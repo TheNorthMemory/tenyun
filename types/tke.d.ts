@@ -1447,6 +1447,18 @@ declare namespace V20180525 {
     Token?: string;
   }
 
+  /** 开启第三方节点池支持配置信息 */
+  interface ClusterExternalConfig {
+    /** 集群网络插件类型，支持：Flannel、CiliumBGP、CiliumVXLan */
+    NetworkType: string;
+    /** 子网ID */
+    SubnetId: string;
+    /** Pod CIDR */
+    ClusterCIDR?: string | null;
+    /** 是否开启第三方节点池支持 */
+    Enabled?: boolean;
+  }
+
   /** 集群master自定义参数 */
   interface ClusterExtraArgs {
     /** etcd自定义参数，只支持独立集群 */
@@ -2109,6 +2121,50 @@ declare namespace V20180525 {
     AddonName: string;
     /** 扩展组件信息(扩展组件资源对象的json字符串描述) */
     AddonParam: string;
+  }
+
+  /** 第三方节点 */
+  interface ExternalNode {
+    /** 第三方节点名称 */
+    Name: string;
+    /** 第三方节点所属节点池 */
+    NodePoolId: string | null;
+    /** 第三方IP地址 */
+    IP: string;
+    /** 第三方地域 */
+    Location: string;
+    /** 第三方节点状态 */
+    Status: string;
+    /** 创建时间 */
+    CreatedTime: string | null;
+    /** 异常原因 */
+    Reason: string | null;
+    /** 是否封锁。true表示已封锁，false表示未封锁 */
+    Unschedulable: boolean | null;
+  }
+
+  /** 第三方节点池信息 */
+  interface ExternalNodePool {
+    /** 第三方节点池ID */
+    NodePoolId: string;
+    /** 第三方节点池名称 */
+    Name: string;
+    /** 节点池生命周期 */
+    LifeState: string;
+    /** 集群CIDR */
+    ClusterCIDR: string;
+    /** 集群网络插件类型 */
+    NetworkType: string;
+    /** 第三方节点Runtime配置 */
+    RuntimeConfig: RuntimeConfig;
+    /** 第三方节点label */
+    Labels: Label[] | null;
+    /** 第三方节点taint */
+    Taints: Taint[] | null;
+    /** 第三方节点高级设置 */
+    InstanceAdvancedSettings: InstanceAdvancedSettings | null;
+    /** 删除保护开关 */
+    DeletionProtection: boolean | null;
   }
 
   /** 修改标签失败的资源 */
@@ -4635,6 +4691,34 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface CreateExternalNodePoolRequest {
+    /** 集群Id */
+    ClusterId: string;
+    /** 节点池名称 */
+    Name: string;
+    /** 运行时 */
+    ContainerRuntime: string;
+    /** 运行时版本 */
+    RuntimeVersion: string;
+    /** 第三方节点label */
+    Labels?: Label[];
+    /** 第三方节点taint */
+    Taints?: Taint[];
+    /** 第三方节点高级设置 */
+    InstanceAdvancedSettings?: InstanceAdvancedSettings;
+    /** 删除保护开关 */
+    DeletionProtection?: boolean;
+    /** 节点类型 */
+    NodeType?: string;
+  }
+
+  interface CreateExternalNodePoolResponse {
+    /** 节点池ID */
+    NodePoolId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateGlobalMaintenanceWindowAndExclusionsRequest {
     /** 维护开始时间 */
     MaintenanceTime: string;
@@ -5123,6 +5207,34 @@ declare namespace V20180525 {
   }
 
   interface DeleteEdgeClusterInstancesResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteExternalNodePoolRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 第三方节点池ID列表 */
+    NodePoolIds: string[];
+    /** 是否强制删除，在第三方节点上有pod的情况下，如果选择非强制删除，则删除会失败 */
+    Force?: boolean;
+  }
+
+  interface DeleteExternalNodePoolResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteExternalNodeRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 第三方节点列表 */
+    Names: string[];
+    /** 是否强制删除：如果第三方节点上有运行中Pod，则非强制删除状态下不会进行删除 */
+    Force?: boolean;
+  }
+
+  interface DeleteExternalNodeResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6253,6 +6365,62 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeExternalNodePoolsRequest {
+    /** 集群ID */
+    ClusterId: string;
+  }
+
+  interface DescribeExternalNodePoolsResponse {
+    /** 节点池总数 */
+    TotalCount: number | null;
+    /** 第三方节点池列表 */
+    NodePoolSet: ExternalNodePool[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeExternalNodeRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 节点池ID */
+    NodePoolId?: string;
+    /** 节点名称 */
+    Names?: string[];
+  }
+
+  interface DescribeExternalNodeResponse {
+    /** 节点列表 */
+    Nodes: ExternalNode[] | null;
+    /** 节点总数 */
+    TotalCount: number | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeExternalNodeScriptRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 节点池ID */
+    NodePoolId: string;
+    /** 网卡名 */
+    Interface?: string;
+    /** 节点名称 */
+    Name?: string;
+    /** 是否内网获取节点初始化脚本 */
+    Internal?: boolean;
+  }
+
+  interface DescribeExternalNodeScriptResponse {
+    /** 添加脚本cos下载链接 */
+    Link?: string;
+    /** cos临时密钥 */
+    Token?: string;
+    /** 添加脚本下载命令 */
+    Command?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeExternalNodeSupportConfigRequest {
     /** 集群Id */
     ClusterId: string;
@@ -7287,6 +7455,18 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DrainExternalNodeRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 节点名 */
+    Name: string;
+  }
+
+  interface DrainExternalNodeResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface EnableClusterAuditRequest {
     /** 集群ID */
     ClusterId: string;
@@ -7367,6 +7547,18 @@ declare namespace V20180525 {
   }
 
   interface EnableEventPersistenceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface EnableExternalNodeSupportRequest {
+    /** 集群Id */
+    ClusterId: string;
+    /** 开启第三方节点池支持配置信息 */
+    ClusterExternalConfig: ClusterExternalConfig;
+  }
+
+  interface EnableExternalNodeSupportResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -7829,6 +8021,28 @@ declare namespace V20180525 {
   }
 
   interface ModifyClusterVirtualNodePoolResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface ModifyExternalNodePoolRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 节点池ID */
+    NodePoolId: string;
+    /** 节点池名称 */
+    Name?: string;
+    /** 第三方节点label */
+    Labels?: Label[];
+    /** 第三方节点taint */
+    Taints?: Taint[];
+    /** 删除保护开关 */
+    DeletionProtection?: boolean;
+    /** base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看 */
+    UserScript?: string;
+  }
+
+  interface ModifyExternalNodePoolResponse {
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -8583,6 +8797,8 @@ declare interface Tke {
   CreateEdgeLogConfig(data: V20180525.CreateEdgeLogConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateEdgeLogConfigResponse>;
   /** 弹性集群创建日志采集配置 {@link V20180525.CreateEksLogConfigRequest} {@link V20180525.CreateEksLogConfigResponse} */
   CreateEksLogConfig(data: V20180525.CreateEksLogConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateEksLogConfigResponse>;
+  /** 创建第三方节点池 {@link V20180525.CreateExternalNodePoolRequest} {@link V20180525.CreateExternalNodePoolResponse} */
+  CreateExternalNodePool(data: V20180525.CreateExternalNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateExternalNodePoolResponse>;
   /** 创建全局维护时间窗口和排除项 {@link V20180525.CreateGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.CreateGlobalMaintenanceWindowAndExclusionsResponse} */
   CreateGlobalMaintenanceWindowAndExclusions(data: V20180525.CreateGlobalMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.CreateGlobalMaintenanceWindowAndExclusionsResponse>;
   /** 创建镜像缓存 {@link V20180525.CreateImageCacheRequest} {@link V20180525.CreateImageCacheResponse} */
@@ -8647,6 +8863,10 @@ declare interface Tke {
   DeleteEdgeCVMInstances(data: V20180525.DeleteEdgeCVMInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteEdgeCVMInstancesResponse>;
   /** 删除边缘计算实例 {@link V20180525.DeleteEdgeClusterInstancesRequest} {@link V20180525.DeleteEdgeClusterInstancesResponse} */
   DeleteEdgeClusterInstances(data: V20180525.DeleteEdgeClusterInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteEdgeClusterInstancesResponse>;
+  /** 删除第三方节点 {@link V20180525.DeleteExternalNodeRequest} {@link V20180525.DeleteExternalNodeResponse} */
+  DeleteExternalNode(data: V20180525.DeleteExternalNodeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteExternalNodeResponse>;
+  /** 删除第三方节点池 {@link V20180525.DeleteExternalNodePoolRequest} {@link V20180525.DeleteExternalNodePoolResponse} */
+  DeleteExternalNodePool(data: V20180525.DeleteExternalNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteExternalNodePoolResponse>;
   /** 删除全局维护时间窗口和排除项 {@link V20180525.DeleteGlobalMaintenanceWindowAndExclusionRequest} {@link V20180525.DeleteGlobalMaintenanceWindowAndExclusionResponse} */
   DeleteGlobalMaintenanceWindowAndExclusion(data: V20180525.DeleteGlobalMaintenanceWindowAndExclusionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DeleteGlobalMaintenanceWindowAndExclusionResponse>;
   /** 删除镜像缓存 {@link V20180525.DeleteImageCachesRequest} {@link V20180525.DeleteImageCachesResponse} */
@@ -8785,6 +9005,12 @@ declare interface Tke {
   DescribeEncryptionStatus(data: V20180525.DescribeEncryptionStatusRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEncryptionStatusResponse>;
   /** 查询已经存在的节点 {@link V20180525.DescribeExistedInstancesRequest} {@link V20180525.DescribeExistedInstancesResponse} */
   DescribeExistedInstances(data: V20180525.DescribeExistedInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExistedInstancesResponse>;
+  /** 查看第三方节点列表 {@link V20180525.DescribeExternalNodeRequest} {@link V20180525.DescribeExternalNodeResponse} */
+  DescribeExternalNode(data: V20180525.DescribeExternalNodeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodeResponse>;
+  /** 查看第三方节点池列表 {@link V20180525.DescribeExternalNodePoolsRequest} {@link V20180525.DescribeExternalNodePoolsResponse} */
+  DescribeExternalNodePools(data: V20180525.DescribeExternalNodePoolsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodePoolsResponse>;
+  /** 获取第三方节点添加脚本 {@link V20180525.DescribeExternalNodeScriptRequest} {@link V20180525.DescribeExternalNodeScriptResponse} */
+  DescribeExternalNodeScript(data: V20180525.DescribeExternalNodeScriptRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodeScriptResponse>;
   /** 查看开启第三方节点池配置信息 {@link V20180525.DescribeExternalNodeSupportConfigRequest} {@link V20180525.DescribeExternalNodeSupportConfigResponse} */
   DescribeExternalNodeSupportConfig(data: V20180525.DescribeExternalNodeSupportConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeExternalNodeSupportConfigResponse>;
   /** 获取全局维护时间窗口和排除项 {@link V20180525.DescribeGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.DescribeGlobalMaintenanceWindowAndExclusionsResponse} */
@@ -8903,6 +9129,8 @@ declare interface Tke {
   DisableVpcCniNetworkType(data: V20180525.DisableVpcCniNetworkTypeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DisableVpcCniNetworkTypeResponse>;
   /** 驱逐超级节点 {@link V20180525.DrainClusterVirtualNodeRequest} {@link V20180525.DrainClusterVirtualNodeResponse} */
   DrainClusterVirtualNode(data: V20180525.DrainClusterVirtualNodeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DrainClusterVirtualNodeResponse>;
+  /** 驱逐第三方节点 {@link V20180525.DrainExternalNodeRequest} {@link V20180525.DrainExternalNodeResponse} */
+  DrainExternalNode(data: V20180525.DrainExternalNodeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DrainExternalNodeResponse>;
   /** 开启集群审计 {@link V20180525.EnableClusterAuditRequest} {@link V20180525.EnableClusterAuditResponse} */
   EnableClusterAudit(data: V20180525.EnableClusterAuditRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableClusterAuditResponse>;
   /** 启用集群删除保护 {@link V20180525.EnableClusterDeletionProtectionRequest} {@link V20180525.EnableClusterDeletionProtectionResponse} */
@@ -8915,6 +9143,8 @@ declare interface Tke {
   EnableEncryptionProtection(data: V20180525.EnableEncryptionProtectionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableEncryptionProtectionResponse>;
   /** 开启事件持久化功能 {@link V20180525.EnableEventPersistenceRequest} {@link V20180525.EnableEventPersistenceResponse} */
   EnableEventPersistence(data: V20180525.EnableEventPersistenceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableEventPersistenceResponse>;
+  /** 开启第三方节点池支持 {@link V20180525.EnableExternalNodeSupportRequest} {@link V20180525.EnableExternalNodeSupportResponse} */
+  EnableExternalNodeSupport(data: V20180525.EnableExternalNodeSupportRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableExternalNodeSupportResponse>;
   /** 开启vpc-cni容器网络能力 {@link V20180525.EnableVpcCniNetworkTypeRequest} {@link V20180525.EnableVpcCniNetworkTypeResponse} */
   EnableVpcCniNetworkType(data: V20180525.EnableVpcCniNetworkTypeRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.EnableVpcCniNetworkTypeResponse>;
   /** 操作TKEEdge集群的addon {@link V20180525.ForwardTKEEdgeApplicationRequestV3Request} {@link V20180525.ForwardTKEEdgeApplicationRequestV3Response} */
@@ -8967,6 +9197,8 @@ declare interface Tke {
   ModifyClusterTags(data: V20180525.ModifyClusterTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterTagsResponse>;
   /** 修改超级节点池 {@link V20180525.ModifyClusterVirtualNodePoolRequest} {@link V20180525.ModifyClusterVirtualNodePoolResponse} */
   ModifyClusterVirtualNodePool(data: V20180525.ModifyClusterVirtualNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterVirtualNodePoolResponse>;
+  /** 修改第三方节点池 {@link V20180525.ModifyExternalNodePoolRequest} {@link V20180525.ModifyExternalNodePoolResponse} */
+  ModifyExternalNodePool(data: V20180525.ModifyExternalNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyExternalNodePoolResponse>;
   /** 更新全局维护时间窗口和排除项 {@link V20180525.ModifyGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.ModifyGlobalMaintenanceWindowAndExclusionsResponse} */
   ModifyGlobalMaintenanceWindowAndExclusions(data: V20180525.ModifyGlobalMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyGlobalMaintenanceWindowAndExclusionsResponse>;
   /** 修改托管集群master组件 {@link V20180525.ModifyMasterComponentRequest} {@link V20180525.ModifyMasterComponentResponse} */

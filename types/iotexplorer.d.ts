@@ -1216,6 +1216,46 @@ declare interface TalkAIBotInfo {
   RAGConfig?: string;
 }
 
+/** Talk激活审计信息。 */
+declare interface TalkActivateRecordLogInfo {
+  /** 产品ID */
+  ProductId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 激活时间，秒级时间戳 */
+  ActiveTime?: number;
+  /** 过期时间，秒级时间戳 */
+  ExpireTime?: number;
+  /** TWeTalk类型：1-基础版；2-高级版；3-多模态； */
+  ServiceType?: number;
+  /** 状态: 0-未激活, 1-已激活, 2-已过期, 3-已作废 */
+  Status?: number;
+  /** 错误信息 */
+  ErrorMsg?: string;
+}
+
+/** Talk设备激活信息。 */
+declare interface TalkActivationInfo {
+  /** 设备ID，产品ID_设备名称 */
+  DeviceId?: string;
+  /** 设备激活状态，0：激活成功；60001：激活码类型不匹配；60002：激活码数量不足；60003：设备不存在；60004：产品不存在；60005：权限不足；60006：设备已激活；60007：无效的参数；60008：系统错误；60009：产品不是码音视频类型 */
+  ErrCode?: number;
+  /** 激活错误信息 */
+  ErrMessage?: string;
+  /** 过期时间，秒级时间戳 */
+  ExpireTime?: number;
+}
+
+/** Talk激活状态响应定义。 */
+declare interface TalkActivationStatusInfo {
+  /** 设备ID，产品ID_设备名称 */
+  DeviceId?: string;
+  /** 过期时间，秒级时间戳 */
+  ExpireTime?: number;
+  /** TWeTalk类型：1-基础版；2-高级版；3-多模态； */
+  ServiceType?: number;
+}
+
 /** 智能体配置信息。 */
 declare interface TalkAgentConfigInfo {
   /** 会话超时（秒），指连接会话的时间，例如30秒是指会话在30秒后断开 */
@@ -1614,6 +1654,22 @@ declare interface ActivateTWeCallLicenseResponse {
   FailureList?: DeviceActiveResult[];
   /** 设备激活成功返回数据 */
   SuccessList?: DeviceActiveResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ActivateTWeTalkRequest {
+  /** TWeTalk类型：1-基础版；2-高级版；3-多模态； */
+  ServiceType: number;
+  /** 设备列表, 产品ID_设备名； */
+  DeviceIds?: string[];
+}
+
+declare interface ActivateTWeTalkResponse {
+  /** 设备激活失败返回数据 */
+  FailureRecords?: TalkActivationInfo[];
+  /** 设备激活成功返回数据 */
+  SuccessRecords?: TalkActivationInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4252,6 +4308,44 @@ declare interface GetTWeTalkAIBotListResponse {
   RequestId?: string;
 }
 
+declare interface GetTWeTalkActiveRecordListRequest {
+  /** 最早的时间。 */
+  StartTime?: number;
+  /** 查询的最晚时间。跟StartTime形成时间段，用于查询时间段中的记录。 */
+  EndTime?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 分页的大小。默认为10，最大不超过500。 */
+  Limit?: number;
+  /** 产品ID */
+  ProductId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** TWeTalk类型：1-基础版；2-高级版；3-多模态； */
+  ServiceType?: number[];
+}
+
+declare interface GetTWeTalkActiveRecordListResponse {
+  /** 设备激活记录列表。 */
+  ActiveRecords?: TalkActivateRecordLogInfo[];
+  /** 数据总数量。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetTWeTalkActiveStatusRequest {
+  /** 设备列表， 产品ID_设备名称 */
+  DeviceIds?: string[];
+}
+
+declare interface GetTWeTalkActiveStatusResponse {
+  /** 激活状态 */
+  TalkActivationRecords?: TalkActivationStatusInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTWeTalkProductConfigListRequest {
   /** 产品ID */
   ProductId?: string;
@@ -5441,6 +5535,8 @@ declare interface Iotexplorer {
   (): Versions;
   /** 激活TWeCall {@link ActivateTWeCallLicenseRequest} {@link ActivateTWeCallLicenseResponse} */
   ActivateTWeCallLicense(data: ActivateTWeCallLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeCallLicenseResponse>;
+  /** 激活TWeTalk {@link ActivateTWeTalkRequest} {@link ActivateTWeTalkResponse} */
+  ActivateTWeTalk(data: ActivateTWeTalkRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeTalkResponse>;
   /** 批量创建 TWeSee 语义理解任务 {@link BatchCreateTWeSeeRecognitionTaskRequest} {@link BatchCreateTWeSeeRecognitionTaskResponse} */
   BatchCreateTWeSeeRecognitionTask(data: BatchCreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateTWeSeeRecognitionTaskResponse>;
   /** 批量同步执行 TWeSee 语义理解任务 {@link BatchInvokeTWeSeeRecognitionTaskRequest} {@link BatchInvokeTWeSeeRecognitionTaskResponse} */
@@ -5717,6 +5813,10 @@ declare interface Iotexplorer {
   GetTWeCallActiveStatus(data?: GetTWeCallActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeCallActiveStatusResponse>;
   /** 获取TWeTalk智能体列表 {@link GetTWeTalkAIBotListRequest} {@link GetTWeTalkAIBotListResponse} */
   GetTWeTalkAIBotList(data?: GetTWeTalkAIBotListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkAIBotListResponse>;
+  /** 查询TweTalk激活记录 {@link GetTWeTalkActiveRecordListRequest} {@link GetTWeTalkActiveRecordListResponse} */
+  GetTWeTalkActiveRecordList(data?: GetTWeTalkActiveRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkActiveRecordListResponse>;
+  /** 查询TWeTalk激活状态 {@link GetTWeTalkActiveStatusRequest} {@link GetTWeTalkActiveStatusResponse} */
+  GetTWeTalkActiveStatus(data?: GetTWeTalkActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkActiveStatusResponse>;
   /** 获取TWeTalk连接配置信息列表 {@link GetTWeTalkProductConfigListRequest} {@link GetTWeTalkProductConfigListResponse} */
   GetTWeTalkProductConfigList(data?: GetTWeTalkProductConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkProductConfigListResponse>;
   /** 查询WeTalk连接产品配置信息列表 {@link GetTWeTalkProductConfigListV2Request} {@link GetTWeTalkProductConfigListV2Response} */

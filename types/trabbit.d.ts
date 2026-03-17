@@ -106,6 +106,14 @@ declare interface RabbitMQClusterInfo {
   TraceTime?: number;
   /** 实例标签列表 */
   Tags?: RabbitMQServerlessTag[];
+  /** 是否开启弹性tps */
+  ElasticTpsFlag?: boolean;
+  /** 弹性tps倍数，默认弹1倍 */
+  ElasticTpsRatio?: number;
+  /** 最大重投次数 */
+  MaxRedeliverCount?: number;
+  /** 消费超时时间，单位min */
+  ConsumerTimeout?: number;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -727,7 +735,7 @@ declare interface DescribeRabbitMQServerlessBindingsRequest {
   Offset?: number;
   /** 分页limit */
   Limit?: number;
-  /** 搜索关键词，根据源exchange名称/目标资源名称/绑定key进行模糊搜索 */
+  /** 搜索关键词，根据源exchange名称/目标资源名称进行模糊搜索 */
   SearchWord?: string;
   /** 根据源Exchange精准搜索过滤 */
   SourceExchange?: string;
@@ -1091,6 +1099,8 @@ declare interface ModifyRabbitMQServerlessExchangeRequest {
   ExchangeName: string;
   /** 备注信息 */
   Remark?: string;
+  /** 备用交换机 */
+  AlternateExchange?: string;
 }
 
 declare interface ModifyRabbitMQServerlessExchangeResponse {

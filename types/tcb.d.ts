@@ -264,6 +264,44 @@ declare interface DropIndex {
   IndexName?: string;
 }
 
+/** 环境计费信息 */
+declare interface EnvBillingInfoItem {
+  /** 环境ID */
+  EnvId?: string;
+  /** tcb产品套餐ID，参考DescribePackages接口的返回值。 */
+  PackageId?: string;
+  /** 自动续费标记 */
+  IsAutoRenew?: boolean;
+  /** 状态。包含以下取值： 空字符串：初始化中 NORMAL：正常 ISOLATE：隔离 */
+  Status?: string;
+  /** 支付方式。包含以下取值： PREPAYMENT：预付费 POSTPAID：后付费 */
+  PayMode?: string;
+  /** 隔离时间，最近一次隔离的时间 */
+  IsolatedTime?: string;
+  /** 过期时间，套餐即将到期的时间 */
+  ExpireTime?: string;
+  /** 创建时间，第一次接入计费方案的时间。 */
+  CreateTime?: string;
+  /** 更新时间，计费信息最近一次更新的时间。 */
+  UpdateTime?: string;
+  /** true表示从未升级过付费版。 */
+  IsAlwaysFree?: boolean;
+  /** 付费渠道。 miniapp：小程序 qcloud：腾讯云 */
+  PaymentChannel?: string;
+  /** 最新的订单信息 */
+  OrderInfo?: OrderInfo;
+  /** 免费配额信息。 */
+  FreeQuota?: string;
+  /** 是否开启 `超过套餐额度部分转按量付费` */
+  EnableOverrun?: boolean;
+  /** 环境套餐类型 */
+  ExtPackageType?: string;
+  /** 是否付费期环境，可取值：yes/no。 */
+  EnvCharged?: string;
+  /** 是否已激活，可取值：yes/no。 */
+  EnvActivated?: string;
+}
+
 /** 环境信息 */
 declare interface EnvInfo {
   /** 账户下该环境唯一标识 */
@@ -324,6 +362,14 @@ declare interface FunctionInfo {
   Namespace?: string;
   /** 所属地域。当前支持ap-shanghai */
   Region?: string;
+}
+
+/** 扩缩容策略 */
+declare interface HpaPolicy {
+  /** 策略类型 */
+  PolicyType?: string;
+  /** 策略阈值 */
+  PolicyThreshold?: number;
 }
 
 /** 索引命中信息 */
@@ -488,6 +534,32 @@ declare interface MySQLTaskStatus {
   StatusDesc?: string;
 }
 
+/** 订单信息 */
+declare interface OrderInfo {
+  /** 订单号 */
+  TranId?: string;
+  /** 订单要切换的套餐ID */
+  PackageId?: string;
+  /** 订单类型1 购买2 续费3 变配 */
+  TranType?: string;
+  /** 订单状态。1未支付2 支付中3 发货中4 发货成功5 发货失败6 已退款7 已取消100 已删除 */
+  TranStatus?: string;
+  /** 订单更新时间 */
+  UpdateTime?: string;
+  /** 订单创建时间 */
+  CreateTime?: string;
+  /** 付费模式.prepayment 预付费postpaid 后付费 */
+  PayMode?: string;
+  /** 订单绑定的扩展ID */
+  ExtensionId?: string;
+  /** 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化) */
+  ResourceReady?: string;
+  /** 安装标记。建议使用方统一转大小写之后再判断。QuickStart：快速启动来源Activity：活动来源 */
+  Flag?: string;
+  /** 下单时的参数 */
+  ReqBody?: string;
+}
+
 /** 分页信息 */
 declare interface Pager {
   /** 分页偏移量 */
@@ -570,6 +642,16 @@ declare interface Tag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** tke集群信息 */
+declare interface TkeClusterInfo {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群的vpcId */
+  VpcId?: string;
+  /** 版本内网CLB所在子网Id */
+  VersionClbSubnetId?: string;
 }
 
 /** 用户信息 */
@@ -976,6 +1058,18 @@ declare interface DescribeBaasPackageListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillingInfoRequest {
+  /** 环境ID */
+  EnvId?: string;
+}
+
+declare interface DescribeBillingInfoResponse {
+  /** 环境计费信息列表 */
+  EnvBillingInfoList?: EnvBillingInfoItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudBaseBuildServiceRequest {
   /** 环境id */
   EnvId: string;
@@ -1074,6 +1168,98 @@ declare interface DescribeCloudBaseGWServiceResponse {
   AccessFlag?: number;
   /** 云接入源站域名 */
   OriginDomain?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudBaseRunServerVersionRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务名称 */
+  ServerName: string;
+  /** 版本名称 */
+  VersionName: string;
+}
+
+declare interface DescribeCloudBaseRunServerVersionResponse {
+  /** 版本名称 */
+  VersionName?: string;
+  /** 备注 */
+  Remark?: string;
+  /** Dockerfile的路径 */
+  DockerfilePath?: string;
+  /** DockerBuild的目录 */
+  BuildDir?: string;
+  /** 请使用CPUSize */
+  Cpu?: number;
+  /** 请使用MemSize */
+  Mem?: number;
+  /** 副本最小值 */
+  MinNum?: number;
+  /** 副本最大值 */
+  MaxNum?: number;
+  /** 策略类型 */
+  PolicyType?: string;
+  /** 策略阈值 */
+  PolicyThreshold?: number;
+  /** 环境变量 */
+  EnvParams?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 版本的IP */
+  VersionIP?: string;
+  /** 版本的端口号 */
+  VersionPort?: number;
+  /** 版本状态 */
+  Status?: string;
+  /** 代码包的名字 */
+  PackageName?: string;
+  /** 代码版本的名字 */
+  PackageVersion?: string;
+  /** 枚举（package/repository/image) */
+  UploadType?: string;
+  /** Repo的类型(gitlab/github/coding) */
+  RepoType?: string;
+  /** 地址 */
+  Repo?: string;
+  /** 分支 */
+  Branch?: string;
+  /** 服务名字 */
+  ServerName?: string;
+  /** 是否对于外网开放 */
+  IsPublic?: boolean;
+  /** vpc id */
+  VpcId?: string;
+  /** 子网实例id */
+  SubnetIds?: string[] | null;
+  /** 日志采集路径 */
+  CustomLogs?: string;
+  /** 监听端口 */
+  ContainerPort?: number;
+  /** 延迟多长时间开始健康检查（单位s） */
+  InitialDelaySeconds?: number;
+  /** 镜像地址 */
+  ImageUrl?: string;
+  /** CPU 大小 */
+  CpuSize?: number;
+  /** MEM 大小 */
+  MemSize?: number;
+  /** 是否有Dockerfile：0-default has, 1-has, 2-has not */
+  HasDockerfile?: number;
+  /** 基础镜像 */
+  BaseImage?: string;
+  /** 容器启动入口命令 */
+  EntryPoint?: string;
+  /** 仓库语言 */
+  RepoLanguage?: string;
+  /** 自动扩缩容策略组 */
+  PolicyDetail?: HpaPolicy[] | null;
+  /** Tke集群信息 */
+  TkeClusterInfo?: TkeClusterInfo | null;
+  /** 版本工作负载类型；deployment/deamonset */
+  TkeWorkloadType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1685,12 +1871,16 @@ declare interface Tcb {
   DescribeAuthDomains(data: DescribeAuthDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthDomainsResponse>;
   /** 获取新套餐 {@link DescribeBaasPackageListRequest} {@link DescribeBaasPackageListResponse} */
   DescribeBaasPackageList(data?: DescribeBaasPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaasPackageListResponse>;
+  /** 获取计费相关信息 {@link DescribeBillingInfoRequest} {@link DescribeBillingInfoResponse} */
+  DescribeBillingInfo(data?: DescribeBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingInfoResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
   /** 获取网关API列表 {@link DescribeCloudBaseGWAPIRequest} {@link DescribeCloudBaseGWAPIResponse} */
   DescribeCloudBaseGWAPI(data?: DescribeCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWAPIResponse>;
   /** 获取网关服务 {@link DescribeCloudBaseGWServiceRequest} {@link DescribeCloudBaseGWServiceResponse} */
   DescribeCloudBaseGWService(data?: DescribeCloudBaseGWServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWServiceResponse>;
+  /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
+  DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
   /** 开通 MySql 结果查询 {@link DescribeCreateMySQLResultRequest} {@link DescribeCreateMySQLResultResponse} */
   DescribeCreateMySQLResult(data: DescribeCreateMySQLResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateMySQLResultResponse>;
   /** 获取文档型数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
@@ -1874,8 +2064,6 @@ declare interface Tcb {
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeAuthentification(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeBillingInfo(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeBuild(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeBuildInfo(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
@@ -1919,8 +2107,6 @@ declare interface Tcb {
   DescribeCloudBaseRunResource(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunServer(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeCloudBaseRunServerVersion(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunServers(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

@@ -194,6 +194,38 @@ declare interface DataSetConfig {
   Id: string;
 }
 
+/** 数据源信息 */
+declare interface DataSourceInfo {
+  /** 数据源ID */
+  Id?: string;
+  /** 数据源名称 */
+  Name?: string;
+  /** 创建者uin */
+  Creator?: string;
+  /** 创建者名称 */
+  CreatorName?: string;
+  /** 数据源类型英文名 */
+  Type?: string;
+  /** 数据源权限，取值有RW RO */
+  Permission?: string;
+  /** 数据源所属存储实例ID */
+  StorageId?: string;
+  /** 数据源所属存储实例名称 */
+  StorageName?: string;
+  /** 数据源挂载配置 */
+  MountConfigure?: MountConfigureInfo;
+  /** 创建时间, 格式为yyyy-mm-ddThh:mm:ssZ */
+  CreateTime?: string;
+  /** 更新时间, 格式为yyyy-mm-ddThh:mm:ssZ */
+  UpdateTime?: string;
+  /** 限制开关是否开启，只有开启时才有限制 */
+  LimitMount?: boolean;
+  /** 标签配置 */
+  Tags?: Tag[];
+  /** 额外配置,对应存储实例的额外配置 */
+  ExtraConf?: StorageExtraConf | null;
+}
+
 /** 数据集组 */
 declare interface DatasetGroup {
   /** 数据集ID */
@@ -420,6 +452,16 @@ declare interface Filter {
   Negative?: boolean;
   /** 是否开启模糊匹配 */
   Fuzzy?: boolean;
+}
+
+/** 描述网关相关配置 */
+declare interface GatewayConfig {
+  /** 网关类型 */
+  GatewayType?: string;
+  /** 网关调度算法：轮询、一致性哈希等 */
+  SchedulingAlgorithm?: string;
+  /** 一致性哈希使用的Header字段名 */
+  HashHeaderKey?: string;
 }
 
 /** 配置GooseFS参数 */
@@ -884,6 +926,48 @@ declare interface ModelSource {
   ReasoningEnvironmentId: string | null;
   /** 自定义推理环境 */
   ReasoningImageInfo: ImageInfo | null;
+}
+
+/** 数据源挂载配置 */
+declare interface MountConfigureInfo {
+  /** 数据源的相对路径，支持<@subaccount>这样的占位符 */
+  WorkDir?: string;
+}
+
+/** 挂载的实例列表 */
+declare interface MountInstanceInfo {
+  /** 类型英文名 */
+  Type?: string;
+  /** 存储实例ID */
+  StorageId?: string;
+  /** 存储实例名称 */
+  StorageName?: string;
+  /** 状态，0可挂载 1不可挂载(挂载限制) */
+  Status?: number;
+  /** 额外配置 */
+  ExtraConf?: StorageExtraConf | null;
+}
+
+/** 挂载限制 */
+declare interface MountLimitInfo {
+  /** 数据源类型英文名 */
+  Type?: string;
+  /** 数据源所属存储实例ID */
+  StorageId?: string;
+  /** 数据源所属存储实例名称 */
+  StorageName?: string;
+  /** 限制开关是否开启，只有开启时才有限制 */
+  LimitMount?: boolean;
+  /** 创建者uin */
+  Creator?: string;
+  /** 创建者名称 */
+  CreatorName?: string;
+  /** 创建时间, 格式为yyyy-mm-ddThh:mm:ssZ */
+  CreateTime?: string;
+  /** 更新时间, 格式为yyyy-mm-ddThh:mm:ssZ */
+  UpdateTime?: string;
+  /** 额外配置 */
+  ExtraConf?: StorageExtraConf | null;
 }
 
 /** 多模态对话内容,支持图片与文字信息 */
@@ -1488,6 +1572,8 @@ declare interface ServiceCallInfoV2 {
   EnableLimit?: boolean;
   /** 访问grpc时需携带的虚拟Host */
   GrpcHost?: string;
+  /** 网关相关配置 */
+  GatewayConfig?: GatewayConfig;
 }
 
 /** 服务共享弹性网卡设置 */
@@ -1562,6 +1648,8 @@ declare interface ServiceGroup {
   SubUinName?: string;
   /** 网关日志投递相关配置 */
   GatewayLogConfig?: LogConfig;
+  /** 网关路由相关配置 */
+  GatewayConfig?: GatewayConfig;
 }
 
 /** 推理服务在集群中的信息 */
@@ -1734,6 +1822,14 @@ declare interface StatefulSetCondition {
   LastTransitionTime: string | null;
   /** 上次更新的时间 */
   LastUpdateTime?: string | null;
+}
+
+/** 存储额外配置 */
+declare interface StorageExtraConf {
+  /** cfs的存储类型 // HP:通用性能型 // SD:通用标准型 // TP:turbo性能型 // TB:turbo标准型 // THP:吞吐型 */
+  CFSStorageType?: string;
+  /** cfs的协议 */
+  CFSProtocol?: string;
 }
 
 /** 子账号信息 */
@@ -2074,6 +2170,28 @@ declare interface ChatCompletionResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataSourceRequest {
+  /** 数据源名称 */
+  Name?: string;
+  /** 数据源类型英文名 */
+  Type?: string;
+  /** 数据源权限，取值有RW RO */
+  Permission?: string;
+  /** 存储实例ID */
+  StorageId?: string;
+  /** 数据源挂载配置 */
+  MountConfigure?: MountConfigureInfo;
+  /** 标签配置 */
+  Tags?: Tag[];
+}
+
+declare interface CreateDataSourceResponse {
+  /** 数据源ID */
+  Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDatasetRequest {
   /** 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   DatasetName: string;
@@ -2245,11 +2363,27 @@ declare interface CreateModelServiceRequest {
   SchedulingStrategy?: string;
   /** 网关日志投递相关配置 */
   GatewayLogConfig?: LogConfig;
+  /** 网关相关配置 */
+  GatewayConfig?: GatewayConfig;
 }
 
 declare interface CreateModelServiceResponse {
   /** 生成的模型服务 */
   Service?: Service;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMountLimitRequest {
+  /** 数据源类型英文名 */
+  Type: string;
+  /** 存储实例ID */
+  StorageId: string;
+  /** 限制开关是否开启，只有开启时才有限制，默认关闭 */
+  LimitMount?: boolean;
+}
+
+declare interface CreateMountLimitResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2450,6 +2584,16 @@ declare interface CreateTrainingTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDataSourceRequest {
+  /** 数据源ID */
+  Id?: string;
+}
+
+declare interface DeleteDataSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDatasetRequest {
   /** 数据集id */
   DatasetId: string;
@@ -2504,6 +2648,18 @@ declare interface DeleteModelServiceRequest {
 }
 
 declare interface DeleteModelServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMountLimitRequest {
+  /** 数据源类型英文名 */
+  Type?: string;
+  /** 存储实例ID */
+  StorageId?: string;
+}
+
+declare interface DeleteMountLimitResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2654,6 +2810,42 @@ declare interface DescribeBuildInImagesRequest {
 declare interface DescribeBuildInImagesResponse {
   /** 内置镜像详情列表 */
   BuildInImageInfos?: ImageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataSourceRequest {
+  /** 数据源id */
+  Id?: string;
+}
+
+declare interface DescribeDataSourceResponse {
+  /** 数据源信息 */
+  DataSourceInfo?: DataSourceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataSourcesRequest {
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 标签过滤条件 */
+  TagFilters?: TagFilter[];
+  /** 偏移量 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 排序的依据字段 */
+  OrderField?: string;
+  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
+  Order?: string;
+}
+
+declare interface DescribeDataSourcesResponse {
+  /** 数据源列表 */
+  DataSourceInfos?: DataSourceInfo[];
+  /** 总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2924,6 +3116,60 @@ declare interface DescribeModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMountInstanceRequest {
+  /** 数据源类型英文名 */
+  Type: string;
+  /** 存储实例ID */
+  StorageId?: string;
+}
+
+declare interface DescribeMountInstanceResponse {
+  /** 挂载的实例详情 */
+  MountInstance?: MountInstanceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMountInstancesRequest {
+  /** 数据源类型英文名 */
+  Type: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+}
+
+declare interface DescribeMountInstancesResponse {
+  /** 挂载的实例列表 */
+  MountInstances?: MountInstanceInfo[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMountLimitsRequest {
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 偏移量 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+  /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
+  Order?: string;
+  /** 排序的依据字段 */
+  OrderField?: string;
+}
+
+declare interface DescribeMountLimitsResponse {
+  /** 挂载限制列表 */
+  MountLimits?: MountLimitInfo[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNotebookRequest {
   /** notebook id */
   Id: string;
@@ -3165,6 +3411,8 @@ declare interface ModifyModelServiceRequest {
   VolumeMounts?: VolumeMount[];
   /** 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用 */
   SchedulingStrategy?: string;
+  /** 目标工作空间，不为0则进行迁移，源服务只允许在默认空间 */
+  TargetProjectId?: number;
 }
 
 declare interface ModifyModelServiceResponse {
@@ -3320,6 +3568,36 @@ declare interface StopTrainingTaskRequest {
 }
 
 declare interface StopTrainingTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateDataSourceRequest {
+  /** 数据源ID */
+  Id?: string;
+  /** 数据源名称 */
+  Name?: string;
+  /** 数据源权限，取值有RW RO */
+  Permission?: string;
+  /** 数据源挂载配置 */
+  MountConfigure?: MountConfigureInfo;
+}
+
+declare interface UpdateDataSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateMountLimitRequest {
+  /** 数据源类型英文名 */
+  Type: string;
+  /** 存储实例ID */
+  StorageId: string;
+  /** 限制开关是否开启，只有开启时才有限制，默认关闭 */
+  LimitMount: boolean;
+}
+
+declare interface UpdateMountLimitResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4053,6 +4331,8 @@ declare interface Tione {
   (): Versions;
   /** 与大模型聊天 {@link ChatCompletionRequest} {@link ChatCompletionResponse} */
   ChatCompletion(data: ChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionResponse>;
+  /** 创建数据源 {@link CreateDataSourceRequest} {@link CreateDataSourceResponse} */
+  CreateDataSource(data?: CreateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataSourceResponse>;
   /** 创建数据集 {@link CreateDatasetRequest} {@link CreateDatasetResponse} */
   CreateDataset(data: CreateDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasetResponse>;
   /** 创建日志下载任务 {@link CreateExportRequest} {@link CreateExportResponse} */
@@ -4061,6 +4341,8 @@ declare interface Tione {
   CreateModelService(data?: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
   /** 在线服务创建 AuthToken {@link CreateModelServiceAuthTokenRequest} {@link CreateModelServiceAuthTokenResponse} */
   CreateModelServiceAuthToken(data: CreateModelServiceAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceAuthTokenResponse>;
+  /** 创建挂载限制 {@link CreateMountLimitRequest} {@link CreateMountLimitResponse} */
+  CreateMountLimit(data: CreateMountLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMountLimitResponse>;
   /** 创建Notebook {@link CreateNotebookRequest} {@link CreateNotebookResponse} */
   CreateNotebook(data: CreateNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookResponse>;
   /** 生成Notebook访问链接 {@link CreatePresignedNotebookUrlRequest} {@link CreatePresignedNotebookUrlResponse} */
@@ -4069,6 +4351,8 @@ declare interface Tione {
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
   /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */
   CreateTrainingTask(data: CreateTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingTaskResponse>;
+  /** 删除数据源 {@link DeleteDataSourceRequest} {@link DeleteDataSourceResponse} */
+  DeleteDataSource(data?: DeleteDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataSourceResponse>;
   /** 删除数据集 {@link DeleteDatasetRequest} {@link DeleteDatasetResponse} */
   DeleteDataset(data: DeleteDatasetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasetResponse>;
   /** 删除日志下载任务 {@link DeleteExportRequest} {@link DeleteExportResponse} */
@@ -4079,6 +4363,8 @@ declare interface Tione {
   DeleteModelServiceAuthToken(data: DeleteModelServiceAuthTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceAuthTokenResponse>;
   /** 删除模型服务组 {@link DeleteModelServiceGroupRequest} {@link DeleteModelServiceGroupResponse} */
   DeleteModelServiceGroup(data: DeleteModelServiceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceGroupResponse>;
+  /** 删除挂载限制 {@link DeleteMountLimitRequest} {@link DeleteMountLimitResponse} */
+  DeleteMountLimit(data?: DeleteMountLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountLimitResponse>;
   /** 删除Notebook {@link DeleteNotebookRequest} {@link DeleteNotebookResponse} */
   DeleteNotebook(data: DeleteNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookResponse>;
   /** 删除模型 {@link DeleteTrainingModelRequest} {@link DeleteTrainingModelResponse} */
@@ -4099,6 +4385,10 @@ declare interface Tione {
   DescribeBillingSpecsPrice(data: DescribeBillingSpecsPriceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingSpecsPriceResponse>;
   /** 获取内置镜像列表 {@link DescribeBuildInImagesRequest} {@link DescribeBuildInImagesResponse} */
   DescribeBuildInImages(data?: DescribeBuildInImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBuildInImagesResponse>;
+  /** 获取数据源详情 {@link DescribeDataSourceRequest} {@link DescribeDataSourceResponse} */
+  DescribeDataSource(data?: DescribeDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourceResponse>;
+  /** 获取数据源列表 {@link DescribeDataSourcesRequest} {@link DescribeDataSourcesResponse} */
+  DescribeDataSources(data?: DescribeDataSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataSourcesResponse>;
   /** 查询数据集列表 {@link DescribeDatasetsRequest} {@link DescribeDatasetsResponse} */
   DescribeDatasets(data?: DescribeDatasetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasetsResponse>;
   /** 获取事件 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
@@ -4123,6 +4413,12 @@ declare interface Tione {
   DescribeModelServiceGroups(data?: DescribeModelServiceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceGroupsResponse>;
   /** 查询模型服务能否开启热更新 {@link DescribeModelServiceHotUpdatedRequest} {@link DescribeModelServiceHotUpdatedResponse} */
   DescribeModelServiceHotUpdated(data: DescribeModelServiceHotUpdatedRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServiceHotUpdatedResponse>;
+  /** 非数据源挂载时校验实例是否可以挂载 {@link DescribeMountInstanceRequest} {@link DescribeMountInstanceResponse} */
+  DescribeMountInstance(data: DescribeMountInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountInstanceResponse>;
+  /** 非数据源挂载时获取实例列表 {@link DescribeMountInstancesRequest} {@link DescribeMountInstancesResponse} */
+  DescribeMountInstances(data: DescribeMountInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountInstancesResponse>;
+  /** 获取挂载限制列表 {@link DescribeMountLimitsRequest} {@link DescribeMountLimitsResponse} */
+  DescribeMountLimits(data?: DescribeMountLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountLimitsResponse>;
   /** Notebook详情 {@link DescribeNotebookRequest} {@link DescribeNotebookResponse} */
   DescribeNotebook(data: DescribeNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookResponse>;
   /** Notebook列表 {@link DescribeNotebooksRequest} {@link DescribeNotebooksResponse} */
@@ -4165,6 +4461,10 @@ declare interface Tione {
   StopNotebook(data: StopNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<StopNotebookResponse>;
   /** 停止模型训练任务 {@link StopTrainingTaskRequest} {@link StopTrainingTaskResponse} */
   StopTrainingTask(data: StopTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopTrainingTaskResponse>;
+  /** 更新数据源 {@link UpdateDataSourceRequest} {@link UpdateDataSourceResponse} */
+  UpdateDataSource(data?: UpdateDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataSourceResponse>;
+  /** 更新挂载限制 {@link UpdateMountLimitRequest} {@link UpdateMountLimitResponse} */
+  UpdateMountLimit(data: UpdateMountLimitRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateMountLimitResponse>;
   /** 更新子账号Linux用户信息 {@link UpdateSubAccountLinuxUserInfoRequest} {@link UpdateSubAccountLinuxUserInfoResponse} */
   UpdateSubAccountLinuxUserInfo(data?: UpdateSubAccountLinuxUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSubAccountLinuxUserInfoResponse>;
   /** 创建存储库 {@link V20191022.CreateCodeRepositoryRequest} {@link V20191022.CreateCodeRepositoryResponse} */

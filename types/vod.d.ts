@@ -6339,18 +6339,20 @@ declare namespace V20180717 {
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
     ClassId?: number;
-    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 指定所生成图片的宽高比。输入格式为 W:H。本字段在以下场景有效：* 生商品图场景，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9* AI扩图场景。可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9、21:9，可以配合 ImageWidth 和 ImageHeight 使用，规则如下： 1. 仅指定 AspectRatio 时，根据原图输入进行自适应调整。 2. 指定 AspectRatio 和 ImageWidth 时，ImageHeight 由两者计算得出，反亦是如此。 3. 当AspectRatio、ImageWidth、ImageHeight 同时指定的时候，优先使用ImageWidth、ImageHeight。 */
+    /** 指定所生成图片的宽高比。输入格式为 W:H。本字段在以下场景有效：生商品图场景，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9AI扩图场景。可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9、21:9，可以配合 ImageWidth 和 ImageHeight 使用，规则如下： 仅指定 AspectRatio 时，根据原图输入进行自适应调整。指定 AspectRatio 和 ImageWidth 时，ImageHeight 由两者计算得出，反亦是如此。当AspectRatio、ImageWidth、ImageHeight 同时指定的时候，优先使用ImageWidth、ImageHeight。 */
     AspectRatio?: string;
-    /** 输出图片编码格式参数。**仅AI换衣场景有效。** */
+    /** 输出图片编码格式参数。仅AI换衣场景有效。 */
     EncodeConfig?: ImageSceneAigcEncodeConfig;
-    /** 输出图像宽度，**仅AI扩图场景有效**。 */
+    /** 输出图像宽度，仅AI扩图场景有效。 */
     ImageWidth?: number;
-    /** 输出图像高度，**仅AI扩图场景有效**。 */
+    /** 输出图像高度，仅AI扩图场景有效。 */
     ImageHeight?: number;
+    /** 输出分辨率。仅change_clothes、change_clothes_under场景有效。可选值：1K、2K、4K。 */
+    Resolution?: string;
   }
 
   /** 场景化 AIGC 生图任务信息 */

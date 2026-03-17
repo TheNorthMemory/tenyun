@@ -1166,6 +1166,14 @@ declare interface ExportInfo {
   DerivedFields?: string[];
 }
 
+/** 跨账户投递外部角色 */
+declare interface ExternalRole {
+  /** 跨账户投递-用户角色RoleArn */
+  RoleArn: string;
+  /** 跨账户投递-用户角色名称 */
+  ExternalId: string;
+}
+
 /** 日志提取规则 */
 declare interface ExtractRuleInfo {
   /** 时间字段的key名字，TimeKey和TimeFormat必须成对出现 */
@@ -2200,17 +2208,17 @@ declare interface ShipperInfo {
   EndTime?: number;
   /** 历史数据投递的进度（仅当用户选择的数据内中历史数据时才有效） */
   Progress?: number;
-  /** 历史数据全部投递完成剩余的时间（仅当用户选择的数据中有历史数据时才有效） */
+  /** 历史数据全部投递完成剩余的时间（仅当用户选择的数据中有历史数据时才有效）单位：秒 */
   RemainTime?: number;
   /** 历史任务状态：0：实时任务1：任务准备中2：任务运行中3：任务运行异常4：任务运行结束 */
   HistoryStatus?: number;
-  /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：STANDARD：标准存储STANDARD_IA：低频存储ARCHIVE：归档存储DEEP_ARCHIVE：深度归档存储MAZ_STANDARD：标准存储（多 AZ）MAZ_STANDARD_IA：低频存储（多 AZ）INTELLIGENT_TIERING：智能分层存储MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
+  /** 对象存储类型，默认值为 STANDARD。枚举值请参见 存储类型概述 文档。参考值有：STANDARD：标准存储STANDARD_IA：低频存储ARCHIVE：归档存储DEEP_ARCHIVE：深度归档存储MAZ_STANDARD：标准存储（多 AZ）MAZ_STANDARD_IA：低频存储（多 AZ）INTELLIGENT_TIERING：智能分层存储MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
-  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  /** 角色访问描述名 创建角色 */
   RoleArn?: string;
   /** 外部ID */
   ExternalId?: string;
-  /** 任务运行状态。支持`0`,`1`,`2`- `0`: 停止- `1`: 运行中- `2`: 异常 */
+  /** 任务运行状态。支持0,1,20: 停止1: 运行中2: 异常 */
   TaskStatus?: number;
 }
 
@@ -2272,6 +2280,8 @@ declare interface SplunkDeliverInfo {
   Channel?: string;
   /** 预过滤处理-对写入 Splunk 原始数据进行预过滤处理语句 */
   DSLFilter?: string;
+  /** 高级配置-跨账户投递参数 */
+  ExternalRole?: ExternalRole;
 }
 
 /** 创建资源实例时同时绑定的标签对说明 */
@@ -2649,15 +2659,15 @@ declare interface CreateAlarmShieldResponse {
 }
 
 declare interface CreateCloudProductLogCollectionRequest {
-  /** 实例ID- 通过各个接入云产品官方文档获取 */
+  /** 实例ID通过各个接入云产品官方文档获取 */
   InstanceId: string;
   /** 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS */
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：CDS所有日志类型：ap-guangzhouCDB-AUDIT: gzTDSQL-C-AUDIT: gzMongoDB-AUDIT: gzMongoDB-SlowLog：ap-guangzhouMongoDB-ErrorLog：ap-guangzhouTDMYSQL-SLOW：gzDCDB所有日志类型：gzMariaDB所有日志类型：gzPostgreSQL所有日志类型：gzBH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)APIS所有日志类型：gz */
   CloudProductRegion: string;
-  /** CLS目标地域- 支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
+  /** CLS目标地域支持地域参考 地域列表 文档 */
   ClsRegion: string;
   /** 日志集名称，未填LogsetId时必填。若日志集不存在, 将自动创建 */
   LogsetName?: string;
@@ -2665,10 +2675,12 @@ declare interface CreateCloudProductLogCollectionRequest {
   TopicName?: string;
   /** 日志配置扩展信息， 一般用于存储额外的日志投递配置 */
   Extend?: string;
-  /** 日志集id- 通过[获取日志集列表](https://cloud.tencent.com/document/api/614/58624)获取日志集Id。 */
+  /** 日志集id通过获取日志集列表获取日志集Id。 */
   LogsetId?: string;
-  /** 日志主题id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题id通过获取日志主题列表获取日志主题Id。 */
   TopicId?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateCloudProductLogCollectionResponse {
@@ -3335,9 +3347,9 @@ declare interface CreateShipperResponse {
 }
 
 declare interface CreateSplunkDeliverRequest {
-  /** 日志主题id- 通过获取日志主题列表获取日志主题Id。 */
+  /** 日志主题id通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** splunk投递任务名称；name有如下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9 */
+  /** splunk投递任务名称；name有如下限制：不能为空长度不大于64只能包含aA-zZ、下划线、-、0-9 */
   Name: string;
   /** Splunk投递任务-目标配置-网络信息 */
   NetInfo: NetInfo;
@@ -3357,6 +3369,8 @@ declare interface CreateSplunkDeliverRequest {
   Channel?: string;
   /** 日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理 */
   DSLFilter?: string;
+  /** 高级配置-跨账户投递用户角色授权信息取值参考：新建自定义角色 */
+  ExternalRole?: ExternalRole;
 }
 
 declare interface CreateSplunkDeliverResponse {
@@ -3467,8 +3481,12 @@ declare interface DeleteCloudProductLogCollectionRequest {
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：CDS所有日志类型：ap-guangzhouCDB-AUDIT: gzTDSQL-C-AUDIT: gzMongoDB-AUDIT: gzMongoDB-SlowLog：ap-guangzhouMongoDB-ErrorLog：ap-guangzhouTDMYSQL-SLOW：gzDCDB所有日志类型：gzMariaDB所有日志类型：gzPostgreSQL所有日志类型：gzBH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)APIS所有日志类型：gz */
   CloudProductRegion: string;
+  /** 是否删除关联的topic */
+  IsDeleteTopic?: boolean;
+  /** 是否删除关联的logset。如果logset下还有topic的话，不会进行删除 */
+  IsDeleteLogset?: boolean;
 }
 
 declare interface DeleteCloudProductLogCollectionResponse {
@@ -3865,9 +3883,9 @@ declare interface DescribeAlertRecordHistoryResponse {
 declare interface DescribeCloudProductLogTasksRequest {
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
-  /** 分页单页限制数目，默认值为100，最大值100。 */
+  /** 分页单页限制数目，默认值为20，最大值100。 */
   Limit?: number;
-  /** - assumerName - 按照【云产品标识】进行过滤。 - 类型：String - 必选：否 - 枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS- logType - 按照【日志类型】进行过滤。 - 类型：String - 必选：否 - 枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS- instanceId - 按照【实例ID】进行过滤。 - 类型：String - 必选：否 */
+  /** assumerName按照【云产品标识】进行过滤。类型：String必选：否枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APISlogType按照【日志类型】进行过滤。类型：String必选：否枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESSinstanceId按照【实例ID】进行过滤。类型：String必选：否 */
   Filters?: Filter[];
 }
 
@@ -4687,9 +4705,9 @@ declare interface DescribeShippersResponse {
 }
 
 declare interface DescribeSplunkDeliversRequest {
-  /** 日志主题Id- 通过获取日志主题列表获取日志主题Id。 */
+  /** 日志主题Id通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** taskId 按照【任务id】进行过滤。 类型：String 必选：否 name 按照【任务名称】进行过滤。 类型：String 必选：否 statusFlag 按照【状态】进行过滤。 类型：String 必选：否 每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  /** taskId 按照【任务id】进行过滤。 类型：String 必选：否 name 按照【任务名称】进行过滤。 类型：String 必选：否 statusFlag 按照【状态】进行过滤。 类型：String 必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
   Filters?: Filter[];
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -5593,9 +5611,9 @@ declare interface ModifyShipperResponse {
 declare interface ModifySplunkDeliverRequest {
   /** 任务id */
   TaskId: string;
-  /** 日志主题id- 通过获取日志主题列表获取日志主题Id。 */
+  /** 日志主题id通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** 投递任务名称name有以下限制：- 不能为空- 长度不大于64- 只能包含aA-zZ、下划线、-、0-9 */
+  /** 投递任务名称name有以下限制：不能为空长度不大于64只能包含aA-zZ、下划线、-、0-9 */
   Name?: string;
   /** 投递任务启用状态；0:禁用；1:启用 */
   Enable?: number;
@@ -5617,6 +5635,8 @@ declare interface ModifySplunkDeliverRequest {
   Channel?: string;
   /** 预过滤处理-对写入 Splunk 原始数据进行预过滤处理 */
   DSLFilter?: string;
+  /** 高级配置-跨账户投递用户角色授权信息取值参考：新建自定义角色 */
+  ExternalRole?: ExternalRole;
 }
 
 declare interface ModifySplunkDeliverResponse {

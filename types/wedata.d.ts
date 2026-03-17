@@ -14456,13 +14456,13 @@ declare namespace V20210820 {
   /** 过去七天（不算当天）表的热度值 */
   interface TableHeat {
     /** 表ID */
-    TableId: string | null;
+    TableId?: string | null;
     /** 统计日期 */
-    DayTime: string | null;
+    DayTime?: string | null;
     /** 表热度 */
-    Heat: number | null;
+    Heat?: number | null;
     /** 表热度最大值 */
-    MaxHeat: number | null;
+    MaxHeat?: number | null;
   }
 
   /** 元数据表详细信息 */
@@ -14771,6 +14771,8 @@ declare namespace V20210820 {
     MetaFrom?: string | null;
     /** 引擎侧创建者 */
     EngineCreator?: string | null;
+    /** 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中 */
+    ProjectStatus?: number | null;
   }
 
   /** 表附加信息 */
@@ -14818,21 +14820,21 @@ declare namespace V20210820 {
   /** 按天更新的表的资产评分 */
   interface TablePropertyScore {
     /** 表ID */
-    TableId: string;
+    TableId?: string;
     /** 统计日期 */
-    DayTime: string;
+    DayTime?: string;
     /** 表完整性评分 */
-    Integrity: number;
+    Integrity?: number;
     /** 表保障性评分 */
-    Safety: number;
+    Safety?: number;
     /** 表及时性评分 */
-    Timeliness: number;
+    Timeliness?: number;
     /** 表稳定性评分 */
-    Stability: number;
+    Stability?: number;
     /** 表规范性评分 */
-    Normative: number;
+    Normative?: number;
     /** 资产评分平均分 */
-    Average: number;
+    Average?: number;
   }
 
   /** 表质量详情 */

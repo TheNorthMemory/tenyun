@@ -156,6 +156,10 @@ declare interface QueryHunyuanTo3DProJobResponse {
   ErrorMessage?: string;
   /** 生成的3D文件数组。 */
   ResultFile3Ds?: File3D[];
+  /** 接口任务功能参数及积分详情，返回形式为字符串。Generate参数返回对应模式及消耗积分，如：Generate-Normal：20附加参数返回参数名称及消耗积分，如：MultiViewImages：10 */
+  ResultCreditDetails?: string;
+  /** 任务总消耗积分。 */
+  ResultCreditConsumed?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -207,7 +211,7 @@ declare interface SubmitHunyuanTo3DProJobRequest {
   EnablePBR?: boolean;
   /** 生成3D模型的面数，默认值为500000。可支持生成面数范围，参考值：3000-1500000。GenerateType中选择LowPoly时，此参数不生效。取值范围：[3000, 1500000] */
   FaceCount?: number;
-  /** 生成任务类型，默认Normal，参考值：Normal：可生成带纹理的几何模型。LowPoly：可生成智能拓扑后的模型，FaceCount参数不生效。Geometry：可生成不带纹理的几何模型（白模），EnablePBR参数不生效。Sketch：可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。枚举值：Normal： 可生成带纹理的几何模型LowPoly： 可生成智能拓扑后的模型，FaceCount参数不生效。Geometry： 可生成不带纹理的几何模型（白模），EnablePBR参数不生效。Sketch： 可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。 */
+  /** 生成任务类型，默认Normal枚举值：Normal： 可生成带纹理的几何模型LowPoly： 可生成智能拓扑后的模型，FaceCount参数不生效。Geometry： 可生成不带纹理的几何模型（白模），EnablePBR参数不生效。Sketch： 可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。 */
   GenerateType?: string;
   /** 该参数仅在GenerateType中选择LowPoly模式可生效。多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:triangle: 三角形面。quadrilateral: 四边形面与三角形面混合生成。 */
   PolygonType?: string;
@@ -291,7 +295,7 @@ declare interface SubmitTextureTo3DJobRequest {
   File3D: File3D;
   /** 文生3D，3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符。文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。 */
   Prompt?: string;
-  /** 3D模型纹理参考图 Base64 数据和参考图图 Url。- Base64 和 Url 必须提供一个，如果都提供以 Url 为准。- 图片限制：单边分辨率小于4096且大于128，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。 */
+  /** 3D模型纹理参考图 Base64 数据和参考图 Url。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于4096且大于128，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。 */
   Image?: Image;
   /** 是否开启 PBR材质生成，默认 false。 */
   EnablePBR?: boolean;
