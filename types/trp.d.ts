@@ -424,6 +424,34 @@ declare interface RawScanLog {
   District?: string;
 }
 
+/** 扫码明细上报响应，成功数 */
+declare interface ReportScanDetailResult {
+  /** 成功数量 */
+  Count?: number;
+}
+
+/** 扫码信息 */
+declare interface ScanDetailItem {
+  /** 用户ID，也可以为手机号 */
+  Uid: string;
+  /** 时间参数格式：YYYYMMDDHHMMSS */
+  Time: string;
+  /** 省 */
+  ProvinceName: string;
+  /** 市 */
+  CityName: string;
+  /** 区 */
+  RegionName: string;
+  /** 品牌 */
+  BrandName: string;
+  /** 品规 */
+  SpecName?: string;
+  /** IP，可选，需符合IP格式 */
+  IP?: string;
+  /** 码 */
+  Code?: string;
+}
+
 /** 扫码明细 */
 declare interface ScanLog {
   /** 行ID */
@@ -1722,6 +1750,18 @@ declare interface ReportBatchCallbackStatusResponse {
   RequestId?: string;
 }
 
+declare interface ReportScanDetailRequest {
+  /** 请求参数 */
+  ScanDetails: ScanDetailItem[];
+}
+
+declare interface ReportScanDetailResponse {
+  /** 结果返回，成功数 */
+  Data?: ReportScanDetailResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Trp T-Sec-安心平台(RP)} */
 declare interface Trp {
   (): Versions;
@@ -1833,6 +1873,8 @@ declare interface Trp {
   ModifyTraceDataRanks(data?: ModifyTraceDataRanksRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTraceDataRanksResponse>;
   /** 离线筛选包数据推送 {@link ReportBatchCallbackStatusRequest} {@link ReportBatchCallbackStatusResponse} */
   ReportBatchCallbackStatus(data: ReportBatchCallbackStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ReportBatchCallbackStatusResponse>;
+  /** 扫码数据上报 {@link ReportScanDetailRequest} {@link ReportScanDetailResponse} */
+  ReportScanDetail(data: ReportScanDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ReportScanDetailResponse>;
 }
 
 export declare type Versions = ["2021-05-15"];

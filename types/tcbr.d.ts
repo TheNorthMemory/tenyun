@@ -739,7 +739,7 @@ declare interface DescribeCloudRunDeployRecordResponse {
 declare interface DescribeCloudRunEnvsRequest {
   /** 环境ID，如果传了这个参数则只返回该环境的相关信息 */
   EnvId?: string;
-  /** 指定Channels字段为可见渠道列表或不可见渠道列表如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"] */
+  /** 指定Channels字段为可见渠道列表或不可见渠道列表如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;] */
   IsVisible?: boolean;
   /** 渠道列表，代表可见或不可见渠道由IsVisible参数指定 */
   Channels?: string[];

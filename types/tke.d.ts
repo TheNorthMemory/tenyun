@@ -910,6 +910,20 @@ declare interface DescribeClustersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGPUInfoRequest {
+  /** 实例机型名称，默认值"" */
+  InstanceType: string;
+  /** 操作系统oskey，默认值"" */
+  OsName?: string;
+}
+
+declare interface DescribeGPUInfoResponse {
+  /** GPU相关配置 */
+  GPUParams?: GPUParams[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHealthCheckPoliciesRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -976,6 +990,16 @@ declare interface DescribeNodePoolsResponse {
   NodePools?: NodePool[];
   /** 资源总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeZoneInstanceConfigInfosRequest {
+  /** 机型过滤设置 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeZoneInstanceConfigInfosResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8719,6 +8743,8 @@ declare interface Tke {
   DescribeClusterMachines(data: DescribeClusterMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterMachinesResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
+  /** 获取GPU信息 {@link DescribeGPUInfoRequest} {@link DescribeGPUInfoResponse} */
+  DescribeGPUInfo(data: DescribeGPUInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGPUInfoResponse>;
   /** 查询健康检测策略 {@link DescribeHealthCheckPoliciesRequest} {@link DescribeHealthCheckPoliciesResponse} */
   DescribeHealthCheckPolicies(data: DescribeHealthCheckPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckPoliciesResponse>;
   /** 查询健康检测策略绑定关系 {@link DescribeHealthCheckPolicyBindingsRequest} {@link DescribeHealthCheckPolicyBindingsResponse} */
@@ -8727,6 +8753,8 @@ declare interface Tke {
   DescribeHealthCheckTemplate(data?: DescribeHealthCheckTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckTemplateResponse>;
   /** 查询 TKE 节点池列表 {@link DescribeNodePoolsRequest} {@link DescribeNodePoolsResponse} */
   DescribeNodePools(data: DescribeNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsResponse>;
+  /** 查询原生节点机型配置 {@link DescribeZoneInstanceConfigInfosRequest} {@link DescribeZoneInstanceConfigInfosResponse} */
+  DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
   /** 修改原生节点 {@link ModifyClusterMachineRequest} {@link ModifyClusterMachineResponse} */
   ModifyClusterMachine(data: ModifyClusterMachineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterMachineResponse>;
   /** 修改健康检测策略 {@link ModifyHealthCheckPolicyRequest} {@link ModifyHealthCheckPolicyResponse} */

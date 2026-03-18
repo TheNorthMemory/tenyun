@@ -1991,11 +1991,13 @@ declare interface DeleteDBRequest {
   InstanceId: string;
   /** 数据库名数组 */
   Names: string[];
+  /** 删除数据库前是否创建备份。取值范围：[0, 1]默认值：0 */
+  NoDoBackup?: number;
 }
 
 declare interface DeleteDBResponse {
   /** 任务流ID */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

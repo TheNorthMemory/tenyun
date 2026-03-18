@@ -193,9 +193,11 @@ declare interface CustomLineInfo {
 /** 子订单号列表 */
 declare interface Deals {
   /** 子订单ID */
-  DealId: string;
+  DealId?: string;
   /** 子订单号 */
-  DealName: string;
+  DealName?: string;
+  /** 资源ID */
+  ResourceId?: string;
 }
 
 /** 批量删除域名详情 */
@@ -1711,7 +1713,7 @@ declare interface DescribeDomainFilterListRequest {
   Offset?: number;
   /** 要获取的域名数量, 比如获取 20 个, 则为 20。默认值为 5000。如果账户中的域名数量超过了 5000, 将会强制分页并且只返回前 5000 条, 这时需要通过 Offset 和 Limit 参数去获取其它域名。 */
   Limit?: number;
-  /** 根据域名分组 id 获取域名 */
+  /** 根据域名分组 id 获取域名取值参考：DescribeDomainList */
   GroupId?: number[];
   /** 根据关键字获取域名。 */
   Keyword?: string;
@@ -1725,15 +1727,15 @@ declare interface DescribeDomainFilterListRequest {
   Package?: string[];
   /** 根据备注信息获取域名。 */
   Remark?: string;
-  /** 要获取域名的更新时间起始时间点，如 '2021-05-01 03:00:00'。 */
+  /** 要获取域名的更新时间起始时间点，如 &#39;2021-05-01 03:00:00&#39;。 */
   UpdatedAtBegin?: string;
-  /** 要获取域名的更新时间终止时间点，如 '2021-05-10 20:00:00'。 */
+  /** 要获取域名的更新时间终止时间点，如 &#39;2021-05-10 20:00:00&#39;。 */
   UpdatedAtEnd?: string;
   /** 要获取域名的记录数查询区间起点。 */
   RecordCountBegin?: number;
   /** 要获取域名的记录数查询区间终点。 */
   RecordCountEnd?: number;
-  /** 项目ID，"帐号中心-项目管理"拿到项目ID */
+  /** 项目ID，&quot;账号中心-项目管理&quot;拿到项目ID */
   ProjectId?: number;
   /** 标签过滤 */
   Tags?: TagItemFilter[];
@@ -2107,6 +2109,8 @@ declare interface DescribeRecordListRequest {
   Offset?: number;
   /** 限制数量，当前Limit最大支持3000。默认值为100。 */
   Limit?: number;
+  /** 查询不到数据时是否报错枚举值： yes： 报错 no： 不报错，返回空列表默认值：yes */
+  ErrorOnEmpty?: string;
 }
 
 declare interface DescribeRecordListResponse {

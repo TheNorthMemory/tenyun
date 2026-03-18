@@ -1574,6 +1574,98 @@ declare interface ImageComponent {
   ImageID?: string;
 }
 
+/** 镜像拦截事件 */
+declare interface ImageDenyEvent {
+  /** 事件类型 EVENT_RISK:风险事件类型，EVENT_PRIVILEGE:特权 */
+  EventType?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则RuleID */
+  RuleID?: string;
+  /** 规则类型 */
+  RuleType?: string;
+  /** 规则启用状态 0:开启，1:关闭 */
+  RuleStatus?: number;
+  /** 规则策略状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中 */
+  RuleEffectStatus?: string;
+  /** 规则内容 */
+  RuleInfo?: string[];
+  /** 规则描述 */
+  RuleDescription?: string;
+  /** 镜像ID */
+  ImageID?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 内网IP */
+  NodeIP?: string;
+  /** 主机Quuid */
+  QUUID?: string;
+  /** 首次生成时间 */
+  FoundTime?: string;
+  /** 最近生成时间 */
+  LatestFoundTime?: string;
+  /** 事件数量 */
+  EventCount?: number;
+  /** 执行动作:BEHAVIOR_ALERT:告警，BEHAVIOR_HOLDUP_SUCCESSED:拦截 */
+  DealBehavior?: string;
+  /** 事件ID */
+  EventID?: number;
+  /** 外网IP */
+  PublicIP?: string;
+  /** 节点ID */
+  NodeID?: string;
+  /** 集群ID */
+  ClusterID?: string;
+  /** 节点类型 */
+  NodeType?: string;
+  /** 超级节点唯一id */
+  NodeUniqueID?: string;
+  /** pod ip */
+  PodIP?: string;
+  /** pod name */
+  PodName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 镜像仓库信息 */
+  ImageRegistryInfo?: ImageRegistryInfo;
+}
+
+/** 镜像拦截事件趋势 */
+declare interface ImageDenyEventTendency {
+  /** 日期 */
+  Date: string;
+  /** 事件数量 */
+  EventCount: number;
+}
+
+/** 镜像拦截规则 */
+declare interface ImageDenyRule {
+  /** 规则RuleID */
+  RuleID: string;
+  /** 规则名称 */
+  RuleName: string;
+  /** 规则类型 RULE_RISK：风险， RULE_PRIVILEGE：特权 */
+  RuleType: string;
+  /** 生效的镜像数量 */
+  EffectImageCount: number;
+  /** 是否对全部扫描镜像生效。0:全选镜像，1:自选镜像 */
+  IsEffectAllImage: number;
+  /** 规则开始生效时间 */
+  EffectTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 操作用户 */
+  OperationUin: string;
+  /** 启用状态 */
+  Status: number;
+  /** 生效状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中 */
+  EffectStatus: string;
+  /** 规则ID */
+  ID: number;
+}
+
 /** 容器安全 主机镜像关联列表 */
 declare interface ImageHost {
   /** 镜像id */
@@ -2242,6 +2334,22 @@ declare interface K8sApiAbnormalTendencyItem {
   PrivilegeContainerCount?: number;
 }
 
+/** 恶意外连黑白名单信息 */
+declare interface MaliciousConnectionRuleInfo {
+  /** 枚举：IP: 表示ipv4或者ipv6DOMAIN: 表示域名 */
+  RuleType: string;
+  /** 自定义黑白名单的域名/IP */
+  Address: string;
+  /** 创建时间 */
+  CreatedTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 备注 */
+  Remark: string;
+  /** 规则ID */
+  RuleID: number;
+}
+
 /** 漏洞扫描新增和取消忽略漏洞入参 */
 declare interface ModifyIgnoreVul {
   /** 漏洞PocID */
@@ -2596,6 +2704,38 @@ declare interface RaspRuleVul {
   CveID?: string;
   /** 漏洞防御类型，从漏洞表富化， 1:支持组件漏洞防御，组件漏洞没有正则加白。2:支持正则防御 */
   SupportDefense?: number;
+}
+
+/** 正则规则详情 */
+declare interface RegexpRuleInfo {
+  /** 规则名称 */
+  RuleName: string | null;
+  /** 启用状态 */
+  Status: boolean | null;
+  /** 正则表达式列表 */
+  ExpressionList: WhiteListRegexpExpressionInfo[] | null;
+  /** 规则ID */
+  RuleID?: string | null;
+  /** 最近更新时间 */
+  UpdateTime?: string | null;
+  /** 最近操作账号 */
+  OperatorUIN?: string | null;
+}
+
+/** 正则规则列表Item */
+declare interface RegexpRuleListItem {
+  /** 规则ID */
+  RuleID?: string | null;
+  /** 规则名称 */
+  RuleName?: string | null;
+  /** 生效表达式个数 */
+  EffectiveExpression?: number | null;
+  /** 最新编辑时间 */
+  UpdateTime?: string | null;
+  /** 最近编辑账号 */
+  OperatorUin?: string | null;
+  /** 启用状态 */
+  Status?: boolean | null;
 }
 
 /** 地域信息 */
@@ -3992,6 +4132,16 @@ declare interface WarningRule {
   EndTime: string;
   /** 告警等级策略控制，二进制位每位代表一个含义，值以字符串类型传递控制开关分为高、中、低，则二进制位分别为：第1位:低，第2位:中，第3位:高，0表示关闭、1表示打开。如：高危和中危打开告警，低危关闭告警，则二进制值为：110告警类型不区分等级控制，则传1。 */
   ControlBits: string;
+}
+
+/** 白名单正则表达式信息 */
+declare interface WhiteListRegexpExpressionInfo {
+  /** 逻辑符号与 (AND)或 (OR)非 (NOT) */
+  LogicSymbol?: string;
+  /** 匹配字段 */
+  MatchField?: string;
+  /** 匹配内容 */
+  MatchContent?: string;
 }
 
 declare interface AddAndPublishNetworkFirewallPolicyDetailRequest {
@@ -7650,6 +7800,232 @@ declare interface DescribeImageComponentListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeImageDenyEventDetailRequest {
+  /** 事件ID */
+  EventID: number;
+}
+
+declare interface DescribeImageDenyEventDetailResponse {
+  /** 事件ID */
+  EventID?: number;
+  /** 事件类型 EVENT_RISK:风险事件类型，EVENT_PRIVILEGE:特权 */
+  EventType?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则RuleID */
+  RuleID?: string;
+  /** 规则类型 */
+  RuleType?: string;
+  /** 规则启用状态 0:开启，1:关闭 */
+  RuleStatus?: number;
+  /** 规则策略状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中 */
+  RuleEffectStatus?: string;
+  /** 规则内容 */
+  RuleInfo?: string[] | null;
+  /** 规则描述 */
+  RuleDescription?: string;
+  /** 镜像ID */
+  ImageID?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 内网IP */
+  NodeIP?: string;
+  /** 外网IP */
+  PublicIP?: string;
+  /** 主机Quuid */
+  QUUID?: string;
+  /** 首次生成时间 */
+  FoundTime?: string;
+  /** 最近生成时间 */
+  LatestFoundTime?: string;
+  /** 事件数量 */
+  EventCount?: number;
+  /** 执行动作:BEHAVIOR_ALERT:告警，BEHAVIOR_HOLDUP_SUCCESSED:拦截 */
+  DealBehavior?: string;
+  /** Pod名称 */
+  PodName?: string;
+  /** 规则开始拦截时间 */
+  RuleEffectTime?: string;
+  /** 事件描述 */
+  Description?: string;
+  /** 镜像启动参数 */
+  StartParam?: string;
+  /** 解决方案 */
+  Solution?: string;
+  /** pod ip */
+  PodIP?: string;
+  /** pod状态 */
+  PodStatus?: string;
+  /** 集群id */
+  ClusterID?: string;
+  /** 节点类型 */
+  NodeType?: string;
+  /** 节点id */
+  NodeID?: string;
+  /** 节点唯一id */
+  NodeUniqueID?: string;
+  /** 节点子网id */
+  NodeSubNetID?: string;
+  /** 节点子网名称 */
+  NodeSubNetName?: string;
+  /** 节点子网cidr */
+  NodeSubNetCIDR?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 镜像仓库信息 */
+  ImageRegistryInfo?: ImageRegistryInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageDenyEventListRequest {
+  /** 过滤条件。EventType- String - 是否必填：否 -事件类型 EVENT_RISK:风险事件类型，EVENT_PRIVILEGE:特权。DealBehavior- String - 是否必填：否 - 执行动作,BEHAVIOR_ALERT:告警，BEHAVIOR_HOLDUP_SUCCESSED:拦截。RuleName- string - 是否必填：否 - 规则名称。NodeName- string - 是否必填：否 - 节点名称。NodeIP- string - 是否必填：否 - 内外IP。PublicIP- string - 是否必填：否 - 外网IP。ImageName- string - 是否必填：否 - 镜像名称。ImageID- string - 是否必填：否 - 镜像ID。TimeRange- String -是否必填: 否 - 时间范围，第一个值表示开始时间，第二个值表示结束时间 */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式：asc/desc */
+  Order?: string;
+  /** 排序字段：告警数量：EventCount，最近生成时间：LatestFoundTime */
+  By?: string;
+}
+
+declare interface DescribeImageDenyEventListResponse {
+  /** 镜像拦截列表 */
+  List?: ImageDenyEvent[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageDenyEventTendencyRequest {
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+}
+
+declare interface DescribeImageDenyEventTendencyResponse {
+  /** 镜像拦截成功事件趋势 */
+  DenyList: ImageDenyEventTendency[];
+  /** 镜像拦截告警事件趋势 */
+  AlarmList: ImageDenyEventTendency[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageDenyRuleDetailRequest {
+  /** 规则RuleID */
+  RuleID: string;
+}
+
+declare interface DescribeImageDenyRuleDetailResponse {
+  /** 规则ID */
+  ID: number;
+  /** 规则名称 */
+  RuleName: string;
+  /** 规则类型 RULE_RISK：风险， RULE_PRIVILEGE：特权 */
+  RuleType: string;
+  /** 生效的镜像数量 */
+  EffectImageCount: number;
+  /** 是否对全部扫描镜像生效。0:全选镜像，1:自选镜像 */
+  IsEffectAllImage: number;
+  /** 规则开始生效时间 */
+  EffectTime: string;
+  /** 更新时间 */
+  UpdateTime: string;
+  /** 操作用户 */
+  OperationUin: string;
+  /** 生效状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中 */
+  EffectStatus: string;
+  /** 规则描述 */
+  RuleDescription: string;
+  /** 启用状态 0:开启，1:关闭 */
+  Status: number;
+  /** 漏洞，0:未选中，1:选中 */
+  Vul: number;
+  /** cve编号 */
+  CVEIDSet: string[];
+  /** 组件编号 */
+  ComponentSet: string[];
+  /** 漏洞分类 */
+  VulClassSet: string[];
+  /** 漏洞等级 */
+  VulLevelSet: string[];
+  /** 漏洞标签 */
+  VulLabelSet: string[];
+  /** 木马，0:未选中，1:选中 */
+  Virus: number;
+  /** 木马md5列表 */
+  VirusMD5Set: string[];
+  /** 木马等级 */
+  VirusLevelSet: string[];
+  /** 病毒名 */
+  VirusName: string[];
+  /** 敏感信息，0:未选中，1:选中 */
+  Risk: number;
+  /** 敏感等级 */
+  RiskLevelSet: string[];
+  /** 敏感信息分类 */
+  RiskType: string[];
+  /** 特权启动 0:不允许，1:允许 */
+  PrivilegeRun: number;
+  /** 特权类型, */
+  PrivilegeDetail: string[] | null;
+  /** 镜像ID列表 */
+  EffectImageSet: string[];
+  /** 多少天后生效 */
+  EffectDay: number;
+  /** 规则RuelD */
+  RuleID: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageDenyRuleListRequest {
+  /** 过滤条件。RuleType- String - 是否必填：否 -规则类型 RULE_RISK：风险， RULE_PRIVILEGE：特权EffectStatus- String - 是否必填：否 - 生效状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中。RuleName- string - 是否必填：否 - 规则名称。Status- string - 是否必填：否 - 开启状态 0：开启，1：关闭。 */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序方式：asc/desc */
+  Order?: string;
+  /** 排序字段：生效时间：EffectTime，更新时间：UpdateTime */
+  By?: string;
+  /** 置顶已开启规则 true：是 ，否：false */
+  TopTurnOn?: boolean;
+}
+
+declare interface DescribeImageDenyRuleListResponse {
+  /** 规则列表 */
+  List: ImageDenyRule[];
+  /** 规则总数量 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageDenyRuleSummaryRequest {
+}
+
+declare interface DescribeImageDenyRuleSummaryResponse {
+  /** 镜像拦截规则总数(含关闭的和开启的) */
+  RuleTotalCount: number;
+  /** 开启的镜像拦截规则数 */
+  EnabledRuleCount: number;
+  /** 观察期中的镜像拦截规则数 */
+  ObservedRuleCount: number;
+  /** 已生效的镜像拦截规则数 */
+  EffectiveRuleCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeImageRegistryNamespaceListRequest {
   /** 本次查询的起始偏移量，默认为0。 */
   Offset?: number;
@@ -7908,6 +8284,50 @@ declare interface DescribeLogStorageStatisticResponse {
   TotalSize?: number;
   /** 已使用容量（单位：B） */
   UsedSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMaliciousConnectionBlackListRequest {
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。RequestType- string - 是否必填：否 - 请求类型，全部请求类型：ALL；域名：DOMAIN；IP: IPBlackDomain- string - 是否必填：否 - 自定义黑域名BlackIP- string - 是否必填：否 - 自定义黑IP */
+  Filters?: RunTimeFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeMaliciousConnectionBlackListResponse {
+  /** 恶意请求白名单总数 */
+  TotalCount: number;
+  /** 恶意请求白名单列表 */
+  List: MaliciousConnectionRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMaliciousConnectionWhiteListRequest {
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。RequestType- string - 是否必填：是 - 请求类型，全部请求类型：ALL；域名：DOMAIN；IP: IPWhiteDomain- string - 是否必填：否 - 自定义白域名WhiteIP- string - 是否必填：否 - 自定义白名单IP */
+  Filters?: RunTimeFilters[];
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeMaliciousConnectionWhiteListResponse {
+  /** 恶意请求白名单总数 */
+  TotalCount: number;
+  /** 恶意请求白名单列表 */
+  List: MaliciousConnectionRuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8402,6 +8822,40 @@ declare interface DescribeReverseShellEventsResponse {
   TotalCount?: number;
   /** 反弹shell数组 */
   EventSet?: ReverseShellEventInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReverseShellRegexpWhiteListInfoRequest {
+  /** 规则ID */
+  RuleID: string;
+}
+
+declare interface DescribeReverseShellRegexpWhiteListInfoResponse {
+  /** 规则详情 */
+  RuleInfo?: RegexpRuleInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReverseShellRegexpWhiteListRequest {
+  /** 过滤条件。RuleName- String - 是否必填：否 - 规则名称 */
+  Filters?: RunTimeFilters[];
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序字段 */
+  By?: string;
+  /** 排序方式 */
+  Order?: string;
+}
+
+declare interface DescribeReverseShellRegexpWhiteListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 列表 */
+  List?: RegexpRuleListItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11379,6 +11833,18 @@ declare interface Tcss {
   DescribeImageAutoAuthorizedTaskList(data: DescribeImageAutoAuthorizedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAutoAuthorizedTaskListResponse>;
   /** 查询本地镜像组件列表 {@link DescribeImageComponentListRequest} {@link DescribeImageComponentListResponse} */
   DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
+  /** 查询镜像拦截事件详情 {@link DescribeImageDenyEventDetailRequest} {@link DescribeImageDenyEventDetailResponse} */
+  DescribeImageDenyEventDetail(data: DescribeImageDenyEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageDenyEventDetailResponse>;
+  /** 查询镜像拦截事件列表 {@link DescribeImageDenyEventListRequest} {@link DescribeImageDenyEventListResponse} */
+  DescribeImageDenyEventList(data?: DescribeImageDenyEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageDenyEventListResponse>;
+  /** 查询镜像拦截事件趋势 {@link DescribeImageDenyEventTendencyRequest} {@link DescribeImageDenyEventTendencyResponse} */
+  DescribeImageDenyEventTendency(data: DescribeImageDenyEventTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageDenyEventTendencyResponse>;
+  /** 查询镜像拦截规则详情 {@link DescribeImageDenyRuleDetailRequest} {@link DescribeImageDenyRuleDetailResponse} */
+  DescribeImageDenyRuleDetail(data: DescribeImageDenyRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageDenyRuleDetailResponse>;
+  /** 查询镜像拦截规则列表 {@link DescribeImageDenyRuleListRequest} {@link DescribeImageDenyRuleListResponse} */
+  DescribeImageDenyRuleList(data?: DescribeImageDenyRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageDenyRuleListResponse>;
+  /** 查询镜像拦截规则统计 {@link DescribeImageDenyRuleSummaryRequest} {@link DescribeImageDenyRuleSummaryResponse} */
+  DescribeImageDenyRuleSummary(data?: DescribeImageDenyRuleSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageDenyRuleSummaryResponse>;
   /** 查询用户镜像仓库下的命令空间列表 {@link DescribeImageRegistryNamespaceListRequest} {@link DescribeImageRegistryNamespaceListResponse} */
   DescribeImageRegistryNamespaceList(data?: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
   /** 镜像仓库查看定时任务 {@link DescribeImageRegistryTimingScanTaskRequest} {@link DescribeImageRegistryTimingScanTaskResponse} */
@@ -11409,6 +11875,10 @@ declare interface Tcss {
   DescribeK8sApiAbnormalTendency(data: DescribeK8sApiAbnormalTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeK8sApiAbnormalTendencyResponse>;
   /** 获取日志检索容量使用统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
+  /** 查询恶意外连黑名单 {@link DescribeMaliciousConnectionBlackListRequest} {@link DescribeMaliciousConnectionBlackListResponse} */
+  DescribeMaliciousConnectionBlackList(data?: DescribeMaliciousConnectionBlackListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousConnectionBlackListResponse>;
+  /** 查询恶意外连白名单 {@link DescribeMaliciousConnectionWhiteListRequest} {@link DescribeMaliciousConnectionWhiteListResponse} */
+  DescribeMaliciousConnectionWhiteList(data?: DescribeMaliciousConnectionWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaliciousConnectionWhiteListResponse>;
   /** @deprecated 查询集群策略审计列表 {@link DescribeNetworkFirewallAuditRecordRequest} {@link DescribeNetworkFirewallAuditRecordResponse} */
   DescribeNetworkFirewallAuditRecord(data?: DescribeNetworkFirewallAuditRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetworkFirewallAuditRecordResponse>;
   /** @deprecated 查询集群策略列表 {@link DescribeNetworkFirewallClusterListRequest} {@link DescribeNetworkFirewallClusterListResponse} */
@@ -11455,6 +11925,10 @@ declare interface Tcss {
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 运行时反弹shell列表导出 {@link DescribeReverseShellEventsExportRequest} {@link DescribeReverseShellEventsExportResponse} */
   DescribeReverseShellEventsExport(data?: DescribeReverseShellEventsExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsExportResponse>;
+  /** 查询反弹shell正则白名单列表 {@link DescribeReverseShellRegexpWhiteListRequest} {@link DescribeReverseShellRegexpWhiteListResponse} */
+  DescribeReverseShellRegexpWhiteList(data?: DescribeReverseShellRegexpWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRegexpWhiteListResponse>;
+  /** 查询反弹shell正则白名单详情 {@link DescribeReverseShellRegexpWhiteListInfoRequest} {@link DescribeReverseShellRegexpWhiteListInfoResponse} */
+  DescribeReverseShellRegexpWhiteListInfo(data: DescribeReverseShellRegexpWhiteListInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRegexpWhiteListInfoResponse>;
   /** 运行时反弹shell白名单详细信息 {@link DescribeReverseShellWhiteListDetailRequest} {@link DescribeReverseShellWhiteListDetailResponse} */
   DescribeReverseShellWhiteListDetail(data: DescribeReverseShellWhiteListDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellWhiteListDetailResponse>;
   /** 运行时反弹shell白名单列表 {@link DescribeReverseShellWhiteListsRequest} {@link DescribeReverseShellWhiteListsResponse} */

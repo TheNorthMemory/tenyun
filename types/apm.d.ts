@@ -642,6 +642,12 @@ declare interface ServiceDetail {
   Tags?: ApmTag[] | null;
   /** 业务系统名称 */
   InstanceName?: string;
+  /** 阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值 */
+  EnableThresholdConfig?: boolean | null;
+  /** 错误率阈值（%），用于判断应用健康状态为&quot;红色&quot;单位：% */
+  ErrRateThreshold?: number | null;
+  /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;单位：ms */
+  ResponseDurationWarningThreshold?: number | null;
 }
 
 /** Span 对象 */

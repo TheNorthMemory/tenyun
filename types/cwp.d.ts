@@ -2136,6 +2136,38 @@ declare interface CanNotSeparateInfo {
   Reason?: number;
 }
 
+/** 客户端设置相关功能主机结构体 */
+declare interface ClientSettingHost {
+  /** host对应的数据库记录ID */
+  Id?: number;
+  /** 主机名字 */
+  Name?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 公网IP */
+  PublicIp?: string;
+  /** 内网IP */
+  PrivateIp?: string;
+  /** 主机Quuid */
+  Quuid?: string;
+  /** 主机状态OFFLINE: 离线 ONLINE: 在线SHUTDOWN: 已关机UNINSTALLED: 未防护 */
+  Status?: string;
+  /** ins-sad143 */
+  VpcId?: string;
+  /** 地域信息 */
+  RegionInfo?: RegionInfo;
+  /** 附加信息 */
+  MachineExtraInfo?: MachineExtraInfo;
+  /** 0: 关闭 1: 开启2: 开启中 3: 关闭中9: 未设置 */
+  FunctionStatus?: number;
+  /** 以下几个固定值需要前端特殊处理，其他失败原因可直接展示：1. UNINSTALLED -- 未安装2. NEED_UPGRADE -- 需要升级3. NOT_RUNNING -- 已关机4. NO_PASSWORD -- 未开启密码登录，无法开启扫码 */
+  Message?: string;
+  /** 失败原因 */
+  MessageDesc?: string;
+  /** 实例状态RUNNING: 运行中STOPED: 已关机EXPIRED: 待回收 */
+  InstanceStatus?: string;
+}
+
 /** 云服务器类型机器数量 */
 declare interface CloudFromCnt {
   /** 云服务器类型 */
@@ -3518,6 +3550,50 @@ declare interface MalwareWhiteListInfo {
   ModifyTime?: string;
 }
 
+/** 内存马白名单规则 */
+declare interface MemShellRule {
+  /** 规则ID */
+  Id?: number;
+  /** 客户端ID */
+  UuidHostips?: UuidHostip[];
+  /** 逻辑运算符，0: 下面5个有效的正则逻辑与 1: 逻辑或 */
+  LogicalSymbol?: number;
+  /** 类名正则表达式，为空则不匹配 */
+  ClassNameRegexp?: string;
+  /** 父类名正则表达式，为空则不匹配 */
+  SuperClassNameRegexp?: string;
+  /** 继承的接口正则表达式，为空则不匹配 */
+  InterfacesRegexp?: string;
+  /** 注释正则表达式，为空则不匹配 */
+  AnnotationsRegexp?: string;
+  /** 所属的类加载器正则表达式，为空则不匹配 */
+  LoaderClassNameRegexp?: string;
+  /** 操作人 */
+  Operator?: string;
+  /** 是否全局规则(是否对appid下所有主机有效， 0:单台uuid 1:全局，默认否) */
+  IsGlobal?: number;
+  /** 状态 (0: 有效 1: 删除，2：无效（启用开关关闭）) */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 处理历史事件， 0:不处理 1:处理 */
+  HandleHistory?: number;
+  /** 批次id */
+  GroupID?: string;
+  /** 应用资产，描述服务器数量，全局时候为：全部服务器 */
+  MachinesNums?: string;
+  /** 策略名称 */
+  GroupName?: string;
+  /** 源代码正则表达式，为空则不匹配 */
+  CodeSourceRegexp?: string;
+  /** 调用栈正则表达式，为空则不匹配 */
+  CallStackRegexp?: string;
+  /** 文件是否存在， 0:用户没选择规则时候的默认值，1：文件存在，2：文件不存在 */
+  FileExist?: number;
+}
+
 /** 网络攻击事件 */
 declare interface NetAttackEvent {
   /** 日志ID */
@@ -3664,6 +3740,16 @@ declare interface OpenPortStatistics {
   Port?: number;
   /** 主机数量 */
   MachineNum?: number;
+}
+
+/** 订单详情 */
+declare interface OrderDetail {
+  /** 资源ID */
+  ResourceID?: string;
+  /** 计费项 */
+  InquireKey?: string;
+  /** 订单状态- 1 正常- 2 隔离期- 3 已销毁 */
+  Status?: number;
 }
 
 /** 订单变配参数对象 */
@@ -4306,6 +4392,440 @@ declare interface RansomDefenseStrategyMachineInfo {
   DiskInfo?: string;
 }
 
+/** 应用防护白名单攻击类型列表 */
+declare interface RaspAttackTypeListItem {
+  /** 攻击类型名称 */
+  AttackTypeName?: string;
+  /** 攻击类型ID */
+  AttackTypeID?: number;
+  /** 漏洞对应的功能类型，rasp:漏洞防御,memshell_inject:内存马注入 */
+  Source?: string;
+}
+
+/** 应用防护事件 */
+declare interface RaspEvent {
+  /** 漏洞事件id */
+  Id?: number;
+  /** 机器uuid */
+  Uuid?: string;
+  /** 机器quuid */
+  Quuid?: string;
+  /** 主机名 */
+  Alias?: string;
+  /** 实例id */
+  InstanceID?: string;
+  /** 内网ip */
+  PrivateIp?: string;
+  /** 公网ip */
+  PublicIp?: string;
+  /** 漏洞ID */
+  VulId?: number;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** cve编号 */
+  CveId?: string;
+  /** 攻击源ip */
+  SourceIp?: string;
+  /** 攻击源ip地址所在城市 */
+  City?: string;
+  /** 被攻击的端口 */
+  AttackPort?: number;
+  /** 首次攻击时间 */
+  CreateTime?: string;
+  /** 最近攻击时间 */
+  MergeTime?: string;
+  /** 攻击次数 */
+  Count?: number;
+  /** 状态 0: 待处理 1:已防御 2:已处理 3: 已忽略 4: 已删除 5: 已加白 */
+  Status?: number;
+  /** 应用攻击类型 */
+  AttackTypeName?: string;
+  /** 应用攻击类型id */
+  AttackType?: number;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点id */
+  NodeId?: string;
+  /** 容器名称 */
+  ContainerName?: string;
+  /** 容器id */
+  ContainerId?: string;
+  /** 容器运行状态 */
+  ContainerStatus?: string;
+  /** 容器隔离状态 */
+  ContainerNetStatus?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** pod名称 */
+  PodName?: string;
+  /** podip */
+  PodIp?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 事件详情，包括poc */
+  RaspDetail?: string;
+  /** 普通节点：NORMAL超级节点：SUPER */
+  NodeType?: string;
+  /** 事件类型 1:攻击时间 2:防御成功 */
+  EventType?: number;
+  /** 超级节点的唯一id */
+  NodeUniqueID?: string;
+  /** poc id */
+  PocID?: string;
+  /** 请求url */
+  Url?: string;
+  /** 恶意特征 */
+  Poc?: string;
+}
+
+/** 应用防护事件详情 */
+declare interface RaspEventDetail {
+  /** 漏洞事件id */
+  Id?: number | null;
+  /** 状态 0: 待处理 1:已防御 2:已处理 3: 已忽略 4: 已删除 5: 已加白 */
+  Status?: number | null;
+  /** 机器quuid */
+  Quuid?: string | null;
+  /** 主机名 */
+  Alias?: string | null;
+  /** 实例id */
+  InstanceID?: string | null;
+  /** 内网ip */
+  PrivateIp?: string | null;
+  /** 公网ip */
+  PublicIp?: string | null;
+  /** 资产tag */
+  HostTags?: string[] | null;
+  /** 首次攻击时间 */
+  CreateTime?: string | null;
+  /** 最近攻击时间 */
+  MergeTime?: string | null;
+  /** 应用攻击类型 */
+  AttackTypeName?: string | null;
+  /** 应用攻击类型id */
+  AttackType?: number | null;
+  /** 请求url */
+  Url?: string | null;
+  /** 漏洞名称 */
+  VulName?: string | null;
+  /** 攻击次数 */
+  Count?: number | null;
+  /** cve编号 */
+  CveId?: string | null;
+  /** 攻击源ip */
+  SourceIp?: string | null;
+  /** 攻击源ip地址所在城市 */
+  City?: string | null;
+  /** 被攻击的端口 */
+  AttackPort?: number | null;
+  /** 漏洞描述 */
+  Description?: string | null;
+  /** 修复方式 */
+  Fix?: string | null;
+  /** 请求内容 */
+  NetworkPayload?: string | null;
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 节点id */
+  NodeId?: string | null;
+  /** 容器名称 */
+  ContainerName?: string | null;
+  /** 容器id */
+  ContainerId?: string | null;
+  /** 容器运行状态 */
+  ContainerStatus?: string | null;
+  /** 容器隔离状态 */
+  ContainerNetStatus?: string | null;
+  /** 镜像ID */
+  ImageId?: string | null;
+  /** 镜像名称 */
+  ImageName?: string | null;
+  /** pod名称 */
+  PodName?: string | null;
+  /** podip */
+  PodIp?: string | null;
+  /** 集群名称 */
+  ClusterName?: string | null;
+  /** 集群id */
+  ClusterId?: string | null;
+  /** 进程id */
+  Pid?: number | null;
+  /** 关联进程主类名 */
+  MainClass?: string | null;
+  /** 堆栈信息 */
+  StackTrace?: string | null;
+  /** 漏洞ID相关的事件详情(json array格式 rasp特有) */
+  RaspDetail?: string | null;
+  /** 入侵状态： 1 攻击事件，2 防御成功 */
+  EventType?: number;
+}
+
+/** 应用防御概览信息 */
+declare interface RaspEventOverview {
+  /** 可防御漏洞数 */
+  DefenceVuls?: number;
+  /** 可精准防御漏洞数 */
+  PreciseDefenseVuls?: number;
+  /** 未处理的应用防御事件数 */
+  UnhandledRaspEvents?: number;
+  /** 未处理的内存马扫描事件数 */
+  UnhandledMemShellScanEvents?: number;
+  /** 未处理的内存马注入事件数 */
+  UnhandledMemShellInjectEvents?: number;
+  /** 每日未处理事件趋势 */
+  UnHandledEvents?: number[];
+  /** 每日漏洞检测事件趋势 */
+  RaspAttackCounts?: number[];
+  /** 每日漏洞防御事件趋势 */
+  RaspDefendCounts?: number[];
+  /** 每日内存马检测事件趋势 */
+  MemShellAttackCounts?: number[];
+  /** 每日内存马防御事件趋势 */
+  MemShellDefendCounts?: number[];
+  /** 日期 */
+  Date?: string[];
+  /** 开通RASP防护开关资产数 */
+  ProtectAssetOpenCount?: number;
+  /** 全部资产数 */
+  ProtectAssetCount?: number;
+  /** 绑定了旗舰版的资产防护数 */
+  UltimateAssetCount?: number;
+  /** 绑定了重保防护包的资产数 */
+  RaspAssetCount?: number;
+  /** 未授权的资产数 */
+  NotProtectAssetCount?: number;
+  /** 近7天未处理事件数 */
+  RecentUnhandledEvents?: number;
+  /** 防御成功的总次数 */
+  RaspDefendCount?: number;
+}
+
+/** 重保授权包列表对象 */
+declare interface RaspLicenseList {
+  /** 机器唯一ID */
+  QUUID?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 公网IP */
+  PublicIP?: string;
+  /** 内网IP */
+  PrivateIP?: string;
+  /** 云标签信息 */
+  Tags?: Tags[];
+  /** 防护版本信息- CriticalProtection 重保防护包- Pro 容器安全-专业版- Ultimate 主机安全-旗舰版 */
+  ProtectionVersion?: string[];
+  /** 防护设置- 0 未配置- 1 已配置 */
+  ConfigurationSetting?: number;
+  /** 总开关- 0 未开启- 1已开启 */
+  Enable?: number;
+  /** 漏洞防御开关- 0 未开启- 1 开启 */
+  VulDefEnable?: number;
+  /** 漏洞防御模式- 0 标准- 1 重保 */
+  VulDefMode?: number;
+  /** 漏洞防御动作- 0 仅检测- 1 检测+防御 */
+  VulDefAction?: number;
+  /** 内存马防御开关- 0 未开启- 1 开启 */
+  MemShellDefEnable?: number;
+  /** 更多防护- 0 不注入会重启的进程 - 1 注入会重启的进程 */
+  SafeInject?: number;
+  /** 性能阈值配置开关- 0 未开启- 1 开启 */
+  PerformanceLimit?: number;
+  /** CPU阈值,取值1-99 */
+  PerformanceLimitCpu?: number;
+  /** 内存阈值,取值1-99 */
+  PerformanceLimitMem?: number;
+  /** 内存剩余阈值 */
+  PerformanceLimitMemAmount?: number;
+  /** 插件状态- 0 使用正常- 1 存在异常- 2 未使用 */
+  RaspException?: number;
+  /** 最近更新时间 */
+  LatestUpdateTime?: string;
+  /** 集群ID,仅容器资产有值 */
+  ClusterName?: string;
+  /** 集群名称,仅容器资产有值 */
+  ClusterId?: string;
+  /** 订单信息 */
+  OrderDetail?: OrderDetail;
+  /** 是否允许解绑,fasle 不允许 true 允许 */
+  IsUnBind?: boolean;
+  /** uuid 机器唯一ID,仅AssetType = CWP 时有值 */
+  UUID?: string;
+  /** 无注入/注入失败原因 */
+  Reason?: string;
+}
+
+/** 重保防护授权插件详情 */
+declare interface RaspLicensePlugin {
+  /** java进程pid */
+  PID?: number;
+  /** java主类 */
+  MainClass?: string;
+  /** 0: 注入中, 1: 注入成功, 2: 插件超时, 3: 插件退出, 4: 注入失败 */
+  Status?: number;
+  /** 错误详情 */
+  ErrorLog?: string;
+  /** 注入失败原因 */
+  Reason?: string;
+  /** 注入时间 */
+  InjectTime?: string;
+}
+
+/** java内存马事件信息 */
+declare interface RaspMemShellDetail {
+  /** 事件ID */
+  Id?: number | null;
+  /** 服务器quuid */
+  Quuid?: string | null;
+  /** 服务器名称 */
+  Alias?: string | null;
+  /** 实例id */
+  InstanceID?: string;
+  /** 内网ip */
+  PrivateIp?: string | null;
+  /** 公网ip */
+  PublicIp?: string | null;
+  /** 主机tag */
+  HostTags?: string[] | null;
+  /** 内存马类型 0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他 */
+  Type?: number | null;
+  /** 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4 - 已手动处理 */
+  Status?: number | null;
+  /** 所属的类加载器 */
+  ClassLoaderName?: string | null;
+  /** 父类名 */
+  SuperClassName?: string | null;
+  /** 继承的接口 */
+  Interfaces?: string | null;
+  /** 注释 */
+  Annotations?: string | null;
+  /** 类名 */
+  ClassName?: string | null;
+  /** 类文件md5 */
+  Md5?: string | null;
+  /** 进程pid */
+  Pid?: number | null;
+  /** java进程路径 */
+  Exe?: string | null;
+  /** java进程命令行参数 */
+  Args?: string | null;
+  /** java内存马二进制代码(base64) */
+  ClassContent?: string | null;
+  /** java内存马反编译代码 */
+  ClassContentPretty?: string | null;
+  /** 事件描述 */
+  EventDescription?: string | null;
+  /** 安全建议 */
+  SecurityAdvice?: string | null;
+  /** 首次发现时间 */
+  CreateTime?: string | null;
+  /** 最近检测时间 */
+  RecentFoundTime?: string | null;
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 节点id */
+  NodeId?: string | null;
+  /** 容器名称 */
+  ContainerName?: string | null;
+  /** 容器id */
+  ContainerId?: string | null;
+  /** 容器运行状态 */
+  ContainerStatus?: string | null;
+  /** 容器隔离状态 */
+  ContainerNetStatus?: string | null;
+  /** 镜像ID */
+  ImageId?: string | null;
+  /** 镜像名称 */
+  ImageName?: string | null;
+  /** pod名称 */
+  PodName?: string | null;
+  /** podip */
+  PodIp?: string | null;
+  /** 集群名称 */
+  ClusterName?: string | null;
+  /** 集群id */
+  ClusterId?: string | null;
+}
+
+/** java内存马事件信息 */
+declare interface RaspMemShellEvent {
+  /** 事件ID */
+  Id?: number;
+  /** 服务器quuid */
+  Quuid?: string;
+  /** 服务器名称 */
+  Alias?: string;
+  /** 服务器IP */
+  HostIp?: string;
+  /** 内存马类型 0:Filter型 1:Listener型 2:Servlet型 3:Interceptors型 4:Agent型 5:其他 */
+  Type?: number;
+  /** 说明 */
+  Description?: string;
+  /** 首次发现时间 */
+  CreateTime?: string;
+  /** 最近检测时间 */
+  RecentFoundTime?: string;
+  /** 处理状态 0 -- 待处理 1 -- 已加白 2 -- 已删除 3 - 已忽略 4 - 已手动处理 */
+  Status?: number;
+  /** 类文件md5 */
+  Md5?: string;
+  /** 类名 */
+  ClassName?: string;
+  /** 父类名 */
+  SuperClassName?: string;
+  /** 继承的接口 */
+  Interfaces?: string;
+  /** 注释 */
+  Annotations?: string;
+  /** 所属的类加载器 */
+  LoaderClassName?: string;
+  /** 进程pid */
+  Pid?: number;
+  /** java进程路径 */
+  Exe?: string;
+  /** java进程命令行参数 */
+  Args?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点id */
+  NodeId?: string;
+  /** 容器名称 */
+  ContainerName?: string;
+  /** 容器id */
+  ContainerId?: string;
+  /** 容器运行状态 */
+  ContainerStatus?: string;
+  /** 容器隔离状态 */
+  ContainerNetStatus?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 镜像名称 */
+  ImageName?: string;
+  /** pod名称 */
+  PodName?: string;
+  /** podip */
+  PodIp?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 和节点id一样，前端可以不用这个 */
+  InstanceID?: string;
+  /** 服务器内网ip */
+  HostInnerIP?: string;
+  /** 服务器外网ip */
+  HostPublicIP?: string;
+  /** 普通节点：NORMAL超级节点：SUPER */
+  NodeType?: string;
+  /** 超级节点唯一id */
+  NodeUniqueID?: string;
+}
+
 /** rasp白名单规则 */
 declare interface RaspRule {
   /** 规则ID */
@@ -4548,6 +5068,40 @@ declare interface ReverseShellRule {
   Hostip?: string;
 }
 
+/** 反弹Shell规则-聚合版本 */
+declare interface ReverseShellRuleAggregation {
+  /** 规则ID */
+  Id?: number;
+  /** 客户端ID */
+  UuidHostips?: UuidHostip[];
+  /** 进程名称 */
+  ProcessName?: string;
+  /** 目标IP */
+  DestIp?: string;
+  /** 目标端口 */
+  DestPort?: string;
+  /** 操作人 */
+  Operator?: string;
+  /** 是否全局规则 */
+  IsGlobal?: number;
+  /** 状态 (0: 有效 1: 无效) */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 加白方式， 0:常规加白 1:正则加白 */
+  WhiteType?: number;
+  /** 正则表达式 */
+  RuleRegexp?: string;
+  /** 处理历史事件， 0:不处理 1:处理 */
+  HandleHistory?: number;
+  /** 批次id */
+  GroupID?: string;
+  /** 应用资产，描述服务器数量，全局时候为：全部服务器 */
+  MachinesNums?: string;
+}
+
 /** 恶意请求事件 */
 declare interface RiskDnsEvent {
   /** 事件Id */
@@ -4678,6 +5232,12 @@ declare interface RiskDnsPolicy {
   UpdateTime?: string;
   /** 事件ID */
   EventId?: number;
+}
+
+/** 内存马和rasp注入时候的风险服务 */
+declare interface RiskMainClass {
+  /** rasp注入时候的风险服务 */
+  ServiceName?: string;
 }
 
 /** 异常进程事件 */
@@ -5056,6 +5616,26 @@ declare interface SecurityTrend {
   EventNum?: number;
 }
 
+/** 反弹shell列表数据详情 */
+declare interface ShellPolicyList {
+  /** 策略ID */
+  PolicyId?: number | null;
+  /** 策略名称 */
+  PolicyName?: string | null;
+  /** 0 系统策略, 1 用户自定义策略 */
+  PolicyType?: number | null;
+  /** 策略描述 */
+  PolicyDesc?: string | null;
+  /** 策略动作[0:告警,1:放行,2:拦截+告警] */
+  PolicyAction?: number | null;
+  /** 0 开启, 1关闭 */
+  IsEnabled?: number | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 主机范围:[0: 一组quuid 1: 所有专业版 2: 旗舰版 3: 所有主机] */
+  HostScope?: number | null;
+}
+
 /** 标准模式阻断配置 */
 declare interface StandardModeConfig {
   /** 阻断时长，单位：秒 */
@@ -5172,6 +5752,14 @@ declare interface UsualPlace {
   ProvinceId?: number;
   /** 城市 ID。 */
   CityId?: number;
+}
+
+/** 过检机器和对应的hostip */
+declare interface UuidHostip {
+  /** 服务器id */
+  Uuid?: string;
+  /** 服务器ip */
+  Hostip?: string;
 }
 
 /** 索引的value描述 */
@@ -5436,6 +6024,38 @@ declare interface VulDefenceRangeDetail {
   VulId?: number;
   /** 状态，0:防御中，1：已加白，指的是在白名单列表中有这个漏洞的，不一定是全局型白名单 */
   Status?: number;
+}
+
+/** 漏洞防御设置 */
+declare interface VulDefenceSetting {
+  /** 策略名称 */
+  StrategyName?: string | null;
+  /** 0系统策略1自定义策略 */
+  StrategyType?: number | null;
+  /** 威胁等级 */
+  ThreatLevel?: number | null;
+  /** 1全部旗舰版主机0自选主机 */
+  Scope?: number | null;
+  /** 支持的漏洞个数 */
+  SupportVulNum?: number | null;
+  /** 0 关闭 1 开启 */
+  Enable?: number | null;
+  /** 用户appid */
+  AppId?: number | null;
+  /** 用户MemberId */
+  MemberId?: string | null;
+  /** 策略动作0告警1防御 */
+  StrategyAction?: number | null;
+  /** 用户uin */
+  Uin?: string | null;
+  /** 用户昵称 */
+  Nickname?: string | null;
+  /** 防护类型0漏洞防御1攻击检测 */
+  DefenceType?: number | null;
+  /** 自选主机数量 */
+  InstanceNum?: number | null;
+  /** 策略id */
+  StrategyId?: string | null;
 }
 
 /** 漏洞详细信息 */
@@ -5950,6 +6570,70 @@ declare interface WebHookRuleSummary {
   UpdateTime?: string;
   /** 主机数目 */
   HostCount?: number;
+}
+
+/** 应用防护白名单规则 */
+declare interface YDRaspBlackWhiteListItem {
+  /** 规则ID */
+  Id?: number;
+  /** 逻辑运算符，0: 下面5个有效的正则逻辑与 1: 逻辑或 */
+  LogicalSymbol?: number;
+  /** 类名正则表达式，为空则不匹配 */
+  ClassNameRegexp?: string;
+  /** 父类名正则表达式，为空则不匹配 */
+  SuperClassNameRegexp?: string;
+  /** 继承的接口正则表达式，为空则不匹配 */
+  InterfacesRegexp?: string;
+  /** 注释正则表达式，为空则不匹配 */
+  AnnotationsRegexp?: string;
+  /** 所属的类加载器正则表达式，为空则不匹配 */
+  LoaderClassNameRegexp?: string;
+  /** 白名单类型，rasp:漏洞防御,memshell_scan:内存马扫描, memshell_inject:内存马注入 */
+  Source?: string;
+  /** 状态 (0: 有效 1: 删除，2：无效（启用开关关闭）) */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 内存马扫描使用，处理历史事件， 0:不处理 1:处理 */
+  HandleHistory?: number;
+  /** rasp和内存马注入使用，匹配内容，POC，可以是正则表达式（MatchMode=5），也可以是字符串 */
+  Content?: string;
+  /** rasp和内存马注入使用，攻击来源ip,不设置就是全部来源，可以多个，可以有ip段，例如：192.168.57.1/24;172.17.0.1 */
+  IP?: string;
+  /** 规则名称 */
+  PolicyName?: string;
+  /** rasp和内存马注入使用，加白方式，0：恶意特征加白，1：请求URL加白 */
+  FilterType?: number;
+  /** rasp和内存马注入使用，攻击类型，vul.rasp_attacktype_mapping attack_type_id字段 */
+  AttackType?: number;
+  /** rasp和内存马注入使用，匹配模式，0:完全匹配,1：前缀匹配，2：后缀匹配，4：任意匹配，5：部分匹配，6：正则匹配 */
+  MatchMode?: number;
+  /** 生效资产类型，0: 主机不生效 1: 主机生效 */
+  CWPEffective?: number;
+  /** 0: 一组quuid 1: 所有主机授权的机器 */
+  CWPScope?: number;
+  /** 指定生效主机机器 */
+  CWPQuuids?: string[];
+  /** 生效资产类型，0: 容器不生效 1: 容器生效 */
+  TCSSEffective?: number;
+  /** 0: 一组quuid 1: 所有容器授权的node */
+  TCSSScope?: number;
+  /** 指定生效容器节点 */
+  TCSSQuuids?: string[];
+  /** 生效资产类型，0: 超级节点不生效 1: 超级节点生效 */
+  EksEffective?: number;
+  /** 0: 一组quuid 1: 所有容器授权的超级节点 */
+  EksScope?: number;
+  /** 指定生效容器超级节点 */
+  EksNodeUniqueID?: string[];
+  /** 应用资产，全局则：全部主机，否则是选择主机服务器的数量 */
+  CWPMachinesNums?: string;
+  /** 应用资产，全局则：全部容器主机节点，否则是选择容器主机节点的数量 */
+  TCSSMachinesNums?: string;
+  /** 应用资产，全局则：全部超级节点，否则是选择超级节点的数量 */
+  EksMachinesNums?: string;
 }
 
 /** 可用区信息 */
@@ -7938,6 +8622,28 @@ declare interface DescribeAttackTrendsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAttackTypeRequest {
+  /** 过滤条件。Source - String - 是否必填：是 - 加白的模块，rasp：漏洞防御，memshell_inject：内存马注入 */
+  Filters: Filter[];
+  /** 返回数量，默认为10，最大值为1000。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序字段，目前有：Id，默认按照Id排序，可以不传 */
+  By?: string;
+  /** 排序升序还是倒序，DESC有ASC、 */
+  Order?: string;
+}
+
+declare interface DescribeAttackTypeResponse {
+  /** 列表内容 */
+  List?: RaspAttackTypeListItem[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAttackVulTypeListRequest {
 }
 
@@ -9194,6 +9900,22 @@ declare interface DescribeImportMachineInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInjectRiskyServiceSwitchRequest {
+}
+
+declare interface DescribeInjectRiskyServiceSwitchResponse {
+  /** 内存马是否注入风险服务配置，0: 用户没有操作过，默认不注入 1: 注入,2:用户指定不注入 */
+  JavaShellInjectRiskyServiceStatus?: number | null;
+  /** 主机rasp是否注入风险服务配置，0: 用户没有操作过，默认不注入 1: 注入,2:用户指定不注入 */
+  RaspInjectRiskyServiceStatus?: number | null;
+  /** 风险服务总条数 */
+  TotalCount?: number;
+  /** 风险服务列表 */
+  List?: RiskMainClass[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJavaMemShellInfoRequest {
   /** 事件Id */
   Id: number;
@@ -9562,6 +10284,52 @@ declare interface DescribeLogTypeRequest {
 declare interface DescribeLogTypeResponse {
   /** cls日志类型信息 */
   Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLoginTypeGlobalConfRequest {
+}
+
+declare interface DescribeLoginTypeGlobalConfResponse {
+  /** 是否开启防卸载 0 否 1 是 9 未设置,和0一样是未开启 */
+  Enable?: number;
+  /** 开启范围 0 自选主机 1 全部主机 */
+  Scope?: number;
+  /** 正选主机配置数 */
+  IncludeHostCount?: number;
+  /** 反选主机配置数 */
+  ExcludeHostCount?: number;
+  /** 正选quuid配置列表 */
+  IncludeQuuid?: string[];
+  /** 反选quuid配置列表 */
+  ExcludeQuuid?: string[];
+  /** 已开启机器数 */
+  EnableCount?: number;
+  /** 未启机器数 */
+  DisableCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLoginTypeHostRequest {
+  /** Name - string - 是否必填：否 - 主机名 InstanceId - string - 是否必填：否 - 实例ID PublicIp - string - 是否必填：否 - 公网IP PrivateIp - string - 是否必填：否 - 私网IP */
+  Filters?: Filter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [Id] */
+  By?: string;
+}
+
+declare interface DescribeLoginTypeHostResponse {
+  /** 总数 */
+  Total?: number;
+  /** 主机列表 */
+  List?: ClientSettingHost[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10136,6 +10904,28 @@ declare interface DescribeMalwareWhiteListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMemShellRulesRequest {
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。Keywords - String - 是否必填：否 - 关键字(进程名称) */
+  Filters?: Filter[];
+  /** 排序字段，目前有：CreateTime、ModifyTime，默认按照ModifyTime排序 */
+  By?: string;
+  /** 排序升序还是倒序，DESC有ASC、 */
+  Order?: string;
+}
+
+declare interface DescribeMemShellRulesResponse {
+  /** 列表内容 */
+  List?: MemShellRule[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNetAttackSettingRequest {
 }
 
@@ -10640,12 +11430,158 @@ declare interface DescribeRansomDefenseTrendResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRaspEventCWPRequest {
+  /** 过滤条件：Keywords: ip或者主机名, VulKeywords漏洞名或者CveId模糊查询;AttackTypeKeywords攻击类型名模糊查询;Quuid，VulId，EventType，Status精确匹配，CreateBeginTime，CreateEndTime时间段查询Source区分内存马注入和漏洞防御，rasp：漏洞防御，memshell_inject：内存马注入 */
+  Filters?: Filter[];
+  /** 数据偏移 */
+  Offset?: number;
+  /** 数据限制 */
+  Limit?: number;
+  /** 排序，大小写无关：asc 升序，desc降序 */
+  Order?: string;
+  /** 排序列，严格相等：CreateTime创建时间，MergeTime合并时间，Count事件数量 */
+  By?: string;
+}
+
+declare interface DescribeRaspEventCWPResponse {
+  /** 数据总数 */
+  TotalCount?: number;
+  /** 漏洞防御事件列表 */
+  List?: RaspEvent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspEventDetailCWPRequest {
+  /** 漏洞事件id */
+  Id?: number;
+}
+
+declare interface DescribeRaspEventDetailCWPResponse {
+  /** 应用防护事件详情 */
+  Data?: RaspEventDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspEventDetailTCSSRequest {
+  /** 漏洞事件id */
+  Id?: number;
+}
+
+declare interface DescribeRaspEventDetailTCSSResponse {
+  /** 应用防护事件详情 */
+  Data?: RaspEventDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspEventTCSSRequest {
+  /** 过滤条件：Keywords: ip或者主机名, VulKeywords漏洞名或者CveId模糊查询;AttackTypeKeywords攻击类型名模糊查询;Quuid，VulId，EventType，Status精确匹配，CreateBeginTime，CreateEndTime时间段查询 */
+  Filters?: Filter[];
+  /** 数据偏移 */
+  Offset?: number;
+  /** 数据限制 */
+  Limit?: number;
+  /** 排序，大小写无关：asc 升序，desc降序 */
+  Order?: string;
+  /** 排序列，严格相等：CreateTime创建时间，MergeTime合并时间，Count事件数量 */
+  By?: string;
+}
+
+declare interface DescribeRaspEventTCSSResponse {
+  /** 数据总数 */
+  TotalCount?: number;
+  /** 漏洞防御事件列表 */
+  List?: RaspEvent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspLicenseListRequest {
+  /** 过滤条件- AssetType 资产类型(CWP 主机安全资产, TCSS_HOST 容器主机节点,TCSS_EKS 容器超级节点)- PluginStatus 插件状态(Normal 使用正常,Abnormal 存在异常,Unused 未使用)- ProtectionSwitch 防护开关(Enable 开启,Disable 未开启)- ProtectionVersion 防护版本(Rasp 重保授权包,Unauthorized 未授权)- InstanceID 实例ID- InstanceName 实例名称- InstanceIP 实例IP(内网IP/外网IP)- NodeID 容器节点ID- NodeName 容器节点名称- ClusterID 容器集群ID- ClusterName 容器集群名称 */
+  Filters?: Filters[];
+  /** 限制条数,默认10 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式,ASC 正序,DESC 倒序 */
+  Order?: string;
+  /** 排序值- LatestUpdateTime 最近更新时间 */
+  By?: string;
+}
+
+declare interface DescribeRaspLicenseListResponse {
+  /** 总条数 */
+  TotalCount?: number;
+  /** 数组对象 */
+  List?: RaspLicenseList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRaspMaxCpuRequest {
 }
 
 declare interface DescribeRaspMaxCpuResponse {
   /** rasp当前最大cpu限制，大于0，小于等于100，默认100表示不限制 */
   RaspMaxCpu?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspMemShellDetailTCSSRequest {
+  /** 内存马事件id */
+  Id?: number;
+}
+
+declare interface DescribeRaspMemShellDetailTCSSResponse {
+  /** 事件详情 */
+  Data?: RaspMemShellDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspMemShellListTCSSRequest {
+  /** 过滤条件：InstanceID、IP、MachineName主机名模糊查询, Type，Status精确匹配，CreateBeginTime，CreateEndTime时间段 */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 需要返回的数量，默认为10，最大值为100 */
+  Limit?: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeRaspMemShellListTCSSResponse {
+  /** 事件列表 */
+  List?: RaspMemShellEvent[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRaspPluginListRequest {
+  /** 资产类型- CWP 主机安全资产- TCSS_HOST 容器主机节点- TCSS_EKS 容器超级节点 */
+  AssetType?: string;
+  /** 机器唯一ID */
+  QUUID?: string;
+  /** 过滤参数PluginStatus 插件状态 (Injecting 注入中,Injected 注入成功,Timeout 插件超时,Exited 插件退出, Failed 注入失败)PID 进程PIDMainClass 进程主类名 */
+  Filters?: Filters[];
+  /** 偏移量默认0 */
+  Offset?: number;
+  /** 限制条数,默认10 */
+  Limit?: number;
+}
+
+declare interface DescribeRaspPluginListResponse {
+  /** 列表详情 */
+  List?: RaspLicensePlugin[];
+  /** 总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10732,6 +11668,28 @@ declare interface DescribeReverseShellEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReverseShellRulesAggregationRequest {
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤条件。Keywords - String - 是否必填：否 - 关键字(进程名称) */
+  Filters?: Filter[];
+  /** 排序字段，目前有：CreateTime、ModifyTime，默认按照ModifyTime排序 */
+  By?: string;
+  /** 排序升序还是倒序，DESC有ASC、 */
+  Order?: string;
+}
+
+declare interface DescribeReverseShellRulesAggregationResponse {
+  /** 列表内容 */
+  List?: ReverseShellRuleAggregation[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReverseShellRulesRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -10746,6 +11704,18 @@ declare interface DescribeReverseShellRulesResponse {
   List?: ReverseShellRule[];
   /** 总条数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReverseShellSystemPolicyConfigRequest {
+}
+
+declare interface DescribeReverseShellSystemPolicyConfigResponse {
+  /** 内网告警展示 */
+  InnerNetAlarmShow?: boolean;
+  /** 内网ip展示 */
+  InnerIPShow?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11420,6 +12390,28 @@ declare interface DescribeServersAndRiskAndFirstInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeShellPolicyListRequest {
+  /** 限制条数,默认10 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 过滤参数 */
+  Filters?: Filters[];
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列:[UpdateTime] */
+  By?: string;
+}
+
+declare interface DescribeShellPolicyListResponse {
+  /** 列表数据 */
+  List?: ShellPolicyList[];
+  /** 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStrategyExistRequest {
   /** 策略名 */
   StrategyName: string;
@@ -11638,6 +12630,20 @@ declare interface DescribeVulDefenceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVulDefenceOverviewCountRequest {
+}
+
+declare interface DescribeVulDefenceOverviewCountResponse {
+  /** 策略数 */
+  StrategyCount?: number;
+  /** 开启的策略数 */
+  StrategyOpenCount?: number;
+  /** 支持的防御漏洞个数 */
+  SupportDefenceVulCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVulDefenceOverviewRequest {
 }
 
@@ -11696,6 +12702,24 @@ declare interface DescribeVulDefencePluginStatusResponse {
   TotalCount?: number;
   /** 各主机漏洞防御插件信息列表 */
   List?: VulDefencePluginStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulDefenceSettingListRequest {
+  /** 过滤条件：Switch、Keywords */
+  Filters?: Filter[];
+  /** 数据偏移 */
+  Offset?: number;
+  /** 数据限制 */
+  Limit?: number;
+}
+
+declare interface DescribeVulDefenceSettingListResponse {
+  /** 数据总数 */
+  TotalCount?: number;
+  /** 漏洞防御设置列表 */
+  List?: VulDefenceSetting[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12256,6 +13280,28 @@ declare interface DescribeWindowsPatchListResponse {
   TotalCount?: number;
   /** Windows补丁信息列表 */
   PatchInfoList?: EventPatchInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeYDRaspBlackWhiteRequest {
+  /** 过滤条件。WhiteContent - String - 是否必填：否 - 加白内容搜索GroupName - String - 是否必填：否 - 规则名称搜索Source - String - 是否必填：否 - 加白的模块Status - String - 是否必填：否 - 策略开关 */
+  Filters?: Filter[];
+  /** 返回数量，默认为10，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 排序字段，目前有：CreateTime、ModifyTime，默认按照ModifyTime排序 */
+  By?: string;
+  /** 排序升序还是倒序，DESC有ASC、 */
+  Order?: string;
+}
+
+declare interface DescribeYDRaspBlackWhiteResponse {
+  /** 列表内容 */
+  List?: YDRaspBlackWhiteListItem[];
+  /** 总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14456,6 +15502,16 @@ declare interface RansomDefenseRollbackResponse {
   RequestId?: string;
 }
 
+declare interface RaspEventOverviewRequest {
+}
+
+declare interface RaspEventOverviewResponse {
+  /** 应用防御概览信息 */
+  Overview?: RaspEventOverview;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecoverMalwaresRequest {
   /** 木马Id数组（最大100条） */
   Ids: number[];
@@ -15175,6 +16231,8 @@ declare interface Cwp {
   DescribeAttackTop(data?: DescribeAttackTopRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackTopResponse>;
   /** 网络攻击趋势数据 {@link DescribeAttackTrendsRequest} {@link DescribeAttackTrendsResponse} */
   DescribeAttackTrends(data?: DescribeAttackTrendsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackTrendsResponse>;
+  /** 查询应用防护白名单攻击类型列表 {@link DescribeAttackTypeRequest} {@link DescribeAttackTypeResponse} */
+  DescribeAttackType(data: DescribeAttackTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackTypeResponse>;
   /** 获取网络攻击威胁类型列表 {@link DescribeAttackVulTypeListRequest} {@link DescribeAttackVulTypeListResponse} */
   DescribeAttackVulTypeList(data?: DescribeAttackVulTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackVulTypeListResponse>;
   /** 获取爆破阻断模式 {@link DescribeBanModeRequest} {@link DescribeBanModeResponse} */
@@ -15311,6 +16369,8 @@ declare interface Cwp {
   DescribeIgnoreRuleEffectHostList(data: DescribeIgnoreRuleEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIgnoreRuleEffectHostListResponse>;
   /** 查询批量导入机器信息 {@link DescribeImportMachineInfoRequest} {@link DescribeImportMachineInfoResponse} */
   DescribeImportMachineInfo(data: DescribeImportMachineInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImportMachineInfoResponse>;
+  /** 查询java内存马和rasp是否注入风险服务配置 {@link DescribeInjectRiskyServiceSwitchRequest} {@link DescribeInjectRiskyServiceSwitchResponse} */
+  DescribeInjectRiskyServiceSwitch(data?: DescribeInjectRiskyServiceSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInjectRiskyServiceSwitchResponse>;
   /** 查询java内存马事件详细信息 {@link DescribeJavaMemShellInfoRequest} {@link DescribeJavaMemShellInfoResponse} */
   DescribeJavaMemShellInfo(data: DescribeJavaMemShellInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJavaMemShellInfoResponse>;
   /** 查询java内存马事件列表 {@link DescribeJavaMemShellListRequest} {@link DescribeJavaMemShellListResponse} */
@@ -15349,6 +16409,10 @@ declare interface Cwp {
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 获取日志类型 {@link DescribeLogTypeRequest} {@link DescribeLogTypeResponse} */
   DescribeLogType(data?: DescribeLogTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogTypeResponse>;
+  /** 获取扫码登录全局配置 {@link DescribeLoginTypeGlobalConfRequest} {@link DescribeLoginTypeGlobalConfResponse} */
+  DescribeLoginTypeGlobalConf(data?: DescribeLoginTypeGlobalConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginTypeGlobalConfResponse>;
+  /** 获取扫码登录机器列表 {@link DescribeLoginTypeHostRequest} {@link DescribeLoginTypeHostResponse} */
+  DescribeLoginTypeHost(data?: DescribeLoginTypeHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginTypeHostResponse>;
   /** 获取异地登录白名单合并后列表 {@link DescribeLoginWhiteCombinedListRequest} {@link DescribeLoginWhiteCombinedListResponse} */
   DescribeLoginWhiteCombinedList(data?: DescribeLoginWhiteCombinedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCombinedListResponse>;
   /** 查询合并后白名单机器列表 {@link DescribeLoginWhiteHostListRequest} {@link DescribeLoginWhiteHostListResponse} */
@@ -15401,6 +16465,8 @@ declare interface Cwp {
   DescribeMalwareWhiteList(data?: DescribeMalwareWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareWhiteListResponse>;
   /** 获取木马白名单受影响列表 {@link DescribeMalwareWhiteListAffectListRequest} {@link DescribeMalwareWhiteListAffectListResponse} */
   DescribeMalwareWhiteListAffectList(data: DescribeMalwareWhiteListAffectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMalwareWhiteListAffectListResponse>;
+  /** 获取java内存马白名单列表 {@link DescribeMemShellRulesRequest} {@link DescribeMemShellRulesResponse} */
+  DescribeMemShellRules(data?: DescribeMemShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMemShellRulesResponse>;
   /** 查询网络攻击设置 {@link DescribeNetAttackSettingRequest} {@link DescribeNetAttackSettingResponse} */
   DescribeNetAttackSetting(data?: DescribeNetAttackSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetAttackSettingResponse>;
   /** 获取网络攻击白名单列表 {@link DescribeNetAttackWhiteListRequest} {@link DescribeNetAttackWhiteListResponse} */
@@ -15453,8 +16519,24 @@ declare interface Cwp {
   DescribeRansomDefenseStrategyMachines(data: DescribeRansomDefenseStrategyMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRansomDefenseStrategyMachinesResponse>;
   /** 获取全网勒索态势 {@link DescribeRansomDefenseTrendRequest} {@link DescribeRansomDefenseTrendResponse} */
   DescribeRansomDefenseTrend(data?: DescribeRansomDefenseTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRansomDefenseTrendResponse>;
+  /** 主机视角应用防护事件列表 {@link DescribeRaspEventCWPRequest} {@link DescribeRaspEventCWPResponse} */
+  DescribeRaspEventCWP(data?: DescribeRaspEventCWPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspEventCWPResponse>;
+  /** 获取应用防护事件详情 {@link DescribeRaspEventDetailCWPRequest} {@link DescribeRaspEventDetailCWPResponse} */
+  DescribeRaspEventDetailCWP(data?: DescribeRaspEventDetailCWPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspEventDetailCWPResponse>;
+  /** 获取容器视角应用防护事件详情 {@link DescribeRaspEventDetailTCSSRequest} {@link DescribeRaspEventDetailTCSSResponse} */
+  DescribeRaspEventDetailTCSS(data?: DescribeRaspEventDetailTCSSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspEventDetailTCSSResponse>;
+  /** 容器视角应用防护事件列表 {@link DescribeRaspEventTCSSRequest} {@link DescribeRaspEventTCSSResponse} */
+  DescribeRaspEventTCSS(data?: DescribeRaspEventTCSSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspEventTCSSResponse>;
+  /** 查询应用防护授权列表 {@link DescribeRaspLicenseListRequest} {@link DescribeRaspLicenseListResponse} */
+  DescribeRaspLicenseList(data?: DescribeRaspLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspLicenseListResponse>;
   /** 查询rasp最大cpu限制 {@link DescribeRaspMaxCpuRequest} {@link DescribeRaspMaxCpuResponse} */
   DescribeRaspMaxCpu(data?: DescribeRaspMaxCpuRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspMaxCpuResponse>;
+  /** 获取容器应用防护内存马扫描事件详情 {@link DescribeRaspMemShellDetailTCSSRequest} {@link DescribeRaspMemShellDetailTCSSResponse} */
+  DescribeRaspMemShellDetailTCSS(data?: DescribeRaspMemShellDetailTCSSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspMemShellDetailTCSSResponse>;
+  /** 获取容器视角应用防护内存马扫描列表 {@link DescribeRaspMemShellListTCSSRequest} {@link DescribeRaspMemShellListTCSSResponse} */
+  DescribeRaspMemShellListTCSS(data?: DescribeRaspMemShellListTCSSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspMemShellListTCSSResponse>;
+  /** 重保防护插件详情列表 {@link DescribeRaspPluginListRequest} {@link DescribeRaspPluginListResponse} */
+  DescribeRaspPluginList(data?: DescribeRaspPluginListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspPluginListResponse>;
   /** 获取rasp白名单里的漏洞列表 {@link DescribeRaspRuleVulsRequest} {@link DescribeRaspRuleVulsResponse} */
   DescribeRaspRuleVuls(data: DescribeRaspRuleVulsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspRuleVulsResponse>;
   /** 获取rasp白名单列表 {@link DescribeRaspRulesRequest} {@link DescribeRaspRulesResponse} */
@@ -15467,6 +16549,10 @@ declare interface Cwp {
   DescribeReverseShellEvents(data?: DescribeReverseShellEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellEventsResponse>;
   /** 获取反弹Shell规则列表 {@link DescribeReverseShellRulesRequest} {@link DescribeReverseShellRulesResponse} */
   DescribeReverseShellRules(data?: DescribeReverseShellRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesResponse>;
+  /** 获取反弹Shell规则列表-聚合版本 {@link DescribeReverseShellRulesAggregationRequest} {@link DescribeReverseShellRulesAggregationResponse} */
+  DescribeReverseShellRulesAggregation(data?: DescribeReverseShellRulesAggregationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellRulesAggregationResponse>;
+  /** 查询反弹shell系统策略配置 {@link DescribeReverseShellSystemPolicyConfigRequest} {@link DescribeReverseShellSystemPolicyConfigResponse} */
+  DescribeReverseShellSystemPolicyConfig(data?: DescribeReverseShellSystemPolicyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellSystemPolicyConfigResponse>;
   /** 查询入侵检测事件更新状态任务是否完成 {@link DescribeRiskBatchStatusRequest} {@link DescribeRiskBatchStatusResponse} */
   DescribeRiskBatchStatus(data: DescribeRiskBatchStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskBatchStatusResponse>;
   /** 查询恶意请求事件详情 {@link DescribeRiskDnsEventInfoRequest} {@link DescribeRiskDnsEventInfoResponse} */
@@ -15539,6 +16625,8 @@ declare interface Cwp {
   DescribeServerRelatedDirInfo(data: DescribeServerRelatedDirInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerRelatedDirInfoResponse>;
   /** 获文件查杀概览信息 {@link DescribeServersAndRiskAndFirstInfoRequest} {@link DescribeServersAndRiskAndFirstInfoResponse} */
   DescribeServersAndRiskAndFirstInfo(data?: DescribeServersAndRiskAndFirstInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServersAndRiskAndFirstInfoResponse>;
+  /** 查询反弹shell策略列表 {@link DescribeShellPolicyListRequest} {@link DescribeShellPolicyListResponse} */
+  DescribeShellPolicyList(data?: DescribeShellPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShellPolicyListResponse>;
   /** 根据策略名查询策略是否存在 {@link DescribeStrategyExistRequest} {@link DescribeStrategyExistResponse} */
   DescribeStrategyExist(data: DescribeStrategyExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategyExistResponse>;
   /** 获取指定标签关联的服务器信息 {@link DescribeTagMachinesRequest} {@link DescribeTagMachinesResponse} */
@@ -15571,6 +16659,8 @@ declare interface Cwp {
   DescribeVulDefenceList(data?: DescribeVulDefenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceListResponse>;
   /** 获取漏洞防御概览信息 {@link DescribeVulDefenceOverviewRequest} {@link DescribeVulDefenceOverviewResponse} */
   DescribeVulDefenceOverview(data?: DescribeVulDefenceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceOverviewResponse>;
+  /** 获取漏洞防御策略和事件统计 {@link DescribeVulDefenceOverviewCountRequest} {@link DescribeVulDefenceOverviewCountResponse} */
+  DescribeVulDefenceOverviewCount(data?: DescribeVulDefenceOverviewCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceOverviewCountResponse>;
   /** 获取单台主机漏洞防御插件信息 {@link DescribeVulDefencePluginDetailRequest} {@link DescribeVulDefencePluginDetailResponse} */
   DescribeVulDefencePluginDetail(data: DescribeVulDefencePluginDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefencePluginDetailResponse>;
   /** 获取当前异常插件数 {@link DescribeVulDefencePluginExceptionCountRequest} {@link DescribeVulDefencePluginExceptionCountResponse} */
@@ -15579,6 +16669,8 @@ declare interface Cwp {
   DescribeVulDefencePluginStatus(data?: DescribeVulDefencePluginStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefencePluginStatusResponse>;
   /** 获取当前漏洞防御插件设置 {@link DescribeVulDefenceSettingRequest} {@link DescribeVulDefenceSettingResponse} */
   DescribeVulDefenceSetting(data?: DescribeVulDefenceSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceSettingResponse>;
+  /** 查询漏洞防御设置列表 {@link DescribeVulDefenceSettingListRequest} {@link DescribeVulDefenceSettingListResponse} */
+  DescribeVulDefenceSettingList(data?: DescribeVulDefenceSettingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulDefenceSettingListResponse>;
   /** 漏洞影响主机列表 {@link DescribeVulEffectHostListRequest} {@link DescribeVulEffectHostListResponse} */
   DescribeVulEffectHostList(data: DescribeVulEffectHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulEffectHostListResponse>;
   /** 漏洞影响组件列表 {@link DescribeVulEffectModulesRequest} {@link DescribeVulEffectModulesResponse} */
@@ -15631,6 +16723,8 @@ declare interface Cwp {
   DescribeWebPageServiceInfo(data?: DescribeWebPageServiceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebPageServiceInfoResponse>;
   /** 查询Windows补丁风险列表 {@link DescribeWindowsPatchListRequest} {@link DescribeWindowsPatchListResponse} */
   DescribeWindowsPatchList(data?: DescribeWindowsPatchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWindowsPatchListResponse>;
+  /** 查询应用防护白名单列表 {@link DescribeYDRaspBlackWhiteRequest} {@link DescribeYDRaspBlackWhiteResponse} */
+  DescribeYDRaspBlackWhite(data?: DescribeYDRaspBlackWhiteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeYDRaspBlackWhiteResponse>;
   /** 销毁订单 {@link DestroyOrderRequest} {@link DestroyOrderResponse} */
   DestroyOrder(data: DestroyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyOrderResponse>;
   /** 新增或修改高危命令规则（支持多服务器选择） {@link EditBashRulesRequest} {@link EditBashRulesResponse} */
@@ -15893,6 +16987,8 @@ declare interface Cwp {
   ModifyWebPageProtectSwitch(data: ModifyWebPageProtectSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebPageProtectSwitchResponse>;
   /** 防勒索快照回滚 {@link RansomDefenseRollbackRequest} {@link RansomDefenseRollbackResponse} */
   RansomDefenseRollback(data: RansomDefenseRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<RansomDefenseRollbackResponse>;
+  /** 获取应用防护事件概览 {@link RaspEventOverviewRequest} {@link RaspEventOverviewResponse} */
+  RaspEventOverview(data?: RaspEventOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<RaspEventOverviewResponse>;
   /** 恢复木马文件 {@link RecoverMalwaresRequest} {@link RecoverMalwaresResponse} */
   RecoverMalwares(data: RecoverMalwaresRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMalwaresResponse>;
   /** 删除本地存储数据 {@link RemoveLocalStorageItemRequest} {@link RemoveLocalStorageItemResponse} */

@@ -8887,6 +8887,18 @@ declare namespace V20210820 {
     NameEn?: string | null;
   }
 
+  /** 业务额外属性 */
+  interface BizParams {
+    /** 字段中文名 */
+    NameCn?: string | null;
+    /** 字段英文名 */
+    NameEn?: string | null;
+    /** iceberg表是否启用高级配置 */
+    HasAdvancedConfig?: string | null;
+    /** 标注编码 */
+    BizStandCode?: string | null;
+  }
+
   /** 实时任务同步速度 字节/s */
   interface BytesSpeed {
     /** 节点类型 */
@@ -9805,6 +9817,52 @@ declare namespace V20210820 {
     OwnerAccount?: number | null;
     /** 操作权限 */
     OperateOption?: OperateOption | null;
+  }
+
+  /** 实时获取数据库列表信息 */
+  interface DatabaseRealViewVO {
+    /** CatalogName: 如dlc数据默认为DataLakeCatalog */
+    CatalogName?: string | null;
+    /** 数据源ID */
+    DataSourceId?: number | null;
+    /** 数据源名称 */
+    DataSourceName?: string | null;
+    /** 数据源实例 */
+    DataSourceInstance?: string | null;
+    /** 数据源类型 */
+    DataSourceType?: string | null;
+    /** 数据库名称 */
+    DatabaseName?: string | null;
+    /** 描述 */
+    Description?: string | null;
+    /** 责任人 */
+    Owner?: string | null;
+    /** 责任人账号 */
+    OwnerAccount?: number | null;
+    /** 创建时间 */
+    CreateTime?: number | null;
+    /** 修改时间 */
+    ModifiedTime?: number | null;
+    /** 数据库地址 */
+    Location?: string | null;
+    /** 业务额外属性 */
+    BizParams?: BizParams | null;
+    /** 下一级元数据:CATALOG,DATABASE,SCHEMA,TABLE */
+    NextLevel?: string | null;
+  }
+
+  /** 实时获取数据库列表 分页参数 */
+  interface DatabaseRealViewVOPageVO {
+    /** 分页页码 */
+    PageNumber?: number | null;
+    /** 分页大小 */
+    PageSize?: number | null;
+    /** 总个数 */
+    TotalCount?: number | null;
+    /** 总分页页码 */
+    TotalPageNumber?: number | null;
+    /** 记录 */
+    Rows?: DatabaseRealViewVO[] | null;
   }
 
   /** 数据库Schema信息 */
@@ -14875,6 +14933,20 @@ declare namespace V20210820 {
     Items: TableQualityDetail[] | null;
   }
 
+  /** 表一行数据 */
+  interface TableRecord {
+    /** 表一行数据，包含多个Field */
+    TableRecordFieldSet: TableRecordField[];
+  }
+
+  /** 表的单行记录中的字段名和值 */
+  interface TableRecordField {
+    /** 字段名称 */
+    Name: string;
+    /** 字段值 */
+    Value: string;
+  }
+
   /** 表评分统计信息 */
   interface TableScoreStatisticsInfo {
     /** 等级 1、2、3、4、5 */
@@ -18550,6 +18622,24 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeDatabaseByNameRequest {
+    /** 数据库名称 */
+    DatabaseName: string;
+    /** 数据源id */
+    DatasourceId: number;
+    /** schema名称 */
+    SchemaName?: string;
+    /** 集群id */
+    ClusterId?: string;
+  }
+
+  interface DescribeDatabaseByNameResponse {
+    /** 数据库信息 */
+    DatabaseMeta?: DatabaseMeta | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeDatabaseInfoListRequest {
     /** 过滤参数 */
     Filters: Filter[];
@@ -18560,6 +18650,18 @@ declare namespace V20210820 {
   interface DescribeDatabaseInfoListResponse {
     /** 数据库列表 */
     DatabaseInfo?: DatabaseInfo[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeDatabaseMetaRequest {
+    /** 数据源唯一Id */
+    DatabaseId: string;
+  }
+
+  interface DescribeDatabaseMetaResponse {
+    /** 数据库元数据 */
+    DatabaseMeta?: DatabaseMeta | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -19400,6 +19502,24 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeLineageColumnsRequest {
+    /** 表id */
+    TableId: string;
+  }
+
+  interface DescribeLineageColumnsResponse {
+    /** 元数据类型 */
+    MetastoreType?: string[] | null;
+    /** 元数据类型名称 */
+    MetastoreTypeName?: string | null;
+    /** 表名称 */
+    TableName?: string | null;
+    /** 字段列表 */
+    ColumnSet?: ColumnLineageInfo[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeLineageInfoRequest {
     /** 实体原始唯一ID */
     ResourceOriId?: string;
@@ -19890,6 +20010,38 @@ declare namespace V20210820 {
     BytesSpeedList?: BytesSpeed[];
     /** 同步速度，包括了RecordsSpeedList和BytesSpeedList */
     Data?: RealTimeTaskSpeed;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeRealViewDatabasePageRequest {
+    /** 数据源ID */
+    DatasourceId: number;
+    /** 项目Id */
+    ProjectId: string;
+    /** 排序字段类型：ASC/DESC */
+    Asc?: boolean;
+    /** 指定数据源链接方式，如hive jdbc或者metastore client */
+    ConnectionType?: string;
+    /** Keyword过滤 */
+    Keyword?: string;
+    /** 【分页参数】页码 */
+    PageNumber?: number;
+    /** 【分页参数】分页大小 */
+    PageSize?: number;
+    /** 资源组ID */
+    ResourceGroupId?: string;
+    /** 资源组类型 */
+    ResourceType?: number;
+    /** Sort */
+    Sort?: string;
+    /** catalog名称 */
+    CatalogName?: string;
+  }
+
+  interface DescribeRealViewDatabasePageResponse {
+    /** 离线获取数据库列表 */
+    Data?: DatabaseRealViewVOPageVO | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -20602,6 +20754,54 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeTableContentPreviewRequest {
+    /** 表ID */
+    TableId: string;
+    /** 组件类型枚举值，支持的值有 HDFS/HBASE/HIVE/KAFKA */
+    TechnologyType: string;
+    /** 集群id */
+    ClusterId: string;
+    /** 资源类型枚举值，支持的值有TOPIC/PATH/TABLE/DATABASE */
+    ResourceType: string;
+    /** 表名 */
+    TableName: string;
+    /** 项目id */
+    ProjectId: string;
+    /** 预览的行数，默认10行 */
+    RowNum?: number;
+    /** 数据库名，kafka或其他无数据库概念的不填 */
+    DatabaseName?: string;
+    /** 异步查询预览结果时填写 */
+    TaskId?: string;
+    /** 分区信息 */
+    PartitionName?: string;
+  }
+
+  interface DescribeTableContentPreviewResponse {
+    /** 表的列名列表 */
+    ColumnNames?: string[] | null;
+    /** 表的行数据列表 */
+    TableRecordSet?: TableRecord[] | null;
+    /** 异步预览任务ID */
+    TaskId?: string | null;
+    /** 异步预览结果状态: 0 初始化， 1 执行中， 2 执行成功 */
+    AsyncState?: number | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeTableDdlRequest {
+    /** 表ID */
+    TableId: string;
+  }
+
+  interface DescribeTableDdlResponse {
+    /** 表的DDL */
+    Ddl?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeTableInfoListRequest {
     /** 表名 */
     Filters: Filter[];
@@ -20802,6 +21002,18 @@ declare namespace V20210820 {
   interface DescribeTableScoreTrendResponse {
     /** 表得分趋势 */
     Data?: QualityScoreTrend | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeTableSelectRequest {
+    /** 表ID */
+    TableId: string;
+  }
+
+  interface DescribeTableSelectResponse {
+    /** 表的select语句 */
+    Select?: string | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -24356,8 +24568,12 @@ declare interface Wedata {
   DescribeDataSourceInfoList(data: V20210820.DescribeDataSourceInfoListRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDataSourceInfoListResponse>;
   /** 数据源管理-查询数据源分页列表 {@link V20210820.DescribeDataSourceListRequest} {@link V20210820.DescribeDataSourceListResponse} */
   DescribeDataSourceList(data: V20210820.DescribeDataSourceListRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDataSourceListResponse>;
+  /** 根据数据库名称和数据源id获取数据库信息 {@link V20210820.DescribeDatabaseByNameRequest} {@link V20210820.DescribeDatabaseByNameResponse} */
+  DescribeDatabaseByName(data: V20210820.DescribeDatabaseByNameRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDatabaseByNameResponse>;
   /** 获取数据库信息 {@link V20210820.DescribeDatabaseInfoListRequest} {@link V20210820.DescribeDatabaseInfoListResponse} */
   DescribeDatabaseInfoList(data: V20210820.DescribeDatabaseInfoListRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDatabaseInfoListResponse>;
+  /** 查询数据库元数据 {@link V20210820.DescribeDatabaseMetaRequest} {@link V20210820.DescribeDatabaseMetaResponse} */
+  DescribeDatabaseMeta(data: V20210820.DescribeDatabaseMetaRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDatabaseMetaResponse>;
   /** 查询数据库列表 {@link V20210820.DescribeDatabaseMetasRequest} {@link V20210820.DescribeDatabaseMetasResponse} */
   DescribeDatabaseMetas(data: V20210820.DescribeDatabaseMetasRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeDatabaseMetasResponse>;
   /** 数据源管理-数据源详情 {@link V20210820.DescribeDatasourceRequest} {@link V20210820.DescribeDatasourceResponse} */
@@ -24434,6 +24650,8 @@ declare interface Wedata {
   DescribeIntegrationTasks(data: V20210820.DescribeIntegrationTasksRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeIntegrationTasksResponse>;
   /** 查询集成任务版本节点信息 {@link V20210820.DescribeIntegrationVersionNodesInfoRequest} {@link V20210820.DescribeIntegrationVersionNodesInfoResponse} */
   DescribeIntegrationVersionNodesInfo(data: V20210820.DescribeIntegrationVersionNodesInfoRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeIntegrationVersionNodesInfoResponse>;
+  /** 列出血缘中心字段信息 {@link V20210820.DescribeLineageColumnsRequest} {@link V20210820.DescribeLineageColumnsResponse} */
+  DescribeLineageColumns(data: V20210820.DescribeLineageColumnsRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeLineageColumnsResponse>;
   /** 通用血缘查询 {@link V20210820.DescribeLineageInfoRequest} {@link V20210820.DescribeLineageInfoResponse} */
   DescribeLineageInfo(data: V20210820.DescribeLineageInfoRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeLineageInfoResponse>;
   /** 查询手动任务触发记录 {@link V20210820.DescribeManualTriggerRecordPageRequest} {@link V20210820.DescribeManualTriggerRecordPageResponse} */
@@ -24472,6 +24690,8 @@ declare interface Wedata {
   DescribeRealTimeTaskMetricOverview(data: V20210820.DescribeRealTimeTaskMetricOverviewRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeRealTimeTaskMetricOverviewResponse>;
   /** 实时任务同步速度趋势 {@link V20210820.DescribeRealTimeTaskSpeedRequest} {@link V20210820.DescribeRealTimeTaskSpeedResponse} */
   DescribeRealTimeTaskSpeed(data: V20210820.DescribeRealTimeTaskSpeedRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeRealTimeTaskSpeedResponse>;
+  /** 实时获取数据库列表信息 {@link V20210820.DescribeRealViewDatabasePageRequest} {@link V20210820.DescribeRealViewDatabasePageResponse} */
+  DescribeRealViewDatabasePage(data: V20210820.DescribeRealViewDatabasePageRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeRealViewDatabasePageResponse>;
   /** 数据集成分页获取数据库Schema {@link V20210820.DescribeRealViewSchemaPageRequest} {@link V20210820.DescribeRealViewSchemaPageResponse} */
   DescribeRealViewSchemaPage(data: V20210820.DescribeRealViewSchemaPageRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeRealViewSchemaPageResponse>;
   /** 根据任务ID分页查询上下游直接关联任务 {@link V20210820.DescribeRelatedTasksByTaskIdRequest} {@link V20210820.DescribeRelatedTasksByTaskIdResponse} */
@@ -24536,6 +24756,10 @@ declare interface Wedata {
   DescribeSuccessorTaskInfoList(data: V20210820.DescribeSuccessorTaskInfoListRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeSuccessorTaskInfoListResponse>;
   /** 表基础信息查询 {@link V20210820.DescribeTableBasicInfoRequest} {@link V20210820.DescribeTableBasicInfoResponse} */
   DescribeTableBasicInfo(data: V20210820.DescribeTableBasicInfoRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableBasicInfoResponse>;
+  /** 查询表的数据预览 {@link V20210820.DescribeTableContentPreviewRequest} {@link V20210820.DescribeTableContentPreviewResponse} */
+  DescribeTableContentPreview(data: V20210820.DescribeTableContentPreviewRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableContentPreviewResponse>;
+  /** 查询表的DDL {@link V20210820.DescribeTableDdlRequest} {@link V20210820.DescribeTableDdlResponse} */
+  DescribeTableDdl(data: V20210820.DescribeTableDdlRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableDdlResponse>;
   /** 获取数据表信息 {@link V20210820.DescribeTableInfoListRequest} {@link V20210820.DescribeTableInfoListResponse} */
   DescribeTableInfoList(data: V20210820.DescribeTableInfoListRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableInfoListResponse>;
   /** 列出表血缘信息 {@link V20210820.DescribeTableLineageRequest} {@link V20210820.DescribeTableLineageResponse} */
@@ -24554,6 +24778,8 @@ declare interface Wedata {
   DescribeTableSchemaInfo(data: V20210820.DescribeTableSchemaInfoRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableSchemaInfoResponse>;
   /** 查询表得分趋势 {@link V20210820.DescribeTableScoreTrendRequest} {@link V20210820.DescribeTableScoreTrendResponse} */
   DescribeTableScoreTrend(data: V20210820.DescribeTableScoreTrendRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableScoreTrendResponse>;
+  /** 查询表的select语句 {@link V20210820.DescribeTableSelectRequest} {@link V20210820.DescribeTableSelectResponse} */
+  DescribeTableSelect(data: V20210820.DescribeTableSelectRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTableSelectResponse>;
   /** 查询任务告警规则列表 {@link V20210820.DescribeTaskAlarmRegulationsRequest} {@link V20210820.DescribeTaskAlarmRegulationsResponse} */
   DescribeTaskAlarmRegulations(data: V20210820.DescribeTaskAlarmRegulationsRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeTaskAlarmRegulationsResponse>;
   /** 周期任务统计 {@link V20210820.DescribeTaskByCycleRequest} {@link V20210820.DescribeTaskByCycleResponse} */
