@@ -34,6 +34,20 @@ declare interface FeiShuRobotNoticeTmplMatcher {
   Template: FeiShuRobotNoticeTmpl;
 }
 
+/** Google Chat 机器人内容模板配置 */
+declare interface GoogleChatRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+}
+
+/** Google Chat 机器人通知模板的匹配器 */
+declare interface GoogleChatRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: GoogleChatRobotNoticeTmpl;
+}
+
 /** 自定义通知内容模板 */
 declare interface NoticeContentTmpl {
   /** 自定义通知内容模板id，唯一id */
@@ -80,6 +94,8 @@ declare interface NoticeContentTmplItem {
   TeamsRobot?: TeamsRobotNoticeTmplMatcher[] | null;
   /** PagerDutyRobot机器人通知渠道配置 */
   PagerDutyRobot?: PagerDutyRobotNoticeTmplMatcher[] | null;
+  /** GoogleChat */
+  GoogleChatRobot?: GoogleChatRobotNoticeTmplMatcher[];
 }
 
 /** 分页请求参数 */
@@ -1989,7 +2005,7 @@ declare namespace V20180724 {
 
   /** 托管Prometheus agent信息 */
   interface PrometheusAgentInfo {
-    /** 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群 */
+    /** 集群类型。可填入tke、eks、tkeedge、tdcc、external，分别代表标准集群、弹性集群、边缘集群、注册集群、外部集群 */
     ClusterType: string;
     /** 集成容器服务中关联的集群ID */
     ClusterId: string;
@@ -2171,11 +2187,11 @@ declare namespace V20180724 {
   interface PrometheusClusterScrapeStatistics {
     /** 集群ID */
     ClusterID?: string;
-    /** 被采集的点数 */
+    /** 被采集的点个数 */
     ScrapedRate?: number | null;
     /** Job列表 */
     Jobs?: PrometheusJobScrapeStatistics[] | null;
-    /** 过滤前的指标采集速率 */
+    /** 每秒过滤前的指标采集速率 */
     SamplesRate?: number | null;
   }
 
@@ -2211,13 +2227,13 @@ declare namespace V20180724 {
   interface PrometheusInstanceScrapeStatistics {
     /** 实例ID */
     InstanceId?: string;
-    /** 被采集的点数 */
+    /** 每秒被采集的点数 */
     ScrapedRate?: number;
     /** 集群指标列表 */
     Clusters?: PrometheusClusterScrapeStatistics[];
     /** 非容器指标列表 */
     Global?: PrometheusClusterScrapeStatistics[] | null;
-    /** 过滤前的指标采集速率 */
+    /** 过滤前的每秒指标采集速率 */
     SamplesRate?: number;
   }
 
@@ -2229,9 +2245,9 @@ declare namespace V20180724 {
     CalcDate?: string | null;
     /** 总用量 */
     Total?: number | null;
-    /** 基础指标用量 */
+    /** 基础指标用量个数 */
     Basic?: number | null;
-    /** 付费指标用量 */
+    /** 付费指标用量个数 */
     Fee?: number | null;
   }
 

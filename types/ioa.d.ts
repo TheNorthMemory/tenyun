@@ -28,6 +28,8 @@ declare interface AggrCategorySoftDetailRow {
   GenuineRate?: number | null;
   /** 有新版本可升级的设备数量 */
   UpgradableDeviceNum?: number;
+  /** 有新版本可升级的设备数量 */
+  UpgradeDeviceNum?: number;
 }
 
 /** 聚合软件的已安装终端列表中的一行数据 */
@@ -896,6 +898,8 @@ declare interface RulePayloadItem {
   Groups?: RulePayloadItem[] | null;
   /** RelateOption 关系操作符（and/or），用于根级别条件关系 */
   RelateOption?: string | null;
+  /** 值类型 */
+  ValueType?: string | null;
 }
 
 /** 简单规则表达式 */

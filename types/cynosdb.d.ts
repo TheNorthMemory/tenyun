@@ -206,6 +206,18 @@ declare interface AuditRuleTemplateInfo {
   AffectedInstances?: string[];
 }
 
+/** 保险箱自动投递关系 */
+declare interface AutoCopyConfig {
+  /** 集群id */
+  ClusterId?: string;
+  /** 保险箱ID */
+  VaultId?: string;
+  /** 保险箱地域 */
+  VaultRegion?: string;
+  /** 投递类型：binlog, redolog, snapshot, logic */
+  CopyType?: string;
+}
+
 /** 高级映射，自动映射规则 */
 declare interface AutoMapRule {
   /** 源端实例Id */
@@ -1216,6 +1228,14 @@ declare interface DbTable {
   TableName?: string;
 }
 
+/** 删除保险箱任务信息 */
+declare interface DeleteVaultTask {
+  /** 保险箱ID */
+  VaultId?: string;
+  /** 任务ID */
+  TaskId?: number;
+}
+
 /** 日志投递信息 */
 declare interface DeliverSummary {
   /** 投递类型，store（存储类），mq（消息通道） */
@@ -1226,6 +1246,90 @@ declare interface DeliverSummary {
   DeliverConsumer?: string;
   /** 投递者名称 */
   DeliverConsumerName?: string;
+}
+
+/** DescribeBackupListByVaultItem */
+declare interface DescribeBackupListByVaultItem {
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群name */
+  ClusterName?: string;
+  /** 备份信息 */
+  BackupFileInfo?: BackupFileInfo;
+}
+
+/** binlog备份信息 */
+declare interface DescribeBinlogListByVaultItem {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** Binlog文件信息 */
+  BinlogFileInfo?: BinlogItem;
+}
+
+/** redolog信息 */
+declare interface DescribeRedoLogListByVaultItem {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** RedoLog文件信息 */
+  RedoFileInfo?: RedoLogItem;
+}
+
+/** 集群信息 */
+declare interface DescribeVaultBackupClusterInfo {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 集群状态 */
+  ClusterStatus?: string;
+  /** 集群所在地域 */
+  ClusterRegion?: string;
+  /** 集群所在可用区 */
+  ClusterZone?: string;
+}
+
+/** 保险箱信息 */
+declare interface DescribeVaultsItem {
+  /** 保险箱ID */
+  VaultId?: string;
+  /** 保险箱名称 */
+  VaultName?: string;
+  /** 保险箱描述 */
+  VaultDescribe?: string;
+  /** 加密密钥ID */
+  KeyId?: string;
+  /** 密钥所在地域 */
+  KeyRegion?: string;
+  /** 密钥类型 */
+  KeyType?: string;
+  /** 备份文件数量 */
+  BackupFileCount?: number;
+  /** 备份文件总大小（字节） */
+  BackupFileSize?: number;
+  /** Binlog文件数量 */
+  BinlogFileCount?: number;
+  /** Binlog文件总大小（字节） */
+  BinlogFileSize?: number;
+  /** RedoLog文件数量 */
+  RedoLogFileCount?: number;
+  /** RedoLog文件总大小（字节） */
+  RedoLogFileSize?: number;
+  /** 保险箱状态 */
+  Status?: string;
+  /** 备份保留时长（秒） */
+  BackupSaveSeconds?: number;
+  /** 锁定时间 */
+  LockedTime?: string;
+  /** 关联任务列表 */
+  Tasks?: ObjectTask[];
+  /** 保险箱所在地域 */
+  VaultRegion?: string;
+  /** 自动投递关系 */
+  AutoCopyConfigs?: AutoCopyConfig[];
 }
 
 /** 错误日志导出格式 */
@@ -3116,6 +3220,14 @@ declare interface VaultInfo {
   BackupSaveSeconds?: number;
 }
 
+/** 将被删除的备份文件列表 */
+declare interface WillDeleteItem {
+  /** 备份文件ID */
+  BackupId?: number;
+  /** 备份文件名称 */
+  BackupName?: string;
+}
+
 /** 可用区库存信息 */
 declare interface ZoneStockInfo {
   /** 可用区 */
@@ -3272,6 +3384,38 @@ declare interface BindClusterResourcePackagesResponse {
   RequestId?: string;
 }
 
+declare interface CalculateBackupSaveSecExpiresRequest {
+  /** 备份保险箱ID */
+  VaultId: string;
+  /** 备份保留时长（秒），必须大于0 */
+  BackupSaveSeconds?: number;
+  /** 每页数量，范围(0,100]，默认10 */
+  Limit?: number;
+  /** 偏移量，范围[0,INF)，默认0 */
+  Offset?: number;
+  /** 排序字段，可选值：VaultId,VaultName,BackupSaveSeconds,LockedTime,CreateTime,UpdateTime，默认endTime */
+  OrderBy?: string;
+  /** 排序方式，可选值：desc,asc,DESC,ASC，默认desc */
+  OrderByType?: string;
+}
+
+declare interface CalculateBackupSaveSecExpiresResponse {
+  /** 将被删除的备份文件总数 */
+  WillDeleteBackupFileCount?: number;
+  /** 将被删除的备份文件列表 */
+  WillDeleteBackupFiles?: WillDeleteItem[];
+  /** 将被删除的Binlog文件总数 */
+  WillDeleteBinlogFileCount?: number;
+  /** 将被删除的Binlog文件列表 */
+  WillDeleteBinlogFiles?: WillDeleteItem[];
+  /** 将被删除的Redolog文件总数 */
+  WillDeleteRedoLogFileCount?: number;
+  /** 将被删除的Redolog文件列表 */
+  WillDeleteRedoLogFiles?: WillDeleteItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckCreateLibraDBInstanceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3284,6 +3428,24 @@ declare interface CheckCreateLibraDBInstanceResponse {
   Status?: string | null;
   /** 校验项 */
   CheckItem?: CheckItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckTransferClusterZoneRequest {
+  /** 源集群Id */
+  ClusterId: string;
+  /** 目标可用区 */
+  DstZone: string;
+  /** proxy迁移的目标可用区信息 */
+  ProxyZones?: ProxyZone[];
+}
+
+declare interface CheckTransferClusterZoneResponse {
+  /** 是否check成功 */
+  CheckStatus?: boolean;
+  /** check失败的原因 */
+  CheckMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3372,6 +3534,20 @@ declare interface CloseWanRequest {
 declare interface CloseWanResponse {
   /** 任务流ID */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CopyBackupToVaultRequest {
+  /** 目标保险箱ID，备份文件将复制到此保险箱 */
+  VaultId?: string;
+  /** 备份文件ID列表，支持批量复制多个备份文件 */
+  BackupIds?: number[];
+}
+
+declare interface CopyBackupToVaultResponse {
+  /** 任务ID */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3908,6 +4084,30 @@ declare interface CreateResourcePackageResponse {
   RequestId?: string;
 }
 
+declare interface CreateVaultRequest {
+  /** 保险箱名称，长度必须大于0 */
+  VaultName: string;
+  /** 备份保留时长（秒），必须大于0 */
+  BackupSaveSeconds: number;
+  /** 保险箱描述 */
+  VaultDescribe?: string;
+  /** KMS密钥ID，长度0-36字符 */
+  KeyId?: string;
+  /** 密钥类型，可选值：cloud（云托管密钥）、custom（自定义密钥） */
+  KeyType?: string;
+  /** 密钥所在地域，长度0-32字符 */
+  KeyRegion?: string;
+  /** 锁定时间，格式：YYYY-MM-DD HH:mm:ss */
+  LockedTime?: string;
+}
+
+declare interface CreateVaultResponse {
+  /** 任务ID，用于查询任务执行状态 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccountsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3952,6 +4152,20 @@ declare interface DeleteBackupRequest {
 }
 
 declare interface DeleteBackupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBackupVaultRequest {
+  /** 备份保险箱ID，长度必须大于0 */
+  VaultId: string;
+  /** 待删除的备份文件ID列表，不能为空 */
+  BackupIds: number[];
+}
+
+declare interface DeleteBackupVaultResponse {
+  /** 任务ID，用于查询任务执行状态 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4030,6 +4244,18 @@ declare interface DeleteParamTemplateRequest {
 }
 
 declare interface DeleteParamTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVaultsRequest {
+  /** 待删除的备份保险箱ID列表，不能为空，保险箱内必须已清空所有文件 */
+  VaultIds: string[];
+}
+
+declare interface DeleteVaultsResponse {
+  /** 删除任务列表，每个保险箱对应一个任务 */
+  VaultTask?: DeleteVaultTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4284,6 +4510,38 @@ declare interface DescribeBackupDownloadUserRestrictionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupListByVaultRequest {
+  /** 保险箱ID，长度必须大于0 */
+  VaultId: string;
+  /** 备份文件ID列表，用于筛选特定备份 */
+  BackupIds?: number[];
+  /** 集群ID，用于筛选特定集群的备份 */
+  ClusterId?: string;
+  /** 备份名称列表，用于精确匹配筛选 */
+  BackupNames?: string[];
+  /** 文件名称列表，用于精确匹配筛选 */
+  FileNames?: string[];
+  /** 分页数量，取值范围：(0, 100]，默认100 */
+  Limit?: number;
+  /** 分页偏移量，取值范围：[0, INF)，默认0 */
+  Offset?: number;
+  /** 排序字段，可选值：VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime，默认createTime */
+  OrderBy?: string;
+  /** 排序方式，可选值：desc, asc, DESC, ASC，默认desc */
+  OrderByType?: string;
+  /** 状态 */
+  Status?: string;
+}
+
+declare interface DescribeBackupListByVaultResponse {
+  /** 符合条件的备份文件总数 */
+  TotalCount?: number;
+  /** 备份文件列表 */
+  BackupList?: DescribeBackupListByVaultItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupListRequest {
   /** 集群ID */
   ClusterId: string;
@@ -4315,6 +4573,8 @@ declare interface DescribeBackupListRequest {
   BackupRegion?: string;
   /** 是否跨地域备份 */
   IsCrossRegionsBackup?: string;
+  /** 需要查询的状态 */
+  BackupStatus?: string[];
 }
 
 declare interface DescribeBackupListResponse {
@@ -4352,6 +4612,38 @@ declare interface DescribeBinlogDownloadUrlRequest {
 declare interface DescribeBinlogDownloadUrlResponse {
   /** 下载地址 */
   DownloadUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBinlogListByVaultRequest {
+  /** 保险箱ID */
+  VaultId: string;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 备份ID列表 */
+  BackupIds?: number[];
+  /** 备份名称列表 */
+  BackupNames?: string[];
+  /** 文件名列表 */
+  FileNames?: string[];
+  /** 返回数量，范围: (0, 100]，默认100 */
+  Limit?: number;
+  /** 偏移量，范围: [0, INF)，默认0 */
+  Offset?: number;
+  /** 排序字段，可选值: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime，默认createTime */
+  OrderBy?: string;
+  /** 排序方式，可选值: desc, asc, DESC, ASC，默认desc */
+  OrderByType?: string;
+  /** 状态 */
+  Status?: string;
+}
+
+declare interface DescribeBinlogListByVaultResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** Binlog文件列表 */
+  BinlogList?: DescribeBinlogListByVaultItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5332,6 +5624,38 @@ declare interface DescribeProxySpecsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRedoLogListByVaultRequest {
+  /** 保险箱ID */
+  VaultId: string;
+  /** 备份ID列表 */
+  BackupIds?: number[];
+  /** 集群ID */
+  ClusterId?: string;
+  /** 备份名称列表 */
+  BackupNames?: string[];
+  /** 文件名称列表 */
+  FileNames?: string[];
+  /** 每页数量，范围(0,100]，默认100 */
+  Limit?: number;
+  /** 偏移量，范围[0,INF)，默认0 */
+  Offset?: number;
+  /** 排序字段，可选值：VaultId,VaultName,BackupSaveSeconds,LockedTime,CreateTime,UpdateTime，默认createTime */
+  OrderBy?: string;
+  /** 排序方式，可选值：desc,asc,DESC,ASC，默认desc */
+  OrderByType?: string;
+  /** 状态 */
+  Status?: string;
+}
+
+declare interface DescribeRedoLogListByVaultResponse {
+  /** 符合条件的RedoLog文件总数 */
+  TotalCount?: number;
+  /** RedoLog文件列表 */
+  RedoLogList?: DescribeRedoLogListByVaultItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRedoLogsRequest {
   /** 集群id */
   ClusterId: string;
@@ -5588,6 +5912,44 @@ declare interface DescribeTasksResponse {
   TotalCount?: number;
   /** 任务列表 */
   TaskList?: BizTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVaultBackupClusterInfoRequest {
+  /** 备份保险箱ID */
+  VaultId: string;
+}
+
+declare interface DescribeVaultBackupClusterInfoResponse {
+  /** 保险箱信息 */
+  ClusterInfos?: DescribeVaultBackupClusterInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVaultsRequest {
+  /** 保险箱ID列表，用于精确筛选 */
+  VaultIds?: string[];
+  /** 保险箱名称，用于模糊筛选 */
+  VaultName?: string;
+  /** 保险箱状态列表，用于筛选 */
+  Status?: string[];
+  /** 每页数量，范围(0,100]，默认100 */
+  Limit?: number;
+  /** 偏移量，范围[0,+∞)，默认0 */
+  Offset?: number;
+  /** 排序字段，可选值：VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime */
+  OrderBy?: string;
+  /** 排序方式，可选值：desc, asc, DESC, ASC */
+  OrderByType?: string;
+}
+
+declare interface DescribeVaultsResponse {
+  /** 保险箱列表 */
+  Vaults?: DescribeVaultsItem[];
+  /** 总数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6142,6 +6504,20 @@ declare interface ModifyBinlogSaveDaysResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterBinlogRedoLogAutoCopyVaultRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 自动拷贝保险箱配置列表 */
+  AutoCopyVaults?: CreateBackupVaultItem[];
+}
+
+declare interface ModifyClusterBinlogRedoLogAutoCopyVaultResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterDatabaseRequest {
   /** 集群ID */
   ClusterId: string;
@@ -6659,6 +7035,36 @@ declare interface ModifySnapBackupCrossRegionConfigRequest {
 
 declare interface ModifySnapBackupCrossRegionConfigResponse {
   /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVaultRequest {
+  /** 保险箱ID */
+  VaultId: string;
+  /** 保险箱名称，最大255字符 */
+  VaultName?: string;
+  /** 保险箱描述，最大1024字符 */
+  VaultDescribe?: string;
+  /** 备份保留时长（秒），范围: (0, 632448000] */
+  BackupSaveSeconds?: number;
+  /** 加密密钥ID，最大36字符 */
+  KeyId?: string;
+  /** 密钥类型，可选值: cloud、custom */
+  KeyType?: string;
+  /** 密钥所在地域，最大32字符 */
+  KeyRegion?: string;
+  /** 是否锁定保险箱 */
+  IsLock?: boolean;
+  /** 锁定到期时间，格式: 2006-01-02 15:04:05，锁定时间距当前最多15天 */
+  LockedTime?: string;
+  /** 是否加密 */
+  IsEncryption?: boolean;
+}
+
+declare interface ModifyVaultResponse {
+  /** 任务ID */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -7352,6 +7758,28 @@ declare interface SwitchProxyVpcResponse {
   RequestId?: string;
 }
 
+declare interface TransferClusterZoneRequest {
+  /** 源集群Id */
+  ClusterId: string;
+  /** 目标可用区 */
+  DstZone: string;
+  /** 跨可用区迁移主从数据延迟校验阈值，单位毫秒(ms) */
+  MaxLag: number;
+  /** Immediate:立即执行，InMaintain:时间窗口执行 */
+  TransferType: string;
+  /** 多可用区备区 */
+  DstSlaveZone?: string;
+  /** proxy迁移的目标可用区信息 */
+  ProxyZones?: ProxyZone[];
+}
+
+declare interface TransferClusterZoneResponse {
+  /** 异步任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindClusterResourcePackagesRequest {
   /** 集群ID */
   ClusterId: string;
@@ -7487,8 +7915,12 @@ declare interface Cynosdb {
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 为集群绑定资源包 {@link BindClusterResourcePackagesRequest} {@link BindClusterResourcePackagesResponse} */
   BindClusterResourcePackages(data: BindClusterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<BindClusterResourcePackagesResponse>;
+  /** 修改保险箱备份保存时间将会删除备份文件 {@link CalculateBackupSaveSecExpiresRequest} {@link CalculateBackupSaveSecExpiresResponse} */
+  CalculateBackupSaveSecExpires(data: CalculateBackupSaveSecExpiresRequest, config?: AxiosRequestConfig): AxiosPromise<CalculateBackupSaveSecExpiresResponse>;
   /** 校验集群是否可以添加只读分析引擎 {@link CheckCreateLibraDBInstanceRequest} {@link CheckCreateLibraDBInstanceResponse} */
   CheckCreateLibraDBInstance(data: CheckCreateLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCreateLibraDBInstanceResponse>;
+  /** 检查跨可用区迁移 {@link CheckTransferClusterZoneRequest} {@link CheckTransferClusterZoneResponse} */
+  CheckTransferClusterZone(data: CheckTransferClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTransferClusterZoneResponse>;
   /** 实例关闭审计服务 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭集群密码复杂度 {@link CloseClusterPasswordComplexityRequest} {@link CloseClusterPasswordComplexityResponse} */
@@ -7501,6 +7933,8 @@ declare interface Cynosdb {
   CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
   /** 关闭外网 {@link CloseWanRequest} {@link CloseWanResponse} */
   CloseWan(data?: CloseWanRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWanResponse>;
+  /** 存量备份手动投递到保险箱 {@link CopyBackupToVaultRequest} {@link CopyBackupToVaultResponse} */
+  CopyBackupToVault(data?: CopyBackupToVaultRequest, config?: AxiosRequestConfig): AxiosPromise<CopyBackupToVaultResponse>;
   /** 复制集群密码复杂度 {@link CopyClusterPasswordComplexityRequest} {@link CopyClusterPasswordComplexityResponse} */
   CopyClusterPasswordComplexity(data: CopyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<CopyClusterPasswordComplexityResponse>;
   /** 创建用户账号 {@link CreateAccountsRequest} {@link CreateAccountsResponse} */
@@ -7531,6 +7965,8 @@ declare interface Cynosdb {
   CreateProxyEndPoint(data: CreateProxyEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyEndPointResponse>;
   /** 新购资源包 {@link CreateResourcePackageRequest} {@link CreateResourcePackageResponse} */
   CreateResourcePackage(data: CreateResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePackageResponse>;
+  /** 创建保险箱 {@link CreateVaultRequest} {@link CreateVaultResponse} */
+  CreateVault(data: CreateVaultRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVaultResponse>;
   /** 删除用户账号 {@link DeleteAccountsRequest} {@link DeleteAccountsResponse} */
   DeleteAccounts(data: DeleteAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountsResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
@@ -7539,6 +7975,8 @@ declare interface Cynosdb {
   DeleteAuditRuleTemplates(data: DeleteAuditRuleTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleTemplatesResponse>;
   /** 删除手动备份 {@link DeleteBackupRequest} {@link DeleteBackupResponse} */
   DeleteBackup(data: DeleteBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupResponse>;
+  /** 从备份保险箱中删除指定的备份文件 {@link DeleteBackupVaultRequest} {@link DeleteBackupVaultResponse} */
+  DeleteBackupVault(data: DeleteBackupVaultRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupVaultResponse>;
   /** 删除日志投递 {@link DeleteCLSDeliveryRequest} {@link DeleteCLSDeliveryResponse} */
   DeleteCLSDelivery(data: DeleteCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliveryResponse>;
   /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
@@ -7551,6 +7989,8 @@ declare interface Cynosdb {
   DeleteLibraDBClusterAccounts(data: DeleteLibraDBClusterAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLibraDBClusterAccountsResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
   DeleteParamTemplate(data: DeleteParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteParamTemplateResponse>;
+  /** 批量删除备份保险箱 {@link DeleteVaultsRequest} {@link DeleteVaultsResponse} */
+  DeleteVaults(data: DeleteVaultsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVaultsResponse>;
   /** 查询账号所有可授予权限 {@link DescribeAccountAllGrantPrivilegesRequest} {@link DescribeAccountAllGrantPrivilegesResponse} */
   DescribeAccountAllGrantPrivileges(data: DescribeAccountAllGrantPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountAllGrantPrivilegesResponse>;
   /** 查询账号已有权限 {@link DescribeAccountPrivilegesRequest} {@link DescribeAccountPrivilegesResponse} */
@@ -7577,10 +8017,14 @@ declare interface Cynosdb {
   DescribeBackupDownloadUserRestriction(data?: DescribeBackupDownloadUserRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadUserRestrictionResponse>;
   /** 查询备份文件列表 {@link DescribeBackupListRequest} {@link DescribeBackupListResponse} */
   DescribeBackupList(data: DescribeBackupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListResponse>;
+  /** 查询保险箱内的备份 {@link DescribeBackupListByVaultRequest} {@link DescribeBackupListByVaultResponse} */
+  DescribeBackupListByVault(data: DescribeBackupListByVaultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListByVaultResponse>;
   /** 查询binlog配置 {@link DescribeBinlogConfigRequest} {@link DescribeBinlogConfigResponse} */
   DescribeBinlogConfig(data: DescribeBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogConfigResponse>;
   /** 查询 Binlog下载地址 {@link DescribeBinlogDownloadUrlRequest} {@link DescribeBinlogDownloadUrlResponse} */
   DescribeBinlogDownloadUrl(data: DescribeBinlogDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogDownloadUrlResponse>;
+  /** 根据保险箱ID查询Binlog文件列表 {@link DescribeBinlogListByVaultRequest} {@link DescribeBinlogListByVaultResponse} */
+  DescribeBinlogListByVault(data: DescribeBinlogListByVaultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogListByVaultResponse>;
   /** 查询Binlog保留天数 {@link DescribeBinlogSaveDaysRequest} {@link DescribeBinlogSaveDaysResponse} */
   DescribeBinlogSaveDays(data: DescribeBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogSaveDaysResponse>;
   /** 查询 Binlog 列表 {@link DescribeBinlogsRequest} {@link DescribeBinlogsResponse} */
@@ -7675,6 +8119,8 @@ declare interface Cynosdb {
   DescribeProxyNodes(data?: DescribeProxyNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyNodesResponse>;
   /** 查询数据库代理规格 {@link DescribeProxySpecsRequest} {@link DescribeProxySpecsResponse} */
   DescribeProxySpecs(data?: DescribeProxySpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySpecsResponse>;
+  /** 查询保险箱内redolog备份 {@link DescribeRedoLogListByVaultRequest} {@link DescribeRedoLogListByVaultResponse} */
+  DescribeRedoLogListByVault(data: DescribeRedoLogListByVaultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedoLogListByVaultResponse>;
   /** redo日志列表 {@link DescribeRedoLogsRequest} {@link DescribeRedoLogsResponse} */
   DescribeRedoLogs(data: DescribeRedoLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedoLogsResponse>;
   /** 查询资源包使用详情 {@link DescribeResourcePackageDetailRequest} {@link DescribeResourcePackageDetailResponse} */
@@ -7701,6 +8147,10 @@ declare interface Cynosdb {
   DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 查询备份保险箱关联的集群信息列表 {@link DescribeVaultBackupClusterInfoRequest} {@link DescribeVaultBackupClusterInfoResponse} */
+  DescribeVaultBackupClusterInfo(data: DescribeVaultBackupClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVaultBackupClusterInfoResponse>;
+  /** 查询备份保险箱列表，支持分页、筛选和排序 {@link DescribeVaultsRequest} {@link DescribeVaultsResponse} */
+  DescribeVaults(data?: DescribeVaultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVaultsResponse>;
   /** 查询可售卖地域可用区信息 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 安全组批量解绑云资源 {@link DisassociateSecurityGroupsRequest} {@link DisassociateSecurityGroupsResponse} */
@@ -7755,6 +8205,8 @@ declare interface Cynosdb {
   ModifyBinlogConfig(data: ModifyBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogConfigResponse>;
   /** 修改Binlog保留天数 {@link ModifyBinlogSaveDaysRequest} {@link ModifyBinlogSaveDaysResponse} */
   ModifyBinlogSaveDays(data: ModifyBinlogSaveDaysRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBinlogSaveDaysResponse>;
+  /** 修改集群Binlog和RedoLog自动拷贝到保险箱的配置 {@link ModifyClusterBinlogRedoLogAutoCopyVaultRequest} {@link ModifyClusterBinlogRedoLogAutoCopyVaultResponse} */
+  ModifyClusterBinlogRedoLogAutoCopyVault(data: ModifyClusterBinlogRedoLogAutoCopyVaultRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterBinlogRedoLogAutoCopyVaultResponse>;
   /** 修改数据库 {@link ModifyClusterDatabaseRequest} {@link ModifyClusterDatabaseResponse} */
   ModifyClusterDatabase(data: ModifyClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDatabaseResponse>;
   /** 开关全局加密 {@link ModifyClusterGlobalEncryptionRequest} {@link ModifyClusterGlobalEncryptionResponse} */
@@ -7813,6 +8265,8 @@ declare interface Cynosdb {
   ModifyServerlessStrategy(data: ModifyServerlessStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServerlessStrategyResponse>;
   /** 修改快照备份跨地域配置 {@link ModifySnapBackupCrossRegionConfigRequest} {@link ModifySnapBackupCrossRegionConfigResponse} */
   ModifySnapBackupCrossRegionConfig(data: ModifySnapBackupCrossRegionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapBackupCrossRegionConfigResponse>;
+  /** 修改保险箱 {@link ModifyVaultRequest} {@link ModifyVaultResponse} */
+  ModifyVault(data: ModifyVaultRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVaultResponse>;
   /** 修改实例组ip，端口 {@link ModifyVipVportRequest} {@link ModifyVipVportResponse} */
   ModifyVipVport(data: ModifyVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVipVportResponse>;
   /** 销毁集群 {@link OfflineClusterRequest} {@link OfflineClusterResponse} */
@@ -7885,6 +8339,8 @@ declare interface Cynosdb {
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
   /** 更换数据库代理vpc {@link SwitchProxyVpcRequest} {@link SwitchProxyVpcResponse} */
   SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;
+  /** 跨可用区迁移 {@link TransferClusterZoneRequest} {@link TransferClusterZoneResponse} */
+  TransferClusterZone(data: TransferClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<TransferClusterZoneResponse>;
   /** cynos解绑资源包 {@link UnbindClusterResourcePackagesRequest} {@link UnbindClusterResourcePackagesResponse} */
   UnbindClusterResourcePackages(data: UnbindClusterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindClusterResourcePackagesResponse>;
   /** 更新内核小版本 {@link UpgradeClusterVersionRequest} {@link UpgradeClusterVersionResponse} */

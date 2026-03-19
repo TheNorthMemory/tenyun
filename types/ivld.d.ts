@@ -154,9 +154,9 @@ declare interface ImageMetadata {
   FileSize: number | null;
   /** 媒资图片文件MD5 */
   MD5: string | null;
-  /** 媒资图片文件宽度 */
+  /** 媒资图片文件宽度单位：像素（px） */
   Width: number | null;
-  /** 媒资图片文件高度 */
+  /** 媒资图片文件高度单位：像素（px） */
   Height: number | null;
   /** 媒资图片文件格式 */
   Format: string | null;
@@ -332,9 +332,9 @@ declare interface Rectf {
   X: number | null;
   /** 矩形框左上角竖直座标 */
   Y: number | null;
-  /** 矩形框宽度 */
+  /** 矩形框宽度单位：像素（px） */
   Width: number | null;
-  /** 矩形框长度 */
+  /** 矩形框长度单位：像素（px） */
   Height: number | null;
 }
 
@@ -432,7 +432,7 @@ declare interface TaskInfo {
   TaskStatus?: number;
   /** 任务进度，范围为[0，100] */
   TaskProgress?: number | null;
-  /** 任务执行时间 */
+  /** 任务执行时间单位：秒 */
   TaskTimeCost?: number | null;
   /** 任务创建时间 */
   TaskCreateTime?: string;
@@ -498,7 +498,7 @@ declare interface TextMetadata {
   FileSize?: number | null;
   /** 媒资文本文件MD5 */
   MD5?: string | null;
-  /** 媒资文本文件字符数 */
+  /** 媒资文本文件字符数单位：字符 */
   Length?: number | null;
   /** 媒资文本文件格式 */
   Format?: string | null;

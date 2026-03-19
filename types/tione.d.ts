@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 聚合后的公共算法版本 */
+declare interface AggregatePublicAlgoVersion {
+  /** 用于聚合的系列名字 */
+  GroupName?: string | null;
+  /** 算法公共版本列表 */
+  PublicAlgoVersions?: PublicAlgoVersion[] | null;
+}
+
 /** 镜像属性 */
 declare interface Attribute {
   /** 为‘List’时属性值取Values 否则取Value */
@@ -382,6 +390,22 @@ declare interface DefaultNginxGatewayCallInfo {
   Host?: string | null;
 }
 
+/** 设备对应的镜像信息 */
+declare interface DeviceImageInfo {
+  /** 设备类型, 支持GPU等 */
+  DeviceType?: string | null;
+  /** 镜像信息 */
+  ImageInfo?: ImageInfo | null;
+}
+
+/** 对应设备的物料信息 */
+declare interface DeviceMaterialInfo {
+  /** 设备信息 */
+  DeviceType?: string | null;
+  /** 物料信息 */
+  MaterialInfo?: MaterialInfo | null;
+}
+
 /** 编码后的启动命令信息 */
 declare interface EncodedStartCmdInfo {
   /** 任务的启动命令，以base64格式输入，注意转换时需要完整输入{"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""} */
@@ -732,6 +756,20 @@ declare interface LogIdentity {
   PodName: string | null;
   /** 日志的时间戳（RFC3339格式的时间字符串） */
   Timestamp: string | null;
+}
+
+/** 物料信息 */
+declare interface MaterialInfo {
+  /** 存储类型 */
+  StorageType?: string | null;
+  /** Cos存储信息 */
+  CosPathInfo?: CosPathInfo | null;
+  /** 物料名，支持Code、Model */
+  MaterialName?: string | null;
+  /** 物料类型，支持PreSet(预置)、 Custom(自定义) */
+  MaterialType?: string | null;
+  /** 训练任务挂载路径 */
+  MountPath?: string | null;
 }
 
 /** 对话输入内容 */
@@ -1300,6 +1338,62 @@ declare interface ProbeAction {
   ActionType?: string;
 }
 
+/** 公共算法版本信息 */
+declare interface PublicAlgoVersion {
+  /** 公共算法版本Id */
+  PublicAlgoVersionId?: string | null;
+  /** 对应的公共算法组Id */
+  PublicAlgoGroupId?: string | null;
+  /** 版本号 */
+  Version?: string | null;
+  /** 模型简介 */
+  Introduction?: string | null;
+  /** 预览信息 */
+  PreviewInfo?: string | null;
+  /** 预置训练镜像信息 */
+  PresetTrainImageInfo?: ImageInfo | null;
+  /** 预置训练代码信息 */
+  PresetTrainCodeInfo?: MaterialInfo | null;
+  /** 预置模型信息 */
+  PresetModelInfo?: MaterialInfo | null;
+  /** 是否已经被导入到我的算法 */
+  IsImported?: boolean | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 默认训练资源规格 */
+  DefaultResourceSpec?: ResourceSpec | null;
+  /** 默认推理资源规格 */
+  DefaultInferenceResourceSpec?: ResourceSpec | null;
+  /** 是否支持直接部署推理服务 */
+  SupportDeploy?: boolean | null;
+  /** 内置训练数据集 */
+  PresetTrainDataset?: MaterialInfo | null;
+  /** 训练代码包下载路径 */
+  TrainCodeDownloadUrl?: string | null;
+  /** 内置数据下载路径 */
+  TrainDataDownloadUrl?: string | null;
+  /** 训练参数列表 */
+  TrainParams?: TrainParam[] | null;
+  /** 训练启动命令 */
+  PresetTrainCodeStartCmd?: string | null;
+  /** 是否非公开模型 */
+  IsPrivateModel?: boolean | null;
+  /** 各种设备下的训练镜像 */
+  PresetTrainImageInfoList?: DeviceImageInfo[] | null;
+  /** 各种设备下的推理镜像 */
+  PresetInferenceImageInfoList?: DeviceImageInfo[] | null;
+  /** 各种设备下的训练代码信息 */
+  PresetTrainCodeInfoList?: DeviceMaterialInfo[] | null;
+  /** 各种设备下的内置模型信息 */
+  PresetModelInfoList?: DeviceMaterialInfo[] | null;
+  /** 模型类别，比如LLM/MultiModal */
+  ModelCategory?: string | null;
+  /** 公共算法Id */
+  PublicAlgoSeriesId?: string;
+}
+
 /** 公有云数据源结构 */
 declare interface PublicDataSourceFS {
   /** 数据源id */
@@ -1410,6 +1504,16 @@ declare interface ResourceInstanceRunningJobInfo {
   TaskId?: string | null;
   /** 任务自定义名称 */
   TaskName?: string | null;
+}
+
+/** TI资源规格 */
+declare interface ResourceSpec {
+  /** 规格简称 */
+  SpecAlias?: string | null;
+  /** 规格Id */
+  SpecId?: string | null;
+  /** 规则名称 */
+  SpecName?: string | null;
 }
 
 /** 滚动更新策略 */
@@ -1878,6 +1982,26 @@ declare interface TagFilter {
   TagKey?: string;
   /** 多个标签值 */
   TagValues?: string[];
+}
+
+/** 训练超参 */
+declare interface TrainParam {
+  /** 参数名 */
+  Name?: string | null;
+  /** 默认参数值 */
+  DefaultValue?: string | null;
+  /** 参数注释 */
+  Comment?: string | null;
+  /** 参数类型 */
+  Type?: string | null;
+  /** 是否必选 */
+  Required?: boolean;
+  /** 参数值 */
+  Value?: string;
+  /** 参数范围 */
+  Range?: string[];
+  /** 参数选项 */
+  Enum?: string[];
 }
 
 /** 模型版本列表 */
@@ -3224,6 +3348,28 @@ declare interface DescribePlatformImagesResponse {
   RequestId?: string;
 }
 
+declare interface DescribePublicAlgoVersionListRequest {
+  /** 过滤器 */
+  Filters?: Filter[];
+  /** 偏移量 */
+  Offset?: number;
+  /** 返回记录条数，默认10 */
+  Limit?: number;
+  /** 是否需要聚合 */
+  NeedsAggregate?: boolean;
+}
+
+declare interface DescribePublicAlgoVersionListResponse {
+  /** 算法版本数量 */
+  TotalCount?: number | null;
+  /** 公共算法版本列表 */
+  PublicAlgoVersions?: PublicAlgoVersion[] | null;
+  /** 聚合后的公共算法版本列表 */
+  AggregatePublicAlgoVersions?: AggregatePublicAlgoVersion[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubAccountLinuxUserInfosRequest {
 }
 
@@ -4425,6 +4571,8 @@ declare interface Tione {
   DescribeNotebooks(data?: DescribeNotebooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebooksResponse>;
   /** 查询平台镜像信息 {@link DescribePlatformImagesRequest} {@link DescribePlatformImagesResponse} */
   DescribePlatformImages(data?: DescribePlatformImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformImagesResponse>;
+  /** 公共算法版本列表 {@link DescribePublicAlgoVersionListRequest} {@link DescribePublicAlgoVersionListResponse} */
+  DescribePublicAlgoVersionList(data?: DescribePublicAlgoVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicAlgoVersionListResponse>;
   /** 批量查询子账号Linux用户信息 {@link DescribeSubAccountLinuxUserInfosRequest} {@link DescribeSubAccountLinuxUserInfosResponse} */
   DescribeSubAccountLinuxUserInfos(data?: DescribeSubAccountLinuxUserInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAccountLinuxUserInfosResponse>;
   /** 查询模型版本 {@link DescribeTrainingModelVersionRequest} {@link DescribeTrainingModelVersionResponse} */

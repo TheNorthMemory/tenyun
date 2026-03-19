@@ -1793,7 +1793,7 @@ declare interface CreateTargetGroupRequest {
   Protocol?: string;
   /** 健康检查。 */
   HealthCheck?: TargetGroupHealthCheck;
-  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：&lt;ur&gt;WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。&lt;ur&gt; */
+  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。 */
   ScheduleAlgorithm?: string;
   /** 标签。 */
   Tags?: TagInfo[];

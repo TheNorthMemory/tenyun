@@ -50,7 +50,7 @@ declare interface AICallExtractResultElement {
 declare interface AICallExtractResultInfo {
   /** 提取的类型是文本 */
   Text?: string;
-  /** 提取的内型是选项 */
+  /** 提取的类型是选项 */
   Chosen?: string[];
   /** 提取类型是布尔值 */
   Boolean?: boolean;
@@ -542,6 +542,8 @@ declare interface NumberInfo {
   CallOutSkillGroupIds?: number[];
   /** 号码状态，1-正常，2-欠费停用，4-管理员停用，5-违规停用 */
   State?: number;
+  /** 是否自携号码枚举值：0： 非自携1： 自携 */
+  CostType?: number;
 }
 
 /** 用户自带号码审批明细数据类型 */
@@ -1650,6 +1652,8 @@ declare interface DeleteStaffRequest {
 declare interface DeleteStaffResponse {
   /** 无法删除的状态为在线的客服列表 */
   OnlineStaffList?: string[];
+  /** 坐席删除详情 */
+  DeleteStatusInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

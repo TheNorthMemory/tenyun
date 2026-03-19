@@ -264,6 +264,30 @@ declare interface DropIndex {
   IndexName?: string;
 }
 
+/** 邮箱登录配置 */
+declare interface EmailProviderConfig {
+  /** smtp配置 */
+  SmtpConfig?: EmailSmtpConfig;
+  /** 可选：TRUE，FALSE，如果On为TRUE，则表示采用默认代发。 */
+  On?: string;
+}
+
+/** 邮箱smtp配置 */
+declare interface EmailSmtpConfig {
+  /** 邮件发送者的邮箱地址，即收件人看到的发件人地址。需为有效的邮箱格式，且须与 SMTP 服务器的授权账号一致，否则可能被邮件服务商拒绝发送。例如：abc@example.com */
+  SenderAddress?: string;
+  /** SMTP 邮件服务器的域名或 IP 地址，用于建立邮件发送连接。不同邮件服务商的 SMTP 地址不同，例如 QQ 邮箱为 smtp.qq.com，Gmail 为 smtp.gmail.com，请以实际服务商提供的地址为准。 */
+  ServerHost?: string;
+  /** SMTP 邮件服务器的端口号，需与所选安全模式（SecurityMode）匹配。常用端口：465（SSL 加密）、587（STARTTLS 加密）、25（无加密，不推荐）。建议优先使用 465 或 587 以保障传输安全。 */
+  ServerPort?: number;
+  /** SMTP 服务器的登录账号，通常为发件人的完整邮箱地址。部分邮件服务商支持使用独立的 SMTP 授权账号，请以实际服务商的要求为准。 */
+  AccountUsername?: string;
+  /** SMTP 服务器的登录密码。注意：部分邮件服务商（如 QQ 邮箱、163 邮箱）不支持直接使用账号登录密码，需在邮箱设置中开启 SMTP 服务并生成专用的授权码，请以实际服务商的要求为准。 */
+  AccountPassword?: string;
+  /** SMTP 连接的加密模式，用于保障邮件传输安全。可选值：AUTO（自动选择，优先使用安全连接）、SSL（全程 SSL/TLS 加密，通常配合端口 465 使用）、STARTSSL（通过 STARTTLS 命令升级为加密连接，通常配合端口 587 使用）、NO_SSL（不使用加密，仅建议在内网或测试环境中使用）。推荐使用 AUTO 或 SSL 以确保传输安全。 */
+  SecurityMode?: string;
+}
+
 /** 环境计费信息 */
 declare interface EnvBillingInfoItem {
   /** 环境ID */
@@ -410,6 +434,14 @@ declare interface KVPair {
   Value: string;
 }
 
+/** 可以为每种语言配置一个字符串。比如：name，中文展示为：名字，英文展示为 name，韩文展示为：이름 */
+declare interface LocalizedMessage {
+  /** 默认展示的文本 */
+  Message: string;
+  /** 针对每种语言展示的文字 */
+  Localized?: MessageLocalized[];
+}
+
 /** CLS日志单条信息 */
 declare interface LogObject {
   /** 日志属于的 topic ID */
@@ -452,6 +484,26 @@ declare interface LogServiceInfo {
   Region?: string;
   /** topic保存时长 默认7天 */
   Period?: number;
+}
+
+/** 多因子认证登录配置，用于管理 MFA（Multi-Factor Authentication）相关设置。包括 MFA 总开关、短信验证、邮箱验证、强制绑定手机号、TOTP 动态验证码等认证方式的独立开关配置。当 MFA 总开关（On）开启时，用户在登录后需完成额外的身份验证步骤。各子开关可独立控制具体的验证方式。不传则不修改当前配置。 */
+declare interface MFALoginConfig {
+  /** MFA 多因子认证开关。取值范围：TRUE：开启 MFA 多因子认证FALSE：关闭 MFA 多因子认证不传则不修改当前配置。 */
+  On?: string | null;
+  /** 短信验证开关，控制是否在 MFA 流程中启用短信验证码校验。取值范围：TRUE：开启短信验证FALSE：关闭短信验证不传则不修改当前配置。 */
+  Sms?: string | null;
+  /** 邮箱验证开关，控制是否在 MFA 流程中启用邮箱验证码校验。取值范围：TRUE：开启邮箱验证FALSE：关闭邮箱验证不传则不修改当前配置。 */
+  Email?: string | null;
+  /** 强制绑定手机号开关，控制用户在完成 MFA 认证前是否必须绑定手机号。取值范围：TRUE：要求绑定手机号FALSE：不要求绑定手机号不传则不修改当前配置。 */
+  RequiredBindPhone?: string | null;
+}
+
+/** 多语言文字，在 Locale 中 展示的 Message */
+declare interface MessageLocalized {
+  /** 字符串 */
+  Message: string;
+  /** 在该语言中 */
+  Locale: string;
 }
 
 /** 待执行命令 */
@@ -570,6 +622,18 @@ declare interface Pager {
   Total?: number | null;
 }
 
+/** 登录配置中密码更新配置策略，用于管理使用用户名密码登录方式时，密码的过期策略和更新策略。例如，首次登录需要更新密码、定期过期密码等策略。 */
+declare interface PasswordUpdateLoginConfig {
+  /** 首次登录强制修改密码开关。开启后，用户首次登录时将强制要求修改密码。 */
+  FirstLoginUpdate?: boolean | null;
+  /** 定期强制修改密码开关。开启后，用户需按照 PeriodValue 和 PeriodType 指定的周期定期修改密码，超过周期未修改将在登录时强制要求修改。 */
+  PeriodUpdate?: boolean | null;
+  /** 定期修改密码的周期数值，与 PeriodType 配合使用。例如 PeriodValue 为 6，PeriodType 为 MONTH，表示每 6 个月需修改一次密码。当 PeriodUpdate 为 true 时必填。 */
+  PeriodValue?: number | null;
+  /** 定期修改密码的周期时间单位，与 PeriodValue 配合使用。取值范围：WEEK：周MONTH：月YEAR：年当 PeriodUpdate 为 true 时必填。 */
+  PeriodType?: string | null;
+}
+
 /** FlexDB数据库权限信息 */
 declare interface PermissionInfo {
   /** "READONLY", //公有读，私有写。所有用户可读，仅创建者及管理员可写 "PRIVATE", //私有读写，仅创建者及管理员可读写 "ADMINWRITE", //所有用户可读，仅管理员可写 "ADMINONLY", //仅管理员可操作 "CUSTOM", // 安全规则 */
@@ -578,6 +642,116 @@ declare interface PermissionInfo {
   EnvId: string;
   /** 自定义规则 */
   Rule?: string;
+}
+
+/** 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。 */
+declare interface Provider {
+  /** 身份源的唯一标识符，用于在系统内区分不同的身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。创建后不可修改 */
+  Id: string;
+  /** 身份源的安全认证配置，包含与第三方平台对接所需的核心参数，如 ClientId、ClientSecret、授权端点、Token 端点、回调地址、Scope 等。不同 ProviderType 对应不同的配置项。CUSTOM 类型无需手动配置（系统自动填充），OIDC 类型会根据 Issuer 自动补全端点信息，SAML 类型需提供 SamlMetadata（最大 10KB） */
+  Config: ProviderConfig;
+  /** 身份源的显示名称，支持国际化多语言配置。用户在登录页面看到的身份源名称将使用该字段，建议根据实际业务场景填写易于识别的名称。未传入时默认使用 Id 值作为显示名称 */
+  Name?: LocalizedMessage;
+  /** 身份源图标的访问地址，将展示在登录页的身份源按钮上。建议使用 64×64 像素的 SVG 格式图片以保证清晰度，支持 HTTP/HTTPS 公网可访问的图片链接 */
+  Picture?: string | null;
+  /** 身份源对应的官方主页地址。该信息将在用户查看自己的第三方账号绑定列表时展示，帮助用户识别已绑定的身份源来源。例如 GitHub 身份源可填写：https://github.com */
+  Homepage?: string | null;
+  /** 身份源协议类型，决定该身份源使用何种认证协议与第三方平台对接。可选值：OAUTH（标准 OAuth 2.0 协议）、OIDC（OpenID Connect 协议）、SAML（SAML 2.0 协议）、CUSTOM（自定义登录，使用 RSA 密钥对签名验证）、EMAIL（邮箱登录，需配合 EmailConfig 使用） */
+  ProviderType?: string | null;
+  /** 控制第三方身份源登录时是否自动注册系统用户。可选值：TRUE（始终自动注册，无论第三方返回的用户信息是否包含手机号或邮箱）、FALSE（不自动注册，需用户手动绑定）、UNSPECIFIED（默认行为：仅当第三方身份源返回的用户信息中包含手机号或邮箱时才自动注册，否则登录完成后要求用户绑定手机号方可继续使用）。注意：企业微信类型（WX_WORK_AGENT/WX_WORK_INTERNAL/WX_WORK_THIRD_PARTY/WX_WORK_THIRD_PARTY_ASSOCIATION）和微信小程序类型（WX_MICRO_APP/WX_QRCODE_MICRO_APP/WX_OPEN）在 UNSPECIFIED 时会自动设为 TRUE。当 TransparentMode 为 TRUE 时，该字段将被强制设为 FALSE */
+  AutoSignUpWithProviderUser?: string | null;
+  /** 身份源的启用状态。可选值：TRUE（启用，用户可通过该身份源登录）、FALSE（禁用，已有绑定关系不受影响）。未传入时默认为 TRUE（启用） */
+  On?: string | null;
+  /** 身份源的详细描述信息，支持国际化多语言配置。可用于向用户说明该身份源的用途或使用场景。 */
+  Description?: LocalizedMessage | null;
+  /** 是否开启信息透传模式。可选值：TRUE（仅登录模式：平台不持久化存储用户数据，仅将第三方身份源返回的用户信息透传给业务方，适用于不希望平台留存用户数据的场景）、FALSE（登录且注册模式：平台正常注册并存储用户信息，默认值）。注意：开启透传模式时，AutoSignUpWithProviderUser 将被强制设为 FALSE；若 ReuseUserId 为 UNSPECIFIED，将被自动设为 TRUE。 */
+  TransparentMode?: string | null;
+  /** 是否直接复用第三方身份源返回的用户标识（如 OpenID、UnionID 等）作为平台用户 ID。可选值：TRUE（开启，平台用户 ID 将直接使用第三方身份源返回的用户标识，适用于已有用户体系迁移场景）、FALSE（关闭，由平台生成独立用户 ID）。注意：开启后需确保第三方用户标识的全局唯一性，避免 ID 冲突。当 TransparentMode 为 TRUE 且该字段为 UNSPECIFIED 时，将被自动设为 TRUE */
+  ReuseUserId?: string | null;
+  /** 邮箱身份源的专项配置，仅当 ProviderType 为 EMAIL 时有效且必填。包含邮件服务商、发件人地址、SMTP 配置等参数，用于支持通过邮箱验证码方式进行身份认证。支持两种模式：自有 SMTP 服务器（需填写完整的 SMTP 配置）和平台代发（EmailConfig.On 设为 TRUE 时由平台随机分配 SMTP 服务器） */
+  EmailConfig?: EmailProviderConfig | null;
+  /** 是否开启邮箱自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE）。开启后，若第三方身份源返回的邮箱与系统中已有用户的邮箱一致，则自动将该第三方账号与已有用户关联绑定并完成登录，无需用户手动绑定 */
+  AutoSignInWhenEmailMatch?: string | null;
+  /** 是否开启手机号自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认行为等同于 TRUE，即默认开启）。开启后，若第三方身份源返回的手机号与系统中已有用户的手机号一致，则自动将该第三方账号与已有用户关联绑定并完成登录，无需用户手动绑定 */
+  AutoSignInWhenPhoneNumberMatch?: string | null;
+}
+
+/** 身份认证源协议连接配置。包含 OAuth 2.0 / OIDC 协议端点（授权端点、令牌端点、用户信息端点、JWKS 端点等）、客户端凭证（ClientId、ClientSecret）、SAML 元数据、请求与响应参数的字段映射等配置信息。OIDC 类型的认证源字段定义参考 https://openid.net/specs/openid-connect-discovery-1_0.html 规范。 */
+declare interface ProviderConfig {
+  /** 身份提供方的唯一标识符（Issuer URL），用于验证 ID Token 中的 iss 字段。仅当 ProviderType 为 OIDC 时需要填写，值通常为第三方 OIDC 服务的根地址，例如：https://accounts.google.com。填写后平台将自动通过 /.well-known/openid-configuration 发现并填充 AuthorizationEndpoint、TokenEndpoint、UserinfoEndpoint、JwksUri 等端点地址。详情参考 OpenID Connect Discovery 标准。 */
+  Issuer?: string | null;
+  /** 第三方身份提供方的 JSON Web Key Set 地址，用于获取公钥以验证 ID Token 签名。仅当 ProviderType 为 OIDC 时需要填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OpenID Connect Discovery 标准。 */
+  JwksUri?: string | null;
+  /** 在第三方身份提供方注册的应用客户端 ID，用于标识当前接入应用。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，可在对应平台的开发者控制台中获取。详情参考 OAuth 2.0 标准。 */
+  ClientId?: string | null;
+  /** 在第三方身份提供方注册的应用客户端密钥，与 ClientId 配合使用，用于在 Token 端点进行身份验证。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，请妥善保管，避免泄露。详情参考 OAuth 2.0 标准。 */
+  ClientSecret?: string | null;
+  /** OAuth 授权完成后第三方平台回调的地址，需与在第三方平台注册的回调地址完全一致，否则授权将失败。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，并需在对应平台的开发者控制台中配置该地址为合法回调地址。详情参考 OAuth 2.0 标准。 */
+  RedirectUri?: string | null;
+  /** 向第三方身份提供方申请的权限范围，多个 scope 之间用空格分隔。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，OIDC 场景下通常至少包含 openid，如需获取用户邮箱或手机号可追加 email、phone 等。若已填写 Issuer 且未指定 Scope，将自动使用 OpenID Connect Discovery 返回的 scopes_supported。详情参考 OAuth 2.0 标准。 */
+  Scope?: string | null;
+  /** 第三方身份提供方的授权端点地址，用于发起 OAuth/OIDC 授权请求，引导用户跳转至第三方登录页面。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。 */
+  AuthorizationEndpoint?: string | null;
+  /** 第三方身份提供方的 Token 端点地址，用于通过授权码（code）换取 Access Token 和 ID Token。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。 */
+  TokenEndpoint?: string | null;
+  /** 第三方身份提供方的用户信息端点地址，用于通过 Access Token 获取用户的基本信息（如昵称、头像、邮箱等）。当 ProviderType 为 OIDC 或 OAUTH 且需要获取用户详细信息时填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OIDC 标准。 */
+  UserinfoEndpoint?: string | null;
+  /** OAuth/OIDC 授权请求的响应类型，决定授权端点返回的内容。可选值：code（授权码模式，推荐）、token（隐式模式，直接返回 Access Token）、id_token（直接返回 ID Token）。当 ProviderType 为 OIDC 时默认使用 id_token，其他类型默认使用 code。当 ProviderType 为 OIDC 或 OAUTH 时可选填写。详情参考 OAuth 2.0 / OIDC 标准。 */
+  ResponseType?: string | null;
+  /** 第三方身份提供方的单点退出端点地址。配置后，用户退出当前应用时将被跳转至该地址，使第三方 IDP 的登录态也一并失效，实现单点退出（SLO）。适用于 OIDC、OAUTH、SAML 等所有支持单点退出的身份源类型。不填则退出时仅清除本平台登录态。 */
+  SignoutEndpoint?: string | null;
+  /** Token 端点的客户端身份验证方式，决定请求 Token 时如何传递 ClientId 和 ClientSecret。可选值：CLIENT_SECRET_POST（将凭证放在请求 Body 中传递）、CLIENT_SECRET_BASIC（将凭证通过 HTTP Basic Auth Header 传递）。当 ProviderType 为 OIDC 或 OAUTH 时可选填写，默认使用 CLIENT_SECRET_POST。详情参考 OIDC 标准。 */
+  TokenEndpointAuthMethod?: string | null;
+  /** SAML 身份提供方的 Metadata XML 内容，包含 IDP 的实体 ID、SSO 端点地址、签名证书等关键信息，平台将据此完成 SAML 协议的对接配置。仅当 ProviderType 为 SAML 时可填写，通常可从第三方 IDP 的管理控制台中下载获取。详情参考 SAML 2.0 标准。 */
+  SamlMetadata?: string;
+  /** 请求参数映射配置，用于处理非标准 OAuth 协议的参数转换。默认情况下平台严格遵循 OAuth 2.0 标准进行参数传递，若对接的第三方平台（如微信、企业微信等）使用了非标准的参数名称或传参方式，可通过该字段配置自定义的参数映射规则，以确保请求参数与第三方平台的要求一致。 */
+  RequestParametersMap?: ProviderRequestParametersMap | null;
+  /** 响应参数映射配置，用于处理非标准 OAuth 协议的响应参数转换。默认情况下平台严格遵循 OAuth 2.0 标准解析响应参数，若对接的第三方平台（如微信、企业微信等）返回了非标准的字段名称或数据结构，可通过该字段配置自定义的响应参数映射规则，将第三方返回的字段映射为平台标准字段。 */
+  ResponseParametersMap?: ProviderResponseParametersMap | null;
+}
+
+/** 三方认证入参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。 */
+declare interface ProviderRequestParametersMap {
+  /** OAuth 标准协议中的 client_id。不同第三方平台的字段名称可能不同，例如微信平台对应 appid、新浪微博对应 app_id。 */
+  ClientId?: string;
+  /** OAuth 标准协议中的 client_secret，用于身份认证源的密钥鉴权。请妥善保管，避免泄露。 */
+  ClientSecret?: string;
+  /** OAuth 标准协议中的 redirect_uri，即授权回调地址。用户完成第三方认证后将重定向至该地址。 */
+  RedirectUri?: string;
+  /** 身份源注册用户时自动绑定的角色 ID。配置后，通过该身份源注册的新用户将自动关联指定角色。 */
+  RegisterUserRoleId?: string;
+  /** 身份源注册用户时是否自动授予许可证。取值范围：TRUE：自动授权许可证FALSE：不自动授权（默认值） */
+  RegisterUserAutoLicense?: string;
+  /** OAuth 获取 Token 时认证信息的请求位置。取值范围：URL：将认证信息放在请求 URL 参数中Headers：将认证信息放在请求 Header 中Body：将认证信息放在请求 Body 中 */
+  AuthPosition?: string;
+  /** OAuth 授权模式匹配的参数字段名。用于指定获取 Token 请求中 grant_type 参数对应的字段名称。 */
+  GrantType?: string;
+  /** OAuth 授权模式类型。用于指定 grant_type 的值，例如 client_credentials 表示客户端凭证模式。 */
+  ClientCredentials?: string;
+  /** OAuth 返回中 access_token 的映射字段名。若第三方平台返回的 Token 字段名不是标准的 access_token，可通过此字段指定实际字段名。 */
+  AccessToken?: string;
+  /** OAuth 返回中 Token 有效期的映射字段名。若第三方平台返回的有效期字段名不是标准的 expires_in，可通过此字段指定实际字段名。 */
+  ExpiresIn?: string;
+  /** 身份源注册用户时的用户类型。取值范围：externalUser：外部用户internalUser：内部用户默认值为 externalUser。 */
+  RegisterUserType?: string;
+}
+
+/** 三方认证出参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：microsoft, github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。 */
+declare interface ProviderResponseParametersMap {
+  /** 用户唯一标识（sub）的映射字段名。对应 OIDC 标准中的 sub 字段，值为第三方平台返回的用户信息 JSON 中表示用户 ID 的字段路径。例如github平台填sub。 */
+  Sub?: string | null;
+  /** 用户名称（name）的映射字段名。对应 OIDC 标准中的 name 字段，值为第三方平台返回的用户信息 JSON 中表示用户昵称或姓名的字段路径。例如github平台填 name。 */
+  Name?: string | null;
+  /** 用户头像（picture）的映射字段名。对应 OIDC 标准中的 picture 字段，值为第三方平台返回的用户信息 JSON 中表示用户头像 URL 的字段路径。需要公网可访问的url。 */
+  Picture?: string | null;
+  /** 用户登录名（username）的映射字段名。对应 OIDC 标准中的 preferred_username 字段，值为第三方平台返回的用户信息 JSON 中表示用户唯一登录名的字段, 例如可使用sub或email等唯一值的字段。 */
+  Username?: string | null;
+  /** 用户邮箱（email）的映射字段名。对应 OIDC 标准中的 email 字段，值为第三方平台返回的用户信息 JSON 中表示用户邮箱地址的字段。 */
+  Email?: string | null;
+  /** 用户手机号（phone_number）的映射字段名。对应 OIDC 标准中的 phone_number 字段，值为第三方平台返回的用户信息 JSON 中表示用户手机号的字段。 */
+  PhoneNumber?: string | null;
+  /** 用户角色/分组（groups）的映射字段名。对应 OIDC 标准中的 groups 字段，值为第三方平台返回的用户信息 JSON 中表示用户所属角色或分组的字段路径。支持字符串数组类型的返回值。 */
+  Groups?: string | null;
 }
 
 /** 静态CDN资源信息 */
@@ -674,6 +848,86 @@ declare interface User {
   AvatarUrl?: string;
   /** 用户描述 */
   Description?: string;
+}
+
+/** 虚拟主机价格 */
+declare interface VMPrice {
+  /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
+  Currency?: string;
+  /** 原始价格 */
+  OriginalPrice?: number;
+  /** 折扣率 */
+  Discount?: number;
+  /** 折扣后的价格 */
+  DiscountPrice?: number;
+  /** 折扣前每天资源点 */
+  OriginalCredits?: number;
+  /** 折扣后每天所需资源点 */
+  DiscountCredits?: number;
+}
+
+/** VM规格 */
+declare interface VMSpec {
+  /** LightHouse=轻量云服务器CVM=云服务器 */
+  Type?: string;
+  /** 轻量云服务器规格。当Type=LightHouse时有效 */
+  LightHouseSpec?: VMSpecLightHouse;
+  /** 价格信息 */
+  Price?: VMPrice;
+}
+
+/** vm规格 */
+declare interface VMSpecLightHouse {
+  /** LH主机的BundleId */
+  BundleId?: string;
+  /** 主机配置详情json */
+  BundleConfig?: string;
+}
+
+/** 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，推荐使用云开发默认短信包。如果使用自定义APIs发送短信，方法命名规则方法名称：发送验证码方法标识：SendVerificationCode入参Mobile：字符串（手机号，如：“+86 + 手机号”）VerificationCode：字符串（验证码，如：“123456”）返回值ErrorCode：int（0 表示成功，非 0 表示失败）ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息） */
+declare interface VerificationConfig {
+  /** 短信验证码发送通道类型。取值范围：default：使用默认云开发短信包发送短信。apis：使用云开发自定义 APIs 作为短信发送通道，需配合 Name 和 Method 参数使用。不传则不修改当前配置。 */
+  Type?: string | null;
+  /** 自定义 APIs 数据源唯一标识，当 Type 为 apis 时必填。用于定位微搭 APIs 中对应的数据源。 */
+  Name?: string | null;
+  /** 自定义 APIs 方法名，当 Type 为 apis 时必填。指定微搭 APIs 中用于发送验证码的方法。 */
+  Method?: string | null;
+  /** 单个手机号每日短信发送上限。默认值为 30，传 -1 表示不限制，如果设置为不限制，需要注意恶意攻击，导致短信套餐用量计费问题。仅支持正整数或 -1。不传则不修改当前配置。 */
+  SmsDayLimit?: number | null;
+}
+
+declare interface AddProviderRequest {
+  /** 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。 */
+  EnvId: string;
+  /** 身份源的显示名称，支持国际化多语言配置。用户在登录页面看到的身份源名称将使用该字段，建议根据实际业务场景填写易于识别的名称，例如：企业微信、GitHub 等。 */
+  Name: LocalizedMessage;
+  /** 身份源协议类型，决定该身份源使用何种认证协议与第三方平台对接。可选值：OAUTH：标准 OAuth 2.0 协议OIDC：OpenID Connect 协议SAML：SAML 2.0 协议WX_MICRO_APP：微信小程序登录WX_QRCODE_MICRO_APP：微信小程序扫码登录WX_CLOUDBASE_MICRO_APP：云开发托管小程序登录WX_MP：微信公众号网页授权登录WX_OPEN：微信开放平台扫码登录WX_WORK_INTERNAL：企业微信自建应用登录WX_WORK_AGENT：企业微信代开发应用登录WX_WORK_THIRD_PARTY：企业微信第三方应用登录WX_WORK_THIRD_PARTY_ASSOCIATION：企业微信第三方应用关联登录CUSTOM：自定义登录EMAIL：邮箱登录 */
+  ProviderType: string;
+  /** 身份源的唯一标识符，用于在系统内区分不同的身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。若不填写，系统将自动生成。例如：github、google。 */
+  Id?: string;
+  /** 身份源图标的访问地址，将展示在登录页的身份源按钮上。建议使用 64×64 像素的 SVG 格式图片以保证清晰度，支持 HTTP/HTTPS 公网可访问的图片链接。 */
+  Picture?: string;
+  /** 身份源对应的官方主页地址。该信息将在用户查看自己的第三方账号绑定列表时展示，帮助用户识别已绑定的身份源来源。例如 GitHub 身份源可填写：https://github.com。 */
+  Homepage?: string;
+  /** 身份认证源协议连接配置，包含与第三方平台对接所需的核心参数，如 ClientId、ClientSecret、授权端点、Token 端点、回调地址、Scope、SAML Metadata、请求和响应参数映射等。不同 ProviderType 对应不同的配置项要求。 */
+  Config?: ProviderConfig;
+  /** 是否开启透传登录模式。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE，企业微信代开发应用 WX_WORK_AGENT 类型默认为 TRUE）。开启后，平台不会持久化存储用户数据，仅将第三方身份源返回的用户信息透传给业务方，适用于不希望平台留存用户数据的场景。注意：开启透传模式时，ReuseUserId 将自动设为 TRUE，AutoSignUpWithProviderUser 将自动设为 FALSE。 */
+  TransparentMode?: string;
+  /** 身份源的详细描述信息，支持国际化多语言配置。可用于向用户说明该身份源的用途或使用场景，例如：谷歌授权登录。 */
+  Description?: LocalizedMessage;
+  /** 是否直接复用第三方身份源的用户 ID 作为平台的用户 ID。可选值：TRUE（直接复用，适用于已有用户体系迁移场景）、FALSE（不复用，由平台生成独立用户 ID）、UNSPECIFIED（默认为 FALSE，但当 TransparentMode 为 TRUE 时自动设为 TRUE）。注意：开启后需确保第三方用户 ID 的唯一性，避免 ID 冲突。 */
+  ReuseUserId?: string;
+  /** 身份源的启用状态。可选值：TRUE（启用，用户可通过该身份源登录）、FALSE（禁用，登录入口将被隐藏，已有绑定关系不受影响）、UNSPECIFIED（默认为 TRUE）。 */
+  On?: string;
+  /** 是否开启邮箱自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE）。开启后，若第三方身份源返回的邮箱与系统中已有用户的邮箱一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。 */
+  AutoSignInWhenEmailMatch?: string;
+  /** 是否开启手机号自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认行为等同 TRUE）。开启后，若第三方身份源返回的手机号与系统中已有用户的手机号一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。注意：该字段默认行为（UNSPECIFIED）与 AutoSignInWhenEmailMatch 不同，手机号匹配在未显式关闭时默认生效。 */
+  AutoSignInWhenPhoneNumberMatch?: string;
+}
+
+declare interface AddProviderResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BindCloudBaseAccessDomainRequest {
@@ -831,6 +1085,18 @@ declare interface CreateEnvRequest {
   RenewFlag?: string;
 }
 
+declare interface CreateEnvResourceRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 资源类型。代表本次开通哪些资源。 可取值以及含义： - log : 表示日志资源，当前仅支持 log（日志资源类型），后续版本可能扩展，该数组不能为空，且每个元素必须为合法的资源类型值 */
+  Resources: string[];
+}
+
+declare interface CreateEnvResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateEnvResponse {
   /** 自动生成的环境ID */
   EnvId?: string;
@@ -941,7 +1207,7 @@ declare interface CreateUserResponse {
 declare interface DeleteAuthDomainRequest {
   /** 开发者的环境ID */
   EnvId: string;
-  /** 域名ID列表，支持批量 */
+  /** 域名ID列表，支持批量传递 */
   DomainIds: string[];
 }
 
@@ -986,6 +1252,18 @@ declare interface DeleteCloudBaseGWDomainRequest {
 declare interface DeleteCloudBaseGWDomainResponse {
   /** 删除个数 */
   Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProviderRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 认证源ID，比如：github, 格式必须为：2-32位小写英文字符串或数字 */
+  Id: string;
+}
+
+declare interface DeleteProviderResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1066,6 +1344,30 @@ declare interface DescribeBillingInfoRequest {
 declare interface DescribeBillingInfoResponse {
   /** 环境计费信息列表 */
   EnvBillingInfoList?: EnvBillingInfoItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClientRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 客户端的唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用，创建后不可修改，一般使用环境id */
+  Id: string;
+}
+
+declare interface DescribeClientResponse {
+  /** 客户端的唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用。创建时仅可传入环境 ID 或留空：传入环境 ID 时将直接使用该值作为客户端 ID（一个环境仅允许一个）；留空时由系统自动生成与环境 ID 关联的唯一 ID。创建后不可修改。 */
+  Id?: string;
+  /** 客户端的创建时间，格式遵循 ISO 8601 标准（如：2024-01-01T00:00:00Z），由系统自动生成，不可手动修改。 */
+  CreatedAt?: string | null;
+  /** 客户端信息的最后修改时间，格式遵循 ISO 8601 标准（如：2024-01-01T00:00:00Z），每次更新应用配置时由系统自动更新。 */
+  UpdatedAt?: string | null;
+  /** Refresh Token 的有效期，单位为秒。超过该时间后 Refresh Token 将失效，用户需重新登录。取值范围：最小 1800 秒（30 分钟），最大 2592000 秒（30 天），超出上限将自动截断为 30 天。若不设置则默认为 30 天。当该值小于等于 7200 秒时，系统会自动将 AccessTokenExpiresIn 调整为 RefreshTokenExpiresIn - 660 秒。 */
+  RefreshTokenExpiresIn?: number | null;
+  /** Access Token 的有效期，单位为秒。超过该时间后 Access Token 将失效，需通过 Refresh Token 换取新的 Access Token。若不设置则默认为 7200 秒（2 小时）。设置值小于 1800 秒时将被忽略，使用系统默认值。 */
+  AccessTokenExpiresIn?: number | null;
+  /** 单个用户在该客户端下允许同时登录的最大会话数量。取值范围：-1 至 50。-1 表示不限制设备数量；0 或不填默认按 User-Agent 区分设备（相同 User-Agent 共享一个会话，不同 User-Agent 各独立一个会话）；1 表示单设备登录，新登录将踢出旧会话；大于 1 时按真实设备 ID 限制，超出限制后最早登录的会话将被自动踢出。 */
+  MaxDevice?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1418,6 +1720,30 @@ declare interface DescribeHostingDomainTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLoginConfigRequest {
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DescribeLoginConfigResponse {
+  /** 是否开启邮箱登录方式。true 表示已开启，允许用户使用邮箱和密码进行登录；false 表示已关闭。 */
+  EmailLogin?: boolean;
+  /** 是否开启匿名登录方式。true 表示已开启，允许用户无需注册即可以匿名身份登录；false 表示已关闭。 */
+  AnonymousLogin?: boolean;
+  /** 是否开启用户名密码登录方式。true 表示已开启，允许用户使用用户名和密码进行登录；false 表示已关闭。 */
+  UserNameLogin?: boolean;
+  /** 短信验证码发送配置，包含短信发送通道类型、自定义 APIs 数据源、调用方法及每日发送限额等信息。 */
+  SmsVerificationConfig?: VerificationConfig;
+  /** 是否开启手机号短信登录方式。true 表示已开启，允许用户使用手机号和短信验证码进行登录和注册；false 表示已关闭。 */
+  PhoneNumberLogin?: boolean;
+  /** MFA 多因子认证登录配置，包含 MFA 开关及各验证方式（短信、邮箱、TOTP、强制绑定手机号）的启用状态。 */
+  MfaConfig?: MFALoginConfig | null;
+  /** 密码修改策略配置，包含首次登录强制修改密码开关及定期修改密码策略（周期和时间单位）。 */
+  PwdUpdateStrategy?: PasswordUpdateLoginConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMySQLClusterDetailRequest {
   /** 云开发环境ID */
   EnvId: string;
@@ -1564,6 +1890,18 @@ declare interface DescribeUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVmSpecRequest {
+  /** 类型：LightHouse = 轻量云服务器CVM = 云服务器 */
+  Type?: string;
+}
+
+declare interface DescribeVmSpecResponse {
+  /** 规格列表 */
+  SpecList?: VMSpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroyEnvRequest {
   /** 环境Id */
   EnvId: string;
@@ -1620,6 +1958,20 @@ declare interface EditAuthConfigResponse {
   RequestId?: string;
 }
 
+declare interface GetProvidersRequest {
+  /** 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。 */
+  EnvId: string;
+}
+
+declare interface GetProvidersResponse {
+  /** 总数 */
+  Total?: number | null;
+  /** 三方认证源列表 */
+  Data?: Provider[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTablesRequest {
   /** 每页返回数量（0-1000) */
   MgoLimit: number;
@@ -1644,6 +1996,24 @@ declare interface ListTablesResponse {
   Tables?: TableInfo[] | null;
   /** 分页信息 */
   Pager?: Pager | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClientRequest {
+  /** 客户端所属的云开发环境 ID，用于标识该应用归属的云开发环境。不同环境之间的应用数据相互隔离。 */
+  EnvId: string;
+  /** 需要修改的客户端唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用。该字段为定位参数，仅用于指定目标客户端，不可修改。 */
+  Id: string;
+  /** Refresh Token 的有效期，单位为秒。超过该时间后 Refresh Token 将失效，用户需重新登录。取值范围：1800~2592000（即 30 分钟至 30 天），超出上限将被截断为 2592000。默认值为 2592000（即 30 天）。注意：当该值 ≤ 7200 时，AccessTokenExpiresIn 将被自动设为该值减去 660 秒。 */
+  RefreshTokenExpiresIn?: number;
+  /** 单个用户在该应用下允许同时登录的最大会话数量。取值范围：-1~50。特殊值说明：-1 表示不限制设备数；0 表示按客户端 User-Agent 区分设备（相同 User-Agent 视为同一设备）；1~50 为精确的最大会话数限制，超出限制后最早登录的会话将被自动踢出。不传则保持原有配置不变。 */
+  MaxDevice?: number;
+  /** Access Token 的有效期，单位为秒。超过该时间后 Access Token 将失效，需使用 Refresh Token 重新换取。最小有效值为 1800 秒（小于 1800 将被忽略，使用默认值），默认值为 7200（即 2 小时）。该值应小于 RefreshTokenExpiresIn。 */
+  AccessTokenExpiresIn?: number;
+}
+
+declare interface ModifyClientResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1710,6 +2080,66 @@ declare interface ModifyEnvRequest {
 }
 
 declare interface ModifyEnvResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLoginConfigRequest {
+  /** 环境 ID，用于指定需要修改登录策略的云开发环境。 */
+  EnvId: string;
+  /** 手机号短信登录开关。设置为 true 开启手机号短信登录，允许用户使用手机号和短信验证码进行登录和注册；设置为 false 关闭手机号短信登录。 */
+  PhoneNumberLogin: boolean;
+  /** 邮箱登录开关。设置为 true 开启邮箱登录，允许用户使用邮箱和密码进行登录和注册；设置为 false 关闭邮箱登录。 */
+  EmailLogin: boolean;
+  /** 用户名密码登录开关。设置为 true 开启用户名密码登录，允许用户使用用户名和密码进行登录和注册；设置为 false 关闭用户名密码登录。 */
+  UserNameLogin: boolean;
+  /** 匿名登录开关。设置为 true 开启匿名登录，允许用户无需注册即可以匿名身份访问应用；设置为 false 关闭匿名登录。 */
+  AnonymousLogin: boolean;
+  /** 短信验证码发送配置，用于设置短信验证码的发送通道类型和日发送限额。不传则不修改当前配置。 */
+  SmsVerificationConfig?: VerificationConfig;
+  /** MFA 多因子认证登录配置，用于设置多因子认证开关及验证方式（短信、邮箱、TOTP、强制绑定手机号）。不传则不修改当前配置。 */
+  MfaConfig?: MFALoginConfig;
+  /** 密码更新策略配置，用于设置首次登录强制修改密码和定期强制修改密码策略。不传则不修改当前配置。 */
+  PwdUpdateStrategy?: PasswordUpdateLoginConfig;
+}
+
+declare interface ModifyLoginConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProviderRequest {
+  /** 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。 */
+  EnvId: string;
+  /** 身份源的唯一标识符，用于指定需要修改的目标身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。例如：github、google。 */
+  Id: string;
+  /** 身份源的显示名称，支持国际化多语言配置。用户在登录页面看到的身份源名称将使用该字段，建议根据实际业务场景填写易于识别的名称，例如：GitHub、Google 等。 */
+  Name?: LocalizedMessage;
+  /** 身份源图标的访问地址，将展示在登录页的身份源按钮上。建议使用 64×64 像素的 SVG 格式图片以保证清晰度，支持 HTTP/HTTPS 公网可访问的图片链接。 */
+  Picture?: string;
+  /** 身份源对应的官方主页地址。该信息将在用户查看自己的第三方账号绑定列表时展示，帮助用户识别已绑定的身份源来源。例如 GitHub 身份源可填写：https://github.com。 */
+  Homepage?: string;
+  /** 身份源协议类型，决定该身份源使用何种认证协议与第三方平台对接。可选值：OAUTH：标准 OAuth 2.0 协议OIDC：OpenID Connect 协议SAML：SAML 2.0 协议WX_MICRO_APP：微信小程序登录WX_QRCODE_MICRO_APP：微信小程序扫码登录WX_CLOUDBASE_MICRO_APP：云开发托管小程序登录WX_MP：微信公众号网页授权登录WX_OPEN：微信开放平台扫码登录WX_WORK_INTERNAL：企业微信自建应用登录WX_WORK_AGENT：企业微信代开发应用登录WX_WORK_THIRD_PARTY：企业微信第三方应用登录WX_WORK_THIRD_PARTY_ASSOCIATION：企业微信第三方应用关联登录CUSTOM：自定义登录EMAIL：邮箱登录 */
+  ProviderType?: string;
+  /** 身份认证源协议连接配置，包含与第三方平台对接所需的核心参数，如 ClientId、ClientSecret、授权端点、Token 端点、回调地址、Scope、SAML Metadata、请求和响应参数映射等。不同 ProviderType 对应不同的配置项要求。注意：CUSTOM 和 EMAIL 类型的身份源，其存储后端类型（StorageDb）不可修改。 */
+  Config?: ProviderConfig;
+  /** 是否开启透传登录模式。可选值：TRUE（开启）、FALSE（关闭，默认值）。开启后，平台不会持久化存储用户数据，仅将第三方身份源返回的用户信息透传给业务方，适用于不希望平台留存用户数据的场景。注意：开启透传模式时，ReuseUserId 将被强制设为 TRUE，AutoSignUpWithProviderUser 将被强制设为 FALSE。 */
+  TransparentMode?: string;
+  /** 身份源的启用状态。可选值：TRUE（启用，用户可通过该身份源登录）、FALSE（禁用，登录入口将被隐藏，已有绑定关系不受影响）、UNSPECIFIED（默认为 TRUE）。 */
+  On?: string;
+  /** 身份源的详细描述信息，支持国际化多语言配置。可用于向用户说明该身份源的用途或使用场景，例如：谷歌授权登录。 */
+  Description?: LocalizedMessage;
+  /** 是否直接复用第三方身份源的用户 ID 作为平台用户 ID。可选值：TRUE（开启，返回的用户 ID 将直接使用第三方身份源的用户 ID，适用于已有用户体系迁移场景）、FALSE（关闭，由平台生成独立用户 ID）、UNSPECIFIED（默认为 FALSE，但当 TransparentMode 为 TRUE 时将被强制设为 TRUE）。注意：开启后需确保第三方用户 ID 的全局唯一性，避免 ID 冲突。 */
+  ReuseUserId?: string;
+  /** 邮箱身份源的专项配置，包含邮件服务商、发件人地址、SMTP 配置等参数，用于支持通过邮箱验证码或邮箱密码方式进行身份认证。仅当身份源 ID 为 email 时有效。若该身份源不存在，系统将自动创建一个默认关闭的邮箱身份源。 */
+  EmailConfig?: EmailProviderConfig;
+  /** 是否开启邮箱自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE）。开启后，若第三方身份源返回的邮箱与系统中已有用户的邮箱一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。 */
+  AutoSignInWhenEmailMatch?: string;
+  /** 是否开启手机号自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认行为等同 TRUE）。开启后，若第三方身份源返回的手机号与系统中已有用户的手机号一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。注意：该字段默认行为（UNSPECIFIED）与 AutoSignInWhenEmailMatch 不同，手机号匹配在未显式关闭时默认生效。 */
+  AutoSignInWhenPhoneNumberMatch?: string;
+}
+
+declare interface ModifyProviderResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1875,6 +2305,8 @@ declare interface UpdateTableResponse {
 /** {@link Tcb 云开发 CloudBase} */
 declare interface Tcb {
   (): Versions;
+  /** 添加第三方认证源 {@link AddProviderRequest} {@link AddProviderResponse} */
+  AddProvider(data: AddProviderRequest, config?: AxiosRequestConfig): AxiosPromise<AddProviderResponse>;
   /** 绑定云开发自定义域名 {@link BindCloudBaseAccessDomainRequest} {@link BindCloudBaseAccessDomainResponse} */
   BindCloudBaseAccessDomain(data: BindCloudBaseAccessDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudBaseAccessDomainResponse>;
   /** 绑定自定义域名 {@link BindCloudBaseGWDomainRequest} {@link BindCloudBaseGWDomainResponse} */
@@ -1889,6 +2321,8 @@ declare interface Tcb {
   CreateCloudBaseGWAPI(data: CreateCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseGWAPIResponse>;
   /** 创建环境 {@link CreateEnvRequest} {@link CreateEnvResponse} */
   CreateEnv(data: CreateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResponse>;
+  /** 创建环境相关资源 {@link CreateEnvResourceRequest} {@link CreateEnvResourceResponse} */
+  CreateEnvResource(data: CreateEnvResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResourceResponse>;
   /** 创建托管域名 {@link CreateHostingDomainRequest} {@link CreateHostingDomainResponse} */
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
   /** 开通 MySql {@link CreateMySQLRequest} {@link CreateMySQLResponse} */
@@ -1905,6 +2339,8 @@ declare interface Tcb {
   DeleteCloudBaseGWAPI(data: DeleteCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWAPIResponse>;
   /** 删除网关域名 {@link DeleteCloudBaseGWDomainRequest} {@link DeleteCloudBaseGWDomainResponse} */
   DeleteCloudBaseGWDomain(data: DeleteCloudBaseGWDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWDomainResponse>;
+  /** 删除第三方认证源 {@link DeleteProviderRequest} {@link DeleteProviderResponse} */
+  DeleteProvider(data: DeleteProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProviderResponse>;
   /** 删除文档型数据库表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 删除tcb用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
@@ -1915,6 +2351,8 @@ declare interface Tcb {
   DescribeBaasPackageList(data?: DescribeBaasPackageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaasPackageListResponse>;
   /** 获取计费相关信息 {@link DescribeBillingInfoRequest} {@link DescribeBillingInfoResponse} */
   DescribeBillingInfo(data?: DescribeBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingInfoResponse>;
+  /** 查询应用客户端详情 {@link DescribeClientRequest} {@link DescribeClientResponse} */
+  DescribeClient(data: DescribeClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
   /** 获取网关API列表 {@link DescribeCloudBaseGWAPIRequest} {@link DescribeCloudBaseGWAPIResponse} */
@@ -1937,6 +2375,8 @@ declare interface Tcb {
   DescribeEnvs(data?: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
   /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
+  /** 获取登录策略 {@link DescribeLoginConfigRequest} {@link DescribeLoginConfigResponse} */
+  DescribeLoginConfig(data: DescribeLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginConfigResponse>;
   /** 查询Mysql集群信息 {@link DescribeMySQLClusterDetailRequest} {@link DescribeMySQLClusterDetailResponse} */
   DescribeMySQLClusterDetail(data: DescribeMySQLClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLClusterDetailResponse>;
   /** 销毁Mysql结果查询 {@link DescribeMySQLTaskStatusRequest} {@link DescribeMySQLTaskStatusResponse} */
@@ -1953,6 +2393,8 @@ declare interface Tcb {
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询tcb用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
+  /** 获取VM规格 {@link DescribeVmSpecRequest} {@link DescribeVmSpecResponse} */
+  DescribeVmSpec(data?: DescribeVmSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVmSpecResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
   /** 销毁MySql {@link DestroyMySQLRequest} {@link DestroyMySQLResponse} */
@@ -1961,8 +2403,12 @@ declare interface Tcb {
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
   /** 编辑登录配置 {@link EditAuthConfigRequest} {@link EditAuthConfigResponse} */
   EditAuthConfig(data: EditAuthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<EditAuthConfigResponse>;
+  /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
+  GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
   /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
+  /** 修改应用客户端 {@link ModifyClientRequest} {@link ModifyClientResponse} */
+  ModifyClient(data: ModifyClientRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClientResponse>;
   /** 修改云开发网关API {@link ModifyCloudBaseGWAPIRequest} {@link ModifyCloudBaseGWAPIResponse} */
   ModifyCloudBaseGWAPI(data: ModifyCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseGWAPIResponse>;
   /** 修改日志主题 {@link ModifyClsTopicRequest} {@link ModifyClsTopicResponse} */
@@ -1973,6 +2419,10 @@ declare interface Tcb {
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
   /** 更新云开发环境套餐 {@link ModifyEnvPlanRequest} {@link ModifyEnvPlanResponse} */
   ModifyEnvPlan(data: ModifyEnvPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvPlanResponse>;
+  /** 修改登录策略 {@link ModifyLoginConfigRequest} {@link ModifyLoginConfigResponse} */
+  ModifyLoginConfig(data: ModifyLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginConfigResponse>;
+  /** 修改第三方认证源 {@link ModifyProviderRequest} {@link ModifyProviderResponse} */
+  ModifyProvider(data: ModifyProviderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProviderResponse>;
   /** 设置数据库安全规则 {@link ModifySafeRuleRequest} {@link ModifySafeRuleResponse} */
   ModifySafeRule(data: ModifySafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySafeRuleResponse>;
   /** 更新tcb用户 {@link ModifyUserRequest} {@link ModifyUserResponse} */

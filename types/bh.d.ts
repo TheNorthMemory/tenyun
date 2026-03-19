@@ -2462,6 +2462,16 @@ declare interface DescribeUsersResponse {
   RequestId?: string;
 }
 
+declare interface DisableClientTcpAccessRequest {
+  /** 堡垒机id */
+  ResourceId: string;
+}
+
+declare interface DisableClientTcpAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableExternalAccessRequest {
   /** 堡垒机id */
   ResourceId: string;
@@ -2478,6 +2488,26 @@ declare interface DisableIntranetAccessRequest {
 }
 
 declare interface DisableIntranetAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableWebAccessRequest {
+  /** 堡垒机id */
+  ResourceId: string;
+}
+
+declare interface DisableWebAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableClientTcpAccessRequest {
+  /** 堡垒机id */
+  ResourceId: string;
+}
+
+declare interface EnableClientTcpAccessResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2506,6 +2536,16 @@ declare interface EnableIntranetAccessRequest {
 }
 
 declare interface EnableIntranetAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableWebAccessRequest {
+  /** 堡垒机id */
+  ResourceId: string;
+}
+
+declare interface EnableWebAccessResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3445,14 +3485,22 @@ declare interface Bh {
   DescribeUserSyncStatus(data: DescribeUserSyncStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserSyncStatusResponse>;
   /** 查询用户列表 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
+  /** 关闭客户端TCP访问堡垒机 {@link DisableClientTcpAccessRequest} {@link DisableClientTcpAccessResponse} */
+  DisableClientTcpAccess(data: DisableClientTcpAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClientTcpAccessResponse>;
   /** 关闭公网访问堡垒机 {@link DisableExternalAccessRequest} {@link DisableExternalAccessResponse} */
   DisableExternalAccess(data: DisableExternalAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DisableExternalAccessResponse>;
   /** 关闭内网访问 {@link DisableIntranetAccessRequest} {@link DisableIntranetAccessResponse} */
   DisableIntranetAccess(data?: DisableIntranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DisableIntranetAccessResponse>;
+  /** 关闭web访问堡垒机 {@link DisableWebAccessRequest} {@link DisableWebAccessResponse} */
+  DisableWebAccess(data: DisableWebAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DisableWebAccessResponse>;
+  /** 开启客户端TCP访问堡垒机 {@link EnableClientTcpAccessRequest} {@link EnableClientTcpAccessResponse} */
+  EnableClientTcpAccess(data: EnableClientTcpAccessRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClientTcpAccessResponse>;
   /** 开启公网访问堡垒机 {@link EnableExternalAccessRequest} {@link EnableExternalAccessResponse} */
   EnableExternalAccess(data: EnableExternalAccessRequest, config?: AxiosRequestConfig): AxiosPromise<EnableExternalAccessResponse>;
   /** 开通内网访问 {@link EnableIntranetAccessRequest} {@link EnableIntranetAccessResponse} */
   EnableIntranetAccess(data?: EnableIntranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<EnableIntranetAccessResponse>;
+  /** 开启web访问堡垒机 {@link EnableWebAccessRequest} {@link EnableWebAccessResponse} */
+  EnableWebAccess(data: EnableWebAccessRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWebAccessResponse>;
   /** 导入外部资产信息 {@link ImportExternalDeviceRequest} {@link ImportExternalDeviceResponse} */
   ImportExternalDevice(data: ImportExternalDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<ImportExternalDeviceResponse>;
   /** 修改访问白名单自动添加IP状态 {@link ModifyAccessWhiteListAutoStatusRequest} {@link ModifyAccessWhiteListAutoStatusResponse} */

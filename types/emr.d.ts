@@ -2338,8 +2338,12 @@ declare interface SLInstanceInfo {
   AppId?: number;
   /** 主可用区私有网络ID */
   VpcId?: number;
+  /** 主可用区私有网络名 */
+  VpcName?: string;
   /** 主可用区子网ID */
   SubnetId?: number;
+  /** 主可用区子网名 */
+  SubnetName?: string;
   /** 状态码 */
   Status?: number;
   /** 创建时间 */
@@ -2358,6 +2362,8 @@ declare interface SLInstanceInfo {
   ExpireTime?: string;
   /** 主备部署角色 */
   DeployRole?: string;
+  /** webui地址 */
+  WebUIUrl?: string;
 }
 
 /** 扩容节点类型以及数量 */
@@ -3463,6 +3469,8 @@ declare interface CreateSLInstanceRequest {
   ClientToken?: string;
   /** 部署模式 */
   DeploymentMode?: string;
+  /** 服务用户名，对不需要用户名的服务不用传，8-16个字符，支持大写字母、小写字母、数字 */
+  UserName?: string;
 }
 
 declare interface CreateSLInstanceResponse {

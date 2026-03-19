@@ -400,7 +400,7 @@ declare interface RoomInfo {
   TurnOffMic?: number;
   /** 高音质模式。可以有以下取值： 0 不开启高音质（默认值） 1 开启高音质 */
   AudioQuality?: number;
-  /** 上课后是否禁止自动录制。可以有以下取值： 0 不禁止录制（自动开启录制，默认值） 1 禁止录制 注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
+  /** 录制方式。枚举值：0： 开启自动录制1： 禁止录制2： 开启手动录制。（仅支持页面录制，需通过startRecord、stopRecord接口控制录制的开始和结束。）3： 信令录制 */
   DisableRecord?: number;
   /** 助教Id列表。通过[注册用户]接口获取的UserId。 */
   Assistants?: string[];
@@ -446,6 +446,8 @@ declare interface RoomInfo {
   Guests?: string[];
   /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
   RecordMerge?: number;
+  /** 转推开关枚举值：0： 关闭1： 开启 */
+  EnableLiveRelay?: number;
 }
 
 /** 房间列表 */
@@ -914,6 +916,8 @@ declare interface CreateRoomRequest {
   SubtitlesTranscription?: number;
   /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
   RecordMerge?: number;
+  /** 转推开关枚举值：0： 关闭1： 开启 */
+  EnableLiveRelay?: number;
 }
 
 declare interface CreateRoomResponse {
@@ -1483,7 +1487,7 @@ declare interface DescribeRoomResponse {
   AudioQuality?: number;
   /** 课堂子类型，可以有以下取值：videodoc 文档+视频video 纯视频 */
   SubType?: string;
-  /** 上课后是否禁止自动录制。可以有以下取值：0 不禁止录制（自动开启录制，默认值）1 禁止录制注：如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 */
+  /** 录制方式。枚举值：0： 开启自动录制1： 禁止录制2： 开启手动录制。（仅支持页面录制，需通过startRecord、stopRecord接口控制录制的开始和结束。）3： 信令录制。 */
   DisableRecord?: number;
   /** 助教UserId列表。 */
   Assistants?: string[];
@@ -1533,6 +1537,8 @@ declare interface DescribeRoomResponse {
   Guests?: string[];
   /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
   RecordMerge?: number;
+  /** 转推开关枚举值：0： 关闭1： 开启 */
+  EnableLiveRelay?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1950,7 +1956,7 @@ declare interface ModifyRoomRequest {
   AudioQuality?: number;
   /** 房间子类型，可以有以下取值：videodoc 文档+视频video 纯视频直播开始后不允许修改。 */
   SubType?: string;
-  /** 禁止录制。可以有以下取值：0 不禁止录制（默认值）1 禁止录制直播开始后不允许修改。 */
+  /** 录制方式。枚举值：0： 开启自动录制1： 禁止录制2： 开启手动录制。（仅支持页面录制，需通过startRecord、stopRecord接口控制录制的开始和结束。）3： 信令录制 */
   DisableRecord?: number;
   /** 助教Id列表。直播开始后不允许修改。 */
   Assistants?: string[];
@@ -1988,6 +1994,8 @@ declare interface ModifyRoomRequest {
   Guests?: string[];
   /** 录制文件合并开关。0 关闭 1 开启 注：只有在一节课多次启用手动录制时，此功能才有效 */
   RecordMerge?: number;
+  /** 转推开关枚举值：0： 关闭1： 开启 */
+  EnableLiveRelay?: number;
 }
 
 declare interface ModifyRoomResponse {

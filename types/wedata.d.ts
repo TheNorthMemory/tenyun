@@ -8161,6 +8161,16 @@ declare namespace V20210820 {
     PropertiesList?: ParamInfoDs[] | null;
     /** 事件广播类型 */
     EventBroadcastType?: string | null;
+    /** 事件生产者任务Id */
+    ProducerTaskId?: string | null;
+    /** 事件维度 */
+    Dimension?: string | null;
+    /** 事件状态 */
+    Status?: string | null;
+    /** 事件触发时间 */
+    EventTriggerTs?: string | null;
+    /** 事件ID */
+    CaseId?: string | null;
   }
 
   /** DLC资源配置信息 */
@@ -10439,6 +10449,8 @@ declare namespace V20210820 {
     LogTimestamp?: string | null;
     /** 事件实例描述 */
     Description?: string | null;
+    /** 消费次数 */
+    ConsumeCount?: number | null;
   }
 
   /** 事件实例分页查询结果 */
@@ -11601,6 +11613,8 @@ declare namespace V20210820 {
     DlcSparkJobId?: string | null;
     /** 扩展属性 */
     Ext?: StrToStrMap | null;
+    /** 事件列表 */
+    RelatedEventList?: EventCaseAuditLogOptDto[] | null;
   }
 
   /** 任务运行历史分页记录 */
@@ -12269,6 +12283,8 @@ declare namespace V20210820 {
     TargetTaskAction?: number | null;
     /** 补录实例自定义参数 */
     MapParamList?: StrToStrMap[] | null;
+    /** 补录扩展属性 */
+    MakeExtList?: StrToStrMap[] | null;
     /** 创建人ID */
     CreatorId?: string | null;
     /** 创建人 */
@@ -15447,6 +15463,8 @@ declare namespace V20210820 {
     LatestSavedVersion?: string | null;
     /** 保存版本ID */
     LatestSavedVersionId?: string | null;
+    /** 任务状态 */
+    Status?: string | null;
   }
 
   /** 集成任务导入到编排空间配置 */
@@ -15829,6 +15847,8 @@ declare namespace V20210820 {
     WorkflowType?: string | null;
     /** 任务扩展信息 */
     TaskExtDTO?: TaskExtOpsDto | null;
+    /** 任务时区 */
+    ScheduleTimeZone?: string | null;
   }
 
   /** 任务执行脚本 */
@@ -16708,6 +16728,8 @@ declare namespace V20210820 {
     NeedCheckParentSubmitted?: boolean;
     /** 是否需要补录中间实例 */
     EnableMakeUp?: boolean;
+    /** 指定审批人列表 */
+    AssignApprovalList?: string[];
   }
 
   interface BatchCreateTaskVersionAsyncResponse {
@@ -17257,6 +17279,8 @@ declare namespace V20210820 {
     VersionRemark?: string;
     /** true表示：针对新建、已下线状态的任务仅生成开发态保存版本，您可在任务中自行提交到生产。针对调度中、已暂停、已失效的任务生成开发态保存版本并提交到生产（即本次代码模板的改动在调度中生效）； false表示：针对所有状态的任务均仅生成开发态保存版本。 */
     NeedSubmitScheduleForTemplate?: boolean;
+    /** 指定审批人列表 */
+    AssignApprovalList?: string[];
   }
 
   interface CreateCodeTemplateVersionResponse {
@@ -17783,6 +17807,8 @@ declare namespace V20210820 {
     EnableCheckTaskCycleLink?: boolean;
     /** 是否需要补录中间实例 */
     EnableMakeUp?: boolean;
+    /** 指定审批人列表 */
+    AssignApprovalList?: string[];
   }
 
   interface CreateTaskVersionDsResponse {

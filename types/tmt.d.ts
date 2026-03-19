@@ -8,9 +8,9 @@ declare interface BoundingBox {
   X?: number;
   /** 左上顶点y坐标 */
   Y?: number;
-  /** 宽 */
+  /** 宽单位：px */
   Width?: number;
-  /** 高 */
+  /** 高单位：px */
   Height?: number;
 }
 
@@ -42,7 +42,7 @@ declare interface TransDetail {
   BoundingBox?: BoundingBox;
   /** 行数 */
   LinesCount?: number;
-  /** 行高 */
+  /** 行高单位：px */
   LineHeight?: number;
   /** 正常段落spam_code字段为0；如果存在spam_code字段且值大于0（1: 命中垃圾检查；2: 命中安全策略；3: 其他。），则命中安全检查被过滤。 */
   SpamCode?: number;
