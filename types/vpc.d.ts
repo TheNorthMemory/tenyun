@@ -8798,9 +8798,9 @@ declare interface ModifyAssistantCidrResponse {
 
 declare interface ModifyBandwidthPackageAttributeRequest {
   /** 带宽包唯一标识ID */
-  BandwidthPackageId: string;
+  BandwidthPackageId?: string;
   /** 带宽包名称 */
-  BandwidthPackageName: string;
+  BandwidthPackageName?: string;
   /** 带宽包计费模式，可选值:ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 后付费-按主流量计费BANDWIDTH_POSTPAID_BY_DAY: 常规BGP-后付费-按带宽计费FIXED_PREPAID_BY_MONTH: 常规BGP-预付费PEAK_BANDWIDTH_POSTPAID_BY_DAY: 静态单线-后付费-按日结算TOP5_POSTPAID_BY_MONTH: 后付费-TOP5计费，如需使用，请提交工单申请 */
   ChargeType?: string;
 }
@@ -8847,6 +8847,8 @@ declare interface ModifyCcnAttributeRequest {
   RouteOverlapFlag?: boolean;
   /** 是否开启qos功能。`False` 不开启，`True` 开启。 */
   TrafficMarkingPolicyFlag?: boolean;
+  /** 是否切换为混合计费 */
+  MixedBillingFlag?: boolean;
 }
 
 declare interface ModifyCcnAttributeResponse {
@@ -11098,7 +11100,7 @@ declare interface Vpc {
   /** 修改辅助CIDR {@link ModifyAssistantCidrRequest} {@link ModifyAssistantCidrResponse} */
   ModifyAssistantCidr(data: ModifyAssistantCidrRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssistantCidrResponse>;
   /** 修改带宽包属性 {@link ModifyBandwidthPackageAttributeRequest} {@link ModifyBandwidthPackageAttributeResponse} */
-  ModifyBandwidthPackageAttribute(data: ModifyBandwidthPackageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBandwidthPackageAttributeResponse>;
+  ModifyBandwidthPackageAttribute(data?: ModifyBandwidthPackageAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBandwidthPackageAttributeResponse>;
   /** 调整共享带宽包带宽 {@link ModifyBandwidthPackageBandwidthRequest} {@link ModifyBandwidthPackageBandwidthResponse} */
   ModifyBandwidthPackageBandwidth(data: ModifyBandwidthPackageBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBandwidthPackageBandwidthResponse>;
   /** 修改CCN关联实例属性 {@link ModifyCcnAttachedInstancesAttributeRequest} {@link ModifyCcnAttachedInstancesAttributeResponse} */

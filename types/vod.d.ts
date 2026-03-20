@@ -7828,9 +7828,9 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Qwen：千问。Hunyuan：混元。Vidu：生数。Kling：可灵。 */
+    /** 模型名称。取值：Qwen：千问。Hunyuan：混元。Vidu：生数。Kling：可灵。MJ：Midjourney。 */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1； */
+    /** 模型版本。取值：当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni；当 ModelName 是 MJ，可选值为 v7； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个。下列模型可传多张参考图：GEM 2.5：0～3张图片；Vidu q2：0～7张图片，图片支持 png、jpeg、jpg、webp格式，图片像素不能小于 128x128，且比例需要小于1:4或4:1； */
     FileInfos?: AigcImageTaskInputFileInfo[];

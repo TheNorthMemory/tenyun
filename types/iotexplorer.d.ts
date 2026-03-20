@@ -1122,6 +1122,14 @@ declare interface SearchKeyword {
   Value?: string;
 }
 
+/** TWeSee 处理云存事件 EventId 的过滤规则配置 */
+declare interface SeeEventIdFilterConfig {
+  /** 包含的云存事件 ID 集合 */
+  IncludeOnly?: string[];
+  /** 排除的云存事件 ID 集合 */
+  Exclude?: string[];
+}
+
 /** 已订阅Topic信息 */
 declare interface SubscribedTopicItem {
   /** Topic名称 */
@@ -3796,6 +3804,10 @@ declare interface DescribeTWeSeeConfigResponse {
   EnableSearch?: boolean;
   /** 配置参数 */
   Config?: string;
+  /** 摘要配置参数 */
+  SummaryConfig?: VisionSummaryConfig;
+  /** 云存事件 ID 过滤规则配置项 */
+  EventIdFilterConfig?: SeeEventIdFilterConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5007,6 +5019,8 @@ declare interface ModifyTWeSeeConfigRequest {
   Config?: string;
   /** 视频摘要配置参数，不传则不修改 */
   SummaryConfig?: VisionSummaryConfig;
+  /** 云存事件 ID 过滤规则配置，不传则不修改 */
+  EventIdFilterConfig?: SeeEventIdFilterConfig;
 }
 
 declare interface ModifyTWeSeeConfigResponse {

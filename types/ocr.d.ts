@@ -3877,10 +3877,6 @@ declare interface GeneralAccurateOCRRequest {
   EnableDetectText?: boolean;
   /** 配置ID支持： OCR -- 通用场景 MulOCR--多语种场景，默认值为OCR */
   ConfigID?: string;
-  /** 需要识别的文字类型，默认识别全部类型的文字。 0：自动识别全部类型文字 1：仅识别手写体文字 2：仅识别印刷体文字 */
-  WordsType?: string;
-  /** 支持输出单行文字的语种信息，开启后耗时会略有增加。 */
-  LanguageInfo?: boolean;
 }
 
 declare interface GeneralAccurateOCRResponse {

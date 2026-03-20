@@ -34,6 +34,136 @@ declare interface AuditKeywordInfo {
   CreateTime?: string;
 }
 
+/** 数字人主播信息。 */
+declare interface AvatarAnchorInfo {
+  /** 主播昵称。同一个主播可以存在多个数字人ID。 */
+  AnchorName?: string;
+  /** 主播 ID。用于标识主播形象。同一个主播ID可存在竖屏和横屏两种数字人。 */
+  AnchorId?: string;
+  /** 主播性别。male-男性，femal-女性。 */
+  AnchorGender?: string;
+  /** 形象图片。 */
+  PoseImage?: string;
+  /** 主播形象图片的分辨率。 */
+  PoseImageResolution?: string;
+  /** 形象预览视频段。 */
+  ReferenceVideoSegmentUrl?: string;
+  /** 横屏数字人信息。 */
+  HorizontalAvatar?: AvatarImageInfo;
+  /** 竖屏数字人信息。 */
+  VerticalAvatar?: AvatarImageInfo;
+  /** 推荐音色。 */
+  SuggestTimbreKey?: string;
+}
+
+/** 数字人背景信息。 */
+declare interface AvatarBackgroundInfo {
+  /** 背景 ID。 */
+  BackgroundId?: string;
+  /** 背景场景。如：带货，娱乐等。 */
+  Scene?: string;
+  /** 竖屏背景图片 URL。 */
+  VerticalImageUrl?: string;
+  /** 横屏背景图片 URL。 */
+  HorizontalImageUrl?: string;
+}
+
+/** 数字人形象信息。 */
+declare interface AvatarImageInfo {
+  /** 数字人原始缩放系数。数字人展示大小=原始大小*缩放系数。 */
+  OriginZoom?: number;
+  /** 数字人KEY。 */
+  AvatarKey?: string;
+  /** 分辨率。 */
+  Resolution?: string;
+}
+
+/** 数字人直播间信息。 */
+declare interface AvatarRoomInfo {
+  /** 数字人直播间 ID。 */
+  RoomId?: string;
+  /** 数字人直播间名称。 */
+  Name?: string;
+  /** 数字人直播间状态，CLOSE - 未开播。OPEN - 直播中。 */
+  Status?: string;
+  /** 数字人形象 KEY。 */
+  AvatarKey?: string;
+  /** 音色 KEy。 */
+  TimbreKey?: string;
+  /** 数字人形象图片 URL。 */
+  AvatarImageUrl?: string;
+  /** 背景图片 URL。 */
+  BackgroundUrl?: string;
+  /** 推流目标描述。 */
+  Comment?: string;
+  /** 目标推流地址。 */
+  ToUrl?: string;
+  /** 主播大小，默认1.00。 取值范围(0, 15.00]。 */
+  AnchorScale?: number;
+  /** 主播纵向位置。默认-1贴底部。 */
+  AnchorVerticalPos?: number;
+  /** 主播横向位置。默认-1居中。 */
+  AnchorHorizontalPos?: number;
+  /** 语速（1.0为正常语速，范围[0.5-1.5]，值为0.5时播报语速最慢，值为1.5时播报语速最快。 */
+  SpeechSpeed?: number;
+  /** 音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。 */
+  SpeechVolume?: number;
+  /** 直播间创建时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
+  CreateTime?: string;
+  /** 直播间最后更新时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
+  UpdateTime?: string;
+}
+
+/** 数字人直播间话术信息。 */
+declare interface AvatarScriptInfo {
+  /** 数字人直播间话术 ID。 */
+  ScriptId?: string;
+  /** 话术标题。 */
+  Title?: string;
+  /** 话术内容。 */
+  Content?: string;
+  /** 话术状态。PENDING --未生成。PROCESSING --生成中。READY --已生成。 */
+  Status?: string;
+  /** 时长。单位：毫秒。 */
+  Duration?: number;
+  /** 话术位置。 */
+  Position?: number;
+  /** 话术创建时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
+  CreateTime?: string;
+  /** 话术最后更新时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
+  UpdateTime?: string;
+}
+
+/** 数字人直播间临时话术信息。 */
+declare interface AvatarTemporaryScriptInfo {
+  /** 话术内容。 */
+  Content?: string;
+  /** 话术创建时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
+  CreateTime?: string;
+}
+
+/** 数字人声音信息。 */
+declare interface AvatarTimbreInfo {
+  /** 音色 Key。 */
+  TimbreKey?: string;
+  /** 音色名称。 */
+  TimbreName?: string;
+  /** 音色描述。 */
+  TimbreDesc?: string;
+  /** 音色试听样例 URL。 */
+  TimbreSample?: string;
+  /** 音色性别，male:男音，femal:女音。 */
+  TimbreGender?: string;
+}
+
+/** 数字人音色信息列表。 */
+declare interface AvatarTimbreList {
+  /** 音色 类型。 */
+  TimbreType?: string;
+  /** 音色信息列表。 */
+  TimbreInfoList?: AvatarTimbreInfo[];
+}
+
 /** 主备流详细信息。 */
 declare interface BackupStreamDetailData {
   /** 推流域名。 */
@@ -1998,6 +2128,24 @@ declare interface CopyCasterResponse {
   RequestId?: string;
 }
 
+declare interface CopyLiveAvatarRoomRequest {
+  /** 新直播间名称。 */
+  Name: string;
+  /** 源数字人直播间 ID。 */
+  SourceRoomId: string;
+  /** 是否复制话术列表。默认：true。 */
+  IsCopyScript?: boolean;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface CopyLiveAvatarRoomResponse {
+  /** 数字人直播间 ID。 */
+  RoomId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAuditKeywordLibRequest {
   /** 自定义词库名称。 */
   Name: string;
@@ -2146,6 +2294,40 @@ declare interface CreateCommonMixStreamRequest {
 }
 
 declare interface CreateCommonMixStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLiveAvatarRoomRequest {
+  /** 直播间名称。 */
+  Name: string;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface CreateLiveAvatarRoomResponse {
+  /** 数字人直播间 ID。 */
+  RoomId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLiveAvatarScriptRequest {
+  /** 话术标题。限制500字节。 */
+  Title: string;
+  /** 话术内容。中文最大支持150个汉字（全角标点符号算一个汉字）；英文最大支持500个字母（半角标点符号算一个字母）。 */
+  Content: string;
+  /** 话术所属的数字人直播间 ID。 */
+  RoomId: string;
+  /** 话术插入时，可根据已有话术位置，指定新话术插入位置。如已有三条话术100，200，300。新话术可选择150插入到第一条和第二条中间。 */
+  SpecifyPosition?: number;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface CreateLiveAvatarScriptResponse {
+  /** 话术 ID。 */
+  ScriptId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2780,6 +2962,26 @@ declare interface DeleteCasterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLiveAvatarRoomRequest {
+  /** 直播间ID。 */
+  RoomId: string;
+}
+
+declare interface DeleteLiveAvatarRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveAvatarScriptRequest {
+  /** 话术ID。 */
+  ScriptId: string;
+}
+
+declare interface DeleteLiveAvatarScriptResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLiveCallbackRuleRequest {
   /** 推流域名。 */
   DomainName: string;
@@ -3398,6 +3600,94 @@ declare interface DescribeHttpStatusInfoListRequest {
 declare interface DescribeHttpStatusInfoListResponse {
   /** 播放状态码列表。 */
   DataInfoList?: HttpStatusData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarBackgroundListRequest {
+}
+
+declare interface DescribeLiveAvatarBackgroundListResponse {
+  /** 数字人背景图片信息列表。 */
+  InfoList?: AvatarBackgroundInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarImageListRequest {
+}
+
+declare interface DescribeLiveAvatarImageListResponse {
+  /** 数字人形象信息列表。 */
+  ImageInfoList?: AvatarAnchorInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarRoomsRequest {
+  /** 数字人直播间 ID。 */
+  RoomId?: string;
+  /** 数字人直播间名称。 */
+  Name?: string;
+  /** 分页查询的页数。 */
+  PageIndex?: number;
+  /** 分页查询的每页个数。 */
+  PageSize?: number;
+}
+
+declare interface DescribeLiveAvatarRoomsResponse {
+  /** 数字人直播间信息列表。 */
+  InfoList?: AvatarRoomInfo[];
+  /** 限制可创建的数字人直播间总数。 */
+  LimitCreateNum?: number;
+  /** 当前数字人直播间总个数。 */
+  TotalNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarScriptsRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+  /** 数字人直播间话术 ID。 */
+  ScriptId?: string;
+  /** 分页查询的页数。 */
+  PageIndex?: number;
+  /** 分页查询的每页个数。 */
+  PageSize?: number;
+}
+
+declare interface DescribeLiveAvatarScriptsResponse {
+  /** 数字人直播间话术信息列表。 */
+  InfoList?: AvatarScriptInfo[];
+  /** 限制可创建的数字人直播间话术总条数。 */
+  LimitCreateNum?: number;
+  /** 当前数字人直播间话术总条数。 */
+  TotalNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarTemporaryScriptListRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+}
+
+declare interface DescribeLiveAvatarTemporaryScriptListResponse {
+  /** 临时话术列表。 */
+  InfoList?: AvatarTemporaryScriptInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarTimbreListRequest {
+  /** 过滤音色性别。默认不过滤。male - 男性，female -女性。 */
+  TimbreGender?: string;
+}
+
+declare interface DescribeLiveAvatarTimbreListResponse {
+  /** 数字人声音信息列表。 */
+  TimbreList?: AvatarTimbreList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4848,6 +5138,26 @@ declare interface ForbidLiveStreamResponse {
   RequestId?: string;
 }
 
+declare interface GenerateLiveAvatarScriptBroadcastRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+  /** 话术 ID。 */
+  ScriptId: string;
+  /** 音色 Key。如果不填，则默认使用数字人直播已经保存的音色。 */
+  TimbreKey?: string;
+  /** 语速（1.0为正常语速，范围[0.6-2.5]，值为0.6时播报语速最慢，值为2.5时播报语速最快。不传默认使用数字人直播间已设置的语速。 */
+  SpeechSpeed?: number;
+  /** 音量大小，范围[0，10]，对应音量大小。默认为5，代表正常音量，值越大音量越高。不传使用数字人直播已设置的音量。 */
+  SpeechVolume?: number;
+}
+
+declare interface GenerateLiveAvatarScriptBroadcastResponse {
+  /** 音频播报 URL。 */
+  PreviewAudioUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InsertTaskTemporaryFilesRequest {
   /** 直播拉流任务 ID。 */
   TaskId: string;
@@ -4966,6 +5276,54 @@ declare interface ModifyCasterRequest {
 }
 
 declare interface ModifyCasterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLiveAvatarRoomRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+  /** 直播间名称。 */
+  Name?: string;
+  /** 数字人形象KEY。 */
+  AvatarKey?: string;
+  /** 音色KEY。 */
+  TimbreKey?: string;
+  /** 背景图片URL。 */
+  BackgroundUrl?: string;
+  /** 主播大小，默认1.00。取值范围(0, 15.00]。精度：使用小数点后两位。 */
+  AnchorScale?: number;
+  /** 主播纵向位置。默认-1贴底部。左上角为原点，形象顶部离屏幕顶部的距离，最大不能使形象底部超出屏幕。即该纵向位置最大为：数字人分辨率的高 - 形象高。 */
+  AnchorVerticalPos?: number;
+  /** 主播横向位置。默认-1居中。左上角为原点，形象左侧离左侧屏幕的距离。最大值不可使形象右侧超出右侧屏幕。即最大值为：数字人分辨率的宽 - 形象宽。 */
+  AnchorHorizontalPos?: number;
+  /** 语速（1.0为正常语速，范围[0.6-2.5]，值为0.6时播报语速最慢，值为2.5时播报语速最快。 */
+  SpeechSpeed?: number;
+  /** 音量大小，范围[0，10]，对应音量大小。默认为5，代表正常音量，值越大音量越高。 */
+  SpeechVolume?: number;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface ModifyLiveAvatarRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLiveAvatarScriptRequest {
+  /** 数字人直播间话术 ID。 */
+  ScriptId: string;
+  /** 话术标题，限制500字节。 */
+  Title?: string;
+  /** 话术内容，限制1000字节。 */
+  Content?: string;
+  /** 修改已有话术的位置。比如已有话术三条，位置分别为100，200，300。可将第三条话术改到第一条和第二条中间，则可指定第三条话术的位置为 150。每次指定尽量取两条话术的中间位置，如50,150等，为后面顺序调整预留位置。 */
+  SpecifyPosition?: number;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface ModifyLiveAvatarScriptResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5452,6 +5810,34 @@ declare interface SendLiveCloudEffectResponse {
   RequestId?: string;
 }
 
+declare interface SendTemporaryScriptToAvatarRoomRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+  /** 临时话术，最长不超过500字。 */
+  Content: string;
+}
+
+declare interface SendTemporaryScriptToAvatarRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartLiveAvatarRoomRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+  /** 目标地址描述。 */
+  Comment: string;
+  /** 推流目标地址。 */
+  ToUrl: string;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface StartLiveAvatarRoomResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartLivePadStreamRequest {
   /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
   AppName: string;
@@ -5496,6 +5882,18 @@ declare interface StopCasterPvwRequest {
 }
 
 declare interface StopCasterPvwResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopLiveAvatarRoomRequest {
+  /** 数字人直播间 ID。 */
+  RoomId: string;
+  /** 操作者。 */
+  Operator?: string;
+}
+
+declare interface StopLiveAvatarRoomResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5649,6 +6047,8 @@ declare interface Live {
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
   /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
+  /** 复制数字人直播间 {@link CopyLiveAvatarRoomRequest} {@link CopyLiveAvatarRoomResponse} */
+  CopyLiveAvatarRoom(data: CopyLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CopyLiveAvatarRoomResponse>;
   /** 直播审核创建词库 {@link CreateAuditKeywordLibRequest} {@link CreateAuditKeywordLibResponse} */
   CreateAuditKeywordLib(data: CreateAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordLibResponse>;
   /** 直播审核创建关键词 {@link CreateAuditKeywordsRequest} {@link CreateAuditKeywordsResponse} */
@@ -5665,6 +6065,10 @@ declare interface Live {
   CreateCasterPvw(data: CreateCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPvwResponse>;
   /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
+  /** 创建数字人直播间 {@link CreateLiveAvatarRoomRequest} {@link CreateLiveAvatarRoomResponse} */
+  CreateLiveAvatarRoom(data: CreateLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveAvatarRoomResponse>;
+  /** 创建数字人直播间话术 {@link CreateLiveAvatarScriptRequest} {@link CreateLiveAvatarScriptResponse} */
+  CreateLiveAvatarScript(data: CreateLiveAvatarScriptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveAvatarScriptResponse>;
   /** 创建回调规则 {@link CreateLiveCallbackRuleRequest} {@link CreateLiveCallbackRuleResponse} */
   CreateLiveCallbackRule(data: CreateLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveCallbackRuleResponse>;
   /** 创建回调模板 {@link CreateLiveCallbackTemplateRequest} {@link CreateLiveCallbackTemplateResponse} */
@@ -5719,6 +6123,10 @@ declare interface Live {
   DeleteCasterMarkWordInfo(data: DeleteCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterMarkWordInfoResponse>;
   /** 删除导播台推流信息 {@link DeleteCasterOutputInfoRequest} {@link DeleteCasterOutputInfoResponse} */
   DeleteCasterOutputInfo(data: DeleteCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterOutputInfoResponse>;
+  /** 删除数字人直播间 {@link DeleteLiveAvatarRoomRequest} {@link DeleteLiveAvatarRoomResponse} */
+  DeleteLiveAvatarRoom(data: DeleteLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveAvatarRoomResponse>;
+  /** 删除数字人直播间话术 {@link DeleteLiveAvatarScriptRequest} {@link DeleteLiveAvatarScriptResponse} */
+  DeleteLiveAvatarScript(data: DeleteLiveAvatarScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveAvatarScriptResponse>;
   /** 删除回调规则 {@link DeleteLiveCallbackRuleRequest} {@link DeleteLiveCallbackRuleResponse} */
   DeleteLiveCallbackRule(data: DeleteLiveCallbackRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveCallbackRuleResponse>;
   /** 删除回调模板 {@link DeleteLiveCallbackTemplateRequest} {@link DeleteLiveCallbackTemplateResponse} */
@@ -5807,6 +6215,18 @@ declare interface Live {
   DescribeGroupProIspPlayInfoList(data: DescribeGroupProIspPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupProIspPlayInfoListResponse>;
   /** 查询播放http状态码明细数据 {@link DescribeHttpStatusInfoListRequest} {@link DescribeHttpStatusInfoListResponse} */
   DescribeHttpStatusInfoList(data: DescribeHttpStatusInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpStatusInfoListResponse>;
+  /** 查询直播数字人背景列表 {@link DescribeLiveAvatarBackgroundListRequest} {@link DescribeLiveAvatarBackgroundListResponse} */
+  DescribeLiveAvatarBackgroundList(data?: DescribeLiveAvatarBackgroundListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarBackgroundListResponse>;
+  /** 查询直播数字人形象列表 {@link DescribeLiveAvatarImageListRequest} {@link DescribeLiveAvatarImageListResponse} */
+  DescribeLiveAvatarImageList(data?: DescribeLiveAvatarImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarImageListResponse>;
+  /** 查询数字人直播间 {@link DescribeLiveAvatarRoomsRequest} {@link DescribeLiveAvatarRoomsResponse} */
+  DescribeLiveAvatarRooms(data?: DescribeLiveAvatarRoomsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarRoomsResponse>;
+  /** 查询数字人直播间话术列表 {@link DescribeLiveAvatarScriptsRequest} {@link DescribeLiveAvatarScriptsResponse} */
+  DescribeLiveAvatarScripts(data: DescribeLiveAvatarScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarScriptsResponse>;
+  /** 查询数字人直播间临时话术列表 {@link DescribeLiveAvatarTemporaryScriptListRequest} {@link DescribeLiveAvatarTemporaryScriptListResponse} */
+  DescribeLiveAvatarTemporaryScriptList(data: DescribeLiveAvatarTemporaryScriptListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarTemporaryScriptListResponse>;
+  /** 查询直播数字人音色列表 {@link DescribeLiveAvatarTimbreListRequest} {@link DescribeLiveAvatarTimbreListResponse} */
+  DescribeLiveAvatarTimbreList(data?: DescribeLiveAvatarTimbreListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarTimbreListResponse>;
   /** 获取回调规则列表 {@link DescribeLiveCallbackRulesRequest} {@link DescribeLiveCallbackRulesResponse} */
   DescribeLiveCallbackRules(data?: DescribeLiveCallbackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveCallbackRulesResponse>;
   /** 获取直播单个回调模板 {@link DescribeLiveCallbackTemplateRequest} {@link DescribeLiveCallbackTemplateResponse} */
@@ -5961,6 +6381,8 @@ declare interface Live {
   ForbidLiveDomain(data: ForbidLiveDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveDomainResponse>;
   /** 禁推直播流 {@link ForbidLiveStreamRequest} {@link ForbidLiveStreamResponse} */
   ForbidLiveStream(data: ForbidLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidLiveStreamResponse>;
+  /** 生成数字人话术播报 {@link GenerateLiveAvatarScriptBroadcastRequest} {@link GenerateLiveAvatarScriptBroadcastResponse} */
+  GenerateLiveAvatarScriptBroadcast(data: GenerateLiveAvatarScriptBroadcastRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateLiveAvatarScriptBroadcastResponse>;
   /** 轮播任务插播文件 {@link InsertTaskTemporaryFilesRequest} {@link InsertTaskTemporaryFilesResponse} */
   InsertTaskTemporaryFiles(data: InsertTaskTemporaryFilesRequest, config?: AxiosRequestConfig): AxiosPromise<InsertTaskTemporaryFilesResponse>;
   /** 修改导播台 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
@@ -5975,6 +6397,10 @@ declare interface Live {
   ModifyCasterMarkWordInfo(data: ModifyCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterMarkWordInfoResponse>;
   /** 修改导播台推流信息 {@link ModifyCasterOutputInfoRequest} {@link ModifyCasterOutputInfoResponse} */
   ModifyCasterOutputInfo(data: ModifyCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterOutputInfoResponse>;
+  /** 修改数字人直播间配置 {@link ModifyLiveAvatarRoomRequest} {@link ModifyLiveAvatarRoomResponse} */
+  ModifyLiveAvatarRoom(data: ModifyLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveAvatarRoomResponse>;
+  /** 修改数字人直播间话术 {@link ModifyLiveAvatarScriptRequest} {@link ModifyLiveAvatarScriptResponse} */
+  ModifyLiveAvatarScript(data: ModifyLiveAvatarScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveAvatarScriptResponse>;
   /** 修改回调模板 {@link ModifyLiveCallbackTemplateRequest} {@link ModifyLiveCallbackTemplateResponse} */
   ModifyLiveCallbackTemplate(data: ModifyLiveCallbackTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveCallbackTemplateResponse>;
   /** 批量绑定证书对应的播放域名 {@link ModifyLiveDomainCertBindingsRequest} {@link ModifyLiveDomainCertBindingsResponse} */
@@ -6015,6 +6441,10 @@ declare interface Live {
   ResumeLiveStream(data: ResumeLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeLiveStreamResponse>;
   /** 发送直播云端特效 {@link SendLiveCloudEffectRequest} {@link SendLiveCloudEffectResponse} */
   SendLiveCloudEffect(data: SendLiveCloudEffectRequest, config?: AxiosRequestConfig): AxiosPromise<SendLiveCloudEffectResponse>;
+  /** 发送数字人直播间临时话术 {@link SendTemporaryScriptToAvatarRoomRequest} {@link SendTemporaryScriptToAvatarRoomResponse} */
+  SendTemporaryScriptToAvatarRoom(data: SendTemporaryScriptToAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<SendTemporaryScriptToAvatarRoomResponse>;
+  /** 启动数字人直播间 {@link StartLiveAvatarRoomRequest} {@link StartLiveAvatarRoomResponse} */
+  StartLiveAvatarRoom(data: StartLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveAvatarRoomResponse>;
   /** 开始切入垫片 {@link StartLivePadStreamRequest} {@link StartLivePadStreamResponse} */
   StartLivePadStream(data: StartLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartLivePadStreamResponse>;
   /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
@@ -6023,6 +6453,8 @@ declare interface Live {
   StopCasterPgm(data: StopCasterPgmRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPgmResponse>;
   /** 停止导播台预监任务 {@link StopCasterPvwRequest} {@link StopCasterPvwResponse} */
   StopCasterPvw(data: StopCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPvwResponse>;
+  /** 停止数字人直播间 {@link StopLiveAvatarRoomRequest} {@link StopLiveAvatarRoomResponse} */
+  StopLiveAvatarRoom(data: StopLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveAvatarRoomResponse>;
   /** 停止切入垫片 {@link StopLivePadStreamRequest} {@link StopLivePadStreamResponse} */
   StopLivePadStream(data: StopLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StopLivePadStreamResponse>;
   /** 终止录制任务(已废弃,请使用新接口) {@link StopLiveRecordRequest} {@link StopLiveRecordResponse} */

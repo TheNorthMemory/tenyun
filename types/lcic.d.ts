@@ -362,6 +362,8 @@ declare interface PlaybackItem {
   Duration?: number;
   /** 录制开始时间 */
   CreateTime?: number;
+  /** 文件大小。单位：MB */
+  FileSize?: number;
 }
 
 /** 房间问答问题详情 */
@@ -1293,6 +1295,24 @@ declare interface DescribeGroupResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLiveRelayConfigRequest {
+  /** 低代码互动课堂的SdkAppId */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+}
+
+declare interface DescribeLiveRelayConfigResponse {
+  /** 转推类型枚举值：0： 单流1： 混流 */
+  RelayType?: number;
+  /** 转推URL */
+  Urls?: string[];
+  /** 是否是腾讯云CDN。枚举值：0： 转推非腾讯云CDN1： 转推腾讯CDN */
+  IsTencentCdn?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMarqueeRequest {
   /** 学校ID */
   SdkAppId: number;
@@ -1933,6 +1953,24 @@ declare interface ModifyGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLiveRelayConfigRequest {
+  /** 低代码互动课堂的SdkAppId */
+  SdkAppId: number;
+  /** 房间ID */
+  RoomId: number;
+  /** 转推类型枚举值：0： 单流1： 混流 */
+  RelayType: number;
+  /** 转推URL */
+  Urls: string[];
+  /** 是否是腾讯云CDN（默认为0）枚举值：0： 转推非腾讯CDN1： 转推腾讯CDN */
+  IsTencentCdn?: number;
+}
+
+declare interface ModifyLiveRelayConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRoomRequest {
   /** 房间ID。 */
   RoomId: number;
@@ -2296,6 +2334,8 @@ declare interface Lcic {
   DescribeGroupLiveCodes(data?: DescribeGroupLiveCodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupLiveCodesResponse>;
   /** 获取群组成员列表 {@link DescribeGroupMemberListRequest} {@link DescribeGroupMemberListResponse} */
   DescribeGroupMemberList(data: DescribeGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupMemberListResponse>;
+  /** 获取转推配置 {@link DescribeLiveRelayConfigRequest} {@link DescribeLiveRelayConfigResponse} */
+  DescribeLiveRelayConfig(data: DescribeLiveRelayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRelayConfigResponse>;
   /** 查询跑马灯配置 {@link DescribeMarqueeRequest} {@link DescribeMarqueeResponse} */
   DescribeMarquee(data: DescribeMarqueeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarqueeResponse>;
   /** 获取信令录制回放视频观看记录 {@link DescribePlayRecordsRequest} {@link DescribePlayRecordsResponse} */
@@ -2356,6 +2396,8 @@ declare interface Lcic {
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改群组 {@link ModifyGroupRequest} {@link ModifyGroupResponse} */
   ModifyGroup(data: ModifyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGroupResponse>;
+  /** 修改转推配置 {@link ModifyLiveRelayConfigRequest} {@link ModifyLiveRelayConfigResponse} */
+  ModifyLiveRelayConfig(data: ModifyLiveRelayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRelayConfigResponse>;
   /** 修改课堂 {@link ModifyRoomRequest} {@link ModifyRoomResponse} */
   ModifyRoom(data: ModifyRoomRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoomResponse>;
   /** 修改用户信息 {@link ModifyUserProfileRequest} {@link ModifyUserProfileResponse} */

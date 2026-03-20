@@ -14,7 +14,7 @@ declare interface AccessControl {
 
 /** 访问控制规则 */
 declare interface AccessControlRule {
-  /** requestHeader ：对请求头部进行访问控制url ： 对访问url进行访问控制 */
+  /** 规则类型：requestHeader ：对请求头部进行访问控制url ： 对访问url进行访问控制 */
   RuleType: string | null;
   /** 封禁内容 */
   RuleContent: string | null;
@@ -44,7 +44,7 @@ declare interface AdvanceConfig {
 
 /** 回源的自定义Https配置 */
 declare interface AdvanceHttps {
-  /** 自定义Tls数据开关 */
+  /** 自定义Tls数据开关on - 开off - 关 */
   CustomTlsStatus?: string | null;
   /** Tls版本列表，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本 */
   TlsVersion?: string[] | null;
@@ -838,9 +838,9 @@ declare interface ExtraLogset {
 
 /** 防盗刷配置规则 */
 declare interface FilterRules {
-  /** 封禁类型 */
+  /** 封禁类型forbidden - 封禁 */
   FilterType: string | null;
-  /** 封禁规则类型 */
+  /** 封禁规则类型all - 全部请求file - 指定后缀的文件请求 */
   RuleType: string | null;
   /** 封禁规则路径 */
   RulePaths: string[] | null;
@@ -2273,13 +2273,13 @@ declare interface DescribeBillingDataRequest {
   Interval?: string;
   /** 指定域名查询计费数据 */
   Domain?: string;
-  /** 指定项目 ID 查询，[前往查看项目 ID](https://console.cloud.tencent.com/project)若 Domain 参数填充了具体域名信息，则返回该域名的计费数据，而非指定项目计费数据 */
+  /** 指定项目 ID 查询，前往查看项目 ID若 Domain 参数填充了具体域名信息，则返回该域名的计费数据，而非指定项目计费数据 */
   Project?: number;
   /** 指定加速区域查询计费数据：mainland：中国境内overseas：中国境外不填充时，默认为 mainland */
   Area?: string;
-  /** Area 为 overseas 时，指定国家/地区查询省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316)不填充时，查询所有国家/地区 */
+  /** Area 为 overseas 时，指定国家/地区查询省份、国家/地区编码可以查看 省份编码映射不填充时，查询所有国家/地区 */
   District?: number;
-  /** 计费统计类型flux：计费流量bandwidth：计费带宽默认为 bandwidth */
+  /** 计费统计类型flux：计费流量bandwidth：计费带宽https：https请求数默认为 bandwidth */
   Metric?: string;
   /** 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn */
   Product?: string;
@@ -2417,9 +2417,9 @@ declare interface DescribeDistrictIspDataRequest {
   EndTime: string;
   /** 指定查询指标，支持:bandwidth：带宽，单位为 bpsflux：流量，单位为 byterequest：请求数，单位为 次statusCode：状态码，返回 0、2xx、3xx、4xx、5xx 汇总数据，单位为 次2xx：返回 2xx 状态码汇总及各 2 开头状态码数据，单位为 次3xx：返回 3xx 状态码汇总及各 3 开头状态码数据，单位为 次4xx：返回 4xx 状态码汇总及各 4 开头状态码数据，单位为 次5xx：返回 5xx 状态码汇总及各 5 开头状态码数据，单位为 次支持指定具体状态码查询，若未产生过，则返回为空 */
   Metric: string;
-  /** 指定省份查询，不填充表示查询所有省份省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316) */
+  /** 指定省份查询，不填充表示查询所有省份（注：指定条件查询只支持映射表范围）省份、国家/地区编码可以查看 省份编码映射 */
   Districts?: number[];
-  /** 指定运营商查询，不填充表示查询所有运营商运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316) */
+  /** 指定运营商查询，不填充表示查询所有运营商（注：指定条件查询只支持映射表范围）运营商编码可以查看 运营商编码映射 */
   Isps?: number[];
   /** 指定协议查询，不填充表示查询所有协议all：所有协议http：指定查询 HTTP 对应指标https：指定查询 HTTPS 对应指标 */
   Protocol?: string;
@@ -2759,9 +2759,9 @@ declare interface DescribeReportDataResponse {
 }
 
 declare interface DescribeTopDataRequest {
-  /** 查询起始日期：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为起始日期返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04 10:40:00，返回数据的起始时间为2018-09-04 00:00:00仅支持 90 天内数据查询 */
+  /** 查询起始日期：yyyy-MM-dd仅支持按天粒度的数据查询，取入参中的天信息作为起始日期返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04，返回数据的起始时间为2018-09-04 00:00:00仅支持 90 天内数据查询 */
   StartTime: string;
-  /** 查询结束日期：yyyy-MM-dd HH:mm:ss仅支持按天粒度的数据查询，取入参中的天信息作为结束日期返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59EndTime 需要大于等于 StartTime */
+  /** 查询结束日期：yyyy-MM-dd仅支持按天粒度的数据查询，取入参中的天信息作为结束日期返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05，返回数据的结束时间为2018-09-05 23:59:59EndTime 需要大于等于 StartTime */
   EndTime: string;
   /** 排序对象，支持以下几种形式：ip、ua_device、ua_browser、ua_os、referer */
   Metric: string;

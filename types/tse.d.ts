@@ -814,6 +814,10 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   DeleteProtect?: boolean;
   /** 表示可以升级的版本号 */
   AvailableVersions?: string[] | null;
+  /** 网关可以升级的版本号列表 */
+  AvailableUpgradeVersions?: string[];
+  /** 是否提示可升级 */
+  AvailableUpgrade?: boolean;
 }
 
 /** 获取云原生API网关实例协议端口列表响应结果 */
@@ -1558,6 +1562,8 @@ declare interface KongRoutePreview {
   ResponseBuffering?: boolean;
   /** 正则优先级 */
   RegexPriority?: number;
+  /** querystring参数 */
+  QueryStringParameters?: KVMapping[];
 }
 
 /** 云原生网关服务详细信息 */
@@ -2501,6 +2507,8 @@ declare interface CreateCloudNativeAPIGatewayRouteRequest {
   ResponseBuffering?: boolean;
   /** 正则优先级 */
   RegexPriority?: number;
+  /** queryString参数 */
+  QueryStringParameters?: KVMapping[];
 }
 
 declare interface CreateCloudNativeAPIGatewayRouteResponse {
@@ -4233,6 +4241,8 @@ declare interface ModifyCloudNativeAPIGatewayRouteRequest {
   ResponseBuffering?: boolean;
   /** 增加优先级 */
   RegexPriority?: number;
+  /** querysring参数 */
+  QueryStringParameters?: KVMapping[];
 }
 
 declare interface ModifyCloudNativeAPIGatewayRouteResponse {

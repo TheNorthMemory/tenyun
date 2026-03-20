@@ -614,7 +614,7 @@ declare interface AttrLabelDetail {
 
 /** 标签引用信息 */
 declare interface AttrLabelRefer {
-  /** 标签来源，1：标签 */
+  /** 标签来源，1：标签。使用标签引用信息时，Source、AttributeBizId和LabelBizIds都需填写。 */
   Source?: number;
   /** 标签ID */
   AttributeBizId?: string;
@@ -2054,7 +2054,7 @@ declare interface ReleaseConfigs {
   ConfigItem?: string | null;
   /** 更新时间 */
   UpdateTime?: string | null;
-  /** 状态 */
+  /** 状态2：待发布3：发布中4：已发布5：发布失败 */
   Action?: number | null;
   /** 变更后的内容 */
   Value?: string | null;

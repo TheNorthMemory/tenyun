@@ -1786,6 +1786,20 @@ declare interface SealInfo {
   SealName: string;
 }
 
+/** 签署证书信息结构体 */
+declare interface SignCertificate {
+  /** 证书序列号 */
+  SerialNumber?: string;
+  /** 证书持有者名称 */
+  CommonName?: string;
+  /** 证书生效时间 */
+  NotBefore?: number;
+  /** 证书失效时间 */
+  NotAfter?: number;
+  /** 证书颁发者名称 */
+  IssuerCommonName?: string;
+}
+
 /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括- 签署控件是否默认展示日期. */
 declare interface SignComponentConfig {
   /** 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。- false 展示签署日期（默认）- true 不展示签署日期 ![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。 */
@@ -2554,6 +2568,28 @@ declare interface CreateConvertTaskApiRequest {
 declare interface CreateConvertTaskApiResponse {
   /** 接口返回的文件转换任务Id，可以调用接口查询转换任务状态获取转换任务的状态和转换后的文件资源Id。 */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDigitalDataSignRequest {
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 数据加签的原文 */
+  PlainText?: string;
+}
+
+declare interface CreateDigitalDataSignResponse {
+  /** 加签签名值 */
+  SignValue?: string;
+  /** 加签时间戳 */
+  SignTimestamp?: string;
+  /** 签署证书信息 */
+  Certificate?: SignCertificate;
+  /** 签署算法 */
+  SignAlgorithm?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5424,6 +5460,26 @@ declare interface VerifyDigitFileResponse {
   RequestId?: string;
 }
 
+declare interface VerifyDigitalDataSignRequest {
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator?: UserInfo;
+  /** 加签原文 */
+  PlainText?: string;
+  /** 签名值 */
+  SignValue?: string;
+}
+
+declare interface VerifyDigitalDataSignResponse {
+  /** 签名值验证结果；1-验证成功；2-验证失败 */
+  VerifyResult?: number;
+  /** 签名证书信息 */
+  Certificate?: SignCertificate;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyPdfRequest {
   /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
@@ -5489,6 +5545,8 @@ declare interface Ess {
   CreateContractReviewWebUrl(data: CreateContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContractReviewWebUrlResponse>;
   /** 创建文件转换任务 {@link CreateConvertTaskApiRequest} {@link CreateConvertTaskApiResponse} */
   CreateConvertTaskApi(data: CreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConvertTaskApiResponse>;
+  /** 创建数据加签 {@link CreateDigitalDataSignRequest} {@link CreateDigitalDataSignResponse} */
+  CreateDigitalDataSign(data: CreateDigitalDataSignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDigitalDataSignResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
   /** 补充动态签署合同的签署方 {@link CreateDynamicFlowApproverRequest} {@link CreateDynamicFlowApproverResponse} */
@@ -5729,6 +5787,8 @@ declare interface Ess {
   UploadFiles(data: UploadFilesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFilesResponse>;
   /** 加签文件验签接口 {@link VerifyDigitFileRequest} {@link VerifyDigitFileResponse} */
   VerifyDigitFile(data?: VerifyDigitFileRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDigitFileResponse>;
+  /** 数据加签验证 {@link VerifyDigitalDataSignRequest} {@link VerifyDigitalDataSignResponse} */
+  VerifyDigitalDataSign(data?: VerifyDigitalDataSignRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDigitalDataSignResponse>;
   /** 流程文件验签 {@link VerifyPdfRequest} {@link VerifyPdfResponse} */
   VerifyPdf(data: VerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPdfResponse>;
 }

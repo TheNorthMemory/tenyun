@@ -6172,7 +6172,7 @@ declare interface Monitor {
   DeleteGrafanaIntegration(data: V20180724.DeleteGrafanaIntegrationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteGrafanaIntegrationResponse>;
   /** 删除 Grafana 告警通道 {@link V20180724.DeleteGrafanaNotificationChannelRequest} {@link V20180724.DeleteGrafanaNotificationChannelResponse} */
   DeleteGrafanaNotificationChannel(data: V20180724.DeleteGrafanaNotificationChannelRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteGrafanaNotificationChannelResponse>;
-  /** 删除告警策略组 {@link V20180724.DeletePolicyGroupRequest} {@link V20180724.DeletePolicyGroupResponse} */
+  /** @deprecated 删除告警策略组 {@link V20180724.DeletePolicyGroupRequest} {@link V20180724.DeletePolicyGroupResponse} */
   DeletePolicyGroup(data: V20180724.DeletePolicyGroupRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeletePolicyGroupResponse>;
   /** 删除Prometheus告警规则分组 {@link V20180724.DeletePrometheusAlertGroupsRequest} {@link V20180724.DeletePrometheusAlertGroupsResponse} */
   DeletePrometheusAlertGroups(data: V20180724.DeletePrometheusAlertGroupsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeletePrometheusAlertGroupsResponse>;

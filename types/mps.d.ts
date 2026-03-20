@@ -424,7 +424,7 @@ declare interface AiAnalysisTaskDelLogoOutput {
   OriginSubtitlePath?: string;
   /** 基于画面提取的字幕翻译文件路径。 */
   TranslateSubtitlePath?: string;
-  /** 擦除的字幕位置。**注意**：仅对字幕提取且开启返回字幕位置时有效。 */
+  /** 擦除的字幕位置。注意：仅对字幕提取且开启返回字幕位置时有效。 */
   SubtitlePos?: SubtitlePosition | null;
   /** 音色克隆后的视频文件地址 */
   VoiceClonedVideo?: string | null;
@@ -4858,7 +4858,7 @@ declare interface OutputSRTSourceAddressResp {
 
 /** 智能擦除自定义参数 */
 declare interface OverrideEraseParameter {
-  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
   EraseType?: string;
   /** 字幕擦除配置；当EraseType值为：subtitle，此字段为必填参数 */
   EraseSubtitleConfig?: UpdateSmartEraseSubtitleConfig;
@@ -4866,6 +4866,8 @@ declare interface OverrideEraseParameter {
   EraseWatermarkConfig?: UpdateSmartEraseWatermarkConfig;
   /** 隐私保护配置；当EraseType值为：privacy，此字段为必填参数 */
   ErasePrivacyConfig?: UpdateSmartErasePrivacyConfig;
+  /** 擦除压制字幕模板id。 */
+  SubtitleEmbedId?: number;
 }
 
 /** 自定义转码的规格参数。用于覆盖模板中对应参数值。 */
@@ -5292,7 +5294,7 @@ declare interface RawImageWatermarkInput {
 
 /** 智能擦除自定义参数 */
 declare interface RawSmartEraseParameter {
-  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
   EraseType: string;
   /** 字幕擦除配置；当EraseType值为：subtitle，此字段为必填参数 */
   EraseSubtitleConfig?: SmartEraseSubtitleConfig | null;
@@ -5300,28 +5302,36 @@ declare interface RawSmartEraseParameter {
   EraseWatermarkConfig?: SmartEraseWatermarkConfig | null;
   /** 隐私保护配置；当EraseType值为：privacy，此字段为必填参数 */
   ErasePrivacyConfig?: SmartErasePrivacyConfig | null;
+  /** 擦除字幕压制模板id。 */
+  SubtitleEmbedId?: number;
+  /** 压制配置，默认开启1, 把字幕压制回原字幕位置。 */
+  UseOriginalPos?: number;
+  /** 压制配置，默认开启1, 开启后使用原字幕字号。 */
+  UseOriginalSize?: number;
 }
 
 /** 自定义智能字幕参数 */
 declare interface RawSmartSubtitleParameter {
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
-  /** 智能字幕视频源语言OCR识别仅支持以下语言：`zh_en`：中英`multi`：其他ASR识别和纯字幕翻译当前支持以下语言：`auto`：自动识别（仅在纯字幕翻译中支持）`zh`：简体中文`en`：英语`ja`：日语`ko`：韩语`zh-PY`：中英粤`zh_medical`：中文医疗`vi`：越南语`ms`：马来语`id`：印度尼西亚语`fil`：菲律宾语`th`：泰语`pt`：葡萄牙语`tr`：土耳其语`ar`：阿拉伯语`es`：西班牙语`hi`：印地语`fr`：法语`de`：德语`it`：意大利语`zh_dialect`：中文方言`zh_en`：中英`yue`：粤语`ru`：俄语`prime_zh`：中英方言`af-ZA`：南非荷兰语（南非）`sq-AL`：阿尔巴尼亚语（阿尔巴尼亚）`am-ET`：阿姆哈拉语（埃塞俄比亚）`ar-DZ`：阿拉伯语（阿尔及利亚）`ar-BH`：阿拉伯语（巴林）`ar-EG`：阿拉伯语（埃及）`ar-IQ`：阿拉伯语（伊拉克）`ar-IL`：阿拉伯语（以色列）`ar-JO`：阿拉伯语（约旦）`ar-KW`：阿拉伯语（科威特）`ar-LB`：阿拉伯语（黎巴嫩）`ar-MR`：阿拉伯语（毛里塔尼亚）`ar-MA`：阿拉伯语（摩洛哥）`ar-OM`：阿拉伯语（阿曼）`ar-QA`：阿拉伯语（卡塔尔）`ar-SA`：阿拉伯语（沙特阿拉伯）`ar-PS`：阿拉伯语（巴勒斯坦国）`ar-SY`：阿拉伯语（叙利亚）`ar-TN`：阿拉伯语（突尼斯）`ar-AE`：阿拉伯语（阿拉伯联合酋长国）`ar-YE`：阿拉伯语（也门）`hy-AM`：亚美尼亚语（亚美尼亚）`az-AZ`：阿塞拜疆语（阿塞拜疆）`eu-ES`：巴斯克语（西班牙）`bn-BD`：孟加拉语（孟加拉）`bn-IN`：孟加拉语（印度）`bs-BA`：波斯尼亚语（波斯尼亚和黑塞哥维那）`bg-BG`：保加利亚语（保加利亚）`my-MM`：缅甸语（缅甸）`ca-ES`：加泰罗尼亚语（西班牙）`hr-HR`：克罗地亚语（克罗地亚）`cs-CZ`：捷克语（捷克共和国）`da-DK`：丹麦语（丹麦）`nl-BE`：荷兰语（比利时）`nl-NL`：荷兰语（荷兰）`en-AU`：英语（澳大利亚）`en-CA`：英语（加拿大）`en-GH`：英语（加纳）`en-HK`：英语（中国香港）`en-IN`：英语（印度）`en-IE`：英语（爱尔兰）`en-KE`：英语（肯尼亚）`en-NZ`：英语（新西兰）`en-NG`：英语（尼日利亚）`en-PK`：英语（巴基斯坦）`en-PH`：英语（菲律宾）`en-SG`：英语（新加坡）`en-ZA`：英语（南非）`en-TZ`：英语（坦桑尼亚）`en-GB`：英语（英国）`en-US`：英语（美国）`et-EE`：爱沙尼亚语（爱沙尼亚）`fil-PH`：菲律宾语（菲律宾）`fi-FI`：芬兰语（芬兰）`fr-BE`：法语（比利时）`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fr-CH`：法语（瑞士）`gl-ES`：加利西亚语（西班牙）`ka-GE`：格鲁吉亚语（格鲁吉亚）`el-GR`：希腊语（希腊）`gu-IN`：古吉拉特语（印度）`iw-IL`：希伯来语（以色列）`hi-IN`：印地语（印度）`hu-HU`：匈牙利语（匈牙利）`is-IS`：冰岛语（冰岛）`id-ID`：印度尼西亚语（印度尼西亚）`it-IT`：意大利语（意大利）`it-CH`：意大利语（瑞士）`ja-JP`：日语（日本）`jv-ID`：爪哇语（印度尼西亚）`kn-IN`：卡纳达语（印度）`kk-KZ`：哈萨克语（哈萨克斯坦）`km-KH`：高棉语（柬埔寨）`rw-RW`：卢旺达语（卢旺达）`ko-KR`：韩语（韩国）`lo-LA`：老挝语（老挝）`lv-LV`：拉脱维亚语（拉脱维亚）`lt-LT`：立陶宛语（立陶宛）`mk-MK`：马其顿语（北马其顿）`ms-MY`：马来语（马来西亚）`ml-IN`：马拉雅拉姆语（印度）`mr-IN`：马拉地语（印度）`mn-MN`：蒙古语（蒙古）`ne-NP`：尼泊尔语（尼泊尔）`no-NO`：博克马尔挪威语（挪威）`fa-IR`：波斯语（伊朗）`pl-PL`：波兰语（波兰）`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`ro-RO`：罗马尼亚语（罗马尼亚）`ru-RU`：俄语（俄罗斯）`sr-RS`：塞尔维亚语（塞尔维亚）`si-LK`：僧伽罗语（斯里兰卡）`sk-SK`：斯洛伐克语（斯洛伐克）`sl-SI`：斯洛文尼亚语（斯洛文尼亚）`st-ZA`：南索托语（南非）`es-AR`：西班牙语（阿根廷）`es-BO`：西班牙语（玻利维亚）`es-CL`：西班牙语（智利）`es-CO`：西班牙语（哥伦比亚）`es-CR`：西班牙语（哥斯达黎加）`es-DO`：西班牙语（多米尼加共和国）`es-EC`：西班牙语（厄瓜多尔）`es-SV`：西班牙语（萨尔瓦多）`es-GT`：西班牙语（危地马拉）`es-HN`：西班牙语（洪都拉斯）`es-MX`：西班牙语（墨西哥）`es-NI`：西班牙语（尼加拉瓜）`es-PA`：西班牙语（巴拿马）`es-PY`：西班牙语（巴拉圭）`es-PE`：西班牙语（秘鲁）`es-PR`：西班牙语（波多黎各）`es-ES`：西班牙语（西班牙）`es-US`：西班牙语（美国）`es-UY`：西班牙语（乌拉圭）`es-VE`：西班牙语（委内瑞拉）`su-ID`：巽他语（印度尼西亚）`sw-KE`：斯瓦希里语（肯尼亚）`sw-TZ`：斯瓦希里语（坦桑尼亚）`sv-SE`：瑞典语（瑞典）`ta-IN`：泰米尔语（印度）`ta-MY`：泰米尔语（马来西亚）`ta-SG`：泰米尔语（新加坡）`ta-LK`：泰米尔语（斯里兰卡）`te-IN`：泰卢固语（印度）`th-TH`：泰语（泰国）`ts-ZA`：聪加语（南非）`tr-TR`：土耳其语（土耳其）`uk-UA`：乌克兰语（乌克兰）`ur-IN`：乌尔都语（印度）`ur-PK`：乌尔都语（巴基斯坦）`uz-UZ`：乌兹别克语（乌兹别克斯坦）`ve-ZA`：文达语（南非）`vi-VN`：越南语（越南）`xh-ZA`：科萨语（南非）`zu-ZA`：祖鲁语（南非） */
+  /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
   VideoSrcLanguage: string;
-  /** 智能字幕文件格式:- ASR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕 - 不填或填空：不生成字幕文件- 纯字幕翻译处理类型下： - original：与源文件一致 - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕- OCR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕**注意**：- ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；- 纯字幕翻译和OCR识别翻译方式下，不允许传空或不传 */
+  /** 智能字幕文件格式:ASR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕不填或填空：不生成字幕文件纯字幕翻译处理类型下：original：与源文件一致vtt: WebVTT 格式字幕srt: SRT 格式字幕OCR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕注意：ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；纯字幕翻译和OCR识别翻译方式下，不允许传空或不传OCR类型的任务，在开启压制时，允许不传或传空 */
   SubtitleFormat?: string | null;
-  /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
   TranslateSwitch?: string | null;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
   TranslateDstLanguage?: string | null;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
   /** 自定义参数 */
   ExtInfo?: string;
-  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2：OCR识别字幕**注意**：不传的情况下默认类型为 ASR识别字幕 */
+  /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下默认类型为 ASR识别字幕 */
   ProcessType?: number;
   /** 字幕OCR提取框选区域配置 */
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig | null;
+  /** 压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写 */
+  SubtitleEmbedId?: number;
 }
 
 /** 自定义转码的规格参数。 */
@@ -5806,24 +5816,30 @@ declare interface SmartErasePrivacyConfig {
 
 /** 智能擦除模板去字幕配置 */
 declare interface SmartEraseSubtitleConfig {
-  /** 字幕擦除方式。**自动擦除：**通过AI模型自动识别视频中的字幕文本内容，进行无痕化擦除，生成新的视频。但画面干扰、特殊字幕样式可能会带来一定漏擦误擦问题，可以通过指定区域擦除处理。当使用自动擦除时，若您不指定AutoAreas，将对默认区域（画面中下部）进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。**指定区域擦除：**若您的字幕位置较固定，建议您直接指定擦除区域，最大程度减少漏擦的情况。当您选择指定区域擦除时，请在CustomAreas中至少传入一个指定区域。- auto 自动擦除- custom 指定区域擦除 */
+  /** 字幕擦除方式。自动擦除：通过AI模型自动识别视频中的字幕文本内容，进行无痕化擦除，生成新的视频。但画面干扰、特殊字幕样式可能会带来一定漏擦误擦问题，可以通过指定区域擦除处理。当使用自动擦除时，若您不指定AutoAreas，将对默认区域（画面中下部）进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。指定区域擦除：若您的字幕位置较固定，建议您直接指定擦除区域，最大程度减少漏擦的情况。当您选择指定区域擦除时，请在CustomAreas中至少传入一个指定区域。auto 自动擦除custom 指定区域擦除 */
   SubtitleEraseMethod: string;
-  /** 字幕擦除模型。**标准版（推荐）：**若您的字幕样式标准，通常建议选择该版本，细节无痕化效果更好。**区域版：**若您的字幕存在花体、阴影、动效等特殊样式，建议选择区域版，擦除面积更大，但细节效果不如标准版。- standard 标准模型- area 区域模型 */
+  /** 字幕擦除模型。标准版（推荐）：若您的字幕样式标准，通常建议选择该版本，细节无痕化效果更好。区域版：若您的字幕存在花体、阴影、动效等特殊样式，建议选择区域版，擦除面积更大，但细节效果不如标准版。standard 标准模型area 区域模型 */
   SubtitleModel: string;
-  /** 是否开启OCR字幕提取，默认取OFF。当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。- ON 开启- OFF 关闭 */
+  /** 是否开启OCR字幕提取，默认取OFF。当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。ON 开启OFF 关闭 */
   OcrSwitch?: string;
-  /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取"ON"时生效。- zh_en 中英文- multi 其他其他具体支持识别如下语言：中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
+  /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取&quot;ON&quot;时生效。zh_en 中英文multi 其他其他具体支持识别如下语言：中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
   SubtitleLang?: string;
-  /** 字幕文件格式，默认取vtt；仅当OcrSwitch取"ON"时生效。- srt srt格式- vtt WebVTT格式 */
+  /** 字幕文件格式，默认取vtt；仅当OcrSwitch取&quot;ON&quot;时生效。srt srt格式vtt WebVTT格式当填写SubtitleEmbedId时可以取值空字符串，表示不输出字幕文件 */
   SubtitleFormat?: string;
-  /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取"ON"时生效。- ON 开启- OFF 关闭 */
+  /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取&quot;ON&quot;时生效。ON 开启OFF 关闭 */
   TransSwitch?: string;
-  /** 字幕翻译目标语言，默认取en；仅当TransSwitch取"ON"时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+  /** 字幕翻译目标语言，默认取en；仅当TransSwitch取&quot;ON&quot;时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
   TransDstLang?: string;
   /** 自动擦除自定义区域。对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意：当擦除方式选择custom时，此参数将不会生效；修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
   AutoAreas?: EraseArea[];
   /** 指定擦除自定义区域。对选定区域，在选定时间段内不进行检测识别直接进行擦除。注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
   CustomAreas?: EraseTimeArea[];
+  /** 字幕压制模板id，只有开启OCR翻译时可以填写 */
+  SubtitleEmbedId?: number;
+  /** 压制配置，默认开启1, 把字幕压制回原字幕位置。只有开启OCR翻译时可以填写，取0时表示不开启压回原位 */
+  UseOriginalPos?: number;
+  /** 压制配置，默认开启1, 开启后使用原字幕字号。只有开启OCR翻译时可以填写，取0时表示不使用原字号 */
+  UseOriginalSize?: number;
 }
 
 /** 智能擦除任务 */
@@ -5924,6 +5940,8 @@ declare interface SmartSubtitleTaskAsrFullTextResultOutput {
   Path?: string;
   /** 字幕文件地址。 */
   SubtitlePath?: string;
+  /** 识别字幕结果信息。 */
+  SubtitleInfo?: SubtitleResult;
   /** 字幕文件存储位置。 */
   OutputStorage?: TaskOutputStorage;
 }
@@ -6020,9 +6038,9 @@ declare interface SmartSubtitleTaskTransTextResultOutput {
   SegmentSet?: SmartSubtitleTaskTransTextSegmentItem[] | null;
   /** 字幕文件地址。 */
   SubtitlePath?: string;
-  /** 字幕文件存储位置。 */
+  /** 智能字幕结果存储信息。 */
   OutputStorage?: TaskOutputStorage;
-  /** 字幕文件地址 */
+  /** 字幕文件路径。 */
   Path?: string;
   /** 多语言翻译时返回翻译结果。 */
   SubtitleResults?: SubtitleTransResultItem[];
@@ -6042,6 +6060,8 @@ declare interface SmartSubtitleTaskTransTextSegmentItem {
   Trans?: string;
   /** 字词时间戳信息。 */
   Wordlist?: WordResult[] | null;
+  /** 说话人ID（如启用说话人识别） */
+  SpeakerId?: string;
 }
 
 /** 智能字幕模板详情 */
@@ -6200,6 +6220,118 @@ declare interface StreamUrlDetail {
   Type?: string;
 }
 
+/** 字幕压制模块背景配置 */
+declare interface SubtitleBoardConfig {
+  /** 字幕压制模块背景配置开关，0关闭，1开启，默认0 */
+  SubtitleBoardConfigSwitch?: number;
+  /** 字幕背景底板的x轴坐标位置；支持像素和百分比格式：- 像素：Npx，N范围：[-4096,4096]。- 百分百：N%，N范围：[-100,100]；例如10%表示字幕背景底板x坐标=10%*源视频宽度。默认值：0px。注意：坐标轴原点位于源视频的中轴线底部，字幕底板的基准点在其中轴线底部，参考下图：![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png) */
+  BoardX?: number;
+  /** BoardX单位, 0 像素，1百分比，默认为0，像素 */
+  BoardXUnit?: number;
+  /** 字幕背景底板的y轴坐标位置；支持像素和百分比格式：- 像素：Npx，N范围：[0,4096]。- 百分百：N%，N范围：[0,100]；例如10%表示字幕背景底板y坐标=10%*源视频高度。不传表示不开启字幕背景底板。注意：坐标轴原点位于源视频的中轴线底部，字幕背景底板的基准点在其中轴线底部，参考下图：![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png) */
+  BoardY?: number;
+  /** BoardY单位, 0 像素，1百分比，默认为0，像素 */
+  BoardYUnit?: number;
+  /** 底板的宽度，正整数。- 代表像素时，取值范围：[0,4096]。- 代表百分数时，[0, 100]。开启底板且不填此值时，默认源视频宽像素的90%。 */
+  BoardWidth?: number;
+  /** 底板的宽度单位，0 像素，1百分比，默认为0，像素 */
+  BoardWidthUnit?: number;
+  /** 底板的高度，正整数。- 代表像素时，取值范围：[0,4096]。- 代表百分数时，[0, 100]。开启底板且不填此值时，默认为源视频高像素的15%。 */
+  BoardHeight?: number;
+  /** 底板的高度单位，0 像素，1百分比，默认为0，像素 */
+  BoardHeightUnit?: number;
+  /** 底板颜色。格式：0xRRGGBB，默认值：0x000000（黑色）。 */
+  BoardColor?: string;
+  /** 字幕背景板透明度，取值范围：[0, 1]0：完全透明1：完全不透明默认值：0.8。 */
+  BoardAlpha?: number;
+}
+
+/** 字幕压制模块配置 */
+declare interface SubtitleEmbedConfig {
+  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语roboto.ttf：Robotonotosans.ttf：NotoSansnotosansthai.ttf：泰语NotoSansThaisarabun.ttf：泰语Sarabunkanit.ttf：泰语Kanitcharmonman.ttf：泰语Charmonmannotonaskharabic.ttf：阿拉伯语NotoNaskhArabicnotosansdevanagari.ttf：印度语NotoSansDevanagarinotosanstc.ttf：粤语思源黑体NotoSansTCnotosanskr.ttf：韩语NotoSansKRgothica1.ttf：韩语GothicA1nanummyeongjo.ttf：韩语NanumMyeongjonotosansjp.ttf：日语NotoSansJPnotoserifjp.ttf：日语NotoSerifJPshipporimincho.ttf：日语ShipporiMincho默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf填了FontPath时FontPath优先 */
+  FontType?: string;
+  /** 自定义字体文件url地址，和CosInputInfo二选一 */
+  FontPath?: string;
+  /** 自定义字体文件cos地址 */
+  CosInputInfo?: CosInputInfo;
+  /** 字体大小，不指定则以字幕文件中为准。支持像素和百分比格式：像素：Npx，N范围：(0,4096]。百分百：N%，N范围：(0,100]；例如10%表示字幕字体大小=10%*源视频高度。不填且字幕文件无设置时，默认源视频高度的5%。 */
+  FontSize?: number;
+  /** FontSize单位, 0 像素，1百分比，默认为0，像素 */
+  FontSizeUnit?: number;
+  /** 字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。 */
+  FontColor?: string;
+  /** 文字透明度，取值范围：(0, 1]0：完全透明1：完全不透明默认值：1。 */
+  FontAlpha?: number;
+  /** 字幕x轴坐标位置，指定此参数会忽略字幕文件自带坐标；支持像素和百分比格式：像素：Npx，N范围：[-4096,4096]。百分百：N%，N范围：[-100,100]；例如10%表示字幕x坐标=10%*源视频宽度。默认值：0px。注意：坐标轴原点在源视频中轴线底部，字幕基准点在字幕中轴线底部，参考下图： */
+  PosX?: number;
+  /** PosX单位, 0 像素，1百分比，默认为0，像素 */
+  PosXUnit?: number;
+  /** 字幕y轴坐标位置，指定此参数会忽略字幕文件自带坐标；支持像素和百分比格式：像素：Npx，N范围：[0,4096]。百分百：N%，N范围：[0,100]；例如10%表示字幕y坐标=10%*源视频高度。默认值：源视频高度*4%。注意：坐标轴原点在源视频中轴线底部，字幕基准点在字幕中轴线底部，参考下图： */
+  PosY?: number;
+  /** PosY单位, 0 像素，1百分比，默认为0，像素 */
+  PosYUnit?: number;
+  /** 背景配置 */
+  SubtitleBoardConfig?: SubtitleBoardConfig;
+  /** 排列配置 */
+  SubtitleLayoutConfig?: SubtitleLayoutConfig;
+  /** 文字描边配置 */
+  SubtitleOutlineConfig?: SubtitleOutlineConfig;
+  /** 文字阴影配置 */
+  SubtitleShadowConfig?: SubtitleShadowConfig;
+  /** 源视频尺寸的宽，单位像素值 */
+  SampleWidth?: number;
+  /** 源视频尺寸的高，单位像素值 */
+  SampleHeight?: number;
+}
+
+/** 字幕压制模板详情 */
+declare interface SubtitleEmbedTemplateItem {
+  /** 字幕压制模板唯一标识 */
+  Definition?: number;
+  /** 字幕压制模板名称 */
+  Name?: string | null;
+  /** 字幕压制模板描述信息 */
+  Comment?: string | null;
+  /** 模板类型，取值范围：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  Type?: string | null;
+  /** 删除标记，0 未删除 1 删除 */
+  DeleteTag?: number;
+  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  CreateTime?: string;
+  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  UpdateTime?: string;
+  /** 字幕压制模块配置 */
+  SubtitleEmbedConfig?: SubtitleEmbedConfig;
+  /** 字幕压制模板英文名称 */
+  AliasName?: string | null;
+}
+
+/** 字幕压制模块字幕排列配置 */
+declare interface SubtitleLayoutConfig {
+  /** 字幕排列配置开关，0关闭，1开启，默认0 */
+  SubtitleLayoutConfigSwitch?: number;
+  /** 行间距。正整数。- 代表像素值时， [0, 1000]。- 代表百分数时，[0, 100]。不填默认0。 */
+  LineSpacing?: number;
+  /** LineSpacing单位，0 像素，1百分比，默认为0，像素 */
+  LineSpacingUnit?: number;
+  /** 对齐方式，取值：top: 顶部对齐，字幕顶部按位置固定，底部随行数变化。bottom: 底部对齐，字幕底部按位置固定，顶部随行数变化。不填默认底部对齐。 */
+  Alignment?: string;
+}
+
+/** 字幕压制模块文字描边配置 */
+declare interface SubtitleOutlineConfig {
+  /** 文字描边配置开关，0关闭，1开启，默认0 */
+  SubtitleOutlineConfigSwitch?: number;
+  /** 描边宽度，默认单位像素，底层默认值为源视频高度的0.3% */
+  OutlineWidth?: number;
+  /** 描边宽度单位，0 像素，1百分比，默认为0，像素 */
+  OutlineWidthUnit?: number;
+  /** 描边颜色。6位16进制RGB。不填默认黑色。 */
+  OutlineColor?: string;
+  /** 描边透明度。(0，1] 正浮点数。不填默认1，完全不透明 */
+  OutlineAlpha?: number;
+}
+
 /** 字幕位置信息 */
 declare interface SubtitlePosition {
   /** 居中位置时Y的坐标值 */
@@ -6212,8 +6344,24 @@ declare interface SubtitleResult {
   Language?: string;
   /** 处理是否成功 */
   Status?: string;
-  /** 字幕文件地址 */
+  /** 字幕文件路径。 */
   Path?: string;
+  /** 字幕压制视频路径。 */
+  SubtitleEmbedPath?: string;
+}
+
+/** 字幕压制模块文字阴影配置 */
+declare interface SubtitleShadowConfig {
+  /** 文字阴影配置开关，0关闭，1开启，默认0 */
+  SubtitleShadowConfigSwitch?: number;
+  /** 阴影宽度，默认单位像素，底层默认值为0，无阴影 */
+  ShadowWidth?: number;
+  /** 阴影宽度单位， 0 像素，1百分比，默认为0，像素 */
+  ShadowWidthUnit?: number;
+  /** 阴影颜色。6位16进制RGB。不填默认黑色（有设置阴影的情况下） */
+  ShadowColor?: string;
+  /** 阴影透明度。(0，1] 正浮点数。不填默认1，完全不透明（有设置阴影的情况下） */
+  ShadowAlpha?: number;
 }
 
 /** 字幕流配置参数。 */
@@ -6226,7 +6374,7 @@ declare interface SubtitleTemplate {
   SubtitleFileInput?: MediaInputInfo | null;
   /** 压制字幕字体文件的输入信息，目前仅支持url和cos。都填时url优先于cos。填了FontFileInput时FontFileInput优先于FontType */
   FontFileInput?: MediaInputInfo;
-  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf填了FontFileInput时FontFileInput优先 */
+  /** 字体类型，支持：hei.ttf：黑体song.ttf：宋体kai.ttf（推荐）或 simkai.ttf：楷体msyh.ttf：微软雅黑msyhbd.ttf：微软雅黑加粗hkjgt.ttf：华康金刚体dhttx.ttf：典黑体特细xqgdzt.ttf：喜鹊古字典体qpcyt.ttf：巧拼超圆体arial.ttf：仅支持英文dinalternate.ttf：DIN Alternate Boldhelveticalt.ttf：Helveticahelveticains.ttf：Helvetica Inserattrajanpro.ttf：TrajanPro-Boldkorean.ttf：韩语japanese.ttf：日语thai.ttf：泰语roboto.ttf：Robotonotosans.ttf：NotoSansnotosansthai.ttf：泰语NotoSansThaisarabun.ttf：泰语Sarabunkanit.ttf：泰语Kanitcharmonman.ttf：泰语Charmonmannotonaskharabic.ttf：阿拉伯语NotoNaskhArabicnotosansdevanagari.ttf：印度语NotoSansDevanagarinotosanstc.ttf：粤语思源黑体NotoSansTCnotosanskr.ttf：韩语NotoSansKRgothica1.ttf：韩语GothicA1nanummyeongjo.ttf：韩语NanumMyeongjonotosansjp.ttf：日语NotoSansJPnotoserifjp.ttf：日语NotoSerifJPshipporimincho.ttf：日语ShipporiMincho默认：hei.ttf 黑体。注意：楷体推荐使用kai.ttf填了FontFileInput时FontFileInput优先 */
   FontType?: string | null;
   /** 字体大小，不指定则以字幕文件中为准。支持像素和百分比格式：- 像素：Npx，N范围：(0,4096]。- 百分百：N%，N范围：(0,100]；例如10%表示字幕字体大小=10%*源视频高度。不填且字幕文件无设置时，默认源视频高度的5%。 */
   FontSize?: string | null;
@@ -6276,14 +6424,16 @@ declare interface SubtitleTemplate {
 
 /** 字幕翻译输出结果 */
 declare interface SubtitleTransResultItem {
-  /** 翻译标识：- Success- Error */
+  /** 翻译标识：SuccessError */
   Status?: string;
-  /** 源语言（如"en"） */
+  /** 源语言（如&quot;en&quot;） */
   TransSrc?: string;
-  /** 目标语言（如"zh"） */
+  /** 目标语言（如&quot;zh&quot;） */
   TransDst?: string;
   /** 字幕文件地址 */
   Path?: string;
+  /** 翻译字幕压制视频路径。 */
+  SubtitleEmbedPath?: string;
 }
 
 /** 超分配置 */
@@ -7589,7 +7739,7 @@ declare interface CreateScheduleResponse {
 declare interface CreateSmartEraseTemplateRequest {
   /** 智能擦除模板名称长度限制：64 个字符。 */
   Name: string;
-  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
   EraseType: string;
   /** 智能擦除模板描述信息长度限制：256 个字符。 */
   Comment?: string;
@@ -7611,24 +7761,26 @@ declare interface CreateSmartEraseTemplateResponse {
 declare interface CreateSmartSubtitleTemplateRequest {
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name: string;
-  /** 智能字幕视频源语言OCR识别仅支持以下语言：`zh_en`：中英`multi`：其他ASR识别和纯字幕翻译当前支持以下语言：`auto`：自动识别（仅在纯字幕翻译中支持）`zh`：简体中文`en`：英语`ja`：日语`ko`：韩语`zh-PY`：中英粤`zh_medical`：中文医疗`vi`：越南语`ms`：马来语`id`：印度尼西亚语`fil`：菲律宾语`th`：泰语`pt`：葡萄牙语`tr`：土耳其语`ar`：阿拉伯语`es`：西班牙语`hi`：印地语`fr`：法语`de`：德语`it`：意大利语`zh_dialect`：中文方言`zh_en`：中英`yue`：粤语`ru`：俄语`prime_zh`：中英方言`af-ZA`：南非荷兰语（南非）`sq-AL`：阿尔巴尼亚语（阿尔巴尼亚）`am-ET`：阿姆哈拉语（埃塞俄比亚）`ar-DZ`：阿拉伯语（阿尔及利亚）`ar-BH`：阿拉伯语（巴林）`ar-EG`：阿拉伯语（埃及）`ar-IQ`：阿拉伯语（伊拉克）`ar-IL`：阿拉伯语（以色列）`ar-JO`：阿拉伯语（约旦）`ar-KW`：阿拉伯语（科威特）`ar-LB`：阿拉伯语（黎巴嫩）`ar-MR`：阿拉伯语（毛里塔尼亚）`ar-MA`：阿拉伯语（摩洛哥）`ar-OM`：阿拉伯语（阿曼）`ar-QA`：阿拉伯语（卡塔尔）`ar-SA`：阿拉伯语（沙特阿拉伯）`ar-PS`：阿拉伯语（巴勒斯坦国）`ar-SY`：阿拉伯语（叙利亚）`ar-TN`：阿拉伯语（突尼斯）`ar-AE`：阿拉伯语（阿拉伯联合酋长国）`ar-YE`：阿拉伯语（也门）`hy-AM`：亚美尼亚语（亚美尼亚）`az-AZ`：阿塞拜疆语（阿塞拜疆）`eu-ES`：巴斯克语（西班牙）`bn-BD`：孟加拉语（孟加拉）`bn-IN`：孟加拉语（印度）`bs-BA`：波斯尼亚语（波斯尼亚和黑塞哥维那）`bg-BG`：保加利亚语（保加利亚）`my-MM`：缅甸语（缅甸）`ca-ES`：加泰罗尼亚语（西班牙）`hr-HR`：克罗地亚语（克罗地亚）`cs-CZ`：捷克语（捷克共和国）`da-DK`：丹麦语（丹麦）`nl-BE`：荷兰语（比利时）`nl-NL`：荷兰语（荷兰）`en-AU`：英语（澳大利亚）`en-CA`：英语（加拿大）`en-GH`：英语（加纳）`en-HK`：英语（中国香港）`en-IN`：英语（印度）`en-IE`：英语（爱尔兰）`en-KE`：英语（肯尼亚）`en-NZ`：英语（新西兰）`en-NG`：英语（尼日利亚）`en-PK`：英语（巴基斯坦）`en-PH`：英语（菲律宾）`en-SG`：英语（新加坡）`en-ZA`：英语（南非）`en-TZ`：英语（坦桑尼亚）`en-GB`：英语（英国）`en-US`：英语（美国）`et-EE`：爱沙尼亚语（爱沙尼亚）`fil-PH`：菲律宾语（菲律宾）`fi-FI`：芬兰语（芬兰）`fr-BE`：法语（比利时）`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fr-CH`：法语（瑞士）`gl-ES`：加利西亚语（西班牙）`ka-GE`：格鲁吉亚语（格鲁吉亚）`el-GR`：希腊语（希腊）`gu-IN`：古吉拉特语（印度）`iw-IL`：希伯来语（以色列）`hi-IN`：印地语（印度）`hu-HU`：匈牙利语（匈牙利）`is-IS`：冰岛语（冰岛）`id-ID`：印度尼西亚语（印度尼西亚）`it-IT`：意大利语（意大利）`it-CH`：意大利语（瑞士）`ja-JP`：日语（日本）`jv-ID`：爪哇语（印度尼西亚）`kn-IN`：卡纳达语（印度）`kk-KZ`：哈萨克语（哈萨克斯坦）`km-KH`：高棉语（柬埔寨）`rw-RW`：卢旺达语（卢旺达）`ko-KR`：韩语（韩国）`lo-LA`：老挝语（老挝）`lv-LV`：拉脱维亚语（拉脱维亚）`lt-LT`：立陶宛语（立陶宛）`mk-MK`：马其顿语（北马其顿）`ms-MY`：马来语（马来西亚）`ml-IN`：马拉雅拉姆语（印度）`mr-IN`：马拉地语（印度）`mn-MN`：蒙古语（蒙古）`ne-NP`：尼泊尔语（尼泊尔）`no-NO`：博克马尔挪威语（挪威）`fa-IR`：波斯语（伊朗）`pl-PL`：波兰语（波兰）`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`ro-RO`：罗马尼亚语（罗马尼亚）`ru-RU`：俄语（俄罗斯）`sr-RS`：塞尔维亚语（塞尔维亚）`si-LK`：僧伽罗语（斯里兰卡）`sk-SK`：斯洛伐克语（斯洛伐克）`sl-SI`：斯洛文尼亚语（斯洛文尼亚）`st-ZA`：南索托语（南非）`es-AR`：西班牙语（阿根廷）`es-BO`：西班牙语（玻利维亚）`es-CL`：西班牙语（智利）`es-CO`：西班牙语（哥伦比亚）`es-CR`：西班牙语（哥斯达黎加）`es-DO`：西班牙语（多米尼加共和国）`es-EC`：西班牙语（厄瓜多尔）`es-SV`：西班牙语（萨尔瓦多）`es-GT`：西班牙语（危地马拉）`es-HN`：西班牙语（洪都拉斯）`es-MX`：西班牙语（墨西哥）`es-NI`：西班牙语（尼加拉瓜）`es-PA`：西班牙语（巴拿马）`es-PY`：西班牙语（巴拉圭）`es-PE`：西班牙语（秘鲁）`es-PR`：西班牙语（波多黎各）`es-ES`：西班牙语（西班牙）`es-US`：西班牙语（美国）`es-UY`：西班牙语（乌拉圭）`es-VE`：西班牙语（委内瑞拉）`su-ID`：巽他语（印度尼西亚）`sw-KE`：斯瓦希里语（肯尼亚）`sw-TZ`：斯瓦希里语（坦桑尼亚）`sv-SE`：瑞典语（瑞典）`ta-IN`：泰米尔语（印度）`ta-MY`：泰米尔语（马来西亚）`ta-SG`：泰米尔语（新加坡）`ta-LK`：泰米尔语（斯里兰卡）`te-IN`：泰卢固语（印度）`th-TH`：泰语（泰国）`ts-ZA`：聪加语（南非）`tr-TR`：土耳其语（土耳其）`uk-UA`：乌克兰语（乌克兰）`ur-IN`：乌尔都语（印度）`ur-PK`：乌尔都语（巴基斯坦）`uz-UZ`：乌兹别克语（乌兹别克斯坦）`ve-ZA`：文达语（南非）`vi-VN`：越南语（越南）`xh-ZA`：科萨语（南非）`zu-ZA`：祖鲁语（南非） */
+  /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
   VideoSrcLanguage: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
   /** 智能字幕模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 智能字幕文件格式:- ASR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕 - 不填或填空：不生成字幕文件- 纯字幕翻译处理类型下： - original：与源文件一致 - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕- OCR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕**注意**：- ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；- 纯字幕翻译和OCR识别翻译方式下，不允许传空或不传 */
+  /** 智能字幕文件格式:ASR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕不填或填空：不生成字幕文件纯字幕翻译处理类型下：original：与源文件一致vtt: WebVTT 格式字幕srt: SRT 格式字幕OCR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕注意：ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；纯字幕翻译方式下，不允许传空或不传OCR类型的任务，在开启压制时，允许不传或传空 */
   SubtitleFormat?: string;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
-  /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
   TranslateSwitch?: string;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
   TranslateDstLanguage?: string;
-  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2：OCR识别字幕**注意**：不传的情况下默认类型为 ASR识别字幕 */
+  /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下默认类型为 ASR识别字幕 */
   ProcessType?: number;
   /** 字幕OCR提取框选区域配置 */
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
+  /** 压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写。开启多个翻译语言时，不允许填写。 */
+  SubtitleEmbedId?: number;
 }
 
 declare interface CreateSmartSubtitleTemplateResponse {
@@ -7734,6 +7886,22 @@ declare interface CreateStreamLinkSecurityGroupRequest {
 declare interface CreateStreamLinkSecurityGroupResponse {
   /** 安全组 ID。 */
   Id?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSubtitleEmbedTemplateRequest {
+  /** 字幕压制模板名称长度限制：64 个字符。 */
+  Name: string;
+  /** 字幕压制模板描述信息长度限制：256 个字符。 */
+  Comment?: string;
+  /** 字幕压制相关配置 */
+  SubtitleEmbedConfig?: SubtitleEmbedConfig;
+}
+
+declare interface CreateSubtitleEmbedTemplateResponse {
+  /** 字幕压制模板唯一标识。 */
+  Definition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8078,6 +8246,16 @@ declare interface DeleteStreamLinkSecurityGroupRequest {
 }
 
 declare interface DeleteStreamLinkSecurityGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSubtitleEmbedTemplateRequest {
+  /** 字幕压制模板唯一标识。 */
+  Definition: number;
+}
+
+declare interface DeleteSubtitleEmbedTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8924,6 +9102,28 @@ declare interface DescribeStreamLinkSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSubtitleEmbedTemplatesRequest {
+  /** 智能字幕模板唯一标识过滤条件，数组长度限制：100。 */
+  Definitions?: number[];
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：10，最大值：100。 */
+  Limit?: number;
+  /** 模板类型过滤条件，不填则返回所有，可选值：Preset：系统预置模板；Custom：用户自定义模板。 */
+  Type?: string;
+  /** 字幕压制模板标识过滤条件，长度限制：64 个字符。 */
+  Name?: string;
+}
+
+declare interface DescribeSubtitleEmbedTemplatesResponse {
+  /** 符合过滤条件的记录总数。 */
+  TotalCount?: number;
+  /** 字幕压制模板详情列表。 */
+  SubtitleEmbedTemplateSet?: SubtitleEmbedTemplateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskDetailRequest {
   /** 视频处理任务的任务 ID。 */
   TaskId: string;
@@ -9603,7 +9803,7 @@ declare interface ModifySmartEraseTemplateRequest {
   Name?: string;
   /** 智能擦除模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 擦除类型- subtitle 去字幕- watermark 去水印- privacy 隐私保护 */
+  /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
   EraseType?: string;
   /** 字幕擦除配置，EraseType取subtitle或者EraseType不填，对应模板原EraseType为subtitle时生效。 */
   EraseSubtitleConfig?: SmartEraseSubtitleConfig;
@@ -9621,26 +9821,28 @@ declare interface ModifySmartEraseTemplateResponse {
 declare interface ModifySmartSubtitleTemplateRequest {
   /** 智能字幕模板唯一标识 */
   Definition: number;
-  /** 字幕翻译开关`ON`: 开启翻译`OFF`: 关闭翻译**注意**：纯字幕翻译方式下，不传默认是打开的，不允许传空或`OFF`； */
+  /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
   TranslateSwitch?: string;
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name?: string;
   /** 智能字幕模板描述信息长度限制：256 个字符。 */
   Comment?: string;
-  /** 智能字幕视频源语言OCR识别仅支持以下语言：`zh_en`：中英`multi`：其他ASR识别和纯字幕翻译当前支持以下语言：`auto`：自动识别（仅在纯字幕翻译中支持）`zh`：简体中文`en`：英语`ja`：日语`ko`：韩语`zh-PY`：中英粤`zh_medical`：中文医疗`vi`：越南语`ms`：马来语`id`：印度尼西亚语`fil`：菲律宾语`th`：泰语`pt`：葡萄牙语`tr`：土耳其语`ar`：阿拉伯语`es`：西班牙语`hi`：印地语`fr`：法语`de`：德语`it`：意大利语`zh_dialect`：中文方言`zh_en`：中英`yue`：粤语`ru`：俄语`prime_zh`：中英方言`af-ZA`：南非荷兰语（南非）`sq-AL`：阿尔巴尼亚语（阿尔巴尼亚）`am-ET`：阿姆哈拉语（埃塞俄比亚）`ar-DZ`：阿拉伯语（阿尔及利亚）`ar-BH`：阿拉伯语（巴林）`ar-EG`：阿拉伯语（埃及）`ar-IQ`：阿拉伯语（伊拉克）`ar-IL`：阿拉伯语（以色列）`ar-JO`：阿拉伯语（约旦）`ar-KW`：阿拉伯语（科威特）`ar-LB`：阿拉伯语（黎巴嫩）`ar-MR`：阿拉伯语（毛里塔尼亚）`ar-MA`：阿拉伯语（摩洛哥）`ar-OM`：阿拉伯语（阿曼）`ar-QA`：阿拉伯语（卡塔尔）`ar-SA`：阿拉伯语（沙特阿拉伯）`ar-PS`：阿拉伯语（巴勒斯坦国）`ar-SY`：阿拉伯语（叙利亚）`ar-TN`：阿拉伯语（突尼斯）`ar-AE`：阿拉伯语（阿拉伯联合酋长国）`ar-YE`：阿拉伯语（也门）`hy-AM`：亚美尼亚语（亚美尼亚）`az-AZ`：阿塞拜疆语（阿塞拜疆）`eu-ES`：巴斯克语（西班牙）`bn-BD`：孟加拉语（孟加拉）`bn-IN`：孟加拉语（印度）`bs-BA`：波斯尼亚语（波斯尼亚和黑塞哥维那）`bg-BG`：保加利亚语（保加利亚）`my-MM`：缅甸语（缅甸）`ca-ES`：加泰罗尼亚语（西班牙）`hr-HR`：克罗地亚语（克罗地亚）`cs-CZ`：捷克语（捷克共和国）`da-DK`：丹麦语（丹麦）`nl-BE`：荷兰语（比利时）`nl-NL`：荷兰语（荷兰）`en-AU`：英语（澳大利亚）`en-CA`：英语（加拿大）`en-GH`：英语（加纳）`en-HK`：英语（中国香港）`en-IN`：英语（印度）`en-IE`：英语（爱尔兰）`en-KE`：英语（肯尼亚）`en-NZ`：英语（新西兰）`en-NG`：英语（尼日利亚）`en-PK`：英语（巴基斯坦）`en-PH`：英语（菲律宾）`en-SG`：英语（新加坡）`en-ZA`：英语（南非）`en-TZ`：英语（坦桑尼亚）`en-GB`：英语（英国）`en-US`：英语（美国）`et-EE`：爱沙尼亚语（爱沙尼亚）`fil-PH`：菲律宾语（菲律宾）`fi-FI`：芬兰语（芬兰）`fr-BE`：法语（比利时）`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fr-CH`：法语（瑞士）`gl-ES`：加利西亚语（西班牙）`ka-GE`：格鲁吉亚语（格鲁吉亚）`el-GR`：希腊语（希腊）`gu-IN`：古吉拉特语（印度）`iw-IL`：希伯来语（以色列）`hi-IN`：印地语（印度）`hu-HU`：匈牙利语（匈牙利）`is-IS`：冰岛语（冰岛）`id-ID`：印度尼西亚语（印度尼西亚）`it-IT`：意大利语（意大利）`it-CH`：意大利语（瑞士）`ja-JP`：日语（日本）`jv-ID`：爪哇语（印度尼西亚）`kn-IN`：卡纳达语（印度）`kk-KZ`：哈萨克语（哈萨克斯坦）`km-KH`：高棉语（柬埔寨）`rw-RW`：卢旺达语（卢旺达）`ko-KR`：韩语（韩国）`lo-LA`：老挝语（老挝）`lv-LV`：拉脱维亚语（拉脱维亚）`lt-LT`：立陶宛语（立陶宛）`mk-MK`：马其顿语（北马其顿）`ms-MY`：马来语（马来西亚）`ml-IN`：马拉雅拉姆语（印度）`mr-IN`：马拉地语（印度）`mn-MN`：蒙古语（蒙古）`ne-NP`：尼泊尔语（尼泊尔）`no-NO`：博克马尔挪威语（挪威）`fa-IR`：波斯语（伊朗）`pl-PL`：波兰语（波兰）`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`ro-RO`：罗马尼亚语（罗马尼亚）`ru-RU`：俄语（俄罗斯）`sr-RS`：塞尔维亚语（塞尔维亚）`si-LK`：僧伽罗语（斯里兰卡）`sk-SK`：斯洛伐克语（斯洛伐克）`sl-SI`：斯洛文尼亚语（斯洛文尼亚）`st-ZA`：南索托语（南非）`es-AR`：西班牙语（阿根廷）`es-BO`：西班牙语（玻利维亚）`es-CL`：西班牙语（智利）`es-CO`：西班牙语（哥伦比亚）`es-CR`：西班牙语（哥斯达黎加）`es-DO`：西班牙语（多米尼加共和国）`es-EC`：西班牙语（厄瓜多尔）`es-SV`：西班牙语（萨尔瓦多）`es-GT`：西班牙语（危地马拉）`es-HN`：西班牙语（洪都拉斯）`es-MX`：西班牙语（墨西哥）`es-NI`：西班牙语（尼加拉瓜）`es-PA`：西班牙语（巴拿马）`es-PY`：西班牙语（巴拉圭）`es-PE`：西班牙语（秘鲁）`es-PR`：西班牙语（波多黎各）`es-ES`：西班牙语（西班牙）`es-US`：西班牙语（美国）`es-UY`：西班牙语（乌拉圭）`es-VE`：西班牙语（委内瑞拉）`su-ID`：巽他语（印度尼西亚）`sw-KE`：斯瓦希里语（肯尼亚）`sw-TZ`：斯瓦希里语（坦桑尼亚）`sv-SE`：瑞典语（瑞典）`ta-IN`：泰米尔语（印度）`ta-MY`：泰米尔语（马来西亚）`ta-SG`：泰米尔语（新加坡）`ta-LK`：泰米尔语（斯里兰卡）`te-IN`：泰卢固语（印度）`th-TH`：泰语（泰国）`ts-ZA`：聪加语（南非）`tr-TR`：土耳其语（土耳其）`uk-UA`：乌克兰语（乌克兰）`ur-IN`：乌尔都语（印度）`ur-PK`：乌尔都语（巴基斯坦）`uz-UZ`：乌兹别克语（乌兹别克斯坦）`ve-ZA`：文达语（南非）`vi-VN`：越南语（越南）`xh-ZA`：科萨语（南非）`zu-ZA`：祖鲁语（南非） */
+  /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
   VideoSrcLanguage?: string;
-  /** 智能字幕文件格式:- ASR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕 - 不填或填空：不生成字幕文件- 纯字幕翻译处理类型下： - original：与源文件一致 - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕- OCR识别翻译处理类型下： - vtt: WebVTT 格式字幕 - srt: SRT 格式字幕**注意**：- ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；- 纯字幕翻译和OCR识别翻译方式下，不允许传空或不传 */
+  /** 智能字幕文件格式:ASR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕不填或填空：不生成字幕文件纯字幕翻译处理类型下：original：与源文件一致vtt: WebVTT 格式字幕srt: SRT 格式字幕OCR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕注意：ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；纯字幕翻译方式下，不允许传空或不传OCR类型的任务，在开启压制时，允许不传或传空 */
   SubtitleFormat?: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType?: number;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：`ab`：阿布哈兹语`ace`：亚齐语`ach`：阿乔利语`af`：南非荷兰语`ak`：契维语（阿坎语）`am`：Amharic`ar`：阿拉伯语`as`：阿萨姆语`ay`：艾马拉语`az`：阿塞拜疆语`ba`：巴什基尔语`ban`：巴厘语`bbc`：巴塔克托巴语`bem`：Bemba`bew`：Betawi`bg`：保加利亚语`bho`：博杰普尔语`bik`：Bikol`bm`：班巴拉语`bn`：孟加拉语`br`：布列塔尼语`bs`：波斯尼亚语`btx`：巴塔克卡罗语`bts`：巴塔克西马隆贡语`bua`：布里亚特语`ca`：加泰罗尼亚语`ceb`：宿务语`cgg`：Kiga`chm`：草原马里语`ckb`：库尔德语（索拉尼语）`cnh`：哈卡钦语`co`：科西嘉语`crh`：克里米亚鞑靼语`crs`：塞舌尔克里奥尔语`cs`：捷克语`cv`：楚瓦什语`cy`：威尔士语`da`：丹麦语`de`：德语`din`：Dinka`doi`：多格来语`dov`：敦贝语`dv`：第维埃语`dz`：宗卡语`ee`：Ewe`el`：希腊语`en`：英语`eo`：世界语`es`：西班牙语`et`：爱沙尼亚语`eu`：巴斯克语`fa`：波斯语`ff`：富拉语`fi`：芬兰语`fil`：菲律宾语（塔加拉语）`fj`：斐济语`fr`：法语`fr-CA`：法语（加拿大）`fr-FR`：法语（法国）`fy`：弗里斯兰语`ga`：爱尔兰语`gaa`：加 (Ga) 语`gd`：苏格兰盖尔语`gl`：加利西亚语`gn`：瓜拉尼语`gom`：贡根语`gu`：古吉拉特语`gv`：马恩岛语`ha`：Hausa`haw`：夏威夷语`he`：希伯来语`hi`：印地语`hil`：希利盖农语`hmn`：苗语`hr`：克罗地亚语`hrx`：洪斯吕克语`ht`：海地克里奥尔语`hu`：匈牙利语`hy`：亚美尼亚语`id`：印度尼西亚语`ig`：Igbo`ilo`：伊洛果语`is`：冰岛语`it`：意大利语`iw`：希伯来语`ja`：日语`jv`：爪哇语`ka`：格鲁吉亚语`kk`：哈萨克语`km`：高棉语`kn`：卡纳达语`ko`：韩语`kri`：Krio`ku`：库尔德语（库尔曼吉语）`ktu`：吉土巴语`ky`：吉尔吉斯语`la`：拉丁语`lb`：卢森堡语`lg`：干达语（卢干达语）`li`：林堡语`lij`：利古里亚语`lmo`：伦巴第语`ln`：林加拉语`lo`：老挝语`lt`：立陶宛语`ltg`：拉特加莱语`luo`：Luo`lus`：米佐语`lv`：拉脱维亚语`mai`：迈蒂利语`mak`：马卡萨`mg`：马尔加什语`mi`：毛利语`min`：米南语`mk`：马其顿语`ml`：马拉雅拉姆语`mn`：蒙古语`mr`：马拉地语`ms`：马来语`mt`：马耳他语`my`：缅甸语`ne`：尼泊尔语`new`：尼瓦尔语`nl`：荷兰语`no`：挪威语`nr`：恩德贝莱语（南部）`nso`：北索托语（塞佩蒂语）`nus`：努尔语`ny`：齐切瓦语（尼扬贾语）`oc`：奥克斯坦语`om`：Oromo`or`：奥里亚语`pa`：旁遮普语`pag`：邦阿西楠语`pam`：邦板牙语`pap`：Papiamento`pl`：波兰语`ps`：Pashto`pt`：葡萄牙语`pt-BR`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`qu`：克丘亚语`ro`：罗马尼亚语`rom`：罗姆语`rn`：Rundi`ru`：俄语`rw`：卢旺达语`sa`：梵语`scn`：西西里语`sd`：信德语`sg`：Sango`shn`：掸语`si`：僧伽罗语`sk`：斯洛伐克语`sl`：斯洛文尼亚语`sm`：萨摩亚语`sn`：修纳语`so`：索马里语`sq`：阿尔巴尼亚语`sr`：塞尔维亚语`ss`：斯瓦特语`st`：塞索托语`su`：巽他语`sv`：瑞典语`sw`：斯瓦希里语`szl`：西里西亚语`ta`：泰米尔语`te`：泰卢固语`tet`：德顿语`tg`：塔吉克语`th`：泰语`ti`：提格里尼亚语`tk`：土库曼语`tn`：茨瓦纳语`tr`：土耳其语`ts`：聪加语`tt`：鞑靼语`ug`：维吾尔语`uk`：乌克兰语`ur`：乌尔都语`uz`：乌兹别克语`vi`：越南语`xh`：科萨语`yi`：意第绪语`yo`：约鲁巴语`yua`：尤卡坦玛雅语`yue`：粤语`zh`：简体中文`zh-TW`：中文（繁体）`zu`：祖鲁语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
   TranslateDstLanguage?: string;
-  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2：OCR识别字幕**注意**：不传的情况下，默认是ASR方式 */
+  /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下，默认是ASR方式 */
   ProcessType?: number;
   /** 字幕OCR提取框选区域配置 */
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
+  /** 压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写。开启多个翻译语言时，不允许填写。 */
+  SubtitleEmbedId?: number;
 }
 
 declare interface ModifySmartSubtitleTemplateResponse {
@@ -9736,6 +9938,22 @@ declare interface ModifyStreamLinkSecurityGroupRequest {
 }
 
 declare interface ModifyStreamLinkSecurityGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySubtitleEmbedTemplateRequest {
+  /** 字幕压制模板唯一标识 */
+  Definition: number;
+  /** 字幕压制名称长度限制：64 个字符。 */
+  Name?: string;
+  /** 字幕压制模板描述信息长度限制：256 个字符。 */
+  Comment?: string;
+  /** 字幕压制相关配置 */
+  SubtitleEmbedConfig?: SubtitleEmbedConfig;
+}
+
+declare interface ModifySubtitleEmbedTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9907,7 +10125,7 @@ declare interface ProcessImageResponse {
 }
 
 declare interface ProcessLiveStreamRequest {
-  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc: //trtc.rtc.qq.com/mps/&lt;roomid&gt;?sdkappid=&lt;sdkappid&gt;&amp;userid=&lt;userid&gt;&amp;usersig=&lt;usersig&gt;&lt;roomid&gt; 为trtc的房间号id, 为数字&lt;sdkappid&gt; 为trtc的sdk app id&lt;userid&gt; 为服务进入房间的用户id,可以区分谁是机器人&lt;usersig&gt; 为trtc 用户的签名webrtc 支持LEB的直播流，地址获取请参考srt支持地址请参考 */
+  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc://trtc.rtc.qq.com/mps/&lt;roomid&gt;?sdkappid=&lt;sdkappid&gt;&amp;userid=&lt;userid&gt;&amp;usersig=&lt;usersig&gt;&lt;roomid&gt; 为trtc的房间号id, 为数字&lt;sdkappid&gt; 为trtc的sdk app id&lt;userid&gt; 为服务进入房间的用户id,可以区分谁是机器人&lt;usersig&gt; 为trtc 用户的签名webrtc 支持LEB的直播流，地址获取请参考srt支持地址请参考 */
   Url: string;
   /** 任务的事件通知信息，用于指定直播流处理的结果。 */
   TaskNotifyConfig: LiveStreamTaskNotifyConfig;
@@ -10205,6 +10423,8 @@ declare interface Mps {
   CreateStreamLinkOutputInfo(data: CreateStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkOutputInfoResponse>;
   /** 创建安全组 {@link CreateStreamLinkSecurityGroupRequest} {@link CreateStreamLinkSecurityGroupResponse} */
   CreateStreamLinkSecurityGroup(data: CreateStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkSecurityGroupResponse>;
+  /** 创建字幕压制模板 {@link CreateSubtitleEmbedTemplateRequest} {@link CreateSubtitleEmbedTemplateResponse} */
+  CreateSubtitleEmbedTemplate(data: CreateSubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubtitleEmbedTemplateResponse>;
   /** 创建转码模板 {@link CreateTranscodeTemplateRequest} {@link CreateTranscodeTemplateResponse} */
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
   /** 创建视频检索的入库任务 {@link CreateVideoDatabaseEntryTaskRequest} {@link CreateVideoDatabaseEntryTaskResponse} */
@@ -10259,6 +10479,8 @@ declare interface Mps {
   DeleteStreamLinkOutput(data: DeleteStreamLinkOutputRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkOutputResponse>;
   /** 删除安全组 {@link DeleteStreamLinkSecurityGroupRequest} {@link DeleteStreamLinkSecurityGroupResponse} */
   DeleteStreamLinkSecurityGroup(data: DeleteStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkSecurityGroupResponse>;
+  /** 删除字幕压制模板 {@link DeleteSubtitleEmbedTemplateRequest} {@link DeleteSubtitleEmbedTemplateResponse} */
+  DeleteSubtitleEmbedTemplate(data: DeleteSubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubtitleEmbedTemplateResponse>;
   /** 删除转码模板 {@link DeleteTranscodeTemplateRequest} {@link DeleteTranscodeTemplateResponse} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
   /** 删除水印模板 {@link DeleteWatermarkTemplateRequest} {@link DeleteWatermarkTemplateResponse} */
@@ -10341,6 +10563,8 @@ declare interface Mps {
   DescribeStreamLinkRegions(data?: DescribeStreamLinkRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkRegionsResponse>;
   /** 批量查询安全组信息 {@link DescribeStreamLinkSecurityGroupsRequest} {@link DescribeStreamLinkSecurityGroupsResponse} */
   DescribeStreamLinkSecurityGroups(data?: DescribeStreamLinkSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkSecurityGroupsResponse>;
+  /** 获取字幕压制模板列表 {@link DescribeSubtitleEmbedTemplatesRequest} {@link DescribeSubtitleEmbedTemplatesResponse} */
+  DescribeSubtitleEmbedTemplates(data?: DescribeSubtitleEmbedTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubtitleEmbedTemplatesResponse>;
   /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 获取任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
@@ -10421,6 +10645,8 @@ declare interface Mps {
   ModifyStreamLinkOutputInfo(data: ModifyStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkOutputInfoResponse>;
   /** 更新安全组 {@link ModifyStreamLinkSecurityGroupRequest} {@link ModifyStreamLinkSecurityGroupResponse} */
   ModifyStreamLinkSecurityGroup(data: ModifyStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkSecurityGroupResponse>;
+  /** 修改字幕压制模板 {@link ModifySubtitleEmbedTemplateRequest} {@link ModifySubtitleEmbedTemplateResponse} */
+  ModifySubtitleEmbedTemplate(data: ModifySubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubtitleEmbedTemplateResponse>;
   /** 修改转码模板 {@link ModifyTranscodeTemplateRequest} {@link ModifyTranscodeTemplateResponse} */
   ModifyTranscodeTemplate(data: ModifyTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTranscodeTemplateResponse>;
   /** 修改水印模板 {@link ModifyWatermarkTemplateRequest} {@link ModifyWatermarkTemplateResponse} */

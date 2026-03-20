@@ -48,6 +48,22 @@ declare interface ComputeDetail {
   Memory?: string;
 }
 
+/** 资源相关信息 */
+declare interface ComputeInfo {
+  /** 资源类型及数量 */
+  ComputeResources?: ComputeResource[];
+  /** 副本数 */
+  Replicas?: number;
+}
+
+/** 推理服务的算力资源 */
+declare interface ComputeResource {
+  /** 算力套餐的类型 */
+  BundleType: string;
+  /** 节点数量 */
+  Count: number;
+}
+
 /** 容器信息 */
 declare interface ContainerInfo {
   /** 镜像相关信息 */
@@ -206,6 +222,26 @@ declare interface LoginSetting {
   Url?: string;
 }
 
+/** 模型详情 */
+declare interface ModelDetail {
+  /** 模型名称 */
+  ModelName?: string;
+  /** 模型ID */
+  ModelId?: string;
+  /** 应用描述 */
+  Description?: string;
+  /** 官方社区链接 */
+  CommunityUrl?: string;
+  /** 最佳实践链接 */
+  GuideUrl?: string;
+  /** 模型状态 */
+  ModelState?: string;
+  /** 应用对应的标签，如机器学习 */
+  Tags?: string[];
+  /** 配置环境 */
+  ConfigEnvironment?: string;
+}
+
 /** musk prompt详情 */
 declare interface MuskPromptInfo {
   /** workflow id */
@@ -226,6 +262,18 @@ declare interface MuskPromptInfo {
   Cost?: number;
   /** 任务执行失败错误信息 */
   ErrorMessage?: string;
+}
+
+/** 推理集群的网络设置 */
+declare interface NetworkSetting {
+  /** 公网访问 */
+  PublicEndpointEnable?: boolean;
+  /** 内网访问 */
+  VpcEndpointEnable?: boolean;
+  /** vpc内网ID */
+  VpcId?: string;
+  /** 子网ID */
+  SubnetId?: string;
 }
 
 /** HAI 实例的网络配置和消耗情况 */
@@ -296,6 +344,14 @@ declare interface ServiceDetail {
   HyperParam?: HyperParam;
 }
 
+/** 服务元数据信息，如服务名 */
+declare interface ServiceMetaData {
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 收费类型 */
+  ServiceChargeType?: string;
+}
+
 /** 推理集群费用数据结构体 */
 declare interface ServicePriceDetail {
   /** 推理集群价格信息 */
@@ -320,6 +376,20 @@ declare interface SystemDisk {
   DiskName?: string;
 }
 
+/** 模板详情 */
+declare interface TemplateDetail {
+  /** 模板id */
+  TemplateId?: string;
+  /** 部署方式 */
+  DeployMode?: string;
+  /** 推理引擎 */
+  EngineType?: string;
+  /** 算力详情 */
+  ComputeSet?: ComputeDetail[];
+  /** 当前部署模板所支持的增强功能 */
+  SupportFunc?: string[];
+}
+
 declare interface CreateApplicationRequest {
   /** 需要制作自定义应用的HAI实例ID */
   InstanceId: string;
@@ -336,6 +406,28 @@ declare interface CreateApplicationResponse {
   RequestId?: string;
 }
 
+declare interface CreateInferServiceByTemplateRequest {
+  /** 模版ID */
+  TemplateId: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 副本数 */
+  Replicas?: number;
+  /** 付费方式，POSTPAID_BY_HOUR按量后付费 */
+  ServiceChargeType?: string;
+  /** 描述了服务的超参数配置 */
+  HyperParam?: HyperParam;
+  /** 网络设置 */
+  NetworkSetting?: NetworkSetting;
+}
+
+declare interface CreateInferServiceByTemplateResponse {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMuskPromptRequest {
   /** workgroup id */
   WorkgroupId: string;
@@ -348,6 +440,26 @@ declare interface CreateMuskPromptRequest {
 declare interface CreateMuskPromptResponse {
   /** prompt id */
   PromptId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeployInferServiceRequest {
+  /** 服务元数据信息，如服务名 */
+  ServiceMetaData?: ServiceMetaData;
+  /** 资源相关信息 */
+  ComputeInfo?: ComputeInfo;
+  /** 服务部署信息 */
+  DeploymentConfigs?: DeploymentConfig[];
+  /** 服务超参数配置 */
+  HyperParam?: HyperParam;
+  /** 网络设置 */
+  NetworkSetting?: NetworkSetting;
+}
+
+declare interface DeployInferServiceResponse {
+  /** 服务ID */
+  ServiceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -372,6 +484,20 @@ declare interface DescribeApplicationsResponse {
   TotalCount?: number;
   /** 分页返回的应用列表 */
   ApplicationSet?: ApplicationInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeployTemplatesRequest {
+  /** 模型ID */
+  ModelId: string;
+}
+
+declare interface DescribeDeployTemplatesResponse {
+  /** 模板列表 */
+  TemplateSet?: TemplateDetail[];
+  /** 支持的推理引擎 */
+  EngineTypes?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -406,6 +532,26 @@ declare interface DescribeInstancesResponse {
   TotalCount?: number;
   /** 分页实例详情 */
   InstanceSet?: Instance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelsRequest {
+  /** 模型id */
+  ModelIds?: string[];
+  /** 过滤器。Name的可选值有scene-id */
+  Filters?: Filter[];
+  /** 偏移量，不得小于0，默认为0 */
+  Offset?: number;
+  /** 返回量，不得大于100，默认为20 */
+  Limit?: number;
+}
+
+declare interface DescribeModelsResponse {
+  /** 模型总数 */
+  TotalCount?: number;
+  /** 分页返回的模型列表 */
+  ModelSet?: ModelDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -635,14 +781,22 @@ declare interface Hai {
   (): Versions;
   /** 创建自定义应用 {@link CreateApplicationRequest} {@link CreateApplicationResponse} */
   CreateApplication(data: CreateApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApplicationResponse>;
+  /** 根据模板创建服务 {@link CreateInferServiceByTemplateRequest} {@link CreateInferServiceByTemplateResponse} */
+  CreateInferServiceByTemplate(data: CreateInferServiceByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferServiceByTemplateResponse>;
   /** 创建Prompt请求任务 {@link CreateMuskPromptRequest} {@link CreateMuskPromptResponse} */
   CreateMuskPrompt(data: CreateMuskPromptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMuskPromptResponse>;
+  /** 部署推理服务 {@link DeployInferServiceRequest} {@link DeployInferServiceResponse} */
+  DeployInferService(data?: DeployInferServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeployInferServiceResponse>;
   /** 查询应用 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
   DescribeApplications(data?: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
+  /** 查询模型支持的部署模板 {@link DescribeDeployTemplatesRequest} {@link DescribeDeployTemplatesResponse} */
+  DescribeDeployTemplates(data: DescribeDeployTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployTemplatesResponse>;
   /** 查询实例的网络配置及消耗情况 {@link DescribeInstanceNetworkStatusRequest} {@link DescribeInstanceNetworkStatusResponse} */
   DescribeInstanceNetworkStatus(data: DescribeInstanceNetworkStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceNetworkStatusResponse>;
   /** 查询实例 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 查询模型 {@link DescribeModelsRequest} {@link DescribeModelsResponse} */
+  DescribeModels(data?: DescribeModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelsResponse>;
   /** 获取Prompt任务列表 {@link DescribeMuskPromptsRequest} {@link DescribeMuskPromptsResponse} */
   DescribeMuskPrompts(data: DescribeMuskPromptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMuskPromptsResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */

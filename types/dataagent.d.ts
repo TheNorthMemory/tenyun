@@ -80,6 +80,8 @@ declare interface FileInfo {
   IsShowCase?: number;
   /** 文档摘要 */
   DocumentSummary?: string;
+  /** 网页地址 */
+  WebUrl?: string;
 }
 
 /** 知识库信息 */
