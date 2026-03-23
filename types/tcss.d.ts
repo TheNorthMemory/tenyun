@@ -6215,7 +6215,7 @@ declare interface DescribeAssetImageListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。ImageName- String - 是否必填：否 - 镜像名称筛选，ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErrImageID- String - 是否必填：否 - 镜像ID筛选，SecurityRisk- String - 是否必填：否 - 安全风险，VulCnt 、VirusCnt、RiskCnt、IsTrustImage */
+  /** 过滤条件。ImageName- String - 是否必填：否 - 镜像名称筛选，ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErrImageID- String - 是否必填：否 - 镜像ID筛选，SecurityRisk- String - 是否必填：否 - 安全风险，VirusCnt、RiskCnt、IsTrustImage、CriticalLevelVul、HighLevelVul、MediumLevelVul、LowLevelVul */
   Filters?: AssetFilters[];
   /** 排序字段 */
   By?: string;

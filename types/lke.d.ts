@@ -2991,7 +2991,7 @@ declare interface DeleteDocCateResponse {
 declare interface DeleteDocRequest {
   /** 文档业务ID列表 */
   DocBizIds: string[];
-  /** 应用ID */
+  /** 应用ID。删除知识库文档时，该参数填入知识库ID。 */
   BotBizId: string;
 }
 
@@ -4239,7 +4239,7 @@ declare interface ListDocCateResponse {
 }
 
 declare interface ListDocRequest {
-  /** 应用ID, 获取方式参看 [BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
+  /** 应用ID, 获取方式参看 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)。查询知识库下文档时，该参数填入知识库ID。 */
   BotBizId: string;
   /** 页码(必须大于0) */
   PageNumber: number;
@@ -4745,7 +4745,7 @@ declare interface ModifyDocCateResponse {
 }
 
 declare interface ModifyDocRequest {
-  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
+  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469)修改知识库文档时，该参数填入知识库ID。 */
   BotBizId: string;
   /** 文档ID */
   DocBizId: string;
@@ -4957,7 +4957,7 @@ declare interface RetryReleaseResponse {
 }
 
 declare interface SaveDocRequest {
-  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
+  /** 应用ID。应用ID 获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469)导入知识库文档时，该参数填入知识库 ID。 */
   BotBizId: string;
   /** 文件名，需要包含文件扩展名 */
   FileName: string;

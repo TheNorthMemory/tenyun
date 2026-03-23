@@ -80,6 +80,8 @@ declare interface AvailableType {
   Type?: string;
   /** 是否支持预付费。返回值中 true 为支持、false 为不支持 */
   Prepayment?: boolean;
+  /** 文件系统版本枚举值：v1.5： 通用系列v3.1： 通用系列（增强型）v4.0： Turbo系列 */
+  Version?: string;
 }
 
 /** 版本控制-可用区数组 */

@@ -5704,6 +5704,40 @@ declare interface ModifyWebCallbackResponse {
   RequestId?: string;
 }
 
+declare interface OpenClawServiceRequest {
+  /** 标签类型枚举值：OpenClaw： OpenClaw类型ClawPro： ClawPro类型 */
+  Tag: string;
+}
+
+declare interface OpenClawServiceResponse {
+  /** 日志集id日志集文档 */
+  LogsetId?: string;
+  /** 日志集名称 */
+  LogsetName?: string;
+  /** 日志主题id日志主题文档 */
+  TopicId?: string;
+  /** 日志主题名称 */
+  TopicName?: string;
+  /** 指标主题id指标主题文档 */
+  MetricTopicId?: string;
+  /** 指标主题名称 */
+  MetricTopicName?: string;
+  /** 机器组id机器组文档 */
+  MachineGroupId?: string;
+  /** 机器组名称 */
+  MachineGroupName?: string;
+  /** 采集配置id。应用日志采集概述文档 - LogListener 采集配置导入 */
+  AppLogConfigId?: string;
+  /** 采集配置名称。应用日志 */
+  AppLogConfigName?: string;
+  /** 采集配置id。会话日志采集概述文档 - LogListener 采集配置导入 */
+  SessionLogConfigId?: string;
+  /** 采集配置名称。会话日志 */
+  SessionLogConfigName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenKafkaConsumerRequest {
   /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
   FromTopicId: string;
@@ -6285,6 +6319,8 @@ declare interface Cls {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改告警渠道回调配置 {@link ModifyWebCallbackRequest} {@link ModifyWebCallbackResponse} */
   ModifyWebCallback(data: ModifyWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebCallbackResponse>;
+  /** 创建OpenClaw服务 {@link OpenClawServiceRequest} {@link OpenClawServiceResponse} */
+  OpenClawService(data: OpenClawServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClawServiceResponse>;
   /** 打开Kafka协议消费 {@link OpenKafkaConsumerRequest} {@link OpenKafkaConsumerResponse} */
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
   /** Kafka数据订阅日志预览 {@link PreviewKafkaRechargeRequest} {@link PreviewKafkaRechargeResponse} */

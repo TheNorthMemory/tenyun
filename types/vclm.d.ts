@@ -6,8 +6,10 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface ExtraParam {
   /** 预签名的上传url，支持把视频直接传到客户指定的地址。 */
   UserDesignatedUrl?: string;
-  /** 回调地址需要您在创建任务时主动设置 CallbackUrl，请求方法为 POST，当视频生成结束时，我们将向此地址发送生成结果。数据格式如下：{ "JobId": "1397428070633955328", "Status": "DONE", "ErrorCode": "", "ErrorMessage": "", "ResultVideoUrl": "https://vcg.cos.tencentcos.cn/template_to_video/fa80b846-b933-4981-afad-8a39b46ef2ca.mp4"} */
+  /** 回调地址需要您在创建任务时主动设置 CallbackUrl，请求方法为 POST，当视频生成结束时，我们将向此地址发送生成结果。数据格式如下：{ &quot;JobId&quot;: &quot;1397428070633955328&quot;, &quot;Status&quot;: &quot;DONE&quot;, &quot;ErrorCode&quot;: &quot;&quot;, &quot;ErrorMessage&quot;: &quot;&quot;, &quot;ResultVideoUrl&quot;: &quot;https://vcg.cos.tencentcos.cn/template_to_video/fa80b846-b933-4981-afad-8a39b46ef2ca.mp4&quot;} */
   CallbackUrl?: string;
+  /** BGM音频文本。 */
+  BGMText?: string;
 }
 
 /** 人脸图片和待被融合的素材模板图的人脸位置信息。 */
@@ -445,15 +447,15 @@ declare interface SubmitPortraitSingJobResponse {
 }
 
 declare interface SubmitTemplateToVideoJobRequest {
-  /** 特效模板名称。请在 [视频特效模板列表](https://cloud.tencent.com/document/product/1616/119194) 中选择想要生成的特效对应的 template 名称。 */
+  /** 特效模板名称。请在 视频特效模板列表 中选择想要生成的特效对应的 template 名称。 */
   Template: string;
-  /** 参考图像，不同特效输入图片的数量详见： [视频特效模板-图片要求说明](https://cloud.tencent.com/document/product/1616/119194)- 支持传入图片Base64编码或图片URL（确保可访问）- 图片格式：支持png、jpg、jpeg、webp、bmp、tiff- 图片文件：大小不能超过10MB（base64后），图片分辨率不小于300*300px，不大于4096*4096，图片宽高比应在1:4 ~ 4:1之间 */
+  /** 参考图像，不同特效输入图片的数量详见： 视频特效模板-图片要求说明支持传入图片Base64编码或图片URL（确保可访问）图片格式：支持png、jpg、jpeg、webp、bmp、tiff图片文件：大小不能超过10MB（base64后），图片分辨率不小于300×300px，不大于4096×4096，图片宽高比应在1:4 ~ 4:1之间 */
   Images: Image[];
-  /** 为生成视频添加标识的开关，默认为1。传0 需前往 [控制台](https://console.cloud.tencent.com/vtc/setting) 申请开启显式标识自主完成后方可生效。1：添加标识；0：不添加标识；其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
+  /** 为生成视频添加标识的开关，默认为1。传0 需前往 控制台 申请开启显式标识自主完成后方可生效。1：添加标识；0：不添加标识；其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
   LogoAdd?: number;
-  /** 标识内容设置。默认在生成视频的右下角添加“ AI 生成”或“视频由 AI 生成”字样，如需替换为其他的标识图片，需前往 [控制台](https://console.cloud.tencent.com/vtc/setting) 申请开启显式标识自主完成。 */
+  /** 标识内容设置。默认在生成视频的右下角添加“ AI 生成”或“视频由 AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显式标识自主完成。 */
   LogoParam?: LogoParam;
-  /** 视频输出分辨率，默认值：360p 。不同特效支持的清晰度及消耗积分数详见：[视频特效模板-单次调用消耗积分数列](https://cloud.tencent.com/document/product/1616/119194 ) */
+  /** 视频输出分辨率，默认值：360p 。不同特效支持的清晰度及消耗积分数详见：视频特效模板-单次调用消耗积分数列 */
   Resolution?: string;
   /** 是否为生成的视频添加背景音乐。默认：false， 传 true 时系统将从预设 BGM 库中自动挑选合适的音乐并添加；不传或为 false 则不添加 BGM。 */
   BGM?: boolean;

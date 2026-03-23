@@ -448,6 +448,14 @@ declare interface DeviceAccount {
   IsK8SManageAccount?: boolean;
 }
 
+/** 资产数目 */
+declare interface DeviceCount {
+  /** 资产类型 */
+  Kind?: number;
+  /** 资产数目 */
+  Count?: number;
+}
+
 /** 网络域 */
 declare interface Domain {
   /** 自增id */
@@ -2062,6 +2070,38 @@ declare interface DescribeDeviceAccountsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceCountRequest {
+  /** 地域码 */
+  ApCode?: string;
+  /** 用户VPC实例ID */
+  VpcId?: string;
+  /** 堡垒机服务ID */
+  ResourceId?: string;
+  /** 资产类型,1-Linux, 2-Windows,3-MySQL,4-SqlServer 不传-全部 */
+  Kind?: number;
+  /** 是否绑定服务,1-已绑定, 2-未绑定， 不传-全部 */
+  BindResource?: number;
+}
+
+declare interface DescribeDeviceCountResponse {
+  /** 主机总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceCountSummaryRequest {
+}
+
+declare interface DescribeDeviceCountSummaryResponse {
+  /** 各种类型的资产总数 */
+  DeviceCountSet?: DeviceCount[];
+  /** 各种类型应用资产总数 */
+  AppAssetCountSet?: DeviceCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceGroupMembersRequest {
   /** true - 查询已在该资产组的资产，false - 查询未在该资产组的资产 */
   Bound: boolean;
@@ -3453,6 +3493,10 @@ declare interface Bh {
   DescribeDepartments(data?: DescribeDepartmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDepartmentsResponse>;
   /** 查询主机账号列表 {@link DescribeDeviceAccountsRequest} {@link DescribeDeviceAccountsResponse} */
   DescribeDeviceAccounts(data?: DescribeDeviceAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceAccountsResponse>;
+  /** 查询导入的主机数 {@link DescribeDeviceCountRequest} {@link DescribeDeviceCountResponse} */
+  DescribeDeviceCount(data?: DescribeDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCountResponse>;
+  /** 查询不同分类的资产数 {@link DescribeDeviceCountSummaryRequest} {@link DescribeDeviceCountSummaryResponse} */
+  DescribeDeviceCountSummary(data?: DescribeDeviceCountSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCountSummaryResponse>;
   /** 查询资产组成员列表 {@link DescribeDeviceGroupMembersRequest} {@link DescribeDeviceGroupMembersResponse} */
   DescribeDeviceGroupMembers(data: DescribeDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceGroupMembersResponse>;
   /** 查询资产组列表 {@link DescribeDeviceGroupsRequest} {@link DescribeDeviceGroupsResponse} */

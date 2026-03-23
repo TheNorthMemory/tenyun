@@ -4897,7 +4897,7 @@ declare interface CreatePrefetchTaskResponse {
 declare interface CreatePurgeTaskRequest {
   /** 站点 ID。若您希望快速提交不同站点下的 Targets Url，可以将其填写为 *，但前提是调用该 API 的账号必须具备主账号下全部站点资源的权限。 */
   ZoneId: string;
-  /** 节点缓存清除类型，取值有：purge_url：URL刷新；purge_prefix：目录刷新；purge_host：Hostname 刷新；purge_all：站点下全部缓存刷新；purge_cache_tag：cache-tag 刷新。缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。 */
+  /** 节点缓存清除类型，取值有：purge_url：URL刷新；purge_prefix：目录刷新；purge_host：Hostname 刷新；purge_all：站点下全部缓存刷新（取该值时不支持 ZoneId 入参为 *）；purge_cache_tag：cache-tag 刷新。缓存清除类型详情请查看[清除缓存](https://cloud.tencent.com/document/product/1552/70759)。 */
   Type: string;
   /** 节点缓存清除方法，针对目录刷新、Hostname 刷新以及刷新全部缓存类型有效，取值有： invalidate：仅刷新目录下产生了更新的资源； delete：无论目录下资源是否更新都刷新节点资源。默认值： invalidate。 */
   Method?: string;
