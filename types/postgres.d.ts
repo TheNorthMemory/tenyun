@@ -268,6 +268,8 @@ declare interface DBInstance {
   ExpandedCpu?: number;
   /** 实例是否开启删除保护，取值如下：true：开启删除保护false：关闭删除保护 */
   DeletionProtection?: boolean;
+  /** 实例存储类型，可选值：PHYSICAL_LOCAL_SSD：物理机本地ssd硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：ssd云硬盘 CLOUD_HSSD：增强型ssd云硬盘 */
+  DBInstanceStorageType?: string;
 }
 
 /** 描述实例的网络连接信息。 */
@@ -1131,6 +1133,8 @@ declare interface CreateInstancesRequest {
   NeedSupportIpv6?: number;
   /** 实例是否开启删除保护: true-开启删除保护；false-关闭删除保护。 */
   DeletionProtection?: boolean;
+  /** 实例存储类型，可选值：PHYSICAL_LOCAL_SSD：物理机本地ssd硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：ssd云硬盘 CLOUD_HSSD：增强型ssd云硬盘 */
+  StorageType?: string;
 }
 
 declare interface CreateInstancesResponse {
@@ -1573,6 +1577,8 @@ declare interface DescribeClassesRequest {
   DBEngine: string;
   /** 数据库主版本号。例如12，13，可以通过接口DescribeDBVersions获取。 */
   DBMajorVersion: string;
+  /** 实例存储类型，根据存储类型返回支持的规格。枚举值：PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘CLOUD_PREMIUM： 高性能云硬盘CLOUD_SSD： ssd云硬盘CLOUD_HSSD： 增强型ssd云硬盘默认值：PHYSICAL_LOCAL_SSD */
+  StorageType?: string;
 }
 
 declare interface DescribeClassesResponse {
@@ -1751,6 +1757,8 @@ declare interface DescribeDBInstancesResponse {
 }
 
 declare interface DescribeDBVersionsRequest {
+  /** 实例存储类型，根据磁盘类型返回支持的版本枚举值：PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘CLOUD_PREMIUM： 高性能云硬盘CLOUD_SSD： ssd云硬盘CLOUD_HSSD： 增强型ssd云硬盘默认值：PHYSICAL_LOCAL_SSD */
+  StorageType?: string;
 }
 
 declare interface DescribeDBVersionsResponse {
@@ -1993,6 +2001,8 @@ declare interface DescribeProductConfigRequest {
   Zone?: string;
   /** 数据库引擎，支持：1、postgresql（云数据库PostgreSQL）；2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；如不指定默认使用postgresql。 */
   DBEngine?: string;
+  /** 实例存储类型，根据存储类型返回支持的版本和规格枚举值：PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘CLOUD_PREMIUM： 高性能云硬盘CLOUD_SSD： ssd云硬盘CLOUD_HSSD： 增强型ssd云硬盘默认值：PHYSICAL_LOCAL_SSD */
+  StorageType?: string;
 }
 
 declare interface DescribeProductConfigResponse {
@@ -2177,6 +2187,8 @@ declare interface InquiryPriceCreateDBInstancesRequest {
   InstanceType?: string;
   /** DB引擎，默认postgresql，支持如下：postgresql（云数据库PostgreSQL）mssql_compatible（MSSQL兼容-云数据库PostgreSQL） */
   DBEngine?: string;
+  /** 实例存储类型，可选值：PHYSICAL_LOCAL_SSD：物理机本地ssd硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：ssd云硬盘 CLOUD_HSSD：增强型ssd云硬盘 */
+  StorageType?: string;
 }
 
 declare interface InquiryPriceCreateDBInstancesResponse {

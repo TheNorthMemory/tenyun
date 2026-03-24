@@ -414,6 +414,8 @@ declare interface DescribeDeviceData {
   StreamName?: string;
   /** 是否开启静音帧（0：关闭；1 开启） */
   SilentFrameSwitch?: number;
+  /** Rtmp设备安全认证推流地址(仅rtmp设备有效) */
+  PushStreamSecureUrl?: string;
 }
 
 /** 批量查询设备接口返回数据 */

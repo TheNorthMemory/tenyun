@@ -6462,6 +6462,12 @@ declare interface SvgWatermarkInputForUpdate {
   Height?: string;
 }
 
+/** 同步配音输出参数设置 */
+declare interface SyncDubbingOutputOption {
+  /** 合成结果输出类型枚举值：data： 音频base64编码url： 音频url，有效期24小时 */
+  Type?: string;
+}
+
 /** 极速高清参数配置。 */
 declare interface TEHDConfig {
   /** 极速高清类型，可选值：TEHD-100：极速高清-100（视频极速高清）。TEHD-200：极速高清-200（音频极速高清）。不填代表不启用极速高清。 */
@@ -9233,9 +9239,9 @@ declare interface DescribeTranscodeTemplatesResponse {
 declare interface DescribeUsageDataRequest {
   /** 起始日期。使用 ISO 日期格式。 */
   StartTime: string;
-  /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  /** 结束日期，需大于等于起始日期。使用 ISO 日期格式。 */
   EndTime: string;
-  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印AIGC: AIGC */
+  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印AIGC: AIGCVideo */
   Types?: string[];
   /** 媒体处理园区，默认返回 ap-guangzhou 园区。ap-guangzhou：广州ap-hongkong：中国香港ap-taipei：中国台北ap-singapore：新加坡ap-mumbai：印度ap-jakarta：雅加达ap-seoul：首尔ap-bangkok：泰国ap-tokyo：日本na-siliconvalley：美国硅谷na-ashburn：弗吉尼亚na-toronto：多伦多sa-saopaulo：圣保罗eu-frankfurt：法兰克福eu-moscow：俄罗斯aws：AWS */
   ProcessRegions?: string[];
@@ -10309,6 +10315,8 @@ declare interface SyncDubbingRequest {
   AudioUrl?: string;
   /** 克隆音频语言，默认中文。当前支持语言同TextLang */
   AudioLang?: string;
+  /** 输出相关参数可以指定输出形式等 */
+  Output?: SyncDubbingOutputOption;
   /** 扩展参数，json字符串synExt Object 语音合成扩展参数 -duration Float 合成音频时长，单位秒，示例：5.2 -sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100] -pitch Integer 音调，默认0原音色输出，取值[-12, 12]cloneExt Object 音色克隆扩展参数 -timeRanges Float[][] 指定克隆音频时间范围，默认[[0, 20]]，示例[[5.2, 10], [45, 59.8]] */
   ExtParam?: string;
 }
@@ -10320,8 +10328,12 @@ declare interface SyncDubbingResponse {
   Msg?: string;
   /** 合成音频的base64编码，wav格式。 */
   AudioData?: string | null;
+  /** 合成音频url，有效期24小时 */
+  AudioUrl?: string;
   /** 克隆的音色Id。 */
   VoiceId?: string | null;
+  /** 扩展信息，json字符串duration: 结果音频时长，单位秒 */
+  ExtInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

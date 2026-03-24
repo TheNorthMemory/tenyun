@@ -5636,6 +5636,24 @@ declare interface ShellPolicyList {
   HostScope?: number | null;
 }
 
+/** Skill 的信息 */
+declare interface SkillInfo {
+  /** Skill名称 */
+  SkillName?: string;
+  /** Skill 描述 */
+  SkillDesc?: string;
+  /** Skill来源 */
+  SkillSource?: string;
+  /** Skill风险标签 */
+  Tags?: string[];
+  /** skill风险描述 */
+  RiskDesc?: string;
+  /** 证据链 */
+  Evidence?: string;
+  /** 事件ID */
+  Id?: number;
+}
+
 /** 标准模式阻断配置 */
 declare interface StandardModeConfig {
   /** 阻断时长，单位：秒 */
@@ -12412,6 +12430,18 @@ declare interface DescribeShellPolicyListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillInfoRequest {
+  /** 事件id */
+  Ids: number[];
+}
+
+declare interface DescribeSkillInfoResponse {
+  /** skill信息列表 */
+  SkillInfoList?: SkillInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStrategyExistRequest {
   /** 策略名 */
   StrategyName: string;
@@ -16627,6 +16657,8 @@ declare interface Cwp {
   DescribeServersAndRiskAndFirstInfo(data?: DescribeServersAndRiskAndFirstInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServersAndRiskAndFirstInfoResponse>;
   /** 查询反弹shell策略列表 {@link DescribeShellPolicyListRequest} {@link DescribeShellPolicyListResponse} */
   DescribeShellPolicyList(data?: DescribeShellPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShellPolicyListResponse>;
+  /** 获取skill信息 {@link DescribeSkillInfoRequest} {@link DescribeSkillInfoResponse} */
+  DescribeSkillInfo(data: DescribeSkillInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillInfoResponse>;
   /** 根据策略名查询策略是否存在 {@link DescribeStrategyExistRequest} {@link DescribeStrategyExistResponse} */
   DescribeStrategyExist(data: DescribeStrategyExistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStrategyExistResponse>;
   /** 获取指定标签关联的服务器信息 {@link DescribeTagMachinesRequest} {@link DescribeTagMachinesResponse} */

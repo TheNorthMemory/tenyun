@@ -1897,7 +1897,7 @@ declare namespace V20180717 {
 
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
-    /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&amp;2.1std_720PKling2.0&amp;2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&amp;2.3_768PHailuo02&amp;2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2_Refer_540P_OffPeakViduQ2_Refer_720PViduQ2_Refer_720P_OffPeakViduQ2_Refer_1080PViduQ2_Refer_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_1080PViduQ2pro_Refer_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3pro_540PViduQ3pro_540P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingunknown */
+    /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&amp;2.1std_720PKling2.0&amp;2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling3.0_720PKling3.0Sound_720PKling3.0CustomVoice_720PKling3.0_1080PKling3.0Sound_1080PKling3.0CustomVoice_1080PKling3.0CustomVoice_2KKling3.0CustomVoice_4KKling3.0MotionControl_720PKling3.0MotionControl_1080PKling3.0MotionControl_2KKling3.0MotionControl_4KKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&amp;2.3_768PHailuo02&amp;2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2_Refer_540PViduQ2_Refer_540P_OffPeakViduQ2_Refer_720PViduQ2_Refer_720P_OffPeakViduQ2_Refer_1080PViduQ2_Refer_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_1080PViduQ2pro_Refer_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3_Refer_720PViduQ3_Refer_720P_OffPeakViduQ3_Refer_1080PViduQ3_Refer_1080P_OffPeakViduQ3_Refer_2KViduQ3_Refer_2K_OffPeakViduQ3_Refer_4KViduQ3_Refer_4K_OffPeakViduQ3pro_540PViduQ3pro_540P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakViduQ3turbo_540PViduQ3turbo_540P_OffPeakViduQ3turbo_720PViduQ3turbo_720P_OffPeakViduQ3turbo_1080PViduQ3turbo_1080P_OffPeakViduQ3turbo_2KViduQ3turbo_2K_OffPeakViduQ3turbo_4KViduQ3turbo_4K_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingFaceInfoCustomVoiceSubjectunknown */
     Specification?: string;
     /** 用量数据。 */
     DataSet?: TaskStatDataItem[];
@@ -1909,9 +1909,9 @@ declare namespace V20180717 {
     StorageMode?: string;
     /** 输出媒体文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
     ClassId?: number;
-    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
     /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8； */
     Duration?: number;
@@ -1927,11 +1927,13 @@ declare namespace V20180717 {
     InputComplianceCheck?: string;
     /** 是否开启输出内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
     OutputComplianceCheck?: string;
-    /** 是否启用视频增强。取值有： Enabled：开启； Disabled：关闭； 说明：1. 对于选择的分辨率超过模型可生成分辨率时，默认会启用增强。2. 对于模型可以直出的分辨率，也可以主动选择模型直出低分辨率，使用增强获得指定分辨率。 */
+    /** 是否启用视频增强。取值有： Enabled：开启； Disabled：关闭；说明：对于选择的分辨率超过模型可生成分辨率时，默认会启用增强。对于模型可以直出的分辨率，也可以主动选择模型直出低分辨率，使用增强获得指定分辨率。 */
     EnhanceSwitch?: string;
+    /** 是否开启错峰。取值有： Enabled：开启； Disabled：关闭； */
+    OffPeak?: string;
     /** 是否开启vidu智能插帧。取值有： Enabled：开启； Disabled：关闭； */
     FrameInterpolate?: string;
-    /** 是否开启图标水印。取值有： Enabled：开启； Disabled：关闭； 目前支持的模型有 Vidu，其他模型暂不支持。 */
+    /** 是否开启图标水印。取值有： Enabled：开启； Disabled：关闭；目前支持的模型有 Vidu，其他模型暂不支持。 */
     LogoAdd?: string;
   }
 

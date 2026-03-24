@@ -2,6 +2,30 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** Ai Agent 资产信息列表项 */
+declare interface AIAgentAsset {
+  /** ID 标识 */
+  ID?: string;
+  /** agent 名称 */
+  AgentName?: string;
+  /** agent 使用模型名称 */
+  AgentModel?: string[];
+  /** 实例 ID */
+  InstanceID?: string;
+  /** metadata 风险列表。有如下枚举值: 1. AK_TMP 2. USER_DATA */
+  MetadataRiskList?: string[];
+  /** 首次检出时间 */
+  IdentityTimeFirst?: string;
+  /** 最近检出时间 */
+  IdentityTimeLast?: string;
+  /** 检出方式。有如下枚举值 1. FINGER 资产指纹方式检出 2. NETWORK 网络访问方式检出 */
+  IdentityMethod?: string;
+  /** 暴露状态。有如下枚举值。1. EXPOSED；2.UNEXPOSED；3. UNKNOWN; */
+  ExposureStatus?: string;
+  /** metadata 有风险时对应路径 */
+  MetadataRiskURL?: string;
+}
+
 /** AK简要信息 */
 declare interface AKInfo {
   /** ak对应id */
@@ -3499,6 +3523,22 @@ declare interface DeleteRiskScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAIAgentAssetListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选 */
+  Filter?: Filter;
+}
+
+declare interface DescribeAIAgentAssetListResponse {
+  /** 资产列表 */
+  AssetList?: AIAgentAsset[];
+  /** 资产总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAbnormalCallRecordRequest {
   /** 告警规则ID */
   AlarmRuleID: number;
@@ -5230,6 +5270,8 @@ declare interface Csip {
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
+  DescribeAIAgentAssetList(data?: DescribeAIAgentAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentAssetListResponse>;
   /** 获取异常调用记录 {@link DescribeAbnormalCallRecordRequest} {@link DescribeAbnormalCallRecordResponse} */
   DescribeAbnormalCallRecord(data: DescribeAbnormalCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalCallRecordResponse>;
   /** 获取访问密钥告警记录 {@link DescribeAccessKeyAlarmRequest} {@link DescribeAccessKeyAlarmResponse} */

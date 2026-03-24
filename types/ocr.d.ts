@@ -2408,8 +2408,10 @@ declare interface TextWaybill {
   SenderNum?: WaybillObj;
   /** 寄件人地址 */
   SenderAddr?: WaybillObj;
-  /** 运单号 */
+  /** 运单号, 当同时存在 母 / 子 运单号时， 该字段为子运单号 */
   WaybillNum?: WaybillObj;
+  /** 母运单号， 当不存在母运单号时， 该字段为不存在 */
+  MainWaybillNum?: WaybillObj;
 }
 
 /** 过路过桥费发票 */

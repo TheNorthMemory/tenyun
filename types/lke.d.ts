@@ -4905,7 +4905,7 @@ declare interface RenameDocRequest {
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** 应用ID */
+  /** 应用ID，获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469)。重命名知识库文档时，该参数填入知识库ID。 */
   BotBizId?: string;
   /** 文档ID */
   DocBizId?: string;

@@ -1013,7 +1013,7 @@ declare interface CreateDeviceVirtualGroupRequest {
   DomainInstanceId?: string;
   /** 详情 */
   Description?: string;
-  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios ； 默认值0）(只支持32位) */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位) */
   OsType?: number;
   /** 分组类型（0:手动分组；非0为自动划分分组；具体枚举值为：1:自动每小时划分分组、2:自动每天划分分组、3:自定义时间划分分组； 默认值0）(只支持32位) */
   TimeType?: number;
@@ -1203,7 +1203,7 @@ declare interface DescribeDeviceDetailListResponse {
 declare interface DescribeDeviceHardwareInfoListRequest {
   /** 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id */
   GroupId: number;
-  /** 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0），需要和GroupId或者GroupIds匹配 */
+  /** 【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)，需要和GroupId或者GroupIds匹配 */
   OsType: number;
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -1239,7 +1239,7 @@ declare interface DescribeDeviceVirtualGroupsRequest {
   DomainInstanceId?: string;
   /** 滤条件、分页参数 Name - String - 是否必填：否 - 操作符: like - 排序支持：否- 按终端自定义分组过滤。 DeviceVirtualGroupName - String - 是否必填：否 - 操作符: like - 排序支持：否- 按终端自定义分组过滤。 */
   Condition?: Condition;
-  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0） */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位) */
   OsType?: number;
   /** 非必填，自定义分组ids */
   VirtualGroupIds?: number[];
@@ -1259,7 +1259,7 @@ declare interface DescribeDevicesRequest {
   Condition?: Condition;
   /** 【和GroupIds必须有一个填写】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id */
   GroupId?: number;
-  /** 操作系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0），需要和GroupId或者GroupIds匹配 */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)，需要和GroupId或者GroupIds匹配 */
   OsType?: number;
   /** 在线状态 （2表示在线，0或者1表示离线） */
   OnlineStatus?: number;
@@ -1351,7 +1351,7 @@ declare interface DescribeVirtualDevicesRequest {
   Condition?: Condition;
   /** 终端自定义分组ID（0：获取租户全部自定义分组下的终端数据；其他值：获取具体ID分组下的终端数据） */
   DeviceVirtualGroupId?: number;
-  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0） */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位) */
   OsType?: number;
   /** 选填，在线状态 （2表示在线，0或者1表示离线） */
   OnlineStatus?: number;
@@ -1365,7 +1365,7 @@ declare interface DescribeVirtualDevicesResponse {
 }
 
 declare interface ExportDeviceDownloadTaskRequest {
-  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios；默认值0） */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位) */
   OsType?: number;
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -1413,7 +1413,7 @@ declare interface ModifyVirtualDeviceGroupsRequest {
   DeviceVirtualGroupId?: number;
   /** 要添加的终端自定义分组id列表 */
   DeviceVirtualGroupIds?: number[];
-  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios 默认值0） */
+  /** 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位) */
   OsType?: number;
 }
 

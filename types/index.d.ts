@@ -19,6 +19,7 @@ import Antiddos, { Versions as AntiddosVersions } from "./antiddos";
 import Ape, { Versions as ApeVersions } from "./ape";
 import Api, { Versions as ApiVersions } from "./api";
 import Apigateway, { Versions as ApigatewayVersions } from "./apigateway";
+import Apis, { Versions as ApisVersions } from "./apis";
 import Apm, { Versions as ApmVersions } from "./apm";
 import Asr, { Versions as AsrVersions } from "./asr";
 import Asw, { Versions as AswVersions } from "./asw";
@@ -274,6 +275,7 @@ export declare type SERVICE_VERSIONS = {
   ape: ApeVersions,
   api: ApiVersions,
   apigateway: ApigatewayVersions,
+  apis: ApisVersions,
   apm: ApmVersions,
   asr: AsrVersions,
   asw: AswVersions,
@@ -562,6 +564,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   api: Api,
   /** {@link Apigateway API 网关} */
   apigateway: Apigateway,
+  /** {@link Apis AI Agent 安全网关} */
+  apis: Apis,
   /** {@link Apm 应用性能监控} */
   apm: Apm,
   /** {@link Asr 语音识别} */
