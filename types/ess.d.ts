@@ -4374,6 +4374,24 @@ declare interface DescribeContractReviewChecklistsWebUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractReviewMarkedRiskExportTaskRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 导出任务 ID。 */
+  TaskId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeContractReviewMarkedRiskExportTaskResponse {
+  /** 导出文件 url。 */
+  Url?: string;
+  /** 任务状态。未知 = 0; 创建完成 = 1; 队列中 = 2; 执行中 = 3; 执行成功 = 4; 失败 = 5; 终止 = 6; */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContractReviewTaskListWebUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -5086,6 +5104,24 @@ declare interface ExportContractComparisonTaskResponse {
   RequestId?: string;
 }
 
+declare interface ExportContractReviewMarkedRiskRequest {
+  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  Operator: UserInfo;
+  /** 开始日期。eg， "2006-01-02" */
+  FromDate: string;
+  /** 结束日期。eg，"2006-02-01" */
+  ToDate: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface ExportContractReviewMarkedRiskResponse {
+  /** 导出任务 id。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportContractReviewResultRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -5685,6 +5721,8 @@ declare interface Ess {
   DescribeContractReviewChecklistWebUrl(data: DescribeContractReviewChecklistWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewChecklistWebUrlResponse>;
   /** 获取审查要点清单列表web页面 {@link DescribeContractReviewChecklistsWebUrlRequest} {@link DescribeContractReviewChecklistsWebUrlResponse} */
   DescribeContractReviewChecklistsWebUrl(data: DescribeContractReviewChecklistsWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewChecklistsWebUrlResponse>;
+  /** 查询合同审查标注风险项导出任务详情 {@link DescribeContractReviewMarkedRiskExportTaskRequest} {@link DescribeContractReviewMarkedRiskExportTaskResponse} */
+  DescribeContractReviewMarkedRiskExportTask(data: DescribeContractReviewMarkedRiskExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewMarkedRiskExportTaskResponse>;
   /** 获取合同审查任务详情 {@link DescribeContractReviewTaskRequest} {@link DescribeContractReviewTaskResponse} */
   DescribeContractReviewTask(data: DescribeContractReviewTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskResponse>;
   /** 获取合同审查记录列表web页面 {@link DescribeContractReviewTaskListWebUrlRequest} {@link DescribeContractReviewTaskListWebUrlResponse} */
@@ -5751,6 +5789,8 @@ declare interface Ess {
   DisableUserAutoSign(data: DisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUserAutoSignResponse>;
   /** 导出合同对比任务详情 {@link ExportContractComparisonTaskRequest} {@link ExportContractComparisonTaskResponse} */
   ExportContractComparisonTask(data: ExportContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractComparisonTaskResponse>;
+  /** 导出合同审查标注风险项 {@link ExportContractReviewMarkedRiskRequest} {@link ExportContractReviewMarkedRiskResponse} */
+  ExportContractReviewMarkedRisk(data: ExportContractReviewMarkedRiskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractReviewMarkedRiskResponse>;
   /** 导出合同审查结果 {@link ExportContractReviewResultRequest} {@link ExportContractReviewResultResponse} */
   ExportContractReviewResult(data: ExportContractReviewResultRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractReviewResultResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */

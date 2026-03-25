@@ -12963,6 +12963,8 @@ declare namespace V20210820 {
     InChargeIdList?: string[] | null;
     /** 负责人name */
     InChargeNameList?: string[] | null;
+    /** 生产调度任务状态，参考调度任务侧状态信息，“DELETED”状态为质量侧单独加的，查不到任务时认为任务“DELETED”'Y': '调度中','F': '已下线','O': '已暂停','INVALID': '已失效','DELETED': '已删除' */
+    TaskStatus?: string | null;
   }
 
   /** 项目信息 */
@@ -13901,10 +13903,12 @@ declare namespace V20210820 {
 
   /** 规则组分页 */
   interface RuleGroupPage {
-    /** 记录数 */
-    TotalCount: number | null;
+    /** 查询结果总数量 */
+    TotalCount?: number | null;
     /** 规则组列表 */
-    Items: RuleGroup[] | null;
+    Items?: RuleGroup[] | null;
+    /** 已开启监控任务数量（在查询结果总量中） */
+    MonitorEnabledCount?: number | null;
   }
 
   /** 规则组调度信息 */

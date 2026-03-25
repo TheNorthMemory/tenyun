@@ -4166,7 +4166,7 @@ declare interface DescribeVoucherInfoRequest {
   Limit: number;
   /** 第多少页，默认是1 */
   Offset: number;
-  /** 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue */
+  /** 券状态：待使用：unUsed，已使用：&nbsp;used，已发货：delivered，已作废：&nbsp;cancel，已过期：overdue */
   Status?: string;
   /** 代金券id */
   VoucherId?: string;
@@ -4186,9 +4186,9 @@ declare interface DescribeVoucherInfoRequest {
   SortField?: string;
   /** 指定升序降序：desc、asc */
   SortOrder?: string;
-  /** 付费模式，postPay后付费/prePay预付费/riPay预留实例/""或者"*"表示全部模式，如果payMode为""或"*"，那么productCode与subProductCode必须传空 */
+  /** 付费模式，postPay后付费/prePay预付费/riPay预留实例/&quot;&quot;或者&quot;*&quot;表示全部模式，如果payMode为&quot;&quot;或&quot;*&quot;，那么productCode与subProductCode必须传空 */
   PayMode?: string;
-  /** 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景 */
+  /** 付费场景PayMode=postPay时：spotpay-竞价实例,&quot;settle account&quot;-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景 */
   PayScene?: string;
   /** 操作人，默认就是用户uin */
   Operator?: string;
@@ -4208,6 +4208,8 @@ declare interface DescribeVoucherInfoRequest {
   CreateTimeFrom?: string;
   /** 发券时间结束时间 */
   CreateTimeTo?: string;
+  /** 语言参数默认值：zh期望返回产品名称中文或其他语言，目前仅支持中文、英文；填&quot;zh&quot;或不填时返回中文，其他情况返回英文 */
+  Lang?: string;
 }
 
 declare interface DescribeVoucherInfoResponse {

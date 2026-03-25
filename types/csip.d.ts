@@ -24,6 +24,8 @@ declare interface AIAgentAsset {
   ExposureStatus?: string;
   /** metadata 有风险时对应路径 */
   MetadataRiskURL?: string;
+  /** 无 */
+  SkillState?: SkillState;
 }
 
 /** AK简要信息 */
@@ -2552,6 +2554,16 @@ declare interface ServiceSupport {
   SupportTotalCount?: number;
   /** 是否支持该产品1支持；0不支持 */
   IsSupport?: boolean;
+}
+
+/** SKILL安装状态信息 */
+declare interface SkillState {
+  /** SKILL安装状态枚举值：0：未安装1：安装中2：已安装3：安装失败4：卸载中5：卸载失败 */
+  SkillInstallStatus?: number;
+  /** SKILL安装/卸载操作时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  SkillInstallTime?: string;
+  /** SKILL安装/卸载结果描述信息 */
+  SkillInstallResult?: string;
 }
 
 /** 访问密钥资产信息（源IP角度） */

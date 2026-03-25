@@ -1519,7 +1519,7 @@ declare interface BatchModifyTargetTagResponse {
 declare interface BatchModifyTargetWeightRequest {
   /** 负载均衡实例 ID。 */
   LoadBalancerId: string;
-  /** 要批量修改权重的列表。 */
+  /** 要批量修改权重的列表。ModifyList数组最多100个元素，ModifyList[i].Targets最多50个，全部Targets累加不超过500。 */
   ModifyList: RsWeightRule[];
 }
 
@@ -2491,7 +2491,7 @@ declare interface DescribeTargetGroupsResponse {
 }
 
 declare interface DescribeTargetHealthRequest {
-  /** 要查询的负载均衡实例ID列表。 */
+  /** 要查询的负载均衡实例ID列表。数组大小最大支持30。 */
   LoadBalancerIds: string[];
   /** 要查询的监听器ID列表。 */
   ListenerIds?: string[];

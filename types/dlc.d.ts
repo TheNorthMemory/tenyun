@@ -760,6 +760,12 @@ declare interface DatabaseResponseInfo {
   GovernPolicy?: DataGovernPolicy | null;
   /** 数据库ID（无效字段） */
   DatabaseId?: string;
+  /** 所属catalog名称 */
+  CatalogName?: string | null;
+  /** 所属catalog 类型 */
+  CatalogType?: string | null;
+  /** 是否InformationSchema */
+  IsInformationSchema?: boolean | null;
 }
 
 /** 数据源属性 */
@@ -958,7 +964,7 @@ declare interface FavorInfo {
   Table?: string;
 }
 
-/** 查询列表过滤条件参数 */
+/** 筛选条件定义 */
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑或（OR）关系。 */
   Name: string;

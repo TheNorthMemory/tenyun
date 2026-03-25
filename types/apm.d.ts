@@ -168,6 +168,8 @@ declare interface ApmAppConfig {
   ErrRateThreshold?: number;
   /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot; */
   ResponseDurationWarningThreshold?: number;
+  /** 是否默认使用探针自带熔断阈值 */
+  UseDefaultFuseConfig?: boolean;
 }
 
 /** 应用相关的配置列表项 */
@@ -272,6 +274,8 @@ declare interface ApmApplicationConfigView {
   ErrRateThreshold?: number;
   /** 响应时间预警阈值单位：ms */
   ResponseDurationWarningThreshold?: number;
+  /** 是否使用探针默认熔断阈值 */
+  UseDefaultFuseConfig?: boolean;
 }
 
 /** 展示apm业务系统与其他云产品关联关系返回体 */
@@ -1531,6 +1535,8 @@ declare interface ModifyApmApplicationConfigRequest {
   ErrRateThreshold?: number;
   /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot; */
   ResponseDurationWarningThreshold?: number;
+  /** 是否使用探针默认熔断阈值 */
+  UseDefaultFuseConfig?: boolean;
 }
 
 declare interface ModifyApmApplicationConfigResponse {

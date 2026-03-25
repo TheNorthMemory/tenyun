@@ -896,6 +896,16 @@ declare interface VerificationConfig {
   SmsDayLimit?: number | null;
 }
 
+/** 云主机实例 */
+declare interface VmInstance {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例状态 */
+  Status?: string;
+  /** 实例地域 */
+  Region?: string;
+}
+
 declare interface AddProviderRequest {
   /** 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。 */
   EnvId: string;
@@ -1294,6 +1304,18 @@ declare interface DeleteUsersRequest {
 declare interface DeleteUsersResponse {
   /** 删除用户结果 */
   Data?: DeleteUsersResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVmInstanceRequest {
+  /** 服务器实例id */
+  InstanceId: string;
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DeleteVmInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1890,6 +1912,20 @@ declare interface DescribeUserListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVmInstancesRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务器类型： LightHouse = 轻量云服务器 CVM = 云服务器 */
+  Type: string;
+}
+
+declare interface DescribeVmInstancesResponse {
+  /** 主机实例列表 */
+  InstanceList?: VmInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVmSpecRequest {
   /** 类型：LightHouse = 轻量云服务器CVM = 云服务器 */
   Type?: string;
@@ -1968,6 +2004,32 @@ declare interface GetProvidersResponse {
   Total?: number | null;
   /** 三方认证源列表 */
   Data?: Provider[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquireVmPriceRequest {
+  /** 服务器类型：LightHouse = 轻量云服务器CVM = 云服务器 */
+  Type: string;
+  /** 轻量云服务器套餐ID。当Type=LightHouse时必传 */
+  LightHouseBundleId?: string;
+  /** 轻量云服务器镜像ID。当Type=LightHouse时必传 */
+  LightHouseBlueprintId?: string;
+}
+
+declare interface InquireVmPriceResponse {
+  /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
+  Currency?: string;
+  /** 原价（主机原始每月价格） */
+  OriginalPrice?: number;
+  /** 折扣率 */
+  Discount?: number;
+  /** 折扣后每月价格 */
+  DiscountPrice?: number;
+  /** 折扣前每天资源点 */
+  OriginalCredits?: number;
+  /** 折扣后每天资源点 */
+  DiscountCredits?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2345,6 +2407,8 @@ declare interface Tcb {
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 删除tcb用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
+  /** 销毁服务器实例 {@link DeleteVmInstanceRequest} {@link DeleteVmInstanceResponse} */
+  DeleteVmInstance(data: DeleteVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVmInstanceResponse>;
   /** 获取安全域名列表 {@link DescribeAuthDomainsRequest} {@link DescribeAuthDomainsResponse} */
   DescribeAuthDomains(data: DescribeAuthDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthDomainsResponse>;
   /** 获取新套餐 {@link DescribeBaasPackageListRequest} {@link DescribeBaasPackageListResponse} */
@@ -2393,6 +2457,8 @@ declare interface Tcb {
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询tcb用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
+  /** 查询环境下的服务器实例 {@link DescribeVmInstancesRequest} {@link DescribeVmInstancesResponse} */
+  DescribeVmInstances(data: DescribeVmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVmInstancesResponse>;
   /** 获取VM规格 {@link DescribeVmSpecRequest} {@link DescribeVmSpecResponse} */
   DescribeVmSpec(data?: DescribeVmSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVmSpecResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
@@ -2405,6 +2471,8 @@ declare interface Tcb {
   EditAuthConfig(data: EditAuthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<EditAuthConfigResponse>;
   /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
+  /** 查询云服务器价格 {@link InquireVmPriceRequest} {@link InquireVmPriceResponse} */
+  InquireVmPrice(data: InquireVmPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireVmPriceResponse>;
   /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
   /** 修改应用客户端 {@link ModifyClientRequest} {@link ModifyClientResponse} */

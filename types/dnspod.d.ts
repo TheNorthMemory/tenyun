@@ -1152,6 +1152,36 @@ declare interface CheckSnapshotRollbackResponse {
   RequestId?: string;
 }
 
+declare interface CreateAndPayDealRequest {
+  /** 询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购） */
+  DealType: number;
+  /** 商品类型，1 域名套餐 2 增值服务 */
+  GoodsType: number;
+  /** 套餐类型：DP_PLUS：专业版DP_EXPERT：企业版DP_ULTRA：尊享版增值服务类型LB：负载均衡URL：URL转发DMONITOR_TASKS：D监控任务数DMONITOR_IP：D监控备用 IP 数CUSTOMLINE：自定义线路数 */
+  GoodsChildType: string;
+  /** 增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等） */
+  GoodsNum: number;
+  /** 是否开启自动续费，1 开启，2 不开启（增值服务暂不支持自动续费），默认值为 2 不开启 */
+  AutoRenew: number;
+  /** 需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。 */
+  Domain?: string;
+  /** 套餐时长：套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）升级套餐时不需要传。增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10） */
+  TimeSpan?: number;
+  /** 套餐类型，需要升级到的套餐类型，只有升级时需要。 */
+  NewPackageType?: string;
+  /** 可重入ID，避免接口重试场景生成额外订单和实例入参限制：长度不超过70个字符 */
+  ClientToken?: string;
+}
+
+declare interface CreateAndPayDealResponse {
+  /** 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单 */
+  BigDealId?: string;
+  /** 子订单列表 */
+  DealList?: Deals[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDealRequest {
   /** 询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购） */
   DealType: number;
@@ -2881,6 +2911,8 @@ declare interface Dnspod {
   CheckRecordSnapshotRollback(data: CheckRecordSnapshotRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRecordSnapshotRollbackResponse>;
   /** 快照回滚前检查 {@link CheckSnapshotRollbackRequest} {@link CheckSnapshotRollbackResponse} */
   CheckSnapshotRollback(data: CheckSnapshotRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckSnapshotRollbackResponse>;
+  /** 商品下单并支付 {@link CreateAndPayDealRequest} {@link CreateAndPayDealResponse} */
+  CreateAndPayDeal(data: CreateAndPayDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndPayDealResponse>;
   /** 商品下单 {@link CreateDealRequest} {@link CreateDealResponse} */
   CreateDeal(data: CreateDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDealResponse>;
   /** 添加域名 {@link CreateDomainRequest} {@link CreateDomainResponse} */

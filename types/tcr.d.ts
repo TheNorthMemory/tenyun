@@ -2599,6 +2599,8 @@ declare interface ModifyNamespaceRequest {
   Severity?: string;
   /** 漏洞白名单列表 */
   CVEWhitelistItems?: CVEWhitelistItem[];
+  /** tag列表 */
+  TagSpecification?: TagSpecification;
 }
 
 declare interface ModifyNamespaceResponse {

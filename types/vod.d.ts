@@ -7892,19 +7892,19 @@ declare namespace V20180717 {
   interface CreateAigcVideoTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Hailuo：海螺；Kling：可灵； Jimeng：即梦；Vidu；Hunyuan：混元；Mingmou：明眸； */
+    /** 模型名称。取值：Kling：可灵；Vidu；Hailuo：海螺；Jimeng：即梦；Hunyuan：混元；Mingmou：明眸；GV；OS； */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
-    /** 最多包含三张素材资源文件的列表，用于描述模型在生成视频时要使用的资源文件。首尾帧视频生成：用 FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。支持多图输入的模型：GV，使用多图输入时，不可使用 LastFrameFileId 和 LastFrameUrl。Vidu，支持多图参考生视频。q2 模型1-7张图片，可通过 FileInfos 里面的 ObjectId 作为主体 id 来传入。注意：图片大小不超过10M。支持的图片格式：jpeg、png。 */
+    /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图、视频参考、视频编辑等模式。首尾帧视频生成：FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片生成：可传入单张图片或者多张，单张时候ObjectId字段必须不为空（区别于首帧生成）；参考图片，可以调整生成视频的宽高比例。视频编辑、视频参考：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
     /** 固定主体输入信息。 */
     SubjectInfos?: AigcVideoTaskInputSubjectInfo[];
-    /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。说明：只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。图片大小需小于5M。图片格式的取值为：jpeg，jpg, png, webp。 */
+    /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。指定该参数时，须同时通过 FileInfos 指定首帧画面。图片大小需小于10M。图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameFileId?: string;
-    /** 用于作为尾帧画面来生成视频的媒体文件 URL。说明：只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。图片大小需小于5M。图片格式的取值为：jpeg，jpg, png, webp。 */
+    /** 用于作为尾帧画面来生成视频的媒体文件 URL。说明：指定该参数时，须同时通过 FileInfos 指定首帧画面。图片大小需小于5M。图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameUrl?: string;
-    /** 生成视频的提示词。当 FileInfos 为空时，此参数必填。示例值：move the picture */
+    /** 生成视频的提示词。当未传入参考文件，没有使用场景类型，ExtInfo不为空，Prompt 为必填。 */
     Prompt?: string;
     /** 要阻止模型生成视频的提示词。 */
     NegativePrompt?: string;
@@ -7922,7 +7922,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。 */
+    /** 保留字段，特殊用途时使用。可用于传入模型特殊参数、分镜prompt等 */
     ExtInfo?: string;
   }
 

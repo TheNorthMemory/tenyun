@@ -3726,6 +3726,22 @@ declare interface DescribeProductCloudStorageAIServiceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProductDynamicRegisterRequest {
+  /** 产品Id */
+  ProductId: string;
+}
+
+declare interface DescribeProductDynamicRegisterResponse {
+  /** 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备 */
+  RegisterType: number;
+  /** 动态注册产品密钥 */
+  ProductSecret: string;
+  /** 动态注册设备上限 */
+  RegisterLimit: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectRequest {
   /** 项目ID */
   ProjectId: string;
@@ -4950,6 +4966,26 @@ declare interface ModifyProductCloudStorageAIServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyProductDynamicRegisterRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备 */
+  RegisterType: number;
+  /** 动态注册设备上限 */
+  RegisterLimit: number;
+}
+
+declare interface ModifyProductDynamicRegisterResponse {
+  /** 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备 */
+  RegisterType: number;
+  /** 动态注册产品密钥 */
+  ProductSecret: string;
+  /** 动态注册设备上限 */
+  RegisterLimit: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProjectRequest {
   /** 项目ID */
   ProjectId: string;
@@ -5759,6 +5795,8 @@ declare interface Iotexplorer {
   DescribePositionFenceList(data: DescribePositionFenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePositionFenceListResponse>;
   /** 查询产品云存AI分析服务 {@link DescribeProductCloudStorageAIServiceRequest} {@link DescribeProductCloudStorageAIServiceResponse} */
   DescribeProductCloudStorageAIService(data: DescribeProductCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductCloudStorageAIServiceResponse>;
+  /** 获取产品动态注册详情 {@link DescribeProductDynamicRegisterRequest} {@link DescribeProductDynamicRegisterResponse} */
+  DescribeProductDynamicRegister(data: DescribeProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductDynamicRegisterResponse>;
   /** 查询项目详情 {@link DescribeProjectRequest} {@link DescribeProjectResponse} */
   DescribeProject(data: DescribeProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectResponse>;
   /** 获取位置空间中围栏告警事件列表 {@link DescribeSpaceFenceEventListRequest} {@link DescribeSpaceFenceEventListResponse} */
@@ -5883,6 +5921,8 @@ declare interface Iotexplorer {
   ModifyPositionSpace(data: ModifyPositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPositionSpaceResponse>;
   /** 修改产品云存AI分析服务 {@link ModifyProductCloudStorageAIServiceRequest} {@link ModifyProductCloudStorageAIServiceResponse} */
   ModifyProductCloudStorageAIService(data: ModifyProductCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductCloudStorageAIServiceResponse>;
+  /** 修改产品动态注册 {@link ModifyProductDynamicRegisterRequest} {@link ModifyProductDynamicRegisterResponse} */
+  ModifyProductDynamicRegister(data: ModifyProductDynamicRegisterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProductDynamicRegisterResponse>;
   /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
   /** 更新位置空间产品属性 {@link ModifySpacePropertyRequest} {@link ModifySpacePropertyResponse} */

@@ -1904,6 +1904,28 @@ declare interface TurnPushInfo {
   Time: string;
 }
 
+/** aigc cos信息，存储用户请求时填写的cos信息，存放结果 */
+declare interface VideoRedrawCosInfo {
+  /** cos所在地域 */
+  Region?: string;
+  /** cos桶信息 */
+  Bucket?: string;
+  /** 任务存放cos的目录 */
+  Dir?: string;
+  /** 临时Cos SecretId */
+  TmpSecretId?: string;
+  /** 临时Cos SecretKey */
+  TmpSecretKey?: string;
+  /** 临时token */
+  Token?: string;
+}
+
+/** 视频转绘的输入源 */
+declare interface VideoRedrawInput {
+  /** 输入待转绘的视频URL */
+  Url: string;
+}
+
 /** 水印信息。 */
 declare interface WatermarkInfo {
   /** 水印 ID。 */
@@ -2871,6 +2893,20 @@ declare interface CreateScreenshotTaskRequest {
 
 declare interface CreateScreenshotTaskResponse {
   /** 任务ID，全局唯一标识截图任务。返回TaskId字段说明截图任务创建成功。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVideoRedrawTaskRequest {
+  /** 输入待转绘视频url信息 */
+  Input: VideoRedrawInput;
+  /** 用户自定义cos信息 */
+  CosInfo?: VideoRedrawCosInfo;
+}
+
+declare interface CreateVideoRedrawTaskResponse {
+  /** 任务id */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4883,7 +4919,7 @@ declare interface DescribeStreamPlayInfoListRequest {
   PlayDomain?: string;
   /** 流名称，精确匹配。若不填，则为查询总体播放数据。 */
   StreamName?: string;
-  /** 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。若不填，则为查询总体播放数据。 */
+  /** 该参数暂不可用。 */
   AppName?: string;
   /** 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。 */
   ServiceName?: string;
@@ -6109,6 +6145,8 @@ declare interface Live {
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;
   /** 创建截图任务 {@link CreateScreenshotTaskRequest} {@link CreateScreenshotTaskResponse} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
+  /** 创建AIGC视频转绘任务 {@link CreateVideoRedrawTaskRequest} {@link CreateVideoRedrawTaskResponse} */
+  CreateVideoRedrawTask(data: CreateVideoRedrawTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoRedrawTaskResponse>;
   /** 直播审核删除关键词 {@link DeleteAuditKeywordsRequest} {@link DeleteAuditKeywordsResponse} */
   DeleteAuditKeywords(data: DeleteAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordsResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
