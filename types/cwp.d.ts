@@ -5136,7 +5136,7 @@ declare interface RiskDnsEvent {
   SuggestSolution?: string;
   /** 参考链接 */
   ReferenceLink?: string;
-  /** 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略] */
+  /** 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略|6:已拦截] */
   HandleStatus?: number;
   /** 进程ID */
   Pid?: number;
@@ -14845,7 +14845,7 @@ declare interface ModifyLicenseOrderResponse {
 declare interface ModifyLicenseUnBindsRequest {
   /** 资源ID */
   ResourceId: string;
-  /** 授权类型 */
+  /** 授权类型- 0 按量付费-专业版- 1 包年包月-专业版- 2 包年包月-旗舰版- 3 包年包月-轻量版 */
   LicenseType: number;
   /** 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过) */
   IsAll?: boolean;

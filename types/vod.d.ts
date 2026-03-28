@@ -1787,13 +1787,13 @@ declare namespace V20180717 {
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
     ClassId?: number;
-    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 生成图片的分辨率。* GEM 2.5 可选值：1K、2K、4K，默认1K；* GEM 3.0 可选值：1K、2K、4K，默认1K；* Vidu q2 可选值：1080p、2K、4K，默认1080p；* Kling 2.1 可选值：1k、2k，默认1k；* Hunyuan 3.0 可选值：720P、1080P、2K、4K。 */
+    /** 生成图片的分辨率。各模型可选值：GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：512、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。示例：1024:1024；Qwen 2.0：支持自由设置宽高，输出图像总像素需在512 * 512 至 2048 * 2048之间。默认分辨率为1024*1024；Qwen 0925：不支持； */
     Resolution?: string;
-    /** 指定所生成图片的宽高比。当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；当 ModelName 是 Qwen，则暂不支持。当 ModelName 是 Hunyuan，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。当 ModelName 是 Vidu，可选值16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。当 ModelName 是 Kling，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。 */
+    /** 指定所生成图片的宽高比。GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；SI 4.0：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 4.5：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 5.0-lite：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Hunyuan 3.0：不支持；Qwen 2.0：不支持；Qwen 0925：不支持； */
     AspectRatio?: string;
     /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
     PersonGeneration?: string;
@@ -2005,18 +2005,20 @@ declare namespace V20180717 {
     Type?: string;
     /** 文件分类。取值为：Image: 图片；Video: 视频。 */
     Category?: string;
-    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：推荐使用小于10M的图片；图片格式的取值为：jpeg，jpg, png。 */
     FileId?: string;
-    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：推荐使用小于10M的图片；图片格式的取值为：jpeg，jpg, png。 */
     Url?: string;
     /** 参考类型，GV模型适用。注意：当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。 */
     ReferenceType?: string;
-    /** 主体 Id。适用模型：Vidu-q2.当需要对图片标识主体时，需要每个图片都带主体 Id，后续生成时可以通过@主体 Id 的方式使用。当 Category 为 Image 时有效。 */
+    /** 用法：Vidu主体Id、参考图模式。参考图模式：只有一张图时候，ObjectId必须不为空（一张图、ObjectId为空，为首帧模式）。Vidu主体Id：prompt可以通过 @主体Id 的方式使用。当 Category 为 Image 时有效。 */
     ObjectId?: string;
     /** 适用于 Vidu-q2 模型。当全部图片携带主体 Id 时，可针对主体设置音色 Id。 当 Category 为 Image 时有效。音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg */
     VoiceId?: string;
     /** 是否保留视频原声。当 Category 为 Video 时有效。取值如下：Enabled：保留Disabled：不保留 */
     KeepOriginalSound?: string;
+    /** 用于区分输入是首帧或参考帧。可选值：FirstFrame：首帧；Reference：参考帧； */
+    Usage?: string;
   }
 
   /** AIGC 固定主体输入信息。 */
@@ -7830,11 +7832,11 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Qwen：千问。Hunyuan：混元。Vidu：生数。Kling：可灵。MJ：Midjourney。 */
+    /** 模型名称。取值：GGSIQwenHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni；当 ModelName 是 MJ，可选值为 v7； */
+    /** 模型版本。取值：当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925、2.0；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni； */
     ModelVersion: string;
-    /** AIGC 生图任务的输入图片的文件信息。默认只支持指定1个。下列模型可传多张参考图：GEM 2.5：0～3张图片；Vidu q2：0～7张图片，图片支持 png、jpeg、jpg、webp格式，图片像素不能小于 128x128，且比例需要小于1:4或4:1； */
+    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：1张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；Qwen 2.0：3张；MJ v7：3张。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
     /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
@@ -7844,7 +7846,7 @@ declare namespace V20180717 {
     EnhancePrompt?: string;
     /** 生图任务的输出媒体文件配置。 */
     OutputConfig?: AigcImageOutputConfig;
-    /** 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。 */
+    /** 输入的区域信息。可选值：Mainland：中国大陆；Oversea：海外；OverseaUSWest：海外-美西； */
     InputRegion?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;

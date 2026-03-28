@@ -2493,6 +2493,12 @@ declare interface CreateRocketMQRoleRequest {
   Remark?: string;
   /** 角色授权类型（集群：Cluster; 主题或消费组：TopicAndGroup） */
   PermType?: string;
+  /** AK、SK的生成方式，AUTO：后端自动生成，MANUAL：用户手动输入 */
+  RoleGenerateMode?: string;
+  /** 选择MANUAL模式下，需要手动输入AK值 */
+  AccessKey?: string;
+  /** 选择MANUAL模式下，需要手动输入SK值 */
+  SecretKey?: string;
 }
 
 declare interface CreateRocketMQRoleResponse {
@@ -4951,6 +4957,8 @@ declare interface ModifyRocketMQInstanceSpecRequest {
   NodeCount?: number;
   /** 存储空间，GB为单位 */
   StorageSize?: number;
+  /** 部署可用区列表 */
+  ZoneIds?: string[];
 }
 
 declare interface ModifyRocketMQInstanceSpecResponse {
@@ -5347,10 +5355,10 @@ declare interface VerifyRocketMQConsumeRequest {
   GroupId: string;
   /** 消息id */
   MsgId: string;
-  /** 客户端ID */
-  ClientId: string;
   /** 主题名称 */
   TopicName: string;
+  /** 客户端 ID，不指定该参数时消息将被发送到对应消费组内任意客户端 */
+  ClientId?: string;
 }
 
 declare interface VerifyRocketMQConsumeResponse {

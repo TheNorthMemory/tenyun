@@ -9591,6 +9591,8 @@ declare namespace V20210820 {
     Namespace?: string | null;
     /** Catalog来源 */
     MetaFrom?: string | null;
+    /** 引擎侧责任人 */
+    EngineOwner?: string | null;
   }
 
   /** 数据源云梯连接状态 */
@@ -23831,11 +23833,11 @@ declare namespace V20210820 {
     TriggerScope: string;
     /** 运行数据时间列表 */
     DataTimeList: string[];
-    /** 工作流ID */
+    /** 手动工作流ID */
     WorkflowId: string;
     /** 备注 */
     Remark?: string;
-    /** 需要运行的任务列表TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK此参数必传 */
+    /** 需要运行的手动工作流任务列表TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK此参数必传 */
     TaskIds?: string[];
     /** 用户提交运行时指定的调度资源组，未指定时使用任务配置的调度资源组 */
     SchedulerResourceGroup?: string;

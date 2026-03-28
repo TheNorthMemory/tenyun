@@ -126,6 +126,20 @@ declare interface DelayDistribution {
   Updatetime?: number;
 }
 
+/** 投递信息 */
+declare interface DeliverSummary {
+  /** 投递类型，store（存储类），mq（消息通道） */
+  DeliverType?: string | null;
+  /** 投递子类型：cls，ckafka。 */
+  DeliverSubType?: string | null;
+  /** 投递订阅者 */
+  DeliverConsumer?: string | null;
+  /** 投递订阅者名称 */
+  DeliverConsumerName?: string | null;
+  /** 投递 */
+  DeliverError?: string | null;
+}
+
 /** 详细DTS实例信息 */
 declare interface DescribeInstanceDTSInstanceInfo {
   /** 地域 ID。 */
@@ -144,6 +158,38 @@ declare interface DescribeInstanceDTSInstanceInfo {
   Vip?: string;
   /** 状态。 */
   Status?: number;
+}
+
+/** 导出文件 */
+declare interface ExportFile {
+  /** 文件名。 */
+  FileName?: string | null;
+  /** 状态值。枚举值：creating： 文件创建中。success： 文件已生成。failed： 文件生成失败。deleted： 文件已删除。 */
+  Status?: string | null;
+  /** 文件大小，单位：byte。 */
+  FileSize?: number | null;
+  /** 文件创建时间。 */
+  CreateTime?: string | null;
+  /** 文件下载地址。 */
+  DownloadUrl?: string | null;
+  /** 导出文件的错误信息。 */
+  ErrMsg?: string | null;
+  /** 导出文件的进度。 */
+  Progress?: number | null;
+  /** 导出文件的完成时间。 */
+  FinishTime?: string | null;
+  /** 异步请求 ID。 */
+  AsyncRequestId?: number | null;
+}
+
+/** 业务侧实例过滤参数 */
+declare interface Filter {
+  /** 过滤字段。枚举值：InstanceId： 实例 ID。InstanceName： 实例名称。TagKey： 标签键。InstanceTags： 实例标签键值，标签key值&amp;标签value值。 */
+  Name: string;
+  /** 过滤字段的值。 */
+  Values: string[];
+  /** 精确匹配开关。false：关闭。true：开启。 */
+  ExactMatch?: boolean;
 }
 
 /** 复制组信息 */
@@ -274,6 +320,28 @@ declare interface InstanceEnumParam {
   Status?: number;
 }
 
+/** 实例信息 */
+declare interface InstanceInfo {
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 实例状态 */
+  Status?: number | null;
+  /** 流程中的实例返回的子状态。枚举值：0： 磁盘只读， */
+  SubStatus?: number;
+  /** 地域 */
+  Region?: string | null;
+  /** 区 */
+  Zone?: string | null;
+  /** 降级策略，单位：毫秒，实例P99达到降级策略后，审计数据自动丢弃，优先保障业务的可用性,默认值：500毫秒，范围值：300-1000毫秒 */
+  DegradeStrategy?: number | null;
+  /** 标签信息 */
+  InstanceTags?: InstanceTagInfo[] | null;
+  /** 架构版本 */
+  Type?: number | null;
+}
+
 /** 实例整型参数描述 */
 declare interface InstanceIntegerParam {
   /** 参数名 */
@@ -364,6 +432,8 @@ declare interface InstanceProxySlowlogDetail {
   RecvClientEnd?: number;
   /** 发送客户端请求时长(ms) */
   SendClientEnd?: number;
+  /** Proxy节点ID。 */
+  Node?: string;
 }
 
 /** 实例安全组信息 */
@@ -600,6 +670,70 @@ declare interface LogDeliveryInfo {
   TopicId?: string;
   /** 日志集所在地域 */
   LogRegion?: string;
+}
+
+/** 日志过滤条件 */
+declare interface LogFilter {
+  /** 过滤条件名称。枚举值：Timestamp： 创建时间（格式：2006-01-02 15:04:05.000）UserName： 用户名CacheCode： 缓存代码，后端redis节点ClientAddr： 客户端地址CommandDetail： 命令详情CommandLatency： 命令延迟（毫秒）CommandType： 命令类型DBId： 数据库IDErrMsg： 错误信息 */
+  Type?: string;
+  /** 过滤条件匹配类型。枚举值：INC： 包含，多个值之前是||的关系EXC： 不包含，多个值之前是||的关系EQS： 等于，多个值之前是||的关系NEQ： 不等于，多个值之前是&amp;&amp;的关系RA： 范围 */
+  Compare?: string;
+  /** 过滤条件匹配值。当Compare=RA时，例如：[&quot;1-100&quot;,&quot;200-300&quot;]。 */
+  Value?: string[];
+}
+
+/** 实例 */
+declare interface LogInstance {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 日志状态，create：创建中；normal：开启；close：关闭中。 */
+  Status?: string;
+  /** 是否可以切换日志查询-取值：yes-可以，no-不可以。该参数主要为控制存量日志迁移到日志平台做查询使用，只有为yes状态才可以调用查询日志接口。 */
+  EnableQuery?: string;
+  /** 开启时间 */
+  CreateAt?: string;
+  /** 高频存储天数 */
+  HighLogExpireDay?: number;
+  /** 低频存储天数 */
+  LowLogExpireDay?: number;
+  /** 总存储时长 */
+  LogExpireDay?: number;
+  /** 高频存储量，单位：MB */
+  HighStorage?: number;
+  /** 低频存储量，单位：MB */
+  LowStorage?: number;
+  /** 总存储量 */
+  LogStorage?: number;
+  /** 是否开启投递：ON，OFF */
+  Deliver?: string;
+  /** 日志投递信息 */
+  DeliverSummary?: DeliverSummary[] | null;
+  /** 业务侧实例相关信息，根据业务不同，返回相关信息不同。 */
+  InstanceInfo?: InstanceInfo;
+  /** 审计子类型 */
+  LogSubType?: string;
+}
+
+/** 日志结果 */
+declare interface LogResult {
+  /** 数据库ID */
+  DBId?: number;
+  /** 命令延迟（毫秒） */
+  CommandLatency?: number;
+  /** 创建时间（格式：2006-01-02 15:04:05.000） */
+  Timestamp?: string;
+  /** 客户端地址 */
+  ClientAddr?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 命令类型 */
+  CommandType?: string;
+  /** 缓存代码，后端redis节点 */
+  CacheCode?: string;
+  /** 命令详情 */
+  CommandDetail?: string;
+  /** 错误信息 */
+  ErrMsg?: string;
 }
 
 /** 安全组出站规则 */
@@ -1230,6 +1364,18 @@ declare interface CloneInstancesResponse {
   RequestId?: string;
 }
 
+declare interface CloseLogRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志类型 */
+  LogType: string;
+}
+
+declare interface CloseLogResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseSSLRequest {
   /** 实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1238,6 +1384,26 @@ declare interface CloseSSLRequest {
 declare interface CloseSSLResponse {
   /** 任务ID。 */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateExportTaskRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 日志检索的起始时间。参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 00:00:00。返回结果中仅包含该时间点及之后的日志。 */
+  StartTime: string;
+  /** 日志检索的结束时间。参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 23:59:59。返回结果中仅包含该时间点及之前的日志。 */
+  EndTime: string;
+  /** 设置日志筛选字段，过滤并下载符合条件的日志。 */
+  LogFilter?: LogFilter[];
+  /** 自定义下载的日志字段，多个字段以逗号分隔，例如 &quot;timestamp,operation,user&quot;。指定后仅下载所选字段的数据。不传该参数时，默认下载所有字段。 */
+  ColumnFilter?: string[];
+}
+
+declare interface CreateExportTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1368,6 +1534,20 @@ declare interface CreateReplicationGroupResponse {
   TaskId?: number;
   /** 复制组string型id */
   GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteExportTaskRequest {
+  /** 指定删除的日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 指定删除日志的文件名。 */
+  FileName: string;
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DeleteExportTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1586,6 +1766,26 @@ declare interface DescribeDBSecurityGroupsResponse {
   VIP?: string;
   /** 内网端口。 */
   VPort?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExportTasksRequest {
+  /** 日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 每页输出的任务列表大小。默认值：20。取值范围：[1,100]。 */
+  Limit: number;
+  /** 分页偏移量。默认值：0。取值：Limit 整数倍。计算公式：offset=limit*(页码-1)。 */
+  Offset: number;
+  /** 指定查询的实例 ID。请登录Redis 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeExportTasksResponse {
+  /** 查询日志记录的总数目。 */
+  TotalCount?: number;
+  /** 日志文件属性信息，包含：文件名、文件大小、下载地址等。 */
+  Items?: ExportFile[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2048,6 +2248,60 @@ declare interface DescribeInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogInstanceListRequest {
+  /** 日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 每页输出的任务列表大小。取值范围：[1,100]。默认值：20。 */
+  Limit?: number;
+  /** 分页偏移量。默认为0。取值为 Limit 整数倍。计算公式：offset=limit*(页码-1)。 */
+  Offset?: number;
+  /** 设置日志筛选字段，过滤并返回符合条件的日志。 */
+  Filters?: Filter[];
+  /** 日志子类型。枚举值：write： 写日志。read： 读日志。all： 读写日志。 */
+  LogSubType?: string;
+  /** 日志开关。不传查询所有日志实例。on：开启。off：关闭。 */
+  LogSwitch?: string;
+}
+
+declare interface DescribeLogInstanceListResponse {
+  /** 查询到的日志的数量。 */
+  TotalCount?: number;
+  /** 日志平台实例信息。 */
+  Items?: LogInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogsRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 日志检索的起始时间。参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 00:00:00。返回结果中仅包含该时间点及之后的日志。 */
+  StartTime: string;
+  /** 日志检索的结束时间。参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 23:59:59。返回结果中仅包含该时间点及之前的日志。 */
+  EndTime: string;
+  /** 日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 过滤条件 */
+  LogFilter?: LogFilter[];
+  /** 每页返回的日志列表大小。默认值：20。取值范围：[1,100]。 */
+  Limit?: number;
+  /** 分页的起始偏移量。默认：0。取值：Limit 整数倍。计算公式：offset=limit*(页码-1)。 */
+  Offset?: number;
+  /** 日志排序方式，默认值为 DESC。取值如下：ASC：按时间升序排列，最早的日志在前。DESC：按时间降序排列，最新的日志在前。 */
+  Order?: string;
+  /** 排序字段，指定按哪个字段对日志进行排序。 */
+  OrderBy?: string;
+}
+
+declare interface DescribeLogsResponse {
+  /** 查询的日志总数量。 */
+  TotalCount?: number;
+  /** 日志详情。 */
+  Items?: LogResult[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMaintenanceWindowRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -2479,15 +2733,15 @@ declare interface EnableReplicaReadonlyResponse {
 declare interface InquiryPriceCreateInstanceRequest {
   /** 实例类型。- 2：Redis 2.8 内存版（标准架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。- 200:Memcached 1.6 内存版（集群架构）。 */
   TypeId: number;
-  /** 内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。 */
+  /** 内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 查询产品售卖规格 返回的规格为准。TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。 */
   MemSize: number;
-  /** 实例数量，单次购买实例数量以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。 */
+  /** 实例数量，单次购买实例数量以 查询产品售卖规格 返回的规格为准。 */
   GoodsNum: number;
   /** 购买时长，在创建包年包月实例的时候需要填写，按量计费实例填1即可，单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
   Period: number;
   /** 付费方式。- 0：按量计费。- 1：包年包月。 */
   BillingMode: number;
-  /** 实例所属的可用区 ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。**说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。 */
+  /** 实例所属的可用区 ID，可参考地域和可用区 。说明：请在 ZoneId 与 ZoneName 中至少指定一个参数。 */
   ZoneId?: number;
   /** 实例分片数量。- 标准架构需要配置分片数量为1。- 集群架构分片数量支持设置为1、3、5、8、12、16、24、32、40、48、64、80、96、128。 */
   RedisShardNum?: number;
@@ -2495,20 +2749,24 @@ declare interface InquiryPriceCreateInstanceRequest {
   RedisReplicasNum?: number;
   /** 是否支持副本只读。Redis2.8标准架构、CKV标准架构无需填写。- true：无需支持副本只读。- false：需支持。 */
   ReplicasReadonly?: boolean;
-  /** 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。**说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。 */
+  /** 实例所属的可用区名称，可参考地域和可用区 。说明：请在 ZoneId 与 ZoneName 中至少指定一个参数。 */
   ZoneName?: string;
   /** 部署方式。- local：本地盘版，默认为 local。- cloud：云盘版。- cdc：独享集群版。 */
   ProductVersion?: string;
 }
 
 declare interface InquiryPriceCreateInstanceResponse {
-  /** 价格 */
+  /** 折扣后价格 */
   Price?: number;
-  /** 高精度价格 */
+  /** 高精度折扣后价格 */
   HighPrecisionPrice?: number;
+  /** 原价 */
+  OriginalPrice?: number;
+  /** 高精度原价 */
+  HighPrecisionOriginalPrice?: number;
   /** 币种 */
   Currency?: string;
-  /** 价格金额单位- pent: 分- microPent: 微分 */
+  /** 价格金额单位pent: 分microPent: 微分 */
   AmountUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2517,25 +2775,29 @@ declare interface InquiryPriceCreateInstanceResponse {
 declare interface InquiryPriceRenewInstanceRequest {
   /** 包年包月实例的购买时长。- 单位：月。- 取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。 */
   Period: number;
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis)在实例列表复制包年包月实例 ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录 Redis 控制台在实例列表复制包年包月实例 ID。 */
   InstanceId: string;
 }
 
 declare interface InquiryPriceRenewInstanceResponse {
-  /** 价格 */
+  /** 折扣后价格 */
   Price?: number;
-  /** 高精度价格 */
+  /** 高精度折扣后价格 */
   HighPrecisionPrice?: number;
+  /** 原价 */
+  OriginalPrice?: number;
+  /** 高精度原价 */
+  HighPrecisionOriginalPrice?: number;
   /** 币种 */
   Currency?: string;
-  /** 价格金额单位- pent: 分- microPent: 微分 */
+  /** 价格金额单位pent: 分microPent: 微分 */
   AmountUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface InquiryPriceUpgradeInstanceRequest {
-  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 分片大小，单位：MB。 */
   MemSize: number;
@@ -2546,13 +2808,17 @@ declare interface InquiryPriceUpgradeInstanceRequest {
 }
 
 declare interface InquiryPriceUpgradeInstanceResponse {
-  /** 价格 */
+  /** 折扣后价格 */
   Price?: number;
-  /** 高精度价格 */
+  /** 高精度折扣后价格 */
   HighPrecisionPrice?: number;
+  /** 原价 */
+  OriginalPrice?: number;
+  /** 高精度原价 */
+  HighPrecisionOriginalPrice?: number;
   /** 币种 */
   Currency?: string;
-  /** 价格金额单位- pent: 分- microPent: 微分 */
+  /** 价格金额单位pent: 分microPent: 微分 */
   AmountUnit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2860,6 +3126,26 @@ declare interface ModifyInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLogRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 日志类型。枚举值：auditLog： 审计日志 */
+  LogType: string;
+  /** 日志子类型。枚举值：write： 写命令read： 读命令all： 全部命令 */
+  LogSubType: string;
+  /** 日志过期时间，单位：天。枚举值：7： 7 天30： 30 天 */
+  LogExpireDay: number;
+  /** 高频日志过期时间，单位：天。枚举值：7： 7 天默认值： 7 */
+  HighLogExpireDay: number;
+  /** 降级策略，单位：毫秒，实例P99达到降级策略后，审计数据自动丢弃，优先保障业务的可用性，默认值：500毫秒。取值范围：[300, 1000] */
+  DegradeStrategy: number;
+}
+
+declare interface ModifyLogResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMaintenanceWindowRequest {
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -2934,6 +3220,26 @@ declare interface ModifyReplicationGroupRequest {
 }
 
 declare interface ModifyReplicationGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenLogRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 日志子类型。枚举值：write： 写命令。read： 读命令。all： 读写命令。 */
+  LogSubType: string;
+  /** 日志有效期, 单位：天。枚举值：7： 7 天30： 30 天默认值：7 */
+  LogExpireDay: number;
+  /** 高频日志有效期, 单位：天。枚举值：7： 7天默认值：7 */
+  HighLogExpireDay: number;
+  /** 日志降级策略阈值。当实例 P99 延迟达到该阈值后，系统将自动丢弃审计日志数据，以优先保障业务可用性。单位：毫秒。默认值：500。取值范围：[300, 1000]。 */
+  DegradeStrategy?: number;
+}
+
+declare interface OpenLogResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3215,8 +3521,12 @@ declare interface Redis {
   ClearInstance(data: ClearInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ClearInstanceResponse>;
   /** 克隆实例 {@link CloneInstancesRequest} {@link CloneInstancesResponse} */
   CloneInstances(data: CloneInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CloneInstancesResponse>;
+  /** 关闭日志 {@link CloseLogRequest} {@link CloseLogResponse} */
+  CloseLog(data: CloseLogRequest, config?: AxiosRequestConfig): AxiosPromise<CloseLogResponse>;
   /** 关闭SSL {@link CloseSSLRequest} {@link CloseSSLResponse} */
   CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
+  /** 创建日志下载任务 {@link CreateExportTaskRequest} {@link CreateExportTaskResponse} */
+  CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
   /** 自定义实例账号 {@link CreateInstanceAccountRequest} {@link CreateInstanceAccountResponse} */
   CreateInstanceAccount(data: CreateInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceAccountResponse>;
   /** 创建Redis实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
@@ -3225,6 +3535,8 @@ declare interface Redis {
   CreateParamTemplate(data: CreateParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateParamTemplateResponse>;
   /** 创建复制组接口 {@link CreateReplicationGroupRequest} {@link CreateReplicationGroupResponse} */
   CreateReplicationGroup(data: CreateReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReplicationGroupResponse>;
+  /** 删除日志下载任务 {@link DeleteExportTaskRequest} {@link DeleteExportTaskResponse} */
+  DeleteExportTask(data: DeleteExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportTaskResponse>;
   /** 删除实例子账号 {@link DeleteInstanceAccountRequest} {@link DeleteInstanceAccountResponse} */
   DeleteInstanceAccount(data: DeleteInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceAccountResponse>;
   /** 删除参数模板 {@link DeleteParamTemplateRequest} {@link DeleteParamTemplateResponse} */
@@ -3245,6 +3557,8 @@ declare interface Redis {
   DescribeCommonDBInstances(data?: DescribeCommonDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCommonDBInstancesResponse>;
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
+  /** 查询日志下载任务 {@link DescribeExportTasksRequest} {@link DescribeExportTasksResponse} */
+  DescribeExportTasks(data: DescribeExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportTasksResponse>;
   /** 查询全球复制支持地域信息 {@link DescribeGlobalReplicationAreaRequest} {@link DescribeGlobalReplicationAreaResponse} */
   DescribeGlobalReplicationArea(data?: DescribeGlobalReplicationAreaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalReplicationAreaResponse>;
   /** 查看实例账号信息 {@link DescribeInstanceAccountRequest} {@link DescribeInstanceAccountResponse} */
@@ -3293,6 +3607,10 @@ declare interface Redis {
   DescribeInstanceZoneInfo(data?: DescribeInstanceZoneInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceZoneInfoResponse>;
   /** 查询Redis实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
+  /** 查询日志实例列表 {@link DescribeLogInstanceListRequest} {@link DescribeLogInstanceListResponse} */
+  DescribeLogInstanceList(data: DescribeLogInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogInstanceListResponse>;
+  /** 查询日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
+  DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintenanceWindowRequest} {@link DescribeMaintenanceWindowResponse} */
   DescribeMaintenanceWindow(data: DescribeMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceWindowResponse>;
   /** 查询参数模板详情 {@link DescribeParamTemplateInfoRequest} {@link DescribeParamTemplateInfoResponse} */
@@ -3375,6 +3693,8 @@ declare interface Redis {
   ModifyInstancePassword(data: ModifyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePasswordResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */
   ModifyInstanceReadOnly(data: ModifyInstanceReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceReadOnlyResponse>;
+  /** 修改日志 {@link ModifyLogRequest} {@link ModifyLogResponse} */
+  ModifyLog(data: ModifyLogRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogResponse>;
   /** 修改实例维护时间窗时间 {@link ModifyMaintenanceWindowRequest} {@link ModifyMaintenanceWindowResponse} */
   ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
   /** 修改实例网络配置 {@link ModifyNetworkConfigRequest} {@link ModifyNetworkConfigResponse} */
@@ -3383,6 +3703,8 @@ declare interface Redis {
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
   /** 修改复制组信息 {@link ModifyReplicationGroupRequest} {@link ModifyReplicationGroupResponse} */
   ModifyReplicationGroup(data: ModifyReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReplicationGroupResponse>;
+  /** 开启日志 {@link OpenLogRequest} {@link OpenLogResponse} */
+  OpenLog(data: OpenLogRequest, config?: AxiosRequestConfig): AxiosPromise<OpenLogResponse>;
   /** 开启SSL {@link OpenSSLRequest} {@link OpenSSLResponse} */
   OpenSSL(data: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;
   /** 关闭外网接口 {@link ReleaseWanAddressRequest} {@link ReleaseWanAddressResponse} */

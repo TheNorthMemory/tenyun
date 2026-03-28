@@ -1666,12 +1666,14 @@ declare interface RegisterInfo {
 
 /** 创建合同，若对方签署人的企业信息还未在腾讯电子签注册。则在进行引导企业注册时控制企业填写信息的个性化参数。具体可查看[视频](https://qian.tencent.com/developers/video/?menu=scene&id=6) */
 declare interface RegisterInfoOption {
-  /** 是否允许编辑企业注册时的法人姓名。true：允许编辑false：不允许编辑（默认值）注意：RegisterInfo 中的LegalName值不为空的时候，才可设置为不可编辑。 */
+  /** 是否允许编辑企业注册时的法人姓名。true：不允许编辑false：允许编辑（默认值）注意：RegisterInfo 中的LegalName值不为空的时候，才可设置为不可编辑。 */
   LegalNameSame?: boolean;
   /** 是否允许编辑企业注册时统一社会信用代码。true:不允许编辑。false:允许编辑（默认值）。注意：RegisterInfo 中的UnifiedSocialCreditCode值不为空的时候，才可设置为不可编辑。 */
   UnifiedSocialCreditCodeCNameSame?: boolean;
   /** 是否允许编辑企业注册时的证照类型true:不允许编辑。false:允许编辑（默认值）。注意：RegisterInfo 中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。 */
   OrganizationIdCardTypeSame?: boolean;
+  /** 是否允许编辑企业注册时统一社会信用代码。true:不允许编辑。false:允许编辑（默认值）。注意：RegisterInfo 中的UnifiedSocialCreditCode值不为空的时候，才可设置为不可编辑。 */
+  UnifiedSocialCreditCodeSame?: boolean;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */

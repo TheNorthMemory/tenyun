@@ -719,6 +719,8 @@ declare interface BatchGetPlaybackTokenRequest {
   RoomIds: number[];
   /** token过期时间，单位秒。如果传0则表示不过期 */
   ExpireSeconds?: number;
+  /** 用户ID */
+  UserId?: string;
 }
 
 declare interface BatchGetPlaybackTokenResponse {
@@ -726,6 +728,8 @@ declare interface BatchGetPlaybackTokenResponse {
   Results?: TokenResult[];
   /** 房间ID。 */
   Total?: number;
+  /** 用户ID */
+  UserId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

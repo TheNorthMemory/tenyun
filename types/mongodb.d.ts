@@ -2126,6 +2126,28 @@ declare interface ModifyDBInstanceSpecResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceAzRequest {
+  /** 实例 ID，例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 主节点所在的可用区 ID。获取方式，请参见地域和可用区。 */
+  PrimaryNodeZone: string;
+  /** 从节点所在的可用区 ID 列表。注意：不可包含主节点与 Hidden 节点所在的可用区。 */
+  SecondaryNodeZone: string[];
+  /** 若当前实例未配置 Hidden 节点，则无需传入此参数。 */
+  HiddenNodeZone?: string;
+  /** 只读节点所在的可用区 ID 列表。注意：若当前实例已包含只读节点，则此参数为必填项。 */
+  ReadonlyNodeZone?: string[];
+  /** 指定切换可用区的执行时间策略。0：立即执行切换。1：在设定的维护时间窗执行切换。具体信息，请参见设置实例维护时间。 */
+  InMaintenance?: number;
+}
+
+declare interface ModifyInstanceAzResponse {
+  /** 可用区调整订单ID。 */
+  DealId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceParamsRequest {
   /** 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -2937,6 +2959,8 @@ declare interface Mongodb {
   ModifyDBInstanceSecurityGroup(data: ModifyDBInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupResponse>;
   /** 调整云数据库实例配置 {@link ModifyDBInstanceSpecRequest} {@link ModifyDBInstanceSpecResponse} */
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
+  /** 调整云数据库实例节点的可用区 {@link ModifyInstanceAzRequest} {@link ModifyInstanceAzResponse} */
+  ModifyInstanceAz(data: ModifyInstanceAzRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAzResponse>;
   /** 修改mongoDB实例参数 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 修改实例SRV访问地址自定义域名 {@link ModifySRVConnectionUrlRequest} {@link ModifySRVConnectionUrlResponse} */

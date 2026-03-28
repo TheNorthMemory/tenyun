@@ -30,6 +30,18 @@ declare interface COSStorage {
   URI?: string;
 }
 
+/** 服务调用信息 */
+declare interface CallInfo {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 服务调用地址 */
+  PublicEndpoint?: string;
+  /** 服务调用的API_KEY */
+  ApiKey?: string;
+  /** 内网调用地址 */
+  VpcEndpoint?: string;
+}
+
 /** 算力详情 */
 declare interface ComputeDetail {
   /** 算力套餐ID */
@@ -444,6 +456,16 @@ declare interface CreateMuskPromptResponse {
   RequestId?: string;
 }
 
+declare interface DeleteServiceRequest {
+  /** 服务ID */
+  ServiceId: string;
+}
+
+declare interface DeleteServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeployInferServiceRequest {
   /** 服务元数据信息，如服务名 */
   ServiceMetaData?: ServiceMetaData;
@@ -610,6 +632,22 @@ declare interface DescribeServiceLoginSettingsRequest {
 declare interface DescribeServiceLoginSettingsResponse {
   /** 服务登录配置详情 */
   LoginSettings?: LoginSetting[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServicesCallInfoRequest {
+  /** 推理服务ID列表 */
+  ServiceIds?: string[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeServicesCallInfoResponse {
+  /** 调用信息 */
+  CallInfoSet?: CallInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -785,6 +823,8 @@ declare interface Hai {
   CreateInferServiceByTemplate(data: CreateInferServiceByTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferServiceByTemplateResponse>;
   /** 创建Prompt请求任务 {@link CreateMuskPromptRequest} {@link CreateMuskPromptResponse} */
   CreateMuskPrompt(data: CreateMuskPromptRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMuskPromptResponse>;
+  /** 删除服务 {@link DeleteServiceRequest} {@link DeleteServiceResponse} */
+  DeleteService(data: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
   /** 部署推理服务 {@link DeployInferServiceRequest} {@link DeployInferServiceResponse} */
   DeployInferService(data?: DeployInferServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeployInferServiceResponse>;
   /** 查询应用 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
@@ -807,6 +847,8 @@ declare interface Hai {
   DescribeServiceLoginSettings(data: DescribeServiceLoginSettingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceLoginSettingsResponse>;
   /** 查询服务 {@link DescribeServicesRequest} {@link DescribeServicesResponse} */
   DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
+  /** 查询服务调用信息 {@link DescribeServicesCallInfoRequest} {@link DescribeServicesCallInfoResponse} */
+  DescribeServicesCallInfo(data?: DescribeServicesCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesCallInfoResponse>;
   /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 更新服务配置询价 {@link InquirePriceUpdateServiceConfigsRequest} {@link InquirePriceUpdateServiceConfigsResponse} */

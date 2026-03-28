@@ -3266,6 +3266,32 @@ declare interface DeleteScreenshotTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAIGCTaskStatusRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeAIGCTaskStatusResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 状态枚举值：FINISHED： 1 */
+  TaskStatus?: string;
+  /** 输出url */
+  OutputUrl?: string | null;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务调度时间 */
+  ScheduledTime?: string;
+  /** 任务完成时间 */
+  FinishedTime?: string;
+  /** 任务错误码 */
+  TaskResultCode?: number;
+  /** 任务返回错误信息 */
+  TaskResultMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAllStreamPlayInfoListRequest {
   /** 查询时间点，精确到分钟粒度，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。支持最近1个月的数据查询，数据延迟为5分钟左右，如果要查询实时的数据，建议传递5分钟前的整点时间点。 */
   QueryTime: string;
@@ -6207,6 +6233,8 @@ declare interface Live {
   DeleteRecordTask(data: DeleteRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordTaskResponse>;
   /** 删除截图任务 {@link DeleteScreenshotTaskRequest} {@link DeleteScreenshotTaskResponse} */
   DeleteScreenshotTask(data: DeleteScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScreenshotTaskResponse>;
+  /** 查询AIGC任务详情 {@link DescribeAIGCTaskStatusRequest} {@link DescribeAIGCTaskStatusResponse} */
+  DescribeAIGCTaskStatus(data: DescribeAIGCTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGCTaskStatusResponse>;
   /** 查询某个时间点所有流的下行播放数据 {@link DescribeAllStreamPlayInfoListRequest} {@link DescribeAllStreamPlayInfoListResponse} */
   DescribeAllStreamPlayInfoList(data: DescribeAllStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllStreamPlayInfoListResponse>;
   /** 海外分区直播播放带宽和流量数据查询 {@link DescribeAreaBillBandwidthAndFluxListRequest} {@link DescribeAreaBillBandwidthAndFluxListResponse} */

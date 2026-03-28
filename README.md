@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，13680+ 服务数</summary>
+<details><summary>共计 252+ 款产品，13694+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -237,7 +237,7 @@ goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(83) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(19) |
 habo |  | 2018-12-03(2) |
-hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(23) |
+hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(25) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
 hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(28) |
@@ -262,7 +262,7 @@ keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(68) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(82) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(118) |
-live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(225) |
+live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(226) |
 lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(106) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(27) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(17) |
@@ -272,7 +272,7 @@ market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-1
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(51) |
-mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(74) | 2018-04-08(13) |
+mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(75) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(5) | 2018-07-24(170) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(157) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(67) |
@@ -291,7 +291,7 @@ postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [风险识别 RCE](https://cloud.tencent.com/document/product/1343) | 2025-04-25(1) | 2020-11-03(11) |
-redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(110) |
+redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(118) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(66) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
@@ -314,7 +314,7 @@ tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(24) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(52) |
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(70+210) |
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(71+211) |
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(19+7) |
 tccatalog | [统一Catalog服务](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(2) |

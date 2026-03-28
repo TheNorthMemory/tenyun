@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** API Key 访问凭证信息。描述云开发环境下 API Key 的完整信息，包括标识符、名称、令牌值、创建时间和过期时间。支持两种类型：api_key（服务端管理员访问凭证，用于服务端接口调用的身份认证，可设置有效期，单个环境最多 5 个）和 publish_key（前端匿名访问凭证，固定有效期，每个环境仅保留一个）。注意：令牌值（ApiKey 字段）仅在创建时返回完整明文，列表查询时将进行脱敏处理。 */
+declare interface ApiKeyToken {
+  /** API Key 的唯一标识符，由系统基于 UUID 自动生成的 Base64 URL 编码字符串。后续对该 API Key 进行删除、修改名称或精确查询操作时，均需使用该值作为定位参数 */
+  KeyId?: string;
+  /** API Key 的名称，即创建时传入的 KeyName 参数值。对于 publish_key 类型，该值固定为 publish_key */
+  Name?: string;
+  /** API Key 的令牌值（JWT 格式），用于服务端接口调用时的身份认证。出于安全考虑，仅在创建时返回一次完整明文；后续通过列表查询接口获取时，api_key 类型将进行脱敏处理；publish_key 类型始终返回完整明文。请在创建后妥善保存 */
+  ApiKey?: string | null;
+  /** API Key 的过期时间，格式遵循 ISO 8601 标准。对于 api_key 类型：若创建时未指定有效期（ExpireIn），则该字段不返回，表示永不过期；若指定了有效期，则返回具体的过期时间。对于 publish_key 类型：始终返回，固定为约 2099 年 */
+  ExpireAt?: string | null;
+  /** API Key 的创建时间，格式遵循 ISO 8601 标准。对于 api_key 类型：为该 Key 实际创建时的时间。对于 publish_key 类型：若环境下已存在 publish_key 记录，则返回首次创建的时间而非本次调用时间 */
+  CreateAt?: string | null;
+}
+
 /** 合法域名 */
 declare interface AuthDomain {
   /** 域名ID */
@@ -40,106 +54,16 @@ declare interface BaasPackageInfo {
   IsExternal?: boolean;
 }
 
-/** http访问服务客户端限频 */
-declare interface CloudBaseClientQPSPolicy {
-  /** UserID 或 ClientIP 或 None，如果为 None 代表不限制 */
-  LimitBy?: string;
-  /** 限制值 */
-  LimitValue?: number;
-}
-
-/** tcb 网关API */
-declare interface CloudBaseGWAPI {
-  /** 服务ID */
-  ServiceId?: string;
-  /** API ID */
-  APIId?: string;
-  /** API Path */
-  Path?: string;
-  /** API 类型 */
-  Type?: number;
-  /** API 名 */
-  Name?: string;
-  /** API创建时间 */
-  CreateTime?: number;
-  /** 自定义值通用字段：Type为1时，该值为空。Type为2时，该值为容器的代理IP:PORT数组。 */
-  Custom?: string;
-  /** 表示是否开启认证 */
-  EnableAuth?: boolean | null;
-  /** 云开发环境ID */
-  EnvId?: string | null;
-  /** 访问类型（该参数暂不对外暴露） */
-  AccessType?: number | null;
-  /** 统一发布状态 */
-  UnionStatus?: number | null;
-  /** 域名（*表示所有域名） */
-  Domain?: string | null;
-  /** 是否有路径冲突 */
-  ConflictFlag?: boolean | null;
-  /** 域名状态 */
-  DomainStatus?: number | null;
-  /** 是否开启路径透传，默认true表示短路径，即不开启(已弃用) */
-  IsShortPath?: boolean | null;
-  /** 路径透传，默认0关闭，1开启，2关闭 */
-  PathTransmission?: number | null;
-  /** 跨域校验，默认0开启，1开启，2关闭 */
-  EnableCheckAcrossDomain?: number | null;
-  /** 静态托管文件目录 */
-  StaticFileDirectory?: string | null;
-  /** QPS策略 */
-  QPSPolicy?: CloudBaseGWAPIQPSPolicy;
-}
-
-/** http访问服务路由qps策略 */
-declare interface CloudBaseGWAPIQPSPolicy {
-  /** qps限额总量 */
-  QPSTotal?: number;
-  /** 客户端限频，如果不限制，LimitBy=None */
-  QPSPerClient?: CloudBaseClientQPSPolicy;
-}
-
-/** 网关服务 */
-declare interface CloudBaseGWService {
-  /** 服务ID */
-  ServiceId?: string;
-  /** 服务域名 */
-  Domain?: string;
-  /** 开启时间 */
-  OpenTime?: number;
-  /** 绑定状态，1 绑定中；2绑定失败；3绑定成功 */
-  Status?: number | null;
-  /** 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。 */
-  IsPreempted?: boolean | null;
-  /** 是否开启多地域 */
-  EnableRegion?: boolean | null;
-  /** cdn CName地址 */
-  Cname?: string | null;
-  /** 统一域名状态 */
-  UnionStatus?: number | null;
-  /** CName状态 */
-  CnameStatus?: number | null;
-  /** 证书Id */
-  CertId?: string | null;
-  /** 是否强制https */
-  ForceHttps?: boolean | null;
-  /** icp黑名单封禁状态，0-未封禁，1-封禁 */
-  IcpForbidStatus?: number | null;
-  /** 自定义路由规则 */
-  CustomRoutingRules?: string | null;
-  /** 绑定类型，1绑定cdn，2源站，4自定义 */
-  BindFlag?: number;
-  /** TcbIngress源站cname */
-  OriginCname?: string;
-  /** 自定义cname */
-  CustomCname?: string;
-}
-
-/** http service选项 */
-declare interface CloudBaseOption {
-  /** 键 */
-  Key: string;
-  /** 值 */
-  Value: string;
+/** 封禁配置 */
+declare interface BanConfig {
+  /** ip白名单，支持ipv4、ipv6，支持CIDR */
+  IpWhiteList?: string[];
+  /** ip黑名单，支持ipv4、ipv6，支持CIDR */
+  IpBlackList?: string[];
+  /** 地域白名单（国家英文名） */
+  CountryWhiteList?: string[];
+  /** 地域黑名单（国家英文名） */
+  CountryBlackList?: string[];
 }
 
 /** cls日志信息 */
@@ -198,6 +122,22 @@ declare interface CreateMySQLResult {
 declare interface CreateUserResp {
   /** 用户ID */
   Uid?: string;
+}
+
+/** 安全网关自定义日志配置 */
+declare interface CustomLogConfig {
+  /** 是否需要请求体 */
+  NeedReqBodyLog?: boolean;
+  /** 是否需要请求头 */
+  NeedReqHeaderLog?: boolean;
+  /** 是否需要回包体 */
+  NeedRspBodyLog?: boolean;
+  /** 是否需要回包头部信息 */
+  NeedRspHeaderLog?: boolean;
+  /** cls set信息 */
+  LogSetId?: string;
+  /** cls topicId */
+  LogTopicId?: string;
 }
 
 /** 数据库资源信息 */
@@ -380,12 +320,174 @@ declare interface EnvInfo {
   Recycle?: string;
 }
 
+/** 外部存储。标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。 */
+declare interface ExternalStorage {
+  /** 桶名。当 Provider=cos 时，表示腾讯云对象存储桶。 */
+  BucketName: string;
+  /** Bucket所属地域。当 Provider=cos 时，表示腾讯云对象存储桶的所属地域。 */
+  Region: string;
+  /** 基础路径。绑定之后，用户访问云存储内的文件，后台会自动以BasePath作为前缀，拼接到所访问的文件中。例如： BasePath=my-cloudbase-path ， 当用户访问云存储内的 /tencentcloud.png 时，实际访问的完整路径是：/my-cloudbase-path/tencentcloud.png */
+  BasePath: string;
+  /** 是否启用外部存储 */
+  Enabled?: boolean;
+}
+
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等 */
+declare interface Filter {
+  /** 需要过滤的字段。过滤条件数量限制为10。 */
+  Name?: string;
+  /** 字段的过滤值。 */
+  Values?: string[];
+}
+
 /** 函数的信息 */
 declare interface FunctionInfo {
   /** 命名空间 */
   Namespace?: string;
   /** 所属地域。当前支持ap-shanghai */
   Region?: string;
+}
+
+/** 网关版本详情 */
+declare interface GatewayVersionItem {
+  /** 版本名 */
+  VersionName: string;
+  /** 版本流量权重 */
+  Weight: number;
+  /** 创建状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
+  /** 构建ID */
+  BuildId?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 优先级 */
+  Priority?: number;
+  /** 是否默认版本 */
+  IsDefault?: boolean;
+  /** 网关版本自定义配置 */
+  CustomConfig?: WxGatewayCustomConfig;
+}
+
+/** 查询HTTP访问服务输出的域名信息，每个域名内包含所有路由信息 */
+declare interface HTTPServiceDomain {
+  /** 域名 */
+  Domain?: string;
+  /** 域名类型。 HTTPSERVICE: HTTP访问服务，CBR: 云托管服务，ANYSERVICE: 任意服务，AI_AGENT: AI agent，VM: 主机，INTEGRATION_CALLBACK: 集成回调 */
+  DomainType?: string;
+  /** 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF） */
+  AccessType?: string;
+  /** 证书ID。当前账户下SSL平台的证书ID */
+  CertId?: string;
+  /** 协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向 */
+  Protocol?: string;
+  /** 配置DNS解析的CNAME。根据AccessType返回不同的CNAME值。 */
+  Cname?: string;
+  /** 是否是默认域名 */
+  IsDefault?: boolean;
+  /** 域名开启状态 */
+  Enable?: boolean;
+  /** 状态。PROCESSING、FAIL，SUCCESS。 */
+  Status?: string;
+  /** DNS解析状态。OK： 解析正常，INVALID：解析不正确，域名未解析到当前Cname域名。 */
+  DNSStatus?: string;
+  /** HTTP访问服务路由信息 */
+  Routes?: HTTPServiceRoute[];
+  /** 域名创建时间 */
+  CreateTime?: string;
+  /** 域名更新时间 */
+  UpdateTime?: string;
+}
+
+/** 创建或修改HTTP访问服务输入的域名信息，修改HTTP访问服务域名时对应字段不传参数表示不需要修改。 */
+declare interface HTTPServiceDomainParam {
+  /** 域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败 */
+  Domain: string;
+  /** 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF） */
+  AccessType?: string;
+  /** 证书ID。当前账户下SSL平台的证书ID */
+  CertId?: string;
+  /** 协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向 */
+  Protocol?: string;
+  /** 自定义CNAME。对应AccessType: Custom */
+  CustomCname?: string;
+  /** 域名开启状态，不传默认开启 */
+  Enable?: boolean;
+  /** 创建/修改的HTTP访问服务路由列表。如果不传，仅创建或修改域名信息。列表最大支持传入20个 */
+  Routes?: HTTPServiceRouteParam[];
+}
+
+/** HTTP访问服务路径重写配置 */
+declare interface HTTPServicePathRewrite {
+  /** 路径前缀重写。StaticStorePrefix、Prefix只能填一个 */
+  Prefix?: string;
+}
+
+/** http访问服务客户端限频 */
+declare interface HTTPServiceQPSPerClient {
+  /** 客户端维度限频标识。限制当前资源被单个客户端调用的频率，客户端标识支持 用户ID（UserID） 或 客户端 IP（ClientIP）。UserID 包括 云开发用户 ID 或 微信 openid，如果请求无 UserID 信息，则不会限制。 */
+  LimitBy?: string;
+  /** 限制QPS值，每秒请求次数 */
+  LimitValue?: number;
+}
+
+/** 查询HTTP访问服务输出路由信息 */
+declare interface HTTPServiceRoute {
+  /** 路径 */
+  Path?: string;
+  /** 路径重写 */
+  PathRewrite?: HTTPServicePathRewrite;
+  /** 上游服务类型。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse */
+  UpstreamResourceType?: string;
+  /** 上游服务名 */
+  UpstreamResourceName?: string;
+  /** 是否开启安全域名 */
+  EnableSafeDomain?: boolean;
+  /** 是否开启身份认证 */
+  EnableAuth?: boolean;
+  /** 是否开启路径透传 */
+  EnablePathTransmission?: boolean;
+  /** QPS限频策略 */
+  QPSPolicy?: HTTPServiceRouteQPSPolicy;
+  /** 是否开启路由 */
+  Enable?: boolean;
+  /** 路由创建时间 */
+  CreateTime?: string;
+  /** 路由更新时间 */
+  UpdateTime?: string;
+}
+
+/** 创建或修改HTTP访问服务输入的路由信息，修改HTTP访问服务路由信息时对应字段不传参数表示不用修改。 */
+declare interface HTTPServiceRouteParam {
+  /** 路径 */
+  Path: string;
+  /** 上游服务类型。创建时必填，修改时可选填。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse */
+  UpstreamResourceType?: string;
+  /** 上游服务名。创建时必填，修改时可选填 */
+  UpstreamResourceName?: string;
+  /** 路径重写 */
+  PathRewrite?: HTTPServicePathRewrite;
+  /** 是否开启安全域名。默认开启 */
+  EnableSafeDomain?: boolean;
+  /** 是否开启身份认证。默认关闭 */
+  EnableAuth?: boolean;
+  /** 是否开启路径透传。默认关闭 */
+  EnablePathTransmission?: boolean;
+  /** QPS限频策略 */
+  QPSPolicy?: HTTPServiceRouteQPSPolicy;
+  /** 是否开启路由 */
+  Enable?: boolean;
+}
+
+/** 云开发路由限频策略 */
+declare interface HTTPServiceRouteQPSPolicy {
+  /** QPS值，每秒请求次数 */
+  QPSTotal?: number;
+  /** 客户端限频配置 */
+  QPSPerClient?: HTTPServiceQPSPerClient;
 }
 
 /** 扩缩容策略 */
@@ -850,6 +952,18 @@ declare interface User {
   Description?: string;
 }
 
+/** 云服务器登录方式 */
+declare interface VMLoginConfiguration {
+  /** 登录方式。扫码登录时指定为 SCAN_LOGIN */
+  LoginType?: string;
+  /** 是否自动生成密码 */
+  AutoGeneratePassword?: string;
+  /** 指定密码登录 */
+  Password?: string;
+  /** 绑定密钥ID */
+  KeyIds?: string[];
+}
+
 /** 虚拟主机价格 */
 declare interface VMPrice {
   /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
@@ -906,6 +1020,20 @@ declare interface VmInstance {
   Region?: string;
 }
 
+/** 安全网关自定义配置 */
+declare interface WxGatewayCustomConfig {
+  /** 是否开启x-real-ip */
+  IsOpenXRealIp?: boolean;
+  /** 封禁配置 */
+  BanConfig?: BanConfig;
+  /** 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address) */
+  SourceIpType?: string;
+  /** 日志信息 */
+  LogConfig?: CustomLogConfig;
+  /** 是否开启http1.0 */
+  IsAcceptHttpOne?: boolean;
+}
+
 declare interface AddProviderRequest {
   /** 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。 */
   EnvId: string;
@@ -940,48 +1068,38 @@ declare interface AddProviderResponse {
   RequestId?: string;
 }
 
-declare interface BindCloudBaseAccessDomainRequest {
-  /** 服务Id，目前是指环境Id */
-  ServiceId: string;
-  /** 自定义域名 */
-  Domain: string;
-  /** 腾讯云证书Id */
-  CertId?: string;
-  /** 默认1，1 绑定默认Cdn，2 绑定TcbIngress（不经过cdn），4 绑定自定义cdn */
-  BindFlag?: number;
-  /** 自定义cdn cname域名 */
-  CustomCname?: string;
-}
-
-declare interface BindCloudBaseAccessDomainResponse {
-  /** 服务Id，目前是指环境Id */
-  ServiceId?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface BindCloudBaseGWDomainRequest {
-  /** 服务ID */
-  ServiceId: string;
-  /** 服务域名 */
-  Domain: string;
-  /** 证书ID */
-  CertId?: string;
-  /** 是否启用多地域 */
-  EnableRegion?: boolean;
-}
-
-declare interface BindCloudBaseGWDomainResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CheckTcbServiceRequest {
 }
 
 declare interface CheckTcbServiceResponse {
   /** true表示已开通 */
   Initialized?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateApiKeyRequest {
+  /** 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离 */
+  EnvId: string;
+  /** 密钥类型。可选值：api_key（服务端调用使用的 API 密钥，具有完整权限，请勿暴露在客户端）、publish_key（客户端使用的公开密钥，权限受限，可安全用于前端或移动端）。 */
+  KeyType: string;
+  /** 密钥的自定义名称，用于在管理列表中标识和区分不同的密钥，建议填写能体现用途或归属的描述性名称，例如：server-prod、mobile-test */
+  KeyName?: string;
+  /** 密钥的有效期，单位为秒，最短不得低于 7200 秒。超过有效期后密钥将自动失效。不设置或设置为 0 则表示永不过期，建议根据安全需求合理设置有效期 */
+  ExpireIn?: number;
+}
+
+declare interface CreateApiKeyResponse {
+  /** API Key 的唯一标识符，由系统基于 JWT Access Token Hash 自动生成。后续对该 API Key 进行查询、修改名称或删除操作时，均需使用该值作为定位参数 */
+  KeyId?: string;
+  /** API Key 的名称，即创建时传入的 KeyName 参数值。对于 publish_key 类型，该值固定为 publish_key */
+  Name?: string;
+  /** API Key 的令牌值（JWT 格式），用于服务端接口调用时的身份认证。出于安全考虑，仅在创建时返回一次完整明文；后续通过列表查询接口获取时，api_key 类型将进行脱敏处理；publish_key 类型始终返回完整明文。请在创建后妥善保存 */
+  ApiKey?: string | null;
+  /** API Key 的过期时间。对于 api_key 类型：若创建时未指定有效期，则该字段不返回，表示永不过期；若指定了有效期，则返回具体的过期时间。对于 publish_key 类型：始终返回，固定为 2099 年 */
+  ExpireAt?: string | null;
+  /** API Key 的创建时间。对于 api_key 类型：为实际创建该 Key 时的时间。对于 publish_key 类型：若环境下已存在 publish_key，则返回首次创建的时间而非本次调用时间 */
+  CreateAt?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1038,46 +1156,6 @@ declare interface CreateBillDealResponse {
   RequestId?: string;
 }
 
-declare interface CreateCloudBaseGWAPIRequest {
-  /** Service ID */
-  ServiceId: string;
-  /** API Path */
-  Path: string;
-  /** API类型（1表示云函数，2表示容器） */
-  Type: number;
-  /** API Name */
-  Name: string;
-  /** APIId，如果非空，表示修改绑定Path */
-  APIId?: string;
-  /** 自定义值通用字段（当Type为容器时必填） */
-  Custom?: string;
-  /** 认证开关 1为开启 2为关闭 */
-  AuthSwitch?: number;
-  /** 是否开启多地域 */
-  EnableRegion?: boolean;
-  /** 是否启用统一域名 */
-  EnableUnion?: boolean;
-  /** 域名 */
-  Domain?: string;
-  /** 访问类型："OA", "PUBLIC", "MINIAPP", "VPC" （不传默认PUBLIC+MINIAPP+VPC） */
-  AccessTypes?: string[];
-  /** 是否开启路径透传，默认true表示短路径，即不开启路径透传(已弃用) */
-  IsShortPath?: boolean;
-  /** 路径透传，默认0关闭，1开启，2关闭 */
-  PathTransmission?: number;
-  /** 跨域校验，默认0开启，1开启，2关闭 */
-  EnableCheckAcrossDomain?: number;
-  /** 静态托管资源目录 */
-  StaticFileDirectory?: string;
-}
-
-declare interface CreateCloudBaseGWAPIResponse {
-  /** API ID */
-  APIId: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateEnvRequest {
   /** 环境别名。### 格式要求- 可选字符： 小写字母(a~z)、数字、减号(-)- 不能以 减号(-) 开头或结尾- 不能有连个连续的 减号(-)- 长度不超过20位示例值：cloud */
   Alias: string;
@@ -1110,6 +1188,18 @@ declare interface CreateEnvResourceResponse {
 declare interface CreateEnvResponse {
   /** 自动生成的环境ID */
   EnvId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHTTPServiceRouteRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 域名路由信息 */
+  Domain: HTTPServiceDomainParam;
+}
+
+declare interface CreateHTTPServiceRouteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1155,6 +1245,8 @@ declare interface CreateStaticStoreRequest {
   EnvId: string;
   /** 是否启用统一域名 */
   EnableUnion?: boolean;
+  /** 外部存储源。 */
+  ExternalStorage?: ExternalStorage;
 }
 
 declare interface CreateStaticStoreResponse {
@@ -1214,6 +1306,38 @@ declare interface CreateUserResponse {
   RequestId?: string;
 }
 
+declare interface CreateVmInstanceRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务器类型：LightHouse = 轻量云服务器CVM = 云服务器 */
+  Type: string;
+  /** 轻量云服务器套餐ID。 当Type=LightHouse时必传 */
+  LightHouseBundleId?: string;
+  /** 轻量云服务器镜像ID。当Type=LightHouse时必传 */
+  LightHouseBlueprintId?: string;
+  /** 服务器别名 */
+  InstanceName?: string;
+  /** 登录方式 */
+  LoginConfiguration?: VMLoginConfiguration;
+}
+
+declare interface CreateVmInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteApiKeyRequest {
+  /** 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离 */
+  EnvId: string;
+  /** 密钥的唯一标识符，用于精确定位指定的 API 密钥。可通过查询密钥列表接口获取 */
+  KeyId: string;
+}
+
+declare interface DeleteApiKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAuthDomainRequest {
   /** 开发者的环境ID */
   EnvId: string;
@@ -1228,40 +1352,16 @@ declare interface DeleteAuthDomainResponse {
   RequestId?: string;
 }
 
-declare interface DeleteCloudBaseGWAPIRequest {
-  /** 服务ID */
-  ServiceId: string;
-  /** API Path */
-  Path?: string;
-  /** API ID */
-  APIId?: string;
-  /** API类型 */
-  Type?: number;
-  /** API Name */
-  Name?: string;
-  /** 自定义值字段（Type为2时，传递容器服务名表示需要删除JNSGW） */
-  Custom?: string;
+declare interface DeleteHTTPServiceRouteRequest {
+  /** 环境ID */
+  EnvId: string;
   /** 域名 */
-  Domain?: string;
-}
-
-declare interface DeleteCloudBaseGWAPIResponse {
-  /** 最终删除API个数 */
-  Count?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteCloudBaseGWDomainRequest {
-  /** 服务ID */
-  ServiceId: string;
-  /** 服务域名 */
   Domain: string;
+  /** 路径列表。为空则表示删除此域名和所有路由 */
+  Paths?: string[];
 }
 
-declare interface DeleteCloudBaseGWDomainResponse {
-  /** 删除个数 */
-  Count?: number;
+declare interface DeleteHTTPServiceRouteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1316,6 +1416,26 @@ declare interface DeleteVmInstanceRequest {
 }
 
 declare interface DeleteVmInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApiKeyListRequest {
+  /** 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离 */
+  EnvId: string;
+  /** 分页查询的页码，从 1 开始。与 PageSize 配合使用，不传则默认返回第 1 页 */
+  PageNumber?: number;
+  /** 分页查询每页返回的记录条数。与 PageNumber 配合使用，不传则使用系统默认值 */
+  PageSize?: number;
+  /** 密钥类型过滤条件。可选值：api_key（服务端调用使用的 API 密钥，具有完整权限）、publish_key（客户端使用的公开密钥，权限受限）密钥类型过滤条件。不传默认值为api_key */
+  KeyType?: string;
+}
+
+declare interface DescribeApiKeyListResponse {
+  /** API Key列表 */
+  Data?: ApiKeyToken[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1422,76 +1542,6 @@ declare interface DescribeCloudBaseBuildServiceResponse {
   DownloadHeaders?: KVPair[];
   /** 下载链接是否过期 */
   OutDate?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseGWAPIRequest {
-  /** 服务ID */
-  ServiceId?: string;
-  /** API域名 */
-  Domain?: string;
-  /** API Path */
-  Path?: string;
-  /** API ID */
-  APIId?: string;
-  /** API类型，1为云函数，2为容器 */
-  Type?: number;
-  /** API名，Type为1时为云函数名，Type为2时为容器服务名 */
-  Name?: string;
-  /** 查询的分页参数，用于设置查询的偏移位置，0表示从头开始 */
-  Offset?: number;
-  /** 查询的分页参数，用于表示每次查询的最大返回数据量 */
-  Limit?: number;
-  /** 是否启用多地域 */
-  EnableRegion?: boolean;
-  /** 是否使用统一域名 */
-  EnableUnion?: boolean;
-}
-
-declare interface DescribeCloudBaseGWAPIResponse {
-  /** API列表 */
-  APISet?: CloudBaseGWAPI[] | null;
-  /** 是否开启http调用 */
-  EnableService?: boolean;
-  /** 查询结果的数据总量 */
-  Total?: number | null;
-  /** 查询的分页参数 */
-  Offset?: number | null;
-  /** 查询的分页参数 */
-  Limit?: number | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeCloudBaseGWServiceRequest {
-  /** 服务ID */
-  ServiceId?: string;
-  /** 服务域名 */
-  Domain?: string;
-  /** 是否启用多地域 */
-  EnableRegion?: boolean;
-  /** 是否启用统一域名 */
-  EnableUnion?: boolean;
-}
-
-declare interface DescribeCloudBaseGWServiceResponse {
-  /** 服务列表 */
-  ServiceSet?: CloudBaseGWService[] | null;
-  /** 是否开启服务 */
-  EnableService?: boolean;
-  /** 默认域名信息 */
-  DefaultDomain?: string | null;
-  /** 是否开启CDN迁移 */
-  EnableUnion?: boolean | null;
-  /** 是否开启跨域校验，默认开启 true */
-  EnableCheckAcrossDomain?: boolean | null;
-  /** 自定义路由规则 */
-  CustomRoutingRules?: string | null;
-  /** 默认域名绑定类型，1绑定TCB-CDN，2绑定tcbingres（不经过cdn） */
-  AccessFlag?: number;
-  /** 云接入源站域名 */
-  OriginDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1726,6 +1776,48 @@ declare interface DescribeEnvsResponse {
   EnvList?: EnvInfo[];
   /** 环境个数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGatewayVersionsRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 网关id */
+  GatewayId: string;
+  /** 版本名 */
+  VersionName?: string;
+}
+
+declare interface DescribeGatewayVersionsResponse {
+  /** 网关id */
+  GatewayId?: string;
+  /** 版本总数 */
+  TotalCount?: number;
+  /** 版本信息详情 */
+  GatewayVersionItems?: GatewayVersionItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHTTPServiceRouteRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 过滤条件。Key的含义参考对应字段，Value精确匹配。可过滤: Domain、Path、DomainType、UpstreamResourceType。可过滤的Values单条不超过100 */
+  Filters?: Filter[];
+  /** 分页偏移量。默认 0 */
+  Offset?: number;
+  /** 分页限制。默认20，最大值1000 */
+  Limit?: number;
+}
+
+declare interface DescribeHTTPServiceRouteResponse {
+  /** 域名路由信息列表 */
+  Domains?: HTTPServiceDomain[];
+  /** 自定义接入的源站域名（HTTPService接入层域名） */
+  OriginDomain?: string;
+  /** 域名总数，分页查询使用总数判断是否已经拉取到所有数据 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2080,20 +2172,6 @@ declare interface ModifyClientResponse {
   RequestId?: string;
 }
 
-declare interface ModifyCloudBaseGWAPIRequest {
-  /** Service ID */
-  ServiceId: string;
-  /** API ID */
-  APIId: string;
-  /** 选项列表，key取值：domain, path。 */
-  Options: CloudBaseOption[];
-}
-
-declare interface ModifyCloudBaseGWAPIResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyClsTopicRequest {
   /** 环境ID */
   EnvId: string;
@@ -2142,6 +2220,18 @@ declare interface ModifyEnvRequest {
 }
 
 declare interface ModifyEnvResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyHTTPServiceRouteRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 域名路由信息 */
+  Domain: HTTPServiceDomainParam;
+}
+
+declare interface ModifyHTTPServiceRouteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2369,22 +2459,20 @@ declare interface Tcb {
   (): Versions;
   /** 添加第三方认证源 {@link AddProviderRequest} {@link AddProviderResponse} */
   AddProvider(data: AddProviderRequest, config?: AxiosRequestConfig): AxiosPromise<AddProviderResponse>;
-  /** 绑定云开发自定义域名 {@link BindCloudBaseAccessDomainRequest} {@link BindCloudBaseAccessDomainResponse} */
-  BindCloudBaseAccessDomain(data: BindCloudBaseAccessDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudBaseAccessDomainResponse>;
-  /** 绑定自定义域名 {@link BindCloudBaseGWDomainRequest} {@link BindCloudBaseGWDomainResponse} */
-  BindCloudBaseGWDomain(data: BindCloudBaseGWDomainRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudBaseGWDomainResponse>;
   /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */
   CheckTcbService(data?: CheckTcbServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTcbServiceResponse>;
+  /** 创建云开发平台的API Key {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
+  CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
   /** 增加安全域名 {@link CreateAuthDomainRequest} {@link CreateAuthDomainResponse} */
   CreateAuthDomain(data: CreateAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthDomainResponse>;
   /** 创建计费订单 {@link CreateBillDealRequest} {@link CreateBillDealResponse} */
   CreateBillDeal(data: CreateBillDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBillDealResponse>;
-  /** 创建云开发网关API {@link CreateCloudBaseGWAPIRequest} {@link CreateCloudBaseGWAPIResponse} */
-  CreateCloudBaseGWAPI(data: CreateCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudBaseGWAPIResponse>;
   /** 创建环境 {@link CreateEnvRequest} {@link CreateEnvResponse} */
   CreateEnv(data: CreateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResponse>;
   /** 创建环境相关资源 {@link CreateEnvResourceRequest} {@link CreateEnvResourceResponse} */
   CreateEnvResource(data: CreateEnvResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResourceResponse>;
+  /** 创建HTTP访问服务路由 {@link CreateHTTPServiceRouteRequest} {@link CreateHTTPServiceRouteResponse} */
+  CreateHTTPServiceRoute(data: CreateHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHTTPServiceRouteResponse>;
   /** 创建托管域名 {@link CreateHostingDomainRequest} {@link CreateHostingDomainResponse} */
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
   /** 开通 MySql {@link CreateMySQLRequest} {@link CreateMySQLResponse} */
@@ -2395,12 +2483,14 @@ declare interface Tcb {
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
   /** 创建tcb用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 创建服务器实例 {@link CreateVmInstanceRequest} {@link CreateVmInstanceResponse} */
+  CreateVmInstance(data: CreateVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVmInstanceResponse>;
+  /** 删除云开发平台的API Key {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
+  DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
   /** 删除合法域名 {@link DeleteAuthDomainRequest} {@link DeleteAuthDomainResponse} */
   DeleteAuthDomain(data: DeleteAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthDomainResponse>;
-  /** 删除网关API {@link DeleteCloudBaseGWAPIRequest} {@link DeleteCloudBaseGWAPIResponse} */
-  DeleteCloudBaseGWAPI(data: DeleteCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWAPIResponse>;
-  /** 删除网关域名 {@link DeleteCloudBaseGWDomainRequest} {@link DeleteCloudBaseGWDomainResponse} */
-  DeleteCloudBaseGWDomain(data: DeleteCloudBaseGWDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudBaseGWDomainResponse>;
+  /** 删除HTTP访问服务路由 {@link DeleteHTTPServiceRouteRequest} {@link DeleteHTTPServiceRouteResponse} */
+  DeleteHTTPServiceRoute(data: DeleteHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHTTPServiceRouteResponse>;
   /** 删除第三方认证源 {@link DeleteProviderRequest} {@link DeleteProviderResponse} */
   DeleteProvider(data: DeleteProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProviderResponse>;
   /** 删除文档型数据库表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
@@ -2409,6 +2499,8 @@ declare interface Tcb {
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 销毁服务器实例 {@link DeleteVmInstanceRequest} {@link DeleteVmInstanceResponse} */
   DeleteVmInstance(data: DeleteVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVmInstanceResponse>;
+  /** 查询云开发平台的API Key列表 {@link DescribeApiKeyListRequest} {@link DescribeApiKeyListResponse} */
+  DescribeApiKeyList(data: DescribeApiKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyListResponse>;
   /** 获取安全域名列表 {@link DescribeAuthDomainsRequest} {@link DescribeAuthDomainsResponse} */
   DescribeAuthDomains(data: DescribeAuthDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthDomainsResponse>;
   /** 获取新套餐 {@link DescribeBaasPackageListRequest} {@link DescribeBaasPackageListResponse} */
@@ -2419,10 +2511,6 @@ declare interface Tcb {
   DescribeClient(data: DescribeClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
-  /** 获取网关API列表 {@link DescribeCloudBaseGWAPIRequest} {@link DescribeCloudBaseGWAPIResponse} */
-  DescribeCloudBaseGWAPI(data?: DescribeCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWAPIResponse>;
-  /** 获取网关服务 {@link DescribeCloudBaseGWServiceRequest} {@link DescribeCloudBaseGWServiceResponse} */
-  DescribeCloudBaseGWService(data?: DescribeCloudBaseGWServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseGWServiceResponse>;
   /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
   DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
   /** 开通 MySql 结果查询 {@link DescribeCreateMySQLResultRequest} {@link DescribeCreateMySQLResultResponse} */
@@ -2437,6 +2525,10 @@ declare interface Tcb {
   DescribeEnvLimit(data?: DescribeEnvLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvLimitResponse>;
   /** 获取环境列表 {@link DescribeEnvsRequest} {@link DescribeEnvsResponse} */
   DescribeEnvs(data?: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
+  /** 查询网关版本信息 {@link DescribeGatewayVersionsRequest} {@link DescribeGatewayVersionsResponse} */
+  DescribeGatewayVersions(data: DescribeGatewayVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayVersionsResponse>;
+  /** 查询HTTP访问服务路由信息 {@link DescribeHTTPServiceRouteRequest} {@link DescribeHTTPServiceRouteResponse} */
+  DescribeHTTPServiceRoute(data: DescribeHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPServiceRouteResponse>;
   /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
   /** 获取登录策略 {@link DescribeLoginConfigRequest} {@link DescribeLoginConfigResponse} */
@@ -2477,8 +2569,6 @@ declare interface Tcb {
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
   /** 修改应用客户端 {@link ModifyClientRequest} {@link ModifyClientResponse} */
   ModifyClient(data: ModifyClientRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClientResponse>;
-  /** 修改云开发网关API {@link ModifyCloudBaseGWAPIRequest} {@link ModifyCloudBaseGWAPIResponse} */
-  ModifyCloudBaseGWAPI(data: ModifyCloudBaseGWAPIRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudBaseGWAPIResponse>;
   /** 修改日志主题 {@link ModifyClsTopicRequest} {@link ModifyClsTopicResponse} */
   ModifyClsTopic(data: ModifyClsTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClsTopicResponse>;
   /** 修改文档型数据库权限 {@link ModifyDatabaseACLRequest} {@link ModifyDatabaseACLResponse} */
@@ -2487,6 +2577,8 @@ declare interface Tcb {
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
   /** 更新云开发环境套餐 {@link ModifyEnvPlanRequest} {@link ModifyEnvPlanResponse} */
   ModifyEnvPlan(data: ModifyEnvPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvPlanResponse>;
+  /** 修改HTTP访问服务路由 {@link ModifyHTTPServiceRouteRequest} {@link ModifyHTTPServiceRouteResponse} */
+  ModifyHTTPServiceRoute(data: ModifyHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHTTPServiceRouteResponse>;
   /** 修改登录策略 {@link ModifyLoginConfigRequest} {@link ModifyLoginConfigResponse} */
   ModifyLoginConfig(data: ModifyLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginConfigResponse>;
   /** 修改第三方认证源 {@link ModifyProviderRequest} {@link ModifyProviderResponse} */
@@ -2639,6 +2731,8 @@ declare interface Tcb {
   DescribeCloudBaseCodeBranch(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseCodeRepos(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
+  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
+  DescribeCloudBaseGWAPI(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunBaseImages(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

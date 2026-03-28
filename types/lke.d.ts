@@ -2915,6 +2915,8 @@ declare interface CreateWorkflowRunRequest {
   Query?: string;
   /** API参数配置 */
   CustomVariables?: CustomVariable[];
+  /** 用户ID */
+  VisitorId?: string;
 }
 
 declare interface CreateWorkflowRunResponse {

@@ -274,7 +274,7 @@ declare interface CopyJobItem {
   TargetName?: string;
   /** 新作业的目录id */
   TargetFolderId?: string;
-  /** 源作业类型 */
+  /** 作业类型枚举值：1： sql作业2： jar作业4： python作业 */
   JobType?: number;
 }
 
@@ -378,7 +378,7 @@ declare interface GatewayRefItem {
 declare interface HadoopYarnItem {
   /** ClusterGroupSerialId */
   ClusterGroupSerialId: string;
-  /** 状态 */
+  /** 状态枚举值：1： 停止2： 开启中3： 启动4： 开启失败5： 停止中 */
   Status: number | null;
   /** cpu */
   Cpu: number | null;
@@ -478,6 +478,8 @@ declare interface JobConfig {
   CheckpointTimeoutSecond?: number;
   /** checkpoint 间隔时间 */
   CheckpointIntervalSecond?: number;
+  /** 变量替换模式枚举值：0： 表变量替换1： 全局SQL变量替换默认值：0 */
+  VariableReplaceMode?: number;
 }
 
 /** 描述作业发生的一个事件 */
@@ -854,9 +856,9 @@ declare interface ResourceRefLatest {
   ResourceId?: string | null;
   /** 版本号 */
   Version?: number | null;
-  /** 资源类型 */
+  /** 资源类型枚举值：1： Main资源2： 依赖资源3： python文件4： 数据文件 */
   Type?: number | null;
-  /** 状态 */
+  /** 状态枚举值：1： 活跃-2： 删除 */
   Status?: number | null;
   /** 空间id */
   WorkspaceId?: string | null;
@@ -1218,13 +1220,31 @@ declare interface TreeResourceItem {
   RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
 }
 
+/** 变量信息列表 */
+declare interface VariableItem {
+  /** 变量id */
+  SerialId?: string | null;
+  /** 变量名 */
+  Name?: string | null;
+  /** 变量值 */
+  Value?: string | null;
+  /** 变量值是否隐藏 */
+  Type?: number | null;
+  /** 变量描述 */
+  Remark?: string | null;
+  /** 变量创建时间 */
+  CreateTime?: string | null;
+  /** 变量创建人 */
+  CreatorUin?: string | null;
+}
+
 /** Setats Warehouse结构 */
 declare interface Warehouse {
-  /** 状态 */
+  /** 状态枚举值：0： 未开启1： 开启中2： 已开启 */
   Status?: number | null;
   /** location */
   Location?: string | null;
-  /** catalogtype */
+  /** catalog类型枚举值：hadoop： hadoop catalog */
   CatalogType?: string | null;
   /** uri */
   Uri?: string | null;
@@ -1463,6 +1483,8 @@ declare interface CreateJobConfigRequest {
   CheckpointTimeoutSecond?: number;
   /** checkpoint 间隔时间 */
   CheckpointIntervalSecond?: number;
+  /** 变量替换模式枚举值：0： 表变量替换1： SQL全局变量替换默认值：1 */
+  VariableReplaceMode?: number;
 }
 
 declare interface CreateJobConfigResponse {
@@ -2050,6 +2072,8 @@ declare interface DescribeVariablesRequest {
 }
 
 declare interface DescribeVariablesResponse {
+  /** ["x","y"] */
+  VariableSet?: VariableItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

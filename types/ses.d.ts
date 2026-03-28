@@ -321,9 +321,9 @@ declare interface BatchSendEmailRequest {
   TaskType: number;
   /** 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。 */
   ReplyToAddresses?: string;
-  /** 使用模板发送时，填写的模板相关参数 如您未申请过特殊配置，则该字段为必填 </dx-alert> */
+  /** 使用模板发送时，填写的模板相关参数 注意 如您未申请过特殊配置，则该字段为必填 */
   Template?: Template;
-  /** 已废弃 仅部分历史上申请了特殊配置的客户需要使用。如您未申请过特殊配置，则不存在该字段。</dx-alert> */
+  /** 已废弃 说明 仅部分历史上申请了特殊配置的客户需要使用。如您未申请过特殊配置，则不存在该字段。 */
   Simple?: Simple;
   /** 需要发送附件时，填写附件相关参数（暂未支持） */
   Attachments?: Attachment[];
@@ -331,7 +331,7 @@ declare interface BatchSendEmailRequest {
   CycleParam?: CycleEmailParam;
   /** 定时发送任务的必要参数 */
   TimedParam?: TimedEmailParam;
-  /** 退订链接选项 0: 不加入退订链接 1: 简体中文 2: 英文 3: 繁体中文 4: 西班牙语 5: 法语 6: 德语 7: 日语 8: 韩语 9: 阿拉伯语 10: 泰语 */
+  /** 退订链接选项枚举值：0： 不加入退订链接1： 简体中文2： 英文3： 繁体中文4： 西班牙语5： 法语6： 德语7： 日语8： 韩语9： 阿拉伯语10： 泰语11： 印尼语 */
   Unsubscribe?: string;
   /** 是否添加广告标识 0:不添加 1:添加到subject前面，2:添加到subject后面 */
   ADLocation?: number;

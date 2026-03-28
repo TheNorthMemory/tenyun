@@ -296,6 +296,8 @@ declare interface Registry {
   RenewFlag?: number;
   /** 是否开启实例删除保护，false表示不开启 */
   DeletionProtection?: boolean;
+  /** 是否支持AI特性 */
+  AIFeature?: boolean | null;
 }
 
 /** 实例预付费模式 */

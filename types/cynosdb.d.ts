@@ -34,16 +34,18 @@ declare interface Ability {
 declare interface Account {
   /** 数据库账号名 */
   AccountName?: string;
+  /** 主机 */
+  Host?: string;
   /** 数据库账号描述 */
   Description?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
-  /** 主机 */
-  Host?: string;
   /** 用户最大连接数 */
   MaxUserConnections?: number;
+  /** 是否开启密码轮转(0:关闭;1:开启) */
+  PasswordRotation?: number;
 }
 
 /** 账号参数 */
@@ -2152,14 +2154,16 @@ declare interface NetAddr {
   InstanceGroupId?: string;
 }
 
-/** x08新创建的账号 */
+/** 新建账号 */
 declare interface NewAccount {
   /** 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-30 */
   AccountName: string;
-  /** 密码，密码长度范围为8到64个字符 */
-  AccountPassword: string;
   /** 主机(%或ipv4地址) */
   Host: string;
+  /** 密码，密码长度范围为8到64个字符 */
+  AccountPassword: string;
+  /** 是否开启密码轮转(0:关闭;1:开启) */
+  PasswordRotation?: number;
   /** 描述 */
   Description?: string;
   /** 用户最大连接数，不能大于10240 */
@@ -5575,7 +5579,7 @@ declare interface DescribeProxiesRequest {
   OrderBy?: string;
   /** 排序类型，取值范围： ASC：升序排序 DESC：降序排序 */
   OrderByType?: string;
-  /** 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
+  /** 搜索条件，若存在多个 Filter 时，Filter 间的关系为逻辑与（AND）关系。说明：此参数当前仅支持 Status 和 ProxyGroupId 两种过滤条件。 */
   Filters?: QueryParamFilter[];
 }
 
@@ -7817,7 +7821,7 @@ declare interface UpgradeInstanceRequest {
   Memory: number;
   /** 升级类型：upgradeImmediate，upgradeInMaintain */
   UpgradeType: string;
-  /** 实例机器类型 */
+  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
   DeviceType?: string;
   /** 该参数已废弃 */
   StorageLimit?: number;
