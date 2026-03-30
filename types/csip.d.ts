@@ -3551,6 +3551,30 @@ declare interface DescribeAIAgentAssetListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAKAnalysisDetailRequest {
+  /** 告警记录ID */
+  ID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeAKAnalysisDetailResponse {
+  /** 告警AI分析状态 -1 分析失败 0 未分析 1 分析中 2 分析成功，真实告警 3 分析成功，可疑告警 */
+  AIStatus?: number;
+  /** AI分析任务ID */
+  AITaskID?: string;
+  /** 告警AI分析结果，base64格式，避免数据被拦截 */
+  AIResult?: string;
+  /** 反馈建议 */
+  Feedback?: string;
+  /** 反馈状态 0表示没有反馈，1表示认可，2表示不认可 */
+  FeedbackResult?: number;
+  /** 失败原因 */
+  FailedReason?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAbnormalCallRecordRequest {
   /** 告警规则ID */
   AlarmRuleID: number;
@@ -5284,6 +5308,8 @@ declare interface Csip {
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
   DescribeAIAgentAssetList(data?: DescribeAIAgentAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentAssetListResponse>;
+  /** 获取访问密钥告警AI分析详情 {@link DescribeAKAnalysisDetailRequest} {@link DescribeAKAnalysisDetailResponse} */
+  DescribeAKAnalysisDetail(data: DescribeAKAnalysisDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAKAnalysisDetailResponse>;
   /** 获取异常调用记录 {@link DescribeAbnormalCallRecordRequest} {@link DescribeAbnormalCallRecordResponse} */
   DescribeAbnormalCallRecord(data: DescribeAbnormalCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAbnormalCallRecordResponse>;
   /** 获取访问密钥告警记录 {@link DescribeAccessKeyAlarmRequest} {@link DescribeAccessKeyAlarmResponse} */

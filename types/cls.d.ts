@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** DataSight访问控制规则 */
+declare interface AccessControlRule {
+  /** 访问方式：public - 公网，internal - 内网 */
+  AccessMode: string | null;
+}
+
 /** 高级过滤规则 */
 declare interface AdvanceFilterRuleInfo {
   /** 过滤字段 */
@@ -276,12 +282,30 @@ declare interface AnonymousInfo {
   Conditions?: ConditionInfo[];
 }
 
+/** DataSight内网匿名登录账号信息 */
+declare interface AnonymousLoginInfo {
+  /** 匿名登录账号secretId */
+  SecretId: string | null;
+  /** 匿名登录账号secretKey */
+  SecretKey?: string | null;
+}
+
 /** 元数据Pod label标签结构体 */
 declare interface AppointLabel {
   /** 指定标签类型。- 0：所有Pod label，Keys字段无效- 1：指定Pod label，Keys字段不能为空 */
   Type: number | null;
   /** 元数据Pod标签的键。有效标签键有两个部分：可选前缀和名称，以斜杠 (/) 分隔。名称部分是必需的，并且必须不超过 63 个字符，以字母数字字符 ([a-z0-9A-Z]) 开头和结尾，中间有破折号(-)、下划线(_)、点(.) 和字母数字。前缀是可选的。如果指定，前缀必须是 DNS 子域：一系列以点 (.) 分隔的 DNS 标签，总长度不超过 253 个字符，后跟斜杠 ( /)。- prefix 格式 `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`- name 格式 `([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]`- key不能重复 */
   Keys?: string[] | null;
+}
+
+/** dataSight 第三方验证登录角色配置信息 */
+declare interface AuthRoleInfo {
+  /** Auth角色名称 */
+  RoleName: string;
+  /** Auth角色对应权限SecretId */
+  SecretId: string;
+  /** Auth角色对应权限SecretKey */
+  SecretKey?: string | null;
 }
 
 /** 指标采集配置 */
@@ -446,6 +470,56 @@ declare interface ConfigInfo {
   AdvancedConfig?: string;
   /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）- file: 文件类型采集- windows_event：windows事件采集- syslog：系统日志采集 */
   InputType?: string;
+}
+
+/** DataSight控制台实例 */
+declare interface Console {
+  /** DataSight控制台Id */
+  ConsoleId?: string;
+  /** 访问方式：public-公网，internal-内网 */
+  AccessMode?: string[];
+  /** 登录方式：0-账号密码鉴权，1-匿名登录，2-第三方认证登录 */
+  LoginMode?: number;
+  /** 自定义域名前缀 */
+  DomainPrefix?: string;
+  /** 用户账号信息 */
+  Accounts?: ConsoleAccount[] | null;
+  /** 内网类型，默认为0 */
+  IntranetType?: number | null;
+  /** 内网地域 */
+  IntranetRegion?: string | null;
+  /** 内网私有网络VpcId */
+  VpcId?: string | null;
+  /** 内网子网SubnetId */
+  SubnetId?: string | null;
+  /** 匿名登录账号信息 */
+  AnonymousLogin?: AnonymousLoginInfo | null;
+  /** auth用户角色信息 */
+  AuthRoles?: AuthRoleInfo[] | null;
+  /** 绑定的标签信息 */
+  Tags?: Tag[] | null;
+  /** 自定义隐藏参数 */
+  HideParams?: string[] | null;
+  /** 访问控制规则 */
+  AccessControlRules?: AccessControlRule[] | null;
+  /** 备注 */
+  Remarks?: string | null;
+  /** 自定义显示菜单 */
+  Menus?: string[] | null;
+}
+
+/** DataSight控制台用户账号信息 */
+declare interface ConsoleAccount {
+  /** 用户名 */
+  UserName: string | null;
+  /** 用户密码 */
+  Password: string | null;
+  /** 腾讯云账号SecretId */
+  SecretId: string | null;
+  /** 腾讯云账号SecretKey */
+  SecretKey: string | null;
+  /** 电子邮箱，用于发送验证码 */
+  Email?: string | null;
 }
 
 /** 控制台分享配置 */
@@ -2774,6 +2848,46 @@ declare interface CreateConfigResponse {
   RequestId?: string;
 }
 
+declare interface CreateConsoleRequest {
+  /** 访问方式：public - 公网，internal - 内网 */
+  AccessMode: string[];
+  /** 登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录 */
+  LoginMode: number;
+  /** 自定义域名前缀 */
+  DomainPrefix: string;
+  /** 用户账号信息“账号密码鉴权“登录方式必传 */
+  Accounts?: ConsoleAccount[];
+  /** 匿名登录账号信息“匿名登录”登录方式必传 */
+  AnonymousLogin?: AnonymousLoginInfo;
+  /** 内网类型，默认为0 */
+  IntranetType?: number;
+  /** 内网地域 */
+  IntranetRegion?: string;
+  /** 内网私有网络VpcId */
+  VpcId?: string;
+  /** 内网子网SubnetId */
+  SubnetId?: string;
+  /** Auth角色信息“第三方认证登录”登录方式必传 */
+  AuthRoles?: AuthRoleInfo[];
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
+  /** 自定义隐藏参数 */
+  HideParams?: string[];
+  /** 访问控制规则“第三方认证登录”登录方式必传 AccessMode: internal &amp;&amp; Action: ACCEPT 规则 */
+  AccessControlRules?: AccessControlRule[];
+  /** 备注 */
+  Remarks?: string;
+  /** 自定义显示菜单 */
+  Menus?: string[];
+}
+
+declare interface CreateConsoleResponse {
+  /** DataSight控制台Id */
+  ConsoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConsoleSharingRequest {
   /** 免密分享配置 */
   SharingConfig: ConsoleSharingConfig;
@@ -3528,6 +3642,16 @@ declare interface DeleteConfigResponse {
   RequestId?: string;
 }
 
+declare interface DeleteConsoleRequest {
+  /** DataSight控制台Id */
+  ConsoleId: string;
+}
+
+declare interface DeleteConsoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConsoleSharingRequest {
   /** 免密分享Id。- 通过 [获取免密分享列表](https://cloud.tencent.com/document/product/614/109798) 获取免密分享Id。 - 通过 [创建免密分享](https://cloud.tencent.com/document/product/614/109800) 获取免密分享Id。 */
   SharingId: string;
@@ -3994,6 +4118,24 @@ declare interface DescribeConsoleSharingListResponse {
   TotalCount?: number;
   /** 控制台免密分享列表 */
   ConsoleSharingInfos?: ConsoleSharingInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsolesRequest {
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为100，最大值100。 */
+  Limit?: number;
+  /** DomainPrefix按照【域名前缀】进行过滤。类型：String必选：否 ConsoleId按照【DataSight实例ID】进行过滤。类型：String必选：否 tagKey按照【标签键】进行过滤。类型：String必选：否 tag:tagKey按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换，例如tag:exampleKey。类型：String必选：否 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeConsolesResponse {
+  /** DataSight控制台实例列表 */
+  Consoles?: Console[];
+  /** 实例总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5108,6 +5250,46 @@ declare interface ModifyConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyConsoleRequest {
+  /** DataSight控制台ConsoleId */
+  ConsoleId: string;
+  /** 访问方式：public - 公网，internal - 内网 */
+  AccessMode?: string[];
+  /** 登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录 */
+  LoginMode?: number;
+  /** 自定义域名前缀 */
+  DomainPrefix?: string;
+  /** 用户账号信息“账号密码鉴权“登录方式必传 */
+  Accounts?: ConsoleAccount[];
+  /** 匿名登录账号信息“匿名登录”登录方式必传 */
+  AnonymousLogin?: AnonymousLoginInfo;
+  /** 内网类型，默认为0 */
+  IntranetType?: number;
+  /** 内网地域 */
+  IntranetRegion?: string;
+  /** 内网私有网络VpcId */
+  VpcId?: string;
+  /** 内网子网SubnetId */
+  SubnetId?: string;
+  /** Auth用户角色信息“第三方认证登录”登录方式必传 */
+  AuthRoles?: AuthRoleInfo[];
+  /** 自定义隐藏参数 */
+  HideParams?: string[];
+  /** 访问控制规则“第三方认证登录”登录方式必传 AccessMode: internal &amp;&amp; Action: ACCEPT 规则 */
+  AccessControlRules?: AccessControlRule[];
+  /** 备注 */
+  Remarks?: string;
+  /** 自定义显示菜单 */
+  Menus?: string[];
+}
+
+declare interface ModifyConsoleResponse {
+  /** DataSight控制台Id */
+  ConsoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConsoleSharingRequest {
   /** 免密分享Id。- 通过 [获取免密分享列表](https://cloud.tencent.com/document/product/614/109798) 获取免密分享Id。 - 通过 [创建免密分享](https://cloud.tencent.com/document/product/614/109800) 获取免密分享Id。 */
   SharingId: string;
@@ -6023,6 +6205,8 @@ declare interface Cls {
   CreateConfig(data: CreateConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigResponse>;
   /** 创建特殊采集配置任务 {@link CreateConfigExtraRequest} {@link CreateConfigExtraResponse} */
   CreateConfigExtra(data: CreateConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigExtraResponse>;
+  /** 创建DataSight控制台 {@link CreateConsoleRequest} {@link CreateConsoleResponse} */
+  CreateConsole(data: CreateConsoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleResponse>;
   /** 创建免密分享 {@link CreateConsoleSharingRequest} {@link CreateConsoleSharingResponse} */
   CreateConsoleSharing(data: CreateConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleSharingResponse>;
   /** 创建投递Ckafka任务 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
@@ -6089,6 +6273,8 @@ declare interface Cls {
   DeleteConfigExtra(data: DeleteConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigExtraResponse>;
   /** 删除应用到机器组的采集配置 {@link DeleteConfigFromMachineGroupRequest} {@link DeleteConfigFromMachineGroupResponse} */
   DeleteConfigFromMachineGroup(data: DeleteConfigFromMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConfigFromMachineGroupResponse>;
+  /** 删除DataSight控制台 {@link DeleteConsoleRequest} {@link DeleteConsoleResponse} */
+  DeleteConsole(data: DeleteConsoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleResponse>;
   /** 删除免密分享 {@link DeleteConsoleSharingRequest} {@link DeleteConsoleSharingResponse} */
   DeleteConsoleSharing(data: DeleteConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleSharingResponse>;
   /** 删除投递Ckafka任务 {@link DeleteConsumerRequest} {@link DeleteConsumerResponse} */
@@ -6161,6 +6347,8 @@ declare interface Cls {
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 获取免密分享列表 {@link DescribeConsoleSharingListRequest} {@link DescribeConsoleSharingListResponse} */
   DescribeConsoleSharingList(data?: DescribeConsoleSharingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsoleSharingListResponse>;
+  /** 查询DataSight控制台实例列表 {@link DescribeConsolesRequest} {@link DescribeConsolesResponse} */
+  DescribeConsoles(data?: DescribeConsolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsolesResponse>;
   /** 获取投递配置 {@link DescribeConsumerRequest} {@link DescribeConsumerResponse} */
   DescribeConsumer(data: DescribeConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerResponse>;
   /** 获取消费组列表 {@link DescribeConsumerGroupsRequest} {@link DescribeConsumerGroupsResponse} */
@@ -6269,6 +6457,8 @@ declare interface Cls {
   ModifyConfig(data: ModifyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigResponse>;
   /** 修改特殊采集配置任务 {@link ModifyConfigExtraRequest} {@link ModifyConfigExtraResponse} */
   ModifyConfigExtra(data: ModifyConfigExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConfigExtraResponse>;
+  /** 编辑DataSight控制台 {@link ModifyConsoleRequest} {@link ModifyConsoleResponse} */
+  ModifyConsole(data: ModifyConsoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleResponse>;
   /** 修改免密分享 {@link ModifyConsoleSharingRequest} {@link ModifyConsoleSharingResponse} */
   ModifyConsoleSharing(data: ModifyConsoleSharingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConsoleSharingResponse>;
   /** 修改投递Ckafka任务 {@link ModifyConsumerRequest} {@link ModifyConsumerResponse} */

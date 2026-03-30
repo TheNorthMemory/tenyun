@@ -1312,6 +1312,24 @@ declare interface ModifyDomainOwnerBatchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDomainOwnerRequest {
+  /** 域名ID */
+  DomainId: string;
+  /** 新用户UIN */
+  NewOwnerUin: string;
+  /** 新用户APPID */
+  NewOwnerAppId?: string;
+  /** 是否同时转移对应的 DNS 解析域名，默认false */
+  TransferDns?: boolean;
+}
+
+declare interface ModifyDomainOwnerResponse {
+  /** null: 未转移对应的 DNS 解析域名，false: 转移对应的 DNS 解析域名失败，true: 转移对应的 DNS 解析域名成功 */
+  TransferDnsResult?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyIntlCustomDnsHostRequest {
   /** 域名ID */
   DomainId: string;
@@ -1589,6 +1607,8 @@ declare interface Domain {
   ModifyCustomDnsHost(data: ModifyCustomDnsHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomDnsHostResponse>;
   /** 批量域名 DNS 修改 {@link ModifyDomainDNSBatchRequest} {@link ModifyDomainDNSBatchResponse} */
   ModifyDomainDNSBatch(data: ModifyDomainDNSBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainDNSBatchResponse>;
+  /** 域名过户 {@link ModifyDomainOwnerRequest} {@link ModifyDomainOwnerResponse} */
+  ModifyDomainOwner(data: ModifyDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerResponse>;
   /** 批量账号间转移 {@link ModifyDomainOwnerBatchRequest} {@link ModifyDomainOwnerBatchResponse} */
   ModifyDomainOwnerBatch(data: ModifyDomainOwnerBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainOwnerBatchResponse>;
   /** 修改DNS Host {@link ModifyIntlCustomDnsHostRequest} {@link ModifyIntlCustomDnsHostResponse} */

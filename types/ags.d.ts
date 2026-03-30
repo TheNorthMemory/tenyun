@@ -126,6 +126,14 @@ declare interface LogConfiguration {
   CLSConfig?: CLSConfig;
 }
 
+/** metadata 项 */
+declare interface MetadataVar {
+  /** 沙箱元数据名 */
+  Name?: string;
+  /** 沙箱元数据值 */
+  Value?: string;
+}
+
 /** 沙箱实例存储挂载配置可选项，用于覆盖沙箱工具的存储配置的部分选项，并提供子路径挂载配置。 */
 declare interface MountOption {
   /** 指定沙箱工具中的存储配置名称 */
@@ -204,6 +212,10 @@ declare interface SandboxInstance {
   MountOptions?: MountOption[];
   /** 沙箱实例自定义配置 */
   CustomConfiguration?: CustomConfigurationDetail;
+  /** 网络模式枚举值：PUBLIC： 公网访问SANDBOX： 无网络INTERNAL_SERVICE： 腾讯云内部公共服务可以覆盖工具级别的网络配置。但如果一个工具本身就不支持 VPC 网络，那么即便在实例设置里选了 VPC 模式，也是无效的 */
+  NetworkMode?: string;
+  /** 沙箱实例元数据 */
+  Metadata?: MetadataVar[];
 }
 
 /** 沙箱工具结构体 */
@@ -489,6 +501,10 @@ declare interface StartSandboxInstanceRequest {
   MountOptions?: MountOption[];
   /** 沙箱实例自定义配置 */
   CustomConfiguration?: CustomConfiguration;
+  /** 沙箱访问认证模式枚举值：DEFAULT： 跟随系统策略TOKEN： Token认证NONE： 免认证 默认值：DEFAULT */
+  AuthMode?: string;
+  /** 沙箱元数据 */
+  Metadata?: MetadataVar[];
 }
 
 declare interface StartSandboxInstanceResponse {
@@ -513,6 +529,8 @@ declare interface UpdateSandboxInstanceRequest {
   InstanceId: string;
   /** 新的超时时间（从设置时开始重新计算超时），支持格式：5m、300s、1h等。最小30s，最大24h。如果不指定则保持原有超时设置 */
   Timeout?: string;
+  /** 沙箱实例元数据 */
+  Metadata?: MetadataVar[];
 }
 
 declare interface UpdateSandboxInstanceResponse {

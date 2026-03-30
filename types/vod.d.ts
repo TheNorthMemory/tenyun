@@ -459,6 +459,8 @@ declare namespace V20180717 {
     TEHDConfig?: TEHDConfig | null;
     /** 音视频增强配置。 */
     EnhanceConfig?: EnhanceConfig | null;
+    /** 扩展参数。 */
+    StdExtInfo?: string;
   }
 
   /** 自定义主体信息 */
@@ -1783,7 +1785,7 @@ declare namespace V20180717 {
 
   /** AIGC 生图任务的输出媒体文件配置。 */
   interface AigcImageOutputConfig {
-    /** 存储模式。取值有： Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    /** 存储模式枚举值：Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId默认值：Temporary */
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
@@ -1905,7 +1907,7 @@ declare namespace V20180717 {
 
   /** AIGC 生视频任务的输出媒体文件配置。 */
   interface AigcVideoOutputConfig {
-    /** 存储模式。取值有： Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    /** 存储模式枚举值：Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId默认值：Temporary */
     StorageMode?: string;
     /** 输出媒体文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
@@ -6339,7 +6341,7 @@ declare namespace V20180717 {
 
   /** AIGC 场景化生图任务的输出媒体文件配置。 */
   interface SceneAigcImageOutputConfig {
-    /** 存储模式。取值有： Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    /** 存储模式枚举值：Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId默认值：Temporary */
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
@@ -7089,12 +7091,14 @@ declare namespace V20180717 {
     EnhanceConfig?: EnhanceConfig | null;
     /** 封装格式过滤条件，可选值：Video：视频格式，可以同时包含视频流和音频流的封装格式；PureAudio：纯音频格式，只能包含音频流的封装格式板。 */
     ContainerType?: string;
-    /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 模板创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 模板最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
     /** 切片类型，仅当 Container 为 hls 时有效。 */
     SegmentType?: string;
+    /** 扩展参数。 */
+    StdExtInfo?: string;
   }
 
   /** 转场操作 */
@@ -7307,10 +7311,18 @@ declare namespace V20180717 {
     Vcrf?: number;
     /** 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。当填 0 或不填时，系统将自动设置 gop 长度。 */
     Gop?: number;
+    /** Gop数值单位。枚举值：frame： 表示帧数。second： 表示秒数。默认值：frame */
+    GopUnit?: string;
     /** 当原始视频为 HDR（High Dynamic Range）时，转码输出是否依然保持 HDR。取值范围：ON: 如果原始文件是 HDR，则转码输出保持 HDR；否则转码输出为 SDR （Standard Dynamic Range）。OFF: 无论原始文件是 HDR 还是 SDR，转码输出均为 SDR。默认值：OFF。 */
     PreserveHDRSwitch?: string;
     /** 编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：hvc1 表示 hvc1 标签；hev1 表示 hev1 标签。 默认值：hvc1。 */
     CodecTag?: string;
+    /** 码率控制模式。枚举值：VBR： Variable Bit Rate，动态比特率，根据视频画面的复杂度动态调整输出的码率，使得画面质量更高，适用于存储场景和对画面质量要求较高的应用。ABR： Average Bit Rate，平均比特率，尽量保持输出视频的平均码率稳定，但允许短期内的码率波动，适用于需要在保持一定画质的情况下尽量减少整体码率的场景。CBR： Constant Bit Rate，恒定比特率，指视频编码时输出的码率保持恒定不变，不考虑画面复杂度的变化，适用于对网络带宽要求较为严格的场景，如直播等。VCRF： 恒定质量因子，通过设定一个质量因子来控制视频质量，实现视频的恒定质量编码，码率会根据内容的复杂度自动调整，适用于希望保持一定画质的场景。默认值：VBR */
+    Mode?: string;
+    /** 参考帧之间的B帧数，默认为自动。取值范围：[0, 16] */
+    Bframes?: number;
+    /** 分片平均时长。0或不填表示自动，将根据视频的 GOP 等特征自动选择合适的分片时长。取值范围：[0, 10]单位：秒只支持转码模板，暂不支持自适应码流模板。 */
+    HlsTime?: number;
   }
 
   /** 视频流配置参数 */
@@ -7337,6 +7349,14 @@ declare namespace V20180717 {
     PreserveHDRSwitch?: string;
     /** 编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：hvc1 表示 hvc1 标签；hev1 表示 hev1 标签。 默认值：hvc1。 */
     CodecTag?: string;
+    /** Gop数值单位。枚举值：frame： 表示帧数。second： 表示秒数。默认值：frame */
+    GopUnit?: string;
+    /** 码率控制模式。枚举值：VBR： Variable Bit Rate，动态比特率，根据视频画面的复杂度动态调整输出的码率，使得画面质量更高，适用于存储场景和对画面质量要求较高的应用。ABR： Average Bit Rate，平均比特率，尽量保持输出视频的平均码率稳定，但允许短期内的码率波动，适用于需要在保持一定画质的情况下尽量减少整体码率的场景。CBR： Constant Bit Rate，恒定比特率，指视频编码时输出的码率保持恒定不变，不考虑画面复杂度的变化，适用于对网络带宽要求较为严格的场景，如直播等。VCRF： Constant Rate Factor，恒定质量因子，通过设定一个质量因子来控制视频质量，实现视频的恒定质量编码，码率会根据内容的复杂度自动调整，适用于希望保持一定画质的场景。默认值：VBR */
+    Mode?: string;
+    /** 最大连续B帧数，默认为自动， -1 表示修改为自动值。取值范围：[-1, 16] */
+    Bframes?: number;
+    /** 分片平均时长。0或不填表示自动，将根据视频的 GOP 等特征自动选择合适的分片时长。取值范围：[0, 10]单位：秒只支持转码模板，暂不支持自适应码流模板。 */
+    HlsTime?: number;
   }
 
   /** 视频轨的视频片段信息。 */
@@ -8618,7 +8638,7 @@ declare namespace V20180717 {
   interface CreateTranscodeTemplateRequest {
     /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
     Container: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 转码模板名称，长度限制：64 个字符。 */
     Name?: string;
@@ -8638,6 +8658,8 @@ declare namespace V20180717 {
     EnhanceConfig?: EnhanceConfig;
     /** 切片类型，当 Container 为 hls 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。默认值：ts。 */
     SegmentType?: string;
+    /** 扩展参数。 */
+    StdExtInfo?: string;
   }
 
   interface CreateTranscodeTemplateResponse {
@@ -11436,7 +11458,7 @@ declare namespace V20180717 {
   interface ModifyTranscodeTemplateRequest {
     /** 转码模板唯一标识。 */
     Definition: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
     Container?: string;
@@ -11458,6 +11480,8 @@ declare namespace V20180717 {
     EnhanceConfig?: EnhanceConfigForUpdate;
     /** 切片类型，当 Container 为 hls 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。 */
     SegmentType?: string;
+    /** 扩展参数。 */
+    StdExtInfo?: string;
   }
 
   interface ModifyTranscodeTemplateResponse {

@@ -2,6 +2,70 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI工作台SRE数字分身任务 */
+declare interface AIWorkbenchSREDigitalTwinTask {
+  /** 任务名称 */
+  Name: string;
+  /** 任务类型 */
+  TaskType: string;
+  /** 任务配置 */
+  TaskConfig: string;
+  /** 唯一标识 */
+  ID?: number;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 所属数字分身ID */
+  TwinID?: number;
+}
+
+/** AI工作台SRE数字分身任务列表 */
+declare interface AIWorkbenchSREDigitalTwinTaskList {
+  /** 任务列表 */
+  Tasks?: AIWorkbenchSREDigitalTwinTask[];
+  /** 任务总数 */
+  Total?: number;
+}
+
+/** AI工作台SRE数字分身工作日志 */
+declare interface AIWorkbenchSREDigitalTwinWorkLog {
+  /** 唯一标识符 */
+  ID?: number;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 所属数字分身ID */
+  TwinID?: number;
+  /** 所属数字分身任务ID */
+  TaskID?: number;
+  /** 分析时间 */
+  StartTime?: string;
+  /** 分析状态 */
+  Status?: string;
+  /** 分析结果摘要 */
+  Result?: string;
+  /** 所属任务名称 */
+  TaskName?: string;
+  /** 所属任务类型 */
+  TaskType?: string;
+}
+
+/** AI工作台SRE数字分身工作日志详细信息 */
+declare interface AIWorkbenchSREDigitalTwinWorkLogDetail {
+  /** 工作日志详细内容 */
+  Content?: string;
+  /** 工作日志任务类型 */
+  TaskType?: string;
+  /** 工作日志相关对话ID */
+  DialogID?: number;
+}
+
+/** AI工作台SRE数字分身工作日志列表 */
+declare interface AIWorkbenchSREDigitalTwinWorkLogList {
+  /** 工作日志列表 */
+  WorkLogs?: AIWorkbenchSREDigitalTwinWorkLog[];
+  /** 总数 */
+  Total?: number;
+}
+
 /** 钉钉机器人内容模板配置 */
 declare interface DingDingRobotNoticeTmpl {
   /** 内容模板 */
@@ -192,6 +256,12 @@ declare interface TeamsRobotNoticeTmplMatcher {
   Template: TeamsRobotNoticeTmpl;
 }
 
+/** 触发数字分身任务响应 */
+declare interface TriggerDigitalTwinTaskResp {
+  /** 数字分身任务ID */
+  TaskID?: number;
+}
+
 /** 企业微信机器人内容模板配置 */
 declare interface WeWorkRobotNoticeTmpl {
   /** 内容模板 */
@@ -260,6 +330,56 @@ declare interface DeleteNoticeContentTmplsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAIWorkbenchSREDigitalTwinTaskListRequest {
+  /** 数字分身ID */
+  TwinID: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 数量限制 */
+  Limit?: number;
+}
+
+declare interface DescribeAIWorkbenchSREDigitalTwinTaskListResponse {
+  /** Json序列化路径 */
+  JSONStrPaths?: string[];
+  /** 数字分身任务列表 */
+  Data?: AIWorkbenchSREDigitalTwinTaskList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest {
+  /** 工作日志ID */
+  WorkLogID: number;
+}
+
+declare interface DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse {
+  /** Json序列化路径 */
+  JSONStrPaths?: string[];
+  /** 数字分身详细信息 */
+  Data?: AIWorkbenchSREDigitalTwinWorkLogDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest {
+  /** 数字分身ID */
+  TwinID: number;
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 分页限制条数 */
+  Limit?: number;
+}
+
+declare interface DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse {
+  /** Json序列化路径 */
+  JSONStrPaths?: string[];
+  /** 数字分身工作日志列表 */
+  Data?: AIWorkbenchSREDigitalTwinWorkLogList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAlarmNotifyHistoriesRequest {
   /** 监控类型 */
   MonitorType: string;
@@ -324,6 +444,20 @@ declare interface ModifyNoticeContentTmplRequest {
 }
 
 declare interface ModifyNoticeContentTmplResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TriggerAIWorkbenchSREDigitalTwinTaskRequest {
+  /** 数字分身任务ID */
+  TaskID: number;
+}
+
+declare interface TriggerAIWorkbenchSREDigitalTwinTaskResponse {
+  /** Json序列化路径 */
+  JSONStrPaths?: string[];
+  /** 数字分身任务信息 */
+  Data?: TriggerDigitalTwinTaskResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6094,12 +6228,20 @@ declare interface Monitor {
   CreateNoticeContentTmpl(data: CreateNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentTmplResponse>;
   /** 批量删除通知内容模板 {@link DeleteNoticeContentTmplsRequest} {@link DeleteNoticeContentTmplsResponse} */
   DeleteNoticeContentTmpls(data?: DeleteNoticeContentTmplsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentTmplsResponse>;
+  /** 查询AI工作台SRE数字分身任务列表 {@link DescribeAIWorkbenchSREDigitalTwinTaskListRequest} {@link DescribeAIWorkbenchSREDigitalTwinTaskListResponse} */
+  DescribeAIWorkbenchSREDigitalTwinTaskList(data: DescribeAIWorkbenchSREDigitalTwinTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSREDigitalTwinTaskListResponse>;
+  /** 查询AI工作台SRE数字分身工作日志详细信息 {@link DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest} {@link DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse} */
+  DescribeAIWorkbenchSREDigitalTwinWorkLogDetail(data: DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse>;
+  /** 查询AI工作台SRE数字分身任务工作日志列表 {@link DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest} {@link DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse} */
+  DescribeAIWorkbenchSREDigitalTwinWorkLogList(data: DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse>;
   /** 查询告警通知历史 {@link DescribeAlarmNotifyHistoriesRequest} {@link DescribeAlarmNotifyHistoriesResponse} */
   DescribeAlarmNotifyHistories(data: DescribeAlarmNotifyHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNotifyHistoriesResponse>;
   /** 获取通知内容模板 {@link DescribeNoticeContentTmplRequest} {@link DescribeNoticeContentTmplResponse} */
   DescribeNoticeContentTmpl(data: DescribeNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentTmplResponse>;
   /** 修改通知内容模板 {@link ModifyNoticeContentTmplRequest} {@link ModifyNoticeContentTmplResponse} */
   ModifyNoticeContentTmpl(data: ModifyNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentTmplResponse>;
+  /** 触发AI工作台SRE数字分身任务 {@link TriggerAIWorkbenchSREDigitalTwinTaskRequest} {@link TriggerAIWorkbenchSREDigitalTwinTaskResponse} */
+  TriggerAIWorkbenchSREDigitalTwinTask(data: TriggerAIWorkbenchSREDigitalTwinTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerAIWorkbenchSREDigitalTwinTaskResponse>;
   /** 绑定 Grafana 服务实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: V20180724.BindPrometheusManagedGrafanaRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindPrometheusManagedGrafanaResponse>;
   /** 绑定策略对象 {@link V20180724.BindingPolicyObjectRequest} {@link V20180724.BindingPolicyObjectResponse} */

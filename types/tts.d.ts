@@ -97,13 +97,13 @@ declare interface TextToVoiceRequest {
   SessionId: string;
   /** 音量大小，范围[-10，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。 */
   Volume?: number;
-  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考[代码示例](https://sdk-1300466766.cos.ap-shanghai.myqcloud.com/sample/speed_sample.tar.gz) */
+  /** 语速，范围：[-2，6]，分别对应不同语速：-2代表0.6倍-1代表0.8倍0代表1.0倍（默认）1代表1.2倍2代表1.5倍6代表2.5倍如果需要更细化的语速，可以保留小数点后 2 位，例如0.5/1.25/2.81等。参数值与实际语速转换，可参考代码示例 */
   Speed?: number;
   /** 项目id，用户自定义，默认为0。 */
   ProjectId?: number;
   /** 模型类型，1-默认模型。 */
   ModelType?: number;
-  /** 音色 ID，包括精品音色、大模型音色与基础版复刻音色。不同音色价格有差异，详情请参见[购买指南](https://cloud.tencent.com/document/product/1073/34112)。完整的音色 ID 列表请参见[音色列表](https://cloud.tencent.com/document/product/1073/92668)。若使用一句话版声音复刻，请填入固定值“200000000”。 */
+  /** 音色 ID，包括精品音色、大模型音色与基础版复刻音色。不同音色价格有差异，详情请参见购买指南。完整的音色 ID 列表请参见音色列表。若使用一句话版声音复刻，请填入固定值“200000000”。 */
   VoiceType?: number;
   /** 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。 */
   FastVoiceType?: string;
@@ -113,7 +113,7 @@ declare interface TextToVoiceRequest {
   SampleRate?: number;
   /** 返回音频格式，可取值：wav（默认），mp3，pcm */
   Codec?: string;
-  /** 是否开启时间戳功能，默认为false。 */
+  /** 是否开启时间戳功能，默认为false。部分超自然音色不支持时间戳 */
   EnableSubtitle?: boolean;
   /** 断句敏感阈值，默认值为：0，取值范围：[0,1,2]。该值越大越不容易断句，模型会更倾向于仅按照标点符号断句。此参数建议不要随意调整，可能会影响合成效果。 */
   SegmentRate?: number;

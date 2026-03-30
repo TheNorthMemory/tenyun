@@ -1362,6 +1362,8 @@ declare interface NotebookSessionInfo {
   PodSize?: number;
   /** pod数量 */
   PodNumbers?: number;
+  /** spark app名称 */
+  SparkAppName?: string;
 }
 
 /** 按批提交Statement运行SQL任务。 */
@@ -1430,6 +1432,10 @@ declare interface NotebookSessions {
   ResourceGroupId?: string;
   /** 资源组名字 */
   ResourceGroupName?: string;
+  /** Kernel id */
+  KernelId?: string;
+  /** spark app名称 */
+  SparkAppName?: string;
 }
 
 /** 开通了第三方访问的用户信息 */

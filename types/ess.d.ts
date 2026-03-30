@@ -2628,6 +2628,26 @@ declare interface CreateDocumentResponse {
   RequestId?: string;
 }
 
+declare interface CreateDraftContractByPromptsTaskRequest {
+  /** 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 起草要求 */
+  Requirement: string;
+  /** 参考模板文件资源id（PDF/Word格式） */
+  ReferenceTemplateId?: string;
+  /** 相关规定文件资源id列表（PDF/Word格式） */
+  RequirementFileIds?: string[];
+  /** 起草合同的语言要求（zh，en）默认zh */
+  ContractLanguage?: string;
+}
+
+declare interface CreateDraftContractByPromptsTaskResponse {
+  /** 起草任务id */
+  TaskId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDynamicFlowApproverRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -4470,6 +4490,26 @@ declare interface DescribeContractReviewWebUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDraftContractByPromptsTaskRequest {
+  /** 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface DescribeDraftContractByPromptsTaskResponse {
+  /** 任务状态，枚举，0 已创建，1 执行中，2 成功，3 失败 */
+  Status?: number;
+  /** 任务错误信息，仅在失败时返回 */
+  Message?: string;
+  /** 生成的合同名称 */
+  ContractName?: string;
+  /** 生成的合同文件资源id */
+  ResourceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnterpriseContractReviewChecklistsRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -5587,6 +5627,8 @@ declare interface Ess {
   CreateDigitalDataSign(data: CreateDigitalDataSignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDigitalDataSignResponse>;
   /** 模板发起合同-创建电子文档 {@link CreateDocumentRequest} {@link CreateDocumentResponse} */
   CreateDocument(data: CreateDocumentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocumentResponse>;
+  /** 创建智能合同起草任务 {@link CreateDraftContractByPromptsTaskRequest} {@link CreateDraftContractByPromptsTaskResponse} */
+  CreateDraftContractByPromptsTask(data: CreateDraftContractByPromptsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDraftContractByPromptsTaskResponse>;
   /** 补充动态签署合同的签署方 {@link CreateDynamicFlowApproverRequest} {@link CreateDynamicFlowApproverResponse} */
   CreateDynamicFlowApprover(data: CreateDynamicFlowApproverRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDynamicFlowApproverResponse>;
   /** 获取其他可嵌入web页面 {@link CreateEmbedWebUrlRequest} {@link CreateEmbedWebUrlResponse} */
@@ -5731,6 +5773,8 @@ declare interface Ess {
   DescribeContractReviewTaskListWebUrl(data: DescribeContractReviewTaskListWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewTaskListWebUrlResponse>;
   /** 获取合同审查结果web页面 {@link DescribeContractReviewWebUrlRequest} {@link DescribeContractReviewWebUrlResponse} */
   DescribeContractReviewWebUrl(data: DescribeContractReviewWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewWebUrlResponse>;
+  /** 查询智能合同起草任务 {@link DescribeDraftContractByPromptsTaskRequest} {@link DescribeDraftContractByPromptsTaskResponse} */
+  DescribeDraftContractByPromptsTask(data: DescribeDraftContractByPromptsTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDraftContractByPromptsTaskResponse>;
   /** 获取企业全部审查要点清单 {@link DescribeEnterpriseContractReviewChecklistsRequest} {@link DescribeEnterpriseContractReviewChecklistsResponse} */
   DescribeEnterpriseContractReviewChecklists(data: DescribeEnterpriseContractReviewChecklistsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseContractReviewChecklistsResponse>;
   /** 查询企业扩展服务授权详情 {@link DescribeExtendedServiceAuthDetailRequest} {@link DescribeExtendedServiceAuthDetailResponse} */
