@@ -2686,6 +2686,8 @@ declare interface StopParams {
   StopPolicy?: string;
   /** 线程数 */
   ThreadCount?: number;
+  /** 安全停止超时时间，单位秒 */
+  GraceDownTime?: number;
 }
 
 /** HDFS文件存储详情 */

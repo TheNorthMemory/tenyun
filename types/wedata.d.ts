@@ -8783,6 +8783,8 @@ declare namespace V20210820 {
     PhoneNum?: string | null;
     /** 邮箱 */
     Email?: string | null;
+    /** 0: 普通用户 1: entraId用户 */
+    UserTag?: number | null;
   }
 
   /** BatchCreateTaskVersion使用，描述任务信息 */
@@ -13053,6 +13055,8 @@ declare namespace V20210820 {
     CreateTimestamp?: number | null;
     /** 用户状态 0:历史 1:正常 2:已删除 */
     Status?: number | null;
+    /** 0: 普通用户 1: entraId用户 */
+    UserTag?: number | null;
   }
 
   /** 项目下的用户集合 */

@@ -18,6 +18,14 @@ declare interface DataAuthorizationInfo {
   PrivacyPolicyLink?: string;
 }
 
+/** 附加信息 */
+declare interface ExtraInfo {
+  /** 附加信息名字 */
+  Key?: string;
+  /** 附加信息内容 */
+  Value?: string;
+}
+
 /** 风险信息 */
 declare interface RiskInfo {
   /** 风险类型。更多详情请参见：[Android](https://cloud.tencent.com/document/product/1628/85898)、[iOS](https://cloud.tencent.com/document/product/1628/85896)、[H5](https://cloud.tencent.com/document/product/1628/85897)、[小程序](https://cloud.tencent.com/document/product/1628/85895)、[场景风险](https://cloud.tencent.com/document/product/1628/88912) */
@@ -91,27 +99,31 @@ declare interface DescribeFraudBaseRequest {
 
 declare interface DescribeFraudBaseResponse {
   /** App版本信息 */
-  AppVersion: string;
+  AppVersion?: string;
   /** 品牌 */
-  Brand: string;
+  Brand?: string;
   /** 客户端IP */
-  ClientIp: string;
+  ClientIp?: string;
   /** 机型 */
-  Model: string;
+  Model?: string;
   /** 网络类型 */
-  NetworkType: string;
+  NetworkType?: string;
   /** 应用包名 */
-  PackageName: string;
+  PackageName?: string;
   /** 平台（2-Android，3-iOS，4-H5，5-微信小程序） */
-  Platform: string;
+  Platform?: string;
   /** 系统版本 */
-  SystemVersion: string;
+  SystemVersion?: string;
   /** SDK版本号 */
-  SdkBuildNo: string;
+  SdkBuildNo?: string;
   /** 实时风险信息 */
-  RiskInfos: RiskInfo[];
+  RiskInfos?: RiskInfo[];
   /** 离线风险信息 */
-  HistRiskInfos: RiskInfo[];
+  HistRiskInfos?: RiskInfo[];
+  /** 检测时间戳（毫秒） */
+  RiskCheckTimestamp?: string;
+  /** 额外信息 */
+  ExtraInfos?: ExtraInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

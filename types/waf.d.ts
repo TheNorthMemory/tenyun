@@ -180,6 +180,12 @@ declare interface ApiDetailSampleHistory {
   FullReqLog?: string;
 }
 
+/** guard content */
+declare interface ApiGuardContent {
+  /** prompt */
+  Prompt: string;
+}
+
 /** 带有请求方式的apiname结构体 */
 declare interface ApiNameMethod {
   /** api名称 */
@@ -1004,6 +1010,18 @@ declare interface CdcRegion {
   Region: string;
   /** 该地域对应的集群信息 */
   Clusters: CdcCluster[];
+}
+
+/** ClawRiskItem */
+declare interface ClawRiskItem {
+  /** 风险类别 */
+  RiskType?: string;
+  /** 规则id */
+  RuleId?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 分数 */
+  Score?: number;
 }
 
 /** 负载均衡型WAF域名详情 */
@@ -2226,6 +2244,34 @@ declare interface KVInt {
   Value?: number;
 }
 
+/** 大模型安全检测敏感词库命中信息结构体 */
+declare interface KeyWordInfo {
+  /** 命中的词库id */
+  Id?: string;
+  /** 命中的词库名称 */
+  Name?: string;
+}
+
+/** 大模型安全检测综合结果 */
+declare interface LLMDetectResult {
+  /** 仅输出侧：涉敏信息 */
+  SensitiveResult?: LLMSensitiveValueLevel[];
+  /** 输入输出均检测：关键词库命中信息 */
+  KeyWordsResult?: KeyWordInfo[];
+  /** 输入输出均检测：数据分类分级结果 */
+  DataCategoryResult?: string[];
+  /** 仅输入侧检出：prompt检测的结果 */
+  PromptInjectionResult?: PromptDetectResult;
+  /** 命中的规则ID */
+  RuleId?: string;
+  /** 命中的规则名称 */
+  RuleName?: string;
+  /** 规则动作 */
+  Action?: string;
+  /** 攻击payload */
+  Payload?: string;
+}
+
 /** 有效预付费大模型安全包信息 */
 declare interface LLMMonPkg {
   /** 资源id */
@@ -2262,6 +2308,20 @@ declare interface LLMPkg {
   EndTime?: string;
   /** 计费项 */
   InquireKey?: string;
+}
+
+/** LLMRisks */
+declare interface LLMRisks {
+  /** 分数 */
+  Risks?: ClawRiskItem[];
+}
+
+/** 涉敏信息结果结构体 */
+declare interface LLMSensitiveValueLevel {
+  /** 敏感数据标签，如政治、色情 */
+  Label?: string;
+  /** 敏感数据等级，250,300，400分别代表超严格、严格、标准等级 */
+  Level?: number;
 }
 
 /** 限流Header数据结构 */
@@ -2836,6 +2896,14 @@ declare interface ProductInfo {
   Name?: string;
   /** 版本 */
   Value?: string;
+}
+
+/** prompt注入检测结果结构体 */
+declare interface PromptDetectResult {
+  /** 检测结果 */
+  Result?: string;
+  /** 置信度 */
+  Confidence?: number;
 }
 
 /** clb-waf QPS套餐 New */
@@ -4239,7 +4307,7 @@ declare interface DeleteHostResponse {
 }
 
 declare interface DeleteIpAccessControlRequest {
-  /** 域名 */
+  /** 域名，当操作对象为全局规则时，Domain参数应填写为"global" */
   Domain: string;
   /** 删除的ip数组 */
   Items: string[];
@@ -4247,7 +4315,7 @@ declare interface DeleteIpAccessControlRequest {
   IsId?: boolean;
   /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单 */
   DeleteAll?: boolean;
-  /** 是否为多域名黑白名单 */
+  /** 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 */
   SourceType?: string;
   /** IP黑白名单类型，40为IP白名单，42为IP黑名单 */
   ActionType?: number;
@@ -4263,13 +4331,13 @@ declare interface DeleteIpAccessControlResponse {
 }
 
 declare interface DeleteIpAccessControlV2Request {
-  /** 域名 */
+  /** 域名，当操作对象为全局规则时，Domain参数应填写为"global" */
   Domain: string;
   /** 规则ID列表，支持批量删除，在DeleteAll参数为true的时候可以不传 */
   RuleIds?: number[];
   /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定IP名单，批量防护不支持 */
   DeleteAll?: boolean;
-  /** batch表示为批量防护的IP黑白名单 */
+  /** 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 */
   SourceType?: string;
   /** IP黑白名单类型，40为IP白名单，42为IP黑名单，在DeleteAll为true的时候必传此参数 */
   ActionType?: number;
@@ -5339,7 +5407,7 @@ declare interface DescribeInstancesResponse {
 }
 
 declare interface DescribeIpAccessControlRequest {
-  /** 域名 */
+  /** 域名，当操作对象为全局规则时，Domain参数应填写为"global" */
   Domain: string;
   /** 计数标识 */
   Count: number;
@@ -5357,7 +5425,7 @@ declare interface DescribeIpAccessControlRequest {
   OffSet?: number;
   /** 每页返回的数量，默认为20 */
   Limit?: number;
-  /** 来源 */
+  /** 用于按数据来源过滤黑白名单记录，非必填（默认为空字符串，表示不过滤/查询全部）。 "" (空字符串)	，不按来源过滤，返回所有记录（默认值） custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 batch-group（防护对象组），防护对象组维度添加的黑白名单规则 */
   Source?: string;
   /** 排序参数 */
   Sort?: string;
@@ -5418,6 +5486,30 @@ declare interface DescribeIpHitItemsRequest {
 declare interface DescribeIpHitItemsResponse {
   /** 结果 */
   Data?: IpHitItemsData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLLMContentSecCheckRequest {
+  /** 服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
+  ServiceId: string;
+  /** 要审核的内容 */
+  Content: string;
+  /** 流量类型，是入向流量还是出向流量，入向：1，出向：2；入向和出向必填 */
+  Type: number;
+  /** 实例id，必传 */
+  InstanceId: string;
+  /** 对话的id */
+  ChatId?: string;
+  /** 标识用户的id，限速使用，不填，则限速会不生效 */
+  UserId?: string;
+  /** token使用量，不填，会采用默认的token计算方法，计算的是模型的消耗，因为该值时在出向方向上添加，即Type=2 */
+  TokenUsage?: number;
+}
+
+declare interface DescribeLLMContentSecCheckResponse {
+  /** 检测结果 */
+  Data?: LLMDetectResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5680,6 +5772,24 @@ declare interface DescribeProtectionModesRequest {
 declare interface DescribeProtectionModesResponse {
   /** 规则大类ID及防护模式 */
   Modes?: TigaMainClassMode[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQClawContentSecCheckRequest {
+  /** 服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
+  ServiceId: string;
+  /** 要审核的内容 */
+  Content: ApiGuardContent;
+  /** 标识用户的id，限速使用，不填，则限速会不生效 */
+  UserId?: string;
+  /** 会话id */
+  SessionId?: string;
+}
+
+declare interface DescribeQClawContentSecCheckResponse {
+  /** 检测结果 */
+  Data?: LLMRisks;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6227,7 +6337,7 @@ declare interface ImportIpAccessControlRequest {
   Data: IpAccessControlParam[];
   /** 具体域名如：test.qcloudwaf.com全局域名为：global */
   Domain: string;
-  /** 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空 */
+  /** 用于按数据来源导入黑白名单记录，必填。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 */
   SourceType: string;
   /** 实例Id */
   InstanceId?: string;
@@ -7941,6 +8051,8 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 大模型内容审核接口 {@link DescribeLLMContentSecCheckRequest} {@link DescribeLLMContentSecCheckResponse} */
+  DescribeLLMContentSecCheck(data: DescribeLLMContentSecCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMContentSecCheckResponse>;
   /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */
   DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
   /** 查询waf各个模块接口的开关状态 {@link DescribeModuleStatusRequest} {@link DescribeModuleStatusResponse} */
@@ -7967,6 +8079,8 @@ declare interface Waf {
   DescribePostCLSFlows(data?: DescribePostCLSFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCLSFlowsResponse>;
   /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
   DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
+  /** Qclaw大模型内容审核接口 {@link DescribeQClawContentSecCheckRequest} {@link DescribeQClawContentSecCheckResponse} */
+  DescribeQClawContentSecCheck(data: DescribeQClawContentSecCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQClawContentSecCheckResponse>;
   /** 查询限流规则列表接口 {@link DescribeRateLimitsV2Request} {@link DescribeRateLimitsV2Response} */
   DescribeRateLimitsV2(data: DescribeRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRateLimitsV2Response>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */

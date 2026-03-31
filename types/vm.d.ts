@@ -234,6 +234,10 @@ declare interface InputInfo {
   Url?: string;
   /** 桶信息。当输入当时COS时，该字段不为空 */
   BucketInfo?: string | null;
+  /** 大模型审核可选输入图片列表 */
+  ImageUrlList?: string[];
+  /** 大模型审核场景下，base64编码的审核要求内容 */
+  TextContent?: string;
 }
 
 /** 歌曲识别结果 */
@@ -340,6 +344,10 @@ declare interface StorageInfo {
   Url?: string;
   /** 腾讯云存储桶信息 */
   BucketInfo?: BucketInfo;
+  /** 大模型审核场景下，送审的图片列表 */
+  ImageUrlList?: string[];
+  /** 大模型审核场景下，base64编码的审核要求内容 */
+  TextContent?: string;
 }
 
 /** 音频切片识别标签 */
@@ -486,6 +494,48 @@ declare interface User {
   SendTime?: string;
 }
 
+/** 大模型原子能力审核明细 */
+declare interface VideoLLMDetail {
+  /** 命中的标签名 */
+  LabelName?: string;
+  /** 命中标签的原因 */
+  Reason?: string;
+  /** 命中的文本内容 */
+  TargetText?: string[];
+  /** 违规建议 */
+  Suggestion?: string;
+}
+
+/** 单个视频切片审核结果 */
+declare interface VideoSegment {
+  /** 视频切片审核结果 */
+  Result?: VideoSegmentResult;
+  /** 视频切片的起始时间偏移 */
+  OffsetTime?: string;
+  /** 切片保存时间 */
+  CreatedAt?: string;
+}
+
+/** 单个视频切片审核详情 */
+declare interface VideoSegmentResult {
+  /** 违规标志 0 未命中 1 命中 */
+  HitFlag?: number;
+  /** 审核建议，可选值： Pass 通过， Review 建议人审， Block 确认违规 */
+  Suggestion?: string;
+  /** Asr文本内容 */
+  Text?: string;
+  /** 审核结果 */
+  Detail?: VideoLLMDetail[];
+  /** 视频切片存储URL */
+  VideoUrl?: string;
+  /** 音频切片存储URL */
+  AudioUrl?: string;
+  /** 切片时长 */
+  Duration?: string;
+  /** 切片请求ID */
+  RequestId?: string;
+}
+
 declare interface CancelTaskRequest {
   /** 任务ID */
   TaskId: string;
@@ -536,13 +586,13 @@ declare interface DescribeTaskDetailResponse {
   BizType?: string;
   /** 该字段用于返回调用视频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。 */
   Name?: string;
-  /** 该字段用于返回所查询内容的任务状态。取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。 */
+  /** 该字段用于返回所查询内容的任务状态。取值：FINISH（任务已完成）、PENDING （任务等待中）、RUNNING （任务进行中）、ERROR （任务出错）、CANCELLED （任务已取消）。 */
   Status?: string;
-  /** 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：**VIDEO**（点播视频）、**LIVE_VIDEO**（直播视频）和**VIDEO_AIGC**（AI生成检测），默认值为VIDEO。 */
+  /** 该字段用于返回调用视频审核接口时输入的视频审核类型，取值为：VIDEO（点播视频）、LIVE_VIDEO（直播视频）和VIDEO_AIGC（AI生成检测），默认值为VIDEO。 */
   Type?: string;
-  /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
+  /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过 */
   Suggestion?: string;
-  /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
+  /** 该字段用于返回检测结果所对应的恶意标签。返回值：Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
   Labels?: TaskLabel[];
   /** 该字段用于返回输入媒体文件的详细信息，包括编解码格式、分片时长等信息。详细内容敬请参考MediaInfo数据结构的描述。 */
   MediaInfo?: MediaInfo;
@@ -558,18 +608,20 @@ declare interface DescribeTaskDetailResponse {
   ImageSegments?: ImageSegments[];
   /** 该字段用于返回视频中音频审核的结果，详细返回内容敬请参考AudioSegments数据结构的描述。 */
   AudioSegments?: AudioSegments[];
-  /** 当任务状态为Error时，返回对应错误的类型，取值：**DECODE_ERROR**: 解码失败。（输入资源中可能包含无法解码的视频）**URL_ERROR**：下载地址验证失败。**TIMEOUT_ERROR**：处理超时。**CALLBACK_ERRORR**：回调错误。**MODERATION_ERROR**：审核失败。**URL_NOT_SUPPORTED**：源文件太大或没有图片音频帧任务状态非Error时默认返回为空。 */
+  /** 当任务状态为Error时，返回对应错误的类型，取值：DECODE_ERROR: 解码失败。（输入资源中可能包含无法解码的视频）URL_ERROR：下载地址验证失败。TIMEOUT_ERROR：处理超时。CALLBACK_ERRORR：回调错误。MODERATION_ERROR：审核失败。URL_NOT_SUPPORTED：源文件太大或没有图片音频帧任务状态非Error时默认返回为空。 */
   ErrorType?: string;
   /** 当任务状态为Error时，该字段用于返回对应错误的详细描述，任务状态非Error时默认返回为空。 */
   ErrorDescription?: string;
   /** 该字段用于返回检测结果所对应的标签。如果未命中恶意，返回Normal，如果命中恶意，则返回Labels中优先级最高的标签 */
   Label?: string;
-  /** 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。 */
+  /** 该字段用于返回音频文件识别出的对应文本内容，最大支持前1000个字符。 */
   AudioText?: string;
   /** 该字段用于返回音频文件识别出的对应文本内容。 */
   Asrs?: RcbAsr[];
   /** 该字段用于返回检测结果明细数据相关的cos url */
   SegmentCosUrlList?: SegmentCosUrlList;
+  /** 该字段用于返回视频中视频切片审核的结果 */
+  VideoSegments?: VideoSegment[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

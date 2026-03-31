@@ -206,6 +206,62 @@ declare interface NewsInfo {
   Id?: number;
 }
 
+/** 总览统计数据 */
+declare interface Overview {
+  /** 过期license数量 */
+  Expired: number;
+  /** 有效license数量 */
+  Valid: number;
+  /** 临期license数量 */
+  Near: number;
+}
+
+/** 应用包名信息 */
+declare interface OverviewAppInfo {
+  /** 应用Id */
+  Id?: number;
+  /** 应用名称 */
+  AppName?: string;
+  /** Ios 包名 */
+  BundleId?: string | null;
+  /** Andorid 包名 */
+  PackageName?: string | null;
+  /** Mac 进程名 */
+  MacBundleId?: string | null;
+  /** windows 进程名 */
+  WinProcessName?: string | null;
+  /** 域名列表 */
+  DomainList?: string[] | null;
+}
+
+/** 视立方应用license */
+declare interface OverviewLicense {
+  /** 所属应用 */
+  Application?: OverviewAppInfo;
+  /** license生效时间 */
+  StartTime?: string;
+  /** license失效时间 */
+  EndTime?: string;
+  /** license对应的功能Id */
+  FeatureId?: number | null;
+  /** license是测试：test还是正式：formal */
+  LicenseType?: string;
+  /** license索引 */
+  LicenseId?: number;
+  /** license名称 */
+  Name?: string;
+  /** 返回还有多少秒过期，过期返回负值 */
+  RestTime?: number | null;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 更新时间 */
+  UpdatedAt?: string;
+  /** 优图套餐名称 */
+  Plan?: string | null;
+  /** licenseType */
+  Type?: string;
+}
+
 /** 资源包结构 */
 declare interface Package {
   /** 资源包Id */
@@ -658,6 +714,14 @@ declare interface DescribeLicenseListRequest {
 }
 
 declare interface DescribeLicenseListResponse {
+  /** 临期license数量 */
+  Count?: number;
+  /** 正式license总览统计数据 */
+  Overview?: Overview;
+  /** 临期license列表 */
+  LicenseList?: OverviewLicense[];
+  /** 测试license总览统计数据 */
+  TrialOverview?: Overview;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -44,7 +44,7 @@ declare interface CosStorageSource {
 declare interface CustomConfiguration {
   /** 镜像地址 */
   Image?: string;
-  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  /** 镜像仓库类型：enterprise、personal。 */
   ImageRegistryType?: string;
   /** 启动命令 */
   Command?: string[];
@@ -58,13 +58,15 @@ declare interface CustomConfiguration {
   Resources?: ResourceConfiguration;
   /** 探针配置 */
   Probe?: ProbeConfiguration;
+  /** 沙箱 DNS 配置 */
+  DNSConfig?: DNSConfig;
 }
 
 /** 沙箱自定义配置详细信息 */
 declare interface CustomConfigurationDetail {
   /** 镜像地址 */
   Image?: string;
-  /** 镜像仓库类型：`TCR`、`CCR`。 */
+  /** 镜像仓库类型：TCR、CCR。 */
   ImageRegistryType?: string;
   /** 镜像 Digest */
   ImageDigest?: string;
@@ -80,6 +82,18 @@ declare interface CustomConfigurationDetail {
   Resources?: ResourceConfiguration;
   /** 探针配置 */
   Probe?: ProbeConfiguration;
+  /** 沙箱 DNS 配置 */
+  DNSConfig?: DNSConfig;
+}
+
+/** 沙箱自定义 dns 配置 */
+declare interface DNSConfig {
+  /** DNS 服务器地址参数格式：需要有效 IP 地址默认值：10.0.0.1 */
+  Servers: string[];
+  /** 搜索域(对应 resolv.conf 的 search 指令) */
+  Searches?: string[];
+  /** 配置项(对应 resolv.conf 选项) */
+  Options?: string[];
 }
 
 /** 环境变量 */

@@ -400,6 +400,10 @@ declare interface DescribeModelServiceResponseVO {
   RelateAgentAppNum?: number;
   /** 请求路径 */
   Url?: string;
+  /** 是否开启提示词安全检测 */
+  PromptModerateStatus?: boolean | null;
+  /** 提示词安全检测配置 */
+  PromptModerateConfig?: PromptModerateConfigDTO | null;
 }
 
 /** 查询模型列表的响应 */
@@ -598,6 +602,14 @@ declare interface PluginFormValueDTO {
   Field?: string | null;
   /** 值 */
   Value?: string | null;
+}
+
+/** 提示词安全配置 */
+declare interface PromptModerateConfigDTO {
+  /** 执行动作 */
+  Action?: string | null;
+  /** 响应拦截内容 */
+  InterceptMessage?: string | null;
 }
 
 /** ResultIDVO */
@@ -865,6 +877,10 @@ declare interface CreateModelServiceRequest {
   PluginConfigs?: PluginConfigDTO[];
   /** 超时配置，秒 */
   Timeout?: number;
+  /** 是否开启提示词安全检测 */
+  PromptModerateStatus?: boolean;
+  /** 提示词安全检测配置 */
+  PromptModerateConfig?: PromptModerateConfigDTO;
 }
 
 declare interface CreateModelServiceResponse {
@@ -1357,6 +1373,10 @@ declare interface ModifyModelServiceRequest {
   PluginConfigs?: PluginConfigDTO[];
   /** 超时配置，秒 */
   Timeout?: number;
+  /** 是否开启提示词安全检测配置 */
+  PromptModerateStatus?: boolean;
+  /** 提示词安全检测配置 */
+  PromptModerateConfig?: PromptModerateConfigDTO;
 }
 
 declare interface ModifyModelServiceResponse {

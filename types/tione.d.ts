@@ -1950,6 +1950,10 @@ declare interface SubAccountInfo {
   LinuxGid?: number;
   /** 子账号在Linux下的用户名 */
   LinuxUserName?: string;
+  /** 是否开启 root 登录 */
+  EnableRootLogin?: boolean;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** tcp socket 健康探针检查行为 */
@@ -3371,11 +3375,19 @@ declare interface DescribePublicAlgoVersionListResponse {
 }
 
 declare interface DescribeSubAccountLinuxUserInfosRequest {
+  /** 分页偏移量（0 表示全量） */
+  Offset?: number;
+  /** 每页数量（0 表示全量） */
+  Limit?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeSubAccountLinuxUserInfosResponse {
   /** 子账号信息列表 */
   SubAccountList?: SubAccountInfo[];
+  /** 总数（配合分页使用） */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1562,6 +1562,8 @@ declare interface PassportRecognizeInfos {
   IssuePlace?: string;
   /** 签发机关（护照信息页识别结果）仅中国大陆护照支持返回此字段，港澳台及境外护照不支持 */
   IssuingAuthority?: string;
+  /** 出生地（护照信息页识别结果） */
+  BirthPlace?: string;
 }
 
 /** 外国人永久居留证信息返回 */
@@ -2203,19 +2205,21 @@ declare interface TextArithmetic {
 /** 文字识别结果 */
 declare interface TextDetection {
   /** 识别出的文本行内容 */
-  DetectedText: string;
+  DetectedText?: string;
   /** 置信度 0 ~100 */
-  Confidence: number;
+  Confidence?: number;
   /** 文本行坐标，以四个顶点坐标表示 */
-  Polygon: Coord[] | null;
+  Polygon?: Coord[] | null;
   /** 此字段为扩展字段。GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。 */
-  AdvancedInfo: string;
+  AdvancedInfo?: string;
   /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
-  ItemPolygon: ItemCoord;
+  ItemPolygon?: ItemCoord;
   /** 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR */
-  Words: DetectedWords[];
+  Words?: DetectedWords[];
   /** 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR */
-  WordCoordPoint: DetectedWordCoordPoint[];
+  WordCoordPoint?: DetectedWordCoordPoint[];
+  /** 语种信息。zh:中文; en:英文; th:泰语; id:印尼语; ja:日语; ko:韩语; es:西班牙语; fr:法语; de:德语; pt:葡萄牙语; vi:越南语; ms:马来语; ru:俄语; it:意大利语; nl:荷兰语; sv:瑞典语; fi:芬兰语; no:挪威语; hu:匈牙利语; ar:阿拉伯语; hi:印地语 */
+  Language?: string;
 }
 
 /** 英文识别结果 */
@@ -5618,9 +5622,9 @@ declare interface VerifyBizLicenseEnterprise4Response {
   IsLrNameConsistent?: boolean;
   /** 注册登记证件号码是否一致仅StatusCode为0时返回，企业名称与统一社会信用代码均未查得时，固定返回false */
   IsIdNumConsistent?: boolean;
-  /** 经营状态枚举值：1： 开业（在营）2： 迁出3： 注销4： 吊销5： 撤销6： 停业0： 其他-10002： 企业信息不正确，无法查询 */
+  /** 经营状态枚举值：1： 开业（在营）2： 迁出3： 注销4： 吊销5： 撤销6： 停业7： 撤销登记0： 其他/： 无法查询 */
   OperatingStatus?: string;
-  /** 营业期限：一般包括营业开始时间和结束时间参数格式：yyyy-MM-dd/yyyy-MM-dd无固定期限的格式为：yyyy-MM-dd/部分企业历史数据可能为空，将返回：/企业信息不正确，无法查询，将返回：-10002 */
+  /** 营业期限：一般包括营业开始时间和结束时间参数格式：yyyy-MM-dd/yyyy-MM-dd无固定期限的格式为：yyyy-MM-dd/部分企业历史数据可能为空，将返回：/无法查询，将返回：/ */
   OperatingPeriod?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

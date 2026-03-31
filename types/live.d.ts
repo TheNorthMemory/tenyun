@@ -2859,7 +2859,7 @@ declare interface CreateRecordTaskRequest {
   StartTime?: number;
   /** 推流类型，默认0。取值：0-直播推流。1-合成流，即 A+B=C 类型混流。 */
   StreamType?: number;
-  /** 录制模板ID，CreateLiveRecordTemplate 返回值。如果不填或者传入错误ID，则默认录制HLS格式、永久存储。 */
+  /** 录制模板ID，CreateLiveRecordTemplate 返回值。如果不填或者传入错误ID，则默认录制 HLS 格式、永久存储至 VOD 主应用下。示例值：0。 */
   TemplateId?: number;
   /** 扩展字段，暂无定义。默认为空。 */
   Extension?: string;

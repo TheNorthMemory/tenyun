@@ -898,6 +898,8 @@ declare interface Placement {
   HostIds?: string[];
   /** 实例所属的专用宿主机ID，仅用于出参。 */
   HostId?: string;
+  /** 实例所属的实例资源池机架ID，仅用于出参。 */
+  RackId?: string;
 }
 
 /** 后付费实例配额 */
@@ -994,6 +996,68 @@ declare interface RepairTaskInfo {
   AuthType?: number;
   /** 授权渠道，支持取值：- `Waiting_auth`：待授权- `Customer_auth`：客户操作授权- `System_mandatory_auth`：系统默认授权- `Pre_policy_auth`：预置策略授权 */
   AuthSource?: string;
+}
+
+/** 实例资源池容量 */
+declare interface ResourceCount {
+  /** vCPU核数。 */
+  Cpu?: number | null;
+  /** 内存大小，单位：GB。 */
+  Memory?: number | null;
+  /** GPU数量。 */
+  Gpu?: number | null;
+  /** 本地盘大小，单位：GB。 */
+  Disk?: number | null;
+}
+
+/** 实例资源池 */
+declare interface ResourcePoolPack {
+  /** 实例资源池ID。形如：rpp-rn99mzt2。 */
+  DedicatedResourcePackId?: string;
+  /** 实例资源池的名称。 */
+  DedicatedResourcePackName?: string;
+  /** 实例资源池预扣包所在可用区。形如：ap-guangzhou-6。返回项：可用区列表 */
+  Zone?: string;
+  /** 实例资源池预扣包的规格，仅支持半整机/整机规格。形如：SA9.96XLARGE1152（SA9半整机）。 */
+  InstanceType?: string;
+  /** 实例资源池预扣包的实例类型。形如：SA9。 */
+  InstanceFamily?: string;
+  /** 实例资源池类型。返回项：EXCLUSIVE (独享) | SHARED (共享)。 */
+  ResourcePoolPackType?: string;
+  /** 实例资源池状态。返回项：CREATING (创建中) | ACTIVE (运行中) | FAILED (创建失败) | RETIRED (已过期)。 */
+  Status?: string;
+  /** 实例资源池总容量。 */
+  TotalCapacity?: ResourceCount;
+  /** 实例资源池剩余容量。 */
+  AvailableCapacity?: ResourceCount;
+  /** 底层物理机IP（已加密）。 */
+  HostIp?: string;
+  /** 机架ID（已加密）。 */
+  RackId?: string;
+  /** 交换机ID（已加密）。 */
+  SwitchId?: string;
+  /** 自动放置开关状态。开启则在不指定实例资源池创建实例时，系统会在开启了该能力的实例资源池里寻找合适的池子创建实例。关闭则在不指定实例资源池创建实例时，系统不会在该池子里创建实例，只有在指定实例资源池创建实例时，指定了该池子的ID，才允许在池子内创建实例。 */
+  AutoPlacement?: boolean;
+  /** 自动续费标识。返回项：NOTIFY_AND_AUTO_RENEW (通知且自动续费) | NOTIFY_AND_MANUAL_RENEW (通知不自动续费) | DISABLE_NOTIFY_AND_MANUAL_RENEW (不通知不自动续费)。 */
+  RenewFlag?: string;
+  /** 实例资源池预扣包创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
+  StartTime?: string;
+  /** 实例资源池到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
+  EndTime?: string;
+}
+
+/** 描述实例资源池内已创建实例的信息 */
+declare interface ResourcePoolPackInstance {
+  /** 实例资源池ID。形如：rpp-fb7bzcyt。 */
+  DedicatedResourcePackId?: string;
+  /** 实例资源池内的实例ID列表。形如：["ins-5u8lxsum"]。 */
+  InstanceIdSet?: string[];
+  /** 实例族。形如：SA9。 */
+  InstanceFamily?: string;
+  /** 实例规格。形如：SA9.96XLARGE1152。 */
+  InstanceType?: string;
+  /** 可用区。形如：ap-guangzhou-6。 */
+  Zone?: string;
 }
 
 /** 描述了 “云自动化助手” 服务相关的信息 */
@@ -2000,6 +2064,48 @@ declare interface DescribeRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResourcePoolPackInstancesRequest {
+  /** 实例资源池ID列表。形如：rpp-39kj2fsb。每次请求的实例的上限为100。 */
+  DedicatedResourcePackIds: string[];
+}
+
+declare interface DescribeResourcePoolPackInstancesResponse {
+  /** 实例资源池内已创建的实例详情列表。 */
+  DedicatedResourcePackInstanceSet?: ResourcePoolPackInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourcePoolPackTypeConfigsRequest {
+  /** zone按照【可用区】进行过滤。形如：ap-guangzhou-6。类型：String必选：是可选项：可用区列表instance-family按照【实例族】进行过滤。形如：SA9。类型：String必选：否instance-type按照【实例规格】进行过滤。形如：SA9.96XLARGE1152。类型：String必选：否每次请求的`Filters`的上限为10。 */
+  Filters: Filter[];
+}
+
+declare interface DescribeResourcePoolPackTypeConfigsResponse {
+  /** 支持实例资源池的机型规格列表。 */
+  InstanceTypeConfigSet?: InstanceTypeConfig[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourcePoolPacksRequest {
+  /** 返回数量，默认值为10，最小值为10，最大值为100。 */
+  MaxResults?: number;
+  /** 分页标记，用于获取下一页数据。 */
+  NextToken?: string;
+  /** dedicated-resource-pack-id按照【实例资源池ID】进行过滤。形如：rpp-rn99mzt2。类型：String必选：否zone按照【可用区】进行过滤。形如：ap-guangzhou-6。类型：String必选：否可选项：可用区列表instance-family按照【实例类型】进行过滤。形如：SA9。类型：String必选：否instance-type按照【实例规格】进行过滤。形如：SA9.96XLARGE1152。类型：String必选：否status按照【实例资源池状态】进行过滤。类型：String必选：否可选项：CREATING (创建中) | ACTIVE (运行中) | RETIRED (已过期)每次请求的`Filters`的上限为10。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeResourcePoolPacksResponse {
+  /** 符合条件的实例资源池列表。 */
+  DedicatedResourcePackSet?: ResourcePoolPack[];
+  /** 下一页数据的标记，用于分页查询。值为空时表示已到最后一页。 */
+  NextToken?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskInfoRequest {
   /** 返回数量，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小节。 */
   Limit: number;
@@ -2204,6 +2310,24 @@ declare interface ImportKeyPairRequest {
 declare interface ImportKeyPairResponse {
   /** 密钥对ID。 */
   KeyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquirePricePurchaseResourcePoolPacksRequest {
+  /** 实例资源池预扣包所在可用区。形如：ap-guangzhou-6。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口获取可用区列表。 */
+  Zone: string;
+  /** 实例资源池的规格，仅支持整机/半整机规格。形如：SA9.96XLARGE1152。 */
+  InstanceType: string;
+  /** 实例资源池的数量。1个数量代表1个半整机/整机资源池。 */
+  InstanceCount: number;
+  /** 实例资源池的时长，单位：月。取值范围：1-60。 */
+  Period: number;
+}
+
+declare interface InquirePricePurchaseResourcePoolPacksResponse {
+  /** 实例资源池价格信息。 */
+  Price?: ItemPrice;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2653,6 +2777,34 @@ declare interface ProgramFpgaImageResponse {
   RequestId?: string;
 }
 
+declare interface PurchaseResourcePoolPacksRequest {
+  /** 实例资源池预扣包所在可用区。形如：ap-guangzhou-6。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口获取可用区列表。 */
+  Zone: string;
+  /** 实例资源池预扣包的规格，仅支持半整机/整机规格。形如：SA9.96XLARGE1152（SA9半整机）。 */
+  InstanceType: string;
+  /** 实例资源池预扣包的数量。1个数量代表1个半整机/整机资源池。取值范围：1-100。 */
+  InstanceCount: number;
+  /** 实例资源池预扣包的时长，单位：月。取值范围：1-60。 */
+  Period: number;
+  /** 实例资源池类型。取值范围：EXCLUSIVE：独享（默认值）SHARED：共享注意：第一期仅支持EXCLUSIVE类型。 */
+  ResourcePoolPackType?: string;
+  /** 自动放置开关，默认开启（true）。开启：在不指定实例资源池创建实例时，系统会在开启了该能力的实例资源池里寻找合适的池子创建实例。关闭：在不指定实例资源池创建实例时，系统不会在该池子里创建实例，只有在指定实例资源池创建实例时，指定了该池子的ID，才允许在池子内创建实例。 */
+  AutoPlacement?: boolean;
+  /** 实例资源池的名称。长度限制：1-60个字符，支持中文、英文、数字、连接线"-"、下划线"_"。 */
+  DedicatedResourcePoolPackName?: string;
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费（默认值）DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费 */
+  RenewFlag?: string;
+  /** 试运行，用于校验请求参数是否正确。默认为false。true：发送检查请求，不会创建实例资源池。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId。false（默认值）：发送正常请求，通过检查后直接创建实例资源池。 */
+  DryRun?: boolean;
+}
+
+declare interface PurchaseResourcePoolPacksResponse {
+  /** 创建的实例资源池ID列表。形如：rpp-39kj2fsb。 */
+  DedicatedResourcePackIdSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RebootInstancesRequest {
   /** 一个或多个待操作的实例ID。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
   InstanceIds: string[];
@@ -2959,6 +3111,16 @@ declare interface TerminateInstancesResponse {
   RequestId?: string;
 }
 
+declare interface TerminateResourcePoolPacksRequest {
+  /** 实例资源池ID列表，支持批量销毁。形如：rpp-6rk3550n。每次请求的实例的上限为100。 */
+  DedicatedResourcePackIds: string[];
+}
+
+declare interface TerminateResourcePoolPacksResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cvm 云服务器} */
 declare interface Cvm {
   (): Versions;
@@ -3054,6 +3216,12 @@ declare interface Cvm {
   DescribeLaunchTemplates(data?: DescribeLaunchTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLaunchTemplatesResponse>;
   /** 查询地域列表 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
+  /** 查询实例资源池内已创建的实例列表 {@link DescribeResourcePoolPackInstancesRequest} {@link DescribeResourcePoolPackInstancesResponse} */
+  DescribeResourcePoolPackInstances(data: DescribeResourcePoolPackInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePoolPackInstancesResponse>;
+  /** 查询支持实例资源池的机型规格列表 {@link DescribeResourcePoolPackTypeConfigsRequest} {@link DescribeResourcePoolPackTypeConfigsResponse} */
+  DescribeResourcePoolPackTypeConfigs(data: DescribeResourcePoolPackTypeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePoolPackTypeConfigsResponse>;
+  /** 查询实例资源池预扣包列表 {@link DescribeResourcePoolPacksRequest} {@link DescribeResourcePoolPacksResponse} */
+  DescribeResourcePoolPacks(data?: DescribeResourcePoolPacksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePoolPacksResponse>;
   /** 查询维修任务列表 {@link DescribeTaskInfoRequest} {@link DescribeTaskInfoResponse} */
   DescribeTaskInfo(data: DescribeTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskInfoResponse>;
   /** 获取可用区机型配置信息 {@link DescribeZoneInstanceConfigInfosRequest} {@link DescribeZoneInstanceConfigInfosResponse} */
@@ -3076,6 +3244,8 @@ declare interface Cvm {
   ImportInstancesActionTimer(data: ImportInstancesActionTimerRequest, config?: AxiosRequestConfig): AxiosPromise<ImportInstancesActionTimerResponse>;
   /** 导入密钥对 {@link ImportKeyPairRequest} {@link ImportKeyPairResponse} */
   ImportKeyPair(data: ImportKeyPairRequest, config?: AxiosRequestConfig): AxiosPromise<ImportKeyPairResponse>;
+  /** 创建实例资源池预扣包询价 {@link InquirePricePurchaseResourcePoolPacksRequest} {@link InquirePricePurchaseResourcePoolPacksResponse} */
+  InquirePricePurchaseResourcePoolPacks(data: InquirePricePurchaseResourcePoolPacksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePricePurchaseResourcePoolPacksResponse>;
   /** 修改实例计费模式询价 {@link InquiryPriceModifyInstancesChargeTypeRequest} {@link InquiryPriceModifyInstancesChargeTypeResponse} */
   InquiryPriceModifyInstancesChargeType(data: InquiryPriceModifyInstancesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceModifyInstancesChargeTypeResponse>;
   /** 续费CDH实例询价 {@link InquiryPriceRenewHostsRequest} {@link InquiryPriceRenewHostsResponse} */
@@ -3126,6 +3296,8 @@ declare interface Cvm {
   ModifyLaunchTemplateDefaultVersion(data: ModifyLaunchTemplateDefaultVersionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLaunchTemplateDefaultVersionResponse>;
   /** 在线烧录FPGA镜像 {@link ProgramFpgaImageRequest} {@link ProgramFpgaImageResponse} */
   ProgramFpgaImage(data: ProgramFpgaImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProgramFpgaImageResponse>;
+  /** 创建实例资源池预扣包 {@link PurchaseResourcePoolPacksRequest} {@link PurchaseResourcePoolPacksResponse} */
+  PurchaseResourcePoolPacks(data: PurchaseResourcePoolPacksRequest, config?: AxiosRequestConfig): AxiosPromise<PurchaseResourcePoolPacksResponse>;
   /** 重启实例 {@link RebootInstancesRequest} {@link RebootInstancesResponse} */
   RebootInstances(data: RebootInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootInstancesResponse>;
   /** 清理CHC物理服务器的带外网络和部署网络 {@link RemoveChcAssistVpcRequest} {@link RemoveChcAssistVpcResponse} */
@@ -3158,6 +3330,8 @@ declare interface Cvm {
   SyncImages(data: SyncImagesRequest, config?: AxiosRequestConfig): AxiosPromise<SyncImagesResponse>;
   /** 退还实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
+  /** 销毁实例资源池预扣包 {@link TerminateResourcePoolPacksRequest} {@link TerminateResourcePoolPacksResponse} */
+  TerminateResourcePoolPacks(data: TerminateResourcePoolPacksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateResourcePoolPacksResponse>;
 }
 
 export declare type Versions = ["2017-03-12"];

@@ -218,8 +218,10 @@ declare interface ChangePwdTaskDetail {
   Device?: Device;
   /** 资产账号 */
   Account?: string;
-  /** 上次改密结果。0-未改密 1-改密成功 2-改密失败 */
+  /** 上次改密结果。0-未改密 1-改密成功 2-改密失败,3-改密中，4-改密超时 */
   LastChangeStatus?: number;
+  /** 改密任务状态，0-待执行，1-执行完成，2-执行失败，3-执行中，4-执行超时 */
+  TaskStatus?: number;
 }
 
 /** 修改密码任务信息 */
@@ -268,6 +270,8 @@ declare interface ChangePwdTaskInfo {
   NextTime?: string;
   /** 上次执行时间 */
   LastTime?: string;
+  /** 改密任务状态，0-待执行，1-执行完成，2-执行失败，3-执行中，4-执行超时 */
+  Status?: number;
 }
 
 /** 负载均衡 */
@@ -836,6 +840,10 @@ declare interface Resource {
   TimeSpan?: number;
   /** 计费模式 0后付费，1预付费 */
   PayMode?: number;
+  /** 计费侧地域 */
+  BillingRegion?: string;
+  /** 计费侧可用区 */
+  BillingZone?: string;
 }
 
 /** 立即执行改密任务的入参 */

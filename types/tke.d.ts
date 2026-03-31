@@ -1621,9 +1621,9 @@ declare namespace V20180525 {
   interface ClusterStatus {
     /** 集群Id */
     ClusterId?: string;
-    /** 集群状态 */
+    /** 集群状态运行中：Running集群等级中：ClusterLevelUpgrading集群升级中：Upgrading集群控制面扩容中：MasterScaling托管集群修改参数中：RuntimeUpgrading节点升级中：NodeUpgrading集群删除中：Deleting集群创建中：Creating集群已隔离：Isolated集群升级暂停：Pause集群执行隔离：ResourceIsolate集群隔离：ResourceIsolated集群执行冲正：ResourceReverse集群冲正：ResourceReversal集群执行销毁：ResourceDestroy集群销毁：ResourceDestroyed集群变配交易中：ClusterLevelTrading */
     ClusterState?: string;
-    /** 集群下机器实例的状态 */
+    /** 集群下机器实例的状态节点全部正常：AllNormal节点全部异常：AllAbnormal节点部分异常：PartialAbnormal */
     ClusterInstanceState?: string;
     /** 集群是否开启监控 */
     ClusterBMonitor?: boolean;

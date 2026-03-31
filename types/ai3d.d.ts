@@ -293,6 +293,10 @@ declare interface SubmitReduceFaceJobResponse {
 declare interface SubmitTextureTo3DJobRequest {
   /** 源3D模型文件。Type可选值：OBJ，GLB */
   File3D: File3D;
+  /** 混元生3D生成模型版本，默认为3.0，可选项：3.0，3.1仅选择3.1版本时，多视图功能可用。 */
+  Model?: string;
+  /** 多视角的模型图片（仅3.1版本支持），视角参考值：left：左视图；right：右视图；back：后视图；top：顶视图；bottom：底视图；left_front：左前45°视图；right_front：右前45°视图；每个视角仅限制一张图片。●图片大小限制：编码后所有图片大小总和不可超过8M。（base64编码下图片大小总和不超过6M，因base64编码后图片大小会大30%左右）●图片分辨率限制：单边分辨率小于5000且大于128。●支持图片格式：支持jpg或png */
+  MultiViewImages?: ViewImage[];
   /** 文生3D，3D内容的描述，中文正向提示词。最多支持200个 utf-8 字符。文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。 */
   Prompt?: string;
   /** 3D模型纹理参考图 Base64 数据和参考图 Url。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于4096且大于128，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。 */

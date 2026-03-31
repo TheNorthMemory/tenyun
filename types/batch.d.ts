@@ -658,6 +658,8 @@ declare interface Placement {
   HostIds?: string[];
   /** 实例所属的专用宿主机ID，仅用于出参。 */
   HostId?: string;
+  /** 实例所属的实例资源池机架ID，仅用于出参。 */
+  RackId?: string;
 }
 
 /** 重定向信息 */

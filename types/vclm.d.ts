@@ -28,9 +28,9 @@ declare interface FaceRect {
   X?: number;
   /** 人脸框左上角纵坐标。 */
   Y?: number;
-  /** 人脸框宽度。 */
+  /** 人脸框宽度。单位：px */
   Width?: number;
-  /** 人脸框高度。 */
+  /** 人脸框高度。单位：px */
   Height?: number;
 }
 
@@ -573,7 +573,7 @@ declare interface Vclm {
   DescribeVideoEditJob(data: DescribeVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditJobResponse>;
   /** 查询人脸融合大模型任务 {@link DescribeVideoFaceFusionJobRequest} {@link DescribeVideoFaceFusionJobResponse} */
   DescribeVideoFaceFusionJob(data?: DescribeVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoFaceFusionJobResponse>;
-  /** 查询视频风格化任务 {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
+  /** 查询视频风格化任务（下线中） {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
   DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
   /** 查询视频配音效任务 {@link DescribeVideoVoiceJobRequest} {@link DescribeVideoVoiceJobResponse} */
   DescribeVideoVoiceJob(data?: DescribeVideoVoiceJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoVoiceJobResponse>;
@@ -595,7 +595,7 @@ declare interface Vclm {
   SubmitVideoEditJob(data: SubmitVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoEditJobResponse>;
   /** 提交人脸融合大模型任务 {@link SubmitVideoFaceFusionJobRequest} {@link SubmitVideoFaceFusionJobResponse} */
   SubmitVideoFaceFusionJob(data?: SubmitVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoFaceFusionJobResponse>;
-  /** 提交视频风格化任务 {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
+  /** 提交视频风格化任务（下线中） {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
   SubmitVideoStylizationJob(data: SubmitVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoStylizationJobResponse>;
   /** 提交视频配音效任务 {@link SubmitVideoVoiceJobRequest} {@link SubmitVideoVoiceJobResponse} */
   SubmitVideoVoiceJob(data?: SubmitVideoVoiceJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoVoiceJobResponse>;

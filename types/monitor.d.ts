@@ -66,6 +66,62 @@ declare interface AIWorkbenchSREDigitalTwinWorkLogList {
   Total?: number;
 }
 
+/** 告警中的Label */
+declare interface AlarmLable {
+  /** label name */
+  Name?: string;
+  /** label value */
+  Value?: string;
+}
+
+/** 单个告警通知历史 */
+declare interface AlarmNotifyHistory {
+  /** 通知的唯一ID */
+  NotifyId?: string;
+  /** 告警策略ID */
+  PolicyId?: string;
+  /** 告警周期iD */
+  SessionId?: string;
+  /** 通知时间 unix秒级时间戳 */
+  NotifyTime?: number;
+  /** 触发时间 unix秒级时间戳 */
+  TriggerTime?: number;
+  /** 告警级别 None 非分级告警级别; Note 提示级别; Warn 严重级别; Serious 紧急级别 */
+  TriggerLevel?: string;
+  /** 告警内容 */
+  AlarmContent?: string;
+  /** 告警对象 */
+  AlarmObject?: string;
+  /** 本次告警通知涉及到的渠道合集 */
+  ChannelSet?: string[] | null;
+  /** 渠道的接收人信息 */
+  ChannelsReceivers?: ChannelsReceivers[];
+  /** 告警策略名称 */
+  PolicyName?: string;
+  /** Prometheus实例ID, 仅当 MT_PROME 时有效 */
+  PromeInstanceID?: string;
+  /** Prometheus实例所在的地域, 仅当 MT_PROME 时有效 */
+  PromeInstanceRegion?: string;
+  /** 通知模板相关的配置信息 */
+  Notices?: NotifyRelatedNotice[];
+  /** 告警触发状态 Trigger 告警状态触发; Recovery 告警状态恢复 */
+  TriggerStatus?: string;
+  /** 与当前Prometheus通知历史相关控制台页面地址，仅当 MR_PROME 时有效 */
+  PromeConsoleURL?: string;
+  /** 告警的lable */
+  Labels?: AlarmLable[];
+}
+
+/** 接受人详情信息 */
+declare interface ChannelsReceivers {
+  /** 通知渠道名称 */
+  ChannelName?: string | null;
+  /** 接收者 */
+  Receivers?: string[] | null;
+  /** 发送结果,0-无效,1-成功,2-失败,3-无需发送 */
+  SendStatus?: string | null;
+}
+
 /** 钉钉机器人内容模板配置 */
 declare interface DingDingRobotNoticeTmpl {
   /** 内容模板 */
@@ -162,12 +218,34 @@ declare interface NoticeContentTmplItem {
   GoogleChatRobot?: GoogleChatRobotNoticeTmplMatcher[];
 }
 
+/** 通知历史中关联的通知模板信息 */
+declare interface NotifyRelatedNotice {
+  /** 通知模板ID */
+  NoticeId?: string;
+  /** 通知模板的名称 */
+  NoticeName?: string;
+}
+
 /** 分页请求参数 */
 declare interface PageByNoParams {
   /** 每个分页的数量是多少 */
   PerPage?: number | null;
   /** 第几个分页，从1开始 */
   PageNo?: string | null;
+}
+
+/** 分页结果参数 */
+declare interface PageByNoResult {
+  /** 总共有多少数据 */
+  TotalCount?: number | null;
+  /** 总共有多少个分页 */
+  TotalPage?: number | null;
+  /** 当前的分页号 */
+  CurrentPageNo?: number | null;
+  /** 【已弃用】是否遍历到末尾 */
+  IsEnd?: boolean | null;
+  /** 是否遍历到末尾 */
+  End?: boolean;
 }
 
 /** 告警通知自定义PagerDutyRobot内容模板 */
@@ -398,6 +476,10 @@ declare interface DescribeAlarmNotifyHistoriesRequest {
 }
 
 declare interface DescribeAlarmNotifyHistoriesResponse {
+  /** 告警历史 */
+  AlarmNotifyHistoryList?: AlarmNotifyHistory[];
+  /** 分页情况 */
+  PageResult?: PageByNoResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

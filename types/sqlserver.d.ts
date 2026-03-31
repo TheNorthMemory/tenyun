@@ -556,6 +556,20 @@ declare interface DealInstance {
   DealName?: string;
 }
 
+/** 投递信息 */
+declare interface DeliverSummary {
+  /** 投递类型，store（存储类），mq（消息通道） */
+  DeliverType?: string | null;
+  /** 投递子类型：cls，ckafka。 */
+  DeliverSubType?: string | null;
+  /** 投递订阅者 */
+  DeliverConsumer?: string | null;
+  /** 投递订阅者名称 */
+  DeliverConsumerName?: string | null;
+  /** 投递 */
+  DeliverError?: string | null;
+}
+
 /** 备机只读信息 */
 declare interface DrReadableInfo {
   /** 备机资源ID */
@@ -618,6 +632,28 @@ declare interface Events {
   ExternalAddr?: string;
 }
 
+/** 导出文件 */
+declare interface ExportFile {
+  /** 文件名 */
+  FileName?: string | null;
+  /** 状态 */
+  Status?: string | null;
+  /** 文件大小 */
+  FileSize?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 下载地址 */
+  DownloadUrl?: string | null;
+  /** 错误信息 */
+  ErrMsg?: string | null;
+  /** 进度 */
+  Progress?: number | null;
+  /** 完成时间 */
+  FinishTime?: string | null;
+  /** req */
+  AsyncRequestId?: number | null;
+}
+
 /** 允许动作信息 */
 declare interface FileAction {
   /** 支持的所有操作，值包括：view(查看列表) remark(修改备注)，deploy(部署)，delete(删除文件) */
@@ -626,12 +662,68 @@ declare interface FileAction {
   AllowedAction?: string[];
 }
 
+/** 业务侧实例过滤参数 */
+declare interface Filter {
+  /** 1. 项目 ProjectId - true = 精确查找 - false = 模糊匹配2. 标签键 TagKey - true = 精确查找 - false = 模糊匹配3. 标签 Tag - true = 精确查找 - false = 模糊匹配4. 实例名称 InstanceName - true = 精确查找 - false = 模糊匹配5. 实例ID InstanceId - true = 精确查找 - false = 模糊匹配 */
+  Name: string;
+  /** 值 */
+  Values: string[];
+  /** 开关 */
+  ExactMatch?: boolean;
+}
+
 /** 实例的数据库信息 */
 declare interface InstanceDBDetail {
   /** 实例ID */
   InstanceId: string;
   /** 数据库信息列表 */
   DBDetails: DBDetail[];
+}
+
+/** 实例信息 */
+declare interface InstanceInfo {
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 实例标签 */
+  TagList?: TagList[] | null;
+  /** 实例状态 */
+  Status?: number | null;
+  /** test */
+  Vip?: string | null;
+  /** test */
+  Vport?: number | null;
+  /** test */
+  Architecture?: string | null;
+  /** test */
+  ROFlag?: string | null;
+  /** test */
+  HAFlag?: string | null;
+  /** test */
+  InstanceType?: string | null;
+  /** test */
+  Type?: string | null;
+  /** 审计日志状态 ON, OFF, ERROR */
+  AuditLogStatus?: string | null;
+  /** 审计日志上报地址 */
+  AuditLogHosts?: string[] | null;
+  /** 审计日志状态信息 */
+  AuditLogStatusMessage?: string | null;
+  /** 版本号 */
+  Version?: string | null;
+  /** 版本名 */
+  VersionName?: string | null;
+  /** 地域id */
+  RegionId?: number | null;
+  /** 区id */
+  ZoneId?: number | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 区 */
+  Zone?: string | null;
 }
 
 /** 实例续费状态信息 */
@@ -694,6 +786,118 @@ declare interface InterInstanceFlow {
   InstanceId: string;
   /** 实例开通或者关闭互通组的流程ID，FlowId小于0-开通或者关闭失败，反之则成功。 */
   FlowId: number;
+}
+
+/** 日志过滤条件 */
+declare interface LogFilter {
+  /** 过滤条件名称。如：sql - SQL命令详情host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType - SQL类型；errCode - 错误码execTime - 执行时间lockWaitTime - 锁等待时间ioWaitTime - IO等待时间trxLivingTime - 事务执行时间cpuTime- Cpu时间threadId - 线程IDtrxId - 事务IDcheckRows - 扫描行数affectRows - 影响行数sentRows - 返回行数 */
+  Type?: string;
+  /** 过滤条件匹配类型。支持：INC – 包含； （多个值之前是||的关系）EXC – 不包含； （多个值之前是&&的关系）EQS – 等于； （多个值之前是||的关系）NEQ – 不等于；（多个值之前是&&的关系）RA – 范围； */
+  Compare?: string;
+  /** 过滤条件匹配值。当Compare=RG时，例：["1-100","200-300"] */
+  Value?: string[];
+}
+
+/** 日志实例 */
+declare interface LogInstance {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 日志状态，create：创建中；normal：开启；close：关闭中。 */
+  Status?: string;
+  /** 是否可以切换日志查询-取值：yes-可以，no-不可以。该参数主要为控制存量日志迁移到日志平台做查询使用，只有为yes状态才可以调用查询日志接口。 */
+  EnableQuery?: string;
+  /** 开启时间 */
+  CreateAt?: string;
+  /** 高频存储天数 */
+  HighLogExpireDay?: number;
+  /** 低频存储天数 */
+  LowLogExpireDay?: number;
+  /** 总存储时长 */
+  LogExpireDay?: number;
+  /** 高频存储量，单位：MB */
+  HighStorage?: number;
+  /** 低频存储量，单位：MB */
+  LowStorage?: number;
+  /** 总存储量 */
+  LogStorage?: number;
+  /** 是否开启投递：ON，OFF */
+  Deliver?: string;
+  /** 日志投递信息 */
+  DeliverSummary?: DeliverSummary[] | null;
+  /** 业务侧实例相关信息，根据业务不同，返回相关信息不同。 */
+  InstanceInfo?: InstanceInfo;
+}
+
+/** 日志结果 */
+declare interface LogResult {
+  /** 时间戳 */
+  Timestamp?: number | null;
+  /** 错误类别 */
+  Category?: string | null;
+  /** 客户端应用程序名称 */
+  ClientAppName?: string | null;
+  /** 客户端主机名 */
+  ClientHostName?: string | null;
+  /** CPU 时间 */
+  CpuTime?: number | null;
+  /** 数据库 ID */
+  DatabaseId?: number | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 执行时间 */
+  Duration?: number | null;
+  /** 错误编号 */
+  ErrorNumber?: number | null;
+  /** 是否被拦截 */
+  IsIntercepted?: string | null;
+  /** 最后行计数 */
+  LastRowCount?: number | null;
+  /** 逻辑读取 */
+  LogicalReads?: number | null;
+  /** 消息 */
+  Message?: string | null;
+  /** 对象 ID */
+  ObjectId?: number | null;
+  /** 对象名称 */
+  ObjectName?: string | null;
+  /** 对象类型 */
+  ObjectType?: string | null;
+  /** 输出参数 */
+  OutputParameters?: string | null;
+  /** 参数化计划句柄 */
+  ParameterizedPlanHandle?: string | null;
+  /** 物理读取 */
+  PhysicalReads?: number | null;
+  /** 结果 */
+  Result?: string | null;
+  /** 行计数 */
+  RowCount?: number | null;
+  /** 服务器主体名称 */
+  ServerPrincipalName?: string | null;
+  /** 会话服务器主体名称 */
+  SessionServerPrincipalName?: string | null;
+  /** 严重性 */
+  Severity?: number | null;
+  /** 源数据库 ID */
+  SourceDatabaseId?: number | null;
+  /** SQL 文本 */
+  SqlText?: string | null;
+  /** 状态 */
+  State?: number | null;
+  /** 语句 */
+  Statement?: string | null;
+  /** 系统线程 ID */
+  SystemThreadId?: number | null;
+  /** 事务 ID */
+  TransactionId?: number | null;
+  /** 用户定义 */
+  UserDefined?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 写入 */
+  Writes?: number | null;
+  /** 目标 */
+  Destination?: string | null;
 }
 
 /** 需要迁移的DB列表 */
@@ -1348,6 +1552,14 @@ declare interface TDEConfigAttribute {
   CMKRegion?: string;
 }
 
+/** 实例标签Tag */
+declare interface TagList {
+  /** key */
+  TagKey?: string;
+  /** value */
+  TagValue?: string;
+}
+
 /** 可用区信息 */
 declare interface ZoneInfo {
   /** 可用区英文ID，形如ap-guangzhou-1，表示广州一区 */
@@ -1418,6 +1630,18 @@ declare interface CloseInterCommunicationRequest {
 declare interface CloseInterCommunicationResponse {
   /** 实例和异步流程ID */
   InterInstanceFlowSet?: InterInstanceFlow[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CloseLogRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志类型 */
+  LogType: string;
+}
+
+declare interface CloseLogResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1814,6 +2038,26 @@ declare interface CreateDBResponse {
   RequestId?: string;
 }
 
+declare interface CreateExportTaskRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志类型：auditLog,slowLog,errLog */
+  LogType: string;
+  /** 要检索日志的起始时间 */
+  StartTime: string;
+  /** 要检索日志的结束时间 */
+  EndTime: string;
+  /** 过滤条件[type, Compare, Value] */
+  LogFilter?: LogFilter[];
+  /** 过滤列 */
+  ColumnFilter?: string[];
+}
+
+declare interface CreateExportTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIncrementalMigrationRequest {
   /** 导入目标实例ID */
   InstanceId: string;
@@ -1998,6 +2242,20 @@ declare interface DeleteDBRequest {
 declare interface DeleteDBResponse {
   /** 任务流ID */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteExportTaskRequest {
+  /** 日志类型：auditLog,slowLog,errLog */
+  LogType: string;
+  /** 文件名称 */
+  FileName: string;
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DeleteExportTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2748,6 +3006,26 @@ declare interface DescribeDatabasesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExportTasksRequest {
+  /** 日志类型：auditLog,slowLog,errLog */
+  LogType: string;
+  /** 单页条数限制，取值1-100，默认100 */
+  Limit: number;
+  /** 偏移量，大于0 */
+  Offset: number;
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeExportTasksResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 导出文件 */
+  Items?: ExportFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFlowStatusRequest {
   /** 流程ID */
   FlowId: number;
@@ -2964,6 +3242,58 @@ declare interface DescribeInstanceTradeParameterRequest {
 declare interface DescribeInstanceTradeParameterResponse {
   /** 计费参数 */
   Parameter?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogInstanceListRequest {
+  /** 日志类型：auditLog,slowLog,errorLog */
+  LogType: string;
+  /** 单页条数限制，取值[0, 100) */
+  Limit?: number;
+  /** 偏移量，大于0 */
+  Offset?: number;
+  /** 业务侧实例过滤参数 */
+  Filters?: Filter[];
+  /** 日志开关,不传查询所有日志实例： on-开启，off-未开启。 */
+  LogSwitch?: string;
+}
+
+declare interface DescribeLogInstanceListResponse {
+  /** 实例数量 */
+  TotalCount?: number;
+  /** 日志平台实例信息 */
+  Items?: LogInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 要检索日志的起始时间 */
+  StartTime: string;
+  /** 要检索日志的结束时间 */
+  EndTime: string;
+  /** 日志类型 */
+  LogType: string;
+  /** 过滤条件[type, Compare, Value] */
+  LogFilter?: LogFilter[];
+  /** 单页条数限制，取值1-100，默认100 */
+  Limit?: number;
+  /** 偏移量，大于0 */
+  Offset?: number;
+  /** 排序，可选：ASC，DESC */
+  Order?: string;
+  /** 排序条件，根据业务字段不同，可选排序字段不一样 */
+  OrderBy?: string;
+}
+
+declare interface DescribeLogsResponse {
+  /** 日志总数 */
+  TotalCount?: number;
+  /** 日志详情，根据产品的不同返回的字段有差异 */
+  Items?: LogResult[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4078,6 +4408,22 @@ declare interface ModifyInstanceParamResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLogRequest {
+  /** 实例ID，例如：mssql-xjhsdj****。 */
+  InstanceId: string;
+  /** 日志类型。枚举值：auditLog： 审计日志。 */
+  LogType: string;
+  /** 日志有效期, 单位：天。枚举值：7： 7天30： 30天90： 90天180： 180天365： 365天1095： 1095天1825： 1825天 */
+  LogExpireDay: number;
+  /** 高频日志有效期, 单位：天。枚举值：7： 7天 */
+  HighLogExpireDay: number;
+}
+
+declare interface ModifyLogResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMaintenanceSpanRequest {
   /** 实例ID，形如mssql-k8voqdlz */
   InstanceId: string;
@@ -4194,6 +4540,22 @@ declare interface OpenInterCommunicationRequest {
 declare interface OpenInterCommunicationResponse {
   /** 实例和异步流程ID */
   InterInstanceFlowSet: InterInstanceFlow[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenLogRequest {
+  /** 实例ID，例如：mssql-xjhsdj****。 */
+  InstanceId: string;
+  /** 日志类型。枚举值：auditLog： 审计日志 */
+  LogType: string;
+  /** 日志有效期, 单位：天。枚举值：7： 7 天30： 30 天默认值：7 */
+  LogExpireDay: number;
+  /** 高频日志有效期, 单位：天。枚举值：7： 7天默认值：7 */
+  HighLogExpireDay: number;
+}
+
+declare interface OpenLogResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4507,6 +4869,8 @@ declare interface Sqlserver {
   CloneDB(data: CloneDBRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBResponse>;
   /** 关闭实例互通 {@link CloseInterCommunicationRequest} {@link CloseInterCommunicationResponse} */
   CloseInterCommunication(data: CloseInterCommunicationRequest, config?: AxiosRequestConfig): AxiosPromise<CloseInterCommunicationResponse>;
+  /** 关闭日志 {@link CloseLogRequest} {@link CloseLogResponse} */
+  CloseLog(data: CloseLogRequest, config?: AxiosRequestConfig): AxiosPromise<CloseLogResponse>;
   /** 立刻完成扩容任务 {@link CompleteExpansionRequest} {@link CompleteExpansionResponse} */
   CompleteExpansion(data: CompleteExpansionRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteExpansionResponse>;
   /** 完成迁移任务 {@link CompleteMigrationRequest} {@link CompleteMigrationResponse} */
@@ -4531,6 +4895,8 @@ declare interface Sqlserver {
   CreateDB(data: CreateDBRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBResponse>;
   /** 创建高可用实例 (本地盘) {@link CreateDBInstancesRequest} {@link CreateDBInstancesResponse} */
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
+  /** 创建日志下载任务 {@link CreateExportTaskRequest} {@link CreateExportTaskResponse} */
+  CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
   /** 创建增量备份导入任务 {@link CreateIncrementalMigrationRequest} {@link CreateIncrementalMigrationResponse} */
   CreateIncrementalMigration(data: CreateIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIncrementalMigrationResponse>;
   /** 创建迁移任务 {@link CreateMigrationRequest} {@link CreateMigrationResponse} */
@@ -4551,6 +4917,8 @@ declare interface Sqlserver {
   DeleteDB(data: DeleteDBRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBResponse>;
   /** 立即下线实例 {@link DeleteDBInstanceRequest} {@link DeleteDBInstanceResponse} */
   DeleteDBInstance(data: DeleteDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceResponse>;
+  /** 删除日志下载任务 {@link DeleteExportTaskRequest} {@link DeleteExportTaskResponse} */
+  DeleteExportTask(data: DeleteExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteExportTaskResponse>;
   /** 删除增量备份导入任务 {@link DeleteIncrementalMigrationRequest} {@link DeleteIncrementalMigrationResponse} */
   DeleteIncrementalMigration(data: DeleteIncrementalMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIncrementalMigrationResponse>;
   /** 删除迁移任务 {@link DeleteMigrationRequest} {@link DeleteMigrationResponse} */
@@ -4615,6 +4983,8 @@ declare interface Sqlserver {
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据库配置信息 {@link DescribeDatabasesNormalRequest} {@link DescribeDatabasesNormalResponse} */
   DescribeDatabasesNormal(data: DescribeDatabasesNormalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesNormalResponse>;
+  /** 查询日志下载任务 {@link DescribeExportTasksRequest} {@link DescribeExportTasksResponse} */
+  DescribeExportTasks(data: DescribeExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportTasksResponse>;
   /** 查询流程状态 {@link DescribeFlowStatusRequest} {@link DescribeFlowStatusResponse} */
   DescribeFlowStatus(data: DescribeFlowStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowStatusResponse>;
   /** 查询主备切换日志 {@link DescribeHASwitchLogRequest} {@link DescribeHASwitchLogResponse} */
@@ -4633,6 +5003,10 @@ declare interface Sqlserver {
   DescribeInstanceTasks(data: DescribeInstanceTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTasksResponse>;
   /** 查询实例的计费参数 {@link DescribeInstanceTradeParameterRequest} {@link DescribeInstanceTradeParameterResponse} */
   DescribeInstanceTradeParameter(data: DescribeInstanceTradeParameterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceTradeParameterResponse>;
+  /** 查询日志实例列表 {@link DescribeLogInstanceListRequest} {@link DescribeLogInstanceListResponse} */
+  DescribeLogInstanceList(data: DescribeLogInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogInstanceListResponse>;
+  /** 查询日志 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
+  DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询该实例的可维护时间窗 {@link DescribeMaintenanceSpanRequest} {@link DescribeMaintenanceSpanResponse} */
   DescribeMaintenanceSpan(data: DescribeMaintenanceSpanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceSpanResponse>;
   /** 查询迁移数据库列表 {@link DescribeMigrationDatabasesRequest} {@link DescribeMigrationDatabasesResponse} */
@@ -4743,6 +5117,8 @@ declare interface Sqlserver {
   ModifyInstanceEncryptAttributes(data: ModifyInstanceEncryptAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceEncryptAttributesResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamRequest} {@link ModifyInstanceParamResponse} */
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
+  /** 修改日志 {@link ModifyLogRequest} {@link ModifyLogResponse} */
+  ModifyLog(data: ModifyLogRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogResponse>;
   /** 修改可维护时间窗 {@link ModifyMaintenanceSpanRequest} {@link ModifyMaintenanceSpanResponse} */
   ModifyMaintenanceSpan(data: ModifyMaintenanceSpanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceSpanResponse>;
   /** 修改迁移任务 {@link ModifyMigrationRequest} {@link ModifyMigrationResponse} */
@@ -4757,6 +5133,8 @@ declare interface Sqlserver {
   ModifyReadOnlyGroupDetails(data: ModifyReadOnlyGroupDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReadOnlyGroupDetailsResponse>;
   /** 打开实例的互通 {@link OpenInterCommunicationRequest} {@link OpenInterCommunicationResponse} */
   OpenInterCommunication(data: OpenInterCommunicationRequest, config?: AxiosRequestConfig): AxiosPromise<OpenInterCommunicationResponse>;
+  /** 开启日志 {@link OpenLogRequest} {@link OpenLogResponse} */
+  OpenLog(data: OpenLogRequest, config?: AxiosRequestConfig): AxiosPromise<OpenLogResponse>;
   /** 查询迁移校验任务进度 {@link QueryMigrationCheckProcessRequest} {@link QueryMigrationCheckProcessResponse} */
   QueryMigrationCheckProcess(data: QueryMigrationCheckProcessRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMigrationCheckProcessResponse>;
   /** 主动回收实例 {@link RecycleDBInstanceRequest} {@link RecycleDBInstanceResponse} */

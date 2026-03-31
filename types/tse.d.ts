@@ -818,6 +818,8 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   AvailableUpgradeVersions?: string[];
   /** 是否提示可升级 */
   AvailableUpgrade?: boolean;
+  /** 可回退的版本 */
+  AvailableRollbackVersion?: string;
 }
 
 /** 获取云原生API网关实例协议端口列表响应结果 */
@@ -856,6 +858,30 @@ declare interface DescribeInstanceRegionInfo {
   MainRegion?: boolean;
   /** 该地域所在的EKS集群 */
   EKSClusterID?: string;
+}
+
+/** 查询跨域配置出参 */
+declare interface DescribeKongCORSResult {
+  /** 资源类型 */
+  SourceType?: string;
+  /** 资源id */
+  SourceId?: string;
+  /** 是否启用 */
+  Enabled?: boolean;
+  /** 跨域 Origins */
+  Origins?: string[];
+  /** 跨域 Headers */
+  Headers?: string[];
+  /** 跨域 Methods */
+  Methods?: string[];
+  /** 跨域 ExposedHeaders */
+  ExposedHeaders?: string[];
+  /** 跨域OPTIONS请求缓存时间 */
+  MaxAge?: number;
+  /** 跨域请求是否允许携带身份信息 */
+  Credentials?: boolean;
+  /** 跨域请求是否透传后端 */
+  PreFlightContinue?: boolean;
 }
 
 /** 查询云原生网关访问控制配置出参 */
@@ -2764,6 +2790,36 @@ declare interface CreateNativeGatewayServiceSourceResponse {
   RequestId?: string;
 }
 
+declare interface CreateOrModifyCloudNativeAPIGatewayCORSRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 跨域插件绑定的资源类型：route|service */
+  SourceType: string;
+  /** 路由或服务的id */
+  SourceId: string;
+  /** 是否启用插件 */
+  Enabled: boolean;
+  /** 跨域 Access-Control-Allow-Origin */
+  Origins?: string[];
+  /** 跨域 Access-Control-Allow-Headers header */
+  Headers?: string[];
+  /** 跨域 Access-Control-Allow-Methods */
+  Methods?: string[];
+  /** 跨域 Access-Control-Expose-Headers */
+  ExposedHeaders?: string[];
+  /** preflight 请求缓存时间 */
+  MaxAge?: number;
+  /** 跨域 Access-Control-Allow-Credentials */
+  Credentials?: boolean;
+  /** 是否把OPTIONS请求透传后端 */
+  PreFlightContinue?: boolean;
+}
+
+declare interface CreateOrModifyCloudNativeAPIGatewayCORSResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest {
   /** 网关ID */
   GatewayId: string;
@@ -2826,6 +2882,20 @@ declare interface DeleteAutoScalerResourceStrategyRequest {
 declare interface DeleteAutoScalerResourceStrategyResponse {
   /** 是否成功 */
   Result: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayCORSRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 跨域插件绑定的资源类型：route|service */
+  SourceType: string;
+  /** 路由或服务的id */
+  SourceId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayCORSResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3178,6 +3248,22 @@ declare interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
 declare interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
   /** 云原生API网关实例策略绑定网关分组列表响应结果 */
   Result?: ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCORSRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 跨域插件绑定的资源类型：route|service */
+  SourceType: string;
+  /** 路由或服务的id */
+  SourceId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayCORSResponse {
+  /** 出参 */
+  Result?: DescribeKongCORSResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4714,6 +4800,8 @@ declare interface Tse {
   CreateNativeGatewayServerGroup(data: CreateNativeGatewayServerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServerGroupResponse>;
   /** 创建网关服务来源 {@link CreateNativeGatewayServiceSourceRequest} {@link CreateNativeGatewayServiceSourceResponse} */
   CreateNativeGatewayServiceSource(data: CreateNativeGatewayServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNativeGatewayServiceSourceResponse>;
+  /** 创建或编辑云原生网关跨域配置 {@link CreateOrModifyCloudNativeAPIGatewayCORSRequest} {@link CreateOrModifyCloudNativeAPIGatewayCORSResponse} */
+  CreateOrModifyCloudNativeAPIGatewayCORS(data: CreateOrModifyCloudNativeAPIGatewayCORSRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyCloudNativeAPIGatewayCORSResponse>;
   /** 创建或编辑云原生网关访问控制 {@link CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest} {@link CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse} */
   CreateOrModifyCloudNativeAPIGatewayIPRestriction(data: CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse>;
   /** 创建或更新配置文件并发布配置 {@link CreateOrUpdateConfigFileAndReleaseRequest} {@link CreateOrUpdateConfigFileAndReleaseResponse} */
@@ -4724,6 +4812,8 @@ declare interface Tse {
   DeleteAutoScalerResourceStrategy(data: DeleteAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScalerResourceStrategyResponse>;
   /** 删除云原生API网关实例 {@link DeleteCloudNativeAPIGatewayRequest} {@link DeleteCloudNativeAPIGatewayResponse} */
   DeleteCloudNativeAPIGateway(data: DeleteCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayResponse>;
+  /** 删除云原生网关跨域配置 {@link DeleteCloudNativeAPIGatewayCORSRequest} {@link DeleteCloudNativeAPIGatewayCORSResponse} */
+  DeleteCloudNativeAPIGatewayCORS(data: DeleteCloudNativeAPIGatewayCORSRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCORSResponse>;
   /** 删除云原生网关的灰度规则 {@link DeleteCloudNativeAPIGatewayCanaryRuleRequest} {@link DeleteCloudNativeAPIGatewayCanaryRuleResponse} */
   DeleteCloudNativeAPIGatewayCanaryRule(data: DeleteCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 删除云原生网关证书 {@link DeleteCloudNativeAPIGatewayCertificateRequest} {@link DeleteCloudNativeAPIGatewayCertificateResponse} */
@@ -4774,6 +4864,8 @@ declare interface Tse {
   DescribeAutoScalerResourceStrategyBindingGroups(data: DescribeAutoScalerResourceStrategyBindingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalerResourceStrategyBindingGroupsResponse>;
   /** 获取云原生API网关实例信息 {@link DescribeCloudNativeAPIGatewayRequest} {@link DescribeCloudNativeAPIGatewayResponse} */
   DescribeCloudNativeAPIGateway(data: DescribeCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayResponse>;
+  /** 查询云原生网关跨域配置 {@link DescribeCloudNativeAPIGatewayCORSRequest} {@link DescribeCloudNativeAPIGatewayCORSResponse} */
+  DescribeCloudNativeAPIGatewayCORS(data: DescribeCloudNativeAPIGatewayCORSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCORSResponse>;
   /** 查询云原生网关灰度规则列表 {@link DescribeCloudNativeAPIGatewayCanaryRulesRequest} {@link DescribeCloudNativeAPIGatewayCanaryRulesResponse} */
   DescribeCloudNativeAPIGatewayCanaryRules(data: DescribeCloudNativeAPIGatewayCanaryRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCanaryRulesResponse>;
   /** 查询云原生网关单个证书详情 {@link DescribeCloudNativeAPIGatewayCertificateDetailsRequest} {@link DescribeCloudNativeAPIGatewayCertificateDetailsResponse} */

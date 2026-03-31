@@ -332,11 +332,11 @@ declare interface BackupInfo {
   IntranetUrl?: string;
   /** 下载地址 */
   InternetUrl?: string;
-  /** 日志具体类型。可能的值有 "logical": 逻辑冷备， "physical": 物理冷备。 */
+  /** 日志具体类型。可能的值有 &quot;logical&quot;: 逻辑冷备， &quot;physical&quot;: 物理冷备。 */
   Type?: string;
   /** 备份子任务的ID，删除备份文件时使用 */
   BackupId?: number;
-  /** 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。 */
+  /** 备份任务状态。可能的值有 &quot;SUCCESS&quot;: 备份成功， &quot;FAILED&quot;: 备份失败， &quot;RUNNING&quot;: 备份进行中。 */
   Status?: string;
   /** 备份任务的完成时间 */
   FinishTime?: string;
@@ -344,9 +344,9 @@ declare interface BackupInfo {
   Creator?: string;
   /** 备份任务的开始时间 */
   StartTime?: string;
-  /** 备份方法。可能的值有 "full": 全量备份， "partial": 部分备份。 */
+  /** 备份方法。可能的值有 &quot;full&quot;: 全量备份， &quot;partial&quot;: 部分备份。 */
   Method?: string;
-  /** 备份方式。可能的值有 "manual": 手动备份， "automatic": 自动备份。 */
+  /** 备份方式。可能的值有 &quot;manual&quot;: 手动备份， &quot;automatic&quot;: 自动备份。 */
   Way?: string;
   /** 手动备份别名 */
   ManualBackupName?: string;
@@ -360,6 +360,8 @@ declare interface BackupInfo {
   CosStorageType?: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;
+  /** 备份完成进度 */
+  Progress?: number;
   /** 备份文件是否加密， on-加密， off-未加密 */
   EncryptionFlag?: string;
   /** 备份GTID点位 */
@@ -428,7 +430,7 @@ declare interface BinlogInfo {
   BinlogFinishTime?: string;
   /** 本地binlog文件所在地域 */
   Region?: string;
-  /** 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。 */
+  /** 备份任务状态。可能的值有 &quot;SUCCESS&quot;: 备份成功， &quot;FAILED&quot;: 备份失败， &quot;RUNNING&quot;: 备份进行中。 */
   Status?: string;
   /** binlog异地备份详细信息 */
   RemoteInfo?: RemoteBackupInfo[];
@@ -436,6 +438,8 @@ declare interface BinlogInfo {
   CosStorageType?: number;
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId?: string;
+  /** 备份完成进度 */
+  Progress?: number;
 }
 
 /** 聚合桶的信息 */
@@ -2465,21 +2469,21 @@ declare interface CreateDBImportJobResponse {
 declare interface CreateDBInstanceHourRequest {
   /** 实例数量，默认值为 1，最小值 1，最大值为 100。 */
   GoodsNum: number;
-  /** 实例内存大小，单位：MB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的内存规格。 */
+  /** 实例内存大小，单位：MB，请使用 获取云数据库可售卖规格 接口获取可创建的内存规格。 */
   Memory: number;
-  /** 实例硬盘大小，单位：GB，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的硬盘范围。 */
+  /** 实例硬盘大小，单位：GB，请使用 获取云数据库可售卖规格 接口获取可创建的硬盘范围。 */
   Volume: number;
-  /** MySQL 版本，值包括：5.5、5.6、5.7和8.0，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的实例版本。说明：创建非云盘版实例时，请根据需要指定实例版本（推荐5.7或8.0），若此参数不填，则默认值为8.0；若创建的是云盘版实例，则此参数仅能指定为5.7或8.0。 */
+  /** MySQL 版本，值包括：5.5、5.6、5.7和8.0，请使用 获取云数据库可售卖规格 接口获取可创建的实例版本。说明：创建非云盘版实例时，请根据需要指定实例版本（推荐5.7或8.0），若此参数不填，则默认值为8.0；若创建的是云盘版实例，则此参数仅能指定为5.7或8.0。 */
   EngineVersion?: string;
-  /** 私有网络 ID，请使用 [查询私有网络列表](/document/api/215/15778)。说明：如果创建的是云盘版实例，此参数为必填且为私有网络类型。若此项不填，则系统会选择默认的 VPC。 */
+  /** 私有网络 ID，请使用 查询私有网络列表。说明：如果创建的是云盘版实例，此参数为必填且为私有网络类型。若此项不填，则系统会选择默认的 VPC。 */
   UniqVpcId?: string;
-  /** 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用 [查询子网列表](/document/api/215/15784)。说明：若此项不填，则系统会选择默认 VPC 下的默认子网。 */
+  /** 私有网络下的子网 ID，如果设置了 UniqVpcId，则 UniqSubnetId 必填，请使用 查询子网列表。说明：若此项不填，则系统会选择默认 VPC 下的默认子网。 */
   UniqSubnetId?: string;
   /** 项目 ID，不填为默认项目。 */
   ProjectId?: number;
-  /** 可用区信息，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/api/236/17229) 接口获取可创建的可用区。说明：若您创建单节点、双节点、三节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
+  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。说明：若您创建单节点、双节点、三节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
   Zone?: string;
-  /** 实例 ID，购买只读实例或者灾备实例时必填，该字段表示只读实例或者灾备实例的主实例 ID，请使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口查询云数据库实例 ID。 */
+  /** 实例 ID，购买只读实例或者灾备实例时必填，该字段表示只读实例或者灾备实例的主实例 ID，请使用 查询实例列表 接口查询云数据库实例 ID。 */
   MasterInstanceId?: string;
   /** 实例类型，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。说明：请选择实例类型，不填会默认选择 master。 */
   InstanceRole?: string;
@@ -2487,9 +2491,9 @@ declare interface CreateDBInstanceHourRequest {
   MasterRegion?: string;
   /** 自定义端口，端口支持范围：[1024 - 65535]。说明：不填则默认为3306。 */
   Port?: number;
-  /** 设置 root 账号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
+  /** 设置 root 账号密码，密码规则：8 - 64 个字符，至少包含字母、数字、字符（支持的字符：_+-&amp;=!@#$%^*()）中的两种，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
   Password?: string;
-  /** 参数列表，参数格式如 ParamList.0.Name=auto_increment&ParamList.0.Value=1。可通过 [查询默认的可设置参数列表](https://cloud.tencent.com/document/api/236/32662) 查询支持设置的参数。说明：表名大小写敏感的开启和关闭可通过参数 lower_case_table_names 进行设置，参数值为0表示开启，参数值为1表示关闭，若不设置则此参数默认值为0。若您创建的是 MySQL 8.0 版本的实例，则需要在创建实例时通过设置 lower_case_table_names 参数来开启或关闭表名大小写敏感，创建实例后无法修改参数，即创建后无法修改表名大小写敏感。其他数据库版本的实例支持在创建实例后修改 lower_case_table_names 参数。创建实例时设置表名大小写敏感的 API 调用方法请参见本文中的示例2。 */
+  /** 参数列表，参数格式如 ParamList.0.Name=auto_increment&amp;ParamList.0.Value=1。可通过 查询默认的可设置参数列表 查询支持设置的参数。说明：表名大小写敏感的开启和关闭可通过参数 lower_case_table_names 进行设置，参数值为0表示开启，参数值为1表示关闭，若不设置则此参数默认值为0。若您创建的是 MySQL 8.0 版本的实例，则需要在创建实例时通过设置 lower_case_table_names 参数来开启或关闭表名大小写敏感，创建实例后无法修改参数，即创建后无法修改表名大小写敏感。其他数据库版本的实例支持在创建实例后修改 lower_case_table_names 参数。创建实例时设置表名大小写敏感的 API 调用方法请参见本文中的示例2。 */
   ParamList?: ParamInfo[];
   /** 数据复制方式，默认为 0，支持值包括：0 - 表示异步复制，1 - 表示半同步复制，2 - 表示强同步复制，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
   ProtectMode?: number;
@@ -2499,7 +2503,7 @@ declare interface CreateDBInstanceHourRequest {
   SlaveZone?: string;
   /** 备库 2 的可用区信息，默认为空，购买三节点主实例时可指定该参数。 */
   BackupZone?: string;
-  /** 安全组参数，可使用 [查询项目安全组信息](https://cloud.tencent.com/document/api/236/15850) 接口查询某个项目的安全组详情。 */
+  /** 安全组参数，可使用 查询项目安全组信息 接口查询某个项目的安全组详情。 */
   SecurityGroup?: string[];
   /** 只读实例信息。购买只读实例时，该参数必传。 */
   RoGroup?: RoGroup;
@@ -2513,7 +2517,7 @@ declare interface CreateDBInstanceHourRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"BASIC_V2" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 云盘版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 云盘版加强型。不指定则默认为通用型实例。说明：如果创建的是云盘版实例，此参数为必填。 */
+  /** 实例隔离类型。支持值包括：&quot;UNIVERSAL&quot; - 通用型实例，&quot;EXCLUSIVE&quot; - 独享型实例，&quot;BASIC_V2&quot; - ONTKE 单节点实例，&quot;CLOUD_NATIVE_CLUSTER&quot; - 云盘版标准型，&quot;CLOUD_NATIVE_CLUSTER_EXCLUSIVE&quot; - 云盘版加强型。不指定则默认为通用型实例。说明：如果创建的是云盘版实例，此参数为必填。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
@@ -2527,13 +2531,13 @@ declare interface CreateDBInstanceHourRequest {
   AutoSyncFlag?: number;
   /** 金融围拢 ID 。 */
   CageId?: string;
-  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板，默认值是："HIGH_STABILITY"。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
+  /** 默认参数模板类型。支持值包括：&quot;HIGH_STABILITY&quot; - 高稳定模板，&quot;HIGH_PERFORMANCE&quot; - 高性能模板，默认值是：&quot;HIGH_STABILITY&quot;。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
   ParamTemplateType?: string;
-  /** 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。 */
+  /** 告警策略名数组，例如:[&quot;policy-uyoee9wg&quot;]，AlarmPolicyList不为空时该参数无效。 */
   AlarmPolicyIdList?: string[];
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。 */
   DryRun?: boolean;
-  /** 实例引擎类型，默认为"InnoDB"，支持值包括："InnoDB"，"RocksDB"。 */
+  /** 实例引擎类型，默认为&quot;InnoDB&quot;，支持值包括：&quot;InnoDB&quot;，&quot;RocksDB&quot;。 */
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
@@ -2541,7 +2545,7 @@ declare interface CreateDBInstanceHourRequest {
   DataProtectVolume?: number;
   /** 云盘版节点拓扑配置。说明：若购买的是云盘版实例，此参数为必填，需设置云盘版实例的 RW 和 RO 节点拓扑，RO 节点范围是1 - 5个，请至少设置1个 RO 节点。 */
   ClusterTopology?: ClusterTopology;
-  /** 硬盘类型，单节点（云盘）或者云盘版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘，CLOUD_PREMIUM 表示高性能云硬盘。说明：单节点（云盘）、云盘版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 [地域和可用区](https://cloud.tencent.com/document/product/236/8458)。 */
+  /** 硬盘类型，单节点（云盘）或者云盘版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘，CLOUD_PREMIUM 表示高性能云硬盘。说明：单节点（云盘）、云盘版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 地域和可用区。 */
   DiskType?: string;
   /** 集群类型:cage——金融围拢，cdc——CDB ON CDC；dedicate——独享集群 */
   ClusterType?: string;

@@ -512,7 +512,7 @@ declare interface TableRow {
 declare interface VPCOption {
   /** 私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络） */
   VPCId?: string;
-  /** 子网ID（SubnetId和SubnetZone&SubnetCIDRBlock必选其一。若使用SubnetId，则使用现用子网；若使用SubnetZone&SubnetCIDRBlock，则创建新的子网） */
+  /** 子网ID（SubnetId和SubnetZone&amp;SubnetCIDRBlock必选其一。若使用SubnetId，则使用现用子网；若使用SubnetZone&amp;SubnetCIDRBlock，则创建新的子网） */
   SubnetId?: string;
   /** 子网可用区。 */
   SubnetZone?: string;

@@ -40,6 +40,14 @@ declare interface AKInfo {
   Remark?: string;
 }
 
+/** 常规密钥凭据（出参专用），用于查询详情接口的响应。Value字段返回打码后的值，不暴露明文 */
+declare interface AccessCredentialOutput {
+  /** 凭据键名（原文），如SecretId、SecretKey、Token等 */
+  Key?: string;
+  /** 凭据键值（打码后）补充说明：保留前3后4位，中间用***替代；长度不足7位时全部替换为*** */
+  Value?: string;
+}
+
 /** 访问密钥告警记录 */
 declare interface AccessKeyAlarm {
   /** 告警名称 */
@@ -1362,6 +1370,14 @@ declare interface CloudCountDesc {
   CloudDesc?: string;
 }
 
+/** 生效机器范围，用于指定凭证在哪些机器上生效 */
+declare interface CredentialEffectScope {
+  /** 是否排除模式枚举值：0：包含模式（仅Instances中的机器生效），此时Instances必填1：排除模式（Instances中的机器不生效，其余机器生效），此时Instances可选（空列表表示全部机器生效） */
+  Exclude?: number;
+  /** 机器实例ID列表。Exclude为0时必填，表示仅这些机器可访问凭证；Exclude为1时可选，表示这些机器不可访问凭证（空列表表示全部机器生效） */
+  Instances?: string[] | null;
+}
+
 /** 风险中心风险概览统计数据 */
 declare interface CsipRiskCenterStatistics {
   /** 端口风险总数 */
@@ -1888,6 +1904,22 @@ declare interface IpAssetListVO {
   VerifyStatus?: number;
 }
 
+/** 凭证数据结构，用于列表查询和详情查询的响应 */
+declare interface KeySandboxCredential {
+  /** 凭证ID */
+  CredentialId?: string;
+  /** 凭证名称 */
+  CredentialName?: string;
+  /** 凭证类型枚举值：access：常规密钥（Key/Value键值对）sts：STS临时密钥凭据 */
+  CredentialType?: string;
+  /** 生效机器范围 */
+  CredentialEffectScope?: CredentialEffectScope;
+  /** 创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  CreateTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  UpdateTime?: string;
+}
+
 /** KeyValue对 */
 declare interface KeyValue {
   /** 字段 */
@@ -2364,6 +2396,16 @@ declare interface RoleInfo {
   ContainerName?: string;
   /** 容器ID */
   ContainerID?: string;
+}
+
+/** STS临时密钥凭据（出参专用），用于查询详情接口的响应。SecretID和SecretKey字段返回打码后的值，System返回原文 */
+declare interface STSCredentialOutput {
+  /** 凭据提供商标识（原文），如tencentCam、aws、aliyun等 */
+  System?: string;
+  /** SecretID（打码后）补充说明：保留前3后4位，中间用***替代；长度不足7位时全部替换为*** */
+  SecretID?: string;
+  /** SecretKey（打码后）补充说明：保留前3后4位，中间用***替代；长度不足7位时全部替换为*** */
+  SecretKey?: string;
 }
 
 /** 扫描任务详情 */
@@ -4249,6 +4291,50 @@ declare interface DescribeHighBaseLineRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKeySandboxCredentialListRequest {
+  /** 过滤条件列表，支持的过滤条件如下：CredentialName - 凭证名称（模糊匹配）CredentialType - 凭证类型（精确匹配），取值：access、sts */
+  Filter?: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeKeySandboxCredentialListResponse {
+  /** 凭证数据列表 */
+  Data?: KeySandboxCredential[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKeySandboxCredentialRequest {
+  /** 凭证ID */
+  CredentialId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeKeySandboxCredentialResponse {
+  /** 凭证ID */
+  CredentialId?: string;
+  /** 凭证名称 */
+  CredentialName?: string;
+  /** 凭证类型枚举值：access：常规密钥sts：STS临时密钥 */
+  CredentialType?: string;
+  /** 生效机器范围 */
+  CredentialEffectScope?: CredentialEffectScope;
+  /** 常规密钥凭据数据（打码后），CredentialType为access时返回补充说明：Key为原文，Value为打码后的值（保留前3后4位，中间用***替代） */
+  Access?: AccessCredentialOutput[] | null;
+  /** STS凭据数据（打码后），CredentialType为sts时返回补充说明：System为原文，SecretID和SecretKey为打码后的值（保留前3后4位，中间用***替代） */
+  STS?: STSCredentialOutput | null;
+  /** 创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  CreateTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  UpdateTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeListenerListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -5368,6 +5454,10 @@ declare interface Csip {
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询云边界分析-暴露路径下主机节点的高危基线风险列表 {@link DescribeHighBaseLineRiskListRequest} {@link DescribeHighBaseLineRiskListResponse} */
   DescribeHighBaseLineRiskList(data?: DescribeHighBaseLineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighBaseLineRiskListResponse>;
+  /** 查询凭证详情 {@link DescribeKeySandboxCredentialRequest} {@link DescribeKeySandboxCredentialResponse} */
+  DescribeKeySandboxCredential(data: DescribeKeySandboxCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeySandboxCredentialResponse>;
+  /** 查询凭证列表 {@link DescribeKeySandboxCredentialListRequest} {@link DescribeKeySandboxCredentialListResponse} */
+  DescribeKeySandboxCredentialList(data?: DescribeKeySandboxCredentialListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeySandboxCredentialListResponse>;
   /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */

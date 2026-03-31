@@ -397,6 +397,8 @@ declare namespace V20180717 {
     SubtitleSet?: MediaSubtitleItem[];
     /** 默认字幕的唯一标识。 */
     DefaultSubtitleId?: string;
+    /** DRM加密方法。 */
+    DrmEncryptType?: string;
   }
 
   /** 对视频转自适应码流的输入参数类型 */
@@ -427,19 +429,21 @@ declare namespace V20180717 {
     Comment?: string;
     /** 自适应转码格式，取值范围：HLS。 */
     Format?: string;
-    /** DRM 类型，取值范围：SimpleAESWidevineFairPlay如果取值为空字符串，代表不对视频做 DRM 保护。 */
+    /** DRM 类型，取值范围：SimpleAESWidevineFairPlayWidevine+FairPlay如果取值为空字符串，代表不对视频做 DRM 保护。 */
     DrmType?: string;
-    /** DRM 的密钥提供商，取值范围：SDMC：华曦达；VOD：云点播。默认值为 VOD 。 */
+    /** DRM 的密钥提供商，取值范围：SDMC：华曦达；VOD：云点播。默认值为 VOD 。华曦达服务后续逐步下线，请使用VOD DRM加密服务。 */
     DrmKeyProvider?: string;
+    /** DRM的加密类型，取值范围：{&quot;cbcs&quot;, &quot;cenc&quot;} */
+    DrmEncryptType?: string;
     /** 自适应转码输入流参数信息，最多输入10路流。 */
     StreamInfos?: AdaptiveStreamTemplate[];
     /** 是否禁止视频低码率转高码率，取值范围：0：否，1：是。 */
     DisableHigherVideoBitrate?: number;
     /** 是否禁止视频分辨率转高分辨率，取值范围：0：否，1：是。 */
     DisableHigherVideoResolution?: number;
-    /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 模板创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 模板最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
     /** 切片类型，仅当 Format 为 HLS 时有效。 */
     SegmentType?: string;
@@ -7738,14 +7742,16 @@ declare namespace V20180717 {
     Format: string;
     /** 自适应转码输出子流参数信息，最多输出10路子流。注意：各个子流的帧率必须保持一致；如果不一致，采用第一个子流的帧率作为输出帧率。 */
     StreamInfos: AdaptiveStreamTemplate[];
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** DRM 方案类型，取值范围：SimpleAESWidevineFairPlay默认值为空字符串，如果取值为空字符串，代表不对视频做 DRM 保护。 */
+    /** DRM 方案类型，取值范围：SimpleAESWidevineFairPlayWidevine+FairPlay默认值为空字符串，如果取值为空字符串，代表不对视频做 DRM 保护。 */
     DrmType?: string;
-    /** DRM 的密钥提供商，取值范围：SDMC：华曦达；VOD：云点播。默认为 VOD 。 */
+    /** DRM 的密钥提供商，取值范围：SDMC：华曦达；VOD：云点播。默认为 VOD 。华曦达服务后续逐步下线，请使用VOD DRM加密服务。 */
     DrmKeyProvider?: string;
+    /** 加密方式，可选值：cbcs：Widevine，FairPlay，WideVine+FairPlay支持；cenc：Widevine支持； 若不填FairPlay 默认cbcs;Widevine 默认cenc;WideVine+FairPlay默认cbcs; */
+    DrmEncryptType?: string;
     /** 是否禁止视频低码率转高码率，取值范围：0：否，1：是。默认为否。 */
     DisableHigherVideoBitrate?: number;
     /** 是否禁止视频分辨率转高分辨率，取值范围：0：否，1：是。默认为否。 */
@@ -9540,12 +9546,12 @@ declare namespace V20180717 {
   }
 
   interface DescribeDrmKeyProviderInfoRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
   interface DescribeDrmKeyProviderInfoResponse {
-    /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
+    /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。华曦达服务后续逐步下线，请使用VOD DRM加密服务。 */
     SDMCInfo?: SDMCDrmKeyProviderInfo;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
@@ -12134,9 +12140,9 @@ declare namespace V20180717 {
   }
 
   interface SetDrmKeyProviderInfoRequest {
-    /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。 */
+    /** 华曦达（SDMC）相关的 DRM 密钥提供商信息。华曦达服务后续逐步下线，请使用VOD DRM加密服务。 */
     SDMCInfo?: SDMCDrmKeyProviderInfo;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
