@@ -432,9 +432,9 @@ declare interface NodeScript {
 
 /** 输出重定向配置 */
 declare interface OutputRedirect {
-  /** 输出driver类型 */
+  /** 输出driver类型枚举值：local： 宿主机本地目录cos： 远端cos存储默认值：local */
   Driver?: string;
-  /** 重定向配置参数 */
+  /** 重定向配置参数日志重定向路径，用于指定任务日志的输出目标。取值格式与 Driver 类型关联：当 Driver 为 local 时，格式为本地文件路径，如 stdout=/tmp/train_out.log；当 Driver 为 cos 时，格式为 COS 存储桶路径，如 stdout=cos://test-123456.cos.ap-shanghai.myqcloud.com/test/. */
   Options?: string[];
 }
 

@@ -1408,6 +1408,14 @@ declare interface InstanceVersion {
   AllowModifyTxnIdExpiration?: boolean;
 }
 
+/** 实例公网路由IP白名单列表对象 */
+declare interface IpWhitelistDTO {
+  /** 放通IP或网段 */
+  CidrBlock?: string;
+  /** 描述 */
+  PolicyDescription?: string;
+}
+
 /** 数据处理——Value处理参数——Jsonpath替换参数 */
 declare interface JsonPathReplaceParam {
   /** 被替换值，Jsonpath表达式 */
@@ -2976,11 +2984,11 @@ declare interface CreatePostPaidInstanceRequest {
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数 */
   ClusterId?: number;
-  /** 实例版本。目前支持当前支持"2.4.1", "2.4.2","2.8.1", "3.2.3"，默认取值"2.4.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
+  /** 实例版本。目前支持当前支持&quot;2.4.1&quot;, &quot;2.4.2&quot;,&quot;2.8.1&quot;, &quot;3.2.3&quot;，默认取值&quot;2.4.1&quot;。&quot;2.4.1&quot; 与 &quot;2.4.2&quot; 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
-  /** 实例类型。"standard"：标准版，"profession"：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
+  /** 实例类型。&quot;standard&quot;：标准版，&quot;profession&quot;：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
   SpecificationsType?: string;
-  /** 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认值为 "CLOUD_BASIC" */
+  /** 专业版实例磁盘类型，标准版实例不需要填写。&quot;CLOUD_SSD&quot;：SSD云硬盘；&quot;CLOUD_BASIC&quot;：高性能云硬盘。不传默认值为 &quot;CLOUD_BASIC&quot; */
   DiskType?: string;
   /** 实例内网峰值带宽，默认值为40。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格，可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/11745 */
   BandWidth?: number;
@@ -2998,7 +3006,7 @@ declare interface CreatePostPaidInstanceRequest {
   ZoneIds?: number[];
   /** 购买实例数量。非必填，默认值为 1。当传入该参数时，会创建多个 instanceName 加后缀区分的实例 */
   InstanceNum?: number;
-  /** 公网带宽大小，单位 Mbps。默认是没有加上免费 3Mbps 带宽。例如总共需要 3Mbps 公网带宽，此处传 0；总共需要 6Mbps 公网带宽，此处传 3。需要保证传入参数为 3 的整数倍 */
+  /** 公网带宽大小，单位 Mbps。单位：Mbps */
   PublicNetworkMonthly?: number;
   /** 标签 */
   Tags?: Tag[];
@@ -3054,6 +3062,8 @@ declare interface CreateRouteRequest {
   Note?: string;
   /** 关联安全组有序列表 */
   SecurityGroupIds?: string[];
+  /** 公网路由IP白名单预设配置入参限制：vipType=1 */
+  IpWhitelist?: IpWhitelistDTO[];
 }
 
 declare interface CreateRouteResponse {
@@ -4187,7 +4197,7 @@ declare interface InstanceAttributesResponse {
   MaxGroupNum?: number;
   /** 售卖类型,0:标准版,1:专业版 */
   Cvm?: number;
-  /** 实例类型 枚举列表: profession :专业版 standards2 :标准版premium :高级版serverless :serverless版 */
+  /** 实例类型 枚举列表:profession :专业版standards2 :标准版premium :高级版serverless :serverless版 */
   InstanceType?: string;
   /** 表示该实例支持的特性。FEATURE_SUBNET_ACL:表示acl策略支持设置子网。 */
   Features?: string[];
@@ -4211,7 +4221,7 @@ declare interface InstanceAttributesResponse {
   MaxMessageByte?: number;
   /** 实例计费类型 POSTPAID_BY_HOUR 按小时付费; PREPAID 包年包月 */
   InstanceChargeType?: string;
-  /** 是否开启弹性带宽白名单 1:已开启弹性带宽白名单;0:未开启弹性带宽白名单; */
+  /** 是否开启弹性带宽白名单1:已开启弹性带宽白名单;0:未开启弹性带宽白名单; */
   ElasticBandwidthSwitch?: number;
   /** 弹性带宽开通状态1:未开启弹性带宽;16: 开启弹性带宽中;32:开启弹性带宽成功;33:关闭弹性带宽中;34:关闭弹性带宽成功;64:开启弹性带宽失败;65:关闭弹性带宽失败; */
   ElasticBandwidthOpenStatus?: number;

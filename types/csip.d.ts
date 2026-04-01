@@ -1723,11 +1723,11 @@ declare interface FilterDataObject {
 /** filter过滤条件 */
 declare interface Filters {
   /** 实例ID */
-  Name?: string | null;
+  Name?: string;
   /** 实例ID内容 */
-  Values?: string[] | null;
+  Values?: string[];
   /** 模糊匹配 */
-  ExactMatch?: string | null;
+  ExactMatch?: string;
 }
 
 /** 网关资产 */

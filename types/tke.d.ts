@@ -2299,6 +2299,10 @@ declare namespace V20180525 {
     ImageRegistryCredentials?: ImageRegistryCredential[];
     /** 腾讯云标签 */
     Tags?: Tag[];
+    /** 镜像缓存类型 */
+    ImageCacheType?: string;
+    /** 镜像缓存所属snapshotter类型 */
+    Snapshotter?: string;
   }
 
   /** 镜像缓存的事件 */
@@ -7650,6 +7654,8 @@ declare namespace V20180525 {
   interface GetMostSuitableImageCacheRequest {
     /** 容器镜像列表 */
     Images: string[];
+    /** 容器镜像制作snapshotter */
+    Snapshotter?: string;
   }
 
   interface GetMostSuitableImageCacheResponse {

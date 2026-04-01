@@ -8,9 +8,9 @@ declare interface FaceInfo {
   X?: number;
   /** 人脸框的纵坐标 */
   Y?: number;
-  /** 人脸框的宽度 */
+  /** 人脸框的宽度。单位：px */
   Width?: number;
-  /** 人脸框的高度 */
+  /** 人脸框的高度。单位：px */
   Height?: number;
 }
 

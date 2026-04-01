@@ -1455,6 +1455,8 @@ declare namespace V20180416 {
     DeployMode?: number;
     /** 多可用区部署时可用区的详细信息 */
     MultiZoneInfo?: ZoneDetail[];
+    /** 客户自定义dns配置 */
+    UserDnsIp?: string | null;
   }
 
   /** Logstash节点信息 */
@@ -3572,6 +3574,8 @@ declare namespace V20180416 {
     NodeNum?: number;
     /** 实例YML配置 */
     YMLConfig?: string;
+    /** 客户自定义dns配置 */
+    UserDnsIp?: string;
     /** 实例绑定的ES集群信息 */
     BindedES?: LogstashBindedES;
     /** 实例名称 */

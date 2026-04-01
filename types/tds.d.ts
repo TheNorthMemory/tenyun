@@ -88,6 +88,10 @@ declare interface DescribeFinanceFraudUltimateResponse {
   SuggestionLevel?: number;
   /** 图灵盾统一ID */
   Unionid?: string;
+  /** 检测时间戳（毫秒） */
+  RiskCheckTimestamp?: string;
+  /** 额外信息 */
+  ExtraInfos?: ExtraInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -216,6 +220,10 @@ declare interface DescribeFraudUltimateResponse {
   SuggestionLevel?: number;
   /** 图灵盾统一ID */
   Unionid?: string;
+  /** 检测时间戳（毫秒） */
+  RiskCheckTimestamp?: string;
+  /** 额外信息 */
+  ExtraInfos?: ExtraInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

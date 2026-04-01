@@ -9239,9 +9239,9 @@ declare interface DescribeTranscodeTemplatesResponse {
 declare interface DescribeUsageDataRequest {
   /** 起始日期。使用 ISO 日期格式。 */
   StartTime: string;
-  /** 结束日期，需大于等于起始日期。使用 ISO 日期格式。 */
+  /** 结束日期，需大于等于起始日期。使用ISO 日期格式。参数格式：2019-07-16T06:21:28Z */
   EndTime: string;
-  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印AIGC: AIGCVideo */
+  /** 查询媒体处理任务类型，默认查询转码。Transcode：转码Enhance：增强AIAnalysis：智能分析AIRecognition：智能识别AIReview：内容审核Snapshot：截图AnimatedGraphics：转动图AiQualityControl：质检Evaluation：视频评测ImageProcess: 图片处理AddBlindWatermark: 添加基础版权数字水印AddNagraWatermark: 添加NAGRA数字水印ExtractBlindWatermark: 提取基础版权数字水印AIGCVideo: AIGC视频生成AIGCImage: AIGC图片生成 */
   Types?: string[];
   /** 媒体处理园区，默认返回 ap-guangzhou 园区。ap-guangzhou：广州ap-hongkong：中国香港ap-taipei：中国台北ap-singapore：新加坡ap-mumbai：印度ap-jakarta：雅加达ap-seoul：首尔ap-bangkok：泰国ap-tokyo：日本na-siliconvalley：美国硅谷na-ashburn：弗吉尼亚na-toronto：多伦多sa-saopaulo：圣保罗eu-frankfurt：法兰克福eu-moscow：俄罗斯aws：AWS */
   ProcessRegions?: string[];

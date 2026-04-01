@@ -898,6 +898,10 @@ declare interface Placement {
   HostIds?: string[];
   /** 实例所属的专用宿主机ID，仅用于出参。 */
   HostId?: string;
+  /** 专有资源预扣策略。取值范围：ResourcePool：使用实例资源池进行资源预扣 */
+  DedicatedResourcePackTenancy?: string;
+  /** 专有预扣资源ID列表。形如：rpp-7eumgm3l。通过指定专有预扣资源创建实例时，必须同时指定匹配的DedicatedResourcePackTenancy。 */
+  DedicatedResourcePackIds?: string[];
   /** 实例所属的实例资源池机架ID，仅用于出参。 */
   RackId?: string;
 }

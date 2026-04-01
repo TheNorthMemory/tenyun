@@ -635,37 +635,39 @@ declare interface CreateAutoSnapshotPolicyResponse {
 }
 
 declare interface CreateCfsFileSystemRequest {
-  /** 可用区名称，例如ap-beijing-1，请参考 [概览](https://cloud.tencent.com/document/product/582/13225) 文档中的地域与可用区列表 */
+  /** 可用区名称，例如ap-beijing-1，请参考 概览 文档中的地域与可用区列表 */
   Zone: string;
   /** 网络类型，可选值为 VPC，CCN；其中 VPC 为私有网络， CCN 为云联网。通用标准型/性能型请选择VPC，Turbo标准型/性能型请选择CCN。 */
   NetInterface: string;
-  /** 权限组 ID,pgroupbasic 是默认权限组，通过控制查询权限组列表接口获取[DescribeCfsPGroups](https://cloud.tencent.com/document/product/582/38157) */
+  /** 权限组 ID,pgroupbasic 是默认权限组，通过控制查询权限组列表接口获取DescribeCfsPGroups */
   PGroupId: string;
   /** 文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择TURBO，不支持NFS、CIFS */
   Protocol?: string;
   /** 文件系统存储类型，默认值为 SD ；其中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。 */
   StorageType?: string;
-  /** 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取，[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778) */
+  /** 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取，DescribeVpcs */
   VpcId?: string;
-  /** 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取，[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784) */
+  /** 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取，DescribeSubnets */
   SubnetId?: string;
   /** 指定IP地址，仅VPC网络支持；若不填写、将在该子网下随机分配 IP，Turbo系列当前不支持指定 */
   MountIP?: string;
   /** 用户自定义文件系统名称 */
   FsName?: string;
+  /** 文件系统是否加密，若留空则默认为不加密 */
+  Encrypted?: boolean;
   /** 文件系统标签 */
   ResourceTags?: TagInfo[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。用于保证请求幂等性的字符串失效时间为2小时。 */
   ClientToken?: string;
-  /** 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取，通过接口[DescribeCcns](https://cloud.tencent.com/document/product/215/19199) */
+  /** 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取，通过接口DescribeCcns */
   CcnId?: string;
   /** 云联网中CFS使用的网段， 若网络类型选择的是Ccn，该字段为必填，且不能和Ccn中已经绑定的网段冲突 */
   CidrBlock?: string;
   /** 文件系统容量，turbo系列必填，单位为GiB。 turbo标准型单位GB，起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。turbo性能型起售10TiB，即10240 GiB；扩容步长10TiB，10240 GiB。 */
   Capacity?: number;
-  /** 文件系统快照ID，通过查询快照列表获取该参数，[DescribeCfsSnapshots](https://cloud.tencent.com/document/product/582/80206) */
+  /** 文件系统快照ID，通过查询快照列表获取该参数，DescribeCfsSnapshots */
   SnapshotId?: string;
-  /** 定期快照策略ID，通过查询快照策略信息获取,[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/product/582/38157) */
+  /** 定期快照策略ID，通过查询快照策略信息获取,DescribeAutoSnapshotPolicies */
   AutoSnapshotPolicyId?: string;
   /** 是否开启默认扩容，仅turbo类型文件存储支持 */
   EnableAutoScaleUp?: boolean;

@@ -187,7 +187,7 @@ declare interface CancelIsolateDBInstancesResponse {
 }
 
 declare interface CreateDBSBackupRequest {
-  /** 备份方式：physical、snapshot 这个值和DescribeDBSBackupPolicy接口返回的backupMethod保持一致枚举值： physical： 物理备份 snapshot： 快照备份 */
+  /** 备份方式：physical、snapshot 这个值和DescribeDBSBackupPolicy接口返回的backupMethod保持一致枚举值：physical： 物理备份snapshot： 快照备份 */
   BackupMethod: string;
   /** 备份类型：暂时只支持full */
   BackupType: string;
@@ -239,7 +239,7 @@ declare interface DescribeDBParametersResponse {
 }
 
 declare interface DescribeDBSAvailableRecoveryTimeRequest {
-  /** db实例ID */
+  /** 实例ID */
   InstanceId: string;
   /** 备份集ID,值来自 DescribeDBSBackupSets 接口返回 */
   BackupSetId?: number;
@@ -451,9 +451,9 @@ declare interface Tdmysql {
   (): Versions;
   /** 批量解除隔离实例 {@link CancelIsolateDBInstancesRequest} {@link CancelIsolateDBInstancesResponse} */
   CancelIsolateDBInstances(data: CancelIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIsolateDBInstancesResponse>;
-  /** 创建实例备份 {@link CreateDBSBackupRequest} {@link CreateDBSBackupResponse} */
+  /** 创建实例手工备份 {@link CreateDBSBackupRequest} {@link CreateDBSBackupResponse} */
   CreateDBSBackup(data: CreateDBSBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBSBackupResponse>;
-  /** 清理实例备份 {@link DeleteDBSBackupSetsRequest} {@link DeleteDBSBackupSetsResponse} */
+  /** 删除实例手工备份 {@link DeleteDBSBackupSetsRequest} {@link DeleteDBSBackupSetsResponse} */
   DeleteDBSBackupSets(data: DeleteDBSBackupSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBSBackupSetsResponse>;
   /** 查看实例参数 {@link DescribeDBParametersRequest} {@link DescribeDBParametersResponse} */
   DescribeDBParameters(data: DescribeDBParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBParametersResponse>;
@@ -479,7 +479,7 @@ declare interface Tdmysql {
   ModifyDBParameters(data: ModifyDBParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBParametersResponse>;
   /** 修改实例备份策略 {@link ModifyDBSBackupPolicyRequest} {@link ModifyDBSBackupPolicyResponse} */
   ModifyDBSBackupPolicy(data: ModifyDBSBackupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSBackupPolicyResponse>;
-  /** 修改实例备份备注名 {@link ModifyDBSBackupSetCommentRequest} {@link ModifyDBSBackupSetCommentResponse} */
+  /** 修改实例备份备注 {@link ModifyDBSBackupSetCommentRequest} {@link ModifyDBSBackupSetCommentResponse} */
   ModifyDBSBackupSetComment(data: ModifyDBSBackupSetCommentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSBackupSetCommentResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;

@@ -1252,7 +1252,7 @@ declare interface ExternalRole {
 declare interface ExtractRuleInfo {
   /** 时间字段的key名字，TimeKey和TimeFormat必须成对出现 */
   TimeKey?: string;
-  /** 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数- 参考 [配置时间格式](https://cloud.tencent.com/document/product/614/38614) 文档 */
+  /** 时间字段的格式，参考c语言的strftime函数对于时间的格式说明输出参数参考 配置时间格式 文档 */
   TimeFormat?: string;
   /** 分隔符类型日志的分隔符，只有LogType为delimiter_log时有效 */
   Delimiter?: string;
@@ -1268,28 +1268,30 @@ declare interface ExtractRuleInfo {
   UnMatchUpLoadSwitch?: boolean | null;
   /** 失败日志的key，当UnMatchUpLoadSwitch为true时必填 */
   UnMatchLogKey?: string | null;
-  /** 增量采集模式下的回溯数据量，默认：-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。注意：- COS导入不支持此字段。 */
+  /** 增量采集模式下的回溯数据量，默认：-1（全量采集）；其他非负数表示增量采集（从最新的位置，往前采集${Backtracking}字节（Byte）的日志）最大支持1073741824（1G）。注意：COS导入不支持此字段。 */
   Backtracking?: number | null;
-  /** 是否为Gbk编码。 0：否；1：是。注意- 目前取0值时，表示UTF-8编码- COS导入不支持此字段。 */
+  /** 是否为Gbk编码。 0：否；1：是。注意目前取0值时，表示UTF-8编码COS导入不支持此字段。 */
   IsGBK?: number;
-  /** 是否为标准json。 0：否； 1：是。- 标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。 */
+  /** 是否为标准json。 0：否； 1：是。标准json指采集器使用业界标准开源解析器进行json解析，非标json指采集器使用CLS自研json解析器进行解析，两种解析器没有本质区别，建议客户使用标准json进行解析。 */
   JsonStandard?: number | null;
-  /** syslog传输协议，取值为tcp或者udp，只有在LogType为service_syslog时生效，其余类型无需填写。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置。- COS导入不支持此字段。 */
+  /** syslog传输协议，取值为tcp或者udp，只有在LogType为service_syslog时生效，其余类型无需填写。注意：该字段适用于：创建采集规则配置、修改采集规则配置。COS导入不支持此字段。 */
   Protocol?: string;
-  /** syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]，只有在LogType为service_syslog时生效，其余类型无需填写。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置。- COS导入不支持此字段。 */
+  /** syslog系统日志采集指定采集器监听的地址和端口 ，形式：[ip]:[port]，只有在LogType为service_syslog时生效，其余类型无需填写。注意：该字段适用于：创建采集规则配置、修改采集规则配置。COS导入不支持此字段。 */
   Address?: string;
-  /** rfc3164：指定系统日志采集使用RFC3164协议解析日志。rfc5424：指定系统日志采集使用RFC5424协议解析日志。auto：自动匹配rfc3164或者rfc5424其中一种协议。只有在LogType为service_syslog时生效，其余类型无需填写。注意：- 该字段适用于：创建采集规则配置、修改采集规则配置- COS导入不支持此字段。 */
+  /** rfc3164：指定系统日志采集使用RFC3164协议解析日志。rfc5424：指定系统日志采集使用RFC5424协议解析日志。auto：自动匹配rfc3164或者rfc5424其中一种协议。只有在LogType为service_syslog时生效，其余类型无需填写。注意：该字段适用于：创建采集规则配置、修改采集规则配置COS导入不支持此字段。 */
   ParseProtocol?: string;
-  /** 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。注意：- COS导入不支持此字段。 */
+  /** 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。注意：COS导入不支持此字段。 */
   MetadataType?: number;
-  /** 采集配置路径正则表达式。```请用"()"标识路径中目标字段对应的正则表达式，解析时将"()"视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。若不希望以序号为键名，可以通过命名捕获组"(?<{键名}>{正则})"自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组```注意：- MetadataType为3时必填。- COS导入不支持此字段。 */
+  /** 采集配置路径正则表达式。请用&quot;()&quot;标识路径中目标字段对应的正则表达式，解析时将&quot;()&quot;视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。若不希望以序号为键名，可以通过命名捕获组&quot;(?&lt;{键名}&gt;{正则})&quot;自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组注意：MetadataType为3时必填。COS导入不支持此字段。 */
   PathRegex?: string;
-  /** 用户自定义元数据信息。注意：- MetadataType为2时必填。- COS导入不支持此字段。 */
+  /** 用户自定义元数据信息。注意：MetadataType为2时必填。COS导入不支持此字段。 */
   MetaTags?: MetaTagInfo[];
   /** Windows事件日志采集规则，只有在LogType为windows_event_log时生效，其余类型无需填写。 */
   EventLogRules?: EventLog[];
-  /** 日志过滤规则列表（新版）。注意：- 2.9.3以下版本LogListener不支持， 请使用FilterKeyRegex配置日志过滤规则。- 自建k8s采集配置（CreateConfigExtra、ModifyConfigExtra）不支持此字段。 */
+  /** 日志过滤规则列表（新版）。注意：2.9.3以下版本LogListener不支持， 请使用FilterKeyRegex配置日志过滤规则。自建k8s采集配置（CreateConfigExtra、ModifyConfigExtra）不支持此字段。 */
   AdvanceFilterRules?: AdvanceFilterRuleInfo[] | null;
+  /** 原始日志的键名称(Key)；所有原始日志， 均以您指定的键名称（Key），原始日志内容作为值（Value）进行上传，为空时表示不开启原始日志上传。COS导入不支持此字段。 */
+  RawLogKey?: string;
 }
 
 /** 文件路径信息 */
@@ -2294,6 +2296,10 @@ declare interface ShipperInfo {
   ExternalId?: string;
   /** 任务运行状态。支持0,1,20: 停止1: 运行中2: 异常 */
   TaskStatus?: number;
+  /** 用于生成投递到COS 的文件路径中的时间变量 */
+  TimeZone?: string;
+  /** 预过滤处理-对写入COS原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 /** 投递任务信息 */
@@ -3419,11 +3425,11 @@ declare interface CreateScheduledSqlResponse {
 }
 
 declare interface CreateShipperRequest {
-  /** 创建的投递规则所属的日志主题Id。- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 创建的投递规则所属的日志主题Id。通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
+  /** COS存储桶，详见产品支持的存储桶命名规范。 通过GET Service（List Buckets）获取COS存储桶。 */
   Bucket: string;
-  /** 投递规则投递的新的目录前缀。- 仅支持0-9A-Za-z-_/- 最大支持256个字符 */
+  /** 投递规则投递的新的目录前缀。仅支持0-9A-Za-z-_/最大支持256个字符 */
   Prefix: string;
   /** 投递规则的名字。最大支持255个字符 */
   ShipperName: string;
@@ -3445,12 +3451,16 @@ declare interface CreateShipperRequest {
   StartTime?: number;
   /** 投递数据范围的结束时间点（秒级时间戳），不能填写未来时间。如果用户不填写，默认为持续投递，即无限。 */
   EndTime?: number;
-  /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：- STANDARD：标准存储- STANDARD_IA：低频存储- ARCHIVE：归档存储- DEEP_ARCHIVE：深度归档存储- MAZ_STANDARD：标准存储（多 AZ）- MAZ_STANDARD_IA：低频存储（多 AZ）- INTELLIGENT_TIERING：智能分层存储- MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
+  /** 对象存储类型，默认值为 STANDARD。枚举值请参见 存储类型概述 文档。参考值有：STANDARD：标准存储STANDARD_IA：低频存储ARCHIVE：归档存储DEEP_ARCHIVE：深度归档存储MAZ_STANDARD：标准存储（多 AZ）MAZ_STANDARD_IA：低频存储（多 AZ）INTELLIGENT_TIERING：智能分层存储MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
-  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  /** 角色访问描述名 创建角色 */
   RoleArn?: string;
   /** 外部ID */
   ExternalId?: string;
+  /** 用于生成投递到COS 的文件路径中的时间变量入参限制：支持下面时区列表GMT-12:00GMT-11:00GMT-10:00GMT-09:30GMT-09:00GMT-08:00GMT-07:00GMT-06:00GMT-05:00GMT-04:00GMT-03:30GMT-03:00GMT-02:00GMT-01:00GMT+00:00GMT+01:00GMT+02:00GMT+03:30GMT+04:00GMT+04:30GMT+05:00GMT+05:30GMT+05:45GMT+06:00GMT+06:30GMT+07:00GMT+08:00GMT+09:00GMT+09:30GMT+10:00GMT+10:30GMT+11:00GMT+11:30GMT+12:00GMT+12:45GMT+13:00GMT+14:00UTC-11:00UTC-10:00UTC-09:00UTC-08:00UTC-12:00UTC-07:00UTC-06:00UTC-05:00UTC-04:30UTC-04:00UTC-03:30UTC-03:00UTC-02:00UTC-01:00UTC+00:00UTC+01:00UTC+02:00UTC+03:00UTC+03:30UTC+04:00UTC+04:30UTC+05:00UTC+05:45UTC+06:00UTC+06:30UTC+07:00UTC+08:00UTC+09:00UTC+09:30UTC+10:00UTC+11:00UTC+12:00UTC+13:00 */
+  TimeZone?: string;
+  /** 预过滤处理-对写入COS原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface CreateShipperResponse {
@@ -5753,11 +5763,11 @@ declare interface ModifyScheduledSqlResponse {
 }
 
 declare interface ModifyShipperRequest {
-  /** 投递规则Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745)获取ShipperId。 */
+  /** 投递规则Id。通过 获取投递任务列表获取ShipperId。 */
   ShipperId: string;
-  /** COS存储桶，详见产品支持的[存储桶命名规范](https://cloud.tencent.com/document/product/436/13312)。	- 通过[GET Service（List Buckets）](https://cloud.tencent.com/document/product/436/8291)获取COS存储桶。 */
+  /** COS存储桶，详见产品支持的存储桶命名规范。 通过GET Service（List Buckets）获取COS存储桶。 */
   Bucket?: string;
-  /** 投递规则投递的新的目录前缀。- 仅支持0-9A-Za-z-_/- 最大支持256个字符 */
+  /** 投递规则投递的新的目录前缀。仅支持0-9A-Za-z-_/最大支持256个字符 */
   Prefix?: string;
   /** 投递规则的开关状态。true：开启投递任务；false：关闭投递任务。 */
   Status?: boolean;
@@ -5777,12 +5787,16 @@ declare interface ModifyShipperRequest {
   Content?: ContentInfo;
   /** 投递文件命名配置，0：随机数命名，1：投递时间命名。 */
   FilenameMode?: number;
-  /** 对象存储类型，默认值为 STANDARD。枚举值请参见[ 存储类型概述](https://cloud.tencent.com/document/product/436/33417) 文档。参考值有：- STANDARD：标准存储- STANDARD_IA：低频存储- ARCHIVE：归档存储- DEEP_ARCHIVE：深度归档存储- MAZ_STANDARD：标准存储（多 AZ）- MAZ_STANDARD_IA：低频存储（多 AZ）- INTELLIGENT_TIERING：智能分层存储- MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
+  /** 对象存储类型，默认值为 STANDARD。枚举值请参见 存储类型概述 文档。参考值有：STANDARD：标准存储STANDARD_IA：低频存储ARCHIVE：归档存储DEEP_ARCHIVE：深度归档存储MAZ_STANDARD：标准存储（多 AZ）MAZ_STANDARD_IA：低频存储（多 AZ）INTELLIGENT_TIERING：智能分层存储MAZ_INTELLIGENT_TIERING：智能分层存储（多 AZ） */
   StorageType?: string;
-  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  /** 角色访问描述名 创建角色 */
   RoleArn?: string;
   /** 外部ID */
   ExternalId?: string;
+  /** 用于生成投递到COS 的文件路径中的时间变量入参限制：支持下面时区列表GMT-12:00GMT-11:00GMT-10:00GMT-09:30GMT-09:00GMT-08:00GMT-07:00GMT-06:00GMT-05:00GMT-04:00GMT-03:30GMT-03:00GMT-02:00GMT-01:00GMT+00:00GMT+01:00GMT+02:00GMT+03:30GMT+04:00GMT+04:30GMT+05:00GMT+05:30GMT+05:45GMT+06:00GMT+06:30GMT+07:00GMT+08:00GMT+09:00GMT+09:30GMT+10:00GMT+10:30GMT+11:00GMT+11:30GMT+12:00GMT+12:45GMT+13:00GMT+14:00UTC-11:00UTC-10:00UTC-09:00UTC-08:00UTC-12:00UTC-07:00UTC-06:00UTC-05:00UTC-04:30UTC-04:00UTC-03:30UTC-03:00UTC-02:00UTC-01:00UTC+00:00UTC+01:00UTC+02:00UTC+03:00UTC+03:30UTC+04:00UTC+04:30UTC+05:00UTC+05:45UTC+06:00UTC+06:30UTC+07:00UTC+08:00UTC+09:00UTC+09:30UTC+10:00UTC+11:00UTC+12:00UTC+13:00 */
+  TimeZone?: string;
+  /** 预过滤处理-对写入COS原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface ModifyShipperResponse {
@@ -6071,25 +6085,25 @@ declare interface SearchDashboardSubscribeResponse {
 }
 
 declare interface SearchLogRequest {
-  /** 要检索分析的日志的起始时间，**Unix时间戳（毫秒）** */
+  /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
   From: number;
-  /** 要检索分析的日志的结束时间，**Unix时间戳（毫秒）** */
+  /** 要检索分析的日志的结束时间，Unix时间戳（毫秒） */
   To: number;
-  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志 */
-  Query: string;
-  /** 检索语法规则，默认值为0，推荐使用1 。- 0：Lucene语法- 1：CQL语法（CLS Query Language，日志服务专用检索语法） ⚠️⚠️ **注意** **该参数值建议设置为 1，使用 CQL 语法规则，控制台日志检索及仪表盘默认均使用该语法规则。** 该参数值未指定或者为 0 时，将使用 Lucene 语法，语法容易报错且查询结果与控制台默认语法规则不一致。详细说明参见检索条件语法规则。 */
-  SyntaxRule?: number;
-  /** - 要检索分析的日志主题ID，仅能指定一个日志主题。- 如需同时检索多个日志主题，请使用Topics参数。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
+  /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志默认值：空字符串 */
+  QueryString?: string;
+  /** 检索语法规则，默认值为1，推荐使用1 。0：Lucene语法1：CQL语法（CLS Query Language，日志服务专用检索语法）详细说明参见检索条件语法规则。默认值：1 */
+  QuerySyntax?: number;
+  /** 要检索分析的日志主题ID，仅能指定一个日志主题。如需同时检索多个日志主题，请使用Topics参数。TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
   TopicId?: string;
-  /** - 要检索分析的日志主题列表，最大支持50个日志主题。- 检索单个日志主题时请使用TopicId。- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
+  /** 要检索分析的日志主题列表，最大支持50个日志主题。检索单个日志主题时请使用TopicId。TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。 */
   Topics?: MultiTopicSearchInformation[];
-  /** 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果排序方式参考SQL ORDER BY语法 */
+  /** 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc注意：仅当检索分析语句(Query)不包含SQL时有效SQL结果排序方式参考SQL ORDER BY语法 */
   Sort?: string;
-  /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000。注意：* 仅当检索分析语句(Query)不包含SQL时有效* SQL结果条数指定方式参考SQL LIMIT语法可通过两种方式获取后续更多日志：* Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志* Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制 */
+  /** 表示单次查询返回的原始日志条数，默认为100，最大值为1000。注意：仅当检索分析语句(Query)不包含SQL时有效SQL结果条数指定方式参考SQL LIMIT语法可通过两种方式获取后续更多日志：Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制 */
   Limit?: number;
-  /** 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。 注意：* 仅当检索分析语句(Query)不包含SQL时有效* 不能与Context参数同时使用* 仅适用于单日志主题检索 */
+  /** 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。注意：仅当检索分析语句(Query)不包含SQL时有效不能与Context参数同时使用仅适用于单日志主题检索 */
   Offset?: number;
-  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。注意：* 透传该参数时，请勿修改除该参数外的其它参数* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考SQL LIMIT语法 */
+  /** 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。注意：透传该参数时，请勿修改除该参数外的其它参数仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考SQL LIMIT语法 */
   Context?: string;
   /** 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。0：自动采样;0～1：按指定采样率采样，例如0.02;1：不采样，即精确分析默认值为1 */
   SamplingRate?: number;
@@ -6097,10 +6111,14 @@ declare interface SearchLogRequest {
   UseNewAnalysis?: boolean;
   /** 是否高亮符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索 */
   HighLight?: boolean;
+  /** Query字段已废弃，请使用QueryString字段字段差异：未指定语法规则时，Query默认使用Lucene语法，QueryString默认使用CQL语法，语法差异详见 语法规则 */
+  Query?: string;
+  /** SyntaxRule字段已废弃，请使用QuerySyntax字段字段差异：SyntaxRule与Query字段搭配使用，默认使用Lucene语法QuerySyntax与QueryString字段搭配使用，默认使用CQL语法SyntaxRule参数说明：0：Lucene语法1：CQL语法（CLS Query Language，日志服务专用检索语法） */
+  SyntaxRule?: number;
 }
 
 declare interface SearchLogResponse {
-  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。注意：* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context */
+  /** 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。注意：仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context */
   Context?: string;
   /** 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志注意：仅当检索分析语句(Query)不包含SQL时有效 */
   ListOver?: boolean;
