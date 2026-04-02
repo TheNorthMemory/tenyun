@@ -396,7 +396,7 @@ declare interface ServerBaseInfo {
   DefaultDomainName?: string;
   /** 自定义域名 */
   CustomDomainName?: string;
-  /** 服务状态：running/deploying/deploy_failed */
+  /** 服务状态：creating/create_failed/freezing/freeze_fail/froze/unfreezing/unfreeze_fail/normal/deleting/delete_failed/abnormal枚举值：creating： 创建中create_failed： 创建失败freezing： 冻结中freeze_fail： 冻结失败froze： 已冻结unfreezing： 解冻中unfreeze_fail： 解冻失败normal： 正常deleting： 删除中delete_failed： 删除失败abnormal： 服务异常 */
   Status?: string;
   /** 更新时间 */
   UpdateTime?: string;

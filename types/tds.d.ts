@@ -139,29 +139,33 @@ declare interface DescribeFraudPremiumRequest {
 
 declare interface DescribeFraudPremiumResponse {
   /** App版本信息 */
-  AppVersion: string;
+  AppVersion?: string;
   /** 品牌 */
-  Brand: string;
+  Brand?: string;
   /** 客户端IP */
-  ClientIp: string;
+  ClientIp?: string;
   /** 机型 */
-  Model: string;
+  Model?: string;
   /** 网络类型 */
-  NetworkType: string;
+  NetworkType?: string;
   /** 应用包名 */
-  PackageName: string;
+  PackageName?: string;
   /** 平台（2-Android，3-iOS，4-H5，5-微信小程序） */
-  Platform: string;
+  Platform?: string;
   /** 系统版本 */
-  SystemVersion: string;
+  SystemVersion?: string;
   /** SDK版本号 */
-  SdkBuildNo: string;
+  SdkBuildNo?: string;
   /** 实时风险信息 */
-  RiskInfos: RiskInfo[];
+  RiskInfos?: RiskInfo[];
   /** 离线风险信息 */
-  HistRiskInfos: RiskInfo[];
+  HistRiskInfos?: RiskInfo[];
   /** 设备匿名标识 */
-  Openid: string;
+  Openid?: string;
+  /** 检测时间戳（毫秒） */
+  RiskCheckTimestamp?: string;
+  /** 额外信息 */
+  ExtraInfos?: ExtraInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

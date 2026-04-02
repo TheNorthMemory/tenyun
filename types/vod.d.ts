@@ -3859,29 +3859,29 @@ declare namespace V20180717 {
 
   /** 大模型解析人脸识别配置 */
   interface LLMComprehendFaceRecognition {
-    /**  */
+    /** 人脸识别任务开关枚举值：ON： 开启智能人脸识别任务OFF： 关闭智能人脸识别任务默认值：OFF */
     Switch: string;
-    /**  */
+    /** 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果取值范围：[0, 100]默认值：95 */
     Score?: number;
-    /**  */
+    /** 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。枚举值：entertainment： 娱乐明星sport： 体育明星politician： 政治人物 */
     DefaultLibraryLabelSet?: string[];
-    /**  */
+    /** 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。 入参限制：标签个数最多 100 个，每个标签长度最多 16 个字符。 */
     UserDefineLibraryLabelSet?: string[];
-    /**  */
+    /** 人物库选择枚举值：Default： 使用默认人物库UserDefine： 使用用户自定义人物库All： 同时使用默认人物库和用户自定义人物库默认值：All */
     FaceLibrary?: string;
   }
 
   /** 大模型解析人脸识别配置 */
   interface LLMComprehendFaceRecognitionForUpdate {
-    /**  */
+    /** 人脸识别任务开关枚举值：ON： 开启智能人脸识别任务OFF： 关闭智能人脸识别任务默认值：OFF */
     Switch?: string;
-    /**  */
+    /** 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果取值范围：[0, 100] */
     Score?: number;
-    /**  */
+    /** 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。枚举值：entertainment： 娱乐明星sport： 体育明星politician： 政治人物 */
     DefaultLibraryLabelSet?: string[];
-    /**  */
+    /** 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。 入参限制：标签个数最多 100 个，每个标签长度最多 16 个字符。 */
     UserDefineLibraryLabelSet?: string[];
-    /**  */
+    /** 人物库选择枚举值：Default： 使用默认人物库UserDefine： 使用用户自定义人物库All： 同时使用默认人物库和用户自定义人物库默认值：All */
     FaceLibrary?: string;
   }
 
@@ -3909,15 +3909,17 @@ declare namespace V20180717 {
     Name?: string;
     /** 图片异步处理模板描述信息。 */
     Comment?: string;
-    /** 解析级别，可选值为：- Audio: 音频级解析- Video: 视频级解析 */
+    /** 解析级别，可选值为：Audio: 音频级解析Video: 视频级解析 */
     Level?: string;
     /** 分段摘要解析配置 */
     Summary?: LLMComprehendSummary;
     /** 文本转录解析配置 */
     Asr?: LLMComprehendAsr;
-    /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 人脸识别解析配置 */
+    FaceRecognition?: LLMComprehendFaceRecognition;
+    /** 模板创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 模板最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
   }
 
@@ -7896,7 +7898,7 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** 主体名称。 */
     SubjectName?: string;
-    /** 主体图片，至少上传 1 张主体图片。注1：支持传入图片 Base64 编码或图片URL（确保可访问）；注2：最多支持输入 3 张图；注3：图片支持 png、jpeg、jpg、webp格式；注4：图片比例需要小于 1:4 或者 4:1 ；注5：图片大小不超过 50 MB； */
+    /** 主体图片，至少上传 1 张主体图片。* 注1：支持传入图片URL（确保可访问）；* 注2：最多支持输入 3 张图；* 注3：图片支持 png、jpeg、jpg、webp格式；* 注4：图片比例需要小于 1:4 或者 4:1 ；* 注5：图片大小不超过 50 MB； */
     SubjectImages?: string[];
     /** 视频参考支持上传 1 个主体视频注1：仅参考生viduq2-pro模型支持使用视频主体注2：最多支持上传 1个5秒 的视频注3：视频支持 mp4、avi、mov格式注4：视频像素不能小于 128*128，且比例需要小于1:4或者4:1，且大小不超过100M。 */
     SubjectVideos?: string[];
@@ -9736,7 +9738,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeLLMComprehendTemplatesRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 大模型解析模板唯一标识过滤条件，数组长度最大值：100。 */
     Definitions?: number[];
@@ -9749,7 +9751,7 @@ declare namespace V20180717 {
   interface DescribeLLMComprehendTemplatesResponse {
     /** 符合过滤条件的记录总数。 */
     TotalCount?: number;
-    /** 图片异步处理模板详情列表。 */
+    /** 大模型解析模板详情列表。 */
     LLMComprehendTemplateSet?: LLMComprehendTemplateItem[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;

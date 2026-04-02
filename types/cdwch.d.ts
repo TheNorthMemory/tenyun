@@ -282,6 +282,10 @@ declare interface InstanceConfigInfo {
   Uin?: string;
   /** 修改时间 */
   ModifyTime?: string;
+  /** 取值范围 */
+  ValueRange?: string;
+  /** 标记异常 */
+  AbnormalParam?: string;
 }
 
 /** KV配置 */
@@ -290,6 +294,12 @@ declare interface InstanceConfigItem {
   ConfKey: string;
   /** value */
   ConfValue: string;
+  /** add/delete/update */
+  ModifyType?: string;
+  /** 是否需要重启 */
+  NeedRestart?: boolean;
+  /** 修改前的值 */
+  OriginalConfValue?: string;
 }
 
 /** Instance表detail字段 */
@@ -300,11 +310,11 @@ declare interface InstanceDetail {
 
 /** 实例描述信息 */
 declare interface InstanceInfo {
-  /** 集群实例ID, "cdw-xxxx" 字符串类型 */
+  /** 集群实例ID, &quot;cdw-xxxx&quot; 字符串类型 */
   InstanceId?: string;
   /** 集群实例名称 */
   InstanceName?: string;
-  /** 状态,Init 创建中; Serving 运行中； Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
+  /** 状态,Init 创建中; Serving 运行中；Deleted已销毁；Deleting 销毁中；Modify 集群变更中； */
   Status?: string;
   /** 版本 */
   Version?: string;
@@ -316,7 +326,7 @@ declare interface InstanceInfo {
   VpcId?: string;
   /** 子网名称 */
   SubnetId?: string;
-  /** 付费类型，"hour", "prepay" */
+  /** 付费类型，&quot;hour&quot;, &quot;prepay&quot; */
   PayMode?: string;
   /** 创建时间 */
   CreateTime?: string;
@@ -326,15 +336,15 @@ declare interface InstanceInfo {
   MasterSummary?: NodesSummary;
   /** zookeeper节点描述信息 */
   CommonSummary?: NodesSummary;
-  /** 高可用,"true" "false" */
+  /** 高可用,&quot;true&quot; &quot;false&quot; */
   HA?: string;
-  /** 访问地址，例如 "10.0.0.1:9000" */
+  /** 访问地址，例如 &quot;10.0.0.1:9000&quot; */
   AccessInfo?: string;
   /** 记录ID，数值型 */
   Id?: number;
   /** regionId, 表示地域 */
   RegionId?: number;
-  /** 可用区说明，例如 "广州二区" */
+  /** 可用区说明，例如 &quot;广州二区&quot; */
   ZoneDesc?: string;
   /** 错误流程说明信息 */
   FlowMsg?: string;
@@ -412,6 +422,8 @@ declare interface InstanceInfo {
   ShowRip?: string;
   /** 实例类型：标准型 standard，无keeper节点类型noKeeper； */
   InstanceType?: string;
+  /** keyvalue视图 */
+  EnableConfigKeyValue?: string;
 }
 
 /** 实例节点描述信息 */
@@ -469,7 +481,9 @@ declare interface InstanceStateInfo {
   /** 请求id */
   RequestId?: string;
   /** 流程的二级名称 */
-  ProcessSubName?: string;
+  ProcessSubName?: string | null;
+  /** 请求ID */
+  RequestID?: string | null;
 }
 
 /** kv配置，多层级item */

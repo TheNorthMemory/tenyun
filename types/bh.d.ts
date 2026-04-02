@@ -2655,21 +2655,21 @@ declare interface ModifyAclRequest {
   AllowAnyAccount: boolean;
   /** 访问权限ID */
   Id: number;
-  /** 是否开启剪贴板文件上行 */
+  /** 是否开启剪贴板文件上行，不传时默认为false */
   AllowClipFileUp?: boolean;
-  /** 是否开启剪贴板文件下行 */
+  /** 是否开启剪贴板文件下行，不传时默认为false */
   AllowClipFileDown?: boolean;
-  /** 是否开启剪贴板文本（含图片）上行 */
+  /** 是否开启剪贴板文本（含图片）上行，不传时默认为false */
   AllowClipTextUp?: boolean;
-  /** 是否开启剪贴板文本（含图片）下行 */
+  /** 是否开启剪贴板文本（含图片）下行，不传时默认为false */
   AllowClipTextDown?: boolean;
-  /** 是否开启文件传输上传 */
+  /** 是否开启文件传输上传，不传时默认为false */
   AllowFileUp?: boolean;
-  /** 文件传输上传大小限制（预留参数，目前暂未使用） */
+  /** 文件传输上传大小限制（预留参数，目前暂未使用），不传时默认为0 */
   MaxFileUpSize?: number;
-  /** 是否开启文件传输下载 */
+  /** 是否开启文件传输下载，不传时默认为false */
   AllowFileDown?: boolean;
-  /** 文件传输下载大小限制（预留参数，目前暂未使用） */
+  /** 文件传输下载大小限制（预留参数，目前暂未使用），不传时默认为0 */
   MaxFileDownSize?: number;
   /** 关联的用户ID */
   UserIdSet?: number[];
@@ -2677,25 +2677,25 @@ declare interface ModifyAclRequest {
   UserGroupIdSet?: number[];
   /** 关联的资产ID */
   DeviceIdSet?: number[];
-  /** 关联的应用资产ID集合 */
+  /** 关联的应用资产ID集合，不传时表示不选择任何应用资产 */
   AppAssetIdSet?: number[];
-  /** 关联的资产组ID */
+  /** 关联的资产组ID，不传时表示不选择任何资产组 */
   DeviceGroupIdSet?: number[];
-  /** 关联的账号 */
+  /** 关联的资产账号，不传时表示不选择任何资产账号 */
   AccountSet?: string[];
-  /** 关联的高危命令模板ID */
+  /** 关联的高危命令模板ID，不传时表示不选择任何模板 */
   CmdTemplateIdSet?: number[];
-  /** 关联高危DB模板ID */
+  /** 关联高危DB模板ID，不传时表示不选择任何模板 */
   ACTemplateIdSet?: string[];
-  /** 是否开启 RDP 磁盘映射文件上传 */
+  /** 是否开启 RDP 磁盘映射文件上传，不传时默认为false */
   AllowDiskFileUp?: boolean;
-  /** 是否开启 RDP 磁盘映射文件下载 */
+  /** 是否开启 RDP 磁盘映射文件下载，不传时默认为false */
   AllowDiskFileDown?: boolean;
-  /** 是否开启rz sz文件上传 */
+  /** 是否开启rz sz文件上传，不传时默认为false */
   AllowShellFileUp?: boolean;
-  /** 是否开启rz sz文件下载 */
+  /** 是否开启rz sz文件下载，不传时默认为false */
   AllowShellFileDown?: boolean;
-  /** 是否开启 SFTP 文件删除 */
+  /** 是否开启 SFTP 文件删除，不传时默认为false */
   AllowFileDel?: boolean;
   /** 访问权限生效时间，如:"2021-09-22T00:00:00+00:00"生效、失效时间不填则访问权限长期有效 */
   ValidateFrom?: string;
@@ -2703,11 +2703,11 @@ declare interface ModifyAclRequest {
   ValidateTo?: string;
   /** 权限所属部门的ID，如：1.2.3 */
   DepartmentId?: string;
-  /** 是否允许使用访问串 */
+  /** 是否允许使用访问串，不传时默认为true */
   AllowAccessCredential?: boolean;
-  /** 是否允许键盘记录 */
+  /** 是否允许键盘记录，不传时默认为false */
   AllowKeyboardLogger?: boolean;
-  /** 访问串有效期最大时长，秒数，允许使用访问串时需大于0且必须为86400整数倍 */
+  /** 访问串有效期最大时长，秒数，允许使用访问串时需大于0且必须为86400整数倍，不传时默认为9999天对应的秒数 */
   MaxAccessCredentialDuration?: number;
 }
 

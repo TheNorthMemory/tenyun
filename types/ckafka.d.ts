@@ -3373,7 +3373,7 @@ declare interface DescribeACLRequest {
   /** Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER) */
   ResourceType: number;
   /** 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。 */
-  ResourceName: string;
+  ResourceName?: string;
   /** 偏移位置 */
   Offset?: number;
   /** 个数限制，默认值为50，最大值为50。 */

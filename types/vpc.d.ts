@@ -4833,7 +4833,7 @@ declare interface CreateTrafficMirrorRequest {
   State?: string;
   /** 流量镜像采集方向，支持EGRESS/INGRESS/ALL（vpc），ALL（公网IP）。 */
   Direction?: string;
-  /** 流量镜像的采集对象。 */
+  /** 流量镜像的采集对象 (最多支持20个采集对象)。 */
   CollectorSrcs?: string[];
   /** 流量镜像过滤的natgw实例。 */
   NatId?: string;
@@ -4847,6 +4847,10 @@ declare interface CreateTrafficMirrorRequest {
   Type?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。 */
   Tags?: Tag[];
+  /** 流量镜像入站过滤规则。 */
+  IngressFilterRules?: TrafficMirrorFilter[];
+  /** 流量镜像出站过滤规则。 */
+  EgressFilterRules?: TrafficMirrorFilter[];
 }
 
 declare interface CreateTrafficMirrorResponse {
@@ -7718,6 +7722,8 @@ declare interface DescribeTrafficMirrorsRequest {
 declare interface DescribeTrafficMirrorsResponse {
   /** 流量镜像实例信息 */
   TrafficMirrorSet?: TrafficMirror[];
+  /** 符合条件的对象数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9881,7 +9887,7 @@ declare interface ReleaseIp6AddressesBandwidthResponse {
 }
 
 declare interface RemoveBandwidthPackageResourcesRequest {
-  /** 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。 */
+  /** 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表：可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取。高防EIP、Anycast EIP、精品BGP EIP默认不支持从共享带宽包中移除，其中高防EIP和精品BGP IP可以迁移到其他同线路类型的共享带宽包中。LB资源列表：可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。 */
   ResourceIds?: string[];
   /** 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。 */
   BandwidthPackageId?: string;
@@ -10187,6 +10193,10 @@ declare interface ResetTrafficMirrorFilterRequest {
   NatId?: string;
   /** 流量镜像需要过滤的五元组规则 */
   CollectorNormalFilters?: TrafficMirrorFilter[];
+  /** 流量镜像入站过滤规则。 */
+  IngressFilterRules?: TrafficMirrorFilter[];
+  /** 流量镜像出站过滤规则。 */
+  EgressFilterRules?: TrafficMirrorFilter[];
 }
 
 declare interface ResetTrafficMirrorFilterResponse {
@@ -10402,13 +10412,17 @@ declare interface UpdateTrafficMirrorAllFilterRequest {
   /** 流量镜像实例ID */
   TrafficMirrorId: string;
   /** 流量镜像采集方向 */
-  Direction: string;
+  Direction?: string;
   /** 流量镜像采集对象 */
   CollectorSrcs?: string[];
   /** 流量镜像需要过滤的natgw实例 */
   NatId?: string;
   /** 流量镜像需要过滤的五元组规则 */
   CollectorNormalFilters?: TrafficMirrorFilter[];
+  /** 流量镜像入站过滤规则。 */
+  IngressFilterRules?: TrafficMirrorFilter[];
+  /** 流量镜像出站过滤规则。 */
+  EgressFilterRules?: TrafficMirrorFilter[];
 }
 
 declare interface UpdateTrafficMirrorAllFilterResponse {
@@ -10419,7 +10433,7 @@ declare interface UpdateTrafficMirrorAllFilterResponse {
 declare interface UpdateTrafficMirrorDirectionRequest {
   /** 流量镜像实例ID */
   TrafficMirrorId: string;
-  /** 流量镜像采集方向 */
+  /** 流量镜像采集方向。取值范围：- EGRESS - 出方向采集- INGRESS - 入方向采集- ALL - 出入双向采集- NO-DIRECTION - 不区分采集方向（新模式）。切换为该模式后将不再支持按方向采集，需通过 CreateTrafficMirrorFilterRules 接口创建带方向的过滤规则，过滤规则支持设置优先级和单独编辑。 */
   Direction: string;
 }
 

@@ -1078,6 +1078,20 @@ declare interface RebootMachinesResponse {
   RequestId?: string;
 }
 
+declare interface ScaleNodePoolRequest {
+  /** 集群 ID */
+  ClusterId: string;
+  /** 节点池 ID */
+  NodePoolId: string;
+  /** 期望节点数 */
+  Replicas: number;
+}
+
+declare interface ScaleNodePoolResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetMachineLoginRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -8769,6 +8783,8 @@ declare interface Tke {
   ModifyNodePool(data: ModifyNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodePoolResponse>;
   /** 重启原生节点实例 {@link RebootMachinesRequest} {@link RebootMachinesResponse} */
   RebootMachines(data: RebootMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootMachinesResponse>;
+  /** 设置 TKE 节点池期望节点数 {@link ScaleNodePoolRequest} {@link ScaleNodePoolResponse} */
+  ScaleNodePool(data: ScaleNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleNodePoolResponse>;
   /** 设置是否开启节点登录 {@link SetMachineLoginRequest} {@link SetMachineLoginResponse} */
   SetMachineLogin(data: SetMachineLoginRequest, config?: AxiosRequestConfig): AxiosPromise<SetMachineLoginResponse>;
   /** 启动原生节点实例 {@link StartMachinesRequest} {@link StartMachinesResponse} */

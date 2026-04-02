@@ -272,21 +272,21 @@ declare interface IntentionQuestionResult {
   FinalResultCode?: string | null;
 }
 
-/** 意愿核身相关结果。 */
+/** 意愿核身朗读模式相关结果。 */
 declare interface IntentionVerifyData {
-  /** 意愿确认环节中录制的视频（base64）。- 若不存在则为空字符串。 */
+  /** 意愿确认环节中录制的视频（base64）。若不存在则为空字符串。 */
   IntentionVerifyVideo?: string | null;
-  /** 意愿确认环节中用户语音转文字的识别结果。- 若不存在则为空字符串。 */
+  /** 意愿确认环节中用户语音转文字的识别结果。若不存在则为空字符串。 */
   AsrResult?: string | null;
-  /** 意愿确认环节的结果码。- 当该结果码为0时，语音朗读的视频与语音识别结果才会返回。 */
+  /** 意愿确认环节（朗读模式）的结果码。取值范围：0: &quot;成功&quot;-1: &quot;系统异常&quot;-2: &quot;参数错误&quot;-3:&quot;业务繁忙，请重试&quot;-4：&quot;后端服务异常，请重试&quot;-5：&quot;后端服务进房异常，请重试&quot;-6：&quot;后端服务录制异常，请重试&quot;-7：&quot;文件存储异常，请重试&quot;-8：&quot;后端服务重复进房，请重试&quot;-9：&quot;实时视频流异常，请重试&quot;-10：&quot;语音识别失败，请重试&quot;-11：&quot;流程已中断，请重试&quot;-12：&quot;流程未完成，请重试&quot;-13：&quot;token校验不通过，请重试&quot;-14：&quot;流程已结束&quot;-15:&quot;超过预设重试次数&quot;-16:&quot;系统未知错误，请联系人工核实&quot;-17:&quot;未检测到用户声音&quot;3001:&quot;请保持人脸在框内&quot;3002:&quot;检测到多张人脸&quot;3003:&quot;人脸检测失败&quot;3011:&quot;人脸比对相似度低&quot;3012:&quot;人脸比对失败&quot;-800: &quot;前端不兼容错误&quot;-801: &quot;用户未授权摄像头和麦克风权限&quot;-802: &quot;核验流程异常中断，请勿切屏或进行其他操作&quot;-803: &quot;用户主动关闭链接/异常断开链接&quot;说明：若在人脸核身过程失败、未进入意愿确认过程，则该参数返回为空，请参考人脸核身错误码结果（DetectInfoText.ErrCode）示例值：0 */
   ErrorCode?: number | null;
   /** 意愿确认环节的结果信息。 */
   ErrorMessage?: string | null;
-  /** 意愿确认环节中录制视频的最佳帧（base64）。- 若不存在则为空字符串。 */
+  /** 意愿确认环节中录制视频的最佳帧（base64）。若不存在则为空字符串。 */
   IntentionVerifyBestFrame?: string | null;
   /** 本次流程用户语音与传入文本比对的相似度分值，取值范围 [0.00, 100.00]。只有配置了相似度阈值后才进行语音校验并返回相似度分值。 */
   AsrResultSimilarity?: string | null;
-  /** 意愿确认环节中录制的音频（base64）。- 若不存在则为空字符串。 */
+  /** 意愿确认环节中录制的音频（base64）。若不存在则为空字符串。 */
   IntentionVerifyAudio?: string | null;
 }
 
