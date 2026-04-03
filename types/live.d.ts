@@ -1464,7 +1464,7 @@ declare interface RecordParam {
   CosBucketName?: string | null;
   /** 存储至 cos 的 bucket 区域。 */
   CosBucketRegion?: string | null;
-  /** 存储至 cos 的 bucket 路径。 */
+  /** 存储至 cos 的 bucket 路径。注意：若为输入参数，则该参数必填，且必须以斜杠（/）开头，建议至少包含 {StartYear}、{StartMonth}、{StartDay}、{StartHour}、{StartMinute}、{StartSecond} 或 {RandomID} 任意一种，否则可能出现录制文件名重复造成文件相互覆盖；若为返回参数，则此字段可能返回 null，表示取不到有效值。示例值：/{RecordSource}/{Domain}/{AppName}/{StreamID}/{RecordId}-{RandomID}/{StartYear}-{StartMonth}-{StartDay}-{StartHour}-{StartMinute}-{StartSecond}支持的特殊占位符有：{RecordSource}：区分录制内容，若录制原始流、水印流则为“origin”，录制转码流时，代表转码模板ID{StreamID}: 流ID{RecordId}：录制任务ID，断流前后该值可能重复；{RandomID}：随机数，断流前后该值不同；{StartYear}: 开始时间-年{StartMonth}: 开始时间-月{StartDay}: 开始时间-日{StartHour}: 开始时间-小时{StartMinute}: 开始时间-分钟{StartSecond}: 开始时间-秒{StartMillisecond}: 开始时间-毫秒{EndYear}: 结束时间-年{EndMonth}: 结束时间-月{EndDay}: 结束时间-日{EndHour}: 结束时间-小时{EndMinute}: 结束时间-分钟{EndSecond}: 结束时间-秒{EndMillisecond}: 结束时间-毫秒 */
   CosBucketPath?: string | null;
 }
 

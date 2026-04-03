@@ -210,6 +210,8 @@ declare interface EmailProviderConfig {
   SmtpConfig?: EmailSmtpConfig;
   /** 可选：TRUE，FALSE，如果On为TRUE，则表示采用默认代发。 */
   On?: string;
+  /** 邮件模板配置 */
+  TemplateConfig?: EmailTemplateConfig | null;
 }
 
 /** 邮箱smtp配置 */
@@ -226,6 +228,14 @@ declare interface EmailSmtpConfig {
   AccountPassword?: string;
   /** SMTP 连接的加密模式，用于保障邮件传输安全。可选值：AUTO（自动选择，优先使用安全连接）、SSL（全程 SSL/TLS 加密，通常配合端口 465 使用）、STARTSSL（通过 STARTTLS 命令升级为加密连接，通常配合端口 587 使用）、NO_SSL（不使用加密，仅建议在内网或测试环境中使用）。推荐使用 AUTO 或 SSL 以确保传输安全。 */
   SecurityMode?: string;
+}
+
+/** 邮件模板配置 */
+declare interface EmailTemplateConfig {
+  /** 注册登录模板入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等 */
+  RegisterSignIn?: LocalizedTemplate | null;
+  /** 默认模板入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等 */
+  DefaultTpl?: LocalizedTemplate | null;
 }
 
 /** 环境计费信息 */
@@ -396,6 +406,8 @@ declare interface HTTPServiceDomain {
   DNSStatus?: string;
   /** HTTP访问服务路由信息 */
   Routes?: HTTPServiceRoute[];
+  /** 扩展字段，内部包含headers处理等 */
+  Extension?: HTTPServiceExtension;
   /** 域名创建时间 */
   CreateTime?: string;
   /** 域名更新时间 */
@@ -418,6 +430,36 @@ declare interface HTTPServiceDomainParam {
   Enable?: boolean;
   /** 创建/修改的HTTP访问服务路由列表。如果不传，仅创建或修改域名信息。列表最大支持传入20个 */
   Routes?: HTTPServiceRouteParam[];
+  /** 扩展字段，内部包含headers处理等 */
+  Extension?: HTTPServiceExtension;
+}
+
+/** HTTP访问服务路由扩展字段 */
+declare interface HTTPServiceExtension {
+  /** 添加请求头列表 */
+  HeadersHandler?: HTTPServiceHeadersHandler;
+}
+
+/** HTTP访问服务路由添加header */
+declare interface HTTPServiceHeaderToAdd {
+  /** 添加头部的key */
+  Key?: string;
+  /** 添加头部的值 */
+  Value?: string;
+  /** 添加头部的处理行为。默认：OVERWRITE_IF_EXISTS_OR_ADD。APPEND_IF_EXISTS_OR_ADD: 已存在时追加值，不存在时添加，ADD_IF_ABSENT: 仅在 header 不存在时添加，已存在时不做任何操作，OVERWRITE_IF_EXISTS_OR_ADD: 已存在时覆盖值，不存在时添加（默认值），OVERWRITE_IF_EXISTS: 仅在 header 已存在时覆盖值，不存在时不做任何操作 */
+  Action?: string;
+}
+
+/** HTTP访问服务路由headers处理 */
+declare interface HTTPServiceHeadersHandler {
+  /** 添加请求头列表 */
+  RequestHeadersToAdd?: HTTPServiceHeaderToAdd[];
+  /** 删除请求头列表 */
+  RequestHeadersToRemove?: string[];
+  /** 添加返回头列表 */
+  ResponseHeadersToAdd?: HTTPServiceHeaderToAdd[];
+  /** 删除返回头列表 */
+  ResponseHeadersToRemove?: string[];
 }
 
 /** HTTP访问服务路径重写配置 */
@@ -454,6 +496,8 @@ declare interface HTTPServiceRoute {
   QPSPolicy?: HTTPServiceRouteQPSPolicy;
   /** 是否开启路由 */
   Enable?: boolean;
+  /** 扩展字段，内部包含headers处理等 */
+  Extension?: HTTPServiceExtension;
   /** 路由创建时间 */
   CreateTime?: string;
   /** 路由更新时间 */
@@ -480,6 +524,8 @@ declare interface HTTPServiceRouteParam {
   QPSPolicy?: HTTPServiceRouteQPSPolicy;
   /** 是否开启路由 */
   Enable?: boolean;
+  /** 扩展字段，内部包含headers处理等 */
+  Extension?: HTTPServiceExtension;
 }
 
 /** 云开发路由限频策略 */
@@ -542,6 +588,14 @@ declare interface LocalizedMessage {
   Message: string;
   /** 针对每种语言展示的文字 */
   Localized?: MessageLocalized[];
+}
+
+/** 多语言模板 */
+declare interface LocalizedTemplate {
+  /** 中文 */
+  ZhCN?: string | null;
+  /** 英文 */
+  EnUS?: string | null;
 }
 
 /** CLS日志单条信息 */
@@ -1152,6 +1206,20 @@ declare interface CreateBillDealRequest {
 }
 
 declare interface CreateBillDealResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCustomLoginKeyRequest {
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface CreateCustomLoginKeyResponse {
+  /** 自定义登录的 RSA 私钥（1024 位），PEM 编码格式（PKCS#1）。调用方需使用该私钥对包含用户身份信息的 JSON 数据进行 JWS 签名，生成 JWT Token 后传入自定义登录接口完成身份认证。出于安全考虑，系统仅存储公钥，私钥仅在创建时返回一次且无法恢复，请妥善保存。创建新密钥后，该环境下原有未设置过期时间的旧密钥将被自动标记为 2 小时后过期 */
+  PrivateKey?: string;
+  /** 密钥对的唯一标识符（UUID 格式），由系统自动生成。在自定义登录时，需将该 KeyID 拼接到 ProviderToken 参数中（格式：{KeyID}/{algorithm}/{signedJWT}），服务端通过 KeyID 查找对应的公钥以验证签名 */
+  KeyID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2467,6 +2535,8 @@ declare interface Tcb {
   CreateAuthDomain(data: CreateAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthDomainResponse>;
   /** 创建计费订单 {@link CreateBillDealRequest} {@link CreateBillDealResponse} */
   CreateBillDeal(data: CreateBillDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBillDealResponse>;
+  /** 自定义登录密钥生成 {@link CreateCustomLoginKeyRequest} {@link CreateCustomLoginKeyResponse} */
+  CreateCustomLoginKey(data: CreateCustomLoginKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomLoginKeyResponse>;
   /** 创建环境 {@link CreateEnvRequest} {@link CreateEnvResponse} */
   CreateEnv(data: CreateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResponse>;
   /** 创建环境相关资源 {@link CreateEnvResourceRequest} {@link CreateEnvResourceResponse} */

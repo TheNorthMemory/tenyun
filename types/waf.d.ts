@@ -5780,11 +5780,15 @@ declare interface DescribeQClawContentSecCheckRequest {
   /** 服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
   ServiceId: string;
   /** 要审核的内容 */
-  Content: ApiGuardContent;
+  Content?: ApiGuardContent;
   /** 标识用户的id，限速使用，不填，则限速会不生效 */
   UserId?: string;
   /** 会话id */
   SessionId?: string;
+  /** 工具名称 */
+  ToolName?: string;
+  /** 工具执行的参数 */
+  ToolArgs?: string;
 }
 
 declare interface DescribeQClawContentSecCheckResponse {

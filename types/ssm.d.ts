@@ -125,6 +125,8 @@ declare interface CreateProductSecretRequest {
   KmsHsmClusterId?: string;
   /** 账户备注 */
   AccountRemark?: string;
+  /** 数据库账号类型，目前仅在创建sqlserver凭据场景会使用到，仅支持L3枚举值：L3： 普通权限账号 */
+  AccountType?: string;
 }
 
 declare interface CreateProductSecretResponse {

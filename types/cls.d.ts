@@ -324,6 +324,28 @@ declare interface CallBackInfo {
   Headers?: string[];
 }
 
+/** 消耗量 */
+declare interface ChatUsage {
+  /** 输入token数 */
+  PromptTokens?: number;
+  /** 输出token数 */
+  CompletionTokens?: number;
+  /** 总token数 */
+  TotalTokens?: number;
+}
+
+/** 返回的回复, 支持多个 */
+declare interface Choice {
+  /** 结束标志位，可能为 stop、 sensitive或者tool_calls。stop 表示输出正常结束。sensitive 表示安全审核未通过。tool_calls 标识函数调用。注意：可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。 */
+  FinishReason?: string;
+  /** 增量返回值，流式调用时使用该字段。 */
+  Delta?: Delta;
+  /** 返回值，非流式调用时使用该字段。 */
+  Message?: Message;
+  /** 索引值，流式调用时使用该字段。 */
+  Index?: number;
+}
+
 /** CKafka的描述-需要投递到的kafka信息 */
 declare interface Ckafka {
   /** Ckafka 的 InstanceId。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。- 通过 [创建实例](https://cloud.tencent.com/document/product/597/53207) 获取实例id。 */
@@ -974,6 +996,18 @@ declare interface DeliverConfig {
   TopicId: string;
   /** 投递数据范围。0: 全部日志, 包括告警策略日常周期执行的所有日志，也包括告警策略变更产生的日志，默认值1:仅告警触发及恢复日志 */
   Scope: number;
+}
+
+/** 返回的内容 */
+declare interface Delta {
+  /** 角色枚举值：user： 用户assistant： AI助手 */
+  Role?: string;
+  /** 内容详情 */
+  Content?: string;
+  /** 思维链内容。用于展示模型思考过程，仅深度思考模式可用。仅作为输出参数返回，在进行多轮对话时，无需传入输入参数中。 */
+  ReasoningContent?: string;
+  /** 模型生成的工具调用。仅支持输出参数返回。对于每一次的输出值应该以Id为标识对Type、Name、Arguments字段进行合并。 */
+  ToolCalls?: ToolCall[];
 }
 
 /** 云产品实例维度信息 */
@@ -1720,6 +1754,18 @@ declare interface MachineInfo {
   ErrMsg?: string;
 }
 
+/** 会话内容 */
+declare interface Message {
+  /** 角色枚举值：user： 用户assistant： AI助手 */
+  Role?: string;
+  /** 文本内容 */
+  Content?: string;
+  /** 思维链内容。用于展示模型思考过程，仅深度思考模式可用。仅作为输出参数返回，在进行多轮对话时，无需传入输入参数中。 */
+  ReasoningContent?: string;
+  /** 模型生成的工具调用。仅支持输出参数返回。 */
+  ToolCalls?: ToolCall[];
+}
+
 /** 元数据信息 */
 declare interface MetaTagInfo {
   /** 元数据key */
@@ -1738,6 +1784,14 @@ declare interface MetadataInfo {
   EnableTag?: boolean;
   /** JSON是否平铺，投递__TAG__字段时必填 */
   TagJsonTiled?: boolean;
+}
+
+/** Metadata数组项 */
+declare interface MetadataItem {
+  /** 元数据标签键 */
+  Key?: string;
+  /** 元数据标签值 */
+  Value?: string;
 }
 
 /** 指标采集配置 */
@@ -2372,6 +2426,26 @@ declare interface Tag {
   Value: string;
 }
 
+/** 模型生成的工具调用 */
+declare interface ToolCall {
+  /** 工具调用id */
+  Id?: string;
+  /** 工具调用类型，当前只支持function */
+  Type?: string;
+  /** 具体的function调用 */
+  Function?: ToolCallFunction;
+  /** 索引值 */
+  Index?: number;
+}
+
+/** 具体的Tool Call Function调用 */
+declare interface ToolCallFunction {
+  /** Function名称 */
+  Name?: string;
+  /** Function参数，一般为json字符串 */
+  Arguments?: string;
+}
+
 /** 日志主题扩展信息 */
 declare interface TopicExtendInfo {
   /** 日志主题免鉴权配置信息 */
@@ -2565,6 +2639,32 @@ declare interface CancelRebuildIndexTaskRequest {
 
 declare interface CancelRebuildIndexTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ChatCompletionsRequest {
+  /** 功能名称枚举值：text2sql： 智能生成检索分析语句text2sql-reasoning： 智能生成检索分析语句-深度思考 */
+  Model: string;
+  /** 聊天上下文信息。说明：长度最多为 11 (5轮历史会话 + user新提问) ，按对话时间从旧到新在数组中排列。超出此长度会丢弃旧会话数据。Message.Role 可选值：user、assistant。user 和 assistant 需交替出现，以 user 提问开始，user 提问结束，Content 不能为空。Role 的顺序示例：[user assistant user assistant user ...]。 */
+  Messages: Message[];
+  /** 流式调用开关。说明：未传值时默认为非流式调用（false）。流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。非流式调用时：调用方式与普通 HTTP 请求无异。接口响应耗时较长，如需更低时延建议设置为 true。只返回一次最终结果（返回值取 Choices[n].Message 中的值）。注意：通过 SDK 调用时，流式和非流式调用需用不同的方式获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。 */
+  Stream?: boolean;
+  /** 额外元数据信息。例如：[{&quot;Key&quot;:&quot;topic_id&quot;,&quot;Value&quot;:&quot;xxxxxxxx-xxxx&quot;},{&quot;Key&quot;:&quot;topic_region&quot;,&quot;Value&quot;:&quot;ap-guangzhou&quot;}] */
+  Metadata?: MetadataItem[];
+}
+
+declare interface ChatCompletionsResponse {
+  /** Unix 时间戳，单位为秒。 */
+  Created?: number;
+  /** Token 统计信息。 */
+  Usage?: ChatUsage;
+  /** 本次请求的 Id。 */
+  Id?: string;
+  /** 回复内容。 */
+  Choices?: Choice[];
+  /** 功能名称枚举值：text2sql： 智能生成检索分析语句text2sql-reasoning： 智能生成检索分析语句-深度思考 */
+  Model?: string;
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }
 
@@ -6203,6 +6303,8 @@ declare interface Cls {
   ApplyConfigToMachineGroup(data: ApplyConfigToMachineGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConfigToMachineGroupResponse>;
   /** 取消重建索引任务 {@link CancelRebuildIndexTaskRequest} {@link CancelRebuildIndexTaskResponse} */
   CancelRebuildIndexTask(data: CancelRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelRebuildIndexTaskResponse>;
+  /** 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
+  ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 语法校验接口 {@link CheckFunctionRequest} {@link CheckFunctionResponse} */
   CheckFunction(data: CheckFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckFunctionResponse>;
   /** Kafka服务集群连通性校验 {@link CheckRechargeKafkaServerRequest} {@link CheckRechargeKafkaServerResponse} */

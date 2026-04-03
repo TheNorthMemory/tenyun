@@ -1811,9 +1811,9 @@ declare namespace V20180717 {
 
   /** 场景化 AIGC 生图配置。 */
   interface AigcImageSceneInfo {
-    /** AI生图场景类型，可选值：- change_clothes：AI换衣。- product_image：AI生商品图。- outpainting: AI扩图。 */
+    /** AI生图场景类型，可选值：change_clothes：常规场景换衣。change_clothes_under：特殊场景换衣。change_clothes_top_wear：上半身换衣。change_clothes_bottom_wear：下半身换衣。change_clothes_full_wear：全身换衣。product_image：AI生商品图。outpainting: AI扩图。 */
     Type: string;
-    /** 当 Type 为 change_clothes 时有效，则该项为必填，表示AI 换衣生图配置参数。 */
+    /** 当 Type 下列类型时，则该项为必填，表示AI 换衣生图配置参数：change_clotheschange_clothes_underchange_clothes_full_wearchange_clothes_top_wearchange_clothes_bottom_wear */
     ChangeClothesConfig?: ChangeClothesConfig;
     /** 当 Type 为 product_image 时有效，表示AI 生商品图配置参数。 */
     ProductImageConfig?: ProductImageConfig;
@@ -2383,9 +2383,9 @@ declare namespace V20180717 {
 
   /** AI 换衣参数配置 */
   interface ChangeClothesConfig {
-    /** 输入需要更换的**衣物**图片列表。目前最大支持4张图片。 */
+    /** 输入需要更换的衣物图片列表。各类型最大支持衣物数量：change_clothes：4 张图片；change_clothes_under：1 张图片；change_clothes_full_wear：1 张图片；change_clothes_top_wear：1 张图片；change_clothes_bottom_wear：1 张图片； */
     ClothesFileInfos?: SceneAigcImageTaskInputFileInfo[];
-    /** AI换衣的提示词。 */
+    /** AI换衣的提示词。仅Type为change_clothes有效。 */
     Prompt?: string;
   }
 
@@ -3381,6 +3381,28 @@ declare namespace V20180717 {
     Intensity?: number;
   }
 
+  /** 人脸识别的媒体信息 */
+  interface FaceRecognitionInfo {
+    /** 人脸识别任务列表 */
+    FaceRecognitionTasks?: FaceRecognitionTask[];
+  }
+
+  /** 人脸识别输出文件信息 */
+  interface FaceRecognitionOutputFileInfo {
+    /** 人脸识别输出文件类型枚举值：Output： 任务生成的结果输出，文件对应人脸识别任务返回中的结果，以 JSON 格式生成文件。 */
+    FileType?: string;
+    /** 人脸识别输出文件的URL */
+    Url?: string;
+  }
+
+  /** 人脸识别任务 */
+  interface FaceRecognitionTask {
+    /** 人脸识别模板编号 */
+    Definition?: number;
+    /** 输出文件信息 */
+    OutputFile?: FaceRecognitionOutputFileInfo[];
+  }
+
   /** 快速媒体编辑操作的输入媒体类型 */
   interface FastEditMediaFileInfo {
     /** 媒体的 ID。 */
@@ -3843,6 +3865,12 @@ declare namespace V20180717 {
     VideoConfigure?: VideoConfigureInfo;
     /** 水印参数配置。 */
     WatermarkConfigure?: WatermarkConfigureData;
+  }
+
+  /** 媒资智能知识库信息 */
+  interface KnowledgeBasesInfo {
+    /** 当前媒资当导入的知识库列表 */
+    Bases?: string[];
   }
 
   /** 大模型解析文本转录解析配置 */
@@ -4359,6 +4387,10 @@ declare namespace V20180717 {
     MPSAiMediaInfo?: MPSAiMediaInfo;
     /** 图片理解信息。 */
     ImageUnderstandingInfo?: ImageUnderstandingInfo | null;
+    /** 智能知识库信息。 */
+    KnowledgeBasesInfo?: KnowledgeBasesInfo;
+    /** 人脸识别信息。 */
+    FaceRecognitionInfo?: FaceRecognitionInfo;
   }
 
   /** 要处理的源视频信息，视频名称、视频自定义 ID。 */
@@ -8272,9 +8304,9 @@ declare namespace V20180717 {
   interface CreateMPSTemplateRequest {
     /** 点播[应用](/document/product/266/14574) ID。 */
     SubAppId: number;
-    /** 需要创建的 MPS 模板的类型。取值：Transcode: 创建转码模板，目前仅支持创建增强模板。 */
+    /** 需要创建的 MPS 模板的类型。取值：Transcode: 创建转码模板，目前仅支持创建增强模板。AIAnalysis: 创建智能分析模板。SmartSubtitle: 创建智能字幕模板。SmartErase: 创建智能擦除模板。 */
     TemplateType: string;
-    /** MPS 创建模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧创建用户自定义的 MPS 任务模板。目前仅支持通过此方式创建以下任务类型的模板：1. 音视频增强：仅支持填写“[创建转码模板](https://cloud.tencent.com/document/product/862/37605)”接口中的 Container 、Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数。其中 EnhanceConfig 此处必填，且 Container 目前暂不支持 hls。目前模板中仅支持配置以上参数，其他参数无需填写。若包含其它参数，系统将自动忽略。以上透传参数以JSON形式表示。 */
+    /** MPS 创建模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧创建用户自定义的 MPS 任务模板。目前仅支持通过此方式创建以下任务类型的模板：1. 音视频增强：仅支持填写“[创建转码模板](https://cloud.tencent.com/document/product/862/37605)”接口中的 Container 、Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数。其中 EnhanceConfig 此处必填，且 Container 目前暂不支持 hls。2. 智能分析：仅支持填写“[创建内容分析模板](https://cloud.tencent.com/document/api/862/40249)”接口中的Name、Comment、ClassificationConfigure、TagConfigure、CoverConfigure、FrameTagConfigure几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。3. 智能字幕：仅支持填写“[创建智能字幕模板](https://cloud.tencent.com/document/api/862/117004)”接口中的Name、Comment、TranslateSwitch、VideoSrcLanguage、SubtitleFormat、SubtitleType、AsrHotWordsConfigure、TranslateDstLanguage、ProcessType几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。4. 智能擦除：仅支持填写“[创建智能擦除模板](https://cloud.tencent.com/document/api/862/123735)”接口中的Name、Comment、EraseType、EraseSubtitleConfig、EraseWatermarkConfig、ErasePrivacyConfig几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。目前模板中仅支持配置以上参数，其他参数无需填写。若包含其它参数，系统将自动忽略。以上透传参数以JSON形式表示。 */
     MPSCreateTemplateParams: string;
   }
 
@@ -8922,7 +8954,7 @@ declare namespace V20180717 {
   interface DeleteMPSTemplateRequest {
     /** 点播[应用](/document/product/266/14574) ID。 */
     SubAppId: number;
-    /** 需要删除的 MPS 模板的类型。取值：Transcode: 删除转码模板。 */
+    /** 需要删除的 MPS 模板的类型。取值：Transcode: 删除转码模板。AIAnalysis: 创建智能分析模板。SmartSubtitle: 创建智能字幕模板。SmartErase: 创建智能擦除模板。 */
     TemplateType: string;
     /** MPS 任务模板唯一标识。 */
     Definition: number;
@@ -9602,12 +9634,12 @@ declare namespace V20180717 {
   }
 
   interface DescribeEventsStateRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
   interface DescribeEventsStateResponse {
-    /** 待进行拉取的事件通知数，为近似值，约5秒延迟。 */
+    /** 待进行拉取的事件通知数，为近似值，约有3分钟延迟。注意：不建议使用此字段作为是否拉取事件通知的依据。 */
     CountOfEventsToPull?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
@@ -9778,9 +9810,9 @@ declare namespace V20180717 {
   interface DescribeMPSTemplatesRequest {
     /** 点播[应用](/document/product/266/14574) ID。 */
     SubAppId: number;
-    /** MPS 模板类型。根据需要查询的 MPS 模板的类型对结果进行过滤。取值：Transcode: 查询转码模板列表。 */
+    /** MPS 模板类型。根据需要查询的 MPS 模板的类型对结果进行过滤。取值：Transcode: 查询转码模板列表。AIAnalysis: 创建智能分析模板。SmartSubtitle: 创建智能字幕模板。SmartErase: 创建智能擦除模板。 */
     TemplateType: string;
-    /** MPS 查询模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧查询 MPS 任务模板列表。目前仅支持通过此方式查询以下任务类型的模板：1. 音视频增强：仅支持填写“[获取转码模板列表](https://cloud.tencent.com/document/product/862/37593)”接口中的 Definitions、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。 */
+    /** MPS 查询模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧查询 MPS 任务模板列表。目前仅支持通过此方式查询以下任务类型的模板：1. 音视频增强：仅支持填写“[获取转码模板列表](https://cloud.tencent.com/document/product/862/37593)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。2. 智能分析：仅支持填写“[获取智能分析模板列表](https://cloud.tencent.com/document/product/862/40247)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。3. 智能字幕：仅支持填写“[获取智能字幕模板列表](https://cloud.tencent.com/document/product/862/117002)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。4. 智能擦除：仅支持填写“[获取智能擦除模板列表](https://cloud.tencent.com/document/product/862/123733)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。 */
     MPSDescribeTemplateParams?: string;
   }
 
@@ -9796,9 +9828,9 @@ declare namespace V20180717 {
   interface DescribeMediaInfosRequest {
     /** 媒体文件 ID 列表，N 从 0 开始取值，最大 19。 */
     FileIds: string[];
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：basicInfo（视频基础信息）。metaData（视频元信息）。transcodeInfo（视频转码结果信息）。animatedGraphicsInfo（视频转动图结果信息）。imageSpriteInfo（视频雪碧图信息）。snapshotByTimeOffsetInfo（视频指定时间点截图信息）。sampleSnapshotInfo（采样截图信息）。keyFrameDescInfo（打点信息）。adaptiveDynamicStreamingInfo（转自适应码流信息）。miniProgramReviewInfo（小程序审核信息）。subtitleInfo（字幕信息）。reviewInfo（审核信息）。 */
+    /** 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：basicInfo（视频基础信息）。metaData（视频元信息）。transcodeInfo（视频转码结果信息）。animatedGraphicsInfo（视频转动图结果信息）。imageSpriteInfo（视频雪碧图信息）。snapshotByTimeOffsetInfo（视频指定时间点截图信息）。sampleSnapshotInfo（采样截图信息）。keyFrameDescInfo（打点信息）。adaptiveDynamicStreamingInfo（转自适应码流信息）。miniProgramReviewInfo（小程序审核信息）。subtitleInfo（字幕信息）。reviewInfo（审核信息）。mpsAiMediaInfo（mps智能媒资信息）。 */
     Filters?: string[];
   }
 
@@ -11120,11 +11152,11 @@ declare namespace V20180717 {
   }
 
   interface ModifyMPSTemplateRequest {
-    /** 点播[应用](/document/product/266/14574) ID。 */
+    /** 点播应用 ID。 */
     SubAppId: number;
-    /** 需要修改的 MPS 模板的类型。取值：Transcode: 创建转码模板，目前仅支持修改增强参数。 */
+    /** 需要修改的 MPS 模板的类型。枚举值：Transcode： 转码模板，目前仅支持修改增强参数AIAnalysis： 智能分析模板SmartSubtitle： 智能字幕模板SmartErase： 智能擦除模板 */
     TemplateType: string;
-    /** MPS 修改模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧修改用户自定义的 MPS 任务模板。 目前仅支持通过此方式修改以下任务类型的模板：1. 音视频增强：仅支持填写“[修改转码模板](https://cloud.tencent.com/document/api/862/37578)”接口中的 Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。 */
+    /** MPS 修改模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧修改用户自定义的 MPS 任务模板。 目前仅支持通过此方式修改以下任务类型的模板：音视频增强：仅支持填写“修改转码模板”接口中的 Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能分析：仅支持填写“修改内容分析模板”接口中的Name、Comment、ClassificationConfigure、TagConfigure、CoverConfigure、FrameTagConfigure几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能字幕：仅支持填写“修改智能字幕模板”接口中的Name、Comment、TranslateSwitch、VideoSrcLanguage、SubtitleFormat、SubtitleType、AsrHotWordsConfigure、TranslateDstLanguage、ProcessType几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能擦除：仅支持填写“修改智能擦除模板”接口中的Name、Comment、EraseType、EraseSubtitleConfig、EraseWatermarkConfig、ErasePrivacyConfig几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。 */
     MPSModifyTemplateParams: string;
   }
 
@@ -11642,11 +11674,11 @@ declare namespace V20180717 {
   }
 
   interface ProcessMediaByMPSRequest {
-    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。 */
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。 */
     FileId: string;
-    /** 点播[应用](/document/product/266/14574) ID。 */
+    /** 点播应用 ID。 */
     SubAppId: number;
-    /** 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。视频处理参数详情请参考：[MPS 发起媒体处理](https://cloud.tencent.com/document/api/862/37578)。填写说明：1. 目前仅需要配置 MPS “发起媒体处理”接口中任务配置相关的参数，如 AiAnalysisTask 与 MediaProcessTask，其他参数无需填写。若包含其它参数，系统将自动忽略；2. 当前仅支持通过此方式发起智能擦除及音视频增强任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数；3. 音视频增强任务目前不支持使用预置模板发起，可通过 [CreateMPSTemplate](https://cloud.tencent.com/document/product/266/122580) 接口创建自定义模板。 */
+    /** 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。视频处理参数详情请参考：MPS 发起媒体处理。填写说明：目前仅需要配置 MPS “发起媒体处理”接口中任务配置相关的参数，如 AiAnalysisTask 与 MediaProcessTask，其他参数无需填写。若包含其它参数，系统将自动忽略；当前仅支持通过此方式发起智能擦除及音视频增强任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数；音视频增强任务目前不支持使用预置模板发起，可通过 CreateMPSTemplate 接口创建自定义模板。 */
     MPSProcessMediaParams: string;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;

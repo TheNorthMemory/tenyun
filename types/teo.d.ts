@@ -1996,6 +1996,22 @@ declare interface IPReputationGroup {
   BotManagementActionOverrides?: BotManagementActionOverrides[];
 }
 
+/** IP SSL相关信息 */
+declare interface IPSSLConfig {
+  /** IP SSL关联的域名。如果Status值为 unbound 时，该字段为空值。 */
+  AssociatedDomain?: string | null;
+  /** 关联状态， 取值如下：bound：IP SSL配置已绑定binding：IP SSL配置绑定中unbinding：IP SSL配置解绑中unbound：IP SSL配置未绑定 */
+  Status?: string;
+}
+
+/** IP SSL 配置信息 */
+declare interface IPSSLSetting {
+  /** 操作类型， 取值如下： bind：绑定 unbind：解绑 */
+  Operation: string;
+  /** 要绑定的IP SSL的所属域名。 */
+  AssociatedDomain: string;
+}
+
 /** 源站防护IP白名单 */
 declare interface IPWhitelist {
   /** IPv4列表。 */
@@ -3172,6 +3188,16 @@ declare interface RedirectActionParameters {
   URL: string;
 }
 
+/** 引用/被引用的实例信息。 */
+declare interface ReferenceHolder {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 实例类型，取值如下：acceleration-domain：加速域名； */
+  Type: string;
+  /** 被引用/引用的实例信息。 */
+  Instance: string;
+}
+
 /** 预付费套餐自动续费配置项。 */
 declare interface RenewFlag {
   /** 预付费套餐的自动续费标志，取值有： on：开启自动续费； off：不开启自动续费。 */
@@ -3680,6 +3706,22 @@ declare interface SessionRateControl {
 declare interface SetContentIdentifierParameters {
   /** 内容标识id */
   ContentIdentifier?: string;
+}
+
+/** 共享CNAME明细 */
+declare interface SharedCNAMEInfo {
+  /** 共享CNAME类型：取值范围如下：custom：由用户创建的自定义共享CNAMEip-ssl：IP SSL类型的共享CNAME */
+  Type?: string;
+  /** 共享CNAME名称。 */
+  SharedCNAME?: string;
+  /** 描述。 */
+  Description?: string;
+  /** 当type为ip-ssl时，展示该共享CNAME关联的 IP SSL 配置信息。 */
+  IPSSLConfig?: IPSSLConfig;
+  /** 共享CNAME绑定的加速域名数量。 */
+  BindDomainCount?: number;
+  /** 加入该共享CNAME的加速域名列表。当加入的域名数量超过100个时，只返回前100个加速域名。 */
+  AccelerationDomains?: ReferenceHolder[];
 }
 
 /** 例外规则的跳过匹配条件，即在例外时根据本匹配条件，略过指定字段及内容。 */
@@ -6516,6 +6558,32 @@ declare interface DescribeSecurityTemplateBindingsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSharedCNAMERequest {
+  /** 共享CNAME所属站点ID。 */
+  ZoneId: string;
+  /** 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：shared-cname 按照【共享CNAME】进行过滤。 类型：String 必选：否type 按照【共享canme类型】进行过滤。 类型：String 必选：否description 按照【描述】进行过滤。 类型：String 必选：否 */
+  Filters?: AdvancedFilter[];
+  /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为asc。 */
+  Direction?: string;
+  /** 匹配方式，取值有：all：返回匹配所有查询条件的共享CNAME；any：返回匹配任意一个查询条件的共享CNAME。默认值为all。 */
+  Match?: string;
+  /** 排序依据，取值有：create-time：创建时间；shared-cname：共享CNAME；默认根据shared-cname属性排序。 */
+  Order?: string;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 分页查询限制数目，默认值：20，上限：200。 */
+  Limit?: number;
+}
+
+declare interface DescribeSharedCNAMEResponse {
+  /** 符合过滤条件的共享CNAME总数。 */
+  TotalCount?: number;
+  /** 共享CNAME列表明细。 */
+  SharedCNAMEInfo?: SharedCNAMEInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTimingL4DataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -7608,6 +7676,22 @@ declare interface ModifySecurityPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifySharedCNAMERequest {
+  /** 共享 CNAME 所属站点 ID。 */
+  ZoneId: string;
+  /** 共享 CNAME。 */
+  SharedCNAME: string;
+  /** 请输入调整后的描述。 */
+  Description?: string;
+  /** 设置IP SSL 类型的共享CNAME 的 IP SSL 信息。 */
+  IPSSLSetting?: IPSSLSetting;
+}
+
+declare interface ModifySharedCNAMEResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWebSecurityTemplateRequest {
   /** 站点 ID。需要传入目标策略模板在访问权限上归属的站点，可使用 DescribeWebSecurityTemplates 接口查询策略模板归属的站点。 */
   ZoneId: string;
@@ -8275,6 +8359,8 @@ declare interface Teo {
   DescribeSecurityPolicy(data: DescribeSecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPolicyResponse>;
   /** 查询指定策略模板的绑定关系列表 {@link DescribeSecurityTemplateBindingsRequest} {@link DescribeSecurityTemplateBindingsResponse} */
   DescribeSecurityTemplateBindings(data: DescribeSecurityTemplateBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTemplateBindingsResponse>;
+  /** 查询共享CNAME列表 {@link DescribeSharedCNAMERequest} {@link DescribeSharedCNAMEResponse} */
+  DescribeSharedCNAME(data: DescribeSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedCNAMEResponse>;
   /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
   /** 查询流量分析时序数据 {@link DescribeTimingL7AnalysisDataRequest} {@link DescribeTimingL7AnalysisDataResponse} */
@@ -8399,6 +8485,8 @@ declare interface Teo {
   ModifySecurityJSInjectionRule(data: ModifySecurityJSInjectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityJSInjectionRuleResponse>;
   /** 修改Web&Bot安全配置 {@link ModifySecurityPolicyRequest} {@link ModifySecurityPolicyResponse} */
   ModifySecurityPolicy(data: ModifySecurityPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityPolicyResponse>;
+  /** 修改共享 CNAME {@link ModifySharedCNAMERequest} {@link ModifySharedCNAMEResponse} */
+  ModifySharedCNAME(data: ModifySharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<ModifySharedCNAMEResponse>;
   /** 修改安全策略配置模板 {@link ModifyWebSecurityTemplateRequest} {@link ModifyWebSecurityTemplateResponse} */
   ModifyWebSecurityTemplate(data: ModifyWebSecurityTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebSecurityTemplateResponse>;
   /** 修改站点 {@link ModifyZoneRequest} {@link ModifyZoneResponse} */

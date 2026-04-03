@@ -17,13 +17,13 @@ declare interface FaceInfo {
 /** 人脸框信息 */
 declare interface FaceRect {
   /** 人脸框左上角横坐标。 */
-  X: number;
+  X: number | null;
   /** 人脸框左上角纵坐标。 */
-  Y: number;
-  /** 人脸框宽度。 */
-  Width: number;
-  /** 人脸框高度。 */
-  Height: number;
+  Y: number | null;
+  /** 人脸框宽度。单位：px */
+  Width: number | null;
+  /** 人脸框高度。单位：px */
+  Height: number | null;
 }
 
 /** 融合参数 */
