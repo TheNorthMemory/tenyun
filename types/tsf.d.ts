@@ -2624,7 +2624,7 @@ declare interface Program {
 
 /** tsf-privilege模块，数据项 */
 declare interface ProgramItem {
-  /** 数据项ID，调用[DescribePrograms](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program)接口查询已创建的数据集或登陆控制台进行查看；也可以通过调用[CreateProgram](https://cloud.tencent.com/document/api/649/108544)创建新的数据集。 */
+  /** 数据项ID，调用DescribePrograms接口查询已创建的数据集或登录控制台进行查看；也可以通过调用CreateProgram创建新的数据集。 */
   ProgramItemId?: string;
   /** 资源 */
   Resource?: Resource;
@@ -2638,7 +2638,7 @@ declare interface ProgramItem {
   LastUpdateTime?: number;
   /** 删除标识，true: 可删除；false: 不可删除 */
   DeleteFlag?: boolean;
-  /** 数据集ID，调用[DescribePrograms](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program)查询接口获取 */
+  /** 数据集ID，调用DescribePrograms查询接口获取 */
   ProgramId?: string;
 }
 

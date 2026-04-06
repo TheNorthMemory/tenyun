@@ -1004,6 +1004,22 @@ declare interface CodeAction {
   Parameters: RuleCodeActionParams[];
 }
 
+/** 组件被引用的实例信息，用于展示该组件与边缘函数等资源的绑定关系。当边缘函数需要访问组件（如 KV 命名空间）时，会建立引用关系，通过此结构体可查看引用的具体实例详情及所属站点信息。 */
+declare interface ComponentReference {
+  /** 引用的实例类型。取值有：edge-function：边缘函数。 */
+  ReferenceType?: string;
+  /** 引用的实例 ID。根据 ReferenceType 的取值不同，返回对应的实例 ID：当 ReferenceType 为 edge-function 时：返回边缘函数 ID，格式形如：ef-2vc5oe9mzqhm。 */
+  ReferenceId?: string;
+  /** 引用的实例名称。根据 ReferenceType 的取值不同，返回对应的实例名称：当 ReferenceType 为 edge-function 时：返回边缘函数名称。 */
+  ReferenceName?: string;
+  /** 站点 ID。引用该命名空间的实例所属的站点标识。 */
+  ZoneId?: string;
+  /** 站点名称。引用该命名空间的实例所属的站点名称。 */
+  ZoneName?: string;
+  /** 引用该命名空间的实例所属站点的别名。若未设置站点别名，则返回空字符串。 */
+  AliasZoneName?: string;
+}
+
 /** 智能压缩配置。 */
 declare interface Compression {
   /** 智能压缩配置开关，取值有：on：开启；off：关闭。 */
@@ -1130,21 +1146,21 @@ declare interface CustomField {
   Enabled?: boolean;
 }
 
-/** Web安全的自定义规则 */
+/** Web 防护功能下的自定义规则。 */
 declare interface CustomRule {
   /** 自定义规则的名称。 */
   Name: string;
-  /** 自定义规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
+  /** 自定义规则的具体内容，需符合表达式语法，详细规范参见 [产品文档](https://cloud.tencent.com/document/product/1552/125343) 。 */
   Condition: string;
-  /** 自定义规则的执行动作。	SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；ReturnCustomPage：使用指定页面拦截；Redirect：重定向至 URL；BlockIP：IP 封禁；JSChallenge：JavaScript 挑战；ManagedChallenge：托管挑战；Allow：放行。 */
+  /** 自定义规则的处置动作。SecurityAction.Name 取值范围如下：Deny：拦截；Monitor：观察；ReturnCustomPage：使用指定页面拦截；Redirect：重定向至 URL；BlockIP：IP 封禁；JSChallenge：JavaScript 挑战；ManagedChallenge：托管挑战；Allow：放行。 */
   Action: SecurityAction;
   /** 自定义规则是否开启。取值有：on：开启off：关闭 */
   Enabled: string;
-  /** 自定义规则的 ID。通过规则 ID 可支持不同的规则配置操作： - 增加新规则：ID 为空或不指定 ID 参数； - 修改已有规则：指定需要更新/修改的规则 ID； - 删除已有规则：CustomRules 参数中，Rules 列表中未包含的已有规则将被删除。 */
+  /** 自定义规则的 ID。通过规则 ID 可支持不同的规则配置操作：增加新规则：ID 为空或不指定 ID 参数；修改已有规则：指定需要更新/修改的规则 ID；删除已有规则：CustomRules 参数中，Rules 列表中未包含的已有规则将被删除。 */
   Id?: string;
-  /** 自定义规则的类型。取值有：BasicAccessRule：基础访问管控；PreciseMatchRule：精准匹配规则，默认；ManagedAccessRule：专家定制规则，仅出参。默认为PreciseMatchRule。 */
+  /** 自定义规则的类型。取值有：BasicAccessRule：基础访问管控；PreciseMatchRule：精准匹配规则；ManagedAccessRule：专家定制规则，仅出参支持。说明：当未指定 RuleType 时，默认为 `PreciseMatchRule`。 */
   RuleType?: string;
-  /** 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（PreciseMatchRule）。 */
+  /** 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（`PreciseMatchRule`）。 */
   Priority?: number;
 }
 
@@ -1238,6 +1254,14 @@ declare interface DDosProtectionConfig {
 declare interface DNSPodDetail {
   /** 是否伪站点，取值有： 0：非伪站点； 1：伪站点。 */
   IsFake?: number;
+}
+
+/** 默认拦截动作配置。当安全规则命中并触发拦截处置动作时，若 SecurityAction 仅指定了 Name 为 Deny 且未指定 DenyActionParameters，则按功能模块维度匹配并使用此处定义的默认参数配置：ManagedRules 托管规则默认拦截处置动作配置。OtherModules 除托管规则外的安全防护规则（自定义规则、速率限制 和 Bot 管理功能）默认拦截处置动作配置。 */
+declare interface DefaultDenySecurityActionParameters {
+  /** 托管规则默认拦截处置动作配置。	DenyActionParameters 支持的配置参数：ReturnCustomPage：是否使用自定义页面。ResponseCode：自定义页面的状态码。ErrorPageId：自定义页面的 PageId。 */
+  ManagedRules?: DenyActionParameters;
+  /** 除托管规则外的安全防护规则（自定义规则、速率限制 和 Bot 管理功能）默认拦截处置动作配置。	DenyActionParameters 支持的配置参数：ReturnCustomPage：是否使用自定义页面。ResponseCode：自定义页面的状态码。ErrorPageId：自定义页面的 PageId。 */
+  OtherModules?: DenyActionParameters;
 }
 
 /** https 服务端证书配置 */
@@ -1382,7 +1406,7 @@ declare interface DetectLengthLimitRule {
 
 /** 客户端设备配置 */
 declare interface DeviceProfile {
-  /** 客户端设备类型。取值有：iOS；Android；WebView。 */
+  /** 客户端设备类型。取值有：iOS；Android；WebView；WeChatMiniProgram。 */
   ClientType: string;
   /** 判定请求为高风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 50，对应含义 51～100 为高风险。 */
   HighRiskMinScore?: number;
@@ -1730,6 +1754,16 @@ declare interface Function {
   CreateTime?: string;
   /** 修改时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
   UpdateTime?: string;
+}
+
+/** 边缘函数组件绑定配置，用于建立边缘函数与组件（如 KV 命名空间）的关联关系。通过绑定配置，边缘函数代码可在运行时通过指定的变量名访问绑定的资源。 */
+declare interface FunctionComponentBinding {
+  /** 绑定的组件类型。取值有：kv_namespace：KV 命名空间。 */
+  Type: string;
+  /** 用于绑定的变量名。限制 1-50 个字符，允许的字符为字母、数字和下划线，其中数字不能在开头。在边缘函数代码中通过该变量名访问绑定的组件。根据 Type 的取值不同，使用方式如下：当 Type 为 kv_namespace 时：在代码中可通过该变量名访问 KV 命名空间，例如设置为 "MY_KV" 时，可通过 MY_KV.get("key") 进行读写操作。 */
+  VariableName: string;
+  /** KV 命名空间配置参数。用于指定绑定的 KV 命名空间详情。当 Type 为 kv_namespace 时，此字段必填。 */
+  KVNamespaceParameters?: KVNamespaceParameters | null;
 }
 
 /** 边缘函数环境变量 */
@@ -2140,6 +2174,42 @@ declare interface JustInTimeTranscodeTemplate {
   CreateTime?: string;
   /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
   UpdateTime?: string;
+}
+
+/** KV 命名空间信息，包含命名空间的基本属性、存储容量使用情况以及被引用关系。KV 命名空间是边缘函数存储键值对数据的容器，可在边缘函数中通过绑定方式进行读写操作。 */
+declare interface KVNamespace {
+  /** 命名空间名称。在同站点下具有唯一性。 */
+  Namespace?: string;
+  /** 命名空间描述。创建时填写的备注信息，用于说明命名空间的用途或业务含义。最大支持 256 个字符。 */
+  Remark?: string;
+  /** KV 存储空间可用容量，单位为字节（Byte）。表示该命名空间可存储数据的最大容量上限，当前默认为 1 GB。 */
+  Capacity?: number;
+  /** KV 存储空间已用容量，单位为字节（Byte）。表示该命名空间当前已使用的存储空间大小。 */
+  CapacityUsed?: number;
+  /** 命名空间被引用实例的列表。展示当前命名空间被哪些边缘函数实例引用，以及引用的站点信息。若未被引用，则返回空数组。 */
+  References?: ComponentReference[];
+  /** 命名空间的创建时间，遵循 ISO 8601 标准，格式为 YYYY-MM-DDThh:mm:ssZ（UTC 时间）。 */
+  CreatedOn?: string;
+  /** 命名空间的最后修改时间，遵循 ISO 8601 标准，格式为 YYYY-MM-DDThh:mm:ssZ（UTC 时间）。 */
+  ModifiedOn?: string;
+}
+
+/** 边缘函数绑定 KV 命名空间时所需的详细配置参数，用于指定绑定的命名空间来源。通过此配置，边缘函数可操作指定站点下的 KV 命名空间。 */
+declare interface KVNamespaceParameters {
+  /** KV 命名空间所属的站点 ID。指定要绑定的 KV 命名空间所在的站点，支持跨站点绑定。 */
+  ZoneId: string;
+  /** KV 命名空间名称。指定要绑定的具体命名空间，可通过 DescribeKVNamespace 接口获取站点下的命名空间列表。 */
+  Namespace: string;
+}
+
+/** KV 键值对数据，包含键名、键值和过期时间信息。 */
+declare interface KeyValuePair {
+  /** 键名。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。 */
+  Key?: string;
+  /** 键值。入参时不能为空，最大支持 1 MB。出参时若键不存在，则返回空字符串。 */
+  Value?: string;
+  /** 过期时间，遵循 ISO 8601 标准，格式为 YYYY-MM-DDThh:mm:ssZ（UTC 时间）。出参时若为空字符串，表示该键值对永不过期。 */
+  Expiration?: string;
 }
 
 /** 商业或开源工具 UA 特征配置（原 UA 特征规则）。 */
@@ -3636,6 +3706,8 @@ declare interface SecurityPolicy {
   BotManagement?: BotManagement;
   /** 基础 Bot 管理配置。 */
   BotManagementLite?: BotManagementLite;
+  /** 默认拦截动作配置。 */
+  DefaultDenySecurityActionParameters?: DefaultDenySecurityActionParameters;
 }
 
 /** 策略模板信息 */
@@ -4658,6 +4730,20 @@ declare interface CreateDnsRecordResponse {
   RequestId?: string;
 }
 
+declare interface CreateEdgeKVNamespaceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 命名空间名称。输入内容有以下限制：支持输入 1-50 个字符，允许的字符为 a-z、A-Z、0-9、-，且 - 不能单独注册或连续使用，不能放在开头或结尾。在同站点下，名称需保证唯一。 */
+  Namespace: string;
+  /** 命名空间描述。用于说明命名空间的用途或业务含义。最大支持 256 个字符。 */
+  Remark?: string;
+}
+
+declare interface CreateEdgeKVNamespaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFunctionRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -5230,6 +5316,18 @@ declare interface DeleteDnsRecordsRequest {
 }
 
 declare interface DeleteDnsRecordsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEdgeKVNamespaceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 要删除的命名空间名称。 */
+  Namespace: string;
+}
+
+declare interface DeleteEdgeKVNamespaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5850,6 +5948,30 @@ declare interface DescribeDnsRecordsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEdgeKVNamespacesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  Limit?: number;
+  /** 排序依据，取值有：created-on：创建时间；updated-on：更新时间。默认值为 created-on。 */
+  SortBy?: string;
+  /** 列表排序方式，取值有：asc：升序排列；desc：降序排列。默认值为 desc。 */
+  SortOrder?: string;
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回站点 ID 下全部 KV 命名空间。详细的过滤条件如下：namespace：按照 KV 命名空间名称进行过滤，支持模糊查询；remark：按照命名空间描述进行过滤，支持模糊查询。 */
+  Filters?: AdvancedFilter[];
+}
+
+declare interface DescribeEdgeKVNamespacesResponse {
+  /** 符合条件的命名空间总数。 */
+  TotalCount?: number;
+  /** KV 命名空间信息列表。若无符合条件的命名空间，则返回空数组。 */
+  KVNamespaces?: KVNamespace[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnvironmentsRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -5860,6 +5982,28 @@ declare interface DescribeEnvironmentsResponse {
   TotalCount?: number;
   /** 环境列表。 */
   EnvInfos?: EnvInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFunctionComponentBindingsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：1000。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：name：按照绑定的变量名进行过滤，支持模糊查询；type：按照绑定类型进行过滤，不支持模糊查询。 */
+  Filters?: AdvancedFilter[];
+}
+
+declare interface DescribeFunctionComponentBindingsResponse {
+  /** 符合条件的函数绑定总数。 */
+  TotalCount?: number;
+  /** 函数组件绑定列表。 */
+  FunctionComponentBindings?: FunctionComponentBinding[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6898,6 +7042,78 @@ declare interface DownloadL7LogsResponse {
   RequestId?: string;
 }
 
+declare interface EdgeKVDeleteRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 命名空间名称。 */
+  Namespace: string;
+  /** 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。删除单个键时传入包含一个元素的数组。 */
+  Keys: string[];
+}
+
+declare interface EdgeKVDeleteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EdgeKVGetRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 命名空间名称。可通过 DescribeEdgeKVNamespaces 接口获取站点下的命名空间列表。 */
+  Namespace: string;
+  /** 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。查询单个键时传入包含一个元素的数组。 */
+  Keys: string[];
+}
+
+declare interface EdgeKVGetResponse {
+  /** 键值对数据列表。按入参 Keys 的顺序依次返回结果，若某键不存在，则对应项的 Value 字段返回空字符串。 */
+  Data?: KeyValuePair[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EdgeKVListRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 命名空间名称。 */
+  Namespace: string;
+  /** 键名前缀过滤。只返回以指定前缀开头的键名，长度为 1-512 个字符。不填写表示返回所有键名；不允许传入空字符串。 */
+  Prefix?: string;
+  /** 游标位置。标识当前查询的起始位置，用于遍历大量数据。首次查询时不填写，从头开始遍历；后续查询时填写上一次返回的 Cursor 值，从该位置继续向后遍历。 */
+  Cursor?: string;
+  /** 返回的键名数量。默认值：20，最大值：1000。 */
+  Limit?: number;
+}
+
+declare interface EdgeKVListResponse {
+  /** 键名列表。 */
+  Keys?: string[];
+  /** 游标位置。标识当前遍历的位置，用于获取下一批数据。将此值填入下次请求的 Cursor 参数中，可继续向后遍历。若为空字符串，表示已遍历完所有数据。 */
+  Cursor?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EdgeKVPutRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 命名空间名称。 */
+  Namespace: string;
+  /** 键名，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。 */
+  Key: string;
+  /** 键值。不能为空，最大支持 1 MB。支持存储字符串数据。 */
+  Value: string;
+  /** 过期时间，绝对时间。表示从 1970 年 1 月 1 日（UTC/GMT 的午夜）开始所经过的秒数，不能小于当前时间。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。 */
+  Expiration?: number;
+  /** 过期时间，相对时间，单位为秒。表示数据将在指定秒数后过期，必须大于 0。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。 */
+  ExpirationTTL?: number;
+}
+
+declare interface EdgeKVPutResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EnableOriginACLRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -7214,6 +7430,36 @@ declare interface ModifyDnsRecordsStatusRequest {
 }
 
 declare interface ModifyDnsRecordsStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEdgeKVNamespaceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 命名空间名称。 */
+  Namespace: string;
+  /** 命名空间描述。用于说明命名空间的用途或业务含义。最大支持 256 个字符。 */
+  Remark?: string;
+}
+
+declare interface ModifyEdgeKVNamespaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyFunctionComponentBindingsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 操作类型，取值有：bind：绑定组件；bind-override：绑定组件。若绑定已存在则为重绑定行为，否则为绑定行为；unbind：解绑组件；rebind：重置绑定关系。清空所有现有绑定，并设置为传入的绑定列表。若传入空列表，则清空所有绑定。 */
+  Operation: string;
+  /** 操作的函数组件绑定列表。当 Operation 为 rebind 且传入空列表时，表示清空所有绑定。 */
+  FunctionComponentBindings: FunctionComponentBinding[];
+}
+
+declare interface ModifyFunctionComponentBindingsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8139,6 +8385,8 @@ declare interface Teo {
   CreateCustomizeErrorPage(data: CreateCustomizeErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeErrorPageResponse>;
   /** 创建 DNS 记录 {@link CreateDnsRecordRequest} {@link CreateDnsRecordResponse} */
   CreateDnsRecord(data: CreateDnsRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDnsRecordResponse>;
+  /** 创建 KV 命名空间 {@link CreateEdgeKVNamespaceRequest} {@link CreateEdgeKVNamespaceResponse} */
+  CreateEdgeKVNamespace(data: CreateEdgeKVNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeKVNamespaceResponse>;
   /** 创建边缘函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
   /** 创建边缘函数触发规则 {@link CreateFunctionRuleRequest} {@link CreateFunctionRuleResponse} */
@@ -8203,6 +8451,8 @@ declare interface Teo {
   DeleteCustomErrorPage(data: DeleteCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomErrorPageResponse>;
   /** 批量删除 DNS 记录 {@link DeleteDnsRecordsRequest} {@link DeleteDnsRecordsResponse} */
   DeleteDnsRecords(data: DeleteDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDnsRecordsResponse>;
+  /** 删除 KV 命名空间 {@link DeleteEdgeKVNamespaceRequest} {@link DeleteEdgeKVNamespaceResponse} */
+  DeleteEdgeKVNamespace(data: DeleteEdgeKVNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeKVNamespaceResponse>;
   /** 删除边缘函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
   /** 删除边缘函数触发规则 {@link DeleteFunctionRulesRequest} {@link DeleteFunctionRulesResponse} */
@@ -8279,8 +8529,12 @@ declare interface Teo {
   DescribeDeployHistory(data: DescribeDeployHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployHistoryResponse>;
   /** 查询 DNS 记录列表 {@link DescribeDnsRecordsRequest} {@link DescribeDnsRecordsResponse} */
   DescribeDnsRecords(data: DescribeDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDnsRecordsResponse>;
+  /** 查询 KV 命名空间 {@link DescribeEdgeKVNamespacesRequest} {@link DescribeEdgeKVNamespacesResponse} */
+  DescribeEdgeKVNamespaces(data: DescribeEdgeKVNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeKVNamespacesResponse>;
   /** 查询环境信息 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  /** 查询函数组件绑定列表 {@link DescribeFunctionComponentBindingsRequest} {@link DescribeFunctionComponentBindingsResponse} */
+  DescribeFunctionComponentBindings(data: DescribeFunctionComponentBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionComponentBindingsResponse>;
   /** 查询边缘函数触发规则 {@link DescribeFunctionRulesRequest} {@link DescribeFunctionRulesResponse} */
   DescribeFunctionRules(data: DescribeFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionRulesResponse>;
   /** 查询边缘函数运行环境 {@link DescribeFunctionRuntimeEnvironmentRequest} {@link DescribeFunctionRuntimeEnvironmentResponse} */
@@ -8391,6 +8645,14 @@ declare interface Teo {
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
+  /** 删除 KV 数据 {@link EdgeKVDeleteRequest} {@link EdgeKVDeleteResponse} */
+  EdgeKVDelete(data: EdgeKVDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<EdgeKVDeleteResponse>;
+  /** 查询 KV 数据 {@link EdgeKVGetRequest} {@link EdgeKVGetResponse} */
+  EdgeKVGet(data: EdgeKVGetRequest, config?: AxiosRequestConfig): AxiosPromise<EdgeKVGetResponse>;
+  /** 查询 KV 键名列表 {@link EdgeKVListRequest} {@link EdgeKVListResponse} */
+  EdgeKVList(data: EdgeKVListRequest, config?: AxiosRequestConfig): AxiosPromise<EdgeKVListResponse>;
+  /** 写入 KV 数据 {@link EdgeKVPutRequest} {@link EdgeKVPutResponse} */
+  EdgeKVPut(data: EdgeKVPutRequest, config?: AxiosRequestConfig): AxiosPromise<EdgeKVPutResponse>;
   /** 开启源站防护 {@link EnableOriginACLRequest} {@link EnableOriginACLResponse} */
   EnableOriginACL(data: EnableOriginACLRequest, config?: AxiosRequestConfig): AxiosPromise<EnableOriginACLResponse>;
   /** 导出站点配置 {@link ExportZoneConfigRequest} {@link ExportZoneConfigResponse} */
@@ -8429,8 +8691,12 @@ declare interface Teo {
   ModifyDnsRecords(data: ModifyDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordsResponse>;
   /** 批量修改 DNS 记录状态 {@link ModifyDnsRecordsStatusRequest} {@link ModifyDnsRecordsStatusResponse} */
   ModifyDnsRecordsStatus(data: ModifyDnsRecordsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDnsRecordsStatusResponse>;
+  /** 修改 KV 命名空间 {@link ModifyEdgeKVNamespaceRequest} {@link ModifyEdgeKVNamespaceResponse} */
+  ModifyEdgeKVNamespace(data: ModifyEdgeKVNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeKVNamespaceResponse>;
   /** 修改边缘函数 {@link ModifyFunctionRequest} {@link ModifyFunctionResponse} */
   ModifyFunction(data: ModifyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionResponse>;
+  /** 修改函数组件绑定 {@link ModifyFunctionComponentBindingsRequest} {@link ModifyFunctionComponentBindingsResponse} */
+  ModifyFunctionComponentBindings(data: ModifyFunctionComponentBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionComponentBindingsResponse>;
   /** 修改边缘函数触发规则 {@link ModifyFunctionRuleRequest} {@link ModifyFunctionRuleResponse} */
   ModifyFunctionRule(data: ModifyFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionRuleResponse>;
   /** 修改边缘函数触发规则优先级 {@link ModifyFunctionRulePriorityRequest} {@link ModifyFunctionRulePriorityResponse} */

@@ -1594,6 +1594,18 @@ declare interface DeleteInstancesActionTimerResponse {
   RequestId?: string;
 }
 
+declare interface DeleteInstancesDisasterRecoverGroupsRequest {
+  /** 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。 */
+  InstanceIds: string[];
+  /** 分散置放群组ID列表，可通过[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。 */
+  DisasterRecoverGroupIds: string[];
+}
+
+declare interface DeleteInstancesDisasterRecoverGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteKeyPairsRequest {
   /** 一个或多个待操作的密钥对ID。每次请求批量密钥对的上限为100。可以通过以下方式获取可用的密钥ID：通过登录[控制台](https://console.cloud.tencent.com/cvm/sshkey)查询密钥ID。通过调用接口 [DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699) ，取返回信息中的 `KeyId` 获取密钥对ID。 */
   KeyIds: string[];
@@ -3162,6 +3174,8 @@ declare interface Cvm {
   DeleteImages(data: DeleteImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImagesResponse>;
   /** 删除定时任务 {@link DeleteInstancesActionTimerRequest} {@link DeleteInstancesActionTimerResponse} */
   DeleteInstancesActionTimer(data: DeleteInstancesActionTimerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancesActionTimerResponse>;
+  /** 将云服务器实例从指定的置放群组中批量移除 {@link DeleteInstancesDisasterRecoverGroupsRequest} {@link DeleteInstancesDisasterRecoverGroupsResponse} */
+  DeleteInstancesDisasterRecoverGroups(data: DeleteInstancesDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstancesDisasterRecoverGroupsResponse>;
   /** 删除密钥对 {@link DeleteKeyPairsRequest} {@link DeleteKeyPairsResponse} */
   DeleteKeyPairs(data: DeleteKeyPairsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeyPairsResponse>;
   /** 删除实例启动模板 {@link DeleteLaunchTemplateRequest} {@link DeleteLaunchTemplateResponse} */

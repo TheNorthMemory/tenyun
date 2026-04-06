@@ -1754,6 +1754,8 @@ declare interface NodeRunBase {
   CostMilliseconds?: number;
   /** 消耗的token总数 */
   TotalTokens?: number;
+  /** 分支下标列表单位：无 */
+  BranchIndexList?: number[] | null;
 }
 
 /** 工作流节点运行详情 */
@@ -2628,7 +2630,7 @@ declare interface WorkflowRunNodeInfo {
   TaskOutput?: string | null;
   /** 错误信息 */
   FailMessage?: string | null;
-  /** 花费时长 */
+  /** 花费时长，单位为毫秒 */
   CostMilliSeconds?: number | null;
   /** 大模型输出信息 */
   StatisticInfos?: StatisticInfo[] | null;

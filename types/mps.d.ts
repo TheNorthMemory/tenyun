@@ -7118,6 +7118,28 @@ declare interface VideoTemplateInfoForUpdate {
   CompressType?: string | null;
 }
 
+/** 音色信息 */
+declare interface VoiceInfo {
+  /** 音色ID */
+  VoiceId?: string;
+  /** 音色名 */
+  Name?: string;
+  /** 音色描述信息 */
+  Description?: string;
+  /** 音色类别枚举值：system： 系统音色 */
+  Category?: string;
+  /** 性别枚举值：male： 男famale： 女 */
+  Gender?: string;
+  /** 支持语种列表如：en */
+  Languages?: string[];
+  /** 试听音频URL */
+  AudioUrl?: string;
+  /** 标签列表如：温柔 */
+  Labels?: string[];
+  /** 推荐场景如：教育 */
+  Scenes?: string[];
+}
+
 /** 音量均衡配置 */
 declare interface VolumeBalanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -9286,6 +9308,24 @@ declare interface DescribeVideoSearchTaskDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVoicesRequest {
+  /** 音色类别枚举值：system： 系统音色 */
+  VoiceType?: string;
+  /** 扩展参数，json字符串其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色 */
+  ExtParam?: string;
+}
+
+declare interface DescribeVoicesResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 可用音色列表 */
+  Voices?: VoiceInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWatermarkTemplatesRequest {
   /** 水印模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
@@ -10591,6 +10631,8 @@ declare interface Mps {
   DescribeVideoDatabaseEntryTaskDetail(data: DescribeVideoDatabaseEntryTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDatabaseEntryTaskDetailResponse>;
   /** 查询视频检索任务详情 {@link DescribeVideoSearchTaskDetailRequest} {@link DescribeVideoSearchTaskDetailResponse} */
   DescribeVideoSearchTaskDetail(data: DescribeVideoSearchTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoSearchTaskDetailResponse>;
+  /** 查询可用音色 {@link DescribeVoicesRequest} {@link DescribeVoicesResponse} */
+  DescribeVoices(data?: DescribeVoicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoicesResponse>;
   /** 获取水印模板列表 {@link DescribeWatermarkTemplatesRequest} {@link DescribeWatermarkTemplatesResponse} */
   DescribeWatermarkTemplates(data?: DescribeWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWatermarkTemplatesResponse>;
   /** 获取关键词样本列表 {@link DescribeWordSamplesRequest} {@link DescribeWordSamplesResponse} */

@@ -1925,7 +1925,7 @@ declare namespace V20180717 {
     Resolution?: string;
     /** 指定所生成视频的宽高比。当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；当 ModelName 是 Hailuo，则暂不支持。 */
     AspectRatio?: string;
-    /** 是否生成音频。支持的模型包括 GV、OS、Vidu。取值有： Enabled：开启； Disabled：关闭；默认值：Disabled */
+    /** 是否生成音频。支持的模型包括 GV、OS、Vidu、Jimeng、Kling。枚举值：Enabled： 开启Disabled： 关闭默认值：Disabled */
     AudioGeneration?: string;
     /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
     PersonGeneration?: string;
@@ -2031,8 +2031,14 @@ declare namespace V20180717 {
   interface AigcVideoTaskInputSubjectInfo {
     /** 固定主体Id。Kling主体必选；Vidu主体可选。 */
     Id?: string;
-    /** 固定名称。Vidu主体必选；Kling主体可选。 */
+    /** 固定名称。Vidu主体必选，可在 prompt 中加入 [@name] 使用。如 name 为小明时，prompt 中描述为 [@小明] 。Kling主体可选。 */
     Name?: string;
+    /** 仅Vidu有效。音色ID用来决定视频中的声音音色，为空时系统会自动推荐。 */
+    VoiceId?: string;
+    /** 仅Vidu有效。临时主体图片，最多3张图片注1：支持传入图片URL（确保可访问）；注2：图片支持 png、jpeg、jpg、webp格式；注3：图片像素不能小于 128*128，且比例需要小于1:4或者4:1。 */
+    ImageUrls?: string[];
+    /** 仅Vidu有效。临时主体视频，最多1个5秒视频注1：仅参考生viduq2-pro模型支持使用视频主体；注2：最多支持上传 1个5秒 的视频；注3：视频支持 mp4、avi、mov格式；注4：视频像素不能小于 128*128，且比例需要小于1:4或者4:1； */
+    VideoUrls?: string[];
   }
 
   /** AIGC 生视频任务的输出信息。 */
@@ -7896,7 +7902,7 @@ declare namespace V20180717 {
     ModelName: string;
     /** 模型版本。取值：当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925、2.0；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni； */
     ModelVersion: string;
-    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：1张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；Qwen 2.0：3张；MJ v7：3张。 */
+    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；Qwen 2.0：3张；MJ v7：3张。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
     /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;

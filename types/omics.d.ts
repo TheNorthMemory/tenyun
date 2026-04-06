@@ -178,6 +178,128 @@ declare interface GitInfo {
   Tag?: string;
 }
 
+/** HPC集群 */
+declare interface HPCCluster {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 状态 */
+  Status?: string;
+  /** 调度器 */
+  Scheduler?: string;
+  /** VPC ID */
+  VPCId?: string;
+  /** 节点数量 */
+  NodeCount?: number;
+  /** 标签 */
+  Tags?: Tag[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 集群类型 */
+  Type?: string;
+  /** 系统名称 */
+  OsName?: string;
+  /** 调度器版本 */
+  SchedulerVersion?: string;
+  /** 集群VPC CIDR */
+  VPCCIDRBlock?: string;
+  /** 集群确认交付截止日期 */
+  ConfirmDeadline?: string;
+}
+
+/** HPC实例硬盘 */
+declare interface HPCDisk {
+  /** 硬盘ID。仅作为出参。 */
+  DiskId?: string;
+  /** 硬盘大小 */
+  Size?: number;
+  /** 类型 */
+  Type?: string;
+}
+
+/** HPC实例GPU */
+declare interface HPCGPUInfo {
+  /** GPU类型 */
+  GPUType?: string;
+  /** GPU数量 */
+  GPUCount?: number;
+}
+
+/** HPC实例 */
+declare interface HPCInstance {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 名称 */
+  Name?: string;
+  /** CPU数量 */
+  CPU?: number;
+  /** 内存 */
+  Memory?: number;
+  /** 状态 */
+  State?: string;
+  /** 类型 */
+  Type?: string;
+  /** 计费类型 */
+  ChargeType?: string;
+  /** 系统名称 */
+  OSName?: string;
+  /** 系统盘 */
+  SystemDisk?: HPCDisk;
+  /** GPU */
+  GPUInfo?: HPCGPUInfo;
+  /** 内网IP地址 */
+  PrivateIPAddresses?: string[];
+  /** 公网IP地址 */
+  PublicIPAddresses?: string[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 到期时间 */
+  ExpireTime?: string;
+  /** Uuid */
+  Uuid?: string;
+  /** 节点网络信息 */
+  InternetInfo?: HPCInternetInfo;
+}
+
+/** HPC节点网络信息 */
+declare interface HPCInternetInfo {
+  /** 网络出口带宽，单位Mbps */
+  InternetMaxBandwidthOut?: number;
+  /** 网络收费类型枚举值：BANDWIDTH_PREPAID： 预付费按带宽结算TRAFFIC_POSTPAID_BY_HOUR： 流量按小时后付费BANDWIDTH_POSTPAID_BY_HOUR： 带宽按小时后付费 */
+  InternetChargeType?: string;
+}
+
+/** HPC节点 */
+declare interface HPCNode {
+  /** 节点ID */
+  NodeId?: string;
+  /** 队列ID */
+  QueueId?: string;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 角色 */
+  Role?: string;
+  /** 类型 */
+  Type?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 实例信息 */
+  Instance?: HPCInstance;
+  /** 标签 */
+  Tags?: Tag[];
+  /** 节点名称 */
+  Name?: string;
+  /** 队列名称 */
+  QueueName?: string;
+  /** 节点状态。取值范围：IDLE 空闲DOWN 节点下线MIXED 节点部分使用ALLOC 节点完全分配DRAIN 排空，不接受新任务 */
+  Status?: string;
+}
+
 /** 资源限制范围。 */
 declare interface LimitRange {
   /** 最大CPU设置 */
@@ -508,6 +630,14 @@ declare interface TableRow {
   Content?: string[];
 }
 
+/** 标签 */
+declare interface Tag {
+  /** 标签键 */
+  Key: string;
+  /** 标签值 */
+  Value: string;
+}
+
 /** 私有网络配置。 */
 declare interface VPCOption {
   /** 私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络） */
@@ -670,6 +800,44 @@ declare interface DescribeEnvironmentsResponse {
   TotalCount?: number;
   /** 环境详情列表。 */
   Environments?: Environment[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHPCClustersRequest {
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：- ClusterId：集群ID- Name：名称- Status：状态- ConfirmDeadlineLt: 交付确认截止日期小于给定值的集群，如2026-01-13T16:00:00+08:00 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeHPCClustersResponse {
+  /** HPC集群。 */
+  Clusters?: HPCCluster[] | null;
+  /** 符合条件的数量。 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHPCNodesRequest {
+  /** 集群ID。 */
+  ClusterId?: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：- ClusterId：集群ID- QueueId：队列ID- NodeId：节点ID- Name：名称- Role：角色- Type：类型- Zone：可用区- InstanceState：实例状态- InstanceType：实例机型- InstanceFamily：实例机型族- InstanceChargeType：实例计费类型- Tag：标签，Value格式为tagKey:tagValue */
+  Filters?: Filter[];
+}
+
+declare interface DescribeHPCNodesResponse {
+  /** HPC节点。 */
+  Nodes?: HPCNode[] | null;
+  /** 符合条件的数量。 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -860,6 +1028,20 @@ declare interface ModifyVolumeResponse {
   RequestId?: string;
 }
 
+declare interface RebootHPCNodesRequest {
+  /** 集群Id */
+  ClusterId: string;
+  /** 节点Id，例如ins-d1fc42ss */
+  NodeIds: string[];
+  /** 重启的关机类型。枚举值：SOFT： 软关机HARD： 硬关机SOFT_FIRST： 优先软关机，失败再执行硬关机默认值：SOFT */
+  StopType?: string;
+}
+
+declare interface RebootHPCNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RetryRunsRequest {
   /** 项目ID。（不填使用指定地域下的默认项目） */
   ProjectId?: string;
@@ -993,6 +1175,10 @@ declare interface Omics {
   DeleteVolumeData(data: DeleteVolumeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeDataResponse>;
   /** 查询环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
+  /** 查询HPC集群列表 {@link DescribeHPCClustersRequest} {@link DescribeHPCClustersResponse} */
+  DescribeHPCClusters(data?: DescribeHPCClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHPCClustersResponse>;
+  /** 查询HPC节点列表 {@link DescribeHPCNodesRequest} {@link DescribeHPCNodesResponse} */
+  DescribeHPCNodes(data?: DescribeHPCNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHPCNodesResponse>;
   /** 查询任务批次列表 {@link DescribeRunGroupsRequest} {@link DescribeRunGroupsResponse} */
   DescribeRunGroups(data?: DescribeRunGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunGroupsResponse>;
   /** 查询任务列表 {@link DescribeRunsRequest} {@link DescribeRunsResponse} */
@@ -1013,6 +1199,8 @@ declare interface Omics {
   ImportTableFile(data: ImportTableFileRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTableFileResponse>;
   /** 修改缓存卷 {@link ModifyVolumeRequest} {@link ModifyVolumeResponse} */
   ModifyVolume(data: ModifyVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVolumeResponse>;
+  /** 重启HPC节点 {@link RebootHPCNodesRequest} {@link RebootHPCNodesResponse} */
+  RebootHPCNodes(data: RebootHPCNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootHPCNodesResponse>;
   /** 重试任务 {@link RetryRunsRequest} {@link RetryRunsResponse} */
   RetryRuns(data?: RetryRunsRequest, config?: AxiosRequestConfig): AxiosPromise<RetryRunsResponse>;
   /** 运行应用 {@link RunApplicationRequest} {@link RunApplicationResponse} */
