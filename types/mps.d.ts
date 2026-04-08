@@ -138,6 +138,26 @@ declare interface ActivityResult {
   ActivityResItem?: ActivityResItem;
 }
 
+/** AdBreakInfo。 */
+declare interface AdBreakInfo {
+  /** SourceLocationId。 */
+  SourceLocationId?: string;
+  /** VodSourceName。 */
+  VodSourceName?: string;
+  /** Offset。 */
+  Offset?: number;
+  /** MessageType，分SpliceInsert和TimeSignal。 */
+  MessageType?: string;
+  /** TimeSignalConf。 */
+  TimeSignalConf?: TimeSignalInfo;
+  /** SpliceInsertConf。 */
+  SpliceInsertConf?: SpliceInsertInfo;
+  /** Metadatas。 */
+  Metadatas?: Metadata[];
+  /** SourceLocationName。 */
+  SourceLocationName?: string;
+}
+
 /** 转自适应码流信息 */
 declare interface AdaptiveDynamicStreamingInfoItem {
   /** 转自适应码流规格。 */
@@ -1692,6 +1712,14 @@ declare interface AigcVideoReferenceVideoInfo {
   KeepOriginalSound?: string;
 }
 
+/** Alias-value配置信息。 */
+declare interface AliasValueConf {
+  /** Alias。 */
+  Alias?: string;
+  /** Value。 */
+  Value?: string;
+}
+
 /** 转动图任务类型。 */
 declare interface AnimatedGraphicTaskInput {
   /** 视频转动图模板 ID。 */
@@ -1814,6 +1842,34 @@ declare interface AsrWordsConfigureInfoForUpdate {
   Switch?: string;
   /** 关键词过滤标签，指定需要返回的关键词的标签。如果未填或者为空，则全部结果都返回。标签个数最多 10 个，每个标签长度最多 16 个字符。 */
   LabelSet?: string[];
+}
+
+/** 线性组装信息查询 */
+declare interface AssemblyUsageDetail {
+  /** 频道id */
+  ChannelID?: string;
+  /** 日期 */
+  Date?: string;
+  /** 查询开始时间 */
+  StartTime?: string;
+  /** 查询结束时间 */
+  EndTime?: string;
+  /** 持续时间 */
+  Duration?: number;
+  /** 频道类型 */
+  ChannelTier?: string;
+  /** 频道名称 */
+  ChannelName?: string;
+}
+
+/** 线性组装用量查询响应 */
+declare interface AssemblyUsageInfo {
+  /** 频道线性组装用量明细 */
+  AssemblyUsageDetails?: AssemblyUsageDetail[];
+  /** Basic频道类型总时长 */
+  SumBasicChannelDuration?: number;
+  /** Standard频道类型总时长 */
+  SumStandardChannelDuration?: number;
 }
 
 /** 音量美化配置 */
@@ -2012,6 +2068,14 @@ declare interface BlindWatermarkTemplate {
   Strength?: string;
 }
 
+/** 线性组装频道告警返回信息。 */
+declare interface ChannelAlertResp {
+  /** Program告警聚合信息。 */
+  ProgramAlertCounts?: ProgramAlertCounts[];
+  /** Program告警明细信息。 */
+  ProgramAlertInfos?: ProgramAlertInfos[];
+}
+
 /** 智能分类任务控制参数 */
 declare interface ClassificationConfigureInfo {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
@@ -2022,6 +2086,18 @@ declare interface ClassificationConfigureInfo {
 declare interface ClassificationConfigureInfoForUpdate {
   /** 智能分类任务开关，可选值：ON：开启智能分类任务；OFF：关闭智能分类任务。 */
   Switch?: string;
+}
+
+/** 垫片配置。 */
+declare interface ClipRangeInfo {
+  /** vod类型有效，内容有效起始时间，可选Entire和SpecifyTimeRange。 */
+  Type?: string;
+  /** 偏移量,Type为SpecifyTimeRange时有效。 */
+  Offset?: number;
+  /** 开始偏移量,Type为SpecifyTimeRange时有效。 */
+  StartOffset?: number;
+  /** 结束偏移量,Type为SpecifyTimeRange时有效。 */
+  EndOffset?: number;
 }
 
 /** 色彩增强配置 */
@@ -2266,6 +2342,14 @@ declare interface ComposeVideoStream {
   Fps?: number;
   /** 参考码率，单位 kbps，范围：50~35000。如果设置，编码时会尽量按该码率进行编码。如果不设置，服务将通过画面复杂度自动采用合适的码率。 */
   Bitrate?: number;
+}
+
+/** 参数配置。 */
+declare interface ConfigAliasesInfo {
+  /** 参数名。 */
+  ParamName?: string;
+  /** alias-value配置。 */
+  AliasValueList?: AliasValueConf[];
 }
 
 /** 容器格式诊断结果 */
@@ -2556,6 +2640,18 @@ declare interface CreateOutputSRTSettingsDestinations {
   Ip: string;
   /** 输出的端口。 */
   Port: number;
+}
+
+/** Type为DASH时manifest配置使用的字段。 */
+declare interface DashManifestInfo {
+  /** 每个清单的总持续时间（以秒为单位）。[30, 3600]，类型：整数，默认值60。 */
+  Windows?: number;
+  /** 播放器在缓冲区中保持的最小缓存时间（以秒为单位）。[2, 60]，类型：整数，默认值30。 */
+  MinBufferTime?: number;
+  /** 播放器在请求更新清单之前应等待的最短时间（以秒为单位）。[2, 60]，类型：整数，默认值2。 */
+  MinUpdatePeriod?: number;
+  /** 播放器启播时距离最新直播时间点的时间，是一个回退量（以秒为单位）。[2, 60]，类型：整数，默认值10。 */
+  SuggestedPresentationDelay?: number;
 }
 
 /** 查询Event的配置信息。 */
@@ -3692,6 +3788,62 @@ declare interface InputAddress {
   Port: number;
 }
 
+/** 线性组装频道信息。 */
+declare interface LinearAssemblyChannelInfo {
+  /** 线性组装频道名称。 */
+  Name?: string;
+  /** 定义channel的特性，Standard支持直播和点播源，Basic只支持点播源编排。 */
+  Tier?: string;
+  /** 频道中的source切换的模式，分Linear线性和Loop循环，直播只支持Linear。 */
+  PlaybackMode?: string;
+  /** 时移配置，vod有效。 */
+  TimeShiftConf?: TimeShiftInfo;
+  /** 垫片配置。 */
+  SlateConf?: SlateInfo;
+  /** output信息。 */
+  Outputs?: OutputInfo[];
+  /** 该channel绑定的program列表。 */
+  AttachedPrograms?: string[];
+  /** program信息。 */
+  ProgramSchedules?: ProgramScheduleInfo[];
+  /** Id。 */
+  Id?: string;
+  /** Region。 */
+  Region?: string;
+  /** State。 */
+  State?: string;
+  /** 时移开启开关。 */
+  TimeShiftEnable?: boolean;
+  /** channel创建时间，unix秒时间戳。 */
+  CreateTime?: number;
+}
+
+/** 频道线性组装program信息。 */
+declare interface LinearAssemblyProgramInfo {
+  /** program名称。 */
+  Name?: string;
+  /** 编排的目标source的类型，分直播和点播。 */
+  SourceType?: string;
+  /** 关联的source location id。 */
+  SourceLocationId?: string;
+  /** SourceId，唯一标识一个source。 */
+  SourceId?: string;
+  /** 关联的直播or点播，source名称，location下全局唯一。 */
+  SourceName?: string;
+  /** 绑定的channel。 */
+  AttachedChannel?: string;
+  /** 播放配置。 */
+  PlaybackConf?: PlaybackInfo;
+  /** AdBreaks。 */
+  AdBreaks?: AdBreakInfo[];
+  /** Id。 */
+  Id?: string;
+  /** Region。 */
+  Region?: string;
+  /** SourceLocation名称。 */
+  SourceLocationName?: string;
+}
+
 /** 直播编排子任务输出 */
 declare interface LiveActivityResItem {
   /** 直播录制任务输出 */
@@ -4194,6 +4346,14 @@ declare interface LowLightEnhanceConfig {
 declare interface MP4ConfigureInfo {
   /** 录制周期，单位：秒，取值范围 10 分钟到720分钟。默认值：60分钟（3600秒）。 */
   Interval?: number;
+}
+
+/** 线性组装频道配置。 */
+declare interface ManifestInfo {
+  /** 单位秒。 */
+  Windows?: number;
+  /** 打到output广告标签的格式，可选Date Range和Enhanced SCTE-35。 */
+  AdMarkupType?: string;
 }
 
 /** 智能分类结果 */
@@ -4702,6 +4862,14 @@ declare interface MediaVideoStreamItem {
   FpsDenominator?: number | null;
 }
 
+/** Metadata。 */
+declare interface Metadata {
+  /** Key。 */
+  Key?: string;
+  /** Value。 */
+  Value?: string;
+}
+
 /** 修改输入信息的参数。 */
 declare interface ModifyInput {
   /** 输入Id。 */
@@ -4794,6 +4962,14 @@ declare interface MosaicInput {
   EndTimeOffset?: number;
 }
 
+/** 自定义服务器信息。 */
+declare interface NameServer {
+  /** 名称。 */
+  Name?: string;
+  /** 地址。 */
+  Url?: string;
+}
+
 /** 输出文件名的`{number}`变量的规则。 */
 declare interface NumberFormat {
   /** `{number}`变量的起始值，默认为0。 */
@@ -4840,12 +5016,42 @@ declare interface OutputAddress {
   Ip: string;
 }
 
+/** 线性组装output信息。 */
+declare interface OutputInfo {
+  /** HLS DASH。 */
+  Type?: string;
+  /** output group名称，可以和source的group名称对应关联起来。 */
+  GroupName?: string;
+  /** channel program调度后输出的文件名。 */
+  ManifestName?: string;
+  /** Type为HLS时manifest配置使用的字段。 */
+  ManifestConf?: ManifestInfo;
+  /** 播放地址。 */
+  PlaybackURL?: string;
+  /** Type为DASH时manifest配置使用的字段。 */
+  DashManifestConf?: DashManifestInfo;
+}
+
 /** RIST输出的监听地址。 */
 declare interface OutputRISTSourceAddressResp {
   /** 监听IP。 */
   Ip?: string | null;
   /** 监听端口。 */
   Port?: number | null;
+}
+
+/** 线性组装output信息。 */
+declare interface OutputReq {
+  /** 输出类型，区分HLS DASH。 */
+  Type?: string;
+  /** output group名称，可以和source的group名称对应关联起来。 */
+  GroupName?: string;
+  /** channel program调度后输出的文件名。 */
+  ManifestName?: string;
+  /** Type为HLS时manifest配置使用的字段。 */
+  ManifestConf?: ManifestInfo;
+  /** Type为DASH时manifest配置使用的字段。 */
+  DashManifestConf?: DashManifestInfo;
 }
 
 /** SRT输出的监听地址。 */
@@ -4900,6 +5106,40 @@ declare interface PidSelector {
   AudioPID?: number[] | null;
   /** 对于含有多个视频轨的流，可以通过输入PID来指定需要使用的视频轨，PID可以输入1到8191之间的正整数。 */
   VideoPID?: number[] | null;
+}
+
+/** program播放配置。 */
+declare interface PlaybackInfo {
+  /** program持续时间，单位毫秒，直播有效。 */
+  Duration?: number;
+  /** program启动方式，直播只支持Absolute，点播还支持Relative。 */
+  TransitionType?: string;
+  /** unix时间戳，Absolute场景下program的开始执行时间。 */
+  StartTime?: number;
+  /** 和所选program的插入顺序关系，分After和Before。 */
+  RelativePosition?: string;
+  /** 所选的插入参考program id。 */
+  RelativeProgramId?: string;
+  /** 垫片配置。 */
+  ClipRangeConf?: ClipRangeInfo;
+  /** RelativeProgramName。 */
+  RelativeProgramName?: string;
+}
+
+/** program播放配置请求。 */
+declare interface PlaybackInfoReq {
+  /** program启动方式，直播只支持Absolute，点播还支持Relative。PlaybackMode类型为Linear的VOD支持Absolute和Relative。PlaybackMode类型为Loop的VOD只支持Relative */
+  TransitionType?: string;
+  /** unix时间戳，absolute场景下program的开始执行时间。最多大于当前90天（7776000）。 */
+  StartTime?: number;
+  /** program持续时间，单位毫秒，直播有效。支持600000-86400000。默认600000。 */
+  Duration?: number;
+  /** 和所选program的插入顺序关系，分After和Before。 */
+  RelativePosition?: string;
+  /** 所选的插入参考program id。 */
+  RelativeProgramId?: string;
+  /** 垫片配置。 */
+  ClipRangeConf?: ClipRangeInfo;
 }
 
 /** 语音涉敏任务控制参数 */
@@ -5086,6 +5326,58 @@ declare interface ProcessImageTemplate {
   CreateTime?: string;
   /** 模板最后修改时间。 */
   UpdateTime?: string;
+}
+
+/** 线性组装Program聚合告警信息 */
+declare interface ProgramAlertCounts {
+  /** Program ID。 */
+  ProgramId?: string;
+  /** Program名称。 */
+  ProgramName?: string;
+  /** 告警分类。 */
+  Category?: string;
+  /** 出现次数 */
+  Count?: number;
+  /** 更新时间。 */
+  LastModifiedTime?: number;
+}
+
+/** 线性组装program告警信息详情。 */
+declare interface ProgramAlertInfos {
+  /** 频道ID。 */
+  ChannelId?: string;
+  /** 频道名称。 */
+  ChannelName?: string;
+  /** ProgramName。 */
+  ProgramId?: string;
+  /** ProgramName。 */
+  ProgramName?: string;
+  /** 告警事件码。 */
+  Code?: number;
+  /** 告警分类。 */
+  Category?: string;
+  /** 告警消息。 */
+  Message?: string;
+  /** 更新时间。 */
+  LastModifiedTime?: number;
+}
+
+/** 该channel下面Program的调度信息。 */
+declare interface ProgramScheduleInfo {
+  /** program名称。 */
+  ProgramName?: string;
+  /** program id。 */
+  ProgramId?: string;
+  /** source类型。 */
+  SourceType?: string;
+  /** source id。 */
+  SourceId?: string;
+  /** source location的id。 */
+  SourceLocationId?: string;
+  /** 开始时间戳。 */
+  StartTime?: number;
+  /** 持续时长。 */
+  Duration?: string;
 }
 
 /** 语音违禁任务控制参数 */
@@ -5492,6 +5784,80 @@ declare interface SRTSourceAddressResp {
   Port: number | null;
 }
 
+/** 广告插入频道配置信息。 */
+declare interface SSAIChannelInfo {
+  /** 频道ID，全局唯一标识。 */
+  ID?: string;
+  /** 频道名称。 */
+  Name?: string;
+  /** 广告源信息。 */
+  ContentSource?: string;
+  /** 播放地址。 */
+  PlaybackPrefix?: string;
+  /** 广告插入SSAI配置信息。 */
+  SSAIInfo?: SSAIConf;
+  /** 地域信息。 */
+  Region?: string;
+  /** 用于clickthrough地址 */
+  SessionInitPrefix?: string;
+}
+
+/** SSAI广告插入配置。 */
+declare interface SSAIConf {
+  /** 广告决策服务器URL(ADS)。 */
+  AdsUrl?: string;
+  /** 参数配置。 */
+  ConfigAliases?: ConfigAliasesInfo[] | null;
+  /** 是否开启广告标记透传。 */
+  AdMarkerPassthrough?: boolean;
+  /** 如何处理广告中的标记,可选值[1-2]：1:所有SCTE-35类型标记全部处理-all（默认）2:SCTE-35enhanced，解析部分类型。 */
+  SCTE35AdType?: number | null;
+  /** 默认广告url。 */
+  SlateAd?: string;
+  /** 未填充的最大时长，单位：秒。 */
+  Threshold?: number;
+  /** 是否开启mpd location, true对应enable， false对应disable。 */
+  DashMPDLocation?: boolean;
+  /** 被视作广告的标记类型，可选值[1-8]：Splice insert2.Provider advertisementDistributor advertisementProvider placement opportunityDistributor placement opportunityBreakProvider overlay placement opportunityDistributor overlay placement opportunity。 */
+  AdTriggers?: number[] | null;
+  /** 被视作广告的分发限制类型，可选值[1-4]：1:None2:Restricted（默认） 3:Unrestricted4.Both */
+  DeliveryRestrictions?: number | null;
+  /** 源流CDN前缀，需要以http://或者https://开头。 */
+  SourceCDNPrefix?: string;
+  /** 广告CDN前缀，需要以http://或者https://开头。 */
+  AdCDNPrefix?: string;
+  /** 预加载广告决策服务地址。 */
+  PreRollAdsUrl?: string;
+  /** 预加载广告最大允许时长，0-3600。 */
+  PreRollMaxAllowedDuration?: number;
+  /** 是否开启多次请求ADS,开启后将优先请求ADS，请求失败后再请求兜底广告 */
+  MultiRequest?: boolean;
+}
+
+/** SSAI用量信息 */
+declare interface SSAIUsageInfo {
+  /** 广告请求成功次数 */
+  AdRequestSuccess?: number;
+  /** 广告请求失败次数 */
+  AdRequestFail?: number;
+  /** 曝光次数 */
+  Impression?: number;
+  /** 中贴个性化广告填充率 */
+  MidFillRate?: number;
+  /** 中贴广告标记时间 */
+  AdMarkerTime?: number;
+  /** 中贴个性化替换时间 */
+  ReplacedTime?: number;
+  /** 前贴广告替换率 */
+  PreReplaceRate?: number;
+  /** 前贴广告请求数 */
+  PreReqNum?: number;
+  /** 前贴广告替换数 */
+  PreReplacedNum?: number;
+  /** 各广告配置用量详情 */
+  UsageDetails?: UsageDetail[] | null;
+}
+
 /** 对视频做采样截图任务输入参数类型。 */
 declare interface SampleSnapshotTaskInput {
   /** 采样截图模板 ID。 */
@@ -5734,6 +6100,14 @@ declare interface SecurityGroupInfo {
   OccupiedOutputs?: string[] | null;
 }
 
+/** SourceLocation垫片配置。 */
+declare interface SegmentDeliverInfo {
+  /** 默认内容源地址。 */
+  DefaultSegmentUrl?: string;
+  /** 自定义服务器地址。 */
+  NameServers?: NameServer[];
+}
+
 /** 智能拆条片段。 */
 declare interface SegmentRecognitionItem {
   /** 置信度。 */
@@ -5804,6 +6178,14 @@ declare interface SimpleAesDrm {
   Key: string | null;
   /** 加密初始化向量(十六进制32字节字符串)。 */
   Vector?: string | null;
+}
+
+/** 线性组装频道垫片配置。 */
+declare interface SlateInfo {
+  /** source location的ID。 */
+  SourceLocationId?: string;
+  /** 对应的vod垫片内容源名称。 */
+  VodSourceName?: string;
 }
 
 /** 智能擦除模板隐私保护配置 */
@@ -6172,6 +6554,86 @@ declare interface SnapshotByTimeOffsetTemplate {
   FillType?: string;
 }
 
+/** 线性组装Location告警信息 */
+declare interface SourceAlert {
+  /** Source ID。 */
+  SourceId?: string;
+  /** Source名称。 */
+  SourceName?: string;
+  /** 告警事件码。 */
+  Code?: number;
+  /** 告警分类。 */
+  Category?: string;
+  /** 告警消息。 */
+  Message?: string;
+  /** 更新时间。 */
+  LastModifiedTime?: number;
+}
+
+/** 源信息。 */
+declare interface SourceInfo {
+  /** 名称。 */
+  Name?: string;
+  /** source类型，区分直播Live和点播Vod。 */
+  Type?: string;
+  /** 源配置。 */
+  PackageConf?: SourcePackageConf[];
+  /** ID。 */
+  Id?: string;
+  /** 创建时间戳。 */
+  CreateTime?: number;
+  /** 更新时间戳。 */
+  UpdateTime?: number;
+  /** Region。 */
+  Region?: string;
+  /** 源标签 */
+  SourceTags?: SourceTag[];
+}
+
+/** SourceLocation配置信息。 */
+declare interface SourceLocationInfo {
+  /** ID，唯一标识。 */
+  Id?: string;
+  /** SourceLocation名称。 */
+  Name?: string;
+  /** 地域。 */
+  Region?: string;
+  /** BaseUrl信息。 */
+  BaseUrl?: string;
+  /** 是否开启补片。 */
+  SegmentDeliverEnable?: boolean;
+  /** 补片配置。 */
+  SegmentDeliverConf?: SegmentDeliverInfo;
+  /** 绑定的直播source id列表。 */
+  AttachedLiveSources?: string[];
+  /** 绑定的点播source id列表。 */
+  AttachedVodSources?: string[];
+  /** source location创建时间，Unix时间戳。 */
+  CreateTime?: number;
+  /** source location最近一次修改时间，Unix时间戳。 */
+  UpdateTime?: number;
+  /** 是否开启package分发分片，默认开启。 */
+  SegmentDeliverUsePackageEnable?: boolean;
+}
+
+/** 源文件信息。 */
+declare interface SourcePackageConf {
+  /** group名称，当channel为Linear模式并且选择了vod source的时候，该group 名称和channel output的输出组名称对应。 */
+  GroupName?: string;
+  /** 类型，区分HLS和DASH，可选值：HLS、DASH。 */
+  Type?: string;
+  /** 访问路径。 */
+  Path?: string;
+}
+
+/** type SourceTag struct {	Key string `json:"Key"`	Value string `json:"Value"`} */
+declare interface SourceTag {
+  /** sourcetag的key，支持1-50位的大写字母、数字、下划线、中划线 */
+  Key?: string;
+  /** sourcetag的value，支持1-200位的字母、数字下划线、中划线、英文句号、百分号（%） */
+  Value?: string;
+}
+
 /** 指定规格任务统计数据。 */
 declare interface SpecificationDataItem {
   /** 任务规格。 */
@@ -6192,6 +6654,18 @@ declare interface SpekeDrm {
   EncryptionMethod?: string;
   /** 子流加密规则，默认 preset0preset0：全部子流使用同一个key加密；preset1：每个子流使用不同的key加密； */
   EncryptionPreset?: string;
+}
+
+/** SpliceInsertInfo。 */
+declare interface SpliceInsertInfo {
+  /** EventID。 */
+  EventID?: string;
+  /** AvailNum。 */
+  AvailNum?: string;
+  /** AvailExpected。 */
+  AvailExpected?: string;
+  /** ProgramID。 */
+  ProgramID?: string;
 }
 
 /** 媒体传输的地区信息。 */
@@ -6654,6 +7128,32 @@ declare interface TextWatermarkTemplateInputForUpdate {
   TextContent?: string;
 }
 
+/** 线性组装频道时移配置信息。 */
+declare interface TimeShiftInfo {
+  /** 回看窗口，单位秒。 */
+  TimeWindows?: number;
+}
+
+/** TimeSignalInfo。 */
+declare interface TimeSignalInfo {
+  /** EventID。 */
+  EventID?: string;
+  /** UPIDType。 */
+  UPIDType?: string;
+  /** UPID。 */
+  UPID?: string;
+  /** TypeID。 */
+  TypeID?: string;
+  /** Num。 */
+  Num?: string;
+  /** Expected。 */
+  Expected?: string;
+  /** SubsegmentNum。 */
+  SubsegmentNum?: string;
+  /** SubsegmentsExpected。 */
+  SubsegmentsExpected?: string;
+}
+
 /** 媒体质检的检测策略。 */
 declare interface TimeSpotCheck {
   /** 每次循环检测的时长。取值范围（单位s）：- 最小值：10- 最大值：86400 */
@@ -6828,6 +7328,68 @@ declare interface UpdateSmartEraseWatermarkConfig {
 declare interface UrlInputInfo {
   /** 视频的 URL。 */
   Url: string;
+}
+
+/** 广告配置及广告类型维度下的SSAI用量详情 */
+declare interface UsageDetail {
+  /** 广告配置uniq_id */
+  UniqId?: string;
+  /** 广告配置id */
+  ChannelId?: string;
+  /** 广告配置名称 */
+  ChannelName?: string;
+  /** 广告类型 */
+  AdType?: string;
+  /** 广告请求成功数 */
+  AdRequestSuccess?: number;
+  /** 广告请求失败数 */
+  AdRequestFail?: number;
+  /** 广告曝光数 */
+  Impression?: number;
+  /** 广告开始播放数 */
+  Start?: number;
+  /** 广告播放到1/4处数 */
+  FirstQuarter?: number;
+  /** 广告播放到1/2处数 */
+  Midpoint?: number;
+  /** 广告播放到3/4处数 */
+  ThirdQuarter?: number;
+  /** 广告播放完成数 */
+  Complete?: number;
+  /** 中贴广告标记时间 */
+  AdMarkerTime?: number;
+  /** 中贴个性化替换时间 */
+  ReplacedTime?: number;
+  /** 中贴个性化广告填充率 */
+  MidFillRate?: number;
+  /** 前贴广告请求数 */
+  PreReqNum?: number;
+  /** 前贴广告替换数 */
+  PreReplacedNum?: number;
+  /** 前贴广告替换率 */
+  PreReplaceRate?: number;
+  /** 在清单中发现了广告标记次数 */
+  ADMarkerFound?: number;
+  /** 向ADS请求广告次数 */
+  MakeAdsRequest?: number;
+  /** 从ADS收到VAST返回次数 */
+  VASTResponse?: number;
+  /** 成功填充了广告次数 */
+  FilledAvail?: number;
+  /** 执行广告替换时遇到问题次数 */
+  WarningNoAd?: number;
+  /** ADS返回超时次数 */
+  ErrorAdsTimeout?: number;
+  /** ADS 返回了一个空的 VAST 响应次数 */
+  EmptyVASTResponse?: number;
+  /** ADS 返回了一个空的VMAP 响应次数 */
+  EmptyVMAPResponse?: number;
+  /** 日期 */
+  Date?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
 }
 
 /** 用户自定义语音审核任务控制参数 */
@@ -7274,6 +7836,22 @@ declare interface WorkflowTrigger {
   CosFileUploadTrigger?: CosFileUploadTrigger | null;
   /** 当 Type 为 AwsS3FileUpload 时必填且有效，为 AWS S3 触发规则。注意：目前AWS的S3、对应触发队列SQS、回调队列SQS的秘钥需要一致。 */
   AwsS3FileUploadTrigger?: AwsS3FileUploadTrigger | null;
+}
+
+declare interface ActivateSSAIRequest {
+}
+
+declare interface ActivateSSAIResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ActivateStreamPackageRequest {
+}
+
+declare interface ActivateStreamPackageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface BatchDeleteStreamLinkFlowRequest {
@@ -7918,6 +8496,110 @@ declare interface CreateStreamLinkSecurityGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateStreamPackageLinearAssemblyChannelRequest {
+  /** Channel名称。 */
+  Name: string;
+  /** 定义channel的特性，Standard支持直播和点播源，Basic只支持点播源编排，可选值：Standard、Basic。 */
+  Tier?: string;
+  /** 频道中的source切换的模式，分Linear线性和Loop循环，Basic只支持Linear，Standard两种都支持。 */
+  PlaybackMode?: string;
+  /** 时移开启开关，只有Tier为Standard时有效。 */
+  TimeShiftEnable?: boolean;
+  /** 时移配置，时移开关开启时有效。 */
+  TimeShiftConf?: TimeShiftInfo;
+  /** 垫片配置，只有PlaybackMode为Linear时有效。 */
+  SlateConf?: SlateInfo;
+  /** 输出配置。 */
+  Outputs?: OutputReq[];
+}
+
+declare interface CreateStreamPackageLinearAssemblyChannelResponse {
+  /** channel信息。 */
+  Info?: LinearAssemblyChannelInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateStreamPackageLinearAssemblyProgramRequest {
+  /** Program名称。 */
+  Name: string;
+  /** 绑定的channel。 */
+  AttachedChannel: string;
+  /** 编排的目标source的类型，分直播Live和点播VOD。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD */
+  SourceType?: string;
+  /** 关联的source location。 */
+  SourceLocationId?: string;
+  /** 关联的直播or点播，source名称，location下全局唯一。 */
+  SourceName?: string;
+  /** PlaybackConf。 */
+  PlaybackConf?: PlaybackInfoReq;
+  /** AdBreaks，只有source类型为Vod时有效。 */
+  AdBreaks?: AdBreakInfo[];
+}
+
+declare interface CreateStreamPackageLinearAssemblyProgramResponse {
+  /** channel信息。 */
+  Info?: LinearAssemblyProgramInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateStreamPackageSSAIChannelRequest {
+  /** 广告插入配置名称，全局唯一，不能与其他频道重复。 */
+  Name: string;
+  /** 源流地址前缀 */
+  ContentSource: string;
+  /** 广告插入配置 */
+  SSAIInfo: SSAIConf;
+}
+
+declare interface CreateStreamPackageSSAIChannelResponse {
+  /** 创建的广告插入配置信息。 */
+  Info?: SSAIChannelInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateStreamPackageSourceLocationRequest {
+  /** SourceLocation名称。 */
+  Name: string;
+  /** 基准URL。 */
+  BaseUrl: string;
+  /** 是否开启补片。 */
+  SegmentDeliverEnable?: boolean;
+  /** 补片配置。 */
+  SegmentDeliverConf?: SegmentDeliverInfo;
+  /** 是否开启package分发分片，默认开启。 */
+  SegmentDeliverUsePackageEnable?: boolean;
+}
+
+declare interface CreateStreamPackageSourceLocationResponse {
+  /** SourceLocation信息。 */
+  Info?: SourceLocationInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateStreamPackageSourceRequest {
+  /** 该source所属的location id，必填且唯一绑定一个location。 */
+  AttachedLocation: string;
+  /** Source名称，在location下面全局唯一。 */
+  Name: string;
+  /** 区分直播Live和点播VOD source类型，可选值：Live、VOD。 */
+  Type: string;
+  /** source具体配置。 */
+  PackageConfs?: SourcePackageConf[];
+  /** sourcetag标签，ADS可以根据Source Tag信息，返回更精准的广告 */
+  SourceTags?: SourceTag[];
+}
+
+declare interface CreateStreamPackageSourceResponse {
+  /** Source信息。 */
+  Info?: SourceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSubtitleEmbedTemplateRequest {
   /** 字幕压制模板名称长度限制：64 个字符。 */
   Name: string;
@@ -8274,6 +8956,88 @@ declare interface DeleteStreamLinkSecurityGroupRequest {
 }
 
 declare interface DeleteStreamLinkSecurityGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyChannelRequest {
+  /** 频道id。 */
+  Id: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyChannelsRequest {
+  /** 频道id列表。 */
+  Ids: string[];
+}
+
+declare interface DeleteStreamPackageLinearAssemblyChannelsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyProgramRequest {
+  /** Program id。 */
+  Id: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyProgramResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyProgramsByChannelRequest {
+  /** 频道的ID */
+  ChannelID: string;
+  /** 需要删除的Id数组 */
+  IDs: string[];
+}
+
+declare interface DeleteStreamPackageLinearAssemblyProgramsByChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageLinearAssemblyProgramsRequest {
+  /** Program id列表。 */
+  Ids: string[];
+}
+
+declare interface DeleteStreamPackageLinearAssemblyProgramsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageSSAIChannelRequest {
+  /** 需要删除的广告插入配置ID。 */
+  ID: string;
+}
+
+declare interface DeleteStreamPackageSSAIChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageSourceLocationRequest {
+  /** SourceLocation Id。 */
+  Id: string;
+}
+
+declare interface DeleteStreamPackageSourceLocationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteStreamPackageSourceRequest {
+  /** Source Id。 */
+  Id: string;
+}
+
+declare interface DeleteStreamPackageSourceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8686,6 +9450,16 @@ declare interface DescribeLiveRecordTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMDPMPSUserInfoRequest {
+}
+
+declare interface DescribeMDPMPSUserInfoResponse {
+  /** 用户状态，取值为： InvalidMpsUser：未开通mps；Normal：正常 ； Closed：下线； Arrearage：欠费停服 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMediaMetaDataRequest {
   /** 需要获取元信息的文件输入信息。 */
   InputInfo: MediaInputInfo;
@@ -8766,6 +9540,16 @@ declare interface DescribeQualityControlTemplatesResponse {
   TotalCount?: number;
   /** 媒体质检模板详情列表。 */
   QualityControlTemplateSet?: QualityControlTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSSAIActivateStateRequest {
+}
+
+declare interface DescribeSSAIActivateStateResponse {
+  /** SSAI开通状态，0表示正常开通，-1表示未开通 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9126,6 +9910,290 @@ declare interface DescribeStreamLinkSecurityGroupsRequest {
 declare interface DescribeStreamLinkSecurityGroupsResponse {
   /** 安全组信息列表。 */
   Infos?: SecurityGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageActivateStateRequest {
+}
+
+declare interface DescribeStreamPackageActivateStateResponse {
+  /** 用户已激活为0，否则为非0。 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyChannelAlertsRequest {
+  /** 频道ID。 */
+  ChannelId: string;
+  /** 查询开始时间，Unix时间戳，支持最近七天的查询。 */
+  StartTime?: number;
+  /** 查询结束时间，Unix时间戳，支持最近七天的查询。 */
+  EndTime?: number;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyChannelAlertsResponse {
+  /** 频道告警信息。 */
+  Infos?: ChannelAlertResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyChannelRequest {
+  /** 频道id。 */
+  Id: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyChannelResponse {
+  /** Channel信息。 */
+  Info?: LinearAssemblyChannelInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyChannelsRequest {
+  /** 页数，取值范围为[1, 1000]。 */
+  PageNum?: number;
+  /** 每页大小，取值范围为[1, 1000]。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyChannelsResponse {
+  /** Channel列表。 */
+  Infos?: LinearAssemblyChannelInfo[] | null;
+  /** 页数。 */
+  PageNum?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 总数量。 */
+  TotalNum?: number;
+  /** 总页数。 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyProgramRequest {
+  /** program id。 */
+  Id: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyProgramResponse {
+  /** Program信息。 */
+  Info?: LinearAssemblyProgramInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyProgramSchedulesRequest {
+  /** 查询某个Channel下面的所有Program。 */
+  ChannelId: string;
+  /** 窗口时长信息，单位秒。最大7776000s */
+  TimeWindow?: number;
+  /** 页数，取值范围为[1, 10000]。 */
+  PageNum?: number;
+  /** 每页大小，取值范围为[1, 1000]。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyProgramSchedulesResponse {
+  /** Program的调度列表。 */
+  Infos?: LinearAssemblyProgramInfo[] | null;
+  /** 页数。 */
+  PageNum?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 总数量。 */
+  TotalNum?: number;
+  /** 总页数。 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyProgramsRequest {
+  /** 页数，取值范围为[1, 1000]。 */
+  PageNum?: number;
+  /** 每页大小，取值范围为[1, 10000]。 */
+  PageSize?: number;
+  /** 查询某个Channel下面的所有Program。 */
+  ChannelId?: string;
+  /** 按Name过滤，模糊匹配 */
+  Name?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyProgramsResponse {
+  /** Program列表。 */
+  Infos?: LinearAssemblyProgramInfo[] | null;
+  /** 页数。 */
+  PageNum?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 总数量。 */
+  TotalNum?: number;
+  /** 总页数。 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageLinearAssemblyUsageRequest {
+  /** 查询开始时间 */
+  StartTime?: string;
+  /** 查询结束时间 */
+  EndTime?: string;
+  /** 维度，可选值：summary对应false；detail 对应true */
+  Dimension?: boolean;
+  /** 要查询的频道ID列表 */
+  ChannelIds?: string[];
+  /** 要查询的频道类型，可选Basic/Standard；若为空，默认查询所有类型 */
+  ChannelTiers?: string[];
+}
+
+declare interface DescribeStreamPackageLinearAssemblyUsageResponse {
+  /** 线性组装用量详情 */
+  Info?: AssemblyUsageInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSSAIChannelRequest {
+  /** 广告插入配置ID。 */
+  ID: string;
+}
+
+declare interface DescribeStreamPackageSSAIChannelResponse {
+  /** 广告插入配置信息。 */
+  Info?: SSAIChannelInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSSAIChannelsRequest {
+  /** 页码，默认1。 */
+  PageNum?: number;
+  /** 每页大小，默认10。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamPackageSSAIChannelsResponse {
+  /** 广告插入配置信息。 */
+  Infos?: SSAIChannelInfo[];
+  /** 页码。 */
+  PageNum?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 总条目数。 */
+  TotalNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSSAIUsageRequest {
+  /** 起始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 需要查询的channel_id */
+  ChannelIds?: string[];
+  /** 需要查询的广告类型。可选Pre-roll/Mid-roll/VOD；若为空，默认查询所有类型 */
+  Types?: string[];
+  /** 维度，可选值：summary对应false；detail 对应true */
+  Dimension?: boolean;
+}
+
+declare interface DescribeStreamPackageSSAIUsageResponse {
+  /** SSAI用量信息 */
+  Info?: SSAIUsageInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSourceAlertsRequest {
+  /** Source ID。 */
+  SourceId: string;
+  /** 查询开始时间，Unix时间戳，支持最近七天的查询。 */
+  StartTime?: number;
+  /** 查询结束时间，Unix时间戳，支持最近七天的查询。 */
+  EndTime?: number;
+}
+
+declare interface DescribeStreamPackageSourceAlertsResponse {
+  /** Source告警信息。 */
+  Infos?: SourceAlert[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSourceLocationRequest {
+  /** SourceLocation Id。 */
+  Id: string;
+}
+
+declare interface DescribeStreamPackageSourceLocationResponse {
+  /** SourceLocation信息。 */
+  Info?: SourceLocationInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSourceLocationsRequest {
+  /** 页数，取值范围为[1, 1000]。 */
+  PageNum?: number;
+  /** 每页大小，取值范围为[1, 1000]。 */
+  PageSize?: number;
+}
+
+declare interface DescribeStreamPackageSourceLocationsResponse {
+  /** SourceLocation列表。 */
+  Infos?: SourceLocationInfo[] | null;
+  /** 页数。 */
+  PageNum?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 总数量。 */
+  TotalNum?: number;
+  /** 总页数。 */
+  TotalPage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSourceRequest {
+  /** Source Id。 */
+  Id: string;
+}
+
+declare interface DescribeStreamPackageSourceResponse {
+  /** Source信息。 */
+  Info?: SourceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageSourcesRequest {
+  /** 页数，取值范围为[1, 1000]。 */
+  PageNum?: number;
+  /** 每页大小，取值范围为[1, 1000]。 */
+  PageSize?: number;
+  /** Location Id，查询该location下面所有source。 */
+  LocationId?: string;
+  /** Source的类型，分直播Live和点播VOD。 */
+  Type?: string;
+}
+
+declare interface DescribeStreamPackageSourcesResponse {
+  /** Source列表。 */
+  Infos?: SourceInfo[] | null;
+  /** 页数。 */
+  PageNum?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 总数量。 */
+  TotalNum?: number;
+  /** 总页数。 */
+  TotalPage?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9988,6 +11056,106 @@ declare interface ModifyStreamLinkSecurityGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStreamPackageLinearAssemblyChannelRequest {
+  /** Channel Id。 */
+  Id: string;
+  /** 修改后的名称。 */
+  Name?: string;
+  /** 定义channel的特性，Standard支持直播和点播源，Basic只支持点播源编排。 */
+  Tier?: string;
+  /** 频道中的source切换的模式，分Linear线性和Loop循环，直播只支持Linear。 */
+  PlaybackMode?: string;
+  /** 时移开启开关。 */
+  TimeShiftEnable?: boolean;
+  /** 时移配置。 */
+  TimeShiftConf?: TimeShiftInfo;
+  /** 垫片配置。 */
+  SlateConf?: SlateInfo;
+  /** 输出配置。 */
+  Outputs?: OutputInfo[];
+}
+
+declare interface ModifyStreamPackageLinearAssemblyChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamPackageLinearAssemblyProgramRequest {
+  /** Program Id。 */
+  Id: string;
+  /** 修改后的名称。 */
+  Name?: string;
+  /** 编排的目标source的类型，分直播和点播。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD */
+  SourceType?: string;
+  /** 关联的source location。 */
+  SourceLocationId?: string;
+  /** 关联的直播or点播，source名称，location下全局唯一。 */
+  SourceName?: string;
+  /** PlaybackConf。 */
+  PlaybackConf?: PlaybackInfoReq;
+  /** AdBreaks。 */
+  AdBreaks?: AdBreakInfo[];
+}
+
+declare interface ModifyStreamPackageLinearAssemblyProgramResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamPackageSSAIChannelRequest {
+  /** 广告插入配置名称，全局唯一，不能与其他频道重复。 */
+  Name: string;
+  /** 通配广告源地址。 */
+  ContentSource: string;
+  /** 广告插入配置信息。 */
+  SSAIInfo: SSAIConf;
+  /** 广告插入配置ID。 */
+  ID: string;
+}
+
+declare interface ModifyStreamPackageSSAIChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamPackageSourceLocationRequest {
+  /** SourceLocation Id。 */
+  Id: string;
+  /** 修改后的名称。 */
+  Name?: string;
+  /** 基准URL。 */
+  BaseUrl?: string;
+  /** 是否开启补片。 */
+  SegmentDeliverEnable?: boolean;
+  /** 补片配置。 */
+  SegmentDeliverConf?: SegmentDeliverInfo;
+  /** 是否开启package分发分片，默认开启。 */
+  SegmentDeliverUsePackageEnable?: boolean;
+}
+
+declare interface ModifyStreamPackageSourceLocationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyStreamPackageSourceRequest {
+  /** Source Id。 */
+  Id: string;
+  /** 修改后的名称。 */
+  Name?: string;
+  /** 区分直播Live和点播VOD source类型。 */
+  Type?: string;
+  /** source配置。 */
+  PackageConfs?: SourcePackageConf[];
+  /** ADS可以根据Source Tag信息，返回更精准的广告。 */
+  SourceTags?: SourceTag[];
+}
+
+declare interface ModifyStreamPackageSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySubtitleEmbedTemplateRequest {
   /** 字幕压制模板唯一标识 */
   Definition: number;
@@ -10332,12 +11500,32 @@ declare interface StartStreamLinkFlowResponse {
   RequestId?: string;
 }
 
+declare interface StartStreamPackageLinearAssemblyChannelRequest {
+  /** Channel ID。 */
+  Id: string;
+}
+
+declare interface StartStreamPackageLinearAssemblyChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopStreamLinkFlowRequest {
   /** 流Id。 */
   FlowId: string;
 }
 
 declare interface StopStreamLinkFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopStreamPackageLinearAssemblyChannelRequest {
+  /** Channel ID。 */
+  Id: string;
+}
+
+declare interface StopStreamPackageLinearAssemblyChannelResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10419,6 +11607,10 @@ declare interface WithdrawsWatermarkResponse {
 /** {@link Mps 媒体处理} */
 declare interface Mps {
   (): Versions;
+  /** 开通SSAI {@link ActivateSSAIRequest} {@link ActivateSSAIResponse} */
+  ActivateSSAI(data?: ActivateSSAIRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateSSAIResponse>;
+  /** 创建媒体封装用户 {@link ActivateStreamPackageRequest} {@link ActivateStreamPackageResponse} */
+  ActivateStreamPackage(data?: ActivateStreamPackageRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateStreamPackageResponse>;
   /** 批量删除媒体传输流 {@link BatchDeleteStreamLinkFlowRequest} {@link BatchDeleteStreamLinkFlowResponse} */
   BatchDeleteStreamLinkFlow(data: BatchDeleteStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteStreamLinkFlowResponse>;
   /** 批量输入发起媒体处理 {@link BatchProcessMediaRequest} {@link BatchProcessMediaResponse} */
@@ -10477,6 +11669,16 @@ declare interface Mps {
   CreateStreamLinkOutputInfo(data: CreateStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkOutputInfoResponse>;
   /** 创建安全组 {@link CreateStreamLinkSecurityGroupRequest} {@link CreateStreamLinkSecurityGroupResponse} */
   CreateStreamLinkSecurityGroup(data: CreateStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamLinkSecurityGroupResponse>;
+  /** 创建线性组装频道 {@link CreateStreamPackageLinearAssemblyChannelRequest} {@link CreateStreamPackageLinearAssemblyChannelResponse} */
+  CreateStreamPackageLinearAssemblyChannel(data: CreateStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamPackageLinearAssemblyChannelResponse>;
+  /** 创建线性组装Program {@link CreateStreamPackageLinearAssemblyProgramRequest} {@link CreateStreamPackageLinearAssemblyProgramResponse} */
+  CreateStreamPackageLinearAssemblyProgram(data: CreateStreamPackageLinearAssemblyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamPackageLinearAssemblyProgramResponse>;
+  /** 创建SSAI广告插入配置 {@link CreateStreamPackageSSAIChannelRequest} {@link CreateStreamPackageSSAIChannelResponse} */
+  CreateStreamPackageSSAIChannel(data: CreateStreamPackageSSAIChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamPackageSSAIChannelResponse>;
+  /** 创建线性组装Source {@link CreateStreamPackageSourceRequest} {@link CreateStreamPackageSourceResponse} */
+  CreateStreamPackageSource(data: CreateStreamPackageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamPackageSourceResponse>;
+  /** 创建线性组装SourceLocation {@link CreateStreamPackageSourceLocationRequest} {@link CreateStreamPackageSourceLocationResponse} */
+  CreateStreamPackageSourceLocation(data: CreateStreamPackageSourceLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStreamPackageSourceLocationResponse>;
   /** 创建字幕压制模板 {@link CreateSubtitleEmbedTemplateRequest} {@link CreateSubtitleEmbedTemplateResponse} */
   CreateSubtitleEmbedTemplate(data: CreateSubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSubtitleEmbedTemplateResponse>;
   /** 创建转码模板 {@link CreateTranscodeTemplateRequest} {@link CreateTranscodeTemplateResponse} */
@@ -10533,6 +11735,22 @@ declare interface Mps {
   DeleteStreamLinkOutput(data: DeleteStreamLinkOutputRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkOutputResponse>;
   /** 删除安全组 {@link DeleteStreamLinkSecurityGroupRequest} {@link DeleteStreamLinkSecurityGroupResponse} */
   DeleteStreamLinkSecurityGroup(data: DeleteStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamLinkSecurityGroupResponse>;
+  /** 删除线性组装Channel {@link DeleteStreamPackageLinearAssemblyChannelRequest} {@link DeleteStreamPackageLinearAssemblyChannelResponse} */
+  DeleteStreamPackageLinearAssemblyChannel(data: DeleteStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageLinearAssemblyChannelResponse>;
+  /** 批量删除线性组装Channel {@link DeleteStreamPackageLinearAssemblyChannelsRequest} {@link DeleteStreamPackageLinearAssemblyChannelsResponse} */
+  DeleteStreamPackageLinearAssemblyChannels(data: DeleteStreamPackageLinearAssemblyChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageLinearAssemblyChannelsResponse>;
+  /** 删除线性组装Program {@link DeleteStreamPackageLinearAssemblyProgramRequest} {@link DeleteStreamPackageLinearAssemblyProgramResponse} */
+  DeleteStreamPackageLinearAssemblyProgram(data: DeleteStreamPackageLinearAssemblyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageLinearAssemblyProgramResponse>;
+  /** 批量删除线性组装Program {@link DeleteStreamPackageLinearAssemblyProgramsRequest} {@link DeleteStreamPackageLinearAssemblyProgramsResponse} */
+  DeleteStreamPackageLinearAssemblyPrograms(data: DeleteStreamPackageLinearAssemblyProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageLinearAssemblyProgramsResponse>;
+  /** 批量删除同一Channel的线性组装Programs {@link DeleteStreamPackageLinearAssemblyProgramsByChannelRequest} {@link DeleteStreamPackageLinearAssemblyProgramsByChannelResponse} */
+  DeleteStreamPackageLinearAssemblyProgramsByChannel(data: DeleteStreamPackageLinearAssemblyProgramsByChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageLinearAssemblyProgramsByChannelResponse>;
+  /** 删除广告插入配置 {@link DeleteStreamPackageSSAIChannelRequest} {@link DeleteStreamPackageSSAIChannelResponse} */
+  DeleteStreamPackageSSAIChannel(data: DeleteStreamPackageSSAIChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageSSAIChannelResponse>;
+  /** 删除线性组装Source {@link DeleteStreamPackageSourceRequest} {@link DeleteStreamPackageSourceResponse} */
+  DeleteStreamPackageSource(data: DeleteStreamPackageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageSourceResponse>;
+  /** 删除线性组装SourceLocation {@link DeleteStreamPackageSourceLocationRequest} {@link DeleteStreamPackageSourceLocationResponse} */
+  DeleteStreamPackageSourceLocation(data: DeleteStreamPackageSourceLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStreamPackageSourceLocationResponse>;
   /** 删除字幕压制模板 {@link DeleteSubtitleEmbedTemplateRequest} {@link DeleteSubtitleEmbedTemplateResponse} */
   DeleteSubtitleEmbedTemplate(data: DeleteSubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubtitleEmbedTemplateResponse>;
   /** 删除转码模板 {@link DeleteTranscodeTemplateRequest} {@link DeleteTranscodeTemplateResponse} */
@@ -10573,6 +11791,8 @@ declare interface Mps {
   DescribeImageTaskDetail(data: DescribeImageTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskDetailResponse>;
   /** 获取直播录制模板 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
   DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
+  /** 查询mdp用户开通mps信息 {@link DescribeMDPMPSUserInfoRequest} {@link DescribeMDPMPSUserInfoResponse} */
+  DescribeMDPMPSUserInfo(data?: DescribeMDPMPSUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMDPMPSUserInfoResponse>;
   /** 获取媒体元信息 {@link DescribeMediaMetaDataRequest} {@link DescribeMediaMetaDataResponse} */
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
   /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
@@ -10581,6 +11801,8 @@ declare interface Mps {
   DescribeProcessImageTemplates(data?: DescribeProcessImageTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessImageTemplatesResponse>;
   /** 获取媒体质检模板列表 {@link DescribeQualityControlTemplatesRequest} {@link DescribeQualityControlTemplatesResponse} */
   DescribeQualityControlTemplates(data?: DescribeQualityControlTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQualityControlTemplatesResponse>;
+  /** 查询SSAI开通状态 {@link DescribeSSAIActivateStateRequest} {@link DescribeSSAIActivateStateResponse} */
+  DescribeSSAIActivateState(data?: DescribeSSAIActivateStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSAIActivateStateResponse>;
   /** 获取采样截图模板列表 {@link DescribeSampleSnapshotTemplatesRequest} {@link DescribeSampleSnapshotTemplatesResponse} */
   DescribeSampleSnapshotTemplates(data?: DescribeSampleSnapshotTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSampleSnapshotTemplatesResponse>;
   /** 查询编排 {@link DescribeSchedulesRequest} {@link DescribeSchedulesResponse} */
@@ -10617,6 +11839,38 @@ declare interface Mps {
   DescribeStreamLinkRegions(data?: DescribeStreamLinkRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkRegionsResponse>;
   /** 批量查询安全组信息 {@link DescribeStreamLinkSecurityGroupsRequest} {@link DescribeStreamLinkSecurityGroupsResponse} */
   DescribeStreamLinkSecurityGroups(data?: DescribeStreamLinkSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamLinkSecurityGroupsResponse>;
+  /** 查询媒体封装用户开通情况 {@link DescribeStreamPackageActivateStateRequest} {@link DescribeStreamPackageActivateStateResponse} */
+  DescribeStreamPackageActivateState(data?: DescribeStreamPackageActivateStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageActivateStateResponse>;
+  /** 查询线性组装Channel信息 {@link DescribeStreamPackageLinearAssemblyChannelRequest} {@link DescribeStreamPackageLinearAssemblyChannelResponse} */
+  DescribeStreamPackageLinearAssemblyChannel(data: DescribeStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyChannelResponse>;
+  /** 查询线性组装频道告警信息 {@link DescribeStreamPackageLinearAssemblyChannelAlertsRequest} {@link DescribeStreamPackageLinearAssemblyChannelAlertsResponse} */
+  DescribeStreamPackageLinearAssemblyChannelAlerts(data: DescribeStreamPackageLinearAssemblyChannelAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyChannelAlertsResponse>;
+  /** 查询线性组装Channel信息列表 {@link DescribeStreamPackageLinearAssemblyChannelsRequest} {@link DescribeStreamPackageLinearAssemblyChannelsResponse} */
+  DescribeStreamPackageLinearAssemblyChannels(data?: DescribeStreamPackageLinearAssemblyChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyChannelsResponse>;
+  /** 查询线性组装Program信息 {@link DescribeStreamPackageLinearAssemblyProgramRequest} {@link DescribeStreamPackageLinearAssemblyProgramResponse} */
+  DescribeStreamPackageLinearAssemblyProgram(data: DescribeStreamPackageLinearAssemblyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyProgramResponse>;
+  /** 查询线性组装Programl组装调度信息列表 {@link DescribeStreamPackageLinearAssemblyProgramSchedulesRequest} {@link DescribeStreamPackageLinearAssemblyProgramSchedulesResponse} */
+  DescribeStreamPackageLinearAssemblyProgramSchedules(data: DescribeStreamPackageLinearAssemblyProgramSchedulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyProgramSchedulesResponse>;
+  /** 查询线性组装Programl信息列表 {@link DescribeStreamPackageLinearAssemblyProgramsRequest} {@link DescribeStreamPackageLinearAssemblyProgramsResponse} */
+  DescribeStreamPackageLinearAssemblyPrograms(data?: DescribeStreamPackageLinearAssemblyProgramsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyProgramsResponse>;
+  /** 查询线性组装频道用量信息 {@link DescribeStreamPackageLinearAssemblyUsageRequest} {@link DescribeStreamPackageLinearAssemblyUsageResponse} */
+  DescribeStreamPackageLinearAssemblyUsage(data?: DescribeStreamPackageLinearAssemblyUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageLinearAssemblyUsageResponse>;
+  /** 查询广告插入配置 {@link DescribeStreamPackageSSAIChannelRequest} {@link DescribeStreamPackageSSAIChannelResponse} */
+  DescribeStreamPackageSSAIChannel(data: DescribeStreamPackageSSAIChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSSAIChannelResponse>;
+  /** 批量查询广告插入配置 {@link DescribeStreamPackageSSAIChannelsRequest} {@link DescribeStreamPackageSSAIChannelsResponse} */
+  DescribeStreamPackageSSAIChannels(data?: DescribeStreamPackageSSAIChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSSAIChannelsResponse>;
+  /** 查询SSAI用量信息 {@link DescribeStreamPackageSSAIUsageRequest} {@link DescribeStreamPackageSSAIUsageResponse} */
+  DescribeStreamPackageSSAIUsage(data?: DescribeStreamPackageSSAIUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSSAIUsageResponse>;
+  /** 查询线性组装Source信息 {@link DescribeStreamPackageSourceRequest} {@link DescribeStreamPackageSourceResponse} */
+  DescribeStreamPackageSource(data: DescribeStreamPackageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSourceResponse>;
+  /** 查询线性组装Source告警信息 {@link DescribeStreamPackageSourceAlertsRequest} {@link DescribeStreamPackageSourceAlertsResponse} */
+  DescribeStreamPackageSourceAlerts(data: DescribeStreamPackageSourceAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSourceAlertsResponse>;
+  /** 查询线性组装SourceLocation信息 {@link DescribeStreamPackageSourceLocationRequest} {@link DescribeStreamPackageSourceLocationResponse} */
+  DescribeStreamPackageSourceLocation(data: DescribeStreamPackageSourceLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSourceLocationResponse>;
+  /** 查询线性组装SourceLocation信息列表 {@link DescribeStreamPackageSourceLocationsRequest} {@link DescribeStreamPackageSourceLocationsResponse} */
+  DescribeStreamPackageSourceLocations(data?: DescribeStreamPackageSourceLocationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSourceLocationsResponse>;
+  /** 查询线性组装Source信息列表 {@link DescribeStreamPackageSourcesRequest} {@link DescribeStreamPackageSourcesResponse} */
+  DescribeStreamPackageSources(data?: DescribeStreamPackageSourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageSourcesResponse>;
   /** 获取字幕压制模板列表 {@link DescribeSubtitleEmbedTemplatesRequest} {@link DescribeSubtitleEmbedTemplatesResponse} */
   DescribeSubtitleEmbedTemplates(data?: DescribeSubtitleEmbedTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubtitleEmbedTemplatesResponse>;
   /** 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
@@ -10701,6 +11955,16 @@ declare interface Mps {
   ModifyStreamLinkOutputInfo(data: ModifyStreamLinkOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkOutputInfoResponse>;
   /** 更新安全组 {@link ModifyStreamLinkSecurityGroupRequest} {@link ModifyStreamLinkSecurityGroupResponse} */
   ModifyStreamLinkSecurityGroup(data: ModifyStreamLinkSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamLinkSecurityGroupResponse>;
+  /** 修改线性组装Channel配置 {@link ModifyStreamPackageLinearAssemblyChannelRequest} {@link ModifyStreamPackageLinearAssemblyChannelResponse} */
+  ModifyStreamPackageLinearAssemblyChannel(data: ModifyStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamPackageLinearAssemblyChannelResponse>;
+  /** 修改线性组装Program配置 {@link ModifyStreamPackageLinearAssemblyProgramRequest} {@link ModifyStreamPackageLinearAssemblyProgramResponse} */
+  ModifyStreamPackageLinearAssemblyProgram(data: ModifyStreamPackageLinearAssemblyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamPackageLinearAssemblyProgramResponse>;
+  /** 修改广告插入配置 {@link ModifyStreamPackageSSAIChannelRequest} {@link ModifyStreamPackageSSAIChannelResponse} */
+  ModifyStreamPackageSSAIChannel(data: ModifyStreamPackageSSAIChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamPackageSSAIChannelResponse>;
+  /** 修改线性组装Source配置 {@link ModifyStreamPackageSourceRequest} {@link ModifyStreamPackageSourceResponse} */
+  ModifyStreamPackageSource(data: ModifyStreamPackageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamPackageSourceResponse>;
+  /** 修改线性组装SourceLocation配置 {@link ModifyStreamPackageSourceLocationRequest} {@link ModifyStreamPackageSourceLocationResponse} */
+  ModifyStreamPackageSourceLocation(data: ModifyStreamPackageSourceLocationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStreamPackageSourceLocationResponse>;
   /** 修改字幕压制模板 {@link ModifySubtitleEmbedTemplateRequest} {@link ModifySubtitleEmbedTemplateResponse} */
   ModifySubtitleEmbedTemplate(data: ModifySubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySubtitleEmbedTemplateResponse>;
   /** 修改转码模板 {@link ModifyTranscodeTemplateRequest} {@link ModifyTranscodeTemplateResponse} */
@@ -10727,8 +11991,12 @@ declare interface Mps {
   ResetWorkflow(data: ResetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<ResetWorkflowResponse>;
   /** 开启媒体传输流 {@link StartStreamLinkFlowRequest} {@link StartStreamLinkFlowResponse} */
   StartStreamLinkFlow(data: StartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamLinkFlowResponse>;
+  /** 启动线性组装频道 {@link StartStreamPackageLinearAssemblyChannelRequest} {@link StartStreamPackageLinearAssemblyChannelResponse} */
+  StartStreamPackageLinearAssemblyChannel(data: StartStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<StartStreamPackageLinearAssemblyChannelResponse>;
   /** 停止媒体传输流 {@link StopStreamLinkFlowRequest} {@link StopStreamLinkFlowResponse} */
   StopStreamLinkFlow(data: StopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamLinkFlowResponse>;
+  /** 停止线性组装频道 {@link StopStreamPackageLinearAssemblyChannelRequest} {@link StopStreamPackageLinearAssemblyChannelResponse} */
+  StopStreamPackageLinearAssemblyChannel(data: StopStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamPackageLinearAssemblyChannelResponse>;
   /** 同步配音 {@link SyncDubbingRequest} {@link SyncDubbingResponse} */
   SyncDubbing(data?: SyncDubbingRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDubbingResponse>;
   /** 文本翻译 {@link TextTranslationRequest} {@link TextTranslationResponse} */

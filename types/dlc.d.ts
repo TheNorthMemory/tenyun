@@ -158,14 +158,16 @@ declare interface Column {
   Nullable?: string;
   /** 字段位置，小的在前 */
   Position?: number;
-  /** 字段创建时间 */
+  /** 字段创建时间参数格式：YYYY-MM-DD hh:mm:ss */
   CreateTime?: string;
-  /** 字段修改时间 */
+  /** 字段修改时间参数格式：YYYY-MM-DD hh:mm:ss */
   ModifiedTime?: string;
   /** 是否为分区字段 */
   IsPartition?: boolean;
   /** 数据脱敏策略信息 */
   DataMaskStrategyInfo?: DataMaskStrategyInfo | null;
+  /** 数据字段说明 */
+  TypeText?: string;
 }
 
 /** 任务公共指标 */

@@ -118,11 +118,13 @@ declare interface AvatarRoomInfo {
 declare interface AvatarScriptInfo {
   /** 数字人直播间话术 ID。 */
   ScriptId?: string;
+  /** 数字人直播间产品 ID。 */
+  ProductId?: string;
   /** 话术标题。 */
   Title?: string;
   /** 话术内容。 */
   Content?: string;
-  /** 话术状态。PENDING --未生成。PROCESSING --生成中。READY --已生成。 */
+  /** 话术状态。PENDING --未生成。PROCESSING --生成中。READY --已生成。FAILED-失败枚举值：FAILED： 失败 */
   Status?: string;
   /** 时长。单位：毫秒。 */
   Duration?: number;

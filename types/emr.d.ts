@@ -439,9 +439,9 @@ declare interface ComponentBasicRestartInfo {
 /** 计算资源高级设置 */
 declare interface ComputeResourceAdvanceParams {
   /** 节点Label数组 */
-  Labels?: TkeLabel[];
+  Labels?: TkeLabel[] | null;
   /** 节点污点 */
-  Taints?: Taint[];
+  Taints?: Taint[] | null;
   /** base64 编码的用户脚本，在初始化节点之前执行 */
   PreStartUserScript?: string;
   /** base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看 */
@@ -2204,7 +2204,7 @@ declare interface RepeatStrategy {
 declare interface Resource {
   /** 节点规格描述，如CVM.SA2。 */
   Spec: string;
-  /** 取值范围:"LOCAL_SSD" 3 //本地SSD "CLOUD_SSD" 4 //云SSD "CLOUD_PREMIUM" 5 //高效云盘"CLOUD_HSSD" 6 //增强型SSD云硬盘 "CLOUD_THROUGHPUT" 11//吞吐型云硬盘 "CLOUD_TSSD" 12 //极速型SSD云硬盘 "CLOUD_BSSD" 13 //通用型SSD云硬盘 "CLOUD_BIGDATA" 14 //大数据型云硬盘"CLOUD_HIGHIO" 15 //高IO型云硬盘 该类型字段为无效字段，实际系统盘类型会根据数据盘类型和节点类型判断，如果节点支持所选的数据盘类型，系统盘类型会跟数据盘保持一致，建议使用CreateCluster接口 */
+  /** 取值范围:&quot;LOCAL_SSD&quot; 3 //本地SSD&quot;CLOUD_SSD&quot; 4 //云SSD&quot;CLOUD_PREMIUM&quot; 5 //高效云盘&quot;CLOUD_HSSD&quot; 6 //增强型SSD云硬盘&quot;CLOUD_THROUGHPUT&quot; 11//吞吐型云硬盘&quot;CLOUD_TSSD&quot; 12 //极速型SSD云硬盘&quot;CLOUD_BSSD&quot; 13 //通用型SSD云硬盘&quot;CLOUD_BIGDATA&quot; 14 //大数据型云硬盘&quot;CLOUD_HIGHIO&quot; 15 //高IO型云硬盘 该类型字段为无效字段，实际系统盘类型会根据数据盘类型和节点类型判断，如果节点支持所选的数据盘类型，系统盘类型会跟数据盘保持一致，建议使用CreateCluster接口 */
   StorageType: number;
   /** 数据盘类型 取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。LOCAL_BASIC：表示本地盘。LOCAL_SSD：表示本地SSD。CLOUD_HSSD：表示增强型SSD云硬盘。CLOUD_THROUGHPUT：表示吞吐型云硬盘。CLOUD_TSSD：表示极速型SSD云硬盘。CLOUD_BIGDATA：表示大数据型云硬盘。CLOUD_HIGHIO：表示高IO型云硬盘。CLOUD_BSSD：表示通用型SSD云硬盘。REMOTE_SSD：表示远端SSD盘。 */
   DiskType: string;
@@ -2228,6 +2228,8 @@ declare interface Resource {
   DiskNum?: number;
   /** GPU信息 */
   GpuDesc?: string;
+  /** 分区置放群组分区数 */
+  PartitionNumber?: number;
 }
 
 /** 资源详情 */
@@ -3289,7 +3291,7 @@ declare interface CreateCloudInstanceResponse {
 }
 
 declare interface CreateClusterRequest {
-  /** EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：[产品版本名称](https://cloud.tencent.com/document/product/589/66338) */
+  /** EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：产品版本名称 */
   ProductVersion: string;
   /** 是否开启节点高可用。取值范围：true：表示开启节点高可用。false：表示不开启节点高可用。 */
   EnableSupportHAFlag: boolean;
@@ -3303,11 +3305,11 @@ declare interface CreateClusterRequest {
   SceneSoftwareConfig: SceneSoftwareConfig;
   /** 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。 */
+  /** 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 DescribeSecurityGroups 的返回值中的SecurityGroupId字段来获取。 */
   SecurityGroupIds?: string[];
-  /** [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。 */
+  /** 引导操作脚本设置。 */
   ScriptBootstrapActionConfig?: ScriptBootstrapActionConfig[];
-  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808 */
+  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6---****-fae360632808 */
   ClientToken?: string;
   /** 是否开启集群Master节点公网。取值范围：NEED_MASTER_WAN：表示开启集群Master节点公网。NOT_NEED_MASTER_WAN：表示不开启。默认开启集群Master节点公网。 */
   NeedMasterWan?: string;
@@ -3315,11 +3317,11 @@ declare interface CreateClusterRequest {
   EnableRemoteLoginFlag?: boolean;
   /** 是否开启Kerberos认证。默认不开启 取值范围：true：表示开启false：表示不开启 */
   EnableKerberosFlag?: boolean;
-  /** [自定义软件配置](https://cloud.tencent.com/document/product/589/35655?from_cn_redirect=1) */
+  /** 自定义软件配置 */
   CustomConf?: string;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。 */
   Tags?: Tag[];
-  /** 分散置放群组ID列表，当前只支持指定一个。该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。 */
+  /** 分散置放群组ID列表，当前只支持指定一个。该参数可以通过调用 DescribeDisasterRecoverGroups的返回值中的DisasterRecoverGroupId字段来获取。 */
   DisasterRecoverGroupIds?: string[];
   /** 是否开启集群维度CBS加密。默认不加密 取值范围：true：表示加密false：表示不加密 */
   EnableCbsEncryptFlag?: boolean;
@@ -3341,6 +3343,8 @@ declare interface CreateClusterRequest {
   NeedCdbAudit?: number;
   /** 安全指定来源ip */
   SgIP?: string;
+  /** 分区置放群组分区 */
+  PartitionNumber?: number;
 }
 
 declare interface CreateClusterResponse {
@@ -3367,7 +3371,7 @@ declare interface CreateGroupsSTDResponse {
 declare interface CreateInstanceRequest {
   /** 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：51:表示STARROCKS-V1.4.054:表示STARROCKS-V2.0.027:表示KAFKA-V1.0.050:表示KAFKA-V2.0.016:表示EMR-V2.3.020:表示EMR-V2.5.030:表示EMR-V2.6.038:表示EMR-V2.7.025:表示EMR-V3.1.033:表示EMR-V3.2.134:表示EMR-V3.3.037:表示EMR-V3.4.044:表示EMR-V3.5.053:表示EMR-V3.6.058:表示EMR-3.6.159:表示EMR-serverless-1.0.060:表示EMR-TKE-1.1.061:表示SR-V2.1.062:表示SR-V2.1.0-SharedData63:表示SR-V2.1.0.tlinux64:表示统一元数据管理项目65:表示EMR-TKE-AI-1.0.066:表示RSS-1.0.067:表示SR-V2.2.068:表示SR-V2.2.0.tlinux69:表示EMR-AI-1.1.070:表示SR-V2.2.171:表示EMR-3.7.072:表示EMR-serverless-1.0.173:表示KAFKA-2.0.174:表示SR-V2.2.275:表示EMR-TKE-AI-1.1.076:表示EMR-V3.7.177:表示SERVERLESS-TCBASE-1.0.078:表示EMR-V3.6.279:表示STARROCKS-V2.2.280:表示EMR-AI-V1.1.1 */
   ProductId: number;
-  /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；填写实例值：hive、flink。 */
+  /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：组件版本 ；填写实例值：hive、flink。 */
   Software: string[];
   /** 是否开启节点高可用。取值范围：0：表示不开启节点高可用。1：表示开启节点高可用。 */
   SupportHA: number;
@@ -3389,13 +3393,13 @@ declare interface CreateInstanceRequest {
   COSSettings?: COSSettings;
   /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。 */
   Placement?: Placement;
-  /** 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。 */
+  /** 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 DescribeSecurityGroups 的返回值中的SecurityGroupId字段来获取。 */
   SgId?: string;
-  /** [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。 */
+  /** 引导操作脚本设置。 */
   PreExecutedFileSettings?: PreExecuteFileSettings[];
   /** 包年包月实例是否自动续费。取值范围：0：表示不自动续费。1：表示自动续费。 */
   AutoRenew?: number;
-  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280 */
+  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6---****-fae36063280 */
   ClientToken?: string;
   /** 是否开启集群Master节点公网。取值范围：NEED_MASTER_WAN：表示开启集群Master节点公网。NOT_NEED_MASTER_WAN：表示不开启。默认开启集群Master节点公网。 */
   NeedMasterWan?: string;
@@ -3407,7 +3411,7 @@ declare interface CreateInstanceRequest {
   ExtendFsField?: string;
   /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。 */
   Tags?: Tag[];
-  /** 分散置放群组ID列表，当前只支持指定一个。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/213/15486 ) 的返回值中的SecurityGroupId字段来获取。 */
+  /** 分散置放群组ID列表，当前只支持指定一个。该参数可以通过调用 DescribeSecurityGroups 的返回值中的SecurityGroupId字段来获取。 */
   DisasterRecoverGroupIds?: string[];
   /** 集群维度CBS加密盘，默认0表示不加密，1表示加密 */
   CbsEncrypt?: number;
@@ -3441,6 +3445,8 @@ declare interface CreateInstanceRequest {
   NeedCdbAudit?: number;
   /** 安全组指定来源ip */
   SgIP?: string;
+  /** 分区置放群组分区 */
+  PartitionNumber?: number;
 }
 
 declare interface CreateInstanceResponse {
@@ -5209,21 +5215,21 @@ declare interface ScaleOutClusterRequest {
   InstanceId: string;
   /** 扩容节点类型以及数量 */
   ScaleOutNodeConfig: ScaleOutNodeConfig;
-  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280 */
+  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6---****-fae36063280 */
   ClientToken?: string;
   /** 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
-  /** [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。 */
+  /** 引导操作脚本设置。 */
   ScriptBootstrapActionConfig?: ScriptBootstrapActionConfig[];
-  /** 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。 */
+  /** 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。组件名对应的映射关系表。 */
   SoftDeployInfo?: number[];
-  /** 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。 */
+  /** 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程： DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。进程名对应的映射关系表。 */
   ServiceNodeInfo?: number[];
-  /** 分散置放群组ID列表，当前只支持指定一个。该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。 */
+  /** 分散置放群组ID列表，当前只支持指定一个。该参数可以通过调用 DescribeDisasterRecoverGroups的返回值中的DisasterRecoverGroupId字段来获取。 */
   DisasterRecoverGroupIds?: string[];
   /** 扩容节点绑定标签列表。 */
   Tags?: Tag[];
-  /** 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
+  /** 扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
   HardwareSourceType?: string;
   /** Pod相关资源信息 */
   PodSpecInfo?: PodSpecInfo;
@@ -5237,7 +5243,7 @@ declare interface ScaleOutClusterRequest {
   EnableStartServiceFlag?: boolean;
   /** 规格设置 */
   ResourceSpec?: NodeResourceSpec;
-  /** 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
+  /** 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用DescribeZones 的返回值中的Zone字段来获取。 */
   Zone?: string;
   /** 子网，默认是集群创建时的子网 */
   SubnetId?: string;
@@ -5247,6 +5253,8 @@ declare interface ScaleOutClusterRequest {
   NodeMarks?: NodeMark;
   /** 扩容指定计算组名称 */
   WarehouseName?: string;
+  /** 分区置放群组分区 */
+  PartitionNumber?: number;
 }
 
 declare interface ScaleOutClusterResponse {
@@ -5275,7 +5283,7 @@ declare interface ScaleOutInstanceRequest {
   InstanceId: string;
   /** 实例计费模式。取值范围：0：表示按量计费。1：表示包年包月。 */
   PayMode: number;
-  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280 */
+  /** 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6---****-fae36063280 */
   ClientToken?: string;
   /** 引导操作脚本设置。 */
   PreExecutedFileSettings?: PreExecuteFileSettings[];
@@ -5295,7 +5303,7 @@ declare interface ScaleOutInstanceRequest {
   DisasterRecoverGroupIds?: string[];
   /** 扩容节点绑定标签列表。 */
   Tags?: Tag[];
-  /** 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
+  /** 扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
   HardwareResourceType?: string;
   /** 使用Pod资源扩容时，指定的Pod规格以及来源等信息 */
   PodSpec?: PodSpec;
@@ -5329,6 +5337,8 @@ declare interface ScaleOutInstanceRequest {
   NodeMarks?: NodeMark;
   /** 扩容指定计算组 */
   WarehouseName?: string;
+  /** 分区置放群组分区 */
+  PartitionNumber?: number;
 }
 
 declare interface ScaleOutInstanceResponse {

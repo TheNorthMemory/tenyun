@@ -3319,7 +3319,7 @@ declare interface AddInstancesRequest {
   Memory: number;
   /** 新增只读实例数，取值范围为(0,15] */
   ReadOnlyCount: number;
-  /** 实例机器类型，支持值如下：- common：表示通用型- exclusive：表示独享型 */
+  /** 实例机器类型，支持值如下：common：表示通用型exclusive：表示独享型 */
   DeviceType?: string;
   /** 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。 */
   InstanceGrpId?: string;
@@ -3329,7 +3329,7 @@ declare interface AddInstancesRequest {
   SubnetId?: string;
   /** 新增RO组时使用的Port，取值范围为[0,65535) */
   Port?: number;
-  /** 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，'_','-','.' */
+  /** 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，&#39;_&#39;,&#39;-&#39;,&#39;.&#39; */
   InstanceName?: string;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher?: number;
@@ -3352,7 +3352,7 @@ declare interface AddInstancesRequest {
 declare interface AddInstancesResponse {
   /** 冻结流水，一次开通一个冻结流水。 */
   TranId?: string;
-  /** 后付费订单号。 */
+  /** 付费的订单号。说明：建议您使用 DescribeResourcesByDealName 接口查询订单关联实例。 */
   DealNames?: string[];
   /** 发货资源id列表。 */
   ResourceIds?: string[];
@@ -5068,6 +5068,24 @@ declare interface DescribeInstanceSlowQueriesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceSpecsByOperationTypeRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 操作类型addROInstance：新增RO实例modifyInstance：变配 */
+  OperationType: string;
+  /** 实例ID，查询变配规格时必传 */
+  InstanceId?: string;
+  /** 实例机器类型 */
+  DeviceType?: string;
+}
+
+declare interface DescribeInstanceSpecsByOperationTypeResponse {
+  /** 实例规格信息 */
+  InstanceSpecSet?: InstanceSpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSpecsRequest {
   /** 数据库类型，取值范围: MYSQL */
   DbType: string;
@@ -5871,6 +5889,8 @@ declare interface DescribeSlaveZonesRequest {
   Zone: string;
   /** 云架集群ID */
   OssClusterId?: number;
+  /** 存储架构类型。枚举值：1.0/2.0 默认值：1.0 */
+  StorageVersion?: string;
 }
 
 declare interface DescribeSlaveZonesResponse {
@@ -8075,6 +8095,8 @@ declare interface Cynosdb {
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
   /** 查询购买页可购买的实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
   DescribeInstanceSpecs(data: DescribeInstanceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsResponse>;
+  /** 根据操作类型查询实例规格 {@link DescribeInstanceSpecsByOperationTypeRequest} {@link DescribeInstanceSpecsByOperationTypeResponse} */
+  DescribeInstanceSpecsByOperationType(data: DescribeInstanceSpecsByOperationTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSpecsByOperationTypeResponse>;
   /** 查询实例的列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 查询同一集群下实例列表 {@link DescribeInstancesWithinSameClusterRequest} {@link DescribeInstancesWithinSameClusterResponse} */

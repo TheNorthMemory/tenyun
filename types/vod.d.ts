@@ -1797,7 +1797,7 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 生成图片的分辨率。各模型可选值：GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：512、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。示例：1024:1024；Qwen 2.0：支持自由设置宽高，输出图像总像素需在512 * 512 至 2048 * 2048之间。默认分辨率为1024*1024；Qwen 0925：不支持； */
+    /** 生成图片的分辨率。各模型可选值：GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：512、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：暂不支持本字段，可通过ExtInfo字段设置分辨率；Qwen 0925：暂不支持本字段，可通过ExtInfo字段设置分辨率； */
     Resolution?: string;
     /** 指定所生成图片的宽高比。GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；SI 4.0：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 4.5：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 5.0-lite：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Hunyuan 3.0：不支持；Qwen 2.0：不支持；Qwen 0925：不支持； */
     AspectRatio?: string;
@@ -7900,9 +7900,9 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：GGSIQwenHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925、2.0；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni； */
+    /** 模型版本。取值：当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni； */
     ModelVersion: string;
-    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；Qwen 2.0：3张；MJ v7：3张。 */
+    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；MJ v7：3张。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
     /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
@@ -7920,7 +7920,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。 */
+    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1356\&quot;}&quot;}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}可用于开启输出多张图像，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;sequential_image_generation\&quot;:\&quot;auto\&quot;}&quot;}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;} */
     ExtInfo?: string;
   }
 

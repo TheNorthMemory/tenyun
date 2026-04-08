@@ -444,7 +444,7 @@ declare interface CheckIdCardInformationRequest {
 }
 
 declare interface CheckIdCardInformationResponse {
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。 */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人（采用固定阈值70，误通过率为万分之一，不支持调整阈值）。 */
   Sim?: number;
   /** 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;
@@ -968,7 +968,7 @@ declare interface ImageRecognitionV2Request {
 }
 
 declare interface ImageRecognitionV2Response {
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一） */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人（采用固定阈值70，误通过率为万分之一，不支持调整阈值） */
   Sim?: number;
   /** 业务错误码。成功情况返回Success。错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;
@@ -1000,7 +1000,7 @@ declare interface LivenessCompareRequest {
 declare interface LivenessCompareResponse {
   /** 验证通过后的视频最佳截图照片。照片为BASE64编码后的值，jpg格式。 */
   BestFrameBase64?: string | null;
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。 */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人（采用固定阈值70，误通过率为万分之一，不支持调整阈值）。 */
   Sim?: number;
   /** 业务错误码。成功情况返回Success。错误情况请参考下方错误码，列表中FailedOperation部分。 */
   Result?: string;
@@ -1034,7 +1034,7 @@ declare interface LivenessRecognitionRequest {
 declare interface LivenessRecognitionResponse {
   /** 验证通过后的视频最佳截图照片。照片为BASE64编码后的值，jpg格式。 */
   BestFrameBase64?: string | null;
-  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一） */
+  /** 相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，（采用固定阈值70，误通过率为万分之一，不支持调整阈值） */
   Sim?: number;
   /** 业务错误码。成功情况返回Success。错误情况请参考下方错误码 列表中FailedOperation部分 */
   Result?: string;

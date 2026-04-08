@@ -2180,6 +2180,22 @@ declare interface ImagesVul {
   AttackLevel?: number;
 }
 
+/** k8s告警类型和对应的告警数量 */
+declare interface K8SAPIRuleTypeCountItem {
+  /** 规则类型枚举值：ABNORMAL_CREATE_POD： 可疑容器创建 */
+  RuleType?: string;
+  /** 规则对应告警数量 */
+  EventCount?: number;
+}
+
+/** k8s告警类型和中文映射 */
+declare interface K8SAPIRuleTypeZhItem {
+  /** 规则类型枚举值：&quot;rule_type&quot;: &quot;ABNORMAL_CREATE_POD&quot;,： 可疑容器创建 */
+  RuleType?: string;
+  /** 规则类型对应中文 */
+  RuleTypeZh?: string;
+}
+
 /** k8sApi异常事件详情 */
 declare interface K8sApiAbnormalEventInfo {
   /** 命中规则名称 */
@@ -2200,7 +2216,7 @@ declare interface K8sApiAbnormalEventInfo {
   LastCreateTime?: string;
   /** 告警数量 */
   AlarmCount?: number;
-  /** 状态"EVENT_UNDEAL":未处理"EVENT_DEALED": 已处理"EVENT_IGNORE": 忽略"EVENT_DEL": 删除"EVENT_ADD_WHITE": 加白 */
+  /** 状态&quot;EVENT_UNDEAL&quot;:未处理&quot;EVENT_DEALED&quot;: 已处理&quot;EVENT_IGNORE&quot;: 忽略&quot;EVENT_DEL&quot;: 删除&quot;EVENT_ADD_WHITE&quot;: 加白 */
   Status?: string;
   /** 集群masterIP */
   ClusterMasterIP?: string;
@@ -2220,6 +2236,10 @@ declare interface K8sApiAbnormalEventInfo {
   HighLightFields?: string[];
   /** 命中规则 */
   MatchRule?: K8sApiAbnormalRuleScopeInfo;
+  /** 高亮字段对应的命中规则内容(JSON字符串, 如: {&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;})参数格式：{&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;} */
+  HighLightFieldsVal?: string;
+  /** 规则中文 */
+  RuleTypeZH?: string;
 }
 
 /** k8sapi异常事件列表Item */
@@ -2304,6 +2324,8 @@ declare interface K8sApiAbnormalRuleScopeInfo {
   Status?: boolean;
   /** 是否被删除 适用于自定义规则入参 */
   IsDelete?: boolean;
+  /** 规则类型对应中文 */
+  RuleTypeZH?: string;
 }
 
 /** k8sapi异常请求趋势Item */
@@ -2332,6 +2354,8 @@ declare interface K8sApiAbnormalTendencyItem {
   AnonymousAccessCount?: number;
   /** 特权容器事件数 */
   PrivilegeContainerCount?: number;
+  /** 规则类型对应告警数量 */
+  RuleTypeCountSet?: K8SAPIRuleTypeCountItem[];
 }
 
 /** 恶意外连黑白名单信息 */
@@ -8188,6 +8212,8 @@ declare interface DescribeK8sApiAbnormalEventListResponse {
   List?: K8sApiAbnormalEventListItem[];
   /** 总数量 */
   TotalCount?: number;
+  /** k8s告警类型和对应中文翻译 */
+  RuleTypeZhSet?: K8SAPIRuleTypeZhItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8272,6 +8298,8 @@ declare interface DescribeK8sApiAbnormalTendencyRequest {
 declare interface DescribeK8sApiAbnormalTendencyResponse {
   /** 趋势列表 */
   List?: K8sApiAbnormalTendencyItem[];
+  /** 规则类型对应中文 */
+  RuleTypeZhSet?: K8SAPIRuleTypeZhItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

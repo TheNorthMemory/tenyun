@@ -216,6 +216,8 @@ declare interface NoticeContentTmplItem {
   PagerDutyRobot?: PagerDutyRobotNoticeTmplMatcher[] | null;
   /** GoogleChat */
   GoogleChatRobot?: GoogleChatRobotNoticeTmplMatcher[];
+  /** Slack */
+  SlackRobot?: SlackRobotNoticeTmplMatcher[];
 }
 
 /** 通知历史中关联的通知模板信息 */
@@ -318,6 +320,20 @@ declare interface QCloudYeheWeChatNoticeTmplItem {
   AlarmRegionTmpl?: string;
   /** 告警时间模板 */
   AlarmTimeTmpl?: string;
+}
+
+/** 企业微信机器人内容模板配置 */
+declare interface SlackRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+}
+
+/** 企业微信机器人通知模板的匹配器 */
+declare interface SlackRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid;Trigger 告警触发; Recovery 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: SlackRobotNoticeTmpl;
 }
 
 /** 企业微信机器人内容模板配置 */

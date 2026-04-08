@@ -1255,6 +1255,14 @@ declare namespace V20180525 {
     Name: string;
   }
 
+  /** 调度器客户端连接配置参数 */
+  interface ClientConnection {
+    /** 客户端与服务器连接时每秒允许的最大查询数 */
+    QPS?: number;
+    /** 客户端在短时间内超过QPS限制的突发请求数量 */
+    Burst?: number;
+  }
+
   /** 集群信息结构体 */
   interface Cluster {
     /** 集群ID */
@@ -2153,6 +2161,32 @@ declare namespace V20180525 {
     HostName?: string;
   }
 
+  /** 扩展调度器(Extenders)客户端配置 */
+  interface ExtenderClientConfig {
+    /** 访问extender服务url设置 */
+    Service?: ServiceReference;
+  }
+
+  /** 扩展调度器(Extender)管理的扩展资源 */
+  interface ExtenderManagedResource {
+    /** 自定义资源的名称 */
+    Name?: string;
+  }
+
+  /** 扩展调度器(Extenders) */
+  interface Extenders {
+    /** 过滤阶段接口 */
+    FilterVerb?: string;
+    /** 打分阶段扩展接口 */
+    PrioritizeVerb?: string;
+    /** 打分阶段节点分数的权重,取值范围限定(0,2】 */
+    Weight?: number;
+    /** 扩展调度器(Extender)管理的扩展资源 */
+    ManagedResources?: ExtenderManagedResource[];
+    /** extender客户端配置 */
+    ExtenderClientConfig?: ExtenderClientConfig;
+  }
+
   /** 创建集群时，选择安装的扩展组件的信息 */
   interface ExtensionAddon {
     /** 扩展组件名称 */
@@ -2891,6 +2925,14 @@ declare namespace V20180525 {
     IsCustom?: boolean;
     /** 命名空间。当 RoleType 为 namespace 时必填 */
     Namespace?: string | null;
+  }
+
+  /** 管理调度插件(plugins)的启用和禁用 */
+  interface PluginSet {
+    /** 指定需要额外启用的插件列表 */
+    Enabled?: SchedulerPolicyPriority[];
+    /** 指定需要禁用的默认插件列表 */
+    Disabled?: SchedulerPolicyPriority[];
   }
 
   /** Pod计费信息 */
@@ -3765,6 +3807,32 @@ declare namespace V20180525 {
     InstanceDeleteMode: string;
   }
 
+  /** 调度器plugin配置参数 */
+  interface SchedulerPluginConfigs {
+    /** 配置的插件的名称 */
+    Name?: string | null;
+    /** 初始化时传递给插件的参数，对{"apiVersion":"kubescheduler.config.k8s.io/v1beta3","kind":"NodeResourcesFitArgs","scoringStrategy":{"type":"LeastAllocated"}}base64后的结果 */
+    Args?: string | null;
+  }
+
+  /** SchedulerPolicy配置信息 */
+  interface SchedulerPolicyConfig {
+    /** 调度器名称 */
+    SchedulerName?: string | null;
+    /** 调度器plugin配置参数 */
+    PluginConfigs?: SchedulerPluginConfigs[] | null;
+    /** 插件配置 */
+    PluginSet?: PluginSet;
+  }
+
+  /** 调度策略权重 */
+  interface SchedulerPolicyPriority {
+    /** 打分函数名称 */
+    Name?: string;
+    /** 权重 */
+    Weight?: number;
+  }
+
   /** cloudrun安全特性 */
   interface SecurityContext {
     /** 安全能力清单 */
@@ -3797,6 +3865,20 @@ declare namespace V20180525 {
     JWKSURI?: string | null;
     /** 如果为true，则会自动创建允许匿名用户访问'/.well-known/openid-configuration'和/openid/v1/jwks的rbac规则 */
     AutoCreateDiscoveryAnonymousAuth?: boolean | null;
+  }
+
+  /** 调度器访问自定义 Extender 服务 URL 的设置 */
+  interface ServiceReference {
+    /** 命名空间 */
+    Namespace: string;
+    /** 服务名称 */
+    Name: string;
+    /** 服务端口 */
+    Port?: number;
+    /** 服务路径 */
+    Path?: string;
+    /** 服务协议 */
+    Scheme?: string;
   }
 
   /** 执行步骤信息 */
@@ -6013,6 +6095,26 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface DescribeClusterSchedulerPolicyRequest {
+    /** 集群ID */
+    ClusterId: string;
+  }
+
+  interface DescribeClusterSchedulerPolicyResponse {
+    /** 调度策略json字符串 */
+    Policy?: string;
+    /** SchedulerPolicy配置信息 */
+    SchedulerPolicyConfig?: SchedulerPolicyConfig[];
+    /** 客户端连接 */
+    ClientConnection?: ClientConnection;
+    /** 扩展调度器 */
+    Extenders?: Extenders[];
+    /** 高性能模式 */
+    HighPerformance?: boolean | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeClusterSecurityRequest {
     /** 集群 ID，请填写 查询集群列表 接口中返回的 clusterId 字段 */
     ClusterId: string;
@@ -8031,6 +8133,24 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyClusterSchedulerPolicyRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** SchedulerPolicy配置信息 */
+    SchedulerPolicyConfig?: SchedulerPolicyConfig[];
+    /** 客户端连接 */
+    ClientConnection?: ClientConnection;
+    /** 扩展调度器 */
+    Extenders?: Extenders[];
+    /** 高性能模式 */
+    HighPerformance?: boolean;
+  }
+
+  interface ModifyClusterSchedulerPolicyResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyClusterTagsRequest {
     /** 集群ID */
     ClusterId: string;
@@ -9011,6 +9131,8 @@ declare interface Tke {
   DescribeClusterRouteTables(data: V20180525.DescribeClusterRouteTablesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterRouteTablesResponse>;
   /** 查询集群路由 {@link V20180525.DescribeClusterRoutesRequest} {@link V20180525.DescribeClusterRoutesResponse} */
   DescribeClusterRoutes(data: V20180525.DescribeClusterRoutesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterRoutesResponse>;
+  /** 查询集群调度策略 {@link V20180525.DescribeClusterSchedulerPolicyRequest} {@link V20180525.DescribeClusterSchedulerPolicyResponse} */
+  DescribeClusterSchedulerPolicy(data: V20180525.DescribeClusterSchedulerPolicyRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterSchedulerPolicyResponse>;
   /** 集群的密钥信息 {@link V20180525.DescribeClusterSecurityRequest} {@link V20180525.DescribeClusterSecurityResponse} */
   DescribeClusterSecurity(data: V20180525.DescribeClusterSecurityRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterSecurityResponse>;
   /** 查看集群状态列表 {@link V20180525.DescribeClusterStatusRequest} {@link V20180525.DescribeClusterStatusResponse} */
@@ -9243,6 +9365,8 @@ declare interface Tke {
   ModifyClusterRollOutSequenceTags(data: V20180525.ModifyClusterRollOutSequenceTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterRollOutSequenceTagsResponse>;
   /** 修改集群运行时配置 {@link V20180525.ModifyClusterRuntimeConfigRequest} {@link V20180525.ModifyClusterRuntimeConfigResponse} */
   ModifyClusterRuntimeConfig(data: V20180525.ModifyClusterRuntimeConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterRuntimeConfigResponse>;
+  /** 修改集群调度策略 {@link V20180525.ModifyClusterSchedulerPolicyRequest} {@link V20180525.ModifyClusterSchedulerPolicyResponse} */
+  ModifyClusterSchedulerPolicy(data: V20180525.ModifyClusterSchedulerPolicyRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterSchedulerPolicyResponse>;
   /** 修改集群标签 {@link V20180525.ModifyClusterTagsRequest} {@link V20180525.ModifyClusterTagsResponse} */
   ModifyClusterTags(data: V20180525.ModifyClusterTagsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyClusterTagsResponse>;
   /** 修改超级节点池 {@link V20180525.ModifyClusterVirtualNodePoolRequest} {@link V20180525.ModifyClusterVirtualNodePoolResponse} */

@@ -2138,22 +2138,6 @@ declare interface DestroyStaticStoreResponse {
   RequestId?: string;
 }
 
-declare interface EditAuthConfigRequest {
-  /** 环境id */
-  EnvId: string;
-  /** 手机号登录配置 "TRUE", "FALSE", "LOGIN_ONLY" */
-  PhoneNumberLogin?: string;
-  /** 匿名登录配置 "TRUE", "FALSE" */
-  AnonymousLogin?: string;
-  /** 用户名密码登录配置 "TRUE", "FALSE" */
-  UsernameLogin?: string;
-}
-
-declare interface EditAuthConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetProvidersRequest {
   /** 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。 */
   EnvId: string;
@@ -2412,16 +2396,6 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
-declare interface ReinstateEnvRequest {
-  /** 环境ID */
-  EnvId: string;
-}
-
-declare interface ReinstateEnvResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RenewEnvRequest {
   /** 环境ID */
   EnvId: string;
@@ -2629,8 +2603,6 @@ declare interface Tcb {
   DestroyMySQL(data: DestroyMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMySQLResponse>;
   /** 销毁静态托管资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
-  /** 编辑登录配置 {@link EditAuthConfigRequest} {@link EditAuthConfigResponse} */
-  EditAuthConfig(data: EditAuthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<EditAuthConfigResponse>;
   /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
   /** 查询云服务器价格 {@link InquireVmPriceRequest} {@link InquireVmPriceResponse} */
@@ -2657,8 +2629,6 @@ declare interface Tcb {
   ModifySafeRule(data: ModifySafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySafeRuleResponse>;
   /** 更新tcb用户 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
-  /** 恢复环境，解除隔离状态 {@link ReinstateEnvRequest} {@link ReinstateEnvResponse} */
-  ReinstateEnv(data: ReinstateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReinstateEnvResponse>;
   /** 续费云开发环境 {@link RenewEnvRequest} {@link RenewEnvResponse} */
   RenewEnv(data: RenewEnvRequest, config?: AxiosRequestConfig): AxiosPromise<RenewEnvResponse>;
   /** 执行文档型数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
