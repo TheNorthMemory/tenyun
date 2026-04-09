@@ -4172,7 +4172,7 @@ declare interface DescribeVoucherInfoRequest {
   Limit: number;
   /** 第多少页，默认是1 */
   Offset: number;
-  /** 券状态：待使用：unUsed，已使用：&nbsp;used，已发货：delivered，已作废：&nbsp;cancel，已过期：overdue */
+  /** 券状态：待使用：unUsed，已使用：xa0used，已发货：delivered，已作废：xa0cancel，已过期：overdue */
   Status?: string;
   /** 代金券id */
   VoucherId?: string;
@@ -4225,6 +4225,8 @@ declare interface DescribeVoucherInfoResponse {
   TotalBalance?: number;
   /** 代金券相关信息 */
   VoucherInfos?: VoucherInfos[];
+  /** 接口返回的金额字段单位默认值：micro金额单位：micro（微分）代金券发放和使用按8位高精度处理，所以金额单位默认为micro（微分），如需CNY或USD请按以下公式换算CNY：1 micro = 10⁻⁸ 元USD：1 micro = 10⁻⁸ 美元 */
+  Unit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -88,6 +88,8 @@ declare interface ContainerInfo {
   Envs?: EnvParam[];
   /** 存储挂载配置 */
   Storages?: StorageInfo[];
+  /** 探针信息 */
+  Probe?: ProbeInfo;
 }
 
 /** 服务部署信息 */
@@ -118,6 +120,14 @@ declare interface Filter {
 declare interface HiCacheInfo {
   /** HiCache缓存等级 */
   HiCacheLevel?: string;
+}
+
+/** http配置信息 */
+declare interface HttpConfig {
+  /** 指定健康检查的URL路径 */
+  Path?: string;
+  /** 指定健康检查的端口 */
+  Port?: number;
 }
 
 /** 描述了服务的超参数配置 */
@@ -310,6 +320,32 @@ declare interface Price {
   CloudDiskPrice?: ItemPrice;
   /** 分实例价格 */
   PriceDetailSet?: ItemPriceDetail[];
+}
+
+/** 探针配置信息 */
+declare interface ProbeConfig {
+  /** HTTP GET请求进行健康检查 */
+  HttpGet?: HttpConfig;
+  /** 容器启动后，等待多少秒开始第一次探测 */
+  InitialDelaySeconds?: number;
+  /** 每次执行探测的间隔时间（秒） */
+  PeriodSeconds?: number;
+  /** 每次探测等待响应的超时时间（秒） */
+  TimeoutSeconds?: number;
+  /** 探测失败后，最小连续成功次数才被认为成功 */
+  SuccessThreshold?: number;
+  /** 探测失败后，Kubernetes的重试次数 */
+  FailureThreshold?: number;
+}
+
+/** 探针信息 */
+declare interface ProbeInfo {
+  /** 存活探针 */
+  LivenessProbe?: ProbeConfig;
+  /** 就绪探针 */
+  ReadinessProbe?: ProbeConfig;
+  /** 启动探针 */
+  StartupProbe?: ProbeConfig;
 }
 
 /** 地域列表 */

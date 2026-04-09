@@ -100,7 +100,7 @@ declare interface ApmServiceInfo {
 declare interface DescribePolicy {
   /** 保护策略ID列表 */
   TaskPolicyIdList: string[];
-  /** 保护策略状态 */
+  /** 保护策略状态枚举值：已触发： 表示已触发护栏策略未触发： 表示未触发护栏策略已恢复： 表示护栏策略已恢复 */
   TaskPolicyStatus: string;
   /** 策略规则 */
   TaskPolicyRule: string;
@@ -346,7 +346,7 @@ declare interface TaskGroupAction {
   TaskGroupActionGeneralConfiguration: string;
   /** 分组动作自定义配置 */
   TaskGroupActionCustomConfiguration: string;
-  /** 分组动作状态 */
+  /** 分组动作状态枚举值：2001： 未开始2002： 待执行2003： 执行中2004： 执行结束 */
   TaskGroupActionStatus: number;
   /** 动作分组创建时间 */
   TaskGroupActionCreateTime: string;
@@ -372,7 +372,7 @@ declare interface TaskGroupAction {
   IsExecuteRedo?: boolean;
   /** 动作风险级别 */
   ActionRisk?: string;
-  /** 动作运行时间 */
+  /** 动作运行时间单位：秒 */
   TaskGroupActionExecuteTime?: number;
   /** 动作开始执行时间 */
   TaskGroupActionStartTime?: string;
@@ -418,7 +418,7 @@ declare interface TaskGroupInstance {
   TaskGroupInstanceId: number;
   /** 实例ID */
   TaskGroupInstanceObjectId: string;
-  /** 实例动作执行状态 */
+  /** 实例动作执行状态枚举值：3001： 未开始3002： 执行中3003： 执行结束3004： 准备中 */
   TaskGroupInstanceStatus: number;
   /** 实例创建时间 */
   TaskGroupInstanceCreateTime: string;
@@ -434,13 +434,13 @@ declare interface TaskGroupInstance {
   TaskGroupInstanceExecuteLog?: string | null;
   /** 实例是否可重试 */
   TaskGroupInstanceIsRedo?: boolean;
-  /** 动作实例执行时间 */
+  /** 动作实例执行时间单位：秒 */
   TaskGroupInstanceExecuteTime?: number;
 }
 
 /** 机器选取规则 */
 declare interface TaskGroupInstancesExecuteRules {
-  /** 实例选取模式 */
+  /** 实例选取模式枚举值：1： 全部注入2： 随机选取指定比例注入3： 随机选取指定数量注入 */
   TaskGroupInstancesExecuteMode?: number;
   /** 按比例选取模式下选取比例 */
   TaskGroupInstancesExecutePercent?: number;
@@ -544,7 +544,7 @@ declare interface TaskTarget {
   Type?: number;
   /** 1:平台 2:用户个人 */
   Source?: number;
-  /** 目标标签是否已被删除 */
+  /** 目标标签是否已被删除枚举值：0： 未删除1： 已删除 */
   TargetStatus?: number;
 }
 
@@ -997,6 +997,8 @@ declare interface ModifyTaskRunStatusRequest {
   Issue?: string;
   /** 演练记录 */
   Record?: string;
+  /**  */
+  IncludeRecordInReport?: number;
 }
 
 declare interface ModifyTaskRunStatusResponse {

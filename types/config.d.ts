@@ -1035,10 +1035,12 @@ declare interface ListAggregateCompliancePacksRequest {
   RiskLevel?: number[];
   /** 合规包状态 ACTIVE、NO_ACTIVE */
   Status?: string;
-  /** 评估状态合规： 'COMPLIANT'不合规： 'NON_COMPLIANT' */
+  /** 评估状态合规： &#39;COMPLIANT&#39;不合规： &#39;NON_COMPLIANT&#39; */
   ComplianceResult?: string[];
   /** 排序类型, 倒序：desc，顺序：asc */
   OrderType?: string;
+  /** 包含合规包结果定义枚举值：NO： 不包含默认值：空此字段为新增，因此不传或者传了YES都会默认返回包含合规结果数据，其他枚举值后面视情况丰富 */
+  IncludeCompliancePackRuleResult?: string;
 }
 
 declare interface ListAggregateCompliancePacksResponse {

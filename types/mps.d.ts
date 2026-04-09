@@ -340,6 +340,8 @@ declare interface AiAnalysisResult {
 declare interface AiAnalysisTaskClassificationInput {
   /** 视频智能分类模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能分类结果信息 */
@@ -368,6 +370,8 @@ declare interface AiAnalysisTaskClassificationResult {
 declare interface AiAnalysisTaskCoverInput {
   /** 视频智能封面模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能封面结果信息 */
@@ -398,6 +402,8 @@ declare interface AiAnalysisTaskCoverResult {
 declare interface AiAnalysisTaskCutoutInput {
   /** 视频智能抠图模板 ID。 */
   Definition: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 视频抠图结果信息 */
@@ -432,6 +438,8 @@ declare interface AiAnalysisTaskCutoutResult {
 declare interface AiAnalysisTaskDelLogoInput {
   /** 视频智能擦除模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能擦除结果信息 */
@@ -470,6 +478,8 @@ declare interface AiAnalysisTaskDelLogoResult {
 declare interface AiAnalysisTaskDescriptionInput {
   /** 视频智能描述模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能描述结果信息 */
@@ -496,6 +506,8 @@ declare interface AiAnalysisTaskDescriptionResult {
 declare interface AiAnalysisTaskDubbingInput {
   /** 视频译制模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能译制结果信息 */
@@ -528,6 +540,8 @@ declare interface AiAnalysisTaskDubbingResult {
 declare interface AiAnalysisTaskFrameTagInput {
   /** 视频智能按帧标签模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能按帧标签结果信息 */
@@ -556,6 +570,8 @@ declare interface AiAnalysisTaskFrameTagResult {
 declare interface AiAnalysisTaskHeadTailInput {
   /** 片头片尾识别模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 片头片尾结果信息 */
@@ -584,6 +600,8 @@ declare interface AiAnalysisTaskHeadTailResult {
 declare interface AiAnalysisTaskHighlightInput {
   /** 视频智能精彩片段模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能精彩片段结果信息 */
@@ -612,6 +630,8 @@ declare interface AiAnalysisTaskHighlightResult {
 declare interface AiAnalysisTaskHorizontalToVerticalInput {
   /** 视频智能横转竖模板 ID */
   Definition?: number | null;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能横转竖结果信息 */
@@ -650,6 +670,8 @@ declare interface AiAnalysisTaskInput {
 declare interface AiAnalysisTaskReelInput {
   /** 智能成片模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** AI解说二创结果信息 */
@@ -690,6 +712,8 @@ declare interface AiAnalysisTaskReelResult {
 declare interface AiAnalysisTaskSegmentInput {
   /** 拆条任务模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能拆条结果信息 */
@@ -718,6 +742,8 @@ declare interface AiAnalysisTaskSegmentResult {
 declare interface AiAnalysisTaskTagInput {
   /** 视频智能标签模板 ID。 */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 智能标签结果信息 */
@@ -746,6 +772,8 @@ declare interface AiAnalysisTaskTagResult {
 declare interface AiAnalysisTaskVideoComprehensionInput {
   /** 视频（音频）理解模板ID */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 视频（音频）理解输出内容结果信息 */
@@ -784,6 +812,8 @@ declare interface AiAnalysisTaskVideoComprehensionResult {
 declare interface AiAnalysisTaskVideoRemakeInput {
   /** 视频智能去重模板 ID */
   Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
 }
 
 /** 视频去重结果信息 */
@@ -5472,6 +5502,8 @@ declare interface QualityControlData {
   QualityEvaluationScore?: number;
   /** 视频无参考质量评分，MOS分数。 */
   QualityEvaluationMeanOpinionScore?: number;
+  /** 视频美学评分，范围：[0,100]。 */
+  AestheticEvaluationScore?: number;
   /** 内容质检检出异常项。 */
   QualityControlResultSet?: QualityControlResult[];
   /** 格式诊断检出异常项。 */

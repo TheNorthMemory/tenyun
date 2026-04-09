@@ -2094,6 +2094,20 @@ declare interface CreateDatabaseWhiteListRulesResponse {
   RequestId?: string;
 }
 
+declare interface CreateNatFwDnatRuleRequest {
+  /** 0：cfw新增模式，1：cfw接入模式。 */
+  Mode: number;
+  /** 防火墙实例id，该字段必须传递。 */
+  CfwInstance?: string;
+  /** 添加或删除操作的Dnat规则列表。 */
+  DnatRules?: CfwNatDnatRule[];
+}
+
+declare interface CreateNatFwDnatRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNatFwInstanceRequest {
   /** 防火墙实例名称 */
   Name: string;
@@ -2254,6 +2268,20 @@ declare interface DeleteBlockIgnoreRuleNewRequest {
 }
 
 declare interface DeleteBlockIgnoreRuleNewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteNatFwDnatRuleRequest {
+  /** 0：cfw新增模式，1：cfw接入模式。 */
+  Mode: number;
+  /** 防火墙实例id，该字段必须传递。 */
+  CfwInstance?: string;
+  /** 添加或删除操作的Dnat规则列表。 */
+  DnatRules?: CfwNatDnatRule[];
+}
+
+declare interface DeleteNatFwDnatRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4235,6 +4263,8 @@ declare interface Cfw {
   CreateChooseVpcs(data: CreateChooseVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChooseVpcsResponse>;
   /** 创建暴露数据库白名单规则 {@link CreateDatabaseWhiteListRulesRequest} {@link CreateDatabaseWhiteListRulesResponse} */
   CreateDatabaseWhiteListRules(data: CreateDatabaseWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseWhiteListRulesResponse>;
+  /** 创建Nat防火墙Dnat规则 {@link CreateNatFwDnatRuleRequest} {@link CreateNatFwDnatRuleResponse} */
+  CreateNatFwDnatRule(data: CreateNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwDnatRuleResponse>;
   /** 创建NAT防火墙实例（Region参数必填） {@link CreateNatFwInstanceRequest} {@link CreateNatFwInstanceResponse} */
   CreateNatFwInstance(data: CreateNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatFwInstanceResponse>;
   /** 创建防火墙实例和接入域名（Region参数必填） {@link CreateNatFwInstanceWithDomainRequest} {@link CreateNatFwInstanceWithDomainResponse} */
@@ -4251,6 +4281,8 @@ declare interface Cfw {
   DeleteBlockIgnoreRuleList(data: DeleteBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleListResponse>;
   /** 批量删除入侵防御封禁列表、放通列表规则（新） {@link DeleteBlockIgnoreRuleNewRequest} {@link DeleteBlockIgnoreRuleNewResponse} */
   DeleteBlockIgnoreRuleNew(data: DeleteBlockIgnoreRuleNewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockIgnoreRuleNewResponse>;
+  /** 删除Nat防火墙Dnat规则 {@link DeleteNatFwDnatRuleRequest} {@link DeleteNatFwDnatRuleResponse} */
+  DeleteNatFwDnatRule(data: DeleteNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwDnatRuleResponse>;
   /** 销毁防火墙实例 {@link DeleteNatFwInstanceRequest} {@link DeleteNatFwInstanceResponse} */
   DeleteNatFwInstance(data: DeleteNatFwInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNatFwInstanceResponse>;
   /** 删除远程运维域名 {@link DeleteRemoteAccessDomainRequest} {@link DeleteRemoteAccessDomainResponse} */

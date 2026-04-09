@@ -2439,6 +2439,14 @@ declare namespace V20180724 {
     Targets?: Targets | null;
   }
 
+  /** Prometheus 内部动态 api 代理响应 */
+  interface PrometheusDynamicAPIResponseHTTP {
+    /** HTTP 状态码 */
+    StatusCode?: number;
+    /** HTTP 响应体 */
+    ResponseBody?: string;
+  }
+
   /** 实例的授权信息 */
   interface PrometheusInstanceGrantInfo {
     /** 是否有计费操作权限(1=有，2=无) */
@@ -2737,6 +2745,14 @@ declare namespace V20180724 {
     JobId?: string;
     /** 配置 */
     Config?: string | null;
+  }
+
+  /** Prometheus 通用字符串类型 kv */
+  interface PrometheusStringKeyValuePair {
+    /** 键 */
+    Key: string;
+    /** 值 */
+    Value: string;
   }
 
   /** Prometheus 托管服务标签 */
@@ -5499,9 +5515,23 @@ declare namespace V20180724 {
   }
 
   interface ExportPrometheusReadOnlyDynamicAPIRequest {
+    /** Prometheus 实例 ID */
+    InstanceId: string;
+    /** HTTP 方法名 GET/POST/PUT/DELETE 等 */
+    Method: string;
+    /** HTTP 路径（包括 query string） */
+    Path: string;
+    /** HTTP 请求体，任何数据 */
+    RequestBody?: string;
+    /** HTTP 请求头 */
+    Headers?: PrometheusStringKeyValuePair[];
+    /** 是否请求自监控数据。自监控仅支持 /api/v1/query 与 /api/v1/query_range 接口。 */
+    SelfMonitor?: boolean;
   }
 
   interface ExportPrometheusReadOnlyDynamicAPIResponse {
+    /** HTTP 响应数据 */
+    HTTP?: PrometheusDynamicAPIResponseHTTP;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

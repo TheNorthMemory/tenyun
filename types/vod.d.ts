@@ -413,8 +413,10 @@ declare namespace V20180717 {
     CopyRightWatermark?: CopyRightWatermarkInput;
     /** 数字水印。 */
     BlindWatermark?: BlindWatermarkInput;
-    /** 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。 */
+    /** 外挂字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。 */
     SubtitleSet?: string[];
+    /** 字幕压制信息列表。最大可支持 2 个。 */
+    SubtitleInfoSet?: SubtitleInfoInput[];
   }
 
   /** 转自适应码流模板详情 */
@@ -6825,6 +6827,48 @@ declare namespace V20180717 {
     Formats: string[];
   }
 
+  /** 字幕压制输入信息 */
+  interface SubtitleInfoInput {
+    /** 字幕 ID。 */
+    Id: string;
+    /** 字体类型。枚举值：hei.ttf： 黑体song.ttf： 宋体kai.ttf（推荐）或 simkai.ttf： 楷体msyh.ttf： 微软雅黑msyhbd.ttf： 微软雅黑加粗hkjgt.ttf： 华康金刚体dhttx.ttf： 典黑体特细xqgdzt.ttf： 喜鹊古字典体qpcyt.ttf： 巧拼超圆体arial.ttf： 仅支持英文dinalternate.ttf： DIN Alternate Boldhelveticalt.ttf： Helveticahelveticains.ttf： Helvetica Inserattrajanpro.ttf： TrajanPro-Boldkorean.ttf： 韩语japanese.ttf： 日语thai.ttf： 泰语roboto.ttf： Robotonotosans.ttf： NotoSansnotosansthai.ttf： 泰语NotoSansThaisarabun.ttf： 泰语Sarabunkanit.ttf： 泰语Kanitcharmonman.ttf： 泰语Charmonmannotonaskharabic.ttf： 阿拉伯语NotoNaskhArabicnotosansdevanagari.ttf： 印度语NotoSansDevanagarinotosanstc.ttf： 粤语思源黑体NotoSansTCnotosanskr.ttf： 韩语NotoSansKRgothica1.ttf： 韩语GothicA1nanummyeongjo.ttf： 韩语NanumMyeongjonotosansjp.ttf： 日语NotoSansJPnotoserifjp.ttf： 日语NotoSerifJPshipporimincho.ttf： 日语ShipporiMincho默认值：hei.ttf 黑体 */
+    FontType?: string;
+    /** 字体大小，不指定则以字幕文件中为准。支持像素和百分比格式：像素：Npx，N范围：(0,4096]。百分比：N%，N范围：(0,100]；例如，10%表示字幕字体大小=10%*源视频高度。不填且字幕文件中无设置时，默认源视频高度的5%。 */
+    FontSize?: string;
+    /** 字体颜色，格式：0xRRGGBB。默认值：0xFFFFFF（白色）。 */
+    FontColor?: string;
+    /** 文字透明度。取值范围：(0, 1]。0：完全透明；1：完全不透明默认值：1 */
+    FontAlpha?: number;
+    /** 字幕y轴坐标位置，指定此参数会忽略字幕文件自带坐标；支持像素和百分比格式：像素：Npx，N范围：[0,4096]。百分比：N%，N范围：[0,100]；例如10%表示字幕y坐标=10%源视频高度。默认值：源视频高度4%。注意：坐标轴原点在源视频中轴线底部，字幕基准点在字幕中轴线底部，参考下图： */
+    YPos?: string;
+    /** 字幕背景底板的y轴坐标位置；支持像素和百分比格式：像素：Npx，N范围：[0,4096]。百分比：N%，N范围：[0,100]；例如10%表示字幕背景底板y坐标=10%*源视频高度。不传表示不开启字幕背景底板。注意：坐标轴原点位于源视频的中轴线底部，字幕背景底板的基准点在其中轴线底部，参考下图： */
+    BoardY?: string;
+    /** 底板的宽度，正整数。像素：Npx，N 取值范围：[0,4096]。百分比：N%，N 取值范围：[0, 100]。开启底板且不填此值时，默认源视频宽像素的90%。 */
+    BoardWidth?: string;
+    /** 底板的高度，正整数。像素：Npx，N 取值范围：[0,4096]。百分比：N%，N 取值范围：[0, 100]。开启底板且不填此值时，默认为源视频高像素的15%。 */
+    BoardHeight?: string;
+    /** 底板颜色。格式：0xRRGGBB。默认值：0x000000（黑色）。 */
+    BoardColor?: string;
+    /** 字幕背景板透明度，取值范围：[0, 1]。0：完全透明；1：完全不透明。默认值：0.8。 */
+    BoardAlpha?: number;
+    /** 对齐方式。枚举值：top： 顶部对齐，字幕顶部按位置固定，底部随行数变化。 bottom： 底部对齐，字幕底部按位置固定，顶部随行数变化。 默认值：bottom */
+    Alignment?: string;
+    /** 描边宽度。浮点数。像素：Npx，N 取值范围： [0, 1000]。百分比：N%，N 取值范围：[0, 100]。不填默认源视频高度的0.3%。 */
+    OutlineWidth?: string;
+    /** 描边颜色。格式：0xRRGGBB。默认值：0x000000（黑色）。 */
+    OutlineColor?: string;
+    /** 描边透明度。(0，1] 正浮点数。0：完全透明；1：完全不透明。默认值：1 */
+    OutlineAlpha?: number;
+    /** 阴影宽度。浮点数。像素：Npx，N 取值范围： [0, 1000]。百分比：N%，N 取值范围：[0, 100]。不填默认无阴影。 */
+    ShadowWidth?: string;
+    /** 阴影颜色。格式：0xRRGGBB。默认值：0x000000（黑色），有设置阴影的情况下。 */
+    ShadowColor?: string;
+    /** 阴影透明度。(0，1] 正浮点数。0：完全透明；1：完全不透明。默认值：1，完全不透明，有设置阴影的情况下。 */
+    ShadowAlpha?: number;
+    /** 行间距。正整数。像素：Npx，N 取值范围： [0, 1000]。百分比：N%，N 取值范围：[0, 100]。默认值：0 */
+    LineSpacing?: string;
+  }
+
   /** 画面超分控制参数 */
   interface SuperResolutionInfo {
     /** 画面超分控制开关，可选值：ON：开启画面超分；OFF：关闭画面超分。 */
@@ -7107,6 +7151,8 @@ declare namespace V20180717 {
     StartTimeOffset?: number;
     /** 转码后视频的终止时间偏移，单位：秒。不填或填0，表示转码后的视频持续到原始视频的末尾终止；当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。 */
     EndTimeOffset?: number;
+    /** 字幕压制信息列表。最大可支持 2 个。 */
+    SubtitleInfoSet?: SubtitleInfoInput[];
   }
 
   /** 转码模板详情 */

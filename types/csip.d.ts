@@ -12,6 +12,8 @@ declare interface AIAgentAsset {
   AgentModel?: string[];
   /** 实例 ID */
   InstanceID?: string;
+  /** 实例名称 */
+  InstanceName?: string;
   /** metadata 风险列表。有如下枚举值: 1. AK_TMP 2. USER_DATA */
   MetadataRiskList?: string[];
   /** 首次检出时间 */
@@ -20,7 +22,7 @@ declare interface AIAgentAsset {
   IdentityTimeLast?: string;
   /** 检出方式。有如下枚举值 1. FINGER 资产指纹方式检出 2. NETWORK 网络访问方式检出 */
   IdentityMethod?: string;
-  /** 暴露状态。有如下枚举值。1. EXPOSED；2.UNEXPOSED；3. UNKNOWN; */
+  /** 暴露状态。有如下枚举值。1. EXPOSED；2.UNEXPOSED；UNKNOWN; */
   ExposureStatus?: string;
   /** metadata 有风险时对应路径 */
   MetadataRiskURL?: string;

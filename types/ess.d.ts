@@ -3401,7 +3401,7 @@ declare interface CreateOrganizationAuthUrlRequest {
   Operator: UserInfo;
   /** 指定授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationTypes?: number[];
-  /** 认证企业名称，请确认该名称与企业营业执照中注册的名称一致。注：1. `如果名称中包含英文括号()，请使用中文括号（）代替。`2. `EndPointType=“H5”或者"SHORT_H5"时，该参数必填` */
+  /** 认证企业名称，请确认该名称与企业营业执照中注册的名称一致。注：如果名称中包含英文括号()，请使用中文括号（）代替。EndPointType=“H5”或者&quot;SHORT_H5&quot;时，该参数必填 */
   OrganizationName?: string;
   /** 企业统一社会信用代码 */
   UniformSocialCreditCode?: string;
@@ -3435,9 +3435,9 @@ declare interface CreateOrganizationAuthUrlRequest {
   BusinessLicense?: string;
   /** 跳转链接类型：PC：适用于PC端的认证链接APP：用于全屏或半屏跳转的小程序链接SHORT_URL：跳转小程序的链接的短链形式H5：适用于H5页面的认证链接SHORT_H5：H5认证链接的短链形式 */
   Endpoint?: string;
-  /** 指定企业初始化引导，现在可以配置如下的选项：1: 启用此选项后，在企业认证的最终步骤将添加创建印章的引导。如下图的位置![image](https://qcloudimg.tencent-cloud.cn/raw/88e0b45095a5c589de8995462ad755dc.jpg) */
+  /** 指定企业初始化引导，现在可以配置如下的选项：1: 启用此选项后，在企业认证的最终步骤将添加创建印章的引导。如下图的位置2:开通企业授权API签署协议，目前仅支持PC网页端，即Endpoint=PC（该功能需联系电子签客服开通）枚举值：1： 创建印章2： 开通企业授权API签署协议 */
   Initialization?: number[];
-  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 授权书可以通过接口[生成企业授权书](https://qian.tencent.com/developers/companyApis/organizations/CreateOrganizationAuthFile) 来获得。p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。授权书可以通过接口生成企业授权书 来获得。p.s. 如果上传授权书 ，需遵循以下条件 超管的信息（超管姓名，超管手机号）必须为必填参数。认证方式AuthorizationTypes必须只能是上传授权书方式 */
   PowerOfAttorneys?: string[];
   /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 4096长度。在. 企业引导企业实名认证后回调中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
@@ -3445,9 +3445,9 @@ declare interface CreateOrganizationAuthUrlRequest {
   BankAccountNumber?: string;
   /** 对方打开链接认证时，对公打款账号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在对公打款不为空时有效 */
   BankAccountNumberSame?: boolean;
-  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为&quot;true&quot; 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
-  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 **CLINICFILLINGCERTIFICATE** :诊所备案证注意 ：如果企业证照类型是医疗机构执业许可证或者诊所备案证，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.医疗机构执业许可证和诊所备案证的企业授权方式 仅有授权书的方式。企业认证仅有上传营业执照的方式。 */
+  /** 企业证照类型： USCC :(默认)工商组织营业执照 PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证 CLINICFILLINGCERTIFICATE :诊所备案证注意 ：如果企业证照类型是医疗机构执业许可证或者诊所备案证，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.医疗机构执业许可证和诊所备案证的企业授权方式 仅有授权书的方式。企业认证仅有上传营业执照的方式。 */
   OrganizationIdCardType?: string;
   /** 是否允许编辑企业注册时的证照类型true:不允许编辑。false:允许编辑（默认值）。注意：入参中的OrganizationIdCardType值不为空的时候，才可设置为不可编辑。 */
   OrganizationIdCardTypeSame?: boolean;
@@ -3456,7 +3456,7 @@ declare interface CreateOrganizationAuthUrlRequest {
 }
 
 declare interface CreateOrganizationAuthUrlResponse {
-  /** 生成的认证链接。注： `链接有效期统一30天` */
+  /** 生成的认证链接。注： 链接有效期统一30天 */
   AuthUrl?: string;
   /** 链接过期时间，格式为Unix标准时间戳（秒） */
   ExpiredTime?: number;
@@ -3517,12 +3517,14 @@ declare interface CreateOrganizationGroupInvitationLinkResponse {
 }
 
 declare interface CreateOrganizationInfoChangeUrlRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 企业信息变更类型，可选类型如下：**1**：企业超管变更**2**：企业基础信息变更 */
   ChangeType: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 他方企业的统一社会信用代码，如果不传默认生成当前企业信息变更链接 */
+  UnifiedSocialCreditCode?: string;
 }
 
 declare interface CreateOrganizationInfoChangeUrlResponse {

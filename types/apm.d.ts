@@ -286,6 +286,8 @@ declare interface ApmAssociation {
   Status?: number | null;
   /** CKafka消息主题 */
   Topic?: string;
+  /** Ckafka消费主题用于Kafka指标投递 */
+  MetricTopic?: string;
 }
 
 /** 指标维度信息 */
@@ -1555,6 +1557,8 @@ declare interface ModifyApmAssociationRequest {
   PeerId?: string;
   /** CKafka消息主题 */
   Topic?: string;
+  /** Ckafka消息主题 */
+  MetricTopic?: string;
 }
 
 declare interface ModifyApmAssociationResponse {
