@@ -1960,6 +1960,12 @@ declare interface CostDetail {
   ProductCode?: string;
   /** 标签信息 */
   Tags?: BillTagInfo[];
+  /** 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ） */
+  OperateUin?: string;
+  /** 使用者UIN：实际使用资源的账号 ID */
+  OwnerUin?: string;
+  /** 扣费时间：结算扣费时间 */
+  PayTime?: string;
 }
 
 /** 获取预算管理的基础信息分页数据 */

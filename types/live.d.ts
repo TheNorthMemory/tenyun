@@ -2347,6 +2347,8 @@ declare interface CreateLiveAvatarScriptRequest {
   SpecifyPosition?: number;
   /** 操作者。 */
   Operator?: string;
+  /** 话术所属的数字人产品 ID。 */
+  ProductId?: string;
 }
 
 declare interface CreateLiveAvatarScriptResponse {
@@ -3719,6 +3721,8 @@ declare interface DescribeLiveAvatarScriptsRequest {
   PageIndex?: number;
   /** 分页查询的每页个数。 */
   PageSize?: number;
+  /** 数字人该话术所属的产品 ID。 */
+  ProductId?: string;
 }
 
 declare interface DescribeLiveAvatarScriptsResponse {
@@ -5367,6 +5371,8 @@ declare interface ModifyLiveAvatarRoomRequest {
   SpeechVolume?: number;
   /** 操作者。 */
   Operator?: string;
+  /** 房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间枚举值：AIGC： AIGC形象房间PRESET： 预设形象房间 */
+  RoomType?: string;
 }
 
 declare interface ModifyLiveAvatarRoomResponse {
@@ -5895,6 +5901,8 @@ declare interface StartLiveAvatarRoomRequest {
   ToUrl: string;
   /** 操作者。 */
   Operator?: string;
+  /** 房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间枚举值：AIGC： AIGC形象房间PRESET： 预设形象房间 */
+  RoomType?: string;
 }
 
 declare interface StartLiveAvatarRoomResponse {

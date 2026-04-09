@@ -2171,6 +2171,8 @@ declare namespace V20180525 {
   interface ExtenderManagedResource {
     /** 自定义资源的名称 */
     Name?: string;
+    /** 调度器是否忽略该资源的默认处理 */
+    IgnoredByScheduler?: boolean;
   }
 
   /** 扩展调度器(Extenders) */
@@ -2185,6 +2187,10 @@ declare namespace V20180525 {
     ManagedResources?: ExtenderManagedResource[];
     /** extender客户端配置 */
     ExtenderClientConfig?: ExtenderClientConfig;
+    /** 抢占接口 */
+    PreemptVerb?: string;
+    /** 节点缓存能力 */
+    NodeCacheCapable?: boolean;
   }
 
   /** 创建集群时，选择安装的扩展组件的信息 */

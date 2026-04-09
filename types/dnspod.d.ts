@@ -636,6 +636,30 @@ declare interface ModifyRecordBatchDetail {
   DomainId?: number;
 }
 
+/** 批量修改记录入参，指定修改的记录ID和记录内容 */
+declare interface ModifyRecordItem {
+  /** 记录 ID */
+  RecordId: number;
+  /** 主机记录 */
+  SubDomain?: string;
+  /** 记录类型 */
+  RecordType?: string;
+  /** 记录线路 */
+  RecordLine?: string;
+  /** 记录值 */
+  Value?: string;
+  /** 解析记录状态 1：开启 0：暂停 */
+  Enabled?: string;
+  /** 备注信息 */
+  Remark?: string;
+  /** 权重 */
+  Weight?: number;
+  /** MX优先级 */
+  MX?: number;
+  /** TTL缓存时间 */
+  TTL?: number;
+}
+
 /** 套餐配置明细 */
 declare interface PackageDetailItem {
   /** 套餐原价 */
@@ -2650,6 +2674,18 @@ declare interface ModifyRecordBatchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRecordBatchV3Request {
+  /** 需要修改的记录列表 */
+  ModifyRecordList: ModifyRecordItem[];
+}
+
+declare interface ModifyRecordBatchV3Response {
+  /** 批量任务ID */
+  JobId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRecordFieldsRequest {
   /** 域名 */
   Domain: string;
@@ -3073,6 +3109,8 @@ declare interface Dnspod {
   ModifyRecord(data: ModifyRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordResponse>;
   /** 批量修改记录 {@link ModifyRecordBatchRequest} {@link ModifyRecordBatchResponse} */
   ModifyRecordBatch(data: ModifyRecordBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordBatchResponse>;
+  /** 批量修改记录V3 {@link ModifyRecordBatchV3Request} {@link ModifyRecordBatchV3Response} */
+  ModifyRecordBatchV3(data: ModifyRecordBatchV3Request, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordBatchV3Response>;
   /** 修改记录可选字段 {@link ModifyRecordFieldsRequest} {@link ModifyRecordFieldsResponse} */
   ModifyRecordFields(data: ModifyRecordFieldsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordFieldsResponse>;
   /** 修改记录分组 {@link ModifyRecordGroupRequest} {@link ModifyRecordGroupResponse} */

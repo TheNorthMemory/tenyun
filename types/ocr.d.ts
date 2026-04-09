@@ -3431,11 +3431,51 @@ declare interface ClassifyStoreNameRequest {
   ImageBase64?: string;
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
+  /** 是否输出具体场景标签。注：开启后耗时会增加。 */
+  SceneType?: boolean;
+  /** 输入商户名称，辅助判断具体场景标签。注：仅SceneType配置为true时支持。 */
+  StoreInfo?: string;
 }
 
 declare interface ClassifyStoreNameResponse {
   /** 门头照标签 */
   StoreLabel?: string[];
+  /** 具体场景标签，输出3个最匹配的场景， 注：仅SceneType配置为true时支持。 */
+  SceneType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CropEnhanceImageOCRRequest {
+  /** 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 0表示关闭切边1表示开启切边，默认为1 */
+  Crop?: number;
+  /** 0表示关闭弯曲矫正1表示开启弯曲矫正，默认为1 */
+  Deskew?: number;
+  /** 0表示返回处理后的图和坐标，默认为01表示只返回坐标，不返回图片 */
+  OnlyPosition?: number;
+  /** 默认-1-1 不处理增强1 增亮2 增强并锐化3 黑白4 灰度5 去阴影增强6 点阵图 */
+  EnhanceType?: number;
+  /** 0表示不矫正图像方向，默认为0 1表示矫正图像方向 */
+  AdjustOrientation?: number;
+}
+
+declare interface CropEnhanceImageOCRResponse {
+  /** 处理后图的宽 */
+  CroppedWidth?: number;
+  /** 处理后图的高 */
+  CroppedHeight?: number;
+  /** 图像处理后的jpg图片，base64格式 */
+  CroppedImage?: string;
+  /** 切图区域的4个角点坐标, 是个长度为8的数组[0,1,2,3,4,5,6,7](0,1) 左上角坐标(2,3) 右上角坐标(4,5) 右下角坐标(6,7) 左下角坐标 */
+  Position?: number[];
+  /** 图像角度，AdjustOrientation =1时生效, 返回值如下 -1: 失败 0、90、180、270 */
+  Angle?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3634,6 +3674,30 @@ declare interface EnterpriseLicenseOCRResponse {
   EnterpriseLicenseInfos?: EnterpriseLicenseInfo[];
   /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
   Angle?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EraseHandwrittenImageOCRRequest {
+  /** 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 */
+  PdfPageNumber?: number;
+  /** 0表示关闭切边，默认为01表示开启切边 */
+  Crop?: number;
+  /** 0表示关闭弯曲矫正，默认为01表示开启弯曲矫正 */
+  Deskew?: number;
+  /** 0表示关闭增强锐化，默认为01表示开启增强锐化 */
+  Sharpen?: number;
+  /** 0表示返回黑白图像1表示返回彩色图像，默认为1 */
+  Grayscale?: number;
+}
+
+declare interface EraseHandwrittenImageOCRResponse {
+  /** 图像处理后的jpg图片，base64格式 */
+  Image?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5741,6 +5805,8 @@ declare interface Ocr {
   ClassifyDetectOCR(data?: ClassifyDetectOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyDetectOCRResponse>;
   /** 商户照片分类 {@link ClassifyStoreNameRequest} {@link ClassifyStoreNameResponse} */
   ClassifyStoreName(data?: ClassifyStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<ClassifyStoreNameResponse>;
+  /** 图像切边增强 {@link CropEnhanceImageOCRRequest} {@link CropEnhanceImageOCRResponse} */
+  CropEnhanceImageOCR(data?: CropEnhanceImageOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CropEnhanceImageOCRResponse>;
   /** 异步文档抽取Agent(查询任务) {@link DescribeExtractDocAgentJobRequest} {@link DescribeExtractDocAgentJobResponse} */
   DescribeExtractDocAgentJob(data?: DescribeExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtractDocAgentJobResponse>;
   /** 作文批改Agent（查询任务） {@link DescribeMarkEssayAgentJobRequest} {@link DescribeMarkEssayAgentJobResponse} */
@@ -5757,6 +5823,8 @@ declare interface Ocr {
   EnglishOCR(data?: EnglishOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnglishOCRResponse>;
   /** 企业证照识别 {@link EnterpriseLicenseOCRRequest} {@link EnterpriseLicenseOCRResponse} */
   EnterpriseLicenseOCR(data?: EnterpriseLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnterpriseLicenseOCRResponse>;
+  /** 试卷手写擦除 {@link EraseHandwrittenImageOCRRequest} {@link EraseHandwrittenImageOCRResponse} */
+  EraseHandwrittenImageOCR(data?: EraseHandwrittenImageOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EraseHandwrittenImageOCRResponse>;
   /** 不动产权证识别 {@link EstateCertOCRRequest} {@link EstateCertOCRResponse} */
   EstateCertOCR(data?: EstateCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EstateCertOCRResponse>;
   /** 实时文档抽取Agent {@link ExtractDocAgentRequest} {@link ExtractDocAgentResponse} */

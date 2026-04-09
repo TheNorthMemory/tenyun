@@ -256,7 +256,7 @@ declare interface AgentPluginInfo {
   EnableRoleAuth?: boolean | null;
   /** 应用配置的插件query信息 */
   Query?: AgentPluginQuery[];
-  /** MCP类型 */
+  /** MCP类型枚举值：0： SSE 模式1： Streamable Http 模式 */
   McpType?: number;
 }
 
@@ -352,6 +352,16 @@ declare interface AgentReference {
   KnowledgeName?: string | null;
   /** 知识库标识 */
   KnowledgeBizId?: string | null;
+}
+
+/** 智能体任务信息 */
+declare interface AgentTask {
+  /** 任务序号 */
+  Index?: number;
+  /** 任务内容 */
+  Content?: string;
+  /** 任务状态 */
+  Status?: string;
 }
 
 /** Agent的思考过程 */
@@ -836,6 +846,12 @@ declare interface Content {
   Widget?: Widget | null;
   /** Widget动作信息 */
   WidgetAction?: WidgetAction | null;
+  /** 任务列表 */
+  Tasks?: AgentTask[] | null;
+  /** 问卷信息 */
+  Questionnaire?: Questionnaire | null;
+  /** 选项卡模式 */
+  OptionMode?: number;
 }
 
 /** 会话内容参考文献信息 */
@@ -997,19 +1013,19 @@ declare interface FileInfo {
 /** 文件信息内容 */
 declare interface FileInfoContent {
   /** 实时文档解析接口返回的 DocBizId */
-  DocBizId?: number | null;
+  DocBizId?: string | null;
   /** 文件名称 */
   FileName?: string | null;
   /** 文件类型 */
   FileType?: string | null;
-  /** 文件大小 */
-  FileSize?: number | null;
+  /** 文件大小，单位为Byte */
+  FileSize?: string | null;
   /** 文件 URL */
   FileUrl?: string | null;
   /** 实时文档解析接口返回的 doc_id。 */
-  DocId?: number | null;
+  DocId?: string | null;
   /** 文件创建时间 */
-  CreateTime?: number | null;
+  CreateTime?: string | null;
 }
 
 /** 不满意回复检索过滤 */
@@ -1988,6 +2004,46 @@ declare interface QaReference {
   KnowledgeBizId?: number | null;
   /** 问答所在知识库名称 */
   KnowledgeName?: string | null;
+}
+
+/** 问题可选项 */
+declare interface QuestionOption {
+  /** 选项的标签 */
+  Label?: string;
+  /** 选项的描述 */
+  Description?: string;
+}
+
+/** 问卷信息 */
+declare interface Questionnaire {
+  /** 问卷的标题 */
+  Title?: string;
+  /** 问卷的问题列表 */
+  Questions?: QuestionnaireQuestion[];
+  /** 问卷的答案列表 */
+  Answers?: QuestionnaireQuestionAnswer[];
+}
+
+/** 问卷的问题 */
+declare interface QuestionnaireQuestion {
+  /** 问题的序号 */
+  Index?: number;
+  /** 问题的内容 */
+  Question?: string;
+  /** 问题类型 */
+  Type?: number;
+  /** 是否必选 */
+  Required?: boolean;
+  /** 问题的选项 */
+  Options?: QuestionOption[];
+}
+
+/** 问卷问题的答案 */
+declare interface QuestionnaireQuestionAnswer {
+  /** 问题 */
+  Question?: string;
+  /** 选中的答案标签 */
+  SelectedLabels?: string[];
 }
 
 /** 搜索引擎参考来源索引 */

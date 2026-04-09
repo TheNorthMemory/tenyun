@@ -918,7 +918,7 @@ declare interface ClientAttester {
   Name?: string;
   /** 认证规则类型。仅出参返回，取值有：PRESET: 系统预置规则，仅允许修改 AttesterDuration；CUSTOM: 用户自定义规则。 */
   Type?: string;
-  /** 认证方法。取值有：TC-RCE: 使用风险识别 RCE 进行认证；TC-CAPTCHA: 使用天御验证码进行认证。 */
+  /** 认证方法。取值有：TC-RCE: 使用风险识别 RCE 进行认证；TC-CAPTCHA: 使用天御验证码进行认证；TC-EO-CAPTCHA: 使用 EdgeOne 人机校验进行认证。 */
   AttesterSource?: string;
   /** 认证有效时间。默认为 60s，支持的单位有：s：秒，取值范围 60～43200；m：分，取值范围 1～720；h：小时，取值范围 1～12。 */
   AttesterDuration?: string;
@@ -926,6 +926,8 @@ declare interface ClientAttester {
   TCRCEOption?: TCRCEOption;
   /** TC-CAPTCHA 认证的配置信息。当 AttesterSource 参数值为 TC-CAPTCHA 时，此字段必填。 */
   TCCaptchaOption?: TCCaptchaOption;
+  /** TC-EO-CAPTCHA 认证的配置信息。当 AttesterSource 参数值为 TC-EO-CAPTCHA 时，此字段必填。 */
+  TCEOCaptchaOption?: TCEOCaptchaOption;
 }
 
 /** 客户端行为校验 */
@@ -3944,6 +3946,12 @@ declare interface TCCaptchaOption {
   CaptchaAppId: string;
   /** AppSecretKey 信息。 */
   AppSecretKey: string;
+}
+
+/** EdgeOne 人机校验认证实例信息。 */
+declare interface TCEOCaptchaOption {
+  /** EdgeOne 人机校验模式，取值有： Invisible：无感验证；Adaptive：自适应交互验证。 */
+  CaptchaMode?: string;
 }
 
 /** RCE 认证选项实例信息。 */
