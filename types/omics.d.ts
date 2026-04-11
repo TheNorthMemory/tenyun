@@ -2,6 +2,42 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 应用详情 */
+declare interface Application {
+  /** 应用ID */
+  ApplicationId?: string;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 类型枚举值：WDL： WDLNEXTFLOW： NEXTFLOW */
+  Type?: string;
+  /** 代码入口 */
+  Entrypoint?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 创建人ID */
+  CreatorId?: string;
+  /** 版本数量 */
+  VersionCount?: number;
+  /** 版本列表 */
+  Versions?: ApplicationVersion[];
+  /** GIT信息 */
+  GitSource?: GitInfo;
+  /** 运行限制 */
+  RunConstraints?: RunConstraints;
+  /** 应用COS文件信息 */
+  CosSource?: CosFileInfo;
+  /** 排序顺序 */
+  SortOrder?: number;
+}
+
 /** 应用版本。 */
 declare interface ApplicationVersion {
   /** 版本类型。 */
@@ -300,6 +336,28 @@ declare interface HPCNode {
   Status?: string;
 }
 
+/** 运行参数模板 */
+declare interface InputTemplate {
+  /** 唯一ID */
+  Uuid?: string;
+  /** 应用输入模板ID */
+  InputTemplateId?: string;
+  /** 关联项目ID */
+  ProjectId?: string;
+  /** 关联应用ID */
+  ApplicationId?: string;
+  /** 关联应用版本 */
+  ApplicationVersionId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 创建人ID */
+  CreatorId?: string;
+}
+
 /** 资源限制范围。 */
 declare interface LimitRange {
   /** 最大CPU设置 */
@@ -338,6 +396,26 @@ declare interface NotificationType {
   Email?: string[];
   /** 当前用户邮箱。 */
   CurrentUserEmail?: boolean;
+}
+
+/** 项目信息 */
+declare interface Project {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 地域 */
+  Region?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 是否默认项目 */
+  IsDefault?: boolean;
 }
 
 /** 云资源ID。 */
@@ -408,6 +486,12 @@ declare interface Run {
   CreateTime?: string;
   /** 更新时间。 */
   UpdateTime?: string;
+}
+
+/** 运行限制 */
+declare interface RunConstraints {
+  /** 运行时可选的Nextflow版本 */
+  NextflowVersion?: string[];
 }
 
 /** 任务。 */
@@ -786,6 +870,48 @@ declare interface DeleteVolumeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeApplicationVersionsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 运行应用ID */
+  ApplicationId: string;
+  /** 翻页入参 */
+  Offset?: number;
+  /** 翻页入参 */
+  Limit?: number;
+}
+
+declare interface DescribeApplicationVersionsResponse {
+  /** 应用运行版本列表 */
+  ApplicationVersions?: ApplicationVersion[];
+  /** 应用运行版本列表总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApplicationsRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 翻页入参 */
+  Limit?: number;
+  /** 翻页入参 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：Name：应用名称ApplicationId：应用IDHasRunCreatorId：创建人IDType：应用类型 */
+  Filters?: Filter[];
+  /** 排序 */
+  OrderBy?: string;
+}
+
+declare interface DescribeApplicationsResponse {
+  /** 应用列表总数 */
+  TotalCount?: number;
+  /** 应用列表 */
+  Applications?: Application[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnvironmentsRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -838,6 +964,48 @@ declare interface DescribeHPCNodesResponse {
   Nodes?: HPCNode[] | null;
   /** 符合条件的数量。 */
   TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInputTemplatesRequest {
+  /** 项目ID */
+  ProjectId?: string;
+  /** 翻页入参 */
+  Limit?: number;
+  /** 翻页入参 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：Name：模板名称InputTemplateId：模板ID */
+  Filters?: Filter[];
+  /** 运行应用版本ID */
+  ApplicationVersionId?: string;
+  /** 运行应用ID */
+  ApplicationId?: string;
+}
+
+declare interface DescribeInputTemplatesResponse {
+  /** 运行应用参数模板列表 */
+  InputTemplates?: InputTemplate[] | null;
+  /** 运行参数模板列表总数 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProjectsRequest {
+  /** 翻页入参 */
+  Limit?: number;
+  /** 翻页入参 */
+  Offset?: number;
+  /** 过滤器，支持过滤字段：Name：项目名称ProjectId：项目IDRegion：地域 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeProjectsResponse {
+  /** 项目列表总数 */
+  TotalCount?: number;
+  /** 项目列表 */
+  Projects?: Project[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -944,6 +1112,26 @@ declare interface DescribeVolumesResponse {
   RequestId?: string;
 }
 
+declare interface GetInputTemplateFileRequest {
+  /** 运行参数模板ID */
+  InputTemplateId: string;
+  /** 项目ID */
+  ProjectId?: string;
+  /** 运行应用版本ID */
+  ApplicationVersionId?: string;
+  /** 运行应用ID */
+  ApplicationId?: string;
+}
+
+declare interface GetInputTemplateFileResponse {
+  /** COS签名url */
+  CosSignedUrl?: string | null;
+  /** 模板内容 */
+  Content?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRunCallsRequest {
   /** 任务Uuid。 */
   RunUuid: string;
@@ -990,6 +1178,28 @@ declare interface GetRunStatusRequest {
 declare interface GetRunStatusResponse {
   /** 作业详情。 */
   Metadata?: RunMetadata;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportCommonApplicationRequest {
+  /** 公共应用ID */
+  CommonAppUuid: string;
+  /** 公共应用重命名 */
+  CommonAppNewName: string;
+  /** 项目ID */
+  ProjectId: string;
+  /** 公共应用类型枚举值：WDL： WDLNEXTFLOW： NEXTFLOW */
+  Type: string;
+  /** NEXTFLOW版本 */
+  NextflowVersion: string;
+  /** 是否内部应用 */
+  Internal?: boolean;
+}
+
+declare interface ImportCommonApplicationResponse {
+  /** 应用ID */
+  ApplicationId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1173,12 +1383,20 @@ declare interface Omics {
   DeleteVolume(data: DeleteVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeResponse>;
   /** 删除缓存卷数据 {@link DeleteVolumeDataRequest} {@link DeleteVolumeDataResponse} */
   DeleteVolumeData(data: DeleteVolumeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeDataResponse>;
+  /** 查询应用版本 {@link DescribeApplicationVersionsRequest} {@link DescribeApplicationVersionsResponse} */
+  DescribeApplicationVersions(data: DescribeApplicationVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationVersionsResponse>;
+  /** 查询项目应用列表 {@link DescribeApplicationsRequest} {@link DescribeApplicationsResponse} */
+  DescribeApplications(data: DescribeApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationsResponse>;
   /** 查询环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data?: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询HPC集群列表 {@link DescribeHPCClustersRequest} {@link DescribeHPCClustersResponse} */
   DescribeHPCClusters(data?: DescribeHPCClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHPCClustersResponse>;
   /** 查询HPC节点列表 {@link DescribeHPCNodesRequest} {@link DescribeHPCNodesResponse} */
   DescribeHPCNodes(data?: DescribeHPCNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHPCNodesResponse>;
+  /** 查询运行参数模板列表 {@link DescribeInputTemplatesRequest} {@link DescribeInputTemplatesResponse} */
+  DescribeInputTemplates(data?: DescribeInputTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInputTemplatesResponse>;
+  /** 查询项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
+  DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
   /** 查询任务批次列表 {@link DescribeRunGroupsRequest} {@link DescribeRunGroupsResponse} */
   DescribeRunGroups(data?: DescribeRunGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunGroupsResponse>;
   /** 查询任务列表 {@link DescribeRunsRequest} {@link DescribeRunsResponse} */
@@ -1189,12 +1407,16 @@ declare interface Omics {
   DescribeTablesRows(data: DescribeTablesRowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesRowsResponse>;
   /** 查询缓存卷列表 {@link DescribeVolumesRequest} {@link DescribeVolumesResponse} */
   DescribeVolumes(data: DescribeVolumesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVolumesResponse>;
+  /** 查询运行参数模板文件 {@link GetInputTemplateFileRequest} {@link GetInputTemplateFileResponse} */
+  GetInputTemplateFile(data: GetInputTemplateFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetInputTemplateFileResponse>;
   /** 查询作业详情 {@link GetRunCallsRequest} {@link GetRunCallsResponse} */
   GetRunCalls(data: GetRunCallsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunCallsResponse>;
   /** 获取任务详情文件 {@link GetRunMetadataFileRequest} {@link GetRunMetadataFileResponse} */
   GetRunMetadataFile(data: GetRunMetadataFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunMetadataFileResponse>;
   /** 查询任务详情 {@link GetRunStatusRequest} {@link GetRunStatusResponse} */
   GetRunStatus(data: GetRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunStatusResponse>;
+  /** 导入公共应用 {@link ImportCommonApplicationRequest} {@link ImportCommonApplicationResponse} */
+  ImportCommonApplication(data: ImportCommonApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ImportCommonApplicationResponse>;
   /** 导入表格文件 {@link ImportTableFileRequest} {@link ImportTableFileResponse} */
   ImportTableFile(data: ImportTableFileRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTableFileResponse>;
   /** 修改缓存卷 {@link ModifyVolumeRequest} {@link ModifyVolumeResponse} */
