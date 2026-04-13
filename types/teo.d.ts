@@ -1058,7 +1058,7 @@ declare interface ConfigGroupVersionInfo {
 
 /** 版本管理配置组工作模式信息。 */
 declare interface ConfigGroupWorkModeInfo {
-  /** 配置组类型，可选项如下：l7_acceleration: 七层加速配置组；edge_functions: 边缘函数配置组。 */
+  /** 配置组类型，可选项如下：l7_acceleration: 七层加速配置组；edge_functions: 边缘函数配置组。web_security: Web 防护配置组。 */
   ConfigGroupType: string;
   /** 工作模式，可选项如下：immediate_effect: 即时生效模式；version_control: 版本管理模式。 */
   WorkMode: string;
@@ -7145,7 +7145,7 @@ declare interface EnableOriginACLResponse {
 declare interface ExportZoneConfigRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 导出配置项的类型列表，不填表示导出所有类型的配置，当前支持的取值有：L7AccelerationConfig：表示导出七层加速配置，对应控制台「站点加速-全局加速配置」和「站点加速-规则引擎」。需注意：后续支持导出的类型会随着迭代增加，导出所有类型时需要注意导出文件大小，建议使用时指定需要导出的配置类型，以便控制请求响应包负载大小。 */
+  /** 导出配置项的类型列表，不填表示导出所有类型的配置，当前支持的取值有：L7AccelerationConfig：表示导出七层加速配置，对应控制台「站点加速-全局加速配置」和「站点加速-规则引擎」。WebSecurity：表示导出 Web 防护配置。 需注意：后续支持导出的类型会随着迭代增加，导出所有类型时需要注意导出文件大小，建议使用时指定需要导出的配置类型，以便控制请求响应包负载大小。 */
   Types?: string[];
 }
 

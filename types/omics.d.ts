@@ -418,6 +418,24 @@ declare interface Project {
   IsDefault?: boolean;
 }
 
+/** 公共应用。 */
+declare interface PublicApplication {
+  /** 应用ID。 */
+  ApplicationId?: string;
+  /** 名称。 */
+  Name?: string;
+  /** 类型。 */
+  Type?: string;
+  /** 应用标记枚举值：SUB_APP： 子应用APP_COLLECTION： 合集STANDALONE_APP： 独立应用 */
+  AppGroupType?: string;
+  /** Nextflow版本 */
+  NextflowVersion?: string[];
+  /** 应用分类 */
+  AppTags?: ToolRepoTag[];
+  /** 应用标识 */
+  AppId?: string;
+}
+
 /** 云资源ID。 */
 declare interface ResourceIds {
   /** 私有网络ID。 */
@@ -722,6 +740,14 @@ declare interface Tag {
   Value: string;
 }
 
+/** 应用分类标签 */
+declare interface ToolRepoTag {
+  /** 应用分类标签ID */
+  TagId?: string;
+  /** 应用分类标签名称 */
+  TagName?: string;
+}
+
 /** 私有网络配置。 */
 declare interface VPCOption {
   /** 私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络） */
@@ -1006,6 +1032,22 @@ declare interface DescribeProjectsResponse {
   TotalCount?: number;
   /** 项目列表 */
   Projects?: Project[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePublicApplicationsRequest {
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+}
+
+declare interface DescribePublicApplicationsResponse {
+  /** 公共应用。 */
+  Applications?: PublicApplication[] | null;
+  /** 符合条件的数量。 */
+  TotalCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1397,6 +1439,8 @@ declare interface Omics {
   DescribeInputTemplates(data?: DescribeInputTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInputTemplatesResponse>;
   /** 查询项目列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
   DescribeProjects(data?: DescribeProjectsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectsResponse>;
+  /** 查询公共应用列表 {@link DescribePublicApplicationsRequest} {@link DescribePublicApplicationsResponse} */
+  DescribePublicApplications(data?: DescribePublicApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicApplicationsResponse>;
   /** 查询任务批次列表 {@link DescribeRunGroupsRequest} {@link DescribeRunGroupsResponse} */
   DescribeRunGroups(data?: DescribeRunGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRunGroupsResponse>;
   /** 查询任务列表 {@link DescribeRunsRequest} {@link DescribeRunsResponse} */

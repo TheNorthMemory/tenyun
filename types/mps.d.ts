@@ -6380,9 +6380,9 @@ declare interface SmartSubtitleTaskAsrFullTextSegmentItem {
 declare interface SmartSubtitleTaskBatchOutput {
   /** 任务进度。 */
   Progress?: number;
-  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  /** 任务状态，有 PROCESSING，SUCCESS，WAITING 和 FAIL 四种。 */
   Status?: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string;
   /** 错误信息。 */
   Message?: string;
@@ -7903,7 +7903,7 @@ declare interface BatchProcessMediaRequest {
   InputInfo: MediaInputInfo[];
   /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。注意：当InputInfo.Type为URL时，该参数是必填项，目前只支持COS输出 */
   OutputStorage?: TaskOutputStorage;
-  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如/movie/201907/。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
   OutputDir?: string;
   /** 智能字幕 */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput;
@@ -7915,8 +7915,10 @@ declare interface BatchProcessMediaRequest {
   SessionContext?: string;
   /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
-  /** 是否跳过元信息获取，可选值： 0：表示不跳过 1：表示跳过 默认值：0 */
+  /** 是否跳过元信息获取，可选值：0：表示不跳过1：表示跳过默认值：0 */
   SkipMateData?: number;
+  /** 执行模式，可选值：Parallel: 并发执行Serial: 串行执行注意：默认并发执行。 */
+  TaskMode?: string;
 }
 
 declare interface BatchProcessMediaResponse {
@@ -9446,16 +9448,22 @@ declare interface DescribeImageTaskDetailResponse {
   Status?: string | null;
   /** 任务失败时的错误码。 */
   ErrCode?: number;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrMsg?: string;
   /** 任务异常Message。 */
   Message?: string;
   /** 图片处理任务的执行状态与结果。 */
   ImageProcessTaskResultSet?: ImageProcessTaskResult[] | null;
-  /** 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务的创建时间，采用 ISO 日期格式。 */
   CreateTime?: string | null;
-  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
   FinishTime?: string | null;
+  /** 模板唯一标识。 */
+  Definition?: number;
+  /** 任务发起参数。 */
+  ImageTask?: ImageTaskInput;
+  /** 图片任务输入信息。 */
+  InputInfo?: MediaInputInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

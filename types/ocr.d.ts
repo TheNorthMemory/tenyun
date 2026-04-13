@@ -1238,6 +1238,12 @@ declare interface MarkInfo {
   AnswerInfos?: AnswerInfo[];
   /** 嵌套题目结构（如果有多层嵌套则会返回子题信息，如果没有嵌套题目则返回空） */
   MarkInfos?: MarkInfo[];
+  /** 题干坐标单位：px */
+  QuestionPositions?: number[];
+  /** 题干插图坐标列表，每个元素包含一张插图的4个角点坐标 */
+  QuestionImagePositions?: Positions[];
+  /** 题目级正确答案（步骤批改时使用，包含完整解题步骤） */
+  RightAnswer?: string;
 }
 
 /** 医疗票据信息 */
@@ -5371,10 +5377,14 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   BoolSingleQuestion?: boolean;
   /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
   EnableDeepThink?: boolean;
-  /** 题目信息输出配置，当key对应为true表示开启配置开关。 当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为ReturnAnswerPosition value为false表示不输出手写答案坐标（降低处理耗时，按需输出）； 设置方式参考 {"KnowledgePoints":true,"TrueAnswer":true} */
+  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改； 设置方式参考 {&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true} */
   QuestionConfigMap?: string;
   /** 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中 */
   ReferenceAnswer?: string;
+  /** 图片/PDF的 Base64 列表值，最多三张。每张图片要求参考ImageBase64 1. 如果ImageBase64List或者ImageUrlList 都没值则取ImageBase64 或者ImageUrl 2.如果ImageBase64List或者ImageUrlList 有一个值，则不取ImageBase64 或者ImageUrl值，优先去list 3.如果ImageBase64List或者ImageUrlList 都有值，则取ImageUrlList */
+  ImageBase64List?: string[];
+  /** 图片/PDF的 Url 地址Base64 列表值，最多三张。每张图片要求参考ImageUrl。 图片生效规则同ImageBase64List */
+  ImageUrlList?: string[];
 }
 
 declare interface SubmitQuestionMarkAgentJobResponse {

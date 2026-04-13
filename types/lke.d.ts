@@ -5117,21 +5117,21 @@ declare interface UpdateSharedKnowledgeResponse {
 }
 
 declare interface UpdateVarRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看如何获取 BotBizId。 */
   AppBizId: string;
-  /** 变量ID */
+  /** 变量 ID。由 CreateVar 接口生成，通过 CreateVar / DescribeVar 返回结果获取。 */
   VarId: string;
-  /** 变量名称，最大支持50个字符 */
+  /** 变量名称，最大支持50个字符，英文字母开头，支持英文数字与下划线”_” 。 */
   VarName: string;
   /** 参数描述 */
   VarDesc?: string;
-  /** 参数类型 */
+  /** 变量类型枚举值：STRING： 字符串INT： 整形BOOL： 布尔型OBJECT： 对象ARRAY_STRING： 字符串数组ARRAY_INT： 整型数组ARRAY_FLOAT： 浮点型数组ARRAY_BOOL： 布尔型数组ARRAY_OBJECT： 对象数组FILE： 文件类型DOCUMENT： 文档类型IMAGE： 图片类型AUDIO： 音频VIDEO： 视频ARRAY_FILE： 文件数组ARRAY_DOCUMENT： 文档数组ARRAY_IMAGE： 图片数组ARRAY_AUDIO： 音频数组ARRAY_VIDEO： 视频数组SECRET： 秘钥ARRAY_ARRAY： 多维数组默认值：STRING */
   VarType?: string;
-  /** 自定义变量默认值 */
+  /** 自定义变量默认值，VarDefaultValue&nbsp;默认为空 */
   VarDefaultValue?: string;
-  /** 自定义变量文件默认名称 */
+  /** 自定义变量文件默认名称，VarDefaultFileName 默认为空 */
   VarDefaultFileName?: string;
-  /** 变量类型 */
+  /** 变量模块类型枚举值：0： API参数1： 环境参数2： 应用参数3： 系统参数 */
   VarModuleType?: number;
 }
 

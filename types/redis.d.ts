@@ -1441,7 +1441,7 @@ declare interface CreateInstanceAccountResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。200：Memcached 1.6 内存版（集群架构）。说明：CKV 版本当前有存量用户使用，暂时保留。 */
+  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。19：Valkey 8.0 内存版（标准架构）。20：Valkey 8.0 内存版（集群架构）。200：Memcached 1.6 内存版（集群架构）。说明：CKV 版本当前有存量用户使用，暂时保留。 */
   TypeId: number;
   /** 内存容量，单位为MB， 数值需为1024的整数倍。具体规格，请通过 DescribeProductInfo 接口查询全地域的售卖规格。TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。 */
   MemSize: number;

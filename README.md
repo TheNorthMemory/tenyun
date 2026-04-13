@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，13819+ 服务数</summary>
+<details><summary>共计 252+ 款产品，13838+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -283,7 +283,7 @@ nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(45) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(93) |
-omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(29) |
+omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(30) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(132) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
@@ -293,7 +293,7 @@ pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(
 rce | [风险识别 RCE](https://cloud.tencent.com/document/product/1343) | 2025-04-25(1) | 2020-11-03(11) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(119) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(66) |
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(84) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
 securitylake | [安全湖](https://cloud.tencent.com/document/product/1720) | 2024-01-17(1) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(36) |

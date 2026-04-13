@@ -980,7 +980,7 @@ declare interface MountInstanceInfo {
   StorageId?: string;
   /** 存储实例名称 */
   StorageName?: string;
-  /** 状态，0可挂载 1不可挂载(挂载限制) */
+  /** 状态枚举值：0： 可挂载（正常）1： 不可挂载（挂载限制）2： 不可挂载（存储配置关闭） */
   Status?: number;
   /** 额外配置 */
   ExtraConf?: StorageExtraConf | null;
@@ -2218,6 +2218,8 @@ declare interface TrainingTaskSetItem {
   SubUinName?: string | null;
   /** 任务AppId */
   AppId?: string;
+  /** 环境变量 */
+  Envs?: EnvVar[];
 }
 
 /** 大模型生成Token统计 */
@@ -2653,11 +2655,11 @@ declare interface CreateTrainingModelResponse {
 }
 
 declare interface CreateTrainingTaskRequest {
-  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
   Name: string;
   /** 计费模式，eg：PREPAID 包年包月（资源组）;POSTPAID_BY_HOUR 按量计费 */
   ChargeType: string;
-  /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
+  /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{&quot;Role&quot;:&quot;WORKER&quot;, &quot;InstanceType&quot;: &quot;TI.S.MEDIUM.POST&quot;, &quot;InstanceNum&quot;: 1}] */
   ResourceConfigInfos: ResourceConfigInfo[];
   /** 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
   FrameworkName?: string;
@@ -2695,7 +2697,7 @@ declare interface CreateTrainingTaskRequest {
   Remark?: string;
   /** 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx */
   DataSource?: string;
-  /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292) */
+  /** 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&amp;内容详见：[TI-ONE接口回调说明] */
   CallbackUrl?: string;
   /** 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效 */
   EncodedStartCmdInfo?: EncodedStartCmdInfo;
@@ -2703,6 +2705,8 @@ declare interface CreateTrainingTaskRequest {
   CodeRepos?: CodeRepoConfig[];
   /** 网络暴露配置 */
   ExposeNetworkConfig?: ExposeNetworkConfig;
+  /** 环境变量 */
+  Envs?: EnvVar[];
 }
 
 declare interface CreateTrainingTaskResponse {

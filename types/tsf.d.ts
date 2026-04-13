@@ -100,6 +100,10 @@ declare interface ApiDetailInfo {
   Md5?: string | null;
   /** RPC 类型 */
   RpcType?: string | null;
+  /** 是否禁用短路径访问开关 */
+  PathMappingUnsupported?: boolean;
+  /** 禁用短路径访问开关原因 */
+  PathMappingUnsupportedMsg?: string;
 }
 
 /** API分组信息 */
@@ -190,6 +194,8 @@ declare interface ApiRateLimitRule {
   Offset?: number | null;
   /** AppId */
   AppId?: string | null;
+  /** 旧格式 method 与 path 分开，新格式 path-Method,如 /checkToken-GET，默认为新格式 */
+  UsePathAndMethodFormat?: boolean;
 }
 
 /** ApiRequestDescr */
@@ -2330,6 +2336,10 @@ declare interface Microservice {
   RunInstanceCount?: number | null;
   /** 微服务的离线实例数目 */
   CriticalInstanceCount?: number | null;
+  /** 是否禁用删除按钮，true：是；false：否。 */
+  DeleteDisabled?: boolean | null;
+  /** 禁用删除原因。 */
+  DeleteDisabledReason?: string | null;
 }
 
 /** 监控概览对象 */
@@ -2870,6 +2880,8 @@ declare interface ServiceSetting {
   LoadBalancerId?: string;
   /** 已存在的负载均衡id */
   ExistingLoadBalancerId?: string;
+  /** 是否为全局服务（仅TCS环境使用） */
+  EnableGlobalService?: boolean;
 }
 
 /** 服务统计结果 */
@@ -3012,6 +3024,10 @@ declare interface SimpleGroup {
   AppMicroServiceType?: string;
   /** k8s 命名空间名称 */
   K8sNamespaceName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdatedTime?: string;
 }
 
 /** 日志投递kafka配置描述的缩简版 */
@@ -7374,7 +7390,7 @@ declare interface ModifyLaneResponse {
 }
 
 declare interface ModifyLaneRuleRequest {
-  /** 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。 */
+  /** 灰度发布规则ID。该参数可以通过调用 DescribeLaneRules 的返回值中的 RuleId 字段来获取或通过登录控制台查看；也可以调用CreateLaneRule创建新的灰度发布规则。 */
   RuleId: string;
   /** 灰度发布规则名称，最多支持60个字符，支持中英文字符。 */
   RuleName: string;
@@ -7382,16 +7398,16 @@ declare interface ModifyLaneRuleRequest {
   Remark: string;
   /** 灰度发布规则标签列表。 */
   RuleTagList: LaneRuleTag[];
-  /** 灰度发布规则标签关系。- RELEATION_AND：与- RELEATION_OR：或 */
-  RuleTagRelationship: string;
-  /** 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。 */
+  /** 泳道配置ID。该参数可以通过调用 DescribeLanes 的返回值中的 LaneId 字段来获取或通过登录控制台查看；也可以调用CreateLane创建新的泳道配置。 */
   LaneId: string;
-  /** 开启状态。- true：开启- false：关闭 */
+  /** 开启状态。true：开启false：关闭 */
   Enable: boolean;
+  /** 灰度发布规则标签关系。- RELEATION_AND：与- RELEATION_OR：或 */
+  RuleTagRelationship?: string;
 }
 
 declare interface ModifyLaneRuleResponse {
-  /** 修改结果。- true：成功- false：失败 */
+  /** 修改结果。true：成功false：失败 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -8021,6 +8037,8 @@ declare interface UpdateApiRateLimitRulesRequest {
   UsableStatus: string;
   /** QPS值。开启限流规则时，必填 */
   MaxQps?: number;
+  /** 旧格式 method 与 path 分开，新格式 path-,如 /checkToken-GET，默认为新格式 */
+  UsePathAndMethodFormat?: boolean;
 }
 
 declare interface UpdateApiRateLimitRulesResponse {

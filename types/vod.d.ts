@@ -2011,7 +2011,7 @@ declare namespace V20180717 {
   interface AigcVideoTaskInputFileInfo {
     /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
     Type?: string;
-    /** 文件分类。取值为：Image: 图片；Video: 视频。 */
+    /** 文件分类。取值为：Image: 图片；注意，要使用Usage字段定义图片类型。Video: 视频。 */
     Category?: string;
     /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：推荐使用小于10M的图片；图片格式的取值为：jpeg，jpg, png。 */
     FileId?: string;
@@ -2019,13 +2019,13 @@ declare namespace V20180717 {
     Url?: string;
     /** 参考类型，GV模型适用。注意：当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。 */
     ReferenceType?: string;
-    /** 用法：Vidu主体Id、参考图模式。参考图模式：只有一张图时候，ObjectId必须不为空（一张图、ObjectId为空，为首帧模式）。Vidu主体Id：prompt可以通过 @主体Id 的方式使用。当 Category 为 Image 时有效。 */
+    /** 用法：Vidu主体Id。Vidu主体Id：prompt可以通过 @主体Id 的方式使用。当 Category 为 Image 时有效。 */
     ObjectId?: string;
     /** 适用于 Vidu-q2 模型。当全部图片携带主体 Id 时，可针对主体设置音色 Id。 当 Category 为 Image 时有效。音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg */
     VoiceId?: string;
     /** 是否保留视频原声。当 Category 为 Video 时有效。取值如下：Enabled：保留Disabled：不保留 */
     KeepOriginalSound?: string;
-    /** 用于区分输入是首帧或参考帧。可选值：FirstFrame：首帧；Reference：参考帧； */
+    /** 用于区分输入是首帧或参考帧。可选值：FirstFrame：首帧；Reference：参考帧；注意，默认是FirstFrame */
     Usage?: string;
   }
 
@@ -8010,7 +8010,7 @@ declare namespace V20180717 {
     ModelName: string;
     /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0； */
     ModelVersion: string;
-    /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图、视频参考、视频编辑等模式。首尾帧视频生成：FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片生成：可传入单张图片或者多张，单张时候ObjectId字段必须不为空（区别于首帧生成）；参考图片，可以调整生成视频的宽高比例。视频编辑、视频参考：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
+    /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图、视频参考、视频编辑等模式。首尾帧视频生成：首帧图片只支持一张图片，图片的Usage字段为FirstFrame，LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片生成：可传入单张图片或者多张，图片的Usage字段为Reference；参考图片，可以调整生成视频的宽高比例。视频编辑、视频参考：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片，图片的Usage字段为Reference。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。x0b关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
     /** 固定主体输入信息。 */
     SubjectInfos?: AigcVideoTaskInputSubjectInfo[];

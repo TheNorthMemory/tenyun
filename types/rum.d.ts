@@ -2,12 +2,40 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** BugLY比较结构体 */
+declare interface CompareCondition {
+  /** App版本 */
+  AppVersion?: string;
+  /** 筛选条件 */
+  Filters?: Filters;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等· 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。· 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
 declare interface Filter {
   /** 一个或者多个过滤值。 */
   Values?: string[];
   /** 过滤键的名称。 */
   Name?: string;
+}
+
+/** BugLY筛选结构体 */
+declare interface Filters {
+  /** 是否反转 */
+  IsReversed?: boolean;
+  /** 键 */
+  Key?: string;
+  /** 名称 */
+  Name?: string;
+  /** 运算符 */
+  Operator?: string;
+  /** 类型 */
+  Type?: number;
+  /** 值 */
+  Values?: string[];
 }
 
 /** 旁路kafka配置 */
@@ -510,6 +538,66 @@ declare interface DescribeAppSingleCaseListRequest {
 declare interface DescribeAppSingleCaseListResponse {
   /** 查询数据返回 */
   Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApplicationExitReportDetailRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 问题Id */
+  ClientIdentify?: string;
+  /** 开始时间 */
+  StartEventTime?: number;
+  /** 结束时间 */
+  EndEventTime?: number;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeApplicationExitReportDetailResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApplicationExitReportListRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeApplicationExitReportListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2246,6 +2334,486 @@ declare interface DescribeErrorResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExceptionDetailRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 消息唯一标识 */
+  ClientIdentify?: string;
+  /** 集群堆栈类型 */
+  ClusterStackType?: number;
+  /** 特征 */
+  Feature?: string;
+  /** 问题类型 */
+  IssueType?: number;
+  /** 事件开始时间 */
+  StartEventTime?: number;
+  /** 事件结束时间 */
+  EndEventTime?: number;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeExceptionDetailResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExceptionReportListRequest {
+  /** 产品Id */
+  ProductId?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 form_list 的值 */
+  ParamToken?: string;
+  /** 问题类型 */
+  IssueType?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序方式 */
+  SortType?: string;
+  /** 特征 */
+  Feature?: string;
+  /** 每页数目 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+  /** 拓展字段 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeExceptionReportListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFOOMMallocProblemDetailRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 消息唯一标识 */
+  ClientIdentify?: string;
+  /** 特征 */
+  Feature?: string;
+  /** 事件开始时间 */
+  StartEventTime?: number;
+  /** 事件结束时间 */
+  EndEventTime?: number;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeFOOMMallocProblemDetailResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFOOMMallocProblemListRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeFOOMMallocProblemListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 消息 */
+  Message?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFOOMMallocReportListRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 特征 */
+  Feature?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeFOOMMallocReportListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 消息 */
+  Message?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFOOMProblemDetailRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 消息唯一标识 */
+  ClientIdentify?: string;
+  /** 特征 */
+  Feature?: string;
+  /** 事件开始时间 */
+  StartEventTime?: number;
+  /** 事件结束时间 */
+  EndEventTime?: number;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeFOOMProblemDetailResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFOOMProblemListRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeFOOMProblemListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 消息 */
+  Message?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFOOMReportListRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 特征 */
+  Feature?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeFOOMReportListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 消息 */
+  Message?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIssuesDistributionRequest {
+  /** 产品Id */
+  ProductId?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 分布维度是自定义维度时，填‘user_custom’ */
+  DimType?: string;
+  /** 维度，e.g. os_version, app_version, model等 */
+  Dimension?: string;
+  /** 数字类型字段的区间范围 */
+  Intervals?: number[];
+  /** 提供给前端使用，当填写本字段时，会覆盖 form_list 的值 */
+  ParamToken?: string;
+  /** 问题Id */
+  IssueId?: string;
+  /** 问题类型 */
+  IssueType?: number;
+  /** 限制返回的个数，默认返回所有值 */
+  ParamLimit?: number;
+  /** 键 */
+  MapKey?: string;
+  /** 名称 */
+  MapName?: string;
+  /** 指标类型 */
+  MetricType?: number;
+  /** 每页数目 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+  /** 用户自定义维度key */
+  UserCustomKey?: string;
+  /** 拓展字段 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeIssuesDistributionResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIssuesListRequest {
+  /** 产品Id */
+  ProductId?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormList?: string;
+  /** 接口调试专用，对比模式下条件A，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListA?: string;
+  /** 接口调试专用，对比模式下条件B，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListB?: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 form_list 的值 */
+  ParamToken?: string;
+  /** 问题类型 */
+  IssueType?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序方式 */
+  SortType?: string;
+  /** 每页数目 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+  /** 问题对比列表模式下，用于标识是按照sort_field字段的A值排序还是B值还是ratio值 */
+  SortABRatio?: string;
+  /** 模式：false:问题列表模式，true:对比列表模式 */
+  Compare?: boolean;
+  /** 对比状态 0:所有 1:新增 2：遗留 3:已解决 */
+  CompareStatus?: number;
+  /** 拓展字段 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeIssuesListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIssuesStatisticsTrendRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 form_list 的值 */
+  ParamToken?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormList?: string;
+  /** 问题Id */
+  IssueId?: string;
+  /** 问题类型 */
+  IssueType?: number;
+  /** 时间窗口 */
+  TimeWindow?: number;
+  /** 累计值 */
+  TotalSize?: boolean;
+  /** 无 */
+  Stat?: number;
+  /** 指标类型 */
+  MetricType?: number;
+  /** 拓展字段 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+  /** 无 */
+  TrendStat?: number;
+}
+
+declare interface DescribeIssuesStatisticsTrendResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLagANRProblemAccountDetailRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 消息唯一标识 */
+  ClientIdentify?: string;
+  /** 特征 */
+  Feature?: string;
+  /** 事件开始时间 */
+  StartEventTime?: number;
+  /** 事件结束时间 */
+  EndEventTime?: number;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeLagANRProblemAccountDetailResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLagANRProblemFeatureAccountsRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 问题特征 */
+  Feature?: string;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeLagANRProblemFeatureAccountsResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 消息 */
+  Message?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLagANRProblemListRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 提供给前端使用，当填写本字段时，会覆盖 formlist 的值 */
+  ParamToken?: string;
+  /** 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息 */
+  FormListString?: string;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页展示最大数量 */
+  PageSize?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序类型 */
+  SortType?: string;
+  /** 拓展数据 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeLagANRProblemListResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 消息 */
+  Message?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProjectLimitsRequest {
   /** 项目ID */
   ProjectID: number;
@@ -2538,6 +3106,62 @@ declare interface DescribeTawInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTokenRequest {
+  /** 筛选条件 */
+  FormListString?: string;
+  /** 仅对比模式下填写，筛选条件A */
+  FormListAString?: string;
+  /** 仅对比模式下填写，筛选条件B */
+  FormListBString?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+  /** 拓展字段 */
+  ExtraData?: string;
+}
+
+declare interface DescribeTokenResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopIssuesRequest {
+  /** 产品Id */
+  ProductId: string;
+  /** 需要对比的查询条件，没有则不填 */
+  Compare?: CompareCondition;
+  /** 查询条件 */
+  Condition?: CompareCondition;
+  /** 问题类型 */
+  IssueType?: number;
+  /** 排序字段 */
+  SortField?: string;
+  /** 排序方式 */
+  SortType?: string;
+  /** topN */
+  TopNum?: number;
+  /** 拓展字段 */
+  ExtraData?: string;
+  /** 请求头 */
+  RequestHeader?: string;
+}
+
+declare interface DescribeTopIssuesResponse {
+  /** 返回值 */
+  Data?: string;
+  /** 状态码 */
+  Code?: number;
+  /** 消息 */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUvListRequest {
   /** ID */
   ProjectId: number;
@@ -2719,6 +3343,10 @@ declare interface Rum {
   DescribeAppSingleCaseDetailList(data: DescribeAppSingleCaseDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSingleCaseDetailListResponse>;
   /** 查询 app 监控个例聚合列表 {@link DescribeAppSingleCaseListRequest} {@link DescribeAppSingleCaseListResponse} */
   DescribeAppSingleCaseList(data: DescribeAppSingleCaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSingleCaseListResponse>;
+  /** 【融合版】获取异常退出分析个例详情 {@link DescribeApplicationExitReportDetailRequest} {@link DescribeApplicationExitReportDetailResponse} */
+  DescribeApplicationExitReportDetail(data: DescribeApplicationExitReportDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationExitReportDetailResponse>;
+  /** 【融合版】获取异常退出分析个例列表 {@link DescribeApplicationExitReportListRequest} {@link DescribeApplicationExitReportListResponse} */
+  DescribeApplicationExitReportList(data: DescribeApplicationExitReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationExitReportListResponse>;
   /** 获取QueryData {@link DescribeDataRequest} {@link DescribeDataResponse} */
   DescribeData(data: DescribeDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataResponse>;
   /** 获取DescribeDataBridgeUrlV2信息 {@link DescribeDataBridgeUrlV2Request} {@link DescribeDataBridgeUrlV2Response} */
@@ -2781,6 +3409,34 @@ declare interface Rum {
   DescribeDataWebVitalsPageV2(data: DescribeDataWebVitalsPageV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDataWebVitalsPageV2Response>;
   /** 获取首页错误信息 {@link DescribeErrorRequest} {@link DescribeErrorResponse} */
   DescribeError(data: DescribeErrorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeErrorResponse>;
+  /** 【融合版】获取异常问题详情数据 {@link DescribeExceptionDetailRequest} {@link DescribeExceptionDetailResponse} */
+  DescribeExceptionDetail(data: DescribeExceptionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExceptionDetailResponse>;
+  /** 【融合版】获取异常(崩溃 错误 安卓anr 安卓foom)个例列表 {@link DescribeExceptionReportListRequest} {@link DescribeExceptionReportListResponse} */
+  DescribeExceptionReportList(data?: DescribeExceptionReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExceptionReportListResponse>;
+  /** 【融合版】FOOM内存分配问题详情 {@link DescribeFOOMMallocProblemDetailRequest} {@link DescribeFOOMMallocProblemDetailResponse} */
+  DescribeFOOMMallocProblemDetail(data: DescribeFOOMMallocProblemDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMMallocProblemDetailResponse>;
+  /** 【融合版】获取FOOM内存分配问题列表数据 {@link DescribeFOOMMallocProblemListRequest} {@link DescribeFOOMMallocProblemListResponse} */
+  DescribeFOOMMallocProblemList(data: DescribeFOOMMallocProblemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMMallocProblemListResponse>;
+  /** 【融合版】FOOM内存分配问题个例列表 {@link DescribeFOOMMallocReportListRequest} {@link DescribeFOOMMallocReportListResponse} */
+  DescribeFOOMMallocReportList(data: DescribeFOOMMallocReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMMallocReportListResponse>;
+  /** 【融合版】获取FOOM个例详情数据 {@link DescribeFOOMProblemDetailRequest} {@link DescribeFOOMProblemDetailResponse} */
+  DescribeFOOMProblemDetail(data: DescribeFOOMProblemDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMProblemDetailResponse>;
+  /** 【融合版】获取FOOM问题列表数据 {@link DescribeFOOMProblemListRequest} {@link DescribeFOOMProblemListResponse} */
+  DescribeFOOMProblemList(data: DescribeFOOMProblemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMProblemListResponse>;
+  /** 【融合版】获取FOOM个例列表 {@link DescribeFOOMReportListRequest} {@link DescribeFOOMReportListResponse} */
+  DescribeFOOMReportList(data: DescribeFOOMReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMReportListResponse>;
+  /** 【融合版】获取问题指定维度下的分布数据 {@link DescribeIssuesDistributionRequest} {@link DescribeIssuesDistributionResponse} */
+  DescribeIssuesDistribution(data?: DescribeIssuesDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIssuesDistributionResponse>;
+  /** 【融合版】获取问题列表数据 {@link DescribeIssuesListRequest} {@link DescribeIssuesListResponse} */
+  DescribeIssuesList(data?: DescribeIssuesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIssuesListResponse>;
+  /** 【融合版】获取问题趋势数据 {@link DescribeIssuesStatisticsTrendRequest} {@link DescribeIssuesStatisticsTrendResponse} */
+  DescribeIssuesStatisticsTrend(data: DescribeIssuesStatisticsTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIssuesStatisticsTrendResponse>;
+  /** 【融合版】获取卡顿ANR问题个例详情 {@link DescribeLagANRProblemAccountDetailRequest} {@link DescribeLagANRProblemAccountDetailResponse} */
+  DescribeLagANRProblemAccountDetail(data: DescribeLagANRProblemAccountDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLagANRProblemAccountDetailResponse>;
+  /** 【融合版】获取卡顿ANR问题个例列表 {@link DescribeLagANRProblemFeatureAccountsRequest} {@link DescribeLagANRProblemFeatureAccountsResponse} */
+  DescribeLagANRProblemFeatureAccounts(data: DescribeLagANRProblemFeatureAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLagANRProblemFeatureAccountsResponse>;
+  /** 【融合版】获取卡顿ANR问题列表 {@link DescribeLagANRProblemListRequest} {@link DescribeLagANRProblemListResponse} */
+  DescribeLagANRProblemList(data: DescribeLagANRProblemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLagANRProblemListResponse>;
   /** 获取应用上报抽样信息 {@link DescribeProjectLimitsRequest} {@link DescribeProjectLimitsResponse} */
   DescribeProjectLimits(data: DescribeProjectLimitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectLimitsResponse>;
   /** 获取 RUM 应用列表 {@link DescribeProjectsRequest} {@link DescribeProjectsResponse} */
@@ -2809,6 +3465,10 @@ declare interface Rum {
   DescribeTawAreas(data?: DescribeTawAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawAreasResponse>;
   /** 查询 RUM 业务系统信息 {@link DescribeTawInstancesRequest} {@link DescribeTawInstancesResponse} */
   DescribeTawInstances(data?: DescribeTawInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTawInstancesResponse>;
+  /** 【融合版】获取查询参数的token {@link DescribeTokenRequest} {@link DescribeTokenResponse} */
+  DescribeToken(data?: DescribeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenResponse>;
+  /** 【融合版】查询top问题列表 {@link DescribeTopIssuesRequest} {@link DescribeTopIssuesResponse} */
+  DescribeTopIssues(data: DescribeTopIssuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopIssuesResponse>;
   /** 获取UV列表 {@link DescribeUvListRequest} {@link DescribeUvListResponse} */
   DescribeUvList(data: DescribeUvListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUvListResponse>;
   /** 获取白名单列表 {@link DescribeWhitelistsRequest} {@link DescribeWhitelistsResponse} */

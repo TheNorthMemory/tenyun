@@ -711,6 +711,12 @@ declare interface DescribeFeatureListResponse {
 }
 
 declare interface DescribeLicenseListRequest {
+  /** 页码，从0开始 */
+  PageNumber: number;
+  /** 每页数据量 */
+  PageSize: number;
+  /** pc端还是mobile端 */
+  Platform: string;
 }
 
 declare interface DescribeLicenseListResponse {
@@ -1136,7 +1142,7 @@ declare interface Vcube {
   /** 查询功能列表 {@link DescribeFeatureListRequest} {@link DescribeFeatureListResponse} */
   DescribeFeatureList(data?: DescribeFeatureListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFeatureListResponse>;
   /** 查询临期License列表 {@link DescribeLicenseListRequest} {@link DescribeLicenseListResponse} */
-  DescribeLicenseList(data?: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
+  DescribeLicenseList(data: DescribeLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseListResponse>;
   /** 查询产品动态 {@link DescribeNewsRequest} {@link DescribeNewsResponse} */
   DescribeNews(data: DescribeNewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNewsResponse>;
   /** 查询cos临时秘钥 {@link DescribeSTSRequest} {@link DescribeSTSResponse} */
