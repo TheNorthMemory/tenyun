@@ -1161,7 +1161,7 @@ declare interface DescribeInstanceListResponse {
 }
 
 declare interface DescribeInstanceRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1236,6 +1236,8 @@ declare interface DescribeInstanceResponse {
   TransportLayerSecurity?: string;
   /** 消息属性增强规则配额 */
   MessageEnrichmentRuleLimit?: number;
+  /** 封禁规则最大数量 */
+  BlockRuleLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

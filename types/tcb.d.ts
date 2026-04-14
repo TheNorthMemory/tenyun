@@ -2138,6 +2138,28 @@ declare interface DestroyStaticStoreResponse {
   RequestId?: string;
 }
 
+declare interface ExecutePGSqlRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 要执行的SQL语句 */
+  Sql: string;
+  /** 指定 role 执行 SQL */
+  Role?: string;
+}
+
+declare interface ExecutePGSqlResponse {
+  /** 影响行数 */
+  AffectedRows?: number;
+  /** 字段名列表 */
+  Columns?: string[] | null;
+  /** 数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 &lt;null&gt;，如果是字符串则为该列的值的字符串表示形式。 */
+  Rows?: string[] | null;
+  /** SQL执行耗时单位：毫秒 */
+  ExecutionTimeMs?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetProvidersRequest {
   /** 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。 */
   EnvId: string;
@@ -2603,6 +2625,8 @@ declare interface Tcb {
   DestroyMySQL(data: DestroyMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMySQLResponse>;
   /** 销毁静态托管资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
+  /** 在PostgreSQL数据库上执行SQL查询 {@link ExecutePGSqlRequest} {@link ExecutePGSqlResponse} */
+  ExecutePGSql(data: ExecutePGSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ExecutePGSqlResponse>;
   /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
   /** 查询云服务器价格 {@link InquireVmPriceRequest} {@link InquireVmPriceResponse} */

@@ -94,6 +94,30 @@ declare interface AggregatorAccount {
   MemberName: string | null;
 }
 
+/** 告警策略列表单个记录结构体 */
+declare interface AlarmPolicyRsp {
+  /** 告警策略唯一标识id */
+  AlarmPolicyId?: number;
+  /** 策略名称 */
+  Name?: string;
+  /** 事件类型 */
+  Type?: number;
+  /** 1：当前账号 2：多账号 */
+  EventScope?: number[];
+  /** 1：高风险 2：中风险 3：低风险 */
+  RiskLevel?: number[];
+  /** 通知周期，1-7数字分别代表周一至周日 */
+  NoticePeriod?: number[];
+  /** 通知时间段 */
+  NoticeTime?: string;
+  /** 通知机制 */
+  NotificationMechanism?: string;
+  /** 策略状态 1：启动 2：停止 */
+  Status?: number;
+  /** 策略描述 */
+  Description?: string | null;
+}
+
 /** 合规详情 */
 declare interface Annotation {
   /** 资源当前实际配置。长度为0~256位字符，即资源不合规配置 */
@@ -560,6 +584,32 @@ declare interface AddAggregateConfigRuleResponse {
   RequestId?: string;
 }
 
+declare interface AddAlarmPolicyRequest {
+  /** 告警策略名 */
+  Name: string;
+  /** 事件范围 1：当前账号 2：多账号 */
+  EventScope: number[];
+  /** 风险等级 1：高风险 2：中风险 3：低风险 */
+  RiskLevel: number[];
+  /** 通知时间段 */
+  NoticeTime: string;
+  /** 通知机制 */
+  NotificationMechanism: string;
+  /** 状态 1：启用 2：停用 */
+  Status: number;
+  /** 通知周期 */
+  NoticePeriod: number[];
+  /** 策略描述 */
+  Description?: string;
+}
+
+declare interface AddAlarmPolicyResponse {
+  /** 告警策略唯一id */
+  AlarmPolicyId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddCompliancePackRequest {
   /** 合规包规则 */
   ConfigRules: CompliancePackRule[];
@@ -604,6 +654,8 @@ declare interface AddConfigRuleRequest {
 }
 
 declare interface AddConfigRuleResponse {
+  /** 规则ID */
+  RuleId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -696,6 +748,16 @@ declare interface DeleteAggregateConfigRuleRequest {
 }
 
 declare interface DeleteAggregateConfigRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAlarmPolicyRequest {
+  /** 告警策略id */
+  AlarmPolicyId: number;
+}
+
+declare interface DeleteAlarmPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1150,6 +1212,20 @@ declare interface ListAggregatorsResponse {
   RequestId?: string;
 }
 
+declare interface ListAlarmPolicyRequest {
+  /** 页码 */
+  Offset: number;
+}
+
+declare interface ListAlarmPolicyResponse {
+  /** 返回记录的数量 */
+  Total?: number;
+  /** 告警策略返回值 */
+  AlarmPolicyList?: AlarmPolicyRsp[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListCompliancePacksRequest {
   /** 数量 */
   Limit: number;
@@ -1494,6 +1570,32 @@ declare interface UpdateAggregateConfigRuleResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAlarmPolicyRequest {
+  /** 告警策略id */
+  AlarmPolicyId: number;
+  /** 告警策略名 */
+  Name?: string;
+  /** 事件范围 1：当前账号 2：多账号 */
+  EventScope?: number[];
+  /** 风险等级 1：高风险 2：中风险 3：低风险 */
+  RiskLevel?: number[];
+  /** 通知时间段 */
+  NoticeTime?: string;
+  /** 通知机制 */
+  NotificationMechanism?: string;
+  /** 状态 1：启用 2：停用 */
+  Status?: number;
+  /** 通知周期,1-7数字分别代表周一到周日 */
+  NoticePeriod?: number[];
+  /** 策略描述 */
+  Description?: string;
+}
+
+declare interface UpdateAlarmPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateCompliancePackRequest {
   /** 合规包名称 */
   CompliancePackName: string;
@@ -1605,6 +1707,8 @@ declare interface Config {
   AddAggregateCompliancePack(data: AddAggregateCompliancePackRequest, config?: AxiosRequestConfig): AxiosPromise<AddAggregateCompliancePackResponse>;
   /** 账号组新建规则 {@link AddAggregateConfigRuleRequest} {@link AddAggregateConfigRuleResponse} */
   AddAggregateConfigRule(data: AddAggregateConfigRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAggregateConfigRuleResponse>;
+  /** 新建告警 {@link AddAlarmPolicyRequest} {@link AddAlarmPolicyResponse} */
+  AddAlarmPolicy(data: AddAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AddAlarmPolicyResponse>;
   /** 新建合规包 {@link AddCompliancePackRequest} {@link AddCompliancePackResponse} */
   AddCompliancePack(data: AddCompliancePackRequest, config?: AxiosRequestConfig): AxiosPromise<AddCompliancePackResponse>;
   /** 新建规则 {@link AddConfigRuleRequest} {@link AddConfigRuleResponse} */
@@ -1623,6 +1727,8 @@ declare interface Config {
   DeleteAggregateCompliancePack(data: DeleteAggregateCompliancePackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAggregateCompliancePackResponse>;
   /** 账号组删除规则 {@link DeleteAggregateConfigRuleRequest} {@link DeleteAggregateConfigRuleResponse} */
   DeleteAggregateConfigRule(data: DeleteAggregateConfigRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAggregateConfigRuleResponse>;
+  /** 删除告警 {@link DeleteAlarmPolicyRequest} {@link DeleteAlarmPolicyResponse} */
+  DeleteAlarmPolicy(data: DeleteAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmPolicyResponse>;
   /** 删除合规包 {@link DeleteCompliancePackRequest} {@link DeleteCompliancePackResponse} */
   DeleteCompliancePack(data: DeleteCompliancePackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCompliancePackResponse>;
   /** 删除规则 {@link DeleteConfigRuleRequest} {@link DeleteConfigRuleResponse} */
@@ -1667,6 +1773,8 @@ declare interface Config {
   ListAggregateDiscoveredResources(data: ListAggregateDiscoveredResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateDiscoveredResourcesResponse>;
   /** 账号组列表 {@link ListAggregatorsRequest} {@link ListAggregatorsResponse} */
   ListAggregators(data: ListAggregatorsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregatorsResponse>;
+  /** 告警策略列表 {@link ListAlarmPolicyRequest} {@link ListAlarmPolicyResponse} */
+  ListAlarmPolicy(data: ListAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListAlarmPolicyResponse>;
   /** 获取合规包列表 {@link ListCompliancePacksRequest} {@link ListCompliancePacksResponse} */
   ListCompliancePacks(data: ListCompliancePacksRequest, config?: AxiosRequestConfig): AxiosPromise<ListCompliancePacksResponse>;
   /** 获取评估结果（规则维度） {@link ListConfigRuleEvaluationResultsRequest} {@link ListConfigRuleEvaluationResultsResponse} */
@@ -1707,6 +1815,8 @@ declare interface Config {
   UpdateAggregateConfigDeliver(data: UpdateAggregateConfigDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAggregateConfigDeliverResponse>;
   /** 账号组编辑规则 {@link UpdateAggregateConfigRuleRequest} {@link UpdateAggregateConfigRuleResponse} */
   UpdateAggregateConfigRule(data: UpdateAggregateConfigRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAggregateConfigRuleResponse>;
+  /** 更新告警 {@link UpdateAlarmPolicyRequest} {@link UpdateAlarmPolicyResponse} */
+  UpdateAlarmPolicy(data: UpdateAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlarmPolicyResponse>;
   /** 编辑合规包 {@link UpdateCompliancePackRequest} {@link UpdateCompliancePackResponse} */
   UpdateCompliancePack(data: UpdateCompliancePackRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCompliancePackResponse>;
   /** 修改合规包状态 {@link UpdateCompliancePackStatusRequest} {@link UpdateCompliancePackStatusResponse} */

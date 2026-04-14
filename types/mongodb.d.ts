@@ -668,6 +668,22 @@ declare interface ReplicateSetInfo {
   Nodes?: NodeProperty[];
 }
 
+/** 待回档collection */
+declare interface RestoreCollection {
+  /** 待回档的原collection */
+  OldCollection: string;
+  /** 回档后的collection */
+  NewCollection: string;
+}
+
+/** 库表回档到新实例，库表信息 */
+declare interface RestoreDatabases {
+  /** DB名称。 */
+  Db: string;
+  /** 待回档的集合信息。 */
+  Collections: RestoreCollection[];
+}
+
 /** 安全组信息 */
 declare interface SecurityGroup {
   /** 所属项目 ID。 */
@@ -2262,6 +2278,22 @@ declare interface RestartNodesResponse {
   RequestId?: string;
 }
 
+declare interface RestoreDBInstanceRequest {
+  /** 实例 ID。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 指定回档的目标时间点。该时间必须处于实例的备份保留期内。参数格式：YYYY-MM-DD hh:mm:ss */
+  RestoreTime: string;
+  /** 回档的库表信息。 */
+  Databases: RestoreDatabases[];
+}
+
+declare interface RestoreDBInstanceResponse {
+  /** 回档任务流程 ID。 */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetAccountUserPrivilegeRequest {
   /** 指定待设置账号的实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -2977,6 +3009,8 @@ declare interface Mongodb {
   ResetDBInstancePassword(data: ResetDBInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDBInstancePasswordResponse>;
   /** 重启数据库节点 {@link RestartNodesRequest} {@link RestartNodesResponse} */
   RestartNodes(data: RestartNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartNodesResponse>;
+  /** 回档实例 {@link RestoreDBInstanceRequest} {@link RestoreDBInstanceResponse} */
+  RestoreDBInstance(data: RestoreDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestoreDBInstanceResponse>;
   /** 设置账户权限 {@link SetAccountUserPrivilegeRequest} {@link SetAccountUserPrivilegeResponse} */
   SetAccountUserPrivilege(data: SetAccountUserPrivilegeRequest, config?: AxiosRequestConfig): AxiosPromise<SetAccountUserPrivilegeResponse>;
   /** 设置云数据库实例的自动备份规则 {@link SetBackupRulesRequest} {@link SetBackupRulesResponse} */

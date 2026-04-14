@@ -128,6 +128,8 @@ declare interface AuditLog {
   TemplateInfo?: LogRuleTemplateInfo[];
   /** 事务ID */
   TrxId?: number;
+  /** 客户端端口 */
+  ClientPort?: number;
 }
 
 /** 审计日志文件 */

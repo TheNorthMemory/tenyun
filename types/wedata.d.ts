@@ -10625,6 +10625,8 @@ declare namespace V20210820 {
     ProjectId: string | null;
     /** 任务周期类型 */
     CycleType?: string | null;
+    /** 事件名称 */
+    EventName?: string | null;
   }
 
   /** 事件详情 */

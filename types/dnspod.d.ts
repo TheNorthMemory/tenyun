@@ -1411,7 +1411,7 @@ declare interface CreateRecordRequest {
   SubDomain?: string;
   /** 线路的 ID，可以通过接口DescribeRecordLineList查看当前域名允许的线路信息，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
   RecordLineId?: string;
-  /** MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围1-65535。 */
+  /** MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围0-65535。取值范围：[0, 65535] */
   MX?: number;
   /** TTL，范围1-604800，不同套餐域名最小值不同。 */
   TTL?: number;
@@ -1423,7 +1423,7 @@ declare interface CreateRecordRequest {
   Remark?: string;
   /** 开启DNSSEC时，强制添加CNAME/URL记录 */
   DnssecConflictMode?: string;
-  /** 记录分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。 */
+  /** 记录分组 Id。可以通过接口 DescribeRecordGroupList 接口 GroupId 字段获取。取值参考：DescribeRecordGroupList */
   GroupId?: number;
 }
 
@@ -2653,7 +2653,7 @@ declare interface ModifyPackageDomainResponse {
 }
 
 declare interface ModifyRecordBatchRequest {
-  /** 记录ID数组。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId。单次最多修改5000条记录。 */
+  /** 记录ID数组。可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId。单次最多修改5000条记录。取值参考：DescribeRecordList */
   RecordIdList: number[];
   /** 要修改的字段，可选值为 [“sub_domain”、”record_type”、”area”、”value”、”mx”、”ttl”、”status”] 中的某一个。 */
   Change: string;
@@ -2661,7 +2661,7 @@ declare interface ModifyRecordBatchRequest {
   ChangeTo: string;
   /** 要修改到的记录值，仅当 change 字段为 “record_type” 时为必填参数。 */
   Value?: string;
-  /** MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围1-65535。 */
+  /** MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围0-65535。 */
   MX?: string;
 }
 
@@ -2755,7 +2755,7 @@ declare interface ModifyRecordRequest {
   SubDomain?: string;
   /** 线路的 ID，可以通过接口DescribeRecordLineList查看当前域名允许的线路信息，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。 */
   RecordLineId?: string;
-  /** MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围1-65535。 */
+  /** MX 优先级，当记录类型是 MX、HTTPS、SVCB 时必填，范围0-65535。取值范围：[0, 65535] */
   MX?: number;
   /** TTL，范围1-604800，不同等级域名最小值不同。 */
   TTL?: number;

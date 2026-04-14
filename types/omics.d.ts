@@ -1041,6 +1041,10 @@ declare interface DescribePublicApplicationsRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
+  /** 父应用ID */
+  ParentAppId?: string;
+  /** 应用类型枚举值：WDL： WDLNEXTFLOW： NEXTFLOW */
+  AppType?: string;
 }
 
 declare interface DescribePublicApplicationsResponse {

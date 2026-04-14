@@ -1602,7 +1602,7 @@ declare interface Service {
   SubUin?: string | null;
   /** app_id */
   AppId?: number | null;
-  /** 服务的业务状态 */
+  /** 服务的业务状态CREATING 创建中CREATE_FAILED 创建失败CREATE_SUCCEED 创建成功ARREARS_STOP 因欠费停止WHITELIST_STOP 白名单额度不足RELEASE_FAILED 资源释放失败WHITELIST_RELEASE_FAILED 白名单资源释放失败TIMEOUT_EXCEPTION 创建超时异常BILLING 计费中WHITELIST_USING 白名单试用中 */
   BusinessStatus?: string | null;
   /** 已废弃,以ServiceInfo中的对应为准 */
   ServiceLimit?: ServiceLimit;
@@ -1610,7 +1610,7 @@ declare interface Service {
   ScheduledAction?: ScheduledAction;
   /** 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED */
   CreateFailedReason?: string | null;
-  /** 服务状态CREATING 创建中CREATE_FAILED 创建失败Normal	正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
+  /** 服务状态CREATING 创建中CREATE_FAILED 创建失败TIMEOUT_EXCEPTION 创建超时异常Normal 正常运行中Stopped 已停止Stopping 停止中Abnormal 异常Pending 启动中Waiting 就绪中 */
   Status?: string | null;
   /** 费用信息 */
   BillingInfo?: string | null;
@@ -1720,7 +1720,7 @@ declare interface ServiceGroup {
   RunningServiceCount?: number | null;
   /** 服务描述 */
   Services?: Service[] | null;
-  /** 服务组状态，与服务一致 CREATING 创建中 CREATE_FAILED 创建失败 Normal	正常运行中 Stopped 已停止 Stopping 停止中 Abnormal 异常 Pending 启动中 Waiting 就绪中 */
+  /** 服务组状态，与服务一致 CREATING 创建中 CREATE_FAILED 创建失败 Normal 正常运行中 Stopped 已停止 Stopping 停止中 Abnormal 异常 Pending 启动中 Waiting 就绪中 */
   Status?: string | null;
   /** 服务组标签 */
   Tags?: Tag[] | null;
@@ -1732,7 +1732,7 @@ declare interface ServiceGroup {
   BillingInfo?: string | null;
   /** 服务的创建来源 */
   CreateSource?: string | null;
-  /** 服务组的权重更新状态 UPDATING 更新中 UPDATED 更新成功 UPDATE_FAILED 更新失败 */
+  /** 服务组的权重更新状态UPDATING 更新中 UPDATED 更新成功 UPDATE_FAILED 更新失败 */
   WeightUpdateStatus?: string | null;
   /** 服务组下运行的pod数量 */
   ReplicasCount?: number | null;
@@ -1794,7 +1794,7 @@ declare interface ServiceInfo {
   ModelHotUpdateEnable: boolean | null;
   /** 服务的规格别名 */
   InstanceAlias?: string;
-  /** 实例数量调节方式,默认为手动支持：自动 - "AUTO", 手动 - "MANUAL" */
+  /** 实例数量调节方式,默认为手动支持：自动 - &quot;AUTO&quot;, 手动 - &quot;MANUAL&quot; */
   ScaleMode?: string | null;
   /** 定时伸缩任务 */
   CronScaleJobs?: CronScaleJob[] | null;
@@ -2407,7 +2407,7 @@ declare interface CreateModelServiceAuthTokenResponse {
 declare interface CreateModelServiceRequest {
   /** 新增版本时需要填写 */
   ServiceGroupId?: string;
-  /** 不超过60个字，仅支持英文、数字、下划线"_"、短横"-"，只能以英文、数字开头 */
+  /** 不超过60个字，仅支持英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以英文、数字开头 */
   ServiceGroupName?: string;
   /** 模型服务的描述 */
   ServiceDescription?: string;
@@ -2423,9 +2423,9 @@ declare interface CreateModelServiceRequest {
   Env?: EnvVar[];
   /** 资源描述，指定包年包月模式下的cpu,mem,gpu等信息，后付费无需填写 */
   Resources?: ResourceInfo;
-  /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST	2C4GTI.S.LARGE.POST	4C8GTI.S.2XLARGE16.POST	8C16GTI.S.2XLARGE32.POST	8C32GTI.S.4XLARGE32.POST	16C32GTI.S.4XLARGE64.POST	16C64GTI.S.6XLARGE48.POST	24C48GTI.S.6XLARGE96.POST	24C96GTI.S.8XLARGE64.POST	32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST	4C20G T4*1/4TI.GN7.2XLARGE40.POST	10C40G T4*1/2TI.GN7.2XLARGE32.POST	8C32G T4*1TI.GN7.5XLARGE80.POST	20C80G T4*1TI.GN7.8XLARGE128.POST	32C128G T4*1TI.GN7.10XLARGE160.POST	40C160G T4*2TI.GN7.20XLARGE320.POST	80C320G T4*4 */
+  /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST 2C4GTI.S.LARGE.POST 4C8GTI.S.2XLARGE16.POST 8C16GTI.S.2XLARGE32.POST 8C32GTI.S.4XLARGE32.POST 16C32GTI.S.4XLARGE64.POST 16C64GTI.S.6XLARGE48.POST 24C48GTI.S.6XLARGE96.POST 24C96GTI.S.8XLARGE64.POST 32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST 4C20G T41/4TI.GN7.2XLARGE40.POST 10C40G T41/2TI.GN7.2XLARGE32.POST 8C32G T41TI.GN7.5XLARGE80.POST 20C80G T41TI.GN7.8XLARGE128.POST 32C128G T41TI.GN7.10XLARGE160.POST 40C160G T42TI.GN7.20XLARGE320.POST 80C320G T4*4 */
   InstanceType?: string;
-  /** 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL",默认为MANUAL */
+  /** 扩缩容类型 支持：自动 - &quot;AUTO&quot;, 手动 - &quot;MANUAL&quot;,默认为MANUAL */
   ScaleMode?: string;
   /** 实例数量, 不同计费模式和调节模式下对应关系如下PREPAID 和 POSTPAID_BY_HOUR:手动调节模式下对应 实例数量自动调节模式下对应 基于时间的默认策略的实例数量HYBRID_PAID:后付费实例手动调节模式下对应 实例数量后付费实例自动调节模式下对应 时间策略的默认策略的实例数量 */
   Replicas?: number;
@@ -2457,7 +2457,7 @@ declare interface CreateModelServiceRequest {
   VolumeMount?: VolumeMount;
   /** 服务限速限流相关配置 */
   ServiceLimit?: ServiceLimit;
-  /** 回调地址，用于回调创建服务状态信息，回调格式&内容详情见：[TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292) */
+  /** 回调地址，用于回调创建服务状态信息，回调格式&amp;内容详情见：TI-ONE 接口回调说明 */
   CallbackUrl?: string;
   /** 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。 */
   ModelTurboEnable?: boolean;
@@ -2471,7 +2471,7 @@ declare interface CreateModelServiceRequest {
   CommandBase64?: string;
   /** 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092 */
   ServicePort?: number;
-  /** 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD */
+  /** 服务的部署类型 [标准部署，分布式多机部署，] 默认STANDARD枚举值：STANDARD： 标准部署DIST： 多机分布式部署ROLE_SET： 多角色部署 */
   DeployType?: string;
   /** 单副本下的实例数，仅在部署类型为DIST时生效，默认1 */
   InstancePerReplicas?: number;
@@ -3079,7 +3079,7 @@ declare interface DescribeInferTemplatesResponse {
 }
 
 declare interface DescribeLogsRequest {
-  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
+  /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：TRAINNOTEBOOKINFERBATCH */
   Service: string;
   /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
   StartTime?: string;
@@ -3087,9 +3087,9 @@ declare interface DescribeLogsRequest {
   EndTime?: string;
   /** 日志查询条数，默认值100，最大值1000 */
   Limit?: number;
-  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
+  /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：Service类型为TRAIN：调用DescribeTrainingTask接口查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceIdService类型为NOTEBOOK：调用DescribeNotebook接口查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodNameService类型为INFER：调用DescribeModelServiceGroup接口查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceIdService类型为BATCH：调用DescribeBatchTask接口查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
   ServiceId?: string;
-  /** Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList注：支持结尾通配符* */
+  /** Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：Service类型为TRAIN：调用DescribeTrainingTaskPods接口查询训练任务pod列表，PodName为接口返回值中Response.PodNamesService类型为NOTEBOOK：调用DescribeNotebook接口查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodNameService类型为INFER：调用DescribeModelService接口查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfosService类型为BATCH：调用DescribeBatchTask接口查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList注：支持结尾通配符* */
   PodName?: string;
   /** 排序方向（可选值为ASC, DESC ），默认为DESC */
   Order?: string;
@@ -3097,7 +3097,7 @@ declare interface DescribeLogsRequest {
   OrderField?: string;
   /** 日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回 */
   Context?: string;
-  /** 过滤条件注意: 1. Filter.Name：目前只支持Key（也就是按关键字过滤日志）2. Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足3. Filter. Negative和Filter. Fuzzy没有使用 */
+  /** 过滤条件注意: Filter.Name：目前只支持Key（也就是按关键字过滤日志）Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足Filter. Negative和Filter. Fuzzy没有使用 */
   Filters?: Filter[];
   /** 使用OFFSET分页查询时，指定返回的数据偏移量，默认为0 */
   Offset?: number;

@@ -1128,6 +1128,8 @@ declare interface PadTemplate {
   MaxDuration?: number;
   /** 垫片内容类型： 1：图片，2：视频。 默认值：1。 */
   Type?: number;
+  /** 断流垫片触发条件枚举值：0： 主动及异常断流1： 异常断流默认值：0 */
+  TriggerCondition?: number;
 }
 
 /** 播放鉴权key信息。 */

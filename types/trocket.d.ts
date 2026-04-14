@@ -676,6 +676,24 @@ declare interface CreateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateMigrationTaskRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 0 - 未指定（存量）1 - 元数据导入 */
+  Type: number;
+  /** 待导入的消费组列表 */
+  Topics?: TopicItem[];
+  /** 待导入的消费组列表 */
+  Groups?: ConsumeGroupItem[];
+  /** 待导入的角色列表 */
+  Roles?: RoleItem[];
+}
+
+declare interface CreateMigrationTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRoleRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
@@ -1649,6 +1667,8 @@ declare interface Trocket {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建集群 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
+  /** 创建元数据迁移上云任务 {@link CreateMigrationTaskRequest} {@link CreateMigrationTaskResponse} */
+  CreateMigrationTask(data: CreateMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationTaskResponse>;
   /** 创建角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
   CreateRole(data: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
