@@ -22,9 +22,9 @@ declare interface Item {
 
 /** 目标算式在图片上的坐标信息 */
 declare interface ItemCoord {
-  /** 算式高度 */
+  /** 算式高度（单位：px） */
   Height: number;
-  /** 算式宽度 */
+  /** 算式宽度（单位：px） */
   Width: number;
   /** 算式图的左上角横坐标 */
   X: number;

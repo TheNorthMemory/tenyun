@@ -2267,7 +2267,7 @@ declare interface DescribeLogInstanceListRequest {
   Filters?: Filter[];
   /** 日志子类型。枚举值：write： 写日志。read： 读日志。all： 读写日志。 */
   LogSubType?: string;
-  /** 日志开关。不传查询所有日志实例。on：开启。off：关闭。 */
+  /** 日志开关。枚举值：on： 开启off： 关闭默认值：off */
   LogSwitch?: string;
 }
 
@@ -3545,7 +3545,7 @@ declare interface Redis {
   ClearInstance(data: ClearInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ClearInstanceResponse>;
   /** 克隆实例 {@link CloneInstancesRequest} {@link CloneInstancesResponse} */
   CloneInstances(data: CloneInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CloneInstancesResponse>;
-  /** 关闭日志 {@link CloseLogRequest} {@link CloseLogResponse} */
+  /** 关闭审计日志 {@link CloseLogRequest} {@link CloseLogResponse} */
   CloseLog(data: CloseLogRequest, config?: AxiosRequestConfig): AxiosPromise<CloseLogResponse>;
   /** 关闭SSL {@link CloseSSLRequest} {@link CloseSSLResponse} */
   CloseSSL(data: CloseSSLRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSSLResponse>;
@@ -3719,7 +3719,7 @@ declare interface Redis {
   ModifyInstancePassword(data: ModifyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePasswordResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */
   ModifyInstanceReadOnly(data: ModifyInstanceReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceReadOnlyResponse>;
-  /** 修改日志 {@link ModifyLogRequest} {@link ModifyLogResponse} */
+  /** 修改审计日志 {@link ModifyLogRequest} {@link ModifyLogResponse} */
   ModifyLog(data: ModifyLogRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogResponse>;
   /** 修改实例维护时间窗时间 {@link ModifyMaintenanceWindowRequest} {@link ModifyMaintenanceWindowResponse} */
   ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
@@ -3729,7 +3729,7 @@ declare interface Redis {
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
   /** 修改复制组信息 {@link ModifyReplicationGroupRequest} {@link ModifyReplicationGroupResponse} */
   ModifyReplicationGroup(data: ModifyReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReplicationGroupResponse>;
-  /** 开启日志 {@link OpenLogRequest} {@link OpenLogResponse} */
+  /** 开启审计日志 {@link OpenLogRequest} {@link OpenLogResponse} */
   OpenLog(data: OpenLogRequest, config?: AxiosRequestConfig): AxiosPromise<OpenLogResponse>;
   /** 开启SSL {@link OpenSSLRequest} {@link OpenSSLResponse} */
   OpenSSL(data: OpenSSLRequest, config?: AxiosRequestConfig): AxiosPromise<OpenSSLResponse>;

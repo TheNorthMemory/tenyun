@@ -843,6 +843,8 @@ declare interface UpdateServiceConfigsRequest {
   ServiceId: string;
   /** 期望副本数 */
   TargetReplicas?: number;
+  /** 启动参数、环境变量等参数 */
+  DeploymentConfigs?: DeploymentConfig[];
 }
 
 declare interface UpdateServiceConfigsResponse {

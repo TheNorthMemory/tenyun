@@ -3086,6 +3086,20 @@ declare interface UpdateGroupResponse {
   RequestId?: string;
 }
 
+declare interface UpdateIPWhitelistRequest {
+  /** 空间ID */
+  ZoneId?: string;
+  /** ip白名单（上限100个） */
+  IpWhitelist?: string[];
+}
+
+declare interface UpdateIPWhitelistResponse {
+  /** 成功返回 */
+  Success?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateOrganizationIdentityRequest {
   /** 身份ID。可以通过[ListOrganizationIdentity](https://cloud.tencent.com/document/product/850/82934)获取 */
   IdentityId: number;
@@ -3887,6 +3901,8 @@ declare interface Organization {
   UpdateCustomPolicyForRoleConfiguration(data: UpdateCustomPolicyForRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomPolicyForRoleConfigurationResponse>;
   /** 修改用户组信息 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */
   UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
+  /** 更新新建ip白名单 {@link UpdateIPWhitelistRequest} {@link UpdateIPWhitelistResponse} */
+  UpdateIPWhitelist(data?: UpdateIPWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateIPWhitelistResponse>;
   /** 更新组织身份 {@link UpdateOrganizationIdentityRequest} {@link UpdateOrganizationIdentityResponse} */
   UpdateOrganizationIdentity(data: UpdateOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationIdentityResponse>;
   /** 更新组织成员信息 {@link UpdateOrganizationMemberRequest} {@link UpdateOrganizationMemberResponse} */

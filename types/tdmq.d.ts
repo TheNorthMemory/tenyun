@@ -1640,6 +1640,24 @@ declare interface RocketMQNamespace {
   InternalEndpoint?: string | null;
 }
 
+/** RocketMQ角色配置信息 */
+declare interface RocketMQRoleConfig {
+  /** 角色名，对应SecretKey */
+  RoleName?: string;
+  /** accessKey */
+  RoleToken?: string;
+  /** 命名空间 */
+  EnvironmentId?: string;
+  /** 角色权限 */
+  Permissions?: string[];
+  /** 备注 */
+  Remark?: string;
+  /** 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别） */
+  PermType?: string;
+  /** Topic和Group维度权限配置 */
+  DetailedRolePerms?: DetailedRolePerm[];
+}
+
 /** RocketMQ消费组订阅信息 */
 declare interface RocketMQSubscription {
   /** 主题名称 */
@@ -2462,6 +2480,26 @@ declare interface CreateRocketMQGroupV2Request {
 }
 
 declare interface CreateRocketMQGroupV2Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRocketMQMigrationTaskRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 任务类型：0，集群迁移1，导入到指定命名空间 */
+  Type: number;
+  /** 待导入的主题列表 */
+  Topics?: RocketMQTopicConfig[];
+  /** 待导入的消费组列表 */
+  Groups?: RocketMQGroupConfig[];
+  /** 待导入的角色列表 */
+  Roles?: RocketMQRoleConfig[];
+  /** 指定导入的命名空间 */
+  Namespace?: string;
+}
+
+declare interface CreateRocketMQMigrationTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5403,6 +5441,8 @@ declare interface Tdmq {
   CreateRocketMQGroup(data: CreateRocketMQGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupResponse>;
   /** 创建 RocketMQ 消费组 {@link CreateRocketMQGroupV2Request} {@link CreateRocketMQGroupV2Response} */
   CreateRocketMQGroupV2(data: CreateRocketMQGroupV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQGroupV2Response>;
+  /** 创建RocketMQ元数据迁移任务 {@link CreateRocketMQMigrationTaskRequest} {@link CreateRocketMQMigrationTaskResponse} */
+  CreateRocketMQMigrationTask(data: CreateRocketMQMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQMigrationTaskResponse>;
   /** 创建 RocketMQ 命名空间 {@link CreateRocketMQNamespaceRequest} {@link CreateRocketMQNamespaceResponse} */
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
   /** 创建 RocketMQ 角色 {@link CreateRocketMQRoleRequest} {@link CreateRocketMQRoleResponse} */

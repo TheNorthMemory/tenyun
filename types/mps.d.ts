@@ -5466,6 +5466,24 @@ declare interface ProhibitedOcrReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
+/** 剧集项目信息 */
+declare interface Project {
+  /** 项目id */
+  ProjectId?: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 项目描述 */
+  Description?: string;
+  /** 项目术语库 */
+  TermBase?: TermBase[];
+  /** 角色列表 */
+  Speakers?: Speakers[];
+  /** 创建时间（Unix 时间戳） */
+  CreatedAt?: number;
+  /** 更新时间（Unix 时间戳） */
+  UpdatedAt?: number;
+}
+
 /** 纯字幕翻译结果 */
 declare interface PureSubtitleTransResult {
   /** 任务状态（有以下三种）： - PROCESSING- SUCCESS - FAIL */
@@ -6666,6 +6684,22 @@ declare interface SourceTag {
   Value?: string;
 }
 
+/** 角色列表 */
+declare interface Speakers {
+  /** 角色唯一标识 */
+  SpeakerId: string;
+  /** 绑定的音色 ID */
+  VoiceId: string;
+  /** 性别：male / female，默认 male */
+  Gender?: string;
+  /** 年龄段：child / teenager / youth / middle_aged/ senior，默认 youth */
+  AgeGroup?: string;
+  /** 角色描述 */
+  Description?: string;
+  /** 角色人名术语表 */
+  NameTerms?: TermBase[];
+}
+
 /** 指定规格任务统计数据。 */
 declare interface SpecificationDataItem {
   /** 任务规格。 */
@@ -7070,6 +7104,14 @@ declare interface TaskStatDataItem {
   Count?: number;
   /** 任务用量。 */
   Usage?: number;
+}
+
+/** 术语表 */
+declare interface TermBase {
+  /** 术语原语言 */
+  Src: string;
+  /** 术语目标语言 */
+  Dst: string;
 }
 
 /** 涉敏任务控制参数 */
@@ -8304,6 +8346,24 @@ declare interface CreateProcessImageTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateProjectRequest {
+  /** 项目名称 */
+  ProjectName: string;
+  /** 项目术语表 */
+  TermBase?: TermBase[];
+  /** 项目描述 */
+  Description?: string;
+  /** 角色列表 */
+  Speakers?: Speakers[];
+}
+
+declare interface CreateProjectResponse {
+  /** 项目id */
+  ProjectId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateQualityControlTemplateRequest {
   /** 媒体质检模板名称，长度限制：64 个字符。 */
   Name: string;
@@ -8888,6 +8948,16 @@ declare interface DeleteProcessImageTemplateRequest {
 }
 
 declare interface DeleteProcessImageTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProjectRequest {
+  /** 项目id */
+  ProjectId: string;
+}
+
+declare interface DeleteProjectResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11460,6 +11530,26 @@ declare interface ProcessMediaResponse {
   RequestId?: string;
 }
 
+declare interface QueryProjectRequest {
+  /** 项目id */
+  ProjectId?: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 页码，从 1 开始，默认 1 */
+  Page?: number;
+  /** 每页数量，默认 20 */
+  PageSize?: number;
+}
+
+declare interface QueryProjectResponse {
+  /** 符合条件的总数量 */
+  Total?: number;
+  /** 项目数据 */
+  Data?: Project[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeAudioRequest {
   /** base64编码的音频数据 */
   AudioData: string;
@@ -11628,6 +11718,24 @@ declare interface TextTranslationResponse {
   RequestId?: string;
 }
 
+declare interface UpdateProjectRequest {
+  /** 项目id */
+  ProjectId: string;
+  /** 项目名称 */
+  ProjectName?: string;
+  /** 项目术语表 */
+  TermBase?: TermBase[];
+  /** 项目描述 */
+  Description?: string;
+  /** 角色列表 */
+  Speakers?: Speakers[];
+}
+
+declare interface UpdateProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface WithdrawsWatermarkRequest {
   /** 输入媒体文件存储信息。 */
   InputInfo: MediaInputInfo;
@@ -11687,6 +11795,8 @@ declare interface Mps {
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建图片处理模板 {@link CreateProcessImageTemplateRequest} {@link CreateProcessImageTemplateResponse} */
   CreateProcessImageTemplate(data: CreateProcessImageTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProcessImageTemplateResponse>;
+  /** 剧集项目创建 {@link CreateProjectRequest} {@link CreateProjectResponse} */
+  CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 创建媒体质检模板 {@link CreateQualityControlTemplateRequest} {@link CreateQualityControlTemplateResponse} */
   CreateQualityControlTemplate(data: CreateQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQualityControlTemplateResponse>;
   /** 创建采样截图模板 {@link CreateSampleSnapshotTemplateRequest} {@link CreateSampleSnapshotTemplateResponse} */
@@ -11755,6 +11865,8 @@ declare interface Mps {
   DeletePersonSample(data: DeletePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePersonSampleResponse>;
   /** 删除图片处理模板 {@link DeleteProcessImageTemplateRequest} {@link DeleteProcessImageTemplateResponse} */
   DeleteProcessImageTemplate(data?: DeleteProcessImageTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProcessImageTemplateResponse>;
+  /** 剧集项目删除 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
+  DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除媒体质检模板 {@link DeleteQualityControlTemplateRequest} {@link DeleteQualityControlTemplateResponse} */
   DeleteQualityControlTemplate(data: DeleteQualityControlTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQualityControlTemplateResponse>;
   /** 删除采样截图模板 {@link DeleteSampleSnapshotTemplateRequest} {@link DeleteSampleSnapshotTemplateResponse} */
@@ -12023,6 +12135,8 @@ declare interface Mps {
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
   /** 发起媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
+  /** 剧集项目查询 {@link QueryProjectRequest} {@link QueryProjectResponse} */
+  QueryProject(data?: QueryProjectRequest, config?: AxiosRequestConfig): AxiosPromise<QueryProjectResponse>;
   /** 识别音频 {@link RecognizeAudioRequest} {@link RecognizeAudioResponse} */
   RecognizeAudio(data: RecognizeAudioRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAudioResponse>;
   /** 智学智能媒体识别 {@link RecognizeMediaForZhiXueRequest} {@link RecognizeMediaForZhiXueResponse} */
@@ -12041,6 +12155,8 @@ declare interface Mps {
   SyncDubbing(data?: SyncDubbingRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDubbingResponse>;
   /** 文本翻译 {@link TextTranslationRequest} {@link TextTranslationResponse} */
   TextTranslation(data: TextTranslationRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslationResponse>;
+  /** 剧集项目更新 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
+  UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
   /** 提取盲水印 {@link WithdrawsWatermarkRequest} {@link WithdrawsWatermarkResponse} */
   WithdrawsWatermark(data: WithdrawsWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawsWatermarkResponse>;
 }

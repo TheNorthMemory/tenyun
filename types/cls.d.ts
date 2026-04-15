@@ -2957,11 +2957,11 @@ declare interface CreateConfigResponse {
 declare interface CreateConsoleRequest {
   /** 访问方式：public - 公网，internal - 内网 */
   AccessMode: string[];
-  /** 登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录 */
+  /** 登录方式枚举值：0： 账号密码鉴权1： 匿名登录2： 第三方认证登录 */
   LoginMode: number;
   /** 自定义域名前缀 */
   DomainPrefix: string;
-  /** 用户账号信息“账号密码鉴权“登录方式必传 */
+  /** 用户账号信息“账号密码鉴权”登录方式必传 */
   Accounts?: ConsoleAccount[];
   /** 匿名登录账号信息“匿名登录”登录方式必传 */
   AnonymousLogin?: AnonymousLoginInfo;
@@ -5365,11 +5365,11 @@ declare interface ModifyConsoleRequest {
   ConsoleId: string;
   /** 访问方式：public - 公网，internal - 内网 */
   AccessMode?: string[];
-  /** 登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录 */
+  /** 登录方式枚举值：0： 账号密码鉴权1： 匿名登录2： 第三方认证登录 */
   LoginMode?: number;
   /** 自定义域名前缀 */
   DomainPrefix?: string;
-  /** 用户账号信息“账号密码鉴权“登录方式必传 */
+  /** 用户账号信息“账号密码鉴权”登录方式必传 */
   Accounts?: ConsoleAccount[];
   /** 匿名登录账号信息“匿名登录”登录方式必传 */
   AnonymousLogin?: AnonymousLoginInfo;

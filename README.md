@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，13845+ 服务数</summary>
+<details><summary>共计 252+ 款产品，13852+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -274,7 +274,7 @@ mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(51) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(76) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(9) | 2018-07-24(170) |
-mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(198) |
+mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(202) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(67) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
@@ -285,7 +285,7 @@ oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(93) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(30) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
-organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(132) | 2018-12-25(20) |
+organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(133) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(104) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
@@ -324,7 +324,7 @@ tcss | [容器安全服务](https://cloud.tencent.com/document/product/1285) | 2
 tdai | [腾讯云数据库 AI 服务](https://cloud.tencent.com/document/product/1813) | 2025-07-17(19) |
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(18) |
-tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(150) |
+tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(151) |
 tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(17) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
@@ -350,7 +350,7 @@ tsi | [腾讯同传系统](https://cloud.tencent.com/document/product/1399) | 20
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |
 vcg | [视频生成](https://cloud.tencent.com/document/product/1770) | 2024-04-04(2) |
-vclm | [腾讯混元生视频](https://cloud.tencent.com/document/product/1616) | 2024-05-23(23) |
+vclm | [腾讯混元生视频](https://cloud.tencent.com/document/product/1616) | 2024-05-23(24) |
 vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449) | 2022-04-10(36) |
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(17) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |

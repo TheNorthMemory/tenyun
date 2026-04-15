@@ -587,6 +587,8 @@ declare interface AddAggregateConfigRuleResponse {
 declare interface AddAlarmPolicyRequest {
   /** 告警策略名 */
   Name: string;
+  /** 事件类型 1：资源不合规事件 */
+  Type: number;
   /** 事件范围 1：当前账号 2：多账号 */
   EventScope: number[];
   /** 风险等级 1：高风险 2：中风险 3：低风险 */

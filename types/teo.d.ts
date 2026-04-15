@@ -1046,7 +1046,7 @@ declare interface ConfigGroupVersionInfo {
   VersionNumber?: string;
   /** 配置组 ID。 */
   GroupId?: string;
-  /** 配置组类型。取值有：l7_acceleration ：七层加速配置组。edge_functions ：边缘函数配置组。 */
+  /** 配置组类型，可选项如下：l7_acceleration: 七层加速配置组；edge_functions: 边缘函数配置组；web_security: Web 防护配置组。 */
   GroupType?: string;
   /** 版本描述。 */
   Description?: string;

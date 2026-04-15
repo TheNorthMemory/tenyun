@@ -212,6 +212,8 @@ declare interface SandboxInstance {
   ToolName: string;
   /** 实例状态：STARTING（启动中）、RUNNING（运行中）、STOPPING（停止中）、STOPPED（已停止）、STOP_FAILED（停止失败）、FAILED（失败状态） */
   Status: string;
+  /** 是否常驻实例 */
+  Persistent?: boolean;
   /** 超时时间（秒），null 表示无超时设置 */
   TimeoutSeconds?: number;
   /** 过期时间（ISO 8601 格式），null 表示无过期时间 */
@@ -244,6 +246,8 @@ declare interface SandboxTool {
   Status?: string;
   /** 沙箱工具描述信息，最大长度 200 字符 */
   Description?: string;
+  /** 是否常驻沙箱 */
+  Persistent?: boolean;
   /** 默认超时时间，支持格式：5m、300s、1h 等，不指定则使用系统默认值（5 分钟）。最大 24 小时 */
   DefaultTimeoutSeconds?: number;
   /** 网络配置 */
@@ -375,6 +379,8 @@ declare interface CreateSandboxToolRequest {
   CustomConfiguration?: CustomConfiguration;
   /** 沙箱工具日志推送相关配置 */
   LogConfiguration?: LogConfiguration;
+  /** 常驻沙箱标识 */
+  Persistent?: boolean;
 }
 
 declare interface CreateSandboxToolResponse {
