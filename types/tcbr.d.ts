@@ -1006,6 +1006,36 @@ declare interface SearchClsLogResponse {
   RequestId?: string;
 }
 
+declare interface StartVersionInstanceRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 版本名 */
+  VersionName: string;
+}
+
+declare interface StartVersionInstanceResponse {
+  /** pod名 */
+  InstanceName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopVersionInstanceRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 实例名 */
+  InstanceName: string;
+}
+
+declare interface StopVersionInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitServerRollbackRequest {
   /** 环境Id */
   EnvId: string;
@@ -1087,6 +1117,10 @@ declare interface Tcbr {
   ReleaseGray(data: ReleaseGrayRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseGrayResponse>;
   /** 查询日志cls日志信息 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
+  /** 启动版本实例 {@link StartVersionInstanceRequest} {@link StartVersionInstanceResponse} */
+  StartVersionInstance(data: StartVersionInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartVersionInstanceResponse>;
+  /** 停止版本实例 {@link StopVersionInstanceRequest} {@link StopVersionInstanceResponse} */
+  StopVersionInstance(data: StopVersionInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopVersionInstanceResponse>;
   /** 回滚版本 {@link SubmitServerRollbackRequest} {@link SubmitServerRollbackResponse} */
   SubmitServerRollback(data: SubmitServerRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitServerRollbackResponse>;
   /** 更新云托管服务 {@link UpdateCloudRunServerRequest} {@link UpdateCloudRunServerResponse} */

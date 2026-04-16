@@ -1217,6 +1217,8 @@ declare interface ListAggregatorsResponse {
 declare interface ListAlarmPolicyRequest {
   /** 页码 */
   Offset: number;
+  /** 每页展示数量 */
+  Limit: number;
 }
 
 declare interface ListAlarmPolicyResponse {

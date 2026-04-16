@@ -726,6 +726,14 @@ declare interface EnterpriseSecurityGroupRuleRuleInfo {
   Scope?: string;
 }
 
+/** 字段可选项枚举值 */
+declare interface FieldOption {
+  /** 字段展示值 */
+  Text?: string;
+  /** 字段存储值 */
+  Value?: string;
+}
+
 /** 防火墙网段信息 */
 declare interface FwCidrInfo {
   /** 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义 */
@@ -968,6 +976,64 @@ declare interface MultiTopicSearchInformation {
   Context?: string;
 }
 
+/** NDR资产识别服务类型统计结果 */
+declare interface NDRAssetCategoryStats {
+  /** 服务类型 */
+  Name?: string;
+  /** 服务统计结果 */
+  Services?: NDRAssetServiceStats[];
+}
+
+/** NDR资产识别信息 */
+declare interface NDRAssetServiceInfo {
+  /** 资产ID */
+  AssetId?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 地域 */
+  Region?: string;
+  /** 私有网络ID */
+  VpcId?: string;
+  /** 私有网络名称 */
+  VpcName?: string;
+  /** 服务IP */
+  Ip?: string;
+  /** 服务端口 */
+  Port?: number;
+  /** IP版本 "0": IPv4"1": IPv6 */
+  IpVersion?: string;
+  /** IP类型"0": 公网IP"1": EIP"-1": 内网IP */
+  IpType?: string;
+  /** 服务名称 */
+  AssetService?: string;
+  /** 服务版本 */
+  AssetVersion?: string;
+  /** 服务类型 */
+  AssetCategory?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 识别来源"0": 流量识别"1": 云资产实例 */
+  IdentificationSource?: string;
+  /** 首次识别时间 */
+  FirstIdentificationTime?: string;
+  /** 最近识别时间 */
+  LatestIdentificationTime?: string;
+  /** 服务地址 */
+  ServerAddr?: string;
+}
+
+/** NDR资产服务统计结果 */
+declare interface NDRAssetServiceStats {
+  /** 服务名称 */
+  Name?: string;
+  /** 服务计数 */
+  Count?: number;
+}
+
 /** Nat防火墙弹性公网ip列表 */
 declare interface NatFwEipsInfo {
   /** 弹性公网ip */
@@ -1128,6 +1194,16 @@ declare interface NewModeItems {
   Eips?: string[];
   /** 新增模式下新增绑定的出口弹性公网ip个数，其中Eips和AddCount至少传递一个。 */
   AddCount?: number;
+}
+
+/** 查询过滤条件 */
+declare interface OperatorFilter {
+  /** 过滤字段 */
+  Name: string;
+  /** 匹配的值 */
+  Values: string[];
+  /** 操作类型：1：等于 field = value2：大于 field > value3：小于 field < value4：大于等于 field >= value5：小于等于 field <= value6：不等于 field <> value7：IN field IN (value1, value2...)8：NOT IN field NOT IN (value1, value2...)9：模糊匹配 field LIKE value13：非模糊匹配 field NOT LIKE value14：按位与 field & value = value15：between and field between value1 and value2 */
+  OperatorType: number;
 }
 
 /** 引流地域CIDR配置 */
@@ -2537,12 +2613,12 @@ declare interface DescribeBlockIgnoreListRequest {
   Order: string;
   /** 排序列：EndTime结束时间，StartTime开始时间，MatchTimes命中次数 */
   By: string;
+  /** blocklist 封禁列表whitelist 白名单列表 */
+  ShowType: string;
   /** 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common */
   SearchValue?: string;
   /** 规则类型：1封禁，2放通 */
   RuleType?: number;
-  /** blocklist 封禁列表whitelist 白名单列表 */
-  ShowType?: string;
 }
 
 declare interface DescribeBlockIgnoreListResponse {
@@ -2978,6 +3054,44 @@ declare interface DescribeLogsResponse {
   ReturnMsg?: string;
   /** 七层协议，NTA日志有效 */
   AppProtocolList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNDRAssetIdentificationListRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 排序方式，asc正序 desc倒序 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 查询过滤条件，多个条件之间为AND的关系 */
+  Filters?: OperatorFilter[];
+}
+
+declare interface DescribeNDRAssetIdentificationListResponse {
+  /** 符合查询条件的总条数 */
+  Total?: number;
+  /** 查询结果列表 */
+  Data?: NDRAssetServiceInfo[];
+  /** 服务类型统计结果 */
+  AssetCategoryStats?: NDRAssetCategoryStats[];
+  /** 地域可选项 */
+  RegionOptions?: FieldOption[];
+  /** IP版本可选项 */
+  IpVersionOptions?: FieldOption[];
+  /** IP类型可选项 */
+  IpTypeOptions?: FieldOption[];
+  /** 服务类型可选项 */
+  AssetCategoryOptions?: FieldOption[];
+  /** 识别来源可选项 */
+  IdentificationSourceOptions?: FieldOption[];
+  /** 协议可选项 */
+  ProtocolOptions?: FieldOption[];
+  /** 实例类型可选项 */
+  InstanceTypeOptions?: FieldOption[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4347,6 +4461,8 @@ declare interface Cfw {
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
+  /** 获取NDR资产识别结果列表 {@link DescribeNDRAssetIdentificationListRequest} {@link DescribeNDRAssetIdentificationListResponse} */
+  DescribeNDRAssetIdentificationList(data: DescribeNDRAssetIdentificationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationListResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */
   DescribeNatAcRule(data: DescribeNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatAcRuleResponse>;
   /** 查询Nat防火墙Dnat规则 {@link DescribeNatFwDnatRuleRequest} {@link DescribeNatFwDnatRuleResponse} */

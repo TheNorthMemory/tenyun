@@ -172,6 +172,8 @@ declare interface AddRecordBackupTemplateData {
   CreateAt?: string;
   /** 更新时间 */
   UpdateAt?: string;
+  /** 周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像默认值：1 */
+  DayOffset?: number;
 }
 
 /** 查询取回任务详情返回数据 */
@@ -612,6 +614,8 @@ declare interface DescribeRecordBackupTemplateData {
   CreateAt?: string;
   /** 更新时间 */
   UpdateAt?: string;
+  /** 周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像 */
+  DayOffset?: number;
 }
 
 /** 用于查询设备云端录像时间轴信息返回数据 */
@@ -914,6 +918,8 @@ declare interface ListRecordBackupTemplatesData {
   CreateAt?: string;
   /** 更新时间 */
   UpdateAt?: string;
+  /** 周期偏移量，默认1，表示拉去昨天的，0表示拉去今天的，3表示拉去前天的 */
+  DayOffset?: number;
 }
 
 /** 用户下所有实时上云计划中的通道id列表返回数据 */
@@ -1428,6 +1434,8 @@ declare interface UpdateRecordBackupTemplateData {
   CreateAt?: string;
   /** 更新时间 */
   UpdateAt?: string;
+  /** 周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像 */
+  DayOffset?: number;
 }
 
 /** 修改录像上云模板数据结构 */
@@ -1583,6 +1591,8 @@ declare interface AddRecordBackupTemplateRequest {
   DevTimeSections: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
   Scale: number;
+  /** 周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像取值范围：[0, 90]默认值：1 */
+  DayOffset?: number;
 }
 
 declare interface AddRecordBackupTemplateResponse {

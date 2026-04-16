@@ -1672,6 +1672,8 @@ declare interface IndicatorItem {
   Sample?: string;
   /** 检测方法 */
   Method?: string;
+  /** 检验指标项坐标信息 */
+  ItemCoords?: ItemCoordinate;
 }
 
 /** 检验指标项结构v2 */
@@ -1902,6 +1904,16 @@ declare interface IssueInfo {
   IssuedAuthority?: string;
   /** 签发日期 */
   IssuedDate?: string;
+}
+
+/** 检验指标内容坐标 */
+declare interface ItemCoordinate {
+  /** 指标项名称坐标 */
+  Name?: Coordinate;
+  /** 指标结果称坐标 */
+  Result?: Coordinate;
+  /** 指标项范围坐标 */
+  Range?: Coordinate;
 }
 
 /** 体检报告信息 */

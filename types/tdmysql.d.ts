@@ -14,6 +14,30 @@ declare interface ArchiveLogInterval {
   StartTime?: string | null;
 }
 
+/** 归档日志对象 */
+declare interface ArchiveLogModel {
+  /** 归档日志ID */
+  ArchiveLogId?: number | null;
+  /** 备份耗时 */
+  BackupDuration?: number | null;
+  /** 备份集状态 */
+  BackupStatus?: string | null;
+  /** 备份结束时间 */
+  EndTime?: string | null;
+  /** 错误信息 */
+  ErrorMessage?: string | null;
+  /** 过期时间 */
+  ExpiredTime?: string | null;
+  /** 备份文件名 */
+  FileName?: string | null;
+  /** 备份集文件大小，单位Byte */
+  FileSize?: number | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 备份开始时间 */
+  StartTime?: string | null;
+}
+
 /** 修改备份策略对象 */
 declare interface BackupPolicyModelInput {
   /** 备份结束时间 */
@@ -238,6 +262,36 @@ declare interface DescribeDBParametersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBSArchiveLogsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志记录ID */
+  ArchiveLogId?: number;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 备份状态：pending,running,success,failed */
+  FilterStatus?: string;
+  /** 条数限制 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序字段，枚举：StartTime,EndTime,ExpiredTime,FileSize,BackupDuration */
+  OrderBy?: string;
+  /** 排序方式：ASC：顺序, DESC：倒序 */
+  OrderType?: string;
+  /** 开始时间 */
+  StartTime?: string;
+}
+
+declare interface DescribeDBSArchiveLogsResponse {
+  /** 归档日志列表 */
+  Items?: ArchiveLogModel[] | null;
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBSAvailableRecoveryTimeRequest {
   /** 实例ID */
   InstanceId: string;
@@ -457,6 +511,8 @@ declare interface Tdmysql {
   DeleteDBSBackupSets(data: DeleteDBSBackupSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBSBackupSetsResponse>;
   /** 查看实例参数 {@link DescribeDBParametersRequest} {@link DescribeDBParametersResponse} */
   DescribeDBParameters(data: DescribeDBParametersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBParametersResponse>;
+  /** 查询实例归档日志列表 {@link DescribeDBSArchiveLogsRequest} {@link DescribeDBSArchiveLogsResponse} */
+  DescribeDBSArchiveLogs(data: DescribeDBSArchiveLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSArchiveLogsResponse>;
   /** 获取可恢复时间 {@link DescribeDBSAvailableRecoveryTimeRequest} {@link DescribeDBSAvailableRecoveryTimeResponse} */
   DescribeDBSAvailableRecoveryTime(data: DescribeDBSAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSAvailableRecoveryTimeResponse>;
   /** 查询实例克隆列表 {@link DescribeDBSCloneInstancesRequest} {@link DescribeDBSCloneInstancesResponse} */

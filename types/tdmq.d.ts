@@ -1802,6 +1802,12 @@ declare interface Role {
   UpdateTime?: string;
   /** 授权类型（Cluster：集群；TopicAndGroup：主题或消费组） */
   PermType?: string;
+  /** 角色类型枚举值：Temporary： 轮转密钥Permanent： 永久密钥 */
+  TokenType?: string;
+  /** SSM 唯一 ID */
+  SecretName?: string;
+  /** 轮转周期单位：天 */
+  RotateFreq?: number;
 }
 
 /** 安全策略 */
@@ -2251,24 +2257,26 @@ declare interface CreateEnvironmentRoleResponse {
 }
 
 declare interface CreateProClusterRequest {
-  /** 多可用区部署选择三个可用区，示例[200002,200003,200004]单可用区部署选择一个可用区，示例[200002] */
+  /** 多可用区部署选择三个可用区，示例[200002,200003,200004]单可用区部署选择一个可用区，示例[200002]当选择PULSAR.P2.MINI1 时只支持两个可用区，其他支持三个可用区 */
   ZoneIds: number[];
-  /** 集群规格代号参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
+  /** 集群规格代号参考 专业集群规格 */
   ProductName: string;
   /** 1: true，开启自动按月续费0: false，关闭自动按月续费 */
   AutoRenewFlag: number;
   /** 购买时长，取值范围：1～50 */
   TimeSpan: number;
-  /** 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。 */
+  /** 集群名称不能为空，支持数字、字母、中文以及符号 “-_=:.”，长度不超过64个字符 */
   ClusterName: string;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher: number;
-  /** 存储规格参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705) */
+  /** 存储规格参考 专业集群规格 */
   StorageSize?: number;
   /** vpc网络标签 */
   Vpc?: VpcInfo;
   /** 集群的标签列表(已废弃) */
   Tags?: Tag[];
+  /** 集群版本信息 */
+  InstanceVersion?: string;
 }
 
 declare interface CreateProClusterResponse {

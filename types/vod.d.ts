@@ -1809,6 +1809,8 @@ declare namespace V20180717 {
     InputComplianceCheck?: string;
     /** 是否开启输出内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
     OutputComplianceCheck?: string;
+    /** 生成图片张数。*仅ModelName为Kling时有效，可选值 1-9 *。 */
+    OutputImageCount?: number;
   }
 
   /** 场景化 AIGC 生图配置。 */
@@ -1945,6 +1947,8 @@ declare namespace V20180717 {
     FrameInterpolate?: string;
     /** 是否开启图标水印。取值有： Enabled：开启； Disabled：关闭；目前支持的模型有 Vidu，其他模型暂不支持。 */
     LogoAdd?: string;
+    /** 是否为生成的视频添加背景音乐。枚举值：Enabled： 系统将从预设 BGM 库中自动挑选合适的音乐并添加。Disabled： 不添加BGM。默认值：Disabled */
+    EnableBGM?: string;
   }
 
   /** 场景化 AIGC 生图配置。 */

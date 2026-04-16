@@ -2306,6 +2306,8 @@ declare interface RiskDetailItem {
   RiskRuleId?: string;
   /** 风险验证状态 */
   CheckStatus?: string;
+  /**  */
+  AppID?: number;
 }
 
 /** 风险规则 */

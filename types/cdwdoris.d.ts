@@ -74,6 +74,8 @@ declare interface BackUpJobDisplay {
   Encryption?: string;
   /** 是否开通加密存储：0-未开通，1-已开通 */
   EncryptionEnabled?: boolean;
+  /** 任务调度id */
+  ScheduleId?: number;
 }
 
 /** 备份实例中关于cos的信息 */
@@ -506,6 +508,10 @@ declare interface InstanceInfo {
   SlaveInstances?: string[];
   /** ccr服务部署节点ip */
   SyncerIp?: string;
+  /** 是否支持sql convertor */
+  EnableSqlConv?: number;
+  /** 集群时区，默认+08:00 */
+  TimeZone?: string;
 }
 
 /** 实例节点描述信息 */
@@ -858,6 +864,8 @@ declare interface SnapshotRemainPolicy {
   RemainDays?: number;
   /** 保留最新快照的数量 */
   RemainLatestNum?: number;
+  /** 天数单位0：天1：季度2：年 */
+  RemainDaysUnit?: number;
 }
 
 /** 标签描述 */
@@ -1164,6 +1172,8 @@ declare interface DescribeAreaRegionResponse {
   FrontEndRules?: FrontEndRule[];
   /** 返回可用的白名单名称 */
   AvailableWhiteListNames?: string[];
+  /** 隔离天数 */
+  IsolationDays?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1225,6 +1235,8 @@ declare interface DescribeBackUpSchedulesRequest {
   ApplicationType?: number;
   /** 0-未加密；1-已加密 */
   EncryptionFilters?: number[];
+  /** 调度任务id过滤 */
+  ScheduleId?: number;
 }
 
 declare interface DescribeBackUpSchedulesResponse {
@@ -1328,6 +1340,8 @@ declare interface DescribeClusterConfigsResponse {
   HasCN?: boolean;
   /** 实例已经存在的jar包列表 */
   ExistingJarConfList?: ClusterConfigsInfoFromEMR[];
+  /** ipdb的文件大小 byte */
+  IPDBFileSizeLimit?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1856,6 +1870,8 @@ declare interface DescribeWorkloadGroupResponse {
   Status?: string;
   /** 错误信息 */
   ErrorMsg?: string;
+  /** 是否开启监控，0：未开启，1：开启 */
+  MonitorStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

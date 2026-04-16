@@ -886,8 +886,6 @@ declare interface Objects {
   Databases?: Database[] | null;
   /** 高级对象类型，如function、procedure。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型。当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full */
   AdvancedObjects?: string[];
-  /** OnlineDDL类型，冗余字段不做配置用途 */
-  OnlineDDL?: OnlineDDL;
   /** 库/表/视图级 DML/DDL 白名单 */
   DatabasesOpFilter?: DBOpFilter[];
 }
@@ -898,12 +896,6 @@ declare interface OffsetTimeMap {
   PartitionNo?: number;
   /** kafka offset */
   Offset?: number;
-}
-
-/** OnlineDDL类型 */
-declare interface OnlineDDL {
-  /** 状态，ON-启用，OFF-不启用。 */
-  Status: string;
 }
 
 /** DDL/DML 过滤规则 */
@@ -1519,7 +1511,7 @@ declare interface ConfigureSubscribeJobResponse {
 }
 
 declare interface ConfigureSyncJobRequest {
-  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 同步实例id（即标识一个同步作业），形如sync-werwfs23，可通过DescribeSyncJobs接口获取。 */
   JobId: string;
   /** 源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路 */
   SrcAccessType: string;
@@ -1529,11 +1521,11 @@ declare interface ConfigureSyncJobRequest {
   Objects: Objects;
   /** 同步任务名称 */
   JobName?: string;
-  /** 枚举值是 liteMode 和 fullMode ，分别对应精简模式或正常模式 */
+  /** 配置任务模式，默认值为fullMode枚举值：fullMode： 正常模式 */
   JobMode?: string;
   /** 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
   RunMode?: string;
-  /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05" */
+  /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如：&quot;2006-01-02 15:04:05&quot; */
   ExpectRunTime?: string;
   /** 源端tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，SrcInfos中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。 */
   SrcConnectType?: string;

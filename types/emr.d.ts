@@ -566,6 +566,18 @@ declare interface DependService {
   InstanceId: string;
 }
 
+/** 引导脚本回包 */
+declare interface DescribeBootScriptRsp {
+  /** 资源初始化结束自定义脚本文件 */
+  ResourceAfter: PreExecuteFileSetting[] | null;
+  /** 集群启动前自定义脚本文件 */
+  ClusterBefore: PreExecuteFileSetting[] | null;
+  /** 集群启动后自定义脚本文件 */
+  ClusterAfter: PreExecuteFileSetting[] | null;
+  /** 服务下线前自定义脚本 */
+  ServiceBefore?: PreExecuteFileSetting[] | null;
+}
+
 /** 节点规格 */
 declare interface DescribeNodeSpec {
   /** 节点类型 */
@@ -2028,6 +2040,36 @@ declare interface PodVolume {
   PVCVolume?: PersistentVolumeContext | null;
   /** 当VolumeType为"hostpath"时，该字段生效。 */
   HostVolume?: HostVolumeContext | null;
+}
+
+/** 预执行脚本配置 */
+declare interface PreExecuteFileSetting {
+  /** 脚本在COS上路径 */
+  Path?: string;
+  /** 执行脚本参数 */
+  Args?: string;
+  /** COS的Bucket名称 */
+  Bucket?: string;
+  /** COS的Region名称 */
+  Region?: string;
+  /** COS的Domain数据 */
+  Domain?: string;
+  /** 执行顺序 */
+  RunOrder?: number;
+  /** resourceAfter 或 clusterAfter */
+  WhenRun?: string;
+  /** 脚本文件名 */
+  CosFileName?: string;
+  /** 脚本的cos地址 */
+  CosFileURI?: string;
+  /** cos的SecretId */
+  CosSecretId?: string;
+  /** Cos的SecretKey */
+  CosSecretKey?: string;
+  /** cos的appid */
+  AppId?: string;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 预执行脚本配置 */
@@ -3622,6 +3664,20 @@ declare interface DescribeAutoScaleStrategiesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBootScriptRequest {
+  /** EMR实例序列号 */
+  InstanceId: string;
+  /** 引导脚本类型，resourceAfter,clusterAfter,clusterBefore不填时表示全部时机 */
+  BootType?: string;
+}
+
+declare interface DescribeBootScriptResponse {
+  /** 引导脚本详情 */
+  Detail: DescribeBootScriptRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterFlowStatusDetailRequest {
   /** EMR实例ID */
   InstanceId: string;
@@ -4850,6 +4906,20 @@ declare interface ModifyAutoScaleStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBootScriptRequest {
+  /** EMR实例Id */
+  InstanceId: string;
+  /** 引导脚本类型,resourceAfter,clusterAfter,clusterBefore */
+  BootType: string;
+  /** 引导脚本的具体变更，如为空表示WhenRun时机无引导脚本 */
+  PreExecutedFileSettings?: PreExecuteFileSetting[];
+}
+
+declare interface ModifyBootScriptResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGlobalConfigRequest {
   /** emr集群的英文id */
   InstanceId: string;
@@ -5505,6 +5575,8 @@ declare interface Emr {
   DescribeAutoScaleRecords(data: DescribeAutoScaleRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleRecordsResponse>;
   /** 获取自动扩缩容规则 {@link DescribeAutoScaleStrategiesRequest} {@link DescribeAutoScaleStrategiesResponse} */
   DescribeAutoScaleStrategies(data: DescribeAutoScaleStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScaleStrategiesResponse>;
+  /** 获取引导脚本 {@link DescribeBootScriptRequest} {@link DescribeBootScriptResponse} */
+  DescribeBootScript(data: DescribeBootScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBootScriptResponse>;
   /** 查询EMR集群任务运行详情状态 {@link DescribeClusterFlowStatusDetailRequest} {@link DescribeClusterFlowStatusDetailResponse} */
   DescribeClusterFlowStatusDetail(data: DescribeClusterFlowStatusDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterFlowStatusDetailResponse>;
   /** 查询集群节点信息 {@link DescribeClusterNodesRequest} {@link DescribeClusterNodesResponse} */
@@ -5599,6 +5671,8 @@ declare interface Emr {
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改自动扩缩容规则 {@link ModifyAutoScaleStrategyRequest} {@link ModifyAutoScaleStrategyResponse} */
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
+  /** 修改引导脚本 {@link ModifyBootScriptRequest} {@link ModifyBootScriptResponse} */
+  ModifyBootScript(data: ModifyBootScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBootScriptResponse>;
   /** 修改YARN资源调度的全局配置 {@link ModifyGlobalConfigRequest} {@link ModifyGlobalConfigResponse} */
   ModifyGlobalConfig(data: ModifyGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalConfigResponse>;
   /** 设置巡检任务配置 {@link ModifyInspectionSettingsRequest} {@link ModifyInspectionSettingsResponse} */

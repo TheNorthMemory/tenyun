@@ -922,6 +922,10 @@ declare interface StaticStorageInfo {
   Region?: string;
   /** bucket信息 */
   Bucket?: string;
+  /** 到期时间（秒级时间戳） */
+  AccessExpire?: number;
+  /** 外部存储。 */
+  ExternalStorage?: ExternalStorage;
 }
 
 /** 静态托管资源信息 */
@@ -950,6 +954,8 @@ declare interface StorageInfo {
   CdnDomain?: string;
   /** 资源所属用户的腾讯云appId */
   AppId?: string;
+  /** 外部存储介质相关信息。 */
+  ExternalStorage?: ExternalStorage;
 }
 
 /** 表信息 */

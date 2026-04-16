@@ -138,6 +138,10 @@ declare interface Cluster {
   LogCOSBucket?: string;
   /** Cdc集群Id */
   CdcId?: string | null;
+  /** 集群进度 */
+  ClusterProcessMsg?: string | null;
+  /** 单作业最大可配置 CU 数 */
+  MaxCuPerJob?: number;
 }
 
 /** 工作空间集群组信息 */
@@ -1012,6 +1016,8 @@ declare interface Setats {
   SetatsUiUrl?: string;
   /** setats镜像版本 */
   ImageVersion?: string;
+  /** 类型：0 公网，1 内网枚举值：0： 公网1： 内网默认值：0 */
+  WebUIType?: number;
 }
 
 /** setats 机器规格 */

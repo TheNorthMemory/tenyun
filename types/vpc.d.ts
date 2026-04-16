@@ -9264,6 +9264,22 @@ declare interface ModifyLocalGatewayResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNatGatewayAdvancedAttributeRequest {
+  /** NAT网关的ID，形如：`nat-df45454`。 */
+  NatGatewayId: string;
+  /** UDP映射空闲时间，单位：秒。含义为UDP流空闲多少秒以后从NAT映射中释放。取值范围为：3-7200，默认为180。 */
+  UDPMappingTimeout?: number;
+  /** TCP已建立的连接空闲超时时间，单位：秒。含义为TCP已建立的连接空闲多少秒以后从NAT映射中释放。取值范围为：40-10800，默认为10800。 */
+  TCPEstablishedConnectionTimeout?: number;
+  /** TCP TIME_WAIT超时时间，单位：秒。含义为完全关闭的TCP连接在到期后保留在NAT映射中的秒数。取值范围为：10-600，默认为120。 */
+  TCPTimeWaitTimeout?: number;
+}
+
+declare interface ModifyNatGatewayAdvancedAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNatGatewayAttributeRequest {
   /** NAT网关的ID，形如：`nat-df45454`。 */
   NatGatewayId: string;
@@ -11263,6 +11279,8 @@ declare interface Vpc {
   ModifyIpv6AddressesAttribute(data: ModifyIpv6AddressesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpv6AddressesAttributeResponse>;
   /** 修改本地网关 {@link ModifyLocalGatewayRequest} {@link ModifyLocalGatewayResponse} */
   ModifyLocalGateway(data: ModifyLocalGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLocalGatewayResponse>;
+  /** 修改NAT网关高级属性 {@link ModifyNatGatewayAdvancedAttributeRequest} {@link ModifyNatGatewayAdvancedAttributeResponse} */
+  ModifyNatGatewayAdvancedAttribute(data: ModifyNatGatewayAdvancedAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatGatewayAdvancedAttributeResponse>;
   /** 修改NAT网关的属性 {@link ModifyNatGatewayAttributeRequest} {@link ModifyNatGatewayAttributeResponse} */
   ModifyNatGatewayAttribute(data: ModifyNatGatewayAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatGatewayAttributeResponse>;
   /** 修改NAT网关端口转发规则 {@link ModifyNatGatewayDestinationIpPortTranslationNatRuleRequest} {@link ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse} */

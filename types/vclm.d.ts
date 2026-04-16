@@ -2,6 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 控制摄像机运动的协议 */
+declare interface CameraControl {
+  /** 枚举值：“simple”, “down_back”, “forward_up”, “right_turn_forward”, “left_turn_forward”simple：简单运镜，此类型下可在"config"中六选一进行运镜down_back：镜头下压并后退 -> 下移拉远，此类型下config参数无需填写forward_up：镜头前进并上仰 -> 推进上移，此类型下config参数无需填写right_turn_forward：先右旋转后前进 -> 右旋推进，此类型下config参数无需填写left_turn_forward：先左旋并前进 -> 左旋推进，此类型下config参数无需填写 */
+  Type?: string;
+  /** 包含六个字段，用于指定摄像机在不同方向上的运动或变化。- 当运镜类型指定simple时必填，指定其他类型时不填- 参数6选1，即只能有一个参数不为0，其余参数为0 */
+  Config?: CameraControlConfig;
+}
+
+/** 指定摄像机在不同方向上的运动或变化 */
+declare interface CameraControlConfig {
+  /** 水平运镜，控制摄像机在水平方向上的移动量（沿x轴平移）取值范围：[-10, 10]，负值表示向左平移，正值表示向右平移 */
+  Horizontal?: number;
+  /** 垂直运镜，控制摄像机在垂直方向上的移动量（沿y轴平移）取值范围：[-10, 10]，负值表示向下平移，正值表示向上平移 */
+  Vertical?: number;
+  /** 水平摇镜，控制摄像机在水平面上的旋转量（绕y轴旋转）取值范围：[-10, 10]，负值表示绕y轴向左旋转，正值表示绕y轴向右旋转 */
+  Pan?: number;
+  /** 垂直摇镜，控制摄像机在垂直面上的旋转量（沿x轴旋转）取值范围：[-10, 10]，负值表示绕x轴向下旋转，正值表示绕x轴向上旋转 */
+  Tilt?: number;
+  /** 旋转运镜，控制摄像机的滚动量（绕z轴旋转）取值范围：[-10, 10]，负值表示绕z轴逆时针旋转，正值表示绕z轴顺时针旋转 */
+  Roll?: number;
+  /** 变焦，控制摄像机的焦距变化，影响视野的远近取值范围：[-10, 10]，负值表示焦距变长、视野范围变小，正值表示焦距变短、视野范围变大 */
+  Zoom?: number;
+}
+
+/** 动态笔刷 */
+declare interface DynamicMask {
+  /** 动态笔刷涂抹区域（用户通过运动笔刷涂抹的 mask 图片）支持传入图片Base64编码或图片URL（确保可访问，格式要求同 Image 字段）图片格式支持.jpg / .jpeg / .png图片长宽比必须与输入图片相同（即Image字段），否则任务失败StaticMask 和 DynamicMasks.Mask 这两张图片的分辨率必须一致，否则任务失败 */
+  Mask?: string;
+  /** 运动轨迹坐标序列生成5s的视频，轨迹长度不超过77，即坐标个数取值范围：[2, 77]轨迹坐标系，以图片左下角为坐标原点注1：坐标点个数越多轨迹刻画越准确，如只有2个轨迹点则为这两点连接的直线注2：轨迹方向以传入顺序为指向，以最先传入的坐标为轨迹起点，依次连接后续坐标形成运动轨迹 */
+  Trajectories?: Trajectory[];
+}
+
+/** Element */
+declare interface Element {
+  /** ID配置 */
+  ElementId?: string;
+}
+
 /** 扩展字段。 */
 declare interface ExtraParam {
   /** 预签名的上传url，支持把视频直接传到客户指定的地址。 */
@@ -52,6 +90,14 @@ declare interface Image {
   Url?: string;
 }
 
+/** 参考图列表 */
+declare interface ImageInfo {
+  /** 图片URL */
+  ImageUrl: string;
+  /** 首帧：first_frame尾帧：end_frame其他：空 */
+  Type?: string;
+}
+
 /** logo参数 */
 declare interface LogoParam {
   /** 水印 Url */
@@ -74,10 +120,58 @@ declare interface LogoRect {
   Height?: number;
 }
 
+/** 各分镜信息，如提示词、时长等通过index、prompt、duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长用key:value承载，如下："multi_prompt":[	{ "index":int, "prompt": "string", "duration": "5" }, { "index":int, "prompt": "string", "duration": "5" }]当mult_shot参数为true且shot_type参数为customize时，当前参数不得为空 */
+declare interface MultiPrompt {
+  /** 分镜序号 */
+  Index?: number;
+  /** 分镜提示词 */
+  Prompt?: string;
+  /** 时长 */
+  Duration?: string;
+}
+
+/** 参考视频信息 */
+declare interface ReferVideoInfo {
+  /** 视频地址 */
+  VideoUrl?: string;
+  /** 视频类型feature为特征参考视频base为待编辑视频 */
+  ReferType?: string;
+  /** 否保留视频原声，yes为保留，no为不保留；当前参数对特征参考视频（feature）也生效。 */
+  KeepOriginalSound?: string;
+}
+
+/** 参考主体，主要用作参考图生视频。由主体id、主体图（三视图）以及声音组成。 */
+declare interface ReferenceSubject {
+  /** 主体id，后续生成时在提示词中可以通过@主体id的方式使用。 */
+  Id: string;
+  /** 该主体对应的图片url，每个主体最多支持3张图片注1：支持传入图片URL（确保可访问）注2：图片支持 png、jpeg、jpg、webp格式注3：图片像素不能小于 128*128，且比例需要小于1:4或者4:1，且大小不超过50M。 */
+  Images: string[];
+  /** 主体id，后续生成时可以通过@主体id的方式使用 */
+  Name?: string;
+  /** 主体视频，该主体对应的视频url，与videos必填一个注1： 仅viduq2-pro模型支持使用视频主体注2：每个主体中的图片和视频，共享3个槽位注3：支持1个5秒视频注4：支持传入视频 URL（确保可访问）注5：视频支持 mp4、avi、mov格式注6：视频像素不能小于 128*128，且比例需要小于1:4或者4:1注7：请注意，base64 decode之后的字节长度需要小于20M，且编码必须包含适当的内容类型字符串 */
+  Videos?: string[];
+  /** 音色ID用来决定视频中的声音音色，为空时系统会自动推荐，可选枚举值参考列表：[音色列表](URL https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg) */
+  VoiceId?: string;
+}
+
+/** 运动轨迹坐标序列 */
+declare interface Trajectory {
+  /** 轨迹点横坐标（在像素二维坐标系下，以输入图片image左下为原点的像素坐标） */
+  X?: number;
+  /** 轨迹点纵坐标（在像素二维坐标系下，以输入图片image左下为原点的像素坐标） */
+  Y?: number;
+}
+
 /** 视频编辑参数 */
 declare interface VideoEditParam {
   /** 魔法词，针对特定场景生效。不同场景传不同的值。默认不传。- 换人场景：1 */
   Magic?: string;
+}
+
+/** 生成视频时所引用的音色 */
+declare interface Voice {
+  /** 音色id */
+  VoiceId?: string;
 }
 
 declare interface CheckAnimateImageJobRequest {
@@ -192,6 +286,76 @@ declare interface DescribeImageToVideoGeneralJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeImageToVideoJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface DescribeImageToVideoJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 视频id */
+  VideoId?: string;
+  /** 视频总时长，单位s */
+  Duration?: string;
+  /** 任务最终扣减积分数值 */
+  FinalUnitDeduction?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageToVideoViduJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribeImageToVideoViduJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 该任务消耗的积分数量。 */
+  Credits?: number;
+  /** 任务调用时传入的透传参数。 */
+  Payload?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMotionControlKlingJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribeMotionControlKlingJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 视频时长。 */
+  Duration?: string;
+  /** 消耗积分数。 */
+  FinalUnitDeduction?: string;
+  /** 视频id */
+  VideoId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePortraitSingJobRequest {
   /** 任务ID */
   JobId: string;
@@ -214,6 +378,28 @@ declare interface DescribePortraitSingJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReferenceToVideoViduJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribeReferenceToVideoViduJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 该任务消耗的积分数量。 */
+  Credits?: number;
+  /** 任务调用时传入的透传参数。 */
+  Payload?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTemplateToVideoJobRequest {
   /** 任务ID。 */
   JobId: string;
@@ -232,6 +418,52 @@ declare interface DescribeTemplateToVideoJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTextToVideoJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface DescribeTextToVideoJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 视频id */
+  VideoId?: string;
+  /** 视频总时长，单位s */
+  Duration?: string;
+  /** 任务最终扣减积分数值 */
+  FinalUnitDeduction?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTextToVideoViduJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribeTextToVideoViduJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 该任务消耗的积分数量。 */
+  Credits?: number;
+  /** 任务调用时传入的透传参数。 */
+  Payload?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoEditJobRequest {
   /** 任务ID。 */
   JobId: string;
@@ -246,6 +478,54 @@ declare interface DescribeVideoEditJobResponse {
   ErrorCode?: string;
   /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoEditKlingJobRequest {
+  /** 任务ID */
+  JobId: string;
+}
+
+declare interface DescribeVideoEditKlingJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 视频id */
+  VideoId?: string;
+  /** 时长 */
+  Duration?: string;
+  /** 消耗积分数 */
+  FinalUnitDeduction?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoExtendKlingJobRequest {
+  /** 任务ID。 */
+  JobId?: string;
+}
+
+declare interface DescribeVideoExtendKlingJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  ErrorMessage?: string;
+  /** 结果视频 URL。有效期 24 小时。 */
+  ResultVideoUrl?: string;
+  /** 视频时长。 */
+  Duration?: string;
+  /** 消耗积分数。 */
+  FinalUnitDeduction?: string;
+  /** 视频id */
+  VideoId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -422,6 +702,56 @@ declare interface SubmitImageToVideoGeneralJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitImageToVideoJobRequest {
+  /** 模型名称。v1.6：Kling-V1-6v2.0：Kling-V2-Masterv2.1：Kling-V2-1v2.5：Kling-V2-5-Turbov2.6：Kling-V2-6V3.0：kling-v3 */
+  Model?: string;
+  /** 参考图像。支持传入图片Base64编码或图片URL（确保可访问）图片文件大小不能超过10MB，图片分辨率不小于300*300px，图片宽高比要在1:2.5 ~ 2.5:1之间Image 参数与 ImageTail 参数至少二选一，二者不能同时为空图片格式支持.jpg / .jpeg / .png */
+  Image?: Image;
+  /** 参考尾帧图像。支持传入图片Base64编码或图片URL（确保可访问）图片文件大小不能超过10MB，图片分辨率不小于300*300px，图片宽高比要在1:2.5 ~ 2.5:1之间Image 参数与 ImageTail 参数至少二选一，二者不能同时为空图片格式支持.jpg / .jpeg / .pngImageTail参数、DynamicMasks/StaticMask参数、CameraControl参数三选一，不能同时使用 */
+  ImageTail?: Image;
+  /** 正向文本提示词。不能超过2500个字符 */
+  Prompt?: string;
+  /** 负向文本提示词。不能超过2500个字符 */
+  NegativePrompt?: string;
+  /** 生成视频时长，单位s。默认值为5。枚举值：3，4，5，6，7，8，9，10，11，12，13，14，15不同模型支持时长不同模型v1.6、v2.0、v2.5、v2.6：支持5、10模型v3.0：支持3～15s */
+  Duration?: string;
+  /** 生成视频的模式枚举值：std，pro其中std：标准模式（标准），基础模式，性价比高其中pro：专家模式（高品质），高表现模式，生成视频质量更佳不同模型版本、视频模式支持范围不同v1.6：首尾帧与仅首帧情况下只支持prov2.0、v3.0 ：无需配置v2.1、v2.5、v2.6：首尾帧情况下只支持pro */
+  Mode?: string;
+  /** 生成视频的自由度；值越大，模型自由度越小，与用户输入的提示词相关性越强。v2.0、v2.5、v2.6模型的不支持当前参数取值范围：[0, 1] */
+  CfgScale?: number;
+  /** 生成视频时是否同时生成声音枚举值：on，off不同模型版本、视频模式支持范围不同v2.6：有首尾帧的pro模式只能生成无声的视频 */
+  Sound?: string;
+  /** 为生成视频添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+  /** 是否生成多镜头视频当前参数为true时，Prompt参数无效，且不支持设定首尾帧生视频当前参数为false时，ShotType参数及MultiPrompt参数无效 */
+  MultiShot?: boolean;
+  /** 分镜方式枚举值：customize，intelligence当MultiShot参数为true时，当前参数必填 */
+  ShotType?: string;
+  /** 各分镜信息，如提示词、时长等通过Index、Prompt、Duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长用key:value承载，如下：&quot;MultiPrompt&quot;:[ { &quot;Index&quot;:int, &quot;Prompt&quot;: &quot;string&quot;, &quot;Duration&quot;: &quot;5&quot; }, { &quot;Index&quot;:int, &quot;Prompt&quot;: &quot;string&quot;, &quot;Duration&quot;: &quot;5&quot; }]当MultiShot参数为true且ShotType参数为customize时，当前参数不得为空 */
+  MultiPrompt?: MultiPrompt[];
+  /** 参考主体列表基于主体库中主体的ID配置，用key:value承载，如下： &quot;ElementList&quot;:[ { &quot;ElementId&quot;:long }, { &quot;ElementId&quot;:long } ]最多支持3个参考主体主体分为视频定制主体（简称：视频角色主体）和图片定制主体（简称：多图主体），适用范围不同，请注意区分更多主体信息详见：可灵「主体库 3.0」使用指南 */
+  ElementList?: Element[];
+  /** 静态笔刷涂抹区域（用户通过运动笔刷涂抹的 mask 图片）“运动笔刷”能力包含“动态笔刷 DynamicMasks”和“静态笔刷 StaticMask”两种支持传入图片Base64编码或图片URL（确保可访问，格式要求同 Image 字段）图片格式支持.jpg / .jpeg / .png图片长宽比必须与输入图片相同（即Image字段），否则任务失败（failed）StaticMask和 DynamicMasks.Mask这两张图片的分辨率必须一致，否则任务失败（failed） */
+  StaticMask?: string;
+  /** 动态笔刷配置列表可配置多组（最多6组），每组包含“涂抹区域 Mask”与“运动轨迹 Trajectories”序列 */
+  DynamicMasks?: DynamicMask[];
+  /** 控制摄像机运动的协议（如未指定，模型将根据输入的文本/图片进行智能匹配） */
+  CameraControl?: CameraControl;
+  /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
+  CallbackUrl?: string;
+  /** 生成视频时所引用的音色的列表一次视频生成任务至多引用2个音色当VoiceList参数不为空且Prompt参数中引用音色ID时，视频生成任务按“有指定音色”计量计费VoiceId参数值通过音色定制接口返回，也可使用系统预置音色，详见音色定制相关API；非对口型API的VoiceIdElementList参数与VoiceList参数互斥，不能共存v3模型不支持指定音色用key:value承载，如下：&quot;VoiceList&quot;:[ {&quot;VoiceId&quot;:&quot;VoiceId_1&quot;}, {&quot;VoiceId&quot;:&quot;VoiceId_2&quot;}] */
+  VoiceList?: Voice[];
+}
+
+declare interface SubmitImageToVideoJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitImageToVideoViduJobRequest {
   /** 上传单张图时【首帧生视频】：模型将以此参数中传入的图片为首帧画面来生成视频。注1：支持传入图片 Base64 编码或图片URL（确保可访问）；注2：支持上传1 张图；注3：图片支持 png、jpeg、jpg、webp格式；注4：图片比例需要小于 1:4 或者 4:1 ；注5：图片大小不超过50M。上传两张图时【首尾帧生视频】：上传的第一张图片视作首帧图，第二张图片视作尾帧图，模型将以此参数中传入的图片来生成视频注1: 首尾帧两张输入图的分辨率需相近，首帧图的分辨率/尾帧图的分辨率要在0.8～1.25之间。且图片比例需要小于1:4或者4:1；注2: 支持传入图片 Base64 编码或图片URL（确保可访问）；注3: 图片支持 png、jpeg、jpg、webp格式；注4: 图片大小不超过50M； */
   Images: string[];
@@ -466,6 +796,38 @@ declare interface SubmitImageToVideoViduJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitMotionControlKlingJobRequest {
+  /** 模型名称 枚举值：kling-v2-6, kling-v3。 */
+  Model?: string;
+  /** 文本提示词，可包含正向描述和负向描述可将提示词模板化来满足不同的视频生成需求不能超过2500个字 */
+  Prompt?: string;
+  /** 参考图像，生成视频中的人物、背景等元素均以参考图为准 视频内容需满足以下要求： 人物比例尽量与参考动作比例一致，尽量避免全身动作驱动半身人物进行生成 人物需要露出清晰的上半身或全身的肢体及头部，避免遮挡 画面中人物避免存在极端朝向，比如倒立、平卧等。人物占画面比例不得太低 支持真实/风格化的角色（包括人物/类人动物/部分纯动物/部分类人肢体比例的角色）通过 包含支持传入图片Base64编码或图片URL（确保可访问）。 */
+  Image?: string;
+  /** 参考视频的获取链接。生成视频中的人物动作与参考视频一致。 视频内容需满足以下要求： 人物需要漏出清晰的上半身或全身的全部肢体及头部，避免遮挡 建议上传1人动作视频，2人及以上会取画面占比最大的人物动作进行生成 推荐使用真人动作，部分风格化的人物/类人肢体比例可以通过 动作视频一镜到底，角色始终出现在画面中，避免切镜、运镜等。否则会被截取 动作避免过快，相对平稳的动作生成效果更佳 视频文件支持.mp4/.mov，文件大小不超过100MB，仅支持长宽的边长均位于340px~3850px之间，上述校验不通过会返回错误码等信息 视频时长下限不短于3秒，时长上限与人物朝向参考（character_orientation）有关： 当人物朝向与视频中人物一致时，视频时长最长可达30秒； 当人物朝向与图片中人物一致时，视频时长最长可达10秒； 如果您的动作难度比较高、速度比较快，有一定概率生成不足上传视频时长的结果，因为模型只能提取有效动作时长进行生成，最短提取出3s可用连续动作即可生成。请注意，因此消耗的积分将无法退还，建议适当调整动作难度与速度 系统会校验视频内容，如有问题会返回错误码等信息。 */
+  Video?: string;
+  /** 生成视频的模式枚举值：std，pro其中std：标准模式（标准），基础模式，性价比高其中pro：专家模式（高品质），高表现模式，生成视频质量更佳 */
+  Mode?: string;
+  /** 可选择是否保留视频原声 枚举值：yes，no 其中yes：保留视频原声 其中no：不保留视频原声。 */
+  KeepOriginalSound?: string;
+  /** 生成视频中人物的朝向，可选择与图片一致或与视频一致 枚举值：image，video，其中： 其中image：与图片中人物朝向一致；此时参考视频时长不得超过10秒； 其中video：与视频中人物朝向一致；此时参考视频时长不得超过30秒； 引用主体时，生成的视频暂时只能参考视频中的人物朝向。 */
+  CharacterOrientation?: string;
+  /** 参考主体列表 基于主体库中主体的ID配置，用key:value承载，如下： &quot;element_list&quot;:[ { &quot;element_id&quot;:long }, { &quot;element_id&quot;:long } ] 参考主体数量与有无参考视频、参考图片数量有关，其中： 当使用首帧生成视频时，最多支持3个主体； 当使用首尾帧生成视频时，kling-v3-omni模型最多支持3个主体，kling-video-o1模不支持主体； 有参考视频时，参考图片数量和参考主体数量之和不得超过4，且不支持使用视频角色主体； 无参考视频时，参考图片数量和参考主体数量之和不得超过7； */
+  ElementList?: Element[];
+  /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
+  CallbackUrl?: string;
+  /** 为生成视频添加标识的开关，默认为1，0 需前往 控制台 申请开启显示标识自主完成方可生效。 1：添加标识； 0：不添加标识； 其他数值：默认按1处理。 */
+  LogoAdd?: number;
+  /** 默认在生成视频的右下角添加“ AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显示标识自主完成。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitMotionControlKlingJobResponse {
+  /** 任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitPortraitSingJobRequest {
   /** 传入音频URL地址，音频要求：- 音频时长：2秒 - 60秒- 音频格式：mp3、wav、m4a */
   AudioUrl: string;
@@ -485,6 +847,52 @@ declare interface SubmitPortraitSingJobRequest {
 
 declare interface SubmitPortraitSingJobResponse {
   /** 任务ID。任务有效期为48小时。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitReferenceToVideoViduJobRequest {
+  /** 文本提示词生成视频的文本描述。注1：字符长度不能超过 2000 个字符注2：使用Subjects主体参数时，可以通过@主体id 来表示主体内容，例如：&quot;@1 和 @2 在一起吃火锅，并且旁白音说火锅大家都爱吃。&quot; */
+  Prompt: string;
+  /** 图像参考【非主体调用时传入】支持上传1～7张图片，模型将以此参数中传入的图片中的主题为参考生成具备主体一致的视频。支持传入图片 Base64 编码或图片URL（确保可访问）图片支持 png、jpeg、jpg、webp格式图片像素不能小于 128*128，且比例需要小于1:4或者4:1，且大小不超过50M。 */
+  Images?: string[];
+  /** 参考生图主体信息，支持1-7个主体，主体图片共1 ～ 7张【主体调用时传入】 */
+  Subjects?: ReferenceSubject[];
+  /** 视频参考支持上传1～2个视频，模型将以此参数中传入的视频作为参考，生成具备主体一致的视频。注1： 仅viduq2-pro模型支持该参数注2：使用视频参考功能时，最多支持上传 1个8秒 视频 或 2个5秒 视频注3：视频支持 mp4、avi、mov格式注4：视频像素不能小于 128*128，且比例需要小于1:4或者4:1，且大小不超过100M。 */
+  Videos?: string[];
+  /** 模型名称，可选值，当前仅可并且默认viduq2viduq2：最新模型 */
+  Model?: string;
+  /** 是否使用音视频直出能力，默认false，可选值 true、falsetrue：使用音视频直出能力。false：不使用音视频直出能力。仅上传主体时支持此功能 */
+  Audio?: boolean;
+  /** 音频类型，audio为true时必填，默认为all枚举值：all： 音效+人声speech_only： 仅人声sound_effect_only： 仅音效 */
+  AudioType?: string;
+  /** 是否为生成的视频添加背景音乐。默认：false，可选值 true 、false【仅支持非主体调用时生效】传 true 时系统将从预设 BGM 库中自动挑选合适的音乐并添加；不传或为 false 则不添加 BGM。BGM不限制时长，系统根据视频时长自动适配BGM参数在q2系列模型的duration为 9秒 或 10秒 时不生效 */
+  Bgm?: boolean;
+  /** 视频时长参数：默认5秒，可选：1-10（整数） */
+  Duration?: number;
+  /** 比例默认值：16:9【非主体调用时】可选值如下：16:9、9:16、4:3、3:4、1:1【主体调用时】可选值如下：16:9、9:16、1:1注：q2模型 支持任意宽高比 */
+  AspectRatio?: string;
+  /** 分辨率参数默认 720p, 可选：540p、720p、1080p */
+  Resolution?: string;
+  /** 运动幅度默认 auto，可选值：auto、small、medium、large注：使用q2系列模型时该参数不生效 */
+  MovementAmplitude?: string;
+  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{&quot;Label&quot;: &quot;your_label&quot;,&quot;ContentProducer&quot;: &quot;yourcontentproducer&quot;,&quot;ContentPropagator&quot;: &quot;your_content_propagator&quot;,&quot;ProduceID&quot;: &quot;yourproductid&quot;, &quot;PropagateID&quot;: &quot;your_propagate_id&quot;,&quot;ReservedCode1&quot;: &quot;yourreservedcode1&quot;, &quot;ReservedCode2&quot;: &quot;your_reserved_code2&quot;}该参数为空时，默认使用vidu生成的元数据标识 */
+  MetaData?: string;
+  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的&quot;status&quot;包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
+  CallbackUrl?: string;
+  /** 透传参数不做任何处理，仅数据传输注：最多 1048576个字符 */
+  Payload?: string;
+  /** 错峰模式，默认为：false，可选值：true：错峰生成视频；false：即时生成视频；注1：错峰模式消耗的积分更低注2：错峰模式下提交的任务，会在48小时内生成，未能完成的任务会被自动取消，并返还该任务的积分 */
+  OffPeak?: boolean;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。1：添加。0：不添加。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。示例值：1 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitReferenceToVideoViduJobResponse {
+  /** 任务ID。 */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -514,6 +922,86 @@ declare interface SubmitTemplateToVideoJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitTextToVideoJobRequest {
+  /** 正向文本提示词。不能超过2500个字符 */
+  Prompt?: string;
+  /** 模型名称。v1.6：Kling-V1-6v2.0：Kling-V2-Masterv2.5：Kling-V2-5-Turbov2.6：Kling-V2-6v3.0：kling-v3 */
+  Model?: string;
+  /** 负向文本提示词。不能超过2500个字符 */
+  NegativePrompt?: string;
+  /** 生成视频时长，单位s。默认值为5。枚举值：3，4，5，6，7，8，9，10，11，12，13，14，15不同模型支持时长不同模型v1.6、v2.0、v2.5、v2.6：支持5、10模型v3.0：支持3～15s */
+  Duration?: string;
+  /** 生成视频的模式；枚举值：std，pro其中std：标准模式（标准），基础模式，性价比高其中pro：专家模式（高品质），高表现模式，生成视频质量更佳不同模型版本、视频模式支持范围不同v1.6：std、pro。v2.0、v3.0：模型无需配置。v2.5：首尾帧情况下支持pro。v2.6：仅支持pro，选择v2.6模型时，默认自动生成高品质pro视频。 */
+  Mode?: string;
+  /** 生成视频的自由度；值越大，模型自由度越小，与用户输入的提示词相关性越强。取值范围：[0, 1]v2.0、v2.5、v2.6 模型不支持当前参数默认值：0.5。 */
+  CfgScale?: number;
+  /** 生成视频的画面纵横比（宽:高）枚举值：16:9, 9:16, 1:1默认值：16:9 */
+  AspectRatio?: string;
+  /** 生成视频时是否同时生成声音枚举值：on，off仅V2.6及后续版本模型支持当前参数，v2.6模型的std模式只能生成无声的视频 */
+  Sound?: string;
+  /** 为生成视频添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+  /** 是否生成多镜头视频当前参数为true时，prompt参数无效当前参数为false时，shot_type参数及multi_prompt参数无效 */
+  MultiShot?: boolean;
+  /** 分镜方式枚举值：customize，intelligence当MultiShot参数为true时，当前参数必填 */
+  ShotType?: string;
+  /** 各分镜提示词，可包含正向描述和负向描述通过index、prompt、duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长当MultiShot参数为true且ShotType参数为customize时，当前参数不得为空用key:value承载，如下： &quot;MultiPrompt&quot;:[ { &quot;Index&quot;:int, &quot;Prompt&quot;: &quot;string&quot;, &quot;Duration&quot;: &quot;5&quot; } ] */
+  MultiPrompt?: MultiPrompt[];
+  /** 控制摄像机运动的协议（如未指定，模型将根据输入的文本/图片进行智能匹配） */
+  CameraControl?: CameraControl;
+  /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
+  CallbackUrl?: string;
+}
+
+declare interface SubmitTextToVideoJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitTextToVideoViduJobRequest {
+  /** 文本提示词生成视频的文本描述。注：字符长度不能超过 2000 个字符 */
+  Prompt: string;
+  /** 模型名称，可选值，默认viduq2viduq2：最新模型viduq3-turbo：对比viduq3-pro，生成速度更快viduq3-pro：高效生成优质音视频内容，让视频内容更生动、更形象、更立体，效果更好 */
+  Model?: string;
+  /** 视频时长参数，默认值依据模型而定：viduq3-pro、viduq3-turbo: 默认5秒，可选：1-16viduq2 : 默认5秒，可选：1-10 */
+  Duration?: number;
+  /** 是否为生成的视频添加背景音乐。默认：false，可选值 true 、false传 true 时系统将从预设 BGM 库中自动挑选合适的音乐并添加；不传或为 false 则不添加 BGM。BGM不限制时长，系统根据视频时长自动适配BGM参数在q2模型的duration为 9秒 或 10秒 时不生效；该参数在q3系列模型中不生效 */
+  Bgm?: boolean;
+  /** 比例默认 16:9，可选值如下：16:9、9:16、4:3、3:4、1:1 */
+  AspectRatio?: string;
+  /** 分辨率参数，默认值依据模型和视频时长而定：viduq3-pro、viduq3-turbo(1-16秒)：默认 720p，可选：540p、720p、1080pviduq2(1-10秒)：默认 720p，可选：540p、720p、1080p */
+  Resolution?: string;
+  /** 风格默认 general，可选值：general、animegeneral：通用风格，可以通过提示词来控制风格anime：动漫风格，仅在动漫风格表现突出，可以通过不同的动漫风格提示词来控制注：使用q2、q3系列模型时该参数不生效 */
+  Style?: string;
+  /** 运动幅度默认 auto，可选值：auto、small、medium、large注：使用q2、q3系列模型时该参数不生效 */
+  MovementAmplitude?: string;
+  /** 是否使用音视频直出能力，默认为true，枚举值为：false：不需要音视频直出，输出静音视频true：需要音画同步，输出声音的视频（包括台词和音效）注1：仅q3系列模型支持该参数 */
+  Audio?: boolean;
+  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{&quot;Label&quot;: &quot;your_label&quot;,&quot;ContentProducer&quot;: &quot;your_content_producer&quot;,&quot;ContentPropagator&quot;: &quot;your_content_propagator&quot;,&quot;ProduceID&quot;: &quot;your_product_id&quot;,&quot;PropagateID&quot;: &quot;your_propagate_id&quot;,&quot;ReservedCode1&quot;: &quot;your_reserved_code1&quot;,&quot;ReservedCode2&quot;: &quot;your_reserved_code2&quot;}该参数为空时，默认使用vidu生成的元数据标识 */
+  MetaData?: string;
+  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成任务完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的&quot;status&quot;包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
+  CallbackUrl?: string;
+  /** 透传参数 不做任何处理，仅数据传输 注：最多 1048576个字符 */
+  Payload?: string;
+  /** 错峰模式，默认为：false，可选值：true：错峰生成视频；false：即时生成视频；注1：错峰模式消耗的积分更低注2：错峰模式下提交的任务，会在48小时内生成，未能完成的任务会被自动取消，并返还该任务的积分 */
+  OffPeak?: boolean;
+  /** 为生成结果图添加显式水印标识的开关，默认为1。1：添加。0：不添加。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。示例值：1 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitTextToVideoViduJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitVideoEditJobRequest {
   /** 参考视频URL。默认为待编辑视频。视频格式：支持MP4视频时长：输入视频时长≤10秒视频大小：不超过200M视频文件：输入的视频帧率及分辨率不做限制（建议输入16：9或9：16的视频；分辨率建议在2160px内，帧率建议在60fps内）；输出视频是帧率会≥16fps，分辨率为720p */
   VideoUrl: string;
@@ -532,6 +1020,70 @@ declare interface SubmitVideoEditJobRequest {
 }
 
 declare interface SubmitVideoEditJobResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitVideoEditKlingJobRequest {
+  /** 文本提示词，可包含正向描述和负向描述可将提示词模板化来满足不同的视频生成需求不能超过2500个字 */
+  Prompt?: string;
+  /** 模型名称，支持kling-video-o1，kling-v3-omni。默认kling-video-o1。 */
+  Model?: string;
+  /** 参考图列表包括主体、场景、风格等参考图片，也可作为首帧或尾帧生成视频；当作为首帧或尾帧生成视频时：通过type参数来定义图片是否为首尾帧：first_frame为首帧，end_frame为尾帧暂时不支持仅尾帧，即有尾帧图时必须有首帧图首帧或首尾帧生视频时，不能使用视频编辑功能用key:value承载，如下：&quot;ImageInfo&quot;:[ { &quot;ImageUrl&quot;:&quot;https://cos.ap-guangzhou.myqcloud.com/test.png&quot;, &quot;Type&quot;:&quot;first_frame&quot; }, { &quot;ImageUrl&quot;:&quot;https://cos.ap-guangzhou.myqcloud.com/test.png&quot;, &quot;Type&quot;:&quot;end_frame&quot; }]支持传入图片URL（确保可访问）图片格式支持.jpg / .jpeg / .png图片文件大小不能超过10MB，图片宽高尺寸不小于300px，不大于8000px，图片宽高比要在1:2.5 ~ 2.5:1之间有参考视频时，参考图片数量不得超过4；无参考视频时，参考图片数量不得超过7数组中超过2张图片时，不支持设置尾帧 */
+  ImageList?: ImageInfo[];
+  /** 生成视频的画面纵横比（宽:高）枚举值：16:9, 9:16, 1:1未使用首帧参考或视频编辑功能时，当前参数必填 */
+  AspectRatio?: string;
+  /** 生成视频时长，单位s枚举值：3，4，5，6，7，8，9，10，其中：使用文生视频、首帧图生视频时，仅支持5和10s使用视频编辑功能（“refer_type”:“base”）时，输出结果与传入视频时长相同，此时当前参数无效；此时，按输入视频时长四舍五入取整计量计费 */
+  Duration?: number;
+  /** 为生成视频添加标识的开关，默认为1，0 需前往 控制台 申请开启显示标识自主完成方可生效。 1：添加标识； 0：不添加标识； 其他数值：默认按1处理。 */
+  LogoAdd?: number;
+  /** 默认在生成视频的右下角添加“ AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显示标识自主完成。 */
+  LogoParam?: LogoParam;
+  /** 生成视频的模式枚举值：std，pro其中std：标准模式（标准），基础模式，性价比高其中pro：专家模式（高品质），高表现模式，生成视频质量更佳 */
+  Mode?: string;
+  /** 参考视频，通过URL方式获取可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声通过ReferType参数区分参考视频类型：feature为特征参考视频，base为待编辑视频参考视频为待编辑视频时，不能定义视频首尾帧通过KeepOriginalSound参数选择是否保留视频原声，yes为保留，no为不保留；当前参数对特征参考视频（feature）也生效视频格式仅支持MP4/MOV仅支持时长≥3秒且≤10秒的视频视频宽高尺寸需介于720px（含）和2160px（含）之间视频帧率基于24fps～60fps，生成视频时会输出为24fps至多仅支持上传1段视频，视频大小不超过200MB */
+  VideoList?: ReferVideoInfo[];
+  /** 是否生成多镜头视频 当前参数为true时，prompt参数无效，且不支持设定首尾帧生视频 当前参数为false时，shot_type参数及multi_prompt参数无效 */
+  MultiShot?: boolean;
+  /** 分镜方式 枚举值：customize 当multi_shot参数为true时，当前参数必填 */
+  ShotType?: string;
+  /** 各分镜信息，如提示词、时长等 通过index、prompt、duration参数定义分镜序号及相应提示词和时长，其中： 最多支持6个分镜，最小支持1个分镜 每个分镜相关内容的最大长度不超过512 每个分镜的时长不大于当前任务的总时长，不小于1 所有分镜的时长之和等于当前任务的总时长 */
+  MultiPrompt?: MultiPrompt[];
+  /** 参考主体列表 基于主体库中主体的ID配置，用key:value承载，如下： &quot;element_list&quot;:[ { &quot;element_id&quot;:long }, { &quot;element_id&quot;:long } ] 参考主体数量与有无参考视频、参考图片数量有关，其中： 当使用首帧生成视频时，最多支持3个主体； 当使用首尾帧生成视频时，kling-v3-omni模型最多支持3个主体，kling-video-o1模不支持主体； 有参考视频时，参考图片数量和参考主体数量之和不得超过4，且不支持使用视频角色主体； 无参考视频时，参考图片数量和参考主体数量之和不得超过7； */
+  ElementList?: Element[];
+  /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
+  CallbackUrl?: string;
+  /** 是否开启声音 */
+  Sound?: string;
+}
+
+declare interface SubmitVideoEditKlingJobResponse {
+  /** 任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitVideoExtendKlingJobRequest {
+  /** 视频ID 支持通过文本、图片和视频延长生成的视频的ID（原视频不能超过3分钟） 请注意，基于目前的清理策略、视频生成30天之后会被清理，则无法进行延长 */
+  VideoId: string;
+  /** 正向文本提示词 不能超过2500个字符 */
+  Prompt?: string;
+  /** 负向文本提示词 不能超过2500个字符 */
+  NegativePrompt?: string;
+  /** 提示词参考强度 取值范围：[0,1]，数值越大参考强度越大 */
+  CfgScale?: number;
+  /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
+  CallbackUrl?: string;
+  /** 为生成视频添加标识的开关，默认为1。传0 需前往 控制台 申请开启显式标识自主完成后方可生效。1：添加标识；0：不添加标识；其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
+  LogoAdd?: number;
+  /** 标识内容设置。默认在生成视频的右下角添加“ AI 生成”或“视频由 AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显式标识自主完成。 */
+  LogoParam?: LogoParam;
+}
+
+declare interface SubmitVideoExtendKlingJobResponse {
   /** 任务ID。 */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -609,12 +1161,28 @@ declare interface Vclm {
   DescribeImageAnimateJob(data?: DescribeImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAnimateJobResponse>;
   /** 查询图生视频通用能力任务 {@link DescribeImageToVideoGeneralJobRequest} {@link DescribeImageToVideoGeneralJobResponse} */
   DescribeImageToVideoGeneralJob(data: DescribeImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoGeneralJobResponse>;
+  /** 查询Kling图生视频任务 {@link DescribeImageToVideoJobRequest} {@link DescribeImageToVideoJobResponse} */
+  DescribeImageToVideoJob(data: DescribeImageToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoJobResponse>;
+  /** 查询Vidu图生视频任务 {@link DescribeImageToVideoViduJobRequest} {@link DescribeImageToVideoViduJobResponse} */
+  DescribeImageToVideoViduJob(data: DescribeImageToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoViduJobResponse>;
+  /** 查询Kling动作控制任务 {@link DescribeMotionControlKlingJobRequest} {@link DescribeMotionControlKlingJobResponse} */
+  DescribeMotionControlKlingJob(data: DescribeMotionControlKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMotionControlKlingJobResponse>;
   /** 查询图片唱演任务 {@link DescribePortraitSingJobRequest} {@link DescribePortraitSingJobResponse} */
   DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
+  /** 查询Vidu参考生视频任务 {@link DescribeReferenceToVideoViduJobRequest} {@link DescribeReferenceToVideoViduJobResponse} */
+  DescribeReferenceToVideoViduJob(data: DescribeReferenceToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReferenceToVideoViduJobResponse>;
   /** 查询视频特效任务 {@link DescribeTemplateToVideoJobRequest} {@link DescribeTemplateToVideoJobResponse} */
   DescribeTemplateToVideoJob(data: DescribeTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateToVideoJobResponse>;
+  /** 查询Kling文生视频任务 {@link DescribeTextToVideoJobRequest} {@link DescribeTextToVideoJobResponse} */
+  DescribeTextToVideoJob(data: DescribeTextToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoJobResponse>;
+  /** 查询Vidu文生视频任务 {@link DescribeTextToVideoViduJobRequest} {@link DescribeTextToVideoViduJobResponse} */
+  DescribeTextToVideoViduJob(data: DescribeTextToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoViduJobResponse>;
   /** 查询视频编辑任务 {@link DescribeVideoEditJobRequest} {@link DescribeVideoEditJobResponse} */
   DescribeVideoEditJob(data: DescribeVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditJobResponse>;
+  /** 查询Kling-Omni-Video任务 {@link DescribeVideoEditKlingJobRequest} {@link DescribeVideoEditKlingJobResponse} */
+  DescribeVideoEditKlingJob(data: DescribeVideoEditKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditKlingJobResponse>;
+  /** 查询视频延长任务 {@link DescribeVideoExtendKlingJobRequest} {@link DescribeVideoExtendKlingJobResponse} */
+  DescribeVideoExtendKlingJob(data?: DescribeVideoExtendKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoExtendKlingJobResponse>;
   /** 查询人脸融合大模型任务 {@link DescribeVideoFaceFusionJobRequest} {@link DescribeVideoFaceFusionJobResponse} */
   DescribeVideoFaceFusionJob(data?: DescribeVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoFaceFusionJobResponse>;
   /** 查询视频风格化任务（下线中） {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
@@ -631,14 +1199,28 @@ declare interface Vclm {
   SubmitImageAnimateJob(data?: SubmitImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageAnimateJobResponse>;
   /** 提交图生视频通用能力任务 {@link SubmitImageToVideoGeneralJobRequest} {@link SubmitImageToVideoGeneralJobResponse} */
   SubmitImageToVideoGeneralJob(data: SubmitImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageToVideoGeneralJobResponse>;
+  /** 提交Kling图生视频任务 {@link SubmitImageToVideoJobRequest} {@link SubmitImageToVideoJobResponse} */
+  SubmitImageToVideoJob(data?: SubmitImageToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageToVideoJobResponse>;
   /** 提交Vidu图生视频任务 {@link SubmitImageToVideoViduJobRequest} {@link SubmitImageToVideoViduJobResponse} */
   SubmitImageToVideoViduJob(data: SubmitImageToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageToVideoViduJobResponse>;
+  /** 提交Kling动作控制任务 {@link SubmitMotionControlKlingJobRequest} {@link SubmitMotionControlKlingJobResponse} */
+  SubmitMotionControlKlingJob(data?: SubmitMotionControlKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMotionControlKlingJobResponse>;
   /** 提交图片唱演任务 {@link SubmitPortraitSingJobRequest} {@link SubmitPortraitSingJobResponse} */
   SubmitPortraitSingJob(data: SubmitPortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitPortraitSingJobResponse>;
+  /** 提交Vidu参考生视频任务 {@link SubmitReferenceToVideoViduJobRequest} {@link SubmitReferenceToVideoViduJobResponse} */
+  SubmitReferenceToVideoViduJob(data: SubmitReferenceToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitReferenceToVideoViduJobResponse>;
   /** 提交视频特效任务 {@link SubmitTemplateToVideoJobRequest} {@link SubmitTemplateToVideoJobResponse} */
   SubmitTemplateToVideoJob(data: SubmitTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTemplateToVideoJobResponse>;
+  /** 提交Kling文生视频任务 {@link SubmitTextToVideoJobRequest} {@link SubmitTextToVideoJobResponse} */
+  SubmitTextToVideoJob(data?: SubmitTextToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToVideoJobResponse>;
+  /** 提交Vidu文生视频任务 {@link SubmitTextToVideoViduJobRequest} {@link SubmitTextToVideoViduJobResponse} */
+  SubmitTextToVideoViduJob(data: SubmitTextToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToVideoViduJobResponse>;
   /** 提交视频编辑任务 {@link SubmitVideoEditJobRequest} {@link SubmitVideoEditJobResponse} */
   SubmitVideoEditJob(data: SubmitVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoEditJobResponse>;
+  /** 提交Kling-Omni-Video任务 {@link SubmitVideoEditKlingJobRequest} {@link SubmitVideoEditKlingJobResponse} */
+  SubmitVideoEditKlingJob(data?: SubmitVideoEditKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoEditKlingJobResponse>;
+  /** 提交视频延长任务接口 {@link SubmitVideoExtendKlingJobRequest} {@link SubmitVideoExtendKlingJobResponse} */
+  SubmitVideoExtendKlingJob(data: SubmitVideoExtendKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoExtendKlingJobResponse>;
   /** 提交人脸融合大模型任务 {@link SubmitVideoFaceFusionJobRequest} {@link SubmitVideoFaceFusionJobResponse} */
   SubmitVideoFaceFusionJob(data?: SubmitVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoFaceFusionJobResponse>;
   /** 提交视频风格化任务（下线中） {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
