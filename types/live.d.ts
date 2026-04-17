@@ -2138,6 +2138,16 @@ declare interface CancelCommonMixStreamResponse {
   RequestId?: string;
 }
 
+declare interface CloseSourceStreamRequest {
+  /** 播放域名。 */
+  DomainName: string;
+}
+
+declare interface CloseSourceStreamResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CopyCasterRequest {
   /** 源导播台的ID */
   CasterId: number;
@@ -4622,6 +4632,16 @@ declare interface DescribeMonitorReportResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOriginStreamInfoRequest {
+}
+
+declare interface DescribeOriginStreamInfoResponse {
+  /** 缓存格式规则。 0：默认格式。1：云直播源站格式。当 OriginStreamPlayType 为 customization 时候生效。 */
+  CacheFormatRule?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePlayErrorCodeDetailInfoListRequest {
   /** 起始时间，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。 */
   StartTime: string;
@@ -5774,6 +5794,14 @@ declare interface ModifyLiveTranscodeTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOriginStreamInfoRequest {
+}
+
+declare interface ModifyOriginStreamInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPullStreamConfigRequest {
   /** 配置 ID。获取来源：创建拉流配置接口CreatePullStreamConfig返回的配置 ID。通过查询接口DescribePullStreamConfigs获取配置 ID。 */
   ConfigId: string;
@@ -6121,6 +6149,8 @@ declare interface Live {
   AuthenticateDomainOwner(data: AuthenticateDomainOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<AuthenticateDomainOwnerResponse>;
   /** 取消通用混流 {@link CancelCommonMixStreamRequest} {@link CancelCommonMixStreamResponse} */
   CancelCommonMixStream(data: CancelCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CancelCommonMixStreamResponse>;
+  /** 关闭回源客户源站 {@link CloseSourceStreamRequest} {@link CloseSourceStreamResponse} */
+  CloseSourceStream(data: CloseSourceStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CloseSourceStreamResponse>;
   /** 复制导播台 {@link CopyCasterRequest} {@link CopyCasterResponse} */
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
   /** 复制数字人直播间 {@link CopyLiveAvatarRoomRequest} {@link CopyLiveAvatarRoomResponse} */
@@ -6411,6 +6441,8 @@ declare interface Live {
   DescribeLogDownloadList(data: DescribeLogDownloadListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadListResponse>;
   /** 查询监播报告 {@link DescribeMonitorReportRequest} {@link DescribeMonitorReportResponse} */
   DescribeMonitorReport(data: DescribeMonitorReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorReportResponse>;
+  /** 获取直播源站配置信息 {@link DescribeOriginStreamInfoRequest} {@link DescribeOriginStreamInfoResponse} */
+  DescribeOriginStreamInfo(data?: DescribeOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginStreamInfoResponse>;
   /** 查询播放http错误码实时数据 {@link DescribePlayErrorCodeDetailInfoListRequest} {@link DescribePlayErrorCodeDetailInfoListResponse} */
   DescribePlayErrorCodeDetailInfoList(data: DescribePlayErrorCodeDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeDetailInfoListResponse>;
   /** 查询播放http错误码汇总数据 {@link DescribePlayErrorCodeSumInfoListRequest} {@link DescribePlayErrorCodeSumInfoListResponse} */
@@ -6507,6 +6539,8 @@ declare interface Live {
   ModifyLiveTimeShiftTemplate(data: ModifyLiveTimeShiftTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTimeShiftTemplateResponse>;
   /** 修改转码模板配置 {@link ModifyLiveTranscodeTemplateRequest} {@link ModifyLiveTranscodeTemplateResponse} */
   ModifyLiveTranscodeTemplate(data: ModifyLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTranscodeTemplateResponse>;
+  /** 变更直播源站配置 {@link ModifyOriginStreamInfoRequest} {@link ModifyOriginStreamInfoResponse} */
+  ModifyOriginStreamInfo(data?: ModifyOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginStreamInfoResponse>;
   /** 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamConfigRequest} {@link ModifyPullStreamConfigResponse} */
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
   /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamStatusRequest} {@link ModifyPullStreamStatusResponse} */

@@ -4,7 +4,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 疑似攻击风险详情 */
 declare interface AttackRiskDetail {
-  /** 疑似的攻击痕迹类型SuspectedSpoofingAttack：翻拍攻击SuspectedSynthesisImage：疑似合成图片SuspectedSynthesisVideo：疑似合成视频SuspectedeAnomalyAttack：人脸特征疑似非真人SuspectedAdversarialAttack：疑似对抗样本攻击SuspectedBlackIndustry：疑似黑产批量模版攻击SuspectedWatermark：疑似存在水印 */
+  /** 疑似的攻击痕迹类型SuspectedSpoofingAttack：翻拍攻击SuspectedSynthesisImage：疑似合成图片SuspectedSynthesisVideo：疑似合成视频SuspectedAnomalyAttack：人脸特征疑似非真人SuspectedAdversarialAttack：疑似对抗样本攻击SuspectedBlackIndustry：疑似黑产批量模板攻击SuspectedWatermark：疑似存在水印 */
   Type?: string | null;
 }
 
@@ -136,7 +136,7 @@ declare interface DetectInfoText {
   Extra?: string | null;
   /** 本次流程进行的活体一比一流水。 */
   LivenessDetail?: DetectDetail[] | null;
-  /** 描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。详情如下： 01-用户全程闭眼 02-用户未完成指定动作 03-疑似翻拍攻击 04-疑似合成攻击 05-疑似黑产模版 06-疑似存在水印 07-反光校验未通过 08-疑似中途换人 09-人脸质量过差 10-距离校验不通过 11-疑似对抗样本攻击 12-嘴巴区域疑似存在攻击痕迹 13-眼睛区域疑似存在攻击痕迹 14-眼睛或嘴巴被遮挡 */
+  /** 描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。- 详情如下： 01-用户全程闭眼 02-用户未完成指定动作 03-疑似翻拍攻击 04-疑似合成攻击 05-疑似黑产模板 06-疑似存在水印 07-反光校验未通过 08-疑似中途换人 09-人脸质量过差 10-距离校验不通过 11-疑似对抗样本攻击 12-嘴巴区域疑似存在攻击痕迹 13-眼睛区域疑似存在攻击痕迹 14-眼睛或嘴巴被遮挡 */
   LivenessInfoTag?: string[] | null;
   /** 手机号码。 */
   Mobile?: string | null;
@@ -290,9 +290,9 @@ declare interface IntentionVerifyData {
   IntentionVerifyAudio?: string | null;
 }
 
-/** 模版检索详细信息 */
+/** 模板检索详细信息 */
 declare interface RetrievalLivenessExtraInfo {
-  /** 命中的模版类型，其中Common-公共库；Auto-自动聚类库；Owner-自建模版库 */
+  /** 命中的模板类型，其中Common-公共库；Auto-自动聚类库；Owner-自建模板库 */
   HitGroup?: string | null;
   /** 请求图像与命中攻击模板的相似度，相似度取值范围[0,2]，取值越小表示命中攻击模板的概率越高。默认阈值为0.6，当SimilarityScore≥0.6时判断为正常，SimilarityScore&lt;0.6是判断为攻击。 */
   SimilarityScore?: number | null;
@@ -532,7 +532,7 @@ declare interface DetectAIFakeFacesResponse {
   AttackRiskLevel?: string;
   /** 检测到的疑似攻击痕迹列表，仅当AttackRiskLevel为High或Mid时返回。说明：未检测到攻击痕迹时，返回空数组。此出参仅作为结果判断的参考，实际应用仍建议使用AttackRiskLevel的结果。 */
   AttackRiskDetailList?: AttackRiskDetail[];
-  /** 返回额外信息（包括命中模版的详细信息）。 */
+  /** 返回额外信息（包括命中模板的详细信息）。 */
   ExtraInfo?: ExtraInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

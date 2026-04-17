@@ -9476,6 +9476,26 @@ declare interface DescribeContentReviewTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDesignTaskRequest {
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface DescribeDesignTaskResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 任务状态枚举值：success： 成功fail： 失败processing： 处理中 */
+  Status?: string;
+  /** 音色id */
+  VoiceId?: string | null;
+  /** 扩展信息 */
+  ExtInfo?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGroupAttachFlowsByIdRequest {
   /** 媒体传输安全组ID。 */
   Id?: string;
@@ -10568,6 +10588,24 @@ declare interface DescribeWorkflowsResponse {
   TotalCount?: number;
   /** 工作流信息数组。 */
   WorkflowInfoSet?: WorkflowInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DesignVoiceAsyncRequest {
+  /** 音色描述 */
+  Prompt: string;
+  /** 扩展参数，json字符串 */
+  ExtParam?: string;
+}
+
+declare interface DesignVoiceAsyncResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 任务id，查询任务时使用 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11939,6 +11977,8 @@ declare interface Mps {
   DescribeBlindWatermarkTemplates(data?: DescribeBlindWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlindWatermarkTemplatesResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
+  /** 查询音色设计任务结果 {@link DescribeDesignTaskRequest} {@link DescribeDesignTaskResponse} */
+  DescribeDesignTask(data: DescribeDesignTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDesignTaskResponse>;
   /** 反查媒体传输安全组绑定的Flow信息 {@link DescribeGroupAttachFlowsByIdRequest} {@link DescribeGroupAttachFlowsByIdResponse} */
   DescribeGroupAttachFlowsById(data?: DescribeGroupAttachFlowsByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupAttachFlowsByIdResponse>;
   /** 获取雪碧图模板列表 {@link DescribeImageSpriteTemplatesRequest} {@link DescribeImageSpriteTemplatesResponse} */
@@ -12049,6 +12089,8 @@ declare interface Mps {
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
   /** 获取工作流列表 {@link DescribeWorkflowsRequest} {@link DescribeWorkflowsResponse} */
   DescribeWorkflows(data?: DescribeWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowsResponse>;
+  /** 音色设计-异步 {@link DesignVoiceAsyncRequest} {@link DesignVoiceAsyncResponse} */
+  DesignVoiceAsync(data: DesignVoiceAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DesignVoiceAsyncResponse>;
   /** 禁用编排 {@link DisableScheduleRequest} {@link DisableScheduleResponse} */
   DisableSchedule(data: DisableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableScheduleResponse>;
   /** 禁用工作流 {@link DisableWorkflowRequest} {@link DisableWorkflowResponse} */

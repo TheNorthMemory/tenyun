@@ -70,6 +70,18 @@ declare interface AgentParams {
   MaxIdleTime?: number;
 }
 
+/** 字幕对齐 */
+declare interface AlignmentItem {
+  /** 字幕对应的时间起点 */
+  TimeBeginMs?: number;
+  /** 字幕对应的时间尾点 */
+  TimeEndMs?: number;
+  /** 字幕对应的文本索引起点 */
+  TextBegin?: number;
+  /** 字幕对应的文本索引尾点 */
+  TextEnd?: number;
+}
+
 /** 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：coffee_shops: 咖啡店氛围，背景中有人聊天。busy_office: 客服中心street_traffic: 户外街道evening_mountain: 户外山林 */
 declare interface AmbientSound {
   /** 环境场景选择 */
@@ -118,7 +130,7 @@ declare interface AudioEncodeParams {
 
 /** TTS音频输出的格式 */
 declare interface AudioFormat {
-  /** 生成的音频格式- TextToSpeechSSE 流式接口 支持 pcm, 默认: pcm- TextToSpeech 非流式接口 支持 pcm,wav,mp3, 默认: pcm */
+  /** 生成的音频格式- TextToSpeechSSE 流式接口 支持 pcm, 默认: pcm- TextToSpeech 非流式接口 支持 pcm,wav,mp3, 默认: pcm- AsyncTextToSpeech支持pcm,mp3, 默认：mp3 */
   Format?: string;
   /** 生成的音频采样率，默认24000可选- 16000- 24000 */
   SampleRate?: number;
@@ -750,6 +762,14 @@ declare interface PresetLayoutConfig {
   PlaceImageId?: number;
 }
 
+/** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
+declare interface PronunciationDict {
+  /** 需要纠正发音的词语，前后空格自动去除。同一请求中若有重复词语，以最后一条为准。 */
+  Word: string;
+  /** 目标发音，支持以下格式：① 带声调数字的拼音（1=阴平，2=阳平，3=上声，4=去声，5=轻声），如 yin2 hang2；② 拼音连写（无空格），如 yin2hang2；③ 文字+拼音混写，如 银hang2；④ 直接文本替换，会将原始文本替换为目标文本 */
+  Pronunciation: string;
+}
+
 /** 第三方CDN转推参数 */
 declare interface PublishCdnParams {
   /** 腾讯云直播BizId。 */
@@ -1374,6 +1394,32 @@ declare interface WebRecordVideoParams {
   MaxMediaFileDuration?: number;
 }
 
+declare interface AsyncTextToSpeechRequest {
+  /** 需要转语音的文字内容，最大允许50000字符，注意 1汉字=2字符 */
+  Text: string;
+  /** 文本转语音的声音配置 */
+  Voice: Voice;
+  /** TRTC的SdkAppId */
+  SdkAppId: number;
+  /** 文本转语音的输出音频的格式 */
+  AudioFormat?: AudioFormat;
+  /** TTS的模型，当前固定为：flow_01_turbo */
+  Model?: string;
+  /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
+  PronunciationDict?: PronunciationDict[];
+  /** 默认为0，0表示不生成字幕，1表示生成字幕 */
+  AlignmentMode?: number;
+  /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下： zh（中文） en（英文） yue（粤语） ja（日语） ko（韩语） ar（阿拉伯语） id（印尼语） th（泰语） */
+  LanguageCode?: string;
+}
+
+declare interface AsyncTextToSpeechResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ControlAIConversationRequest {
   /** 任务唯一标识 */
   TaskId: string;
@@ -1674,6 +1720,22 @@ declare interface DescribeAITranscriptionResponse {
   TaskId?: string;
   /** 开启转录任务时填写的SessionId，如果没写则不返回。 */
   SessionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAsyncTextToSpeechRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeAsyncTextToSpeechResponse {
+  /** 任务状态- Processing，处理中- Success，任务成功- Failed，任务失败- Expired，任务过期 */
+  Status?: string;
+  /** 音频下载url */
+  AudioDownloadUrl?: string;
+  /** 字幕下载url */
+  SubtitleDownloadUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2621,11 +2683,17 @@ declare interface TextToSpeechRequest {
   Model?: string;
   /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：- zh（中文）- en（英文）- yue（粤语）- ja（日语）- ko（韩语）- ar（阿拉伯语）- id（印尼语）- th（泰语） */
   Language?: string;
+  /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
+  PronunciationDict?: PronunciationDict[];
+  /** 默认为0，0表示不生成字幕，1表示生成字幕 */
+  AlignmentMode?: number;
 }
 
 declare interface TextToSpeechResponse {
   /** Base64编码的音频数据 */
   Audio?: string;
+  /** 字幕对齐数据 */
+  Alignments?: AlignmentItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2645,6 +2713,10 @@ declare interface TextToSpeechSSERequest {
   Model?: string;
   /** 需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：- zh（中文）- en（英文）- yue（粤语）- ja（日语）- ko（韩语）- ar（阿拉伯语）- id（印尼语）- th（泰语） */
   Language?: string;
+  /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
+  PronunciationDict?: PronunciationDict[];
+  /** 默认为0，0表示不生成字幕，1表示生成字幕 */
+  AlignmentMode?: number;
 }
 
 declare interface TextToSpeechSSEResponse {
@@ -2771,6 +2843,8 @@ declare interface VoiceCloneResponse {
 /** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
+  /** 异步实时文本转语音 {@link AsyncTextToSpeechRequest} {@link AsyncTextToSpeechResponse} */
+  AsyncTextToSpeech(data: AsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncTextToSpeechResponse>;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
   /** 创建基础审核任务 {@link CreateBasicModerationRequest} {@link CreateBasicModerationResponse} */
@@ -2803,6 +2877,8 @@ declare interface Trtc {
   DescribeAIConversation(data?: DescribeAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIConversationResponse>;
   /** 查询AI转录任务状态 {@link DescribeAITranscriptionRequest} {@link DescribeAITranscriptionResponse} */
   DescribeAITranscription(data: DescribeAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITranscriptionResponse>;
+  /** 查询异步语音合成 {@link DescribeAsyncTextToSpeechRequest} {@link DescribeAsyncTextToSpeechResponse} */
+  DescribeAsyncTextToSpeech(data: DescribeAsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncTextToSpeechResponse>;
   /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
   /** 查询云端审核信息 {@link DescribeCloudModerationRequest} {@link DescribeCloudModerationResponse} */

@@ -440,6 +440,30 @@ declare interface DetailCheckItem {
   SkipInfo?: string;
 }
 
+/** 数据块内不一致数据的详情信息 */
+declare interface DiffChunkItem {
+  /** 数据库名 */
+  DBName?: string | null;
+  /** schema名 */
+  SchemaName?: string;
+  /** 数据表名 */
+  TableName?: string | null;
+  /** 分块号 */
+  ChunkId?: number | null;
+  /** 数据标识符，比如主键信息等 */
+  Identifier?: string | null;
+  /** 不一致类型，可能的取值为：data - 两边数据不一致；srcLack - 源缺失；dstLack - 目标缺失 */
+  DiffType?: string | null;
+  /** 表结构信息 */
+  SchemaInfo?: string[] | null;
+  /** 源端数据 */
+  SrcItem?: string[] | null;
+  /** 目标端数据 */
+  DstItem?: string[] | null;
+  /** 完成时间 */
+  FinishedAt?: string | null;
+}
+
 /** 数据库不一致的详情，mongodb业务用到 */
 declare interface DifferenceAdvancedObjectsDetail {
   /** 总数 */
@@ -850,7 +874,7 @@ declare interface MigrateOption {
   IsOverrideRoot?: boolean;
   /** 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值) */
   IsDstReadOnly?: boolean;
-  /** 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数: ["DstWriteMode":normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务	"IsDstReadOnly":true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) "ClientOutputBufferHardLimit":512, 从机缓冲区的硬性容量限制(MB) "ClientOutputBufferSoftLimit":512, 从机缓冲区的软性容量限制(MB) "ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) "ReplBacklogSize":512, 环形缓冲区容量限制(MB) "ReplTimeout":120， 复制超时时间(秒) "IsExpireKey":"true",过期key自动淘汰] */
+  /** 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数:[&quot;DstWriteMode&quot;:normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务 &quot;IsDstReadOnly&quot;:true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) &quot;ClientOutputBufferHardLimit&quot;:512, 从机缓冲区的硬性容量限制(MB) &quot;ClientOutputBufferSoftLimit&quot;:512, 从机缓冲区的软性容量限制(MB) &quot;ClientOutputBufferPersistTime&quot;:60, 从机缓冲区的软性限制持续时间(秒) &quot;ReplBacklogSize&quot;:512, 环形缓冲区容量限制(MB) &quot;ReplTimeout&quot;:120， 复制超时时间(秒) &quot;IsExpireKey&quot;:&quot;true&quot;,过期key自动淘汰] */
   ExtraAttr?: KeyValuePairOption[];
   /** pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移) */
   MigrateWay?: string;
@@ -1816,6 +1840,34 @@ declare interface DescribeCheckSyncJobResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCompareDiffItemsRequest {
+  /** 迁移任务 Id */
+  JobId: string;
+  /** 校验任务 Id */
+  CompareTaskId: string;
+  /** 数据库名 */
+  DBName?: string;
+  /** schema名 */
+  SchemaName?: string;
+  /** 数据表名 */
+  TableName?: string;
+  /** 数据分块号 */
+  ChunkId?: number;
+  /** 分页条件，查询结果返回条数 */
+  Limit?: number;
+  /** 分页条件，查询的起始位置 */
+  Offset?: number;
+}
+
+declare interface DescribeCompareDiffItemsResponse {
+  /** 查询结果的数量 */
+  TotalCount?: number;
+  /** 查询结果详情 */
+  Items?: DiffChunkItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCompareReportRequest {
   /** 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
@@ -2216,6 +2268,34 @@ declare interface DescribeSubscribeReturnableResponse {
   IsReturnable?: boolean;
   /** 不支持退还的原因 */
   ReturnFailMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSyncCompareDiffItemsRequest {
+  /** 迁移任务 Id */
+  JobId: string;
+  /** 校验任务 Id */
+  CompareTaskId: string;
+  /** 数据库名 */
+  DBName?: string;
+  /** schema名 */
+  SchemaName?: string;
+  /** 数据表名 */
+  TableName?: string;
+  /** 数据分块号 */
+  ChunkId?: number;
+  /** 分页条件，查询结果返回条数 */
+  Limit?: number;
+  /** 分页条件，查询的起始位置 */
+  Offset?: number;
+}
+
+declare interface DescribeSyncCompareDiffItemsResponse {
+  /** 查询结果的数量 */
+  TotalCount?: number;
+  /** 查询结果详情 */
+  Items?: DiffChunkItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3615,6 +3695,8 @@ declare interface Dts {
   DeleteSyncCompareTask(data: DeleteSyncCompareTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSyncCompareTaskResponse>;
   /** 查询同步校验任务结果 {@link DescribeCheckSyncJobResultRequest} {@link DescribeCheckSyncJobResultResponse} */
   DescribeCheckSyncJobResult(data?: DescribeCheckSyncJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckSyncJobResultResponse>;
+  /** 查询不一致内容详情 {@link DescribeCompareDiffItemsRequest} {@link DescribeCompareDiffItemsResponse} */
+  DescribeCompareDiffItems(data: DescribeCompareDiffItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareDiffItemsResponse>;
   /** 查询一致性校验任务详情 {@link DescribeCompareReportRequest} {@link DescribeCompareReportResponse} */
   DescribeCompareReport(data: DescribeCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompareReportResponse>;
   /** 查询一致性校验任务列表 {@link DescribeCompareTasksRequest} {@link DescribeCompareTasksResponse} */
@@ -3641,6 +3723,8 @@ declare interface Dts {
   DescribeSubscribeJobs(data?: DescribeSubscribeJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeJobsResponse>;
   /** 查询订阅实例是否可以退换 {@link DescribeSubscribeReturnableRequest} {@link DescribeSubscribeReturnableResponse} */
   DescribeSubscribeReturnable(data: DescribeSubscribeReturnableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribeReturnableResponse>;
+  /** 查询同步校验不一致内容详情 {@link DescribeSyncCompareDiffItemsRequest} {@link DescribeSyncCompareDiffItemsResponse} */
+  DescribeSyncCompareDiffItems(data: DescribeSyncCompareDiffItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncCompareDiffItemsResponse>;
   /** 查询同步一致性校验任务详情 {@link DescribeSyncCompareReportRequest} {@link DescribeSyncCompareReportResponse} */
   DescribeSyncCompareReport(data: DescribeSyncCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncCompareReportResponse>;
   /** 查询同步一致性校验任务列表 {@link DescribeSyncCompareTasksRequest} {@link DescribeSyncCompareTasksResponse} */

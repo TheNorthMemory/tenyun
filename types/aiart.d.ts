@@ -44,9 +44,9 @@ declare interface LogoRect {
   X?: number | null;
   /** 左上角Y坐标 */
   Y?: number | null;
-  /** 方框宽度 */
+  /** 方框宽度单位为 px */
   Width?: number | null;
-  /** 方框高度 */
+  /** 方框高度单位为 px */
   Height?: number | null;
 }
 

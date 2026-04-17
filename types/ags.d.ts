@@ -138,6 +138,14 @@ declare interface ImageStorageSource {
 declare interface LogConfiguration {
   /** 日志推送CLS的配置。 */
   CLSConfig?: CLSConfig;
+  /** 日志源配置 */
+  LogSources?: LogSources;
+}
+
+/** 日志源配置 */
+declare interface LogSources {
+  /** 需要采集的日志文件路径，必须是 /logs/ 目录下的文件，不支持子目录，最大支持 10 个文件。 */
+  Files?: string[] | null;
 }
 
 /** metadata 项 */

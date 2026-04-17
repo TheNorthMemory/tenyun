@@ -113,11 +113,11 @@ declare interface SentenceCorrectionResponse {
 /** {@link Nlp NLP 技术} */
 declare interface Nlp {
   (): Versions;
-  /** 情感分析V2 {@link AnalyzeSentimentRequest} {@link AnalyzeSentimentResponse} */
+  /** @deprecated 情感分析V2 {@link AnalyzeSentimentRequest} {@link AnalyzeSentimentResponse} */
   AnalyzeSentiment(data: AnalyzeSentimentRequest, config?: AxiosRequestConfig): AxiosPromise<AnalyzeSentimentResponse>;
-  /** 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
+  /** @deprecated 词法分析V2 {@link ParseWordsRequest} {@link ParseWordsResponse} */
   ParseWords(data: ParseWordsRequest, config?: AxiosRequestConfig): AxiosPromise<ParseWordsResponse>;
-  /** 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
+  /** @deprecated 句子纠错 {@link SentenceCorrectionRequest} {@link SentenceCorrectionResponse} */
   SentenceCorrection(data: SentenceCorrectionRequest, config?: AxiosRequestConfig): AxiosPromise<SentenceCorrectionResponse>;
 }
 

@@ -40,6 +40,14 @@ declare interface Element {
   ElementId?: string;
 }
 
+/** 主体正面图 参考图列表 */
+declare interface ElementImageList {
+  /** 主体参考图 */
+  ReferImages?: ReferImageItem[];
+  /** 主体主图 */
+  FrontalImage?: string;
+}
+
 /** 扩展字段。 */
 declare interface ExtraParam {
   /** 预签名的上传url，支持把视频直接传到客户指定的地址。 */
@@ -130,6 +138,22 @@ declare interface MultiPrompt {
   Duration?: string;
 }
 
+/** ProviderDetail */
+declare interface ProviderDetail {
+  /** 供应商详情 */
+  Provider?: string;
+  /** 状态 */
+  Status?: string;
+  /** 错误信息 */
+  ErrorMessage?: string;
+}
+
+/** 生成视频时所引用的音色 */
+declare interface ReferImageItem {
+  /** 图片地址 */
+  ImageUrl?: string;
+}
+
 /** 参考视频信息 */
 declare interface ReferVideoInfo {
   /** 视频地址 */
@@ -152,6 +176,12 @@ declare interface ReferenceSubject {
   Videos?: string[];
   /** 音色ID用来决定视频中的声音音色，为空时系统会自动推荐，可选枚举值参考列表：[音色列表](URL https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg) */
   VoiceId?: string;
+}
+
+/** 生成视频时所引用的音色 */
+declare interface TagList {
+  /** tag标签 */
+  TagId?: string;
 }
 
 /** 运动轨迹坐标序列 */
@@ -190,6 +220,86 @@ declare interface CheckAnimateImageJobRequest {
 declare interface CheckAnimateImageJobResponse {
   /** 输入图是否通过校验。 */
   CheckPass?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAigcElementRequest {
+  /**  */
+  Name: string;
+  /**  */
+  Description: string;
+  /**  */
+  ReferenceType?: string;
+  /**  */
+  ElementImageList?: ElementImageList;
+  /**  */
+  VideoList?: string[];
+  /**  */
+  Provider?: string[];
+  /**  */
+  TagList?: TagList[];
+}
+
+declare interface CreateAigcElementResponse {
+  /** 任务ID。 */
+  JobId?: string;
+  /**  */
+  ElementId?: string;
+  /**  */
+  Status?: string;
+  /**  */
+  Provider?: string[];
+  /**  */
+  CreatedAt?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAigcElementRequest {
+  /**  */
+  ElementId?: string;
+}
+
+declare interface DeleteAigcElementResponse {
+  /**  */
+  ElementId?: string;
+  /**  */
+  Deleted?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAigcElementRequest {
+  /**  */
+  ElementId?: string;
+}
+
+declare interface DescribeAigcElementResponse {
+  /** 主体名称 */
+  Name?: string;
+  /** 主体id */
+  ElementId?: string;
+  /** 主体描述 */
+  Description?: string;
+  /** 主体参考方式枚举值：video_refer： 视频角色主体image_refer： 多图主体 */
+  ReferenceType?: string;
+  /** 任务状态枚举值：pending： 执行中failed： 任务失败succeed： 任务成功 */
+  Status?: string;
+  /** 厂商列表 */
+  Provider?: string[];
+  /** 主体参考图，可通过多张图片设定主体及其细节 */
+  ElementImageList?: ElementImageList;
+  /** 主体参考视频，可通过视频设定主体及其细节 */
+  VideoList?: string[];
+  /** 为主体配置标签，一个主体可以配置多个标签 */
+  TagList?: TagList[];
+  /** 厂商聚合字段 */
+  ProviderDetails?: ProviderDetail[];
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 更新时间 */
+  UpdatedAt?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1151,6 +1261,12 @@ declare interface Vclm {
   (): Versions;
   /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */
   CheckAnimateImageJob(data: CheckAnimateImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAnimateImageJobResponse>;
+  /** 创建主体 {@link CreateAigcElementRequest} {@link CreateAigcElementResponse} */
+  CreateAigcElement(data: CreateAigcElementRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcElementResponse>;
+  /** 删除主体库 {@link DeleteAigcElementRequest} {@link DeleteAigcElementResponse} */
+  DeleteAigcElement(data?: DeleteAigcElementRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAigcElementResponse>;
+  /** 查询主体 {@link DescribeAigcElementRequest} {@link DescribeAigcElementResponse} */
+  DescribeAigcElement(data?: DescribeAigcElementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcElementResponse>;
   /** 查询生视频任务 {@link DescribeAigcVideoJobRequest} {@link DescribeAigcVideoJobResponse} */
   DescribeAigcVideoJob(data?: DescribeAigcVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcVideoJobResponse>;
   /** 查询人像驱动任务 {@link DescribeHumanActorJobRequest} {@link DescribeHumanActorJobResponse} */
