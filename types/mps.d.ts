@@ -5854,8 +5854,10 @@ declare interface SSAIChannelInfo {
 
 /** SSAI广告插入配置。 */
 declare interface SSAIConf {
-  /** 广告决策服务器URL(ADS)。 */
+  /** 广告决策服务器URL(ADS)。注意：填了AdsUrl会自动代替覆盖AdsUrls[0] */
   AdsUrl?: string;
+  /** 广告决策服务器URL数组(ADS) */
+  AdsUrls?: string[];
   /** 参数配置。 */
   ConfigAliases?: ConfigAliasesInfo[] | null;
   /** 是否开启广告标记透传。 */
@@ -5876,8 +5878,10 @@ declare interface SSAIConf {
   SourceCDNPrefix?: string;
   /** 广告CDN前缀，需要以http://或者https://开头。 */
   AdCDNPrefix?: string;
-  /** 预加载广告决策服务地址。 */
+  /** 预加载广告决策服务地址。注意：填了PreRollAdsUrl会自动代替覆盖PreRollAdsUrls[0] */
   PreRollAdsUrl?: string;
+  /** 预加载广告决策服务地址数组 */
+  PreRollAdsUrls?: string[];
   /** 预加载广告最大允许时长，0-3600。 */
   PreRollMaxAllowedDuration?: number;
   /** 是否开启多次请求ADS,开启后将优先请求ADS，请求失败后再请求兜底广告 */

@@ -2553,6 +2553,8 @@ declare namespace V20180724 {
     RecordingRuleLimit?: number | null;
     /** 迁移状态，0-不在迁移中，1-迁移中、原实例，2-迁移中、目标实例 */
     MigrationType?: number | null;
+    /** 标识prom实例特殊属性归档存储时长(天):key: LongTermStorageRetentionTimevalue: 60-730实例创建方式：key: CreatedFromvalue: 0 - 来自prom控制台1 - 来自tke集群详情页2 - 来自新建集群页免费试用到期时间:key: FreeTrialExpireAtvalue: RFC3339 格式时间字符串关联的资源包ID:key: ResourcePackageIDvalue: prompkg-xxxxx */
+    InstanceAttributes?: PrometheusRuleKV[] | null;
   }
 
   /** 托管prometheusV2实例概览 */
@@ -3639,6 +3641,8 @@ declare namespace V20180724 {
     TagSpecification?: PrometheusTag[];
     /** 需要关联的 Grafana 实例 */
     GrafanaInstanceId?: string;
+    /** 标识prom实例特殊属性归档存储时长(天):key: LongTermStorageRetentionTimevalue: 60-730 */
+    InstanceAttributes?: PrometheusRuleKV[];
   }
 
   interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
@@ -5873,6 +5877,8 @@ declare namespace V20180724 {
     InstanceName?: string;
     /** 数据存储时间（单位天），限制值为15, 30, 45, 90, 180, 365, 730之一 */
     DataRetentionTime?: number;
+    /** 标识prom实例特殊属性归档存储时长(天):key: LongTermStorageRetentionTimevalue: 60-730 */
+    InstanceAttributes?: PrometheusRuleKV[];
   }
 
   interface ModifyPrometheusInstanceAttributesResponse {

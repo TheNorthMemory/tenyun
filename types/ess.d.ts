@@ -126,7 +126,7 @@ declare interface ApproverOption {
   FlowReadLimit?: string;
   /** 禁止在签署过程中添加签署日期控件 前置条件：文件发起合同时，指定SignBeanTag=1（可以在签署过程中添加签署控件）： 默认值：false，在开启：签署过程中添加签署控件时，添加签署控件会默认自带签署日期控件 可选值：true，在开启：签署过程中添加签署控件时，添加签署控件不会自带签署日期控件 */
   ForbidAddSignDate?: boolean;
-  /** 签署人手机号传参模式枚举值：REPLACE： 接受已有认证手机号并替换GIVEN： 以客户入参输入手机号为主VALIDATE： 若与认证手机号不一致则报错默认值：REPLACE会触发手机号传参模式的前提是：签署人是指定了具体身份信息的在指定签署人姓名，证件号的情况下会触发 */
+  /** 签署人手机号传参模式枚举值：REPLACE： 接受已有认证手机号并替换GIVEN： 以客户入参输入手机号为主VALIDATE： 若与认证手机号不一致则报错&quot;&quot;： 不走手机号传参模式默认值：&quot;&quot;会触发手机号传参模式的前提是：签署人是指定了具体身份信息的在指定签署人姓名，证件号的情况下会触发 */
   ApproverMobileMode?: string;
 }
 

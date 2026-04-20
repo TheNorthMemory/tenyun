@@ -780,6 +780,8 @@ declare interface ComplianceAffectedAsset {
   ClusterID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 资产唯一ID默认值：- */
+  AssetUniqueID?: string;
 }
 
 /** 表示一项资产的详情。 */
@@ -844,6 +846,8 @@ declare interface ComplianceAssetInfo {
   ClusterID?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 资产唯一ID默认值：- */
+  AssetUniqueID?: string;
 }
 
 /** 表示一条检测项的信息。 */

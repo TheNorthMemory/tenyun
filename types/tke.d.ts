@@ -8275,6 +8275,20 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface ModifyLogConfigRequest {
+    /** 集群ID */
+    ClusterId: string;
+    /** 日志采集配置的json表达 */
+    LogConfig: string;
+    /** 当前集群类型支持tke（标准集群）、eks（serverless集群） */
+    ClusterType?: string;
+  }
+
+  interface ModifyLogConfigResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyMasterComponentRequest {
     /** 集群ID */
     ClusterId: string;
@@ -9421,6 +9435,8 @@ declare interface Tke {
   ModifyExternalNodePool(data: V20180525.ModifyExternalNodePoolRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyExternalNodePoolResponse>;
   /** 更新全局维护时间窗口和排除项 {@link V20180525.ModifyGlobalMaintenanceWindowAndExclusionsRequest} {@link V20180525.ModifyGlobalMaintenanceWindowAndExclusionsResponse} */
   ModifyGlobalMaintenanceWindowAndExclusions(data: V20180525.ModifyGlobalMaintenanceWindowAndExclusionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyGlobalMaintenanceWindowAndExclusionsResponse>;
+  /** 修改日志采集配置 {@link V20180525.ModifyLogConfigRequest} {@link V20180525.ModifyLogConfigResponse} */
+  ModifyLogConfig(data: V20180525.ModifyLogConfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyLogConfigResponse>;
   /** 修改托管集群master组件 {@link V20180525.ModifyMasterComponentRequest} {@link V20180525.ModifyMasterComponentResponse} */
   ModifyMasterComponent(data: V20180525.ModifyMasterComponentRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.ModifyMasterComponentResponse>;
   /** 修改节点池关联伸缩组的期望实例数 {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgRequest} {@link V20180525.ModifyNodePoolDesiredCapacityAboutAsgResponse} */

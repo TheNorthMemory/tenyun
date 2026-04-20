@@ -186,6 +186,8 @@ declare interface Action {
 declare interface AdaptiveFrequencyControl {
   /** 自适应频控是否开启。取值有：on：开启；off：关闭。 */
   Enabled: string;
+  /** 自适应频控的规则 ID，仅作为出参返回。 */
+  Id?: string;
   /** 自适应频控的限制等级，当 Enabled 为 on 时，此字段必填。取值有：Loose：宽松；Moderate：适中；Strict：严格。 */
   Sensitivity?: string;
   /** 自适应频控的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截；Challenge：挑战，其中ChallengeActionParameters.Name仅支持JSChallenge。 */
@@ -408,6 +410,8 @@ declare interface AuthenticationParameters {
 declare interface BandwidthAbuseDefense {
   /** 流量防盗刷（仅适用中国大陆地区）是否开启。取值有：on：开启；off：关闭。 */
   Enabled: string;
+  /** 流量防盗刷的规则 ID，仅作为出参返回。 */
+  Id?: string;
   /** 流量防盗刷（仅适用中国大陆地区）的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截；Challenge：挑战，其中ChallengeActionParameters.Name仅支持JSChallenge。 */
   Action?: SecurityAction;
 }
@@ -502,10 +506,12 @@ declare interface BotExtendAction {
 
 /** Bot 智能分析的具体配置。 */
 declare interface BotIntelligence {
-  /** 基于客户端和请求特征，将请求来源分为人类来源请求、合法 Bot 请求、疑似 Bot 请求和高风险 Bot 请求，并提供请求处置选项。 */
-  BotRatings?: BotRatings;
   /** Bot 智能分析的具体配置开关。取值有：on：开启；off：关闭。 */
   Enabled?: string;
+  /** Bot 智能分析的规则 ID，仅作为出参返回。 */
+  Id?: string;
+  /** 基于客户端和请求特征，将请求来源分为人类来源请求、合法 Bot 请求、疑似 Bot 请求和高风险 Bot 请求，并提供请求处置选项。 */
+  BotRatings?: BotRatings;
 }
 
 /** Bot 规则，下列规则ID可参考接口 DescribeBotManagedRules返回的ID信息 */
@@ -952,6 +958,8 @@ declare interface ClientBehaviorDetection {
 declare interface ClientFiltering {
   /** 智能客户端过滤是否开启。取值有：on：开启；off：关闭。 */
   Enabled: string;
+  /** 智能客户端过滤的规则 ID，仅作为出参返回。 */
+  Id?: string;
   /** 智能客户端过滤的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截；Challenge：挑战，其中ChallengeActionParameters.Name仅支持JSChallenge。 */
   Action?: SecurityAction;
 }
@@ -1726,6 +1734,8 @@ declare interface ForceRedirectHTTPSParameters {
 declare interface FrequentScanningProtection {
   /** 高频扫描防护规则是否开启。取值有：on：开启，高频扫描防护规则生效；off：关闭，高频扫描防护规则不生效。 */
   Enabled?: string;
+  /** 高频扫描防护的规则 ID，仅作为出参返回。 */
+  Id?: string;
   /** 高频扫描防护的处置动作。 当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Deny：拦截，响应拦截页面；Monitor：观察，不处理请求记录安全事件到日志中；JSChallenge：JavaScript 挑战，响应 JavaScript 挑战页面。 */
   Action?: SecurityAction;
   /** 请求统计的匹配方式，当 Enabled 为 on 时，此字段必填。取值有：http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；http.request.ip：客户端 IP。 */
@@ -3818,6 +3828,8 @@ declare interface SkipCondition {
 declare interface SlowAttackDefense {
   /** 慢速攻击防护是否开启。取值有：on：开启；off：关闭。 */
   Enabled: string;
+  /** 慢速攻击防护的规则 ID，仅作为出参返回。 */
+  Id?: string;
   /** 慢速攻击防护的处置方式，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值支持：Monitor：观察；Deny：拦截； */
   Action?: SecurityAction;
   /** 正文传输最小速率阈值的具体配置，当 Enabled 为 on 时，此字段必填。 */

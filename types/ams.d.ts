@@ -148,12 +148,16 @@ declare interface HitInfo {
 
 /** 输入信息详情 */
 declare interface InputInfo {
-  /** 该字段表示文件访问类型，取值为**URL**（资源链接）和**COS** (腾讯云对象存储)。 */
+  /** 该字段表示文件访问类型，取值为URL（资源链接）和COS (腾讯云对象存储)。 */
   Type?: string;
   /** 该字段表示文件访问的链接地址，格式为标准URL格式。 备注：当Type为URL时此字段不为空。 */
   Url?: string;
   /** 该字段表示文件访问的腾讯云存储桶信息。 备注：当Type为COS时此字段不为空。 */
   BucketInfo?: BucketInfo | null;
+  /** 大模型审核可选输入图片列表 */
+  ImageUrlList?: string[];
+  /** 大模型审核场景下，base64编码的审核要求内容 */
+  TextContent?: string;
 }
 
 /** 歌曲识别结果 */

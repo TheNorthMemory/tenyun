@@ -5,13 +5,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 制作云用户账号信息。 */
 declare interface AccountInfo {
   /** 用户 Id。 */
-  UserId: string;
+  UserId?: string;
   /** 用户手机号码。 */
-  Phone: string;
+  Phone?: string;
   /** 用户昵称。 */
-  Nick: string;
+  Nick?: string;
   /** 账号状态，取值：Normal：有效；Stopped：无效。 */
-  Status: string;
+  Status?: string;
+  /** 账户的创建时间。参数格式：使用 ISO 日期格式。 */
+  CreateTime?: string;
 }
 
 /** 添加的团队成员信息 */

@@ -3387,6 +3387,8 @@ declare interface CreateClusterRequest {
   SgIP?: string;
   /** 分区置放群组分区 */
   PartitionNumber?: number;
+  /** 服务ui地址枚举值：0： 服务ui地址，只返回1条服务ui地址1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd默认值：0 */
+  WebUiVersion?: number;
 }
 
 declare interface CreateClusterResponse {
@@ -3489,6 +3491,8 @@ declare interface CreateInstanceRequest {
   SgIP?: string;
   /** 分区置放群组分区 */
   PartitionNumber?: number;
+  /** 服务ui地址枚举值：0： 服务ui地址，只返回1条服务ui地址1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd默认值：0 */
+  WebUiVersion?: number;
 }
 
 declare interface CreateInstanceResponse {
