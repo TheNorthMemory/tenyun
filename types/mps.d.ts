@@ -3872,6 +3872,8 @@ declare interface LinearAssemblyProgramInfo {
   Region?: string;
   /** SourceLocation名称。 */
   SourceLocationName?: string;
+  /** VOD获取方式，支持PreCaching和DynamicUpdating，默认PreCaching，仅Linear频道支持 */
+  VodAcquisitionMethod?: string;
 }
 
 /** 直播编排子任务输出 */
@@ -8637,6 +8639,8 @@ declare interface CreateStreamPackageLinearAssemblyProgramRequest {
   PlaybackConf?: PlaybackInfoReq;
   /** AdBreaks，只有source类型为Vod时有效。 */
   AdBreaks?: AdBreakInfo[];
+  /** VOD获取方式，支持PreCaching和DynamicUpdating，默认PreCaching，仅Linear频道支持 */
+  VodAcquisitionMethod?: string;
 }
 
 declare interface CreateStreamPackageLinearAssemblyProgramResponse {
@@ -11251,6 +11255,8 @@ declare interface ModifyStreamPackageLinearAssemblyProgramRequest {
   PlaybackConf?: PlaybackInfoReq;
   /** AdBreaks。 */
   AdBreaks?: AdBreakInfo[];
+  /** VOD获取方式，支持PreCaching和DynamicUpdating，默认PreCaching，仅Linear频道支持 */
+  VodAcquisitionMethod?: string;
 }
 
 declare interface ModifyStreamPackageLinearAssemblyProgramResponse {

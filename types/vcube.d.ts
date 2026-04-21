@@ -525,6 +525,8 @@ declare interface CreateApplicationAndBindLicenseRequest {
   BundleId?: string;
   /** 包名 */
   PackageName?: string;
+  /** 鸿蒙包包名 */
+  BundleName?: string;
   /** 资源包ID */
   ResourceIds?: string[];
   /** 营业执照 */
@@ -619,6 +621,8 @@ declare interface CreateTrialApplicationAndLicenseRequest {
   BundleId?: string;
   /** 包名 */
   PackageName?: string;
+  /** 鸿蒙包包名 */
+  BundleName?: string;
   /** 功能 id 数组 */
   FeatureIds?: number[];
   /** 是否要开通优图功能 */

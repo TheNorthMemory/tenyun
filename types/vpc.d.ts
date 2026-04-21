@@ -3224,17 +3224,17 @@ declare interface VpnGateway {
   VpcId?: string;
   /** 网关实例名称。 */
   VpnGatewayName?: string;
-  /** 网关实例类型：'IPSEC', 'SSL','CCN','SSL_CCN'。 */
+  /** 网关实例类型枚举值：IPSEC： IPSEC VPC类型VPNSSL： SSL VPC类型VPNCCN： IPSEC CCN类型VPNSSL_CCN： SSL CCN类型VPN默认值：IPSEC */
   Type?: string;
-  /** 网关实例状态， 'PENDING'：生产中，'PENDING_ERROR'：生产失败，'DELETING'：删除中，'DELETING_ERROR'：删除失败，'AVAILABLE'：运行中。 */
+  /** 网关实例状态。枚举值：PENDING： 生产中PENDING_ERROR： 生产失败DELETING： 删除中DELETING_ERROR： 生产失败AVAILABLE： 运行中 */
   State?: string;
   /** 网关公网IP。 */
   PublicIpAddress?: string;
-  /** 网关续费类型：'NOTIFY_AND_MANUAL_RENEW'：手动续费，'NOTIFY_AND_AUTO_RENEW'：自动续费，'NOT_NOTIFY_AND_NOT_RENEW'：到期不续费。 */
+  /** 网关续费类型：&#39;NOTIFY_AND_MANUAL_RENEW&#39;：手动续费，&#39;NOTIFY_AND_AUTO_RENEW&#39;：自动续费，&#39;NOT_NOTIFY_AND_NOT_RENEW&#39;：到期不续费。 */
   RenewFlag?: string;
   /** 网关付费类型：POSTPAID_BY_HOUR：按量计费，PREPAID：包年包月预付费。 */
   InstanceChargeType?: string;
-  /** 网关出带宽，单位：Mbps。 */
+  /** 网关出带宽单位：Mbps */
   InternetMaxBandwidthOut?: number;
   /** 创建时间。 */
   CreatedTime?: string;
@@ -3252,7 +3252,7 @@ declare interface VpnGateway {
   VpnGatewayQuotaSet?: VpnGatewayQuota[];
   /** 网关实例版本信息。 */
   Version?: string;
-  /** Type值为CCN时，该值表示云联网实例ID。 */
+  /** Type值为CCN/SSL_CCN时，该值表示云联网实例ID。 */
   NetworkInstanceId?: string;
   /** CDC 实例ID。 */
   CdcId?: string;
@@ -3260,6 +3260,8 @@ declare interface VpnGateway {
   MaxConnection?: number;
   /** Bgp ASN */
   BgpAsn?: number;
+  /** 标签列表 */
+  TagSet?: Tag[];
 }
 
 /** VPN网关配额对象 */

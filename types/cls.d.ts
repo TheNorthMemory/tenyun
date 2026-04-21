@@ -4587,7 +4587,7 @@ declare interface DescribeKafkaConsumerPreviewResponse {
 }
 
 declare interface DescribeKafkaConsumerRequest {
-  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   FromTopicId: string;
 }
 
@@ -4600,6 +4600,10 @@ declare interface DescribeKafkaConsumerResponse {
   Compression?: number;
   /** kafka协议消费数据格式 */
   ConsumerContent?: KafkaConsumerContent;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+  /** 消费范围类型，0:最新，1:历史+最新 */
+  ScopeType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5659,12 +5663,16 @@ declare interface ModifyKafkaConsumerGroupOffsetResponse {
 }
 
 declare interface ModifyKafkaConsumerRequest {
-  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   FromTopicId: string;
   /** 压缩方式。0：不压缩；2：使用Snappy压缩；3：使用LZ4压缩 */
   Compression?: number;
   /** kafka协议消费数据格式 */
   ConsumerContent?: KafkaConsumerContent;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+  /** 消费范围类型，0:最新，1:历史+最新 */
+  ScopeType?: number;
 }
 
 declare interface ModifyKafkaConsumerResponse {
@@ -6035,12 +6043,16 @@ declare interface OpenClawServiceResponse {
 }
 
 declare interface OpenKafkaConsumerRequest {
-  /** 日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   FromTopicId: string;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4]，默认：0 */
   Compression?: number;
   /** kafka协议消费数据格式 */
   ConsumerContent?: KafkaConsumerContent;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 默认值：2 */
+  HasServicesLog?: number;
+  /** 消费范围类型，0:最新；1:历史+最新；默认值:0 */
+  ScopeType?: number;
 }
 
 declare interface OpenKafkaConsumerResponse {

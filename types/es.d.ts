@@ -457,6 +457,8 @@ declare namespace V20180416 {
     IndexPhrase?: string | null;
     /** 后备索引创建时间 */
     IndexCreateTime?: string | null;
+    /** 索引Uuid */
+    IndexUuid?: string;
   }
 
   /** 集群维度视图数据 */
@@ -991,6 +993,12 @@ declare namespace V20180416 {
     TimestampField?: string | null;
     /** 写入模式 */
     WriteMode?: string | null;
+    /** 是否开启完全卸载枚举值：true： 开启完全卸载false： 关闭完全卸载 */
+    FullOffloadedEnable?: string;
+    /** 完全卸载生命周期 */
+    FullOffloadedMaxAge?: string;
+    /** 完全卸载后备索引取回后生命周期 */
+    FullOffloadedRetrieveMaxAge?: string;
   }
 
   /** 索引生命周期字段 */
@@ -3422,6 +3430,12 @@ declare namespace V20180416 {
     Password?: string;
     /** 是否滚动后备索引 */
     RolloverBackingIndex?: boolean;
+    /** 是否为取回完全卸载索引 */
+    MountIndex?: boolean;
+    /** 索引Uuid */
+    IndexUuid?: string;
+    /** 后备索引名 */
+    BackingIndexName?: string;
   }
 
   interface UpdateIndexResponse {

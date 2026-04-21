@@ -426,6 +426,24 @@ declare interface PublicAccessRule {
   Remark?: string;
 }
 
+/** 共享订阅组 */
+declare interface SharedGroup {
+  /** 腾讯云MQTT实例ID */
+  InstanceId?: string;
+  /** 共享订阅组名 */
+  SharedName?: string;
+  /** 共享组消费负载均衡策略 1.RANDOM 2.HASH_PARTITION */
+  LbStrategy?: number;
+  /** HASH_PARTITION 策略下生效，表示Client掉线或新Client上线加入共享订阅组消费的延迟时间。范围：0～600秒 */
+  ExpiryInterval?: number;
+  /** 备注，长度不超过128个字符。 */
+  Remark?: string | null;
+  /** 创建时间，毫秒级时间戳 。 */
+  CreateTime?: number;
+  /** 上次更新时间，毫秒级时间戳 。 */
+  UpdateTime?: number;
+}
+
 /** 订阅的UserProperty结构 */
 declare interface SubscriptionUserProperty {
   /** 订阅的UserProperty键 */
@@ -1352,6 +1370,20 @@ declare interface DescribeProductSKUListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSharedSubscriptionGroupsRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+}
+
+declare interface DescribeSharedSubscriptionGroupsResponse {
+  /** 集群下共享订阅组列表 */
+  Data?: SharedGroup[];
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSharedSubscriptionLagRequest {
   /** 集群id */
   InstanceId: string;
@@ -1881,6 +1913,8 @@ declare interface Mqtt {
   DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 获取MQTT产品售卖规格 {@link DescribeProductSKUListRequest} {@link DescribeProductSKUListResponse} */
   DescribeProductSKUList(data?: DescribeProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUListResponse>;
+  /** 查询共享订阅组列表 {@link DescribeSharedSubscriptionGroupsRequest} {@link DescribeSharedSubscriptionGroupsResponse} */
+  DescribeSharedSubscriptionGroups(data: DescribeSharedSubscriptionGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionGroupsResponse>;
   /** 查询共享订阅堆积 {@link DescribeSharedSubscriptionLagRequest} {@link DescribeSharedSubscriptionLagResponse} */
   DescribeSharedSubscriptionLag(data: DescribeSharedSubscriptionLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionLagResponse>;
   /** 查询MQTT主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */

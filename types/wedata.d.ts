@@ -14509,6 +14509,10 @@ declare namespace V20210820 {
     SystemInit?: boolean | null;
     /** 自定义参数 */
     Params?: string | null;
+    /** 创建时间 */
+    CreateTimeStr?: string | null;
+    /** 创建人 */
+    Creator?: string | null;
   }
 
   /** Table */

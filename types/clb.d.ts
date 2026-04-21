@@ -2856,6 +2856,8 @@ declare interface ModifyLoadBalancerSlaRequest {
 }
 
 declare interface ModifyLoadBalancerSlaResponse {
+  /** 订单号。 */
+  DealName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

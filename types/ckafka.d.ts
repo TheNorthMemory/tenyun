@@ -576,6 +576,12 @@ declare interface DatahubTaskInfo {
   StepList?: string[];
   /** 任务描述信息 */
   Description?: string;
+  /** 任务并发数默认值：1 */
+  TaskMax?: number;
+  /** 任务同步限流值,单位MB/s默认值：20MB/s */
+  SyncThrottleLimit?: number;
+  /** 任务是否自动扩容标识枚举值：true： 自动扩容false： 手动扩容默认值：true */
+  AutoExpandFlag?: boolean;
 }
 
 /** Datahub主题 */
@@ -688,6 +694,8 @@ declare interface DescribeConnectResource {
   KafkaConnectParam?: KafkaConnectParam | null;
   /** MQTT配置，Type 为 MQTT 时返回 */
   MqttConnectParam?: MqttConnectParam | null;
+  /** 标签列表 */
+  Tags?: Tag[];
 }
 
 /** 查询连接源具体数据的返参 */
@@ -734,6 +742,8 @@ declare interface DescribeConnectResourceResp {
   KafkaConnectParam?: KafkaConnectParam | null;
   /** MQTT配置，Type 为 MQTT 时返回 */
   MqttConnectParam?: MqttConnectParam | null;
+  /** 标签列表 */
+  Tags?: Tag[];
 }
 
 /** 查询连接源列表的返参 */
@@ -780,6 +790,12 @@ declare interface DescribeDatahubTaskRes {
   Description?: string;
   /** 1:正常 2:隔离中 */
   IsolateStatus?: number;
+  /** 并发数默认值：1 */
+  TaskMax?: number;
+  /** 并发流量预估参考上限，MB/s */
+  SyncThrottleLimit?: number;
+  /** 自动扩容 true:自动扩容 false:手动扩容默认值：true */
+  AutoExpandFlag?: boolean;
 }
 
 /** 查询Datahub任务列表 */
@@ -1074,6 +1090,14 @@ declare interface EventBusParam {
   FunctionName?: string;
   /** SCF云函数版本及别名 */
   Qualifier?: string;
+}
+
+/** 实例公网路由IP白名单返回结果对象 */
+declare interface ExternalAccessInfoWrapper {
+  /** IP白名单放通规则数 */
+  TotalCount?: number;
+  /** IP白名单 */
+  IpWhitelist?: IpWhitelistDTO[];
 }
 
 /** 数据处理规则失败处理 */
@@ -1490,11 +1514,11 @@ declare interface KafkaParam {
   UseTableMapping?: boolean;
   /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名） */
   UseAutoCreateTopic?: boolean;
-  /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。 */
+  /** 写入Topic时是否进行压缩，不开启填&quot;none&quot;，开启的话，填写&quot;open&quot;。 */
   CompressionType?: string;
   /** 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用) */
   MsgMultiple?: number;
-  /** 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写"META_SYNC_INSTANCE_TYPE", 同步元数据及全部topic内消息的填写"META_AND_DATA_SYNC_INSTANCE_TYPE"; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写"DATA_SYNC_TYPE" */
+  /** 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写&quot;META_SYNC_INSTANCE_TYPE&quot;, 同步元数据及全部topic内消息的填写&quot;META_AND_DATA_SYNC_INSTANCE_TYPE&quot;; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写&quot;DATA_SYNC_TYPE&quot; */
   ConnectorSyncType?: string;
   /** 数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false */
   KeepPartition?: boolean;
@@ -1504,6 +1528,8 @@ declare interface KafkaParam {
   Prefix?: string;
   /** Topic前缀分隔符 */
   Separator?: string;
+  /** 多选topic列表 */
+  TopicList?: string[];
 }
 
 /** 最新版本信息列表 */
@@ -2820,6 +2846,8 @@ declare interface CreateConnectResourceRequest {
   KafkaConnectParam?: KafkaConnectParam;
   /** MQTT配置，Type为 MQTT 时必填 */
   MqttConnectParam?: MqttConnectParam;
+  /** 标签列表 */
+  Tags?: Tag[];
 }
 
 declare interface CreateConnectResourceResponse {
@@ -2880,13 +2908,13 @@ declare interface CreateDatahubTaskResponse {
 }
 
 declare interface CreateDatahubTopicRequest {
-  /** 名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** 名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-)，可通过接口DescribeAppInfo获取。 */
   Name: string;
-  /** Partition个数，大于0 */
+  /** Partition个数，最大值为500，大于0 */
   PartitionNum: number;
   /** 消息保留时间，单位ms，当前最小值为60000ms */
   RetentionMs: number;
-  /** 主题备注，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-) */
+  /** 主题备注，是一个不超过 64 个字符的字符串，可以包含字母、数字和横划线(-)。 */
   Note?: string;
   /** 标签列表 */
   Tags?: Tag[];
@@ -3385,6 +3413,20 @@ declare interface DescribeACLRequest {
 declare interface DescribeACLResponse {
   /** 返回的ACL结果集对象 */
   Result?: AclResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessPolicyRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 路由ID */
+  RouteId: number;
+}
+
+declare interface DescribeAccessPolicyResponse {
+  /** 实例公网IP白名单配置列表 */
+  Result?: ExternalAccessInfoWrapper;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4291,6 +4333,22 @@ declare interface JgwOperateResponse {
   Data?: OperateResponseData | null;
 }
 
+declare interface ModifyAccessPolicyRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 路由ID */
+  RouteId: number;
+  /** 公网IP白名单配置不传默认删除全部配置 */
+  IpWhitelist?: IpWhitelistDTO[];
+}
+
+declare interface ModifyAccessPolicyResponse {
+  /** 修改公网IP白名单结果 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAclRuleRequest {
   /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
@@ -4356,6 +4414,12 @@ declare interface ModifyDatahubTaskRequest {
   TaskName?: string;
   /** 任务描述信息 */
   Description?: string;
+  /** 任务并发上限 */
+  TasksMax?: number;
+  /** 数据同步限流值上限单位：MB/s */
+  SyncThrottleLimit?: number;
+  /** 开启自动扩容枚举值： true： 自动扩容 false： 手动扩容 */
+  AutoExpandFlag?: boolean;
 }
 
 declare interface ModifyDatahubTaskResponse {
@@ -4366,11 +4430,11 @@ declare interface ModifyDatahubTaskResponse {
 }
 
 declare interface ModifyDatahubTopicRequest {
-  /** 弹性topic名称 */
+  /** 弹性topic名称取值参考：DescribeDatahubTopics */
   Name: string;
   /** 消息保留时间，单位：ms，当前最小值为60000ms。 */
   RetentionMs: number;
-  /** 主题备注，是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线-。 */
+  /** 主题备注入参限制：不超过64个字符 */
   Note?: string;
   /** 标签列表 */
   Tags?: Tag[];
@@ -4756,11 +4820,11 @@ declare interface Ckafka {
   CreateAclRule(data: CreateAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAclRuleResponse>;
   /** 创建cdc-ckafka集群 {@link CreateCdcClusterRequest} {@link CreateCdcClusterResponse} */
   CreateCdcCluster(data: CreateCdcClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCdcClusterResponse>;
-  /** 创建Datahub连接源 {@link CreateConnectResourceRequest} {@link CreateConnectResourceResponse} */
+  /** 创建连接器连接 {@link CreateConnectResourceRequest} {@link CreateConnectResourceResponse} */
   CreateConnectResource(data: CreateConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConnectResourceResponse>;
   /** 创建消费者组 {@link CreateConsumerRequest} {@link CreateConsumerResponse} */
   CreateConsumer(data: CreateConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerResponse>;
-  /** 创建DIP转储任务 {@link CreateDatahubTaskRequest} {@link CreateDatahubTaskResponse} */
+  /** 创建连接器任务 {@link CreateDatahubTaskRequest} {@link CreateDatahubTaskResponse} */
   CreateDatahubTask(data: CreateDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTaskResponse>;
   /** 创建DIP主题 {@link CreateDatahubTopicRequest} {@link CreateDatahubTopicResponse} */
   CreateDatahubTopic(data: CreateDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTopicResponse>;
@@ -4786,9 +4850,9 @@ declare interface Ckafka {
   DeleteAcl(data: DeleteAclRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclResponse>;
   /** 删除ACL规则 {@link DeleteAclRuleRequest} {@link DeleteAclRuleResponse} */
   DeleteAclRule(data: DeleteAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAclRuleResponse>;
-  /** 删除Datahub连接源 {@link DeleteConnectResourceRequest} {@link DeleteConnectResourceResponse} */
+  /** 删除连接器连接 {@link DeleteConnectResourceRequest} {@link DeleteConnectResourceResponse} */
   DeleteConnectResource(data: DeleteConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConnectResourceResponse>;
-  /** 删除Dip任务 {@link DeleteDatahubTaskRequest} {@link DeleteDatahubTaskResponse} */
+  /** 删除连接器任务 {@link DeleteDatahubTaskRequest} {@link DeleteDatahubTaskResponse} */
   DeleteDatahubTask(data: DeleteDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTaskResponse>;
   /** 删除DIP主题 {@link DeleteDatahubTopicRequest} {@link DeleteDatahubTopicResponse} */
   DeleteDatahubTopic(data: DeleteDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatahubTopicResponse>;
@@ -4812,15 +4876,17 @@ declare interface Ckafka {
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 枚举ACL {@link DescribeACLRequest} {@link DescribeACLResponse} */
   DescribeACL(data: DescribeACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeACLResponse>;
+  /** 查看实例公网IP白名单配置 {@link DescribeAccessPolicyRequest} {@link DescribeAccessPolicyResponse} */
+  DescribeAccessPolicy(data: DescribeAccessPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessPolicyResponse>;
   /** 查询ACL规则列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */
   DescribeAclRule(data: DescribeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRuleResponse>;
   /** 查询实例版本信息 {@link DescribeCkafkaVersionRequest} {@link DescribeCkafkaVersionResponse} */
   DescribeCkafkaVersion(data: DescribeCkafkaVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaVersionResponse>;
   /** 查看可用区列表 {@link DescribeCkafkaZoneRequest} {@link DescribeCkafkaZoneResponse} */
   DescribeCkafkaZone(data?: DescribeCkafkaZoneRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCkafkaZoneResponse>;
-  /** 查询Datahub连接源 {@link DescribeConnectResourceRequest} {@link DescribeConnectResourceResponse} */
+  /** 查询连接器连接详情 {@link DescribeConnectResourceRequest} {@link DescribeConnectResourceResponse} */
   DescribeConnectResource(data: DescribeConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourceResponse>;
-  /** 查询Datahub连接源列表 {@link DescribeConnectResourcesRequest} {@link DescribeConnectResourcesResponse} */
+  /** 查询连接器连接列表 {@link DescribeConnectResourcesRequest} {@link DescribeConnectResourcesResponse} */
   DescribeConnectResources(data?: DescribeConnectResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectResourcesResponse>;
   /** 查询消费分组信息 {@link DescribeConsumerGroupRequest} {@link DescribeConsumerGroupResponse} */
   DescribeConsumerGroup(data: DescribeConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupResponse>;
@@ -4828,9 +4894,9 @@ declare interface Ckafka {
   DescribeCvmInfo(data: DescribeCvmInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmInfoResponse>;
   /** 获取Datahub消费分组offset {@link DescribeDatahubGroupOffsetsRequest} {@link DescribeDatahubGroupOffsetsResponse} */
   DescribeDatahubGroupOffsets(data: DescribeDatahubGroupOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubGroupOffsetsResponse>;
-  /** 查询Datahub任务信息 {@link DescribeDatahubTaskRequest} {@link DescribeDatahubTaskResponse} */
+  /** 查询连接器任务详情 {@link DescribeDatahubTaskRequest} {@link DescribeDatahubTaskResponse} */
   DescribeDatahubTask(data: DescribeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTaskResponse>;
-  /** 查询Datahub任务列表 {@link DescribeDatahubTasksRequest} {@link DescribeDatahubTasksResponse} */
+  /** 查询连接器任务列表 {@link DescribeDatahubTasksRequest} {@link DescribeDatahubTasksResponse} */
   DescribeDatahubTasks(data?: DescribeDatahubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTasksResponse>;
   /** 获取DIP主题属性 {@link DescribeDatahubTopicRequest} {@link DescribeDatahubTopicResponse} */
   DescribeDatahubTopic(data: DescribeDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatahubTopicResponse>;
@@ -4892,11 +4958,13 @@ declare interface Ckafka {
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
   /** 按量实例扩缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
   InstanceScalingDown(data: InstanceScalingDownRequest, config?: AxiosRequestConfig): AxiosPromise<InstanceScalingDownResponse>;
+  /** 修改实例公网IP白名单配置 {@link ModifyAccessPolicyRequest} {@link ModifyAccessPolicyResponse} */
+  ModifyAccessPolicy(data: ModifyAccessPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPolicyResponse>;
   /** 修改Acl预设规则 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */
   ModifyAclRule(data: ModifyAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAclRuleResponse>;
-  /** 编辑Datahub连接源 {@link ModifyConnectResourceRequest} {@link ModifyConnectResourceResponse} */
+  /** 编辑连接器连接 {@link ModifyConnectResourceRequest} {@link ModifyConnectResourceResponse} */
   ModifyConnectResource(data: ModifyConnectResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectResourceResponse>;
-  /** 修改Datahub任务 {@link ModifyDatahubTaskRequest} {@link ModifyDatahubTaskResponse} */
+  /** 修改连接器任务 {@link ModifyDatahubTaskRequest} {@link ModifyDatahubTaskResponse} */
   ModifyDatahubTask(data: ModifyDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTaskResponse>;
   /** 修改DIP主题属性 {@link ModifyDatahubTopicRequest} {@link ModifyDatahubTopicResponse} */
   ModifyDatahubTopic(data: ModifyDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatahubTopicResponse>;
@@ -4912,13 +4980,13 @@ declare interface Ckafka {
   ModifyRoutineMaintenanceTask(data: ModifyRoutineMaintenanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutineMaintenanceTaskResponse>;
   /** 设置主题属性 {@link ModifyTopicAttributesRequest} {@link ModifyTopicAttributesResponse} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
-  /** 暂停Dip任务 {@link PauseDatahubTaskRequest} {@link PauseDatahubTaskResponse} */
+  /** 暂停连接器任务 {@link PauseDatahubTaskRequest} {@link PauseDatahubTaskResponse} */
   PauseDatahubTask(data: PauseDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PauseDatahubTaskResponse>;
   /** 续费Ckafka实例 {@link RenewCkafkaInstanceRequest} {@link RenewCkafkaInstanceResponse} */
   RenewCkafkaInstance(data: RenewCkafkaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenewCkafkaInstanceResponse>;
-  /** 重启Datahub任务 {@link RestartDatahubTaskRequest} {@link RestartDatahubTaskResponse} */
+  /** 重启连接器任务 {@link RestartDatahubTaskRequest} {@link RestartDatahubTaskResponse} */
   RestartDatahubTask(data: RestartDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDatahubTaskResponse>;
-  /** 恢复Dip任务 {@link ResumeDatahubTaskRequest} {@link ResumeDatahubTaskResponse} */
+  /** 恢复连接器任务 {@link ResumeDatahubTaskRequest} {@link ResumeDatahubTaskResponse} */
   ResumeDatahubTask(data: ResumeDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeDatahubTaskResponse>;
   /** HTTP发送消息 {@link SendMessageRequest} {@link SendMessageResponse} */
   SendMessage(data: SendMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendMessageResponse>;

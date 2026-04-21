@@ -2494,7 +2494,7 @@ declare interface MinimalRequestBodyTransferRate {
 declare interface ModifyOriginParameters {
   /** 源站类型。取值有：IPDomain：IPV4、IPV6 或域名类型源站；OriginGroup：源站组类型源站；LoadBalance：负载均衡，该功能内测中，如需使用，请提工单或联系智能客服；COS：腾讯云 COS 对象存储源站；AWSS3：支持 AWS S3 协议的所有对象存储源站。 */
   OriginType?: string;
-  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IPDomain 时，该参数请填写 IPV4、IPV6 地址或域名；当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；当 OriginType = AWSS3，该参数请填写 S3 桶的访问域名；当 OriginType = OriginGroup 时，该参数请填写源站组 ID；当 OriginType = LoadBalance 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放。 */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IPDomain 时，该参数请填写 IPV4、IPV6 地址或域名；当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；当 OriginType = AWSS3，该参数请填写 S3 桶的访问域名；当 OriginType = OriginGroup 时，该参数请填写源站组 ID；当为出参的时候，如果引用了其它站点的源站组，格式为{源站组 ID}@{ZoneID}。例如：og-testorigin@zone-38moq1z10wwwy；当 OriginType = LoadBalance 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；当为出参的时候，如果引用了其它站点的负载均衡，格式为{负载均衡 ID}@{ZoneID}。例如：lb-2rxpamcyqfzg@zone-38moq1z10wwwy。 */
   Origin?: string;
   /** 回源协议配置。当 OriginType 取值为 IPDomain、OriginGroup、LoadBalance 时该参数必填。取值有：http：使用 HTTP 协议；https：使用 HTTPS 协议；follow：协议跟随。 */
   OriginProtocol?: string;
@@ -3434,7 +3434,7 @@ declare interface RuleCondition {
 
 /** 规则引擎操作。 */
 declare interface RuleEngineAction {
-  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置；ContentCompression：内容压缩配置；OriginAuthentication：回源鉴权配置。 */
+  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；Shield：源站卸载配置；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置；ContentCompression：内容压缩配置；OriginAuthentication：回源鉴权配置。 */
   Name: string;
   /** 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。 */
   CacheParameters?: CacheParameters | null;
@@ -3488,6 +3488,8 @@ declare interface RuleEngineAction {
   UpstreamFollowRedirectParameters?: UpstreamFollowRedirectParameters | null;
   /** 回源请求参数配置参数，当 Name 取值为 UpstreamRequest 时，该参数必填。 */
   UpstreamRequestParameters?: UpstreamRequestParameters | null;
+  /** 源站卸载配置参数，当 Name 取值为 Shield 时，该参数必填。 */
+  ShieldParameters?: ShieldParameters | null;
   /** SSL/TLS 安全配置参数，当 Name 取值为 TLSConfig 时，该参数必填。 */
   TLSConfigParameters?: TLSConfigParameters | null;
   /** 修改源站配置参数，当 Name 取值为 ModifyOrigin 时，该参数必填。 */
@@ -3806,6 +3808,12 @@ declare interface SharedCNAMEInfo {
   BindDomainCount?: number;
   /** 加入该共享CNAME的加速域名列表。当加入的域名数量超过100个时，只返回前100个加速域名。 */
   AccelerationDomains?: ReferenceHolder[];
+}
+
+/** 源站卸载配置参数。 */
+declare interface ShieldParameters {
+  /** 源站卸载空间 ID。 */
+  ShieldSpaceId: string;
 }
 
 /** 例外规则的跳过匹配条件，即在例外时根据本匹配条件，略过指定字段及内容。 */

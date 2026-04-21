@@ -1402,6 +1402,20 @@ declare interface CreateVideoEncodingPresetResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccountRequest {
+  /** 平台 Id，指定访问的平台。关于平台概念，请参见文档 平台。 */
+  Platform: string;
+  /** 用户标识 。 */
+  UserId: string;
+  /** 操作者。如不填，默认为 cmeid_system，表示平台管理员操作，可以操作任意账户。如果指定操作者，则操作者必须为账户所有者。 */
+  Operator?: string;
+}
+
+declare interface DeleteAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteClassRequest {
   /** 平台名称，指定访问的平台。 */
   Platform: string;
@@ -1934,6 +1948,20 @@ declare interface FlattenListMediaResponse {
   RequestId?: string;
 }
 
+declare interface ForbidAccountRequest {
+  /** 平台 Id，指定访问的平台。关于平台概念，请参见文档 平台。 */
+  Platform: string;
+  /** 用户标识 。 */
+  UserId: string;
+  /** 操作者。如不填，默认为 cmeid_system，表示平台管理员操作，可以操作任意账户。如果指定操作者，则操作者必须为账户所有者。 */
+  Operator?: string;
+}
+
+declare interface ForbidAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GenerateVideoSegmentationSchemeByAiRequest {
   /** 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。 */
   Platform: string;
@@ -2333,6 +2361,8 @@ declare interface Cme {
   CreateTeam(data: CreateTeamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTeamResponse>;
   /** 创建视频编码配置 {@link CreateVideoEncodingPresetRequest} {@link CreateVideoEncodingPresetResponse} */
   CreateVideoEncodingPreset(data: CreateVideoEncodingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoEncodingPresetResponse>;
+  /** 删除账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
+  DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
   /** 删除分类 {@link DeleteClassRequest} {@link DeleteClassResponse} */
   DeleteClass(data: DeleteClassRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClassResponse>;
   /** 删除登录态 {@link DeleteLoginStatusRequest} {@link DeleteLoginStatusResponse} */
@@ -2385,6 +2415,8 @@ declare interface Cme {
   ExportVideoEditProject(data: ExportVideoEditProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ExportVideoEditProjectResponse>;
   /** 平铺浏览媒体 {@link FlattenListMediaRequest} {@link FlattenListMediaResponse} */
   FlattenListMedia(data: FlattenListMediaRequest, config?: AxiosRequestConfig): AxiosPromise<FlattenListMediaResponse>;
+  /** 禁用账户 {@link ForbidAccountRequest} {@link ForbidAccountResponse} */
+  ForbidAccount(data: ForbidAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidAccountResponse>;
   /** 视频智能拆条 {@link GenerateVideoSegmentationSchemeByAiRequest} {@link GenerateVideoSegmentationSchemeByAiResponse} */
   GenerateVideoSegmentationSchemeByAi(data: GenerateVideoSegmentationSchemeByAiRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVideoSegmentationSchemeByAiResponse>;
   /** 发起媒资授权 {@link GrantResourceAuthorizationRequest} {@link GrantResourceAuthorizationResponse} */

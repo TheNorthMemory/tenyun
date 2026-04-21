@@ -56,9 +56,9 @@ declare interface Rect {
   X?: number;
   /** 人脸框左上角纵坐标。 */
   Y?: number;
-  /** 人脸框宽度。 */
+  /** 人脸框宽度。单位：px */
   Width?: number;
-  /** 人脸框高度。 */
+  /** 人脸框高度。单位：px */
   Height?: number;
 }
 

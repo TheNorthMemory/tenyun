@@ -74,6 +74,20 @@ declare interface AgentInstance {
   UpdateTime?: string;
   /** 资源绑定Tag列表 */
   Tags?: TagItem[];
+  /** 部署位置,intranet-共享版，userVpc-专享版 */
+  DeployPlace?: string;
+  /** 关联的告警策略ID。 */
+  PolicyIds?: string[];
+  /** 无 */
+  ClawConfig?: ClawConfigInfo;
+  /** 无 */
+  InstanceType?: string;
+  /** 无 */
+  AllowedActions?: string[];
+  /** 无 */
+  LastActiveTime?: string;
+  /** 无 */
+  Description?: string;
 }
 
 /** 会话信息 */
@@ -108,6 +122,26 @@ declare interface ChatDetail {
   UserMessage?: string;
   /** 助手消息 */
   AssistantMessage?: CreateChatCompletionRes[] | null;
+}
+
+/** databaseClaw实例配置信息 */
+declare interface ClawConfigInfo {
+  /** 无 */
+  TemplateId?: number;
+  /** 无 */
+  DbTypes?: string[];
+  /** 无 */
+  Deploy?: ClawDeployInfo;
+}
+
+/** databaseClaw实例部署详情 */
+declare interface ClawDeployInfo {
+  /** 无 */
+  UserVpcId?: string;
+  /** 无 */
+  UserSubnetId?: string;
+  /** 无 */
+  UserVpcRegion?: string;
 }
 
 /** 仓库信息 */
@@ -192,6 +226,14 @@ declare interface SqlAgentParameter {
   CodeRepo?: CodeRepo;
 }
 
+/** 实例状态描述 */
+declare interface StatusItem {
+  /** 无 */
+  Status?: string;
+  /** 无 */
+  Count?: number;
+}
+
 /** 通过标签对资源进行过滤 */
 declare interface TagFilter {
   /** 标签键 */
@@ -255,6 +297,16 @@ declare interface CreateAgentInstanceRequest {
   Parameters?: Parameter[];
   /** 资源的标签信息 */
   Tags?: TagItem[];
+  /** 无 */
+  InstanceType?: string;
+  /** 无 */
+  TemplateId?: number;
+  /** 无 */
+  Skills?: string[];
+  /** 无 */
+  SoulId?: number;
+  /** 无 */
+  Description?: string;
 }
 
 declare interface CreateAgentInstanceResponse {
@@ -349,6 +401,8 @@ declare interface DescribeAgentInstancesRequest {
   Status?: string;
   /** 标签过滤信息 */
   TagFilter?: TagFilter[];
+  /** 实例类型 */
+  InstanceType?: string;
 }
 
 declare interface DescribeAgentInstancesResponse {
@@ -356,6 +410,8 @@ declare interface DescribeAgentInstancesResponse {
   TotalCount?: number;
   /** 智能体实例列表 */
   Items?: AgentInstance[];
+  /** 无 */
+  StatusCounts?: StatusItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

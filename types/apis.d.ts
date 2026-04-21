@@ -404,6 +404,10 @@ declare interface DescribeModelServiceResponseVO {
   PromptModerateStatus?: boolean | null;
   /** 提示词安全检测配置 */
   PromptModerateConfig?: PromptModerateConfigDTO | null;
+  /** 是否开启敏感数据检测 */
+  SensitiveDataCheckStatus?: boolean | null;
+  /** 敏感数据检测配置 */
+  SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO | null;
 }
 
 /** 查询模型列表的响应 */
@@ -622,6 +626,16 @@ declare interface ResultIDVO {
 declare interface ResultIDsVO {
   /** 结果ID数组 */
   IDs?: string[] | null;
+}
+
+/** 敏感数据检测配置 */
+declare interface SensitiveDataCheckConfigDTO {
+  /** 执行动作 */
+  Action?: string | null;
+  /** 响应拦截内容 */
+  InterceptMessage?: string | null;
+  /** 检测项枚举值：birthday： 生日email： 邮箱identity_number： 身份证phone_number： 电话号码secret： 秘钥password： 密码private_key： 私钥 */
+  CheckItems?: string[] | null;
 }
 
 /** 开始结束时间结构体 */
@@ -881,6 +895,10 @@ declare interface CreateModelServiceRequest {
   PromptModerateStatus?: boolean;
   /** 提示词安全检测配置 */
   PromptModerateConfig?: PromptModerateConfigDTO;
+  /** 是否开启敏感数据检测 */
+  SensitiveDataCheckStatus?: boolean;
+  /** 敏感数据检测配置 */
+  SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO;
 }
 
 declare interface CreateModelServiceResponse {
@@ -1377,6 +1395,10 @@ declare interface ModifyModelServiceRequest {
   PromptModerateStatus?: boolean;
   /** 提示词安全检测配置 */
   PromptModerateConfig?: PromptModerateConfigDTO;
+  /** 是否开启敏感数据检测 */
+  SensitiveDataCheckStatus?: boolean;
+  /** 敏感数据检测配置 */
+  SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO;
 }
 
 declare interface ModifyModelServiceResponse {

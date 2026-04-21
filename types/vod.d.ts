@@ -1951,6 +1951,28 @@ declare namespace V20180717 {
     EnableBGM?: string;
   }
 
+  /** AIGC 视频转绘任务的输出媒体文件配置。 */
+  interface AigcVideoRedrawOutputConfig {
+    /** 存储模式。取值有： Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    StorageMode?: string;
+    /** 输出媒体文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。参数格式：2025-12-28T00:35:00Z */
+    ExpireTime?: string;
+  }
+
+  /** AIGC 视频转绘任务输入文件信息。 */
+  interface AigcVideoRedrawTaskInputFileInfo {
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    Type?: string;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    Url?: string;
+  }
+
   /** 场景化 AIGC 生图配置。 */
   interface AigcVideoSceneInfo {
     /** AI生视频场景类型，可选值：- product_showcase： 产品360度展示。 */
@@ -8013,6 +8035,30 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcVideoRedrawTaskRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** AIGC 视频转绘任务的输入视频的文件信息。 */
+    FileInfo?: AigcVideoRedrawTaskInputFileInfo;
+    /** AIGC 视频转绘任务的输出媒体文件配置。 */
+    OutputConfig?: AigcVideoRedrawOutputConfig;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+    /** 保留字段，特殊用途时使用。 */
+    ExtInfo?: string;
+  }
+
+  interface CreateAigcVideoRedrawTaskResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAigcVideoTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -12407,6 +12453,8 @@ declare interface Vod {
   CreateAigcImageTask(data: V20180717.CreateAigcImageTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcImageTaskResponse>;
   /** 创建 AIGC 自定义主体（Vidu） {@link V20180717.CreateAigcSubjectRequest} {@link V20180717.CreateAigcSubjectResponse} */
   CreateAigcSubject(data: V20180717.CreateAigcSubjectRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcSubjectResponse>;
+  /** 创建 AIGC 视频转绘任务 {@link V20180717.CreateAigcVideoRedrawTaskRequest} {@link V20180717.CreateAigcVideoRedrawTaskResponse} */
+  CreateAigcVideoRedrawTask(data: V20180717.CreateAigcVideoRedrawTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcVideoRedrawTaskResponse>;
   /** 创建 AIGC 生视频任务 {@link V20180717.CreateAigcVideoTaskRequest} {@link V20180717.CreateAigcVideoTaskResponse} */
   CreateAigcVideoTask(data: V20180717.CreateAigcVideoTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcVideoTaskResponse>;
   /** 创建转动图模板 {@link V20180717.CreateAnimatedGraphicsTemplateRequest} {@link V20180717.CreateAnimatedGraphicsTemplateResponse} */
