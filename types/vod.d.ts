@@ -8720,9 +8720,9 @@ declare namespace V20180717 {
   }
 
   interface CreateStorageRegionRequest {
-    /** 待开通的存储地域，必须是系统支持的地域。 */
+    /** 待开通的存储地域，必须是系统支持的地域。取值参考：已支持地域列表 */
     StorageRegion: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -8738,9 +8738,9 @@ declare namespace V20180717 {
     Description?: string;
     /** 应用类型， 取值有：AllInOne：一体化；Professional：专业版。默认值为 AllInOne。 */
     Type?: string;
-    /** 此应用的模式，可选值为：- fileid：仅FileID模式- fileid+path：FileID & Path模式留空时默认选择仅FileID模式 */
+    /** 此应用的模式，可选值为：fileid：仅FileID模式fileid+path：FileID &amp; Path模式留空时默认选择仅FileID模式 */
     Mode?: string;
-    /** 存储地域 */
+    /** Mode是仅fileid时，用于设置默认存储地域，可选。Mode是fileid+path时，用于指定存储地域，必填。取值参考：已支持地域列表 */
     StorageRegion?: string;
     /** 此应用需要绑定的tag */
     Tags?: ResourceTag[];

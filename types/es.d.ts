@@ -2484,6 +2484,8 @@ declare namespace V20180416 {
     Password?: string;
     /** 后备索引名 */
     BackingIndexName?: string;
+    /** 索引生命阶段 */
+    IndexPhrase?: string;
   }
 
   interface DeleteIndexResponse {
@@ -3245,6 +3247,22 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface RequestInstancesByGetRequest {
+  }
+
+  interface RequestInstancesByGetResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface RequestInstancesRequest {
+  }
+
+  interface RequestInstancesResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface RestartInstanceRequest {
     /** 实例ID */
     InstanceId: string;
@@ -3873,6 +3891,10 @@ declare interface Es {
   ModifyEsVipSecurityGroup(data: V20180416.ModifyEsVipSecurityGroupRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyEsVipSecurityGroupResponse>;
   /** 查询IP溯源日志 {@link V20180416.QueryIpTraceLogRequest} {@link V20180416.QueryIpTraceLogResponse} */
   QueryIpTraceLog(data: V20180416.QueryIpTraceLogRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.QueryIpTraceLogResponse>;
+  /** 请求es集群本身 {@link V20180416.RequestInstancesRequest} {@link V20180416.RequestInstancesResponse} */
+  RequestInstances(data: V20180416.RequestInstancesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.RequestInstancesResponse>;
+  /** 请求es集群本身仅 GET 请求 {@link V20180416.RequestInstancesByGetRequest} {@link V20180416.RequestInstancesByGetResponse} */
+  RequestInstancesByGet(data: V20180416.RequestInstancesByGetRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.RequestInstancesByGetResponse>;
   /** 重启ES集群实例 {@link V20180416.RestartInstanceRequest} {@link V20180416.RestartInstanceResponse} */
   RestartInstance(data: V20180416.RestartInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.RestartInstanceResponse>;
   /** 重启Kibana {@link V20180416.RestartKibanaRequest} {@link V20180416.RestartKibanaResponse} */

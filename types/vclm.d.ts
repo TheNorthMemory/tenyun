@@ -225,32 +225,34 @@ declare interface CheckAnimateImageJobResponse {
 }
 
 declare interface CreateAigcElementRequest {
-  /**  */
+  /** 主体名称不能超过20个字符 */
   Name: string;
-  /**  */
+  /** 主体描述不能超过100个字符 */
   Description: string;
-  /**  */
+  /** 主体参考方式枚举值：video_referimage_refervideo_refer: 视频角色主体，此时将参考element_video_list定义主体外表image_refer: 多图主体，此时将参考element_image_list定义主体外表 */
   ReferenceType?: string;
-  /**  */
+  /** 主体参考图，可通过多张图片设定主体及其细节包括正面参考图和其他角度或特写参考图，其中：至少包括1张正面参考图，由frontal_image参数定义；需包括1～3张其他参考图，需与正面参考图有差异，由image_url参数定义支持传入图片Base64编码或图片URL（确保可访问）图片格式支持.jpg / .jpeg / .png。图片文件大小不能超过10MB，图片宽高尺寸不小于300px，图片宽高比要在1:2.5 ~ 2.5:1之间reference_type参数值为 image_refer 时，当前参数必填 */
   ElementImageList?: ElementImageList;
-  /**  */
+  /** 主体参考视频，可通过视频设定主体及其细节可上传有声视频，有声视频包含人声则触发音色定制（定制+入音色库+与主体绑定）暂时仅支持通过视频定制写实风格的人形形象参考视频时当前参数必填，参考图片时当前参数无效用key:value承载。视频格式仅支持MP4/MOV。仅支持时长介于3s～8s之间、宽高比例需为16:9或9:16的1080P视频。至多仅支持上传1段视频，视频大小不超过200MB。video_url参数值不得为空 */
   VideoList?: string[];
-  /**  */
+  /** 厂商 */
   Provider?: string[];
-  /**  */
+  /** 为主体配置标签，一个主体可以配置多个标签用key:value承载。tag的ID与名称：o_101 热梗, o_102 人物, o_103 动物, o_104 道具, o_105 服饰, o_106 场景, o_107 特效, o_108 其他 */
   TagList?: TagList[];
+  /** 主体音色ID，可绑定音色库中已有音色当前参数为空时，当前主体不绑定音色为多图主体绑定音色时，仅支持人物形象主体或类人形象主体 */
+  ElementVoiceId?: string;
 }
 
 declare interface CreateAigcElementResponse {
   /** 任务ID。 */
   JobId?: string;
-  /**  */
+  /** 主体Id */
   ElementId?: string;
-  /**  */
+  /** 任务状态默认值：任务状态 */
   Status?: string;
-  /**  */
+  /** 厂商 */
   Provider?: string[];
-  /**  */
+  /** 任务创建时间 */
   CreatedAt?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -271,7 +273,7 @@ declare interface DeleteAigcElementResponse {
 }
 
 declare interface DescribeAigcElementRequest {
-  /**  */
+  /** 主体Id */
   ElementId?: string;
 }
 
@@ -300,6 +302,8 @@ declare interface DescribeAigcElementResponse {
   CreatedAt?: string;
   /** 更新时间 */
   UpdatedAt?: string;
+  /** 音色Id */
+  ElementVoiceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -398,7 +402,9 @@ declare interface DescribeImageToVideoGeneralJobResponse {
 
 declare interface DescribeImageToVideoJobRequest {
   /** 任务ID。 */
-  JobId: string;
+  JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface DescribeImageToVideoJobResponse {
@@ -416,6 +422,8 @@ declare interface DescribeImageToVideoJobResponse {
   Duration?: string;
   /** 任务最终扣减积分数值 */
   FinalUnitDeduction?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -444,7 +452,9 @@ declare interface DescribeImageToVideoViduJobResponse {
 
 declare interface DescribeMotionControlKlingJobRequest {
   /** 任务ID */
-  JobId: string;
+  JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface DescribeMotionControlKlingJobResponse {
@@ -530,7 +540,9 @@ declare interface DescribeTemplateToVideoJobResponse {
 
 declare interface DescribeTextToVideoJobRequest {
   /** 任务ID。 */
-  JobId: string;
+  JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface DescribeTextToVideoJobResponse {
@@ -548,6 +560,8 @@ declare interface DescribeTextToVideoJobResponse {
   Duration?: string;
   /** 任务最终扣减积分数值 */
   FinalUnitDeduction?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -594,7 +608,9 @@ declare interface DescribeVideoEditJobResponse {
 
 declare interface DescribeVideoEditKlingJobRequest {
   /** 任务ID */
-  JobId: string;
+  JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface DescribeVideoEditKlingJobResponse {
@@ -619,6 +635,8 @@ declare interface DescribeVideoEditKlingJobResponse {
 declare interface DescribeVideoExtendKlingJobRequest {
   /** 任务ID。 */
   JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface DescribeVideoExtendKlingJobResponse {
@@ -853,11 +871,15 @@ declare interface SubmitImageToVideoJobRequest {
   CallbackUrl?: string;
   /** 生成视频时所引用的音色的列表一次视频生成任务至多引用2个音色当VoiceList参数不为空且Prompt参数中引用音色ID时，视频生成任务按“有指定音色”计量计费VoiceId参数值通过音色定制接口返回，也可使用系统预置音色，详见音色定制相关API；非对口型API的VoiceIdElementList参数与VoiceList参数互斥，不能共存v3模型不支持指定音色用key:value承载，如下：&quot;VoiceList&quot;:[ {&quot;VoiceId&quot;:&quot;VoiceId_1&quot;}, {&quot;VoiceId&quot;:&quot;VoiceId_2&quot;}] */
   VoiceList?: Voice[];
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface SubmitImageToVideoJobResponse {
   /** 任务ID。 */
   JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -911,6 +933,8 @@ declare interface SubmitMotionControlKlingJobRequest {
   Model?: string;
   /** 文本提示词，可包含正向描述和负向描述可将提示词模板化来满足不同的视频生成需求不能超过2500个字 */
   Prompt?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 参考图像，生成视频中的人物、背景等元素均以参考图为准 视频内容需满足以下要求： 人物比例尽量与参考动作比例一致，尽量避免全身动作驱动半身人物进行生成 人物需要露出清晰的上半身或全身的肢体及头部，避免遮挡 画面中人物避免存在极端朝向，比如倒立、平卧等。人物占画面比例不得太低 支持真实/风格化的角色（包括人物/类人动物/部分纯动物/部分类人肢体比例的角色）通过 包含支持传入图片Base64编码或图片URL（确保可访问）。 */
   Image?: string;
   /** 参考视频的获取链接。生成视频中的人物动作与参考视频一致。 视频内容需满足以下要求： 人物需要漏出清晰的上半身或全身的全部肢体及头部，避免遮挡 建议上传1人动作视频，2人及以上会取画面占比最大的人物动作进行生成 推荐使用真人动作，部分风格化的人物/类人肢体比例可以通过 动作视频一镜到底，角色始终出现在画面中，避免切镜、运镜等。否则会被截取 动作避免过快，相对平稳的动作生成效果更佳 视频文件支持.mp4/.mov，文件大小不超过100MB，仅支持长宽的边长均位于340px~3850px之间，上述校验不通过会返回错误码等信息 视频时长下限不短于3秒，时长上限与人物朝向参考（character_orientation）有关： 当人物朝向与视频中人物一致时，视频时长最长可达30秒； 当人物朝向与图片中人物一致时，视频时长最长可达10秒； 如果您的动作难度比较高、速度比较快，有一定概率生成不足上传视频时长的结果，因为模型只能提取有效动作时长进行生成，最短提取出3s可用连续动作即可生成。请注意，因此消耗的积分将无法退还，建议适当调整动作难度与速度 系统会校验视频内容，如有问题会返回错误码等信息。 */
@@ -934,6 +958,8 @@ declare interface SubmitMotionControlKlingJobRequest {
 declare interface SubmitMotionControlKlingJobResponse {
   /** 任务ID */
   JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1035,13 +1061,13 @@ declare interface SubmitTemplateToVideoJobResponse {
 declare interface SubmitTextToVideoJobRequest {
   /** 正向文本提示词。不能超过2500个字符 */
   Prompt?: string;
-  /** 模型名称。v1.6：Kling-V1-6v2.0：Kling-V2-Masterv2.5：Kling-V2-5-Turbov2.6：Kling-V2-6v3.0：kling-v3 */
+  /** 模型名称。v1.0：Kling-V1v1.5：Kling-V1-5v1.6：Kling-V1-6v2.0：Kling-V2-Masterv2.1m：Kling-V2-1-masterv2.5：Kling-V2-5-Turbov2.6：Kling-V2-6v3.0：kling-v3 */
   Model?: string;
   /** 负向文本提示词。不能超过2500个字符 */
   NegativePrompt?: string;
-  /** 生成视频时长，单位s。默认值为5。枚举值：3，4，5，6，7，8，9，10，11，12，13，14，15不同模型支持时长不同模型v1.6、v2.0、v2.5、v2.6：支持5、10模型v3.0：支持3～15s */
+  /** 生成视频时长，单位s。默认值为5。枚举值：3，4，5，6，7，8，9，10，11，12，13，14，15不同模型支持时长不同●模型v1.0、v1.6、v2.0、v2.1m、v2.5、v2.6：支持5、10●模型v3.0：支持3～15s */
   Duration?: string;
-  /** 生成视频的模式；枚举值：std，pro其中std：标准模式（标准），基础模式，性价比高其中pro：专家模式（高品质），高表现模式，生成视频质量更佳不同模型版本、视频模式支持范围不同v1.6：std、pro。v2.0、v3.0：模型无需配置。v2.5：首尾帧情况下支持pro。v2.6：仅支持pro，选择v2.6模型时，默认自动生成高品质pro视频。 */
+  /** 生成视频的模式；枚举值：std，pro●其中std：标准模式（标准），基础模式，性价比高●其中pro：专家模式（高品质），高表现模式，生成视频质量更佳不同模型版本、视频模式支持范围不同●v1.6：std、pro。●v1.0、v1.5：pro●v2.0、v2.1m、v3.0：模型无需配置。●v2.5：首尾帧情况下支持pro。●v2.6：仅支持pro，选择v2.6模型时，默认自动生成高品质pro视频。 */
   Mode?: string;
   /** 生成视频的自由度；值越大，模型自由度越小，与用户输入的提示词相关性越强。取值范围：[0, 1]v2.0、v2.5、v2.6 模型不支持当前参数默认值：0.5。 */
   CfgScale?: number;
@@ -1063,11 +1089,15 @@ declare interface SubmitTextToVideoJobRequest {
   CameraControl?: CameraControl;
   /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
   CallbackUrl?: string;
+  /**  */
+  ExternalTaskId?: string;
 }
 
 declare interface SubmitTextToVideoJobResponse {
   /** 任务ID。 */
   JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1141,6 +1171,8 @@ declare interface SubmitVideoEditKlingJobRequest {
   Prompt?: string;
   /** 模型名称，支持kling-video-o1，kling-v3-omni。默认kling-video-o1。 */
   Model?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 参考图列表包括主体、场景、风格等参考图片，也可作为首帧或尾帧生成视频；当作为首帧或尾帧生成视频时：通过type参数来定义图片是否为首尾帧：first_frame为首帧，end_frame为尾帧暂时不支持仅尾帧，即有尾帧图时必须有首帧图首帧或首尾帧生视频时，不能使用视频编辑功能用key:value承载，如下：&quot;ImageInfo&quot;:[ { &quot;ImageUrl&quot;:&quot;https://cos.ap-guangzhou.myqcloud.com/test.png&quot;, &quot;Type&quot;:&quot;first_frame&quot; }, { &quot;ImageUrl&quot;:&quot;https://cos.ap-guangzhou.myqcloud.com/test.png&quot;, &quot;Type&quot;:&quot;end_frame&quot; }]支持传入图片URL（确保可访问）图片格式支持.jpg / .jpeg / .png图片文件大小不能超过10MB，图片宽高尺寸不小于300px，不大于8000px，图片宽高比要在1:2.5 ~ 2.5:1之间有参考视频时，参考图片数量不得超过4；无参考视频时，参考图片数量不得超过7数组中超过2张图片时，不支持设置尾帧 */
   ImageList?: ImageInfo[];
   /** 生成视频的画面纵横比（宽:高）枚举值：16:9, 9:16, 1:1未使用首帧参考或视频编辑功能时，当前参数必填 */
@@ -1172,6 +1204,8 @@ declare interface SubmitVideoEditKlingJobRequest {
 declare interface SubmitVideoEditKlingJobResponse {
   /** 任务ID */
   JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1183,6 +1217,8 @@ declare interface SubmitVideoExtendKlingJobRequest {
   Prompt?: string;
   /** 负向文本提示词 不能超过2500个字符 */
   NegativePrompt?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 提示词参考强度 取值范围：[0,1]，数值越大参考强度越大 */
   CfgScale?: number;
   /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
@@ -1196,6 +1232,8 @@ declare interface SubmitVideoExtendKlingJobRequest {
 declare interface SubmitVideoExtendKlingJobResponse {
   /** 任务ID。 */
   JobId?: string;
+  /**  */
+  ExternalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1278,11 +1316,11 @@ declare interface Vclm {
   /** 查询图生视频通用能力任务 {@link DescribeImageToVideoGeneralJobRequest} {@link DescribeImageToVideoGeneralJobResponse} */
   DescribeImageToVideoGeneralJob(data: DescribeImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoGeneralJobResponse>;
   /** 查询Kling图生视频任务 {@link DescribeImageToVideoJobRequest} {@link DescribeImageToVideoJobResponse} */
-  DescribeImageToVideoJob(data: DescribeImageToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoJobResponse>;
+  DescribeImageToVideoJob(data?: DescribeImageToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoJobResponse>;
   /** 查询Vidu图生视频任务 {@link DescribeImageToVideoViduJobRequest} {@link DescribeImageToVideoViduJobResponse} */
   DescribeImageToVideoViduJob(data: DescribeImageToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoViduJobResponse>;
   /** 查询Kling动作控制任务 {@link DescribeMotionControlKlingJobRequest} {@link DescribeMotionControlKlingJobResponse} */
-  DescribeMotionControlKlingJob(data: DescribeMotionControlKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMotionControlKlingJobResponse>;
+  DescribeMotionControlKlingJob(data?: DescribeMotionControlKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMotionControlKlingJobResponse>;
   /** 查询图片唱演任务 {@link DescribePortraitSingJobRequest} {@link DescribePortraitSingJobResponse} */
   DescribePortraitSingJob(data: DescribePortraitSingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortraitSingJobResponse>;
   /** 查询Vidu参考生视频任务 {@link DescribeReferenceToVideoViduJobRequest} {@link DescribeReferenceToVideoViduJobResponse} */
@@ -1290,13 +1328,13 @@ declare interface Vclm {
   /** 查询视频特效任务 {@link DescribeTemplateToVideoJobRequest} {@link DescribeTemplateToVideoJobResponse} */
   DescribeTemplateToVideoJob(data: DescribeTemplateToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTemplateToVideoJobResponse>;
   /** 查询Kling文生视频任务 {@link DescribeTextToVideoJobRequest} {@link DescribeTextToVideoJobResponse} */
-  DescribeTextToVideoJob(data: DescribeTextToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoJobResponse>;
+  DescribeTextToVideoJob(data?: DescribeTextToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoJobResponse>;
   /** 查询Vidu文生视频任务 {@link DescribeTextToVideoViduJobRequest} {@link DescribeTextToVideoViduJobResponse} */
   DescribeTextToVideoViduJob(data: DescribeTextToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoViduJobResponse>;
   /** 查询视频编辑任务 {@link DescribeVideoEditJobRequest} {@link DescribeVideoEditJobResponse} */
   DescribeVideoEditJob(data: DescribeVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditJobResponse>;
   /** 查询Kling-Omni-Video任务 {@link DescribeVideoEditKlingJobRequest} {@link DescribeVideoEditKlingJobResponse} */
-  DescribeVideoEditKlingJob(data: DescribeVideoEditKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditKlingJobResponse>;
+  DescribeVideoEditKlingJob(data?: DescribeVideoEditKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditKlingJobResponse>;
   /** 查询视频延长任务 {@link DescribeVideoExtendKlingJobRequest} {@link DescribeVideoExtendKlingJobResponse} */
   DescribeVideoExtendKlingJob(data?: DescribeVideoExtendKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoExtendKlingJobResponse>;
   /** 查询人脸融合大模型任务 {@link DescribeVideoFaceFusionJobRequest} {@link DescribeVideoFaceFusionJobResponse} */

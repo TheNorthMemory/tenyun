@@ -302,6 +302,10 @@ declare interface ClusterSwitchDetail {
   PeerAppid?: string;
   /** 跨租户操作状态 1不允许操作 0可以 */
   PeerStatus?: number;
+  /** Bypass状态 */
+  Bypass?: number;
+  /** 防火墙开关操作时的进度状态：// 开启 — 自动模式（3步）&quot;AUTO_OPEN_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源&quot;AUTO_OPEN_PUSHING_ROUTES&quot; // 步骤3: 创建策略路由// 开启 — 手动模式（1步）&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源// 关闭 — 自动模式（2步）&quot;AUTO_CLOSE_DELETING_ROUTES&quot; // 步骤1: 删除策略路由&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源// 关闭 — 手动模式（1步）&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源// 修改 — 自动模式（3步）&quot;AUTO_MODIFY_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由&quot;AUTO_MODIFY_PUSHING_ROUTES&quot; // 步骤3: 创建新策略路由// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源 */
+  Progress?: string;
 }
 
 /** 日志分析的列属性 */
@@ -1034,6 +1038,14 @@ declare interface NDRAssetServiceStats {
   Count?: number;
 }
 
+/** NAT集群模式开关信息 */
+declare interface NatClusterInfo {
+  /** nat网关ID */
+  NatInsId?: string;
+  /** nat网关名称 */
+  NatInsName?: string;
+}
+
 /** Nat防火墙弹性公网ip列表 */
 declare interface NatFwEipsInfo {
   /** 弹性公网ip */
@@ -1574,6 +1586,16 @@ declare interface SwitchError {
   ErrKey?: string | null;
   /** 错误时间 */
   InsertTime?: string | null;
+}
+
+/** 开关开启错误码数据 */
+declare interface SwitchFailInfo {
+  /** 自增唯一ID */
+  Id?: number;
+  /** 开关名称 */
+  Name?: string;
+  /** 防火墙开关变动状态，小于0 */
+  Status?: number;
 }
 
 /** 防火墙开关列表对象 */
@@ -2770,6 +2792,8 @@ declare interface DescribeClusterVpcFwSwitchsResponse {
   Total?: number;
   /** 防火墙开关列表 */
   Data?: ClusterSwitchDetail[] | null;
+  /** 开关开启失败列表 */
+  FailData?: SwitchFailInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3176,6 +3200,8 @@ declare interface DescribeNatFwInstanceRequest {
 declare interface DescribeNatFwInstanceResponse {
   /** 实例数组 */
   NatinsLst?: NatFwInstance[];
+  /** nat ccn集群防火墙列表 */
+  NatClusterLst?: NatClusterInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

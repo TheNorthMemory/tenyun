@@ -716,7 +716,7 @@ declare interface AllocationUnit {
 
 /** 成本分析交易类型复杂类型 */
 declare interface AnalyseActionTypeDetail {
-  /** 交易类型code */
+  /** 交易类型code枚举值：prepay_purchase： 包年包月新购prepay_renew： 包年包月续费prepay_modify： 包年包月配置变更prepay_return： 包年包月退款postpay_deduct_h： 按量计费小时结postpay_deduct_d： 按量计费日结postpay_deduct_m： 按量计费月结offline_deduct： 线下项目扣费online_deduct： 线下产品扣费recon_deduct： 调账扣费recon_increase： 调账补偿postpay_deduct_s： 竞价实例小时结recon_increase_f： 线下项目调账补偿pre_to_post： 包年包月转按量svp_hour_pay： 节省计划小时费用recon_guarantee： 保底扣款billVirtualId： 月度计费精度差异 */
   ActionType?: string;
   /** 交易类型Name */
   ActionTypeName?: string;
@@ -822,7 +822,7 @@ declare interface AnalyseOwnerUinDetail {
 
 /** 成本分析支付方式复杂类型 */
 declare interface AnalysePayModeDetail {
-  /** 计费模式code */
+  /** 计费模式code枚举值：prePay： 包年包月postPay： 按量计费 */
   PayMode?: string;
   /** 计费模式Name */
   PayModeName?: string;
@@ -1360,7 +1360,7 @@ declare interface BillZoneId {
 declare interface BudgetConditionsForm {
   /** 产品 */
   Business?: string[] | null;
-  /** 计费模式 */
+  /** 计费模式枚举值：prePay： 包年包月postPay： 按量计费 */
   PayMode?: string[] | null;
   /** 子产品 */
   ProductCodes?: string[] | null;
@@ -1662,7 +1662,7 @@ declare interface ConditionRegion {
 
 /** 账单筛选条件对象 */
 declare interface Conditions {
-  /** 只支持6和12两个值 */
+  /** 只支持6个月和12个月两个值 */
   TimeRange?: number;
   /** 产品名称代码 */
   BusinessCode?: string;
@@ -2878,7 +2878,7 @@ declare interface DescribeAllocationBillConditionsRequest {
   SearchKey?: string;
   /** 项目id */
   ProjectIds?: number[];
-  /** 费用归集类型 */
+  /** 费用归集类型枚举值：0： 分摊1： 归集-1： 未分配 */
   AllocationType?: number[];
 }
 
@@ -2998,7 +2998,7 @@ declare interface DescribeAllocationOverviewRequest {
   PeriodType?: string;
   /** 分账单元唯一标识，用作筛选 */
   TreeNodeUniqKeys?: string[];
-  /** 排序字段，枚举值如下： GatherCashPayAmount - 归集费用(现金)GatherVoucherPayAmount- 归集费用(优惠券)GatherIncentivePayAmount - 归集费用(赠送金)GatherTransferPayAmount - 归集费用(分成金)AllocateCashPayAmount - 分摊费用(现金)AllocateVoucherPayAmount - 分摊费用(优惠券)AllocateIncentivePayAmount - 分摊费用(赠送金)AllocateTransferPayAmount - 分摊费用(分成金)TotalCashPayAmount - 合计费用(现金)TotalVoucherPayAmount - 合计费用(优惠券)TotalIncentivePayAmount - 合计费用(赠送金)TotalTransferPayAmount - 合计费用(分成金)GatherRealCost - 归集费用(折后总额)AllocateRealCost - 分摊费用(折后总额)RealTotalCost - 合计费用(折后总额)Ratio - 占比(折后总额) */
+  /** 排序字段，枚举值如下：GatherCashPayAmount - 归集费用(现金)GatherVoucherPayAmount- 归集费用(优惠券)GatherIncentivePayAmount - 归集费用(赠送金)GatherTransferPayAmount - 归集费用(分成金)AllocateCashPayAmount - 分摊费用(现金)AllocateVoucherPayAmount - 分摊费用(优惠券)AllocateIncentivePayAmount - 分摊费用(赠送金)AllocateTransferPayAmount - 分摊费用(分成金)TotalCashPayAmount - 合计费用(现金)TotalVoucherPayAmount - 合计费用(优惠券)TotalIncentivePayAmount - 合计费用(赠送金)TotalTransferPayAmount - 合计费用(分成金)GatherRealCost - 归集费用(折后总额)AllocateRealCost - 分摊费用(折后总额)RealTotalCost - 合计费用(折后总额)Ratio - 占比(折后总额) */
   Sort?: string;
   /** 排序类型，枚举值如下：asc - 升序desc - 降序 */
   SortType?: string;
@@ -3031,7 +3031,7 @@ declare interface DescribeAllocationRuleDetailResponse {
   Uin?: string;
   /** 公摊规则名称 */
   Name?: string;
-  /** 公摊策略类型，枚举值如下：1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊 */
+  /** 公摊策略类型，枚举值如下：1 - 自定义分摊占比2 - 等比分摊3 - 按占比分摊 */
   Type?: number;
   /** 公摊规则表达式 */
   RuleDetail?: AllocationRuleExpression;
@@ -3048,7 +3048,7 @@ declare interface DescribeAllocationRuleSummaryRequest {
   Offset: number;
   /** 月份，不传默认当前月 */
   Month?: string;
-  /** 公摊策略类型，用于筛选。枚举值如下： 1 - 自定义分摊占比 2 - 等比分摊 3 - 按占比分摊 */
+  /** 公摊策略类型，用于筛选。枚举值如下：1 - 自定义分摊占比2 - 等比分摊3 - 按占比分摊 */
   Type?: number;
   /** 公摊规则名称或分账单元名称，用于模糊筛选。 */
   Name?: string;
@@ -3198,7 +3198,7 @@ declare interface DescribeAllocationSummaryByResourceRequest {
   SearchKey?: string;
   /** 项目ID，用作筛选 */
   ProjectIds?: number[];
-  /** 费用归集类型，枚举值如下：0 - 分摊 1 - 归集 -1 - 未分配 */
+  /** 费用归集类型，枚举值如下：0 - 分摊1 - 归集-1 - 未分配 */
   AllocationType?: number[];
 }
 
@@ -4038,7 +4038,7 @@ declare interface DescribeGatherResourceRequest {
   Month?: string;
   /** 分账单元唯一标识，用作筛选 */
   TreeNodeUniqKey?: string;
-  /** 资源目录类别，枚举值如下：all - 全部 none - 未归集 */
+  /** 资源目录类别，枚举值如下：all - 全部none - 未归集 */
   GatherType?: string;
   /** 排序字段，枚举值如下：realCost - 折后总价cashPayAmount - 现金金额voucherPayAmount - 代金券金额incentivePayAmount - 赠送金金额transferPayAmount -分成金金额 */
   Sort?: string;

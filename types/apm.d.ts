@@ -542,7 +542,7 @@ declare interface ComponentTopologyView {
 declare interface Filter {
   /** 过滤方式（=, !=, in） */
   Type: string;
-  /** 过滤维度名 */
+  /** 过滤维度名详情参考实际接口字段描述 */
   Key: string;
   /** 过滤值，in过滤方式用逗号分割多个值 */
   Value: string;
@@ -1209,9 +1209,9 @@ declare interface DescribeGeneralOTSpanListRequest {
   StartTime: number;
   /** Span 查询结束时间戳（单位：秒） */
   EndTime: number;
-  /** 通用过滤参数 */
+  /** 通用过滤参数 支持的过滤key如service.name */
   Filters?: Filter[];
-  /** 排序现支持的 Key 有：- startTime(开始时间)- endTime(结束时间)- duration(响应时间)现支持的 Value 有：- desc(降序排序)- asc(升序排序) */
+  /** 排序现支持的 Key 有：startTime(开始时间)endTime(结束时间)duration(响应时间)现支持的 Value 有：desc(降序排序)asc(升序排序) */
   OrderBy?: OrderBy;
   /** 业务自身服务名，控制台用户请填写taw */
   BusinessName?: string;
@@ -1224,7 +1224,7 @@ declare interface DescribeGeneralOTSpanListRequest {
 declare interface DescribeGeneralOTSpanListResponse {
   /** 总数量 */
   TotalCount?: number;
-  /** Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。1. 将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。2. 使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。3. 使用 UTF-8 字符集，将压缩前的字节数组转换为文本。 */
+  /** Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。使用 UTF-8 字符集，将压缩前的字节数组转换为文本。 */
   Spans?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1237,9 +1237,9 @@ declare interface DescribeGeneralSpanListRequest {
   StartTime: number;
   /** Span 查询结束时间戳（单位：秒） */
   EndTime: number;
-  /** 通用过滤参数 */
+  /** 通用过滤参数 支持的过滤key如service.name */
   Filters?: Filter[];
-  /** 排序现支持的 Key 有：- startTime(开始时间)- endTime(结束时间)- duration(响应时间)现支持的 Value 有：- desc(降序排序)- asc(升序排序) */
+  /** 排序现支持的 Key 有：startTime(开始时间)endTime(结束时间)duration(响应时间)现支持的 Value 有：desc(降序排序)asc(升序排序) */
   OrderBy?: OrderBy;
   /** 业务自身服务名，控制台用户请填写taw */
   BusinessName?: string;

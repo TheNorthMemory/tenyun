@@ -144,6 +144,8 @@ declare interface CreateCasInput {
   IdcPointType?: string;
   /** 运营商链路是否有保护 */
   BIapLinkProtected?: boolean;
+  /** 服务类型，SHARE-共享型，EXCLUSIVE-独占型 */
+  ServiceType?: string;
 }
 
 /** 物理专线信息列表 */

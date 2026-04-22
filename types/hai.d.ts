@@ -140,6 +140,10 @@ declare interface HyperParam {
 declare interface ImageInfo {
   /** tcr仓库地址 */
   ImageRegistryUrl?: string;
+  /** 仓库用户名 */
+  ImageRegistryUsername?: string;
+  /** 仓库密码 */
+  ImageRegistryPassword?: string;
 }
 
 /** 实例信息 */

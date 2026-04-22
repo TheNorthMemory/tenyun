@@ -376,6 +376,50 @@ declare interface RankInfo {
   RowColumnConfigList?: RowColumnConfig[] | null;
 }
 
+/** 资源权限信息 */
+declare interface ResourceDTO {
+  /** 资源名称 */
+  ResourceName?: string | null;
+  /** 是否启用 */
+  ResourceValue?: boolean | null;
+  /** 能否变更 */
+  CanChange?: boolean | null;
+  /** 提示 */
+  Tips?: string | null;
+}
+
+/** 资源 */
+declare interface ResourceItem {
+  /** 资源名称 */
+  ResourceName?: string | null;
+  /** 资源值 */
+  ResourceValue?: boolean | null;
+  /** 是否可变更 */
+  CanChange?: boolean | null;
+  /** 提示信息 */
+  Tips?: string | null;
+}
+
+/** 操作的资源权限 */
+declare interface ResourceListDTO {
+  /** 资源id */
+  EntityId?: number | null;
+  /** 资源类型 */
+  NodeType?: number | null;
+  /** 资源权限 */
+  ResourceList?: ResourceItem[] | null;
+}
+
+/** 资源权限标签过滤参数 */
+declare interface ResourceTagValue {
+  /** 标签id */
+  Id?: number;
+  /** 标签名称 */
+  Name?: string;
+  /** 标签值列表 */
+  Values?: string[];
+}
+
 /** 角色 */
 declare interface Role {
   /** 角色ID */
@@ -458,6 +502,70 @@ declare interface UserGroupDTO {
   Location?: number | null;
 }
 
+/** 用户组权限树 */
+declare interface UserGroupPageTreeVO {
+  /** 列表 */
+  List?: UserGroupTreeVO[] | null;
+  /** 总数 */
+  Total?: number | null;
+  /** 页数 */
+  TotalPages?: number | null;
+}
+
+/** 用户组数节点 */
+declare interface UserGroupTreeNodeDTO {
+  /** 用户组id */
+  GroupId?: number | null;
+  /** 是否查询子节点 */
+  QueryChildNodes?: boolean | null;
+}
+
+/** 用户组权限树 */
+declare interface UserGroupTreeVO {
+  /** 当前实体ID */
+  Id?: number | null;
+  /** 用户组名称 */
+  GroupName?: string | null;
+  /** 父id */
+  ParentId?: number | null;
+  /** 父节点名称 */
+  ParentName?: string | null;
+  /** 1 */
+  IsDefault?: number | null;
+  /** 管理员账号id */
+  AdminUserId?: string | null;
+  /** 用户集合 */
+  UserList?: UserVO[] | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 排序 */
+  Location?: number | null;
+  /** 孩子节点 */
+  Children?: UserGroupTreeVO[] | null;
+  /** 是否有孩子节点 */
+  HasChildren?: boolean | null;
+  /** 资源集合 */
+  ResourceList?: ResourceDTO[] | null;
+}
+
+/** 用户组更新入参 */
+declare interface UserGroupUpdateDTO {
+  /** 组管理员 */
+  AdminUserId?: string;
+  /** 描述 */
+  Description?: string;
+  /** 用户组名称 */
+  GroupName?: string;
+  /** 排序位置 */
+  Location?: number;
+  /** 父节点id */
+  ParentId?: number;
+  /** 用户组id */
+  Id?: number;
+  /** 父节点名称 */
+  ParentName?: string;
+}
+
 /** 用户ID和用户名 */
 declare interface UserIdAndUserName {
   /** 用户ID */
@@ -524,6 +632,18 @@ declare interface UserInfo {
   AppUserId?: string | null;
   /** 企微账号名称 */
   AppUserName?: string | null;
+}
+
+/** 用户资源入参 */
+declare interface UserResourceDTO {
+  /** 企业id */
+  CorpId?: string | null;
+  /** 用户id */
+  UserId?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 资源列表 */
+  ResourceList?: ResourceItem[] | null;
 }
 
 /** 用户角色信息 */
@@ -602,6 +722,14 @@ declare interface UserRoleListDataUserRoleInfo {
   EmailActivationStatus?: number | null;
   /** 用户组信息 */
   UserGroupList?: UserGroupDTO[] | null;
+}
+
+/** 基础用户信息 */
+declare interface UserVO {
+  /** u1 */
+  UserId?: string | null;
+  /** zhang */
+  UserName?: string | null;
 }
 
 /** 页面组件信息 */
@@ -906,6 +1034,32 @@ declare interface CreateProjectResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserGroupMemberRequest {
+}
+
+declare interface CreateUserGroupMemberResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateUserGroupRequest {
+  /** 用户组名称 */
+  GroupName?: string;
+  /** 位置 */
+  Location?: number;
+  /** 父用户组id */
+  ParentId?: number;
+}
+
+declare interface CreateUserGroupResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserRoleProjectRequest {
   /** 项目ID */
   ProjectId?: number;
@@ -992,6 +1146,32 @@ declare interface DeleteProjectResponse {
   Data?: string | null;
   /** "" */
   Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserGroupMemberRequest {
+  /** 用户组id */
+  GroupId?: number;
+  /** 用户id集合 */
+  UserIdList?: string[];
+}
+
+declare interface DeleteUserGroupMemberResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserGroupRequest {
+  /** 用户组id */
+  Id?: number;
+}
+
+declare interface DeleteUserGroupResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1202,6 +1382,122 @@ declare interface DescribeProjectListResponse {
   Msg?: string | null;
   /** 数据 */
   Data?: ProjectListData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceUserGroupPageListRequest {
+  /** 项目Id */
+  ProjectId?: number;
+  /** 页面Id */
+  PageId?: number;
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 是否分页 */
+  AllPage?: number;
+  /** 模糊搜索关键字 */
+  Keyword?: string;
+  /** 页码 */
+  PageNo?: number;
+  /** 每页条数 */
+  PageSize?: number;
+  /** 标签过滤条件 */
+  TagValueList?: ResourceTagValue[];
+  /** 角色 */
+  ModuleCollection?: string;
+  /** 是否授权 */
+  ResourceValue?: string;
+  /** 权限类型 */
+  ResourceName?: string;
+  /** 父id */
+  ParentId?: number;
+  /** 资源id */
+  EntityId?: number;
+}
+
+declare interface DescribeResourceUserGroupPageListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: UserGroupPageTreeVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserGroupInfoRequest {
+  /** 用户组id */
+  Id?: number;
+}
+
+declare interface DescribeUserGroupInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserGroupMemberListRequest {
+  /** 用户组id集合 */
+  GroupIds?: number[];
+  /** asc正序,desc倒序 */
+  CreatedOnOrder?: string;
+  /** 搜索关键字 */
+  Keyword?: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNo?: number;
+  /** 是否需要分页 */
+  AllPage?: boolean;
+}
+
+declare interface DescribeUserGroupMemberListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserGroupTreeListRequest {
+  /** 项目Id */
+  ProjectId?: number;
+  /** 是否分页 */
+  AllPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 每页条数 */
+  PageSize?: number;
+  /** 标签过滤条件 */
+  TagValueList?: ResourceTagValue[];
+  /** 节点集合 */
+  Nodes?: UserGroupTreeNodeDTO[];
+  /** 用户组id集合 */
+  GroupIds?: number[];
+  /** 查询下一个code */
+  QueryNextNode?: boolean;
+  /** 父id集合 */
+  ParentIds?: number[];
+  /** 是否查询所有节点 */
+  QueryAllNode?: boolean;
+  /** 过滤组id集合 */
+  FilterGroupIds?: number[];
+  /** 模糊搜索关键字 */
+  Keyword?: string;
+}
+
+declare interface DescribeUserGroupTreeListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: UserGroupTreeVO[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1490,6 +1786,110 @@ declare interface ModifyProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyResourceUserGroupRequest {
+  /** 项目Id */
+  ProjectId?: number;
+  /** 用户组id集合 */
+  UserGroupIds?: number[];
+  /** 操作的资源权限 */
+  Resource?: ResourceListDTO;
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 是否查询所有孩子节点 */
+  QueryChildren?: boolean;
+}
+
+declare interface ModifyResourceUserGroupResourceRequest {
+  /** 项目Id */
+  ProjectId?: number;
+  /** 用户id */
+  UserGroupId?: number;
+  /** 资源 */
+  Resource?: UserResourceDTO;
+  /** 实体类 */
+  EntityIds?: number[];
+  /** 资源类型 */
+  ResourceType?: string;
+}
+
+declare interface ModifyResourceUserGroupResourceResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyResourceUserGroupResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserDetailInfoRequest {
+  /** 用户ID */
+  UserId?: string;
+  /** 角色ID 列表 */
+  RoleIdList?: number[];
+  /** 邮箱 */
+  Email?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 手机号 */
+  PhoneNumber?: string;
+  /** 手机区号 */
+  AreaCode?: string;
+  /** 企业微信应用用户id */
+  AppUserId?: string;
+  /** 是否开启手机验证码登录（0 关闭，1 开启） */
+  LoginSecurityStatus?: number;
+  /** 是否开启密码过期提醒（0 关闭，1 开启 */
+  ResetPassWordTip?: number;
+  /** 强制修改密码（0 关闭，1 开启） */
+  ForceResetPassWord?: number;
+  /** 密码过期提醒时间，30、60、90（默认）、180天 */
+  PasswordExpired?: number;
+  /** 用户组id */
+  UserGroupIdList?: number[];
+}
+
+declare interface ModifyUserDetailInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserGroupRequest {
+  /** 用户组更新list */
+  UpdateList?: UserGroupUpdateDTO[];
+}
+
+declare interface ModifyUserGroupResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserRoleProjectRequest {
   /** 项目ID */
   ProjectId?: number;
@@ -1556,6 +1956,32 @@ declare interface ModifyUserRoleResponse {
   RequestId?: string;
 }
 
+declare interface QueryUserGroupMemberRequest {
+  /** 用户组id集合 */
+  GroupIds?: number[];
+  /** 搜索关键字 */
+  Keyword?: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 分页页码 */
+  PageNo?: number;
+  /** 是否需要分页 */
+  AllPage?: boolean;
+  /** 用户组节点信息 */
+  Nodes?: UserGroupTreeNodeDTO[];
+  /** 标签值 */
+  TagValueList?: ResourceTagValue[];
+  /** 需要过滤的用户组 */
+  FilterGroupIds?: number[];
+}
+
+declare interface QueryUserGroupMemberResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Bi 商业智能分析 BI} */
 declare interface Bi {
   (): Versions;
@@ -1573,6 +1999,10 @@ declare interface Bi {
   CreatePermissionRanks(data?: CreatePermissionRanksRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePermissionRanksResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
+  /** 创建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
+  CreateUserGroup(data?: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
+  /** 创建用户组成员 {@link CreateUserGroupMemberRequest} {@link CreateUserGroupMemberResponse} */
+  CreateUserGroupMember(data?: CreateUserGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupMemberResponse>;
   /** 创建用户角色 {@link CreateUserRoleRequest} {@link CreateUserRoleResponse} */
   CreateUserRole(data?: CreateUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserRoleResponse>;
   /** 项目内-创建用户角色 {@link CreateUserRoleProjectRequest} {@link CreateUserRoleProjectResponse} */
@@ -1581,6 +2011,10 @@ declare interface Bi {
   DeleteDatasource(data: DeleteDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasourceResponse>;
   /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
+  /** 删除用户组 {@link DeleteUserGroupRequest} {@link DeleteUserGroupResponse} */
+  DeleteUserGroup(data?: DeleteUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupResponse>;
+  /** 删除用户组成员 {@link DeleteUserGroupMemberRequest} {@link DeleteUserGroupMemberResponse} */
+  DeleteUserGroupMember(data?: DeleteUserGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupMemberResponse>;
   /** 删除用户角色 {@link DeleteUserRoleRequest} {@link DeleteUserRoleResponse} */
   DeleteUserRole(data: DeleteUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserRoleResponse>;
   /** 项目内-删除用户角色 {@link DeleteUserRoleProjectRequest} {@link DeleteUserRoleProjectResponse} */
@@ -1599,6 +2033,14 @@ declare interface Bi {
   DescribeProjectInfo(data: DescribeProjectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectInfoResponse>;
   /** 项目列表数据接口 {@link DescribeProjectListRequest} {@link DescribeProjectListResponse} */
   DescribeProjectList(data?: DescribeProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectListResponse>;
+  /** 查看当前资源的用户组权限 {@link DescribeResourceUserGroupPageListRequest} {@link DescribeResourceUserGroupPageListResponse} */
+  DescribeResourceUserGroupPageList(data?: DescribeResourceUserGroupPageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUserGroupPageListResponse>;
+  /** 查询用户组详情 {@link DescribeUserGroupInfoRequest} {@link DescribeUserGroupInfoResponse} */
+  DescribeUserGroupInfo(data?: DescribeUserGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupInfoResponse>;
+  /** 查询用户组成员列表 {@link DescribeUserGroupMemberListRequest} {@link DescribeUserGroupMemberListResponse} */
+  DescribeUserGroupMemberList(data?: DescribeUserGroupMemberListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupMemberListResponse>;
+  /** 用户组-树形结构 {@link DescribeUserGroupTreeListRequest} {@link DescribeUserGroupTreeListResponse} */
+  DescribeUserGroupTreeList(data?: DescribeUserGroupTreeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupTreeListResponse>;
   /** 项目内-用户接口 {@link DescribeUserProjectListRequest} {@link DescribeUserProjectListResponse} */
   DescribeUserProjectList(data?: DescribeUserProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserProjectListResponse>;
   /** 用户角色列表 {@link DescribeUserRoleListRequest} {@link DescribeUserRoleListResponse} */
@@ -1613,10 +2055,20 @@ declare interface Bi {
   ModifyDatasourceCloud(data: ModifyDatasourceCloudRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatasourceCloudResponse>;
   /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
+  /** 更新用户组权限 {@link ModifyResourceUserGroupRequest} {@link ModifyResourceUserGroupResponse} */
+  ModifyResourceUserGroup(data?: ModifyResourceUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceUserGroupResponse>;
+  /** 按资源 - 更新用户组权限 {@link ModifyResourceUserGroupResourceRequest} {@link ModifyResourceUserGroupResourceResponse} */
+  ModifyResourceUserGroupResource(data?: ModifyResourceUserGroupResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceUserGroupResourceResponse>;
+  /** 修改用户角色信息和用户组信息 {@link ModifyUserDetailInfoRequest} {@link ModifyUserDetailInfoResponse} */
+  ModifyUserDetailInfo(data?: ModifyUserDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserDetailInfoResponse>;
+  /** 更新用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
+  ModifyUserGroup(data?: ModifyUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupResponse>;
   /** 修改用户角色信息 {@link ModifyUserRoleRequest} {@link ModifyUserRoleResponse} */
   ModifyUserRole(data?: ModifyUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserRoleResponse>;
   /** 项目-修改用户角色信息 {@link ModifyUserRoleProjectRequest} {@link ModifyUserRoleProjectResponse} */
   ModifyUserRoleProject(data?: ModifyUserRoleProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserRoleProjectResponse>;
+  /** 查询用户组成员 {@link QueryUserGroupMemberRequest} {@link QueryUserGroupMemberResponse} */
+  QueryUserGroupMember(data?: QueryUserGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserGroupMemberResponse>;
 }
 
 export declare type Versions = ["2022-01-05"];

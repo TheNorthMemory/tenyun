@@ -2,19 +2,43 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** aigc片段审核结果 */
+declare interface AIGCRecognitionResult {
+  /** 一级标签名 */
+  Label?: string;
+  /** 一级标签码 */
+  LabelCode?: string;
+  /** 分数 */
+  Score?: number;
+  /** 该vad片段在原始音频片段中的起始时间偏移 */
+  StartTime?: number;
+  /** 该vad片段在原始音频片段中的结束时间偏移 */
+  EndTime?: number;
+  /** 建议值 */
+  Suggestion?: string;
+  /** 二级标签名 */
+  SubLabel?: string;
+  /** 二级标签码 */
+  SubLabelCode?: string;
+  /** 三级标签名 */
+  SubTag?: string;
+  /** 三级标签码 */
+  SubTagCode?: string;
+}
+
 /** 音频审核输出参数 */
 declare interface AudioResult {
-  /** 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。 */
+  /** 该字段用于返回审核内容是否命中审核模型；取值：0（未命中）、1（命中）。 */
   HitFlag?: number;
-  /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
+  /** 该字段用于返回检测结果所对应的恶意标签。返回值：Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
   Label?: string;
-  /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
+  /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过 */
   Suggestion?: string;
-  /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
+  /** 该字段用于返回当前标签下的置信度，取值范围：0（置信度最低）-100（置信度最高 ），越高代表文本越有可能属于当前返回的标签；如：色情 99，则表明该文本非常有可能属于色情内容。 */
   Score?: number;
-  /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。 */
+  /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别5小时的音频文件，若超出时长限制，接口将会报错。 */
   Text?: string;
-  /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
+  /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用COS预签名功能更新签名时效。 */
   Url?: string;
   /** 该字段用于返回音频文件的时长，单位为毫秒。 */
   Duration?: string;
@@ -46,6 +70,8 @@ declare interface AudioResult {
   Sentences?: Sentence[];
   /** 切片请求ID */
   RequestId?: string;
+  /** AIGC音频片段审核结果 */
+  AIGCRecognitionResults?: AIGCRecognitionResult[];
 }
 
 /** 音频语言种类检测结果 */

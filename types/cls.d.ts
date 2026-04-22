@@ -6011,6 +6011,8 @@ declare interface ModifyWebCallbackResponse {
 declare interface OpenClawServiceRequest {
   /** 标签类型枚举值：OpenClaw： OpenClaw类型ClawPro： ClawPro类型 */
   Tag: string;
+  /** 是否创建 trace 主题，默认为 false枚举值：true： 创建trace 主题false： 不创建trace 主题 */
+  EnableTrace?: boolean;
 }
 
 declare interface OpenClawServiceResponse {
@@ -6038,6 +6040,10 @@ declare interface OpenClawServiceResponse {
   SessionLogConfigId?: string;
   /** 采集配置名称。会话日志 */
   SessionLogConfigName?: string;
+  /** trace 主题 ID */
+  TraceTopicId?: string;
+  /** trace 主题名称 */
+  TraceTopicName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
