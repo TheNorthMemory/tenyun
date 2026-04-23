@@ -23,13 +23,13 @@ declare interface FaceMorphOutput {
 /** 人脸框信息 */
 declare interface FaceRect {
   /** 人脸框左上角纵坐标。 */
-  Y: number;
+  Y: number | null;
   /** 人脸框左上角横坐标。 */
-  X: number;
-  /** 人脸框宽度。 */
-  Width: number;
-  /** 人脸框高度。 */
-  Height: number;
+  X: number | null;
+  /** 人脸框宽度。单位：px */
+  Width: number | null;
+  /** 人脸框高度。单位：px */
+  Height: number | null;
 }
 
 /** 人脸转换性别信息 */

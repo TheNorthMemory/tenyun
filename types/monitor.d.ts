@@ -727,6 +727,8 @@ declare namespace V20180724 {
     Tags?: Tag[] | null;
     /** 是否免登录，0-否，1-是 */
     IsLoginFree?: number;
+    /** IANA 时区名 */
+    TimeZoneName?: string;
   }
 
   /** 告警策略详情 */
@@ -3219,6 +3221,8 @@ declare namespace V20180724 {
     Tags?: Tag[];
     /** 是否免登录，0-否，1-是 */
     IsLoginFree?: number;
+    /** IANA 时区名 */
+    TimeZoneName?: string;
   }
 
   interface CreateAlarmNoticeResponse {
@@ -5655,6 +5659,8 @@ declare namespace V20180724 {
     PolicyIds?: string[];
     /** 是否免登录，0-否，1-是 */
     IsLoginFree?: number;
+    /** IANA 时区名 */
+    TimeZoneName?: string;
   }
 
   interface ModifyAlarmNoticeResponse {

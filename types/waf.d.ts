@@ -450,6 +450,96 @@ declare interface AutoDenyDetail {
   LastUpdateTime?: string;
 }
 
+/** 批量自定义规则列表信息数据 */
+declare interface BatchCustomRuleListData {
+  /** 规则列表 */
+  List?: BatchCustomRuleListItem[];
+  /** 列表总数 */
+  Total?: number;
+}
+
+/** 批量自定义规则列表信息Item */
+declare interface BatchCustomRuleListItem {
+  /** 规则Id */
+  Id?: number;
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
+  ActionType?: number;
+  /** 加白模块 */
+  Bypass?: string;
+  /** 有效期 */
+  ExpireTime?: number;
+  /** 规则名称 */
+  Name?: string;
+  /** 重定向地址 */
+  Redirect?: string;
+  /** 优先级 */
+  SortId?: number;
+  /** 开关状态 */
+  Status?: number;
+  /** 域名列表 */
+  Domains?: string[];
+  /** 备注 */
+  Remark?: string;
+  /** 策略列表 */
+  Strategies?: Strategy[];
+  /** 事件Id */
+  EventId?: string;
+  /** 生效状态 */
+  ValidStatus?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 周期任务粒度 */
+  CronType?: string;
+  /** 标签 */
+  Label?: string;
+  /** 页面ID */
+  PageId?: string;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
+  /** 动作灰度的比例 */
+  ActionRatio?: number;
+}
+
+/** 批量精准白名单规则详情 */
+declare interface BatchCustomWhiteRule {
+  /** 规则ID */
+  ID?: number;
+  /** 规则名 */
+  Name?: string;
+  /** 优先级 */
+  SortId?: number;
+  /** 策略详情 */
+  Strategies?: Strategy[];
+  /** 加白的模块，owasp：Web防护-规则引擎、ai：Web防护-AI引擎、ip_auto_deny：IP封禁、geoip：访问控制-地域封禁、acl：访问控制-自定义规则、cc：CC防护、antileakage：信息防泄漏防护、bwip：IP黑白名单、botrpc：BOT防护、api：API安全、applet：小程序防护 */
+  Bypass?: string[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 周期任务的类型 */
+  CronType?: string;
+  /** 域名列表，如果绑定的是批量域名 */
+  Domains?: string[];
+  /** 防护对象组ID列表，如果绑定的是防护对象组 */
+  GroupIds?: number[];
+  /** 生效状态，1：生效中、0：未生效 */
+  ValidStatus?: number;
+  /** 规则创建时间 */
+  CreateTime?: string;
+  /** 规则更新时间 */
+  UpdateTime?: string;
+  /** 规则开关状态，1：开启、0：关闭 */
+  Status?: number;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
+}
+
 /** 批量防护失败的域名以及对应的原因。 */
 declare interface BatchDomainResult {
   /** 批量操作中失败的域名 */
@@ -2002,6 +2092,14 @@ declare interface InOutputUCBRuleEntry {
   ParamCompareList?: ParamCompareList[];
 }
 
+/** 实例对象的简略结构，只包含实例ID和实例名 */
+declare interface InstanceBriefInfo {
+  /** 实例ID */
+  ID?: string;
+  /** 实例名 */
+  Name?: string;
+}
+
 /** 一个实例的详细信息 */
 declare interface InstanceInfo {
   /** 实例唯一ID */
@@ -2882,6 +2980,32 @@ declare interface PromptDetectResult {
   Confidence?: number;
 }
 
+/** 防护对象组的域名详情 */
+declare interface ProtectGroupDomainInfo {
+  /** 防护对象组中绑定的域名 */
+  Domain?: string;
+  /** 防护对象组中绑定的域名对应所属的实例信息，一个域名可能存在多个实例中 */
+  Instances?: InstanceBriefInfo[];
+}
+
+/** 防护对象组对象详情 */
+declare interface ProtectGroupInfo {
+  /** 防护对象组ID */
+  ID?: number;
+  /** 防护对象组名称 */
+  Name?: string;
+  /** 防护对象组备注 */
+  Remark?: string;
+  /** 防护对象组中绑定的域名详情 */
+  Domains?: ProtectGroupDomainInfo[];
+  /** 关联的批量规则数 */
+  RuleNum?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
 /** clb-waf QPS套餐 New */
 declare interface QPSPackageNew {
   /** 资源ID */
@@ -3580,6 +3704,74 @@ declare interface AddAttackWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface AddBatchCustomRuleRequest {
+  /** 规则名称 */
+  Name: string;
+  /** 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒） */
+  ExpireTime: number;
+  /** 优先级 */
+  SortId: number;
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向 */
+  ActionType: number;
+  /** 重定向地址 */
+  Redirect: string;
+  /** 加白模块 */
+  Bypass: string;
+  /** 备注 */
+  Remark: string;
+  /** 事件Id */
+  EventId: string;
+  /** 域名列表 */
+  Domains: string[];
+  /** 策略详情列表 */
+  Strategies: Strategy[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
+  /** 页面ID */
+  PageId?: string;
+  /** 动作灰度比例 */
+  ActionRatio?: number;
+}
+
+declare interface AddBatchCustomRuleResponse {
+  /** 操作成功 */
+  Res?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddBatchCustomWhiteRuleRequest {
+  /** 规则名称 */
+  Name: string;
+  /** 优先级 */
+  SortId: number;
+  /** 策略详情 */
+  Strategies: Strategy[];
+  /** 加白的模块，owasp：Web防护-规则引擎、ai：Web防护-AI引擎、ip_auto_deny：IP封禁、geoip：访问控制-地域封禁、acl：访问控制-自定义规则、cc：CC防护、antileakage：信息防泄漏防护、bwip：IP黑白名单、botrpc：BOT防护、api：API安全、applet：小程序防护 */
+  Bypass: string[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 域名列表，如果绑定的是批量域名，和GroupIds参数二选一 */
+  Domains?: string[];
+  /** 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一 */
+  GroupIds?: number[];
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
+}
+
+declare interface AddBatchCustomWhiteRuleResponse {
+  /** 添加成功的规则ID */
+  RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddBypassAllRuleRequest {
 }
 
@@ -4050,6 +4242,22 @@ declare interface CreatePostCLSFlowResponse {
   RequestId?: string;
 }
 
+declare interface CreateProtectGroupRequest {
+  /** 防护对象组名称 */
+  Name: string;
+  /** 防护对象组的应用范围 */
+  Domains: string[];
+  /** 防护对象组备注 */
+  Remark?: string;
+}
+
+declare interface CreateProtectGroupResponse {
+  /** 防护对象组的ID */
+  GroupId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRateLimitV2Request {
   /** 域名 */
   Domain: string;
@@ -4164,6 +4372,34 @@ declare interface DeleteAttackWhiteRuleRequest {
 declare interface DeleteAttackWhiteRuleResponse {
   /** 删除失败的规则序号组 */
   FailIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBatchCustomRuleRequest {
+  /** 数据类型 "custom-rule"-自定义规则、"custom-white-rule"-精准白名单 */
+  DataType: string;
+  /** 0-指定Id删除、1-删除全部（除部分排除的Id） */
+  IsDeleteAll: number;
+  /** 具体Ids 由IsDeleteAll而定 */
+  Ids: number[];
+  /** 筛选条件 */
+  Filters: FiltersItemNew[];
+}
+
+declare interface DeleteBatchCustomRuleResponse {
+  /** 操作成功 */
+  Res?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBatchCustomWhiteRuleRequest {
+  /** 要删除的规则ID列表 */
+  Ids: number[];
+}
+
+declare interface DeleteBatchCustomWhiteRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4346,6 +4582,28 @@ declare interface DeleteOwaspWhiteRuleRequest {
 }
 
 declare interface DeleteOwaspWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProtectGroupDomainRequest {
+  /** 防护对象组ID */
+  GroupId: number;
+  /** 解除绑定的域名 */
+  Domain: string;
+}
+
+declare interface DeleteProtectGroupDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProtectGroupRequest {
+  /** 防护对象组ID列表，支持批量删除 */
+  GroupIds?: number[];
+}
+
+declare interface DeleteProtectGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4812,6 +5070,50 @@ declare interface DescribeAutoDenyIPRequest {
 declare interface DescribeAutoDenyIPResponse {
   /** 查询IP封禁状态返回结果 */
   Data?: IpHitItemsData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBatchCustomRuleListRequest {
+  /** 偏移量 */
+  Offset: number;
+  /** 页尺寸 */
+  Limit: number;
+  /** 排序字段"update_time"-更新时间、"expire_time"-过期时间、"sort_id"-优先级、"id"-规则Id、"create_time"-创建时间 */
+  By: string;
+  /** 排序类型desc-降序、asc-升序 */
+  Order: string;
+  /** 数据类型 "custom-rule"-自定义规则、"custom-white-rule"-精准白名单 */
+  DataType: string;
+  /** 筛选列表 */
+  Filters: FiltersItemNew[];
+}
+
+declare interface DescribeBatchCustomRuleListResponse {
+  /** 操作成功 */
+  Data?: BatchCustomRuleListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBatchCustomWhiteRulesRequest {
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 页尺寸，默认为10 */
+  Limit?: number;
+  /** 排序字段"modify_time"-更新时间、"sort_id"-优先级、"id"-规则Id、"create_time"-创建时间，默认为update_time */
+  By?: string;
+  /** 排序类型desc-降序、asc-升序，默认为desc */
+  Order?: string;
+  /** 筛选列表，支持按照 ID：规则RuleId、Domain：生效的域名、Name：规则名称来筛选、ValidStatus：生效状态、Status：开关状态、TimerType：生效方式 */
+  Filters?: FiltersItemNew[];
+}
+
+declare interface DescribeBatchCustomWhiteRulesResponse {
+  /** 批量规则列表 */
+  Data?: BatchCustomWhiteRule[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5738,6 +6040,28 @@ declare interface DescribePostCLSFlowsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeProtectGroupRequest {
+  /** 查询防护对象的查询条件，如果为空则获取所有的防护对象组，支持按照 Name：对象组名称、Domain：绑定的域名、InstanceID：实例ID、ID：对象组ID、InstanceName：实例名称 */
+  Filter?: FiltersItemNew[];
+  /** 偏移量，默认为0 */
+  OffSet?: number;
+  /** 页尺寸，默认为10 */
+  Limit?: number;
+  /** 排序字段，支持按照 "update_time"-更新时间、"create_time"-创建时间 */
+  By?: string;
+  /** 排序类型desc-降序、asc-升序 */
+  Order?: string;
+}
+
+declare interface DescribeProtectGroupResponse {
+  /** 防护对象组的详情 */
+  Data?: ProtectGroupInfo[];
+  /** 对象组的总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeProtectionModesRequest {
   /** sparta-waf或clb */
   Edition: string;
@@ -6532,6 +6856,104 @@ declare interface ModifyAttackWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBatchCustomRuleRequest {
+  /** 批量规则Id */
+  Id: number;
+  /** 规则名称 */
+  Name: string;
+  /** 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒） */
+  ExpireTime: number;
+  /** 优先级 */
+  SortId: number;
+  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
+  ActionType: number;
+  /** 重定向地址 */
+  Redirect: string;
+  /** 备注 */
+  Remark: string;
+  /** 事件Id */
+  EventId: string;
+  /** 策略详情列表 */
+  Strategies: Strategy[];
+  /** 加白模块 */
+  Bypass?: string;
+  /** 域名列表 */
+  Domains?: string[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType?: string;
+  /** 定时任务配置 */
+  JobDateTime?: JobDateTime;
+  /** 防护对象组ID列表 */
+  GroupIds?: number[];
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
+  /** 页面ID */
+  PageId?: string;
+  /** 动作灰度的比例，1-100，默认是100 */
+  ActionRatio?: number;
+}
+
+declare interface ModifyBatchCustomRuleResponse {
+  /** 操作成功 */
+  Res?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBatchCustomRuleStatusRequest {
+  /** 批量Id */
+  Id: number;
+  /** 开关状态 0-关、1-开 */
+  Status: number;
+}
+
+declare interface ModifyBatchCustomRuleStatusResponse {
+  /** 操作成功 */
+  Res?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBatchCustomWhiteRuleRequest {
+  /** 规则ID */
+  ID: number;
+  /** 规则名称 */
+  Name: string;
+  /** 优先级 */
+  SortId: number;
+  /** 策略详情 */
+  Strategies: Strategy[];
+  /** 加白的模块，owasp：Web防护-规则引擎、ai：Web防护-AI引擎、ip_auto_deny：IP封禁、geoip：访问控制-地域封禁、acl：访问控制-自定义规则、cc：CC防护、antileakage：信息防泄漏防护、bwip：IP黑白名单、botrpc：BOT防护、api：API安全、applet：小程序防护 */
+  Bypass: string[];
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  JobType: string;
+  /** 定时任务配置 */
+  JobDateTime: JobDateTime;
+  /** 域名列表，如果绑定的是批量域名 */
+  Domains?: string[];
+  /** 防护对象组ID列表，如果绑定的是防护对象组 */
+  GroupIds?: number[];
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  LogicalOp?: string;
+}
+
+declare interface ModifyBatchCustomWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBatchCustomWhiteRuleStatusRequest {
+  /** 要更新的规则ID列表 */
+  Ids: number[];
+  /** 开关，1：开启、0：关闭 */
+  Status: number;
+}
+
+declare interface ModifyBatchCustomWhiteRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBatchIpAccessControlRequest {
   /** 编辑的批量规则ID */
   RuleId: number;
@@ -7150,6 +7572,24 @@ declare interface ModifyOwaspWhiteRuleRequest {
 }
 
 declare interface ModifyOwaspWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProtectGroupRequest {
+  /** 防护对象组名称 */
+  Name: string;
+  /** 防护对象组ID */
+  GroupId: number;
+  /** 防护对象组备注 */
+  Remark?: string;
+  /** 防护对象组的应用范围 */
+  Domains?: string[];
+}
+
+declare interface ModifyProtectGroupResponse {
+  /** 防护对象组的ID */
+  GroupId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7843,6 +8283,10 @@ declare interface Waf {
   AddAreaBanAreas(data: AddAreaBanAreasRequest, config?: AxiosRequestConfig): AxiosPromise<AddAreaBanAreasResponse>;
   /** 增加规则引擎白名单 {@link AddAttackWhiteRuleRequest} {@link AddAttackWhiteRuleResponse} */
   AddAttackWhiteRule(data: AddAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddAttackWhiteRuleResponse>;
+  /** 批量新增自定义规则接口 {@link AddBatchCustomRuleRequest} {@link AddBatchCustomRuleResponse} */
+  AddBatchCustomRule(data: AddBatchCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddBatchCustomRuleResponse>;
+  /** 添加批量精准白名单规则 {@link AddBatchCustomWhiteRuleRequest} {@link AddBatchCustomWhiteRuleResponse} */
+  AddBatchCustomWhiteRule(data: AddBatchCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddBatchCustomWhiteRuleResponse>;
   /** 添加一键bypass规则 {@link AddBypassAllRuleRequest} {@link AddBypassAllRuleResponse} */
   AddBypassAllRule(data?: AddBypassAllRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddBypassAllRuleResponse>;
   /** 新增自定义规则 {@link AddCustomRuleRequest} {@link AddCustomRuleResponse} */
@@ -7875,6 +8319,8 @@ declare interface Waf {
   CreatePostCKafkaFlow(data: CreatePostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCKafkaFlowResponse>;
   /** 创建CLS投递流任务 {@link CreatePostCLSFlowRequest} {@link CreatePostCLSFlowResponse} */
   CreatePostCLSFlow(data?: CreatePostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePostCLSFlowResponse>;
+  /** 新建防护对象组 {@link CreateProtectGroupRequest} {@link CreateProtectGroupResponse} */
+  CreateProtectGroup(data: CreateProtectGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtectGroupResponse>;
   /** 创建自研版限流规则 {@link CreateRateLimitV2Request} {@link CreateRateLimitV2Response} */
   CreateRateLimitV2(data: CreateRateLimitV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateRateLimitV2Response>;
   /** 删除访问日志导出 {@link DeleteAccessExportRequest} {@link DeleteAccessExportResponse} */
@@ -7887,6 +8333,10 @@ declare interface Waf {
   DeleteAttackDownloadRecord(data: DeleteAttackDownloadRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackDownloadRecordResponse>;
   /** 删除规则引擎白名单 {@link DeleteAttackWhiteRuleRequest} {@link DeleteAttackWhiteRuleResponse} */
   DeleteAttackWhiteRule(data: DeleteAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttackWhiteRuleResponse>;
+  /** 删除批量自定义规则接口 {@link DeleteBatchCustomRuleRequest} {@link DeleteBatchCustomRuleResponse} */
+  DeleteBatchCustomRule(data: DeleteBatchCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchCustomRuleResponse>;
+  /** 删除批量精准白名单规则 {@link DeleteBatchCustomWhiteRuleRequest} {@link DeleteBatchCustomWhiteRuleResponse} */
+  DeleteBatchCustomWhiteRule(data: DeleteBatchCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchCustomWhiteRuleResponse>;
   /** 批量IP黑白名单删除接口 {@link DeleteBatchIpAccessControlRequest} {@link DeleteBatchIpAccessControlResponse} */
   DeleteBatchIpAccessControl(data?: DeleteBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBatchIpAccessControlResponse>;
   /** 场景化后删除Bot的UCB自定义规则 {@link DeleteBotSceneUCBRuleRequest} {@link DeleteBotSceneUCBRuleResponse} */
@@ -7911,6 +8361,10 @@ declare interface Waf {
   DeleteOwaspRuleStatus(data: DeleteOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspRuleStatusResponse>;
   /** 删除用户规则引擎白名单 {@link DeleteOwaspWhiteRuleRequest} {@link DeleteOwaspWhiteRuleResponse} */
   DeleteOwaspWhiteRule(data: DeleteOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspWhiteRuleResponse>;
+  /** 删除防护对象组 {@link DeleteProtectGroupRequest} {@link DeleteProtectGroupResponse} */
+  DeleteProtectGroup(data?: DeleteProtectGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProtectGroupResponse>;
+  /** 解除防护对象组中的域名绑定 {@link DeleteProtectGroupDomainRequest} {@link DeleteProtectGroupDomainResponse} */
+  DeleteProtectGroupDomain(data: DeleteProtectGroupDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProtectGroupDomainResponse>;
   /** 删除自研版限流规则列表 {@link DeleteRateLimitsV2Request} {@link DeleteRateLimitsV2Response} */
   DeleteRateLimitsV2(data: DeleteRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteRateLimitsV2Response>;
   /** 删除CC攻击的session设置 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
@@ -7951,6 +8405,10 @@ declare interface Waf {
   DescribeAttackWhiteRule(data: DescribeAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAttackWhiteRuleResponse>;
   /** 描述WAF自动封禁IP详情 {@link DescribeAutoDenyIPRequest} {@link DescribeAutoDenyIPResponse} */
   DescribeAutoDenyIP(data: DescribeAutoDenyIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDenyIPResponse>;
+  /** 批量自定义规则列表接口 {@link DescribeBatchCustomRuleListRequest} {@link DescribeBatchCustomRuleListResponse} */
+  DescribeBatchCustomRuleList(data: DescribeBatchCustomRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchCustomRuleListResponse>;
+  /** 获取批量精准白名单列表 {@link DescribeBatchCustomWhiteRulesRequest} {@link DescribeBatchCustomWhiteRulesResponse} */
+  DescribeBatchCustomWhiteRules(data?: DescribeBatchCustomWhiteRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchCustomWhiteRulesResponse>;
   /** 批量防护IP黑白名单查询 {@link DescribeBatchIpAccessControlRequest} {@link DescribeBatchIpAccessControlResponse} */
   DescribeBatchIpAccessControl(data: DescribeBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchIpAccessControlResponse>;
   /** 获取BotId规则列表 {@link DescribeBotIdRuleRequest} {@link DescribeBotIdRuleResponse} */
@@ -8035,6 +8493,8 @@ declare interface Waf {
   DescribePostCKafkaFlows(data?: DescribePostCKafkaFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCKafkaFlowsResponse>;
   /** 获取CLS投递流任务列表 {@link DescribePostCLSFlowsRequest} {@link DescribePostCLSFlowsResponse} */
   DescribePostCLSFlows(data?: DescribePostCLSFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostCLSFlowsResponse>;
+  /** 获取防护对象组信息 {@link DescribeProtectGroupRequest} {@link DescribeProtectGroupResponse} */
+  DescribeProtectGroup(data?: DescribeProtectGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectGroupResponse>;
   /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
   DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
   /** 查询限流规则列表接口 {@link DescribeRateLimitsV2Request} {@link DescribeRateLimitsV2Response} */
@@ -8121,6 +8581,14 @@ declare interface Waf {
   ModifyAreaBanStatus(data: ModifyAreaBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAreaBanStatusResponse>;
   /** 修改规则引擎白名单 {@link ModifyAttackWhiteRuleRequest} {@link ModifyAttackWhiteRuleResponse} */
   ModifyAttackWhiteRule(data: ModifyAttackWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttackWhiteRuleResponse>;
+  /** 批量编辑自定义规则接口 {@link ModifyBatchCustomRuleRequest} {@link ModifyBatchCustomRuleResponse} */
+  ModifyBatchCustomRule(data: ModifyBatchCustomRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchCustomRuleResponse>;
+  /** 批量自定义规则开关接口 {@link ModifyBatchCustomRuleStatusRequest} {@link ModifyBatchCustomRuleStatusResponse} */
+  ModifyBatchCustomRuleStatus(data: ModifyBatchCustomRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchCustomRuleStatusResponse>;
+  /** 修改批量精准白名单规则 {@link ModifyBatchCustomWhiteRuleRequest} {@link ModifyBatchCustomWhiteRuleResponse} */
+  ModifyBatchCustomWhiteRule(data: ModifyBatchCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchCustomWhiteRuleResponse>;
+  /** 更新批量精准白名单规则开关 {@link ModifyBatchCustomWhiteRuleStatusRequest} {@link ModifyBatchCustomWhiteRuleStatusResponse} */
+  ModifyBatchCustomWhiteRuleStatus(data: ModifyBatchCustomWhiteRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchCustomWhiteRuleStatusResponse>;
   /** 批量IP黑白名单编辑接口 {@link ModifyBatchIpAccessControlRequest} {@link ModifyBatchIpAccessControlResponse} */
   ModifyBatchIpAccessControl(data: ModifyBatchIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBatchIpAccessControlResponse>;
   /** 修改Bot-ID规则配置 {@link ModifyBotIdRuleRequest} {@link ModifyBotIdRuleResponse} */
@@ -8185,6 +8653,8 @@ declare interface Waf {
   ModifyOwaspRuleTypeStatus(data: ModifyOwaspRuleTypeStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleTypeStatusResponse>;
   /** 编辑规则引擎白名单 {@link ModifyOwaspWhiteRuleRequest} {@link ModifyOwaspWhiteRuleResponse} */
   ModifyOwaspWhiteRule(data: ModifyOwaspWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspWhiteRuleResponse>;
+  /** 编辑防护对象组 {@link ModifyProtectGroupRequest} {@link ModifyProtectGroupResponse} */
+  ModifyProtectGroup(data: ModifyProtectGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectGroupResponse>;
   /** 更改防护等级 {@link ModifyProtectionLevelRequest} {@link ModifyProtectionLevelResponse} */
   ModifyProtectionLevel(data?: ModifyProtectionLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionLevelResponse>;
   /** 开启、关闭WAF开关 {@link ModifyProtectionStatusRequest} {@link ModifyProtectionStatusResponse} */

@@ -416,6 +416,20 @@ declare interface ErrLogDetail {
   ErrTime?: string;
   /** 错误消息 */
   ErrMsg?: string;
+  /** 进程ID */
+  ProcessId?: number | null;
+  /** 客户端地址 */
+  ClientAddr?: string | null;
+  /** 会话ID */
+  SessionId?: string | null;
+  /** 会话开始时间 */
+  SessionStartTime?: string | null;
+  /** 虚拟事务ID */
+  VirtualTransactionId?: string | null;
+  /** SQLSTATE错误码 */
+  SqlStateCode?: string | null;
+  /** 客户端应用名称 */
+  ApplicationName?: string | null;
 }
 
 /** 参数修改事件信息 */
@@ -478,6 +492,16 @@ declare interface LogBackup {
   FinishTime?: string;
   /** 备份的过期时间。 */
   ExpireTime?: string;
+}
+
+/** 日志过滤条件 */
+declare interface LogFilter {
+  /** 过滤条件名称。如：sql - SQL命令详情host – 客户端 IP；user – 数据库账户。 */
+  Type: string;
+  /** 过滤条件匹配类型。支持：INC – 包含； （多个值之间是||的关系）EXC – 不包含； （多个值之间是&amp;&amp;的关系）EQS – 等于； （多个值之间是||的关系）NEQ – 不等于；（多个值之间是&amp;&amp;的关系）RG – 范围； */
+  Compare: string;
+  /** 过滤条件匹配值。当Compare=RG时，例：[&quot;1-100&quot;,&quot;200-300&quot;] */
+  Value: string[];
 }
 
 /** 用于修改数据库对象的权限，其中包含了数据库对象描述的数据结构、需要修改的权限列表以及修改的类型等。 */
@@ -645,17 +669,27 @@ declare interface PolicyRule {
 /** 慢SQL查询接口返回 慢SQL列表详情 */
 declare interface RawSlowQuery {
   /** 慢SQL 语句 */
-  RawQuery: string;
+  RawQuery?: string;
   /** 慢SQL 查询的数据库 */
-  DatabaseName: string;
+  DatabaseName?: string;
   /** 慢SQL执行 耗时 */
-  Duration: number;
+  Duration?: number;
   /** 执行慢SQL的客户端 */
-  ClientAddr: string;
+  ClientAddr?: string;
   /** 执行慢SQL的用户名 */
-  UserName: string;
+  UserName?: string;
   /** 慢SQL执行的开始时间 */
-  SessionStartTime: string;
+  SessionStartTime?: string;
+  /** 执行慢SQL的进程ID */
+  ProcessId?: number | null;
+  /** 执行慢SQL的会话ID */
+  SessionId?: string | null;
+  /** 执行慢SQL的事务ID */
+  VirtualTransactionId?: string | null;
+  /** 执行慢SQL的状态码 */
+  SqlStateCode?: string | null;
+  /** 执行慢SQL的客户端名称 */
+  ApplicationName?: string | null;
 }
 
 /** 只读组信息 */
@@ -1631,7 +1665,7 @@ declare interface DescribeDBBackupsResponse {
 }
 
 declare interface DescribeDBErrlogsRequest {
-  /** 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。 可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
   /** 查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。 */
   StartTime: string;
@@ -1645,6 +1679,8 @@ declare interface DescribeDBErrlogsRequest {
   Limit?: number;
   /** 数据偏移量，从0开始。默认值为0。 */
   Offset?: number;
+  /** 日志过滤条件。格式为 [{Type: &quot;ApplicationName&quot;, Compare: &quot;INC&quot;, Value: [&quot;123&quot;]}]。 */
+  LogFilters?: LogFilter[];
 }
 
 declare interface DescribeDBErrlogsResponse {

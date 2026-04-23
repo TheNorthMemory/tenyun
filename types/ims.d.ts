@@ -255,6 +255,10 @@ declare interface CreateImageModerationAsyncTaskRequest {
   Device?: Device;
   /** 服务类型，可为空，默认为 IMAGE。枚举值：IMAGE： 一般图片异步检测IMAGE_LLM： 大模型图片异步检测 */
   Type?: string;
+  /** 该字段表示待审核的图片资源链接，最多支持传入4张图片 */
+  FileUrlList?: string[];
+  /** 待审核的文本内容，需为UTF-8编码并以Base64格式传入，字数限制5000字内。 */
+  TextContent?: string;
 }
 
 declare interface CreateImageModerationAsyncTaskResponse {

@@ -286,6 +286,8 @@ declare interface InstanceConfigInfo {
   ValueRange?: string;
   /** 标记异常 */
   AbnormalParam?: string;
+  /** 是否生效 */
+  ConfigEffective?: string;
 }
 
 /** KV配置 */

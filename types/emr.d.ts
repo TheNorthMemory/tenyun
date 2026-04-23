@@ -268,6 +268,16 @@ declare interface CloudResource {
   Disks?: Disk[] | null;
   /** 容忍 */
   Tolerations?: Toleration[] | null;
+  /** pod亲和性 */
+  PodAffinity?: PodAffinitySpec;
+  /** pod反亲和性 */
+  PodAntiAffinity?: PodAffinitySpec;
+  /** 拓扑分布约束 */
+  TopologySpreadConstraints?: TopologySpreadConstraint[];
+  /** pod标签 */
+  PodLabels?: StringMap[];
+  /** 是否创建默认raycluster */
+  EnableDefaultRayCluster?: boolean;
 }
 
 /** 当前集群共用组件与集群对应关系 */
@@ -436,6 +446,14 @@ declare interface ComponentBasicRestartInfo {
   IpList?: string[] | null;
 }
 
+/** 角色的部署信息 */
+declare interface ComponentDeployInfo {
+  /** 角色名称 */
+  ComponentName?: string;
+  /** 待安装的节点uuid列表 */
+  DeployHostUuidList?: string[];
+}
+
 /** 计算资源高级设置 */
 declare interface ComputeResourceAdvanceParams {
   /** 节点Label数组 */
@@ -446,6 +464,8 @@ declare interface ComputeResourceAdvanceParams {
   PreStartUserScript?: string;
   /** base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看 */
   UserScript?: string;
+  /** 节点组Id */
+  TkeClusterNodePool?: string;
 }
 
 /** 资源调度 - 队列修改信息 */
@@ -492,6 +512,12 @@ declare interface ConfigurationItem {
   Value: string;
   /** 所在的配置文件名 */
   InFile?: string;
+}
+
+/** 容器额外配置 */
+declare interface ContainerExtraConf {
+  /** 计算作业代理访问类型，如Spark作业和RayCluster UI；不填写默认使用Internal枚举值：Internal： 使用内网LB代理访问Public： 使用公网LB代理访问None： 不创建LB代理访问 */
+  JobAccessProxyType?: string;
 }
 
 /** 用户Hive-MetaDB信息 */
@@ -1264,6 +1290,24 @@ declare interface KyuubiQueryInfo {
   User?: string;
 }
 
+/** 标签选择器 */
+declare interface LabelSelector {
+  /** 标签精确匹配条件 */
+  MatchLabels?: StringMap[];
+  /** 标签表达式匹配条件 */
+  MatchExpressions?: LabelSelectorRequirement[];
+}
+
+/** 标签选择器匹配表达式 */
+declare interface LabelSelectorRequirement {
+  /** 键 */
+  Key?: string;
+  /** 匹配操作 */
+  Operator?: string;
+  /** 值 */
+  Values?: string[];
+}
+
 /** 自动扩缩容基于负载指标的规则 */
 declare interface LoadAutoScaleStrategy {
   /** 规则ID。 */
@@ -1916,6 +1960,26 @@ declare interface Placement {
   ProjectId?: number;
 }
 
+/** Pod亲和性 */
+declare interface PodAffinitySpec {
+  /** 调度硬关联规则 */
+  RequiredDuringSchedulingIgnoredDuringExecution?: PodAffinityTerm[];
+  /** 调度软关联规则 */
+  PreferredDuringSchedulingIgnoredDuringExecution?: WeightedPodAffinityTerm[];
+}
+
+/** Pod亲和性项 */
+declare interface PodAffinityTerm {
+  /** 标签选择器 */
+  LabelSelector?: LabelSelector;
+  /** 命名空间列表 */
+  Namespaces?: string[];
+  /** 拓扑域键 */
+  TopologyKey?: string;
+  /** 命名空间选择器 */
+  NamespaceSelector?: LabelSelector;
+}
+
 /** POD自定义权限和自定义参数 */
 declare interface PodNewParameter {
   /** TKE或EKS集群ID */
@@ -2492,6 +2556,14 @@ declare interface ServiceBasicRestartInfo {
   ComponentInfoList?: ComponentBasicRestartInfo[];
 }
 
+/** 服务的部署信息 */
+declare interface ServiceDeployInfo {
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 角色的部署信息列表 */
+  ComponentDeployInfoList?: ComponentDeployInfo[];
+}
+
 /** 服务进程信息 */
 declare interface ServiceNodeDetailInfo {
   /** 进程所在节点IP */
@@ -2758,6 +2830,14 @@ declare interface StrategyConfig {
   Args?: Arg[] | null;
 }
 
+/** 通用字符串map */
+declare interface StringMap {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: string;
+}
+
 /** 子网信息 */
 declare interface SubnetInfo {
   /** 子网信息（名字） */
@@ -2904,6 +2984,26 @@ declare interface TopologyInfo {
   NodeInfoList?: ShortNodeInfo[] | null;
 }
 
+/** 调度拓扑分布 */
+declare interface TopologySpreadConstraint {
+  /** 最大偏差值 */
+  MaxSkew?: number;
+  /** 拓扑域键 */
+  TopologyKey?: string;
+  /** 不满足约束时的处理策略 */
+  WhenUnsatisfiable?: string;
+  /** 标签选择器 */
+  LabelSelector?: LabelSelector;
+  /** 最小拓扑域数量 */
+  MinDomains?: number;
+  /** 节点亲和性策略 */
+  NodeAffinityPolicy?: string;
+  /** 节点污点策略 */
+  NodeTaintsPolicy?: string;
+  /** 匹配标签键列表 */
+  MatchLabelKeys?: string[];
+}
+
 /** 规则触发条件 */
 declare interface TriggerCondition {
   /** 条件比较方法，1表示大于，2表示小于，3表示大于等于，4表示小于等于。 */
@@ -3046,6 +3146,14 @@ declare interface WeekRepeatStrategy {
   ExecuteAtTimeOfDay: string;
   /** 每周几的数字描述，例如，[1,3,4]表示每周周一、周三、周四。 */
   DaysOfWeek: number[] | null;
+}
+
+/** 加权pod亲和性项 */
+declare interface WeightedPodAffinityTerm {
+  /** 权重 */
+  Weight?: number;
+  /** pod亲和性条件 */
+  PodAffinityTerm?: PodAffinityTerm;
 }
 
 /** Yarn 运行的Application信息 */
@@ -3289,7 +3397,7 @@ declare interface CreateCloudInstanceRequest {
   InstanceName: string;
   /** 容器集群类型，取值范围EMR容器集群实例: EMR-TKE */
   ClusterClass: string;
-  /** 部署的组件列表，不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ； */
+  /** 部署的组件列表，不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：组件版本 ； */
   Software: string[];
   /** 容器平台类型，取值范围EMR容器集群实例: tke */
   PlatFormType: string;
@@ -3323,6 +3431,8 @@ declare interface CreateCloudInstanceRequest {
   NeedCdbAudit?: number;
   /** 安全组来源IP */
   SgIP?: string;
+  /** 额外容器相关配置 */
+  ContainerExtraConf?: ContainerExtraConf;
 }
 
 declare interface CreateCloudInstanceResponse {
@@ -4876,6 +4986,44 @@ declare interface InquiryPriceUpdateInstanceResponse {
   RequestId?: string;
 }
 
+declare interface InstallSoftwareRequest {
+  /** 集群实例号 */
+  InstanceId: string;
+  /** 组件版本号，例如presto-0.161，可根据InstallSoftWareInfo查看当前集群可安装的组件 */
+  SoftInfo: string[];
+  /** 如果需要购买CDB，如果是包年包月集群，是否为这个cdb自动续费，默认AUTO_RENEW,如不自动续费新增的CDB，则填入NOT_AUTO_RENEW */
+  CdbAutoRenew?: string;
+  /** hive共享元数据库类型。取值范围：EMR_NEW_META：表示集群默认创建EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。USER_CUSTOM_META：表示集群使用自定义MetaDB。 */
+  MetaType?: string;
+  /** EMR-MetaDB实例 */
+  UnifyMetaInstanceId?: string;
+  /** 自定义MetaDB信息 */
+  MetaDBInfo?: CustomMetaInfo;
+  /** 共用组件信息 */
+  ExternalService?: ExternalService[];
+  /** 标签信息 */
+  Tags?: Tag[];
+  /** 角色的Pod规格信息 */
+  CloudResources?: CloudResource[];
+  /** 自定义部署信息 */
+  ServiceDeployInfoList?: ServiceDeployInfo[];
+  /** 数据库版本 */
+  DefaultMetaVersion?: string;
+  /** 是否开通审计 */
+  NeedCdbAudit?: number;
+  /** 额外容器相关配置 */
+  ContainerExtraConf?: ContainerExtraConf;
+}
+
+declare interface InstallSoftwareResponse {
+  /** 校验错误信息 */
+  ErrorMessages?: string[] | null;
+  /** 流程id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAutoRenewFlagRequest {
   /** 集群ID */
   InstanceId: string;
@@ -5511,6 +5659,8 @@ declare interface TerminateInstanceRequest {
   ResourceBaseType?: string;
   /** 计算资源ID */
   ComputeResourceId?: string;
+  /** 保留计算资源关联的TKE集群 */
+  RetainTkeCluster?: boolean;
 }
 
 declare interface TerminateInstanceResponse {
@@ -5671,6 +5821,8 @@ declare interface Emr {
   InquiryPriceScaleOutInstance(data: InquiryPriceScaleOutInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceScaleOutInstanceResponse>;
   /** 变配询价 {@link InquiryPriceUpdateInstanceRequest} {@link InquiryPriceUpdateInstanceResponse} */
   InquiryPriceUpdateInstance(data: InquiryPriceUpdateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceUpdateInstanceResponse>;
+  /** 安装组件 {@link InstallSoftwareRequest} {@link InstallSoftwareResponse} */
+  InstallSoftware(data: InstallSoftwareRequest, config?: AxiosRequestConfig): AxiosPromise<InstallSoftwareResponse>;
   /** 开启关闭自动续费接口 {@link ModifyAutoRenewFlagRequest} {@link ModifyAutoRenewFlagResponse} */
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改自动扩缩容规则 {@link ModifyAutoScaleStrategyRequest} {@link ModifyAutoScaleStrategyResponse} */

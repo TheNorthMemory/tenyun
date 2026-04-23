@@ -1591,7 +1591,7 @@ declare interface AddRecordBackupTemplateRequest {
   DevTimeSections: RecordTemplateTimeSections[];
   /** 上云倍速（支持1，2，4倍速） */
   Scale: number;
-  /** 周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像取值范围：[0, 90]默认值：1 */
+  /** 周期偏移量，默认1，表示拉取昨天的设备录像，0表示拉取今天的设备录像，3表示拉取前天的设备录像取值范围：[0, 90]默认值：1 */
   DayOffset?: number;
 }
 
