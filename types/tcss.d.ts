@@ -1512,7 +1512,7 @@ declare interface HostInfo {
   Status?: string;
   /** 是否是Containerd */
   IsContainerd?: boolean;
-  /** 主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器； */
+  /** 主机来源：[&quot;CVM&quot;, &quot;ECM&quot;, &quot;LH&quot;, &quot;BM&quot;] 中的之一为腾讯云服务器；[&quot;Other&quot;]之一非腾讯云服务器； */
   MachineType?: string;
   /** 外网ip */
   PublicIp?: string;
@@ -1532,6 +1532,10 @@ declare interface HostInfo {
   ClusterName?: string;
   /** 集群接入状态 */
   ClusterAccessedStatus?: string;
+  /** 集群接入子状态枚举值：AccessedSubNone： 无AccessedSubUninstallException： 卸载异常AccessedSubTimeout： 接入超时AccessedSubUninstallTimeout： 卸载超时AccessedSubResourceException： 集群组件检查异常-Deployment/DaemonSet等异常AccessedSubCAMPermissionDenied： CAM权限不够 */
+  ClusterAccessedSubStatus?: string;
+  /** 失败具体原因描述 */
+  ClusterAccessedErrorReason?: string;
   /** 计费核数 */
   ChargeCoresCnt?: number;
   /** 防护状态:已防护: Defended未防护: UnDefended */
@@ -3216,6 +3220,16 @@ declare interface ScanIgnoreVul {
   LocalImageCount?: number;
 }
 
+/** 扫描范围信息 */
+declare interface ScanRangeInfo {
+  /** true:选择全部；false:部分选择 */
+  IsAll?: boolean;
+  /** SCAN_NORMAL:普通节点；SCAN_SUPER:超级节点SCAN_CONTAINER:容器 */
+  RangeType?: string;
+  /** 选择的ID */
+  IDs?: string[];
+}
+
 /** 快速搜索模板 */
 declare interface SearchTemplate {
   /** 检索名称 */
@@ -3438,6 +3452,10 @@ declare interface SuperNodeListItem {
   ChargeCoresCnt?: number;
   /** 防护状态:已防护: Defended未防护: UnDefended */
   DefendStatus?: string;
+  /** 集群接入子状态枚举值：AccessedSubNone： 无AccessedSubUninstallException： 卸载异常AccessedSubTimeout： 接入超时AccessedSubUninstallTimeout： 卸载超时AccessedSubResourceException： 集群组件检查异常-Deployment/DaemonSet等异常AccessedSubCAMPermissionDenied： CAM权限不够 */
+  ClusterAccessedSubStatus?: string;
+  /** 失败具体原因描述 */
+  ClusterAccessedErrorReason?: string;
 }
 
 /** 超级节点Pod列表Item信息 */
@@ -3660,6 +3678,28 @@ declare interface VirusTendencyInfo {
   EventCount?: number;
   /** 隔离事件总数 */
   IsolateEventCount?: number;
+}
+
+/** VirusWhiteListRuleInfo */
+declare interface VirusWhiteListRuleInfo {
+  /** 白名单id */
+  Id?: number;
+  /** md5加白内容 */
+  Md5List?: string[];
+  /** 镜像id */
+  ImageIds?: string[];
+  /** 范围 */
+  Scope?: number;
+  /** 镜像数 */
+  ImageCount?: number;
+  /** md5数 */
+  Md5Count?: number;
+  /** 标记 */
+  Remark?: string;
+  /** 插入时间 */
+  InsertTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** 受漏洞影响的组件信息 */
@@ -4450,6 +4490,44 @@ declare interface AddNetworkFirewallPolicyYamlDetailResponse {
   TaskId?: number;
   /** 创建任务的结果，"Succ"为成功，"Failed"为失败 */
   Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddOrModifyMaliciousConnectionWhiteListRequest {
+  /** 枚举IP: IP域名：DOMAIN */
+  RequestType: string;
+  /** 白名单域名 */
+  WhiteDomainList?: string[];
+  /** 白名单IP */
+  WhiteIPList?: string[];
+  /** 备注 */
+  Remark?: string;
+  /** 白名单记录id，只有修改时需要 */
+  ID?: number;
+}
+
+declare interface AddOrModifyMaliciousConnectionWhiteListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddOrModifyVirusWhiteListRuleRequest {
+  /** MD5列表 */
+  Md5List: string[];
+  /** 生效范围：1=全部镜像，0=自选镜像 */
+  Scope: number;
+  /** 规则ID，有值为修改，无值为新增 */
+  Id?: number;
+  /** 镜像ID列表，最大1000个。Scope为0（自选镜像）时必填 */
+  ImageIds?: string[];
+  /** 规则备注，最大256字符 */
+  Remark?: string;
+  /** 事件id */
+  EventId?: number;
+}
+
+declare interface AddOrModifyVirusWhiteListRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5484,6 +5562,16 @@ declare interface DeleteSearchTemplateRequest {
 }
 
 declare interface DeleteSearchTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVirusWhiteListRuleRequest {
+  /** 规则ID列表 */
+  RuleIdSet: number[];
+}
+
+declare interface DeleteVirusWhiteListRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9930,6 +10018,22 @@ declare interface DescribeVirusManualScanEstimateTimeoutResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVirusMonitorConfigRequest {
+}
+
+declare interface DescribeVirusMonitorConfigResponse {
+  /** 是否开启实时监控 */
+  EnableScan?: boolean;
+  /** true:包含路径 false:排除路径 */
+  IsIncludePath?: boolean;
+  /** 自选排除或扫描的地址 */
+  ScanPath?: string[] | null;
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVirusMonitorSettingRequest {
 }
 
@@ -9956,6 +10060,32 @@ declare interface DescribeVirusSampleDownloadUrlRequest {
 declare interface DescribeVirusSampleDownloadUrlResponse {
   /** 样本下载地址 */
   FileUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVirusScanConfigRequest {
+}
+
+declare interface DescribeVirusScanConfigResponse {
+  /** 是否开启定期扫描 */
+  EnableScan?: boolean;
+  /** 检测周期每隔多少天 */
+  Cycle?: number;
+  /** 扫描开始时间 */
+  BeginScanAt?: string;
+  /** 超时时长，单位小时 */
+  Timeout?: number;
+  /** SCAN_NODE:扫描节点SCAN_CONTAINER:扫描容器 */
+  ScanRangeType?: string;
+  /** 自选扫描范围的容器id或者节点id */
+  ScanIDs?: ScanRangeInfo[];
+  /** 自选排除或扫描的地址 */
+  ScanPath?: string[];
+  /** 扫描路径模式：SCAN_PATH_ALL：全部路径SCAN_PATH_DEFAULT：默认路径SCAN_PATH_USER_DEFINE：用户自定义路径 */
+  ScanPathMode?: string;
+  /** true:包含路径false:排除路径 */
+  IsIncludePath?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10078,6 +10208,28 @@ declare interface DescribeVirusTaskListResponse {
   List?: VirusTaskInfo[];
   /** 总数量(容器任务数量) */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVirusWhiteListRulesRequest {
+  /** 分页大小，默认为10 */
+  Limit?: number;
+  /** 分页偏移量，默认为0 */
+  Offset?: number;
+  /** 排序方向，ASC/DESC，默认DESC */
+  Order?: string;
+  /** 排序字段，支持 InsertTime/UpdateTime */
+  By?: string;
+  /** 过滤 */
+  Filters?: RunTimeFilters[];
+}
+
+declare interface DescribeVirusWhiteListRulesResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 白名单规则列表 */
+  List?: VirusWhiteListRuleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11555,6 +11707,10 @@ declare interface Tcss {
   AddNetworkFirewallPolicyDetail(data: AddNetworkFirewallPolicyDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyDetailResponse>;
   /** @deprecated 容器网络创建Yaml网络策略添加任务 {@link AddNetworkFirewallPolicyYamlDetailRequest} {@link AddNetworkFirewallPolicyYamlDetailResponse} */
   AddNetworkFirewallPolicyYamlDetail(data: AddNetworkFirewallPolicyYamlDetailRequest, config?: AxiosRequestConfig): AxiosPromise<AddNetworkFirewallPolicyYamlDetailResponse>;
+  /** 增加或修改恶意外连的白名单 {@link AddOrModifyMaliciousConnectionWhiteListRequest} {@link AddOrModifyMaliciousConnectionWhiteListResponse} */
+  AddOrModifyMaliciousConnectionWhiteList(data: AddOrModifyMaliciousConnectionWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrModifyMaliciousConnectionWhiteListResponse>;
+  /** 新增或修改木马白名单规则 {@link AddOrModifyVirusWhiteListRuleRequest} {@link AddOrModifyVirusWhiteListRuleResponse} */
+  AddOrModifyVirusWhiteListRule(data: AddOrModifyVirusWhiteListRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrModifyVirusWhiteListRuleResponse>;
   /** @deprecated 容器网络创建检查Yaml网络策略任务 {@link CheckNetworkFirewallPolicyYamlRequest} {@link CheckNetworkFirewallPolicyYamlResponse} */
   CheckNetworkFirewallPolicyYaml(data: CheckNetworkFirewallPolicyYamlRequest, config?: AxiosRequestConfig): AxiosPromise<CheckNetworkFirewallPolicyYamlResponse>;
   /** 检查单个镜像仓库名是否重复 {@link CheckRepeatAssetImageRegistryRequest} {@link CheckRepeatAssetImageRegistryResponse} */
@@ -11675,6 +11831,8 @@ declare interface Tcss {
   DeleteRiskSyscallWhiteLists(data: DeleteRiskSyscallWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskSyscallWhiteListsResponse>;
   /** 删除检索模板 {@link DeleteSearchTemplateRequest} {@link DeleteSearchTemplateResponse} */
   DeleteSearchTemplate(data: DeleteSearchTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchTemplateResponse>;
+  /** 删除木马白名单规则 {@link DeleteVirusWhiteListRuleRequest} {@link DeleteVirusWhiteListRuleResponse} */
+  DeleteVirusWhiteListRule(data: DeleteVirusWhiteListRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVirusWhiteListRuleResponse>;
   /** 获取用户当前灰度配置 {@link DescribeABTestConfigRequest} {@link DescribeABTestConfigResponse} */
   DescribeABTestConfig(data?: DescribeABTestConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeABTestConfigResponse>;
   /** 运行时异常进程事件详细信息 {@link DescribeAbnormalProcessDetailRequest} {@link DescribeAbnormalProcessDetailResponse} */
@@ -12049,10 +12207,14 @@ declare interface Tcss {
   DescribeVirusList(data?: DescribeVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusListResponse>;
   /** 查询木马一键检测预估超时时间 {@link DescribeVirusManualScanEstimateTimeoutRequest} {@link DescribeVirusManualScanEstimateTimeoutResponse} */
   DescribeVirusManualScanEstimateTimeout(data: DescribeVirusManualScanEstimateTimeoutRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusManualScanEstimateTimeoutResponse>;
+  /** 运行时查询文件查杀实时监控设置信息 {@link DescribeVirusMonitorConfigRequest} {@link DescribeVirusMonitorConfigResponse} */
+  DescribeVirusMonitorConfig(data?: DescribeVirusMonitorConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusMonitorConfigResponse>;
   /** 运行时查询文件查杀实时监控设置 {@link DescribeVirusMonitorSettingRequest} {@link DescribeVirusMonitorSettingResponse} */
   DescribeVirusMonitorSetting(data?: DescribeVirusMonitorSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusMonitorSettingResponse>;
   /** 查询木马样本下载url {@link DescribeVirusSampleDownloadUrlRequest} {@link DescribeVirusSampleDownloadUrlResponse} */
   DescribeVirusSampleDownloadUrl(data: DescribeVirusSampleDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusSampleDownloadUrlResponse>;
+  /** 运行时查询文件查杀新设置 {@link DescribeVirusScanConfigRequest} {@link DescribeVirusScanConfigResponse} */
+  DescribeVirusScanConfig(data?: DescribeVirusScanConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanConfigResponse>;
   /** 运行时查询文件查杀设置 {@link DescribeVirusScanSettingRequest} {@link DescribeVirusScanSettingResponse} */
   DescribeVirusScanSetting(data?: DescribeVirusScanSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusScanSettingResponse>;
   /** 运行时查询文件查杀任务状态 {@link DescribeVirusScanTaskStatusRequest} {@link DescribeVirusScanTaskStatusResponse} */
@@ -12063,6 +12225,8 @@ declare interface Tcss {
   DescribeVirusSummary(data?: DescribeVirusSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusSummaryResponse>;
   /** 运行时查询文件查杀任务列表 {@link DescribeVirusTaskListRequest} {@link DescribeVirusTaskListResponse} */
   DescribeVirusTaskList(data: DescribeVirusTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusTaskListResponse>;
+  /** 查询木马白名单规则列表 {@link DescribeVirusWhiteListRulesRequest} {@link DescribeVirusWhiteListRulesResponse} */
+  DescribeVirusWhiteListRules(data?: DescribeVirusWhiteListRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirusWhiteListRulesResponse>;
   /** 查询受漏洞的容器列表 {@link DescribeVulContainerListRequest} {@link DescribeVulContainerListResponse} */
   DescribeVulContainerList(data: DescribeVulContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulContainerListResponse>;
   /** 查询漏洞防御事件列表 {@link DescribeVulDefenceEventRequest} {@link DescribeVulDefenceEventResponse} */

@@ -2935,6 +2935,8 @@ declare namespace V20180724 {
     Label?: string | null;
     /** HTTP 额外添加的头 */
     Headers?: RemoteWriteHeader[] | null;
+    /** 数据多写类型:1- 只多写采集指标2- 只多写预聚合指标3- 同时多写采集和预聚合指标 */
+    RemoteWriteType?: number | null;
   }
 
   /** Remote Write 协议额外添加的 HTTP 头 */

@@ -2842,6 +2842,14 @@ declare interface DeleteTrainingTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBillingResourceGroupAttachedWorkspacesRequest {
+}
+
+declare interface DescribeBillingResourceGroupAttachedWorkspacesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBillingResourceGroupRequest {
   /** 资源组id, 取值为创建资源组接口(CreateBillingResourceGroup)响应中的ResourceGroupId */
   ResourceGroupId: string;
@@ -4537,6 +4545,8 @@ declare interface Tione {
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
+  /** 查询资源组绑定的工作空间列表 {@link DescribeBillingResourceGroupAttachedWorkspacesRequest} {@link DescribeBillingResourceGroupAttachedWorkspacesResponse} */
+  DescribeBillingResourceGroupAttachedWorkspaces(data?: DescribeBillingResourceGroupAttachedWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupAttachedWorkspacesResponse>;
   /** 查询资源组列表 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data?: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */

@@ -304,9 +304,11 @@ declare interface JobView {
   JobName?: string;
   /** 作业描述 */
   JobDescription?: string;
+  /** 作业创建者 */
+  Creator?: string;
   /** 作业优先级 */
   Priority?: number;
-  /** 作业状态，包括CREATED, QUEING, STARTNG, RUNING, TERMINATING, TERMINATED, SUCCESS, FAILED */
+  /** 作业状态，包括CREATED, QUEING, STARTNG, RUNING, TERMINATING, TERMINATED, SUCCESS,FAILED */
   JobState?: string;
   /** 作业所属集群ID */
   ClusterId?: string;

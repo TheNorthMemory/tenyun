@@ -5101,6 +5101,8 @@ declare namespace V20180525 {
   }
 
   interface CreateRollOutSequenceResponse {
+    /** 发布序列ID */
+    ID?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

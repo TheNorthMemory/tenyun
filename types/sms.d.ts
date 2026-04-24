@@ -104,6 +104,20 @@ declare interface ModifyTemplateStatus {
   TemplateId: number;
 }
 
+/** 批量发送中每个手机号的发送信息。 */
+declare interface MultiSmsInfo {
+  /** 下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为国际/港澳台手机号。 例如：+60198890000， 其中前面有一个+号 ，60为国家码，198890000为手机号。 */
+  PhoneNumber: string;
+  /** 模板 ID，必须填写已审核通过的模板 ID。模板 ID 可前往 国际/港澳台短信 的正文模板管理查看，仅支持使用国际/港澳台短信模板。 */
+  TemplateId: string;
+  /** 模板参数，若无模板参数，则设置为空。 注意 模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致。 */
+  TemplateParamSet?: string[];
+  /** 国际/港澳台短信 Sender ID。可参考 Sender ID 说明。注：国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。 */
+  SenderId?: string;
+  /** 用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。 */
+  SessionContext?: string;
+}
+
 /** 号码信息。 */
 declare interface PhoneNumberInfo {
   /** 号码信息查询错误码，查询成功返回 "Ok"。 */
@@ -166,6 +180,24 @@ declare interface ReportConversionStatus {
   Code: string;
   /** 错误码描述。 */
   Message: string;
+}
+
+/** 发送短信状态 */
+declare interface SendMultiStatus {
+  /** 发送流水号。 */
+  SerialNo?: string;
+  /** 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+60198890000， 其中前面有一个+号 ，60为国家码，198890000为手机号。 */
+  PhoneNumber?: string;
+  /** 计费条数，计费规则请查询 计费策略。 */
+  Fee?: number;
+  /** 用户 session 内容。 */
+  SessionContext?: string;
+  /** 短信请求错误码，具体含义请参考 错误码，发送成功返回 &quot;Ok&quot;。 */
+  Code?: string;
+  /** 短信请求错误码描述。 */
+  Message?: string;
+  /** 国家码或地区码，例如 US、MY 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 国际/港澳台短信价格总览。 */
+  IsoCode?: string;
 }
 
 /** 发送短信状态 */
@@ -486,6 +518,20 @@ declare interface ReportConversionRequest {
 declare interface ReportConversionResponse {
   /** 转化率上报响应包体。 */
   ReportConversionStatus?: ReportConversionStatus;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SendMultiGlobalSmsRequest {
+  /** 短信 SdkAppId，在 短信控制台 添加应用后生成的实际 SdkAppId。 */
+  SmsSdkAppId: string;
+  /** 批量发送信息列表，单次请求最多支持200个号码且要求全为国际/港澳台号码。每个元素包含一个手机号码及其对应的模板、模板参数等信息。 */
+  MultiSmsInfoSet: MultiSmsInfo[];
+}
+
+declare interface SendMultiGlobalSmsResponse {
+  /** 短信批量发送状态。 */
+  SendMultiStatusSet?: SendMultiStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1093,6 +1139,8 @@ declare interface Sms {
   PullSmsSendStatusByPhoneNumber(data: PullSmsSendStatusByPhoneNumberRequest, config?: AxiosRequestConfig): AxiosPromise<PullSmsSendStatusByPhoneNumberResponse>;
   /** 上报转化率 {@link ReportConversionRequest} {@link ReportConversionResponse} */
   ReportConversion(data: ReportConversionRequest, config?: AxiosRequestConfig): AxiosPromise<ReportConversionResponse>;
+  /** 批量发送国际短信 {@link SendMultiGlobalSmsRequest} {@link SendMultiGlobalSmsResponse} */
+  SendMultiGlobalSms(data: SendMultiGlobalSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendMultiGlobalSmsResponse>;
   /** 发送短信 {@link SendSmsRequest} {@link SendSmsResponse} */
   SendSms(data: SendSmsRequest, config?: AxiosRequestConfig): AxiosPromise<SendSmsResponse>;
   /** 发送短信数据统计 {@link SendStatusStatisticsRequest} {@link SendStatusStatisticsResponse} */

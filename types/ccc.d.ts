@@ -176,6 +176,28 @@ declare interface AutoCalloutTaskInfo {
   MaxRingTimeoutSecond?: number;
 }
 
+/** 工作时间配置 */
+declare interface AvailableTimeConfig {
+  /** 日期类型，默认为每天枚举值：EveryDay： 每天BusinessDay： 法定工作日Holiday： 法定休息日Custom： 自定义 */
+  DayType?: string;
+  /** 仅在 DayType 为 Custom 时生效，指定适用的星期几枚举值：Monday： 星期一Tuesday： 星期二Wednesday： 星期三Thursday： 星期四Friday： 星期五Saturday： 星期六Sunday： 星期日 */
+  DaysOfWeek?: string[];
+  /** 该日期类型下的时间段列表 */
+  TimeRanges?: TimeRange[];
+}
+
+/** basic 鉴权 */
+declare interface BasicAuth {
+  /**  */
+  BasicToken?: string;
+}
+
+/** Bearer 鉴权 */
+declare interface BearerAuth {
+  /**  */
+  BearerToken?: string;
+}
+
 /** 呼入实时指标 */
 declare interface CallInMetrics {
   /** IVR驻留数量 */
@@ -450,6 +472,48 @@ declare interface ForwardingTarget {
   Extension?: string;
 }
 
+/** http header 参数 */
+declare interface HeaderParams {
+  /**  */
+  Key?: string;
+  /**  */
+  Value?: string;
+}
+
+/** http 回调包体参数 */
+declare interface HttpCallbackConfig {
+  /** http 标准 url */
+  Url?: string;
+  /** http header 参数 */
+  HeaderParams?: HeaderParams[];
+  /** http 请求包参数 */
+  Params?: HttpParams[];
+  /** 对端输出值，由对端 url 返回的 json 包里包含该字段就行 */
+  Returns?: ReturnKey[];
+  /** 是否异步 */
+  Async?: boolean;
+  /** 是否鉴权枚举值：0： 不开启鉴权1： 启用鉴权 */
+  AuthType?: number;
+  /** basic token 鉴权 */
+  BasicAuth?: BasicAuth;
+  /** bearer token 鉴权 */
+  BearerAuth?: BearerAuth;
+  /** 自定义鉴权 */
+  CustomAuth?: HttpParams;
+  /** oauth2 鉴权 */
+  Oauth2Auth?: OauthConfig;
+}
+
+/** http 请求包体 */
+declare interface HttpParams {
+  /**  */
+  Key?: string;
+  /**  */
+  Value?: string;
+  /**  */
+  ValueType?: string;
+}
+
 /** 文本会话服务记录信息 */
 declare interface IMCdrInfo {
   /** 服务记录ID */
@@ -544,6 +608,16 @@ declare interface NumberInfo {
   State?: number;
   /** 是否自携号码枚举值：0： 非自携1： 自携 */
   CostType?: number;
+}
+
+/** Oauth2鉴权 */
+declare interface OauthConfig {
+  /**  */
+  TokenURL?: string;
+  /**  */
+  ClientId?: string;
+  /**  */
+  ClientSecret?: string;
 }
 
 /** 用户自带号码审批明细数据类型 */
@@ -656,6 +730,20 @@ declare interface PhoneNumBuyInfo {
   EndTime: number;
   /** 号码状态，1正常|2欠费停用|4管理员停用|5违规停用 */
   State: number;
+}
+
+/** 自动外呼限定重呼标签 */
+declare interface RetryTagItem {
+  /** 标签名称 */
+  TagName?: string;
+  /** 标签值 */
+  TagValue?: string;
+}
+
+/** http return key */
+declare interface ReturnKey {
+  /**  */
+  Key?: string;
 }
 
 /** 应用购买信息 */
@@ -1044,6 +1132,18 @@ declare interface ToneWordInfo {
   ZHToneWords?: ZHToneWordsInfo;
 }
 
+/** 触发策略数组，每个策略里包含接口调用信息，挂断类型，通话标签，触发模式 */
+declare interface TriggerStrategyItem {
+  /** http 接口相关参数 */
+  InterfaceConfig?: HttpCallbackConfig;
+  /** 挂断类型 */
+  HangupTypes?: string[];
+  /** 通话标签 */
+  CallTags?: RetryTagItem[];
+  /** 触发模式枚举值：ONCE_PER_NUMBER： 每个号码仅第一次命中条件时触发ALWAYS_ON_MATCH： 每次命中条件均触发 */
+  TriggerMode?: string;
+}
+
 /** 上传音频文件信息 */
 declare interface UploadAudioInfo {
   /** 文件别名（可重复） */
@@ -1359,6 +1459,14 @@ declare interface CreateAutoCalloutTaskRequest {
   RetryInterval?: number;
   /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
   MaxRingTimeoutSecond?: number;
+  /** 根据限定的挂断原因(可选挂断状态码:202,203,204,205,206,207,208,210,212,213,215,216,217,218,219,221,222,234)进行重试，只对使用AIAgentID的任务有效，挂断状态码说明详见 */
+  RetryHangupTypes?: string[];
+  /** 根据限定的话后标签进行重试，只对使用对话模型的AIAgentID任务有效，标签信息可在智能体配置中查询 */
+  RetryTags?: RetryTagItem[];
+  /** 生效的工作时间配置。建议使用此字段代替AvailableTime 字段，当同时使用时，优先生效AvailableTime。 */
+  AvailableWorkTimeConfig?: AvailableTimeConfig[];
+  /** 触发策略 */
+  TriggerStrategy?: TriggerStrategyItem[];
 }
 
 declare interface CreateAutoCalloutTaskResponse {

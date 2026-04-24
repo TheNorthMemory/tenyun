@@ -1684,10 +1684,12 @@ declare interface AiSampleWordInfo {
 
 /** 用于AIGC创作图片时用到的扩展参数信息。 */
 declare interface AigcImageExtraParam {
-  /** 指定所生成视频的宽高比。不同模型支持的宽高比:1. GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
+  /** 指定所生成视频的宽高比。不同模型支持的宽高比:GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
   AspectRatio?: string;
   /** 指定图片输出分辨率。支持该参数的模型：支持选择: 720P, 1080P, 2K, 4K。 */
   Resolution?: string;
+  /** 是否添加图标水印。默认不加。1-添加，0-不添加。取值范围：[0, 1]默认值：0 */
+  LogoAdd?: number;
 }
 
 /** 用于AIGC创作的图片信息。 */
@@ -5844,8 +5846,12 @@ declare interface SSAIChannelInfo {
   Name?: string;
   /** 广告源信息。 */
   ContentSource?: string;
-  /** 播放地址。 */
+  /** 播放地址。兼容旧版本参数，推荐使用HlsPlaybackPrefix或DashPlaybackPrefix */
   PlaybackPrefix?: string;
+  /** hls播放地址 */
+  HlsPlaybackPrefix?: string;
+  /** dash播放地址 */
+  DashPlaybackPrefix?: string;
   /** 广告插入SSAI配置信息。 */
   SSAIInfo?: SSAIConf;
   /** 地域信息。 */
@@ -5888,6 +5894,14 @@ declare interface SSAIConf {
   PreRollMaxAllowedDuration?: number;
   /** 是否开启多次请求ADS,开启后将优先请求ADS，请求失败后再请求兜底广告 */
   MultiRequest?: boolean;
+  /** dash周期类型：SinglePeriod 或 MultiPeriod，默认 MultiPeriod */
+  DashOriginManifestType?: string;
+  /** Empty VAST时是否播放Slate，默认开启(true) */
+  SlateOnEmptyVast?: boolean;
+  /** SCTE marker duration，默认180，范围0-3600 */
+  SCTEMarkerDuration?: number;
+  /** 安全组Id */
+  SecurityGroupId?: string;
 }
 
 /** SSAI用量信息 */
@@ -8109,9 +8123,9 @@ declare interface CreateAigcImageTaskResponse {
 }
 
 declare interface CreateAigcVideoTaskRequest {
-  /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Vidu，OS，GV。 */
+  /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Vidu，OS，GV，PixVerse。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hailuo， 可选[02、2.3]。Kling，可选[2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。Vidu,可选[q2、q2-pro、q2-turbo、q3-pro、q3-turbo]。GV, 可选[3.1]。OS，可选[2.0]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hailuo， 可选[02、2.3、2.3-fast]。Kling，可选[1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。Vidu,可选[q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。GV, 可选[3.1、3.1-fast]。OS，可选[2.0]。PixVerse，可选[v5.6、v6、c1] */
   ModelVersion?: string;
   /** 指定场景生视频。注意：仅部分模型支持指定场景。Kling支持动作控制，motion_control。Mingmou支持横转竖，land2port。Vidu支持特效模板，template_effect。 */
   SceneType?: string;
@@ -10430,6 +10444,28 @@ declare interface DescribeTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTextToSpeechAsyncTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeTextToSpeechAsyncTaskResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 任务状态枚举值：success： 成功fail： 失败processing： 处理中 */
+  Status?: string;
+  /** 合成音频url */
+  AudioUrl?: string;
+  /** 使用的音色ID */
+  VoiceId?: string;
+  /** 扩展信息 */
+  ExtInfo?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTranscodeTemplatesRequest {
   /** 转码模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
@@ -11748,6 +11784,28 @@ declare interface SyncDubbingResponse {
   RequestId?: string;
 }
 
+declare interface TextToSpeechAsyncRequest {
+  /** 语音合成文本 */
+  Text: string;
+  /** 音色ID */
+  VoiceId: string;
+  /** 文本语言，默认中文 */
+  TextLang?: string;
+  /** 扩展参数，json字符串synExt Object 语音合成扩展参数 duration Float 合成音频时长，单位秒，示例：5.2 sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100] pitch Integer 音调，默认0原音色输出，取值[-12, 12]transExt Object 翻译扩展参数 transInfo Object transDst String 目标语言，如en transRequirement String 翻译要求 */
+  ExtParam?: string;
+}
+
+declare interface TextToSpeechAsyncResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 任务ID，使用该ID查询结果 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextTranslationRequest {
   /** 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。 */
   SourceText: string;
@@ -12083,6 +12141,8 @@ declare interface Mps {
   DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 获取任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
+  /** 查询语音合成任务结果 {@link DescribeTextToSpeechAsyncTaskRequest} {@link DescribeTextToSpeechAsyncTaskResponse} */
+  DescribeTextToSpeechAsyncTask(data: DescribeTextToSpeechAsyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToSpeechAsyncTaskResponse>;
   /** 获取转码模板列表 {@link DescribeTranscodeTemplatesRequest} {@link DescribeTranscodeTemplatesResponse} */
   DescribeTranscodeTemplates(data?: DescribeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTranscodeTemplatesResponse>;
   /** 查询用量信息 {@link DescribeUsageDataRequest} {@link DescribeUsageDataResponse} */
@@ -12209,6 +12269,8 @@ declare interface Mps {
   StopStreamPackageLinearAssemblyChannel(data: StopStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamPackageLinearAssemblyChannelResponse>;
   /** 同步配音 {@link SyncDubbingRequest} {@link SyncDubbingResponse} */
   SyncDubbing(data?: SyncDubbingRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDubbingResponse>;
+  /** 异步语音合成 {@link TextToSpeechAsyncRequest} {@link TextToSpeechAsyncResponse} */
+  TextToSpeechAsync(data: TextToSpeechAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechAsyncResponse>;
   /** 文本翻译 {@link TextTranslationRequest} {@link TextTranslationResponse} */
   TextTranslation(data: TextTranslationRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslationResponse>;
   /** 剧集项目更新 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */

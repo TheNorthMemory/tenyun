@@ -334,7 +334,7 @@ declare interface AgentReference {
   Id?: string | null;
   /** 名称 */
   Name?: string | null;
-  /** 类型 */
+  /** 类型枚举值：1： 问答2： 文档片段4： 联网检索到的内容 */
   Type?: number | null;
   /** 链接 */
   Url?: string | null;
@@ -572,14 +572,14 @@ declare interface AppModel {
 
 /** 模型详情 */
 declare interface AppModelDetailInfo {
+  /** 模型别名 */
+  AliasName?: string;
+  /** 限制 */
+  HistoryLimit?: number;
   /** 模型名称 */
   ModelName?: string;
   /** 模型参数 */
   ModelParams?: ModelParams;
-  /** 限制 */
-  HistoryLimit?: number;
-  /** 模型别名 */
-  AliasName?: string;
 }
 
 /** 异步工作流的消息 */
@@ -980,6 +980,22 @@ declare interface DuplicateFileHandle {
   HandleType?: number;
 }
 
+/** ES存储配置 */
+declare interface ESConfig {
+  /** 存储类型，0: 未知类型， 1:默认存储(平台提供)，2: 自定义存储(用户自建ES) */
+  StorageType?: number;
+  /** ES集群名称(自定义存储时必填) */
+  InstanceName?: string;
+  /** ES集群ID(自定义存储时必填) */
+  InstanceId?: string;
+  /** ES用户名(自定义存储时必填) */
+  Username?: string;
+  /** ES密码(自定义存储时必填) */
+  Password?: string;
+  /** 允许修改存储方式 */
+  CanModify?: boolean;
+}
+
 /** 扩展信息 */
 declare interface ExtraInfo {
   /** ECharts信息 */
@@ -1026,6 +1042,14 @@ declare interface FileInfoContent {
   DocId?: string | null;
   /** 文件创建时间 */
   CreateTime?: string | null;
+}
+
+/** 筛选条件。 */
+declare interface FilterItem {
+  /** 筛选内容。例如筛选审核状态可以使用"AuditStatus" */
+  FilterKey?: string;
+  /** 筛选条件。例如对于筛选内容"AuditStatus"，可使用筛选条件:"ContentFailed":"内容审核失败","PictureFailed":"图片审核失败","ContentAndPictureFailed":"图片和内容审核失败", */
+  FilterValue?: string[];
 }
 
 /** 不满意回复检索过滤 */
@@ -1578,7 +1602,7 @@ declare interface ModelInfo {
   RoleLenLimit?: number;
   /** 是否专属并发模型 */
   IsExclusive?: boolean;
-  /** 模型支持智能通话效果 */
+  /** 模型支持智能通话效果枚举值：0： 模型不支持1： 模型支持ai通话2： 模型ai通话支持效果不佳 */
   SupportAiCallStatus?: number;
   /** 专属并发数 */
   Concurrency?: number;
@@ -1602,7 +1626,7 @@ declare interface ModelInfo {
 declare interface ModelParameter {
   /** 超参名称 */
   Name?: string | null;
-  /** 类型 */
+  /** 类型枚举值：string： 字符类型int： 整数类型float： 浮点数类型array： 数组类型 */
   Type?: string;
   /** 默认值 */
   DefaultValue?: string;
@@ -1618,28 +1642,28 @@ declare interface ModelParameter {
 
 /** 模型参数 */
 declare interface ModelParams {
+  /** 深度思考值disabledenabled */
+  DeepThinking?: string | null;
+  /** 频率惩罚 */
+  FrequencyPenalty?: number;
+  /** 最大输出长度 */
+  MaxTokens?: number;
+  /** 存在惩罚 */
+  PresencePenalty?: number;
+  /** 效果 disabled low medium high */
+  ReasoningEffort?: string | null;
+  /** 重复惩罚 */
+  RepetitionPenalty?: number;
+  /** 输出格式 */
+  ReplyFormat?: string;
+  /** 随机种子 */
+  Seed?: number;
+  /** 停止序列 */
+  StopSequences?: string[];
   /** 温度 */
   Temperature?: number;
   /** Top_P */
   TopP?: number;
-  /** 随机种子 */
-  Seed?: number;
-  /** 存在惩罚 */
-  PresencePenalty?: number;
-  /** 频率惩罚 */
-  FrequencyPenalty?: number;
-  /** 重复惩罚 */
-  RepetitionPenalty?: number;
-  /** 最大输出长度 */
-  MaxTokens?: number;
-  /** 停止序列 */
-  StopSequences?: string[];
-  /** 输出格式 */
-  ReplyFormat?: string;
-  /** 深度思考值disabledenabled */
-  DeepThinking?: string | null;
-  /** 效果 disabled low medium high */
-  ReasoningEffort?: string | null;
 }
 
 /** 文档信息 */
@@ -1716,6 +1740,8 @@ declare interface MsgRecord {
   WidgetAction?: WidgetAction | null;
   /** 音频信息 */
   Audios?: Audio[] | null;
+  /** 标识选项卡为单选还是双选枚举值：0： 单选1： 双选 */
+  OptionMode?: number;
 }
 
 /** 聊天详情Refer */
@@ -1724,7 +1750,7 @@ declare interface MsgRecordReference {
   Id?: string;
   /** 链接 */
   Url?: string;
-  /** 类型 */
+  /** 类型枚举值：1： 问答2： 文档片段4： 联网检索到的内容 */
   Type?: number;
   /** 名称 */
   Name?: string;
@@ -1870,24 +1896,24 @@ declare interface ParameterConfig {
 
 /** 插件参数请求结构 */
 declare interface PluginToolReqParam {
-  /** 参数名称 */
-  Name?: string;
-  /** 参数描述 */
-  Desc?: string;
-  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object, 99:null, 100:upspecified */
-  Type?: number;
-  /** 参数是否必填 */
-  IsRequired?: boolean;
-  /** 参数默认值 */
-  DefaultValue?: string;
-  /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
-  SubParams?: PluginToolReqParam[];
-  /** 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见 */
-  GlobalHidden?: boolean;
-  /** OneOf类型参数 */
-  OneOf?: PluginToolReqParam[];
   /** AnyOf类型参数 */
   AnyOf?: PluginToolReqParam[];
+  /** 参数默认值 */
+  DefaultValue?: string;
+  /** 参数描述 */
+  Desc?: string;
+  /** 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见 */
+  GlobalHidden?: boolean;
+  /** 参数是否必填 */
+  IsRequired?: boolean;
+  /** 参数名称 */
+  Name?: string;
+  /** OneOf类型参数 */
+  OneOf?: PluginToolReqParam[];
+  /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
+  SubParams?: PluginToolReqParam[];
+  /** 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object, 99:null, 100:upspecified */
+  Type?: number;
 }
 
 /** 执行过程信息记录 */
@@ -2104,6 +2130,8 @@ declare interface RejectedQuestion {
   IsAllowDelete?: boolean | null;
   /** 操作人 */
   Operator?: string | null;
+  /** 拒答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
+  EnableScope?: number | null;
 }
 
 /** 发布配置项 */
@@ -2284,9 +2312,9 @@ declare interface Stat {
 declare interface StatisticInfo {
   /** 模型名称 */
   ModelName?: string | null;
-  /** 首Token耗时 */
+  /** 首Token耗时单位：ms */
   FirstTokenCost?: number | null;
-  /** 总耗时 */
+  /** 总耗时单位：ms */
   TotalCost?: number | null;
   /** 输入Token数量 */
   InputTokens?: number | null;
@@ -2568,6 +2596,8 @@ declare interface WorkFlowSummary {
   OptionCardIndex?: OptionCardIndex;
   /** 工作流多气泡输出 */
   Contents?: Content[] | null;
+  /** 标识选项卡为单选还是双选枚举值：0： 单选1： 多选 */
+  OptionMode?: number;
 }
 
 /** 工作流信息 */
@@ -2586,6 +2616,8 @@ declare interface WorkflowInfo {
   WorkflowReleaseTime?: string | null;
   /** 工作流多气泡输出 */
   Contents?: Content[] | null;
+  /** 标识选项卡为单选还是双选枚举值：0： 单选1： 多选 */
+  OptionMode?: number;
 }
 
 /** WorkflowRef详情 */
@@ -2672,11 +2704,11 @@ declare interface WorkflowRunDetail {
 declare interface WorkflowRunNodeInfo {
   /** 节点ID */
   NodeId?: string | null;
-  /** 节点类型 */
+  /** 节点类型枚举值：0： 未指定1： 开始节点2： 参数提取节点3： 大模型节点4： 知识问答节点5： 知识检索节点6： 标签提取节点7： 代码执行节点8： 工具节点9： 逻辑判断节点10： 消息节点11： 选项卡节点12： 循环节点13： 意图识别节点14： 工作流节点15： 插件节点16： 结束节点17： 变量聚合节点18： 批处理节点19： 消息队列节点20： 数据库节点21： 变量赋值节点22： 变量转换节点23： Agent节点24： 注释节点25： 文件收集节点26： 文本收集节点27： Widget 节点 */
   NodeType?: number | null;
   /** 节点名称 */
   NodeName?: string | null;
-  /** 状态 */
+  /** 状态枚举值：0： 初始状态1： 运行中2： 运行成功3： 运行失败 */
   Status?: number | null;
   /** 输入 */
   Input?: string | null;
@@ -2891,7 +2923,7 @@ declare interface CreateQAResponse {
 }
 
 declare interface CreateRejectedQuestionRequest {
-  /** 应用ID, 获取方式参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469) */
+  /** 应用ID, 获取方式参看如何获取BotBizId */
   BotBizId: string;
   /** 拒答问题 */
   Question: string;
@@ -2899,6 +2931,8 @@ declare interface CreateRejectedQuestionRequest {
   BusinessSource: number;
   /** 拒答问题来源的数据源唯一id */
   BusinessId?: string;
+  /** 拒答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 默认值：2。 */
+  EnableScope?: number;
 }
 
 declare interface CreateRejectedQuestionResponse {
@@ -2931,6 +2965,8 @@ declare interface CreateSharedKnowledgeRequest {
   EmbeddingModel?: string;
   /** 共享知识库类型，0普通，1公众号 */
   KnowledgeType?: number;
+  /** ES存储配置 */
+  EsConfig?: ESConfig;
 }
 
 declare interface CreateSharedKnowledgeResponse {
@@ -4469,14 +4505,16 @@ declare interface ListRejectedQuestionPreviewResponse {
 }
 
 declare interface ListRejectedQuestionRequest {
-  /** 应用ID, 获取方法参看如何获取 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)。 */
+  /** 应用ID, 获取方法参看如何获取 BotBizId。 */
   BotBizId: string;
-  /** 页码（必须大于0） */
+  /** 页码（必须大于0）默认值：1 */
   PageNumber: number;
-  /** 每页数量（取值范围1-200） */
+  /** 每页数量（取值范围1-200）默认值：15 */
   PageSize: number;
   /** 查询内容 */
   Query?: string;
+  /** 过滤条件：生效： EnableScope: 1,2,3,4 */
+  Filters?: FilterItem[];
 }
 
 declare interface ListRejectedQuestionResponse {
@@ -4713,6 +4751,8 @@ declare interface ListWorkflowRunsRequest {
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
+  /** 查询内容 */
+  Query?: string;
 }
 
 declare interface ListWorkflowRunsResponse {

@@ -2302,6 +2302,28 @@ declare interface SearchLogTopics {
   Infos?: SearchLogInfos[];
 }
 
+/** 检索视图信息 */
+declare interface SearchViewInfo {
+  /** 视图ID */
+  ViewId?: string;
+  /** 视图名称 */
+  ViewName?: string;
+  /** 视图类型枚举值：log： 日志主题metric： 指标主题 */
+  ViewType?: string;
+  /** 日志集id视图所属日志集 */
+  LogsetId?: string;
+  /** 日志集所属地域参数格式：ap-guangzhou */
+  LogsetRegion?: string;
+  /** 视图日志主题信息 */
+  Topics?: ViewSearchTopic[];
+  /** 视图描述 */
+  Description?: string;
+  /** 创建时间单位：秒级别时间戳 */
+  CreateTime?: number;
+  /** 更新时间单位：秒级别时间戳 */
+  UpdateTime?: number;
+}
+
 /** 投递规则 */
 declare interface ShipperInfo {
   /** 投递规则ID */
@@ -2554,6 +2576,16 @@ declare interface ValueInfo {
   OpenIndexForChildOnly?: boolean;
   /** json子节点列表注意：仅json类型字段可配置该参数 */
   ChildNode?: KeyValueInfo[];
+}
+
+/** 视图检索日志主题配置 */
+declare interface ViewSearchTopic {
+  /** 日志集与日志主题所属地域参数格式：ap-guangzhou */
+  Region: string;
+  /** 日志集id */
+  LogsetId: string;
+  /** 日志主题id */
+  TopicId: string;
 }
 
 /** 回调地址 */
@@ -3524,6 +3556,30 @@ declare interface CreateScheduledSqlResponse {
   RequestId?: string;
 }
 
+declare interface CreateSearchViewRequest {
+  /** 日志集id标记视图所属该日志集，用于查询日志集下的查询视图配置 */
+  LogsetId: string;
+  /** 日志集所属地域参数格式：ap-guangzhou */
+  LogsetRegion: string;
+  /** 视图名称入参限制：最大支持255字符，不能包含&quot;|&quot;字符。 */
+  ViewName: string;
+  /** 视图类型枚举值：log： 日志主题metric： 指标主题Topics字段中配置的主题信息应该与ViewType类型匹配 */
+  ViewType: string;
+  /** 视图主题配置信息Topics字段中配置的主题信息应该与ViewType类型匹配 */
+  Topics: ViewSearchTopic[];
+  /** 配置描述信息 */
+  Description?: string;
+  /** 自定义视图id前缀参数格式：^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$配置成功之后ViewId格式: ${ViewIdPrefix}-view */
+  ViewIdPrefix?: string;
+}
+
+declare interface CreateSearchViewResponse {
+  /** 视图ID */
+  ViewId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateShipperRequest {
   /** 创建的投递规则所属的日志主题Id。通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
@@ -3988,6 +4044,16 @@ declare interface DeleteScheduledSqlRequest {
 }
 
 declare interface DeleteScheduledSqlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSearchViewRequest {
+  /** 视图ID */
+  ViewId: string;
+}
+
+declare interface DeleteSearchViewResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4920,6 +4986,24 @@ declare interface DescribeScheduledSqlInfoResponse {
   ScheduledSqlTaskInfos?: ScheduledSqlTaskInfo[];
   /** 任务总次数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSearchViewsRequest {
+  /** viewId 按照【视图ID】进行过滤。 类型：String 必选：否 viewName 按照【视图名称】进行过滤。 类型：String 必选：否 logsetId 按照【日志集ID】进行过滤。 类型：String 必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeSearchViewsResponse {
+  /** Splunk投递任务信息列表 */
+  Infos?: SearchViewInfo[];
+  /** 符合条件的任务总数。 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5870,6 +5954,24 @@ declare interface ModifyScheduledSqlResponse {
   RequestId?: string;
 }
 
+declare interface ModifySearchViewRequest {
+  /** 视图ID */
+  ViewId: string;
+  /** 视图名称参数格式：^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$ */
+  ViewName?: string;
+  /** 视图类型枚举值：log： 日志主题metric： 指标主题 */
+  ViewType?: string;
+  /** 视图主题配置信息 */
+  Topics?: ViewSearchTopic[];
+  /** 配置描述信息 */
+  Description?: string;
+}
+
+declare interface ModifySearchViewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyShipperRequest {
   /** 投递规则Id。通过 获取投递任务列表获取ShipperId。 */
   ShipperId: string;
@@ -6389,6 +6491,8 @@ declare interface Cls {
   CreateRebuildIndexTask(data: CreateRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildIndexTaskResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
+  /** 新建查询视图 {@link CreateSearchViewRequest} {@link CreateSearchViewResponse} */
+  CreateSearchView(data: CreateSearchViewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSearchViewResponse>;
   /** 新建投递到COS的任务 {@link CreateShipperRequest} {@link CreateShipperResponse} */
   CreateShipper(data: CreateShipperRequest, config?: AxiosRequestConfig): AxiosPromise<CreateShipperResponse>;
   /** 创建Splunk投递任务 {@link CreateSplunkDeliverRequest} {@link CreateSplunkDeliverResponse} */
@@ -6455,6 +6559,8 @@ declare interface Cls {
   DeleteNoticeContent(data: DeleteNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
+  /** 删除查询视图 {@link DeleteSearchViewRequest} {@link DeleteSearchViewResponse} */
+  DeleteSearchView(data: DeleteSearchViewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSearchViewResponse>;
   /** 删除投递COS任务 {@link DeleteShipperRequest} {@link DeleteShipperResponse} */
   DeleteShipper(data: DeleteShipperRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteShipperResponse>;
   /** 删除Splunk投递任务 {@link DeleteSplunkDeliverRequest} {@link DeleteSplunkDeliverResponse} */
@@ -6559,6 +6665,8 @@ declare interface Cls {
   DescribeRebuildIndexTasks(data: DescribeRebuildIndexTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebuildIndexTasksResponse>;
   /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
   DescribeScheduledSqlInfo(data?: DescribeScheduledSqlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledSqlInfoResponse>;
+  /** 获取查询视图列表 {@link DescribeSearchViewsRequest} {@link DescribeSearchViewsResponse} */
+  DescribeSearchViews(data?: DescribeSearchViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchViewsResponse>;
   /** 获取投递任务列表 {@link DescribeShipperTasksRequest} {@link DescribeShipperTasksResponse} */
   DescribeShipperTasks(data: DescribeShipperTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeShipperTasksResponse>;
   /** 获取投递到COS的任务配置信息 {@link DescribeShippersRequest} {@link DescribeShippersResponse} */
@@ -6639,6 +6747,8 @@ declare interface Cls {
   ModifyNoticeContent(data: ModifyNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
+  /** 修改查询视图 {@link ModifySearchViewRequest} {@link ModifySearchViewResponse} */
+  ModifySearchView(data: ModifySearchViewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySearchViewResponse>;
   /** 修改投递COS任务 {@link ModifyShipperRequest} {@link ModifyShipperResponse} */
   ModifyShipper(data: ModifyShipperRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShipperResponse>;
   /** 修改splunk任务投递信息 {@link ModifySplunkDeliverRequest} {@link ModifySplunkDeliverResponse} */
