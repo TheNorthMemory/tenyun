@@ -4959,6 +4959,8 @@ declare interface ModifyRejectedQuestionRequest {
   Question: string;
   /** 拒答问题来源的数据源唯一id, 通过调用ListRejectedQuestion接口获取 */
   RejectedBizId: string;
+  /** 拒答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
+  EnableScope?: number;
 }
 
 declare interface ModifyRejectedQuestionResponse {

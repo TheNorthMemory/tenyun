@@ -240,6 +240,8 @@ declare interface SandboxInstance {
   NetworkMode?: string;
   /** 沙箱实例元数据 */
   Metadata?: MetadataVar[];
+  /** 沙箱访问认证模式枚举值：DEFAULT： 默认，即 TOKEN 认证TOKEN： Token认证，即所有端口访问都需携带TOKENNONE： 免认证，即所有端口访问无需携带TOKENPUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN默认值：DEFAULT */
+  AuthMode?: string;
 }
 
 /** 沙箱工具结构体 */
@@ -326,6 +328,8 @@ declare interface AcquireSandboxInstanceTokenResponse {
   Token?: string;
   /** 过期时间 */
   ExpiresAt?: string;
+  /** 非管控面（envd）的访问Token */
+  TrafficToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -529,7 +533,7 @@ declare interface StartSandboxInstanceRequest {
   MountOptions?: MountOption[];
   /** 沙箱实例自定义配置 */
   CustomConfiguration?: CustomConfiguration;
-  /** 沙箱访问认证模式枚举值：DEFAULT： 跟随系统策略TOKEN： Token认证NONE： 免认证 默认值：DEFAULT */
+  /** 沙箱访问认证模式枚举值：DEFAULT： 默认，即 TOKEN 认证TOKEN： Token认证，即所有端口访问都需携带TOKENNONE： 免认证，即所有端口访问无需携带TOKENPUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN默认值：DEFAULT */
   AuthMode?: string;
   /** 沙箱元数据 */
   Metadata?: MetadataVar[];

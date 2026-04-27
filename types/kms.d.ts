@@ -166,6 +166,14 @@ declare interface MemberAccount {
   MemberUin?: number;
 }
 
+/** 地域的QPS扩展包 */
+declare interface RegionQps {
+  /** 地域 */
+  Region?: string;
+  /** qps的大小 */
+  Qps?: number;
+}
+
 /** 标签键和标签值 */
 declare interface Tag {
   /** 标签键 */
@@ -920,6 +928,12 @@ declare interface GetServiceStatusResponse {
   SyncTaskList?: DestinationSyncConfig[];
   /** 是否支持同步任务。true:支持，false:不支持。 */
   IsAllowedSync?: boolean;
+  /** 地域下的QPS */
+  QpsLimit?: number;
+  /** 总的QPS值 */
+  QpsTotalLimit?: number;
+  /** 地域下的QPS */
+  RegionsQps?: RegionQps[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

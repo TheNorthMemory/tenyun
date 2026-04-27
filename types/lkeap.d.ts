@@ -60,6 +60,10 @@ declare interface CreateReconstructDocumentFlowConfig {
   ResultType?: string;
   /** 是否忽略失败页，返回已成功的页数据。默认为true。 */
   IgnoreFailedPage?: boolean;
+  /** Markdown文件中是否包含页码信息 */
+  ReturnPageFormat?: boolean;
+  /** 自定义输出页码样式,{{p}}为页码占位符，开启ReturnPageFormat生效。未填默认样式:page {{p}} */
+  PageFormat?: string;
 }
 
 /** 创建智能文档拆分任务的配置信息 */
@@ -78,6 +82,10 @@ declare interface CreateSplitDocumentFlowConfig {
   SplitResultType?: string;
   /** Markdown文件中表格返回的形式0，表格以MD形式返回1，表格以HTML形式返回默认为 */
   SplitTableResultType?: string;
+  /** Markdown文件中是否包含页码信息 */
+  ReturnPageFormat?: boolean;
+  /** 自定义输出页码样式,{{p}}为页码占位符，开启ReturnPageFormat生效。未填默认样式:page {{p}} */
+  PageFormat?: string;
 }
 
 /** 返回的内容 */

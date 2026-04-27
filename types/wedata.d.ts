@@ -646,6 +646,8 @@ declare interface CreateTriggerTaskSchedulerConfiguration {
   DependencyTriggerPolicy?: string;
   /** 是否允许下游依赖 1允许 0不允许取值范围：[0, 1]默认值：1 */
   AllowDownstreamDependency?: number;
+  /** 调度类型: 0 正常调度 1 空跑调度枚举值：0： 正常调度1： 空跑调度默认值：0 */
+  ScheduleType?: number;
 }
 
 /** 创建工作流结果 */
@@ -1124,6 +1126,8 @@ declare interface InTaskParameter {
   FromTaskId: string | null;
   /** 父任务参数key */
   FromParamKey: string | null;
+  /** 任务输入类型，默认使用TASK枚举值：TASK： 来源为父任务CONSTANT： 常量值，目前仅for-each节点支持 */
+  Type?: string | null;
 }
 
 /** 调度实例详情 */
@@ -4164,6 +4168,8 @@ declare interface TriggerTaskSchedulerConfiguration {
   DependencyTriggerPolicy?: string | null;
   /** 是否允许下游依赖 1允许 0不允许取值范围：[0, 1] */
   AllowDownstreamDependency?: number | null;
+  /** 调度类型: 0 正常调度 1 空跑调度枚举值：0： 正常调度1： 空跑调度默认值：0 */
+  ScheduleType?: number | null;
 }
 
 /** 任务版本列表信息 */

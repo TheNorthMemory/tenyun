@@ -2302,7 +2302,7 @@ declare interface SearchLogTopics {
   Infos?: SearchLogInfos[];
 }
 
-/** 检索视图信息 */
+/** 查询视图信息 */
 declare interface SearchViewInfo {
   /** 视图ID */
   ViewId?: string;
@@ -2578,9 +2578,9 @@ declare interface ValueInfo {
   ChildNode?: KeyValueInfo[];
 }
 
-/** 视图检索日志主题配置 */
+/** 查询视图主题配置 */
 declare interface ViewSearchTopic {
-  /** 日志集与日志主题所属地域参数格式：ap-guangzhou */
+  /** 日志集与主题所属地域参数格式：ap-guangzhou同一查询视图内，包含的各个主题需为相同地域 */
   Region: string;
   /** 日志集id */
   LogsetId: string;
@@ -3557,20 +3557,20 @@ declare interface CreateScheduledSqlResponse {
 }
 
 declare interface CreateSearchViewRequest {
-  /** 日志集id标记视图所属该日志集，用于查询日志集下的查询视图配置 */
+  /** 日志集id查询视图所属的日志集，仅用于管理查询视图，查询视图中包含的主题可与该日志集无关 */
   LogsetId: string;
   /** 日志集所属地域参数格式：ap-guangzhou */
   LogsetRegion: string;
   /** 视图名称入参限制：最大支持255字符，不能包含&quot;|&quot;字符。 */
   ViewName: string;
-  /** 视图类型枚举值：log： 日志主题metric： 指标主题Topics字段中配置的主题信息应该与ViewType类型匹配 */
+  /** 视图类型枚举值：log： 日志主题metric： 指标主题Topics字段中配置的主题类型应该与ViewType类型匹配 */
   ViewType: string;
-  /** 视图主题配置信息Topics字段中配置的主题信息应该与ViewType类型匹配 */
+  /** 查询视图中包含的主题，最大可包含10个主题Topics字段中配置的主题信息应该与ViewType类型匹配 */
   Topics: ViewSearchTopic[];
-  /** 配置描述信息 */
-  Description?: string;
-  /** 自定义视图id前缀参数格式：^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$配置成功之后ViewId格式: ${ViewIdPrefix}-view */
+  /** 自定义查询视图id前缀参数格式：^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$创建成功的查询视图 ViewId 格式为 ${ViewIdPrefix}-view */
   ViewIdPrefix?: string;
+  /** 描述信息 */
+  Description?: string;
 }
 
 declare interface CreateSearchViewResponse {
@@ -5000,7 +5000,7 @@ declare interface DescribeSearchViewsRequest {
 }
 
 declare interface DescribeSearchViewsResponse {
-  /** Splunk投递任务信息列表 */
+  /** 查询视图详细信息 */
   Infos?: SearchViewInfo[];
   /** 符合条件的任务总数。 */
   Total?: number;
@@ -5959,11 +5959,11 @@ declare interface ModifySearchViewRequest {
   ViewId: string;
   /** 视图名称参数格式：^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$ */
   ViewName?: string;
-  /** 视图类型枚举值：log： 日志主题metric： 指标主题 */
+  /** 视图类型枚举值：log： 日志主题metric： 指标主题Topics字段中配置的主题信息应该与ViewType类型匹配 */
   ViewType?: string;
-  /** 视图主题配置信息 */
+  /** 查询视图中包含的主题，最大可包含10个主题 */
   Topics?: ViewSearchTopic[];
-  /** 配置描述信息 */
+  /** 描述信息 */
   Description?: string;
 }
 

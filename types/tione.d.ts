@@ -1188,6 +1188,18 @@ declare interface NumOrPercent {
   Value?: number;
 }
 
+/** 操作者信息 */
+declare interface OperatorInfo {
+  /** 操作者子账号 UIN */
+  SubUin?: string;
+  /** 操作者子账号名称 */
+  SubUinName?: string;
+  /** 是否为平台操作 */
+  IsPlatformOperator?: boolean;
+  /** 操作类型 */
+  OperationType?: string;
+}
+
 /** 键值对 */
 declare interface Option {
   /** 指标名 */
@@ -2160,6 +2172,8 @@ declare interface TrainingTaskDetail {
   CodeRepos?: CodeRepoConfig[];
   /** 暴露网络配置 */
   ExposeNetworkConfig?: ExposeNetworkConfig;
+  /** 操作者信息 */
+  OperatorInfo?: OperatorInfo;
 }
 
 /** 出参类型 */
@@ -2220,6 +2234,8 @@ declare interface TrainingTaskSetItem {
   AppId?: string;
   /** 环境变量 */
   Envs?: EnvVar[];
+  /** 操作者信息 */
+  LatestOperatorInfo?: OperatorInfo;
 }
 
 /** 大模型生成Token统计 */
@@ -2519,7 +2535,7 @@ declare interface CreateMountLimitResponse {
 }
 
 declare interface CreateNotebookRequest {
-  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
   Name: string;
   /** 计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
   ChargeType: string;
@@ -2539,7 +2555,7 @@ declare interface CreateNotebookRequest {
   VpcId?: string;
   /** 子网Id */
   SubnetId?: string;
-  /** 存储的类型。取值包含： FREE：预付费的免费存储CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CFS：CFS存储CFS_TURBO：CFS Turbo存储GooseFSx：GooseFSx存储 */
+  /** 存储的类型。取值包含：FREE：预付费的免费存储CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CFS：CFS存储CFS_TURBO：CFS Turbo存储GooseFSx：GooseFSx存储 */
   VolumeSourceType?: string;
   /** 云硬盘存储卷大小，单位GB */
   VolumeSizeInGB?: number;
@@ -3595,7 +3611,7 @@ declare interface ModifyModelServiceResponse {
 declare interface ModifyNotebookRequest {
   /** notebook id */
   Id: string;
-  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
   Name: string;
   /** （不允许修改）计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
   ChargeType: string;

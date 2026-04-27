@@ -12159,7 +12159,7 @@ declare interface Mps {
   DescribeWordSamples(data?: DescribeWordSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWordSamplesResponse>;
   /** 获取工作流列表 {@link DescribeWorkflowsRequest} {@link DescribeWorkflowsResponse} */
   DescribeWorkflows(data?: DescribeWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowsResponse>;
-  /** 音色设计-异步 {@link DesignVoiceAsyncRequest} {@link DesignVoiceAsyncResponse} */
+  /** 异步音色设计 {@link DesignVoiceAsyncRequest} {@link DesignVoiceAsyncResponse} */
   DesignVoiceAsync(data: DesignVoiceAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DesignVoiceAsyncResponse>;
   /** 禁用编排 {@link DisableScheduleRequest} {@link DisableScheduleResponse} */
   DisableSchedule(data: DisableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableScheduleResponse>;
