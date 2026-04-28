@@ -3194,6 +3194,26 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface CheckAddressByPrometheusRequest {
+    /** 实例id */
+    InstanceId: string;
+    /** 探测地址 */
+    Target: string;
+    /** 探测方式。tcp或http，默认是tcp */
+    ProbeProtocol?: string;
+  }
+
+  interface CheckAddressByPrometheusResponse {
+    /** 实际探测的地址 */
+    Target?: string;
+    /** 探测是否成功 */
+    Success?: boolean;
+    /** 探测失败时返回错误信息 */
+    Message?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CleanGrafanaInstanceRequest {
     /** Grafana 实例 ID，例如：grafana-abcdefgh */
     InstanceId: string;
@@ -6390,6 +6410,8 @@ declare interface Monitor {
   BindingPolicyObject(data: V20180724.BindingPolicyObjectRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindingPolicyObjectResponse>;
   /** 策略绑定标签 {@link V20180724.BindingPolicyTagRequest} {@link V20180724.BindingPolicyTagResponse} */
   BindingPolicyTag(data: V20180724.BindingPolicyTagRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindingPolicyTagResponse>;
+  /** 检查用户地址联通性 {@link V20180724.CheckAddressByPrometheusRequest} {@link V20180724.CheckAddressByPrometheusResponse} */
+  CheckAddressByPrometheus(data: V20180724.CheckAddressByPrometheusRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CheckAddressByPrometheusResponse>;
   /** 强制销毁 Grafana 实例 {@link V20180724.CleanGrafanaInstanceRequest} {@link V20180724.CleanGrafanaInstanceResponse} */
   CleanGrafanaInstance(data: V20180724.CleanGrafanaInstanceRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CleanGrafanaInstanceResponse>;
   /** 创建通知模板 {@link V20180724.CreateAlarmNoticeRequest} {@link V20180724.CreateAlarmNoticeResponse} */

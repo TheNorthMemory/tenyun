@@ -9965,6 +9965,8 @@ declare namespace V20210820 {
     TotalPageNumber?: number | null;
     /** 记录 */
     Rows?: DatabaseRealViewVO[] | null;
+    /** 分页快照id */
+    SnapshotId?: string | null;
   }
 
   /** 数据库Schema信息 */

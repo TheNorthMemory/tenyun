@@ -1285,7 +1285,9 @@ declare interface DescribeDevicesResponse {
 }
 
 declare interface DescribeLocalAccountsRequest {
-  /** 查询条件：过滤或排序1、UserName，string类型，姓名是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否2、UserId，string类型，账户是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否3、Phone，string类型，手机号是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否 */
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 查询条件：过滤或排序1、UserName，string类型，姓名是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否2、UserId，string类型，账户是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否3、Phone，string类型，手机号是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否4、Email，string类型，邮箱是否必填：否过滤支持：是，支持eq、like、ilike排序支持：否 */
   Condition?: Condition;
   /** 获取账号的分组ID，不传默认获取全网根账号组 */
   AccountGroupId?: number;

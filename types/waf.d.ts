@@ -2012,6 +2012,14 @@ declare interface HybridPkg {
   RenewFlag?: number;
 }
 
+/** llm要检测的图片的检测结果 */
+declare interface ImageResult {
+  /** 命中类别标识 */
+  Category?: string;
+  /** 类别的名称 */
+  CategoryName?: string;
+}
+
 /** 修改/新增自定义规则的入参，查询自定义规则列表时的出参 */
 declare interface InOutputBotUCBRule {
   /** 域名 */
@@ -2350,6 +2358,8 @@ declare interface LLMDetectResult {
   Action?: string;
   /** 攻击payload */
   Payload?: string;
+  /** 图片检测结果 */
+  ImageResult?: ImageResult[];
 }
 
 /** 有效预付费大模型安全包信息 */
@@ -3146,6 +3156,16 @@ declare interface RuleType {
   ActiveRuleCount?: number;
   /** 类型下的规则总数量 */
   TotalRuleCount?: number;
+}
+
+/** 对话消息结构体 */
+declare interface SSEClientMessage {
+  /** 对话角色，填user */
+  Role: string;
+  /** prompt内容 */
+  Content: string;
+  /** 检测类型，0是文本内容代答，目前只支持0，可以不传，默认值是0枚举值：0： 文件内容代答 */
+  ContentType?: number;
 }
 
 /** 扫描ip信息 */
@@ -5771,18 +5791,20 @@ declare interface DescribeIpHitItemsResponse {
 declare interface DescribeLLMContentSecCheckRequest {
   /** 服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
   ServiceId: string;
-  /** 要审核的内容 */
-  Content: string;
   /** 流量类型，是入向流量还是出向流量，入向：1，出向：2；入向和出向必填 */
   Type: number;
   /** 实例id，必传 */
   InstanceId: string;
+  /** 要审核的内容 */
+  Content?: string;
   /** 对话的id */
   ChatId?: string;
   /** 标识用户的id，限速使用，不填，则限速会不生效 */
   UserId?: string;
   /** token使用量，不填，会采用默认的token计算方法，计算的是模型的消耗，因为该值时在出向方向上添加，即Type=2 */
   TokenUsage?: number;
+  /** 图片base64编码后的数据,body大小最大支持10M */
+  ImageEncode?: string;
 }
 
 declare interface DescribeLLMContentSecCheckResponse {
@@ -6537,6 +6559,18 @@ declare interface GenerateDealsAndPayNewResponse {
   /** 购买的实例ID */
   InstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateLLMSecAnswerRequest {
+  /** 消息结构体内容 */
+  Message: SSEClientMessage;
+  /** 消息id，传入 要回答的MsgID ，用于匹配自定义回答模板，最终可得到优化的代答结果 */
+  MsgID: string;
+}
+
+declare interface GenerateLLMSecAnswerResponse {
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
   RequestId?: string;
 }
 
@@ -8547,6 +8581,8 @@ declare interface Waf {
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */
   GenerateDealsAndPayNew(data: GenerateDealsAndPayNewRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateDealsAndPayNewResponse>;
+  /** 大模型安全代答生成接口。当用户输入命中内容安全风险检测规则时，调用本接口由大模型实时生成安全合规的替代回答。 {@link GenerateLLMSecAnswerRequest} {@link GenerateLLMSecAnswerResponse} */
+  GenerateLLMSecAnswer(data: GenerateLLMSecAnswerRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateLLMSecAnswerResponse>;
   /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;
   /** 攻击日志统计 {@link GetAttackHistogramRequest} {@link GetAttackHistogramResponse} */

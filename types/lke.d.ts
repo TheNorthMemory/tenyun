@@ -2018,6 +2018,10 @@ declare interface QAQuery {
   QueryType?: string;
   /** 问答生效域检索，不检索不传。枚举值如下：1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。 */
   EnableScope?: number;
+  /** 创建时间范围 */
+  CreateTime?: TimeRange;
+  /** 更新时间范围 */
+  UpdateTime?: TimeRange;
 }
 
 /** 问答对参考信息 */
@@ -2406,6 +2410,14 @@ declare interface TaskFlowSummary {
 declare interface TaskParams {
   /** 下载地址,需要通过cos桶临时密钥去下载 */
   CosPath?: string | null;
+}
+
+/** 时间范围 */
+declare interface TimeRange {
+  /** 开始时间参数格式：YYYY-MM-DDThh:mm:ssZ */
+  Start?: string;
+  /** 结束时间参数格式：YYYY-MM-DDThh:mm:ssZ */
+  End?: string;
 }
 
 /** 当前执行的 token 统计信息 */
@@ -2977,19 +2989,19 @@ declare interface CreateSharedKnowledgeResponse {
 }
 
 declare interface CreateVarRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看如何获取 BotBizId。 */
   AppBizId: string;
-  /** 变量名称，不允许重复，最大支持50个字符 */
+  /** 变量名称，不允许重复，最大支持50个字符，英文字母开头，支持英文数字与下划线”_”。 */
   VarName: string;
   /** 变量描述，最大支持120个字符 */
   VarDesc?: string;
-  /** 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用 */
+  /** 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持&quot;STRING&quot;类型使用 */
   VarType?: string;
-  /** 自定义变量默认值 */
+  /** 自定义变量默认值，VarDefaultValuexa0默认为空 */
   VarDefaultValue?: string;
-  /** 自定义变量文件默认名称 */
+  /** 自定义变量文件默认名称，VarDefaultFileName默认为空 */
   VarDefaultFileName?: string;
-  /** 参数类型 */
+  /** 变量模块类型枚举值：0： API参数1： 环境参数2： 应用参数3： 系统参数 */
   VarModuleType?: number;
 }
 
@@ -3145,11 +3157,11 @@ declare interface DeleteSharedKnowledgeResponse {
 }
 
 declare interface DeleteVarRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看如何获取 BotBizId。 */
   AppBizId: string;
-  /** 变量ID */
+  /** 变量 ID，可通过 CreateVar；DescribeVar；DescribeVarList 接口返回结果中获取。DeleteVar */
   VarId: string;
-  /** 参数类型 */
+  /** 变量模块类型枚举值：0： API参数1： 环境参数2： 应用参数3： 系统参数默认值：0 */
   VarModuleType?: number;
 }
 
@@ -3625,9 +3637,9 @@ declare interface DescribeSearchStatsGraphRequest {
   LoginUin?: string;
   /** 登录用户子账号(集成商模式必填) */
   LoginSubAccountUin?: string;
-  /** uin列表 */
+  /** 子账号标识列表，支持批量查询多个子账号。不填时查询主账号下所有子账号的汇总数据 */
   UinAccount?: string[];
-  /** 子业务类型 */
+  /** 子业务类型，用于筛选不同业务场景的调用统计 */
   SubBizType?: string;
   /** 模型标识 */
   ModelName?: string;
@@ -3637,11 +3649,11 @@ declare interface DescribeSearchStatsGraphRequest {
   EndTime?: string;
   /** 应用id列表 */
   AppBizIds?: string[];
-  /** 空间id */
+  /** 空间ID，用于限定查询范围。不填时查询所有空间的数据 */
   SpaceId?: string;
-  /** 开始时间戳, 单位为秒 */
+  /** 开始时间。Unix 时间戳，单位是秒，默认为空。 */
   StatStartTime?: number;
-  /** 结束时间戳, 单位为秒 */
+  /** 结束时间。Unix 时间戳，单位是秒，默认为空。 */
   StatEndTime?: number;
 }
 
@@ -3692,9 +3704,9 @@ declare interface DescribeStorageCredentialRequest {
 declare interface DescribeStorageCredentialResponse {
   /** 密钥信息 */
   Credentials?: Credentials;
-  /** 失效时间 */
+  /** 失效时间，为 Unix 时间戳单位：秒 */
   ExpiredTime?: number;
-  /** 开始时间 */
+  /** 开始时间，为 Unix 时间戳单位：秒 */
   StartTime?: number;
   /** 对象存储桶 */
   Bucket?: string;
@@ -4103,21 +4115,21 @@ declare interface GetTaskStatusResponse {
 }
 
 declare interface GetVarListRequest {
-  /** 应用ID */
+  /** 应用ID，获取方法参看如何获取 BotBizId。 */
   AppBizId: string;
   /** 变量ID数组 */
   VarIds?: string[];
   /** 按变量名称关键词搜索 */
   Keyword?: string;
-  /** 起始偏移量（默认0） */
+  /** 起始偏移量（默认0），取值范围 &gt; 0 */
   Offset?: number;
-  /** 限定数量（默认15） */
+  /** 限定数量（默认15），取值范围 1-200 */
   Limit?: number;
   /** 按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO) */
   VarType?: string;
-  /** 是否需要内部变量(默认false) */
+  /** 是否需要内部变量, 在结果中包含平台预置的“内置自定义变量” (默认false)。当&nbsp;NeedInternalVar = true&nbsp;且&nbsp;VarModuleType&nbsp;为&nbsp;AllVar&nbsp;或&nbsp;ApiVar&nbsp;时，返回列表会在用户变量之前拼入内置变量，并同样支持&nbsp;Keyword&nbsp;VarType&nbsp;VarIds&nbsp;过滤。其他VarModuleType下，该开关不生效。 */
   NeedInternalVar?: boolean;
-  /** 变量类型 */
+  /** 变量模块类型枚举值：0： API参数1： 环境参数2： 应用参数3： 系统参数默认值：0 */
   VarModuleType?: number;
 }
 
@@ -4335,7 +4347,7 @@ declare interface ListDocCateResponse {
 }
 
 declare interface ListDocRequest {
-  /** 应用ID, 获取方式参看 [BotBizId](https://cloud.tencent.com/document/product/1759/109469)。查询知识库下文档时，该参数填入知识库ID。 */
+  /** 应用ID, 获取方式参看 BotBizId。查询知识库下文档时，该参数填入知识库ID。 */
   BotBizId: string;
   /** 页码(必须大于0) */
   PageNumber: number;
@@ -4357,6 +4369,8 @@ declare interface ListDocRequest {
   ShowCurrCate?: number;
   /** 文档生效域；不检索默认为0。检索枚举值如下：1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 */
   EnableScope?: number;
+  /** 文档更新时间范围 */
+  UpdateTime?: TimeRange;
 }
 
 declare interface ListDocResponse {
@@ -4413,7 +4427,7 @@ declare interface ListQACateResponse {
 declare interface ListQARequest {
   /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
-  /** 页码（取值范围>0） */
+  /** 页码（取值范围&gt;0） */
   PageNumber: number;
   /** 每页大小(取值范围1-200) */
   PageSize: number;
@@ -4433,12 +4447,16 @@ declare interface ListQARequest {
   CateBizId?: string;
   /** QA业务ID列表 */
   QaBizIds?: string[];
-  /** 查询类型 filename 名称、 attribute 标签如果不填默认值为"filename" */
+  /** 查询类型 filename 名称、 attribute 标签如果不填默认值为&quot;filename&quot; */
   QueryType?: string;
   /** 是否只展示当前分类的数据 0不是，1是 */
   ShowCurrCate?: number;
   /** 问答生效域检索，不检索不传。枚举值如下：1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。 */
   EnableScope?: number;
+  /** 问答创建时间范围 */
+  CreateTime?: TimeRange;
+  /** 问答更新时间范围 */
+  UpdateTime?: TimeRange;
 }
 
 declare interface ListQAResponse {
@@ -5309,7 +5327,7 @@ declare interface Lke {
   DescribeReleaseInfo(data: DescribeReleaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseInfoResponse>;
   /** 通过appKey获取应用业务ID {@link DescribeRobotBizIDByAppKeyRequest} {@link DescribeRobotBizIDByAppKeyResponse} */
   DescribeRobotBizIDByAppKey(data: DescribeRobotBizIDByAppKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRobotBizIDByAppKeyResponse>;
-  /** 查询搜索服务调用折线图 {@link DescribeSearchStatsGraphRequest} {@link DescribeSearchStatsGraphResponse} */
+  /** 查询搜索服务调用量统计 {@link DescribeSearchStatsGraphRequest} {@link DescribeSearchStatsGraphResponse} */
   DescribeSearchStatsGraph(data?: DescribeSearchStatsGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchStatsGraphResponse>;
   /** 获取片段详情 {@link DescribeSegmentsRequest} {@link DescribeSegmentsResponse} */
   DescribeSegments(data: DescribeSegmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSegmentsResponse>;

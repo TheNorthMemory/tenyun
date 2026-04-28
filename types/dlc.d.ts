@@ -46,6 +46,8 @@ declare interface AnalysisTaskResults {
   OutputFilesNum?: number;
   /** 任务输出小文件总数 */
   OutputSmallFilesNum?: number;
+  /** shuffle write 总 Bytes 大小单位：Bytes默认值：无 */
+  ShuffleWriteBytesSum?: number;
 }
 
 /** 元数据基本对象 */
@@ -2384,6 +2386,10 @@ declare interface TaskFullRespInfo {
   GpuDriverSize?: number;
   /** Gpu Executor 规格 */
   GpuExecutorSize?: number;
+  /** ShuffleWrite数据量 */
+  ShuffleWriteBytesSum?: number;
+  /** 活跃core */
+  ActiveCore?: number;
 }
 
 /** 任务监控信息 */

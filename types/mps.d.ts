@@ -1762,8 +1762,10 @@ declare interface AnimatedGraphicTaskInput {
   EndTimeOffset: number;
   /** 转动图后文件的目标存储，不填则继承上层的 OutputStorage 值。 */
   OutputStorage?: TaskOutputStorage | null;
-  /** 转动图后文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：`{inputName}_animatedGraphic_{definition}.{format}`。 */
+  /** 转动图后文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以.{format}结尾。变量名请参考 文件名变量说明。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_animatedGraphic_{definition}.{format}。 */
   OutputObjectPath?: string;
+  /** 扩展参数。 */
+  ExtInfo?: string;
 }
 
 /** 转动图模板详情。 */
@@ -3712,12 +3714,14 @@ declare interface ImageSpriteTaskInput {
   Definition: number;
   /** 截取雪碧图后文件的目标存储，不填则继承上层的 OutputStorage 值。 */
   OutputStorage?: TaskOutputStorage | null;
-  /** 截取雪碧图后，雪碧图图片文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：`{inputName}_imageSprite_{definition}_{number}.{format}`。 */
+  /** 截取雪碧图后，雪碧图图片文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以.{format}结尾。变量名请参考 文件名变量说明。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_imageSprite_{definition}_{number}.{format}。 */
   OutputObjectPath?: string;
-  /** 截取雪碧图后，Web VTT 文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_imageSprite_{definition}.{format}`。 */
+  /** 截取雪碧图后，Web VTT 文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：{inputName}_imageSprite_{definition}.{format}。 */
   WebVttObjectName?: string;
-  /** 截取雪碧图后输出路径中的`{number}`变量的规则。 */
+  /** 截取雪碧图后输出路径中的{number}变量的规则。 */
   ObjectNumberFormat?: NumberFormat | null;
+  /** 扩展参数。 */
+  ExtInfo?: string;
 }
 
 /** 雪碧图模板详情 */
@@ -5678,6 +5682,10 @@ declare interface RawSmartSubtitleParameter {
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig | null;
   /** 压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写 */
   SubtitleEmbedId?: number;
+  /** 说话人识别模式，可选值：0：表示不开启说话人识别；1：表示开启说话人识别；默认值：0 */
+  SpeakerMode?: number;
+  /** 说话人识别输出到字幕文件，可选值：0：表示不输出到字幕文件；1：表示输出到vtt字幕文件注意：使用此参数SpeakerMode的值不能为0；默认值：0 */
+  SpeakerLabel?: number;
 }
 
 /** 自定义转码的规格参数。 */
@@ -5936,10 +5944,12 @@ declare interface SampleSnapshotTaskInput {
   WatermarkSet?: WatermarkInput[];
   /** 采样截图后文件的目标存储，不填则继承上层的 OutputStorage 值。 */
   OutputStorage?: TaskOutputStorage | null;
-  /** 采样截图后图片文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：`{inputName}_sampleSnapshot_{definition}_{number}.{format}`。 */
+  /** 采样截图后图片文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以.{format}结尾。变量名请参考 文件名变量说明。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_sampleSnapshot_{definition}_{number}.{format}。 */
   OutputObjectPath?: string;
-  /** 采样截图后输出路径中的`{number}`变量的规则。 */
+  /** 采样截图后输出路径中的{number}变量的规则。 */
   ObjectNumberFormat?: NumberFormat | null;
+  /** 扩展参数。 */
+  ExtInfo?: string;
 }
 
 /** 采样截图模板详情 */
@@ -6454,6 +6464,8 @@ declare interface SmartSubtitleTaskResultInput {
   Definition?: number;
   /** 智能字幕自定义参数，当 Definition 填 0 时有效。该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。 */
   RawParameter?: RawSmartSubtitleParameter | null;
+  /** 扩展参数。 */
+  UserExtPara?: string;
 }
 
 /** 智能字幕识别结果。 */
@@ -6524,32 +6536,38 @@ declare interface SmartSubtitleTemplateItem {
   Name?: string | null;
   /** 智能字幕模板描述信息 */
   Comment?: string | null;
-  /** 模板类型，取值范围：* Preset：系统预置模板；* Custom：用户自定义模板。 */
+  /** 模板类型，取值范围：Preset：系统预置模板；Custom：用户自定义模板。 */
   Type?: string | null;
   /** ASR热词库参数 */
   AsrHotWordsConfigure?: AsrHotWordsConfigure | null;
   /** 模板关联热词库名称 */
   AsrHotWordsLibraryName?: string | null;
-  /** 智能字幕视频源语言列表：`zh`：简体中文`yue`：中文粵语`zh-PY`：中英粤`zh_medical`：中文医疗`zh_dialect`：中文方言`prime_zh`：中英方言`zh_en`：中英`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语`it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语`ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语`auto`：自动识别（仅在纯字幕翻译中支持） */
+  /** 智能字幕视频源语言列表：zh：简体中文yue：中文粵语zh-PY：中英粤zh_medical：中文医疗zh_dialect：中文方言prime_zh：中英方言zh_en：中英en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语fil：菲律宾语auto：自动识别（仅在纯字幕翻译中支持） */
   VideoSrcLanguage?: string;
-  /** 智能字幕文件格式- vtt: WebVTT 格式- srt: SRT格式- original：与源字幕文件一致（用于纯字幕翻译模板）- 不填或填空：不生成字幕文件 */
+  /** 智能字幕文件格式vtt: WebVTT 格式srt: SRT格式original：与源字幕文件一致（用于纯字幕翻译模板）不填或填空：不生成字幕文件 */
   SubtitleFormat?: string | null;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType?: number;
   /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译 */
   TranslateSwitch?: string | null;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效`zh`：简体中文`zh-TW`：繁体中文`en`：英语`ja`：日语`ko`：韩语`fr`：法语`es`：西班牙语 `it`：意大利语`de`：德语`tr`：土耳其语`ru`：俄语`pt`：葡萄牙语（巴西）`pt-PT`：葡萄牙语（葡萄牙）`vi`：越南语`id`：印度尼西亚语 `ms`：马来语`th`：泰语`ar`：阿拉伯语`hi`：印地语`fil`：菲律宾语**注意**：多语言方式，则使用 `/` 分割，如：`en/ja`，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效zh：简体中文zh-TW：繁体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语fil：菲律宾语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
   TranslateDstLanguage?: string | null;
-  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 模板创建时间，使用 ISO 日期格式。 */
   CreateTime?: string;
-  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 模板最后修改时间，使用 ISO 日期格式。 */
   UpdateTime?: string;
   /** 智能字幕预设模板别名 */
   AliasName?: string | null;
-  /** 字幕处理类型：- 0：ASR识别字幕- 1：纯字幕翻译- 2: OCR识别字幕 */
+  /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2: OCR识别字幕 */
   ProcessType?: number;
   /** 字幕OCR提取框选区域配置信息 */
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig | null;
+  /** 字幕压制模板id */
+  SubtitleEmbedId?: number;
+  /** 说话人识别模式，可选值：0：表示不开启说话人识别；1：表示开启说话人识别；默认值：0 */
+  SpeakerMode?: number;
+  /** 说话人识别输出到字幕文件，可选值：0：表示不输出到字幕文件；1：表示输出到vtt字幕文件注意：使用此参数SpeakerMode的值不能为0；默认值：0 */
+  SpeakerLabel?: number;
 }
 
 /** 智能字幕结果。 */
@@ -6592,10 +6610,12 @@ declare interface SnapshotByTimeOffsetTaskInput {
   WatermarkSet?: WatermarkInput[];
   /** 时间点截图后文件的目标存储，不填则继承上层的 OutputStorage 值。 */
   OutputStorage?: TaskOutputStorage | null;
-  /** 时间点截图后图片文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：`{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`。 */
+  /** 时间点截图后图片文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以.{format}结尾。变量名请参考 文件名变量说明。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}。 */
   OutputObjectPath?: string;
-  /** 时间点截图后输出路径中的`{number}`变量的规则。 */
+  /** 时间点截图后输出路径中的{number}变量的规则。 */
   ObjectNumberFormat?: NumberFormat | null;
+  /** 扩展参数。 */
+  ExtInfo?: string;
 }
 
 /** 时间点截图模板详情 */
@@ -8505,6 +8525,10 @@ declare interface CreateSmartSubtitleTemplateRequest {
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
   /** 压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写。开启多个翻译语言时，不允许填写。 */
   SubtitleEmbedId?: number;
+  /** 说话人识别开关，可选值：0：表示不开启说话人识别；1：表示开启说话人识别；默认不开启说话人识别。 */
+  SpeakerMode?: number;
+  /** 说话人识别输出到字幕文件，可选值：0：表示不输出到字幕文件；1：表示输出到vtt字幕文件注意：使用此参数SpeakerMode的值不能为0；默认不输出到字幕文件。 */
+  SpeakerLabel?: number;
 }
 
 declare interface CreateSmartSubtitleTemplateResponse {
@@ -11153,6 +11177,10 @@ declare interface ModifySmartSubtitleTemplateRequest {
   SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
   /** 压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写。开启多个翻译语言时，不允许填写。 */
   SubtitleEmbedId?: number;
+  /** 说话人识别开关，可选值：0：表示不开启说话人识别；1：表示开启说话人识别。 */
+  SpeakerMode?: number;
+  /** 说话人识别输出到字幕文件，可选值：0：表示不输出到字幕文件；1：表示输出到vtt字幕文件注意：使用此参数SpeakerMode的值不能为0。 */
+  SpeakerLabel?: number;
 }
 
 declare interface ModifySmartSubtitleTemplateResponse {

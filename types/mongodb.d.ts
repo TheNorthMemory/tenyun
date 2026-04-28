@@ -969,60 +969,62 @@ declare interface CreateBackupDownloadTaskResponse {
 }
 
 declare interface CreateDBInstanceHourRequest {
-  /** 实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 DescribeSpecInfo 获取。 */
   Memory: number;
-  /** 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 DescribeSpecInfo 获取。 */
   Volume: number;
-  /** - 创建副本集实例，指副本集数量，该参数只能为1。- 创建分片集群实例，指分片的数量。请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。 */
+  /** 创建副本集实例，指副本集数量，该参数只能为1。创建分片集群实例，指分片的数量。请通过接口DescribeSpecInfo查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。 */
   ReplicateSetNum: number;
-  /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 DescribeSpecInfo 获取。创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 DescribeSpecInfo 获取。 */
   NodeNum: number;
-  /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
+  /** 指版本信息。具体支持的版本信息 ，请通过接口 DescribeSpecInfo 获取。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
-  /** 产品规格类型。- HIO10G：通用高HIO万兆型。- HCD：云盘版类型。 */
+  /** 产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
   MachineCode: string;
   /** 实例数量，最小值1，最大值为30。 */
   GoodsNum: number;
-  /** 可用区信息，输入格式如：ap-guangzhou-2。- 具体信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。 */
+  /** 可用区信息，输入格式如：ap-guangzhou-2。具体信息，请通过接口 DescribeSpecInfo 获取。该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。 */
   Zone: string;
-  /** 实例架构类型。- REPLSET：副本集。- SHARD：分片集群。 */
+  /** 实例架构类型。REPLSET：副本集。SHARD：分片集群。 */
   ClusterType: string;
-  /** 私有网络ID。- 仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的私有网络 ID。- 实例创建成功之后，支持更换私有网络。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。 */
+  /** 私有网络ID。仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录私有网络控制台获取可使用的私有网络 ID。实例创建成功之后，支持更换私有网络。具体操作，请参见更换网络。 */
   VpcId?: string;
-  /** 私有网络 VPC 的子网 ID。- 必须在已选的私有网络内指定一个子网。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的子网 ID。- 实例创建成功之后，支持更换私有网络及子网。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。 */
+  /** 私有网络 VPC 的子网 ID。必须在已选的私有网络内指定一个子网。请登录私有网络控制台获取可使用的子网 ID。实例创建成功之后，支持更换私有网络及子网。具体操作，请参见更换网络。 */
   SubnetId?: string;
-  /** 实例密码。设置要求如下：- 字符个数为[8,32]。- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“_”。- 不能设置单一的字母或者数字。 */
+  /** 实例密码。设置要求如下：字符个数为[8,32]。可输入[A,Z]、[a,z]、[0,9]范围内的字符。可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“*”、括号“()”、下划线“_”。不能设置单一的字母或者数字。 */
   Password?: string;
-  /** 项目ID。- 若不设置该参数，则为默认项目。- 在 [MongoDB 控制台项目管理](https://console.cloud.tencent.com/project)页面，可获取项目ID。 */
+  /** 项目ID。若不设置该参数，则为默认项目。在 MongoDB 控制台项目管理页面，可获取项目ID。 */
   ProjectId?: number;
   /** 实例标签信息。 */
   Tags?: TagInfo[];
-  /** 实例类型。- 1：正式实例。- 3：只读实例。- 4：灾备实例。- 5：克隆实例。注意：克隆实例 RestoreTime 为必填项。 */
+  /** 实例类型。1：正式实例。3：只读实例。4：灾备实例。5：克隆实例。注意：克隆实例 RestoreTime 为必填项。 */
   Clone?: number;
-  /** 父实例 ID。- 当参数**Clone**为3或者4时，即实例为只读或灾备实例时，该参数必须配置。- 请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制父实例 ID。 */
+  /** 父实例 ID。当参数Clone为3或者4时，即实例为只读或灾备实例时，该参数必须配置。请登录 MongoDB 控制台在实例列表复制父实例 ID。 */
   Father?: string;
-  /** 安全组 ID。 请登录[安全组控制台](https://console.cloud.tencent.com/vpc/security-group)页面获取与数据库实例同地域的安全组 ID。 */
+  /** 安全组 ID。 请登录安全组控制台页面获取与数据库实例同地域的安全组 ID。 */
   SecurityGroup?: string[];
-  /** 克隆实例回档时间。- 若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。- 回档时间范围：仅能回档7天内时间点的数据。 */
+  /** 克隆实例回档时间。若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。回档时间范围：仅能回档7天内时间点的数据。 */
   RestoreTime?: string;
-  /** 实例名称。仅支持长度为128个字符的中文、英文、数字、下划线\_、分隔符\-。批量购买数据库实例时，支持通过自定义命名模式串与数字后缀自动升序功能，高效设置实例名称。- 基础模式：前缀＋自动升序编号（默认从1开始），**lnstanceName**仅需自定义实例名称前缀，例如设置为：cmgo，设置购买数量为5，则购买后，实例名称依次分别为cmgo1、cmgo2、cmgo3、cmgo4、cmgo5。- 自定义起始序号模式：前缀+｛R:x｝（x为自定义起始序号）。**InstanceName**需填写“前缀｛R:x｝”，例如：cmgo｛R:3｝，设置购买数量为5，则实例名称为cmgo3、cmgo4、cmgo5、cmgo6、cmgo7。- 复合模式串：前缀1{R:x}+前缀2{R:y}+ ⋯+固定后缀，x与y分别为每一段前缀的起始序号。**instanceName**需填写复合模式串，例如：cmgo{R:10}\_node{R:12}\_db，设置批量购买数量为5，则实例名称为 cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, cluster14\_node16\_db. */
+  /** 实例名称。仅支持长度为128个字符的中文、英文、数字、下划线_、分隔符-。批量购买数据库实例时，支持通过自定义命名模式串与数字后缀自动升序功能，高效设置实例名称。基础模式：前缀＋自动升序编号（默认从1开始），lnstanceName仅需自定义实例名称前缀，例如设置为：cmgo，设置购买数量为5，则购买后，实例名称依次分别为cmgo1、cmgo2、cmgo3、cmgo4、cmgo5。自定义起始序号模式：前缀+｛R:x｝（x为自定义起始序号）。InstanceName需填写“前缀｛R:x｝”，例如：cmgo｛R:3｝，设置购买数量为5，则实例名称为cmgo3、cmgo4、cmgo5、cmgo6、cmgo7。复合模式串：前缀1{R:x}+前缀2{R:y}+ ⋯+固定后缀，x与y分别为每一段前缀的起始序号。instanceName需填写复合模式串，例如：cmgo{R:10}_node{R:12}_db，设置批量购买数量为5，则实例名称为 cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, cluster14_node16_db. */
   InstanceName?: string;
-  /** 若多可用区部署云数据库实例，指定多可用区列表。- 多可用区部署实例，参数 **Zone** 指定实例主可用区信息；**AvailabilityZoneList** 指定所有可用区信息，包含主可用区。输入格式如：[ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4]。- 通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 可获取云数据库不同地域规划的可用区信息，以便指定有效的可用区。- 多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。 */
+  /** 若多可用区部署云数据库实例，指定多可用区列表。多可用区部署实例，参数 Zone 指定实例主可用区信息；AvailabilityZoneList 指定所有可用区信息，包含主可用区。输入格式如：[ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4]。通过接口 DescribeSpecInfo 可获取云数据库不同地域规划的可用区信息，以便指定有效的可用区。多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。 */
   AvailabilityZoneList?: string[];
   /** Mongos CPU 核数，支持1、2、4、8、16。购买分片集群时，必须填写。 */
   MongosCpu?: number;
-  /** Mongos 内存大小。- 购买分片集群时，必须填写。- 单位：GB，支持1核2GB、2核4GB、4核8GB、8核16GB、16核32GB。 */
+  /** Mongos 内存大小。购买分片集群时，必须填写。单位：GB，支持1核2GB、2核4GB、4核8GB、8核16GB、16核32GB。 */
   MongosMemory?: number;
-  /** Mongos 数量。购买分片集群时，必须填写。- 单可用区部署实例，其数量范围为[3,32]。- 多可用区部署实例，其数量范围为[6,32]。 */
+  /** Mongos 数量。购买分片集群时，必须填写。单可用区部署实例，其数量范围为[3,32]。多可用区部署实例，其数量范围为[6,32]。 */
   MongosNodeNum?: number;
   /** 只读节点数量，取值范围[0,5]。 */
   ReadonlyNodeNum?: number;
-  /** 指只读节点所属可用区数组。跨可用区部署实例，参数**ReadonlyNodeNum**不为**0**时，必须配置该参数。 */
+  /** 指只读节点所属可用区数组。跨可用区部署实例，参数ReadonlyNodeNum不为0时，必须配置该参数。 */
   ReadonlyNodeAvailabilityZoneList?: string[];
   /** Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。 */
   HiddenZone?: string;
-  /** 参数模板 ID。- 参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。- 参数模板 ID 可通过 [DescribeDBInstanceParamTpl ](https://cloud.tencent.com/document/product/240/109155)接口获取。请选择与实例版本与架构所对应的参数模板 ID。 */
+  /** 参数模板 ID。参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。参数模板 ID 可通过 DescribeDBInstanceParamTpl 接口获取。请选择与实例版本与架构所对应的参数模板 ID。 */
   ParamTemplateId?: string;
+  /** 实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 DescribeSpecInfo 获取。注意：通用 I 型实例必须设置 CPU 大小。 */
+  CpuCore?: number;
 }
 
 declare interface CreateDBInstanceHourResponse {
@@ -1057,66 +1059,68 @@ declare interface CreateDBInstanceParamTplResponse {
 }
 
 declare interface CreateDBInstanceRequest {
-  /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 DescribeSpecInfo 获取。创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 DescribeSpecInfo 获取。 */
   NodeNum: number;
-  /** 实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 DescribeSpecInfo 获取。 */
   Memory: number;
-  /** 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 DescribeSpecInfo 获取。 */
   Volume: number;
-  /** 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
+  /** 指版本信息。具体支持的版本信息 ，请通过接口 DescribeSpecInfo 获取。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
   /** 实例数量, 最小值1，最大值为30。 */
   GoodsNum: number;
-  /** 可用区信息，输入格式如：ap-guangzhou-2。- 具体信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。 */
+  /** 可用区信息，输入格式如：ap-guangzhou-2。具体信息，请通过接口 DescribeSpecInfo 获取。该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。 */
   Zone: string;
   /** 指定购买实例的购买时长。取值可选：[1,2,3,4,5,6,7,8,9,10,11,12,24,36]；单位：月。 */
   Period: number;
-  /** 产品规格类型。- HIO10G：通用高HIO万兆型。- HCD：云盘版类型。 */
+  /** 产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
   MachineCode: string;
-  /** 实例架构类型。- REPLSET：副本集。- SHARD：分片集群。 */
+  /** 实例架构类型。REPLSET：副本集。SHARD：分片集群。 */
   ClusterType: string;
-  /** - 创建副本集实例，指副本集数量，该参数只能为1。- 创建分片集群实例，指分片的数量。请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。 */
+  /** 创建副本集实例，指副本集数量，该参数只能为1。创建分片集群实例，指分片的数量。请通过接口DescribeSpecInfo查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。 */
   ReplicateSetNum: number;
-  /** 项目ID。- 若不设置该参数，则为默认项目。- 在 [MongoDB 控制台项目管理](https://console.cloud.tencent.com/project)页面，可获取项目ID。 */
+  /** 项目ID。若不设置该参数，则为默认项目。在 MongoDB 控制台项目管理页面，可获取项目ID。 */
   ProjectId?: number;
-  /** 私有网络 ID。- 仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的私有网络 ID。- 实例创建成功之后，支持更换私有网络。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。 */
+  /** 私有网络 ID。仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录私有网络控制台获取可使用的私有网络 ID。实例创建成功之后，支持更换私有网络。具体操作，请参见更换网络。 */
   VpcId?: string;
-  /** 私有网络 VPC 的子网 ID。- 必须在已选的私有网络内指定一个子网。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的子网 ID。- 实例创建成功之后，支持更换私有网络及子网。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。 */
+  /** 私有网络 VPC 的子网 ID。必须在已选的私有网络内指定一个子网。请登录私有网络控制台获取可使用的子网 ID。实例创建成功之后，支持更换私有网络及子网。具体操作，请参见更换网络。 */
   SubnetId?: string;
-  /** 实例密码。设置要求如下：- 字符个数为[8,32]。- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“\_”。- 不能设置单一的字母或者数字。 */
+  /** 实例密码。设置要求如下：字符个数为[8,32]。可输入[A,Z]、[a,z]、[0,9]范围内的字符。可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“*”、括号“()”、下划线“_”。不能设置单一的字母或者数字。 */
   Password?: string;
   /** 实例标签信息。 */
   Tags?: TagInfo[];
-  /** 自动续费标记。- 0：不自动续费。- 1：自动续费。 */
+  /** 自动续费标记。0：不自动续费。1：自动续费。 */
   AutoRenewFlag?: number;
-  /** 是否自动选择代金券。- 1：是。- 0：否。默认为0。 */
+  /** 是否自动选择代金券。1：是。0：否。默认为0。 */
   AutoVoucher?: number;
-  /** 实例类型。- 1：正式实例。- 3：只读实例。- 4：灾备实例。- 5：克隆实例。注意：克隆实例 RestoreTime 为必填项。 */
+  /** 实例类型。1：正式实例。3：只读实例。4：灾备实例。5：克隆实例。注意：克隆实例 RestoreTime 为必填项。 */
   Clone?: number;
-  /** 父实例 ID。- 当参数**Clone**为3或者4时，即实例为只读或灾备实例时，该参数必须配置。- 请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制父实例 ID。 */
+  /** 父实例 ID。当参数Clone为3或者4时，即实例为只读或灾备实例时，该参数必须配置。请登录 MongoDB 控制台在实例列表复制父实例 ID。 */
   Father?: string;
-  /** 安全组 ID。 请登录[安全组控制台](https://console.cloud.tencent.com/vpc/security-group)页面获取与数据库实例同地域的安全组 ID。 */
+  /** 安全组 ID。 请登录安全组控制台页面获取与数据库实例同地域的安全组 ID。 */
   SecurityGroup?: string[];
   /** 克隆实例回档时间，当Clone取值为5或6时为必填。- 若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。- 回档时间范围：仅能回档7天内时间点的数据。 */
   RestoreTime?: string;
-  /** 实例名称。仅支持长度为128个字符的中文、英文、数字、下划线\_、分隔符\-。批量购买数据库实例时，支持通过自定义命名模式串与数字后缀自动升序功能，高效设置实例名称。- 基础模式：前缀＋自动升序编号（默认从1开始），**lnstanceName**仅需自定义实例名称前缀，例如设置为：cmgo，设置购买数量为5，则购买后，实例名称依次分别为cmgo1、cmgo2、cmgo3、cmgo4、cmgo5。- 自定义起始序号模式：前缀+｛R:x｝（x为自定义起始序号）。**InstanceName**需填写“前缀｛R:x｝”，例如：cmgo｛R:3｝，设置购买数量为5，则实例名称为cmgo3、cmgo4、cmgo5、cmgo6、cmgo7。- 复合模式串：前缀1{R:x}+前缀2{R:y}+ ⋯+固定后缀，x与y分别为每一段前缀的起始序号。**instanceName**需填写复合模式串，例如：cmgo{R:10}\_node{R:12}\_db，设置批量购买数量为5，则实例名称为 cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, cluster14\_node16\_db. */
+  /** 实例名称。仅支持长度为128个字符的中文、英文、数字、下划线_、分隔符-。批量购买数据库实例时，支持通过自定义命名模式串与数字后缀自动升序功能，高效设置实例名称。基础模式：前缀＋自动升序编号（默认从1开始），lnstanceName仅需自定义实例名称前缀，例如设置为：cmgo，设置购买数量为5，则购买后，实例名称依次分别为cmgo1、cmgo2、cmgo3、cmgo4、cmgo5。自定义起始序号模式：前缀+｛R:x｝（x为自定义起始序号）。InstanceName需填写“前缀｛R:x｝”，例如：cmgo｛R:3｝，设置购买数量为5，则实例名称为cmgo3、cmgo4、cmgo5、cmgo6、cmgo7。复合模式串：前缀1{R:x}+前缀2{R:y}+ ⋯+固定后缀，x与y分别为每一段前缀的起始序号。instanceName需填写复合模式串，例如：cmgo{R:10}_node{R:12}_db，设置批量购买数量为5，则实例名称为 cmgo10_node12_db, cmgo11_node13_db, cmgo12_node14_db, cmgo13_node15_db, cluster14_node16_db. */
   InstanceName?: string;
-  /** 若多可用区部署云数据库实例，指定多可用区列表。- 多可用区部署实例，参数 **Zone** 指定实例主可用区信息；**AvailabilityZoneList** 指定所有可用区信息，包含主可用区。输入格式如：[ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4]。- 通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 可获取云数据库不同地域规划的可用区信息，以便指定有效的可用区。- 多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。 */
+  /** 若多可用区部署云数据库实例，指定多可用区列表。多可用区部署实例，参数 Zone 指定实例主可用区信息；AvailabilityZoneList 指定所有可用区信息，包含主可用区。输入格式如：[ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4]。通过接口 DescribeSpecInfo 可获取云数据库不同地域规划的可用区信息，以便指定有效的可用区。多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。 */
   AvailabilityZoneList?: string[];
   /** Mongos CPU 核数，支持1、2、4、8、16。购买分片集群时，必须填写。 */
   MongosCpu?: number;
-  /** Mongos 内存大小。- 购买分片集群时，必须填写。- 单位：GB，支持1核2GB、2核4GB、4核8GB、8核16GB、16核32GB。 */
+  /** Mongos 内存大小。购买分片集群时，必须填写。单位：GB，支持1核2GB、2核4GB、4核8GB、8核16GB、16核32GB。 */
   MongosMemory?: number;
-  /** Mongos 数量。购买分片集群时，必须填写。- 单可用区部署实例，其数量范围为[3,32]。- 多可用区部署实例，其数量范围为[6,32]。 */
+  /** Mongos 数量。购买分片集群时，必须填写。单可用区部署实例，其数量范围为[3,32]。多可用区部署实例，其数量范围为[6,32]。 */
   MongosNodeNum?: number;
   /** 只读节点数量，取值范围[0,5]。 */
   ReadonlyNodeNum?: number;
-  /** 指只读节点所属可用区数组。跨可用区部署实例，参数**ReadonlyNodeNum**不为**0**时，必须配置该参数。 */
+  /** 指只读节点所属可用区数组。跨可用区部署实例，参数ReadonlyNodeNum不为0时，必须配置该参数。 */
   ReadonlyNodeAvailabilityZoneList?: string[];
   /** Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。 */
   HiddenZone?: string;
-  /** 参数模板 ID。- 参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。- 参数模板 ID 可通过 [DescribeDBInstanceParamTpl ](https://cloud.tencent.com/document/product/240/109155)接口获取。请选择与实例版本与架构所对应的参数模板 ID。 */
+  /** 参数模板 ID。参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。参数模板 ID 可通过 DescribeDBInstanceParamTpl 接口获取。请选择与实例版本与架构所对应的参数模板 ID。 */
   ParamTemplateId?: string;
+  /** 实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 DescribeSpecInfo 获取注意：通用 I 型实例必须设置 CPU 大小。 */
+  CpuCore?: number;
 }
 
 declare interface CreateDBInstanceResponse {
@@ -1927,27 +1931,27 @@ declare interface FlushInstanceRouterConfigResponse {
 }
 
 declare interface InquirePriceCreateDBInstancesRequest {
-  /** 实例所属区域及可用区信息。具体信息，请参见[地域和可用区](https://cloud.tencent.com/document/product/240/3637)。 */
+  /** 实例所属区域及可用区信息。具体信息，请参见地域和可用区。 */
   Zone: string;
-  /** - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。 */
+  /** 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 DescribeSpecInfo 获取。创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 DescribeSpecInfo 获取。 */
   NodeNum: number;
-  /** 实例内存大小。- 单位：GB。- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。 */
+  /** 实例内存大小。单位：GB。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。 */
   Memory: number;
-  /** 实例硬盘大小。- 单位：GB。- 取值范围：请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
+  /** 实例硬盘大小。单位：GB。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MinStorage与MaxStorage分别对应其最小磁盘规格与最大磁盘规格。 */
   Volume: number;
-  /** 实例版本信息。具体支持的版本，请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
+  /** 实例版本信息。具体支持的版本，请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
-  /** 产品规格类型。- HIO10G：通用高HIO万兆型。- HCD：云盘版。 */
+  /** 产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
   MachineCode: string;
   /** 实例数量，取值范围为[1,10]。 */
   GoodsNum: number;
-  /** 实例类型。- REPLSET：副本集。- SHARD：分片集群。 */
+  /** 实例类型。REPLSET：副本集。SHARD：分片集群。 */
   ClusterType: string;
-  /** - 创建副本集实例，指副本集数量，该参数只能为1。- 创建分片集群实例，指分片的数量。请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。 */
+  /** 创建副本集实例，指副本集数量，该参数只能为1。创建分片集群实例，指分片的数量。请通过接口DescribeSpecInfo查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。 */
   ReplicateSetNum: number;
-  /** - 选择包年包月计费模式，即 InstanceChargeType 设定为PREPAID时，必须设置该参数，指定购买实例的购买时长。取值可选：[1,2,3,4,5,6,7,8,9,10,11,12,24,36]；单位：月。-选择按量计费，即 InstanceChargeType 设定为 **POSTPAID_BY_HOUR** 时，该参数仅可配置为 1。 */
+  /** 选择包年包月计费模式，即 InstanceChargeType 设定为PREPAID时，必须设置该参数，指定购买实例的购买时长。取值可选：[1,2,3,4,5,6,7,8,9,10,11,12,24,36]；单位：月。-选择按量计费，即 InstanceChargeType 设定为 POSTPAID_BY_HOUR 时，该参数仅可配置为 1。 */
   Period?: number;
-  /** 实例付费方式。- PREPAID：包年包月计费。- POSTPAID_BY_HOUR：按量计费。 */
+  /** 实例付费方式。PREPAID：包年包月计费。POSTPAID_BY_HOUR：按量计费。 */
   InstanceChargeType?: string;
   /** Mongos CPU 核数，支持1、2、4、8、16。购买分片集群时，必须填写。注意为空时取默认取值为2C。 */
   MongosCpu?: number;
@@ -1961,6 +1965,10 @@ declare interface InquirePriceCreateDBInstancesRequest {
   ConfigServerMemory?: number;
   /** 指 ConfigServer 磁盘大小，固定取值为 20，单位：GB，可不配置该参数。 */
   ConfigServerVolume?: number;
+  /** 创建副本集实例，指每个副本集内只读节点数量。 创建分片集群实例，指每个分片的只读节点数量。取值范围为［1,5］。 */
+  ReadonlyNodeNum?: number;
+  /** 实例CPU大小。单位：C。取值范围：请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数CPU与Memory分别对应CPU核数与内存规格。注意：通用 I 型实例询价时必须传入与内存对应的 CPU 核数大小 */
+  Cpu?: number;
 }
 
 declare interface InquirePriceCreateDBInstancesResponse {
@@ -1981,6 +1989,8 @@ declare interface InquirePriceModifyDBInstanceSpecRequest {
   NodeNum?: number;
   /** 分片集群实例，指变更配置后实例的分片数量。取值范围：[2,36] 。**说明**：变更后的分片数量不能小于当前现有的数量。切勿同时发起调整节点数、调整分片数与调整节点规格的任务。 */
   ReplicateSetNum?: number;
+  /** 变更配置后实例CPU大小，单位：C。具体售卖的CPU规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。注意：通用 I 型实例询价时必须传入与内存对应的 CPU 核数大小 */
+  Cpu?: number;
 }
 
 declare interface InquirePriceModifyDBInstanceSpecResponse {
@@ -2113,26 +2123,30 @@ declare interface ModifyDBInstanceSecurityGroupResponse {
 }
 
 declare interface ModifyDBInstanceSpecRequest {
-  /** 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 实例 ID。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 实例配置变更后的内存大小。单位：GB。该参数为空值时，默认取实例当前的内存大小。当前所支持的内存规格，请参见[产品规格](https://cloud.tencent.com/document/product/240/64125)。**注意**：内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。 */
+  /** 实例配置变更后的内存大小。单位：GB。该参数为空值时，默认取实例当前的内存大小。当前所支持的内存规格，请参见产品规格。注意：内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。 */
   Memory?: number;
-  /** 实例配置变更后的硬盘大小，单位：GB。该参数为空值时，默认取当前实例的磁盘大小。当前所支持的磁盘容量，请参见[产品规格](https://cloud.tencent.com/document/product/240/64125)。- 内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。- 降配时，变更后的磁盘容量必须大于已用磁盘容量的1.2倍。 */
+  /** 实例配置变更后的硬盘大小，单位：GB。该参数为空值时，默认取当前实例的磁盘大小。当前所支持的磁盘容量，请参见产品规格。内存和磁盘必须同时升配或同时降配，即 Memory 与 Volume 需同时配置变更。降配时，变更后的磁盘容量必须大于已用磁盘容量的1.2倍。 */
   Volume?: number;
-  /** (已废弃) 请使用ResizeOplog独立接口完成。实例配置变更后 Oplog 的大小。- 单位：GB。- 默认 Oplog 占用容量为磁盘空间的10%。系统允许设置的 Oplog 容量范围为磁盘空间的[10%,90%]。 */
+  /** (已废弃) 请使用ResizeOplog独立接口完成。实例配置变更后 Oplog 的大小。单位：GB。默认 Oplog 占用容量为磁盘空间的10%。系统允许设置的 Oplog 容量范围为磁盘空间的[10%,90%]。 */
   OplogSize?: number;
-  /** 实例变更后 mongod 的节点数（不包含 readonly 只读节点数）。- 副本集节点数：请通过 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38567)接口返回的参数 MinNodeNum 与 MaxNodeNum 获取节点数量取值范围。- 分片集群每个分片节点数：请通过 [DescribeSpecInfo ](https://cloud.tencent.com/document/product/240/38567)接口返回的参数 MinReplicateSetNodeNum 与 MaxReplicateSetNodeNum 获取节点数量取值范围。**说明**：变更 mongod 或 mongos 的 CPU 与内存规格时，该参数可以不配置或者输入当前 mongod 或 mongos（不包含readonly）节点数量。 */
+  /** 实例变更后 mongod 的节点数（不包含 readonly 只读节点数）。副本集节点数：请通过 DescribeSpecInfo 接口返回的参数 MinNodeNum 与 MaxNodeNum 获取节点数量取值范围。分片集群每个分片节点数：请通过 DescribeSpecInfo 接口返回的参数 MinReplicateSetNodeNum 与 MaxReplicateSetNodeNum 获取节点数量取值范围。说明：变更 mongod 或 mongos 的 CPU 与内存规格时，该参数可以不配置或者输入当前 mongod 或 mongos（不包含readonly）节点数量。 */
   NodeNum?: number;
-  /** 实例变更后的分片数。- 请通过 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 接口返回的参数**MinReplicateSetNum**与**MaxReplicateSetNum**获取实例分片数取值范围。- 实例分片数量只允许增加不允许减少。 */
+  /** 实例变更后的分片数。请通过 DescribeSpecInfo 接口返回的参数MinReplicateSetNum与MaxReplicateSetNum获取实例分片数取值范围。实例分片数量只允许增加不允许减少。 */
   ReplicateSetNum?: number;
-  /** 实例配置变更的切换时间。- 0：调整完成时，立即执行变配任务。默认为0。- 1：在维护时间窗内，执行变配任务。**说明**：调整节点数和分片数不支持在维护时间窗内变更。 */
+  /** 实例配置变更的切换时间。0：调整完成时，立即执行变配任务。默认为0。1：在维护时间窗内，执行变配任务。说明：调整节点数和分片数不支持在维护时间窗内变更。 */
   InMaintenance?: number;
-  /** 分片实例配置变更后的 mongos 内存大小。单位：GB。实例支持的规格，请参见[产品规格](https://cloud.tencent.com/document/product/240/64125)。 */
+  /** 分片实例配置变更后的 mongos 内存大小。单位：GB。实例支持的规格，请参见产品规格。 */
   MongosMemory?: string;
   /** 新增节点列表，节点类型及可用区信息。 */
   AddNodeList?: AddNodeList[];
-  /** 删除节点列表。**注意**：基于分片实例各片节点的一致性原则，删除分片实例节点时，只需指定0分片对应的节点即可，如：cmgo-9nl1czif_0-node-readonly0 将删除每个分片的第1个只读节点。 */
+  /** 删除节点列表。注意：基于分片实例各片节点的一致性原则，删除分片实例节点时，只需指定0分片对应的节点即可，如：cmgo-9nl1czif_0-node-readonly0 将删除每个分片的第1个只读节点。 */
   RemoveNodeList?: RemoveNodeList[];
+  /** 实例配置变更后的CPU大小。单位：C。该参数为空值时，默认取实例当前的 CPU 大小。当前所支持的CPU规格，请参见产品规格。 */
+  Cpu?: number;
+  /** 实例配置变更后的产品规格类型。该参数为空值时，默认取实例当前的产品规格类型。当前支持的产品规格类型如下：产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请通用 I 型不能变更到白名单规格类型 */
+  MachineCode?: string;
 }
 
 declare interface ModifyDBInstanceSpecResponse {

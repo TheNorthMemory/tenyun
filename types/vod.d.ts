@@ -1799,9 +1799,9 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 生成图片的分辨率。各模型可选值：GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：512、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；Kling O1：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：暂不支持本字段，可通过ExtInfo字段设置分辨率；Qwen 0925：暂不支持本字段，可通过ExtInfo字段设置分辨率； */
+    /** 生成图片的分辨率。各模型可选值：OG：1080P、2K、4K；GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：512、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；Kling O1：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：暂不支持本字段，可通过ExtInfo字段设置分辨率；Qwen 0925：暂不支持本字段，可通过ExtInfo字段设置分辨率； */
     Resolution?: string;
-    /** 指定所生成图片的宽高比。GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；Kling O1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；SI 4.0：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 4.5：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 5.0-lite：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Hunyuan 3.0：不支持；Qwen 2.0：不支持；Qwen 0925：不支持； */
+    /** 指定所生成图片的宽高比。OG：1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21；GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；Kling O1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；SI 4.0：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 4.5：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 5.0-lite：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Hunyuan 3.0：不支持；Qwen 2.0：不支持；Qwen 0925：不支持； */
     AspectRatio?: string;
     /** 是否允许人物或人脸生成。取值有： AllowAdult：允许生成成人； Disallowed：禁止在图片中包含人物或人脸； */
     PersonGeneration?: string;
@@ -1809,7 +1809,7 @@ declare namespace V20180717 {
     InputComplianceCheck?: string;
     /** 是否开启输出内容的合规性检查。取值有： Enabled：开启； Disabled：关闭； */
     OutputComplianceCheck?: string;
-    /** 生成图片张数。*仅ModelName为Kling时有效，可选值 1-9 *。 */
+    /** 生成图片张数。各模型可选值：Kling：可选值 1-9；OG：可选值1-8；其他模型不生效。 */
     OutputImageCount?: number;
   }
 
@@ -1963,6 +1963,58 @@ declare namespace V20180717 {
     ExpireTime?: string;
   }
 
+  /** AIGC 视频转绘任务的输出文件信息。 */
+  interface AigcVideoRedrawOutputFileInfo {
+    /** 存储模式。取值有： Permanent：永久存储； Temporary：临时存储；默认值：Temporary */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 mp4、flv 等。 */
+    FileType?: string;
+    /** 媒体文件播放地址。 */
+    FileUrl?: string;
+    /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
+    FileId?: string;
+    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    MetaData?: MediaMetaData;
+  }
+
+  /** AIGC 视频转绘任务信息 */
+  interface AigcVideoRedrawTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 视频转绘任务的输入信息。 */
+    Input?: AigcVideoRedrawTaskInput;
+    /** AIGC 视频转绘任务的输出信息。 */
+    Output?: AigcVideoRedrawTaskOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** AIGC 视频转绘任务的输入。 */
+  interface AigcVideoRedrawTaskInput {
+    /** AIGC 视频转绘任务输入文件信息。 */
+    FileInfo?: AigcVideoRedrawTaskInputFileInfo;
+    /** AIGC 视频转绘输出配置。 */
+    OutputConfig?: AigcVideoRedrawOutputConfig;
+  }
+
   /** AIGC 视频转绘任务输入文件信息。 */
   interface AigcVideoRedrawTaskInputFileInfo {
     /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
@@ -1971,6 +2023,12 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
     Url?: string;
+  }
+
+  /** AIGC 视频转绘任务的输出信息。 */
+  interface AigcVideoRedrawTaskOutput {
+    /** AIGC 视频转绘任务的输出文件信息。 */
+    FileInfo?: AigcVideoRedrawOutputFileInfo;
   }
 
   /** 场景化 AIGC 生图配置。 */
@@ -2059,7 +2117,7 @@ declare namespace V20180717 {
     Usage?: string;
   }
 
-  /** AIGC 固定主体输入信息。 */
+  /** AIGC 主体输入信息。 */
   interface AigcVideoTaskInputSubjectInfo {
     /** 固定主体Id。Kling主体必选；Vidu主体可选。 */
     Id?: string;
@@ -7974,9 +8032,9 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：GGSIQwenHunyuanViduKling */
+    /** 模型名称。取值：OGGGSIQwenHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1； */
+    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；Kling O1：10张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；MJ v7：3张。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
@@ -8068,7 +8126,7 @@ declare namespace V20180717 {
     ModelVersion: string;
     /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图、视频参考、视频编辑等模式。首尾帧视频生成：首帧图片只支持一张图片，图片的Usage字段为FirstFrame，LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片生成：可传入单张图片或者多张，图片的Usage字段为Reference；参考图片，可以调整生成视频的宽高比例。视频编辑、视频参考：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片，图片的Usage字段为Reference。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。x0b关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
-    /** 固定主体输入信息。 */
+    /** 主体输入信息。 */
     SubjectInfos?: AigcVideoTaskInputSubjectInfo[];
     /** 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。指定该参数时，须同时通过 FileInfos 指定首帧画面。图片大小需小于10M。图片格式的取值为：jpeg，jpg, png, webp。 */
     LastFrameFileId?: string;
@@ -9348,13 +9406,13 @@ declare namespace V20180717 {
   }
 
   interface DescribeAigcUsageDataRequest {
-    /** 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 起始日期。使用 ISO 日期格式。 */
     StartTime: string;
-    /** 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 结束日期，需大于等于起始日期。使用 ISO 日期格式。 */
     EndTime: string;
-    /** AIGC类型，取值有： Video：视频。 Image：图片。 Text：文本。 */
+    /** AIGC类型。枚举值：Video： 视频Image： 图片Text： 文本SceneAigcVideo： 场景化视频处理SceneAigcImage： 场景化图片处理SceneAigcTime： 场景化处理次数 */
     AigcType: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -10337,7 +10395,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElementTask：创建自定义主体任务CreateAigcCustomVoiceTask：创建自定义音色任务CreateAigcSubjectTask：创建主体任务 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElementTask：创建自定义主体任务CreateAigcCustomVoiceTask：创建自定义音色任务CreateAigcSubjectTask：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -10413,6 +10471,8 @@ declare namespace V20180717 {
     CreateAigcCustomVoiceTask?: CreateAigcCustomVoiceTask;
     /** 创建主体信息，仅当 TaskType 为 CreateAigcSubject，该字段有值。 */
     CreateAigcSubjectTask?: CreateAigcSubjectTask;
+    /** AIGC 视频转绘信息，仅当 TaskType 为AigcVideoRedrawTask，该字段有值。 */
+    AigcVideoRedrawTask?: AigcVideoRedrawTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

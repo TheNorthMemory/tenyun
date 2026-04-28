@@ -658,6 +658,10 @@ declare interface DisplaySubDomain {
   AverageDelay?: number;
   /** 丢包率（百分比） */
   LossRate?: number;
+  /** DNS解析类型A、AAAA、MX、CNAME、NX */
+  DnsType?: string;
+  /** DNS解析值 */
+  DnsValue?: string;
 }
 
 /** 影子资产详情 */
@@ -1183,6 +1187,10 @@ declare interface CreateSubDomainRequest {
   Isp?: string;
   /** 子公司 */
   EnterpriseUid?: string;
+  /** DNS解析类型。A、AAAA、CNAME等 */
+  DnsType?: string;
+  /** DNS解析值。域名或者ip */
+  DnsValue?: string;
 }
 
 declare interface CreateSubDomainResponse {

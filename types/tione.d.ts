@@ -1110,6 +1110,8 @@ declare interface NotebookDetail {
   AppId?: string | null;
   /** 描述 */
   Description?: string | null;
+  /** 最后操作者信息 */
+  LatestOperatorInfo?: OperatorInfo;
 }
 
 /** Notebook列表元素 */
@@ -1178,6 +1180,8 @@ declare interface NotebookSetItem {
   ExposePortConfig?: ExposePortConfig;
   /** 描述 */
   Description?: string | null;
+  /** 操作者信息 */
+  LatestOperatorInfo?: OperatorInfo;
 }
 
 /** 用于表示百分比或数量 */
@@ -2859,6 +2863,8 @@ declare interface DeleteTrainingTaskResponse {
 }
 
 declare interface DescribeBillingResourceGroupAttachedWorkspacesRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DescribeBillingResourceGroupAttachedWorkspacesResponse {
@@ -2869,6 +2875,8 @@ declare interface DescribeBillingResourceGroupAttachedWorkspacesResponse {
 declare interface DescribeBillingResourceGroupRequest {
   /** 资源组id, 取值为创建资源组接口(CreateBillingResourceGroup)响应中的ResourceGroupId */
   ResourceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 过滤条件注意: 1. Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询3. Filter.Negative: 是否取反，默认为false4. Filter.Fuzzy: 是否模糊查询，默认为false5. 每次请求的Filters的上限为10，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10...即每页左边为闭区间; 默认0 */
@@ -2893,6 +2901,8 @@ declare interface DescribeBillingResourceGroupResponse {
 }
 
 declare interface DescribeBillingResourceGroupsRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** Filter.Name: 枚举值: ResourceGroupId (资源组id列表) ResourceGroupName (资源组名称列表) AvailableNodeCount（资源组中可用节点数量） Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 标签过滤 */
@@ -2921,6 +2931,8 @@ declare interface DescribeBillingResourceInstanceRunningJobsRequest {
   ResourceGroupId: string;
   /** 资源组节点id */
   ResourceInstanceId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DescribeBillingResourceInstanceRunningJobsResponse {
@@ -2971,6 +2983,8 @@ declare interface DescribeBuildInImagesResponse {
 }
 
 declare interface DescribeDataSourceRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 数据源id */
   Id?: string;
 }
@@ -3217,15 +3231,17 @@ declare interface DescribeModelServiceGroupResponse {
 }
 
 declare interface DescribeModelServiceGroupsRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 偏移量，默认为0 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100 */
   Limit?: number;
   /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
   Order?: string;
-  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
+  /** 排序的依据字段， 取值范围 &quot;CreateTime&quot; &quot;UpdateTime&quot; */
   OrderField?: string;
-  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelVersionId"] */
+  /** 分页参数，支持的分页过滤Name包括：[&quot;ClusterId&quot;, &quot;ServiceId&quot;, &quot;ServiceGroupName&quot;, &quot;ServiceGroupId&quot;,&quot;Status&quot;,&quot;CreatedBy&quot;,&quot;ModelVersionId&quot;] */
   Filters?: Filter[];
   /** 标签过滤参数 */
   TagFilters?: TagFilter[];
@@ -3238,6 +3254,8 @@ declare interface DescribeModelServiceGroupsResponse {
   TotalCount?: number | null;
   /** 服务组信息 */
   ServiceGroups?: ServiceGroup[] | null;
+  /** 当前uin和region下全量服务组数量 */
+  GlobalTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3329,6 +3347,8 @@ declare interface DescribeMountLimitsResponse {
 declare interface DescribeNotebookRequest {
   /** notebook id */
   Id: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DescribeNotebookResponse {
@@ -3339,6 +3359,8 @@ declare interface DescribeNotebookResponse {
 }
 
 declare interface DescribeNotebooksRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 偏移量，默认为0 */
   Offset?: number;
   /** 每页返回的实例数，默认为10 */
@@ -3449,6 +3471,8 @@ declare interface DescribeTrainingModelVersionsResponse {
 declare interface DescribeTrainingTaskPodsRequest {
   /** 训练任务ID */
   Id: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DescribeTrainingTaskPodsResponse {
@@ -3465,6 +3489,8 @@ declare interface DescribeTrainingTaskPodsResponse {
 declare interface DescribeTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 训练任务实例ID */
   InstanceId?: string;
 }
@@ -3477,6 +3503,8 @@ declare interface DescribeTrainingTaskResponse {
 }
 
 declare interface DescribeTrainingTasksRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]取值范围：Name（名称）：task1Id（task ID）：train-23091792777383936Status（状态）：SUBMITTING/PENDING/STARTING / RUNNING / STOPPING / STOPPED / FAILED / SUCCEED / SUBMIT_FAILEDResourceGroupId（资源组 Id）：trsg-kvvfrwl7Creator（创建者 uin）：100014761913ChargeType（计费类型）：PREPAID（预付费）/ POSTPAID_BY_HOUR（后付费）CHARGE_STATUS（计费状态）：NOT_BILLING（未开始计费）/ BILLING（计费中）/ ARREARS_STOP（欠费停止） */
   Filters?: Filter[];
   /** 标签过滤器，eg：[{ "TagKey": "TagKeyA", "TagValue": ["TagValueA"] }] */

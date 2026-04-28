@@ -294,6 +294,8 @@ declare interface BackupFileInfo {
   EncryptRegion?: string;
   /** 保险箱信息 */
   VaultInfos?: VaultInfo[];
+  /** 备份周期策略 */
+  BackupPeriodStrategy?: string;
 }
 
 /** 备份下载集群限制参数 */
@@ -1252,6 +1254,8 @@ declare interface DeliverSummary {
   DeliverConsumer?: string;
   /** 投递者名称 */
   DeliverConsumerName?: string;
+  /** 投递异常错误 */
+  DeliverError?: string;
 }
 
 /** DescribeBackupListByVaultItem */
@@ -2130,6 +2134,14 @@ declare interface Module {
   IsDisable: string;
   /** 模块名 */
   ModuleName: string;
+}
+
+/** 月份日期信息 */
+declare interface MonthDay {
+  /** 月份信息 */
+  Month: number;
+  /** 日期信息 */
+  Day: number;
 }
 
 /** 网络信息 */
@@ -3076,6 +3088,46 @@ declare interface SnapshotBackupConfig {
   BackupTriggerStrategy?: string;
   /** 保险箱信息 */
   AutoCopyVaults?: CreateBackupVaultItem[];
+}
+
+/** 稀疏备份配置 */
+declare interface SparseBackupConfig {
+  /** 稀疏备份开关：ON/OFF */
+  SparseBackupSwitch?: string;
+  /** 稀疏备份策略列表（1-3条） */
+  SparseBackupConfigInfos?: SparseBackupConfigInfo[];
+}
+
+/** 稀疏备份策略配置信息 */
+declare interface SparseBackupConfigInfo {
+  /** 操作类型:add,modify,remove */
+  OpType: string;
+  /** 配置 ID */
+  ConfigId?: string;
+  /** 周期策略类型：weekly/monthly/yearly */
+  SparsePeriodConfig?: string;
+  /** 周期时间配置 */
+  SparsePeriodTime?: SparsePeriodTime;
+  /** 保留天数（7-7320天，最长20年） */
+  SparseBackupSaveDays?: number;
+}
+
+/** 稀疏备份配置 */
+declare interface SparseBackupConfigRsp {
+  /** 稀疏备份开关：ON/OFF */
+  SparseBackupSwitch?: string | null;
+  /** 稀疏备份策略列表（1-3条） */
+  SparseBackupConfigInfos?: SparseBackupConfigInfo[] | null;
+}
+
+/** 稀疏备份周期信息 */
+declare interface SparsePeriodTime {
+  /** 按周：星期几列表，1-7，1=周一，7=周日（仅 weekly 周期使用，最多7个） */
+  WeekDays?: number[];
+  /** 按月：日期列表，1-31（仅 monthly 周期使用，最多7个） */
+  Days?: number[];
+  /** 按年：月日组合列表（仅 yearly 周期使用，最多7个） */
+  MonthDays?: MonthDay[];
 }
 
 /** 转换集群log bin开关 */
@@ -4456,7 +4508,7 @@ declare interface DescribeBackupConfigResponse {
   BackupTimeBeg?: number;
   /** 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200 */
   BackupTimeEnd?: number;
-  /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800 */
+  /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800 */
   ReserveDuration?: number;
   /** 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份 */
   BackupFreq?: string[];
@@ -4468,6 +4520,8 @@ declare interface DescribeBackupConfigResponse {
   LogicBackupConfig?: LogicBackupConfigInfo;
   /** 二级快照备份配置信息 */
   SnapshotSecondaryBackupConfig?: BackupConfigInfo | null;
+  /** 稀疏备份配置 */
+  SparseBackupConfig?: SparseBackupConfigRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6437,7 +6491,7 @@ declare interface ModifyBackupConfigRequest {
   BackupTimeBeg?: number;
   /** 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200 */
   BackupTimeEnd?: number;
-  /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000 */
+  /** 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000 */
   ReserveDuration?: number;
   /** 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份 */
   BackupFreq?: string[];
@@ -6449,6 +6503,8 @@ declare interface ModifyBackupConfigRequest {
   DeleteAutoLogicBackup?: boolean;
   /** 二级快照备份参数 */
   SnapshotSecondaryBackupConfig?: SnapshotBackupConfig;
+  /** 稀疏备份配置 */
+  SparseBackupConfig?: SparseBackupConfig;
 }
 
 declare interface ModifyBackupConfigResponse {

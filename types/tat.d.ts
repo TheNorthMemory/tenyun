@@ -359,9 +359,9 @@ declare interface CancelInvocationResponse {
 }
 
 declare interface CreateCommandRequest {
-  /** 命令名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。 */
+  /** 命令名称。名称仅支持中文、英文、数字、下划线、分隔符&quot;-&quot;、小数点，最大长度不能超60个字节。 */
   CommandName: string;
-  /** Base64编码后的命令内容，长度不可超过64KB。 */
+  /** 命令脚本内容。 需 Base64 编码后传入。当 EnableParameter = true 时，支持两种动态参数占位符：普通参数 {{key}}：例如脚本 echo {{word}} 配合参数 {&quot;word&quot;: &quot;hello&quot;}，实际执行 echo hello，执行记录显示 {&quot;word&quot;: &quot;hello&quot;}。隐藏参数 {{tat-hidden:key}}：用于敏感信息脱敏。例如脚本 echo {{tat-hidden:word}} 配合参数 {&quot;word&quot;: &quot;hello&quot;}（传参 Key 不带前缀），实际执行 echo hello，记录显示 {&quot;word&quot;: &quot;******&quot;}。参数格式：Base64 编码字符串入参限制：Base64 编码后的字符串长度不能超过 64KB */
   Content: string;
   /** 命令描述。不超过120字符。 */
   Description?: string;
@@ -373,9 +373,9 @@ declare interface CreateCommandRequest {
   Timeout?: number;
   /** 是否启用自定义参数功能。一旦创建，此值不提供修改。默认值：false。 */
   EnableParameter?: boolean;
-  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。仅在 EnableParameter 参数为 true 时，才允许设置此参数。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{&quot;varA&quot;: &quot;222&quot;}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。参数不支持同时指定 DefaultParameters 和 DefaultParameterConfs 。仅在 EnableParameter 参数为 true 时，才允许设置此参数。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
-  /** 自定义参数数组。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。仅在 EnableParameter 参数为 true 时，才允许设置此参数。自定义参数最多20个。 */
+  /** 自定义参数数组。如果InvokeCommand时未提供参数取值，将使用这里的默认值进行替换。参数不支持同时指定 DefaultParameters 和 DefaultParameterConfs 。仅在 EnableParameter 参数为 true 时，才允许设置此参数。自定义参数最多20个。 */
   DefaultParameterConfs?: DefaultParameterConf[];
   /** 为命令关联的标签，列表长度不超过10。 */
   Tags?: Tag[];
@@ -383,7 +383,7 @@ declare interface CreateCommandRequest {
   Username?: string;
   /** 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。 */
   OutputCOSBucketUrl?: string;
-  /** 指定日志在cos bucket中的目录，目录命名有如下规则：1. 可用数字、中英文和可见字符的组合，长度最多为60。2. 用 / 分割路径，可快速创建子目录。3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称 */
+  /** 指定日志在cos bucket中的目录，目录命名有如下规则：可用数字、中英文和可见字符的组合，长度最多为60。用 / 分割路径，可快速创建子目录。不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称 */
   OutputCOSKeyPrefix?: string;
 }
 
@@ -757,7 +757,7 @@ declare interface ModifyCommandRequest {
   CommandName?: string;
   /** 命令描述。不超过120字符。 */
   Description?: string;
-  /** Base64编码后的命令内容，长度不可超过64KB。 */
+  /** 命令脚本内容。 需 Base64 编码后传入。当 EnableParameter = true 时，支持两种动态参数占位符：普通参数 {{key}}：例如脚本 echo {{word}} 配合参数 {&quot;word&quot;: &quot;hello&quot;}，实际执行 echo hello，执行记录显示 {&quot;word&quot;: &quot;hello&quot;}。隐藏参数 {{tat-hidden:key}}：用于敏感信息脱敏。例如脚本 echo {{tat-hidden:word}} 配合参数 {&quot;word&quot;: &quot;hello&quot;}（传参 Key 不带前缀），实际执行 echo hello，记录显示 {&quot;word&quot;: &quot;******&quot;}。参数格式：Base64 编码字符串入参限制：Base64 编码后的字符串长度不能超过 64KB */
   Content?: string;
   /** 命令类型，目前支持取值：SHELL、POWERSHELL、BAT。 */
   CommandType?: string;
@@ -835,11 +835,11 @@ declare interface PreviewReplacedCommandContentResponse {
 }
 
 declare interface RunCommandRequest {
-  /** Base64编码后的命令内容，长度不可超过64KB。 */
+  /** 命令脚本内容。 需 Base64 编码后传入。当 EnableParameter = true 时，支持两种动态参数占位符：普通参数 {{key}}：例如脚本 echo {{word}} 配合参数 {&quot;word&quot;: &quot;hello&quot;}，实际执行 echo hello，执行记录显示 {&quot;word&quot;: &quot;hello&quot;}。隐藏参数 {{tat-hidden:key}}：用于敏感信息脱敏。例如脚本 echo {{tat-hidden:word}} 配合参数 {&quot;word&quot;: &quot;hello&quot;}（传参 Key 不带前缀），实际执行 echo hello，记录显示 {&quot;word&quot;: &quot;******&quot;}。参数格式：Base64 编码字符串入参限制：Base64 编码后的字符串长度不能超过 64KB */
   Content: string;
-  /** 待执行命令的实例ID列表，上限200。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：- CVM- Lighthouse- TAT 托管实例 */
+  /** 待执行命令的实例ID列表，上限200。可通过对应云产品的查询实例接口获取实例 ID。目前支持实例类型：CVMLighthouseTAT 托管实例 */
   InstanceIds: string[];
-  /** 命令名称。名称仅支持中文、英文、数字、下划线、分隔符"-"、小数点，最大长度不能超60个字节。 */
+  /** 命令名称。名称仅支持中文、英文、数字、下划线、分隔符&quot;-&quot;、小数点，最大长度不能超60个字节。 */
   CommandName?: string;
   /** 命令描述。不超过120字符。 */
   Description?: string;
@@ -853,11 +853,11 @@ declare interface RunCommandRequest {
   SaveCommand?: boolean;
   /** 是否启用自定义参数功能。一旦创建，此值不提供修改。取值范围： true：启用 false：不启用 默认值：false。 */
   EnableParameter?: boolean;
-  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。仅在命令的 EnableParameter 为 true 时，才允许设置此参数。参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。如果 Parameters 未提供，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** 启用自定义参数功能时，自定义参数的默认取值。字段类型为json encoded string。如：{&quot;varA&quot;: &quot;222&quot;}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。仅在命令的 EnableParameter 为 true 时，才允许设置此参数。参数不支持同时指定 DefaultParameters 和 DefaultParameterConfs 。如果 Parameters 未提供，将使用这里的默认值进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   DefaultParameters?: string;
-  /** 自定义参数数组。 如果 Parameters 未提供，将使用这里的默认值进行替换。 自定义参数最多20个。如果 Parameters 未提供，将使用这里的默认值进行替换。仅在命令的 EnableParameter 为 true 时，才允许设置此参数。参数不支持同时指定 `DefaultParameters` 和 `DefaultParameterConfs` 。 */
+  /** 自定义参数数组。 如果 Parameters 未提供，将使用这里的默认值进行替换。 自定义参数最多20个。如果 Parameters 未提供，将使用这里的默认值进行替换。仅在命令的 EnableParameter 为 true 时，才允许设置此参数。参数不支持同时指定 DefaultParameters 和 DefaultParameterConfs 。 */
   DefaultParameterConfs?: DefaultParameterConf[];
-  /** Command 的自定义参数。字段类型为json encoded string。如：{"varA": "222"}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。仅在命令的 EnableParameter 为 true 时，才允许设置此参数。如果未提供该参数取值，将使用 DefaultParameters 或 DefaultParameterConfs 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
+  /** Command 的自定义参数。字段类型为json encoded string。如：{&quot;varA&quot;: &quot;222&quot;}。key为自定义参数名称，value为该参数的默认取值。kv均为字符串型。仅在命令的 EnableParameter 为 true 时，才允许设置此参数。如果未提供该参数取值，将使用 DefaultParameters 或 DefaultParameterConfs 进行替换。自定义参数最多20个。自定义参数名称需符合以下规范：字符数目上限64，可选范围【a-zA-Z0-9-_】。 */
   Parameters?: string;
   /** 如果保存命令，可为命令设置标签。列表长度不超过10。 */
   Tags?: Tag[];
@@ -865,7 +865,7 @@ declare interface RunCommandRequest {
   Username?: string;
   /** 指定日志上传的cos bucket 地址，必须以https开头，如 https://BucketName-123454321.cos.ap-beijing.myqcloud.com。 */
   OutputCOSBucketUrl?: string;
-  /** 指定日志在cos bucket中的目录，目录命名有如下规则：1. 可用数字、中英文和可见字符的组合，长度最多为60。2. 用 / 分割路径，可快速创建子目录。3. 不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。 */
+  /** 指定日志在cos bucket中的目录，目录命名有如下规则：可用数字、中英文和可见字符的组合，长度最多为60。用 / 分割路径，可快速创建子目录。不允许连续 / ；不允许以 / 开头；不允许以..作为文件夹名称。 */
   OutputCOSKeyPrefix?: string;
 }
 

@@ -54,6 +54,102 @@ declare interface AnalysisItems {
   LastTime?: string;
 }
 
+/** 审计实例信息 */
+declare interface AuditInstanceInfo {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 开启状态枚举值：OFF： 关闭ON： 打开 */
+  AuditStatus?: string;
+  /** 日志存储有效期单位：天 */
+  LogExpireDay?: number;
+  /** 热存储有效期单位：天 */
+  HotLogExpireDay?: number;
+  /** 冷存储有效期单位：天 */
+  ColdLogExpireDay?: number;
+  /** 热存储大小单位：MB */
+  HotLogSize?: number;
+  /** 冷存储大小单位：MB */
+  ColdLogSize?: number;
+  /** 开启时间 */
+  CreateTime?: string;
+  /** 投递状态 */
+  Deliver?: string;
+  /** 投递信息 */
+  DeliverSummary?: DeliverSummary[] | null;
+  /** 实例信息 */
+  InstanceInfo?: LogInstanceInfo;
+}
+
+/** 审计日志详情 */
+declare interface AuditLog {
+  /** 日志时间 */
+  Timestamp?: string | null;
+  /** 影响行数 */
+  AffectRows?: number | null;
+  /** 数据库 */
+  DBName?: string | null;
+  /** 错误码 */
+  ErrCode?: string | null;
+  /** 错误信息 */
+  ErrorMessage?: string | null;
+  /** 执行时间 */
+  ExecTime?: number | null;
+  /** 访问来源 */
+  Host?: string | null;
+  /** 实例Id */
+  InstanceId?: string | null;
+  /** 对象名称 */
+  ObjectName?: string | null;
+  /** 对象类型 */
+  ObjectType?: string | null;
+  /** sql */
+  Sql?: string | null;
+  /** sql类型 */
+  SqlType?: string | null;
+  /** 线程ID */
+  ThreadId?: string | null;
+  /** 用户 */
+  User?: string | null;
+}
+
+/** 数据库审计日志文件 */
+declare interface AuditLogFile {
+  /** 文件名 */
+  FileName?: string;
+  /** 任务状态枚举值：success： 成功running： 创建中failed： 失败 */
+  Status?: string;
+  /** 文件大小单位：MB */
+  FileSize?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 下载链接 */
+  DownloadUrl?: string;
+  /** 错误信息 */
+  ErrMsg?: string;
+  /** 下载进度 */
+  Progress?: number;
+  /** 完成时间 */
+  FinishTime?: string;
+}
+
+/** 审计日志过滤条件 */
+declare interface AuditLogFilter {
+  /** 影响函数 */
+  AffectRows?: number;
+  /** 数据库名字 */
+  DBName?: string[];
+  /** 执行时间 */
+  ExecTime?: number;
+  /** 主机Host */
+  Host?: string[];
+  /** sql语句 */
+  Sql?: string;
+  /** 登录名 */
+  User?: string[];
+  /** 审计类型 */
+  SqlType?: string[];
+}
+
 /** 备份下载限制信息 */
 declare interface BackupDownloadRestriction {
   /** 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。当该参数取值为CUSTOMIZE 时，vpc或ip信息至少填写一项 */
@@ -370,6 +466,20 @@ declare interface DedicatedCluster {
   DiskAvailable?: number;
 }
 
+/** 日志投递信息 */
+declare interface DeliverSummary {
+  /** 投递消费者，当前仅支持CLS */
+  DeliverConsumer?: string;
+  /** 投递消费者名称，当前仅支持CLS */
+  DeliverConsumerName?: string;
+  /** 投递类型当前仅支持mq */
+  DeliverType?: string;
+  /** 投递子类型，当前仅支持CLS */
+  DeliverSubType?: string;
+  /** 投递报错 */
+  DeliverError?: string;
+}
+
 /** 慢SQL 统计分析接口返回详情 */
 declare interface Detail {
   /** 输入时间范围内所有慢sql执行的总时间，单位毫秒（ms） */
@@ -502,6 +612,28 @@ declare interface LogFilter {
   Compare: string;
   /** 过滤条件匹配值。当Compare=RG时，例：[&quot;1-100&quot;,&quot;200-300&quot;] */
   Value: string[];
+}
+
+/** 日志实例信息 */
+declare interface LogInstanceInfo {
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** 项目ID */
+  ProjectId?: number | null;
+  /** 实例标签 */
+  TagList?: Tag[] | null;
+  /** 引擎 */
+  Engine?: string | null;
+  /** 引擎版本 */
+  EngineVersion?: string | null;
+  /** 实例状态 */
+  InstanceStatus?: string | null;
+  /** 是否支持审计。1代表支持，0代表不支持。 */
+  IsSupportAudit?: number | null;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 日志类型枚举值：complex： 精细审计simple： 极速审计 */
+  AuditType?: string;
 }
 
 /** 用于修改数据库对象的权限，其中包含了数据库对象描述的数据结构、需要修改的权限列表以及修改的类型等。 */
@@ -988,6 +1120,18 @@ declare interface CloseAccountCAMResponse {
   RequestId?: string;
 }
 
+declare interface CloseAuditServiceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 产品名称入参限制：postgres */
+  Product: string;
+}
+
+declare interface CloseAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseDBExtranetAccessRequest {
   /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。形如postgres-6r233v55 */
   DBInstanceId: string;
@@ -1020,6 +1164,24 @@ declare interface CreateAccountRequest {
 }
 
 declare interface CreateAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAuditLogFileRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开始时间参数格式：2026-03-25 00:00:00 */
+  StartTime: string;
+  /** 结束时间参数格式：2026-03-25 01:00:00 */
+  EndTime: string;
+  /** 产品名称入参限制：postgres */
+  Product: string;
+  /** 过滤条件 */
+  Filter?: AuditLogFilter;
+}
+
+declare interface CreateAuditLogFileResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1330,6 +1492,20 @@ declare interface DeleteAccountResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditLogFileRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 产品名称，固定值：postgres */
+  Product: string;
+  /** 审计日志文件名称 */
+  FileName: string;
+}
+
+declare interface DeleteAuditLogFileResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteBackupPlanRequest {
   /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -1462,6 +1638,80 @@ declare interface DescribeAccountsResponse {
   TotalCount?: number;
   /** 账号列表详细信息。当CreateTime项为0000-00-00 00:00:00时，意味着对应账号是直连数据库创建的，并非通过CreateAccount接口创建。 */
   Details?: AccountInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditInstanceListRequest {
+  /** 产品名称：postgres */
+  Product: string;
+  /** 是否开通枚举值：0： 未开通1： 已开通 */
+  AuditSwitch: number;
+  /** 分页限制 */
+  Limit: number;
+  /** 页偏移量 */
+  Offset?: number;
+  /** 实例过滤参数入参限制：支持过滤条件：InstanceId-实例ID,InstanceName-实例名称 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeAuditInstanceListResponse {
+  /** 实例数量 */
+  TotalCount?: number | null;
+  /** 实例日志信息 */
+  Items?: AuditInstanceInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogFilesRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 产品名称入参限制：postgres */
+  Product: string;
+  /** 日志文件名称 */
+  FileName?: string;
+  /** 查询限制取值范围：[1, 300] */
+  Limit?: number;
+  /** 偏移量取值范围：[0, 1000] */
+  Offset?: number;
+}
+
+declare interface DescribeAuditLogFilesResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 审计日志文件列表 */
+  Items?: AuditLogFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 开始时间参数格式：2026-03-25 00:00:00 */
+  StartTime: string;
+  /** 结束时间参数格式：2026-03-25 01:00:00 */
+  EndTime: string;
+  /** 查询限制取值范围：[1, 100] */
+  Limit: number;
+  /** 产品名称参数格式：postgres */
+  Product: string;
+  /** 位移量取值范围：[0, 10000] */
+  Offset?: number;
+  /** 排序方法入参限制：Timestamp,AffectRows,ExecTime */
+  Order?: string;
+  /** 排序字段入参限制：ASC,DESC */
+  OrderBy?: string;
+  /** 过滤条件 */
+  Filter?: AuditLogFilter;
+}
+
+declare interface DescribeAuditLogsResponse {
+  /** 日志条数 */
+  TotalCount?: number;
+  /** 日志详情 */
+  Items?: AuditLog[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2330,6 +2580,24 @@ declare interface ModifyAccountRemarkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuditServiceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志保存时长（天）枚举值：7： 7天30： 30天90： 90天180： 180天365： 365天1095： 1095天1825： 1825天 */
+  LogExpireDay: number;
+  /** 高频存储时长（天）枚举值：7： 7天30： 30天90： 90天180： 180天365： 365天1095： 1095天1825： 1825天 */
+  HotLogExpireDay: number;
+  /** 审计类型枚举值：complex： 精细审计，审计日志更全面，包含对象类型、对象等，开启后对性能有一定影响simple： 极速审计，审计日志覆盖绝大多数字段，开启审计后对性能影响较小 */
+  AuditType: string;
+  /** 产品名称入参限制：postgres */
+  Product: string;
+}
+
+declare interface ModifyAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBackupDownloadRestrictionRequest {
   /** 备份文件下载限制类型，NONE 无限制，内外网都可以下载；INTRANET 只允许内网下载；CUSTOMIZE 自定义限制下载的vpc或ip。当该参数取值为CUSTOMIZE时，Vpc限制和Ip限制需要至少填写一项。 */
   RestrictionType: string;
@@ -2688,6 +2956,24 @@ declare interface OpenAccountCAMResponse {
   RequestId?: string;
 }
 
+declare interface OpenAuditServiceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 日志保存时长枚举值：7： 7天30： 30天90： 90天180： 180天365： 365天1095： 1095天1825： 1825天 */
+  LogExpireDay: number;
+  /** 高频存储时长枚举值：7： 7天30： 30天90： 90天180： 180天365： 365天1095： 1095天1825： 1825天 */
+  HotLogExpireDay: number;
+  /** 审计类型枚举值：complex： 精细审计，审计日志更全面，包含对象类型、对象等，开启后对性能有一定影响simple： 极速审计，审计日志覆盖绝大多数字段，开启审计后对性能影响较小 */
+  AuditType: string;
+  /** 产品名称入参限制：postgres */
+  Product: string;
+}
+
+declare interface OpenAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenDBExtranetAccessRequest {
   /** 实例ID，形如postgres-hez4fh0v。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。 */
   DBInstanceId: string;
@@ -2911,10 +3197,14 @@ declare interface Postgres {
   CloneDBInstance(data: CloneDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneDBInstanceResponse>;
   /** 关闭数据库账户的CAM验证 {@link CloseAccountCAMRequest} {@link CloseAccountCAMResponse} */
   CloseAccountCAM(data: CloseAccountCAMRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAccountCAMResponse>;
+  /** 关闭数据库审计 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
+  CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
+  /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
+  CreateAuditLogFile(data: CreateAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditLogFileResponse>;
   /** 创建备份计划 {@link CreateBackupPlanRequest} {@link CreateBackupPlanResponse} */
   CreateBackupPlan(data: CreateBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupPlanResponse>;
   /** 创建实例数据备份 {@link CreateBaseBackupRequest} {@link CreateBaseBackupResponse} */
@@ -2935,6 +3225,8 @@ declare interface Postgres {
   CreateReadOnlyGroupNetworkAccess(data: CreateReadOnlyGroupNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReadOnlyGroupNetworkAccessResponse>;
   /** 删除数据库账号 {@link DeleteAccountRequest} {@link DeleteAccountResponse} */
   DeleteAccount(data: DeleteAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountResponse>;
+  /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
+  DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除备份计划 {@link DeleteBackupPlanRequest} {@link DeleteBackupPlanResponse} */
   DeleteBackupPlan(data: DeleteBackupPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBackupPlanResponse>;
   /** 删除实例数据备份 {@link DeleteBaseBackupRequest} {@link DeleteBaseBackupResponse} */
@@ -2953,6 +3245,12 @@ declare interface Postgres {
   DescribeAccountPrivileges(data: DescribeAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountPrivilegesResponse>;
   /** 查询实例的数据库账号列表 {@link DescribeAccountsRequest} {@link DescribeAccountsResponse} */
   DescribeAccounts(data: DescribeAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountsResponse>;
+  /** 查询审计实例列表 {@link DescribeAuditInstanceListRequest} {@link DescribeAuditInstanceListResponse} */
+  DescribeAuditInstanceList(data: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
+  /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
+  DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
+  /** 查询审计日志 {@link DescribeAuditLogsRequest} {@link DescribeAuditLogsResponse} */
+  DescribeAuditLogs(data: DescribeAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogsResponse>;
   /** 查询实例可恢复的时间范围 {@link DescribeAvailableRecoveryTimeRequest} {@link DescribeAvailableRecoveryTimeResponse} */
   DescribeAvailableRecoveryTime(data: DescribeAvailableRecoveryTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableRecoveryTimeResponse>;
   /** 查询备份文件下载限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
@@ -3045,6 +3343,8 @@ declare interface Postgres {
   ModifyAccountPrivileges(data: ModifyAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountPrivilegesResponse>;
   /** 修改账号备注 {@link ModifyAccountRemarkRequest} {@link ModifyAccountRemarkResponse} */
   ModifyAccountRemark(data: ModifyAccountRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountRemarkResponse>;
+  /** 修改数据库审计 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
+  ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改备份文件下载限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
   /** 修改备份计划 {@link ModifyBackupPlanRequest} {@link ModifyBackupPlanResponse} */
@@ -3087,6 +3387,8 @@ declare interface Postgres {
   ModifySwitchTimePeriod(data: ModifySwitchTimePeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySwitchTimePeriodResponse>;
   /** 为数据库账户开启CAM验证 {@link OpenAccountCAMRequest} {@link OpenAccountCAMResponse} */
   OpenAccountCAM(data: OpenAccountCAMRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAccountCAMResponse>;
+  /** 开启数据库审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
+  OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */

@@ -310,7 +310,7 @@ declare interface InstanceDetail {
   EnableAlarmStrategy?: boolean;
 }
 
-/** 实例描述信息 */
+/** 实例的描述信息 */
 declare interface InstanceInfo {
   /** 集群实例ID, &quot;cdw-xxxx&quot; 字符串类型 */
   InstanceId?: string;
@@ -426,6 +426,8 @@ declare interface InstanceInfo {
   InstanceType?: string;
   /** keyvalue视图 */
   EnableConfigKeyValue?: string;
+  /** 实例是否开启HTTPS枚举值：true： 已开启HTTPSfalse： 未开启HTTPS */
+  HttpsEnabled?: boolean;
 }
 
 /** 实例节点描述信息 */

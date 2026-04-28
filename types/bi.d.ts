@@ -2,6 +2,36 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 创建ApiKey接口出参 */
+declare interface ApiKeyAuthApplyVO {
+  /** id */
+  Id?: number | null;
+  /** 企业id */
+  CorpId?: string | null;
+  /** apiKey */
+  ApiKey?: string | null;
+  /** 默认用户 */
+  DefaultUser?: string | null;
+  /** 创建人 */
+  CreatedUser?: string | null;
+  /** 创建时间 */
+  CreatedAt?: string | null;
+  /** 更新人 */
+  UpdatedUser?: string | null;
+  /** 更新时间 */
+  UpdatedAt?: string | null;
+}
+
+/** ApiKey列表 */
+declare interface ApiKeyAuthApplyVOList {
+  /** 总数 */
+  Total?: number | null;
+  /** 页数 */
+  TotalPages?: number | null;
+  /** 列表数据 */
+  List?: ApiKeyAuthApplyVO[] | null;
+}
+
 /** 申请Token延期 */
 declare interface ApplyEmbedTokenInfo {
   /** 申请结果 */
@@ -804,6 +834,24 @@ declare interface ClearEmbedTokenResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuthApiKeyRequest {
+  /** 默认用户 */
+  DefaultUser?: string;
+}
+
+declare interface CreateAuthApiKeyResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** &quot;&quot; */
+  Extra?: string | null;
+  /** &quot;success&quot; */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: ApiKeyAuthApplyVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDatasourceCloudRequest {
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
@@ -1108,6 +1156,24 @@ declare interface CreateUserRoleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuthApiKeyRequest {
+  /** ApiKey */
+  ApiKey: string;
+}
+
+declare interface DeleteAuthApiKeyResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** &quot;&quot; */
+  Extra?: string | null;
+  /** &quot;success&quot; */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDatasourceRequest {
   /** 数据源id */
   Id: number;
@@ -1210,6 +1276,48 @@ declare interface DeleteUserRoleResponse {
   Data?: string | null;
   /** 消息 */
   Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuthApiKeyInfoRequest {
+  /** ApiKey */
+  ApiKey: string;
+}
+
+declare interface DescribeAuthApiKeyInfoResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** &quot;&quot; */
+  Extra?: string | null;
+  /** &quot;success&quot; */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: ApiKeyAuthApplyVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuthApiKeyListRequest {
+  /** 全部默认值：false */
+  AllPage?: boolean;
+  /** 页码默认值：0 */
+  PageNo?: number;
+  /** 分页大小默认值：10 */
+  PageSize?: number;
+  /** 关键字过滤 */
+  Keyword?: string;
+}
+
+declare interface DescribeAuthApiKeyListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** {} */
+  Extra?: string | null;
+  /** 信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: ApiKeyAuthApplyVOList | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1624,6 +1732,26 @@ declare interface ExportScreenPageResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuthApiKeyRequest {
+  /** ApiKey */
+  ApiKey: string;
+  /** 默认用户 */
+  DefaultUser?: string;
+}
+
+declare interface ModifyAuthApiKeyResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** &quot;&quot; */
+  Extra?: string | null;
+  /** &quot;success&quot; */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: ApiKeyAuthApplyVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDatasourceCloudRequest {
   /** 后端提供字典：域类型，1、腾讯云，2、本地 */
   ServiceType: string;
@@ -1989,6 +2117,8 @@ declare interface Bi {
   ApplyEmbedInterval(data?: ApplyEmbedIntervalRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyEmbedIntervalResponse>;
   /** 清理强鉴权token {@link ClearEmbedTokenRequest} {@link ClearEmbedTokenResponse} */
   ClearEmbedToken(data: ClearEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ClearEmbedTokenResponse>;
+  /** 创建ApiKey {@link CreateAuthApiKeyRequest} {@link CreateAuthApiKeyResponse} */
+  CreateAuthApiKey(data?: CreateAuthApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthApiKeyResponse>;
   /** 创建数据源 {@link CreateDatasourceRequest} {@link CreateDatasourceResponse} */
   CreateDatasource(data: CreateDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasourceResponse>;
   /** 创建云数据库 {@link CreateDatasourceCloudRequest} {@link CreateDatasourceCloudResponse} */
@@ -2007,6 +2137,8 @@ declare interface Bi {
   CreateUserRole(data?: CreateUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserRoleResponse>;
   /** 项目内-创建用户角色 {@link CreateUserRoleProjectRequest} {@link CreateUserRoleProjectResponse} */
   CreateUserRoleProject(data?: CreateUserRoleProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserRoleProjectResponse>;
+  /** 删除ApiKey {@link DeleteAuthApiKeyRequest} {@link DeleteAuthApiKeyResponse} */
+  DeleteAuthApiKey(data: DeleteAuthApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthApiKeyResponse>;
   /** 删除数据源 {@link DeleteDatasourceRequest} {@link DeleteDatasourceResponse} */
   DeleteDatasource(data: DeleteDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatasourceResponse>;
   /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
@@ -2019,6 +2151,10 @@ declare interface Bi {
   DeleteUserRole(data: DeleteUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserRoleResponse>;
   /** 项目内-删除用户角色 {@link DeleteUserRoleProjectRequest} {@link DeleteUserRoleProjectResponse} */
   DeleteUserRoleProject(data: DeleteUserRoleProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserRoleProjectResponse>;
+  /** ApiKey信息 {@link DescribeAuthApiKeyInfoRequest} {@link DescribeAuthApiKeyInfoResponse} */
+  DescribeAuthApiKeyInfo(data: DescribeAuthApiKeyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthApiKeyInfoResponse>;
+  /** ApiKey列表 {@link DescribeAuthApiKeyListRequest} {@link DescribeAuthApiKeyListResponse} */
+  DescribeAuthApiKeyList(data?: DescribeAuthApiKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthApiKeyListResponse>;
   /** 查询数据源列表 {@link DescribeDatasourceListRequest} {@link DescribeDatasourceListResponse} */
   DescribeDatasourceList(data: DescribeDatasourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceListResponse>;
   /** 查询页面组件信息 {@link DescribePageWidgetListRequest} {@link DescribePageWidgetListResponse} */
@@ -2049,6 +2185,8 @@ declare interface Bi {
   DescribeUserRoleProjectList(data: DescribeUserRoleProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleProjectListResponse>;
   /** 分享页截图导出 {@link ExportScreenPageRequest} {@link ExportScreenPageResponse} */
   ExportScreenPage(data: ExportScreenPageRequest, config?: AxiosRequestConfig): AxiosPromise<ExportScreenPageResponse>;
+  /** 更新ApiKey {@link ModifyAuthApiKeyRequest} {@link ModifyAuthApiKeyResponse} */
+  ModifyAuthApiKey(data: ModifyAuthApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthApiKeyResponse>;
   /** 更新数据源 {@link ModifyDatasourceRequest} {@link ModifyDatasourceResponse} */
   ModifyDatasource(data: ModifyDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatasourceResponse>;
   /** 更新云数据库 {@link ModifyDatasourceCloudRequest} {@link ModifyDatasourceCloudResponse} */
