@@ -8581,7 +8581,7 @@ declare interface Waf {
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */
   GenerateDealsAndPayNew(data: GenerateDealsAndPayNewRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateDealsAndPayNewResponse>;
-  /** 大模型安全代答生成接口。当用户输入命中内容安全风险检测规则时，调用本接口由大模型实时生成安全合规的替代回答。 {@link GenerateLLMSecAnswerRequest} {@link GenerateLLMSecAnswerResponse} */
+  /** 大模型安全流式代答接口 {@link GenerateLLMSecAnswerRequest} {@link GenerateLLMSecAnswerResponse} */
   GenerateLLMSecAnswer(data: GenerateLLMSecAnswerRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateLLMSecAnswerResponse>;
   /** 查询下载攻击日志任务记录列表 {@link GetAttackDownloadRecordsRequest} {@link GetAttackDownloadRecordsResponse} */
   GetAttackDownloadRecords(data?: GetAttackDownloadRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDownloadRecordsResponse>;

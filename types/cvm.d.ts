@@ -2567,6 +2567,18 @@ declare interface ModifyChcAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyChcNetworkModeRequest {
+  /** CHC物理服务器id列表，如[&quot;chc-1a2b3c4d&quot;] */
+  ChcIds: string[];
+  /** 所要切换的网络模式枚举值：DEPLOY： 部署网络模式BUSINESS： 业务网络模式 */
+  NetworkMode: string;
+}
+
+declare interface ModifyChcNetworkModeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDisasterRecoverGroupAttributeRequest {
   /** 分散置放群组ID，可使用DescribeDisasterRecoverGroups接口获取。 */
   DisasterRecoverGroupId: string;
@@ -3286,6 +3298,8 @@ declare interface Cvm {
   InquiryPriceTerminateInstances(data: InquiryPriceTerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceTerminateInstancesResponse>;
   /** 修改CHC物理服务器的属性 {@link ModifyChcAttributeRequest} {@link ModifyChcAttributeResponse} */
   ModifyChcAttribute(data: ModifyChcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChcAttributeResponse>;
+  /** 切换CHC服务器网络模式 {@link ModifyChcNetworkModeRequest} {@link ModifyChcNetworkModeResponse} */
+  ModifyChcNetworkMode(data: ModifyChcNetworkModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChcNetworkModeResponse>;
   /** 修改分散置放群组属性 {@link ModifyDisasterRecoverGroupAttributeRequest} {@link ModifyDisasterRecoverGroupAttributeResponse} */
   ModifyDisasterRecoverGroupAttribute(data: ModifyDisasterRecoverGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisasterRecoverGroupAttributeResponse>;
   /** 修改CDH实例的属性 {@link ModifyHostsAttributeRequest} {@link ModifyHostsAttributeResponse} */

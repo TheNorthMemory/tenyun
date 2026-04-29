@@ -82,6 +82,8 @@ declare interface FileInfo {
   DocumentSummary?: string;
   /** 网页地址 */
   WebUrl?: string;
+  /** 文件能力标识列表 */
+  Capabilities?: string[];
 }
 
 /** 知识库信息 */
@@ -100,6 +102,8 @@ declare interface KnowledgeBase {
   FileNum?: number;
   /** 知识库关联的数据库列表，目前是只绑定一个数据源，数组预留拓展 */
   DatasourceIds?: string[];
+  /** 知识库任务配置 */
+  Config?: KnowledgeTaskConfig;
 }
 
 /** 任务配置 */
@@ -108,7 +112,7 @@ declare interface KnowledgeTaskConfig {
   ChunkType?: number;
   /** /智能切片：最小值 1000，默认 4800 自定义切片：正整数即可,默认值 1000 */
   MaxChunkSize?: number;
-  /** 切片分隔符,自定义切片使用：默认值为：["\n\n", "\n", "。", "！", "？", "，", ""] */
+  /** 切片分隔符,自定义切片使用：默认值为：[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;！&quot;, &quot;？&quot;, &quot;，&quot;, &quot;&quot;] */
   Delimiters?: string[] | null;
   /** 自定义切片使用:默认0 可重叠字符长度 */
   ChunkOverlap?: number;
@@ -120,6 +124,8 @@ declare interface KnowledgeTaskConfig {
   GenDocSummary?: number;
   /** 0：不生成段落摘要，1：生成段落概要。默认0 */
   GenParaSummary?: number;
+  /** 0：不开启图片理解，1：开启图片理解。默认1取值范围：[1, 10000]默认值：1 */
+  EnableImageUnderstanding?: number;
 }
 
 /** 用户对象的权限 */
@@ -198,6 +204,8 @@ declare interface Scene {
   UpdateTime?: string;
   /** 创建者Uin */
   CreatorUin?: string;
+  /** 知识 */
+  Knowledge?: string;
 }
 
 /** 检索配置 */
@@ -521,6 +529,8 @@ declare interface ModifyKnowledgeBaseRequest {
   UseScope?: number;
   /** 可使用用户列表 */
   AuthorityUins?: string[];
+  /** 知识库任务配置 */
+  Config?: KnowledgeTaskConfig;
 }
 
 declare interface ModifyKnowledgeBaseResponse {

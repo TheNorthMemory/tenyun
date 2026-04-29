@@ -10,6 +10,62 @@ declare interface AggregatePublicAlgoVersion {
   PublicAlgoVersions?: PublicAlgoVersion[] | null;
 }
 
+/** 描述标注任务详细信息 */
+declare interface AnnotationTaskInfo {
+  /** 标注任务id */
+  TaskId?: string;
+  /** 标注任务名称 */
+  TaskName?: string;
+  /** 数据集id */
+  DatasetId?: string;
+  /** 数据集名称 */
+  DatasetName?: string;
+  /** 标注场景名称 */
+  SceneName?: string;
+  /** 标注任务的label信息数组 */
+  LabelValueList?: LabelValue[];
+  /** tag详情数组 */
+  CamTagList?: CamTag[];
+  /** 任务状态 */
+  Status?: number;
+  /** 创建任务失败原因说明 */
+  AbnormalMsg?: string;
+  /** 标注任务是否正在提交 */
+  IsSubmitting?: boolean;
+  /** 任务详情描述 */
+  TaskNote?: string;
+  /** 数据集版本 */
+  DataSetVersion?: string;
+  /** 已经标注的图片数量 */
+  NumAnnotated?: number;
+  /** 标注的总图片数量 */
+  NumTotal?: number;
+  /** 创建任务的时间戳 */
+  CreateTime?: number;
+  /** Ocr Tool Type */
+  OcrToolType?: number;
+  /** Ocr Text Attribute Annotate Enable */
+  OcrTextAttributeAnnotateEnable?: boolean;
+  /** 导出格式 */
+  ExportFormat?: string;
+  /** 提交错误说明 */
+  SubmittingErrorMsg?: string;
+  /** ocr任务类型：1-识别。2-智能结构化 */
+  OcrAnnotationContentType?: number | null;
+  /** OCR任务：是否启用辅助标注 */
+  EnableAuxiliaryAnnotation?: boolean | null;
+  /** 数据集创建者UIN */
+  DatasetCreator?: string | null;
+  /** 任务创建者UIN */
+  Creator?: string | null;
+  /** 数据集创建者名称 */
+  DatasetCreatorName?: string;
+  /** 任务创建者名称 */
+  CreatorName?: string;
+  /** 标注任务状态枚举枚举值：CREATING： 创建中CREATE_SUCCESS： 创建成功，可标注CREATE_FAILED： 创建失败SUBMITTING： 提交中SUBMIT_SUCCESS： 提交成功，需重启才可标注SUBMIT_FAILED： 提交失败ABNORMAL： 数据版本异常，需删除重建（大模型场景） */
+  TaskStatus?: string;
+}
+
 /** 镜像属性 */
 declare interface Attribute {
   /** 为‘List’时属性值取Values 否则取Value */
@@ -78,6 +134,14 @@ declare interface CFSTurbo {
   Id?: string | null;
   /** CFSTurbo路径 */
   Path?: string | null;
+}
+
+/** cam详细信息 */
+declare interface CamTag {
+  /** tag键值 */
+  Key: string;
+  /** tag值 */
+  Value: string;
 }
 
 /** 对话结果 */
@@ -728,6 +792,14 @@ declare interface IntranetCallInfo {
   PrivateLinkInfos?: PrivateLinkInfo[] | null;
   /** 基于新网关的私有连接信息 */
   PrivateLinkInfosV2?: PrivateLinkInfo[] | null;
+}
+
+/** 描述label详细信息 */
+declare interface LabelValue {
+  /** 标签名称 */
+  LabelName: string;
+  /** 标签的颜色 */
+  LabelColor: string;
 }
 
 /** 本地磁盘信息 */
@@ -1478,6 +1550,18 @@ declare interface ResourceGroup {
   InstanceSet?: Instance[] | null;
   /** 标签列表 */
   TagSet?: Tag[] | null;
+}
+
+/** 工作空间绑定的资源组信息 */
+declare interface ResourceGroupInWorkspace {
+  /** 资源组ID */
+  ResourceGroupId?: string;
+  /** 资源组名称 */
+  ResourceGroupName?: string;
+  /** 地域 */
+  Region?: string;
+  /** 是否有运行中的任务/服务占用 */
+  Occupied?: boolean;
 }
 
 /** 在线服务中服务的资源组简略信息结构 */
@@ -2294,6 +2378,24 @@ declare interface WorkloadStatus {
   Reason?: string | null;
 }
 
+/** 工作空间 */
+declare interface Workspace {
+  /** 项目ID */
+  TiProjectId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 绑定的资源组信息 */
+  ResourceGroups?: ResourceGroupInWorkspace[];
+  /** 当前用户对此空间拥有的权限 */
+  ActionType?: string[];
+  /** 工作空间状态 */
+  Status?: string;
+}
+
 declare interface ChatCompletionRequest {
   /** 对话的目标模型ID。自行部署的开源大模型聊天：部署的模型服务组ID，形如ms-q7pfr29p。 */
   Model: string;
@@ -2681,6 +2783,8 @@ declare interface CreateTrainingTaskRequest {
   ChargeType: string;
   /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{&quot;Role&quot;:&quot;WORKER&quot;, &quot;InstanceType&quot;: &quot;TI.S.MEDIUM.POST&quot;, &quot;InstanceNum&quot;: 1}] */
   ResourceConfigInfos: ResourceConfigInfo[];
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
   FrameworkName?: string;
   /** 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9 */
@@ -2855,9 +2959,35 @@ declare interface DeleteTrainingModelVersionResponse {
 declare interface DeleteTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DeleteTrainingTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAnnotatedTaskListRequest {
+  /** 偏移量，默认为0 */
+  Offset: number;
+  /** 页面大小，默认为10 */
+  Limit: number;
+  /** 过滤条件数组，支持数据集ID，标注场景、任务状态、数据集名称、人物名称的过滤，后面两个支持模糊查询 */
+  Filters?: Filter[];
+  /** 标签过滤条件 */
+  TagFilters?: TagFilter[];
+  /** 排序方向：Asc Desc */
+  Order?: string;
+  /** 排序字段 */
+  OrderField?: string;
+}
+
+declare interface DescribeAnnotatedTaskListResponse {
+  /** 任务列表总数量 */
+  TotalCount?: number;
+  /** 标注任务详情列表 */
+  TaskList?: AnnotationTaskInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3528,6 +3658,30 @@ declare interface DescribeTrainingTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkspacesRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 偏移量 */
+  Offset?: number;
+  /** 数量 */
+  Limit?: number;
+  /** 排序字段 */
+  OrderField?: string;
+  /** 排序方式 */
+  Order?: string;
+}
+
+declare interface DescribeWorkspacesResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 工作空间列表 */
+  Workspaces?: Workspace[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
@@ -3723,6 +3877,8 @@ declare interface ModifyServiceGroupWeightsResponse {
 }
 
 declare interface PushTrainingMetricsRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 指标数据 */
   Data?: MetricData[];
 }
@@ -3745,6 +3901,8 @@ declare interface StartNotebookResponse {
 declare interface StartTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface StartTrainingTaskResponse {
@@ -3779,6 +3937,8 @@ declare interface StopNotebookResponse {
 declare interface StopTrainingTaskRequest {
   /** 训练任务ID */
   Id: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface StopTrainingTaskResponse {
@@ -4587,6 +4747,8 @@ declare interface Tione {
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
   /** 删除训练任务 {@link DeleteTrainingTaskRequest} {@link DeleteTrainingTaskResponse} */
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
+  /** 查询标注任务列表 {@link DescribeAnnotatedTaskListRequest} {@link DescribeAnnotatedTaskListResponse} */
+  DescribeAnnotatedTaskList(data: DescribeAnnotatedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnnotatedTaskListResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
   /** 查询资源组绑定的工作空间列表 {@link DescribeBillingResourceGroupAttachedWorkspacesRequest} {@link DescribeBillingResourceGroupAttachedWorkspacesResponse} */
@@ -4655,6 +4817,8 @@ declare interface Tione {
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** 模型训练任务列表 {@link DescribeTrainingTasksRequest} {@link DescribeTrainingTasksResponse} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
+  /** 查询工作空间列表 {@link DescribeWorkspacesRequest} {@link DescribeWorkspacesResponse} */
+  DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 更新模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
   /** 在线服务修改 AuthToken {@link ModifyModelServiceAuthTokenRequest} {@link ModifyModelServiceAuthTokenResponse} */

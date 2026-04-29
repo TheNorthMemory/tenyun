@@ -98,6 +98,8 @@ declare interface AssociatedInstanceInfo {
   SecurityGroupRuleCount?: number;
   /** 关联数据库代理Id */
   CdbId?: string;
+  /** 容器服务集群ID */
+  TkeClusterId?: string;
 }
 
 /** 关联实例信息 */

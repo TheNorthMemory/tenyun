@@ -1776,12 +1776,14 @@ declare interface LibraDBClusterDetail {
   RenewFlag?: number;
   /** 版本标签 */
   CynosVersionTag?: string;
-  /** 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro */
+  /** 不支持添加ro yes-不支持添加ro， no/null/&quot;&quot; 支持添加ro */
   NoSupportAddRo?: string;
   /** 可用区 */
   Zone?: string;
   /** 物理可用区 */
   PhysicalZone?: string;
+  /** 版本升级灰度信息 */
+  AnalysisUpgradeVersionInfo?: UpgradeAnalysisInstanceVersionInfo | null;
 }
 
 /** 集群列表信息 */
@@ -3242,6 +3244,18 @@ declare interface TradePrice {
   UnitPriceDiscountHighPrecision?: string;
   /** 货币单位 */
   AmountUnit?: string;
+}
+
+/** 分析实例版本升级，升级之后用于灰度的连接信息 */
+declare interface UpgradeAnalysisInstanceVersionInfo {
+  /** ip */
+  Vip?: string;
+  /** 端口 */
+  Vport?: number;
+  /** 版本 */
+  EngineVersion?: string;
+  /** 到期时间 */
+  ExpiredTime?: number;
 }
 
 /** 添加实例或者变配实例时同步升级proxy. */
@@ -5502,6 +5516,8 @@ declare interface DescribeLibraDBInstanceDetailResponse {
   NodeInfo?: LibraDBNodeInfo[];
   /** 实例节点个数 */
   NodeCount?: number;
+  /** 分析实例升级版本之后信息 */
+  AnalysisUpgradeVersionInfo?: UpgradeAnalysisInstanceVersionInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

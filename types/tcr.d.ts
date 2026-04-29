@@ -298,6 +298,10 @@ declare interface Registry {
   DeletionProtection?: boolean;
   /** 是否支持AI特性 */
   AIFeature?: boolean | null;
+  /** cos桶是否开启多AZ特性 */
+  EnableCosMAZ?: boolean;
+  /** cos桶是否开启版本控制 */
+  EnableCosVersioning?: boolean;
 }
 
 /** 实例预付费模式 */
@@ -1059,6 +1063,8 @@ declare interface CreateInstanceRequest {
   EnableCosMAZ?: boolean;
   /** 是否开启实例删除保护 */
   DeletionProtection?: boolean;
+  /** 是否开启cos桶多版本控制 */
+  EnableCosVersioning?: boolean;
 }
 
 declare interface CreateInstanceResponse {

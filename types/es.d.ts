@@ -1879,7 +1879,7 @@ declare namespace V20180416 {
     SpaceId?: string;
     /** Serverless索引空间名 */
     SpaceName?: string;
-    /** Serverless索引空间状态，0正常，-1已删除 */
+    /** Serverless索引空间状态枚举值：0： 创建中1： 正常2： 流程中-3： 已删除-4： 隔离中 */
     Status?: number;
     /** 创建日期 */
     CreateTime?: string;

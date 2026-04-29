@@ -928,7 +928,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   tcb: Tcb,
   /** {@link Tcbr 云托管 CloudBase Run} */
   tcbr: Tcbr,
-  /** {@link Tccatalog 统一Catalog服务} */
+  /** {@link Tccatalog 多模态智能数据湖 TCLake} */
   tccatalog: Tccatalog,
   /** {@link Tchd 腾讯云健康看板} */
   tchd: Tchd,

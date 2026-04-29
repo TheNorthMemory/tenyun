@@ -2278,6 +2278,18 @@ declare interface GetGroupResponse {
   RequestId?: string;
 }
 
+declare interface GetIPWhitelistRequest {
+  /** 空间ID */
+  ZoneId?: string;
+}
+
+declare interface GetIPWhitelistResponse {
+  /** ip白名单 */
+  IpWhitelist?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetProvisioningTaskStatusRequest {
   /** 空间ID。 */
   ZoneId: string;
@@ -3821,6 +3833,8 @@ declare interface Organization {
   GetExternalSAMLIdentityProvider(data: GetExternalSAMLIdentityProviderRequest, config?: AxiosRequestConfig): AxiosPromise<GetExternalSAMLIdentityProviderResponse>;
   /** 查询用户组信息 {@link GetGroupRequest} {@link GetGroupResponse} */
   GetGroup(data: GetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupResponse>;
+  /** 获取ip白名单 {@link GetIPWhitelistRequest} {@link GetIPWhitelistResponse} */
+  GetIPWhitelist(data?: GetIPWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<GetIPWhitelistResponse>;
   /** 查询用户同步异步任务的状态 {@link GetProvisioningTaskStatusRequest} {@link GetProvisioningTaskStatusResponse} */
   GetProvisioningTaskStatus(data: GetProvisioningTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvisioningTaskStatusResponse>;
   /** 查询权限配置信息 {@link GetRoleConfigurationRequest} {@link GetRoleConfigurationResponse} */

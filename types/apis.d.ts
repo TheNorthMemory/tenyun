@@ -408,6 +408,16 @@ declare interface DescribeModelServiceResponseVO {
   SensitiveDataCheckStatus?: boolean | null;
   /** 敏感数据检测配置 */
   SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO | null;
+  /** 负载方式枚举值：random： 随机consistentHash： 会话保持 */
+  TargetSelect?: string | null;
+  /** 会话判断方式枚举值：fromClientIP： 从客户端IP判断fromHeader： 从请求header判断autoDetect： 自动探测 */
+  FindHostKeyMethod?: string | null;
+  /** 会话判断header名称 */
+  HostKeyHeaderName?: string | null;
+  /** 是否开启备份模型 */
+  FallbackStatus?: boolean | null;
+  /** 备份模型 */
+  FallbackModels?: TargetModelDTO[] | null;
 }
 
 /** 查询模型列表的响应 */
@@ -899,6 +909,16 @@ declare interface CreateModelServiceRequest {
   SensitiveDataCheckStatus?: boolean;
   /** 敏感数据检测配置 */
   SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO;
+  /** 负载方式枚举值：random： 随机consistentHash： 会话保持 */
+  TargetSelect?: string;
+  /** 会话判断方式枚举值：fromClientIP： 客户端IPfromHeader： 通过header值autoDetect： 自动探测 */
+  FindHostKeyMethod?: string;
+  /** 会话判定方式为fromHeader时会话的header名称 */
+  HostKeyHeaderName?: string;
+  /** 是否启用Fallback模型 */
+  FallbackStatus?: boolean;
+  /** Fallback模型配置 */
+  FallbackModels?: TargetModelDTO[];
 }
 
 declare interface CreateModelServiceResponse {
@@ -1399,6 +1419,16 @@ declare interface ModifyModelServiceRequest {
   SensitiveDataCheckStatus?: boolean;
   /** 敏感数据检测配置 */
   SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO;
+  /** 负载方式枚举值：random： 随机consistentHash： 会话保持 */
+  TargetSelect?: string;
+  /** 会话判断方式枚举值：fromClientIP： 从客户端IP判断fromHeader： 从请求header判断autoDetect： 自动探测 */
+  FindHostKeyMethod?: string;
+  /** 会话判断header名称 */
+  HostKeyHeaderName?: string;
+  /** 是否开启备份模型 */
+  FallbackStatus?: boolean;
+  /** 备份模型 */
+  FallbackModels?: TargetModelDTO[];
 }
 
 declare interface ModifyModelServiceResponse {

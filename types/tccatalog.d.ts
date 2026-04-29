@@ -142,7 +142,7 @@ declare interface DescribeTccCatalogsResponse {
   RequestId?: string;
 }
 
-/** {@link Tccatalog 统一Catalog服务} */
+/** {@link Tccatalog 多模态智能数据湖 TCLake} */
 declare interface Tccatalog {
   (): Versions;
   /** 接受终端节点连接 {@link AcceptTccVpcEndPointConnectRequest} {@link AcceptTccVpcEndPointConnectResponse} */

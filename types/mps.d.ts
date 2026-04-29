@@ -5904,7 +5904,7 @@ declare interface SSAIConf {
   MultiRequest?: boolean;
   /** dash周期类型：SinglePeriod 或 MultiPeriod，默认 MultiPeriod */
   DashOriginManifestType?: string;
-  /** Empty VAST时是否播放Slate，默认开启(true) */
+  /** 广告为空时是否插入Slate，默认开启(true) */
   SlateOnEmptyVast?: boolean;
   /** SCTE marker duration，默认180，范围0-3600 */
   SCTEMarkerDuration?: number;

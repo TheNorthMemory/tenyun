@@ -1265,8 +1265,6 @@ declare interface CreateDatabaseResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 实例所属主可用区， 如：ap-guangzhou-3；若需要支持多可用区，在DBNodeSet.N字段中进行添加主可用区和备可用区信息；可用区信息可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。 */
-  Zone: string;
   /** 售卖规格码。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。 */
   SpecCode: string;
   /** 实例磁盘容量大小，单位：GB。该参数的设置步长为10。 */
@@ -1281,6 +1279,8 @@ declare interface CreateInstancesRequest {
   AdminName: string;
   /** 实例根账号用户名对应的密码，长度8 ~ 32位，推荐使用12位以上的密码;不能以&quot; / &quot;开头;必须包含以下四项，字符种类:小写字母： [a ~ z]大写字母：[A ～ Z]数字：0 - 9特殊字符：()`~!@#$%^&amp;*-+=_|{}[]:;'&lt;&gt;,.?/ */
   AdminPassword: string;
+  /** 实例所属主可用区， 如：ap-guangzhou-3；若需要支持多可用区，在DBNodeSet.N字段中进行添加主可用区和备可用区信息；可用区信息可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。 */
+  Zone: string;
   /** PostgreSQL大版本号（该参数当前必传），版本信息可从DescribeDBVersions获取。目前支持10，11，12，13，14，15这几个大版本，详情见内核版本概述。输入该参数时，会基于此大版本号创建对应的最新小版本的最新内核版本号实例。 */
   DBMajorVersion?: string;
   /** PostgreSQL社区大版本+小版本号。一般场景不推荐传入该参数。如需指定，只能传当前大版本号下最新小版本号。 */
@@ -2439,7 +2439,7 @@ declare interface DestroyDBInstanceResponse {
 }
 
 declare interface DisIsolateDBInstancesRequest {
-  /** 实例ID列表。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。支持同时解隔离多个实例。 */
+  /** 实例ID列表。可通过DescribeDBInstances接口获取。支持同时解隔离多个实例。 */
   DBInstanceIdSet: string[];
   /** 购买时长，单位：月。预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36后付费：该参数不生效 */
   Period?: number;
@@ -2531,7 +2531,7 @@ declare interface InquiryPriceUpgradeDBInstanceResponse {
 }
 
 declare interface IsolateDBInstancesRequest {
-  /** 实例ID集合。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。注意：不推荐同时隔离多个实例。建议每次操作仅传入单个实例ID。 */
+  /** 实例ID集合。可通过DescribeDBInstances接口获取。注意：不推荐同时隔离多个实例。建议每次操作仅传入单个实例ID。 */
   DBInstanceIdSet: string[];
 }
 
