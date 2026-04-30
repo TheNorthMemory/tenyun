@@ -330,6 +330,18 @@ declare interface Coord {
   Y?: number;
 }
 
+/** 坐标数组 */
+declare interface CoordList {
+  /** 左上角坐标。 */
+  TopLeft?: Coord;
+  /** 右上角坐标。 */
+  TopRight?: Coord;
+  /** 左下角坐标。 */
+  BottomLeft?: Coord;
+  /** 右下角坐标。 */
+  BottomRight?: Coord;
+}
+
 /** 海关进/出口货物报关单 */
 declare interface CustomsDeclaration {
   /** 发票名称 */
@@ -680,6 +692,22 @@ declare interface EnterpriseLicenseInfo {
   Name?: string;
   /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
   Value?: string;
+}
+
+/** 用于展示抽取出的信息 */
+declare interface FieldsInfo {
+  /** 用户自定义的提取字段名。 */
+  KeyName?: string;
+  /** 用户自定义的提取字段名的提示词。 */
+  KeyPrompt?: string;
+  /** 出参字段对应的值。 */
+  KeyValue?: string;
+  /** 出参类型。注：与入参对应同个值。 */
+  KeyType?: number;
+  /** 文本行坐标，以四个顶点坐标表示。注：仅当入参EnableCoord不为null时生效，默认是false。 */
+  Polygon?: CoordList;
+  /** 嵌套FieldsInfo结构，仅当KeyType=1时有效。 */
+  SubItems?: SubItemGroup[];
 }
 
 /** 金融票据整单识别单个字段的内容 */
@@ -1122,6 +1150,18 @@ declare interface LicensePlateInfo {
 declare interface LineInfo {
   /** 每行的一个元素 */
   Lines?: ItemInfo[];
+}
+
+/** 用于展示结构化提取出的结果与输入给模型的提示词和模型的输出 */
+declare interface ListInfo {
+  /** 推理任务的完整提示词。注：仅当QueryType=1/2/3时有效，否则返回为null。 */
+  QueryInfo?: string;
+  /** 根据QueryType对应任务的返回内容。注：仅当QueryType=1/2/3时有效，其他情况为null。 */
+  Answer?: string;
+  /** 结构化提取结果。注：仅当QueryType=4时有效，否则返回null。 */
+  ExtractFields?: FieldsInfo[];
+  /** 检测到的文本信息，包括内容、坐标以及旋转纠正后的坐标等，具体内容请参见 TextDetection。注：仅当QueryType=0时TextDetections不为空，否则返回null。 */
+  TextDetections?: TextDetection[];
 }
 
 /** 通用机打发票 */
@@ -1864,6 +1904,28 @@ declare interface SaleInventory {
   Content?: OtherInvoiceItem[];
 }
 
+/** 用于风险提示和表示不同场景下的风险程度 */
+declare interface SceneWarnInfo {
+  /** 是否存在该提示 */
+  IsWarn?: boolean;
+  /** 风险程度（0-1） */
+  RiskConfidence?: number;
+  /** 提示位置四点坐标，仅部分提示类型支持返回提示位置坐标 */
+  Polygon?: Polygon[];
+}
+
+/** 描述用户提供的出参结构的模板 */
+declare interface SchemaList {
+  /** 自定义需提取的字段名称。注：若需提取多个字段，可定义多个KeyName。 */
+  KeyName?: string;
+  /** 字段类型。枚举值：0： 表示KeyName为简单字段（如姓名、性别等）。1： 表示KeyName为数组对象（如工作经历、教育经历列表）。 */
+  KeyType?: number;
+  /** 补充提取字段的描述。 */
+  KeyPrompt?: string;
+  /** 嵌套SchemaList结构，最多支持嵌套三层。注：仅当KeyType=1时生效。 */
+  SubItems?: SchemaList[];
+}
+
 /** 印章信息 */
 declare interface SealInfo {
   /** 印章主体内容 */
@@ -2038,6 +2100,12 @@ declare interface StructuralItem {
   ItemCoord?: ItemCoord;
   /** 字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。 */
   Row?: number;
+}
+
+/** 用于分层展示抽取出的信息 */
+declare interface SubItemGroup {
+  /** 子结构嵌套FieldsInfo结构 */
+  Groups?: FieldsInfo[];
 }
 
 /** 单元格数据 */
@@ -4640,6 +4708,34 @@ declare interface QuotaInvoiceOCRResponse {
   RequestId?: string;
 }
 
+declare interface RecognizeAgentRequest {
+  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  ImageUrl?: string;
+  /** 图片/PDF的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  ImageBase64?: string;
+  /** 需识别的PDF页码。仅支持PDF单页识别，当上传文件为PDF时有效。默认值：1 */
+  PdfPageNumber?: number;
+  /** 模型选择。枚举值：0： 推理模型。1： 识别、推理模型。默认值：0 */
+  SelectModel?: number;
+  /** 任务类型。枚举值：0： 全文识别。识别且输出全文内容。1： 判断。判断输入图的内容是否为Query中的内容，返回结果为是或否。如Query:&quot;增值税发票&quot;，该任务类型下，将判断输入图是否为增值税发票，返回&quot;是&quot;或&quot;否&quot;。2： 分类。判断输入图属于Query中具体哪个分类项。如Query:[&quot;营业执照&quot;,&quot;合同&quot;,&quot;票据&quot;]，在该任务类型下，将判断输入图是否属于&quot;营业执照&quot;、&quot;合同&quot;、&quot;票据&quot;，返回&quot;营业执照&quot;/&quot;合同&quot;/&quot;票据&quot;或&quot;均不符合&quot;。3： 总结提炼。总结输入图与Query相关的内容。如Query:&quot;工作经历&quot;，在该任务类型下，将输出输入图中和&quot;工作经历&quot;相关的内容，或&quot;无相关内容&quot;。4： 信息提取。按照自定义字段提取Key-Value，且支持多层级提取，详见入参SchemaItems说明。入参可参考下面的接口示例QueryType=4场景默认值：0 */
+  QueryType?: number;
+  /** 自定义提取字段的结构，详见SchemaList结构。仅当QueryType=4时生效。注：.N表示数组型参数。 */
+  SchemaItems?: SchemaList[];
+  /** 推理任务的提示词。与QueryType搭配使用，具体说明见QueryType描述。1）仅当QueryType=1/2/3时生效，且QueryType=1/3时，长度必须为1；2）QueryType=2，Query长度必须符合2≤x≤5。注：.N表示数组型参数。 */
+  Query?: string[];
+  /** 是否需要返回坐标。默认值：false注：仅对QueryType=4时生效，且坐标位置为 Response.ExtractFields.Polygon。 */
+  EnableCoord?: boolean;
+}
+
+declare interface RecognizeAgentResponse {
+  /** 返回内容。详见ListInfo。 */
+  Response?: ListInfo[];
+  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
+  Angle?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RecognizeContainerOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5702,6 +5798,32 @@ declare interface VerifyOfdVatInvoiceOCRResponse {
   RequestId?: string;
 }
 
+declare interface VerifyScenePhotoRequest {
+  /** 场景类型参数，如果场景无法细分请选用该大类的第一个子类，目前支持以下类型：经营场所照0101 门头照0102 店内照0103 流动经营照 */
+  Scene: string;
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M。 */
+  ImageBase64?: string;
+}
+
+declare interface VerifyScenePhotoResponse {
+  /** 区域篡改提示 */
+  Tamper?: SceneWarnInfo;
+  /** AIGC合成提示 */
+  Synthesis?: SceneWarnInfo;
+  /** 屏幕翻拍提示 */
+  RemakeScreen?: SceneWarnInfo;
+  /** 截图提示 */
+  Screenshot?: SceneWarnInfo;
+  /** 文字水印提示 */
+  TextWatermark?: SceneWarnInfo;
+  /** 水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。 */
+  WatermarkContent?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VinOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5847,6 +5969,8 @@ declare interface Ocr {
   QuestionSplitOCR(data?: QuestionSplitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionSplitOCRResponse>;
   /** 定额发票识别 {@link QuotaInvoiceOCRRequest} {@link QuotaInvoiceOCRResponse} */
   QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
+  /** 通用文字识别Agent {@link RecognizeAgentRequest} {@link RecognizeAgentResponse} */
+  RecognizeAgent(data?: RecognizeAgentRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAgentResponse>;
   /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
   RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
   /** 身份证识别（安全加密版） {@link RecognizeEncryptedIDCardOCRRequest} {@link RecognizeEncryptedIDCardOCRResponse} */
@@ -5917,6 +6041,8 @@ declare interface Ocr {
   VerifyBizLicenseEnterprise4(data: VerifyBizLicenseEnterprise4Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise4Response>;
   /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
+  /** 场景鉴伪（大模型版） {@link VerifyScenePhotoRequest} {@link VerifyScenePhotoResponse} */
+  VerifyScenePhoto(data: VerifyScenePhotoRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyScenePhotoResponse>;
   /** 车辆VIN码识别 {@link VinOCRRequest} {@link VinOCRResponse} */
   VinOCR(data?: VinOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VinOCRResponse>;
   /** 运单识别 {@link WaybillOCRRequest} {@link WaybillOCRResponse} */

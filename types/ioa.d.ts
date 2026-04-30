@@ -104,6 +104,12 @@ declare interface Condition {
   RulePayloadMode?: number | null;
 }
 
+/** 创建业务资源响应的数据 */
+declare interface CreateBusinessResourceData {
+  /** 创建成功的业务资源数据id */
+  ServiceId?: number | null;
+}
+
 /** 文件鉴定任务分页数据 */
 declare interface CreateDLPFileDetectTaskData {
   /** 任务请求唯一Id */
@@ -182,6 +188,42 @@ declare interface DescribeAccountGroupsPageResp {
   Page?: Paging;
 }
 
+/** 数据集 */
+declare interface DescribeAccountResourcesData {
+  /** 资源对象 */
+  Items?: DescribeAccountResourcesItems[] | null;
+}
+
+/** 资源对象 */
+declare interface DescribeAccountResourcesItems {
+  /** 资源组id(只支持32位) */
+  AreaId?: number | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 资源类型(只支持32位) */
+  ResourceType?: number | null;
+  /** 资源id(只支持32位) */
+  ResourceId?: number | null;
+  /** 一般同id字段相同(只支持32位) */
+  FromSourceId?: number | null;
+  /** 是否继承过来的资源 */
+  IsInherited?: boolean | null;
+  /** 资源过期时间(只支持32位) */
+  ExpireTime?: number | null;
+  /** 账户组的namepath */
+  NamePath?: string | null;
+  /** 访问类型:0-NGN 1-web(只支持32位) */
+  AccessType?: number | null;
+  /** 资源名称 */
+  ResourceName?: string | null;
+  /** 继承开关状态(只支持32位) */
+  IsInheritedSwitch?: number | null;
+  /** 关系id(只支持32位) */
+  Id?: number | null;
+  /** 资源名称 */
+  AreaName?: string | null;
+}
+
 /** 业务响应数据 */
 declare interface DescribeAggrSoftCategorySoftListData {
   /** 分页公共对象 */
@@ -232,6 +274,102 @@ declare interface DescribeAggrSoftDeviceListData {
   Total?: number | null;
   /** 详情 */
   AggrSoftDeviceList?: AggrSoftDeviceRow[] | null;
+}
+
+/** 业务资源列表数据对象集合 */
+declare interface DescribeBusinessResourceData {
+  /** 业务资源id(只支持32位) */
+  ServiceId?: number | null;
+  /** 业务资源名称 */
+  ServiceName?: string | null;
+  /** 资源类型:ip,domain,ip_section，对应ip，域名，ip段 */
+  ServiceType?: string | null;
+  /** 业务资源地址 */
+  ServiceAddress?: string | null;
+  /** 业务资源端口 all,1-65535 */
+  ServicePort?: string | null;
+  /** 业务资源创建时间 */
+  CreateTime?: string | null;
+  /** 业务资源最后修改时间 */
+  UpdateTime?: string | null;
+  /** 说明字段 */
+  Remark?: string | null;
+  /** 资源模块ID(只支持32位) */
+  AreaId?: number | null;
+  /** 零信任网关id(只支持32位) */
+  SmartGateIds?: number[] | null;
+  /** 业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位) */
+  Protocol?: number | null;
+  /** 业务资源等级(只支持32位) */
+  Levels?: number | null;
+  /** 零信任网关名称 */
+  SmartGateNames?: string | null;
+  /** 网关连通性(只支持32位) */
+  DirectConn?: number | null;
+  /** 网关连通性状态(只支持32位) */
+  DetectState?: number | null;
+  /** 网关连通性信息 */
+  DetectInfo?: string | null;
+  /** 网关连通性创建时间 */
+  DetectTime?: string | null;
+  /** 绑定的连接器组Id */
+  ConnectorGroupId?: string | null;
+  /** 绑定的连接器组的名称 */
+  ConnectorGroupName?: string | null;
+  /** 资源连通性可达最后的检测时间 */
+  ReachableTime?: string | null;
+  /** 资源连通性可达状态,0：未检测，1：未连通，2：已连通 */
+  ReachableState?: number | null;
+  /** 访问类型:0-NGN 1-web(只支持32位) */
+  AccessType?: number | null;
+  /** web资源-后端协议 */
+  BackendScheme?: string | null;
+  /** web资源-后端路径 */
+  BackendPath?: string | null;
+  /** web资源-前端协议 */
+  FrontScheme?: string | null;
+  /** web资源-前端host */
+  FrontHost?: string | null;
+  /** web资源-前端host(只支持32位) */
+  FrontPort?: number | null;
+  /** web资源-前端路径 默认&quot;/&quot; */
+  FrontPath?: string | null;
+  /** web资源-是否禁用外网访问：0-可通过外网访问 1-不能通过外网访问(只支持32位) */
+  DisableFront?: number | null;
+  /** web资源-租户自定义域名 */
+  CustomDomain?: string | null;
+  /** web资源-自定义host */
+  CustomHost?: string | null;
+  /** web资源-Cname状态(只支持32位) */
+  CnameStatus?: number | null;
+  /** web资源-关联证书ID(只支持32位) */
+  CertificateId?: number | null;
+  /** web资源类型：0-应用 1-API(只支持32位) */
+  WebGwResourceType?: number | null;
+  /** web资源-如果选择API类型资源，则需要配置密钥(只支持32位) */
+  APISecretId?: number | null;
+  /** 所属资源组名称 */
+  AreaName?: string | null;
+  /** web资源-前端协议是HTTPS类型，需要配置证书 */
+  SSLCertId?: string | null;
+  /** web资源-是否启用依赖地址：0-不启用 1-启用(只支持32位) */
+  EnableDependentAddr?: number | null;
+  /** web资源-依赖地址的后端服务器地址 */
+  DependentAddr?: string | null;
+  /** web免鉴权：1-鉴权 2-免鉴权 */
+  WebGwNoAuth?: number;
+  /** 通道类型枚举值：vpc： vpc类型native： 专线类型默认值：native */
+  ConnectorGroupType?: string;
+  /** 域名后缀 */
+  DomainSuffix?: string;
+}
+
+/** 业务资源分页返回对象 */
+declare interface DescribeBusinessResourcePageRsp {
+  /** 业务资源列表数据对象集合 */
+  Items?: DescribeBusinessResourceData[] | null;
+  /** 分页公共对象 */
+  Page?: Paging | null;
 }
 
 /** 业务响应数据 */
@@ -496,6 +634,26 @@ declare interface DescribeLocalAccountsPage {
   Page?: Paging;
   /** 获取账号列表响应的单个对象 */
   Items?: DescribeLocalAccountsData[];
+}
+
+/** DescribeResourceGrantedAccountsData */
+declare interface DescribeResourceGrantedAccountGroupsData {
+  /**  */
+  Items?: GrantedAccountGroupItem[];
+}
+
+/** DescribeResourceGrantedAccountsData */
+declare interface DescribeResourceGrantedAccountsData {
+  /** 总数 */
+  TotalCount?: number;
+  /**  */
+  Items?: GrantedAccountItem[];
+}
+
+/** DescribeResourceGrantedAccountsData */
+declare interface DescribeResourceGrantedVirtualGroupsData {
+  /**  */
+  Items?: GrantedVirtualGroupItem[];
 }
 
 /** 软件统计响应对象集合 */
@@ -838,6 +996,106 @@ declare interface GetAccountGroupData {
   MiniIamId?: string;
 }
 
+/** 授权操作 */
+declare interface GrantResourceOperationByAccountGroups {
+  /** 操作类型: 1-增加授权 2-删除授权; */
+  OperationType: number;
+  /** 资源或资源组Id */
+  ResourceId: number;
+  /** 资源类型 ,1:资源 2:资源组 */
+  ResourceType: number;
+  /** 过期时间,时间戳(秒) */
+  ExpireTime: number;
+  /** 分组id */
+  AccountGroupId: number;
+}
+
+/** 授权操作 */
+declare interface GrantResourceOperationByAccounts {
+  /** 操作类型: 1-增加授权 2-删除授权; */
+  OperationType: number;
+  /** 资源或资源组Id */
+  ResourceId: number;
+  /** 资源类型 ,1:资源 2:资源组 */
+  ResourceType: number;
+  /** 过期时间,时间戳(秒) */
+  ExpireTime: number;
+  /** 账号userid */
+  AccountUserId: string;
+  /** 账号目录ID */
+  MenuId: number;
+}
+
+/** 授权操作 */
+declare interface GrantResourceOperationByVirtualGroups {
+  /** 操作类型: 1-增加授权 2-删除授权; */
+  OperationType: number;
+  /** 资源或资源组Id */
+  ResourceId: number;
+  /** 资源类型 ,1:资源 2:资源组 */
+  ResourceType: number;
+  /** 过期时间,时间戳(秒) */
+  ExpireTime: number;
+  /** 分组id */
+  VirtualAccountGroupId: number;
+}
+
+/** GrantedAccountItem */
+declare interface GrantedAccountGroupItem {
+  /** 账户组Id */
+  AccountGroupId?: number;
+  /** 分组名称 */
+  Name?: string;
+  /** 所属分组Id */
+  IdPathArray?: number[];
+  /** 所属分组NamePathArray */
+  NamePathArray?: string[];
+  /** 目录id */
+  AccountCount?: number;
+  /** 过期时间 */
+  ExpireTime?: number;
+  /** 关联id */
+  RelationId?: number;
+}
+
+/** GrantedAccountItem */
+declare interface GrantedAccountItem {
+  /** 账户Id */
+  AccountId?: number;
+  /** 用户UserId */
+  UserId?: string;
+  /** 用户名称 */
+  UserName?: string;
+  /** 所属分组Id */
+  GroupId?: number;
+  /** 分组路劲GroupIdPathArray */
+  GroupIdPathArray?: number[];
+  /** 所属分组NamePathArray */
+  GroupNamePathArray?: string[];
+  /** 目录id */
+  MenuId?: number;
+  /** 过期时间 */
+  ExpireTime?: number;
+  /** 关联id */
+  RelationId?: number;
+}
+
+/** GrantedAccountItem */
+declare interface GrantedVirtualGroupItem {
+  /** 账户组Id */
+  VirtualGroupId?: number;
+  /** 分组名称 */
+  Name?: string;
+  /** 描述信息 */
+  Description?: string;
+  /** 目录id */
+  AccountCount?: number;
+  /** 过期时间 */
+  ExpireTime?: number;
+  /** 关联id */
+  RelationId?: number;
+}
+
 /** 操作的设备列表 */
 declare interface ModifyVirtualDeviceGroupsReqItem {
   /** 设备mid */
@@ -948,6 +1206,32 @@ declare interface Sort {
   Field?: string;
   /** 排序方式 */
   Order?: string;
+}
+
+declare interface CreateBusinessResourceRequest {
+  /** 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位) */
+  AreaId: number;
+  /** 业务资源协议类型, 1:UDP, 2:TCP, 3:所有协议(只支持32位) */
+  Protocol: number;
+  /** 业务资源名称，同一个资源模块下面不可重复 */
+  ServiceName: string;
+  /** 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段 */
+  ServiceType: string;
+  /** 业务资源端口 all,1-65535 */
+  ServicePort: string;
+  /** 业务资源优先级 1-65535(只支持32位) */
+  Levels: number;
+  /** 业务资源地址(ip、域名、ip段) */
+  ServiceAddress: string;
+  /** 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位) */
+  DirectConn?: number;
+}
+
+declare interface CreateBusinessResourceResponse {
+  /** 创建业务资源响应的数据 */
+  Data?: CreateBusinessResourceData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateDLPFileDetectTaskRequest {
@@ -1106,6 +1390,32 @@ declare interface DescribeAggrSoftDeviceListRequest {
 declare interface DescribeAggrSoftDeviceListResponse {
   /** 已安装终端列表 */
   Data?: DescribeAggrSoftDeviceListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBusinessResourcesRequest {
+  /** 资源模块Id */
+  AreaId?: number;
+  /** 搜索的业务资源名称 */
+  ServiceName?: string;
+  /** 获取业务资源列表的开始时间，时间格式：2006-01-02 */
+  StartTime?: string;
+  /** 搜索关键字 */
+  Keywords?: string;
+  /** 获取业务资源列表的结束时间，时间格式：2006-01-02 */
+  EndTime?: string;
+  /** 滤条件、分页参数。分页内容不传，默认获取第1页，10条数据排序条件CreateTime - string - 是否必填：否 - 排序支持：是 - 按业务资源创建时间排序。Levels - int - 是否必填：否 - 排序支持：是 - 按业务资源优先级排序。ReachableState - int - 是否必填：否 - 排序支持：是 - 按业务资源连通性排序(私有化版本不支持)。 */
+  Condition?: Condition;
+  /** 资源类型 */
+  AccessType?: string;
+  /** web资源前端地址 */
+  FrontAddr?: string;
+}
+
+declare interface DescribeBusinessResourcesResponse {
+  /** 业务资源分页返回对象 */
+  Data: DescribeBusinessResourcePageRsp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1284,6 +1594,18 @@ declare interface DescribeDevicesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDirectAccountGroupResourcesRequest {
+  /** 账户组Id(只支持32位) */
+  AccountGroupId: number;
+}
+
+declare interface DescribeDirectAccountGroupResourcesResponse {
+  /** 查询的数据集合 */
+  Data?: DescribeAccountResourcesData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLocalAccountsRequest {
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -1298,6 +1620,44 @@ declare interface DescribeLocalAccountsRequest {
 declare interface DescribeLocalAccountsResponse {
   /** 获取账号列表响应的分页对象 */
   Data?: DescribeLocalAccountsPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGrantedAccountGroupsRequest {
+  /** 资源或资源组Id; */
+  ResourceId: number;
+}
+
+declare interface DescribeResourceGrantedAccountGroupsResponse {
+  /** 查询的数据集合 */
+  Data?: DescribeResourceGrantedAccountGroupsData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGrantedAccountsRequest {
+  /** 账户组Id(只支持32位) */
+  ResourceId?: number;
+}
+
+declare interface DescribeResourceGrantedAccountsResponse {
+  /** 查询的数据集合 */
+  Data?: DescribeResourceGrantedAccountsData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGrantedVirtualGroupsRequest {
+  /** 资源ID */
+  ResourceId?: number;
+  /** 资源类型 */
+  ResourceType?: number;
+}
+
+declare interface DescribeResourceGrantedVirtualGroupsResponse {
+  /** 查询的数据集合 */
+  Data?: DescribeResourceGrantedVirtualGroupsData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1406,6 +1766,54 @@ declare interface ExportSoftwareInformationListResponse {
   RequestId?: string;
 }
 
+declare interface GrantResourcesByAccountGroupsRequest {
+  /**  */
+  Operations: GrantResourceOperationByAccountGroups[];
+}
+
+declare interface GrantResourcesByAccountGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GrantResourcesByAccountsRequest {
+  /**  */
+  Operations: GrantResourceOperationByAccounts[];
+}
+
+declare interface GrantResourcesByAccountsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GrantResourcesByVirtualGroupsRequest {
+  /**  */
+  Operations: GrantResourceOperationByVirtualGroups[];
+}
+
+declare interface GrantResourcesByVirtualGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDeviceTrustStatusRequest {
+  /** 设备状态，1表示拉黑，0表示加白 */
+  Status: number;
+  /** 设备MID列表 */
+  DeviceIDList?: string[];
+  /** 设备拉黑有效期，UnixTime, 单位是 ms,0表示永久有效，默认值是0 */
+  BlackStatusDeadline?: number;
+  /** DescribeAccuserList返回的Id 列表 */
+  IdList?: number[];
+  /** 默认值：0，根据id更新，1根据DeviceIDList */
+  UpdateFlags?: number;
+}
+
+declare interface ModifyDeviceTrustStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVirtualDeviceGroupsRequest {
   /** 必填，操作的设备列表数据 */
   DeviceList: ModifyVirtualDeviceGroupsReqItem[];
@@ -1427,6 +1835,8 @@ declare interface ModifyVirtualDeviceGroupsResponse {
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
+  /** 创建业务资源 {@link CreateBusinessResourceRequest} {@link CreateBusinessResourceResponse} */
+  CreateBusinessResource(data: CreateBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessResourceResponse>;
   /** 创建文件鉴定任务 {@link CreateDLPFileDetectTaskRequest} {@link CreateDLPFileDetectTaskResponse} */
   CreateDLPFileDetectTask(data: CreateDLPFileDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDLPFileDetectTaskResponse>;
   /** 提交送检任务 {@link CreateDLPFileDetectionTaskRequest} {@link CreateDLPFileDetectionTaskResponse} */
@@ -1445,6 +1855,8 @@ declare interface Ioa {
   DescribeAggrSoftDetail(data?: DescribeAggrSoftDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDetailResponse>;
   /** 获取聚合软件的设备列表 {@link DescribeAggrSoftDeviceListRequest} {@link DescribeAggrSoftDeviceListResponse} */
   DescribeAggrSoftDeviceList(data?: DescribeAggrSoftDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDeviceListResponse>;
+  /** 获取业务资源列表 {@link DescribeBusinessResourcesRequest} {@link DescribeBusinessResourcesResponse} */
+  DescribeBusinessResources(data?: DescribeBusinessResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessResourcesResponse>;
   /** 查询DLP边缘节点分组 {@link DescribeDLPEdgeNodeGroupsRequest} {@link DescribeDLPEdgeNodeGroupsResponse} */
   DescribeDLPEdgeNodeGroups(data?: DescribeDLPEdgeNodeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPEdgeNodeGroupsResponse>;
   /** 查询边缘节点列表 {@link DescribeDLPEdgeNodesRequest} {@link DescribeDLPEdgeNodesResponse} */
@@ -1465,8 +1877,16 @@ declare interface Ioa {
   DescribeDeviceVirtualGroups(data?: DescribeDeviceVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceVirtualGroupsResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
   DescribeDevices(data?: DescribeDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDevicesResponse>;
+  /** 列表账户组直接关联的资源 {@link DescribeDirectAccountGroupResourcesRequest} {@link DescribeDirectAccountGroupResourcesResponse} */
+  DescribeDirectAccountGroupResources(data: DescribeDirectAccountGroupResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectAccountGroupResourcesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */
   DescribeLocalAccounts(data?: DescribeLocalAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalAccountsResponse>;
+  /** DescribeResourceGrantedAccountGroups {@link DescribeResourceGrantedAccountGroupsRequest} {@link DescribeResourceGrantedAccountGroupsResponse} */
+  DescribeResourceGrantedAccountGroups(data: DescribeResourceGrantedAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedAccountGroupsResponse>;
+  /** DescribeResourceGrantedAccounts {@link DescribeResourceGrantedAccountsRequest} {@link DescribeResourceGrantedAccountsResponse} */
+  DescribeResourceGrantedAccounts(data?: DescribeResourceGrantedAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedAccountsResponse>;
+  /** DescribeResourceGrantedVirtualGroups {@link DescribeResourceGrantedVirtualGroupsRequest} {@link DescribeResourceGrantedVirtualGroupsResponse} */
+  DescribeResourceGrantedVirtualGroups(data?: DescribeResourceGrantedVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedVirtualGroupsResponse>;
   /** 查询账号根分组 {@link DescribeRootAccountGroupRequest} {@link DescribeRootAccountGroupResponse} */
   DescribeRootAccountGroup(data?: DescribeRootAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRootAccountGroupResponse>;
   /** 按终端查看软件统计信息 {@link DescribeSoftCensusListByDeviceRequest} {@link DescribeSoftCensusListByDeviceResponse} */
@@ -1479,6 +1899,14 @@ declare interface Ioa {
   ExportDeviceDownloadTask(data?: ExportDeviceDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportDeviceDownloadTaskResponse>;
   /** 导出软件信息列表 {@link ExportSoftwareInformationListRequest} {@link ExportSoftwareInformationListResponse} */
   ExportSoftwareInformationList(data?: ExportSoftwareInformationListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportSoftwareInformationListResponse>;
+  /** 按照账户分组组授权资源 {@link GrantResourcesByAccountGroupsRequest} {@link GrantResourcesByAccountGroupsResponse} */
+  GrantResourcesByAccountGroups(data: GrantResourcesByAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByAccountGroupsResponse>;
+  /** 按照账号授权资源访问 {@link GrantResourcesByAccountsRequest} {@link GrantResourcesByAccountsResponse} */
+  GrantResourcesByAccounts(data: GrantResourcesByAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByAccountsResponse>;
+  /** 按照虚拟分组授权资源访问 {@link GrantResourcesByVirtualGroupsRequest} {@link GrantResourcesByVirtualGroupsResponse} */
+  GrantResourcesByVirtualGroups(data: GrantResourcesByVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByVirtualGroupsResponse>;
+  /** 给接入设备批量加黑加白 {@link ModifyDeviceTrustStatusRequest} {@link ModifyDeviceTrustStatusResponse} */
+  ModifyDeviceTrustStatus(data: ModifyDeviceTrustStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTrustStatusResponse>;
   /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
   ModifyVirtualDeviceGroups(data: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
 }

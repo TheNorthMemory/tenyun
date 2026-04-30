@@ -7810,6 +7810,8 @@ declare interface VoiceInfo {
   Category?: string;
   /** 性别枚举值：male： 男famale： 女 */
   Gender?: string;
+  /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+  Age?: string;
   /** 支持语种列表如：en */
   Languages?: string[];
   /** 试听音频URL */
@@ -7817,6 +7819,22 @@ declare interface VoiceInfo {
   /** 标签列表如：温柔 */
   Labels?: string[];
   /** 推荐场景如：教育 */
+  Scenes?: string[];
+}
+
+/** 音色属性 */
+declare interface VoiceProfile {
+  /** 音色名 */
+  Name?: string;
+  /** 音色描述 */
+  Description?: string;
+  /** 性别枚举值：male： 男性female： 女性unknown： 未知 */
+  Gender?: string;
+  /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+  Age?: string;
+  /** 标签 */
+  Labels?: string[];
+  /** 使用场景 */
   Scenes?: string[];
 }
 
@@ -10579,8 +10597,24 @@ declare interface DescribeVideoSearchTaskDetailResponse {
 }
 
 declare interface DescribeVoicesRequest {
-  /** 音色类别枚举值：system： 系统音色 */
+  /** 音色ID */
+  VoiceId?: string;
+  /** 音色类别枚举值：system： 系统音色clone： 克隆音色design： 设计音色all： 所有音色（默认） */
   VoiceType?: string;
+  /** 音色名 */
+  VoiceName?: string;
+  /** 音色描述 */
+  Description?: string;
+  /** 性别枚举值：male： 男female： 女unknown： 未知 */
+  Gender?: string;
+  /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+  Age?: string;
+  /** 语言 */
+  Languages?: string[];
+  /** 标签 */
+  Labels?: string[];
+  /** 场景 */
+  Scenes?: string[];
   /** 扩展参数，json字符串其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色 */
   ExtParam?: string;
 }
@@ -10663,6 +10697,8 @@ declare interface DescribeWorkflowsResponse {
 declare interface DesignVoiceAsyncRequest {
   /** 音色描述 */
   Prompt: string;
+  /** 音色属性 */
+  VoiceProfile?: VoiceProfile;
   /** 扩展参数，json字符串 */
   ExtParam?: string;
 }
@@ -11789,8 +11825,12 @@ declare interface SyncDubbingRequest {
   AudioUrl?: string;
   /** 克隆音频语言，默认中文。当前支持语言同TextLang */
   AudioLang?: string;
+  /** 音色属性 */
+  VoiceProfile?: VoiceProfile;
   /** 输出相关参数可以指定输出形式等 */
   Output?: SyncDubbingOutputOption;
+  /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
+  ResourceId?: string;
   /** 扩展参数，json字符串synExt Object 语音合成扩展参数 -duration Float 合成音频时长，单位秒，示例：5.2 -sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100] -pitch Integer 音调，默认0原音色输出，取值[-12, 12]cloneExt Object 音色克隆扩展参数 -timeRanges Float[][] 指定克隆音频时间范围，默认[[0, 20]]，示例[[5.2, 10], [45, 59.8]] */
   ExtParam?: string;
 }

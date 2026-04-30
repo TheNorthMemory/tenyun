@@ -7732,29 +7732,29 @@ declare namespace V20180717 {
   }
 
   interface ApplyUploadRequest {
-    /** 媒体类型，可选值请参考 [上传能力综述](/document/product/266/9760)。 */
+    /** 媒体类型，可选值请参考 上传能力综述。 */
     MediaType: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 媒体名称。 */
     MediaName?: string;
-    /** 封面类型，可选值请参考 [上传能力综述](/document/product/266/9760)。 */
+    /** 封面类型，可选值请参考 上传能力综述。 */
     CoverType?: string;
-    /** 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 [创建任务流模板](/document/product/266/33819) 并为模板命名。 */
+    /** 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 创建任务流模板 并为模板命名。 */
     Procedure?: string;
-    /** 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](/document/product/266/11732)。 */
+    /** 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
     /** 指定上传园区，仅适用于对上传地域有特殊需求的用户。 */
     StorageRegion?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
     ClassId?: number;
-    /** 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。 */
+    /** 来源上下文，用于透传用户请求信息，上传完成回调 将返回该字段值，最长 250 个字符。 */
     SourceContext?: string;
-    /** 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。 */
+    /** 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，任务流状态变更回调 将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;
-    /** 媒体存储路径，以/开头。只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。 */
+    /** 媒体存储路径，以/开头。只有FileID + Path 模式的子应用可以指定存储路径。 */
     MediaStoragePath?: string;
   }
 
@@ -7798,7 +7798,7 @@ declare namespace V20180717 {
   interface CommitUploadRequest {
     /** 点播会话，取申请上传接口的返回值 VodSessionKey。 */
     VodSessionKey: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 

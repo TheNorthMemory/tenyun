@@ -182,6 +182,48 @@ declare interface CBSInstance {
   ThroughputPerformance?: number;
 }
 
+/** cbs 存储卷 */
+declare interface CBSVolume {
+  /** 存储卷名称 */
+  VolumeName?: string;
+  /** cbs 盘类型 */
+  DiskType?: string;
+  /** cbs 大小（GB） */
+  DiskSize?: number;
+  /** cbs 数量 */
+  DiskCount?: number;
+}
+
+/** cfs trubo 存储卷 */
+declare interface CFSTurboVolume {
+  /** 存储卷名称 */
+  VolumeName?: string;
+  /** 文件系统 id */
+  FileSystemId?: string;
+  /** CFSId */
+  FSId?: string;
+  /** 挂载点 ip */
+  Host?: string;
+  /** cfs子目录 */
+  SubPath?: string;
+  /** lustre挂载根目录，默认为/cfs */
+  RootDir?: string;
+}
+
+/** cfs 存储卷 */
+declare interface CFSVolume {
+  /** 存储卷名称 */
+  VolumeName?: string;
+  /** 文件系统 id */
+  FileSystemId?: string;
+  /** CFSId */
+  FSId?: string;
+  /** 挂载点 ip */
+  Host?: string;
+  /** cfs子目录 */
+  SubPath?: string;
+}
+
 /** 容器集群Pod服务CLB设置 */
 declare interface CLBSetting {
   /** CLB类型，PUBLIC_IP表示支持公网CLB和INTERNAL_IP表示支持内网CLB字段 */
@@ -198,6 +240,20 @@ declare interface COSSettings {
   CosSecretKey: string;
   /** 日志存储在COS上的路径 */
   LogOnCosPath?: string;
+}
+
+/** cos 存储卷 */
+declare interface COSVolume {
+  /** 存储卷名称 */
+  VolumeName?: string;
+  /** 密钥名称 */
+  Secret?: string;
+  /** cos桶所在地域 */
+  Region?: string;
+  /** 存储桶名称 */
+  Bucket?: string;
+  /** cos 子目录 */
+  SubPath?: string;
 }
 
 /** 资源调度-容量调度器的全局设置 */
@@ -520,6 +576,16 @@ declare interface ContainerExtraConf {
   JobAccessProxyType?: string;
 }
 
+/** 自定义镜像信息 */
+declare interface CustomImage {
+  /** 镜像来源。支持企业版镜像（tcr）、个人版镜像（ccrPersonal）、个人版共有镜像（ccrAllPersonal) */
+  ImageSourceType?: string;
+  /** 镜像信息 */
+  ImageInfo?: ImageInfo | null;
+  /** 镜像获取密钥 */
+  ImagePullSecret?: ImagePullSecret | null;
+}
+
 /** 用户Hive-MetaDB信息 */
 declare interface CustomMetaDBInfo {
   /** 自定义MetaDB的JDBC连接，示例: jdbc:mysql://10.10.10.10:3306/dbname */
@@ -718,6 +784,88 @@ declare interface Dps {
   Timestamp?: string;
   /** 采样值 */
   Value?: string;
+}
+
+/** 创建DynamicInstance提交的表单数据 */
+declare interface DynamicInstanceForm {
+  /** DynamicInstance名，长度限制1-64字符，只能包含小写字母 */
+  DynamicInstanceName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 是否支持高可用 */
+  SupportHA?: boolean;
+  /** 自定义镜像信息 */
+  CustomImage?: CustomImage;
+  /** 资源组配置 */
+  DynamicInstanceGroups?: DynamicInstanceGroup[];
+  /** 是否支持存储配置 */
+  SupportPV?: boolean;
+  /** cbs存储卷列表 */
+  CBSVolumes?: CBSVolume[];
+  /** cfs存储卷列表，只包含cfs，不包含cfs turbo */
+  CFSVolumes?: CFSVolume[];
+  /** cos存储卷列表 */
+  COSVolumes?: COSVolume[];
+  /** 挂载卷列表 */
+  VolumeMounts?: VolumeMount[];
+  /** pod标签 */
+  Labels?: TkeLabel[];
+  /** Tolerations定义 */
+  Tolerations?: Toleration[];
+  /** 环境变量 */
+  Envs?: NameValue[];
+  /** 依赖外部组件 */
+  DependServices?: DependService[];
+  /** 是否开启token鉴权 */
+  SupportToken?: boolean;
+  /** cfs trubo挂载列表，不包含标准版cfs */
+  CFSTurboVolumes?: CFSTurboVolume[];
+}
+
+/** 创建DynamicInstance提交的表单数据中的group部分 */
+declare interface DynamicInstanceGroup {
+  /** 资源组类型 */
+  GroupType?: string;
+  /** 资源组名称 */
+  GroupName?: string;
+  /** pod cpu核数 */
+  PodCpu?: number;
+  /** pod mem大小（GB） */
+  PodMem?: number;
+  /** pod gpu类型 */
+  PodGpuType?: string;
+  /** pod gpu块数 */
+  PodGpu?: number;
+  /** pod个数 */
+  PodNum?: number;
+  /** pod弹性最小个数 */
+  MinPodNum?: number;
+  /** pod弹性最大个数，当MaxPodNum &gt; MinPodNum时，默认表示开启弹性扩缩容，将在范围内扩缩容 */
+  MaxPodNum?: number;
+  /** 是否支持存储配置 */
+  SupportPV?: boolean;
+  /** cbs存储卷列表 */
+  CBSVolumes?: CBSVolume[];
+  /** cfs存储卷列表 */
+  CFSVolumes?: CFSVolume[];
+  /** cos存储卷列表 */
+  COSVolumes?: COSVolume[];
+  /** 挂载卷列表 */
+  VolumeMounts?: VolumeMount[];
+  /** pod标签 */
+  Labels?: TkeLabel[];
+  /** Tolerations定义 */
+  Tolerations?: Toleration[];
+  /** 环境变量 */
+  Envs?: NameValue[];
+  /** 节点调度策略 */
+  SchedulingPolicy?: string;
+  /** 资源标签 */
+  ResourceLabel?: string;
+  /** GPU资源厂商key */
+  PodGpuResourceKey?: string;
+  /** CFS Turbo 挂载列表 */
+  CFSTurboVolumes?: CFSTurboVolume[];
 }
 
 /** POD浮动规格 */
@@ -1082,6 +1230,34 @@ declare interface HostVolumeContext {
   VolumePath: string;
 }
 
+/** 镜像信息 */
+declare interface ImageInfo {
+  /** 镜像所属地域 */
+  Region?: string;
+  /** tcr实例Id */
+  RegistryId?: string;
+  /** 域名 */
+  DomainName?: string;
+  /** 命名空间 */
+  NamespaceName?: string;
+  /** 镜像仓库名称 */
+  RepositoryName?: string;
+  /** 镜像版本 */
+  ImageVersion?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像地址 */
+  Image?: string;
+}
+
+/** 镜像获取密钥 */
+declare interface ImagePullSecret {
+  /** 源密钥所在命名空间 */
+  SourceNamespace?: string;
+  /** 密钥名称列表 */
+  SecretNames?: string[] | null;
+}
+
 /** Impala查询详情 */
 declare interface ImpalaQuery {
   /** 执行语句 */
@@ -1408,6 +1584,38 @@ declare interface MetricTags {
   Type?: string;
 }
 
+/** 更新DynamicInstance提交的表单数据 */
+declare interface ModifyDynamicInstanceForm {
+  /** 更新作用域：1：添加workerGroup（DynamicInstance级别）2：更新存储配置（DynamicInstance级别）3：更新标签配置（DynamicInstance级别）4：更新高级配置（DynamicInstance级别）5：更新PodCpu、PodMem（DynamicInstance-group级别）6：更新PodNum、MinPodNum、MaxPodNum（DynamicInstance-group级别）7：更新存储配置（DynamicInstance-group级别）8：更新标签配置（DynamicInstance-group级别） */
+  ModifyScope: number;
+  /** 添加的workerGroup信息 */
+  AddDynamicInstanceGroup?: DynamicInstanceGroup;
+  /** 是否支持存储配置 */
+  SupportPV?: boolean;
+  /** cbs存储卷列表 */
+  CBSVolumes?: CBSVolume[];
+  /** cfs存储卷列表，不包含cfs turbo列表 */
+  CFSVolumes?: CFSVolume[];
+  /** cos存储卷列表 */
+  COSVolumes?: COSVolume[];
+  /** 挂载卷列表 */
+  VolumeMounts?: VolumeMount[];
+  /** pod标签 */
+  Labels?: TkeLabel[];
+  /** Tolerations定义 */
+  Tolerations?: Toleration[];
+  /** 环境变量 */
+  Envs?: NameValue[];
+  /** 依赖外部组件 */
+  DependServices?: DependService[];
+  /** 是否生成新token鉴权 */
+  SupportNewToken?: boolean;
+  /** DynamicInstance-group级别的更新信息 */
+  ModifyDynamicInstanceGroup?: DynamicInstanceGroup;
+  /** cfs turbo挂载列表，不包含标准版 */
+  CFSTurboVolumes?: CFSTurboVolume[];
+}
+
 /** 强制修改标签 */
 declare interface ModifyResourceTags {
   /** 集群id 或者 cvm id */
@@ -1468,6 +1676,14 @@ declare interface MultiZoneSetting {
   Placement?: Placement;
   /** 无 */
   ResourceSpec?: NewResourceSpec;
+}
+
+/** NameValue 键值 */
+declare interface NameValue {
+  /** name */
+  Name: string;
+  /** value */
+  Value: string;
 }
 
 /** 资源描述 */
@@ -2244,6 +2460,24 @@ declare interface QuotaEntity {
   TotalQuota?: number;
   /** 可用区 */
   Zone?: string;
+}
+
+/** RayCluster */
+declare interface RayCluster {
+  /** RayCluster 集群名 */
+  RayClusterName?: string;
+  /** RayCluster 集群 id */
+  RayClusterId?: number;
+  /** pod 数量 */
+  PodCount?: number;
+  /** 集群创建时间 */
+  CreateTime?: string;
+  /** redis 实例数量 */
+  RedisCount?: number;
+  /** 创建类型枚举值：1： 表单创建2： yaml创建 */
+  SubmitType?: number;
+  /** head访问地址,也是dashboard地址 */
+  DashboardUrl?: string;
 }
 
 /** 集群续费实例信息 */
@@ -3132,6 +3366,20 @@ declare interface VirtualPrivateCloud {
   SubnetId: string;
 }
 
+/** 挂载卷 */
+declare interface VolumeMount {
+  /** 挂载卷名称 */
+  MountName?: string;
+  /** 挂载路径 */
+  MountPath?: string;
+  /** 挂载类型 */
+  SubPathMode?: string;
+  /** 子路径 */
+  SubPath?: string;
+  /** 挂载模式，仅支持ReadWrite和OnlyRead */
+  MountMode?: string;
+}
+
 /** 数据卷目录设置 */
 declare interface VolumeSetting {
   /** 数据卷类型HOST_PATH表示支持本机路径NEW_PVC表示新建PVC组件角色支持的数据卷类型可参考 EMR on TKE 集群部署说明：[部署说明](https://cloud.tencent.com/document/product/589/94254) */
@@ -3504,6 +3752,26 @@ declare interface CreateClusterRequest {
 declare interface CreateClusterResponse {
   /** 实例ID */
   InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDynamicInstanceRequest {
+  /** EMR集群id */
+  InstanceId: string;
+  /** 支持DynamicInstance的服务名称 */
+  ServiceName: string;
+  /** DynamicInstance类型枚举值：RayCluster： RayCluster类型 */
+  DynamicInstanceType: string;
+  /** 表单创建信息 */
+  DynamicInstanceForm?: DynamicInstanceForm;
+  /** yaml创建信息 */
+  DynamicInstanceYaml?: string;
+}
+
+declare interface CreateDynamicInstanceResponse {
+  /** 异步流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3886,6 +4154,18 @@ declare interface DescribeDAGInfoResponse {
   TotalCount?: number;
   /** Starrocks 查询信息列表 */
   DAGInfoList?: DAGInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDynamicInstanceListRequest {
+  /** emr 集群 id */
+  InstanceId: string;
+}
+
+declare interface DescribeDynamicInstanceListResponse {
+  /** RayCluster 集群列表 */
+  DynamicInstanceList?: RayCluster[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5072,6 +5352,28 @@ declare interface ModifyBootScriptResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDynamicInstanceRequest {
+  /** EMR集群id */
+  InstanceId: string;
+  /** 支持DynamicInstance的服务名称 */
+  ServiceName: string;
+  /** DynamicInstance类型枚举值：RayCluster： RayCluster类型 */
+  DynamicInstanceType: string;
+  /** DynamicInstance的id */
+  DynamicInstanceId: number;
+  /** 更新表单配置（每个更新域都传递最新的内容，要完整） */
+  DynamicInstanceForm?: ModifyDynamicInstanceForm;
+  /** 更新YAML配置 */
+  DynamicInstanceYaml?: string;
+}
+
+declare interface ModifyDynamicInstanceResponse {
+  /** 异步流程id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGlobalConfigRequest {
   /** emr集群的英文id */
   InstanceId: string;
@@ -5650,6 +5952,22 @@ declare interface TerminateClusterNodesResponse {
   RequestId?: string;
 }
 
+declare interface TerminateDynamicInstancesRequest {
+  /** EMR集群id */
+  InstanceId: string;
+  /** DynamicInstance类型枚举值：RayCluster： RayCluster类型 */
+  DynamicInstanceType: string;
+  /** yaml创建信息 */
+  DynamicInstanceIds: number[];
+}
+
+declare interface TerminateDynamicInstancesResponse {
+  /** 异步流程id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateInstanceRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -5707,6 +6025,8 @@ declare interface Emr {
   CreateCloudInstance(data: CreateCloudInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudInstanceResponse>;
   /** 创建EMR集群实例(新) {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
+  /** 创建容器EMR-TKE集群DynamicInstance {@link CreateDynamicInstanceRequest} {@link CreateDynamicInstanceResponse} */
+  CreateDynamicInstance(data: CreateDynamicInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDynamicInstanceResponse>;
   /** 用户管理-批量创建用户组 {@link CreateGroupsSTDRequest} {@link CreateGroupsSTDResponse} */
   CreateGroupsSTD(data: CreateGroupsSTDRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGroupsSTDResponse>;
   /** 创建EMR实例(旧) {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
@@ -5739,6 +6059,8 @@ declare interface Emr {
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
   /** 查询DAG信息 {@link DescribeDAGInfoRequest} {@link DescribeDAGInfoResponse} */
   DescribeDAGInfo(data: DescribeDAGInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDAGInfoResponse>;
+  /** 描述容器EMR-TKE集群DynamicInstance列表 {@link DescribeDynamicInstanceListRequest} {@link DescribeDynamicInstanceListResponse} */
+  DescribeDynamicInstanceList(data: DescribeDynamicInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDynamicInstanceListResponse>;
   /** 查询EMR事件数据信息 {@link DescribeEMREventListRequest} {@link DescribeEMREventListResponse} */
   DescribeEMREventList(data: DescribeEMREventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEMREventListResponse>;
   /** 查询YARN的任务统计信息 {@link DescribeEmrApplicationStaticsRequest} {@link DescribeEmrApplicationStaticsResponse} */
@@ -5829,6 +6151,8 @@ declare interface Emr {
   ModifyAutoScaleStrategy(data: ModifyAutoScaleStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScaleStrategyResponse>;
   /** 修改引导脚本 {@link ModifyBootScriptRequest} {@link ModifyBootScriptResponse} */
   ModifyBootScript(data: ModifyBootScriptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBootScriptResponse>;
+  /** 更新容器EMR-TKE集群DynamicInstance {@link ModifyDynamicInstanceRequest} {@link ModifyDynamicInstanceResponse} */
+  ModifyDynamicInstance(data: ModifyDynamicInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDynamicInstanceResponse>;
   /** 修改YARN资源调度的全局配置 {@link ModifyGlobalConfigRequest} {@link ModifyGlobalConfigResponse} */
   ModifyGlobalConfig(data: ModifyGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalConfigResponse>;
   /** 设置巡检任务配置 {@link ModifyInspectionSettingsRequest} {@link ModifyInspectionSettingsResponse} */
@@ -5879,6 +6203,8 @@ declare interface Emr {
   SyncPodState(data: SyncPodStateRequest, config?: AxiosRequestConfig): AxiosPromise<SyncPodStateResponse>;
   /** 销毁集群节点(新) {@link TerminateClusterNodesRequest} {@link TerminateClusterNodesResponse} */
   TerminateClusterNodes(data: TerminateClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateClusterNodesResponse>;
+  /** 销毁容器EMR-TKE集群DynamicInstance {@link TerminateDynamicInstancesRequest} {@link TerminateDynamicInstancesResponse} */
+  TerminateDynamicInstances(data: TerminateDynamicInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDynamicInstancesResponse>;
   /** 销毁EMR实例 {@link TerminateInstanceRequest} {@link TerminateInstanceResponse} */
   TerminateInstance(data: TerminateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstanceResponse>;
   /** Serverless HBase销毁实例 {@link TerminateSLInstanceRequest} {@link TerminateSLInstanceResponse} */

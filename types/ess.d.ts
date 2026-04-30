@@ -312,6 +312,38 @@ declare interface Checklist {
   ConfigStatus?: number;
 }
 
+/** 合同审查清单大类 */
+declare interface ChecklistCategory {
+  /** 合同风险审查清单分组名称，每个分组下可以包含多个检查点 */
+  Name: string;
+  /** 合同风险审查清单检查点列表，每个检查点定义了一个具体的风险项 */
+  Points?: ChecklistPoint[];
+}
+
+/** 合同审查清单检查点 */
+declare interface ChecklistPoint {
+  /** 合同风险审查清单检查点名称 */
+  Summary: string;
+  /** 合同风险审查清单检查点详细描述，说明具体风险信息 */
+  Explanation: string;
+  /** 合同风险审查清单检查点对应的风险等级，一般分为 高风险、中风险、一般风险 */
+  RiskLevel: string;
+  /** 合同风险审查清单检查点ID，创建清单时无需填写 */
+  Id?: string;
+  /** 合同风险审查清单检查点是否不可缺失，若为true，相关条款未出现在内容中，视作风险 */
+  IsIndispensable?: boolean;
+  /** 合同风险审查清单检查点是否要求和参考条款一致 */
+  IsConsistentWithReferenceItem?: boolean;
+  /** 合同风险审查清单检查点参考条款，用于辅助审查 */
+  ReferenceItem?: string;
+  /** 合同风险审查清单检查点固定修改建议，优先级高于AiSuggestion */
+  Suggestion?: string;
+  /** 合同风险审查清单检查点AI修改建议提示，会参考该配置生成对应的修改建议 */
+  AiSuggestion?: string;
+  /** 合同风险审查清单检查点表现标签，用于自定义不同的风险类型 */
+  RiskPresentation?: string[];
+}
+
 /** 合同对比差异结果详情。 */
 declare interface ComparisonDetail {
   /** 合同对比差异点唯一ID。 */
@@ -4400,6 +4432,28 @@ declare interface DescribeContractDiffTaskWebUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeContractReviewChecklistRequest {
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 需要获取的合同风险审查清单ID */
+  ChecklistId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeContractReviewChecklistResponse {
+  /** 获取的合同风险审查清单ID */
+  ChecklistId?: string;
+  /** 获取的合同风险审查清单名称 */
+  Name?: string;
+  /** 获取的合同风险审查清单是否启用 */
+  Enabled?: boolean;
+  /** 获取的合同风险审查清单审查点列表 */
+  Categories?: ChecklistCategory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeContractReviewChecklistWebUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -5244,6 +5298,28 @@ declare interface GetTaskResultApiResponse {
   RequestId?: string;
 }
 
+declare interface ImportContractReviewChecklistRequest {
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 导入的合同审查清单名称 */
+  Name: string;
+  /** 导入的合同审查清单审查点列表 */
+  Categories: ChecklistCategory[];
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+  /** 如果传值，则更新对应的合同审查清单，否则创建新的合同审查清单 */
+  ChecklistID?: string;
+  /** 设置为true则启动清单，否则禁用清单 */
+  Enabled?: boolean;
+}
+
+declare interface ImportContractReviewChecklistResponse {
+  /** 导入成功的合同审查清单ID */
+  ChecklistId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyApplicationCallbackInfoRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -5821,6 +5897,8 @@ declare interface Ess {
   DescribeContractComparisonTask(data: DescribeContractComparisonTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractComparisonTaskResponse>;
   /** 获取合同对比结果web页面 {@link DescribeContractDiffTaskWebUrlRequest} {@link DescribeContractDiffTaskWebUrlResponse} */
   DescribeContractDiffTaskWebUrl(data: DescribeContractDiffTaskWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractDiffTaskWebUrlResponse>;
+  /** 获取合同风险审查清单 {@link DescribeContractReviewChecklistRequest} {@link DescribeContractReviewChecklistResponse} */
+  DescribeContractReviewChecklist(data: DescribeContractReviewChecklistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewChecklistResponse>;
   /** 查看审查要点清单web页面 {@link DescribeContractReviewChecklistWebUrlRequest} {@link DescribeContractReviewChecklistWebUrlResponse} */
   DescribeContractReviewChecklistWebUrl(data: DescribeContractReviewChecklistWebUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContractReviewChecklistWebUrlResponse>;
   /** 获取审查要点清单列表web页面 {@link DescribeContractReviewChecklistsWebUrlRequest} {@link DescribeContractReviewChecklistsWebUrlResponse} */
@@ -5901,6 +5979,8 @@ declare interface Ess {
   ExportContractReviewResult(data: ExportContractReviewResultRequest, config?: AxiosRequestConfig): AxiosPromise<ExportContractReviewResultResponse>;
   /** 查询转换任务状态 {@link GetTaskResultApiRequest} {@link GetTaskResultApiResponse} */
   GetTaskResultApi(data: GetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<GetTaskResultApiResponse>;
+  /** 导入合同风险审查清单 {@link ImportContractReviewChecklistRequest} {@link ImportContractReviewChecklistResponse} */
+  ImportContractReviewChecklist(data: ImportContractReviewChecklistRequest, config?: AxiosRequestConfig): AxiosPromise<ImportContractReviewChecklistResponse>;
   /** 修改企业回调配置 {@link ModifyApplicationCallbackInfoRequest} {@link ModifyApplicationCallbackInfoResponse} */
   ModifyApplicationCallbackInfo(data: ModifyApplicationCallbackInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApplicationCallbackInfoResponse>;
   /** 管理企业扩展服务 {@link ModifyExtendedServiceRequest} {@link ModifyExtendedServiceResponse} */

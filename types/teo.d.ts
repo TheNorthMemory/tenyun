@@ -1207,27 +1207,27 @@ declare interface DDoS {
 /** DDoS攻击事件对象 */
 declare interface DDoSAttackEvent {
   /** 事件ID。 */
-  EventId: string;
+  EventId?: string;
   /** 攻击类型(对应交互事件名称)。 */
-  AttackType: string;
+  AttackType?: string;
   /** 攻击状态。 */
-  AttackStatus: number;
-  /** 攻击最大带宽。 */
-  AttackMaxBandWidth: number;
-  /** 攻击包速率峰值。 */
-  AttackPacketMaxRate: number;
+  AttackStatus?: number;
+  /** 攻击最大带宽，单位为 bps。 */
+  AttackMaxBandWidth?: number;
+  /** 攻击包速率峰值，单位为 pps。 */
+  AttackPacketMaxRate?: number;
   /** 攻击开始时间，单位为s。 */
-  AttackStartTime: number;
+  AttackStartTime?: number;
   /** 攻击结束时间，单位为s。 */
-  AttackEndTime: number;
+  AttackEndTime?: number;
   /** DDoS策略组ID。 */
-  PolicyId: number | null;
+  PolicyId?: number | null;
   /** 站点ID。 */
-  ZoneId: string | null;
+  ZoneId?: string | null;
   /** 攻击事件所属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据。 */
-  Area: string | null;
+  Area?: string | null;
   /** 封禁解封信息。 */
-  DDoSBlockData: DDoSBlockData[] | null;
+  DDoSBlockData?: DDoSBlockData[] | null;
 }
 
 /** DDoS封禁解封信息 */
@@ -5061,7 +5061,7 @@ declare interface CreatePurgeTaskRequest {
   Targets?: string[];
   /** 若有编码转换，仅清除编码转换后匹配的资源。若内容含有非 ASCII 字符集的字符，请开启此开关进行编码转换（编码规则遵循 RFC3986）。 */
   EncodeUrl?: boolean;
-  /** 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。 */
+  /** 节点缓存清除类型取值为 purge_cache_tag 时，该参数必填，入参值为域名。 */
   CacheTag?: CacheTag;
 }
 
