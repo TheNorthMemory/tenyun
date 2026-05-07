@@ -2811,13 +2811,13 @@ declare interface CheckAttributeLabelReferResponse {
 }
 
 declare interface CreateAppRequest {
-  /** 应用类型；knowledge_qa-知识问答管理 */
+  /** 应用类型；&quot;knowledge_qa&quot; 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式） */
   AppType: string;
   /** 应用基础配置 */
   BaseConfig: BaseConfig;
-  /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式 */
+  /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式,ClawAgent:Claw模式 */
   Pattern?: string;
-  /** 智能体类型 dialogue 对话式智能体，wechat 公众号智能体 */
+  /** 智能体类型，用于区分应用最终以何种智能体形态对外服务（对话(&quot;dialogue&quot;) / 公众号(&quot;wechat&quot;)）。当前 ADP 创建页面不区分对话/公众号智能体，ADP 创建页默认走对话智能体。 */
   AgentType?: string;
 }
 

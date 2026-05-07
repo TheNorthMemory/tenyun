@@ -194,10 +194,10 @@ declare interface ClientIncreaseInfoList {
 
 /** 订单价格详情 */
 declare interface DealGoodsPriceNewElem {
-  /** 实付金额（单位：分） */
-  RealTotalCost: number;
-  /** 原始金额（不含折扣，单位：分） */
-  OriginalTotalCost: number;
+  /** 实付金额单位：分该金额与控制台展示金额一致，为订单实付价 - 代金券之后的结果 */
+  RealTotalCost?: number;
+  /** 原始金额（不含折扣）单位：分 */
+  OriginalTotalCost?: number;
 }
 
 /** 订单价格详情 */

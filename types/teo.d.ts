@@ -324,7 +324,7 @@ declare interface ApplicationProxy {
   SecurityType?: number;
   /** 是否开启加速，取值有：0：关闭加速；1：开启加速。 */
   AccelerateType?: number;
-  /** 会话保持时间。 */
+  /** 会话保持时间，单位为秒。 */
   SessionPersistTime?: number;
   /** 状态，取值有：online：启用；offline：停用；progress：部署中；stopping：停用中；fail：部署失败/停用失败。 */
   Status?: string;
@@ -352,7 +352,7 @@ declare interface ApplicationProxyRule {
   Port: string[];
   /** 源站类型，取值有：custom：手动添加；loadbalancer：负载均衡；origins：源站组。 */
   OriginType: string;
-  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 loadbalancer 时，表示一个负载均衡，如`["lb-xdffsfasdfs"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
+  /** 源站信息：当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；当 OriginType 为 loadbalancer 时，表示一个负载均衡，如`["lb-3pbiw4d9iqz0"]`；当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。 */
   OriginValue: string[];
   /** 规则ID。 */
   RuleId?: string;
@@ -362,7 +362,7 @@ declare interface ApplicationProxyRule {
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。默认值：false。 */
   SessionPersist?: boolean;
-  /** 会话保持的时间，只有当SessionPersist为true时，该值才会生效。 */
+  /** 会话保持的时间，单位为秒，只有当SessionPersist为true时，该值才会生效。 */
   SessionPersistTime?: number;
   /** 源站端口，支持格式：单端口，如：80。端口段：81-82，表示81，82两个端口。 */
   OriginPort?: string;
@@ -4651,7 +4651,7 @@ declare interface CreateApplicationProxyRuleRequest {
   ForwardClientIp?: string;
   /** 是否开启会话保持，取值有：true：开启；false：关闭。默认值：false。 */
   SessionPersist?: boolean;
-  /** 会话保持的时间，只有当SessionPersist为true时，该值才会生效。 */
+  /** 会话保持的时间，单位为秒，只有当SessionPersist为true时，该值才会生效。 */
   SessionPersistTime?: number;
   /** 源站端口，支持格式：单端口：80；端口段：81-90，81至90端口。 */
   OriginPort?: string;
@@ -7131,9 +7131,9 @@ declare interface EdgeKVPutRequest {
   Key: string;
   /** 键值。不能为空，最大支持 1 MB。支持存储字符串数据。 */
   Value: string;
-  /** 过期时间，绝对时间。表示从 1970 年 1 月 1 日（UTC/GMT 的午夜）开始所经过的秒数，不能小于当前时间。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。 */
+  /** 键值对的过期时间，绝对时间，单位为秒，表示从 1970 年 1 月 1 日 00:00:00（UTC）起经过的秒数（即 Unix 时间戳）。取值必须大于等于当前时间 + 60，即过期时间距当前至少 60 秒。当 Expiration 与 ExpirationTTL 同时填写时，以 ExpirationTTL 为准；当两者均不填写时，键值对永不过期。 */
   Expiration?: number;
-  /** 过期时间，相对时间，单位为秒。表示数据将在指定秒数后过期，必须大于 0。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。 */
+  /** 键值对的存活时长，相对时间，单位为秒，表示数据将在写入后经过指定秒数过期。取值范围：大于等于 60。当 Expiration 与 ExpirationTTL 同时填写时，以 ExpirationTTL 为准；当两者均不填写时，键值对永不过期。 */
   ExpirationTTL?: number;
 }
 

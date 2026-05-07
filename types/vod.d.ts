@@ -1867,6 +1867,8 @@ declare namespace V20180717 {
     OutputConfig?: AigcImageOutputConfig;
     /** 模型随机种子。 */
     Seed?: number;
+    /** 场景类型。取值如下：当 ModelName 为 Hunyuan 时： 3d_panorama 表示全景图；其他 ModelName 暂不支持。 */
+    SceneType?: string;
   }
 
   /** AIGC生图任务输入文件信息 */
@@ -2143,18 +2145,22 @@ declare namespace V20180717 {
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
     MediaName?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
     ClassId?: number;
-    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
     /** 文件类型，例如 mp4、flv 等。 */
     FileType?: string;
     /** 媒体文件播放地址。 */
     FileUrl?: string;
+    /** 文件内容。当 UsageType 为 position_info 时有返回值。 */
+    FileContent?: string;
     /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
     FileId?: string;
     /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
     MetaData?: MediaMetaData;
+    /** 文件的用途类型。枚举值：scene_url： 3D 场景文件，FileUrl 字段有返回值。point_url： 点云文件，FileUrl 字段有返回值。mesh_url： 原始网格模型文，FileUrl 字段有返回值。mesh_simplified_url： 简化后的网格模型文件，FileUrl 字段有返回值。position_info： 场景空间位置信息，FileContent 字段有返回值。image_url： 生成的图片，FileUrl 字段有返回值。 */
+    UsageType?: string;
   }
 
   /** 转动图任务类型 */
@@ -8048,6 +8054,8 @@ declare namespace V20180717 {
     OutputConfig?: AigcImageOutputConfig;
     /** 输入的区域信息。可选值：Mainland：中国大陆；Oversea：海外；OverseaUSWest：海外-美西； */
     InputRegion?: string;
+    /** 场景类型。取值如下：当 ModelName 为 Hunyuan 时： 3d_panorama 表示全景图；其他 ModelName 暂不支持。 */
+    SceneType?: string;
     /** 模型随机种子。 */
     Seed?: number;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */

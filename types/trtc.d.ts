@@ -2849,7 +2849,7 @@ declare interface VoiceCloneResponse {
 /** {@link Trtc 实时音视频} */
 declare interface Trtc {
   (): Versions;
-  /** 异步实时文本转语音 {@link AsyncTextToSpeechRequest} {@link AsyncTextToSpeechResponse} */
+  /** 异步文本转语音 {@link AsyncTextToSpeechRequest} {@link AsyncTextToSpeechResponse} */
   AsyncTextToSpeech(data: AsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncTextToSpeechResponse>;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
@@ -2883,7 +2883,7 @@ declare interface Trtc {
   DescribeAIConversation(data?: DescribeAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIConversationResponse>;
   /** 查询AI转录任务状态 {@link DescribeAITranscriptionRequest} {@link DescribeAITranscriptionResponse} */
   DescribeAITranscription(data: DescribeAITranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITranscriptionResponse>;
-  /** 查询异步语音合成 {@link DescribeAsyncTextToSpeechRequest} {@link DescribeAsyncTextToSpeechResponse} */
+  /** 查询异步文本转语音 {@link DescribeAsyncTextToSpeechRequest} {@link DescribeAsyncTextToSpeechResponse} */
   DescribeAsyncTextToSpeech(data: DescribeAsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncTextToSpeechResponse>;
   /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
@@ -2983,9 +2983,9 @@ declare interface Trtc {
   StopStreamIngest(data: StopStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamIngestResponse>;
   /** 停止页面录制 {@link StopWebRecordRequest} {@link StopWebRecordResponse} */
   StopWebRecord(data: StopWebRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopWebRecordResponse>;
-  /** 实时文本转语音 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */
+  /** 文本转语音 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */
   TextToSpeech(data: TextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechResponse>;
-  /** 实时SSE流式文本转语音 {@link TextToSpeechSSERequest} {@link TextToSpeechSSEResponse} */
+  /** 流式文本转语音 {@link TextToSpeechSSERequest} {@link TextToSpeechSSEResponse} */
   TextToSpeechSSE(data: TextToSpeechSSERequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechSSEResponse>;
   /** 更新AI对话 {@link UpdateAIConversationRequest} {@link UpdateAIConversationResponse} */
   UpdateAIConversation(data: UpdateAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIConversationResponse>;

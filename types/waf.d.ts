@@ -2360,6 +2360,8 @@ declare interface LLMDetectResult {
   Payload?: string;
   /** 图片检测结果 */
   ImageResult?: ImageResult[];
+  /** 要代答的消息id，此消息id用于作为GenerateLLMSecAnswer接口的入参 */
+  MsgID?: string;
 }
 
 /** 有效预付费大模型安全包信息 */

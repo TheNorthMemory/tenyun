@@ -52,6 +52,24 @@ declare interface Convert3DFormatResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHunyuanTo3DMotionJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface DescribeHunyuanTo3DMotionJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 示例值：RUN。 */
+  Status?: string;
+  /** 错误码。 */
+  ErrorCode?: string;
+  /** 错误信息。 */
+  ErrorMessage?: string;
+  /** 生成文件的URL地址，有效期1天。 */
+  ResultFile3Ds?: File3D[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHunyuanTo3DUVJobRequest {
   /** 任务ID。 */
   JobId: string;
@@ -196,6 +214,30 @@ declare interface SubmitHunyuan3DPartJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitHunyuanTo3DMotionJobRequest {
+  /** 输入文本prompt，限定最大字符为128。 */
+  Prompt: string;
+  /** 模型名称：HY-Motion-1.0，默认HY-Motion-1.0。 */
+  Model?: string;
+  /** 需重定向的模型地址，只能支持混元生3D动画生成的模型（动画模板的接口） */
+  RetargetFile?: InputFile3D;
+  /** 生成动画的时长，默认5，范围：1-12（单位s） */
+  Duration?: number;
+  /** 默认true，返回的fbx是否带蒙皮mesh */
+  EnableMesh?: boolean;
+  /** 是否开启prompt扩写，开启后将补充完善输入的prompt。默认false。 */
+  EnableRewrite?: boolean;
+  /** 是否开启时长自动匹配，开启后将自动根据prompt匹配适合时长的动作数据默认false。 */
+  EnableDurationEst?: boolean;
+}
+
+declare interface SubmitHunyuanTo3DMotionJobResponse {
+  /** 任务ID（有效期24小时） */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitHunyuanTo3DProJobRequest {
   /** 混元生3D生成模型版本，默认为3.0，可选项：3.0，3.1选择3.1版本时，LowPoly参数不可用。 */
   Model?: string;
@@ -317,6 +359,8 @@ declare interface Ai3d {
   (): Versions;
   /** 模型格式转换 {@link Convert3DFormatRequest} {@link Convert3DFormatResponse} */
   Convert3DFormat(data: Convert3DFormatRequest, config?: AxiosRequestConfig): AxiosPromise<Convert3DFormatResponse>;
+  /** 查询文生动作任务 {@link DescribeHunyuanTo3DMotionJobRequest} {@link DescribeHunyuanTo3DMotionJobResponse} */
+  DescribeHunyuanTo3DMotionJob(data: DescribeHunyuanTo3DMotionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanTo3DMotionJobResponse>;
   /** 查询UV展开任务 {@link DescribeHunyuanTo3DUVJobRequest} {@link DescribeHunyuanTo3DUVJobResponse} */
   DescribeHunyuanTo3DUVJob(data: DescribeHunyuanTo3DUVJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanTo3DUVJobResponse>;
   /** 查询3D人物生成任务 {@link DescribeProfileTo3DJobRequest} {@link DescribeProfileTo3DJobResponse} */
@@ -333,6 +377,8 @@ declare interface Ai3d {
   QueryHunyuanTo3DRapidJob(data?: QueryHunyuanTo3DRapidJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanTo3DRapidJobResponse>;
   /** 提交组件生成任务 {@link SubmitHunyuan3DPartJobRequest} {@link SubmitHunyuan3DPartJobResponse} */
   SubmitHunyuan3DPartJob(data?: SubmitHunyuan3DPartJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuan3DPartJobResponse>;
+  /** 提交文生动作任务 {@link SubmitHunyuanTo3DMotionJobRequest} {@link SubmitHunyuanTo3DMotionJobResponse} */
+  SubmitHunyuanTo3DMotionJob(data: SubmitHunyuanTo3DMotionJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DMotionJobResponse>;
   /** 提交混元生3D专业版任务 {@link SubmitHunyuanTo3DProJobRequest} {@link SubmitHunyuanTo3DProJobResponse} */
   SubmitHunyuanTo3DProJob(data?: SubmitHunyuanTo3DProJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DProJobResponse>;
   /** 提交混元生3D极速版任务 {@link SubmitHunyuanTo3DRapidJobRequest} {@link SubmitHunyuanTo3DRapidJobResponse} */
