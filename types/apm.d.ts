@@ -1708,6 +1708,20 @@ declare interface ModifyApmSampleConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApmServiceRequest {
+  /** 应用ID */
+  ServiceID: string;
+  /** 应用描述 */
+  ServiceDescription?: string;
+  /** 标签列表 */
+  Tags?: ApmTag[];
+}
+
+declare interface ModifyApmServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGeneralApmApplicationConfigRequest {
   /** 业务系统Id */
   InstanceId: string;
@@ -1797,6 +1811,8 @@ declare interface Apm {
   ModifyApmPrometheusRule(data: ModifyApmPrometheusRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmPrometheusRuleResponse>;
   /** 修改采样配置 {@link ModifyApmSampleConfigRequest} {@link ModifyApmSampleConfigResponse} */
   ModifyApmSampleConfig(data: ModifyApmSampleConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmSampleConfigResponse>;
+  /** 修改应用信息 {@link ModifyApmServiceRequest} {@link ModifyApmServiceResponse} */
+  ModifyApmService(data: ModifyApmServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmServiceResponse>;
   /** 修改应用配置信息（不推荐） {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
   ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
   /** 销毁 APM 业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */

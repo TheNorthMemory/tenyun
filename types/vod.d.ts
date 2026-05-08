@@ -1759,6 +1759,92 @@ declare namespace V20180717 {
     Tags?: string[];
   }
 
+  /** AIGC 生音效任务的输出媒体文件配置。 */
+  interface AigcAudioOutputConfig {
+    /** 存储模式枚举值：Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId默认值：Temporary */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
+    ExpireTime?: string;
+    /** 生成音频的时长。默认不填。 取值范围：[0, 60] */
+    Duration?: number;
+    /** 输出音频格式，默认不填 */
+    OutputAudioFormat?: string;
+  }
+
+  /** 创建 AIGC 音效任务信息。 */
+  interface AigcAudioTask {
+    /** 任务ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 音频任务的输入信息。 */
+    Input?: AigcAudioTaskInput;
+    /** AIGC 音频任务的输出信息。 */
+    Output?: AigcAudioTaskOutput;
+  }
+
+  /** AIGC 生音效任务的输入。 */
+  interface AigcAudioTaskInput {
+    /** 模型名称。 */
+    ModelName?: string;
+    /** 模型版本。 */
+    ModelVersion?: string;
+    /** 场景类型。取值如下：当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；其他 ModelName 暂不支持。 */
+    SceneType?: string;
+    /** 生成视频的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。 */
+    Prompt?: string;
+    /** 要阻止模型生成视频的提示词。最大支持1000字符。 */
+    NegativePrompt?: string;
+    /** 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
+    EnhancePrompt?: boolean;
+    /** AIGC 生图输出结果文件输出。 */
+    OutputConfig?: AigcAudioOutputConfig;
+    /** 额外参数 */
+    AdditionalParameters?: string;
+  }
+
+  /** AIGC 音效任务的输出信息。 */
+  interface AigcAudioTaskOutput {
+    /** 输出音频信息 */
+    AudioInfos?: AigcAudioTaskOutputFileInfo[];
+    /** 输出视频信息 */
+    VideoInfos?: AigcAudioTaskOutputFileInfo[];
+  }
+
+  /** AIGC 生音效任务的输出文件信息。 */
+  interface AigcAudioTaskOutputFileInfo {
+    /** 存储模式。取值有： Permanent：永久存储； Temporary：临时存储；默认值：Temporary */
+    StorageMode?: string;
+    /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
+    MediaName?: string;
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    ClassId?: number;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 mp4、flv 等。 */
+    FileType?: string;
+    /** 媒体文件播放地址。 */
+    FileUrl?: string;
+    /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
+    FileId?: string;
+    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    MetaData?: MediaMetaData;
+    /** 时长单位：秒 */
+    Duration?: number;
+  }
+
   /** 人脸身份信息。 */
   interface AigcFaceIdentityInfo {
     /** 视频中的人脸 ID。同一个人脸在视频中间隔超过1s时会视作不同 ID。 */
@@ -10403,7 +10489,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElementTask：创建自定义主体任务CreateAigcCustomVoiceTask：创建自定义音色任务CreateAigcSubjectTask：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 音频复刻任务 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -10481,6 +10567,8 @@ declare namespace V20180717 {
     CreateAigcSubjectTask?: CreateAigcSubjectTask;
     /** AIGC 视频转绘信息，仅当 TaskType 为AigcVideoRedrawTask，该字段有值。 */
     AigcVideoRedrawTask?: AigcVideoRedrawTask;
+    /** AIGC音效信息，仅当TaskType为AigcAudioTask时，该字段有值。 */
+    AigcAudioTask?: AigcAudioTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

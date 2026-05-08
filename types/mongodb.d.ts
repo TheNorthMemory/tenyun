@@ -868,6 +868,14 @@ declare interface UserInfo {
   ConsolePassUpdateTime?: string;
 }
 
+/** mongodb外网服务节点信息。 */
+declare interface WanServiceNodeList {
+  /** 实例节点的vip及端口信息。 */
+  VipVport?: string | null;
+  /** CLB监听器监听端口，取值范围1~65535。 */
+  ListenerPort?: string | null;
+}
+
 declare interface AssignProjectRequest {
   /** 实例 ID 列表，请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceIds: string[];
@@ -1897,6 +1905,22 @@ declare interface EnableTransparentDataEncryptionRequest {
 
 declare interface EnableTransparentDataEncryptionResponse {
   /** 开启透明加密的异步流程id，用于查询流程状态。 */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableWanServiceRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 负载均衡ID。 */
+  LoadBalancerId: string;
+  /** 节点及监听端口信息。 */
+  NodeList: WanServiceNodeList[];
+}
+
+declare interface EnableWanServiceResponse {
+  /** 异步任务ID。 */
   FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2979,6 +3003,8 @@ declare interface Mongodb {
   EnableSRVConnectionUrl(data: EnableSRVConnectionUrlRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSRVConnectionUrlResponse>;
   /** 开启实例数据透明加密 {@link EnableTransparentDataEncryptionRequest} {@link EnableTransparentDataEncryptionResponse} */
   EnableTransparentDataEncryption(data: EnableTransparentDataEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTransparentDataEncryptionResponse>;
+  /** 开启外网访问地址 {@link EnableWanServiceRequest} {@link EnableWanServiceResponse} */
+  EnableWanService(data: EnableWanServiceRequest, config?: AxiosRequestConfig): AxiosPromise<EnableWanServiceResponse>;
   /** 按 Key 回档 {@link FlashBackDBInstanceRequest} {@link FlashBackDBInstanceResponse} */
   FlashBackDBInstance(data: FlashBackDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<FlashBackDBInstanceResponse>;
   /** 刷新路由配置 {@link FlushInstanceRouterConfigRequest} {@link FlushInstanceRouterConfigResponse} */

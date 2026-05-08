@@ -3145,7 +3145,7 @@ declare namespace V20180724 {
   }
 
   interface BindingPolicyObjectRequest {
-    /** 必填。固定值"monitor" */
+    /** 必填。固定值&quot;monitor&quot; */
     Module: string;
     /** 策略组id，例如 4739573。逐渐弃用，建议使用 PolicyId 参数 */
     GroupId?: number;
@@ -3153,7 +3153,7 @@ declare namespace V20180724 {
     PolicyId?: string;
     /** 实例分组ID */
     InstanceGroupId?: number;
-    /** 需要绑定的对象维度信息，当为实例绑定渠道时，此处为必填信息 */
+    /** 需要绑定的对象维度信息。当告警对象选择为实例绑定方式时，该参数为必填参数；当告警对象选择为标签绑定、实例分组方式时，该参数为选填参数。 */
     Dimensions?: BindingPolicyObjectDimension[];
     /** 事件配置的告警 */
     EbSubject?: string;

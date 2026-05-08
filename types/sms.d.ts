@@ -351,10 +351,14 @@ declare interface DescribePhoneNumberInfoResponse {
 }
 
 declare interface DescribeSmsSignListRequest {
-  /** 签名 ID 数组。注：默认数组最大长度100。 */
-  SignIdSet: number[];
   /** 是否国际/港澳台短信：0：表示国内短信。1：表示国际/港澳台短信。 */
   International: number;
+  /** 签名 ID 数组。注：默认数组最大长度100。 */
+  SignIdSet?: number[];
+  /** 最大上限，最多100。注：默认为10，SignIdSet 为空时启用。 */
+  Limit?: number;
+  /** 偏移量。注：默认为0，SignIdSet 为空时启用。 */
+  Offset?: number;
 }
 
 declare interface DescribeSmsSignListResponse {

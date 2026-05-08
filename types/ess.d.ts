@@ -1678,8 +1678,10 @@ declare interface RecipientComponentInfo {
   RecipientFillStatus?: string;
   /** 是否为发起方true-发起方false-参与方 */
   IsPromoter?: boolean;
-  /** 改参与方填写控件信息列表 */
+  /** 该参与方填写控件信息列表 */
   Components?: FilledComponent[];
+  /** 该参与方签批控件信息 */
+  SignComponents?: FilledComponent[];
 }
 
 /** 引用的资料 */
@@ -3399,9 +3401,9 @@ declare interface CreateModifyAdminAuthorizationUrlResponse {
 }
 
 declare interface CreateMultiFlowSignQRCodeRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 合同模板ID，为32位字符串。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
+  /** 合同模板ID，为32位字符串。可登录腾讯电子签控制台，在 &quot;模板&quot;-&gt;&quot;模板中心&quot;-&gt;&quot;列表展示设置&quot;选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId: string;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
   FlowName: string;
@@ -3411,6 +3413,8 @@ declare interface CreateMultiFlowSignQRCodeRequest {
   QrEffectiveDay?: number;
   /** 合同流程的签署有效期限，若未设定签署截止日期，则默认为自合同流程创建起的7天内截止。若在签署截止日期前未完成签署，合同状态将变更为已过期，从而导致合同无效。最长设定期限不得超过30天。 */
   FlowEffectiveDay?: number;
+  /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下:枚举值：0： 合同1： 文件2： 协议3： 文书默认值：0 */
+  FlowDisplayType?: number;
   /** 指定签署人信息。在指定签署人后，仅允许特定签署人通过扫描二维码进行签署。 */
   Restrictions?: ApproverRestriction[];
   /** 调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */

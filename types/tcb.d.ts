@@ -2,6 +2,52 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI 模型信息 */
+declare interface AIModel {
+  /** 模型名 */
+  Model?: string;
+  /** 是否开启MCP */
+  EnableMCP?: boolean;
+  /** 标签 */
+  Tags?: string[];
+}
+
+/** AI 模型信息 */
+declare interface AIModelGroup {
+  /** 模型分组枚举值：hunyuan-exp： 内置 hunyuan 分组，Models 中包含混元生文模型hunyuan-image： 内置 hunyuan 分组，Models 中包含混元生图模型deepseek： 内置 deepseek 分组，Models 中包含Deepseek生文模型cloudbase： 内置 cloudbase 分组，Models 中包含云开发提供的模型，支持的所有模型可从 DescribeManagedAIModelList 获取custom-xxxx： 自定义模型分组，Models 中包含用户自行配置的模型 */
+  GroupName?: string;
+  /** 模型列表 */
+  Models?: AIModel[] | null;
+  /** 模型类型枚举值：builtin： 内置模型分组类别custom： 用户自定义模型分组类别 */
+  Type?: string;
+  /** 原始模型类型枚举值：builtin： 内置模型类型custom： 用户自定义模型类型 */
+  OriginType?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 模型地址 */
+  BaseUrl?: string;
+  /** 模型状态, 1: 开启, 2: 关闭 */
+  Status?: number;
+  /** 模型密钥 */
+  Secret?: AIModelSecret | null;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
+/** AI模型密钥信息 */
+declare interface AIModelSecret {
+  /** 密钥来源 */
+  SecretSource?: string;
+  /** 密钥ID, 和SecretKey一一对应 */
+  SecretId?: string;
+  /** 密钥Key, 和SecretId一一对应 */
+  SecretKey?: string;
+  /** ApiKey,SecretKey和ApiKey二选一 */
+  ApiKey?: string;
+}
+
 /** API Key 访问凭证信息。描述云开发环境下 API Key 的完整信息，包括标识符、名称、令牌值、创建时间和过期时间。支持两种类型：api_key（服务端管理员访问凭证，用于服务端接口调用的身份认证，可设置有效期，单个环境最多 5 个）和 publish_key（前端匿名访问凭证，固定有效期，每个环境仅保留一个）。注意：令牌值（ApiKey 字段）仅在创建时返回完整明文，列表查询时将进行脱敏处理。 */
 declare interface ApiKeyToken {
   /** API Key 的唯一标识符，由系统基于 UUID 自动生成的 Base64 URL 编码字符串。后续对该 API Key 进行删除、修改名称或精确查询操作时，均需使用该值作为定位参数 */
@@ -654,6 +700,54 @@ declare interface MFALoginConfig {
   RequiredBindPhone?: string | null;
 }
 
+/** 托管型AI 模型信息 */
+declare interface ManagedAIModel {
+  /** 模型名 */
+  Model?: string;
+  /** 是否开启MCP */
+  EnableMCP?: boolean;
+  /** 模型规格 */
+  ModelSpec?: ManagedAIModelSpec;
+  /** 模型计费信息 */
+  ModelChargingInfo?: ManagedAIModelChargingInfo[];
+}
+
+/** 托管 AI 模型计费信息 */
+declare interface ManagedAIModelChargingInfo {
+  /** 计费类型枚举值：Uniform： 固定计费Tiered： 分段计费 */
+  Type?: string;
+  /** 分组名称 */
+  Name?: string;
+  /** 输入 Token 价格 */
+  InputPrice?: string;
+  /** 输出 Token 价格 */
+  OutputPrice?: string;
+  /** 命中缓存价格 */
+  CachePrice?: string;
+  /** 计费单位 */
+  InputOutputUnit?: string;
+}
+
+/** 云开发内置 AI 模型信息 */
+declare interface ManagedAIModelGroup {
+  /** 模型分组 */
+  GroupName?: string;
+  /** 模型列表 */
+  Models?: ManagedAIModel[] | null;
+  /** 备注 */
+  Remark?: string;
+}
+
+/** 托管 AI 模型参数规格 */
+declare interface ManagedAIModelSpec {
+  /** 最大输入 Token */
+  MaxInputToken?: string;
+  /** 最大输出 Token */
+  MaxOutputToken?: string;
+  /** 上下文长度 */
+  ContextLength?: string;
+}
+
 /** 多语言文字，在 Locale 中 展示的 Message */
 declare interface MessageLocalized {
   /** 字符串 */
@@ -1138,6 +1232,30 @@ declare interface CheckTcbServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateAIModelRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 分组名入参限制：不允许以 cloudbase 为前缀 */
+  GroupName: string;
+  /** 模型服务地址 */
+  BaseUrl?: string;
+  /** 模型名列表 */
+  Models?: AIModel[];
+  /** 分组备注 */
+  Remark?: string;
+  /** 模型状态, 1: 开启, 2: 关闭 */
+  Status?: number;
+  /** 模型密钥 */
+  Secret?: AIModelSecret;
+}
+
+declare interface CreateAIModelResponse {
+  /** 创建数量 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateApiKeyRequest {
   /** 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离 */
   EnvId: string;
@@ -1400,6 +1518,20 @@ declare interface CreateVmInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAIModelRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 分组名列表 */
+  GroupNames: string[];
+}
+
+declare interface DeleteAIModelResponse {
+  /** 成功删除数量 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteApiKeyRequest {
   /** 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离 */
   EnvId: string;
@@ -1490,6 +1622,18 @@ declare interface DeleteVmInstanceRequest {
 }
 
 declare interface DeleteVmInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIModelsRequest {
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DescribeAIModelsResponse {
+  /** 模型列表 */
+  AIModels?: AIModelGroup[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1928,6 +2072,18 @@ declare interface DescribeLoginConfigResponse {
   MfaConfig?: MFALoginConfig | null;
   /** 密码修改策略配置，包含首次登录强制修改密码开关及定期修改密码策略（周期和时间单位）。 */
   PwdUpdateStrategy?: PasswordUpdateLoginConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeManagedAIModelListRequest {
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DescribeManagedAIModelListResponse {
+  /** 托管模型列表 */
+  ManagedAIModelList?: ManagedAIModelGroup[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2504,6 +2660,30 @@ declare interface SearchClsLogResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAIModelRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 分组名 */
+  GroupName: string;
+  /** 模型地址枚举值：http://default.tcb： 默认模型地址，custom模型切换为builtin模型时使用 */
+  BaseUrl?: string;
+  /** 模型名列表Models 列表更新采用全量替换 */
+  Models?: AIModel[];
+  /** 备注 */
+  Remark?: string;
+  /** 模型状态, 1: 开启, 2: 关闭 */
+  Status?: number;
+  /** 模型密钥 */
+  Secret?: AIModelSecret;
+}
+
+declare interface UpdateAIModelResponse {
+  /** 更新数量 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateTableRequest {
   /** 表名 */
   TableName: string;
@@ -2531,6 +2711,8 @@ declare interface Tcb {
   AddProvider(data: AddProviderRequest, config?: AxiosRequestConfig): AxiosPromise<AddProviderResponse>;
   /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */
   CheckTcbService(data?: CheckTcbServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTcbServiceResponse>;
+  /** 创建AI模型 {@link CreateAIModelRequest} {@link CreateAIModelResponse} */
+  CreateAIModel(data: CreateAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIModelResponse>;
   /** 创建云开发平台的API Key {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
   CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
   /** 增加安全域名 {@link CreateAuthDomainRequest} {@link CreateAuthDomainResponse} */
@@ -2557,6 +2739,8 @@ declare interface Tcb {
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建服务器实例 {@link CreateVmInstanceRequest} {@link CreateVmInstanceResponse} */
   CreateVmInstance(data: CreateVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVmInstanceResponse>;
+  /** 删除AI模型 {@link DeleteAIModelRequest} {@link DeleteAIModelResponse} */
+  DeleteAIModel(data: DeleteAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIModelResponse>;
   /** 删除云开发平台的API Key {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
   DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
   /** 删除合法域名 {@link DeleteAuthDomainRequest} {@link DeleteAuthDomainResponse} */
@@ -2571,6 +2755,8 @@ declare interface Tcb {
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 销毁服务器实例 {@link DeleteVmInstanceRequest} {@link DeleteVmInstanceResponse} */
   DeleteVmInstance(data: DeleteVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVmInstanceResponse>;
+  /** 查询AI模型列表 {@link DescribeAIModelsRequest} {@link DescribeAIModelsResponse} */
+  DescribeAIModels(data: DescribeAIModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelsResponse>;
   /** 查询云开发平台的API Key列表 {@link DescribeApiKeyListRequest} {@link DescribeApiKeyListResponse} */
   DescribeApiKeyList(data: DescribeApiKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyListResponse>;
   /** 获取安全域名列表 {@link DescribeAuthDomainsRequest} {@link DescribeAuthDomainsResponse} */
@@ -2605,6 +2791,8 @@ declare interface Tcb {
   DescribeHostingDomainTask(data: DescribeHostingDomainTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostingDomainTaskResponse>;
   /** 获取登录策略 {@link DescribeLoginConfigRequest} {@link DescribeLoginConfigResponse} */
   DescribeLoginConfig(data: DescribeLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginConfigResponse>;
+  /** 查询托管类型AI模型列表 {@link DescribeManagedAIModelListRequest} {@link DescribeManagedAIModelListResponse} */
+  DescribeManagedAIModelList(data: DescribeManagedAIModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagedAIModelListResponse>;
   /** 查询Mysql集群信息 {@link DescribeMySQLClusterDetailRequest} {@link DescribeMySQLClusterDetailResponse} */
   DescribeMySQLClusterDetail(data: DescribeMySQLClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLClusterDetailResponse>;
   /** 销毁Mysql结果查询 {@link DescribeMySQLTaskStatusRequest} {@link DescribeMySQLTaskStatusResponse} */
@@ -2667,6 +2855,8 @@ declare interface Tcb {
   RunSql(data: RunSqlRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlResponse>;
   /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
+  /** 更新AI模型 {@link UpdateAIModelRequest} {@link UpdateAIModelResponse} */
+  UpdateAIModel(data: UpdateAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIModelResponse>;
   /** 修改文档型数据库表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
   UpdateTable(data: UpdateTableRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

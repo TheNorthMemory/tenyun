@@ -1796,6 +1796,32 @@ declare interface GrantResourcesByVirtualGroupsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBusinessResourceRequest {
+  /** 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位) */
+  AreaId: number;
+  /** 业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位) */
+  Protocol: number;
+  /** 业务资源名称，同一个资源模块下面不可重复 */
+  ServiceName: string;
+  /** 业务资源优先级 1-65535(只支持32位) */
+  Levels: number;
+  /** 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段 */
+  ServiceType: string;
+  /** 业务资源端口 all,1-65535 */
+  ServicePort: string;
+  /** 修改业务资源的id(只支持32位) */
+  ServiceId: number;
+  /** 业务资源地址(ip、域名、ip段) */
+  ServiceAddress: string;
+  /** 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位) */
+  DirectConn?: number;
+}
+
+declare interface ModifyBusinessResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceTrustStatusRequest {
   /** 设备状态，1表示拉黑，0表示加白 */
   Status: number;
@@ -1905,6 +1931,8 @@ declare interface Ioa {
   GrantResourcesByAccounts(data: GrantResourcesByAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByAccountsResponse>;
   /** 按照虚拟分组授权资源访问 {@link GrantResourcesByVirtualGroupsRequest} {@link GrantResourcesByVirtualGroupsResponse} */
   GrantResourcesByVirtualGroups(data: GrantResourcesByVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByVirtualGroupsResponse>;
+  /** 修改业务资源 {@link ModifyBusinessResourceRequest} {@link ModifyBusinessResourceResponse} */
+  ModifyBusinessResource(data: ModifyBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBusinessResourceResponse>;
   /** 给接入设备批量加黑加白 {@link ModifyDeviceTrustStatusRequest} {@link ModifyDeviceTrustStatusResponse} */
   ModifyDeviceTrustStatus(data: ModifyDeviceTrustStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTrustStatusResponse>;
   /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */

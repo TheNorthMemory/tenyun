@@ -1298,6 +1298,20 @@ declare interface AddUserGroupMembersResponse {
   RequestId?: string;
 }
 
+declare interface BindDeviceAccountKubeconfigRequest {
+  /** 容器账号Id */
+  Id: number;
+  /** 容器账号凭据 */
+  Kubeconfig: string;
+  /** 托管维度。1-集群 */
+  ManageDimension?: number;
+}
+
+declare interface BindDeviceAccountKubeconfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindDeviceAccountPasswordRequest {
   /** 主机账号ID */
   Id: number;
@@ -3419,6 +3433,8 @@ declare interface Bh {
   AddDeviceGroupMembers(data: AddDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceGroupMembersResponse>;
   /** 添加用户组成员 {@link AddUserGroupMembersRequest} {@link AddUserGroupMembersResponse} */
   AddUserGroupMembers(data: AddUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserGroupMembersResponse>;
+  /** 绑定容器账号凭据 {@link BindDeviceAccountKubeconfigRequest} {@link BindDeviceAccountKubeconfigResponse} */
+  BindDeviceAccountKubeconfig(data: BindDeviceAccountKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountKubeconfigResponse>;
   /** 绑定主机账号密码 {@link BindDeviceAccountPasswordRequest} {@link BindDeviceAccountPasswordResponse} */
   BindDeviceAccountPassword(data: BindDeviceAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountPasswordResponse>;
   /** 绑定主机账号私钥 {@link BindDeviceAccountPrivateKeyRequest} {@link BindDeviceAccountPrivateKeyResponse} */

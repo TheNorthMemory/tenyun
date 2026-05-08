@@ -1094,6 +1094,44 @@ declare interface MonitorStreamPlayInfo {
   Request?: number;
 }
 
+/** 播放域名回源自定义协议规则。 */
+declare interface OriginStreamCustomizationRule {
+  /** 匹配规则，可选项如下：.m3u8、.mpd、.ts、.mp4、.m4s、.m4a、.m4i、.m4v、.m4f、.aac、.webm。 */
+  MatchRule: string;
+  /** 原站地址类型： 1 =&gt; IP 类型。 2 =&gt; 域名类型。 */
+  OriginAddressType: number;
+  /** 原站 host。 */
+  OriginHost: string;
+  /** 原站地址信息，每项用冒号分割域名（ip）、端口信息。 端口为空也要带上分号，表示取默认端口。 */
+  OriginAddress: string[];
+  /** 是否透传 http 头信息，可取值：on、off。 */
+  PassThroughHttpHeader: string;
+  /** 是否透传相应，可取值：on、off。 */
+  PassThroughResponse: string;
+  /** 是否透传参数，可取值：on、off。 */
+  PassThroughParam: string;
+  /** url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。 url1、url2 长度限制100，不可包含特殊字符。 */
+  UrlReplaceRules: string[];
+  /** options 支持，可取值：on、off，默认值：off。 */
+  OptionsRequest: string;
+  /** 回源超时时间，单位 ms，取值范围：1 ～ 60000，默认值：10000。 */
+  OriginTimeout: number;
+  /** 重试次数，单位 次，取值范围：1 ～ 10。 */
+  OriginRetryTimes: number;
+  /** 状态码缓存，数组元素格式： cacheKey:interval cacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。 interval 单位 s。 */
+  CacheStatusCode: string[];
+  /** 缓存时间，单位 s，取值范围：0 ～ 31536000。 */
+  Cache: number;
+  /** 缓存键。 */
+  KeepParam: string[];
+  /** 设置索引自定义 header，最大支持 10 组，每一组参数、取值用空格分开，允许字符规则如下： 头部参数：由大小写字母、数字及-组成，长度支持1 ～100个字符，黑名单：Host、Connection、Content-Length、Range。 头部取值：不支持中文、不支持以$开头，长度支持1 ～ 100个字符，不允许有空格。 */
+  HttpHeader: string[];
+  /** 自定义回源缓存随源配置。0：不开启。1：开启。 */
+  CustomizationCacheFollowOrigin?: number;
+  /** 缓存 Http 头部键。 */
+  KeepHttpHeader?: string[];
+}
+
 /** 查询当前垫片流的信息 */
 declare interface PadStreamInfo {
   /** 流名称。 */
@@ -4635,10 +4673,78 @@ declare interface DescribeMonitorReportResponse {
 }
 
 declare interface DescribeOriginStreamInfoRequest {
+  /** 域名。 */
+  DomainName: string;
 }
 
 declare interface DescribeOriginStreamInfoResponse {
-  /** 缓存格式规则。 0：默认格式。1：云直播源站格式。当 OriginStreamPlayType 为 customization 时候生效。 */
+  /** 配置状态信息：0 配置中，1 成功，2 关闭中，3 关闭成功。 */
+  Status?: number;
+  /** 播放类型。 */
+  CdnStreamPlayType?: string[];
+  /** 原站配置类型：1 直播原站。2 streamPackage。 */
+  OriginStreamType?: number;
+  /** 原站播放类型。 */
+  OriginStreamPlayType?: string;
+  /** 原站地址类型：1 ip，2 域名。 */
+  OriginAddressType?: number;
+  /** 原站地址信息，每项用分号分割域名（ip）、端口信息。端口为空也要带上分号，表示取默认端口。 */
+  OriginAddress?: string[];
+  /** 超时时间，单位 ms。 */
+  OriginTimeout?: number | null;
+  /** 重试次数，单位 次。 */
+  OriginRetryTimes?: number | null;
+  /** 时间戳修正，可取值：on、off。当原站播放协议为 rtmp、flv 时，传递该字段才会生效。 */
+  TimeJitter?: string | null;
+  /** 分片数，单位 个。 */
+  HlsPlayFragmentCount?: number | null;
+  /** 分片时长，单位 ms。 */
+  HlsPlayFragmentDuration?: number | null;
+  /** 是否透传 http 头信息，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  PassThroughHttpHeader?: string | null;
+  /** 是否透传相应，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  PassThroughResponse?: string | null;
+  /** 是否透传参数，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  PassThroughParam?: string | null;
+  /** 原站 host。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  OriginHost?: string | null;
+  /** 索引缓存，单位 ms。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  IndexerCache?: number | null;
+  /** 分片缓存，单位 ms。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  FragmentCache?: number | null;
+  /** 域名。 */
+  DomainName?: string | null;
+  /** https 回源，可取值：on、off。当原站播放协议为flv、hls时，传递此字段才会生效。 */
+  UsingHttps?: string | null;
+  /** 是否遵循原站，可取值：on、off。当原站播放协议为hls时，此字段才会生效。 */
+  CacheFollowOrigin?: string | null;
+  /** 状态码缓存，数组元素格式：cacheKey:intervalcacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。interval 单位 ms。当原站播放协议为hls时，此字段才会生效。 */
+  CacheStatusCode?: string[] | null;
+  /** url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。url1、url2 长度限制100，不可包含特殊字符。当原站播放协议为hls时，此字段才会生效。 */
+  UrlReplaceRules?: string[] | null;
+  /** 是否 options 支持，可取值：on、off。当原站播放协议为hls时，此字段才会生效。 */
+  OptionsRequest?: string | null;
+  /** 是否 follow 301/302，可取值：on、off。当原站播放协议为hls时，此字段才会生效。 */
+  FollowRedirect?: string | null;
+  /** 源站类型 OriginStreamType 为 2 时，该字段有效。 代表源站地址 OriginAddress 对应的地区 region。 */
+  StreamPackageRegion?: string[] | null;
+  /** 客户名。 */
+  CustomerName?: string | null;
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置索引缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。 */
+  IndexerKeepParam?: string[] | null;
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置分片缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。 */
+  FragmentKeepParam?: string[] | null;
+  /** 当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：media_package =&gt; 仅配置普通频道。media_package_pure_ad =&gt; 仅配置广告。media_package_mix_ad =&gt; 同时配置普通频道和广告。 */
+  MediaPackageType?: string | null;
+  /** 当 OriginStreamType = 2 且 MediaPackageType = media_package 时有效，表示 mediapackage 频道类型，可组合如下值：normal（频道）、ssai（广告）、linear_assembly（线性组装）。 */
+  MediaPackageChannelTypes?: string[];
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置索引自定义 header，每一组参数、取值用空格分开。 */
+  IndexerHeader?: string[] | null;
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置分片自定义 header，每一组参数、取值用空格分开。 */
+  FragmentHeader?: string[] | null;
+  /** 自定义规则列表。 */
+  CustomizationRules?: OriginStreamCustomizationRule[] | null;
+  /** 缓存格式规则。0：默认格式。1：云直播源站格式。当 OriginStreamPlayType 为 customization 时候生效。 */
   CacheFormatRule?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5799,6 +5905,70 @@ declare interface ModifyLiveTranscodeTemplateResponse {
 }
 
 declare interface ModifyOriginStreamInfoRequest {
+  /** 域名。 */
+  DomainName: string;
+  /** 源站播放协议，可取值：rtmp、flv、hls、dash、hls|dash、customization。 */
+  OriginStreamPlayType: string;
+  /** 播放协议，可取值：rtmp、flv、hls、dash、hls|dash、customization。自定义回源协议填写 customization。 */
+  CdnStreamPlayType: string[];
+  /** 原站类型：1 =&gt; 直播原站。2 =&gt; mediaPackage。 */
+  OriginStreamType: number;
+  /** 原站地址信息，每项用冒号分割域名（ip）、端口信息。端口为空也要带上分号，表示取默认端口。自定义回源协议填写 customization。 */
+  OriginAddress: string[];
+  /** 原站地址类型：1 =&gt; IP 类型。2 =&gt; 域名类型。 */
+  OriginAddressType: number;
+  /** 自定义名称 */
+  CustomerName?: string;
+  /** 原站 host。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  OriginHost?: string;
+  /** 超时时间，单位 ms，取值范围：1 ～ 60000，默认值：10000。 */
+  OriginTimeout?: number;
+  /** 重试次数，单位 次，取值范围：1 ～ 10，默认值：10。 */
+  OriginRetryTimes?: number;
+  /** 是否透传 http 头信息，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  PassThroughHttpHeader?: string;
+  /** 是否透传相应，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  PassThroughResponse?: string;
+  /** 是否透传参数，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  PassThroughParam?: string;
+  /** 索引缓存，单位 ms，取值范围：1 ～ 60000，默认值：10000。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  IndexerCache?: number;
+  /** 分片缓存，单位 ms，取值范围：1 ～ 60000，默认值：10000。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  FragmentCache?: number;
+  /** 分片数，单位 个，取值范围：1 ～ 10，默认值：3。 */
+  HlsPlayFragmentCount?: number;
+  /** 分片时长，单位 ms，取值范围：1 ～ 10000，默认值：3000。 */
+  HlsPlayFragmentDuration?: number;
+  /** 时间戳修正，可取值：on、off，默认值：off。当原站播放协议为 rtmp、flv 时，传递该字段才会生效。 */
+  TimeJitter?: string;
+  /** https 回源，可取值：on、off，默认值：off。当原站播放协议为flv、hls时，传递此字段才会生效。 */
+  UsingHttps?: string;
+  /** 遵循原站，可取值：on、off，默认值：off。当原站播放协议为hls时，传递此字段才会生效。 */
+  CacheFollowOrigin?: string;
+  /** 状态码缓存，数组元素格式：cacheKey:intervalcacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。interval 单位 ms。当原站播放协议为hls时，传递此字段才会生效。 */
+  CacheStatusCode?: string[];
+  /** url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。url1、url2 长度限制100，不可包含特殊字符。当原站播放协议为hls时，传递此字段才会生效。 */
+  UrlReplaceRules?: string[];
+  /** options 支持，可取值：on、off，默认值：off。当原站播放协议为hls时，传递此字段才会生效。 */
+  OptionsRequest?: string;
+  /** follow 301/302，可取值：on、off，默认值：off。当原站播放协议为hls时，传递此字段才会生效。 */
+  FollowRedirect?: string;
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置索引缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。 */
+  IndexerKeepParam?: string[];
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置分片缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。 */
+  FragmentKeepParam?: string[];
+  /** 当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：media_package =&gt; 仅配置普通频道。media_package_pure_ad =&gt; 仅配置广告。media_package_mix_ad =&gt; 同时配置普通频道和广告。注意：配置时候，优先使用 media_package。和 MediaPackageChannelTypes 字段配合使用。 */
+  MediaPackageType?: string;
+  /** 当 OriginStreamType = 2 且 MediaPackageType = media_package 时有效，表示 mediapackage 频道类型，可组合如下值：normal（频道）、ssai（广告）、linear_assembly（线性组装）。 */
+  MediaPackageChannelTypes?: string[];
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置索引自定义 header，最大支持 10 组，每一组参数、取值用空格分开，允许字符规则如下：头部参数：由大小写字母、数字及-组成，长度支持1 ～100个字符，黑名单：Host、Connection、Content-Length、Range。头部取值：不支持中文、不支持以$开头，长度支持1 ～ 100个字符，不允许有空格。 */
+  IndexerHeader?: string[];
+  /** 当 OriginStreamPlayType 为 hls 时生效，设置分片自定义 header，最大支持 10 组，每一组参数、取值用空格分开，允许字符规则如下：头部参数：由大小写字母、数字及-组成，长度支持1 ～100个字符，黑名单：Host、Connection、Content-Length、Range。头部取值：不支持中文、不支持以$开头，长度支持1 ～ 100个字符，不允许有空格。 */
+  FragmentHeader?: string[];
+  /** 自定义回源规则列表，当 OriginStreamPlayType 为 customization 时候生效。 */
+  CustomizationRules?: OriginStreamCustomizationRule[];
+  /** 缓存格式规则。0：默认格式。1：云直播源站格式。当 OriginStreamPlayType 为 customization 时候生效。 */
+  CacheFormatRule?: number;
 }
 
 declare interface ModifyOriginStreamInfoResponse {
@@ -6446,7 +6616,7 @@ declare interface Live {
   /** 查询监播报告 {@link DescribeMonitorReportRequest} {@link DescribeMonitorReportResponse} */
   DescribeMonitorReport(data: DescribeMonitorReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorReportResponse>;
   /** 获取直播源站配置信息 {@link DescribeOriginStreamInfoRequest} {@link DescribeOriginStreamInfoResponse} */
-  DescribeOriginStreamInfo(data?: DescribeOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginStreamInfoResponse>;
+  DescribeOriginStreamInfo(data: DescribeOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginStreamInfoResponse>;
   /** 查询播放http错误码实时数据 {@link DescribePlayErrorCodeDetailInfoListRequest} {@link DescribePlayErrorCodeDetailInfoListResponse} */
   DescribePlayErrorCodeDetailInfoList(data: DescribePlayErrorCodeDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeDetailInfoListResponse>;
   /** 查询播放http错误码汇总数据 {@link DescribePlayErrorCodeSumInfoListRequest} {@link DescribePlayErrorCodeSumInfoListResponse} */
@@ -6544,7 +6714,7 @@ declare interface Live {
   /** 修改转码模板配置 {@link ModifyLiveTranscodeTemplateRequest} {@link ModifyLiveTranscodeTemplateResponse} */
   ModifyLiveTranscodeTemplate(data: ModifyLiveTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveTranscodeTemplateResponse>;
   /** 变更直播源站配置 {@link ModifyOriginStreamInfoRequest} {@link ModifyOriginStreamInfoResponse} */
-  ModifyOriginStreamInfo(data?: ModifyOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginStreamInfoResponse>;
+  ModifyOriginStreamInfo(data: ModifyOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOriginStreamInfoResponse>;
   /** 更新拉流配置(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamConfigRequest} {@link ModifyPullStreamConfigResponse} */
   ModifyPullStreamConfig(data: ModifyPullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPullStreamConfigResponse>;
   /** 修改拉流配置状态(该接口已下线,请使用新接口 ModifyLivePullStreamTask) {@link ModifyPullStreamStatusRequest} {@link ModifyPullStreamStatusResponse} */

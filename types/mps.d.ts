@@ -8131,10 +8131,12 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 }
 
 declare interface CreateAigcImageTaskRequest {
-  /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Qwen。 */
+  /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Qwen，Vidu，Kling。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。GEM， 可选[2.5,3.0]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。GEM，可选[2.5,3.0,3.1]。Vidu，可选[q2]。Kling，可选[2.1、O1、3.0、3.0-Omni] */
   ModelVersion?: string;
+  /** 场景化生图使用，仅部分模型支持。枚举值：3d_panorama： 全景图。仅Hunyuan支持。 */
+  SceneType?: string;
   /** 生成图片的描述。(注：最大支持1000字符)。当未传入参考图片时，此参数必填。 */
   Prompt?: string;
   /** 用于描述您想要阻止模型生成的内容。 注意：部分模型支持。 例如： 顶部照明、明亮的色彩 人物、动物 多辆汽车、风。 */
