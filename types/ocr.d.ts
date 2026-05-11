@@ -214,16 +214,6 @@ declare interface BusInvoice {
   TrainNumber?: string;
 }
 
-/** 汽车票字段信息 */
-declare interface BusInvoiceInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、身份证号、省、市、开票日期、乘车地点、检票口、客票类型、车型、座位号、车次。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect?: Rect;
-}
-
 /** 名片识别结果 */
 declare interface BusinessCardInfo {
   /** 识别出的字段名称（关键字，可能重复，比如多个手机），能识别的字段名为：姓名、英文姓名、英文地址、公司、英文公司、职位、英文职位、部门、英文部门、手机、电话、传真、社交账号、QQ、MSN、微信、微博、邮箱、邮编、网址、公司账号、其他。 */
@@ -400,16 +390,6 @@ declare interface DetectedWords {
   Confidence?: number;
   /** 候选字Character。 */
   Character?: string;
-}
-
-/** 识别出的字段 */
-declare interface DutyPaidProofInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：税号 、纳税人识别号 、纳税人名称 、金额合计大写 、金额合计小写 、填发日期 、税务机关 、填票人。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect?: Rect;
 }
 
 /** 全电发票（航空运输电子客票行程单） */
@@ -708,22 +688,6 @@ declare interface FieldsInfo {
   Polygon?: CoordList;
   /** 嵌套FieldsInfo结构，仅当KeyType=1时有效。 */
   SubItems?: SubItemGroup[];
-}
-
-/** 金融票据整单识别单个字段的内容 */
-declare interface FinanBillInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：【进账单】日期、出票全称、出票账号、出票开户行、收款人全称、收款人账号、收款开户行、大写金额、小写金额、票据种类、票据张数、票据号码；【支票】开户银行、支票种类、凭证号码2、日期、大写金额、小写金额、付款行编号、密码、凭证号码1；【银行承兑汇票】或【商业承兑汇票】出票日期、行号1、行号2、出票人全称、出票人账号、付款行全称、收款人全称、收款人账号、收款人开户行、出票金额大写、出票金额小写、汇票到期日、付款行行号、付款行地址。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-}
-
-/** 金融票据切片识别单个字段的内容 */
-declare interface FinanBillSliceInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：大写金额、小写金额、账号、票号1、票号2、收款人、大写日期、同城交换号、地址-省份、地址-城市、付款行全称、支票密码、支票用途。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
 }
 
 /** 财务票据查验返回结果 */
@@ -1030,16 +994,6 @@ declare interface InvoiceDetectInfo {
   Rect?: Rect;
   /** 入参 ReturnImage 为 True 时返回 Base64 编码后的图片。 */
   Image?: string | null;
-}
-
-/** 通用机打发票信息 */
-declare interface InvoiceGeneralInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段识别（注：下划线表示一个字段）：发票代码、发票号码、日期、合计金额(小写)、合计金额(大写)、购买方识别号、销售方识别号、校验码、购买方名称、销售方名称、时间、种类、发票消费类型、省、市、是否有公司印章、发票名称、购买方地址、电话、销售方地址、电话、购买方开户行及账号、销售方开户行及账号、经办人取票用户、经办人支付信息、经办人商户号、经办人订单号、货物或应税劳务、服务名称、数量、单价、税率、税额、金额、单位、规格型号、合计税额、合计金额、备注、收款人、复核、开票人、密码区、行业分类 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect?: Rect;
 }
 
 /** 混贴票据单张发票识别信息 */
@@ -1938,16 +1892,6 @@ declare interface SealInfo {
   SealShape: string;
 }
 
-/** 轮船票字段信息 */
-declare interface ShipInvoiceInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：发票代码、发票号码、日期、票价、始发地、目的地、姓名、时间、发票消费类型、省、市、币种。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect?: Rect;
-}
-
 /** 轮船票 */
 declare interface ShippingInvoice {
   /** 发票名称 */
@@ -2516,16 +2460,6 @@ declare interface TollInvoice {
   HighwayMark?: number;
   /** 是否存在二维码（1：有，0：无） */
   QRCodeMark?: number;
-}
-
-/** 过路过桥费字段信息 */
-declare interface TollInvoiceInfo {
-  /** 识别出的字段名称（关键字）。支持以下字段的识别：发票代码、发票号码、日期、金额、入口、出口、时间、发票消费类型、高速标志。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect?: Rect;
 }
 
 /** 火车票 */
@@ -3140,16 +3074,6 @@ declare interface VatInvoiceUserInfo {
   FinancialAccount: string;
 }
 
-/** 增值税发票卷票信息 */
-declare interface VatRollInvoiceInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：发票代码、合计金额(小写)、合计金额(大写)、开票日期、发票号码、购买方识别号、销售方识别号、校验码、销售方名称、购买方名称、发票消费类型、省、市、是否有公司印章、单价、金额、数量、服务类型、品名、种类。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标。 */
-  Rect?: Rect;
-}
-
 /** 增值税普通发票（卷票）条目 */
 declare interface VatRollItem {
   /** 项目名称 */
@@ -3426,26 +3350,6 @@ declare interface BizLicenseOCRResponse {
   RequestId?: string;
 }
 
-declare interface BusInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface BusInvoiceOCRResponse {
-  /** 汽车票识别结果，具体内容请点击左侧链接。 */
-  BusInvoiceInfos?: BusInvoiceInfo[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
-  Angle?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface BusinessCardOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -3636,26 +3540,6 @@ declare interface DriverLicenseOCRResponse {
   BackPageCardCode?: string;
   /** 驾驶证类型电子驾驶证：Electronic普通驾驶证：Normal */
   DriverLicenseType?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DutyPaidProofOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface DutyPaidProofOCRResponse {
-  /** 完税证明识别结果，具体内容请点击左侧链接。 */
-  DutyPaidProofInfos?: DutyPaidProofInfo[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
-  Angle?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3880,34 +3764,6 @@ declare interface ExtractDocMultiResponse {
   WordList?: WordItem[];
   /** 样本识别字段数 */
   TokenNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface FinanBillOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface FinanBillOCRResponse {
-  /** 金融票据整单识别结果，具体内容请点击左侧链接。 */
-  FinanBillInfos?: FinanBillInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface FinanBillSliceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface FinanBillSliceOCRResponse {
-  /** 金融票据切片识别结果，具体内容请点击左侧链接。 */
-  FinanBillSliceInfos?: FinanBillSliceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4292,26 +4148,6 @@ declare interface InsuranceBillOCRResponse {
   RequestId?: string;
 }
 
-declare interface InvoiceGeneralOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface InvoiceGeneralOCRResponse {
-  /** 通用机打发票识别结果，具体内容请点击左侧链接。 */
-  InvoiceGeneralInfos?: InvoiceGeneralInfo[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
-  Angle?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface LicensePlateOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4672,38 +4508,6 @@ declare interface QuestionSplitOCRRequest {
 declare interface QuestionSplitOCRResponse {
   /** 检测到的文本信息 */
   QuestionInfo?: QuestionInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface QuotaInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface QuotaInvoiceOCRResponse {
-  /** 发票号码 */
-  InvoiceNum?: string;
-  /** 发票代码 */
-  InvoiceCode?: string;
-  /** 大写金额 */
-  Rate?: string;
-  /** 小写金额 */
-  RateNum?: string;
-  /** 发票消费类型 */
-  InvoiceType?: string;
-  /** 省 */
-  Province?: string | null;
-  /** 市 */
-  City?: string | null;
-  /** 是否有公司印章（1有 0无 空为识别不出） */
-  HasStamp?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5320,26 +5124,6 @@ declare interface SealOCRResponse {
   RequestId?: string;
 }
 
-declare interface ShipInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface ShipInvoiceOCRResponse {
-  /** 轮船票识别结果，具体内容请点击左侧链接。 */
-  ShipInvoiceInfos?: ShipInvoiceInfo[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
-  Angle?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SmartStructuralOCRRequest {
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
@@ -5508,26 +5292,6 @@ declare interface TextDetectResponse {
   RequestId?: string;
 }
 
-declare interface TollInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface TollInvoiceOCRResponse {
-  /** 过路过桥费发票识别结果，具体内容请点击左侧链接。 */
-  TollInvoiceInfos?: TollInvoiceInfo[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
-  Angle?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface TrainTicketOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5646,26 +5410,6 @@ declare interface VatInvoiceVerifyNewResponse {
   ElectronicAirTransport?: ElectronicAirTransport;
   /** 财政发票详细字段信息 */
   FinancialBill?: FinancialBill;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface VatRollInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface VatRollInvoiceOCRResponse {
-  /** 增值税发票（卷票）识别结果，具体内容请点击左侧链接。 */
-  VatRollInvoiceInfos?: VatRollInvoiceInfo[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负。 */
-  Angle?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5871,8 +5615,6 @@ declare interface Ocr {
   BankSlipOCR(data?: BankSlipOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankSlipOCRResponse>;
   /** 营业执照识别 {@link BizLicenseOCRRequest} {@link BizLicenseOCRResponse} */
   BizLicenseOCR(data?: BizLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BizLicenseOCRResponse>;
-  /** 汽车票识别 {@link BusInvoiceOCRRequest} {@link BusInvoiceOCRResponse} */
-  BusInvoiceOCR(data?: BusInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusInvoiceOCRResponse>;
   /** 名片识别 {@link BusinessCardOCRRequest} {@link BusinessCardOCRResponse} */
   BusinessCardOCR(data?: BusinessCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BusinessCardOCRResponse>;
   /** 购车发票识别 {@link CarInvoiceOCRRequest} {@link CarInvoiceOCRResponse} */
@@ -5889,8 +5631,6 @@ declare interface Ocr {
   DescribeQuestionMarkAgentJob(data?: DescribeQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionMarkAgentJobResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
-  /** 完税证明识别 {@link DutyPaidProofOCRRequest} {@link DutyPaidProofOCRResponse} */
-  DutyPaidProofOCR(data?: DutyPaidProofOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DutyPaidProofOCRResponse>;
   /** 数学试题识别 {@link EduPaperOCRRequest} {@link EduPaperOCRResponse} */
   EduPaperOCR(data?: EduPaperOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EduPaperOCRResponse>;
   /** 英文识别 {@link EnglishOCRRequest} {@link EnglishOCRResponse} */
@@ -5907,10 +5647,6 @@ declare interface Ocr {
   ExtractDocMulti(data?: ExtractDocMultiRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocMultiResponse>;
   /** 文档抽取（多模态Pro版） {@link ExtractDocMultiProRequest} {@link ExtractDocMultiProResponse} */
   ExtractDocMultiPro(data?: ExtractDocMultiProRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocMultiProResponse>;
-  /** 金融票据整单识别 {@link FinanBillOCRRequest} {@link FinanBillOCRResponse} */
-  FinanBillOCR(data?: FinanBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillOCRResponse>;
-  /** 金融票据切片识别 {@link FinanBillSliceOCRRequest} {@link FinanBillSliceOCRResponse} */
-  FinanBillSliceOCR(data?: FinanBillSliceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FinanBillSliceOCRResponse>;
   /** 机票行程单识别 {@link FlightInvoiceOCRRequest} {@link FlightInvoiceOCRResponse} */
   FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
   /** 数学公式识别 {@link FormulaOCRRequest} {@link FormulaOCRResponse} */
@@ -5941,8 +5677,6 @@ declare interface Ocr {
   ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
   /** 保险单据识别 {@link InsuranceBillOCRRequest} {@link InsuranceBillOCRResponse} */
   InsuranceBillOCR(data?: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
-  /** 通用机打发票识别 {@link InvoiceGeneralOCRRequest} {@link InvoiceGeneralOCRResponse} */
-  InvoiceGeneralOCR(data?: InvoiceGeneralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InvoiceGeneralOCRResponse>;
   /** 车牌识别 {@link LicensePlateOCRRequest} {@link LicensePlateOCRResponse} */
   LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
   /** 马来西亚身份证识别 {@link MLIDCardOCRRequest} {@link MLIDCardOCRResponse} */
@@ -5967,8 +5701,6 @@ declare interface Ocr {
   QuestionSplitLayoutOCR(data?: QuestionSplitLayoutOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionSplitLayoutOCRResponse>;
   /** 试卷切题 {@link QuestionSplitOCRRequest} {@link QuestionSplitOCRResponse} */
   QuestionSplitOCR(data?: QuestionSplitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionSplitOCRResponse>;
-  /** 定额发票识别 {@link QuotaInvoiceOCRRequest} {@link QuotaInvoiceOCRResponse} */
-  QuotaInvoiceOCR(data?: QuotaInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuotaInvoiceOCRResponse>;
   /** 通用文字识别Agent {@link RecognizeAgentRequest} {@link RecognizeAgentResponse} */
   RecognizeAgent(data?: RecognizeAgentRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAgentResponse>;
   /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
@@ -6007,8 +5739,6 @@ declare interface Ocr {
   RideHailingTransportLicenseOCR(data?: RideHailingTransportLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingTransportLicenseOCRResponse>;
   /** 印章识别 {@link SealOCRRequest} {@link SealOCRResponse} */
   SealOCR(data?: SealOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SealOCRResponse>;
-  /** 轮船票识别 {@link ShipInvoiceOCRRequest} {@link ShipInvoiceOCRResponse} */
-  ShipInvoiceOCR(data?: ShipInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ShipInvoiceOCRResponse>;
   /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
   /** 异步文档抽取Agent(创建任务) {@link SubmitExtractDocAgentJobRequest} {@link SubmitExtractDocAgentJobResponse} */
@@ -6023,16 +5753,12 @@ declare interface Ocr {
   TaxiInvoiceOCR(data?: TaxiInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TaxiInvoiceOCRResponse>;
   /** 快速文本检测 {@link TextDetectRequest} {@link TextDetectResponse} */
   TextDetect(data?: TextDetectRequest, config?: AxiosRequestConfig): AxiosPromise<TextDetectResponse>;
-  /** 过路过桥费发票识别 {@link TollInvoiceOCRRequest} {@link TollInvoiceOCRResponse} */
-  TollInvoiceOCR(data?: TollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TollInvoiceOCRResponse>;
   /** 火车票识别 {@link TrainTicketOCRRequest} {@link TrainTicketOCRResponse} */
   TrainTicketOCR(data?: TrainTicketOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TrainTicketOCRResponse>;
   /** 增值税发票识别 {@link VatInvoiceOCRRequest} {@link VatInvoiceOCRResponse} */
   VatInvoiceOCR(data?: VatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceOCRResponse>;
   /** 增值税发票核验（新版） {@link VatInvoiceVerifyNewRequest} {@link VatInvoiceVerifyNewResponse} */
   VatInvoiceVerifyNew(data: VatInvoiceVerifyNewRequest, config?: AxiosRequestConfig): AxiosPromise<VatInvoiceVerifyNewResponse>;
-  /** 增值税发票（卷票）识别 {@link VatRollInvoiceOCRRequest} {@link VatRollInvoiceOCRResponse} */
-  VatRollInvoiceOCR(data?: VatRollInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VatRollInvoiceOCRResponse>;
   /** 行驶证识别 {@link VehicleLicenseOCRRequest} {@link VehicleLicenseOCRResponse} */
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
   /** 机动车登记证书识别 {@link VehicleRegCertOCRRequest} {@link VehicleRegCertOCRResponse} */

@@ -2990,6 +2990,8 @@ declare interface PromptDetectResult {
   Result?: string;
   /** 置信度 */
   Confidence?: number;
+  /** 检出类别 */
+  Category?: string[];
 }
 
 /** 防护对象组的域名详情 */

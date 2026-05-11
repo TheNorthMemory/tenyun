@@ -88,6 +88,8 @@ declare interface AgentInstance {
   LastActiveTime?: string;
   /** 无 */
   Description?: string;
+  /** 发货进度详情 */
+  CreatingProgress?: CreatingProgress;
 }
 
 /** 会话信息 */
@@ -182,6 +184,30 @@ declare interface CreateChatCompletionRes {
   TaskId?: string;
   /** 消息的数据详情 */
   Choices?: UploadChoice[];
+}
+
+/** 发货步骤描述 */
+declare interface CreatingProgress {
+  /** 总步骤数 */
+  TotalSteps?: number;
+  /** 当前步骤 */
+  CurrentStep?: number;
+  /** 步骤详情 */
+  Steps?: CreatingStepInfo[];
+}
+
+/** 发货步骤详情 */
+declare interface CreatingStepInfo {
+  /** 步骤名称 */
+  StepName?: string;
+  /** 步骤描述 */
+  StepDesc?: string;
+  /** 步骤状态 */
+  Status?: string;
+  /** 完成时间 */
+  FinishTime?: string;
+  /** 错误信息描述 */
+  ErrMsg?: string;
 }
 
 /** 智能体值守任务额外信息 */

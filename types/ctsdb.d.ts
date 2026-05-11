@@ -191,6 +191,8 @@ declare interface Tenant {
 }
 
 declare interface DescribeClusterDetailRequest {
+  /** 实例ID */
+  ClusterID?: string;
 }
 
 declare interface DescribeClusterDetailResponse {

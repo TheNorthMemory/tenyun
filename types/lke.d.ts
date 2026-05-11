@@ -258,6 +258,16 @@ declare interface AgentPluginInfo {
   Query?: AgentPluginQuery[];
   /** MCP类型枚举值：0： SSE 模式1： Streamable Http 模式 */
   McpType?: number;
+  /** OAuth授权主体枚举值：0： 开发者授权1： 使用者授权 */
+  AuthMode?: number;
+  /** 授权方式枚举值：0： 无鉴权1： api key鉴权2： 支持CAM授权3： 支持Oauth2.0授权 */
+  AuthType?: number;
+  /** 授权配置状态枚举值：0： 不需要授权1： 未配置2： 已配置 */
+  AuthConfigStatus?: number;
+  /** 插件用途类型枚举值：0： 工具类1： 连接器类 */
+  PluginClass?: number;
+  /** 插件状态枚举值：1： 成功2： 不可用 */
+  PluginStatus?: number;
 }
 
 /** 应用配置MCP插件query信息 */
@@ -434,6 +444,10 @@ declare interface AgentToolInfo {
   AuthType?: number;
   /** 工具授权配置状态；0：不需要授权，1：需要授权-未配置，2：需要授权-已配置 */
   AuthConfigStatus?: number;
+  /** 连接器工具 API 类型枚举值：1： 只读2： 写/删除 */
+  ToolAccessMode?: number;
+  /** 是否禁用该工具 */
+  IsDisabled?: boolean;
 }
 
 /** Agent工具的请求参数定义 */
@@ -2576,7 +2590,7 @@ declare interface WidgetAction {
 declare interface WidgetParam {
   /** 参数名称 */
   Name?: string;
-  /** 参数类型 */
+  /** 参数类型枚举值：0： string1： int2： float3： bool4： object5： array_string6： array_int7： array_float8： array_bool9： array_object20： array_array */
   Type?: number;
   /** 子参数 */
   SubParams?: WidgetParam[];

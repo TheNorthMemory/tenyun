@@ -138,7 +138,7 @@ declare interface CreateLibraryRequest {
 declare interface CreateLibraryResponse {
   /** 媒体库 ID */
   LibraryId?: string;
-  /**  */
+  /** 用于访问 SMH 的域名 */
   AccessDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

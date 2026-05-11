@@ -1759,6 +1759,20 @@ declare namespace V20180717 {
     Tags?: string[];
   }
 
+  /** AIGC 高级自定义主体信息 */
+  interface AigcAdvancedCustomElementInfo {
+    /** 主体 ID。 */
+    Id?: string;
+    /** 主体名字。 */
+    Name?: string;
+    /** 主体音色 ID。 */
+    VoiceId?: string;
+    /** 主体描述。 */
+    Description?: string;
+    /** 主体创建时间。格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
+    CreateTime?: string;
+  }
+
   /** AIGC 生音效任务的输出媒体文件配置。 */
   interface AigcAudioOutputConfig {
     /** 存储模式枚举值：Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId默认值：Temporary */
@@ -1773,6 +1787,26 @@ declare namespace V20180717 {
     Duration?: number;
     /** 输出音频格式，默认不填 */
     OutputAudioFormat?: string;
+  }
+
+  /** 参考音频信息。 */
+  interface AigcAudioReferenceAudioInfo {
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
+    Type?: string;
+    /** 音频文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。 */
+    FileId?: string;
+    /** 音频文件 URL，需要外网可访问。当 Type 取值为 Url 时，本参数有效。 */
+    Url?: string;
+  }
+
+  /** 用于AIGC视频生成的参考视频素材。 */
+  interface AigcAudioReferenceVideoInfo {
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    Type?: string;
+    /** 视频文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。 */
+    FileId?: string;
+    /** 参考视频URL，需要外网可访问。当 Type 取值为 Url 时，本参数有效。 */
+    Url?: string;
   }
 
   /** 创建 AIGC 音效任务信息。 */
@@ -2201,7 +2235,7 @@ declare namespace V20180717 {
     VoiceId?: string;
     /** 是否保留视频原声。当 Category 为 Video 时有效。取值如下：Enabled：保留Disabled：不保留 */
     KeepOriginalSound?: string;
-    /** 用于区分输入是首帧或参考帧。可选值：FirstFrame：首帧；Reference：参考帧；注意，默认是FirstFrame */
+    /** 用于区分输入图像用于首（尾）帧生视频、图生视频或参考生视频。可选值：FirstFrame：用于首（尾）帧生视频 或 图生视频；Reference：用于参考生视频；注意，默认是FirstFrame */
     Usage?: string;
   }
 
@@ -2563,9 +2597,9 @@ declare namespace V20180717 {
     Name?: string;
     /** 日志下载链接，24小时内下载有效。 */
     Url?: string;
-    /** 日志起始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 日志起始时间，使用 ISO 日期格式。 */
     StartTime?: string;
-    /** 日志结束时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 日志结束时间，使用 ISO 日期格式。 */
     EndTime?: string;
   }
 
@@ -2633,7 +2667,7 @@ declare namespace V20180717 {
 
   /** 自适应码流任务多语言音频流输入参数。 */
   interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
-    /** 音频源的媒体 ID。固定取该媒体中的首个音频流，视频流和其它音频流（如有）将被忽略。 */
+    /** 音频源的媒体 ID。固定取该媒体源文件中的首个音频流，视频流和其它音频流（如有）将被忽略。 */
     FileId: string;
     /** 输出的自适应码流中的音频流名称，长度限制为16个字符。 */
     Name: string;
@@ -3133,11 +3167,11 @@ declare namespace V20180717 {
     DeployStatus?: string;
     /** HTTPS 配置信息。 */
     HTTPSConfig?: DomainHTTPSConfig;
-    /** [Key 防盗链](https://cloud.tencent.com/document/product/266/14047)配置信息。 */
+    /** Key 防盗链配置信息。 */
     UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
-    /** [Referer 防盗链](https://cloud.tencent.com/document/product/266/14046)配置信息。 */
+    /** Referer 防盗链配置信息。 */
     RefererAuthPolicy?: RefererAuthPolicy;
-    /** 域名添加到腾讯云点播系统中的时间。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 域名添加到腾讯云点播系统中的时间。格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     CreateTime?: string;
     /** 域名 QUIC 配置信息。 */
     QUICConfig?: DomainQUICConfig;
@@ -3149,7 +3183,7 @@ declare namespace V20180717 {
 
   /** 域名 HTTPS 配置信息 */
   interface DomainHTTPSConfig {
-    /** 证书过期时间。格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 证书过期时间。格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。参数格式：YYYY-MM-DDThh:mm:ss+08:00 */
     CertExpireTime: string;
     /** 腾讯云 SSL 产品中的证书 ID。 */
     CloudCertId?: string;
@@ -4185,6 +4219,66 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** MPS智能分析模板配置选项 */
+  interface MPSAIAnalysisConfigureInfo {
+    /** 智能分类任务开关，可选值： ON：开启智能分类任务； OFF：关闭智能分类任务。 */
+    Switch?: string;
+  }
+
+  /** MPS智能分析模板输入 */
+  interface MPSAIAnalysisTemplate {
+    /** 视频内容分析模板名称，长度限制：64 个字符。 */
+    Name: string;
+    /** 视频内容分析模板描述信息，长度限制：256 个字符。 */
+    Comment: string;
+    /** 智能分类任务控制参数。 */
+    ClassificationConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能标签任务控制参数。 */
+    TagConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能封面任务控制参数。 */
+    CoverConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能按帧标签任务控制参数。 */
+    FrameTagConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能拆条任务控制参数。 */
+    SplitConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能集锦任务控制参数。 */
+    HighlightConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能片头片尾任务控制参数。 */
+    OpeningAndEndingConfigure?: MPSAIAnalysisConfigureInfo;
+  }
+
+  /** MPS智能分析模板输入 */
+  interface MPSAIAnalysisTemplateForUpdate {
+    /** 视频内容分析模板唯一标识。 */
+    Definition: number;
+    /** 视频内容分析模板名称，长度限制：64 个字符。 */
+    Name: string;
+    /** 视频内容分析模板描述信息，长度限制：256 个字符。 */
+    Comment: string;
+    /** 智能分类任务控制参数。 */
+    ClassificationConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能标签任务控制参数。 */
+    TagConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能封面任务控制参数。 */
+    CoverConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能按帧标签任务控制参数。 */
+    FrameTagConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能拆条任务控制参数。 */
+    SplitConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能集锦任务控制参数。 */
+    HighlightConfigure?: MPSAIAnalysisConfigureInfo;
+    /** 智能片头片尾任务控制参数。 */
+    OpeningAndEndingConfigure?: MPSAIAnalysisConfigureInfo;
+  }
+
+  /** AI 视频智能分析输入参数类型 */
+  interface MPSAiAnalysisTaskInput {
+    /** 视频内容分析模板 ID。 */
+    Definition: number;
+    /** 扩展参数，其值为序列化的 json字符串。注意：此参数为定制需求参数，参考如下：智能檫除智能拆条高光集锦智能横转竖 */
+    ExtendedParameter?: string;
+  }
+
   /** 使用MPS进行处理后的智能媒体信息 */
   interface MPSAiMediaInfo {
     /** MPS处理后的智能媒体信息列表 */
@@ -4209,6 +4303,30 @@ declare namespace V20180717 {
     OutputText?: string;
   }
 
+  /** 智能擦除，擦除区域坐标配置。区域由左上角与右下角点的坐标确定。坐标原点为画面左上角，坐标点可使用像素值或百分比单位指定。对自动擦除区域：当单位为%时，坐标范围为[0,1]；当单位为px时，X值范围为 [0，视频画面宽度]，Y值范围为 [0，视频画面高度]对指定擦除区域：当单位为%时，坐标范围为[0,1)；当单位为px时，X值范围为 [0，视频画面宽度]，Y值范围为 [0，视频画面高度] */
+  interface MPSEraseArea {
+    /** 区域左上角X坐标。 如当Unit取1即使用百分比单位时，0.05表示区域左上角离整个画面左上角的横向距离为画面宽度的5%。 */
+    LeftTopX: number;
+    /** 区域左上角Y坐标。 如当Unit取1即使用百分比单位时，0.1表示区域左上角离整个画面左上角的纵向距离为画面高度的10%。 */
+    LeftTopY: number;
+    /** 区域右下角X坐标。 如当Unit取1即使用百分比单位时，0.75表示区域右下角离整个画面左上角的横向距离为画面宽度的75%。 */
+    RightBottomX: number;
+    /** 区域右下角Y坐标。 如当Unit取1即使用百分比单位时，0.9表示区域右下角离整个画面左上角的纵向距离为画面高度的90%。 */
+    RightBottomY: number;
+    /** 坐标单位 - 1 百分比 - 2 像素值 */
+    Unit: number;
+  }
+
+  /** 智能擦除，指定擦除区域配置。对指定时间段内的指定区域直接进行擦除。当BeginMs和EndMs均取0时对整个视频内的指定区域直接进行擦除。 */
+  interface MPSEraseTimeArea {
+    /** 开始时间，单位:毫秒 */
+    BeginMs: number;
+    /** 结束时间，单位:毫秒 */
+    EndMs: number;
+    /** 时间段内擦除区域列表 */
+    Areas: MPSEraseArea[];
+  }
+
   /** 用于描述 MPS 视频处理任务中的返回文件结果。 */
   interface MPSOutputFile {
     /** 文件类型。用于标识 MPS 视频处理任务执行结果中的特定返回文件。取值：AiAnalysis.DeLogo.Video: 智能擦除任务中产生的擦除后视频文件，默认以原文件类型存储；AiAnalysis.DeLogo.OriginSubtitle: 智能擦除任务中基于画面提取的字幕文件；AiAnalysis.DeLogo.TranslateSubtitle: 智能擦除任务中基于画面提取的字幕翻译文件。MediaProcess.Transcode.Video: 音视频增强任务中增强后的音视频文件，默认以转码文件类型存储。AiAnalysis.HorizontalToVerticalTask.Video: 横转竖任务中生成的视频文件，默认以智能媒体文件类型存储。AiAnalysis.VideoRemakeTaskk.Video: 智能去重任务中生成的视频文件，默认以智能媒体文件类型存储。AiAnalysis.SegmentTask.Video: 智能拆条任务中生成的视频文件，默认以智能媒体文件类型存储。SmartErase.Video: 智能擦除任务中生成的视频文件，默认以智能媒体文件类型存储。 */
@@ -4231,6 +4349,226 @@ declare namespace V20180717 {
     FileType?: string;
     /** MPS输出文件的URL */
     Url?: string;
+  }
+
+  /** 智能擦除自定义参数 */
+  interface MPSOverrideEraseParameter {
+    /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
+    EraseType?: string;
+    /** 字幕擦除配置；当EraseType值为：subtitle，此字段为必填参数 */
+    EraseSubtitleConfig?: MPSUpdateSmartEraseSubtitleConfig;
+    /** 水印擦除配置；当EraseType值为：watermark，此字段为必填参数 */
+    EraseWatermarkConfig?: MPSUpdateSmartEraseWatermarkConfig;
+    /** 隐私保护配置；当EraseType值为：privacy，此字段为必填参数 */
+    ErasePrivacyConfig?: MPSSmartErasePrivacyConfig;
+    /** 擦除压制字幕模板id。 */
+    SubtitleEmbedId?: number;
+  }
+
+  /** 智能擦除自定义参数 */
+  interface MPSRawSmartEraseParameter {
+    /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
+    EraseType: string;
+    /** 字幕擦除配置；当EraseType值为：subtitle，此字段为必填参数 */
+    EraseSubtitleConfig?: MPSSmartEraseSubtitleConfig;
+    /** 水印擦除配置；当EraseType值为：watermark，此字段为必填参数 */
+    EraseWatermarkConfig?: MPSSmartEraseWatermarkConfig;
+    /** 隐私保护配置；当EraseType值为：privacy，此字段为必填参数 */
+    ErasePrivacyConfig?: MPSSmartErasePrivacyConfig;
+    /** 擦除字幕压制模板id。 */
+    SubtitleEmbedId?: number;
+    /** 压制配置，默认开启1, 把字幕压制回原字幕位置。 */
+    UseOriginalPos?: number;
+    /** 压制配置，默认开启1, 开启后使用原字幕字号。 */
+    UseOriginalSize?: number;
+  }
+
+  /** 自定义智能字幕参数 */
+  interface MPSRawSmartSubtitleParameter {
+    /** 智能字幕字幕语言类型。枚举值：0： 源语言1： 翻译语言2： 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+    SubtitleType: number;
+    /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
+    VideoSrcLanguage: string;
+    /** 智能字幕文件格式:ASR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕不填或填空：不生成字幕文件纯字幕翻译处理类型下：original：与源文件一致vtt: WebVTT 格式字幕srt: SRT 格式字幕OCR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕注意：ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；纯字幕翻译和OCR识别翻译方式下，不允许传空或不传OCR类型的任务，在开启压制时，允许不传或传空 */
+    SubtitleFormat?: string;
+    /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
+    TranslateSwitch?: string;
+    /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
+    TranslateDstLanguage?: string;
+    /** 自定义参数 */
+    ExtInfo?: string;
+    /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下默认类型为 ASR识别字幕 */
+    ProcessType?: number;
+  }
+
+  /** 字幕OCR提取框选区域配置 */
+  interface MPSSelectingSubtitleAreasConfig {
+    /** 自动选择自定义区域。 对选定区域，利用AI模型自动检测其中存在的选择目标并提取。 */
+    AutoAreas?: MPSEraseArea[];
+    /** 示例视频或图片的宽，单位像素值 */
+    SampleWidth?: number;
+    /** 示例视频或图片的高，单位像素值 */
+    SampleHeight?: number;
+  }
+
+  /** 智能擦除模板隐私保护配置 */
+  interface MPSSmartErasePrivacyConfig {
+    /** 隐私保护擦除方式。枚举值：blur： 模糊mosaic： 马赛克 */
+    PrivacyModel: string;
+    /** 隐私保护目标，（在API Explorer上使用时无需传入数组，添加相应项并填入对应值即可）。枚举值：face： 人脸plate： 车牌 */
+    PrivacyTargets: string[];
+  }
+
+  /** 智能擦除模板去字幕配置 */
+  interface MPSSmartEraseSubtitleConfig {
+    /** 字幕擦除方式。自动擦除：通过AI模型自动识别视频中的字幕文本内容，进行无痕化擦除，生成新的视频。但画面干扰、特殊字幕样式可能会带来一定漏擦误擦问题，可以通过指定区域擦除处理。当使用自动擦除时，若您不指定AutoAreas，将对默认区域（画面中下部）进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。指定区域擦除：若您的字幕位置较固定，建议您直接指定擦除区域，最大程度减少漏擦的情况。当您选择指定区域擦除时，请在CustomAreas中至少传入一个指定区域。auto 自动擦除custom 指定区域擦除 */
+    SubtitleEraseMethod: string;
+    /** 字幕擦除模型。标准版（推荐）：若您的字幕样式标准，通常建议选择该版本，细节无痕化效果更好。区域版：若您的字幕存在花体、阴影、动效等特殊样式，建议选择区域版，擦除面积更大，但细节效果不如标准版。standard 标准模型area 区域模型 */
+    SubtitleModel: string;
+    /** 是否开启OCR字幕提取，默认取OFF。当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。ON 开启OFF 关闭 */
+    OcrSwitch?: string;
+    /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取"ON"时生效。zh_en 中英文multi 其他其他具体支持识别如下语言：中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
+    SubtitleLang?: string;
+    /** 字幕文件格式，默认取vtt；仅当OcrSwitch取"ON"时生效。srt srt格式vtt WebVTT格式当填写SubtitleEmbedId时可以取值空字符串，表示不输出字幕文件 */
+    SubtitleFormat?: string;
+    /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取"ON"时生效。ON 开启OFF 关闭 */
+    TransSwitch?: string;
+    /** 字幕翻译目标语言，默认取en；仅当TransSwitch取"ON"时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+    TransDstLang?: string;
+    /** 自动擦除自定义区域。对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意：当擦除方式选择custom时，此参数将不会生效；修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    AutoAreas?: MPSEraseArea[];
+    /** 指定擦除自定义区域。对选定区域，在选定时间段内不进行检测识别直接进行擦除。注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    CustomAreas?: MPSEraseTimeArea[];
+    /** 压制配置，默认开启1, 把字幕压制回原字幕位置。只有开启OCR翻译时可以填写，取0时表示不开启压回原位 */
+    UseOriginalPos?: number;
+    /** 压制配置，默认开启1, 开启后使用原字幕字号。只有开启OCR翻译时可以填写，取0时表示不使用原字号 */
+    UseOriginalSize?: number;
+  }
+
+  /** 智能擦除任务 */
+  interface MPSSmartEraseTaskInput {
+    /** 智能擦除模板id。 */
+    Definition?: number;
+    /** 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。 */
+    RawParameter?: MPSRawSmartEraseParameter;
+    /** 智能擦除自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分擦除参数时，将使用填写的参数覆盖智能擦除模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定智能擦除参数。 */
+    OverrideParameter?: MPSOverrideEraseParameter;
+  }
+
+  /** MPS智能擦除模板输入 */
+  interface MPSSmartEraseTemplate {
+    /** 智能擦除模板名称长度限制：64 个字符。 */
+    Name: string;
+    /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
+    EraseType: string;
+    /** 智能擦除模板描述信息长度限制：256 个字符。 */
+    Comment?: string;
+    /** 字幕擦除配置，EraseType取subtitle时必填且仅此时生效。 */
+    EraseSubtitleConfig?: MPSSmartEraseSubtitleConfig;
+    /** 水印擦除配置，EraseType取watermark时必填且仅此时生效。 */
+    EraseWatermarkConfig?: MPSSmartEraseWatermarkConfig;
+    /** 隐私保护配置，EraseType取privacy时必填且仅此时生效。 */
+    ErasePrivacyConfig?: MPSSmartErasePrivacyConfig;
+    /** 示例视频或图片的宽，单位像素值 */
+    SampleWidth?: number;
+    /** 示例视频或图片的高，单位像素值 */
+    SampleHeight?: number;
+  }
+
+  /** MPS智能擦除模板输入 */
+  interface MPSSmartEraseTemplateForUpdate {
+    /** 智能擦除模板唯一标识 */
+    Definition: number;
+    /** 智能擦除模板名称长度限制：64 个字符。 */
+    Name: string;
+    /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
+    EraseType: string;
+    /** 智能擦除模板描述信息长度限制：256 个字符。 */
+    Comment?: string;
+    /** 字幕擦除配置，EraseType取subtitle或者EraseType不填，对应模板原EraseType为subtitle时生效。 */
+    EraseSubtitleConfig?: MPSSmartEraseSubtitleConfig;
+    /** 水印擦除配置，EraseType取watermark或者EraseType不填，对应模板原EraseType为watermark时生效。 */
+    EraseWatermarkConfig?: MPSSmartEraseWatermarkConfig;
+    /** 隐私保护配置，EraseType取privacy或者EraseType不填，对应模板原EraseType为privacy时生效。 */
+    ErasePrivacyConfig?: MPSSmartErasePrivacyConfig;
+    /** 示例视频或图片的宽，单位像素值 */
+    SampleWidth?: number;
+    /** 示例视频或图片的高，单位像素值 */
+    SampleHeight?: number;
+  }
+
+  /** 智能擦除模板去水印配置 */
+  interface MPSSmartEraseWatermarkConfig {
+    /** 水印擦除方式。 自动擦除：通过A模型自动识别视频中的水印，擦除后生成新的视频。适用于动态水印。 当使用自动擦除时，若您不指定AutoAreas，将对视频全屏进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。 指定区域擦除：针对位置较固定的静态水印，建议您直接指定擦除区域。 当您选择指定区域擦除时，请至少传入一个指定区域。 - auto 自动擦除 - custom 指定区域擦除 */
+    WatermarkEraseMethod: string;
+    /** 水印擦除模型。 基础版：效果一般，性价比高，适合动画或背景较干净的视频。 高级版：效果更好，适合短剧等现实风格视频。 - basic 基础版 - advanced 高级版 */
+    WatermarkModel: string;
+    /** 自动擦除自定义区域。 对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。 注意，当擦除方式为custom时，此参数将不会生效。清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    AutoAreas?: MPSEraseArea[];
+    /** 指定擦除自定义区域。 对选定区域，在选定时间段内不进行检测识别直接进行擦除。 注意：清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    CustomAreas?: MPSEraseTimeArea[];
+  }
+
+  /** MPS智能字幕模板输入 */
+  interface MPSSmartSubtitleTemplate {
+    /** 智能字幕模板名称长度限制：64 个字符。 */
+    Name: string;
+    /** 智能字幕模板描述信息长度限制：256 个字符。 */
+    Comment: string;
+    /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+    SubtitleType: number;
+    /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
+    VideoSrcLanguage?: string;
+    /** 智能字幕文件格式:ASR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕不填或填空：不生成字幕文件纯字幕翻译处理类型下：original：与源文件一致vtt: WebVTT 格式字幕srt: SRT 格式字幕OCR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕注意：ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；纯字幕翻译方式下，不允许传空或不传OCR类型的任务，在开启压制时，允许不传或传空 */
+    SubtitleFormat?: string;
+    /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
+    TranslateSwitch?: string;
+    /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
+    TranslateDstLanguage?: string;
+    /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下默认类型为 ASR识别字幕 */
+    ProcessType?: number;
+    /** 字幕OCR提取框选区域配置 */
+    SelectingSubtitleAreasConfig?: MPSSelectingSubtitleAreasConfig;
+    /** 说话人识别开关，可选值：0：表示不开启说话人识别；1：表示开启说话人识别；默认不开启说话人识别。 */
+    SpeakerMode?: number;
+    /** 说话人识别输出到字幕文件，可选值：0：表示不输出到字幕文件；1：表示输出到vtt字幕文件注意：使用此参数SpeakerMode的值不能为0；默认不输出到字幕文件。 */
+    SpeakerLabel?: number;
+  }
+
+  /** MPS智能字幕模板输入 */
+  interface MPSSmartSubtitleTemplateForUpdate {
+    /** 智能字幕模板唯一标识 */
+    Definition: number;
+    /** 智能字幕模板名称长度限制：64 个字符。 */
+    Name: string;
+    /** 智能字幕模板描述信息长度限制：256 个字符。 */
+    Comment: string;
+    /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
+    SubtitleType: number;
+    /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
+    VideoSrcLanguage?: string;
+    /** 智能字幕文件格式:ASR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕不填或填空：不生成字幕文件纯字幕翻译处理类型下：original：与源文件一致vtt: WebVTT 格式字幕srt: SRT 格式字幕OCR识别翻译处理类型下：vtt: WebVTT 格式字幕srt: SRT 格式字幕注意：ASR识别方式下，翻译大于等于2种语言时不允许传空或不传；纯字幕翻译方式下，不允许传空或不传OCR类型的任务，在开启压制时，允许不传或传空 */
+    SubtitleFormat?: string;
+    /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
+    TranslateSwitch?: string;
+    /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
+    TranslateDstLanguage?: string;
+    /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下，默认是ASR方式 */
+    ProcessType?: number;
+    /** 字幕OCR提取框选区域配置 */
+    SelectingSubtitleAreasConfig?: MPSSelectingSubtitleAreasConfig;
+    /** 说话人识别开关，可选值：0：表示不开启说话人识别；1：表示开启说话人识别。 */
+    SpeakerMode?: number;
+    /** 说话人识别输出到字幕文件，可选值：0：表示不输出到字幕文件；1：表示输出到vtt字幕文件注意：使用此参数SpeakerMode的值不能为0。 */
+    SpeakerLabel?: number;
+  }
+
+  /** 智能字幕输入结构体 */
+  interface MPSSmartSubtitlesTaskInput {
+    /** 智能字幕模板 ID。 */
+    Definition?: number;
+    /** 智能字幕自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能字幕参数。 */
+    RawParameter?: MPSRawSmartSubtitleParameter;
   }
 
   /** MPS 具体子任务查询结果类型。 */
@@ -4263,6 +4601,40 @@ declare namespace V20180717 {
     TaskType?: string;
     /** MPS 任务模板详情内容。 */
     MPSTemplateInfo?: string;
+  }
+
+  /** 智能擦除模板去字幕配置 */
+  interface MPSUpdateSmartEraseSubtitleConfig {
+    /** 字幕擦除方式。 自动擦除：通过AI模型自动识别视频中的字幕文本内容，进行无痕化擦除，生成新的视频。但画面干扰、特殊字幕样式可能会带来一定漏擦误擦问题，可以通过指定区域擦除处理。 当使用自动擦除时，若您不指定AutoAreas，将对默认区域（画面中下部）进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。 指定区域擦除：若您的字幕位置较固定，建议您直接指定擦除区域，最大程度减少漏擦的情况。 当您选择指定区域擦除时，请在CustomAreas中至少传入一个指定区域。 auto 自动擦除 -custom 指定区域擦除 */
+    SubtitleEraseMethod?: string;
+    /** 字幕擦除模型。 标准版（推荐）：若您的字幕样式标准，通常建议选择该版本，细节无痕化效果更好。 区域版：若您的字幕存在花体、阴影、动效等特殊样式，建议选择区域版，擦除面积更大，但细节效果不如标准版。 - standard 标准模型 - area 区域模型 */
+    SubtitleModel?: string;
+    /** 是否开启OCR字幕提取，默认取OFF。 当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。 ON 开启OFF 关闭 */
+    OcrSwitch?: string;
+    /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取&quot;ON&quot;时生效。 zh_en 中英文 multi 其他 其他具体支持识别如下语言： 中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
+    SubtitleLang?: string;
+    /** 字幕文件格式，默认取vtt；仅当OcrSwitch取&quot;ON&quot;时生效。srt srt格式 vtt WebVTT格式 */
+    SubtitleFormat?: string;
+    /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取&quot;ON&quot;时生效。 ON 开启 OFF 关闭 */
+    TransSwitch?: string;
+    /** 字幕翻译目标语言，默认取en；仅当TransSwitch取&quot;ON&quot;时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+    TransDstLang?: string;
+    /** 自动擦除自定义区域。 对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意：当擦除方式选择custom时，此参数将不会生效；修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    AutoAreas?: MPSEraseArea[];
+    /** 指定擦除自定义区域。 对选定区域，在选定时间段内不进行检测识别直接进行擦除。 注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    CustomAreas?: MPSEraseTimeArea[];
+  }
+
+  /** 智能擦除模板去水印配置 */
+  interface MPSUpdateSmartEraseWatermarkConfig {
+    /** 水印擦除方式。 自动擦除：通过A模型自动识别视频中的水印，擦除后生成新的视频。适用于动态水印。 当使用自动擦除时，若您不指定AutoAreas，将对视频全屏进行自动擦除；若指定AutoAreas，将改为对您指定的区域进行自动擦除。指定区域擦除：针对位置较固定的静态水印，建议您直接指定擦除区域。 当您选择指定区域擦除时，请至少传入一个指定区域。 - auto 自动擦除 - custom 指定区域擦除 */
+    WatermarkEraseMethod?: string;
+    /** 水印擦除模型。 基础版：效果一般，性价比高，适合动画或背景较干净的视频。 高级版：效果更好，适合短剧等现实风格视频。 basic 基础版 advanced 高级版 */
+    WatermarkModel?: string;
+    /** 自动擦除自定义区域。 对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。 注意，当擦除方式为custom时，此参数将不会生效。清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    AutoAreas?: MPSEraseArea[];
+    /** 指定擦除自定义区域。 对选定区域，在选定时间段内不进行检测识别直接进行擦除。 注意：清除区域请传入[]，不传时将保持模板区域信息不变。 */
+    CustomAreas?: MPSEraseTimeArea[];
   }
 
   /** 转自适应码流信息 */
@@ -5215,11 +5587,11 @@ declare namespace V20180717 {
     ImageSpriteDefinition?: number;
     /** 播放器对不于不同分辨率的子流展示名字。 */
     ResolutionNameSet?: ResolutionNameInfo[];
-    /** 播放器配置创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 播放器配置创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 播放器配置最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 播放器配置最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
-    /** 播放时使用的域名。值为 Default，表示使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的域名。 */
+    /** 播放时使用的域名。值为 Default，表示使用默认分发配置中的域名。 */
     Domain?: string;
     /** 播放时使用的 Scheme。取值范围：Default：使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的 Scheme；HTTP；HTTPS。 */
     Scheme?: string;
@@ -5633,13 +6005,13 @@ declare namespace V20180717 {
   interface ProductInstance {
     /** 预付费商品实例类型，取值有：StarterPackage：点播新手包。MiniProgramPlugin：点播小程序插件。ResourcePackage：点播资源包。 */
     ProductType?: string;
-    /** 资源包实例起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 资源包实例起始日期。使用 ISO 日期格式。 */
     StartTime?: string;
-    /** 资源包实例过期日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 资源包实例过期日期。使用 ISO 日期格式。 */
     ExpireTime?: string;
     /** 资源包实例ID。对应每个资源包，系统会分配相应的资源。续费或者升级资源包时，需要带上这个资源ID。 */
     ProductInstanceId?: string;
-    /** 系统最近一次扣除资源包的日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 系统最近一次扣除资源包的日期。使用 ISO 日期格式。 */
     LastConsumeDate?: string;
     /** 资源包绑定 License 状态，取值有：0：未绑定。1：已绑定。 */
     BindStatus?: number;
@@ -8079,6 +8451,32 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcAudioTaskRequest {
+    /** 模型名称。 */
+    ModelName?: string;
+    /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。 */
+    ModelVersion?: string;
+    /** 指定场景，目前支持sfx（音效）。 */
+    SceneType?: string;
+    /** 生成音频的描述 */
+    Prompt?: string;
+    /** 参考视频信息 */
+    VideoInfos?: AigcAudioReferenceVideoInfo[];
+    /** 传入参考音频信息。比如传入音频生成音乐时需要传入。 */
+    AudioInfos?: AigcAudioReferenceAudioInfo[];
+    /** 输出参数 */
+    OutputConfig?: AigcAudioOutputConfig;
+    /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例：{"camera_control":{"type":"simple"}} */
+    AdditionalParameters?: string;
+  }
+
+  interface CreateAigcAudioTaskResponse {
+    /** 任务创建成功后，返回的任务ID。调用查询接口，轮询获取任务进度及生成结果。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAigcCustomElementRequest {
     /** 主体名称。不能超过20个字符 */
     ElementName: string;
@@ -8214,7 +8612,7 @@ declare namespace V20180717 {
   interface CreateAigcVideoTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：Kling：可灵；Vidu；Hailuo：海螺；Jimeng：即梦；Hunyuan：混元；Mingmou：明眸；GV；OS；PixVerse; */
+    /** 模型名称。取值：Kling：可灵；Vidu；Hailuo：海螺；Hunyuan：混元；Mingmou：明眸；GV；OS；PixVerse; */
     ModelName: string;
     /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
     ModelVersion: string;
@@ -8564,12 +8962,18 @@ declare namespace V20180717 {
   }
 
   interface CreateMPSTemplateRequest {
-    /** 点播[应用](/document/product/266/14574) ID。 */
+    /** 点播应用 ID。 */
     SubAppId: number;
-    /** 需要创建的 MPS 模板的类型。取值：Transcode: 创建转码模板，目前仅支持创建增强模板。AIAnalysis: 创建智能分析模板。SmartSubtitle: 创建智能字幕模板。SmartErase: 创建智能擦除模板。 */
+    /** 需要创建的 MPS 模板的类型。取值：AIAnalysis: 创建智能分析模板。SmartSubtitle: 创建智能字幕模板。SmartErase: 创建智能擦除模板。 */
     TemplateType: string;
-    /** MPS 创建模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧创建用户自定义的 MPS 任务模板。目前仅支持通过此方式创建以下任务类型的模板：1. 音视频增强：仅支持填写“[创建转码模板](https://cloud.tencent.com/document/product/862/37605)”接口中的 Container 、Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数。其中 EnhanceConfig 此处必填，且 Container 目前暂不支持 hls。2. 智能分析：仅支持填写“[创建内容分析模板](https://cloud.tencent.com/document/api/862/40249)”接口中的Name、Comment、ClassificationConfigure、TagConfigure、CoverConfigure、FrameTagConfigure几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。3. 智能字幕：仅支持填写“[创建智能字幕模板](https://cloud.tencent.com/document/api/862/117004)”接口中的Name、Comment、TranslateSwitch、VideoSrcLanguage、SubtitleFormat、SubtitleType、AsrHotWordsConfigure、TranslateDstLanguage、ProcessType几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。4. 智能擦除：仅支持填写“[创建智能擦除模板](https://cloud.tencent.com/document/api/862/123735)”接口中的Name、Comment、EraseType、EraseSubtitleConfig、EraseWatermarkConfig、ErasePrivacyConfig几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。目前模板中仅支持配置以上参数，其他参数无需填写。若包含其它参数，系统将自动忽略。以上透传参数以JSON形式表示。 */
-    MPSCreateTemplateParams: string;
+    /** MPS 创建模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧创建用户自定义的 MPS 任务模板。目前仅支持通过此方式创建以下任务类型的模板：智能分析：仅支持填写“创建内容分析模板”接口中的Name、Comment、ClassificationConfigure、TagConfigure、CoverConfigure、FrameTagConfigure几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能字幕：仅支持填写“创建智能字幕模板”接口中的Name、Comment、TranslateSwitch、VideoSrcLanguage、SubtitleFormat、SubtitleType、AsrHotWordsConfigure、TranslateDstLanguage、ProcessType几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能擦除：仅支持填写“创建智能擦除模板”接口中的Name、Comment、EraseType、EraseSubtitleConfig、EraseWatermarkConfig、ErasePrivacyConfig几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。目前模板中仅支持配置以上参数，其他参数无需填写。若包含其它参数，系统将自动忽略。以上透传参数以JSON形式表示。 */
+    MPSCreateTemplateParams?: string;
+    /** 智能分析模板参数，MPSCreateTemplateParams为空时有效。 */
+    AIAnalysisTemplate?: MPSAIAnalysisTemplate;
+    /** 智能字幕模板参数，MPSCreateTemplateParams为空时有效。 */
+    SmartSubtitleTemplate?: MPSSmartSubtitleTemplate;
+    /** 智能擦除模板参数，MPSCreateTemplateParams为空时有效。 */
+    SmartEraseTemplate?: MPSSmartEraseTemplate;
   }
 
   interface CreateMPSTemplateResponse {
@@ -9069,6 +9473,18 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DeleteAigcAdvancedCustomElementRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** AIGC 高级自定义主体的 ID */
+    ElementId: string;
+  }
+
+  interface DeleteAigcAdvancedCustomElementResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteAigcApiTokenRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -9473,6 +9889,24 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeAigcAdvancedCustomElementsRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 分页返回的起始偏移量。将返回第 Offset 到第 Offset+Limit-1 条。默认值：0Offset 必须是 Limit 的整数倍。 */
+    Offset?: number;
+    /** 分页返回的记录条数。取值范围：[1, 300]默认值：10Offset 必须是 Limit 的整数倍。 */
+    Limit?: number;
+  }
+
+  interface DescribeAigcAdvancedCustomElementsResponse {
+    /** AIGC 高级自定义主体信息。 */
+    ElementSet?: AigcAdvancedCustomElementInfo[];
+    /** 记录总数。 */
+    TotalCount?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeAigcApiTokensRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -9680,11 +10114,11 @@ declare namespace V20180717 {
   interface DescribeCdnLogsRequest {
     /** 域名。 */
     DomainName: string;
-    /** 获取日志起始时间点，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 获取日志起始时间点，使用 ISO 日期格式。参数格式：YYYY-MM-DDThh:mm:ssZ */
     StartTime: string;
-    /** 结束时间需大于起始时间；使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 结束时间需大于起始时间；使用 ISO 日期格式。参数格式：YYYY-MM-DDThh:mm:ssZ */
     EndTime: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 分页拉取的最大返回结果数。默认值：100；最大值：1000。 */
     Limit?: number;
@@ -11422,10 +11856,16 @@ declare namespace V20180717 {
   interface ModifyMPSTemplateRequest {
     /** 点播应用 ID。 */
     SubAppId: number;
-    /** 需要修改的 MPS 模板的类型。枚举值：Transcode： 转码模板，目前仅支持修改增强参数AIAnalysis： 智能分析模板SmartSubtitle： 智能字幕模板SmartErase： 智能擦除模板 */
+    /** 需要修改的 MPS 模板的类型。枚举值：AIAnalysis： 智能分析模板SmartSubtitle： 智能字幕模板SmartErase： 智能擦除模板 */
     TemplateType: string;
     /** MPS 修改模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧修改用户自定义的 MPS 任务模板。 目前仅支持通过此方式修改以下任务类型的模板：音视频增强：仅支持填写“修改转码模板”接口中的 Name、Comment、RemoveVideo、RemoveAudio、VideoTemplate、AudioTemplate 和 EnhanceConfig 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能分析：仅支持填写“修改内容分析模板”接口中的Name、Comment、ClassificationConfigure、TagConfigure、CoverConfigure、FrameTagConfigure几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能字幕：仅支持填写“修改智能字幕模板”接口中的Name、Comment、TranslateSwitch、VideoSrcLanguage、SubtitleFormat、SubtitleType、AsrHotWordsConfigure、TranslateDstLanguage、ProcessType几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。智能擦除：仅支持填写“修改智能擦除模板”接口中的Name、Comment、EraseType、EraseSubtitleConfig、EraseWatermarkConfig、ErasePrivacyConfig几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。 */
-    MPSModifyTemplateParams: string;
+    MPSModifyTemplateParams?: string;
+    /** 智能分析模板参数，MPSModifyTemplateParams为空时有效。 */
+    AIAnalysisTemplate?: MPSAIAnalysisTemplateForUpdate;
+    /** 智能字幕模板参数，MPSModifyTemplateParams为空时有效。 */
+    SmartSubtitleTemplate?: MPSSmartSubtitleTemplateForUpdate;
+    /** 智能擦除模板参数，MPSModifyTemplateParams为空时有效。 */
+    SmartEraseTemplate?: MPSSmartEraseTemplateForUpdate;
   }
 
   interface ModifyMPSTemplateResponse {
@@ -11946,8 +12386,14 @@ declare namespace V20180717 {
     FileId: string;
     /** 点播应用 ID。 */
     SubAppId: number;
-    /** 该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。视频处理参数详情请参考：MPS 发起媒体处理。填写说明：目前仅需要配置 MPS “发起媒体处理”接口中任务配置相关的参数，如 AiAnalysisTask 与 MediaProcessTask，其他参数无需填写。若包含其它参数，系统将自动忽略；当前仅支持通过此方式发起智能擦除及音视频增强任务。若配置了其他任务类型的相关参数，系统将自动忽略这些参数；音视频增强任务目前不支持使用预置模板发起，可通过 CreateMPSTemplate 接口创建自定义模板。 */
-    MPSProcessMediaParams: string;
+    /** 可选参数，该参数用于透传至媒体处理服务（MPS），以便从云点播侧发起 MPS 视频处理任务。不同类型的视频处理参数详情请参考 使用MPS 媒体 AI 能力，可通过CreateMPSTemplate 接口创建自定义模板。 */
+    MPSProcessMediaParams?: string;
+    /** 视频内容分析类型任务参数，MPSProcessMediaParams为空时有效。 */
+    AiAnalysisTask?: MPSAiAnalysisTaskInput;
+    /** 智能字幕类型任务参数，MPSProcessMediaParams为空时有效。 */
+    SmartSubtitlesTask?: MPSSmartSubtitlesTaskInput;
+    /** 智能擦除类型任务参数，MPSProcessMediaParams为空时有效。 */
+    SmartEraseTask?: MPSSmartEraseTaskInput;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;
   }
@@ -12020,15 +12466,15 @@ declare namespace V20180717 {
   }
 
   interface ProcessMediaRequest {
-    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。FileId和MediaStoragePath必须提供其中一个。 */
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。FileId和MediaStoragePath必须提供其中一个。 */
     FileId?: string;
-    /** 媒体的存储路径。只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。FileId和MediaStoragePath必须提供其中一个。 */
+    /** 媒体的存储路径。只有FileID + Path 模式的子应用可以通过MediaStoragePath发起任务。FileId和MediaStoragePath必须提供其中一个。 */
     MediaStoragePath?: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 视频处理类型任务参数。 */
     MediaProcessTask?: MediaProcessTaskInput;
-    /** 音视频内容审核类型任务参数 \*。\* 不建议使用，推荐使用 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217)。 */
+    /** 音视频内容审核类型任务参数 *。* 不建议使用，推荐使用 音视频审核(ReviewAudioVideo) 或 图片审核(ReviewImage)。 */
     AiContentReviewTask?: AiContentReviewTaskInput;
     /** 音视频内容分析类型任务参数。 */
     AiAnalysisTask?: AiAnalysisTaskInput;
@@ -12044,6 +12490,8 @@ declare namespace V20180717 {
     SessionId?: string;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;
+    /** FileID为空时有效，拉取Url生成新媒资产生新FileID，媒体处理产物将作为新媒资的附属产物。注意：新媒资会产生存储费用 */
+    Url?: string;
   }
 
   interface ProcessMediaResponse {
@@ -12603,6 +13051,8 @@ declare interface Vod {
   CreateAigcAdvancedCustomElement(data: V20180717.CreateAigcAdvancedCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcAdvancedCustomElementResponse>;
   /** 创建AIGC API Token {@link V20180717.CreateAigcApiTokenRequest} {@link V20180717.CreateAigcApiTokenResponse} */
   CreateAigcApiToken(data: V20180717.CreateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcApiTokenResponse>;
+  /** 创建AIGC生音频任务 {@link V20180717.CreateAigcAudioTaskRequest} {@link V20180717.CreateAigcAudioTaskResponse} */
+  CreateAigcAudioTask(data: V20180717.CreateAigcAudioTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcAudioTaskResponse>;
   /** 创建AIGC自定义主体 {@link V20180717.CreateAigcCustomElementRequest} {@link V20180717.CreateAigcCustomElementResponse} */
   CreateAigcCustomElement(data: V20180717.CreateAigcCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomElementResponse>;
   /** 创建 AIGC 自定义音色 {@link V20180717.CreateAigcCustomVoiceRequest} {@link V20180717.CreateAigcCustomVoiceResponse} */
@@ -12687,6 +13137,8 @@ declare interface Vod {
   DeleteAIRecognitionTemplate(data: V20180717.DeleteAIRecognitionTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAIRecognitionTemplateResponse>;
   /** 删除转自适应码流模板 {@link V20180717.DeleteAdaptiveDynamicStreamingTemplateRequest} {@link V20180717.DeleteAdaptiveDynamicStreamingTemplateResponse} */
   DeleteAdaptiveDynamicStreamingTemplate(data: V20180717.DeleteAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAdaptiveDynamicStreamingTemplateResponse>;
+  /** 删除 AIGC 高级自定义主体 {@link V20180717.DeleteAigcAdvancedCustomElementRequest} {@link V20180717.DeleteAigcAdvancedCustomElementResponse} */
+  DeleteAigcAdvancedCustomElement(data: V20180717.DeleteAigcAdvancedCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcAdvancedCustomElementResponse>;
   /** 删除 AIGC API Token {@link V20180717.DeleteAigcApiTokenRequest} {@link V20180717.DeleteAigcApiTokenResponse} */
   DeleteAigcApiToken(data: V20180717.DeleteAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcApiTokenResponse>;
   /** 删除转动图模板 {@link V20180717.DeleteAnimatedGraphicsTemplateRequest} {@link V20180717.DeleteAnimatedGraphicsTemplateResponse} */
@@ -12749,6 +13201,8 @@ declare interface Vod {
   DescribeAIRecognitionTemplates(data: V20180717.DescribeAIRecognitionTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 {@link V20180717.DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link V20180717.DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data: V20180717.DescribeAdaptiveDynamicStreamingTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  /** 获取 AIGC 高级自定义主体 {@link V20180717.DescribeAigcAdvancedCustomElementsRequest} {@link V20180717.DescribeAigcAdvancedCustomElementsResponse} */
+  DescribeAigcAdvancedCustomElements(data: V20180717.DescribeAigcAdvancedCustomElementsRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcAdvancedCustomElementsResponse>;
   /** 查询 AIGC API Token 列表 {@link V20180717.DescribeAigcApiTokensRequest} {@link V20180717.DescribeAigcApiTokensResponse} */
   DescribeAigcApiTokens(data: V20180717.DescribeAigcApiTokensRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcApiTokensResponse>;
   /** 获取 AIGC 人脸信息 {@link V20180717.DescribeAigcFaceInfoRequest} {@link V20180717.DescribeAigcFaceInfoResponse} */

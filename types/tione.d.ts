@@ -2423,6 +2423,8 @@ declare interface ChatCompletionResponse {
 }
 
 declare interface CreateDataSourceRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 数据源名称 */
   Name?: string;
   /** 数据源类型英文名 */
@@ -2631,6 +2633,8 @@ declare interface CreateMountLimitRequest {
   Type: string;
   /** 存储实例ID */
   StorageId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 限制开关是否开启，只有开启时才有限制，默认关闭 */
   LimitMount?: boolean;
 }
@@ -2841,6 +2845,8 @@ declare interface CreateTrainingTaskResponse {
 }
 
 declare interface DeleteDataSourceRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 数据源ID */
   Id?: string;
 }
@@ -2909,6 +2915,8 @@ declare interface DeleteModelServiceResponse {
 }
 
 declare interface DeleteMountLimitRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 数据源类型英文名 */
   Type?: string;
   /** 存储实例ID */
@@ -3127,6 +3135,8 @@ declare interface DescribeDataSourceResponse {
 }
 
 declare interface DescribeDataSourcesRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 过滤条件 */
   Filters?: Filter[];
   /** 标签过滤条件 */
@@ -3423,6 +3433,8 @@ declare interface DescribeModelServiceResponse {
 declare interface DescribeMountInstanceRequest {
   /** 数据源类型英文名 */
   Type: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 存储实例ID */
   StorageId?: string;
 }
@@ -3437,6 +3449,8 @@ declare interface DescribeMountInstanceResponse {
 declare interface DescribeMountInstancesRequest {
   /** 数据源类型英文名 */
   Type: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 偏移量 */
   Offset?: number;
   /** 分页大小 */
@@ -3453,6 +3467,8 @@ declare interface DescribeMountInstancesResponse {
 }
 
 declare interface DescribeMountLimitsRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 过滤条件 */
   Filters?: Filter[];
   /** 偏移量 */
@@ -3947,6 +3963,8 @@ declare interface StopTrainingTaskResponse {
 }
 
 declare interface UpdateDataSourceRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 数据源ID */
   Id?: string;
   /** 数据源名称 */
@@ -3969,6 +3987,8 @@ declare interface UpdateMountLimitRequest {
   StorageId: string;
   /** 限制开关是否开启，只有开启时才有限制，默认关闭 */
   LimitMount: boolean;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface UpdateMountLimitResponse {

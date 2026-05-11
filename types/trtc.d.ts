@@ -1742,6 +1742,8 @@ declare interface DescribeAsyncTextToSpeechResponse {
   AudioDownloadUrl?: string;
   /** 字幕下载url */
   SubtitleDownloadUrl?: string;
+  /** 音频时长 */
+  TotalDurationMs?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2700,6 +2702,8 @@ declare interface TextToSpeechResponse {
   Audio?: string;
   /** 字幕对齐数据 */
   Alignments?: AlignmentItem[];
+  /** 音频时长 */
+  TotalDurationMs?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

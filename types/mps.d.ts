@@ -1690,6 +1690,8 @@ declare interface AigcImageExtraParam {
   Resolution?: string;
   /** 是否添加图标水印。默认不加。1-添加，0-不添加。取值范围：[0, 1]默认值：0 */
   LogoAdd?: number;
+  /** 指定图片的输出格式，支持jpeg, png。 */
+  OutputFormat?: string;
 }
 
 /** 用于AIGC创作的图片信息。 */

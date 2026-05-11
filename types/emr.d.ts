@@ -3747,6 +3747,8 @@ declare interface CreateClusterRequest {
   PartitionNumber?: number;
   /** 服务ui地址枚举值：0： 服务ui地址，只返回1条服务ui地址1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd默认值：0 */
   WebUiVersion?: number;
+  /** 系统盘是否加密 */
+  EnableCbsSysEncryptFlag?: boolean;
 }
 
 declare interface CreateClusterResponse {
@@ -3871,6 +3873,8 @@ declare interface CreateInstanceRequest {
   PartitionNumber?: number;
   /** 服务ui地址枚举值：0： 服务ui地址，只返回1条服务ui地址1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd默认值：0 */
   WebUiVersion?: number;
+  /** 是否开启集群维度cbs系统盘加密,0关闭1开启 */
+  CbsSysEncrypt?: number;
 }
 
 declare interface CreateInstanceResponse {

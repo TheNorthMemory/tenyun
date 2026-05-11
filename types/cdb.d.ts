@@ -1038,7 +1038,7 @@ declare interface InstanceInfo {
   EngineType?: string;
   /** 最大延迟阈值 */
   MaxDelayTime?: number;
-  /** 实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。说明：1. 若返回："DiskType": "CLOUD_HSSD"，则表示该实例磁盘类型为增强型 SSD 云硬盘。2. 若返回："DiskType": "CLOUD_SSD"，则表示该实例磁盘类型为 SSD 云硬盘。3. 若返回："DiskType": ""，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。 */
+  /** 实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。说明：若返回：&quot;DiskType&quot;: &quot;CLOUD_HSSD&quot;，则表示该实例磁盘类型为增强型 SSD 云硬盘。若返回：&quot;DiskType&quot;: &quot;CLOUD_SSD&quot;，则表示该实例磁盘类型为 SSD 云硬盘。若返回：&quot;DiskType&quot;: &quot;&quot;，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。 */
   DiskType?: string;
   /** 当前扩容的CPU核心数。 */
   ExpandCpu?: number;
@@ -1052,6 +1052,8 @@ declare interface InstanceInfo {
   DestroyProtect?: string;
   /** TDSQL引擎参数 */
   CpuModel?: string;
+  /** 分析引擎实例版本升级信息 */
+  AnalysisUpgradeVersionInfo?: UpgradeAnalysisInstanceVersionInfo | null;
 }
 
 /** 实例预期重启时间 */
@@ -1924,6 +1926,18 @@ declare interface TimeIntervalStrategy {
   StartTime?: number;
   /** 结束扩容时间。说明：此值的格式为 Integer 的时间戳（秒级）。 */
   EndTime?: number;
+}
+
+/** 分析引擎实例版本升级信息 */
+declare interface UpgradeAnalysisInstanceVersionInfo {
+  /** 版本升级灰度ip */
+  Vip?: string;
+  /** 版本升级灰度port */
+  Vport?: number;
+  /** 升级之后版本 */
+  EngineVersion?: string;
+  /** 实例升级灰度事件单位：天 */
+  ExpireTime?: number;
 }
 
 /** 5.7升级8.0指定参数的结构 */
@@ -3629,9 +3643,9 @@ declare interface DescribeDBInstancesRequest {
   SubnetIds?: number[];
   /** 是否锁定标记，可选值：0 - 不锁定，1 - 锁定，默认为0。 */
   CdbErrors?: number[];
-  /** 返回结果集排序的字段，目前支持："instanceId"，"instanceName"，"createTime"，"deadlineTime"。 */
+  /** 返回结果集排序的字段，目前支持：&quot;instanceId&quot;，&quot;instanceName&quot;，&quot;createTime&quot;，&quot;deadlineTime&quot;。 */
   OrderBy?: string;
-  /** 返回结果集排序方式。目前支持值："ASC" - 表示升序，"DESC" - 表示降序，默认为 "DESC"。 */
+  /** 返回结果集排序方式。目前支持值：&quot;ASC&quot; - 表示升序，&quot;DESC&quot; - 表示降序，默认为 &quot;DESC&quot;。 */
   OrderDirection?: string;
   /** 是否以安全组 ID 为过滤条件。说明：0表示否，1表示是。 */
   WithSecurityGroup?: number;

@@ -1208,6 +1208,18 @@ declare interface Sort {
   Order?: string;
 }
 
+declare interface BindBusinessResourceConnectorGroupRequest {
+  /** 要绑定连接器的业务资源id，创建时候响应会返回，修改调用端自己获取传递 */
+  ServiceId: number;
+  /** 业务资源要绑定的连接器id */
+  ConnectorGroupId: string;
+}
+
+declare interface BindBusinessResourceConnectorGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBusinessResourceRequest {
   /** 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位) */
   AreaId: number;
@@ -1861,6 +1873,8 @@ declare interface ModifyVirtualDeviceGroupsResponse {
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
+  /** 绑定业务资源连接器 {@link BindBusinessResourceConnectorGroupRequest} {@link BindBusinessResourceConnectorGroupResponse} */
+  BindBusinessResourceConnectorGroup(data: BindBusinessResourceConnectorGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindBusinessResourceConnectorGroupResponse>;
   /** 创建业务资源 {@link CreateBusinessResourceRequest} {@link CreateBusinessResourceResponse} */
   CreateBusinessResource(data: CreateBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessResourceResponse>;
   /** 创建文件鉴定任务 {@link CreateDLPFileDetectTaskRequest} {@link CreateDLPFileDetectTaskResponse} */

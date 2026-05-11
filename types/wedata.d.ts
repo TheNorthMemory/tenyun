@@ -25116,7 +25116,7 @@ declare interface Wedata {
   SubmitTask(data: V20210820.SubmitTaskRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.SubmitTaskResponse>;
   /** 提交工作流测试运行任务 {@link V20210820.SubmitTaskTestRunRequest} {@link V20210820.SubmitTaskTestRunResponse} */
   SubmitTaskTestRun(data: V20210820.SubmitTaskTestRunRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.SubmitTaskTestRunResponse>;
-  /** 提交工作流（废弃） {@link V20210820.SubmitWorkflowRequest} {@link V20210820.SubmitWorkflowResponse} */
+  /** @deprecated 提交工作流（废弃） {@link V20210820.SubmitWorkflowRequest} {@link V20210820.SubmitWorkflowResponse} */
   SubmitWorkflow(data: V20210820.SubmitWorkflowRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.SubmitWorkflowResponse>;
   /** 暂停实时集成任务 {@link V20210820.SuspendIntegrationTaskRequest} {@link V20210820.SuspendIntegrationTaskResponse} */
   SuspendIntegrationTask(data: V20210820.SuspendIntegrationTaskRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.SuspendIntegrationTaskResponse>;

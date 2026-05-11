@@ -444,6 +444,18 @@ declare interface SharedGroup {
   UpdateTime?: number;
 }
 
+/** 共享订阅组下客户端 */
+declare interface SharedSubscriptionClient {
+  /** 客户端ID */
+  ClientId?: string;
+  /** 共享订阅组名 */
+  SharedName?: string;
+  /** 共享组下的订阅表达式列表 */
+  TopicFilter?: string;
+  /** 在线状态 */
+  Online?: boolean;
+}
+
 /** 订阅的UserProperty结构 */
 declare interface SubscriptionUserProperty {
   /** 订阅的UserProperty键 */
@@ -1370,6 +1382,24 @@ declare interface DescribeProductSKUListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSharedSubscriptionClientRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 共享订阅组名 */
+  SharedName: string;
+  /** 订阅表达式 */
+  TopicFilter: string;
+}
+
+declare interface DescribeSharedSubscriptionClientResponse {
+  /** 共享订阅组下Client信息 */
+  Data?: SharedSubscriptionClient[];
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSharedSubscriptionGroupsRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1394,6 +1424,24 @@ declare interface DescribeSharedSubscriptionLagRequest {
 declare interface DescribeSharedSubscriptionLagResponse {
   /** 堆积值 */
   Lag?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSharedSubscriptionsRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 共享订阅组名 */
+  SharedName: string;
+}
+
+declare interface DescribeSharedSubscriptionsResponse {
+  /** 集群id */
+  InstanceId?: string;
+  /** 共享组名 */
+  SharedName?: string;
+  /** 共享组下的订阅表达式列表 */
+  TopicFilter?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1913,10 +1961,14 @@ declare interface Mqtt {
   DescribeMessageList(data: DescribeMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageListResponse>;
   /** 获取MQTT产品售卖规格 {@link DescribeProductSKUListRequest} {@link DescribeProductSKUListResponse} */
   DescribeProductSKUList(data?: DescribeProductSKUListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductSKUListResponse>;
+  /** 查询共享订阅组客户端 {@link DescribeSharedSubscriptionClientRequest} {@link DescribeSharedSubscriptionClientResponse} */
+  DescribeSharedSubscriptionClient(data: DescribeSharedSubscriptionClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionClientResponse>;
   /** 查询共享订阅组列表 {@link DescribeSharedSubscriptionGroupsRequest} {@link DescribeSharedSubscriptionGroupsResponse} */
   DescribeSharedSubscriptionGroups(data: DescribeSharedSubscriptionGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionGroupsResponse>;
   /** 查询共享订阅堆积 {@link DescribeSharedSubscriptionLagRequest} {@link DescribeSharedSubscriptionLagResponse} */
   DescribeSharedSubscriptionLag(data: DescribeSharedSubscriptionLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionLagResponse>;
+  /** 查询共享订阅组订阅列表 {@link DescribeSharedSubscriptionsRequest} {@link DescribeSharedSubscriptionsResponse} */
+  DescribeSharedSubscriptions(data: DescribeSharedSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionsResponse>;
   /** 查询MQTT主题详情 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 查询MQTT主题列表 {@link DescribeTopicListRequest} {@link DescribeTopicListResponse} */

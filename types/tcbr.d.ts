@@ -614,6 +614,12 @@ declare interface VolumeConf {
   DstPath?: string;
   /** 存储挂载源目录 */
   SrcPath?: string;
+  /** cfs 实例ip */
+  MountIP?: string;
+  /** 默认读写 */
+  ReadOnly?: boolean;
+  /** CFS 实例 ID */
+  InstanceId?: string;
 }
 
 /** 云托管服务 Vpc 配置 */

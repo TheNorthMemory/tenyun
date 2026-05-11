@@ -1658,6 +1658,34 @@ declare interface RocketMQRoleConfig {
   DetailedRolePerms?: DetailedRolePerm[];
 }
 
+/** rocketmq router规则基本信息 */
+declare interface RocketMQRouterRuleInfo {
+  /** 源类型。OPEN_SOURCE_ROCKETMQ：开源rocketmqALI_ROCKETMQ：阿里云rocketmqTENCENT_ROCKETMQ：腾讯云rocketmqTENCENT_MQTT：腾讯云MQTTALI_MNS：阿里云mns */
+  SourceType: string;
+  /** 目标类型。枚举和SourceType字段一样 */
+  TargetType: string;
+  /** 规则备注，创建后任务后可以修改 */
+  RemarkName?: string;
+  /** 阿里云rocketmq源信息 */
+  AliRocketMQSource?: RouterRocketMQSource;
+  /** 阿里云rocketmq目标信息 */
+  AliRocketMQTarget?: RouterRocketMQTarget;
+  /** 阿里云mns源信息 */
+  AliMessageServiceSource?: RouterMessageServiceSource;
+  /** 阿里云mns目标信息 */
+  AliMessageServiceTarget?: RouterMessageServiceTarget;
+  /** 腾讯云rocketmq源信息 */
+  TenRocketMQSource?: RouterTencentRocketMQSource;
+  /** 腾讯云rocketmq目标信息 */
+  TenRocketMQTarget?: RouterTencentRocketMQTarget;
+  /** 任务别名 */
+  AliasName?: string;
+  /** 腾讯云 MQTT 源集群信息 */
+  TenMQTTSource?: RouterTencentMQTTSource;
+  /** 腾讯云 MQTT 目标集群信息 */
+  TenMQTTTarget?: RouterTencentMQTTTarget;
+}
+
 /** RocketMQ消费组订阅信息 */
 declare interface RocketMQSubscription {
   /** 主题名称 */
@@ -1808,6 +1836,168 @@ declare interface Role {
   SecretName?: string;
   /** 轮转周期单位：天 */
   RotateFreq?: number;
+}
+
+/** rocketmq router mns 源信息 */
+declare interface RouterMessageServiceSource {
+  /** access key */
+  AccessKey: string | null;
+  /** mns接入点。需要和router内网联通，一般是公网接入点 */
+  Endpoint: string | null;
+  /** mns queue名字。可以在https://mns.console.aliyun.com/region/cn-shenzhen/queues 看到 */
+  Queue: string | null;
+  /** secret key */
+  SecretKey: string | null;
+  /** 是否自动解码mns body。ON：自动解码，复制后的消息内容为解码后的明文。OFF：不用解码，保持Mns消息体原始状态 */
+  EnableDecodeBody?: string | null;
+  /** mns消费并发数 */
+  SourceConsumeConcurrentThreadCount?: number | null;
+  /** 过滤时间戳，毫秒级时间戳 */
+  FilterFromTimestampMs?: number;
+}
+
+/** rocketmq router mns 目标信息 */
+declare interface RouterMessageServiceTarget {
+  /** access key */
+  AccessKey: string | null;
+  /** mns接入点，需要和router内网联通，一般是公网接入点 */
+  Endpoint: string | null;
+  /** secret key */
+  SecretKey: string | null;
+  /** mns queue名字。可以在https://mns.console.aliyun.com/region/cn-shenzhen/queues 看到 */
+  Queue?: string | null;
+  /** 是否用base64编码发送mns消息。 ON：发送base64编码的消息体到mnsOFF：将原始消息体发送到mns */
+  SendWithBase64?: string | null;
+  /** 发送mns的并发数 */
+  TargetProduceConcurrentThreadCount?: number | null;
+  /** topic名字。可以在https://mns.console.aliyun.com/region/cn-shenzhen/topics 看到 */
+  Topic?: string | null;
+}
+
+/** rocketmq router的rocketmq源信息 */
+declare interface RouterRocketMQSource {
+  /** access key */
+  AccessKey: string | null;
+  /** 过滤表达式, 参考：https://github.com/apache/rocketmq/blob/develop/common/src/main/java/org/apache/rocketmq/common/filter/ExpressionType.java */
+  FilterExpression: string | null;
+  /** 过滤时间，毫秒时间戳 */
+  FilterFromTimestampMs: number | null;
+  /** 过滤类型，参考：https://github.com/apache/rocketmq/blob/develop/common/src/main/java/org/apache/rocketmq/common/filter/ExpressionType.java */
+  FilterType: string | null;
+  /** 消费者组名。会使用该消费者来消费消息 */
+  Group: string | null;
+  /** namesrv地址列表，也可以是云厂商提供的接入点信息 */
+  NameServerAddressList: string | null;
+  /** secret key */
+  SecretKey: string | null;
+  /** topic名字 */
+  Topic: string | null;
+  /** 4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocketmxxx57d53rnn5_tiger_namespace */
+  Namespace?: string | null;
+  /** 消费者并发数，0 ～ 100 */
+  SourceConsumeConcurrentThreadCount?: number | null;
+}
+
+/** rocketmq router任务的目标信息 */
+declare interface RouterRocketMQTarget {
+  /** access key */
+  AccessKey: string | null;
+  /** namesrv地址列表，也可以是云厂商提供的接入点信息 */
+  NameServerAddressList: string | null;
+  /** secret key */
+  SecretKey: string | null;
+  /** topic名字 */
+  Topic: string | null;
+  /** 4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocketmqka57d53rnn5_tiger_namespace */
+  Namespace?: string | null;
+  /** 生产者并发数，可以不用填，可以在规则创建后修改 */
+  TargetProduceConcurrentThreadCount?: number | null;
+}
+
+/** 待复制的 MQTT 源集群信息 */
+declare interface RouterTencentMQTTSource {
+  /** MQTT 集群ID */
+  ClusterId: string | null;
+  /** 主题名 */
+  Topic: string | null;
+  /** 地域 */
+  SourceRegion: string | null;
+  /** 用户名 */
+  UserName: string | null;
+  /** 用户密码 */
+  Password?: string | null;
+  /** 消费者并发数，0 ～ 100 */
+  SourceConsumeConcurrentThreadCount?: number | null;
+  /** 过滤时间，毫秒时间戳 */
+  FilterFromTimestampMs?: number | null;
+  /** MQTT集群接入点信息 */
+  Endpoint?: string | null;
+}
+
+/** MQTT 目标集群信息 */
+declare interface RouterTencentMQTTTarget {
+  /** MQTT 集群ID */
+  ClusterId: string | null;
+  /** 主题名 */
+  Topic: string | null;
+  /** 地域 */
+  SourceRegion: string | null;
+  /** 用户名 */
+  UserName: string | null;
+  /** 用户密码 */
+  Password?: string | null;
+  /** 消费者并发数，0 ～ 100 */
+  TargetProduceConcurrentThreadCount?: number | null;
+  /** 过滤时间，毫秒时间戳 */
+  FilterFromTimestampMs?: number | null;
+  /** MQTT集群接入点信息 */
+  Endpoint?: string | null;
+}
+
+/** rocketmq router腾讯云源 */
+declare interface RouterTencentRocketMQSource {
+  /** 过滤表达式, 参考：https://github.com/apache/rocketmq/blob/develop/common/src/main/java/org/apache/rocketmq/common/filter/ExpressionType.java */
+  FilterExpression: string | null;
+  /** 过滤时间，毫秒时间戳 */
+  FilterFromTimestampMs: number | null;
+  /** 过滤类型枚举值：SQL92： 按SQL92表达式过滤TAG： 按TAG表达式过滤 */
+  FilterType: string | null;
+  /** topic名字 */
+  Topic: string | null;
+  /** rocketmq实例id */
+  ClusterId: string | null;
+  /** 4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocketmqka57d53rnn5_tiger_namespace */
+  Namespace?: string | null;
+  /** 消费者并发数 */
+  SourceConsumeConcurrentThreadCount?: number | null;
+  /** 源地域 */
+  SourceRegion?: string | null;
+  /** 选择TDMQ RocketMQ时，选择一个角色来完成数据同步 */
+  RoleName?: string | null;
+  /** 选择腾讯云版RockeMQ类型后，RoleName对应的AssessKey值 */
+  AccessKey?: string | null;
+  /** 选择腾讯云版RockeMQ类型后，RoleName对应的SecretKey值 */
+  SecretKey?: string | null;
+}
+
+/** rocketmq router腾讯云目标 */
+declare interface RouterTencentRocketMQTarget {
+  /** topic名字 */
+  Topic: string | null;
+  /** rocketmq实例id */
+  ClusterId: string | null;
+  /** 4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocket2mq3ka57d53rnn5_tiger_namespace */
+  Namespace?: string | null;
+  /** 消费者并发数 */
+  TargetProduceConcurrentThreadCount?: number | null;
+  /** 目标region */
+  TargetRegion?: string | null;
+  /** 选择TDMQ RocketMQ时，选择一个角色来完成数据同步 */
+  RoleName?: string | null;
+  /** 选择腾讯云版RockeMQ类型后，RoleName对应的AssessKey值 */
+  AccessKey?: string | null;
+  /** 选择腾讯云版RockeMQ类型后，RoleName对应的SecretKey值 */
+  SecretKey?: string | null;
 }
 
 /** 安全策略 */
@@ -2554,6 +2744,20 @@ declare interface CreateRocketMQRoleResponse {
   Token?: string;
   /** 备注说明 */
   Remark?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRocketMQRouterRuleRequest {
+  /** true: 立即启动任务false: 创建任务后不立即启动，可以在控制台操作启动 */
+  StartNow: boolean;
+  /** 规则数据结构 */
+  Rule: RocketMQRouterRuleInfo;
+  /** 数据同步类型。Topic：按照topic维度同步 */
+  SyncType: string;
+}
+
+declare interface CreateRocketMQRouterRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5455,6 +5659,8 @@ declare interface Tdmq {
   CreateRocketMQNamespace(data: CreateRocketMQNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQNamespaceResponse>;
   /** 创建 RocketMQ 角色 {@link CreateRocketMQRoleRequest} {@link CreateRocketMQRoleResponse} */
   CreateRocketMQRole(data: CreateRocketMQRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQRoleResponse>;
+  /** 创建RocketMQ Router规则 {@link CreateRocketMQRouterRuleRequest} {@link CreateRocketMQRouterRuleResponse} */
+  CreateRocketMQRouterRule(data: CreateRocketMQRouterRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQRouterRuleResponse>;
   /** 批量创建 RocketMQ 主题 {@link CreateRocketMQTopicRequest} {@link CreateRocketMQTopicResponse} */
   CreateRocketMQTopic(data: CreateRocketMQTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRocketMQTopicResponse>;
   /** 创建 RocketMQ 主题 {@link CreateRocketMQTopicV2Request} {@link CreateRocketMQTopicV2Response} */

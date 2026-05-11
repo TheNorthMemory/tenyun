@@ -2164,6 +2164,76 @@ declare interface RebuildIndexTaskInfo {
   StatusMessage: string;
 }
 
+/** 预聚合任务详情 */
+declare interface RecordingRuleTaskInfo {
+  /** 预聚合任务id */
+  TaskId?: string;
+  /** 源日志主题id */
+  TopicId?: string;
+  /** 预聚合任务名称 */
+  Name?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务更新时间 */
+  UpdateTime?: string;
+  /** 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题5: 访问权限问题 6:内部故障 7:其他故障 */
+  Status?: number;
+  /** 任务启用状态，1开启, 2关闭 */
+  EnableFlag?: number;
+  /** 调度开始时间 */
+  ProcessStartTime?: number;
+  /** 调度周期(分钟) */
+  ProcessPeriod?: number;
+  /** 执行延迟(秒) */
+  ProcessDelay?: number;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+  /** 预聚合检索语句 */
+  RecordingRuleContent?: string;
+  /** 指标名称 */
+  MetricName?: string;
+  /** 自定义指标名称 */
+  CustomMetricLabels?: MetricLabel[];
+  /** yaml配置文件id */
+  YamlId?: string;
+  /** yaml配置文件名称 */
+  YamlConfigName?: string;
+  /** 目标日志主题id */
+  DstTopicId?: string;
+}
+
+/** 预聚合Yaml任务详情 */
+declare interface RecordingRuleYamlTaskInfo {
+  /** yaml配置文件id */
+  YamlId?: string;
+  /** 源日志主题id */
+  TopicId?: string;
+  /** 写入描述的日志主题id */
+  DstTopicId?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务更新时间 */
+  UpdateTime?: string;
+  /** 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题5: 访问权限问题 6:内部故障 7:其他故障 */
+  Status?: number;
+  /** 任务启用状态，1开启, 2关闭 */
+  EnableFlag?: number;
+  /** 调度开始时间 */
+  ProcessStartTime?: number;
+  /** 调度周期(分钟) */
+  ProcessPeriod?: number;
+  /** 执行延迟(秒) */
+  ProcessDelay?: number;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+  /** yaml配置文件名称 */
+  YamlConfigName?: string;
+  /** yaml配置文件内容 */
+  YamlContent?: string;
+  /** yaml文件子任务数量 */
+  SubTaskCount?: number;
+}
+
 /** 标签重新标记配置。允许动态重写目标、警报、抓取样本和远程写入样本的标签集。 */
 declare interface Relabeling {
   /** 基于正则表达式匹配执行的动作。- replace: Label替换, 必填: SourceLabels, Separator, Regex, TargetLabel, Replacement- labeldrop: 丢弃Label, 必填: Regex- labelkeep: 保留Label, 必填: Regex- lowercase: 小写化, 必填: SourceLabels, Separator, TargetLabel- uppercase: 大写化, 必填: SourceLabels, Separator, TargetLabel- dropequal: 丢弃指标-完全匹配, 必填: SourceLabels, Separator, TargetLabel- keepequal: 保留指标-完全匹配, 必填: SourceLabels, Separator, TargetLabel- drop: 丢弃指标-正则匹配, 必填: SourceLabels, Separator, Regex- keep: 保留指标-正则匹配, 必填: SourceLabels, Separator, Regex- hashmod:哈希取模, 必填: SourceLabels, Separator, TargetLabel, Modulus- labelmap:Label映射, 必填: Regex, Replacement */
@@ -2510,7 +2580,7 @@ declare interface TopicInfo {
   AutoSplit?: boolean;
   /** 若开启自动分裂的话，该主题能够允许的最大分区数 */
   MaxSplitPartitions?: number;
-  /** 主题的存储类型- hot: 标准存储- cold: 低频存储 */
+  /** 主题的存储类型hot: 标准存储cold: 低频存储 */
   StorageType?: string;
   /** 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存 */
   Period?: number;
@@ -2518,24 +2588,28 @@ declare interface TopicInfo {
   SubAssumerName?: string;
   /** 主题描述 */
   Describes?: string;
-  /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
+  /** 开启日志沉降，标准存储的生命周期， hotPeriod &lt; Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
   HotPeriod?: number;
   /** kms-cls服务秘钥id */
   KeyId?: string;
-  /** 主题类型。- 0: 日志主题 - 1: 指标主题 */
+  /** 主题类型。0: 日志主题 1: 指标主题 */
   BizType?: number;
-  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
+  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见日志主题。 */
   IsWebTracking?: boolean;
   /** 日志主题扩展信息 */
   Extends?: TopicExtendInfo;
   /** 异步迁移任务ID */
   TopicAsyncTaskID?: string;
-  /** 异步迁移状态- 1：进行中- 2：已完成- 3：失败- 4：已取消 */
+  /** 异步迁移状态1：进行中2：已完成3：失败4：已取消 */
   MigrationStatus?: number;
   /** 异步迁移完成后，预计生效日期时间格式：yyyy-MM-dd HH:mm:ss */
   EffectiveDate?: string;
   /** IsSourceFrom 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
+  /** 当前计费模式枚举值：0： 按功能项计费1： 原始日志量计费 */
+  BillingMode?: number;
+  /** 如果有异步任务，任务成功后的新计费模式枚举值：0： 按功能项计费1： 原始日志量计费 */
+  NewBillingMode?: number;
 }
 
 /** Partitions */
@@ -3520,6 +3594,66 @@ declare interface CreateRebuildIndexTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateRecordingRuleTaskRequest {
+  /** 源指标主题id取值参考：DescribeTopics指标主题 */
+  TopicId: string;
+  /** 目标指标主题id，可与 TopicId 相同 */
+  DstTopicId: string;
+  /** 预聚合任务名称入参限制：仅支持字母、数字、及下划线，不允许下划线开头，小于256个字符 */
+  Name: string;
+  /** 任务状态； 1:开启；2:关闭 */
+  EnableFlag: number;
+  /** 任务执行开始时间 ,Unix时间戳单位：ms */
+  ProcessStartTime: number;
+  /** 调度周期(分钟)，支持范围(0,1440]分钟。 */
+  ProcessPeriod: number;
+  /** 执行延迟，建议设置为30秒，避免指标上报延迟导致预聚合任务计算结果不精确单位：秒 */
+  ProcessDelay: number;
+  /** 执行语句(PromQL) */
+  RecordingRuleContent: string;
+  /** 指标名称 */
+  MetricName: string;
+  /** 指标自定义维度 */
+  CustomMetricLabels?: MetricLabel[];
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+}
+
+declare interface CreateRecordingRuleTaskResponse {
+  /** 任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRecordingRuleYamlTaskRequest {
+  /** 源指标主题id取值参考：DescribeTopics指标主题 */
+  TopicId: string;
+  /** 目标指标主题id，可与 TopicId 相同 */
+  DstTopicId: string;
+  /** 任务状态； 1:开启；2:关闭 */
+  EnableFlag: number;
+  /** 任务执行开始时间 ,Unix时间戳单位：ms */
+  ProcessStartTime: number;
+  /** 调度周期(分钟)，支持范围(0,1440]分钟。单位：分钟也可在YAML中使用 interval: duration 为每个group单独设置执行间隔 */
+  ProcessPeriod: number;
+  /** 执行延迟，建议设置为30秒，避免指标上报延迟导致预聚合任务计算结果不精确单位：秒 */
+  ProcessDelay: number;
+  /** yaml配置名称 */
+  YamlConfigName: string;
+  /** yaml配置内容兼容 Prometheus Recording Rules 配置文件，API调用时请注意字符串中的换行与缩进。 */
+  YamlContent: string;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+}
+
+declare interface CreateRecordingRuleYamlTaskResponse {
+  /** Yaml配置id， 可以关联多子任务 */
+  YamlId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateScheduledSqlRequest {
   /** 源日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
   SrcTopicId: string;
@@ -3661,9 +3795,9 @@ declare interface CreateSplunkDeliverResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 日志集ID- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
+  /** 日志集ID通过获取日志集列表获取日志集Id。 */
   LogsetId: string;
-  /** 主题名称名称限制- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
+  /** 主题名称名称限制不能为空字符串不能包含字符&#39;|&#39;不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;] */
   TopicName: string;
   /** 主题分区个数。默认创建1个，最大支持创建10个分区。 */
   PartitionCount?: number;
@@ -3675,7 +3809,7 @@ declare interface CreateTopicRequest {
   MaxSplitPartitions?: number;
   /** 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。指标主题不支持该配置。 */
   StorageType?: string;
-  /** 存储时间，单位天。- 日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。- 日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。- 指标主题：支持1至3600天，值为3640时代表永久保存。 */
+  /** 存储时间，单位天。日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。指标主题：支持1至3600天，值为3640时代表永久保存。 */
   Period?: number;
   /** 主题描述 */
   Describes?: string;
@@ -3683,16 +3817,18 @@ declare interface CreateTopicRequest {
   HotPeriod?: number;
   /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。0或者不传： 不加密1：kms-cls 云产品密钥加密支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo */
   Encryption?: number;
-  /** 主题类型- 0:日志主题，默认值- 1:指标主题 */
+  /** 主题类型0:日志主题，默认值1:指标主题 */
   BizType?: number;
-  /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。- 如果指定该字段，需保证全地域唯一 */
+  /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。如果指定该字段，需保证全地域唯一 */
   TopicId?: string;
-  /** 免鉴权开关。 false：关闭； true：开启。默认为false。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。指标主题不支持该配置。 */
+  /** 免鉴权开关。 false：关闭； true：开启。默认为false。开启后将支持指定操作匿名访问该日志主题。详情请参见日志主题。指标主题不支持该配置。 */
   IsWebTracking?: boolean;
   /** 主题扩展信息 */
   Extends?: TopicExtendInfo;
   /** 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
+  /** 计费模式枚举值：0： 按功能项计费1： 原始日志量计费默认值：0通过接口调用时默认值为0，通过控制台调用时默认值为1 */
+  BillingMode?: number;
 }
 
 declare interface CreateTopicResponse {
@@ -4032,6 +4168,30 @@ declare interface DeleteNoticeContentRequest {
 }
 
 declare interface DeleteNoticeContentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordingRuleTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 源指标主题id */
+  TopicId: string;
+}
+
+declare interface DeleteRecordingRuleTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecordingRuleYamlTaskRequest {
+  /** 任务ID */
+  YamlId: string;
+  /** 源指标主题id */
+  TopicId: string;
+}
+
+declare interface DeleteRecordingRuleYamlTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4964,6 +5124,46 @@ declare interface DescribeRebuildIndexTasksRequest {
 declare interface DescribeRebuildIndexTasksResponse {
   /** 索引重建任务列表 */
   RebuildTasks?: RebuildIndexTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordingRuleTaskRequest {
+  /** 源指标主题id */
+  TopicId: string;
+  /** 分页的偏移量，默认值为0。 */
+  Offset: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit: number;
+  /** yamlId【关联yaml配置ID】进行过滤，模糊匹配。类型：String。必选：否 taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否 taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRecordingRuleTaskResponse {
+  /** RecordingRule任务列表信息 */
+  RecordingRuleTaskInfos?: RecordingRuleTaskInfo[];
+  /** 任务总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecordingRuleYamlTaskRequest {
+  /** 源指标主题id */
+  TopicId: string;
+  /** 分页的偏移量，默认值为0。 */
+  Offset: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit: number;
+  /** yamlConfigName【配置文件名称】进行过滤，模糊匹配。类型：String。必选：否 yamlId按照【yamlID】进行过滤，模糊匹配。类型：String。必选：否 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRecordingRuleYamlTaskResponse {
+  /** RecordingRule任务列表信息 */
+  RecordingRuleYamlTaskInfos?: RecordingRuleYamlTaskInfo[];
+  /** 任务总条数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5924,6 +6124,68 @@ declare interface ModifyNoticeContentResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRecordingRuleTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+  /** 源指标主题id */
+  TopicId: string;
+  /** 目标指标主题id */
+  DstTopicId?: string;
+  /** 任务名称 */
+  Name?: string;
+  /** 任务启动状态. 1开启, 2关闭 */
+  EnableFlag?: number;
+  /** 调度开始时间,Unix时间戳，单位ms */
+  ProcessStartTime?: number;
+  /** 调度周期(分钟)，支持范围(0,1440]分钟。 */
+  ProcessPeriod?: number;
+  /** 执行延迟(秒) */
+  ProcessDelay?: number;
+  /** 指标名称 */
+  MetricName?: string;
+  /** 执行语句(PromQL) */
+  RecordingRuleContent?: string;
+  /** 自定义指标名称 */
+  CustomMetricLabels?: MetricLabel[];
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+}
+
+declare interface ModifyRecordingRuleTaskResponse {
+  /** 预聚合任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRecordingRuleYamlTaskRequest {
+  /** Yaml配置id */
+  YamlID: string;
+  /** 源指标主题id */
+  TopicId: string;
+  /** 目标指标主题id */
+  DstTopicId?: string;
+  /** 任务状态； 1:开启；2:关闭 */
+  EnableFlag?: number;
+  /** 调度开始时间,Unix时间戳，单位ms */
+  ProcessStartTime?: number;
+  /** 调度周期(分钟)，支持范围(0,1440]分钟。 */
+  ProcessPeriod?: number;
+  /** 执行延迟(秒) */
+  ProcessDelay?: number;
+  /** yaml配置名称 */
+  YamlConfigName?: string;
+  /** yaml配置内容 */
+  YamlContent?: string;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+}
+
+declare interface ModifyRecordingRuleYamlTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyScheduledSqlRequest {
   /** 任务ID，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
   TaskId: string;
@@ -6051,9 +6313,9 @@ declare interface ModifySplunkDeliverResponse {
 }
 
 declare interface ModifyTopicRequest {
-  /** 主题ID- 通过[获取主题列表](https://cloud.tencent.com/document/product/614/56454)获取主题Id。 */
+  /** 主题ID- 通过获取主题列表获取主题Id。 */
   TopicId: string;
-  /** 主题名称输入限制：- 不能为空字符串- 不能包含字符'|'- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
+  /** 主题名称输入限制：不能为空字符串不能包含字符&#39;|&#39;不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;] */
   TopicName?: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
@@ -6063,7 +6325,7 @@ declare interface ModifyTopicRequest {
   AutoSplit?: boolean;
   /** 若开启最大分裂，该主题能够允许的最大分区数；默认为50；必须为正数 */
   MaxSplitPartitions?: number;
-  /** 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存 */
+  /** 生命周期，单位天，标准存储取值范围1~3600，低频存储取值范围7~3600。取值为3640时代表永久保存 */
   Period?: number;
   /** 存储类型：cold 低频存储，hot 标准存储 */
   StorageType?: string;
@@ -6071,18 +6333,20 @@ declare interface ModifyTopicRequest {
   Describes?: string;
   /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
   HotPeriod?: number;
-  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。 */
+  /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见日志主题。 */
   IsWebTracking?: boolean;
   /** 主题扩展信息 */
   Extends?: TopicExtendInfo;
-  /** 主题分区数量。默认为1；取值范围及约束：- 当输入值<=0，系统自动调整为1。- 如果未传MaxSplitPartitions，需要PartitionCount<=50；- 如果传递了MaxSplitPartitions，需要PartitionCount<=MaxSplitPartitions； */
+  /** 主题分区数量。默认为1；取值范围及约束：当输入值&lt;=0，系统自动调整为1。如果未传MaxSplitPartitions，需要PartitionCount&lt;=50；如果传递了MaxSplitPartitions，需要PartitionCount&lt;=MaxSplitPartitions； */
   PartitionCount?: number;
-  /** 取消切换存储任务的id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。 */
+  /** 取消切换存储任务的id通过获取日志主题列表获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。 */
   CancelTopicAsyncTaskID?: string;
   /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。只支持传入1：kms-cls 云产品秘钥加密 */
   Encryption?: number;
   /** 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
+  /** 计费模式枚举值：0： 按功能项计费1： 原始日志量计费 */
+  BillingMode?: number;
 }
 
 declare interface ModifyTopicResponse {
@@ -6489,6 +6753,10 @@ declare interface Cls {
   CreateNoticeContent(data: CreateNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentResponse>;
   /** 创建重建索引任务 {@link CreateRebuildIndexTaskRequest} {@link CreateRebuildIndexTaskResponse} */
   CreateRebuildIndexTask(data: CreateRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRebuildIndexTaskResponse>;
+  /** 创建预聚合任务 {@link CreateRecordingRuleTaskRequest} {@link CreateRecordingRuleTaskResponse} */
+  CreateRecordingRuleTask(data: CreateRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleTaskResponse>;
+  /** 通过YAML批量创建预聚合任务 {@link CreateRecordingRuleYamlTaskRequest} {@link CreateRecordingRuleYamlTaskResponse} */
+  CreateRecordingRuleYamlTask(data: CreateRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleYamlTaskResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建查询视图 {@link CreateSearchViewRequest} {@link CreateSearchViewResponse} */
@@ -6557,6 +6825,10 @@ declare interface Cls {
   DeleteNetworkApplication(data: DeleteNetworkApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNetworkApplicationResponse>;
   /** 删除通知内容模板 {@link DeleteNoticeContentRequest} {@link DeleteNoticeContentResponse} */
   DeleteNoticeContent(data: DeleteNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentResponse>;
+  /** 删除预聚合任务 {@link DeleteRecordingRuleTaskRequest} {@link DeleteRecordingRuleTaskResponse} */
+  DeleteRecordingRuleTask(data: DeleteRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRuleTaskResponse>;
+  /** 删除YAML预聚合任务 {@link DeleteRecordingRuleYamlTaskRequest} {@link DeleteRecordingRuleYamlTaskResponse} */
+  DeleteRecordingRuleYamlTask(data: DeleteRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRuleYamlTaskResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除查询视图 {@link DeleteSearchViewRequest} {@link DeleteSearchViewResponse} */
@@ -6663,6 +6935,10 @@ declare interface Cls {
   DescribePartitions(data: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
   /** 获取重建索引任务列表 {@link DescribeRebuildIndexTasksRequest} {@link DescribeRebuildIndexTasksResponse} */
   DescribeRebuildIndexTasks(data: DescribeRebuildIndexTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRebuildIndexTasksResponse>;
+  /** 获取预聚合任务列表 {@link DescribeRecordingRuleTaskRequest} {@link DescribeRecordingRuleTaskResponse} */
+  DescribeRecordingRuleTask(data: DescribeRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRuleTaskResponse>;
+  /** 获取YAML预聚合任务列表 {@link DescribeRecordingRuleYamlTaskRequest} {@link DescribeRecordingRuleYamlTaskResponse} */
+  DescribeRecordingRuleYamlTask(data: DescribeRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRuleYamlTaskResponse>;
   /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
   DescribeScheduledSqlInfo(data?: DescribeScheduledSqlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledSqlInfoResponse>;
   /** 获取查询视图列表 {@link DescribeSearchViewsRequest} {@link DescribeSearchViewsResponse} */
@@ -6745,6 +7021,10 @@ declare interface Cls {
   ModifyNetworkApplication(data: ModifyNetworkApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkApplicationResponse>;
   /** 修改通知内容模板 {@link ModifyNoticeContentRequest} {@link ModifyNoticeContentResponse} */
   ModifyNoticeContent(data: ModifyNoticeContentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentResponse>;
+  /** 修改预聚合任务 {@link ModifyRecordingRuleTaskRequest} {@link ModifyRecordingRuleTaskResponse} */
+  ModifyRecordingRuleTask(data: ModifyRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingRuleTaskResponse>;
+  /** 修改YAML创建预聚合任务 {@link ModifyRecordingRuleYamlTaskRequest} {@link ModifyRecordingRuleYamlTaskResponse} */
+  ModifyRecordingRuleYamlTask(data: ModifyRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingRuleYamlTaskResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改查询视图 {@link ModifySearchViewRequest} {@link ModifySearchViewResponse} */
