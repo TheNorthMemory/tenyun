@@ -1526,6 +1526,22 @@ declare interface SequenceData {
   NewOrderIndex: number;
 }
 
+/** 防火墙串行地域带宽分配情况 */
+declare interface SerialRegionInfo {
+  /** 地域 */
+  Region: string | null;
+  /** 分配带宽值 单位Mbps */
+  Width?: number | null;
+  /** 弹性开关 */
+  ElasticSwitch?: number | null;
+  /** 弹性带宽上限，单位Mbps */
+  ElasticBandwidth?: number | null;
+  /** 七天入向峰值带宽，单位bps */
+  InFlowMax?: number;
+  /** 七天出向峰值带宽，单位bps */
+  OutFlowMax?: number;
+}
+
 /** 企业安全组域名解析的IP统计 */
 declare interface SgDnsParseCount {
   /** 有效下发的IP个数，离散数据 */
@@ -3380,6 +3396,24 @@ declare interface DescribeSecurityGroupListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSerialRegionRequest {
+}
+
+declare interface DescribeSerialRegionResponse {
+  /** 串行地域带宽分配 */
+  SerialRegionLst?: SerialRegionInfo[] | null;
+  /** 剩余可分配通用带宽 单位M */
+  UnUsedWidth?: number | null;
+  /** 可配置实例个数 */
+  UnUsedQuota?: number | null;
+  /** 旁路带宽数据 */
+  BypassWidth?: number | null;
+  /** 赠送的旁路带宽数据 */
+  SendBypassWidth?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSourceAssetRequest {
   /** ChooseType为1，查询已经分组的资产；ChooseType不为1查询没有分组的资产 */
   ChooseType?: string;
@@ -4515,6 +4549,8 @@ declare interface Cfw {
   DescribeRuleOverview(data?: DescribeRuleOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleOverviewResponse>;
   /** 查询安全组规则列表 {@link DescribeSecurityGroupListRequest} {@link DescribeSecurityGroupListResponse} */
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
+  /** 查询串行防火墙地域带宽分配信息 {@link DescribeSerialRegionRequest} {@link DescribeSerialRegionResponse} */
+  DescribeSerialRegion(data?: DescribeSerialRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSerialRegionResponse>;
   /** 查询全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
   DescribeSourceAsset(data?: DescribeSourceAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceAssetResponse>;
   /** 互联网边界和VPC防火墙开关横幅错误信息 {@link DescribeSwitchErrorRequest} {@link DescribeSwitchErrorResponse} */

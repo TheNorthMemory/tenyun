@@ -1590,6 +1590,60 @@ declare interface RuleInfo {
   StreamName?: string;
 }
 
+/** 场景化视频结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。 */
+declare interface SceneStoreCosParam {
+  /** Cos桶名称。 */
+  CosBucketName?: string;
+  /** Cos桶地域。 */
+  CosBucketRegion?: string;
+  /** 存储路径。 */
+  CosBucketPath?: string;
+}
+
+/** 用于场景化创作视频时用到的扩展参数信息。 */
+declare interface SceneVideoExtraParam {
+  /** 指定输出分辨率。选项:720P, 1080P, 2K, 4K。 */
+  Resolution?: string;
+  /** 指定输出视频的宽高比，示例：16:9。 */
+  AspectRatio?: string;
+  /** 错峰模型，仅支持的模型可使用。 */
+  OffPeak?: boolean;
+  /** 自动添加水印，默认左上角添加 &quot;AI生成&quot; 标识。 */
+  LogoAdd?: boolean;
+  /** 使用音画同出。 */
+  EnableAudio?: boolean;
+  /** 生成背景音乐。 */
+  EnableBgm?: boolean;
+  /** 对输入的Prompt进行优化。 */
+  EnablePromptEnhance?: boolean;
+  /** 回调URL。 */
+  CallbackUrl?: string;
+}
+
+/** 场景化视频输出信息。 */
+declare interface SceneVideoOutputInfo {
+  /** 输出信息。 */
+  Info?: string;
+  /** 输出类型。 */
+  Type?: string;
+}
+
+/** 用于场景化生视频创作的参考图片信息。 */
+declare interface SceneVideoReferenceImageInfo {
+  /** 输入的参考图Url，需外网可访问。 */
+  ImageUrl?: string;
+  /** 针对该参考图的Prompt描述，仅部分模型是支持。 */
+  Text?: string;
+  /** 参考类型。 */
+  ReferenceType?: string;
+}
+
+/** 用于场景化视频生成的参考视频素材。 */
+declare interface SceneVideoReferenceVideoInfo {
+  /** 参考视频Url，需外网可访问。 */
+  VideoUrl?: string;
+}
+
 /** 截图任务 */
 declare interface ScreenshotTask {
   /** 截图任务ID。 */
@@ -2925,6 +2979,42 @@ declare interface CreateRecordTaskRequest {
 
 declare interface CreateRecordTaskResponse {
   /** 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSceneVideoTaskRequest {
+  /** 模型名称。 */
+  ModelName?: string;
+  /** 模型版本号。 */
+  ModelVersion?: string;
+  /** 场景化类型。枚举值：template_effect： 模板特效。 */
+  SceneType?: string;
+  /** 输入的Prompt。避免出现违规词汇，审核会进行拦截。 */
+  Prompt?: string;
+  /** 指定输出的视频时长。部分场景不支持指定时长。 */
+  Duration?: number;
+  /** 输入的首帧参考图片Url。需外网可访问。 */
+  ImageUrl?: string;
+  /** 输入的尾帧参考图片Url。 */
+  LastImageUrl?: string;
+  /** 多图参考生视频时，通过该参数指定多张参考图。 */
+  ImageInfos?: SceneVideoReferenceImageInfo[];
+  /** 视频编辑时，指定参考视频信息。 */
+  VideoInfos?: SceneVideoReferenceVideoInfo[];
+  /** 常规扩展参数。 */
+  ExtraParameters?: SceneVideoExtraParam;
+  /** 模型扩展参数，用于透传到模型侧。 */
+  AdditionalParameters?: string;
+  /** 输出结果存储到私有cos，需授权响应角色权限。 */
+  StoreCosParam?: SceneStoreCosParam;
+  /** 操作者名称。 */
+  Operator?: string;
+}
+
+declare interface CreateSceneVideoTaskResponse {
+  /** 输出的任务ID。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5000,6 +5090,26 @@ declare interface DescribeRecordTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSceneVideoTaskRequest {
+  /** 任务ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeSceneVideoTaskResponse {
+  /** 一些特殊场景的返回信息。 */
+  InfoList?: SceneVideoOutputInfo[];
+  /** 任务状态。枚举值：DONE： 任务结束。RUN： 任务运行中。WAIT： 任务准备中。FAIL： 任务失败。 */
+  Status?: string;
+  /** 输出视频的分辨率。示例：720x1280。 */
+  Resolution?: string;
+  /** 错误信息。 */
+  Message?: string;
+  /** 输出的视频Url。默认过期时间:12小时，请尽快拉取并转存。也可以使用私有Cos桶长期存储。 */
+  VideoUrls?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScreenShotSheetNumListRequest {
   /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
@@ -6387,6 +6497,8 @@ declare interface Live {
   CreatePullStreamConfig(data: CreatePullStreamConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePullStreamConfigResponse>;
   /** 创建录制任务（新） {@link CreateRecordTaskRequest} {@link CreateRecordTaskResponse} */
   CreateRecordTask(data: CreateRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordTaskResponse>;
+  /** 创建场景化生视频任务 {@link CreateSceneVideoTaskRequest} {@link CreateSceneVideoTaskResponse} */
+  CreateSceneVideoTask(data?: CreateSceneVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSceneVideoTaskResponse>;
   /** 创建截图任务 {@link CreateScreenshotTaskRequest} {@link CreateScreenshotTaskResponse} */
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
   /** 创建AIGC视频转绘任务 {@link CreateVideoRedrawTaskRequest} {@link CreateVideoRedrawTaskResponse} */
@@ -6635,6 +6747,8 @@ declare interface Live {
   DescribePushBandwidthAndFluxList(data: DescribePushBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePushBandwidthAndFluxListResponse>;
   /** 查询录制任务列表（新） {@link DescribeRecordTaskRequest} {@link DescribeRecordTaskResponse} */
   DescribeRecordTask(data: DescribeRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordTaskResponse>;
+  /** 查询场景化生视频任务 {@link DescribeSceneVideoTaskRequest} {@link DescribeSceneVideoTaskResponse} */
+  DescribeSceneVideoTask(data: DescribeSceneVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSceneVideoTaskResponse>;
   /** 查询截图张数 {@link DescribeScreenShotSheetNumListRequest} {@link DescribeScreenShotSheetNumListResponse} */
   DescribeScreenShotSheetNumList(data: DescribeScreenShotSheetNumListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScreenShotSheetNumListResponse>;
   /** 查询截图任务列表 {@link DescribeScreenshotTaskRequest} {@link DescribeScreenshotTaskResponse} */

@@ -1946,13 +1946,13 @@ declare interface AudioSeparateConfig {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfo {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3;eac3：自适应转码音轨合并时使用。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3;eac3：自适应转码音轨合并时使用。当外层参数 Container 为 wav时，可选值为：pcm16, pcm24； */
   Codec: string;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。当取值为 0，表示音频码率和原始音频保持一致。注意：如果使用自适应转码音轨合并TrackChannelInfo参数，取值范围：1）、不能填0；2）、Codec为：aac时，取值范围：[26, 256];3）、Codec为：ac3时，取值范围：[26, 640];4)、Codec为：eac3时，取值范围：[26, 6144]，备注：当SampleRate为44100HZ，最大值为：5644，当SampleRate为48000HZ，最大值为：6144， */
   Bitrate: number;
-  /** 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
+  /** 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。详细参考音频采样率支持范围文档单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
   SampleRate: number;
-  /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。默认值：2。 */
+  /** 音频通道方式，可选值：0：声道数随源1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式（mp3）时，声道数不允许设为5.1声道。默认值：2。注意：设置音频声道随源时，如果转码音频编码格式不支持当前声道，转码任务可能会失败。 */
   AudioChannel?: number;
   /** 合并音轨信息。注意：此字段只是自适应转码生效， */
   TrackChannelInfo?: AudioTrackChannelInfo | null;
@@ -1960,13 +1960,13 @@ declare interface AudioTemplateInfo {
 
 /** 音频流配置参数 */
 declare interface AudioTemplateInfoForUpdate {
-  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。 */
+  /** 音频流的编码格式。当不需要对音频进行转码时，可选值为：copy。当外层参数 Container 为 mp3 时，可选值为：mp3。当外层参数 Container 为 ogg 或 flac 时，可选值为：flac。当外层参数 Container 为 m4a 时，可选值为：aac；ac3。当外层参数 Container 为 mp4 或 flv 时，可选值为：aac：更适合 mp4；mp3：更适合 flv；mp2。当外层参数 Container 为 hls 时，可选值为：aac；mp3。当外层参数 Container 为 wav时，可选值为：pcm16, pcm24； */
   Codec?: string | null;
   /** 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示音频码率和原始音频保持一致。 */
   Bitrate?: number | null;
-  /** 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。详细参考[音频采样率支持范围文档](https://cloud.tencent.com/document/product/862/77166)单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
+  /** 音频流的采样率，不同编码标准支持的采样率选项不同。填0代表使用源音频的采样率数值。详细参考音频采样率支持范围文档单位：Hz注意：请确保源音频流的采样率在上述选项范围内，否则可能导致转码失败！ */
   SampleRate?: number | null;
-  /** 音频通道方式，可选值：1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为5.1声道。 */
+  /** 音频通道方式，可选值：0：声道数随源1：单通道2：双通道6：5.1声道当媒体的封装格式是音频格式（mp3）时，声道数不允许设为5.1声道。默认值：2。注意：设置音频声道随源时，如果转码音频编码格式不支持当前声道，转码任务可能会失败。 */
   AudioChannel?: number | null;
   /** 指定输出要保留的音频轨道。默认是全部保留源的。 */
   StreamSelects?: number[] | null;
@@ -6802,6 +6802,14 @@ declare interface StreamUrlDetail {
   Type?: string;
 }
 
+/** 自动探测硬字幕区域中，表示字幕区域坐标的数据结构。同时包含置信度。 */
+declare interface SubtitleArea {
+  /** 检测到的字幕区域 */
+  Area?: EraseArea;
+  /** 检测区域的置信度取值范围：[0, 100] */
+  Confidence?: number;
+}
+
 /** 字幕压制模块背景配置 */
 declare interface SubtitleBoardConfig {
   /** 字幕压制模块背景配置开关，0关闭，1开启，默认0 */
@@ -8527,7 +8535,7 @@ declare interface CreateSmartEraseTemplateResponse {
 declare interface CreateSmartSubtitleTemplateRequest {
   /** 智能字幕模板名称长度限制：64 个字符。 */
   Name: string;
-  /** 智能字幕视频源语言OCR识别仅支持以下语言：zh_en：中英multi：其他ASR识别和纯字幕翻译当前支持以下语言：auto：自动识别zh：简体中文en：英语ja：日语ko：韩语zh-PY：中英粤zh_medical：中文医疗vi：越南语ms：马来语id：印度尼西亚语fil：菲律宾语th：泰语pt：葡萄牙语tr：土耳其语ar：阿拉伯语es：西班牙语hi：印地语fr：法语de：德语it：意大利语zh_dialect：中文方言zh_en：中英yue：粤语ru：俄语prime_zh：中英方言af-ZA：南非荷兰语（南非）sq-AL：阿尔巴尼亚语（阿尔巴尼亚）am-ET：阿姆哈拉语（埃塞俄比亚）ar-DZ：阿拉伯语（阿尔及利亚）ar-BH：阿拉伯语（巴林）ar-EG：阿拉伯语（埃及）ar-IQ：阿拉伯语（伊拉克）ar-IL：阿拉伯语（以色列）ar-JO：阿拉伯语（约旦）ar-KW：阿拉伯语（科威特）ar-LB：阿拉伯语（黎巴嫩）ar-MR：阿拉伯语（毛里塔尼亚）ar-MA：阿拉伯语（摩洛哥）ar-OM：阿拉伯语（阿曼）ar-QA：阿拉伯语（卡塔尔）ar-SA：阿拉伯语（沙特阿拉伯）ar-PS：阿拉伯语（巴勒斯坦国）ar-SY：阿拉伯语（叙利亚）ar-TN：阿拉伯语（突尼斯）ar-AE：阿拉伯语（阿拉伯联合酋长国）ar-YE：阿拉伯语（也门）hy-AM：亚美尼亚语（亚美尼亚）az-AZ：阿塞拜疆语（阿塞拜疆）eu-ES：巴斯克语（西班牙）bn-BD：孟加拉语（孟加拉）bn-IN：孟加拉语（印度）bs-BA：波斯尼亚语（波斯尼亚和黑塞哥维那）bg-BG：保加利亚语（保加利亚）my-MM：缅甸语（缅甸）ca-ES：加泰罗尼亚语（西班牙）hr-HR：克罗地亚语（克罗地亚）cs-CZ：捷克语（捷克共和国）da-DK：丹麦语（丹麦）nl-BE：荷兰语（比利时）nl-NL：荷兰语（荷兰）en-AU：英语（澳大利亚）en-CA：英语（加拿大）en-GH：英语（加纳）en-HK：英语（中国香港）en-IN：英语（印度）en-IE：英语（爱尔兰）en-KE：英语（肯尼亚）en-NZ：英语（新西兰）en-NG：英语（尼日利亚）en-PK：英语（巴基斯坦）en-PH：英语（菲律宾）en-SG：英语（新加坡）en-ZA：英语（南非）en-TZ：英语（坦桑尼亚）en-GB：英语（英国）en-US：英语（美国）et-EE：爱沙尼亚语（爱沙尼亚）fil-PH：菲律宾语（菲律宾）fi-FI：芬兰语（芬兰）fr-BE：法语（比利时）fr-CA：法语（加拿大）fr-FR：法语（法国）fr-CH：法语（瑞士）gl-ES：加利西亚语（西班牙）ka-GE：格鲁吉亚语（格鲁吉亚）el-GR：希腊语（希腊）gu-IN：古吉拉特语（印度）iw-IL：希伯来语（以色列）hi-IN：印地语（印度）hu-HU：匈牙利语（匈牙利）is-IS：冰岛语（冰岛）id-ID：印度尼西亚语（印度尼西亚）it-IT：意大利语（意大利）it-CH：意大利语（瑞士）ja-JP：日语（日本）jv-ID：爪哇语（印度尼西亚）kn-IN：卡纳达语（印度）kk-KZ：哈萨克语（哈萨克斯坦）km-KH：高棉语（柬埔寨）rw-RW：卢旺达语（卢旺达）ko-KR：韩语（韩国）lo-LA：老挝语（老挝）lv-LV：拉脱维亚语（拉脱维亚）lt-LT：立陶宛语（立陶宛）mk-MK：马其顿语（北马其顿）ms-MY：马来语（马来西亚）ml-IN：马拉雅拉姆语（印度）mr-IN：马拉地语（印度）mn-MN：蒙古语（蒙古）ne-NP：尼泊尔语（尼泊尔）no-NO：博克马尔挪威语（挪威）fa-IR：波斯语（伊朗）pl-PL：波兰语（波兰）pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）ro-RO：罗马尼亚语（罗马尼亚）ru-RU：俄语（俄罗斯）sr-RS：塞尔维亚语（塞尔维亚）si-LK：僧伽罗语（斯里兰卡）sk-SK：斯洛伐克语（斯洛伐克）sl-SI：斯洛文尼亚语（斯洛文尼亚）st-ZA：南索托语（南非）es-AR：西班牙语（阿根廷）es-BO：西班牙语（玻利维亚）es-CL：西班牙语（智利）es-CO：西班牙语（哥伦比亚）es-CR：西班牙语（哥斯达黎加）es-DO：西班牙语（多米尼加共和国）es-EC：西班牙语（厄瓜多尔）es-SV：西班牙语（萨尔瓦多）es-GT：西班牙语（危地马拉）es-HN：西班牙语（洪都拉斯）es-MX：西班牙语（墨西哥）es-NI：西班牙语（尼加拉瓜）es-PA：西班牙语（巴拿马）es-PY：西班牙语（巴拉圭）es-PE：西班牙语（秘鲁）es-PR：西班牙语（波多黎各）es-ES：西班牙语（西班牙）es-US：西班牙语（美国）es-UY：西班牙语（乌拉圭）es-VE：西班牙语（委内瑞拉）su-ID：巽他语（印度尼西亚）sw-KE：斯瓦希里语（肯尼亚）sw-TZ：斯瓦希里语（坦桑尼亚）sv-SE：瑞典语（瑞典）ta-IN：泰米尔语（印度）ta-MY：泰米尔语（马来西亚）ta-SG：泰米尔语（新加坡）ta-LK：泰米尔语（斯里兰卡）te-IN：泰卢固语（印度）th-TH：泰语（泰国）ts-ZA：聪加语（南非）tr-TR：土耳其语（土耳其）uk-UA：乌克兰语（乌克兰）ur-IN：乌尔都语（印度）ur-PK：乌尔都语（巴基斯坦）uz-UZ：乌兹别克语（乌兹别克斯坦）ve-ZA：文达语（南非）vi-VN：越南语（越南）xh-ZA：科萨语（南非）zu-ZA：祖鲁语（南非） */
+  /** 智能字幕视频源语言ASR识别和纯字幕翻译取值参考文档：ASR 识别支持语种下面列举部分常用取值auto：自动识别，zh：简体中文，en：英语，ja：日语，ko：韩语，zh-PY：中英粤，zh_medical：中文医疗，vi：越南语，ms：马来语，id：印度尼西亚语，fil：菲律宾语，th：泰语，pt：葡萄牙语，tr：土耳其语，ar：阿拉伯语，es：西班牙语，hi：印地语，fr：法语，de：德语，it：意大利语，zh_dialect：中文方言，zh_en：中英，yue：粤语，ru：俄语，prime_zh：中英方言OCR 识别仅支持以下取值：zh_en：中英multi：其他不同取值支持的语种参考文档：OCR 识别支持语种 */
   VideoSrcLanguage: string;
   /** 智能字幕字幕语言类型0: 源语言1: 翻译语言2: 源语言+翻译语言当TranslateSwitch为OFF时仅支持取0当TranslateSwitch为ON时仅支持取1或2 */
   SubtitleType: number;
@@ -8539,7 +8547,7 @@ declare interface CreateSmartSubtitleTemplateRequest {
   AsrHotWordsConfigure?: AsrHotWordsConfigure;
   /** 字幕翻译开关ON: 开启翻译OFF: 关闭翻译注意：纯字幕翻译方式下，不传默认是打开的，不允许传空或OFF； */
   TranslateSwitch?: string;
-  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ab：阿布哈兹语ace：亚齐语ach：阿乔利语af：南非荷兰语ak：契维语（阿坎语）am：Amharicar：阿拉伯语as：阿萨姆语ay：艾马拉语az：阿塞拜疆语ba：巴什基尔语ban：巴厘语bbc：巴塔克托巴语bem：Bembabew：Betawibg：保加利亚语bho：博杰普尔语bik：Bikolbm：班巴拉语bn：孟加拉语br：布列塔尼语bs：波斯尼亚语btx：巴塔克卡罗语bts：巴塔克西马隆贡语bua：布里亚特语ca：加泰罗尼亚语ceb：宿务语cgg：Kigachm：草原马里语ckb：库尔德语（索拉尼语）cnh：哈卡钦语co：科西嘉语crh：克里米亚鞑靼语crs：塞舌尔克里奥尔语cs：捷克语cv：楚瓦什语cy：威尔士语da：丹麦语de：德语din：Dinkadoi：多格来语dov：敦贝语dv：第维埃语dz：宗卡语ee：Eweel：希腊语en：英语eo：世界语es：西班牙语et：爱沙尼亚语eu：巴斯克语fa：波斯语ff：富拉语fi：芬兰语fil：菲律宾语（塔加拉语）fj：斐济语fr：法语fr-CA：法语（加拿大）fr-FR：法语（法国）fy：弗里斯兰语ga：爱尔兰语gaa：加 (Ga) 语gd：苏格兰盖尔语gl：加利西亚语gn：瓜拉尼语gom：贡根语gu：古吉拉特语gv：马恩岛语ha：Hausahaw：夏威夷语he：希伯来语hi：印地语hil：希利盖农语hmn：苗语hr：克罗地亚语hrx：洪斯吕克语ht：海地克里奥尔语hu：匈牙利语hy：亚美尼亚语id：印度尼西亚语ig：Igboilo：伊洛果语is：冰岛语it：意大利语iw：希伯来语ja：日语jv：爪哇语ka：格鲁吉亚语kk：哈萨克语km：高棉语kn：卡纳达语ko：韩语kri：Krioku：库尔德语（库尔曼吉语）ktu：吉土巴语ky：吉尔吉斯语la：拉丁语lb：卢森堡语lg：干达语（卢干达语）li：林堡语lij：利古里亚语lmo：伦巴第语ln：林加拉语lo：老挝语lt：立陶宛语ltg：拉特加莱语luo：Luolus：米佐语lv：拉脱维亚语mai：迈蒂利语mak：马卡萨mg：马尔加什语mi：毛利语min：米南语mk：马其顿语ml：马拉雅拉姆语mn：蒙古语mr：马拉地语ms：马来语mt：马耳他语my：缅甸语ne：尼泊尔语new：尼瓦尔语nl：荷兰语no：挪威语nr：恩德贝莱语（南部）nso：北索托语（塞佩蒂语）nus：努尔语ny：齐切瓦语（尼扬贾语）oc：奥克斯坦语om：Oromoor：奥里亚语pa：旁遮普语pag：邦阿西楠语pam：邦板牙语pap：Papiamentopl：波兰语ps：Pashtopt：葡萄牙语pt-BR：葡萄牙语（巴西）pt-PT：葡萄牙语（葡萄牙）qu：克丘亚语ro：罗马尼亚语rom：罗姆语rn：Rundiru：俄语rw：卢旺达语sa：梵语scn：西西里语sd：信德语sg：Sangoshn：掸语si：僧伽罗语sk：斯洛伐克语sl：斯洛文尼亚语sm：萨摩亚语sn：修纳语so：索马里语sq：阿尔巴尼亚语sr：塞尔维亚语ss：斯瓦特语st：塞索托语su：巽他语sv：瑞典语sw：斯瓦希里语szl：西里西亚语ta：泰米尔语te：泰卢固语tet：德顿语tg：塔吉克语th：泰语ti：提格里尼亚语tk：土库曼语tn：茨瓦纳语tr：土耳其语ts：聪加语tt：鞑靼语ug：维吾尔语uk：乌克兰语ur：乌尔都语uz：乌兹别克语vi：越南语xh：科萨语yi：意第绪语yo：约鲁巴语yua：尤卡坦玛雅语yue：粤语zh：简体中文zh-TW：中文（繁体）zu：祖鲁语注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。 */
+  /** 字幕翻译目标语言当TranslateSwitch为ON的时候生效，翻译语言列表：ASR 提取翻译参考语种列表：ASR 翻译支持语种OCR 提取翻译参考语种列表：OCR 翻译支持语种注意：多语言方式，则使用 / 分割，如：en/ja，表示英语和日语。部分常用语种示例：ar：阿拉伯语en：英语fr：法语it：意大利语ja：日语ko：韩语ru：俄语th：泰语tr：土耳其语vi：越南语yue：粤语zh：简体中文zh-TW：繁体中文 */
   TranslateDstLanguage?: string;
   /** 字幕处理类型：0：ASR识别字幕1：纯字幕翻译2：OCR识别字幕注意：不传的情况下默认类型为 ASR识别字幕 */
   ProcessType?: number;
@@ -10718,6 +10726,26 @@ declare interface DesignVoiceAsyncResponse {
   RequestId?: string;
 }
 
+declare interface DetectVideoSubtitleAreaRequest {
+  /** 输入信息，当前仅支持 URL、COS */
+  InputInfo: MediaInputInfo;
+  /** 视频的语言，如果明确知道视频的语言可以填写，提高识别准确率。枚举值：zh_en： 中英en： 英语ja： 日语ko： 韩语 */
+  VideoLanguage?: string;
+  /** 扩展参数，默认不填 */
+  UserExtPara?: string;
+}
+
+declare interface DetectVideoSubtitleAreaResponse {
+  /** 视频宽度单位：px */
+  Width?: number;
+  /** 视频高度单位：px */
+  Height?: number;
+  /** 识别到的字幕框，识别不到结果为空 */
+  Result?: SubtitleArea[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableScheduleRequest {
   /** 编排唯一表示。 */
   ScheduleId: number;
@@ -11605,7 +11633,7 @@ declare interface ProcessImageResponse {
 }
 
 declare interface ProcessLiveStreamRequest {
-  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc://trtc.rtc.qq.com/mps/&lt;roomid&gt;?sdkappid=&lt;sdkappid&gt;&amp;userid=&lt;userid&gt;&amp;usersig=&lt;usersig&gt;&lt;roomid&gt; 为trtc的房间号id, 为数字&lt;sdkappid&gt; 为trtc的sdk app id&lt;userid&gt; 为服务进入房间的用户id,可以区分谁是机器人&lt;usersig&gt; 为trtc 用户的签名webrtc 支持LEB的直播流，地址获取请参考srt支持地址请参考 */
+  /** 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。trtc地址如下： trtc://trtc.rtc.qq.com/mps/&lt;roomid&gt;?sdkappid=&lt;sdkappid&gt;&amp;userid=&lt;userid&gt;&amp;usersig=&lt;usersig&gt;&lt;roomid&gt; 为trtc的房间号id&lt;sdkappid&gt; 为trtc的sdk app id&lt;userid&gt; 为服务进入房间的用户id,可以区分谁是机器人&lt;usersig&gt; 为trtc 用户的签名webrtc 支持LEB的直播流，地址获取请参考srt支持地址请参考 */
   Url: string;
   /** 任务的事件通知信息，用于指定直播流处理的结果。 */
   TaskNotifyConfig: LiveStreamTaskNotifyConfig;
@@ -11629,7 +11657,7 @@ declare interface ProcessLiveStreamRequest {
   SessionContext?: string;
   /** 直播编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若对直播流发起处理（ProcessLiveStream）有输出，将覆盖原有编排的默认输出。注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessLiveStream）有设置，将覆盖原有编排的默认回调。 */
   ScheduleId?: number;
-  /** 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。 */
+  /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
 }
 
@@ -11831,7 +11859,7 @@ declare interface SyncDubbingRequest {
   AudioLang?: string;
   /** 音色属性 */
   VoiceProfile?: VoiceProfile;
-  /** 输出相关参数可以指定输出形式等 */
+  /** 输出相关参数可以指定输出形式等。默认输出音频base64。 */
   Output?: SyncDubbingOutputOption;
   /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
@@ -12233,6 +12261,8 @@ declare interface Mps {
   DescribeWorkflows(data?: DescribeWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowsResponse>;
   /** 异步音色设计 {@link DesignVoiceAsyncRequest} {@link DesignVoiceAsyncResponse} */
   DesignVoiceAsync(data: DesignVoiceAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DesignVoiceAsyncResponse>;
+  /** 探测视频字幕区域 {@link DetectVideoSubtitleAreaRequest} {@link DetectVideoSubtitleAreaResponse} */
+  DetectVideoSubtitleArea(data: DetectVideoSubtitleAreaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectVideoSubtitleAreaResponse>;
   /** 禁用编排 {@link DisableScheduleRequest} {@link DisableScheduleResponse} */
   DisableSchedule(data: DisableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableScheduleResponse>;
   /** 禁用工作流 {@link DisableWorkflowRequest} {@link DisableWorkflowResponse} */

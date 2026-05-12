@@ -17270,6 +17270,8 @@ declare namespace V20210820 {
     InstanceVersion?: number;
     /** 前端操作类型描述 */
     EventDesc?: string;
+    /** 提交时任务状态枚举值：3： 运行中 */
+    CurrentStatus?: number;
   }
 
   interface CommitIntegrationTaskResponse {

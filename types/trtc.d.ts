@@ -1204,6 +1204,14 @@ declare interface TurnDetection {
   SemanticEagerness?: string;
 }
 
+/** 用量列表 */
+declare interface UsageList {
+  /** 时间 */
+  TimeKey?: string;
+  /** 用量数值 */
+  UsageValue?: number[];
+}
+
 /** 用户信息，包括用户进房时间，退房时间等 */
 declare interface UserInformation {
   /** 房间号 */
@@ -2000,6 +2008,48 @@ declare interface DescribeStreamIngestResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTRTCAIRecognitionUsageRequest {
+  /** 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。 */
+  StartTime: string;
+  /** 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。 */
+  EndTime: string;
+  /** 用量类型列表。- conversation AI 实时对话- asr 语音转文本- translation 实时翻译- tts 实时语音合成 */
+  AuType: string[];
+  /** 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。 */
+  SdkAppId?: string;
+}
+
+declare interface DescribeTRTCAIRecognitionUsageResponse {
+  /** 用量类型列表 */
+  UsageKey?: string[];
+  /** 用量列表 */
+  UsageList?: UsageList[];
+  /** 总用量列表 */
+  TotalUsage?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTRTCDedicatedCloudAccUsageRequest {
+  /** 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。 */
+  StartTime: string;
+  /** 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。 */
+  EndTime: string;
+  /** 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。 */
+  SdkAppId?: number;
+}
+
+declare interface DescribeTRTCDedicatedCloudAccUsageResponse {
+  /** 用量指标名列表 */
+  UsageKey?: string[];
+  /** 用量明细列表 */
+  UsageList?: UsageList[];
+  /** 汇总用量列表 */
+  TotalUsage?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTRTCMarketQualityDataRequest {
   /** 用户SdkAppId（如：1400xxxxxx） */
   SdkAppId: string;
@@ -2088,6 +2138,30 @@ declare interface DescribeTRTCRealTimeScaleDataRequest {
 declare interface DescribeTRTCRealTimeScaleDataResponse {
   /** TRTC监控数据出参 */
   Data?: TRTCDataResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTRTCSegmentModerationUsageRequest {
+  /** 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。 */
+  StartTime: string;
+  /** 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。 */
+  EndTime: string;
+  /** 媒体类型，枚举值：audio（音频）、picture（图片） */
+  Type: string;
+  /** 使用场景（业务类型），枚举值：0 = AI 内容理解（审核场景）、1 = 音视频切片（云端切片场景） */
+  Business: number;
+  /** 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。 */
+  SdkAppId?: number;
+}
+
+declare interface DescribeTRTCSegmentModerationUsageResponse {
+  /** 用量指标名列表 */
+  UsageKey?: string[];
+  /** 用量明细列表 */
+  UsageList?: UsageList[];
+  /** 汇总用量列表 */
+  TotalUsage?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2915,6 +2989,10 @@ declare interface Trtc {
   DescribeScaleInfo(data: DescribeScaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScaleInfoResponse>;
   /** 查询输入在线媒体流 {@link DescribeStreamIngestRequest} {@link DescribeStreamIngestResponse} */
   DescribeStreamIngest(data: DescribeStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamIngestResponse>;
+  /** AI 智能识别与对话用量查询 {@link DescribeTRTCAIRecognitionUsageRequest} {@link DescribeTRTCAIRecognitionUsageResponse} */
+  DescribeTRTCAIRecognitionUsage(data: DescribeTRTCAIRecognitionUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCAIRecognitionUsageResponse>;
+  /** TRTC专属云网络加速用量查询 {@link DescribeTRTCDedicatedCloudAccUsageRequest} {@link DescribeTRTCDedicatedCloudAccUsageResponse} */
+  DescribeTRTCDedicatedCloudAccUsage(data: DescribeTRTCDedicatedCloudAccUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCDedicatedCloudAccUsageResponse>;
   /** 查询TRTC数据大盘质量相关数据 {@link DescribeTRTCMarketQualityDataRequest} {@link DescribeTRTCMarketQualityDataResponse} */
   DescribeTRTCMarketQualityData(data: DescribeTRTCMarketQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityDataResponse>;
   /** 查询TRTC数据大盘规模数据 {@link DescribeTRTCMarketScaleDataRequest} {@link DescribeTRTCMarketScaleDataResponse} */
@@ -2925,6 +3003,8 @@ declare interface Trtc {
   DescribeTRTCRealTimeQualityData(data: DescribeTRTCRealTimeQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityDataResponse>;
   /** 查询TRTC实时监控规模数据 {@link DescribeTRTCRealTimeScaleDataRequest} {@link DescribeTRTCRealTimeScaleDataResponse} */
   DescribeTRTCRealTimeScaleData(data: DescribeTRTCRealTimeScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleDataResponse>;
+  /** 切片截图与内容理解用量查询 {@link DescribeTRTCSegmentModerationUsageRequest} {@link DescribeTRTCSegmentModerationUsageResponse} */
+  DescribeTRTCSegmentModerationUsage(data: DescribeTRTCSegmentModerationUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCSegmentModerationUsageResponse>;
   /** 查询旁路转码计费时长（旧） {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
   /** 查询TRTC音视频房间维度用量 {@link DescribeTrtcRoomUsageRequest} {@link DescribeTrtcRoomUsageResponse} */

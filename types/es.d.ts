@@ -591,7 +591,7 @@ declare namespace V20180416 {
   interface CosBackup {
     /** 是否开启cos自动备份 */
     IsAutoBackup: boolean;
-    /** 自动备份执行时间（精确到小时）, e.g. "22:00" */
+    /** 自动备份执行时间（精确到小时）, e.g. &quot;22:00&quot; */
     BackupTime: string;
     /** 备份快照前缀 */
     SnapshotName?: string;
@@ -623,8 +623,14 @@ declare namespace V20180416 {
     Indices?: string;
     /** cos多AZ备份 0 单AZ; 1 多AZ */
     MultiAz?: number;
+    /** 每节点写入仓库的最大速度 max_snapshot_bytes_per_sec, 默认40m */
+    MaxSnapshotPerSec?: string;
+    /** 每节点读取仓库的最大速度 max_restore_bytes_per_sec, 710前默认40m, 710及以后默认无限制 */
+    MaxRestorePerSec?: string;
     /** 策略创建时间 */
     CreateTime?: string;
+    /** 实例ID */
+    InstanceId?: string;
   }
 
   /** 无 */
@@ -1049,7 +1055,7 @@ declare namespace V20180416 {
     SubnetUid?: string;
     /** 实例状态，0:处理中,1:正常,-1:停止,-2:销毁中,-3:已销毁, -4:隔离中,2:创建集群时初始化中 */
     Status?: number;
-    /** 自动续费标识。取值范围：RENEW_FLAG_AUTO：自动续费 RENEW_FLAG_MANUAL：不自动续费默认取值：RENEW_FLAG_DEFAULT：不自动续费若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。 */
+    /** 自动续费标识。取值范围：RENEW_FLAG_AUTO：自动续费RENEW_FLAG_MANUAL：不自动续费默认取值：RENEW_FLAG_DEFAULT：不自动续费若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。 */
     RenewFlag?: string;
     /** 实例计费模式。取值范围： PREPAID：表示预付费，即包年包月 POSTPAID_BY_HOUR：表示后付费，即按量计费 CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。 */
     ChargeType?: string;
@@ -1207,7 +1213,7 @@ declare namespace V20180416 {
     NetConnectScheme?: string | null;
     /** 置放群组相关参数 */
     DisasterRecoverGroupAffinity?: number | null;
-    /** 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段 */
+    /** 子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段 */
     SubProductCode?: string | null;
     /** 存算分离cos用量，单位M */
     CosBucketStorageSize?: number | null;
@@ -1225,6 +1231,14 @@ declare namespace V20180416 {
     IsCdzLite?: boolean;
     /** 集群内网tcp地址 */
     EsPrivateTcpUrl?: string;
+    /** 是否在回收站内默认值：false */
+    IsInRecycleBin?: boolean;
+    /** 回收站内是否锁定默认值：false */
+    RecycleLockEnabled?: boolean;
+    /** 预计销毁的时间参数格式：YYYY-MM-DD hh:mm:ss */
+    MayDestroyPoint?: string;
+    /** 延迟销毁的时间单位：天 */
+    DelayDestroyInterval?: number;
   }
 
   /** ES集群日志详细信息 */
@@ -1689,6 +1703,8 @@ declare namespace V20180416 {
     SubAccountUin?: string | null;
     /** 自动扩容标识：0-非自动，1-自动 */
     AutoScaleTag?: number;
+    /** 流程异常原因 */
+    SuspendedReason?: string;
   }
 
   /** 操作详情 */
@@ -1781,6 +1797,8 @@ declare namespace V20180416 {
     Total?: number | null;
     /** 任务类型：60：重启型任务70：分片迁移型任务80：节点变配任务 */
     TaskType?: number | null;
+    /** 预估剩余时间单位：秒 */
+    EstimatedTimeRemaining?: number;
   }
 
   /** 创建serverless索引时创建数据接入 */
@@ -2009,6 +2027,10 @@ declare namespace V20180416 {
     StrategyName?: string | null;
     /** cos多AZ备份 0 单AZ; 1 多AZ */
     MultiAz?: number | null;
+    /** 每节点写入仓库的最大速度 max_snapshot_bytes_per_sec, 默认40m */
+    MaxSnapshotPerSec?: string | null;
+    /** 实例ID */
+    InstanceId?: string | null;
   }
 
   /** 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项） */
@@ -2154,6 +2176,8 @@ declare namespace V20180416 {
     RemoteCosRegion?: string;
     /** cos多AZ备份 0 单AZ; 1 多AZ */
     MultiAz?: number;
+    /** 快照创建速率（单位mb） */
+    MaxSnapshotPerSec?: string;
   }
 
   interface CreateClusterSnapshotResponse {
@@ -2496,6 +2520,10 @@ declare namespace V20180416 {
   interface DeleteInstanceRequest {
     /** 实例ID */
     InstanceId: string;
+    /** 回收站锁定设置，true时不可手动销毁，到预设时间后自动销毁默认值：false */
+    LockEnabled?: boolean;
+    /** 放入回收站的锁定时间取值范围：[1, 7]单位：天默认值：1 */
+    LockDuration?: number;
   }
 
   interface DeleteInstanceResponse {
@@ -3350,6 +3378,8 @@ declare namespace V20180416 {
     Indices?: string;
     /** 如果为 false，则如果快照中包含的一个或多个索引没有所有主分片可用，则整个恢复操作将失败。默认为 false,如果为 true，则允许恢复具有不可用分片的索引的部分快照。只有成功包含在快照中的分片才会被恢复。所有丢失的碎片将被重新创建为空 */
     Partial?: string;
+    /** 快照恢复速率（单位mb） */
+    MaxRestorePerSec?: string;
   }
 
   interface RestoreClusterSnapshotResponse {

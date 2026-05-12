@@ -980,7 +980,7 @@ declare interface CynosdbInstance {
   InstanceIndexMode?: string;
   /** 当前实例支持的能力 */
   InstanceAbility?: InstanceAbility;
-  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
+  /** 实例机器类型common，通用型。exclusive，独享型。 */
   DeviceType?: string;
   /** 实例存储类型 */
   InstanceStorageType?: string;
@@ -1546,7 +1546,7 @@ declare interface InstanceInitInfo {
   MinRoCpu?: number;
   /** Serverless实例最大规格 */
   MaxRoCpu?: number;
-  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
+  /** 实例机器类型common，通用型。exclusive，独享型。 */
   DeviceType?: string;
 }
 
@@ -3765,9 +3765,9 @@ declare interface CreateClustersRequest {
   VpcId: string;
   /** 所属子网ID */
   SubnetId: string;
-  /** 数据库类型，取值范围: MYSQL */
+  /** 数据库类型枚举值：MYSQL： MYSQL */
   DbType: string;
-  /** 数据库版本，取值范围: MYSQL可选值：5.7，8.0 */
+  /** 数据库版本枚举值：5.7： MySQL5.7版本8.0： MySQL8.0版本 */
   DbVersion: string;
   /** 所属项目ID */
   ProjectId?: number;
@@ -3779,17 +3779,17 @@ declare interface CreateClustersRequest {
   InstanceCount?: number;
   /** 该参数无实际意义，已废弃。存储大小，单位GB。 */
   Storage?: number;
-  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（&#39;-&#39;,&#39;_&#39;,&#39;.&#39;） */
   ClusterName?: string;
-  /** 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种) */
+  /** 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/中的任意三种) */
   AdminPassword?: string;
   /** 端口，默认3306，取值范围[0, 65535) */
   Port?: number;
-  /** 计费模式，支持值为0和1，默认值为0。取值为0，表示按量计费。取值为1，表示包年包月。 */
+  /** 计费模式枚举值：0： 表示按量计费1： 表示包年包月默认值：0 */
   PayMode?: number;
   /** 购买集群数，可选值范围[1,50]，默认为1 */
   Count?: number;
-  /** 回档类型：noneRollback：不回档；snapRollback，快照回档；timeRollback，时间点回档 */
+  /** 回档类型枚举值：noneRollback： 不回档snapRollback： 快照回档timeRollback： 时间点回档 */
   RollbackStrategy?: string;
   /** 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效 */
   RollbackId?: number;
@@ -3803,11 +3803,11 @@ declare interface CreateClustersRequest {
   StorageLimit?: number;
   /** 包年包月购买时长 */
   TimeSpan?: number;
-  /** 包年包月购买时长单位，['s','d','m','y'] */
+  /** 包年包月购买时长单位，[&#39;s&#39;,&#39;d&#39;,&#39;m&#39;,&#39;y&#39;] */
   TimeUnit?: string;
-  /** 包年包月购买是否自动续费，默认为0。0标识默认续费方式，1表示自动续费，2表示不自动续费。 */
+  /** 包年包月购买是否自动续费枚举值：0： 默认续费方式1： 自动续费2： 不自动续费默认值：0 */
   AutoRenewFlag?: number;
-  /** 是否自动选择代金券 1是 0否 默认为0 */
+  /** 是否自动选择代金券 1是 0否 默认为0枚举值：1： 是0： 否默认值：0 */
   AutoVoucher?: number;
   /** 实例数量（该参数已不再使用，只做存量兼容处理） */
   HaCount?: number;
@@ -3815,13 +3815,13 @@ declare interface CreateClustersRequest {
   OrderSource?: string;
   /** 集群创建需要绑定的tag数组信息 */
   ResourceTags?: Tag[];
-  /** Db类型当DbType为MYSQL时可选(默认NORMAL)：NORMALSERVERLESS */
+  /** Db类型枚举值：NORMAL： 普通实例SERVERLESS： serverless实例默认值：NORMAL当DbType为MYSQL时可选(默认NORMAL) */
   DbMode?: string;
   /** 当DbMode为SERVERLESS时必填cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
   MinCpu?: number;
   /** 当DbMode为SERVERLESS时必填：cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回 */
   MaxCpu?: number;
-  /** 当DbMode为SERVERLESS时，指定集群是否自动暂停，可选范围yesno默认值:yes */
+  /** 否自动暂停枚举值：yes： 是no： 否默认值：yesDbMode为SERVERLESS生效 */
   AutoPause?: string;
   /** 当DbMode为SERVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]默认值:600 */
   AutoPauseDelay?: number;
@@ -3833,7 +3833,7 @@ declare interface CreateClustersRequest {
   AlarmPolicyIds?: string[];
   /** 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感 */
   ClusterParams?: ParamItem[];
-  /** 交易模式，0-下单且支付，1-下单 */
+  /** 交易模式枚举值：0： 下单且支付1： 下单默认值：0 */
   DealMode?: number;
   /** 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID */
   ParamTemplateId?: number;
@@ -3845,9 +3845,9 @@ declare interface CreateClustersRequest {
   GdnId?: string;
   /** 数据库代理配置 */
   ProxyConfig?: ProxyConfig;
-  /** 是否自动归档 */
+  /** 是否自动归档枚举值：yes： 是no： 否默认值：no仅当前集群主实例为SERVERLESS时，该参数生效 */
   AutoArchive?: string;
-  /** 暂停后的归档处理时间 */
+  /** 暂停后的归档处理时间单位：时默认值：12仅当前集群主实例为SERVERLESS时，该参数生效 */
   AutoArchiveDelayHours?: number;
   /** 内核小版本号 */
   CynosVersion?: string;

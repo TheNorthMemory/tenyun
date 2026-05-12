@@ -180,6 +180,12 @@ declare interface ApiDetailSampleHistory {
   FullReqLog?: string;
 }
 
+/** guard content */
+declare interface ApiGuardContent {
+  /** prompt */
+  Prompt: string;
+}
+
 /** 带有请求方式的apiname结构体 */
 declare interface ApiNameMethod {
   /** api名称 */
@@ -1094,6 +1100,18 @@ declare interface CdcRegion {
   Region: string;
   /** 该地域对应的集群信息 */
   Clusters: CdcCluster[];
+}
+
+/** ClawRiskItem */
+declare interface ClawRiskItem {
+  /** 风险类别 */
+  RiskType?: string;
+  /** 规则id */
+  RuleId?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 分数 */
+  Score?: number;
 }
 
 /** 负载均衡型WAF域名详情 */
@@ -2400,6 +2418,12 @@ declare interface LLMPkg {
   EndTime?: string;
   /** 计费项 */
   InquireKey?: string;
+}
+
+/** LLMRisks */
+declare interface LLMRisks {
+  /** 分数 */
+  Risks?: ClawRiskItem[];
 }
 
 /** 涉敏信息结果结构体 */
@@ -6102,6 +6126,28 @@ declare interface DescribeProtectionModesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeQClawContentSecCheckRequest {
+  /** 服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
+  ServiceId: string;
+  /** 要审核的内容 */
+  Content?: ApiGuardContent;
+  /** 标识用户的id，限速使用，不填，则限速会不生效 */
+  UserId?: string;
+  /** 会话id */
+  SessionId?: string;
+  /** toolcall工具名称 */
+  ToolName?: string;
+  /** toolcall工具执行的参数 */
+  ToolArgs?: string;
+}
+
+declare interface DescribeQClawContentSecCheckResponse {
+  /** 检测结果 */
+  Data?: LLMRisks;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRateLimitsV2Request {
   /** 域名 */
   Domain: string;
@@ -8535,6 +8581,8 @@ declare interface Waf {
   DescribeProtectGroup(data?: DescribeProtectGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectGroupResponse>;
   /** 查询tiga引擎下大类规则的防护模式 {@link DescribeProtectionModesRequest} {@link DescribeProtectionModesResponse} */
   DescribeProtectionModes(data: DescribeProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionModesResponse>;
+  /** Qclaw大模型内容审核接口 {@link DescribeQClawContentSecCheckRequest} {@link DescribeQClawContentSecCheckResponse} */
+  DescribeQClawContentSecCheck(data: DescribeQClawContentSecCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQClawContentSecCheckResponse>;
   /** 查询限流规则列表接口 {@link DescribeRateLimitsV2Request} {@link DescribeRateLimitsV2Response} */
   DescribeRateLimitsV2(data: DescribeRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRateLimitsV2Response>;
   /** 获取规格限制 {@link DescribeRuleLimitRequest} {@link DescribeRuleLimitResponse} */

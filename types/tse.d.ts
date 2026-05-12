@@ -1348,6 +1348,8 @@ declare interface GovernanceService {
   IsolateInstanceCount?: number;
   /** 服务健康状态 */
   ServiceStatus?: number;
+  /** 服务类型枚举值：0： 微服务（默认）1： MCP Server2： AI Agent */
+  Type?: number;
 }
 
 /** 服务契约定义 */
@@ -1424,6 +1426,8 @@ declare interface GovernanceServiceInput {
   ExportTo?: string[];
   /** 是否开启同步到全局注册中心 */
   SyncToGlobalRegistry?: boolean;
+  /** 服务类型枚举值：0： 微服务（默认）1： MCP Server2： AI Agent默认值：0 */
+  Type?: number;
 }
 
 /** 实例监听端口信息 */
@@ -3903,6 +3907,8 @@ declare interface DescribeGovernanceServicesRequest {
   SyncToGlobalRegistry?: string;
   /** 过滤筛选条件 */
   StatusFilter?: Filter[];
+  /** 服务类型枚举值：0： 微服务（默认）1： MCP Server2： AI Agent */
+  Type?: number;
 }
 
 declare interface DescribeGovernanceServicesResponse {

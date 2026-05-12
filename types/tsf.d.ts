@@ -2814,6 +2814,14 @@ declare interface SchedulingStrategy {
   CustomTolerateSchedules?: CustomTolerateSchedule[];
 }
 
+/** 模糊查询数据集信息指定字段和值 */
+declare interface SearchFiltersProgram {
+  /** 数据集ID */
+  ProgramId?: string;
+  /** 数据集名称 */
+  ProgramName?: string;
+}
+
 /** 服务配置 */
 declare interface ServiceConfig {
   /** 服务名 */
@@ -6542,6 +6550,8 @@ declare interface DescribeProgramsRequest {
   Limit?: number;
   /** 起始偏移量，默认值0 */
   Offset?: number;
+  /** 模糊查询，传递模糊查询字段和对应的值 */
+  SearchFilters?: SearchFiltersProgram;
 }
 
 declare interface DescribeProgramsResponse {
