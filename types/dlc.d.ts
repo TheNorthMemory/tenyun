@@ -5134,6 +5134,16 @@ declare interface DescribeSubUserAccessPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTCLakeMetaInstanceRequest {
+}
+
+declare interface DescribeTCLakeMetaInstanceResponse {
+  /** 开通状态枚举值：Running： 开通成功 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTablePartitionsRequest {
   /** 数据目录名称 */
   Catalog: string;
@@ -5864,6 +5874,18 @@ declare interface GrantDLCCatalogAccessRequest {
 }
 
 declare interface GrantDLCCatalogAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InitializeTCLakeRequest {
+}
+
+declare interface InitializeTCLakeResponse {
+  /** 实例Id */
+  InstanceId?: string;
+  /** 是否成功 */
+  IsSuccess?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6799,6 +6821,8 @@ declare interface Dlc {
   DescribeStoreLocation(data?: DescribeStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStoreLocationResponse>;
   /** 查询子用户访问策略 {@link DescribeSubUserAccessPolicyRequest} {@link DescribeSubUserAccessPolicyResponse} */
   DescribeSubUserAccessPolicy(data?: DescribeSubUserAccessPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserAccessPolicyResponse>;
+  /** 查询TCLake开通状态 {@link DescribeTCLakeMetaInstanceRequest} {@link DescribeTCLakeMetaInstanceResponse} */
+  DescribeTCLakeMetaInstance(data?: DescribeTCLakeMetaInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTCLakeMetaInstanceResponse>;
   /** 查询表详情 {@link DescribeTableRequest} {@link DescribeTableResponse} */
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
   /** 查询表分区信息 {@link DescribeTablePartitionsRequest} {@link DescribeTablePartitionsResponse} */
@@ -6867,6 +6891,8 @@ declare interface Dlc {
   GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
   /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */
   GrantDLCCatalogAccess(data: GrantDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GrantDLCCatalogAccessResponse>;
+  /** 开通TCLake {@link InitializeTCLakeRequest} {@link InitializeTCLakeResponse} */
+  InitializeTCLake(data?: InitializeTCLakeRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeTCLakeResponse>;
   /** 批量启动标准引擎资源组 {@link LaunchStandardEngineResourceGroupsRequest} {@link LaunchStandardEngineResourceGroupsResponse} */
   LaunchStandardEngineResourceGroups(data: LaunchStandardEngineResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<LaunchStandardEngineResourceGroupsResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */

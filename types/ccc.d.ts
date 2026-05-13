@@ -58,6 +58,32 @@ declare interface AICallExtractResultInfo {
   Number?: number;
 }
 
+/** 表示一轮完整的对话交互 */
+declare interface AICallInteractionRound {
+  /** 本轮对话的唯一标识 Id */
+  RoundId?: string;
+  /** 轮次 */
+  RoundIndex?: number;
+  /** 用户回复分类的标签， json序列化后的表示 */
+  Tags?: string;
+  /** 本轮涉及到的消息内容 */
+  Messages?: AIRoundMessage[];
+  /** 本轮对话在画布中经过的节点路径 */
+  Paths?: AIRoundPath[];
+}
+
+/** 智能体的响应延时 */
+declare interface AICallLatencyMetrics {
+  /** asr时延（毫秒）-1 表示无 asr时延 */
+  AsrLatency?: number;
+  /** llm首token时延(毫秒) */
+  LLMFirstTokenLatency?: number;
+  /** tts时延（毫秒）-1 表示无 tts时延 */
+  TTSLatency?: number;
+  /** 总时延 */
+  TotalLatency?: number;
+}
+
 /** AI时延明细 */
 declare interface AILatencyDetail {
   /** 对话ID */
@@ -94,6 +120,38 @@ declare interface AILatencyStatisticsInfo {
   MiddleLatency?: number;
   /** p90 */
   P90Latency?: number;
+}
+
+/** 表示一轮对话中的用户和 AI 消息 */
+declare interface AIRoundMessage {
+  /** 消息的毫秒级时间戳单位：ms */
+  Timestamp?: number;
+  /** 用户消息 */
+  UserReply?: UserReplyEvent;
+  /** 智能体响应消息 */
+  AISpeak?: AISpeakEvent;
+}
+
+/** 本轮对话在画布中经过的节点路径 */
+declare interface AIRoundPath {
+  /** 画布中的节点名称 */
+  NodeName?: string;
+  /** 画布中的节点类型枚举值：DIALOGUE： 对话节点API_CALL： 接口调用节点TRANSFER： 转接节点KEY_PRESS： 按键节点END_CALL： 挂断节点 */
+  NodeType?: string;
+  /** 经过当前节点的时间戳单位：ms */
+  Timestamp?: number;
+}
+
+/** 智能体发言事件 */
+declare interface AISpeakEvent {
+  /** 本次话术是否允许被用户VAD打断 */
+  CanBeInterrupted?: boolean;
+  /** 智能体播报的话术文本内容 */
+  SpokenText?: string;
+  /** 智能体发言类型枚举值：Script： 智能体话术KnowledgeBase： 知识库LLMFallback： 大模型兜底NoResponseTip： 无响应提示智能追问： SmartFollowUpFAQ： FAQ转人工 - 排队等待音： TransferWaitingPrompt无响应挂断前放音： PlayNoResponseEndPrompt转人工 - 排队前放音： PlayQueuePrompt转人工 - 接待前放音： PlayPromptBeforeReception转人工 - 排队超时放音： PlayQueueTimeoutPrompt转人工 - 转人工失败放音： PlayTransferFailPromptDTMF收号（按键用户输入）： Dtmf按键节点 - 播放提示音： PlayDtmfPrompt按键节点 - 输入错误提示音： PlayInvalidDtmfPrompt按键节点 - 超时提示音： PlayDtmfTimeoutPrompt其他类型： Other */
+  SpokenType?: string;
+  /** 本次响应生成的时延结果 */
+  LatencyMetrics?: AICallLatencyMetrics | null;
 }
 
 /** AI转人工配置项 */
@@ -1160,6 +1218,18 @@ declare interface UploadIvrAudioFailedInfo {
   FailedMsg?: string;
 }
 
+/** 用户发言事件 */
+declare interface UserReplyEvent {
+  /** ASR语音识别引擎将用户语音转换成的原始文本结果 */
+  ASRTranscript?: string;
+  /** 命中画布中该对话节点配置的回复分类 */
+  MatchedIntent?: string;
+  /** 用户回复分类的标签， json序列化后的信息 */
+  ExtractedSlots?: string;
+  /** 用户回复命中的分支类型枚举值：Intent： 用户意图Fallback： 兜底分支NoResponse： 无响应跳转分支SlotCollectionSuccess： 词槽收集完成跳转分支SlotCollectionFail： 词槽收集失败跳转分支GlobalIntent： 全局节点意图LogicAnd： 逻辑判断节点 andLogicOr： 逻辑判断节点 orDTMF成功： DTMFSuccessDTMF失败： DTMFFailDTMF导航： DTMFNavigationDTMF分机： DTMFExtensionDTMF收号： DTMFCollection转接智能体节点失败： TransferAgentFail */
+  BranchType?: string;
+}
+
 /** 变量 */
 declare interface Variable {
   /** 变量名 */
@@ -1822,6 +1892,20 @@ declare interface DescribeAICallExtractResultRequest {
 declare interface DescribeAICallExtractResultResponse {
   /** 结果列表 */
   ResultList?: AICallExtractResultElement[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAICallInteractionRecordsRequest {
+  /** 应用 ID，可以查看 https://console.cloud.tencent.com/ccc。 */
+  SdkAppId: number;
+  /** 查询的会话SessionID */
+  SessionId: string;
+}
+
+declare interface DescribeAICallInteractionRecordsResponse {
+  /** 返回的会话交互结果 */
+  InteractionEventList?: AICallInteractionRound[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3021,6 +3105,8 @@ declare interface Ccc {
   DescribeAIAnalysisResult(data: DescribeAIAnalysisResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisResultResponse>;
   /** 查询智能体通话话后标签数据 {@link DescribeAICallExtractResultRequest} {@link DescribeAICallExtractResultResponse} */
   DescribeAICallExtractResult(data: DescribeAICallExtractResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAICallExtractResultResponse>;
+  /** 查询智能体的会话交互流 {@link DescribeAICallInteractionRecordsRequest} {@link DescribeAICallInteractionRecordsResponse} */
+  DescribeAICallInteractionRecords(data: DescribeAICallInteractionRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAICallInteractionRecordsResponse>;
   /** 查询智能体通话中 AI 服务时延信息 {@link DescribeAILatencyRequest} {@link DescribeAILatencyResponse} */
   DescribeAILatency(data: DescribeAILatencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAILatencyResponse>;
   /** 查询生效运营商白名单规则 {@link DescribeActiveCarrierPrivilegeNumberRequest} {@link DescribeActiveCarrierPrivilegeNumberResponse} */

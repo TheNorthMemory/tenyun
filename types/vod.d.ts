@@ -1773,6 +1773,16 @@ declare namespace V20180717 {
     CreateTime?: string;
   }
 
+  /** AIGC 声音复刻输入文件信息 */
+  interface AigcAudioCloneInputFileInfo {
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    Type?: string | null;
+    /** 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    FileId?: string | null;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。 */
+    Url?: string | null;
+  }
+
   /** AIGC 生音效任务的输出媒体文件配置。 */
   interface AigcAudioOutputConfig {
     /** 存储模式枚举值：Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId默认值：Temporary */
@@ -1931,6 +1941,10 @@ declare namespace V20180717 {
     OutputComplianceCheck?: string;
     /** 生成图片张数。各模型可选值：Kling：可选值 1-9；OG：可选值1-8；其他模型不生效。 */
     OutputImageCount?: number;
+    /** 指定模型输出图片文件格式，若不指定则跟随模型默认值。可选值：jpegpng */
+    OutputFormat?: string;
+    /** 是否开启图标水印，默认为Disabled。取值有：Enabled：开启；Disabled：关闭； */
+    LogoAdd?: string;
   }
 
   /** 场景化 AIGC 生图配置。 */
@@ -2015,17 +2029,17 @@ declare namespace V20180717 {
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。 */
     MediaName?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。 */
     ClassId?: number;
-    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 文件类型，例如 mp4、flv 等。 */
+    /** 文件类型，例如 png、jpg 等。 */
     FileType?: string;
     /** 媒体文件播放地址。 */
     FileUrl?: string;
     /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
     FileId?: string;
-    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    /** 输出图片的元信息。当 StorageMode 为 Permanent 时有效。 */
     MetaData?: MediaMetaData;
   }
 
@@ -2227,7 +2241,7 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：推荐使用小于10M的图片；图片格式的取值为：jpeg，jpg, png。 */
     Url?: string;
-    /** 参考类型，GV模型适用。注意：当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。 */
+    /** 参考类型，GV、Kling、PixVerse模型适用。注意：当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频；当使用 PixVerse 模型时，可用于多图（主体）参考生模式，可选值：subject 表示主体、background 表示背景； */
     ReferenceType?: string;
     /** 用法：Vidu主体Id。Vidu主体Id：prompt可以通过 @主体Id 的方式使用。当 Category 为 Image 时有效。 */
     ObjectId?: string;
@@ -2237,6 +2251,8 @@ declare namespace V20180717 {
     KeepOriginalSound?: string;
     /** 用于区分输入图像用于首（尾）帧生视频、图生视频或参考生视频。可选值：FirstFrame：用于首（尾）帧生视频 或 图生视频；Reference：用于参考生视频；注意，默认是FirstFrame */
     Usage?: string;
+    /** 仅 PixVerse 模型的多图（主体）参考生模式生效，针对图片指定名字, 用来更精准效果。用法：当本字段值为“小猫”，在 Prompt 中使用 @小猫 精确描述场景。@Text 后必须有空格，如 @小猫 跑步。Prompt 中引用的名称必须与本字段完全一致。 */
+    Text?: string;
   }
 
   /** AIGC 主体输入信息。 */
@@ -2969,6 +2985,62 @@ declare namespace V20180717 {
     Input?: CreateAigcAdvancedCustomElementInput;
     /** 创建 AIGC 自定义主体任务输出信息。 */
     Output?: CreateAigcAdvancedCustomElementOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** 创建 AIGC 声音复刻输入信息。 */
+  interface CreateAigcAudioCloneInput {
+    /** 原音频文件，模型将以此参数中传入的音频音色为示例对音色进行复刻。 */
+    AudioFileInfo?: AigcAudioCloneInputFileInfo;
+    /** 自定义的声音ID。 */
+    VoiceId?: string;
+    /** 复刻试听参数。 */
+    Text?: string;
+    /** 音色复刻示例音频。 */
+    PromptAudioFileInfo?: AigcAudioCloneInputFileInfo;
+    /** 示例音频对应的文本内容。 */
+    PromptText?: string;
+    /** 透传参数。 */
+    Payload?: string;
+  }
+
+  /** 创建 AIGC 声音复刻输出信息。 */
+  interface CreateAigcAudioCloneOutput {
+    /** 任务ID。 */
+    TaskId?: string;
+    /** 处理状态。 */
+    State?: string;
+    /** 用户自定义的 voice_id，如果任务失败则不返回。 */
+    VoiceId?: string;
+    /** 如果请求体中传入了试听文本 text，那么本参数将以链接形式返回试听音频，否则本参数为空值。 */
+    DemoAudio?: string;
+    /** 本次调用时传入的透传参数。 */
+    Payload?: string;
+    /** 任务创建时间。 */
+    CreatedAt?: string;
+  }
+
+  /** 创建 AIGC 声音复刻任务信息。 */
+  interface CreateAigcAudioCloneTask {
+    /** 任务ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 音频复刻任务的输入信息。 */
+    Input?: CreateAigcAudioCloneInput;
+    /** AIGC 音频复刻任务的输出信息。 */
+    Output?: CreateAigcAudioCloneOutput;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
@@ -10923,7 +10995,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 音频复刻任务 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -11003,6 +11075,8 @@ declare namespace V20180717 {
     AigcVideoRedrawTask?: AigcVideoRedrawTask;
     /** AIGC音效信息，仅当TaskType为AigcAudioTask时，该字段有值。 */
     AigcAudioTask?: AigcAudioTask;
+    /** AIGC 声音复刻信息，仅当 TaskType 为CreateAigcAudioClone，该字段有值。 */
+    CreateAigcAudioCloneTask?: CreateAigcAudioCloneTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

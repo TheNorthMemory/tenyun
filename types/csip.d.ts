@@ -1022,6 +1022,122 @@ declare interface AttributeOptionSet {
   Value?: string;
 }
 
+/** 审计日志列表信息 */
+declare interface AuditLogInfo {
+  /** ai分数 */
+  AiScore?: number;
+  /** 应用用户 */
+  AppUser?: string;
+  /** 备份数据包 */
+  BackPacket?: string;
+  /** 客户端 IP */
+  ClientIp?: string;
+  /** 客户端 Mac */
+  ClientMac?: string;
+  /** 终端名称，取值Proxy时为casb代理流量，其它为Agent流量 */
+  ClientName?: string;
+  /** 客户端用户 */
+  ClientUser?: string;
+  /** 客户端端口 */
+  ClientPort?: number;
+  /** 风险等级 */
+  DangerLevel?: number;
+  /** 数据库 IP */
+  DbIp?: string;
+  /** 数据库名称 */
+  DbName?: string;
+  /** 数据库端口 */
+  DbPort?: number;
+  /** 数据库用户 */
+  DbUser?: string;
+  /** 影响行数 */
+  EffectRow?: number;
+  /** 执行时间 */
+  ExecTime?: number;
+  /** 命中规则 */
+  HitRule?: string;
+  /** 日志 ID */
+  Id?: number;
+  /** 数据资产名称 */
+  InstanceId?: number;
+  /** 审计单元名 */
+  InstanceName?: string;
+  /** 操作语句(sql 语句) */
+  OpSql?: string;
+  /** 操作时间(时间) */
+  OpTime?: number;
+  /** 返回消息 */
+  RetMsg?: string;
+  /** 返回码 */
+  RetNo?: number;
+  /** 会话ID */
+  SessionId?: string;
+  /** 操作类型 */
+  SqlType?: string;
+  /** 表名 */
+  TableName?: string;
+  /** 数据资产名称 */
+  AssetName?: string;
+  /** 规则集合 */
+  HitRules?: HitRules[];
+  /** 流量来源 */
+  SourceType?: string;
+  /** 单条审计日志id */
+  ReqId?: string;
+  /** SQL 主要类型，DML/DDL/DCL/TCL */
+  SqlMainType?: string;
+  /** 表名集合 */
+  TableNames?: string[];
+  /** 字段名集合 */
+  FieldNames?: string[];
+  /** 字段名 */
+  FieldName?: string;
+  /** 数据库类型 */
+  DbType?: string;
+  /** 客户端工具 */
+  ClientDriverName?: string;
+  /** 位置信息 */
+  Location?: Location;
+  /** 字段信息（包含敏感信息） */
+  FieldDetails?: TableField[];
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
+/** 日志备份 */
+declare interface BackupLog {
+  /** 索引 */
+  Id: number;
+  /** 索引开始时间 */
+  IndexStartTime: number;
+  /** 索引结束时间 */
+  IndexEndTime: number;
+  /** 备份后压缩的大小，单位M */
+  BackupSize: number;
+  /** 日志状态 0备份未完成， 1备份文件，2恢复中，3已恢复，4.已删除 */
+  Status: number;
+  /** 恢复剩余的分钟数，分钟，需要前端转换 */
+  RestoreProcessRemindTime?: number;
+  /** 恢复日志保留的时间 */
+  RestoreRemindTime?: number;
+  /** 恢复索引大小 */
+  RestoreIndexSize?: number;
+  /** 恢复日志执行结束时间 */
+  RestoreEndTime?: number;
+  /** 备份所属的appId */
+  AppId?: number;
+  /** 备份所属的资产ID */
+  AssetId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
 /** 漏洞详细信息 */
 declare interface BugInfoDetail {
   /** 漏洞编号 */
@@ -1600,12 +1716,1036 @@ declare interface DomainAssetVO {
   BotAccessCount?: number;
 }
 
+/** Dspm访问记录 */
+declare interface DspmAccessRecord {
+  /** 资产信息 */
+  Asset?: DspmDbAsset;
+  /** 账号 */
+  Accounts?: DspmAssetAccount[];
+  /** 来源ip信息 */
+  SourceIpList?: DspmIp[];
+  /** 记录时间 */
+  RecordTime?: string;
+  /** 登录成功次数 */
+  LoginSuccessCount?: number;
+  /** 登录失败次数 */
+  LoginFailedCount?: number;
+}
+
+/** Dspm访问管理记录Id */
+declare interface DspmAccessRecordId {
+  /** 来源ip */
+  SourceIp?: string;
+  /** 资产列表 */
+  AssetId?: string;
+  /** 资产所在地域 */
+  Region?: string;
+  /** 资产账号 */
+  Account?: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 记录时间 */
+  RecordTime?: string;
+}
+
+/** Dspm 账号统计数 */
+declare interface DspmAccountCount {
+  /** 云账号个数 */
+  UinAccountCount?: number;
+  /** 访客账号个数 */
+  PersonCount?: number;
+  /** 未管控账号个数 */
+  UncontrolledAccountCount?: number;
+  /** 总账号个数 */
+  TotalAccountCount?: number;
+}
+
+/** 申请单信息 */
+declare interface DspmApplyOrder {
+  /** 申请单id */
+  OrderId?: string;
+  /** 身份id。 */
+  IdentifyId?: string;
+  /** 申请人账号uin */
+  ApplicantUin?: DspmUinUser;
+  /** 资产id */
+  AssetId?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 资产所属地域 */
+  Region?: string;
+  /** 申请类型。0-关联身份 1-编辑身份 2-创建临时身份 */
+  ApplyType?: number;
+  /** 申请权限。 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 从审批完成后开始计算的访问权限失效时间，临时账号有效。单位毫秒。 */
+  ValidatePeriod?: number;
+  /** 申请原因。 */
+  Reason?: string;
+  /** 审批步骤 */
+  ApproverSteps?: DspmApproverStep[];
+  /** 管理类型。0-普通成员 1-管理员 */
+  ManagerType?: number;
+  /** 个人用户信息 */
+  Person?: DspmPersonUser;
+  /** 云账号用户信息 */
+  SubjectUser?: DspmUinUser;
+  /** 审批状态。 0-未审批 1-通过 2-拒绝 */
+  Status?: number;
+  /** 申请单创建时间。 */
+  CreateTime?: string;
+}
+
+/** 审批单信息 */
+declare interface DspmApproverOrder {
+  /** 对应申请单id */
+  OrderId?: string;
+  /** 身份id。 */
+  IdentifyId?: string;
+  /** 申请人账号uin */
+  ApplicantUin?: DspmUinUser;
+  /** 资产id */
+  AssetId?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 申请类型。0-关联身份 1-编辑身份 2-创建临时身份 */
+  ApplyType?: number;
+  /** 申请权限 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 从审批完成后开始计算的访问权限失效时间，临时账号有效。单位毫秒。 */
+  ValidatePeriod?: number;
+  /** 申请原因 */
+  Reason?: string;
+  /** 管理类型。0-普通成员 1-管理员 */
+  ManagerType?: number;
+  /** 个人用户信息 */
+  Person?: DspmPersonUser;
+  /** 云账号用户信息 */
+  SubjectUser?: DspmUinUser;
+  /** 对应申请单创建时间。 */
+  CreateTime?: string;
+}
+
+/** 审批步骤 */
+declare interface DspmApproverStep {
+  /** 审批人列表 */
+  ApproverUinSet?: DspmUinUser[];
+  /** 审批人 */
+  ApproverUin?: string;
+  /** 审批状态 0-未审批 1-通过 2-拒绝 */
+  Status?: number;
+  /** 审批意见 */
+  Comment?: string;
+  /** 审批时间。 */
+  ApproveTime?: string;
+}
+
+/** Dspm地域信息 */
+declare interface DspmArea {
+  /** 国家 */
+  Country?: string;
+  /** 省 */
+  Province?: string;
+  /** 市 */
+  City?: string;
+}
+
+/** Dspm资产访问拓扑 */
+declare interface DspmAssetAccessTopologyItem {
+  /** 资产id */
+  AssetId?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 资产账号 */
+  AssetAccount?: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 账号类型 */
+  AccountType?: number;
+  /** 资产地址 */
+  AssetIp?: string;
+  /** 访问来源ip地址 */
+  SourceIp?: string;
+  /** 访问来源ip类型 */
+  SourceIpType?: string;
+  /** 访问频率。次/天 */
+  AccessFrequency?: DspmFrequency;
+  /** 执行SQL频率。条/小时。 */
+  ExecSQLFrequency?: DspmFrequency;
+  /** 访问起始时间 */
+  AccessBeginTime?: string;
+  /** 访问结束时间 */
+  AccessEndTime?: string;
+  /** 账号风险数 */
+  AccountRisk?: number;
+  /** 资产风险数 */
+  AssetRisk?: number;
+  /** 所属地域 */
+  Region?: string;
+  /** 身份类型。非身份账号为null。0-未定义 2-长期身份 3-临时身份 */
+  IdentifyType?: number;
+  /** 所属云账号uin用户。 */
+  OwnerUin?: DspmUinUser;
+  /** 所属个人用户信息。 */
+  Person?: DspmPersonUser;
+  /** 账号告警数 */
+  AccountAlarm?: number;
+  /** 资产告警数 */
+  AssetAlarm?: number;
+}
+
+/** 资产账号信息 */
+declare interface DspmAssetAccount {
+  /** 账号名 */
+  Account?: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 账号类型。 0-未定义 1-服务账号 2-个人账号 3-临时账号 */
+  AccountType?: number;
+  /** 所属对象。uin或个人id */
+  Subject?: string;
+  /** 权限信息 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 状态。 0-不活跃 1-活跃 2-已删除 */
+  Status?: number;
+  /** 账号创建时间。 */
+  CreateTime?: string;
+  /** 访问权限生效时间。 */
+  ValidateFrom?: string;
+  /** 访问权限失效时间。 */
+  ValidateTo?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 资产id */
+  AssetId?: string;
+  /** 是否新账号 */
+  IsNewAccount?: number;
+  /** 身份类型。非身份账号为null。0-未定义 2-长期身份 3-临时身份 */
+  IdentifyType?: number;
+  /** 所属云账号uin用户。 */
+  OwnerUin?: DspmUinUser;
+  /** 所属个人用户信息。 */
+  Person?: DspmPersonUser;
+  /** 风险统计信息 */
+  RiskCount?: DspmRiskCount;
+  /** 预设权限。 */
+  PresetPrivilege?: DspmDbAccountPrivilege;
+}
+
+/** 资产账号身份信息 */
+declare interface DspmAssetAccountIdentify {
+  /** 资产id */
+  AssetId?: string;
+  /** 所属云账号uin用户。 */
+  OwnerUin?: DspmUinUser;
+  /** 是否管理员 */
+  IsManager?: number;
+  /** 主机地址 */
+  Host?: string;
+  /** 账号类型。 0-未定义 1-服务账号 2-个人账号 3-临时账号 */
+  AccountType?: number;
+  /** 权限信息 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 活跃状态。 0-不活跃 1-活跃 */
+  Status?: number;
+  /** 账号创建时间。 */
+  CreateTime?: string;
+  /** 访问权限生效时间。 */
+  ValidateFrom?: string;
+  /** 访问权限失效时间。 */
+  ValidateTo?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 访客权限申请次数 */
+  PersonApplyCount?: number;
+  /** 资产名 */
+  AssetName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 所属地域 */
+  Region?: string;
+  /** 风险统计信息 */
+  RiskCount?: DspmRiskCount;
+  /** 身份类型。非身份账号为null。0-未定义 2-长期身份 3-临时身份 */
+  IdentifyType?: number;
+  /** 所属个人用户信息。 */
+  Person?: DspmPersonUser;
+  /** 创建者账号uin用户。 */
+  CreatorUin?: DspmUinUser;
+  /** 预设权限。 */
+  PresetPrivilege?: DspmDbAccountPrivilege;
+  /** 内网访问地址，如果有多个，使用';'分割 */
+  PrivateIp?: string;
+  /** 身份id */
+  IdentifyId?: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
+/** Dspm 资产统计数 */
+declare interface DspmAssetCount {
+  /** 资产个数 */
+  AssetCount?: number;
+  /** 资产有危险风险的个数 */
+  DangerRiskCount?: number;
+  /** 资产有低风险的个数 */
+  LowRiskCount?: number;
+  /** 有待处理风险的实例数 */
+  RiskAssetCount?: number;
+  /** 有待处理告警的实例数 */
+  AlarmAssetCount?: number;
+}
+
+/** dspm资产数据识别详情 */
+declare interface DspmAssetDataScanDetail {
+  /** 识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败 */
+  Status?: number;
+  /** 识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败 */
+  StatusInfo?: string;
+  /** 识别进度 */
+  Progress?: number;
+  /** 最近扫描时间 */
+  LatestScanTime?: string;
+  /** 识别失败信息 */
+  ErrorInfo?: string;
+  /** 数据库数量 */
+  DbCount?: number;
+  /** 分类id集合 */
+  CategoryIds?: number[];
+  /** 分类名称集合 */
+  CategoryNames?: string[];
+  /** 扫描任务配置 */
+  TaskConfig?: DspmSensitiveScanTaskConfig;
+  /** 识别结果分类详情 */
+  CategoryDetails?: DspmIdentifyCategoryDetail[];
+}
+
+/** dspm资产数据库信息 */
+declare interface DspmAssetDatabaseInfo {
+  /** 资产实例id */
+  AssetId?: string;
+  /** 数据库名称 */
+  DbName?: string;
+  /** 总表数 */
+  TableCount?: number;
+  /** 敏感表数 */
+  SensitiveTableCount?: number;
+  /** 数据项id集合 */
+  RuleIds?: number[];
+  /** 数据项名称集合 */
+  RuleNames?: string[];
+  /** 分类id集合 */
+  CategoryIds?: number[];
+  /** 分类名称集合 */
+  CategoryNames?: string[];
+  /** 分类详情 */
+  CategoryDetails?: DspmIdentifyCategoryDetail[];
+}
+
+/** dspm资产字段信息 */
+declare interface DspmAssetFieldInfo {
+  /** 资产实例id */
+  AssetId?: string;
+  /** 数据库名称 */
+  DbName?: string;
+  /** schema名 */
+  SchemaName?: string;
+  /** 表名 */
+  TableName?: string;
+  /** 字段名 */
+  FieldName?: string;
+  /** 数据项id集合 */
+  RuleIds?: number[];
+  /** 数据项名称集合 */
+  RuleNames?: string[];
+  /** 分类id集合 */
+  CategoryIds?: number[];
+  /** 分类名称集合 */
+  CategoryNames?: string[];
+}
+
+/** Dspm资产实例 */
+declare interface DspmAssetInstance {
+  /** 资产实例Id */
+  AssetId: string;
+  /** 资产类型 */
+  AssetType: string;
+  /** 地域 */
+  Region: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+}
+
+/** Dspm资产安全分析状态 */
+declare interface DspmAssetSecurityAnalyseStatus {
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 资产实例Id */
+  AssetId?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 地域 */
+  Region?: string;
+  /** 是否支持敏感数据识别。0 不支持；1 支持 */
+  IdentifyScanSupported?: number;
+  /** 是否支持日志投递。0-不支持 1-支持 */
+  LogDeliverySupported?: number;
+  /** 安全分析状态（0-关闭 1-打开 2-开通中 3-关闭中） */
+  SecurityAnalyseStatus?: number;
+  /** 日志投递状态。0-投递关闭 1-投递打开 2-投递开通中 3-投递关闭中 */
+  LogDeliveryStatus?: number;
+  /** 日志审计禁止开通的原因，可选值：VersionNotSupportLogSubscription, InstanceIsUpgrading,CdbRuleAuditEnabled */
+  LogDeliveryDisableReason?: string;
+  /** 当前实例的总日志数 */
+  TotalAuditLogs?: number;
+  /** 已识别敏感数据项个数 */
+  DataScanDetailRuleCount?: number;
+  /** 操作错误信息 */
+  OperationErrorMsg?: string;
+}
+
+/** dspm资产表信息 */
+declare interface DspmAssetTableInfo {
+  /** 资产实例id */
+  AssetId?: string;
+  /** 数据库名称 */
+  DbName?: string;
+  /** schema名称 */
+  SchemaName?: string;
+  /** 表名 */
+  TableName?: string;
+  /** 字段数 */
+  FieldCount?: number;
+  /** 敏感字段数 */
+  SensitiveFieldCount?: number;
+  /** 数据项id集合 */
+  RuleIds?: number[];
+  /** 数据项名称集合 */
+  RuleNames?: string[];
+  /** 分类id集合 */
+  CategoryIds?: number[];
+  /** 分类名称集合 */
+  CategoryNames?: string[];
+}
+
+/** Dspm 资产按类型统计数 */
+declare interface DspmAssetTypeCount {
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产安全分析开启数 */
+  OpenCount?: number;
+  /** 资产安全分析开启中数 */
+  OpeningCount?: number;
+  /** 资产安全分析关闭中数 */
+  ClosingCount?: number;
+  /** 资产安全分析未开启数 */
+  CloseCount?: number;
+}
+
+/** 列权限信息 */
+declare interface DspmColumnPrivilege {
+  /** 数据库名 */
+  Database?: string;
+  /** 数据库表名 */
+  Table?: string;
+  /** 数据库列名 */
+  Column?: string;
+  /** 权限信息 */
+  Privileges?: string[];
+}
+
+/** 数据库权限 */
+declare interface DspmDatabasePrivilege {
+  /** 权限信息 */
+  Privileges?: string[];
+  /** 数据库名 */
+  Database?: string;
+}
+
+/** 数据库账号权限信息 */
+declare interface DspmDbAccountPrivilege {
+  /** 使用默认权限。0-未使用；1-只读权限，即SELECT权限；2-全部权限，即global级别全部权限。 */
+  UseDefaultPrivilege?: number;
+  /** 全局权限数组。 */
+  GlobalPrivileges?: string[];
+  /** 数据库权限数组。 */
+  DatabasePrivilegesList?: DspmDatabasePrivilege[];
+  /** 数据库中的表权限数组。 */
+  TablePrivileges?: DspmTablePrivilege[];
+  /** 数据库表中的列权限数组。 */
+  ColumnPrivileges?: DspmColumnPrivilege[];
+}
+
+/** 数据库资产 */
+declare interface DspmDbAsset {
+  /** 资产实例Id */
+  AssetId?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产名 */
+  Name?: string;
+  /** 账号数 */
+  AccountCount?: number;
+  /** 公网访问地址，如果有多个，使用';'分割 */
+  PublicIp?: string;
+  /** 内网访问地址，如果有多个，使用';'分割 */
+  PrivateIp?: string;
+  /** 广域网域名地址，如果有多个，使用';'分割 */
+  WanDomain?: string;
+  /** 地域 */
+  Region?: string;
+  /** 资产所在vpc的vpcid */
+  VpcId?: string;
+  /** 资产所在vpc的vpc名 */
+  VpcName?: string;
+  /** 资产所在vpc子网的subnetid */
+  SubnetId?: string;
+  /** 资产所在vpc子网名 */
+  SubnetName?: string;
+  /** 实例状态 */
+  Status?: number;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 管理者信息。 */
+  Manager?: DspmUinUser[];
+  /** 是否绑定身份。0-未绑定 1-已绑定 */
+  BindIdentify?: number;
+  /** 是否管理员 */
+  IsManager?: number;
+  /** 风险统计信息 */
+  RiskCount?: DspmRiskCount;
+  /** 安全建议。Resolve 立即解决Reinforcement 加固None 暂无异常 */
+  SafetyAdvice?: string;
+  /** 日志投递状态。0-投递关闭 1-投递打开 2-投递开通中 3-投递关闭中 */
+  LogDeliveryStatus?: number;
+  /** 是否支持日志投递。0-不支持 1-支持 */
+  LogDeliverySupported?: number;
+  /** 数据扫描信息 */
+  DataScanInfo?: DspmAssetDataScanDetail;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+  /** 安全分析状态（0-关闭 1-打开 2-开通中 3-关闭中） */
+  SecurityAnalyseStatus?: number;
+  /** 当前实例的总日志数 */
+  TotalAuditLogs?: number;
+  /** 日志审计禁止开通的原因，可选值：VersionNotSupportLogSubscription, InstanceIsUpgrading, CdbRuleAuditEnabled, AssetNotExists */
+  LogDeliveryDisableReason?: string;
+  /** 在线日志的起始时间戳，精确到秒 */
+  OldestOnlineLogTimestamp?: number;
+  /** 在线日志的最新时间戳，精确到秒 */
+  NewestOnlineLogTimestamp?: number;
+  /** 操作错误信息 */
+  OperationErrorMsg?: string;
+  /** 是否支持账号操作。0 不支持；1 支持 */
+  AccountOptSupported?: number;
+  /** 实例类型 */
+  InstanceType?: number;
+  /** 是否支持敏感数据识别。0 不支持；1 支持 */
+  IdentifyScanSupported?: number;
+}
+
+/** 数据库资产Id信息 */
+declare interface DspmDbAssetId {
+  /** 资产实例Id */
+  AssetId?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产名 */
+  Name?: string;
+  /** 资产记录id */
+  Id?: number;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
+/** dspm字典信息 */
+declare interface DspmDictionary {
+  /** 字典id */
+  DictId?: number;
+  /** 字典名称 */
+  DictName?: string;
+}
+
+/** Dspm频率 */
+declare interface DspmFrequency {
+  /** 数量。 */
+  Count?: number;
+  /** 单位。 */
+  Unit?: string;
+}
+
+/** Dspm身份关联资产统计 */
+declare interface DspmIdentifyAssetStatistic {
+  /** 关联资产管理员数。 */
+  ManagerCount?: number;
+  /** 关联资产普通成员数。 */
+  MemberCount?: number;
+}
+
+/** dspm数据识别结果分类详情 */
+declare interface DspmIdentifyCategoryDetail {
+  /** 分类id */
+  CategoryId?: number;
+  /** 分类名称 */
+  CategoryName?: string;
+  /** 数据项集合 */
+  RuleSet?: DspmIdentifyRuleDetail[];
+}
+
+/** Dspm身份统计信息 */
+declare interface DspmIdentifyCount {
+  /** 身份类型。0-未定义 2-长期身份 3-临时身份 */
+  IdentifyType?: number;
+  /** 个数。 */
+  Count?: number;
+}
+
+/** Dspm身份id信息 */
+declare interface DspmIdentifyIdItem {
+  /** 身份id。 */
+  IdentifyId?: string;
+  /** 备注。 */
+  Remark?: string;
+  /** 身份类型。0-未定义 2-长期身份 3-临时身份 */
+  IdentifyType?: number;
+  /** 所属云账号uin用户。 */
+  OwnerUin?: DspmUinUser | null;
+  /** 创建者账号uin用户。 */
+  CreatorUin?: DspmUinUser;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 状态。0-不活跃 1-活跃 */
+  Status?: number;
+  /** 所属个人用户信息 */
+  Person?: DspmPersonUser | null;
+}
+
+/** Dspm身份信息 */
+declare interface DspmIdentifyInfoItem {
+  /** 身份id。 */
+  IdentifyId?: string;
+  /** 备注。 */
+  Remark?: string;
+  /** 身份类型。0-未定义 2-长期身份 3-临时身份 */
+  IdentifyType?: number;
+  /** 所属云账号uin用户。 */
+  OwnerUin?: DspmUinUser | null;
+  /** 创建者账号uin用户。 */
+  CreatorUin?: DspmUinUser;
+  /** 关联资产。 */
+  AssetCount?: number;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 状态。0-不活跃 1-活跃 */
+  Status?: number;
+  /** 所属个人用户信息 */
+  Person?: DspmPersonUser | null;
+  /** 关联数据资产统计信息。 */
+  AssetStatistic?: DspmIdentifyAssetStatistic;
+  /** 风险统计信息 */
+  RiskCount?: DspmRiskCount;
+  /** 安全建议。 Resolve 立即解决 Reinforcement 加固 None 暂无异常 */
+  SafetyAdvice?: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
+/** dspm数据项详情 */
+declare interface DspmIdentifyRuleDetail {
+  /** 数据项id */
+  RuleId?: number;
+  /** 数据项名称 */
+  RuleName?: string;
+  /** 敏感级别id */
+  LevelId?: number;
+  /** 敏感级别名称 */
+  LevelName?: string;
+  /** 敏感程度 */
+  LevelScore?: number;
+}
+
+/** Dspm Ip信息 */
+declare interface DspmIp {
+  /** ip地址 */
+  Ip?: string;
+  /** ip类型。public-公网 private-内网 */
+  IpType?: string;
+  /** ip标记信息 */
+  Remark?: string;
+  /** 是否已经标记信息 */
+  IsRemarked?: number;
+  /** ip归属实例id */
+  ResourceInstanceId?: string;
+  /** ip所属产品 */
+  ResourceType?: string;
+  /** ip所属地域 */
+  Area?: DspmArea;
+  /** 是否新ip地址 */
+  IsNewIp?: number;
+}
+
+/** Dspm ip 统计数 */
+declare interface DspmIpCount {
+  /** 访问Ip个数 */
+  IpCount?: number;
+  /** 未打标公网Ip个数 */
+  UnmarkedPublicIpCount?: number;
+  /** 内网Ip个数 */
+  PrivateIpCount?: number;
+}
+
+/** 访客申请记录 */
+declare interface DspmPersonApplyHistoryItem {
+  /** 资产id */
+  AssetId?: string;
+  /** 姓名 */
+  PersonName?: string;
+  /** 手机号 */
+  Phone?: string;
+  /** 访问权限生效时间。 */
+  ValidateFrom?: string;
+  /** 访问权限失效时间。 */
+  ValidateTo?: string;
+  /** 访问权限有效时间。单位毫秒。 */
+  ValidatePeriod?: number;
+  /** 权限信息。 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 是否有效。0-无效；1-有效。 */
+  ValidStatus?: number;
+}
+
+/** Dspm个人身份信息 */
+declare interface DspmPersonIdentifyItem {
+  /** 身份id。 */
+  PersonId?: string;
+  /** 姓名。 */
+  Name?: string;
+  /** 手机号 */
+  Phone?: string;
+  /** 备注。 */
+  Remark?: string;
+  /** 创建时间。 */
+  CreateTime?: string;
+}
+
+/** 个人用户信息 */
+declare interface DspmPersonUser {
+  /** 个人id */
+  PersonId?: string;
+  /** 姓名 */
+  PersonName?: string;
+  /** 手机号 */
+  Phone?: string;
+}
+
+/** Dspm风险 */
+declare interface DspmRisk {
+  /** 风险id */
+  RiskId?: string;
+  /** 风险名称 */
+  RiskName?: string;
+  /** 风险英文名称 */
+  RiskNameEn?: string;
+  /** 策略类型 */
+  StrategyType?: string;
+  /** 策略类别 */
+  StrategyCategory?: string;
+  /** 风险等级 */
+  RiskLevel?: string;
+  /** 资产实例Id */
+  AssetId?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 地域 */
+  AssetRegion?: string;
+  /** 资产账号 */
+  Account?: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 账号类型 */
+  AccountType?: number;
+  /** 风险检出时间 */
+  DetectTime?: string;
+  /** 处理状态 0-未处理 1-已处置 2-已忽略 */
+  Status?: number;
+  /** 身份id */
+  IdentifyId?: string;
+  /** 所属云账号uin用户 */
+  OwnerUin?: DspmUinUser;
+  /** 所属个人用户信息 */
+  Person?: DspmPersonUser;
+  /** 风险数据。 */
+  RiskData?: string;
+  /** 是否资产管理员 */
+  IsAssetManager?: number;
+  /** 数据起始时间 */
+  DataBeginTime?: string;
+  /** 数据结束时间 */
+  DataEndTime?: string;
+  /** 风险类型。risk-风险；alarm-告警。 */
+  RiskType?: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
+/** Dspm 风险统计数 */
+declare interface DspmRiskCount {
+  /** 待处理风险个数 */
+  UnprocessedRisk?: number;
+  /** 配置风险个数 */
+  ConfigurationRisk?: number;
+  /** 基线风险个数 */
+  BaselineDeviation?: number;
+  /** 泄露风险个数 */
+  LeakDetection?: number;
+  /** SQL行为异常风险个数 */
+  SQLBehaviorAnomaly?: number;
+  /** 权限异常风险个数 */
+  PermissionAnomaly?: number;
+  /** 登录行为异常风险个数 */
+  LoginBehaviorAnomaly?: number;
+  /** 攻击面风险个数 */
+  AttackSurfaceRisk?: number;
+  /** 账号敏感操作个数 */
+  AccountSensitiveOperation?: number;
+  /** 待处理告警个数 */
+  UnprocessedAlarm?: number;
+  /** 新增事件告警 */
+  NumOfNewAlarmEvent?: number;
+  /** 新增配置风险 */
+  NumOfNewConfigRisk?: number;
+}
+
+/** Dspm 风险策略 */
+declare interface DspmRiskStrategy {
+  /** 策略类型 */
+  StrategyType?: string;
+  /** 策略名 */
+  Name?: string;
+  /** 策略类型 */
+  StrategyCategory?: string;
+  /** 是否启用。0-禁用 1-启用 */
+  IsEnabled?: number;
+  /** 风险等级。 */
+  RiskLevel?: string;
+  /** 策略规则 */
+  Rule?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 策略内容 */
+  Description?: string;
+  /** 命中次数 */
+  HitCount?: number;
+  /** 风险类型。risk-风险；alarm-告警。 */
+  RiskType?: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+  /** 策略id */
+  StrategyId?: number;
+}
+
+/** Dspm 风险分组策略 */
+declare interface DspmRiskStrategyGroup {
+  /** 策略类型 */
+  StrategyType?: string;
+  /** 策略名 */
+  Name?: string;
+  /** 策略类型 */
+  StrategyCategory?: string;
+  /** 是否启用。0-禁用 1-启用 */
+  IsEnabled?: number;
+  /** 命中次数 */
+  HitCount?: number;
+  /** 风险类型。risk-风险；alarm-告警。 */
+  RiskType?: string;
+  /** 策略列表 */
+  StrategyList?: DspmRiskStrategy[];
+}
+
+/** Dspm风险趋势 */
+declare interface DspmRiskTendency {
+  /** 日期 */
+  Date?: string;
+  /** 未管控账号个数 */
+  UncontrolledAccount?: number;
+  /** 配置风险个数 */
+  ConfigurationRisk?: number;
+  /** 基线风险个数 */
+  BaselineRisk?: number;
+  /** 泄露风险个数 */
+  LeakDetectionRisk?: number;
+  /** SQL行为异常风险个数 */
+  SQLBehaviorAnomaly?: number;
+  /** 权限异常风险个数 */
+  PermissionAnomaly?: number;
+  /** 登录行为异常风险个数 */
+  LoginBehaviorAnomaly?: number;
+  /** 攻击面风险风险个数 */
+  AttackSurfaceRisk?: number;
+  /** 账号敏感操作个数 */
+  AccountSensitiveOperation?: number;
+}
+
+/** 调度任务配置 */
+declare interface DspmScheduleConfig {
+  /** 调度类型: daily(按天), weekly(按周), monthly(按月) */
+  ScheduleType?: string;
+  /** 按天不传，按周调度配置（星期几 (1=周一, ..., 7=周日)），按月调度配置（每月第几天 (1-31)） */
+  Day?: number | null;
+  /** 调度时间配置 */
+  Time?: string | null;
+  /** 时区,默认东八区（Asia/Shanghai） */
+  TimeZone?: string;
+}
+
+/** Dspm 资产安全分析状态统计数 */
+declare interface DspmSecurityAnalyseStatusCount {
+  /** 资产安全分析开启数 */
+  OpenCount?: number;
+  /** 资产安全分析开启中数 */
+  OpeningCount?: number;
+  /** 资产安全分析关闭中数 */
+  ClosingCount?: number;
+  /** 资产安全分析未开启数 */
+  CloseCount?: number;
+  /** 按照资产类型分组的资产安全分析状态统计数 */
+  AssetTypeCountSet?: DspmAssetTypeCount[];
+}
+
+/** dspm敏感数据扫描任务配置 */
+declare interface DspmSensitiveScanTaskConfig {
+  /** 是否定时任务 */
+  IsScheduled?: boolean;
+  /** 调度周期配置 */
+  ScheduleConfig?: DspmScheduleConfig;
+  /** 是否立即扫描 */
+  IsRunAtOnce?: boolean;
+}
+
+/** dspm支持的产品信息 */
+declare interface DspmSupportedAssetType {
+  /** 产品名（用于查询） */
+  Product?: string;
+  /** 地域列表 */
+  Regions?: RegionConfig[];
+  /** 产品名-用于展示 */
+  ProductDisplayName?: string;
+  /** 产品组名 */
+  ProductGroup?: string;
+  /** 给定资产类型的资产实例总数 */
+  AssetTotal?: number;
+}
+
+/** 表权限 */
+declare interface DspmTablePrivilege {
+  /** 数据库名 */
+  Database?: string;
+  /** 数据库表名 */
+  Table?: string;
+  /** 权限信息 */
+  Privileges?: string[];
+}
+
+/** 云账号用户信息 */
+declare interface DspmUinUser {
+  /** 账号uin */
+  Uin?: string;
+  /** 姓名 */
+  Name?: string;
+  /** 用户类型。1-主账号 2-子用户 */
+  UserType?: number;
+}
+
+/** Dspm 白名单策略 */
+declare interface DspmWhitelistStrategy {
+  /** 白名单策略id */
+  WhitelistStrategyId?: string;
+  /** 策略类型 */
+  StrategyType?: string;
+  /** 白名单策略名 */
+  Name?: string;
+  /** 策略类型 */
+  StrategyCategory?: string;
+  /** 策略规则 */
+  Rule?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 资产id */
+  AssetId?: string;
+  /** 账号 */
+  Account?: string;
+  /** 主机 */
+  Host?: string;
+  /** 策略规则内容描述 */
+  Description?: string;
+  /** 白名单类型。risk-风险白名单；alarm-告警白名单。 */
+  RiskType?: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 资产所属账号uin */
+  Uin?: string;
+}
+
 /** 统计条目 */
 declare interface Element {
   /** 统计类型 */
   Key?: string;
   /** 统计对象 */
   Value?: string;
+}
+
+/** 导出任务列表 */
+declare interface ExportTask {
+  /** 任务Id */
+  Id?: number;
+  /** 用户AppId */
+  AppId?: number;
+  /** 进度百分比 */
+  Percentage?: number;
+  /** 任务状态：0.未开始 1.执行中 2.执行成功 3.执行超时 4.执行失败 */
+  TaskStatus?: number;
+  /** 任务创建时间 */
+  CreateTime?: number;
+  /** 任务更新时间 */
+  ModifyTime?: number;
+  /** 文件名 */
+  FileName?: string;
+  /** 文件大小 字节 */
+  FileSize?: number;
+  /** 剩余时间(单位：秒) */
+  RemainingTime?: number;
 }
 
 /** 暴露资产分类 */
@@ -1832,6 +2972,22 @@ declare interface HighBaseLineRiskItem {
   AppID?: number;
 }
 
+/** 规则集合 */
+declare interface HitRules {
+  /** 规则Id */
+  RuleId: number;
+  /** 规则 */
+  RuleName: string;
+}
+
+/** 计费项信息 */
+declare interface InquireInfo {
+  /** 计费项名称 */
+  Name?: string;
+  /** 购买量 */
+  Value?: number;
+}
+
 /** ip列表 */
 declare interface IpAssetListVO {
   /** 资产id */
@@ -1928,6 +3084,16 @@ declare interface KeyValue {
   Key?: string;
   /** 值 */
   Value?: string;
+}
+
+/** 位置信息 */
+declare interface Location {
+  /** 国家 */
+  Country?: string;
+  /** 地区 */
+  Region?: string;
+  /** 城市 */
+  City?: string;
 }
 
 /** 网卡资产 */
@@ -2182,6 +3348,26 @@ declare interface ProductSupport {
 declare interface PublicIpDomainListKey {
   /** 资产值 */
   Asset: string;
+}
+
+/** 地域配置 */
+declare interface RegionConfig {
+  /** 地域 */
+  Region?: string | null;
+  /** 地域中文 */
+  RegionName?: string | null;
+  /** 是否国外 */
+  Foreign?: number | null;
+  /** 地域码 */
+  Code?: number | null;
+  /** 是否自驾云 */
+  IsAutoDriveCloud?: number | null;
+  /** 是否支持nat */
+  IsSupportNat?: number | null;
+  /** 地区信息 */
+  RegionArea?: string | null;
+  /** 地域英文 */
+  RegionNameEN?: string;
 }
 
 /** 相关攻击事件结构 */
@@ -2524,6 +3710,16 @@ declare interface ScanTaskInfoList {
   SourceType?: number;
 }
 
+/** 敏感分类分级描述 */
+declare interface SensitiveDetail {
+  /** 字段分类 */
+  CategoryRule?: string;
+  /** 字段分级 */
+  LevelRisk?: string;
+  /** 1:敏感信息字段0:非敏感字段 */
+  IsSensitive?: number;
+}
+
 /** 服务风险 */
 declare interface ServerRisk {
   /** 测绘标签 */
@@ -2772,6 +3968,20 @@ declare interface SubnetAsset {
   IsNewAsset?: number;
 }
 
+/** 数据库字段描述 */
+declare interface TableField {
+  /** 数据库名 */
+  DB?: string;
+  /** 数据库视图名 */
+  Schema?: string;
+  /** 数据库表名 */
+  Table?: string;
+  /** 数据库字段名 */
+  Field?: string;
+  /** 字段敏感信息 */
+  Sensitive?: SensitiveDetail;
+}
+
 /** 标签 */
 declare interface Tag {
   /** 标签名称 */
@@ -2996,6 +4206,32 @@ declare interface UserCallRecord {
   AppID?: number;
   /** 运营商 */
   ISP?: string;
+}
+
+/** 账号dspm信息 */
+declare interface UserDspmInfo {
+  /** APPID */
+  AppID?: number;
+  /** UIN */
+  Uin?: string;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 账号下数据库资产数量 */
+  AssetNum?: number;
+  /** 账号下开启安全分析数据库资产数量 */
+  UsedAssetNum?: number;
+  /** 是否被共享，1-被共享，2-未被共享 */
+  IsShared?: number;
+  /** 是否单独购买，1-单独购买，2-未单独购买 */
+  IsSelfBuy?: number;
+  /** 配额来源账号 */
+  ShareFromAppID?: number;
+  /** 云类型（0：腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云） */
+  CloudType?: number;
+  /** 账号是否隔离中 */
+  IsIsolating?: boolean;
+  /** 是否正在数据清理 */
+  IsDataCleaning?: boolean;
 }
 
 /** 应急漏洞基本数据 */
@@ -3382,6 +4618,18 @@ declare interface WhereFilter {
   OperatorType?: number;
 }
 
+declare interface AddDspmAssetManagerRequest {
+  /** 管理员uin */
+  IdentifyIds: string[];
+  /** 资产id */
+  AssetId: string[];
+}
+
+declare interface AddDspmAssetManagerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddNewBindRoleUserRequest {
 }
 
@@ -3507,6 +4755,238 @@ declare interface CreateDomainAndIpResponse {
   RequestId?: string;
 }
 
+declare interface CreateDspmAccessExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 视图类型 */
+  View?: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmAccessExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmApplyOrderRequest {
+  /** 资产id */
+  AssetId: string;
+  /** 申请类型。0-子账号授权 1-访客授权。 */
+  ApplyType: number;
+  /** 权限信息。 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 主机地址。当前仅支持'%'。默认'%'。 */
+  Host?: string;
+  /** 从审批完成后开始计算的访问权限失效时间，临时账号有效。单位毫秒。 */
+  ValidatePeriod?: number;
+  /** 审批人列表。为空使用资产全部管理员。 */
+  ApproverUin?: string[];
+  /** 申请原因 */
+  Reason?: string;
+  /** 管理类型。0-普通成员 1-管理员 */
+  ManagerType?: number;
+  /** 被授权者。子账号授权时，传目标uin，为空时默认使用当前uin；访客授权时传访客身份id。 */
+  Subject?: string;
+}
+
+declare interface CreateDspmApplyOrderResponse {
+  /** 申请单id */
+  OrderId?: string;
+  /** 自动审批 */
+  AutoApproval?: boolean | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmApproveHistoryExportJobRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmApproveHistoryExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmAssetAccessTopologyExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 视图类型。ip或instance */
+  View?: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmAssetAccessTopologyExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmAssetsExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmAssetsExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmExportTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 风险等级(0-安全,1-低风险,2-中风险,3-高风险,-1-全部) */
+  DangerLevel?: number;
+  /** 数据库名称 */
+  DbName?: string;
+  /** 数据库端口 */
+  DbPort?: number;
+  /** 数据库 IP */
+  DbIp?: string;
+  /** 资产 ID */
+  AssetsId?: number;
+  /** 会话 ID */
+  SessionId?: string;
+  /** 客户端 IP */
+  ClientSideIp?: string;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 命中规则 */
+  HitRule?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 模糊查询 */
+  FuzzySearch?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 客户端 */
+  ClientName?: string;
+  /** 流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两都都传或不传则返回所有 */
+  SourceTypes?: string[];
+  /** 表名，长度限制64，多个表名查询的话可以用空格连接 */
+  TableName?: string;
+  /** 字段名，长度限制64，多个字段名查询的话可以用空格连接 */
+  FieldName?: string;
+  /** SQL 主要类型，DDL, DML, DCL, TCL */
+  SqlMainTypes?: string[];
+  /** 操作类型 */
+  SqlType?: string;
+  /** 影响行数最小值 */
+  RowNumMin?: number;
+  /** 影响行数最大值 */
+  RowNumMax?: number;
+  /** 数据库类型 */
+  DbTypes?: string[];
+  /** 返回码 */
+  RetNo?: number;
+  /** 客户端工具 */
+  ClientDriverName?: string;
+  /** 客户端端口 */
+  ClientPort?: number;
+  /** 审计日志 ID */
+  LogId?: string;
+  /** 风险等级数组(0-安全,1-低风险,2-中风险,3-高风险), 如果要全部，则需要将所有的值都传入。如果为空，则会参考：DangerLevel 入参 */
+  DangerLevels?: number[];
+  /** 字段分类 */
+  SensitiveCategoryRule?: string;
+  /** 字段分级 */
+  SensitiveLevelRisk?: string;
+  /** 事务Id */
+  TrxId?: number;
+  /** clientMac */
+  ClientMac?: string;
+}
+
+declare interface CreateDspmExportTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyInfoListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmIdentifyInfoListExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmPersonalIdentifyRequest {
+  /** 手机号 */
+  Phone: string;
+  /** 姓名 */
+  Name: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateDspmPersonalIdentifyResponse {
+  /** 个人id */
+  PersonId?: string;
+  /** 身份id */
+  IdentifyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmRiskExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmRiskExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmWhitelistStrategyRequest {
+  /** 策略类型 */
+  StrategyType: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 白名单 */
+  Name?: string;
+  /** 规则 */
+  Rule?: string;
+  /** 资产id */
+  AssetId?: string;
+  /** 账号 */
+  Account?: string;
+  /** 主机 */
+  Host?: string;
+  /** 风险id */
+  RiskId?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateDspmWhitelistStrategyResponse {
+  /** 白名单id */
+  WhitelistStrategyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRiskCenterScanTaskRequest {
   /** 任务名称 */
   TaskName: string;
@@ -3565,6 +5045,90 @@ declare interface DeleteDomainAndIpRequest {
 declare interface DeleteDomainAndIpResponse {
   /** 删除的资产数量 */
   Data?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmApplyOrderRequest {
+  /** 申请单id */
+  OrderId?: string[];
+}
+
+declare interface DeleteDspmApplyOrderResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmAssetAccountRequest {
+  /** 实例id */
+  AssetId: string;
+  /** 账号名 */
+  Account: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface DeleteDspmAssetAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmBackupLogListRequest {
+  /** 备份日志Id */
+  Id: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmBackupLogListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmExportTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 要删除的导出任务ID */
+  TaskIds?: number[];
+}
+
+declare interface DeleteDspmExportTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmPersonalIdentifyRequest {
+  /** 个人id */
+  PersonId: string;
+}
+
+declare interface DeleteDspmPersonalIdentifyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmRestoreLogListRequest {
+  /** 日志Id */
+  Id: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmRestoreLogListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmWhitelistStrategyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 白名单id */
+  WhitelistStrategyId?: string[];
+}
+
+declare interface DeleteDspmWhitelistStrategyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3887,6 +5451,18 @@ declare interface DescribeAssetViewVulRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssumeRoleRequest {
+  /** 角色名 */
+  RoleName?: string;
+}
+
+declare interface DescribeAssumeRoleResponse {
+  /** 是否绑定角色。0-未绑定 1-已绑定 */
+  Bind?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCFWAssetStatisticsRequest {
 }
 
@@ -4183,6 +5759,874 @@ declare interface DescribeDomainAssetsResponse {
   SourceTypeList?: FilterDataObject[];
   /** 地域列表 */
   RegionList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAccessRecordRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 视图类型。ip或instance */
+  View?: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAccessRecordResponse {
+  /** 访问记录 */
+  AccessSet?: DspmAccessRecord[];
+  /** 记录总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAccessTopologyAccountsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器。 支持的FilterName: Ip/AssetId */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAccessTopologyAccountsResponse {
+  /** 资产账号列表 */
+  Items?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAccessTopologyAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器。 支持的FilterName: Ip/Account */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAccessTopologyAssetsResponse {
+  /** 资产id列表 */
+  Items?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAccessTopologyIpsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器。 支持的FilterName: AssetId/Account */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAccessTopologyIpsResponse {
+  /** ip列表 */
+  Items?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmApplyHistoryRequest {
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmApplyHistoryResponse {
+  /** 申请记录总数 */
+  TotalCount?: number;
+  /** 申请记录信息 */
+  ApplySet?: DspmApplyOrder[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmApplyOrderListRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmApplyOrderListResponse {
+  /** 申请单总数 */
+  TotalCount?: number;
+  /** 申请单详情 */
+  OrderSet?: DspmApplyOrder[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmApproveHistoryRequest {
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmApproveHistoryResponse {
+  /** 审批记录总数 */
+  TotalCount?: number;
+  /** 审批记录信息 */
+  ApproveSet?: DspmApplyOrder[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmApproveOrderListRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmApproveOrderListResponse {
+  /** 审批单总数 */
+  TotalCount?: number;
+  /** 审批单详情 */
+  OrderSet?: DspmApproverOrder[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetAccessTopologyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 视图类型。ip或instance */
+  View?: string;
+  /** - 来源ip方式查看View: "ip"Filter:{	{ "Name":"Ip", "Values":["172.1.1.1"]	},	{ "Name":"AssetId", "Values":["cdb-1111|ap-guangzhou","cdb-2222|ap-guangzhou","cdb-3333|ap-guangzhou"]	},	{ "Name":"Account", "Values":["root|%","test|%"]	}}- 实例方式查看View: "instance"Filter:{	{ "Name":"AssetId", "Values":["cdb-1111|ap-guangzhou"]	},	{ "Name":"Ip", "Values":["172.1.1.1","172.1.1.2","172.1.1.3"]	},	{ "Name":"Account", "Values":["root|%","test|%"]	}} */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetAccessTopologyResponse {
+  /** 拓扑数据 */
+  ItemSet?: DspmAssetAccessTopologyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetAccountIdentifyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 资产id */
+  AssetId?: string;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetAccountIdentifyResponse {
+  /** 资产账号身份总数 */
+  TotalCount?: number;
+  /** 资产账号身份信息 */
+  IdentifySet?: DspmAssetAccountIdentify[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetAccountPresetPrivilegesRequest {
+  /** 资产id */
+  AssetId?: string;
+  /** 账号 */
+  Account?: string;
+  /** 地址 */
+  Host?: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetAccountPresetPrivilegesResponse {
+  /** 权限信息 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetAccountRecycledPrivilegesRequest {
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface DescribeDspmAssetAccountRecycledPrivilegesResponse {
+  /** 权限信息 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetAccountsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 资产id */
+  AssetId?: string;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetAccountsResponse {
+  /** 资产账号总数 */
+  TotalCount?: number;
+  /** 账号信息 */
+  AccountSet?: DspmAssetAccount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetDatabaseListRequest {
+  /** 资产实例id */
+  AssetId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetDatabaseListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 结果集 */
+  DataSet?: DspmAssetDatabaseInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetDatabasesRequest {
+  /** 资产id */
+  AssetId: string;
+}
+
+declare interface DescribeDspmAssetDatabasesResponse {
+  /** 数据库列表 */
+  Items?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetFieldListRequest {
+  /** 资产实例id */
+  AssetId: string;
+  /** 数据库名称 */
+  DbName: string;
+  /** 表名 */
+  TableName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetFieldListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 结果集 */
+  DataSet?: DspmAssetFieldInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetIdsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetIdsResponse {
+  /** 数据库资产总数 */
+  TotalCount?: number;
+  /** 资产id信息 */
+  AssetSet?: DspmDbAssetId[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetLoginCredentialRequest {
+  /** 数据库资产id */
+  AssetId: string;
+  /** 主机。默认'%' */
+  Host?: string;
+  /** 加密算法 */
+  EncryptMethod?: string;
+}
+
+declare interface DescribeDspmAssetLoginCredentialResponse {
+  /** 账号 */
+  Account?: string;
+  /** 密码信息 */
+  Password?: string;
+  /** 有效期开始时间 */
+  ValidateStart?: string;
+  /** 有效期结束时间 */
+  ValidateEnd?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetSecurityAnalyseStatusRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetSecurityAnalyseStatusResponse {
+  /** 数据库资产总数 */
+  TotalCount?: number;
+  /** 资产安全分析状态信息 */
+  AssetSet?: DspmAssetSecurityAnalyseStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetSupportedPrivilegesRequest {
+  /** 资产id */
+  AssetId: string;
+}
+
+declare interface DescribeDspmAssetSupportedPrivilegesResponse {
+  /** 实例支持的全局权限。 */
+  GlobalSupportedPrivileges?: string[];
+  /** 实例支持的数据库权限。 */
+  DatabaseSupportedPrivileges?: string[];
+  /** 实例支持的数据库表权限。 */
+  TableSupportedPrivileges?: string[];
+  /** 实例支持的数据库列权限。 */
+  ColumnSupportedPrivileges?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetTableListRequest {
+  /** 资产实例id */
+  AssetId: string;
+  /** 数据库名称 */
+  DbName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetTableListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 结果集 */
+  DataSet?: DspmAssetTableInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAssetsResponse {
+  /** 数据库资产总数 */
+  TotalCount?: number;
+  /** 资产信息 */
+  AssetSet?: DspmDbAsset[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmBackupLogListRequest {
+  /** 限制数目 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 排序方式(desc=倒叙,asc=升序) */
+  Sort?: string;
+  /** 排序字段(支持&#39;StartTime&#39;) */
+  Field?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 备份日志状态0未完成的,1备份文件，2恢复中，3已恢复，4.已删除,全部查询-1 */
+  Status?: number;
+  /** 数据库类型,如：cdb, mariadb */
+  DbTypes?: string[];
+}
+
+declare interface DescribeDspmBackupLogListResponse {
+  /** 总共多少条 */
+  TotalCount?: number;
+  /** 备份日志列表 */
+  List?: BackupLog[];
+  /** 当前是否存在恢复中任务 */
+  HasRestoringTask?: boolean;
+  /** 最大恢复空间 */
+  MaxRestoreSizeInGB?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmBackupSettingRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmBackupSettingResponse {
+  /** 备份日志保留时长 */
+  BackupLogSaveTime?: number;
+  /** 恢复日志保留时长 */
+  RestoreLogSaveTime?: number;
+  /** 日志最大生命周期限制 */
+  LogMaxSaveTime?: number;
+  /** 在线日志最大天数限制 */
+  OnlineLogMaxSaveTime?: number;
+  /** 最大在线日志条数，单位是：个 */
+  MaxOnlineLogCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmDictionaryListRequest {
+  /** 字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项） */
+  DictType: string;
+  /** 筛选条件 */
+  Filters?: WhereFilter[];
+}
+
+declare interface DescribeDspmDictionaryListResponse {
+  /** 结果集 */
+  DataSet?: DspmDictionary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmExportTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 任务状态：0.未开始 1.执行中 2.执行成功 3.执行超时 4.执行失败 */
+  TaskStatus?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+}
+
+declare interface DescribeDspmExportTaskResponse {
+  /** 任务列表 */
+  List?: ExportTask[];
+  /** 任务总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyIdListRequest {
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyIdListResponse {
+  /** id总数 */
+  TotalCount?: number;
+  /** 身份id列表 */
+  IdSet?: DspmIdentifyIdItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyInfoListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyInfoListResponse {
+  /** 身份总数 */
+  TotalCount?: number;
+  /** 身份 信息 */
+  InfoSet?: DspmIdentifyInfoItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmIdentifyInfoResponse {
+  /** 身份id */
+  IdentifyId?: string;
+  /** 身份统计信息 */
+  IdentifyCount?: DspmIdentifyCount[];
+  /** 申请单个数 */
+  ApplyOrderCount?: number;
+  /** 审批单个数 */
+  ApproveOrderCount?: number;
+  /** 已审批个数 */
+  ApproveHistoryCount?: number;
+  /** 资产总数 */
+  AssetCount?: number | null;
+  /** 云账号总数 */
+  UinAccountCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmLogListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 限制数目 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序方式(desc=倒叙,asc=升序) */
+  Sort?: string;
+  /** 排序字段(opTime=时间,dangerLvl=风险等级) */
+  Field?: string;
+  /** 风险等级(0-安全,1-低风险,2-中风险,3-高风险,不传全部) */
+  DangerLevel?: string;
+  /** 数据库名称 */
+  DbName?: string;
+  /** 数据库端口 */
+  DbPort?: number;
+  /** 数据库 IP */
+  DbIp?: string;
+  /** 资产 ID */
+  AssetsId?: number;
+  /** 会话 ID */
+  SessionId?: string;
+  /** 客户端 IP */
+  ClientSideIp?: string;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 命中规则 */
+  HitRule?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 模糊查询 */
+  FuzzySearch?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 恢复日志id */
+  RestoreLogId?: number;
+  /** 客户端 */
+  ClientName?: string;
+  /** 流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两者都传或不传则返回所有 */
+  SourceTypes?: string[];
+  /** 表名，长度限制64，多个表名查询的话可以用空格连接 */
+  TableName?: string;
+  /** 字段名，长度限制64，多个字段名查询的话可以用空格连接 */
+  FieldName?: string;
+  /** SQL 主要类型，DDL, DML, DCL, TCL */
+  SqlMainTypes?: string[];
+  /** 操作类型 */
+  SqlType?: string;
+  /** 影响行数最小值 */
+  RowNumMin?: number;
+  /** 影响行数最大值 */
+  RowNumMax?: number;
+  /** 数据库类型 */
+  DbTypes?: string[];
+  /** 返回码 */
+  RetNo?: number;
+  /** 客户端工具 */
+  ClientDriverName?: string;
+  /** 客户端端口 */
+  ClientPort?: number;
+  /** 审计日志 ID */
+  LogId?: string;
+  /** 风险等级数组(0-安全,1-低风险,2-中风险,3-高风险) */
+  DangerLevels?: number[];
+  /** 字段分类 */
+  SensitiveCategoryRule?: string;
+  /** 字段分级 */
+  SensitiveLevelRisk?: string;
+  /** 客户端MAC */
+  ClientMac?: string;
+}
+
+declare interface DescribeDspmLogListResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 日志信息列表 */
+  List?: AuditLogInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmPayInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmPayInfoResponse {
+  /** APPID */
+  AppID?: number;
+  /** 订单状态 0未购买 1正常，2隔离，3销毁，6试用中，7到期 */
+  OrderStatus?: number;
+  /** 已购数据库实例数量 */
+  AssetNum?: number;
+  /** 已购审计日志量（TB） */
+  LogStorage?: number;
+  /** 已使用数据库实例数量 */
+  UsedAssetNum?: number;
+  /** 已使用审计日志量（TB） */
+  UsedLogStorage?: number;
+  /** 已购sql存储总量（单位百万） */
+  SqlTotal?: number;
+  /** 已购sql qps */
+  SqlQps?: number;
+  /** 支付模式，0-后付费 1-预付费 */
+  PayMode?: number;
+  /** 是否单独购买，1-单独购买，2-被其它账号共享 */
+  IsSelfBuy?: number;
+  /** 订单开始时间 */
+  BeginTime?: string;
+  /** 订单到期时间 */
+  EndTime?: string;
+  /** 0-用户未设置,1-用户设置自动续费,2-用户设置不自动续费 */
+  AutoRenew?: number;
+  /** 订单时长 */
+  TimeSpan?: number;
+  /** 时长单位 */
+  TimeUnit?: string;
+  /** 资源id */
+  ResourceId?: string;
+  /** 公测结束时间 */
+  BetaEndTime?: string;
+  /** 系统当前时间 */
+  TimeNow?: string;
+  /** 是否分享给其它账号，1-是，2-否 */
+  IsShareToOther?: number;
+  /** uin */
+  Uin?: string;
+  /** 昵称 */
+  NickName?: string;
+  /** 购买信息 */
+  InquireData?: InquireInfo[];
+  /** 版本(专业版：professional 试用版：trial) */
+  Version?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmPersonApplyHistoryRequest {
+  /** 对象 */
+  Subject?: string;
+  /** 资产id */
+  AssetId?: string;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmPersonApplyHistoryResponse {
+  /** 申请记录总数 */
+  TotalCount?: number;
+  /** 申请记录信息 */
+  ApplySet?: DspmPersonApplyHistoryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmPersonalIdentifyListRequest {
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmPersonalIdentifyListResponse {
+  /** 身份总数 */
+  TotalCount?: number;
+  /** 个人身份信息 */
+  InfoSet?: DspmPersonIdentifyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmRiskDetailRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface DescribeDspmRiskDetailResponse {
+  /** 风险等级 */
+  RiskLevel?: string;
+  /** 风险检出时间 */
+  DetectTime?: string;
+  /** 资产实例Id */
+  AssetId?: string;
+  /** 资产名 */
+  AssetName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 地域 */
+  Region?: string;
+  /** 公网访问地址 */
+  PublicIp?: string;
+  /** 内网访问地址 */
+  PrivateIp?: string;
+  /** 账号 */
+  Account?: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 身份id */
+  IdentifyId?: string;
+  /** 所属云账号uin用户 */
+  OwnerUin?: DspmUinUser;
+  /** 所属个人用户信息 */
+  Person?: DspmPersonUser;
+  /** 风险名称 */
+  RiskName?: string;
+  /** 风险英文名称 */
+  RiskNameEn?: string;
+  /** 风险数据 */
+  RiskData?: string;
+  /** 基线数据 */
+  BaselineData?: string;
+  /** 风险id */
+  RiskId?: string;
+  /** 策略类型 */
+  StrategyType?: string;
+  /** 策略类别 */
+  StrategyCategory?: string;
+  /** 账号类型 */
+  AccountType?: number;
+  /** 风险状态 */
+  Status?: number;
+  /** 是否资产管理员 */
+  IsAssetManager?: number;
+  /** 数据起始时间 */
+  DataBeginTime?: string;
+  /** 数据结束时间 */
+  DataEndTime?: string;
+  /** 风险类型。risk-风险；alarm-告警。 */
+  RiskType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmRiskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmRiskResponse {
+  /** 风险列表 */
+  RiskSet?: DspmRisk[];
+  /** 风险总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmRiskStrategyGroupRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmRiskStrategyGroupResponse {
+  /** 分组策略列表 */
+  StrategyGroupSet?: DspmRiskStrategyGroup[];
+  /** 分组策略总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmRiskStrategyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmRiskStrategyResponse {
+  /** 策略列表 */
+  StrategySet?: DspmRiskStrategy[];
+  /** 策略总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmRiskTendencyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 起始日期 */
+  StartDate?: string;
+  /** 结束日期 */
+  EndDate?: string;
+}
+
+declare interface DescribeDspmRiskTendencyResponse {
+  /** 风险趋势 */
+  RiskTendencySet?: DspmRiskTendency[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmStatisticsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmStatisticsResponse {
+  /** 资产统计信息 */
+  AssetCount?: DspmAssetCount;
+  /** 访问Ip统计信息 */
+  IpCount?: DspmIpCount;
+  /** 用户账号统计信息 */
+  UserCount?: DspmAccountCount;
+  /** 风险统计信息 */
+  RiskCount?: DspmRiskCount;
+  /** 资产安全分析统计信息 */
+  AnalyseAssetStatusCount?: DspmSecurityAnalyseStatusCount;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmSupportedAssetTypeRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmSupportedAssetTypeResponse {
+  /** 实例支持的全局权限。 */
+  AssetTypeSet?: DspmSupportedAssetType[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmSyncAssetsStatusRequest {
+}
+
+declare interface DescribeDspmSyncAssetsStatusResponse {
+  /** 资产同步任务状态。0-未执行。1-执行中 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmSyncUsersStatusRequest {
+}
+
+declare interface DescribeDspmSyncUsersStatusResponse {
+  /** 用户同步任务状态。0-未执行。1-执行中 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmWhitelistStrategyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmWhitelistStrategyResponse {
+  /** 白名单列表 */
+  WhitelistSet?: DspmWhitelistStrategy[];
+  /** 白名单总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5061,6 +7505,24 @@ declare interface DescribeUserCallRecordResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserDspmInfoListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeUserDspmInfoListResponse {
+  /** 账号dspm信息列表 */
+  List?: UserDspmInfo[];
+  /** 已勾选数据库资产总数 */
+  SelectedAssetNum?: number;
+  /** 账号总数 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVULListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -5215,6 +7677,262 @@ declare interface DescribeVulViewVulRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DownloadDspmExportLogRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 要下载的导出任务ID */
+  TaskId?: number;
+}
+
+declare interface DownloadDspmExportLogResponse {
+  /** 下载URL */
+  Url?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmAccessRecordRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 来源ip */
+  Id?: DspmAccessRecordId[];
+  /** 视图。ip或instance */
+  View?: string;
+  /** 阅读标记。 1-已阅 */
+  Noted?: number;
+}
+
+declare interface ModifyDspmAccessRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmApproveStatusRequest {
+  /** 申请单id */
+  OrderId: string;
+  /** 状态。1-通过 2-拒绝 */
+  Status: number;
+  /** 审批信息 */
+  Comment?: string;
+}
+
+declare interface ModifyDspmApproveStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmAssetAccountPrivilegesRequest {
+  /** 实例id */
+  AssetId: string;
+  /** 账号名 */
+  Account: string;
+  /** 权限信息 */
+  Privilege?: DspmDbAccountPrivilege;
+  /** 主机地址 */
+  Host?: string;
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface ModifyDspmAssetAccountPrivilegesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmAssetAccountRequest {
+  /** 实例id */
+  AssetId: string;
+  /** 账号名 */
+  Account: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 主机地址 */
+  Host?: string;
+  /** 账号类型 */
+  AccountType?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface ModifyDspmAssetAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmAssetDataScanTaskRequest {
+  /** 实例id */
+  AssetIds: string[];
+  /** 是否定时任务 */
+  IsScheduled: boolean;
+  /** 是否同意一键授权 */
+  IsAgreeAuth: boolean;
+  /** 是否立即执行 */
+  IsRunAtOnce: boolean;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 调度周期配置 */
+  ScheduleConfig?: DspmScheduleConfig;
+}
+
+declare interface ModifyDspmAssetDataScanTaskResponse {
+  /** 识别任务id集合 */
+  TaskIdSet?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmAssetLogDeliverySwitchRequest {
+  /** 实例id */
+  AssetId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 开关。1-打开 0-关闭 */
+  Enable?: number;
+}
+
+declare interface ModifyDspmAssetLogDeliverySwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmAssetSecurityAnalysisSwitchRequest {
+  /** 实例信息 */
+  Instances: DspmAssetInstance[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 开关。1-打开 0-关闭 */
+  Enable?: number;
+}
+
+declare interface ModifyDspmAssetSecurityAnalysisSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmBackupSettingRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 备份日志保留时长 */
+  BackupLogSaveTime?: number;
+  /** 恢复日志保留时长 */
+  RestoreLogSaveTime?: number;
+  /** 日志最大生命周期限制 */
+  LogMaxSaveTime?: number;
+  /** 在线日志最大天数限制 */
+  OnlineLogMaxSaveTime?: number;
+}
+
+declare interface ModifyDspmBackupSettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyInfoRequest {
+  /** 对象。uin或person id */
+  Subject: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyDspmIdentifyInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIpInfoRequest {
+  /** ip地址 */
+  Ip: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyDspmIpInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmPersonalIdentifyRequest {
+  /** 身份id */
+  PersonId: string;
+  /** 手机号 */
+  Phone?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyDspmPersonalIdentifyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmRestoreLogTaskRequest {
+  /** 备份日志Id */
+  Id: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmRestoreLogTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmRiskInfoRequest {
+  /** 风险id */
+  RiskId: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 风险状态 2-已忽略 */
+  Status?: number;
+}
+
+declare interface ModifyDspmRiskInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmRiskStrategyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 风险策略类型 */
+  StrategyType?: string;
+  /** 是否启用 */
+  IsEnabled?: number;
+  /** 策略内容，如：{ ThresholdValue: "100" } */
+  Rule?: string;
+  /** 可选值：Info/Low/Medium/High */
+  RiskLevel?: string;
+  /** 策略id */
+  StrategyId?: number[];
+}
+
+declare interface ModifyDspmRiskStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmWhitelistStrategyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 白名单id */
+  WhitelistStrategyId?: string;
+  /** 白名单名 */
+  Name?: string;
+  /** 规则 */
+  Rule?: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyDspmWhitelistStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOrganizationAccountStatusRequest {
   /** 修改集团账号状态，1 开启， 0关闭 */
   Status: number;
@@ -5301,6 +8019,68 @@ declare interface ModifyUebaRuleSwitchResponse {
   RequestId?: string;
 }
 
+declare interface ResetDspmAssetAccountPasswordRequest {
+  /** 实例id */
+  AssetId: string;
+  /** 账号名 */
+  Account: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface ResetDspmAssetAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RetryDspmExportLogRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 任务ID */
+  TaskId?: number;
+}
+
+declare interface RetryDspmExportLogResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RevertDspmAssetAccountRequest {
+  /** 实例id */
+  AssetId: string;
+  /** 账号名 */
+  Account: string;
+  /** 主机地址 */
+  Host?: string;
+  /** 是否回退权限 */
+  PrivilegeFlag?: number;
+  /** 是否回退密码 */
+  PasswordFlag?: number;
+  /** 风险id */
+  RiskId?: string;
+}
+
+declare interface RevertDspmAssetAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SendDspmAssetLoginSmsCodeRequest {
+  /** 个人id */
+  PersonId: string;
+  /** 数据库资产id */
+  AssetId: string;
+  /** 主机。默认'%' */
+  Host?: string;
+}
+
+declare interface SendDspmAssetLoginSmsCodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopRiskCenterTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
@@ -5311,6 +8091,24 @@ declare interface StopRiskCenterTaskRequest {
 declare interface StopRiskCenterTaskResponse {
   /** Status为0， 停止成功 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SyncDspmAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface SyncDspmAssetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SyncDspmUsersRequest {
+}
+
+declare interface SyncDspmUsersResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5379,9 +8177,35 @@ declare interface UpdateAlertStatusListResponse {
   RequestId?: string;
 }
 
+declare interface VerifyDspmAssetLoginCodeRequest {
+  /** 个人id */
+  PersonId: string;
+  /** 数据库资产id */
+  AssetId: string;
+  /** 验证码 */
+  Code: string;
+  /** 主机。默认'%' */
+  Host?: string;
+}
+
+declare interface VerifyDspmAssetLoginCodeResponse {
+  /** 账号 */
+  Account?: string;
+  /** 密码信息 */
+  Password?: string;
+  /** 有效期开始时间 */
+  ValidateStart?: string;
+  /** 有效期结束时间 */
+  ValidateEnd?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Csip 云安全一体化平台} */
 declare interface Csip {
   (): Versions;
+  /** 添加资产管理员 {@link AddDspmAssetManagerRequest} {@link AddDspmAssetManagerResponse} */
+  AddDspmAssetManager(data: AddDspmAssetManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddDspmAssetManagerResponse>;
   /** csip角色授权绑定接口 {@link AddNewBindRoleUserRequest} {@link AddNewBindRoleUserResponse} */
   AddNewBindRoleUser(data?: AddNewBindRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddNewBindRoleUserResponse>;
   /** 发起访问密钥的检测任务 {@link CreateAccessKeyCheckTaskRequest} {@link CreateAccessKeyCheckTaskResponse} */
@@ -5390,10 +8214,44 @@ declare interface Csip {
   CreateAccessKeySyncTask(data?: CreateAccessKeySyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeySyncTaskResponse>;
   /** 创建域名、ip相关信息 {@link CreateDomainAndIpRequest} {@link CreateDomainAndIpResponse} */
   CreateDomainAndIp(data: CreateDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAndIpResponse>;
+  /** 创建Dspm访问记录导出任务 {@link CreateDspmAccessExportJobRequest} {@link CreateDspmAccessExportJobResponse} */
+  CreateDspmAccessExportJob(data?: CreateDspmAccessExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAccessExportJobResponse>;
+  /** 创建Dspm申请单 {@link CreateDspmApplyOrderRequest} {@link CreateDspmApplyOrderResponse} */
+  CreateDspmApplyOrder(data: CreateDspmApplyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmApplyOrderResponse>;
+  /** 创建Dspm审批历史导出任务 {@link CreateDspmApproveHistoryExportJobRequest} {@link CreateDspmApproveHistoryExportJobResponse} */
+  CreateDspmApproveHistoryExportJob(data?: CreateDspmApproveHistoryExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmApproveHistoryExportJobResponse>;
+  /** 创建Dspm资产访问拓扑导出任务 {@link CreateDspmAssetAccessTopologyExportJobRequest} {@link CreateDspmAssetAccessTopologyExportJobResponse} */
+  CreateDspmAssetAccessTopologyExportJob(data?: CreateDspmAssetAccessTopologyExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetAccessTopologyExportJobResponse>;
+  /** 创建Dspm资产列表导出任务 {@link CreateDspmAssetsExportJobRequest} {@link CreateDspmAssetsExportJobResponse} */
+  CreateDspmAssetsExportJob(data?: CreateDspmAssetsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetsExportJobResponse>;
+  /** 创建日志导出任务 {@link CreateDspmExportTaskRequest} {@link CreateDspmExportTaskResponse} */
+  CreateDspmExportTask(data?: CreateDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmExportTaskResponse>;
+  /** 创建Dspm身份列表导出任务 {@link CreateDspmIdentifyInfoListExportJobRequest} {@link CreateDspmIdentifyInfoListExportJobResponse} */
+  CreateDspmIdentifyInfoListExportJob(data?: CreateDspmIdentifyInfoListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyInfoListExportJobResponse>;
+  /** 创建Dspm个人身份 {@link CreateDspmPersonalIdentifyRequest} {@link CreateDspmPersonalIdentifyResponse} */
+  CreateDspmPersonalIdentify(data: CreateDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmPersonalIdentifyResponse>;
+  /** 创建Dspm风险导出任务 {@link CreateDspmRiskExportJobRequest} {@link CreateDspmRiskExportJobResponse} */
+  CreateDspmRiskExportJob(data?: CreateDspmRiskExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmRiskExportJobResponse>;
+  /** 创建Dspm白名单策略 {@link CreateDspmWhitelistStrategyRequest} {@link CreateDspmWhitelistStrategyResponse} */
+  CreateDspmWhitelistStrategy(data: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
   /** 创建风险中心扫描任务 {@link CreateRiskCenterScanTaskRequest} {@link CreateRiskCenterScanTaskResponse} */
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
   /** 删除域名和ip请求 {@link DeleteDomainAndIpRequest} {@link DeleteDomainAndIpResponse} */
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
+  /** 删除Dspm申请单 {@link DeleteDspmApplyOrderRequest} {@link DeleteDspmApplyOrderResponse} */
+  DeleteDspmApplyOrder(data?: DeleteDspmApplyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmApplyOrderResponse>;
+  /** 删除Dspm资产账号 {@link DeleteDspmAssetAccountRequest} {@link DeleteDspmAssetAccountResponse} */
+  DeleteDspmAssetAccount(data: DeleteDspmAssetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmAssetAccountResponse>;
+  /** 删除备份日志 {@link DeleteDspmBackupLogListRequest} {@link DeleteDspmBackupLogListResponse} */
+  DeleteDspmBackupLogList(data: DeleteDspmBackupLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmBackupLogListResponse>;
+  /** 删除导出任务 {@link DeleteDspmExportTaskRequest} {@link DeleteDspmExportTaskResponse} */
+  DeleteDspmExportTask(data?: DeleteDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmExportTaskResponse>;
+  /** 删除Dspm个人身份 {@link DeleteDspmPersonalIdentifyRequest} {@link DeleteDspmPersonalIdentifyResponse} */
+  DeleteDspmPersonalIdentify(data: DeleteDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmPersonalIdentifyResponse>;
+  /** 删除恢复日志 {@link DeleteDspmRestoreLogListRequest} {@link DeleteDspmRestoreLogListResponse} */
+  DeleteDspmRestoreLogList(data: DeleteDspmRestoreLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmRestoreLogListResponse>;
+  /** 删除Dspm白名单策略 {@link DeleteDspmWhitelistStrategyRequest} {@link DeleteDspmWhitelistStrategyResponse} */
+  DeleteDspmWhitelistStrategy(data?: DeleteDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmWhitelistStrategyResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
@@ -5424,6 +8282,8 @@ declare interface Csip {
   DescribeAssetRiskList(data?: DescribeAssetRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetRiskListResponse>;
   /** 漏洞管理-资产视角的漏洞风险列表 {@link DescribeAssetViewVulRiskListRequest} {@link DescribeAssetViewVulRiskListResponse} */
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
+  /** 查询是否绑定角色 {@link DescribeAssumeRoleRequest} {@link DescribeAssumeRoleResponse} */
+  DescribeAssumeRole(data?: DescribeAssumeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssumeRoleResponse>;
   /** 云防资产中心统计数据 {@link DescribeCFWAssetStatisticsRequest} {@link DescribeCFWAssetStatisticsResponse} */
   DescribeCFWAssetStatistics(data?: DescribeCFWAssetStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCFWAssetStatisticsResponse>;
   /** 资产风险概览统计接口 {@link DescribeCSIPRiskStatisticsRequest} {@link DescribeCSIPRiskStatisticsResponse} */
@@ -5448,6 +8308,92 @@ declare interface Csip {
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
+  /** 查询Dspm访问记录 {@link DescribeDspmAccessRecordRequest} {@link DescribeDspmAccessRecordResponse} */
+  DescribeDspmAccessRecord(data?: DescribeDspmAccessRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessRecordResponse>;
+  /** 查询Dspm访问拓扑账号列表 {@link DescribeDspmAccessTopologyAccountsRequest} {@link DescribeDspmAccessTopologyAccountsResponse} */
+  DescribeDspmAccessTopologyAccounts(data?: DescribeDspmAccessTopologyAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessTopologyAccountsResponse>;
+  /** 查询Dspm访问拓扑资产列表 {@link DescribeDspmAccessTopologyAssetsRequest} {@link DescribeDspmAccessTopologyAssetsResponse} */
+  DescribeDspmAccessTopologyAssets(data?: DescribeDspmAccessTopologyAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessTopologyAssetsResponse>;
+  /** 查询Dspm访问拓扑ip列表 {@link DescribeDspmAccessTopologyIpsRequest} {@link DescribeDspmAccessTopologyIpsResponse} */
+  DescribeDspmAccessTopologyIps(data?: DescribeDspmAccessTopologyIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessTopologyIpsResponse>;
+  /** 查询Dspm申请历史 {@link DescribeDspmApplyHistoryRequest} {@link DescribeDspmApplyHistoryResponse} */
+  DescribeDspmApplyHistory(data?: DescribeDspmApplyHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmApplyHistoryResponse>;
+  /** 查询Dspm申请单列表 {@link DescribeDspmApplyOrderListRequest} {@link DescribeDspmApplyOrderListResponse} */
+  DescribeDspmApplyOrderList(data?: DescribeDspmApplyOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmApplyOrderListResponse>;
+  /** 查询Dspm审批历史 {@link DescribeDspmApproveHistoryRequest} {@link DescribeDspmApproveHistoryResponse} */
+  DescribeDspmApproveHistory(data?: DescribeDspmApproveHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmApproveHistoryResponse>;
+  /** 查询Dspm审批单列表 {@link DescribeDspmApproveOrderListRequest} {@link DescribeDspmApproveOrderListResponse} */
+  DescribeDspmApproveOrderList(data?: DescribeDspmApproveOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmApproveOrderListResponse>;
+  /** 查询Dspm资产访问拓扑 {@link DescribeDspmAssetAccessTopologyRequest} {@link DescribeDspmAssetAccessTopologyResponse} */
+  DescribeDspmAssetAccessTopology(data?: DescribeDspmAssetAccessTopologyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetAccessTopologyResponse>;
+  /** 查询Dspm资产账号身份信息 {@link DescribeDspmAssetAccountIdentifyRequest} {@link DescribeDspmAssetAccountIdentifyResponse} */
+  DescribeDspmAssetAccountIdentify(data?: DescribeDspmAssetAccountIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetAccountIdentifyResponse>;
+  /** 查询Dspm资产账号预设特权信息 {@link DescribeDspmAssetAccountPresetPrivilegesRequest} {@link DescribeDspmAssetAccountPresetPrivilegesResponse} */
+  DescribeDspmAssetAccountPresetPrivileges(data?: DescribeDspmAssetAccountPresetPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetAccountPresetPrivilegesResponse>;
+  /** 查询Dspm资产账号回收后特权信息 {@link DescribeDspmAssetAccountRecycledPrivilegesRequest} {@link DescribeDspmAssetAccountRecycledPrivilegesResponse} */
+  DescribeDspmAssetAccountRecycledPrivileges(data?: DescribeDspmAssetAccountRecycledPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetAccountRecycledPrivilegesResponse>;
+  /** 查询Dspm资产账号列表 {@link DescribeDspmAssetAccountsRequest} {@link DescribeDspmAssetAccountsResponse} */
+  DescribeDspmAssetAccounts(data?: DescribeDspmAssetAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetAccountsResponse>;
+  /** 查询dspm资产数据库信息列表 {@link DescribeDspmAssetDatabaseListRequest} {@link DescribeDspmAssetDatabaseListResponse} */
+  DescribeDspmAssetDatabaseList(data: DescribeDspmAssetDatabaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetDatabaseListResponse>;
+  /** 查询Dspm资产数据库列表 {@link DescribeDspmAssetDatabasesRequest} {@link DescribeDspmAssetDatabasesResponse} */
+  DescribeDspmAssetDatabases(data: DescribeDspmAssetDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetDatabasesResponse>;
+  /** 查询dspm资产字段信息列表 {@link DescribeDspmAssetFieldListRequest} {@link DescribeDspmAssetFieldListResponse} */
+  DescribeDspmAssetFieldList(data: DescribeDspmAssetFieldListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetFieldListResponse>;
+  /** 查询Dspm资产id列表 {@link DescribeDspmAssetIdsRequest} {@link DescribeDspmAssetIdsResponse} */
+  DescribeDspmAssetIds(data?: DescribeDspmAssetIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetIdsResponse>;
+  /** 查询Dspm资产登录凭据 {@link DescribeDspmAssetLoginCredentialRequest} {@link DescribeDspmAssetLoginCredentialResponse} */
+  DescribeDspmAssetLoginCredential(data: DescribeDspmAssetLoginCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetLoginCredentialResponse>;
+  /** 查询Dspm资产安全分析状态 {@link DescribeDspmAssetSecurityAnalyseStatusRequest} {@link DescribeDspmAssetSecurityAnalyseStatusResponse} */
+  DescribeDspmAssetSecurityAnalyseStatus(data?: DescribeDspmAssetSecurityAnalyseStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetSecurityAnalyseStatusResponse>;
+  /** 查询Dspm资产支持的权限 {@link DescribeDspmAssetSupportedPrivilegesRequest} {@link DescribeDspmAssetSupportedPrivilegesResponse} */
+  DescribeDspmAssetSupportedPrivileges(data: DescribeDspmAssetSupportedPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetSupportedPrivilegesResponse>;
+  /** 查询dspm资产表信息列表 {@link DescribeDspmAssetTableListRequest} {@link DescribeDspmAssetTableListResponse} */
+  DescribeDspmAssetTableList(data: DescribeDspmAssetTableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetTableListResponse>;
+  /** 查询Dspm资产列表 {@link DescribeDspmAssetsRequest} {@link DescribeDspmAssetsResponse} */
+  DescribeDspmAssets(data?: DescribeDspmAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetsResponse>;
+  /** 查询备份日志列表 {@link DescribeDspmBackupLogListRequest} {@link DescribeDspmBackupLogListResponse} */
+  DescribeDspmBackupLogList(data: DescribeDspmBackupLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmBackupLogListResponse>;
+  /** 查询日志备份配置 {@link DescribeDspmBackupSettingRequest} {@link DescribeDspmBackupSettingResponse} */
+  DescribeDspmBackupSetting(data?: DescribeDspmBackupSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmBackupSettingResponse>;
+  /** 查询dspm字典信息列表 {@link DescribeDspmDictionaryListRequest} {@link DescribeDspmDictionaryListResponse} */
+  DescribeDspmDictionaryList(data: DescribeDspmDictionaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmDictionaryListResponse>;
+  /** 查询导出任务 {@link DescribeDspmExportTaskRequest} {@link DescribeDspmExportTaskResponse} */
+  DescribeDspmExportTask(data?: DescribeDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmExportTaskResponse>;
+  /** 查询Dspm身份id列表 {@link DescribeDspmIdentifyIdListRequest} {@link DescribeDspmIdentifyIdListResponse} */
+  DescribeDspmIdentifyIdList(data?: DescribeDspmIdentifyIdListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyIdListResponse>;
+  /** 查询Dspm身份信息 {@link DescribeDspmIdentifyInfoRequest} {@link DescribeDspmIdentifyInfoResponse} */
+  DescribeDspmIdentifyInfo(data?: DescribeDspmIdentifyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyInfoResponse>;
+  /** 查询Dspm身份信息列表 {@link DescribeDspmIdentifyInfoListRequest} {@link DescribeDspmIdentifyInfoListResponse} */
+  DescribeDspmIdentifyInfoList(data?: DescribeDspmIdentifyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyInfoListResponse>;
+  /** 日志列表信息 {@link DescribeDspmLogListRequest} {@link DescribeDspmLogListResponse} */
+  DescribeDspmLogList(data?: DescribeDspmLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmLogListResponse>;
+  /** 获取已购Dspm订单的信息 {@link DescribeDspmPayInfoRequest} {@link DescribeDspmPayInfoResponse} */
+  DescribeDspmPayInfo(data?: DescribeDspmPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmPayInfoResponse>;
+  /** 查询Dspm访客申请记录 {@link DescribeDspmPersonApplyHistoryRequest} {@link DescribeDspmPersonApplyHistoryResponse} */
+  DescribeDspmPersonApplyHistory(data?: DescribeDspmPersonApplyHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmPersonApplyHistoryResponse>;
+  /** 查询Dspm个人身份信息列表 {@link DescribeDspmPersonalIdentifyListRequest} {@link DescribeDspmPersonalIdentifyListResponse} */
+  DescribeDspmPersonalIdentifyList(data?: DescribeDspmPersonalIdentifyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmPersonalIdentifyListResponse>;
+  /** 查询Dspm风险记录 {@link DescribeDspmRiskRequest} {@link DescribeDspmRiskResponse} */
+  DescribeDspmRisk(data?: DescribeDspmRiskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskResponse>;
+  /** 查询Dspm风险详情 {@link DescribeDspmRiskDetailRequest} {@link DescribeDspmRiskDetailResponse} */
+  DescribeDspmRiskDetail(data?: DescribeDspmRiskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskDetailResponse>;
+  /** 查询Dspm风险策略 {@link DescribeDspmRiskStrategyRequest} {@link DescribeDspmRiskStrategyResponse} */
+  DescribeDspmRiskStrategy(data?: DescribeDspmRiskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskStrategyResponse>;
+  /** 查询Dspm风险分组策略 {@link DescribeDspmRiskStrategyGroupRequest} {@link DescribeDspmRiskStrategyGroupResponse} */
+  DescribeDspmRiskStrategyGroup(data?: DescribeDspmRiskStrategyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskStrategyGroupResponse>;
+  /** 查询Dspm风险趋势 {@link DescribeDspmRiskTendencyRequest} {@link DescribeDspmRiskTendencyResponse} */
+  DescribeDspmRiskTendency(data?: DescribeDspmRiskTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskTendencyResponse>;
+  /** 查询Dspm统计信息 {@link DescribeDspmStatisticsRequest} {@link DescribeDspmStatisticsResponse} */
+  DescribeDspmStatistics(data?: DescribeDspmStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmStatisticsResponse>;
+  /** 查询Dspm支持的资产类型信息 {@link DescribeDspmSupportedAssetTypeRequest} {@link DescribeDspmSupportedAssetTypeResponse} */
+  DescribeDspmSupportedAssetType(data?: DescribeDspmSupportedAssetTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSupportedAssetTypeResponse>;
+  /** 查询Dspm同步资产状态 {@link DescribeDspmSyncAssetsStatusRequest} {@link DescribeDspmSyncAssetsStatusResponse} */
+  DescribeDspmSyncAssetsStatus(data?: DescribeDspmSyncAssetsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSyncAssetsStatusResponse>;
+  /** 查询Dspm同步用户状态 {@link DescribeDspmSyncUsersStatusRequest} {@link DescribeDspmSyncUsersStatusResponse} */
+  DescribeDspmSyncUsersStatus(data?: DescribeDspmSyncUsersStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSyncUsersStatusResponse>;
+  /** 查询Dspm白名单策略 {@link DescribeDspmWhitelistStrategyRequest} {@link DescribeDspmWhitelistStrategyResponse} */
+  DescribeDspmWhitelistStrategy(data?: DescribeDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmWhitelistStrategyResponse>;
   /** 查询云边界分析资产分类 {@link DescribeExposeAssetCategoryRequest} {@link DescribeExposeAssetCategoryResponse} */
   DescribeExposeAssetCategory(data?: DescribeExposeAssetCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposeAssetCategoryResponse>;
   /** 查询云边界分析路径节点 {@link DescribeExposePathRequest} {@link DescribeExposePathResponse} */
@@ -5526,6 +8472,8 @@ declare interface Csip {
   DescribeUebaRule(data?: DescribeUebaRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaRuleResponse>;
   /** 获取账号的调用记录 {@link DescribeUserCallRecordRequest} {@link DescribeUserCallRecordResponse} */
   DescribeUserCallRecord(data: DescribeUserCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCallRecordResponse>;
+  /** 获取用户Dspm信息列表 {@link DescribeUserDspmInfoListRequest} {@link DescribeUserDspmInfoListResponse} */
+  DescribeUserDspmInfoList(data?: DescribeUserDspmInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDspmInfoListResponse>;
   /** 风险中心-漏洞列表 {@link DescribeVULListRequest} {@link DescribeVULListResponse} */
   DescribeVULList(data?: DescribeVULListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULListResponse>;
   /** 查询漏洞风险高级配置 {@link DescribeVULRiskAdvanceCFGListRequest} {@link DescribeVULRiskAdvanceCFGListResponse} */
@@ -5538,6 +8486,38 @@ declare interface Csip {
   DescribeVulRiskList(data?: DescribeVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulRiskListResponse>;
   /** 漏洞管理-漏洞视角的漏洞风险列表 {@link DescribeVulViewVulRiskListRequest} {@link DescribeVulViewVulRiskListResponse} */
   DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
+  /** 下载导出日志 {@link DownloadDspmExportLogRequest} {@link DownloadDspmExportLogResponse} */
+  DownloadDspmExportLog(data?: DownloadDspmExportLogRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDspmExportLogResponse>;
+  /** 修改Dspm访问管理信息 {@link ModifyDspmAccessRecordRequest} {@link ModifyDspmAccessRecordResponse} */
+  ModifyDspmAccessRecord(data?: ModifyDspmAccessRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAccessRecordResponse>;
+  /** 修改Dspm审批单状态 {@link ModifyDspmApproveStatusRequest} {@link ModifyDspmApproveStatusResponse} */
+  ModifyDspmApproveStatus(data: ModifyDspmApproveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmApproveStatusResponse>;
+  /** 修改Dspm资产账号信息 {@link ModifyDspmAssetAccountRequest} {@link ModifyDspmAssetAccountResponse} */
+  ModifyDspmAssetAccount(data: ModifyDspmAssetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetAccountResponse>;
+  /** 修改Dspm资产账号权限 {@link ModifyDspmAssetAccountPrivilegesRequest} {@link ModifyDspmAssetAccountPrivilegesResponse} */
+  ModifyDspmAssetAccountPrivileges(data: ModifyDspmAssetAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetAccountPrivilegesResponse>;
+  /** 修改Dspm资产数据识别扫描任务 {@link ModifyDspmAssetDataScanTaskRequest} {@link ModifyDspmAssetDataScanTaskResponse} */
+  ModifyDspmAssetDataScanTask(data: ModifyDspmAssetDataScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetDataScanTaskResponse>;
+  /** 修改Dspm资产日志投递开关 {@link ModifyDspmAssetLogDeliverySwitchRequest} {@link ModifyDspmAssetLogDeliverySwitchResponse} */
+  ModifyDspmAssetLogDeliverySwitch(data: ModifyDspmAssetLogDeliverySwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetLogDeliverySwitchResponse>;
+  /** 修改Dspm安全分析开关 {@link ModifyDspmAssetSecurityAnalysisSwitchRequest} {@link ModifyDspmAssetSecurityAnalysisSwitchResponse} */
+  ModifyDspmAssetSecurityAnalysisSwitch(data: ModifyDspmAssetSecurityAnalysisSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetSecurityAnalysisSwitchResponse>;
+  /** 修改日志备份设置 {@link ModifyDspmBackupSettingRequest} {@link ModifyDspmBackupSettingResponse} */
+  ModifyDspmBackupSetting(data?: ModifyDspmBackupSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmBackupSettingResponse>;
+  /** 修改Dspm身份信息 {@link ModifyDspmIdentifyInfoRequest} {@link ModifyDspmIdentifyInfoResponse} */
+  ModifyDspmIdentifyInfo(data: ModifyDspmIdentifyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyInfoResponse>;
+  /** 修改DspmIp信息 {@link ModifyDspmIpInfoRequest} {@link ModifyDspmIpInfoResponse} */
+  ModifyDspmIpInfo(data: ModifyDspmIpInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIpInfoResponse>;
+  /** 修改Dspm个人身份 {@link ModifyDspmPersonalIdentifyRequest} {@link ModifyDspmPersonalIdentifyResponse} */
+  ModifyDspmPersonalIdentify(data: ModifyDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmPersonalIdentifyResponse>;
+  /** 恢复备份日志 {@link ModifyDspmRestoreLogTaskRequest} {@link ModifyDspmRestoreLogTaskResponse} */
+  ModifyDspmRestoreLogTask(data: ModifyDspmRestoreLogTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmRestoreLogTaskResponse>;
+  /** 修改Dspm风险信息 {@link ModifyDspmRiskInfoRequest} {@link ModifyDspmRiskInfoResponse} */
+  ModifyDspmRiskInfo(data: ModifyDspmRiskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmRiskInfoResponse>;
+  /** 修改Dspm风险策略 {@link ModifyDspmRiskStrategyRequest} {@link ModifyDspmRiskStrategyResponse} */
+  ModifyDspmRiskStrategy(data?: ModifyDspmRiskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmRiskStrategyResponse>;
+  /** 修改Dspm白名单策略 {@link ModifyDspmWhitelistStrategyRequest} {@link ModifyDspmWhitelistStrategyResponse} */
+  ModifyDspmWhitelistStrategy(data?: ModifyDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmWhitelistStrategyResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */
@@ -5546,14 +8526,28 @@ declare interface Csip {
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 更新自定义策略的开关 {@link ModifyUebaRuleSwitchRequest} {@link ModifyUebaRuleSwitchResponse} */
   ModifyUebaRuleSwitch(data: ModifyUebaRuleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUebaRuleSwitchResponse>;
+  /** 重置Dspm资产账号密码 {@link ResetDspmAssetAccountPasswordRequest} {@link ResetDspmAssetAccountPasswordResponse} */
+  ResetDspmAssetAccountPassword(data: ResetDspmAssetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDspmAssetAccountPasswordResponse>;
+  /** 重试导出任务 {@link RetryDspmExportLogRequest} {@link RetryDspmExportLogResponse} */
+  RetryDspmExportLog(data?: RetryDspmExportLogRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDspmExportLogResponse>;
+  /** 恢复Dspm资产账号 {@link RevertDspmAssetAccountRequest} {@link RevertDspmAssetAccountResponse} */
+  RevertDspmAssetAccount(data: RevertDspmAssetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDspmAssetAccountResponse>;
+  /** 发送Dspm资产访问验证码 {@link SendDspmAssetLoginSmsCodeRequest} {@link SendDspmAssetLoginSmsCodeResponse} */
+  SendDspmAssetLoginSmsCode(data: SendDspmAssetLoginSmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendDspmAssetLoginSmsCodeResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
+  /** 同步Dspm资产 {@link SyncDspmAssetsRequest} {@link SyncDspmAssetsResponse} */
+  SyncDspmAssets(data?: SyncDspmAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmAssetsResponse>;
+  /** 同步Dspm用户列表 {@link SyncDspmUsersRequest} {@link SyncDspmUsersResponse} */
+  SyncDspmUsers(data?: SyncDspmUsersRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmUsersResponse>;
   /** 修改告警或者风险状态 {@link UpdateAccessKeyAlarmStatusRequest} {@link UpdateAccessKeyAlarmStatusResponse} */
   UpdateAccessKeyAlarmStatus(data: UpdateAccessKeyAlarmStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyAlarmStatusResponse>;
   /** 编辑访问密钥备注 {@link UpdateAccessKeyRemarkRequest} {@link UpdateAccessKeyRemarkResponse} */
   UpdateAccessKeyRemark(data: UpdateAccessKeyRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyRemarkResponse>;
   /** 批量告警状态处理 {@link UpdateAlertStatusListRequest} {@link UpdateAlertStatusListResponse} */
   UpdateAlertStatusList(data: UpdateAlertStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlertStatusListResponse>;
+  /** 验证Dspm资产登录验证码 {@link VerifyDspmAssetLoginCodeRequest} {@link VerifyDspmAssetLoginCodeResponse} */
+  VerifyDspmAssetLoginCode(data: VerifyDspmAssetLoginCodeRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyDspmAssetLoginCodeResponse>;
 }
 
 export declare type Versions = ["2022-11-21"];

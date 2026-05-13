@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，14002+ 服务数</summary>
+<details><summary>共计 252+ 款产品，14093+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -160,7 +160,7 @@ captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(7) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(14) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(47) |
-ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(83) |
+ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(84) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(176) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(23) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(52+3) |
@@ -171,7 +171,7 @@ cdwpg | [腾讯云数据仓库TCHouse-P](https://cloud.tencent.com/document/prod
 cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
 cetcd | [云原生xa0etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
-cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(57) |
+cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(58) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(128) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(38) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
@@ -192,7 +192,7 @@ cms | 内容安全 | 2019-03-21(6) |
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(63) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(86) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(172) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(3) |
@@ -208,7 +208,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(83) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(186) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(188) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(96) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(56) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -281,7 +281,7 @@ ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(3) |
 npp | 号码保护 | 2019-08-23(8) |
-oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(45) |
+oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(46) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(84) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(30) |
 open | 腾讯云 OAuth | 2018-12-25(2) |

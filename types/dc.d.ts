@@ -114,6 +114,10 @@ declare interface CloudAttachInfo {
   IdcPointType?: string;
   /** 运营商链路是否有保护 */
   BIapLinkProtected?: boolean;
+  /** 服务类型：SHARE-共享型，EXCLUSIVE-独占型 */
+  ServiceType?: string;
+  /** VLAN范围 */
+  VlanRange?: string;
 }
 
 /** 坐标，经维度描述 */
@@ -509,6 +513,8 @@ declare interface ApplyInternetAddressResponse {
 declare interface CreateCloudAttachServiceRequest {
   /** 创建敏捷上云入参 */
   Data: CreateCasInput;
+  /** 标签 */
+  Tags?: Tag[];
 }
 
 declare interface CreateCloudAttachServiceResponse {

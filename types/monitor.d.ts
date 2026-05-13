@@ -5400,6 +5400,8 @@ declare namespace V20180724 {
     TotalCount?: number;
     /** 规则组详情 */
     RecordingRuleSet?: RecordingRuleSet[] | null;
+    /** 预聚合规则数 */
+    TotalRuleCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

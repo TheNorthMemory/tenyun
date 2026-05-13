@@ -264,6 +264,18 @@ declare interface Filter {
   Name: string;
 }
 
+/** 入参权限组规则列表 */
+declare interface InputPermissionGroupRules {
+  /** 允许访问的客户端IP */
+  AuthClientIp: string;
+  /** 读写权限, ro为只读，rw为读写 */
+  RWPermission: string;
+  /** 用户权限。其中all_squash为所有访问用户都会被映射为匿名用户或用户组；no_all_squash为访问用户会先与本机用户匹配，匹配失败后再映射为匿名用户或用户组；root_squash为将来访的root用户映射为匿名用户或用户组；no_root_squash为来访的root用户保持root帐号权限。 */
+  UserPermission: string;
+  /** 规则优先级，1-100。 其中 1 为最高，100为最低 */
+  Priority: number;
+}
+
 /** 生命周期任务 */
 declare interface LifecycleDataTaskInfo {
   /** 任务id */
@@ -1406,6 +1418,20 @@ declare interface ModifyLifecyclePolicyResponse {
   RequestId?: string;
 }
 
+declare interface OverrideCfsRulesRequest {
+  /** 权限组 ID */
+  PermissionGroupId: string;
+  /** 权限组规则列表 */
+  RuleList: InputPermissionGroupRules[];
+}
+
+declare interface OverrideCfsRulesResponse {
+  /** 权限组规则列表 */
+  RuleList: PGroupRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ScaleUpFileSystemRequest {
   /** 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
@@ -1733,6 +1759,8 @@ declare interface Cfs {
   ModifyFileSystemAutoScaleUpRule(data: ModifyFileSystemAutoScaleUpRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFileSystemAutoScaleUpRuleResponse>;
   /** 更新生命周期策略 {@link ModifyLifecyclePolicyRequest} {@link ModifyLifecyclePolicyResponse} */
   ModifyLifecyclePolicy(data: ModifyLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifecyclePolicyResponse>;
+  /** 批量覆盖式创建权限组规则 {@link OverrideCfsRulesRequest} {@link OverrideCfsRulesResponse} */
+  OverrideCfsRules(data: OverrideCfsRulesRequest, config?: AxiosRequestConfig): AxiosPromise<OverrideCfsRulesResponse>;
   /** 文件系统存储量扩容 {@link ScaleUpFileSystemRequest} {@link ScaleUpFileSystemResponse} */
   ScaleUpFileSystem(data: ScaleUpFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpFileSystemResponse>;
   /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */

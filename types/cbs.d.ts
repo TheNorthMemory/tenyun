@@ -905,7 +905,7 @@ declare interface DescribeDisksResponse {
 }
 
 declare interface DescribeInstancesDiskNumRequest {
-  /** 云服务器实例ID，通过[DescribeInstances](/document/product/213/15728)接口查询。 */
+  /** 云服务器实例ID，通过DescribeInstances接口查询。 */
   InstanceIds: string[];
 }
 

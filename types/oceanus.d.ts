@@ -666,7 +666,7 @@ declare interface LogicalType {
   Type?: string | null;
   /** 是否允许为空 */
   NullAble?: boolean | null;
-  /** 长度 */
+  /** 长度单位：字符数 */
   Length?: number | null;
 }
 
@@ -1036,7 +1036,7 @@ declare interface SetatsCvmInfo {
 declare interface SetatsDisk {
   /** 磁盘类型CLOUD_BSSDCLOUD_SSDCLOUD_HSSDCLOUD_PREMIUM */
   DiskType?: string | null;
-  /** 磁盘大小 */
+  /** 磁盘大小单位：GB */
   DiskSize?: number | null;
 }
 
@@ -2084,6 +2084,20 @@ declare interface DescribeVariablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkSpaceUsersRequest {
+  /** 工作空间 SerialId */
+  WorkSpaceId: string;
+  /** 子用户 */
+  AuthSubAccountUin?: string;
+}
+
+declare interface DescribeWorkSpaceUsersResponse {
+  /** 空间用户列表 */
+  RoleAuths?: RoleAuth[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWorkSpacesRequest {
   /** 偏移量，默认 0 */
   Offset?: number;
@@ -2387,6 +2401,8 @@ declare interface Oceanus {
   DescribeTreeResources(data?: DescribeTreeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTreeResourcesResponse>;
   /** 变量描述 {@link DescribeVariablesRequest} {@link DescribeVariablesResponse} */
   DescribeVariables(data?: DescribeVariablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariablesResponse>;
+  /** 工作空间用户列表 {@link DescribeWorkSpaceUsersRequest} {@link DescribeWorkSpaceUsersResponse} */
+  DescribeWorkSpaceUsers(data: DescribeWorkSpaceUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpaceUsersResponse>;
   /** 授权工作空间列表 {@link DescribeWorkSpacesRequest} {@link DescribeWorkSpacesResponse} */
   DescribeWorkSpaces(data?: DescribeWorkSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkSpacesResponse>;
   /** 查询Statement执行结果 {@link FetchSqlGatewayStatementResultRequest} {@link FetchSqlGatewayStatementResultResponse} */

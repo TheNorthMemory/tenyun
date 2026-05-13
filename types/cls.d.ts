@@ -528,6 +528,10 @@ declare interface Console {
   Remarks?: string | null;
   /** 自定义显示菜单 */
   Menus?: string[] | null;
+  /** 公网访问域名 */
+  Domain?: string;
+  /** 内网访问域名 */
+  IntranetDomain?: string;
 }
 
 /** DataSight控制台用户账号信息 */
