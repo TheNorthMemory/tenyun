@@ -8791,7 +8791,7 @@ declare interface CreateSubtitleEmbedTemplateResponse {
 }
 
 declare interface CreateTranscodeTemplateRequest {
-  /** 封装格式，可选值：mp4、flv、hls、ts、webm、mkv、mxf、mov、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
+  /** 封装格式，可选值：mp4、flv、hls、ts、webm、mkv、mxf、mov、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
   Container: string;
   /** 转码模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -11469,7 +11469,7 @@ declare interface ModifySubtitleEmbedTemplateResponse {
 declare interface ModifyTranscodeTemplateRequest {
   /** 转码模板唯一标识。 */
   Definition: number;
-  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。 */
+  /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
   Container?: string;
   /** 转码模板名称，长度限制：64 个字符。 */
   Name?: string;

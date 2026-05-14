@@ -1892,6 +1892,10 @@ declare interface NodeResource {
   MaxResourceNum?: number;
   /** 支持的包销时长 */
   PrepaidUnderwritePeriods?: number[] | null;
+  /** 配额数量 */
+  QuotaNum?: number;
+  /** 配额单位 */
+  QuotaUnit?: string;
 }
 
 /** 资源详情 */
@@ -2012,6 +2016,10 @@ declare interface NodeSpecInstanceType {
   PrepaidUnderwritePeriods?: number[] | null;
   /** GPU信息 */
   GpuDesc?: string;
+  /** 配额数量 */
+  QuotaNum?: number;
+  /** 配额单位 */
+  QuotaUnit?: string;
 }
 
 /** 节点机型类型 */

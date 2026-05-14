@@ -28,6 +28,12 @@ declare interface AIAgentAsset {
   MetadataRiskURL?: string;
   /** 无 */
   SkillState?: SkillState;
+  /** 流量沙箱插件状态 */
+  TrafficPluginState?: TrafficPluginState;
+  /** 流量沙箱规则状态 */
+  TrafficRuleState?: TrafficRuleState[];
+  /** 命令沙箱插件状态 */
+  CommandPluginState?: CommandPluginState;
 }
 
 /** AK简要信息 */
@@ -1488,6 +1494,12 @@ declare interface CloudCountDesc {
   CloudDesc?: string;
 }
 
+/** AI Agent 命令沙箱插件状态 */
+declare interface CommandPluginState {
+  /** 插件安装状态（上层聚合）枚举值：NONE：未安装INSTALLING：安装中INSTALLED：已安装INSTALL_FAIL：安装失败 */
+  InstallStatus?: string;
+}
+
 /** 生效机器范围，用于指定凭证在哪些机器上生效 */
 declare interface CredentialEffectScope {
   /** 是否排除模式枚举值：0：包含模式（仅Instances中的机器生效），此时Instances必填1：排除模式（Instances中的机器不生效，其余机器生效），此时Instances可选（空列表表示全部机器生效） */
@@ -2862,13 +2874,13 @@ declare interface FilterDataObject {
   Text?: string;
 }
 
-/** filter过滤条件 */
+/** 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系 */
 declare interface Filters {
-  /** 实例ID */
+  /** 过滤条件名称 */
   Name?: string;
-  /** 实例ID内容 */
+  /** 过滤条件值列表 */
   Values?: string[];
-  /** 模糊匹配 */
+  /** 是否精确匹配：1 精确匹配；默认模糊匹配 */
   ExactMatch?: string;
 }
 
@@ -3798,6 +3810,78 @@ declare interface ServiceSupport {
   IsSupport?: boolean;
 }
 
+/** Skill 能力标签 */
+declare interface SkillCapabilityTag {
+  /** 能力标签标识，适合程序判定、过滤或聚合使用 */
+  ID?: string;
+  /** 能力标签展示名称 */
+  Name?: string;
+}
+
+/** 融合规则目录项 */
+declare interface SkillRuleCatalogItem {
+  /** 融合规则 ID（9xxxx） */
+  RuleID?: string;
+  /** 风险类别名称 */
+  RuleName?: string;
+}
+
+/** 子引擎扫描结果 */
+declare interface SkillScanEngineResult {
+  /** 子引擎类型枚举值：AI：AI 引擎STATIC：静态分析引擎 */
+  ScanType?: string;
+  /** 该引擎命中的规则列表 */
+  RuleList?: SkillScanRuleHit[];
+}
+
+/** Skill 安全检测结果详情 */
+declare interface SkillScanItem {
+  /** Skill 名称 */
+  SkillName?: string;
+  /** Skill 描述，帮助理解 Skill 的主要用途 */
+  SkillDescription?: string;
+  /** ZIP 文件的 SHA256 Hash参数格式：sha256: */
+  ContentHash?: string;
+  /** 原始上传 ZIP 文件解压后的实际文件数，也是计费的范围，扫描成功后1个文件计为1次额度 */
+  UploadFileCount?: number;
+  /** 综合风险等级枚举值：malicious：恶意suspicious：可疑benign：可信 */
+  RiskLevel?: string;
+  /** 风险主标签融合规则 ID（9xxxx），由服务端从命中的融合风险标签中生成；benign 且无规则命中时为空。展示名称可通过 RuleCatalog 获取 */
+  PrimaryRuleID?: string;
+  /** 综合处置建议，用于指导调用方优先执行下线、隔离、修复、复检等动作。历史结果中可能为空。传 Language=en-US 时返回英文文案 */
+  Mitigation?: string;
+  /** 风险综合描述，对本次检测发现的风险进行概括性说明。传 Language=en-US 时返回英文文案 */
+  RiskDescription?: string;
+  /** 安全评分取值范围：[0, 100]补充说明：100 为最安全 */
+  SecurityScore?: number;
+  /** 本次扫描使用的引擎版本号 */
+  EngineVersion?: number;
+  /** Skill 能力标签列表，描述 Skill 具备的能力特征或适用场景。不等同于风险标签，也不参与风险等级判定。传 Language=en-US 时 Name 切换为英文，ID 保持不变 */
+  CapabilityTags?: SkillCapabilityTag[];
+  /** 融合规则目录全集，包含所有融合规则类别（9xxxx），调用方可据此展示分类标签，无需本地维护映射表。传 Language=en-US 时返回英文名称 */
+  RuleCatalog?: SkillRuleCatalogItem[];
+  /** 扫描结果详情，按子引擎分组。每个元素包含 ScanType（引擎类型）和 RuleList（命中规则列表）。规则中的 RuleID 使用融合编码（9xxxx），可与 RuleCatalog 交叉引用。传 Language=en-US 时 Description 返回英文文本 */
+  ScanItems?: SkillScanEngineResult[];
+  /** 综合安全审计报告地址（签名 URL）。有效期由请求参数 ReportURLExpireHours 控制 */
+  ReportURL?: string;
+  /** 扫描完成时间。仅 Status=SUCCESS 时有值参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  ScannedAt?: string;
+  /** 任务创建时间。仅 Status=SCANNING 时有值参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  CreatedAt?: string;
+  /** 失败时间。仅 Status=FAILED 时有值参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  FailedAt?: string;
+  /** 失败原因描述。仅 Status=FAILED 时有值 */
+  Message?: string;
+}
+
+/** 命中规则项 */
+declare interface SkillScanRuleHit {
+  /** 融合规则编号（9xxxx），可与 RuleCatalog 交叉引用 */
+  RuleID?: string;
+  /** 当前命中规则的具体发现描述，包含文件位置、行为特征、风险点等信息 */
+  Description?: string;
+}
+
 /** SKILL安装状态信息 */
 declare interface SkillState {
   /** SKILL安装状态枚举值：0：未安装1：安装中2：已安装3：安装失败4：卸载中5：卸载失败 */
@@ -4110,6 +4194,26 @@ declare interface TaskLogURL {
   TaskLogName?: string;
   /** APP ID */
   AppId?: string;
+}
+
+/** AI Agent 流量沙箱插件状态 */
+declare interface TrafficPluginState {
+  /** 插件安装状态（上层聚合）枚举值：NONE：未安装INSTALLING：安装中INSTALLED：已安装INSTALL_FAIL：安装失败 */
+  InstallStatus?: string;
+  /** 插件安装细分状态。取值与 InstallStatus 对应：未安装（InstallStatus=UNINSTALL）时为空字符串；安装成功（InstallStatus=INSTALLED）时为 SUCCESS；安装失败（InstallStatus=INSTALL_FAIL）时为具体失败原因枚举值：NOT_SUPPORT：环境不支持CONTAINER_NOT_FOUND：容器不存在REQUIRE_RESTART：需要重启CA_FAILED：CA 失败EBPF_FAILED：eBPF 失败IPTABLE_FAILED：iptables 失败REDIRECT_FAILED：流量重定向失败 */
+  Status?: string;
+  /** 状态文案（由 Status 根据请求语言派生的国际化描述） */
+  Message?: string;
+  /** 插件最近活跃时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  ActivityTime?: string;
+}
+
+/** 流量沙箱规则状态 */
+declare interface TrafficRuleState {
+  /** 沙箱插件模块名 */
+  Module?: string;
+  /** 沙箱规则状态枚举值：ON： 开启OFF： 关闭 */
+  Status?: string;
 }
 
 /** 用户行为分析 自定义策略结构体 */
@@ -5023,6 +5127,26 @@ declare interface CreateRiskCenterScanTaskResponse {
   Status?: number;
   /** 未认证资产列表 */
   UnAuthAsset?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSkillScanRequest {
+  /** ZIP 文件内容的 Base64 编码入参限制：文件大小上限 7MB（编码前），仅接受有效的 ZIP 格式 */
+  FileBase64: string;
+  /** 文件名，用于服务端日志记录参数格式：形如 my-skill.zip */
+  FileName?: string;
+}
+
+declare interface CreateSkillScanResponse {
+  /** 文件的 SHA256 Hash，用于轮询 DescribeSkillScanResult 接口参数格式：sha256: */
+  ContentHash?: string;
+  /** 本次请求实际绑定的引擎版本号。调用方应保存并在后续 DescribeSkillScanResult 时显式传入 */
+  EngineVersion?: number;
+  /** 任务状态，固定为 SCANNING，表示任务已接收 */
+  Status?: string;
+  /** 可读的操作结果描述 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7347,6 +7471,24 @@ declare interface DescribeSearchBugInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillScanResultRequest {
+  /** ZIP 文件的 SHA256 Hash参数格式：sha256: */
+  ContentHash: string;
+  /** 指定引擎版本号取值参考：由 CreateSkillScan 接口返回 */
+  EngineVersion: number;
+  /** 报告签名地址有效期单位：小时默认值：8760（1年）补充说明：对返回的 ReportURL 生效 */
+  ReportURLExpireHours?: number;
+}
+
+declare interface DescribeSkillScanResultResponse {
+  /** 检测状态枚举值：SUCCESS：检测完成，有结果SCANNING：检测进行中NOT_FOUND：无检测记录FAILED：检测失败 */
+  Status?: string;
+  /** 检测结果详情。Status=SUCCESS 时大部分字段有值；Status=SCANNING 时仅包含 ContentHash 和 CreatedAt；Status=FAILED 时仅包含 ContentHash、FailedAt 和 Message；Status=NOT_FOUND 时仅包含 ContentHash */
+  Data?: SkillScanItem;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSourceIPAssetRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -8236,6 +8378,8 @@ declare interface Csip {
   CreateDspmWhitelistStrategy(data: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
   /** 创建风险中心扫描任务 {@link CreateRiskCenterScanTaskRequest} {@link CreateRiskCenterScanTaskResponse} */
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
+  /** 上传 Skill 触发安全检测 {@link CreateSkillScanRequest} {@link CreateSkillScanResponse} */
+  CreateSkillScan(data: CreateSkillScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillScanResponse>;
   /** 删除域名和ip请求 {@link DeleteDomainAndIpRequest} {@link DeleteDomainAndIpResponse} */
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除Dspm申请单 {@link DeleteDspmApplyOrderRequest} {@link DeleteDspmApplyOrderResponse} */
@@ -8456,6 +8600,8 @@ declare interface Csip {
   DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
   /** 查询漏洞信息 {@link DescribeSearchBugInfoRequest} {@link DescribeSearchBugInfoResponse} */
   DescribeSearchBugInfo(data: DescribeSearchBugInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchBugInfoResponse>;
+  /** 查询 Skill 安全检测结果 {@link DescribeSkillScanResultRequest} {@link DescribeSkillScanResultResponse} */
+  DescribeSkillScanResult(data: DescribeSkillScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanResultResponse>;
   /** 获取访问密钥资产（源IP视角） {@link DescribeSourceIPAssetRequest} {@link DescribeSourceIPAssetResponse} */
   DescribeSourceIPAsset(data?: DescribeSourceIPAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIPAssetResponse>;
   /** 查询集团的子账号列表 {@link DescribeSubUserInfoRequest} {@link DescribeSubUserInfoResponse} */

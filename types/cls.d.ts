@@ -610,13 +610,13 @@ declare interface ConsoleSharingParam {
 declare interface ConsumerContent {
   /** 是否投递 TAG 信息。当EnableTag为true时，表示投递TAG元信息。 */
   EnableTag: boolean;
-  /** 需要投递的元数据列表，目前仅支持：\_\_SOURCE\_\_，\_\_FILENAME\_\_，\_\_TIMESTAMP\_\_，\_\_HOSTNAME\_\_和\_\_PKGID\_\_ */
+  /** 需要投递的元数据列表，目前仅支持：__SOURCE__，__FILENAME__，__TIMESTAMP__，__HOSTNAME__和__PKGID__ */
   MetaFields: string[];
-  /** 当EnableTag为true时，必须填写TagJsonNotTiled字段。TagJsonNotTiled用于标识tag信息是否json平铺。TagJsonNotTiled为true时不平铺，示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`TagJsonNotTiled为false时平铺，示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}` */
+  /** 当EnableTag为true时，必须填写TagJsonNotTiled字段。TagJsonNotTiled用于标识tag信息是否json平铺。TagJsonNotTiled为true时不平铺，示例：TAG信息：{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}不平铺：{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}TagJsonNotTiled为false时平铺，示例：TAG信息：{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}平铺：{&quot;__TAG__.fieldA&quot;:200,&quot;__TAG__.fieldB&quot;:&quot;text&quot;} */
   TagJsonNotTiled?: boolean;
   /** 投递时间戳精度，可选项 [1：秒；2：毫秒] ，默认是1。 */
   TimestampAccuracy?: number;
-  /** 投递Json格式。JsonType为0：和原始日志一致，不转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType为1：转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}` */
+  /** 投递Json格式。枚举值：0： 转义。示例：日志原文：{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}投递到Ckafka：{&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;{\&quot;b1\&quot;:\&quot;b1b1\&quot;, \&quot;c1\&quot;:\&quot;c1c1\&quot;}&quot;}1： 和原始日志一致，不转义。示例：日志原文：{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}投递到Ckafka：{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}} */
   JsonType?: number;
 }
 

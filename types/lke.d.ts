@@ -2498,6 +2498,8 @@ declare interface UnsatisfiedReply {
   Operator?: string;
   /** 自定义反馈 */
   FeedbackContent?: string;
+  /** 用户 */
+  Visitor?: string;
 }
 
 /** 更新时间策略 */

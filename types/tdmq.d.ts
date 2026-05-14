@@ -1216,6 +1216,16 @@ declare interface RabbitMQUserQuota {
   UsedUser?: number;
 }
 
+/** RabbitMQ 虚拟主机基础配额信息 */
+declare interface RabbitMQVHostBaseQuota {
+  /** 单个 vhost 下允许的最大连接数 */
+  MaxConnectionPerVhost?: number;
+  /** 单个 vhost 下允许的最大交换机数 */
+  MaxExchangePerVhost?: number;
+  /** 单个 vhost 下允许的最大队列数 */
+  MaxQueuePerVhost?: number;
+}
+
 /** RabbitMQ 托管版实例信息 */
 declare interface RabbitMQVipInstance {
   /** 实例 ID */
@@ -1298,6 +1308,8 @@ declare interface RabbitMQVirtualHostInfo {
   CreateTs?: number;
   /** 修改时间时间戳 */
   ModifyTs?: number;
+  /** 基础配额信息 */
+  Quota?: RabbitMQVHostBaseQuota;
 }
 
 /** vhost概览统计信息 */

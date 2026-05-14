@@ -856,6 +856,26 @@ declare interface GetGroupListResponse {
   RequestId?: string;
 }
 
+declare interface GetHardwareInfoRequest {
+  /** 厂商名称 */
+  Vendor: string;
+  /** 设备SN序列号 */
+  SN: string;
+}
+
+declare interface GetHardwareInfoResponse {
+  /** license授权有效期 0：月度授权 1：永久授权 -1：未知 */
+  LicensePayMode?: number;
+  /** 付费方 0：客户付费 1：厂商付费 */
+  Payer?: number;
+  /** 硬件序列号 */
+  SN?: string;
+  /** 厂商名称 */
+  Vendor?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetHardwareListRequest {
   /** 页码 */
   PageNumber: number;
@@ -1353,6 +1373,8 @@ declare interface Mna {
   GetGroupDetail(data: GetGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupDetailResponse>;
   /** 获取分组列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */
   GetGroupList(data: GetGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupListResponse>;
+  /** 获取硬件设备信息 {@link GetHardwareInfoRequest} {@link GetHardwareInfoResponse} */
+  GetHardwareInfo(data: GetHardwareInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareInfoResponse>;
   /** 获取厂商硬件列表 {@link GetHardwareListRequest} {@link GetHardwareListResponse} */
   GetHardwareList(data: GetHardwareListRequest, config?: AxiosRequestConfig): AxiosPromise<GetHardwareListResponse>;
   /** 获取互通规则列表 {@link GetL3ConnListRequest} {@link GetL3ConnListResponse} */

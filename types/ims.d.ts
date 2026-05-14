@@ -142,6 +142,8 @@ declare interface OcrHitInfo {
   LibName?: string;
   /** 位置信息 */
   Positions?: Positions[];
+  /** 命中标签 */
+  Label?: string;
 }
 
 /** 用于返回OCR结果检测详情 */

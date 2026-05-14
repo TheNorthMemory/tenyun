@@ -624,6 +624,26 @@ declare interface EdgeIpInfo {
   SwitchSupportType?: number;
 }
 
+/** 边界防火墙公网IP开关列表 */
+declare interface EdgeIpInfoSimple {
+  /** 公网IP */
+  PublicIp?: string;
+  /** 公网 IP 类型 1 公网,2 弹性,3 弹性ipv6,4 anycastIP, 6 HighQualityEIP */
+  PublicIpType?: number;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 开关状态0 : 关闭1 : 开启2 : 开启中3 : 关闭中4 : 异常 */
+  Status?: number;
+  /** 0 : 旁路 1 : 串行 2 : 正在模式切换 */
+  SwitchMode?: number;
+  /** 地域 */
+  Region?: string;
+  /** 资产类型 */
+  AssetType?: string;
+}
+
 /** 开启、关闭 防火墙互联网边界开关 */
 declare interface EdgeIpSwitch {
   /** 公网IP */
@@ -2838,6 +2858,28 @@ declare interface DescribeDefenseSwitchResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEdgeIpSimpleRequest {
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** 每页条数 */
+  Limit?: number;
+  /** 偏移值 */
+  Offset?: number;
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeEdgeIpSimpleResponse {
+  /** ip 开关列表 */
+  Data?: EdgeIpInfoSimple[];
+  /** ip 开关列表个数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnterpriseSGRuleProgressRequest {
 }
 
@@ -4501,6 +4543,8 @@ declare interface Cfw {
   DescribeClusterVpcFwSwitchs(data?: DescribeClusterVpcFwSwitchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterVpcFwSwitchsResponse>;
   /** 获取入侵防御按钮列表 {@link DescribeDefenseSwitchRequest} {@link DescribeDefenseSwitchResponse} */
   DescribeDefenseSwitch(data?: DescribeDefenseSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefenseSwitchResponse>;
+  /** 互联网边界防火墙开关列表(轻量) {@link DescribeEdgeIpSimpleRequest} {@link DescribeEdgeIpSimpleResponse} */
+  DescribeEdgeIpSimple(data?: DescribeEdgeIpSimpleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeIpSimpleResponse>;
   /** 查询新版安全组下发进度 {@link DescribeEnterpriseSGRuleProgressRequest} {@link DescribeEnterpriseSGRuleProgressResponse} */
   DescribeEnterpriseSGRuleProgress(data?: DescribeEnterpriseSGRuleProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSGRuleProgressResponse>;
   /** 查询新企业安全组规则 {@link DescribeEnterpriseSecurityGroupRuleRequest} {@link DescribeEnterpriseSecurityGroupRuleResponse} */

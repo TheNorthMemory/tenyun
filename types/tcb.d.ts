@@ -1222,6 +1222,42 @@ declare interface AddProviderResponse {
   RequestId?: string;
 }
 
+declare interface AllocateEnvRequest {
+  /** 分配请求ID，会按这个值做幂等入参限制：长度不超过64 */
+  AllocateId: string;
+  /** 客户平台的应用标识，如果没有则不传 */
+  ExternalAppId?: string;
+}
+
+declare interface AllocateEnvResponse {
+  /** 环境ID */
+  EnvId?: string;
+  /** 回显 客户平台的应用标识，如果没有则不传 */
+  ExternalAppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssumeRoleForAllocatedEnvRequest {
+  /** 环境ID */
+  EnvId: string;
+}
+
+declare interface AssumeRoleForAllocatedEnvResponse {
+  /** SecretId */
+  SecretId?: string;
+  /** SecretKey */
+  SecretKey?: string;
+  /** Token值 */
+  Token?: string | null;
+  /** 过期时间戳 */
+  ExpiredTime?: number | null;
+  /** 是否从缓存中加载。标明该值是否实时从sts服务获取，还是从缓存中获取。调用方可不关心 */
+  IsCache?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckTcbServiceRequest {
 }
 
@@ -2580,6 +2616,18 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface ReleaseEnvRequest {
+  /** 环境ID */
+  EnvId?: string;
+  /** 分配请求ID */
+  AllocateId?: string;
+}
+
+declare interface ReleaseEnvResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewEnvRequest {
   /** 环境ID */
   EnvId: string;
@@ -2709,6 +2757,10 @@ declare interface Tcb {
   (): Versions;
   /** 添加第三方认证源 {@link AddProviderRequest} {@link AddProviderResponse} */
   AddProvider(data: AddProviderRequest, config?: AxiosRequestConfig): AxiosPromise<AddProviderResponse>;
+  /** 从环境池分配环境 {@link AllocateEnvRequest} {@link AllocateEnvResponse} */
+  AllocateEnv(data: AllocateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateEnvResponse>;
+  /** 为环境池里的环境申请角色临时凭证 {@link AssumeRoleForAllocatedEnvRequest} {@link AssumeRoleForAllocatedEnvResponse} */
+  AssumeRoleForAllocatedEnv(data: AssumeRoleForAllocatedEnvRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleForAllocatedEnvResponse>;
   /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */
   CheckTcbService(data?: CheckTcbServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTcbServiceResponse>;
   /** 创建AI模型 {@link CreateAIModelRequest} {@link CreateAIModelResponse} */
@@ -2847,6 +2899,8 @@ declare interface Tcb {
   ModifySafeRule(data: ModifySafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySafeRuleResponse>;
   /** 更新tcb用户 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 释放从环境池里分配的环境 {@link ReleaseEnvRequest} {@link ReleaseEnvResponse} */
+  ReleaseEnv(data?: ReleaseEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseEnvResponse>;
   /** 续费云开发环境 {@link RenewEnvRequest} {@link RenewEnvResponse} */
   RenewEnv(data: RenewEnvRequest, config?: AxiosRequestConfig): AxiosPromise<RenewEnvResponse>;
   /** 执行文档型数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
