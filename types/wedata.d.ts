@@ -4262,6 +4262,8 @@ declare interface TriggerWorkflowDetail {
   GeneralTaskParams?: WorkflowGeneralTaskParam[] | null;
   /** Trigger 状态 启动ACTIVE，暂停PAUSED */
   SchedulerStatus?: string | null;
+  /** 工作流运行参数配置 */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig | null;
 }
 
 /** 获取工作流的列表信息item */
@@ -4524,6 +4526,8 @@ declare interface UpdateTriggerWorkflowPartially {
   BundleInfo?: string;
   /** 通用参数 */
   GeneralTaskParams?: WorkflowGeneralTaskParam[];
+  /** 工作流运行参数配置 */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
 }
 
 /** 更新工作流结果 */
@@ -4662,6 +4666,14 @@ declare interface WorkflowPermissionPage {
   TotalPageNumber?: number;
   /** 授权信息列表 */
   Items?: WorkflowPermission[];
+}
+
+/** 工作流运行配置 */
+declare interface WorkflowRunConfig {
+  /** 工作流运行最大并发数，取值范围：[1, 1000] */
+  MaxConcurrentNum?: number | null;
+  /** 1：开启 0：关闭当工作流达到最大并发上限时，若开启，新工作流运行排队等待，直到其他运行释放并发，最大等待时长为48小时，超过则自动跳过不再执行；若关闭，新工作流直接跳过结束。 */
+  QueuingMode?: number | null;
 }
 
 /** 工作流统一调度出参 */
@@ -5207,6 +5219,8 @@ declare interface CreateTriggerWorkflowRequest {
   BundleInfo?: string;
   /** 通用参数配置 */
   GeneralTaskParams?: WorkflowGeneralTaskParam[];
+  /** 工作流调度运行配置 */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
 }
 
 declare interface CreateTriggerWorkflowResponse {
@@ -8137,6 +8151,8 @@ declare interface UpdateTriggerWorkflowRequest {
   BundleInfo?: string;
   /** 通用参数配置 */
   GeneralTaskParams?: WorkflowGeneralTaskParam[];
+  /**  */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
 }
 
 declare interface UpdateTriggerWorkflowResponse {
@@ -12077,6 +12093,8 @@ declare namespace V20210820 {
     SavePointId?: string | null;
     /** savepiontId */
     SavePointPath?: string | null;
+    /** 最近一次操作信息 */
+    LastOperateInfo?: LastOperateInfo | null;
   }
 
   /** 调度任务日志错误提示信息 */
@@ -12121,6 +12139,20 @@ declare namespace V20210820 {
     LabelId?: number | null;
     /** 标签值ID */
     LabelValue?: string | null;
+  }
+
+  /** 最近一次的操作信息 */
+  interface LastOperateInfo {
+    /** 任务事件 */
+    TaskEvent?: string;
+    /** 操作ID */
+    OperateId?: string;
+    /** 错误信息 */
+    ErrorMsg?: string | null;
+    /** 创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+    CreatedTime?: string | null;
+    /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+    UpdatedTime?: string | null;
   }
 
   /** 表生命周期相关信息 */

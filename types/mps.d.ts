@@ -252,6 +252,8 @@ declare interface AddBlindWatermarkConfig {
 
 /** 图片处理编排中使用的输入参数。 */
 declare interface AddOnImageInput {
+  /** 图片类型。 */
+  Type?: string;
   /** 图片路径。 */
   Image?: MediaInputInfo;
 }
@@ -9566,6 +9568,8 @@ declare interface DescribeDesignTaskResponse {
   Status?: string;
   /** 音色id */
   VoiceId?: string | null;
+  /** 试听音频Url */
+  AudioUrl?: string;
   /** 扩展信息 */
   ExtInfo?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -10711,6 +10715,8 @@ declare interface DesignVoiceAsyncRequest {
   Prompt: string;
   /** 音色属性 */
   VoiceProfile?: VoiceProfile;
+  /** 试听音频文本。长度不超过500 */
+  Text?: string;
   /** 扩展参数，json字符串 */
   ExtParam?: string;
 }

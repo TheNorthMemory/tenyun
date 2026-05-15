@@ -2932,6 +2932,58 @@ declare interface DescribeRumGroupLogResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRumGroupLogV2Request {
+  /** 排序方式 desc asc（必填） */
+  OrderBy: string;
+  /** 开始时间（必填） */
+  StartTime: number;
+  /** 单次查询返回的原始日志条数，最大值为100（必填） */
+  Limit: number;
+  /** 过滤条件 */
+  Filter: string;
+  /** 结束时间（必填） */
+  EndTime: number;
+  /** 项目ID（必填） */
+  ID: number;
+  /** 聚合字段 */
+  Label: string;
+  /** 页数，第几页 */
+  Last?: number;
+}
+
+declare interface DescribeRumGroupLogV2Response {
+  /** Query result in JSON string format */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRumLogDetailsV2Request {
+  /** 排序方式 desc asc */
+  OrderBy: string;
+  /** 开始时间（必填）格式为时间戳 毫秒 */
+  StartTime: number;
+  /** 单次查询返回的原始日志条数，最大值为100（必填） */
+  Limit: number;
+  /** 查询的相关参数 */
+  Filter: string;
+  /** 结束时间（必填）格式为时间戳 毫秒 */
+  EndTime: number;
+  /** 项目ID（必填） */
+  ID: number;
+  /** 上次查询的最后一个日志的时间戳 */
+  LastTime?: number;
+  /** 上次查询的最后一个日志的rowId */
+  LastRowId?: number;
+}
+
+declare interface DescribeRumLogDetailsV2Response {
+  /** 日志明细 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRumLogExportRequest {
   /** 导出标识name */
   Name: string;
@@ -2954,6 +3006,28 @@ declare interface DescribeRumLogExportResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRumLogExportV2Request {
+  /** Export name */
+  Name: string;
+  /** Start time */
+  StartTime: number;
+  /** Query statement */
+  Filter: string;
+  /** End time */
+  EndTime: number;
+  /** Project ID */
+  ID: number;
+  /** c字段 */
+  Fields?: string[];
+}
+
+declare interface DescribeRumLogExportV2Response {
+  /** Query result in JSON string format */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRumLogExportsRequest {
   /** 页面大小 */
   PageSize: number;
@@ -2965,6 +3039,22 @@ declare interface DescribeRumLogExportsRequest {
 
 declare interface DescribeRumLogExportsResponse {
   /** 返回字符串 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRumLogExportsV2Request {
+  /** Page size */
+  PageSize: number;
+  /** Page number */
+  PageNum: number;
+  /** Project ID */
+  ID: number;
+}
+
+declare interface DescribeRumLogExportsV2Response {
+  /** Query result in JSON string format */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2994,6 +3084,32 @@ declare interface DescribeRumLogListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRumLogTotalV2Request {
+  /** 排序方式 desc asc */
+  OrderBy: string;
+  /** 开始时间（必填）格式为时间戳 毫秒 */
+  StartTime: number;
+  /** 单次查询返回的原始日志条数，最大值为100（必填） */
+  Limit: number;
+  /** 查询的相关参数 */
+  Filter: string;
+  /** 结束时间（必填）格式为时间戳 毫秒 */
+  EndTime: number;
+  /** 项目ID（必填） */
+  ID: number;
+  /** 上次查询的最后一个日志的时间戳 */
+  LastTime?: number;
+  /** 上次查询的最后一个日志的rowId */
+  LastRowId?: number;
+}
+
+declare interface DescribeRumLogTotalV2Response {
+  /** 日志总量 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRumStatsLogListRequest {
   /** 开始时间（必填） */
   StartTime: string;
@@ -3009,6 +3125,26 @@ declare interface DescribeRumStatsLogListRequest {
 
 declare interface DescribeRumStatsLogListResponse {
   /** 返回字符串 */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRumStatsLogListV2Request {
+  /** 开始时间（必填） */
+  StartTime: number;
+  /** 单次查询返回的原始日志条数，最大值为100（必填） */
+  Limit: number;
+  /** 过滤条件 */
+  Filter: string;
+  /** 结束时间（必填） */
+  EndTime: number;
+  /** 项目ID（必填） */
+  ID: number;
+}
+
+declare interface DescribeRumStatsLogListV2Response {
+  /** Query result in JSON string format */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3449,14 +3585,26 @@ declare interface Rum {
   DescribeReleaseFiles(data: DescribeReleaseFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseFilesResponse>;
   /** 获取Rum日志聚合信息 {@link DescribeRumGroupLogRequest} {@link DescribeRumGroupLogResponse} */
   DescribeRumGroupLog(data: DescribeRumGroupLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumGroupLogResponse>;
+  /** 根据label 聚合分析日志 {@link DescribeRumGroupLogV2Request} {@link DescribeRumGroupLogV2Response} */
+  DescribeRumGroupLogV2(data: DescribeRumGroupLogV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumGroupLogV2Response>;
+  /** 查询日志明细 {@link DescribeRumLogDetailsV2Request} {@link DescribeRumLogDetailsV2Response} */
+  DescribeRumLogDetailsV2(data: DescribeRumLogDetailsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogDetailsV2Response>;
   /** 导出Rum日志列表 {@link DescribeRumLogExportRequest} {@link DescribeRumLogExportResponse} */
   DescribeRumLogExport(data: DescribeRumLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportResponse>;
+  /** 创建日志导出 {@link DescribeRumLogExportV2Request} {@link DescribeRumLogExportV2Response} */
+  DescribeRumLogExportV2(data: DescribeRumLogExportV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportV2Response>;
   /** 获取Rum日志导出列表 {@link DescribeRumLogExportsRequest} {@link DescribeRumLogExportsResponse} */
   DescribeRumLogExports(data: DescribeRumLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportsResponse>;
+  /** 获取日志导出列表 {@link DescribeRumLogExportsV2Request} {@link DescribeRumLogExportsV2Response} */
+  DescribeRumLogExportsV2(data: DescribeRumLogExportsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportsV2Response>;
   /** 获取Rum日志列表 {@link DescribeRumLogListRequest} {@link DescribeRumLogListResponse} */
   DescribeRumLogList(data: DescribeRumLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogListResponse>;
+  /** 日志总量查询 {@link DescribeRumLogTotalV2Request} {@link DescribeRumLogTotalV2Response} */
+  DescribeRumLogTotalV2(data: DescribeRumLogTotalV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogTotalV2Response>;
   /** 获取Rum分钟级日志列表 {@link DescribeRumStatsLogListRequest} {@link DescribeRumStatsLogListResponse} */
   DescribeRumStatsLogList(data: DescribeRumStatsLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumStatsLogListResponse>;
+  /** 查询日志时间分布表 {@link DescribeRumStatsLogListV2Request} {@link DescribeRumStatsLogListV2Response} */
+  DescribeRumStatsLogListV2(data: DescribeRumStatsLogListV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumStatsLogListV2Response>;
   /** 获取首页分数列表 {@link DescribeScoresRequest} {@link DescribeScoresResponse} */
   DescribeScores(data: DescribeScoresRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScoresResponse>;
   /** 获取首页分数列表V2 {@link DescribeScoresV2Request} {@link DescribeScoresV2Response} */

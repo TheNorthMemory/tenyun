@@ -149,7 +149,7 @@ declare interface CreateSavingPlanOrderRequest {
   RegionId: number;
   /** 区域编码 */
   ZoneId: number;
-  /** 预付费类型 */
+  /** 预付费类型枚举值：1： 全预费2： 部分预付3： 不预付 */
   PrePayType: string;
   /** 时长 */
   TimeSpan: number;
@@ -159,10 +159,12 @@ declare interface CreateSavingPlanOrderRequest {
   CommodityCode: string;
   /** 承诺时长内的小额金额（单位：元） */
   PromiseUseAmount: number;
-  /** 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:"2023-10-01 00:00:00"，仅支持指定日期的0点时刻 */
+  /** 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:&quot;2023-10-01 00:00:00&quot;，仅支持指定日期的0点时刻 */
   SpecifyEffectTime?: string;
   /** 可重入ID */
   ClientToken?: string;
+  /** 节省计划结算类型枚举值：1： 小时结算包2： 日结算包3： 月结算包默认值：1不填写是默认是小时结算包 */
+  CommitmentPeriod?: number;
 }
 
 declare interface CreateSavingPlanOrderResponse {

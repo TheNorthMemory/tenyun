@@ -714,6 +714,8 @@ declare interface AssetRiskItem {
   StandardTerms?: StandardTerm[];
   /** 资产类型 */
   AssetType?: string;
+  /** 资产类型图标 */
+  AssetTypeIconURL?: string;
 }
 
 /** 安全中心资产标签 */
@@ -1452,6 +1454,8 @@ declare interface CheckViewRiskItem {
   Classify?: string;
   /** cspm规范条款 */
   StandardTerms?: StandardTerm[];
+  /** 资产类型图标 */
+  AssetTypeIconURL?: string;
 }
 
 /** clb实例和监听器信息 */
@@ -2080,6 +2084,10 @@ declare interface DspmAssetFieldInfo {
   CategoryIds?: number[];
   /** 分类名称集合 */
   CategoryNames?: string[];
+  /** 分类详情 */
+  CategoryDetails?: DspmIdentifyCategoryDetail[];
+  /** 字段注释 */
+  FieldComment?: string;
 }
 
 /** Dspm资产实例 */
@@ -2144,6 +2152,12 @@ declare interface DspmAssetTableInfo {
   CategoryIds?: number[];
   /** 分类名称集合 */
   CategoryNames?: string[];
+  /** 分类详情 */
+  CategoryDetails?: DspmIdentifyCategoryDetail[];
+  /** 数据表id */
+  TableId?: number;
+  /** 表注释 */
+  TableComment?: string;
 }
 
 /** Dspm 资产按类型统计数 */
@@ -2846,6 +2860,10 @@ declare interface ExposesItem {
   ToGovernedRiskCount?: number;
   /** 待治理风险内容 */
   ToGovernedRiskContent?: string;
+  /** 资产类型图标 */
+  AssetTypeIconURL?: string;
+  /** 资产类型3D图标 */
+  AssetTypeIconSolidURL?: string;
 }
 
 /** 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤 */
@@ -7471,6 +7489,44 @@ declare interface DescribeSearchBugInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillScanPayInfoRequest {
+}
+
+declare interface DescribeSkillScanPayInfoResponse {
+  /** 订单所属租户 AppID */
+  AppID?: number;
+  /** 订单状态枚举值：0：未购买1：正常2：隔离6：试用中7：已过期8：试用到期 */
+  OrderStatus?: number;
+  /** 总配额 */
+  TotalQuota?: number;
+  /** 已消耗配额 */
+  UsedCount?: number;
+  /** 支付模式枚举值：0：后付费1：预付费 */
+  PayMode?: number;
+  /** 自动续费标志枚举值：0：未设置1：自动续费2：不自动续费 */
+  AutoRenew?: number;
+  /** 资源ID */
+  ResourceId?: string;
+  /** 购买时长 */
+  TimeSpan?: number;
+  /** 时长单位 */
+  TimeUnit?: string;
+  /** 订单开始时间 */
+  BeginTime?: string;
+  /** 订单到期时间 */
+  EndTime?: string;
+  /** 公测结束时间，固定为 2026-06-30 23:59:59 */
+  BetaEndTime?: string;
+  /** 服务器当前时间 */
+  TimeNow?: string;
+  /** 租户 Uin */
+  Uin?: string;
+  /** 租户昵称 */
+  NickName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillScanResultRequest {
   /** ZIP 文件的 SHA256 Hash参数格式：sha256: */
   ContentHash: string;
@@ -8600,6 +8656,8 @@ declare interface Csip {
   DescribeScanTaskList(data?: DescribeScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanTaskListResponse>;
   /** 查询漏洞信息 {@link DescribeSearchBugInfoRequest} {@link DescribeSearchBugInfoResponse} */
   DescribeSearchBugInfo(data: DescribeSearchBugInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchBugInfoResponse>;
+  /** 查询 Skill 安全检测计费信息 {@link DescribeSkillScanPayInfoRequest} {@link DescribeSkillScanPayInfoResponse} */
+  DescribeSkillScanPayInfo(data?: DescribeSkillScanPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanPayInfoResponse>;
   /** 查询 Skill 安全检测结果 {@link DescribeSkillScanResultRequest} {@link DescribeSkillScanResultResponse} */
   DescribeSkillScanResult(data: DescribeSkillScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanResultResponse>;
   /** 获取访问密钥资产（源IP视角） {@link DescribeSourceIPAssetRequest} {@link DescribeSourceIPAssetResponse} */

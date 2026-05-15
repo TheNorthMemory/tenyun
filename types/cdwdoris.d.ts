@@ -90,6 +90,44 @@ declare interface BackupCosInfo {
   Region?: string;
 }
 
+/** 备份、迁移任务信息 */
+declare interface BackupScheduleInfo {
+  /** 迁移类型：1-远端集群迁移；2-COS迁移 */
+  BackupType?: number;
+  /** 当前任务现存实例数 */
+  ExistCount?: number;
+  /** cos信息 */
+  CosSourceInfo?: string;
+  /** doris信息 */
+  DorisSourceInfo?: string;
+  /** 恢复类型 */
+  RestoreType?: number;
+  /** 快照保留策略 */
+  SnapshotRemainPolicy?: SnapshotRemainPolicy;
+  /** 远程备份地域 */
+  DataRemoteRegion?: string;
+  /** 是否在宽限期内 */
+  IsWithinGracePeriod?: boolean;
+  /** 宽限期（天数） */
+  GracePeriod?: number;
+  /** 宽限开始时间 */
+  GraceStartTime?: string;
+  /** 托管桶类型：standard-标准，多可用区-MAZ */
+  BucketType?: string;
+  /** 是否开启安全锁：0-未开启，1-已开启 */
+  EnableSecurityLock?: number;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 实例状态描述 */
+  InstanceStatusDesc?: string;
+  /** 桶加密状态信息 */
+  BucketEncryption?: BucketEncryptionInfo;
+}
+
 /** 备份任务的进度详情 */
 declare interface BackupStatus {
   /** 备份任务id */
@@ -1203,6 +1241,14 @@ declare interface DescribeBackUpJobRequest {
   InstanceId: string;
   /** 任务类型：0-不限制，或使用TypeFilters过滤；1-备份恢复（包括周期备份和一次性备份）；2-数据迁移（包括跨集群迁移和cos迁移） */
   ApplicationType?: number;
+  /** 任务类型过滤器 */
+  TypeFilters?: number[];
+  /** 实例状态过滤器 */
+  StatusFilters?: number[];
+  /** 任务名称过滤器 */
+  ScheduleNameFilters?: string;
+  /** 按照快照生成时间排序，默认DESC：ASC-升序DESC-降序 */
+  OrderType?: string;
   /** 分页大小 */
   PageSize?: number;
   /** 页号 */
@@ -1233,6 +1279,20 @@ declare interface DescribeBackUpJobResponse {
 declare interface DescribeBackUpSchedulesRequest {
   /** 任务类型0-不限制，或使用TypeFilters过滤；1-备份恢复（包括周期备份和一次性备份）；2-数据迁移（包括跨集群迁移和cos迁移） */
   ApplicationType?: number;
+  /** 创建人过滤器 */
+  UsersFilters?: string[];
+  /** 任务类型过滤器。0-周期；1-一次性；2-数据迁移(即3和4的合集)；3-远端集群迁移；4-COS迁移 */
+  TypeFilters?: number[];
+  /** 任务状态过滤器 */
+  StatusFilters?: number[];
+  /** 排序：DESC-降序ASC-升序 */
+  OrderType?: string;
+  /** 任务名过滤器 */
+  ScheduleNameFilters?: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 页号 */
+  PageNum?: number;
   /** 0-未加密；1-已加密 */
   EncryptionFilters?: number[];
   /** 调度任务id过滤 */
@@ -1240,6 +1300,14 @@ declare interface DescribeBackUpSchedulesRequest {
 }
 
 declare interface DescribeBackUpSchedulesResponse {
+  /** 备份是否开启 */
+  BackUpOpened?: boolean;
+  /** 备份桶 */
+  CosBucketName?: string;
+  /** 备份的状态 */
+  BackUpStatus?: number;
+  /** 备份、迁移任务信息 */
+  BackupScheduleInfos?: BackupScheduleInfo[];
   /** 当前系统时间 */
   CurrentTime?: string;
   /** 桶加密状态信息 */

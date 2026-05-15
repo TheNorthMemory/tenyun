@@ -260,6 +260,8 @@ declare interface User {
   Birthdate?: number | null;
   /** 用户组ID */
   UserGroups?: string[] | null;
+  /** 用户组名称 */
+  UserGroupNames?: string[] | null;
   /** 上次修改时间 */
   LastModifiedDate?: number | null;
   /** 自定义属性 */
@@ -320,6 +322,10 @@ declare interface User {
   IndexedAttribute4?: string | null;
   /** 索引字段5 */
   IndexedAttribute5?: string | null;
+  /** 用户所属组织机构ID */
+  UserOrgs?: string[] | null;
+  /** 用户所属企业微信组织机构 */
+  WeComUserOrgs?: number[] | null;
 }
 
 /** 用户组 */
@@ -455,6 +461,8 @@ declare interface CreateUserRequest {
   IndexedAttribute4?: string;
   /** 索引字段5 */
   IndexedAttribute5?: string;
+  /** 用户所属组织机构ID */
+  UserOrg?: string[];
 }
 
 declare interface CreateUserResponse {
@@ -651,7 +659,7 @@ declare interface ListUserRequest {
   UserStoreId: string;
   /** 分页数据 */
   Pageable: Pageable;
-  /** Key可选值为condition、userGroupId **condition** Values = 查询条件，用户ID，用户名称，手机或邮箱 **userGroupId** Values = 用户组ID */
+  /** Key可选值为condition、userGroup、userOrg、weComUserOrg condition Values = 查询条件，用户ID，用户名称，手机或邮箱 userGroup Values = 用户组ID userOrg Values = 用户所属机构ID weComUserOrg Values = 用户所属企业微信机构ID */
   Filters?: Filter[];
   /** 返回信息是否为原文 */
   Original?: boolean;
@@ -753,6 +761,8 @@ declare interface UpdateUserRequest {
   IndexedAttribute4?: string;
   /** 索引字段5 */
   IndexedAttribute5?: string;
+  /** 用户所属组织机构ID */
+  UserOrg?: string[];
 }
 
 declare interface UpdateUserResponse {

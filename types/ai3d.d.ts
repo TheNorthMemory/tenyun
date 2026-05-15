@@ -52,6 +52,24 @@ declare interface Convert3DFormatResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAutoRiggingJobRequest {
+  /** 任务ID。 */
+  JobId: string;
+}
+
+declare interface DescribeAutoRiggingJobResponse {
+  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 示例值：RUN。 */
+  Status?: string;
+  /** 错误码。 */
+  ErrorCode?: string;
+  /** 错误信息。 */
+  ErrorMessage?: string;
+  /** 生成文件的URL地址，有效期1天。 */
+  ResultFile3Ds?: File3D[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHunyuanTo3DMotionJobRequest {
   /** 任务ID。 */
   JobId: string;
@@ -196,6 +214,20 @@ declare interface QueryHunyuanTo3DRapidJobResponse {
   ErrorMessage?: string;
   /** 生成的3D文件数组。 */
   ResultFile3Ds?: File3D[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitAutoRiggingJobRequest {
+  /** 3D人物模型文件，通过输入源模型生成3D人物模型动画。人物模型需为标准T-Pose文件（双臂水平展开的人物站立姿态），3D模型文件必选其一，参考值：FBX：3D模型文件，格式为FBX，文件大小不超过60Mb；OBJ：3D模型文件，格式为OBJ，文件大小不超过60Mb； */
+  File3D: InputFile3D;
+  /** 预设动作类型，参考值：回旋踢 左勾拳 蓄力攻击 蓄力出拳 二连击打 二连击打-2 后撤 受击 受击-2 受击-3 受击倒地-1 受击倒地-2 落地 沮丧 割喉 刺拳 连续击打 踢腿 侧踢 打太极 后空翻 蹲姿转体 走路-1 走路-2 走路-3 待机-1 待机-2 街舞 扭扭舞 左转弯 右转弯 慢跑 慢跑-2 奔跑 冲刺跑-1 冲刺跑-2 冲刺跑-3 原地跳-1 滑铲 向前大跳 向前大跳-2 跨越 恐吓 向前跌倒 右转 原地跳-2 转身 发送冲击波 */
+  MotionType?: number;
+}
+
+declare interface SubmitAutoRiggingJobResponse {
+  /** 任务ID（有效期24小时） */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -359,6 +391,8 @@ declare interface Ai3d {
   (): Versions;
   /** 模型格式转换 {@link Convert3DFormatRequest} {@link Convert3DFormatResponse} */
   Convert3DFormat(data: Convert3DFormatRequest, config?: AxiosRequestConfig): AxiosPromise<Convert3DFormatResponse>;
+  /** 查询绑骨蒙皮任务 {@link DescribeAutoRiggingJobRequest} {@link DescribeAutoRiggingJobResponse} */
+  DescribeAutoRiggingJob(data: DescribeAutoRiggingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoRiggingJobResponse>;
   /** 查询文生动作任务 {@link DescribeHunyuanTo3DMotionJobRequest} {@link DescribeHunyuanTo3DMotionJobResponse} */
   DescribeHunyuanTo3DMotionJob(data: DescribeHunyuanTo3DMotionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanTo3DMotionJobResponse>;
   /** 查询UV展开任务 {@link DescribeHunyuanTo3DUVJobRequest} {@link DescribeHunyuanTo3DUVJobResponse} */
@@ -375,6 +409,8 @@ declare interface Ai3d {
   QueryHunyuanTo3DProJob(data: QueryHunyuanTo3DProJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanTo3DProJobResponse>;
   /** 查询混元生3D极速版任务 {@link QueryHunyuanTo3DRapidJobRequest} {@link QueryHunyuanTo3DRapidJobResponse} */
   QueryHunyuanTo3DRapidJob(data?: QueryHunyuanTo3DRapidJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanTo3DRapidJobResponse>;
+  /** 提交绑骨蒙皮任务 {@link SubmitAutoRiggingJobRequest} {@link SubmitAutoRiggingJobResponse} */
+  SubmitAutoRiggingJob(data: SubmitAutoRiggingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAutoRiggingJobResponse>;
   /** 提交组件生成任务 {@link SubmitHunyuan3DPartJobRequest} {@link SubmitHunyuan3DPartJobResponse} */
   SubmitHunyuan3DPartJob(data?: SubmitHunyuan3DPartJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuan3DPartJobResponse>;
   /** 提交文生动作任务 {@link SubmitHunyuanTo3DMotionJobRequest} {@link SubmitHunyuanTo3DMotionJobResponse} */

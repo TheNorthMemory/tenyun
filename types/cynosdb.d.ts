@@ -5113,7 +5113,7 @@ declare interface DescribeInstanceSlowQueriesRequest {
   StartTime?: string;
   /** 事务开始最晚时间 */
   EndTime?: string;
-  /** 限制条数 */
+  /** 限制条数建议控制 limit 大小，当 limit 过大时，由于平台返回结果大小限制，可能会造成截断 */
   Limit?: number;
   /** 偏移量 */
   Offset?: number;
@@ -5123,7 +5123,7 @@ declare interface DescribeInstanceSlowQueriesRequest {
   Host?: string;
   /** 数据库名 */
   Database?: string;
-  /** 排序字段，可选值：QueryTime,LockTime,RowsExamined,RowsSent */
+  /** 排序字段枚举值：QueryTime： 按照 SQL 语句的总执行时长排序LockTime： 按照 SQL 语句在等待锁（如表锁、行锁）上消耗的时间排序RowsExamined： 按照 SQL 语句在执行过程中扫描的行数排序RowsSent： 按照 SQL 语句最终返回给客户端的结果行数排序Timestamp： 按照慢查询语句发生的时间戳排序 */
   OrderBy?: string;
   /** 排序类型，可选值：asc,desc */
   OrderByType?: string;

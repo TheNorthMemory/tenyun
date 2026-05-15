@@ -5163,6 +5163,8 @@ declare interface SubmitExtractDocAgentJobRequest {
   FileStartPageNumber?: number;
   /** 结束页 */
   FileEndPageNumber?: number;
+  /** model_hunyuan:选择混元底座视觉大模型精调抽取任务 model_youtu：选择优图底座多模态大模型精调抽取任务 */
+  ModelConfig?: string;
 }
 
 declare interface SubmitExtractDocAgentJobResponse {

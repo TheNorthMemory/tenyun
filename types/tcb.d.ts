@@ -1385,20 +1385,24 @@ declare interface CreateCustomLoginKeyResponse {
 }
 
 declare interface CreateEnvRequest {
-  /** 环境别名。### 格式要求- 可选字符： 小写字母(a~z)、数字、减号(-)- 不能以 减号(-) 开头或结尾- 不能有连个连续的 减号(-)- 长度不超过20位示例值：cloud */
+  /** 环境别名。格式要求可选字符： 小写字母(a~z)、数字、减号(-)不能以 减号(-) 开头或结尾不能有连个连续的 减号(-)长度不超过20位示例值：cloud */
   Alias: string;
-  /** 云开发环境套餐Id。对于云开发环境套餐，可通过 [DescribeBaasPackageList](https://cloud.tencent.com/document/product/876/78167) 接口获取，对应其出参的PackageName。 */
+  /** 云开发环境套餐Id。对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName。 */
   PackageId: string;
-  /** 资源类型。代表新购环境时需要发货哪些资源。可取值以及含义：- flexdb : 表示文档型数据库- storage : 表示云存储- function : 表示云函数**该字段不可为空** */
+  /** 资源类型。代表新购环境时需要发货哪些资源。可取值以及含义：flexdb : 表示文档型数据库storage : 表示云存储function : 表示云函数postgresql：表示postgresql数据库该字段不可为空 */
   Resources: string[];
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24。默认值为1，即1个月。 */
   Period?: number;
   /** 是否自动选择代金券支付。 */
   AutoVoucher?: boolean;
-  /** 环境标签。可取值通过接口 [tag:DescribeTags](https://cloud.tencent.com/document/product/651/35316) 可获取到。不传或为空则默认不打任何标签。 */
+  /** 环境标签。可取值通过接口 tag:DescribeTags 可获取到。不传或为空则默认不打任何标签。 */
   Tags?: Tag[];
-  /** 自动续费标识。取值范围：- NOTIFY_AND_AUTO_RENEW：通知过期且自动续费- NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费（需要手动续费，可通过接口 [RenewEnv](https://cloud.tencent.com/document/product/876/128590) 来续费）默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW（即：自动续费），在账户余额充足的情况下，实例到期后将按月自动续费；但如果账户余额不足，将无法自动续费。请留意腾讯云短信和邮件通知。 */
+  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费（需要手动续费，可通过接口 RenewEnv 来续费）默认取值：NOTIFY_AND_MANUAL_RENEW。若该参数指定为NOTIFY_AND_AUTO_RENEW（即：自动续费），在账户余额充足的情况下，实例到期后将按月自动续费；但如果账户余额不足，将无法自动续费。请留意腾讯云短信和邮件通知。 */
   RenewFlag?: string;
+  /** 云存储外部存储源。表示该环境下不再自动分配云存储cos桶，而是由指定的bucket作为该环境的云存储介质。仅当 Resources 中包含storage时有效。 */
+  ExternalStorage?: ExternalStorage;
+  /** 开启或关闭 超限转按量。 可取值： TRUE/FALSE （字符串类型） 非法制、不传、为空 则不变更该字段。 */
+  EnableOverrun?: string;
 }
 
 declare interface CreateEnvResourceRequest {
