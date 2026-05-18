@@ -3201,21 +3201,21 @@ declare interface CreatePersonAuthCertificateImageResponse {
 declare interface CreateSealByImageRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
+  /** 电子印章名字，1-50个中文字符注:同一企业下电子印章名字不能相同 */
   SealName: string;
-  /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式注: `通过图片创建的电子印章，需电子签平台人工审核` */
+  /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式注: 通过图片创建的电子印章，需电子签平台人工审核 */
   SealImage?: string;
   /** 操作者的信息 */
   Operator?: UserInfo;
   /** 电子印章生成方式空值:(默认)使用上传的图片生成印章, 此时需要上传SealImage图片SealGenerateSourceSystem: 系统生成印章, 无需上传SealImage图片 */
   GenerateSource?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: (默认)公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章**OTHER**: 其他注: 同企业下只能有一个公章, 重复创建会报错 */
+  /** 电子印章类型 , 可选类型如下: OFFICIAL: (默认)公章CONTRACT: 合同专用章;FINANCE: 财务专用章;PERSONNEL: 人事专用章INVOICE: 发票专用章OTHER: 其他注: 同企业下只能有一个公章, 重复创建会报错 */
   SealType?: string;
-  /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的"印章横向文字在这里"![image](https://dyn.ess.tencent.cn/guide/capi/CreateSealByImage2.png) */
+  /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的&quot;印章横向文字在这里&quot; */
   SealHorizontalText?: string;
   /** 印章样式, 可以选择的样式如下: **circle**:(默认)圆形印章**ellipse**:椭圆印章 */
   SealStyle?: string;
-  /** 印章尺寸取值描述, 可以选择的尺寸如下: **38_38**: 圆形企业公章直径38mm, 当SealStyle是圆形的时候才有效 **40_40**: 圆形企业公章直径40mm, 当SealStyle是圆形的时候才有效 **42_42**（默认）: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 **45_45**: 圆形企业印章直径45mm, 当SealStyle是圆形的时候才有效 **50_50**: 圆形企业印章直径50mm, 当SealStyle是圆形的时候才有效 **58_58**: 圆形企业印章直径58mm, 当SealStyle是圆形的时候才有效 **40_30**: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效 **45_30**: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 */
+  /** 印章尺寸取值描述, 可以选择的尺寸如下: 38_38: 圆形企业公章直径38mm, 当SealStyle是圆形的时候才有效 40_40: 圆形企业公章直径40mm, 当SealStyle是圆形的时候才有效 42_42（默认）: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 45_45: 圆形企业印章直径45mm, 当SealStyle是圆形的时候才有效 50_50: 圆形企业印章直径50mm, 当SealStyle是圆形的时候才有效 58_58: 圆形企业印章直径58mm, 当SealStyle是圆形的时候才有效 40_30: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效 45_30: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 */
   SealSize?: string;
   /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */
   TaxIdentifyCode?: string;
@@ -3228,12 +3228,16 @@ declare interface CreateSealByImageRequest {
 declare interface CreateSealByImageResponse {
   /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。 */
   SealId?: string;
-  /** 电子印章预览链接地址，地址默认失效时间为24小时。注:`图片上传生成的电子印章无预览链接地址` */
+  /** 电子印章预览链接地址，地址默认失效时间为24小时。注:图片上传生成的电子印章无预览链接地址 */
   ImageUrl?: string;
-  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  /** 人脸验证操作人链接，用法可以参考&quot;跳转电子签小程序配置&quot;，默认为空。 */
   SealOperatorVerifyPath?: string;
   /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
   SealOperatorVerifyQrcodeUrl?: string;
+  /** 创建印章预览逻辑，返回的是印章加盖在示例文件上的效果图片链接。链接有效期为90天。 */
+  PreviewFileUrl?: string;
+  /** 创建印章预览逻辑，返回的是印章加盖在示例文件上的效果PDF文件链接。链接有效期为90天。 */
+  PreviewPdfUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

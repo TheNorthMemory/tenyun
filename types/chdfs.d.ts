@@ -102,7 +102,7 @@ declare interface MountPoint {
 declare interface RestoreTask {
   /** 回热任务ID */
   RestoreTaskId?: number;
-  /** 回热任务文件路径 */
+  /** 回热任务文件路径，不支持目录和通配符 */
   FilePath?: string;
   /** 回热任务类型（1：标准；2：极速；3：批量，暂时仅支持标准） */
   Type?: number;

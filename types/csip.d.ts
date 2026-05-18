@@ -1504,6 +1504,606 @@ declare interface CommandPluginState {
   InstallStatus?: string;
 }
 
+/** cos访问权限信息 */
+declare interface CosAccessInfo {
+  /** 可访问账号uin */
+  AccessUin?: string;
+  /** 可访问账号uid */
+  AccessUid?: string;
+  /** 昵称 */
+  NickName?: string;
+  /** 身份标识 1 主账号2 子账号 */
+  Identity?: number;
+  /** 所属主账号名称 */
+  MainNickName?: string;
+  /** 可访问ak列表 */
+  AkList?: string[];
+  /** 可访问权限数 */
+  CamPolicyCount?: number;
+  /** 修改时间Unix时间单位毫秒 */
+  UpdateTime?: number;
+}
+
+/** cos命令信息 */
+declare interface CosActionInfo {
+  /** 接口名 */
+  ActionName?: string;
+  /** 接口中文名 */
+  ActionNameCn?: string;
+  /** 接口描述 */
+  ActionDescription?: string;
+}
+
+/** cos关联ak资产信息 */
+declare interface CosAkAssetInfo {
+  /** appid */
+  AppId?: number;
+  /** ak id */
+  AkId?: string;
+  /** ak名称 */
+  AkName?: string;
+  /** ak备注 */
+  AkRemark?: string;
+  /** ak所属uin */
+  AkOwnerUin?: string;
+  /** ak类型 1 主 2 子 */
+  AkOwnerType?: number;
+  /** ak所属账号名 */
+  AkOwnerName?: string;
+  /** ak主账号名 */
+  AkMainOwnerName?: string;
+  /** ak关联桶集合 */
+  AkRelBucketSet?: string[];
+  /** ak关联告警集合 */
+  AkRelAlarmSet?: CosRiskInfo[];
+  /** Ak关联ip数 */
+  AkRelIpCount?: number;
+  /** ak状态 0 禁用 1 启用 */
+  AkStatus?: number;
+  /** 创建时间 */
+  CreateTimestamp?: number;
+  /** 最后访问时间 */
+  LastAccessTimestamp?: number;
+}
+
+/** cos ak 集合 */
+declare interface CosAkSet {
+  /** ak所属appid */
+  AppId?: number;
+  /** ak名称集合 */
+  AkNameSet?: string[];
+}
+
+/** 对象存储告警信息 */
+declare interface CosAlarmInfo {
+  /** appid */
+  AppId?: number;
+  /** 策略id */
+  PolicyId?: number;
+  /** 策略名称 */
+  PolicyName?: string;
+  /** 策略类型 0-未知规则分类(Unknown), 1-异常行为(AbnormalBehavior), 2-权限过大(ExcessivePermission), 3-资源枚举(ResourceEnumerated), 4-匿名访问(AnonymousAccess) */
+  PolicyAbnormalType?: number;
+  /** 风险等级：0:Normal, 1:Tip, 2:Low, 3:Middle, 4:High, 5:Critical */
+  PolicyRiskLevel?: number;
+  /** 策略信息描述 */
+  PolicyDescription?: string;
+  /** 桶名 */
+  BucketName?: string;
+  /** 桶地域 */
+  BucketRegion?: string;
+  /** 桶备注 */
+  BucketMarker?: string;
+  /** 桶tag信息 */
+  BucketTagInfo?: string;
+  /** 桶可访问属性 */
+  BucketAccessWay?: string;
+  /** 所属账号uin */
+  AccountUin?: string;
+  /** 所属账号昵称 */
+  AccountNickName?: string;
+  /** 所属账号社身份 1 主 2子 */
+  AccountIdentify?: number;
+  /** 子账号所属主账号昵称 */
+  AccountMainNickName?: string;
+  /** 告警时间戳Unix时间单位毫秒 */
+  AlarmTimestamp?: number;
+  /** 处置状态 0 未处理 1 标记处置 2标记忽略 */
+  HandleStatus?: number;
+  /** 告警对象id */
+  AlarmId?: number;
+  /** 桶地域码值 */
+  BucketRegionCode?: string;
+  /** 数据识别分类详情 */
+  CategoryDetails?: CosIdentifyCategoryDetail[];
+}
+
+/** 告警或者风险id信息 */
+declare interface CosAlarmRiskIdInfo {
+  /** 告警id */
+  AlarmRiskId: number;
+  /** 租户id */
+  AppId: number;
+}
+
+/** cos每日告警/风险信息 */
+declare interface CosAlarmTrendInfo {
+  /** 当前日期字符串格式 */
+  CurrentDateStr?: string;
+  /** 当前日期总数 */
+  CurrentDayCount?: number;
+  /** 当天告警分类详情 */
+  CurrentDayOverView?: CosRiskInfo[];
+}
+
+/** cos审计资产数据识别详情 */
+declare interface CosAssetDataScanDetail {
+  /** 识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败 */
+  Status?: number;
+  /** 识别进度 */
+  Progress?: number;
+  /** 最近扫描时间 */
+  LatestScanTime?: number;
+  /** 识别失败信息 */
+  ErrorInfo?: string;
+  /** 识别结果分类详情 */
+  CategoryDetails?: CosIdentifyCategoryDetail[];
+}
+
+/** cos审计文件数据识别信息 */
+declare interface CosAssetFileIdentifyInfo {
+  /** 文件名称 */
+  FileName?: string;
+  /** 文件路径 */
+  DirName?: string;
+  /** 分类数据项详情 */
+  CategoryDetails?: CosIdentifyCategoryDetail[];
+}
+
+/** Cos资产信息 */
+declare interface CosAssetInfo {
+  /** appid */
+  AppId?: number;
+  /** cos桶名 */
+  BucketName?: string;
+  /** cos region名 */
+  BucketRegion?: string;
+  /** 地域码值 */
+  BucketRegionCode?: string;
+  /** cos桶备注 */
+  BucketMarker?: string;
+  /** cos桶主账号所属者 */
+  BucketOwnerUin?: string;
+  /** cos主账号所属者昵称 */
+  BucketOwnerNickName?: string;
+  /** cos桶标签详情 */
+  BucketTagInfo?: string;
+  /** 安全建议1 暂无异常2 建议加固3 立即处理 */
+  BucketSecuritySuggestion?: number;
+  /** 告警列表 */
+  BucketAlarmList?: CosRiskAlarmInfo[];
+  /** 风险列表 */
+  BucketRiskList?: CosRiskAlarmInfo[];
+  /** 调用源ip数 */
+  BucketInvokeSourceIpCount?: number;
+  /** 访问策略 */
+  BucketAccessWay?: CosBucketAccessWay;
+  /** 创建时间Unix时间单位毫秒 */
+  CreateTime?: number;
+  /** 最后访问时间Unix时间单位毫秒 */
+  LastAccessTime?: number;
+  /** 存储桶id */
+  BucketId?: number;
+  /** 0 关闭1 开启 */
+  MonitorStatus?: number;
+  /** 数据识别扫描信息 */
+  DataScanInfo?: CosAssetDataScanDetail;
+}
+
+/** cos资产同步任务信息 */
+declare interface CosAssetSyncTaskInfo {
+  /** appid */
+  AppId?: number;
+  /** 同步任务id */
+  TaskId?: string;
+  /** 最后一次扫描时间 */
+  LastScanTime?: number;
+}
+
+/** cos审计支付信息 */
+declare interface CosAuditPayInfo {
+  /** APPID */
+  AppId?: number;
+  /** 订单状态 0未购买 1正常，2隔离，3销毁，6试用中，7到期 */
+  OrderStatus?: number;
+  /** 已购对象存储数量 */
+  BucketNum?: number;
+  /** 支付模式，0-后付费 1-预付费 */
+  PayMode?: number;
+  /** 是否单独购买，1-单独购买，2-被其它账号共享 */
+  IsSelfBuy?: number;
+  /** 订单开始时间 */
+  BeginTime?: string;
+  /** 订单到期时间 */
+  EndTime?: string;
+  /** 0-用户未设置,1-用户设置自动续费,2-用户设置不自动续费 */
+  AutoRenew?: number;
+  /** 订单时长 */
+  TimeSpan?: number;
+  /** 时长单位 */
+  TimeUnit?: string;
+  /** 资源id */
+  ResourceId?: string;
+  /** 公测结束时间 */
+  BetaEndTime?: string;
+  /** 系统当前时间 */
+  TimeNow?: string;
+  /** 是否分享给其它账号，1-是，2-否 */
+  IsShareToOther?: number;
+  /** uin */
+  Uin?: string;
+  /** 昵称 */
+  NickName?: string;
+  /** 共享的bucketIdSet */
+  BindBucket?: CosBucketId[];
+  /** 共享的appid */
+  SharedAppIdSet?: number[];
+  /** 是否已经开启后付费 */
+  PostPayStatus?: number;
+  /** 0：未做过试用期试用 1 ：做过试用期试用 */
+  IsTestUser?: number;
+  /** 剩余可用数 */
+  AvailableBucketNum?: number;
+  /** 已开启的监测存储桶数 */
+  MonitorBucketNum?: number;
+  /** 总的存储桶数 */
+  TotalBucketNum?: number;
+}
+
+/** cos风险识别桶访问规则 */
+declare interface CosBucketAccessWay {
+  /** 可访问方式：specify 指定用户anonymous 可匿名访问 */
+  AccessType?: string;
+  /** 用户数 */
+  AccessUserCount?: number;
+  /** ak数 */
+  AccessAkCount?: number;
+  /** 角色数 */
+  AccessRoleCount?: number;
+}
+
+/** 存储桶数量 */
+declare interface CosBucketBillingInfo {
+  /** appid */
+  AppId?: number;
+  /** uin */
+  OwnerUin?: string;
+  /** 昵称 */
+  OwnerNickName?: string;
+  /** 存储桶数量 */
+  BucketCount?: number;
+  /** 0 未购买 1 已单独购买 2 已被共享 */
+  BuyStatus?: number;
+  /** 共享账号appid */
+  ShareFromAppId?: number;
+  /** 共享账号uin */
+  ShareFromUin?: string;
+  /** 共享账号昵称 */
+  ShareFromNickName?: string;
+  /** 监控的存储桶数 */
+  MonitorBucketCount?: number;
+  /** 0 关闭 1 开启 */
+  IsAutoMonitor?: number;
+}
+
+/** 存储桶id */
+declare interface CosBucketId {
+  /** appid */
+  AppId?: string;
+  /** bucket id集合 */
+  BucketIdSet?: string[];
+}
+
+/** cos存储桶详情信息 */
+declare interface CosBucketInfo {
+  /** appid信息 */
+  AppId: number | null;
+  /** 存储桶名 */
+  BucketName: string | null;
+  /** 地域信息 */
+  BucketRegion?: string;
+  /** 地域码值 */
+  BucketRegionCode?: string;
+  /** 备注 */
+  BucketMarker?: string;
+}
+
+/** cos存储桶任务信息 */
+declare interface CosBucketTaskInfo {
+  /** appid */
+  AppId?: number;
+  /** 存储桶名 */
+  BucketName?: string;
+  /** 任务id */
+  TaskId?: string;
+  /** 最后一次扫描时间 */
+  LastScanTime?: number;
+}
+
+/** cos字典信息 */
+declare interface CosDictionary {
+  /** 字典id */
+  DictId?: number;
+  /** 字典名称 */
+  DictName?: string;
+}
+
+/** cos数据识别结果分类详情 */
+declare interface CosIdentifyCategoryDetail {
+  /** 分类id */
+  CategoryId?: number;
+  /** 分类名称 */
+  CategoryName?: string;
+  /** 数据项集合 */
+  RuleSet?: CosIdentifyRuleDetail[];
+}
+
+/** cos数据项详情 */
+declare interface CosIdentifyRuleDetail {
+  /** 数据项id */
+  RuleId?: number;
+  /** 数据项名称 */
+  RuleName?: string;
+  /** 敏感级别id */
+  LevelId?: number;
+  /** 敏感级别名称 */
+  LevelName?: string;
+  /** 敏感程度 */
+  LevelScore?: number;
+}
+
+/** cos调用详情信息 */
+declare interface CosInvokeDetailInfo {
+  /** 调用时间 */
+  InvokeTimestamp: number;
+  /** 请求id */
+  InvokeRequestId: string;
+  /** 调用内容 */
+  InvokeContent: string;
+}
+
+/** cos调用源ip vpc信息 */
+declare interface CosInvokeIpVpcInfo {
+  /** vpc所属uin */
+  Uin?: string;
+  /** vpc所属appid */
+  AppId?: number;
+  /** 昵称 */
+  NickName?: string;
+  /** vpcid信息 */
+  VpcId?: string;
+  /** vpc名称 */
+  VpcName?: string;
+}
+
+/** cos调用日志 */
+declare interface CosInvokeLog {
+  /** 调用时间戳 */
+  InvokeTimestamp?: number;
+  /** 请求id */
+  RequestId?: string;
+  /** 请求内容 base64 json 结构 */
+  RequestContent?: string;
+}
+
+/** cos概览页面数据结构 */
+declare interface CosOverview {
+  /** 资产总数 */
+  AssetCount?: number;
+  /** 需要立即处理的资产数 */
+  AlarmAssetCount?: number;
+  /** 需要加固的资产数 */
+  RiskAssetCount?: number;
+  /** 告警总数 */
+  AlarmCount?: number;
+  /** 当日新增告警总数 */
+  IncrementAlarmCount?: number;
+  /** 风险总数 */
+  RiskCount?: number;
+  /** 当日新增告警总数 */
+  IncrementRiskCount?: number;
+  /** 风险top详情 */
+  RiskTop?: CosRiskInfo[];
+  /** 告警风险top */
+  AlarmTop?: CosRiskInfo[];
+}
+
+/** cos权限信息 */
+declare interface CosPermissionInfo {
+  /** 权限来源 */
+  PermissionSource?: string;
+  /** 权限内容 */
+  PermissionContent?: string;
+  /** 授权资源 */
+  GrantResource?: string;
+  /** 授权动作 */
+  GrantAction?: string;
+  /** 授权条件 */
+  GrantCondition?: string;
+}
+
+/** cos策略信息 */
+declare interface CosPolicyInfo {
+  /** 策略名称 */
+  PolicyName: string;
+  /** 策略类型PolicyType：1 告警策略 2 风险策略 3 白名单策略 4 ip隐藏策略 */
+  PolicyType: number;
+  /** system:系统内置 user:用户自定义 */
+  PolicySource: number;
+  /** 策略内容 */
+  PolicyContent: string;
+  /** 0 关闭1 开启 */
+  PolicyStatus: number;
+  /** 策略分类 */
+  PolicyAbnormalType: number;
+  /** 风险级别 */
+  RiskLevel: number;
+  /** 策略id */
+  PolicyId?: number;
+  /** 创建时间 */
+  PolicyCreateTime?: number;
+  /** 更新时间 */
+  PolicyUpdateTime?: number;
+  /** 策略近七天命中次数 */
+  PolicyHitCount?: number;
+  /** 告警内容hash */
+  PolicyContentHash?: string;
+  /** 关联账户数 */
+  RelAccountCount?: number;
+  /** 关联账号uin */
+  RelAccountUin?: string;
+  /** 关联账号名 */
+  RelAccountName?: string;
+  /** 描述信息 */
+  PolicyDescription?: string;
+  /** 备注信息 */
+  PolicyMarker?: string;
+  /** appid */
+  AppId?: number;
+  /** 多账号场景下的id集合 */
+  PolicyIdSet?: number[];
+  /** 是否处置历史数据状态 0 无须处置 1 需要处置 2 已处置 */
+  PolicyHistoryHandleStatus?: number;
+  /** 系统策略编辑状态 */
+  SystemPolicyEditStatus?: number;
+}
+
+/** 风险接口情况 */
+declare interface CosRiskActionInfo {
+  /** 接口名 */
+  ActionName?: string;
+  /** 接口名中文 */
+  ActionNameCn?: string;
+  /** 调用次数 */
+  InvokeCount?: number;
+  /** 最后访问时间Unix时间单位毫秒 */
+  ActionAccessTime?: number;
+}
+
+/** cos风险告警信息 */
+declare interface CosRiskAlarmInfo {
+  /** 策略类型枚举值 */
+  PolicyType?: number;
+  /** 策略名 */
+  PolicyTypeName?: string;
+  /** 策略类型对应的策略数量 */
+  PolicyCount?: number;
+}
+
+/** 受影响的存储桶信息 */
+declare interface CosRiskBucketInfo {
+  /** appid */
+  AppId?: number;
+  /** 桶名 */
+  BucketName?: string;
+  /** 桶地域 */
+  BucketRegion?: string;
+  /** 桶备注信息 */
+  BucketMarker?: string;
+  /** 桶uin */
+  BucketUin?: string;
+  /** uin昵称 */
+  BucketNickName?: string;
+  /** uin主账号昵称 */
+  BucketMainNickName?: string;
+  /** uin身份 */
+  BucketIdentify?: number;
+  /** 风险检出时间Unix时间单位毫秒 */
+  LastScanTimestamp?: number;
+  /** 状态信息 */
+  HandleStatus?: number;
+  /** 风险名称 */
+  PolicyName?: string;
+  /** 风险类型 */
+  PolicyType?: number;
+  /** 策略id */
+  PolicyId?: number;
+  /** 策略级别 */
+  PolicyLevel?: number;
+  /** 策略描述 */
+  PolicyDescription?: string;
+  /** 访问方式 */
+  BucketAccessWay?: string;
+  /** 标签信息 */
+  BucketTagInfo?: string;
+  /** 风险id */
+  RiskId?: number;
+  /** cos地域码值 */
+  BucketRegionCode?: string;
+  /** 是否开启自动监测状态 0 关闭 1 开启 */
+  BucketMonitorStatus?: number;
+}
+
+/** cos风险详情 */
+declare interface CosRiskInfo {
+  /** 策略类型码值 */
+  PolicyType?: number;
+  /** 策略分类名 */
+  PolicyTypeName?: string;
+  /** 命中策略总数 */
+  PolicyCount?: number;
+}
+
+/** 对象存储风险趋势图 */
+declare interface CosRiskTrendInfo {
+  /** 当前日期 */
+  CurrentDateStr?: string;
+  /** 风险数据信息 */
+  RiskDataSet?: CosRiskInfo[];
+}
+
+/** 风险视角风险列表 */
+declare interface CosRiskViewInfo {
+  /** appid */
+  AppId?: number;
+  /** 策略名称 */
+  PolicyName?: string;
+  /** 策略id */
+  PolicyId?: string;
+  /** 策略分类 */
+  PolicyType?: number;
+  /** 策略风险等级 */
+  PolicyRiskLevel?: number;
+  /** 策略描述 */
+  PolicyDescription?: string;
+  /** 待处理的桶数 */
+  HandleBucketCount?: number;
+  /** 最近风险检出时间Unix时间单位毫秒 */
+  LastScanTimestamp?: number;
+}
+
+/** Cos桶关联角色列表信息 */
+declare interface CosRoleAccessInfo {
+  /** 角色ID */
+  RoleId?: string;
+  /** 角色名称 */
+  RoleName?: string;
+  /** 角色描述 */
+  RoleDescription?: string;
+  /** 可访问权限数 */
+  PermissionCount?: number;
+  /** 策略创建时间 */
+  CreateTime?: number;
+}
+
+/** 对象存储调用源ip信息 */
+declare interface CosSourceIpInfo {
+  /** 调用UA */
+  UA?: string[];
+  /** 调用vpc信息 */
+  VpcInfo?: CosInvokeIpVpcInfo;
+}
+
 /** 生效机器范围，用于指定凭证在哪些机器上生效 */
 declare interface CredentialEffectScope {
   /** 是否排除模式枚举值：0：包含模式（仅Instances中的机器生效），此时Instances必填1：排除模式（Instances中的机器不生效，其余机器生效），此时Instances可选（空列表表示全部机器生效） */
@@ -3386,7 +3986,7 @@ declare interface RegionConfig {
   Region?: string | null;
   /** 地域中文 */
   RegionName?: string | null;
-  /** 是否国外 */
+  /** 是否境外 */
   Foreign?: number | null;
   /** 地域码 */
   Code?: number | null;
@@ -4861,6 +5461,60 @@ declare interface CreateAccessKeySyncTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateCosAssetSyncTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 1 同步所有 2 仅同步资产数 */
+  SyncType?: number;
+}
+
+declare interface CreateCosAssetSyncTaskResponse {
+  /** 同步任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCosObjectScanTaskRequest {
+  /** 1: 敏感数据识别 2:恶意文件扫描 */
+  TaskType: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 存储桶列表 */
+  BucketSet?: string[];
+}
+
+declare interface CreateCosObjectScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCosPolicyRequest {
+  /** 策略信息 */
+  CosPolicyInfo: CosPolicyInfo;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateCosPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCosRiskScanTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 需要扫描的桶列表 */
+  BucketNameSet?: CosBucketInfo[];
+  /** 是否扫描全部的桶 */
+  IsScanAllBucket?: boolean;
+}
+
+declare interface CreateCosRiskScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDomainAndIpRequest {
   /** 公网IP/域名 */
   Content: string[];
@@ -5165,6 +5819,28 @@ declare interface CreateSkillScanResponse {
   Status?: string;
   /** 可读的操作结果描述 */
   Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCosAkAssetRequest {
+  /** 要删除的cos ak集合 */
+  CosAkSet: CosAkSet[];
+}
+
+declare interface DeleteCosAkAssetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCosPolicyRequest {
+  /** 要删除的策略集合 */
+  PolicyIdSet?: number[];
+  /** 是否删除所有 */
+  IsDeleteAll?: number;
+}
+
+declare interface DeleteCosPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5605,6 +6281,24 @@ declare interface DescribeAssumeRoleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBucketInvokeIpListRequest {
+  /** appid */
+  RelAppId: number;
+  /** 桶名 */
+  BucketName: string;
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeBucketInvokeIpListResponse {
+  /** ip信息 */
+  Data?: CosSourceIpInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCFWAssetStatisticsRequest {
 }
 
@@ -5835,6 +6529,434 @@ declare interface DescribeConfigCheckRulesResponse {
   DispositionTypeList?: AttributeOptionSet[];
   /** 检查类型选项 */
   CheckTypeList?: AttributeOptionSet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAccessPermissionRequest {
+  /** 关联的appid */
+  RelAppId: number;
+  /** 桶名 */
+  BucketName: string;
+  /** 需要查看的uin */
+  RelUin: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosAccessPermissionResponse {
+  /** cos权限信息 */
+  Data?: CosPermissionInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAccessPermissionsRequest {
+  /** appid */
+  RelAppId: number;
+  /** 桶名 */
+  BucketName: string;
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosAccessPermissionsResponse {
+  /** 返回数据列表 */
+  Data?: CosAccessInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosActionListRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosActionListResponse {
+  /** 列表 */
+  Data?: CosActionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAkAssetRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 查询过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosAkAssetResponse {
+  /** 总数 */
+  Total?: number;
+  /** ak资产列表 */
+  Data?: CosAkAssetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAkInvokeIpListRequest {
+  /** appid */
+  RelAppId: number;
+  /** ak */
+  Ak: string;
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosAkInvokeIpListResponse {
+  /** ip信息 */
+  Data?: CosSourceIpInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAlarmListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosAlarmListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 告警列表 */
+  Data?: CosAlarmInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAlarmTrendDataRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 需要查看多久的时间 */
+  LastDays?: number;
+}
+
+declare interface DescribeCosAlarmTrendDataResponse {
+  /** 告警趋势信息 */
+  CosAlarmTrendInfo?: CosAlarmTrendInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAssetRequest {
+  /** 请求过滤器 */
+  Filter: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeCosAssetResponse {
+  /** 总数 */
+  Total?: number;
+  /** 桶信息 */
+  Data?: CosAssetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAssetSyncTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeCosAssetSyncTaskResponse {
+  /** 数据信息 */
+  Data?: CosAssetSyncTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAuditAppIdListRequest {
+}
+
+declare interface DescribeCosAuditAppIdListResponse {
+  /** 已购买appid集合 */
+  Data?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAuditDictionaryListRequest {
+  /** 字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项） */
+  DictType: string;
+  /** 筛选条件 */
+  Filters?: WhereFilter[];
+}
+
+declare interface DescribeCosAuditDictionaryListResponse {
+  /** 结果集 */
+  DataSet?: CosDictionary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosAuditPayInfoRequest {
+}
+
+declare interface DescribeCosAuditPayInfoResponse {
+  /** cos审计支付信息 */
+  CosAuditPayInfo?: CosAuditPayInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosBucketBillingInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeCosBucketBillingInfoResponse {
+  /** 存储桶计费信息 */
+  CosBucketBillingInfoSet?: CosBucketBillingInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosBucketListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosBucketListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 资产信息 */
+  Data?: CosAssetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosBucketRiskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosBucketRiskResponse {
+  /** 总数 */
+  Total?: number;
+  /** 列表 */
+  Data?: CosRiskBucketInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosIdentifyFileListRequest {
+  /** 存储桶名 */
+  BucketName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 0：没有识别结果 1：有识别结果 */
+  ResultStatus?: number;
+}
+
+declare interface DescribeCosIdentifyFileListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 结果集 */
+  DataSet?: CosAssetFileIdentifyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosInvokeUaRequest {
+  /** appid */
+  RelAppId: number;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosInvokeUaResponse {
+  /** 总数 */
+  Total?: number;
+  /** 文件列表 */
+  Data?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosIpInvokeLogRequest {
+  /** appid */
+  RelAppId: number;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosIpInvokeLogResponse {
+  /** 总数 */
+  Total?: number;
+  /** 请求日志数据 */
+  Data?: CosInvokeLog[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosIpInvokeRecordFileRequest {
+  /** appid */
+  RelAppId: number;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosIpInvokeRecordFileResponse {
+  /** 总数 */
+  Total?: number;
+  /** 文件列表 */
+  Data?: string[];
+  /** 文件列表详情 */
+  DataSet?: CosAssetFileIdentifyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosOverviewRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤信息 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosOverviewResponse {
+  /** cos概览 */
+  CosOverview?: CosOverview;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosPolicyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosPolicyResponse {
+  /** 策略总数 */
+  Total?: number;
+  /** 策略信息 */
+  Data?: CosPolicyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosRiskActionListRequest {
+  /** appid */
+  RelAppId: number;
+  /** 策略id */
+  PolicyId: number;
+  /** 桶名 */
+  BucketName: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosRiskActionListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 列表 */
+  Data?: CosRiskActionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosRiskEvidenceRequest {
+  /** appid */
+  RelAppId: number;
+  /** 策略id */
+  PolicyId: number;
+  /** 存储桶名 */
+  BucketName: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosRiskEvidenceResponse {
+  /** 证据信息 */
+  Evidences?: CosPermissionInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosRiskScanTaskRequest {
+  /** 需要查看的存储桶详情 */
+  BucketInfoSet?: CosBucketInfo[];
+}
+
+declare interface DescribeCosRiskScanTaskResponse {
+  /** cos桶任务详情 */
+  BucketTaskInfoSet?: CosBucketTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosRoleAccessPermissionRequest {
+  /** 关联的appid */
+  RelAppId: number;
+  /** 需要查看的角色id */
+  RelRoleId: string;
+  /** 桶名 */
+  BucketName: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosRoleAccessPermissionResponse {
+  /** cos权限信息 */
+  Data?: CosPermissionInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosRoleAccessPermissionsRequest {
+  /** 存储桶所属appid */
+  RelAppId: number;
+  /** 存储桶名 */
+  BucketName: string;
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosRoleAccessPermissionsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 角色详情 */
+  Data?: CosRoleAccessInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosSourceIpRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCosSourceIpResponse {
+  /** 列表信息 */
+  Data?: CosSourceIpInfo[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6881,6 +8003,30 @@ declare interface DescribeHighBaseLineRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIpInvokeRecordDetailRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeIpInvokeRecordDetailResponse {
+  /** 调用详情信息 */
+  InvokeDetailInfo?: CosInvokeDetailInfo[];
+  /** 调用权限相关 */
+  InvokePermission?: CosPermissionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIpInvokeRecordRequest {
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeIpInvokeRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKeySandboxCredentialListRequest {
   /** 过滤条件列表，支持的过滤条件如下：CredentialName - 凭证名称（模糊匹配）CredentialType - 凭证类型（精确匹配），取值：access、sts */
   Filter?: Filter;
@@ -7027,6 +8173,20 @@ declare interface DescribeOtherCloudAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePolicyHitDataRequest {
+  /** 查看的日期时间戳 */
+  IndexTimestamp: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribePolicyHitDataResponse {
+  /** 策略命中详情信息 */
+  PolicyHitDetail?: CosRiskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePublicIpAssetsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -7071,6 +8231,24 @@ declare interface DescribeRepositoryImageAssetsResponse {
   Total?: number;
   /** region列表 */
   RegionList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskBucketListRequest {
+  /** 关联的appid */
+  RelAppId: number;
+  /** 规则id */
+  PolicyId: string;
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskBucketListResponse {
+  /** 总数 */
+  Total?: number;
+  /** 受影响的存储桶 */
+  Data?: CosRiskBucketInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7357,6 +8535,22 @@ declare interface DescribeRiskDetailListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRiskItemListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface DescribeRiskItemListResponse {
+  /** 列表信息 */
+  Data?: CosRiskViewInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRiskRuleDetailRequest {
   /** 风险规则ID */
   RiskRuleId: string;
@@ -7399,6 +8593,20 @@ declare interface DescribeRiskRulesResponse {
   RiskRuleList?: RiskRuleItem[];
   /** 实例类型选项 */
   InstanceTypeList?: AttributeOptionSet[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRiskTrendDataRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 指定的日期 */
+  LastDays?: number;
+}
+
+declare interface DescribeRiskTrendDataResponse {
+  /** 风险趋势数据 */
+  CosRiskTrendData?: CosRiskTrendInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7889,6 +9097,46 @@ declare interface DownloadDspmExportLogResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAlarmRiskStatusRequest {
+  /** 告警或者风险id */
+  AlarmRiskIdSet: CosAlarmRiskIdInfo[];
+  /** 风险或告警状态 1 告警 2风险 */
+  AlarmRiskType: number;
+  /** 处置状态 */
+  HandleStatus: number;
+}
+
+declare interface ModifyAlarmRiskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCosAuditMonitorAccountRequest {
+  /** 资源id */
+  ResourceId: string;
+  /** 需要监测的appid信息 */
+  MonitorAppIdSet?: number[];
+  /** 选择存储桶映射关系 */
+  BindBucket?: CosBucketId[];
+}
+
+declare interface ModifyCosAuditMonitorAccountResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCosMarkInfoRequest {
+  /** 需要修改的存储桶列表 */
+  BucketNameSet: CosBucketInfo[];
+  /** 备注信息 */
+  MarkInfo: string;
+}
+
+declare interface ModifyCosMarkInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDspmAccessRecordRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -8141,6 +9389,18 @@ declare interface ModifyOrganizationAccountStatusRequest {
 declare interface ModifyOrganizationAccountStatusResponse {
   /** 返回值为0，则修改成功 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPolicyStatusRequest {
+  /** 策略id集合 */
+  PolicyIdSet: number[];
+  /** 状态值 */
+  Status: number;
+}
+
+declare interface ModifyPolicyStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8410,6 +9670,14 @@ declare interface Csip {
   CreateAccessKeyCheckTask(data?: CreateAccessKeyCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeyCheckTaskResponse>;
   /** 创建访问密钥的资产同步任务 {@link CreateAccessKeySyncTaskRequest} {@link CreateAccessKeySyncTaskResponse} */
   CreateAccessKeySyncTask(data?: CreateAccessKeySyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeySyncTaskResponse>;
+  /** 创建对象存储资产同步任务 {@link CreateCosAssetSyncTaskRequest} {@link CreateCosAssetSyncTaskResponse} */
+  CreateCosAssetSyncTask(data?: CreateCosAssetSyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosAssetSyncTaskResponse>;
+  /** 创建cos文件内容扫描任务 {@link CreateCosObjectScanTaskRequest} {@link CreateCosObjectScanTaskResponse} */
+  CreateCosObjectScanTask(data: CreateCosObjectScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosObjectScanTaskResponse>;
+  /** 创建cos策略 {@link CreateCosPolicyRequest} {@link CreateCosPolicyResponse} */
+  CreateCosPolicy(data: CreateCosPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosPolicyResponse>;
+  /** 创建对象存储风险监测任务 {@link CreateCosRiskScanTaskRequest} {@link CreateCosRiskScanTaskResponse} */
+  CreateCosRiskScanTask(data?: CreateCosRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosRiskScanTaskResponse>;
   /** 创建域名、ip相关信息 {@link CreateDomainAndIpRequest} {@link CreateDomainAndIpResponse} */
   CreateDomainAndIp(data: CreateDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDomainAndIpResponse>;
   /** 创建Dspm访问记录导出任务 {@link CreateDspmAccessExportJobRequest} {@link CreateDspmAccessExportJobResponse} */
@@ -8436,6 +9704,10 @@ declare interface Csip {
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
   /** 上传 Skill 触发安全检测 {@link CreateSkillScanRequest} {@link CreateSkillScanResponse} */
   CreateSkillScan(data: CreateSkillScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillScanResponse>;
+  /** 删除cosak资产 {@link DeleteCosAkAssetRequest} {@link DeleteCosAkAssetResponse} */
+  DeleteCosAkAsset(data: DeleteCosAkAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosAkAssetResponse>;
+  /** 删除cos策略 {@link DeleteCosPolicyRequest} {@link DeleteCosPolicyResponse} */
+  DeleteCosPolicy(data?: DeleteCosPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosPolicyResponse>;
   /** 删除域名和ip请求 {@link DeleteDomainAndIpRequest} {@link DeleteDomainAndIpResponse} */
   DeleteDomainAndIp(data?: DeleteDomainAndIpRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainAndIpResponse>;
   /** 删除Dspm申请单 {@link DeleteDspmApplyOrderRequest} {@link DeleteDspmApplyOrderResponse} */
@@ -8484,6 +9756,8 @@ declare interface Csip {
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
   /** 查询是否绑定角色 {@link DescribeAssumeRoleRequest} {@link DescribeAssumeRoleResponse} */
   DescribeAssumeRole(data?: DescribeAssumeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssumeRoleResponse>;
+  /** 查看存储桶调用源ip列表 {@link DescribeBucketInvokeIpListRequest} {@link DescribeBucketInvokeIpListResponse} */
+  DescribeBucketInvokeIpList(data: DescribeBucketInvokeIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBucketInvokeIpListResponse>;
   /** 云防资产中心统计数据 {@link DescribeCFWAssetStatisticsRequest} {@link DescribeCFWAssetStatisticsResponse} */
   DescribeCFWAssetStatistics(data?: DescribeCFWAssetStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCFWAssetStatisticsResponse>;
   /** 资产风险概览统计接口 {@link DescribeCSIPRiskStatisticsRequest} {@link DescribeCSIPRiskStatisticsResponse} */
@@ -8502,6 +9776,60 @@ declare interface Csip {
   DescribeClusterPodAssets(data?: DescribeClusterPodAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPodAssetsResponse>;
   /** 云资源配置风险规则列表 {@link DescribeConfigCheckRulesRequest} {@link DescribeConfigCheckRulesResponse} */
   DescribeConfigCheckRules(data?: DescribeConfigCheckRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigCheckRulesResponse>;
+  /** 查看可访问权限列表 {@link DescribeCosAccessPermissionRequest} {@link DescribeCosAccessPermissionResponse} */
+  DescribeCosAccessPermission(data: DescribeCosAccessPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAccessPermissionResponse>;
+  /** 访问权限列表 {@link DescribeCosAccessPermissionsRequest} {@link DescribeCosAccessPermissionsResponse} */
+  DescribeCosAccessPermissions(data: DescribeCosAccessPermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAccessPermissionsResponse>;
+  /** 查看cos操作名列表 {@link DescribeCosActionListRequest} {@link DescribeCosActionListResponse} */
+  DescribeCosActionList(data?: DescribeCosActionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosActionListResponse>;
+  /** 查看cos关联ak资产信息 {@link DescribeCosAkAssetRequest} {@link DescribeCosAkAssetResponse} */
+  DescribeCosAkAsset(data?: DescribeCosAkAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAkAssetResponse>;
+  /** 查看cos ak调用源ip列表 {@link DescribeCosAkInvokeIpListRequest} {@link DescribeCosAkInvokeIpListResponse} */
+  DescribeCosAkInvokeIpList(data: DescribeCosAkInvokeIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAkInvokeIpListResponse>;
+  /** 查看cos告警列表 {@link DescribeCosAlarmListRequest} {@link DescribeCosAlarmListResponse} */
+  DescribeCosAlarmList(data?: DescribeCosAlarmListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAlarmListResponse>;
+  /** 查看cos告警趋势图 {@link DescribeCosAlarmTrendDataRequest} {@link DescribeCosAlarmTrendDataResponse} */
+  DescribeCosAlarmTrendData(data?: DescribeCosAlarmTrendDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAlarmTrendDataResponse>;
+  /** 查看cos资产列表 {@link DescribeCosAssetRequest} {@link DescribeCosAssetResponse} */
+  DescribeCosAsset(data: DescribeCosAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAssetResponse>;
+  /** 查看对象存储资产同步任务 {@link DescribeCosAssetSyncTaskRequest} {@link DescribeCosAssetSyncTaskResponse} */
+  DescribeCosAssetSyncTask(data?: DescribeCosAssetSyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAssetSyncTaskResponse>;
+  /** 查看该appid下已购买的appid集合 {@link DescribeCosAuditAppIdListRequest} {@link DescribeCosAuditAppIdListResponse} */
+  DescribeCosAuditAppIdList(data?: DescribeCosAuditAppIdListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAuditAppIdListResponse>;
+  /** 查询cos审计字典信息列表 {@link DescribeCosAuditDictionaryListRequest} {@link DescribeCosAuditDictionaryListResponse} */
+  DescribeCosAuditDictionaryList(data: DescribeCosAuditDictionaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAuditDictionaryListResponse>;
+  /** 查看对象存储审计支付信息 {@link DescribeCosAuditPayInfoRequest} {@link DescribeCosAuditPayInfoResponse} */
+  DescribeCosAuditPayInfo(data?: DescribeCosAuditPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosAuditPayInfoResponse>;
+  /** 获取存储桶计费信息 {@link DescribeCosBucketBillingInfoRequest} {@link DescribeCosBucketBillingInfoResponse} */
+  DescribeCosBucketBillingInfo(data?: DescribeCosBucketBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosBucketBillingInfoResponse>;
+  /** 查询cos存储桶列表 {@link DescribeCosBucketListRequest} {@link DescribeCosBucketListResponse} */
+  DescribeCosBucketList(data?: DescribeCosBucketListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosBucketListResponse>;
+  /** 查看存储桶风险信息 {@link DescribeCosBucketRiskRequest} {@link DescribeCosBucketRiskResponse} */
+  DescribeCosBucketRisk(data?: DescribeCosBucketRiskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosBucketRiskResponse>;
+  /** 查询cos文件数据识别结果列表 {@link DescribeCosIdentifyFileListRequest} {@link DescribeCosIdentifyFileListResponse} */
+  DescribeCosIdentifyFileList(data: DescribeCosIdentifyFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosIdentifyFileListResponse>;
+  /** 查看cos调用ua {@link DescribeCosInvokeUaRequest} {@link DescribeCosInvokeUaResponse} */
+  DescribeCosInvokeUa(data: DescribeCosInvokeUaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosInvokeUaResponse>;
+  /** 查看调用记录日志 {@link DescribeCosIpInvokeLogRequest} {@link DescribeCosIpInvokeLogResponse} */
+  DescribeCosIpInvokeLog(data: DescribeCosIpInvokeLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosIpInvokeLogResponse>;
+  /** 查看cos调用记录文件列表 {@link DescribeCosIpInvokeRecordFileRequest} {@link DescribeCosIpInvokeRecordFileResponse} */
+  DescribeCosIpInvokeRecordFile(data: DescribeCosIpInvokeRecordFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosIpInvokeRecordFileResponse>;
+  /** 查看cos统计概览 {@link DescribeCosOverviewRequest} {@link DescribeCosOverviewResponse} */
+  DescribeCosOverview(data?: DescribeCosOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosOverviewResponse>;
+  /** 告警策略列表 {@link DescribeCosPolicyRequest} {@link DescribeCosPolicyResponse} */
+  DescribeCosPolicy(data?: DescribeCosPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosPolicyResponse>;
+  /** 查看存储桶风险接口列表 {@link DescribeCosRiskActionListRequest} {@link DescribeCosRiskActionListResponse} */
+  DescribeCosRiskActionList(data: DescribeCosRiskActionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRiskActionListResponse>;
+  /** 查看风险证据信息 {@link DescribeCosRiskEvidenceRequest} {@link DescribeCosRiskEvidenceResponse} */
+  DescribeCosRiskEvidence(data: DescribeCosRiskEvidenceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRiskEvidenceResponse>;
+  /** 查看cos风险监测任务 {@link DescribeCosRiskScanTaskRequest} {@link DescribeCosRiskScanTaskResponse} */
+  DescribeCosRiskScanTask(data?: DescribeCosRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRiskScanTaskResponse>;
+  /** 查看角色可访问权限列表 {@link DescribeCosRoleAccessPermissionRequest} {@link DescribeCosRoleAccessPermissionResponse} */
+  DescribeCosRoleAccessPermission(data: DescribeCosRoleAccessPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRoleAccessPermissionResponse>;
+  /** 查看cos桶角色相关权限 {@link DescribeCosRoleAccessPermissionsRequest} {@link DescribeCosRoleAccessPermissionsResponse} */
+  DescribeCosRoleAccessPermissions(data: DescribeCosRoleAccessPermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosRoleAccessPermissionsResponse>;
+  /** 获取调用源ip列表 {@link DescribeCosSourceIpRequest} {@link DescribeCosSourceIpResponse} */
+  DescribeCosSourceIp(data?: DescribeCosSourceIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosSourceIpResponse>;
   /** db资产详情 {@link DescribeDbAssetInfoRequest} {@link DescribeDbAssetInfoResponse} */
   DescribeDbAssetInfo(data: DescribeDbAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetInfoResponse>;
   /** 数据库资产列表 {@link DescribeDbAssetsRequest} {@link DescribeDbAssetsResponse} */
@@ -8604,6 +9932,10 @@ declare interface Csip {
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询云边界分析-暴露路径下主机节点的高危基线风险列表 {@link DescribeHighBaseLineRiskListRequest} {@link DescribeHighBaseLineRiskListResponse} */
   DescribeHighBaseLineRiskList(data?: DescribeHighBaseLineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighBaseLineRiskListResponse>;
+  /** 查看ip调用记录详情 {@link DescribeIpInvokeRecordRequest} {@link DescribeIpInvokeRecordResponse} */
+  DescribeIpInvokeRecord(data?: DescribeIpInvokeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInvokeRecordResponse>;
+  /** 调用记录详情 {@link DescribeIpInvokeRecordDetailRequest} {@link DescribeIpInvokeRecordDetailResponse} */
+  DescribeIpInvokeRecordDetail(data?: DescribeIpInvokeRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInvokeRecordDetailResponse>;
   /** 查询凭证详情 {@link DescribeKeySandboxCredentialRequest} {@link DescribeKeySandboxCredentialResponse} */
   DescribeKeySandboxCredential(data: DescribeKeySandboxCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeySandboxCredentialResponse>;
   /** 查询凭证列表 {@link DescribeKeySandboxCredentialListRequest} {@link DescribeKeySandboxCredentialListResponse} */
@@ -8618,10 +9950,14 @@ declare interface Csip {
   DescribeOrganizationUserInfo(data?: DescribeOrganizationUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationUserInfoResponse>;
   /** 资产列表 {@link DescribeOtherCloudAssetsRequest} {@link DescribeOtherCloudAssetsResponse} */
   DescribeOtherCloudAssets(data?: DescribeOtherCloudAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOtherCloudAssetsResponse>;
+  /** 查看风险趋势图详情数据 {@link DescribePolicyHitDataRequest} {@link DescribePolicyHitDataResponse} */
+  DescribePolicyHitData(data: DescribePolicyHitDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyHitDataResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 仓库镜像列表 {@link DescribeRepositoryImageAssetsRequest} {@link DescribeRepositoryImageAssetsResponse} */
   DescribeRepositoryImageAssets(data?: DescribeRepositoryImageAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryImageAssetsResponse>;
+  /** 查看受影响的存储桶列表 {@link DescribeRiskBucketListRequest} {@link DescribeRiskBucketListResponse} */
+  DescribeRiskBucketList(data: DescribeRiskBucketListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskBucketListResponse>;
   /** 获取风险对应的调用记录 {@link DescribeRiskCallRecordRequest} {@link DescribeRiskCallRecordResponse} */
   DescribeRiskCallRecord(data: DescribeRiskCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCallRecordResponse>;
   /** 获取资产视角的配置风险列表 {@link DescribeRiskCenterAssetViewCFGRiskListRequest} {@link DescribeRiskCenterAssetViewCFGRiskListResponse} */
@@ -8644,10 +9980,14 @@ declare interface Csip {
   DescribeRiskCenterWebsiteRiskList(data?: DescribeRiskCenterWebsiteRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCenterWebsiteRiskListResponse>;
   /** 云配置风险详情列表 {@link DescribeRiskDetailListRequest} {@link DescribeRiskDetailListResponse} */
   DescribeRiskDetailList(data: DescribeRiskDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskDetailListResponse>;
+  /** 查看风险项视角列表 {@link DescribeRiskItemListRequest} {@link DescribeRiskItemListResponse} */
+  DescribeRiskItemList(data?: DescribeRiskItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskItemListResponse>;
   /** 云配置风险规则详情 {@link DescribeRiskRuleDetailRequest} {@link DescribeRiskRuleDetailResponse} */
   DescribeRiskRuleDetail(data: DescribeRiskRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskRuleDetailResponse>;
   /** 高级配置风险规则列表 {@link DescribeRiskRulesRequest} {@link DescribeRiskRulesResponse} */
   DescribeRiskRules(data?: DescribeRiskRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskRulesResponse>;
+  /** 查看风险趋势图信息 {@link DescribeRiskTrendDataRequest} {@link DescribeRiskTrendDataResponse} */
+  DescribeRiskTrendData(data?: DescribeRiskTrendDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskTrendDataResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
   /** 查询云边界分析扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
@@ -8692,6 +10032,12 @@ declare interface Csip {
   DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
   /** 下载导出日志 {@link DownloadDspmExportLogRequest} {@link DownloadDspmExportLogResponse} */
   DownloadDspmExportLog(data?: DownloadDspmExportLogRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDspmExportLogResponse>;
+  /** 风险或者告警处理 {@link ModifyAlarmRiskStatusRequest} {@link ModifyAlarmRiskStatusResponse} */
+  ModifyAlarmRiskStatus(data: ModifyAlarmRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmRiskStatusResponse>;
+  /** 修改cos审计监测账号 {@link ModifyCosAuditMonitorAccountRequest} {@link ModifyCosAuditMonitorAccountResponse} */
+  ModifyCosAuditMonitorAccount(data: ModifyCosAuditMonitorAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditMonitorAccountResponse>;
+  /** 修改对象存储备注信息 {@link ModifyCosMarkInfoRequest} {@link ModifyCosMarkInfoResponse} */
+  ModifyCosMarkInfo(data: ModifyCosMarkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosMarkInfoResponse>;
   /** 修改Dspm访问管理信息 {@link ModifyDspmAccessRecordRequest} {@link ModifyDspmAccessRecordResponse} */
   ModifyDspmAccessRecord(data?: ModifyDspmAccessRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAccessRecordResponse>;
   /** 修改Dspm审批单状态 {@link ModifyDspmApproveStatusRequest} {@link ModifyDspmApproveStatusResponse} */
@@ -8724,6 +10070,8 @@ declare interface Csip {
   ModifyDspmWhitelistStrategy(data?: ModifyDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmWhitelistStrategyResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
+  /** 修改策略状态 {@link ModifyPolicyStatusRequest} {@link ModifyPolicyStatusResponse} */
+  ModifyPolicyStatus(data: ModifyPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyStatusResponse>;
   /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */
   ModifyRiskCenterRiskStatus(data: ModifyRiskCenterRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterRiskStatusResponse>;
   /** 修改风险中心扫描任务 {@link ModifyRiskCenterScanTaskRequest} {@link ModifyRiskCenterScanTaskResponse} */

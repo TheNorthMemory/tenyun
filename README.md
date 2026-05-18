@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，14110+ 服务数</summary>
+<details><summary>共计 252+ 款产品，14156+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -192,7 +192,7 @@ cms | 内容安全 | 2019-03-21(6) |
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(63) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(175) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(219) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(3) |
@@ -252,7 +252,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(39) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(205) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(206) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
@@ -359,7 +359,7 @@ vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(448) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(218) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(219) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(182) | 2021-08-20(307) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(63) |

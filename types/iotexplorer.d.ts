@@ -3630,6 +3630,16 @@ declare interface DescribeInstanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLicenseOverviewRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeLicenseOverviewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLoRaFrequencyRequest {
   /** 频点唯一ID */
   FreqId?: string;
@@ -5787,6 +5797,8 @@ declare interface Iotexplorer {
   DescribeGatewaySubProducts(data: DescribeGatewaySubProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewaySubProductsResponse>;
   /** 获取实例详情 {@link DescribeInstanceRequest} {@link DescribeInstanceResponse} */
   DescribeInstance(data: DescribeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceResponse>;
+  /** 获取实例激活码详情 {@link DescribeLicenseOverviewRequest} {@link DescribeLicenseOverviewResponse} */
+  DescribeLicenseOverview(data: DescribeLicenseOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseOverviewResponse>;
   /** 获取LoRa自定义频点详情 {@link DescribeLoRaFrequencyRequest} {@link DescribeLoRaFrequencyResponse} */
   DescribeLoRaFrequency(data?: DescribeLoRaFrequencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoRaFrequencyResponse>;
   /** 查询产品数据模板 {@link DescribeModelDefinitionRequest} {@link DescribeModelDefinitionResponse} */

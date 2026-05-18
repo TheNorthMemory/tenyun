@@ -10722,7 +10722,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeProcedureTemplatesRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 任务流模板名字过滤条件，数组长度限制：100。 */
     Names?: string[];
@@ -10732,6 +10732,8 @@ declare namespace V20180717 {
     Offset?: number;
     /** 返回记录条数，默认值：10，最大值：100。 */
     Limit?: number;
+    /** 指定字段对返回结果进行生序或者降序Sort.Field 目前只支持 CreateTime 。Sort.Order 为 desc（降序）或者 asc（升序）入参限制：当前仅支持排序字段为CreateTime */
+    SortBy?: SortBy[];
   }
 
   interface DescribeProcedureTemplatesResponse {

@@ -7568,6 +7568,18 @@ declare interface ModifyObjectsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOwaspDomainUpdateStatusRequest {
+  /** 域名 */
+  Domain: string;
+  /** 新规则状态，0为关闭，1为开启，2为仅观察 */
+  UpdateStatus: number;
+}
+
+declare interface ModifyOwaspDomainUpdateStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOwaspRuleStatusRequest {
   /** 域名 */
   Domain: string;
@@ -8731,6 +8743,8 @@ declare interface Waf {
   ModifyObject(data: ModifyObjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectResponse>;
   /** 批量修改防护对象 {@link ModifyObjectsRequest} {@link ModifyObjectsResponse} */
   ModifyObjects(data: ModifyObjectsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyObjectsResponse>;
+  /** 修改更新规则的规则状态 {@link ModifyOwaspDomainUpdateStatusRequest} {@link ModifyOwaspDomainUpdateStatusResponse} */
+  ModifyOwaspDomainUpdateStatus(data: ModifyOwaspDomainUpdateStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspDomainUpdateStatusResponse>;
   /** 更新规则的开关 {@link ModifyOwaspRuleStatusRequest} {@link ModifyOwaspRuleStatusResponse} */
   ModifyOwaspRuleStatus(data: ModifyOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOwaspRuleStatusResponse>;
   /** 更新规则类型的防护模式 {@link ModifyOwaspRuleTypeActionRequest} {@link ModifyOwaspRuleTypeActionResponse} */

@@ -756,11 +756,11 @@ declare interface Instance {
   UsedResource?: ResourceInfo | null;
   /** 节点总资源 */
   TotalResource?: ResourceInfo | null;
-  /** 节点状态 注意：此字段为枚举值说明: DEPLOYING: 部署中RUNNING: 运行中 DEPLOY_FAILED: 部署失败RELEASING 释放中 RELEASED：已释放 EXCEPTION：异常DEBT_OR_EXPIRED: 欠费过期 */
+  /** 节点状态注意：此字段为枚举值说明:DEPLOYING: 部署中RUNNING: 运行中DEPLOY_FAILED: 部署失败RELEASING 释放中RELEASED：已释放EXCEPTION：异常DEBT_OR_EXPIRED: 欠费过期 */
   InstanceStatus?: string | null;
   /** 创建人 */
   SubUin?: string;
-  /** 创建时间: 注意：北京时间，比如: 2021-12-01 12:00:00 */
+  /** 创建时间:注意：北京时间，比如: 2021-12-01 12:00:00 */
   CreateTime?: string | null;
   /** 到期时间注意：北京时间，比如：2021-12-11 12:00:00 */
   ExpireTime?: string | null;
@@ -1738,6 +1738,10 @@ declare interface Service {
   SchedulingPolicy?: SchedulingPolicy;
   /** 外部的资源组信息，表示借调了哪些资源组的资源 */
   ExternalResourceGroups?: ResourceGroupInfo[];
+  /** 变更服务的子账户 */
+  Changer?: string;
+  /** 变更服务的子账户名称 */
+  ChangerName?: string;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -1854,6 +1858,10 @@ declare interface ServiceGroup {
   GatewayLogConfig?: LogConfig;
   /** 网关路由相关配置 */
   GatewayConfig?: GatewayConfig;
+  /** 变更服务的子账户 */
+  Changer?: string;
+  /** 变更服务的子账户名称 */
+  ChangerName?: string;
 }
 
 /** 推理服务在集群中的信息 */
@@ -3095,9 +3103,11 @@ declare interface DescribeBillingSpecsPriceResponse {
 declare interface DescribeBillingSpecsRequest {
   /** 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月 */
   ChargeType: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 枚举值：空、TRAIN、NOTEBOOK、INFERENCE或EMS */
   TaskType?: string;
-  /** 资源类型：["", "CALC", "CPU", "GPU", "GPU-SW"] */
+  /** 资源类型：[&quot;&quot;, &quot;CALC&quot;, &quot;CPU&quot;, &quot;GPU&quot;, &quot;GPU-SW&quot;] */
   ResourceType?: string;
 }
 

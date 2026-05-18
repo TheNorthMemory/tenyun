@@ -3968,13 +3968,15 @@ declare interface CreateSealRequest {
 declare interface CreateSealResponse {
   /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 &quot;印章&quot;-&gt;&quot;印章中心&quot;选择查看的印章，在&quot;印章详情&quot; 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
+  /** 电子印章预览链接地址，地址默认失效时间为24小时。 */
+  ImageUrl?: string;
   /** 人脸验证操作人链接，用法可以参考&quot;跳转电子签小程序配置&quot;，默认为空。 */
   SealOperatorVerifyPath?: string;
   /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
   SealOperatorVerifyQrcodeUrl?: string;
-  /** 创建印章预览逻辑，返回的是印章加盖在示例文件上的效果图片链接。 */
+  /** 创建印章预览逻辑，返回的是印章加盖在示例文件上的效果图片链接。链接有效期为90天。 */
   PreviewFileUrl?: string;
-  /** 创建印章预览逻辑，返回的是印章加盖在示例文件上的效果PDF文件链接。 */
+  /** 创建印章预览逻辑，返回的是印章加盖在示例文件上的效果PDF文件链接。链接有效期为90天。 */
   PreviewPdfUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

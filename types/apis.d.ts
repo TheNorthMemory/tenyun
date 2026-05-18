@@ -342,6 +342,10 @@ declare interface DescribeModelResponseVO {
   CreateTime?: string;
   /** 最后修改时间 */
   LastUpdateTime?: string;
+  /** model ID */
+  ModelID?: string;
+  /** 描述 */
+  Description?: string;
 }
 
 /** 查询模型服务详情的响应 */
@@ -418,6 +422,8 @@ declare interface DescribeModelServiceResponseVO {
   FallbackStatus?: boolean | null;
   /** 备份模型 */
   FallbackModels?: TargetModelDTO[] | null;
+  /** 模型类型 */
+  ModelProtocol?: string | null;
 }
 
 /** 查询模型列表的响应 */
@@ -624,6 +630,8 @@ declare interface PromptModerateConfigDTO {
   Action?: string | null;
   /** 响应拦截内容 */
   InterceptMessage?: string | null;
+  /** 检测上下文 */
+  ContextScope?: string | null;
 }
 
 /** ResultIDVO */
@@ -646,6 +654,8 @@ declare interface SensitiveDataCheckConfigDTO {
   InterceptMessage?: string | null;
   /** 检测项枚举值：birthday： 生日email： 邮箱identity_number： 身份证phone_number： 电话号码secret： 秘钥password： 密码private_key： 私钥 */
   CheckItems?: string[] | null;
+  /** 检测上下文 */
+  ContextScope?: string | null;
 }
 
 /** 开始结束时间结构体 */
@@ -688,6 +698,8 @@ declare interface TmsConfigDTO {
   BizType?: string | null;
   /** 响应拦截内容 */
   InterceptMessage?: string | null;
+  /** 检测上下文 */
+  ContextScope?: string | null;
 }
 
 /** Token限流配置 */
@@ -857,6 +869,10 @@ declare interface CreateModelRequest {
   CheckTargetCertsError?: boolean;
   /** http协议版本：1.1/2.0 */
   HttpProtocolVersion?: string;
+  /** model ID */
+  ModelID?: string;
+  /** 描述 */
+  Description?: string;
 }
 
 declare interface CreateModelResponse {
@@ -919,6 +935,8 @@ declare interface CreateModelServiceRequest {
   FallbackStatus?: boolean;
   /** Fallback模型配置 */
   FallbackModels?: TargetModelDTO[];
+  /** 模型协议 */
+  ModelProtocol?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -1207,6 +1225,8 @@ declare interface DescribeModelServicesRequest {
   ModelID?: string;
   /** 排序 */
   Sort?: DescribeModelServicesSort;
+  /** 模型类型，OpenAI或Anthropic */
+  ModelProtocol?: string;
 }
 
 declare interface DescribeModelServicesResponse {
@@ -1367,6 +1387,10 @@ declare interface ModifyModelRequest {
   CheckTargetCertsError?: boolean;
   /** http协议版本：1.1/2.0 */
   HttpProtocolVersion?: string;
+  /** model ID */
+  ModelID?: string;
+  /** 描述 */
+  Description?: string;
 }
 
 declare interface ModifyModelResponse {
@@ -1429,6 +1453,8 @@ declare interface ModifyModelServiceRequest {
   FallbackStatus?: boolean;
   /** 备份模型 */
   FallbackModels?: TargetModelDTO[];
+  /** 模型类型 */
+  ModelProtocol?: string;
 }
 
 declare interface ModifyModelServiceResponse {

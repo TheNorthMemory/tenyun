@@ -906,7 +906,7 @@ declare interface CynosdbInstance {
   Memory?: number;
   /** 存储量，单位：GB */
   Storage?: number;
-  /** 实例类型 */
+  /** 实例类型枚举值：rw： 读写实例ro： 只读实例 */
   InstanceType?: string;
   /** 实例当前角色 */
   InstanceRole?: string;
@@ -7637,7 +7637,7 @@ declare interface RollbackToNewClusterRequest {
   UniqVpcId?: string;
   /** 所属子网ID */
   UniqSubnetId?: string;
-  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（&#39;-&#39;,&#39;_&#39;,&#39;.&#39;） */
   ClusterName?: string;
   /** 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效 */
   RollbackId?: number;
