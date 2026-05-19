@@ -10007,11 +10007,11 @@ declare interface DescribeJavaMemShellPluginListResponse {
 }
 
 declare interface DescribeLicenseBindListRequest {
-  /** 授权ID */
+  /** 授权ID取DescribeLicenseList接口List对象下的LicenseId参数值 */
   LicenseId: number;
-  /** 授权类型 */
+  /** 授权类型枚举值：0： 专业版-按量计费1： 专业版-包年包月(主机安全)2： 旗舰版-包年包月(主机安全)3： 轻量版-LH-包年包月6： 专业版-包年包月（云安全中心）7： 旗舰版-包年包月（云安全中心） */
   LicenseType: number;
-  /** 资源ID */
+  /** 资源ID,取DescribeLicenseList接口List对象下的ResourceId参数值 */
   ResourceId: string;
   /** InstanceID、IP、MachineName 模糊查询 */
   Filters?: Filters[];

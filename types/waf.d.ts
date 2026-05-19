@@ -5833,6 +5833,10 @@ declare interface DescribeLLMContentSecCheckRequest {
   TokenUsage?: number;
   /** 图片base64编码后的数据,body大小最大支持10M */
   ImageEncode?: string;
+  /** tool_call 场景工具名称 */
+  ToolName?: string;
+  /** tool_call 场景工具参数 */
+  ToolArgs?: string;
 }
 
 declare interface DescribeLLMContentSecCheckResponse {

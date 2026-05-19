@@ -2390,6 +2390,8 @@ declare interface TaskFullRespInfo {
   ShuffleWriteBytesSum?: number;
   /** 活跃core */
   ActiveCore?: number;
+  /** 排队时间单位：毫秒 */
+  QueueTime?: number;
 }
 
 /** 任务监控信息 */

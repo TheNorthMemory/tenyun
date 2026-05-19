@@ -246,6 +246,8 @@ declare interface SessionDeviceDetail {
   MultiMode?: number;
   /** 多网卡信息 */
   MultiNet?: MultiNet[];
+  /** 现场设备和远端设备消息通道往返延迟单位：毫秒ms */
+  ControlLatency?: number[];
 }
 
 /** 会话信息 */
@@ -489,6 +491,10 @@ declare interface DescribeDeviceListResponse {
 declare interface DescribeDeviceSessionDetailsRequest {
   /** 会话ID */
   SessionId: string;
+  /** 查询指标开始时间单位：秒 */
+  StartTime?: number;
+  /** 查询指标结束时间单位：秒 */
+  EndTime?: number;
 }
 
 declare interface DescribeDeviceSessionDetailsResponse {

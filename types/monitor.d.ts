@@ -3756,26 +3756,6 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
-  interface CreateServiceDiscoveryRequest {
-    /** Prometheus 实例 ID */
-    InstanceId: string;
-    /** 类型为TKE：对应集成的腾讯云容器服务集群 ID */
-    KubeClusterId: string;
-    /** 用户 Kubernetes 集群类型： 1 = 容器服务集群(TKE) */
-    KubeType: number;
-    /** 服务发现类型，取值如下： 1 = ServiceMonitor 2 = PodMonitor 3 = JobMonitor */
-    Type: number;
-    /** 服务发现配置信息，YAML 格式，[具体YAML参数内容请参考](https://cloud.tencent.com/document/product/1416/55995) */
-    Yaml: string;
-  }
-
-  interface CreateServiceDiscoveryResponse {
-    /** 创建成功之后，返回对应服务发现信息 */
-    ServiceDiscovery?: ServiceDiscoveryItem;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface DeleteAlarmNoticesRequest {
     /** 模块名，这里填“monitor” */
     Module: string;
@@ -5452,22 +5432,6 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
-  interface DescribeServiceDiscoveryRequest {
-    /** Prometheus 实例 ID */
-    InstanceId: string;
-    /** 类型是 TKE，为对应的腾讯云容器服务集群 ID */
-    KubeClusterId: string;
-    /** 用户 Kubernetes 集群类型： 1 = 容器服务集群(TKE) */
-    KubeType: number;
-  }
-
-  interface DescribeServiceDiscoveryResponse {
-    /** 返回服务发现列表信息 */
-    ServiceDiscoverySet?: ServiceDiscoveryItem[] | null;
-    /** 唯一请求 ID，每次请求都会返回。 */
-    RequestId?: string;
-  }
-
   interface DescribeStatisticDataRequest {
     /** 所属模块，固定值，为monitor */
     Module: string;
@@ -6462,8 +6426,6 @@ declare interface Monitor {
   CreateRecordingRule(data: V20180724.CreateRecordingRuleRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateRecordingRuleResponse>;
   /** 授权腾讯云用户 {@link V20180724.CreateSSOAccountRequest} {@link V20180724.CreateSSOAccountResponse} */
   CreateSSOAccount(data: V20180724.CreateSSOAccountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateSSOAccountResponse>;
-  /** 创建服务发现 {@link V20180724.CreateServiceDiscoveryRequest} {@link V20180724.CreateServiceDiscoveryResponse} */
-  CreateServiceDiscovery(data: V20180724.CreateServiceDiscoveryRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateServiceDiscoveryResponse>;
   /** 删除告警通知模板（批量） {@link V20180724.DeleteAlarmNoticesRequest} {@link V20180724.DeleteAlarmNoticesResponse} */
   DeleteAlarmNotices(data: V20180724.DeleteAlarmNoticesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlarmNoticesResponse>;
   /** 删除告警策略 {@link V20180724.DeleteAlarmPolicyRequest} {@link V20180724.DeleteAlarmPolicyResponse} */
@@ -6636,8 +6598,6 @@ declare interface Monitor {
   DescribeRemoteWrites(data: V20180724.DescribeRemoteWritesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeRemoteWritesResponse>;
   /** 列出授权账号 {@link V20180724.DescribeSSOAccountRequest} {@link V20180724.DescribeSSOAccountResponse} */
   DescribeSSOAccount(data: V20180724.DescribeSSOAccountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeSSOAccountResponse>;
-  /** 列出服务发现列表 {@link V20180724.DescribeServiceDiscoveryRequest} {@link V20180724.DescribeServiceDiscoveryResponse} */
-  DescribeServiceDiscovery(data: V20180724.DescribeServiceDiscoveryRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeServiceDiscoveryResponse>;
   /** 根据维度条件查询监控数据 {@link V20180724.DescribeStatisticDataRequest} {@link V20180724.DescribeStatisticDataResponse} */
   DescribeStatisticData(data: V20180724.DescribeStatisticDataRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeStatisticDataResponse>;
   /** 强制释放 Prometheus 实例 {@link V20180724.DestroyPrometheusInstanceRequest} {@link V20180724.DestroyPrometheusInstanceResponse} */

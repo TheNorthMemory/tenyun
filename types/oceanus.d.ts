@@ -1018,6 +1018,10 @@ declare interface Setats {
   ImageVersion?: string;
   /** 类型：0 公网，1 内网枚举值：0： 公网1： 内网默认值：0 */
   WebUIType?: number;
+  /** setats集群的名字 */
+  Name?: string;
+  /** setats集群注释 */
+  Remark?: string;
 }
 
 /** setats 机器规格 */
@@ -1234,6 +1238,14 @@ declare interface VariableItem {
   Name?: string | null;
   /** 变量值 */
   Value?: string | null;
+  /** 变量值类型枚举值：0： 自定义变量1： 凭据值 */
+  ValueType?: number;
+  /** 凭据所在地域 */
+  SecretRegion?: string;
+  /** 凭据名称 */
+  SecretName?: string;
+  /** 凭据版本 */
+  SecretVersionId?: string;
   /** 变量值是否隐藏 */
   Type?: number | null;
   /** 变量描述 */
@@ -1595,11 +1607,21 @@ declare interface CreateVariableRequest {
   Remark?: string;
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 变量值类型枚举值：0： 自定义变量1： 凭据值 */
+  ValueType?: number;
+  /** 凭据所在地域 */
+  SecretRegion?: string;
+  /** 凭据名称 */
+  SecretName?: string;
+  /** 凭据版本 */
+  SecretVersionId?: string;
+  /** 凭据值md5 */
+  SecretValueMd5?: string;
 }
 
 declare interface CreateVariableResponse {
   /** 变量Id */
-  VariableId: string;
+  VariableId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

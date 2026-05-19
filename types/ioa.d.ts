@@ -934,6 +934,54 @@ declare interface DeviceVirtualDeviceGroupsDetail {
   Utime?: string;
 }
 
+/** 企业目录的配置数据 */
+declare interface DirectoryConfigData {
+  /** 企业目录 ID */
+  Id?: number;
+  /** 目录对应身份源类型枚举值：WeCom： 企业微信Lark： 飞书DingTalk： 钉钉MicrosoftEntraID： 微软 AAD */
+  Type?: string;
+  /** 企业目录名称 */
+  Name?: string;
+  /** 使用 JSON 字符串表示的配置信息 */
+  Config?: string;
+  /** 是否开启了定时同步 */
+  SyncEnable?: boolean;
+  /** 定时同步的策略枚举值：4hours： 按创建时间开始的每 4 小时daily： 每日weekly： 每周 */
+  SyncPolicy?: string;
+  /** JSON 字符串，针对不同类型的同步策略，提取对应不同的值 */
+  SyncPolicyParams?: string;
+  /** 是否配置了同步创建认证配置 */
+  CreateAuthConfig?: boolean;
+  /** 描述 */
+  Description?: string;
+  /** 对应 Config 的配置 ID */
+  SourceId?: string;
+  /** 是否在登录页展示 */
+  DisplayOnLoginPage?: boolean;
+}
+
+/** 创建/编辑企业目录配置之后返回结果数据 */
+declare interface DirectoryConfigResultData {
+  /** 企业目录 ID */
+  Id?: number;
+  /** 企业目录名称 */
+  Name?: string;
+  /** 身份源配置 ID */
+  IdentifySourceId?: string;
+  /** 是否同步创建了认证配置 */
+  CreateAuthConfig?: boolean;
+  /** 认证源配置 ID */
+  AuthSourceId?: string;
+  /** 认证配置 ID */
+  AuthConfigId?: number;
+  /** 认证策略 ID */
+  AuthPolicyId?: number;
+  /** 认证支持的平台, PC 或 Mobile */
+  AuthSupportPlatforms?: string[];
+  /** 认证方式，授权认证/扫码认证 等 */
+  AuthMethods?: string[];
+}
+
 /** 业务响应数据 */
 declare interface ExportSoftwareDownloadUrlRspData {
   /** 下载的url */
@@ -1246,6 +1294,36 @@ declare interface CreateBusinessResourceResponse {
   RequestId?: string;
 }
 
+declare interface CreateCompanyDirectoryConfigRequest {
+  /** 企业目录类型 */
+  Type: string;
+  /** 企业目录名 */
+  Name: string;
+  /** 配置是通过 SM2 加密再 Hex 之后的数据 */
+  Config: string;
+  /** 是否开启定时同步 */
+  SyncEnable: boolean;
+  /** 定时同步的策略，枚举值：支持每4小时（4hours）/每日定时（daily）/每周定时（weekly） */
+  SyncPolicy: string;
+  /** JSON 字符串，针对不同类型的同步策略，提取对应不同的值 */
+  SyncPolicyParams: string;
+  /** 是否同步创建认证源 */
+  CreateAuthConfig: boolean;
+  /** 是否在登录页展示 */
+  DisplayOnLoginPage: boolean;
+  /** 描述 */
+  Description?: string;
+  /** 使用场景：API 创建，快速上手，普通配置等 */
+  Scene?: string;
+}
+
+declare interface CreateCompanyDirectoryConfigResponse {
+  /** 创建企业目录配置的结果 */
+  Data?: DirectoryConfigResultData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDLPFileDetectTaskRequest {
   /** 文件下载Url */
   DownloadUrl: string;
@@ -1428,6 +1506,18 @@ declare interface DescribeBusinessResourcesRequest {
 declare interface DescribeBusinessResourcesResponse {
   /** 业务资源分页返回对象 */
   Data: DescribeBusinessResourcePageRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCompanyDirectoryConfigRequest {
+  /** 企业目录 ID */
+  Id?: number;
+}
+
+declare interface DescribeCompanyDirectoryConfigResponse {
+  /** 企业目录配置详情 */
+  Data?: DirectoryConfigData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1834,6 +1924,36 @@ declare interface ModifyBusinessResourceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCompanyDirectoryConfigRequest {
+  /** 企业目录类型 */
+  Type: string;
+  /** 企业目录名 */
+  Name: string;
+  /** 使用 JSON 字符串表示的配置信息调用此接口前，需要先调用DescribeCompanyDirectoryConfig获取完整的配置，然后对里面需要更新的配置进行修改，请求的时候必须传完整配置，否则可能导致配置缺失出现错误。如果是脱敏的信息，保持原样的脱敏格式提交，如果和脱敏格式不一致，会认为是新的配置值更新原有配置 */
+  Config: string;
+  /** 是否开启定时同步 */
+  SyncEnable: boolean;
+  /** 定时同步的策略，枚举值：支持每4小时（4hours）/每日定时（daily）/每周定时（weekly） */
+  SyncPolicy: string;
+  /** JSON 字符串，针对不同类型的同步策略，提取对应不同的值 */
+  SyncPolicyParams: string;
+  /** 是否同步创建认证源 */
+  CreateAuthConfig: boolean;
+  /** 是否在登录页展示 */
+  DisplayOnLoginPage: boolean;
+  /** 企业目录 ID */
+  Id?: number;
+  /** 描述 */
+  Description?: string;
+}
+
+declare interface ModifyCompanyDirectoryConfigResponse {
+  /** 编辑企业目录配置的结果 */
+  Data?: DirectoryConfigResultData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceTrustStatusRequest {
   /** 设备状态，1表示拉黑，0表示加白 */
   Status: number;
@@ -1877,6 +1997,8 @@ declare interface Ioa {
   BindBusinessResourceConnectorGroup(data: BindBusinessResourceConnectorGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindBusinessResourceConnectorGroupResponse>;
   /** 创建业务资源 {@link CreateBusinessResourceRequest} {@link CreateBusinessResourceResponse} */
   CreateBusinessResource(data: CreateBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessResourceResponse>;
+  /** 新建企业目录配置 {@link CreateCompanyDirectoryConfigRequest} {@link CreateCompanyDirectoryConfigResponse} */
+  CreateCompanyDirectoryConfig(data: CreateCompanyDirectoryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCompanyDirectoryConfigResponse>;
   /** 创建文件鉴定任务 {@link CreateDLPFileDetectTaskRequest} {@link CreateDLPFileDetectTaskResponse} */
   CreateDLPFileDetectTask(data: CreateDLPFileDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDLPFileDetectTaskResponse>;
   /** 提交送检任务 {@link CreateDLPFileDetectionTaskRequest} {@link CreateDLPFileDetectionTaskResponse} */
@@ -1897,6 +2019,8 @@ declare interface Ioa {
   DescribeAggrSoftDeviceList(data?: DescribeAggrSoftDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftDeviceListResponse>;
   /** 获取业务资源列表 {@link DescribeBusinessResourcesRequest} {@link DescribeBusinessResourcesResponse} */
   DescribeBusinessResources(data?: DescribeBusinessResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBusinessResourcesResponse>;
+  /** 获取企业目录配置 {@link DescribeCompanyDirectoryConfigRequest} {@link DescribeCompanyDirectoryConfigResponse} */
+  DescribeCompanyDirectoryConfig(data?: DescribeCompanyDirectoryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCompanyDirectoryConfigResponse>;
   /** 查询DLP边缘节点分组 {@link DescribeDLPEdgeNodeGroupsRequest} {@link DescribeDLPEdgeNodeGroupsResponse} */
   DescribeDLPEdgeNodeGroups(data?: DescribeDLPEdgeNodeGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPEdgeNodeGroupsResponse>;
   /** 查询边缘节点列表 {@link DescribeDLPEdgeNodesRequest} {@link DescribeDLPEdgeNodesResponse} */
@@ -1947,6 +2071,8 @@ declare interface Ioa {
   GrantResourcesByVirtualGroups(data: GrantResourcesByVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByVirtualGroupsResponse>;
   /** 修改业务资源 {@link ModifyBusinessResourceRequest} {@link ModifyBusinessResourceResponse} */
   ModifyBusinessResource(data: ModifyBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBusinessResourceResponse>;
+  /** 编辑企业目录配置 {@link ModifyCompanyDirectoryConfigRequest} {@link ModifyCompanyDirectoryConfigResponse} */
+  ModifyCompanyDirectoryConfig(data: ModifyCompanyDirectoryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompanyDirectoryConfigResponse>;
   /** 给接入设备批量加黑加白 {@link ModifyDeviceTrustStatusRequest} {@link ModifyDeviceTrustStatusResponse} */
   ModifyDeviceTrustStatus(data: ModifyDeviceTrustStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTrustStatusResponse>;
   /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */

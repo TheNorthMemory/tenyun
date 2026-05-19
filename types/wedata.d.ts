@@ -7157,7 +7157,7 @@ declare interface ListTasksRequest {
   OwnerUin?: string;
   /** 任务类型 */
   TaskTypeId?: number;
-  /** 任务状态* N: 新建 * Y: 调度中 * F: 已下线 * O: 已暂停 * T: 下线中 * INVALID: 已失效 */
+  /** 任务状态N: 新建 Y: 调度中 F: 已下线 O: 已暂停 T: 下线中 INVALID: 已失效 */
   Status?: string;
   /** 提交状态 */
   Submit?: boolean;
@@ -7169,6 +7169,12 @@ declare interface ListTasksRequest {
   ModifyTime?: string[];
   /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
   CreateTime?: string[];
+  /** 任务文件夹路径列表，支持多选，从工作流下的目录开始填写，节点类型无需填写。选择上层文件夹时，自动包含所有子文件夹下的任务。 路径格式为绝对路径，如 &quot;/子目录A&quot;，根目录为 &quot;/&quot; */
+  TaskFolderPathList?: string[];
+  /** 工作流文件夹路径列表，支持多选。选择上层文件夹时，自动包含所有子文件夹下工作流的任务。 路径格式为绝对路径，如 &quot;/数据开发/子目录&quot;，根目录为 &quot;/&quot;。 */
+  WorkflowFolderPathList?: string[];
+  /** 节点类型列表，用于按任务节点分类筛选，支持多选， 可选值参考下面枚举类型 。 传入后将根据这些节点类型包含的任务类型ID列表进行筛选。枚举值：ETL： 数据集成节点EMR： EMR节点DLC： DLC节点SETATS： SETATS节点TDSQL： TDSQL节点TCHOUSE： TCHOUSE节点GENERAL： 通用节点DATA_QUALITY： 数据质量节点INDICATOR： 指标节点TI_ONE： TI-ONE机器学习节点 */
+  TaskNodeTypeList?: string[];
 }
 
 declare interface ListTasksResponse {
@@ -7245,7 +7251,7 @@ declare interface ListTriggerTasksRequest {
   OwnerUin?: string;
   /** 任务类型 */
   TaskTypeId?: number;
-  /** 任务状态* N: 新建 * Y: 调度中 */
+  /** 任务状态N: 新建 Y: 调度中 */
   Status?: string;
   /** 提交状态 */
   Submit?: boolean;
@@ -7257,6 +7263,12 @@ declare interface ListTriggerTasksRequest {
   ModifyTime?: string[];
   /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
   CreateTime?: string[];
+  /** 任务文件夹路径列表，支持多选，从工作流下的目录开始填写，节点类型无需填写。选择上层文件夹时，自动包含所有子文件夹下的任务。 路径格式为绝对路径，如 &quot;/子目录A&quot;，根目录为 &quot;/&quot; */
+  TaskFolderPathList?: string[];
+  /** 工作流文件夹路径列表，支持多选。选择上层文件夹时，自动包含所有子文件夹下工作流的任务。 路径格式为绝对路径，如 &quot;/数据开发/子目录&quot;，根目录为 &quot;/&quot; */
+  WorkflowFolderPathList?: string[];
+  /** 节点类型列表，用于按任务节点分类筛选，支持多选，可选值参考下面枚举类型 。 传入后将根据这些节点类型包含的任务类型ID列表进行筛选。枚举值：ETL： 数据集成节点EMR： EMR节点DLC： DLC节点SETATS： SETATS节点TDSQL： TDSQL节点TCHOUSE： TCHOUSE节点GENERAL： 通用节点DATA_QUALITY： 数据质量节点INDICATOR： 指标节点TI_ONE： TI-ONE机器学习节点 */
+  TaskNodeTypeList?: string[];
 }
 
 declare interface ListTriggerTasksResponse {
@@ -10017,6 +10029,10 @@ declare namespace V20210820 {
     ParamsString?: string | null;
     /** 区分数据源类型自定义源还是系统源 */
     Category?: string | null;
+    /** 数据实例ip */
+    Ip?: string | null;
+    /** 数据实例port */
+    Port?: string | null;
   }
 
   /** 依赖配置 */
@@ -15543,8 +15559,10 @@ declare namespace V20210820 {
     BundleInfo?: string | null;
     /** 是否允许下游依赖 0 不允许 1 允许 */
     AllowDownstreamDependency?: number | null;
-    /** - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
+    /** 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行 */
     DependencyTriggerPolicy?: string | null;
+    /** 任务最后更新时间戳 */
+    LastUpdateTimestamp?: number | null;
   }
 
   /** 属性配置 */
@@ -16327,6 +16345,8 @@ declare namespace V20210820 {
     BucketName?: string | null;
     /** 错误信息 */
     ErrorMessage?: string | null;
+    /** 脚本内容是否被截断 */
+    ScriptContentTruncated?: boolean | null;
   }
 
   /** 试运行子记录 */
@@ -16367,6 +16387,10 @@ declare namespace V20210820 {
     LogFilePath?: string | null;
     /** 是否包含子结果 */
     HasSubResultSet?: boolean | null;
+    /** 脚本内容是否被截断 */
+    ScriptContentTruncated?: boolean | null;
+    /** 结果集表字符信息 */
+    SchemaInfoFilePath?: string | null;
   }
 
   /** 数据质量阈值 */
@@ -17951,6 +17975,8 @@ declare namespace V20210820 {
     EnableMakeUp?: boolean;
     /** 指定审批人列表 */
     AssignApprovalList?: string[];
+    /** MAKEUP:补录缺失的实例;FORCE_SUCCESS:将缺失的实例置成功;SKIP:不处理，忽略缺失的实例 */
+    MissingInstanceStrategy?: string;
   }
 
   interface CreateTaskVersionDsResponse {

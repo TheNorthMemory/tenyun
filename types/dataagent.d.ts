@@ -496,6 +496,14 @@ declare interface GetUploadJobDetailsResponse {
   RequestId?: string;
 }
 
+declare interface GetUserInstanceListRequest {
+}
+
+declare interface GetUserInstanceListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyChunkRequest {
   /** 实例ID */
   InstanceId: string;
@@ -683,6 +691,8 @@ declare interface Dataagent {
   GetSessionDetails(data?: GetSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetSessionDetailsResponse>;
   /** 查询上传任务详情 {@link GetUploadJobDetailsRequest} {@link GetUploadJobDetailsResponse} */
   GetUploadJobDetails(data?: GetUploadJobDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadJobDetailsResponse>;
+  /** 获取用户实例列表 {@link GetUserInstanceListRequest} {@link GetUserInstanceListResponse} */
+  GetUserInstanceList(data?: GetUserInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserInstanceListResponse>;
   /** 编辑分片 {@link ModifyChunkRequest} {@link ModifyChunkResponse} */
   ModifyChunk(data: ModifyChunkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChunkResponse>;
   /** 修改知识库 {@link ModifyKnowledgeBaseRequest} {@link ModifyKnowledgeBaseResponse} */

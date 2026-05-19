@@ -4663,6 +4663,8 @@ declare interface CreateAssetImageRegistryScanTaskRequest {
   ExcludeImageList?: number[];
   /** 是否仅扫描各repository最新版的镜像, 与Filters配合使用 */
   OnlyScanLatest?: boolean;
+  /** 任务超时时长单位：秒 */
+  Timeout?: number;
 }
 
 declare interface CreateAssetImageRegistryScanTaskResponse {

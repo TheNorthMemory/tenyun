@@ -84,6 +84,8 @@ declare interface DeviceBaseInfo {
   Sn?: string;
   /** 厂商 */
   Vendor?: string;
+  /** 可接入地域列表。 */
+  AllowedRegions?: string[];
 }
 
 /** 设备详细信息 */
@@ -987,7 +989,7 @@ declare interface GetNetMonitorRequest {
   BeginTime: number;
   /** 结束时间 */
   EndTime: number;
-  /** 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms） */
+  /** 统计指标（上行速率：&quot;TxRate&quot;:bit/s，下行速率：&quot;RxRate&quot;:bit/s，丢包：&quot;Loss&quot;:%，时延：&quot;RTT&quot;:ms） */
   Metrics: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
@@ -996,7 +998,7 @@ declare interface GetNetMonitorRequest {
 declare interface GetNetMonitorResponse {
   /** 监控数据 */
   MonitorData?: MonitorData[];
-  /** 接入区域。取值范围：['MC','AP','EU','AM']MC=中国大陆AP=亚太EU=欧洲AM=美洲 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;]MC=中国大陆AP=亚太EU=欧洲AM=美洲 */
   AccessRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

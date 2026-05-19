@@ -730,8 +730,10 @@ declare interface DisplayToolCommon {
   CreateAt?: string;
   /** 更新时间 */
   UpdateAt?: string;
-  /** 标签列表，json格式：{\"tag1\":[\"责任人xxx\"],\"tag2\":[\"测试站\"]} */
+  /** 标签列表，json格式：{"tag1":["责任人xxx"],"tag2":["测试站"]} */
   Labels?: string;
+  /** 演示模式是否明文展示枚举值：0： 否1： 是 */
+  IsPlainTextInDemo?: number;
 }
 
 /** 漏洞详情 */

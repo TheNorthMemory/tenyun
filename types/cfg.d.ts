@@ -484,6 +484,8 @@ declare interface TaskListItem {
   ArchName?: string;
   /** 来源 */
   TaskSource?: number;
+  /** 云资源标签列表 */
+  Tags?: TagWithDescribe[];
 }
 
 /** 监控指标 */
