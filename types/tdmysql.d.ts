@@ -361,21 +361,27 @@ declare interface DescribeDatabaseObjectsRequest {
   InstanceId: string;
   /** 数据库名称，通过 DescribeDatabases 接口获取。 */
   DbName: string;
+  /** 分页索引 */
+  Offset?: number;
+  /** 每页数量 */
+  Limit?: number;
+  /** 数据表名称匹配表达式 */
+  TableRegexp?: string;
 }
 
 declare interface DescribeDatabaseObjectsResponse {
   /** 透传入参。 */
-  InstanceId: string;
+  InstanceId?: string;
   /** 数据库名称。 */
-  DbName: string;
+  DbName?: string;
   /** 表列表。 */
-  Tables: DatabaseTable[] | null;
+  Tables?: DatabaseTable[] | null;
   /** 视图列表。 */
-  Views: DatabaseView[] | null;
+  Views?: DatabaseView[] | null;
   /** 存储过程列表。 */
-  Procs: DatabaseProcedure[] | null;
+  Procs?: DatabaseProcedure[] | null;
   /** 函数列表。 */
-  Funcs: DatabaseFunction[] | null;
+  Funcs?: DatabaseFunction[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

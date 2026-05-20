@@ -8355,7 +8355,7 @@ declare interface Tsf {
   DescribeDeliveryConfigByGroupId(data: DescribeDeliveryConfigByGroupIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigByGroupIdResponse>;
   /** 获取多个投递项配置 {@link DescribeDeliveryConfigsRequest} {@link DescribeDeliveryConfigsResponse} */
   DescribeDeliveryConfigs(data?: DescribeDeliveryConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryConfigsResponse>;
-  /** 获取下载程序包信息 {@link DescribeDownloadInfoRequest} {@link DescribeDownloadInfoResponse} */
+  /** 查询下载程序包信息 {@link DescribeDownloadInfoRequest} {@link DescribeDownloadInfoResponse} */
   DescribeDownloadInfo(data: DescribeDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDownloadInfoResponse>;
   /** 查询生效的单元化规则 {@link DescribeEnabledUnitRuleRequest} {@link DescribeEnabledUnitRuleResponse} */
   DescribeEnabledUnitRule(data: DescribeEnabledUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnabledUnitRuleResponse>;

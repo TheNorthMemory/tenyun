@@ -4458,7 +4458,7 @@ declare interface SkillScanItem {
   SkillName?: string;
   /** Skill 描述，帮助理解 Skill 的主要用途 */
   SkillDescription?: string;
-  /** ZIP 文件的 SHA256 Hash参数格式：sha256: */
+  /** ZIP 文件的 SHA256 Hash参数格式：sha256:&lt;64位hex&gt; */
   ContentHash?: string;
   /** 原始上传 ZIP 文件解压后的实际文件数，也是计费的范围，扫描成功后1个文件计为1次额度 */
   UploadFileCount?: number;
@@ -4470,7 +4470,7 @@ declare interface SkillScanItem {
   Mitigation?: string;
   /** 风险综合描述，对本次检测发现的风险进行概括性说明。传 Language=en-US 时返回英文文案 */
   RiskDescription?: string;
-  /** 安全评分取值范围：[0, 100]补充说明：100 为最安全 */
+  /** 安全评分取值范围：[0, 100]补充说明：分数越高越安全 */
   SecurityScore?: number;
   /** 本次扫描使用的引擎版本号 */
   EngineVersion?: number;

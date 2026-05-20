@@ -3624,6 +3624,18 @@ declare interface DescribeTrainingModelVersionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTrainingTaskPodUrlRequest {
+  /** 任务实例名 */
+  PodName: string;
+}
+
+declare interface DescribeTrainingTaskPodUrlResponse {
+  /** Pod登录URL */
+  PodUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTrainingTaskPodsRequest {
   /** 训练任务ID */
   Id: string;
@@ -4843,6 +4855,8 @@ declare interface Tione {
   DescribeTrainingModelVersions(data: DescribeTrainingModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingModelVersionsResponse>;
   /** 训练任务详情 {@link DescribeTrainingTaskRequest} {@link DescribeTrainingTaskResponse} */
   DescribeTrainingTask(data: DescribeTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskResponse>;
+  /** 获取实例登录URL {@link DescribeTrainingTaskPodUrlRequest} {@link DescribeTrainingTaskPodUrlResponse} */
+  DescribeTrainingTaskPodUrl(data: DescribeTrainingTaskPodUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodUrlResponse>;
   /** 训练任务pod列表 {@link DescribeTrainingTaskPodsRequest} {@link DescribeTrainingTaskPodsResponse} */
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** 模型训练任务列表 {@link DescribeTrainingTasksRequest} {@link DescribeTrainingTasksResponse} */

@@ -5682,6 +5682,8 @@ declare interface DescribeProxiesResponse {
   ProxyGroupInfos?: ProxyGroupInfo[];
   /** 数据库代理节点 */
   ProxyNodeInfos?: ProxyNodeInfo[] | null;
+  /** sql自动转发 */
+  ColumnStoreProxyForward?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

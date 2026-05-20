@@ -916,11 +916,11 @@ declare interface RabbitMQBindingListInfo {
 declare interface RabbitMQClusterAccessInfo {
   /** 集群公网接入地址 */
   PublicAccessEndpoint?: string | null;
-  /** 集群控制台访问地址 */
+  /** 集群 Web 控制台公网访问地址 */
   WebConsoleEndpoint?: string;
-  /** 集群控制台登录用户名 */
+  /** 集群 Web 控制台登录用户名 */
   WebConsoleUsername?: string;
-  /** 集群控制台登录密码 */
+  /** 集群 Web 控制台登录密码 */
   WebConsolePassword?: string;
   /** 已废弃 */
   PublicAccessEndpointStatus?: boolean;
@@ -928,13 +928,13 @@ declare interface RabbitMQClusterAccessInfo {
   PublicControlConsoleSwitchStatus?: boolean;
   /** 已废弃 */
   VpcControlConsoleSwitchStatus?: boolean;
-  /** Vpc管控台访问地址，示例值，http://1.1.1.1:15672 */
+  /** Web 管控台 VPC 访问地址 */
   VpcWebConsoleEndpoint?: string;
-  /** 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
+  /** Web 控制台公网访问开关状态枚举值：OFF： 已关闭ON： 已开启CREATING： 创建中DELETING： 删除中CREATE_FAILURE： 创建失败DELETE_FAILURE： 删除失败 */
   PublicWebConsoleSwitchStatus?: string;
-  /** Vpc管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
+  /** Web 控制台 VPC 访问开关状态枚举值：OFF： 已关闭ON： 已开启CREATING： 创建中DELETING： 删除中CREATE_FAILURE： 创建失败DELETE_FAILURE： 删除失败 */
   VpcWebConsoleSwitchStatus?: string;
-  /** 公网管控台开关状态，示例值，OFF/ON/CREATING/DELETING */
+  /** 公网接入点开关状态枚举值：OFF： 已关闭ON： 已开启CREATING： 创建中DELETING： 删除中CREATE_FAILURE： 创建失败DELETE_FAILURE： 删除失败 */
   PublicDataStreamStatus?: string;
   /** Prometheus信息 */
   PrometheusEndpointInfo?: PrometheusEndpointInfo;
@@ -946,12 +946,14 @@ declare interface RabbitMQClusterAccessInfo {
   PublicTlsAccessEndpoint?: string;
   /** 公网IP是否复用 */
   PublicIpReused?: boolean;
-  /** 公网控制台接入点操作的错误信息 */
+  /** Web 控制台公网访问操作的错误信息 */
   PublicWebConsoleErrorMessage?: string;
-  /** 内网控制台接入点操作的错误信息 */
+  /** Web 控制台 VPC 访问操作的错误信息 */
   VpcWebConsoleErrorMessage?: string;
   /** 公网接入点操作的错误信息 */
   PublicDataStreamErrorMessage?: string;
+  /** 公网Stream接入点 */
+  PublicStreamAccessEndpoint?: string;
 }
 
 /** RabbitMQ 集群基本信息 */
@@ -1182,7 +1184,7 @@ declare interface RabbitMQQueueListInfo {
 
 /** RabbitMQ用户实体详情 */
 declare interface RabbitMQUser {
-  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 TDMQ RabbitMQ 控制台查询。 */
   InstanceId?: string;
   /** 用户名，登录时使用 */
   User?: string;
@@ -1206,6 +1208,10 @@ declare interface RabbitMQUser {
   CreateTs?: number;
   /** 修改时间时间戳 */
   ModifyTs?: number;
+  /** 是否开启cam验证默认值：false */
+  CamAuthEnabled?: boolean;
+  /** cam凭据名称 */
+  CamCredentialName?: string | null;
 }
 
 /** RabbitMQ 实例用户配额信息 */
@@ -1266,7 +1272,7 @@ declare interface RabbitMQVipInstance {
   Vpcs?: VpcEndpointInfo[];
   /** 创建时间，毫秒为单位。unix 时间戳 */
   CreateTime?: number;
-  /** 实例类型，0 托管版、1 Serverless 版 */
+  /** 实例类型枚举值：0： 托管版实例 */
   InstanceType?: number;
   /** 隔离时间，毫秒为单位。unix 时间戳 */
   IsolatedTime?: number;
@@ -1274,6 +1280,8 @@ declare interface RabbitMQVipInstance {
   EnableDeletionProtection?: boolean;
   /** 标签列表 */
   Tags?: Tag[];
+  /** 公有数据流Stream接入点 */
+  PublicStreamAccessEndpoint?: string;
 }
 
 /** RabbitMQ的vhost详情 */
@@ -2264,6 +2272,10 @@ declare interface VpcEndpointInfo {
   VpcTlsEndpoint?: string;
   /** VPC 接入点操作失败的错误信息 */
   VpcErrorMessage?: string;
+  /** 接入点ID */
+  Id?: string;
+  /** vpc Stream接入点 */
+  VpcStreamEndpoint?: string;
 }
 
 /** vpc信息（由UniqVpcId和UniqSubnetId组成） */

@@ -3266,6 +3266,84 @@ declare interface SessionItem {
   Key?: string;
 }
 
+/** skills检测命中规则名录 */
+declare interface SkillRuleCatalogItem {
+  /** 规则分类标识（如 static_analysis、ai_analysis） */
+  Key?: string;
+  /** 规则分类中文名称 */
+  Value?: string;
+}
+
+/** skills检测能力标签 */
+declare interface SkillScanCapabilityTag {
+  /** 标签唯一ID */
+  Id?: string;
+  /** 标签名称（如 network_access、file_system 等） */
+  Name?: string;
+}
+
+/** 扫描结果详情（按子引擎分组） */
+declare interface SkillScanItem {
+  /** 子引擎类型：AI（AI 分析）/ STATIC（静态分析） */
+  ScanType?: string;
+  /** 该引擎命中的规则列表 */
+  RuleList?: SkillScanRuleHit[];
+}
+
+/** skills检测结果列表 */
+declare interface SkillScanQueryData {
+  /** 检测状态：success（检测完成，有结果）、scanning（检测进行中）、not_found（无记录）、failed（检测失败）枚举值：success： 检测完成，有结果scanning： 检测进行中not_found： 无记录failed： 检测失败 */
+  Status?: string;
+  /** Skill 名称，用于页面展示、结果列表呈现和人工研判 */
+  SkillName?: string;
+  /** Skill 描述，通常来自 Skill 元数据或说明信息，用于帮助调用方理解 Skill 的用途 */
+  SkillDescription?: string;
+  /** ZIP 文件的 SHA256 哈希值，格式为 sha256:hex_digest */
+  ContentHash?: string;
+  /** 风险等级：malicious（恶意）、suspicious（可疑）、benign（可信） */
+  RiskLevel?: string;
+  /** 综合处置建议字段，位于 data 顶层，用于给出本次检测结果的总体修复、缓解或人工处置建议 */
+  Mitigation?: string;
+  /** 安全评分（0-100，100 为最安全）取值范围：[0, 100] */
+  SecurityScore?: number;
+  /** 本次扫描使用的引擎版本号 */
+  EngineVersion?: number;
+  /** Skill 的能力标签列表，对外固定返回格式为 [{id,name}]。该字段用于描述 Skill 具备的能力特征或适用场景，便于调用方做检索、展示或分类；不等同于风险标签，也不表示风险高低或命中规则结果。当 lang=en 时，仅 name 会切换为英文，id 保持不变 */
+  CapabilityTags?: SkillScanCapabilityTag[];
+  /** 融合规则目录全集，key 为融合 rule_id（9xxxx），value 为风险类别名称；包含所有融合规则类别，调用方可据此展示分类标签，无需本地维护映射表。传 lang=en 时返回英文名称。该对象是名称映射表，不表达主标签优先级 */
+  RuleCatalog?: SkillRuleCatalogItem[];
+  /** 扫描结果详情，按子引擎分组，每个元素包含 scan_type（引擎类型）和 rule_list（命中的规则列表）；规则中的 rule_id 使用融合编码（9xxxx），可与 rule_catalog 交叉引用。传 lang=en 时，description 返回英文文本 */
+  ScanItems?: SkillScanItem[];
+  /** 综合安全审计报告地址。调用方可通过 report_url_expire_hours 指定有效期，不传时默认返回 1 年有效期地址 */
+  ReportUrl?: string;
+  /** 扫描完成时间 */
+  ScannedAt?: string;
+  /** 任务创建时间 */
+  CreatedAt?: string;
+  /** 失败时间 */
+  FailedAt?: string;
+  /** 失败原因描述 */
+  Message?: string;
+}
+
+/** SkillScanRuleHit 命中的规则 */
+declare interface SkillScanRuleHit {
+  /** 规则唯一ID */
+  RuleId?: string;
+  /** 规则描述（命中原因说明） */
+  Description?: string;
+}
+
+/** skills 上检测接口返回信息 */
+declare interface SkillScanUploadData {
+  /** 文件的 SHA256 Hash，用于轮询查询接口 */
+  ContentHash?: string;
+  /** 固定为 scanning，表示任务已接收 */
+  Status?: string;
+  /** 可读的操作结果描述 */
+  Message?: string;
+}
+
 /** waf斯巴达-编辑防护域名中的端口结构 */
 declare interface SpartaProtectionPort {
   /** 分配的服务器id。首次接入的域名和端口该参数填0，已接入的域名和端口分配的id可以通过DescribeDomainDetailsSaas或DescribeDomains接口获取。 */
@@ -6248,6 +6326,22 @@ declare interface DescribeSessionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillSecScanResultRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** ZIP 文件的 SHA256 哈希值，格式为 sha256:hex_digest，请严格遵循文档中的zip打包规范 */
+  ContentHash: string;
+  /** 返回语言。支持 zh / en，默认 zh */
+  Lang?: string;
+}
+
+declare interface DescribeSkillSecScanResultResponse {
+  /** 检测结果 */
+  Data?: SkillScanQueryData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSpartaProtectionInfoRequest {
   /** 域名 */
   Domain: string;
@@ -8228,6 +8322,22 @@ declare interface UpdateRateLimitV2Response {
   RequestId?: string;
 }
 
+declare interface UploadSkillSecScanRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** zip压缩包base64编码后的数据 */
+  FileData: string;
+  /** skills文件压缩之后的文件名，.zip结尾 */
+  FileName?: string;
+}
+
+declare interface UploadSkillSecScanResponse {
+  /** 上传结果 */
+  Data?: SkillScanUploadData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpsertCCAutoStatusRequest {
   /** 域名 */
   Domain: string;
@@ -8607,6 +8717,8 @@ declare interface Waf {
   DescribeScanIp(data: DescribeScanIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanIpResponse>;
   /** Waf 会话定义查询接口 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */
   DescribeSession(data: DescribeSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionResponse>;
+  /** 查询skills检测结果 {@link DescribeSkillSecScanResultRequest} {@link DescribeSkillSecScanResultResponse} */
+  DescribeSkillSecScanResult(data: DescribeSkillSecScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillSecScanResultResponse>;
   /** waf斯巴达-获取防护域名信息 {@link DescribeSpartaProtectionInfoRequest} {@link DescribeSpartaProtectionInfoResponse} */
   DescribeSpartaProtectionInfo(data: DescribeSpartaProtectionInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpartaProtectionInfoResponse>;
   /** 查询SaaS型WAF支持的TLS版本 {@link DescribeTlsVersionRequest} {@link DescribeTlsVersionResponse} */
@@ -8805,6 +8917,8 @@ declare interface Waf {
   UpdateProtectionModes(data: UpdateProtectionModesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProtectionModesResponse>;
   /** 更新自研版限流规则 {@link UpdateRateLimitV2Request} {@link UpdateRateLimitV2Response} */
   UpdateRateLimitV2(data: UpdateRateLimitV2Request, config?: AxiosRequestConfig): AxiosPromise<UpdateRateLimitV2Response>;
+  /** Skill安全检测上传接口 {@link UploadSkillSecScanRequest} {@link UploadSkillSecScanResponse} */
+  UploadSkillSecScan(data: UploadSkillSecScanRequest, config?: AxiosRequestConfig): AxiosPromise<UploadSkillSecScanResponse>;
   /** 编辑SAAS型接入的紧急CC防护状态 {@link UpsertCCAutoStatusRequest} {@link UpsertCCAutoStatusResponse} */
   UpsertCCAutoStatus(data: UpsertCCAutoStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCAutoStatusResponse>;
   /** Waf CC V2 Upsert接口 {@link UpsertCCRuleRequest} {@link UpsertCCRuleResponse} */

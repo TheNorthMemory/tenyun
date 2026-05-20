@@ -418,7 +418,7 @@ declare interface RemediationExecutions {
   ExecutionResourceIds?: string;
 }
 
-/** 资源列列表信息 */
+/** 资源列表信息 */
 declare interface ResourceListInfo {
   /** 资源类型 */
   ResourceType?: string;
@@ -473,33 +473,33 @@ declare interface SystemCompliancePack {
 /** 管理端规则详情 */
 declare interface SystemConfigRule {
   /** 规则标识 */
-  Identifier: string | null;
+  Identifier?: string | null;
   /** 规则名 */
-  RuleName: string | null;
+  RuleName?: string | null;
   /** 规则参数 */
-  InputParameter: InputParameterForManage[] | null;
+  InputParameter?: InputParameterForManage[] | null;
   /** 规则触发条件 */
-  SourceCondition: SourceConditionForManage[] | null;
+  SourceCondition?: SourceConditionForManage[] | null;
   /** 支持的资源类型 */
-  ResourceType: string[] | null;
+  ResourceType?: string[] | null;
   /** 标签 */
-  Label: string[] | null;
+  Label?: string[] | null;
   /** 风险等级，1，2，3 */
-  RiskLevel: number | null;
+  RiskLevel?: number | null;
   /** 对应的函数 */
-  ServiceFunction: string | null;
+  ServiceFunction?: string | null;
   /** 创建时间 */
-  CreateTime: string | null;
+  CreateTime?: string | null;
   /** 更新时间 */
-  UpdateTime: string | null;
+  UpdateTime?: string | null;
   /** 触发类型 */
-  TriggerType: string[] | null;
+  TriggerType?: string[] | null;
   /** 描述 */
-  Description: string | null;
+  Description?: string | null;
   /** 使用次数 */
-  ReferenceCount: number | null;
+  ReferenceCount?: number | null;
   /** 规则类型 */
-  IdentifierType: string;
+  IdentifierType?: string;
 }
 
 /** 标签 */

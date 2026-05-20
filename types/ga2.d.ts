@@ -40,7 +40,7 @@ declare interface AcceleratorRegionSet {
 
 /** 终端节点配置 */
 declare interface EndpointConfigurations {
-  /** 域名类型。可选值'Domain', 'PublicIp'。 */
+  /** 域名类型。可选值&#39;Domain&#39;, &#39;PublicIp&#39;。 */
   EndpointType: string;
   /** 域名。 */
   EndpointService: string;

@@ -2,34 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 属性信息 */
-declare interface AttributeItem {
-  /** 属性id */
-  AttributeId?: string | null;
-  /** 属性标识 */
-  AttributeKey?: string | null;
-  /** 属性名称 */
-  AttributeName?: string | null;
-  /** 标签名称 */
-  Labels?: AttributeLabelItem[] | null;
-}
-
-/** 属性标签信息 */
-declare interface AttributeLabelItem {
-  /** 标签id */
-  LabelId?: string | null;
-  /** 标签名称，最大80个英文字符 */
-  LabelName?: string | null;
-}
-
-/** 属性标签引用 */
-declare interface AttributeLabelReferItem {
-  /** 属性id */
-  AttributeId?: string | null;
-  /** 标签id */
-  LabelIds?: string[] | null;
-}
-
 /** 消耗量 */
 declare interface ChatUsage {
   /** 输入token数 */
@@ -98,20 +70,6 @@ declare interface Delta {
   ReasoningContent?: string;
 }
 
-/** 离线文档列表回包 */
-declare interface DocItem {
-  /** 文档id */
-  DocId?: string | null;
-  /** 状态，- Uploading 上传中 - Auditing 审核中- Parsing 解析中 - ParseFailed 解析失败- Indexing 创建索引中 - IndexFailed 创建索引失败- Success 发布成功- Failed 失败 */
-  Status?: string | null;
-  /** 文件名 */
-  FileName?: string | null;
-  /** 更新时间 */
-  UpdateTime?: string | null;
-  /** 属性标签 */
-  AttributeLabels?: AttributeLabelReferItem[] | null;
-}
-
 /** 文档拆分任务的用量 */
 declare interface DocumentUsage {
   /** 文档拆分任务的页数 */
@@ -146,14 +104,6 @@ declare interface ErrorInfo {
   Message?: string;
 }
 
-/** 属性标签 */
-declare interface LabelItem {
-  /** 属性key */
-  Name?: string;
-  /** 标签值 */
-  Values?: string[];
-}
-
 /** 会话内容 */
 declare interface Message {
   /** 角色 */
@@ -164,22 +114,6 @@ declare interface Message {
   ReasoningContent?: string;
   /** 搜索结果 */
   SearchResults?: SearchResult[];
-}
-
-/** 问答对信息 */
-declare interface QaItem {
-  /** 问答id */
-  QaId?: string | null;
-  /** 问题 */
-  Question?: string | null;
-  /** 答案 */
-  Answer?: string | null;
-  /** 属性标签 */
-  AttributeLabels?: AttributeLabelReferItem[] | null;
-  /** 创建时间 */
-  CreateTime?: string | null;
-  /** 更新时间 */
-  UpdateTime?: string | null;
 }
 
 /** 文档解析失败记录 */
@@ -202,36 +136,6 @@ declare interface ReconstructDocumentSSEConfig {
   IgnoreFailedPage?: boolean;
 }
 
-/** 检索的结果 */
-declare interface RetrievalRecord {
-  /** 检索结果的元数据 */
-  Metadata?: RetrievalRecordMetadata;
-  /** 检索到的标题 */
-  Title?: string;
-  /** 检索到的内容 */
-  Content?: string;
-}
-
-/** 检索结果的元数据 */
-declare interface RetrievalRecordMetadata {
-  /** 结果的类型。- `DOC`：文档- `QA`：问答对 */
-  Type?: string;
-  /** 检索结果的来源。- `SEMANTIC`：从语义检索中得到的结果- `FULL_TEXT`：从全文检索中得到的结果 */
-  ResultSource?: string;
-  /** 切片在文档中的页码，仅部分文档支持 */
-  ChunkPageNumbers?: number[];
-}
-
-/** 检索参数设置 */
-declare interface RetrievalSetting {
-  /** 检索的类型，不填该参数则检索全部。- `DOC`：文档- `QA`：QA仅RetrieveKnowledge接口支持该参数 */
-  Type?: string;
-  /** 返回个数 */
-  TopK?: number;
-  /** 分数过滤 */
-  ScoreThreshold?: number;
-}
-
 /** 搜索结果 */
 declare interface SearchResult {
   /** 索引 */
@@ -248,12 +152,6 @@ declare interface SearchResult {
   Site?: string;
   /** 1740412800 */
   PublishedTime?: number;
-}
-
-/** 分段配置 */
-declare interface SegmentationConfig {
-  /** 最大分片长度 */
-  MaxChunkSize?: number;
 }
 
 /** 文档解析失败记录 */
@@ -322,50 +220,6 @@ declare interface ChatCompletionsResponse {
   RequestId?: string;
 }
 
-declare interface CreateAttributeLabelRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 属性标识，最大40个英文字符，如style */
-  AttributeKey: string;
-  /** 属性名称，最大80个英文字符，如风格 */
-  AttributeName: string;
-  /** 属性标签信息 */
-  Labels?: AttributeLabelItem[];
-}
-
-declare interface CreateAttributeLabelResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateKnowledgeBaseRequest {
-}
-
-declare interface CreateKnowledgeBaseResponse {
-  /** 知识库ID */
-  KnowledgeBaseId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateQARequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 问题，最大1000个英文字符 */
-  Question: string;
-  /** 答案，最大4000个英文字符 */
-  Answer: string;
-  /** 属性标签 */
-  AttributeLabels?: AttributeLabelReferItem[];
-}
-
-declare interface CreateQAResponse {
-  /** 问答对ID */
-  QaId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateReconstructDocumentFlowRequest {
   /** 文件类型。**支持的文件类型：**- `WPS、PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`、`HTML`、`EPUB`、`BMP`、`GIF`、`WEBP`、`HEIC`、`EPS`、`ICNS`、`IM`、`PCX`、`PPM`、`TIFF`、`XBM`、`HEIF`、`JP2`**支持的文件大小：** - `PDF` 最大300M - `WPS`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
   FileType: string;
@@ -408,74 +262,6 @@ declare interface CreateSplitDocumentFlowRequest {
 declare interface CreateSplitDocumentFlowResponse {
   /** 拆分任务唯一ID。30天内可以通过`GetSplitDocumentResult`接口查询TaskId对应的拆分结果。 */
   TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteAttributeLabelsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 属性ID */
-  AttributeIds: string[];
-}
-
-declare interface DeleteAttributeLabelsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteDocsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 文档ID列表。支持批量删除，数量不超过100 */
-  DocIds: string[];
-}
-
-declare interface DeleteDocsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteKnowledgeBaseRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-}
-
-declare interface DeleteKnowledgeBaseResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteQAsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 问答对ID列表。支持批量删除，数量不超过100 */
-  QaIds: string[];
-}
-
-declare interface DeleteQAsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDocRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 文档ID */
-  DocId: string;
-}
-
-declare interface DescribeDocResponse {
-  /** 文档ID */
-  DocId?: string;
-  /** 状态，- Uploading 上传中 - Auditing 审核中- Parsing 解析中 - ParseFailed 解析失败- Indexing 创建索引中 - IndexFailed 创建索引失败- Success 发布成功- Failed 失败 */
-  Status?: string;
-  /** 文件名 */
-  FileName?: string;
-  /** 更新时间 */
-  UpdateTime?: string;
-  /** 属性标签 */
-  AttributeLabels?: AttributeLabelReferItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -552,114 +338,6 @@ declare interface GetSplitDocumentResultResponse {
   RequestId?: string;
 }
 
-declare interface ImportQAsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 文件名 */
-  FileName: string;
-  /** 文件的 Url 地址。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 Url 速度和稳定性可能受一定影响。导入模板：https://cdn.xiaowei.qq.com/lke/assets//static/批量导入问答模板v6.xlsx */
-  FileUrl: string;
-  /** 文件类型，仅支持XLSX格式，请使用模板 */
-  FileType?: string;
-}
-
-declare interface ImportQAsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListAttributeLabelsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 页码，默认1 */
-  PageNumber?: number;
-  /** 每页数目，最大50，默认20 */
-  PageSize?: number;
-}
-
-declare interface ListAttributeLabelsResponse {
-  /** 属性总数 */
-  TotalCount?: number;
-  /** 属性标签列表 */
-  List?: AttributeItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListDocsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 页码，默认1 */
-  PageNumber?: number;
-  /** 每页数目，最大50，默认20 */
-  PageSize?: number;
-}
-
-declare interface ListDocsResponse {
-  /** 文档总数 */
-  TotalCount?: number;
-  /** 文档信息 */
-  List?: DocItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListQAsRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 页码，默认1 */
-  PageNumber?: number;
-  /** 每页数目，最大50，默认20 */
-  PageSize?: number;
-}
-
-declare interface ListQAsResponse {
-  /** 问答对总数量 */
-  TotalCount?: number;
-  /** 问答对信息 */
-  List?: QaItem[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyAttributeLabelRequest {
-  /** 说明：知识库ID备注：通过创建知识库接口（DeleteKnowledgeBase）得到知识库ID（KnowledgeBaseId） */
-  KnowledgeBaseId: string;
-  /** 说明：属性ID备注：通过CreateAttributeLabel接口创建属性时会生成AttributeId，通过ListAttributeLabels接口可查询得到AttributeId、AttributeKey、AttributeName以及LabelId、LabelName的对应关系 */
-  AttributeId: string;
-  /** 说明：属性标识，备注：仅支持英文字符，不支持数字，支持下划线。最大支持40个英文字符，如style */
-  AttributeKey: string;
-  /** 说明：属性名称备注：支持中英文字符。最大支持80个中英文字符，如风格 */
-  AttributeName: string;
-  /** 说明：标签ID（LabelId）以及标签名（LabelName）备注：- 不填写LabelId，默认在当前AttributeId下新增标签值（LabelName）；- 若填写该AttributeId下的LabelId以及LabelName，则为修改该LabelId对应的标签值 */
-  Labels?: AttributeLabelItem[];
-  /** 说明：删除的标签id */
-  DeleteLabelIds?: string[];
-}
-
-declare interface ModifyAttributeLabelResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyQARequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 问答对ID */
-  QaId: string;
-  /** 问题，最大1000个英文字符 */
-  Question: string;
-  /** 答案，最大4000个英文字符 */
-  Answer: string;
-  /** 属性标签 */
-  AttributeLabels?: AttributeLabelReferItem[];
-}
-
-declare interface ModifyQAResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface QueryRewriteRequest {
   /** 说明：需要改写的多轮历史会话，每轮历史对话需要包含user（问）和assistant（答）成对输入备注：由于模型字符限制，最多提供4轮对话。针对最后一轮对话进行改写。四轮对话最多包含3600个字符。 */
   Messages: Message[];
@@ -712,28 +390,6 @@ declare interface ReconstructDocumentSSEResponse {
   RequestId?: string;
 }
 
-declare interface RetrieveKnowledgeRequest {
-  /** 知识库ID。 */
-  KnowledgeBaseId: string;
-  /** 用于检索的文本。 */
-  Query: string;
-  /** 检索方法，默认使用`HYBRID`混合检索。- `SEMANTIC`：语义检索- `FULL_TEXT`：全文检索- `HYBRID`：混合检索 */
-  RetrievalMethod?: string;
-  /** 检索设置。 */
-  RetrievalSetting?: RetrievalSetting;
-  /** 标签过滤。 */
-  AttributeLabels?: LabelItem[];
-}
-
-declare interface RetrieveKnowledgeResponse {
-  /** 检索结果 */
-  Records?: RetrievalRecord[];
-  /** 检索结果数量 */
-  TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RunRerankRequest {
   /** 说明：查询内容备注：用于匹配的query */
   Query: string;
@@ -752,30 +408,6 @@ declare interface RunRerankResponse {
   RequestId?: string;
 }
 
-declare interface UploadDocRequest {
-  /** 知识库ID */
-  KnowledgeBaseId: string;
-  /** 文件名。**需带文件类型后缀** */
-  FileName: string;
-  /** 文件类型。**支持的文件类型：**- `PDF`、`DOC`、`DOCX`、`XLS`、`XLSX`、`PPT`、`PPTX`、`MD`、`TXT`、`PNG`、`JPG`、`JPEG`、`CSV`**支持的文件大小：** - `PDF`、`DOCX`、`DOC`、`PPT`、`PPTX` 最大 200M - `TXT`、`MD` 最大10M - 其他 最大20M */
-  FileType: string;
-  /** 文件的 URL 地址。文件存储于腾讯云的 URL 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。 非腾讯云存储的 URL 速度和稳定性可能受一定影响。参考：[腾讯云COS文档](https://cloud.tencent.com/document/product/436/7749) */
-  FileUrl: string;
-  /** 属性标签引用 */
-  AttributeLabel?: AttributeLabelReferItem[];
-  /** 属性标签引用 */
-  AttributeLabels?: AttributeLabelReferItem[];
-  /** 分段信息 */
-  Config?: SegmentationConfig;
-}
-
-declare interface UploadDocResponse {
-  /** 文档ID */
-  DocId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Lkeap 知识引擎原子能力} */
 declare interface Lkeap {
   (): Versions;
@@ -783,26 +415,10 @@ declare interface Lkeap {
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** DeepSeek API 接口 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
-  /** 创建属性标签 {@link CreateAttributeLabelRequest} {@link CreateAttributeLabelResponse} */
-  CreateAttributeLabel(data: CreateAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAttributeLabelResponse>;
-  /** 创建知识库 {@link CreateKnowledgeBaseRequest} {@link CreateKnowledgeBaseResponse} */
-  CreateKnowledgeBase(data?: CreateKnowledgeBaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKnowledgeBaseResponse>;
-  /** 创建问答对 {@link CreateQARequest} {@link CreateQAResponse} */
-  CreateQA(data: CreateQARequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAResponse>;
   /** 创建文档解析任务 {@link CreateReconstructDocumentFlowRequest} {@link CreateReconstructDocumentFlowResponse} */
   CreateReconstructDocumentFlow(data: CreateReconstructDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReconstructDocumentFlowResponse>;
   /** 创建文档拆分任务 {@link CreateSplitDocumentFlowRequest} {@link CreateSplitDocumentFlowResponse} */
   CreateSplitDocumentFlow(data: CreateSplitDocumentFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSplitDocumentFlowResponse>;
-  /** 批量删除属性标签 {@link DeleteAttributeLabelsRequest} {@link DeleteAttributeLabelsResponse} */
-  DeleteAttributeLabels(data: DeleteAttributeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAttributeLabelsResponse>;
-  /** 删除文档 {@link DeleteDocsRequest} {@link DeleteDocsResponse} */
-  DeleteDocs(data: DeleteDocsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocsResponse>;
-  /** 删除知识库 {@link DeleteKnowledgeBaseRequest} {@link DeleteKnowledgeBaseResponse} */
-  DeleteKnowledgeBase(data: DeleteKnowledgeBaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKnowledgeBaseResponse>;
-  /** 删除问答对 {@link DeleteQAsRequest} {@link DeleteQAsResponse} */
-  DeleteQAs(data: DeleteQAsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAsResponse>;
-  /** 查询文档详情 {@link DescribeDocRequest} {@link DescribeDocResponse} */
-  DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
   /** 获取账号下字符使用量与容量 {@link GetCharacterUsageRequest} {@link GetCharacterUsageResponse} */
   GetCharacterUsage(data?: GetCharacterUsageRequest, config?: AxiosRequestConfig): AxiosPromise<GetCharacterUsageResponse>;
   /** 获取特征向量 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
@@ -811,28 +427,12 @@ declare interface Lkeap {
   GetReconstructDocumentResult(data: GetReconstructDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetReconstructDocumentResultResponse>;
   /** 查询文档拆分任务结果 {@link GetSplitDocumentResultRequest} {@link GetSplitDocumentResultResponse} */
   GetSplitDocumentResult(data: GetSplitDocumentResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetSplitDocumentResultResponse>;
-  /** 批量导入问答对 {@link ImportQAsRequest} {@link ImportQAsResponse} */
-  ImportQAs(data: ImportQAsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportQAsResponse>;
-  /** 获取属性标签列表 {@link ListAttributeLabelsRequest} {@link ListAttributeLabelsResponse} */
-  ListAttributeLabels(data: ListAttributeLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttributeLabelsResponse>;
-  /** 获取文档列表 {@link ListDocsRequest} {@link ListDocsResponse} */
-  ListDocs(data: ListDocsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDocsResponse>;
-  /** 获取问答对列表 {@link ListQAsRequest} {@link ListQAsResponse} */
-  ListQAs(data: ListQAsRequest, config?: AxiosRequestConfig): AxiosPromise<ListQAsResponse>;
-  /** 修改属性标签 {@link ModifyAttributeLabelRequest} {@link ModifyAttributeLabelResponse} */
-  ModifyAttributeLabel(data: ModifyAttributeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAttributeLabelResponse>;
-  /** 修改问答对 {@link ModifyQARequest} {@link ModifyQAResponse} */
-  ModifyQA(data: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
   /** 多轮改写 {@link QueryRewriteRequest} {@link QueryRewriteResponse} */
   QueryRewrite(data: QueryRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRewriteResponse>;
   /** 实时文档解析 {@link ReconstructDocumentSSERequest} {@link ReconstructDocumentSSEResponse} */
   ReconstructDocumentSSE(data: ReconstructDocumentSSERequest, config?: AxiosRequestConfig): AxiosPromise<ReconstructDocumentSSEResponse>;
-  /** 检索知识库内容 {@link RetrieveKnowledgeRequest} {@link RetrieveKnowledgeResponse} */
-  RetrieveKnowledge(data: RetrieveKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<RetrieveKnowledgeResponse>;
   /** 重排序 {@link RunRerankRequest} {@link RunRerankResponse} */
   RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
-  /** 上传文档 {@link UploadDocRequest} {@link UploadDocResponse} */
-  UploadDoc(data: UploadDocRequest, config?: AxiosRequestConfig): AxiosPromise<UploadDocResponse>;
 }
 
 export declare type Versions = ["2024-05-22"];
