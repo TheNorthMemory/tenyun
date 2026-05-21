@@ -5093,7 +5093,7 @@ declare interface RetryReleaseResponse {
 }
 
 declare interface SaveDocRequest {
-  /** 应用ID。应用ID 获取方法参看[如何获取 BotBizId](https://cloud.tencent.com/document/product/1759/109469)导入知识库文档时，该参数填入知识库 ID。 */
+  /** 应用ID。应用ID 获取方法参看如何获取 BotBizId导入知识库文档时，该参数填入知识库 ID。 */
   BotBizId: string;
   /** 文件名，需要包含文件扩展名 */
   FileName: string;
@@ -5103,7 +5103,7 @@ declare interface SaveDocRequest {
   CosUrl: string;
   /** ETag 全称为 Entity Tag，是对象被创建时标识对象内容的信息标签，可用于检查对象的内容是否发生变化 成功上传cos后，从返回头中获取 */
   ETag: string;
-  /** cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性 成功上传cos后，从返回头中获取请注意：cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判定为重复文档 */
+  /** cos_hash x-cos-hash-crc64ecma 头部中的 CRC64编码进行校验上传到云端的文件和本地文件的一致性成功上传cos后，从返回头中获取请注意：cos_hash为文档唯一性标识，与文件名无关 相同的cos_hash会被判定为重复文档 */
   CosHash: string;
   /** 文件大小 */
   Size: string;
@@ -5131,12 +5131,14 @@ declare interface SaveDocRequest {
   IsDownload?: boolean;
   /** 重复文档处理方式，按顺序匹配第一个满足条件的方式处理 */
   DuplicateFileHandles?: DuplicateFileHandle[];
-  /** 自定义切分规则请求参数为一个 **JSON Object**，具体格式可参见接口示例值。包含以下主要字段：| 字段名 | 类型 | 说明 ||--------------------|--------|----------------------------------------|| `xlsx_splitter` | Object | **Excel（xlsx）文件切分策略配置**，仅当处理 Excel 文件时有效 || `common_splitter` | Object | **通用文件（如 txt、pdf 等）切分策略配置**，按页或按标签切分 || `table_style` | String | 表格内容的输出格式，如 HTML 或 Markdown |---## `xlsx_splitter`（Excel 切分策略）用于配置 **表格文件的切分方式**。**类型：Object**```json"xlsx_splitter": { "header_interval": [1, 2], "content_start": 10, "split_row": 2}```### 字段说明：| 字段名 | 类型 | 说明 ||-------------------|--------|----------------------------------------------------------------------|| `header_interval` | Array\ | 表头所在的行区间，格式为 `[起始行, 结束行]`，**行号从 1 开始计数**。例如 `[1, 2]` 表示第 1~2 行为表头。 || `content_start` | Number | **表格内容的起始行号（从 1 开始）**。 || `split_row` | Number | **切分行数**。 |---## `common_splitter`（通用文件切分策略）用于配置 **非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式**，支持两种策略：**按页切分（page）** 或 **按标识符切分（tag）**。**类型：Object**```json"common_splitter": { "splitter": "page", "page_splitter": { "chunk_length": 1000, "chunk_overlap_length": 100 }}```### 字段说明：| 字段名 | 类型 | 说明 ||-------------------|--------|---------------------------------------------------|| `splitter` | String | 切分策略类型，可选值为：`"page"`（按页切分） 或 `"tag"`（按标识符切分）。 || `page_splitter` | Object | **按页切分的配置**。 || `page_splitter.chunk_length` | 1000 | **切片最大长度**。 || `page_splitter.chunk_overlap_length` | 100 | **切片重叠长度**。 || `tag_splitter` | Object | **自定义切分配置**。 || `tag_splitter.tag` | Array\ | **切分标识符**。 || `tag_splitter.chunk_length`| Number | **切片最大长度**。 || `tag_splitter.chunk_overlap_length` | Number | **切块重叠长度**。 |🔹 **补充说明：**- `splitter` 字段的值可以是： - `"page"`：只使用按页切分逻辑，此时只需要关心 `page_splitter` 相关字段。 - `"tag"`：只使用按标识符（如分号、换行等）切分逻辑，此时关注 `tag_splitter`。---## `table_style`（表格输出样式）用于指定 **表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回**，方便前端展示或后续处理。**类型：String**```json"table_style": "md"```### 字段说明：| 字段名 | 类型 | 说明 ||--------------|--------|----------------------------------------------------------------------|| `table_style` | String | 指定表格内容的输出格式。可用值：• `"html"`：以 HTML 表格形式返回，适合网页展示。• `"md"`：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。| */
+  /** 自定义切分规则请求参数为一个 JSON Object，具体格式可参见接口示例值。包含以下主要字段：字段名类型说明xlsx_splitterObjectExcel（xlsx）文件切分策略配置，仅当处理 Excel 文件时有效common_splitterObject通用文件（如 txt、pdf 等）切分策略配置，按页或按标签切分table_styleString表格内容的输出格式，如 HTML 或 Markdownxlsx_splitter（Excel 切分策略）用于配置 表格文件的切分方式。类型：Object&quot;xlsx_splitter&quot;: { &quot;header_interval&quot;: [1, 2], &quot;content_start&quot;: 10, &quot;split_row&quot;: 2}字段说明：字段名类型说明header_intervalArray&lt;Number&gt;表头所在的行区间，格式为 [起始行, 结束行]，行号从 1 开始计数。例如 [1, 2] 表示第 1~2 行为表头。content_startNumber表格内容的起始行号（从 1 开始）。split_rowNumber切分行数。common_splitter（通用文件切分策略）用于配置 非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式，支持两种策略：按页切分（page） 或 按标识符切分（tag）。类型：Object&quot;common_splitter&quot;: { &quot;splitter&quot;: &quot;page&quot;, &quot;page_splitter&quot;: { &quot;chunk_length&quot;: 1000, &quot;chunk_overlap_length&quot;: 100 }}字段说明：字段名类型说明splitterString切分策略类型，可选值为：&quot;page&quot;（按页切分） 或 &quot;tag&quot;（按标识符切分）。page_splitterObject按页切分的配置。page_splitter.chunk_length1000切片最大长度。page_splitter.chunk_overlap_length100切片重叠长度。tag_splitterObject自定义切分配置。tag_splitter.tagArray&lt;String&gt;切分标识符。tag_splitter.chunk_lengthNumber切片最大长度。tag_splitter.chunk_overlap_lengthNumber切块重叠长度。???? 补充说明：splitter 字段的值可以是：&quot;page&quot;：只使用按页切分逻辑，此时只需要关心 page_splitter 相关字段。&quot;tag&quot;：只使用按标识符（如分号、换行等）切分逻辑，此时关注 tag_splitter。table_style（表格输出样式）用于指定 表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回，方便前端展示或后续处理。类型：String&quot;table_style&quot;: &quot;md&quot;字段说明：字段名类型说明table_styleString指定表格内容的输出格式。可用值：• &quot;html&quot;：以 HTML 表格形式返回，适合网页展示。• &quot;md&quot;：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。 */
   SplitRule?: string;
   /** 文档更新频率，默认值为0不更新 */
   UpdatePeriodInfo?: UpdatePeriodInfo;
   /** 文档生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效默认值：应用内默认知识库为2，共享知识库为4。 */
   EnableScope?: number;
+  /** 文件url 文件的 FileUrl、CosUrl必须提供一个，如果都提供，只使用CosUrl */
+  FileUrl?: string;
 }
 
 declare interface SaveDocResponse {

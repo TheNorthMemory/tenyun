@@ -2202,6 +2202,12 @@ declare interface ObjectTask {
   ObjectType?: string;
 }
 
+/** 同步对象列表 */
+declare interface Objects {
+  /** 包含数据库表信息 */
+  DatabaseTables?: MigrateObject | null;
+}
+
 /** 数据库地址 */
 declare interface OldAddrInfo {
   /** IP */
@@ -3432,6 +3438,68 @@ declare interface AddInstancesResponse {
   RequestId?: string;
 }
 
+declare interface AddLibraDBInstancesRequest {
+  /** 可用区 */
+  Zone: string;
+  /** 集群ID */
+  ClusterId: string;
+  /** Cpu核数 */
+  Cpu: number;
+  /** 内存，单位为GB */
+  Mem: number;
+  /** 磁盘大小 */
+  StorageSize: number;
+  /** 付费模式 */
+  PayMode: number;
+  /** 同步对象列表 */
+  Objects: Objects;
+  /** 新增RO组时使用的Port，取值范围为[0,65535) */
+  Port?: number;
+  /** 新增只读实例数，取值范围为(0,15] */
+  GoodsNum?: number;
+  /** 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，'_','-','.' */
+  InstanceName?: string;
+  /** 副本数 */
+  ReplicasNum?: number;
+  /** ReplicasNum>1或者ReplicasNum=1且Cpu>=32核的时候取值为'Exclusive'，其余场景取值'Common' */
+  InstanceType?: string;
+  /** 磁盘类型 */
+  StorageType?: string;
+  /** 是否自动选择代金券 1是 0否 默认为0 */
+  AutoVoucher?: number;
+  /** 订单来源，字符串长度范围为[0,64) */
+  OrderSource?: string;
+  /** 交易模式 0-下单并支付 1-下单 */
+  DealMode?: number;
+  /** 所属VPC网络ID。 */
+  VpcId?: string;
+  /** 所属子网ID，如果设置了VpcId，则SubnetId必填。 */
+  SubnetId?: string;
+  /** 安全组ID，新建只读实例时可以指定安全组。 */
+  SecurityGroupIds?: string[];
+  /** 分析引擎版本 */
+  LibraDBVersion?: string;
+  /** 购买时长,与TimeUnit组合才能生效 */
+  TimeSpan?: number;
+  /** 购买时长单位, 与TimeSpan组合生效，可选:日:d,月:m */
+  TimeUnit?: string;
+  /** 源端实例id */
+  SrcInstanceId?: string;
+}
+
+declare interface AddLibraDBInstancesResponse {
+  /** 大订单号 */
+  BigDealIds?: string[] | null;
+  /** 冻结流水，一次开通一个冻结流水。 */
+  TranId?: string | null;
+  /** 后付费订单号。 */
+  DealNames?: string[] | null;
+  /** 发货资源id列表。 */
+  ResourceIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssociateSecurityGroupsRequest {
   /** 实例组 ID 数组，cynosdbmysql-grp-前缀开头或集群 ID。说明：要获取集群的实例组 ID，可通过 [查询集群实例组](https://cloud.tencent.com/document/product/1003/103934) 进行。 */
   InstanceIds: string[];
@@ -3775,7 +3843,7 @@ declare interface CreateClustersRequest {
   Cpu?: number;
   /** 当DbMode为NORMAL或不填时必选普通实例内存,单位GB */
   Memory?: number;
-  /** 实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos */
+  /** 实例数量取值范围：[1, 16]默认值：2取值为2，表示一个 rw 实例 + 一个 ro 实例。传递的 n 表示1个 rw 实例 + n-1个 ro 实例（规格相同）。如需要更精确的集群组成搭配，请使用 InstanceInitInfos。此参数设置的数值适用于预置资源集群，如需设置 Serverless 集群的实例规格及数量，请使用 InstanceInitInfos.N 中的 InstanceInitInfo 结构。 */
   InstanceCount?: number;
   /** 该参数无实际意义，已废弃。存储大小，单位GB。 */
   Storage?: number;
@@ -3849,6 +3917,8 @@ declare interface CreateClustersRequest {
   AutoArchive?: string;
   /** 暂停后的归档处理时间单位：时默认值：12仅当前集群主实例为SERVERLESS时，该参数生效 */
   AutoArchiveDelayHours?: number;
+  /** 集群级别，可空。例如 P0, P1。（可忽略该字段） */
+  ClusterLevel?: string;
   /** 内核小版本号 */
   CynosVersion?: string;
 }
@@ -8013,6 +8083,8 @@ declare interface Cynosdb {
   AddClusterSlaveZone(data: AddClusterSlaveZoneRequest, config?: AxiosRequestConfig): AxiosPromise<AddClusterSlaveZoneResponse>;
   /** 集群添加实例 {@link AddInstancesRequest} {@link AddInstancesResponse} */
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
+  /** 创建只读分析引擎 {@link AddLibraDBInstancesRequest} {@link AddLibraDBInstancesResponse} */
+  AddLibraDBInstances(data: AddLibraDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddLibraDBInstancesResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 为集群绑定资源包 {@link BindClusterResourcePackagesRequest} {@link BindClusterResourcePackagesResponse} */

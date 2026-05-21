@@ -345,6 +345,12 @@ declare interface CreateAgentInstanceResponse {
 }
 
 declare interface CreateChatCompletionRequest {
+  /** 输入内容 */
+  InputContent: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 对话窗口ID，空值表示新的会话 */
+  ChatId?: string;
   /** 是否隐藏 */
   IsHidden?: boolean;
   /** 是否隐藏会话 */
@@ -636,7 +642,7 @@ declare interface Tdai {
   /** 创建Agent实例 {@link CreateAgentInstanceRequest} {@link CreateAgentInstanceResponse} */
   CreateAgentInstance(data?: CreateAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentInstanceResponse>;
   /** 创建一个聊天会话 {@link CreateChatCompletionRequest} {@link CreateChatCompletionResponse} */
-  CreateChatCompletion(data?: CreateChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChatCompletionResponse>;
+  CreateChatCompletion(data: CreateChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChatCompletionResponse>;
   /** 查询Agent实例值守任务详情 {@link DescribeAgentDutyTaskDetailRequest} {@link DescribeAgentDutyTaskDetailResponse} */
   DescribeAgentDutyTaskDetail(data?: DescribeAgentDutyTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDutyTaskDetailResponse>;
   /** 查询Agent实例值守任务列表 {@link DescribeAgentDutyTasksRequest} {@link DescribeAgentDutyTasksResponse} */

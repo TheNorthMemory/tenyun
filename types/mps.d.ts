@@ -9250,6 +9250,22 @@ declare interface DeleteTranscodeTemplateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteVoiceRequest {
+  /** 音色Id */
+  VoiceId: string;
+  /** 扩展参数，json字符串 */
+  ExtParam?: string;
+}
+
+declare interface DeleteVoiceResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWatermarkTemplateRequest {
   /** 水印模板唯一标识。 */
   Definition: number;
@@ -11871,7 +11887,7 @@ declare interface SyncDubbingRequest {
   Output?: SyncDubbingOutputOption;
   /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
-  /** 扩展参数，json字符串synExt Object 语音合成扩展参数 -duration Float 合成音频时长，单位秒，示例：5.2 -sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100] -pitch Integer 音调，默认0原音色输出，取值[-12, 12]cloneExt Object 音色克隆扩展参数 -timeRanges Float[][] 指定克隆音频时间范围，默认[[0, 20]]，示例[[5.2, 10], [45, 59.8]] */
+  /** 扩展参数，json字符串synExt Object 语音合成扩展参数 duration Float 合成音频时长（单位秒），默认不控制时长。示例：5.2 sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,24000,32000,44100] pitch Integer 音调，默认0原音色输出，取值[-12, 12]cloneExt Object 音色克隆扩展参数 timeRanges Float[][] 指定克隆音频时间范围（单位秒），默认取音频前20s。示例：[[5.2, 10], [45, 59.8]] */
   ExtParam?: string;
 }
 
@@ -12125,6 +12141,8 @@ declare interface Mps {
   DeleteSubtitleEmbedTemplate(data: DeleteSubtitleEmbedTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubtitleEmbedTemplateResponse>;
   /** 删除转码模板 {@link DeleteTranscodeTemplateRequest} {@link DeleteTranscodeTemplateResponse} */
   DeleteTranscodeTemplate(data: DeleteTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTranscodeTemplateResponse>;
+  /** 删除音色 {@link DeleteVoiceRequest} {@link DeleteVoiceResponse} */
+  DeleteVoice(data: DeleteVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVoiceResponse>;
   /** 删除水印模板 {@link DeleteWatermarkTemplateRequest} {@link DeleteWatermarkTemplateResponse} */
   DeleteWatermarkTemplate(data: DeleteWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWatermarkTemplateResponse>;
   /** 删除关键词样本 {@link DeleteWordSamplesRequest} {@link DeleteWordSamplesResponse} */

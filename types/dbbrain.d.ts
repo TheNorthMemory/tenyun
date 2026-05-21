@@ -1355,7 +1355,7 @@ declare interface CreateAuditLogFileResponse {
 }
 
 declare interface CreateDBDiagReportTaskRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。TDSQL MySQL数据库类型，实例ID应填写为“实例ID&amp;分片ID”的格式。 */
   InstanceId: string;
   /** 开始时间，如“2020-11-08T14:00:00+08:00”。 */
   StartTime: string;
@@ -1367,7 +1367,7 @@ declare interface CreateDBDiagReportTaskRequest {
   ContactPerson?: number[];
   /** 接收邮件的联系组ID数组。 */
   ContactGroup?: number[];
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;mariadb&quot; - 云数据库 MariaDB，&quot;dcdb&quot; - 云数据库 TDSQL MySQL，默认为&quot;mysql&quot;。 */
   Product?: string;
 }
 
@@ -2889,13 +2889,13 @@ declare interface DescribeUserAutonomyProfileResponse {
 }
 
 declare interface DescribeUserSqlAdviceRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
   /** SQL语句。 */
   SqlText: string;
   /** 库名。 */
   Schema?: string;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值&quot;dcdb&quot; - 云数据库TDSQL MySQL；&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL；&quot;dbbrain-mysql&quot; - 自建 MySQL，默认为&quot;mysql&quot;。 */
   Product?: string;
 }
 

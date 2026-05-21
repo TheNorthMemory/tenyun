@@ -2533,11 +2533,11 @@ declare interface CreateRabbitMQBindingResponse {
 }
 
 declare interface CreateRabbitMQUserRequest {
-  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 TDMQ RabbitMQ 控制台查询。 */
   InstanceId: string;
   /** 用户名，登录时使用 */
   User: string;
-  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项 */
+  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;&#39;,.?/】中的两项 */
   Password: string;
   /** 描述 */
   Description?: string;
@@ -2547,6 +2547,8 @@ declare interface CreateRabbitMQUserRequest {
   MaxConnections?: number;
   /** 该用户的最大channel数，不填写则不限制 */
   MaxChannels?: number;
+  /** 是否开启cam验证 */
+  EnableCamAuth?: boolean;
 }
 
 declare interface CreateRabbitMQUserResponse {
@@ -5085,11 +5087,11 @@ declare interface ModifyRabbitMQPermissionResponse {
 }
 
 declare interface ModifyRabbitMQUserRequest {
-  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
+  /** 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 TDMQ RabbitMQ 控制台查询。 */
   InstanceId: string;
-  /** 用户名，形如rabbitmq。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。 */
+  /** 用户名，形如rabbitmq。有效的 User 名称可通过登录 TDMQ RabbitMQ 控制台查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。 */
   User: string;
-  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项 */
+  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;&#39;,.?/】中的两项 */
   Password: string;
   /** 描述，不传则不修改 */
   Description?: string;
@@ -5099,6 +5101,8 @@ declare interface ModifyRabbitMQUserRequest {
   MaxConnections?: number;
   /** 该用户的最大channel数，不传则不修改 */
   MaxChannels?: number;
+  /** 是否开启cam验证 */
+  EnableCamAuth?: boolean;
 }
 
 declare interface ModifyRabbitMQUserResponse {

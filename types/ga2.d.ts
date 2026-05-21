@@ -652,6 +652,18 @@ declare interface DescribeListenersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskResultRequest {
+  /** 异步任务ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeTaskResultResponse {
+  /** 任务状态。 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAccelerateAreasRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -847,6 +859,8 @@ declare interface Ga2 {
   DescribeGlobalAccelerators(data?: DescribeGlobalAcceleratorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalAcceleratorsResponse>;
   /** 查询监听器 {@link DescribeListenersRequest} {@link DescribeListenersResponse} */
   DescribeListeners(data: DescribeListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenersResponse>;
+  /** 查询异步任务结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
+  DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 修改加速地域 {@link ModifyAccelerateAreasRequest} {@link ModifyAccelerateAreasResponse} */
   ModifyAccelerateAreas(data: ModifyAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccelerateAreasResponse>;
   /** 修改终端节点组 {@link ModifyEndpointGroupRequest} {@link ModifyEndpointGroupResponse} */

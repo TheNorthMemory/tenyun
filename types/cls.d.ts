@@ -2610,9 +2610,9 @@ declare interface TopicInfo {
   EffectiveDate?: string;
   /** IsSourceFrom 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
-  /** 当前计费模式枚举值：0： 按功能项计费1： 原始日志量计费 */
+  /** 当前计费模式枚举值：0： 按使用功能计费1： 按原始日志量计费（目前仅面向少部分客户支持） */
   BillingMode?: number;
-  /** 如果有异步任务，任务成功后的新计费模式枚举值：0： 按功能项计费1： 原始日志量计费 */
+  /** 如果有异步任务，任务成功后的新计费模式枚举值：0： 按使用功能计费1： 按原始日志量计费（目前仅面向少部分客户支持） */
   NewBillingMode?: number;
 }
 
@@ -3831,7 +3831,7 @@ declare interface CreateTopicRequest {
   Extends?: TopicExtendInfo;
   /** 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
-  /** 计费模式枚举值：0： 按功能项计费1： 原始日志量计费默认值：0通过接口调用时默认值为0，通过控制台调用时默认值为1 */
+  /** 计费模式枚举值：0： 按使用功能计费1： 按原始日志量计费（目前仅面向少部分客户支持）默认值：0 */
   BillingMode?: number;
 }
 
@@ -6349,7 +6349,7 @@ declare interface ModifyTopicRequest {
   Encryption?: number;
   /** 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
-  /** 计费模式枚举值：0： 按功能项计费1： 原始日志量计费 */
+  /** 计费模式枚举值：0： 按使用功能计费1： 按原始日志量计费（目前仅面向少部分客户支持）默认值：0 */
   BillingMode?: number;
 }
 

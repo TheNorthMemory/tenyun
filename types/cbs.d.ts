@@ -114,30 +114,30 @@ declare interface CdcSize {
   DiskAvailable?: number;
 }
 
-/** 描述购买云盘时的费用明细。 */
+/** 描述购买云硬盘时的费用明细。 */
 declare interface DetailPrice {
-  /** 描述计费项目名称。 */
-  PriceTitle?: string;
-  /** 描述计费项目显示名称，用户控制台展示。 */
-  PriceName?: string;
-  /** 预付费云盘预支费用的原价，单位：元。 */
-  OriginalPrice?: number | null;
-  /** 预付费云盘预支费用的折扣价，单位：元。 */
-  DiscountPrice?: number | null;
-  /** 后付费云盘原单价，单位：元。 */
-  UnitPrice?: number | null;
-  /** 后付费云盘折扣单价，单位：元。 */
-  UnitPriceDiscount?: number | null;
-  /** 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。 */
+  /** 后付费云硬盘的计价单元，取值范围：HOUR：表示后付费云硬盘的计价单元是按小时计算。 */
   ChargeUnit?: string | null;
-  /** 高精度预付费云盘预支费用的原价，单位：元。 */
-  OriginalPriceHigh?: string | null;
-  /** 高精度预付费云盘预支费用的折扣价，单位：元。 */
+  /** 预付费云硬盘预支费用的折扣价，单位：元。 */
+  DiscountPrice?: number | null;
+  /** 高精度预付费云硬盘预支费用的折扣价，单位：元。 */
   DiscountPriceHigh?: string | null;
-  /** 高精度后付费云盘原单价，单位：元。 */
-  UnitPriceHigh?: string | null;
-  /** 高精度后付费云盘折扣单价，单位：元。 */
+  /** 预付费云硬盘预支费用的原价，单位：元。 */
+  OriginalPrice?: number | null;
+  /** 高精度预付费云硬盘预支费用的原价，单位：元。 */
+  OriginalPriceHigh?: string | null;
+  /** 描述计费项目名称 */
+  PriceName?: string;
+  /** 描述计费项目显示名称，用户控制台展示 */
+  PriceTitle?: string;
+  /** 后付费云硬盘原单价，单位：元。 */
+  UnitPrice?: number | null;
+  /** 后付费云硬盘折扣单价，单位：元。 */
+  UnitPriceDiscount?: number | null;
+  /** 高精度后付费云硬盘折扣单价，单位：元。 */
   UnitPriceDiscountHigh?: string | null;
+  /** 高精度后付费云硬盘原单价，单位：元。 */
+  UnitPriceHigh?: string | null;
 }
 
 /** 描述了云硬盘的详细信息 */
@@ -314,16 +314,16 @@ declare interface Placement {
   Zone: string;
   /** 围笼Id，可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。 */
   CageId?: string | null;
+  /** 实例所属的独享集群ID。可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。 */
+  CdcId?: string | null;
+  /** 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。 */
+  CdcName?: string | null;
+  /** 独享集群id。 */
+  DedicatedClusterId?: string;
   /** 实例所属项目ID，可通过DescribeProject获取。不填默认为0，表示默认项目。 */
   ProjectId?: number;
   /** 实例所属项目名称，可通过[DescribeProject](/document/api/651/78725)获取。 */
   ProjectName?: string | null;
-  /** 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。 */
-  CdcName?: string | null;
-  /** 实例所属的独享集群ID。可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。 */
-  CdcId?: string | null;
-  /** 独享集群id。 */
-  DedicatedClusterId?: string;
 }
 
 /** 描述了定期快照的执行策略。可理解为在DayOfWeek/DayOfMonth指定的几天中，或者是IntervalDays设定的间隔的几天，在Hour指定的时刻点执行该条定期快照策。注：DayOfWeek/DayOfMonth/IntervalDays为互斥规则，必填且仅可设置其中一条策略规则。如果同时传入互斥规则，则只有一条生效，优先级为上文列出顺序：例如将三条规则全部设置，只有 DayOfWeek 生效。 */
@@ -362,26 +362,26 @@ declare interface PrepayPrice {
   DetailPrices?: DetailPrice[];
 }
 
-/** 描述预付费或后付费云盘的价格。 */
+/** 描述预付费或后付费云硬盘的价格。 */
 declare interface Price {
-  /** 后付费云盘折扣单价，单位：元。 */
-  UnitPriceDiscount?: number | null;
-  /** 预付费云盘预支费用的折扣价，单位：元。 */
-  DiscountPrice?: number | null;
-  /** 后付费云盘原单价，单位：元。 */
-  UnitPrice?: number | null;
-  /** 高精度后付费云盘原单价, 单位：元 */
-  UnitPriceHigh?: string | null;
-  /** 高精度预付费云盘预支费用的原价, 单位：元	。 */
-  OriginalPriceHigh?: string | null;
-  /** 预付费云盘预支费用的原价，单位：元。 */
-  OriginalPrice?: number | null;
-  /** 高精度预付费云盘预支费用的折扣价, 单位：元 */
-  DiscountPriceHigh?: string | null;
-  /** 高精度后付费云盘折扣单价, 单位：元 */
-  UnitPriceDiscountHigh?: string | null;
-  /** 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。 */
+  /** 后付费云硬盘的计价单元，取值范围：HOUR：表示后付费云硬盘的计价单元是按小时计算。 */
   ChargeUnit?: string | null;
+  /** 预付费云硬盘预支费用的折扣价，单位：元。 */
+  DiscountPrice?: number | null;
+  /** 高精度预付费云硬盘预支费用的折扣价，单位：元。 */
+  DiscountPriceHigh?: string | null;
+  /** 预付费云硬盘预支费用的原价，单位：元。 */
+  OriginalPrice?: number | null;
+  /** 高精度预付费云硬盘预支费用的原价，单位：元。 */
+  OriginalPriceHigh?: string | null;
+  /** 后付费云硬盘原单价，单位：元。 */
+  UnitPrice?: number | null;
+  /** 后付费云硬盘折扣单价，单位：元。 */
+  UnitPriceDiscount?: number | null;
+  /** 高精度后付费云硬盘折扣单价，单位：元。 */
+  UnitPriceDiscountHigh?: string | null;
+  /** 高精度后付费云硬盘原单价，单位：元。 */
+  UnitPriceHigh?: string | null;
 }
 
 /** 快照分享信息集合 */

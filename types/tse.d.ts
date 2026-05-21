@@ -2,6 +2,32 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 跨服务降级配置 */
+declare interface AIGWCrossServiceFallbackConfig {
+  /** 触发条件枚举值：ServiceUnavailable： 服务不可用ConnectionTimeout： 连接超时RateLimited： 限流 */
+  TriggerConditions: string[];
+  /** fallback 服务链 */
+  FallbackServiceChain: AIGWFallbackServiceItem[];
+}
+
+/** 降级服务元素 */
+declare interface AIGWFallbackServiceItem {
+  /** 模型服务 Id */
+  ModelServiceId: string;
+  /** 模型服务名 */
+  ModelServiceName?: string;
+}
+
+/** 路由匹配规则 */
+declare interface AIGWKVMatch {
+  /** 键 */
+  Key: string;
+  /** 值 */
+  Value: string;
+  /** 操作类型 */
+  Operator: string;
+}
+
 /** 云原生网关限流插件参数限流的精确Qps阈值 */
 declare interface AccurateQpsThreshold {
   /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
@@ -96,6 +122,104 @@ declare interface CLBMultiRegion {
   CLBMasterZone?: string;
   /** 备可用区信息 */
   CLBSlaveZone?: string;
+}
+
+/** 消费者结构 */
+declare interface CNAPIGwConsumer {
+  /** 分组id */
+  ConsumerId: string;
+  /** 名字 */
+  Name: string;
+  /** 创建时间 */
+  CreateTime: string;
+  /** 更新时间 yyyy-MM-dd hh:mm:ss */
+  ModifyTime: string;
+  /** 描述 */
+  Description?: string | null;
+  /** 消费者分组 */
+  ConsumerGroups?: CNAPIGwConsumerGroup[] | null;
+}
+
+/** 消费者组结构 */
+declare interface CNAPIGwConsumerGroup {
+  /** 分组id */
+  ConsumerGroupId: string;
+  /** 名字 */
+  Name: string;
+  /** 状态Disable/Enable */
+  Status: string;
+  /** 描述 */
+  Description: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 yyyy-MM-dd hh:mm:ss */
+  ModifyTime?: string;
+  /** 绑定的消费者数量 */
+  BindCount?: number | null;
+}
+
+/** 分组列表 */
+declare interface CNAPIGwConsumerGroupList {
+  /** 总数 */
+  TotalCount?: number;
+  /** 消费者分组信息 */
+  ConsumerGroups?: CNAPIGwConsumerGroup[];
+}
+
+/** 消费者列表 */
+declare interface CNAPIGwConsumerList {
+  /** 总数 */
+  TotalCount?: number;
+  /** 消费者列表 */
+  Consumers?: CNAPIGwConsumer[] | null;
+}
+
+/** 创建资源通用结果 */
+declare interface CNAPIGwCreateCommonResult {
+  /** 是否成功 */
+  Success?: boolean;
+  /** 对应的id 值 */
+  ID?: string;
+}
+
+/** 密钥信息 */
+declare interface CNAPIGwSecretKey {
+  /** 密钥id */
+  SecretKeyId?: string;
+  /** 密钥名字 */
+  Name?: string;
+  /** 密钥类型：ApiKey/JWT */
+  SecretType?: string;
+  /** 状态:- Enable: 启用- Disable: 禁用 */
+  Status?: string;
+  /** 生成方式:KMS/System/Custom */
+  GenerateType?: string;
+  /** 密钥值 */
+  SecretValue?: string;
+  /** KMS凭证名字 */
+  KmsKeyName?: string | null;
+  /** KMS凭证版本 */
+  KmsKeyVersion?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 是否可以绑定 */
+  CanBind?: boolean | null;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 绑定数 */
+  BindCount?: number;
+  /** 资源类型：- Consumer 消费者- LLM 模型服务 */
+  ResourceType?: string;
+}
+
+/** 密钥列表 */
+declare interface CNAPIGwSecretKeyList {
+  /** 总数 */
+  TotalCount?: number;
+  /** 密钥列表 */
+  SecretKeys?: CNAPIGwSecretKey[];
 }
 
 /** 灰度规则 Priority - Rule */
@@ -230,6 +354,132 @@ declare interface CloudNativeAPIGatewayConfig {
   IPV6FullChain?: boolean;
   /** 负载均衡个性化配置内容 */
   CustomizedConfigContent?: string;
+}
+
+/** LLM 模型 API */
+declare interface CloudNativeAPIGatewayLLMModelAPI {
+  /** 模型 API ID。 */
+  Id?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** AI 网关 LLM 模型 API 的唯一标识名称，格式规则：2-50 字符，支持英文、数字、下划线。 */
+  Name?: string;
+  /** 选择业务场景,xa0 选项：Chat（聊天）。 */
+  SceneType?: string;
+  /** 业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。 */
+  RequestProtocol?: string;
+  /** 路由列表 */
+  RouteList?: DefaultKongRoute[];
+  /** 为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。 */
+  BasePath?: string;
+  /** 路径简化，启用时：客户端请求路径 → 移除Base Path → 后端接收简洁路径禁用时：客户端请求路径 → 完整传递给后端。 */
+  StripPath?: boolean;
+  /** 模型 API 的相关描述。 */
+  Description?: string;
+  /** 模型服务Id */
+  ModelServiceId?: string;
+  /** 模型服务名称 */
+  ModelServiceName?: string;
+  /** 模型服务路由策略（是指如何路由到模型服务） */
+  ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute;
+  /** 无 */
+  MatchHeaders?: AIGWKVMatch[];
+  /** 是否开启跨服务fallback */
+  EnableCrossServiceFallback?: boolean;
+  /** 跨服务fallback配置详情 */
+  CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig;
+  /** 是否展示模型API */
+  DescribeCloudNativeAPIGatewayLLMModelAPI?: boolean;
+}
+
+/** LLM-单模型内降级规则 */
+declare interface CloudNativeAPIGatewayLLMModelFallbackRule {
+  /** 备选模型，主模型不可用时将依次按顺序尝试。 */
+  FallbackModels?: string[];
+}
+
+/** LLM-模型参数检查信息 */
+declare interface CloudNativeAPIGatewayLLMModelParamCheckInfo {
+  /** 允许的模型列表。 */
+  AllowModelList?: string[];
+  /** 模型参数校验失败时的处理策略，选项：Return404（返回404）、FallBackToDefaultModel（使用默认模型降级）。 */
+  ModelValidationFailureStrategy?: string;
+}
+
+/** LLM 模型服务 */
+declare interface CloudNativeAPIGatewayLLMModelService {
+  /** 模型服务 ID。 */
+  Id?: string;
+  /** 模型服务名称。 */
+  Name?: string;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 修改时间。 */
+  ModifyTime?: string;
+  /** 服务类型，目前只支持xa0LLMService。 */
+  ServiceType?: string;
+  /** 选择模型提供商, 选项：OpenAI、Anthropic、Azure OpenAI、自定义HTTP。 */
+  ModelProvider?: string;
+  /** API协议标准，根据供应商动态变化：OpenAI→OpenAI/v1，Anthropic→Anthropic/v1等 */
+  ModelProtocol?: string;
+  /** 自定义的模型请求 URL。 */
+  UpstreamURL?: string;
+  /** 模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。 */
+  ModelSelector?: string;
+  /** 默认模型，模型选择方式为 Specify 时必填。 */
+  DefaultModel?: string;
+  /** 开启模型降级，模型选择方式为 Specify 时必填。 */
+  EnableModelFallback?: boolean;
+  /** 可以配置备用模型规则，EnableSpecifyModelFallbackxa0为 true 时必填。 */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule;
+  /** 开启模型参数校验，是否校验客户端传递的 model 参数,xa0模型选择方式为 PassThrough 时必填。 */
+  EnableModelParamCheck?: boolean;
+  /** 模型检验信息，EnableModelParamCheckxa0为 true 时必填。 */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo;
+  /** 描述。 */
+  Description?: string;
+  /** 连接超时时间取值范围：[1, 3600000]单位：毫秒默认值：10000 */
+  ConnectTimeout?: number;
+  /** 写入超时时间取值范围：[1, 3600000]单位：毫秒默认值：60000 */
+  WriteTimeout?: number;
+  /** 读取超时时间取值范围：[1, 3600000]单位：毫秒 */
+  ReadTimeout?: number;
+  /** 重试次数取值范围：[0, 5]单位：次默认值：0 */
+  Retries?: number;
+  /** 路径拼接模式枚举值：FixedPath： 固定路径AutoConcat： 自动拼接 */
+  UpstreamUrlMode?: string;
+  /** sni */
+  SNI?: string;
+}
+
+/** 模型服务路由配置 */
+declare interface CloudNativeAPIGatewayLLMModelServiceRoute {
+  /** 生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个) */
+  SelectedTypes: string[];
+  /** 权重路由配置，最多10个 */
+  WeightedConfig?: CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy[];
+  /** 模型名称路由配置，最多10个 */
+  ModelNameConfig?: CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy[];
+}
+
+/** 模型服务模型名称路由策略 */
+declare interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
+  /** 模型服务id */
+  ModelServiceId: string;
+  /** 匹配模型服务 */
+  MatchModelName: string;
+  /** 重写模型 */
+  RewriteModelName?: string;
+}
+
+/** 权重路由配置 */
+declare interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
+  /** 模型服务id */
+  ModelServiceId: string;
+  /** 权重值 */
+  Weight: number;
 }
 
 /** 云原生API网关节点信息。 */
@@ -690,6 +940,18 @@ declare interface CreatePublicNetworkResult {
   GroupId?: string;
   /** 客户端公网网络ID */
   NetworkId?: string;
+}
+
+/** 默认kong路由，目前只在 LLM 模型 API相 关接口使用 */
+declare interface DefaultKongRoute {
+  /** 服务名字 */
+  Name: string;
+  /** 服务ID */
+  ID?: string;
+  /** HTTP Method */
+  Methods?: string[];
+  /** Http Path */
+  Paths?: string[];
 }
 
 /** 删除云原生API网关响应结果。 */
@@ -1800,6 +2062,22 @@ declare interface LimitRule {
   AccurateQpsThresholds?: AccurateQpsThreshold[];
 }
 
+/** LLM 模型 API 列表 */
+declare interface ListCloudNativeAPIGatewayLLMModelAPI {
+  /** 总数 */
+  TotalCount?: number;
+  /** AI 网关模型 API 列表。 */
+  DataList?: CloudNativeAPIGatewayLLMModelAPI[];
+}
+
+/** LLM 模型服务列表 */
+declare interface ListCloudNativeAPIGatewayLLMModelService {
+  /** 模型服务数量。 */
+  TotalCount?: number;
+  /** 模型服务列表。 */
+  DataList?: CloudNativeAPIGatewayLLMModelService[];
+}
+
 /** 获取云原生API网关实例列表响应结果。 */
 declare interface ListCloudNativeAPIGatewayResult {
   /** 总数。 */
@@ -2340,6 +2618,38 @@ declare interface ZookeeperServerInterface {
   Interface?: string;
 }
 
+declare interface AddCloudNativeAPIGatewayConsumerGroupAuthRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 资源类型:- ModelAPI: 模型API */
+  ResourceType: string;
+  /** 对应资源的id */
+  ResourceId: string;
+  /** 资源ID */
+  ConsumerGroupIds: string[];
+}
+
+declare interface AddCloudNativeAPIGatewayConsumerGroupAuthResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddCloudNativeAPIGatewayConsumerInGroupRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者组ID */
+  ConsumerGroupId: string;
+  /** 消费者ID */
+  ConsumerIds: string[];
+}
+
+declare interface AddCloudNativeAPIGatewayConsumerInGroupResponse {
+  /** 添加结果 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindAutoScalerResourceStrategyToGroupsRequest {
   /** 网关实例ID */
   GatewayId: string;
@@ -2430,6 +2740,128 @@ declare interface CreateCloudNativeAPIGatewayCertificateRequest {
 declare interface CreateCloudNativeAPIGatewayCertificateResponse {
   /** 创建证书结果 */
   Result?: CertificateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者组名称 */
+  Name: string;
+  /** 状态：- Enable 启用- Disable 禁用 */
+  Status: string;
+  /** 消费者组描述 */
+  Description?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
+  /** 创建结果 */
+  Result?: CNAPIGwCreateCommonResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayConsumerRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者名称 */
+  Name: string;
+  /** 消费者描述 */
+  Description?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayConsumerResponse {
+  /** 创建结果 */
+  Result?: CNAPIGwCreateCommonResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayLLMModelAPIRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** AI 网关 LLM 模型 API 的唯一标识名称，格式规则：最长60个字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。 */
+  Name: string;
+  /** 选择业务场景, 选项：Chat（聊天）。 */
+  SceneType: string;
+  /** 业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。 */
+  RequestProtocol: string;
+  /** 初始化关联的模型服务列表。 */
+  ListModelServiceId: string[];
+  /** 路由列表 */
+  RouteList: DefaultKongRoute[];
+  /** 为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。 */
+  BasePath?: string;
+  /** 模型 API 的相关描述。 */
+  Description?: string;
+  /** 模型服务路由策略（是指如何路由到模型服务） */
+  ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute;
+  /** 路由 Header 匹配规则 */
+  MatchHeaders?: AIGWKVMatch[];
+  /** 跨服务 fallback 开关 */
+  EnableCrossServiceFallback?: boolean;
+  /** 跨服务 fallback 配置 */
+  CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig;
+}
+
+declare interface CreateCloudNativeAPIGatewayLLMModelAPIResponse {
+  /** 是否成功。 */
+  Result?: boolean;
+  /** 模型 API ID，全局唯一标识。 */
+  ModelAPIId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 服务名称，最长60个字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。 */
+  Name: string;
+  /** 服务类型。目前仅支持 LLMService。枚举值：LLMService： 大语言模型服务 */
+  ServiceType: string;
+  /** 选择模型提供商, 选项：OpenAI、Anthropic、Azure OpenAI等。 */
+  ModelProvider: string;
+  /** API协议标准，根据供应商动态变化：OpenAI→OpenAI/v1，Anthropic→Anthropic/v1等 */
+  ModelProtocol: string;
+  /** 模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。 */
+  ModelSelector: string;
+  /** LLM 厂商颁发的认证信息 token 。 */
+  SecretKeyIds?: string[];
+  /** 默认模型，模型选择方式为 Specify 时必填。 */
+  DefaultModel?: string;
+  /** 开启模型降级，模型选择方式为 Specify 时必填。 */
+  EnableModelFallback?: boolean;
+  /** 可以配置备用模型规则，EnableSpecifyModelFallbackxa0为 true 时必填。 */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule;
+  /** 开启模型参数校验，是否校验客户端传递的 model 参数,xa0模型选择方式为 PassThrough 时必填 */
+  EnableModelParamCheck?: boolean;
+  /** 模型检验信息，EnableModelParamCheckxa0为 true 时必填。 */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo;
+  /** 描述。 */
+  Description?: string;
+  /** 服务提供商自定义 url */
+  UpstreamURL?: string;
+  /** 连接超时时间取值范围：[1, 3600000]单位：毫秒默认值：10000 */
+  ConnectTimeout?: number;
+  /** 写入超时时间取值范围：[1, 3600000]单位：毫秒默认值：60000 */
+  WriteTimeout?: number;
+  /** 读取超时时间取值范围：[1, 3600000]单位：毫秒默认值：60000 */
+  ReadTimeout?: number;
+  /** 重试次数取值范围：[0, 5]单位：次默认值：0 */
+  Retries?: number;
+  /** 路径拼接模式枚举值：FixedPath： 固定地址AutoConcat： 自动拼接 */
+  UpstreamUrlMode?: string;
+  /** sni */
+  SNI?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
+  /** 是否成功 */
+  Result?: boolean;
+  /** 模型服务 ID，全局唯一标识。 */
+  ModelServiceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2542,6 +2974,34 @@ declare interface CreateCloudNativeAPIGatewayRouteRequest {
 }
 
 declare interface CreateCloudNativeAPIGatewayRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewaySecretKeyRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 密钥类型： ApiKey */
+  SecretType: string;
+  /** 密钥名字 */
+  Name: string;
+  /** 生成方式： 密钥类型 Consumer 时选项： - KMS- System 系统 - Custom 自定义 密钥类型是 LLM 时选项 - KMS - Custom 自定义 */
+  GenerateType: string;
+  /** 资源类型：- Consumer 消费者- LLM 模型服务 */
+  ResourceType: string;
+  /** KMS 的凭证名字， GenerateType 时 kms 必填 */
+  KmsKeyName?: string;
+  /** KMS 的凭证版本， GenerateType 时 kms 必填 */
+  KmsKeyVersion?: string;
+  /** GenerateType 等于 Custom 是必填 */
+  SecretValue?: string;
+  /** 描述 */
+  Description?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewaySecretKeyResponse {
+  /** 允许的操作 */
+  Result?: CNAPIGwCreateCommonResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2932,6 +3392,30 @@ declare interface DeleteCloudNativeAPIGatewayCertificateResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者组ID */
+  ConsumerGroupId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayConsumerRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者ID */
+  ConsumerId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayConsumerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
   /** 网关ID */
   GatewayId: string;
@@ -2942,6 +3426,34 @@ declare interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayIPRestrictionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayLLMModelAPIRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 模型 API ID，全局唯一标识。 */
+  ModelAPIId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
+  /** 是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayLLMModelServiceRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 模型服务 ID，全局唯一标识。 */
+  ModelServiceId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
+  /** 是否成功 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2996,6 +3508,18 @@ declare interface DeleteCloudNativeAPIGatewayRouteRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewaySecretKeyRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 密钥id */
+  SecretKeyId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewaySecretKeyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3338,6 +3862,66 @@ declare interface DescribeCloudNativeAPIGatewayConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayConsumerGroupListRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 每页条数 */
+  Limit: number;
+  /** 起始位置 */
+  Offset: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerGroupListResponse {
+  /** 修改结果 */
+  Result?: CNAPIGwConsumerGroupList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者组ID */
+  ConsumerGroupId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
+  /** 删除结果 */
+  Result?: CNAPIGwConsumerGroup;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerListRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 页显示条数，最大20 */
+  Limit: number;
+  /** 起始位置 */
+  Offset: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerListResponse {
+  /** 消费者列表 */
+  Result?: CNAPIGwConsumerList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者ID */
+  ConsumerId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayConsumerResponse {
+  /** 删除结果 */
+  Result?: CNAPIGwConsumer;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayIPRestrictionRequest {
   /** 网关ID */
   GatewayId: string;
@@ -3362,6 +3946,82 @@ declare interface DescribeCloudNativeAPIGatewayInfoByIpRequest {
 declare interface DescribeCloudNativeAPIGatewayInfoByIpResponse {
   /** 出参 */
   Result?: DescribeInstanceInfoByIpResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 模型 API ID，全局唯一标识。 */
+  ModelAPIId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelAPIResponse {
+  /** 模型 API 信息。 */
+  Result?: CloudNativeAPIGatewayLLMModelAPI;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 返回数量，默认为 10，最大值为 1000。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是“与”的关系 */
+  Filters?: Filter[];
+  /** 搜索关键词，模糊匹配 name 和 description */
+  Keyword?: string;
+  /** 通过消费者组Id筛选，UseToBind 为 true 时ConsumerGroupId不为空 */
+  ConsumerGroupId?: string;
+  /** 筛选可被绑定的数据， 比如模型API里面绑定模型服务筛选时，如果设置true, 返回结果只会有可以被绑定的数据。 */
+  UseToBind?: boolean;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
+  /** 模型 API 列表。 */
+  Result?: ListCloudNativeAPIGatewayLLMModelAPI;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelServiceRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 模型服务 ID，全局唯一标识。 */
+  ModelServiceId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
+  /** 模型服务。 */
+  Result?: CloudNativeAPIGatewayLLMModelService;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelServicesRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 返回数量，默认为 10，最大值为 1000。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是“与”的关系，支持 Name */
+  Filters?: Filter[];
+  /** 通过模型 API 筛选模型服务 */
+  ModelAPIId?: string;
+  /** 通过密匙查询绑定的模型服务 */
+  SecretKeyId?: string;
+  /** 搜索关键词，模糊匹配 name 和 description */
+  Keyword?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayLLMModelServicesResponse {
+  /** 模型服务列表。 */
+  Result?: ListCloudNativeAPIGatewayLLMModelService;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3440,6 +4100,50 @@ declare interface DescribeCloudNativeAPIGatewayRoutesRequest {
 declare interface DescribeCloudNativeAPIGatewayRoutesResponse {
   /** 无 */
   Result?: KongServiceRouteList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 每页数量，最大20个 */
+  Limit: number;
+  /** 起始值 */
+  Offset: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
+  /** 允许的操作 */
+  Result?: CNAPIGwSecretKeyList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 密钥id */
+  SecretKeyId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyResponse {
+  /** 允许的操作 */
+  Result?: CNAPIGwSecretKey;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 密钥id */
+  SecretKeyId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyValueResponse {
+  /** 密钥值 */
+  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4264,6 +4968,114 @@ declare interface ModifyCloudNativeAPIGatewayCertificateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者组ID */
+  ConsumerGroupId: string;
+  /** 新的消费者组名称 */
+  Name: string;
+  /** 状态：- Enable 启用- Disable 禁用 */
+  Status: string;
+  /** 新的消费者组描述 */
+  Description?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayConsumerRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者ID */
+  ConsumerId: string;
+  /** 新的消费者名称 */
+  Name: string;
+  /** 新的消费者描述 */
+  Description?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayConsumerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 模型 API ID，全局唯一标识。 */
+  ModelAPIId: string;
+  /** 修改模型 API 名称 */
+  Name?: string;
+  /** 为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。 */
+  BasePath?: string;
+  /** 模型 API 的相关描述。 */
+  Description?: string;
+  /** 关联的模型服务列表（支持填多个模型服务） */
+  ListModelServiceId?: string[];
+  /** 模型服务路由策略（是指如何路由到模型服务） */
+  ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute;
+  /** headers 路由匹配 */
+  MatchHeaders?: AIGWKVMatch[];
+  /** 跨服务 fallback */
+  EnableCrossServiceFallback?: boolean;
+  /** 跨服务 fallback 配置 */
+  CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig;
+}
+
+declare interface ModifyCloudNativeAPIGatewayLLMModelAPIResponse {
+  /** 是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
+  /** 网关 id。 */
+  GatewayId: string;
+  /** 模型服务 ID，全局唯一标识。 */
+  ModelServiceId: string;
+  /** 修改服务名称，长度2-50字符，支持中英文、数字、下划线。 */
+  Name?: string;
+  /** 修改默认模型，模型选择方式为 Specify 时必填。 */
+  DefaultModel?: string;
+  /** 修改模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。 */
+  ModelSelector?: string;
+  /** 修改开启模型降级，模型选择方式为 Specify 时必填。 */
+  EnableModelFallback?: boolean;
+  /** 修改可以配置备用模型规则，EnableSpecifyModelFallback 为 true 时必填。 */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule;
+  /** 修改开启模型参数校验，是否校验客户端传递的 model 参数, 模型选择方式为 PassThrough 时必填 */
+  EnableModelParamCheck?: boolean;
+  /** 修改模型检验信息，EnableModelParamCheck 为 true 时必填。 */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo;
+  /** 修改描述。 */
+  Description?: string;
+  /** 修改模型服务地址 */
+  UpstreamURL?: string;
+  /** 连接超时时间取值范围：[1, 3600000]单位：毫秒默认值：10000 */
+  ConnectTimeout?: number;
+  /** 写入超时时间取值范围：[1, 3600000]单位：毫秒默认值：60000 */
+  WriteTimeout?: number;
+  /** 读取超时时间取值范围：[1, 3600000]单位：毫秒默认值：60000 */
+  ReadTimeout?: number;
+  /** 重试次数取值范围：[0, 5]单位：次默认值：0 */
+  Retries?: number;
+  /** 路径拼接模式枚举值：FixedPath： 固定路径AutoConcat： 自动拼接 */
+  UpstreamUrlMode?: string;
+  /** SNI */
+  SNI?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
+  /** 是否成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudNativeAPIGatewayRequest {
   /** 云原生API网关实例ID。 */
   GatewayId: string;
@@ -4338,6 +5150,20 @@ declare interface ModifyCloudNativeAPIGatewayRouteRequest {
 }
 
 declare interface ModifyCloudNativeAPIGatewayRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewaySecretKeyStatusRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 密钥名字 */
+  Status: string;
+  /** 密钥id */
+  SecretKeyId: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewaySecretKeyStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4637,6 +5463,36 @@ declare interface RateLimitResponse {
   HttpStatus?: number;
 }
 
+declare interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 资源类型:- ModelAPI: 模型API */
+  ResourceType: string;
+  /** 资源id */
+  ResourceId: string;
+  /** 资源ID */
+  ConsumerGroupIds: string[];
+}
+
+declare interface RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveCloudNativeAPIGatewayConsumerInGroupRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 消费者组ID */
+  ConsumerGroupId: string;
+  /** 消费者ID列表 */
+  ConsumerIds: string[];
+}
+
+declare interface RemoveCloudNativeAPIGatewayConsumerInGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RestartSREInstanceRequest {
   /** 微服务引擎实例Id */
   InstanceId: string;
@@ -4764,6 +5620,10 @@ declare interface UpdateUpstreamTargetsResponse {
 /** {@link Tse TSF-Polaris&ZK&网关} */
 declare interface Tse {
   (): Versions;
+  /** 云原生网关添加消费者组授权 {@link AddCloudNativeAPIGatewayConsumerGroupAuthRequest} {@link AddCloudNativeAPIGatewayConsumerGroupAuthResponse} */
+  AddCloudNativeAPIGatewayConsumerGroupAuth(data: AddCloudNativeAPIGatewayConsumerGroupAuthRequest, config?: AxiosRequestConfig): AxiosPromise<AddCloudNativeAPIGatewayConsumerGroupAuthResponse>;
+  /** 云原生网关添加消费者到消费者组 {@link AddCloudNativeAPIGatewayConsumerInGroupRequest} {@link AddCloudNativeAPIGatewayConsumerInGroupResponse} */
+  AddCloudNativeAPIGatewayConsumerInGroup(data: AddCloudNativeAPIGatewayConsumerInGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddCloudNativeAPIGatewayConsumerInGroupResponse>;
   /** 弹性伸缩策略批量绑定网关分组 {@link BindAutoScalerResourceStrategyToGroupsRequest} {@link BindAutoScalerResourceStrategyToGroupsResponse} */
   BindAutoScalerResourceStrategyToGroups(data: BindAutoScalerResourceStrategyToGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoScalerResourceStrategyToGroupsResponse>;
   /** 关闭 WAF 防护 {@link CloseWafProtectionRequest} {@link CloseWafProtectionResponse} */
@@ -4776,12 +5636,22 @@ declare interface Tse {
   CreateCloudNativeAPIGatewayCanaryRule(data: CreateCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 创建云原生网关证书 {@link CreateCloudNativeAPIGatewayCertificateRequest} {@link CreateCloudNativeAPIGatewayCertificateResponse} */
   CreateCloudNativeAPIGatewayCertificate(data: CreateCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayCertificateResponse>;
+  /** 创建云原生网关消费者 {@link CreateCloudNativeAPIGatewayConsumerRequest} {@link CreateCloudNativeAPIGatewayConsumerResponse} */
+  CreateCloudNativeAPIGatewayConsumer(data: CreateCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayConsumerResponse>;
+  /** 创建云原生网关消费者分组 {@link CreateCloudNativeAPIGatewayConsumerGroupRequest} {@link CreateCloudNativeAPIGatewayConsumerGroupResponse} */
+  CreateCloudNativeAPIGatewayConsumerGroup(data: CreateCloudNativeAPIGatewayConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayConsumerGroupResponse>;
+  /** 创建 AI 网关模型 API {@link CreateCloudNativeAPIGatewayLLMModelAPIRequest} {@link CreateCloudNativeAPIGatewayLLMModelAPIResponse} */
+  CreateCloudNativeAPIGatewayLLMModelAPI(data: CreateCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayLLMModelAPIResponse>;
+  /** 创建 LLM 模型服务 {@link CreateCloudNativeAPIGatewayLLMModelServiceRequest} {@link CreateCloudNativeAPIGatewayLLMModelServiceResponse} */
+  CreateCloudNativeAPIGatewayLLMModelService(data: CreateCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayLLMModelServiceResponse>;
   /** 创建公网网络配置 {@link CreateCloudNativeAPIGatewayPublicNetworkRequest} {@link CreateCloudNativeAPIGatewayPublicNetworkResponse} */
   CreateCloudNativeAPIGatewayPublicNetwork(data: CreateCloudNativeAPIGatewayPublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayPublicNetworkResponse>;
   /** 创建云原生网关路由 {@link CreateCloudNativeAPIGatewayRouteRequest} {@link CreateCloudNativeAPIGatewayRouteResponse} */
   CreateCloudNativeAPIGatewayRoute(data: CreateCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayRouteResponse>;
   /** 创建云原生网关限流插件(路由) {@link CreateCloudNativeAPIGatewayRouteRateLimitRequest} {@link CreateCloudNativeAPIGatewayRouteRateLimitResponse} */
   CreateCloudNativeAPIGatewayRouteRateLimit(data: CreateCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 创建云原生网关密钥 {@link CreateCloudNativeAPIGatewaySecretKeyRequest} {@link CreateCloudNativeAPIGatewaySecretKeyResponse} */
+  CreateCloudNativeAPIGatewaySecretKey(data: CreateCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewaySecretKeyResponse>;
   /** 创建云原生网关服务 {@link CreateCloudNativeAPIGatewayServiceRequest} {@link CreateCloudNativeAPIGatewayServiceResponse} */
   CreateCloudNativeAPIGatewayService(data: CreateCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayServiceResponse>;
   /** 创建云原生网关限流插件(服务) {@link CreateCloudNativeAPIGatewayServiceRateLimitRequest} {@link CreateCloudNativeAPIGatewayServiceRateLimitResponse} */
@@ -4824,14 +5694,24 @@ declare interface Tse {
   DeleteCloudNativeAPIGatewayCanaryRule(data: DeleteCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 删除云原生网关证书 {@link DeleteCloudNativeAPIGatewayCertificateRequest} {@link DeleteCloudNativeAPIGatewayCertificateResponse} */
   DeleteCloudNativeAPIGatewayCertificate(data: DeleteCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayCertificateResponse>;
+  /** 删除云原生网关消费者 {@link DeleteCloudNativeAPIGatewayConsumerRequest} {@link DeleteCloudNativeAPIGatewayConsumerResponse} */
+  DeleteCloudNativeAPIGatewayConsumer(data: DeleteCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayConsumerResponse>;
+  /** 删除云原生网关消费者组 {@link DeleteCloudNativeAPIGatewayConsumerGroupRequest} {@link DeleteCloudNativeAPIGatewayConsumerGroupResponse} */
+  DeleteCloudNativeAPIGatewayConsumerGroup(data: DeleteCloudNativeAPIGatewayConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayConsumerGroupResponse>;
   /** 删除云原生网关访问控制 {@link DeleteCloudNativeAPIGatewayIPRestrictionRequest} {@link DeleteCloudNativeAPIGatewayIPRestrictionResponse} */
   DeleteCloudNativeAPIGatewayIPRestriction(data: DeleteCloudNativeAPIGatewayIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayIPRestrictionResponse>;
+  /** 删除 LLM 模型 API {@link DeleteCloudNativeAPIGatewayLLMModelAPIRequest} {@link DeleteCloudNativeAPIGatewayLLMModelAPIResponse} */
+  DeleteCloudNativeAPIGatewayLLMModelAPI(data: DeleteCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayLLMModelAPIResponse>;
+  /** 删除 LLM 模型服务 {@link DeleteCloudNativeAPIGatewayLLMModelServiceRequest} {@link DeleteCloudNativeAPIGatewayLLMModelServiceResponse} */
+  DeleteCloudNativeAPIGatewayLLMModelService(data: DeleteCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayLLMModelServiceResponse>;
   /** 删除公网网络配置 {@link DeleteCloudNativeAPIGatewayPublicNetworkRequest} {@link DeleteCloudNativeAPIGatewayPublicNetworkResponse} */
   DeleteCloudNativeAPIGatewayPublicNetwork(data: DeleteCloudNativeAPIGatewayPublicNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayPublicNetworkResponse>;
   /** 删除云原生网关路由 {@link DeleteCloudNativeAPIGatewayRouteRequest} {@link DeleteCloudNativeAPIGatewayRouteResponse} */
   DeleteCloudNativeAPIGatewayRoute(data: DeleteCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayRouteResponse>;
   /** 删除云原生网关的限流插件(路由) {@link DeleteCloudNativeAPIGatewayRouteRateLimitRequest} {@link DeleteCloudNativeAPIGatewayRouteRateLimitResponse} */
   DeleteCloudNativeAPIGatewayRouteRateLimit(data: DeleteCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 删除云原生网关密钥 {@link DeleteCloudNativeAPIGatewaySecretKeyRequest} {@link DeleteCloudNativeAPIGatewaySecretKeyResponse} */
+  DeleteCloudNativeAPIGatewaySecretKey(data: DeleteCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewaySecretKeyResponse>;
   /** 删除云原生网关服务 {@link DeleteCloudNativeAPIGatewayServiceRequest} {@link DeleteCloudNativeAPIGatewayServiceResponse} */
   DeleteCloudNativeAPIGatewayService(data: DeleteCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayServiceResponse>;
   /** 删除云原生网关的限流插件(服务) {@link DeleteCloudNativeAPIGatewayServiceRateLimitRequest} {@link DeleteCloudNativeAPIGatewayServiceRateLimitResponse} */
@@ -4880,10 +5760,26 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayCertificates(data: DescribeCloudNativeAPIGatewayCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayCertificatesResponse>;
   /** 获取云原生API网关实例网络配置信息 {@link DescribeCloudNativeAPIGatewayConfigRequest} {@link DescribeCloudNativeAPIGatewayConfigResponse} */
   DescribeCloudNativeAPIGatewayConfig(data: DescribeCloudNativeAPIGatewayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConfigResponse>;
+  /** 查询云原生网关消费者详情 {@link DescribeCloudNativeAPIGatewayConsumerRequest} {@link DescribeCloudNativeAPIGatewayConsumerResponse} */
+  DescribeCloudNativeAPIGatewayConsumer(data: DescribeCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConsumerResponse>;
+  /** 查询云原生网关消费者分组 {@link DescribeCloudNativeAPIGatewayConsumerGroupRequest} {@link DescribeCloudNativeAPIGatewayConsumerGroupResponse} */
+  DescribeCloudNativeAPIGatewayConsumerGroup(data: DescribeCloudNativeAPIGatewayConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConsumerGroupResponse>;
+  /** 查询云原生网关消费者分组列表 {@link DescribeCloudNativeAPIGatewayConsumerGroupListRequest} {@link DescribeCloudNativeAPIGatewayConsumerGroupListResponse} */
+  DescribeCloudNativeAPIGatewayConsumerGroupList(data: DescribeCloudNativeAPIGatewayConsumerGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConsumerGroupListResponse>;
+  /** 查询云原生网关消费者列表 {@link DescribeCloudNativeAPIGatewayConsumerListRequest} {@link DescribeCloudNativeAPIGatewayConsumerListResponse} */
+  DescribeCloudNativeAPIGatewayConsumerList(data: DescribeCloudNativeAPIGatewayConsumerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConsumerListResponse>;
   /** 查询云原生网关访问控制 {@link DescribeCloudNativeAPIGatewayIPRestrictionRequest} {@link DescribeCloudNativeAPIGatewayIPRestrictionResponse} */
   DescribeCloudNativeAPIGatewayIPRestriction(data: DescribeCloudNativeAPIGatewayIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayIPRestrictionResponse>;
   /** 根据公网IP查询云原生网关实例信息 {@link DescribeCloudNativeAPIGatewayInfoByIpRequest} {@link DescribeCloudNativeAPIGatewayInfoByIpResponse} */
   DescribeCloudNativeAPIGatewayInfoByIp(data: DescribeCloudNativeAPIGatewayInfoByIpRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayInfoByIpResponse>;
+  /** 查询单个LLM 模型 API {@link DescribeCloudNativeAPIGatewayLLMModelAPIRequest} {@link DescribeCloudNativeAPIGatewayLLMModelAPIResponse} */
+  DescribeCloudNativeAPIGatewayLLMModelAPI(data: DescribeCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayLLMModelAPIResponse>;
+  /** 查询 LLM 模型 API 列表 {@link DescribeCloudNativeAPIGatewayLLMModelAPIsRequest} {@link DescribeCloudNativeAPIGatewayLLMModelAPIsResponse} */
+  DescribeCloudNativeAPIGatewayLLMModelAPIs(data: DescribeCloudNativeAPIGatewayLLMModelAPIsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayLLMModelAPIsResponse>;
+  /** 查询单个 LLM 模型服务列表 {@link DescribeCloudNativeAPIGatewayLLMModelServiceRequest} {@link DescribeCloudNativeAPIGatewayLLMModelServiceResponse} */
+  DescribeCloudNativeAPIGatewayLLMModelService(data: DescribeCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayLLMModelServiceResponse>;
+  /** 查询 LLM 模型服务列表 {@link DescribeCloudNativeAPIGatewayLLMModelServicesRequest} {@link DescribeCloudNativeAPIGatewayLLMModelServicesResponse} */
+  DescribeCloudNativeAPIGatewayLLMModelServices(data: DescribeCloudNativeAPIGatewayLLMModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayLLMModelServicesResponse>;
   /** 获取云原生网关节点列表 {@link DescribeCloudNativeAPIGatewayNodesRequest} {@link DescribeCloudNativeAPIGatewayNodesResponse} */
   DescribeCloudNativeAPIGatewayNodes(data: DescribeCloudNativeAPIGatewayNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayNodesResponse>;
   /** 获取云原生API网关实例端口信息 {@link DescribeCloudNativeAPIGatewayPortsRequest} {@link DescribeCloudNativeAPIGatewayPortsResponse} */
@@ -4892,6 +5788,12 @@ declare interface Tse {
   DescribeCloudNativeAPIGatewayRouteRateLimit(data: DescribeCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayRouteRateLimitResponse>;
   /** 查询云原生网关路由列表 {@link DescribeCloudNativeAPIGatewayRoutesRequest} {@link DescribeCloudNativeAPIGatewayRoutesResponse} */
   DescribeCloudNativeAPIGatewayRoutes(data: DescribeCloudNativeAPIGatewayRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayRoutesResponse>;
+  /** 查询云原生网关密钥详情 {@link DescribeCloudNativeAPIGatewaySecretKeyRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyResponse} */
+  DescribeCloudNativeAPIGatewaySecretKey(data: DescribeCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyResponse>;
+  /** 查询云原生网关密钥列表 {@link DescribeCloudNativeAPIGatewaySecretKeyListRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyListResponse} */
+  DescribeCloudNativeAPIGatewaySecretKeyList(data: DescribeCloudNativeAPIGatewaySecretKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyListResponse>;
+  /** 查询云原生网关密钥值 {@link DescribeCloudNativeAPIGatewaySecretKeyValueRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyValueResponse} */
+  DescribeCloudNativeAPIGatewaySecretKeyValue(data: DescribeCloudNativeAPIGatewaySecretKeyValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyValueResponse>;
   /** 查询云原生网关的限流插件(服务) {@link DescribeCloudNativeAPIGatewayServiceRateLimitRequest} {@link DescribeCloudNativeAPIGatewayServiceRateLimitResponse} */
   DescribeCloudNativeAPIGatewayServiceRateLimit(data: DescribeCloudNativeAPIGatewayServiceRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayServiceRateLimitResponse>;
   /** 查询云原生网关服务列表 {@link DescribeCloudNativeAPIGatewayServicesRequest} {@link DescribeCloudNativeAPIGatewayServicesResponse} */
@@ -4970,10 +5872,20 @@ declare interface Tse {
   ModifyCloudNativeAPIGatewayCanaryRule(data: ModifyCloudNativeAPIGatewayCanaryRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayCanaryRuleResponse>;
   /** 更新云原生网关证书 {@link ModifyCloudNativeAPIGatewayCertificateRequest} {@link ModifyCloudNativeAPIGatewayCertificateResponse} */
   ModifyCloudNativeAPIGatewayCertificate(data: ModifyCloudNativeAPIGatewayCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayCertificateResponse>;
+  /** 修改云原生网关消费者 {@link ModifyCloudNativeAPIGatewayConsumerRequest} {@link ModifyCloudNativeAPIGatewayConsumerResponse} */
+  ModifyCloudNativeAPIGatewayConsumer(data: ModifyCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayConsumerResponse>;
+  /** 修改云原生网关消费者组 {@link ModifyCloudNativeAPIGatewayConsumerGroupRequest} {@link ModifyCloudNativeAPIGatewayConsumerGroupResponse} */
+  ModifyCloudNativeAPIGatewayConsumerGroup(data: ModifyCloudNativeAPIGatewayConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayConsumerGroupResponse>;
+  /** 修改 LLM 模型 API {@link ModifyCloudNativeAPIGatewayLLMModelAPIRequest} {@link ModifyCloudNativeAPIGatewayLLMModelAPIResponse} */
+  ModifyCloudNativeAPIGatewayLLMModelAPI(data: ModifyCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayLLMModelAPIResponse>;
+  /** 修改 LLM 模型服务 {@link ModifyCloudNativeAPIGatewayLLMModelServiceRequest} {@link ModifyCloudNativeAPIGatewayLLMModelServiceResponse} */
+  ModifyCloudNativeAPIGatewayLLMModelService(data: ModifyCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse>;
   /** 修改云原生网关路由 {@link ModifyCloudNativeAPIGatewayRouteRequest} {@link ModifyCloudNativeAPIGatewayRouteResponse} */
   ModifyCloudNativeAPIGatewayRoute(data: ModifyCloudNativeAPIGatewayRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayRouteResponse>;
   /** 修改云原生网关限流插件(路由) {@link ModifyCloudNativeAPIGatewayRouteRateLimitRequest} {@link ModifyCloudNativeAPIGatewayRouteRateLimitResponse} */
   ModifyCloudNativeAPIGatewayRouteRateLimit(data: ModifyCloudNativeAPIGatewayRouteRateLimitRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayRouteRateLimitResponse>;
+  /** 修改云原生网关密钥状态 {@link ModifyCloudNativeAPIGatewaySecretKeyStatusRequest} {@link ModifyCloudNativeAPIGatewaySecretKeyStatusResponse} */
+  ModifyCloudNativeAPIGatewaySecretKeyStatus(data: ModifyCloudNativeAPIGatewaySecretKeyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewaySecretKeyStatusResponse>;
   /** 修改云原生网关服务 {@link ModifyCloudNativeAPIGatewayServiceRequest} {@link ModifyCloudNativeAPIGatewayServiceResponse} */
   ModifyCloudNativeAPIGatewayService(data: ModifyCloudNativeAPIGatewayServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayServiceResponse>;
   /** 修改云原生网关限流插件(服务) {@link ModifyCloudNativeAPIGatewayServiceRateLimitRequest} {@link ModifyCloudNativeAPIGatewayServiceRateLimitResponse} */
@@ -5008,6 +5920,10 @@ declare interface Tse {
   OpenWafProtection(data: OpenWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenWafProtectionResponse>;
   /** 发布配置文件 {@link PublishConfigFilesRequest} {@link PublishConfigFilesResponse} */
   PublishConfigFiles(data: PublishConfigFilesRequest, config?: AxiosRequestConfig): AxiosPromise<PublishConfigFilesResponse>;
+  /** 云原生网关移除消费者组授权 {@link RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest} {@link RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse} */
+  RemoveCloudNativeAPIGatewayConsumerGroupAuth(data: RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse>;
+  /** 云原生网关消费者组中移除消费者 {@link RemoveCloudNativeAPIGatewayConsumerInGroupRequest} {@link RemoveCloudNativeAPIGatewayConsumerInGroupResponse} */
+  RemoveCloudNativeAPIGatewayConsumerInGroup(data: RemoveCloudNativeAPIGatewayConsumerInGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse>;
   /** 重启微服务引擎实例 {@link RestartSREInstanceRequest} {@link RestartSREInstanceResponse} */
   RestartSREInstance(data: RestartSREInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartSREInstanceResponse>;
   /** 回滚配置发布 {@link RollbackConfigFileReleasesRequest} {@link RollbackConfigFileReleasesResponse} */

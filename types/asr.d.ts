@@ -104,7 +104,7 @@ declare interface SentenceDetail {
   SpeakerId?: number | null;
   /** 情绪能量值，取值为音量分贝值/10。取值范围：[1,10]。值越高情绪越强烈。 */
   EmotionalEnergy?: number | null;
-  /** 本句与上一句之间的静音时长 */
+  /** 本句与上一句之间的静音时长（ms）枚举值：0： 表示无静音间隔 */
   SilenceTime?: number | null;
   /** 情绪类型（可能为空，有2种情况 1、没有对应资源包；2、情绪跟语音效果相关，如果情绪不够强烈时可能无法识别） */
   EmotionType?: string[] | null;

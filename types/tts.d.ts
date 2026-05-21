@@ -55,7 +55,7 @@ declare interface CreateTtsTaskRequest {
   VoiceType?: number;
   /** 主语言类型：1-中文（默认）2-英文 */
   PrimaryLanguage?: number;
-  /** 音频采样率：16000：16k（默认）8000：8k */
+  /** 音频采样率：16000：16k（默认）8000：8k枚举值：16000： 16kHz音频采样率 */
   SampleRate?: number;
   /** 返回音频格式，可取值：mp3（默认），wav，pcm */
   Codec?: string;
