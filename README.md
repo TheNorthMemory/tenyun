@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，14178+ 服务数</summary>
+<details><summary>共计 252+ 款产品，14221+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -155,7 +155,7 @@ bri | [业务风险情报](https://cloud.tencent.com/document/product/1064) | 20
 bsca | [软件成分分析](https://cloud.tencent.com/document/product/1483) | 2021-08-11(7) |
 btoe | [区块链可信取证](https://cloud.tencent.com/document/product/1259) | 2021-05-14(13) | 2021-03-03(12) |
 ca | [腾讯云CA](https://cloud.tencent.com/document/product/1691) | 2023-02-28(3) |
-cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-16(92) |
+cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-16(94) |
 captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07-22(18) |
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(7) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(14) |
@@ -178,7 +178,7 @@ chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
 cim |  | 2019-03-18(1) |
-ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(95) |
+ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(94) |
 clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(91) |
 cloudapp | [云应用](https://cloud.tencent.com/document/product/1689) | 2022-05-30(3) |
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
@@ -208,7 +208,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(83) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(188) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(189) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(96) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(56) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -221,13 +221,13 @@ ecdn | [全站加速网络](https://cloud.tencent.com/document/product/570) | 20
 ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 2019-07-19(139) |
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
-emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(100) |
+emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(101) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(10) | 2018-04-16(73) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(150) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(94) | 2020-12-22(53) |
 evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(5) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
-faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(36) |
+faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(38) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 ga2 | [全球加速](https://cloud.tencent.com/document/product/1817) | 2025-01-15(23) |
@@ -249,7 +249,7 @@ ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-0
 ig | [智能导诊](https://cloud.tencent.com/document/product/1273) | 2021-05-18(1) |
 igtm | [智能全局流量管理](https://cloud.tencent.com/document/product/1551) | 2023-10-24(28) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
-ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(42) |
+ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(43) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(206) |
@@ -271,9 +271,9 @@ mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237)
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2) |
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
-mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(52) |
-mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(77) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(9) | 2018-07-24(169) |
+mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(54) |
+mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(81) | 2018-04-08(13) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(9) | 2018-07-24(172) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(208) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(70) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
@@ -314,7 +314,7 @@ tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(24) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(52) |
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(79+211) |
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(82+211) |
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(21+7) |
 tccatalog | [多模态智能数据湖 TCLake](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(2) |
@@ -325,7 +325,7 @@ tdai | [腾讯云数据库 AI 服务](https://cloud.tencent.com/document/product
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(18) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(152) |
-tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(18) |
+tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(35) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(210) | 2022-01-06(5) |
@@ -341,7 +341,7 @@ tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-2
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/document/product/1495) | 2023-04-18(29) |
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(48) |
-trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(55) |
+trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(63) |
 trro | [实时互动-工业能源版](https://cloud.tencent.com/document/product/1584) | 2022-03-25(31) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(77) |
 tse | [TSF-Polaris&ZK&网关](https://cloud.tencent.com/document/product/1364) | 2020-12-07(160) |

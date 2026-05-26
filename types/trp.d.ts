@@ -216,6 +216,196 @@ declare interface Ext {
   Value?: string | null;
 }
 
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandImportantCityScanAnalysisCityItem {
+  /** 口味王分布 */
+  Ratio?: number;
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 上周期口味王分布 */
+  LastCycleRatio?: number;
+  /** 上周期口味王牌市场份额 */
+  LastCycleMarketShare?: number;
+  /** 上周期其他品牌市场份额 */
+  LastCycleOtherMarketShare?: number;
+  /** 口味王增长率 */
+  GrowRatio?: number;
+  /** 其他品牌增长率 */
+  OtherGrowRatio?: number;
+  /** 下属城市明细 */
+  Regions?: FlavorKingCycleBrandImportantCityScanAnalysisRegionItem[];
+  /** 城市 */
+  City?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandImportantCityScanAnalysisRegionItem {
+  /** 口味王分布 */
+  Ratio?: number;
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 上周期口味王分布 */
+  LastCycleRatio?: number;
+  /** 上周期口味王市场份额 */
+  LastCycleMarketShare?: number;
+  /** 上周期其他品牌市场份额 */
+  LastCycleOtherMarketShare?: number;
+  /** 口味王增长率 */
+  GrowRatio?: number;
+  /** 其他品牌增长率 */
+  OtherGrowRatio?: number;
+  /** 区 */
+  Region?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandImportantProvinceScanAnalysisCityItem {
+  /** 口味王分布 */
+  Ratio?: number;
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 上周期口味王分布 */
+  LastCycleRatio?: number;
+  /** 上周期口味王市场份额 */
+  LastCycleMarketShare?: number;
+  /** 上周期其他品牌市场份额 */
+  LastCycleOtherMarketShare?: number;
+  /** 口味王增长率 */
+  GrowRatio?: number;
+  /** 其他品牌增长率 */
+  OtherGrowRatio?: number;
+  /** 城市 */
+  City?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandImportantProvinceScanAnalysisProvinceItem {
+  /** 口味王分布 */
+  Ratio?: number;
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 上周期口味王分布 */
+  LastCycleRatio?: number;
+  /** 上周期口味王市场份额 */
+  LastCycleMarketShare?: number;
+  /** 上周期其他品牌市场份额 */
+  LastCycleOtherMarketShare?: number;
+  /** 口味王增长率 */
+  GrowRatio?: number;
+  /** 其他品牌增长率 */
+  OtherGrowRatio?: number;
+  /** 下属城市明细 */
+  Cities?: FlavorKingCycleBrandImportantProvinceScanAnalysisCityItem[];
+  /** 省份 */
+  Province?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandImportantProvinceUserAnalysisCityItem {
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 口味王增长率 */
+  GrowRatio?: number;
+  /** 其他品牌增长率 */
+  OtherGrowRatio?: number;
+  /** 城市 */
+  City?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandImportantProvinceUserAnalysisProvinceItem {
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 口味王增长率 */
+  GrowRatio?: number;
+  /** 其他品牌增长率 */
+  OtherGrowRatio?: number;
+  /** 下属城市明细 */
+  Cities?: FlavorKingCycleBrandImportantProvinceUserAnalysisCityItem[];
+  /** 省份 */
+  Province?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandProvinceCityScanAnalysisCityItem {
+  /** 口味王分布 */
+  Ratio?: number[];
+  /** 分区域数据 */
+  Regions?: FlavorKingCycleBrandProvinceCityScanAnalysisRegionItem[];
+  /** 城市 */
+  City?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandProvinceCityScanAnalysisProvinceItem {
+  /** 口味王分布 */
+  Ratio?: number[];
+  /** 下属城市明细 */
+  Cities?: FlavorKingCycleBrandProvinceCityScanAnalysisCityItem[];
+  /** 省份 */
+  Province?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandProvinceCityScanAnalysisRegionItem {
+  /** 口味王分布 */
+  Ratio?: number[];
+  /** 区域 */
+  Region?: string;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandProvinceScanAnalysisDataItem {
+  /** 口味王市场份额 */
+  MarketShare?: number;
+  /** 其他品牌市场份额 */
+  OtherMarketShare?: number;
+  /** 上周期口味王市场份额 */
+  LastCycleMarketShare?: number;
+  /** 上周期其他品牌市场份额 */
+  OtherLastCycleMarketShare?: number;
+  /** 口味王分布 */
+  Ratio?: number;
+  /** 上周期口味王分布 */
+  LastCycleRatio?: number;
+  /** 省份 */
+  Province?: string;
+  /** 口味王环比 */
+  GrowRatio?: number;
+  /** 其他平台环比 */
+  OtherGrowRatio?: number;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandScanAnalysisDataItem {
+  /** 周期时间 */
+  Duration?: string | null;
+  /** 品牌 */
+  BrandName?: string | null;
+  /** 品牌占比 */
+  Ratio?: number | null;
+}
+
+/** 品牌扫码数据 */
+declare interface FlavorKingCycleBrandScanMetricsItem {
+  /** 日期范围 */
+  Duration?: string;
+  /** 口味王分布 */
+  Ratio?: number;
+}
+
 /** 业务加密入参 */
 declare interface InputEncryptData {
   /** 加密方式，0：AES加密； */
@@ -450,6 +640,12 @@ declare interface ScanDetailItem {
   IP?: string;
   /** 码 */
   Code?: string;
+  /** Uid扩展字段 */
+  ExtUid?: string;
+  /** 维度取值范围：[-90, 90] */
+  Latitude?: number;
+  /** 精度取值范围：[-180, 180] */
+  Longitude?: number;
 }
 
 /** 扫码明细 */
@@ -1224,6 +1420,118 @@ declare interface DescribeCustomRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFlavorKingCycleBrandImportantCityScanAnalysisRequest {
+  /** 企业ID */
+  CorpId: number;
+  /** 日期类型 */
+  TypeDate: string;
+  /** 溯源ID */
+  QueryDate: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse {
+  /** 数据 */
+  Data?: FlavorKingCycleBrandImportantCityScanAnalysisCityItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisRequest {
+  /** 企业ID */
+  CorpId: number;
+  /** 日期类型 */
+  TypeDate: string;
+  /** 溯源ID */
+  QueryDate: string;
+  /** 省份 */
+  ProvinceList?: string[];
+}
+
+declare interface DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse {
+  /** 数据 */
+  Data?: FlavorKingCycleBrandImportantProvinceScanAnalysisProvinceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisRequest {
+  /** 企业ID */
+  CorpId: number;
+  /** 日期类型 */
+  TypeDate: string;
+  /** 溯源ID */
+  QueryDate: string;
+  /** 省份 */
+  ProvinceList?: string[];
+}
+
+declare interface DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse {
+  /** 数据 */
+  Data?: FlavorKingCycleBrandImportantProvinceUserAnalysisProvinceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandProvinceCityScanAnalysisRequest {
+  /** CorpId */
+  CorpId: number;
+  /** 溯源ID */
+  QueryDate: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse {
+  /** 数据 */
+  Data?: FlavorKingCycleBrandProvinceCityScanAnalysisProvinceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandProvinceScanAnalysisRequest {
+  /** 企业ID */
+  CorpId: number;
+  /** 日期类型 */
+  TypeDate: string;
+  /** 溯源ID */
+  QueryDate: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse {
+  /** 数据 */
+  Data?: FlavorKingCycleBrandProvinceScanAnalysisResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandScanAnalysisRequest {
+  /** 企业ID */
+  CorpId: number;
+  /** 日期类型 */
+  TypeDate: string;
+  /** 溯源ID */
+  QueryDate: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandScanAnalysisResponse {
+  /** 响应 */
+  Data?: FlavorKingCycleBrandScanAnalysisResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandScanMetricsRequest {
+  /** CorpId */
+  CorpId: number;
+  /** 溯源ID */
+  QueryDate: string;
+}
+
+declare interface DescribeFlavorKingCycleBrandScanMetricsResponse {
+  /** 数据 */
+  Data?: FlavorKingCycleBrandScanMetricsItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobFileUrlRequest {
   /** 调度ID */
   JobId: number;
@@ -1518,6 +1826,14 @@ declare interface DescribeTraceDataListResponse {
   RequestId?: string;
 }
 
+declare interface DownloadGEORequest {
+}
+
+declare interface DownloadGEOResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EffectFeedbackRequest {
   /** 业务加密入参。 */
   BusinessSecurityData: InputEncryptData;
@@ -1528,6 +1844,30 @@ declare interface EffectFeedbackResponse {
   Data?: OutputAuthorizedTransfer;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
+}
+
+declare interface FlavorKingCycleBrandProvinceScanAnalysisResponse {
+  /** 口味王全国份额 */
+  MarketShare?: number;
+  /** 上周期口味王市场份额 */
+  LastCycleMarketShare?: number;
+  /** 口味王全国周环比 */
+  Provinces?: FlavorKingCycleBrandProvinceScanAnalysisDataItem[];
+  /** 口味王环比 */
+  GrowRatio?: number;
+  /** 其他品牌环比 */
+  OtherGrowRatio?: number;
+}
+
+declare interface FlavorKingCycleBrandScanAnalysisResponse {
+  /** 总数 */
+  Count?: number;
+  /** 占比 */
+  CycleRatio?: number;
+  /** 环比 */
+  CycleOverCycle?: number;
+  /** 占比详情 */
+  CycleRatioItems?: FlavorKingCycleBrandScanAnalysisDataItem[];
 }
 
 declare interface ModifyCodeBatchRequest {
@@ -1821,6 +2161,20 @@ declare interface Trp {
   DescribeCustomRuleById(data: DescribeCustomRuleByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRuleByIdResponse>;
   /** 查自定义码规则列表 {@link DescribeCustomRulesRequest} {@link DescribeCustomRulesResponse} */
   DescribeCustomRules(data?: DescribeCustomRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomRulesResponse>;
+  /** 获取周、半月、月品牌城市扫码数据 {@link DescribeFlavorKingCycleBrandImportantCityScanAnalysisRequest} {@link DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse} */
+  DescribeFlavorKingCycleBrandImportantCityScanAnalysis(data: DescribeFlavorKingCycleBrandImportantCityScanAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse>;
+  /** 获取周、半月、月扫码数据 {@link DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisRequest} {@link DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse} */
+  DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis(data: DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse>;
+  /** 获取周、半月、月品牌省用户数据 {@link DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisRequest} {@link DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse} */
+  DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis(data: DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse>;
+  /** 获取口味王日热度明细 {@link DescribeFlavorKingCycleBrandProvinceCityScanAnalysisRequest} {@link DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse} */
+  DescribeFlavorKingCycleBrandProvinceCityScanAnalysis(data: DescribeFlavorKingCycleBrandProvinceCityScanAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse>;
+  /** 获取周、半月、月品牌省扫码数据 {@link DescribeFlavorKingCycleBrandProvinceScanAnalysisRequest} {@link DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse} */
+  DescribeFlavorKingCycleBrandProvinceScanAnalysis(data: DescribeFlavorKingCycleBrandProvinceScanAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse>;
+  /** 获取周、半月、月品牌扫描数据 {@link DescribeFlavorKingCycleBrandScanAnalysisRequest} {@link DescribeFlavorKingCycleBrandScanAnalysisResponse} */
+  DescribeFlavorKingCycleBrandScanAnalysis(data: DescribeFlavorKingCycleBrandScanAnalysisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandScanAnalysisResponse>;
+  /** 获取口味王日热度趋势 {@link DescribeFlavorKingCycleBrandScanMetricsRequest} {@link DescribeFlavorKingCycleBrandScanMetricsResponse} */
+  DescribeFlavorKingCycleBrandScanMetrics(data: DescribeFlavorKingCycleBrandScanMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlavorKingCycleBrandScanMetricsResponse>;
   /** 获取异步任务的输出地址 {@link DescribeJobFileUrlRequest} {@link DescribeJobFileUrlResponse} */
   DescribeJobFileUrl(data: DescribeJobFileUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFileUrlResponse>;
   /** 查询商户信息 {@link DescribeMerchantByIdRequest} {@link DescribeMerchantByIdResponse} */
@@ -1851,6 +2205,8 @@ declare interface Trp {
   DescribeTraceDataById(data: DescribeTraceDataByIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataByIdResponse>;
   /** 查询溯源信息 {@link DescribeTraceDataListRequest} {@link DescribeTraceDataListResponse} */
   DescribeTraceDataList(data?: DescribeTraceDataListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTraceDataListResponse>;
+  /** 地图位置文件下载 {@link DownloadGEORequest} {@link DownloadGEOResponse} */
+  DownloadGEO(data?: DownloadGEORequest, config?: AxiosRequestConfig): AxiosPromise<DownloadGEOResponse>;
   /** 效果数据反馈 {@link EffectFeedbackRequest} {@link EffectFeedbackResponse} */
   EffectFeedback(data: EffectFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<EffectFeedbackResponse>;
   /** 修改批次 {@link ModifyCodeBatchRequest} {@link ModifyCodeBatchResponse} */

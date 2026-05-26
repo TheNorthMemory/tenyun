@@ -88,6 +88,8 @@ declare interface ResourceInfo {
   PqcStatus?: number;
   /** 0关闭，1开启 */
   PqcFlag?: number;
+  /** 环境默认值：cloudcloud或者cdc */
+  DeployEnv?: string;
 }
 
 /** 安全组基础信息 */
@@ -362,6 +364,8 @@ declare interface DescribeVsmAttributesResponse {
   Manufacturer?: string;
   /** 0-关闭，1-开启 */
   PqcFlag?: number;
+  /** 环境默认值：cloudcloud或者cdc */
+  DeployEnv?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

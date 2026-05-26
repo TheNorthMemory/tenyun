@@ -2159,7 +2159,7 @@ declare interface DescribeTaskInfoResponse {
 }
 
 declare interface DescribeZoneInstanceConfigInfosRequest {
-  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-6。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。具体取值参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。类型：String必选：否instance-type按照【实例机型】进行过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认查询筛选条件下所有机型。类型：String必选：否instance-charge-type按照【实例计费模式】进行过滤。(PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费 | CDHPAID：表示独享子机 | SPOTPAID：表示竞价付费 | CDCPAID：表示专用集群付费)类型：String必选：否sort-keys按关键字进行排序,格式为排序字段加排序方式，中间用冒号分隔。 例如： 按cpu数逆序排序 "cpu:desc", 按mem大小顺序排序 "mem:asc"类型：String必选：否每次请求的`Filters`的上限为10，`Filter.Values`的上限为100。 */
+  /** zone按照【可用区】进行过滤。可用区形如：ap-guangzhou-6。类型：String必选：否可选项：可用区列表instance-family按照【实例机型系列】进行过滤。实例机型系列形如：S1、I1、M1等。具体取值参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。类型：String必选：否instance-type按照【实例机型】进行过滤。不同实例机型指定了不同的资源规格，具体取值可通过调用接口 [DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/product/213/15749) 来获得最新的规格表或参见[实例类型](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则默认查询筛选条件下所有机型。类型：String必选：否instance-charge-type按照【实例计费模式】进行过滤。- PREPAID：预付费，即包年包月- POSTPAID_BY_HOUR：后付费，即按量计费- CDHPAID：独享子机- SPOTPAID：竞价付费- CDCPAID：专用集群付费类型：String必选：否sort-keys按关键字进行排序,格式为排序字段加排序方式，中间用冒号分隔。 例如： 按cpu数逆序排序 "cpu:desc", 按mem大小顺序排序 "mem:asc"类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为100。 */
   Filters?: Filter[];
 }
 
@@ -3322,7 +3322,7 @@ declare interface Cvm {
   ModifyInstancesProject(data: ModifyInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesProjectResponse>;
   /** 修改实例续费标识 {@link ModifyInstancesRenewFlagRequest} {@link ModifyInstancesRenewFlagResponse} */
   ModifyInstancesRenewFlag(data: ModifyInstancesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesRenewFlagResponse>;
-  /** 修改实例vpc属性 {@link ModifyInstancesVpcAttributeRequest} {@link ModifyInstancesVpcAttributeResponse} */
+  /** 修改实例vpc的属性 {@link ModifyInstancesVpcAttributeRequest} {@link ModifyInstancesVpcAttributeResponse} */
   ModifyInstancesVpcAttribute(data: ModifyInstancesVpcAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancesVpcAttributeResponse>;
   /** 修改密钥对属性 {@link ModifyKeyPairAttributeRequest} {@link ModifyKeyPairAttributeResponse} */
   ModifyKeyPairAttribute(data: ModifyKeyPairAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeyPairAttributeResponse>;

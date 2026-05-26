@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 密钥对关联的实例信息 */
+declare interface AssociatedInstanceInfo {
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 密钥对绑定的用户。 */
+  Username?: string;
+}
+
 /** 挂载信息 */
 declare interface AttachDetail {
   /** 实例ID */
@@ -760,6 +768,8 @@ declare interface KeyPair {
   PublicKey?: string;
   /** 密钥对关联的实例 ID 列表。 */
   AssociatedInstanceIds?: string[];
+  /** 密钥对关联的实例列表。 */
+  AssociatedInstanceSet?: AssociatedInstanceInfo[];
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   CreatedTime?: string | null;
   /** 密钥对私钥。 */
@@ -1105,6 +1115,10 @@ declare interface AssociateInstancesKeyPairsRequest {
   KeyIds: string[];
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
+  /** 绑定类型。可选值：ONLINE - 在线绑定，不需要关机。OFFLINE - 离线绑定，会对实例进行关机。 */
+  AssociateType?: string;
+  /** 绑定的用户名。当 AssociateType 为 OFFLINE 时，不支持该参数。 */
+  Username?: string;
 }
 
 declare interface AssociateInstancesKeyPairsResponse {
@@ -2161,6 +2175,10 @@ declare interface DisassociateInstancesKeyPairsRequest {
   KeyIds: string[];
   /** 实例 ID 列表。每次请求批量实例的上限为 100。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1207/47573)接口返回值中的InstanceId获取。 */
   InstanceIds: string[];
+  /** 解绑定类型。可选值：ONLINE - 在线解绑定，不需要关机。OFFLINE - 离线解绑定，需要关机。 */
+  DisassociateType?: string;
+  /** 解绑定的用户名。当 DisassociateType 为 OFFLINE 时，不支持该参数。 */
+  Username?: string;
 }
 
 declare interface DisassociateInstancesKeyPairsResponse {

@@ -280,11 +280,11 @@ declare interface DiagHistoryEventItem {
 declare interface EventInfo {
   /** 事件 ID 。 */
   EventId?: number;
-  /** 诊断类型。 */
+  /** 诊断类型。包含以下值：内存利用率，CPU利用率，磁盘空间利用率，复制，复制IO线程中断。 */
   DiagType?: string;
-  /** 开始时间。 */
+  /** 开始时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX" */
   StartTime?: string;
-  /** 结束时间。 */
+  /** 结束时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX" */
   EndTime?: string;
   /** 概要。 */
   Outline?: string;
@@ -331,13 +331,13 @@ declare interface HealthReportTask {
 /** 获取健康得分返回的详情。 */
 declare interface HealthScoreInfo {
   /** 异常详情。 */
-  IssueTypes: IssueTypeInfo[];
+  IssueTypes?: IssueTypeInfo[];
   /** 异常事件总数。 */
-  EventsTotalCount: number;
+  EventsTotalCount?: number;
   /** 健康得分。 */
-  HealthScore: number;
-  /** 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。 */
-  HealthLevel: string;
+  HealthScore?: number;
+  /** 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。其中：HEALTH - 健康SUB_HEALTH - 亚健康RISK - 危险HIGH_RISK - 高危 */
+  HealthLevel?: string;
 }
 
 /** 健康得分趋势 */
@@ -1844,7 +1844,7 @@ declare interface DescribeDBDiagEventRequest {
   /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx */
   InstanceId: string;
   /** 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。 */
-  EventId?: number;
+  EventId: number;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
 }
@@ -1883,9 +1883,9 @@ declare interface DescribeDBDiagEventsRequest {
   EndTime: string;
   /** 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。 */
   Severities?: number[];
-  /** 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx */
+  /** 实例ID列表。可通过 DescribeDiagDBInstances 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&amp;Shard实例ID，如：dcdbt-157xxxk&amp;shard-qxxxx */
   InstanceIds?: string[];
-  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb 默认为"mysql"。 */
+  /** 服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;mariadb&quot;-数据库mariadb，&quot;cynosdb&quot;-数据库 TDSQL-C, &quot;dcdb&quot;-数据库TDSQL MySQL 默认为&quot;mysql&quot;。 */
   Product?: string;
   /** 偏移量，默认0。 */
   Offset?: number;
@@ -2047,11 +2047,11 @@ declare interface DescribeDiagDBInstancesResponse {
 }
 
 declare interface DescribeHealthScoreRequest {
-  /** 需要获取健康得分的实例ID。 */
+  /** 需要获取健康得分的实例ID。可通过 DescribeDiagDBInstances 接口获取。如果是dcdb(TDSQL MySQL)，请使用 {ClusterId}&amp;{InstanceId} 拼接结果代替入参 */
   InstanceId: string;
   /** 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。 */
   Time: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。 */
   Product: string;
 }
 
@@ -3153,9 +3153,9 @@ declare namespace V20191016 {
     EventId?: number;
     /** 诊断类型。 */
     DiagType?: string;
-    /** 开始时间。 */
+    /** 开始时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX" */
     StartTime?: string;
-    /** 结束时间。 */
+    /** 结束时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX" */
     EndTime?: string;
     /** 概要。 */
     Outline?: string;

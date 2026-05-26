@@ -356,9 +356,9 @@ declare interface CasterInfo {
   Description?: string;
   /** 导播台创建时间，值为unix时间戳。 */
   CreateTime?: number;
-  /** 导播台状态 0：停止状态，无预监，无主监1：无预监，有主监2：有预监，无主监3：有预监，有主监 */
+  /** 导播台状态0：停止状态，无预监，无主监1：无预监，有主监2：有预监，无主监3：有预监，有主监 */
   Status?: number;
-  /** 导播台的过期时间戳。值为-1或unix时间戳。 默认值为-1。 当值为-1时，表示该导播台永不过期。 当值为正常unix时间戳时，导播台将在该时间过期。 导播台过期后，预监与主监画面将自动停止，转推自动停止。 点播、直播url将停止转拉，推流url需自行停止推流。 */
+  /** 导播台的过期时间戳。值为-1或unix时间戳。默认值为-1。 当值为-1时，表示该导播台永不过期。当值为正常unix时间戳时，导播台将在该时间过期。导播台过期后，预监与主监画面将自动停止，转推自动停止。点播、直播url将停止转拉，推流url需自行停止推流。 */
   ExpireTime?: number;
   /** 导播台延时播放时间，单位为秒。 */
   DelayTime?: number;
@@ -372,14 +372,16 @@ declare interface CasterInfo {
   PgmBitRate?: number;
   /** 导播台主监输出的音频码率，单位为kbps。 */
   PgmAudioBitRate?: number;
-  /** 导播台的计费类型。 0 通用型 1 播单型。注： 本参数暂无作用。 */
+  /** 导播台的计费类型。0 通用型 1 播单型。注： 本参数暂无作用。 */
   FeeType?: number;
   /** 录制模板id。 */
   RecordTemplateId?: number;
-  /** 录制状态。 0：未录制 1：录制中 */
+  /** 录制状态。0：未录制1：录制中 */
   RecordStatus?: number;
   /** 录制接口返回的taskid */
   RecordTaskId?: string;
+  /** 导播台主监输出的编码方式枚举值：h264： h264编码h265： h265编码默认值：h264 */
+  PgmVcodec?: string;
 }
 
 /** 导播台输入信息参数 */
@@ -2397,10 +2399,12 @@ declare interface CreateCasterRequest {
   PgmFps?: number;
   /** 导播台主监输出的码率，单位为kbps。默认为0，表示随源的码率输出。最大允许10000kbps。 */
   PgmBitRate?: number;
-  /** 导播台的计费类型。0 通用型 1 播单型。注： 本参数暂无作用。 */
+  /** 导播台的计费类型。0 通用型1 播单型。注： 本参数暂无作用。 */
   FeeType?: number;
   /** 导播台主监输出的音频码率，单位为kbps。可选项：[0, 128, 192, 256]默认值为0，表示随源的音频码率输出。 */
   PgmAudioBitRate?: number;
+  /** 导播台主监输出的编码方式枚举值：h264： h264编码h265： h265编码默认值：h264 */
+  PgmVcodec?: string;
 }
 
 declare interface CreateCasterResponse {
@@ -5583,6 +5587,8 @@ declare interface ModifyCasterRequest {
   RecordTaskId?: string;
   /** 导播台主监输出的音频码率，单位为kbps。可选项：[0, 128, 192, 256]默认值为0，表示随源的音频码率输出。 */
   PgmAudioBitRate?: number;
+  /** 导播台主监输出的编码方式枚举值：h264： h264编码h265： h265编码默认值：h264 */
+  PgmVcodec?: string;
 }
 
 declare interface ModifyCasterResponse {

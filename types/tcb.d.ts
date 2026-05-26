@@ -374,6 +374,10 @@ declare interface EnvInfo {
   ArchitectureType?: string;
   /** 回收标志，默认为空 */
   Recycle?: string;
+  /** 环境meta信息列表 */
+  Meta?: KVPair[];
+  /** pg信息 */
+  PostgreSQL?: PostgreSQLInfo[];
 }
 
 /** 外部存储。标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。 */
@@ -894,6 +898,20 @@ declare interface PermissionInfo {
   Rule?: string;
 }
 
+/** PostgreSQL资源信息结构体 */
+declare interface PostgreSQLInfo {
+  /** 数据库名称 */
+  Name?: string;
+  /** 实例id */
+  InstanceName?: string;
+  /** 实例状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: string;
+  /** 数据库引擎版本 */
+  Version?: string;
+}
+
 /** 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。 */
 declare interface Provider {
   /** 身份源的唯一标识符，用于在系统内区分不同的身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。创建后不可修改 */
@@ -1254,6 +1272,18 @@ declare interface AssumeRoleForAllocatedEnvResponse {
   ExpiredTime?: number | null;
   /** 是否从缓存中加载。标明该值是否实时从sts服务获取，还是从缓存中获取。调用方可不关心 */
   IsCache?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BindStorageSourceRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 存储源 */
+  StorageConfig: ExternalStorage;
+}
+
+declare interface BindStorageSourceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2019,7 +2049,7 @@ declare interface DescribeEnvLimitResponse {
 declare interface DescribeEnvsRequest {
   /** 环境ID，如果传了这个参数则只返回该环境的相关信息 */
   EnvId?: string;
-  /** 指定Channels字段为可见渠道列表或不可见渠道列表如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"] */
+  /** 指定Channels字段为可见渠道列表或不可见渠道列表如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;] */
   IsVisible?: boolean;
   /** 渠道列表，代表可见或不可见渠道由IsVisible参数指定 */
   Channels?: string[];
@@ -2588,6 +2618,18 @@ declare interface ModifySafeRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStorageSourceRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 存储源 */
+  StorageConfig: ExternalStorage;
+}
+
+declare interface ModifyStorageSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserRequest {
   /** 环境id */
   EnvId: string;
@@ -2712,6 +2754,16 @@ declare interface SearchClsLogResponse {
   RequestId?: string;
 }
 
+declare interface UnbindStorageSourceRequest {
+  /** 环境ID */
+  EnvId: string;
+}
+
+declare interface UnbindStorageSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAIModelRequest {
   /** 环境id */
   EnvId: string;
@@ -2765,6 +2817,8 @@ declare interface Tcb {
   AllocateEnv(data: AllocateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateEnvResponse>;
   /** 为环境池里的环境申请角色临时凭证 {@link AssumeRoleForAllocatedEnvRequest} {@link AssumeRoleForAllocatedEnvResponse} */
   AssumeRoleForAllocatedEnv(data: AssumeRoleForAllocatedEnvRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleForAllocatedEnvResponse>;
+  /** 云存储绑定外部存储源 {@link BindStorageSourceRequest} {@link BindStorageSourceResponse} */
+  BindStorageSource(data: BindStorageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindStorageSourceResponse>;
   /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */
   CheckTcbService(data?: CheckTcbServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckTcbServiceResponse>;
   /** 创建AI模型 {@link CreateAIModelRequest} {@link CreateAIModelResponse} */
@@ -2901,6 +2955,8 @@ declare interface Tcb {
   ModifyProvider(data: ModifyProviderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProviderResponse>;
   /** 设置数据库安全规则 {@link ModifySafeRuleRequest} {@link ModifySafeRuleResponse} */
   ModifySafeRule(data: ModifySafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySafeRuleResponse>;
+  /** 更新云存储外部数据源 {@link ModifyStorageSourceRequest} {@link ModifyStorageSourceResponse} */
+  ModifyStorageSource(data: ModifyStorageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStorageSourceResponse>;
   /** 更新tcb用户 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 释放从环境池里分配的环境 {@link ReleaseEnvRequest} {@link ReleaseEnvResponse} */
@@ -2913,6 +2969,8 @@ declare interface Tcb {
   RunSql(data: RunSqlRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlResponse>;
   /** 搜索CLS日志 {@link SearchClsLogRequest} {@link SearchClsLogResponse} */
   SearchClsLog(data: SearchClsLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClsLogResponse>;
+  /** 解绑云存储外部云存储源 {@link UnbindStorageSourceRequest} {@link UnbindStorageSourceResponse} */
+  UnbindStorageSource(data: UnbindStorageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindStorageSourceResponse>;
   /** 更新AI模型 {@link UpdateAIModelRequest} {@link UpdateAIModelResponse} */
   UpdateAIModel(data: UpdateAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIModelResponse>;
   /** 修改文档型数据库表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */

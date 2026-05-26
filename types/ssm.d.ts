@@ -70,6 +70,10 @@ declare interface SecretMetadata {
   ResourceID?: string;
   /** 用户指定的轮转开始时间。 */
   RotationBeginTime?: string;
+  /** 凭据加密类型枚举值：0： KMS 密钥加密1： 软密钥加密默认值：0 */
+  EncryptType?: number;
+  /** 凭据密钥加密切换中 */
+  EncryptSwitching?: boolean;
 }
 
 /** 标签键和标签值 */
@@ -127,6 +131,8 @@ declare interface CreateProductSecretRequest {
   AccountRemark?: string;
   /** 数据库账号类型，目前仅在创建sqlserver凭据场景会使用到，仅支持L3枚举值：L3： 普通权限账号 */
   AccountType?: string;
+  /** 凭据加密类型枚举值：0： KMS 密钥1： 软件密钥默认值：0 */
+  EncryptType?: number;
 }
 
 declare interface CreateProductSecretResponse {
@@ -157,6 +163,8 @@ declare interface CreateSSHKeyPairSecretRequest {
   SSHKeyName?: string;
   /** KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。 */
   KmsHsmClusterId?: string;
+  /** 凭据加密类型枚举值：0： KMS 密钥1： 软件密钥默认值：0 */
+  EncryptType?: number;
 }
 
 declare interface CreateSSHKeyPairSecretResponse {
@@ -195,6 +203,8 @@ declare interface CreateSecretRequest {
   Tags?: Tag[];
   /** KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。 */
   KmsHsmClusterId?: string;
+  /** 凭据加密类型枚举值：0： KMS 密钥加密1： 软密钥加密 */
+  EncryptType?: number;
 }
 
 declare interface CreateSecretResponse {
@@ -330,6 +340,10 @@ declare interface DescribeSecretResponse {
   TargetUin?: number;
   /** 凭据额外配置 */
   AdditionalConfig?: string;
+  /** 凭据加密类型枚举值：0： KMS 密钥加密1： 软密钥加密默认值：0 */
+  EncryptType?: number;
+  /** 凭据更新状态 */
+  EncryptSwitching?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -483,6 +497,8 @@ declare interface ListSecretsRequest {
   SecretType?: number;
   /** 此参数仅在SecretType参数值为1时生效，当SecretType值为1时：如果ProductName值为空，则表示查询所有类型的云产品凭据；如果ProductName值为某个指定的云产品值如Mysql时，则表示查询Mysql数据库凭据；如果ProductName值为多个云产品值，如：Mysql,Tdsql-mysql,Tdsql_C_Mysql（多个值以英文逗号,分隔开）则表示查询三种云产品类型的凭据；支持的云产品列表请通过接口：DescribeSupportedProducts进行查询。 */
   ProductName?: string;
+  /** 凭据加密类型枚举值：0： KMS 密钥加密1： 软密钥加密默认值：0 */
+  EncryptType?: number;
 }
 
 declare interface ListSecretsResponse {

@@ -10100,6 +10100,12 @@ declare interface DescribeLicenseGeneralResponse {
   AutoOpenRaspSwitch?: boolean;
   /** 是否自动缩容开关开启 */
   AutoDowngradeSwitch?: boolean;
+  /** 可使用的AI防护版授权数 */
+  AvailableAISecurityLicenseCnt?: number;
+  /** AI 防护版总授权数 */
+  AISecurityVersionLicenseCnt?: number;
+  /** 应用防护授权数+旗舰版授权数相加后的可使用授权数 */
+  ApplicationAvailableLicenseCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10152,6 +10158,8 @@ declare interface DescribeLicenseWhiteConfigResponse {
   PrattWhitney?: VersionWhiteConfig;
   /** 重保授权包 配置信息 */
   RASP?: VersionWhiteConfig;
+  /** 日志分析配置信息 */
+  LOG?: VersionWhiteConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -290,6 +290,8 @@ declare interface CcInfo {
   CcPermission?: number;
   /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **none** : 不通知 */
   NotifyType?: string;
+  /** 被抄送方企业名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。注意:此为白名单功能，需要联系客户经理，开通白名单后才能使用。使用文档 签署方/抄送方仅指定企业名称发起合同 */
+  OrganizationName?: string;
 }
 
 /** 合同审查清单 */

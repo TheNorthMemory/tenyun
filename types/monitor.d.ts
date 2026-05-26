@@ -2383,6 +2383,22 @@ declare namespace V20180724 {
     RuleState?: number | null;
   }
 
+  /** Prometheus Alertmanger 抑制规则 */
+  interface PrometheusAlertmanagerConfigInhibitRule {
+    /** Source 告警的标签匹配规则，比如 "a=b"、"a!=c" 等 */
+    SourceMatchers: string[] | null;
+    /** Target 告警的标签匹配规则，比如 "a=b"、"a!=c" 等 */
+    TargetMatchers: string[] | null;
+    /** Source 和 Target 告警都必须有的一组标签名，比如 alertname、cluster 等 */
+    Equal: string[] | null;
+  }
+
+  /** Prometheus Alertmanger 可修改配置 */
+  interface PrometheusAlertmanagerConfigV2 {
+    /** Prometheus Alertmanger 抑制规则组 */
+    InhibitRules?: PrometheusAlertmanagerConfigInhibitRule[] | null;
+  }
+
   /** 与腾讯云可观测平台融合托管 Prometheus 实例，关联集群基础信息 */
   interface PrometheusClusterAgentBasic {
     /** 地域 */
@@ -5000,6 +5016,18 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DescribePrometheusAlertmanagerConfigRequest {
+    /** Prometheus 实例 ID */
+    InstanceId?: string;
+  }
+
+  interface DescribePrometheusAlertmanagerConfigResponse {
+    /** Alertmanager 配置 */
+    AlertmanagerConfig?: PrometheusAlertmanagerConfigV2;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribePrometheusClusterAgentsRequest {
     /** 实例id */
     InstanceId: string;
@@ -5918,12 +5946,44 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface ReplacePrometheusAlertmanagerConfigRequest {
+    /** Prometheus 实例 ID */
+    InstanceId: string;
+    /** Alertmanager 配置 */
+    AlertmanagerConfig?: PrometheusAlertmanagerConfigV2;
+  }
+
+  interface ReplacePrometheusAlertmanagerConfigResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ResumeGrafanaInstanceRequest {
     /** Grafana 实例 ID，例如：grafana-12345678 */
     InstanceId: string;
   }
 
   interface ResumeGrafanaInstanceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface RoutePrometheusDynamicAPIRequest {
+    /** Prometheus 实例 ID */
+    InstanceId: string;
+    /** HTTP 方法名 GET/POST/PUT/DELETE 等 */
+    Method: string;
+    /** HTTP 路径（包括 query string） */
+    Path: string;
+    /** HTTP 请求体，任何数据 */
+    RequestBody?: string;
+    /** HTTP 请求头 */
+    Headers?: PrometheusStringKeyValuePair[];
+  }
+
+  interface RoutePrometheusDynamicAPIResponse {
+    /** HTTP 响应数据 */
+    HTTP?: PrometheusDynamicAPIResponseHTTP;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6554,6 +6614,8 @@ declare interface Monitor {
   DescribePrometheusAlertGroups(data: V20180724.DescribePrometheusAlertGroupsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusAlertGroupsResponse>;
   /** 获取2.0实例告警策略列表 {@link V20180724.DescribePrometheusAlertPolicyRequest} {@link V20180724.DescribePrometheusAlertPolicyResponse} */
   DescribePrometheusAlertPolicy(data: V20180724.DescribePrometheusAlertPolicyRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusAlertPolicyResponse>;
+  /** 获取 Prometheus Alertmanager 配置 {@link V20180724.DescribePrometheusAlertmanagerConfigRequest} {@link V20180724.DescribePrometheusAlertmanagerConfigResponse} */
+  DescribePrometheusAlertmanagerConfig(data: V20180724.DescribePrometheusAlertmanagerConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusAlertmanagerConfigResponse>;
   /** 获取TMP实例关联集群列表 {@link V20180724.DescribePrometheusClusterAgentsRequest} {@link V20180724.DescribePrometheusClusterAgentsResponse} */
   DescribePrometheusClusterAgents(data: V20180724.DescribePrometheusClusterAgentsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePrometheusClusterAgentsResponse>;
   /** 拉取Prometheus配置 {@link V20180724.DescribePrometheusConfigRequest} {@link V20180724.DescribePrometheusConfigResponse} */
@@ -6652,8 +6714,12 @@ declare interface Monitor {
   ModifyPrometheusTemp(data: V20180724.ModifyPrometheusTempRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusTempResponse>;
   /** 修改多写配置 {@link V20180724.ModifyRemoteURLsRequest} {@link V20180724.ModifyRemoteURLsResponse} */
   ModifyRemoteURLs(data: V20180724.ModifyRemoteURLsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyRemoteURLsResponse>;
+  /** 更新 Prometheus Alertmanager 配置 {@link V20180724.ReplacePrometheusAlertmanagerConfigRequest} {@link V20180724.ReplacePrometheusAlertmanagerConfigResponse} */
+  ReplacePrometheusAlertmanagerConfig(data: V20180724.ReplacePrometheusAlertmanagerConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ReplacePrometheusAlertmanagerConfigResponse>;
   /** 恢复 Grafana 实例 {@link V20180724.ResumeGrafanaInstanceRequest} {@link V20180724.ResumeGrafanaInstanceResponse} */
   ResumeGrafanaInstance(data: V20180724.ResumeGrafanaInstanceRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ResumeGrafanaInstanceResponse>;
+  /** Prometheus 内部动态 api 代理 {@link V20180724.RoutePrometheusDynamicAPIRequest} {@link V20180724.RoutePrometheusDynamicAPIResponse} */
+  RoutePrometheusDynamicAPI(data: V20180724.RoutePrometheusDynamicAPIRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.RoutePrometheusDynamicAPIResponse>;
   /** 初始化TMP实例 {@link V20180724.RunPrometheusInstanceRequest} {@link V20180724.RunPrometheusInstanceResponse} */
   RunPrometheusInstance(data: V20180724.RunPrometheusInstanceRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.RunPrometheusInstanceResponse>;
   /** 设为默认告警策略 {@link V20180724.SetDefaultAlarmPolicyRequest} {@link V20180724.SetDefaultAlarmPolicyResponse} */

@@ -2007,14 +2007,18 @@ declare namespace V20180717 {
 
   /** AIGC生图任务输入文件信息 */
   interface AigcImageTaskInputFileInfo {
-    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    /** 输入的文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； Base64：图片或视频转换的Base64字符串； */
     Type?: string;
-    /** 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
+    /** 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：推荐使用小于7M的图片；图片格式的取值为：jpeg，jpg, png, webp。 */
     FileId?: string;
-    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于7M的图片；2. 图片格式的取值为：jpeg，jpg, png, webp。 */
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：推荐使用小于7M的图片；图片格式的取值为：jpeg，jpg, png, webp。 */
     Url?: string;
+    /** 可访问的文件 Base64。当 Type 取值为 Base64 时，本参数有效。说明：所有文件的文件大小总和不能超过 7 MB，避免转为 Base64 后超出云 API 的 10 MB包大小上限；图片格式应为：jpeg，jpg, png, webp；不要有data:image/jpeg;base64,之类的前缀。 */
+    Base64?: string;
     /** 输入图片的描述信息，用于帮助模型理解图片。仅GEM 2.5、GEM 3.0 有效。 */
     Text?: string;
+    /** 仅当 ModelName 为 OG 时有效。图片类型。枚举值：mask： 图片蒙版。 */
+    ReferenceType?: string;
   }
 
   /** AIGC 生图任务的输出。 */
@@ -2233,7 +2237,7 @@ declare namespace V20180717 {
 
   /** AIGC 生视频任务输入的图片文件信息。 */
   interface AigcVideoTaskInputFileInfo {
-    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    /** 输入的视频文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； Base64：图片或视频转换的Base64字符串； */
     Type?: string;
     /** 文件分类。取值为：Image: 图片；注意，要使用Usage字段定义图片类型。Video: 视频。 */
     Category?: string;
@@ -2241,6 +2245,8 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：推荐使用小于10M的图片；图片格式的取值为：jpeg，jpg, png。 */
     Url?: string;
+    /** 可访问的文件 Base64。当 Type 取值为 Base64 时，本参数有效。说明：所有文件的文件大小总和不能超过7MB，避免转为 Base64 后超出云API的10MB包大小上限；图片格式应为：jpeg，jpg, png, webp。视频格式应为：mp4, mov, avi。不要有data:image/jpeg;base64,之类的前缀。 */
+    Base64?: string;
     /** 参考类型，GV、Kling、PixVerse模型适用。注意：当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频；当使用 PixVerse 模型时，可用于多图（主体）参考生模式，可选值：subject 表示主体、background 表示背景； */
     ReferenceType?: string;
     /** 用法：Vidu主体Id。Vidu主体Id：prompt可以通过 @主体Id 的方式使用。当 Category 为 Image 时有效。 */
@@ -2273,6 +2279,8 @@ declare namespace V20180717 {
   interface AigcVideoTaskOutput {
     /** AIGC 生视频任务的输出文件信息。 */
     FileInfos?: AigcVideoTaskOutputFileInfo[];
+    /** 任务类型为 Procedure 的任务 ID。若发起创建 AIGC 生视频任务时指定了任务流模板(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+    ProcedureTaskIds?: string[];
   }
 
   /** AIGC 生视频任务的输出文件信息。 */
@@ -8744,6 +8752,8 @@ declare namespace V20180717 {
     InputRegion?: string;
     /** 场景类型。取值如下：当 ModelName 为 Kling 时： motion_control 表示动作控制； avatar_i2v 表示数字人； lip_sync 表示对口型；当 ModelName 为 Vidu 时： template_effect 表示特效模板；其他 ModelName 暂不支持。 */
     SceneType?: string;
+    /** 任务流名称，在需要对生成的新视频执行任务流时填写。 */
+    Procedure?: string;
     /** 模型随机种子。 */
     Seed?: number;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */

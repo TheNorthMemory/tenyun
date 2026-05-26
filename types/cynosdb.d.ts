@@ -2380,6 +2380,8 @@ declare interface ParamItemDetail {
   ParamName?: string;
   /** 参数类型：integer，enum，float，string，func */
   ParamType?: string;
+  /** 参数是否可修改 */
+  ModifiableInfo?: ModifiableInfo;
   /** 参数描述 */
   Description?: string;
   /** 类型是否为公式 */

@@ -1420,6 +1420,20 @@ declare interface CreatePrivilegeCodeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDeviceVirtualGroupRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 必填，终端自定义分组id */
+  DeviceVirtualGroupId?: number;
+  /** 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位) */
+  OsType?: number;
+}
+
+declare interface DeleteDeviceVirtualGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAccountGroupsRequest {
   /** 搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。 */
   Deepin?: number;
@@ -2009,6 +2023,8 @@ declare interface Ioa {
   CreateDeviceVirtualGroup(data: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
   /** 创建特权码、卸载码 {@link CreatePrivilegeCodeRequest} {@link CreatePrivilegeCodeResponse} */
   CreatePrivilegeCode(data: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
+  /** 删除终端自定义分组 {@link DeleteDeviceVirtualGroupRequest} {@link DeleteDeviceVirtualGroupResponse} */
+  DeleteDeviceVirtualGroup(data?: DeleteDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceVirtualGroupResponse>;
   /** 查询账号分组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 软件分类的聚合软件列表查询 {@link DescribeAggrSoftCategorySoftListRequest} {@link DescribeAggrSoftCategorySoftListResponse} */

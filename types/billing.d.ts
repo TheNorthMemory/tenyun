@@ -776,9 +776,9 @@ declare interface AnalyseConditions {
   PayModes?: string;
   /** 交易类型，查询交易类型（请使用交易类型code入参） */
   ActionTypes?: string;
-  /** 分账标签键 */
+  /** 分账标签 */
   Tags?: string;
-  /** 费用类型，查询费用类型（请使用费用类型code入参)入参枚举如下：cashPayAmount:现金 incentivePayAmount:赠送金 voucherPayAmount:优惠券 tax:税金 costBeforeTax:税前价 */
+  /** 费用类型，查询费用类型（请使用费用类型code入参)入参枚举如下：cashPayAmount:现金incentivePayAmount:赠送金voucherPayAmount:优惠券tax:税金costBeforeTax:税前价 */
   FeeType?: string;
   /** 查询成本分析数据的用户UIN */
   PayerUins?: string;
@@ -3772,7 +3772,7 @@ declare interface DescribeCostExplorerSummaryRequest {
   PageSize: number;
   /** 起始页，当PageNo=1表示第一页， PageNo=2表示第二页，依次类推。 */
   PageNo: number;
-  /** 分账标签值 */
+  /** 分账标签键 */
   TagKeyStr?: string;
   /** 是否需要筛选框， 1-表示需要， 0-表示不需要，若不传默认不需要。 */
   NeedConditionValue?: string;

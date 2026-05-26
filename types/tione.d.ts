@@ -250,6 +250,8 @@ declare interface DataConfig {
   HostPathSource?: HostPath;
   /** 公有云数据源 */
   PublicDataSource?: PublicDataSourceFS | null;
+  /** 是否是只读存储 */
+  ReadOnly?: boolean;
 }
 
 /** 数据点 */
@@ -562,6 +564,8 @@ declare interface GooseFS {
   Path?: string | null;
   /** GooseFS命名空间 */
   NameSpace?: string | null;
+  /** 客户端的挂载参数，逗号分隔的参数名 */
+  MountOptions?: string;
 }
 
 /** GosseFSx的配置 */

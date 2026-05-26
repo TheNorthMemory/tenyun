@@ -2399,7 +2399,7 @@ declare interface CreateCloneInstanceRequest {
   InstanceId: string;
   /** 如果需要克隆实例回档到指定时间，则指定该值。时间格式为：yyyy-mm-dd hh:mm:ss。说明：此参数和 SpecifiedBackupId 参数需要2选1进行设置。 */
   SpecifiedRollbackTime?: string;
-  /** 如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 查询数据备份文件列表。说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、云盘版实例，备份文件为快照备份。 */
+  /** 如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 查询数据备份文件列表。如果是克隆双节点、三节点、四节点实例，备份文件为物理备份，如果是克隆单节点、云盘版实例，备份文件为快照备份。 */
   SpecifiedBackupId?: number;
   /** 私有网络 ID，请使用 查询私有网络列表。 */
   UniqVpcId?: string;
@@ -2427,7 +2427,7 @@ declare interface CreateCloneInstanceRequest {
   BackupZone?: string;
   /** 克隆实例类型。支持值包括：&quot;UNIVERSAL&quot; - 通用型实例，&quot;EXCLUSIVE&quot; - 独享型实例，&quot;CLOUD_NATIVE_CLUSTER&quot; - 云盘版标准型，&quot;CLOUD_NATIVE_CLUSTER_EXCLUSIVE&quot; - 云盘版加强型。不指定则默认为通用型。 */
   DeviceType?: string;
-  /** 新克隆实例节点数。如果需要克隆出三节点实例， 请将该值设置为3 或指定 BackupZone 参数。如果需要克隆出两节点实例，请将该值设置为2。默认克隆出两节点实例。 */
+  /** 新克隆实例节点数。如果需要克隆出三节点实例，请将该值设置为3，或指定 BackupZone 参数；如果需要克隆出双节点实例，请将该值设置为2，默认克隆出双节点实例；如果需要克隆出四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
   InstanceNodes?: number;
   /** 置放群组 ID。 */
   DeployGroupId?: string;
@@ -2451,6 +2451,8 @@ declare interface CreateCloneInstanceRequest {
   MasterZone?: string;
   /** 新产生的克隆实例主库的可用区信息，默认同源实例 Zone 的值。 */
   Zone?: string;
+  /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
+  FourthZone?: string;
 }
 
 declare interface CreateCloneInstanceResponse {
@@ -2497,7 +2499,7 @@ declare interface CreateDBInstanceHourRequest {
   UniqSubnetId?: string;
   /** 项目 ID，不填为默认项目。 */
   ProjectId?: number;
-  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。说明：若您创建单节点、双节点、三节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
+  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
   Zone?: string;
   /** 实例 ID，购买只读实例或者灾备实例时必填，该字段表示只读实例或者灾备实例的主实例 ID，请使用 查询实例列表 接口查询云数据库实例 ID。 */
   MasterInstanceId?: string;
@@ -2515,9 +2517,9 @@ declare interface CreateDBInstanceHourRequest {
   ProtectMode?: number;
   /** 多可用区域，默认为 0，支持值包括：0 - 表示单可用区，1 - 表示多可用区，购买主实例时可指定该参数，购买只读实例或者灾备实例时指定该参数无意义。 */
   DeployMode?: number;
-  /** 备库 1 的可用区信息。说明：双节点、三节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。 */
+  /** 备库 1 的可用区信息。双节点、三节点、四节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。 */
   SlaveZone?: string;
-  /** 备库 2 的可用区信息，默认为空，购买三节点主实例时可指定该参数。 */
+  /** 备库 2 的可用区信息，默认为空。购买三节点主实例、四节点主实例时可指定该参数。 */
   BackupZone?: string;
   /** 安全组参数，可使用 查询项目安全组信息 接口查询某个项目的安全组详情。 */
   SecurityGroup?: string[];
@@ -2539,7 +2541,7 @@ declare interface CreateDBInstanceHourRequest {
   ParamTemplateId?: number;
   /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
-  /** 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。 */
+  /** 实例节点数。对于 RO 和 基础版实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
   InstanceNodes?: number;
   /** 实例 Cpu 核数。当内存规格 Memory 存在多种 Cpu 配置时（如 64000MB 内存对应 8核/16核/32核），必须传入 Cpu 参数。 */
   Cpu?: number;
@@ -2567,6 +2569,8 @@ declare interface CreateDBInstanceHourRequest {
   ClusterType?: string;
   /** 开启或关闭实例销毁保护。on-开启，off-关闭 */
   DestroyProtect?: string;
+  /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
+  FourthZone?: string;
 }
 
 declare interface CreateDBInstanceHourResponse {
@@ -2587,7 +2591,7 @@ declare interface CreateDBInstanceRequest {
   Period: number;
   /** 实例数量，默认值为1, 最小值1，最大值为100。 */
   GoodsNum: number;
-  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。说明：若您创建单节点、双节点、三节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
+  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
   Zone?: string;
   /** 私有网络 ID，请使用 查询私有网络列表。说明：如果创建的是云盘版实例，此参数为必填且为私有网络类型。若此项不填，则系统会选择默认的 VPC。 */
   UniqVpcId?: string;
@@ -2609,11 +2613,11 @@ declare interface CreateDBInstanceRequest {
   ProtectMode?: number;
   /** 多可用区域，默认为 0，支持值包括：0 - 表示单可用区，1 - 表示多可用区。 */
   DeployMode?: number;
-  /** 备库 1 的可用区信息。说明：双节点、三节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。 */
+  /** 备库 1 的可用区信息。双节点、三节点、四节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。 */
   SlaveZone?: string;
   /** 参数列表，参数格式如 ParamList.0.Name=auto_increment&amp;ParamList.0.Value=1。可通过 查询默认的可设置参数列表 查询支持设置的参数。说明：表名大小写敏感的开启和关闭可通过参数 lower_case_table_names 进行设置，参数值为0表示开启，参数值为1表示关闭，若不设置则此参数默认值为0。若您创建的是 MySQL 8.0 版本的实例，则需要在创建实例时通过设置 lower_case_table_names 参数来开启或关闭表名大小写敏感，创建实例后无法修改参数，即创建后无法修改表名大小写敏感。其他数据库版本的实例支持在创建实例后修改 lower_case_table_names 参数。创建实例时设置表名大小写敏感的 API 调用方法请参见本文中的示例3。 */
   ParamList?: ParamInfo[];
-  /** 备库 2 的可用区信息，默认为空，购买三节点主实例时可指定该参数。 */
+  /** 备库 2 的可用区信息，默认为空。购买三节点主实例、四节点主实例时可指定该参数。 */
   BackupZone?: string;
   /** 自动续费标记，可选值为：0 - 不自动续费；1 - 自动续费。默认为0。 */
   AutoRenewFlag?: number;
@@ -2637,7 +2641,7 @@ declare interface CreateDBInstanceRequest {
   ParamTemplateId?: number;
   /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
-  /** 实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。 */
+  /** 实例节点数。对于 RO 和基础版实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
   InstanceNodes?: number;
   /** 实例 Cpu 核数。当内存规格 Memory 存在多种 CPU 配置时（如 64000MB 内存对应 8核/16核/32核），必须传入 Cpu 参数。 */
   Cpu?: number;
@@ -2663,6 +2667,8 @@ declare interface CreateDBInstanceRequest {
   DiskType?: string;
   /** 开启或关闭实例销毁保护。on-开启，off-关闭 */
   DestroyProtect?: string;
+  /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
+  FourthZone?: string;
 }
 
 declare interface CreateDBInstanceResponse {
@@ -3536,14 +3542,16 @@ declare interface DescribeDBInstanceConfigResponse {
   ProtectMode?: number;
   /** 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。 */
   DeployMode?: number;
-  /** 实例可用区信息，格式如 &quot;ap-shanghai-2&quot;。 */
+  /** 实例主可用区信息，格式如 &quot;ap-shanghai-2&quot;。 */
   Zone?: string;
-  /** 备库的配置信息。 */
+  /** 双节点、三节点、四节点实例第一备库的配置信息。查询双节点时，此参数返回为双节点的备库信息；查询三节点、四节点时，此参数返回为实例的第一备库信息。 */
   SlaveConfig?: SlaveConfig | null;
-  /** 强同步实例第二备库的配置信息。 */
+  /** 三节点、四节点实例第二备库的配置信息。查询三节点、四节点时，此参数返回为第二备库的信息。 */
   BackupConfig?: BackupConfig | null;
   /** 是否切换备库。 */
   Switched?: boolean;
+  /** 四节点实例第三备库的配置信息。查询四节点时，此参数返回为第三备库的信息。 */
+  FourthConfig?: BackupConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

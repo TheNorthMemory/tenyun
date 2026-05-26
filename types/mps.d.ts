@@ -1686,7 +1686,7 @@ declare interface AiSampleWordInfo {
 
 /** 用于AIGC创作图片时用到的扩展参数信息。 */
 declare interface AigcImageExtraParam {
-  /** 指定所生成视频的宽高比。不同模型支持的宽高比:GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
+  /** 指定所生成视频的宽高比。不同模型支持的宽高比:Kling 2.1支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling 3.0支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling 3.0-Omni支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling O1支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Vidu q2支持：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。MJ v7的宽高比需要在 prompt 中进行指定。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
   AspectRatio?: string;
   /** 指定图片输出分辨率。支持该参数的模型：支持选择: 720P, 1080P, 2K, 4K。 */
   Resolution?: string;
@@ -1716,13 +1716,13 @@ declare interface AigcStoreCosParam {
 
 /** 用于AIGC创作视频时用到的扩展参数信息。 */
 declare interface AigcVideoExtraParam {
-  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:Kling 720P(默认), 1080P。Hailuo 768P(默认), 1080P。Vidu 720P(默认)，1080P。GV 720P(默认),1080P。OS 720P, 图片仅支持1280x720、720x1280，暂不支持指定。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
+  /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:Kling 720P(默认)，1080P。Kling 3.0、Kling 3.0-Omni 支持 4K。Hailuo 768P(默认)，1080P。Vidu 540P，720P(默认)，1080P。PixVerse 540P，720P(默认)，1080P。H2 720P，1080P(默认)。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
   Resolution?: string;
-  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。Hailuo 暂不支持。Vidu 仅文生和参考图生视频 支持[16:9、9:16、4:3、3:4、1:1]，其中仅q2支持4:3、3:4。GV 16:9(默认值)、9:16。OS 仅文生视频支持, 16:9(默认), 9:16。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
+  /** 指定所生成视频的宽高比。 不同模型对于此参数的支持：Kling 仅文生视频支持, 16:9(默认值)、9:16、 1:1。Hailuo 暂不支持。Vidu 仅文生和参考图生视频支持 [16:9、9:16、4:3、3:4、1:1]，其中仅 q2 支持 4:3、3:4。PixVerse 仅文生和参考图生视频支持 [16:9、9:16、4:3、3:4、1:1、2:3、3:2、21:9]，其中仅 v6、c1 支持 2:3、3:2、21:9。H2 仅文生和参考图生视频支持 [16:9、9:16、4:3、3:4、4:5、5:4、1:1、21:9、9:21]。注：关于具体模型支持的宽高比例，可查看具体模型官网介绍获取更完整描述。 */
   AspectRatio?: string;
-  /** 是否添加图标水印。Hailuo 支持此参数。Kling 支持此参数。Vidu 支持此参数。 */
+  /** 是否添加图标水印。Hailuo 支持此参数。Kling 支持此参数。Vidu 支持此参数。H2 支持此参数。 */
   LogoAdd?: number;
-  /** 为视频生成音频。接受的值包括 true 或 false。 支持此参数的模型：GV，默认true。OS，默认true。 */
+  /** 为视频生成音频。接受的值包括 true 或 false。 支持此参数的模型：Vidu，仅 q3 系列模型支持该参数，默认 false。PixVerse，默认 false。Kling，默认 false。 */
   EnableAudio?: boolean;
   /** 错峰模型，目前仅支持Vidu模型。错峰模式下提交的任务，会在48小时内生成，未能完成的任务会被自动取消。 */
   OffPeak?: boolean;
@@ -8145,23 +8145,23 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 }
 
 declare interface CreateAigcImageTaskRequest {
-  /** 模型名称。当前支持的模型列表：Hunyuan,GEM，Qwen，Vidu，Kling。 */
+  /** 模型名称。当前支持的模型列表：Hunyuan，Qwen，Vidu，Kling，MJ。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。GEM，可选[2.5,3.0,3.1]。Vidu，可选[q2]。Kling，可选[2.1、O1、3.0、3.0-Omni] */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [3.0]。Vidu，可选 [q2]。Kling，可选 [2.1、O1、3.0、3.0-Omni]。Qwen，可选 [0925]。MJ，可选 [v7] */
   ModelVersion?: string;
   /** 场景化生图使用，仅部分模型支持。枚举值：3d_panorama： 全景图。仅Hunyuan支持。 */
   SceneType?: string;
-  /** 生成图片的描述。(注：最大支持1000字符)。当未传入参考图片时，此参数必填。 */
+  /** 生成图片的描述。当未传入参考图片时，此参数必填。 */
   Prompt?: string;
-  /** 用于描述您想要阻止模型生成的内容。 注意：部分模型支持。 例如： 顶部照明、明亮的色彩 人物、动物 多辆汽车、风。 */
+  /** 用于描述您想要阻止模型生成的内容。 注意：部分模型支持。例如：顶部照明、明亮的色彩、人物、动物、多辆汽车、风。 */
   NegativePrompt?: string;
   /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
   EnhancePrompt?: boolean;
-  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：GEM，可支持最多3张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
+  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：Kling 2.1，可支持最多 4 张图片输入作为资源图。Kling 3.0-Omni，可支持最多 10 张图片输入作为资源图。Kling O1，可支持最多 10 张图片输入作为资源图。Vidu q2，可支持最多 7 张图片输入作为资源图。Hunyuan 3.0，可支持最多 3 张图片输入作为资源图。MJ v7，可支持最多 3 张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
   ImageInfos?: AigcImageInfo[];
   /** 用于传入模型要求的额外参数。 */
   ExtraParameters?: AigcImageExtraParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 示例： {"size":"2048x2048"} */
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 Hunyuan 3.0，支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。Qwen 0925，支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例： {"size":"1024x1024"}。 */
   AdditionalParameters?: string;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
@@ -8177,33 +8177,33 @@ declare interface CreateAigcImageTaskResponse {
 }
 
 declare interface CreateAigcVideoTaskRequest {
-  /** 模型名称。当前支持的模型列表:Hunyuan,Hailuo，Kling，Vidu，OS，GV，PixVerse。 */
+  /** 模型名称。当前支持的模型列表:Hunyuan，Hailuo，Kling，Vidu，PixVerse，Mingmou，H2。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hailuo， 可选[02、2.3、2.3-fast]。Kling，可选[1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。Vidu,可选[q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。GV, 可选[3.1、3.1-fast]。OS，可选[2.0]。PixVerse，可选[v5.6、v6、c1] */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [1.5]。Hailuo，可选 [02、2.3、2.3-fast]。Kling，可选 [1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。Vidu，可选 [q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。PixVerse，可选 [v5.6、v6、c1]。H2，可选 [1.0]。 */
   ModelVersion?: string;
-  /** 指定场景生视频。注意：仅部分模型支持指定场景。Kling支持动作控制，motion_control。Mingmou支持横转竖，land2port。Vidu支持特效模板，template_effect。 */
+  /** 指定场景生视频。注意：仅部分模型支持指定场景。Kling支持：动作控制，motion_control；数字人，avatar_i2v；对口型，lip_sync。Mingmou支持：横转竖，land2port。Vidu支持：特效模板，template_effect。 */
   SceneType?: string;
-  /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
+  /** 生成视频的描述。当未传入图片时，此参数必填。 */
   Prompt?: string;
-  /** 用于描述您想要阻止模型生成的内容。注意：部分模型支持。例如：顶部照明、明亮的色彩人物、动物多辆汽车、风。 */
+  /** 用于描述您想要阻止模型生成的内容。注意：部分模型支持。例如：顶部照明、明亮的色彩。人物、动物。多辆汽车、风。 */
   NegativePrompt?: string;
   /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
   EnhancePrompt?: boolean;
-  /** 用于指导视频生成的图片 URL。该URL需外网可访问。注意：推荐图片大小不超过10M，不同模型大小限制不相同。支持的图片格式：jpeg、png。使用OS模型时，需输入图片尺寸为: 1280x720、720x1280。 */
+  /** 用于指导视频生成的图片 URL。该URL需外网可访问。注意：推荐图片大小不超过10M，不同模型大小限制不相同，可查看相应模型官网获取更完整描述。支持的图片格式：jpeg、png。 */
   ImageUrl?: string;
-  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：GV，传入尾帧图片时，必须同时传入ImageUrl作为首帧。Kling， 在Resolution:1080P的情况下 2.1版本支持首尾帧。Vidu, q2-pro, q2-turbo 支持首尾帧。注意：推荐图片大小不超过10M，各模型限制不同。支持的图片格式：jpeg、png。 */
+  /** 模型将以此参数传入的图片作为尾帧画面来生成视频。支持此参数的模型：Kling，2.0、O1、3.0、3.0-Omni 支持首尾帧。Kling，1.6、2.1、2.5、2.6 在 Resolution:1080P 的情况下支持首尾帧。Vidu，q2-pro、q2-turbo、q3-pro、q3-turbo 支持首尾帧。PixVerse，v5.6、v6、c1 支持首尾帧。Hailuo，02 支持首尾帧。注意：推荐图片大小不超过10M，各模型限制不同。支持的图片格式：jpeg、png。 */
   LastImageUrl?: string;
-  /** 最多包含三张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：GV，使用多图输入时，不可使用ImageUrl和LastImageUrl。Vidu，支持多图参考生视频。q2模型1-7张图片，可通过ImageInfos里面的ReferenceType作为主体id来传入。注意：图片大小不超过10M。支持的图片格式：jpeg、png。 */
+  /** 包含多张素材资源图片的列表，用于描述模型在生成视频时要使用的资源图片。支持多图输入的模型：Vidu，q2、q2-pro、q3-turbo、q3、q3-mix 支持多图参考生视频。支持上传 1-7 张图片，可通过 ImageInfos 里面的 ReferenceType 作为主体 id 来传入。Kling，O1、3.0-Omni、1.6 支持多图参考生视频。Kling 1.6 支持上传 1-4 张图片。Kling O1、3.0-Omni 支持上传 1-7 张图片。当有参考视频时，支持上传 0-4 张图片。PixVerse，v5.6、v6、c1 支持多图参考生视频。支持上传 1-7 张图片，需要通过 ImageInfos 里面的 Text 字段传入图片名称。H2，1.0 支持多图参数生视频。支持上传 1-9 张图片。当有参考视频时，支持上传 0-5 张图片。注意：图片大小不超过10M。支持的图片格式：jpeg、png。 */
   ImageInfos?: AigcVideoReferenceImageInfo[];
-  /** 目前仅Kling O1版本支持参考视频信息传入。可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声。 */
+  /** 目前仅 Kling O1、Kling 3.0-Omni、Vidu q2-pro、H2 1.0 支持参考视频信息传入。Kling O1、3.0-Omni 可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声。Vidu q2-pro 支持视频参考。H2 1.0 支持视频参考。 */
   VideoInfos?: AigcVideoReferenceVideoInfo[];
-  /** 生成视频的时长。注意：Kling支持 5、10秒。默认: 5秒。Hailuo的std模式可支持6、10秒，其他仅6秒。默认：6秒。Vidu支持1-10秒。GV支持 8秒。 默认：8秒。OS支持4、8、12秒。 默认：8秒。 */
+  /** 生成视频的时长。注意：Kling，默认：5 秒。O1 支持 3-10 秒。3.0-Omni 支持 3-15 秒，当使用视频参考时只支持 3-10 秒。3.0 支持 3-15 秒。其他版本支持 5、10 秒。Hailuo 的 std 模式可支持 6、10 秒，其他仅 6 秒。默认：6 秒。Vidu，默认：5 秒。q3-pro、q3-turbo、q3、q3-mix 支持 3-16 秒。q2-pro、q2-turbo、q2 支持 1-10 秒。 PixVerse，默认：5 秒。v5.6 支持 5、8、10 秒。v6、c1 支持 1-15 秒。H2，支持 3-15 秒，默认 ：5 秒。 */
   Duration?: number;
   /** 用于传入要求的额外参数。 */
   ExtraParameters?: AigcVideoExtraParam;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例：{"camera_control":{"type":"simple"}} */
+  /** 用于传入一些模型需要的特殊场景参数、分镜prompt等，Json格式序列化成字符串。示例：{"camera_control":{"type":"simple"}} */
   AdditionalParameters?: string;
   /** 接口操作者名称。 */
   Operator?: string;

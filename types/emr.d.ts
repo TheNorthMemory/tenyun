@@ -868,6 +868,42 @@ declare interface DynamicInstanceGroup {
   CFSTurboVolumes?: CFSTurboVolume[];
 }
 
+/** DynamicInstanceGroupSpec */
+declare interface DynamicInstanceGroupSpec {
+  /** group 名称 */
+  Name: string;
+  /** pod 数量 */
+  PodCount: number;
+  /** 最小节点数 */
+  MinNodes: number;
+  /** 最大节点数 */
+  MaxNodes: number;
+  /** 是否开启存储配置 */
+  StorageConfigEnabled: boolean;
+  /** headGroup:head;workerGroup:worker */
+  GroupType?: string;
+  /** CPU 核数 */
+  Cpu?: number;
+  /** 内存(GB) */
+  MemSize?: number;
+  /** GPU类型 */
+  GpuType?: string;
+  /** GPU核数 */
+  Gpu?: number;
+  /** 资源标签 */
+  ResourceLabels?: string;
+  /** 环境变量 */
+  Env?: NameValue[];
+  /** 标签 */
+  Labels?: NameValue[];
+  /** 容忍度 */
+  Tolerations?: Toleration[];
+  /** 调度策略 */
+  Scheduler?: string;
+  /** 卷目录 */
+  PersistentVolume?: PersistentVolume;
+}
+
 /** POD浮动规格 */
 declare interface DynamicPodSpec {
   /** 需求最小cpu核数 */
@@ -2164,6 +2200,24 @@ declare interface Period {
   TimeUnit?: string;
 }
 
+/** 卷目录 */
+declare interface PersistentVolume {
+  /** cbs 存储卷 */
+  CBSVolumes?: CBSVolume[];
+  /** cfs存储卷 */
+  CFSVolumes?: CFSVolume[];
+  /** cos 存储卷 */
+  COSVolumes?: COSVolume[];
+  /** 存储卷名称（yaml 提交的没有存储卷的类型） */
+  StorageVolumeName?: string[];
+  /** 存储卷列表 */
+  VolumeMounts?: VolumeMount[];
+  /** 存储卷详情 */
+  StorageVolumeDetail?: StorageVolumeDetail[];
+  /** cfs trubo存储卷 */
+  CFSTurboVolumes?: CFSTurboVolume[];
+}
+
 /** Pod PVC存储方式描述 */
 declare interface PersistentVolumeContext {
   /** 磁盘大小，单位为GB。 */
@@ -2486,6 +2540,16 @@ declare interface RayCluster {
   SubmitType?: number;
   /** head访问地址,也是dashboard地址 */
   DashboardUrl?: string;
+}
+
+/** Redis 实例信息 */
+declare interface RedisInstance {
+  /** redis实例id */
+  Id?: string;
+  /** 实例 ip */
+  Host?: string;
+  /** 实例端口 */
+  Port?: number;
 }
 
 /** 集群续费实例信息 */
@@ -3056,6 +3120,16 @@ declare interface StorageSummaryDistribution {
   MetricName?: string;
   /** 采样值 */
   Dps?: Dps[] | null;
+}
+
+/** 存储卷详情 */
+declare interface StorageVolumeDetail {
+  /** 存储卷名称 */
+  VolumeName?: string;
+  /** 存储卷类型 */
+  VolumeType?: string;
+  /** 存储卷详情 */
+  Desc?: string;
 }
 
 /** 重启/停止/启动服务/监控的配置 */
@@ -4166,6 +4240,62 @@ declare interface DescribeDAGInfoResponse {
   TotalCount?: number;
   /** Starrocks 查询信息列表 */
   DAGInfoList?: DAGInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDynamicInstanceDetailRequest {
+  /** EMR 集群 id */
+  InstanceId: string;
+  /** Ray集群Id */
+  RayClusterId: number;
+}
+
+declare interface DescribeDynamicInstanceDetailResponse {
+  /** ray集群名 */
+  RayClusterName?: string;
+  /** ray集群ID */
+  RayClusterId?: number;
+  /** 创建类型枚举值：1： 表单创建2： yaml创建 */
+  SubmitType?: number;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** labels */
+  Labels?: NameValue[];
+  /** Tolerations */
+  Tolerations?: Toleration[];
+  /** 环境变量 */
+  Env?: NameValue[];
+  /** 是否依赖 Kerberos 外部组件 */
+  SupportExternalKerberosService?: boolean;
+  /** 依赖的Kerberos集群 */
+  KerberosCluster?: string;
+  /** token */
+  Token?: string;
+  /** HeadGroup */
+  HeadGroupSpec?: DynamicInstanceGroupSpec;
+  /** WorkerGroup */
+  WorkerGroupSpecs?: DynamicInstanceGroupSpec[];
+  /** 是否开启存储配置 */
+  StorageConfigEnabled?: boolean;
+  /** Redis 实例信息 */
+  RedisInstance?: RedisInstance;
+  /** 镜像信息 */
+  CustomImage?: CustomImage;
+  /** dashboard链接 */
+  DashboardUrl?: string;
+  /** pod 总数 */
+  TotalPodCount?: number;
+  /** 是否高可用 */
+  HighAvailability?: boolean;
+  /** 存储信息 */
+  PersistentVolume?: PersistentVolume;
+  /** rayClusterYamlJson */
+  RayClusterYaml?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6071,6 +6201,8 @@ declare interface Emr {
   DescribeCvmQuota(data: DescribeCvmQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCvmQuotaResponse>;
   /** 查询DAG信息 {@link DescribeDAGInfoRequest} {@link DescribeDAGInfoResponse} */
   DescribeDAGInfo(data: DescribeDAGInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDAGInfoResponse>;
+  /** 描述容器EMR-TKE集群DynamicInstance详细信息 {@link DescribeDynamicInstanceDetailRequest} {@link DescribeDynamicInstanceDetailResponse} */
+  DescribeDynamicInstanceDetail(data: DescribeDynamicInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDynamicInstanceDetailResponse>;
   /** 描述容器EMR-TKE集群DynamicInstance列表 {@link DescribeDynamicInstanceListRequest} {@link DescribeDynamicInstanceListResponse} */
   DescribeDynamicInstanceList(data: DescribeDynamicInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDynamicInstanceListResponse>;
   /** 查询EMR事件数据信息 {@link DescribeEMREventListRequest} {@link DescribeEMREventListResponse} */

@@ -3767,7 +3767,7 @@ declare interface CreateShipperResponse {
 declare interface CreateSplunkDeliverRequest {
   /** 日志主题id通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** splunk投递任务名称；name有如下限制：不能为空长度不大于64只能包含aA-zZ、下划线、-、0-9 */
+  /** splunk投递任务名称；name有如下限制：- 不能为空- 长度不大于256- 只能包含aA-zZ、下划线、-、0-9 */
   Name: string;
   /** Splunk投递任务-目标配置-网络信息 */
   NetInfo: NetInfo;
@@ -6285,7 +6285,7 @@ declare interface ModifySplunkDeliverRequest {
   TaskId: string;
   /** 日志主题id通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
-  /** 投递任务名称name有以下限制：不能为空长度不大于64只能包含aA-zZ、下划线、-、0-9 */
+  /** 投递任务名称name有以下限制：- 不能为空- 长度不大于256- 只能包含aA-zZ、下划线、-、0-9 */
   Name?: string;
   /** 投递任务启用状态；0:禁用；1:启用 */
   Enable?: number;

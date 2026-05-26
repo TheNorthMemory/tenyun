@@ -856,6 +856,16 @@ declare interface GetLiveCodeResponse {
   RequestId?: string;
 }
 
+declare interface GetNFCTokenRequest {
+}
+
+declare interface GetNFCTokenResponse {
+  /** NFCToken */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetWeChatBillDetailsRequest {
   /** 拉取的日期（YYYY-MM-DD）。- 最大可追溯到365天前。- 当天6点后才能拉取前一天的数据。 */
   Date: string;
@@ -872,6 +882,54 @@ declare interface GetWeChatBillDetailsResponse {
   NextCursor?: number;
   /** 数据。 */
   WeChatBillDetails?: WeChatBillDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetWxNFCResultRequest {
+  /** 前端 NFC SDK返回的唯一标识ID */
+  NFCToken: string;
+}
+
+declare interface GetWxNFCResultResponse {
+  /** NFC计费结果码，NFC识读成功一次则计费一次（同一个NFC请求重复拉取结果不会重复计费）。计费结果码取值范围： 0：识读成功，计费-1：识读失败，不计费 */
+  ResultCode?: string;
+  /** 身份证号 */
+  IdNum?: string | null;
+  /** 姓名 */
+  Name?: string | null;
+  /** 证件中的人像照片 */
+  Picture?: string | null;
+  /** 身份类证件正面照片（人像面） */
+  IdCardFrontImg?: string | null;
+  /** 身份类证件背面照片（国徽面） */
+  IdCardBackImg?: string | null;
+  /** 出生日期 */
+  BirthDate?: string | null;
+  /** 有效期起始时间 */
+  BeginTime?: string | null;
+  /** 有效期结束时间 */
+  EndTime?: string | null;
+  /** 住址 */
+  Address?: string | null;
+  /** 民族 */
+  Nation?: string | null;
+  /** 性别 */
+  Sex?: string | null;
+  /** 证件类型枚举值：01： 身份证03： 中国护照06： 港澳通行证07： 台胞证08： 外国护照13： 外国人永久居留证14： 港澳台居民居住证15： 回乡证16： 大陆居民来往台湾通行证99： 其他证件 */
+  IdType?: string | null;
+  /** 英文姓名 */
+  EnName?: string | null;
+  /** 签发机关 */
+  SigningOrganization?: string | null;
+  /** 港澳台居民居住证，通行证号码 */
+  OtherIdNum?: string | null;
+  /** 旅行证件国籍 */
+  Nationality?: string | null;
+  /** 旅行证件机读区第二行 29~42 位 */
+  PersonalNumber?: string | null;
+  /** 证件的验真结果JSON格式如下： {&quot;result_issuer &quot;:&quot;签发者证书合法性验证结果 &quot;,&quot;result_paper&quot;:&quot;证件安全对象合法性验证结果 &quot;,&quot;result_data&quot; :&quot;防数据篡改验证结果 &quot;,&quot;result_chip&quot; :&quot;防证书件芯片被复制验证结果&quot;} 。 - 取值范围： 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真。 */
+  CheckMRTD?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1297,8 +1355,12 @@ declare interface Faceid {
   GetFaceidRiskInfoToken(data?: GetFaceidRiskInfoTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetFaceidRiskInfoTokenResponse>;
   /** 获取数字验证码 {@link GetLiveCodeRequest} {@link GetLiveCodeResponse} */
   GetLiveCode(data?: GetLiveCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GetLiveCodeResponse>;
+  /** 获取NFC识别Token信息 {@link GetNFCTokenRequest} {@link GetNFCTokenResponse} */
+  GetNFCToken(data?: GetNFCTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetNFCTokenResponse>;
   /** 查询账单明细（微信渠道） {@link GetWeChatBillDetailsRequest} {@link GetWeChatBillDetailsResponse} */
   GetWeChatBillDetails(data: GetWeChatBillDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetWeChatBillDetailsResponse>;
+  /** 获取证件NFC数据 {@link GetWxNFCResultRequest} {@link GetWxNFCResultResponse} */
+  GetWxNFCResult(data: GetWxNFCResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetWxNFCResultResponse>;
   /** 身份证识别及信息核验 {@link IdCardOCRVerificationRequest} {@link IdCardOCRVerificationResponse} */
   IdCardOCRVerification(data?: IdCardOCRVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<IdCardOCRVerificationResponse>;
   /** 身份信息认证（二要素核验） {@link IdCardVerificationRequest} {@link IdCardVerificationResponse} */

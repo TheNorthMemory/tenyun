@@ -290,6 +290,22 @@ declare interface OffsiteFlag {
   Tips?: number;
 }
 
+/** 子账号密码规则 */
+declare interface PassWordRule {
+  /** 最小长度 */
+  MinimumLength?: number | null;
+  /** 必须包含的字符 */
+  MustContain?: string | null;
+  /** 强制修改周期 */
+  ForcePasswordChange?: number | null;
+  /** 重复使用次数 */
+  ReusePasswordLimit?: number | null;
+  /** 密码重试次数 */
+  RetryPasswordLimit?: number | null;
+  /** 密码过期失效 1：是，2：否（是：密码过期后，子用户无法登录，需要管理员重置密码。否：密码过期后，子用户可登录，登录后强制根据旧密码修改密码） */
+  PasswordExpirationInvalidation?: number | null;
+}
+
 /** 策略版本详情 */
 declare interface PolicyVersionDetail {
   /** 策略版本号 */
@@ -1218,6 +1234,20 @@ declare interface GetGroupResponse {
   RequestId?: string;
 }
 
+declare interface GetPasswordRulesRequest {
+}
+
+declare interface GetPasswordRulesResponse {
+  /** 密码规则 */
+  Rules?: PassWordRule;
+  /** 修改时间 */
+  UpdateTime?: string;
+  /** 修改人 */
+  Modifier?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetPolicyRequest {
   /** 策略Id。 */
   PolicyId: number;
@@ -1854,6 +1884,16 @@ declare interface UpdateOIDCConfigResponse {
   RequestId?: string;
 }
 
+declare interface UpdatePasswordRulesRequest {
+  /** 密码规则 */
+  Rules: PassWordRule;
+}
+
+declare interface UpdatePasswordRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdatePolicyRequest {
   /** 策略ID，与PolicyName二选一必填 */
   PolicyId?: number;
@@ -2091,6 +2131,8 @@ declare interface Cam {
   GetCustomMFATokenInfo(data: GetCustomMFATokenInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomMFATokenInfoResponse>;
   /** 查询用户组详情 {@link GetGroupRequest} {@link GetGroupResponse} */
   GetGroup(data: GetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupResponse>;
+  /** 获取CAM密码设置规则 {@link GetPasswordRulesRequest} {@link GetPasswordRulesResponse} */
+  GetPasswordRules(data?: GetPasswordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<GetPasswordRulesResponse>;
   /** 查看策略详情 {@link GetPolicyRequest} {@link GetPolicyResponse} */
   GetPolicy(data: GetPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetPolicyResponse>;
   /** 查询策略版本详情 {@link GetPolicyVersionRequest} {@link GetPolicyVersionResponse} */
@@ -2167,6 +2209,8 @@ declare interface Cam {
   UpdateGroup(data: UpdateGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGroupResponse>;
   /** 修改角色OIDC配置 {@link UpdateOIDCConfigRequest} {@link UpdateOIDCConfigResponse} */
   UpdateOIDCConfig(data: UpdateOIDCConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOIDCConfigResponse>;
+  /** 更新CAM密码设置规则 {@link UpdatePasswordRulesRequest} {@link UpdatePasswordRulesResponse} */
+  UpdatePasswordRules(data: UpdatePasswordRulesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePasswordRulesResponse>;
   /** 更新策略信息 {@link UpdatePolicyRequest} {@link UpdatePolicyResponse} */
   UpdatePolicy(data?: UpdatePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePolicyResponse>;
   /** 修改角色是否可登录 {@link UpdateRoleConsoleLoginRequest} {@link UpdateRoleConsoleLoginResponse} */

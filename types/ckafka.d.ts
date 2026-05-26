@@ -3351,22 +3351,6 @@ declare interface DeleteRouteTriggerTimeResponse {
   RequestId?: string;
 }
 
-declare interface DeleteTopicIpWhiteListRequest {
-  /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
-  InstanceId: string;
-  /** 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取。 */
-  TopicName: string;
-  /** ip白名单列表 */
-  IpWhiteList: string[];
-}
-
-declare interface DeleteTopicIpWhiteListResponse {
-  /** 删除主题IP白名单结果 */
-  Result?: JgwOperateResponse;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteTopicRequest {
   /** ckafka 实例Id */
   InstanceId: string;
@@ -4870,8 +4854,6 @@ declare interface Ckafka {
   DeleteRouteTriggerTime(data: DeleteRouteTriggerTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTriggerTimeResponse>;
   /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
-  /** 删除主题IP白名单 {@link DeleteTopicIpWhiteListRequest} {@link DeleteTopicIpWhiteListResponse} */
-  DeleteTopicIpWhiteList(data: DeleteTopicIpWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicIpWhiteListResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 枚举ACL {@link DescribeACLRequest} {@link DescribeACLResponse} */

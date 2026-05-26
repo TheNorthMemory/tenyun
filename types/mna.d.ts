@@ -304,6 +304,16 @@ declare interface OrderInfo {
   Updated?: string;
 }
 
+/** 此数据结构用来展示可用地域信息。 */
+declare interface RegionInfo {
+  /** 地域 ID。 */
+  RegionId?: string;
+  /** 地域名称。 */
+  RegionName?: string;
+  /** 地域英文缩写。 */
+  RegionAbbr?: string;
+}
+
 /** 网卡流量指标数据 */
 declare interface SlotNetInfo {
   /** 网卡名 */
@@ -512,6 +522,16 @@ declare interface DeleteL3ConnRequest {
 }
 
 declare interface DeleteL3ConnResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessRegionsRequest {
+}
+
+declare interface DescribeAccessRegionsResponse {
+  /** 地域信息列表 */
+  RegionList?: RegionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1118,6 +1138,18 @@ declare interface GroupDeleteDeviceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDeviceAccessRegionsRequest {
+  /** 设备ID */
+  DeviceIds: string[];
+  /** 接入地域 */
+  AllowedRegions?: string[];
+}
+
+declare interface ModifyDeviceAccessRegionsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPackageRenewFlagRequest {
   /** 流量包的唯一资源ID */
   ResourceId: string;
@@ -1345,6 +1377,8 @@ declare interface Mna {
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 删除互通规则 {@link DeleteL3ConnRequest} {@link DeleteL3ConnResponse} */
   DeleteL3Conn(data: DeleteL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL3ConnResponse>;
+  /** 查询可接入地域列表 {@link DescribeAccessRegionsRequest} {@link DescribeAccessRegionsResponse} */
+  DescribeAccessRegions(data?: DescribeAccessRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRegionsResponse>;
   /** 下载活跃设备数量统计 {@link DownloadActiveDeviceCountRequest} {@link DownloadActiveDeviceCountResponse} */
   DownloadActiveDeviceCount(data?: DownloadActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadActiveDeviceCountResponse>;
   /** 活跃设备数量统计 {@link GetActiveDeviceCountRequest} {@link GetActiveDeviceCountResponse} */
@@ -1401,6 +1435,8 @@ declare interface Mna {
   GroupAddDevice(data: GroupAddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GroupAddDeviceResponse>;
   /** 分组删除设备 {@link GroupDeleteDeviceRequest} {@link GroupDeleteDeviceResponse} */
   GroupDeleteDevice(data: GroupDeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GroupDeleteDeviceResponse>;
+  /** 修改设备接入地域 {@link ModifyDeviceAccessRegionsRequest} {@link ModifyDeviceAccessRegionsResponse} */
+  ModifyDeviceAccessRegions(data: ModifyDeviceAccessRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAccessRegionsResponse>;
   /** 修改流量包自动续费标识 {@link ModifyPackageRenewFlagRequest} {@link ModifyPackageRenewFlagResponse} */
   ModifyPackageRenewFlag(data: ModifyPackageRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageRenewFlagResponse>;
   /** 订购流量包 {@link OrderFlowPackageRequest} {@link OrderFlowPackageResponse} */

@@ -704,6 +704,8 @@ declare interface TmsConfigDTO {
 
 /** Token限流配置 */
 declare interface TokenLimitConfigDTO {
+  /** 限流类型枚举值：minute： 时间窗口day： 自然日month： 自然月 */
+  Type?: string | null;
   /** 单次请求上限，k */
   LimitRequestBody?: number | null;
   /** 累次token总量消耗上限 */

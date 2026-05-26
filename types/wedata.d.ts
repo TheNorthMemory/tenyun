@@ -8993,7 +8993,7 @@ declare namespace V20210820 {
 
   /** 批量操作出参 */
   interface BatchTaskOperateNew {
-    /** 操作Id */
+    /** 操作Id可使用JobId字段通过ListBatchDetail接口 查询异步操作结果 */
     JobId?: number | null;
   }
 
@@ -11129,7 +11129,7 @@ declare namespace V20210820 {
     PageNum?: number | null;
     /** 总页数 */
     PageTotal?: number | null;
-    /** 分页内容 */
+    /** 分页内容分页拉取全部代码内容后，先拼接，再Base64解码获取完整脚本内容 */
     Base64ScriptContent?: string | null;
   }
 
@@ -16313,7 +16313,7 @@ declare namespace V20210820 {
     InstanceStatus?: number | null;
   }
 
-  /** 编排空间试运行记录 */
+  /** 编排空间试运行记录查询执行日志 可调用DownloadLogByLine接口 */
   interface TestRunningRecord {
     /** 开始时间 */
     StartTime?: string | null;

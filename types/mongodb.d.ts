@@ -1196,6 +1196,18 @@ declare interface DeleteAuditLogFileResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDBBackupsRequest {
+  /** 实例id,cmgo-xxxx */
+  InstanceId: string;
+  /** 备份文件id列表 */
+  BackupIds: number[];
+}
+
+declare interface DeleteDBBackupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLogDownloadTaskRequest {
   /** 实例 ID */
   InstanceId: string;
@@ -1758,6 +1770,14 @@ declare interface DescribeMongodbLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePasswordRotationRequest {
+}
+
+declare interface DescribePasswordRotationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSRVConnectionDomainRequest {
   /** 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -1878,6 +1898,14 @@ declare interface DropDBInstanceParamTplRequest {
 }
 
 declare interface DropDBInstanceParamTplResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnablePasswordRotationRequest {
+}
+
+declare interface EnablePasswordRotationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2094,6 +2122,22 @@ declare interface ModifyAuditServiceRequest {
 }
 
 declare interface ModifyAuditServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBackupExpireTimeRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 过期时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ExpireTime: string;
+  /** 备份ID */
+  BackupIds: number[];
+}
+
+declare interface ModifyBackupExpireTimeResponse {
+  /** 失败的备份ID */
+  FailedBackups?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2935,6 +2979,8 @@ declare interface Mongodb {
   DeleteAccountUser(data: DeleteAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountUserResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
+  /** 删除全量备份 {@link DeleteDBBackupsRequest} {@link DeleteDBBackupsResponse} */
+  DeleteDBBackups(data: DeleteDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBBackupsResponse>;
   /** 删除日志下载任务 {@link DeleteLogDownloadTaskRequest} {@link DeleteLogDownloadTaskResponse} */
   DeleteLogDownloadTask(data: DeleteLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogDownloadTaskResponse>;
   /** 全部账号列表 {@link DescribeAccountUsersRequest} {@link DescribeAccountUsersResponse} */
@@ -2983,6 +3029,8 @@ declare interface Mongodb {
   DescribeLogDownloadTasks(data: DescribeLogDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadTasksResponse>;
   /** 日志查询接口 {@link DescribeMongodbLogsRequest} {@link DescribeMongodbLogsResponse} */
   DescribeMongodbLogs(data: DescribeMongodbLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMongodbLogsResponse>;
+  /** 查询密码轮转状态 {@link DescribePasswordRotationRequest} {@link DescribePasswordRotationResponse} */
+  DescribePasswordRotation(data?: DescribePasswordRotationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePasswordRotationResponse>;
   /** 查询实例的当前的SRV访问域名 {@link DescribeSRVConnectionDomainRequest} {@link DescribeSRVConnectionDomainResponse} */
   DescribeSRVConnectionDomain(data: DescribeSRVConnectionDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSRVConnectionDomainResponse>;
   /** 查询实例绑定的安全组 {@link DescribeSecurityGroupRequest} {@link DescribeSecurityGroupResponse} */
@@ -2999,6 +3047,8 @@ declare interface Mongodb {
   DisableSRVConnectionUrl(data: DisableSRVConnectionUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DisableSRVConnectionUrlResponse>;
   /** 删除参数模板 {@link DropDBInstanceParamTplRequest} {@link DropDBInstanceParamTplResponse} */
   DropDBInstanceParamTpl(data: DropDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<DropDBInstanceParamTplResponse>;
+  /** 开启密码轮转 {@link EnablePasswordRotationRequest} {@link EnablePasswordRotationResponse} */
+  EnablePasswordRotation(data?: EnablePasswordRotationRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePasswordRotationResponse>;
   /** 开启实例的SRV访问地址 {@link EnableSRVConnectionUrlRequest} {@link EnableSRVConnectionUrlResponse} */
   EnableSRVConnectionUrl(data: EnableSRVConnectionUrlRequest, config?: AxiosRequestConfig): AxiosPromise<EnableSRVConnectionUrlResponse>;
   /** 开启实例数据透明加密 {@link EnableTransparentDataEncryptionRequest} {@link EnableTransparentDataEncryptionResponse} */
@@ -3023,6 +3073,8 @@ declare interface Mongodb {
   KillOps(data: KillOpsRequest, config?: AxiosRequestConfig): AxiosPromise<KillOpsResponse>;
   /** 修改审计配置 {@link ModifyAuditServiceRequest} {@link ModifyAuditServiceResponse} */
   ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
+  /** 修改备份过期时间 {@link ModifyBackupExpireTimeRequest} {@link ModifyBackupExpireTimeResponse} */
+  ModifyBackupExpireTime(data: ModifyBackupExpireTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupExpireTimeResponse>;
   /** 修改云数据库实例网络信息 {@link ModifyDBInstanceNetworkAddressRequest} {@link ModifyDBInstanceNetworkAddressResponse} */
   ModifyDBInstanceNetworkAddress(data: ModifyDBInstanceNetworkAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkAddressResponse>;
   /** 修改数据库参数模板 {@link ModifyDBInstanceParamTplRequest} {@link ModifyDBInstanceParamTplResponse} */

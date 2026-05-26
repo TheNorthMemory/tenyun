@@ -3304,7 +3304,7 @@ declare interface SkillScanQueryData {
   RiskLevel?: string;
   /** 综合处置建议字段，位于 data 顶层，用于给出本次检测结果的总体修复、缓解或人工处置建议 */
   Mitigation?: string;
-  /** 安全评分（0-100，100 为最安全）取值范围：[0, 100] */
+  /** 安全评分（0-100，分数越高越安全）取值范围：[0, 100] */
   SecurityScore?: number;
   /** 本次扫描使用的引擎版本号 */
   EngineVersion?: number;

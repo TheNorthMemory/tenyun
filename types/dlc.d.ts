@@ -3974,6 +3974,26 @@ declare interface CreateUserResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserRoleRequest {
+  /** 角色Arn信息 */
+  Arn: string;
+  /** 角色描述信息 */
+  Desc: string;
+  /** 角色名称 */
+  Name?: string;
+  /** cos授权路径列表 */
+  CosPermissionList?: CosPermission[];
+  /** cam策略json */
+  PermissionJson?: string;
+  /** 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻） */
+  IsDefault?: number;
+}
+
+declare interface CreateUserRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserVpcConnectionRequest {
   /** 用户vpcid */
   UserVpcId: string;
@@ -6697,6 +6717,8 @@ declare interface Dlc {
   CreateTcIcebergTable(data: CreateTcIcebergTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTcIcebergTableResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
+  /** 创建用户角色 {@link CreateUserRoleRequest} {@link CreateUserRoleResponse} */
+  CreateUserRole(data: CreateUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserRoleResponse>;
   /** 创建用户vpc连接 {@link CreateUserVpcConnectionRequest} {@link CreateUserVpcConnectionResponse} */
   CreateUserVpcConnection(data: CreateUserVpcConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVpcConnectionResponse>;
   /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */

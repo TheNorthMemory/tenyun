@@ -36,7 +36,7 @@ declare interface AggregateEvaluationResult {
   ResourceOwnerName?: string | null;
 }
 
-/** 资源列列表信息 */
+/** 资源列表信息 */
 declare interface AggregateResourceInfo {
   /** 资源类型 */
   ResourceType?: string;
