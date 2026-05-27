@@ -3204,13 +3204,15 @@ declare interface RateLimitingRule {
   Name?: string;
   /** 精准速率限制的具体内容，需符合表达式语法，详细规范参见[产品文档](https://cloud.tencent.com/document/product/1552/125343)。 */
   Condition?: string;
+  /** 限速方式。在统计时间窗口 CountingPeriod 内，对满足特征 CountBy 的请求，支持配置以下限速方式：Block: 阻断访问源。当统计次数超过阈值 MaxRequestThreshold 时，在 ActionDuration 时长内，对满足特征的所有后续请求执行 Action 处置；Throttle: 仅处置超额请求。当统计次数超过阈值 MaxRequestThreshold 时，仅对超过阈值的请求执行 Action 处置，窗口结束后停止处置。此时，ActionDuration 参数将被忽略。默认值为 Block。 */
+  Mode?: string;
   /** 速率阈值请求特征的匹配方式， 当 Enabled 为 on 时，此字段必填。当条件有多个时，将组合多个条件共同进行统计计算，条件最多不可超过5条。取值有：http.request.ip：客户端 IP；http.request.xff_header_ip：客户端 IP（优先匹配 XFF 头部）；http.request.uri.path：请求的访问路径；http.request.cookies['session']：名称为 session 的 Cookie，其中 session 可替换为自己指定的参数；http.request.headers['user-agent']：名称为 user-agent 的 HTTP 头部，其中 user-agent 可替换为自己指定的参数；http.request.ja3：请求的 JA3 指纹；http.request.ja4：请求的 JA4 指纹；http.request.uri.query['test']：名称为 test 的 URL 查询参数，其中 test 可替换为自己指定的参数。 */
   CountBy?: string[];
   /** 精准速率限制在时间范围内的累计拦截次数，取值范围 1 ~ 100000。 */
   MaxRequestThreshold?: number;
   /** 统计的时间窗口，取值有：1s：1秒；5s：5秒；10s：10秒；20s：20秒；30s：30秒；40s：40秒；50s：50秒；1m：1分钟；2m：2分钟；5m：5分钟；10m：10分钟；1h：1小时。 */
   CountingPeriod?: string;
-  /** Action 动作的持续时长，单位仅支持：s：秒，取值 1 ~ 120；m：分钟，取值 1 ~ 120；h：小时，取值 1 ~ 48；d：天，取值 1 ~ 30。 */
+  /** Action 动作的持续时长，单位仅支持：s：秒，取值 1 ~ 120；m：分钟，取值 1 ~ 120；h：小时，取值 1 ~ 48；d：天，取值 1 ~ 30。当 Mode 为 Throttle 时，此参数将被忽略，不会生效。 */
   ActionDuration?: string;
   /** 精准速率限制的处置方式。取值有：Monitor：观察；Deny：拦截，其中DenyActionParameters.Name支持Deny和ReturnCustomPage；Challenge：挑战，其中ChallengeActionParameters.Name支持JSChallenge和ManagedChallenge；Redirect：重定向至URL； */
   Action?: SecurityAction;

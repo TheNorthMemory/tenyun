@@ -1625,6 +1625,10 @@ declare namespace V20180416 {
     DiskCount?: number;
     /** 节点磁盘是否加密 0: 不加密，1: 加密；默认不加密 */
     DiskEncrypt?: number;
+    /** 自定义加密密钥id */
+    KmsKeyId?: string | null;
+    /** 自定义加密密钥name */
+    KmsKeyName?: string | null;
     /** cpu数目 */
     CpuNum?: number | null;
     /** 内存大小，单位GB */
@@ -2264,13 +2268,13 @@ declare namespace V20180416 {
   interface CreateInstanceRequest {
     /** 可用区 */
     Zone: string;
-    /** 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"、"7.10.1"） */
+    /** 实例版本（支持&quot;5.6.4&quot;、&quot;6.4.3&quot;、&quot;6.8.2&quot;、&quot;7.5.1&quot;、&quot;7.10.1&quot;） */
     EsVersion: string;
     /** 私有网络ID */
     VpcId: string;
     /** 子网ID */
     SubnetId: string;
-    /** 访问密码（密码需8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号） */
+    /** 访问密码（密码需8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&amp;^*+=_:;,.?]的特殊符号） */
     Password: string;
     /** 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_） */
     InstanceName?: string;
@@ -2334,7 +2338,7 @@ declare namespace V20180416 {
     CdcId?: string;
     /** 置放群组亲和度，范围[0,10]，0表示不开启 */
     DisasterRecoverGroupAffinity?: number;
-    /** 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段 */
+    /** 子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段 */
     SubProductCode?: string;
     /** 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离 */
     ReadWriteMode?: number;
@@ -2346,6 +2350,8 @@ declare namespace V20180416 {
     AutoScaleDiskInfoList?: AutoScaleDiskInfo[];
     /** 是否开启kibana公网访问，不传默认开启 */
     EnableKibanaPublicAccess?: string;
+    /** 已有的云监控告警策略 ID */
+    AlarmPolicyIds?: string[];
   }
 
   interface CreateInstanceResponse {

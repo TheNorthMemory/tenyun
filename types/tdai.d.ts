@@ -234,6 +234,34 @@ declare interface InstanceInfos {
   TableName?: string;
 }
 
+/** Memory正式版实例列表元素信息 */
+declare interface MemoryPlusInfo {
+  /** 实例id */
+  SpaceId?: string;
+  /** 实例名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 实例状态 */
+  Status?: number;
+  /** 地域 */
+  Region?: string;
+  /** 记忆条数 */
+  MemoryUsage?: number;
+  /** 当月积分数 */
+  CreditUsage?: number;
+  /** 资源标签 */
+  ResourceTags?: ResourceTag[];
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 隔离时间 */
+  IsolatedAt?: string;
+  /** 到期时间 */
+  ExpiredAt?: string;
+  /** 到期销毁时间 */
+  DestroyAt?: string;
+}
+
 /** 智能体实例的参数值 */
 declare interface Parameter {
   /** 参数键 */
@@ -242,6 +270,14 @@ declare interface Parameter {
   Value: string | null;
   /** 枚举值，可取值包括：string(字符串), int(整型), float(浮点型), bool(布尔型), struct(结构体), array(数组), */
   ValueType: string | null;
+}
+
+/** 资源tag */
+declare interface ResourceTag {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
 }
 
 /** 风险SQL智能体参数 */
@@ -298,6 +334,26 @@ declare interface UploadDelta {
   StepBrief?: string;
   /** 步骤详情 */
   Content?: string;
+}
+
+/** vdb数据库文档结构 */
+declare interface VDBDocument {
+  /** vdb document数据id */
+  Id?: string;
+  /** vdb document数据标量字段 */
+  Fields?: VDBFieldMap[];
+}
+
+/** vdb数据库文档中键值结构 */
+declare interface VDBFieldMap {
+  /** vdb document字段名 */
+  Name?: string;
+  /** vdb document字段值 */
+  Value?: string;
+  /** vdb document字段类型 */
+  Type?: string;
+  /** 字段描述 */
+  Description?: string;
 }
 
 declare interface ContinueAgentWorkRequest {
@@ -359,6 +415,24 @@ declare interface CreateChatCompletionRequest {
 
 declare interface CreateChatCompletionResponse {
   /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
+declare interface CreateMemoryPlusSpaceRequest {
+  /** Memory 实例的自定义名称，用于唯一标识和管理实例。支持 60 个字符内的中英文、数字、中划线（-）及下划线（_）。 */
+  Name?: string;
+  /** emory 实例的简要描述，包括使用场景、用途或背景信息，便于日常运维识别。长度限制为 0-200 个字符。 */
+  Description?: string;
+  /** 以键值对（Key-Value）形式为 Memory 实例绑定的标签，用于项目管理、成本分摊、环境隔离等场景。 */
+  ResourceTags?: ResourceTag[];
+  /** 单次批量创建 Memory 实例的数量。取值范围为 1-50。 */
+  GoodsNum?: number;
+}
+
+declare interface CreateMemoryPlusSpaceResponse {
+  /** 实例 ID 列表。 */
+  SpaceIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
@@ -526,6 +600,110 @@ declare interface DescribeChatsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMemoryPlusRecordRequest {
+  /** 查询的 Memory 实例 ID。 */
+  SpaceId: string;
+  /** 查询列表的起始位置（偏移量）。用于分页查询，指明从符合条件的第几条数据开始返回。 */
+  Offset?: number;
+  /** 单次查询返回的记录数量上限（分页大小）。 */
+  Limit?: number;
+  /** 查询的记忆类型。conversation：L0 原始对话。memory：L1 原子记忆。scene：L2 场景记忆。persona：L3 个性化画像。memory/persona：L1 原子记忆-画像型。memory/episodic：L1 原子记忆-事件型。memory/instruction：L1 原子记忆-指令型。 */
+  RecordType?: string;
+  /** 指定返回记录中的特定字段。 */
+  Output?: string[];
+  /** 过滤条件，当前仅支持 RecordType 为 conversation 的 session_id 过滤。 */
+  Filters?: VDBFieldMap[];
+  /** 查询结果列表的排序规则。ASC：升序。DESC：降序。 */
+  OrderDirection?: string;
+  /** 查询时间范围的起始时间点。 */
+  StartTime?: string;
+  /** 查询时间范围的结束时间点。 */
+  EndTime?: string;
+}
+
+declare interface DescribeMemoryPlusRecordResponse {
+  /** 查询结果总数量。 */
+  TotalCount?: number;
+  /** 查询的记忆数据。 */
+  Documents?: VDBDocument[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMemoryPlusSpaceRequest {
+  /** 指定查询的 Memory 实例 ID。 */
+  SpaceId: string;
+}
+
+declare interface DescribeMemoryPlusSpaceResponse {
+  /** Memory 实例 ID。 */
+  SpaceId?: string;
+  /** Memory 实例的自定义名称。 */
+  Name?: string;
+  /** Memory 实例的简要描述，包括使用场景、用途或背景信息，便于日常运维识别。 */
+  Description?: string;
+  /** 腾讯云账号的 APPID。 */
+  AppId?: number;
+  /** Memroy 实例所属地域。 */
+  Region?: string;
+  /** Memory 实例的标签信息。 */
+  ResourceTags?: ResourceTag[];
+  /** Memory 实例当前运行状态。1：运行中。2：创建中。3：销毁中。4：已销毁。5：隔离中。6：已隔离。7：恢复中。 */
+  Status?: number;
+  /** Memory 实例计费模式。-1：免费体验。0：包年包月。1：按量计费。 */
+  PayMode?: number;
+  /** Memory 版本信息：v1。 */
+  Version?: string;
+  /** Memory 当前已写入的记忆条数。 */
+  MemoryUsage?: number;
+  /** Memory 实例记忆条数配额上限。 */
+  MemoryLimit?: number;
+  /** Memory 实例当前 Credit 的使用数量。 */
+  CreditUsage?: number;
+  /** Memory 实例 Credit 的最大使用数量。 */
+  CreditLimit?: number;
+  /** Memory 实例的内网访问地址。 */
+  AccessUrl?: string;
+  /** Memory 实例的外网访问地址。 */
+  WanAccessUrl?: string;
+  /** Memory 实例的创建时间。 */
+  CreatedAt?: string;
+  /** Memory 实例的到期时间。 */
+  ExpiredAt?: string;
+  /** Memory 实例的隔离时间。 */
+  IsolatedAt?: string;
+  /** 到期销毁时间 */
+  DestroyAt?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMemoryPlusSpacesRequest {
+  /** 查询列表的起始位置（偏移量）。用于分页查询，指明从符合条件的第几条数据开始返回。 */
+  Offset?: number;
+  /** 单次查询返回的记录数量上限（分页大小）。 */
+  Limit?: number;
+  /** 查询实例名称或者实例id */
+  SearchKeys?: string[];
+  /** 实例状态枚举值：1： 运行中2： 创建中3： 删除中4： 已删除5： 隔离中6： 已隔离（进入回收站）7： 恢复中（从回收站恢复） */
+  Status?: number[];
+  /** 资源标签 */
+  ResourceTags?: ResourceTag[];
+  /** 排序字段 */
+  Orderby?: string;
+  /** 排序方向枚举值：ASC： 升序DESC： 降序 */
+  OrderDirection?: string;
+}
+
+declare interface DescribeMemoryPlusSpacesResponse {
+  /** 查询结果总数量。 */
+  TotalCount?: number;
+  /** 实例列表信息 */
+  Items?: MemoryPlusInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReportUrlRequest {
 }
 
@@ -536,12 +714,44 @@ declare interface DescribeReportUrlResponse {
   RequestId?: string;
 }
 
+declare interface DescribeServiceAccessKeyRequest {
+  /** 指定 Memroy 实例 ID。 */
+  ServiceId: string;
+}
+
+declare interface DescribeServiceAccessKeyResponse {
+  /** 访问密钥。 */
+  AuthKey?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyMemoryPlusSpaceRequest {
+  /** 指定需要销毁的 Memory 实例 ID 列表。 */
+  SpaceIds: string[];
+}
+
+declare interface DestroyMemoryPlusSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface IsolateAgentInstanceRequest {
   /** 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选 */
   InstanceId: string;
 }
 
 declare interface IsolateAgentInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface IsolateMemoryPlusSpaceRequest {
+  /** 指定需要放入回收站的 Memory 实例 ID 列表。 */
+  SpaceIds: string[];
+}
+
+declare interface IsolateMemoryPlusSpaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -576,6 +786,20 @@ declare interface ModifyChatTitleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMemoryPlusSpaceRequest {
+  /** 指定需要修改的 Memory 实例 ID。 */
+  SpaceId: string;
+  /** 指定修改后的实例名称。支持 60 个字符内 的中英文、数字、中划线（-）及下划线（_）。 */
+  Name?: string;
+  /** 指定修改后的实例描述。最多支持 200 个字符。 */
+  Description?: string;
+}
+
+declare interface ModifyMemoryPlusSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PauseAgentWorkRequest {
   /** 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选 */
   InstanceId: string;
@@ -594,6 +818,16 @@ declare interface RecoverAgentInstanceRequest {
 }
 
 declare interface RecoverAgentInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RecoverMemoryPlusSpaceRequest {
+  /** 指定需要恢复的 Memory 实例 ID 列表。 */
+  SpaceIds: string[];
+}
+
+declare interface RecoverMemoryPlusSpaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -643,6 +877,8 @@ declare interface Tdai {
   CreateAgentInstance(data?: CreateAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentInstanceResponse>;
   /** 创建一个聊天会话 {@link CreateChatCompletionRequest} {@link CreateChatCompletionResponse} */
   CreateChatCompletion(data: CreateChatCompletionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChatCompletionResponse>;
+  /** 创建正式版 Memory 实例 {@link CreateMemoryPlusSpaceRequest} {@link CreateMemoryPlusSpaceResponse} */
+  CreateMemoryPlusSpace(data?: CreateMemoryPlusSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMemoryPlusSpaceResponse>;
   /** 查询Agent实例值守任务详情 {@link DescribeAgentDutyTaskDetailRequest} {@link DescribeAgentDutyTaskDetailResponse} */
   DescribeAgentDutyTaskDetail(data?: DescribeAgentDutyTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDutyTaskDetailResponse>;
   /** 查询Agent实例值守任务列表 {@link DescribeAgentDutyTasksRequest} {@link DescribeAgentDutyTasksResponse} */
@@ -657,18 +893,34 @@ declare interface Tdai {
   DescribeChatDetail(data: DescribeChatDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatDetailResponse>;
   /** 获取会话列表 {@link DescribeChatsRequest} {@link DescribeChatsResponse} */
   DescribeChats(data: DescribeChatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChatsResponse>;
+  /** 查询正式版 Memory 实例记忆数据 {@link DescribeMemoryPlusRecordRequest} {@link DescribeMemoryPlusRecordResponse} */
+  DescribeMemoryPlusRecord(data: DescribeMemoryPlusRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMemoryPlusRecordResponse>;
+  /** 查询正式版 Memory 服务详情 {@link DescribeMemoryPlusSpaceRequest} {@link DescribeMemoryPlusSpaceResponse} */
+  DescribeMemoryPlusSpace(data: DescribeMemoryPlusSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMemoryPlusSpaceResponse>;
+  /** 查询正式版 Memory 实例列表 {@link DescribeMemoryPlusSpacesRequest} {@link DescribeMemoryPlusSpacesResponse} */
+  DescribeMemoryPlusSpaces(data?: DescribeMemoryPlusSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMemoryPlusSpacesResponse>;
   /** 查询实例报告下载链接 {@link DescribeReportUrlRequest} {@link DescribeReportUrlResponse} */
   DescribeReportUrl(data?: DescribeReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReportUrlResponse>;
+  /** 查询服务访问密钥 {@link DescribeServiceAccessKeyRequest} {@link DescribeServiceAccessKeyResponse} */
+  DescribeServiceAccessKey(data: DescribeServiceAccessKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceAccessKeyResponse>;
+  /** 销毁正式版 Memory 实例 {@link DestroyMemoryPlusSpaceRequest} {@link DestroyMemoryPlusSpaceResponse} */
+  DestroyMemoryPlusSpace(data: DestroyMemoryPlusSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMemoryPlusSpaceResponse>;
   /** 隔离Agent实例 {@link IsolateAgentInstanceRequest} {@link IsolateAgentInstanceResponse} */
   IsolateAgentInstance(data: IsolateAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateAgentInstanceResponse>;
+  /** 将 Memory 实例放入回收站 {@link IsolateMemoryPlusSpaceRequest} {@link IsolateMemoryPlusSpaceResponse} */
+  IsolateMemoryPlusSpace(data: IsolateMemoryPlusSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateMemoryPlusSpaceResponse>;
   /** 配置智能体实例参数 {@link ModifyAgentInstanceParametersRequest} {@link ModifyAgentInstanceParametersResponse} */
   ModifyAgentInstanceParameters(data: ModifyAgentInstanceParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentInstanceParametersResponse>;
   /** 修改会话标题 {@link ModifyChatTitleRequest} {@link ModifyChatTitleResponse} */
   ModifyChatTitle(data: ModifyChatTitleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChatTitleResponse>;
+  /** 修改正式版 Memory 实例 {@link ModifyMemoryPlusSpaceRequest} {@link ModifyMemoryPlusSpaceResponse} */
+  ModifyMemoryPlusSpace(data: ModifyMemoryPlusSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMemoryPlusSpaceResponse>;
   /** 暂停Agent实例 {@link PauseAgentWorkRequest} {@link PauseAgentWorkResponse} */
   PauseAgentWork(data: PauseAgentWorkRequest, config?: AxiosRequestConfig): AxiosPromise<PauseAgentWorkResponse>;
   /** 解隔离Agent实例 {@link RecoverAgentInstanceRequest} {@link RecoverAgentInstanceResponse} */
   RecoverAgentInstance(data: RecoverAgentInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverAgentInstanceResponse>;
+  /** 从回收站中恢复正式版 Memory 实例 {@link RecoverMemoryPlusSpaceRequest} {@link RecoverMemoryPlusSpaceResponse} */
+  RecoverMemoryPlusSpace(data: RecoverMemoryPlusSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<RecoverMemoryPlusSpaceResponse>;
   /** 删除会话 {@link RemoveChatRequest} {@link RemoveChatResponse} */
   RemoveChat(data: RemoveChatRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveChatResponse>;
   /** 启动智能体任务 {@link StartAgentTaskRequest} {@link StartAgentTaskResponse} */

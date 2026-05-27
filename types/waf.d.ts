@@ -400,6 +400,34 @@ declare interface ApiSecSensitiveRule {
   IsPan?: number;
 }
 
+/** 敏感数据加白字段模型 */
+declare interface ApiSecSensitiveWhiteField {
+  /** 字段名称 */
+  FieldName?: string;
+  /** 字段位置 */
+  FieldType?: string;
+  /** 敏感数据类型列表 */
+  SensitiveTypes?: string[];
+}
+
+/** 敏感数据加白规则模型 */
+declare interface ApiSecSensitiveWhiteRule {
+  /** 白名单规则名称 */
+  RuleName?: string;
+  /** 加白对象配置 */
+  ApiNameOp?: ApiNameOp[];
+  /** 加白模式枚举值：1： 对整个API加白2： 对指定字段加白 */
+  WhiteMode?: number;
+  /** 加白字段配置列表 */
+  WhiteFields?: ApiSecSensitiveWhiteField[];
+  /** 规则开关枚举值：0： 关1： 开 */
+  Status?: number;
+  /** 规则描述 */
+  Description?: string;
+  /** 修改时间单位：s */
+  UpdateTime?: number;
+}
+
 /** 地域信息 */
 declare interface Area {
   /** 国家，除了标准的国家外还支持国内、国外这两个特殊的标识 */
@@ -1148,6 +1176,8 @@ declare interface ClbDomainsInfo {
   Labels?: string[];
   /** clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中” */
   AccessStatus?: number;
+  /** 标签信息 */
+  TagInfos?: TagInfo[];
 }
 
 /** Clb类型防护对象 */
@@ -1208,6 +1238,12 @@ declare interface ClbObject {
   MemberUin?: string;
   /** 跨账号时，表示成员账号的昵称 */
   MemberNickName?: string;
+  /** 标签信息 */
+  TagInfos?: TagInfo[];
+  /** 精准域名信息 */
+  PreciseDomainDetails?: DomainInfo[];
+  /** waf接入状态 */
+  WafAccessStatus?: number;
 }
 
 /** Clb-waf地域信息 */
@@ -1444,19 +1480,19 @@ declare interface DomainInfo {
   Cname: string;
   /** 域名所属实例类型。sparta-waf：SaaS型WAF实例clb-waf：负载均衡型WAF实例cdc-clb-waf：CDC环境下负载均衡型WAF实例 */
   Edition: string;
-  /** 地域。"多伦多": "ca""广州": "gz""成都": "cd""福州": "fzec""深圳": "szx""印度": "in""济南": "jnec""重庆": "cq""天津": "tsn""欧洲东北": "ru""南京": "nj""美国硅谷": "usw""泰国": "th""广州Open": "gzopen""深圳金融": "szjr""法兰克福": "de""日本": "jp""弗吉尼亚": "use""北京": "bj""中国香港": "hk""杭州": "hzec""北京金融": "bjjr""上海金融": "shjr""台北": "tpe""首尔": "kr""上海": "sh""新加坡": "sg""清远": "qy" */
+  /** 地域。&quot;多伦多&quot;: &quot;ca&quot;&quot;广州&quot;: &quot;gz&quot;&quot;成都&quot;: &quot;cd&quot;&quot;福州&quot;: &quot;fzec&quot;&quot;深圳&quot;: &quot;szx&quot;&quot;印度&quot;: &quot;in&quot;&quot;济南&quot;: &quot;jnec&quot;&quot;重庆&quot;: &quot;cq&quot;&quot;天津&quot;: &quot;tsn&quot;&quot;欧洲东北&quot;: &quot;ru&quot;&quot;南京&quot;: &quot;nj&quot;&quot;美国硅谷&quot;: &quot;usw&quot;&quot;泰国&quot;: &quot;th&quot;&quot;广州Open&quot;: &quot;gzopen&quot;&quot;深圳金融&quot;: &quot;szjr&quot;&quot;法兰克福&quot;: &quot;de&quot;&quot;日本&quot;: &quot;jp&quot;&quot;弗吉尼亚&quot;: &quot;use&quot;&quot;北京&quot;: &quot;bj&quot;&quot;中国香港&quot;: &quot;hk&quot;&quot;杭州&quot;: &quot;hzec&quot;&quot;北京金融&quot;: &quot;bjjr&quot;&quot;上海金融&quot;: &quot;shjr&quot;&quot;台北&quot;: &quot;tpe&quot;&quot;首尔&quot;: &quot;kr&quot;&quot;上海&quot;: &quot;sh&quot;&quot;新加坡&quot;: &quot;sg&quot;&quot;清远&quot;: &quot;qy&quot; */
   Region: string;
   /** 实例名 */
   InstanceName: string;
   /** 访问日志开关状态。0：关闭1：开启 */
   ClsStatus: number;
-  /** 负载均衡型WAF使用模式。0：镜像模式 1：清洗模式 */
+  /** 负载均衡型WAF使用模式。0：镜像模式1：清洗模式 */
   FlowMode: number;
-  /** waf开关状态。0：关闭 1：开启 */
+  /** waf开关状态。0：关闭1：开启 */
   Status: number;
-  /** 规则引擎防护模式。0：观察模式 1：拦截模式 */
+  /** 规则引擎防护模式。0：观察模式1：拦截模式 */
   Mode: number;
-  /** 规则引擎和AI引擎防护模式联合状态。1:初始状态,规则引擎拦截&&AI引擎未操作开关状态10：规则引擎观察&&AI引擎关闭模式 11：规则引擎观察&&AI引擎观察模式 12：规则引擎观察&&AI引擎拦截模式 20：规则引擎拦截&&AI引擎关闭模式 21：规则引擎拦截&&AI引擎观察模式 22：规则引擎拦截&&AI引擎拦截模式 */
+  /** 规则引擎和AI引擎防护模式联合状态。1:初始状态,规则引擎拦截&amp;&amp;AI引擎未操作开关状态10：规则引擎观察&amp;&amp;AI引擎关闭模式11：规则引擎观察&amp;&amp;AI引擎观察模式12：规则引擎观察&amp;&amp;AI引擎拦截模式20：规则引擎拦截&amp;&amp;AI引擎关闭模式21：规则引擎拦截&amp;&amp;AI引擎观察模式22：规则引擎拦截&amp;&amp;AI引擎拦截模式 */
   Engine: number;
   /** 沙箱集群回源出口IP列表 */
   CCList: string[];
@@ -1468,23 +1504,25 @@ declare interface DomainInfo {
   LoadBalancerSet: LoadBalancerPackageNew[];
   /** 用户id */
   AppId: number;
-  /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功 4：正在绑定LB 6：正在解绑LB 7：解绑LB失败 8：绑定LB失败 10：内部错误 */
+  /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功4：正在绑定LB6：正在解绑LB7：解绑LB失败8：绑定LB失败10：内部错误 */
   State: number;
   /** 创建时间 */
   CreateTime?: string;
-  /** Ipv6开关状态。0：关闭 1：开启 */
+  /** 编辑时间 */
+  ModifyTime?: string;
+  /** Ipv6开关状态。0：关闭1：开启 */
   Ipv6Status?: number;
-  /** BOT开关状态。0：关闭 1：关闭2：开启3：开启 */
+  /** BOT开关状态。0：关闭1：关闭2：开启3：开启 */
   BotStatus?: number;
-  /** 实例版本信息。101：小微敏捷版 102：小微超轻版2：高级版3：企业版4：旗舰版6：独享版 */
+  /** 实例版本信息。101：小微敏捷版102：小微超轻版2：高级版3：企业版4：旗舰版6：独享版 */
   Level?: number;
-  /** 投递CLS状态。0：关闭 1：开启 */
+  /** 投递CLS状态。0：关闭1：开启 */
   PostCLSStatus?: number;
-  /** 投递CKafka状态。0：关闭 1：开启 */
+  /** 投递CKafka状态。0：关闭1：开启 */
   PostCKafkaStatus?: number;
   /** cdc实例域名接入的集群信息,非cdc实例忽略。 */
   CdcClusters?: string;
-  /** api安全开关状态。0：关闭 1：开启 */
+  /** api安全开关状态。0：关闭1：开启 */
   ApiStatus?: number;
   /** 应用型负载均衡类型，默认clb。clb：七层负载均衡器类型apisix：apisix网关型 */
   AlbType?: string;
@@ -1508,6 +1546,14 @@ declare interface DomainInfo {
   Labels?: string[];
   /** saaswaf独享ip状态，0是关闭，1是开启，2是开启中 */
   PrivateVipStatus?: number;
+  /** 代表是否是四层clbwaf域名 */
+  IsREIP?: number;
+  /** 四层关联的对象ID */
+  REIPObjectId?: string;
+  /** 标签结构体 */
+  TagInfos?: TagInfo[];
+  /** 大模型开关枚举值：0： 大模型开关关闭状态1： 大模型开关开启状态 */
+  LLMStatus?: number;
 }
 
 /** waf 域名扩展套餐 */
@@ -1558,7 +1604,9 @@ declare interface DomainsPartInfo {
   Cert?: string;
   /** 创建时间 */
   CreateTime?: string;
-  /** 规则引擎和AI引擎防护模式联合状态。1:初始状态,规则引擎拦截&&AI引擎未操作开关状态10：规则引擎观察&&AI引擎关闭模式 11：规则引擎观察&&AI引擎观察模式 12：规则引擎观察&&AI引擎拦截模式 20：规则引擎拦截&&AI引擎关闭模式 21：规则引擎拦截&&AI引擎观察模式 22：规则引擎拦截&&AI引擎拦截模式 */
+  /** 更新时间 */
+  ModifyTime?: string;
+  /** 规则引擎和AI引擎防护模式联合状态。1:初始状态,规则引擎拦截&amp;&amp;AI引擎未操作开关状态10：规则引擎观察&amp;&amp;AI引擎关闭模式11：规则引擎观察&amp;&amp;AI引擎观察模式12：规则引擎观察&amp;&amp;AI引擎拦截模式20：规则引擎拦截&amp;&amp;AI引擎关闭模式21：规则引擎拦截&amp;&amp;AI引擎观察模式22：规则引擎拦截&amp;&amp;AI引擎拦截模式 */
   Engine?: number;
   /** 是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转 */
   HttpsRewrite?: number;
@@ -1604,7 +1652,7 @@ declare interface DomainsPartInfo {
   TLSVersion?: number;
   /** 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。 */
   Ciphers?: number[];
-  /** 加密套件模板。0：不支持选择，使用默认模板 1：通用型模板 2：安全型模板3：自定义模板 */
+  /** 加密套件模板。0：不支持选择，使用默认模板1：通用型模板2：安全型模板3：自定义模板 */
   CipherTemplate?: number;
   /** WAF与源站的连接超时，默认10s。 */
   ProxyConnectTimeout?: number;
@@ -1656,10 +1704,14 @@ declare interface DomainsPartInfo {
   UseCase?: number;
   /** gzip开关。0：关闭 1：默认值，打开。 */
   Gzip?: number;
-  /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功 4：正在绑定LB 6：正在解绑LB 7：解绑LB失败 8：绑定LB失败 10：内部错误 */
+  /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功4：正在绑定LB6：正在解绑LB7：解绑LB失败8：绑定LB失败10：内部错误 */
   State?: number;
   /** saaswaf独享ip状态，0是关闭状态，1是开启状态，2是开启中 */
   PrivateVipStatus?: number;
+  /** 标签结构体 */
+  TagInfos?: TagInfo[];
+  /** ipv6开启状态枚举值：1： ipv6开关打开0： ipv6开关关闭 */
+  Ipv6Status?: number;
 }
 
 /** 下载攻击日志记录数据项 */
@@ -2240,6 +2292,8 @@ declare interface InstanceInfo {
   DedicatedIPPkg?: DedicatedIPPkg;
   /** 已经配置独享ip的数量 */
   DedicatedIPCount?: number;
+  /** 标签结构体 */
+  TagInfos?: TagInfo[];
 }
 
 /** 数据封装 */
@@ -2380,6 +2434,8 @@ declare interface LLMDetectResult {
   ImageResult?: ImageResult[];
   /** 要代答的消息id，此消息id用于作为GenerateLLMSecAnswer接口的入参 */
   MsgID?: string;
+  /** toolcall的检测结果 */
+  ToolCallResult?: ToolCallResult;
 }
 
 /** 有效预付费大模型安全包信息 */
@@ -3042,6 +3098,10 @@ declare interface ProtectGroupInfo {
   CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
+  /** 标签信息 */
+  TagInfos?: TagInfo[];
+  /** 是否绑定了模板 */
+  BoundTemplate?: boolean | null;
 }
 
 /** clb-waf QPS套餐 New */
@@ -3404,6 +3464,14 @@ declare interface TLSVersion {
 declare interface Tag {
 }
 
+/** 标签结构体 */
+declare interface TagInfo {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
+}
+
 /** 需要开启/关闭API安全的 实例+域名 组合实体 */
 declare interface TargetEntity {
   /** 实例ID */
@@ -3476,6 +3544,16 @@ declare interface TokenVerifyRule {
   JWTRule?: JWTConfig;
   /** 其他会话有效性校验方式(contains、length、regex)的校验规则 */
   GeneralRule?: TokenRuleEntry;
+}
+
+/** tool_call 场景检测结果 */
+declare interface ToolCallResult {
+  /** 命中规则名称 */
+  RuleName?: string;
+  /** 规则动作 */
+  Action?: string;
+  /** 风险等级枚举值：critical： 严重high： 高危 medium： 中危 low： 低危 */
+  Severity?: string;
 }
 
 /** 日志主题扩展信息 */
@@ -3568,7 +3646,7 @@ declare interface UpstreamRule {
   BalanceType: number;
 }
 
-/** saas和clb信息 */
+/** saas和clb、四层域名信息 */
 declare interface UserDomainInfo {
   /** 用户id */
   Appid?: number;
@@ -3596,6 +3674,8 @@ declare interface UserDomainInfo {
   BotStatus?: number;
   /** API开关状态 */
   ApiStatus?: number;
+  /** 是否是四层clbwaf域名 */
+  IsREIP?: number;
 }
 
 /** 用户特征规则描述 */
@@ -4017,7 +4097,7 @@ declare interface AddSpartaProtectionRequest {
   IsWebsocket: number;
   /** 回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
   LoadBalance: string;
-  /** 服务端口列表配置。NginxServerId：新增域名时填'0'Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
+  /** 服务端口列表配置。NginxServerId：新增域名时填&#39;0&#39;Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
   Ports: PortItem[];
   /** 必填项，是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive: string;
@@ -4105,6 +4185,8 @@ declare interface AddSpartaProtectionRequest {
   UseCase?: number;
   /** gzip开关。0：关闭 1：默认值，打开。 */
   Gzip?: number;
+  /** 标签信息 */
+  Tags?: TagInfo[];
 }
 
 declare interface AddSpartaProtectionResponse {
@@ -4251,6 +4333,8 @@ declare interface CreateHostRequest {
   Host: HostRecord;
   /** 实例id */
   InstanceID?: string;
+  /** 标签信息 */
+  Tags?: TagInfo[];
 }
 
 declare interface CreateHostResponse {
@@ -4375,6 +4459,8 @@ declare interface CreateProtectGroupRequest {
   Domains: string[];
   /** 防护对象组备注 */
   Remark?: string;
+  /** 标签信息 */
+  Tags?: TagInfo[];
 }
 
 declare interface CreateProtectGroupResponse {
@@ -5019,6 +5105,8 @@ declare interface DescribeApiSecSensitiveRuleListRequest {
   IsQueryApiCustomEventRule?: boolean;
   /** 是否查询无效api排除策略 */
   IsQueryApiExcludeRule?: boolean;
+  /** 是否查询敏感数据加白规则 */
+  IsQueryApiSensitiveWhiteRule?: boolean;
 }
 
 declare interface DescribeApiSecSensitiveRuleListResponse {
@@ -5040,6 +5128,8 @@ declare interface DescribeApiSecSensitiveRuleListResponse {
   ApiSecCustomEventRule?: ApiSecCustomEventRule[] | null;
   /** 无效api排除规则列表 */
   ApiExcludeRule?: ApiSecExcludeRule[] | null;
+  /** 敏感数据加白规则列表 */
+  ApiSecSensitiveWhiteRule?: ApiSecSensitiveWhiteRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5639,7 +5729,7 @@ declare interface DescribeDomainsRequest {
   Offset: number;
   /** 返回域名的数量 */
   Limit: number;
-  /** 过滤数组，过滤字段包括：Edition：实例版本，sparta-waf或clb-waf Domain：域名 DomainId：域名ID InstanceName：实例名称 InstanceId：实例ID FlowMode：流量接入模式，仅支持CLBWAF FlowCheckMode：流量体检模式，仅支持CLBWAF ClsStatus：日志开关 Status：WAF开关BotStatus：BOT开关 ApiStatus：API安全开关 Engine：引擎模式 UpstreamIP：源站IP，仅支持SAAS型WAF UpstreamDomain：源站域名，仅支持SAAS型WAF DomainState：域名状态，仅支持SAAS型WAF SgState：安全组状态，仅支持SAAS型WAF Label：分组标签，同时仅支持一种标签过滤 */
+  /** 过滤数组，过滤字段包括：Edition：实例版本，sparta-waf或clb-waf AlbType：七层接入类型细分，clb或tsegw或apisix或scf Domain：域名 DomainId：域名ID InstanceName：实例名称 InstanceId：实例ID FlowMode：流量接入模式，仅支持CLBWAF FlowCheckMode：流量体检模式，仅支持CLBWAF ClsStatus：日志开关 Status：WAF开关BotStatus：BOT开关 ApiStatus：API安全开关 Engine：引擎模式 UpstreamIP：源站IP，仅支持SAAS型WAF UpstreamDomain：源站域名，仅支持SAAS型WAF DomainState：域名状态，仅支持SAAS型WAF SgState：安全组状态，仅支持SAAS型WAF Label：分组标签，同时仅支持一种标签过滤 */
   Filters?: FiltersItemNew[];
 }
 
@@ -6933,18 +7023,18 @@ declare interface ModifyApiSecSensitiveRuleRequest {
   Status: number;
   /** 规则名称 */
   RuleName?: string;
-  /** 客户自定义配置 */
-  CustomRule?: ApiSecCustomSensitiveRule;
   /** rulename列表，批量操作的时候填改值 */
   RuleNameList?: string[];
-  /** api提取规则内容 */
-  CustomApiExtractRule?: ApiSecExtractRule;
+  /** 客户自定义配置 */
+  CustomRule?: ApiSecCustomSensitiveRule;
   /** 批量操作的时候的api提取规则 */
   ApiExtractRuleName?: string[];
-  /** 自定义api鉴权规则 */
-  ApiSecPrivilegeRule?: ApiSecPrivilegeRule;
+  /** api提取规则内容 */
+  CustomApiExtractRule?: ApiSecExtractRule;
   /** 匹配操作时候的api鉴权规则 */
   ApiSecPrivilegeRuleName?: string[];
+  /** 自定义api鉴权规则 */
+  ApiSecPrivilegeRule?: ApiSecPrivilegeRule;
   /** 批量操作的时候的自定义场景列表 */
   ApiSecSceneRuleNameList?: string[];
   /** 单条自定义api场景规则 */
@@ -6953,10 +7043,14 @@ declare interface ModifyApiSecSensitiveRuleRequest {
   ApiSecCustomEventRuleNameList?: string[];
   /** 自定义事件规则 */
   ApiSecCustomEventRuleRule?: ApiSecCustomEventRule;
-  /** 无效api排除规则 */
-  CustomApiExcludeRule?: ApiSecExcludeRule;
   /** 批量操作的时候的无效api排除规则 */
   ApiExcludeRuleName?: string[];
+  /** 无效api排除规则 */
+  CustomApiExcludeRule?: ApiSecExcludeRule;
+  /** 批量操作时的敏感数据加白规则名称列表 */
+  ApiSecSensitiveWhiteRuleNameList?: string[];
+  /** 敏感数据加白规则 */
+  ApiSecSensitiveWhiteRuleRule?: ApiSecSensitiveWhiteRule;
 }
 
 declare interface ModifyApiSecSensitiveRuleResponse {
@@ -7643,6 +7737,8 @@ declare interface ModifyObjectRequest {
   MemberAppId?: number;
   /** 对象所属集团成员uin */
   MemberUin?: string;
+  /** 标签信息 */
+  Tags?: TagInfo[];
 }
 
 declare interface ModifyObjectResponse {

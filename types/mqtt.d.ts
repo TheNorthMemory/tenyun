@@ -456,6 +456,18 @@ declare interface SharedSubscriptionClient {
   Online?: boolean;
 }
 
+/** 查询共享订阅组（带订阅） */
+declare interface SharedSubscriptionGroupWithSubscriptions {
+  /** 共享组名 */
+  SharedName?: string;
+  /** 创建时间单位：毫秒级时间戳 */
+  CreateTime?: number;
+  /** 更新时间单位：毫秒级时间戳 */
+  UpdateTime?: number;
+  /** 订阅表达式 */
+  TopicFilters?: string[];
+}
+
 /** 订阅的UserProperty结构 */
 declare interface SubscriptionUserProperty {
   /** 订阅的UserProperty键 */
@@ -1414,6 +1426,20 @@ declare interface DescribeSharedSubscriptionGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSharedSubscriptionGroupsWithSubscriptionsRequest {
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
+  InstanceId: string;
+}
+
+declare interface DescribeSharedSubscriptionGroupsWithSubscriptionsResponse {
+  /** 集群下共享订阅组列表 */
+  Data?: SharedSubscriptionGroupWithSubscriptions[];
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSharedSubscriptionLagRequest {
   /** 集群id */
   InstanceId: string;
@@ -1762,6 +1788,22 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface ModifyX509ConfigRequest {
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
+  InstanceId: string;
+  /** 证书验证模式枚举值：TLS： 单向认证mTLS： 双向认证BYOC： 一机一证 */
+  X509Mode?: string;
+  /** 证书注册方式枚举值：JITP： 自动注册API： 手工注册 */
+  DeviceCertificateProvisionType?: string;
+  /** 证书自动后激活状态枚举值：true： 自动激活false： 不激活 */
+  AutomaticActivation?: boolean;
+}
+
+declare interface ModifyX509ConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PublishMessageRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1965,6 +2007,8 @@ declare interface Mqtt {
   DescribeSharedSubscriptionClient(data: DescribeSharedSubscriptionClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionClientResponse>;
   /** 查询共享订阅组列表 {@link DescribeSharedSubscriptionGroupsRequest} {@link DescribeSharedSubscriptionGroupsResponse} */
   DescribeSharedSubscriptionGroups(data: DescribeSharedSubscriptionGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionGroupsResponse>;
+  /** 查询共享订阅组列表（带订阅） {@link DescribeSharedSubscriptionGroupsWithSubscriptionsRequest} {@link DescribeSharedSubscriptionGroupsWithSubscriptionsResponse} */
+  DescribeSharedSubscriptionGroupsWithSubscriptions(data: DescribeSharedSubscriptionGroupsWithSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionGroupsWithSubscriptionsResponse>;
   /** 查询共享订阅堆积 {@link DescribeSharedSubscriptionLagRequest} {@link DescribeSharedSubscriptionLagResponse} */
   DescribeSharedSubscriptionLag(data: DescribeSharedSubscriptionLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedSubscriptionLagResponse>;
   /** 查询共享订阅组订阅列表 {@link DescribeSharedSubscriptionsRequest} {@link DescribeSharedSubscriptionsResponse} */
@@ -1999,6 +2043,8 @@ declare interface Mqtt {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 修改MQTT角色 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 修改集群X509配置 {@link ModifyX509ConfigRequest} {@link ModifyX509ConfigResponse} */
+  ModifyX509Config(data: ModifyX509ConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyX509ConfigResponse>;
   /** 发布 MQTT 消息 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
   /** 注册CA证书 {@link RegisterCaCertificateRequest} {@link RegisterCaCertificateResponse} */

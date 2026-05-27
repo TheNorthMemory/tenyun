@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** AI 优化器状态 */
+declare interface AIOptimizerStatus {
+  /** 状态。closing-关闭中，closed-关闭，opening-开启中，training-训练中，trained-训练完成，train_failed-训练失败。 */
+  Status?: string;
+  /** 开启时间 */
+  OpenTime?: string;
+  /** 训练进度 */
+  TrainingProgress?: number;
+}
+
 /** 集群支持的功能 */
 declare interface Ability {
   /** 是否支持从可用区 */
@@ -550,13 +560,13 @@ declare interface ClusterInstanceDetail {
   MaintainStartTime?: number;
   /** 持续的时间(单位：秒) */
   MaintainDuration?: number;
-  /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
+  /** 可以执行的时间，枚举值：[&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;] */
   MaintainWeekDays?: string[];
   /** serverless实例子状态 */
   ServerlessStatus?: string;
   /** 实例任务信息 */
   InstanceTasks?: ObjectTask[];
-  /** 实例机器类型1. common，通用型。2. exclusive，独享型。 */
+  /** 实例机器类型common，通用型。exclusive，独享型。 */
   InstanceDeviceType?: string;
   /** 实例存储类型说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
   InstanceStorageType?: string;
@@ -564,6 +574,8 @@ declare interface ClusterInstanceDetail {
   DbMode?: string;
   /** 节点列表说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
   NodeList?: string[];
+  /** AI优化器状态 */
+  AIOptimizerStatus?: AIOptimizerStatus;
 }
 
 /** 参数修改记录 */

@@ -1124,12 +1124,136 @@ declare interface SearchKeyword {
   Value?: string;
 }
 
+/** TWeSee 回调目标信息 */
+declare interface SeeCallbackInfo {
+  /** 回调目标 ID */
+  CallbackId?: string;
+  /** 回调签名 token */
+  CallbackToken?: string;
+  /** 回调 URL */
+  CallbackUrl?: string;
+  /** 创建时间（秒级时间戳） */
+  CreateTime?: number;
+  /** 回调类型 */
+  Type?: string;
+  /** 更新时间（秒级时间戳） */
+  UpdateTime?: number;
+}
+
+/** TWeSee 视频语义浓缩配置 */
+declare interface SeeCompHighlightConfig {
+  /** 是否禁用视频浓缩 */
+  DisableHighlight?: boolean;
+  /** 包含在浓缩结果中的目标类别。可选值：- `person`：人- `pet`：宠物- `vehicle`：车辆 */
+  DetectTypes?: string[];
+  /** 指定是否返回浓缩视频的摘要文本 */
+  EnableSummary?: boolean;
+  /** 指定返回的关键帧图像数量 */
+  KeyFramesNum?: number;
+}
+
+/** TWeSee 视频语义浓缩结果 */
+declare interface SeeCompHighlightResult {
+  /** 摘要文本 */
+  Summary?: string;
+}
+
+/** TWeSee 视觉理解配置 */
+declare interface SeeComprehensionConfig {
+  /** 拓展的目标及事件检测类别 */
+  DetectTypes?: string[];
+  /** 使该视频 / 图片录入搜索库，后续可进行搜索 */
+  EnableSearch?: boolean;
+  /** 主输出语言，可选值包括：- `zh` 中文（默认值）- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
+  OutputLang?: string;
+  /** 次选输出语言，可选值包括：- `zh` 中文- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
+  AlternativeOutputLang?: string;
+  /** 多摄像头布局定义。可选值包括：- 单摄（默认值）：`Single`- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2` */
+  MultiCameraLayout?: string;
+  /** 最大处理的输入视频时长，单位：秒（仅对视频输入生效） */
+  MaxDuration?: number;
+}
+
+/** TWeSee 视觉理解结果 */
+declare interface SeeComprehensionResult {
+  /** 识别到的目标类型与事件标签。可能取值：- `person`：人- `vehicle`：车辆- `dog`：狗- `cat`：猫- `fire`：火焰- `smoke`：烟雾- `package`：快递包裹- `license_plate`：车牌 */
+  DetectedClassifications?: string[];
+  /** 摘要文本 */
+  Summary?: string;
+  /** 摘要文本（次选语言） */
+  AlternativeSummary?: string;
+  /** 错误码，可能取值：- `DownloadFailed`：下载视频/图片文件失败- `ReadFailed`：读取视频/图片文件失败 */
+  ErrorCode?: string;
+  /** 错误消息 */
+  ErrorMsg?: string;
+}
+
 /** TWeSee 处理云存事件 EventId 的过滤规则配置 */
 declare interface SeeEventIdFilterConfig {
   /** 包含的云存事件 ID 集合 */
   IncludeOnly?: string[];
   /** 排除的云存事件 ID 集合 */
   Exclude?: string[];
+}
+
+/** TWeSee 统计数据点 */
+declare interface SeeStatItem {
+  /** 时间 */
+  Time?: string;
+  /** 任务数量 */
+  Count?: number;
+  /** 基础能力用量 */
+  CostBasic?: number;
+  /** 高级能力用量 */
+  CostAdvanced?: number;
+}
+
+/** TWeSee 任务详情 */
+declare interface SeeTaskInfo {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务状态。可能取值：- `1`：失败- `2`：空结果- `3`：有效结果- `4`：处理中 */
+  Status?: number;
+  /** 任务元数据 */
+  Metadata?: SeeTaskMetadata;
+  /** 算法类目。可能取值：- `COMPREHENSION`：视觉理解 */
+  ServiceCategory?: string;
+  /** 算法类型。可能取值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType?: string;
+  /** 套餐规格。可能取值：- `POSTPAID`：后付费（适用于视频理解、图片理解）- `BASIC`：包年包月基础版（适用于视频理解） */
+  ServiceTier?: string;
+  /** 视觉理解结果（适用于视频理解、图片理解） */
+  ComprehensionResult?: SeeComprehensionResult;
+  /** 视频语义浓缩结果（适用于视频语义浓缩） */
+  CompHighlightResult?: SeeCompHighlightResult;
+  /** 完成该任务所消耗的基础能力额度 */
+  CostBasic?: number;
+  /** 完成该任务所消耗的高级能力额度 */
+  CostAdvanced?: number;
+  /** 输出文件名列表 */
+  Files?: string[];
+  /** 输出文件详情列表 */
+  FilesInfo?: CloudStorageAIServiceTaskFileInfo[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 最后更新时间 */
+  UpdateTime?: number;
+}
+
+/** TWeSee 任务元数据 */
+declare interface SeeTaskMetadata {
+  /** 产品 ID */
+  ProductId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 事件起始时间（毫秒级时间戳） */
+  StartTimeMs?: number;
+  /** 事件结束时间（毫秒级时间戳） */
+  EndTimeMs?: number;
+  /** 自定义事件 ID */
+  CustomId?: string;
 }
 
 /** 已订阅Topic信息 */
@@ -2312,6 +2436,38 @@ declare interface CreateTRTCSignaturesWithRoomIdResponse {
   RequestId?: string;
 }
 
+declare interface CreateTWeSeeCallbackRequest {
+  /** 回调类型。可选值：\n- `http` HTTP 回调 */
+  Type: string;
+  /** 回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口 */
+  CallbackUrl: string;
+  /** 回调签名 Token。最大长度 128 */
+  CallbackToken?: string;
+}
+
+declare interface CreateTWeSeeCallbackResponse {
+  /** 回调目标 ID */
+  CallbackId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTWeSeePostPaidServiceRequest {
+  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType: string;
+}
+
+declare interface CreateTWeSeePostPaidServiceResponse {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 资源 ID */
+  ResourceId?: string;
+  /** 订单状态 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTWeSeeRecognitionTaskRequest {
   /** 产品ID */
   ProductId: string;
@@ -2398,6 +2554,42 @@ declare interface CreateTWeSeeServiceRequest {
 }
 
 declare interface CreateTWeSeeServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTWeSeeSubscriptionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 套餐规格。可选值：- `BASIC`：包年包月基础版（适用于视频理解） */
+  ServiceTier: string;
+  /** 订阅购买时长，单位：月，支持 1-60 */
+  Period: number;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 自定义订单 ID */
+  CustomOrderId?: string;
+  /** 续费标识。可选值：- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费（默认）- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费 */
+  RenewFlag?: string;
+}
+
+declare interface CreateTWeSeeSubscriptionResponse {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 订单状态 */
+  Status?: string;
+  /** 资源 ID */
+  ResourceId?: string;
+  /** 原价 */
+  OriginalPrice?: string;
+  /** 折后价 */
+  DiscountPrice?: string;
+  /** 币种 */
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2644,6 +2836,16 @@ declare interface DeleteStudioProductRequest {
 }
 
 declare interface DeleteStudioProductResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTWeSeeCallbackRequest {
+  /** 回调目标 ID，格式为 `callback-` + 8 位小写字母数字 */
+  CallbackId: string;
+}
+
+declare interface DeleteTWeSeeCallbackResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3814,6 +4016,18 @@ declare interface DescribeSubscribedTopicPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeSeeCallbackRequest {
+  /** 回调目标 ID */
+  CallbackId: string;
+}
+
+declare interface DescribeTWeSeeCallbackResponse {
+  /** 回调目标详情 */
+  CallbackInfo?: SeeCallbackInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTWeSeeConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -3840,6 +4054,20 @@ declare interface DescribeTWeSeeConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeSeePostPaidServiceRequest {
+  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType: string;
+}
+
+declare interface DescribeTWeSeePostPaidServiceResponse {
+  /** 后付费资源 ID */
+  ResourceId?: string;
+  /** 资源状态。可选值：- `NORMAL`：正常- `ISOLATED`：已隔离 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTWeSeeRecognitionTaskRequest {
   /** 任务 ID */
   TaskId: string;
@@ -3850,6 +4078,80 @@ declare interface DescribeTWeSeeRecognitionTaskRequest {
 declare interface DescribeTWeSeeRecognitionTaskResponse {
   /** 任务信息 */
   TaskInfo?: VisionRecognitionTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTWeSeeSubscriptionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+declare interface DescribeTWeSeeSubscriptionResponse {
+  /** 资源 ID */
+  ResourceId?: string;
+  /** 套餐规格。可能取值：- `BASIC`：包年包月基础版（适用于视频理解） */
+  ServiceTier?: string;
+  /** 到期时间，秒级时间戳 */
+  ExpireTime?: number;
+  /** 启用状态，`true` 为开启，`false` 为关闭 */
+  Enabled?: boolean;
+  /** 订阅状态。可能取值：- `NORMAL`：正常- `ISOLATED`：隔离 */
+  Status?: string;
+  /** 视觉理解配置（适用于视频理解、图片理解） */
+  ComprehensionConfig?: SeeComprehensionConfig;
+  /** 视频语义浓缩配置（适用于视频语义浓缩） */
+  CompHighlightConfig?: SeeCompHighlightConfig;
+  /** 云存事件 ID 过滤规则配置项 */
+  EventIdFilterConfig?: SeeEventIdFilterConfig;
+  /** 当前周期基础能力总额度 */
+  QuotaBasic?: number;
+  /** 当前周期基础能力已用额度 */
+  QuotaUsedBasic?: number;
+  /** 当前周期高级能力总额度 */
+  QuotaAdvanced?: number;
+  /** 当前周期高级能力已用额度 */
+  QuotaUsedAdvanced?: number;
+  /** 额度刷新时间 */
+  QuotaRefreshTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTWeSeeTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+}
+
+declare interface DescribeTWeSeeTaskResponse {
+  /** 任务信息 */
+  TaskInfo?: SeeTaskInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTWeSeeTaskStatisticsRequest {
+  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType?: string;
+  /** 套餐规格。可选值：- `POSTPAID`：后付费（适用于视频理解、图片理解）- `BASIC`：包年包月基础版（适用于视频理解） */
+  ServiceTier?: string;
+  /** 起始时间 UNIX 时间戳，单位：秒 */
+  StartTime?: number;
+  /** 结束时间 UNIX 时间戳，单位：秒 */
+  EndTime?: number;
+  /** 数据点间隔，单位：秒；-1 表示汇总，只返回 1 个数据点 */
+  Interval?: number;
+}
+
+declare interface DescribeTWeSeeTaskStatisticsResponse {
+  /** 统计数据 */
+  StatData?: SeeStatItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3956,6 +4258,22 @@ declare interface DescribeVideoLicenseRequest {
 declare interface DescribeVideoLicenseResponse {
   /** 视频激活码分类概览 */
   License?: VideoLicenseEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyTWeSeeSubscriptionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+declare interface DestroyTWeSeeSubscriptionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4482,6 +4800,50 @@ declare interface InheritCloudStorageUserResponse {
   RequestId?: string;
 }
 
+declare interface InquireTWeSeeSubscriptionCreatePriceRequest {
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 套餐规格。可选值：- `BASIC`：包年包月基础版（适用于视频理解） */
+  ServiceTier: string;
+  /** 订阅购买时长，单位：月，支持 1-60 */
+  Period: number;
+}
+
+declare interface InquireTWeSeeSubscriptionCreatePriceResponse {
+  /** 原价 */
+  OriginalPrice?: string;
+  /** 折后价 */
+  DiscountPrice?: string;
+  /** 币种 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquireTWeSeeSubscriptionRenewPriceRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 续费时长，单位：月，支持 1-60 */
+  Period: number;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+declare interface InquireTWeSeeSubscriptionRenewPriceResponse {
+  /** 原价 */
+  OriginalPrice?: string;
+  /** 折后价 */
+  DiscountPrice?: string;
+  /** 币种 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InvokeAISearchServiceRequest {
   /** 产品ID */
   ProductId: string;
@@ -4580,6 +4942,36 @@ declare interface InvokeExternalSourceAIServiceTaskResponse {
   TaskId?: string;
   /** 任务信息 */
   TaskInfo?: CloudStorageAIServiceTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InvokeTWeSeeComprehensionRequest {
+  /** 输入视频 / 图片的 URL */
+  InputURL: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType: string;
+  /** 任务元数据 */
+  Metadata?: SeeTaskMetadata;
+  /** 视觉理解配置项 */
+  ComprehensionConfig?: SeeComprehensionConfig;
+  /** 等待结果的超时时间（单位：秒）。填 0 表示无需等待结果。最大超时时长 25 秒，默认超时时长 20 秒。 */
+  WaitResultTimeout?: number;
+  /** 回调目标 ID */
+  CallbackId?: string;
+}
+
+declare interface InvokeTWeSeeComprehensionResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务状态。可能取值：- `1`：失败- `2`：空结果- `3`：有效结果- `4`：处理中 */
+  Status?: number;
+  /** 视觉理解结果 */
+  ComprehensionResult?: SeeComprehensionResult;
+  /** 完成该任务所消耗的基础能力额度 */
+  CostBasic?: number;
+  /** 完成该任务所消耗的高级能力额度 */
+  CostAdvanced?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4770,6 +5162,52 @@ declare interface ListProductOtaModulesRequest {
 declare interface ListProductOtaModulesResponse {
   /** 固件列表 */
   Modules?: OtaModuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTWeSeeCallbackRequest {
+  /** 分页大小，范围 1-100 */
+  Limit: number;
+  /** 分页偏移量，范围 0-10000 */
+  Offset?: number;
+}
+
+declare interface ListTWeSeeCallbackResponse {
+  /** 回调目标列表 */
+  List?: SeeCallbackInfo[];
+  /** 已创建的回调目标总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTWeSeeTasksRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类目。可能取值：- `COMPREHENSION`：视觉理解 */
+  ServiceCategory: string;
+  /** 分页拉取数量 */
+  Limit: number;
+  /** 分页拉取偏移 */
+  Offset?: number;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
+  StartTimeMs?: number;
+  /** 查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
+  EndTimeMs?: number;
+  /** 要查询的任务的状态条件。不传则不按照状态过滤，可选值：- `1`：失败- `2`：空结果- `3`：有效结果 */
+  Status?: number;
+}
+
+declare interface ListTWeSeeTasksResponse {
+  /** 任务列表 */
+  Tasks?: SeeTaskInfo[];
+  /** 任务数量 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5054,6 +5492,22 @@ declare interface ModifyStudioProductResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTWeSeeCallbackRequest {
+  /** 回调目标 ID，格式为 `callback-` + 8 位小写字母数字 */
+  CallbackId: string;
+  /** 回调 URL，需要可访问并通过 Echo 校验 */
+  CallbackUrl: string;
+  /** 回调类型。当前仅支持：`http` */
+  Type: string;
+  /** 回调签名 token，最大长度 128 */
+  CallbackToken?: string;
+}
+
+declare interface ModifyTWeSeeCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTWeSeeConfigRequest {
   /** 产品ID */
   ProductId: string;
@@ -5076,6 +5530,48 @@ declare interface ModifyTWeSeeConfigRequest {
 }
 
 declare interface ModifyTWeSeeConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTWeSeeSubscriptionRenewFlagRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 续费标识。可选值：- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费 */
+  RenewFlag: string;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+declare interface ModifyTWeSeeSubscriptionRenewFlagResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTWeSeeSubscriptionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改 */
+  Enabled?: boolean;
+  /** 视觉理解配置（适用于视频理解、图片理解），不传则不修改 */
+  ComprehensionConfig?: SeeComprehensionConfig;
+  /** 视频语义浓缩配置（适用于视频语义浓缩），不传则不修改 */
+  CompHighlightConfig?: SeeCompHighlightConfig;
+  /** 云存事件 ID 过滤规则配置，不传则不修改 */
+  EventIdFilterConfig?: SeeEventIdFilterConfig;
+}
+
+declare interface ModifyTWeSeeSubscriptionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5292,6 +5788,38 @@ declare interface RemoveUserByRoomIdFromTRTCResponse {
   RequestId?: string;
 }
 
+declare interface RenewTWeSeeSubscriptionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 续费时长，单位：月，支持 1-60 */
+  Period: number;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 自定义订单 ID */
+  CustomOrderId?: string;
+}
+
+declare interface RenewTWeSeeSubscriptionResponse {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 订单状态 */
+  Status?: string;
+  /** 资源 ID */
+  ResourceId?: string;
+  /** 原价 */
+  OriginalPrice?: string;
+  /** 折后价 */
+  DiscountPrice?: string;
+  /** 币种 */
+  Currency?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetCloudStorageAIServiceRequest {
   /** 产品 ID */
   ProductId: string;
@@ -5418,6 +5946,30 @@ declare interface SearchTopicRuleResponse {
   TotalCnt?: number;
   /** 规则信息列表 */
   Rules?: TopicRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TerminateTWeSeeSubscriptionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  ServiceType: string;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+declare interface TerminateTWeSeeSubscriptionResponse {
+  /** 退订订单 ID */
+  OrderId?: string;
+  /** 退订订单状态 */
+  Status?: string;
+  /** 退款金额（退款为负数） */
+  Price?: string;
+  /** 币种 */
+  Currency?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5665,12 +6217,18 @@ declare interface Iotexplorer {
   CreateStudioProduct(data: CreateStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStudioProductResponse>;
   /** 自定义房间id创建TRTC通话参数 {@link CreateTRTCSignaturesWithRoomIdRequest} {@link CreateTRTCSignaturesWithRoomIdResponse} */
   CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
+  /** 创建 TWeSee 回调目标 {@link CreateTWeSeeCallbackRequest} {@link CreateTWeSeeCallbackResponse} */
+  CreateTWeSeeCallback(data: CreateTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeCallbackResponse>;
+  /** 开通 TWeSee 后付费服务v2 {@link CreateTWeSeePostPaidServiceRequest} {@link CreateTWeSeePostPaidServiceResponse} */
+  CreateTWeSeePostPaidService(data: CreateTWeSeePostPaidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeePostPaidServiceResponse>;
   /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */
   CreateTWeSeeRecognitionTask(data: CreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskResponse>;
   /** 上传文件并创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskWithFileRequest} {@link CreateTWeSeeRecognitionTaskWithFileResponse} */
   CreateTWeSeeRecognitionTaskWithFile(data: CreateTWeSeeRecognitionTaskWithFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeRecognitionTaskWithFileResponse>;
   /** 开通 TWeSee 后付费服务 {@link CreateTWeSeeServiceRequest} {@link CreateTWeSeeServiceResponse} */
   CreateTWeSeeService(data: CreateTWeSeeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeServiceResponse>;
+  /** 开通 TWeSee 预付费订阅 {@link CreateTWeSeeSubscriptionRequest} {@link CreateTWeSeeSubscriptionResponse} */
+  CreateTWeSeeSubscription(data: CreateTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeSubscriptionResponse>;
   /** 新增TWeTalk智能体 {@link CreateTWeTalkAIBotRequest} {@link CreateTWeTalkAIBotResponse} */
   CreateTWeTalkAIBot(data: CreateTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkAIBotResponse>;
   /** 新增TWeTalk连接配置信息 {@link CreateTWeTalkProductConfigRequest} {@link CreateTWeTalkProductConfigResponse} */
@@ -5703,6 +6261,8 @@ declare interface Iotexplorer {
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除产品 {@link DeleteStudioProductRequest} {@link DeleteStudioProductResponse} */
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
+  /** 删除 TWeSee 回调目标 {@link DeleteTWeSeeCallbackRequest} {@link DeleteTWeSeeCallbackResponse} */
+  DeleteTWeSeeCallback(data: DeleteTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeCallbackResponse>;
   /** 删除TWeTalk智能体 {@link DeleteTWeTalkAIBotRequest} {@link DeleteTWeTalkAIBotResponse} */
   DeleteTWeTalkAIBot(data: DeleteTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkAIBotResponse>;
   /** 删除WeTalk连接产品配置v2版 {@link DeleteTWeTalkProductConfigV2Request} {@link DeleteTWeTalkProductConfigV2Response} */
@@ -5823,10 +6383,20 @@ declare interface Iotexplorer {
   DescribeStudioProduct(data: DescribeStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStudioProductResponse>;
   /** 获取设备已订阅Topic列表 {@link DescribeSubscribedTopicPolicyRequest} {@link DescribeSubscribedTopicPolicyResponse} */
   DescribeSubscribedTopicPolicy(data: DescribeSubscribedTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubscribedTopicPolicyResponse>;
+  /** 查询 TWeSee 回调目标详情 {@link DescribeTWeSeeCallbackRequest} {@link DescribeTWeSeeCallbackResponse} */
+  DescribeTWeSeeCallback(data: DescribeTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeCallbackResponse>;
   /** 查询 TWeSee 配置 {@link DescribeTWeSeeConfigRequest} {@link DescribeTWeSeeConfigResponse} */
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
+  /** 查询 TWeSee 后付费服务 {@link DescribeTWeSeePostPaidServiceRequest} {@link DescribeTWeSeePostPaidServiceResponse} */
+  DescribeTWeSeePostPaidService(data: DescribeTWeSeePostPaidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeePostPaidServiceResponse>;
   /** 查询 TWeSee 语义理解任务 {@link DescribeTWeSeeRecognitionTaskRequest} {@link DescribeTWeSeeRecognitionTaskResponse} */
   DescribeTWeSeeRecognitionTask(data: DescribeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeRecognitionTaskResponse>;
+  /** 查询 TWeSee 预付费订阅 {@link DescribeTWeSeeSubscriptionRequest} {@link DescribeTWeSeeSubscriptionResponse} */
+  DescribeTWeSeeSubscription(data: DescribeTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeSubscriptionResponse>;
+  /** 查询 TWeSee 任务详情 {@link DescribeTWeSeeTaskRequest} {@link DescribeTWeSeeTaskResponse} */
+  DescribeTWeSeeTask(data: DescribeTWeSeeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeTaskResponse>;
+  /** 查询 TWeSee 任务统计数据 {@link DescribeTWeSeeTaskStatisticsRequest} {@link DescribeTWeSeeTaskStatisticsResponse} */
+  DescribeTWeSeeTaskStatistics(data?: DescribeTWeSeeTaskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeTaskStatisticsResponse>;
   /** 获取TWeTalk智能体详情 {@link DescribeTWeTalkAIBotRequest} {@link DescribeTWeTalkAIBotResponse} */
   DescribeTWeTalkAIBot(data: DescribeTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkAIBotResponse>;
   /** 获取TWeTalk连接配置信息详情 {@link DescribeTWeTalkProductConfigRequest} {@link DescribeTWeTalkProductConfigResponse} */
@@ -5839,8 +6409,10 @@ declare interface Iotexplorer {
   DescribeTopicRule(data: DescribeTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicRuleResponse>;
   /** 获取未绑定的设备列表 {@link DescribeUnbindedDevicesRequest} {@link DescribeUnbindedDevicesResponse} */
   DescribeUnbindedDevices(data: DescribeUnbindedDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnbindedDevicesResponse>;
-  /** 查询视频激活码统计概览 {@link DescribeVideoLicenseRequest} {@link DescribeVideoLicenseResponse} */
+  /** @deprecated 查询视频激活码统计概览 {@link DescribeVideoLicenseRequest} {@link DescribeVideoLicenseResponse} */
   DescribeVideoLicense(data: DescribeVideoLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoLicenseResponse>;
+  /** 销毁 TWeSee 预付费订阅 {@link DestroyTWeSeeSubscriptionRequest} {@link DestroyTWeSeeSubscriptionResponse} */
+  DestroyTWeSeeSubscription(data: DestroyTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyTWeSeeSubscriptionResponse>;
   /** 直接绑定设备和家庭 {@link DirectBindDeviceInFamilyRequest} {@link DirectBindDeviceInFamilyResponse} */
   DirectBindDeviceInFamily(data: DirectBindDeviceInFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DirectBindDeviceInFamilyResponse>;
   /** 禁用规则 {@link DisableTopicRuleRequest} {@link DisableTopicRuleResponse} */
@@ -5897,12 +6469,18 @@ declare interface Iotexplorer {
   GetWechatDeviceTicket(data: GetWechatDeviceTicketRequest, config?: AxiosRequestConfig): AxiosPromise<GetWechatDeviceTicketResponse>;
   /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
+  /** 查询 TWeSee 预付费新购价格 {@link InquireTWeSeeSubscriptionCreatePriceRequest} {@link InquireTWeSeeSubscriptionCreatePriceResponse} */
+  InquireTWeSeeSubscriptionCreatePrice(data: InquireTWeSeeSubscriptionCreatePriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireTWeSeeSubscriptionCreatePriceResponse>;
+  /** 查询 TWeSee 预付费续费价格 {@link InquireTWeSeeSubscriptionRenewPriceRequest} {@link InquireTWeSeeSubscriptionRenewPriceResponse} */
+  InquireTWeSeeSubscriptionRenewPrice(data: InquireTWeSeeSubscriptionRenewPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireTWeSeeSubscriptionRenewPriceResponse>;
   /** 视频语义搜索 {@link InvokeAISearchServiceRequest} {@link InvokeAISearchServiceResponse} */
   InvokeAISearchService(data: InvokeAISearchServiceRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeAISearchServiceResponse>;
   /** 同步执行设备云存AI分析任务 {@link InvokeCloudStorageAIServiceTaskRequest} {@link InvokeCloudStorageAIServiceTaskResponse} */
   InvokeCloudStorageAIServiceTask(data: InvokeCloudStorageAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeCloudStorageAIServiceTaskResponse>;
   /** 同步执行外部视频AI分析任务 {@link InvokeExternalSourceAIServiceTaskRequest} {@link InvokeExternalSourceAIServiceTaskResponse} */
   InvokeExternalSourceAIServiceTask(data: InvokeExternalSourceAIServiceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeExternalSourceAIServiceTaskResponse>;
+  /** 调用 TWeSee 视觉理解算法 {@link InvokeTWeSeeComprehensionRequest} {@link InvokeTWeSeeComprehensionResponse} */
+  InvokeTWeSeeComprehension(data: InvokeTWeSeeComprehensionRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeTWeSeeComprehensionResponse>;
   /** 同步执行 TWeSee 语义理解任务 {@link InvokeTWeSeeRecognitionTaskRequest} {@link InvokeTWeSeeRecognitionTaskResponse} */
   InvokeTWeSeeRecognitionTask(data: InvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<InvokeTWeSeeRecognitionTaskResponse>;
   /** 上传文件并同步执行 TWeSee 语义理解任务 {@link InvokeTWeSeeRecognitionTaskWithFileRequest} {@link InvokeTWeSeeRecognitionTaskWithFileResponse} */
@@ -5917,6 +6495,10 @@ declare interface Iotexplorer {
   ListOtaModules(data: ListOtaModulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListOtaModulesResponse>;
   /** 获取产品OTA模块列表 {@link ListProductOtaModulesRequest} {@link ListProductOtaModulesResponse} */
   ListProductOtaModules(data: ListProductOtaModulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListProductOtaModulesResponse>;
+  /** 查询 TWeSee 回调目标列表 {@link ListTWeSeeCallbackRequest} {@link ListTWeSeeCallbackResponse} */
+  ListTWeSeeCallback(data: ListTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ListTWeSeeCallbackResponse>;
+  /** 查询 TWeSee 任务列表 {@link ListTWeSeeTasksRequest} {@link ListTWeSeeTasksResponse} */
+  ListTWeSeeTasks(data: ListTWeSeeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTWeSeeTasksResponse>;
   /** 获取Topic列表 {@link ListTopicPolicyRequest} {@link ListTopicPolicyResponse} */
   ListTopicPolicy(data: ListTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ListTopicPolicyResponse>;
   /** 更新应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
@@ -5947,8 +6529,14 @@ declare interface Iotexplorer {
   ModifySpaceProperty(data: ModifySpacePropertyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpacePropertyResponse>;
   /** 修改产品 {@link ModifyStudioProductRequest} {@link ModifyStudioProductResponse} */
   ModifyStudioProduct(data: ModifyStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStudioProductResponse>;
+  /** 修改 TWeSee 回调目标 {@link ModifyTWeSeeCallbackRequest} {@link ModifyTWeSeeCallbackResponse} */
+  ModifyTWeSeeCallback(data: ModifyTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeCallbackResponse>;
   /** 修改 TWeSee 配置 {@link ModifyTWeSeeConfigRequest} {@link ModifyTWeSeeConfigResponse} */
   ModifyTWeSeeConfig(data: ModifyTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeConfigResponse>;
+  /** 修改 TWeSee 预付费订阅 {@link ModifyTWeSeeSubscriptionRequest} {@link ModifyTWeSeeSubscriptionResponse} */
+  ModifyTWeSeeSubscription(data: ModifyTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeSubscriptionResponse>;
+  /** 修改 TWeSee 预付费订阅续费标识 {@link ModifyTWeSeeSubscriptionRenewFlagRequest} {@link ModifyTWeSeeSubscriptionRenewFlagResponse} */
+  ModifyTWeSeeSubscriptionRenewFlag(data: ModifyTWeSeeSubscriptionRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeSubscriptionRenewFlagResponse>;
   /** 修改TWeTalk智能体 {@link ModifyTWeTalkAIBotRequest} {@link ModifyTWeTalkAIBotResponse} */
   ModifyTWeTalkAIBot(data: ModifyTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkAIBotResponse>;
   /** 修改TWeTalk连接配置信息 {@link ModifyTWeTalkProductConfigRequest} {@link ModifyTWeTalkProductConfigResponse} */
@@ -5973,6 +6561,8 @@ declare interface Iotexplorer {
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;
   /** 将用户从TRTC房间移出 {@link RemoveUserByRoomIdFromTRTCRequest} {@link RemoveUserByRoomIdFromTRTCResponse} */
   RemoveUserByRoomIdFromTRTC(data: RemoveUserByRoomIdFromTRTCRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByRoomIdFromTRTCResponse>;
+  /** 续费 TWeSee 预付费订阅 {@link RenewTWeSeeSubscriptionRequest} {@link RenewTWeSeeSubscriptionResponse} */
+  RenewTWeSeeSubscription(data: RenewTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<RenewTWeSeeSubscriptionResponse>;
   /** 重置云存服务 {@link ResetCloudStorageRequest} {@link ResetCloudStorageResponse} */
   ResetCloudStorage(data: ResetCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<ResetCloudStorageResponse>;
   /** 重置设备云存AI分析服务 {@link ResetCloudStorageAIServiceRequest} {@link ResetCloudStorageAIServiceResponse} */
@@ -5989,6 +6579,8 @@ declare interface Iotexplorer {
   SearchStudioProduct(data?: SearchStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<SearchStudioProductResponse>;
   /** 搜索规则 {@link SearchTopicRuleRequest} {@link SearchTopicRuleResponse} */
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
+  /** 退订 TWeSee 预付费订阅 {@link TerminateTWeSeeSubscriptionRequest} {@link TerminateTWeSeeSubscriptionResponse} */
+  TerminateTWeSeeSubscription(data: TerminateTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTWeSeeSubscriptionResponse>;
   /** 转移云存服务 {@link TransferCloudStorageRequest} {@link TransferCloudStorageResponse} */
   TransferCloudStorage(data: TransferCloudStorageRequest, config?: AxiosRequestConfig): AxiosPromise<TransferCloudStorageResponse>;
   /** 转移TWeCall激活 {@link TransferTWeCallDeviceRequest} {@link TransferTWeCallDeviceResponse} */

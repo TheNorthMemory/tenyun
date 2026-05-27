@@ -1329,6 +1329,8 @@ declare namespace V20180525 {
     CdcId?: string;
     /** 集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行 */
     IsHighAvailability?: boolean;
+    /** 集群分类：tke=标准TKE集群，agent=Agent集群默认值：tke */
+    ClusterCategory?: string | null;
     /** 开启后会下发Gatekeeper和网络策略 */
     SecurityModeConfig?: SecurityModeConfig;
   }
@@ -3931,6 +3933,20 @@ declare namespace V20180525 {
     Detail?: string;
   }
 
+  /** 子网资源分配 */
+  interface SubnetAllocation {
+    /** 子网 ID */
+    SubnetId: string;
+    /** 分配比例（百分比），所有 Ratio 之和必须等于 100 */
+    Ratio: number;
+  }
+
+  /** 子网资源分配策略，精确控制各子网之间的资源分配比例。 */
+  interface SubnetAllocationPolicy {
+    /** 子网分配列表 */
+    Allocations: SubnetAllocation[];
+  }
+
   /** 子网信息 */
   interface SubnetInfos {
     /** 子网id */
@@ -4185,12 +4201,14 @@ declare namespace V20180525 {
     SubnetIds?: string[] | null;
     /** 节点池名称 */
     Name?: string;
-    /** 节点池生命周期- creating：创建中- normal：正常- updating：更新中 */
+    /** 节点池生命周期creating：创建中normal：正常updating：更新中 */
     LifeState?: string;
     /** 虚拟节点label */
     Labels?: Label[] | null;
     /** 虚拟节点taint */
     Taints?: Taint[] | null;
+    /** 子网分配策略 */
+    SubnetAllocationPolicy?: SubnetAllocationPolicy;
   }
 
   /** 超级节点 */
