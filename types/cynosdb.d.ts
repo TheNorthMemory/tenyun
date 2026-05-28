@@ -1380,6 +1380,62 @@ declare interface ExchangeRoGroupInfo {
   DstRoGroupInfo?: RollbackRoGroupInfo;
 }
 
+/** 执行计划详情 */
+declare interface ExecutionPlanDetail {
+  /** 模板ID */
+  TemplateID?: string;
+  /** 数据库名 */
+  Db?: string;
+  /** 原始SQL样例 */
+  SQLSample?: string;
+  /** 改写后SQL样例 */
+  SQLSampleRewritten?: string;
+  /** 优化前执行计划- 列表 */
+  TablePlanBefore?: ExplainRow[];
+  /** 优化后执行计划 - 列表 */
+  TablePlanAfter?: ExplainRow[];
+  /** 优化前树形执行计划 */
+  TreePlanBefore?: string;
+  /** 优化后树形执行计划 */
+  TreePlanAfter?: string;
+  /** 优化前查询时间 */
+  QueryTimeBefore?: number;
+  /** 优化后查询时间 */
+  QueryTimeAfter?: number;
+  /** 优化前扫描行数 */
+  SQLScanRowsBefore?: number;
+  /** 优化后扫描行数 */
+  SQLScanRowsAfter?: number;
+}
+
+/** 执行计划列表 */
+declare interface ExplainRow {
+  /** 查询的序列号 */
+  Id?: number;
+  /** 查询的类型，常见值：SIMPLE（简单查询，不含子查询或 UNION）、PRIMARY（最外层查询）、SUBQUERY（子查询中的第一个 SELECT）、DERIVED（派生表/FROM 子句中的子查询）、UNION（UNION 中第二个及之后的 SELECT）、UNION RESULT（UNION 的结果集）。 */
+  SelectType?: string;
+  /** 数据表名 */
+  Table?: string;
+  /** 查询匹配的分区 */
+  Partitions?: string;
+  /** 访问类型（非常重要，衡量查询效率的关键指标），从优到差排列：system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL。常见值说明： • system：表只有一行记录（系统表） • const：通过主键或唯一索引匹配一行，常见于 WHERE pk = 1 • eq_ref：连接时使用主键或唯一索引，每个索引值只匹配一行 • ref：使用非唯一索引查找，可能匹配多行 • range：索引范围扫描，如 BETWEEN、&gt;、&lt;、IN • index：全索引扫描（遍历整棵索引树） • ALL：全表扫描（最差，需优化） */
+  Type?: string;
+  /** 查询中可能使用到的索引。为 NULL 表示没有可用索引。 */
+  PossibleKeys?: string;
+  /** 实际使用的索引。为 NULL 表示未使用任何索引。 */
+  Key?: string;
+  /** 实际使用的索引长度（字节数）。可用来判断联合索引中实际使用了哪几个列。值越短说明使用的索引列越少。 */
+  KeyLen?: string;
+  /** 显示哪些列或常量与 key 列中的索引进行比较。常见值：const（常量）、某个列名、func（函数结果）。 */
+  Ref?: string;
+  /** 预估要扫描的行数 */
+  Rows?: number;
+  /** 表示经过表条件过滤后，剩余行数占 rows 的百分比估算。100% 表示没有额外过滤，值越高越好。 */
+  Filtered?: number;
+  /** 附加信息（非常重要），常见值： • Using index：覆盖索引，无需回表（好） • Using where：在存储引擎返回行后再用 WHERE 过滤 • Using temporary：使用了临时表（常见于 GROUP BY/ORDER BY，需优化） • Using filesort：使用了文件排序而非索引排序（需优化） • Using index condition：使用了索引下推（ICP） */
+  Extra?: string;
+}
+
 /** 转发实例信息 */
 declare interface ForwardInstanceInfo {
   /** 转发实例id */
@@ -3510,6 +3566,48 @@ declare interface AddLibraDBInstancesResponse {
   DealNames?: string[] | null;
   /** 发货资源id列表。 */
   ResourceIds?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddServerlessRoInstancesRequest {
+  /** 集群Id */
+  ClusterId: string;
+  /** ro实例最小规格 */
+  MinCpu?: number;
+  /** ro实例最大规格 */
+  MaxCpu?: number;
+  /** ro实例名称 */
+  InstanceName?: string;
+  /** 所属VPC网络ID */
+  VpcId?: string;
+  /** 所属子网ID，如果设置了VpcId，则SubnetId必填 */
+  SubnetId?: string;
+  /** 新增RO组时使用的Port，取值范围为[0,65535) */
+  Port?: number;
+  /** 安全组ID，新建只读实例时可以指定安全组 */
+  SecurityGroupIds?: string[];
+  /** 是否自动暂停枚举值：yes： 是no： 否 */
+  AutoPause?: string;
+  /** 自动暂停时间单位：秒 */
+  AutoPauseDelay?: number;
+  /** 实例参数 */
+  InstanceParams?: ModifyParamItem[];
+  /** 参数模板 */
+  ParamTemplateId?: number;
+  /** 新增的只读实例数量 */
+  RoCount?: number;
+}
+
+declare interface AddServerlessRoInstancesResponse {
+  /** 冻结流水，一次开通一个冻结流水 */
+  TranId?: string | null;
+  /** 后付费订单号 */
+  DealNames?: string[] | null;
+  /** 发货资源id列表 */
+  ResourceIds?: string[] | null;
+  /** 大订单号 */
+  BigDealIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5974,6 +6072,24 @@ declare interface DescribeRollbackTimeRangeResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSQLExecutionPlanRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** SQL模板ID */
+  TemplateID: string;
+  /** 计划详情序列号 */
+  PlanDetailId: number;
+}
+
+declare interface DescribeSQLExecutionPlanResponse {
+  /** 执行计划详情 */
+  PlanDetail?: ExecutionPlanDetail | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSSLStatusRequest {
   /** 集群ID */
   ClusterId: string;
@@ -8099,6 +8215,8 @@ declare interface Cynosdb {
   AddInstances(data: AddInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddInstancesResponse>;
   /** 创建只读分析引擎 {@link AddLibraDBInstancesRequest} {@link AddLibraDBInstancesResponse} */
   AddLibraDBInstances(data: AddLibraDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddLibraDBInstancesResponse>;
+  /** 添加 Serverless 集群只读实例 {@link AddServerlessRoInstancesRequest} {@link AddServerlessRoInstancesResponse} */
+  AddServerlessRoInstances(data: AddServerlessRoInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<AddServerlessRoInstancesResponse>;
   /** 安全组批量绑定云资源 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
   /** 为集群绑定资源包 {@link BindClusterResourcePackagesRequest} {@link BindClusterResourcePackagesResponse} */
@@ -8323,6 +8441,8 @@ declare interface Cynosdb {
   DescribeResourcesByDealName(data?: DescribeResourcesByDealNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesByDealNameResponse>;
   /** 查询回档时间范围 {@link DescribeRollbackTimeRangeRequest} {@link DescribeRollbackTimeRangeResponse} */
   DescribeRollbackTimeRange(data: DescribeRollbackTimeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRollbackTimeRangeResponse>;
+  /** 查询 SQL执行计划 {@link DescribeSQLExecutionPlanRequest} {@link DescribeSQLExecutionPlanResponse} */
+  DescribeSQLExecutionPlan(data: DescribeSQLExecutionPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSQLExecutionPlanResponse>;
   /** 查询实例SSL状态 {@link DescribeSSLStatusRequest} {@link DescribeSSLStatusResponse} */
   DescribeSSLStatus(data: DescribeSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSSLStatusResponse>;
   /** 遗留备份列表 {@link DescribeSaveBackupClustersRequest} {@link DescribeSaveBackupClustersResponse} */

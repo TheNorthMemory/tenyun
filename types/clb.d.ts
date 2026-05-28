@@ -1344,6 +1344,8 @@ declare interface TargetGroupInfo {
   SessionExpireTime?: number;
   /** IP版本。 */
   IpVersion?: string;
+  /** 是否开启SNAT */
+  SnatEnable?: boolean;
 }
 
 /** 目标组实例 */

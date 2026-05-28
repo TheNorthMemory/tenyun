@@ -394,6 +394,12 @@ declare interface ServiceDetail {
   DeploymentConfigs?: DeploymentConfig[];
   /** 服务超参数配置 */
   HyperParam?: HyperParam;
+  /**  */
+  SecurityType?: string;
+  /**  */
+  RoleComputeSet?: ComputeDetail[];
+  /**  */
+  TargetReplicas?: number;
 }
 
 /** 服务元数据信息，如服务名 */
@@ -440,6 +446,8 @@ declare interface TemplateDetail {
   ComputeSet?: ComputeDetail[];
   /** 当前部署模板所支持的增强功能 */
   SupportFunc?: string[];
+  /**  */
+  RoleComputeSet?: ComputeDetail[];
 }
 
 declare interface CreateApplicationRequest {

@@ -1022,6 +1022,34 @@ declare interface ProviderResponseParametersMap {
   Groups?: string | null;
 }
 
+/** 自定义短信服务商模板配置 */
+declare interface SMSProviderTemplateConfig {
+  /** 短信服务商类型枚举值：TENCENT_CN： 腾讯云国内短信TENCENT_INTL： 腾讯云国际短信 */
+  Vendor: string | null;
+  /** 短信服务商侧申请并审核通过的模板ID。腾讯云短信模板ID可前往 腾讯云国内短信 或 国际/港澳台短信 的正文模板管理查看，若向境外手机号发送短信，仅支持使用国际/港澳台短信模板。 */
+  TemplateId: string | null;
+  /** 短信服务商侧为应用分配的ID，按照服务商文档和要求需要此参数的，填写该参数。腾讯云国内短信和国际短信此参数必填，可以在短信控制台的应用列表中查看对应的应用id。 */
+  SdkAppId?: string | null;
+  /** 短信服务商侧申请并审核通过的签名，按照服务商的文档和要求填写。腾讯云短信服务商，签名信息可前往 国内短信 或 国际/港澳台短信 的签名管理查看。 注意：发送国内短信该参数必填，且需填写签名内容而非签名ID。发送国际/港澳台短信该参数非必填。 */
+  SignName?: string | null;
+  /** 调用短信服务商发送短信接口的调用秘钥对应的ID。调用api秘钥会保存在云开发平台控制台—扩展功能—授权管理中，如果对于短信调用的api秘钥有删除需求，可在此处进行删除，删除后，短信将无法正常发送。腾讯云的调用api秘钥在腾讯云控制台获取，建议使用子账号的秘钥ID，并且按照最小权限配置。 */
+  SecretId?: string | null;
+  /** 调用短信服务商发送短信接口的调用api秘钥对应的秘钥Key。腾讯云的调用api秘钥在腾讯云控制台获取，建议使用子账号的秘钥ID, 并且按照最小权限配置。平台对于调用api秘钥key是加密存储的，不会明文存储。 */
+  SecretKey?: string | null;
+  /** 短信服务商侧自定义短信发送的senderID，按照服务商文档和要求传参。仅国际化场景使用。部分国家/运营商支持自定义 Sender ID替代默认主叫号码。国内站点忽略此字段。 */
+  SenderId?: string | null;
+  /** 当短信自定义模板含多个占位符时，平台只负责生成验证码值，其余占位符由调用方在此提供。无需提供验证码对应的占位的值，验证码由云开发平台侧生成。如果是命名占位的服务商的短信模板，这里的参数按照需要对应的占位的key和value，会按照对应的key和value在发送短信时，填充到模板中。如果是序号占位的服务商的短信模板，这里的参数不需要key, 只需要填写对应的value, 会按照填写的顺序依次填充到模板中。 */
+  TemplateExtendParam?: SMSTemplateParams[] | null;
+}
+
+/** 自定义短信模板中的自定义参数 */
+declare interface SMSTemplateParams {
+  /** 短信模板的自定义参数的key。如果短信厂商的自定义参数按照命名占位的，才需要此参数；如果按照序号占位的， 不需要此参数。腾讯云短信是按照序号占位的，不需要此参数。 */
+  Key?: string | null;
+  /** 短信模板的自定义参数对应的value */
+  Value?: string | null;
+}
+
 /** 静态CDN资源信息 */
 declare interface StaticStorageInfo {
   /** 静态CDN域名 */
@@ -1170,9 +1198,9 @@ declare interface VMSpecLightHouse {
   BundleConfig?: string;
 }
 
-/** 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，推荐使用云开发默认短信包。如果使用自定义APIs发送短信，方法命名规则方法名称：发送验证码方法标识：SendVerificationCode入参Mobile：字符串（手机号，如：“+86 + 手机号”）VerificationCode：字符串（验证码，如：“123456”）返回值ErrorCode：int（0 表示成功，非 0 表示失败）ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息） */
+/** 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，自定义短信包可以通过自定义apis或者自定义短信模板的方式接入，推荐使用云开发默认短信包，方便快捷。- 如果使用自定义APIs发送短信，方法命名规则方法名称：发送验证码方法标识：SendVerificationCode入参Mobile：字符串（手机号，如：“+86 + 手机号”）VerificationCode：字符串（验证码，如：“123456”）返回值ErrorCode：int（0 表示成功，非 0 表示失败）ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息）- 如果使用自定义短信模板发送短信时，需要按照对应的短信服务商的要求，申请并审核通过对应的短信模板后，在云开发平台配置自定义短信模板，云开发平台对于短信模板不会做其他操作和限制，只做短信发送的逻辑，其他的操作限制都由短信服务商自身提供。 */
 declare interface VerificationConfig {
-  /** 短信验证码发送通道类型。取值范围：default：使用默认云开发短信包发送短信。apis：使用云开发自定义 APIs 作为短信发送通道，需配合 Name 和 Method 参数使用。不传则不修改当前配置。 */
+  /** 短信验证码发送通道类型。枚举值：default： 使用默认云开发短信包发送短信apis： 使用云开发自定义 APIs 作为短信发送通道，需配合 Name 和 Method 参数使用。不传则不修改当前配置。template： 自定义短信模板配置，需要配置TemplateProvider */
   Type?: string | null;
   /** 自定义 APIs 数据源唯一标识，当 Type 为 apis 时必填。用于定位微搭 APIs 中对应的数据源。 */
   Name?: string | null;
@@ -1180,6 +1208,8 @@ declare interface VerificationConfig {
   Method?: string | null;
   /** 单个手机号每日短信发送上限。默认值为 30，传 -1 表示不限制，如果设置为不限制，需要注意恶意攻击，导致短信套餐用量计费问题。仅支持正整数或 -1。不传则不修改当前配置。 */
   SmsDayLimit?: number | null;
+  /** 自定义短信服务商模板配置 */
+  TemplateProvider?: SMSProviderTemplateConfig | null;
 }
 
 /** 云主机实例 */

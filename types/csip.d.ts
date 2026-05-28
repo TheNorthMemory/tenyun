@@ -1698,6 +1698,14 @@ declare interface CosAssetInfo {
   MonitorStatus?: number;
   /** 数据识别扫描信息 */
   DataScanInfo?: CosAssetDataScanDetail;
+  /** 存储桶Az类型枚举值：MAZ： 多azSAZ： 单az */
+  BucketAzType?: string;
+  /** 存储桶存储大小默认值：0 */
+  BucketStorageSize?: number;
+  /** 存储桶对象个数默认值：0 */
+  BucketObjectCount?: number;
+  /** 存储桶敏感识别采样率取值范围：[0, 1]默认值：0 */
+  IdentifySampleRate?: number;
 }
 
 /** cos资产同步任务信息 */
@@ -1758,6 +1766,12 @@ declare interface CosAuditPayInfo {
   MonitorBucketNum?: number;
   /** 总的存储桶数 */
   TotalBucketNum?: number;
+  /** 后付费产品开关状态 */
+  PostProductStatusList?: number[];
+  /** 后付费产品购买状态 */
+  PostProductBuyStatusList?: number[];
+  /** 新后付费资源id */
+  NewPostPayResourceId?: string;
 }
 
 /** cos风险识别桶访问规则 */
@@ -1794,6 +1808,14 @@ declare interface CosBucketBillingInfo {
   MonitorBucketCount?: number;
   /** 0 关闭 1 开启 */
   IsAutoMonitor?: number;
+  /** 是否启用白名单日志功能 */
+  LogFeatureWhitelist?: boolean;
+  /** 是否存在新的后付费订单 */
+  IsHaveNewPostOrder?: boolean;
+  /** 是否存在旧后付费订单 */
+  IsHaveOldPostOrder?: boolean;
+  /** 后付费产品列表 */
+  PostProductList?: number[];
 }
 
 /** 存储桶id */
@@ -5476,15 +5498,23 @@ declare interface CreateCosAssetSyncTaskResponse {
 }
 
 declare interface CreateCosObjectScanTaskRequest {
-  /** 1: 敏感数据识别 2:恶意文件扫描 */
+  /** 1: 敏感数据识别 2:恶意文件扫描 3:批量扫描敏感数据 */
   TaskType: number;
   /** 集团账号的成员id */
   MemberId?: string[];
   /** 存储桶列表 */
   BucketSet?: string[];
+  /** 任务参数 */
+  TaskArgs?: string;
+  /** 是否全部扫描 */
+  IsScanAll?: boolean;
+  /** 扫描时需要剔除的存储桶 */
+  DeleteBucketSet?: string[];
 }
 
 declare interface CreateCosObjectScanTaskResponse {
+  /** 任务id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5648,7 +5678,7 @@ declare interface CreateDspmExportTaskRequest {
   UserName?: string;
   /** 客户端 */
   ClientName?: string;
-  /** 流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两都都传或不传则返回所有 */
+  /** 流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两都传或不传则返回所有 */
   SourceTypes?: string[];
   /** 表名，长度限制64，多个表名查询的话可以用空格连接 */
   TableName?: string;

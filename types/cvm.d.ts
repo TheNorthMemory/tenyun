@@ -157,9 +157,9 @@ declare interface ChcHostDeniedActions {
 /** 描述了实例CPU拓扑结构的相关信息。 */
 declare interface CpuTopology {
   /** 决定启用的CPU物理核心数。 */
-  CoreCount?: number;
+  CoreCount?: number | null;
   /** 每核心线程数。该参数决定是否开启或关闭超线程。1 表示关闭超线程 2 表示开启超线程 不设置时，实例使用默认的超线程策略。开关超线程请参考文档：[开启与关闭超线程](https://cloud.tencent.com/document/product/213/103798)。 */
-  ThreadPerCore?: number;
+  ThreadPerCore?: number | null;
 }
 
 /** 描述了数据盘的信息 */

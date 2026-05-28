@@ -5901,7 +5901,7 @@ declare interface DescribeInstancesResponse {
 }
 
 declare interface DescribeIpAccessControlRequest {
-  /** 域名，当操作对象为全局规则时，Domain参数应填写为"global" */
+  /** 域名，当操作对象为全局规则时，Domain参数应填写为&quot;global&quot; */
   Domain: string;
   /** 计数标识 */
   Count: number;
@@ -5919,7 +5919,7 @@ declare interface DescribeIpAccessControlRequest {
   OffSet?: number;
   /** 每页返回的数量，默认为20 */
   Limit?: number;
-  /** 用于按数据来源过滤黑白名单记录，非必填（默认为空字符串，表示不过滤/查询全部）。 "" (空字符串)	，不按来源过滤，返回所有记录（默认值） custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 batch-group（防护对象组），防护对象组维度添加的黑白名单规则 */
+  /** 用于按数据来源过滤黑白名单记录，非必填（默认为空字符串，表示不过滤/查询全部）。 &quot;&quot; (空字符串) ，不按来源过滤，返回所有记录（默认值） custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护 ），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 batch-group（防护对象组），防护对象组维度添加的黑白名单规则 */
   Source?: string;
   /** 排序参数 */
   Sort?: string;
@@ -5935,6 +5935,8 @@ declare interface DescribeIpAccessControlRequest {
   RuleId?: number;
   /** 0表示全部，1表示永久生效，2表示定时生效，3表示周粒度生效，4表示月粒度生效 */
   TimerType?: number;
+  /** 查询的ip列表 */
+  IpList?: string[];
 }
 
 declare interface DescribeIpAccessControlResponse {

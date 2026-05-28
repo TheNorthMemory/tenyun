@@ -805,7 +805,7 @@ declare interface CreateBackupResponse {
 }
 
 declare interface CreateClusterRequest {
-  /** 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX` */
+  /** 集群数据描述语言类型，统一填MIX枚举值：MIX： 同时支持PROTO，TDR表 */
   IdlType: string;
   /** 集群名称，可使用中文或英文字符，最大长度32个字符 */
   ClusterName: string;

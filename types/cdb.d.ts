@@ -4039,6 +4039,8 @@ declare interface DescribeInstanceUpgradeTypeRequest {
   NodeDistribution?: NodeDistribution;
   /** 云盘版的节点拓扑配置。Nodeld 信息可通过 DescribeClusterInfo 接口获取。 */
   ClusterTopology?: ClusterTopology;
+  /** 目标实例备机3可用区 ID。可使用 DescribeCdbZoneConfig 获取可用区 ID。 */
+  DstFourthZone?: number;
 }
 
 declare interface DescribeInstanceUpgradeTypeResponse {
@@ -5545,6 +5547,8 @@ declare interface UpgradeDBInstanceRequest {
   CheckFastUpgradeReboot?: number;
   /** 数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源对应的选项为: &quot;high&quot;、&quot;normal&quot;、&quot;low&quot;，默认为空参数详解，：&quot;high&quot;: 对应控制台中的高，数据库负载过高不建议使用&quot;normal&quot;：对应控制台中的标准&quot;low&quot;：对应控制台中的低 */
   DataCheckSensitive?: string;
+  /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
+  FourthZone?: string;
 }
 
 declare interface UpgradeDBInstanceResponse {

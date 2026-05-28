@@ -4223,7 +4223,7 @@ declare interface InstanceAttributesResponse {
   MaxGroupNum?: number;
   /** 售卖类型,0:标准版,1:专业版 */
   Cvm?: number;
-  /** 实例类型 枚举列表:profession :专业版standards2 :标准版premium :高级版serverless :serverless版 */
+  /** 实例类型枚举值：profession： 专业版premium： 高级版serverless： serverless版其他： 标准版（如:standards2/standard，该版本已停售） */
   InstanceType?: string;
   /** 表示该实例支持的特性。FEATURE_SUBNET_ACL:表示acl策略支持设置子网。 */
   Features?: string[];

@@ -226,7 +226,7 @@ declare interface FlavorKingCycleBrandImportantCityScanAnalysisCityItem {
   OtherMarketShare?: number;
   /** 上周期口味王分布 */
   LastCycleRatio?: number;
-  /** 上周期口味王牌市场份额 */
+  /** 上周期口味王品牌市场份额 */
   LastCycleMarketShare?: number;
   /** 上周期其他品牌市场份额 */
   LastCycleOtherMarketShare?: number;

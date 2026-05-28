@@ -166,6 +166,20 @@ declare interface Filter {
   Values: string[];
 }
 
+/** 七层转发策略信息 */
+declare interface ForwardingPolicySet {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId?: string;
+  /** 监听器ID。 */
+  ListenerId?: string;
+  /** 策略ID。 */
+  ForwardingPolicyId?: string;
+  /** 域名。 */
+  Host?: string;
+  /** 是否为默认域名。 */
+  DefaultHostFlag?: boolean;
+}
+
 /** 七层转发规则信息 */
 declare interface ForwardingRuleSet {
   /** 七层转发规则条件信息。 */
@@ -356,6 +370,24 @@ declare interface CreateEndpointGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateForwardingPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 域名。 */
+  Host: string;
+}
+
+declare interface CreateForwardingPolicyResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 七层转发策略ID。 */
+  ForwardingPolicyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateForwardingRuleRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -482,6 +514,22 @@ declare interface DeleteEndpointGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteForwardingPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 策略ID。 */
+  ForwardingPolicyId: string;
+}
+
+declare interface DeleteForwardingPolicyResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteForwardingRuleRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -586,6 +634,26 @@ declare interface DescribeEndpointGroupsRequest {
 declare interface DescribeEndpointGroupsResponse {
   /** 符合条件的终端节点组。 */
   EndpointGroupConfigurationSet?: EndpointGroupConfigurationSet[];
+  /** 符合条件的实例个数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeForwardingPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+}
+
+declare interface DescribeForwardingPolicyResponse {
+  /** 符合条件的策略信息。 */
+  ForwardingPolicySet?: ForwardingPolicySet[];
   /** 符合条件的实例个数。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -734,6 +802,24 @@ declare interface ModifyEndpointGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyForwardingPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 策略ID。 */
+  ForwardingPolicyId: string;
+  /** 域名。 */
+  Host: string;
+}
+
+declare interface ModifyForwardingPolicyResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyForwardingRuleRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -829,6 +915,8 @@ declare interface Ga2 {
   CreateAccelerateAreas(data: CreateAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccelerateAreasResponse>;
   /** 创建终端节点组 {@link CreateEndpointGroupRequest} {@link CreateEndpointGroupResponse} */
   CreateEndpointGroup(data: CreateEndpointGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEndpointGroupResponse>;
+  /** 创建七层转发策略 {@link CreateForwardingPolicyRequest} {@link CreateForwardingPolicyResponse} */
+  CreateForwardingPolicy(data: CreateForwardingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardingPolicyResponse>;
   /** 创建七层转发规则 {@link CreateForwardingRuleRequest} {@link CreateForwardingRuleResponse} */
   CreateForwardingRule(data: CreateForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardingRuleResponse>;
   /** 创建全球加速实例 {@link CreateGlobalAcceleratorRequest} {@link CreateGlobalAcceleratorResponse} */
@@ -839,6 +927,8 @@ declare interface Ga2 {
   DeleteAccelerateAreas(data: DeleteAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccelerateAreasResponse>;
   /** 删除终端节点组 {@link DeleteEndpointGroupsRequest} {@link DeleteEndpointGroupsResponse} */
   DeleteEndpointGroups(data: DeleteEndpointGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndpointGroupsResponse>;
+  /** 删除七层转发策略 {@link DeleteForwardingPolicyRequest} {@link DeleteForwardingPolicyResponse} */
+  DeleteForwardingPolicy(data: DeleteForwardingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardingPolicyResponse>;
   /** 删除七层转发规则 {@link DeleteForwardingRuleRequest} {@link DeleteForwardingRuleResponse} */
   DeleteForwardingRule(data: DeleteForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardingRuleResponse>;
   /** 删除全球加速实例 {@link DeleteGlobalAcceleratorRequest} {@link DeleteGlobalAcceleratorResponse} */
@@ -853,6 +943,8 @@ declare interface Ga2 {
   DescribeCrossBorderSettlement(data: DescribeCrossBorderSettlementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderSettlementResponse>;
   /** 查询终端节点组 {@link DescribeEndpointGroupsRequest} {@link DescribeEndpointGroupsResponse} */
   DescribeEndpointGroups(data: DescribeEndpointGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndpointGroupsResponse>;
+  /** 查看七层转发策略 {@link DescribeForwardingPolicyRequest} {@link DescribeForwardingPolicyResponse} */
+  DescribeForwardingPolicy(data: DescribeForwardingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardingPolicyResponse>;
   /** 查看七层转发规则 {@link DescribeForwardingRuleRequest} {@link DescribeForwardingRuleResponse} */
   DescribeForwardingRule(data: DescribeForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardingRuleResponse>;
   /** 查询全球加速实例 {@link DescribeGlobalAcceleratorsRequest} {@link DescribeGlobalAcceleratorsResponse} */
@@ -865,6 +957,8 @@ declare interface Ga2 {
   ModifyAccelerateAreas(data: ModifyAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccelerateAreasResponse>;
   /** 修改终端节点组 {@link ModifyEndpointGroupRequest} {@link ModifyEndpointGroupResponse} */
   ModifyEndpointGroup(data: ModifyEndpointGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEndpointGroupResponse>;
+  /** 修改七层转发策略 {@link ModifyForwardingPolicyRequest} {@link ModifyForwardingPolicyResponse} */
+  ModifyForwardingPolicy(data: ModifyForwardingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardingPolicyResponse>;
   /** 修改七层转发规则 {@link ModifyForwardingRuleRequest} {@link ModifyForwardingRuleResponse} */
   ModifyForwardingRule(data: ModifyForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardingRuleResponse>;
   /** 修改全球加速实例 {@link ModifyGlobalAcceleratorRequest} {@link ModifyGlobalAcceleratorResponse} */
