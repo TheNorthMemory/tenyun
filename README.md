@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 252+ 款产品，14258+ 服务数</summary>
+<details><summary>共计 252+ 款产品，14264+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -218,7 +218,7 @@ dts | [数据传输服务](https://cloud.tencent.com/document/product/571) | 202
 eb | [事件总线](https://cloud.tencent.com/document/product/1359) | 2021-04-16(32) |
 ecc | [英文作文批改](https://cloud.tencent.com/document/product/1076) | 2018-12-13(4) |
 ecdn | [全站加速网络](https://cloud.tencent.com/document/product/570) | 2019-10-12(6) |
-ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 2019-07-19(139) |
+ecm | [边缘计算机器](https://cloud.tencent.com/document/product/1108) | 2019-07-19(132) |
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(101) |
@@ -246,7 +246,7 @@ iap | [身份识别平台](https://cloud.tencent.com/document/product/1782) | 20
 ic | [图片瘦身](https://cloud.tencent.com/document/product/636) | 2019-03-07(9) |
 icr | [对话机器人](https://cloud.tencent.com/document/product/1268) | 2021-10-14(1) |
 ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-04(10) |
-ig | [智能导诊](https://cloud.tencent.com/document/product/1273) | 2021-05-18(1) |
+ig | [智能导诊](https://cloud.tencent.com/document/product/1273) | 2021-05-18(6) |
 igtm | [智能全局流量管理](https://cloud.tencent.com/document/product/1551) | 2023-10-24(28) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(43) |
@@ -314,7 +314,7 @@ tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(24) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(52) |
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(82+211) |
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(90+211) |
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(21+7) |
 tccatalog | [多模态智能数据湖 TCLake](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(2) |

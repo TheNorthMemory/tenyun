@@ -20,7 +20,7 @@ declare interface AbuseReport {
   SourceIp?: string;
   /** 数据时间 */
   InsertTime?: string;
-  /** 模板id */
+  /** 模板ID */
   TemplateId?: string;
   /** bulkId */
   BulkId?: string;

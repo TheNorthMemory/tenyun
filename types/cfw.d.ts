@@ -212,6 +212,8 @@ declare interface CcnAssociatedInstance {
   CidrLst?: string[] | null;
   /** 实例所属地域 */
   InstanceRegion?: string;
+  /** 是否跨账号 */
+  IsCrossInstance?: number;
 }
 
 /** ccn实例开关信息 */
@@ -1254,7 +1256,7 @@ declare interface RegionCidrConfig {
 declare interface RegionFwStatus {
   /** 地域 */
   Region?: string;
-  /** 引流网络部署状态1. "NotDeployed" 防火墙集群未部署2. "Deployed" 防火墙集群已部署，但未创建引流网络3. "Auto" 防火墙集群已部署，并自动选择网段创建了引流网络4. "Custom" 防火墙集群已部署，并根据用户自定义网段创建了引流网络 */
+  /** 引流网络部署状态&quot;NotDeployed&quot; 防火墙集群未部署&quot;Deployed&quot; 防火墙集群已部署，但未创建引流网络&quot;DeployedCustomOnly&quot; 防火墙集群已部署，但内网段被全覆盖，无法自动选择引流网络，需自定义设置引流网段&quot;Auto&quot; 防火墙集群已部署，并自动选择网段创建了引流网络&quot;Custom&quot; 防火墙集群已部署，并根据用户自定义网段创建了引流网络 */
   Status?: string;
   /** 引流网络的cidr，如果没有部署引流网络则为空 */
   Cidr?: string;

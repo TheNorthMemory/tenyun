@@ -226,6 +226,14 @@ declare interface DescribeCreateMySQLResult {
   FreezeStatus?: boolean;
 }
 
+/** 查询资源权限返回结果 */
+declare interface DescribeResourcePermissionResult {
+  /** 查询到的资源总数 */
+  TotalCount?: number;
+  /** 资源权限列表 */
+  PermissionList?: ResourcePermission[];
+}
+
 /** 查询用户返回结果 */
 declare interface DescribeUserListResp {
   /** 用户总数 */
@@ -788,6 +796,74 @@ declare interface MgoKeySchema {
   MgoIsSparse?: boolean;
 }
 
+/** migration 执行计划冲突项 */
+declare interface MigrationConflict {
+  /** migration 版本号参数格式：纯数字，14位时间格式 */
+  Version?: string;
+  /** migration 版本名参数格式：仅允许小写字母和下划线 */
+  Name?: string;
+  /** 数据库已应用migration的版本名参数格式：仅允许小写字母和下划线 */
+  RemoteName?: string;
+  /** 本次sql计算出来的checksum */
+  LocalChecksum?: string;
+  /** 已应用的migration，数据库存储的checksum */
+  RemoteChecksum?: string;
+  /** 归入该分组的原因 */
+  Reason?: string;
+  /** 冲突信息 */
+  Message?: string;
+}
+
+/** 结构化 SQL migration 信息 */
+declare interface MigrationInput {
+  /** migration 版本号参数格式：纯数字，14位时间格式 */
+  Version: string;
+  /** migration 版本名入参限制：仅允许小写字母和下划线 */
+  Name: string;
+  /** migration 应用 sql 语句 */
+  Query: string;
+  /** migration 回滚 sql 语句 */
+  Rollback?: string;
+}
+
+/** migration 执行计划 */
+declare interface MigrationPlanItem {
+  /** migration 版本号参数格式：纯数字，14位时间格式 */
+  Version?: string;
+  /** migration 版本名参数格式：仅允许小写字母和下划线 */
+  Name?: string;
+  /** migration query sql checksum服务端自动生成，同版本不同checksum会拒绝执行 */
+  Checksum?: string;
+  /** 状态枚举值：applied： 已应用pending： 待执行 */
+  Status?: string;
+  /** 标记请求来源 */
+  Source?: string;
+  /** 被归入该分组的原因，比如not_applied、checksum_matched */
+  Reason?: string;
+}
+
+/** migration 列表 */
+declare interface MigrationSummary {
+  /** migration 版本号参数格式：纯数字，14位时间格式 */
+  Version?: string;
+  /** migration 版本名参数格式：仅允许小写字母和下划线 */
+  Name?: string;
+  /** migration query sql 语句checksum服务端自动生成，同版本不同checksum会拒绝执行 */
+  Checksum?: string;
+  /** 应用时间 */
+  AppliedAt?: string;
+  /** 请求来源 */
+  Source?: string;
+  /** migration 创建时间 */
+  CreatedBy?: string;
+}
+
+/** 修改资源基础权限结果 */
+declare interface ModifyResourcePermissionResult {
+  /** 是否成功 */
+  Success?: boolean;
+}
+
 /** 修改用户返回值 */
 declare interface ModifyUserResp {
   /** 是否成功 */
@@ -1020,6 +1096,18 @@ declare interface ProviderResponseParametersMap {
   PhoneNumber?: string | null;
   /** 用户角色/分组（groups）的映射字段名。对应 OIDC 标准中的 groups 字段，值为第三方平台返回的用户信息 JSON 中表示用户所属角色或分组的字段路径。支持字符串数组类型的返回值。 */
   Groups?: string | null;
+}
+
+/** 资源权限 */
+declare interface ResourcePermission {
+  /** 资源类型。 */
+  ResourceType?: string;
+  /** 资源标识 */
+  Resource?: string;
+  /** 权限级别。取值：READONLY、PRIVATE、ADMINWRITE、ADMINONLY、CUSTOM。 */
+  Permission?: string;
+  /** 自定义安全规则配置，当 Permission 为 CUSTOM 时返回。 */
+  SecurityRule?: string;
 }
 
 /** 自定义短信服务商模板配置 */
@@ -2216,6 +2304,38 @@ declare interface DescribeMySQLTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribePGUserMigrationRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 版本号参数格式：14位时间格式入参限制：纯数字 */
+  MigrationVersion: string;
+}
+
+declare interface DescribePGUserMigrationResponse {
+  /** 版本号参数格式：纯数字，14位时间格式 */
+  Version?: string;
+  /** 版本名参数格式：只允许小写字母和下划线 */
+  Name?: string;
+  /** 要执行的migration sql 语句 */
+  Query?: string;
+  /** 回滚的sql 语句 */
+  Rollback?: string;
+  /** migration query 语句的checksum值由服务端自动生成，同版本 checksum 不一致会拒绝执行 */
+  Checksum?: string;
+  /** 用于标记调用来源 */
+  Source?: string;
+  /** 用于标记该条migration由谁创建，目前默认调用的用户uin */
+  CreatedBy?: string;
+  /** 该migration创建时间 */
+  CreatedAt?: string;
+  /** 该migration应用时间 */
+  AppliedAt?: string;
+  /** 该migration执行耗时单位：毫秒 */
+  DurationMs?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQuotaDataRequest {
   /** 环境ID */
   EnvId: string;
@@ -2232,6 +2352,22 @@ declare interface DescribeQuotaDataResponse {
   Value?: number;
   /** 指标的附加值信息 */
   SubValue?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourcePermissionRequest {
+  /** 环境 ID */
+  EnvId: string;
+  /** 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表 ``示例值：`table`。 */
+  ResourceType: string;
+  /** 资源标识列表。云函数不传或传空数组、云存储传存储桶名、数据库表传表名，不能超过100条。 */
+  Resources?: string[];
+}
+
+declare interface DescribeResourcePermissionResponse {
+  /** 查询资源权限返回结果 */
+  Data?: DescribeResourcePermissionResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2462,6 +2598,26 @@ declare interface InquireVmPriceResponse {
   RequestId?: string;
 }
 
+declare interface ListPGUserMigrationsRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 查询条数取值范围：[1, 500]默认值：100 */
+  Limit?: number;
+  /** 分页偏移默认值：0 */
+  Offset?: number;
+}
+
+declare interface ListPGUserMigrationsResponse {
+  /** 总数量 */
+  Total?: number;
+  /** 已应用最新版本号参数格式：纯数字，14位时间格式 */
+  LatestVersion?: string;
+  /** 已应用migration列表 */
+  Migrations?: MigrationSummary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTablesRequest {
   /** 每页返回数量（0-1000) */
   MgoLimit: number;
@@ -2632,6 +2788,26 @@ declare interface ModifyProviderResponse {
   RequestId?: string;
 }
 
+declare interface ModifyResourcePermissionRequest {
+  /** 环境 ID */
+  EnvId: string;
+  /** 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表。 */
+  ResourceType: string;
+  /** 权限级别。可选值：- SQL型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限 。- 文档型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限；`CUSTOM`-自定义安全规则 。- 云函数：`CUSTOM`-自定义安全规则 。- 云存储（权限标签）：`READONLY`-所有用户可读，仅创建者和管理员可写；`PRIVATE`-仅创建者及管理员可读写；`ADMINWRITE`-所有用户可读，仅管理员可写；`ADMINONLY`-仅管理员可读写；`CUSTOM`-自定义安全规则。 */
+  Permission: string;
+  /** 资源标识。云函数可不传、云存储传存储桶名、数据库表传表名。 */
+  Resource?: string;
+  /** 自定义安全规则配置，当Permission为 `CUSTOM`时必传。JSON字符串格式的规则表达式。配置参考：[云函数安全规则](https://docs.cloudbase.net/cloud-function/security-rules)、[云存储安全规则](https://docs.cloudbase.net/storage/security-rules)、[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)。 */
+  SecurityRule?: string;
+}
+
+declare interface ModifyResourcePermissionResponse {
+  /** 修改结果 */
+  Data?: ModifyResourcePermissionResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySafeRuleRequest {
   /** 环境ID */
   EnvId: string;
@@ -2692,6 +2868,48 @@ declare interface ModifyUserResponse {
   RequestId?: string;
 }
 
+declare interface PreviewPGUserMigrationsRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 预览要执行的migration 列表 */
+  Migrations: MigrationInput[];
+  /** 标记请求来源 */
+  Source?: string;
+}
+
+declare interface PreviewPGUserMigrationsResponse {
+  /** 将要执行的migration列表 */
+  Pending?: MigrationPlanItem[];
+  /** 已经应用的migration列表 */
+  Applied?: MigrationPlanItem[];
+  /** 版本相同但 checksum 不一致冲突的migration列表 */
+  Conflicts?: MigrationConflict[];
+  /** 是否可直接执行；当前仅表示没有 checksum 冲突 */
+  Executable?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PushPGUserMigrationsRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 结构化 SQL migration 列表；每项包含 Query SQL 内容 */
+  Migrations: MigrationInput[];
+  /** 等待获取数据库锁的最长时间单位：毫秒默认值：5000 */
+  LockTimeoutMs?: number;
+  /** 单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句单位：毫秒默认值：300000 */
+  StatementTimeoutMs?: number;
+  /** 标记请求来源 */
+  Source?: string;
+}
+
+declare interface PushPGUserMigrationsResponse {
+  /** 任务ID可通过DescribeTaskResult 接口查询进度 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReleaseEnvRequest {
   /** 环境ID */
   EnvId?: string;
@@ -2714,6 +2932,52 @@ declare interface RenewEnvRequest {
 }
 
 declare interface RenewEnvResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RepairPGUserMigrationHistoryRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** migration版本参数格式：14位时间格式入参限制：纯数字 */
+  MigrationVersion: string;
+  /** migration 版本名入参限制：限制小写字母和下划线 */
+  Name: string;
+  /** 状态枚举值：applied： 已应用reverted： 表示删除 history 记录 */
+  Status: string;
+  /** 修复原因 */
+  Reason: string;
+  /** applied的时候填写，记录应用的sql语句 */
+  Query?: string;
+}
+
+declare interface RepairPGUserMigrationHistoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RollbackPGUserMigrationsRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 要回滚的条数按照逆序回滚最近N条migration */
+  LastN: number;
+  /** 等待获取数据库锁的最长时间单位：毫秒默认值：5000 */
+  LockTimeoutMs?: number;
+  /** 单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句单位：毫秒默认值：300000 */
+  StatementTimeoutMs?: number;
+  /** 标记API调用来源 */
+  Source?: string;
+}
+
+declare interface RollbackPGUserMigrationsResponse {
+  /** 任务ID可通过DescribeTaskResult 接口查询进度 */
+  TaskId?: string;
+  /** 已成功回滚并删除 history 的 migration */
+  RolledBack?: MigrationSummary[];
+  /** 未提供 Rollback SQL、视为成功并删除 history 的 migration */
+  SkippedRollbackSql?: MigrationSummary[];
+  /** 执行 Rollback SQL 失败的 migration，可为空 */
+  Failed?: MigrationSummary;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2937,8 +3201,12 @@ declare interface Tcb {
   DescribeMySQLClusterDetail(data: DescribeMySQLClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLClusterDetailResponse>;
   /** 销毁Mysql结果查询 {@link DescribeMySQLTaskStatusRequest} {@link DescribeMySQLTaskStatusResponse} */
   DescribeMySQLTaskStatus(data: DescribeMySQLTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLTaskStatusResponse>;
+  /** 查看指定环境单条 migration 详情 {@link DescribePGUserMigrationRequest} {@link DescribePGUserMigrationResponse} */
+  DescribePGUserMigration(data: DescribePGUserMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePGUserMigrationResponse>;
   /** 查询环境的配额使用量 {@link DescribeQuotaDataRequest} {@link DescribeQuotaDataResponse} */
   DescribeQuotaData(data: DescribeQuotaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaDataResponse>;
+  /** 查询资源基础权限 {@link DescribeResourcePermissionRequest} {@link DescribeResourcePermissionResponse} */
+  DescribeResourcePermission(data: DescribeResourcePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcePermissionResponse>;
   /** 查询数据库安全规则 {@link DescribeSafeRuleRequest} {@link DescribeSafeRuleResponse} */
   DescribeSafeRule(data: DescribeSafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSafeRuleResponse>;
   /** 查看静态托管资源信息 {@link DescribeStaticStoreRequest} {@link DescribeStaticStoreResponse} */
@@ -2965,6 +3233,8 @@ declare interface Tcb {
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
   /** 查询云服务器价格 {@link InquireVmPriceRequest} {@link InquireVmPriceResponse} */
   InquireVmPrice(data: InquireVmPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireVmPriceResponse>;
+  /** 查询目标环境已应用的 Migration {@link ListPGUserMigrationsRequest} {@link ListPGUserMigrationsResponse} */
+  ListPGUserMigrations(data: ListPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPGUserMigrationsResponse>;
   /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
   /** 修改应用客户端 {@link ModifyClientRequest} {@link ModifyClientResponse} */
@@ -2983,16 +3253,26 @@ declare interface Tcb {
   ModifyLoginConfig(data: ModifyLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginConfigResponse>;
   /** 修改第三方认证源 {@link ModifyProviderRequest} {@link ModifyProviderResponse} */
   ModifyProvider(data: ModifyProviderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProviderResponse>;
+  /** 修改资源基础权限 {@link ModifyResourcePermissionRequest} {@link ModifyResourcePermissionResponse} */
+  ModifyResourcePermission(data: ModifyResourcePermissionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourcePermissionResponse>;
   /** 设置数据库安全规则 {@link ModifySafeRuleRequest} {@link ModifySafeRuleResponse} */
   ModifySafeRule(data: ModifySafeRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySafeRuleResponse>;
   /** 更新云存储外部数据源 {@link ModifyStorageSourceRequest} {@link ModifyStorageSourceResponse} */
   ModifyStorageSource(data: ModifyStorageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStorageSourceResponse>;
   /** 更新tcb用户 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
+  /** 预览SQL migrations 在远端的执行计划，不实际执行 SQL {@link PreviewPGUserMigrationsRequest} {@link PreviewPGUserMigrationsResponse} */
+  PreviewPGUserMigrations(data: PreviewPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewPGUserMigrationsResponse>;
+  /** 批量应用 Migrations {@link PushPGUserMigrationsRequest} {@link PushPGUserMigrationsResponse} */
+  PushPGUserMigrations(data: PushPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<PushPGUserMigrationsResponse>;
   /** 释放从环境池里分配的环境 {@link ReleaseEnvRequest} {@link ReleaseEnvResponse} */
   ReleaseEnv(data?: ReleaseEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseEnvResponse>;
   /** 续费云开发环境 {@link RenewEnvRequest} {@link RenewEnvResponse} */
   RenewEnv(data: RenewEnvRequest, config?: AxiosRequestConfig): AxiosPromise<RenewEnvResponse>;
+  /** 修复Migration History {@link RepairPGUserMigrationHistoryRequest} {@link RepairPGUserMigrationHistoryResponse} */
+  RepairPGUserMigrationHistory(data: RepairPGUserMigrationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<RepairPGUserMigrationHistoryResponse>;
+  /** 回滚 Migration {@link RollbackPGUserMigrationsRequest} {@link RollbackPGUserMigrationsResponse} */
+  RollbackPGUserMigrations(data: RollbackPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackPGUserMigrationsResponse>;
   /** 执行文档型数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
   RunCommands(data: RunCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandsResponse>;
   /** 执行MySQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */

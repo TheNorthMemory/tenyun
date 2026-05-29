@@ -82,11 +82,13 @@ declare interface PutEventResponse {
 
 declare interface PutMessageRequest {
   /** 事件ID */
-  EventId: string;
+  EventId?: string;
   /** 需要推送的事件数据内容，格式为json，字段定义需要与事件中的定义一致 */
   Data?: string;
   /** 数据推送来源，会在生成的单据中展示数据来源 */
   Source?: string;
+  /** 插件ID */
+  PluginId?: string;
 }
 
 declare interface PutMessageResponse {
@@ -108,7 +110,7 @@ declare interface Evt {
   /** 推送事件 {@link PutEventRequest} {@link PutEventResponse} */
   PutEvent(data: PutEventRequest, config?: AxiosRequestConfig): AxiosPromise<PutEventResponse>;
   /** 推送消息 {@link PutMessageRequest} {@link PutMessageResponse} */
-  PutMessage(data: PutMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PutMessageResponse>;
+  PutMessage(data?: PutMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PutMessageResponse>;
 }
 
 export declare type Versions = ["2025-02-17"];

@@ -148,6 +148,16 @@ declare interface ComputeNodeOverview {
   NodeId?: string;
 }
 
+/** COS挂载信息 */
+declare interface CosOption {
+  /** 文件系统本地挂载路径。 */
+  LocalPath: string;
+  /** COS桶地址，可以在COS桶详情页查看。 */
+  RemotePath: string;
+  /** cosfs2挂载工具支持的参数。 */
+  MountParamsOption?: string;
+}
+
 /** 描述了数据盘的信息 */
 declare interface DataDisk {
   /** 数据盘大小，单位：GB。最小调整步长为10G，不同数据盘类型取值范围不同，具体限制详见：[存储概述](https://cloud.tencent.com/document/product/213/4952)。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
@@ -234,8 +244,10 @@ declare interface GooseFSOption {
   LocalPath: string;
   /** 文件系统远程挂载路径。 */
   RemotePath: string;
-  /** 文件系统master的ip和端口。 */
-  Masters: string[];
+  /** 文件系统master的ip和端口，此参数和FileSystemId互斥。 */
+  Masters?: string[];
+  /** GooseFS的文件ID；此参数和Masters 互斥。 */
+  FileSystemId?: string;
 }
 
 /** GooseFS存储选项概览信息。 */
@@ -659,7 +671,9 @@ declare interface StorageOption {
   /** 集群挂载GooseFS文件系统选项。 */
   GooseFSOptions?: GooseFSOption[];
   /** 集群挂载GooseFSx文件系统选项。 */
-  GooseFSxOptions?: GooseFSxOption[] | null;
+  GooseFSxOptions?: GooseFSxOption[];
+  /** 集群挂载COS文件系统选项。 */
+  CosOptions?: CosOption[];
 }
 
 /** 集群存储选项概览信息。 */

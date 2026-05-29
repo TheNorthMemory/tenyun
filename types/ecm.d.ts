@@ -134,90 +134,6 @@ declare interface DataDisk {
   DiskType?: string;
 }
 
-/** 描述了云硬盘的详细信息 */
-declare interface Disk {
-  /** 云盘是否与挂载的实例一起销毁。true:销毁实例时会同时销毁云盘，只支持按小时后付费云盘。false：销毁实例时不销毁云盘。 */
-  DeleteWithInstance: boolean | null;
-  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费。 */
-  RenewFlag?: string | null;
-  /** 硬盘介质类型。取值范围：CLOUD_BASIC：表示普通云硬盘CLOUD_PREMIUM：表示高性能云硬盘CLOUD_SSD：表示SSD云硬盘CLOUD_HSSD：表示增强型SSD云硬盘CLOUD_TSSD：表示极速型SSD云硬盘。 */
-  DiskType?: string;
-  /** 云盘状态。取值范围：UNATTACHED：未挂载ATTACHING：挂载中ATTACHED：已挂载DETACHING：解挂中EXPANDING：扩容中ROLLBACKING：回滚中TORECYCLE：待回收DUMPING：拷贝硬盘中。 */
-  DiskState?: string;
-  /** 云盘拥有的快照总数。 */
-  SnapshotCount: number;
-  /** 云盘已挂载到子机，且子机与云盘都是包年包月。true：子机设置了自动续费标识，但云盘未设置false：云盘自动续费标识正常。 */
-  AutoRenewFlagError?: boolean | null;
-  /** 云盘是否处于快照回滚状态。取值范围：false:表示不处于快照回滚状态true:表示处于快照回滚状态。 */
-  Rollbacking?: boolean;
-  /** 对于非共享型云盘，该参数为空数组。对于共享型云盘，则表示该云盘当前被挂载到的CVM实例InstanceId */
-  InstanceIdList: string[];
-  /** 云盘是否为加密盘。取值范围：false:表示非加密盘true:表示加密盘。 */
-  Encrypt?: boolean;
-  /** 云硬盘名称。 */
-  DiskName?: string;
-  /** 云硬盘因欠费销毁或者到期销毁时， 是否使用快照备份数据的标识。true表示销毁时创建快照进行数据备份。false表示直接销毁，不进行数据备份。 */
-  BackupDisk: boolean;
-  /** 与云盘绑定的标签，云盘未绑定标签则取值为空。 */
-  Tags: Tag[] | null;
-  /** 云硬盘挂载的云主机ID。 */
-  InstanceId?: string;
-  /** 云盘关联的定期快照ID。只有在调用DescribeDisks接口时，入参ReturnBindAutoSnapshotPolicy取值为TRUE才会返回该参数。 */
-  AutoSnapshotPolicyIds?: string[] | null;
-  /** 云硬盘额外性能值，单位MB/s。 */
-  ThroughputPerformance: number | null;
-  /** 云盘是否处于类型变更中。取值范围：false:表示云盘不处于类型变更中true:表示云盘已发起类型变更，正处于迁移中。 */
-  Migrating: boolean | null;
-  /** 云硬盘ID。 */
-  DiskId?: string;
-  /** 云盘拥有的快照总容量，单位为MB。 */
-  SnapshotSize: number;
-  /** 云硬盘所在的位置。 */
-  Placement?: Placement;
-  /** 判断预付费的云盘是否支持主动退还。true:支持主动退还false:不支持主动退还。 */
-  IsReturnable?: boolean | null;
-  /** 云盘是否挂载到云主机上。取值范围：false:表示未挂载true:表示已挂载。 */
-  Attached?: boolean;
-  /** 云硬盘大小，单位GB。 */
-  DiskSize?: number;
-  /** 云盘类型变更的迁移进度，取值0到100。 */
-  MigratePercent: number | null;
-  /** 云硬盘类型。取值范围：SYSTEM_DISK：系统盘DATA_DISK：数据盘。 */
-  DiskUsage?: string;
-  /** 付费模式。取值范围：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：后付费，即按量计费。 */
-  DiskChargeType?: string;
-  /** 是否为弹性云盘，false表示非弹性云盘，true表示弹性云盘。 */
-  Portable?: boolean;
-  /** 云盘是否具备创建快照的能力。取值范围：false表示不具备true表示具备。 */
-  SnapshotAbility?: boolean;
-  /** 在云盘已挂载到实例，且实例与云盘都是包年包月的条件下，此字段才有意义。true:云盘到期时间早于实例。false：云盘到期时间晚于实例。 */
-  DeadlineError?: boolean | null;
-  /** 云盘快照回滚的进度。 */
-  RollbackPercent?: number;
-  /** 当前时间距离盘到期的天数（仅对预付费盘有意义）。 */
-  DifferDaysOfDeadline: number | null;
-  /** 预付费云盘在不支持主动退还的情况下，该参数表明不支持主动退还的具体原因。取值范围：1：云硬盘已经退还2：云硬盘已过期3：云盘不支持退还8：超过可退还数量的限制。 */
-  ReturnFailCode?: number | null;
-  /** 云盘是否为共享型云盘。 */
-  Shareable: boolean;
-  /** 云硬盘的创建时间。 */
-  CreateTime?: string;
-  /** 云硬盘的到期时间。 */
-  DeadlineTime: string;
-  /** 云盘的挂载类型。取值范围：PF: PF挂载VF: VF挂载 */
-  AttachMode: string | null;
-}
-
-/** 描述了实例的计费模式 */
-declare interface DiskChargePrepaid {
-  /** 购买云盘的时长，默认单位为月，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。 */
-  Period: number;
-  /** 自动续费标识。取值范围：NOTIFY_AND_AUTO_RENEW：通知过期且自动续费NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。 */
-  RenewFlag?: string;
-  /** 需要将云盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，云盘会自动按对齐到子机续费后的到期时间续费，示例取值：2018-03-30 20:15:03。 */
-  CurInstanceDeadline?: string;
-}
-
 /** 磁盘信息 */
 declare interface DiskInfo {
   /** 磁盘类型：LOCAL_BASIC */
@@ -1036,34 +952,20 @@ declare interface PhysicalPosition {
   SwitchId?: string | null;
 }
 
-/** 描述了实例的抽象位置，包括其所在的可用区，所属的项目，以及所属的独享集群的ID和名字。 */
-declare interface Placement {
-  /** 云硬盘所属的[可用区](/document/product/213/15753)。该参数也可以通过调用 [DescribeZones](/document/product/213/15707) 的返回值中的Zone字段来获取。 */
-  Zone: string;
-  /** 围笼Id。作为入参时，表示对指定的CageId的资源进行操作，可为空。 作为出参时，表示资源所属围笼ID，可为空。 */
-  CageId?: string | null;
-  /** 实例所属项目ID。该参数可以通过调用 [DescribeProject](/document/api/378/4400) 的返回值中的 projectId 字段来获取。不填为默认项目。 */
-  ProjectId?: number;
-  /** 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。 */
-  CdcName?: string | null;
-  /** 实例所属的独享集群ID。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。 */
-  CdcId?: string | null;
-}
-
 /** 描述实例的位置相关信息。 */
 declare interface Position {
   /** 实例所在的Zone的信息。 */
-  ZoneInfo: ZoneInfo;
+  ZoneInfo?: ZoneInfo;
   /** 实例所在的国家的信息。 */
-  Country: Country;
+  Country?: Country;
   /** 实例所在的Area的信息。 */
-  Area: Area;
+  Area?: Area;
   /** 实例所在的省份的信息。 */
-  Province: Province;
+  Province?: Province;
   /** 实例所在的城市的信息。 */
-  City: City;
+  City?: City;
   /** 实例所在的Region的信息。 */
-  RegionInfo: RegionInfo;
+  RegionInfo?: RegionInfo;
   /** 实例是否支持ipv6 */
   Ipv6Supported?: boolean | null;
 }
@@ -1324,48 +1226,6 @@ declare interface SimpleModule {
   ModuleName: string;
 }
 
-/** 描述了快照的详细信息 */
-declare interface Snapshot {
-  /** 快照所在的位置。 */
-  Placement?: Placement;
-  /** 是否为跨地域复制的快照。取值范围：true：表示为跨地域复制的快照。false:本地域的快照。 */
-  CopyFromRemote: boolean;
-  /** 是否为永久快照。取值范围：true：永久快照false：非永久快照。 */
-  IsPermanent?: boolean;
-  /** 快照名称，用户自定义的快照别名。调用[ModifySnapshotAttribute](/document/product/362/15650)可修改此字段。 */
-  SnapshotName?: string;
-  /** 快照创建进度百分比，快照创建成功后此字段恒为100。 */
-  Percent?: number;
-  /** 快照关联的镜像列表。 */
-  Images: Image[];
-  /** 快照当前被共享数。 */
-  ShareReference: number;
-  /** 快照类型，目前该项取值可以为PRIVATE_SNAPSHOT或者SHARED_SNAPSHOT */
-  SnapshotType: string;
-  /** 创建此快照的云硬盘大小，单位GB。 */
-  DiskSize?: number;
-  /** 创建此快照的云硬盘ID。 */
-  DiskId?: string;
-  /** 快照正在跨地域复制的目的地域，默认取值为[]。 */
-  CopyingToRegions: string[];
-  /** 快照ID。 */
-  SnapshotId?: string;
-  /** 创建此快照的云硬盘类型。取值范围：SYSTEM_DISK：系统盘DATA_DISK：数据盘。 */
-  DiskUsage?: string;
-  /** 是否为加密盘创建的快照。取值范围：true：该快照为加密盘创建的false:非加密盘创建的快照。 */
-  Encrypt?: boolean;
-  /** 快照的创建时间。 */
-  CreateTime?: string;
-  /** 快照关联的镜像个数。 */
-  ImageCount: number;
-  /** 快照的状态。取值范围：NORMAL：正常CREATING：创建中ROLLBACKING：回滚中COPYING_FROM_REMOTE：跨地域复制中CHECKING_COPIED：复制校验中TORECYCLE：待回收。 */
-  SnapshotState?: string;
-  /** 快照的到期时间。 */
-  DeadlineTime: string;
-  /** 快照开始共享的时间。 */
-  TimeStartShare: string | null;
-}
-
 /** 镜像来源信息 */
 declare interface SrcImage {
   /** 镜像id */
@@ -1455,9 +1315,9 @@ declare interface Tag {
 /** 标签信息。 */
 declare interface TagInfo {
   /** 标签的键。 */
-  TagKey?: string;
+  TagKey?: string | null;
   /** 标签的值。 */
-  TagValue?: string;
+  TagValue?: string | null;
 }
 
 /** 资源类型的Tag */
@@ -1798,22 +1658,6 @@ declare interface AssociateSecurityGroupsResponse {
   RequestId?: string;
 }
 
-declare interface AttachDisksRequest {
-  /** 云服务器实例ID。云盘将被挂载到此云服务器上，通过[DescribeInstances](/document/product/213/15728)接口查询。 */
-  InstanceId: string;
-  /** 将要被挂载的弹性云盘ID。通过[DescribeDisks](/document/product/362/16315)接口查询。单次最多可挂载10块弹性云盘。 */
-  DiskIds: string[];
-  /** 可选参数，不传该参数则仅执行挂载操作。传入`True`时，会在挂载成功后将云硬盘设置为随云主机销毁模式，仅对按量计费云硬盘有效。 */
-  DeleteWithInstance?: boolean;
-  /** 可选参数，用于控制云盘挂载时使用的挂载模式，目前仅对黑石裸金属机型有效。取值范围：PFVF */
-  AttachMode?: string;
-}
-
-declare interface AttachDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface AttachNetworkInterfaceRequest {
   /** 弹性网卡实例ID，例如：eni-m6dyj72l。 */
   NetworkInterfaceId: string;
@@ -1864,42 +1708,6 @@ declare interface BatchRegisterTargetsRequest {
 declare interface BatchRegisterTargetsResponse {
   /** 绑定失败的监听器ID，如为空表示全部绑定成功。 */
   FailListenerIdSet?: string[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateDisksRequest {
-  /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目。若不指定项目，将在默认项目下进行创建。 */
-  Placement: Placement;
-  /** 云硬盘计费类型。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDCPAID：独享集群付费各类型价格请参考云硬盘[价格总览](/document/product/362/2413)。 */
-  DiskChargeType: string;
-  /** 硬盘介质类型。取值范围：CLOUD_BASIC：表示普通云硬盘CLOUD_PREMIUM：表示高性能云硬盘CLOUD_SSD：表示SSD云硬盘CLOUD_HSSD：表示增强型SSD云硬盘CLOUD_TSSD：表示极速型SSD云硬盘。 */
-  DiskType: string;
-  /** 云盘显示名称。不传则默认为“未命名”。最大长度不能超60个字节。 */
-  DiskName?: string;
-  /** 云盘绑定的标签。 */
-  Tags?: Tag[];
-  /** 预付费模式，即包年包月相关参数设置。通过该参数指定包年包月云盘的购买时长、是否设置自动续费等属性。创建预付费云盘该参数必传，创建按小时后付费云盘无需传该参数。 */
-  DiskChargePrepaid?: DiskChargePrepaid;
-  /** 创建云硬盘数量，不传则默认为1。单次请求最多可创建的云盘数有限制，具体参见[云硬盘使用限制](https://cloud.tencent.com/doc/product/362/5145)。 */
-  DiskCount?: number;
-  /** 可选参数。使用此参数可给云硬盘购买额外的性能。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD） */
-  ThroughputPerformance?: number;
-  /** 云硬盘大小，单位为GB。如果传入`SnapshotId`则可不传`DiskSize`，此时新建云盘的大小为快照大小如果传入`SnapshotId`同时传入`DiskSize`，则云盘大小必须大于或等于快照大小云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。 */
-  DiskSize?: number;
-  /** 可选参数，默认为False。传入True时，云盘将创建为共享型云盘。 */
-  Shareable?: boolean;
-  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
-  ClientToken?: string;
-  /** 传入该参数用于创建加密云盘，取值固定为ENCRYPT。 */
-  Encrypt?: string;
-  /** 快照ID，如果传入则根据此快照创建云硬盘，快照类型必须为数据盘快照，可通过[DescribeSnapshots](/document/product/362/15647)接口查询快照，见输出参数DiskUsage解释。 */
-  SnapshotId?: string;
-}
-
-declare interface CreateDisksResponse {
-  /** 创建的云硬盘ID列表。 */
-  DiskIdSet: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2308,18 +2116,6 @@ declare interface DeleteSecurityGroupResponse {
   RequestId?: string;
 }
 
-declare interface DeleteSnapshotsRequest {
-  /** 要删除的快照ID列表，可通过[DescribeSnapshots](/document/product/362/15647)查询。 */
-  SnapshotIds: string[];
-  /** 是否强制删除快照关联的镜像 */
-  DeleteBindImages?: boolean;
-}
-
-declare interface DeleteSnapshotsResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteSubnetRequest {
   /** 子网实例ID。可通过DescribeSubnets接口返回值中的SubnetId获取。 */
   SubnetId: string;
@@ -2361,7 +2157,7 @@ declare interface DescribeAddressesRequest {
   EcmRegion: string;
   /** 标识 EIP 的唯一 ID 列表。EIP 唯一 ID 形如：eip-11112222。参数不支持同时指定AddressIds和Filters。 */
   AddressIds?: string[];
-  /** 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定AddressIds和Filters。详细的过滤条件如下：address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的唯一 ID 过滤。EIP 唯一 ID 形如：eip-11112222。address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。取值范围：详见EIP状态列表。instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的实例 ID 过滤。实例 ID 形如：ins-11112222。private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常） */
+  /** 每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定AddressIds和Filters。详细的过滤条件如下：address-id - String - 是否必填：否 - （过滤条件）按照 EIP 的唯一 ID 过滤。EIP 唯一 ID 形如：eip-11112222。address-name - String - 是否必填：否 - （过滤条件）按照 EIP 名称过滤。不支持模糊过滤。address-ip - String - 是否必填：否 - （过滤条件）按照 EIP 的 IP 地址过滤。address-status - String - 是否必填：否 - （过滤条件）按照 EIP 的状态过滤。取值范围：详见EIP状态列表。instance-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的实例 ID 过滤。实例 ID 形如：ins-11112222。private-ip-address - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的内网 IP 过滤。network-interface-id - String - 是否必填：否 - （过滤条件）按照 EIP 绑定的弹性网卡 ID 过滤。弹性网卡 ID 形如：eni-11112222。is-arrears - String - 是否必填：否 - （过滤条件）按照 EIP 是否欠费进行过滤。（TRUE：EIP 处于欠费状态|FALSE：EIP 费用状态正常）address-type - String - 是否必填：否 - （过滤条件）按照 IP类型 进行过滤。可选值：'WanIP'：普通公网 IP, 'EIP'：弹性公网 IP。默认值是'EIP'。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -2450,32 +2246,6 @@ declare interface DescribeDefaultSubnetRequest {
 declare interface DescribeDefaultSubnetResponse {
   /** 默认子网信息，若无子网，则为空数据。 */
   Subnet?: Subnet;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeDisksRequest {
-  /** 过滤条件。参数不支持同时指定`DiskIds`和`Filters`。disk-usage - Array of String - 是否必填：否 -（过滤条件）按云盘类型过滤。 (SYSTEM_DISK：表示系统盘 | DATA_DISK：表示数据盘)disk-charge-type - Array of String - 是否必填：否 -（过滤条件）按照云硬盘计费模式过滤。 (PREPAID：表示预付费，即包年包月 | POSTPAID_BY_HOUR：表示后付费，即按量计费。)portable - Array of String - 是否必填：否 -（过滤条件）按是否为弹性云盘过滤。 (TRUE：表示弹性云盘 | FALSE：表示非弹性云盘。)project-id - Array of Integer - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。disk-id - Array of String - 是否必填：否 -（过滤条件）按照云硬盘ID过滤。云盘ID形如：`disk-11112222`。disk-name - Array of String - 是否必填：否 -（过滤条件）按照云盘名称过滤。disk-type - Array of String - 是否必填：否 -（过滤条件）按照云盘介质类型过滤。(CLOUD_BASIC：表示普通云硬盘 | CLOUD_PREMIUM：表示高性能云硬盘。| CLOUD_SSD：表示SSD云硬盘 | CLOUD_HSSD：表示增强型SSD云硬盘。| CLOUD_TSSD：表示极速型云硬盘。)disk-state - Array of String - 是否必填：否 -（过滤条件）按照云盘状态过滤。(UNATTACHED：未挂载 | ATTACHING：挂载中 | ATTACHED：已挂载 | DETACHING：解挂中 | EXPANDING：扩容中 | ROLLBACKING：回滚中 | TORECYCLE：待回收。)instance-id - Array of String - 是否必填：否 -（过滤条件）按照云盘挂载的云主机实例ID过滤。可根据此参数查询挂载在指定云主机下的云硬盘。zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。instance-ip-address - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载云主机的内网或外网IP过滤。instance-name - Array of String - 是否必填：否 -（过滤条件）按云盘所挂载的实例名称过滤。tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键进行过滤。tag-value - Array of String - 是否必填：否 -（过滤条件）照标签值进行过滤。tag:tag-key - Array of String - 是否必填：否 -（过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。 */
-  Filters?: Filter[];
-  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
-  Limit?: number;
-  /** 云盘列表排序的依据字段。取值范围：CREATE_TIME：依据云盘的创建时间排序DEADLINE：依据云盘的到期时间排序默认按云盘创建时间排序。 */
-  OrderField?: string;
-  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。 */
-  Offset?: number;
-  /** 云盘详情中是否需要返回云盘绑定的定期快照策略ID，TRUE表示需要返回，FALSE表示不返回。 */
-  ReturnBindAutoSnapshotPolicy?: boolean;
-  /** 按照一个或者多个云硬盘ID查询。云硬盘ID形如：`disk-11112222`，此参数的具体格式可参考API[简介](/document/product/362/15633)的ids.N一节）。参数不支持同时指定`DiskIds`和`Filters`。 */
-  DiskIds?: string[];
-  /** 输出云盘列表的排列顺序。取值范围：ASC：升序排列DESC：降序排列。 */
-  Order?: string;
-}
-
-declare interface DescribeDisksResponse {
-  /** 符合条件的云硬盘数量。 */
-  TotalCount: number;
-  /** 云硬盘的详细信息列表。 */
-  DiskSet: Disk[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2916,30 +2686,6 @@ declare interface DescribeSecurityGroupsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeSnapshotsRequest {
-  /** 要查询快照的ID列表。参数不支持同时指定`SnapshotIds`和`Filters`。 */
-  SnapshotIds?: string[];
-  /** 过滤条件。参数不支持同时指定`SnapshotIds`和`Filters`。snapshot-id - Array of String - 是否必填：否 -（过滤条件）按照快照的ID过滤。快照ID形如：`snap-11112222`。snapshot-name - Array of String - 是否必填：否 -（过滤条件）按照快照名称过滤。snapshot-state - Array of String - 是否必填：否 -（过滤条件）按照快照状态过滤。 (NORMAL：正常 | CREATING：创建中 | ROLLBACKING：回滚中。)disk-usage - Array of String - 是否必填：否 -（过滤条件）按创建快照的云盘类型过滤。 (SYSTEM_DISK：代表系统盘 | DATA_DISK：代表数据盘。)project-id - Array of String - 是否必填：否 -（过滤条件）按云硬盘所属项目ID过滤。disk-id - Array of String - 是否必填：否 -（过滤条件）按照创建快照的云硬盘ID过滤。zone - Array of String - 是否必填：否 -（过滤条件）按照[可用区](/document/product/213/15753)过滤。encrypt - Array of String - 是否必填：否 -（过滤条件）按是否加密盘快照过滤。 (TRUE：表示加密盘快照 | FALSE：表示非加密盘快照。)snapshot-type- Array of String - 是否必填：否 -（过滤条件）根据snapshot-type指定的快照类型查询对应的快照。(SHARED_SNAPSHOT：表示共享过来的快照 | PRIVATE_SNAPSHOT：表示自己私有快照。) */
-  Filters?: Filter[];
-  /** 返回数量，默认为20，最大值为100。关于`Limit`的更进一步介绍请参考 API [简介](/document/product/362/15633)中的相关小节。 */
-  Limit?: number;
-  /** 快照列表排序的依据字段。取值范围：CREATE_TIME：依据快照的创建时间排序默认按创建时间排序。 */
-  OrderField?: string;
-  /** 偏移量，默认为0。关于`Offset`的更进一步介绍请参考API[简介](/document/product/362/15633)中的相关小节。 */
-  Offset?: number;
-  /** 输出云盘列表的排列顺序。取值范围：ASC：升序排列DESC：降序排列。 */
-  Order?: string;
-}
-
-declare interface DescribeSnapshotsResponse {
-  /** 快照的数量。 */
-  TotalCount: number;
-  /** 快照的详情列表。 */
-  SnapshotSet: Snapshot[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeSubnetsRequest {
   /** 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定SubnetIds和Filters。 */
   SubnetIds?: string[];
@@ -3042,18 +2788,6 @@ declare interface DescribeVpcsResponse {
   TotalCount?: number;
   /** 私有网络对象。 */
   VpcSet?: VpcInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DetachDisksRequest {
-  /** 将要卸载的云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询，单次请求最多可卸载10块弹性云盘。 */
-  DiskIds: string[];
-  /** 对于非共享型云盘，会忽略该参数；对于共享型云盘，该参数表示要从哪个CVM实例上卸载云盘。 */
-  InstanceId?: string;
-}
-
-declare interface DetachDisksResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3876,16 +3610,6 @@ declare interface StopInstancesResponse {
   RequestId?: string;
 }
 
-declare interface TerminateDisksRequest {
-  /** 需退还的云盘ID列表。 */
-  DiskIds: string[];
-}
-
-declare interface TerminateDisksResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface TerminateInstancesRequest {
   /** 待销毁的实例ID列表。 */
   InstanceIdSet: string[];
@@ -3937,8 +3661,6 @@ declare interface Ecm {
   AssociateAddress(data: AssociateAddressRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateAddressResponse>;
   /** 绑定安全组 {@link AssociateSecurityGroupsRequest} {@link AssociateSecurityGroupsResponse} */
   AssociateSecurityGroups(data: AssociateSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateSecurityGroupsResponse>;
-  /** @deprecated 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
-  AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** 弹性网卡绑定云主机 {@link AttachNetworkInterfaceRequest} {@link AttachNetworkInterfaceResponse} */
   AttachNetworkInterface(data: AttachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNetworkInterfaceResponse>;
   /** 批量解绑后端服务 {@link BatchDeregisterTargetsRequest} {@link BatchDeregisterTargetsResponse} */
@@ -3947,8 +3669,6 @@ declare interface Ecm {
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
   /** 批量绑定后端目标 {@link BatchRegisterTargetsRequest} {@link BatchRegisterTargetsResponse} */
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
-  /** @deprecated 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
-  CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 创建HAVIP {@link CreateHaVipRequest} {@link CreateHaVipResponse} */
   CreateHaVip(data: CreateHaVipRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHaVipResponse>;
   /** 创建镜像 {@link CreateImageRequest} {@link CreateImageResponse} */
@@ -3997,8 +3717,6 @@ declare interface Ecm {
   DeleteSecurityGroup(data: DeleteSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupResponse>;
   /** 删除安全组规则 {@link DeleteSecurityGroupPoliciesRequest} {@link DeleteSecurityGroupPoliciesResponse} */
   DeleteSecurityGroupPolicies(data: DeleteSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupPoliciesResponse>;
-  /** @deprecated 删除快照 {@link DeleteSnapshotsRequest} {@link DeleteSnapshotsResponse} */
-  DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 删除子网 {@link DeleteSubnetRequest} {@link DeleteSubnetResponse} */
   DeleteSubnet(data: DeleteSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSubnetResponse>;
   /** 删除VPC {@link DeleteVpcRequest} {@link DeleteVpcResponse} */
@@ -4015,8 +3733,6 @@ declare interface Ecm {
   DescribeCustomImageTask(data: DescribeCustomImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomImageTaskResponse>;
   /** 查询可用区的默认子网 {@link DescribeDefaultSubnetRequest} {@link DescribeDefaultSubnetResponse} */
   DescribeDefaultSubnet(data: DescribeDefaultSubnetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultSubnetResponse>;
-  /** @deprecated 查询云硬盘列表 {@link DescribeDisksRequest} {@link DescribeDisksResponse} */
-  DescribeDisks(data?: DescribeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDisksResponse>;
   /** 查询HAVIP列表 {@link DescribeHaVipsRequest} {@link DescribeHaVipsResponse} */
   DescribeHaVips(data?: DescribeHaVipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHaVipsResponse>;
   /** 展示镜像列表 {@link DescribeImageRequest} {@link DescribeImageResponse} */
@@ -4069,8 +3785,6 @@ declare interface Ecm {
   DescribeSecurityGroupPolicies(data: DescribeSecurityGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupPoliciesResponse>;
   /** 查看安全组 {@link DescribeSecurityGroupsRequest} {@link DescribeSecurityGroupsResponse} */
   DescribeSecurityGroups(data?: DescribeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupsResponse>;
-  /** @deprecated 查询快照列表 {@link DescribeSnapshotsRequest} {@link DescribeSnapshotsResponse} */
-  DescribeSnapshots(data?: DescribeSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotsResponse>;
   /** 查询子网列表 {@link DescribeSubnetsRequest} {@link DescribeSubnetsResponse} */
   DescribeSubnets(data?: DescribeSubnetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetsResponse>;
   /** 获取负载均衡后端服务的健康检查状态 {@link DescribeTargetHealthRequest} {@link DescribeTargetHealthResponse} */
@@ -4083,8 +3797,6 @@ declare interface Ecm {
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
   /** 查询VPC列表 {@link DescribeVpcsRequest} {@link DescribeVpcsResponse} */
   DescribeVpcs(data?: DescribeVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcsResponse>;
-  /** @deprecated 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
-  DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
   /** 弹性网卡解绑云主机 {@link DetachNetworkInterfaceRequest} {@link DetachNetworkInterfaceResponse} */
   DetachNetworkInterface(data: DetachNetworkInterfaceRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNetworkInterfaceResponse>;
   /** 禁用子网路由 {@link DisableRoutesRequest} {@link DisableRoutesResponse} */
@@ -4191,8 +3903,6 @@ declare interface Ecm {
   StartInstances(data: StartInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StartInstancesResponse>;
   /** 实例关机 {@link StopInstancesRequest} {@link StopInstancesResponse} */
   StopInstances(data: StopInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<StopInstancesResponse>;
-  /** @deprecated 退还云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
-  TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
   /** 销毁实例 {@link TerminateInstancesRequest} {@link TerminateInstancesResponse} */
   TerminateInstances(data: TerminateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateInstancesResponse>;
   /** 释放IPv6子网段 {@link UnassignIpv6SubnetCidrBlockRequest} {@link UnassignIpv6SubnetCidrBlockResponse} */

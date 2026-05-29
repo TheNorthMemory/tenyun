@@ -10056,10 +10056,12 @@ declare namespace V20180717 {
     StartTime: string;
     /** 结束日期，需大于等于起始日期。使用 ISO 日期格式。 */
     EndTime: string;
-    /** AIGC类型。枚举值：Video： 视频Image： 图片Text： 文本SceneAigcVideo： 场景化视频处理SceneAigcImage： 场景化图片处理SceneAigcTime： 场景化处理次数 */
+    /** AIGC类型。枚举值：Video： 视频Image： 图片Text： 文本Audio： 音频SceneAigcVideo： 场景化视频处理SceneAigcImage： 场景化图片处理SceneAigcTime： 场景化处理次数 */
     AigcType: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
+    /** API Key */
+    APIKey?: string;
   }
 
   interface DescribeAigcUsageDataResponse {

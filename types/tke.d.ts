@@ -1163,6 +1163,24 @@ declare namespace V20180525 {
     CreateTime?: string;
   }
 
+  /** AgentPlugin 安装配置，包含域名、Chart 版本和外部 PostgreSQL 连接信息 */
+  interface AgentPluginConfig {
+    /** Helm Chart 版本，一般无需指定 */
+    ChartVersion?: string | null;
+    /** 外部 PostgreSQL 内网地址；配置后跳过内置 PostgreSQL */
+    Host?: string | null;
+    /** 外部 PostgreSQL 密码，配置 Host 时必填 */
+    Password?: string | null;
+    /** 外部 PostgreSQL 端口 */
+    Port?: number | null;
+    /** SSL 模式，取值：disable / require / verify-full */
+    SSLMode?: string | null;
+    /** Agent 实例访问域名，不填则不创建域名路由 */
+    ServiceDomain?: string | null;
+    /** 外部 PostgreSQL 用户名，配置 Host 时必填 */
+    Username?: string | null;
+  }
+
   /** 注释 */
   interface AnnotationValue {
     /** 注释键 */
@@ -4672,8 +4690,12 @@ declare namespace V20180525 {
     VirtualNodes?: VirtualNodeSpec[];
     /** 删除保护开关，默认关闭 */
     DeletionProtection?: boolean;
-    /** 节点池操作系统：- linux（默认）- windows */
+    /** 节点池操作系统：linux（默认）windows */
     OS?: string;
+    /** 子网资源分配策略，精确控制各子网之间的资源分配比例。 */
+    SubnetAllocationPolicy?: SubnetAllocationPolicy;
+    /** AgentPlugin 安装配置。传入即表示需要安装（即使是空对象 {}） */
+    AgentPlugin?: AgentPluginConfig;
   }
 
   interface CreateClusterVirtualNodePoolResponse {
