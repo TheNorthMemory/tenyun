@@ -8,6 +8,20 @@ declare interface AIGWCrossServiceFallbackConfig {
   TriggerConditions: string[];
   /** fallback 服务链 */
   FallbackServiceChain: AIGWFallbackServiceItem[];
+  /** 额度降级触发配置 */
+  QuotaFallbackTrigger?: AIGWLLMQuotaFallbackTrigger;
+}
+
+/** AI 网关自定义脱敏规则（A 层 / B 层共用结构体，MaskFormat 含义随所属层不同） */
+declare interface AIGWCustomDesensitizeRule {
+  /** 自定义脱敏规则名称 */
+  Name: string;
+  /** 自定义脱敏规则匹配正则 */
+  Pattern: string;
+  /** 自定义脱敏规则掩码 */
+  MaskFormat: string;
+  /** 自定义脱敏规则开关 */
+  Enabled: boolean;
 }
 
 /** 降级服务元素 */
@@ -18,6 +32,40 @@ declare interface AIGWFallbackServiceItem {
   ModelServiceName?: string;
 }
 
+/** AI 网关 A 层转发脱敏配置（请求转发到 LLM 供应商前对 messages 替换为占位符） */
+declare interface AIGWForwardDesensitizeConfig {
+  /** 转发脱敏开关 */
+  Enabled: boolean;
+  /** 预定义规则类型枚举值：Phone： 电话号码IdCard： 身份证号BankCard： 银行卡号Email： 电子邮箱地址IP： IP地址Name： 姓名 */
+  PredefinedRuleTypes?: string[];
+  /** 自定义脱敏规则 */
+  CustomRules?: AIGWCustomDesensitizeRule[];
+  /** 掩码 */
+  PlaceholderFormat?: string;
+  /** 脱敏异常处理枚举值：Reject： 拒绝请求Skip： 跳过 */
+  OnFailure?: string;
+}
+
+/** AI 网关意图路由配置 */
+declare interface AIGWIntentRoute {
+  /** 意图识别模型id */
+  IntentModelServiceId: string;
+  /** 置信度 */
+  ConfidenceThreshold: number;
+  /** 默认服务id */
+  DefaultModelServiceId: string;
+  /** 规则 */
+  Rules?: AIGWIntentRouteRule[];
+}
+
+/** AI 网关意图路由规则 */
+declare interface AIGWIntentRouteRule {
+  /** 意图编码枚举值：Coder： 代码编写Math： 数学计算Translation： 翻译Flash： 快速问答Complex： 复杂推理 */
+  IntentCode?: string;
+  /** 模型服务id */
+  ModelServiceId?: string;
+}
+
 /** 路由匹配规则 */
 declare interface AIGWKVMatch {
   /** 键 */
@@ -26,6 +74,70 @@ declare interface AIGWKVMatch {
   Value: string;
   /** 操作类型 */
   Operator: string;
+}
+
+/** 云原生网关模型API 配额降级触发条件信息 */
+declare interface AIGWLLMQuotaFallbackTrigger {
+  /** 配额感知阈值百分比（RPM 与 TPM 共用）取值范围：[0, 99] */
+  ThresholdPercent?: number;
+  /** 检查维度策略枚举值：AnyInsufficient： RPM 或 TPM 任一不足即触发AllInsufficient： RPM 和 TPM 同时不足才触发 */
+  CheckDimension?: string;
+}
+
+/** 云原生网关模型LLM配额限制信息 */
+declare interface AIGWLLMQuotaLimit {
+  /** 该模型服务每分钟请求数上限，0 表示该维度不限 */
+  RPMLimit?: number;
+  /** 该模型服务每分钟 Token 数上限，0 表示该维度不限 */
+  TPMLimit?: number;
+}
+
+/** 延迟优先路由配置 */
+declare interface AIGWLatencyPriorityConfig {
+  /** 路由规则列表 */
+  Rules: AIGWLatencyPriorityRouteRule[];
+  /** 延迟指标枚举值：LLMLatency： LLM 延迟NetworkLatency： 网络延迟 */
+  LatencyMetric: string;
+  /** 路由策略枚举值：FastMode： 快速模式BalanceMode： 均衡模式 */
+  RouteMode?: string;
+}
+
+/** AI 网关延迟优先路由模型服务 */
+declare interface AIGWLatencyPriorityRouteRule {
+  /** 模型服务id */
+  ModelServiceId: string;
+}
+
+/** AI 网关日志输出配置 */
+declare interface AIGWLogConfig {
+  /** 是否开启请求 payload 记录日志 */
+  EnableRequestLogPayloads?: boolean;
+  /** 是否开启响应 payload 记录日志 */
+  EnableResponseLogPayloads?: boolean;
+  /** 日志记录的请求body的最大字节数取值范围：[512, 1048576]EnableRequestLogPayloads 为true时必填 */
+  RequestLogPayloadMaxSize?: number;
+  /** 日志记录的响应body的最大字节数取值范围：[512, 1048576]EnableResponseLogPayloads 为true时必填 */
+  ResponseLogPayloadMaxSize?: number;
+}
+
+/** AI 网关 B 层日志脱敏配置（写入 LLM Log 前对 payload 掩码） */
+declare interface AIGWLogDesensitizeConfig {
+  /** 日志脱敏开关 */
+  Enabled: boolean;
+  /** 预定义规则类型枚举值：Phone： 电话号码IdCard： 身份证号BankCard： 银行卡号Email： 邮箱地址IP： IP地址Name： 姓名 */
+  PredefinedRuleTypes?: string[];
+  /** 自定义脱敏规则 */
+  CustomRules?: AIGWCustomDesensitizeRule[];
+  /** 日志脱敏范围枚举值：Request： 请求Response： 响应 */
+  Scope?: string[];
+}
+
+/** AI网关标签过滤 */
+declare interface AIGWTagFilter {
+  /** 匹配策略枚举值：AND： 并OR： 或 */
+  MatchStrategy?: string;
+  /** 标签 */
+  Tags?: string[];
 }
 
 /** 云原生网关限流插件参数限流的精确Qps阈值 */
@@ -126,7 +238,7 @@ declare interface CLBMultiRegion {
 
 /** 消费者结构 */
 declare interface CNAPIGwConsumer {
-  /** 分组id */
+  /** 消费者 ID。 */
   ConsumerId: string;
   /** 名字 */
   Name: string;
@@ -188,13 +300,13 @@ declare interface CNAPIGwSecretKey {
   SecretKeyId?: string;
   /** 密钥名字 */
   Name?: string;
-  /** 密钥类型：ApiKey/JWT */
+  /** 密钥协议类型。 */
   SecretType?: string;
-  /** 状态:- Enable: 启用- Disable: 禁用 */
+  /** 状态。枚举值：Enable： 启用Disable： 禁用 */
   Status?: string;
-  /** 生成方式:KMS/System/Custom */
+  /** 密钥生成方式。枚举值：System： 系统自动生成Custom： 用户自定义KMS： 使用 KMS 密钥 */
   GenerateType?: string;
-  /** 密钥值 */
+  /** 密钥明文 */
   SecretValue?: string;
   /** KMS凭证名字 */
   KmsKeyName?: string | null;
@@ -210,7 +322,7 @@ declare interface CNAPIGwSecretKey {
   ModifyTime?: string;
   /** 绑定数 */
   BindCount?: number;
-  /** 资源类型：- Consumer 消费者- LLM 模型服务 */
+  /** 密钥归属资源类型。枚举值：Consumer： 消费者ModelService： 模型服务 */
   ResourceType?: string;
 }
 
@@ -392,6 +504,14 @@ declare interface CloudNativeAPIGatewayLLMModelAPI {
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig;
   /** 是否展示模型API */
   DescribeCloudNativeAPIGatewayLLMModelAPI?: boolean;
+  /** 标签 */
+  TagFilter?: AIGWTagFilter;
+  /** 日志显示相关开关 */
+  LogConfig?: AIGWLogConfig;
+  /** 日志脱敏规则 */
+  LogDesensitizeConfig?: AIGWLogDesensitizeConfig;
+  /** 转发脱敏规则 */
+  ForwardDesensitizeConfig?: AIGWForwardDesensitizeConfig;
 }
 
 /** LLM-单模型内降级规则 */
@@ -452,6 +572,12 @@ declare interface CloudNativeAPIGatewayLLMModelService {
   UpstreamUrlMode?: string;
   /** sni */
   SNI?: string;
+  /** 配额限制 */
+  QuotaLimit?: AIGWLLMQuotaLimit;
+  /** 标签 */
+  Tags?: string;
+  /** 绑定的模型服务秘钥 */
+  SecretKeyIds?: string[];
 }
 
 /** 模型服务路由配置 */
@@ -462,6 +588,10 @@ declare interface CloudNativeAPIGatewayLLMModelServiceRoute {
   WeightedConfig?: CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy[];
   /** 模型名称路由配置，最多10个 */
   ModelNameConfig?: CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy[];
+  /** 意图识别 */
+  IntentRouteConfig?: AIGWIntentRoute;
+  /** 延迟路由 */
+  LatencyPriorityConfig?: AIGWLatencyPriorityConfig;
 }
 
 /** 模型服务模型名称路由策略 */
@@ -2621,11 +2751,11 @@ declare interface ZookeeperServerInterface {
 declare interface AddCloudNativeAPIGatewayConsumerGroupAuthRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 资源类型:- ModelAPI: 模型API */
+  /** 授权资源类型。枚举值：ModelAPI：模型 APIMCPServer：MCP Server */
   ResourceType: string;
-  /** 对应资源的id */
+  /** 对应资源的 ID。ResourceType=ModelAPI 时是模型 API IDResourceType=MCPServer 时是 MCP Server ID */
   ResourceId: string;
-  /** 资源ID */
+  /** 消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。 */
   ConsumerGroupIds: string[];
 }
 
@@ -2637,14 +2767,14 @@ declare interface AddCloudNativeAPIGatewayConsumerGroupAuthResponse {
 declare interface AddCloudNativeAPIGatewayConsumerInGroupRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 消费者组ID */
+  /** 消费者组 ID（以 cg- 开头）。 */
   ConsumerGroupId: string;
-  /** 消费者ID */
+  /** 消费者 ID 列表，长度 1-10。 */
   ConsumerIds: string[];
 }
 
 declare interface AddCloudNativeAPIGatewayConsumerInGroupResponse {
-  /** 添加结果 */
+  /** 是否成功。 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2747,16 +2877,16 @@ declare interface CreateCloudNativeAPIGatewayCertificateResponse {
 declare interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 消费者组名称 */
+  /** 消费者组名称，最长 60 字符。同一网关下唯一。 */
   Name: string;
-  /** 状态：- Enable 启用- Disable 禁用 */
+  /** 启用状态。枚举值：Enable：启用Disable：禁用 */
   Status: string;
-  /** 消费者组描述 */
+  /** 消费者组描述。最长 200 字符。 */
   Description?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
-  /** 创建结果 */
+  /** 创建结果。包含成功标识与新建资源 ID。 */
   Result?: CNAPIGwCreateCommonResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2765,14 +2895,14 @@ declare interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
 declare interface CreateCloudNativeAPIGatewayConsumerRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 消费者名称 */
+  /** 消费者名称，最长 60 字符。同一网关下唯一。 */
   Name: string;
-  /** 消费者描述 */
+  /** 消费者描述。最长 200 字符。 */
   Description?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayConsumerResponse {
-  /** 创建结果 */
+  /** 创建结果。包含成功标识与新建资源 ID。 */
   Result?: CNAPIGwCreateCommonResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2781,28 +2911,32 @@ declare interface CreateCloudNativeAPIGatewayConsumerResponse {
 declare interface CreateCloudNativeAPIGatewayLLMModelAPIRequest {
   /** 网关 id。 */
   GatewayId: string;
-  /** AI 网关 LLM 模型 API 的唯一标识名称，格式规则：最长60个字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。 */
+  /** 模型 API 名称，最长 60 字符。同一网关下唯一。 */
   Name: string;
-  /** 选择业务场景, 选项：Chat（聊天）。 */
+  /** 业务场景。枚举值：Chat：聊天Image：图像（需要网关版本 ≥ 3.9.3） */
   SceneType: string;
-  /** 业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。 */
+  /** 请求协议（小写）。当前仅支持：openai */
   RequestProtocol: string;
-  /** 初始化关联的模型服务列表。 */
+  /** 关联的模型服务 ID 列表，长度 1-10。注：字段名建议改为 ModelServiceIds，当前保留用于兼容。 */
   ListModelServiceId: string[];
-  /** 路由列表 */
+  /** 路由列表，至少 1 条。每条包含 Methods/Paths/Hosts 等 Kong 路由属性。 */
   RouteList: DefaultKongRoute[];
-  /** 为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。 */
+  /** 统一前缀路径（可选）。例如 /v1/openai。 */
   BasePath?: string;
-  /** 模型 API 的相关描述。 */
+  /** 模型 API 描述。最长 200 字符。 */
   Description?: string;
-  /** 模型服务路由策略（是指如何路由到模型服务） */
+  /** 多模型服务路由策略。ListModelServiceId 多于 1 项时必填。 */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute;
-  /** 路由 Header 匹配规则 */
+  /** Header 路由匹配规则。当前仅支持 Operator=exact。 */
   MatchHeaders?: AIGWKVMatch[];
-  /** 跨服务 fallback 开关 */
+  /** 是否启用跨服务 Fallback。开启后需提供 CrossServiceFallbackConfig。 */
   EnableCrossServiceFallback?: boolean;
-  /** 跨服务 fallback 配置 */
+  /** 跨服务 Fallback 配置。EnableCrossServiceFallback=true 时必填。 */
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig;
+  /** 标签过滤策略。需要网关版本 ≥ 3.9.4。 */
+  TagFilter?: AIGWTagFilter;
+  /** 日志输出配置（请求/响应 payload 落 LLM Log）。需要网关版本 ≥ 3.9.4。 */
+  LogConfig?: AIGWLogConfig;
 }
 
 declare interface CreateCloudNativeAPIGatewayLLMModelAPIResponse {
@@ -2855,6 +2989,10 @@ declare interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
   UpstreamUrlMode?: string;
   /** sni */
   SNI?: string;
+  /** 模型服务级别的配额上限（RPM/TPM）。需要网关版本 ≥ 3.9.4。 */
+  QuotaLimit?: AIGWLLMQuotaLimit;
+  /** 标签 */
+  Tags?: string[];
 }
 
 declare interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
@@ -2981,26 +3119,26 @@ declare interface CreateCloudNativeAPIGatewayRouteResponse {
 declare interface CreateCloudNativeAPIGatewaySecretKeyRequest {
   /** 实例 ID */
   GatewayId: string;
-  /** 密钥类型： ApiKey */
+  /** 密钥协议类型。枚举值：ApiKeyBasicHmacOAuth2JWT */
   SecretType: string;
-  /** 密钥名字 */
+  /** 密钥名称，2-60 字符。 */
   Name: string;
-  /** 生成方式： 密钥类型 Consumer 时选项： - KMS- System 系统 - Custom 自定义 密钥类型是 LLM 时选项 - KMS - Custom 自定义 */
+  /** 密钥生成方式。枚举值：System：系统自动生成Custom：用户自定义（需传 SecretValue）KMS：使用 KMS 密钥（需传 KmsKeyName 与 KmsKeyVersion） */
   GenerateType: string;
-  /** 资源类型：- Consumer 消费者- LLM 模型服务 */
+  /** 密钥归属资源类型。枚举值：Consumer：消费者ModelService：模型服务 */
   ResourceType: string;
-  /** KMS 的凭证名字， GenerateType 时 kms 必填 */
+  /** KMS 密钥名称。GenerateType=KMS 时必填。 */
   KmsKeyName?: string;
-  /** KMS 的凭证版本， GenerateType 时 kms 必填 */
+  /** KMS 密钥版本。GenerateType=KMS 时必填。 */
   KmsKeyVersion?: string;
-  /** GenerateType 等于 Custom 是必填 */
+  /** 密钥值，长度 8-256。GenerateType=Custom 时必填。 */
   SecretValue?: string;
-  /** 描述 */
+  /** 密钥描述。最长 200 字符。 */
   Description?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewaySecretKeyResponse {
-  /** 允许的操作 */
+  /** 创建结果。包含成功标识与新建资源 ID。 */
   Result?: CNAPIGwCreateCommonResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3438,7 +3576,7 @@ declare interface DeleteCloudNativeAPIGatewayLLMModelAPIRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
-  /** 是否成功 */
+  /** 是否成功。 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3452,7 +3590,7 @@ declare interface DeleteCloudNativeAPIGatewayLLMModelServiceRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
-  /** 是否成功 */
+  /** 是否成功。 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3865,14 +4003,14 @@ declare interface DescribeCloudNativeAPIGatewayConfigResponse {
 declare interface DescribeCloudNativeAPIGatewayConsumerGroupListRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 每页条数 */
+  /** 每页条数，范围 [1, 100]，默认 10。 */
   Limit: number;
-  /** 起始位置 */
+  /** 起始位置，从 0 开始。 */
   Offset: number;
 }
 
 declare interface DescribeCloudNativeAPIGatewayConsumerGroupListResponse {
-  /** 修改结果 */
+  /** 分组列表 */
   Result?: CNAPIGwConsumerGroupList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3886,7 +4024,7 @@ declare interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
 }
 
 declare interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
-  /** 删除结果 */
+  /** 消费者组详情。 */
   Result?: CNAPIGwConsumerGroup;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3895,9 +4033,9 @@ declare interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
 declare interface DescribeCloudNativeAPIGatewayConsumerListRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 页显示条数，最大20 */
+  /** 每页条数，范围 [1, 100]，默认 20。 */
   Limit: number;
-  /** 起始位置 */
+  /** 起始位置，从 0 开始。 */
   Offset: number;
 }
 
@@ -3916,7 +4054,7 @@ declare interface DescribeCloudNativeAPIGatewayConsumerRequest {
 }
 
 declare interface DescribeCloudNativeAPIGatewayConsumerResponse {
-  /** 删除结果 */
+  /** 消费者详情 */
   Result?: CNAPIGwConsumer;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3967,17 +4105,17 @@ declare interface DescribeCloudNativeAPIGatewayLLMModelAPIResponse {
 declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
   /** 网关 id。 */
   GatewayId: string;
-  /** 返回数量，默认为 10，最大值为 1000。 */
+  /** 每页条数，范围 [1, 1000]，默认 10。 */
   Limit?: number;
-  /** 偏移量，默认为 0。 */
+  /** 起始位置，从 0 开始。 */
   Offset?: number;
-  /** 过滤条件，多个过滤条件之间是“与”的关系 */
+  /** 过滤条件。当前未启用具体字段。 */
   Filters?: Filter[];
-  /** 搜索关键词，模糊匹配 name 和 description */
+  /** 模糊匹配模型 API 名称。 */
   Keyword?: string;
-  /** 通过消费者组Id筛选，UseToBind 为 true 时ConsumerGroupId不为空 */
+  /** 消费者组 ID（以 cg- 开头），与 UseToBind 搭配使用。 */
   ConsumerGroupId?: string;
-  /** 筛选可被绑定的数据， 比如模型API里面绑定模型服务筛选时，如果设置true, 返回结果只会有可以被绑定的数据。 */
+  /** 是否用于绑定场景。true 时仅返回可被绑定到指定消费者组的模型 API。 */
   UseToBind?: boolean;
 }
 
@@ -4107,14 +4245,16 @@ declare interface DescribeCloudNativeAPIGatewayRoutesResponse {
 declare interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
   /** 实例 ID */
   GatewayId: string;
-  /** 每页数量，最大20个 */
+  /** 每页条数，范围 [1, 100]，默认 10。 */
   Limit: number;
-  /** 起始值 */
+  /** 起始位置，从 0 开始。 */
   Offset: number;
+  /** 密钥归属资源类型。UseToBind=true 时必填。枚举值：Consumer：消费者ModelService：模型服务 */
+  ResourceType?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
-  /** 允许的操作 */
+  /** 密钥列表 */
   Result?: CNAPIGwSecretKeyList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4128,7 +4268,7 @@ declare interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
 }
 
 declare interface DescribeCloudNativeAPIGatewaySecretKeyResponse {
-  /** 允许的操作 */
+  /** 密钥详情。 */
   Result?: CNAPIGwSecretKey;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4971,13 +5111,13 @@ declare interface ModifyCloudNativeAPIGatewayCertificateResponse {
 declare interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 消费者组ID */
+  /** 消费者组 ID（以 cg- 开头）。 */
   ConsumerGroupId: string;
-  /** 新的消费者组名称 */
+  /** 消费者组名称，最长 60 字符。 */
   Name: string;
-  /** 状态：- Enable 启用- Disable 禁用 */
+  /** 启用状态。枚举值：Enable：启用Disable：禁用 */
   Status: string;
-  /** 新的消费者组描述 */
+  /** 消费者组描述。最长 200 字符。 */
   Description?: string;
 }
 
@@ -4989,11 +5129,11 @@ declare interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
 declare interface ModifyCloudNativeAPIGatewayConsumerRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 消费者ID */
+  /** 消费者 ID。 */
   ConsumerId: string;
-  /** 新的消费者名称 */
+  /** 消费者名称，最长 60 字符。 */
   Name: string;
-  /** 新的消费者描述 */
+  /** 消费者描述。最长 200 字符。 */
   Description?: string;
 }
 
@@ -5007,26 +5147,30 @@ declare interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
   GatewayId: string;
   /** 模型 API ID，全局唯一标识。 */
   ModelAPIId: string;
-  /** 修改模型 API 名称 */
+  /** 模型 API 名称，最长 60 字符。 */
   Name?: string;
-  /** 为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。 */
+  /** 统一前缀路径（可选）。例如 /v1/openai。 */
   BasePath?: string;
-  /** 模型 API 的相关描述。 */
+  /** 模型 API 描述。最长 200 字符。 */
   Description?: string;
-  /** 关联的模型服务列表（支持填多个模型服务） */
+  /** 关联的模型服务 ID 列表，长度 1-10。 */
   ListModelServiceId?: string[];
-  /** 模型服务路由策略（是指如何路由到模型服务） */
+  /** 多模型服务路由策略。ListModelServiceId 多于 1 项时必填。 */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute;
-  /** headers 路由匹配 */
+  /** Header 路由匹配规则。当前仅支持 Operator=exact。 */
   MatchHeaders?: AIGWKVMatch[];
-  /** 跨服务 fallback */
+  /** 是否启用跨服务 Fallback。 */
   EnableCrossServiceFallback?: boolean;
-  /** 跨服务 fallback 配置 */
+  /** 跨服务 Fallback 配置。EnableCrossServiceFallback=true 时必填。 */
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig;
+  /** 标签过滤策略。需要网关版本 ≥ 3.9.4。 */
+  TagFilter?: AIGWTagFilter;
+  /** 日志输出配置。需要网关版本 ≥ 3.9.4。 */
+  LogConfig?: AIGWLogConfig;
 }
 
 declare interface ModifyCloudNativeAPIGatewayLLMModelAPIResponse {
-  /** 是否成功 */
+  /** 是否成功。 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5067,6 +5211,10 @@ declare interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
   UpstreamUrlMode?: string;
   /** SNI */
   SNI?: string;
+  /** 模型服务级别的配额上限（RPM/TPM）。需要网关版本 ≥ 3.9.4。 */
+  QuotaLimit?: AIGWLLMQuotaLimit;
+  /** 标签 */
+  Tags?: string[];
 }
 
 declare interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
@@ -5157,9 +5305,9 @@ declare interface ModifyCloudNativeAPIGatewayRouteResponse {
 declare interface ModifyCloudNativeAPIGatewaySecretKeyStatusRequest {
   /** 实例 ID */
   GatewayId: string;
-  /** 密钥名字 */
+  /** 密钥状态。枚举值：Enable：启用Disable：禁用 */
   Status: string;
-  /** 密钥id */
+  /** 密钥 ID（以 secret- 开头）。 */
   SecretKeyId: string;
 }
 
@@ -5466,11 +5614,11 @@ declare interface RateLimitResponse {
 declare interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 资源类型:- ModelAPI: 模型API */
+  /** 授权资源类型。枚举值：ModelAPI：模型 APIMCPServer：MCP Server */
   ResourceType: string;
-  /** 资源id */
+  /** 对应资源的 ID。ResourceType=ModelAPI 时是模型 API IDResourceType=MCPServer 时是 MCP Server ID */
   ResourceId: string;
-  /** 资源ID */
+  /** 消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。 */
   ConsumerGroupIds: string[];
 }
 
@@ -5482,9 +5630,9 @@ declare interface RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse {
 declare interface RemoveCloudNativeAPIGatewayConsumerInGroupRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 消费者组ID */
+  /** 消费者组 ID（以 cg- 开头）。 */
   ConsumerGroupId: string;
-  /** 消费者ID列表 */
+  /** 消费者 ID 列表，长度 1-10。 */
   ConsumerIds: string[];
 }
 

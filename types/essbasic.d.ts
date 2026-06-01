@@ -3783,7 +3783,7 @@ declare interface SyncProxyOrganizationResponse {
 declare interface UploadFilesRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 **SEAL** : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png */
+  /** 文件对应业务类型,可以选择的类型如下 TEMPLATE : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 DOCUMENT : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 SEAL : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ARCHIVE : 此文件用于归档文件夹，文件类型支持.pdf/.zip格式枚举值：TEMPLATE： 此上传的文件用户生成合同模板DOCUMENT： 此文件用来发起合同流程SEAL： 此文件用于印章的生成ARCHIVE： 此文件用于归档文件夹 */
   BusinessType: string;
   /** 上传文件内容数组，一次最多可上传20个文件。若上传多个文件，所有文件必须为相同类型，例如全部为PDF或全部为Word文件。不支持混合文件类型的上传。 */
   FileInfos?: UploadFile[];
@@ -3792,9 +3792,9 @@ declare interface UploadFilesRequest {
 }
 
 declare interface UploadFilesResponse {
-  /** 上传成功文件数量注: `如果一个文件上传失败, 则全部文件皆上传失败` */
+  /** 上传成功文件数量注: 如果一个文件上传失败, 则全部文件皆上传失败 */
   TotalCount?: number;
-  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:`有效期一个小时（超过一小时后系统不定期清理，会有部分时间差）, 有效期内此文件id可以反复使用, 超过有效期无法使用` */
+  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:有效期一个小时（超过一小时后系统不定期清理，会有部分时间差）, 有效期内此文件id可以反复使用, 超过有效期无法使用 */
   FileIds?: string[];
   /** 对应上传文件的下载链接，过期时间5分钟 */
   FileUrls?: string[];

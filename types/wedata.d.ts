@@ -15497,7 +15497,7 @@ declare namespace V20210820 {
     TaskAutoSubmit?: boolean | null;
     /** 上层产品 数据质量 / 数据开发 / ... */
     ProductName?: string | null;
-    /** 创建者帐号 */
+    /** 创建者账号 */
     OwnId?: string | null;
     /** 子账号 */
     UserId?: string | null;

@@ -450,6 +450,8 @@ declare interface ApmPrometheusRules {
   MetricNameRule?: string | null;
   /** 匹配类型：0精准匹配，1前缀匹配，2后缀匹配 */
   MetricMatchType?: number | null;
+  /** 是否追加资源属性 */
+  AppendResourceAttributes?: boolean;
 }
 
 /** 采样配置信息 */
@@ -847,6 +849,8 @@ declare interface CreateApmPrometheusRuleRequest {
   MetricNameRule: string;
   /** 业务系统ID */
   InstanceId: string;
+  /** 是否追加资源属性 */
+  AppendResourceAttributes?: boolean;
 }
 
 declare interface CreateApmPrometheusRuleResponse {
@@ -1675,6 +1679,8 @@ declare interface ModifyApmPrometheusRuleRequest {
   MetricMatchType?: number;
   /** 客户定义的命中指标名规则。 */
   MetricNameRule?: string;
+  /** 是否追加资源属性 */
+  AppendResourceAttributes?: boolean;
 }
 
 declare interface ModifyApmPrometheusRuleResponse {

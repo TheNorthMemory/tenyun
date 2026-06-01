@@ -7852,6 +7852,26 @@ declare interface VoiceProfile {
   Scenes?: string[];
 }
 
+/** 音色更新字段 */
+declare interface VoiceUpdateFields {
+  /** 音色名 */
+  Name?: string;
+  /** 音色描述 */
+  Description?: string;
+  /** 性别枚举值：male： 男female： 女unknown： 未知 */
+  Gender?: string;
+  /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+  Age?: string;
+  /** 语言 */
+  Languages?: string[];
+  /** 标签 */
+  Labels?: string[];
+  /** 场景 */
+  Scenes?: string[];
+  /** 试听音频 */
+  AudioUrl?: string;
+}
+
 /** 音量均衡配置 */
 declare interface VolumeBalanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -11970,6 +11990,26 @@ declare interface UpdateProjectResponse {
   RequestId?: string;
 }
 
+declare interface UpdateVoiceRequest {
+  /** 音色Id */
+  VoiceId: string;
+  /** 更新音色字段 */
+  VoiceFields: VoiceUpdateFields;
+  /** 扩展参数，json字符串 */
+  ExtParam?: string;
+}
+
+declare interface UpdateVoiceResponse {
+  /** 错误码，正确时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，正确时返回success */
+  Msg?: string;
+  /** 更新后的音色信息 */
+  Voice?: VoiceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface WithdrawsWatermarkRequest {
   /** 输入媒体文件存储信息。 */
   InputInfo: MediaInputInfo;
@@ -12403,6 +12443,8 @@ declare interface Mps {
   TextTranslation(data: TextTranslationRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslationResponse>;
   /** 剧集项目更新 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
+  /** 更新音色 {@link UpdateVoiceRequest} {@link UpdateVoiceResponse} */
+  UpdateVoice(data: UpdateVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVoiceResponse>;
   /** 提取盲水印 {@link WithdrawsWatermarkRequest} {@link WithdrawsWatermarkResponse} */
   WithdrawsWatermark(data: WithdrawsWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawsWatermarkResponse>;
 }

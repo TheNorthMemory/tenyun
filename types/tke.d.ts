@@ -462,7 +462,7 @@ declare interface NativeNodeInfo {
   RenewFlag?: string;
   /** 节点计费模式 */
   PayMode?: string;
-  /** 节点内存容量，单位：`GB` */
+  /** 节点内存容量，单位：GB */
   Memory?: number;
   /** 节点系统盘配置信息 */
   SystemDisk?: Disk;
@@ -492,9 +492,9 @@ declare interface NativeNodeInfo {
   SubnetId?: string;
   /** OS的名称 */
   OsImage?: string | null;
-  /** **原生节点的 Machine 类型**- Native 表示 CXM 类型的原生节点- NativeCVM 表示 CVM 类型的原生节点 */
+  /** 原生节点的 Machine 类型Native 表示 CXM 类型的原生节点NativeCVM 表示 CVM 类型的原生节点 */
   MachineType?: string;
-  /** **原生节点对应的实例 ID**- ins-q47ofw6 表示这个实例是一个 CVM 的实例- eks-f8mvyaep 表示这个实例是一个 CXM 的实例 */
+  /** 原生节点对应的实例 IDins-q47ofw6 表示这个实例是一个 CVM 的实例eks-f8mvyaep 表示这个实例是一个 CXM 的实例 */
   InstanceId?: string | null;
   /** 原生节点云标签 */
   Tags?: Tag[] | null;
@@ -726,7 +726,7 @@ declare interface UpdateNativeNodePoolParam {
   UpgradeSettings?: MachineUpgradeSettings;
   /** 是否开启自愈能力 */
   AutoRepair?: boolean;
-  /** 节点计费类型变更当前仅支持按量计费转包年包月：- PREPAID */
+  /** 计费类型枚举值：POSTPAID_BY_HOUR： 目标计费类型为按量计费PREPAID： 目标计费类型为包年包月计费 */
   InstanceChargeType?: string;
   /** 包年包月机型计费配置 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
@@ -8268,6 +8268,8 @@ declare namespace V20180525 {
     Taints?: Taint[];
     /** 删除保护开关，必须修改至少一个参数 */
     DeletionProtection?: boolean;
+    /** 子网分配策略 */
+    SubnetAllocationPolicy?: SubnetAllocationPolicy;
   }
 
   interface ModifyClusterVirtualNodePoolResponse {

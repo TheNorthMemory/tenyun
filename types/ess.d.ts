@@ -5637,15 +5637,15 @@ declare interface UpdateIntegrationEmployeesResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 文件对应业务类型,可以选择的类型如下 **TEMPLATE** : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 **DOCUMENT** : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 **SEAL** : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ["yDRSRUUgygj6rq2wUuO4zjEyBZ2NHiyT"] */
+  /** 文件对应业务类型,可以选择的类型如下 TEMPLATE : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 DOCUMENT : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 SEAL : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ARCHIVE : 此文件用于归档文件夹，文件类型支持.pdf/.zip格式 [&quot;yDRSRUUgygj6rq2wUuO4zjEyBZ2NHiyT&quot;]枚举值：TEMPLATE： 此上传的文件用户生成合同模板DOCUMENT： 此文件用来发起合同流程SEAL： 此文件用于印章的生成ARCHIVE： 此文件用于归档文件夹 */
   BusinessType: string;
-  /** 执行本接口操作的员工信息。其中OperatorId为必填字段，即用户的UserId。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。其中OperatorId为必填字段，即用户的UserId。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Caller?: Caller;
   /** 请上传文件内容数组，最多可上传20个文件。所有文件必须符合FileType指定的文件类型。 */
   FileInfos?: UploadFile[];
   /** 文件类型， 默认通过文件内容和文件后缀一起解析得到文件类型，调用接口时可以显示的指定上传文件的类型。可支持的指定类型如下:pdfdocdocxxlsxlsxhtmljpgjpegpng如：pdf 表示上传的文件 张三入职合同.pdf的文件类型是 pdf */
   FileType?: string;
-  /** 此参数仅对上传的PDF文件有效。其主要作用是确定是否将PDF中的灰色矩阵置为白色。**true**：将灰色矩阵置为白色。**false**：无需处理，不会将灰色矩阵置为白色（默认）。注: `该参数仅在关键字定位时，需要去除关键字所在的灰框场景下使用。` */
+  /** 此参数仅对上传的PDF文件有效。其主要作用是确定是否将PDF中的灰色矩阵置为白色。**true**：将灰色矩阵置为白色。**false**：无需处理，不会将灰色矩阵置为白色（默认）。注: 该参数仅在关键字定位时，需要去除关键字所在的灰框场景下使用。 */
   CoverRect?: boolean;
   /** 该字段已不再使用 */
   CustomIds?: string[];
@@ -5656,7 +5656,7 @@ declare interface UploadFilesRequest {
 }
 
 declare interface UploadFilesResponse {
-  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:`有效期一个小时（超过一小时后系统不定期清理，会有部分时间差）, 有效期内此文件id可以反复使用, 超过有效期无法使用` */
+  /** 文件资源ID数组，每个文件资源ID为32位字符串。建议开发者保存此资源ID，后续创建合同或创建合同流程需此资源ID。注:有效期一个小时（超过一小时后系统不定期清理，会有部分时间差）, 有效期内此文件id可以反复使用, 超过有效期无法使用 */
   FileIds?: string[];
   /** 上传成功文件数量 */
   TotalCount?: number;

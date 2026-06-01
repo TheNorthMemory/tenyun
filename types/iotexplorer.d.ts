@@ -1188,6 +1188,24 @@ declare interface SeeComprehensionResult {
   ErrorMsg?: string;
 }
 
+/** TWeSee 标签持续检测配置 */
+declare interface SeeDetectContinuousConfig {
+  /** 检测标签。可选值：- `person_motionless`：人物静止 */
+  DetectType: string;
+  /** 启用检测的按日周期起始时间分钟数。取值范围：0 ~ 1440 */
+  DailyStartTime: number;
+  /** 启用检测的按日周期结束时间分钟数。取值范围：0 ~ 1440 */
+  DailyEndTime: number;
+  /** 检测间隔分钟数。取值范围：5 ~ 60。 */
+  Interval: number;
+}
+
+/** TWeSee 标签持续检测结果 */
+declare interface SeeDetectContinuousResult {
+  /** 检测标签是否在当前区间内持续 */
+  IsContinuousInRange?: boolean;
+}
+
 /** TWeSee 处理云存事件 EventId 的过滤规则配置 */
 declare interface SeeEventIdFilterConfig {
   /** 包含的云存事件 ID 集合 */
@@ -1216,9 +1234,9 @@ declare interface SeeTaskInfo {
   Status?: number;
   /** 任务元数据 */
   Metadata?: SeeTaskMetadata;
-  /** 算法类目。可能取值：- `COMPREHENSION`：视觉理解 */
+  /** 算法类目。可能取值：- `COMPREHENSION`：视觉理解- `HIGHLIGHT`：视频浓缩 */
   ServiceCategory?: string;
-  /** 算法类型。可能取值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  /** 算法类型。可能取值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解- `COMP_HIGHLIGHT`：视频浓缩 */
   ServiceType?: string;
   /** 套餐规格。可能取值：- `POSTPAID`：后付费（适用于视频理解、图片理解）- `BASIC`：包年包月基础版（适用于视频理解） */
   ServiceTier?: string;
@@ -1226,6 +1244,8 @@ declare interface SeeTaskInfo {
   ComprehensionResult?: SeeComprehensionResult;
   /** 视频语义浓缩结果（适用于视频语义浓缩） */
   CompHighlightResult?: SeeCompHighlightResult;
+  /** 标签持续检测结果 */
+  DetectContinuousResult?: SeeDetectContinuousResult;
   /** 完成该任务所消耗的基础能力额度 */
   CostBasic?: number;
   /** 完成该任务所消耗的高级能力额度 */
@@ -1752,6 +1772,8 @@ declare interface VisionSummaryConfig {
   DetectTypes?: string[];
   /** 自定义检测标签 */
   CustomDetectQueries?: VisionCustomDetectQuery[];
+  /** 标签持续检测配置 */
+  DetectContinuous?: SeeDetectContinuousConfig[];
 }
 
 /** 微信硬件设备信息 */
@@ -5187,12 +5209,14 @@ declare interface ListTWeSeeTasksRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类目。可能取值：- `COMPREHENSION`：视觉理解 */
+  /** 算法类目。可选值：- `COMPREHENSION`：视觉理解- `HIGHLIGHT`：视频浓缩 */
   ServiceCategory: string;
   /** 分页拉取数量 */
   Limit: number;
   /** 分页拉取偏移 */
   Offset?: number;
+  /** 算法类型。当 ServiceCategory 为 `COMPREHENSION` 时，可选值包括：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解- `CONT_PERSON_MOTIONLESS`：静姿检测当 ServiceCategory 为 `HIGHLIGHT` 时，可选值包括：- `COMP_HIGHLIGHT`：视频浓缩 */
+  ServiceTypes?: string[];
   /** 通道 ID */
   ChannelId?: number;
   /** 查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
@@ -5201,6 +5225,8 @@ declare interface ListTWeSeeTasksRequest {
   EndTimeMs?: number;
   /** 要查询的任务的状态条件。不传则不按照状态过滤，可选值：- `1`：失败- `2`：空结果- `3`：有效结果 */
   Status?: number;
+  /** 下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL */
+  FileURLExpireTime?: number;
 }
 
 declare interface ListTWeSeeTasksResponse {

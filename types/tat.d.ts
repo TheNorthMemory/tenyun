@@ -218,6 +218,8 @@ declare interface Invoker {
   CreatedTime?: string;
   /** 修改时间。格式为：YYYY-MM-DDThh:mm:ssZ */
   UpdatedTime?: string;
+  /** 标签信息。 */
+  Tags?: Tag[];
 }
 
 /** 执行器执行记录。 */

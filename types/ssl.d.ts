@@ -3257,7 +3257,7 @@ declare interface Ssl {
   SubmitAuditManager(data: SubmitAuditManagerRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAuditManagerResponse>;
   /** 付费证书提交资料 {@link SubmitCertificateInformationRequest} {@link SubmitCertificateInformationResponse} */
   SubmitCertificateInformation(data: SubmitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitCertificateInformationResponse>;
-  /** 一键更新新旧证书资源 {@link UpdateCertificateInstanceRequest} {@link UpdateCertificateInstanceResponse} */
+  /** 一键更新旧证书资源 {@link UpdateCertificateInstanceRequest} {@link UpdateCertificateInstanceResponse} */
   UpdateCertificateInstance(data: UpdateCertificateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCertificateInstanceResponse>;
   /** 云资源更新失败重试部署记录 {@link UpdateCertificateRecordRetryRequest} {@link UpdateCertificateRecordRetryResponse} */
   UpdateCertificateRecordRetry(data?: UpdateCertificateRecordRetryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCertificateRecordRetryResponse>;
