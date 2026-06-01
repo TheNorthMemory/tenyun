@@ -224,6 +224,7 @@ import Tke, { Versions as TkeVersions } from "./tke";
 import Tkgdq, { Versions as TkgdqVersions } from "./tkgdq";
 import Tms, { Versions as TmsVersions } from "./tms";
 import Tmt, { Versions as TmtVersions } from "./tmt";
+import Tokenhub, { Versions as TokenhubVersions } from "./tokenhub";
 import Tourism, { Versions as TourismVersions } from "./tourism";
 import Trabbit, { Versions as TrabbitVersions } from "./trabbit";
 import Trocket, { Versions as TrocketVersions } from "./trocket";
@@ -480,6 +481,7 @@ export declare type SERVICE_VERSIONS = {
   tkgdq: TkgdqVersions,
   tms: TmsVersions,
   tmt: TmtVersions,
+  tokenhub: TokenhubVersions,
   tourism: TourismVersions,
   trabbit: TrabbitVersions,
   trocket: TrocketVersions,
@@ -972,6 +974,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   tms: Tms,
   /** {@link Tmt 机器翻译} */
   tmt: Tmt,
+  /** {@link Tokenhub TokenHub} */
+  tokenhub: Tokenhub,
   /** {@link Tourism 文旅客情大数据} */
   tourism: Tourism,
   /** {@link Trabbit 消息队列 RabbitMQ Serverless 版} */
