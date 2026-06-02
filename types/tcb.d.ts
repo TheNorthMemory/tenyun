@@ -320,7 +320,7 @@ declare interface EnvBillingInfoItem {
   OrderInfo?: OrderInfo;
   /** 免费配额信息。 */
   FreeQuota?: string;
-  /** 是否开启 `超过套餐额度部分转按量付费` */
+  /** 是否开启 超过套餐额度部分转按量付费 */
   EnableOverrun?: boolean;
   /** 环境套餐类型 */
   ExtPackageType?: string;
@@ -1887,11 +1887,19 @@ declare interface DescribeBaasPackageListResponse {
 declare interface DescribeBillingInfoRequest {
   /** 环境ID */
   EnvId?: string;
+  /** 环境列表，当环境列表不为空时，查询的环境以该参数为准 */
+  EnvIds?: string[];
+  /** 每页条数（用于拉取列表时分页） */
+  Limit?: number;
+  /** 偏移 */
+  Offset?: number;
 }
 
 declare interface DescribeBillingInfoResponse {
   /** 环境计费信息列表 */
   EnvBillingInfoList?: EnvBillingInfoItem[];
+  /** 总个数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

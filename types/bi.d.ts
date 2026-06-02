@@ -184,6 +184,16 @@ declare interface DatasourceInfoData {
   TotalPages?: number | null;
 }
 
+/** 查询页面列表 */
+declare interface DescribeUserGroupMemberPageListContainer {
+  /** 列表数据集合 */
+  List?: UserGroupMemberVO[] | null;
+  /** 总数 */
+  Total?: number | null;
+  /** 总页数 */
+  TotalPages?: number | null;
+}
+
 /** 报表嵌出数据结构-强鉴权 */
 declare interface EmbedTokenInfo {
   /** 信息标识 */
@@ -532,6 +542,18 @@ declare interface UserGroupDTO {
   Location?: number | null;
 }
 
+/** 用户组成员VO出参 */
+declare interface UserGroupMemberVO {
+  /** 用户名 */
+  UserName?: string | null;
+  /** 用户id */
+  UserId?: string | null;
+  /** 创建人 */
+  CreatedBy?: string | null;
+  /** 创建时间 */
+  CreatedOn?: string | null;
+}
+
 /** 用户组权限树 */
 declare interface UserGroupPageTreeVO {
   /** 列表 */
@@ -594,6 +616,36 @@ declare interface UserGroupUpdateDTO {
   Id?: number;
   /** 父节点名称 */
   ParentName?: string;
+}
+
+/** 用户组返回参数 */
+declare interface UserGroupUserInfoVO {
+  /** 用户id */
+  UserId?: string | null;
+  /** 用户名称 */
+  UserName?: string | null;
+}
+
+/** 用户组返回参数 */
+declare interface UserGroupVO {
+  /** 用户组id */
+  Id?: number | null;
+  /** 用户组名称 */
+  GroupName?: string | null;
+  /** 所属用户组id */
+  ParentId?: number | null;
+  /** 所属用户组名称 */
+  ParentName?: string | null;
+  /** 是否默认用户组 */
+  IsDefault?: number | null;
+  /** 用户组管理员 */
+  AdminUserId?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 排序位置 */
+  Location?: number | null;
+  /** 用户信息 */
+  UserList?: UserGroupUserInfoVO[] | null;
 }
 
 /** 用户ID和用户名 */
@@ -1083,16 +1135,30 @@ declare interface CreateProjectResponse {
 }
 
 declare interface CreateUserGroupMemberRequest {
+  /** 用户组id */
+  GroupId?: number;
+  /** 用户id集合 */
+  UserIdList?: string[];
 }
 
 declare interface CreateUserGroupMemberResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface CreateUserGroupRequest {
+  /** 组管理员 */
+  AdminUserId?: string;
+  /** 描述 */
+  Description?: string;
   /** 用户组名称 */
   GroupName?: string;
   /** 位置 */
@@ -1104,6 +1170,12 @@ declare interface CreateUserGroupRequest {
 declare interface CreateUserGroupResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: UserGroupVO | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1226,6 +1298,12 @@ declare interface DeleteUserGroupMemberRequest {
 declare interface DeleteUserGroupMemberResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1238,6 +1316,12 @@ declare interface DeleteUserGroupRequest {
 declare interface DeleteUserGroupResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1566,6 +1650,12 @@ declare interface DescribeUserGroupMemberListRequest {
 declare interface DescribeUserGroupMemberListResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: DescribeUserGroupMemberPageListContainer | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2014,6 +2104,12 @@ declare interface ModifyUserGroupRequest {
 declare interface ModifyUserGroupResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: UserGroupVO[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2106,6 +2202,12 @@ declare interface QueryUserGroupMemberRequest {
 declare interface QueryUserGroupMemberResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 结果信息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: DescribeUserGroupMemberPageListContainer | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

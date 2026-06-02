@@ -1796,6 +1796,22 @@ declare interface FunctionRegionSelection {
   Regions: string[];
 }
 
+/** 边缘函数副本。 */
+declare interface FunctionReplica {
+  /** 函数 ID。 */
+  FunctionId?: string;
+  /** 边缘函数副本名称。 */
+  ReplicaName?: string;
+  /** 边缘函数副本内容。格式为 JavaScript 代码。 */
+  Content?: string;
+  /** 边缘函数副本描述。 */
+  Remark?: string;
+  /** 边缘函数副本创建时间。 */
+  CreatedOn?: string;
+  /** 边缘函数副本更新时间。 */
+  ModifiedOn?: string;
+}
+
 /** 边缘函数触发规则。 */
 declare interface FunctionRule {
   /** 规则ID。 */
@@ -4816,6 +4832,24 @@ declare interface CreateEdgeKVNamespaceResponse {
   RequestId?: string;
 }
 
+declare interface CreateFunctionReplicaRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 边缘函数副本名称。限制可输入 1-50 个字符，允许的字符为a-z、0-9、-，且-不能单独注册或连续使用，不能放在开头或结尾。同一 FunctionId 下副本名称需唯一。 */
+  ReplicaName: string;
+  /** 边缘函数副本内容，当前仅支持 JavaScript 代码，最大支持 5MB。 */
+  Content: string;
+  /** 边缘函数副本描述。最大支持 50 个字符。 */
+  Remark?: string;
+}
+
+declare interface CreateFunctionReplicaResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFunctionRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -5400,6 +5434,20 @@ declare interface DeleteEdgeKVNamespaceRequest {
 }
 
 declare interface DeleteEdgeKVNamespaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFunctionReplicaRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 需要删除的函数的副本名称。支持以列表的形式传入。 */
+  ReplicaNames: string[];
+}
+
+declare interface DeleteFunctionReplicaResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6076,6 +6124,32 @@ declare interface DescribeFunctionComponentBindingsResponse {
   TotalCount?: number;
   /** 函数组件绑定列表。 */
   FunctionComponentBindings?: FunctionComponentBinding[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFunctionReplicasRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：200。 */
+  Limit?: number;
+  /** 排序依据，取值有： created-on：创建时间。 默认根据 created-on 属性排序。 */
+  SortBy?: string;
+  /** 列表排序方式，取值有： asc：升序排列； desc：降序排列。 默认值为 asc。 */
+  SortOrder?: string;
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回函数 ID 下全部函数副本。详细的过滤条件如下： replica-name：按照函数副本名称进行过滤，支持模糊查询。 */
+  Filters?: AdvancedFilter[];
+}
+
+declare interface DescribeFunctionReplicasResponse {
+  /** 边缘函数副本总数。 */
+  TotalCount?: number;
+  /** 边缘函数副本列表。 */
+  FunctionReplicas?: FunctionReplica[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7536,6 +7610,24 @@ declare interface ModifyFunctionComponentBindingsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyFunctionReplicaRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 函数 ID。 */
+  FunctionId: string;
+  /** 需要修改的边缘函数副本名称。 */
+  ReplicaName: string;
+  /** 边缘函数副本内容，当前仅支持 JavaScript 代码，最大支持 5MB。 */
+  Content?: string;
+  /** 边缘函数副本描述。最大支持 50 个字符。 */
+  Remark?: string;
+}
+
+declare interface ModifyFunctionReplicaResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFunctionRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -8461,6 +8553,8 @@ declare interface Teo {
   CreateEdgeKVNamespace(data: CreateEdgeKVNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdgeKVNamespaceResponse>;
   /** 创建边缘函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
   CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
+  /** 创建边缘函数副本 {@link CreateFunctionReplicaRequest} {@link CreateFunctionReplicaResponse} */
+  CreateFunctionReplica(data: CreateFunctionReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionReplicaResponse>;
   /** 创建边缘函数触发规则 {@link CreateFunctionRuleRequest} {@link CreateFunctionRuleResponse} */
   CreateFunctionRule(data: CreateFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionRuleResponse>;
   /** 创建即时转码模板 {@link CreateJustInTimeTranscodeTemplateRequest} {@link CreateJustInTimeTranscodeTemplateResponse} */
@@ -8527,6 +8621,8 @@ declare interface Teo {
   DeleteEdgeKVNamespace(data: DeleteEdgeKVNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeKVNamespaceResponse>;
   /** 删除边缘函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
+  /** 删除边缘函数副本 {@link DeleteFunctionReplicaRequest} {@link DeleteFunctionReplicaResponse} */
+  DeleteFunctionReplica(data: DeleteFunctionReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionReplicaResponse>;
   /** 删除边缘函数触发规则 {@link DeleteFunctionRulesRequest} {@link DeleteFunctionRulesResponse} */
   DeleteFunctionRules(data: DeleteFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionRulesResponse>;
   /** 删除即时转码模板 {@link DeleteJustInTimeTranscodeTemplatesRequest} {@link DeleteJustInTimeTranscodeTemplatesResponse} */
@@ -8607,6 +8703,8 @@ declare interface Teo {
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;
   /** 查询函数组件绑定列表 {@link DescribeFunctionComponentBindingsRequest} {@link DescribeFunctionComponentBindingsResponse} */
   DescribeFunctionComponentBindings(data: DescribeFunctionComponentBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionComponentBindingsResponse>;
+  /** 查询边缘函数副本列表 {@link DescribeFunctionReplicasRequest} {@link DescribeFunctionReplicasResponse} */
+  DescribeFunctionReplicas(data: DescribeFunctionReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionReplicasResponse>;
   /** 查询边缘函数触发规则 {@link DescribeFunctionRulesRequest} {@link DescribeFunctionRulesResponse} */
   DescribeFunctionRules(data: DescribeFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionRulesResponse>;
   /** 查询边缘函数运行环境 {@link DescribeFunctionRuntimeEnvironmentRequest} {@link DescribeFunctionRuntimeEnvironmentResponse} */
@@ -8769,6 +8867,8 @@ declare interface Teo {
   ModifyFunction(data: ModifyFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionResponse>;
   /** 修改函数组件绑定 {@link ModifyFunctionComponentBindingsRequest} {@link ModifyFunctionComponentBindingsResponse} */
   ModifyFunctionComponentBindings(data: ModifyFunctionComponentBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionComponentBindingsResponse>;
+  /** 编辑边缘函数副本 {@link ModifyFunctionReplicaRequest} {@link ModifyFunctionReplicaResponse} */
+  ModifyFunctionReplica(data: ModifyFunctionReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionReplicaResponse>;
   /** 修改边缘函数触发规则 {@link ModifyFunctionRuleRequest} {@link ModifyFunctionRuleResponse} */
   ModifyFunctionRule(data: ModifyFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionRuleResponse>;
   /** 修改边缘函数触发规则优先级 {@link ModifyFunctionRulePriorityRequest} {@link ModifyFunctionRulePriorityResponse} */

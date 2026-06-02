@@ -4,6 +4,10 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** DataSight访问控制规则 */
 declare interface AccessControlRule {
+  /** 网段或IP，支持IPv4或IPv6。 */
+  CidrBlocks: string[] | null;
+  /** ACCEPT 或 DROP。 */
+  Action: string | null;
   /** 访问方式：public - 公网，internal - 内网 */
   AccessMode: string | null;
 }

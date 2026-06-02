@@ -50,6 +50,10 @@ declare interface Customer {
   IsIncludeFullScan?: boolean | null;
   /** 是否识别集团成员 */
   EnableGroupMemberDiscovered?: boolean;
+  /** 单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10 */
+  SingleIPTaskLimit?: number;
+  /** 端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000 */
+  PortScanQps?: number;
 }
 
 /** API安全详情 */
@@ -76,6 +80,8 @@ declare interface DisplayApiSec {
   Response?: string;
   /** 是否风险API */
   IsRiskAPI?: boolean;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 移动资产详情 */
@@ -164,6 +170,8 @@ declare interface DisplayConfig {
   IsCloudAsset?: number;
   /** 云资产状态，-1为下线 */
   CloudAssetStatus?: number;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 暗网详情 */
@@ -384,6 +392,8 @@ declare interface DisplayHttp {
   ResponseTime?: number;
   /** 域名解析状态 1:异常 0:正常 */
   AnalysisState?: number;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 任务详情 */
@@ -536,6 +546,8 @@ declare interface DisplayManage {
   IsCloudAsset?: number;
   /** 云资产是否下线：-1-已下线 0-正常 */
   CloudAssetStatus?: number;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 网盘泄露详情 */
@@ -586,6 +598,8 @@ declare interface DisplayPort {
   CloudAssetStatus?: number;
   /** 域名解析状态 1:异常 0:正常 */
   AnalysisState?: number;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 种子详情 */
@@ -624,6 +638,8 @@ declare interface DisplaySensitiveInfo {
   IsCloudAsset?: number;
   /** 云资产是否下线：-1-已下线 0-正常 */
   CloudAssetStatus?: number;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 子域名详情 */
@@ -662,6 +678,8 @@ declare interface DisplaySubDomain {
   DnsType?: string;
   /** DNS解析值 */
   DnsValue?: string;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 影子资产详情 */
@@ -702,6 +720,8 @@ declare interface DisplaySuspiciousAsset {
   Owner?: string;
   /** 根域名 */
   RootDomain?: string;
+  /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
+  AggregationCount?: number;
 }
 
 /** 数据管理公共字段 */
@@ -981,6 +1001,14 @@ declare interface CreateCustomerRequest {
   SubCompanyLevel?: number;
   /** 是否以企业名称为起点做完整扫描(包含手动上传),如只想扫描特定的某几个域名，则传false。 */
   IsIncludeFullScan?: boolean;
+  /** 端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000默认值：100 */
+  PortScanQps?: number;
+  /** 单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10默认值：1 */
+  SingleIPTaskLimit?: number;
+  /** 任一速率超过保守值时必须为 true，否则参数错误 */
+  HighRiskAck?: boolean;
+  /** 知情同意勾选清单，用于审计回放 */
+  ScanRateAckChecklist?: string[];
 }
 
 declare interface CreateCustomerResponse {
@@ -1089,6 +1117,14 @@ declare interface CreateJobRecordRequest {
   Qps?: number;
   /** 是否包含完整扫描 */
   IsIncludeFullScan?: boolean;
+  /** 端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000默认值：100 */
+  PortScanQps?: number;
+  /** 单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10默认值：1 */
+  SingleIPTaskLimit?: number;
+  /** 任一速率超过保守值时必须为 true，否则参数错误 */
+  HighRiskAck?: boolean;
+  /** 知情同意勾选清单，用于审计回放 */
+  ScanRateAckChecklist?: string[];
 }
 
 declare interface CreateJobRecordResponse {
@@ -2587,6 +2623,14 @@ declare interface ModifyCustomerRequest {
   SubCompanyLevel?: number;
   /** 是否包含完整的扫描 */
   IsIncludeFullScan?: boolean;
+  /** 端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000默认值：100 */
+  PortScanQps?: number;
+  /** 单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10默认值：1 */
+  SingleIPTaskLimit?: number;
+  /** 任一速率超过保守值时必须为 true，否则参数错误 */
+  HighRiskAck?: boolean;
+  /** 知情同意勾选清单，用于审计回放 */
+  ScanRateAckChecklist?: string[];
 }
 
 declare interface ModifyCustomerResponse {

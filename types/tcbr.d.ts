@@ -96,7 +96,7 @@ declare interface DeployRecord {
 
 /** 服务配置入参 */
 declare interface DiffConfigItem {
-  /** 配置项 KeyMinNum 最小副本数MaxNum 最大副本数PolicyDetails 扩缩容策略AccessTypes 访问类型TimerScale 定时扩缩容InternalAccess 内网访问OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScaleSessionAffinity 会话亲和性 open | closeCpuSpecs cpu 规格MemSpecs mem规格EnvParam 环境变量LogPath 日志采集路径Port 端口Dockerfile dockerfile 文件名BuildDir 目标目录Tag 服务标签LogType 日志类型 none | default | custom LogSetId 日志集IdLogTopicId 日志主题IDLogParseType 日志解析类型 json ｜ lineEntryPoint entrypoint 命令Cmd cmd命令VpcConf 网络信息 */
+  /** 配置项 KeyMinNum 最小副本数MaxNum 最大副本数PolicyDetails 扩缩容策略AccessTypes 访问类型TimerScale 定时扩缩容InternalAccess 内网访问OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScaleSessionAffinity 会话亲和性 open | closeCpuSpecs cpu 规格MemSpecs mem规格EnvParam 环境变量LogPath 日志采集路径Port 端口Dockerfile dockerfile 文件名BuildDir 目标目录Tag 服务标签LogType 日志类型 none | default | customLogSetId 日志集IdLogTopicId 日志主题IDLogParseType 日志解析类型 json ｜ lineEntryPoint entrypoint 命令Cmd cmd命令VpcConf 网络信息 */
   Key: string;
   /** 字符串类型配置项值InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType */
   Value?: string;
@@ -116,6 +116,8 @@ declare interface DiffConfigItem {
   VpcConf?: VpcConf;
   /** 存储配置信息 */
   VolumesConf?: VolumeConf[];
+  /** 公网访问配置 */
+  PublicNetConf?: PublicNetConf;
 }
 
 /** 环境基础信息 */
@@ -286,6 +288,12 @@ declare interface OnlineVersionInfo {
   FlowRatio?: string;
 }
 
+/** 公网访问配置 */
+declare interface PublicNetConf {
+  /** 是否开启公网访问枚举值：ENABLE： 开启公网访问DISABLE： 关闭公网访问 */
+  PublicNetStatus?: string;
+}
+
 /** 发布单信息 */
 declare interface ReleaseOrderInfo {
   /** 发布单Id */
@@ -386,6 +394,8 @@ declare interface ServerBaseConfig {
   VolumesConf?: VolumeConf[];
   /** 关联镜像密钥 */
   LinkImageRegistry?: string;
+  /** 公网访问配置 */
+  PublicNetConf?: PublicNetConf;
 }
 
 /** 服务基本信息 */

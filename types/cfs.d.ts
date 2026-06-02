@@ -154,6 +154,58 @@ declare interface DataFlowInfo {
   AutoRefreshTime?: string;
 }
 
+/** 数据检索信息 */
+declare interface DataRetrievalInfo {
+  /** 数据检索策略名称 */
+  DataRetrievalName?: string;
+  /** 迁移任务id示例值：migrate-001 */
+  DataRetrievalId?: string;
+  /** 文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取示例值：cfs-xxxxxx */
+  FileSystemId?: string;
+  /** 聚合检索条件 */
+  CompoundCondition?: string;
+  /** 创建时间示例值：2023-01-09 15:03:57 */
+  CreateTime?: string;
+  /** 数据检索重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，二选一 */
+  DayOfWeek?: string;
+  /** 数据检索按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek二选一 */
+  DayOfMonth?: string;
+  /** 重复时间点,0-23，小时 */
+  Hour?: string;
+  /** 列表检索条件 */
+  QueryCondition?: string;
+  /** 修改时间参数格式：2023-01-10 15:03:57 */
+  UpdateTime?: string;
+}
+
+/** 数据检索任务信息 */
+declare interface DataRetrievalTaskInfo {
+  /** 数据检索任务ID示例值：dataretrievaltask-123456 */
+  DataRetrievalTaskID?: string;
+  /** 迁移任务id示例值：migrate-001 */
+  DataRetrievalId?: string;
+  /** 文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取示例值：cfs-xxxxxx */
+  FileSystemId?: string;
+  /** 聚合检索条件示例值：from entries|where size &gt;4096 */
+  CompoundCondition?: string;
+  /** 列表检索条件 */
+  QueryCondition?: string;
+  /** 创建时间示例值：2023-01-09 15:03:57 */
+  CreateTime?: string;
+  /** 任务状态已完成：completed排队中：waiting进行中：running失败：failed */
+  State?: string;
+  /** 文件数量示例：1000 */
+  FileNum?: number;
+  /** 目录数量示例：1000 */
+  DirNum?: number;
+  /** 总文件大小，单位KiB示例：1024 */
+  Size?: number;
+  /** 文件清单下载地址示例值：https://xx-12345.cos.ap-shanghai.myqcloud.com/list.csv */
+  FileList?: string;
+  /** 检索错误提示。默认：Null，当Status为failed时，将提示信息展示给用户。 */
+  ErrorInfo?: string;
+}
+
 /** 购买完额外性能之后的值 */
 declare interface ExstraPerformanceInfo {
   /** fixed: 最终值固定 */
@@ -814,6 +866,30 @@ declare interface CreateDataFlowResponse {
   RequestId?: string;
 }
 
+declare interface CreateDataRetrievalRequest {
+  /** 文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取 示例值：cfs-xxxxxx */
+  FileSystemId: string;
+  /** 数据检索名称 示例值：DataDive */
+  DataRetrievalName: string;
+  /** 聚合检索条件 示例值：from entries|where size &gt;4096 */
+  CompoundCondition?: string;
+  /** 列表检索条件 */
+  QueryCondition?: string;
+  /** 数据检索按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek二选一 示例值：1 */
+  DayOfMonth?: string;
+  /** 数据检索重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，二选一 示例值：2,3 */
+  DayOfWeek?: string;
+  /** 重复时间点,0-23，小时 示例值：1,3,5 */
+  Hour?: string;
+}
+
+declare interface CreateDataRetrievalResponse {
+  /** 数据检索ID示例值：dataretrieval-123456 */
+  DataRetrievalId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLifecycleDataTaskRequest {
   /** 文件系统唯一 ID */
   FileSystemId: string;
@@ -980,6 +1056,16 @@ declare interface DeleteDataFlowRequest {
 }
 
 declare interface DeleteDataFlowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDataRetrievalRequest {
+  /** 数据检索 ID。可通过 DescribeDataRetrieval 接口获取。 */
+  DataRetrievalId: string;
+}
+
+declare interface DeleteDataRetrievalResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1206,6 +1292,48 @@ declare interface DescribeDataFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataRetrievalRequest {
+  /** 分页偏移量，默认值为 0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为 20，最大值为 100。 */
+  Limit?: number;
+  /** 过滤条件列表。支持的过滤字段：FileSystemId（文件系统 ID）、DataRetrievalId（数据检索 ID）、Name（数据检索名称，支持模糊搜索）。最多支持 10 个。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDataRetrievalResponse {
+  /** 数据检索总数。 */
+  TotalCount?: number;
+  /** 数据检索策略的详细信息 */
+  DataRetrievals?: DataRetrievalInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDataRetrievalTaskRequest {
+  /** 开始时间。须早于 EndTime ，仅支持查询最近3个月内的任务数据参数格式：2024-11-19 10:15:37 */
+  StartTime: string;
+  /** 结束时间。须晚于 StartTime ，仅支持查询最近3个月内的任务数据。参数格式：2024-10- 19 10:15:37 */
+  EndTime: string;
+  /** 数据检索ID示例值：dataretrieval-123456 */
+  DataRetrievalId: string;
+  /** 分页的偏移量，默认值为0。 示例值：0 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 示例值：20 */
+  Limit?: number;
+  /** DataRetrievalTaskID按照【数据检索任务id】进行过滤。类型：String */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDataRetrievalTaskResponse {
+  /** 数据检索任务总量 示例值：0 */
+  TotalCount?: number;
+  /** 检索任务详情 */
+  DataRetrievalTasks?: DataRetrievalTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLifecycleDataTaskRequest {
   /** 开始时间。须早于 EndTime ，仅支持查询最近3个月内的任务数据。 */
   StartTime: string;
@@ -1378,6 +1506,28 @@ declare interface ModifyDataFlowResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDataRetrievalRequest {
+  /** 数据检索ID示例值：dataretrieval-123456 */
+  DataRetrievalId: string;
+  /** 数据检索名称示例值：DataDive */
+  DataRetrievalName?: string;
+  /** 聚合检索条件 示例值：from entries|where size &gt;4096 */
+  CompoundCondition?: string;
+  /** 列表检索条件 */
+  QueryCondition?: string;
+  /** 数据检索按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek二选一 */
+  DayOfMonth?: string;
+  /** 数据检索重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，二选一 */
+  DayOfWeek?: string;
+  /** 重复时间点,0-23，小时 */
+  Hour?: string;
+}
+
+declare interface ModifyDataRetrievalResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyFileSystemAutoScaleUpRuleRequest {
   /** 文件系统 ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) */
   FileSystemId: string;
@@ -1428,6 +1578,16 @@ declare interface OverrideCfsRulesRequest {
 declare interface OverrideCfsRulesResponse {
   /** 权限组规则列表 */
   RuleList: PGroupRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunDataRetrievalTaskRequest {
+}
+
+declare interface RunDataRetrievalTaskResponse {
+  /** 数据检索任务 ID。 */
+  DataRetrievalTaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1691,6 +1851,8 @@ declare interface Cfs {
   CreateCfsSnapshot(data: CreateCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCfsSnapshotResponse>;
   /** 创建数据流动 {@link CreateDataFlowRequest} {@link CreateDataFlowResponse} */
   CreateDataFlow(data: CreateDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataFlowResponse>;
+  /** 创建数据检索 {@link CreateDataRetrievalRequest} {@link CreateDataRetrievalResponse} */
+  CreateDataRetrieval(data: CreateDataRetrievalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRetrievalResponse>;
   /** 创建数据管理任务 {@link CreateLifecycleDataTaskRequest} {@link CreateLifecycleDataTaskResponse} */
   CreateLifecycleDataTask(data: CreateLifecycleDataTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecycleDataTaskResponse>;
   /** 创建生命周期策略 {@link CreateLifecyclePolicyRequest} {@link CreateLifecyclePolicyResponse} */
@@ -1711,6 +1873,8 @@ declare interface Cfs {
   DeleteCfsSnapshot(data?: DeleteCfsSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCfsSnapshotResponse>;
   /** 删除数据流动 {@link DeleteDataFlowRequest} {@link DeleteDataFlowResponse} */
   DeleteDataFlow(data: DeleteDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataFlowResponse>;
+  /** 删除数据检索 {@link DeleteDataRetrievalRequest} {@link DeleteDataRetrievalResponse} */
+  DeleteDataRetrieval(data: DeleteDataRetrievalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataRetrievalResponse>;
   /** 删除生命周期管理策略 {@link DeleteLifecyclePolicyRequest} {@link DeleteLifecyclePolicyResponse} */
   DeleteLifecyclePolicy(data: DeleteLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifecyclePolicyResponse>;
   /** 删除迁移任务 {@link DeleteMigrationTaskRequest} {@link DeleteMigrationTaskResponse} */
@@ -1739,6 +1903,10 @@ declare interface Cfs {
   DescribeCfsSnapshots(data?: DescribeCfsSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfsSnapshotsResponse>;
   /** 查询数据流动信息 {@link DescribeDataFlowRequest} {@link DescribeDataFlowResponse} */
   DescribeDataFlow(data?: DescribeDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataFlowResponse>;
+  /** 查询数据检索 {@link DescribeDataRetrievalRequest} {@link DescribeDataRetrievalResponse} */
+  DescribeDataRetrieval(data?: DescribeDataRetrievalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRetrievalResponse>;
+  /** 查询数据检索任务 {@link DescribeDataRetrievalTaskRequest} {@link DescribeDataRetrievalTaskResponse} */
+  DescribeDataRetrievalTask(data: DescribeDataRetrievalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRetrievalTaskResponse>;
   /** 查询生命周期任务的接口 {@link DescribeLifecycleDataTaskRequest} {@link DescribeLifecycleDataTaskResponse} */
   DescribeLifecycleDataTask(data: DescribeLifecycleDataTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleDataTaskResponse>;
   /** 查询生命周期管理策略 {@link DescribeLifecyclePoliciesRequest} {@link DescribeLifecyclePoliciesResponse} */
@@ -1755,12 +1923,16 @@ declare interface Cfs {
   DoDirectoryOperation(data: DoDirectoryOperationRequest, config?: AxiosRequestConfig): AxiosPromise<DoDirectoryOperationResponse>;
   /** 修改数据流动相关参数 {@link ModifyDataFlowRequest} {@link ModifyDataFlowResponse} */
   ModifyDataFlow(data: ModifyDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataFlowResponse>;
+  /** 修改数据检索 {@link ModifyDataRetrievalRequest} {@link ModifyDataRetrievalResponse} */
+  ModifyDataRetrieval(data: ModifyDataRetrievalRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataRetrievalResponse>;
   /** 更新文件系统自动扩容策略 {@link ModifyFileSystemAutoScaleUpRuleRequest} {@link ModifyFileSystemAutoScaleUpRuleResponse} */
   ModifyFileSystemAutoScaleUpRule(data: ModifyFileSystemAutoScaleUpRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFileSystemAutoScaleUpRuleResponse>;
   /** 更新生命周期策略 {@link ModifyLifecyclePolicyRequest} {@link ModifyLifecyclePolicyResponse} */
   ModifyLifecyclePolicy(data: ModifyLifecyclePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifecyclePolicyResponse>;
   /** 批量覆盖式创建权限组规则 {@link OverrideCfsRulesRequest} {@link OverrideCfsRulesResponse} */
   OverrideCfsRules(data: OverrideCfsRulesRequest, config?: AxiosRequestConfig): AxiosPromise<OverrideCfsRulesResponse>;
+  /** 执行数据检索任务 {@link RunDataRetrievalTaskRequest} {@link RunDataRetrievalTaskResponse} */
+  RunDataRetrievalTask(data?: RunDataRetrievalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunDataRetrievalTaskResponse>;
   /** 文件系统存储量扩容 {@link ScaleUpFileSystemRequest} {@link ScaleUpFileSystemResponse} */
   ScaleUpFileSystem(data: ScaleUpFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpFileSystemResponse>;
   /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */

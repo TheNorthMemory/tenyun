@@ -164,6 +164,10 @@ declare interface DescribeAgentAppResp {
   McpServersNum?: number;
   /** 绑定的模型服务数量 */
   ModelServicesNum?: number | null;
+  /** API认证列表 */
+  ConnectorIDs?: string[];
+  /** 关联API数量 */
+  ServicesNum?: number;
 }
 
 /** 查询App列表响应 */
@@ -206,6 +210,8 @@ declare interface DescribeAgentCredentialResp {
   RelateMcpServerNum?: number;
   /** 关联模型数 */
   RelateModelNum?: number | null;
+  /** 关联服务数 */
+  RelateServiceNum?: number | null;
   /** 凭据内容 */
   Content?: AgentCredentialContentDTO;
   /** 创建时间 */
@@ -779,6 +785,8 @@ declare interface CreateAgentAppRequest {
   OAuth2ResourceServerID?: string;
   /** 描述 */
   Description?: string;
+  /** API认证列表 */
+  ConnectorIDs?: string[];
 }
 
 declare interface CreateAgentAppResponse {
@@ -1291,6 +1299,8 @@ declare interface ModifyAgentAppRequest {
   OAuth2ResourceServerID?: string;
   /** 描述 */
   Description?: string;
+  /** 凭据ID */
+  ConnectorIDs?: string[];
 }
 
 declare interface ModifyAgentAppResponse {

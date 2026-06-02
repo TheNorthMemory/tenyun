@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 253+ 款产品，14281+ 服务数</summary>
+<details><summary>共计 253+ 款产品，14292+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -171,7 +171,7 @@ cdwpg | [腾讯云数据仓库TCHouse-P](https://cloud.tencent.com/document/prod
 cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-11-23(2) |
 cetcd | [云原生xa0etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
-cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(58) |
+cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(129) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(38) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
@@ -261,7 +261,7 @@ ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(68) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(82) |
-lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(118) |
+lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(119) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(231) |
 lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(106) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(11) |
@@ -328,7 +328,7 @@ tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 20
 tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(35) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(210) | 2022-01-06(5) |
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(214) | 2022-01-06(5) |
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(32) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |

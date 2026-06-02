@@ -100,6 +100,16 @@ declare interface BlueprintPrice {
   DiscountPrice: number;
 }
 
+/** 镜像跨账号共享信息。 */
+declare interface BlueprintShareAcrossAccountInfo {
+  /** 镜像ID。 */
+  BlueprintId?: string;
+  /** 镜像共享的账户ID。 */
+  AccountId?: string;
+  /** 镜像共享时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。 */
+  CreatedTime?: string;
+}
+
 /** 套餐信息。 */
 declare interface Bundle {
   /** 套餐 ID。 */
@@ -1488,6 +1498,26 @@ declare interface DescribeBlueprintsResponse {
   TotalCount?: number;
   /** 镜像详细信息列表。 */
   BlueprintSet?: Blueprint[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBlueprintsShareAcrossAccountInfosRequest {
+  /** 镜像 ID 列表。可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。 */
+  BlueprintIds: string[];
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 过滤器列表。account-id按照【[账号 ID](https://console.cloud.tencent.com/developer)】进行过滤。类型：String必选：否每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeBlueprintsShareAcrossAccountInfosResponse {
+  /** 符合条件的镜像共享信息数量。 */
+  TotalCount?: number;
+  /** 镜像共享信息列表。 */
+  BlueprintShareAcrossAccountInfoSet?: BlueprintShareAcrossAccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2921,6 +2951,8 @@ declare interface Lighthouse {
   DescribeBlueprintInstances(data: DescribeBlueprintInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintInstancesResponse>;
   /** 查询镜像信息 {@link DescribeBlueprintsRequest} {@link DescribeBlueprintsResponse} */
   DescribeBlueprints(data?: DescribeBlueprintsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintsResponse>;
+  /** 查询镜像跨账号共享信息 {@link DescribeBlueprintsShareAcrossAccountInfosRequest} {@link DescribeBlueprintsShareAcrossAccountInfosResponse} */
+  DescribeBlueprintsShareAcrossAccountInfos(data: DescribeBlueprintsShareAcrossAccountInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintsShareAcrossAccountInfosResponse>;
   /** 查询套餐折扣 {@link DescribeBundleDiscountRequest} {@link DescribeBundleDiscountResponse} */
   DescribeBundleDiscount(data: DescribeBundleDiscountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBundleDiscountResponse>;
   /** 查询套餐 {@link DescribeBundlesRequest} {@link DescribeBundlesResponse} */

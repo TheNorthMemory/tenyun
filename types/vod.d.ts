@@ -5457,7 +5457,7 @@ declare namespace V20180717 {
   interface MediaTranscodeItem {
     /** 转码后的视频文件地址。 */
     Url?: string;
-    /** 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。注意：取值 0 表示原始文件。 */
+    /** 转码规格 ID，参见转码参数模板。注意：取值 0 表示原始文件。 */
     Definition?: number;
     /** 视频流码率平均值与音频流码率平均值之和， 单位：bps。 */
     Bitrate?: number;
@@ -5483,6 +5483,8 @@ declare namespace V20180717 {
     CopyRightWatermarkText?: string;
     /** 数字水印模板id。 */
     BlindWatermarkDefinition?: number;
+    /** 转码生成的新FileId，请求开启独立媒资输出时有效。 */
+    FileId?: string;
   }
 
   /** 转场信息 */
