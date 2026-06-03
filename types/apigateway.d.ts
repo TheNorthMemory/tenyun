@@ -3623,7 +3623,7 @@ declare interface Apigateway {
   DescribeAllPluginApis(data: DescribeAllPluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllPluginApisResponse>;
   /** 查询API详情 {@link DescribeApiRequest} {@link DescribeApiResponse} */
   DescribeApi(data: DescribeApiRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiResponse>;
-  /** 搜索应用 {@link DescribeApiAppRequest} {@link DescribeApiAppResponse} */
+  /** @deprecated 搜索应用 {@link DescribeApiAppRequest} {@link DescribeApiAppResponse} */
   DescribeApiApp(data: DescribeApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppResponse>;
   /** 查询应用绑定的Api列表 {@link DescribeApiAppBindApisStatusRequest} {@link DescribeApiAppBindApisStatusResponse} */
   DescribeApiAppBindApisStatus(data: DescribeApiAppBindApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppBindApisStatusResponse>;

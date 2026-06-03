@@ -636,9 +636,9 @@ declare interface DescribeLocalAccountsPage {
   Items?: DescribeLocalAccountsData[];
 }
 
-/** DescribeResourceGrantedAccountsData */
+/** 账号分组授权信息 */
 declare interface DescribeResourceGrantedAccountGroupsData {
-  /**  */
+  /** 授权信息 */
   Items?: GrantedAccountGroupItem[];
 }
 
@@ -646,13 +646,13 @@ declare interface DescribeResourceGrantedAccountGroupsData {
 declare interface DescribeResourceGrantedAccountsData {
   /** 总数 */
   TotalCount?: number;
-  /**  */
+  /** 授权信息 */
   Items?: GrantedAccountItem[];
 }
 
 /** DescribeResourceGrantedAccountsData */
 declare interface DescribeResourceGrantedVirtualGroupsData {
-  /**  */
+  /** 授权信息 */
   Items?: GrantedVirtualGroupItem[];
 }
 
@@ -2079,7 +2079,7 @@ declare interface Ioa {
   ExportDeviceDownloadTask(data?: ExportDeviceDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExportDeviceDownloadTaskResponse>;
   /** 导出软件信息列表 {@link ExportSoftwareInformationListRequest} {@link ExportSoftwareInformationListResponse} */
   ExportSoftwareInformationList(data?: ExportSoftwareInformationListRequest, config?: AxiosRequestConfig): AxiosPromise<ExportSoftwareInformationListResponse>;
-  /** 按照账户分组组授权资源 {@link GrantResourcesByAccountGroupsRequest} {@link GrantResourcesByAccountGroupsResponse} */
+  /** 按照账户分组授权资源 {@link GrantResourcesByAccountGroupsRequest} {@link GrantResourcesByAccountGroupsResponse} */
   GrantResourcesByAccountGroups(data: GrantResourcesByAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByAccountGroupsResponse>;
   /** 按照账号授权资源访问 {@link GrantResourcesByAccountsRequest} {@link GrantResourcesByAccountsResponse} */
   GrantResourcesByAccounts(data: GrantResourcesByAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<GrantResourcesByAccountsResponse>;

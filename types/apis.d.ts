@@ -62,6 +62,44 @@ declare interface AgentAppSecretKeyVO {
   SecretKey?: string;
 }
 
+/** Agent应用关联的服务配置 */
+declare interface AgentAppServiceDTO {
+  /** ID */
+  ID?: string;
+  /** 是否限流 */
+  InvokeLimitConfigStatus?: boolean;
+  /** 限流配置 */
+  InvokeLimitConfig?: InvokeLimitConfigDTO;
+  /** 是否要认证 */
+  NeedAuth?: boolean;
+  /** 凭据ID */
+  AgentCredentialID?: string;
+}
+
+/** 应用API详情 */
+declare interface AgentAppServiceVO {
+  /** ID */
+  ID?: string;
+  /** 应用ID */
+  AgentAppID?: string;
+  /** 服务ID */
+  ServiceID?: string;
+  /** 是否限流 */
+  InvokeLimitConfigStatus?: boolean;
+  /** 限流配置 */
+  InvokeLimitConfig?: InvokeLimitConfigDTO;
+  /** 服务详情 */
+  ServiceVO?: ServiceVO;
+  /** 关联时间 */
+  RelateTime?: string;
+  /** 是否需要认证 */
+  NeedAuth?: boolean;
+  /** 凭据ID */
+  AgentCredentialID?: string;
+  /** 凭据详情 */
+  AgentCredentialVO?: DescribeAgentCredentialResp;
+}
+
 /** 凭证内容 */
 declare interface AgentCredentialContentDTO {
   /** 如果认证类型为sts时，该项必填 */
@@ -112,6 +150,14 @@ declare interface BindMcpSecurityRuleVO {
   IconType?: string;
 }
 
+/** 匹配条件 */
+declare interface CompoundCondition {
+  /** 是否启用 */
+  Enable?: boolean | null;
+  /** 匹配信息 */
+  Rules?: SimpleCondition[] | null;
+}
+
 /** 创建Agent应用的返回值，根据创建的AuthType，返回ApiKey或者SecretKey */
 declare interface CreateAgentAppResp {
   /** app id */
@@ -122,6 +168,14 @@ declare interface CreateAgentAppResp {
   SecretKey?: string;
   /** 如果authType为secretKey时，返回该字段 */
   SecretID?: string;
+}
+
+/** 自定义匹配条件 */
+declare interface CustomMatch {
+  /** 请求头 匹配条件 */
+  HeadersMatch?: CompoundCondition | null;
+  /** 请求参数 匹配条件 */
+  QueryMatch?: CompoundCondition | null;
 }
 
 /** 查询App mcpServer绑定列表响应 */
@@ -168,6 +222,14 @@ declare interface DescribeAgentAppResp {
   ConnectorIDs?: string[];
   /** 关联API数量 */
   ServicesNum?: number;
+}
+
+/** 应用服务查询 */
+declare interface DescribeAgentAppServicesVO {
+  /** 总数 */
+  Total?: number;
+  /** 数据列表 */
+  Items?: AgentAppServiceVO[];
 }
 
 /** 查询App列表响应 */
@@ -470,6 +532,24 @@ declare interface DescribeModelsSort {
   Name?: number;
 }
 
+/** FieldValue结构体 */
+declare interface FieldValueDTO {
+  /** 属性 */
+  Field?: string;
+  /** 值 */
+  Value?: string;
+}
+
+/** HealthCheckConfigDTO */
+declare interface HealthCheckConfigDTO {
+  /** 健康检查路径 */
+  HealthCheckPath?: string | null;
+  /** 状态码 */
+  ValidHealthCheckStatusCode?: number[] | null;
+  /** 请求的超时时间 */
+  HealthCheckTimeout?: number | null;
+}
+
 /** IDNameVO */
 declare interface IDNameVO {
   /** 业务ID */
@@ -664,6 +744,208 @@ declare interface SensitiveDataCheckConfigDTO {
   ContextScope?: string | null;
 }
 
+/** ServiceDatabaseOrderParam */
+declare interface ServiceDatabaseOrderParam {
+  /** 字段名称 */
+  FieldName?: string | null;
+  /** 排序 asc desc */
+  Order?: string | null;
+}
+
+/** 向导模式请求参数 */
+declare interface ServiceDatabaseReqParam {
+  /** 表字段名 */
+  FieldName?: string | null;
+  /** 操作符 */
+  Operator?: string | null;
+  /** 参数名/常量 */
+  Val?: string | null;
+  /** 参数类型 */
+  ValType?: string | null;
+  /** 内部字段 */
+  InternalField?: boolean | null;
+}
+
+/** 响应参数 */
+declare interface ServiceDatabaseRespParam {
+  /** 源字段名称 */
+  FieldName?: string | null;
+  /** 目标字段名称 */
+  Name?: string | null;
+}
+
+/** ServiceVO */
+declare interface ServiceVO {
+  /** 实例 */
+  InstanceID?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 里约应用ID */
+  PaasID?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 标签 */
+  LabelIDs?: string[] | null;
+  /** 目录 */
+  CategoryIDs?: string[] | null;
+  /** 鉴权方式 */
+  AuthType?: string | null;
+  /** 签名 */
+  SignType?: string | null;
+  /** 登录方式 */
+  LoginTypes?: string[] | null;
+  /** 负载方式 */
+  TargetSelect?: string | null;
+  /** 公开路径 */
+  PubPath?: string | null;
+  /** 请求方法 */
+  RequestMethod?: string | null;
+  /** 目标服务器 */
+  TargetHosts?: TargetHostDTO[] | null;
+  /** 是否https */
+  HttpProtocolType?: string | null;
+  /** 证书检查 */
+  CheckTargetCertsError?: boolean | null;
+  /** http协议类型 */
+  HttpProtocolVersion?: string | null;
+  /** 版本号 */
+  Versions?: VersionDTO[] | null;
+  /** 目标路径 */
+  TargetPath?: string | null;
+  /** 入参 */
+  RequestParamsValidatorStatus?: boolean | null;
+  /** 入参 */
+  RequestParamsValidatorJsonInfoT?: string | null;
+  /** 出参 */
+  ResponseParamsValidatorStatus?: boolean | null;
+  /** 出参 */
+  ResponseParamsValidatorJsonInfoT?: string | null;
+  /** 流量控制 */
+  InvokeLimitConfigStatus?: boolean | null;
+  /** 流量控制 */
+  InvokeLimitConfig?: InvokeLimitConfigDTO | null;
+  /** 健康检查 */
+  HealthCheckStatus?: boolean | null;
+  /** 健康检查 */
+  HealthCheckConfig?: HealthCheckConfigDTO | null;
+  /** 格式转换 */
+  SourceTypeStatus?: boolean | null;
+  /** 格式转换 */
+  SourceTypeConfig?: SourceTypeConfigDTO | null;
+  /** 是否开启Token限流 */
+  TokenLimitStatus?: boolean | null;
+  /** Token限流配置 */
+  TokenLimitConfig?: TokenLimitConfigDTO | null;
+  /** 是否开启内容安全 */
+  TmsStatus?: boolean | null;
+  /** 内容安全配置 */
+  TmsConfig?: TmsConfigDTO | null;
+  /** IP白名单 */
+  IpWhiteStatus?: boolean | null;
+  /** IP白名单 */
+  IpWhiteList?: string[] | null;
+  /** IP黑名单 */
+  IpBlackStatus?: boolean | null;
+  /** IP黑名单 */
+  IpBlackList?: string[] | null;
+  /** 插件 */
+  PluginConfigs?: PluginConfigDTO[] | null;
+  /** 服务ID */
+  ID?: string | null;
+  /** 状态 */
+  Status?: string | null;
+  /** 预览地址 */
+  Url?: string | null;
+  /** app */
+  App?: IDNameVO | null;
+  /** 目录 */
+  Catalogs?: IDNameVO[] | null;
+  /** 标签 */
+  Labels?: IDNameVO[] | null;
+  /** 认证方式 */
+  Logins?: IDNameVO[] | null;
+  /** 授权数 */
+  AuthAppNum?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 最后修改时间 */
+  LastUpdateTime?: string | null;
+  /** 应用ID */
+  AppID?: number | null;
+  /** 用户ID */
+  Uin?: string | null;
+  /** 域名 */
+  Domain?: string | null;
+  /** 是否开启报文记录 */
+  OpenMessageLogStatus?: boolean | null;
+  /** 订阅页面的当前用户是否订阅了该API */
+  CurrPaasIDSubscriptionID?: string | null;
+  /** 目标服务类型 Restful Database Mock */
+  TargetServiceType?: string | null;
+  /** SQL模板 */
+  SqlTemplate?: SqlTemplate | null;
+  /** 目标Host类型 0 默认 1 vpc */
+  TargetHostType?: number | null;
+  /** 后端服务类型 0 自定义 原始数据:ip/域名或vpc 1 后端服务 服务组 */
+  TargetServiceHostType?: number | null;
+  /** 后端服务组ID */
+  TargetServerGroupID?: string | null;
+  /** 后端服务组 */
+  TargetServerGroup?: TargetServerGroupDTO | null;
+  /** 自定义host */
+  CustomHttpHost?: string | null;
+  /** Http 请求host类型 useRequestHost 保持源请求host targetHost 修正为源站host customHost 自定义host */
+  HttpHostType?: string | null;
+  /** mock响应状态码 */
+  MockStatusCode?: number | null;
+  /** mock响应body */
+  MockBody?: string | null;
+  /** mock响应头 */
+  MockHeaders?: FieldValueDTO[] | null;
+  /** 路径匹配类型: prefix 前缀匹配(不送默认); absolute 绝对匹配; regex正则匹配; */
+  PathMatchType?: string | null;
+  /** 自定义匹配条件 */
+  CustomMatch?: CustomMatch | null;
+  /** 请求的超时时间 */
+  Timeout?: number | null;
+  /** 绑定的mcp server数量 */
+  McpServerNum?: number | null;
+}
+
+/** 匹配条件请求参数 */
+declare interface SimpleCondition {
+  /** 字段名 */
+  Key?: string | null;
+  /** 匹配方式: eq 等于;ne 不等于;regex 正则; */
+  Condition?: string | null;
+  /** 字段值 或正则表达式 */
+  Value?: string | null;
+}
+
+/** SourceTypeConfigDTO */
+declare interface SourceTypeConfigDTO {
+  /** json xml urlencoded amf0 amf3 hessian1 hessian2 */
+  ReqSourceType?: string | null;
+  /** json xml urlencoded amf0 amf3 hessian1 hessian2 */
+  ReqTargetType?: string | null;
+  /** json xml urlencoded amf0 amf3 hessian1 hessian2 */
+  ResSourceType?: string | null;
+  /** json xml urlencoded amf0 amf3 hessian1 hessian2 */
+  ResTargetType?: string | null;
+}
+
+/** SqlTemplate SQL模板 */
+declare interface SqlTemplate {
+  /** 配置方式 script 脚本 wizard 向导 */
+  DbConfigMode?: string | null;
+  /** 数据源ID */
+  DataSourceID?: string | null;
+  /** Sql代码 */
+  Sql?: string | null;
+  /** 向导模式配置 */
+  WizardConfig?: WizardConfig | null;
+}
+
 /** 开始结束时间结构体 */
 declare interface StartEndTime {
   /** 开始时间 */
@@ -688,6 +970,22 @@ declare interface TargetModelDTO {
   Name?: string;
   /** 权重 */
   Rank?: number;
+}
+
+/** 后端服务组DTO */
+declare interface TargetServerGroupDTO {
+  /** 后端服务组ID */
+  ID?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** 目标服务器列表 */
+  TargetHosts?: TargetHostDTO[] | null;
+  /** 目标Host类型 0 默认 1 vpc */
+  TargetHostType?: number | null;
+  /** 关联的服务数量 */
+  ServiceCount?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
 }
 
 /** 内容安全配置 */
@@ -742,6 +1040,30 @@ declare interface ToolConfigVO {
   McpSecurityRules?: BindMcpSecurityRuleVO[];
 }
 
+/** VersionDTO */
+declare interface VersionDTO {
+  /** Version版本 */
+  Version?: string | null;
+  /** 目标路径 */
+  TargetPath?: string | null;
+}
+
+/** WizardConfig 向导模式配置 */
+declare interface WizardConfig {
+  /** 表名 */
+  DbTable?: string | null;
+  /** 是否分页 */
+  DbEnablePaging?: boolean | null;
+  /** 请求参数 */
+  DbReqParams?: ServiceDatabaseReqParam[] | null;
+  /** 响应参数 */
+  DbRespParams?: ServiceDatabaseRespParam[] | null;
+  /** 排序参数 */
+  DbOrdParams?: ServiceDatabaseOrderParam[] | null;
+  /** 是否开启出参映射 */
+  DbEnableMappingResp?: boolean | null;
+}
+
 declare interface CreateAgentAppMcpServersRequest {
   /** 实例ID */
   InstanceID: string;
@@ -792,6 +1114,22 @@ declare interface CreateAgentAppRequest {
 declare interface CreateAgentAppResponse {
   /** app id */
   Data?: CreateAgentAppResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAgentAppServicesRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** 应用ID */
+  ID: string;
+  /** 服务详情 */
+  Services: AgentAppServiceDTO[];
+}
+
+declare interface CreateAgentAppServicesResponse {
+  /** app id */
+  Data?: ResultIDVO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -956,6 +1294,14 @@ declare interface CreateModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateServiceRequest {
+}
+
+declare interface CreateServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAgentAppMcpServersRequest {
   /** 实例ID */
   InstanceID: string;
@@ -996,6 +1342,22 @@ declare interface DeleteAgentAppRequest {
 }
 
 declare interface DeleteAgentAppResponse {
+  /** app id */
+  Data?: ResultIDVO;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAgentAppServicesRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** 应用ID */
+  ID: string;
+  /** 服务IDs */
+  ServiceIDs: string[];
+}
+
+declare interface DeleteAgentAppServicesResponse {
   /** app id */
   Data?: ResultIDVO;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1052,6 +1414,18 @@ declare interface DeleteModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteServiceRequest {
+  /** 实例ID */
+  InstanceID?: string;
+  /** 业务ID */
+  ID?: string;
+}
+
+declare interface DeleteServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAgentAppMcpServersRequest {
   /** 分页大小 */
   Limit: number;
@@ -1094,6 +1468,34 @@ declare interface DescribeAgentAppRequest {
 declare interface DescribeAgentAppResponse {
   /** app详情 */
   Data?: DescribeAgentAppResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAgentAppServicesRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** 数据量 */
+  Limit: number;
+  /** IDs */
+  IDs?: string[];
+  /** 应用IDs */
+  AgentAppIDs?: string[];
+  /** 服务IDs */
+  ServiceIDs?: string[];
+  /** 关键字 */
+  Keyword?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 是否有凭据 */
+  AgentCredentialExist?: boolean;
+  /** 凭据ID */
+  AgentCredentialIDs?: string[];
+}
+
+declare interface DescribeAgentAppServicesResponse {
+  /** app id */
+  Data?: DescribeAgentAppServicesVO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1268,6 +1670,26 @@ declare interface DescribeModelsRequest {
 declare interface DescribeModelsResponse {
   /** 结果集 */
   Data?: DescribeModelsResponseVO;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServiceRequest {
+  /** 实例ID */
+  InstanceID?: string;
+  /** 业务ID */
+  ID?: string;
+}
+
+declare interface DescribeServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServicesRequest {
+}
+
+declare interface DescribeServicesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1476,6 +1898,80 @@ declare interface ModifyModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyServiceRequest {
+  /** 实例 */
+  InstanceID?: string;
+  /** 名称 */
+  Name?: string;
+  /** 里约应用ID */
+  PaasID?: string;
+  /** 描述 */
+  Description?: string;
+  /** 标签 */
+  LabelIDs?: string[];
+  /** 目录 */
+  CategoryIDs?: string[];
+  /** 鉴权方式 */
+  AuthType?: string;
+  /** 签名 */
+  SignType?: string;
+  /** 登录方式 */
+  LoginTypes?: string[];
+  /** 负载方式 */
+  TargetSelect?: string;
+  /** 公开路径 */
+  PubPath?: string;
+  /** 请求方法 */
+  RequestMethod?: string;
+  /** 是否https */
+  HttpProtocolType?: string;
+  /** 证书检查 */
+  CheckTargetCertsError?: boolean;
+  /** http协议类型 */
+  HttpProtocolVersion?: string;
+  /** 版本号 */
+  Versions?: VersionDTO[];
+  /** 目标路径 */
+  TargetPath?: string;
+  /** 入参 */
+  RequestParamsValidatorStatus?: boolean;
+  /** 入参 */
+  RequestParamsValidatorJsonInfoT?: string;
+  /** 出参 */
+  ResponseParamsValidatorStatus?: boolean;
+  /** 出参 */
+  ResponseParamsValidatorJsonInfoT?: string;
+  /** 流量控制 */
+  InvokeLimitConfigStatus?: boolean;
+  /** 流量控制 */
+  InvokeLimitConfig?: InvokeLimitConfigDTO;
+  /** 健康检查 */
+  HealthCheckStatus?: boolean;
+  /** 健康检查 */
+  HealthCheckConfig?: HealthCheckConfigDTO;
+  /** 格式转换 */
+  SourceTypeStatus?: boolean;
+  /** 格式转换 */
+  SourceTypeConfig?: SourceTypeConfigDTO;
+  /** IP白名单 */
+  IpWhiteStatus?: boolean;
+  /** IP白名单 */
+  IpWhiteList?: string[];
+  /** IP黑名单 */
+  IpBlackStatus?: boolean;
+  /** IP黑名单 */
+  IpBlackList?: string[];
+  /** 插件 */
+  PluginConfigs?: PluginConfigDTO[];
+  /** 服务ID */
+  ID?: string;
+}
+
+declare interface ModifyServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Apis AI Agent 安全网关} */
 declare interface Apis {
   (): Versions;
@@ -1485,6 +1981,8 @@ declare interface Apis {
   CreateAgentAppMcpServers(data: CreateAgentAppMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentAppMcpServersResponse>;
   /** 创建app的model service关联 {@link CreateAgentAppModelServicesRequest} {@link CreateAgentAppModelServicesResponse} */
   CreateAgentAppModelServices(data: CreateAgentAppModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentAppModelServicesResponse>;
+  /** 应用API关联 {@link CreateAgentAppServicesRequest} {@link CreateAgentAppServicesResponse} */
+  CreateAgentAppServices(data: CreateAgentAppServicesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentAppServicesResponse>;
   /** 创建凭据 {@link CreateAgentCredentialRequest} {@link CreateAgentCredentialResponse} */
   CreateAgentCredential(data?: CreateAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentCredentialResponse>;
   /** 创建mcp server {@link CreateMcpServerRequest} {@link CreateMcpServerResponse} */
@@ -1493,12 +1991,16 @@ declare interface Apis {
   CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
   /** 创建模型服务 {@link CreateModelServiceRequest} {@link CreateModelServiceResponse} */
   CreateModelService(data: CreateModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelServiceResponse>;
+  /** 创建服务 {@link CreateServiceRequest} {@link CreateServiceResponse} */
+  CreateService(data?: CreateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceResponse>;
   /** 删除app {@link DeleteAgentAppRequest} {@link DeleteAgentAppResponse} */
   DeleteAgentApp(data: DeleteAgentAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentAppResponse>;
   /** 删除app的mcp server {@link DeleteAgentAppMcpServersRequest} {@link DeleteAgentAppMcpServersResponse} */
   DeleteAgentAppMcpServers(data: DeleteAgentAppMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentAppMcpServersResponse>;
   /** 删除app的model service关联 {@link DeleteAgentAppModelServicesRequest} {@link DeleteAgentAppModelServicesResponse} */
   DeleteAgentAppModelServices(data: DeleteAgentAppModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentAppModelServicesResponse>;
+  /** 应用API关联关系解除 {@link DeleteAgentAppServicesRequest} {@link DeleteAgentAppServicesResponse} */
+  DeleteAgentAppServices(data: DeleteAgentAppServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentAppServicesResponse>;
   /** 删除凭据 {@link DeleteAgentCredentialRequest} {@link DeleteAgentCredentialResponse} */
   DeleteAgentCredential(data?: DeleteAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentCredentialResponse>;
   /** 删除mcp server {@link DeleteMcpServerRequest} {@link DeleteMcpServerResponse} */
@@ -1507,12 +2009,16 @@ declare interface Apis {
   DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 删除模型服务 {@link DeleteModelServiceRequest} {@link DeleteModelServiceResponse} */
   DeleteModelService(data: DeleteModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelServiceResponse>;
+  /** 删除服务 {@link DeleteServiceRequest} {@link DeleteServiceResponse} */
+  DeleteService(data?: DeleteServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceResponse>;
   /** 查询app详情 {@link DescribeAgentAppRequest} {@link DescribeAgentAppResponse} */
   DescribeAgentApp(data: DescribeAgentAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAppResponse>;
   /** 查询app mcp关联列表 {@link DescribeAgentAppMcpServersRequest} {@link DescribeAgentAppMcpServersResponse} */
   DescribeAgentAppMcpServers(data: DescribeAgentAppMcpServersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAppMcpServersResponse>;
   /** 查询app model服务关联列表 {@link DescribeAgentAppModelServicesRequest} {@link DescribeAgentAppModelServicesResponse} */
   DescribeAgentAppModelServices(data?: DescribeAgentAppModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAppModelServicesResponse>;
+  /** 应用API查询 {@link DescribeAgentAppServicesRequest} {@link DescribeAgentAppServicesResponse} */
+  DescribeAgentAppServices(data: DescribeAgentAppServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAppServicesResponse>;
   /** 查询app列表 {@link DescribeAgentAppsRequest} {@link DescribeAgentAppsResponse} */
   DescribeAgentApps(data: DescribeAgentAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAppsResponse>;
   /** 查询凭据详情 {@link DescribeAgentCredentialRequest} {@link DescribeAgentCredentialResponse} */
@@ -1531,6 +2037,10 @@ declare interface Apis {
   DescribeModelServices(data: DescribeModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelServicesResponse>;
   /** 查询模型列表 {@link DescribeModelsRequest} {@link DescribeModelsResponse} */
   DescribeModels(data: DescribeModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelsResponse>;
+  /** 查询服务详情 {@link DescribeServiceRequest} {@link DescribeServiceResponse} */
+  DescribeService(data?: DescribeServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceResponse>;
+  /** 查询服务列表 {@link DescribeServicesRequest} {@link DescribeServicesResponse} */
+  DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
   /** 修改app {@link ModifyAgentAppRequest} {@link ModifyAgentAppResponse} */
   ModifyAgentApp(data: ModifyAgentAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentAppResponse>;
   /** 修改app的model service关联 {@link ModifyAgentAppModelServicesRequest} {@link ModifyAgentAppModelServicesResponse} */
@@ -1543,6 +2053,8 @@ declare interface Apis {
   ModifyModel(data: ModifyModelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelResponse>;
   /** 编辑模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
+  /** 修改服务 {@link ModifyServiceRequest} {@link ModifyServiceResponse} */
+  ModifyService(data?: ModifyServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceResponse>;
 }
 
 export declare type Versions = ["2024-08-01"];

@@ -12,6 +12,12 @@ declare interface AIOptimizerStatus {
   TrainingProgress?: number;
 }
 
+/** AI 优化器任务数据 */
+declare interface AIOptimizerTaskData {
+  /** 模板ID */
+  TemplateID?: string;
+}
+
 /** 集群支持的功能 */
 declare interface Ability {
   /** 是否支持从可用区 */
@@ -486,6 +492,8 @@ declare interface BizTaskInfo {
   VaultId?: string;
   /** 保险箱名称 */
   VaultName?: string;
+  /** AI优化器任务信息 */
+  AIOptimizerTaskData?: AIOptimizerTaskData;
 }
 
 /** 实例参数修改任务详情 */

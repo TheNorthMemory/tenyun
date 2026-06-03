@@ -4845,7 +4845,7 @@ declare interface ModifyCdbProxyParamResponse {
 }
 
 declare interface ModifyDBInstanceLogToCLSRequest {
-  /** 实例 ID，可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
+  /** 实例 ID，可通过 DescribeDBInstances 接口获取。 */
   InstanceId: string;
   /** 日志类型。error：错误日志，slowlog：慢日志。 */
   LogType: string;
@@ -4865,6 +4865,8 @@ declare interface ModifyDBInstanceLogToCLSRequest {
   CreateIndex?: boolean;
   /** CLS 所在地域，不填择默认为 Region 的参数值。 */
   ClsRegion?: string;
+  /** 创建日志集和日志主题的时候可选，最多不能超过10个标签 */
+  ResourceTags?: TagInfoItem[];
 }
 
 declare interface ModifyDBInstanceLogToCLSResponse {

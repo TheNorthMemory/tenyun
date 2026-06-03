@@ -1989,9 +1989,9 @@ declare namespace V20180717 {
     ModelVersion?: string;
     /** AIGC生图任务输入文件信息。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
-    /** 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。 */
+    /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
-    /** 要阻止模型生成图片的提示词。最大支持1000字符。 */
+    /** 要阻止模型生成图片的提示词。 */
     NegativePrompt?: string;
     /** 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
     EnhancePrompt?: string;
@@ -8666,7 +8666,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1356\&quot;}&quot;}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}可用于开启输出多张图像，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;sequential_image_generation\&quot;:\&quot;auto\&quot;}&quot;}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;} */
+    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1356\&quot;}&quot;}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}可用于开启输出多张图像，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;sequential_image_generation\&quot;:\&quot;auto\&quot;}&quot;}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}支持设置透明图层：示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;} */
     ExtInfo?: string;
   }
 
@@ -8732,7 +8732,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：Kling：可灵；Vidu；Hailuo：海螺；Hunyuan：混元；Mingmou：明眸；GV；OS；PixVerse; */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Jimeng，可选值为 3.0pro；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
     ModelVersion: string;
     /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图、视频参考、视频编辑等模式。首尾帧视频生成：首帧图片只支持一张图片，图片的Usage字段为FirstFrame，LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片生成：可传入单张图片或者多张，图片的Usage字段为Reference；参考图片，可以调整生成视频的宽高比例。视频编辑、视频参考：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片，图片的Usage字段为Reference。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。x0b关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];

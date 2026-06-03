@@ -2018,6 +2018,22 @@ declare interface DescribeDBSpaceStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDatabaseAutonomyStatusRequest {
+  /** 实例 ID。 */
+  InstanceId: string;
+  /** 服务产品类型。取值：mongodb（云数据库 MongoDB）。 */
+  Product: string;
+  /** 自治功能类型。取值：AutoIndexAdvice（索引推荐）。 */
+  Type: string;
+}
+
+declare interface DescribeDatabaseAutonomyStatusResponse {
+  /** 自治功能开关状态。取值：0（关闭）、1（开启）。 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDiagDBInstancesRequest {
   /** 是否是DBbrain支持的实例，固定传 true。 */
   IsSupported: boolean;
@@ -3074,6 +3090,24 @@ declare interface UpdateAgentSwitchRequest {
 }
 
 declare interface UpdateAgentSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateDatabaseAutonomyStatusRequest {
+  /** 实例 ID。 */
+  InstanceId: string;
+  /** 服务产品类型。取值：mongodb（云数据库 MongoDB）。 */
+  Product: string;
+  /** 自治功能类型。取值：AutoIndexAdvice（索引推荐）。 */
+  Type: string;
+  /** 开关状态。取值：0（关闭）、1（开启）。 */
+  Status: number;
+}
+
+declare interface UpdateDatabaseAutonomyStatusResponse {
+  /** 操作结果状态。取值：1（操作成功）。 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4343,6 +4377,8 @@ declare interface Dbbrain {
   DescribeDBPerfTimeSeries(data: DescribeDBPerfTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBPerfTimeSeriesResponse>;
   /** 获取指定时间段内的实例空间使用概览 {@link DescribeDBSpaceStatusRequest} {@link DescribeDBSpaceStatusResponse} */
   DescribeDBSpaceStatus(data: DescribeDBSpaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSpaceStatusResponse>;
+  /** 查询数据库自治功能状态 {@link DescribeDatabaseAutonomyStatusRequest} {@link DescribeDatabaseAutonomyStatusResponse} */
+  DescribeDatabaseAutonomyStatus(data: DescribeDatabaseAutonomyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAutonomyStatusResponse>;
   /** 获取实例信息列表 {@link DescribeDiagDBInstancesRequest} {@link DescribeDiagDBInstancesResponse} */
   DescribeDiagDBInstances(data: DescribeDiagDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagDBInstancesResponse>;
   /** 获取健康得分 {@link DescribeHealthScoreRequest} {@link DescribeHealthScoreResponse} */
@@ -4435,6 +4471,8 @@ declare interface Dbbrain {
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 更新Agent状态 {@link UpdateAgentSwitchRequest} {@link UpdateAgentSwitchResponse} */
   UpdateAgentSwitch(data: UpdateAgentSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAgentSwitchResponse>;
+  /** 设置数据库自治功能状态 {@link UpdateDatabaseAutonomyStatusRequest} {@link UpdateDatabaseAutonomyStatusResponse} */
+  UpdateDatabaseAutonomyStatus(data: UpdateDatabaseAutonomyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDatabaseAutonomyStatusResponse>;
   /** 更新Agent实例状态 {@link UpdateMonitorSwitchRequest} {@link UpdateMonitorSwitchResponse} */
   UpdateMonitorSwitch(data: UpdateMonitorSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateMonitorSwitchResponse>;
   /** 验证用户数据库账号权限 {@link VerifyUserAccountRequest} {@link VerifyUserAccountResponse} */

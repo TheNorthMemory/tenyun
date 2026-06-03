@@ -2358,6 +2358,14 @@ declare interface DescribePredictiveDialingCampaignResponse {
   StartTime?: number;
   /** 任务结束时间，Unix 时间戳，到此时间后会自动终止任务 */
   EndTime?: number;
+  /** 自定义变量 */
+  Variables?: Variable[];
+  /** UUI */
+  UUI?: string;
+  /** 任务状态枚举值：0： 待开始 1： 进行中2： 已暂停3： 已终止4： 已完成 */
+  Status?: number;
+  /** 任务状态原因 0 正常 1 手动结束 2 超时结束 */
+  StatusReason?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2373,6 +2381,8 @@ declare interface DescribePredictiveDialingCampaignsRequest {
   Name?: string;
   /** 查询任务列表技能组 ID */
   SkillGroupId?: number;
+  /** 任务 ID */
+  CampaignId?: number;
 }
 
 declare interface DescribePredictiveDialingCampaignsResponse {

@@ -4778,24 +4778,6 @@ declare interface RecognizeMedicalInvoiceOCRResponse {
   RequestId?: string;
 }
 
-declare interface RecognizeOnlineTaxiItineraryOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface RecognizeOnlineTaxiItineraryOCRResponse {
-  /** 网约车行程单识别结果，具体内容请点击左侧链接。 */
-  OnlineTaxiItineraryInfos?: OnlineTaxiItineraryInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RecognizeStoreNameRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5240,46 +5222,6 @@ declare interface TableOCRResponse {
   RequestId?: string;
 }
 
-declare interface TaxiInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface TaxiInvoiceOCRResponse {
-  /** 发票号码 */
-  InvoiceNum?: string;
-  /** 发票代码 */
-  InvoiceCode?: string;
-  /** 日期 */
-  Date?: string;
-  /** 金额 */
-  Fare?: string;
-  /** 上车时间 */
-  GetOnTime?: string;
-  /** 下车时间 */
-  GetOffTime?: string;
-  /** 里程 */
-  Distance?: string;
-  /** 发票所在地 */
-  Location?: string;
-  /** 车牌号 */
-  PlateNumber?: string;
-  /** 发票消费类型 */
-  InvoiceType?: string;
-  /** 省 */
-  Province?: string | null;
-  /** 市 */
-  City?: string | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface TextDetectRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5719,8 +5661,6 @@ declare interface Ocr {
   RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
-  /** 网约车行程单识别 {@link RecognizeOnlineTaxiItineraryOCRRequest} {@link RecognizeOnlineTaxiItineraryOCRResponse} */
-  RecognizeOnlineTaxiItineraryOCR(data?: RecognizeOnlineTaxiItineraryOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeOnlineTaxiItineraryOCRResponse>;
   /** 商户门头照识别 {@link RecognizeStoreNameRequest} {@link RecognizeStoreNameResponse} */
   RecognizeStoreName(data?: RecognizeStoreNameRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeStoreNameResponse>;
   /** 表格识别（V3） {@link RecognizeTableAccurateOCRRequest} {@link RecognizeTableAccurateOCRResponse} */
@@ -5751,8 +5691,6 @@ declare interface Ocr {
   SubmitQuestionMarkAgentJob(data?: SubmitQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitQuestionMarkAgentJobResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
-  /** 出租车发票识别 {@link TaxiInvoiceOCRRequest} {@link TaxiInvoiceOCRResponse} */
-  TaxiInvoiceOCR(data?: TaxiInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TaxiInvoiceOCRResponse>;
   /** 快速文本检测 {@link TextDetectRequest} {@link TextDetectResponse} */
   TextDetect(data?: TextDetectRequest, config?: AxiosRequestConfig): AxiosPromise<TextDetectResponse>;
   /** 火车票识别 {@link TrainTicketOCRRequest} {@link TrainTicketOCRResponse} */

@@ -62,7 +62,7 @@ declare interface ApproverInfo {
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
-  /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **email** : 邮箱 **all** : 短信+邮箱 **none** : 不通知注意：如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信枚举值：sms： 短信通知email： 邮件通知all： 短信+邮件通知none： 不做任何形式的通知 */
+  /** 通知签署方经办人的方式, 有以下途径: **SMS** : (默认)短信 **EMAIL** : 邮箱 **ALL** : 短信+邮箱 **NONE** : 不通知注意：如果使用的是通过文件发起合同（CreateFlowByFiles），NotifyType必须 是 sms 才会发送短信枚举值：SMS： 短信通知EMAIL： 邮件通知ALL： 短信+邮件通知NONE： 不做任何形式的通知 */
   NotifyType?: string;
   /** 收据场景设置签署人角色类型, 可以设置如下类型: **1** :收款人 **2** :开具人 **3** :见证人注: 收据场景为白名单功能，使用前请联系对接的客户经理沟通。 */
   ApproverRole?: number;
@@ -920,7 +920,7 @@ declare interface FlowCreateApprover {
   RecipientId?: string;
   /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: &lt;font color=&quot;red&quot;&gt;不再使用, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
   VerifyChannel?: string[];
-  /** 通知签署方经办人的方式, 有以下途径: **sms** : (默认)短信 **email** : 邮件 **all** : 邮件+短信 **none** : 不通知注: 既是发起方又是签署方时，不给此签署方发送短信枚举值：sms： 短信通知email： 邮件通知all： 邮件通知+短信通知none： 不做任何形式的通知 */
+  /** 通知签署方经办人的方式, 有以下途径: **SMS** : (默认)短信 **EMAIL** : 邮件 **ALL** : 邮件+短信 **NONE** : 不通知注: 既是发起方又是签署方时，不给此签署方发送短信枚举值：SMS： 短信通知EMAIL： 邮件通知ALL： 邮件通知+短信通知NONE： 不做任何形式的通知 */
   NotifyType?: string;
   /** 合同强制需要阅读全文，无需传此参数 */
   IsFullText?: boolean;

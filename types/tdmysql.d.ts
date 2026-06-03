@@ -1135,8 +1135,6 @@ declare interface DescribeDBSArchiveLogsResponse {
 declare interface DescribeDBSAvailableRecoveryTimeRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 备份集ID,值来自 DescribeDBSBackupSets 接口返回 */
-  BackupSetId?: number;
 }
 
 declare interface DescribeDBSAvailableRecoveryTimeResponse {

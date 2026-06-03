@@ -276,8 +276,10 @@ declare interface GroupInfo {
   Tag?: string | null;
   /** 人脸识别所用的算法模型版本。 */
   FaceModelVersion?: string | null;
-  /** Group的创建时间和日期 CreationTimestamp。- CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 - Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。- 有关更多信息，请参阅 Unix 时间。 */
+  /** Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。 */
   CreationTimestamp?: number | null;
+  /** Group的创建时间和日期 CreationTimestamp。- CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 - Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。- 有关更多信息，请参阅 Unix 时间。 */
+  UpdateTimestamp?: number;
 }
 
 /** 头发信息 */
@@ -1425,8 +1427,10 @@ declare namespace V20180301 {
     Tag?: string | null;
     /** 人脸识别所用的算法模型版本。 */
     FaceModelVersion?: string | null;
-    /** Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。 */
+    /** Group的创建时间和日期 CreationTimestamp。CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。 */
     CreationTimestamp?: number | null;
+    /** Group的更新时间和日期 UpdateTimestamp。UpdateTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。有关更多信息，请参阅 Unix 时间。 */
+    UpdateTimestamp?: number;
   }
 
   /** 头发信息 */

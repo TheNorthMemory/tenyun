@@ -479,6 +479,8 @@ declare interface CreateInferServiceByTemplateRequest {
   HyperParam?: HyperParam;
   /** 网络设置 */
   NetworkSetting?: NetworkSetting;
+  /** 推理服务安全类型枚举值：STANDARD： 标准推理服务CONFIDENTIAL： 可信推理服务 */
+  SecurityType?: string;
 }
 
 declare interface CreateInferServiceByTemplateResponse {
