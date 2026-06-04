@@ -4235,9 +4235,9 @@ declare interface CreateParamTemplateResponse {
 declare interface CreateProxyEndPointRequest {
   /** 集群 ID。 */
   ClusterId: string;
-  /** 私有网络 ID，默认与集群私有网络 ID 保持一致。 */
+  /** 私有网络 ID。 */
   UniqueVpcId: string;
-  /** 私有网络子网 ID，默认与集群子网 ID 保持一致。 */
+  /** 私有网络子网 ID。 */
   UniqueSubnetId: string;
   /** 连接池类型：SessionConnectionPool（会话级别连接池）。 */
   ConnectionPoolType?: string;
@@ -7213,17 +7213,17 @@ declare interface ModifyProxyRwSplitRequest {
   ClusterId: string;
   /** 数据库代理组ID，例如cynosdbmysql-proxy-qwe123 */
   ProxyGroupId: string;
-  /** 一致性类型；“eventual"-最终一致性, "session"-会话一致性, "global"-全局一致性 */
+  /** 一致性类型；“eventual&quot;-最终一致性, &quot;session&quot;-会话一致性, &quot;global&quot;-全局一致性 */
   ConsistencyType?: string;
   /** 一致性超时时间。取值范围：0~1000000（微秒）,设置0则表示若只读实例出现延迟, 导致一致性策略不满足, 请求将一直等待。 */
   ConsistencyTimeOut?: string;
-  /** 读写权重分配模式；系统自动分配："system"， 自定义："custom" */
+  /** 读写权重分配模式；系统自动分配：&quot;system&quot;， 自定义：&quot;custom&quot; */
   WeightMode?: string;
   /** 实例只读权重。 */
   InstanceWeights?: ProxyInstanceWeight[];
-  /** 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值："yes" , "no" */
+  /** 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值：&quot;yes&quot; , &quot;no&quot; */
   FailOver?: string;
-  /** 是否自动添加只读实例，取值："yes" , "no" */
+  /** 是否自动添加只读实例，取值：&quot;yes&quot; , &quot;no&quot; */
   AutoAddRo?: string;
   /** 是否打开读写分离。该参数已废弃，请通过RwType设置读写属性。 */
   OpenRw?: string;

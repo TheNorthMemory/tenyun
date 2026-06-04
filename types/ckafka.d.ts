@@ -2983,6 +2983,86 @@ declare interface CreateInstancePreResponse {
   RequestId?: string;
 }
 
+declare interface CreateMetaAndDataSyncDatahubTaskRequest {
+  /** 任务名称64字符内 */
+  TaskName: string;
+  /** 同步源连接参数格式：resource-test */
+  SourceResourceId: string;
+  /** 同步目标连接参数格式：resource-test */
+  TargetResourceId: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+  /** Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp枚举值：earliest： 最开始位置latest： 最新位置timestamp： 时间点位置 */
+  OffsetType?: string;
+  /** 正则匹配Topic列表与TopicList参数二选一 */
+  TopicRegularExpression?: string;
+  /** 多选topic列表与TopicRegularExpression参数二选一 */
+  TopicList?: string[];
+  /** Topic 前缀 */
+  Prefix?: string;
+  /** Topic前缀分隔符仅支持 &quot;.&quot; / &quot;-&quot; / &quot;_&quot; */
+  Separator?: string;
+  /** 连接器任务描述128字符内 */
+  Description?: string;
+}
+
+declare interface CreateMetaAndDataSyncDatahubTaskResponse {
+  /** 返回结果 */
+  Result?: CreateDatahubTaskRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMetaDataAndOffsetSyncDatahubTaskRequest {
+  /** 任务名称参数格式：task-test64字符内 */
+  TaskName: string;
+  /** 同步源连接参数格式：resource-test */
+  SourceResourceId: string;
+  /** 同步目标链接参数格式：resource-test */
+  TargetResourceId: string;
+  /** 连接器任务描述128字符内 */
+  Description?: string;
+  /** Offset类型，最开始位置earliest，最新位置latest枚举值：earliest： 最开始位置latest： 最新位置 */
+  OffsetType?: string;
+  /** 正则匹配Topic列表与TopicList参数二选一 */
+  TopicRegularExpression?: string;
+  /** 多选topic列表与TopicRegularExpression参数二选一 */
+  TopicList?: string[];
+  /** Topic 前缀 */
+  Prefix?: string;
+  /** Topic前缀分隔符仅支持 &quot;.&quot; / &quot;-&quot; / &quot;_&quot; */
+  Separator?: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+}
+
+declare interface CreateMetaDataAndOffsetSyncDatahubTaskResponse {
+  /** 返回结果 */
+  Result?: CreateDatahubTaskRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMetaSyncDatahubTaskRequest {
+  /** 连接器任务名称64字符内 */
+  TaskName: string;
+  /** 同步源连接参数格式：resource-test */
+  SourceResourceId: string;
+  /** 同步目标连接参数格式：resource-test */
+  TargetResourceId: string;
+  /** 连接器任务描述128字符内 */
+  Description?: string;
+  /** 标签列表 */
+  Tags?: Tag[];
+}
+
+declare interface CreateMetaSyncDatahubTaskResponse {
+  /** 返回结果 */
+  Result?: CreateDatahubTaskRes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePartitionRequest {
   /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
   InstanceId: string;
@@ -3178,12 +3258,12 @@ declare interface CreateTopicResponse {
 }
 
 declare interface CreateUserRequest {
-  /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** 用户名称 */
   Name: string;
   /** 用户密码 */
-  Password: string;
+  Password?: string;
 }
 
 declare interface CreateUserResponse {
@@ -3590,13 +3670,13 @@ declare interface DescribeDatahubTopicResponse {
 }
 
 declare interface DescribeDatahubTopicsRequest {
-  /** 搜索词 */
+  /** 搜索词对Name或TopicName或TopicId字段进行模糊匹配 */
   SearchWord?: string;
   /** 本次查询的偏移位置，默认为0 */
   Offset?: number;
-  /** 本次返回结果的最大个数，默认为50，最大值为50 */
+  /** 本次返回结果的最大个数取值范围：[1, 100]默认值：20 */
   Limit?: number;
-  /** 是否从连接查询topic列表 */
+  /** 是否从连接查询topic列表默认值：false */
   QueryFromConnectResource?: boolean;
   /** 连接的ID */
   ConnectResourceId?: string;
@@ -4028,13 +4108,13 @@ declare interface FetchDatahubMessageByOffsetResponse {
 }
 
 declare interface FetchLatestDatahubMessageListRequest {
-  /** 弹性topic名称 */
+  /** 弹性topic名称取值参考：DescribeDatahubTopics */
   Name: string;
   /** 分区id */
   Partition: number;
   /** 位点信息 */
   Offset?: number;
-  /** 最大查询条数，最小1，最大100 */
+  /** 最大查询条数取值范围：[1, 100] */
   MessageCount?: number;
 }
 
@@ -4724,7 +4804,7 @@ declare interface TopicDetailResponse {
 declare interface UpgradeBrokerVersionRequest {
   /** ckafka集群实例Id */
   InstanceId: string;
-  /** 1.平滑升配.2.垂直升配 */
+  /** 版本升级类型枚举值：1： 小版本迁移升级(推荐) */
   Type: number;
   /** 版本号 */
   SourceVersion: string;
@@ -4814,6 +4894,12 @@ declare interface Ckafka {
   CreateDatahubTopic(data: CreateDatahubTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatahubTopicResponse>;
   /** 创建实例(预付费包年包月) {@link CreateInstancePreRequest} {@link CreateInstancePreResponse} */
   CreateInstancePre(data: CreateInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancePreResponse>;
+  /** 创建连接器实例同步任务-元数据、消息数据同步 {@link CreateMetaAndDataSyncDatahubTaskRequest} {@link CreateMetaAndDataSyncDatahubTaskResponse} */
+  CreateMetaAndDataSyncDatahubTask(data: CreateMetaAndDataSyncDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaAndDataSyncDatahubTaskResponse>;
+  /** 创建连接器实例同步任务-元数据、消息数据、消费位点同步 {@link CreateMetaDataAndOffsetSyncDatahubTaskRequest} {@link CreateMetaDataAndOffsetSyncDatahubTaskResponse} */
+  CreateMetaDataAndOffsetSyncDatahubTask(data: CreateMetaDataAndOffsetSyncDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaDataAndOffsetSyncDatahubTaskResponse>;
+  /** 创建连接器实例同步任务-元数据同步 {@link CreateMetaSyncDatahubTaskRequest} {@link CreateMetaSyncDatahubTaskResponse} */
+  CreateMetaSyncDatahubTask(data: CreateMetaSyncDatahubTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaSyncDatahubTaskResponse>;
   /** 增加主题分区 {@link CreatePartitionRequest} {@link CreatePartitionResponse} */
   CreatePartition(data: CreatePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionResponse>;
   /** 创建按量计费实例（新） {@link CreatePostPaidInstanceRequest} {@link CreatePostPaidInstanceResponse} */

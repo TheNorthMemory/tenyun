@@ -2553,6 +2553,8 @@ declare interface ModifyInstanceRequest {
   RegistryType?: string;
   /** 实例删除保护，false为关闭 */
   DeletionProtection?: boolean;
+  /** 实例是否开启多版本控制，false为关闭 */
+  EnableCosVersioning?: boolean;
 }
 
 declare interface ModifyInstanceResponse {

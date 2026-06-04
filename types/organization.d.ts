@@ -2475,7 +2475,7 @@ declare interface ListGroupsRequest {
   NextToken?: string;
   /** 每页的最大数据条数。 取值范围：1~100。 默认值：10。 */
   MaxResults?: number;
-  /** 过滤条件。 格式： ，不区分大小写。目前，只支持GroupName，只支持eq（Equals）和sw（Start With）。 示例：Filter = "GroupName sw test"，表示查询名称以 test 开头的全部用户组。Filter = "GroupName eq testgroup"，表示查询名称为 testgroup 的用户组。 */
+  /** 过滤条件，用户组名称 */
   Filter?: string;
   /** 用户组的类型 Manual：手动创建，Synchronized：外部导入。 */
   GroupType?: string;

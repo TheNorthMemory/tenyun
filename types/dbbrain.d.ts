@@ -959,11 +959,13 @@ declare interface SecLogExportTaskInfo {
 /** 实时会话访问来源详情。 */
 declare interface SessionItem {
   /** 访问来源。 */
-  Ip: string;
+  Ip?: string;
   /** 当前访问来源活跃连接数 */
-  ActiveConn: string;
+  ActiveConn?: string;
   /** 当前访问来源总连接数 */
-  AllConn: number;
+  AllConn?: number;
+  /** 是否为内网ip */
+  IsInternalIp?: boolean;
 }
 
 /** redis top慢日志聚合详情。 */

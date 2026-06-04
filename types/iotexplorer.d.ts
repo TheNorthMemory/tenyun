@@ -1762,18 +1762,20 @@ declare interface VisionRecognitionTask {
 
 /** 视频摘要配置 */
 declare interface VisionSummaryConfig {
-  /** 主输出语言，可选值包括：- `zh` 中文（默认值）- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
+  /** 主输出语言，可选值包括：zh 中文（默认值）en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语ms 马来语 */
   OutputLang?: string;
-  /** 次选输出语言，可选值包括：- `zh` 中文- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
+  /** 次选输出语言，可选值包括：zh 中文en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语ms 马来语 */
   AlternativeOutputLang?: string;
-  /** 多摄像头布局定义。可选值包括：- 单摄（默认值）：`Single`- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2` */
+  /** 多摄像头布局定义。可选值包括：单摄（默认值）：Single双摄（纵向排列）- 全部画面：Vertical,Num=2,Index=0;1双摄（纵向排列）- 画面1：Vertical,Num=2,Index=0双摄（纵向排列）- 画面2：Vertical,Num=2,Index=1三摄（纵向排列）- 全部画面：Vertical,Num=3,Index=0;1;2三摄（纵向排列）- 画面1：Vertical,Num=3,Index=0三摄（纵向排列）- 画面2：Vertical,Num=3,Index=1三摄（纵向排列）- 画面3：Vertical,Num=3,Index=2三摄（纵向排列）- 画面1+2：Vertical,Num=3,Index=0;1三摄（纵向排列）- 画面1+3：Vertical,Num=3,Index=0;2三摄（纵向排列）- 画面2+3：Vertical,Num=3,Index=1;2 */
   MultiCameraLayout?: string;
-  /** 拓展的目标及事件检测类别。可选值包括：**通用事件标签**- `person_enter` 有人进入- `vehicle_entering` 车辆进入- `vehicle_parking` 车辆停靠- `pet` 有宠物- `no_signal` 视频画面异常（无信号等）**看家护院**- `person_climbing_fence` 有人翻围墙- `door_window_open` 门窗被开启- `person_carrying_object` 有人搬运物品**商铺看管**- `person_at_cashier` 有人在收银台- `person_taking_goods` 有人拿商品- `person_night_moving` 夜间有人移动**公共及防火安全**- `person_stealing` 有人偷盗- `crowd` 多人聚集- `smoking` 有人吸烟- `safety_fire` 明火- `safety_smoke` 浓烟- `fireworks` 有人燃放烟花爆竹- `knife` 有人持刀- `gun` 有人持枪- `fight` 有人打架- `hurt` 有人受伤流血**养殖看护**- `person_feeding_animal` 有人投喂牲畜- `animal_lying` 有动物躺地上- `animal_wild_intrusion` 野生动物入侵**果园农田**- `person_picking_fruit` 有人采摘果实- `person_carrying_bag` 有人携带包裹**鱼塘看管**- `fishing` 有人钓鱼- `net_fishing` 有人撒网- `person_carrying_fishing_gear` 有人携带渔具- `loitering_near_water` 有人岸边逗留- `throwing_into_water` 有人投掷物品**婴儿看护**- `baby` 有婴儿- `baby_dropping` 婴儿跌落床铺- `person_holding_baby` 有人抱起婴儿- `baby_rolling` 婴儿翻滚- `baby_crying` 婴儿哭闹**儿童看护**- `child` 有小孩- `child_falling` 小孩摔倒- `child_entering_kitchen` 小孩进入厨房- `child_climbing_window` 小孩攀爬室内窗户- `child_near_water` 小孩靠近水域**老人看护**- `elderly` 有老人- `elderly_falling` 老人摔倒- `elderly_eating` 老人用餐- `elderly_using_stove` 老人使用灶具**宠物看护**- `pet_eating` 宠物进食- `pet_damaging` 宠物损坏家具- `pet_barking` 宠物吠叫- `pet_scratching_door` 宠物挠门 */
+  /** 拓展的目标及事件检测类别。可选值包括：通用事件标签person_enter 有人进入vehicle_entering 车辆进入vehicle_parking 车辆停靠pet 有宠物no_signal 视频画面异常（无信号等）看家护院person_climbing_fence 有人翻围墙door_window_open 门窗被开启person_carrying_object 有人搬运物品商铺看管person_at_cashier 有人在收银台person_taking_goods 有人拿商品person_night_moving 夜间有人移动公共及防火安全person_stealing 有人偷盗crowd 多人聚集smoking 有人吸烟safety_fire 明火safety_smoke 浓烟fireworks 有人燃放烟花爆竹knife 有人持刀gun 有人持枪fight 有人打架hurt 有人受伤流血养殖看护person_feeding_animal 有人投喂牲畜animal_lying 有动物躺地上animal_wild_intrusion 野生动物入侵果园农田person_picking_fruit 有人采摘果实person_carrying_bag 有人携带包裹鱼塘看管fishing 有人钓鱼net_fishing 有人撒网person_carrying_fishing_gear 有人携带渔具loitering_near_water 有人岸边逗留throwing_into_water 有人投掷物品婴儿看护baby 有婴儿baby_dropping 婴儿跌落床铺person_holding_baby 有人抱起婴儿baby_rolling 婴儿翻滚baby_crying 婴儿哭闹儿童看护child 有小孩child_falling 小孩摔倒child_entering_kitchen 小孩进入厨房child_climbing_window 小孩攀爬室内窗户child_near_water 小孩靠近水域老人看护elderly 有老人elderly_falling 老人摔倒elderly_eating 老人用餐elderly_using_stove 老人使用灶具宠物看护pet_eating 宠物进食pet_damaging 宠物损坏家具pet_barking 宠物吠叫pet_scratching_door 宠物挠门 */
   DetectTypes?: string[];
   /** 自定义检测标签 */
   CustomDetectQueries?: VisionCustomDetectQuery[];
   /** 标签持续检测配置 */
   DetectContinuous?: SeeDetectContinuousConfig[];
+  /** 自定义摘要提示词 */
+  SummaryPrompt?: string;
 }
 
 /** 微信硬件设备信息 */

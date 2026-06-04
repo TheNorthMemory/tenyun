@@ -3828,6 +3828,48 @@ declare interface InputAddress {
   Port: number;
 }
 
+/** LLM 大模型检测发现的单条问题 */
+declare interface LLMDetectionIssue {
+  /** 问题分类标签。 */
+  Tag?: string;
+  /** 问题描述。 */
+  Description?: string;
+  /** 该问题的质量得分，范围 [0, 100]。 */
+  Score?: number;
+  /** 该问题的判断置信度，范围 [0, 100]。 */
+  Confidence?: number;
+  /** 问题起始时间（毫秒）。 */
+  StartTimeMs?: number;
+  /** 问题结束时间（毫秒） */
+  EndTimeMs?: number;
+  /** 附加数据（JSON 格式），如严重程度等补充信息。 */
+  ExtraData?: string;
+}
+
+/** LLM 大模型检测结果报告 */
+declare interface LLMDetectionReport {
+  /** 检测结果数量。 */
+  ResultCount?: number;
+  /** 各检测项结果列表。 */
+  ResultSet?: LLMDetectionResultItem[];
+}
+
+/** LLM 大模型单个检测项的聚合结果 */
+declare interface LLMDetectionResultItem {
+  /** 检测分类。枚举值：AIGCQualityCharacteristics： AIGC 质量特征 */
+  Category?: string;
+  /** 检测分组。枚举值：AIGCAuthenticity： AIGC 真实性，包括人体合理性、物理合理性、跨帧一致性等AIGCTechQuality： AIGC 技术质量，包括画幅、黑边、强行竖屏等 */
+  Group?: string;
+  /** 检测类型名称。枚举值：BodyPoseCheck： 人体姿态合理性，属于 AIGCAuthenticityBodyDetailCheck： 人体细节合理性，包括手指数、五官对称等，属于 AIGCAuthenticityPhysicRulesCheck： 物理规律合理性，包括透视、光影、重力等，属于 AIGCAuthenticityObjectConsistencyCheck： 跨帧物体一致性，属于 AIGCAuthenticityFormatCheck： 画幅、黑边、强行竖屏等格式问题，属于 AIGCTechQuality */
+  Type?: string;
+  /** 整体质量得分，范围 [0, 100]，越高越好。 */
+  Score?: number;
+  /** 判断置信度，范围 [0, 100]，越高表示越确定。 */
+  Confidence?: number;
+  /** 检测发现的问题列表，无问题时为空。 */
+  IssueSet?: LLMDetectionIssue[];
+}
+
 /** 线性组装频道信息。 */
 declare interface LinearAssemblyChannelInfo {
   /** 线性组装频道名称。 */
@@ -5538,6 +5580,8 @@ declare interface QualityControlData {
   QualityControlResultSet?: QualityControlResult[];
   /** 格式诊断检出异常项。 */
   ContainerDiagnoseResultSet?: ContainerDiagnoseResultItem[];
+  /** LLM大模型AIGC质量检测结果。 */
+  LLMDetectionReport?: LLMDetectionReport;
 }
 
 /** 质检结果项 */

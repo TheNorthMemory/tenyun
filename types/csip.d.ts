@@ -716,6 +716,8 @@ declare interface AssetRiskItem {
   AssetType?: string;
   /** 资产类型图标 */
   AssetTypeIconURL?: string;
+  /** 资产类型 */
+  AssetTypeName?: string;
 }
 
 /** 安全中心资产标签 */
@@ -4146,6 +4148,8 @@ declare interface RiskDetailItem {
   CheckStatus?: string;
   /** 用户AppID */
   AppID?: number;
+  /** 资产类型 */
+  AssetType?: string;
 }
 
 /** 风险规则 */
@@ -6473,6 +6477,8 @@ declare interface DescribeCheckViewRisksResponse {
   StandardNameList?: StandardItem[];
   /** 资产类型集合 */
   AssetTypeList?: AttributeOptionSet[];
+  /** 云厂商类型集合 */
+  ProviderList?: AttributeOptionSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8597,6 +8603,8 @@ declare interface DescribeRiskRuleDetailResponse {
   RiskInfluence?: string;
   /** 修复指引 */
   RiskFixAdvice?: string;
+  /** 资产类型 */
+  AssetType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -417,6 +417,8 @@ declare namespace V20180717 {
     SubtitleSet?: string[];
     /** 字幕压制信息列表。最大可支持 2 个。 */
     SubtitleInfoSet?: SubtitleInfoInput[];
+    /** 第三方DRM加密信息。暂不支持任务流的方式使用第三方DRM信息发起任务。 */
+    DrmInfo?: ThirdPartyDrmInfo;
   }
 
   /** 转自适应码流模板详情 */
@@ -1929,7 +1931,7 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 生成图片的分辨率。各模型可选值：OG：1K、2K、4K，默认1K；GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：512、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；Kling O1：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：暂不支持本字段，可通过ExtInfo字段设置分辨率；Qwen 0925：暂不支持本字段，可通过ExtInfo字段设置分辨率； */
+    /** 生成图片的分辨率。各模型可选值：OG：1K、2K、4K，默认1K；GG 2.5：1K、2K、4K，默认1K；GG 3.0：1K、2K、4K，默认1K；GG 3.1：720P、1K、2K、4K，默认1K；Kling 2.1：1k、2k，默认1k；Kling 3.0：1k、2k，默认1k；Kling 3.0-Omni：1k、2k、4k，默认1k；Kling O1：1k、2k、4k，默认1k；SI 4.0：1K、2K、4K，默认1K；SI 4.5：2K、4K，默认2K；SI 5.0-lite：2K、3K，默认2K；Vidu q2：1080p、2K、4K，默认1080p；Hunyuan 3.0：暂不支持本字段，可通过ExtInfo字段设置分辨率；Qwen 0925：暂不支持本字段，可通过ExtInfo字段设置分辨率； */
     Resolution?: string;
     /** 指定所生成图片的宽高比。OG：1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21；GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；Kling O1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；SI 4.0：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 4.5：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；SI 5.0-lite：不支持此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；Hunyuan 3.0：不支持；Qwen 2.0：不支持；Qwen 0925：不支持； */
     AspectRatio?: string;
@@ -2255,7 +2257,7 @@ declare namespace V20180717 {
     VoiceId?: string;
     /** 是否保留视频原声。当 Category 为 Video 时有效。取值如下：Enabled：保留Disabled：不保留 */
     KeepOriginalSound?: string;
-    /** 用于区分输入图像用于首（尾）帧生视频、图生视频或参考生视频。可选值：FirstFrame：用于首（尾）帧生视频 或 图生视频；Reference：用于参考生视频；注意，默认是FirstFrame */
+    /** 用于区分输入图像用于首（尾）帧生视频、图生视频或参考生视频。可选值：FirstFrame：用于首（尾）帧生视频的首帧 或 图生视频；Reference：用于参考生视频；LastFrame：用于首（尾）帧生视频的尾帧；注意，默认是FirstFrame */
     Usage?: string;
     /** 仅 PixVerse 模型的多图（主体）参考生模式生效，针对图片指定名字, 用来更精准效果。用法：当本字段值为“小猫”，在 Prompt 中使用 @小猫 精确描述场景。@Text 后必须有空格，如 @小猫 跑步。Prompt 中引用的名称必须与本字段完全一致。 */
     Text?: string;
@@ -6981,6 +6983,22 @@ declare namespace V20180717 {
     FairPlayCertificateUrl: string;
   }
 
+  /** 第三方DRM厂商加密信息。 */
+  interface SPEKEDrm {
+    /** 资源标记，该字段内容为用户自定义； 支持1-128个字符的数字、字母、下划线(_)、中划线(-)。 该字段对应Speke请求中的cid字段。 注：不同DRM厂商对该字段的限制有所区别（如：华曦达不支持该字段带_），具体规则请与DRM厂商进行确认。 */
+    ResourceId: string;
+    /** DRM厂商访问地址，该字段内容从DRM厂商获取。注: 不同DRM厂商对子流的数量限制不一样，如 PallyCon 限制不能超过5条子流，DRMtoday厂商最多仅支持9条子流加密 */
+    KeyServerUrl: string;
+    /** 加密初始化向量(十六进制32字节字符串)，该字段内容为用户自定义。 */
+    Vector: string;
+    /** 加密方式，可选值：cbcs：PlayReady，Widevine，FairPlay，Widevine+FairPlay，Widevine+PlayReady，PlayReady+FairPlay，Widevine+PlayReady+FairPlay支持；cenc：PlayReady，Widevine，Widevine+PlayReady支持；若不填FairPlay 默认cbcs；PlayReady，Widevine 默认cenc；Widevine+FairPlay，PlayReady+FairPlay，Widevine+PlayReady+FairPlay默认cbcs；Widevine+PlayReady默认cenc； */
+    EncryptionMethod?: string;
+    /** 子流加密规则，默认 preset0preset0：全部子流使用同一个key加密；preset1：每个子流使用不同的key加密； */
+    EncryptionPreset?: string;
+    /** DRM厂商请求方式。枚举值：POST： 大多数DRM厂商使用POST方式请求。GET： 部分DRM厂商支持GET方式请求。使用该种方式请求时，需要在KeyServerUrl字段带上各项请求信息。默认值：POST */
+    KeyAcquireMode?: string;
+  }
+
   /** 对视频做采样截图任务输入参数类型 */
   interface SampleSnapshotTaskInput {
     /** 采样截图模板 ID。 */
@@ -7713,6 +7731,14 @@ declare namespace V20180717 {
     FontColor?: string;
     /** 文字透明度，取值范围：(0, 1]0：完全透明1：完全不透明 */
     FontAlpha?: number;
+  }
+
+  /** 第三方Drm 加密信息。 */
+  interface ThirdPartyDrmInfo {
+    /** 加密类型：FairPlay：只能用于HLS，切片格式只能是mp4Widevine：可以用于HLS和DASH，切片格式只能是mp4PlayReady：可以用于HLS和DASH，切片格式只能是mp4Widevine+FairPlay，PlayReady+FairPlay，Widevine PlayReady FairPlay组合: 只能用于HLS，切片格式只能是mp4Widevine PlayReady组合: 可用于HLS、MPEG-DASH，切片格式只能是mp4 */
+    DrmTypes: string[];
+    /** 第三方DRM厂商信息。 */
+    SPEKEDrm?: SPEKEDrm;
   }
 
   /** 用于描述一个时间段的通用数据类型。 */
@@ -8510,6 +8536,8 @@ declare namespace V20180717 {
     ElementImageList?: string;
     /** 为主体配置标签，一个主体可以配置多个标签。用key:value承载，其中具体如下：[ { &quot;tag_id&quot;: &quot;o_101&quot; }, { &quot;tag_id&quot;: &quot;o_102&quot; }] */
     TagList?: string;
+    /** 若已开通海外自定义主体库，可传入True使用海外自定义主体库。枚举值：True： 使用海外自定义主体库。False： 不使用海外自定义主体库。 */
+    DisableModeration?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。 */
@@ -8622,6 +8650,8 @@ declare namespace V20180717 {
     VoiceUrl?: string;
     /** 历史作品 ID，可通过引用历史作品提供音频素材。 */
     VideoId?: string;
+    /** 若已开通海外自定义音色库，可传入True使用海外自定义音色库。枚举值：True： 使用海外自定义音色库。False： 不使用海外自定义音色库。 */
+    DisableModeration?: string;
     /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
     /** 来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。 */
@@ -8642,7 +8672,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：OGGGSIQwenHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1； */
+    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；Kling O1：10张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；MJ v7：3张。 */
     FileInfos?: AigcImageTaskInputFileInfo[];
@@ -8656,7 +8686,7 @@ declare namespace V20180717 {
     OutputConfig?: AigcImageOutputConfig;
     /** 输入的区域信息。可选值：Mainland：中国大陆；Oversea：海外；OverseaUSWest：海外-美西； */
     InputRegion?: string;
-    /** 场景类型。取值如下：当 ModelName 为 Hunyuan 时： 3d_panorama 表示全景图；其他 ModelName 暂不支持。 */
+    /** 场景类型。取值如下：当 ModelName 为 Hunyuan 时： 3d_panorama 表示全景图；当 ModelName 为 Kling 时： image_expand 表示扩图；其他 ModelName 暂不支持。 */
     SceneType?: string;
     /** 模型随机种子。 */
     Seed?: number;
@@ -8666,7 +8696,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1356\&quot;}&quot;}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}可用于开启输出多张图像，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;sequential_image_generation\&quot;:\&quot;auto\&quot;}&quot;}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}支持设置透明图层：示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;} */
+    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1356\&quot;}&quot;}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}可用于开启输出多张图像，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;sequential_image_generation\&quot;:\&quot;auto\&quot;}&quot;}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}支持设置透明图层：示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}Kling支持设置扩图参数，示例：{AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
     ExtInfo?: string;
   }
 

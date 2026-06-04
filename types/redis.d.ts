@@ -480,9 +480,9 @@ declare interface InstanceSet {
   Createtime?: string;
   /** 实例内存容量大小。单位：MB，1MB=1024KB。 */
   Size?: number;
-  /** 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。 */
+  /** 该字段已废弃。请使用腾讯云可观测平台API 接口 GetMonitorData 获取实例已使用的内存容量。 */
   SizeUsed?: number;
-  /** 实例类型。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 5：Redis 2.8 内存版（单机）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。- 200:Memcached 1.6 内存版（集群架构）。 */
+  /** 实例类型。枚举值：2： Redis 2.8 内存版（标准架构）。3： CKV 3.2 内存版（标准架构）。4： CKV 3.2 内存版（集群架构）。5： Redis 2.8 内存版（单机）。6： Redis 4.0 内存版（标准架构）。7： Redis 4.0 内存版（集群架构）。8： Redis 5.0 内存版（标准架构）。9： Redis 5.0 内存版（集群架构）。15： Redis 6.2 内存版（标准架构）。16： Redis 6.2 内存版（集群架构）。17： Redis 7.0 内存版（标准架构）。18： Redis 7.0 内存版（集群架构）。19： Valkey 8.0 内存版（标准架构）。20： Valkey 8.0 内存版（集群架构）。200： Memcached 1.6 内存版（集群架构）。 */
   Type?: number;
   /** 实例是否设置自动续费标识。1：设置自动续费。0：未设置自动续费。 */
   AutoRenewFlag?: number;
@@ -502,7 +502,7 @@ declare interface InstanceSet {
   InstanceTitle?: string;
   /** 已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。 */
   OfflineTime?: string;
-  /** 流程中的实例返回的子状态。- 0：磁盘读写状态。- 1：磁盘超限只读状态。 */
+  /** 流程中的实例返回的子状态。0：磁盘读写状态。1：磁盘超限只读状态。 */
   SubStatus?: number;
   /** 反亲和性标签。 */
   Tags?: string[];
@@ -518,7 +518,7 @@ declare interface InstanceSet {
   PriceId?: number;
   /** 实例隔离开始的时间。 */
   CloseTime?: string;
-  /** 从节点读取权重。- 0：表示关闭副本只读。- 100：表示开启副本只读。 */
+  /** 从节点读取权重。0：表示关闭副本只读。100：表示开启副本只读。 */
   SlaveReadWeight?: number;
   /** 实例关联的标签信息。 */
   InstanceTags?: InstanceTagInfo[];
@@ -544,7 +544,7 @@ declare interface InstanceSet {
   RemainBandwidthDuration?: string;
   /** Redis实例请忽略该参数。 */
   DiskSize?: number;
-  /** 监控版本。1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。5s：5秒粒度监控。 */
+  /** 监控版本。1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见云数据库 Redis 1分钟粒度下线公告。5s：5秒粒度监控。 */
   MonitorVersion?: string;
   /** 客户端最大连接数可设置的最小值。 */
   ClientLimitMin?: number;
@@ -572,9 +572,9 @@ declare interface InstanceSet {
   UpgradeProxyVersion?: string;
   /** 实例可升级Cache小版本。 */
   UpgradeRedisVersion?: string;
-  /** 备份模式：- SecondLevelBackup 秒级备份- NormalLevelBackup 普通备份 */
+  /** 备份模式。SecondLevelBackup：秒级备份。NormalLevelBackup：普通备份。 */
   BackupMode?: string;
-  /** 删除保护开关，0关闭，1开启 */
+  /** 实例销毁保护开关。0：关闭。1：开启。 */
   DeleteProtectionSwitch?: number;
 }
 
@@ -1417,19 +1417,19 @@ declare interface CreateExportTaskResponse {
 }
 
 declare interface CreateInstanceAccountRequest {
-  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 自定义的访问数据库的账号名称。- 仅由字母、数字、下划线、中划线组成。- 长度不能大于32位。 */
+  /** 自定义的访问数据库的账号名称。仅由字母、数字、下划线、中划线组成。长度不能大于32位。 */
   AccountName: string;
-  /** 设置自定义账号的密码。密码复杂度要求如下：- 字符个数为[8,64]。- 至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的两种。- 不能以"/"开头。 */
+  /** 设置自定义账号的密码。密码复杂度要求如下：字符个数为[8,64]。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的两种。不能以&quot;/&quot;开头。 */
   AccountPassword: string;
-  /** 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。- master：主节点- replication：副本节点 */
+  /** 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。master：主节点replication：副本节点 */
   ReadonlyPolicy: string[];
-  /** 账户读写权限，支持选择只读与读写权限。- r：只读。- rw: 读写。 */
+  /** 账户读写权限，支持选择只读与读写权限。r：只读。rw: 读写。 */
   Privilege: string;
   /** 账号备注描述信息，长度为[0,64] 字节，支持中文。 */
   Remark?: string;
-  /** 是否加密密码 */
+  /** 是否启用密码加密传输。true：加密。false：不加密（默认值）。 */
   EncryptPassword?: boolean;
 }
 
@@ -1493,7 +1493,7 @@ declare interface CreateInstancesRequest {
   RedisClusterId?: string;
   /** 告警策略 ID 数组。请登录腾讯云可观测平台-告警管理-策略管理获取告警策略 ID。若不配置该参数，则绑定默认告警策略。默认告警策略具体信息，请登录腾讯云可观测平台-告警管理-策略管理查看。 */
   AlarmPolicyList?: string[];
-  /** 是否加密密码 */
+  /** 是否启用密码加密传输。true：加密。false：不加密（默认值）。 */
   EncryptPassword?: boolean;
 }
 
@@ -2957,21 +2957,21 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 declare interface ModifyInstanceAccountRequest {
-  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 指定需修改的账号。- root：指在创建 Redis 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。- 自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。 */
+  /** 指定需修改的账号。root：指在创建 Redis 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。 */
   AccountName: string;
   /** 指定所修改账号访问的密码。 */
   AccountPassword?: string;
   /** 账号描述信息 */
   Remark?: string;
-  /** 指定所修改账号读写请求路由的策略。- master：表示读写请求路由至主节点。- replication：表示读写请求路由至从节点。 */
+  /** 指定所修改账号读写请求路由的策略。master：表示读写请求路由至主节点。replication：表示读写请求路由至从节点。 */
   ReadonlyPolicy?: string[];
-  /** 指定所修改账号的读写权限。- r：只读。- w：只写。- rw：读写。 */
+  /** 指定所修改账号的读写权限。r：只读。w：只写。rw：读写。 */
   Privilege?: string;
-  /** 指定是否将默认账号（root）设置为免密账号。自定义账号不支持免密访问。- true：默认账号（root）设置为免密账号。- false：默认账号（root）不设置为免密账号。 */
+  /** 指定是否将默认账号（root）设置为免密账号。自定义账号不支持免密访问。true：默认账号（root）设置为免密账号。false：默认账号（root）不设置为免密账号。 */
   NoAuth?: boolean;
-  /** 指定所修改的账号是否加密密码 */
+  /** 是否启用密码加密传输。true：加密。false：不加密（默认值）。 */
   EncryptPassword?: boolean;
 }
 

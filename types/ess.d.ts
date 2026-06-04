@@ -152,6 +152,40 @@ declare interface ArchiveDynamicApproverData {
   RecipientId?: string;
 }
 
+/** 归档合同的参与人信息 */
+declare interface ArchiveFlowApproverInfo {
+  /** 个人签署人姓名，如果传入，必须是证件上的真实中文名；中文名最长 25 个字符； */
+  ApproverName?: string;
+  /** 参与者类型，用于区分个人或企业，可选类型如下:0：企业1：个人 */
+  ApproverType?: number;
+  /** 企业签署方名称。长度不超过 200 个字符。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 )， 则企业名称必填。 */
+  OrganizationName?: string;
+  /** 签署人手机号，必须是合法手机号。 */
+  ApproverMobile?: string;
+  /** 签署人邮箱， 必须是合法邮箱格式。 */
+  ApproverEmail?: string;
+  /** 签署方经办人的证件类型，支持以下类型，样式可以参考常见个人证件类型介绍ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件 */
+  ApproverIdCardType?: string;
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
+  ApproverIdCardNumber?: string;
+  /** 当前参与者的签署时间，Unix 秒级时间戳。 */
+  ApproveTime?: number;
+}
+
+/** 归档合同结果 */
+declare interface ArchiveFlowResult {
+  /** 归档合同id */
+  FlowId?: string;
+  /** 合同处理结果枚举值：0： 成功1： 失败 */
+  ArchiveFlowStatus?: number;
+  /** 业务自定义id */
+  BusinessId?: string;
+  /** 资源ID列表 */
+  ResourceIdList?: string[];
+  /** 错误信息 */
+  ErrorMessage?: string;
+}
+
 /** 企业扩展服务授权列表详情 */
 declare interface AuthInfoDetail {
   /** 扩展服务类型，和入参一致 */
@@ -460,6 +494,32 @@ declare interface ContractSummaryInfo {
   Value?: string;
   /** 主体信息 */
   Identity?: Identity | null;
+}
+
+/** 创建归档合同信息 */
+declare interface CreateArchiveFlow {
+  /** 合同文件的资源id，使用UploadFiles 上传文件返回resourceId，目前一个合同只能支持一个资源ID。 */
+  ResourceIds: string[];
+  /** 合同名称，不传时系统会使用合同资源文件名作为合同名称；最终合同名称不能为空；长度不能超过200，只能由中文、字母、数字和下划线组成。 */
+  FlowName?: string;
+  /** 合同类型，自定义文本字符串，长度不能超过200。 */
+  FlowType?: string;
+  /** 调用方业务系统中的合同业务编号，可以用于外部系统和归档合同做关联，长度不超过 128 字节 */
+  BusinessId?: string;
+  /** 合同发起方/创建人名称，用于归档合同展示和检索，长度不超过 32 字符 */
+  CreatorName?: string;
+  /** 签署人信息列表，用于记录合同由哪些个人或企业签署，最多 50 个参与者。 */
+  ApproverInfo?: ArchiveFlowApproverInfo[];
+  /** 关注人信息列表，用于记录合同关注对象，最多 50 个关注者。 */
+  CcInfo?: ArchiveFlowApproverInfo[];
+  /** 调用方自定义透传数据，可用于保存业务扩展信息，长度不超过 20480 字节。 */
+  UserData?: string;
+  /** 合同描述/备注信息，长度不超过 1000 个字符 */
+  FlowDescription?: string;
+  /** 合同签署完成时间，Unix 秒级时间戳 */
+  ApproveTime?: number;
+  /** 合同发起时间/合同原始创建时间，Unix 秒级时间戳 */
+  CustomCreatedOn?: number;
 }
 
 /** 创建合同个性化参数 */
@@ -2242,6 +2302,20 @@ declare interface CancelUserAutoSignEnableUrlRequest {
 }
 
 declare interface CancelUserAutoSignEnableUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateArchiveFlowTaskRequest {
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 归档合同列表，一次最多支持50个合同 */
+  ArchiveFlows: CreateArchiveFlow[];
+}
+
+declare interface CreateArchiveFlowTaskResponse {
+  /** 归档任务ID，后续使用 查询归档任务状态接口获取归档任务执行结果 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4290,6 +4364,22 @@ declare interface DeleteSingleSignOnEmployeesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeArchiveFlowTaskRequest {
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 任务id，创建归档任务时返回 */
+  TaskId: string;
+}
+
+declare interface DescribeArchiveFlowTaskResponse {
+  /** 任务状态枚举值：0： 待处理1： 处理中2： 任务完成3： 任务完成(存在失败) */
+  Status?: number;
+  /** 每条合同的处理结果，与创建任务的archive_flows列表顺序一致 */
+  ArchiveFlowResults?: ArchiveFlowResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBatchOrganizationRegistrationTasksRequest {
   /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
   Operator: UserInfo;
@@ -5741,6 +5831,8 @@ declare interface Ess {
   CancelMultiFlowSignQRCode(data: CancelMultiFlowSignQRCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CancelMultiFlowSignQRCodeResponse>;
   /** 撤销个人用户自动签的开通链接 {@link CancelUserAutoSignEnableUrlRequest} {@link CancelUserAutoSignEnableUrlResponse} */
   CancelUserAutoSignEnableUrl(data: CancelUserAutoSignEnableUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CancelUserAutoSignEnableUrlResponse>;
+  /** 创建合同归档任务 {@link CreateArchiveFlowTaskRequest} {@link CreateArchiveFlowTaskResponse} */
+  CreateArchiveFlowTask(data: CreateArchiveFlowTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateArchiveFlowTaskResponse>;
   /** 批量创建变更超管任务 {@link CreateBatchAdminChangeInvitationsRequest} {@link CreateBatchAdminChangeInvitationsResponse} */
   CreateBatchAdminChangeInvitations(data: CreateBatchAdminChangeInvitationsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchAdminChangeInvitationsResponse>;
   /** 创建企业批量变更超管链接 {@link CreateBatchAdminChangeInvitationsUrlRequest} {@link CreateBatchAdminChangeInvitationsUrlResponse} */
@@ -5895,6 +5987,8 @@ declare interface Ess {
   DeleteSealPolicies(data: DeleteSealPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSealPoliciesResponse>;
   /** 删除单点登录企业员工信息 {@link DeleteSingleSignOnEmployeesRequest} {@link DeleteSingleSignOnEmployeesResponse} */
   DeleteSingleSignOnEmployees(data: DeleteSingleSignOnEmployeesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSingleSignOnEmployeesResponse>;
+  /** 查询合同归档任务状态 {@link DescribeArchiveFlowTaskRequest} {@link DescribeArchiveFlowTaskResponse} */
+  DescribeArchiveFlowTask(data: DescribeArchiveFlowTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeArchiveFlowTaskResponse>;
   /** 查询企业批量认证状态 {@link DescribeBatchOrganizationRegistrationTasksRequest} {@link DescribeBatchOrganizationRegistrationTasksResponse} */
   DescribeBatchOrganizationRegistrationTasks(data: DescribeBatchOrganizationRegistrationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchOrganizationRegistrationTasksResponse>;
   /** 查询企业批量认证链接 {@link DescribeBatchOrganizationRegistrationUrlsRequest} {@link DescribeBatchOrganizationRegistrationUrlsResponse} */

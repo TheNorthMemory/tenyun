@@ -2,6 +2,46 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** API数据源连接配置 */
+declare interface ApiDatasourceConfig {
+  /** API数据源解析结果 */
+  FieldsJsonData?: string | null;
+  /** 连接类型1:直连 2:抽取 */
+  ConnectionType?: number | null;
+  /** 抽取频率配置 */
+  FrequencyConfig?: FrequencyConfig | null;
+  /** 请求URL */
+  Url?: string | null;
+  /** 1:GET 2:POST */
+  RequestMethod?: number | null;
+  /** 请求头 */
+  RequestHeader?: string | null;
+  /** 请求参数 */
+  RequestParams?: string | null;
+  /** 请求体 */
+  RequestBody?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 密码 */
+  Password?: string | null;
+  /** 1: 无鉴权 2:BASIC_AUTH */
+  AuthorizationType?: number | null;
+  /** 表id */
+  TableId?: number | null;
+  /** 路径DbName映射 */
+  JsonPathDbNameMap?: string | null;
+  /** 鉴权API */
+  AuthApi?: string | null;
+  /** 应用Key */
+  AppKey?: string | null;
+  /** 应用密钥 */
+  AppSecret?: string | null;
+  /** 数据密钥Key */
+  SecretKey?: string | null;
+  /** 数据密钥初始化向量 */
+  SecretIv?: string | null;
+}
+
 /** 创建ApiKey接口出参 */
 declare interface ApiKeyAuthApplyVO {
   /** id */
@@ -238,6 +278,22 @@ declare interface EmbedTokenInfo {
   ConfigParam?: string | null;
 }
 
+/** 空值展示样式配置值结构 */
+declare interface EmptyValue {
+  /** 空值展示样式类型 */
+  Type?: string | null;
+  /** 空值展示样式类型对应具体的展示字符串 */
+  Custom?: string | null;
+}
+
+/** 空值展示样式配置结构 */
+declare interface EmptyValueConfig {
+  /** 数值类字段空值样式配置 */
+  Number?: EmptyValue | null;
+  /** 字符串字段空置样式配置 */
+  String?: EmptyValue | null;
+}
+
 /** 自定义错误信息对象 */
 declare interface ErrorInfo {
   /** 错误说明字段 */
@@ -254,6 +310,32 @@ declare interface ErrorInfo {
   ReservedField?: string | null;
 }
 
+/** 字段备注信息 */
+declare interface FieldRemarkDTO {
+  /** 字段名 */
+  FieldName?: string | null;
+  /** 字段备注列表 */
+  Comment?: string[] | null;
+}
+
+/** 定时任务执行频率配置 */
+declare interface FrequencyConfig {
+  /** 周期 */
+  Frequency?: string | null;
+  /** 日期 */
+  Dates?: number[] | null;
+  /** 时间 */
+  Time?: string | null;
+  /** 间隔时间 */
+  IntervalTime?: number | null;
+  /** 1:SECOND,2:MINUTE,3:HOUR,4:DAY */
+  IntervalTimeUnit?: number | null;
+  /** 小时列表 */
+  Hours?: number[] | null;
+  /** 分钟列表 */
+  Minute?: number[] | null;
+}
+
 /** 仅包含id的对象 */
 declare interface IdDTO {
   /** 请求id */
@@ -266,6 +348,50 @@ declare interface IdDTO {
   TranId?: string | null;
   /** 事务状态取值范围：1: 处理中2: 处理成功3: 处理失败 */
   TranStatus?: number | null;
+}
+
+/** 多表关联原始表之间的关联信息 */
+declare interface JoinRelation {
+  /** 表关联关系id,前端使用 */
+  JoinId?: string | null;
+  /** 原表节点id */
+  SourceTableNodeId?: string | null;
+  /** 目标表节点id */
+  TargetTableNodeId?: string | null;
+  /** 多表关联的关联类型 */
+  JoinType?: string | null;
+  /** 多表关联的字段列表 */
+  Fields?: JoinRelationField[] | null;
+}
+
+/** 多表关联原始表之间使用的关联字段信息 */
+declare interface JoinRelationField {
+  /** 字段关联关系id,前端使用 */
+  FieldJoinId?: string | null;
+  /** 原表字段 */
+  SourceField?: TableField | null;
+  /** 目标表字段 */
+  TargetField?: TableField | null;
+}
+
+/** 多表关联原始表信息 */
+declare interface JoinSourceTable {
+  /** 1:数据源原表,2:本地表,3:Excel表,4:API表 */
+  TableNodeType?: number | null;
+  /** 原始表节点Id */
+  TableNodeId?: string | null;
+  /** 父节点id */
+  ParentId?: string | null;
+  /** 非必填, 数据源原表没有ID */
+  TableId?: string | null;
+  /** 必填,数据源原表用原始表名, 其他类型用BI的逻辑表名 */
+  TableName?: string | null;
+  /** 原始表需要展示的字段列表 */
+  Fields?: TableField[] | null;
+  /** 数据源id */
+  DatasourceId?: number | null;
+  /** 非必填,前端展示的数据源别名,excel建表需要 */
+  TableAlias?: string | null;
 }
 
 /** 页面截图列表 */
@@ -286,6 +412,22 @@ declare interface PageScreenVO {
   Content?: string | null;
   /** 组件Id */
   WidgetId?: string | null;
+}
+
+/** 1 */
+declare interface ParamCreateDTO {
+  /** 参数名 */
+  ParamName?: string | null;
+  /** 默认值 */
+  DefaultValue?: string | null;
+  /** 参数类型，string/datetime/number */
+  ParamType?: string | null;
+  /** 格式化类型，yyyy-MM-dd HH:mm:ss.SSS（只有时间必填） */
+  FormatRule?: string | null;
+  /** 复杂类型，格式化的另一种表达，例如YYYY-MM */
+  ComplexType?: string | null;
+  /** 作用域 */
+  Scope?: string | null;
 }
 
 /** 商业版本权限单元 */
@@ -522,6 +664,116 @@ declare interface RowColumnTagValue {
   Name?: string | null;
   /** 标签值列表 */
   Values?: string[] | null;
+}
+
+/** 表的列数据抽象 */
+declare interface TableColumn {
+  /** 列名字 */
+  DbName?: string | null;
+  /** 列的别名 */
+  AliasName?: string | null;
+  /** 列的类型 */
+  DbType?: string | null;
+  /** 段类型 */
+  FieldType?: string | null;
+  /** 备注 */
+  Mark?: string | null;
+  /** excel名 */
+  ExcelName?: string | null;
+  /** 关联的字典表Id */
+  DictId?: number | null;
+  /** 关联的字典表表名 */
+  DictName?: string | null;
+  /** 多表关联新增字段 */
+  TableNodeId?: string | null;
+  /** 字段所属的表名 */
+  TableName?: string | null;
+  /** 用户设置的带格式的目标复杂格式 */
+  FieldComplexType?: string | null;
+  /** 格式规则 */
+  FormatRule?: string | null;
+  /** 数据字段是否过滤空值 */
+  IsFilter?: boolean | null;
+  /** 计算字段类型 */
+  CalcType?: string | null;
+  /** 计算字段的公式内容 */
+  CalcFormula?: string | null;
+  /** 计算字段的中文公式内容 */
+  CalcDesc?: string | null;
+  /** Api数据源json路径名称 */
+  JsonPathName?: string | null;
+  /** 地理类型标识 */
+  Granularity?: string | null;
+  /** 自定义地图Id */
+  GeoJsonId?: number | null;
+  /** 空值展示样式配置 */
+  EmptyValueConfig?: EmptyValueConfig | null;
+  /** 原列名称 */
+  DbFieldName?: string | null;
+  /** 是否是复制字段操作 */
+  IsCopyOperation?: boolean | null;
+  /** 是否从普通字段复制 */
+  IsCopyFromNormal?: boolean | null;
+}
+
+/** 表的全部列名数据列表 */
+declare interface TableColumnListData {
+  /** 表中的列的列表 */
+  List: TableColumn[] | null;
+  /** 异步事务id */
+  TranId?: string | null;
+  /** 异步事务状态 */
+  TranStatus?: number | null;
+}
+
+/** 表字段描述 */
+declare interface TableField {
+  /** db里的字段column名 */
+  DbName: string;
+  /** bi展示名 */
+  AliasName: string;
+  /** db里的字段类型 */
+  DbType: string;
+  /** BI归类后的抽象字段类型,比如字符串,数字,时间 */
+  FieldType: string;
+  /** 字段组合计算公式后生成的复杂明细类型 */
+  FieldComplexType?: string | null;
+  /** 字段描述 */
+  Mark?: string | null;
+  /** 字段计算公式 */
+  FormatRule?: string | null;
+  /** 数据字段是否过滤空值 */
+  IsFilter?: boolean | null;
+  /** 计算字段类型 */
+  CalcType?: string | null;
+  /** 计算字段的公式内容 */
+  CalcFormula?: string | null;
+  /** 计算字段的中文公式内容, 前端展示使用 */
+  CalcDesc?: string | null;
+  /** 关联字典表id */
+  DictId?: number | null;
+  /** 关联字典表名 */
+  DictName?: string | null;
+  /** 非必填, 多表关联新增字段 */
+  TableNodeId?: string | null;
+  /** excel */
+  ExcelName?: string | null;
+  /** 非必填,多表关联新增字段,字段所属的表名 */
+  TableName?: string | null;
+  /** api数据源路径名 */
+  JsonPathName?: string | null;
+  /** 地理字段标识 */
+  Granularity?: string | null;
+  /** 地图id */
+  GeoJsonId?: number | null;
+  /** 空值展示样式配置 */
+  EmptyValueConfig?: EmptyValueConfig | null;
+  /** 原列名称 */
+  DbFieldName?: string | null;
+  /** 是否是复制字段操作 */
+  IsCopyOperation?: boolean | null;
+  /** 是否从普通字段复制 */
+  IsCopyFromNormal?: boolean | null;
 }
 
 /** 用户组 */
@@ -900,6 +1152,66 @@ declare interface CreateAuthApiKeyResponse {
   Msg?: string | null;
   /** 数据 */
   Data?: ApiKeyAuthApplyVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDataTableRequest {
+  /** 后端提供字典：数据表类型，1、数据库建表，2、SQL建表，3、Excel上传，4、API接入，5、腾讯文档，6、云数据库，7、手工输入，8、关联查询 */
+  Type: number;
+  /** 数据表名称 */
+  Name: string;
+  /** 无 */
+  ProjectId: number;
+  /** 所属文件夹 */
+  FoldId?: number;
+  /** 数据源Id */
+  DatasourceId?: string;
+  /** 物理表名 */
+  TableName?: string;
+  /** sql语句 */
+  Sql?: string;
+  /** excel地址 */
+  ExcelUrl?: string;
+  /** 字段配置 */
+  Fields?: TableField[];
+  /** 多表关联使用: 1:数据源原表,2:本地表,3:Excel表,4:API表 */
+  TableNodeType?: number;
+  /** 多表关联的原始表信息 */
+  Tables?: JoinSourceTable[];
+  /** 多表关联的关联信息 */
+  Joins?: JoinRelation[];
+  /** 补充信息，如api数据源信息，腾讯文档接入信息等 */
+  ExtInfo?: string;
+  /** 是否是异步 */
+  AsyncRequest?: boolean;
+  /** 依赖的异步事务id */
+  ParentTranId?: string;
+  /** API数据源配置 */
+  ApiDatasourceConfig?: ApiDatasourceConfig;
+  /** 1 */
+  ParamList?: ParamCreateDTO[];
+  /** dlc高级参数 */
+  DlcExtInfo?: string;
+  /** 是否查询数据库 */
+  QueryDbData?: string;
+  /** 数据表备注 */
+  TableComment?: string;
+  /** 是否查询字段备注 */
+  QueryFieldRemark?: number;
+  /** 字段备注列表 */
+  FieldRemarkList?: FieldRemarkDTO[];
+}
+
+declare interface CreateDataTableResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 成功返回数据表的id */
+  Data?: IdDTO | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 错误提示 */
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1620,6 +1932,44 @@ declare interface DescribeResourceUserGroupPageListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSourceFieldListRequest {
+  /** 数据源Id */
+  DataSourceId?: number;
+  /** 表名 */
+  TableName?: string;
+  /** sql内容 */
+  Sql?: string;
+  /** 项目id */
+  ProjectId?: number;
+  /** 是否是异步 */
+  AsyncRequest?: boolean;
+  /** 异步事务id */
+  TranId?: string;
+  /** 11 */
+  ParamList?: ParamCreateDTO[];
+  /** DLC扩展参数 */
+  DlcExtInfo?: string;
+  /** 是否查询数据库 */
+  QueryDbData?: string;
+  /** 数据表 Id */
+  TableId?: string;
+  /** 后端提供字典：数据表类型，1、数据库建表，2、SQL建表，3、Excel上传，4、API接入，5、腾讯文档，6、云数据库，7、手工输入，8、关联查询 */
+  TableType?: number;
+}
+
+declare interface DescribeSourceFieldListResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 信息 */
+  Msg?: string | null;
+  /** 表中字段的列表 */
+  Data?: TableColumnListData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserGroupInfoRequest {
   /** 用户组id */
   Id?: number;
@@ -2221,6 +2571,8 @@ declare interface Bi {
   ClearEmbedToken(data: ClearEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ClearEmbedTokenResponse>;
   /** 创建ApiKey {@link CreateAuthApiKeyRequest} {@link CreateAuthApiKeyResponse} */
   CreateAuthApiKey(data?: CreateAuthApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthApiKeyResponse>;
+  /** 添加数据表 {@link CreateDataTableRequest} {@link CreateDataTableResponse} */
+  CreateDataTable(data: CreateDataTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTableResponse>;
   /** 创建数据源 {@link CreateDatasourceRequest} {@link CreateDatasourceResponse} */
   CreateDatasource(data: CreateDatasourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatasourceResponse>;
   /** 创建云数据库 {@link CreateDatasourceCloudRequest} {@link CreateDatasourceCloudResponse} */
@@ -2273,6 +2625,8 @@ declare interface Bi {
   DescribeProjectList(data?: DescribeProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProjectListResponse>;
   /** 查看当前资源的用户组权限 {@link DescribeResourceUserGroupPageListRequest} {@link DescribeResourceUserGroupPageListResponse} */
   DescribeResourceUserGroupPageList(data?: DescribeResourceUserGroupPageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUserGroupPageListResponse>;
+  /** 原始数据表字段接口 {@link DescribeSourceFieldListRequest} {@link DescribeSourceFieldListResponse} */
+  DescribeSourceFieldList(data?: DescribeSourceFieldListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceFieldListResponse>;
   /** 查询用户组详情 {@link DescribeUserGroupInfoRequest} {@link DescribeUserGroupInfoResponse} */
   DescribeUserGroupInfo(data?: DescribeUserGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupInfoResponse>;
   /** 查询用户组成员列表 {@link DescribeUserGroupMemberListRequest} {@link DescribeUserGroupMemberListResponse} */

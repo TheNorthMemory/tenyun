@@ -256,6 +256,38 @@ declare interface TokenSummaryBillingItem {
   TotalQty?: number;
 }
 
+/** Token Plan 企业版套餐调用明细项（字段与 CLS 日志对齐） */
+declare interface UsageDetailItem {
+  /** 主账号 UIN。 */
+  Uin?: string;
+  /** 模型名称。 */
+  ModelName?: string;
+  /** APIKey ID。 */
+  ApiKeyId?: string;
+  /** APIKey 名称。 */
+  ApiKeyName?: string;
+  /** 请求 ID。 */
+  RequestId?: string;
+  /** 请求时间（RFC3339 格式）。 */
+  RequestTime?: string;
+  /** 输入 token 数。 */
+  InputToken?: number;
+  /** 缓存 token 数。 */
+  CacheToken?: number;
+  /** 输出 token 数。 */
+  OutputToken?: number;
+  /** 总 token 数。 */
+  TotalToken?: number;
+  /** 未命中缓存输入消耗额度。单位说明如下：- 套餐类型为专业套餐（enterprise），单位取值为积分；- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。 */
+  InputQuota?: string;
+  /** 缓存消耗额度。单位说明如下：- 套餐类型为专业套餐（enterprise），单位取值为积分；- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。 */
+  CacheQuota?: string;
+  /** 输出消耗额度。单位说明如下：- 套餐类型为专业套餐（enterprise），单位取值为积分；- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。 */
+  OutputQuota?: string;
+  /** 总消耗额度。单位说明如下：- 套餐类型为专业套餐（enterprise），单位取值为积分；- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。 */
+  TotalQuota?: string;
+}
+
 /** 排行列表中的单个对象用量项，含对象标识、时间周期内的统计值（Stats）和时间周期内的时序点列表（Series，仅 ShowAll=false 时返回）。 */
 declare interface UsageRankItem {
   /** 全局排名（从 1 起）。分页场景下仍为全量排序中的位次，非页内序号 */
@@ -465,9 +497,35 @@ declare interface DescribeTokenPlanApiKeySecretResponse {
 }
 
 declare interface DescribeTokenPlanApiKeyUsageDetailRequest {
+  /** 套餐 ID。可通过DescribeTokenPlanList接口获取。 */
+  TeamId: string;
+  /** 起始时间，RFC3339 格式。不传默认为结束时间前 15 分钟。 */
+  From?: string;
+  /** 结束时间，RFC3339 格式。不传默认为当前时间。 */
+  To?: string;
+  /** 排序方式。取值：asc（升序）、desc（降序），默认为 desc。 */
+  Sort?: string;
+  /** 返回条数，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 翻页上下文，首次查询不传，后续传入上次返回的 Context，直到 ListOver 为 true。 */
+  Context?: string;
+  /** 按 API Key ID 精确过滤。最大 128 字符。与 ApiKeyName 至少需传入其一，都传时以 ApiKeyId 为准。可通过 DescribeTokenPlanApiKeyList 接口获取。 */
+  ApiKeyId?: string;
+  /** 按 API Key 名称模糊过滤。最大 64 字符。与 ApiKeyId 至少需传入其一，都传时以 ApiKeyId 为准。 */
+  ApiKeyName?: string;
+  /** 按模型 ID (Model ID) 精确过滤。需要按模型名称过滤时传入该字段。 */
+  ModelName?: string;
 }
 
 declare interface DescribeTokenPlanApiKeyUsageDetailResponse {
+  /** 翻页上下文，传入下一次请求的 Context 参数继续翻页。 */
+  Context?: string;
+  /** 是否已到末尾，为 true 时无需继续翻页。 */
+  ListOver?: boolean;
+  /** 调用明细列表。 */
+  List?: UsageDetailItem[];
+  /** 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐） */
+  ProductType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -669,8 +727,8 @@ declare interface Tokenhub {
   DescribeTokenPlanApiKeyList(data: DescribeTokenPlanApiKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanApiKeyListResponse>;
   /** 查询 Token Plan 套餐的 API Key 密钥（明文） {@link DescribeTokenPlanApiKeySecretRequest} {@link DescribeTokenPlanApiKeySecretResponse} */
   DescribeTokenPlanApiKeySecret(data: DescribeTokenPlanApiKeySecretRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanApiKeySecretResponse>;
-  /** 查询 TokenPlan APIKey 调用明细 {@link DescribeTokenPlanApiKeyUsageDetailRequest} {@link DescribeTokenPlanApiKeyUsageDetailResponse} */
-  DescribeTokenPlanApiKeyUsageDetail(data?: DescribeTokenPlanApiKeyUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanApiKeyUsageDetailResponse>;
+  /** 查询 TokenPlan 企业版 API Key 调用明细 {@link DescribeTokenPlanApiKeyUsageDetailRequest} {@link DescribeTokenPlanApiKeyUsageDetailResponse} */
+  DescribeTokenPlanApiKeyUsageDetail(data: DescribeTokenPlanApiKeyUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanApiKeyUsageDetailResponse>;
   /** 查询 Token Plan 套餐列表 {@link DescribeTokenPlanListRequest} {@link DescribeTokenPlanListResponse} */
   DescribeTokenPlanList(data?: DescribeTokenPlanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanListResponse>;
   /** 查询用量排行列表 {@link DescribeUsageRankListRequest} {@link DescribeUsageRankListResponse} */

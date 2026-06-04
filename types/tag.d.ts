@@ -299,7 +299,7 @@ declare interface DescribeResourceTagsByResourceIdsSeqResponse {
 declare interface DescribeResourceTagsByTagKeysRequest {
   /** 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka */
   ServiceType: string;
-  /** 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填 */
+  /** 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId */
   ResourcePrefix: string;
   /** 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填 */
   ResourceRegion: string;
@@ -359,7 +359,7 @@ declare interface DescribeResourceTagsResponse {
 }
 
 declare interface DescribeResourcesByTagsRequest {
-  /** 标签过滤数组，数量最多6个 */
+  /** 标签过滤数组，最多支持6组标签。 */
   TagFilters: TagFilter[];
   /** 创建标签者uin */
   CreateUin?: number;
@@ -391,7 +391,7 @@ declare interface DescribeResourcesByTagsResponse {
 }
 
 declare interface DescribeResourcesByTagsUnionRequest {
-  /** 标签过滤数组，数量最多六个 */
+  /** 标签过滤数组，最多支持6组标签。 */
   TagFilters: TagFilter[];
   /** 创建标签者uin */
   CreateUin?: number;
@@ -429,7 +429,7 @@ declare interface DescribeTagKeysRequest {
   Offset?: number;
   /** 每页大小，默认为 15，最大1000 */
   Limit?: number;
-  /** 是否展现项目。1:展示 0:不展示 */
+  /** 是否展现项目标签。1:展示 0:不展示。本功能仅供历史客户使用，需提交工单加白主账号后，入参方可有效。 */
   ShowProject?: number;
   /** 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。 */
   Category?: string;
@@ -511,7 +511,7 @@ declare interface DescribeTagsRequest {
   CreateUin?: number;
   /** 标签键数组,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签,当与TagKey同时传递时只取本值 */
   TagKeys?: string[];
-  /** 是否展现项目标签。1:展示 0:不展示 */
+  /** 是否展现项目标签。1:展示 0:不展示。本功能仅供历史客户使用，需提交工单加白主账号后，入参方可有效。 */
   ShowProject?: number;
 }
 
@@ -541,7 +541,7 @@ declare interface DescribeTagsSeqRequest {
   CreateUin?: number;
   /** 标签键数组,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签,当与TagKey同时传递时只取本值 */
   TagKeys?: string[];
-  /** 是否展现项目标签。1:展示 0:不展示 */
+  /** 是否展现项目标签。1:展示 0:不展示。本功能仅供历史客户使用，需提交工单加白主账号后，入参方可有效。 */
   ShowProject?: number;
 }
 
@@ -579,7 +579,7 @@ declare interface DetachResourcesTagResponse {
 declare interface GetResourcesRequest {
   /** 资源六段式列表。腾讯云使用资源六段式描述一个资源。例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。如果传入了此参数会返回所有匹配的资源列表，指定的MaxResults会失效。N取值范围：0~9 */
   ResourceList?: string[];
-  /** 标签键和标签值。指定多个标签，会查询同时绑定了该多个标签的资源。N取值范围：0~5。每个TagFilters中的TagValue最多支持10个 */
+  /** 标签过滤数组，最多支持6组标签。会查询同时绑定了这多组标签的资源。每组标签中的TagValue最多支持10个。 */
   TagFilters?: TagFilter[];
   /** 从上一页的响应中获取的下一页的Token值。如果是第一次请求，设置为空。 */
   PaginationToken?: string;
