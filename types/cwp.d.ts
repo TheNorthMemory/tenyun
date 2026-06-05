@@ -3206,6 +3206,10 @@ declare interface Machine {
   Remark?: string;
   /** 主机安全agent版本 */
   AgentVersion?: string;
+  /** 机器对应APPID */
+  AppId?: number;
+  /** 安全中心付费版本 */
+  CSIPProtectType?: string;
 }
 
 /** 机器清理记录对象 */

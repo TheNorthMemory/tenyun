@@ -2213,7 +2213,7 @@ declare interface DescribeMongoDBProcessListResponse {
 }
 
 declare interface DescribeMySqlProcessListRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。其中 dcdb(即TDSQL MySQL) 的查询入参InstanceId特殊，需要使用 ClusterId + &amp; + InstanceId 来组合代替， 如：tdsqlshard-s1230&amp;shard-abcd */
   InstanceId: string;
   /** 线程的ID，用于筛选线程列表。 */
   ID?: number;
@@ -2233,7 +2233,7 @@ declare interface DescribeMySqlProcessListRequest {
   Info?: string;
   /** 返回数量，默认20。 */
   Limit?: number;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。 */
+  /** 服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;mariadb&quot;-mariadb;&quot;cynosdb&quot;-TDSQL-C for MySQL ;&quot;dcdb&quot;-TDSQL MySQL 默认为&quot;mysql&quot;。 */
   Product?: string;
   /** 会话统计的维度信息,可以多个维度。 */
   StatDimensions?: StatDimension[];

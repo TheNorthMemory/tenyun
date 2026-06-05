@@ -2076,7 +2076,7 @@ declare interface BlindWatermarkConfig {
 
 /** 嵌入盲水印配置 */
 declare interface BlindWatermarkEmbedInfo {
-  /** 盲水印文字，经过URL安全的Base64编码的4Byte数据。Base64解码之后，少于4Byte将会填充0x00到4Byte，超过4Byte将会截断为4Byte。 */
+  /** 盲水印文字，经过URL安全的Base64编码的数据。Base64解码之后，少于12Byte将会填充0x00到12Byte，超过12Byte将会截断为12Byte。 */
   EmbedText?: string | null;
 }
 

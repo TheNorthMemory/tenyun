@@ -3132,6 +3132,8 @@ declare interface QpsData {
   QPSExtendMax?: number;
   /** 境外业务扩展包最大qps */
   QPSExtendIntlMax?: number;
+  /** 预付费/后付费QPS扩容比 */
+  ElasticPrepaidRatio?: number;
 }
 
 /** 有效REC设备安全包信息 */

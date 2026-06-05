@@ -6,6 +6,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosPromise, AxiosRequestHeaders, A
 import Aai, { Versions as AaiVersions } from "./aai";
 import Aca, { Versions as AcaVersions } from "./aca";
 import Acp, { Versions as AcpVersions } from "./acp";
+import Adp, { Versions as AdpVersions } from "./adp";
 import Advisor, { Versions as AdvisorVersions } from "./advisor";
 import Af, { Versions as AfVersions } from "./af";
 import Afc, { Versions as AfcVersions } from "./afc";
@@ -263,6 +264,7 @@ export declare type SERVICE_VERSIONS = {
   aai: AaiVersions,
   aca: AcaVersions,
   acp: AcpVersions,
+  adp: AdpVersions,
   advisor: AdvisorVersions,
   af: AfVersions,
   afc: AfcVersions,
@@ -540,6 +542,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   aca: Aca,
   /** {@link Acp 应用合规平台} */
   acp: Acp,
+  /** {@link Adp 腾讯云智能体开发平台} */
+  adp: Adp,
   /** {@link Advisor 智能顾问} */
   advisor: Advisor,
   /** {@link Af 借贷反欺诈} */

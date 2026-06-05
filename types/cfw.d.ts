@@ -762,6 +762,14 @@ declare interface FieldOption {
   Value?: string;
 }
 
+/** 查询下拉选择选项数据 */
+declare interface FilterDataObject {
+  /** 显示名称 */
+  Text?: string | null;
+  /** 实际值 */
+  Value?: string | null;
+}
+
 /** 防火墙网段信息 */
 declare interface FwCidrInfo {
   /** 防火墙使用的网段类型，值VpcSelf/Assis/Custom分别代表自有网段优先/扩展网段优先/自定义 */
@@ -1062,12 +1070,56 @@ declare interface NDRAssetServiceStats {
   Count?: number;
 }
 
+/** NAT CCN防火墙开关配置 */
+declare interface NatCcnSwitchConfig {
+  /** NAT防火墙实例ID */
+  NatInsId: string;
+  /** 云联网实例ID */
+  CcnId: string;
+  /** 开关接入模式，1:自动接入，2:手动接入 */
+  SwitchMode: number;
+  /** 引流路由方法，0:多路由表，1:策略路由。自动接入模式仅支持策略路由(1)；手动接入模式支持多路由表(0)和策略路由(1) */
+  RoutingMode: number;
+  /** 接入的实例列表 */
+  AccessInstanceList?: AccessInstanceInfo[];
+  /** 引流VPC的CIDR网段 */
+  LeadVpcCidr?: string;
+}
+
 /** NAT集群模式开关信息 */
 declare interface NatClusterInfo {
   /** nat网关ID */
   NatInsId?: string;
   /** nat网关名称 */
   NatInsName?: string;
+}
+
+/** NAT集群防火墙地域部署状态查询 */
+declare interface NatClusterRegionStatusQuery {
+  /** 云联网ID */
+  CcnId: string;
+  /** NAT网关ID */
+  NatInsId: string;
+  /** 资产类型，取值：nat_ccn-CCN+NAT场景，nat-独立NAT场景 */
+  AssetType: string;
+  /** 引流路由方法，0-多路由表模式，1-策略路由模式 */
+  RoutingMode?: number;
+}
+
+/** NAT防火墙引流集群地域状态 */
+declare interface NatFwClusterRegionStatus {
+  /** NAT网关ID */
+  NatInsId?: string;
+  /** 云联网ID */
+  CcnId?: string;
+  /** 地域，如 ap-guangzhou */
+  Region?: string;
+  /** 地域集群状态，取值：NotDeployed-未部署集群，Deployed-已部署集群但未创建引流网络，DeployedCustomOnly-已部署集群但内网段被覆盖，无法自动选择引流网段，需自定义设置引流网段Auto-已创建引流网络(自动分配CIDR)，Custom-已创建引流网络(自定义CIDR) */
+  Status?: string;
+  /** 引流网络 CIDR，仅当 Status 为 Auto 或 Custom 时有值 */
+  Cidr?: string;
+  /** 引流路由方法，0-多路由表模式，1-策略路由模式 */
+  RoutingMode?: number;
 }
 
 /** Nat防火墙弹性公网ip列表 */
@@ -1102,6 +1154,50 @@ declare interface NatFwInstance {
   Status?: number;
   /** nat公网ip */
   NatIp?: string;
+}
+
+/** NAT防火墙开关详情 */
+declare interface NatFwSwitchDetailS {
+  /** NAT实例ID */
+  InsObj?: string;
+  /** 实例名称 */
+  ObjName?: string;
+  /** 防火墙类型 */
+  FwType?: string;
+  /** 资产类型，nat-VPC内防护，nat_ccn-CCN集群模式 */
+  AssetType?: string;
+  /** 地域 */
+  Region?: string;
+  /** 开关接入模式，1-自动接入，2-手动接入 */
+  SwitchMode?: number;
+  /** 引流路由方法，0-多路由表，1-策略路由 */
+  RoutingMode?: number;
+  /** 开关状态，0-未开启，1-已开启，2-开启中，3-关闭中 */
+  Status?: number;
+  /** ip版本，0：ipv4；1：ipv6 */
+  IpVersion?: number;
+  /** 是否非集群模式，0-集群模式，1-非集群模式 */
+  NonCluster?: number;
+  /** 入侵防御动作 */
+  IpsAction?: number;
+  /** 流量监控开关 */
+  TransEnable?: number;
+  /** Bypass状态，0-关闭，1-开启 */
+  Bypass?: number;
+  /** 关联ID，nat_ccn资产类型时为云联网实例ID, nat资产类型时为空 */
+  AttachId?: string;
+  /** 关联ID的实例名称，nat_ccn资产类型时为云联网名称 */
+  AttachName?: string;
+  /** NAT防火墙所在VPC ID */
+  NatVpcId?: string;
+  /** NAT防火墙所在VPC的VPC名称 */
+  NatVpcName?: string;
+  /** CCN关联实例列表 */
+  AttachIns?: AttachInsInfo[] | null;
+  /** 终端节点列表 */
+  Endpoints?: EndpointInfo[] | null;
+  /** 防火墙开关操作时的进度状态：// 开启 — 自动模式（3步）&quot;AUTO_OPEN_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源&quot;AUTO_OPEN_PUSHING_ROUTES&quot; // 步骤3: 创建策略路由// 开启 — 手动模式（1步）&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源// 关闭 — 自动模式（2步）&quot;AUTO_CLOSE_DELETING_ROUTES&quot; // 步骤1: 删除策略路由&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源// 关闭 — 手动模式（1步）&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源// 修改 — 自动模式（3步）&quot;AUTO_MODIFY_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由&quot;AUTO_MODIFY_PUSHING_ROUTES&quot; // 步骤3: 创建新策略路由// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源 */
+  Progress?: string;
 }
 
 /** Nat实例卡片详细信息 */
@@ -2050,6 +2146,18 @@ declare interface AddVpcAcRuleResponse {
   RequestId?: string;
 }
 
+declare interface CloseClusterNatFwSwitchRequest {
+  /** NAT防火墙实例ID */
+  NatInsId: string;
+  /** 云联网实例ID */
+  CcnId: string;
+}
+
+declare interface CloseClusterNatFwSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAcRulesRequest {
   /** 创建规则数据 */
   Data: RuleInfoData[];
@@ -2808,6 +2916,28 @@ declare interface DescribeCfwInsStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterNatCcnFwSwitchListRequest {
+  /** NAT防火墙类型筛选，取值：nat-VPC内防护类型，nat_ccn-CCN集群模式类型，不传则同时查询两种类型 */
+  NatType?: string;
+  /** 每页条数，默认100 */
+  Limit?: number;
+  /** 偏移量，默认0 */
+  Offset?: number;
+  /** 过滤条件列表，支持按Common（通用搜索）、InsObj（实例ID）、ObjName（实例名称）等字段过滤 */
+  Filters?: CommonFilter[];
+}
+
+declare interface DescribeClusterNatCcnFwSwitchListResponse {
+  /** 符合条件的总记录数 */
+  Total?: number;
+  /** NAT防火墙开关详情列表 */
+  Data?: NatFwSwitchDetailS[];
+  /** 地域列表 */
+  RegionList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterVpcFwSwitchsRequest {
   /** 需要查询的索引，特定场景使用，可不填 */
   Index?: string;
@@ -3208,6 +3338,42 @@ declare interface DescribeNatAcRuleResponse {
   Data?: DescAcItem[];
   /** 未过滤的总条数 */
   AllTotal?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNatCcnFwSwitchRequest {
+  /** NAT防火墙实例ID */
+  NatInsId: string;
+  /** 云联网实例ID */
+  CcnId: string;
+}
+
+declare interface DescribeNatCcnFwSwitchResponse {
+  /** 开关接入模式，1-自动接入，2-手动接入枚举值：1： 自动接入2： 手动接入 */
+  SwitchMode?: number;
+  /** 引流路由方法，0-多路由表，1-策略路由枚举值：0： 多路由表1： 策略路由 */
+  RoutingMode?: number;
+  /** Bypass状态，0-关闭，1-开启枚举值：0： 关闭1： 开启 */
+  Bypass?: number;
+  /** 云联网实例ID */
+  CcnId?: string;
+  /** 接入的实例列表 */
+  AccessInstanceList?: AccessInstanceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNatFwClusterRegionStatusRequest {
+  /** NAT集群防火墙地域状态查询列表 */
+  NatClusterRegionStatusQueryList: NatClusterRegionStatusQuery[];
+}
+
+declare interface DescribeNatFwClusterRegionStatusResponse {
+  /** 返回地域数量 */
+  Total?: number;
+  /** 地域防火墙集群状态列表 */
+  RegionFwStatus?: NatFwClusterRegionStatus[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3884,6 +4050,32 @@ declare interface ModifyBlockTopResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterFwBypassRequest {
+  /** 防火墙类型，"VPC_FW"-VPC防火墙，"NAT_FW"-NAT防火墙 */
+  FwType: string;
+  /** 云联网实例ID */
+  CcnId: string;
+  /** Bypass开关，true-开启Bypass（禁用正常下一跳，流量绕过防火墙），false-关闭Bypass（启用正常下一跳，流量经过防火墙） */
+  Enable: boolean;
+  /** NAT防火墙实例ID，FwType为nat时必填 */
+  NatInsId?: string;
+}
+
+declare interface ModifyClusterFwBypassResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClusterNatFwSwitchRequest {
+  /** NAT CCN防火墙开关配置 */
+  NatCcnSwitch: NatCcnSwitchConfig;
+}
+
+declare interface ModifyClusterNatFwSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterVpcFwSwitchRequest {
   /** 开关，0：关闭，1：开启 */
   Enable: number;
@@ -4248,6 +4440,16 @@ declare interface ModifyVpcFwSequenceRulesResponse {
   RequestId?: string;
 }
 
+declare interface OpenClusterNatFwSwitchRequest {
+  /** NAT CCN防火墙开关配置 */
+  NatCcnSwitch: NatCcnSwitchConfig;
+}
+
+declare interface OpenClusterNatFwSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveAcRuleRequest {
   /** 规则的uuid，可通过查询规则列表获取 */
   RuleUuid: number;
@@ -4465,6 +4667,8 @@ declare interface Cfw {
   AddNatAcRule(data: AddNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddNatAcRuleResponse>;
   /** 添加VPC内网间规则 {@link AddVpcAcRuleRequest} {@link AddVpcAcRuleResponse} */
   AddVpcAcRule(data: AddVpcAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddVpcAcRuleResponse>;
+  /** 关闭NAT CCN集群模式防火墙开关 {@link CloseClusterNatFwSwitchRequest} {@link CloseClusterNatFwSwitchResponse} */
+  CloseClusterNatFwSwitch(data: CloseClusterNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<CloseClusterNatFwSwitchResponse>;
   /** 创建访问控制规则 {@link CreateAcRulesRequest} {@link CreateAcRulesResponse} */
   CreateAcRules(data: CreateAcRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAcRulesResponse>;
   /** 创建地址模板规则 {@link CreateAddressTemplateRequest} {@link CreateAddressTemplateResponse} */
@@ -4541,6 +4745,8 @@ declare interface Cfw {
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
   /** cfw实例运行状态查询 {@link DescribeCfwInsStatusRequest} {@link DescribeCfwInsStatusResponse} */
   DescribeCfwInsStatus(data?: DescribeCfwInsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwInsStatusResponse>;
+  /** 查询NAT CCN集群模式防火墙开关列表 {@link DescribeClusterNatCcnFwSwitchListRequest} {@link DescribeClusterNatCcnFwSwitchListResponse} */
+  DescribeClusterNatCcnFwSwitchList(data?: DescribeClusterNatCcnFwSwitchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNatCcnFwSwitchListResponse>;
   /** 查询集群模式Vpc间防火墙开关 {@link DescribeClusterVpcFwSwitchsRequest} {@link DescribeClusterVpcFwSwitchsResponse} */
   DescribeClusterVpcFwSwitchs(data?: DescribeClusterVpcFwSwitchsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterVpcFwSwitchsResponse>;
   /** 获取入侵防御按钮列表 {@link DescribeDefenseSwitchRequest} {@link DescribeDefenseSwitchResponse} */
@@ -4573,6 +4779,10 @@ declare interface Cfw {
   DescribeNDRAssetIdentificationList(data: DescribeNDRAssetIdentificationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationListResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */
   DescribeNatAcRule(data: DescribeNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatAcRuleResponse>;
+  /** 查询NAT CCN防火墙开关配置 {@link DescribeNatCcnFwSwitchRequest} {@link DescribeNatCcnFwSwitchResponse} */
+  DescribeNatCcnFwSwitch(data: DescribeNatCcnFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatCcnFwSwitchResponse>;
+  /** 查询NAT防火墙引流集群地域状态 {@link DescribeNatFwClusterRegionStatusRequest} {@link DescribeNatFwClusterRegionStatusResponse} */
+  DescribeNatFwClusterRegionStatus(data: DescribeNatFwClusterRegionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwClusterRegionStatusResponse>;
   /** 查询Nat防火墙Dnat规则 {@link DescribeNatFwDnatRuleRequest} {@link DescribeNatFwDnatRuleResponse} */
   DescribeNatFwDnatRule(data?: DescribeNatFwDnatRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwDnatRuleResponse>;
   /** 获取当前用户接入nat防火墙的所有子网数及natfw实例个数 {@link DescribeNatFwInfoCountRequest} {@link DescribeNatFwInfoCountResponse} */
@@ -4641,6 +4851,10 @@ declare interface Cfw {
   ModifyBlockIgnoreRuleNew(data: ModifyBlockIgnoreRuleNewRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIgnoreRuleNewResponse>;
   /** 取消阻断记录置顶接口 {@link ModifyBlockTopRequest} {@link ModifyBlockTopResponse} */
   ModifyBlockTop(data: ModifyBlockTopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockTopResponse>;
+  /** 修改集群防火墙Bypass状态 {@link ModifyClusterFwBypassRequest} {@link ModifyClusterFwBypassResponse} */
+  ModifyClusterFwBypass(data: ModifyClusterFwBypassRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterFwBypassResponse>;
+  /** 修改NAT CCN集群模式防火墙开关配置 {@link ModifyClusterNatFwSwitchRequest} {@link ModifyClusterNatFwSwitchResponse} */
+  ModifyClusterNatFwSwitch(data: ModifyClusterNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNatFwSwitchResponse>;
   /** 修改集群模式VPC防火墙开关 {@link ModifyClusterVpcFwSwitchRequest} {@link ModifyClusterVpcFwSwitchResponse} */
   ModifyClusterVpcFwSwitch(data: ModifyClusterVpcFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterVpcFwSwitchResponse>;
   /** 启用停用VPC间规则或Nat边界规则 {@link ModifyEWRuleStatusRequest} {@link ModifyEWRuleStatusResponse} */
@@ -4691,6 +4905,8 @@ declare interface Cfw {
   ModifyVpcFwGroup(data: ModifyVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcFwGroupResponse>;
   /** vpc间规则快速排序 {@link ModifyVpcFwSequenceRulesRequest} {@link ModifyVpcFwSequenceRulesResponse} */
   ModifyVpcFwSequenceRules(data?: ModifyVpcFwSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcFwSequenceRulesResponse>;
+  /** 开启NAT CCN集群模式防火墙开关 {@link OpenClusterNatFwSwitchRequest} {@link OpenClusterNatFwSwitchResponse} */
+  OpenClusterNatFwSwitch(data: OpenClusterNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterNatFwSwitchResponse>;
   /** 删除互联网边界规则 {@link RemoveAcRuleRequest} {@link RemoveAcRuleResponse} */
   RemoveAcRule(data: RemoveAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveAcRuleResponse>;
   /** 删除互联网边界访问控制规则 {@link RemoveAclRuleRequest} {@link RemoveAclRuleResponse} */
