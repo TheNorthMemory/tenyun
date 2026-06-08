@@ -8598,11 +8598,13 @@ declare namespace V20180717 {
   }
 
   interface CreateAigcAudioTaskRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
     /** 模型名称。 */
     ModelName?: string;
     /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。 */
     ModelVersion?: string;
-    /** 指定场景，目前支持sfx（音效）。 */
+    /** 指定场景，目前支持sfx（音效）、music（音乐）。 */
     SceneType?: string;
     /** 生成音频的描述 */
     Prompt?: string;
@@ -10094,6 +10096,8 @@ declare namespace V20180717 {
     SubAppId?: number;
     /** API Key */
     APIKey?: string;
+    /** API Key */
+    APIKeys?: string[];
   }
 
   interface DescribeAigcUsageDataResponse {

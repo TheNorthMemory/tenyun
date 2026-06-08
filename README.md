@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 254+ 款产品，14354+ 服务数</summary>
+<details><summary>共计 254+ 款产品，14356+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -186,7 +186,7 @@ cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 20
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
 cloudmate | [Cloud Mate](https://cloud.tencent.com/document/product/1816) | 2025-10-30(1) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(190) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(192) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(52) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(2) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -283,7 +283,7 @@ msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 201
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(3) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(46) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(82) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(81) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(30) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(134) | 2018-12-25(20) |
@@ -339,7 +339,7 @@ tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2022-05-0
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
 tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 2020-12-29(3) | 2020-07-13(4) |
 tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(2) |
-tokenhub | [TokenHub](https://cloud.tencent.com/document/product/1823) | 2026-03-22(16) |
+tokenhub | [TokenHub](https://cloud.tencent.com/document/product/1823) | 2026-03-22(17) |
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/document/product/1495) | 2023-04-18(29) |
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(48) |

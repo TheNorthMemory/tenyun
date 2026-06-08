@@ -3609,13 +3609,13 @@ declare interface CreateOrganizationAuthUrlResponse {
 }
 
 declare interface CreateOrganizationBatchSignUrlRequest {
-  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 请指定需执行批量签署的流程ID，数量范围为1-100。您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。用户将利用链接对这些合同实施批量操作。 注：生成动态签署方领取时此参数必传。 */
+  /** 请指定需执行批量签署的流程ID，数量范围为1-100。您可登录腾讯电子签控制台，浏览 &quot;合同&quot;-&gt;&quot;合同中心&quot; 以查阅某一合同的FlowId（在页面中显示为合同ID）。用户将利用链接对这些合同实施批量操作。 注：生成动态签署方领取时此参数必传。 */
   FlowIds?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 员工在腾讯电子签平台的独特身份标识，为32位字符串。您可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查阅某位员工的UserId（在页面中显示为用户ID）。UserId必须是传入合同（FlowId）中的签署人。1. 若UserId为空，Name和Mobile 必须提供。2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。 */
+  /** 员工在腾讯电子签平台的独特身份标识，为32位字符串。您可登录腾讯电子签控制台，在 &quot;更多能力&quot;-&gt;&quot;组织管理&quot; 中查阅某位员工的UserId（在页面中显示为用户ID）。UserId必须是传入合同（FlowId）中的签署人。1. 若UserId为空，Name和Mobile 必须提供。2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。 */
   UserId?: string;
   /** 员工姓名，必须与手机号码一起使用。如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
   Name?: string;
@@ -3625,7 +3625,7 @@ declare interface CreateOrganizationBatchSignUrlRequest {
   RecipientIds?: string[];
   /** 合同组Id，传入此参数则可以不传FlowIds */
   FlowGroupId?: string;
-  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。` */
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。 */
   CanBatchReject?: boolean;
   /** 动态签署方领取链接配置。 */
   DynamicSignOption?: DynamicSignOption;

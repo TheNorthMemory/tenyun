@@ -2469,6 +2469,8 @@ declare interface DescribeUserListRequest {
   Phone?: string;
   /** 邮箱，模糊查询 */
   Email?: string;
+  /** 用户id列表，根据id过滤用户 */
+  UidList?: string[];
 }
 
 declare interface DescribeUserListResponse {

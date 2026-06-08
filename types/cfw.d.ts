@@ -240,7 +240,7 @@ declare interface CfwInsStatus {
   FwType?: string;
   /** 实例所属地域 */
   Region?: string;
-  /** 实例运行状态，Running：正常运行；BypassAutoFix：bypass修复；Updating：升级中；Expand：扩容中；BypassManual：手动触发bypass中；BypassAuto：自动触发bypass中 */
+  /** 实例运行状态，Running：正常运行；BypassAutoFix：bypass修复；Updating：升级中；Expand：扩容中；BypassManual：手动触发bypass中；BypassAuto：自动触发bypass中；BypassTcDrop：丢包触发bypass中枚举值：Running： 正常运行BypassAutoFix： 自动bypass已修复Updating： 实例升级中Expand： 实例扩容中BypassManual： 手动触发bypass中BypassAuto： 自动触发bypass中BypassTcDrop： 丢包触发bypass中 */
   Status?: string;
   /** 事件时间 */
   EventTime?: string;
@@ -370,7 +370,7 @@ declare interface CreateNatRuleItem {
   OrderIndex: number;
   /** 规则状态，true表示启用，false表示禁用 */
   Enable?: string;
-  /** 规则对应的唯一id，创建规则时无需填写 */
+  /** 规则对应的唯一id，创建规则AddNatAcRule时无需填写；修改规则ModifyNatAcRule时必须填写创建规则AddNatAcRule时无需填写；修改规则ModifyNatAcRule时必须填写 */
   Uuid?: number;
   /** 描述 */
   Description?: string;

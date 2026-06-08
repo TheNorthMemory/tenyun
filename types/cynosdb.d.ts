@@ -8042,6 +8042,8 @@ declare interface SwitchClusterZoneRequest {
 }
 
 declare interface SwitchClusterZoneResponse {
+  /** 任务id */
+  TaskId?: number;
   /** 异步FlowId */
   FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */

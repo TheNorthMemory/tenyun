@@ -10697,7 +10697,7 @@ declare interface DescribeMachineSnapshotResponse {
 }
 
 declare interface DescribeMachinesRequest {
-  /** 机器所属专区类型 CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区 */
+  /** 机器所属专区类型CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区 */
   MachineType: string;
   /** 机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others */
   MachineRegion: string;
@@ -10709,6 +10709,8 @@ declare interface DescribeMachinesRequest {
   Filters?: Filter[];
   /** 机器所属业务ID列表 */
   ProjectIds?: number[];
+  /** 机器对应的APPID */
+  MachineAppId?: number;
 }
 
 declare interface DescribeMachinesResponse {
@@ -10839,6 +10841,8 @@ declare interface DescribeMalwareRiskWarningResponse {
 }
 
 declare interface DescribeMalwareTimingScanSettingRequest {
+  /** 产品类型 0-主机安全(默认) 1-安全中心 */
+  ProductType?: number;
 }
 
 declare interface DescribeMalwareTimingScanSettingResponse {
@@ -10957,6 +10961,8 @@ declare interface DescribeMemShellRulesResponse {
 }
 
 declare interface DescribeNetAttackSettingRequest {
+  /** 产品类型 0-主机安全 1-安全中心 */
+  ProductType?: number;
 }
 
 declare interface DescribeNetAttackSettingResponse {
@@ -11739,6 +11745,8 @@ declare interface DescribeReverseShellRulesResponse {
 }
 
 declare interface DescribeReverseShellSystemPolicyConfigRequest {
+  /** 产品类型 0-主机安全(默认) 1-安全中心 */
+  ProductType?: number;
 }
 
 declare interface DescribeReverseShellSystemPolicyConfigResponse {
@@ -15093,6 +15101,8 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   QuaraUuids?: string[];
   /** 用户选择的隔离范围，0：默认全隔离 1：用户自选 */
   QuaraScope?: number;
+  /** 产品类型 0-主机安全(默认) 1-安全中心 */
+  ProductType?: number;
 }
 
 declare interface ModifyMalwareTimingScanSettingsResponse {
@@ -15139,6 +15149,8 @@ declare interface ModifyNetAttackSettingRequest {
   ExcludeInstanceIds?: string[];
   /** 新增资产自动包含 0 不包含 1包含 */
   AutoInclude?: number;
+  /** 产品类型 0-主机安全 1-安全中心 */
+  ProductType?: number;
 }
 
 declare interface ModifyNetAttackSettingResponse {

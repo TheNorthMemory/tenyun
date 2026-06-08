@@ -4032,44 +4032,6 @@ declare interface HandwritingEssayOCRResponse {
   RequestId?: string;
 }
 
-declare interface HmtResidentPermitOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** FRONT：有照片的一面（人像面），BACK：无照片的一面（国徽面），该参数如果不填或填错，将为您自动判断正反面。 */
-  CardSide?: string;
-  /** 是否返回头像和位置坐标 */
-  CropPortrait?: boolean;
-}
-
-declare interface HmtResidentPermitOCRResponse {
-  /** 证件姓名 */
-  Name?: string;
-  /** 性别 */
-  Sex?: string;
-  /** 出生日期 */
-  Birth?: string;
-  /** 地址 */
-  Address?: string;
-  /** 身份证号 */
-  IdCardNo?: string;
-  /** 0-正面1-反面 */
-  CardType?: number;
-  /** 证件有效期限 */
-  ValidDate?: string;
-  /** 签发机关 */
-  Authority?: string;
-  /** 签发次数 */
-  VisaNum?: string;
-  /** 通行证号码 */
-  PassNo?: string;
-  /** 头像和坐标信息 */
-  PortraitImageInfo?: PortraitImageInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface IDCardOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5613,8 +5575,6 @@ declare interface Ocr {
   HKIDCardOCR(data?: HKIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HKIDCardOCRResponse>;
   /** 中英文手写作文识别 {@link HandwritingEssayOCRRequest} {@link HandwritingEssayOCRResponse} */
   HandwritingEssayOCR(data?: HandwritingEssayOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HandwritingEssayOCRResponse>;
-  /** 港澳台居住证识别 {@link HmtResidentPermitOCRRequest} {@link HmtResidentPermitOCRResponse} */
-  HmtResidentPermitOCR(data?: HmtResidentPermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HmtResidentPermitOCRResponse>;
   /** 身份证识别 {@link IDCardOCRRequest} {@link IDCardOCRResponse} */
   IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
   /** 文本图像增强 {@link ImageEnhancementRequest} {@link ImageEnhancementResponse} */

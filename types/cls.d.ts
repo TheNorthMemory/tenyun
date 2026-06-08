@@ -5426,6 +5426,16 @@ declare interface GetAlarmLogResponse {
   RequestId?: string;
 }
 
+declare interface GetClsServiceRequest {
+}
+
+declare interface GetClsServiceResponse {
+  /** 账户服务开通状态，0:服务已开通，1:服务未开通 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetMetricLabelValuesRequest {
   /** 时序主题id */
   TopicId: string;
@@ -6422,6 +6432,14 @@ declare interface OpenClawServiceResponse {
   RequestId?: string;
 }
 
+declare interface OpenClsServiceRequest {
+}
+
+declare interface OpenClsServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenKafkaConsumerRequest {
   /** 日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   FromTopicId: string;
@@ -6971,6 +6989,8 @@ declare interface Cls {
   EstimateRebuildIndexTask(data: EstimateRebuildIndexTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EstimateRebuildIndexTaskResponse>;
   /** 获取告警策略执行详情 {@link GetAlarmLogRequest} {@link GetAlarmLogResponse} */
   GetAlarmLog(data: GetAlarmLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmLogResponse>;
+  /** 查询日志服务是否开通 {@link GetClsServiceRequest} {@link GetClsServiceResponse} */
+  GetClsService(data?: GetClsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<GetClsServiceResponse>;
   /** 获取指标标签列表 {@link GetMetricLabelValuesRequest} {@link GetMetricLabelValuesResponse} */
   GetMetricLabelValues(data: GetMetricLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetricLabelValuesResponse>;
   /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
@@ -7047,6 +7067,8 @@ declare interface Cls {
   ModifyWebCallback(data: ModifyWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebCallbackResponse>;
   /** 创建OpenClaw服务 {@link OpenClawServiceRequest} {@link OpenClawServiceResponse} */
   OpenClawService(data: OpenClawServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClawServiceResponse>;
+  /** 开通日志服务 {@link OpenClsServiceRequest} {@link OpenClsServiceResponse} */
+  OpenClsService(data?: OpenClsServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClsServiceResponse>;
   /** 打开Kafka协议消费 {@link OpenKafkaConsumerRequest} {@link OpenKafkaConsumerResponse} */
   OpenKafkaConsumer(data: OpenKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenKafkaConsumerResponse>;
   /** Kafka数据订阅日志预览 {@link PreviewKafkaRechargeRequest} {@link PreviewKafkaRechargeResponse} */
