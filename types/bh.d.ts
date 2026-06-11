@@ -164,7 +164,7 @@ declare interface AppAsset {
   ClientAppKind?: string;
   /** 应用资产url */
   Url?: string;
-  /** 托管状态。0-未托管，1-已托管 */
+  /** 托管状态枚举值：0： 未托管1： 已托管 */
   BindStatus?: number;
   /** 应用服务器实例id */
   DeviceInstanceId?: string;
@@ -184,6 +184,24 @@ declare interface AppAsset {
   GroupSet?: Group[];
   /** 资产所属部门 */
   Department?: Department;
+  /** 账号数量 */
+  AccountCount?: number;
+  /** 代填类型枚举值：0： 不支持代填1： 元素定位代填 */
+  AgentInputType?: number;
+  /** 是否自动提交枚举值：0： 不自动提交1： 自动提交 */
+  AgentInputSubmit?: number;
+  /** 用户名输入框选择器类型枚举值：id： html标签id属性name： html标签name属性selector： css选择器xpath： xpath */
+  UserNameType?: string;
+  /** 用户名输入框选择器属性 */
+  UserNameValue?: string;
+  /** 密码输入框选择器类型枚举值：id： html标签id属性name： html标签name属性selector： css选择器xpath： xpath */
+  PasswordType?: string;
+  /** 密码输入框选择器属性 */
+  PasswordValue?: string;
+  /** 提交按钮选择器类型，为空表示不支持自动提交枚举值：id： html标签id属性name： html标签name属性selector： css选择器xpath： xpath */
+  SubmitType?: string;
+  /** 提交按钮选择器属性值 */
+  SubmitValue?: string;
 }
 
 /** 资产同步标志 */

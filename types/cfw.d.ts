@@ -1260,6 +1260,8 @@ declare interface NatInstanceInfo {
   ElasticBandwidth?: number;
   /** 是否首次开通按量付费1 是0 不是 */
   IsFirstAfterPay?: number;
+  /** 按流量弹性开关默认值：0 */
+  ElasticTrafficSwitch?: number;
 }
 
 /** NAT防火墙开关列表数据 */
@@ -1658,6 +1660,8 @@ declare interface SerialRegionInfo {
   InFlowMax?: number;
   /** 七天出向峰值带宽，单位bps */
   OutFlowMax?: number;
+  /** 边界按流量弹性开关取值范围：[0, 1]默认值：0 */
+  ElasticTrafficSwitch?: number;
 }
 
 /** 企业安全组域名解析的IP统计 */
@@ -1990,6 +1994,8 @@ declare interface VpcFwInstanceInfo {
   ElasticBandwidth?: number;
   /** 是否首次开通按量付费1 是0 不是 */
   IsFirstAfterPay?: number;
+  /** 按流量弹性开关取值范围：[0, 1]默认值：0 */
+  ElasticTrafficSwitch?: number;
 }
 
 /** VPC防火墙实例信息 */
@@ -2505,12 +2511,12 @@ declare interface DeleteBlockIgnoreRuleListResponse {
 declare interface DeleteBlockIgnoreRuleNewRequest {
   /** 是否删除全部 */
   DeleteAll: number;
+  /** blocklist 封禁列表 whitelist 白名单列表 */
+  ShowType: string;
   /** 规则列表 */
   Rules?: BanAndAllowRuleDel[];
   /** 封禁：1，放通：100，主要用于全部删除时区分列表类型 */
   RuleType?: number;
-  /** blocklist 封禁列表 whitelist 白名单列表 */
-  ShowType?: string;
 }
 
 declare interface DeleteBlockIgnoreRuleNewResponse {
@@ -3851,6 +3857,8 @@ declare interface ExpandCfwVerticalRequest {
   ElasticBandwidth?: number;
   /** 按量计费标签 */
   Tags?: TagInfo[];
+  /** 按流量弹性开关取值范围：[0, 1]默认值：0 */
+  ElasticTrafficSwitch?: number;
 }
 
 declare interface ExpandCfwVerticalResponse {

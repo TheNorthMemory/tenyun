@@ -58,7 +58,7 @@ declare interface ApproverInfo {
   OrganizationName?: string;
   /** 【在用文件发起合同场景下才有效，模板发起场景下需要在模板中配置】合同中的该名签署方的签署控件列表，列表中可支持下列多种签署控件,控件的详细定义参考开发者中心的Component结构体 个人签名/印章 企业印章 骑缝章等签署控件 */
   SignComponents?: Component[];
-  /** 签署方经办人的证件类型，支持以下类型，样式可以参考常见个人证件类型介绍ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: 其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。港澳居民来往内地通行证 和 港澳台居民居住证 类型的签署人至少要过一次大陆的海关才能使用。 */
+  /** 签署方经办人的证件类型，支持以下类型，样式可以参考常见个人证件类型介绍&lt;ul&gt;ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)注: 港澳居民来往内地通行证 和 港澳台居民居住证 类型的签署人至少要过一次大陆的海关才能使用。 */
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
@@ -828,11 +828,11 @@ declare interface FillApproverInfo {
   ApproverMobile?: string;
   /** 补充企业动态签署人时，需要指定对应企业名称 */
   OrganizationName?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE 其他证件注: `1.其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。``2.补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)注: 补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。 */
   ApproverIdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串注：补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。 */
   ApproverIdCardNumber?: string;
-  /** 合同流程ID- 补充合同组子合同动态签署人时必传。- 补充普通合同时，请阅读：补充签署人接口的接口使用说明 */
+  /** 合同流程ID补充合同组子合同动态签署人时必传。补充普通合同时，请阅读：补充签署人接口的接口使用说明 */
   FlowId?: string;
   /** 通知类型：当FillApproverType =0，或签场景补充签署人时，指定是否发送或签领取短信SMS：开启或签领取短信通知NONE：关闭或签领取短信通知当NotifyType=NONE时，可调用获取跳转至腾讯电子签小程序的签署链接接口生成签署链接来完成或签领取 */
   NotifyType?: string;
@@ -1408,7 +1408,7 @@ declare interface NeedReviewApproverInfo {
   ApproverName: string;
   /** 签署方经办人手机号码， 支持中国大陆手机号11位数字(无需加+86前缀或其他字符)。 请确认手机号所有方为此合同签署方。 */
   ApproverMobile?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同居民身份证)OTHER_CARD_TYPE 其他证件注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同居民身份证) */
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
@@ -4725,16 +4725,18 @@ declare interface DescribeEnterpriseContractReviewChecklistsResponse {
 }
 
 declare interface DescribeExtendedServiceAuthDetailRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 要查询的扩展服务类型。如下所示：OPEN_SERVER_SIGN：企业静默签署BATCH_SIGN：批量签署 */
   ExtendServiceType?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 指定每页返回的数据条数，和Offset参数配合使用。 注：`1.默认值为20，单页做大值为200。` */
+  /** 指定每页返回的数据条数，和Offset参数配合使用。 注：1.默认值为20，单页做大值为200。 */
   Limit?: number;
-  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：`1.offset从0开始，即第一页为0。` `2.默认从第一页返回。` */
+  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。 注：1.offset从0开始，即第一页为0。 2.默认从第一页返回。 */
   Offset?: number;
+  /** 查询指定的合作方企业的授权信息，当ExtendServiceType=OPEN_SERVER_SIGN：企业静默签署时有效 */
+  PartnerOrganizationName?: string;
 }
 
 declare interface DescribeExtendedServiceAuthDetailResponse {
@@ -4781,9 +4783,9 @@ declare interface DescribeFileCounterSignResultResponse {
 }
 
 declare interface DescribeFileUrlsRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 文件对应的业务类型，目前支持：**FLOW ** : 如需下载合同文件请选择此项**TEMPLATE ** : 如需下载模板文件请选择此项**DOCUMENT **: 如需下载文档文件请选择此项**SEAL **: 如需下载印章图片请选择此项**DIGITFILE**: 如需下载加签文件请选择此项 */
+  /** 文件对应的业务类型，目前支持：FLOW : 如需下载合同文件请选择此项TEMPLATE : 如需下载模板文件请选择此项DOCUMENT: 如需下载文档文件请选择此项SEAL: 如需下载印章图片请选择此项DIGITFILE: 如需下载加签文件请选择此项ARCHIVE: 如需下载合同归档文件请选择此项枚举值：FLOW： 如需下载合同文件请选择此项TEMPLATE： 如需下载模板文件请选择此项DOCUMENT： 如需下载文档文件请选择此项SEAL： 如需下载印章图片请选择此项DIGITFILE： 如需下载加签文件请选择此项ARCHIVE： 如需下载合同归档文件请选择此项 */
   BusinessType: string;
   /** 业务编号的数组，取值如下：流程编号模板编号文档编号印章编号加签文件编号如需下载合同文件请传入FlowId，最大支持20个资源 */
   BusinessIds: string[];

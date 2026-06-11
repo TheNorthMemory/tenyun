@@ -286,6 +286,8 @@ declare interface ScoreInfoV2 {
   StaticFail?: number;
   /** 静态资源加载时间 */
   StaticDuration?: number;
+  /** 忽略的配置项 */
+  Exclusion?: string;
 }
 
 /** 标签 */

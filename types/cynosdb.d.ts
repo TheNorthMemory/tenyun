@@ -2642,6 +2642,8 @@ declare interface ProxyGroupRwInfo {
   ApNodeAsRoNode?: boolean;
   /** libra节点故障，是否转发给其他节点 */
   ApQueryToOtherNode?: boolean;
+  /** 自动负载枚举值：static： 静态负载dynamic： 动态负载 */
+  LoadBalanceMode?: string;
 }
 
 /** 数据库代理，读写分离实例权重 */
@@ -4269,6 +4271,8 @@ declare interface CreateProxyEndPointRequest {
   AccessMode?: string;
   /** 实例权重。 */
   InstanceWeights?: ProxyInstanceWeight[];
+  /** 负载均衡模式枚举值：static： 静态负载dynamic： 动态负载 */
+  LoadBalanceMode?: string;
 }
 
 declare interface CreateProxyEndPointResponse {
@@ -6135,6 +6139,8 @@ declare interface DescribeSaveBackupClustersResponse {
 declare interface DescribeServerlessInstanceSpecsRequest {
   /** 可用区 */
   Zone?: string;
+  /** 集群级别 */
+  ClusterLevel?: string;
 }
 
 declare interface DescribeServerlessInstanceSpecsResponse {
@@ -7243,6 +7249,8 @@ declare interface ModifyProxyRwSplitRequest {
   ApNodeAsRoNode?: boolean;
   /** libra节点故障，是否转发给其他节点 */
   ApQueryToOtherNode?: boolean;
+  /** 负载均衡模式枚举值：static： 静态负载dynamic： 动态负载 */
+  LoadBalanceMode?: string;
 }
 
 declare interface ModifyProxyRwSplitResponse {

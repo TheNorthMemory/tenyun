@@ -2232,7 +2232,7 @@ declare interface KVNamespaceParameters {
 
 /** KV 键值对数据，包含键名、键值和过期时间信息。 */
 declare interface KeyValuePair {
-  /** 键名。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。 */
+  /** 键名。每个键名不能为空，长度为 1-512 个字符，支持合法 UTF-8 字符。 */
   Key?: string;
   /** 键值。入参时不能为空，最大支持 1 MB。出参时若键不存在，则返回空字符串。 */
   Value?: string;
@@ -7193,7 +7193,7 @@ declare interface EdgeKVDeleteRequest {
   ZoneId: string;
   /** 命名空间名称。 */
   Namespace: string;
-  /** 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。删除单个键时传入包含一个元素的数组。 */
+  /** 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，支持合法 UTF-8 字符。删除单个键时传入包含一个元素的数组。 */
   Keys: string[];
 }
 
@@ -7207,7 +7207,7 @@ declare interface EdgeKVGetRequest {
   ZoneId: string;
   /** 命名空间名称。可通过 DescribeEdgeKVNamespaces 接口获取站点下的命名空间列表。 */
   Namespace: string;
-  /** 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。查询单个键时传入包含一个元素的数组。 */
+  /** 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，支持合法 UTF-8 字符。查询单个键时传入包含一个元素的数组。 */
   Keys: string[];
 }
 
@@ -7245,7 +7245,7 @@ declare interface EdgeKVPutRequest {
   ZoneId: string;
   /** 命名空间名称。 */
   Namespace: string;
-  /** 键名，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。 */
+  /** 键名，长度为 1-512 个字符，支持合法 UTF-8 字符。 */
   Key: string;
   /** 键值。不能为空，最大支持 1 MB。支持存储字符串数据。 */
   Value: string;

@@ -1655,15 +1655,15 @@ declare interface CreateMigrateCheckJobResponse {
 }
 
 declare interface CreateMigrationServiceRequest {
-  /** 源实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库) */
+  /** 源实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库)tdsqlmysql,keewidb,tdstore枚举值：mysql： MySQL数据库 */
   SrcDatabaseType: string;
-  /** 目标实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库) */
+  /** 目标实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库)tdsqlmysql,keewidb,tdstore,tendis枚举值：mysql： MySQL数据库 */
   DstDatabaseType: string;
   /** 源实例地域，如：ap-guangzhou */
   SrcRegion: string;
   /** 目标实例地域，如：ap-guangzhou。注意，目标地域必须和API请求地域保持一致。 */
   DstRegion: string;
-  /** 实例规格，包括：small、medium、large、xlarge、2xlarge。当前未计费链路仅支持medium字段值。不同规格类型参考[计费概述](https://cloud.tencent.com/document/product/571/18736) */
+  /** 实例规格，包括：small、medium、large、xlarge、2xlarge。当前未计费链路仅支持medium字段值。不同规格类型参考计费概述 */
   InstanceClass: string;
   /** 购买数量，范围为[1,15]，默认为1 */
   Count?: number;

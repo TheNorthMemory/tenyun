@@ -1015,6 +1015,16 @@ declare namespace V20180724 {
     EventCondition: AlarmPolicyEventCondition | null;
   }
 
+  /** 轮班人员组信息 */
+  interface CoverStaffInfo {
+    /** 轮班人员id组 */
+    CoverStaffIDs?: string[] | null;
+    /** 轮班开始时间 */
+    CoverStartTime?: number | null;
+    /** 轮班结束时间 */
+    CoverEndTime?: number | null;
+  }
+
   /** 创建策略传入的阈值告警条件 */
   interface CreatePolicyGroupCondition {
     /** 指标Id */
@@ -2109,6 +2119,56 @@ declare namespace V20180724 {
     Example?: string;
   }
 
+  /** 排班信息 */
+  interface OnCallForm {
+    /** 排班id */
+    OnCallFormID?: string | null;
+    /** 排班名称 */
+    OnCallFormName?: string | null;
+    /** 排班描述 */
+    OnCallFormDesc?: string | null;
+    /** 轮值类型 */
+    RotationType?: string | null;
+    /** 换班时间 */
+    ShiftTime?: string | null;
+    /** 有效期开始时间 */
+    EffectiveStartTime?: number | null;
+    /** 有效期结束时间 */
+    EffectiveEndTime?: number | null;
+    /** 时区 */
+    TimeZone?: number | null;
+    /** 当前值班人员 */
+    CurrOnCallStaffs?: string[] | null;
+    /** 模板绑定的标签 */
+    Tags?: Tag[] | null;
+  }
+
+  /** 排班详情 */
+  interface OneOnCallForm {
+    /** 值班id */
+    OnCallFormID?: string | null;
+    /** 值班名称 */
+    OnCallFormName?: string | null;
+    /** 值班描述 */
+    OnCallFormDesc?: string | null;
+    /** 值班人员 */
+    StaffInfos?: StaffInfo[] | null;
+    /** 轮班类型 */
+    RotationType?: string | null;
+    /** 换班时间 */
+    ShiftTime?: string | null;
+    /** 值班有效期开始时间 */
+    EffectiveStartTime?: number | null;
+    /** 值班有效期结束时间 */
+    EffectiveEndTime?: number | null;
+    /** 时区 */
+    TimeZone?: number | null;
+    /** 替班信息 */
+    CoverStaffInfos?: CoverStaffInfo[] | null;
+    /** 模板绑定的标签 */
+    Tags?: Tag[] | null;
+  }
+
   /** 维度支持的操作符信息 */
   interface Operator {
     /** 运算符标识 */
@@ -2993,6 +3053,12 @@ declare namespace V20180724 {
     Order?: number | null;
   }
 
+  /** 值班人员id组 */
+  interface StaffInfo {
+    /** 值班人员id组 */
+    StaffIDs?: string[] | null;
+  }
+
   /** 标签 */
   interface Tag {
     /** 标签key */
@@ -3536,6 +3602,38 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface CreateOnCallFormRequest {
+    /** 固定值，为"monitor" */
+    Module: string;
+    /** 值班表名称 */
+    OnCallFormName: string;
+    /** 值班人员id组 */
+    StaffInfos: StaffInfo[];
+    /** 轮转类型 */
+    RotationType: string;
+    /** 换班时间 */
+    ShiftTime: string;
+    /** 有效期开始时间，单位s */
+    EffectiveStartTime: number;
+    /** 有效期结束时间，单位s */
+    EffectiveEndTime: number;
+    /** 时区(-12 - 12) */
+    TimeZone: number;
+    /** 值班表描述 */
+    OnCallFormDesc?: string;
+    /** 轮班信息 */
+    CoverStaffInfos?: CoverStaffInfo[];
+    /** 模板绑定的标签 */
+    Tags?: Tag[];
+  }
+
+  interface CreateOnCallFormResponse {
+    /** 值班表id */
+    OnCallFormID?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreatePolicyGroupRequest {
     /** 组策略名称 */
     GroupName: string;
@@ -3872,6 +3970,22 @@ declare namespace V20180724 {
   }
 
   interface DeleteGrafanaNotificationChannelResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DeleteOnCallFormsRequest {
+    /** 固定值，为"monitor" */
+    Module: string;
+    /** 要删除的值班表id */
+    OnCallFormIDs: string[];
+  }
+
+  interface DeleteOnCallFormsResponse {
+    /** 失败删除的排班id */
+    FailedOnCallFormIDs?: string[];
+    /** 成功删除的排班id */
+    SuccessOnCallFormIDs?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -4730,6 +4844,46 @@ declare namespace V20180724 {
   interface DescribeNotificationContentTemplateSupportsResponse {
     /** 配置详情 */
     Support?: NotificationContentTemplateSupport | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeOnCallFormRequest {
+    /** 固定值，为"monitor" */
+    Module: string;
+    /** 值班id */
+    OnCallFormID: string;
+  }
+
+  interface DescribeOnCallFormResponse {
+    /** 值班详情 */
+    OnCallForm?: OneOnCallForm;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeOnCallFormsRequest {
+    /** 固定值，为"monitor" */
+    Module: string;
+    /** 分页查询起始位 */
+    Offset: number;
+    /** 分页查询页数 */
+    Limit: number;
+    /** 支持userId进行检索 */
+    OnCallFormStaffIDs?: string[];
+    /** 值班类型 */
+    RotationType?: string;
+    /** 排序方式 */
+    Order?: string;
+    /** 支持id、name进行检索 */
+    OnCallFormName?: string;
+  }
+
+  interface DescribeOnCallFormsResponse {
+    /** 排班信息 */
+    OnCallForms?: OnCallForm[];
+    /** 总数 */
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6258,6 +6412,38 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface UpdateOnCallFormRequest {
+    /** 固定值，为"monitor" */
+    Module: string;
+    /** 值班表id */
+    OnCallFormID: string;
+    /** 值班表名称 */
+    OnCallFormName: string;
+    /** 值班人员id组 */
+    StaffInfos: StaffInfo[];
+    /** 轮转类型 */
+    RotationType: string;
+    /** 换班时间 */
+    ShiftTime: string;
+    /** 有效期开始时间，单位s */
+    EffectiveStartTime: number;
+    /** 有效期结束时间，单位s */
+    EffectiveEndTime: number;
+    /** 时区(-12 - 12) */
+    TimeZone: number;
+    /** 值班表描述 */
+    OnCallFormDesc?: string;
+    /** 轮班信息 */
+    CoverStaffInfos?: CoverStaffInfo[];
+  }
+
+  interface UpdateOnCallFormResponse {
+    /** 值班表id */
+    OnCallFormID?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface UpdatePrometheusAgentStatusRequest {
     /** Prometheus 实例 ID */
     InstanceId: string;
@@ -6460,6 +6646,8 @@ declare interface Monitor {
   CreateGrafanaIntegration(data: V20180724.CreateGrafanaIntegrationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateGrafanaIntegrationResponse>;
   /** 创建 Grafana 告警通道 {@link V20180724.CreateGrafanaNotificationChannelRequest} {@link V20180724.CreateGrafanaNotificationChannelResponse} */
   CreateGrafanaNotificationChannel(data: V20180724.CreateGrafanaNotificationChannelRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateGrafanaNotificationChannelResponse>;
+  /** 创建值班表 {@link V20180724.CreateOnCallFormRequest} {@link V20180724.CreateOnCallFormResponse} */
+  CreateOnCallForm(data: V20180724.CreateOnCallFormRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateOnCallFormResponse>;
   /** 增加策略组 {@link V20180724.CreatePolicyGroupRequest} {@link V20180724.CreatePolicyGroupResponse} */
   CreatePolicyGroup(data: V20180724.CreatePolicyGroupRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreatePolicyGroupResponse>;
   /** 创建 Prometheus CVM Agent {@link V20180724.CreatePrometheusAgentRequest} {@link V20180724.CreatePrometheusAgentResponse} */
@@ -6502,6 +6690,8 @@ declare interface Monitor {
   DeleteGrafanaIntegration(data: V20180724.DeleteGrafanaIntegrationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteGrafanaIntegrationResponse>;
   /** 删除 Grafana 告警通道 {@link V20180724.DeleteGrafanaNotificationChannelRequest} {@link V20180724.DeleteGrafanaNotificationChannelResponse} */
   DeleteGrafanaNotificationChannel(data: V20180724.DeleteGrafanaNotificationChannelRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteGrafanaNotificationChannelResponse>;
+  /** 删除值班表 {@link V20180724.DeleteOnCallFormsRequest} {@link V20180724.DeleteOnCallFormsResponse} */
+  DeleteOnCallForms(data: V20180724.DeleteOnCallFormsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteOnCallFormsResponse>;
   /** @deprecated 删除告警策略组 {@link V20180724.DeletePolicyGroupRequest} {@link V20180724.DeletePolicyGroupResponse} */
   DeletePolicyGroup(data: V20180724.DeletePolicyGroupRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeletePolicyGroupResponse>;
   /** 删除Prometheus告警规则分组 {@link V20180724.DeletePrometheusAlertGroupsRequest} {@link V20180724.DeletePrometheusAlertGroupsResponse} */
@@ -6590,6 +6780,10 @@ declare interface Monitor {
   DescribeMonitorTypes(data: V20180724.DescribeMonitorTypesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeMonitorTypesResponse>;
   /** 查询通知内容模板支持的变量及函数 {@link V20180724.DescribeNotificationContentTemplateSupportsRequest} {@link V20180724.DescribeNotificationContentTemplateSupportsResponse} */
   DescribeNotificationContentTemplateSupports(data: V20180724.DescribeNotificationContentTemplateSupportsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeNotificationContentTemplateSupportsResponse>;
+  /** 查询值班表详情 {@link V20180724.DescribeOnCallFormRequest} {@link V20180724.DescribeOnCallFormResponse} */
+  DescribeOnCallForm(data: V20180724.DescribeOnCallFormRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeOnCallFormResponse>;
+  /** 查询值班列表 {@link V20180724.DescribeOnCallFormsRequest} {@link V20180724.DescribeOnCallFormsResponse} */
+  DescribeOnCallForms(data: V20180724.DescribeOnCallFormsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeOnCallFormsResponse>;
   /** 查询周期内电话流水总数 {@link V20180724.DescribePhoneAlarmFlowTotalCountRequest} {@link V20180724.DescribePhoneAlarmFlowTotalCountResponse} */
   DescribePhoneAlarmFlowTotalCount(data: V20180724.DescribePhoneAlarmFlowTotalCountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePhoneAlarmFlowTotalCountResponse>;
   /** 列出所有 Grafana 插件 {@link V20180724.DescribePluginOverviewsRequest} {@link V20180724.DescribePluginOverviewsResponse} */
@@ -6756,6 +6950,8 @@ declare interface Monitor {
   UpdateGrafanaNotificationChannel(data: V20180724.UpdateGrafanaNotificationChannelRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UpdateGrafanaNotificationChannelResponse>;
   /** 更新 Grafana 白名单 {@link V20180724.UpdateGrafanaWhiteListRequest} {@link V20180724.UpdateGrafanaWhiteListResponse} */
   UpdateGrafanaWhiteList(data: V20180724.UpdateGrafanaWhiteListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UpdateGrafanaWhiteListResponse>;
+  /** 修改值班表 {@link V20180724.UpdateOnCallFormRequest} {@link V20180724.UpdateOnCallFormResponse} */
+  UpdateOnCallForm(data: V20180724.UpdateOnCallFormRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UpdateOnCallFormResponse>;
   /** 更新 Prometheus CVM Agent 状态 {@link V20180724.UpdatePrometheusAgentStatusRequest} {@link V20180724.UpdatePrometheusAgentStatusResponse} */
   UpdatePrometheusAgentStatus(data: V20180724.UpdatePrometheusAgentStatusRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.UpdatePrometheusAgentStatusResponse>;
   /** 更新Prometheus告警规则分组 {@link V20180724.UpdatePrometheusAlertGroupRequest} {@link V20180724.UpdatePrometheusAlertGroupResponse} */

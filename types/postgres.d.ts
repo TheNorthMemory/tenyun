@@ -1773,23 +1773,23 @@ declare interface DescribeBackupOverviewRequest {
 
 declare interface DescribeBackupOverviewResponse {
   /** 总免费空间大小，单位byte。 */
-  TotalFreeSize: number;
+  TotalFreeSize?: number;
   /** 已使用免费空间大小，单位byte。 */
-  UsedFreeSize: number;
+  UsedFreeSize?: number;
   /** 已使用收费空间大小，单位byte。 */
-  UsedBillingSize: number;
+  UsedBillingSize?: number;
   /** 日志备份数量。 */
-  LogBackupCount: number;
+  LogBackupCount?: number;
   /** 日志备份大小，单位byte。 */
-  LogBackupSize: number;
+  LogBackupSize?: number;
   /** 手动创建的基础备份数量。 */
-  ManualBaseBackupCount: number;
+  ManualBaseBackupCount?: number;
   /** 手动创建的基础备份大小，单位byte。 */
-  ManualBaseBackupSize: number;
+  ManualBaseBackupSize?: number;
   /** 自动创建的基础备份数量。 */
-  AutoBaseBackupCount: number;
+  AutoBaseBackupCount?: number;
   /** 自动创建的基础备份大小，单位byte。 */
-  AutoBaseBackupSize: number;
+  AutoBaseBackupSize?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2417,6 +2417,8 @@ declare interface DescribeTasksResponse {
 }
 
 declare interface DescribeZonesRequest {
+  /** 实例存储类型，根据磁盘类型返回支持的可用区枚举值：PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘CLOUD_PREMIUM： 高性能云硬盘CLOUD_SSD： ssd云硬盘CLOUD_HSSD： 增强型ssd云硬盘默认值：PHYSICAL_LOCAL_SSD */
+  StorageType?: string;
 }
 
 declare interface DescribeZonesResponse {

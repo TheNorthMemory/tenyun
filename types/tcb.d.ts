@@ -476,11 +476,11 @@ declare interface HTTPServiceDomain {
 declare interface HTTPServiceDomainParam {
   /** 域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败 */
   Domain: string;
-  /** 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF） */
+  /** 绑定类型枚举值：DIRECT： 直连到HTTP访问服务CDN： 接入云开发CDNCUSTOM： 自定义接入类型（CDN、EO、WAF等接入）默认值：DIRECT */
   AccessType?: string;
-  /** 证书ID。当前账户下SSL平台的证书ID */
+  /** 证书ID。当前账户下SSL平台的证书ID，无证书无法使用https访问 */
   CertId?: string;
-  /** 协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向 */
+  /** 协议类型枚举值：HTTP： 仅开启httpHTTPS： 仅开启httpsHTTP_AND_HTTPS： 同时开启http和https，默认HTTP_TO_HTTPS： http重定向成https，需配置证书HTTPS_TO_HTTP： https重定向成http，需配置证书默认值：HTTP_AND_HTTPS */
   Protocol?: string;
   /** 自定义CNAME。对应AccessType: Custom */
   CustomCname?: string;
@@ -528,7 +528,7 @@ declare interface HTTPServicePathRewrite {
 
 /** http访问服务客户端限频 */
 declare interface HTTPServiceQPSPerClient {
-  /** 客户端维度限频标识。限制当前资源被单个客户端调用的频率，客户端标识支持 用户ID（UserID） 或 客户端 IP（ClientIP）。UserID 包括 云开发用户 ID 或 微信 openid，如果请求无 UserID 信息，则不会限制。 */
+  /** 客户端维度限频标识。限制当前资源被单个客户端调用的频率，客户端标识支持 用户ID（UserID） 或 客户端 IP（ClientIP）。UserID 包括 云开发用户 ID 或 微信 openid，如果请求无 UserID 信息，则不会限制。枚举值：UserID： 云开发用户 ID 或 微信 openidClientIP： 客户端ip */
   LimitBy?: string;
   /** 限制QPS值，每秒请求次数 */
   LimitValue?: number;
@@ -566,7 +566,7 @@ declare interface HTTPServiceRoute {
 declare interface HTTPServiceRouteParam {
   /** 路径 */
   Path: string;
-  /** 上游服务类型。创建时必填，修改时可选填。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse */
+  /** 上游服务类型。创建时必填，修改时可选填枚举值：SCF： 云函数CBR： 云托管STATIC_STORE： 静态托管WEB_SCF： web云函数LH： Lighthouse */
   UpstreamResourceType?: string;
   /** 上游服务名。创建时必填，修改时可选填 */
   UpstreamResourceName?: string;

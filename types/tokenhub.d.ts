@@ -54,6 +54,8 @@ declare interface BindingItem {
   ResourceId: string;
   /** 资源类型。取值：endpoint（服务）、model（模型）。 */
   ResourceType: string;
+  /** 资源状态 */
+  Status?: string;
 }
 
 /** 批量创建成功项 */

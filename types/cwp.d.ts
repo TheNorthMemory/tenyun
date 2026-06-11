@@ -6667,7 +6667,7 @@ declare interface ZoneInfo {
 declare interface AddLoginWhiteListsRequest {
   /** 异地登录白名单实体 */
   HostLoginWhiteObj: HostLoginWhiteObj;
-  /** 事件同步处理方式： "" -- 不操作 "All" -- 将符合此配置的所有事件记录加白 "Id" -- 将EventId对应的事件记录加白 */
+  /** 事件同步处理方式： &quot;&quot; -- 不操作 &quot;All&quot; -- 将符合此配置的所有事件记录加白 &quot;Id&quot; -- 将EventId对应的事件记录加白 */
   ProcessType?: string;
   /** 异地登录事件ID，当ProcessType为Id时此项必填 */
   EventId?: number;
@@ -14372,6 +14372,8 @@ declare interface ExportTasksResponse {
   Status?: string;
   /** 下载链接 */
   DownloadUrl?: string;
+  /** 文件名称 */
+  FileName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

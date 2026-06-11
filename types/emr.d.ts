@@ -522,6 +522,8 @@ declare interface ComputeResourceAdvanceParams {
   UserScript?: string;
   /** 节点组Id */
   TkeClusterNodePool?: string;
+  /** 加入节点池的模式枚举值：Inherit： 从节点池继承配置OnlyJoin： 仅加入节点池，不继承配置默认值：Inherit */
+  NodePoolJoinMode?: string;
 }
 
 /** 资源调度 - 队列修改信息 */

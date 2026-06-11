@@ -12,16 +12,16 @@ declare interface ABTestConfig {
 
 /** 容器运行时安全，子策略信息 */
 declare interface AbnormalProcessChildRuleInfo {
-  /** 策略模式， RULE_MODE_RELEASE: 放行 RULE_MODE_ALERT: 告警 RULE_MODE_HOLDUP:拦截 */
-  RuleMode: string;
   /** 进程路径 */
   ProcessPath: string;
+  /** 策略模式， RULE_MODE_RELEASE: 放行 RULE_MODE_ALERT: 告警 RULE_MODE_HOLDUP:拦截 */
+  RuleMode: string;
+  /** 命令行参数 */
+  CmdLine?: string;
   /** 子策略id */
   RuleId?: string;
   /** 威胁等级，HIGH:高，MIDDLE:中，LOW:低 */
   RuleLevel?: string;
-  /** 命令行参数 */
-  CmdLine?: string;
 }
 
 /** 运行时容器访问控制事件描述信息 */
@@ -146,30 +146,58 @@ declare interface AbnormalProcessEventTendencyInfo {
   UserDefinedRuleEventCount?: number;
 }
 
+/** 异常进程策略列表扩展项（扁平独立结构体，含子规则内容和执行动作） */
+declare interface AbnormalProcessRuleExtSetItem {
+  /** 用户自定义策略子规则列表。IsDefault=false时有值 */
+  ChildRules?: AbnormalProcessChildRuleInfo[] | null;
+  /** 编辑用户名称 */
+  EditUserName?: string;
+  /** 策略生效镜像数量 */
+  EffectImageCount?: number;
+  /** true: 默认策略，false:自定义策略 */
+  IsDefault?: boolean;
+  /** 是否为全部镜像规则。true表示对所有镜像生效 */
+  IsGlobal?: boolean;
+  /** true: 策略启用，false：策略禁用 */
+  IsEnable?: boolean;
+  /** 规则组中所有执行动作的去重列表。RULE_MODE_ALERT:告警 RULE_MODE_HOLDUP:拦截 */
+  RuleActions?: string[] | null;
+  /** 策略Id */
+  RuleId?: string;
+  /** 策略名字 */
+  RuleName?: string;
+  /** 系统策略子规则列表。IsDefault=true时有值 */
+  SystemChildRules?: AbnormalProcessSystemChildRuleInfo[] | null;
+  /** 策略更新时间, 存在为空的情况 */
+  UpdateTime?: string;
+}
+
 /** 运行时安全，异常进程检测策略 */
 declare interface AbnormalProcessRuleInfo {
-  /** true:策略启用，false:策略禁用 */
-  IsEnable: boolean;
-  /** 生效镜像id，空数组代表全部镜像 */
-  ImageIds: string[];
   /** 用户策略的子策略数组 */
   ChildRules: AbnormalProcessChildRuleInfo[];
+  /** 生效镜像id，空数组代表全部镜像 */
+  ImageIds: string[];
+  /** true:策略启用，false:策略禁用 */
+  IsEnable: boolean;
   /** 策略名字 */
   RuleName: string;
+  /** 是否是系统默认策略 */
+  IsDefault?: boolean;
+  /** 是否为全部镜像规则。true表示对所有镜像生效 */
+  IsGlobal?: boolean;
   /** 策略id */
   RuleId?: string;
   /** 系统策略的子策略数组 */
   SystemChildRules?: AbnormalProcessSystemChildRuleInfo[];
-  /** 是否是系统默认策略 */
-  IsDefault?: boolean;
 }
 
 /** 异常进程系统策略的子策略信息 */
 declare interface AbnormalProcessSystemChildRuleInfo {
-  /** 子策略Id */
-  RuleId: string;
   /** 子策略状态，true为开启，false为关闭 */
   IsEnable: boolean;
+  /** 子策略Id */
+  RuleId: string;
   /** 策略模式, RULE_MODE_RELEASE: 放行 RULE_MODE_ALERT: 告警 RULE_MODE_HOLDUP:拦截 */
   RuleMode: string;
   /** 子策略检测的行为类型PROXY_TOOL： 代理软件TRANSFER_CONTROL：横向渗透ATTACK_CMD： 恶意命令REVERSE_SHELL：反弹shellFILELESS：无文件程序执行RISK_CMD：高危命令ABNORMAL_CHILD_PROC: 敏感服务异常子进程启动 */
@@ -180,16 +208,16 @@ declare interface AbnormalProcessSystemChildRuleInfo {
 
 /** 容器运行时安全，访问控制子策略信息 */
 declare interface AccessControlChildRuleInfo {
-  /** 策略模式, RULE_MODE_RELEASE: 放行 RULE_MODE_ALERT: 告警 RULE_MODE_HOLDUP:拦截 */
-  RuleMode: string;
   /** 进程路径 */
   ProcessPath: string;
+  /** 策略模式, RULE_MODE_RELEASE: 放行 RULE_MODE_ALERT: 告警 RULE_MODE_HOLDUP:拦截 */
+  RuleMode: string;
   /** 被访问文件路径，仅仅在访问控制生效 */
   TargetFilePath: string;
-  /** 子策略id */
-  RuleId?: string;
   /** 命令行参数 */
   CmdLine?: string;
+  /** 子策略id */
+  RuleId?: string;
 }
 
 /** 运行时容器访问控制事件描述信息 */
@@ -292,32 +320,60 @@ declare interface AccessControlEventInfo {
   CmdLine?: string;
 }
 
+/** 文件篡改策略列表扩展项（扁平独立结构体，含子规则内容和执行动作） */
+declare interface AccessControlRuleExtSetItem {
+  /** 用户自定义策略子规则列表。IsDefault=false时有值 */
+  ChildRules?: AccessControlChildRuleInfo[] | null;
+  /** 编辑用户名称 */
+  EditUserName?: string;
+  /** 策略生效镜像数量 */
+  EffectImageCount?: number;
+  /** true: 默认策略，false:自定义策略 */
+  IsDefault?: boolean;
+  /** 是否为全部镜像规则。true表示对所有镜像生效 */
+  IsGlobal?: boolean;
+  /** true: 策略启用，false：策略禁用 */
+  IsEnable?: boolean;
+  /** 规则组中所有执行动作的去重列表。RULE_MODE_ALERT:告警 RULE_MODE_HOLDUP:拦截 */
+  RuleActions?: string[] | null;
+  /** 策略Id */
+  RuleId?: string;
+  /** 策略名字 */
+  RuleName?: string;
+  /** 系统策略子规则列表。IsDefault=true时有值 */
+  SystemChildRules?: AccessControlSystemChildRuleInfo[] | null;
+  /** 策略更新时间, 存在为空的情况 */
+  UpdateTime?: string;
+}
+
 /** 容器运行时，访问控制策略信息 */
 declare interface AccessControlRuleInfo {
-  /** 开关,true:开启，false:禁用 */
-  IsEnable: boolean;
-  /** 生效镜像id，空数组代表全部镜像 */
-  ImageIds: string[];
   /** 用户策略的子策略数组 */
   ChildRules: AccessControlChildRuleInfo[];
+  /** 生效镜像id，空数组代表全部镜像 */
+  ImageIds: string[];
+  /** 开关,true:开启，false:禁用 */
+  IsEnable: boolean;
   /** 策略名字 */
   RuleName: string;
+  /** 是否是系统默认策略 */
+  IsDefault?: boolean;
+  /** true:全部镜像，false:指定镜像。IsGlobal=true时ImageIds返回空数组 */
+  IsGlobal?: boolean;
   /** 策略id */
   RuleId?: string;
   /** 系统策略的子策略数组 */
   SystemChildRules?: AccessControlSystemChildRuleInfo[];
-  /** 是否是系统默认策略 */
-  IsDefault?: boolean;
 }
 
 /** 容器运行时安全，访问控制系统策略的子策略信息 */
 declare interface AccessControlSystemChildRuleInfo {
+  /** 子策略状态，true为开启，false为关闭 */
+  IsEnable: boolean;
   /** 子策略Id */
   RuleId: string;
   /** 策略模式, RULE_MODE_RELEASE: 放行 RULE_MODE_ALERT: 告警 RULE_MODE_HOLDUP:拦截 */
   RuleMode: string;
-  /** 子策略状态，true为开启，false为关闭 */
-  IsEnable: boolean;
   /** 子策略检测的入侵行为类型CHANGE_CRONTAB：篡改计划任务CHANGE_SYS_BIN：篡改系统程序CHANGE_USRCFG：篡改用户配置 */
   RuleType: string;
 }
@@ -370,6 +426,8 @@ declare interface AssetClusterListItem {
   ClusterName?: string;
   /** 集群状态CSR_RUNNING: 运行中CSR_EXCEPTION:异常CSR_DEL:已经删除 */
   Status?: string;
+  /** 绑定的集群ID */
+  BindRuleID?: string | null;
   /** 绑定规则名称 */
   BindRuleName?: string;
   /** 集群类型:CT_TKE:TKE集群;CT_USER_CREATE:用户自建集群;CT_TKE_SERVERLESS:TKE Serverless集群; */
@@ -2286,54 +2344,60 @@ declare interface K8sApiAbnormalEventListItem {
 
 /** k8a api 异常请求规则详情 */
 declare interface K8sApiAbnormalRuleInfo {
-  /** 规则名称 */
-  RuleName: string;
-  /** 状态 */
-  Status: boolean;
-  /** 规则信息列表 */
-  RuleInfoList: K8sApiAbnormalRuleScopeInfo[];
-  /** 生效集群IDSet */
-  EffectClusterIDSet: string[];
-  /** 规则类型RT_SYSTEM 系统规则RT_USER 用户自定义 */
-  RuleType: string;
   /** 是否所有集群生效 */
   EffectAllCluster: boolean;
+  /** 生效集群IDSet */
+  EffectClusterIDSet: string[];
+  /** 规则信息列表 */
+  RuleInfoList: K8sApiAbnormalRuleScopeInfo[];
+  /** 规则名称 */
+  RuleName: string;
+  /** 规则类型RT_SYSTEM 系统规则RT_USER 用户自定义 */
+  RuleType: string;
+  /** 状态 */
+  Status: boolean;
   /** 规则ID */
   RuleID?: string;
 }
 
 /** k8s api 异常请求规则列表Item */
 declare interface K8sApiAbnormalRuleListItem {
+  /** 是否全部集群生效。true表示全部集群生效，false表示仅指定集群生效 */
+  EffectAllCluster?: boolean;
+  /** 受影响集群总数 */
+  EffectClusterCount?: number;
+  /** 编辑账号 */
+  OprUin?: string;
+  /** 规则组中所有执行动作的去重列表。当前黑名单仅包含 RULE_MODE_ALERT（告警） */
+  RuleActions?: string[] | null;
   /** 规则ID */
   RuleID?: string;
+  /** 子规则内容列表，从 rule_details JSON 反序列化 */
+  RuleInfoList?: K8sApiAbnormalRuleScopeInfo[] | null;
   /** 规则名称 */
   RuleName?: string;
   /** 规则类型RT_SYSTEM 系统规则RT_USER 用户自定义 */
   RuleType?: string;
-  /** 受影响集群总数 */
-  EffectClusterCount?: number;
-  /** 更新时间 */
-  UpdateTime?: string;
-  /** 编辑账号 */
-  OprUin?: string;
   /** 状态 */
   Status?: boolean;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** k8s api 异常事件规则配置范围 */
 declare interface K8sApiAbnormalRuleScopeInfo {
+  /** 执行动作。黑名单规则仅支持 RULE_MODE_ALERT（告警），不再支持 RULE_MODE_RELEASE/PASS（放行）。放行请使用白名单接口 ModifyK8sApiAbnormalWhitelist */
+  Action: string;
   /** 范围系统事件:ANONYMOUS_ACCESS: 匿名访问ABNORMAL_UA_REQ: 异常UA请求ANONYMOUS_ABNORMAL_PERMISSION: 匿名用户权限异动GET_CREDENTIALS: 凭据信息获取MOUNT_SENSITIVE_PATH: 敏感路径挂载COMMAND_RUN: 命令执行PRIVILEGE_CONTAINER: 特权容器EXCEPTION_CRONTAB_TASK: 异常定时任务STATICS_POD: 静态pod创建ABNORMAL_CREATE_POD: 异常pod创建USER_DEFINED: 用户自定义 */
   Scope: string;
-  /** 动作(RULE_MODE_ALERT: 告警 RULE_MODE_RELEASE:放行) */
-  Action: string;
-  /** 威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示 */
-  RiskLevel?: string;
-  /** 开关状态(true:开 false:关) 适用于系统规则 */
-  Status?: boolean;
   /** 是否被删除 适用于自定义规则入参 */
   IsDelete?: boolean;
+  /** 威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示 */
+  RiskLevel?: string;
   /** 规则类型对应中文 */
   RuleTypeZH?: string;
+  /** 开关状态(true:开 false:关) 适用于系统规则 */
+  Status?: boolean;
 }
 
 /** k8sapi异常请求趋势Item */
@@ -3092,20 +3156,22 @@ declare interface RiskSyscallWhiteListInfo {
 
 /** 运行时安全，策略基本信息 */
 declare interface RuleBaseInfo {
-  /** true: 默认策略，false:自定义策略 */
-  IsDefault?: boolean;
-  /** 策略生效镜像数量 */
-  EffectImageCount?: number;
-  /** 策略Id */
-  RuleId?: string;
-  /** 策略更新时间, 存在为空的情况 */
-  UpdateTime?: string;
-  /** 策略名字 */
-  RuleName?: string;
   /** 编辑用户名称 */
   EditUserName?: string;
+  /** 策略生效镜像数量 */
+  EffectImageCount?: number;
+  /** true: 默认策略，false:自定义策略 */
+  IsDefault?: boolean;
+  /** 是否为全部镜像规则。true表示对所有镜像生效 */
+  IsGlobal?: boolean;
   /** true: 策略启用，false：策略禁用 */
   IsEnable?: boolean;
+  /** 策略Id */
+  RuleId?: string;
+  /** 策略名字 */
+  RuleName?: string;
+  /** 策略更新时间, 存在为空的情况 */
+  UpdateTime?: string;
 }
 
 /** 运行时安全事件基本信息 */
@@ -4693,12 +4759,14 @@ declare interface CreateAssetImageScanSettingRequest {
   Images?: string[];
   /** 镜像是否存在运行中的容器 */
   ContainerRunning?: boolean;
-  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 */
+  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 , 3:集群筛选扫描取值范围：[0, 3]默认值：0 */
   ScanScope?: number;
   /** 扫描结束时间02:00 时分 */
   ScanEndTime?: string;
   /** 排除扫描的镜像 */
   ExcludeImages?: string[];
+  /** 集群id */
+  ClusterIDs?: string[];
 }
 
 declare interface CreateAssetImageScanSettingResponse {
@@ -4723,12 +4791,14 @@ declare interface CreateAssetImageScanTaskRequest {
   ExcludeImageIds?: string[];
   /** 镜像是否存在运行中的容器 */
   ContainerRunning?: boolean;
-  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 */
+  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 3:集群扫描取值范围：[0, 3]默认值：0 */
   ScanScope?: number;
   /** 任务超时时长单位秒，默认1小时 */
   Timeout?: number;
   /** 一键扫描任务。默认false表示非一键扫描，true一键扫描 */
   IsOneClickScanningTask?: boolean;
+  /** 集群id */
+  ClusterIDs?: string[];
 }
 
 declare interface CreateAssetImageScanTaskResponse {
@@ -5029,7 +5099,7 @@ declare interface CreateK8sApiAbnormalRuleInfoRequest {
   RuleInfo: K8sApiAbnormalRuleInfo;
   /** 拷贝规则ID(适用于复制规则场景) */
   CopySrcRuleID?: string;
-  /** 事件ID(适用于事件加白场景) */
+  /** 事件ID(已废弃，保留兼容性。事件加白请使用白名单接口 ModifyK8sApiAbnormalWhitelist) */
   EventID?: number;
 }
 
@@ -5345,7 +5415,7 @@ declare interface CreateVulImageExportJobResponse {
 }
 
 declare interface CreateVulScanTaskRequest {
-  /** 本地镜像扫描范围类型。ALL:全部本地镜像，NOT_SCAN：全部已授权未扫描本地镜像，IMAGEIDS:自选本地镜像ID */
+  /** 本地镜像扫描范围类型枚举值：ALL： 全部本地镜像NOT_SCAN： 全部已授权未扫描本地镜像IMAGEIDS： 自选本地镜像IDCLUSTER： 集群筛选 */
   LocalImageScanType?: string;
   /** 根据已授权的本地镜像IDs扫描，优先权高于根据满足条件的已授权的本地镜像。 */
   LocalImageIDs?: string[];
@@ -5363,6 +5433,12 @@ declare interface CreateVulScanTaskRequest {
   RegistryImageContainerRunning?: boolean;
   /** 仓库镜像是否是最新 */
   IsLatest?: boolean;
+  /** 要剔除的本地镜像id */
+  ExcludeLocalImageIDs?: string[];
+  /** 要剔除的仓库镜像id */
+  ExcludeRegistryImageIDs?: number[];
+  /** 集群id */
+  LocalClusterIDs?: string[];
 }
 
 declare interface CreateVulScanTaskResponse {
@@ -5661,14 +5737,14 @@ declare interface DescribeAbnormalProcessLevelSummaryResponse {
 }
 
 declare interface DescribeAbnormalProcessRuleDetailRequest {
-  /** 策略唯一id */
-  RuleId?: string;
   /** 镜像id, 在添加白名单的时候使用 */
   ImageId?: string;
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
+  /** 策略唯一id */
+  RuleId?: string;
 }
 
 declare interface DescribeAbnormalProcessRuleDetailResponse {
@@ -5679,23 +5755,25 @@ declare interface DescribeAbnormalProcessRuleDetailResponse {
 }
 
 declare interface DescribeAbnormalProcessRulesRequest {
+  /** 排序字段 */
+  By?: string;
+  /** 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]ImageName- String - 是否必填：否 - 镜像名称，模糊查找绑定了该镜像的规则 ImageId- String - 是否必填：否 - 镜像ID，模糊查找绑定了该镜像的规则 RuleType- String - 是否必填：否 - 策略类型过滤，取值：system（系统策略）、user（用户策略） RuleAction- String - 是否必填：否 - 执行动作过滤，取值：RULE_MODE_ALERT（告警）、RULE_MODE_HOLDUP（拦截） */
+  Filters?: RunTimeFilters[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}] */
-  Filters?: RunTimeFilters[];
   /** 升序降序,asc desc */
   Order?: string;
-  /** 排序字段 */
-  By?: string;
 }
 
 declare interface DescribeAbnormalProcessRulesResponse {
-  /** 事件总数量 */
-  TotalCount?: number;
+  /** 异常进程策略扩展信息列表（含子规则内容和执行动作）。新前端优先使用此字段 */
+  RuleExtSet?: AbnormalProcessRuleExtSetItem[] | null;
   /** 异常进程策略信息列表 */
   RuleSet?: RuleBaseInfo[];
+  /** 事件总数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5773,14 +5851,14 @@ declare interface DescribeAccessControlEventsResponse {
 }
 
 declare interface DescribeAccessControlRuleDetailRequest {
-  /** 策略唯一id */
-  RuleId?: string;
   /** 镜像id, 仅仅在事件加白的时候使用 */
   ImageId?: string;
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
+  /** 策略唯一id */
+  RuleId?: string;
 }
 
 declare interface DescribeAccessControlRuleDetailResponse {
@@ -5791,23 +5869,25 @@ declare interface DescribeAccessControlRuleDetailResponse {
 }
 
 declare interface DescribeAccessControlRulesRequest {
+  /** 排序字段 */
+  By?: string;
+  /** 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}]ImageName- String - 是否必填：否 - 镜像名称，模糊查找绑定了该镜像的规则 ImageId- String - 是否必填：否 - 镜像ID，模糊查找绑定了该镜像的规则 RuleType- String - 是否必填：否 - 策略类型过滤，取值：system（系统策略）、user（用户策略） RuleAction- String - 是否必填：否 - 执行动作过滤，取值：RULE_MODE_ALERT（告警）、RULE_MODE_HOLDUP（拦截） */
+  Filters?: RunTimeFilters[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤参数,"Filters":[{"Name":"Status","Values":["2"]}] */
-  Filters?: RunTimeFilters[];
   /** 升序降序,asc desc */
   Order?: string;
-  /** 排序字段 */
-  By?: string;
 }
 
 declare interface DescribeAccessControlRulesResponse {
-  /** 事件总数量 */
-  TotalCount?: number;
+  /** 访问控制策略扩展信息列表（含子规则内容和执行动作）。新前端优先使用此字段 */
+  RuleExtSet?: AccessControlRuleExtSetItem[] | null;
   /** 访问控制策略信息列表 */
   RuleSet?: RuleBaseInfo[];
+  /** 事件总数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6814,7 +6894,7 @@ declare interface DescribeAssetImageScanSettingResponse {
   Images?: string[];
   /** 镜像是否存在运行中的容器 */
   ContainerRunning?: boolean;
-  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 */
+  /** 扫描范围 0 全部授权镜像，1自选镜像，2 推荐扫描 3:集群筛选扫描 */
   ScanScope?: number;
   /** 扫描结束时间 02:00 时分 */
   ScanEndTime?: string;
@@ -6824,6 +6904,8 @@ declare interface DescribeAssetImageScanSettingResponse {
   LastScanTime?: string;
   /** 扫描结果(Success|InsufficientLicense|ImageNeedIsEmpty|InternalError) */
   ScanResult?: string;
+  /** 集群id */
+  ClusterIDs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8327,7 +8409,9 @@ declare interface DescribeK8sApiAbnormalRuleInfoResponse {
 }
 
 declare interface DescribeK8sApiAbnormalRuleListRequest {
-  /** 过滤条件。RuleType - string - 是否必填: 否 -规则类型Status - string - 是否必填: 否 -状态 */
+  /** 排序字段。UpdateTime - string - 是否必填: 否 -最后更新时间EffectClusterCount - string - 是否必填: 否 -影响集群数 */
+  By?: string;
+  /** 过滤条件。RuleType - string - 是否必填: 否 -规则类型Status - string - 是否必填: 否 -状态RuleName - string - 是否必填: 否 -规则名称(模糊查询)ClusterName - string - 是否必填: 否 -集群名称，模糊查找绑定了该集群的规则（含全集群规则）ClusterID - string - 是否必填: 否 -集群ID，模糊查找绑定了该集群的规则（含全集群规则）RuleAction - string - 是否必填: 否 -执行动作过滤，取值：RULE_MODE_ALERT（告警）、RULE_MODE_HOLDUP（拦截） */
   Filters?: RunTimeFilters[];
   /** 需要返回的数量，默认为10，最大值为100 */
   Limit?: number;
@@ -8335,8 +8419,6 @@ declare interface DescribeK8sApiAbnormalRuleListRequest {
   Offset?: number;
   /** 排序方式 */
   Order?: string;
-  /** 排序字段。UpdateTime - string - 是否必填: 否 -最后更新时间EffectClusterCount - string - 是否必填: 否 -影响集群数 */
-  By?: string;
 }
 
 declare interface DescribeK8sApiAbnormalRuleListResponse {

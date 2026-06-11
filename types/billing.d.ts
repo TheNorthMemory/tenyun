@@ -2098,6 +2098,28 @@ declare interface DescribeDosageDetail {
   SheetName?: string[];
 }
 
+/** DescribeOrgMemberAccountBalanceData */
+declare interface DescribeOrgMemberAccountBalanceData {
+  /** 成员账号Uin */
+  MemberUin?: string;
+  /** 成员名称 */
+  MemberName?: string;
+  /** 是否为信用账户 */
+  IsCreditAccount?: boolean;
+  /** 当前真实可用余额单位：分 */
+  RealBalance?: number;
+  /** 现金账户余额单位：分 */
+  CashAccountBalance?: number;
+  /** 信用额度单位：分信用额度 = 基础信用额度 + 临时信用额度 */
+  CreditAmount?: number;
+  /** 临时信用额度单位：分 */
+  TempCredit?: number;
+  /** 基础信用额度单位：分 */
+  BasicCreditAmount?: number;
+  /** 欠费金额单位：分 */
+  OweAmount?: number;
+}
+
 /** 由时间和值组成的数据结构 */
 declare interface DetailPoint {
   /** 时间 */
@@ -4101,6 +4123,28 @@ declare interface DescribeGatherRuleDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOrgMemberAccountBalanceRequest {
+  /** 页码默认值：1取值范围≥1 */
+  PageNumber?: number;
+  /** 单页大小取值范围：[1, 10]默认值：10 */
+  PageSize?: number;
+  /** 成员uin列表入参限制：元素必须为纯数字字符串，并且元素个数不能大于10为空时返回当前组织内所有成员的账户余额信息，不为空时返回指定成员的账户余额信息 */
+  MemberUins?: string[];
+}
+
+declare interface DescribeOrgMemberAccountBalanceResponse {
+  /** 成员账户余额列表 */
+  Data?: DescribeOrgMemberAccountBalanceData[];
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 当前页实际返回数量 */
+  PageSize?: number;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeRenewInstancesRequest {
   /** 每页的最大实例条数。 取值范围：1~100。 */
   MaxResults: number;
@@ -4552,6 +4596,8 @@ declare interface Billing {
   DescribeGatherResource(data: DescribeGatherResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherResourceResponse>;
   /** 查询归集规则详情 {@link DescribeGatherRuleDetailRequest} {@link DescribeGatherRuleDetailResponse} */
   DescribeGatherRuleDetail(data: DescribeGatherRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatherRuleDetailResponse>;
+  /** 批量查询集团成员账户余额 {@link DescribeOrgMemberAccountBalanceRequest} {@link DescribeOrgMemberAccountBalanceResponse} */
+  DescribeOrgMemberAccountBalance(data?: DescribeOrgMemberAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrgMemberAccountBalanceResponse>;
   /** 查询续费实例 {@link DescribeRenewInstancesRequest} {@link DescribeRenewInstancesResponse} */
   DescribeRenewInstances(data: DescribeRenewInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRenewInstancesResponse>;
   /** 查询节省计划可共享列表详情 {@link DescribeSavingPlanResourceInfoRequest} {@link DescribeSavingPlanResourceInfoResponse} */

@@ -2067,7 +2067,7 @@ declare namespace V20180717 {
     ClassId?: number;
     /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为 5、10，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8；当 ModelName 是 PixVerse，可指定1-15，默认为5； */
+    /** 生成视频的时长，单位：秒。当 ModelName 是 Kling，可选值为3-15，默认为 5；当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；当 ModelName 是 Vidu，可指定1-10；当 ModelName 是 GV，可选值为 8，默认为 8；当 ModelName 是 OS，可选值为 4、8、12，默认为 8；当 ModelName 是 PixVerse，可指定1-15，默认为5； */
     Duration?: number;
     /** 生成视频的分辨率。当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；当 ModelName 是 OS，可选值为 720P；当 ModelName 是 PixVerse，可选值为 540p、720p、1080p、2k、4k，默认为720p； */
     Resolution?: string;
@@ -3189,6 +3189,42 @@ declare namespace V20180717 {
     Traffic?: number;
   }
 
+  /** 异步获取 AIGC 人脸信息输入。 */
+  interface DescribeAigcFaceInfoAsyncInput {
+    /** 需要获取人脸信息的输入视频信息。 */
+    FileInfos?: AigcFaceInputFileInfo[];
+  }
+
+  /** 异步获取 AIGC 人脸信息输出 */
+  interface DescribeAigcFaceInfoAsyncOutput {
+    /** 人脸信息。 */
+    FaceInfoSet?: AigcFaceInfo[];
+  }
+
+  /** 异步获取 AIGC 人脸信息任务。 */
+  interface DescribeAigcFaceInfoAsyncTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。参数格式：扩展错误码。枚举值：RequestLimitExceeded： 调用超出并发限制。InvalidParameterValue： 参数错误。InternalError： 内部错误。FailedOperation： 操作失败。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 异步获取 AIGC 人脸信息任务的输入信息。 */
+    Input?: DescribeAigcFaceInfoAsyncInput;
+    /** 异步获取 AIGC 人脸信息任务的输出信息。 */
+    Output?: DescribeAigcFaceInfoAsyncOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
   /** 获取文件属性任务信息 */
   interface DescribeFileAttributesTask {
     /** 任务 ID。 */
@@ -3463,7 +3499,7 @@ declare namespace V20180717 {
   interface EventContent {
     /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
     EventHandle?: string;
-    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。AigcImageTaskComplete：AIGC 生图任务完成。AigcVideoTaskComplete：AIGC 生视频任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。AigcImageTaskComplete：AIGC 生图任务完成。AigcVideoTaskComplete：AIGC 生视频任务完成。DescribeAigcFaceInfoAsyncComplete：异步获取 AIGC 人脸信息任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
     EventType?: string;
     /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
     FileUploadEvent?: FileUploadTask | null;
@@ -3531,6 +3567,12 @@ declare namespace V20180717 {
     SceneAigcImageCompleteEvent?: SceneAigcImageTask;
     /** 图片异步处理任务信息，仅当 EventType 为 ProcessImageAsyncCompleteEvent 时有效。 */
     ProcessImageAsyncCompleteEvent?: ProcessImageAsyncTask;
+    /** AIGC 自定义主体信息，仅当 EventType 为 CreateAigcAdvancedCustomElementCompleteEvent，该字段有值。 */
+    CreateAigcAdvancedCustomElementCompleteEvent?: CreateAigcAdvancedCustomElementTask;
+    /** AIGC 自定义音色信息，仅当 EventType 为 CreateAigcCustomVoiceCompleteEvent，该字段有值。 */
+    CreateAigcCustomVoiceCompleteEvent?: CreateAigcCustomVoiceTask;
+    /** 异步获取 AIGC 人脸信息，仅当 EventType 为 DescribeAigcFaceInfoAsyncComplete，该字段有值。 */
+    DescribeAigcFaceInfoAsyncCompleteEvent?: DescribeAigcFaceInfoAsyncTask;
   }
 
   /** 提取盲水印输入信息 */
@@ -10071,6 +10113,26 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeAigcFaceInfoAsyncRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 需要获取人脸信息的输入视频信息，最多包含一个文件。 */
+    FileInfos?: AigcFaceInputFileInfo[];
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+  }
+
+  interface DescribeAigcFaceInfoAsyncResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeAigcFaceInfoRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -11081,7 +11143,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -11157,12 +11219,14 @@ declare namespace V20180717 {
     CreateAigcCustomVoiceTask?: CreateAigcCustomVoiceTask;
     /** 创建主体信息，仅当 TaskType 为 CreateAigcSubject，该字段有值。 */
     CreateAigcSubjectTask?: CreateAigcSubjectTask;
-    /** AIGC 视频转绘信息，仅当 TaskType 为AigcVideoRedrawTask，该字段有值。 */
+    /** AIGC 视频转绘信息，仅当 TaskType 为 AigcVideoRedrawTask，该字段有值。 */
     AigcVideoRedrawTask?: AigcVideoRedrawTask;
-    /** AIGC音效信息，仅当TaskType为AigcAudioTask时，该字段有值。 */
+    /** AIGC音效信息，仅当 TaskType 为 AigcAudioTask，该字段有值。 */
     AigcAudioTask?: AigcAudioTask;
-    /** AIGC 声音复刻信息，仅当 TaskType 为CreateAigcAudioClone，该字段有值。 */
+    /** AIGC 声音复刻信息，仅当 TaskType 为 CreateAigcAudioClone，该字段有值。 */
     CreateAigcAudioCloneTask?: CreateAigcAudioCloneTask;
+    /** 异步获取 AIGC 人脸信息，仅当 TaskType 为 DescribeAigcFaceInfoAsync，该字段有值。 */
+    DescribeAigcFaceInfoAsyncTask?: DescribeAigcFaceInfoAsyncTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -13371,6 +13435,8 @@ declare interface Vod {
   DescribeAigcApiTokens(data: V20180717.DescribeAigcApiTokensRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcApiTokensResponse>;
   /** 获取 AIGC 人脸信息 {@link V20180717.DescribeAigcFaceInfoRequest} {@link V20180717.DescribeAigcFaceInfoResponse} */
   DescribeAigcFaceInfo(data: V20180717.DescribeAigcFaceInfoRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcFaceInfoResponse>;
+  /** 异步获取 AIGC 人脸信息 {@link V20180717.DescribeAigcFaceInfoAsyncRequest} {@link V20180717.DescribeAigcFaceInfoAsyncResponse} */
+  DescribeAigcFaceInfoAsync(data: V20180717.DescribeAigcFaceInfoAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcFaceInfoAsyncResponse>;
   /** 查询 AIGC 用量统计数据 {@link V20180717.DescribeAigcUsageDataRequest} {@link V20180717.DescribeAigcUsageDataResponse} */
   DescribeAigcUsageData(data: V20180717.DescribeAigcUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcUsageDataResponse>;
   /** 获取所有分类 {@link V20180717.DescribeAllClassRequest} {@link V20180717.DescribeAllClassResponse} */

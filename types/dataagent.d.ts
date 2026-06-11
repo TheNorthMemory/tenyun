@@ -12,6 +12,8 @@ declare interface Chunk {
   Size?: number;
   /** 切片概要 */
   Summary?: string;
+  /** 分段类型枚举值：0： 自动分段1： 新建分段 */
+  ChunkSource?: number;
 }
 
 /** 知识库文档表列信息 */
@@ -70,6 +72,8 @@ declare interface FileInfo {
   CreateUser?: string;
   /** 创建时间 */
   CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
   /** 分片策略 */
   ChunkConfig?: KnowledgeTaskConfig;
   /** 文件来源0=unknow,1=user_cos,2=local */
@@ -126,6 +130,8 @@ declare interface KnowledgeTaskConfig {
   GenParaSummary?: number;
   /** 0：不开启图片理解，1：开启图片理解。默认1取值范围：[1, 10000]默认值：1 */
   EnableImageUnderstanding?: number;
+  /** 是否开启表格结构化提取枚举值：0： 不开启表格提取1： 开启表格提取默认值：1 */
+  EnableExtractDb?: number;
 }
 
 /** 用户对象的权限 */
@@ -513,6 +519,8 @@ declare interface ModifyChunkRequest {
   ChunkId?: string;
   /** 编辑后的文本 */
   Content?: string;
+  /** 分段概要 */
+  Summary?: string;
   /** 知识库id */
   KnowledgeBaseId?: string;
 }
@@ -578,6 +586,10 @@ declare interface QueryChunkListRequest {
 declare interface QueryChunkListResponse {
   /** 总数 */
   Total?: number;
+  /** 文档的自动分段数 */
+  AutoTotal?: number;
+  /** 文档的手动新建分段数 */
+  ManualTotal?: number;
   /** 分片信息 */
   Chunks?: Chunk[];
   /** 唯一请求 ID，每次请求都会返回。 */

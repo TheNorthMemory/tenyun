@@ -40,7 +40,7 @@ declare interface Cluster {
   Remark?: string;
   /** 集群创建时间 */
   CreateTime?: string;
-  /** 最后一次操作集群的时间 */
+  /** 最后一次操作集群的时间默认值：- */
   UpdateTime?: string;
   /** CU 数量 */
   CuNum?: number;
@@ -58,7 +58,7 @@ declare interface Cluster {
   FreeCuNum?: number;
   /** 集群绑定的标签 */
   Tags?: Tag[] | null;
-  /** 集群隔离时间; 没隔离时间，则为 - */
+  /** 集群隔离时间; 没隔离时间，则为 -默认值：- */
   IsolatedTime?: string | null;
   /** 集群过期时间; 没过期概念，则为 - */
   ExpireTime?: string | null;
@@ -142,6 +142,12 @@ declare interface Cluster {
   ClusterProcessMsg?: string | null;
   /** 单作业最大可配置 CU 数 */
   MaxCuPerJob?: number;
+  /** 元数据服务信息 */
+  HiveMetastore?: HiveMetastoreInfo | null;
+  /** 安全组 */
+  SecurityGroupIds?: string[] | null;
+  /** 弹性网卡方案，0：POD弹性网卡，1：Node弹性网卡。枚举值：0： POD弹性网卡1： Node弹性网卡 */
+  NetEniType?: number;
 }
 
 /** 工作空间集群组信息 */
@@ -396,6 +402,34 @@ declare interface HadoopYarnItem {
   Config?: string;
   /** CreatorUin */
   CreatorUin?: string;
+}
+
+/** HiveMetastoreInfo */
+declare interface HiveMetastoreInfo {
+  /** hms serialId */
+  HiveMetastoreSerialId?: string;
+  /** 集群SerialId */
+  ClusterGroupSerialId?: string;
+  /** 状态枚举枚举值：3： 运行中1： 初始化中2： 部署中-2： 已删除 */
+  Status?: number;
+  /** 使用核数单位：cu */
+  Cpu?: number;
+  /** 使用内存资源单位：GB */
+  MemGB?: number;
+  /** 副本数 */
+  Replica?: number;
+  /** hms 访问uri */
+  HiveUri?: string | null;
+  /** 命名空间 */
+  HiveNamespace?: string | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** Warehouse地址 */
+  HiveMetastoreWarehouseDir?: string | null;
+  /** 高级参数 */
+  Config?: Property[] | null;
 }
 
 /** 作业配置详情 */
@@ -1018,9 +1052,9 @@ declare interface Setats {
   ImageVersion?: string;
   /** 类型：0 公网，1 内网枚举值：0： 公网1： 内网默认值：0 */
   WebUIType?: number;
-  /** setats集群的名字 */
+  /** Setats集群名字 */
   Name?: string;
-  /** setats集群注释 */
+  /** Setats集群描述 */
   Remark?: string;
 }
 

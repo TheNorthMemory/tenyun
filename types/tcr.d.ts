@@ -56,6 +56,16 @@ declare interface CustomizedDomainInfo {
   Status: string;
 }
 
+/** 删除模型结构体 */
+declare interface DeleteModelItem {
+  /**  */
+  NamespaceName: string;
+  /**  */
+  RepositoryName: string;
+  /**  */
+  Reference?: string;
+}
+
 /** 查询应用更新触发器触发日志返回值 */
 declare interface DescribeApplicationTriggerLogPersonalResp {
   /** 返回总数 */
@@ -188,6 +198,52 @@ declare interface Limit {
   Type: string;
   /** 配置的值 */
   Value: number;
+}
+
+/** 模型详情 */
+declare interface ModelDetail {
+  /**  */
+  ModelName?: string;
+  /**  */
+  NamespaceName?: string;
+  /**  */
+  Version?: string;
+  /**  */
+  Digest?: string;
+  /**  */
+  Size?: number;
+  /**  */
+  Framework?: string;
+  /**  */
+  Precision?: string;
+  /**  */
+  FileFormat?: string;
+  /**  */
+  ParamSize?: string;
+  /**  */
+  Family?: string;
+  /**  */
+  IsRecommended?: boolean;
+  /**  */
+  PushTime?: string;
+}
+
+/** 模型详细参数 */
+declare interface ModelList {
+  /**  */
+  ModelName?: string;
+  /**  */
+  NamespaceName?: string;
+  /**  */
+  LatestVersion?: string;
+  /**  */
+  Kind?: string;
+  /**  */
+  ImageSize?: string;
+  /**  */
+  UpdateTime?: string;
+  /**  */
+  Digest?: string;
 }
 
 /** 命名空间信息 */
@@ -606,6 +662,62 @@ declare interface ServiceAccount {
   Permissions?: Permission[];
 }
 
+/** 查询单个 Skill 的完整详情 */
+declare interface Skill {
+  /**  */
+  SkillName?: string;
+  /**  */
+  SkillVersion?: string;
+  /**  */
+  Description?: string;
+  /**  */
+  Tags?: string[];
+  /**  */
+  SkillType?: string;
+  /**  */
+  Runtime?: string;
+  /**  */
+  Status?: string;
+  /**  */
+  UpdateTime?: string;
+}
+
+/** 查询指定实例下的 AI Skill 列表。 */
+declare interface SkillList {
+  /**  */
+  SkillName?: string;
+  /**  */
+  Description?: string;
+  /**  */
+  SkillType?: string;
+  /**  */
+  Tags?: string[];
+  /**  */
+  LatestVersion?: string;
+  /**  */
+  Status?: string;
+  /**  */
+  UpdateTime?: string;
+}
+
+/** skill 数据结构 */
+declare interface SkillType {
+  /**  */
+  SkillName: string;
+  /**  */
+  SkillVersion?: string;
+}
+
+/** skill VersionList */
+declare interface SkillVersionList {
+  /**  */
+  Version?: string;
+  /**  */
+  Size?: number;
+  /**  */
+  PushTime?: string;
+}
+
 /** 云标签Tag */
 declare interface Tag {
   /** 云标签的key */
@@ -828,6 +940,18 @@ declare interface TriggerResp {
   InvokeCondition?: TriggerInvokeCondition;
   /** 触发器参数 */
   InvokePara?: TriggerInvokePara;
+}
+
+/** 模型版本详情 */
+declare interface VersionList {
+  /**  */
+  Version?: string;
+  /**  */
+  Size?: number;
+  /**  */
+  IsRecommended?: boolean;
+  /**  */
+  PushTime?: string;
 }
 
 /** vpc和domain信息 */
@@ -1358,6 +1482,18 @@ declare interface CreateWebhookTriggerResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAIModelRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 模型删除 */
+  Items: DeleteModelItem[];
+}
+
+declare interface DeleteAIModelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteApplicationTriggerPersonalRequest {
   /** 触发器名称 */
   TriggerName: string;
@@ -1634,6 +1770,18 @@ declare interface DeleteSignaturePolicyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteSkillRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 删除技能列表 */
+  Items?: SkillType[];
+}
+
+declare interface DeleteSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTagRetentionRuleRequest {
   /** 主实例iD */
   RegistryId: string;
@@ -1656,6 +1804,24 @@ declare interface DeleteWebhookTriggerRequest {
 }
 
 declare interface DeleteWebhookTriggerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIModelVersionDetailRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 命名空间 */
+  NamespaceName: string;
+  /** 仓库名 */
+  RepositoryName: string;
+  /** 版本 */
+  Reference: string;
+}
+
+declare interface DescribeAIModelVersionDetailResponse {
+  /** 模型详情 */
+  Model?: ModelDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2248,6 +2414,38 @@ declare interface DescribeServiceAccountsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillDetailRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 技能名称 */
+  SkillName: string;
+  /** 技能版本 */
+  SkillVersion: string;
+}
+
+declare interface DescribeSkillDetailResponse {
+  /** 技能详情 */
+  Skill?: Skill;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSkillDownloadInfoRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 技能名称 */
+  SkillName: string;
+  /** 技能版本 */
+  SkillVersion: string;
+}
+
+declare interface DescribeSkillDownloadInfoResponse {
+  /** 下载链接 */
+  PreSignedDownloadURL?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTagRetentionExecutionRequest {
   /** 主实例iD */
   RegistryId: string;
@@ -2428,6 +2626,98 @@ declare interface DuplicateImageRequest {
 }
 
 declare interface DuplicateImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIModelVersionsRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 命名空间 */
+  NamespaceName: string;
+  /** 仓库名称 */
+  RepositoryName: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 限制 */
+  Limit?: number;
+}
+
+declare interface ListAIModelVersionsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 版本列表 */
+  VersionList?: VersionList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIModelsRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 模型名称 */
+  ModelName?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 最大限制 */
+  Limit?: number;
+  /** 模糊搜索 */
+  SearchKey?: string;
+}
+
+declare interface ListAIModelsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 模型列表 */
+  ModelList?: ModelList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListSkillVersionsRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 技能名称 */
+  SkillName: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 最大限制 */
+  Limit?: number;
+}
+
+declare interface ListSkillVersionsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** Skill版本列表 */
+  VersionList?: SkillVersionList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListSkillsRequest {
+  /** TCR实例ID */
+  RegistryId: string;
+  /** 模糊查询 */
+  SearchKey?: string;
+  /** 技能名称 */
+  SkillName?: string;
+  /** 技能类型枚举值：MCP Server： MCP Server 类型 */
+  SkillType?: string;
+  /** 状态枚举值：active： 活跃 */
+  Status?: string;
+  /** 偏移量 */
+  Offset?: number;
+  /** 限制 */
+  Limit?: number;
+}
+
+declare interface ListSkillsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 技能类型 */
+  SkillList?: SkillList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2873,6 +3163,8 @@ declare interface Tcr {
   CreateUserPersonal(data: CreateUserPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserPersonalResponse>;
   /** 创建触发器 {@link CreateWebhookTriggerRequest} {@link CreateWebhookTriggerResponse} */
   CreateWebhookTrigger(data: CreateWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebhookTriggerResponse>;
+  /** 删除指定模型版本 {@link DeleteAIModelRequest} {@link DeleteAIModelResponse} */
+  DeleteAIModel(data: DeleteAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIModelResponse>;
   /** 删除应用更新触发器 {@link DeleteApplicationTriggerPersonalRequest} {@link DeleteApplicationTriggerPersonalResponse} */
   DeleteApplicationTriggerPersonal(data: DeleteApplicationTriggerPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationTriggerPersonalResponse>;
   /** 删除指定镜像 {@link DeleteImageRequest} {@link DeleteImageResponse} */
@@ -2915,10 +3207,14 @@ declare interface Tcr {
   DeleteServiceAccount(data: DeleteServiceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServiceAccountResponse>;
   /** 删除命名空间加签策略 {@link DeleteSignaturePolicyRequest} {@link DeleteSignaturePolicyResponse} */
   DeleteSignaturePolicy(data: DeleteSignaturePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSignaturePolicyResponse>;
+  /** 删除指定 Skill {@link DeleteSkillRequest} {@link DeleteSkillResponse} */
+  DeleteSkill(data: DeleteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSkillResponse>;
   /** 删除版本保留规则 {@link DeleteTagRetentionRuleRequest} {@link DeleteTagRetentionRuleResponse} */
   DeleteTagRetentionRule(data: DeleteTagRetentionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTagRetentionRuleResponse>;
   /** 删除触发器 {@link DeleteWebhookTriggerRequest} {@link DeleteWebhookTriggerResponse} */
   DeleteWebhookTrigger(data: DeleteWebhookTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookTriggerResponse>;
+  /** 模型版本的详细参数 {@link DescribeAIModelVersionDetailRequest} {@link DescribeAIModelVersionDetailResponse} */
+  DescribeAIModelVersionDetail(data: DescribeAIModelVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelVersionDetailResponse>;
   /** 查询应用更新触发器触发日志 {@link DescribeApplicationTriggerLogPersonalRequest} {@link DescribeApplicationTriggerLogPersonalResponse} */
   DescribeApplicationTriggerLogPersonal(data?: DescribeApplicationTriggerLogPersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationTriggerLogPersonalResponse>;
   /** 查询应用更新触发器 {@link DescribeApplicationTriggerPersonalRequest} {@link DescribeApplicationTriggerPersonalResponse} */
@@ -2987,6 +3283,10 @@ declare interface Tcr {
   DescribeSecurityPolicies(data: DescribeSecurityPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityPoliciesResponse>;
   /** 查询服务级账号 {@link DescribeServiceAccountsRequest} {@link DescribeServiceAccountsResponse} */
   DescribeServiceAccounts(data: DescribeServiceAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceAccountsResponse>;
+  /** 查询单个 Skill 的完整详情 {@link DescribeSkillDetailRequest} {@link DescribeSkillDetailResponse} */
+  DescribeSkillDetail(data: DescribeSkillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillDetailResponse>;
+  /** 获取skill下载链接 {@link DescribeSkillDownloadInfoRequest} {@link DescribeSkillDownloadInfoResponse} */
+  DescribeSkillDownloadInfo(data: DescribeSkillDownloadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillDownloadInfoResponse>;
   /** 查询版本保留执行记录 {@link DescribeTagRetentionExecutionRequest} {@link DescribeTagRetentionExecutionResponse} */
   DescribeTagRetentionExecution(data: DescribeTagRetentionExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRetentionExecutionResponse>;
   /** 查询版本保留执行任务 {@link DescribeTagRetentionExecutionTaskRequest} {@link DescribeTagRetentionExecutionTaskResponse} */
@@ -3005,6 +3305,14 @@ declare interface Tcr {
   DuplicateImage(data: DuplicateImageRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateImageResponse>;
   /** 复制个人版仓库镜像版本 {@link DuplicateImagePersonalRequest} {@link DuplicateImagePersonalResponse} */
   DuplicateImagePersonal(data: DuplicateImagePersonalRequest, config?: AxiosRequestConfig): AxiosPromise<DuplicateImagePersonalResponse>;
+  /** 模型列表 {@link ListAIModelVersionsRequest} {@link ListAIModelVersionsResponse} */
+  ListAIModelVersions(data: ListAIModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIModelVersionsResponse>;
+  /** 模型列表获取 {@link ListAIModelsRequest} {@link ListAIModelsResponse} */
+  ListAIModels(data: ListAIModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIModelsResponse>;
+  /** 查询指定 Skill 的版本列表 {@link ListSkillVersionsRequest} {@link ListSkillVersionsResponse} */
+  ListSkillVersions(data: ListSkillVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSkillVersionsResponse>;
+  /** AI Skill 列表 {@link ListSkillsRequest} {@link ListSkillsResponse} */
+  ListSkills(data: ListSkillsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSkillsResponse>;
   /** 管理实例公网访问 {@link ManageExternalEndpointRequest} {@link ManageExternalEndpointResponse} */
   ManageExternalEndpoint(data: ManageExternalEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ManageExternalEndpointResponse>;
   /** 设置个人版全局镜像版本自动清理策略 {@link ManageImageLifecycleGlobalPersonalRequest} {@link ManageImageLifecycleGlobalPersonalResponse} */

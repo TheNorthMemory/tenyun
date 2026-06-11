@@ -300,7 +300,7 @@ declare interface Volume {
   AcceptedCount?: number;
   /** 送达数量 */
   DeliveredCount?: number;
-  /** 打开邮件的用户数量，根据收件人去重 */
+  /** 打开邮件总次数 */
   OpenedCount?: number;
   /** 点击了邮件中的链接数量用户数量 */
   ClickedCount?: number;

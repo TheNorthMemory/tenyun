@@ -2459,9 +2459,11 @@ declare interface CreateDataSourceResponse {
 }
 
 declare interface CreateDatasetRequest {
-  /** 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  /** 数据集名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
   DatasetName: string;
-  /** 数据集类型:TYPE_DATASET_TEXT，文本TYPE_DATASET_IMAGE，图片TYPE_DATASET_TABLE，表格TYPE_DATASET_OTHER，其他 */
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
+  /** 数据集类型枚举值：TYPE_DATASET_IMAGE： 图片TYPE_DATASET_LLM： 大模型TYPE_DATASET_TABLE： 表格TYPE_DATASET_OTHER： 其他 */
   DatasetType?: string;
   /** 数据源cos路径 */
   StorageDataPath?: CosPathInfo;
@@ -2469,19 +2471,19 @@ declare interface CreateDatasetRequest {
   StorageLabelPath?: CosPathInfo;
   /** 数据集标签 */
   DatasetTags?: Tag[];
-  /** 数据集标注状态:STATUS_NON_ANNOTATED，未标注STATUS_ANNOTATED，已标注 */
+  /** 数据集标注状态枚举值：STATUS_NON_ANNOTATED： 未标注STATUS_ANNOTATED： 已标注 */
   AnnotationStatus?: string;
-  /** 标注类型:ANNOTATION_TYPE_CLASSIFICATION，图片分类ANNOTATION_TYPE_DETECTION，目标检测ANNOTATION_TYPE_SEGMENTATION，图片分割ANNOTATION_TYPE_TRACKING，目标跟踪ANNOTATION_TYPE_OCR，OCRANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类 */
+  /** 标注类型枚举值：ANNOTATION_TYPE_CLASSIFICATION： 图片分类ANNOTATION_TYPE_DETECTION： 目标检测ANNOTATION_TYPE_SEGMENTATION： 图片分割ANNOTATION_TYPE_TRACKING： 目标跟踪ANNOTATION_TYPE_OCR： OCR */
   AnnotationType?: string;
-  /** 标注格式:ANNOTATION_FORMAT_TI，TI平台格式ANNOTATION_FORMAT_PASCAL，Pascal VocANNOTATION_FORMAT_COCO，COCOANNOTATION_FORMAT_FILE，文件目录结构ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式ANNOTATION_FORMAT_TXT，文本类型TXT格式ANNOTATION_FORMAT_CSV，文本类型CSV格式ANNOTATION_FORMAT_JSON，文本类型JSON格式 */
+  /** 标注格式枚举值：ANNOTATION_FORMAT_TI： TI-ONE平台格式ANNOTATION_FORMAT_PASCAL： Pascal Voc格式ANNOTATION_FORMAT_COCO： COCO格式ANNOTATION_FORMAT_FILE： 文件目录结构 */
   AnnotationFormat?: string;
   /** 表头信息 */
   SchemaInfos?: SchemaInfo[];
   /** 数据是否存在表头 */
   IsSchemaExisted?: boolean;
-  /** 导入文件粒度TYPE_TEXT_LINE，按行TYPE_TEXT_FILE，按文件 */
+  /** 导入文件粒度枚举值：TYPE_TEXT_LINE： 按行TYPE_TEXT_FILE： 按文件 */
   ContentType?: string;
-  /** 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER */
+  /** 数据集建模一级类别枚举值：LLM： 大模型建模CV： 传统CV建模STRUCTURE： 大数据建模OTHER： 其它 */
   DatasetScene?: string;
   /** 数据集标签。 */
   SceneTags?: string[];
@@ -3273,6 +3275,8 @@ declare interface DescribeInferTemplatesResponse {
 declare interface DescribeLogsRequest {
   /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：TRAINNOTEBOOKINFERBATCH */
   Service: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
   StartTime?: string;
   /** 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间 */

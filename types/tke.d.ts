@@ -2227,6 +2227,8 @@ declare namespace V20180525 {
     PreemptVerb?: string;
     /** 节点缓存能力 */
     NodeCacheCapable?: boolean;
+    /** extender 是否可忽略 */
+    Ignorable?: boolean;
   }
 
   /** 创建集群时，选择安装的扩展组件的信息 */
@@ -9179,7 +9181,7 @@ declare interface Tke {
   DescribeAddonValues(data: V20180525.DescribeAddonValuesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeAddonValuesResponse>;
   /** 获取集群可以升级的所有版本 {@link V20180525.DescribeAvailableClusterVersionRequest} {@link V20180525.DescribeAvailableClusterVersionResponse} */
   DescribeAvailableClusterVersion(data: V20180525.DescribeAvailableClusterVersionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeAvailableClusterVersionResponse>;
-  /** 边缘计算支持的k8s版本 {@link V20180525.DescribeAvailableTKEEdgeVersionRequest} {@link V20180525.DescribeAvailableTKEEdgeVersionResponse} */
+  /** @deprecated 边缘计算支持的k8s版本 {@link V20180525.DescribeAvailableTKEEdgeVersionRequest} {@link V20180525.DescribeAvailableTKEEdgeVersionResponse} */
   DescribeAvailableTKEEdgeVersion(data: V20180525.DescribeAvailableTKEEdgeVersionRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeAvailableTKEEdgeVersionResponse>;
   /** 查询备份仓库 {@link V20180525.DescribeBackupStorageLocationsRequest} {@link V20180525.DescribeBackupStorageLocationsResponse} */
   DescribeBackupStorageLocations(data: V20180525.DescribeBackupStorageLocationsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeBackupStorageLocationsResponse>;
@@ -9261,7 +9263,7 @@ declare interface Tke {
   DescribeEKSContainerInstanceRegions(data: V20180525.DescribeEKSContainerInstanceRegionsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEKSContainerInstanceRegionsResponse>;
   /** 查询容器实例 {@link V20180525.DescribeEKSContainerInstancesRequest} {@link V20180525.DescribeEKSContainerInstancesResponse} */
   DescribeEKSContainerInstances(data: V20180525.DescribeEKSContainerInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEKSContainerInstancesResponse>;
-  /** 查询边缘容器集群可用的自定义参数 {@link V20180525.DescribeEdgeAvailableExtraArgsRequest} {@link V20180525.DescribeEdgeAvailableExtraArgsResponse} */
+  /** @deprecated 查询边缘容器集群可用的自定义参数 {@link V20180525.DescribeEdgeAvailableExtraArgsRequest} {@link V20180525.DescribeEdgeAvailableExtraArgsResponse} */
   DescribeEdgeAvailableExtraArgs(data: V20180525.DescribeEdgeAvailableExtraArgsRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEdgeAvailableExtraArgsResponse>;
   /** 获取边缘容器CVM实例相关信息 {@link V20180525.DescribeEdgeCVMInstancesRequest} {@link V20180525.DescribeEdgeCVMInstancesResponse} */
   DescribeEdgeCVMInstances(data: V20180525.DescribeEdgeCVMInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeEdgeCVMInstancesResponse>;
@@ -9375,9 +9377,9 @@ declare interface Tke {
   DescribeTKEEdgeClusterStatus(data: V20180525.DescribeTKEEdgeClusterStatusRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeClusterStatusResponse>;
   /** 查询边缘集群列表 {@link V20180525.DescribeTKEEdgeClustersRequest} {@link V20180525.DescribeTKEEdgeClustersResponse} */
   DescribeTKEEdgeClusters(data: V20180525.DescribeTKEEdgeClustersRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeClustersResponse>;
-  /** 获取边缘计算外部访问的kubeconfig {@link V20180525.DescribeTKEEdgeExternalKubeconfigRequest} {@link V20180525.DescribeTKEEdgeExternalKubeconfigResponse} */
+  /** @deprecated 获取边缘计算外部访问的kubeconfig {@link V20180525.DescribeTKEEdgeExternalKubeconfigRequest} {@link V20180525.DescribeTKEEdgeExternalKubeconfigResponse} */
   DescribeTKEEdgeExternalKubeconfig(data: V20180525.DescribeTKEEdgeExternalKubeconfigRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeExternalKubeconfigResponse>;
-  /** 获取边缘脚本链接 {@link V20180525.DescribeTKEEdgeScriptRequest} {@link V20180525.DescribeTKEEdgeScriptResponse} */
+  /** @deprecated 获取边缘脚本链接 {@link V20180525.DescribeTKEEdgeScriptRequest} {@link V20180525.DescribeTKEEdgeScriptResponse} */
   DescribeTKEEdgeScript(data: V20180525.DescribeTKEEdgeScriptRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTKEEdgeScriptResponse>;
   /** 查询任务相关信息 {@link V20180525.DescribeTasksRequest} {@link V20180525.DescribeTasksResponse} */
   DescribeTasks(data: V20180525.DescribeTasksRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeTasksResponse>;

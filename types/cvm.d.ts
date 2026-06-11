@@ -422,47 +422,47 @@ declare interface ImportImageDataDisk {
 declare interface Instance {
   /** 实例所在的位置。 */
   Placement?: Placement;
-  /** 实例`ID`。 */
+  /** 实例ID。 */
   InstanceId?: string;
   /** 实例机型。 */
   InstanceType?: string;
   /** 实例的CPU核数，单位：核。 */
   CPU?: number;
-  /** 实例内存容量，单位：`GiB`。 */
+  /** 实例内存容量，单位：GiB。 */
   Memory?: number;
   /** 实例业务状态。取值范围：NORMAL：表示正常状态的实例EXPIRED：表示过期的实例PROTECTIVELY_ISOLATED：表示被安全隔离的实例。 */
   RestrictState?: string;
   /** 实例名称。 */
   InstanceName?: string;
-  /** 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。取值范围：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）SPOTPAID：竞价付费CDCPAID：专用集群付费 */
+  /** 实例计费类型。取值范围：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）SPOTPAID：竞价付费CDCPAID：专用集群付费 */
   InstanceChargeType?: string;
   /** 实例系统盘信息。 */
   SystemDisk?: SystemDisk;
   /** 实例数据盘信息。 */
   DataDisks?: DataDisk[];
-  /** 实例主网卡的内网`IP`列表。 */
+  /** 实例主网卡的内网IP列表。 */
   PrivateIpAddresses?: string[];
-  /** 实例主网卡的公网`IP`列表。 */
+  /** 实例主网卡的公网IP列表。 */
   PublicIpAddresses?: string[] | null;
   /** 实例带宽信息。 */
   InternetAccessible?: InternetAccessible;
   /** 实例所属虚拟私有网络信息。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
-  /** 生产实例所使用的镜像`ID`。 */
+  /** 生产实例所使用的镜像ID。 */
   ImageId?: string;
-  /** 自动续费标识。取值范围：`NOTIFY_AND_MANUAL_RENEW`：表示通知即将过期，但不自动续费`NOTIFY_AND_AUTO_RENEW`：表示通知即将过期，而且自动续费`DISABLE_NOTIFY_AND_MANUAL_RENEW`：表示不通知即将过期，也不自动续费。注意：后付费模式本项为null */
+  /** 自动续费标识。取值范围：NOTIFY_AND_MANUAL_RENEW：表示通知即将过期，但不自动续费NOTIFY_AND_AUTO_RENEW：表示通知即将过期，而且自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：表示不通知即将过期，也不自动续费。注意：后付费模式本项为null */
   RenewFlag?: string;
-  /** 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
+  /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string;
-  /** 到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。注意：后付费模式本项为null */
+  /** 到期时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。注意：后付费模式本项为null */
   ExpiredTime?: string;
   /** 操作系统名称。 */
   OsName?: string;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。 */
+  /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。 */
   SecurityGroupIds?: string[];
   /** 实例登录设置。目前只返回实例所关联的密钥。 */
   LoginSettings?: LoginSettings;
-  /** 实例状态。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753) */
+  /** 实例状态。状态类型详见实例状态表 */
   InstanceState?: string;
   /** 实例关联的标签列表。 */
   Tags?: Tag[];
@@ -482,11 +482,11 @@ declare interface Instance {
   IPv6Addresses?: string[] | null;
   /** CAM角色名。 */
   CamRoleName?: string | null;
-  /** 高性能计算集群`ID`。 */
+  /** 高性能计算集群ID。 */
   HpcClusterId?: string;
-  /** 高性能计算集群`IP`列表。 */
+  /** 高性能计算集群IP列表。 */
   RdmaIpAddresses?: string[] | null;
-  /** 实例所在的专用集群`ID`。 */
+  /** 实例所在的专用集群ID。 */
   DedicatedClusterId?: string;
   /** 实例隔离类型。取值范围：ARREAR：表示欠费隔离EXPIRE：表示到期隔离MANMADE：表示主动退还隔离NOTISOLATED：表示未隔离 */
   IsolatedSource?: string;
@@ -502,10 +502,12 @@ declare interface Instance {
   DefaultLoginPort?: number;
   /** 实例的最新操作错误信息。 */
   LatestOperationErrorMsg?: string | null;
-  /** 自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。**注：内测中**。 */
+  /** 自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。注：内测中。 */
   Metadata?: Metadata;
   /** 实例绑定的公网IPv6地址。 */
   PublicIPv6Addresses?: string[];
+  /** 描述了实例CPU拓扑结构的相关信息。 */
+  CpuTopology?: CpuTopology;
 }
 
 /** 实例属性 */

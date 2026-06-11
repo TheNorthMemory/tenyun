@@ -802,6 +802,10 @@ declare interface PulsarProClusterInfo {
   Tenant?: string;
   /** 删除保护开关标识 */
   DeleteProtection?: number;
+  /** 是否开启弹性tps枚举值：0： 关闭1： 开启 */
+  ElasticTpsEnabled?: number;
+  /** 是否开启数据加密枚举值：0： 关闭数据加密1： 开启数据加密 */
+  EncryptionStatus?: number;
 }
 
 /** Pulsar专业版集群规格信息 */
@@ -830,6 +834,8 @@ declare interface PulsarProClusterSpecInfo {
   BrokerMaxConnectionsPerIp?: number;
   /** 弹性存储集群最大存储规格；固定存储该值为0 */
   MaximumElasticStorage?: number;
+  /** 当前集群可使用的全量TPS，包括弹性TPS */
+  TotalTps?: number;
 }
 
 /** Pulsar专业版实例信息 */

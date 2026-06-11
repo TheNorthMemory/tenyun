@@ -2162,6 +2162,22 @@ declare interface CreateDeviceChannelResponse {
   RequestId?: string;
 }
 
+declare interface CreateDevicePublishSDPAnswerRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** SDP提议 */
+  SDPOffer: string;
+}
+
+declare interface CreateDevicePublishSDPAnswerResponse {
+  /** SDP应答 */
+  SDPAnswer?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceRequest {
   /** 产品ID。 */
   ProductId: string;
@@ -2195,6 +2211,8 @@ declare interface CreateDeviceSDPAnswerRequest {
   DeviceName: string;
   /** SDP提议 */
   SDPOffer: string;
+  /** 客户自定义拉流标识 */
+  RequesterTag?: string;
 }
 
 declare interface CreateDeviceSDPAnswerResponse {
@@ -2760,6 +2778,18 @@ declare interface DeleteDeviceResponse {
   ResultCode?: string;
   /** 删除的结果信息 */
   ResultMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDeviceSDPRequest {
+  /** 产品ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+}
+
+declare interface DeleteDeviceSDPResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6219,6 +6249,8 @@ declare interface Iotexplorer {
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建设备通道 {@link CreateDeviceChannelRequest} {@link CreateDeviceChannelResponse} */
   CreateDeviceChannel(data: CreateDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceChannelResponse>;
+  /** 创建设备推流SDP应答 {@link CreateDevicePublishSDPAnswerRequest} {@link CreateDevicePublishSDPAnswerResponse} */
+  CreateDevicePublishSDPAnswer(data: CreateDevicePublishSDPAnswerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDevicePublishSDPAnswerResponse>;
   /** 创建设备SDP应答 {@link CreateDeviceSDPAnswerRequest} {@link CreateDeviceSDPAnswerResponse} */
   CreateDeviceSDPAnswer(data: CreateDeviceSDPAnswerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceSDPAnswerResponse>;
   /** 创建外部视频AI分析任务 {@link CreateExternalSourceAIServiceTaskRequest} {@link CreateExternalSourceAIServiceTaskResponse} */
@@ -6271,6 +6303,8 @@ declare interface Iotexplorer {
   DeleteCloudStorageEvent(data: DeleteCloudStorageEventRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudStorageEventResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
+  /** 删除设备SDP请求 {@link DeleteDeviceSDPRequest} {@link DeleteDeviceSDPResponse} */
+  DeleteDeviceSDP(data: DeleteDeviceSDPRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceSDPResponse>;
   /** 批量删除设备 {@link DeleteDevicesRequest} {@link DeleteDevicesResponse} */
   DeleteDevices(data: DeleteDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDevicesResponse>;
   /** 删除围栏绑定信息 {@link DeleteFenceBindRequest} {@link DeleteFenceBindResponse} */

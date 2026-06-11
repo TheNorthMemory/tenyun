@@ -180,6 +180,30 @@ declare interface ApiDetailSampleHistory {
   FullReqLog?: string;
 }
 
+/** APi事件列表 */
+declare interface ApiEvent {
+  /** 事件id */
+  EventId?: string;
+  /** 事件类型 */
+  EventType?: string;
+  /** 事件等级，100,200,300对应低中高 */
+  Level?: string;
+  /** 域名 */
+  Domain?: string;
+  /** 处置状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略 */
+  Mode?: string;
+  /** 发现时间 */
+  StartTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 关联的api */
+  ApiName?: string;
+  /** 请求方式 */
+  Method?: string;
+  /** 事件来源，custom标识自定义 */
+  Source?: string;
+}
+
 /** guard content */
 declare interface ApiGuardContent {
   /** prompt */
@@ -254,6 +278,32 @@ declare interface ApiPkg {
   IsAPISecurityTrial?: number;
 }
 
+/** api安全攻击源详情 */
+declare interface ApiSecAttackSource {
+  /** 攻击来源ip */
+  SrcIp?: string;
+  /** 威胁等级 */
+  EventLevel?: string;
+  /** BOT标签 */
+  BotLabel?: string;
+  /** 变更时间 */
+  Timestamp?: number;
+  /** 地理位置 */
+  City?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 关联事件数量 */
+  EventCount?: number;
+  /** 攻击数量 */
+  AttackCount?: number;
+  /** 缺失参数名，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段 */
+  MissUserName?: string;
+  /** 当是水平越权和垂直越权时，返回此字段 */
+  AttackDetail?: string[];
+  /** 缺失密码参数，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段 */
+  MissPassword?: string;
+}
+
 /** api安全自定义事件规则结构体 */
 declare interface ApiSecCustomEventRule {
   /** 规则名称 */
@@ -292,6 +342,18 @@ declare interface ApiSecCustomSensitiveRule {
   MatchCond?: string[];
   /** 规则是否泛化，默认0表示不泛化 */
   IsPan?: number;
+}
+
+/** 事件变更内容 */
+declare interface ApiSecEventChange {
+  /** 变更人 */
+  UserName: string;
+  /** 变更的状态 */
+  Mode: string;
+  /** 时间戳 */
+  Timestamp: number;
+  /** 备注 */
+  Remark?: string;
 }
 
 /** 排除无效api资产的规则 */
@@ -5092,6 +5154,54 @@ declare interface DescribeApiListVersionTwoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeApiSecEventDetailRequest {
+  /** 域名 */
+  Domain?: string;
+  /** API安全事件ID */
+  EventId?: string;
+}
+
+declare interface DescribeApiSecEventDetailResponse {
+  /** 事件描述信息 */
+  Description?: string;
+  /** 事件基本信息 */
+  EventInfo?: ApiEvent;
+  /** 攻击源详情 */
+  AttackSource?: ApiSecAttackSource[];
+  /** 变更历史 */
+  ChangeHistory?: ApiSecEventChange[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeApiSecEventListRequest {
+  /** 域名 */
+  Domain: string;
+  /** 是否查询数量，默认不查询，为true则进行查询 */
+  NeedTotalCount?: boolean;
+  /** 过滤条件 */
+  Filters?: ApiDataFilter[];
+  /** 查询当前的页 */
+  PageIndex?: number;
+  /** 每一页显示多少条数据 */
+  PageSize?: number;
+  /** 排序，第一个元素为排序的key，第二个元素为排序规则，其中1 为升序排列，而-1 是用于降序排列 */
+  Sort?: string[];
+  /** 查询开始时间 */
+  StartTs?: number;
+  /** 查询结束时间 */
+  EndTs?: number;
+}
+
+declare interface DescribeApiSecEventListResponse {
+  /** 事件列表 */
+  Data?: ApiEvent[] | null;
+  /** 事件总数 */
+  Total?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeApiSecSensitiveRuleListRequest {
   /** 域名 */
   Domain: string;
@@ -8699,6 +8809,10 @@ declare interface Waf {
   DescribeApiDetail(data: DescribeApiDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiDetailResponse>;
   /** api资产列表 {@link DescribeApiListVersionTwoRequest} {@link DescribeApiListVersionTwoResponse} */
   DescribeApiListVersionTwo(data: DescribeApiListVersionTwoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiListVersionTwoResponse>;
+  /** 查询API安全事件详情 {@link DescribeApiSecEventDetailRequest} {@link DescribeApiSecEventDetailResponse} */
+  DescribeApiSecEventDetail(data?: DescribeApiSecEventDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiSecEventDetailResponse>;
+  /** api安全事件列表 {@link DescribeApiSecEventListRequest} {@link DescribeApiSecEventListResponse} */
+  DescribeApiSecEventList(data: DescribeApiSecEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiSecEventListResponse>;
   /** 获取api安全配置规则列表 {@link DescribeApiSecSensitiveRuleListRequest} {@link DescribeApiSecSensitiveRuleListResponse} */
   DescribeApiSecSensitiveRuleList(data: DescribeApiSecSensitiveRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiSecSensitiveRuleListResponse>;
   /** 获取地域封禁配置 {@link DescribeAreaBanAreasRequest} {@link DescribeAreaBanAreasResponse} */

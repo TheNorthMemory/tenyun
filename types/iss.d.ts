@@ -2,78 +2,6 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** AI分析配置 */
-declare interface AIConfig {
-  /** AI 分析类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和Car(车辆车牌识别)等 */
-  DetectType: string;
-  /** 截图频率。可选值1～20秒 */
-  TimeInterval: number;
-  /** 模板生效的时间段。最多包含5组时间段 */
-  OperTimeSlot: OperTimeSlot[];
-}
-
-/** AI任务信息 */
-declare interface AITaskInfo {
-  /** AI 任务 ID */
-  TaskId?: string;
-  /** AI 任务名称 */
-  Name?: string;
-  /** AI 任务描述 */
-  Desc?: string;
-  /** AI 任务状态。"on"代表开启了 AI 分析任务，"off"代表停止 AI 分析任务 */
-  Status?: string;
-  /** 通道 ID 列表 */
-  ChannelList?: string[];
-  /** AI 结果回调地址 */
-  CallbackUrl?: string;
-  /** AI 配置列表 */
-  Templates?: AITemplates[];
-  /** 创建时间 */
-  CreatedTime?: string;
-  /** 更新时间 */
-  UpdatedTime?: string;
-}
-
-/** AI识别结果 */
-declare interface AITaskResultData {
-  /** AI 任务 ID */
-  TaskId?: string;
-  /** 在 BeginTime 和 EndTime 时间之内，有识别结果的 AI 调用次数（分页依据此数值） */
-  AIResultCount?: number;
-  /** AI 任务执行结果详情 */
-  AIResults?: AITaskResultInfo | null;
-}
-
-/** AI分析结果详情 */
-declare interface AITaskResultInfo {
-  /** 人体识别结果列表 */
-  Body?: BodyAIResultInfo[] | null;
-  /** 宠物识别结果列表 */
-  Pet?: PetAIResultInfo[] | null;
-  /** 车辆车牌识别结果列表 */
-  Car?: CarAIResultInfo[] | null;
-  /** 厨师帽结果列表 */
-  ChefHat?: ChefHatAIResultInfo[] | null;
-  /** 厨师服结果列表 */
-  ChefCloth?: ChefClothAIResultInfo[] | null;
-  /** 口罩识别结果列表 */
-  FaceMask?: FaceMaskAIResultInfo[] | null;
-  /** 抽烟检测结果列表 */
-  Smoking?: SmokingAIResultInfo[] | null;
-  /** 接打电话识别结果列表 */
-  PhoneCall?: PhoneCallAIResultInfo[] | null;
-}
-
-/** AI模板信息 */
-declare interface AITemplates {
-  /** AI 类别。可选值 AI(AI 分析)和 Snapshot(截图)，Templates 列表中只能出现一种类型。 */
-  Tag: string;
-  /** AI 分析配置。和"SnapshotConfig"二选一。 */
-  AIConfig?: AIConfig;
-  /** 截图配置。和"AIConfig"二选一。 */
-  SnapshotConfig?: SnapshotConfig;
-}
-
 /** 增加设备接口返回数据 */
 declare interface AddDeviceData {
   /** 设备iD */
@@ -218,16 +146,6 @@ declare interface AddStreamAuthData {
   AppId?: number;
 }
 
-/** 通用AI识别结果信息 */
-declare interface BaseAIResultInfo {
-  /** 名称。返回值有人体识别结果名称(person)、宠物识别结果名称(cat和dog) 、车辆车牌识别结果名称(vehicle) */
-  Name?: string;
-  /** 置信度 */
-  Score?: number;
-  /** 截图中坐标信息 */
-  Location?: Location;
-}
-
 /** 批量操作设备返回结果 */
 declare interface BatchOperateDeviceData {
   /** 任务 ID（用于在查询任务的子任务列表接口ListSubTasks中查询任务进度） */
@@ -240,36 +158,6 @@ declare interface BitRateInfo {
   ChannelId?: string;
   /** 码率,单位:kbps */
   Bitrate?: number;
-}
-
-/** 人体识别结果详情 */
-declare interface BodyAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 人体信息 */
-  BodyInfo?: BaseAIResultInfo[];
-}
-
-/** 车辆车牌识别结果信息 */
-declare interface CarAIResultInfo {
-  /** 车系 */
-  Serial?: string;
-  /** 车辆品牌 */
-  Brand?: string;
-  /** 车辆类型 */
-  Type?: string;
-  /** 车辆颜色 */
-  Color?: string;
-  /** 置信度，0 - 100 */
-  Confidence?: number;
-  /** 年份，识别不出年份时返回0 */
-  Year?: number;
-  /** 车牌信息 */
-  PlateContent?: PlateContent;
-  /** 截图中坐标信息 */
-  Location?: Location;
 }
 
 /** 通道属性信息 */
@@ -290,26 +178,6 @@ declare interface ChannelInfo {
   DeviceId: string;
   /** 设备通道ID，一个设备通道只允许被一个上云计划添加 */
   ChannelId: string;
-}
-
-/** 厨师服识别结果详情 */
-declare interface ChefClothAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 厨师服信息 */
-  ChefClothInfoInfo?: BaseAIResultInfo[];
-}
-
-/** 厨师帽识别结果详情 */
-declare interface ChefHatAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 厨师帽信息 */
-  ChefHatInfo?: BaseAIResultInfo[];
 }
 
 /** 获取开流地址返回数据 */
@@ -688,16 +556,6 @@ declare interface DescribeVideoDownloadUrlData {
   ActualEndTime?: string;
 }
 
-/** 口罩识别结果详情 */
-declare interface FaceMaskAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 口罩信息 */
-  FaceMaskInfo?: BaseAIResultInfo[];
-}
-
 /** 抓拍结果信息 */
 declare interface GBDeviceSnapInfo {
   /** 文件名称 */
@@ -782,12 +640,6 @@ declare interface LifeCycleData {
   Transition: number;
   /** 云文件冷存储时长， 单位天，0表示不设置，设置时最小60天，Expiration字段加Transition字段不超过3650天 */
   Expiration: number;
-}
-
-/** 获取AI任务列表的数据 */
-declare interface ListAITaskData {
-  /** AI任务列表 */
-  List?: AITaskInfo[] | null;
 }
 
 /** 获取设备列表的响应 */
@@ -964,26 +816,6 @@ declare interface ListVideoDownloadTaskData {
   TotalCount?: number;
 }
 
-/** AI识别结果在画面中坐标 */
-declare interface Location {
-  /** 左上角 X 坐标轴 */
-  X?: number;
-  /** 左上角 Y 坐标轴 */
-  Y?: number;
-  /** 方框宽 */
-  Width?: number;
-  /** 方框高 */
-  Height?: number;
-}
-
-/** AI分析的时间段配置 */
-declare interface OperTimeSlot {
-  /** 开始时间。格式为"hh:mm:ss"，且 Start 必须小于 End */
-  Start: string;
-  /** 结束时间。格式为"hh:mm:ss"，且 Start 必须小于 End */
-  End: string;
-}
-
 /** 组织目录下的通道信息 */
 declare interface OrganizationChannelInfo {
   /** 设备通道所属的设备ID */
@@ -996,38 +828,6 @@ declare interface OrganizationChannelInfo {
   ChannelName?: string;
   /** 该通道是否在上云计划中，如果是，则不能在添加到其他上云计划|true：在上云计划中，false：不在上云计划中 */
   InPlan?: boolean;
-}
-
-/** 宠物识别结果详情 */
-declare interface PetAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 宠物信息 */
-  PetInfo?: BaseAIResultInfo[];
-}
-
-/** 打电话识别结果详情 */
-declare interface PhoneCallAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 打电话信息 */
-  PhoneCallInfo?: BaseAIResultInfo[];
-}
-
-/** AI车牌信息 */
-declare interface PlateContent {
-  /** 车牌号信息 */
-  Plate?: string;
-  /** 车牌的颜色 */
-  Color?: string;
-  /** 车牌的种类，例如普通蓝牌 */
-  Type?: string;
-  /** 截图中坐标信息 */
-  Location?: Location;
 }
 
 /** 本地录像播放url数据结构 */
@@ -1188,24 +988,6 @@ declare interface SetForbidplayChannelParam {
   ChannelId: string;
   /** 是否禁止通道播流 */
   Enable: boolean;
-}
-
-/** 抽烟识别结果详情 */
-declare interface SmokingAIResultInfo {
-  /** 时间字符串 */
-  Time?: string;
-  /** 截图 URL */
-  Url?: string;
-  /** 抽烟信息 */
-  SmokingInfo?: BaseAIResultInfo[];
-}
-
-/** 截图配置 */
-declare interface SnapshotConfig {
-  /** 截图频率。可选值1～20秒 */
-  TimeInterval: number;
-  /** 模板生效的时间段。最多包含5组时间段 */
-  OperTimeSlot: OperTimeSlot[];
 }
 
 /** 子任务详情 */
@@ -1522,28 +1304,6 @@ declare interface VideoDownloadTask {
 declare interface VideoDownloadTaskData {
   /** 下载任务ID */
   DownloadTaskId?: string;
-}
-
-declare interface AddAITaskRequest {
-  /** AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name: string;
-  /** 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。 */
-  ChannelList: string[];
-  /** AI 配置列表 */
-  Templates: AITemplates[];
-  /** AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Desc?: string;
-  /** AI 结果回调地址 */
-  CallbackUrl?: string;
-  /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
-  IsStartTheTask?: boolean;
-}
-
-declare interface AddAITaskResponse {
-  /** AI任务信息 */
-  Data?: AITaskInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
 }
 
 declare interface AddOrganizationRequest {
@@ -1892,16 +1652,6 @@ declare interface CreateVideoDownloadTaskResponse {
   RequestId?: string;
 }
 
-declare interface DeleteAITaskRequest {
-  /** AI任务ID */
-  TaskId: string;
-}
-
-declare interface DeleteAITaskResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteDomainRequest {
   /** 域名 ID */
   Id: string;
@@ -1998,46 +1748,6 @@ declare interface DeleteUserDeviceRequest {
 }
 
 declare interface DeleteUserDeviceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAITaskRequest {
-  /** AI任务ID */
-  TaskId: string;
-}
-
-declare interface DescribeAITaskResponse {
-  /** AI任务详情 */
-  Data?: AITaskInfo | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeAITaskResultRequest {
-  /** AI 任务 ID */
-  TaskId: string;
-  /** 通道ID */
-  ChannelId: string;
-  /** 桶内文件的路径。 */
-  Object?: string;
-  /** AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别) */
-  DetectType?: string;
-  /** 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天 */
-  BeginTime?: string;
-  /** 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天 */
-  EndTime?: string;
-  /** 页码。默认为1 */
-  PageNumber?: number;
-  /** 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果） */
-  PageSize?: number;
-}
-
-declare interface DescribeAITaskResultResponse {
-  /** AI识别结果 */
-  Data?: AITaskResultData | null;
-  /** AI识别结果数量 */
-  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2374,26 +2084,6 @@ declare interface DescribeVideoDownloadUrlRequest {
 declare interface DescribeVideoDownloadUrlResponse {
   /** 返回的数据结构 */
   Data?: DescribeVideoDownloadUrlData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListAITasksRequest {
-  /** 是否包含通道列表。"true"代表包含通道列表，"false"代表不包含通道列表，默认为 false */
-  IsContainChannelList?: boolean;
-  /** 是否包含AI配置。"true"代表包含任务配置，"false"代表不包含任务配置，默认为 false。 */
-  IsContainTemplate?: boolean;
-  /** 页码。默认为1 */
-  PageNumber?: number;
-  /** 每页数量。可选值1～200，默认为20 */
-  PageSize?: number;
-}
-
-declare interface ListAITasksResponse {
-  /** AI 任务数量 */
-  TotalCount?: number;
-  /** AI任务列表 */
-  Data?: ListAITaskData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2758,42 +2448,6 @@ declare interface SetForbidPlayChannelsResponse {
   RequestId?: string;
 }
 
-declare interface UpdateAITaskRequest {
-  /** AI 任务 ID */
-  TaskId: string;
-  /** AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string;
-  /** AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Desc?: string;
-  /** 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。 */
-  ChannelList?: string[];
-  /** AI 结果回调地址 */
-  CallbackUrl?: string;
-  /** 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。 */
-  IsStartTheTask?: boolean;
-  /** AI 配置列表 */
-  Templates?: AITemplates[];
-}
-
-declare interface UpdateAITaskResponse {
-  /** AI任务信息 */
-  Data?: AITaskInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface UpdateAITaskStatusRequest {
-  /** AI 任务 ID */
-  TaskId: string;
-  /** AI 任务状态。"on"代表开启了 AI 分析任务，"off"代表停止AI分析任务 */
-  Status: string;
-}
-
-declare interface UpdateAITaskStatusResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UpdateDeviceOrganizationRequest {
   /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
   DeviceIds: string[];
@@ -2951,8 +2605,6 @@ declare interface UpgradeGatewayResponse {
 /** {@link Iss 智能视图计算平台} */
 declare interface Iss {
   (): Versions;
-  /** 添加AI任务 {@link AddAITaskRequest} {@link AddAITaskResponse} */
-  AddAITask(data: AddAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<AddAITaskResponse>;
   /** 新增组织 {@link AddOrganizationRequest} {@link AddOrganizationResponse} */
   AddOrganization(data: AddOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<AddOrganizationResponse>;
   /** 新增录像上云计划 {@link AddRecordBackupPlanRequest} {@link AddRecordBackupPlanResponse} */
@@ -2989,8 +2641,6 @@ declare interface Iss {
   ControlRecordTimeline(data: ControlRecordTimelineRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordTimelineResponse>;
   /** 创建本地录像下载任务 {@link CreateVideoDownloadTaskRequest} {@link CreateVideoDownloadTaskResponse} */
   CreateVideoDownloadTask(data: CreateVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDownloadTaskResponse>;
-  /** 删除AI任务 {@link DeleteAITaskRequest} {@link DeleteAITaskResponse} */
-  DeleteAITask(data: DeleteAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAITaskResponse>;
   /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** 删除网关 {@link DeleteGatewayRequest} {@link DeleteGatewayResponse} */
@@ -3011,10 +2661,6 @@ declare interface Iss {
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
   /** 删除设备 {@link DeleteUserDeviceRequest} {@link DeleteUserDeviceResponse} */
   DeleteUserDevice(data: DeleteUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserDeviceResponse>;
-  /** 获取AI任务详情 {@link DescribeAITaskRequest} {@link DescribeAITaskResponse} */
-  DescribeAITask(data: DescribeAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITaskResponse>;
-  /** 获取AI任务识别结果 {@link DescribeAITaskResultRequest} {@link DescribeAITaskResultResponse} */
-  DescribeAITaskResult(data: DescribeAITaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAITaskResultResponse>;
   /** 根据服务节点获取 CNAME {@link DescribeCNAMERequest} {@link DescribeCNAMEResponse} */
   DescribeCNAME(data: DescribeCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNAMEResponse>;
   /** 通道查询 {@link DescribeDeviceChannelRequest} {@link DescribeDeviceChannelResponse} */
@@ -3067,8 +2713,6 @@ declare interface Iss {
   DescribeVideoBitRate(data: DescribeVideoBitRateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoBitRateResponse>;
   /** 获取云端录像下载URL地址 {@link DescribeVideoDownloadUrlRequest} {@link DescribeVideoDownloadUrlResponse} */
   DescribeVideoDownloadUrl(data: DescribeVideoDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDownloadUrlResponse>;
-  /** 获取AI任务列表 {@link ListAITasksRequest} {@link ListAITasksResponse} */
-  ListAITasks(data?: ListAITasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAITasksResponse>;
   /** 获取设备抓拍结果列表 {@link ListDeviceSnapshotsRequest} {@link ListDeviceSnapshotsResponse} */
   ListDeviceSnapshots(data: ListDeviceSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeviceSnapshotsResponse>;
   /** 获取设备列表 {@link ListDevicesRequest} {@link ListDevicesResponse} */
@@ -3111,10 +2755,6 @@ declare interface Iss {
   RefreshDeviceChannel(data: RefreshDeviceChannelRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshDeviceChannelResponse>;
   /** 设置通道禁止播流 {@link SetForbidPlayChannelsRequest} {@link SetForbidPlayChannelsResponse} */
   SetForbidPlayChannels(data: SetForbidPlayChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<SetForbidPlayChannelsResponse>;
-  /** 更新AI任务 {@link UpdateAITaskRequest} {@link UpdateAITaskResponse} */
-  UpdateAITask(data: UpdateAITaskRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAITaskResponse>;
-  /** 更新 AI 任务状态 {@link UpdateAITaskStatusRequest} {@link UpdateAITaskStatusResponse} */
-  UpdateAITaskStatus(data: UpdateAITaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAITaskStatusResponse>;
   /** 批量修改设备组织 {@link UpdateDeviceOrganizationRequest} {@link UpdateDeviceOrganizationResponse} */
   UpdateDeviceOrganization(data: UpdateDeviceOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceOrganizationResponse>;
   /** 禁用-启用设备 {@link UpdateDeviceStatusRequest} {@link UpdateDeviceStatusResponse} */

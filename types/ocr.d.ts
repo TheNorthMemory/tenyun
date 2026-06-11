@@ -1238,6 +1238,10 @@ declare interface MarkInfo {
   QuestionImagePositions?: Positions[];
   /** 题目级正确答案（步骤批改时使用，包含完整解题步骤） */
   RightAnswer?: string;
+  /** 学科（如语文、数学、英语） */
+  Subject?: string;
+  /** 题型（如选择题、填空题、计算题、应用题、判断题、作文题） */
+  QuestionType?: string;
 }
 
 /** 医疗票据信息 */

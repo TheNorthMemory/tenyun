@@ -1651,7 +1651,7 @@ declare interface CreateListenerRequest {
   SnatEnable?: boolean;
   /** 全端口段监听器的结束端口，端口范围：2 - 65535 */
   FullEndPorts?: number[];
-  /** 内网http监听器开启h2c开关，True（开启）、False（关闭）。默认为关闭。 */
+  /** 内网 HTTP 监听器开启 h2c 开关。True（开启）、False（关闭）。默认为关闭。开启后，监听器仅支持创建后端转发类型为 GRPC 或 GRPCS 的七层规则；创建规则时需在 Rules.N.ForwardType 中显式传入 GRPC 或 GRPCS。 */
   H2cSwitch?: boolean;
   /** 控制 TCP_SSL 类型的监听器是否移除 SSL 加密层。开启后，监听器将作为普通 TCP 协议运行。 可选值：True： 关闭 SSL 功能（协议降级为纯文本 TCP）。False（默认）： 保持 SSL 功能开启。 */
   SslCloseSwitch?: boolean;
@@ -1685,7 +1685,7 @@ declare interface CreateLoadBalancerRequest {
   LoadBalancerName?: string;
   /** 负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 DescribeVpcs 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。 */
   VpcId?: string;
-  /** 在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。创建内网负载均衡实例时，此参数必填，创建公网IPv4负载均衡实例时，不支持指定该参数。 */
+  /** 在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。创建内网负载均衡实例，或者创建 IPv6FullChain 版本的负载均衡实例，此参数必填。创建公网IPv4负载均衡实例时，不支持指定该参数。 */
   SubnetId?: string;
   /** 负载均衡实例所属的项目 ID，默认项目 ID 为0。可以通过 DescribeProject 接口获取。不填此参数则视为默认项目。 */
   ProjectId?: number;
@@ -1697,7 +1697,7 @@ declare interface CreateLoadBalancerRequest {
   MasterZoneId?: string;
   /** 仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。 */
   ZoneId?: string;
-  /** 网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 工单申请 */
+  /** 网络计费模式，其中的最大出带宽，仅对内网属性的性能容量型实例和公网属性的所有实例生效。 */
   InternetAccessible?: InternetAccessible;
   /** 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。 */
   VipIsp?: string;
@@ -1731,14 +1731,16 @@ declare interface CreateLoadBalancerRequest {
   DynamicVip?: boolean;
   /** 网络出口 */
   Egress?: string;
-  /** 负载均衡实例的预付费相关属性，API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 工单申请 */
+  /** 负载均衡实例的预付费相关属性 */
   LBChargePrepaid?: LBChargePrepaid;
-  /** 负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 工单申请 */
+  /** 负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。枚举值：POSTPAID_BY_HOUR： 按量计费PREPAID： 包年包月 */
   LBChargeType?: string;
   /** 七层访问日志主题ID */
   AccessLogTopicId?: string;
   /** 是否开启七层高级路由 */
   AdvancedRoute?: boolean;
+  /** 可用区亲和信息 */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo;
 }
 
 declare interface CreateLoadBalancerResponse {

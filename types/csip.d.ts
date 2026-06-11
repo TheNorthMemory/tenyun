@@ -110,6 +110,8 @@ declare interface AccessKeyAlarm {
   FirstAlarmTimestamp?: number;
   /** 最后告警时间戳（秒级） */
   LastAlarmTimestamp?: number;
+  /** ai分析失败描述，未失败为空字符串 */
+  AIFailedReason?: string;
 }
 
 /** 访问密钥告警数量 */
@@ -1228,6 +1230,26 @@ declare interface CFGViewCFGRisk {
   CFGFix?: string | null;
   /** 帮助文档 */
   CFGHelpURL?: string | null;
+}
+
+/** CI/CD接入Token */
+declare interface CICDToken {
+  /** ID */
+  Id?: number;
+  /** appid */
+  AppId?: number;
+  /** CI/CD名称 */
+  Name?: string;
+  /** 用于接入的Token */
+  Token?: string;
+  /** 扫描结果存储时长 */
+  Period?: number;
+  /** 已扫描文件 */
+  FileCnt?: number;
+  /** 最近扫描状态 */
+  LastScanStatus?: string;
+  /** 最近扫描时间 */
+  LastScanTime?: string;
 }
 
 /** 主机资产信息主机防护状态枚举，左边是常量，右边是显示0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
@@ -3634,6 +3656,48 @@ declare interface HitRules {
   RuleName: string;
 }
 
+/** IaC检测文件 */
+declare interface IaCFile {
+  /** ID */
+  Id?: number;
+  /** appid */
+  AppId?: number;
+  /** 文件ID */
+  FileId?: string;
+  /** 文件名称 */
+  FileName?: string;
+  /** CI/CD名称 */
+  CICDName?: string;
+  /** 文件路径 */
+  FilePath?: string;
+  /** 文件类型(1:Dockerfile,2:Terraform,3:KubernetesYaml) */
+  FileType?: number;
+  /** 风险总计数量 */
+  RiskTotalCnt?: number;
+  /** 风险等级数量(0:低危,1:中危,2:高危,3:严重) */
+  RiskLevelCnt?: KeyValueInt[];
+  /** 扫描时间 */
+  ScanTime?: string;
+  /** 检测状态(0:待扫描,1:检测中,2:已完成,3:检测异常) */
+  Status?: number;
+  /** 扫描失败类型(0:无失败, 1:检测超时, 2:文件格式解析失败, 3:检测失败) */
+  FailType?: number;
+}
+
+/** IaC检测文件风险 */
+declare interface IaCFileRisk {
+  /** 风险等级(0:低危,1:中危,2:高危,3:严重) */
+  Level?: number;
+  /** 风险所在行数 */
+  Line?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 问题描述 */
+  Description?: string;
+  /** 修复建议 */
+  Suggestion?: string;
+}
+
 /** 计费项信息 */
 declare interface InquireInfo {
   /** 计费项名称 */
@@ -3738,6 +3802,14 @@ declare interface KeyValue {
   Key?: string;
   /** 值 */
   Value?: string;
+}
+
+/** 键值对（整数） */
+declare interface KeyValueInt {
+  /** 键 */
+  Key?: number;
+  /** 值 */
+  Value?: number;
 }
 
 /** 位置信息 */
@@ -4652,6 +4724,8 @@ declare interface SubUserInfo {
   IsAccessCheck?: boolean;
   /** 是否配置用户行为管理策略 */
   IsAccessUeba?: boolean;
+  /** 创建时间（Unix时间戳） */
+  CreateTime?: number;
 }
 
 /** 子网资产 */
@@ -5797,6 +5871,46 @@ declare interface CreateDspmWhitelistStrategyResponse {
   RequestId?: string;
 }
 
+declare interface CreateIaCAccessTokenRequest {
+  /** CI/CD名称 */
+  Name: string;
+  /** 扫描结果存储时长(30/60/90/120/150/180天) */
+  Period: number;
+}
+
+declare interface CreateIaCAccessTokenResponse {
+  /** 接入Token */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateIaCFileExportJobRequest {
+  /** 过滤条件 */
+  Filter?: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateIaCFileExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateIaCFileReScanTaskRequest {
+  /** 文件ID */
+  Id: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateIaCFileReScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRiskCenterScanTaskRequest {
   /** 任务名称 */
   TaskName: string;
@@ -5981,6 +6095,26 @@ declare interface DeleteDspmWhitelistStrategyRequest {
 }
 
 declare interface DeleteDspmWhitelistStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteIaCAccessTokenRequest {
+  /** 删除ID列表 */
+  Id: number[];
+}
+
+declare interface DeleteIaCAccessTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteIaCFileRequest {
+  /** 删除ID列表 */
+  Id: number[];
+}
+
+declare interface DeleteIaCFileResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8039,6 +8173,76 @@ declare interface DescribeHighBaseLineRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIaCFileListRequest {
+  /** 过滤条件 */
+  Filter?: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeIaCFileListResponse {
+  /** 列表 */
+  List?: IaCFile[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIaCFileOverviewRequest {
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeIaCFileOverviewResponse {
+  /** 文件数量 */
+  TotalFile?: number;
+  /** 风险文件数量(1:Dockerfile,2:Terraform,3:KubernetesYaml) */
+  RiskFile?: KeyValueInt[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIaCFileReportRequest {
+  /** 资产ID */
+  AssetId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeIaCFileReportResponse {
+  /** 检测文件 */
+  File?: string;
+  /** 检测状态(0:待扫描,1:检测中,2:已完成,3:检测异常) */
+  Status?: number;
+  /** 检测时间 */
+  ScanTime?: string;
+  /** 风险列表 */
+  Risks?: IaCFileRisk[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIaCTokenListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeIaCTokenListResponse {
+  /** 列表 */
+  List?: CICDToken[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIpInvokeRecordDetailRequest {
   /** 过滤器 */
   Filter?: Filter;
@@ -9417,6 +9621,18 @@ declare interface ModifyDspmWhitelistStrategyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyIaCTokenPeriodRequest {
+  /** ID */
+  Id: number;
+  /** 扫描结果存储周期 */
+  Period: number;
+}
+
+declare interface ModifyIaCTokenPeriodResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOrganizationAccountStatusRequest {
   /** 修改集团账号状态，1 开启， 0关闭 */
   Status: number;
@@ -9738,6 +9954,12 @@ declare interface Csip {
   CreateDspmRiskExportJob(data?: CreateDspmRiskExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmRiskExportJobResponse>;
   /** 创建Dspm白名单策略 {@link CreateDspmWhitelistStrategyRequest} {@link CreateDspmWhitelistStrategyResponse} */
   CreateDspmWhitelistStrategy(data: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
+  /** 创建IaC检测接入Token {@link CreateIaCAccessTokenRequest} {@link CreateIaCAccessTokenResponse} */
+  CreateIaCAccessToken(data: CreateIaCAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCAccessTokenResponse>;
+  /** 创建IaC检测文件导出任务 {@link CreateIaCFileExportJobRequest} {@link CreateIaCFileExportJobResponse} */
+  CreateIaCFileExportJob(data?: CreateIaCFileExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCFileExportJobResponse>;
+  /** 创建IaC检测文件重新扫描任务 {@link CreateIaCFileReScanTaskRequest} {@link CreateIaCFileReScanTaskResponse} */
+  CreateIaCFileReScanTask(data: CreateIaCFileReScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCFileReScanTaskResponse>;
   /** 创建风险中心扫描任务 {@link CreateRiskCenterScanTaskRequest} {@link CreateRiskCenterScanTaskResponse} */
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
   /** 上传 Skill 触发安全检测 {@link CreateSkillScanRequest} {@link CreateSkillScanResponse} */
@@ -9762,6 +9984,10 @@ declare interface Csip {
   DeleteDspmRestoreLogList(data: DeleteDspmRestoreLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmRestoreLogListResponse>;
   /** 删除Dspm白名单策略 {@link DeleteDspmWhitelistStrategyRequest} {@link DeleteDspmWhitelistStrategyResponse} */
   DeleteDspmWhitelistStrategy(data?: DeleteDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmWhitelistStrategyResponse>;
+  /** 删除IaC检测接入Token {@link DeleteIaCAccessTokenRequest} {@link DeleteIaCAccessTokenResponse} */
+  DeleteIaCAccessToken(data: DeleteIaCAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIaCAccessTokenResponse>;
+  /** 删除IaC检测文件 {@link DeleteIaCFileRequest} {@link DeleteIaCFileResponse} */
+  DeleteIaCFile(data: DeleteIaCFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIaCFileResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
@@ -9970,6 +10196,14 @@ declare interface Csip {
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询云边界分析-暴露路径下主机节点的高危基线风险列表 {@link DescribeHighBaseLineRiskListRequest} {@link DescribeHighBaseLineRiskListResponse} */
   DescribeHighBaseLineRiskList(data?: DescribeHighBaseLineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighBaseLineRiskListResponse>;
+  /** 获取IaC检测文件列表 {@link DescribeIaCFileListRequest} {@link DescribeIaCFileListResponse} */
+  DescribeIaCFileList(data?: DescribeIaCFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCFileListResponse>;
+  /** 获取IaC检测文件概览 {@link DescribeIaCFileOverviewRequest} {@link DescribeIaCFileOverviewResponse} */
+  DescribeIaCFileOverview(data?: DescribeIaCFileOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCFileOverviewResponse>;
+  /** 获取IaC检测文件报告 {@link DescribeIaCFileReportRequest} {@link DescribeIaCFileReportResponse} */
+  DescribeIaCFileReport(data: DescribeIaCFileReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCFileReportResponse>;
+  /** 获取IaC检测接入Token列表 {@link DescribeIaCTokenListRequest} {@link DescribeIaCTokenListResponse} */
+  DescribeIaCTokenList(data?: DescribeIaCTokenListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCTokenListResponse>;
   /** 查看ip调用记录详情 {@link DescribeIpInvokeRecordRequest} {@link DescribeIpInvokeRecordResponse} */
   DescribeIpInvokeRecord(data?: DescribeIpInvokeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInvokeRecordResponse>;
   /** 调用记录详情 {@link DescribeIpInvokeRecordDetailRequest} {@link DescribeIpInvokeRecordDetailResponse} */
@@ -10106,6 +10340,8 @@ declare interface Csip {
   ModifyDspmRiskStrategy(data?: ModifyDspmRiskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmRiskStrategyResponse>;
   /** 修改Dspm白名单策略 {@link ModifyDspmWhitelistStrategyRequest} {@link ModifyDspmWhitelistStrategyResponse} */
   ModifyDspmWhitelistStrategy(data?: ModifyDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmWhitelistStrategyResponse>;
+  /** 修改IaC检测接入Token存储周期 {@link ModifyIaCTokenPeriodRequest} {@link ModifyIaCTokenPeriodResponse} */
+  ModifyIaCTokenPeriod(data: ModifyIaCTokenPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIaCTokenPeriodResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改策略状态 {@link ModifyPolicyStatusRequest} {@link ModifyPolicyStatusResponse} */

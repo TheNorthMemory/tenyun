@@ -2499,7 +2499,7 @@ declare interface CreateDBInstanceHourRequest {
   UniqSubnetId?: string;
   /** 项目 ID，不填为默认项目。 */
   ProjectId?: number;
-  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
+  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版集群实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
   Zone?: string;
   /** 实例 ID，购买只读实例或者灾备实例时必填，该字段表示只读实例或者灾备实例的主实例 ID，请使用 查询实例列表 接口查询云数据库实例 ID。 */
   MasterInstanceId?: string;
@@ -2535,13 +2535,13 @@ declare interface CreateDBInstanceHourRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括：&quot;UNIVERSAL&quot; - 通用型实例，&quot;EXCLUSIVE&quot; - 独享型实例，&quot;BASIC_V2&quot; - ONTKE 单节点实例，&quot;CLOUD_NATIVE_CLUSTER&quot; - 云盘版标准型，&quot;CLOUD_NATIVE_CLUSTER_EXCLUSIVE&quot; - 云盘版加强型。不指定则默认为通用型实例。说明：如果创建的是云盘版实例，此参数为必填。 */
+  /** 实例隔离类型。枚举值：UNIVERSAL： 通用型实例EXCLUSIVE： 独享型实例CLOUD_NATIVE_CLUSTER： 云盘版标准型CLOUD_NATIVE_CLUSTER_EXCLUSIVE： 云盘版加强型CLOUD_NATIVE_CLUSTER_ULTRA： 云盘版旗舰型若此参数不指定，则默认为通用型实例。如果创建的是云盘版实例，此参数为必填。如果创建的是单节点实例，此参数请填写为：CLOUD_NATIVE_CLUSTER，并指定参数 InstanceNodes 等于1。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
   /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
-  /** 实例节点数。对于 RO 和 基础版实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
+  /** 实例节点数。对于 RO 和单节点实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
   InstanceNodes?: number;
   /** 实例 Cpu 核数。当内存规格 Memory 存在多种 Cpu 配置时（如 64000MB 内存对应 8核/16核/32核），必须传入 Cpu 参数。 */
   Cpu?: number;
@@ -2591,7 +2591,7 @@ declare interface CreateDBInstanceRequest {
   Period: number;
   /** 实例数量，默认值为1, 最小值1，最大值为100。 */
   GoodsNum: number;
-  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
+  /** 可用区信息，请使用 获取云数据库可售卖规格 接口获取可创建的可用区。若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版集群实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。 */
   Zone?: string;
   /** 私有网络 ID，请使用 查询私有网络列表。说明：如果创建的是云盘版实例，此参数为必填且为私有网络类型。若此项不填，则系统会选择默认的 VPC。 */
   UniqVpcId?: string;
@@ -2635,13 +2635,13 @@ declare interface CreateDBInstanceRequest {
   DeployGroupId?: string;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间在48小时内唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
-  /** 实例隔离类型。支持值包括：&quot;UNIVERSAL&quot; - 通用型实例，&quot;EXCLUSIVE&quot; - 独享型实例，&quot;BASIC_V2&quot; - ONTKE 单节点实例，&quot;CLOUD_NATIVE_CLUSTER&quot; - 云盘版标准型，&quot;CLOUD_NATIVE_CLUSTER_EXCLUSIVE&quot; - 云盘版加强型。不指定则默认为通用型实例。说明：如果创建的是云盘版实例，此参数为必填。 */
+  /** 实例隔离类型。枚举值：UNIVERSAL： 通用型实例EXCLUSIVE： 独享型实例CLOUD_NATIVE_CLUSTER： 云盘版标准型CLOUD_NATIVE_CLUSTER_EXCLUSIVE： 云盘版加强型CLOUD_NATIVE_CLUSTER_ULTRA： 云盘版旗舰型若此参数不指定，则默认为通用型实例。如果创建的是云盘版实例，此参数为必填。如果创建的是单节点实例，此参数请填写为：CLOUD_NATIVE_CLUSTER，并指定参数 InstanceNodes 等于1。 */
   DeviceType?: string;
   /** 参数模板 id。备注：如您使用自定义参数模板 id，可传入自定义参数模板 id；如您计划使用默认参数模板，该参数模板 id 传入 id 无效，需设置 ParamTemplateType。 */
   ParamTemplateId?: number;
   /** 告警策略id数组。腾讯云可观测平台DescribeAlarmPolicy接口返回的OriginId。 */
   AlarmPolicyList?: number[];
-  /** 实例节点数。对于 RO 和基础版实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
+  /** 实例节点数。对于 RO 和单节点实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
   InstanceNodes?: number;
   /** 实例 Cpu 核数。当内存规格 Memory 存在多种 CPU 配置时（如 64000MB 内存对应 8核/16核/32核），必须传入 Cpu 参数。 */
   Cpu?: number;
@@ -2661,7 +2661,7 @@ declare interface CreateDBInstanceRequest {
   Vips?: string[];
   /** 云盘版实例的数据保护空间大小，单位 GB，设置范围1 - 10。 */
   DataProtectVolume?: number;
-  /** 云盘版节点拓扑配置。说明：若购买的是云盘版实例，此参数为必填，需设置云盘版实例的 RW 和 RO 节点拓扑，RO 节点范围是1 - 5个，请至少设置1个 RO 节点。 */
+  /** 云盘版实例的节点拓扑配置。若购买的是云盘版实例，此参数为必填，需设置云盘版实例的 RW 和 RO 节点拓扑，RO 节点范围是1 - 5个，请至少设置1个 RO 节点。 */
   ClusterTopology?: ClusterTopology;
   /** 磁盘类型，单节点（云盘版）或者云盘版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘，CLOUD_PREMIUM 表示高性能云硬盘。说明：单节点（云盘版）、云盘版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 地域和可用区。 */
   DiskType?: string;

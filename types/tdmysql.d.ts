@@ -518,6 +518,8 @@ declare interface InstanceInfo {
   AnalysisMode?: string;
   /** 分析引擎关系信息 */
   AnalysisRelationInfos?: AnalysisRelationInfo[];
+  /** 分析引擎实例信息 */
+  AnalysisInstanceInfo?: AnalysisInstanceInfo;
 }
 
 /** 节点信息 */
@@ -821,6 +823,8 @@ declare interface CreateCloneInstanceRequest {
   FullReplications?: number;
   /** 实例模式，normal：标准型；enhanced:加强型 */
   InstanceMode?: string;
+  /** 安全组id列表 */
+  SecurityGroupIds?: string[];
 }
 
 declare interface CreateCloneInstanceResponse {
@@ -893,6 +897,14 @@ declare interface CreateDBInstancesRequest {
   SQLMode?: string;
   /** svls实例的ccu变配配置 */
   AutoScaleConfig?: AutoScalingConfig;
+  /** 绑定安全组列表 */
+  SecurityGroupIds?: string[];
+  /** root用户名,当前版本默认为dbaadmin，传值也会重置为dbaadmin */
+  UserName?: string;
+  /** dbaadmin密码 */
+  Password?: string;
+  /** 是否开启透明加密，0：不开启，1：开启 */
+  EncryptionEnable?: number;
 }
 
 declare interface CreateDBInstancesResponse {
@@ -1066,6 +1078,10 @@ declare interface DescribeDBInstanceDetailResponse {
   AnalysisInstanceInfo?: AnalysisInstanceInfo;
   /** 维护窗口配置 */
   MaintenanceWindow?: MaintenanceWindowInfo;
+  /** 是否开启透明加密，0：未开启；1：已开启 */
+  EncryptionEnable?: number;
+  /** 真实使用的kms地域，用于后续调用kms服务 */
+  EncryptionKmsRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1077,6 +1093,8 @@ declare interface DescribeDBInstancesRequest {
   Limit?: number;
   /** 偏移量，取Limit整数倍 */
   Offset?: number;
+  /** 指定查询引擎类型枚举值：libra： 列存引擎 */
+  EngineType?: string;
 }
 
 declare interface DescribeDBInstancesResponse {

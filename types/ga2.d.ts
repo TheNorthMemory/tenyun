@@ -96,6 +96,8 @@ declare interface EndpointGroupConfiguration {
   IspType?: string;
   /** HPPTS加密算法套件 */
   CipherPolicyId?: string;
+  /** HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
+  HttpVersion?: string;
 }
 
 /** 终端节点组信息 */
@@ -156,6 +158,8 @@ declare interface EndpointGroupConfigurationSet {
   IspType?: string;
   /** HPPTS加密算法套件 */
   CipherPolicyId?: string;
+  /** 仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
+  HttpVersion?: string;
 }
 
 /** 过滤器 */
@@ -234,6 +238,14 @@ declare interface GlobalAcceleratorSet {
   TagSet?: Tag[];
 }
 
+/** 隐藏Header */
+declare interface HideResponseHeaders {
+  /** key */
+  Key: string;
+  /** value */
+  Value: string;
+}
+
 /** 加速地域公网IP信息 */
 declare interface IpAddressInfoSet {
   /** IP地址。 */
@@ -310,6 +322,14 @@ declare interface PortRanges {
   FromPort: number | null;
   /** 终点端口。 */
   ToPort: number | null;
+}
+
+/** 响应Header */
+declare interface ResponseHeaders {
+  /** key */
+  Key: string;
+  /** value */
+  Value: string;
 }
 
 /** 七层转发规则行为信息 */
@@ -407,6 +427,10 @@ declare interface CreateForwardingRuleRequest {
   OriginSni?: string;
   /** 回源host。 */
   OriginHost?: string;
+  /** 源站响应头 */
+  ResponseHeaders?: ResponseHeaders[];
+  /** 删除源站响应头 */
+  HideResponseHeaders?: HideResponseHeaders[];
 }
 
 declare interface CreateForwardingRuleResponse {
@@ -473,6 +497,8 @@ declare interface CreateListenerRequest {
   ServerCertificates?: string[];
   /** 客户端证书。 */
   ClientCaCertificates?: string[];
+  /** HTTPS监听器支持选择版本枚举值：HTTP/1.1： HTTP/1.1HTTP/2： HTTP/2 */
+  HttpVersion?: string;
 }
 
 declare interface CreateListenerResponse {
@@ -793,6 +819,8 @@ declare interface ModifyEndpointGroupRequest {
   PortOverrides?: PortOverride[];
   /** HPPTS加密算法套件 */
   CipherPolicyId?: string;
+  /** 仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
+  HttpVersion?: string;
 }
 
 declare interface ModifyEndpointGroupResponse {
@@ -841,6 +869,10 @@ declare interface ModifyForwardingRuleRequest {
   OriginSni?: string;
   /** 回源host。 */
   OriginHost?: string;
+  /** 源站响应头 */
+  ResponseHeaders?: ResponseHeaders[];
+  /** 删除源站响应头 */
+  HideResponseHeaders?: HideResponseHeaders[];
 }
 
 declare interface ModifyForwardingRuleResponse {

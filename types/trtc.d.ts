@@ -1086,6 +1086,32 @@ declare interface TTSConfig {
   Volume?: number;
 }
 
+/** 伴生转录TTS参数 */
+declare interface TTSParam {
+  /** tts模型 */
+  Model: string;
+  /** tts语言，必须在TranslationParam 的TargetLang列表中。 */
+  Language: string;
+  /** 需要TTS播报的主播用户，该主播用户必须在订阅白名单里并且不在订阅黑名单里。 */
+  TargetUser: TranscriptionUserInfoParams;
+  /** TTS 音频回推到房间的机器人用户。 */
+  TTSRobotUser: TranscriptionUserInfoParams;
+  /** TTS的声音配置参数。 */
+  Voice: TTSVoice;
+}
+
+/** 伴生转录TTS的语音参数配置 */
+declare interface TTSVoice {
+  /** 音色 ID。 */
+  VoiceId: string;
+  /** 语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0。 */
+  Speed?: number;
+  /** 音量调节，0 为静音，10 为最大音量，建议保持默认值 1.0，区间：[0, 10]，默认1.0。 */
+  Volume?: number;
+  /** 音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12]，默认0。 */
+  Pitch?: number;
+}
+
 /** 腾讯云点播相关参数。 */
 declare interface TencentVod {
   /** 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 创建任务流模板 并为模板命名。 */
@@ -1108,12 +1134,28 @@ declare interface TencentVod {
   UserDefineRecordId?: string;
 }
 
+/** 伴生转录术语表词组对 */
+declare interface TermPair {
+  /** 源术语。 */
+  Source: string;
+  /** 目标术语翻译结果。 */
+  Target: string;
+}
+
 /** 翻译术语 */
 declare interface Terminology {
   /** 源术语 */
   Source: string;
   /** 目标术语翻译结果 */
   Target: string;
+}
+
+/** 伴生转录术语表项 */
+declare interface TerminologyItem {
+  /** 翻译目标语言。 */
+  TargetLang: string;
+  /** 翻译目标语言对应的翻译术语配置。 */
+  Terminology: TermPair[];
 }
 
 /** 返回的质量数据，时间:值 */
@@ -1184,8 +1226,10 @@ declare interface TranslationConfig {
 
 /** 翻译相关的参数 */
 declare interface TranslationParam {
-  /** 翻译的目标语言，示例值["en", "ja"]。目标语种列表[中文 "zh"，英语 "en"，越南语 "vi"，日语 "ja"，韩语 "ko"，印度尼西亚语 "id"，泰语 "th"，葡萄牙语 "pt"，阿拉伯语 "ar"，西班牙语 "es"，法语 "fr"，马来语 "ms"，德语 "de"，意大利语 "it"，俄语 "ru"]。 */
+  /** 翻译的目标语言，示例值[&quot;en&quot;, &quot;ja&quot;]。目标语种列表[中文 &quot;zh&quot;，英语 &quot;en&quot;，越南语 &quot;vi&quot;，日语 &quot;ja&quot;，韩语 &quot;ko&quot;，印度尼西亚语 &quot;id&quot;，泰语 &quot;th&quot;，葡萄牙语 &quot;pt&quot;，阿拉伯语 &quot;ar&quot;，西班牙语 &quot;es&quot;，法语 &quot;fr&quot;，马来语 &quot;ms&quot;，德语 &quot;de&quot;，意大利语 &quot;it&quot;，俄语 &quot;ru&quot;]。 */
   TargetLang?: string[];
+  /** 翻译术语表配置。 */
+  Terminologies?: TerminologyItem[];
 }
 
 /** 实时音视频用量在某一时间段的统计信息。 */
@@ -1292,6 +1336,8 @@ declare interface Voice {
   Volume?: number;
   /** 音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12], 默认0 */
   Pitch?: number;
+  /** 情绪控制，目前仅flow_01_ex模型支持枚举值：happy： 高兴sad： 悲伤angry： 愤怒fearful： 害怕disgusted： 厌恶surprised： 惊讶calm： 中性fluent： 生动whisper： 低语 */
+  Emotion?: string;
 }
 
 /** 声纹配置参数 */
@@ -1417,7 +1463,7 @@ declare interface AsyncTextToSpeechRequest {
   SdkAppId: number;
   /** 文本转语音的输出音频的格式 */
   AudioFormat?: AudioFormat;
-  /** TTS的模型，当前固定为：flow_01_turbo */
+  /** TTS的模型，当前固定为：flow_02_turbo枚举值：flow_02_turbo： flow_02_turbo */
   Model?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
@@ -1557,9 +1603,9 @@ declare interface CreateCloudSliceTaskResponse {
 }
 
 declare interface CreateCloudTranscriptionRequest {
-  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和转录的房间所对应的SdkAppId相同。 */
+  /** TRTC的SdkAppId，和转录的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
-  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，转录的TRTC房间所对应的RoomId。注：房间号类型默认为整型，若房间号类型为字符串，请通过RoomIdType指定。 */
+  /** TRTC的RoomId，转录的TRTC房间所对应的RoomId。注：房间号类型默认为整型，若房间号类型为字符串，请通过RoomIdType指定。 */
   RoomId: string;
   /** 房间信息RoomType，必须和转录的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。 */
   RoomIdType: number;
@@ -1569,6 +1615,8 @@ declare interface CreateCloudTranscriptionRequest {
   AsrParam: AsrParam;
   /** 转录服务翻译使用的参数。 */
   TranslationParam?: TranslationParam;
+  /** 转录服务TTS使用的参数。 */
+  TTSParam?: TTSParam[];
 }
 
 declare interface CreateCloudTranscriptionResponse {
@@ -2761,14 +2809,16 @@ declare interface TextToSpeechRequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
-  /** TTS的模型，当前固定为：flow_01_turbo */
+  /** TTS的模型，当前固定为：flow_02_turbo枚举值：flow_02_turbo： flow_02_turbo */
   Model?: string;
-  /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：- zh（中文）- en（英文）- yue（粤语）- ja（日语）- ko（韩语）- ar（阿拉伯语）- id（印尼语）- th（泰语） */
+  /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：zh（中文）en（英文）yue（粤语）ja（日语）ko（韩语）ar（阿拉伯语）id（印尼语）th（泰语） */
   Language?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
   /** 默认为0，0表示不生成字幕，1表示生成字幕 */
   AlignmentMode?: number;
+  /** json字符串，用于拓展用法 */
+  ExtraParams?: string;
 }
 
 declare interface TextToSpeechResponse {
@@ -2793,14 +2843,16 @@ declare interface TextToSpeechSSERequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
-  /** TTS的模型，当前固定为：flow_01_turbo */
+  /** TTS的模型，当前固定为：flow_02_turbo枚举值：flow_02_turbo： flow_02_turbo */
   Model?: string;
-  /** 需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：- zh（中文）- en（英文）- yue（粤语）- ja（日语）- ko（韩语）- ar（阿拉伯语）- id（印尼语）- th（泰语） */
+  /** 需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：zh（中文）en（英文）yue（粤语）ja（日语）ko（韩语）ar（阿拉伯语）id（印尼语）th（泰语） */
   Language?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
   /** 默认为0，0表示不生成字幕，1表示生成字幕 */
   AlignmentMode?: number;
+  /** json字符串，用于拓展用法 */
+  ExtraParams?: string;
 }
 
 declare interface TextToSpeechSSEResponse {
@@ -2911,7 +2963,7 @@ declare interface VoiceCloneRequest {
   APIKey?: string;
   /** 声音克隆的参考文本，为参考音频对应的文字。 */
   PromptText?: string;
-  /** TTS的模型：flow_01_turbo，flow_01_ex */
+  /** TTS的模型：flow_02_turbo，flow_01_ex枚举值：flow_02_turbo： flow_02_turboflow_01_ex： flow_01_ex */
   Model?: string;
   /** 语言参数，默认为空， 参考： (ISO 639-1) */
   Language?: string;

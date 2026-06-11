@@ -290,7 +290,7 @@ declare interface CommonFlowApprover {
   ApproverName?: string;
   /** 签署人手机号，saas企业签署人，个人签署人必传 */
   ApproverMobile?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他证件注: 其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。 */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
@@ -554,7 +554,7 @@ declare interface FailedCreateRoleData {
 declare interface FillApproverInfo {
   /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。 */
   RecipientId: string;
-  /** 指定企业经办签署人OpenId注: `签署人OpenId未实名时，需要传入签署人姓名以及手机号码。` */
+  /** 指定企业经办签署人OpenId注: 签署人OpenId未实名时，需要传入签署人姓名以及手机号码。 */
   OpenId?: string;
   /** 签署人姓名 */
   ApproverName?: string;
@@ -566,11 +566,11 @@ declare interface FillApproverInfo {
   OrganizationOpenId?: string;
   /** 签署企业非渠道子客，默认为false，即表示同一渠道下的企业；如果为true，则目前表示接收方企业为SaaS企业, 为渠道子客时，OrganizationOpenId 必传 */
   NotChannelOrganization?: boolean;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE 其他证件注: `1.其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。``2.补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD 中国大陆居民身份证HONGKONG_AND_MACAO 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 中国港澳台居民居住证(格式同中国大陆居民身份证)注:补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。 */
   ApproverIdCardType?: string;
-  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：`补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。` */
+  /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：补充个人签署方时，若该用户已在电子签完成实名则可通过指定姓名和证件类型、证件号码完成补充。 */
   ApproverIdCardNumber?: string;
-  /** 合同流程ID- 补充合同组子合同动态签署人时必传。- 补充正常合同，请阅读：补充签署人接口接口使用说明 */
+  /** 合同流程ID补充合同组子合同动态签署人时必传。补充正常合同，请阅读：补充签署人接口接口使用说明 */
   FlowId?: string;
 }
 
@@ -642,7 +642,7 @@ declare interface FlowApproverDetail {
 declare interface FlowApproverInfo {
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   Name?: string;
-  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他证件注: 其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。 */
+  /** 签署方经办人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证) */
   IdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber?: string;
