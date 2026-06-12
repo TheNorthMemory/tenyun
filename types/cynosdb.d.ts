@@ -606,12 +606,80 @@ declare interface ClusterParamModifyLog {
   InstanceId?: string;
 }
 
+/** 集群周期弹性策略 */
+declare interface ClusterPeriodScalePolicy {
+  /** 策略ID */
+  PolicyId?: string;
+  /** 实例类型。rw-读写类型，ro-只读类型。 */
+  InstanceType?: string;
+  /** 弹性下限, 后续废弃, 请使用MinCcu */
+  MinCpu?: number;
+  /** 弹性上限,后续废弃，请使用MaxCcu */
+  MaxCpu?: number;
+  /** 弹性开始时间 */
+  ScaleStartTime?: string;
+  /** 弹性结束时间 */
+  ScaleEndTime?: string;
+  /** 策略有效起始日期时间 */
+  PolicyStartTime?: string;
+  /** 策略有效截止日期时间 */
+  PolicyEndTime?: string;
+  /** 周期类型。day-天， week-星期，month-月 */
+  PeriodType?: string;
+  /** 在周期内的时间配置。对于week，表示星期几；对于month，表示几号。对于day，此参数不生效。 */
+  PeriodConfig?: number[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 策略状态。normal-正常，expired-过期, deleted-删除 */
+  Status?: string;
+}
+
 /** 集群只读开关列表 */
 declare interface ClusterReadOnlyValue {
   /** 集群ID */
   ClusterId?: string;
   /** 只读开关值 */
   ReadOnlyValue?: string;
+}
+
+/** 集群Serveless弹性计划 */
+declare interface ClusterServerlessScalePlan {
+  /** 计划ID */
+  PlanId?: number;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 实例对象。具体是实例id或者类型。比如ro-即集群下的所有只读实例。 */
+  ObjectInstance?: string;
+  /** 策略ID */
+  PolicyId?: string;
+  /** 策略类型 */
+  PolicyType?: string;
+  /** 原规格下限 */
+  SourceMinCpu?: number;
+  /** 原规格上限 */
+  SourceMaxCpu?: number;
+  /** 原规格下限 */
+  TargetMinCpu?: number;
+  /** 原规格上限 */
+  TargetMaxCpu?: number;
+  /** 计划状态 */
+  Status?: string;
+  /** 弹性任务ID */
+  ScaleTaskId?: number | null;
+  /** 失败原因 */
+  FailReason?: string | null;
+  /** 计划预期开始执行时间 */
+  ExpectedStartTime?: string;
+  /** 计划预期结束时间 */
+  ExpectedEndTime?: string;
+  /** 恢复自动弹性任务 */
+  ResetTaskId?: number;
+  /** 恢复自动弹性任务执行方式 */
+  ResetType?: string;
+  /** 恢复自动弹性任务执行时间 */
+  ResetTime?: string;
 }
 
 /** 集群从可用区信息 */
@@ -774,7 +842,7 @@ declare interface CynosdbClusterDetail {
   Zone?: string;
   /** 物理可用区 */
   PhysicalZone?: string;
-  /** 状态，支持的值如下：- creating：创建中- running：运行中- isolating：隔离中- isolated：已隔离- activating：从回收站重新恢复- offlining：下线中- offlined：已下线- deleting：删除中- deleted：已删除 */
+  /** 状态，支持的值如下：creating：创建中running：运行中isolating：隔离中isolated：已隔离activating：从回收站重新恢复offlining：下线中offlined：已下线deleting：删除中deleted：已删除 */
   Status?: string;
   /** 状态描述 */
   StatusDesc?: string;
@@ -876,6 +944,8 @@ declare interface CynosdbClusterDetail {
   ArchiveStatus?: string;
   /** 归档进度，百分比。 */
   ArchiveProgress?: number;
+  /** 集群级别。例如 P0, P1 */
+  ClusterLevel?: string;
   /** 是否开启透明加密 */
   IsOpenTDE?: boolean;
 }
@@ -3680,6 +3750,20 @@ declare interface CalculateBackupSaveSecExpiresResponse {
   RequestId?: string;
 }
 
+declare interface CancelClusterServerlessScalePlanRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 计划ID */
+  PlanId: number;
+}
+
+declare interface CancelClusterServerlessScalePlanResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckCreateLibraDBInstanceRequest {
   /** 集群ID */
   ClusterId: string;
@@ -3944,6 +4028,36 @@ declare interface CreateClusterDatabaseRequest {
 }
 
 declare interface CreateClusterDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateClusterPeriodScalePolicyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例类型。rw读写，ro-只读 */
+  InstanceType: string;
+  /** 当天开始弹性时间。格式是小时:分钟 */
+  ScaleStartTime: string;
+  /** 当天结束弹性时间。格式是小时:分钟 */
+  ScaleEndTime: string;
+  /** 策略生效的起始日期时间 */
+  PolicyStartTime: string;
+  /** 策略生效的截止日期时间 */
+  PolicyEndTime: string;
+  /** 周期类型。day-天，week-周，month-月。 */
+  PeriodType: string;
+  /** 弹性规格下限 */
+  MinCpu?: number;
+  /** 弹性规格上限 */
+  MaxCpu?: number;
+  /** 周期内的时间列表。针对PeriodType=week， 表示星期几，比如[1,3]表示星期一、星期三。同理，对于PeriodType=month，[1,3,10]表示每月的1、3、10号。PeriodType=day则该字段无效。 */
+  PeriodConfig?: number[];
+}
+
+declare interface CreateClusterPeriodScalePolicyResponse {
+  /** 策略ID */
+  PolicyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4464,6 +4578,18 @@ declare interface DeleteClusterDatabaseRequest {
 }
 
 declare interface DeleteClusterDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteClusterPeriodScalePolicyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 策略ID */
+  PolicyId: string;
+}
+
+declare interface DeleteClusterPeriodScalePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5144,6 +5270,18 @@ declare interface DescribeClusterPasswordComplexityResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterPeriodScalePolicyRequest {
+  /** 集群id */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterPeriodScalePolicyResponse {
+  /** 集群周期弹性策略列表 */
+  PolicyList?: ClusterPeriodScalePolicy[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterReadOnlyRequest {
   /** 集群ID列表 */
   ClusterIds: string[];
@@ -5152,6 +5290,34 @@ declare interface DescribeClusterReadOnlyRequest {
 declare interface DescribeClusterReadOnlyResponse {
   /** 集群只读开关列表 */
   ClusterReadOnlyValues?: ClusterReadOnlyValue[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterServerlessScalePlansRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例列表 */
+  InstanceIds?: string[];
+  /** 策略类型. PolicyTypePeriodScale - 周期弹性 */
+  PolicyType?: string;
+  /** 计划ID */
+  PlanId?: number;
+  /** 分页数量限制，默认10 */
+  Limit?: number;
+  /** 查询偏移，默认0 */
+  Offset?: number;
+  /** 按计划预期执行时间为条件查询的开始时间点，包含当前时间 */
+  ExpectedStartTime?: string;
+  /** 按计划预期执行时间为条件查询的结束时间点，包含当前时间 */
+  ExpectedEndTime?: string;
+}
+
+declare interface DescribeClusterServerlessScalePlansResponse {
+  /** 计划总数 */
+  TotalCount?: number;
+  /** 策略列表 */
+  ServerlessScalePlans?: ClusterServerlessScalePlan[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5359,6 +5525,8 @@ declare interface DescribeInstanceSpecsRequest {
   IncludeZoneStocks?: boolean;
   /** 实例机器类型 */
   DeviceType?: string;
+  /** 集群级别，可空。例如 P0, P1 */
+  ClusterLevel?: string;
 }
 
 declare interface DescribeInstanceSpecsResponse {
@@ -6918,6 +7086,34 @@ declare interface ModifyClusterPasswordComplexityResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterPeriodScalePolicyRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 策略ID */
+  PolicyId: string;
+  /** 当天开始弹性时间。格式是小时:分钟 */
+  ScaleStartTime?: string;
+  /** 当天结束弹性时间。格式是小时:分钟 */
+  ScaleEndTime?: string;
+  /** 策略生效的起始日期时间 */
+  PolicyStartTime?: string;
+  /** 策略生效的截止日期时间 */
+  PolicyEndTime?: string;
+  /** 周期类型。day-天，week-周，month-月。 */
+  PeriodType?: string;
+  /** 周期内的时间列表。针对PeriodType=week， 表示星期几，比如[1,3]表示星期一、星期三。同理，对于PeriodType=month，[1,3,10]表示每月的1、3、10号。PeriodType=day则该字段无效。 */
+  PeriodConfig?: number[];
+  /** 弹性规格下限 */
+  MinCpu?: number;
+  /** 弹性规格上限 */
+  MaxCpu?: number;
+}
+
+declare interface ModifyClusterPeriodScalePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterReadOnlyRequest {
   /** 集群ID列表 */
   ClusterIds: string[];
@@ -7460,6 +7656,20 @@ declare interface OfflineLibraDBInstanceRequest {
 declare interface OfflineLibraDBInstanceResponse {
   /** 任务流id */
   FlowId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenAIOptimizerRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface OpenAIOptimizerResponse {
+  /** 任务流id */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8241,6 +8451,8 @@ declare interface Cynosdb {
   BindClusterResourcePackages(data: BindClusterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<BindClusterResourcePackagesResponse>;
   /** 修改保险箱备份保存时间将会删除备份文件 {@link CalculateBackupSaveSecExpiresRequest} {@link CalculateBackupSaveSecExpiresResponse} */
   CalculateBackupSaveSecExpires(data: CalculateBackupSaveSecExpiresRequest, config?: AxiosRequestConfig): AxiosPromise<CalculateBackupSaveSecExpiresResponse>;
+  /** 取消集群的弹性计划 {@link CancelClusterServerlessScalePlanRequest} {@link CancelClusterServerlessScalePlanResponse} */
+  CancelClusterServerlessScalePlan(data: CancelClusterServerlessScalePlanRequest, config?: AxiosRequestConfig): AxiosPromise<CancelClusterServerlessScalePlanResponse>;
   /** 校验集群是否可以添加只读分析引擎 {@link CheckCreateLibraDBInstanceRequest} {@link CheckCreateLibraDBInstanceResponse} */
   CheckCreateLibraDBInstance(data: CheckCreateLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCreateLibraDBInstanceResponse>;
   /** 检查跨可用区迁移 {@link CheckTransferClusterZoneRequest} {@link CheckTransferClusterZoneResponse} */
@@ -8273,6 +8485,8 @@ declare interface Cynosdb {
   CreateCLSDelivery(data: CreateCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSDeliveryResponse>;
   /** 创建数据库 {@link CreateClusterDatabaseRequest} {@link CreateClusterDatabaseResponse} */
   CreateClusterDatabase(data: CreateClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterDatabaseResponse>;
+  /** 创建集群周期弹性策略 {@link CreateClusterPeriodScalePolicyRequest} {@link CreateClusterPeriodScalePolicyResponse} */
+  CreateClusterPeriodScalePolicy(data: CreateClusterPeriodScalePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterPeriodScalePolicyResponse>;
   /** 购买新集群 {@link CreateClustersRequest} {@link CreateClustersResponse} */
   CreateClusters(data: CreateClustersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClustersResponse>;
   /** 购买集成集群 {@link CreateIntegrateClusterRequest} {@link CreateIntegrateClusterResponse} */
@@ -8305,6 +8519,8 @@ declare interface Cynosdb {
   DeleteCLSDelivery(data: DeleteCLSDeliveryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliveryResponse>;
   /** 删除数据库 {@link DeleteClusterDatabaseRequest} {@link DeleteClusterDatabaseResponse} */
   DeleteClusterDatabase(data: DeleteClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterDatabaseResponse>;
+  /** 删除周期弹性策略 {@link DeleteClusterPeriodScalePolicyRequest} {@link DeleteClusterPeriodScalePolicyResponse} */
+  DeleteClusterPeriodScalePolicy(data: DeleteClusterPeriodScalePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterPeriodScalePolicyResponse>;
   /** 删除保留备份 {@link DeleteClusterSaveBackupRequest} {@link DeleteClusterSaveBackupResponse} */
   DeleteClusterSaveBackup(data: DeleteClusterSaveBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterSaveBackupResponse>;
   /** 删除 TDSQL-C 分析集群 {@link DeleteLibraDBClusterRequest} {@link DeleteLibraDBClusterResponse} */
@@ -8373,8 +8589,12 @@ declare interface Cynosdb {
   DescribeClusterParams(data: DescribeClusterParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamsResponse>;
   /** 查看集群密码复杂度详情 {@link DescribeClusterPasswordComplexityRequest} {@link DescribeClusterPasswordComplexityResponse} */
   DescribeClusterPasswordComplexity(data: DescribeClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPasswordComplexityResponse>;
+  /** 查询集群周期弹性策略 {@link DescribeClusterPeriodScalePolicyRequest} {@link DescribeClusterPeriodScalePolicyResponse} */
+  DescribeClusterPeriodScalePolicy(data: DescribeClusterPeriodScalePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterPeriodScalePolicyResponse>;
   /** 查询集群只读开关 {@link DescribeClusterReadOnlyRequest} {@link DescribeClusterReadOnlyResponse} */
   DescribeClusterReadOnly(data: DescribeClusterReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterReadOnlyResponse>;
+  /** 查询集群Serverless弹性计划 {@link DescribeClusterServerlessScalePlansRequest} {@link DescribeClusterServerlessScalePlansResponse} */
+  DescribeClusterServerlessScalePlans(data: DescribeClusterServerlessScalePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterServerlessScalePlansResponse>;
   /** 查询集群透明加密信息 {@link DescribeClusterTransparentEncryptInfoRequest} {@link DescribeClusterTransparentEncryptInfoResponse} */
   DescribeClusterTransparentEncryptInfo(data: DescribeClusterTransparentEncryptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTransparentEncryptInfoResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
@@ -8545,6 +8765,8 @@ declare interface Cynosdb {
   ModifyClusterParam(data: ModifyClusterParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterParamResponse>;
   /** 修改集群密码复杂度 {@link ModifyClusterPasswordComplexityRequest} {@link ModifyClusterPasswordComplexityResponse} */
   ModifyClusterPasswordComplexity(data: ModifyClusterPasswordComplexityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPasswordComplexityResponse>;
+  /** 修改集群周期弹性策略 {@link ModifyClusterPeriodScalePolicyRequest} {@link ModifyClusterPeriodScalePolicyResponse} */
+  ModifyClusterPeriodScalePolicy(data: ModifyClusterPeriodScalePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPeriodScalePolicyResponse>;
   /** 修改集群只读开关 {@link ModifyClusterReadOnlyRequest} {@link ModifyClusterReadOnlyResponse} */
   ModifyClusterReadOnly(data: ModifyClusterReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterReadOnlyResponse>;
   /** 变更备可用区 {@link ModifyClusterSlaveZoneRequest} {@link ModifyClusterSlaveZoneResponse} */
@@ -8605,6 +8827,8 @@ declare interface Cynosdb {
   OfflineLibraDBCluster(data: OfflineLibraDBClusterRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineLibraDBClusterResponse>;
   /** 下线只读分析引擎 {@link OfflineLibraDBInstanceRequest} {@link OfflineLibraDBInstanceResponse} */
   OfflineLibraDBInstance(data: OfflineLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineLibraDBInstanceResponse>;
+  /** 开启AI优化器 {@link OpenAIOptimizerRequest} {@link OpenAIOptimizerResponse} */
+  OpenAIOptimizer(data: OpenAIOptimizerRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAIOptimizerResponse>;
   /** 实例开通审计服务 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 开启自定义密码复杂度功能 {@link OpenClusterPasswordComplexityRequest} {@link OpenClusterPasswordComplexityResponse} */

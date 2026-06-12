@@ -527,6 +527,8 @@ declare interface DeployInferServiceRequest {
   HyperParam?: HyperParam;
   /** 网络设置 */
   NetworkSetting?: NetworkSetting;
+  /** 安全类型枚举值：STANDARD： 标准推理CONFIDENTIAL： 可信推理 */
+  SecurityType?: string;
 }
 
 declare interface DeployInferServiceResponse {

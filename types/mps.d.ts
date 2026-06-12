@@ -1684,6 +1684,50 @@ declare interface AiSampleWordInfo {
   Tags?: string[];
 }
 
+/** 虚拟试穿任务配置。 */
+declare interface AiTryOnConfig {
+  /** 换装模型，取值：WAND-tryon-1.0-liteWAND-tryon-1.0-flashWAND-tryon-1.0-pro */
+  Model: string;
+  /** 换装指令。为空时使用内置指令。 */
+  Prompt?: string;
+  /** 输出图片分辨率，取值：1K2K4K默认值：1K */
+  Resolution?: string;
+}
+
+/** Aigc生音频扩展参数。 */
+declare interface AigcAudioExtraParam {
+  /** 资源id，根据具体需要填写。 */
+  ResourceId?: string;
+}
+
+/** Aigc生音频任务，输出的音频信息。 */
+declare interface AigcAudioOutputAudioInfo {
+  /** 音频URl。 */
+  Url?: string;
+  /** 音频时长。 */
+  Duration?: number;
+}
+
+/** Aigc生音频任务，输出的视频信息。 */
+declare interface AigcAudioOutputVideoInfo {
+  /** 视频URL。 */
+  Url?: string;
+  /** 视频时长。 */
+  Duration?: number;
+}
+
+/** 参考音频信息。 */
+declare interface AigcAudioReferenceAudioInfo {
+  /** 参考音频URL信息。需外网可访问。 */
+  AudioUrl?: string;
+}
+
+/** 用于AIGC视频生成的参考视频素材。 */
+declare interface AigcAudioReferenceVideoInfo {
+  /** 参考视频url。需要外网可访问。 */
+  VideoUrl?: string;
+}
+
 /** 用于AIGC创作图片时用到的扩展参数信息。 */
 declare interface AigcImageExtraParam {
   /** 指定所生成视频的宽高比。不同模型支持的宽高比:Kling 2.1支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling 3.0支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling 3.0-Omni支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling O1支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Vidu q2支持：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。MJ v7的宽高比需要在 prompt 中进行指定。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
@@ -3776,6 +3820,8 @@ declare interface ImageTaskInput {
   BeautyConfig?: BeautyConfig;
   /** 图片基础转换能力。 */
   TransformConfig?: ImageTransformConfig;
+  /** Ai 换装配置。 */
+  AiTryOnConfig?: AiTryOnConfig;
 }
 
 /** 图片基础转换能力 */
@@ -8208,6 +8254,38 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateAigcAudioTaskRequest {
+  /** 模型名称。生音乐当前支持的模型: GL、MinimaxMusic。 */
+  ModelName?: string;
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：2.0、3.0-clip、3.0-pro。模型MinimaxMusic支持的版本号：2.0、2.5、2.6。 */
+  ModelVersion?: string;
+  /** 指定场景生音频。音乐: music。 */
+  SceneType?: string;
+  /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
+  Prompt?: string;
+  /** 参考视频信息。仅部分模型支持。 */
+  VideoInfos?: AigcAudioReferenceVideoInfo[];
+  /** 传入参考音频信息。比如传入音频生成音乐时需要传入。 */
+  AudioInfos?: AigcAudioReferenceAudioInfo[];
+  /** 输出音频格式，默认不填。mp3、wav。 */
+  OutputAudioFormat?: string;
+  /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
+  StoreCosParam?: AigcStoreCosParam;
+  /** 用于传入要求的额外参数。 */
+  ExtraParameters?: AigcAudioExtraParam;
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}} */
+  AdditionalParameters?: string;
+  /** 接口操作者名称。 */
+  Operator?: string;
+}
+
+declare interface CreateAigcAudioTaskResponse {
+  /** 任务创建成功后，返回的任务ID。调用查询接口，轮询获取任务进度及生成结果。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAigcImageTaskRequest {
   /** 模型名称。当前支持的模型列表：Hunyuan，Qwen，Vidu，Kling，MJ。 */
   ModelName?: string;
@@ -8245,7 +8323,7 @@ declare interface CreateAigcVideoTaskRequest {
   ModelName?: string;
   /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [1.5]。Hailuo，可选 [02、2.3、2.3-fast]。Kling，可选 [1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。Vidu，可选 [q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。PixVerse，可选 [v5.6、v6、c1]。H2，可选 [1.0]。 */
   ModelVersion?: string;
-  /** 指定场景生视频。注意：仅部分模型支持指定场景。Kling支持：动作控制，motion_control；数字人，avatar_i2v；对口型，lip_sync。Mingmou支持：横转竖，land2port。Vidu支持：特效模板，template_effect。 */
+  /** 指定场景生成视频。注意：仅部分模型支持指定场景。Kling支持：动作控制，motion_control；数字人，avatar_i2v；对口型，lip_sync。Mingmou支持：横转竖，land2port。Vidu支持：特效模板，template_effect。Hunyuan支持: 3d世界模型, 3d_scene；涉及的返回文件非视频。 */
   SceneType?: string;
   /** 生成视频的描述。当未传入图片时，此参数必填。 */
   Prompt?: string;
@@ -9424,6 +9502,24 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   TotalCount?: number;
   /** 转自适应码流模板详情列表。 */
   AdaptiveDynamicStreamingTemplateSet?: AdaptiveDynamicStreamingTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAigcAudioTaskRequest {
+  /** 创建AIGC生视频任务时，返回的任务ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeAigcAudioTaskResponse {
+  /** 任务当前状态。 WAIT：等待中， RUN：执行中， FAIL：任务失败， DONE：任务成功。 */
+  Status?: string;
+  /** 当任务状态为 FAIL时，返回失败信息。 */
+  Message?: string;
+  /** 输出的音频信息。 */
+  AudioInfos?: AigcAudioOutputAudioInfo[];
+  /** 输出的视频信息，仅视频配音等场景会输出。 */
+  VideoInfos?: AigcAudioOutputVideoInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12091,6 +12187,8 @@ declare interface Mps {
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link CreateAdaptiveDynamicStreamingTemplateRequest} {@link CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建AIGC生音频任务 {@link CreateAigcAudioTaskRequest} {@link CreateAigcAudioTaskResponse} */
+  CreateAigcAudioTask(data?: CreateAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcAudioTaskResponse>;
   /** 创建AIGC生图片任务 {@link CreateAigcImageTaskRequest} {@link CreateAigcImageTaskResponse} */
   CreateAigcImageTask(data?: CreateAigcImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcImageTaskResponse>;
   /** 创建AIGC生视频任务 {@link CreateAigcVideoTaskRequest} {@link CreateAigcVideoTaskResponse} */
@@ -12239,6 +12337,8 @@ declare interface Mps {
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 {@link DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  /** 查询AIGC生音频任务 {@link DescribeAigcAudioTaskRequest} {@link DescribeAigcAudioTaskResponse} */
+  DescribeAigcAudioTask(data: DescribeAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcAudioTaskResponse>;
   /** 查询AIGC生图片任务 {@link DescribeAigcImageTaskRequest} {@link DescribeAigcImageTaskResponse} */
   DescribeAigcImageTask(data: DescribeAigcImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcImageTaskResponse>;
   /** 查询AIGC生视频任务 {@link DescribeAigcVideoTaskRequest} {@link DescribeAigcVideoTaskResponse} */

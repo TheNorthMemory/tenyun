@@ -1720,8 +1720,10 @@ declare interface ConsumptionBusinessSummaryDataItem {
   VoucherPayAmount?: string;
   /** 分成金 */
   TransferPayAmount?: string;
-  /** 地域名称（仅在地域汇总总展示） */
+  /** 地域名称（仅在地域汇总中展示） */
   RegionName?: string;
+  /** 待分摊金额剩余待分摊的折后总金额 */
+  LeftRealTotalCost?: string;
 }
 
 /** 消耗按项目汇总详情 */
@@ -1744,6 +1746,8 @@ declare interface ConsumptionProjectSummaryDataItem {
   VoucherPayAmount?: string;
   /** 分成金 */
   TransferPayAmount?: string;
+  /** 待分摊金额剩余待分摊的折后总金额 */
+  LeftRealTotalCost?: string;
 }
 
 /** 消耗按地域汇总详情 */
@@ -1766,6 +1770,8 @@ declare interface ConsumptionRegionSummaryDataItem {
   IncentivePayAmount?: string;
   /** 分成金 */
   TransferPayAmount?: string;
+  /** 待分摊金额剩余待分摊的折后总金额 */
+  LeftRealTotalCost?: string;
 }
 
 /** 消耗按资源汇总过滤条件 */
@@ -1862,6 +1868,8 @@ declare interface ConsumptionResourceSummaryDataItem {
   ComponentConfig?: string;
   /** 标签信息 */
   Tags?: string;
+  /** 待分摊金额剩余待分摊的折后总金额 */
+  LeftRealTotalCost?: string;
 }
 
 /** 消耗汇总详情 */

@@ -384,6 +384,16 @@ declare interface Price {
   UnitPriceHigh?: string | null;
 }
 
+/** 描述了单副本SSD硬盘的预付费计费模式。 */
+declare interface RemoteDiskChargePrepaid {
+  /** 购买单副本SSD硬盘的时长，默认单位为月，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。 */
+  Period: number;
+  /** 需要将单副本SSD硬盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，单副本SSD硬盘会自动按对齐到子机续费后的到期时间续费。 */
+  CurInstanceDeadline?: string;
+  /** 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。 */
+  RenewFlag?: string;
+}
+
 /** 快照分享信息集合 */
 declare interface SharePermission {
   /** 快照分享的时间 */
@@ -559,6 +569,10 @@ declare interface AttachDisksResponse {
 }
 
 declare interface AttachRemoteDisksRequest {
+  /** 指定待挂载单副本SSD硬盘的CVM实例。 */
+  InstanceId: string;
+  /** 一个或多个待挂载的单副本SSD硬盘ID。 */
+  RemoteDiskIds: string[];
 }
 
 declare interface AttachRemoteDisksResponse {
@@ -697,6 +711,20 @@ declare interface CreateDisksResponse {
 }
 
 declare interface CreateRemoteDisksRequest {
+  /** 单副本SSD硬盘计费类型。 枚举值：PREPAID： 预付费，即包年包月POSTPAID_BY_HOUR： 按小时后付费 */
+  DiskChargeType: string;
+  /** 单副本SSD硬盘大小，单位为GiB。取值范围：[2000, 7000] */
+  DiskSize: number;
+  /** 待挂载单副本SSD硬盘的CVM实例ID。 */
+  InstanceId: string;
+  /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目。若不指定项目，将在默认项目下进行创建。 */
+  Placement: Placement;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数指定包年包月单副本SSD硬盘的购买时长、是否设置自动续费等属性。 创建预付费单副本SSD硬盘该参数必传，创建按小时后付费单副本SSD硬盘无需传该参数。 */
+  DiskChargePrepaid?: RemoteDiskChargePrepaid;
+  /** 创建单副本SSD硬盘数量，不传则默认为1。 */
+  DiskCount?: number;
+  /** 单副本SSD的显示名称。 */
+  DiskName?: string;
 }
 
 declare interface CreateRemoteDisksResponse {
@@ -949,6 +977,8 @@ declare interface DescribeRemoteDiskConfigQuotaResponse {
 }
 
 declare interface DescribeRemoteDisksDeniedActionsRequest {
+  /** 单副本SSD硬盘ID列表。每次批量请求单副本SSD硬盘的上限为 100。 */
+  RemoteDiskIds: string[];
 }
 
 declare interface DescribeRemoteDisksDeniedActionsResponse {
@@ -1049,6 +1079,12 @@ declare interface DetachDisksResponse {
 }
 
 declare interface DetachRemoteDisksRequest {
+  /** 指定从特定CVM实例上卸载单副本SSD硬盘。 */
+  InstanceId: string;
+  /** 一个或多个将要卸载的单副本SSD硬盘ID。 */
+  RemoteDiskIds: string[];
+  /** 强制解挂，内部使用。 */
+  ForceDetach?: boolean;
 }
 
 declare interface DetachRemoteDisksResponse {
@@ -1083,6 +1119,14 @@ declare interface InitializeDisksResponse {
 }
 
 declare interface InquirePriceCreateRemoteDisksRequest {
+  /** 单副本SSD硬盘计费类型。枚举值：PREPAID： 预付费，即包年包月POSTPAID_BY_HOUR： 按小时后付费 */
+  DiskChargeType: string;
+  /** 单副本SSD硬盘大小，单位为GiB。取值范围：[2000, 7000] */
+  DiskSize: number;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数指定包年包月云盘的购买时长、是否设置自动续费等属性。 创建预付费云盘该参数必传，创建按小时后付费云盘无需传该参数。 */
+  DiskChargePrepaid?: RemoteDiskChargePrepaid;
+  /** 购买单副本SSD硬盘的数量。不填则默认为1。 */
+  DiskCount?: number;
 }
 
 declare interface InquirePriceCreateRemoteDisksResponse {
@@ -1119,6 +1163,10 @@ declare interface InquirePriceModifyDiskExtraPerformanceResponse {
 }
 
 declare interface InquirePriceRenewRemoteDisksRequest {
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的购买时长。如果在该参数中指定CurInstanceDeadline，则会按对齐到子机到期时间来续费。如果是批量续费询价，该参数与Disks参数一一对应，元素数量需保持一致。 */
+  DiskChargePrepaidSet: RemoteDiskChargePrepaid[];
+  /** 一个或多个单副本SSD硬盘ID。 */
+  RemoteDiskIds: string[];
 }
 
 declare interface InquirePriceRenewRemoteDisksResponse {
@@ -1283,6 +1331,12 @@ declare interface ModifyDisksRenewFlagResponse {
 }
 
 declare interface ModifyRemoteDiskAttributesRequest {
+  /** 一个或多个待操作的单副本SSD硬盘ID。如果传入多个单副本SSD硬盘ID，只支持所有硬盘修改为同一属性。 */
+  RemoteDiskIds: string[];
+  /** 新的单副本SSD硬盘名称 */
+  DiskName?: string;
+  /** 新的单副本SSD硬盘项目ID。 */
+  ProjectId?: number;
 }
 
 declare interface ModifyRemoteDiskAttributesResponse {
@@ -1333,6 +1387,10 @@ declare interface RenewDiskResponse {
 }
 
 declare interface RenewRemoteDiskRequest {
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月单副本SSD硬盘的续费时长。 在云硬盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时单副本SSD硬盘会按对齐到实例续费后的到期时间来续费。 */
+  DiskChargePrepaid: RemoteDiskChargePrepaid;
+  /** 单副本SSD硬盘ID。 */
+  RemoteDiskId: string;
 }
 
 declare interface RenewRemoteDiskResponse {
@@ -1383,6 +1441,8 @@ declare interface TerminateDisksResponse {
 }
 
 declare interface TerminateRemoteDisksRequest {
+  /** 一个或多个单副本SSD硬盘ID。 */
+  RemoteDiskIds: string[];
 }
 
 declare interface TerminateRemoteDisksResponse {
@@ -1416,7 +1476,7 @@ declare interface Cbs {
   /** 挂载云硬盘 {@link AttachDisksRequest} {@link AttachDisksResponse} */
   AttachDisks(data: AttachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachDisksResponse>;
   /** 挂载弹性单副本SSD硬盘 {@link AttachRemoteDisksRequest} {@link AttachRemoteDisksResponse} */
-  AttachRemoteDisks(data?: AttachRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRemoteDisksResponse>;
+  AttachRemoteDisks(data: AttachRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<AttachRemoteDisksResponse>;
   /** 绑定定期快照策略 {@link BindAutoSnapshotPolicyRequest} {@link BindAutoSnapshotPolicyResponse} */
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
   /** 自动快照策略的跨账号复制 {@link CopyAutoSnapshotPolicyCrossAccountRequest} {@link CopyAutoSnapshotPolicyCrossAccountResponse} */
@@ -1430,7 +1490,7 @@ declare interface Cbs {
   /** 创建云硬盘 {@link CreateDisksRequest} {@link CreateDisksResponse} */
   CreateDisks(data: CreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDisksResponse>;
   /** 创建弹性单副本SSD硬盘 {@link CreateRemoteDisksRequest} {@link CreateRemoteDisksResponse} */
-  CreateRemoteDisks(data?: CreateRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRemoteDisksResponse>;
+  CreateRemoteDisks(data: CreateRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRemoteDisksResponse>;
   /** 创建快照 {@link CreateSnapshotRequest} {@link CreateSnapshotResponse} */
   CreateSnapshot(data?: CreateSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSnapshotResponse>;
   /** 创建快照组 {@link CreateSnapshotGroupRequest} {@link CreateSnapshotGroupResponse} */
@@ -1462,7 +1522,7 @@ declare interface Cbs {
   /** 查询单副本SSD硬盘列表 {@link DescribeRemoteDisksRequest} {@link DescribeRemoteDisksResponse} */
   DescribeRemoteDisks(data?: DescribeRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteDisksResponse>;
   /** 查询单副本SSD硬盘操作限制列表 {@link DescribeRemoteDisksDeniedActionsRequest} {@link DescribeRemoteDisksDeniedActionsResponse} */
-  DescribeRemoteDisksDeniedActions(data?: DescribeRemoteDisksDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteDisksDeniedActionsResponse>;
+  DescribeRemoteDisksDeniedActions(data: DescribeRemoteDisksDeniedActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteDisksDeniedActionsResponse>;
   /** 查询快照组列表 {@link DescribeSnapshotGroupsRequest} {@link DescribeSnapshotGroupsResponse} */
   DescribeSnapshotGroups(data?: DescribeSnapshotGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSnapshotGroupsResponse>;
   /** 查询快照使用概览 {@link DescribeSnapshotOverviewRequest} {@link DescribeSnapshotOverviewResponse} */
@@ -1474,19 +1534,19 @@ declare interface Cbs {
   /** 卸载云硬盘 {@link DetachDisksRequest} {@link DetachDisksResponse} */
   DetachDisks(data: DetachDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachDisksResponse>;
   /** 卸载弹性单副本SSD硬盘 {@link DetachRemoteDisksRequest} {@link DetachRemoteDisksResponse} */
-  DetachRemoteDisks(data?: DetachRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachRemoteDisksResponse>;
+  DetachRemoteDisks(data: DetachRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DetachRemoteDisksResponse>;
   /** @deprecated 获取快照概览信息 {@link GetSnapOverviewRequest} {@link GetSnapOverviewResponse} */
   GetSnapOverview(data?: GetSnapOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<GetSnapOverviewResponse>;
   /** 重新初始化云硬盘 {@link InitializeDisksRequest} {@link InitializeDisksResponse} */
   InitializeDisks(data: InitializeDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeDisksResponse>;
   /** 查询创建弹性单副本SSD硬盘的价格 {@link InquirePriceCreateRemoteDisksRequest} {@link InquirePriceCreateRemoteDisksResponse} */
-  InquirePriceCreateRemoteDisks(data?: InquirePriceCreateRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateRemoteDisksResponse>;
+  InquirePriceCreateRemoteDisks(data: InquirePriceCreateRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateRemoteDisksResponse>;
   /** 修改云硬盘备份点配额询价 {@link InquirePriceModifyDiskBackupQuotaRequest} {@link InquirePriceModifyDiskBackupQuotaResponse} */
   InquirePriceModifyDiskBackupQuota(data: InquirePriceModifyDiskBackupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDiskBackupQuotaResponse>;
   /** 调整云硬盘额外性能询价 {@link InquirePriceModifyDiskExtraPerformanceRequest} {@link InquirePriceModifyDiskExtraPerformanceResponse} */
   InquirePriceModifyDiskExtraPerformance(data: InquirePriceModifyDiskExtraPerformanceRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyDiskExtraPerformanceResponse>;
   /** 查询续费弹性单副本SSD硬盘的价格 {@link InquirePriceRenewRemoteDisksRequest} {@link InquirePriceRenewRemoteDisksResponse} */
-  InquirePriceRenewRemoteDisks(data?: InquirePriceRenewRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewRemoteDisksResponse>;
+  InquirePriceRenewRemoteDisks(data: InquirePriceRenewRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRenewRemoteDisksResponse>;
   /** 创建云硬盘询价 {@link InquiryPriceCreateDisksRequest} {@link InquiryPriceCreateDisksResponse} */
   InquiryPriceCreateDisks(data: InquiryPriceCreateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateDisksResponse>;
   /** 续费云硬盘询价 {@link InquiryPriceRenewDisksRequest} {@link InquiryPriceRenewDisksResponse} */
@@ -1506,7 +1566,7 @@ declare interface Cbs {
   /** 修改云硬盘续费标识 {@link ModifyDisksRenewFlagRequest} {@link ModifyDisksRenewFlagResponse} */
   ModifyDisksRenewFlag(data: ModifyDisksRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDisksRenewFlagResponse>;
   /** 修改单副本SSD硬盘属性 {@link ModifyRemoteDiskAttributesRequest} {@link ModifyRemoteDiskAttributesResponse} */
-  ModifyRemoteDiskAttributes(data?: ModifyRemoteDiskAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteDiskAttributesResponse>;
+  ModifyRemoteDiskAttributes(data: ModifyRemoteDiskAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteDiskAttributesResponse>;
   /** 修改快照信息 {@link ModifySnapshotAttributeRequest} {@link ModifySnapshotAttributeResponse} */
   ModifySnapshotAttribute(data: ModifySnapshotAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySnapshotAttributeResponse>;
   /** 修改快照分享信息 {@link ModifySnapshotsSharePermissionRequest} {@link ModifySnapshotsSharePermissionResponse} */
@@ -1514,7 +1574,7 @@ declare interface Cbs {
   /** 续费云硬盘 {@link RenewDiskRequest} {@link RenewDiskResponse} */
   RenewDisk(data: RenewDiskRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDiskResponse>;
   /** 续费弹性单副本SSD硬盘 {@link RenewRemoteDiskRequest} {@link RenewRemoteDiskResponse} */
-  RenewRemoteDisk(data?: RenewRemoteDiskRequest, config?: AxiosRequestConfig): AxiosPromise<RenewRemoteDiskResponse>;
+  RenewRemoteDisk(data: RenewRemoteDiskRequest, config?: AxiosRequestConfig): AxiosPromise<RenewRemoteDiskResponse>;
   /** 扩容云硬盘 {@link ResizeDiskRequest} {@link ResizeDiskResponse} */
   ResizeDisk(data: ResizeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDiskResponse>;
   /** 获取创建弹性单副本SSD硬盘的订单参数 {@link SwitchParameterCreateRemoteDisksRequest} {@link SwitchParameterCreateRemoteDisksResponse} */
@@ -1524,7 +1584,7 @@ declare interface Cbs {
   /** 退还云硬盘 {@link TerminateDisksRequest} {@link TerminateDisksResponse} */
   TerminateDisks(data: TerminateDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDisksResponse>;
   /** 销毁弹性单副本SSD硬盘 {@link TerminateRemoteDisksRequest} {@link TerminateRemoteDisksResponse} */
-  TerminateRemoteDisks(data?: TerminateRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateRemoteDisksResponse>;
+  TerminateRemoteDisks(data: TerminateRemoteDisksRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateRemoteDisksResponse>;
   /** 解绑定期快照策略 {@link UnbindAutoSnapshotPolicyRequest} {@link UnbindAutoSnapshotPolicyResponse} */
   UnbindAutoSnapshotPolicy(data: UnbindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindAutoSnapshotPolicyResponse>;
 }

@@ -136,11 +136,11 @@ declare interface AudioEncodeParams {
 
 /** TTS音频输出的格式 */
 declare interface AudioFormat {
-  /** 生成的音频格式- TextToSpeechSSE 流式接口 支持 pcm, 默认: pcm- TextToSpeech 非流式接口 支持 pcm,wav,mp3, 默认: pcm- AsyncTextToSpeech支持pcm,mp3, 默认：mp3 */
+  /** 生成的音频格式TextToSpeechSSE 流式接口支持 pcm,mp3, 默认: pcmTextToSpeech 非流式接口支持 pcm,wav,mp3, 默认: pcmAsyncTextToSpeech支持pcm,mp3, 默认: mp3 */
   Format?: string;
-  /** 生成的音频采样率，默认24000可选- 16000- 24000 */
+  /** 生成的音频采样率，默认24000可选1600024000 */
   SampleRate?: number;
-  /** MP3 比特率 (kbps)，仅对 MP3 格式生效, 可以选： `64`, `128`, `192`, `256` , 默认： `128` */
+  /** MP3 比特率 (kbps)，仅对 MP3 格式生效, 可以选： 64, 128, 192, 256 , 默认： 128 */
   Bitrate?: number;
 }
 
@@ -1469,7 +1469,7 @@ declare interface AsyncTextToSpeechRequest {
   PronunciationDict?: PronunciationDict[];
   /** 默认为0，0表示不生成字幕，1表示生成字幕 */
   AlignmentMode?: number;
-  /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下： zh（中文） en（英文） yue（粤语） ja（日语） ko（韩语） ar（阿拉伯语） id（印尼语） th（泰语） */
+  /** 需要合成的语言，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
   LanguageCode?: string;
 }
 
@@ -2799,7 +2799,7 @@ declare interface StopWebRecordResponse {
 }
 
 declare interface TextToSpeechRequest {
-  /** 需要转语音的文字内容，长度范围：[1, 255] */
+  /** 需要转语音的文字内容，最大支持2000字符 */
   Text: string;
   /** 文本转语音的声音配置 */
   Voice: Voice;
@@ -2809,9 +2809,9 @@ declare interface TextToSpeechRequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
-  /** TTS的模型，当前固定为：flow_02_turbo枚举值：flow_02_turbo： flow_02_turbo */
+  /** TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo枚举值：flow_02_turbo： 高性价比模型，兼顾效果和成本flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优 */
   Model?: string;
-  /** 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：zh（中文）en（英文）yue（粤语）ja（日语）ko（韩语）ar（阿拉伯语）id（印尼语）th（泰语） */
+  /** 需要合成的语言，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
   Language?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
@@ -2833,7 +2833,7 @@ declare interface TextToSpeechResponse {
 }
 
 declare interface TextToSpeechSSERequest {
-  /** 需要转语音的文字内容，长度范围：[1, 255] */
+  /** 需要转语音的文字内容，最大支持20000字符 */
   Text: string;
   /** 文本转语音的声音配置 */
   Voice: Voice;
@@ -2843,9 +2843,9 @@ declare interface TextToSpeechSSERequest {
   AudioFormat?: AudioFormat;
   /** TTS的API密钥 */
   APIKey?: string;
-  /** TTS的模型，当前固定为：flow_02_turbo枚举值：flow_02_turbo： flow_02_turbo */
+  /** TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo枚举值：flow_02_turbo： 高性价比模型，兼顾效果和成本flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优 */
   Model?: string;
-  /** 需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：zh（中文）en（英文）yue（粤语）ja（日语）ko（韩语）ar（阿拉伯语）id（印尼语）th（泰语） */
+  /** 需要合成的语言，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
   Language?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
@@ -2957,15 +2957,15 @@ declare interface VoiceCloneRequest {
   SdkAppId: number;
   /** 声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位 */
   VoiceName: string;
-  /** 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在6秒～180秒之间 */
+  /** 声音克隆的参考音频，base64字符串，支持wav、mp3、m4a格式，长度在6秒～180秒之间 */
   PromptAudio: string;
   /** TTS的API密钥 */
   APIKey?: string;
   /** 声音克隆的参考文本，为参考音频对应的文字。 */
   PromptText?: string;
-  /** TTS的模型：flow_02_turbo，flow_01_ex枚举值：flow_02_turbo： flow_02_turboflow_01_ex： flow_01_ex */
+  /** TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo枚举值：flow_02_turbo： 高性价比模型，兼顾效果和成本flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优 */
   Model?: string;
-  /** 语言参数，默认为空， 参考： (ISO 639-1) */
+  /** 语言参数，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
   Language?: string;
 }
 

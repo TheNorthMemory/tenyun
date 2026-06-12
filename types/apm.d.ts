@@ -590,6 +590,24 @@ declare interface OrderBy {
   Value: string;
 }
 
+/** 拓扑图节点状态 */
+declare interface OverviewStats {
+  /** 应用节点状态 */
+  ServiceStats?: TopologyNodeStats;
+  /** 数据库节点状态 */
+  DatabaseStats?: TopologyNodeStats;
+  /** 消息队列节点状态 */
+  MQStats?: TopologyNodeStats;
+  /** 节点总数 */
+  TotalNodes?: number;
+  /** 健康节点总数 */
+  HealthyNodes?: number;
+  /** 警告节点总数 */
+  WarningNodes?: number;
+  /** 错误节点总数 */
+  ErrorNodes?: number;
+}
+
 /** 节点位置信息 */
 declare interface Position {
   /** 节点位置横坐标 */
@@ -768,6 +786,8 @@ declare interface TopologyEdgeNew {
   SourceComp?: string;
   /** 边上目标节点类型 应用/MQ/DB */
   TargetComp?: string;
+  /** 组件间调用次数 */
+  ReqCnt?: number;
 }
 
 /** 拓扑图边节点 */
@@ -812,6 +832,22 @@ declare interface TopologyNode {
   ConsumerQps?: number;
   /** 应用 ID */
   ServiceId?: string;
+  /** 调用次数 */
+  ReqCnt?: number;
+  /** 消息队列消费者视角的调用次数 */
+  ConsumerReqCnt?: number;
+}
+
+/** 拓扑图应用节点状态 */
+declare interface TopologyNodeStats {
+  /** 节点总数 */
+  Total?: number;
+  /** 健康节点数量 */
+  Healthy?: number;
+  /** 警告节点数量 */
+  Warning?: number;
+  /** 异常节点数量 */
+  Error?: number;
 }
 
 declare interface CreateApmInstanceRequest {
@@ -1003,11 +1039,27 @@ declare interface DescribeApmInstancesRequest {
   DemoInstanceFlag?: number;
   /** 是否查询全地域业务系统（0=不查询全地域，1=查询全地域，默认为0） */
   AllRegionsFlag?: number;
+  /** 页码，从1开始单位：页 */
+  PageIndex?: number;
+  /** 每页数量，默认20，最大100单位：个 */
+  PageSize?: number;
+  /** 搜索参数（OR 匹配 Name / InstanceKey） */
+  Keyword?: string;
+  /** 排序类型：ASC | DESC */
+  OrderDirection?: string;
+  /** 排序字段：ServiceCount / TotalCount */
+  OrderBy?: string;
 }
 
 declare interface DescribeApmInstancesResponse {
   /** APM 业务系统列表 */
   Instances?: ApmInstanceDetail[];
+  /** 总数单位：个 */
+  TotalCount?: number;
+  /** 页码，从1开始 单位：页 */
+  PageIndex?: number;
+  /** 每页数量，默认20，最大100单位：个 */
+  PageSize?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1277,7 +1329,7 @@ declare interface DescribeMetricRecordsRequest {
   Filters?: Filter[];
   /** Or 过滤条件 */
   OrFilters?: Filter[];
-  /** 排序现支持的 Key 有：- startTime(开始时间)- endTime(结束时间)- duration(响应时间)现支持的 Value 有：- desc(降序排序)- asc(升序排序) */
+  /** 排序现支持的 Key 有：startTime(开始时间)endTime(结束时间)duration(响应时间)现支持的 Value 有：desc(降序排序)asc(升序排序) */
   OrderBy?: OrderBy;
   /** 业务名称，控制台用户请填写taw。 */
   BusinessName?: string;
@@ -1291,6 +1343,8 @@ declare interface DescribeMetricRecordsRequest {
   PageIndex?: number;
   /** 页长 */
   PageSize?: number;
+  /** 应用Id */
+  ServiceID?: string;
 }
 
 declare interface DescribeMetricRecordsResponse {
@@ -1409,6 +1463,8 @@ declare interface DescribeTopologyNewRequest {
   Tags?: ApmTag[];
   /** 不显示的节点类型 */
   Hidden?: Selectors;
+  /** 是否开启云资源关联 */
+  EnableResourceLink?: boolean;
 }
 
 declare interface DescribeTopologyNewResponse {
@@ -1420,6 +1476,8 @@ declare interface DescribeTopologyNewResponse {
   TopologyModifyFlag?: number | null;
   /** 节点数量 */
   Selectors?: SelectorView | null;
+  /** 节点状态 */
+  OverviewStats?: OverviewStats | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

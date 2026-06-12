@@ -4911,9 +4911,9 @@ declare interface InvokeAISearchServiceRequest {
   ChannelId?: number;
   /** 是否需要返回总结，默认为True； 开启后会加大接口响应时长 */
   EnableSummary?: boolean;
-  /** 开始时间。注：1. 单位为毫秒（ms）2. 如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后1天内的数据， 反之EndTimeMs也一样）3. 只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为"过去三天关于猫咪的视频"， 则会将"过去三天忽略"） */
+  /** 开始时间。注：单位为毫秒（ms）如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后1天内的数据， 反之EndTimeMs也一样）只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为&quot;过去三天关于猫咪的视频&quot;， 则会将&quot;过去三天忽略&quot;） */
   StartTimeMs?: number;
-  /** 结束时间。注：1. 单位为毫秒（ms）2. 如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后1天内的数据， 反之EndTimeMs也一样）3. 只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为"过去三天关于猫咪的视频"， 则会将"过去三天忽略"） */
+  /** 结束时间。注：单位为毫秒（ms）如果同时指定了StartTimeMs与EndTimeMs，时间区间不能大于7天；如果只指定其中一个（例如只指定StartTimeMs，则查询自StartTimeMs后1天内的数据， 反之EndTimeMs也一样）只要指定了其中一个参数，接口则会忽略Query参数中关于时间的描述；（例如Query为&quot;过去三天关于猫咪的视频&quot;， 则会将&quot;过去三天忽略&quot;） */
   EndTimeMs?: number;
   /** 时区。默认值：Asia/Shanghai注：符合iana标准 https://www.iana.org/time-zones，例如Asia/Shanghai、Asia/Bangkok */
   TimeZone?: string;
@@ -4925,7 +4925,7 @@ declare interface InvokeAISearchServiceRequest {
   VectorSearchRadius?: number;
   /** 指定向量搜索最相似的 Top K；仅当SearchMode为2时支持自定义设置，默认为100 */
   VectorSearchTopK?: number;
-  /** 搜索结果的排序方式，可选值：- `CORRELATION`：按相关性（默认）- `TIME_ASC`：按时间升序- `TIME_DESC`：按时间降序 */
+  /** 搜索结果的排序方式，可选值：CORRELATION：按相关性（默认）TIME_ASC：按时间升序TIME_DESC：按时间降序 */
   Order?: string;
 }
 

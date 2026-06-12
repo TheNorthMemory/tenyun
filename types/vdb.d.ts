@@ -110,6 +110,10 @@ declare interface InstanceInfo {
   TaskStatus?: number;
   /** 绑定的安全组id */
   SecurityGroupIds?: string[];
+  /** 可升级版本号 */
+  UpgradeVersion?: string;
+  /** 是否为内部实例 */
+  IsInternal?: boolean;
 }
 
 /** 网络信息 */
@@ -126,6 +130,8 @@ declare interface Network {
   PreserveDuration?: number;
   /** 旧 ip 到期时间 */
   ExpireTime?: string;
+  /** 是否是ssl网络 */
+  IsSSL?: boolean;
 }
 
 /** 实例pod信息， pod 名称 */

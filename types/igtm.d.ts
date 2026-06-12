@@ -298,7 +298,7 @@ declare interface MainAddressPool {
   AddressPools: MainPoolWeight[] | null;
   /** 地址池集合id */
   MainAddressPoolId?: number;
-  /** 切换阀值，不能大于主力集合内地址总数 */
+  /** 切换阈值，不能大于主力集合内地址总数 */
   MinSurviveNum?: number;
   /** 切换策略:ALL解析所有地址；WEIGHT：负载均衡。当为ALL时，解析地址的权重值为1；当为WEIGHT时；权重为地址池权重*地址权重 */
   TrafficStrategy?: string;
@@ -899,6 +899,8 @@ declare interface ModifyAddressPoolRequest {
   MonitorId?: number;
   /** 地址列表，全量更新逻辑，对于存量不需要修改的地址信息也需要带上(其中参数里的AddressId需传入正确的值)，否则会被删除。 */
   AddressSet?: Address[];
+  /** 是否保留资源枚举值：false： 全量操作，会有删除逻辑true： 不会删除原有资源 */
+  KeepResource?: boolean;
 }
 
 declare interface ModifyAddressPoolResponse {
@@ -1001,6 +1003,8 @@ declare interface ModifyStrategyRequest {
   KeepDomainRecords?: string;
   /** 调度模式：AUTO默认；STOP仅暂停不切换 */
   SwitchPoolType?: string;
+  /** 是否保留资源枚举值：false： 全量操作，会有删除逻辑true： 不会删除原有资源 */
+  KeepResource?: boolean;
 }
 
 declare interface ModifyStrategyResponse {

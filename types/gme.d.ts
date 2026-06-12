@@ -793,7 +793,7 @@ declare interface DescribeApplicationDataRequest {
 
 declare interface DescribeApplicationDataResponse {
   /** 应用统计数据 */
-  Data: ApplicationDataStatistics;
+  Data?: ApplicationDataStatistics;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

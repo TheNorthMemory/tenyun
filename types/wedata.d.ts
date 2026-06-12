@@ -11745,6 +11745,12 @@ declare namespace V20210820 {
     Ext?: StrToStrMap | null;
     /** 事件列表 */
     RelatedEventList?: EventCaseAuditLogOptDto[] | null;
+    /** 代理任务ID（仅 嵌套场景使用，非 嵌套 场景为 null） */
+    ProxyTaskId?: string | null;
+    /** 嵌套工作流名称（仅 嵌套场景使用，非 嵌套 场景为 null） */
+    WorkflowRunName?: string | null;
+    /** 代理任务类型（仅 嵌套场景使用，非 嵌套 场景为 null） */
+    ProxyTaskType?: TaskTypeOpsDto | null;
   }
 
   /** 任务运行历史分页记录 */
@@ -12571,6 +12577,18 @@ declare namespace V20210820 {
     ScheduleTimeZone?: string | null;
     /** 时间类型，DATA_TIME：数据时间、SCHEDULE_TIME：计划调度时间, 为空时会被当成DATA_TIME处理 */
     TimeType?: string;
+    /** 触发类型枚举值：SUB_PROCESS_TRIGGER： 由嵌套工作流 SP 任务触发SUB_PROCESS_MAKEUP： 由嵌套工作流 SP 任务补录触发MANUAL_RUN_BY_USER： 手动触发 */
+    TriggerSource?: string | null;
+    /** 触发实例ID */
+    TriggerSourceId?: string | null;
+    /** 父嵌套工作流任务 ID。仅 triggerSource 以 SUB_PROCESS_ 开头时有值 */
+    ParentSpTaskId?: string | null;
+    /** 父嵌套工作流任务实例名称（即任务名称）。 */
+    ParentSpInstanceName?: string | null;
+    /** 父嵌套工作流任务实例数据时间参数格式：YYYY-MM-DD hh:mm:ss */
+    ParentSpInstanceDataTime?: string | null;
+    /** 数据时间列表 */
+    ScheduleTimeList?: string[] | null;
   }
 
   /** 手动工作流触发运行记录分页查询 */
@@ -16713,6 +16731,8 @@ declare namespace V20210820 {
     BundleId?: string;
     /** bundle客户端扩展信息，json格式 */
     BundleInfo?: string;
+    /** 引用该手动工作流的嵌套工作流任务ID列表 */
+    NestedBySpTaskIds?: string[] | null;
   }
 
   /** 用户生产工作流列表分页 */

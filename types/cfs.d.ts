@@ -368,6 +368,8 @@ declare interface LifecycleDataTaskInfo {
   DataFlowId?: string;
   /** 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。ture：覆盖false：不覆盖（同时也不会释放热存数据）为空时，默认为false */
   IsOverwrite?: boolean;
+  /** 【新增】数据清单文件路径，清单文件内每行一条待处理文件的完整路径。与 TaskPath 二选一。路径必须以 /cfs 开头，且必须为 CFS 文件系统内已存在的文件。示例值：/cfs/lists/archive_list.txt */
+  ListPath?: string;
 }
 
 /** 生命周期管理策略信息 */
@@ -895,14 +897,16 @@ declare interface CreateLifecycleDataTaskRequest {
   FileSystemId: string;
   /** 生命周期任务类型；archive：沉降；restore：预热；release：数据释放；metaload：元数据加载 */
   Type: string;
-  /** 需要沉降的路径或文件，仅支持传入1个路径，不允许为空。 */
-  TaskPath: string;
   /** 任务名称 */
   TaskName: string;
+  /** 需要沉降的路径或文件，仅支持传入1个路径，不允许为空。 */
+  TaskPath?: string;
   /** 数据流动 ID ，该接口可以通过 DescribeDataFlow 查询 */
   DataFlowId?: string;
   /** 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。 ture：覆盖 false：不覆盖（同时也不会释放热存数据） 为空时，默认为false */
   IsOverwrite?: boolean;
+  /** 【新增】数据清单文件路径，清单文件内每行一条待处理文件的完整路径。与 TaskPath 二选一。路径必须以 /cfs 开头，且必须为 CFS 文件系统内已存在的文件。示例值：/cfs/lists/archive_list.txt */
+  ListPath?: string;
 }
 
 declare interface CreateLifecycleDataTaskResponse {

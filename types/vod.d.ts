@@ -1761,6 +1761,16 @@ declare namespace V20180717 {
     Tags?: string[];
   }
 
+  /** AI换装配置信息。 */
+  interface AiTryOnConfig {
+    /** 换装模型。枚举值：WAND-tryon-1.0-lite： 轻量档，速度优先。WAND-tryon-1.0-flash： 均衡档，兼顾效果与时延。WAND-tryon-1.0-pro： 高质量档，效果优先。 */
+    Model: string;
+    /** 输入需要更换的衣物图片列表。支持1-4张图片。 */
+    ClothesFileInfos?: SceneAigcImageTaskInputFileInfo[];
+    /** 换装指令Prompt。 */
+    Prompt?: string;
+  }
+
   /** AIGC 高级自定义主体信息 */
   interface AigcAdvancedCustomElementInfo {
     /** 主体 ID。 */
@@ -1951,11 +1961,13 @@ declare namespace V20180717 {
 
   /** 场景化 AIGC 生图配置。 */
   interface AigcImageSceneInfo {
-    /** AI生图场景类型，可选值：change_clothes：常规场景换衣。change_clothes_under：特殊场景换衣。change_clothes_top_wear：上半身换衣。change_clothes_bottom_wear：下半身换衣。change_clothes_full_wear：全身换衣。product_image：AI生商品图。outpainting: AI扩图。 */
+    /** AI生图场景类型，可选值：ai_try_on：AI 换装。product_image：AI 生商品图。outpainting: AI 扩图。下列 Type 已废弃，后续不再更新：change_clotheschange_clothes_underchange_clothes_top_wearchange_clothes_bottom_wearchange_clothes_full_wear */
     Type: string;
-    /** 当 Type 下列类型时，则该项为必填，表示AI 换衣生图配置参数：change_clotheschange_clothes_underchange_clothes_full_wearchange_clothes_top_wearchange_clothes_bottom_wear */
+    /** 当 Type 为 ai_try_on 时必填，表示 AI 换装配置参数。 */
+    AiTryOnConfig?: AiTryOnConfig;
+    /** 已废弃，请使用AiTryOnConfig。当 Type 下列类型时，则该项为必填，表示AI 换衣生图配置参数：change_clotheschange_clothes_under */
     ChangeClothesConfig?: ChangeClothesConfig;
-    /** 当 Type 为 product_image 时有效，表示AI 生商品图配置参数。 */
+    /** 当 Type 为 product_image 时必填，表示AI 生商品图配置参数。 */
     ProductImageConfig?: ProductImageConfig;
   }
 
@@ -7091,13 +7103,13 @@ declare namespace V20180717 {
     ExpireTime?: string;
     /** 指定所生成图片的宽高比。输入格式为 W:H。本字段在以下场景有效：生商品图场景，可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、16:9、9:16、21:9AI扩图场景。可选值为：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9、21:9，可以配合 ImageWidth 和 ImageHeight 使用，规则如下： 仅指定 AspectRatio 时，根据原图输入进行自适应调整。指定 AspectRatio 和 ImageWidth 时，ImageHeight 由两者计算得出，反亦是如此。当AspectRatio、ImageWidth、ImageHeight 同时指定的时候，优先使用ImageWidth、ImageHeight。 */
     AspectRatio?: string;
-    /** 输出图片编码格式参数。仅AI换衣场景有效。 */
+    /** 输出图片编码格式参数。 */
     EncodeConfig?: ImageSceneAigcEncodeConfig;
     /** 输出图像宽度，仅AI扩图场景有效。 */
     ImageWidth?: number;
     /** 输出图像高度，仅AI扩图场景有效。 */
     ImageHeight?: number;
-    /** 输出分辨率。仅change_clothes、change_clothes_under场景有效。可选值：1K、2K、4K。 */
+    /** 输出分辨率。仅ai_try_on场景有效。可选值：1K、2K、4K。 */
     Resolution?: string;
   }
 
@@ -11664,27 +11676,27 @@ declare namespace V20180717 {
   interface LiveRealTimeClipRequest {
     /** 推流直播码。 */
     StreamId: string;
-    /** 流剪辑的开始时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 流剪辑的开始时间，格式参照 ISO 日期格式说明。 */
     StartTime: string;
-    /** 流剪辑的结束时间，格式参照 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 流剪辑的结束时间，格式参照 ISO 日期格式说明。 */
     EndTime: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 是否固化。0 不固化，1 固化。默认不固化。 */
     IsPersistence?: number;
-    /** 剪辑固化后的视频存储过期时间。格式参照 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。 */
+    /** 剪辑固化后的视频存储过期时间。格式参照 ISO 日期格式。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。 */
     ExpireTime?: string;
-    /** 剪辑固化后的视频点播任务流处理，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。仅 IsPersistence 为 1 时有效。 */
+    /** 剪辑固化后的视频点播任务流处理，详见上传指定任务流。仅 IsPersistence 为 1 时有效。 */
     Procedure?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。仅 IsPersistence 为 1 时有效。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。仅 IsPersistence 为 1 时有效。 */
     ClassId?: number;
-    /** 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。仅 IsPersistence 为 1 时有效。 */
+    /** 来源上下文，用于透传用户请求信息，上传完成回调 将返回该字段值，最长 250 个字符。仅 IsPersistence 为 1 时有效。 */
     SourceContext?: string;
-    /** 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。 */
+    /** 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，任务流状态变更回调 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。 */
     SessionContext?: string;
     /** 是否需要返回剪辑后的视频元信息。0 不需要，1 需要。默认不需要。 */
     MetaDataRequired?: number;
-    /** 云点播中添加的用于时移播放的域名，必须在云直播已经[关联录制模板和开通时移服务](https://cloud.tencent.com/document/product/266/52220)。**如果本接口的首次调用时间在 2021-01-01T00:00:00Z 之后，则此字段为必选字段。** */
+    /** 云点播中添加的用于时移播放的域名，必须在云直播已经关联录制模板和开通时移服务。如果本接口的首次调用时间在 2021-01-01T00:00:00Z 之后，则此字段为必选字段。 */
     Host?: string;
     /** 剪辑的直播流信息：默认剪辑直播原始流。当StreamInfo中指定的Type为Transcoding，则剪辑TemplateId对应的直播转码流。 */
     StreamInfo?: LiveRealTimeClipStreamInfo;
@@ -12742,23 +12754,23 @@ declare namespace V20180717 {
   }
 
   interface PullUploadRequest {
-    /** 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760)。请确保媒体 URL 可以访问。 */
+    /** 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。支持的扩展名详见媒体类型。请确保媒体 URL 可以访问。 */
     MediaUrl: string;
-    /** 媒体文件类型（扩展名），支持的类型详见[媒体类型](https://cloud.tencent.com/document/product/266/9760)。如果 MediaType 不填或取值为空字符串，将根据 MediaUrl 自动获取文件类型。 */
+    /** 媒体文件类型（扩展名），支持的类型详见媒体类型。如果 MediaType 不填或取值为空字符串，将根据 MediaUrl 自动获取文件类型。 */
     MediaType?: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 媒体名称。 */
     MediaName?: string;
     /** 要拉取的视频封面 URL。支持的文件格式：gif、jpeg（jpg）、png。 */
     CoverUrl?: string;
-    /** 媒体后续任务操作，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。 */
+    /** 媒体后续任务操作，详见上传指定任务流。 */
     Procedure?: string;
-    /** 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
     /** 指定上传园区，仅适用于对上传地域有特殊需求的用户：不填默认上传至您的[默认地域](https://cloud.tencent.com/document/product/266/14059?from=11329)。若指定上传园区，请先确认[上传存储设置](https://cloud.tencent.com/document/product/266/14059?from=11329)已经开启相应的存储地域。 */
     StorageRegion?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过[创建分类](https://cloud.tencent.com/document/product/266/7812)接口，创建分类，获得分类 ID。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过创建分类接口，创建分类，获得分类 ID。 */
     ClassId?: number;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
@@ -12768,9 +12780,9 @@ declare namespace V20180717 {
     SessionId?: string;
     /** 保留字段，特殊用途时使用。 */
     ExtInfo?: string;
-    /** 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。 */
+    /** 来源上下文，用于透传用户请求信息，上传完成回调 将返回该字段值，最长 250 个字符。 */
     SourceContext?: string;
-    /** 媒体存储路径，以/开头。只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。 */
+    /** 媒体存储路径，以/开头。只有FileID + Path 模式的子应用可以指定存储路径。 */
     MediaStoragePath?: string;
   }
 
@@ -13146,7 +13158,7 @@ declare namespace V20180717 {
   interface SimpleHlsClipRequest {
     /** 需要裁剪的腾讯云点播 HLS 视频 URL。 */
     Url: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 裁剪的开始偏移时间，单位秒。默认 0，即从视频开头开始裁剪。负数表示距离视频结束多少秒开始裁剪。例如 -10 表示从倒数第 10 秒开始裁剪。 */
     StartTimeOffset?: number;
@@ -13154,28 +13166,28 @@ declare namespace V20180717 {
     EndTimeOffset?: number;
     /** 是否固化。0 不固化，1 固化。默认不固化。 */
     IsPersistence?: number;
-    /** 剪辑固化后的视频存储过期时间。格式参照 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。 */
+    /** 剪辑固化后的视频存储过期时间。格式参照 ISO 日期格式。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。仅 IsPersistence 为 1 时有效，默认剪辑固化的视频永不过期。 */
     ExpireTime?: string;
-    /** 剪辑固化后的视频点播任务流处理，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。仅 IsPersistence 为 1 时有效。 */
+    /** 剪辑固化后的视频点播任务流处理，详见上传指定任务流。仅 IsPersistence 为 1 时有效。 */
     Procedure?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。仅 IsPersistence 为 1 时有效。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。仅 IsPersistence 为 1 时有效。 */
     ClassId?: number;
-    /** 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。仅 IsPersistence 为 1 时有效。 */
+    /** 来源上下文，用于透传用户请求信息，上传完成回调 将返回该字段值，最长 250 个字符。仅 IsPersistence 为 1 时有效。 */
     SourceContext?: string;
-    /** 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。 */
+    /** 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，任务流状态变更回调 将返回该字段值，最长 1000 个字符。仅 IsPersistence 为 1 时有效。 */
     SessionContext?: string;
     /** 该字段已废弃。 */
     Precision?: string;
     /** 输出视频类型，取值有：hls: 输出 hls 文件。默认取值 hls。 */
     OutputMediaType?: string;
-    /** 保留字段，特殊用途时使用。 示例值："" */
+    /** 保留字段，特殊用途时使用。 示例值：&quot;&quot; */
     ExtInfo?: string;
   }
 
   interface SimpleHlsClipResponse {
     /** 裁剪后的视频地址。 */
     Url?: string;
-    /** 裁剪后的视频元信息。目前`Size`，`Rotate`，`VideoDuration`，`AudioDuration` 几个字段暂时缺省，没有真实数据。 */
+    /** 裁剪后的视频元信息。目前Size，Rotate，VideoDuration，AudioDuration 几个字段暂时缺省，没有真实数据。 */
     MetaData?: MediaMetaData;
     /** 剪辑固化后的视频的媒体文件的唯一标识。 */
     FileId?: string;

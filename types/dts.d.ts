@@ -1108,8 +1108,10 @@ declare interface StepDetailInfo {
   StepId?: string;
   /** 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted */
   Status?: string;
-  /** 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 */
+  /** 当前步骤开始的时间，格式为&quot;yyyy-mm-dd hh:mm:ss&quot;，该字段不存在或者为空是无意义 */
   StartTime?: string;
+  /** 完成时间 */
+  FinishTime?: string;
   /** 步骤错误信息 */
   StepMessage?: string;
   /** 执行进度 */
@@ -1132,6 +1134,8 @@ declare interface StepInfo {
   Status?: string;
   /** 步骤开始时间，可能为空 */
   StartTime?: string;
+  /** 完成时间 */
+  FinishTime?: string;
   /** 错误信息 */
   Errors?: StepTip[] | null;
   /** 警告信息 */

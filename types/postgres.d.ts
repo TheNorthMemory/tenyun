@@ -1211,8 +1211,10 @@ declare interface CreateBackupPlanResponse {
 }
 
 declare interface CreateBaseBackupRequest {
-  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
+  /** 备份方式枚举值：physical： 物理备份logical： 逻辑备份snapshot： 快照备份 */
+  BackupMethod?: string;
 }
 
 declare interface CreateBaseBackupResponse {
@@ -2619,7 +2621,7 @@ declare interface ModifyBackupDownloadRestrictionResponse {
 }
 
 declare interface ModifyBackupPlanRequest {
-  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
   /** 实例最早开始备份时间 */
   MinBackupStartTime?: string;
@@ -2627,7 +2629,7 @@ declare interface ModifyBackupPlanRequest {
   MaxBackupStartTime?: string;
   /** 实例备份保留时长，取值范围为7-1830，单位是天 */
   BaseBackupRetentionPeriod?: number;
-  /** 实例备份周期，若是星期维度，格式为小写星期英文单词，且至少设置两天备份；若是按月维度，格式为数字字符，如["1","2"]。 */
+  /** 实例备份周期，若是星期维度，格式为小写星期英文单词，且至少设置两天备份；若是按月维度，格式为数字字符，如[&quot;1&quot;,&quot;2&quot;]。 */
   BackupPeriod?: string[];
   /** 实例日志备份保留时长，取值范围为7-1830，单位是天 */
   LogBackupRetentionPeriod?: number;
@@ -2635,6 +2637,8 @@ declare interface ModifyBackupPlanRequest {
   PlanId?: string;
   /** 要修改的备份计划名称。 */
   PlanName?: string;
+  /** 备份方式枚举值：physical： 物理备份logical： 逻辑备份snapshot： 快照备份 */
+  BackupMethod?: string;
 }
 
 declare interface ModifyBackupPlanResponse {
