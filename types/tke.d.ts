@@ -4618,7 +4618,7 @@ declare namespace V20180525 {
     ClusterType: string;
     /** 集群容器网络配置信息 */
     ClusterCIDRSettings: ClusterCIDRSettings;
-    /** CVM创建透传参数，json化字符串格式，详见[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。 */
+    /** CVM创建透传参数，json化字符串格式，详见CVM创建实例接口。总机型(包括地域)数量不超过10个，相同机型(地域)购买多台机器可以通过设置参数中RunInstances中InstanceCount来实现。 */
     RunInstancesForNode?: RunInstancesForNode[];
     /** 集群的基本配置信息 */
     ClusterBasicSettings?: ClusterBasicSettings;
@@ -4626,7 +4626,7 @@ declare namespace V20180525 {
     ClusterAdvancedSettings?: ClusterAdvancedSettings;
     /** 节点高级配置信息 */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
-    /** 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过100，不支持添加竞价实例。 */
+    /** 已存在实例的配置信息。所有实例必须在同一个VPC中，最大数量不超过 50，不支持添加竞价实例。 */
     ExistedInstancesForNode?: ExistedInstancesForNode[];
     /** CVM类型和其对应的数据盘挂载配置信息 */
     InstanceDataDiskMountSettings?: InstanceDataDiskMountSetting[];

@@ -1164,11 +1164,11 @@ declare interface SeeComprehensionConfig {
   DetectTypes?: string[];
   /** 使该视频 / 图片录入搜索库，后续可进行搜索 */
   EnableSearch?: boolean;
-  /** 主输出语言，可选值包括：- `zh` 中文（默认值）- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
+  /** 主输出语言，可选值包括：zh 中文（默认值）en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语ms 马来语 */
   OutputLang?: string;
-  /** 次选输出语言，可选值包括：- `zh` 中文- `en` 英语- `ja` 日语- `ko` 韩文- `pt-BR` 葡萄牙语（巴西）- `th` 泰语- `ms` 马来语 */
+  /** 次选输出语言，可选值包括：zh 中文en 英语ja 日语ko 韩文pt-BR 葡萄牙语（巴西）th 泰语ms 马来语 */
   AlternativeOutputLang?: string;
-  /** 多摄像头布局定义。可选值包括：- 单摄（默认值）：`Single`- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2` */
+  /** 多摄像头布局定义。可选值包括：单摄（默认值）：Single双摄（纵向排列）- 全部画面：Vertical,Num=2,Index=0;1双摄（纵向排列）- 画面1：Vertical,Num=2,Index=0双摄（纵向排列）- 画面2：Vertical,Num=2,Index=1三摄（纵向排列）- 全部画面：Vertical,Num=3,Index=0;1;2三摄（纵向排列）- 画面1：Vertical,Num=3,Index=0三摄（纵向排列）- 画面2：Vertical,Num=3,Index=1三摄（纵向排列）- 画面3：Vertical,Num=3,Index=2三摄（纵向排列）- 画面1+2：Vertical,Num=3,Index=0;1三摄（纵向排列）- 画面1+3：Vertical,Num=3,Index=0;2三摄（纵向排列）- 画面2+3：Vertical,Num=3,Index=1;2 */
   MultiCameraLayout?: string;
   /** 最大处理的输入视频时长，单位：秒（仅对视频输入生效） */
   MaxDuration?: number;

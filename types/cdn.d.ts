@@ -2277,7 +2277,7 @@ declare interface DescribeBillingDataRequest {
   Project?: number;
   /** 指定加速区域查询计费数据：mainland：中国境内overseas：中国境外不填充时，默认为 mainland */
   Area?: string;
-  /** Area 为 overseas 时，指定国家/地区查询省份、国家/地区编码可以查看 省份编码映射不填充时，查询所有国家/地区 */
+  /** Area 为 overseas 时，仅支持地区查询省份、国家/地区编码可以查看 省份编码映射不填充时，查询所有国家/地区 */
   District?: number;
   /** 计费统计类型flux：计费流量bandwidth：计费带宽https：https请求数默认为 bandwidth */
   Metric?: string;

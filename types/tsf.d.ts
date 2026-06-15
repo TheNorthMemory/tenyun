@@ -14,12 +14,6 @@ declare interface AddInstanceResult {
   FailedReasons?: string[] | null;
 }
 
-/** 高级选项设置 */
-declare interface AdvanceSettings {
-  /** 子任务单机并发数限制，默认值为2 */
-  SubTaskConcurrency?: number;
-}
-
 /** 亲和规则 */
 declare interface Affinity {
   /** 亲和性范围 */
@@ -2964,14 +2958,6 @@ declare interface ServiceStatisticsResults {
   TotalCount?: number;
 }
 
-/** 分片参数 */
-declare interface ShardArgument {
-  /** 分片参数 KEY，整形, 范围 [1,1000] */
-  ShardKey?: number;
-  /** 分片参数 VALUE */
-  ShardValue?: string | null;
-}
-
 /** 简单应用 */
 declare interface SimpleApplication {
   /** 应用ID */
@@ -3066,120 +3052,10 @@ declare interface Tag {
   TagValue?: string;
 }
 
-/** 工作流图中的边 */
-declare interface TaskFlowEdge {
-  /** 节点 ID，节点类型为任务时为任务ID，节点类型为逻辑节点"且"时为 AND，为逻辑节点"或"时为 OR，节点类型为头节点时为字符串"head" */
-  NodeId?: string;
-  /** 子节点 ID，节点类型为任务时为任务ID，节点类型为逻辑节点"且"时为 AND，为逻辑节点"或"时为 OR */
-  ChildNodeId?: string;
-  /** 是否核心任务,Y/N */
-  CoreNode?: string;
-  /** 边类型，上下游任务依赖触发关系。一共2个值，Y：成功触发，N：失败触发 */
-  EdgeType?: string;
-  /** 任务节点类型，一共有4种类型，AND：逻辑节点且，OR：逻辑节点或，TASK：任务节点，START：头节点 */
-  NodeType?: string;
-  /** X轴坐标位置 */
-  PositionX?: string;
-  /** Y轴坐标位置 */
-  PositionY?: string;
-  /** 图 ID，新建工作流时自动生成，不需要填写，查看工作流图时后端返回 */
-  GraphId?: string;
-  /** 工作流 ID，新建工作流时自动生成，不需要填写，查看工作流图时后端返回 */
-  FlowId?: string;
-  /** 节点名称 */
-  NodeName?: string;
-  /** 任务ID，新建工作流时不需要填写，查看工作流图时后端返回 */
-  TaskId?: string;
-  /** 任务历史ID，新建工作流时不需要填写，查看工作流图时后端返回 */
-  TaskLogId?: string;
-}
-
-/** 工作流最近批次的状态 */
-declare interface TaskFlowLastBatchState {
-  /** 批次ID */
-  FlowBatchId?: string;
-  /** 批次历史ID */
-  FlowBatchLogId?: string;
-  /** 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING */
-  State?: string;
-}
-
 /** 任务id */
 declare interface TaskId {
   /** 任务ID */
   TaskId?: string;
-}
-
-/** 任务最近一次执行状态 */
-declare interface TaskLastExecuteStatus {
-  /** 批次ID */
-  BatchId?: string;
-  /** 运行状态，RUNNING/SUCCESS/FAIL/HALF/TERMINATED */
-  State?: string;
-  /** 批次历史ID */
-  BatchLogId?: string;
-}
-
-/** 任务定义 */
-declare interface TaskRecord {
-  /** 任务名称 */
-  TaskName?: string;
-  /** 任务类型 */
-  TaskType?: string;
-  /** 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行 */
-  ExecuteType?: string;
-  /** 任务内容，长度限制65535字节 */
-  TaskContent?: string;
-  /** 分组ID */
-  GroupId?: string;
-  /** 超时时间，单位：毫秒。 */
-  TimeOut?: number;
-  /** 重试次数 */
-  RetryCount?: number;
-  /** 重试间隔，单位：毫秒。 */
-  RetryInterval?: number;
-  /** 触发规则 */
-  TaskRule?: TaskRule;
-  /** 任务启用状态。一共2种状态可选，ENABLED：启用，DISABLED：停用 */
-  TaskState?: string;
-  /** 任务ID */
-  TaskId?: string;
-  /** 判断任务成功的操作符 */
-  SuccessOperator?: string;
-  /** 判断任务成功的阈值 */
-  SuccessRatio?: number;
-  /** 分片数量 */
-  ShardCount?: number;
-  /** 高级设置 */
-  AdvanceSettings?: AdvanceSettings;
-  /** 分片参数 */
-  ShardArguments?: ShardArgument[];
-  /** 所属工作流ID */
-  BelongFlowIds?: string[];
-  /** 任务历史ID */
-  TaskLogId?: string;
-  /** 触发类型，一共3种类型，WorkFlow：工作流触发，Cron：定时触发，FixRate：周期触发 */
-  TriggerType?: string;
-  /** 任务参数，长度限制10000个字符 */
-  TaskArgument?: string;
-}
-
-/** 翻页查询的任务记录返回 */
-declare interface TaskRecordPage {
-  /** 总数量 */
-  TotalCount?: number;
-  /** 任务记录列表 */
-  Content?: TaskRecord[];
-}
-
-/** 任务规则 */
-declare interface TaskRule {
-  /** 触发规则类型，枚举值。一共3个值，Cron：定时触发，Repeat：周期触发，WorkFlow：工作流触发 */
-  RuleType: string;
-  /** Cron类型规则，cron表达式。 */
-  Expression?: string;
-  /** 时间间隔， 单位毫秒 */
-  RepeatInterval?: number | null;
 }
 
 /** tcr仓库信息 */
@@ -3931,18 +3807,6 @@ declare interface ChangeApiUsableStatusResponse {
   RequestId?: string;
 }
 
-declare interface ContinueRunFailedTaskBatchRequest {
-  /** 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入执行记录页，第一列即为任务批次ID，在[任务执行记录](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=task)页能查看所有任务批次ID。 */
-  BatchId: string;
-}
-
-declare interface ContinueRunFailedTaskBatchResponse {
-  /** true：操作成功、false：操作失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateAllGatewayApiAsyncRequest {
   /** API分组ID */
   GroupId: string;
@@ -4577,68 +4441,6 @@ declare interface CreateRepositoryResponse {
   RequestId?: string;
 }
 
-declare interface CreateTaskFlowRequest {
-  /** 工作流名称 */
-  FlowName: string;
-  /** 触发方式 */
-  TriggerRule: TaskRule;
-  /** 工作流任务节点列表 */
-  FlowEdges: TaskFlowEdge[];
-  /** 工作流执行超时时间，单位：毫秒 */
-  TimeOut: number;
-  /** 数据集列表 */
-  ProgramIdList?: string[];
-}
-
-declare interface CreateTaskFlowResponse {
-  /** 工作流 ID */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateTaskRequest {
-  /** 任务名称，任务长度64字符 */
-  TaskName: string;
-  /** 任务内容，长度限制65536个字节 */
-  TaskContent: string;
-  /** 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行 */
-  ExecuteType: string;
-  /** 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务 */
-  TaskType: string;
-  /** 任务超时时间，取值大于0，单位：毫秒（ms） */
-  TimeOut: number;
-  /** 部署组ID。在[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)，点击应用ID进入应用部署页查看部署组ID。 */
-  GroupId: string;
-  /** 触发规则 */
-  TaskRule?: TaskRule;
-  /** 重试次数，0 <= RetryCount<= 10 */
-  RetryCount?: number;
-  /** 重试间隔， 0 <= RetryInterval <= 600000， 时间单位 ms */
-  RetryInterval?: number;
-  /** 分片数量，仅当任务执行方式为分片执行时需要设置该值，取值范围2~1000 */
-  ShardCount?: number;
-  /** 分片参数 */
-  ShardArguments?: ShardArgument[];
-  /** 判断任务成功的操作符 */
-  SuccessOperator?: string;
-  /** 判断任务成功率的阈值，如100 */
-  SuccessRatio?: string;
-  /** 高级设置 */
-  AdvanceSettings?: AdvanceSettings;
-  /** 任务参数，长度限制10000个字符 */
-  TaskArgument?: string;
-  /** 数据集列表 */
-  ProgramIdList?: string[];
-}
-
-declare interface CreateTaskResponse {
-  /** 任务ID */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateUnitNamespacesRequest {
   /** 网关实体ID */
   GatewayInstanceId: string;
@@ -4926,30 +4728,6 @@ declare interface DeleteRepositoryRequest {
 
 declare interface DeleteRepositoryResponse {
   /** 删除仓库是否成功 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteServerlessGroupRequest {
-  /** groupId，分组唯一标识 */
-  GroupId: string;
-}
-
-declare interface DeleteServerlessGroupResponse {
-  /** 结果true：成功；false：失败。 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteTaskRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface DeleteTaskResponse {
-  /** true：删除成功，false：删除失败 */
   Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5849,18 +5627,6 @@ declare interface DescribeFileConfigsRequest {
 declare interface DescribeFileConfigsResponse {
   /** 文件配置项列表。 */
   Result?: TsfPageFileConfig;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeFlowLastBatchStateRequest {
-  /** 工作流 ID。前往[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)，在工作流列表第一列和工作流详情页查看工作流ID。 */
-  FlowId: string;
-}
-
-declare interface DescribeFlowLastBatchStateResponse {
-  /** 工作流批次最新状态 */
-  Result?: TaskFlowLastBatchState;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6877,58 +6643,6 @@ declare interface DescribeStatisticsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTaskDetailRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。 */
-  TaskId: string;
-  /** 任务历史ID。查询任务列表 [DescribeTaskRecords](https://cloud.tencent.com/document/api/649/56136) 返回值字段 TaskLogId */
-  TaskLogId?: string;
-}
-
-declare interface DescribeTaskDetailResponse {
-  /** 任务详情 */
-  Result?: TaskRecord;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTaskLastStatusRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface DescribeTaskLastStatusResponse {
-  /** 任务上一次执行状态 */
-  Result?: TaskLastExecuteStatus;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTaskRecordsRequest {
-  /** 翻页偏移量。默认值为0 */
-  Offset?: number;
-  /** 翻页查询单页数量。默认值为 20，最大值为 1000 */
-  Limit?: number;
-  /** 模糊查询关键字，支持任务ID和任务名称。 */
-  SearchWord?: string;
-  /** 任务启用状态。一共2种状态可选，ENABLED：启用，DISABLED：停用 */
-  TaskState?: string;
-  /** 部署组ID。前往[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)点击应用ID进入应用部署列表页面获取部署组ID。 */
-  GroupId?: string;
-  /** 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务 */
-  TaskType?: string;
-  /** 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行 */
-  ExecuteType?: string;
-  /** 任务ID列表。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列查看任务ID。 */
-  Ids?: string[];
-}
-
-declare interface DescribeTaskRecordsResponse {
-  /** 任务记录列表 */
-  Result?: TaskRecordPage;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeUnitApiUseDetailRequest {
   /** 网关部署组ID */
   GatewayDeployGroupId: string;
@@ -7079,30 +6793,6 @@ declare interface DisableLaneRuleResponse {
   RequestId?: string;
 }
 
-declare interface DisableTaskFlowRequest {
-  /** 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。 */
-  FlowId: string;
-}
-
-declare interface DisableTaskFlowResponse {
-  /** true成功，false: 失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DisableTaskRequest {
-  /** 任务ID。[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface DisableTaskResponse {
-  /** true：操作成功，false：操作失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DisableUnitRouteRequest {
   /** 网关实体ID */
   Id: string;
@@ -7179,30 +6869,6 @@ declare interface EnableLaneRuleResponse {
   RequestId?: string;
 }
 
-declare interface EnableTaskFlowRequest {
-  /** 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。 */
-  FlowId: string;
-}
-
-declare interface EnableTaskFlowResponse {
-  /** true成功，false: 失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface EnableTaskRequest {
-  /** 任务ID。[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface EnableTaskResponse {
-  /** true：操作成功，false：操作失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface EnableUnitRouteRequest {
   /** 网关实体ID */
   Id: string;
@@ -7223,30 +6889,6 @@ declare interface EnableUnitRuleRequest {
 declare interface EnableUnitRuleResponse {
   /** 是否成功，成功：true，失败：false。 */
   Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ExecuteTaskFlowRequest {
-  /** 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。 */
-  FlowId?: string;
-}
-
-declare interface ExecuteTaskFlowResponse {
-  /** 操作成功返回工作流批次ID，操作失败返回空字符串。 */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ExecuteTaskRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface ExecuteTaskResponse {
-  /** 操作成功返回任务批次ID，操作失败返回空字符串。 */
-  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7495,50 +7137,6 @@ declare interface ModifyProgramResponse {
   RequestId?: string;
 }
 
-declare interface ModifyTaskRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-  /** 任务名称，长度限制为64字符。在任务管理列表页面第一列或是任务基本信息页查看任务名称。 */
-  TaskName?: string;
-  /** 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务 */
-  TaskType?: string;
-  /** 任务内容，长度限制为 65536 字节 */
-  TaskContent?: string;
-  /** 任务执行方式，枚举值。unicast：随机单节点执行，broadcast：广播执行，shard：分片执行 */
-  ExecuteType?: string;
-  /** 触发规则 */
-  TaskRule?: TaskRule;
-  /** 超时时间，取值大于0，单位：毫秒（ms） */
-  TimeOut?: number;
-  /** 部署组ID。在[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)，点击应用ID进入应用部署页查看部署组ID。 */
-  GroupId?: string;
-  /** 分片数量，取值范围2~1000 */
-  ShardCount?: number;
-  /** 分片参数 */
-  ShardArguments?: ShardArgument[];
-  /** 高级设置 */
-  AdvanceSettings?: AdvanceSettings;
-  /** 判断任务成功的操作符 GT/GTE */
-  SuccessOperator?: string;
-  /** 判断任务成功率的阈值，取值范围：1-100，单位：百分比（%） */
-  SuccessRatio?: number;
-  /** 重试次数，取值范围 0 - 10，单位：次 */
-  RetryCount?: number;
-  /** 重试间隔，取值范围 0-600，单位：秒（s） */
-  RetryInterval?: number;
-  /** 任务参数，长度限制10000个字符 */
-  TaskArgument?: string;
-  /** 数据集列表。 */
-  ProgramIdList?: string[];
-}
-
-declare interface ModifyTaskResponse {
-  /** 更新是否成功。true：操作成功、false：操作失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyUploadInfoRequest {
   /** 应用ID，通过调用DescribeApplications接口[获取应用列表](https://cloud.tencent.com/document/api/649/36090)从而获取应用ID，或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看，调用CreateApplication接口[创建应用](https://cloud.tencent.com/document/product/649/36094)时的返回值 */
   ApplicationId: string;
@@ -7589,60 +7187,6 @@ declare interface ReassociateBusinessLogConfigRequest {
 }
 
 declare interface ReassociateBusinessLogConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RedoTaskBatchRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-  /** 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。 */
-  BatchId: string;
-}
-
-declare interface RedoTaskBatchResponse {
-  /** 批次流水ID */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RedoTaskExecuteRequest {
-  /** 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面第一列点击任务ID进入任务详情，进入执行记录列表页，第一列内容即为任务批次ID。 */
-  BatchId: string;
-  /** 任务执行ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面第一列点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。 */
-  ExecuteId: string;
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface RedoTaskExecuteResponse {
-  /** 成功返回执行批次流水ID。失败返回空字符串。 */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RedoTaskFlowBatchRequest {
-  /** 工作流批次 ID。在[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)页面，点击第一列的工作流ID进入工作流执行记录列表页面，第一列的内容即为工作流批次ID。 */
-  FlowBatchId: string;
-}
-
-declare interface RedoTaskFlowBatchResponse {
-  /** 工作流批次历史 ID。操作失败时不返回该字段，返回错误码。 */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RedoTaskRequest {
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。 */
-  TaskId: string;
-}
-
-declare interface RedoTaskResponse {
-  /** 操作成功任务批次ID。操作失败返回空字符串。 */
-  Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7935,48 +7479,6 @@ declare interface StopGroupResponse {
   RequestId?: string;
 }
 
-declare interface StopTaskBatchRequest {
-  /** 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。 */
-  BatchId: string;
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页面可以查看任务ID。 */
-  TaskId?: string;
-}
-
-declare interface StopTaskBatchResponse {
-  /** 返回 true 或 false。true：操作成功，false：操作失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface StopTaskExecuteRequest {
-  /** 任务执行ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。 */
-  ExecuteId: string;
-  /** 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。 */
-  BatchId?: string;
-  /** 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页面可以查看任务ID。 */
-  TaskId?: string;
-}
-
-declare interface StopTaskExecuteResponse {
-  /** 返回 true 或 false。true：操作成功，false：操作失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface TerminateTaskFlowBatchRequest {
-  /** 工作流批次 ID，在[工作流执行记录](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=taskflow)列表页第一列获取。 */
-  FlowBatchId: string;
-}
-
-declare interface TerminateTaskFlowBatchResponse {
-  /** 是否停止成功，true：停止成功，false：停止失败 */
-  Result?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface TsfApiListResponse {
   /** 数量 */
   TotalCount?: number | null;
@@ -8181,8 +7683,6 @@ declare interface Tsf {
   BindPlugin(data: BindPluginRequest, config?: AxiosRequestConfig): AxiosPromise<BindPluginResponse>;
   /** 启用或禁用API {@link ChangeApiUsableStatusRequest} {@link ChangeApiUsableStatusResponse} */
   ChangeApiUsableStatus(data: ChangeApiUsableStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeApiUsableStatusResponse>;
-  /** @deprecated 续跑任务批次 {@link ContinueRunFailedTaskBatchRequest} {@link ContinueRunFailedTaskBatchResponse} */
-  ContinueRunFailedTaskBatch(data: ContinueRunFailedTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ContinueRunFailedTaskBatchResponse>;
   /** 一键导入API分组 {@link CreateAllGatewayApiAsyncRequest} {@link CreateAllGatewayApiAsyncResponse} */
   CreateAllGatewayApiAsync(data: CreateAllGatewayApiAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllGatewayApiAsyncResponse>;
   /** 创建API分组 {@link CreateApiGroupRequest} {@link CreateApiGroupResponse} */
@@ -8235,10 +7735,6 @@ declare interface Tsf {
   CreatePublicConfigWithDetailResp(data: CreatePublicConfigWithDetailRespRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePublicConfigWithDetailRespResponse>;
   /** 创建仓库 {@link CreateRepositoryRequest} {@link CreateRepositoryResponse} */
   CreateRepository(data: CreateRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRepositoryResponse>;
-  /** @deprecated 创建任务 {@link CreateTaskRequest} {@link CreateTaskResponse} */
-  CreateTask(data: CreateTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskResponse>;
-  /** @deprecated 创建工作流 {@link CreateTaskFlowRequest} {@link CreateTaskFlowResponse} */
-  CreateTaskFlow(data: CreateTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTaskFlowResponse>;
   /** 批量创建单元化命名空间 {@link CreateUnitNamespacesRequest} {@link CreateUnitNamespacesResponse} */
   CreateUnitNamespaces(data: CreateUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUnitNamespacesResponse>;
   /** 创建单元化规则 {@link CreateUnitRuleRequest} {@link CreateUnitRuleResponse} */
@@ -8283,10 +7779,6 @@ declare interface Tsf {
   DeletePublicConfig(data: DeletePublicConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePublicConfigResponse>;
   /** 删除仓库 {@link DeleteRepositoryRequest} {@link DeleteRepositoryResponse} */
   DeleteRepository(data: DeleteRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRepositoryResponse>;
-  /** @deprecated 删除部署组 {@link DeleteServerlessGroupRequest} {@link DeleteServerlessGroupResponse} */
-  DeleteServerlessGroup(data: DeleteServerlessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteServerlessGroupResponse>;
-  /** @deprecated 删除任务 {@link DeleteTaskRequest} {@link DeleteTaskResponse} */
-  DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
   /** 删除单元化命名空间 {@link DeleteUnitNamespacesRequest} {@link DeleteUnitNamespacesResponse} */
   DeleteUnitNamespaces(data: DeleteUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUnitNamespacesResponse>;
   /** 删除单元化规则 {@link DeleteUnitRuleRequest} {@link DeleteUnitRuleResponse} */
@@ -8363,8 +7855,6 @@ declare interface Tsf {
   DescribeFileConfigReleases(data?: DescribeFileConfigReleasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigReleasesResponse>;
   /** 查询文件配置项列表 {@link DescribeFileConfigsRequest} {@link DescribeFileConfigsResponse} */
   DescribeFileConfigs(data?: DescribeFileConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConfigsResponse>;
-  /** @deprecated 查询工作流最近一个批次的执行状态 {@link DescribeFlowLastBatchStateRequest} {@link DescribeFlowLastBatchStateResponse} */
-  DescribeFlowLastBatchState(data: DescribeFlowLastBatchStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowLastBatchStateResponse>;
   /** 查询网关所有分组下Api列表 {@link DescribeGatewayAllGroupApisRequest} {@link DescribeGatewayAllGroupApisResponse} */
   DescribeGatewayAllGroupApis(data: DescribeGatewayAllGroupApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAllGroupApisResponse>;
   /** 查询API分组下的Api列表信息 {@link DescribeGatewayApisRequest} {@link DescribeGatewayApisResponse} */
@@ -8467,12 +7957,6 @@ declare interface Tsf {
   DescribeSimpleNamespaces(data?: DescribeSimpleNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSimpleNamespacesResponse>;
   /** 服务统计 {@link DescribeStatisticsRequest} {@link DescribeStatisticsResponse} */
   DescribeStatistics(data: DescribeStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStatisticsResponse>;
-  /** @deprecated 查询任务详情 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
-  DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
-  /** @deprecated 查看任务最近执行批次状态 {@link DescribeTaskLastStatusRequest} {@link DescribeTaskLastStatusResponse} */
-  DescribeTaskLastStatus(data: DescribeTaskLastStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskLastStatusResponse>;
-  /** @deprecated 查询任务列表 {@link DescribeTaskRecordsRequest} {@link DescribeTaskRecordsResponse} */
-  DescribeTaskRecords(data?: DescribeTaskRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskRecordsResponse>;
   /** 查询单元化网关API监控明细数据 {@link DescribeUnitApiUseDetailRequest} {@link DescribeUnitApiUseDetailResponse} */
   DescribeUnitApiUseDetail(data: DescribeUnitApiUseDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnitApiUseDetailResponse>;
   /** 查询单元化命名空间列表 {@link DescribeUnitNamespacesRequest} {@link DescribeUnitNamespacesResponse} */
@@ -8489,10 +7973,6 @@ declare interface Tsf {
   DescribeUsableUnitNamespaces(data?: DescribeUsableUnitNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsableUnitNamespacesResponse>;
   /** 禁用灰度发布规则 {@link DisableLaneRuleRequest} {@link DisableLaneRuleResponse} */
   DisableLaneRule(data: DisableLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableLaneRuleResponse>;
-  /** @deprecated 停用任务 {@link DisableTaskRequest} {@link DisableTaskResponse} */
-  DisableTask(data: DisableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskResponse>;
-  /** @deprecated 停用工作流 {@link DisableTaskFlowRequest} {@link DisableTaskFlowResponse} */
-  DisableTaskFlow(data: DisableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DisableTaskFlowResponse>;
   /** 禁用单元化路由 {@link DisableUnitRouteRequest} {@link DisableUnitRouteResponse} */
   DisableUnitRoute(data: DisableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DisableUnitRouteResponse>;
   /** 禁用单元化规则 {@link DisableUnitRuleRequest} {@link DisableUnitRuleResponse} */
@@ -8505,18 +7985,10 @@ declare interface Tsf {
   DraftApiGroup(data: DraftApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DraftApiGroupResponse>;
   /** 启用灰度发布规则 {@link EnableLaneRuleRequest} {@link EnableLaneRuleResponse} */
   EnableLaneRule(data: EnableLaneRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableLaneRuleResponse>;
-  /** @deprecated 启用任务 {@link EnableTaskRequest} {@link EnableTaskResponse} */
-  EnableTask(data: EnableTaskRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskResponse>;
-  /** @deprecated 启用工作流 {@link EnableTaskFlowRequest} {@link EnableTaskFlowResponse} */
-  EnableTaskFlow(data: EnableTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTaskFlowResponse>;
   /** 启用单元化路由 {@link EnableUnitRouteRequest} {@link EnableUnitRouteResponse} */
   EnableUnitRoute(data: EnableUnitRouteRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRouteResponse>;
   /** 启用单元化规则 {@link EnableUnitRuleRequest} {@link EnableUnitRuleResponse} */
   EnableUnitRule(data: EnableUnitRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableUnitRuleResponse>;
-  /** @deprecated 手动执行一次任务 {@link ExecuteTaskRequest} {@link ExecuteTaskResponse} */
-  ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
-  /** @deprecated 执行一次工作流 {@link ExecuteTaskFlowRequest} {@link ExecuteTaskFlowResponse} */
-  ExecuteTaskFlow(data?: ExecuteTaskFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskFlowResponse>;
   /** 虚拟机部署组添加实例 {@link ExpandGroupRequest} {@link ExpandGroupResponse} */
   ExpandGroup(data: ExpandGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandGroupResponse>;
   /** 修改应用 {@link ModifyApplicationRequest} {@link ModifyApplicationResponse} */
@@ -8543,22 +8015,12 @@ declare interface Tsf {
   ModifyPathRewrite(data: ModifyPathRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathRewriteResponse>;
   /** 更新数据集 {@link ModifyProgramRequest} {@link ModifyProgramResponse} */
   ModifyProgram(data: ModifyProgramRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProgramResponse>;
-  /** @deprecated 修改任务 {@link ModifyTaskRequest} {@link ModifyTaskResponse} */
-  ModifyTask(data: ModifyTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskResponse>;
   /** 更新上传程序包信息 {@link ModifyUploadInfoRequest} {@link ModifyUploadInfoResponse} */
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
   /** 绑定解绑tcr仓库 {@link OperateApplicationTcrBindingRequest} {@link OperateApplicationTcrBindingResponse} */
   OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
   /** @deprecated 重关联业务日志配置 {@link ReassociateBusinessLogConfigRequest} {@link ReassociateBusinessLogConfigResponse} */
   ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
-  /** @deprecated 重新执行任务 {@link RedoTaskRequest} {@link RedoTaskResponse} */
-  RedoTask(data: RedoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskResponse>;
-  /** @deprecated 重新执行任务批次 {@link RedoTaskBatchRequest} {@link RedoTaskBatchResponse} */
-  RedoTaskBatch(data: RedoTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskBatchResponse>;
-  /** @deprecated 重新执行任务的一次执行 {@link RedoTaskExecuteRequest} {@link RedoTaskExecuteResponse} */
-  RedoTaskExecute(data: RedoTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskExecuteResponse>;
-  /** @deprecated 重新执行工作流批次 {@link RedoTaskFlowBatchRequest} {@link RedoTaskFlowBatchResponse} */
-  RedoTaskFlowBatch(data: RedoTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<RedoTaskFlowBatchResponse>;
   /** 发布Api分组 {@link ReleaseApiGroupRequest} {@link ReleaseApiGroupResponse} */
   ReleaseApiGroup(data: ReleaseApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseApiGroupResponse>;
   /** 发布配置 {@link ReleaseConfigRequest} {@link ReleaseConfigResponse} */
@@ -8595,12 +8057,6 @@ declare interface Tsf {
   StopContainerGroup(data: StopContainerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopContainerGroupResponse>;
   /** 停止虚拟机部署组 {@link StopGroupRequest} {@link StopGroupResponse} */
   StopGroup(data: StopGroupRequest, config?: AxiosRequestConfig): AxiosPromise<StopGroupResponse>;
-  /** @deprecated 停止执行中的任务批次 {@link StopTaskBatchRequest} {@link StopTaskBatchResponse} */
-  StopTaskBatch(data: StopTaskBatchRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskBatchResponse>;
-  /** @deprecated 停止正在执行的任务 {@link StopTaskExecuteRequest} {@link StopTaskExecuteResponse} */
-  StopTaskExecute(data: StopTaskExecuteRequest, config?: AxiosRequestConfig): AxiosPromise<StopTaskExecuteResponse>;
-  /** @deprecated 停止一个工作流批次 {@link TerminateTaskFlowBatchRequest} {@link TerminateTaskFlowBatchResponse} */
-  TerminateTaskFlowBatch(data: TerminateTaskFlowBatchRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTaskFlowBatchResponse>;
   /** API分组批量与网关解绑 {@link UnbindApiGroupRequest} {@link UnbindApiGroupResponse} */
   UnbindApiGroup(data: UnbindApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindApiGroupResponse>;
   /** 更新Api分组 {@link UpdateApiGroupRequest} {@link UpdateApiGroupResponse} */

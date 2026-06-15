@@ -19783,6 +19783,8 @@ declare namespace V20210820 {
     PageNumber?: number;
     /** 每页数目，整型 */
     PageSize?: number;
+    /** 触发ID */
+    TriggerId?: string;
   }
 
   interface DescribeManualTriggerRecordPageResponse {

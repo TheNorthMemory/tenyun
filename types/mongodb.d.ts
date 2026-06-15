@@ -560,6 +560,18 @@ declare interface LogInfo {
   LogId?: string | null;
 }
 
+/** 日志投递CLS配置 */
+declare interface LogToCLSConfig {
+  /** CLS服务所在地域 */
+  CLSRegion?: string;
+  /** 投递状态打开或者关闭 */
+  Status?: string;
+  /** CLS日志集ID */
+  LogSetId?: string;
+  /** 日志主题ID */
+  LogTopicId?: string;
+}
+
 /** 修改mongoDB实例，请求参数 */
 declare interface ModifyMongoDBParamType {
   /** 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。 */
@@ -945,12 +957,14 @@ declare interface CreateAuditLogFileResponse {
 }
 
 declare interface CreateBackupDBInstanceRequest {
-  /** 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 实例 ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 设置备份方式。- 0：逻辑备份。- 1：物理备份。- 3：快照备份。**说明**:1. 通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。2. 实例开通存储加密，则备份方式不能为物理备份。 */
+  /** 设置备份方式。0：逻辑备份。1：物理备份。3：快照备份。说明:通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。实例开通存储加密，则备份方式不能为物理备份。 */
   BackupMethod: number;
   /** 备份备注信息。 */
   BackupRemark?: string;
+  /** 保存天数，-2-永久保留（不定期保留），-1-跟随长期保留时长，0-按配置天数，1~7300-自定义天数（最长20年）单位：天 */
+  BackupRetentionDays?: number;
 }
 
 declare interface CreateBackupDBInstanceResponse {
@@ -1164,6 +1178,26 @@ declare interface CreateLogDownloadTaskRequest {
 declare interface CreateLogDownloadTaskResponse {
   /** 任务状态 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSlowLogPatternDownloadTaskRequest {
+  /** 实例 ID。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 采集慢日志开始时间 */
+  StartTime: string;
+  /** 采集慢日志结束时间 */
+  EndTime: string;
+  /** 慢日志采集阈值 */
+  ThresholdMs?: number;
+  /** 慢日志类型 */
+  Commands?: string[];
+}
+
+declare interface CreateSlowLogPatternDownloadTaskResponse {
+  /** 下载任务状态 */
+  Status?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1496,6 +1530,24 @@ declare interface DescribeDBInstanceDealResponse {
   Action?: string;
   /** 当前订单的实例 ID。 */
   InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBInstanceLogToCLSRequest {
+  /** 指定实例ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** CLS服务所在地域 */
+  CLSRegion?: string;
+}
+
+declare interface DescribeDBInstanceLogToCLSResponse {
+  /** 实例错误日志投递配置 */
+  ErrorLog?: LogToCLSConfig;
+  /** 实例慢日志投递配置 */
+  SlowLog?: LogToCLSConfig;
+  /** 实例操作日志投递配置 */
+  OperationLog?: LogToCLSConfig;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1982,6 +2034,14 @@ declare interface FlushInstanceRouterConfigResponse {
   RequestId?: string;
 }
 
+declare interface IncreaseDBInstanceConnectionLimitRequest {
+}
+
+declare interface IncreaseDBInstanceConnectionLimitResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InquirePriceCreateDBInstancesRequest {
   /** 实例所属区域及可用区信息。具体信息，请参见地域和可用区。 */
   Zone: string;
@@ -2138,6 +2198,30 @@ declare interface ModifyBackupExpireTimeRequest {
 declare interface ModifyBackupExpireTimeResponse {
   /** 失败的备份ID */
   FailedBackups?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBInstanceLogToCLSRequest {
+  /** 指定实例ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 日志类型。MongoDB-ErrorLog：错误日志，MongoDB-SlowLog：慢日志，MongoDB-OperationLog：操作日志 */
+  LogType: string;
+  /** 投递状态。ON：开启，OFF：关闭。 */
+  Status: string;
+  /** 是否需要创建日志集。默认为 false。 */
+  CreateLogset?: boolean;
+  /** 需要创建日志集时为日志集名称；选择已有日志集时，为日志集 ID。默认为空。 说明：1. 当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。2. 当参数 CreateLogset 的值为 true 时，Logset 填日志集命名，例如 my_test，否则需要填日志集 id，例如 6adsaw-****。 */
+  Logset?: string;
+  /** 是否需要创建日志主题。默认为 false。 */
+  CreateLogTopic?: boolean;
+  /** 需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题 ID。默认为空。 说明：1. 当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。2. 2. 当参数 CreateLogTopic 的值为 true 时，LogTopic 填日志主题命名，例如 my_test，否则需要填日志主题id，例如 6adsaw-****。 */
+  LogTopic?: string;
+  /** CLS 所在地域，不填则默认为 Region 的参数值。 */
+  CLSRegion?: string;
+}
+
+declare interface ModifyDBInstanceLogToCLSResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2991,6 +3075,8 @@ declare interface Mongodb {
   CreateDBInstanceParamTpl(data: CreateDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceParamTplResponse>;
   /** 创建日志下载任务 {@link CreateLogDownloadTaskRequest} {@link CreateLogDownloadTaskResponse} */
   CreateLogDownloadTask(data: CreateLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogDownloadTaskResponse>;
+  /** 创建慢日志统计下载任务 {@link CreateSlowLogPatternDownloadTaskRequest} {@link CreateSlowLogPatternDownloadTaskResponse} */
+  CreateSlowLogPatternDownloadTask(data: CreateSlowLogPatternDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSlowLogPatternDownloadTaskResponse>;
   /** 删除账号 {@link DeleteAccountUserRequest} {@link DeleteAccountUserResponse} */
   DeleteAccountUser(data: DeleteAccountUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountUserResponse>;
   /** 删除审计日志文件 {@link DeleteAuditLogFileRequest} {@link DeleteAuditLogFileResponse} */
@@ -3023,6 +3109,8 @@ declare interface Mongodb {
   DescribeDBBackups(data: DescribeDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBBackupsResponse>;
   /** 获取数据库实例订单详情 {@link DescribeDBInstanceDealRequest} {@link DescribeDBInstanceDealResponse} */
   DescribeDBInstanceDeal(data: DescribeDBInstanceDealRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDealResponse>;
+  /** 查询实例日志投递CLS的配置 {@link DescribeDBInstanceLogToCLSRequest} {@link DescribeDBInstanceLogToCLSResponse} */
+  DescribeDBInstanceLogToCLS(data: DescribeDBInstanceLogToCLSRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceLogToCLSResponse>;
   /** 查询实例的库表 {@link DescribeDBInstanceNamespaceRequest} {@link DescribeDBInstanceNamespaceResponse} */
   DescribeDBInstanceNamespace(data: DescribeDBInstanceNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceNamespaceResponse>;
   /** 查询节点属性 {@link DescribeDBInstanceNodePropertyRequest} {@link DescribeDBInstanceNodePropertyResponse} */
@@ -3075,6 +3163,8 @@ declare interface Mongodb {
   FlashBackDBInstance(data: FlashBackDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<FlashBackDBInstanceResponse>;
   /** 刷新路由配置 {@link FlushInstanceRouterConfigRequest} {@link FlushInstanceRouterConfigResponse} */
   FlushInstanceRouterConfig(data: FlushInstanceRouterConfigRequest, config?: AxiosRequestConfig): AxiosPromise<FlushInstanceRouterConfigResponse>;
+  /** 提升实例最大连接数 {@link IncreaseDBInstanceConnectionLimitRequest} {@link IncreaseDBInstanceConnectionLimitResponse} */
+  IncreaseDBInstanceConnectionLimit(data?: IncreaseDBInstanceConnectionLimitRequest, config?: AxiosRequestConfig): AxiosPromise<IncreaseDBInstanceConnectionLimitResponse>;
   /** 创建实例询价 {@link InquirePriceCreateDBInstancesRequest} {@link InquirePriceCreateDBInstancesResponse} */
   InquirePriceCreateDBInstances(data: InquirePriceCreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateDBInstancesResponse>;
   /** 变更配置询价 {@link InquirePriceModifyDBInstanceSpecRequest} {@link InquirePriceModifyDBInstanceSpecResponse} */
@@ -3091,6 +3181,8 @@ declare interface Mongodb {
   ModifyAuditService(data: ModifyAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditServiceResponse>;
   /** 修改备份过期时间 {@link ModifyBackupExpireTimeRequest} {@link ModifyBackupExpireTimeResponse} */
   ModifyBackupExpireTime(data: ModifyBackupExpireTimeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupExpireTimeResponse>;
+  /** 开启或关闭日志投递CLS {@link ModifyDBInstanceLogToCLSRequest} {@link ModifyDBInstanceLogToCLSResponse} */
+  ModifyDBInstanceLogToCLS(data: ModifyDBInstanceLogToCLSRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceLogToCLSResponse>;
   /** 修改云数据库实例网络信息 {@link ModifyDBInstanceNetworkAddressRequest} {@link ModifyDBInstanceNetworkAddressResponse} */
   ModifyDBInstanceNetworkAddress(data: ModifyDBInstanceNetworkAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceNetworkAddressResponse>;
   /** 修改数据库参数模板 {@link ModifyDBInstanceParamTplRequest} {@link ModifyDBInstanceParamTplResponse} */

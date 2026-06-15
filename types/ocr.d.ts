@@ -4686,40 +4686,6 @@ declare interface RecognizeGeneralInvoiceResponse {
   RequestId?: string;
 }
 
-declare interface RecognizeHealthCodeOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 需要识别的健康码类型列表，为空或不填表示默认为自动识别。0:自动识别 */
-  Type?: number;
-}
-
-declare interface RecognizeHealthCodeOCRResponse {
-  /** 持码人姓名，如：王*（允许返回空值） */
-  Name?: string;
-  /** 持码人身份证号，如：11**************01（允许返回空值） */
-  IDNumber?: string;
-  /** 健康码更新时间（允许返回空值） */
-  Time?: string;
-  /** 健康码颜色：绿色、黄色、红色（允许返回空值） */
-  Color?: string;
-  /** 核酸检测间隔时长（允许返回空值） */
-  TestingInterval?: string;
-  /** 核酸检测结果：阴性、阳性、暂无核酸检测记录（允许返回空值） */
-  TestingResult?: string;
-  /** 核酸检测时间（允许返回空值） */
-  TestingTime?: string;
-  /** 疫苗接种信息，返回接种针数或接种情况（允许返回空值） */
-  Vaccination?: string;
-  /** 场所名称（允许返回空值） */
-  SpotName?: string;
-  /** 疫苗接种时间 */
-  VaccinationTime?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RecognizeMedicalInvoiceOCRRequest {
   /** 图片的Base64 值。支持的文件格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载文件经Base64编码后不超过 10M。文件下载时间不超过 3 秒。输入参数 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4862,28 +4828,6 @@ declare interface RecognizeThaiIDCardOCRResponse {
   AdvancedInfo?: string;
   /** 卡证正面图片中，证件主体的数量（仅请求曼谷地域[ap-bangkok]返回） */
   CardCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface RecognizeTravelCardOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface RecognizeTravelCardOCRResponse {
-  /** 行程卡更新时间，格式为：XXXX.XX.XX XX:XX:XX */
-  Time?: string;
-  /** 行程卡颜色：绿色、黄色、红色 */
-  Color?: string;
-  /** 7天内到达或途经的城市（自2022年7月8日起，通信行程卡查询结果的覆盖时间范围由“14天”调整为“7天”） */
-  ReachedCity?: string[];
-  /** 7天内到达或途径存在中高风险地区的城市（自2022年6月29日起，通信行程卡取消“星号”标记，改字段将返回空值） */
-  RiskArea?: string[];
-  /** 电话号码 */
-  Telephone?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5366,6 +5310,28 @@ declare interface VehicleRegCertOCRResponse {
   RequestId?: string;
 }
 
+declare interface VerifyBizLicenseEnterprise3Request {
+  /** 统一社会信用代码 */
+  CreditCode: string;
+  /** 企业名称 */
+  EntName: string;
+  /** 法人代表 */
+  LrName?: string;
+  /** 核验类型 枚举值：ENT_2META： 企业名称 、统一社会信用代码ENT_3META： 企业名称 、统一社会信用代码 、法人代表名称 */
+  VerifyType?: string;
+}
+
+declare interface VerifyBizLicenseEnterprise3Response {
+  /** 0 成功，计费1 系统异常，不计费2 查询无结果，不计费 */
+  StatusCode?: number;
+  /** 验证结果1：三要素完全匹配0：三要素不完全匹配仅StatusCode为0时返回 */
+  VerifyResult?: number;
+  /** 企业状态枚举值：1： 开业（在营）/ 在营2： 迁出 / 非在营3： 注销4： 吊销5： 撤销6： 停业7： 撤销登记0： 其他/： 无法查询企业状态 当VerifyType参数为ENT_2META时，可返回： 0-7, / 当VerifyType参数为ENT_3META时，可返回 1，2 */
+  OperatingStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyBizLicenseEnterprise4Request {
   /** 统一社会信用代码 */
   CreditCode: string;
@@ -5621,8 +5587,6 @@ declare interface Ocr {
   RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;
   /** 通用票据识别（高级版） {@link RecognizeGeneralInvoiceRequest} {@link RecognizeGeneralInvoiceResponse} */
   RecognizeGeneralInvoice(data?: RecognizeGeneralInvoiceRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralInvoiceResponse>;
-  /** @deprecated 健康码识别 {@link RecognizeHealthCodeOCRRequest} {@link RecognizeHealthCodeOCRResponse} */
-  RecognizeHealthCodeOCR(data?: RecognizeHealthCodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeHealthCodeOCRResponse>;
   /** 医疗票据识别 {@link RecognizeMedicalInvoiceOCRRequest} {@link RecognizeMedicalInvoiceOCRResponse} */
   RecognizeMedicalInvoiceOCR(data?: RecognizeMedicalInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeMedicalInvoiceOCRResponse>;
   /** 商户门头照识别 {@link RecognizeStoreNameRequest} {@link RecognizeStoreNameResponse} */
@@ -5633,8 +5597,6 @@ declare interface Ocr {
   RecognizeTableOCR(data?: RecognizeTableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTableOCRResponse>;
   /** 泰国身份证识别 {@link RecognizeThaiIDCardOCRRequest} {@link RecognizeThaiIDCardOCRResponse} */
   RecognizeThaiIDCardOCR(data?: RecognizeThaiIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeThaiIDCardOCRResponse>;
-  /** @deprecated 通信行程卡识别 {@link RecognizeTravelCardOCRRequest} {@link RecognizeTravelCardOCRResponse} */
-  RecognizeTravelCardOCR(data?: RecognizeTravelCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeTravelCardOCRResponse>;
   /** 有效身份证件识别（鉴伪版） {@link RecognizeValidIDCardOCRRequest} {@link RecognizeValidIDCardOCRResponse} */
   RecognizeValidIDCardOCR(data?: RecognizeValidIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeValidIDCardOCRResponse>;
   /** 户口本识别 {@link ResidenceBookletOCRRequest} {@link ResidenceBookletOCRResponse} */
@@ -5667,6 +5629,8 @@ declare interface Ocr {
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
   /** 机动车登记证书识别 {@link VehicleRegCertOCRRequest} {@link VehicleRegCertOCRResponse} */
   VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
+  /** 营业执照核验（企业二|三要素） {@link VerifyBizLicenseEnterprise3Request} {@link VerifyBizLicenseEnterprise3Response} */
+  VerifyBizLicenseEnterprise3(data: VerifyBizLicenseEnterprise3Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise3Response>;
   /** 营业执照核验（企业四要素） {@link VerifyBizLicenseEnterprise4Request} {@link VerifyBizLicenseEnterprise4Response} */
   VerifyBizLicenseEnterprise4(data: VerifyBizLicenseEnterprise4Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise4Response>;
   /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */

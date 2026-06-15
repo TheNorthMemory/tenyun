@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 追加文件 */
+declare interface AppendDocument {
+  /** 文件名称 */
+  FileName: string;
+  /** 文件id */
+  FileId: string;
+  /** 文件url */
+  FileUrl: string;
+  /** 文件大小 */
+  FileSize: number;
+}
+
 /** 文件分片 */
 declare interface Chunk {
   /** 切片ID */
@@ -88,6 +100,18 @@ declare interface FileInfo {
   WebUrl?: string;
   /** 文件能力标识列表 */
   Capabilities?: string[];
+}
+
+/** 文件任务状态 */
+declare interface FileTaskStatus {
+  /** 文件id */
+  FileId?: string;
+  /** 状态枚举值：0： 处理中1： 可用-1： 错误 */
+  Status?: number;
+  /** 是否已拉取过状态枚举值：0： 未被拉取过状态1： 已被拉取过状态 */
+  IsTerminated?: number;
+  /** 错误信息，状态-1时不为空 */
+  ErrorMsg?: string;
 }
 
 /** 知识库信息 */
@@ -334,6 +358,22 @@ declare interface AddSceneRequest {
 declare interface AddSceneResponse {
   /** 场景id */
   SceneId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AppendKnowledgeTaskRequest {
+  /** 实例id */
+  InstanceId?: string;
+  /** 知识库id */
+  KnowledgeBaseId?: string;
+  /** 文件id */
+  FileId?: string;
+  /** 追加的文档列表 */
+  Documents?: AppendDocument[];
+}
+
+declare interface AppendKnowledgeTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -596,6 +636,22 @@ declare interface QueryChunkListResponse {
   RequestId?: string;
 }
 
+declare interface QueryKnowledgeTaskRequest {
+  /** 实例id */
+  InstanceId?: string;
+  /** 知识库id */
+  KnowledgeBaseId?: string;
+  /** 文件id列表 */
+  FileIds?: string[];
+}
+
+declare interface QueryKnowledgeTaskResponse {
+  /** 文档任务详情对象 */
+  FileList?: FileTaskStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QuerySceneListRequest {
   /** 实例ID */
   InstanceId?: string;
@@ -683,6 +739,8 @@ declare interface Dataagent {
   AddChunk(data: AddChunkRequest, config?: AxiosRequestConfig): AxiosPromise<AddChunkResponse>;
   /** 新增场景 {@link AddSceneRequest} {@link AddSceneResponse} */
   AddScene(data?: AddSceneRequest, config?: AxiosRequestConfig): AxiosPromise<AddSceneResponse>;
+  /** 文件追加 {@link AppendKnowledgeTaskRequest} {@link AppendKnowledgeTaskResponse} */
+  AppendKnowledgeTask(data?: AppendKnowledgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<AppendKnowledgeTaskResponse>;
   /** DataAgent问答 {@link ChatAIRequest} {@link ChatAIResponse} */
   ChatAI(data?: ChatAIRequest, config?: AxiosRequestConfig): AxiosPromise<ChatAIResponse>;
   /** 生成DataAgent SessionID {@link CreateDataAgentSessionRequest} {@link CreateDataAgentSessionResponse} */
@@ -713,6 +771,8 @@ declare interface Dataagent {
   ModifyUserAuthority(data: ModifyUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserAuthorityResponse>;
   /** 文档切片查询 {@link QueryChunkListRequest} {@link QueryChunkListResponse} */
   QueryChunkList(data?: QueryChunkListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChunkListResponse>;
+  /** 查询知识库任务 {@link QueryKnowledgeTaskRequest} {@link QueryKnowledgeTaskResponse} */
+  QueryKnowledgeTask(data?: QueryKnowledgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<QueryKnowledgeTaskResponse>;
   /** 查询场景列表 {@link QuerySceneListRequest} {@link QuerySceneListResponse} */
   QuerySceneList(data?: QuerySceneListRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySceneListResponse>;
   /** 查询对象的用户权限信息 {@link QueryUserAuthorityRequest} {@link QueryUserAuthorityResponse} */

@@ -64,6 +64,60 @@ declare interface CreateApiKeysResultItem {
   ApiKeyId?: string;
 }
 
+/** 删除术语条目项 */
+declare interface DeleteGlossaryEntryInput {
+  /** 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。 */
+  EntryId: string;
+}
+
+/** 新建术语条目项 */
+declare interface GlossaryEntryInput {
+  /** 源语言术语。最大 1000 字符。 */
+  SourceTerm: string;
+  /** 目标语言术语。最大 1000 字符。 */
+  TargetTerm: string;
+}
+
+/** 术语条目详情 */
+declare interface GlossaryEntryItem {
+  /** 术语条目 ID。 */
+  EntryId?: string;
+  /** 源语言术语。 */
+  SourceTerm?: string;
+  /** 目标语言术语。 */
+  TargetTerm?: string;
+  /** 更新时间。Unix 时间戳（毫秒）。 */
+  UpdatedAt?: number;
+}
+
+/** 术语库详情 */
+declare interface GlossaryItem {
+  /** 术语库 ID。 */
+  GlossaryId?: string;
+  /** 术语库名称。 */
+  Name?: string;
+  /** 术语库描述。 */
+  Description?: string;
+  /** 源语言代码。 */
+  Source?: string;
+  /** 目标语言代码。 */
+  Target?: string;
+  /** 创建时间。 */
+  CreatedTime?: string;
+  /** 更新时间。 */
+  UpdatedTime?: string;
+}
+
+/** 修改术语条目项 */
+declare interface ModifyGlossaryEntryInput {
+  /** 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。 */
+  EntryId: string;
+  /** 源语言术语。最大 1000 字符。不传则保持不变。 */
+  SourceTerm?: string;
+  /** 目标语言术语。最大 1000 字符。不传则保持不变。 */
+  TargetTerm?: string;
+}
+
 /** 过滤条件 */
 declare interface RequestFilter {
   /** 过滤字段名称。 */
@@ -324,6 +378,42 @@ declare interface UsageStats {
   OutputTotalToken?: number;
 }
 
+declare interface CreateGlossaryEntriesRequest {
+  /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
+  GlossaryId: string;
+  /** 术语条目列表。单次最多 100 个。 */
+  Entries: GlossaryEntryInput[];
+}
+
+declare interface CreateGlossaryEntriesResponse {
+  /** 创建成功的术语条目列表。 */
+  Entries?: GlossaryEntryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGlossaryRequest {
+  /** 术语库名称。最大 50 字符。 */
+  Name: string;
+  /** 源语言代码。最大 16 字符。例如：zh（中文）、en（英文）。 */
+  Source: string;
+  /** 目标语言代码。最大 16 字符。例如：zh（中文）、en（英文）。 */
+  Target: string;
+  /** 术语库描述。最大 255 字符。 */
+  Description?: string;
+}
+
+declare interface CreateGlossaryResponse {
+  /** 术语库 ID。 */
+  GlossaryId?: string;
+  /** 术语库名称。 */
+  Name?: string;
+  /** 创建时间。Unix 时间戳（毫秒）。 */
+  CreatedAt?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTokenPlanApiKeysRequest {
   /** 套餐 ID。可通过DescribeTokenPlanList接口获取。 */
   TeamId: string;
@@ -366,6 +456,28 @@ declare interface CreateTokenPlanTeamOrderAndBuyRequest {
 declare interface CreateTokenPlanTeamOrderAndBuyResponse {
   /** 腾讯云订单 ID。用于关联一次购买操作下的所有子订单。 */
   BigOrderId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlossaryEntriesRequest {
+  /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
+  GlossaryId: string;
+  /** 待删除的术语条目列表。单次最多 200 个。 */
+  Entries: DeleteGlossaryEntryInput[];
+}
+
+declare interface DeleteGlossaryEntriesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlossaryRequest {
+  /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
+  GlossaryId: string;
+}
+
+declare interface DeleteGlossaryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -444,6 +556,52 @@ declare interface DescribeApiKeyResponse {
   IpWhitelist?: string[];
   /** 当Platform为maas时该字段为空 */
   Creator?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGlossariesRequest {
+  /** 返回数量。默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 偏移量。默认为 0。 */
+  Offset?: number;
+  /** 过滤条件列表。支持的过滤字段：GlossaryId（术语库 ID）、Name（名称）、Source（源语言代码）、Target（目标语言代码）。 */
+  Filters?: RequestFilter[];
+  /** 排序条件列表。支持的排序字段：CreatedTime（创建时间）、UpdatedTime（更新时间）。 */
+  Sorts?: RequestSort[];
+}
+
+declare interface DescribeGlossariesResponse {
+  /** 术语库列表。 */
+  Items?: GlossaryItem[];
+  /** 符合条件的术语库总数。 */
+  TotalCount?: number;
+  /** 当前页码。 */
+  Current?: number;
+  /** 每页大小。 */
+  PageSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGlossaryEntriesRequest {
+  /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
+  GlossaryId: string;
+  /** 页码。默认为 1。 */
+  Page?: number;
+  /** 每页大小。默认为 20，最大值为 200。 */
+  PageSize?: number;
+}
+
+declare interface DescribeGlossaryEntriesResponse {
+  /** 术语条目列表。 */
+  Entries?: GlossaryEntryItem[];
+  /** 符合条件的术语条目总数。 */
+  Total?: number;
+  /** 当前页码。 */
+  Page?: number;
+  /** 每页大小。 */
+  PageSize?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -654,6 +812,20 @@ declare interface DescribeUsageRankListResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGlossaryEntriesRequest {
+  /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
+  GlossaryId: string;
+  /** 术语条目列表。单次最多 200 个。 */
+  Entries: ModifyGlossaryEntryInput[];
+}
+
+declare interface ModifyGlossaryEntriesResponse {
+  /** 修改后的术语条目列表。 */
+  Entries?: GlossaryEntryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTokenPlanApiKeyRequest {
   /** API Key ID。 */
   ApiKeyId: string;
@@ -719,16 +891,28 @@ declare interface UpgradeTokenPlanTeamOrderResponse {
 /** {@link Tokenhub TokenHub} */
 declare interface Tokenhub {
   (): Versions;
+  /** 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
+  CreateGlossary(data: CreateGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryResponse>;
+  /** 批量创建术语条目 {@link CreateGlossaryEntriesRequest} {@link CreateGlossaryEntriesResponse} */
+  CreateGlossaryEntries(data: CreateGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryEntriesResponse>;
   /** 批量创建 Token Plan 套餐的 API Key {@link CreateTokenPlanApiKeysRequest} {@link CreateTokenPlanApiKeysResponse} */
   CreateTokenPlanApiKeys(data: CreateTokenPlanApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanApiKeysResponse>;
   /** 创建 Token Plan 套餐 {@link CreateTokenPlanTeamOrderAndBuyRequest} {@link CreateTokenPlanTeamOrderAndBuyResponse} */
   CreateTokenPlanTeamOrderAndBuy(data: CreateTokenPlanTeamOrderAndBuyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanTeamOrderAndBuyResponse>;
+  /** 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
+  DeleteGlossary(data: DeleteGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryResponse>;
+  /** 批量删除术语条目 {@link DeleteGlossaryEntriesRequest} {@link DeleteGlossaryEntriesResponse} */
+  DeleteGlossaryEntries(data: DeleteGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryEntriesResponse>;
   /** 删除 Token Plan 套餐的 API Key {@link DeleteTokenPlanApiKeyRequest} {@link DeleteTokenPlanApiKeyResponse} */
   DeleteTokenPlanApiKey(data: DeleteTokenPlanApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTokenPlanApiKeyResponse>;
   /** 查询 API 密钥详情 {@link DescribeApiKeyRequest} {@link DescribeApiKeyResponse} */
   DescribeApiKey(data: DescribeApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyResponse>;
   /** 查询 API 密钥列表 {@link DescribeApiKeyListRequest} {@link DescribeApiKeyListResponse} */
   DescribeApiKeyList(data?: DescribeApiKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyListResponse>;
+  /** 查询术语库列表 {@link DescribeGlossariesRequest} {@link DescribeGlossariesResponse} */
+  DescribeGlossaries(data?: DescribeGlossariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlossariesResponse>;
+  /** 查询术语条目列表 {@link DescribeGlossaryEntriesRequest} {@link DescribeGlossaryEntriesResponse} */
+  DescribeGlossaryEntries(data: DescribeGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlossaryEntriesResponse>;
   /** 查询模型列表 {@link DescribeModelListRequest} {@link DescribeModelListResponse} */
   DescribeModelList(data?: DescribeModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelListResponse>;
   /** 查询 Token Plan 套餐详情 {@link DescribeTokenPlanRequest} {@link DescribeTokenPlanResponse} */
@@ -745,6 +929,8 @@ declare interface Tokenhub {
   DescribeTokenPlanList(data?: DescribeTokenPlanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanListResponse>;
   /** 查询用量排行列表 {@link DescribeUsageRankListRequest} {@link DescribeUsageRankListResponse} */
   DescribeUsageRankList(data: DescribeUsageRankListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageRankListResponse>;
+  /** 批量修改术语条目 {@link ModifyGlossaryEntriesRequest} {@link ModifyGlossaryEntriesResponse} */
+  ModifyGlossaryEntries(data: ModifyGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlossaryEntriesResponse>;
   /** 修改 Token Plan 套餐的 API Key 配置 {@link ModifyTokenPlanApiKeyRequest} {@link ModifyTokenPlanApiKeyResponse} */
   ModifyTokenPlanApiKey(data: ModifyTokenPlanApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTokenPlanApiKeyResponse>;
   /** 重置 Token Plan 套餐的 API Key 密钥 {@link ModifyTokenPlanApiKeySecretRequest} {@link ModifyTokenPlanApiKeySecretResponse} */
