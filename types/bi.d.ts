@@ -2406,6 +2406,32 @@ declare interface ModifyResourceUserGroupResponse {
   RequestId?: string;
 }
 
+declare interface ModifyResourceUserRequest {
+  /** 项目Id */
+  ProjectId?: number;
+  /** 用户id */
+  UserId?: string;
+  /** 资源 */
+  Resource?: UserResourceDTO;
+  /** 实体类 */
+  EntityIds?: number[];
+  /** 资源类型 */
+  ResourceType?: string;
+}
+
+declare interface ModifyResourceUserResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserDetailInfoRequest {
   /** 用户ID */
   UserId?: string;
@@ -2649,6 +2675,8 @@ declare interface Bi {
   ModifyDatasourceCloud(data: ModifyDatasourceCloudRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatasourceCloudResponse>;
   /** 修改项目 {@link ModifyProjectRequest} {@link ModifyProjectResponse} */
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
+  /** 更新用户权限 {@link ModifyResourceUserRequest} {@link ModifyResourceUserResponse} */
+  ModifyResourceUser(data?: ModifyResourceUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceUserResponse>;
   /** 更新用户组权限 {@link ModifyResourceUserGroupRequest} {@link ModifyResourceUserGroupResponse} */
   ModifyResourceUserGroup(data?: ModifyResourceUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceUserGroupResponse>;
   /** 按资源 - 更新用户组权限 {@link ModifyResourceUserGroupResourceRequest} {@link ModifyResourceUserGroupResourceResponse} */

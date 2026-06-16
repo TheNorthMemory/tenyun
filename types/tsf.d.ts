@@ -98,6 +98,8 @@ declare interface ApiDetailInfo {
   PathMappingUnsupported?: boolean;
   /** 禁用短路径访问开关原因 */
   PathMappingUnsupportedMsg?: string;
+  /** API在线状态枚举值：ONLINE： 在线OFFLINE： 离线UNKNOWN： 未知DELETED： 查询服务治理API不存在 */
+  ApiOnlineStatus?: string | null;
 }
 
 /** API分组信息 */
@@ -158,6 +160,14 @@ declare interface ApiInfo {
   Host?: string;
   /** api描述信息 */
   Description?: string;
+}
+
+/** API 参数 */
+declare interface ApiParam {
+  /** 接口Method */
+  Method: string;
+  /** 接口Path */
+  Path: string;
 }
 
 /** 微服务网关API限流规则 */
@@ -1340,15 +1350,15 @@ declare interface Env {
 declare interface ExclusiveInstance {
   /** 配置中心类型[注册中心Registration、配置中心Configuration] */
   CenterType?: string;
-  /** 实例id，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
+  /** 实例id，通过北极星控制台获取 */
   InstanceId?: string;
   /** 实例类型，例如北极星Polaris */
   InstanceType?: string;
   /** 实例名称 */
   InstanceName?: string;
-  /** 实例地域id，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
+  /** 实例地域id，通过北极星控制台获取 */
   RegionId?: string;
-  /** 实例命名空间ID，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取 */
+  /** 实例命名空间ID，通过北极星控制台获取 */
   InstanceNamespaceId?: string;
   /** 部署组Id */
   GroupId?: string | null;
@@ -1356,6 +1366,8 @@ declare interface ExclusiveInstance {
   CreateTime?: number | null;
   /** 更新时间 */
   UpdateTime?: number | null;
+  /** 文档ID */
+  ApplicationId?: string;
 }
 
 /** 容器 env 的 FieldRef */
@@ -1528,6 +1540,8 @@ declare interface GatewayPlugin {
   DeleteDisabled?: boolean;
   /** 禁用原因 */
   DeleteDisabledReason?: string;
+  /** 是否不可绑定枚举值：true： 禁止绑定false： 允许绑定 */
+  BindDisabled?: boolean;
 }
 
 /** 微服务网关插件绑定对象 */
@@ -2362,6 +2376,10 @@ declare interface MsApiArray {
   Description?: string | null;
   /** API状态 0:离线 1:在线 */
   Status?: number | null;
+  /** API ID */
+  ApiId?: string;
+  /** API来源枚举值：FROM_CONSUL： 服务注册FROM_MANUAL： 手动录入 */
+  SrcTypeName?: string;
 }
 
 /** 微服务实例信息 */
@@ -3156,6 +3174,8 @@ declare interface TsfPageBusinessLogV2 {
   Status?: string;
   /** 查询es时，使用searchAfter返回的游标 */
   SearchAfter?: string[];
+  /** 是否压缩 */
+  Compressed?: boolean;
 }
 
 /** Tsf分页集群对象 */
@@ -3532,6 +3552,8 @@ declare interface VmGroup {
   RepositoryName?: string;
   /** 仓库类型 */
   RepositoryType?: string;
+  /** 是否自动重启 */
+  LivenessAutoRestart?: boolean;
 }
 
 /** 虚拟机部署组其他字段 */
@@ -4270,12 +4292,20 @@ declare interface CreateLaneRuleResponse {
 }
 
 declare interface CreateMicroserviceRequest {
-  /** 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。 */
+  /** 命名空间ID。该参数可以通过调用 DescribeSimpleNamespaces 的返回值中的 NamespaceId 字段来获取或通过登录控制台查看；也可以调用CreateNamespace创建新的命名空间。 */
   NamespaceId: string;
-  /** 微服务名称。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceName 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。 */
+  /** 微服务名称。该参数可以通过调用 DescribeMicroservices 的返回值中的 MicroserviceName 字段来获取或通过登录控制台查看；也可以调用CreateMicroserviceWithDetailResp创建新的微服务。 */
   MicroserviceName: string;
   /** 微服务备注信息，最多支持200个字符。 */
   MicroserviceDesc?: string;
+  /** 服务类型，默认SDK枚举值：SDK： sdk服务MESH_EXTERNAL： mesh外部服务 */
+  ServiceType?: string;
+  /** 域名+端口，或者是纯域名方式，其他的不允许配置，不支持 IP */
+  ServiceUrl?: string;
+  /** 协议类型 */
+  Protocol?: string;
+  /** 服务发现方式枚举值：DNS： DNS方式 */
+  ServiceDiscovery?: string;
 }
 
 declare interface CreateMicroserviceResponse {
@@ -4286,12 +4316,20 @@ declare interface CreateMicroserviceResponse {
 }
 
 declare interface CreateMicroserviceWithDetailRespRequest {
-  /** 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。 */
+  /** 命名空间ID。该参数可以通过调用 DescribeSimpleNamespaces 的返回值中的 NamespaceId 字段来获取或通过登录控制台查看；也可以调用CreateNamespace创建新的命名空间。 */
   NamespaceId: string;
   /** 微服务名称，最多支持128个字符。 */
   MicroserviceName: string;
   /** 微服务描述信息，最多支持200个字符。 */
   MicroserviceDesc?: string;
+  /** 服务类型，默认SDK枚举值：SDK： sdk服务MESH_EXTERNAL： mesh外部服务 */
+  ServiceType?: string;
+  /** 域名+端口，或者是纯域名方式，其他的不允许配置，不支持 IP */
+  ServiceUrl?: string;
+  /** 协议类型 */
+  Protocol?: string;
+  /** 服务发现方式枚举值：DNS： DNS方式 */
+  ServiceDiscovery?: string;
 }
 
 declare interface CreateMicroserviceWithDetailRespResponse {
@@ -4884,6 +4922,8 @@ declare interface DeployContainerApplicationRequest {
   Partition?: number;
   /** 是否是增量部署，增量部署只运行增量覆盖一级参数，不支持对一级参数中的子参数进行增量更新，例如更新VolumeMountInfoList时必须传入VolumeMountInfoList更新后的全量参数 */
   IncrementalDeployment?: boolean;
+  /** 是否不立即启动 */
+  DoNotStart?: boolean;
 }
 
 declare interface DeployContainerApplicationResponse {
@@ -5468,7 +5508,7 @@ declare interface DescribeContainerGroupDetailResponse {
 }
 
 declare interface DescribeContainerGroupsRequest {
-  /** 分组所属【应用ID】，可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。 */
+  /** 分组所属【应用ID】，可通过调用DescribeApplications查询已创建的应用列表或登录控制台进行查看；也可以调用CreateApplication创建新的应用。 */
   ApplicationId: string;
   /** 搜索字段，模糊搜索groupName字段 */
   SearchWord?: string;
@@ -5480,10 +5520,12 @@ declare interface DescribeContainerGroupsRequest {
   Offset?: number;
   /** 分页个数，默认为20， 取值应为1~50 */
   Limit?: number;
-  /** 分组所属【集群ID】，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。 */
+  /** 分组所属【集群ID】，可通过调用DescribeClusters查询已创建的集群列表或登录控制台进行查看；也可以调用CreateCluster创建新的集群。 */
   ClusterId?: string;
-  /** 分组所属【命名空间 ID】，可通过调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。 */
+  /** 分组所属【命名空间 ID】，可通过调用DescribeSimpleNamespaces查询已创建的命名空间列表或登录控制台进行查看；也可以调用CreateNamespace创建新的命名空间。 */
   NamespaceId?: string;
+  /** 部署组ID列表 */
+  GroupIdList?: string[];
 }
 
 declare interface DescribeContainerGroupsResponse {
@@ -5658,6 +5700,10 @@ declare interface DescribeGatewayApisRequest {
   GatewayDeployGroupId?: string;
   /** 发布状态, drafted(未发布)/released(已发布)/releasing(发布中)/failed(发布失败) */
   ReleaseStatus?: string;
+  /** 返回扩展出参字段名 */
+  ExtendFieldList?: string[];
+  /** 服务接口状态枚举值：ONLINE： 在线状态OFFLINE： 离线状态UNKNOWN： 未知DELETED： 查询MS API不存在 */
+  ApiOnlineStatus?: string;
 }
 
 declare interface DescribeGatewayApisResponse {
@@ -6170,7 +6216,7 @@ declare interface DescribeMicroservicesResponse {
 }
 
 declare interface DescribeMsApiListRequest {
-  /** 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。 */
+  /** 微服务ID。该参数可以通过调用 DescribeMicroservices 的返回值中的 MicroserviceId 字段来获取或通过登录控制台查看；也可以调用CreateMicroserviceWithDetailResp创建新的微服务。 */
   MicroserviceId: string;
   /** 搜索关键字。 */
   SearchWord?: string;
@@ -6178,6 +6224,8 @@ declare interface DescribeMsApiListRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
+  /** 批量查询API参数 */
+  BatchApiParamList?: ApiParam[];
 }
 
 declare interface DescribeMsApiListResponse {
@@ -7619,12 +7667,14 @@ declare interface UpdateGatewayApiResponse {
 }
 
 declare interface UpdateHealthCheckSettingsRequest {
-  /** 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。 */
+  /** 部署组ID，可通过调用DescribeContainerGroups查询已创建的部署组列表或登录控制台进行查看；也可以调用CreateContainGroup创建新的部署组。 */
   GroupId: string;
   /** 是否开启健康检查 */
   EnableHealthCheck?: boolean;
   /** 健康检查配置 */
   HealthCheckSettings?: HealthCheckSettings;
+  /** 是否自动重启 */
+  LivenessAutoRestart?: boolean;
 }
 
 declare interface UpdateHealthCheckSettingsResponse {
@@ -7837,7 +7887,7 @@ declare interface Tsf {
   DescribeContainerGroupDeployInfo(data: DescribeContainerGroupDeployInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDeployInfoResponse>;
   /** 查询容器部署组详情 {@link DescribeContainerGroupDetailRequest} {@link DescribeContainerGroupDetailResponse} */
   DescribeContainerGroupDetail(data: DescribeContainerGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupDetailResponse>;
-  /** 容器部署组列表 {@link DescribeContainerGroupsRequest} {@link DescribeContainerGroupsResponse} */
+  /** 查询容器部署组列表 {@link DescribeContainerGroupsRequest} {@link DescribeContainerGroupsResponse} */
   DescribeContainerGroups(data: DescribeContainerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContainerGroupsResponse>;
   /** 查询一键导入API分组任务的状态 {@link DescribeCreateGatewayApiStatusRequest} {@link DescribeCreateGatewayApiStatusResponse} */
   DescribeCreateGatewayApiStatus(data?: DescribeCreateGatewayApiStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateGatewayApiStatusResponse>;

@@ -1999,11 +1999,11 @@ declare interface DescribeDBPerfTimeSeriesResponse {
 }
 
 declare interface DescribeDBSpaceStatusRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。(备注，dcdb的InstanceId 要求使用 ClusterId&amp;InstanceId代替) */
   InstanceId: string;
   /** 时间段天数，截止日期为当日，默认为7天。 */
   RangeDays?: number;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"mongodb" - 云数据库 MongoDB，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;dcdb&quot; -（TDSQL MySQL 版）、&quot;mariadb&quot; -（TDSQL MariaDB 版）默认为&quot;mysql&quot;。 */
   Product?: string;
 }
 

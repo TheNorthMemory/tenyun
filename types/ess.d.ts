@@ -3597,6 +3597,8 @@ declare interface CreateOrganizationAuthUrlRequest {
   OrganizationIdCardTypeSame?: boolean;
   /** 指定企业认证的授权方式 支持多选:1: 上传营业执照2: 腾讯云快速认证3: 腾讯商户号授权（仅支持小程序端）注意：1.如果没有指定，则默认是1,仅有上传营业执照。2.H5 仅支持上传营业执照。 */
   AuthorizationMethod?: number[];
+  /** 企业认证页面隐藏上传营业执照 */
+  HideBizLicense?: boolean;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {

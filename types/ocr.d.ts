@@ -5629,7 +5629,7 @@ declare interface Ocr {
   VehicleLicenseOCR(data?: VehicleLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleLicenseOCRResponse>;
   /** 机动车登记证书识别 {@link VehicleRegCertOCRRequest} {@link VehicleRegCertOCRResponse} */
   VehicleRegCertOCR(data?: VehicleRegCertOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VehicleRegCertOCRResponse>;
-  /** 营业执照核验（企业二|三要素） {@link VerifyBizLicenseEnterprise3Request} {@link VerifyBizLicenseEnterprise3Response} */
+  /** 营业执照核验（企业二或三要素） {@link VerifyBizLicenseEnterprise3Request} {@link VerifyBizLicenseEnterprise3Response} */
   VerifyBizLicenseEnterprise3(data: VerifyBizLicenseEnterprise3Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise3Response>;
   /** 营业执照核验（企业四要素） {@link VerifyBizLicenseEnterprise4Request} {@link VerifyBizLicenseEnterprise4Response} */
   VerifyBizLicenseEnterprise4(data: VerifyBizLicenseEnterprise4Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise4Response>;
