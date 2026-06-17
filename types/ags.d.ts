@@ -506,6 +506,8 @@ declare interface PauseSandboxInstanceRequest {
 }
 
 declare interface PauseSandboxInstanceResponse {
+  /** 目标沙箱实例当前的状态枚举值：PAUSING： 正在暂停中PAUSED： 已暂停PAUSE_FAILED： 暂停失败 */
+  InstanceStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

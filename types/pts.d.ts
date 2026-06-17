@@ -792,7 +792,7 @@ declare interface ScenarioRelatedJobsParams {
 
 /** 带已执行任务的scenario */
 declare interface ScenarioWithJobs {
-  /** scecario结果 */
+  /** Scenario结果 */
   Scenario?: Scenario;
   /** job结果 */
   Jobs?: Job[] | null;

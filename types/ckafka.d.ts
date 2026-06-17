@@ -3230,7 +3230,7 @@ declare interface CreateTopicRequest {
   Note?: string;
   /** 最小同步副本数默认值：1最小值为1 */
   MinInsyncReplicas?: number;
-  /** 是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许 */
+  /** 是否允许未同步的副本选为leader，0:不允许，1:允许，默认取实例维度的值 */
   UncleanLeaderElectionEnable?: number;
   /** 可选参数，消息保留时间取值范围：[60000, 7776000000]单位：毫秒默认值：7200000 */
   RetentionMs?: number;

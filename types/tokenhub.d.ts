@@ -36,6 +36,10 @@ declare interface ApiKeyDetail {
   IpWhitelist?: string[];
   /** 当Platform为maas时该字段为空 */
   Creator?: string;
+  /** Token 限额信息多维度列表。未配置限额时不返回该字段。 */
+  QuotaSet?: QuotaInfo[];
+  /** Token 限额状态。空字符串表示未配置任何限额包；active 表示已配置且当前可用；inactive 表示已配置但额度耗尽 */
+  QuotaStatus?: string;
 }
 
 /** 批量创建失败项 */
@@ -116,6 +120,24 @@ declare interface ModifyGlossaryEntryInput {
   SourceTerm?: string;
   /** 目标语言术语。最大 1000 字符。不传则保持不变。 */
   TargetTerm?: string;
+}
+
+/** Token 限额信息 */
+declare interface QuotaInfo {
+  /** 限额包 ID。 */
+  PkgId?: string;
+  /** 限额包状态。取值：1（正常）、3（已耗尽）、4（已销毁）。 */
+  Status?: number;
+  /** 限额周期。取值：d（按日）、m（按月）、lifetime（总额度，不重置）。 */
+  CycleUnit?: string;
+  /** 维度当期限额总量（Token 数）。使用字符串避免大数精度丢失。 */
+  CycleCredits?: string;
+  /** 维度当期已使用量（Token 数）。使用字符串避免大数精度丢失。 */
+  CycleUsed?: string;
+  /** 限额生效起始时间。 */
+  StartTime?: string;
+  /** 限额过期时间。 */
+  ExpireTime?: string;
 }
 
 /** 过滤条件 */
@@ -556,6 +578,10 @@ declare interface DescribeApiKeyResponse {
   IpWhitelist?: string[];
   /** 当Platform为maas时该字段为空 */
   Creator?: string;
+  /** Token 限额多维度信息。未配置限额时不返回该字段。 */
+  QuotaSet?: QuotaInfo[];
+  /** Token 限额状态。空字符串表示未配置任何限额包；active 表示已配置且当前可用；inactive 表示已配置但额度耗尽 */
+  QuotaStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

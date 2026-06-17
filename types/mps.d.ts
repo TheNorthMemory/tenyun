@@ -10930,6 +10930,24 @@ declare interface DetectVideoSubtitleAreaResponse {
   RequestId?: string;
 }
 
+declare interface DetectVideoWatermarkRequest {
+  /** 输入信息，当前仅支持 URL、COS */
+  InputInfo: MediaInputInfo;
+  /** 扩展参数，默认不填 */
+  UserExtPara?: string;
+}
+
+declare interface DetectVideoWatermarkResponse {
+  /** 是否存在水印的置信度取值范围：[0, 100] */
+  Confidence?: number;
+  /** 视频中是否存在水印 */
+  HasWatermark?: boolean;
+  /** 关于水印的一些描述性说明 */
+  Description?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableScheduleRequest {
   /** 编排唯一表示。 */
   ScheduleId: number;
@@ -12473,6 +12491,8 @@ declare interface Mps {
   DesignVoiceAsync(data: DesignVoiceAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DesignVoiceAsyncResponse>;
   /** 探测视频字幕区域 {@link DetectVideoSubtitleAreaRequest} {@link DetectVideoSubtitleAreaResponse} */
   DetectVideoSubtitleArea(data: DetectVideoSubtitleAreaRequest, config?: AxiosRequestConfig): AxiosPromise<DetectVideoSubtitleAreaResponse>;
+  /** 探测视频水印 {@link DetectVideoWatermarkRequest} {@link DetectVideoWatermarkResponse} */
+  DetectVideoWatermark(data: DetectVideoWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<DetectVideoWatermarkResponse>;
   /** 禁用编排 {@link DisableScheduleRequest} {@link DisableScheduleResponse} */
   DisableSchedule(data: DisableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableScheduleResponse>;
   /** 禁用工作流 {@link DisableWorkflowRequest} {@link DisableWorkflowResponse} */
@@ -12587,7 +12607,7 @@ declare interface Mps {
   TextTranslation(data: TextTranslationRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslationResponse>;
   /** 剧集项目更新 {@link UpdateProjectRequest} {@link UpdateProjectResponse} */
   UpdateProject(data: UpdateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProjectResponse>;
-  /** 更新音色 {@link UpdateVoiceRequest} {@link UpdateVoiceResponse} */
+  /** 更新音色信息 {@link UpdateVoiceRequest} {@link UpdateVoiceResponse} */
   UpdateVoice(data: UpdateVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVoiceResponse>;
   /** 提取盲水印 {@link WithdrawsWatermarkRequest} {@link WithdrawsWatermarkResponse} */
   WithdrawsWatermark(data: WithdrawsWatermarkRequest, config?: AxiosRequestConfig): AxiosPromise<WithdrawsWatermarkResponse>;

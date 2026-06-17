@@ -3583,7 +3583,7 @@ declare namespace V20180724 {
   interface CreateGrafanaNotificationChannelRequest {
     /** Grafana 实例 ID，例如：grafana-abcdefgh */
     InstanceId: string;
-    /** 告警通道名称，例如：test */
+    /** 告警通道名称，例如：my-channel */
     ChannelName: string;
     /** 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID */
     Receivers: string[];
@@ -3591,7 +3591,7 @@ declare namespace V20180724 {
     OrgId?: number;
     /** 额外组织 ID 数组，已废弃，请使用 OrganizationIds */
     ExtraOrgIds?: string[];
-    /** 生效的所有组织 ID 数组，默认为 ["1"] */
+    /** 生效的所有组织 ID 数组，默认为 [&quot;1&quot;] */
     OrganizationIds?: string[];
   }
 
@@ -5609,7 +5609,7 @@ declare namespace V20180724 {
 
   interface DescribeSSOAccountResponse {
     /** 授权账号列表 */
-    AccountSet: GrafanaAccountInfo[] | null;
+    AccountSet?: GrafanaAccountInfo[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6343,7 +6343,7 @@ declare namespace V20180724 {
   interface UpdateGrafanaConfigRequest {
     /** 实例 ID */
     InstanceId: string;
-    /** JSON 编码后的字符串，如 "{"server":{"root_url":"http://custom.domain"}}" */
+    /** JSON 编码后的字符串，如 &quot;{&quot;server&quot;:{&quot;root_url&quot;:&quot;http://custom.domain&quot;}}&quot; */
     Config: string;
   }
 
