@@ -2543,6 +2543,8 @@ declare interface CreateModelServiceAuthTokenResponse {
 }
 
 declare interface CreateModelServiceRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 新增版本时需要填写 */
   ServiceGroupId?: string;
   /** 不超过60个字，仅支持英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以英文、数字开头 */

@@ -1856,6 +1856,32 @@ declare interface RemindEmailInfo {
   ApproverEmail?: string;
 }
 
+/** 催办合同组下签署人维度详细信息。 */
+declare interface RemindFlowGroupDetail {
+  /** 该签署人在合同中的签署顺序 */
+  ApproverOrder?: number;
+  /** 签署人对应的签署id */
+  SignId?: string;
+  /** 催办状态枚举值：0： 成功2： 无需催办5： 超过次数限制 */
+  Status?: number;
+  /** 描述当前催办结果的原因 */
+  Reason?: string;
+}
+
+/** 合同组催办接口返回的详细信息。 */
+declare interface RemindFlowGroupRecord {
+  /** 对应签署人出现的合同列表 */
+  FlowIds?: string[];
+  /** 对应签署人出现的合同名 */
+  FlowNames?: string[];
+  /** 签署人姓名 */
+  ApproverName?: string;
+  /** 签署人手机号 */
+  Mobile?: string;
+  /** 催办合同组下签署人维度详细信息 */
+  RemindMessageList?: RemindFlowGroupDetail[] | null;
+}
+
 /** 催办接口返回的详细信息。 */
 declare interface RemindFlowRecords {
   /** 合同流程是否可以催办：true - 可以，false - 不可以。若无法催办，将返回RemindMessage以解释原因。 */
@@ -3114,6 +3140,22 @@ declare interface CreateFlowGroupByTemplatesResponse {
   Approvers?: FlowGroupApprovers[];
   /** FlowGroupNeedWorkflow */
   WorkflowInstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFlowGroupRemindsRequest {
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 合同(流程)组的合同组Id */
+  FlowGroupId: string;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateFlowGroupRemindsResponse {
+  /** 合同组催办接口返回的详细信息。 */
+  RemindFlowGroupRecords?: RemindFlowGroupRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5901,6 +5943,8 @@ declare interface Ess {
   CreateFlowGroupByFiles(data: CreateFlowGroupByFilesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByFilesResponse>;
   /** 通过多模板创建合同组签署流程 {@link CreateFlowGroupByTemplatesRequest} {@link CreateFlowGroupByTemplatesResponse} */
   CreateFlowGroupByTemplates(data: CreateFlowGroupByTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupByTemplatesResponse>;
+  /** 合同组催办 {@link CreateFlowGroupRemindsRequest} {@link CreateFlowGroupRemindsResponse} */
+  CreateFlowGroupReminds(data: CreateFlowGroupRemindsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupRemindsResponse>;
   /** 提交合同组签署流程审批结果 {@link CreateFlowGroupSignReviewRequest} {@link CreateFlowGroupSignReviewResponse} */
   CreateFlowGroupSignReview(data: CreateFlowGroupSignReviewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowGroupSignReviewResponse>;
   /** 合同催办 {@link CreateFlowRemindsRequest} {@link CreateFlowRemindsResponse} */

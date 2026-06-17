@@ -1948,6 +1948,8 @@ declare interface NodeResourceSpec {
   DataDisk?: DiskSpecInfo[] | null;
   /** 本地数据盘 */
   LocalDataDisk?: DiskSpecInfo[] | null;
+  /** 节点配置信息，目前仅提供给terraform平台校验参数使用 */
+  SoftwareConfig?: ServiceDeploy[];
 }
 
 /** Pod强制调度节点选择条件 */
@@ -2862,6 +2864,14 @@ declare interface ServiceBasicRestartInfo {
   ServiceName?: string;
   /** 如果没传，则表示所有进程 */
   ComponentInfoList?: ComponentBasicRestartInfo[];
+}
+
+/** 节点部署配置信息，给tf侧同学使用 */
+declare interface ServiceDeploy {
+  /** 组件名称 */
+  SoftwareName?: string;
+  /** 组件下角色名称 */
+  Roles?: string[];
 }
 
 /** 服务的部署信息 */

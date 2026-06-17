@@ -112,6 +112,28 @@ declare interface BanConfig {
   CountryBlackList?: string[];
 }
 
+/** 部署服务信息 */
+declare interface CloudAppServiceItem {
+  /** 服务名 */
+  ServiceName?: string;
+  /** 框架名 */
+  Framework?: string;
+  /** 域名 */
+  Domain?: string;
+  /** 应用路径 */
+  AppPath?: string;
+  /** 服务创建时间 */
+  CreateTime?: string;
+  /** 最新版本名 */
+  LatestVersionName?: string;
+  /** 最新版本状态 */
+  LatestStatus?: string;
+  /** 最新版本构建时间 */
+  LatestBuildTime?: string;
+  /** 部署类型 */
+  DeployType?: string;
+}
+
 /** cls日志信息 */
 declare interface ClsInfo {
   /** cls所属地域 */
@@ -386,6 +408,24 @@ declare interface EnvInfo {
   Meta?: KVPair[];
   /** pg信息 */
   PostgreSQL?: PostgreSQLInfo[];
+}
+
+/** 模块内资源点用量及原始用量数据结构 */
+declare interface EnvPkgCreditsUsage {
+  /** 环境id */
+  EnvId?: string;
+  /** 模块 */
+  Module?: string;
+  /** module总资源点用量 */
+  CreditsValue?: number;
+  /** 指标用量明细 */
+  MetricUsageDetail?: MetricUsage[];
+  /** 资源点套餐内用量 */
+  DeductValue?: number;
+  /** 资源点资源包用量 */
+  PackageDeductValue?: number;
+  /** 资源点按量用量 */
+  ReportValue?: number;
 }
 
 /** 外部存储。标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。 */
@@ -766,6 +806,30 @@ declare interface MessageLocalized {
   Message: string;
   /** 在该语言中 */
   Locale: string;
+}
+
+/** 指标用量明细 */
+declare interface MetricUsage {
+  /** 指标名称 */
+  MetricName?: string;
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 原始资源用量 */
+  Value?: number;
+  /** 资源点用量 */
+  CreditsValue?: number;
+  /** 计费周期类型，取值为hourly/daily */
+  BillingCycleType?: string;
+  /** 原始资源用量单位 */
+  Unit?: string;
+  /** 原始资源用量明细 */
+  ValueDetailList?: ValueDetail[];
+  /** 资源点套餐内用量 */
+  DeductValue?: number;
+  /** 资源点资源包用量 */
+  PackageDeductValue?: number;
+  /** 资源点按量用量 */
+  ReportValue?: number;
 }
 
 /** 待执行命令 */
@@ -1284,6 +1348,22 @@ declare interface VMSpecLightHouse {
   BundleId?: string;
   /** 主机配置详情json */
   BundleConfig?: string;
+}
+
+/** 资源用量明细结构 */
+declare interface ValueDetail {
+  /** 时间 */
+  CalcTime?: string;
+  /** 原始资源用量 */
+  RawValue?: number;
+  /** 资源点用量 */
+  CreditsValue?: number;
+  /** 资源点套餐内用量 */
+  DeductValue?: number;
+  /** 资源点资源包用量 */
+  PackageDeductValue?: number;
+  /** 资源点按量用量 */
+  ReportValue?: number;
 }
 
 /** 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，自定义短信包可以通过自定义apis或者自定义短信模板的方式接入，推荐使用云开发默认短信包，方便快捷。- 如果使用自定义APIs发送短信，方法命名规则方法名称：发送验证码方法标识：SendVerificationCode入参Mobile：字符串（手机号，如：“+86 + 手机号”）VerificationCode：字符串（验证码，如：“123456”）返回值ErrorCode：int（0 表示成功，非 0 表示失败）ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息）- 如果使用自定义短信模板发送短信时，需要按照对应的短信服务商的要求，申请并审核通过对应的短信模板后，在云开发平台配置自定义短信模板，云开发平台对于短信模板不会做其他操作和限制，只做短信发送的逻辑，其他的操作限制都由短信服务商自身提供。 */
@@ -1928,6 +2008,28 @@ declare interface DescribeClientResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudAppListRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 搜索关键字 */
+  SearchKey?: string;
+  /** 页大小 */
+  PageSize?: number;
+  /** 页号 */
+  PageNo?: number;
+}
+
+declare interface DescribeCloudAppListResponse {
+  /** 服务列表 */
+  ServiceList?: CloudAppServiceItem[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudBaseBuildServiceRequest {
   /** 环境id */
   EnvId: string;
@@ -2062,6 +2164,48 @@ declare interface DescribeCreateMySQLResultRequest {
 declare interface DescribeCreateMySQLResultResponse {
   /** 查询开通结果 */
   Data?: DescribeCreateMySQLResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCreditsUsageDetailRequest {
+  /** 模块列表枚举值：FLEXDB： 文档数据库TDSQL： MYSQL数据库SCF： 云函数AI： 大模型EKS： 云托管COS： 云存储HOSTING： 静态托管Auth： 用户权限APIInvocation： API调用HTTPInvocation： HTTP调用VM： 主机Workflow： 工作流Other： 其他PostgreSQL： PostgreSQLToken： Token */
+  Modules: string[];
+  /** 开始日期 */
+  StartDate: string;
+  /** 结束日期 */
+  EndDate: string;
+  /** 是否需要每日用量明细 */
+  NeedUsageDetails: boolean;
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DescribeCreditsUsageDetailResponse {
+  /** 用量数据 */
+  Usages?: EnvPkgCreditsUsage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCreditsUsageRequest {
+  /** 开始日期 */
+  StartDate: string;
+  /** 结束日期 */
+  EndDate: string;
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DescribeCreditsUsageResponse {
+  /** 资源点套餐内用量 */
+  DeductValue?: number;
+  /** 资源点资源包用量 */
+  PackageDeductValue?: number;
+  /** 资源点按量用量 */
+  ReportValue?: number;
+  /** 历史周期资源点用量 */
+  HistoryDeducted?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3181,12 +3325,18 @@ declare interface Tcb {
   DescribeBillingInfo(data?: DescribeBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingInfoResponse>;
   /** 查询应用客户端详情 {@link DescribeClientRequest} {@link DescribeClientResponse} */
   DescribeClient(data: DescribeClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientResponse>;
+  /** 查询云应用服务列表 {@link DescribeCloudAppListRequest} {@link DescribeCloudAppListResponse} */
+  DescribeCloudAppList(data: DescribeCloudAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppListResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
   /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
   DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
   /** 开通 MySql 结果查询 {@link DescribeCreateMySQLResultRequest} {@link DescribeCreateMySQLResultResponse} */
   DescribeCreateMySQLResult(data: DescribeCreateMySQLResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreateMySQLResultResponse>;
+  /** 获取资源点用量 {@link DescribeCreditsUsageRequest} {@link DescribeCreditsUsageResponse} */
+  DescribeCreditsUsage(data: DescribeCreditsUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreditsUsageResponse>;
+  /** 获取资源点用量明细 {@link DescribeCreditsUsageDetailRequest} {@link DescribeCreditsUsageDetailResponse} */
+  DescribeCreditsUsageDetail(data: DescribeCreditsUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCreditsUsageDetailResponse>;
   /** 查询环境监控曲线 {@link DescribeCurveDataRequest} {@link DescribeCurveDataResponse} */
   DescribeCurveData(data: DescribeCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurveDataResponse>;
   /** 获取文档型数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
