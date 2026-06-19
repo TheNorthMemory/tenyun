@@ -344,86 +344,6 @@ declare interface DescribeDomainRegionData {
   Region?: string;
 }
 
-/** 查询网关信息返回结果 */
-declare interface DescribeGatewayData {
-  /** 网关索引ID，用于网关查询，更新，删除操作 */
-  GatewayId?: string;
-  /** 网关编码，由网关设备生成的唯一编码 */
-  GwId?: string;
-  /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string;
-  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string;
-  /** 服务节点id */
-  ClusterId?: string;
-  /** 服务节点名称 */
-  ClusterName?: string;
-  /** 网关状态，0：离线，1:在线 */
-  Status?: number;
-  /** 网关版本 */
-  Version?: GatewayVersion[] | null;
-  /** 网关下挂设备数量 */
-  DeviceNum?: number;
-  /** 激活时间 */
-  CreatedAt?: string;
-  /** 所属地域 */
-  Region?: string;
-}
-
-/** 查询网关监控信息返回结果 */
-declare interface DescribeGatewayMonitor {
-  /** 设备接入总数 */
-  DeviceTotal?: number;
-  /** 设备在线数 */
-  DeviceOnline?: number;
-  /** 设备离线数 */
-  DeviceOffline?: number;
-  /** 视频通道总数 */
-  ChannelTotal?: number;
-  /** 视频通道在线数 */
-  ChannelOnline?: number;
-  /** 视频通道离线数 */
-  ChannelOffline?: number;
-  /** 网关上行流量,单位kbps */
-  UpFlow?: number;
-  /** 流在传输中的通道数 */
-  ChannelPull?: number;
-  /** 流未传输中的通道数 */
-  ChannelUnPull?: number;
-}
-
-/** 查询网关所支持的接入协议 */
-declare interface DescribeGatewayProtocolData {
-  /** 接入协议的字典码 */
-  TypeCode?: string;
-  /** 接入协议类型值 */
-  Value?: number;
-  /** 接入协议的类型描述 */
-  Label?: string;
-  /** 协议值文本 */
-  ValueText?: string;
-}
-
-/** 查询网关服务版本信息返回数据 */
-declare interface DescribeGatewayVersion {
-  /** 服务名 */
-  Name?: string;
-  /** 服务版本 */
-  Version?: string;
-  /** 服务最新版本 */
-  LatestVersion?: string;
-  /** 是否需要更新 */
-  IsUpdate?: boolean;
-  /** 升级信息 */
-  UpgradeInfo?: string[];
-}
-
-/** 查询网关服务版本信息返回数据 */
-declare interface DescribeGatewayVersionData {
-  /** 网关服务列表 */
-  Services?: DescribeGatewayVersion[];
-}
-
 /** 查询组织数据返回结果 */
 declare interface DescribeOrganizationData {
   /** 组织 ID */
@@ -574,60 +494,6 @@ declare interface GBDeviceSnapInfo {
   SessionId?: string;
 }
 
-/** 网关设备数据 */
-declare interface GatewayDevice {
-  /** 设备ID */
-  DeviceId?: string;
-  /** 网关接入协议类型 */
-  ProtocolType?: number;
-  /** 网关接入协议名称 */
-  ProtocolTypeName?: string;
-  /** 设备名称 */
-  Name?: string;
-  /** 设备类型 */
-  Type?: number;
-  /** 设备内网IP */
-  Ip?: string;
-  /** 设备端口 */
-  Port?: number;
-  /** 设备下通道数 */
-  ChannelNum?: number;
-  /** 设备状态 */
-  Status?: number;
-}
-
-/** 网关详情版本信息 */
-declare interface GatewayVersion {
-  /** 服务名称 */
-  Name?: string;
-  /** 服务版本 */
-  Version?: string;
-}
-
-/** 查询网关列表返回结果 */
-declare interface GatewaysData {
-  /** 网关索引ID */
-  GatewayId?: string;
-  /** 网关编码 */
-  GwId?: string;
-  /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string;
-  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string;
-  /** 网关所属服务节点ID */
-  ClusterId?: string;
-  /** 网关所属服务节点名称 */
-  ClusterName?: string;
-  /** 网关所属地域 */
-  Region?: string;
-  /** 网关状态，0：离线，1:在线 */
-  Status?: number;
-  /** 网关激活时间 */
-  CreatedAt?: string;
-  /** 所属网关设备数量 */
-  DeviceNum?: number;
-}
-
 /** ISUP智能安全接入 API返回数据 */
 declare interface ISAPIOutputData {
   /** 输出参数 */
@@ -682,22 +548,6 @@ declare interface ListForbidplayChannelsData {
   TotalCount?: number;
   /** 设备通道信息列表 */
   List?: ChannelAttrInfo[] | null;
-}
-
-/** 查询网关设备列表返回数据 */
-declare interface ListGatewayDevicesData {
-  /** 网关下设备列表 */
-  List?: GatewayDevice[];
-  /** 网关下设备总数 */
-  TotalCount?: number;
-}
-
-/** 查询网关列表返回结果 */
-declare interface ListGatewaysData {
-  /** 网关列表 */
-  List?: GatewaysData[];
-  /** 网关数量 */
-  TotalCount?: number;
 }
 
 /** 组织目录下的未添加到实时上云计划中的通道数量返回数据 */
@@ -1114,30 +964,6 @@ declare interface UpdateDeviceData {
   Username?: string;
   /** 用户Id */
   AppId?: number;
-}
-
-/** 修改网关信息返回结果 */
-declare interface UpdateGatewayData {
-  /** 网关索引ID */
-  GatewayId?: string;
-  /** 网关编码 */
-  GwId?: string;
-  /** 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符 */
-  Name?: string;
-  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string;
-  /** 服务节点ID */
-  ClusterId?: string;
-  /** 服务节点名称 */
-  ClusterName?: string;
-  /** 网关状态，0：离线，1:在线 */
-  Status?: number;
-  /** 激活时间 */
-  CreatedAt?: number;
-  /** 网关密钥 */
-  Secret?: string;
-  /** 网关版本信息 */
-  Version?: string;
 }
 
 /** 修改组织接口返回数据 */
@@ -1662,16 +1488,6 @@ declare interface DeleteDomainResponse {
   RequestId?: string;
 }
 
-declare interface DeleteGatewayRequest {
-  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
-  GatewayId: string;
-}
-
-declare interface DeleteGatewayResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteOrganizationRequest {
   /** 组织ID（从查询组织接口DescribeOrganization中获取） */
   OrganizationId: string;
@@ -1828,52 +1644,6 @@ declare interface DescribeGBDeviceAddrRequest {
 declare interface DescribeGBDeviceAddrResponse {
   /** 无 */
   Data?: DescribeDeviceAddrList;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeGatewayMonitorRequest {
-  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
-  GatewayId: string;
-}
-
-declare interface DescribeGatewayMonitorResponse {
-  /** 返回数据 */
-  Data?: DescribeGatewayMonitor;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeGatewayProtocolRequest {
-}
-
-declare interface DescribeGatewayProtocolResponse {
-  /** 返回数据 */
-  Data?: DescribeGatewayProtocolData[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeGatewayRequest {
-  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
-  GatewayId: string;
-}
-
-declare interface DescribeGatewayResponse {
-  /** 返回数据 */
-  Data?: DescribeGatewayData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeGatewayVersionRequest {
-  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
-  GatewayId: string;
-}
-
-declare interface DescribeGatewayVersionResponse {
-  /** 返回数据 */
-  Data?: DescribeGatewayVersionData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2142,42 +1912,6 @@ declare interface ListDevicesResponse {
   Data?: ListDeviceInfo[] | null;
   /** 设备总数 */
   TotalCount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListGatewayDevicesRequest {
-  /** 网关索引ID（从获取网关列表接口ListGateways中获取） */
-  GatewayId: string;
-  /** 分页页数 */
-  PageNumber?: number;
-  /** 分页大小 */
-  PageSize?: number;
-}
-
-declare interface ListGatewayDevicesResponse {
-  /** 返回数据 */
-  Data?: ListGatewayDevicesData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ListGatewaysRequest {
-  /** 页码，默认为1 */
-  PageNumber?: number;
-  /** 每页数量，默认为20 */
-  PageSize?: number;
-  /** 网关名称 */
-  Name?: string;
-  /** 服务节点ID */
-  ClusterId?: string;
-  /** 网关状态（0：离线，1 ：在线） */
-  Status?: number;
-}
-
-declare interface ListGatewaysResponse {
-  /** 返回数据 */
-  Data?: ListGatewaysData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2472,22 +2206,6 @@ declare interface UpdateDeviceStatusResponse {
   RequestId?: string;
 }
 
-declare interface UpdateGatewayRequest {
-  /** 网关索引ID（从获取网关列表ListGateways接口中获取） */
-  GatewayId: string;
-  /** 仅支持中文、英文、数网关名称，字、_、-，长度不超过32个字符 */
-  Name?: string;
-  /** 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符 */
-  Description?: string;
-}
-
-declare interface UpdateGatewayResponse {
-  /** 返回数据 */
-  Data?: UpdateGatewayData;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UpdateOrganizationRequest {
   /** 组织ID（从查询组织接口DescribeOrganization中获取） */
   OrganizationId: string;
@@ -2592,16 +2310,6 @@ declare interface UpdateUserDeviceResponse {
   RequestId?: string;
 }
 
-declare interface UpgradeGatewayRequest {
-  /** 网关索引ID（从获取网关列表ListGateways接口中获取） */
-  GatewayId: string;
-}
-
-declare interface UpgradeGatewayResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Iss 智能视图计算平台} */
 declare interface Iss {
   (): Versions;
@@ -2643,8 +2351,6 @@ declare interface Iss {
   CreateVideoDownloadTask(data: CreateVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDownloadTaskResponse>;
   /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
-  /** 删除网关 {@link DeleteGatewayRequest} {@link DeleteGatewayResponse} */
-  DeleteGateway(data: DeleteGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayResponse>;
   /** 删除组织 {@link DeleteOrganizationRequest} {@link DeleteOrganizationResponse} */
   DeleteOrganization(data: DeleteOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOrganizationResponse>;
   /** 删除录像上云计划 {@link DeleteRecordBackupPlanRequest} {@link DeleteRecordBackupPlanResponse} */
@@ -2675,14 +2381,6 @@ declare interface Iss {
   DescribeDomainRegion(data?: DescribeDomainRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainRegionResponse>;
   /** 查询国标设备公网地址 {@link DescribeGBDeviceAddrRequest} {@link DescribeGBDeviceAddrResponse} */
   DescribeGBDeviceAddr(data: DescribeGBDeviceAddrRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGBDeviceAddrResponse>;
-  /** 获取网关详情 {@link DescribeGatewayRequest} {@link DescribeGatewayResponse} */
-  DescribeGateway(data: DescribeGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayResponse>;
-  /** 获取网关监控信息 {@link DescribeGatewayMonitorRequest} {@link DescribeGatewayMonitorResponse} */
-  DescribeGatewayMonitor(data: DescribeGatewayMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayMonitorResponse>;
-  /** 查询网关接入协议 {@link DescribeGatewayProtocolRequest} {@link DescribeGatewayProtocolResponse} */
-  DescribeGatewayProtocol(data?: DescribeGatewayProtocolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayProtocolResponse>;
-  /** 查询网关服务版本 {@link DescribeGatewayVersionRequest} {@link DescribeGatewayVersionResponse} */
-  DescribeGatewayVersion(data: DescribeGatewayVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayVersionResponse>;
   /** 查询组织 {@link DescribeOrganizationRequest} {@link DescribeOrganizationResponse} */
   DescribeOrganization(data?: DescribeOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationResponse>;
   /** 查询录像上云计划详情 {@link DescribeRecordBackupPlanRequest} {@link DescribeRecordBackupPlanResponse} */
@@ -2717,10 +2415,6 @@ declare interface Iss {
   ListDeviceSnapshots(data: ListDeviceSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeviceSnapshotsResponse>;
   /** 获取设备列表 {@link ListDevicesRequest} {@link ListDevicesResponse} */
   ListDevices(data: ListDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListDevicesResponse>;
-  /** 查询网关下设备列表 {@link ListGatewayDevicesRequest} {@link ListGatewayDevicesResponse} */
-  ListGatewayDevices(data: ListGatewayDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<ListGatewayDevicesResponse>;
-  /** 获取网关列表 {@link ListGatewaysRequest} {@link ListGatewaysResponse} */
-  ListGateways(data?: ListGatewaysRequest, config?: AxiosRequestConfig): AxiosPromise<ListGatewaysResponse>;
   /** 查询组织目录下的未添加到实时上云计划中的通道数量 {@link ListOrganizationChannelNumbersRequest} {@link ListOrganizationChannelNumbersResponse} */
   ListOrganizationChannelNumbers(data: ListOrganizationChannelNumbersRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationChannelNumbersResponse>;
   /** 查询组织目录下的通道列表 {@link ListOrganizationChannelsRequest} {@link ListOrganizationChannelsResponse} */
@@ -2759,8 +2453,6 @@ declare interface Iss {
   UpdateDeviceOrganization(data: UpdateDeviceOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceOrganizationResponse>;
   /** 禁用-启用设备 {@link UpdateDeviceStatusRequest} {@link UpdateDeviceStatusResponse} */
   UpdateDeviceStatus(data: UpdateDeviceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceStatusResponse>;
-  /** 修改网关信息 {@link UpdateGatewayRequest} {@link UpdateGatewayResponse} */
-  UpdateGateway(data: UpdateGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGatewayResponse>;
   /** 修改组织 {@link UpdateOrganizationRequest} {@link UpdateOrganizationResponse} */
   UpdateOrganization(data: UpdateOrganizationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOrganizationResponse>;
   /** 修改录像上云计划 {@link UpdateRecordBackupPlanRequest} {@link UpdateRecordBackupPlanResponse} */
@@ -2773,8 +2465,6 @@ declare interface Iss {
   UpdateRecordTemplate(data: UpdateRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRecordTemplateResponse>;
   /** 修改设备 {@link UpdateUserDeviceRequest} {@link UpdateUserDeviceResponse} */
   UpdateUserDevice(data: UpdateUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserDeviceResponse>;
-  /** 网关升级 {@link UpgradeGatewayRequest} {@link UpgradeGatewayResponse} */
-  UpgradeGateway(data: UpgradeGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeGatewayResponse>;
 }
 
 export declare type Versions = ["2023-05-17"];

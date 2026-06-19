@@ -208,6 +208,8 @@ declare interface ResourceConfiguration {
   CPU?: string;
   /** 内存资源量 */
   Memory?: string;
+  /** 自定义磁盘大小枚举值：1Gi： 1Gi5Gi： 5Gi10Gi： 10Gi20Gi： 20Gi */
+  Storage?: string | null;
 }
 
 /** 沙箱实例结构体 */

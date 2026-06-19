@@ -384,6 +384,34 @@ declare interface DescribeSaleZonesInfo {
   IsSupportServerless?: boolean;
 }
 
+/** 执行计划 */
+declare interface Explain {
+  /** 标识符 */
+  ID?: string | null;
+  /** 查询类型枚举值：SIMPLE： 没有子查询和 UNION 的普通查询，单表或普通 JOIN 都是 SIMPLE。 */
+  SelectType?: string | null;
+  /** 表名 */
+  Table?: string | null;
+  /** 分区 */
+  Partitions?: string | null;
+  /** 访问类型 */
+  Type?: string | null;
+  /** 可能使用的索引 */
+  PossibleKeys?: string | null;
+  /** 实际使用的索引 */
+  Key?: string | null;
+  /** 使用的索引长度 */
+  KeyLen?: string | null;
+  /** 与索引比较的列或常量 */
+  Ref?: string | null;
+  /** 估算扫描行数 */
+  Rows?: string | null;
+  /** 条件过滤后剩余行的估算百分比 */
+  Filtered?: string | null;
+  /** 附加信息，如 Using index、Using filesort 等 */
+  Extra?: string | null;
+}
+
 /** 实例列表过滤条件 */
 declare interface InstanceFilter {
   /** 过滤key，支持InstanceId、VpcId、SubnetId、Vip、Vport、Status、InstanceName、TagKey */
@@ -598,6 +626,16 @@ declare interface LogBackupStatisticsModel {
   TotalSize?: number | null;
 }
 
+/** 慢日志过滤 */
+declare interface LogFilter {
+  /** 过滤条件名称。如：sql - SQL命令详情host – 客户端 IP；user – 数据库账户；dbName – 数据库名称；sqlType - SQL类型；errCode - 错误码execTime - 执行时间lockWaitTime - 锁等待时间ioWaitTime - IO等待时间trxLivingTime - 事务执行时间cpuTime- Cpu时间threadId - 线程IDtrxId - 事物IDcheckRows - 扫描行数affectRows - 影响行数sentRows - 返回行数 */
+  Type?: string;
+  /** 过滤条件匹配类型。支持：INC – 包含； （多个值之前是||的关系）EXC – 不包含； （多个值之前是&&的关系）EQS – 等于； （多个值之前是||的关系）NEQ – 不等于；（多个值之前是&&的关系）RG – 范围； */
+  Compare?: string;
+  /** 过滤条件匹配值。当Compare=RG时，例：["1-100","200-300"] */
+  Value?: string[];
+}
+
 /** 维护窗口配置 */
 declare interface MaintenanceWindowInfo {
   /**  */
@@ -708,6 +746,46 @@ declare interface ServerlessCcu {
   MinCcu?: number;
   /** ccu最大值范围 */
   MaxCcu?: number[];
+}
+
+/** 慢日志信息 */
+declare interface SlowLogData {
+  /** Sql的执行时间 */
+  Timestamp?: string | null;
+  /** Sql的执行时长（秒） */
+  QueryTime?: number | null;
+  /** Sql语句 */
+  SqlText?: string | null;
+  /** 客户端地址 */
+  UserHost?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 数据库名 */
+  Database?: string | null;
+  /** 锁时长（秒） */
+  LockTime?: number | null;
+  /** 扫描行数 */
+  RowsExamined?: number | null;
+  /** 结果集行数 */
+  RowsSent?: number | null;
+  /** 事物ID */
+  TransactionId?: string | null;
+  /** rpc耗时 */
+  RpcTime?: number | null;
+  /** 与存储节点交互rpc耗时 */
+  StorageRpcTime?: number | null;
+  /** rpc重试延迟耗时 */
+  RpcRetryDelayTime?: number | null;
+  /** node名称 */
+  NodeId?: string | null;
+  /** rpc 链路追踪 */
+  RpcTrace?: string | null;
+  /** TDStore锁时长单位：秒 */
+  TDStoreLockTime?: number | null;
+  /** 全局标识ID */
+  TraceId?: string | null;
+  /** 执行计划 */
+  Explain?: Explain[] | null;
 }
 
 /** 存储节点规格 */
@@ -936,6 +1014,26 @@ declare interface CreateDBSBackupResponse {
   RequestId?: string;
 }
 
+declare interface CreateUsersRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 新增用户列表 */
+  Users?: User[];
+  /** 未加密密码 */
+  Password?: string;
+  /** 加密密码 */
+  EncryptedPassword?: string;
+  /** 用户描述 */
+  Description?: string;
+}
+
+declare interface CreateUsersResponse {
+  /** 任务id */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDBSBackupSetsRequest {
   /** 实例ID */
   InstanceId: string;
@@ -950,6 +1048,20 @@ declare interface DeleteDBSBackupSetsResponse {
   IsSuccess?: boolean;
   /** 需要删除的备份总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUsersRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 批量删除用户列表 */
+  Users?: User[];
+}
+
+declare interface DeleteUsersResponse {
+  /** 任务id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1358,6 +1470,34 @@ declare interface DescribeFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceSSLStatusRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceSSLStatusResponse {
+  /** SSL启用状态枚举值：Enabled： SSL已开启Disabled： SSL已关闭Enabling： SSL开启中Disabling： SSL关闭中 */
+  SSLStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMaintenanceWindowRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeMaintenanceWindowResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 运维窗口时间范围 */
+  MaintenanceWindow?: string;
+  /** 运维窗口天数范围 */
+  WeekDays?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSaleInfoRequest {
   /** 灾备主实例地域 */
   SrcRegion?: string;
@@ -1370,6 +1510,34 @@ declare interface DescribeSaleInfoRequest {
 declare interface DescribeSaleInfoResponse {
   /** 返回可售卖region信息 */
   RegionList?: DescribeSaleRegionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSlowLogsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 要检索日志的起始时间 */
+  StartTime: string;
+  /** 要检索日志的结束时间 */
+  EndTime: string;
+  /** 过滤条件 */
+  LogFilter?: LogFilter[];
+  /** 单页条数限制 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序，可选：ASC，DESC */
+  Order?: string;
+  /** 排序条件，根据业务字段不同，可选排序字段不一样 */
+  OrderBy?: string;
+}
+
+declare interface DescribeSlowLogsResponse {
+  /** 日志总数 */
+  TotalCount?: number;
+  /** 日志详情 */
+  Items?: SlowLogData[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1500,6 +1668,20 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceVPortRequest {
+  /** 实例 ID，形如：tdsql3-5baee8df。 */
+  InstanceId: string;
+  /** 新的VPC端口，3308 */
+  Vport: number;
+}
+
+declare interface ModifyDBInstanceVPortResponse {
+  /** 返回异步任务FlowId */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBParametersRequest {
   /** 实例 ID，形如：tdsql3-ow728lmc。 */
   InstanceId: string;
@@ -1560,6 +1742,54 @@ declare interface ModifyInstanceNameResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceNetworkRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 希望转到的VPC网络的VpcId */
+  VpcId: string;
+  /** 希望转到的VPC网络的子网ID */
+  SubnetId: string;
+  /** VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。 */
+  VipReleaseDelay?: number;
+  /** 指定vip变更，不填表示随机vip */
+  Vip?: string;
+}
+
+declare interface ModifyInstanceNetworkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceSSLStatusRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 是否启用SSL */
+  Enabled: boolean;
+}
+
+declare interface ModifyInstanceSSLStatusResponse {
+  /** 异步流程ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyMaintenanceWindowRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 运维窗口开始时间参数格式：hh:mm:ss */
+  StartTime: string;
+  /** 运维窗口持续时间取值范围：[1, 3]单位：时 */
+  Duration: number;
+  /** 运维窗口日期枚举值：Monday： 星期一Tuesday： 星期二Wednesday： 星期三Thursday： 星期四Friday： 星期五Saturday： 星期六Sunday： 星期日 */
+  WeekDays: string[];
+}
+
+declare interface ModifyMaintenanceWindowResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserPrivilegesRequest {
   /** 实例 ID，形如：tdsql3-5baee8df。 */
   InstanceId: string;
@@ -1574,6 +1804,24 @@ declare interface ModifyUserPrivilegesRequest {
 }
 
 declare interface ModifyUserPrivilegesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetUserPasswordRequest {
+  /** 用户名 */
+  UserName: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 主机IP，IP段以%结尾，表示允许该IP段的所有IP */
+  Host: string;
+  /** 新密码，要求长度8-32，至少包含英文、数字和符号中的两种 */
+  Password?: string;
+  /** 加密密码 */
+  EncryptedPassword?: string;
+}
+
+declare interface ResetUserPasswordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1625,8 +1873,12 @@ declare interface Tdmysql {
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
   /** 创建实例手工备份 {@link CreateDBSBackupRequest} {@link CreateDBSBackupResponse} */
   CreateDBSBackup(data: CreateDBSBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBSBackupResponse>;
+  /** 批量创建用户 {@link CreateUsersRequest} {@link CreateUsersResponse} */
+  CreateUsers(data: CreateUsersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUsersResponse>;
   /** 删除实例手工备份 {@link DeleteDBSBackupSetsRequest} {@link DeleteDBSBackupSetsResponse} */
   DeleteDBSBackupSets(data: DeleteDBSBackupSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBSBackupSetsResponse>;
+  /** 批量删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
+  DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 查询实例详情 {@link DescribeDBInstanceDetailRequest} {@link DescribeDBInstanceDetailResponse} */
   DescribeDBInstanceDetail(data: DescribeDBInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDetailResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
@@ -1655,8 +1907,14 @@ declare interface Tdmysql {
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询流程状态 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data?: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
+  /** 查询实例SSL状态 {@link DescribeInstanceSSLStatusRequest} {@link DescribeInstanceSSLStatusResponse} */
+  DescribeInstanceSSLStatus(data: DescribeInstanceSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSSLStatusResponse>;
+  /** 查询维护时间窗口 {@link DescribeMaintenanceWindowRequest} {@link DescribeMaintenanceWindowResponse} */
+  DescribeMaintenanceWindow(data: DescribeMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceWindowResponse>;
   /** 查询可用售卖地域 {@link DescribeSaleInfoRequest} {@link DescribeSaleInfoResponse} */
   DescribeSaleInfo(data?: DescribeSaleInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaleInfoResponse>;
+  /** 查询慢日志列表 {@link DescribeSlowLogsRequest} {@link DescribeSlowLogsResponse} */
+  DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
   /** 查询售卖组件规格 {@link DescribeSpecsRequest} {@link DescribeSpecsResponse} */
   DescribeSpecs(data?: DescribeSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecsResponse>;
   /** 查询用户权限 {@link DescribeUserPrivilegesRequest} {@link DescribeUserPrivilegesResponse} */
@@ -1673,6 +1931,8 @@ declare interface Tdmysql {
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
+  /** 修改实例VPC端口 {@link ModifyDBInstanceVPortRequest} {@link ModifyDBInstanceVPortResponse} */
+  ModifyDBInstanceVPort(data: ModifyDBInstanceVPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceVPortResponse>;
   /** 修改实例参数 {@link ModifyDBParametersRequest} {@link ModifyDBParametersResponse} */
   ModifyDBParameters(data: ModifyDBParametersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBParametersResponse>;
   /** 修改实例备份策略 {@link ModifyDBSBackupPolicyRequest} {@link ModifyDBSBackupPolicyResponse} */
@@ -1681,8 +1941,16 @@ declare interface Tdmysql {
   ModifyDBSBackupSetComment(data: ModifyDBSBackupSetCommentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSBackupSetCommentResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
+  /** 修改实例所属网络 {@link ModifyInstanceNetworkRequest} {@link ModifyInstanceNetworkResponse} */
+  ModifyInstanceNetwork(data: ModifyInstanceNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNetworkResponse>;
+  /** 修改实例SSL状态 {@link ModifyInstanceSSLStatusRequest} {@link ModifyInstanceSSLStatusResponse} */
+  ModifyInstanceSSLStatus(data: ModifyInstanceSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceSSLStatusResponse>;
+  /** 更新维护时间窗口 {@link ModifyMaintenanceWindowRequest} {@link ModifyMaintenanceWindowResponse} */
+  ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
   /** 修改用户权限 {@link ModifyUserPrivilegesRequest} {@link ModifyUserPrivilegesResponse} */
   ModifyUserPrivileges(data: ModifyUserPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPrivilegesResponse>;
+  /** 重置用户密码 {@link ResetUserPasswordRequest} {@link ResetUserPasswordResponse} */
+  ResetUserPassword(data: ResetUserPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUserPasswordResponse>;
   /** 重启实例 {@link RestartDBInstancesRequest} {@link RestartDBInstancesResponse} */
   RestartDBInstances(data: RestartDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstancesResponse>;
   /** 纵向扩容实例 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */

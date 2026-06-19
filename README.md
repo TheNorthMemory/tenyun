@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 254+ 款产品，14415+ 服务数</summary>
+<details><summary>共计 254+ 款产品，14421+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -143,7 +143,7 @@ ba | [ICP备案](https://cloud.tencent.com/document/product/243) | 2020-07-20(3)
 batch | [批量计算](https://cloud.tencent.com/document/product/599) | 2017-03-12(30) |
 bda | [人体分析](https://cloud.tencent.com/document/product/1208) | 2020-03-24(5) |
 bh | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2023-04-18(109) |
-bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2022-01-05(50) |
+bi | [商业智能分析 BI](https://cloud.tencent.com/document/product/590) | 2022-01-05(55) |
 billing | [费用中心](https://cloud.tencent.com/document/product/555) | 2018-07-09(69) |
 bizlive | 商业直播 | 2019-03-13(6) |
 bm | [黑石物理服务器CPM](https://cloud.tencent.com/document/product/386) | 2018-04-23(53) |
@@ -257,7 +257,7 @@ iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
-iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(85) |
+iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(76) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(28) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(68) |
@@ -326,7 +326,7 @@ tdai | [腾讯云数据库 AI 服务](https://cloud.tencent.com/document/product
 tdcpg | [TDSQL-C PostgreSQL 版](https://cloud.tencent.com/document/product/1556) | 2021-11-18(25) |
 tdid | [分布式身份](https://cloud.tencent.com/document/product/1439) | 2021-05-19(18) |
 tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 2020-02-17(152) |
-tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(35) |
+tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(45) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(214) | 2022-01-06(5) |

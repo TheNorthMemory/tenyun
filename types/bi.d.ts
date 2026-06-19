@@ -114,6 +114,12 @@ declare interface CorpUserListData {
   TotalPages: number;
 }
 
+/** 创建标签表出参 */
+declare interface CreateTagTableVO {
+  /** 标签表id */
+  Id?: number | null;
+}
+
 /** 数据 */
 declare interface Data {
   /** 项目Id */
@@ -232,6 +238,16 @@ declare interface DescribeUserGroupMemberPageListContainer {
   Total?: number | null;
   /** 总页数 */
   TotalPages?: number | null;
+}
+
+/** 同步标签数据出参 */
+declare interface EditTagVO {
+  /** 事务id */
+  TranId?: string | null;
+  /** 事务状态 */
+  TranStatus?: number | null;
+  /** 标签信息 */
+  Id?: number | null;
 }
 
 /** 报表嵌出数据结构-强鉴权 */
@@ -392,6 +408,12 @@ declare interface JoinSourceTable {
   DatasourceId?: number | null;
   /** 非必填,前端展示的数据源别名,excel建表需要 */
   TableAlias?: string | null;
+}
+
+/** 创建标签表出参 */
+declare interface ModifyTagTableVO {
+  /** 标签表id */
+  Id?: number | null;
 }
 
 /** 页面截图列表 */
@@ -1058,6 +1080,22 @@ declare interface UserRoleListDataUserRoleInfo {
   UserGroupList?: UserGroupDTO[] | null;
 }
 
+/** 用户标签信息 */
+declare interface UserTagInfo {
+  /** 标签ID */
+  Id?: number | null;
+  /** 标签名 */
+  Name?: string | null;
+  /** 标签值 */
+  Value?: string | null;
+  /** 是否被托管 */
+  IsExternalManage?: boolean | null;
+  /** 标签托管平台 */
+  ManagePlatform?: string | null;
+  /** 导入类型 */
+  ImportType?: string | null;
+}
+
 /** 基础用户信息 */
 declare interface UserVO {
   /** u1 */
@@ -1152,6 +1190,24 @@ declare interface CreateAuthApiKeyResponse {
   Msg?: string | null;
   /** 数据 */
   Data?: ApiKeyAuthApplyVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCorpTagRequest {
+  /** 标签名 */
+  Name?: string;
+}
+
+declare interface CreateCorpTagResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: DataId | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1442,6 +1498,30 @@ declare interface CreateProjectResponse {
   Data?: Data;
   /** 返回信息 */
   Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateTagTableRequest {
+  /** 标签表名 */
+  Name?: string;
+  /** 标签表关联的项目id */
+  AutoImportProjectId?: number;
+  /** 标签表关联的数据表id */
+  AutoImportTableId?: number;
+  /** uin对应字段 */
+  AutoImportUinField?: string;
+}
+
+declare interface CreateTagTableResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 数据 */
+  Data?: CreateTagTableVO | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 信息 */
+  Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2142,6 +2222,38 @@ declare interface DescribeUserRoleProjectListResponse {
   RequestId?: string;
 }
 
+declare interface EditCorpTagRequest {
+  /** 标签ID */
+  Id?: number;
+  /** 标签名称 */
+  Name?: string;
+  /** 导入标签的模式(manual/auto) */
+  ImportType?: string;
+  /** 自动导入标签表的id */
+  AutoImportTagTableId?: number;
+  /** 自动导入标签的关联字段 */
+  AutoImportField?: string;
+  /** 是否异步请求 */
+  AsyncRequest?: boolean;
+  /** 自动导入标签表的表名 */
+  AutoImportTagTableName?: string;
+  /** 事务id */
+  TranId?: string;
+}
+
+declare interface EditCorpTagResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 数据 */
+  Data?: EditTagVO | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExportScreenPageRequest {
   /** 项目id */
   ProjectId: string;
@@ -2432,6 +2544,32 @@ declare interface ModifyResourceUserResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTagTableRequest {
+  /** 标签表名 */
+  Name?: string;
+  /** 标签表关联的项目id */
+  AutoImportProjectId?: number;
+  /** 标签表关联的数据表id */
+  AutoImportTableId?: number;
+  /** uin对应字段 */
+  AutoImportUinField?: string;
+  /** 标签表id */
+  Id?: number;
+}
+
+declare interface ModifyTagTableResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 数据 */
+  Data?: ModifyTagTableVO | null;
+  /** 扩展 */
+  Extra?: string | null;
+  /** 信息 */
+  Msg?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserDetailInfoRequest {
   /** 用户ID */
   UserId?: string;
@@ -2556,6 +2694,26 @@ declare interface ModifyUserRoleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserTagRequest {
+  /** 用户ID */
+  UserId?: string;
+  /** 标签信息 */
+  TagList?: UserTagInfo[];
+}
+
+declare interface ModifyUserTagResponse {
+  /** 自定义错误信息对象 */
+  ErrorInfo?: ErrorInfo | null;
+  /** 消息 */
+  Msg?: string | null;
+  /** 额外信息 */
+  Extra?: string | null;
+  /** 数据 */
+  Data?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryUserGroupMemberRequest {
   /** 用户组id集合 */
   GroupIds?: number[];
@@ -2597,6 +2755,8 @@ declare interface Bi {
   ClearEmbedToken(data: ClearEmbedTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ClearEmbedTokenResponse>;
   /** 创建ApiKey {@link CreateAuthApiKeyRequest} {@link CreateAuthApiKeyResponse} */
   CreateAuthApiKey(data?: CreateAuthApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthApiKeyResponse>;
+  /** 创建企业标签 {@link CreateCorpTagRequest} {@link CreateCorpTagResponse} */
+  CreateCorpTag(data?: CreateCorpTagRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCorpTagResponse>;
   /** 添加数据表 {@link CreateDataTableRequest} {@link CreateDataTableResponse} */
   CreateDataTable(data: CreateDataTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataTableResponse>;
   /** 创建数据源 {@link CreateDatasourceRequest} {@link CreateDatasourceResponse} */
@@ -2609,6 +2769,8 @@ declare interface Bi {
   CreatePermissionRanks(data?: CreatePermissionRanksRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePermissionRanksResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
+  /** 创建标签表 {@link CreateTagTableRequest} {@link CreateTagTableResponse} */
+  CreateTagTable(data?: CreateTagTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTagTableResponse>;
   /** 创建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
   CreateUserGroup(data?: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
   /** 创建用户组成员 {@link CreateUserGroupMemberRequest} {@link CreateUserGroupMemberResponse} */
@@ -2665,6 +2827,8 @@ declare interface Bi {
   DescribeUserRoleList(data: DescribeUserRoleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleListResponse>;
   /** 项目内-用户角色列表 {@link DescribeUserRoleProjectListRequest} {@link DescribeUserRoleProjectListResponse} */
   DescribeUserRoleProjectList(data: DescribeUserRoleProjectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserRoleProjectListResponse>;
+  /** 编辑企业标签(异步) {@link EditCorpTagRequest} {@link EditCorpTagResponse} */
+  EditCorpTag(data?: EditCorpTagRequest, config?: AxiosRequestConfig): AxiosPromise<EditCorpTagResponse>;
   /** 分享页截图导出 {@link ExportScreenPageRequest} {@link ExportScreenPageResponse} */
   ExportScreenPage(data: ExportScreenPageRequest, config?: AxiosRequestConfig): AxiosPromise<ExportScreenPageResponse>;
   /** 更新ApiKey {@link ModifyAuthApiKeyRequest} {@link ModifyAuthApiKeyResponse} */
@@ -2681,6 +2845,8 @@ declare interface Bi {
   ModifyResourceUserGroup(data?: ModifyResourceUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceUserGroupResponse>;
   /** 按资源 - 更新用户组权限 {@link ModifyResourceUserGroupResourceRequest} {@link ModifyResourceUserGroupResourceResponse} */
   ModifyResourceUserGroupResource(data?: ModifyResourceUserGroupResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceUserGroupResourceResponse>;
+  /** 编辑标签表 {@link ModifyTagTableRequest} {@link ModifyTagTableResponse} */
+  ModifyTagTable(data?: ModifyTagTableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTagTableResponse>;
   /** 修改用户角色信息和用户组信息 {@link ModifyUserDetailInfoRequest} {@link ModifyUserDetailInfoResponse} */
   ModifyUserDetailInfo(data?: ModifyUserDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserDetailInfoResponse>;
   /** 更新用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
@@ -2689,6 +2855,8 @@ declare interface Bi {
   ModifyUserRole(data?: ModifyUserRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserRoleResponse>;
   /** 项目-修改用户角色信息 {@link ModifyUserRoleProjectRequest} {@link ModifyUserRoleProjectResponse} */
   ModifyUserRoleProject(data?: ModifyUserRoleProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserRoleProjectResponse>;
+  /** 修改用户标签值 {@link ModifyUserTagRequest} {@link ModifyUserTagResponse} */
+  ModifyUserTag(data?: ModifyUserTagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserTagResponse>;
   /** 查询用户组成员 {@link QueryUserGroupMemberRequest} {@link QueryUserGroupMemberResponse} */
   QueryUserGroupMember(data?: QueryUserGroupMemberRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserGroupMemberResponse>;
 }
