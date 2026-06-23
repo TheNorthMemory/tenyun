@@ -484,7 +484,7 @@ declare interface CcnPolicyBasedRoutingNextHop {
   PolicyBasedRoutingRulesCount?: number;
 }
 
-/** 查询云联网策略路由匹配规则 */
+/** 云联网策略路由匹配规则 */
 declare interface CcnPolicyBasedRoutingRule {
   /** 策略路由下一跳ID */
   PolicyBasedRoutingNextHopId: string;
@@ -502,6 +502,10 @@ declare interface CcnPolicyBasedRoutingRule {
   Description?: string;
   /** 策略路由匹配策略ID */
   PolicyBasedRoutingRuleId?: string;
+  /** 目的端实例ID枚举值：VPC： 私有网络 */
+  DestinationInstanceType?: string;
+  /** 目的端实例ID */
+  DestinationInstanceId?: string;
 }
 
 /** 云联网（CCN）地域出带宽上限 */

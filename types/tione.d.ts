@@ -782,6 +782,22 @@ declare interface Instance {
   ErrCode?: string | null;
   /** 部署失败错误信息 */
   ErrMsg?: string | null;
+  /** 节点可用资源 */
+  AvailableResource?: ResourceInfo | null;
+  /** 资源组节点的IP */
+  InstanceIP?: string | null;
+  /** 资源组节点的名称 */
+  InstanceName?: string | null;
+  /** cvm机型 */
+  CvmInstanceType?: string | null;
+  /** 是否自动续买 */
+  AutoRenew?: boolean | null;
+  /** 是否被隔离 */
+  Isolated?: boolean;
+  /** 维修任务信息 */
+  RepairTaskInfo?: RepairTaskInfo;
+  /** 节点可用区名称 */
+  ZoneName?: string;
 }
 
 /** 内网调用信息 */
@@ -1044,7 +1060,7 @@ declare interface ModelSource {
 
 /** 数据源挂载配置 */
 declare interface MountConfigureInfo {
-  /** 数据源的相对路径，支持<@subaccount>这样的占位符 */
+  /** 数据源的相对路径，支持&lt;@subaccount&gt;这样的占位符 */
   WorkDir?: string;
 }
 
@@ -1498,6 +1514,22 @@ declare interface PublicDataSourceFS {
 declare interface RDMAConfig {
   /** 是否开启RDMA */
   Enable?: boolean | null;
+}
+
+/** cvm维修任务信息 */
+declare interface RepairTaskInfo {
+  /** 维修任务ID */
+  TaskId?: string;
+  /** 任务类型ID// - 101：实例运行隐患 // - 102：实例运行异常 // - 103：实例硬盘异常 // - 104：实例网络连接异常 // - 105：实例运行预警 // - 106：实例硬盘预警 // - 107：实例维护升级 */
+  TaskTypeId?: number;
+  /** 任务类型中文名 */
+  TaskTypeName?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务详情 */
+  TaskDetail?: string;
+  /** 产品类型，支持取值： // // - CVM：云服务器 // - CDH：专用宿主机 // - CPM2.0：裸金属云服务器 */
+  Product?: string;
 }
 
 /** Notebook资源参数 */
@@ -3017,6 +3049,8 @@ declare interface DescribeAnnotatedTaskListResponse {
 }
 
 declare interface DescribeBillingResourceGroupAttachedWorkspacesRequest {
+  /** 资源组ID */
+  ResourceGroupId: string;
   /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
   TiProjectId?: string;
 }
@@ -4804,7 +4838,7 @@ declare interface Tione {
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
   DescribeBillingResourceGroup(data: DescribeBillingResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupResponse>;
   /** 查询资源组绑定的工作空间列表 {@link DescribeBillingResourceGroupAttachedWorkspacesRequest} {@link DescribeBillingResourceGroupAttachedWorkspacesResponse} */
-  DescribeBillingResourceGroupAttachedWorkspaces(data?: DescribeBillingResourceGroupAttachedWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupAttachedWorkspacesResponse>;
+  DescribeBillingResourceGroupAttachedWorkspaces(data: DescribeBillingResourceGroupAttachedWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupAttachedWorkspacesResponse>;
   /** 查询资源组列表 {@link DescribeBillingResourceGroupsRequest} {@link DescribeBillingResourceGroupsResponse} */
   DescribeBillingResourceGroups(data?: DescribeBillingResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingResourceGroupsResponse>;
   /** 查询资源组节点运行中的任务 {@link DescribeBillingResourceInstanceRunningJobsRequest} {@link DescribeBillingResourceInstanceRunningJobsResponse} */

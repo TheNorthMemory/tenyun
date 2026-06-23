@@ -46,6 +46,8 @@ declare interface RabbitMQBindingListInfo {
   CreateTime?: string;
   /** 修改时间 */
   ModifyTime?: string;
+  /** 绑定参数，header类型的Exchange绑定时，可以传入参数。其它类型 Exchange 无需传入 */
+  Arguments?: RabbitMQServerlessKeyValuePair[];
 }
 
 /** RabbiteMQ集群基本信息 */
@@ -366,6 +368,14 @@ declare interface RabbitMQServerlessInstance {
   Tags?: RabbitMQServerlessTag[];
 }
 
+/** 键值对 */
+declare interface RabbitMQServerlessKeyValuePair {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: string;
+}
+
 /** 标签 */
 declare interface RabbitMQServerlessTag {
   /** 标签键 */
@@ -489,6 +499,8 @@ declare interface CreateRabbitMQServerlessBindingRequest {
   Destination: string;
   /** 绑定key */
   RoutingKey?: string;
+  /** 创建 Header 类型 Exchange 的 Binding 时，可以传入参数。其它类型 Exchange 无需传入 */
+  Arguments?: RabbitMQServerlessKeyValuePair[];
 }
 
 declare interface CreateRabbitMQServerlessBindingResponse {
@@ -1005,11 +1017,11 @@ declare interface DescribeRabbitMQServerlessQueuesRequest {
   Limit?: number;
   /** 搜索关键词 */
   SearchWord?: string;
-  /** 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列 */
+  /** 队列类型筛选，不填或 &quot;all&quot;：classic 和 quorum 队列；&quot;classic&quot;：筛选 classic 队列；&quot;quorum&quot;：筛选 quorum 队列 */
   QueueType?: string;
-  /** 排序依据的字段：ConsumerNumber - 在线消费者数量；MessageHeapCount - 消息堆积数；MessageRateInOut - 生产消费速率之和；MessageRateIn - 生产速率；MessageRateOut - 消费速率； */
+  /** 排序依据的字段：messages_ready - 消息堆积数；publish - 生产速率；deliver - 消费速率；consumers - 在线消费者数量； */
   SortElement?: string;
-  /** 排序顺序，ascend 或 descend */
+  /** 排序顺序，asc 或 desc */
   SortOrder?: string;
 }
 

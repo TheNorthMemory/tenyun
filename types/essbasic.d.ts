@@ -2911,15 +2911,15 @@ declare interface CreateCloseOrganizationUrlResponse {
 }
 
 declare interface CreateConsoleLoginUrlRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:`1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。 ``2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。 ``3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 ` */
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 */
   Agent: Agent;
-  /** 第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。在测试环境联调的过程中，企业名称请统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。企业名称请使用以下名称, 以下名称可以不用走收录。**子客测试专用企业1 - 子客测试专用企业9**注: `1. 如果名称中包含英文括号()，请使用中文括号（）代替。` `2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 ` */
+  /** 第三方平台子客的企业名称，请确认该企业名称与企业营业执照中注册的名称完全一致。在测试环境联调的过程中，企业名称请统一加上“测试”二字，如：典子谦示例企业测试，否则将无法审核通过。企业名称请使用以下名称, 以下名称可以不用走收录。子客测试专用企业1 - 子客测试专用企业9注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。 2、该名称需要与Agent.ProxyOrganizationOpenId相匹配, 企业激活后Agent.ProxyOrganizationOpenId会跟此企业名称一一绑定; 如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 */
   ProxyOrganizationName: string;
-  /** 子客企业统一社会信用代码，最大长度200个字符注意：`如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效`。 */
+  /** 子客企业统一社会信用代码，最大长度200个字符注意：如果您的企业已经在认证授权中或者激活完成，这里修改子客企业名字将不会生效。 */
   UniformSocialCreditCode?: string;
-  /** 子客企业员工的姓名，最大长度50个字符, 员工的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：`该姓名需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该姓名会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人名字传入将不会生效` */
+  /** 子客企业员工的姓名，最大长度50个字符, 员工的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。注：该姓名需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该姓名会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人名字传入将不会生效 */
   ProxyOperatorName?: string;
-  /** 子客企业员工的手机码, 支持国内手机号11位数字(无需加+86前缀或其他字符)。注：`该手机号需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该手机号会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人手机号传入将不会生效` */
+  /** 子客企业员工的手机码, 支持国内手机号11位数字(无需加+86前缀或其他字符)。注：该手机号需要和Agent.ProxyOperator.OpenId相匹配, 当员工完成认证后该手机号会和Agent.ProxyOperator.OpenId一一绑定, 若员工已认证加入企业，这里修改经办人手机号传入将不会生效 */
   ProxyOperatorMobile?: string;
   /** Web控制台登录后进入的功能模块, 支持的模块包括： **空值** :(默认)企业中心模块 **DOCUMENT** :合同管理模块 **TEMPLATE** :企业模板管理模块 **SEAL** :印章管理模块 **OPERATOR** :组织管理模块注意：1、如果EndPoint选择"CHANNEL"或"APP"，该参数仅支持传递"SEAL"，进入印章管理模块2、该参数**仅在企业和员工激活已经完成，登录控制台场景才生效**。 */
   Module?: string;
@@ -2933,13 +2933,13 @@ declare interface CreateConsoleLoginUrlRequest {
   AutoJumpBackEvent?: string;
   /** 可选的此企业允许的授权方式, 可以设置的方式有:2：转法定代表人授权5：授权书+对公打款 */
   AuthorizationTypes?: number[];
-  /** 子客经办人身份证注意：`如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型`。 */
+  /** 子客经办人身份证注意：如果已同步，这里非空会更新同步的经办人身份证号，暂时只支持中国大陆居民身份证类型。 */
   ProxyOperatorIdCardNumber?: string;
-  /** 已废弃 请使用 JumpEvents 参数，进行替换。认证完成跳转链接。注意：`此功能仅在Endpoint参数设置成 H5 或 PC时才有效`。 */
+  /** 已废弃 请使用 JumpEvents 参数，进行替换。认证完成跳转链接。注意：此功能仅在Endpoint参数设置成 H5 或 PC时才有效。 */
   AutoJumpUrl?: string;
-  /** 是否展示头顶导航栏 **ENABLE** : (默认)进入web控制台展示头顶导航栏 **DISABLE** : 进入web控制台不展示头顶导航栏 注：该参数**仅在企业和员工激活完成，登录控制台场景才生效**。点击查看头顶导航栏位置 */
+  /** 是否展示头顶导航栏 ENABLE : (默认)进入web控制台展示头顶导航栏 DISABLE : 进入web控制台不展示头顶导航栏 注：该参数仅在企业和员工激活完成，登录控制台场景才生效。点击查看头顶导航栏位置 */
   TopNavigationStatus?: string;
-  /** 是否自动激活子客企业，有下面两种选项：**false（默认设置）**：不自动激活子客户。您需要通过控制台或调用[激活或者续期子企业](https://qian.tencent.com/developers/partnerApis/accounts/CreateChannelSubOrganizationActive)接口手动完成激活过程。**true**：若持有的许可证充足，子客户企业注册完成后将自动激活，无需手动操作或访问控制台。注：如果应用扩展服务中的自动激活子客企业为打开态， 则忽略本接口的AutoActive这个参数（若持有的许可证充足，子客户企业注册完成后将自动激活），具体位置参考下图：![image](https://qcloudimg.tencent-cloud.cn/raw/c3639b05503d3735bac483d17aa6b0a3.png) */
+  /** 是否自动激活子客企业，有下面两种选项：false（默认设置）：不自动激活子客户。您需要通过控制台或调用激活或者续期子企业接口手动完成激活过程。true：若持有的许可证充足，子客户企业注册完成后将自动激活，无需手动操作或访问控制台。注：如果应用扩展服务中的自动激活子客企业为打开态， 则忽略本接口的AutoActive这个参数（若持有的许可证充足，子客户企业注册完成后将自动激活），具体位置参考下图： */
   AutoActive?: boolean;
   /** 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。 */
   BusinessLicense?: string;
@@ -2947,7 +2947,7 @@ declare interface CreateConsoleLoginUrlRequest {
   ProxyAddress?: string;
   /** 组织机构法人的姓名。 请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。 */
   ProxyLegalName?: string;
-  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。 2. 认证方式AuthorizationTypes必须只能是上传授权书方式 */
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 p.s. 如果上传授权书 ，需遵循以下条件 超管的信息（超管姓名，超管手机号）必须为必填参数。 认证方式AuthorizationTypes必须只能是上传授权书方式 */
   PowerOfAttorneys?: string[];
   /** 企业认证时个性化能力信息 */
   OrganizationAuthorizationOptions?: OrganizationAuthorizationOptions;
@@ -2955,16 +2955,16 @@ declare interface CreateConsoleLoginUrlRequest {
   BankAccountNumber?: string;
   /** 无 */
   Operator?: UserInfo;
-  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为&quot;true&quot; 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
-  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 */
+  /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 **CLINICFILLINGCERTIFICATE* :诊所备案证枚举值：USCC： 工商组织营业执照PRACTICELICENSEOFMEDICALINSTITUTION： 医疗机构执业许可证CLINICFILLINGCERTIFICATE： 诊所备案证 */
   ProxyOrganizationIdCardType?: string;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
-  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 注： 1. 链接仅单次有效，每次登录需要需要重新创建新的链接2. 创建的链接应避免被转义，如：&被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义3. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  /** 跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 子客企业状态 子客企业员工状态 Endpoint 链接有效期限 企业未激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业未激活 员工未认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 企业已激活 员工未认证 PC/PC_SHORT_URL 5分钟 企业已激活 员工未认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 企业已激活 员工已认证 PC 5分钟 企业已激活 员工已认证 CHANNEL/APP/H5/SHORT_H5/WEIXIN_QRCODE_URL 30天 注： 链接仅单次有效，每次登录需要需要重新创建新的链接创建的链接应避免被转义，如：&amp;被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   ConsoleUrl?: string;
-  /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：`企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码` */
+  /** 子客企业是否已开通腾讯电子签， **true** :已经开通腾讯电子签 **false** :还未开通腾讯电子签注：企业是否实名根据传参Agent.ProxyOrganizationOpenId进行判断，非企业名称或者社会信用代码 */
   IsActivated?: boolean;
   /** 当前经办人是否已认证并加入功能 **true** : 已经认证加入公司 **false** : 还未认证加入公司注意：**员工是否实名是根据Agent.ProxyOperator.OpenId判断，非经办人姓名** */
   ProxyOperatorIsVerified?: boolean;

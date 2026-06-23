@@ -1452,6 +1452,8 @@ declare interface RocketMQClusterInfo {
   AdminSecretKey?: string | null;
   /** 是否开启删除保护 */
   EnableDeletionProtection?: boolean;
+  /** 是否开启自动创建消费组 */
+  AutoCreateConsumeGroupEnabled?: boolean | null;
 }
 
 /** RocketMQ近期使用量 */
@@ -1828,7 +1830,7 @@ declare interface RocketMQVipInstance {
   PayMode?: number;
   /** 备注信息 */
   Remark?: string;
-  /** 实例配置ID */
+  /** 实例规格枚举值：rocket-vip-basic-0： 通用集群rocket-vip-basic-1： 专享集群-基础型rocket-vip-basic-2： 专享集群-标准型rocket-vip-basic-3： 专享集群-高阶I型rocket-vip-basic-4： 专享集群-高阶II型 */
   SpecName?: string;
   /** 最大可设置消息保留时间，小时为单位 */
   MaxRetention?: number;
@@ -4301,6 +4303,8 @@ declare interface DescribeRocketMQMsgRequest {
   Limit?: number;
   /** 根据消费组名称过滤消费详情 */
   FilterTrackGroup?: string;
+  /** 查询延迟消息或定时消息时，该值为true */
+  QueryDelayMessage?: boolean;
 }
 
 declare interface DescribeRocketMQMsgResponse {
@@ -5225,6 +5229,8 @@ declare interface ModifyRocketMQInstanceRequest {
   EnableDeletionProtection?: boolean;
   /** 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5 */
   SendReceiveRatio?: number;
+  /** 是否开启ACL */
+  AclEnabled?: boolean;
 }
 
 declare interface ModifyRocketMQInstanceResponse {

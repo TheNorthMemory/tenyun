@@ -152,6 +152,8 @@ declare interface AISpeakEvent {
   SpokenType?: string;
   /** 本次响应生成的时延结果 */
   LatencyMetrics?: AICallLatencyMetrics | null;
+  /** 节点跳转的原因，仅画布为灵活模式时有值 */
+  TraverseReason?: string;
 }
 
 /** AI转人工配置项 */

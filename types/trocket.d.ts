@@ -623,6 +623,8 @@ declare interface CreateConsumerGroupRequest {
   TagList?: Tag[];
   /** 重试策略 */
   RetryPolicy?: RetryPolicy;
+  /** 轻量主题 */
+  LiteTopic?: string;
 }
 
 declare interface CreateConsumerGroupResponse {
@@ -729,16 +731,20 @@ declare interface CreateTopicRequest {
   InstanceId: string;
   /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   Topic: string;
-  /** 主题类型，枚举值如下：- NORMAL: 普通消息- FIFO: 顺序消息- DELAY: 延时消息- TRANSACTION: 事务消息 */
+  /** 主题类型，枚举值如下：- NORMAL: 普通消息- FIFO: 顺序消息- DELAY: 延时消息- TRANSACTION: 事务消息- LITE: 轻量消息 */
   TopicType: string;
   /** 队列数量，取值范围3～16 */
-  QueueNum: number;
+  QueueNum?: number;
   /** 备注信息，最多 128 个字符 */
   Remark?: string;
   /** 消息保留时长（单位：小时） */
   MsgTTL?: number;
   /** 标签列表 */
   TagList?: Tag[];
+  /** 是否过期自动删除（仅针对轻量主题类型） */
+  AutoExpireDelete?: boolean;
+  /** 过期时间，单位：秒（仅针对轻量主题类型） */
+  AutoExpireTime?: number;
 }
 
 declare interface CreateTopicResponse {
@@ -894,9 +900,9 @@ declare interface DescribeConsumerGroupResponse {
   Tps?: number;
   /** 消息堆积数量 */
   ConsumerLag?: number;
-  /** 消费类型，枚举值如下：- PULL：PULL 消费类型- PUSH：PUSH 消费类型- POP：POP 消费类型 */
+  /** 消费类型，枚举值如下：PULL：PULL 消费类型PUSH：PUSH 消费类型POP：POP 消费类型 */
   ConsumeType?: string;
-  /** 创建时间，**Unix时间戳（毫秒）** */
+  /** 创建时间，Unix时间戳（毫秒） */
   CreatedTime?: number;
   /** 顺序投递：true并发投递：false */
   ConsumeMessageOrderly?: boolean;
@@ -910,6 +916,10 @@ declare interface DescribeConsumerGroupResponse {
   MessageModel?: string;
   /** 重试策略 */
   RetryPolicy?: RetryPolicy;
+  /** 消费模式枚举值：CLUSTERING： 集群/广播消费LITE： LiteTopic消费默认值：CLUSTERING */
+  ConsumeModel?: string;
+  /** 订阅的轻量主题（仅适用于轻量消费模式） */
+  LiteTopic?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1075,6 +1085,8 @@ declare interface DescribeMessageListRequest {
   QueryDeadLetterMessage?: boolean;
   /** 消息 Tag，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031) 或业务日志中获得。 */
   Tag?: string;
+  /** 轻量主题 */
+  LiteTopic?: string;
 }
 
 declare interface DescribeMessageListResponse {
@@ -1093,7 +1105,7 @@ declare interface DescribeMessageRequest {
   InstanceId: string;
   /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   Topic: string;
-  /** 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。 */
+  /** 消息 ID，从 DescribeMessageList 接口或业务日志中获得。 */
   MsgId: string;
   /** 查询起始位置，默认为0。 */
   Offset?: number;
@@ -1120,6 +1132,8 @@ declare interface DescribeMessageResponse {
   MessageTracks?: MessageTrackItem[] | null;
   /** 主题名称 */
   ShowTopicName?: string;
+  /** 轻量主题名称 */
+  LiteTopic?: string;
   /** 消息消费情况列表总条数 */
   MessageTracksCount?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1131,7 +1145,7 @@ declare interface DescribeMessageTraceRequest {
   InstanceId: string;
   /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   Topic: string;
-  /** 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031) 或业务日志中获得。 */
+  /** 消息 ID，从 DescribeMessageList 接口返回的 MessageItem 或业务日志中获得。 */
   MsgId: string;
   /** 是否是死信消息，默认为false */
   QueryDeadLetterMessage?: boolean;
@@ -1142,6 +1156,8 @@ declare interface DescribeMessageTraceRequest {
 declare interface DescribeMessageTraceResponse {
   /** 主题名称 */
   ShowTopicName?: string;
+  /** 轻量主题名称 */
+  LiteTopic?: string;
   /** 轨迹详情 */
   Data?: MessageTraceItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -1388,9 +1404,9 @@ declare interface DescribeTopicResponse {
   TopicType?: string;
   /** 备注 */
   Remark?: string;
-  /** 创建时间，**Unix时间戳（毫秒）** */
+  /** 创建时间，Unix时间戳（毫秒） */
   CreatedTime?: number;
-  /** 最后写入时间，**Unix时间戳（毫秒）** */
+  /** 最后写入时间，Unix时间戳（毫秒） */
   LastUpdateTime?: number;
   /** 订阅数量 */
   SubscriptionCount?: number;
@@ -1398,6 +1414,10 @@ declare interface DescribeTopicResponse {
   SubscriptionData?: SubscriptionData[];
   /** 消息保留时长，单位：小时 */
   MsgTTL?: number;
+  /** 是否自动删除仅适用于轻量主题 */
+  AutoExpireDelete?: boolean;
+  /** 自动过期时间单位：分钟仅适用于轻量主题 */
+  AutoExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1553,6 +1573,10 @@ declare interface ModifyTopicRequest {
   Remark?: string;
   /** 消息保留时长（单位：小时） */
   MsgTTL?: number;
+  /** 是否过期自动删除（仅针对轻量主题类型） */
+  AutoExpireDelete?: boolean;
+  /** 过期时间（仅针对轻量主题类型）取值范围：[30, 720]单位：分钟 */
+  AutoExpireTime?: number;
 }
 
 declare interface ModifyTopicResponse {
@@ -1631,6 +1655,8 @@ declare interface SendMessageRequest {
   MsgKey?: string;
   /** 消息Tag */
   MsgTag?: string;
+  /** 轻量主题 */
+  LiteTopic?: string;
 }
 
 declare interface SendMessageResponse {

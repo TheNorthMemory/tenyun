@@ -383,18 +383,18 @@ declare interface DescribeProbeMetricDataRequest {
   AnalyzeTaskType?: string;
   /** 指标类型（counter、gauge以及histogram），指标查询默认传gauge */
   MetricType?: string;
-  /** 指标详细字段，可以传递传具体的指标也可以对指标进行聚合查询例如："avg(ping_time)"代表整体时延(ms)；不同的任务类型支持不同的field查询，以及聚合规则，详情可见https://cloud.tencent.com/document/product/248/87584。 */
+  /** 指标详细字段，可以传递传具体的指标也可以对指标进行聚合查询例如：&quot;avg(ping_time)&quot;代表整体时延(ms)；不同的任务类型支持不同的field查询，以及聚合规则，详情可见https://cloud.tencent.com/document/product/248/87584。 */
   Field?: string;
   /** 过滤条件可以传单个过滤条件也可以拼接多个参数 */
   Filter?: string;
   /** 聚合时间, 1m、1d、30d 等等 */
   GroupBy?: string;
-  /** 多条件过滤，支持多个过滤条件组合查询例如：[""host" = 'www.test.com'", "time >= now()-1h"] */
+  /** 多条件过滤，支持多个过滤条件组合查询例如：[&quot;&quot;host&quot; = &#39;www.test.com&#39;&quot;, &quot;time &gt;= now()-1h&quot;] */
   Filters?: string[];
 }
 
 declare interface DescribeProbeMetricDataResponse {
-  /** 返回指标 JSON 序列化后的字符串，具体如下所示："[{\"name\":\"task_navigate_request_gauge\",\"columns\":[\"time\",\"avg(first_screen_time) / 1000\"],\"values\":[[1641571200,6.756600000000001]],\"tags\":null}]" */
+  /** 返回指标 JSON 序列化后的字符串，具体如下所示：&quot;[{"name":"task_navigate_request_gauge","columns":["time","avg(first_screen_time) / 1000"],"values":[[1641571200,6.756600000000001]],"tags":null}]&quot; */
   MetricSet?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

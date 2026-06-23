@@ -74,6 +74,10 @@ declare interface SecretMetadata {
   EncryptType?: number;
   /** 凭据密钥加密切换中 */
   EncryptSwitching?: boolean;
+  /** 创建者 UIN 字符串 */
+  CreateUinString?: string;
+  /** 所属者 UIN 字符串用以兼容uint64,防止精度丢失 */
+  TargetUinString?: string;
 }
 
 /** 标签键和标签值 */
@@ -344,6 +348,10 @@ declare interface DescribeSecretResponse {
   EncryptType?: number;
   /** 凭据更新状态 */
   EncryptSwitching?: boolean;
+  /** 创建者 uin 字符串 */
+  CreateUinString?: string;
+  /** 所属用户UIN 字符串 */
+  TargetUinString?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
