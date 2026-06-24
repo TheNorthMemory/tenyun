@@ -8242,10 +8242,12 @@ declare namespace V20180525 {
   interface ModifyClusterTagsRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 集群标签:[{"TagKey":"env","TagValue":"dev"}]}] */
+    /** 集群标签:[{&quot;TagKey&quot;:&quot;env&quot;,&quot;TagValue&quot;:&quot;dev&quot;}]}] */
     Tags?: Tag[];
     /** 是否同步集群内子资源标签 */
     SyncSubresource?: boolean;
+    /** 是否同步节点池标签 */
+    SyncNodePoolTags?: boolean;
   }
 
   interface ModifyClusterTagsResponse {

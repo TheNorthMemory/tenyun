@@ -719,13 +719,13 @@ declare interface GetFlowStatisticByGroupRequest {
   EndTime: number;
   /** 流量种类（1：上行流量，2：下行流量， 3: 上下行总和） */
   Type: number;
-  /** 时间粒度（1：按小时统计，2：按天统计） */
+  /** 时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
-  /** 应用ID, 查询分组流量时无需使用。 查询应用流量时该字段为应用ID，GroupId 填写 "-1" */
+  /** 应用ID, 查询分组流量时无需使用。 查询应用流量时该字段为应用ID，GroupId 填写 &quot;-1&quot; */
   MpApplicationId?: string;
 }
 
@@ -751,13 +751,13 @@ declare interface GetFlowStatisticByNameRequest {
   EndTime: number;
   /** 流量种类（1：上行流量，2：下行流量，3：上下行总和） */
   Type: number;
-  /** 时间粒度（1：按小时统计，2：按天统计） */
+  /** 时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
-  /** 设备名列表，用于查询多设备流量，该字段启用时DeviceId可传"-1" */
+  /** 设备名列表，用于查询多设备流量，该字段启用时DeviceId可传&quot;-1&quot; */
   DeviceList?: string[];
 }
 
@@ -781,11 +781,11 @@ declare interface GetFlowStatisticByRegionRequest {
   EndTime: number;
   /** 流量种类（1：上行流量，2：下行流量， 3: 上下行总和） */
   Type: number;
-  /** 时间粒度（1：按小时统计，2：按天统计） */
+  /** 时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
   /** 网关类型。0：公有云网关；1：自有网关。 */
   GatewayType: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
 }
 
@@ -811,13 +811,13 @@ declare interface GetFlowStatisticRequest {
   EndTime: number;
   /** 流量种类（1：上行流量，2：下行流量，3：上下行总和） */
   Type: number;
-  /** 时间粒度（1：按小时统计，2：按天统计） */
+  /** 时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
-  /** 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传"-1" */
+  /** 设备ID列表，用于查询多设备流量，该字段启用时DeviceId可传&quot;-1&quot; */
   DeviceList?: string[];
 }
 
@@ -965,9 +965,9 @@ declare interface GetMultiFlowStatisticRequest {
   EndTime: number;
   /** 统计流量类型（1：上行流量，2：下行流量， 3: 上下行总和） */
   Type: number;
-  /** 统计时间粒度（1：按小时统计，2：按天统计） */
+  /** 统计时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
@@ -1035,19 +1035,19 @@ declare interface GetPublicKeyResponse {
 }
 
 declare interface GetStatisticDataByNameRequest {
-  /** 设备名。若不指定设备，可传"-1" */
+  /** 设备名。若不指定设备，可传&quot;-1&quot; */
   DeviceName: string;
   /** 统计开始时间，单位：s */
   BeginTime: number;
   /** 统计结束时间，单位：s */
   EndTime: number;
-  /** 聚合粒度：1:按小时统计2:按天统计 */
+  /** 时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
-  /** 设备名列表，最多10个设备，下载多个设备流量时使用，此时DeviceName可传"-1" */
+  /** 设备名列表，最多10个设备，下载多个设备流量时使用，此时DeviceName可传&quot;-1&quot; */
   DeviceList?: string[];
   /** 设备分组ID，若不指定分组则不传，按分组下载数据时使用 */
   GroupId?: string;
@@ -1063,19 +1063,19 @@ declare interface GetStatisticDataByNameResponse {
 }
 
 declare interface GetStatisticDataRequest {
-  /** 设备ID。若不指定设备，可传"-1" */
+  /** 设备ID。若不指定设备，可传&quot;-1&quot; */
   DeviceId: string;
   /** 统计开始时间，单位：s */
   BeginTime: number;
   /** 统计结束时间，单位：s */
   EndTime: number;
-  /** 聚合粒度：1:按小时统计2:按天统计 */
+  /** 时间粒度枚举值：1： 按小时统计2： 按天统计3： 按分钟统计4： 按5分钟统计 */
   TimeGranularity: number;
-  /** 接入区域。取值范围：['MC','AP','EU','AM'] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
+  /** 接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;] MC=中国大陆 AP=亚太 EU=欧洲 AM=美洲。不填代表全量区域。 */
   AccessRegion?: string;
   /** 网关类型。0：公有云网关；1：自有网关。不传默认为0。 */
   GatewayType?: number;
-  /** 设备ID列表，最多10个设备，下载多个设备流量和时使用，此时DeviceId可传"-1" */
+  /** 设备ID列表，最多10个设备，下载多个设备流量和时使用，此时DeviceId可传&quot;-1&quot; */
   DeviceList?: string[];
   /** 设备分组ID，若不指定分组则不传，按分组下载数据时使用 */
   GroupId?: string;

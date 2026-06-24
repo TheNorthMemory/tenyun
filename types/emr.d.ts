@@ -334,6 +334,10 @@ declare interface CloudResource {
   PodLabels?: StringMap[];
   /** 是否创建默认raycluster */
   EnableDefaultRayCluster?: boolean;
+  /** 自定义镜像 */
+  ImageInfoV2?: ImageInfoV2;
+  /** 创建动态实例参数 */
+  DynamicInstanceForm?: DynamicInstanceForm;
 }
 
 /** 当前集群共用组件与集群对应关系 */
@@ -588,7 +592,7 @@ declare interface CustomImage {
   ImagePullSecret?: ImagePullSecret | null;
 }
 
-/** 用户Hive-MetaDB信息 */
+/** 用户自定义数据库信息 */
 declare interface CustomMetaDBInfo {
   /** 自定义MetaDB的JDBC连接，示例: jdbc:mysql://10.10.10.10:3306/dbname */
   MetaDataJdbcUrl?: string;
@@ -600,6 +604,12 @@ declare interface CustomMetaDBInfo {
   MetaType?: string;
   /** EMR-MetaDB实例 */
   UnifyMetaInstanceId?: string;
+  /** 组件 */
+  Components?: string[];
+  /** metadb版本 */
+  DefaultMetaVersion?: string;
+  /** CDBId */
+  LinkInstanceId?: string;
 }
 
 /** 用户自建Hive-MetaDB信息 */
@@ -655,9 +665,9 @@ declare interface DefaultSetting {
 /** 共用组件信息 */
 declare interface DependService {
   /** 共用组件名 */
-  ServiceName: string;
+  ServiceName: string | null;
   /** 共用组件集群 */
-  InstanceId: string;
+  InstanceId: string | null;
 }
 
 /** 引导脚本回包 */
@@ -791,83 +801,93 @@ declare interface Dps {
 /** 创建DynamicInstance提交的表单数据 */
 declare interface DynamicInstanceForm {
   /** DynamicInstance名，长度限制1-64字符，只能包含小写字母 */
-  DynamicInstanceName?: string;
+  DynamicInstanceName?: string | null;
   /** 命名空间 */
-  Namespace?: string;
+  Namespace?: string | null;
   /** 是否支持高可用 */
-  SupportHA?: boolean;
+  SupportHA?: boolean | null;
   /** 自定义镜像信息 */
-  CustomImage?: CustomImage;
+  CustomImage?: CustomImage | null;
   /** 资源组配置 */
-  DynamicInstanceGroups?: DynamicInstanceGroup[];
+  DynamicInstanceGroups?: DynamicInstanceGroup[] | null;
   /** 是否支持存储配置 */
-  SupportPV?: boolean;
+  SupportPV?: boolean | null;
   /** cbs存储卷列表 */
-  CBSVolumes?: CBSVolume[];
+  CBSVolumes?: CBSVolume[] | null;
   /** cfs存储卷列表，只包含cfs，不包含cfs turbo */
-  CFSVolumes?: CFSVolume[];
+  CFSVolumes?: CFSVolume[] | null;
   /** cos存储卷列表 */
-  COSVolumes?: COSVolume[];
+  COSVolumes?: COSVolume[] | null;
   /** 挂载卷列表 */
-  VolumeMounts?: VolumeMount[];
+  VolumeMounts?: VolumeMount[] | null;
   /** pod标签 */
-  Labels?: TkeLabel[];
+  Labels?: TkeLabel[] | null;
   /** Tolerations定义 */
-  Tolerations?: Toleration[];
+  Tolerations?: Toleration[] | null;
   /** 环境变量 */
-  Envs?: NameValue[];
+  Envs?: NameValue[] | null;
   /** 依赖外部组件 */
-  DependServices?: DependService[];
+  DependServices?: DependService[] | null;
   /** 是否开启token鉴权 */
-  SupportToken?: boolean;
+  SupportToken?: boolean | null;
   /** cfs trubo挂载列表，不包含标准版cfs */
-  CFSTurboVolumes?: CFSTurboVolume[];
+  CFSTurboVolumes?: CFSTurboVolume[] | null;
+  /** 自定义镜像 */
+  ImageInfoV2?: ImageInfoV2 | null;
+  /** GooseFS盘 */
+  GooseFSVolumes?: GooseFSVolume[];
 }
 
 /** 创建DynamicInstance提交的表单数据中的group部分 */
 declare interface DynamicInstanceGroup {
   /** 资源组类型 */
-  GroupType?: string;
+  GroupType?: string | null;
   /** 资源组名称 */
-  GroupName?: string;
+  GroupName?: string | null;
   /** pod cpu核数 */
-  PodCpu?: number;
+  PodCpu?: number | null;
   /** pod mem大小（GB） */
-  PodMem?: number;
+  PodMem?: number | null;
   /** pod gpu类型 */
-  PodGpuType?: string;
+  PodGpuType?: string | null;
   /** pod gpu块数 */
-  PodGpu?: number;
+  PodGpu?: number | null;
   /** pod个数 */
-  PodNum?: number;
+  PodNum?: number | null;
   /** pod弹性最小个数 */
-  MinPodNum?: number;
+  MinPodNum?: number | null;
   /** pod弹性最大个数，当MaxPodNum &gt; MinPodNum时，默认表示开启弹性扩缩容，将在范围内扩缩容 */
-  MaxPodNum?: number;
+  MaxPodNum?: number | null;
   /** 是否支持存储配置 */
-  SupportPV?: boolean;
+  SupportPV?: boolean | null;
   /** cbs存储卷列表 */
-  CBSVolumes?: CBSVolume[];
+  CBSVolumes?: CBSVolume[] | null;
   /** cfs存储卷列表 */
-  CFSVolumes?: CFSVolume[];
+  CFSVolumes?: CFSVolume[] | null;
   /** cos存储卷列表 */
-  COSVolumes?: COSVolume[];
+  COSVolumes?: COSVolume[] | null;
   /** 挂载卷列表 */
-  VolumeMounts?: VolumeMount[];
+  VolumeMounts?: VolumeMount[] | null;
   /** pod标签 */
-  Labels?: TkeLabel[];
+  Labels?: TkeLabel[] | null;
   /** Tolerations定义 */
-  Tolerations?: Toleration[];
+  Tolerations?: Toleration[] | null;
   /** 环境变量 */
-  Envs?: NameValue[];
+  Envs?: NameValue[] | null;
   /** 节点调度策略 */
-  SchedulingPolicy?: string;
+  SchedulingPolicy?: string | null;
   /** 资源标签 */
-  ResourceLabel?: string;
+  ResourceLabel?: string | null;
   /** GPU资源厂商key */
-  PodGpuResourceKey?: string;
+  PodGpuResourceKey?: string | null;
   /** CFS Turbo 挂载列表 */
-  CFSTurboVolumes?: CFSTurboVolume[];
+  CFSTurboVolumes?: CFSTurboVolume[] | null;
+  /** GooseFS盘 */
+  GooseFSVolumes?: GooseFSVolume[];
+  /** 启动前指令 */
+  PreStartCommand?: string;
+  /** Ray启动前指令 */
+  RayStartParams?: string;
 }
 
 /** DynamicInstanceGroupSpec */
@@ -904,6 +924,10 @@ declare interface DynamicInstanceGroupSpec {
   Scheduler?: string;
   /** 卷目录 */
   PersistentVolume?: PersistentVolume;
+  /** 前置启动命令 */
+  PreStartCommand?: string;
+  /** RayStart启动参数 */
+  RayStartParams?: string;
 }
 
 /** POD浮动规格 */
@@ -1098,6 +1122,18 @@ declare interface EmrProductConfigOutter {
   PublicKeyId?: string | null;
 }
 
+/** spark开启app监控 对应的Prometheus */
+declare interface EnableSparkAppMonitorInfo {
+  /** 实例id */
+  PrometheusInstanceId?: string | null;
+  /** grafana实例id */
+  GrafanaInstanceId?: string | null;
+  /** 开启关闭状态 */
+  EnableMonitor?: boolean | null;
+  /** grafana访问地址 */
+  GrafanaURL?: string | null;
+}
+
 /** 执行动作。 */
 declare interface Execution {
   /** 任务类型，目前支持以下类型。1. “MR”，将通过hadoop jar的方式提交。2. "HIVE"，将通过hive -f的方式提交。3. "SPARK"，将通过spark-submit的方式提交。 */
@@ -1170,6 +1206,26 @@ declare interface FlowParamsDesc {
   PKey?: string;
   /** 参数value */
   PValue?: string;
+}
+
+/** GooseFSVolume */
+declare interface GooseFSVolume {
+  /** 存储卷名 */
+  VolumeName?: string;
+  /** gooseFS实例ID */
+  ClusterId?: string;
+  /** gooseFS 命名空间 */
+  Namespace?: string;
+  /** 在命名空间中的挂载路径 */
+  SubPath?: string;
+  /** FuseVERSION描述 */
+  FuseVersion?: string;
+  /** Client Version描述，例如 GOOSE-1.5.2 */
+  ClientVersion?: string;
+  /** 默认挂载参数 */
+  MountOptions?: string;
+  /** 默认JVM参数 */
+  JvmOptions?: string;
 }
 
 /** 集群所有伸缩组全局参数信息 */
@@ -1286,6 +1342,36 @@ declare interface ImageInfo {
   ImagePullPolicy?: string;
   /** 镜像地址 */
   Image?: string;
+}
+
+/** EMR on TKE集群组件镜像信息 */
+declare interface ImageInfoV2 {
+  /** 镜像类型枚举值：official： 官方镜像custom： 自定义镜像imageUrl： 镜像地址 */
+  ImageMode?: string;
+  /** 地域 */
+  Region?: string;
+  /** 是否是存量镜像 */
+  LegacyCCR?: boolean;
+  /** 镜像地址 */
+  FullImageUrl?: string;
+  /** 版本 */
+  MainVersion?: string;
+  /** 镜像地址域名 */
+  RegistryUrl?: string;
+  /** 镜像命名空间 */
+  NamespaceName?: string;
+  /** 镜像仓库名 */
+  RepoName?: string;
+  /** 镜像版本标签 */
+  Tag?: string;
+  /** 用户名 */
+  Username?: string;
+  /** 密码 */
+  Password?: string;
+  /** 镜像拉取密钥 */
+  ImagePullSecret?: ImagePullSecret;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
 }
 
 /** 镜像获取密钥 */
@@ -1652,6 +1738,12 @@ declare interface ModifyDynamicInstanceForm {
   ModifyDynamicInstanceGroup?: DynamicInstanceGroup;
   /** cfs turbo挂载列表，不包含标准版 */
   CFSTurboVolumes?: CFSTurboVolume[];
+  /** 自定义镜像 */
+  CustomImage?: CustomImage;
+  /** 自定义镜像 */
+  ImageInfoV2?: ImageInfoV2;
+  /** GooseFS盘 */
+  GooseFSVolumes?: GooseFSVolume[];
 }
 
 /** 强制修改标签 */
@@ -2060,6 +2152,10 @@ declare interface NodeSpecInstanceType {
   QuotaNum?: number;
   /** 配额单位 */
   QuotaUnit?: string;
+  /** 是否需要提供高性能计算集群 */
+  NeedHpcClusterId?: boolean;
+  /** 是否是GPU机型 */
+  IsGpuInstance?: boolean;
 }
 
 /** 节点机型类型 */
@@ -2220,6 +2316,8 @@ declare interface PersistentVolume {
   StorageVolumeDetail?: StorageVolumeDetail[];
   /** cfs trubo存储卷 */
   CFSTurboVolumes?: CFSTurboVolume[];
+  /** goosefs volume挂载信息 */
+  GooseFSVolumes?: GooseFSVolume[];
 }
 
 /** Pod PVC存储方式描述 */
@@ -2544,6 +2642,8 @@ declare interface RayCluster {
   SubmitType?: number;
   /** head访问地址,也是dashboard地址 */
   DashboardUrl?: string;
+  /** 命名空间 */
+  Namespace?: string;
 }
 
 /** Redis 实例信息 */
@@ -3482,6 +3582,16 @@ declare interface VolumeSetting {
   HostPath?: HostPathVolumeSource | null;
 }
 
+/** WebUI访问信息 */
+declare interface WebUIInfo {
+  /** 访问地址，可能为空 */
+  Url?: string | null;
+  /** WebUI状态包括：-1表示当前服务没有WebUI；0表示当前服务有WebUI，但是没有安装KNOX服务；1表示当前服务有WebUI并安装有KNOX服务，但是KNOX没有开启公网访问；2表示，当前服务有WebUI，安装有KNOX服务且已开启公网访问。 */
+  WebUIStatus?: number | null;
+  /** 服务名 */
+  ServiceName?: string | null;
+}
+
 /** 定时扩容每周重复任务策略 */
 declare interface WeekRepeatStrategy {
   /** 重复任务执行的具体时刻，例如"01:02:00" */
@@ -3775,6 +3885,8 @@ declare interface CreateCloudInstanceRequest {
   SgIP?: string;
   /** 额外容器相关配置 */
   ContainerExtraConf?: ContainerExtraConf;
+  /** spark监控 */
+  EnableSparkAppMonitorInfo?: EnableSparkAppMonitorInfo;
 }
 
 declare interface CreateCloudInstanceResponse {
@@ -4308,6 +4420,8 @@ declare interface DescribeDynamicInstanceDetailResponse {
   PersistentVolume?: PersistentVolume;
   /** rayClusterYamlJson */
   RayClusterYaml?: string;
+  /** 镜像信息 */
+  ImageInfoV2?: ImageInfoV2;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4320,6 +4434,8 @@ declare interface DescribeDynamicInstanceListRequest {
 declare interface DescribeDynamicInstanceListResponse {
   /** RayCluster 集群列表 */
   DynamicInstanceList?: RayCluster[];
+  /** 服务访问url */
+  WebUIInfos?: WebUIInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

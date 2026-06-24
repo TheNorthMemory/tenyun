@@ -134,6 +134,8 @@ declare interface ReconstructDocumentSSEConfig {
   PageFormat?: string;
   /** 是否忽略失败页，返回已成功的页数据 */
   IgnoreFailedPage?: boolean;
+  /** 智能文档解析返回结果的格式枚举值：0： 只返回全文MD1： 只返回每一页的OCR原始Json2： 只返回每一页的MD3： 返回全文MD + 每一页的OCR原始Json4： 返回全文MD + 每一页的MD5： 返回全文md，每一页ocr原始json，每一页md默认值：3 */
+  ResultType?: string;
 }
 
 /** 搜索结果 */

@@ -340,6 +340,8 @@ declare interface ProbeConfig {
   SuccessThreshold?: number;
   /** 探测失败后，Kubernetes的重试次数 */
   FailureThreshold?: number;
+  /** TCP Socket请求进行健康检查 */
+  TcpSocket?: TcpSocketConfig;
 }
 
 /** 探针信息 */
@@ -432,6 +434,12 @@ declare interface SystemDisk {
   DiskSize?: number;
   /** 系统盘分区盘符 */
   DiskName?: string;
+}
+
+/** 推理服务TcpSocket的配置 */
+declare interface TcpSocketConfig {
+  /**  */
+  Port?: number;
 }
 
 /** 模板详情 */

@@ -192,6 +192,30 @@ declare interface IpPolicy {
   Effect: string;
 }
 
+/** 账号详情 */
+declare interface ListAllUser {
+  /** 子账号账号ID。 */
+  Uin?: number;
+  /** 子账号用户名。 */
+  Name?: string;
+  /** 子账号 UID。 */
+  Uid?: number;
+  /** 子账号备注。 */
+  Remark?: string;
+  /** 子账号能否登录控制台。 */
+  ConsoleLogin?: number;
+  /** 手机号。 */
+  PhoneNum?: string;
+  /** 区号。 */
+  CountryCode?: string;
+  /** 邮箱。 */
+  Email?: string;
+  /** 创建时间。参数格式：YYYY-MM-DD hh:mm:ss */
+  CreateTime?: string;
+  /** 账号类型枚举值：Owner： 主账号SubUser： 子用户CICUser： CIC 用户WechatCorpUser： 企业微信子用户AgentIdentity： AgentIdentity用户Collaborator： 协作者MessageReceiver： 消息接收者Unknown： 未知 */
+  UserType?: string;
+}
+
 /** ListGrantServiceAccessAction节点 */
 declare interface ListGrantServiceAccessActionNode {
   /** 接口名 */
@@ -1450,6 +1474,26 @@ declare interface ListAccessKeysResponse {
   RequestId?: string;
 }
 
+declare interface ListAccountsRequest {
+  /** 返回结果的条数，当返回结果达到 MaxItems 限制被截断时，返回参数IsTruncated将等于true。取值范围：[1, 100] */
+  MaxItems?: number;
+  /** 当请求的返回结果被截断时，可以使用Marker获取从当前截断位置之后的内容。 */
+  Marker?: string;
+  /** 用户类型枚举值：Owner： 主账号SubUser： 普通子用户CICUser： CIC 子用户WechatCorpUser： 企业微信子用户AgentIdentity： AgentIdentity子用户Collaborator： 协作者MessageReceiver： 消息接收者 */
+  UserType?: string;
+}
+
+declare interface ListAccountsResponse {
+  /** 子账号列表。 */
+  Users?: ListAllUser[];
+  /** 当IsTruncated为true时才有此字段，当返回true时，需要继续调用此接口，并且使用Marker获取截断后的内容 。 */
+  Marker?: string;
+  /** 请求返回结果是否被截断。 */
+  IsTruncated?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListAttachedGroupPoliciesRequest {
   /** 用户组ID */
   TargetGroupId: number;
@@ -2155,6 +2199,8 @@ declare interface Cam {
   GetUserPermissionBoundary(data: GetUserPermissionBoundaryRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserPermissionBoundaryResponse>;
   /** 列出访问密钥 {@link ListAccessKeysRequest} {@link ListAccessKeysResponse} */
   ListAccessKeys(data?: ListAccessKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccessKeysResponse>;
+  /** 查询所有账号列表 {@link ListAccountsRequest} {@link ListAccountsResponse} */
+  ListAccounts(data?: ListAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAccountsResponse>;
   /** 查询用户组关联的策略列表 {@link ListAttachedGroupPoliciesRequest} {@link ListAttachedGroupPoliciesResponse} */
   ListAttachedGroupPolicies(data: ListAttachedGroupPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAttachedGroupPoliciesResponse>;
   /** 获取角色绑定的策略列表 {@link ListAttachedRolePoliciesRequest} {@link ListAttachedRolePoliciesResponse} */

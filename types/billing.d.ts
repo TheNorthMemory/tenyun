@@ -1930,6 +1930,10 @@ declare interface CostComponentSet {
   CashPayAmount?: string;
   /** 赠送金支付金额 */
   IncentivePayAmount?: string;
+  /** 组件类型code */
+  ComponentCode?: string;
+  /** 组件名称code */
+  ItemCode?: string;
 }
 
 /** 消耗明细数据类型 */
@@ -1974,6 +1978,8 @@ declare interface CostDetail {
   OwnerUin?: string;
   /** 扣费时间：结算扣费时间 */
   PayTime?: string;
+  /** 产品名称code */
+  BusinessCode?: string;
 }
 
 /** 获取预算管理的基础信息分页数据 */
@@ -2811,7 +2817,7 @@ declare interface DescribeAccountBalanceResponse {
   Balance?: number;
   /** 查询的用户Uin */
   Uin?: number;
-  /** 当前真实可用余额,单位 分 */
+  /** 当前真实可用余额,单位 分。RealBalance=CashAccountBalance+IncomeIntoAccountBalance+PresentAccountBalance-FreezeAmount-OweAmount单位：分 */
   RealBalance?: number;
   /** 现金账户余额,单位 分 */
   CashAccountBalance?: number;
@@ -2829,9 +2835,9 @@ declare interface DescribeAccountBalanceResponse {
   IsCreditLimited?: boolean;
   /** 信用额度,单位 分 */
   CreditAmount?: number;
-  /** 可用信用额度,单位 分 */
+  /** 可用信用额度,单位 分。CreditBalance=CashAccountBalance+IncomeIntoAccountBalance+PresentAccountBalance+CreditAmount-OweAmount单位：分 */
   CreditBalance?: number;
-  /** 真实可用信用额度,单位 分 */
+  /** 真实可用信用额度,单位 分。RealCreditBalance=CreditBalance-FreezeAmount单位：分 */
   RealCreditBalance?: number;
   /** 临时额度，单位 分 */
   TempCredit?: number;

@@ -156,7 +156,7 @@ bri | [业务风险情报](https://cloud.tencent.com/document/product/1064) | 20
 bsca | [软件成分分析](https://cloud.tencent.com/document/product/1483) | 2021-08-11(7) |
 btoe | [区块链可信取证](https://cloud.tencent.com/document/product/1259) | 2021-05-14(13) | 2021-03-03(12) |
 ca | [腾讯云CA](https://cloud.tencent.com/document/product/1691) | 2023-02-28(3) |
-cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-16(94) |
+cam | [访问管理](https://cloud.tencent.com/document/product/598) | 2019-01-16(95) |
 captcha | [验证码](https://cloud.tencent.com/document/product/1110) | 2019-07-22(18) |
 car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-01-10(7) |
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(14) |
@@ -283,7 +283,7 @@ msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 201
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(3) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(46) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(80) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(79) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(30) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(134) | 2018-12-25(20) |

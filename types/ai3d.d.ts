@@ -174,6 +174,8 @@ declare interface QueryHunyuan3DPartJobResponse {
   ErrorMessage?: string;
   /** 生成文件的URL地址，有效期1天。 */
   ResultFile3Ds?: File3D[];
+  /** 是否分步骤进行组件生成；开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；此参数默认关闭。 */
+  PartSegmentationInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -237,6 +239,10 @@ declare interface SubmitHunyuan3DPartJobRequest {
   File?: InputFile3D;
   /** 组件生成模型版本，默认为1.5枚举值：1.5： 1.5模型默认值：1.5 */
   Model?: string;
+  /** 是否分步骤进行组件生成；开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；此参数默认关闭。 */
+  PartSegmentationInfo?: string;
+  /** 是否开启后处理，开启后将只输出一个模型链接，默认关闭。 （开启此接口后，需额外增加20积分） */
+  EnableStagedGeneration?: boolean;
 }
 
 declare interface SubmitHunyuan3DPartJobResponse {

@@ -207,15 +207,15 @@ declare interface CreateInstanceRequest {
   VpcId: string;
   /** 私有网络 VPC 的子网 ID。 */
   SubnetId: string;
-  /** 指定实例计费方式。- 0：按量付费。- 1：包年包月。 */
+  /** 指定实例计费方式。0：按量付费。1：包年包月。 */
   PayMode: number;
   /** 设置实例名称。仅支持长度不超过 60 的中文/英文/数字/-/_。 */
   InstanceName?: string;
   /** 安全组 ID。 */
   SecurityGroupIds?: string[];
-  /** 若计费方式为包年包月，指定包年包月续费的时长。- 单位：月。- 取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。 */
+  /** 若计费方式为包年包月，指定包年包月续费的时长。单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。 */
   PayPeriod?: number;
-  /** 若为包年包月计费，需指定是否开启自动续费。- 0：不开启自动续费。- 1：开启自动续费。 */
+  /** 若为包年包月计费，需指定是否开启自动续费。0：不开启自动续费。1：开启自动续费。 */
   AutoRenew?: number;
   /** 实例额外参数，通过json提交。 */
   Params?: string;
@@ -225,9 +225,9 @@ declare interface CreateInstanceRequest {
   Project?: string;
   /** 产品版本，0-标准版，1-容量增强版 */
   ProductType?: number;
-  /** 实例类型。- base：免费测试版。- single：单机版。- cluster：高可用版。 */
+  /** 实例类型。base：免费测试版。single：单机版。cluster：高可用版。 */
   InstanceType?: string;
-  /** 实例类型为高可用版，需指定可用区选项。- two：两可用区。- three：三可用区。 */
+  /** 实例类型为高可用版，需指定可用区选项。two：两可用区。three：三可用区。 */
   Mode?: string;
   /** 购买实例数量。 */
   GoodsNum?: number;
@@ -253,16 +253,18 @@ declare interface CreateInstanceRequest {
   Chief?: string;
   /** DBA人员信息 */
   DBA?: string;
-  /** 指定实例的节点类型。具体信息，请参见[选择节点类型](https://cloud.tencent.com/document/product/1709/113399)。- compute：计费型。- normal：标准型。- store：存储型。 */
+  /** 指定实例的节点类型。具体信息，请参见选择节点类型。compute：计费型。normal：标准型。store：存储型。 */
   NodeType?: string;
-  /** 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。- 计算型： 1、2、4、8、16、24、32。- 标准型： 1、2、4、8、12、16。- 存储型： 1、2、4、6、8。 */
+  /** 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。计算型： 1、2、4、8、16、24、32。标准型： 1、2、4、8、12、16。存储型： 1、2、4、6、8。 */
   Cpu?: number;
-  /** 指定实例所需的内存大小。单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  /** 指定实例所需的内存大小。单位：GB。选择具体规格，请参见配置规格（选型）。 */
   Memory?: number;
-  /** 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  /** 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见配置规格（选型）。 */
   DiskSize?: number;
-  /** 指定实例所需配置的节点数量。选择方法，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。 */
+  /** 指定实例所需配置的节点数量。选择方法，请参见配置规格（选型）。 */
   WorkerNodeNum?: number;
+  /** 是否开启磁盘数据存储加密（仅 CBS 数据盘生效，需落在 VECTORDB_DISK_ENCRYPT_REGION 白名单地域，默认 false 不开启）默认值：true */
+  EnableEncryption?: boolean;
 }
 
 declare interface CreateInstanceResponse {

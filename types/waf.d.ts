@@ -2358,6 +2358,18 @@ declare interface InstanceInfo {
   TagInfos?: TagInfo[];
 }
 
+/** 大模型意图检测的请求内容 */
+declare interface IntentContent {
+  /** agent的轨迹内容，参考用例 */
+  AgentTrace?: string;
+}
+
+/** 大模型安全意图检测响应数据 */
+declare interface IntentDetectResult {
+  /** 是否恶意意图枚举值：1： 恶意0： 正常 */
+  IsUnSafe?: number;
+}
+
 /** 数据封装 */
 declare interface IpAccessControlData {
   /** ip黑白名单 */
@@ -2498,6 +2510,8 @@ declare interface LLMDetectResult {
   MsgID?: string;
   /** toolcall的检测结果 */
   ToolCallResult?: ToolCallResult;
+  /** 意图检测结果 */
+  IntentDetectResult?: IntentDetectResult;
 }
 
 /** 有效预付费大模型安全包信息 */
@@ -6099,7 +6113,7 @@ declare interface DescribeIpHitItemsResponse {
 }
 
 declare interface DescribeLLMContentSecCheckRequest {
-  /** 服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
+  /** 服务id，使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
   ServiceId: string;
   /** 流量类型，是入向流量还是出向流量，入向：1，出向：2；入向和出向必填 */
   Type: number;
@@ -6107,7 +6121,7 @@ declare interface DescribeLLMContentSecCheckRequest {
   InstanceId: string;
   /** 要审核的内容 */
   Content?: string;
-  /** 对话的id */
+  /** 一问一答的对话的id */
   ChatId?: string;
   /** 标识用户的id，限速使用，不填，则限速会不生效 */
   UserId?: string;
@@ -6119,6 +6133,10 @@ declare interface DescribeLLMContentSecCheckRequest {
   ToolName?: string;
   /** tool_call 场景工具参数 */
   ToolArgs?: string;
+  /** 多轮对话的id */
+  SessionId?: string;
+  /** 意图检测请求内容 */
+  IntentContent?: IntentContent;
 }
 
 declare interface DescribeLLMContentSecCheckResponse {

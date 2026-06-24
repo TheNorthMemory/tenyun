@@ -332,7 +332,7 @@ declare interface InputPermissionGroupRules {
 declare interface LifecycleDataTaskInfo {
   /** 任务id */
   TaskId?: string;
-  /** 任务状态.init：未执行running：执行中，finished：已完成,failed：失败,stopping：停止中,stopped：已停止 */
+  /** 任务状态枚举值：init： 排队中running： 执行中finished： 已完成failed： 失败stopping： 停止中stopped： 已停止 */
   TaskStatus?: string;
   /** 任务创建时间 */
   CreationTime?: string;

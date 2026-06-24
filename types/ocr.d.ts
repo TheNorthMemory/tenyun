@@ -4506,40 +4506,6 @@ declare interface RecognizeAgentResponse {
   RequestId?: string;
 }
 
-declare interface RecognizeContainerOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface RecognizeContainerOCRResponse {
-  /** 集装箱箱号 */
-  ContainerId?: string;
-  /** 集装箱类型 */
-  ContainerType?: string;
-  /** 集装箱总重量，单位：千克（KG） */
-  GrossKG?: string;
-  /** 集装箱总重量，单位：磅（LB） */
-  GrossLB?: string;
-  /** 集装箱有效承重，单位：千克（KG） */
-  PayloadKG?: string;
-  /** 集装箱有效承重，单位：磅（LB） */
-  PayloadLB?: string;
-  /** 集装箱容量，单位：立方米 */
-  CapacityM3?: string;
-  /** 集装箱容量，单位：立英尺 */
-  CapacityFT3?: string;
-  /** 告警码-9926	集装箱箱号不完整或者不清晰-9927	集装箱类型不完整或者不清晰 */
-  Warn?: number[];
-  /** 集装箱自身重量，单位：千克（KG） */
-  TareKG?: string;
-  /** 集装箱自身重量，单位：磅（LB） */
-  TareLB?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RecognizeEncryptedIDCardOCRRequest {
   /** 请求体被加密后的密文（Base64编码），本接口只支持加密传输 */
   EncryptedBody: string;
@@ -5577,8 +5543,6 @@ declare interface Ocr {
   QuestionSplitOCR(data?: QuestionSplitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionSplitOCRResponse>;
   /** 通用文字识别Agent {@link RecognizeAgentRequest} {@link RecognizeAgentResponse} */
   RecognizeAgent(data?: RecognizeAgentRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAgentResponse>;
-  /** 集装箱识别 {@link RecognizeContainerOCRRequest} {@link RecognizeContainerOCRResponse} */
-  RecognizeContainerOCR(data?: RecognizeContainerOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeContainerOCRResponse>;
   /** 身份证识别（安全加密版） {@link RecognizeEncryptedIDCardOCRRequest} {@link RecognizeEncryptedIDCardOCRResponse} */
   RecognizeEncryptedIDCardOCR(data: RecognizeEncryptedIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeEncryptedIDCardOCRResponse>;
   /** 公式识别 {@link RecognizeFormulaOCRRequest} {@link RecognizeFormulaOCRResponse} */
