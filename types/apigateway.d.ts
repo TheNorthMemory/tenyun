@@ -1591,7 +1591,7 @@ declare interface BindApiAppRequest {
 
 declare interface BindApiAppResponse {
   /** 绑定操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3015,7 +3015,7 @@ declare interface ImportOpenApiRequest {
 
 declare interface ImportOpenApiResponse {
   /** 导入OpenApi返回参数。 */
-  Result: CreateApiRspSet;
+  Result?: CreateApiRspSet;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3519,7 +3519,7 @@ declare interface UpdateApiAppKeyRequest {
 
 declare interface UpdateApiAppKeyResponse {
   /** 更新操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

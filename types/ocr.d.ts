@@ -1056,6 +1056,8 @@ declare interface ItemInfo {
   Key?: Key | null;
   /** Value信息组 */
   Value?: Value | null;
+  /** 返回这个字段是否比对审核通过默认值：false */
+  AuditResult?: boolean;
 }
 
 /** 自定义抽取需要的字段名称、字段类型、字段提示词。 */
@@ -1066,6 +1068,10 @@ declare interface ItemNames {
   KeyType?: number;
   /** 抽取字段的描述内容。 */
   KeyPrompt?: string;
+  /** 自定义字段对应期望的值内容（这个一般需要对字段审核比对才需要输入）。 */
+  KeyExpectedValue?: string;
+  /** 自定义字段审核比对的规则prompt。比如keyname是姓名，KeyExpectedValue 张三，KeyAuditPrompt设置为“字符需要完全匹配则审核返回正确”/“字符匹配90%就审核返回正确” */
+  KeyAuditPrompt?: string;
 }
 
 /** 发票字段坐标信息。包括字段英文名称、字段值所在位置的四点坐标、字段所属行号，具体内容请点击左侧链接。 */

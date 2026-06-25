@@ -6,7 +6,7 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface Account {
   /** 账号名，可输入1 - 32个字符。 */
   User: string;
-  /** 账号的主机。说明：1. IP 形式，支持填入%。2. 多个主机以分隔符分隔，分隔符支持;,|换行符和空格。 */
+  /** 账号的主机。IP 形式，支持填入%。 */
   Host: string;
 }
 
@@ -2201,7 +2201,7 @@ declare interface CreateAccountsRequest {
   InstanceId: string;
   /** 云数据库账号。 */
   Accounts: Account[];
-  /** 新账户的密码。说明：1. 在8 ～ 64位字符数以内（推荐12位以上）。2. 至少包含其中两项：小写字母 a ~ z 或 大写字母 A ～ Z。数字0 ～ 9。_+-,&=!@#$%^*().|。3. 不能包含非法字符。 */
+  /** 新账户的密码。说明：在8 ～ 64位字符数以内（推荐12位以上）。至少包含其中两项：小写字母 a ~ z 或 大写字母 A ～ Z。数字0 ～ 9。_+-,&amp;=!@#$%^*().|。不能包含非法字符。 */
   Password: string;
   /** 备注信息。最多支持输入255个字符。 */
   Description?: string;

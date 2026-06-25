@@ -1038,6 +1038,22 @@ declare interface PermissionInfo {
   Rule?: string;
 }
 
+/** 套餐信息 */
+declare interface PlanInfo {
+  /** 套餐标识 */
+  PackageId?: string;
+  /** 套餐中文名称 */
+  PackageTitle?: string;
+  /** 套餐描述 */
+  PackageDescription?: string;
+  /** 单位原价 */
+  UnitPrice?: string;
+  /** 套餐类型 */
+  PackageType?: string;
+  /** json格式化用户资源限制 */
+  ResourceLimit?: string;
+}
+
 /** PostgreSQL资源信息结构体 */
 declare interface PostgreSQLInfo {
   /** 数据库名称 */
@@ -2316,6 +2332,18 @@ declare interface DescribeEnvLimitResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEnvPlansRequest {
+  /** 套餐英文标识，不指定则返回所有可售卖套餐枚举值：baas_integration： 集成版baas_personal： 个人版baas_pf_standard： 标准版baas_pf_enterprise： 企业版baas_pf_enterprise_senior： 企业高级版 */
+  PackageId?: string;
+}
+
+declare interface DescribeEnvPlansResponse {
+  /** 云开发新套餐详情 */
+  PlanList?: PlanInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnvsRequest {
   /** 环境ID，如果传了这个参数则只返回该环境的相关信息 */
   EnvId?: string;
@@ -3345,6 +3373,8 @@ declare interface Tcb {
   DescribeEnvAccountCircle(data: DescribeEnvAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccountCircleResponse>;
   /** 查询环境个数上限接口 {@link DescribeEnvLimitRequest} {@link DescribeEnvLimitResponse} */
   DescribeEnvLimit(data?: DescribeEnvLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvLimitResponse>;
+  /** 查询环境套餐信息 {@link DescribeEnvPlansRequest} {@link DescribeEnvPlansResponse} */
+  DescribeEnvPlans(data?: DescribeEnvPlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvPlansResponse>;
   /** 获取环境列表 {@link DescribeEnvsRequest} {@link DescribeEnvsResponse} */
   DescribeEnvs(data?: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
   /** 查询网关版本信息 {@link DescribeGatewayVersionsRequest} {@link DescribeGatewayVersionsResponse} */

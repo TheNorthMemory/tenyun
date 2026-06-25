@@ -730,6 +730,18 @@ declare interface AssetTag {
   TagValue?: string;
 }
 
+/** 操作资产标签资产信息 */
+declare interface AssetTagModifyAssetItem {
+  /** appid */
+  AppID: number;
+  /** 资产类型 */
+  AssetType: string;
+  /** 实例ID */
+  InstanceID: string;
+  /** 云厂商 */
+  Provider: string;
+}
+
 /** 资产视角配置风险 */
 declare interface AssetViewCFGRisk {
   /** 唯一id */
@@ -1528,6 +1540,18 @@ declare interface CommandPluginState {
   InstallStatus?: string;
 }
 
+/** 容器环境信息 */
+declare interface ContainerEnvInfo {
+  /** 节点类型 */
+  NodeType?: string;
+  /** docker版本 */
+  DockerVersion?: string;
+  /** containerd版本 */
+  ContainerdVersion?: string;
+  /** 文件系统类型 */
+  FileSystemType?: string;
+}
+
 /** cos访问权限信息 */
 declare interface CosAccessInfo {
   /** 可访问账号uin */
@@ -2294,6 +2318,22 @@ declare interface DbAssetInfo {
   CFWProtectLevel?: number;
   /** tag信息 */
   Tag?: Tag[];
+}
+
+/** 磁盘分区信息 */
+declare interface DiskPartitionInfo {
+  /** 分区名称 */
+  Name?: string;
+  /** 挂载路径 */
+  Path?: string;
+  /** 使用百分比 */
+  Percent?: number;
+  /** 分区大小(MB) */
+  Size?: number;
+  /** 分区类型 */
+  Type?: string;
+  /** 已使用(MB) */
+  Used?: number;
 }
 
 /** 域名资产 */
@@ -3822,6 +3862,198 @@ declare interface Location {
   City?: string;
 }
 
+/** 主机列表 */
+declare interface Machine {
+  /** Agent状态，取值：ONLINE-在线，OFFLINE-离线，UNINSTALL-未安装 */
+  AgentStatus?: string;
+  /** Agent版本 */
+  AgentVersion?: string;
+  /** 账号AppId */
+  AppId?: number;
+  /** 云服务商 */
+  CloudFromEnum?: string;
+  /** 云标签列表 */
+  CloudTags?: Tag[];
+  /** CSIP防护类型，取值：BASIC-基础版，PRO-专业版，ULTIMATE-旗舰版 */
+  CsipProtectType?: string;
+  /** 暴露状态 */
+  ExposedStatus?: string;
+  /** 实例ID */
+  InstanceID?: string;
+  /** 实例状态，取值：RUNNING-运行中，STOPPED-已关机，EXPIRED-待回收 */
+  InstanceStatus?: string;
+  /** 网卡IP列表 */
+  IpList?: string[];
+  /** 是否为新增主机（15天内新增） */
+  IsNew?: boolean;
+  /** 内核版本 */
+  KernelVersion?: string;
+  /** 最近一次离线时间（Unix时间戳） */
+  LatestOfflineTime?: number;
+  /** 内网IP */
+  MachineIp?: string;
+  /** 主机名称 */
+  MachineName?: string;
+  /** 操作系统 */
+  MachineOs?: string;
+  /** 外网IP */
+  MachineWanIp?: string;
+  /** 付费模式，取值：PREPAID-预付费，POSTPAID-后付费 */
+  PayMode?: string;
+  /** 项目ID */
+  ProjectId?: number;
+  /** 防护类型，取值：NONE-无防护，BASIC-基础版，PRO-专业版，ULTIMATE-旗舰版，PRO_LH-轻量版 */
+  ProtectType?: string;
+  /** 主机唯一标识 */
+  Quuid?: string;
+  /** 地域信息 */
+  RegionInfo?: RegionInfo;
+  /** 备注 */
+  Remark?: string;
+  /** 资产标签列表 */
+  TagItems?: MiniTagItem[];
+  /** 标签修改信息 */
+  TagModifyInfo?: AssetTagModifyAssetItem;
+  /** TAT状态，取值：ONLINE-在线，OFFLINE-离线 */
+  TatStatus?: string;
+  /** Agent唯一标识 */
+  Uuid?: string;
+  /** VPC ID */
+  VpcId?: string;
+  /** 主机节点类型枚举值：NONE： 主机节点CLUSTER： 集群节点CONTAINER： 容器节点 */
+  NodeType?: string;
+  /** 容器防护状态枚举值：Enabled： 开启防护Disabled： 关闭防护Unknown： 未知 */
+  ContainerDefendStatus?: string;
+  /** 容器数量 */
+  ContainerCount?: number;
+  /** 核数 */
+  CpuCoreCount?: number;
+}
+
+/** 主机列表 */
+declare interface MachineDetail {
+  /** Agent状态 */
+  AgentStatus?: string;
+  /** Agent版本 */
+  AgentVersion?: string;
+  /** 账号AppId */
+  AppId?: number;
+  /** 资产类型名称 */
+  AssetTypeName?: string;
+  /** 系统启动时间（Unix时间戳） */
+  BootTime?: number;
+  /** 购买时间（Unix时间戳） */
+  BuyTime?: number;
+  /** 云服务商 */
+  CloudFromEnum?: string;
+  /** 云标签列表 */
+  CloudTags?: Tags[];
+  /** 内核版本 */
+  CoreVersion?: string;
+  /** CPU信息 */
+  Cpu?: string;
+  /** CPU负载 */
+  CpuLoad?: string;
+  /** CPU核数 */
+  CpuSize?: number;
+  /** 设备型号 */
+  DeviceVersion?: string;
+  /** 磁盘分区信息 */
+  Disks?: DiskPartitionInfo[];
+  /** 到期时间（Unix时间戳） */
+  EndTime?: number;
+  /** 暴露状态 */
+  ExposedStatus?: string;
+  /** 安装时间（Unix时间戳） */
+  InstallTime?: number;
+  /** 实例ID */
+  InstanceID?: string;
+  /** 实例状态 */
+  InstanceStatus?: string;
+  /** 内核版本 */
+  KernelVersion?: string;
+  /** 最近一次在线时间（Unix时间戳） */
+  LatestLiveTime?: number;
+  /** 最近一次离线时间（Unix时间戳） */
+  LatestOfflineTime?: number;
+  /** 内网IP */
+  MachineIp?: string;
+  /** 主机名称 */
+  MachineName?: string;
+  /** 操作系统（云采集） */
+  MachineOs?: string;
+  /** 主机状态 */
+  MachineStatus?: string;
+  /** 外网IP */
+  MachineWanIp?: string;
+  /** 内存大小(MB) */
+  MemSize?: number;
+  /** 内存使用率 */
+  MemoryLoad?: string;
+  /** 网卡信息 */
+  NetCards?: NetworkCardInfo[];
+  /** 操作系统（端采集） */
+  OsByAgent?: string;
+  /** 付费模式 */
+  PayMode?: string;
+  /** 项目ID */
+  ProjectId?: number;
+  /** 已防护天数 */
+  ProtectDays?: number;
+  /** 防护类型 */
+  ProtectType?: string;
+  /** 主机唯一标识 */
+  Quuid?: string;
+  /** 地域信息 */
+  RegionInfo?: RegionInfo;
+  /** 备注 */
+  Remark?: string;
+  /** 序列号 */
+  SerialNumber?: string;
+  /** 资产标签列表 */
+  TagItems?: MiniTagItem[];
+  /** 标签修改信息 */
+  TagModifyInfo?: AssetTagModifyAssetItem;
+  /** Agent唯一标识 */
+  Uuid?: string;
+  /** VPC CIDR */
+  VpcCidrBlock?: string;
+  /** VPC ID */
+  VpcId?: string;
+  /** VPC名称 */
+  VpcName?: string;
+  /** 主机节点类型枚举值：NONE： 主机节点CLUSTER： 集群节点CONTAINER： 容器节点 */
+  NodeType?: string;
+  /** 容器防护状态枚举值：Enabled： 开启防护Disabled： 关闭防护Unknown： 未知 */
+  ContainerDefendStatus?: string;
+  /** 集群签证md5 */
+  ClusterCaMd5?: string;
+  /** 容器环境信息 */
+  ContainerEnvInfo?: ContainerEnvInfo;
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+}
+
+/** 简要的资产标签元素 */
+declare interface MiniTagItem {
+  /** 标签颜色 */
+  Color?: string;
+  /** 描述 */
+  Description?: string;
+  /** 标签ID */
+  ID?: number;
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
+  /** 标签键英文 */
+  TagKeyEn?: string;
+  /** 标签值英文 */
+  TagValueEn?: string;
+}
+
 /** 网卡资产 */
 declare interface NICAsset {
   /** appid */
@@ -3874,6 +4106,22 @@ declare interface NICAsset {
   IsCore?: number;
   /** 是否新资产 1新 */
   IsNewAsset?: number;
+}
+
+/** 网卡信息 */
+declare interface NetworkCardInfo {
+  /** DNS服务器 */
+  DnsServer?: string;
+  /** 网关 */
+  Gateway?: string;
+  /** IP地址 */
+  Ip?: string;
+  /** IPv6地址 */
+  Ipv6?: string;
+  /** MAC地址 */
+  Mac?: string;
+  /** 网卡名称 */
+  Name?: string;
 }
 
 /** 该结构体用来传入告警的key，以更新告警的status */
@@ -4094,6 +4342,20 @@ declare interface RegionConfig {
   RegionArea?: string | null;
   /** 地域英文 */
   RegionNameEN?: string;
+}
+
+/** 地域信息 */
+declare interface RegionInfo {
+  /** 地域 */
+  Region?: string;
+  /** 地域编码 */
+  RegionCode?: string;
+  /** 地域ID */
+  RegionId?: number;
+  /** 地域名称 */
+  RegionName?: string;
+  /** 地域英文名称 */
+  RegionNameEn?: string;
 }
 
 /** 相关攻击事件结构 */
@@ -6559,6 +6821,42 @@ declare interface DescribeCVMAssetsResponse {
   PublicPrivateAttr?: FilterDataObject[];
   /** 主机防护状态 */
   ProtectStatusList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCWPMachineDetailRequest {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeCWPMachineDetailResponse {
+  /** 主机详情 */
+  MachineDetail?: MachineDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCWPMachinesRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 一、主表字段筛选（需要指定 OperatorType）MachineName：主机名称，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;test-server&quot;]MachineIp：内网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;10.0.0.1&quot;]MachineWanIp：外网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;1.2.3.4&quot;]InstanceID：实例ID，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;ins-xxxxx&quot;]MachineStatus / InstanceStatus：实例状态，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;RUNNING&quot;]，可选值：RUNNING/STOPPED/EXPIREDMachineOs：操作系统类型，支持 OperatorType 7(IN)，Values示例：[&quot;1&quot;]，值为数字编码，见下方OsType说明VpcId：VPC ID，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;vpc-xxxxx&quot;]CloudFromEnum：云服务商，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;0&quot;]，值为数字编码，见下方CloudFrom说明Region ：地域，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;ap-guangzhou&quot;]AppId：账号AppId，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;1234567890&quot;]ProjectId：项目ID，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;0&quot;]二、预筛选字段（不需要指定 OperatorType）AgentStatus：Agent状态，单选，Values示例：[&quot;ONLINE&quot;]，可选值：ONLINE/OFFLINE/UNINSTALLProtectType：防护类型（综合），Values示例：[&quot;ULTIMATE&quot;]，可选值：BASIC/PRO/ULTIMATE/NONECsipProtectType：CSIP防护类型，Values示例：[&quot;ULTIMATE&quot;]，可选值：BASIC/PRO/ULTIMATE/NONECloudTags：云标签，Values示例：[&quot;tagKey$tagValue&quot;]，格式：tagKey$tagValue 或 tagKey（只匹配key），最多5个值Tags：资产标签，Values示例：[&quot;123&quot;]，值为标签IDExposedStatus：暴露状态，单选，Values示例：[&quot;EXPOSED&quot;]，可选值：NOT_APPLICABLE/EXPOSED/UNEXPOSED三、特殊筛选字段（不需要指定 OperatorType）NetworkType：网络类型，单选，Values示例：[&quot;1&quot;]，1=VPC网络, 2=基础网络, 3=非腾讯云网络MachineType：机器类型，可多选，Values示例：[&quot;CVM&quot;]，可选值：CVM/BM/ECM/LH/EKS-NATIVE/ECS/EC2/VMSCommon：通用搜索，单选，Values示例：[&quot;关键词&quot;]，同时对内网IP、外网IP、主机名称、实例ID做模糊匹配 */
+  Filter?: Filter;
+  /** 是否需要tat状态信息 */
+  NeedTatStatus?: boolean;
+  /** 是否需要额外信息，如安全中心标签、腾讯云标签 */
+  MoreInformation?: boolean;
+  /** 是否需要容器信息，如容器数、核数、容器防护状态 */
+  NeedContainerInfo?: boolean;
+}
+
+declare interface DescribeCWPMachinesResponse {
+  /** 主机列表 */
+  Machines?: Machine[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9633,6 +9931,20 @@ declare interface ModifyIaCTokenPeriodResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMachineRemarkRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 备注信息 */
+  Remark: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyMachineRemarkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOrganizationAccountStatusRequest {
   /** 修改集团账号状态，1 开启， 0关闭 */
   Status: number;
@@ -10030,6 +10342,10 @@ declare interface Csip {
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
   DescribeCVMAssets(data?: DescribeCVMAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetsResponse>;
+  /** 查询主机详情 {@link DescribeCWPMachineDetailRequest} {@link DescribeCWPMachineDetailResponse} */
+  DescribeCWPMachineDetail(data?: DescribeCWPMachineDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCWPMachineDetailResponse>;
+  /** 查询主机列表 {@link DescribeCWPMachinesRequest} {@link DescribeCWPMachinesResponse} */
+  DescribeCWPMachines(data?: DescribeCWPMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCWPMachinesResponse>;
   /** 获取调用记录 {@link DescribeCallRecordRequest} {@link DescribeCallRecordResponse} */
   DescribeCallRecord(data?: DescribeCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallRecordResponse>;
   /** 检查项视角云资源配置风险 {@link DescribeCheckViewRisksRequest} {@link DescribeCheckViewRisksResponse} */
@@ -10342,6 +10658,8 @@ declare interface Csip {
   ModifyDspmWhitelistStrategy(data?: ModifyDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmWhitelistStrategyResponse>;
   /** 修改IaC检测接入Token存储周期 {@link ModifyIaCTokenPeriodRequest} {@link ModifyIaCTokenPeriodResponse} */
   ModifyIaCTokenPeriod(data: ModifyIaCTokenPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIaCTokenPeriodResponse>;
+  /** 修改主机备注信息 {@link ModifyMachineRemarkRequest} {@link ModifyMachineRemarkResponse} */
+  ModifyMachineRemark(data: ModifyMachineRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineRemarkResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改策略状态 {@link ModifyPolicyStatusRequest} {@link ModifyPolicyStatusResponse} */

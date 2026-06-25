@@ -651,7 +651,7 @@ declare interface DescribeEndpointGroupsRequest {
   GlobalAcceleratorId: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。 */
+  /** 返回数量，默认为10，最大值为10。 */
   Limit?: number;
   /** 过滤条件。 endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。 */
   Filters?: Filter[];

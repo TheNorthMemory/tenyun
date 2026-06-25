@@ -1230,6 +1230,78 @@ declare interface TopHotKeys {
   Type?: string;
 }
 
+/** 审计日志TopSql */
+declare interface TopSqlTpl {
+  /** 执行次数 */
+  ExecTimes?: number | null;
+  /** SQL模板Id，数据类型Long。 */
+  SqlTemplateId?: string | null;
+  /** 最小影响行数 */
+  AffectRowsMin?: number | null;
+  /** sql模板 */
+  SqlTemplate?: string | null;
+  /** 表名 */
+  TableName?: string | null;
+  /** 最大影响行数 */
+  AffectRowsMax?: number | null;
+  /** sql类型 */
+  SqlType?: string | null;
+  /** 影响行数 */
+  AffectRows?: number | null;
+  /** DB名 */
+  DB?: string | null;
+  /** 最小锁等待时间 */
+  LockWaitTimeMin?: number | null;
+  /** cpu时间 */
+  CpuTime?: number | null;
+  /** 最大io等待时间，单位秒 */
+  IoWaitTimeMax?: number | null;
+  /** 最大锁等待时间，单位秒 */
+  LockWaitTimeMax?: number | null;
+  /** 最小检查行数 */
+  CheckRowsMin?: number | null;
+  /** 检查行数 */
+  CheckRows?: number | null;
+  /** 最大cpu时间，单位秒 */
+  CpuTimeMax?: number | null;
+  /** 最小io等待时间，单位秒 */
+  IoWaitTimeMin?: number | null;
+  /** 最大执行时间，单位秒 */
+  LatencyMax?: number | null;
+  /** io等待时间，单位秒 */
+  IoWaitTime?: number | null;
+  /** 最大检查行数 */
+  CheckRowsMax?: number | null;
+  /** 最小cpu时间，单位秒 */
+  CpuTimeMin?: number | null;
+  /** sql详情 */
+  SqlText?: string | null;
+  /** 锁等待时间，单位秒 */
+  LockWaitTime?: number | null;
+  /** 最小执行时间，单位秒 */
+  LatencyMin?: number | null;
+  /** 执行时间，单位秒 */
+  Latency?: number | null;
+  /** queryTime 占比，单位% */
+  QueryTimeRatio?: string | null;
+  /** 平均扫描行数 */
+  CheckRowsAvg?: number;
+  /** 平均cpu时间 */
+  CpuTimeAvg?: number;
+  /** 平均io等待时间 */
+  IoWaitTimeAvg?: number;
+  /** 平均执行时间 */
+  LatencyAvg?: number;
+  /** 平均锁等待时长 */
+  LockWaitTimeAvg?: number;
+  /** 发送行数 */
+  SentRows?: number;
+  /** 平均发送行数 */
+  SentRowsAvg?: number;
+  /** 平均影响行数 */
+  AffectRowsAvg?: number;
+}
+
 /** 用户配置的相关信息，包括邮件配置。 */
 declare interface UserProfile {
   /** 配置的id。 */
@@ -1758,6 +1830,44 @@ declare interface DescribeAuditLogFilesResponse {
   TotalCount?: number;
   /** 审计日志文件详情。 */
   Items?: AuditLogFile[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBAuditLogTopSqlsRequest {
+  /** 开始时间，如“2019-09-10 12:13:14”。 */
+  StartTime: string;
+  /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
+  EndTime: string;
+  /** 服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，默认为&quot;mysql&quot;。 */
+  Product: string;
+  /** 实例 ID 。 */
+  InstanceId: string;
+  /** 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。 */
+  OrderBy?: string;
+  /** 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。 */
+  OrderByDirection?: string;
+  /** 返回数量，默认为20，最大值为100。 */
+  Limit?: number;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 表名 */
+  TableName?: string;
+  /** Hosts名 */
+  Hosts?: string[];
+  /** sql codes */
+  SqlCodes?: string[];
+  /** sql语句 */
+  SqlSample?: string;
+  /** 用户名列表 */
+  Users?: string[];
+}
+
+declare interface DescribeDBAuditLogTopSqlsResponse {
+  /** 符合条件的记录总数。 */
+  TotalCount?: number;
+  /** top sql 列表 */
+  TopSqls?: TopSqlTpl[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4359,6 +4469,8 @@ declare interface Dbbrain {
   DescribeAuditInstanceList(data: DescribeAuditInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditInstanceListResponse>;
   /** 查询审计日志文件 {@link DescribeAuditLogFilesRequest} {@link DescribeAuditLogFilesResponse} */
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
+  /** 获取审计日志TOP SQL模板列表 {@link DescribeDBAuditLogTopSqlsRequest} {@link DescribeDBAuditLogTopSqlsResponse} */
+  DescribeDBAuditLogTopSqls(data: DescribeDBAuditLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAuditLogTopSqlsResponse>;
   /** 查询自治事件任务详情 {@link DescribeDBAutonomyActionRequest} {@link DescribeDBAutonomyActionResponse} */
   DescribeDBAutonomyAction(data: DescribeDBAutonomyActionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAutonomyActionResponse>;
   /** 查询自治事件任务列表 {@link DescribeDBAutonomyActionsRequest} {@link DescribeDBAutonomyActionsResponse} */

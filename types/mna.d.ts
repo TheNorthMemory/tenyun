@@ -192,6 +192,20 @@ declare interface FlowPackageInfo {
   CapacityRemainPrecise?: number;
 }
 
+/** 网关信息 */
+declare interface GatewayInfo {
+  /** 网关ID */
+  GatewayId?: string;
+  /** 网关名称 */
+  GatewayName?: string;
+  /** 创建时间，单位：秒 */
+  CreateTime?: number;
+  /** 网关状态。0：正常，1：异常 */
+  Status?: number;
+  /** 网关实例数 */
+  InstanceSize?: number;
+}
+
 /** 分组的基本信息 */
 declare interface GroupInfo {
   /** 分组ID */
@@ -834,6 +848,24 @@ declare interface GetFlowStatisticResponse {
   RequestId?: string;
 }
 
+declare interface GetGatewayListRequest {
+  /** 页码，从1开始 */
+  PageNumber: number;
+  /** 每页个数 */
+  PageSize: number;
+  /** 网关名称 */
+  GatewayName?: string;
+}
+
+declare interface GetGatewayListResponse {
+  /** 网关列表 */
+  GatewayList?: GatewayInfo[];
+  /** 总个数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetGroupDetailRequest {
   /** 分组ID */
   GroupId: string;
@@ -1405,6 +1437,8 @@ declare interface Mna {
   GetFlowStatisticByName(data: GetFlowStatisticByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByNameResponse>;
   /** 根据区域获取数据流量统计数据 {@link GetFlowStatisticByRegionRequest} {@link GetFlowStatisticByRegionResponse} */
   GetFlowStatisticByRegion(data: GetFlowStatisticByRegionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFlowStatisticByRegionResponse>;
+  /** 获取网关列表 {@link GetGatewayListRequest} {@link GetGatewayListResponse} */
+  GetGatewayList(data: GetGatewayListRequest, config?: AxiosRequestConfig): AxiosPromise<GetGatewayListResponse>;
   /** 获取分组详细信息 {@link GetGroupDetailRequest} {@link GetGroupDetailResponse} */
   GetGroupDetail(data: GetGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetGroupDetailResponse>;
   /** 获取分组列表 {@link GetGroupListRequest} {@link GetGroupListResponse} */

@@ -1750,6 +1750,8 @@ declare interface MqttParam {
   UniqVpcId?: string;
   /** 是否为自建集群, MQTT只支持非自建集群 */
   SelfBuilt?: boolean;
+  /** MQTT消息过滤sql语句 */
+  SqlFilter?: string;
 }
 
 /** MySQL连接源参数 */
@@ -2932,7 +2934,7 @@ declare interface CreateInstancePreRequest {
   InstanceName: string;
   /** 可用区。当购买多可用区实例时，当前参数为主可用区。 查看可用区 */
   ZoneId: number;
-  /** 预付费购买时长，例如 "1m",就是一个月,取值范围 1m~36m */
+  /** 预付费购买时长，例如 &quot;1m&quot;,就是一个月,取值范围 1m~36m */
   Period: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
   InstanceType: number;
@@ -2948,7 +2950,7 @@ declare interface CreateInstancePreRequest {
   RenewFlag?: number;
   /** CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
-  /** 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium" */
+  /** 实例类型: [标准版实例]填写 &quot;standard&quot; (默认), [专业版实例]填写 &quot;profession&quot;,[高级版实例]填写&quot;premium&quot; */
   SpecificationsType?: string;
   /** 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功。默认取值为500，步长设置为100。可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/122562 */
   DiskSize?: number;
@@ -2958,7 +2960,7 @@ declare interface CreateInstancePreRequest {
   Partition?: number;
   /** 标签 */
   Tags?: Tag[];
-  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC" */
+  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。&quot;CLOUD_SSD&quot;：SSD云硬盘；&quot;CLOUD_BASIC&quot;：高性能云硬盘。不传默认为 &quot;CLOUD_BASIC&quot; */
   DiskType?: string;
   /** 是否创建跨可用区实例，当前参数为 true 时，zoneIds必填 */
   MultiZoneFlag?: boolean;
@@ -2974,6 +2976,8 @@ declare interface CreateInstancePreRequest {
   ElasticBandwidthSwitch?: number;
   /** 自定义证书Id,仅当SpecificationsType为profession时生效,支持自定义证书能力可通过DescribeCertificateDetail接口获取 */
   CustomSSLCertId?: string;
+  /** 弹性存储开关枚举值：0： 关闭1： 开启默认值：0 */
+  StoreQuantityType?: number;
 }
 
 declare interface CreateInstancePreResponse {
@@ -3122,6 +3126,8 @@ declare interface CreatePostPaidInstanceRequest {
   ElasticBandwidthSwitch?: number;
   /** 自定义证书Id,仅当SpecificationsType为profession时生效,支持自定义证书能力可通过DescribeCertificateDetail接口获取 */
   CustomSSLCertId?: string;
+  /** 弹性存储开关枚举值：0： 关闭1： 开启默认值：0 */
+  StoreQuantityType?: number;
 }
 
 declare interface CreatePostPaidInstanceResponse {

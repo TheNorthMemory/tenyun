@@ -408,6 +408,12 @@ declare interface LifecycleRule {
   TargetThreshold?: number;
   /** 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。ture：覆盖false：不覆盖（同时也不会释放热存数据）为空时，默认为false */
   IsOverwrite?: boolean;
+  /** 新建文件是否近实时同步至 S3。true：近实时同步（30 秒内）/ false：基于策略配置时间同步。默认 false。仅当 StorageType=ExternalStorage 时生效 */
+  IsCreateRealTimeSync?: boolean;
+  /** 修改文件是否近实时同步至 S3。true：近实时同步（30 秒内）/ false：基于策略配置时间同步。默认 false。仅当 StorageType=ExternalStorage 时生效。与 IsOverwrite 独立 */
+  IsModifyRealTimeSync?: boolean;
+  /** 删除文件是否同步至 S3。true：同步删除（30 秒内）/ false：不同步删除。默认 false。为 true 时要求目标 COS Bucket 已开启多版本。仅当 StorageType=ExternalStorage 时生效 */
+  IsSyncDelete?: boolean;
 }
 
 /** CFS数据迁移任务信息 */
