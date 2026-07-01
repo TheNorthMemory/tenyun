@@ -136,6 +136,76 @@ declare interface BlockedIP {
   ExpireTime?: string;
 }
 
+/** Budget关联资源信息 */
+declare interface BudgetAssociation {
+  /** Budget ID。 */
+  BudgetId?: string;
+  /** 关联创建时间。 */
+  CreatedTime?: string;
+  /** Key ID。仅当Type为Key时返回。 */
+  KeyId?: string | null;
+  /** 模型路由实例ID。当Type为ModelRouter时表示关联资源本身；当Type为Key时表示Key所属实例。 */
+  ModelRouterId?: string;
+  /** 关联资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由Key */
+  Type?: string;
+  /** 关联关系的状态枚举值：Active： 已生效Configuring： 配置中ConfigureFailed： 配置失败 */
+  Status?: string;
+}
+
+/** Budget预算配置 */
+declare interface BudgetConfig {
+  /** 预算刷新周期。枚举值：1d：按天刷新7d：按周刷新30d：按月刷新不传时默认30d。同一个Budget下每种刷新周期最多配置一次。 */
+  BudgetDuration?: string | null;
+  /** 下一次刷新的时间 */
+  BudgetResetAt?: string;
+  /** 最大预算。单位：credit。取值需大于0且不超过10000000000；不传时默认100000。 */
+  MaxBudget?: number | null;
+}
+
+/** Budget预算配置入参 */
+declare interface BudgetConfigInput {
+  /** 预算刷新周期。支持取值：1d：按天刷新7d：按周刷新30d：按月刷新不传时默认使用30d。同一个Budget下每种刷新周期最多配置一次。 */
+  BudgetDuration?: string;
+  /** 最大预算。单位：credit。取值需大于0且不超过10000000000；不传时默认100000。 */
+  MaxBudget?: number;
+}
+
+/** Budget信息 */
+declare interface BudgetInfo {
+  /** 关联的key数量 */
+  AssociationKeyCount?: number;
+  /** 关联的模型路由数量 */
+  AssociationModelRouterCount?: number;
+  /** 关联的用户组数量 */
+  AssociationUserGroupCount?: number;
+  /** Budget预算配置数组。最多返回3个元素，每种刷新周期（1d/7d/30d）各一个。 */
+  BudgetConfigs?: BudgetConfig[];
+  /** Budget ID。 */
+  BudgetId?: string;
+  /** Budget名称。 */
+  BudgetName?: string;
+  /** 创建时间。 */
+  CreatedTime?: string;
+  /** 修改时间。 */
+  ModifiedTime?: string;
+  /** Budget限速信息。 */
+  RateLimitConfig?: RateLimitConfigForBudget;
+  /** Budget状态。枚举值：Provisioning：创建中Active：运行中Configuring：变配中Deleting：删除中ProvisionFailed：创建失败ConfigureFailed：变配失败DeletionFailed：删除失败 */
+  Status?: string;
+}
+
+/** Budget关联资源对象。仅支持企业型模型路由实例和企业型实例下的Key。 */
+declare interface BudgetResource {
+  /** 模型路由实例ID。当Type为ModelRouter时表示要关联的实例；当Type为Key时表示Key所属实例。 */
+  ModelRouterId: string;
+  /** 资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由KeyUserGroup：用户组（Type 为 UserGroup 时需传 UserGroupId） */
+  Type: string;
+  /** Key ID。字段本身选填；当Type为Key时必填，当Type为ModelRouter时不传。 */
+  KeyId?: string;
+  /** 用户组ID */
+  UserGroupId?: string;
+}
+
 /** 证书ID，以及与该证书ID关联的负载均衡实例列表 */
 declare interface CertIdRelatedWithLoadBalancers {
   /** 证书ID */
@@ -336,6 +406,14 @@ declare interface Cluster {
   Tag?: TagInfo[];
 }
 
+/** 模型路由集群信息 */
+declare interface ClusterInfo {
+  /** 独占集群ID */
+  ClusterId?: string;
+  /** 集群类型枚举值：Public： 公有云集群Exclusive： 独占集群默认值：Public */
+  Type?: string;
+}
+
 /** 独占集群信息 */
 declare interface ClusterItem {
   /** 集群唯一ID */
@@ -388,6 +466,28 @@ declare interface ConfigListItem {
   UpdateTimestamp?: string;
 }
 
+/** 批量创建的Key信息 */
+declare interface CreatedKey {
+  /** 明文Key */
+  Key?: string;
+  /** Key的ID */
+  KeyId?: string;
+  /** Key的名称 */
+  KeyName?: string;
+}
+
+/** Credit使用情况。该结构用于 CreditUsageSet 数组中的逐周期用量。 */
+declare interface CreditUsage {
+  /** Budget刷新周期。枚举值：1d：按天刷新7d：按周刷新30d：按月刷新仅在 CreditUsageSet 数组元素中返回。 */
+  BudgetDuration?: string | null;
+  /** 下次刷新时间。用户组关联Budget且Budget设置重置周期时返回；未关联Budget或未设置重置周期时为空。 */
+  BudgetResetAt?: string | null;
+  /** Credit上限。用户组关联Budget且Budget设置最大预算时返回；未设置最大预算时为空。 */
+  Limit?: number | null;
+  /** 用户组已使用的Credit数量。 */
+  Used?: number;
+}
+
 /** 跨域2.0云联网下子机和网卡信息 */
 declare interface CrossTargets {
   /** 本地私有网络ID，即负载均衡的VpcId。 */
@@ -424,6 +524,12 @@ declare interface ExtraInfo {
   ZhiTong?: boolean;
   /** TgwGroup名称 */
   TgwGroupName?: string;
+}
+
+/** 路由FallBack配置 */
+declare interface FallBackItem {
+  /** 默认回退模型列表 */
+  DefaultFallBackModels?: string[];
 }
 
 /** 过滤器条件 */
@@ -512,6 +618,14 @@ declare interface IdleLoadBalancer {
   Domain?: string;
 }
 
+/** 创建Key的信息 */
+declare interface InputKeyInfo {
+  /** Key的名称 */
+  KeyName?: string;
+  /** 导入的明文Key仅允许导入Key模式下输入 */
+  PlainKey?: string;
+}
+
 /** 网络计费模式，最大出带宽 */
 declare interface InternetAccessible {
   /** TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费，国际站用户不支持该计费模式; BANDWIDTH_PACKAGE 按带宽包计费;BANDWIDTH_PREPAID按带宽预付费。 */
@@ -536,6 +650,18 @@ declare interface ItemPrice {
   UnitPriceDiscount: number | null;
   /** 折扣，如20.0代表2折。 */
   Discount: number | null;
+}
+
+/** 异步任务信息 */
+declare interface Job {
+  /** 接口名称 */
+  ApiName?: string;
+  /** 请求ID */
+  RequestId?: string;
+  /** 异步任务状态枚举值：Processing： 进行中Succeeded： 成功Failed： 失败 */
+  Status?: string;
+  /** 资源ID */
+  ResourceIds?: string[];
 }
 
 /** lb实例包年包月相关配置属性 */
@@ -934,6 +1060,108 @@ declare interface LoadBalancerTraffic {
   Domain?: string;
 }
 
+/** 查询单个实例详细信息 */
+declare interface ModelRouterDetail {
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 模型路由实例域名 */
+  Domain?: string;
+  /** 模型路由ID */
+  ModelRouterId?: string;
+  /** 模型路由名称默认值：- */
+  ModelRouterName?: string;
+  /** 模型路由类型枚举值：Shared： 共享型Enterprise： 企业级 */
+  ModelRouterType?: string;
+  /** 修改时间 */
+  ModifiedTime?: string;
+  /** 模型路由实例网络类型枚举值：Internet： 公网Intranet： 内网 */
+  NetworkType?: string;
+  /** 模型路由限速信息 */
+  RateLimitConfig?: RateLimitConfigForModelRouter;
+  /** 模型路由的路由配置 */
+  RouterSetting?: RouterSettingWithFallBack | null;
+  /** 模型路由实例的安全状态枚举值：Normal： 正常Banned： 已封禁Frozen： 已冻结 */
+  SecurityStatus?: string;
+  /** 模型路由网络配置列表 */
+  ServiceEndPoints?: ServiceEndPoints[];
+  /** 模型路由实例状态枚举值：Active： 运行中Provisioning： 创建中Configuring： 变配中 */
+  Status?: string;
+  /** 模型路由实例所属子网的ID */
+  SubnetId?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+  /** 模型路由实例的计费状态枚举值：Normal： 正常Isolated： 已隔离 */
+  TradeStatus?: string;
+  /** 模型路由实例VIP */
+  Vip?: string;
+  /** 模型路由实例所属VPC的ID */
+  VpcId?: string;
+  /** 模型路由实例关联的Budget ID。未关联Budget时返回空字符串。 */
+  BudgetId?: string | null;
+  /** 模型路由实例关联的Budget名称。未关联Budget时返回空字符串。 */
+  BudgetName?: string | null;
+  /** 模型路由实例的Credit使用情况。 */
+  CreditUsage?: CreditUsage | null;
+  /** 模型路由实例按Budget刷新周期划分的Credit使用情况。当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。 */
+  CreditUsageSet?: CreditUsage[];
+  /** 安全组ID列表 */
+  SecurityGroups?: string[];
+  /** 集群信息 */
+  ClusterInfo?: ClusterInfo;
+}
+
+/** 模型路由相关配额 */
+declare interface ModelRouterQuota {
+  /** 配额名称 */
+  QuotaType?: string | null;
+  /** 资源ID */
+  ResourceId?: string | null;
+  /** 配额上限单位：个 */
+  Limit?: number | null;
+  /** 已使用配额数量单位：个 */
+  Used?: number | null;
+  /** 剩余配额数量单位：个 */
+  Available?: number | null;
+}
+
+/** 模型路由列表 */
+declare interface ModelRouterSet {
+  /** 模型路由实例关联的Budget ID。未关联Budget时返回空字符串。 */
+  BudgetId?: string | null;
+  /** 模型路由实例关联的Budget名称。未关联Budget时返回空字符串。 */
+  BudgetName?: string | null;
+  /** 集群信息 */
+  ClusterInfo?: ClusterInfo;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 模型路由实例按Budget刷新周期划分的Credit使用情况。当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。 */
+  CreditUsageSet?: CreditUsage[];
+  /** 模型路由实例域名 */
+  Domain?: string;
+  /** 模型路由ID */
+  ModelRouterId?: string;
+  /** 模型路由名称默认值：- */
+  ModelRouterName?: string;
+  /** 模型路由类型枚举值：Shared： 共享型Enterprise： 企业级 */
+  ModelRouterType?: string;
+  /** 修改时间 */
+  ModifiedTime?: string;
+  /** 模型路由实例网络类型枚举值：Internet： 公网Intranet： 内网 */
+  NetworkType?: string;
+  /** 模型路由实例的安全状态枚举值：Normal： 正常Banned： 已封禁Frozen： 已冻结 */
+  SecurityStatus?: string;
+  /** 模型路由实例状态枚举值：Active： 运行中Provisioning： 创建中Configuring： 变配中 */
+  Status?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+  /** 模型路由实例的计费状态枚举值：Normal： 正常Isolated： 已隔离 */
+  TradeStatus?: string;
+  /** 模型路由实例VIP */
+  Vip?: string;
+  /** 模型路由实例所属VPC的ID */
+  VpcId?: string;
+}
+
 /** CLB监听器或规则绑定的多证书信息 */
 declare interface MultiCertInfo {
   /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证 */
@@ -970,6 +1198,40 @@ declare interface Quota {
   QuotaCurrent?: number | null;
   /** 配额数量。 */
   QuotaLimit?: number;
+}
+
+/** Budget限速配置 */
+declare interface RateLimitConfigForBudget {
+  /** 每分钟限制的请求数量。单位：次/分钟。 */
+  RPM?: number;
+  /** 每分钟限制的Token数量。单位：个/分钟。 */
+  TPM?: number;
+}
+
+/** 限速配置 */
+declare interface RateLimitConfigForKey {
+  /** 最大并发请求数量单位：次 */
+  MaxParallelRequest?: number;
+  /** 每分钟限制的请求数量单位：次/分钟 */
+  RPM?: number;
+  /** 每分钟限制的Token数量单位：个/分钟 */
+  TPM?: number;
+}
+
+/** 限速配置 */
+declare interface RateLimitConfigForModelRouter {
+  /** 每分钟限制的请求数量单位：次/分钟 */
+  RPM?: number;
+  /** 每分钟限制的Token数量单位：个/分钟 */
+  TPM?: number;
+}
+
+/** 重新生成的Key信息 */
+declare interface RegeneratedKey {
+  /** Key的ID */
+  KeyId?: string;
+  /** 重新生成的明文Key */
+  Key?: string;
 }
 
 /** 资源详细信息 */
@@ -1018,6 +1280,22 @@ declare interface RewriteTarget {
   TakeUrl?: boolean;
   /** 重定向类型，Manual: 手动重定向，Auto: 自动重定向 */
   RewriteType?: string;
+}
+
+/** 路由设置 */
+declare interface RouterSettingWithFallBack {
+  /** 回退策略 */
+  FallBack?: FallBackItem | null;
+  /** 模型内路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
+  RoutingStrategy?: string | null;
+  /** 模型间路由策略。枚举值：SimpleShuffle： 简单随机路由CostBasedRouting： 最低积分路由 */
+  CrossModelGroupRoutingStrategy?: string | null;
+}
+
+/** 路由设置 */
+declare interface RouterSettingWithoutFallBack {
+  /** 路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
+  RoutingStrategy?: string;
 }
 
 /** 修改节点标签的数据类型 */
@@ -1178,6 +1456,16 @@ declare interface RulesItems {
   Targets?: LbRsTargets[];
 }
 
+/** 模型路由网络服务信息 */
+declare interface ServiceEndPoints {
+  /** 证书ID */
+  CertId?: string;
+  /** 监听端口 */
+  Port?: number;
+  /** 网络协议 */
+  Schema?: string;
+}
+
 /** 升级为性能容量型参数 */
 declare interface SlaUpdateParam {
   /** 负载均衡实例 ID。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。 */
@@ -1202,7 +1490,7 @@ declare interface SpecAvailability {
   Availability?: string;
 }
 
-/** 负载均衡的标签信息 */
+/** 模型路由实例的标签信息 */
 declare interface TagInfo {
   /** 标签的键 */
   TagKey: string;
@@ -1412,6 +1700,36 @@ declare interface TypeInfo {
   SpecAvailabilitySet?: SpecAvailability[];
 }
 
+/** 用户组信息。 */
+declare interface UserGroupInfo {
+  /** 用户组ID。「未分组」虚拟分组固定为 ugrp-ungrouped。 */
+  UserGroupId?: string;
+  /** 用户组名称。「未分组」虚拟分组固定为 ungrouped。 */
+  UserGroupName?: string;
+  /** 所属模型路由实例ID。 */
+  ModelRouterId?: string;
+  /** 用户组状态。枚举值：Creating：创建中Active：正常Configuring：配置中Deleting：删除中「未分组」虚拟分组（ugrp-ungrouped）恒为 Active。 */
+  Status?: string;
+  /** 用户组真实模型白名单。「未分组」虚拟分组为空数组。 */
+  Models?: string[];
+  /** 用户组意图路由白名单（ir-xxx）。「未分组」虚拟分组为空数组。 */
+  IntentRouters?: string[];
+  /** 关联的Budget ID。未关联时为空；「未分组」虚拟分组恒为空。 */
+  BudgetId?: string | null;
+  /** 关联的Budget名称。未关联时为空；「未分组」虚拟分组恒为空。 */
+  BudgetName?: string | null;
+  /** 用户组多刷新周期 Credit 使用情况。无多周期预算时为空数组。 */
+  CreditUsageSet?: CreditUsage[];
+  /** 用户组当前包含的 Key 数量。「未分组」虚拟分组（ugrp-ungrouped）返回该模型路由实例下未归属任何用户组的 Key 数量。 */
+  KeyCount?: number;
+  /** 标签列表。「未分组」虚拟分组为空数组。 */
+  Tags?: TagInfo[];
+  /** 创建时间。「未分组」虚拟分组不返回此字段。 */
+  CreatedTime?: string;
+  /** 修改时间。「未分组」虚拟分组不返回此字段。 */
+  ModifiedTime?: string;
+}
+
 /** 可用区相关信息 */
 declare interface ZoneInfo {
   /** 可用区数值形式的唯一ID，如：100001 */
@@ -1448,6 +1766,18 @@ declare interface ZoneResource {
   EdgeZone?: boolean;
   /** 网络出口 */
   Egress?: string;
+}
+
+declare interface AssociateBudgetRequest {
+  /** Budget ID。 */
+  BudgetId: string;
+  /** 要关联的资源列表。仅支持企业型模型路由实例和企业型实例下的Key。同一请求内不允许重复资源；资源已关联其他Budget时将替换为新的Budget。 */
+  Resources: BudgetResource[];
+}
+
+declare interface AssociateBudgetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AssociateCustomizedConfigRequest {
@@ -1592,6 +1922,24 @@ declare interface CloneLoadBalancerResponse {
   RequestId?: string;
 }
 
+declare interface CreateBudgetRequest {
+  /** 预算配置数组。数组长度最大为1。BudgetResetAt不支持作为入参设置。 */
+  BudgetConfigs?: BudgetConfigInput[];
+  /** Budget名称。不传默认为空字符串。 */
+  BudgetName?: string;
+  /** Budget限速配置。 */
+  RateLimitConfig?: RateLimitConfigForBudget;
+  /** 创建Budget时同时关联的资源列表。仅支持企业型模型路由实例和企业型实例下的Key。如果资源不存在或不可关联，创建请求失败；资源已关联其他Budget时将替换为新创建的Budget。 */
+  Resources?: BudgetResource[];
+}
+
+declare interface CreateBudgetResponse {
+  /** Budget ID。创建请求提交后返回，可通过DescribeBudgets查询状态。 */
+  BudgetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClsLogSetRequest {
   /** 日志集的名字，不能和cls其他日志集重名。不填默认为clb_logset。 */
   LogsetName?: string;
@@ -1604,6 +1952,54 @@ declare interface CreateClsLogSetRequest {
 declare interface CreateClsLogSetResponse {
   /** 日志集的 ID。 */
   LogsetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateKeyRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** Key名称 */
+  KeyName?: string;
+  /** 限速配置 */
+  RateLimitConfig?: RateLimitConfigForKey;
+  /** 关联的积分预算ID */
+  BudgetId?: string;
+  /** 需要关联的用户组ID */
+  UserGroupId?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+}
+
+declare interface CreateKeyResponse {
+  /** Key的ID */
+  KeyId?: string;
+  /** 返回的真实Key */
+  Key?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateKeysRequest {
+  /** 模型路由ID */
+  ModelRouterId: string;
+  /** 需要绑定的预算信息，所有Key共用 */
+  BudgetId?: string;
+  /** Key列表 */
+  Keys?: InputKeyInfo[];
+  /** 批量创建Key的模式枚举值：Generate： 平台生成KeyImport： 导入自带Key默认值：Generate */
+  Mode?: string;
+  /** 限速信息，所有Key共用 */
+  RateLimitConfig?: RateLimitConfigForKey;
+  /** 标签。所有Key都会绑定该标签。 */
+  Tags?: TagInfo[];
+  /** 需要关联的用户组ID */
+  UserGroupId?: string;
+}
+
+declare interface CreateKeysResponse {
+  /** 创建的Key的信息 */
+  CreatedKeys?: CreatedKey[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1766,6 +2162,42 @@ declare interface CreateLoadBalancerSnatIpsResponse {
   RequestId?: string;
 }
 
+declare interface CreateModelRouterRequest {
+  /** 模型路由类型枚举值：Shared： 共享型Enterprise： 企业级 */
+  ModelRouterType: string;
+  /** 模型路由实例名称默认值：- */
+  ModelRouterName?: string;
+  /** 模型路由实例的网络协议枚举值：HTTP： HTTP协议HTTPS： HTTPS协议 */
+  Schema?: string;
+  /** 模型路由的监听端口取值范围：[1, 65535] */
+  Port?: number;
+  /** 证书ID入参限制：当Scheme为HTTPS时，该参数必传 */
+  CertId?: string;
+  /** 网络类型枚举值：Internet： 公网Intranet： 内网 */
+  NetworkType?: string;
+  /** 模型路由实例所属VPC的ID */
+  VpcId?: string;
+  /** 模型路由实例所属子网的ID */
+  SubnetId?: string;
+  /** 关联的积分预算ID */
+  BudgetId?: string;
+  /** 限速配置 */
+  RateLimitConfig?: RateLimitConfigForModelRouter;
+  /** 路由配置 */
+  RouterSetting?: RouterSettingWithoutFallBack;
+  /** 标签 */
+  Tags?: TagInfo[];
+  /** 集群信息 */
+  ClusterInfo?: ClusterInfo;
+}
+
+declare interface CreateModelRouterResponse {
+  /** 模型路由实例ID */
+  ModelRouterId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRuleRequest {
   /** 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取 */
   LoadBalancerId: string;
@@ -1842,6 +2274,52 @@ declare interface CreateTopicResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserGroupRequest {
+  /** 模型路由实例ID。用户组将创建在该实例下。 */
+  ModelRouterId: string;
+  /** 用户组名称。必填。同一模型路由实例下名称唯一，长度不超过255个字符。 */
+  UserGroupName: string;
+  /** 建组时直接关联的预算 ID（须为已存在的 Budget）。关联后由该 Budget 统一管理本组的消费上限与限速。不传表示不关联预算，可建组后再用 AssociateBudget 关联。 */
+  BudgetId?: string;
+  /** 用户组意图路由白名单（ir-xxx）。每一项须为该实例已创建的意图路由名。命中意图路由名时其内部真实模型自动豁免白名单。为空表示不授权任何意图路由。 */
+  IntentRouters?: string[];
+  /** 建组时同时绑定的已有 Key ID 列表，最多100个。每个 Key 须属于同一模型路由实例。建组与绑定为一个原子异步任务，任一 Key 失败则整组创建回滚。不传表示建空组。 */
+  KeyIds?: string[];
+  /** 用户组真实模型白名单。每一项须为该实例已关联的模型名。为空表示不在用户组层限制真实模型（按实例层白名单生效）。 */
+  Models?: string[];
+  /** 标签列表，最多50个。 */
+  Tags?: TagInfo[];
+}
+
+declare interface CreateUserGroupResponse {
+  /** 新建用户组的ID。 */
+  UserGroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBudgetsRequest {
+  /** 要删除的Budget ID列表。 */
+  BudgetIds: string[];
+}
+
+declare interface DeleteBudgetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteKeysRequest {
+  /** 模型路由ID */
+  ModelRouterId: string;
+  /** key的ID列表 */
+  KeyIds: string[];
+}
+
+declare interface DeleteKeysResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteListenerRequest {
   /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
@@ -1890,6 +2368,16 @@ declare interface DeleteLoadBalancerSnatIpsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteModelRoutersRequest {
+  /** 模型路由实例ID列表 */
+  ModelRouterIds?: string[];
+}
+
+declare interface DeleteModelRoutersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRewriteRequest {
   /** 负载均衡实例ID。 */
   LoadBalancerId: string;
@@ -1932,6 +2420,18 @@ declare interface DeleteTargetGroupsRequest {
 }
 
 declare interface DeleteTargetGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserGroupsRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 待删除的用户组ID列表，单次1-100个。不可包含「未分组」虚拟分组 ugrp-ungrouped。组内仍有 Key 时将拒绝删除，需先将 Key 移出或迁移到其他组。 */
+  UserGroupIds: string[];
+}
+
+declare interface DeleteUserGroupsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2000,6 +2500,28 @@ declare interface DeregisterTargetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAsyncJobsRequest {
+  /** 请求ID列表 */
+  RequestIds?: string[];
+  /** 分页游标 */
+  NextToken?: string;
+  /** 本次查询最大数量取值范围：[1, 100]默认值：20 */
+  MaxResults?: number;
+}
+
+declare interface DescribeAsyncJobsResponse {
+  /** 异步任务列表 */
+  Jobs?: Job[];
+  /** 分页游标 */
+  NextToken?: string;
+  /** 本次查询最大数量 */
+  MaxResults?: number;
+  /** 本次查询总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBlockIPListRequest {
   /** 负载均衡实例 ID。 */
   LoadBalancerId: string;
@@ -2028,6 +2550,46 @@ declare interface DescribeBlockIPTaskRequest {
 declare interface DescribeBlockIPTaskResponse {
   /** 1 running，2 fail，6 succ */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBudgetAssociationsRequest {
+  /** Budget ID。一次只允许查询一个Budget。 */
+  BudgetId: string;
+  /** 资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由Key不传时返回全部资源类型。 */
+  Type?: string;
+  /** 本次查询偏移量 */
+  Offset?: number;
+  /** 本次查询限制的数量 */
+  Limit?: number;
+}
+
+declare interface DescribeBudgetAssociationsResponse {
+  /** Budget关联资源列表。 */
+  AssociationSet?: BudgetAssociation[];
+  /** 符合条件的总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBudgetsRequest {
+  /** Budget ID列表。 */
+  BudgetIds?: string[];
+  /** 过滤列表。支持：BudgetId、BudgetName、Status。 */
+  Filters?: Filter[];
+  /** 本次查询限制的数量。取值范围：[1, 100]默认值：20。 */
+  Limit?: number;
+  /** 本次查询偏移量。默认值：0。 */
+  Offset?: number;
+}
+
+declare interface DescribeBudgetsResponse {
+  /** Budget列表。 */
+  BudgetSet?: BudgetInfo[];
+  /** 符合条件的总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2376,6 +2938,54 @@ declare interface DescribeLoadBalancersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelRouterDetailRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+}
+
+declare interface DescribeModelRouterDetailResponse {
+  /** 模型路由实例详情 */
+  ModelRouter?: ModelRouterDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelRouterQuotaRequest {
+  /** 配额类型 */
+  QuotaTypes: string[];
+  /** 要查询的资源ID */
+  ResourceIds?: string[];
+  /** 需要展示的字段枚举值：Used： 已使用的配额数量Available： 剩余的配额数量 */
+  DisplayFields?: string[];
+}
+
+declare interface DescribeModelRouterQuotaResponse {
+  /** 配额信息 */
+  Quotas?: ModelRouterQuota[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelRoutersRequest {
+  /** 过滤条件支持：ModelRouterName、ModelRouterType、Status、BudgetId、tag-key、tag:&lt;tag-key&gt;。 */
+  Filters?: Filter[];
+  /** 每页数量，1-100，默认 20 */
+  Limit?: number;
+  /** 模型路由实例ID列表 */
+  ModelRouterIds?: string[];
+  /** 分页偏移量，默认 0 */
+  Offset?: number;
+}
+
+declare interface DescribeModelRoutersResponse {
+  /** 模型路由实例列表 */
+  ModelRouterSet?: ModelRouterSet[];
+  /** 符合条件的总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQuotaRequest {
 }
 
@@ -2548,6 +3158,40 @@ declare interface DescribeTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserGroupsRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 用户组ID列表，用于按ID过滤，单次最多100个；可包含「未分组」虚拟分组 ugrp-ungrouped。 */
+  UserGroupIds?: string[];
+  /** 过滤列表。支持：UserGroupName、Status、tag-key、tag:&lt;tag-key&gt;。 */
+  Filters?: Filter[];
+  /** 本次查询限制的数量取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+  /** 本次查询偏移量默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeUserGroupsResponse {
+  /** 用户组列表。 */
+  UserGroups?: UserGroupInfo[];
+  /** 符合条件的总数（含「未分组」逻辑组 ugrp-ungrouped：当其未被过滤条件排除时计入，即 TotalCount = 真实用户组数 + 1）。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisassociateBudgetRequest {
+  /** Budget ID。 */
+  BudgetId: string;
+  /** 要解除关联的资源列表。 */
+  Resources: BudgetResource[];
+}
+
+declare interface DisassociateBudgetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateCustomizedConfigRequest {
   /** 配置ID */
   UconfigId: string;
@@ -2688,6 +3332,22 @@ declare interface ModifyBlockIPListResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBudgetAttributesRequest {
+  /** Budget ID。 */
+  BudgetId: string;
+  /** 预算配置数组。数组长度最大为1。BudgetResetAt不支持作为入参设置。 */
+  BudgetConfigs?: BudgetConfigInput[];
+  /** Budget名称。 */
+  BudgetName?: string;
+  /** Budget限速配置。 */
+  RateLimitConfig?: RateLimitConfigForBudget;
+}
+
+declare interface ModifyBudgetAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDomainAttributesRequest {
   /** 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。 */
   LoadBalancerId: string;
@@ -2750,6 +3410,50 @@ declare interface ModifyFunctionTargetsRequest {
 }
 
 declare interface ModifyFunctionTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyKeyAttributesRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** API Key的ID */
+  KeyId: string;
+  /** Key的名称 */
+  KeyName?: string;
+  /** 限速配置 */
+  RateLimitConfig?: RateLimitConfigForKey;
+}
+
+declare interface ModifyKeyAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyKeysBlockStatusRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** 是否停止使用 */
+  Blocked: boolean;
+  /** 需要修改的Key的ID列表 */
+  KeyIds?: string[];
+}
+
+declare interface ModifyKeysBlockStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyKeysUserGroupRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 目标归属用户组ID。传真实用户组ID表示批量入组或跨组移动（Key 已属其它组则改为目标组）；传 ugrp-ungrouped 表示批量移出到未分组。 */
+  UserGroupId: string;
+  /** 待变更归属的 Key ID 列表，单次1-100个。 */
+  KeyIds: string[];
+}
+
+declare interface ModifyKeysUserGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2874,6 +3578,24 @@ declare interface ModifyLoadBalancersProjectRequest {
 }
 
 declare interface ModifyLoadBalancersProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelRouterAttributesRequest {
+  /** 模型路由ID */
+  ModelRouterId: string;
+  /** 模型路由名称 */
+  ModelRouterName?: string;
+  /** 限速配置 */
+  RateLimitConfig?: RateLimitConfigForModelRouter;
+  /** 路由配置 */
+  RouterSetting?: RouterSettingWithFallBack;
+  /** 新的 HTTPS 证书ID，用于替换实例 HTTPS 服务端点当前绑定的证书。常用于证书到期前的更换场景。使用限制：仅企业型（Enterprise）且服务端点协议为 HTTPS 的实例支持修改证书。证书须为 SSL 证书控制台中状态为“已签发”（可用）且未过期的服务器证书（SVR 类型）。可在 SSL 证书控制台 查看证书ID。替换后新证书立即生效，过程中不会中断业务流量。若传入的证书与当前绑定的证书相同，接口直接返回成功，不做任何变更。不传则证书保持不变。可通过 DescribeModelRouterDetail 接口的 ServiceEndPoints.CertId 字段查询当前绑定的证书。 */
+  CertId?: string;
+}
+
+declare interface ModifyModelRouterAttributesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3004,6 +3726,42 @@ declare interface ModifyTargetWeightResponse {
   RequestId?: string;
 }
 
+declare interface ModifyUserGroupAttributesRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 待修改的用户组ID。不可为「未分组」虚拟分组 ugrp-ungrouped。 */
+  UserGroupId: string;
+  /** 用户组关联的预算ID。不传则不修改预算关联；传入有效 budget-xxx 则将该用户组关联到此预算（若已关联其它预算则替换为本预算）。仅支持关联/替换，不支持解绑——解绑请用 DisassociateBudget。预算与组内 Key、所属实例的预算各自独立判定。 */
+  BudgetId?: string;
+  /** 用户组意图路由白名单（ir-xxx）。每一项须为该实例已创建的意图路由名。不传则不修改；传入即整体覆盖。 */
+  IntentRouters?: string[];
+  /** 用户组真实模型白名单。每一项须为该实例已关联的模型名。不传则不修改；传入即整体覆盖。 */
+  Models?: string[];
+  /** 用户组名称。不传则不修改；传入时长度不超过255个字符、同实例下唯一。 */
+  UserGroupName?: string;
+}
+
+declare interface ModifyUserGroupAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RegenerateKeysRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** Key的ID列表 */
+  KeyIds?: string[];
+}
+
+declare interface RegenerateKeysResponse {
+  /** 重新生成后的Key的信息 */
+  RegeneratedKeys?: RegeneratedKey[];
+  /** 重新生成失败的Key的ID列表 */
+  FailedKeyIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegisterFunctionTargetsRequest {
   /** 负载均衡实例 ID。 */
   LoadBalancerId: string;
@@ -3105,6 +3863,8 @@ declare interface SetCustomizedConfigForLoadBalancerRequest {
   ConfigName?: string;
   /** 负载均衡实例ID。绑定解绑时，必传此字段。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。 */
   LoadBalancerIds?: string[];
+  /** 标签 */
+  Tags?: TagInfo[];
 }
 
 declare interface SetCustomizedConfigForLoadBalancerResponse {
@@ -3173,6 +3933,8 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
 /** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
+  /** 关联Budget {@link AssociateBudgetRequest} {@link AssociateBudgetResponse} */
+  AssociateBudget(data: AssociateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateBudgetResponse>;
   /** 关联个性化配置 {@link AssociateCustomizedConfigRequest} {@link AssociateCustomizedConfigResponse} */
   AssociateCustomizedConfig(data: AssociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateCustomizedConfigResponse>;
   /** 规则关联目标组 {@link AssociateTargetGroupsRequest} {@link AssociateTargetGroupsResponse} */
@@ -3189,20 +3951,34 @@ declare interface Clb {
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
   /** 克隆负载均衡实例 {@link CloneLoadBalancerRequest} {@link CloneLoadBalancerResponse} */
   CloneLoadBalancer(data: CloneLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CloneLoadBalancerResponse>;
+  /** 创建Budget {@link CreateBudgetRequest} {@link CreateBudgetResponse} */
+  CreateBudget(data?: CreateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBudgetResponse>;
   /** 创建CLB专有日志集 {@link CreateClsLogSetRequest} {@link CreateClsLogSetResponse} */
   CreateClsLogSet(data?: CreateClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogSetResponse>;
+  /** 创建 API Key {@link CreateKeyRequest} {@link CreateKeyResponse} */
+  CreateKey(data: CreateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyResponse>;
+  /** 批量创建Key {@link CreateKeysRequest} {@link CreateKeysResponse} */
+  CreateKeys(data: CreateKeysRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeysResponse>;
   /** 创建负载均衡监听器 {@link CreateListenerRequest} {@link CreateListenerResponse} */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
   /** 购买负载均衡实例 {@link CreateLoadBalancerRequest} {@link CreateLoadBalancerResponse} */
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
   /** 添加SnatIp {@link CreateLoadBalancerSnatIpsRequest} {@link CreateLoadBalancerSnatIpsResponse} */
   CreateLoadBalancerSnatIps(data: CreateLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerSnatIpsResponse>;
+  /** 创建模型路由实例 {@link CreateModelRouterRequest} {@link CreateModelRouterResponse} */
+  CreateModelRouter(data: CreateModelRouterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelRouterResponse>;
   /** 创建负载均衡七层监听器转发规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建目标组 {@link CreateTargetGroupRequest} {@link CreateTargetGroupResponse} */
   CreateTargetGroup(data?: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
+  /** 创建用户组 {@link CreateUserGroupRequest} {@link CreateUserGroupResponse} */
+  CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
+  /** 删除Budget {@link DeleteBudgetsRequest} {@link DeleteBudgetsResponse} */
+  DeleteBudgets(data: DeleteBudgetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBudgetsResponse>;
+  /** 批量删除 API Key {@link DeleteKeysRequest} {@link DeleteKeysResponse} */
+  DeleteKeys(data: DeleteKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeysResponse>;
   /** 删除负载均衡监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
   /** 删除负载均衡实例 {@link DeleteLoadBalancerRequest} {@link DeleteLoadBalancerResponse} */
@@ -3211,12 +3987,16 @@ declare interface Clb {
   DeleteLoadBalancerListeners(data: DeleteLoadBalancerListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerListenersResponse>;
   /** 删除SnatIp {@link DeleteLoadBalancerSnatIpsRequest} {@link DeleteLoadBalancerSnatIpsResponse} */
   DeleteLoadBalancerSnatIps(data: DeleteLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerSnatIpsResponse>;
+  /** 删除模型路由 {@link DeleteModelRoutersRequest} {@link DeleteModelRoutersResponse} */
+  DeleteModelRouters(data?: DeleteModelRoutersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelRoutersResponse>;
   /** 删除负载均衡转发规则之间的重定向关系 {@link DeleteRewriteRequest} {@link DeleteRewriteResponse} */
   DeleteRewrite(data: DeleteRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRewriteResponse>;
   /** 删除负载均衡七层监听器的转发规则 {@link DeleteRuleRequest} {@link DeleteRuleResponse} */
   DeleteRule(data: DeleteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRuleResponse>;
   /** 删除目标组 {@link DeleteTargetGroupsRequest} {@link DeleteTargetGroupsResponse} */
   DeleteTargetGroups(data: DeleteTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTargetGroupsResponse>;
+  /** 删除用户组 {@link DeleteUserGroupsRequest} {@link DeleteUserGroupsResponse} */
+  DeleteUserGroups(data: DeleteUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupsResponse>;
   /** 将云函数从转发规则上解绑 {@link DeregisterFunctionTargetsRequest} {@link DeregisterFunctionTargetsResponse} */
   DeregisterFunctionTargets(data: DeregisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterFunctionTargetsResponse>;
   /** 解绑目标组服务器 {@link DeregisterTargetGroupInstancesRequest} {@link DeregisterTargetGroupInstancesResponse} */
@@ -3225,10 +4005,16 @@ declare interface Clb {
   DeregisterTargets(data: DeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsResponse>;
   /** 解绑传统型负载均衡的后端服务器 {@link DeregisterTargetsFromClassicalLBRequest} {@link DeregisterTargetsFromClassicalLBResponse} */
   DeregisterTargetsFromClassicalLB(data: DeregisterTargetsFromClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsFromClassicalLBResponse>;
+  /** 查询异步任务信息 {@link DescribeAsyncJobsRequest} {@link DescribeAsyncJobsResponse} */
+  DescribeAsyncJobs(data?: DescribeAsyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncJobsResponse>;
   /** 查询一个负载均衡所封禁的IP列表（黑名单） {@link DescribeBlockIPListRequest} {@link DescribeBlockIPListResponse} */
   DescribeBlockIPList(data: DescribeBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIPListResponse>;
   /** 查询封禁IP（黑名单）异步任务的执行状态 {@link DescribeBlockIPTaskRequest} {@link DescribeBlockIPTaskResponse} */
   DescribeBlockIPTask(data: DescribeBlockIPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIPTaskResponse>;
+  /** 查询Budget关联资源 {@link DescribeBudgetAssociationsRequest} {@link DescribeBudgetAssociationsResponse} */
+  DescribeBudgetAssociations(data: DescribeBudgetAssociationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBudgetAssociationsResponse>;
+  /** 查询Budget列表 {@link DescribeBudgetsRequest} {@link DescribeBudgetsResponse} */
+  DescribeBudgets(data?: DescribeBudgetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBudgetsResponse>;
   /** 通过后端主机反向查找其绑定的传统型负载均衡 {@link DescribeClassicalLBByInstanceIdRequest} {@link DescribeClassicalLBByInstanceIdResponse} */
   DescribeClassicalLBByInstanceId(data: DescribeClassicalLBByInstanceIdRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClassicalLBByInstanceIdResponse>;
   /** 获取传统型负载均衡后端的健康状态 {@link DescribeClassicalLBHealthStatusRequest} {@link DescribeClassicalLBHealthStatusResponse} */
@@ -3267,6 +4053,12 @@ declare interface Clb {
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
   /** 查询负载均衡详细信息 {@link DescribeLoadBalancersDetailRequest} {@link DescribeLoadBalancersDetailResponse} */
   DescribeLoadBalancersDetail(data?: DescribeLoadBalancersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersDetailResponse>;
+  /** 查询模型路由详情 {@link DescribeModelRouterDetailRequest} {@link DescribeModelRouterDetailResponse} */
+  DescribeModelRouterDetail(data: DescribeModelRouterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterDetailResponse>;
+  /** 查询模型路由用户配额信息 {@link DescribeModelRouterQuotaRequest} {@link DescribeModelRouterQuotaResponse} */
+  DescribeModelRouterQuota(data: DescribeModelRouterQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterQuotaResponse>;
+  /** 查询模型路由列表页 {@link DescribeModelRoutersRequest} {@link DescribeModelRoutersResponse} */
+  DescribeModelRouters(data?: DescribeModelRoutersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRoutersResponse>;
   /** 查询配额 {@link DescribeQuotaRequest} {@link DescribeQuotaResponse} */
   DescribeQuota(data?: DescribeQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaResponse>;
   /** 查询用户在当前地域支持可用区列表和资源列表 {@link DescribeResourcesRequest} {@link DescribeResourcesResponse} */
@@ -3287,6 +4079,10 @@ declare interface Clb {
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
   /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
+  /** 查询用户组列表 {@link DescribeUserGroupsRequest} {@link DescribeUserGroupsResponse} */
+  DescribeUserGroups(data: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
+  /** 解除Budget关联 {@link DisassociateBudgetRequest} {@link DisassociateBudgetResponse} */
+  DisassociateBudget(data: DisassociateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateBudgetResponse>;
   /** 去关联个性化配置 {@link DisassociateCustomizedConfigRequest} {@link DisassociateCustomizedConfigResponse} */
   DisassociateCustomizedConfig(data: DisassociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateCustomizedConfigResponse>;
   /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
@@ -3305,12 +4101,20 @@ declare interface Clb {
   MigrateClassicalLoadBalancers(data: MigrateClassicalLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateClassicalLoadBalancersResponse>;
   /** 修改负载均衡的IP封禁黑名单列表 {@link ModifyBlockIPListRequest} {@link ModifyBlockIPListResponse} */
   ModifyBlockIPList(data: ModifyBlockIPListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockIPListResponse>;
+  /** 修改Budget属性 {@link ModifyBudgetAttributesRequest} {@link ModifyBudgetAttributesResponse} */
+  ModifyBudgetAttributes(data: ModifyBudgetAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBudgetAttributesResponse>;
   /** 修改七层转发规则的域名 {@link ModifyDomainRequest} {@link ModifyDomainResponse} */
   ModifyDomain(data: ModifyDomainRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainResponse>;
   /** 修改负载均衡七层监听器转发规则的域名级别属性 {@link ModifyDomainAttributesRequest} {@link ModifyDomainAttributesResponse} */
   ModifyDomainAttributes(data: ModifyDomainAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainAttributesResponse>;
   /** 修改转发规则绑定的云函数 {@link ModifyFunctionTargetsRequest} {@link ModifyFunctionTargetsResponse} */
   ModifyFunctionTargets(data: ModifyFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionTargetsResponse>;
+  /** 修改API Key的属性 {@link ModifyKeyAttributesRequest} {@link ModifyKeyAttributesResponse} */
+  ModifyKeyAttributes(data: ModifyKeyAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeyAttributesResponse>;
+  /** 禁用或启用Key {@link ModifyKeysBlockStatusRequest} {@link ModifyKeysBlockStatusResponse} */
+  ModifyKeysBlockStatus(data: ModifyKeysBlockStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeysBlockStatusResponse>;
+  /** 批量变更Key归属组 {@link ModifyKeysUserGroupRequest} {@link ModifyKeysUserGroupResponse} */
+  ModifyKeysUserGroup(data: ModifyKeysUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeysUserGroupResponse>;
   /** 修改负载均衡监听器属性 {@link ModifyListenerRequest} {@link ModifyListenerResponse} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
   /** 修改负载均衡实例的属性 {@link ModifyLoadBalancerAttributesRequest} {@link ModifyLoadBalancerAttributesResponse} */
@@ -3321,6 +4125,8 @@ declare interface Clb {
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;
   /** 修改负载均衡所属项目 {@link ModifyLoadBalancersProjectRequest} {@link ModifyLoadBalancersProjectResponse} */
   ModifyLoadBalancersProject(data: ModifyLoadBalancersProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancersProjectResponse>;
+  /** 修改模型路由实例属性 {@link ModifyModelRouterAttributesRequest} {@link ModifyModelRouterAttributesResponse} */
+  ModifyModelRouterAttributes(data: ModifyModelRouterAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelRouterAttributesResponse>;
   /** 修改负载均衡七层监听器的转发规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
   /** 修改目标组属性 {@link ModifyTargetGroupAttributeRequest} {@link ModifyTargetGroupAttributeResponse} */
@@ -3333,6 +4139,10 @@ declare interface Clb {
   ModifyTargetPort(data: ModifyTargetPortRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetPortResponse>;
   /** 修改监听器绑定的后端机器的转发权重 {@link ModifyTargetWeightRequest} {@link ModifyTargetWeightResponse} */
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
+  /** 修改用户组属性 {@link ModifyUserGroupAttributesRequest} {@link ModifyUserGroupAttributesResponse} */
+  ModifyUserGroupAttributes(data: ModifyUserGroupAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupAttributesResponse>;
+  /** 批量重新生成Key {@link RegenerateKeysRequest} {@link RegenerateKeysResponse} */
+  RegenerateKeys(data: RegenerateKeysRequest, config?: AxiosRequestConfig): AxiosPromise<RegenerateKeysResponse>;
   /** 绑定云函数到转发规则上 {@link RegisterFunctionTargetsRequest} {@link RegisterFunctionTargetsResponse} */
   RegisterFunctionTargets(data: RegisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterFunctionTargetsResponse>;
   /** 注册服务器到目标组 {@link RegisterTargetGroupInstancesRequest} {@link RegisterTargetGroupInstancesResponse} */

@@ -6272,6 +6272,30 @@ declare interface VulHostTopInfo {
   Score?: number;
 }
 
+/** 漏洞忽略规则 */
+declare interface VulIgnoreRule {
+  /** 漏洞规则ID */
+  VulID: number;
+  /** 0:全部主机1:自选主机 */
+  AssetScopeType: number;
+  /** 自选主机情况下自选主机quuid列表 */
+  IncludeQuuidList?: string[];
+  /** 全部主机情况下排出的主机 */
+  ExcludeQuuidList?: string[];
+  /** 忽略的原因 */
+  Remark?: string;
+  /** 配置主机数 */
+  ConfigHostCount?: number;
+  /** 实际受影响主机数 */
+  AffectedHostCount?: number;
+  /** 漏洞名字 */
+  VulName?: string;
+  /** 忽略规则ID */
+  RuleID?: number;
+  /** 最近更新时间 */
+  ModifyTime?: string;
+}
+
 /** 根据cve_id查询漏洞详情 */
 declare interface VulInfoByCveId {
   /** 漏洞id */
@@ -6676,6 +6700,16 @@ declare interface AddLoginWhiteListsRequest {
 declare interface AddLoginWhiteListsResponse {
   /** 重复添加的提示列表 */
   DuplicateHosts?: DuplicateHosts[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddVulIgnoreRuleRequest {
+  /** 忽略规则集合 */
+  RuleDetailList?: VulIgnoreRule[];
+}
+
+declare interface AddVulIgnoreRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -16043,6 +16077,8 @@ declare interface Cwp {
   (): Versions;
   /** 批量添加异地登录白名单 {@link AddLoginWhiteListsRequest} {@link AddLoginWhiteListsResponse} */
   AddLoginWhiteLists(data: AddLoginWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<AddLoginWhiteListsResponse>;
+  /** 添加漏洞忽略规则 {@link AddVulIgnoreRuleRequest} {@link AddVulIgnoreRuleResponse} */
+  AddVulIgnoreRule(data?: AddVulIgnoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddVulIgnoreRuleResponse>;
   /** 修改事件忽略状态 {@link ChangeRuleEventsIgnoreStatusRequest} {@link ChangeRuleEventsIgnoreStatusResponse} */
   ChangeRuleEventsIgnoreStatus(data: ChangeRuleEventsIgnoreStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeRuleEventsIgnoreStatusResponse>;
   /** 修改策略可用状态 {@link ChangeStrategyEnableStatusRequest} {@link ChangeStrategyEnableStatusResponse} */

@@ -1160,7 +1160,7 @@ declare interface SeeCompHighlightResult {
 
 /** TWeSee 视觉理解配置 */
 declare interface SeeComprehensionConfig {
-  /** 拓展的目标及事件检测类别 */
+  /** 拓展的目标及事件检测类别枚举值：person：人vehicle：车辆cat：猫dog：狗package：快递包裹license_plate：车牌fire：火焰smoke：烟雾delivery_man：快递员/外卖员pet：有宠物pet_scratching_door：宠物挠门pet_barking：宠物吠叫pet_damaging：宠物损坏家具pet_eating：宠物进食person_playing_with_pet：人与宠物玩耍pet_close_to_camera：宠物靠近摄像头animal_lying：有动物躺/趴在地上child：有小孩child_near_water：小孩靠近水域child_falling：小孩摔倒child_climbing_window：小孩攀爬室内窗户child_entering_kitchen：小孩进入厨房child_playing_danger_item：小孩玩危险物品child_writing：小孩写作业baby：有婴儿baby_crying：婴儿哭闹baby_dropping：婴儿跌落床铺person_holding_baby：有人抱起婴儿baby_rolling：婴儿翻滚elderly：有老人elderly_falling：老人摔倒elderly_eating：老人用餐elderly_using_stove：老人使用灶具vehicle_parking：车辆停靠vehicle_entering：车辆进入vehicle_exiting：车辆离开person_feeding_animal：有人投喂牲畜animal_wild_intrusion：野生动物入侵throwing_into_water：有人投掷物品loitering_near_water：有人岸边逗留fishing：有人钓鱼net_fishing：有人撒网person_carrying_fishing_gear：有人携带渔具person_carrying_object：有人搬运物品person_taking_goods：有人拿商品person_night_moving：夜间有人移动crowd：多人聚集person_picking_fruit：有人采摘果实person_at_cashier：有人在收银台person_climbing_fence：有人翻围墙person_carrying_bag：有人携带包裹person_entering_farm：人员进入农场person_entering_store：人员进入店铺person_falling：有人跌倒staff_absent：员工离岗uniform_abnormal：未穿工服using_mobile_phone：使用手机smoking：有人吸烟knife：有人持刀gun：有人持枪hurt：有人受伤流血fight：有人打架door_window_open：门窗被开启fireworks：有人燃放烟花爆竹no_signal：视频画面异常（无信号等）camera_angle_abnormal：摄像头角度异常person_motionless：有人且其姿势保持静止 */
   DetectTypes?: string[];
   /** 使该视频 / 图片录入搜索库，后续可进行搜索 */
   EnableSearch?: boolean;
@@ -1170,22 +1170,28 @@ declare interface SeeComprehensionConfig {
   AlternativeOutputLang?: string;
   /** 多摄像头布局定义。可选值包括：单摄（默认值）：Single双摄（纵向排列）- 全部画面：Vertical,Num=2,Index=0;1双摄（纵向排列）- 画面1：Vertical,Num=2,Index=0双摄（纵向排列）- 画面2：Vertical,Num=2,Index=1三摄（纵向排列）- 全部画面：Vertical,Num=3,Index=0;1;2三摄（纵向排列）- 画面1：Vertical,Num=3,Index=0三摄（纵向排列）- 画面2：Vertical,Num=3,Index=1三摄（纵向排列）- 画面3：Vertical,Num=3,Index=2三摄（纵向排列）- 画面1+2：Vertical,Num=3,Index=0;1三摄（纵向排列）- 画面1+3：Vertical,Num=3,Index=0;2三摄（纵向排列）- 画面2+3：Vertical,Num=3,Index=1;2 */
   MultiCameraLayout?: string;
+  /** 自定义检测标签 */
+  CustomDetectQueries?: VisionCustomDetectQuery[];
   /** 最大处理的输入视频时长，单位：秒（仅对视频输入生效） */
   MaxDuration?: number;
+  /** 是否生成关键词默认值：false */
+  EnableKeywords?: boolean;
 }
 
 /** TWeSee 视觉理解结果 */
 declare interface SeeComprehensionResult {
-  /** 识别到的目标类型与事件标签。可能取值：- `person`：人- `vehicle`：车辆- `dog`：狗- `cat`：猫- `fire`：火焰- `smoke`：烟雾- `package`：快递包裹- `license_plate`：车牌 */
+  /** 识别到的目标类型与事件标签。枚举值：person：人vehicle：车辆cat：猫dog：狗package：快递包裹license_plate：车牌fire：火焰smoke：烟雾delivery_man：快递员/外卖员pet：有宠物pet_scratching_door：宠物挠门pet_barking：宠物吠叫pet_damaging：宠物损坏家具pet_eating：宠物进食person_playing_with_pet：人与宠物玩耍pet_close_to_camera：宠物靠近摄像头animal_lying：有动物躺/趴在地上child：有小孩child_near_water：小孩靠近水域child_falling：小孩摔倒child_climbing_window：小孩攀爬室内窗户child_entering_kitchen：小孩进入厨房child_playing_danger_item：小孩玩危险物品child_writing：小孩写作业baby：有婴儿baby_crying：婴儿哭闹baby_dropping：婴儿跌落床铺person_holding_baby：有人抱起婴儿baby_rolling：婴儿翻滚elderly：有老人elderly_falling：老人摔倒elderly_eating：老人用餐elderly_using_stove：老人使用灶具vehicle_parking：车辆停靠vehicle_entering：车辆进入vehicle_exiting：车辆离开person_feeding_animal：有人投喂牲畜animal_wild_intrusion：野生动物入侵throwing_into_water：有人投掷物品loitering_near_water：有人岸边逗留fishing：有人钓鱼net_fishing：有人撒网person_carrying_fishing_gear：有人携带渔具person_carrying_object：有人搬运物品person_taking_goods：有人拿商品person_night_moving：夜间有人移动crowd：多人聚集person_picking_fruit：有人采摘果实person_at_cashier：有人在收银台person_climbing_fence：有人翻围墙person_carrying_bag：有人携带包裹person_entering_farm：人员进入农场person_entering_store：人员进入店铺person_falling：有人跌倒staff_absent：员工离岗uniform_abnormal：未穿工服using_mobile_phone：使用手机smoking：有人吸烟knife：有人持刀gun：有人持枪hurt：有人受伤流血fight：有人打架door_window_open：门窗被开启fireworks：有人燃放烟花爆竹no_signal：视频画面异常（无信号等）camera_angle_abnormal：摄像头角度异常person_motionless：有人且其姿势保持静止 */
   DetectedClassifications?: string[];
   /** 摘要文本 */
   Summary?: string;
   /** 摘要文本（次选语言） */
   AlternativeSummary?: string;
-  /** 错误码，可能取值：- `DownloadFailed`：下载视频/图片文件失败- `ReadFailed`：读取视频/图片文件失败 */
+  /** 错误码，可能取值：DownloadFailed：下载视频/图片文件失败ReadFailed：读取视频/图片文件失败 */
   ErrorCode?: string;
   /** 错误消息 */
   ErrorMsg?: string;
+  /** 生成的关键词列表当配置 EnableKeywords 为 true 时返回 */
+  Keywords?: string[];
 }
 
 /** TWeSee 标签持续检测配置 */

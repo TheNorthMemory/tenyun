@@ -174,6 +174,8 @@ declare interface BackupPlan {
   MinBackupStartTime?: string;
   /** 开始备份的最晚时间 */
   MaxBackupStartTime?: string;
+  /** 备份类型枚举值：physical： 物理备份logical： 逻辑备份snapshot： 快照备份 */
+  BackupMethod?: string;
   /** 备份计划ID */
   PlanId?: string;
   /** 备份计划自定义名称。 */

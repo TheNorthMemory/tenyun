@@ -350,7 +350,7 @@ declare interface DBInstance {
   Cpu?: number;
   /** 实例版本代号 */
   Version?: string;
-  /** 实例类型代号："TS85"-物理机，本地SSD硬盘；"Z3"-物理机早期版本，本地SSD硬盘；"CLOUD_BASIC"-虚拟机，普通云硬盘；"CLOUD_PREMIUM"-虚拟机，高性能云硬盘；"CLOUD_SSD"-虚拟机，云SSD硬盘；"CLOUD_HSSD"-虚拟机，增强型SSD云硬盘；"CLOUD_TSSD"-虚拟机，极速型SSD云硬盘；"CLOUD_BSSD"-虚拟机，通用型SSD云硬盘 */
+  /** 实例类型代号：&quot;TS85&quot;-物理机，本地SSD硬盘；&quot;Z3&quot;-物理机早期版本，本地SSD硬盘；&quot;CLOUD_BASIC&quot;-虚拟机，普通云硬盘；&quot;CLOUD_PREMIUM&quot;-虚拟机，高性能云硬盘；&quot;CLOUD_SSD&quot;-虚拟机，云SSD硬盘；&quot;CLOUD_HSSD&quot;-虚拟机，增强型SSD云硬盘；&quot;CLOUD_TSSD&quot;-虚拟机，极速型SSD云硬盘；&quot;CLOUD_BSSD&quot;-虚拟机，通用型SSD云硬盘 */
   Type?: string;
   /** 计费ID */
   Pid?: number;
@@ -404,6 +404,8 @@ declare interface DBInstance {
   Style?: string;
   /** 多节点实例备可用区信息 */
   MultiSlaveZones?: SlaveZones[];
+  /** 额外IO吞吐量单位：MB/s */
+  ThroughputPerformance?: number | null;
 }
 
 /** 账号的数据库权限信息 */
@@ -1454,6 +1456,20 @@ declare interface SpecInfo {
   InstanceType?: string;
   /** 跨可用区类型，MultiZones-只支持跨可用区，SameZones-只支持同可用区，ALL-支持所有 */
   MultiZonesStatus?: string;
+  /** 最小磁盘容量时的基准单位：IOPS */
+  MinBaselineIOPS?: number;
+  /** 最大磁盘容量时的基准单位：IOPS */
+  MaxBaselineIOPS?: number;
+  /** 最小磁盘容量时的基准吞吐量单位：MB/s */
+  MinBaselineThroughput?: number;
+  /** 最大磁盘容量时的基准吞吐量单位：MB/s */
+  MaxBaselineThroughput?: number;
+  /** 是否支持额外 IO 性能枚举值：TRUE： 支持额外 IO 性能FALSE： 不支持额外 IO 性能 */
+  ExtraIOSupported?: boolean;
+  /** 额外 IO 最大吞吐量单位：MB/s */
+  MaxExtraThroughput?: number;
+  /** 支持额外 IO 的最小磁盘容量单位： GB默认值：460 */
+  MinDiskSizeForExtraIO?: number;
 }
 
 /** 售卖配置状态 */
@@ -1480,6 +1496,20 @@ declare interface SpecSellStatus {
   Price?: Price;
   /** 规格售卖状态 1-正常 2-关闭售卖但是可以升级 3-完全关闭售卖 */
   Status?: number;
+  /** 最小磁盘容量时的基准 单位：IOPS */
+  MinBaselineIOPS?: number;
+  /** 最大磁盘容量时的基准 单位：IOPS */
+  MaxBaselineIOPS?: number;
+  /** 最小磁盘容量时的基准吞吐量 单位：MB/s */
+  MinBaselineThroughput?: number;
+  /** 最大磁盘容量时的基准吞吐量 单位：MB/s */
+  MaxBaselineThroughput?: number;
+  /** 是否支持额外 IO 性能枚举值：TRUE： 支持额外 IO 性能FALSE： 不支持额外 IO 性能 */
+  ExtraIOSupported?: boolean;
+  /** 额外 IO 最大吞吐量 单位：MB/s */
+  MaxExtraThroughput?: number;
+  /** 支持额外 IO 的最小磁盘容量单位：GB默认值：460 */
+  MinDiskSizeForExtraIO?: number;
 }
 
 /** 进度步骤详情 */
@@ -1771,6 +1801,8 @@ declare interface CreateBasicDBInstancesRequest {
   TimeZone?: string;
   /** 磁盘加密标识，0-不加密，1-加密 */
   DiskEncryptFlag?: number;
+  /** 额外磁盘 IO 吞吐量，仅 CLOUD_HSSD 支持取值范围：[0, 650]单位：MB/s */
+  ThroughputPerformance?: number;
 }
 
 declare interface CreateBasicDBInstancesResponse {
@@ -1869,7 +1901,7 @@ declare interface CreateCloudDBInstancesRequest {
   AutoVoucher?: number;
   /** 代金券ID数组，目前单个订单只能使用一张 */
   VoucherIds?: string[];
-  /** sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2008R2。 */
+  /** sqlserver版本，目前所有支持的版本有：2008R2 (SQL Server 2008 R2 Enterprise)，2012SP3 (SQL Server 2012 Enterprise)，201202 (SQL Server 2012 Standard)，2014SP2 (SQL Server 2014 Enterprise)，201402 (SQL Server 2014 Standard)，2016SP1 (SQL Server 2016 Enterprise)，201602 (SQL Server 2016 Standard)，2017 (SQL Server 2017 Enterprise)，201702 (SQL Server 2017 Standard)，2019 (SQL Server 2019 Enterprise)，201902 (SQL Server 2019 Standard)。每个地域支持售卖的版本不同，可通过DescribeProductConfig接口来拉取每个地域可售卖的版本信息。不填，默认为版本2017。 */
   DBVersion?: string;
   /** 自动续费标志：0-正常续费 1-自动续费，默认为1自动续费。只在购买预付费实例时有效。 */
   AutoRenewFlag?: number;
@@ -1895,6 +1927,10 @@ declare interface CreateCloudDBInstancesRequest {
   DrZones?: string[];
   /** 磁盘加密标识，0-不加密，1-加密 */
   DiskEncryptFlag?: number;
+  /** 额外磁盘 IO 性能，仅 CLOUD_HSSD 支持取值范围：[0, 650]单位：MB/s */
+  ThroughputPerformance?: number;
+  /** 可用性策略枚举值：Async： 可用性优先（异步传输）Sync： 可靠性优先（同步传输）默认值：Async仅 AlwaysOn 双节点架构生效，单节点/多节点/MIRROR 架构忽略此参数 */
+  AvailabilityStrategy?: string;
 }
 
 declare interface CreateCloudDBInstancesResponse {
@@ -1955,6 +1991,8 @@ declare interface CreateCloudReadOnlyDBInstancesRequest {
   TimeZone?: string;
   /** 磁盘加密标识，0-不加密，1-加密 */
   DiskEncryptFlag?: number;
+  /** 额外磁盘 IO 吞吐量，仅 CLOUD_HSSD 支持取值范围：[0, 650]单位：MB/s */
+  ThroughputPerformance?: number;
 }
 
 declare interface CreateCloudReadOnlyDBInstancesResponse {
@@ -2013,6 +2051,8 @@ declare interface CreateDBInstancesRequest {
   MultiNodes?: boolean;
   /** 备节点可用区，默认为空。当MultiNodes = true时，主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。 */
   DrZones?: string[];
+  /** 可用性策略枚举值：Async： 可用性优先（异步传输）Sync： 可靠性优先（同步传输）默认值：Async仅 AlwaysOn 双节点架构生效，单节点/多节点/MIRROR 架构忽略此参数 */
+  AvailabilityStrategy?: string;
 }
 
 declare interface CreateDBInstancesResponse {
@@ -3771,6 +3811,8 @@ declare interface DescribeUpgradeInstanceCheckRequest {
   MultiZones?: string;
   /** 多节点架构实例的备节点可用区，默认为空。如果需要在变配的同时修改指定备节点的可用区时必传，当MultiZones = MultiZones时主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。 */
   DrZones?: DrZoneInfo[];
+  /** 额外磁盘IO吞吐量取值范围：[0, 650]单位：MB/s不传-保持原值不变；0-取消额外IO；&gt;0-设为新值 */
+  ThroughputPerformance?: number;
 }
 
 declare interface DescribeUpgradeInstanceCheckResponse {
@@ -3919,12 +3961,14 @@ declare interface InquiryPriceCreateDBInstancesRequest {
   MachineType?: string;
   /** 备节点可用区，默认为空。如果是多节点架构时必传，并且备机可用区集合最小为2个，最大不超过5个。 */
   DrZones?: string[];
+  /** 额外磁盘 IO 吞吐量，仅 CLOUD_HSSD 支持取值范围：[0, 650]单位：MB/s */
+  ThroughputPerformance?: number;
 }
 
 declare interface InquiryPriceCreateDBInstancesResponse {
-  /** 未打折前价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是"每月"。InstanceChargeType=POSTPAID时，单位是"每小时"。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
+  /** 未打折前价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是&quot;每月&quot;。InstanceChargeType=POSTPAID时，单位是&quot;每小时&quot;。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
   OriginalPrice?: number;
-  /** 实际需要支付的价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是"每月"。InstanceChargeType=POSTPAID时，单位是"每小时"。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
+  /** 实际需要支付的价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是&quot;每月&quot;。InstanceChargeType=POSTPAID时，单位是&quot;每小时&quot;。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
   Price?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3957,6 +4001,8 @@ declare interface InquiryPriceUpgradeDBInstanceRequest {
   Storage: number;
   /** 实例升级后的CPU核心数，其值不能比当前实例CPU小 */
   Cpu?: number;
+  /** 额外磁盘 IO 吞吐量取值范围：[0, 650]单位：MB/s */
+  ThroughputPerformance?: number;
 }
 
 declare interface InquiryPriceUpgradeDBInstanceResponse {
@@ -4849,6 +4895,8 @@ declare interface UpgradeDBInstanceRequest {
   DrZones?: DrZoneInfo[];
   /** 是否自动升级数据库的兼容性级别，默认0。0-否，1-是 */
   UpgradeCompatLevel?: number;
+  /** 额外磁盘 IO 吞吐量，仅 CLOUD_HSSD 支持取值范围：[0, 650]单位：MB/s */
+  ThroughputPerformance?: number;
 }
 
 declare interface UpgradeDBInstanceResponse {

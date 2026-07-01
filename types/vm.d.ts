@@ -122,6 +122,12 @@ declare interface BucketInfo {
   Object: string;
 }
 
+/** 视频解码参数 */
+declare interface DecodeParams {
+  /** 视频截帧参数取值范围：[0, 30] */
+  ImageFrequency?: number;
+}
+
 /** Result结果详情 */
 declare interface ImageResult {
   /** 违规标志0 未命中1 命中 */
@@ -238,6 +244,8 @@ declare interface InputInfo {
   ImageUrlList?: string[];
   /** 大模型审核场景下，base64编码的审核要求内容 */
   TextContent?: string;
+  /** 文章标题 */
+  Title?: string;
 }
 
 /** 歌曲识别结果 */
@@ -348,6 +356,8 @@ declare interface StorageInfo {
   ImageUrlList?: string[];
   /** 大模型审核场景下，base64编码的审核要求内容 */
   TextContent?: string;
+  /** 文章标题 */
+  Title?: string;
 }
 
 /** 音频切片识别标签 */
@@ -410,6 +420,8 @@ declare interface TaskInput {
   Name?: string;
   /** 任务输入 */
   Input?: StorageInfo;
+  /** 视频解码参数 */
+  DecodeParams?: DecodeParams;
 }
 
 /** 任务输出标签 */

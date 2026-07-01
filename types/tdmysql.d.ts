@@ -702,6 +702,18 @@ declare interface ParamDesc {
   Description: string | null;
 }
 
+/** 重置密码的用户类型 */
+declare interface ResetUserPasswordInfo {
+  /** 用户名 */
+  UserName?: string;
+  /** host */
+  Host?: string;
+  /** 明文密码 */
+  Password?: string;
+  /** 加密密码 */
+  EncryptedPassword?: string;
+}
+
 /** tag参数 */
 declare interface ResourceTag {
   /** 标签键key */
@@ -1808,20 +1820,16 @@ declare interface ModifyUserPrivilegesResponse {
   RequestId?: string;
 }
 
-declare interface ResetUserPasswordRequest {
-  /** 用户名 */
-  UserName: string;
-  /** 实例ID */
+declare interface ResetUsersPasswordRequest {
+  /** 实例id */
   InstanceId: string;
-  /** 主机IP，IP段以%结尾，表示允许该IP段的所有IP */
-  Host: string;
-  /** 新密码，要求长度8-32，至少包含英文、数字和符号中的两种 */
-  Password?: string;
-  /** 加密密码 */
-  EncryptedPassword?: string;
+  /** 重置用户密码列表 */
+  Users?: ResetUserPasswordInfo[];
 }
 
-declare interface ResetUserPasswordResponse {
+declare interface ResetUsersPasswordResponse {
+  /** 任务id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1949,8 +1957,8 @@ declare interface Tdmysql {
   ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
   /** 修改用户权限 {@link ModifyUserPrivilegesRequest} {@link ModifyUserPrivilegesResponse} */
   ModifyUserPrivileges(data: ModifyUserPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPrivilegesResponse>;
-  /** 重置用户密码 {@link ResetUserPasswordRequest} {@link ResetUserPasswordResponse} */
-  ResetUserPassword(data: ResetUserPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUserPasswordResponse>;
+  /** 批量重置用户密码 {@link ResetUsersPasswordRequest} {@link ResetUsersPasswordResponse} */
+  ResetUsersPassword(data: ResetUsersPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUsersPasswordResponse>;
   /** 重启实例 {@link RestartDBInstancesRequest} {@link RestartDBInstancesResponse} */
   RestartDBInstances(data: RestartDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDBInstancesResponse>;
   /** 纵向扩容实例 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */

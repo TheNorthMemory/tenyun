@@ -119,7 +119,7 @@ declare interface Vtc {
   ConfirmVideoTranslateJob(data: ConfirmVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<ConfirmVideoTranslateJobResponse>;
   /** 查询视频转译任务 {@link DescribeVideoTranslateJobRequest} {@link DescribeVideoTranslateJobResponse} */
   DescribeVideoTranslateJob(data: DescribeVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoTranslateJobResponse>;
-  /** 提交视频转译任务 {@link SubmitVideoTranslateJobRequest} {@link SubmitVideoTranslateJobResponse} */
+  /** @deprecated 提交视频转译任务 {@link SubmitVideoTranslateJobRequest} {@link SubmitVideoTranslateJobResponse} */
   SubmitVideoTranslateJob(data: SubmitVideoTranslateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoTranslateJobResponse>;
 }
 

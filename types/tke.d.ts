@@ -92,6 +92,8 @@ declare interface CreateNativeNodePoolParam {
   EnableAutoscaling?: boolean;
   /** 期望节点数 */
   Replicas?: number;
+  /** 机型和GPU配置相关信息 */
+  GPUConfigs?: GPUConfig[];
   /** 公网带宽设置 */
   InternetAccessible?: InternetAccessible;
   /** 原生节点池数据盘列表 */
@@ -982,6 +984,14 @@ declare interface DescribeHealthCheckTemplateRequest {
 declare interface DescribeHealthCheckTemplateResponse {
   /** 健康检测策略模板 */
   HealthCheckTemplate?: HealthCheckTemplate;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNodePoolsElasticityStrengthRequest {
+}
+
+declare interface DescribeNodePoolsElasticityStrengthResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9001,6 +9011,8 @@ declare interface Tke {
   DescribeHealthCheckTemplate(data?: DescribeHealthCheckTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHealthCheckTemplateResponse>;
   /** 查询 TKE 节点池列表 {@link DescribeNodePoolsRequest} {@link DescribeNodePoolsResponse} */
   DescribeNodePools(data: DescribeNodePoolsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsResponse>;
+  /** 查询节点池弹性健康度 {@link DescribeNodePoolsElasticityStrengthRequest} {@link DescribeNodePoolsElasticityStrengthResponse} */
+  DescribeNodePoolsElasticityStrength(data?: DescribeNodePoolsElasticityStrengthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsElasticityStrengthResponse>;
   /** 查询原生节点机型配置 {@link DescribeZoneInstanceConfigInfosRequest} {@link DescribeZoneInstanceConfigInfosResponse} */
   DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
   /** 修改原生节点 {@link ModifyClusterMachineRequest} {@link ModifyClusterMachineResponse} */

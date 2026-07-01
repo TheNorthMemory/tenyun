@@ -3440,6 +3440,10 @@ declare interface DescribeAIGCTaskStatusResponse {
   TaskResultCode?: number;
   /** 任务返回错误信息 */
   TaskResultMsg?: string;
+  /** 请求参数 */
+  RequestBody?: string;
+  /** 任务类型 */
+  TaskType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

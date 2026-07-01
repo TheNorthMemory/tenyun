@@ -382,22 +382,34 @@ declare interface UsageRankItem {
 
 /** 用量时间周期内的时序点列表（按 metric key 索引）。为 JSON 数组的字符串形式,数组长度与响应 Timestamps 一致，无数据点处为 null。具体包含哪些 key 由响应 MetricKeys 决定。 */
 declare interface UsageSeries {
-  /** 总 token 数用量时间周期内的 JSON 字符串形式，如 `"[12,null,15]"`。 */
+  /** [tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 &quot;[12,null,15]&quot;。 */
   TotalToken?: string;
-  /** 输入 token 数用量时间周期内的 JSON 字符串形式，如 `"[7,null,9]"`。 */
+  /** [tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 &quot;[7,null,9]&quot;。 */
   InputTotalToken?: string;
-  /** 输出 token 数用量时间周期内的 JSON 字符串形式，如 `"[5,null,6]"`。 */
+  /** [tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 &quot;[5,null,6]&quot;。 */
   OutputTotalToken?: string;
+  /** [tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如&quot;[5,null,6]&quot;。 */
+  CacheTotalToken?: string;
+  /** [search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如&quot;[5,null,6]&quot;。 */
+  SearchRequestCount?: string;
+  /** [search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如&quot;[5,null,6]&quot;。 */
+  SearchCount?: string;
 }
 
-/** 时间周期内的统计聚合值（按 metric key 索引）。本期返回 tokens 族（statistics=sum）的累计 Token 用量；具体包含哪些 key、顺序如何，参见响应顶层 `MetricKeys` 字段。接口预留 MetricType 字段以支持后续指标族扩展，本期仅支持 tokens。 */
+/** 时间周期内的统计聚合值（按 metric key 索引）。声明 tokens / search 两族字段都在本 schema 中，按 MetricKeys 实际返回取值，参见响应顶层 `MetricKeys` 字段。 */
 declare interface UsageStats {
-  /** 时间周期内的累计总 token 数。 */
+  /** [tokens 族] 时间周期内的累计总 token 数。 */
   TotalToken?: number;
-  /** 时间周期内的累计输入 token 数。 */
+  /** [tokens 族] 时间周期内的累计输入 token 数。 */
   InputTotalToken?: number;
-  /** 时间周期内的累计输出 token 数。 */
+  /** [tokens 族] 时间周期内的累计输出 token 数。 */
   OutputTotalToken?: number;
+  /** [tokens 族] 时间周期内的累计读缓存 token 数（命中缓存部分） */
+  CacheTotalToken?: number;
+  /** [search 族] 整段累计联网搜索请求数 */
+  SearchRequestCount?: number;
+  /** [search 族] 整段累计搜索引擎调用次数 */
+  SearchCount?: number;
 }
 
 declare interface CreateGlossaryEntriesRequest {
@@ -793,24 +805,24 @@ declare interface DescribeUsageRankListRequest {
   StartTime: string;
   /** 结束时间（开区间），RFC3339 格式。与 StartTime 的跨度最大 90 天。 */
   EndTime: string;
-  /** 指标族切换字段。本期支持 tokens（累计 Token 用量，statistics=sum）；传其他值将返回 InvalidParameter。空字符串或不传时默认 tokens。接口预留 MetricType 字段以支持后续指标族扩展。 */
+  /** 指标族切换字段。tokens（默认）：Token 消耗图（statistics=sum），支持 Dimension = apikey/endpoint/modelsearch【待上线】：联网搜索调用次数（statistics=sum），仅支持 Dimension = model其他值返回 InvalidParameter。枚举值：tokens： tokens */
   MetricType?: string;
   /** 维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。 */
   Target?: string;
-  /** 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；> 10 天 → 86400。仅 ShowAll=false 时使用。 */
+  /** 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；&gt; 10 天 → 86400。仅 ShowAll=false 时使用。 */
   Period?: number;
   /** 翻页起点，从 0 起，默认 0。ShowAll=true 时忽略。页大小固定为 10。 */
   Offset?: number;
-  /** 是否返回全量结果。- false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含 Series 时序点用于绘制曲线。- true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。 */
+  /** 是否返回全量结果。false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含Series 时序点用于绘制曲线。true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。 */
   ShowAll?: boolean;
 }
 
 declare interface DescribeUsageRankListResponse {
   /** 回填请求的统计维度。 */
   Dimension?: string;
-  /** 回填请求的指标族（本期固定为 tokens）。前端按本字段切换图表渲染逻辑。 */
+  /** 回填请求的指标族：tokens / search 。 */
   MetricType?: string;
-  /** 本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，顺序固定为 [Total, Input, Output]。本期为 [TotalToken, InputTotalToken, OutputTotalToken]。前端可遍历此列表渲染图表，无需硬编码 key 名。 */
+  /** 本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，按MetricType 区分：tokens=[Total,Input,Output,Cache]、search=[SearchRequestCount,SearchCount] */
   MetricKeys?: string[];
   /** 视图（数据来源） */
   ViewName?: string;
@@ -828,7 +840,7 @@ declare interface DescribeUsageRankListResponse {
   Limit?: number;
   /** Series 数组对应的时间戳序列（Unix 秒）。ShowAll=true 时为空数组。 */
   Timestamps?: number[];
-  /** 对象排行列表，按主指标（`MetricKeys[0]`，本期为 TotalToken）降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。 */
+  /** 对象排行列表，按MetricKeys[0]降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。 */
   TopList?: UsageRankItem[];
   /** 分页统计结果 */
   PageStats?: UsageStats;

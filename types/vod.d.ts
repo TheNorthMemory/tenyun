@@ -4225,10 +4225,28 @@ declare namespace V20180717 {
     WatermarkConfigure?: WatermarkConfigureData;
   }
 
+  /** 知识库媒体分析信息。 */
+  interface KnowledgeAnalysisInfo {
+    /** 大模型解析模板号 */
+    Definition?: number;
+    /** 大模型解析结果 */
+    AnalysisResults?: KnowledgeAnalysisResult[];
+  }
+
+  /** 知识库媒体分析结果。 */
+  interface KnowledgeAnalysisResult {
+    /** 处理任务类型枚举值：AiAnalysis.DescriptionTask： 智能摘要任务AiAnalysis.VideoComprehensionTask： 视频理解任务SmartSubtitle.AsrFullTextTask： 智能语音全文识别任务 */
+    TaskType?: string;
+    /** 任务输出文件集合 */
+    File?: MPSOutputFileInfo;
+  }
+
   /** 媒资智能知识库信息 */
   interface KnowledgeBasesInfo {
     /** 当前媒资当导入的知识库列表 */
     Bases?: string[];
+    /** 知识库中媒体分析信息 */
+    KnowledgeAnalysisInfos?: KnowledgeAnalysisInfo[];
   }
 
   /** 大模型解析文本转录解析配置 */

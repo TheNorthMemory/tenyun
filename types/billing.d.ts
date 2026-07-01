@@ -984,6 +984,8 @@ declare interface BillDetail {
   DiscountType?: string;
   /** 优惠内容 */
   DiscountContent?: string;
+  /** 资源扩展信息：体现资源维度的扩展信息，与L2账单的扩展字段信息保持一致。 */
+  ExtendField?: string;
 }
 
 /** 明细账单关联单据信息 */

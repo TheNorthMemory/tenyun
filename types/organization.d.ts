@@ -218,6 +218,10 @@ declare interface NotAllowReason {
   ExistResources?: string[];
   /** 检测失败的资源列表。账号有资源检测失败时不允许删除。 */
   DetectFailedResources?: string[];
+  /** 是否部署身份中心权限。部署权限不允许删除枚举值：true： 是false： 否 */
+  CICRoleConfig?: boolean;
+  /** 是否同步身份中心用户。同步用户不允许删除枚举值：true： 是false： 否 */
+  CICUserConfig?: boolean;
 }
 
 /** 按月获取组织财务信息 */

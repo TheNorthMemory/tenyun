@@ -492,6 +492,8 @@ declare interface DescribeModelServiceResponseVO {
   FallbackModels?: TargetModelDTO[] | null;
   /** 模型类型 */
   ModelProtocol?: string | null;
+  /** 自定义模型协议配置 */
+  RawCustomModelProtocolConfig?: string;
 }
 
 /** 查询模型列表的响应 */
@@ -1285,6 +1287,8 @@ declare interface CreateModelServiceRequest {
   FallbackModels?: TargetModelDTO[];
   /** 模型协议 */
   ModelProtocol?: string;
+  /** 自定义模型协议配置 */
+  RawCustomModelProtocolConfig?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -1889,6 +1893,8 @@ declare interface ModifyModelServiceRequest {
   FallbackModels?: TargetModelDTO[];
   /** 模型类型 */
   ModelProtocol?: string;
+  /** 自定义模型协议配置 */
+  RawCustomModelProtocolConfig?: string;
 }
 
 declare interface ModifyModelServiceResponse {

@@ -2978,6 +2978,18 @@ declare interface TrafficQosPolicySet {
   Bandwidth?: number;
   /** 流量调度策略ID。 */
   QosPolicyId?: string;
+  /** 服务等级信息 */
+  QosLevel?: string;
+  /** 服务等级信息 */
+  ServiceLevel?: string;
+  /** 带宽ID参数格式：fcr-xxx */
+  RegionFlowControlId?: string;
+  /** 源地域参数格式：ap-xxx */
+  LocalRegion?: string;
+  /** 目的地域参数格式：ap-xxx */
+  RemoteRegion?: string;
+  /** 流量匹配策略ID */
+  TrafficMatchPolicyId?: string;
 }
 
 /** 私网网关转发规则匹配ACL */

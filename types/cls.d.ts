@@ -1482,6 +1482,18 @@ declare interface InstanceData {
   ErrMsg?: string | null;
 }
 
+/** **JsonExpandInfo 数据结构描述**：```JSON嵌套展开配置```**各字段描述**：| 字段 | 描述 ||------|------|| Switch | 是否开启JSON嵌套展开 || Fields | 待展开的JSON字段列表，1~3个 || DropOriginal | 展开后是否丢弃原始字段，默认true || ConflictPolicy | 字段冲突策略，keep_outer:保留外层(默认)，keep_inner:保留内层 |**LogRechargeRuleInfo 新增字段**：| 字段 | 描述 ||------|------|| JsonExpand | JSON嵌套展开配置，仅RechargeType为json_log时生效 | */
+declare interface JsonExpandInfo {
+  /** 是否开启JSON嵌套展开功能。开启后将对指定JSON字段进行扁平化展开处理默认值：无（必选参数） */
+  Switch: boolean;
+  /** 待展开的JSON字段名列表，支持1~3个字段，字段名不可为空串且不可重复 入参限制：1. 字段数量：1~3个2. 每个字段名长度不超过128个字符3. 字段名不可为空字符串4. 字段名之间不可重复默认值：无（必选参数）取值参考：取值：message；描述：示例字段名示例：[&quot;message&quot;, &quot;data&quot;, &quot;content&quot;] */
+  Fields: string[];
+  /** 展开后是否丢弃原始的嵌套字段。true: 丢弃原始字段只保留展开后的平铺字段; false: 保留原始字段同时增加展开后的平铺字段枚举值：true / false： 丢弃原字段 / 保留原字段默认值：true非必选，不传时默认为true */
+  DropOriginal?: boolean;
+  /** 展开后的字段与已有字段发生冲突时的处理策略枚举值：keep_outer / keep_inner： 保留外层(已存在)字段 / 保留内层(新展开)字段默认值：keep_outer非必选，不传时默认为keep_outer */
+  ConflictPolicy?: string;
+}
+
 /** JSON类型描述 */
 declare interface JsonInfo {
   /** 启用标志 */
@@ -1664,13 +1676,13 @@ declare interface LogRechargeRuleInfo {
   UnMatchLogTimeSrc?: number;
   /** 默认时间来源，0: 系统当前时间，1: Kafka消息时间戳 */
   DefaultTimeSrc?: number;
-  /** 时间字段，日志中代表时间的字段名。- 当DefaultTimeSwitch为false，且RechargeType数据提取模式为 `json_log` JSON-文件日志 或 `fullregex_log` 单行完全正则-文件日志时， TimeKey不能为空。 */
+  /** 时间字段，日志中代表时间的字段名。当DefaultTimeSwitch为false，且RechargeType数据提取模式为 json_log JSON-文件日志 或 fullregex_log 单行完全正则-文件日志时， TimeKey不能为空。 */
   TimeKey?: string;
-  /** 时间提取正则表达式。- 当DefaultTimeSwitch为false，且RechargeType数据提取模式为 `minimalist_log` 单行全文-文件日志时， TimeRegex不能为空。- 仅需输入日志中代表时间的字段的正则表达式即可；若匹配到多个字段，将使用第一个。 例：日志原文为：message with time 2022-08-08 14:20:20，则您可以设置提取时间正则为\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d */
+  /** 时间提取正则表达式。当DefaultTimeSwitch为false，且RechargeType数据提取模式为 minimalist_log 单行全文-文件日志时， TimeRegex不能为空。仅需输入日志中代表时间的字段的正则表达式即可；若匹配到多个字段，将使用第一个。 例：日志原文为：message with time 2022-08-08 14:20:20，则您可以设置提取时间正则为\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d */
   TimeRegex?: string;
-  /** 时间字段格式。- 当DefaultTimeSwitch为false时， TimeFormat不能为空。 */
+  /** 时间字段格式。当DefaultTimeSwitch为false时， TimeFormat不能为空。 */
   TimeFormat?: string;
-  /** 时间字段时区。- 当DefaultTimeSwitch为false时， TimeZone不能为空。- 时区格式规则​前缀​：使用 GMT 或 UTC 作为时区基准​偏移量​： - `-` 表示西时区（比基准时间晚） - `+` 表示东时区（比基准时间早） - 格式为 ±HH:MM（小时:分钟）- 当前支持：```"GMT-12:00" "GMT-11:00" "GMT-10:00" "GMT-09:30" "GMT-09:00" "GMT-08:00" "GMT-07:00" "GMT-06:00" "GMT-05:00" "GMT-04:00" "GMT-03:30" "GMT-03:00" "GMT-02:00" "GMT-01:00" "GMT+00:00""GMT+01:00""GMT+02:00""GMT+03:30""GMT+04:00""GMT+04:30""GMT+05:00""GMT+05:30""GMT+05:45""GMT+06:00""GMT+06:30""GMT+07:00""GMT+08:00""GMT+09:00""GMT+09:30""GMT+10:00""GMT+10:30""GMT+11:00""GMT+11:30""GMT+12:00""GMT+12:45""GMT+13:00""GMT+14:00""UTC-11:00""UTC-10:00""UTC-09:00""UTC-08:00""UTC-12:00""UTC-07:00""UTC-06:00""UTC-05:00""UTC-04:30""UTC-04:00""UTC-03:30""UTC-03:00""UTC-02:00""UTC-01:00""UTC+00:00""UTC+01:00""UTC+02:00""UTC+03:00""UTC+03:30""UTC+04:00""UTC+04:30""UTC+05:00""UTC+05:45""UTC+06:00""UTC+06:30""UTC+07:00""UTC+08:00""UTC+09:00""UTC+09:30""UTC+10:00""UTC+11:00""UTC+12:00""UTC+13:00"``` */
+  /** 时间字段时区。当DefaultTimeSwitch为false时， TimeZone不能为空。时区格式规则前缀：使用 GMT 或 UTC 作为时区基准偏移量：- 表示西时区（比基准时间晚）+ 表示东时区（比基准时间早）格式为 ±HH:MM（小时:分钟）当前支持：&quot;GMT-12:00&quot; &quot;GMT-11:00&quot; &quot;GMT-10:00&quot; &quot;GMT-09:30&quot; &quot;GMT-09:00&quot; &quot;GMT-08:00&quot; &quot;GMT-07:00&quot; &quot;GMT-06:00&quot; &quot;GMT-05:00&quot; &quot;GMT-04:00&quot; &quot;GMT-03:30&quot; &quot;GMT-03:00&quot; &quot;GMT-02:00&quot; &quot;GMT-01:00&quot; &quot;GMT+00:00&quot;&quot;GMT+01:00&quot;&quot;GMT+02:00&quot;&quot;GMT+03:30&quot;&quot;GMT+04:00&quot;&quot;GMT+04:30&quot;&quot;GMT+05:00&quot;&quot;GMT+05:30&quot;&quot;GMT+05:45&quot;&quot;GMT+06:00&quot;&quot;GMT+06:30&quot;&quot;GMT+07:00&quot;&quot;GMT+08:00&quot;&quot;GMT+09:00&quot;&quot;GMT+09:30&quot;&quot;GMT+10:00&quot;&quot;GMT+10:30&quot;&quot;GMT+11:00&quot;&quot;GMT+11:30&quot;&quot;GMT+12:00&quot;&quot;GMT+12:45&quot;&quot;GMT+13:00&quot;&quot;GMT+14:00&quot;&quot;UTC-11:00&quot;&quot;UTC-10:00&quot;&quot;UTC-09:00&quot;&quot;UTC-08:00&quot;&quot;UTC-12:00&quot;&quot;UTC-07:00&quot;&quot;UTC-06:00&quot;&quot;UTC-05:00&quot;&quot;UTC-04:30&quot;&quot;UTC-04:00&quot;&quot;UTC-03:30&quot;&quot;UTC-03:00&quot;&quot;UTC-02:00&quot;&quot;UTC-01:00&quot;&quot;UTC+00:00&quot;&quot;UTC+01:00&quot;&quot;UTC+02:00&quot;&quot;UTC+03:00&quot;&quot;UTC+03:30&quot;&quot;UTC+04:00&quot;&quot;UTC+04:30&quot;&quot;UTC+05:00&quot;&quot;UTC+05:45&quot;&quot;UTC+06:00&quot;&quot;UTC+06:30&quot;&quot;UTC+07:00&quot;&quot;UTC+08:00&quot;&quot;UTC+09:00&quot;&quot;UTC+09:30&quot;&quot;UTC+10:00&quot;&quot;UTC+11:00&quot;&quot;UTC+12:00&quot;&quot;UTC+13:00&quot; */
   TimeZone?: string;
   /** 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp */
   Metadata?: string[];
@@ -1680,6 +1692,8 @@ declare interface LogRechargeRuleInfo {
   ParseArray?: boolean;
   /** 分隔符解析模式-分隔符当解析格式为分隔符提取时，该字段必填 */
   Delimiter?: string;
+  /** JSON嵌套展开配置。仅RechargeType为json_log时生效，不传表示不开启。 */
+  JsonExpand?: JsonExpandInfo;
 }
 
 /** 日志集相关信息 */

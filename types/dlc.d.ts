@@ -5278,6 +5278,18 @@ declare interface DescribeTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskDetailRequest {
+  /** 任务id */
+  TaskInstanceId: string;
+}
+
+declare interface DescribeTaskDetailResponse {
+  /** 任务详情信息 */
+  TaskDetail?: TaskFullRespInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTaskListRequest {
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;
@@ -6855,6 +6867,8 @@ declare interface Dlc {
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询数据表名称列表 {@link DescribeTablesNameRequest} {@link DescribeTablesNameResponse} */
   DescribeTablesName(data: DescribeTablesNameRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesNameResponse>;
+  /** 历史任务详情查询 {@link DescribeTaskDetailRequest} {@link DescribeTaskDetailResponse} */
+  DescribeTaskDetail(data: DescribeTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskDetailResponse>;
   /** 历史任务列表查询 {@link DescribeTaskListRequest} {@link DescribeTaskListResponse} */
   DescribeTaskList(data?: DescribeTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskListResponse>;
   /** 查询任务日志 {@link DescribeTaskLogRequest} {@link DescribeTaskLogResponse} */

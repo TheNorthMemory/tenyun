@@ -164,6 +164,8 @@ declare interface CancelFailureFlow {
   FlowId?: string;
   /** 撤销失败原因 */
   Reason?: string;
+  /** 合同流程名称 */
+  FlowName?: string;
 }
 
 /** 抄送信息 */
@@ -1590,6 +1592,22 @@ declare interface ArchiveDynamicFlowResponse {
   FlowId?: string;
   /** 动态签署人的参与人信息 */
   Approvers?: ChannelArchiveDynamicApproverData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelOrganizationFlowsRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。备注:如果不传递撤回原因，那么默认撤回原因是 &quot;自动撤销（通过接口实现）&quot; */
+  CancelMessage?: string;
+  /** 撤销理由自定义格式, 会展示在合同预览的界面中, 可以选择下面的组合方式：0 : 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同1 : 合同封面页面会展示为: 发起方以CancelMessage的理由撤销当前合同2 : 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以CancelMessage的理由撤销当前合同3 : 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同注: CancelMessage为撤销当前合同的理由枚举值：0： 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同1： 合同封面页面会展示为: 发起方以CancelMessage的理由撤销当前合同2： 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以CancelMessage的理由撤销当前合同3： 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同注: `CancelMessage为撤销当前合同的理由 */
+  CancelMessageFormat?: number;
+}
+
+declare interface CancelOrganizationFlowsResponse {
+  /** 全量撤销企业合同任务编号，为32位字符串，可用于查询批量撤销合同结果 或关联全量撤销任务结果回调 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3345,14 +3363,16 @@ declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
 declare interface DescribeCancelFlowsTaskRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 批量撤销任务编号，为32位字符串，通过接口[批量撤销合同流程](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelBatchCancelFlows)或者[获取批量撤销签署流程腾讯电子签小程序链接](https://qian.tencent.com/developers/partnerApis/operateFlows/ChannelCreateBatchCancelFlowUrl)获得。 */
+  /** 批量撤销任务编号，为32位字符串，通过接口批量撤销合同流程或者获取批量撤销签署流程腾讯电子签小程序链接或者全量撤销企业合同获得。 */
   TaskId: string;
+  /** 撤销任务类型枚举值：0： 默认类型，批量撤销合同任务或者获取批量撤销合同小程序链接的批量撤销任务1： 全量撤销任务枚举值：0： 默认类型，批量撤销合同任务或者获取批量撤销合同小程序链接的批量撤销任务1： 全量撤销任务 */
+  CancelType?: number;
 }
 
 declare interface DescribeCancelFlowsTaskResponse {
   /** 批量撤销任务编号，为32位字符串。 */
   TaskId?: string;
-  /** 任务状态，需要关注的状态**PROCESSING** - 任务执行中**END** - 任务处理完成**TIMEOUT** 任务超时未处理完成，用户未在批量撤销链接有效期内操作 */
+  /** 任务状态，需要关注的状态PROCESSING - 任务执行中END - 任务处理完成TIMEOUT 任务超时未处理完成，用户未在批量撤销链接有效期内操作 */
   TaskStatus?: string;
   /** 批量撤销成功的签署流程编号 */
   SuccessFlowIds?: string[];
@@ -5337,6 +5357,8 @@ declare interface Essbasic {
   (): Versions;
   /** 结束动态签署流程 {@link ArchiveDynamicFlowRequest} {@link ArchiveDynamicFlowResponse} */
   ArchiveDynamicFlow(data: ArchiveDynamicFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ArchiveDynamicFlowResponse>;
+  /** 全量撤销企业合同 {@link CancelOrganizationFlowsRequest} {@link CancelOrganizationFlowsResponse} */
+  CancelOrganizationFlows(data: CancelOrganizationFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<CancelOrganizationFlowsResponse>;
   /** 批量撤销合同流程 {@link ChannelBatchCancelFlowsRequest} {@link ChannelBatchCancelFlowsResponse} */
   ChannelBatchCancelFlows(data: ChannelBatchCancelFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelBatchCancelFlowsResponse>;
   /** 撤销合同流程 {@link ChannelCancelFlowRequest} {@link ChannelCancelFlowResponse} */

@@ -5563,6 +5563,8 @@ declare interface InstallSoftwareRequest {
   NeedCdbAudit?: number;
   /** 额外容器相关配置 */
   ContainerExtraConf?: ContainerExtraConf;
+  /** 是否强制检查自定义组件的合理性，目前仅提供给tf侧使用 */
+  CheckServiceDeployInfo?: boolean;
 }
 
 declare interface InstallSoftwareResponse {

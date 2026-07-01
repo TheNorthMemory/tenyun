@@ -437,9 +437,9 @@ declare interface CreateEventBusRequest {
   EventBusName: string;
   /** 事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符 */
   Description?: string;
-  /** EB存储时长 */
+  /** 事件存储时长单位：day */
   SaveDays?: number;
-  /** EB是否开启存储 */
+  /** 是否开启事件存储 */
   EnableStore?: boolean;
 }
 
@@ -616,7 +616,7 @@ declare interface GetEventBusResponse {
   EventBusName?: string;
   /** 事件集ID */
   EventBusId?: string;
-  /** （已废弃）事件集类型 */
+  /** 事件集类型枚举值：Cloud： 云服务事件集Platform： 平台事件集Custom： 自定义事件集 */
   Type?: string;
   /** 计费模式 */
   PayMode?: string;
@@ -849,9 +849,9 @@ declare interface SearchLogRequest {
   Page: number;
   /** 每页数据大小 */
   Limit: number;
-  /** 事件查询筛选条件；示例如下：[{"key":"host","operator":"eq","value":"106.53.106.243"},{"type":"AND","filters":[{"key":"region","operator":"like","value":"*guangzhou*"},{"key":"type","operator":"eq","value":"cvm:ErrorEvent:GuestReboot"}]},{"type":"OR","filters":[{"key":"field1","operator":"like","value":"*access*"},{"key":"field2","operator":"eq","value":"custorm"}]}] */
+  /** 事件查询筛选条件；示例如下：[{&quot;key&quot;:&quot;host&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;106.53.106.243&quot;},{&quot;type&quot;:&quot;AND&quot;,&quot;filters&quot;:[{&quot;key&quot;:&quot;region&quot;,&quot;operator&quot;:&quot;like&quot;,&quot;value&quot;:&quot;guangzhou&quot;},{&quot;key&quot;:&quot;type&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;cvm:ErrorEvent:GuestReboot&quot;}]},{&quot;type&quot;:&quot;OR&quot;,&quot;filters&quot;:[{&quot;key&quot;:&quot;field1&quot;,&quot;operator&quot;:&quot;like&quot;,&quot;value&quot;:&quot;access&quot;},{&quot;key&quot;:&quot;field2&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;custom&quot;}]}] */
   Filter?: LogFilter[];
-  /** 事件查询结果排序，["timestamp","subject"] */
+  /** 事件查询结果排序，[&quot;timestamp&quot;,&quot;subject&quot;] */
   OrderFields?: string[];
   /** 排序方式，asc 从旧到新，desc 从新到旧 */
   OrderBy?: string;
@@ -895,9 +895,9 @@ declare interface UpdateEventBusRequest {
   Description?: string;
   /** 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符 */
   EventBusName?: string;
-  /** EB日志存储时长 */
+  /** 事件存储时长单位：day */
   SaveDays?: number;
-  /** EB日志主题ID */
+  /** 事件存储主题ID */
   LogTopicId?: string;
   /** 是否开启存储 */
   EnableStore?: boolean;

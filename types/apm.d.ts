@@ -170,6 +170,14 @@ declare interface ApmAppConfig {
   ResponseDurationWarningThreshold?: number;
   /** 是否默认使用探针自带熔断阈值 */
   UseDefaultFuseConfig?: boolean;
+  /** 是否开启自动分析 */
+  AnalysisAutoEnable?: boolean;
+  /** 头采样开关 */
+  EnableHeadSampler?: boolean;
+  /** 头采样类型枚举值：parentbased_traceidratio： 跟随父类型 */
+  HeadSamplerType?: string;
+  /** 采样阈值，100等于关闭采样，0表示全采样 */
+  HeadSamplerArg?: number;
 }
 
 /** 应用相关的配置列表项 */
@@ -1601,6 +1609,12 @@ declare interface ModifyApmApplicationConfigRequest {
   ResponseDurationWarningThreshold?: number;
   /** 是否使用探针默认熔断阈值 */
   UseDefaultFuseConfig?: boolean;
+  /** 是否开启探针头采样 */
+  EnableHeadSampler?: boolean;
+  /** 头采样类型枚举值：parentbased_traceidratio： 跟随parent */
+  HeadSamplerType?: string;
+  /** 采样率取值范围：[0, 100]默认值：100 */
+  HeadSamplerArg?: number;
 }
 
 declare interface ModifyApmApplicationConfigResponse {

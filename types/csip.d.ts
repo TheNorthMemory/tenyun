@@ -3862,6 +3862,182 @@ declare interface Location {
   City?: string;
 }
 
+/** 日志过滤器 */
+declare interface LogCLSFilter {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Values?: string[];
+}
+
+/** 日志列信息 */
+declare interface LogColumn {
+  /** 名称 */
+  Name?: string;
+  /** 类型 */
+  Type?: string;
+}
+
+/** 日志检索上下文信息 */
+declare interface LogContextInfo {
+  /** 主题id */
+  TopicId?: string;
+  /** 上下文 */
+  Context?: string;
+}
+
+/** 日志动态索引信息 */
+declare interface LogDynamicIndex {
+  /** 状态 */
+  Status?: boolean;
+}
+
+/** 日志全文索引信息 */
+declare interface LogFullTextInfo {
+  /** 大小写敏感 */
+  CaseSensitive?: boolean;
+  /** token */
+  Tokenizer?: string;
+  /** 包含中文 */
+  ContainZH?: boolean;
+}
+
+/** 日志高亮信息 */
+declare interface LogHighLightItem {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Values?: string[];
+}
+
+/** 日志索引规则信息 */
+declare interface LogIndexRuleInfo {
+  /** 全文索引 */
+  FullText?: LogFullTextInfo;
+  /** 键值索引 */
+  KeyValue?: LogRuleKeyValueInfo;
+  /** 标签 */
+  Tag?: LogRuleKeyValueInfo;
+  /** 动态索引 */
+  DynamicIndex?: LogDynamicIndex;
+}
+
+/** 日志条目 */
+declare interface LogItem {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: string;
+}
+
+/** 日志条目列表 */
+declare interface LogItems {
+  /** 数值 */
+  Data?: LogItem[];
+}
+
+/** 日志键值索引详情 */
+declare interface LogKeyValueInfo {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: LogValueInfo;
+}
+
+/** 日志键值索引规则信息 */
+declare interface LogRuleKeyValueInfo {
+  /** 大小写敏感 */
+  CaseSensitive?: boolean;
+  /** 键值索引信息 */
+  KeyValues?: LogKeyValueInfo[];
+}
+
+/** 日志检索错误信息 */
+declare interface LogSearchErrors {
+  /** 主题 */
+  TopicId?: string;
+  /** 错误信息 */
+  ErrorMsg?: string;
+  /** 错误信息 */
+  ErrorCodeStr?: string;
+}
+
+/** 日志检索信息 */
+declare interface LogSearchInfos {
+  /** 主题 */
+  TopicId?: string;
+  /** 时间间隔 */
+  Period?: number;
+  /** 上下文 */
+  Context?: string;
+}
+
+/** 日志检索结果 */
+declare interface LogSearchResult {
+  /** 时间 */
+  Time?: number;
+  /** 主题 */
+  TopicId?: string;
+  /** 主题名 */
+  TopicName?: string;
+  /** 源 */
+  Source?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** pkgid */
+  PkgId?: string;
+  /** pkglogid */
+  PkgLogId?: string;
+  /** json数据 */
+  LogJson?: string;
+  /** 主机名 */
+  HostName?: string;
+  /** log信息 */
+  RawLog?: string;
+  /** 索引状态 */
+  IndexStatus?: string;
+  /** 高亮信息 */
+  HighLights?: LogHighLightItem[];
+}
+
+/** 日志检索主题信息 */
+declare interface LogSearchTopics {
+  /** 错误信息 */
+  Errors?: LogSearchErrors[];
+  /** 正常信息 */
+  Infos?: LogSearchInfos[];
+}
+
+/** 日志主题索性信息 */
+declare interface LogTopicIndexInfo {
+  /** 主题 */
+  TopicId?: string;
+  /** 状态 */
+  Status?: boolean;
+  /** 规则 */
+  Rule?: LogIndexRuleInfo;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 是否包含 */
+  IncludeInternalFields?: boolean;
+  /** 元数据标签 */
+  MetadataFlag?: number;
+}
+
+/** 日志索引值描述信息 */
+declare interface LogValueInfo {
+  /** 类型 */
+  Type?: string;
+  /** 标签 */
+  Tokenizer?: string;
+  /** sql标签 */
+  SqlFlag?: boolean;
+  /** 包含中文 */
+  ContainZH?: boolean;
+  /** 别名 */
+  Alias?: string;
+}
+
 /** 主机列表 */
 declare interface Machine {
   /** Agent状态，取值：ONLINE-在线，OFFLINE-离线，UNINSTALL-未安装 */
@@ -4142,6 +4318,48 @@ declare interface NewAlertKey {
   Date: string;
   /** 状态 */
   Status?: number;
+}
+
+/** 通知资产范围配置项 */
+declare interface NotifyAssetConfigItem {
+  /** 模块名 */
+  Module: string;
+  /** 子模块 */
+  SubModule: string;
+  /** 资产范围枚举值：0： 无含义1： 全部2： 自选3： 按标签 */
+  AssetRange: number;
+  /** 选中的实例ID */
+  InstanceIds?: string[];
+  /** 剔除的实例ID */
+  ExcludedInstanceIds?: string[];
+  /** 标签ID */
+  TagIds?: number[];
+  /** 云标签 */
+  CloudTags?: string[];
+  /** 总数 */
+  TotalCount?: number;
+}
+
+/** 通知设置 */
+declare interface NotifySetting {
+  /** 通知模块枚举值：AkSk： 云API风险治理Alert： 告警中心Agent： 客户端 */
+  Module: string;
+  /** 通知设置模式枚举值：0： 标准模式1： 高级模式 */
+  Mode: number;
+  /** 通知状态枚举值：0： 通知关闭1： 通知开启 */
+  Status: number;
+  /** 通知开始时间参数格式：hh:mm:ss */
+  BeginTime: string;
+  /** 通知结束时间参数格式：hh:mm:ss */
+  EndTime: string;
+  /** 资产范围枚举值：1： 全部主机2： 自选主机3： 按标签选择 */
+  AssetRange: number;
+  /** 通知选项枚举值：CRITICAL： 告警等级：严重HIGH： 告警等级：高危MEDIUM： 告警等级：中危LOW： 告警等级：低危INFO： 告警等级：提醒AGENT_UNINSTALL： 客户端卸载AGENT_OFFLINE： 客户端离线 */
+  Option?: string[];
+  /** 通知模块（二级模块） */
+  SubModule?: string;
+  /** 处置状态等 */
+  Item?: string[];
 }
 
 /** 集团账号详情 */
@@ -6759,6 +6977,86 @@ declare interface DescribeCFWAssetStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCLSLogIndexV3Request {
+  /** 过滤条件 */
+  Filters: LogCLSFilter[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** limit限制 */
+  Limit?: number;
+  /** offset */
+  Offset?: number;
+}
+
+declare interface DescribeCLSLogIndexV3Response {
+  /** 主题信息 */
+  TopicIndexInfos?: LogTopicIndexInfo[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCLSLogListV3Request {
+  /** 开始时间 */
+  From: number;
+  /** 结束时间 */
+  To: number;
+  /** 查询条件 */
+  Query: string;
+  /** 语法 */
+  SyntaxRule: number;
+  /** 主题 */
+  Topics?: LogContextInfo[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 排序 */
+  Sort?: string;
+  /** limit */
+  Limit?: number;
+  /** offset */
+  Offset?: number;
+  /** 采样 */
+  SamplingRate?: number;
+  /** 是否高亮 */
+  HighLight?: boolean;
+  /** 是否采用新分析 */
+  UseNewAnalysis?: boolean;
+  /** 查询优化 */
+  QueryOptimize?: number;
+  /** 主题id */
+  TopicId?: string;
+  /** 上下文信息 */
+  Context?: string;
+  /** 查询类型 */
+  SubQueryTypes?: string[];
+}
+
+declare interface DescribeCLSLogListV3Response {
+  /** 上下文 */
+  Context?: string;
+  /** listover */
+  ListOver?: boolean;
+  /** 是否采用分析 */
+  Analysis?: boolean;
+  /** 结果 */
+  Results?: LogSearchResult[];
+  /** 列名 */
+  ColNames?: string[];
+  /** 分析结果 */
+  AnalysisResults?: LogItems[];
+  /** 分析记录 */
+  AnalysisRecords?: string[];
+  /** 列名 */
+  Columns?: LogColumn[];
+  /** 采样 */
+  SamplingRate?: number;
+  /** 主题信息 */
+  Topics?: LogSearchTopics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCSIPRiskStatisticsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -8649,6 +8947,40 @@ declare interface DescribeNICAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNotifyAssetConfigRequest {
+  /** 模块名 */
+  Modules?: string[];
+}
+
+declare interface DescribeNotifyAssetConfigResponse {
+  /** 资产范围配置 */
+  Items?: NotifyAssetConfigItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotifySettingAlertRequest {
+}
+
+declare interface DescribeNotifySettingAlertResponse {
+  /** 通知配置 */
+  Settings?: NotifySetting[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotifySettingRequest {
+}
+
+declare interface DescribeNotifySettingResponse {
+  /** 通知设置列表 */
+  List?: NotifySetting[];
+  /** 成员账号Id */
+  MemberId?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrganizationInfoRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -9945,6 +10277,46 @@ declare interface ModifyMachineRemarkResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNotifyAssetConfigRequest {
+  /** 资产范围配置 */
+  Items?: NotifyAssetConfigItem[];
+}
+
+declare interface ModifyNotifyAssetConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNotifySettingAlertRequest {
+  /** 通知配置 */
+  Settings: NotifySetting[];
+}
+
+declare interface ModifyNotifySettingAlertResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNotifySettingRequest {
+  /** 通知模块枚举值：AkSk： 云API风险治理Alert： 告警中心Agent： 客户端 */
+  Module?: string;
+  /** 通知设置模式枚举值：0： 标准模式1： 高级模式 */
+  Mode?: number;
+  /** 通知状态枚举值：0： 通知关闭1： 通知开启 */
+  Status?: number;
+  /** 通知开始时间参数格式：hh:mm:ss */
+  BeginTime?: string;
+  /** 通知结束时间参数格式：hh:mm:ss */
+  EndTime?: string;
+  /** 通知选项枚举值：CRITICAL： 告警等级：严重HIGH： 告警等级：高危MEDIUM： 告警等级：中危LOW： 告警等级：低危INFO： 告警等级：提醒AGENT_UNINSTALL： 客户端卸载AGENT_OFFLINE： 客户端离线 */
+  Option?: string[];
+}
+
+declare interface ModifyNotifySettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyOrganizationAccountStatusRequest {
   /** 修改集团账号状态，1 开启， 0关闭 */
   Status: number;
@@ -10336,6 +10708,10 @@ declare interface Csip {
   DescribeBucketInvokeIpList(data: DescribeBucketInvokeIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBucketInvokeIpListResponse>;
   /** 云防资产中心统计数据 {@link DescribeCFWAssetStatisticsRequest} {@link DescribeCFWAssetStatisticsResponse} */
   DescribeCFWAssetStatistics(data?: DescribeCFWAssetStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCFWAssetStatisticsResponse>;
+  /** 获取日志索引信息v3 {@link DescribeCLSLogIndexV3Request} {@link DescribeCLSLogIndexV3Response} */
+  DescribeCLSLogIndexV3(data: DescribeCLSLogIndexV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogIndexV3Response>;
+  /** 日志分析cls日志检索v3 {@link DescribeCLSLogListV3Request} {@link DescribeCLSLogListV3Response} */
+  DescribeCLSLogListV3(data: DescribeCLSLogListV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogListV3Response>;
   /** 资产风险概览统计接口 {@link DescribeCSIPRiskStatisticsRequest} {@link DescribeCSIPRiskStatisticsResponse} */
   DescribeCSIPRiskStatistics(data?: DescribeCSIPRiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPRiskStatisticsResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
@@ -10532,6 +10908,12 @@ declare interface Csip {
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */
   DescribeNICAssets(data?: DescribeNICAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNICAssetsResponse>;
+  /** 获取通知资产范围配置 {@link DescribeNotifyAssetConfigRequest} {@link DescribeNotifyAssetConfigResponse} */
+  DescribeNotifyAssetConfig(data?: DescribeNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifyAssetConfigResponse>;
+  /** 获取通知设置 {@link DescribeNotifySettingRequest} {@link DescribeNotifySettingResponse} */
+  DescribeNotifySetting(data?: DescribeNotifySettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifySettingResponse>;
+  /** 获取告警中心通知高级配置 {@link DescribeNotifySettingAlertRequest} {@link DescribeNotifySettingAlertResponse} */
+  DescribeNotifySettingAlert(data?: DescribeNotifySettingAlertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifySettingAlertResponse>;
   /** 查询集团账号详情 {@link DescribeOrganizationInfoRequest} {@link DescribeOrganizationInfoResponse} */
   DescribeOrganizationInfo(data?: DescribeOrganizationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrganizationInfoResponse>;
   /** 查询集团账号用户列表 {@link DescribeOrganizationUserInfoRequest} {@link DescribeOrganizationUserInfoResponse} */
@@ -10660,6 +11042,12 @@ declare interface Csip {
   ModifyIaCTokenPeriod(data: ModifyIaCTokenPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIaCTokenPeriodResponse>;
   /** 修改主机备注信息 {@link ModifyMachineRemarkRequest} {@link ModifyMachineRemarkResponse} */
   ModifyMachineRemark(data: ModifyMachineRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineRemarkResponse>;
+  /** 修改通知资产范围配置 {@link ModifyNotifyAssetConfigRequest} {@link ModifyNotifyAssetConfigResponse} */
+  ModifyNotifyAssetConfig(data?: ModifyNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyAssetConfigResponse>;
+  /** 修改通知设置 {@link ModifyNotifySettingRequest} {@link ModifyNotifySettingResponse} */
+  ModifyNotifySetting(data?: ModifyNotifySettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifySettingResponse>;
+  /** 修改告警中心通知高级配置 {@link ModifyNotifySettingAlertRequest} {@link ModifyNotifySettingAlertResponse} */
+  ModifyNotifySettingAlert(data: ModifyNotifySettingAlertRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifySettingAlertResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改策略状态 {@link ModifyPolicyStatusRequest} {@link ModifyPolicyStatusResponse} */

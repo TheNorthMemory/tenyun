@@ -890,6 +890,26 @@ declare interface AiParagraphInfo {
   EndTimeOffset?: number | null;
 }
 
+/** 智能套图配置 */
+declare interface AiPosterSuiteConfig {
+  /** 出图模式枚举值：auto： 全自动模式。此模式下支持CustomVariables传入。modify： 修改模式。此模式下需要在AddOnParameter.ExtPrompt字段提供对应描述。此模式下禁止CustomVariables传入。默认值：auto */
+  Mode?: string;
+  /** 电商平台视觉模板id如需个性化定制视觉模板，请提交工单。 */
+  Definition?: number;
+  /** 子图配置。 */
+  Recipe?: RecipeItem[];
+  /** 子图文案语言。枚举值：zh-CN： 简体中文en-US： 美式英语默认值：zh-CN如需支持更多语言输出，请提交工单。 */
+  Language?: string;
+  /** 子图比例。枚举值：1:1： 1:13:4： 3:44:3： 4:39:16： 9:1616:9： 16:9默认值：1:1 */
+  PanelRatio?: string;
+  /** 子图分辨率枚举值：720： 7201K： 1K2K： 2K4K： 4K默认值：1K */
+  PanelResolution?: string;
+  /** 用户自定义变量。 */
+  CustomVariables?: CustomVariable[];
+  /** 模型名称。枚举值：WAND-suite-1.0-flash： WAND-suite-1.0-flash */
+  Model?: string;
+}
+
 /** 媒体质检输入参数类型 */
 declare interface AiQualityControlTaskInput {
   /** 媒体质检模板 ID 。可以直接使用预设模板，也可以在控制台自定义模板。预设模板如下：- 10：开启所有质检项；- 20：仅开启格式诊断对应质检项；- 30：仅开启无参考打分对应质检项；- 40：仅开启画面质量对应质检项。 */
@@ -2724,6 +2744,14 @@ declare interface CreateOutputSRTSettingsDestinations {
   Port: number;
 }
 
+/** 自定义描述变量 */
+declare interface CustomVariable {
+  /** 用户自定义变量类型。参数格式：PascalCase格式。不能为UserPrompt。默认平台模板未适配自定义内容，如需适配需提交工单。 */
+  Type?: string;
+  /** 自定义变量描述。 */
+  Description?: string;
+}
+
 /** Type为DASH时manifest配置使用的字段。 */
 declare interface DashManifestInfo {
   /** 每个清单的总持续时间（以秒为单位）。[30, 3600]，类型：整数，默认值60。 */
@@ -3822,6 +3850,8 @@ declare interface ImageTaskInput {
   TransformConfig?: ImageTransformConfig;
   /** Ai 换装配置。 */
   AiTryOnConfig?: AiTryOnConfig;
+  /** Ai套图配置。 */
+  AiPosterSuiteConfig?: AiPosterSuiteConfig;
 }
 
 /** 图片基础转换能力 */
@@ -5816,6 +5846,14 @@ declare interface RawWatermarkParameter {
   YPos?: string;
   /** 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。 */
   ImageTemplate?: RawImageWatermarkInput;
+}
+
+/** 套图图片信息 */
+declare interface RecipeItem {
+  /** 子图类型枚举值：hero： 商品主图detail： 商品细节图selling： 核心卖点图atmosphere： 场景氛围图angles： 多角度图scene： 使用场景图 */
+  Theme?: string;
+  /** 对应子图数量。取值范围：[1, 4]单位：张单种子图最多4张，子图总数必须在4-12张范围内。 */
+  Num?: number;
 }
 
 /** 识别音频单句结果 */
@@ -8255,7 +8293,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 }
 
 declare interface CreateAigcAudioTaskRequest {
-  /** 模型名称。生音乐当前支持的模型: GL、MinimaxMusic。 */
+  /** 模型名称。生音乐当前支持的模型: GL、MiniMaxMusic。 */
   ModelName?: string;
   /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：2.0、3.0-clip、3.0-pro。模型MinimaxMusic支持的版本号：2.0、2.5、2.6。 */
   ModelVersion?: string;

@@ -3280,6 +3280,26 @@ declare interface DescribeLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNDRAssetIdentificationCursorListRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 分页游标前一页返回的NextCursor */
+  Cursor?: string;
+  /** 查询过滤条件，多个条件之间为AND的关系 */
+  Filters?: OperatorFilter[];
+}
+
+declare interface DescribeNDRAssetIdentificationCursorListResponse {
+  /** 查询结果列表 */
+  Data?: NDRAssetServiceInfo[];
+  /** 下一页游标 */
+  NextCursor?: string;
+  /** 是否存在更多数据 */
+  HasMore?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNDRAssetIdentificationListRequest {
   /** 每页条数 */
   Limit: number;
@@ -4783,6 +4803,8 @@ declare interface Cfw {
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
+  /** 游标获取NDR资产识别结果列表 {@link DescribeNDRAssetIdentificationCursorListRequest} {@link DescribeNDRAssetIdentificationCursorListResponse} */
+  DescribeNDRAssetIdentificationCursorList(data: DescribeNDRAssetIdentificationCursorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationCursorListResponse>;
   /** 获取NDR资产识别结果列表 {@link DescribeNDRAssetIdentificationListRequest} {@link DescribeNDRAssetIdentificationListResponse} */
   DescribeNDRAssetIdentificationList(data: DescribeNDRAssetIdentificationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationListResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */

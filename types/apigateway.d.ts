@@ -2234,18 +2234,6 @@ declare interface DescribeApiAppBindApisStatusResponse {
   RequestId?: string;
 }
 
-declare interface DescribeApiAppRequest {
-  /** 应用ID。 */
-  ApiAppId: string;
-}
-
-declare interface DescribeApiAppResponse {
-  /** 应用详情。 */
-  Result?: ApiAppInfos | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeApiAppsStatusRequest {
   /** 返回数量，默认为 20，最大值为 100。 */
   Limit?: number;
@@ -3239,7 +3227,7 @@ declare interface ModifyIPStrategyRequest {
 
 declare interface ModifyIPStrategyResponse {
   /** 修改操作是否成功。 */
-  Result: boolean | null;
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3257,7 +3245,7 @@ declare interface ModifyPluginRequest {
 
 declare interface ModifyPluginResponse {
   /** 修改操作是否成功。 */
-  Result: boolean;
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3623,8 +3611,6 @@ declare interface Apigateway {
   DescribeAllPluginApis(data: DescribeAllPluginApisRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllPluginApisResponse>;
   /** 查询API详情 {@link DescribeApiRequest} {@link DescribeApiResponse} */
   DescribeApi(data: DescribeApiRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiResponse>;
-  /** @deprecated 搜索应用 {@link DescribeApiAppRequest} {@link DescribeApiAppResponse} */
-  DescribeApiApp(data: DescribeApiAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppResponse>;
   /** 查询应用绑定的Api列表 {@link DescribeApiAppBindApisStatusRequest} {@link DescribeApiAppBindApisStatusResponse} */
   DescribeApiAppBindApisStatus(data: DescribeApiAppBindApisStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiAppBindApisStatusResponse>;
   /** 查询应用列表 {@link DescribeApiAppsStatusRequest} {@link DescribeApiAppsStatusResponse} */

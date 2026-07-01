@@ -116,6 +116,8 @@ declare interface EmailIdentity {
   SendIp?: string[];
   /** tag 标签 */
   TagList?: TagList[];
+  /** dkim位数枚举值：0： 10241： 20482： 双签默认值：0 */
+  DKIMOption?: number;
 }
 
 /** 用于描述发件人相关信息 */
@@ -408,6 +410,8 @@ declare interface CreateEmailIdentityResponse {
   VerifiedForSendingStatus?: boolean;
   /** 需要配置的DNS信息 */
   Attributes?: DNSAttributes[];
+  /** dkim位数枚举值：0： 10241： 20482： 双签 */
+  DKIMOption?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -596,6 +600,8 @@ declare interface GetEmailIdentityResponse {
   VerifiedForSendingStatus?: boolean;
   /** DNS配置详情 */
   Attributes?: DNSAttributes[];
+  /** dkim密钥长度枚举值：0： 10241： 20482： both */
+  DKIMOption?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -905,6 +911,10 @@ declare interface UpdateCustomBlackListResponse {
 declare interface UpdateEmailIdentityRequest {
   /** 请求验证的域名 */
   EmailIdentity: string;
+  /** 匹分控制台新老API */
+  NewAPI?: boolean;
+  /** dkim位数枚举值：0： 10241： 20482： 双签 */
+  DKIMOption?: number;
 }
 
 declare interface UpdateEmailIdentityResponse {
@@ -914,6 +924,8 @@ declare interface UpdateEmailIdentityResponse {
   VerifiedForSendingStatus?: boolean;
   /** 需要配置的DNS信息 */
   Attributes?: DNSAttributes[];
+  /** dkim位数枚举值：0： 10241： 20482： 双签 */
+  DKIMOption?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1181,7 +1181,7 @@ declare interface CreateAndPayDealRequest {
   DealType: number;
   /** 商品类型，1 域名套餐 2 增值服务 */
   GoodsType: number;
-  /** 套餐类型：DP_PLUS：专业版DP_EXPERT：企业版DP_ULTRA：尊享版增值服务类型LB：负载均衡URL：URL转发DMONITOR_TASKS：D监控任务数DMONITOR_IP：D监控备用 IP 数CUSTOMLINE：自定义线路数 */
+  /** 套餐类型 或 增值服务类型枚举值：DP_PLUS： 专业版DP_EXPERT： 企业版DP_ULTRA： 尊享版LB： 负载均衡URL： URL转发DMONITOR_TASKS： D监控任务数DMONITOR_IP： D监控备用 IP 数CUSTOMLINE： 自定义线路数升级场景，需传入当前域名绑定的套餐类型 */
   GoodsChildType: string;
   /** 增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等） */
   GoodsNum: number;
@@ -1211,7 +1211,7 @@ declare interface CreateDealRequest {
   DealType: number;
   /** 商品类型，1 域名套餐 2 增值服务 */
   GoodsType: number;
-  /** 套餐类型：DP_PLUS：专业版DP_EXPERT：企业版DP_ULTRA：尊享版增值服务类型LB：负载均衡URL：URL转发DMONITOR_TASKS：D监控任务数DMONITOR_IP：D监控备用 IP 数CUSTOMLINE：自定义线路数 */
+  /** 套餐类型 或 增值服务类型枚举值：DP_PLUS： 专业版DP_EXPERT： 企业版DP_ULTRA： 尊享版LB： 负载均衡URL： URL转发DMONITOR_TASKS： D监控任务数DMONITOR_IP： D监控备用 IP 数CUSTOMLINE： 自定义线路数升级场景，需传入当前域名绑定的套餐类型 */
   GoodsChildType: string;
   /** 增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等） */
   GoodsNum: number;
@@ -1219,7 +1219,7 @@ declare interface CreateDealRequest {
   AutoRenew: number;
   /** 需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。 */
   Domain?: string;
-  /** 套餐时长：1. 套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）2. 升级套餐时不需要传。3. 增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10） */
+  /** 套餐时长：套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）升级套餐时不需要传。增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10） */
   TimeSpan?: number;
   /** 套餐类型，需要升级到的套餐类型，只有升级时需要。 */
   NewPackageType?: string;

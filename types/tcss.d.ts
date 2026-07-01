@@ -6614,7 +6614,7 @@ declare interface DescribeAssetImageRegistryRegistryDetailResponse {
   InstanceID?: string;
   /** 同步方式，0全量同步，1增量同步 */
   SyncMode?: number;
-  /** 是否自动授权&扫描，选择全量同步时只针对最新版本镜像，增量同步时则包含所有新增镜像 */
+  /** 是否自动授权&amp;扫描，选择全量同步时只针对最新版本镜像，增量同步时则包含所有新增镜像 */
   NeedScan?: boolean;
   /** webhook接入地址 */
   WebhookUrl?: string;

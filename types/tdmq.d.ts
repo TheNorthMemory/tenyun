@@ -5839,7 +5839,7 @@ declare interface Tdmq {
   DescribeRocketMQGeneralSKUs(data?: DescribeRocketMQGeneralSKUsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGeneralSKUsResponse>;
   /** 查询 RocketMQ 消费组列表 {@link DescribeRocketMQGroupsRequest} {@link DescribeRocketMQGroupsResponse} */
   DescribeRocketMQGroups(data: DescribeRocketMQGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQGroupsResponse>;
-  /** 平滑迁移：查询Topic迁移状态列表 {@link DescribeRocketMQMigratingTopicListRequest} {@link DescribeRocketMQMigratingTopicListResponse} */
+  /** @deprecated 平滑迁移：查询Topic迁移状态列表 {@link DescribeRocketMQMigratingTopicListRequest} {@link DescribeRocketMQMigratingTopicListResponse} */
   DescribeRocketMQMigratingTopicList(data: DescribeRocketMQMigratingTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMigratingTopicListResponse>;
   /** 查询 RocketMQ 消息详情 {@link DescribeRocketMQMsgRequest} {@link DescribeRocketMQMsgResponse} */
   DescribeRocketMQMsg(data: DescribeRocketMQMsgRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQMsgResponse>;
@@ -5855,7 +5855,7 @@ declare interface Tdmq {
   DescribeRocketMQPublicAccessPoint(data: DescribeRocketMQPublicAccessPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQPublicAccessPointResponse>;
   /** 查询 RocketMQ 角色列表 {@link DescribeRocketMQRolesRequest} {@link DescribeRocketMQRolesResponse} */
   DescribeRocketMQRoles(data: DescribeRocketMQRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQRolesResponse>;
-  /** 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */
+  /** @deprecated 获取RocketMQ平滑迁移任务详情 {@link DescribeRocketMQSmoothMigrationTaskRequest} {@link DescribeRocketMQSmoothMigrationTaskResponse} */
   DescribeRocketMQSmoothMigrationTask(data: DescribeRocketMQSmoothMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSmoothMigrationTaskResponse>;
   /** 查询 RocketMQ 消费组订阅关系列表 {@link DescribeRocketMQSubscriptionsRequest} {@link DescribeRocketMQSubscriptionsResponse} */
   DescribeRocketMQSubscriptions(data: DescribeRocketMQSubscriptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRocketMQSubscriptionsResponse>;
@@ -5889,9 +5889,9 @@ declare interface Tdmq {
   ExportRocketMQMessageDetail(data: ExportRocketMQMessageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportRocketMQMessageDetailResponse>;
   /** 查询命名空间下的主题列表 {@link GetTopicListRequest} {@link GetTopicListResponse} */
   GetTopicList(data: GetTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicListResponse>;
-  /** 平滑迁移：导入消费者组列表 {@link ImportRocketMQConsumerGroupsRequest} {@link ImportRocketMQConsumerGroupsResponse} */
+  /** @deprecated 平滑迁移：导入消费者组列表 {@link ImportRocketMQConsumerGroupsRequest} {@link ImportRocketMQConsumerGroupsResponse} */
   ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
-  /** 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */
+  /** @deprecated 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */
   ImportRocketMQTopics(data: ImportRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQTopicsResponse>;
   /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;

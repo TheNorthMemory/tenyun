@@ -102,9 +102,9 @@ declare interface CNResource {
 declare interface Charge {
   /** 计费类型，“PREPAID” 预付费，“POSTPAID_BY_HOUR” 后付费 */
   ChargeType: string;
-  /** PREPAID需要传递，是否自动续费，1表示自动续费开启 */
+  /** ChargeType为PREPAID时，必传，表示是否自动续费，1表示自动续费开启 */
   RenewFlag?: number;
-  /** 预付费需要传递，计费时间长度，多少个月 */
+  /** ChargeType为PREPAID时，必传，表示计费时间长度，多少个月 */
   TimeSpan?: number;
 }
 
@@ -701,8 +701,10 @@ declare interface CreateInstanceNewRequest {
   TagItems?: Tag[];
   /** 副可用区信息 */
   SecondaryZoneInfo?: SecondaryZoneInfo[];
-  /** default账号登陆实例的密码。8-16个字符，至少包含大写字母、小写字母、数字和特殊字符!@#%^*中的三种，第一个字符不能为特殊字符 */
+  /** default账号登录实例的密码。8-16个字符，至少包含大写字母、小写字母、数字和特殊字符!@#%^*中的三种，第一个字符不能为特殊字符 */
   CkDefaultUserPwd?: string;
+  /** 集群类型 */
+  ClusterType?: string;
 }
 
 declare interface CreateInstanceNewResponse {

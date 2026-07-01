@@ -970,6 +970,14 @@ declare interface UserIdAndUserName {
   EmailActivationStatus?: number | null;
   /** 1 */
   Id?: number | null;
+  /** 飞书应用ID */
+  LarkAppId?: string | null;
+  /** 飞书UserId */
+  LarkUserId?: string | null;
+  /** 飞书OpenId */
+  LarkOpenId?: string | null;
+  /** 飞书UserName */
+  LarkUserName?: string | null;
 }
 
 /** 用户ID和用户名 */
@@ -988,6 +996,8 @@ declare interface UserInfo {
   AppUserId?: string | null;
   /** 企微账号名称 */
   AppUserName?: string | null;
+  /** 飞书OpenId */
+  LarkOpenId?: string | null;
 }
 
 /** 用户资源入参 */

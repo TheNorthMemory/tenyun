@@ -1405,8 +1405,10 @@ declare interface CloseLogResponse {
 }
 
 declare interface CloseSSLRequest {
-  /** 实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 实例 ID。请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
+  /** SSL地址类型。枚举值：0： 不限。1： 内网IPv4。2： 内网IPv6。3： 外网。-1： 未指定。默认值：0 */
+  AddressType?: number;
 }
 
 declare interface CloseSSLResponse {

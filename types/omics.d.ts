@@ -1194,6 +1194,26 @@ declare interface GetRunCallsResponse {
   RequestId?: string;
 }
 
+declare interface GetRunJobLogRequest {
+  /** 任务Uuid。 */
+  RunUuid: string;
+  /** 子任务id */
+  JobId: string;
+  /** 日志类型枚举值：stdout： 标准输出stderr： 标准错误 */
+  LogType: string;
+  /** 项目ID。（不填使用指定地域下的默认项目） */
+  ProjectId?: string;
+  /** 子任务路径，无子任务可填空 */
+  Path?: string;
+}
+
+declare interface GetRunJobLogResponse {
+  /** 日志内容 */
+  Content?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetRunMetadataFileRequest {
   /** 任务Uuid。 */
   RunUuid: string;
@@ -1459,6 +1479,8 @@ declare interface Omics {
   GetInputTemplateFile(data: GetInputTemplateFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetInputTemplateFileResponse>;
   /** 查询作业详情 {@link GetRunCallsRequest} {@link GetRunCallsResponse} */
   GetRunCalls(data: GetRunCallsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunCallsResponse>;
+  /** 获取子任务日志 {@link GetRunJobLogRequest} {@link GetRunJobLogResponse} */
+  GetRunJobLog(data: GetRunJobLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunJobLogResponse>;
   /** 获取任务详情文件 {@link GetRunMetadataFileRequest} {@link GetRunMetadataFileResponse} */
   GetRunMetadataFile(data: GetRunMetadataFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetRunMetadataFileResponse>;
   /** 查询任务详情 {@link GetRunStatusRequest} {@link GetRunStatusResponse} */

@@ -574,6 +574,8 @@ declare interface IOAUserGroup {
   OrgNamePath?: string;
   /** ioa关联用户源类型 */
   Source?: number;
+  /** 用户所属目录 */
+  UserDirName?: string;
 }
 
 /** LDAP配置信息 */
@@ -1238,6 +1240,12 @@ declare interface UserDirectory {
   CreateTime?: string;
   /** 目录下的组织细节信息 */
   UserOrgSet?: UserOrg[];
+  /** 是否开启自动同步 */
+  AutoSync?: boolean;
+  /** 同步周期（5段式 crontab 表达式） */
+  SyncCron?: string;
+  /** 下次同步时间参数格式：2026-06-05T11:30:00+08:00 */
+  NextSyncTime?: string;
 }
 
 /** 同步的ioa用户组织信息 */
@@ -1252,6 +1260,8 @@ declare interface UserOrg {
   OrgNamePath: string;
   /** ioa用户组织id下的用户数 */
   UserTotal?: number;
+  /** 组织绑定的用户组 id 列表 */
+  BindGroupIds?: number[];
 }
 
 declare interface AccessDevicesRequest {
@@ -1681,6 +1691,10 @@ declare interface CreateUserDirectoryRequest {
   SourceName: string;
   /** 目录包含用户数 */
   UserCount?: number;
+  /** 是否开启自动同步 */
+  AutoSync?: boolean;
+  /** 同步周期（5段式 crontab 表达式） */
+  SyncCron?: string;
 }
 
 declare interface CreateUserDirectoryResponse {
@@ -3013,6 +3027,10 @@ declare interface ModifyUserDirectoryRequest {
   Id: number;
   /** ioa分组信息 */
   UserOrgSet: UserOrg[];
+  /** 是否开启自动同步 */
+  AutoSync?: boolean;
+  /** 同步周期（5段式 crontab 表达式） */
+  SyncCron?: string;
 }
 
 declare interface ModifyUserDirectoryResponse {

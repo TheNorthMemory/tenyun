@@ -270,6 +270,8 @@ declare interface LoginActionFlag {
   Mail?: number;
   /** 0: 非u2f硬件token 1: u2f硬件token */
   U2FToken?: number;
+  /** 0: 非passkey 校验 1: passkey校验 */
+  Passkey?: number;
 }
 
 /** 登录和敏感操作flag */

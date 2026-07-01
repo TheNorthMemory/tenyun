@@ -2334,6 +2334,8 @@ declare namespace V20180416 {
     DiskEnhance?: number;
     /** 是否开启智能巡检 */
     EnableDiagnose?: boolean;
+    /** 是否开启自动备份 */
+    EnableCosBackup?: boolean;
     /** cdcId，使用cdc子网时传递 */
     CdcId?: string;
     /** 置放群组亲和度，范围[0,10]，0表示不开启 */

@@ -508,6 +508,28 @@ declare interface DifferenceDetail {
   Items?: DifferenceItem[] | null;
 }
 
+/** 校验得出的不一致详情 */
+declare interface DifferenceDetails {
+  /** 校验结果 */
+  Result?: string;
+  /** 源库gtid set */
+  SrcGtidSets?: string;
+  /** 目标库gtid set */
+  DstGtidSets?: string;
+  /** 源库差异的gtid set */
+  DiffSrc?: string;
+  /** 源库中不一致的表 */
+  DiffSrcTables?: string[];
+  /** 目标库差异的gtid set */
+  DiffDst?: string;
+  /** 校验结束时间 */
+  CompareTimestamp?: string;
+  /** 同步范围内的不一致表 */
+  DiffSrcTablesNeedSync?: string[];
+  /** 同步范围内是否存在不一致的表 */
+  DiffSrcIsNeedSync?: boolean;
+}
+
 /** 校验不一致的表详情 */
 declare interface DifferenceItem {
   /** 数据库名 */
@@ -1976,6 +1998,28 @@ declare interface DescribeMigrateDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMigrateGtidCompareReportRequest {
+  /** 任务id */
+  JobId: string;
+  /** 创建的校验任务id */
+  CompareTaskId?: string;
+  /** 是否需要展示不一致详情 */
+  NeedDiffDetail?: boolean;
+}
+
+declare interface DescribeMigrateGtidCompareReportResponse {
+  /** 校验结论 */
+  Conclusion?: string;
+  /** 校验状态 */
+  Status?: string;
+  /** 校验类型 */
+  Type?: string;
+  /** 不一致详情 */
+  Detail?: DifferenceDetails[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMigrationCheckJobRequest {
   /** 任务id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
   JobId: string;
@@ -2356,6 +2400,28 @@ declare interface DescribeSyncCompareTasksResponse {
   TotalCount?: number | null;
   /** 一致性校验任务列表 */
   Items?: CompareTaskItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSyncGtidCompareReportRequest {
+  /** 任务id */
+  JobId: string;
+  /** 创建的校验任务id */
+  CompareTaskId?: string;
+  /** 是否需要展示不一致详情 */
+  NeedDiffDetail?: boolean;
+}
+
+declare interface DescribeSyncGtidCompareReportResponse {
+  /** 校验结论 */
+  Conclusion?: string;
+  /** 校验状态 */
+  Status?: string;
+  /** 校验类型 */
+  Type?: string;
+  /** 不一致详情 */
+  Detail?: DifferenceDetails[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3709,6 +3775,8 @@ declare interface Dts {
   DescribeConsumerGroups(data: DescribeConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerGroupsResponse>;
   /** 查询可迁移的实例列表 {@link DescribeMigrateDBInstancesRequest} {@link DescribeMigrateDBInstancesResponse} */
   DescribeMigrateDBInstances(data: DescribeMigrateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateDBInstancesResponse>;
+  /** 查询迁移任务gtid校验结果 {@link DescribeMigrateGtidCompareReportRequest} {@link DescribeMigrateGtidCompareReportResponse} */
+  DescribeMigrateGtidCompareReport(data: DescribeMigrateGtidCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrateGtidCompareReportResponse>;
   /** 查询迁移校验任务结果 {@link DescribeMigrationCheckJobRequest} {@link DescribeMigrationCheckJobResponse} */
   DescribeMigrationCheckJob(data: DescribeMigrationCheckJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMigrationCheckJobResponse>;
   /** 查询某个迁移任务详情 {@link DescribeMigrationDetailRequest} {@link DescribeMigrationDetailResponse} */
@@ -3733,6 +3801,8 @@ declare interface Dts {
   DescribeSyncCompareReport(data: DescribeSyncCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncCompareReportResponse>;
   /** 查询同步一致性校验任务列表 {@link DescribeSyncCompareTasksRequest} {@link DescribeSyncCompareTasksResponse} */
   DescribeSyncCompareTasks(data: DescribeSyncCompareTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncCompareTasksResponse>;
+  /** 查询同步任务gtid校验结果 {@link DescribeSyncGtidCompareReportRequest} {@link DescribeSyncGtidCompareReportResponse} */
+  DescribeSyncGtidCompareReport(data: DescribeSyncGtidCompareReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncGtidCompareReportResponse>;
   /** 查询同步任务信息 {@link DescribeSyncJobsRequest} {@link DescribeSyncJobsResponse} */
   DescribeSyncJobs(data?: DescribeSyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSyncJobsResponse>;
   /** 下线已隔离的数据订阅任务 {@link DestroyIsolatedSubscribeRequest} {@link DestroyIsolatedSubscribeResponse} */

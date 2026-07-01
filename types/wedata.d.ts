@@ -9407,9 +9407,9 @@ declare namespace V20210820 {
     Values: ThresholdValue[] | null;
     /** 比较操作类型 */
     Operator: string | null;
-    /** 比较类型 */
+    /** 比较类型：1-固定值, 2-波动值, 3-数值范围比较, 4-枚举范围比较, 5-不用比较, 6-字段数据相关性, 7-公平性 */
     CompareType: number | null;
-    /** 值比较类型 */
+    /** 值比较类型：1-绝对值, 2-上升, 3-下降, 4-范围内, 5-范围外, 6-公平率, 7-公平差 */
     ValueComputeType: number | null;
   }
 
@@ -10193,12 +10193,14 @@ declare namespace V20210820 {
     TimeoutPeriod?: number;
     /** ApiId */
     ApiId?: string | null;
-    /** 0:免认证 1:应用认证 */
+    /** 认证方式枚举值：0： 免认证1： 应用认证2： OAuth2.0认证 */
     AuthType?: number;
     /** 请求地址 */
     GatewayApiUrl?: string | null;
     /** 服务Api状态 1:已上线 3:已下线 */
     ApiStatus?: number | null;
+    /** 是否开启分页枚举值：0： 开启分页1： 未开启 */
+    EnablePage?: number | null;
   }
 
   /** 获取数据服务API的发布态信息列表响应内容 */
@@ -12475,7 +12477,7 @@ declare namespace V20210820 {
     ScheduleTimeZone?: string;
     /** 执行应用参数 */
     AppParam?: string;
-    /** 补录计划时间范围的类型： DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间 */
+    /** 补录计划时间范围的类型：DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间 */
     TimeType?: string;
     /** 开始时间 */
     StartTime?: string;
@@ -12489,6 +12491,14 @@ declare namespace V20210820 {
     RunType?: number | null;
     /** 定时运行时间 */
     RunDateTime?: string | null;
+    /** 定时补录计划 或者 指定时间段补录 执行时间点的时区 */
+    RunScheduleTimeZone?: string | null;
+    /** 指定时间段补录开始时间参数格式：00:00 - 23:59 */
+    RunScheduleRangeStartTime?: string | null;
+    /** 指定时间段补录结束时间参数格式：00:00 - 23:59 */
+    RunScheduleRangeEndTime?: string | null;
+    /** 指定时间段补录生效日，星期一到星期日，1-7枚举值：星期一： 1星期二： 2 */
+    RunScheduleRangeWeekDays?: number[] | null;
   }
 
   /** 补录计划集合 */
@@ -13499,15 +13509,15 @@ declare namespace V20210820 {
     TableId?: string | null;
     /** 规则名称 */
     Name?: string | null;
-    /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+    /** 规则类型：1-系统模版，2-自定义模版，3-自定义SQL */
     Type?: number | null;
     /** 规则模板Id */
     RuleTemplateId?: number | null;
     /** 规则模板概述 */
     RuleTemplateContent?: string | null;
-    /** 规则所属质量维度 1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+    /** 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性 */
     QualityDim?: number | null;
-    /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+    /** 源数据对象类型：1-常量，2-离线表级，3-离线字段级别 */
     SourceObjectType?: number | null;
     /** 规则适用的源数据对象类型（1：数值，2：字符串） */
     SourceObjectDataType?: number | null;
@@ -13515,7 +13525,7 @@ declare namespace V20210820 {
     SourceObjectDataTypeName?: string | null;
     /** 源字段名称 */
     SourceObjectValue?: string | null;
-    /** 检测范围 1.全表, 2.条件扫描 */
+    /** 检测范围类型：1-全表，2-条件扫描 */
     ConditionType?: number | null;
     /** 条件扫描WHERE条件表达式 */
     ConditionExpression?: string | null;
@@ -13523,7 +13533,7 @@ declare namespace V20210820 {
     CustomSql?: string | null;
     /** 报警触发条件 */
     CompareRule?: CompareRule | null;
-    /** 报警触发级别 1.低, 2.中, 3.高 */
+    /** 告警级别：1-低，2-中，3-高 */
     AlarmLevel?: number | null;
     /** 规则描述 */
     Description?: string | null;
@@ -13551,15 +13561,15 @@ declare namespace V20210820 {
     TemplateSql?: string | null;
     /** 模版子维度：0.父维度类型,1.一致性: 枚举范围一致性,2.一致性：数值范围一致性,3.一致性：字段数据相关性 */
     SubQualityDim?: number | null;
-    /** 规则适用的目标数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+    /** 目标数据对象类型：1-常量，2-离线表级，3-离线字段级别 */
     TargetObjectType?: number | null;
-    /** 规则适用的目标数据对象类型（1：数值，2：字符串） */
+    /** 目标字段数据类型：1-数值，2-字符串 */
     TargetObjectDataType?: number | null;
     /** 目标字段详细类型，INT、STRING */
     TargetObjectDataTypeName?: string | null;
     /** 目标字段名称 */
     TargetObjectValue?: string | null;
-    /** 源端对应的引擎类型 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[] | null;
     /** 表名称 */
     TableName?: string | null;
@@ -13575,13 +13585,13 @@ declare namespace V20210820 {
     DatasourceId?: number | null;
     /** 数据库 id */
     DatabaseId?: string | null;
-    /** 监控是否开启.0false,1true */
+    /** 监控是否开启：0-关闭，1-开启 */
     MonitorStatus?: number | null;
     /** 触发条件 */
     TriggerCondition?: string | null;
     /** 0或者未返回或者null：未定义，1：生产，2：开发 */
     DsEnvType?: number | null;
-    /** 数据源类型 */
+    /** 数据源类型：2-HIVE(EMR-Hive)，3-DLC，5-TCHouse-P，6-ICEBERG(EMR-Iceberg)，7-DORIS，8-TCHouse-D，9-EMR-StarRocks，11-TCHouse-X */
     DatasourceType?: number | null;
     /** 模式名称 */
     SchemaName?: string | null;
@@ -13599,7 +13609,7 @@ declare namespace V20210820 {
     DatabaseName?: string | null;
     /** 失败原因 */
     FailMsg?: string | null;
-    /** 任务类型 */
+    /** 任务类型（同MonitorType）：1-未配置，2-关联生产调度，3-离线周期检测 */
     GroupType?: string | null;
     /** 编排任务id */
     AspectTaskId?: string | null;
@@ -13743,6 +13753,8 @@ declare namespace V20210820 {
     AspectTaskId?: string | null;
     /** 目录 */
     CatalogName?: string | null;
+    /** 规则执行状态枚举值：0： 初始状态1： 运行中2： 运行成功3： 运行失败4： 被杀死 */
+    RuleExecStatus?: number;
   }
 
   /** 规则执行结果详情 */
@@ -13765,7 +13777,7 @@ declare namespace V20210820 {
     RuleExecResult?: RuleExecResult | null;
     /** 表负责人userId */
     TableOwnerUserId?: number | null;
-    /** 2.HIVE 3.DLC */
+    /** 数据源类型：2-HIVE(EMR-Hive)，3-DLC，5-TCHouse-P，6-ICEBERG(EMR-Iceberg)，7-DORIS，8-TCHouse-D，9-EMR-StarRocks，11-TCHouse-X */
     DatasourceType?: number | null;
     /** 集群部署类型，CVM/TKE */
     ClusterDeployType?: string | null;
@@ -13831,9 +13843,9 @@ declare namespace V20210820 {
     DatasourceId?: string | null;
     /** 数据源名称 */
     DatasourceName?: string | null;
-    /** 数据源类型 */
+    /** 数据源类型：2-HIVE(EMR-Hive)，3-DLC，5-TCHouse-P，6-ICEBERG(EMR-Iceberg)，7-DORIS，8-TCHouse-D，9-EMR-StarRocks，11-TCHouse-X */
     DatasourceType?: number | null;
-    /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+    /** 监控类型：1-未配置，2-关联生产调度，3-离线周期检测 */
     MonitorType?: number | null;
     /** 更新时间 */
     UpdateTime?: string | null;
@@ -13857,7 +13869,7 @@ declare namespace V20210820 {
     Permission?: boolean | null;
     /** 已经配置的规则数量 */
     RuleCount?: number | null;
-    /** 监控状态 */
+    /** 监控是否开启：0-关闭，1-开启 */
     MonitorStatus?: boolean | null;
     /** 表负责人UserId */
     TableOwnerUserId?: number | null;
@@ -13885,12 +13897,16 @@ declare namespace V20210820 {
     Description?: string | null;
     /** 监控创建人 */
     CreateUserName?: string | null;
-    /** 任务类型 */
+    /** 任务类型（同MonitorType）：1-未配置，2-关联生产调度，3-离线周期检测 */
     GroupType?: string | null;
     /** 任务id */
     AspectTaskId?: string | null;
     /** catalog名称 */
     CatalogName?: string | null;
+    /** 负责人ID */
+    InChargeId?: string | null;
+    /** 负责人名称 */
+    InChargeName?: string | null;
   }
 
   /** 任务配置 */
@@ -13945,7 +13961,7 @@ declare namespace V20210820 {
     RuleGroupExecId?: number | null;
     /** 规则组ID */
     RuleGroupId?: number | null;
-    /** 执行触发类型（1：手动触发， 2：调度事中触发，3：周期调度触发） */
+    /** 触发类型：1-手动触发，2-调度事件触发，3-周期调度触发 */
     TriggerType?: number | null;
     /** 执行时间 yyyy-MM-dd HH:mm:ss */
     ExecTime?: string | null;
@@ -13969,7 +13985,7 @@ declare namespace V20210820 {
     Permission?: boolean | null;
     /** 执行详情，调度计划或者关联生产任务ID */
     ExecDetail?: string | null;
-    /** 实际执行引擎 */
+    /** 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D */
     EngineType?: string | null;
     /** 规则执行结果 */
     RuleExecResultVOList?: RuleExecResult[] | null;
@@ -14011,7 +14027,7 @@ declare namespace V20210820 {
   interface RuleGroupExecStrategy {
     /** 规则组Id */
     RuleGroupId?: number | null;
-    /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+    /** 监控类型：1-未配置，2-关联生产调度，3-离线周期检测 */
     MonitorType?: number | null;
     /** 计算队列 */
     ExecQueue?: string | null;
@@ -14025,7 +14041,7 @@ declare namespace V20210820 {
     StartTime?: string | null;
     /** 周期结束时间 */
     EndTime?: string | null;
-    /** 调度周期类型 */
+    /** 周期类型：MINUTE-分钟，HOUR-小时，DAY-天，WEEK-周，MONTH-月，YEAR-年 */
     CycleType?: string | null;
     /** 延迟调度时间 */
     DelayTime?: number | null;
@@ -14033,7 +14049,7 @@ declare namespace V20210820 {
     CycleStep?: number | null;
     /** 时间指定 */
     TaskAction?: string | null;
-    /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+    /** 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D */
     ExecEngineType?: string | null;
     /** 执行计划 */
     ExecPlan?: string | null;
@@ -14041,7 +14057,7 @@ declare namespace V20210820 {
     RuleId?: number | null;
     /** 规则名称 */
     RuleName?: string | null;
-    /** 触发类型 */
+    /** 触发类型数组：1-手动触发，2-调度事件触发，3-周期调度触发 */
     TriggerTypes?: string[] | null;
     /** DLC资源组 */
     DlcGroupName?: string | null;
@@ -14065,6 +14081,8 @@ declare namespace V20210820 {
     EngineParam?: string | null;
     /** catalog名称 */
     CatalogName?: string | null;
+    /** 执行失败是否阻塞下游枚举值：0： 失败不阻塞（默认）1： 失败阻塞默认值：0仅作用于“关联生产调度”类型的质量监控 */
+    ExecFailBlock?: number | null;
   }
 
   /** 规则组分页 */
@@ -14109,7 +14127,7 @@ declare namespace V20210820 {
     RuleGroupId?: number | null;
     /** 订阅接收人列表 */
     Receivers?: SubscribeReceiver[] | null;
-    /** 订阅方式 1.邮件email 2.短信sms */
+    /** 订阅方式：1-邮件，2-短信，3-微信，4-语音，5-企微，6-HTTP连接，7-飞书群，8-钉钉群 */
     SubscribeType?: number[] | null;
     /** 群机器人配置的webhook信息 */
     WebHooks?: SubscribeWebHook[] | null;
@@ -14171,17 +14189,17 @@ declare namespace V20210820 {
     Name?: string;
     /** 规则模版描述 */
     Description?: string;
-    /** 模版类型（1：系统模版，2：自定义） */
+    /** 模版类型：1-系统模版，2-用户自定义模版 */
     Type?: number;
-    /** 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别） */
+    /** 源数据对象类型：1-常量，2-离线表级，3-离线字段级别 */
     SourceObjectType?: number;
     /** 规则适用的源数据对象类型（1：数值，2：字符串） */
     SourceObjectDataType?: number;
     /** 规则模版源侧内容，区分引擎，JSON 结构 */
     SourceContent?: string | null;
-    /** 源数据适用类型 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[] | null;
-    /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
+    /** 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性 */
     QualityDim?: number | null;
     /** 规则支持的比较方式类型（1：固定值比较，大于、小于，大于等于等 2：波动值比较，绝对值、上升、下降） */
     CompareType?: number | null;
@@ -15827,6 +15845,14 @@ declare namespace V20210820 {
     IsRob: number;
   }
 
+  /** 单任务的缺失实例处理策略 */
+  interface TaskMissingInstanceStrategy {
+    /** 任务ID */
+    TaskId?: string;
+    /** 缺失实例处理策略 */
+    MissingInstanceStrategy?: string;
+  }
+
   /** 任务运维详情 */
   interface TaskOpsDto {
     /** 任务ID */
@@ -16914,6 +16940,8 @@ declare namespace V20210820 {
     EnableMakeUp?: boolean;
     /** 指定审批人列表 */
     AssignApprovalList?: string[];
+    /** 任务缺失实例处理策略MAKEUP:补录缺失的实例;FORCE_SUCCESS:将缺失的实例置成功;SKIP:不处理，忽略缺失的实例 */
+    PerTaskMissingInstanceStrategy?: TaskMissingInstanceStrategy[];
   }
 
   interface BatchCreateTaskVersionAsyncResponse {
@@ -17364,7 +17392,7 @@ declare namespace V20210820 {
   interface CommitRuleGroupTaskRequest {
     /** 规则组ID */
     RuleGroupId?: number;
-    /** 触发类型 1.手动触发 2.调度事中触发 3.周期调度触发 */
+    /** 触发类型：1-手动触发，2-调度事件触发，3-周期调度触发 */
     TriggerType?: number;
     /** 规则配置列表 */
     ExecRuleConfig?: RuleConfig[];
@@ -17372,7 +17400,7 @@ declare namespace V20210820 {
     ExecConfig?: RuleExecConfig;
     /** 项目ID */
     ProjectId?: string;
-    /** 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+    /** 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D */
     EngineType?: string;
   }
 
@@ -17811,15 +17839,15 @@ declare namespace V20210820 {
     TableId?: string;
     /** 规则模板列表 */
     RuleTemplateId?: number;
-    /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+    /** 规则类型：1-系统模版，2-自定义模版，3-自定义SQL */
     Type?: number;
-    /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性 */
+    /** 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性 */
     QualityDim?: number;
     /** 源字段详细类型，int、string */
     SourceObjectDataTypeName?: string;
     /** 源字段名称 */
     SourceObjectValue?: string;
-    /** 检测范围 1.全表 2.条件扫描 */
+    /** 检测范围类型：1-全表，2-条件扫描 */
     ConditionType?: number;
     /** 条件扫描WHERE条件表达式 */
     ConditionExpression?: string;
@@ -17827,7 +17855,7 @@ declare namespace V20210820 {
     CustomSql?: string;
     /** 报警触发条件 */
     CompareRule?: CompareRule;
-    /** 报警触发级别 1.低, 2.中, 3.高 */
+    /** 告警级别：1-低，2-中，3-高 */
     AlarmLevel?: number;
     /** 规则描述 */
     Description?: string;
@@ -17847,7 +17875,7 @@ declare namespace V20210820 {
     FieldConfig?: RuleFieldConfig;
     /** 目标字段名称 CITY */
     TargetObjectValue?: string;
-    /** 该规则支持的执行引擎列表 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[];
   }
 
@@ -17859,17 +17887,17 @@ declare namespace V20210820 {
   }
 
   interface CreateRuleTemplateRequest {
-    /** 模板类型 1.系统模板 2.自定义模板 */
+    /** 模版类型：1-系统模版，2-用户自定义模版 */
     Type?: number;
     /** 模板名称 */
     Name?: string;
-    /** 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性 */
+    /** 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性 */
     QualityDim?: number;
-    /** 源端数据对象类型 1.常量 2.离线表级 2.离线字段级 */
+    /** 源数据对象类型：1-常量，2-离线表级，3-离线字段级别 */
     SourceObjectType?: number;
     /** 模板描述 */
     Description?: string;
-    /** 源端对应的引擎类型 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[];
     /** 是否关联其它库表 */
     MultiSourceFlag?: boolean;
@@ -20647,13 +20675,13 @@ declare namespace V20210820 {
   }
 
   interface DescribeRuleTemplatesRequest {
-    /** 模板类型 1.系统模板 2.自定义模板 */
+    /** 模版类型：1-系统模版，2-用户自定义模版 */
     Type?: number;
-    /** 1.常量 2.离线表级 2.离线字段级 */
+    /** 源数据对象类型：1-常量，2-离线表级，3-离线字段级别 */
     SourceObjectType?: number;
     /** 项目Id */
     ProjectId?: string;
-    /** 源端对应的引擎类型 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[];
   }
 
@@ -20689,7 +20717,7 @@ declare namespace V20210820 {
     ProjectId?: string;
     /** 规则组id */
     RuleGroupId?: number;
-    /** 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+    /** 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D */
     EngineType?: string;
   }
 
@@ -20913,6 +20941,8 @@ declare namespace V20210820 {
     RunningOrderId?: number;
     /** 关键字 */
     Keyword?: string;
+    /** 任务类型，不传时按 INTEGRATION 处理 枚举值：INTEGRATION： 集成任务VALIDATE： 对账任务 */
+    JobType?: string;
   }
 
   interface DescribeStreamTaskLogListResponse {
@@ -22532,7 +22562,7 @@ declare namespace V20210820 {
   interface ModifyExecStrategyRequest {
     /** 规则组ID */
     RuleGroupId?: number;
-    /** 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测 */
+    /** 监控类型：1-未配置，2-关联生产调度，3-离线周期检测 */
     MonitorType?: number;
     /** 计算队列 */
     ExecQueue?: string;
@@ -22548,7 +22578,7 @@ declare namespace V20210820 {
     StartTime?: string;
     /** 离线周期模式下,生效日期-结束时间 */
     EndTime?: string;
-    /** 离线周期模式下,调度周期 MINUTE_CYCLE:I,HOUR_CYCLE:H,DAY_CYCLE:D,WEEK_CYCLE:W,MONTH_CYCLE:M */
+    /** 周期类型：MINUTE-分钟，HOUR-小时，DAY-天，WEEK-周，MONTH-月，YEAR-年 */
     CycleType?: string;
     /** 离线周期模式下,调度步长 */
     CycleStep?: number;
@@ -22562,9 +22592,9 @@ declare namespace V20210820 {
     DatasourceId?: string;
     /** 数据表Id */
     TableId?: string;
-    /** 运行的执行引擎，不传时会请求该数据源下默认的执行引擎 */
+    /** 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D */
     ExecEngineType?: string;
-    /** 触发场景 */
+    /** 触发类型数组：1-手动触发，2-调度事件触发，3-周期调度触发 */
     TriggerTypes?: string[];
   }
 
@@ -22616,7 +22646,7 @@ declare namespace V20210820 {
     ProjectId?: string;
     /** 规则组ID */
     RuleGroupId?: number;
-    /** 监控开关状态 */
+    /** 监控是否开启：0-关闭，1-开启 */
     MonitorStatus?: boolean;
   }
 
@@ -22662,7 +22692,7 @@ declare namespace V20210820 {
     RuleGroupId?: number;
     /** 订阅人信息 */
     Receivers?: SubscribeReceiver[];
-    /** 订阅类型 */
+    /** 订阅方式：1-邮件，2-短信，3-微信，4-语音，5-企微，6-HTTP连接，7-飞书群，8-钉钉群 */
     SubscribeType?: number[];
     /** 项目ID */
     ProjectId?: string;
@@ -22696,15 +22726,15 @@ declare namespace V20210820 {
     TableId?: string;
     /** 规则模板ID */
     RuleTemplateId?: number;
-    /** 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL */
+    /** 规则类型：1-系统模版，2-自定义模版，3-自定义SQL */
     Type?: number;
-    /** 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性） */
+    /** 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性 */
     QualityDim?: number;
     /** 源字段详细类型，int、string */
     SourceObjectDataTypeName?: string;
     /** 源字段名称 */
     SourceObjectValue?: string;
-    /** 检测范围 1.全表 2.条件扫描 */
+    /** 检测范围类型：1-全表，2-条件扫描 */
     ConditionType?: number;
     /** 条件扫描WHERE条件表达式 */
     ConditionExpression?: string;
@@ -22712,7 +22742,7 @@ declare namespace V20210820 {
     CustomSql?: string;
     /** 报警触发条件 */
     CompareRule?: CompareRule;
-    /** 报警触发级别 1.低, 2.中, 3.高 */
+    /** 告警级别：1-低，2-中，3-高 */
     AlarmLevel?: number;
     /** 规则描述 */
     Description?: string;
@@ -22728,7 +22758,7 @@ declare namespace V20210820 {
     FieldConfig?: RuleFieldConfig;
     /** 目标字段名称 CITY */
     TargetObjectValue?: string;
-    /** 该规则适配的执行引擎 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[];
     /** 目标库名 */
     TargetDatabaseName?: string;
@@ -22752,17 +22782,17 @@ declare namespace V20210820 {
   interface ModifyRuleTemplateRequest {
     /** 模板ID */
     TemplateId?: number;
-    /** 模板类型 1.系统模板 2.自定义模板 */
+    /** 模版类型：1-系统模版，2-用户自定义模版 */
     Type?: number;
     /** 模板名称 */
     Name?: string;
-    /** 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性 */
+    /** 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性 */
     QualityDim?: number;
-    /** 源端数据对象类型 1.常量 2.离线表级 2.离线字段级 */
+    /** 源数据对象类型：1-常量，2-离线表级，3-离线字段级别 */
     SourceObjectType?: number;
     /** 描述 */
     Description?: string;
-    /** 源端对应的引擎类型 */
+    /** 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X */
     SourceEngineTypes?: number[];
     /** 是否关联其它库表 */
     MultiSourceFlag?: boolean;

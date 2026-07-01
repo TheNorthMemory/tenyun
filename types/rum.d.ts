@@ -84,6 +84,8 @@ declare interface ReleaseFile {
   FileHash?: string;
   /** 文件 id */
   ID?: number;
+  /** 创建时间 */
+  CreatedAt?: string;
 }
 
 /** Rum片区信息 */
@@ -2899,6 +2901,8 @@ declare interface DescribeReleaseFilesRequest {
   FileVersion?: string;
   /** 查询过滤条件（根据sourcemap的文件名模糊匹配） */
   FileName?: string;
+  /** false/不传=保留「最近 3 个月」约束（旧行为）；true=绕过时间窗口 */
+  IgnoreDefaultTimeRange?: boolean;
 }
 
 declare interface DescribeReleaseFilesResponse {

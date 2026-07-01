@@ -3657,6 +3657,10 @@ declare interface ExtractDocAgentRequest {
   ItemNames?: ItemNames[];
   /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF时有效。 */
   PdfPageNumber?: number;
+  /** 是否需要返回坐标默认值：false */
+  EnableCoord?: boolean;
+  /** 是否需要开启审核逻辑(支持对字段配置比对内容和比对的语意规则)默认值：false */
+  EnableAudit?: boolean;
 }
 
 declare interface ExtractDocAgentResponse {
@@ -3664,9 +3668,9 @@ declare interface ExtractDocAgentResponse {
   Angle?: number;
   /** 配置结构化文本信息。 */
   StructuralList?: GroupInfo[];
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
   ErrorMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4316,6 +4320,26 @@ declare interface MixedInvoiceOCRRequest {
 declare interface MixedInvoiceOCRResponse {
   /** 混贴票据识别结果，具体内容请点击左侧链接。 */
   MixedInvoiceItems?: MixedInvoiceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface MultimodalDocParseRequest {
+  /** 文件的 Url 地址，支持FileType参数对应的文件格式及大小。文件下载时间不超过3秒。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  FileUrl: string;
+  /** 支持解析的文件类型。1：PDF 文档；2：Word 文档（.doc / .docx）；3：PPT 演示文稿（.ppt / .pptx）；4：Excel 表格（.xls / .xlsx）；5：Markdown 文档（.md）；6：纯文本文件（.txt）；7：图片文件（.png / .jpg / .jpeg 等）；8：WPS 文档；0：未知文件类型。支持的文件大小：PDF/WORD/PPT支持150M且300页以内、EXCEL支持10M以内、TXT支持10M以内、图片文件支持70M以内。默认值：1 */
+  FileType: number;
+  /** 输出格式。1：json格式2：markdown格式3：xml格式9：json+markdown+xml格式默认值：9 */
+  ResultType?: number;
+  /** 是否支持子图解析。默认值：false */
+  EnableSubImg?: boolean;
+  /** 需要识别的页码范围，单次调用最多支持300页。参数格式：1-10 */
+  PageRange?: string;
+}
+
+declare interface MultimodalDocParseResponse {
+  /** 结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟。压缩包内包含*.md、*.json以及images文件夹。 */
+  ResultUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5535,6 +5559,8 @@ declare interface Ocr {
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
   /** 混贴票据识别 {@link MixedInvoiceOCRRequest} {@link MixedInvoiceOCRResponse} */
   MixedInvoiceOCR(data?: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
+  /** 多模态解析（文档版） {@link MultimodalDocParseRequest} {@link MultimodalDocParseResponse} */
+  MultimodalDocParse(data: MultimodalDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<MultimodalDocParseResponse>;
   /** 护照识别（中国大陆地区护照） {@link PassportOCRRequest} {@link PassportOCRResponse} */
   PassportOCR(data?: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;
   /** 港澳台通行证识别 {@link PermitOCRRequest} {@link PermitOCRResponse} */

@@ -116,7 +116,7 @@ declare interface DBCustomNode {
   IsolatedTime?: string;
   /** 节点标签信息 */
   Tags?: Tag[] | null;
-  /** 节点是否自动续费标记枚举值：1： 自动续费0： 不自动续费 */
+  /** 节点是否自动续费标记枚举值：1： 自动续费2： 不自动续费 */
   AutoRenew?: number;
   /** 交换机ID（已加密） */
   SwitchId?: string;
@@ -540,7 +540,7 @@ declare interface DescribeDBCustomClusterDetailResponse {
   ClusterDescription?: string;
   /** 集群所属地域枚举值：ap-shanghai： 上海地域ap-nanjing： 南京地域 */
   Region?: string;
-  /** DB Custom 集群状态枚举值：Creating： 创建中Running： 运行中Destroying： 销毁中 */
+  /** DB Custom 集群状态枚举值：Creating： 创建中Running： 运行中Destroying： 销毁中Initializing： 初始化中 */
   ClusterStatus?: string;
   /** 集群版本枚举值：1.34.1： 集群版本1.34.1默认值：1.34.1 */
   ClusterVersion?: string;
