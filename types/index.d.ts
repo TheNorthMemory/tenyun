@@ -76,6 +76,7 @@ import Cls, { Versions as ClsVersions } from "./cls";
 import Cme, { Versions as CmeVersions } from "./cme";
 import Cmq, { Versions as CmqVersions } from "./cmq";
 import Cms, { Versions as CmsVersions } from "./cms";
+import Cngw, { Versions as CngwVersions } from "./cngw";
 import Config, { Versions as ConfigVersions } from "./config";
 import Controlcenter, { Versions as ControlcenterVersions } from "./controlcenter";
 import Cpdp, { Versions as CpdpVersions } from "./cpdp";
@@ -334,6 +335,7 @@ export declare type SERVICE_VERSIONS = {
   cme: CmeVersions,
   cmq: CmqVersions,
   cms: CmsVersions,
+  cngw: CngwVersions,
   config: ConfigVersions,
   controlcenter: ControlcenterVersions,
   cpdp: CpdpVersions,
@@ -681,6 +683,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cmq: Cmq,
   /** {@link Cms 内容安全} */
   cms: Cms,
+  /** {@link Cngw 云原生智能网关} */
+  cngw: Cngw,
   /** {@link Config 配置审计} */
   config: Config,
   /** {@link Controlcenter 控制中心} */
