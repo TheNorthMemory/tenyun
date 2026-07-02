@@ -2500,6 +2500,50 @@ declare interface CreateTWeSeeCallbackResponse {
   RequestId?: string;
 }
 
+declare interface CreateTWeSeeDirectUploadCredentialRequest {
+  /** 产品 ID非 IoT 设备可传 default */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型枚举值：VID_COMP： 视频理解（支持视频文件或多帧图片）IMG_COMP： 图片理解（单帧图片） */
+  ServiceType: string;
+  /** 通道 ID默认值：0 */
+  ChannelId?: number;
+  /** 回调目标 ID */
+  CallbackId?: string;
+  /** 视觉理解配置项 */
+  ComprehensionConfig?: SeeComprehensionConfig;
+  /** 自定义事件 ID，会透传到任务元数据与回调中 */
+  CustomId?: string;
+  /** 临时密钥有效期，单位：秒。默认 300 秒，取值范围 5 到 86400。 */
+  DurationSeconds?: number;
+  /** 该直传凭据最多可触发的分析次数取值范围：[1, 10000]默认值：1 */
+  MaxInvokeCount?: number;
+  /** 上传 COS 存储桶所在地域。不填时使用默认地域。 */
+  StorageRegion?: string;
+  /** 上传方式枚举值：single： 单文件上传manifest： 上传源文件与 Manifest（先上传多个源文件，然后上传 Manifest JSON 触发分析）默认值：single */
+  UploadMethod?: string;
+}
+
+declare interface CreateTWeSeeDirectUploadCredentialResponse {
+  /** 访问 COS 的临时密钥过期时间（秒级 UNIX 时间戳） */
+  ExpiredTime?: number;
+  /** 访问 COS 的临时密钥 SecretId */
+  SecretId?: string;
+  /** 访问 COS 的临时密钥 SecretKey */
+  SecretKey?: string;
+  /** COS 存储桶名称 */
+  StorageBucket?: string;
+  /** COS 对象 Key 前缀。返回的临时凭据仅允许上传到此前缀下，格式为 Direct/{Uin}/{SessionId}/。 */
+  StoragePath?: string;
+  /** COS 存储桶所在地域 */
+  StorageRegion?: string;
+  /** 访问 COS 的临时密钥 Token */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTWeSeePostPaidServiceRequest {
   /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
   ServiceType: string;
@@ -4933,6 +4977,8 @@ declare interface InvokeAISearchServiceRequest {
   VectorSearchTopK?: number;
   /** 搜索结果的排序方式，可选值：CORRELATION：按相关性（默认）TIME_ASC：按时间升序TIME_DESC：按时间降序 */
   Order?: string;
+  /** 是否输出原始任务信息 */
+  WithTaskInfo?: boolean;
 }
 
 declare interface InvokeAISearchServiceResponse {
@@ -6285,6 +6331,8 @@ declare interface Iotexplorer {
   CreateTRTCSignaturesWithRoomId(data: CreateTRTCSignaturesWithRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTRTCSignaturesWithRoomIdResponse>;
   /** 创建 TWeSee 回调目标 {@link CreateTWeSeeCallbackRequest} {@link CreateTWeSeeCallbackResponse} */
   CreateTWeSeeCallback(data: CreateTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeCallbackResponse>;
+  /** 创建 TWeSee COS 直传凭据 {@link CreateTWeSeeDirectUploadCredentialRequest} {@link CreateTWeSeeDirectUploadCredentialResponse} */
+  CreateTWeSeeDirectUploadCredential(data: CreateTWeSeeDirectUploadCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeDirectUploadCredentialResponse>;
   /** 开通 TWeSee 后付费服务v2 {@link CreateTWeSeePostPaidServiceRequest} {@link CreateTWeSeePostPaidServiceResponse} */
   CreateTWeSeePostPaidService(data: CreateTWeSeePostPaidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeePostPaidServiceResponse>;
   /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */

@@ -96,17 +96,17 @@ declare interface AmbientSound {
 
 /** 语音识别使用的参数 */
 declare interface AsrParam {
-  /** 转录服务使用的模型类型。示例值"16k_zh_en"。语音转文本不同套餐版本支持的语言如下：基础语言引擎：- "zh": 8k 采样率中文识别模型，主要用于电话音频。标准语言引擎：- "8k_zh_large": 8k 中文大模型引擎，针对电话音频支持较好。- "16k_zh_large": 16k 大模型引擎，同时支持中文、英文、多种中文方言口音等语言的识别。- "16k_zh_en": 最新 16k 中英大模型引擎，同时支持中文、英语、多种中文方言口音的识别，对中英混说场景识别更优。高级语言引擎：- "zh-yue": 中文粤语- "vi": 越南语- "ja": 日语- "ko": 韩语- "id": 印度尼西亚语- "th": 泰语- "pt": 葡萄牙语- "tr": 土耳其语- "ar": 阿拉伯语- "es": 西班牙语- "hi": 印地语- "fr": 法语- "ms": 马来语- "fil": 菲律宾语- "de": 德语- "it": 意大利语- "ru": 俄语- "sv": 瑞典语- "da": 丹麦语- "no": 挪威语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
+  /** 转录服务使用的模型类型。示例值&quot;bigmodel-zh&quot;。语音转文本不同套餐版本支持的语言如下：V2版本(优先推荐)&quot;bigmodel-xxx&quot; ：大模型引擎，推荐使用。&quot;xxx&quot;填写具体语言，例如&quot;bigmodel-zh&quot;。&quot;xxx&quot;可以填写中文 (&quot;zh&quot;)，英语 (&quot;en&quot;)，粤语 (&quot;yue&quot;)，阿拉伯语 (&quot;ar&quot;)，德语 (&quot;de&quot;)，法语 (&quot;fr&quot;)，西班牙语 (&quot;es&quot;)，葡萄牙语 (&quot;pt&quot;)，印度尼西亚语 (&quot;id&quot;)，意大利语 (&quot;it&quot;)，韩语 (&quot;ko&quot;)，俄语 (&quot;ru&quot;)，泰语 (&quot;th&quot;)，越南语 (&quot;vi&quot;)，日语 (&quot;ja&quot;)，土耳其语 (&quot;tr&quot;)，印地语 (&quot;hi&quot;)，马来语 (&quot;ms&quot;)，荷兰语 (&quot;nl&quot;)，瑞典语 (&quot;sv&quot;)，丹麦语 (&quot;da&quot;)，芬兰语 (&quot;fi&quot;)，波兰语 (&quot;pl&quot;)，捷克语 (&quot;cs&quot;)，菲律宾语 (&quot;fil&quot;)，波斯语 (&quot;fa&quot;)，希腊语 (&quot;el&quot;)，匈牙利语 (&quot;hu&quot;)，马其顿语 (&quot;mk&quot;)，罗马尼亚语 (&quot;ro&quot;)。V1版本(旧版)标准语言引擎：&quot;16k_zh_large&quot;: 16k 大模型引擎，同时支持中文、英文、多种中文方言口音等语言的识别。&quot;16k_zh_en&quot;: 最新 16k 中英大模型引擎，同时支持中文、英语、多种中文方言口音的识别，对中英混说场景识别更优。高级语言引擎：&quot;zh-yue&quot;: 中文粤语&quot;vi&quot;: 越南语&quot;ja&quot;: 日语&quot;ko&quot;: 韩语&quot;id&quot;: 印度尼西亚语&quot;th&quot;: 泰语&quot;pt&quot;: 葡萄牙语&quot;tr&quot;: 土耳其语&quot;ar&quot;: 阿拉伯语&quot;es&quot;: 西班牙语&quot;hi&quot;: 印地语&quot;fr&quot;: 法语&quot;ms&quot;: 马来语&quot;fil&quot;: 菲律宾语&quot;de&quot;: 德语&quot;it&quot;: 意大利语&quot;ru&quot;: 俄语&quot;sv&quot;: 瑞典语&quot;da&quot;: 丹麦语&quot;no&quot;: 挪威语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
   Lang: string;
   /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。示例值：1000 */
   VadSilenceTime?: number;
-  /** 临时热词表：该参数用于提升识别准确率。- 单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如："腾讯云|5" 或 "ASR|11"。- 临时热词表限制：多个热词用英文逗号分割，最多支持128个热词，如："腾讯云|10,语音识别|5,ASR|11"。注意：热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。热词权重设置为100时，当前热词开启热词增强同音同调替换功能，举例：热词配置"蜜制|100"时，与"蜜制"同拼音（mizhi）的"秘制"的识别结果会被强制替换成"蜜制"。因此建议客户根据自己的实际情况开启该功能。建议仅将重要且必须生效的热词设置到100，设置过多权重为100的热词将影响整体字准率。热词不能包含空格，如：ASR 腾讯云示例值：语音助理|10 */
+  /** 临时热词表：该参数用于提升识别准确率。单个热词限制：&quot;热词|权重&quot;，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：&quot;腾讯云|5&quot; 或 &quot;ASR|11&quot;。临时热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：&quot;腾讯云|10,语音识别|5,ASR|11&quot;。注意：热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。热词权重设置为100时，当前热词开启热词增强同音同调替换功能，举例：热词配置&quot;蜜制|100&quot;时，与&quot;蜜制&quot;同拼音（mizhi）的&quot;秘制&quot;的识别结果会被强制替换成&quot;蜜制&quot;。因此建议客户根据自己的实际情况开启该功能。建议仅将重要且必须生效的热词设置到100，设置过多权重为100的热词将影响整体字准率。热词不能包含空格，如：ASR 腾讯云示例值：语音助理|10 */
   HotWordList?: string;
-  /** 发起模糊识别为高级版能力,默认按照高级版收费,仅支持填写除"zh-dialect"和"zh-yue"以外的高级版语言。注意：最多只能填写4种语言。 */
+  /** 发起模糊识别为高级语言引擎能力, 仅支持填写除&quot;zh-dialect&quot;和&quot;zh-yue&quot;以外的高级语言引擎。注意：最多只能填写4种语言。 */
   AlternativeLanguage?: string[];
   /** vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 3]，默认为0。推荐设置为2，有较好的远场人声抑制能力。 */
   VadLevel?: number;
-  /** 是否过滤脏词（目前仅支持填写基础语言引擎和标准语言引擎），范围为[0, 2]，默认值为 0。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 " * "。 */
+  /** 是否过滤脏词（目前仅支持填写基础语言引擎和标准语言引擎），范围为[0, 2]，默认值为 0。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 &quot; * &quot;。 */
   FilterDirty?: number;
   /** 是否过滤语气词（目前仅支持填写基础语言引擎和标准语言引擎），范围为[0, 2]，默认值为 0。0：不过滤语气词；1：部分过滤；2：严格过滤。 */
   FilterModal?: number;
@@ -1096,7 +1096,7 @@ declare interface TTSConfig {
 
 /** 伴生转录TTS参数 */
 declare interface TTSParam {
-  /** tts模型 */
+  /** tts模型参数，仅支持填写&quot;flow_02_turbo&quot;。 */
   Model: string;
   /** tts语言，必须在TranslationParam 的TargetLang列表中。 */
   Language: string;
@@ -1110,7 +1110,7 @@ declare interface TTSParam {
 
 /** 伴生转录TTS的语音参数配置 */
 declare interface TTSVoice {
-  /** 音色 ID。 */
+  /** 音色 ID。对于不同的语言，需要填写特定的音色ID，如下所示：中文（&quot;zh&quot;）：男生音色&quot;v-male-s5NqE0rZ&quot;、女生音色&quot;v-female-R2s4N9qJ&quot;。英语（&quot;en&quot;）：男生音色&quot;v-male-X6h4TvP9&quot;、女生音色&quot;v-female-P6q9LmR2&quot;。日语（&quot;ja&quot;）：男生音色&quot;v-male-J3n8DxK2&quot;、女生音色&quot;v-female-J3k7NxR2&quot;。粤语（&quot;yue&quot;）：男生音色&quot;v-male-D7p4XcL2&quot;、女生音色&quot;v-female-C5t1QxH9&quot;。印度尼西亚语（&quot;id&quot;）：男生音色&quot;v-male-B5f2CnS3&quot;、女生音色&quot;v-female-W5n8HgB2&quot;。泰语（&quot;th&quot;）：男生音色&quot;v-male-B5f2CnS3&quot;、女生音色&quot;v-female-W5n8HgB2&quot;。越南语（&quot;vi&quot;）：男生音色&quot;v-male-B5f2CnS3&quot;、女生音色&quot;v-female-W5n8HgB2&quot;。马来语（&quot;ms&quot;）：男生音色&quot;v-male-Q6p8ZxL3&quot;、女生音色&quot;v-female-C8k4NxL6&quot;。如果缺少满足您需求的音色，请联系我们的技术人员。 */
   VoiceId: string;
   /** 语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0。 */
   Speed?: number;
@@ -2833,7 +2833,7 @@ declare interface TextToSpeechRequest {
   APIKey?: string;
   /** TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo枚举值：flow_02_turbo： 高性价比模型，兼顾效果和成本flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优 */
   Model?: string;
-  /** 需要合成的语言，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
+  /** 需要合成的语言，默认为空，表示自动识别flow_02_turbo支持以下语言：zh：中文en：英文ja：日语ko：韩语yue：粤语ms：马来语ar：阿拉伯语id：印尼语th：泰语vi：越南语flow_01_ex支持以下语言：zh：中文（简体） (Chinese Simplified)zh-tw：中文（繁体） (Chinese Traditional)en：英语 (English)ja：日语 (Japanese)ko：韩语 (Korean)ms：马来语 (Malay)yue：粤语 (Cantonese)ar：阿拉伯语 (Arabic)ru：俄语 (Russian)es：西班牙语 (Spanish)fr：法语 (French)pt：葡萄牙语 (Portuguese)de：德语 (German)tr：土耳其语 (Turkish)nl：荷兰语 (Dutch)uk：乌克兰语 (Ukrainian)vi：越南语 (Vietnamese)id：印尼语 (Indonesian)it：意大利语 (Italian)th：泰语 (Thai)pl：波兰语 (Polish)ro：罗马尼亚语 (Romanian)el：希腊语 (Greek)cs：捷克语 (Czech)fi：芬兰语 (Finnish)hi：印地语 (Hindi)bg：保加利亚语 (Bulgarian)da：丹麦语 (Danish)he：希伯来语 (Hebrew)fa：波斯语（法尔西语） (Persian)sk：斯洛伐克语 (Slovak)sv：瑞典语 (Swedish)hr：克罗地亚语 (Croatian)tl：菲律宾语（他加禄语） (Filipino)hu：匈牙利语 (Hungarian)no：挪威语 (Norwegian)sl：斯洛文尼亚语 (Slovenian)ca：加泰罗尼亚语 (Catalan)nn：新挪威语 (Nynorsk)ta：泰米尔语 (Tamil)af：南非荷兰语 (Afrikaans) */
   Language?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
@@ -2867,7 +2867,7 @@ declare interface TextToSpeechSSERequest {
   APIKey?: string;
   /** TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo枚举值：flow_02_turbo： 高性价比模型，兼顾效果和成本flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优 */
   Model?: string;
-  /** 需要合成的语言，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
+  /** 需要合成的语言，默认为空，表示自动识别flow_02_turbo支持以下语言：zh：中文en：英文ja：日语ko：韩语yue：粤语ms：马来语ar：阿拉伯语id：印尼语th：泰语vi：越南语flow_01_ex支持以下语言：zh：中文（简体） (Chinese Simplified)zh-tw：中文（繁体） (Chinese Traditional)en：英语 (English)ja：日语 (Japanese)ko：韩语 (Korean)ms：马来语 (Malay)yue：粤语 (Cantonese)ar：阿拉伯语 (Arabic)ru：俄语 (Russian)es：西班牙语 (Spanish)fr：法语 (French)pt：葡萄牙语 (Portuguese)de：德语 (German)tr：土耳其语 (Turkish)nl：荷兰语 (Dutch)uk：乌克兰语 (Ukrainian)vi：越南语 (Vietnamese)id：印尼语 (Indonesian)it：意大利语 (Italian)th：泰语 (Thai)pl：波兰语 (Polish)ro：罗马尼亚语 (Romanian)el：希腊语 (Greek)cs：捷克语 (Czech)fi：芬兰语 (Finnish)hi：印地语 (Hindi)bg：保加利亚语 (Bulgarian)da：丹麦语 (Danish)he：希伯来语 (Hebrew)fa：波斯语（法尔西语） (Persian)sk：斯洛伐克语 (Slovak)sv：瑞典语 (Swedish)hr：克罗地亚语 (Croatian)tl：菲律宾语（他加禄语） (Filipino)hu：匈牙利语 (Hungarian)no：挪威语 (Norwegian)sl：斯洛文尼亚语 (Slovenian)ca：加泰罗尼亚语 (Catalan)nn：新挪威语 (Nynorsk)ta：泰米尔语 (Tamil)af：南非荷兰语 (Afrikaans) */
   Language?: string;
   /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
   PronunciationDict?: PronunciationDict[];
@@ -2987,7 +2987,7 @@ declare interface VoiceCloneRequest {
   PromptText?: string;
   /** TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo枚举值：flow_02_turbo： 高性价比模型，兼顾效果和成本flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优 */
   Model?: string;
-  /** 语言参数，默认为空，表示自动识别枚举值：zh： 中文en： 英文ja： 日语ko： 韩语yue： 粤语ms： 马来语ar： 阿拉伯语id： 印尼语th： 泰语vi： 越南语 */
+  /** 需要合成的语言，默认为空，表示自动识别flow_02_turbo支持以下语言：zh：中文en：英文ja：日语ko：韩语yue：粤语ms：马来语ar：阿拉伯语id：印尼语th：泰语vi：越南语flow_01_ex支持以下语言：zh：中文（简体） (Chinese Simplified)zh-tw：中文（繁体） (Chinese Traditional)en：英语 (English)ja：日语 (Japanese)ko：韩语 (Korean)ms：马来语 (Malay)yue：粤语 (Cantonese)ar：阿拉伯语 (Arabic)ru：俄语 (Russian)es：西班牙语 (Spanish)fr：法语 (French)pt：葡萄牙语 (Portuguese)de：德语 (German)tr：土耳其语 (Turkish)nl：荷兰语 (Dutch)uk：乌克兰语 (Ukrainian)vi：越南语 (Vietnamese)id：印尼语 (Indonesian)it：意大利语 (Italian)th：泰语 (Thai)pl：波兰语 (Polish)ro：罗马尼亚语 (Romanian)el：希腊语 (Greek)cs：捷克语 (Czech)fi：芬兰语 (Finnish)hi：印地语 (Hindi)bg：保加利亚语 (Bulgarian)da：丹麦语 (Danish)he：希伯来语 (Hebrew)fa：波斯语（法尔西语） (Persian)sk：斯洛伐克语 (Slovak)sv：瑞典语 (Swedish)hr：克罗地亚语 (Croatian)tl：菲律宾语（他加禄语） (Filipino)hu：匈牙利语 (Hungarian)no：挪威语 (Norwegian)sl：斯洛文尼亚语 (Slovenian)ca：加泰罗尼亚语 (Catalan)nn：新挪威语 (Nynorsk)ta：泰米尔语 (Tamil)af：南非荷兰语 (Afrikaans) */
   Language?: string;
 }
 

@@ -1038,6 +1038,14 @@ declare interface AssetViewWeakPassRisk {
   Port?: number;
 }
 
+/** EDR-攻击阶段对应数量 */
+declare interface AttackStageCount {
+  /** 攻击阶段 */
+  AttackStage?: string;
+  /** 策略数量 */
+  Count?: number;
+}
+
 /** 通用的下拉框列表 */
 declare interface AttributeOptionSet {
   /** cvm实例类型 */
@@ -1262,6 +1270,18 @@ declare interface CICDToken {
   LastScanStatus?: string;
   /** 最近扫描时间 */
   LastScanTime?: string;
+}
+
+/** 安全中心标签 */
+declare interface CSIPTag {
+  /** 标签颜色 */
+  TagColor?: string;
+  /** 标签ID */
+  TagID?: number;
+  /** 标签键（根据语言环境返回中文或英文） */
+  TagKey?: string;
+  /** 标签值（根据语言环境返回中文或英文） */
+  TagValue?: string;
 }
 
 /** 主机资产信息主机防护状态枚举，左边是常量，右边是显示0：未安装1：基础版防护中2：普惠版防护中3：专业版防护中4：旗舰版防护中5：已离线6：已关机 */
@@ -2320,6 +2340,14 @@ declare interface DbAssetInfo {
   Tag?: Tag[];
 }
 
+/** EDR-检测方式对应策略数量 */
+declare interface DetectTypeCount {
+  /** 检测方式，0：主机检测，1：网络检测 */
+  DetectType?: number;
+  /** 策略数量 */
+  Count?: number;
+}
+
 /** 磁盘分区信息 */
 declare interface DiskPartitionInfo {
   /** 分区名称 */
@@ -2416,6 +2444,16 @@ declare interface DomainAssetVO {
   VerifyStatus?: number;
   /** bot访问数量 */
   BotAccessCount?: number;
+}
+
+/** 反查域名信息 */
+declare interface DomainInfo {
+  /** 域名 */
+  Domain?: string;
+  /** 分析时间 */
+  AnalysisTime?: string;
+  /** 标签 */
+  Tags?: string[];
 }
 
 /** Dspm访问记录 */
@@ -3430,6 +3468,282 @@ declare interface DspmWhitelistStrategy {
   Uin?: string;
 }
 
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
+declare interface EDRFilter {
+  /** 过滤键的名称。 */
+  Name: string;
+  /** 一个或者多个过滤值。 */
+  Values: string[];
+  /** 模糊搜索 */
+  ExactMatch?: boolean;
+}
+
+/** EDR-策略内容 */
+declare interface EDRRule {
+  /** 策略ID */
+  RuleID?: string;
+  /** 策略类型，0-系统策略/System Rule, 1-自定义策略/Custom Rule */
+  RuleType?: number;
+  /** 策略名称 */
+  Name?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network */
+  ContentType?: string;
+  /** 执行动作 / Action: 0-告警/Alert, 1-放行/Allow, 2-告警并拦截/Alert and Block */
+  Action?: number;
+  /** 告警等级 / Alert Level: 0-无/None, 1-高危/High, 2-中危/Medium, 3-低危/Low, 4-提示/Reminder */
+  Level?: number;
+  /** 检测模式 / Detect Mode: 0-精准/Precise, 1-均衡/Balanced, 2-深度/Deep */
+  DetectMode?: number;
+  /** 检测方式 / Detect Type: 0-主机检测/Host Detection, 1-网络检测/Network Detection */
+  DetectType?: number;
+  /** 攻击阶段 */
+  AttackStage?: string;
+  /** 主机生效资产范围 / Effective Scope: 0-指定主机/Specified Hosts, 1-全部主机/All Hosts, 2-专业版/Professional, 3-旗舰版/Flagship, 4-专业版+旗舰版/Professional+Flagship */
+  CWPScope?: number;
+  /** 主机运行时的自选主机 */
+  QUUIDS?: string[];
+  /** 状态 / Status: 0-开启/Enabled, 1-关闭/Disabled */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 是否支持拦截 / Support Block: 0-不支持/Not Supported, 1-支持/Supported */
+  SupportBlock?: number;
+  /** MD5列表,ContentType=md5 时填充 */
+  Md5List?: string[];
+  /** 文件名列表,ContentType=custom_file 时填充 */
+  FileName?: string[];
+  /** 文件目录列表,ContentType=custom_file 时填充 */
+  FileDirectory?: string[];
+  /** 域名列表,ContentType=dns 时填充 */
+  Domains?: string[];
+  /** 出站IP列表,ContentType=ip_outbound 时填充 */
+  OutboundIP?: string[];
+  /** 入站IP列表,ContentType=ip_inbound 时填充 */
+  InboundIP?: string[];
+  /** 命令行规则,ContentType=cmdline 时填充 */
+  CmdLineRules?: RuleContentCmdLine;
+  /** 容器生效镜像范围 / Container Image Scope: 0-指定镜像/Specified Images, 1-全部镜像/All Images */
+  TCSSScope?: number;
+  /** 生效镜像ID列表 / Image IDs (when TCSSScope=0) */
+  ImageIDs?: string[];
+  /** 镜像名正则表达式 / Image Names Regex */
+  ImageNamesRegex?: string;
+  /** 置信度 / Confidence: 0-低/Low, 1-中/Medium, 2-高/High */
+  Confidence?: number;
+  /** 排除的主机列表 / Excluded Host QUUIDS */
+  ExcludeQUUIDS?: string[];
+  /** 排除的镜像ID列表 / Excluded Image IDs */
+  ExcludeImageIDs?: string[];
+  /** 进程网络规则 / Process network rules */
+  ProcessNetworkRules?: RuleContentProcessNetwork;
+  /** 策略对应APPID */
+  AppID?: number;
+  /** 自选实例ID范围 */
+  InstanceIDs?: string[];
+  /** 排除实例ID */
+  ExcludeInstanceIDs?: string[];
+}
+
+/** EDR告警大类对应的告警数量 */
+declare interface EdrAlertCategoryCount {
+  /** 告警大类 */
+  AlertCategory?: string;
+  /** 告警数量 */
+  Count?: number;
+}
+
+/** EDR告警详情（含content JSON + 资产/情报富化字段） */
+declare interface EdrAlertDetail {
+  /** 主键ID */
+  Id?: number;
+  /** 租户ID */
+  AppId?: number;
+  /** 告警唯一标识 */
+  AlertId?: string;
+  /** 告警大类（英文枚举：VIRUS_TROJAN/ABNORMAL_LOGIN/HOST_BEHAVIOR/NETWORK_BEHAVIOR/LINK_ENGINE） */
+  AlertCategory?: string;
+  /** 告警子类型（英文枚举：MALWARE_FILE/MALWARE_PROCESS/RISK_LOGIN/BRUTE_FORCE/DNS/BASH/PRIV_ESCALATION/REVERSE_SHELL/NET_ATTACK/VUL_DEFENCE/MEMORY_SHELL_INJECT/MEMORY_SHELL_SCAN/MULTI_BEHAVIOR_ATTACK） */
+  AlertSubType?: string;
+  /** 关联规则ID */
+  RuleId?: string;
+  /** 规则类型: 0-系统规则 1-用户自定义 */
+  RuleType?: number;
+  /** 告警等级（英文枚举：CRITICAL/HIGH/MEDIUM/LOW/INFO） */
+  Level?: string;
+  /** 处理状态（英文枚举：PENDING/PROCESSED/WHITELISTED/ISOLATED/CLEANED/IGNORED/ISOLATING/RESTORING/BLOCKED/DELETED） */
+  Status?: string;
+  /** ATT&amp;CK攻击阶段 */
+  AttackStage?: string;
+  /** 检测模式（英文枚举：PRECISE/BALANCED/DEEP） */
+  DetectMode?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 主机UUID */
+  Quuid?: string;
+  /** 聚合事件数 */
+  EventCount?: number;
+  /** 是否付费版 */
+  IsProVersion?: number;
+  /** 告警来源（英文枚举：HOST/CONTAINER/K8S/CSIP） */
+  AlertSource?: string;
+  /** 容器镜像ID（保留字段，恒为空串） */
+  ImageId?: string;
+  /** 容器ID（保留字段，恒为空串） */
+  ContainerId?: string;
+  /** 集群ID（保留字段，恒为空串） */
+  ClusterId?: string;
+  /** 首次发现时间 */
+  FirstDetectTime?: string;
+  /** 最近发现时间 */
+  LatestDetectTime?: string;
+  /** 规则名称（规则富化） */
+  RuleName?: string;
+  /** 内容类型: md5/cmdline/dns/ip_inbound/ip_outbound/custom_file/process_network */
+  ContentType?: string;
+  /** 实例名（资产富化） */
+  InstanceName?: string;
+  /** 公网IP（资产富化） */
+  PublicIp?: string;
+  /** 内网IP（资产富化） */
+  PrivateIp?: string;
+  /** 告警详情JSON字符串（前端通过JSON.parse解析，空值为&quot;{}&quot;） */
+  Content?: string;
+  /** 告警名称（子类型中英文名） */
+  AlertName?: string;
+  /** 安全中心标签 */
+  CSIPTags?: CSIPTag[];
+  /** 危害描述（统一字段，合并原各子类型独立字段） */
+  HarmDesc?: string;
+  /** 修复建议（统一字段） */
+  SuggestScheme?: string;
+  /** 数据来源: vuldb/vdc/intel/default */
+  HarmDescSource?: string;
+  /** 统一威胁情报标签（按子类型路由不同情报源） */
+  ThreatTags?: string[];
+  /** Base64解码后的命令（高危命令子类型独有） */
+  BashCmdDecoded?: string;
+  /** 漏洞名称（网络攻击子类型独有） */
+  NetVulName?: string;
+  /** CVE编号（网络攻击子类型独有） */
+  NetCVEId?: string;
+  /** 异常行为（网络攻击子类型独有） */
+  NetAbnormalAction?: string;
+  /** IP情报信息（为空时不返回） */
+  IPIntel?: IPIntelInfo;
+  /** 多行为攻击规则类型分类: sequence/threshold/command */
+  MultiBehaviorDetectionMode?: string;
+  /** 告警来源描述（按子类型派生，描述哪个引擎/规则检出） */
+  SourceDesc?: string;
+  /** 处理时间参数格式：2026-05-26 19:45:48 */
+  ModifyTime?: string;
+  /** 情报富化结果来源（标识本次详情是否成功命中外部情报）；取值 &quot;VDC&quot; / &quot;IPAnalysis&quot; / &quot;BreakingTI&quot; / 空串 */
+  IntelSource?: string;
+  /** 综合研判，中英文已翻译，中：恶意/安全/未知；英：Malicious/Safe/Unknown */
+  Verdict?: string;
+  /** 研判依据 */
+  VerdictBasis?: string;
+  /** 病毒名称 */
+  VirusName?: string;
+  /** 病毒家族 */
+  VirusFamily?: string;
+  /** NetResponsePayload 响应数据包（base64 编码后的字符串） */
+  NetResponsePayload?: string;
+  /** 服务进程信息（base64 编码后的 JSON 字符串） */
+  NetSvcPs?: string;
+}
+
+/** EDR告警列表信息 */
+declare interface EdrAlertItem {
+  /** 告警表id */
+  Id?: number;
+  /** APPID */
+  AppId?: number;
+  /** 告警ID */
+  AlertId?: string;
+  /** 告警大类 */
+  AlertCategory?: string;
+  /** 告警子类 */
+  AlertSubType?: string;
+  /** 策略ID */
+  RuleId?: string;
+  /** 策略类型 */
+  RuleType?: number;
+  /** 告警等级 */
+  Level?: string;
+  /** 告警状态 */
+  Status?: string;
+  /** 攻击阶段 */
+  AttackStage?: string;
+  /** 检测模式 */
+  DetectMode?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** QUUID */
+  Quuid?: string;
+  /** 是否付费 */
+  IsProVersion?: number;
+  /** 告警来源 */
+  AlertSource?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 容器id */
+  ContainerId?: string;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 告警数量 */
+  EventCount?: number;
+  /** 最初发现时间 */
+  FirstDetectTime?: string;
+  /** 最近发现时间 */
+  LatestDetectTime?: string;
+  /** 规则名 */
+  RuleName?: string;
+  /** 策略类型 */
+  ContentType?: string;
+  /** 实例名 */
+  InstanceName?: string;
+  /** 公共IP */
+  PublicIp?: string;
+  /** 内网IP */
+  PrivateIp?: string;
+  /** 该机器是否开启应用防护 */
+  RaspOpen?: boolean;
+}
+
+/** EDR告警定位信息（ID + AlertID + AppID 三元组） */
+declare interface EdrAlertTarget {
+  /** 告警主键ID */
+  Id: number;
+  /** 告警所属账号ID（跨账号，前端必传） */
+  AppId: number;
+  /** 告警唯一标识 */
+  AlertId?: string;
+  /** 主机UUID（可选，由列表带回透传） */
+  Quuid?: string;
+  /** 实例ID（可选，由列表带回透传，用于安全中心标签富化） */
+  InstanceId?: string;
+  /** 告警子类型 */
+  AlertSubType?: string;
+}
+
+/** EDR告警定位信息，用于永久忽略 */
+declare interface EdrAlertTargetForIgnore {
+  /** 告警主键ID */
+  Id: number;
+  /** 告警所属账号ID（跨账号，前端必传） */
+  AppId: number;
+  /** 告警唯一标识 */
+  AlertId?: string;
+  /** 主机UUID（可选） */
+  Quuid?: string;
+  /** 实例ID（可选，用于白名单写入） */
+  InstanceId?: string;
+}
+
 /** 统计条目 */
 declare interface Element {
   /** 统计类型 */
@@ -3696,6 +4010,24 @@ declare interface HitRules {
   RuleName: string;
 }
 
+/** IP威胁情报信息（通过TIX IPAnalysis接口获取） */
+declare interface IPIntelInfo {
+  /** 情报标签（如常规木马、漏洞软件、窃密木马） */
+  Tags?: string[];
+  /** 研判依据 */
+  Basis?: string;
+  /** 所属运营商 */
+  ISP?: string;
+  /** 地理位置 */
+  Location?: string;
+  /** 家族团伙 */
+  Characteristic?: string;
+  /** IP画像 */
+  Purpose?: string;
+  /** 反查域名列表 */
+  Referer?: DomainInfo[];
+}
+
 /** IaC检测文件 */
 declare interface IaCFile {
   /** ID */
@@ -3744,6 +4076,14 @@ declare interface InquireInfo {
   Name?: string;
   /** 购买量 */
   Value?: number;
+}
+
+/** instance_id和对应的appid账号信息 */
+declare interface InstanceIDWithAppIdItem {
+  /** APPID */
+  AppId: number;
+  /** 实例ID */
+  InstanceID: string;
 }
 
 /** ip列表 */
@@ -4702,6 +5042,8 @@ declare interface RiskDetailItem {
   AppID?: number;
   /** 资产类型 */
   AssetType?: string;
+  /** 风险忽略原因 */
+  Reason?: string;
 }
 
 /** 风险规则 */
@@ -4794,6 +5136,36 @@ declare interface RoleInfo {
   ContainerName?: string;
   /** 容器ID */
   ContainerID?: string;
+}
+
+/** EDR命令行规则 */
+declare interface RuleContentCmdLine {
+  /** 进程命令行信息 */
+  Process?: RuleContentProcessInfo;
+  /** 父进程命令行信息 */
+  ParentProcess?: RuleContentProcessInfo;
+  /** 祖先进程命令行信息 */
+  AncestorProcess?: RuleContentProcessInfo;
+}
+
+/** EDR命令行规则单规则 */
+declare interface RuleContentProcessInfo {
+  /** 进程文件路径 */
+  Exe: string;
+  /** 进程命令行 */
+  CmdLine: string;
+}
+
+/** 定义进程网络规则内容结构，用于反弹Shell白名单场景，支持进程匹配 + IP/端口过滤 */
+declare interface RuleContentProcessNetwork {
+  /** 当前进程 */
+  Process: RuleContentProcessInfo;
+  /** 目标IP（必填）: 支持单个IP/IP范围/CIDR, 支持IPv4和IPv6 */
+  DstIP: string;
+  /** 父进程 */
+  ParentProcess?: RuleContentProcessInfo;
+  /** 目标端口列表（可选）: 支持1-65535, 为空表示不限端口 */
+  DstPorts?: number[];
 }
 
 /** STS临时密钥凭据（出参专用），用于查询详情接口的响应。SecretID和SecretKey字段返回打码后的值，System返回原文 */
@@ -6623,6 +6995,32 @@ declare interface DescribeAIAgentAssetListResponse {
   AssetList?: AIAgentAsset[];
   /** 资产总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAILinkSettingRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeAILinkSettingResponse {
+  /** 0 关闭AI-Link智链引擎，1 开启AI-Link智链引擎 */
+  AILinkEnable?: number;
+  /** 深度模式 0-关闭 1-开启 */
+  RuleScopeDeep?: number;
+  /** 均衡模式 0-关闭 1-开启 */
+  RuleScopeBalanced?: number;
+  /** 精准模式 0-关闭 1-开启 */
+  RuleScopePrecise?: number;
+  /** 1 全部专业/旗舰版主机，0 Quuids列表主机 */
+  Scope?: number;
+  /** 自选主机Quuid列表 */
+  Quuids?: string[];
+  /** 排除主机Quuid列表 */
+  ExcludeQuuids?: string[];
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8661,6 +9059,76 @@ declare interface DescribeDspmWhitelistStrategyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEDRRuleListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效 */
+  Filters?: EDRFilter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [ModifyTime] */
+  By?: string;
+}
+
+declare interface DescribeEDRRuleListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 列表 */
+  List?: EDRRule[];
+  /** 攻击阶段对应的策略数量 */
+  AttackStageCounts?: AttackStageCount[];
+  /** 检测方式对应的策略数量 */
+  DetectTypeCounts?: DetectTypeCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrAlertInfoRequest {
+  /** 告警定位信息（含跨账号AppID） */
+  Target: EdrAlertTarget;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeEdrAlertInfoResponse {
+  /** 告警详情 */
+  Alert?: EdrAlertDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrAlertListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效 */
+  Filters?: EDRFilter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [LatestDetectTime] */
+  By?: string;
+}
+
+declare interface DescribeEdrAlertListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 列表 */
+  List?: EdrAlertItem[];
+  /** 攻击阶段对应的策略数量 */
+  AttackStageCounts?: AttackStageCount[];
+  /** 告警大类统计（随筛选变化，排除 AlertCategory filter） */
+  AlertCategoryCounts?: EdrAlertCategoryCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExposeAssetCategoryRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -9969,6 +10437,32 @@ declare interface DownloadDspmExportLogResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAILinkSettingRequest {
+  /** 0 关闭AI-Link智链引擎，1 开启AI-Link智链引擎 */
+  AILinkEnable: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 深度模式 0-关闭 1-开启 */
+  RuleScopeDeep?: number;
+  /** 均衡模式 0-关闭 1-开启 */
+  RuleScopeBalanced?: number;
+  /** 精准模式 0-关闭 1-开启 */
+  RuleScopePrecise?: number;
+  /** 1 全部专业/旗舰版主机，0 自选主机列表 */
+  Scope?: number;
+  /** 自选主机Quuid列表（Scope=0时必填） */
+  Quuids?: string[];
+  /** 排除主机Quuid列表（Scope=1时生效） */
+  ExcludeQuuids?: string[];
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
+}
+
+declare interface ModifyAILinkSettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAlarmRiskStatusRequest {
   /** 告警或者风险id */
   AlarmRiskIdSet: CosAlarmRiskIdInfo[];
@@ -10247,6 +10741,82 @@ declare interface ModifyDspmWhitelistStrategyRequest {
 }
 
 declare interface ModifyDspmWhitelistStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEDRRuleRequest {
+  /** 策略类型 / Rule Type: 0-系统策略/System Rule, 1-自定义策略/Custom Rule */
+  RuleType: number;
+  /** 执行动作 / Action: 0-告警/Alert, 1-放行/Allow, 2-告警并拦截/Alert and Block */
+  AlertAction: number;
+  /** 生效资产 / Effective Scope: 0-指定主机/Specified Hosts, 1-全部主机/All Hosts, 2-专业版/Professional, 3-旗舰版/Flagship, 4-专业版+旗舰版/Professional+Flagship QUUIDS []string json:&quot;QUUIDS&quot; // 主机列表 / Host QUUIDS (when Scope=0) */
+  CWPScope: number;
+  /** 容器生效镜像范围 / Container Image Scope: 0-指定镜像/Specified Images, 1-全部镜像/All Images */
+  TCSSScope: number;
+  /** 开关 / Status: 0-开启/Enabled, 1-关闭/Disabled */
+  Status: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 策略名称 */
+  Name?: string;
+  /** 内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network */
+  ContentType?: string;
+  /** 告警等级 / Alert Level: 1-高危/High, 2-中危/Medium, 3-低危/Low, 4-提示/Reminder */
+  Level?: number;
+  /** 检测模式 / Detect Mode: 0-精准/Precise, 1-均衡/Balanced, 2-深度/Deep */
+  DetectMode?: number;
+  /** 攻击阶段 */
+  AttackStage?: string;
+  /** 策略 */
+  RuleID?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 处理历史告警 / Handle Old Events: 0-否/No, 1-是/Yes */
+  DealOldEvents?: number;
+  /** ContentType=md5 时传入的 MD5 列表 */
+  Md5List?: string[];
+  /** ContentType=custom_file 时传入的文件名列表(Base64编码) */
+  FileName?: string[];
+  /** ContentType=custom_file 时传入的文件目录列表(Base64编码) */
+  FileDirectory?: string[];
+  /** ContentType=cmdline 时传入的命令行规则，Process/PProcess/AProcess 的 Exe/Cmdline 字段需要 Base64 编码 */
+  CmdLineRules?: RuleContentCmdLine;
+  /** ContentType=dns 时传入的域名列表(Base64编码) */
+  Domains?: string[];
+  /** ContentType=ip_outbound 时传入的出站IP列表(Base64编码) */
+  OutboundIP?: string[];
+  /** ContentType=ip_inbound 时传入的入站IP列表(Base64编码) */
+  InboundIP?: string[];
+  /** 镜像ID列表 / Image IDs (when TCSSScope=0) */
+  ImageIDs?: string[];
+  /** ContentType=process_network 时传入的进程网络规则 */
+  ProcessNetworkRules?: RuleContentProcessNetwork;
+  /** 选择的多账号的APPID */
+  TargetAppIDs?: number[];
+  /** 告警的加白目标机器信息 */
+  Target?: EdrAlertTarget;
+  /** 自选资产对应的实例ID和APPID */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 全选资产排除的实例ID和APPID */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+}
+
+declare interface ModifyEDRRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEdrAlertPermanentIgnoreRequest {
+  /** 告警定位列表（支持跨账号），最多500条 */
+  Targets: EdrAlertTargetForIgnore[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyEdrAlertPermanentIgnoreResponse {
+  /** 成功忽略的告警数 */
+  IgnoredCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10676,6 +11246,8 @@ declare interface Csip {
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
   DescribeAIAgentAssetList(data?: DescribeAIAgentAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentAssetListResponse>;
+  /** 查询AI-Link智链引擎配置 {@link DescribeAILinkSettingRequest} {@link DescribeAILinkSettingResponse} */
+  DescribeAILinkSetting(data?: DescribeAILinkSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAILinkSettingResponse>;
   /** 获取访问密钥告警AI分析详情 {@link DescribeAKAnalysisDetailRequest} {@link DescribeAKAnalysisDetailResponse} */
   DescribeAKAnalysisDetail(data: DescribeAKAnalysisDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAKAnalysisDetailResponse>;
   /** 获取异常调用记录 {@link DescribeAbnormalCallRecordRequest} {@link DescribeAbnormalCallRecordResponse} */
@@ -10878,6 +11450,12 @@ declare interface Csip {
   DescribeDspmSyncUsersStatus(data?: DescribeDspmSyncUsersStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSyncUsersStatusResponse>;
   /** 查询Dspm白名单策略 {@link DescribeDspmWhitelistStrategyRequest} {@link DescribeDspmWhitelistStrategyResponse} */
   DescribeDspmWhitelistStrategy(data?: DescribeDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmWhitelistStrategyResponse>;
+  /** 获取EDR策略列表 {@link DescribeEDRRuleListRequest} {@link DescribeEDRRuleListResponse} */
+  DescribeEDRRuleList(data?: DescribeEDRRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEDRRuleListResponse>;
+  /** 获取EDR告警详情 {@link DescribeEdrAlertInfoRequest} {@link DescribeEdrAlertInfoResponse} */
+  DescribeEdrAlertInfo(data: DescribeEdrAlertInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertInfoResponse>;
+  /** 获取EDR告警列表 {@link DescribeEdrAlertListRequest} {@link DescribeEdrAlertListResponse} */
+  DescribeEdrAlertList(data?: DescribeEdrAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertListResponse>;
   /** 查询云边界分析资产分类 {@link DescribeExposeAssetCategoryRequest} {@link DescribeExposeAssetCategoryResponse} */
   DescribeExposeAssetCategory(data?: DescribeExposeAssetCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposeAssetCategoryResponse>;
   /** 查询云边界分析路径节点 {@link DescribeExposePathRequest} {@link DescribeExposePathResponse} */
@@ -11002,6 +11580,8 @@ declare interface Csip {
   DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
   /** 下载导出日志 {@link DownloadDspmExportLogRequest} {@link DownloadDspmExportLogResponse} */
   DownloadDspmExportLog(data?: DownloadDspmExportLogRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDspmExportLogResponse>;
+  /** 修改AI-Link智链引擎配置 {@link ModifyAILinkSettingRequest} {@link ModifyAILinkSettingResponse} */
+  ModifyAILinkSetting(data: ModifyAILinkSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAILinkSettingResponse>;
   /** 风险或者告警处理 {@link ModifyAlarmRiskStatusRequest} {@link ModifyAlarmRiskStatusResponse} */
   ModifyAlarmRiskStatus(data: ModifyAlarmRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmRiskStatusResponse>;
   /** 修改cos审计监测账号 {@link ModifyCosAuditMonitorAccountRequest} {@link ModifyCosAuditMonitorAccountResponse} */
@@ -11038,6 +11618,10 @@ declare interface Csip {
   ModifyDspmRiskStrategy(data?: ModifyDspmRiskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmRiskStrategyResponse>;
   /** 修改Dspm白名单策略 {@link ModifyDspmWhitelistStrategyRequest} {@link ModifyDspmWhitelistStrategyResponse} */
   ModifyDspmWhitelistStrategy(data?: ModifyDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmWhitelistStrategyResponse>;
+  /** 编辑或者创建EDR策略 {@link ModifyEDRRuleRequest} {@link ModifyEDRRuleResponse} */
+  ModifyEDRRule(data: ModifyEDRRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEDRRuleResponse>;
+  /** 永久忽略EDR多行为告警 {@link ModifyEdrAlertPermanentIgnoreRequest} {@link ModifyEdrAlertPermanentIgnoreResponse} */
+  ModifyEdrAlertPermanentIgnore(data: ModifyEdrAlertPermanentIgnoreRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdrAlertPermanentIgnoreResponse>;
   /** 修改IaC检测接入Token存储周期 {@link ModifyIaCTokenPeriodRequest} {@link ModifyIaCTokenPeriodResponse} */
   ModifyIaCTokenPeriod(data: ModifyIaCTokenPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIaCTokenPeriodResponse>;
   /** 修改主机备注信息 {@link ModifyMachineRemarkRequest} {@link ModifyMachineRemarkResponse} */

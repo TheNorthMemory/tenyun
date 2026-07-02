@@ -1587,7 +1587,7 @@ declare interface DescribeDataPvUrlStatisticsV2Request {
   Engine?: string;
   /** 运营商 */
   Isp?: string;
-  /** 来源页面 */
+  /** 来源页面， 可多选，用 “,” 隔开的 String */
   From?: string;
   /** 日志等级 */
   Level?: string;

@@ -96,6 +96,10 @@ declare interface LibraryExtension {
   AllowFileExtName?: string[] | null;
   /** 照片上传时是否进行敏感内容鉴定，默认为 false。仅单租户空间媒体库支持该属性，否则该属性为 null。 */
   RecognizeSensitiveContent?: boolean | null;
+  /** 是否开启媒体库配额默认值：false创建媒体库指定，创建后不允许修改 */
+  EnableQuota?: boolean;
+  /** 媒体库配额，单位：字节取值范围：[1, 9223372036854775807]创建媒体库时，开启媒体库配额情况下，此参数必填 */
+  LibraryQuota?: number | null;
 }
 
 /** 流量资源包信息 */

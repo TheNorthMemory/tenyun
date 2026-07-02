@@ -1627,9 +1627,9 @@ declare interface DescribeDeviceDetailListResponse {
 }
 
 declare interface DescribeDeviceHardwareInfoListRequest {
-  /** 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id */
+  /** 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1 全网终端 Win2 未分组终端 Win30000000 服务器 Win40000101 全网终端 Linux40000102 未分组终端 Linux40000103 服务器 Linux40000201 全网终端 macOS40000202 未分组终端 macOS40000203 服务器 macOS40000401 全网终端 Android40000402 未分组终端 Android40000501 全网终端 iOS40000502 未分组终端 iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id */
   GroupId: number;
-  /** 【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)，需要和GroupId或者GroupIds匹配 */
+  /** 【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本））(只支持32位)，需要和GroupId或者GroupIds匹配枚举值：0： Windows1： Linux2： macOS4： Android5： iOS-1： 全系统（SaaS一体化版本） */
   OsType: number;
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -1807,6 +1807,8 @@ declare interface DescribeSoftCensusListByDeviceResponse {
 }
 
 declare interface DescribeSoftwareInformationRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
   /** 终端唯一标识Mid */
   Mid?: string;
   /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。 */
@@ -2061,11 +2063,11 @@ declare interface Ioa {
   DescribeDirectAccountGroupResources(data: DescribeDirectAccountGroupResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectAccountGroupResourcesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */
   DescribeLocalAccounts(data?: DescribeLocalAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalAccountsResponse>;
-  /** DescribeResourceGrantedAccountGroups {@link DescribeResourceGrantedAccountGroupsRequest} {@link DescribeResourceGrantedAccountGroupsResponse} */
+  /** 查询授权的分组列表 {@link DescribeResourceGrantedAccountGroupsRequest} {@link DescribeResourceGrantedAccountGroupsResponse} */
   DescribeResourceGrantedAccountGroups(data: DescribeResourceGrantedAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedAccountGroupsResponse>;
-  /** DescribeResourceGrantedAccounts {@link DescribeResourceGrantedAccountsRequest} {@link DescribeResourceGrantedAccountsResponse} */
+  /** 查询直接授权的账号列表 {@link DescribeResourceGrantedAccountsRequest} {@link DescribeResourceGrantedAccountsResponse} */
   DescribeResourceGrantedAccounts(data?: DescribeResourceGrantedAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedAccountsResponse>;
-  /** DescribeResourceGrantedVirtualGroups {@link DescribeResourceGrantedVirtualGroupsRequest} {@link DescribeResourceGrantedVirtualGroupsResponse} */
+  /** 查询授权的账号自定义分组列表 {@link DescribeResourceGrantedVirtualGroupsRequest} {@link DescribeResourceGrantedVirtualGroupsResponse} */
   DescribeResourceGrantedVirtualGroups(data?: DescribeResourceGrantedVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedVirtualGroupsResponse>;
   /** 查询账号根分组 {@link DescribeRootAccountGroupRequest} {@link DescribeRootAccountGroupResponse} */
   DescribeRootAccountGroup(data?: DescribeRootAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRootAccountGroupResponse>;
@@ -2091,7 +2093,7 @@ declare interface Ioa {
   ModifyCompanyDirectoryConfig(data: ModifyCompanyDirectoryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompanyDirectoryConfigResponse>;
   /** 给接入设备批量加黑加白 {@link ModifyDeviceTrustStatusRequest} {@link ModifyDeviceTrustStatusResponse} */
   ModifyDeviceTrustStatus(data: ModifyDeviceTrustStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTrustStatusResponse>;
-  /** 终端手动自定义分组增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
+  /** 终端自定义分组批量增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
   ModifyVirtualDeviceGroups(data: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
 }
 

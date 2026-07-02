@@ -4924,6 +4924,8 @@ declare interface DeployContainerApplicationRequest {
   IncrementalDeployment?: boolean;
   /** 是否不立即启动 */
   DoNotStart?: boolean;
+  /** 镜像Secret列表 */
+  ImagePullSecretList?: string[];
 }
 
 declare interface DeployContainerApplicationResponse {

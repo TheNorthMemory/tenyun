@@ -196,6 +196,10 @@ declare interface MQTTClientInfo {
   DisconnectTime?: number;
   /** 客户端的订阅列表 */
   MQTTClientSubscriptions?: MQTTClientSubscription[];
+  /** clean-session标志，在客户端使用mqtt5协议时，该字段即clean-start */
+  CleanSession?: boolean;
+  /** MQTT5协议：expireIntervalInSeconds */
+  ExpireIntervalInSeconds?: number;
 }
 
 /** MQTT 订阅关系 */
@@ -280,6 +284,8 @@ declare interface MQTTInstanceItem {
   AutoSubscriptionPolicyLimit?: number;
   /** 单条自动订阅规则TopicFilter数限制 */
   MaxTopicFilterPerAutoSubscriptionPolicy?: number;
+  /** 集群删除保护开关 */
+  DeleteProtect?: boolean;
 }
 
 /** MQTT消息 */
@@ -641,6 +647,12 @@ declare interface CreateHttpAuthenticatorRequest {
   Header?: HeaderItem[];
   /** 转发请求body */
   Body?: BodyItem[];
+  /** 连接UserProperty作为Header转发，默认false */
+  IncludingUserProperties?: boolean;
+  /** vpcsvcIdHTTP认证需要通过vpc网络访问时需要配置 */
+  VpcSvcId?: string;
+  /** 网络连接类型vpc：vpc网络public：公网通过vpc网络连接需要设置VpcSvcId参数 */
+  NetworkType?: string;
 }
 
 declare interface CreateHttpAuthenticatorResponse {
@@ -1035,6 +1047,10 @@ declare interface DescribeClientListRequest {
   ClientId?: string;
   /** 客户端数量限制,最大1024，默认1024 */
   Number?: string;
+  /** 0:查询在线和离线客户端（默认值）1:查询在线客户端2:查询离线客户端 */
+  OnlineStatus?: number;
+  /** 在线连接：表示最后的连接时间离线连接：表示最后的断开连接时间 */
+  MaxTimestamp?: number;
 }
 
 declare interface DescribeClientListResponse {
@@ -1183,7 +1199,7 @@ declare interface DescribeInsVPCEndpointsResponse {
 }
 
 declare interface DescribeInstanceListRequest {
-  /** 查询条件列表,支持以下字段InstanceName：集群名模糊搜索InstanceId：集群id精确搜索InstanceStatus：集群状态搜索（RUNNING-运行中，CREATING-创建中，MODIFYING-变配中，DELETING-删除中）注意：配置TagFilters时该查询条件不生效。 */
+  /** 查询条件列表,支持以下字段InstanceName：集群名模糊搜索InstanceId：集群id精确搜索InstanceStatus：集群状态搜索（RUNNING-运行中，CREATING-创建中，MODIFYING-变配中，DELETING-删除中）PayMode：付费模式搜索（PREPAID-包年包月，POSTPAID-按小时计费）ExpiredBefore：按过期时间过滤：仅筛选包年包月（PREPAID）集群注意：配置TagFilters时该查询条件不生效。 */
   Filters?: Filter[];
   /** 查询起始位置，默认0 */
   Offset?: number;
@@ -1280,6 +1296,12 @@ declare interface DescribeInstanceResponse {
   MessageEnrichmentRuleLimit?: number;
   /** 封禁规则最大数量 */
   BlockRuleLimit?: number;
+  /** 删除保护开关 */
+  DeleteProtect?: boolean;
+  /** 集群客户端事件格式枚举值：V1： 详见官网文档V2： 详见官网文档V3： 详见官网文档默认值：V3 */
+  EventDialect?: string;
+  /** 消息HASH策略枚举值：TOPIC_NAME： 按主题名CLIENT_ID： 按客户端ID默认值：TOPIC_NAME */
+  HashMessagePolicy?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1537,6 +1559,8 @@ declare interface KickOutClientRequest {
   InstanceId: string;
   /** 客户端id */
   ClientId: string;
+  /** 是否清理session，默认false */
+  DeleteSession?: boolean;
 }
 
 declare interface KickOutClientResponse {

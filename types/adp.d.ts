@@ -1398,6 +1398,8 @@ declare interface SingleWorkflowConfig {
   WorkflowId: string;
   /** 工作流名称 */
   WorkflowName: string;
+  /** 工作流是否启用 */
+  Enabled?: boolean;
 }
 
 /** SkillAnalysisInfo Skill 安全扫描信息。 */
@@ -1648,6 +1650,22 @@ declare interface VoiceConfig {
   VoiceName: string;
   /** 公有云音色id */
   VoiceType: number;
+}
+
+declare interface CopyAgentFromAppRequest {
+  /** 应用Id */
+  AppId: string;
+  /** 目标应用ID，kind=0时需传入 */
+  TargetAppId?: string;
+  /** Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent枚举值：0： 配置端Agent 1： 用户态 Agent */
+  Kind?: number;
+}
+
+declare interface CopyAgentFromAppResponse {
+  /** 主 Agent Id */
+  ParentAgentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CopyAppRequest {
@@ -2439,6 +2457,8 @@ declare interface RollbackReleaseResponse {
 /** {@link Adp 腾讯云智能体开发平台} */
 declare interface Adp {
   (): Versions;
+  /** 复制 Agent {@link CopyAgentFromAppRequest} {@link CopyAgentFromAppResponse} */
+  CopyAgentFromApp(data: CopyAgentFromAppRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAgentFromAppResponse>;
   /** 复制应用 {@link CopyAppRequest} {@link CopyAppResponse} */
   CopyApp(data: CopyAppRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAppResponse>;
   /** 创建 Agent {@link CreateAgentRequest} {@link CreateAgentResponse} */

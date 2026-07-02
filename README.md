@@ -113,14 +113,14 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 255+ 款产品，14520+ 服务数</summary>
+<details><summary>共计 255+ 款产品，14536+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
 aai |  | 2018-05-22(4) |
 aca | [AI 临床助手](https://cloud.tencent.com/document/product/1388) | 2021-03-23(8) |
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(8) |
-adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(40) |
+adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(41) |
 advisor | [智能顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(3) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
@@ -194,7 +194,7 @@ cngw | [云原生智能网关](https://cloud.tencent.com/document/product/1826) 
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(63) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(240) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(247) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(3) |
@@ -203,7 +203,7 @@ cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-2
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(236) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
-dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(24) |
+dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(26) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(89) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(24) |
@@ -254,7 +254,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(43) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(228) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(229) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
@@ -343,7 +343,7 @@ tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-2
 tokenhub | [TokenHub](https://cloud.tencent.com/document/product/1823) | 2026-03-22(24) |
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/document/product/1495) | 2023-04-18(29) |
-trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(48) |
+trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(49) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(63) |
 trro | [实时互动-工业能源版](https://cloud.tencent.com/document/product/1584) | 2022-03-25(31) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(77) |
@@ -358,7 +358,7 @@ vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449)
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(17) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
-vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7) | 2018-07-17(222) |
+vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7) | 2018-07-17(226) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(448) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |

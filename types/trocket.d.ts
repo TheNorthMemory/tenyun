@@ -574,6 +574,22 @@ declare interface TopicStageChangeResult {
   Namespace?: string;
 }
 
+/** 主题队列级别的消费详情 */
+declare interface TopicStatsDetail {
+  /** Broker节点名称 */
+  BrokerName?: string | null;
+  /** 队列编号 */
+  QueueId?: number | null;
+  /** 生产消息位点 */
+  BrokerOffset?: number | null;
+  /** 最新消费位点 */
+  CommitOffset?: number | null;
+  /** 堆积总数单位：条 */
+  MessageCount?: number | null;
+  /** 最后消费时间单位：毫秒 */
+  LastUpdateTimestamp?: number | null;
+}
+
 /** VPC信息 */
 declare interface VpcInfo {
   /** VPC ID */
@@ -1422,6 +1438,28 @@ declare interface DescribeTopicResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopicStatsRequest {
+  /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
+  Topic: string;
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 消费组ID，可通过DescribeConsumerGroupList接口返回的ConsumerGroup字段或控制台查询 */
+  GroupId: string;
+  /** 查询起始位置，默认为0。 */
+  Offset?: number;
+  /** 查询结果限制数量，默认20。 */
+  Limit?: number;
+}
+
+declare interface DescribeTopicStatsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 队列级别的消费详情 */
+  Data?: TopicStatsDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DoHealthCheckOnMigratingTopicRequest {
   /** 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031)或控制台中获得。 */
   TaskId: string;
@@ -1755,6 +1793,8 @@ declare interface Trocket {
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
   /** 查询消费组订阅的主题列表 {@link DescribeTopicListByGroupRequest} {@link DescribeTopicListByGroupResponse} */
   DescribeTopicListByGroup(data: DescribeTopicListByGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListByGroupResponse>;
+  /** 查询主题队列级别的消费详情 {@link DescribeTopicStatsRequest} {@link DescribeTopicStatsResponse} */
+  DescribeTopicStats(data: DescribeTopicStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicStatsResponse>;
   /** 迁移主题健康检查 {@link DoHealthCheckOnMigratingTopicRequest} {@link DoHealthCheckOnMigratingTopicResponse} */
   DoHealthCheckOnMigratingTopic(data: DoHealthCheckOnMigratingTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DoHealthCheckOnMigratingTopicResponse>;
   /** 平滑迁移任务导入 Group 元数据 {@link ImportSourceClusterConsumerGroupsRequest} {@link ImportSourceClusterConsumerGroupsResponse} */

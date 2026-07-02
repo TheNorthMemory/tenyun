@@ -490,6 +490,8 @@ declare interface Instance {
   DedicatedClusterId?: string;
   /** 实例隔离类型。取值范围：ARREAR：表示欠费隔离EXPIRE：表示到期隔离MANMADE：表示主动退还隔离NOTISOLATED：表示未隔离 */
   IsolatedSource?: string;
+  /** 置放群组列表(目前仅支持一个) */
+  DisasterRecoverGroupIds?: string[];
   /** GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。 */
   GPUInfo?: GPUInfo;
   /** 实例的操作系统许可类型，默认为TencentCloud */
@@ -2718,12 +2720,16 @@ declare interface ModifyInstancesChargeTypeResponse {
 }
 
 declare interface ModifyInstancesDisasterRecoverGroupRequest {
-  /** 一个或多个待操作的实例ID。可通过[ DescribeInstances ](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100 */
+  /** 一个或多个待操作的实例ID。可通过 DescribeInstances 接口返回值中的InstanceId获取。每次请求批量实例的上限为100 */
   InstanceIds: string[];
-  /** 分散置放群组ID，可使用[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取 */
+  /** 分散置放群组ID，可使用DescribeDisasterRecoverGroups接口获取 */
   DisasterRecoverGroupId?: string;
   /** 是否强制更换实例宿主机。取值范围：true：表示允许实例更换宿主机，允许重启实例。本地盘子机不支持指定此参数。false：不允许实例更换宿主机，只在当前宿主机上加入置放群组。这可能导致更换置放群组失败。默认取值：false */
   Force?: boolean;
+  /** 置放群组id列表(目前仅支持指定一个) */
+  DisasterRecoverGroupIds?: string[];
+  /** 分区置放群组的分区Id，取值范围：1-10，具体取决于所选置放群组的分区数量，如果选中的置放群组是分区置放群组，该值不传默认随机(该功能灰度中) */
+  PartitionNumber?: number;
 }
 
 declare interface ModifyInstancesDisasterRecoverGroupResponse {

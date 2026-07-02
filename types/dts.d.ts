@@ -900,6 +900,8 @@ declare interface MigrateOption {
   ExtraAttr?: KeyValuePairOption[];
   /** pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移) */
   MigrateWay?: string;
+  /** 迁移配置阶段限速相关参数 */
+  RateLimit?: RateLimit;
 }
 
 /** 数据数据订阅的对象，用于修改订阅对象接口。与SubscribeObject结构类似，只是类型和参数名不同。 */
@@ -1038,6 +1040,20 @@ declare interface ProcessStepTip {
   Solution?: string;
   /** 文档提示 */
   HelpDoc?: string;
+}
+
+/** 数据迁移限速配置对象 */
+declare interface RateLimit {
+  /** 全量导出线程数，如果不设置或设置为0则表示保持当前值，最大值为16 */
+  DumpThread?: number;
+  /** 全量导出Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000 */
+  DumpRps?: number;
+  /** 全量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为16 */
+  LoadThread?: number;
+  /** 全量导入Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000 */
+  LoadRps?: number;
+  /** 增量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为128 */
+  SinkerThread?: number;
 }
 
 /** 迁移和同步任务限速的详细信息 */

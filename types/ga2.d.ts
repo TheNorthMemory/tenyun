@@ -52,51 +52,51 @@ declare interface EndpointConfigurations {
 
 /** 终端节点组配置 */
 declare interface EndpointGroupConfiguration {
-  /** 名称，最大长度不能超过60个字节。 */
+  /** 终端节点组名称。最大长度不能超过128个字节。必须以字母（a-z, A-Z）或中文字符开头。 */
   Name: string;
-  /** 地域。 */
+  /** 终端节点组所在地域。 */
   EndpointGroupRegion: string;
   /** 终端节点配置。 */
   EndpointConfigurations: EndpointConfigurations[];
-  /** 检查协议。支持&#39;TCP&#39;, &#39;HTTP&#39;, &#39;HTTPS&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。 */
+  /** 检查协议。支持配置&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。枚举值：TCP： 当终端节点组所在监听器协议是TCP时，可以选择检查协议为TCP。HTTP： 当终端节点组所在监听器协议是HTTP或HTTPS时，可以选择检查协议为HTTP。PING： 当终端节点组所在监听器协议是UDP时，可以选择检查协议为PING。CUSTOM： 当终端节点组所在监听器协议是UDP或TCP时，可以选择检查协议为CUSTOM。当开启健康检查时此字段必传。 */
   CheckType?: string;
-  /** 描述信息，最大长度不能超过100个字节。 */
+  /** 描述信息。默认值：默认值为空，代表不配置描述信息。最大长度不能超过100个字节。 */
   Description?: string;
-  /** 检查端口。 */
+  /** 检查端口。入参限制：范围是1-65535。当CheckType为CUSTOM时候，此字段必传。 */
   CheckPort?: string;
-  /** 检查内容。 */
+  /** 检查内容。支持配置&#39;TEXT&#39;。枚举值：TEXT： 文本内容。当CheckType为CUSTOM时候，此字段必传。 */
   ContextType?: string;
-  /** 检查请求。 */
+  /** 检查请求。入参限制：字节长度要在1-500范围内。当CheckType为CUSTOM时候，此字段必传。 */
   CheckSendContext?: string;
-  /** 检查返回结果。 */
+  /** 检查返回结果。入参限制：字节长度要在1-500范围内。当CheckType为CUSTOM时候，此字段必传。 */
   CheckRecvContext?: string;
-  /** 是否开启健康检查。 */
+  /** 是否开启健康检查。默认值：False */
   EnableHealthCheck?: boolean;
-  /** 响应超时时间。 */
+  /** 响应超时时间。取值范围：[1, 100]默认值：2开启健康检查时，此字段必传。 */
   ConnectTimeout?: number;
-  /** 健康检查间隔。 */
+  /** 健康检查间隔。取值范围：[5, 300]默认值：30开启健康检查，此字段必传。 */
   HealthCheckInterval?: number;
-  /** 不健康阀值。 */
+  /** 不健康阀值。取值范围：[1, 10]默认值：3开启健康检查，此字段必传。 */
   UnhealthyThreshold?: number;
-  /** 健康阈值。 */
+  /** 健康阈值。取值范围：[1, 10]默认值：3开启健康检查，此字段必传。 */
   HealthyThreshold?: number;
-  /** 回源协议。 */
+  /** 回源协议。支持配置&#39;HTTP&#39;, &#39;HTTPS&#39;。枚举值：HTTP： HTTP回源；当终端节点组所在监听器协议是HTTP或HTTPS时可以配置HTTP。HTTPS： HTTPS回源；当终端节点组所在监听器协议是HTTPS时可以配置HTTPS。当终端节点组所在监听器协议为HTTP或HTTPS时候，此字段必传。 */
   ForwardProtocol?: string;
-  /** 检查域名。 */
+  /** 检查域名。入参限制：字节长度范围是3-80。当CheckType是HTTP时，此字段必传。 */
   CheckDomain?: string;
-  /** 检查URL。 */
+  /** 检查URL。参数格式：必须满足正则：^[a-zA-Z0-9_.\-\/]{1,80}$当CheckType是HTTP时，此字段必传。 */
   CheckPath?: string;
-  /** 请求方式。 */
+  /** 请求方式。支持配置&#39;GET&#39;, &#39;HEAD&#39;。枚举值：GET： 请求方式为GET。HEAD： 请求方式为HEAD。当CheckType是HTTP时，此字段必传。 */
   CheckMethod?: string;
-  /** 状态检测码。 */
+  /** 状态检测码。支持配置&#39;http_2xx&#39;, &#39;http_3xx&#39;, &#39;http_4xx&#39;, &#39;http_5xx&#39;。枚举值：http_2xx： 2开头的http code。http_3xx： 3开头的http code。http_4xx： 4开头的http code。http_5xx： 5开头的http code。当CheckType是HTTP时，此字段必传。 */
   StatusMask?: string[];
-  /** 端口映射。 */
+  /** 端口映射。入参限制：七层支持1个端口映射，四层支持最多30个端口映射。 */
   PortOverrides?: PortOverride[];
-  /** 运用商类型。 */
+  /** 运营商类型。支持配置&#39;CMCC&#39;, &#39;CTCC&#39;, &#39;CUCC&#39;。枚举值：CMCC： 中国移动CUCC： 中国联通CTCC： 中国电信当终端节点组地域为三网地域时，此字段必传。 */
   IspType?: string;
-  /** HPPTS加密算法套件 */
+  /** HPPTS加密算法套件；支持配置&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;；枚举值：tls_policy_1.0-2： 加密算法套件。tls_policy_1.1-2： 加密算法套件。tls_policy_1.2： 加密算法套件。tls_policy_1.2_strict： 加密算法套件。tls_policy_1.2_strict-1.3： 加密算法套件。当回源协议为HTTPS，此字段必传。 */
   CipherPolicyId?: string;
-  /** HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
+  /** 回源协议。支持配置&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;。枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2当回源协议为HTTPS时，此字段必传。 */
   HttpVersion?: string;
 }
 
@@ -240,9 +240,9 @@ declare interface GlobalAcceleratorSet {
 
 /** 隐藏Header */
 declare interface HideResponseHeaders {
-  /** key */
+  /** key入参限制：长度不能超过128如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。 */
   Key: string;
-  /** value */
+  /** value当前传&#39;&#39;值即可。 */
   Value: string;
 }
 
@@ -302,9 +302,9 @@ declare interface ListenerSet {
 
 /** 回源Header信息 */
 declare interface OriginHeader {
-  /** 键。 */
+  /** 键。参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()&lt;&gt;@,;:\&quot;/[ ]?={ }入参限制：长度在1-40。 */
   Key: string | null;
-  /** 值。 */
+  /** 值。入参限制：长度不能超过128如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。 */
   Value: string | null;
 }
 
@@ -326,25 +326,25 @@ declare interface PortRanges {
 
 /** 响应Header */
 declare interface ResponseHeaders {
-  /** key */
+  /** key参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()&lt;&gt;@,;:\&quot;/[ ]?={ }入参限制：长度在1-40。 */
   Key: string;
-  /** value */
+  /** value入参限制：长度不能超过128如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。 */
   Value: string;
 }
 
 /** 七层转发规则行为信息 */
 declare interface RuleAction {
-  /** 七层转发规则行为类型 */
+  /** 七层转发规则行为类型枚举值：ForwardGroup： 转发策略为转发至终端节点组。Drop： 转发策略为丢弃。 */
   RuleActionType: string | null;
-  /** 七层转发规则行为值 */
+  /** 七层转发规则行为值当RuleActionType是Drop时，此字段不用传；当RuleActionType是ForwardGroup时，此字段必传，需要填写的是自定义终端节点组ID， 不支持配置默认终端节点组。 */
   RuleActionValue?: string | null;
 }
 
 /** 七层转发规则条件信息 */
 declare interface RuleCondition {
-  /** 七层转发规则条件类型 */
+  /** 七层转发规则条件类型枚举值：Path： Path */
   RuleConditionType: string | null;
-  /** 七层转发规则条件值 */
+  /** 七层转发规则条件值参数格式：格式必须满足正则表达：^[a-zA-Z0-9_.-/]{1,80}$数组长度不能超过1。 */
   RuleConditionValue: string[] | null;
 }
 
@@ -375,7 +375,7 @@ declare interface CreateEndpointGroupRequest {
   GlobalAcceleratorId: string;
   /** 监听器ID。 */
   ListenerId: string;
-  /** 终端节点组类型。支持VIRTUAL，DEFAULT。 */
+  /** 终端节点组类型。枚举值：VIRTUAL： 自定义终端节点组DEFAULT： 默认终端节点组 */
   EndpointGroupType: string;
   /** 终端节点组配置。 */
   EndpointGroupConfiguration: EndpointGroupConfiguration;
@@ -395,7 +395,7 @@ declare interface CreateForwardingPolicyRequest {
   GlobalAcceleratorId: string;
   /** 监听器ID。 */
   ListenerId: string;
-  /** 域名。 */
+  /** 域名。参数格式：格式，必须满足正则表达式：^(a-z0-9?.)+[a-z]{2,}$入参限制：长度范围是1-80。 */
   Host: string;
 }
 
@@ -415,21 +415,21 @@ declare interface CreateForwardingRuleRequest {
   ListenerId: string;
   /** 策略ID。 */
   ForwardingPolicyId: string;
-  /** 七层转发规则条件信息。 */
+  /** 七层转发规则条件信息。数组长度最大不能超过1。 */
   RuleConditions: RuleCondition[];
-  /** 七层转发规则行为信息。 */
+  /** 七层转发规则行为信息。数组长度最大不能超过1。 */
   RuleActions: RuleAction[];
-  /** 回源Header信息。 */
+  /** 回源Header信息。数组长度最大不能超过5。当RuleActions.RuleActionType是ForwardGroup时，此字段必传。 */
   OriginHeaders?: OriginHeader[];
-  /** 是否开启回源sni。 */
+  /** 是否开启回源sni。默认值：False当RuleActions.RuleActionType是ForwardGroup时，此字段必传。 */
   EnableOriginSni?: boolean;
-  /** 回源sni。 */
+  /** 回源sni。入参限制：长度不能超过80。当EnableOriginSni为True时，此字段必传。当RuleActions.RuleActionType是ForwardGroup时，此字段必传。 */
   OriginSni?: string;
-  /** 回源host。 */
+  /** 回源host。入参限制：长度不超过80。当RuleActions.RuleActionType是ForwardGroup时，此字段必传。 */
   OriginHost?: string;
-  /** 源站响应头 */
+  /** 源站响应头数组长度不超过5。可以传空数组，代表清空配置。 */
   ResponseHeaders?: ResponseHeaders[];
-  /** 删除源站响应头 */
+  /** 删除源站响应头数组长度不超过5。可以传空数组，代表清空配置。 */
   HideResponseHeaders?: HideResponseHeaders[];
 }
 
@@ -475,27 +475,27 @@ declare interface CreateListenerRequest {
   PortRanges: PortRanges;
   /** 描述信息，最大长度不能超过100个字节。 */
   Description?: string;
-  /** 监听类型，默认为智能路由。 */
+  /** 监听类型，默认为智能路由。枚举值：Standard： 智能路由。 */
   ListenerType?: string;
-  /** 协议，默认为TCP。 */
+  /** 协议，默认为TCP。支持配置&#39;TCP&#39;, &#39;UDP&#39;, &#39;HTTP&#39;, &#39;HTTPS&#39;。 */
   Protocol?: string;
-  /** 连接空闲等待时间。 */
+  /** 连接空闲等待时间。1、HTTP/HTTPS监听器，默认值为15，支持范围为1-60；2、TCP监听器，默认值为900，支持范围为10-900；3、UDP监听器，默认值为20，支持范围为10-20； */
   IdleTimeout?: number;
-  /** 四层获取源IP方式，支持&#39;TOA&#39;, &#39;ProxyProtocol&#39;。 */
+  /** 四层获取源IP方式，支持&#39;TOA&#39;, &#39;ProxyProtocol&#39;, &#39;ProxyProtocolV2&#39;。需要开启四层获取源IP方式，才填写此参数。 */
   GetRealIpType?: string;
-  /** 是否开启会话保持。 */
+  /** 是否开启会话保持。支持配置&#39;Open&#39;, &#39;Close&#39;。枚举值：Open： 开启。Close： 关闭。 */
   ClientAffinity?: string;
-  /** 请求超时时间。 */
+  /** 请求超时时间。取值范围：[1, 180]默认值：60当HTTPS监听器时才可配置此参数。 */
   RequestTimeout?: number;
   /** 是否打开七层获取源IP方式。 */
   XForwardedForRealIp?: boolean;
-  /** 解析方式。UNIDIRECTIONAL：双向。MUTUAL：单向。 */
+  /** 解析方式。枚举值：UNIDIRECTIONAL： 双向。U： 单向。HTTPS监听器，此字段必传。 */
   CertificationType?: string;
-  /** 加密算法套件。 */
+  /** 加密算法套件。支持配置&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。 */
   CipherPolicyId?: string;
-  /** 服务器证书。 */
+  /** 服务器证书。当是HTTPS监听器时，此字段必传。 */
   ServerCertificates?: string[];
-  /** 客户端证书。 */
+  /** 客户端证书。当时HTTPS监听器且开启双向认证时，此字段必传。 */
   ClientCaCertificates?: string[];
   /** HTTPS监听器支持选择版本枚举值：HTTP/1.1： HTTP/1.1HTTP/2： HTTP/2 */
   HttpVersion?: string;
@@ -711,7 +711,7 @@ declare interface DescribeForwardingRuleResponse {
 declare interface DescribeGlobalAcceleratorsRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。 */
+  /** 返回数量。取值范围：[1, 200]默认值：20 */
   Limit?: number;
   /** 过滤条件。global-accelerator-id - String -（过滤条件）全球加速实例ID。 global-accelerator-state - String -（过滤条件）全球加速实例状态。 */
   Filters?: Filter[];
@@ -781,43 +781,43 @@ declare interface ModifyEndpointGroupRequest {
   EndpointGroupId: string;
   /** 终端节点配置。 */
   EndpointConfigurations?: EndpointConfigurations[];
-  /** 名称，最大长度不能超过60个字节。 */
+  /** 名称。入参限制：最大长度不能超过128个字节。以大小写字母或中文开头。 */
   Name?: string;
-  /** 描述信息，最大长度不能超过100个字节。 */
+  /** 描述信息。入参限制：最大长度不能超过100个字节。 */
   Description?: string;
   /** 是否开启健康检查。 */
   EnableHealthCheck?: boolean;
-  /** 响应超时时间。 */
+  /** 响应超时时间。取值范围：[1, 100]当开启健康检查时候，此参数必传。 */
   ConnectTimeout?: number;
-  /** 健康检查间隔。 */
+  /** 健康检查间隔。取值范围：[5, 300]当开启健康检查时，此参数必传。 */
   HealthCheckInterval?: number;
-  /** 不健康阀值。 */
+  /** 不健康阀值。取值范围：[1, 10]当开启健康检查时，此字段必传。 */
   UnhealthyThreshold?: number;
-  /** 健康阀值。 */
+  /** 健康阀值。取值范围：[1, 10]当开启健康检查时，此字段必传。 */
   HealthyThreshold?: number;
-  /** 检查协议。 */
+  /** 检查协议。入参限制：支持填写：&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。1、当监听器是TCP时，可以选CUSTOM+TCP。2、当监听器是UDP时，可以选PING+CUSTOM。3、当监听器是HTTP或HTTPS时，可以选HTTP。 */
   CheckType?: string;
-  /** 检查端口。 */
+  /** 检查端口。取值范围：[1, 65535]当CheckType是CUSTOM时，此字段必传。 */
   CheckPort?: number;
-  /** 检查内容。 */
+  /** 检查内容。入参限制：仅支持TEXT。当CheckType是CUSTOM时，此字段必传。 */
   ContextType?: string;
-  /** 检查请求。 */
+  /** 检查请求。入参限制：长度范围在1-500。当CheckType是CUSTOM时，此字段必传。 */
   CheckSendContext?: string;
-  /** 检查返回结果。 */
+  /** 检查返回结果。入参限制：长度范围在1-500。当CheckType是CUSTOM时，此字段必传。 */
   CheckRecvContext?: string;
-  /** 检查域名。 */
+  /** 检查域名。入参限制：长度范围在3-80。当CheckType是HTTP时，此字段必传。 */
   CheckDomain?: string;
-  /** 检查URL。 */
+  /** 检查URL。入参限制：长度范围在3-80。当CheckType是HTTP时，此字段必传。 */
   CheckPath?: string;
-  /** 请求方式。 */
+  /** 请求方式。入参限制：支持填写 &#39;GET&#39;, &#39;HEAD&#39;。当CheckType是HTTP时，此字段必传。 */
   CheckMethod?: string;
-  /** 状态检测码。 */
+  /** 状态检测码。入参限制：支持选择&#39;http_2xx&#39;, &#39;http_3xx&#39;, &#39;http_4xx&#39;, &#39;http_5xx&#39;。当CheckType是HTTP时，此字段必传。 */
   StatusMask?: string[];
-  /** 回源协议。 */
+  /** 回源协议。入参限制：支持选择：&#39;HTTP&#39;, &#39;HTTPS&#39;。当监听器协议是HTTP时只能配置HTTP，是HTTPS时能配HTTP或HTTPS。 */
   ForwardProtocol?: string;
-  /** 端口映射。 */
+  /** 端口映射。当监听器协议是HTTP或HTTPS支持配置一对。当监听器协议是UDP或TCP支持配置最多30对。 */
   PortOverrides?: PortOverride[];
-  /** HPPTS加密算法套件 */
+  /** HPPTS加密算法套件入参限制：支持选择&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。当监听器协议是HTTPS时，才支持修改此参数。 */
   CipherPolicyId?: string;
   /** 仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
   HttpVersion?: string;
@@ -837,7 +837,7 @@ declare interface ModifyForwardingPolicyRequest {
   ListenerId: string;
   /** 策略ID。 */
   ForwardingPolicyId: string;
-  /** 域名。 */
+  /** 域名。入参限制：长度范围在1-80。格式必须满足正则表达式：^(a-z0-9?.)+[a-z]{2,}$ */
   Host: string;
 }
 
@@ -857,21 +857,21 @@ declare interface ModifyForwardingRuleRequest {
   ForwardingPolicyId: string;
   /** 七层转发规则ID。 */
   ForwardingRuleId: string;
-  /** 七层转发规则条件信息。 */
+  /** 七层转发规则条件信息。入参限制：数组长度不能超过1。 */
   RuleConditions?: RuleCondition[];
-  /** 七层转发规则行为信息。 */
+  /** 七层转发规则行为信息。入参限制：数组长度不能超过1。 */
   RuleActions?: RuleAction[];
-  /** 回源Header信息。 */
+  /** 回源Header信息。入参限制：数组长度在1-5。 */
   OriginHeaders?: OriginHeader[];
   /** 是否开启回源sni。 */
   EnableOriginSni?: boolean;
-  /** 回源sni。 */
+  /** 回源sni。入参限制：长度不能超过80。当开启回源sni时，此字段必传。 */
   OriginSni?: string;
-  /** 回源host。 */
+  /** 回源host。入参限制：长度不能超过80。当开启回源sni时，此字段必传。 */
   OriginHost?: string;
-  /** 源站响应头 */
+  /** 源站响应头入参限制：数组长度不能超过5。 */
   ResponseHeaders?: ResponseHeaders[];
-  /** 删除源站响应头 */
+  /** 删除源站响应头入参限制：数组长度不能超过5。 */
   HideResponseHeaders?: HideResponseHeaders[];
 }
 
@@ -889,9 +889,9 @@ declare interface ModifyGlobalAcceleratorRequest {
   Name?: string;
   /** 描述信息，最大长度不能超过100个字节。 */
   Description?: string;
-  /** 跨境类型。 */
+  /** 跨境类型。枚举值：HighQuality： 精品跨境。Unicom： 联通跨境。 */
   CrossBorderType?: string;
-  /** 代表是否跨境服务承诺。 */
+  /** 代表是否填写跨境服务承诺书。当CrossBorderType传入时，此字段必须填ture，代表填写跨境承诺书。 */
   CrossBorderPromiseFlag?: boolean;
 }
 
@@ -911,25 +911,25 @@ declare interface ModifyListenerRequest {
   Name?: string;
   /** 描述信息，最大长度不能超过100个字节。 */
   Description?: string;
-  /** 连接空闲等待时间。 */
+  /** 连接空闲等待时间。1、HTTP/HTTPS监听器，支持范围为1-60；2、TCP监听器，支持范围为10-900；3、UDP监听器，支持范围为10-20； */
   IdleTimeout?: number;
-  /** 是否开启会话保持。 */
+  /** 是否开启会话保持。枚举值：Open： 打开。Close： 关闭。TCP/UDP监听器支持修改此参数。 */
   ClientAffinity?: string;
-  /** 会话保持时间。 */
+  /** 会话保持时间。取值范围：[60, 3600] */
   ClientAffinityTime?: number;
-  /** 请求超时时间。 */
+  /** 请求超时时间。取值范围：[1, 180]HTTPS监听器才支持此参数修改。 */
   RequestTimeout?: number;
-  /** 是否打开七层获取源IP方式。 */
+  /** 是否打开七层获取源IP方式。HTTPS/HTTP监听器才支持此参数修改。 */
   XForwardedForRealIp?: boolean;
-  /** 解析方式。UNIDIRECTIONAL：双向。MUTUAL：单向。 */
+  /** 解析方式。枚举值：UNIDIRECTIONAL： 双向。MUTUAL： 单向。HTTPS/HTTP监听器才支持修改此参数。 */
   CertificationType?: string;
-  /** 加密算法套件。 */
+  /** 加密算法套件。入参限制：支持选择tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。HTTPS监听器才支持此参数修改。 */
   CipherPolicyId?: string;
-  /** 服务器证书。 */
+  /** 服务器证书。HTTPS监听器才支持此参数修改。 */
   ServerCertificates?: string[];
-  /** 客户端证书。 */
+  /** 客户端证书。HTTPS监听器才支持此参数修改，并且开启双向认证。 */
   ClientCaCertificates?: string[];
-  /** 四层获取源IP方式。 */
+  /** 获取源IP方式。入参限制：支持选择&#39;ProxyProtocol&#39;, &#39;Close&#39;, &#39;ProxyProtocolV2&#39;, &#39;TOA&#39;。TCP监听器才支持此参数修改。 */
   GetRealIpType?: string;
 }
 

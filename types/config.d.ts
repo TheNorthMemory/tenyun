@@ -1194,6 +1194,8 @@ declare interface ListAggregateDiscoveredResourcesResponse {
   Items?: AggregateResourceInfo[];
   /** 下一页 */
   NextToken?: string | null;
+  /** 总数 */
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1241,17 +1243,19 @@ declare interface ListCompliancePacksRequest {
   RiskLevel?: number[];
   /** 合规包状态 ACTIVE、NO_ACTIVE */
   Status?: string;
-  /** 评估状态合规： 'COMPLIANT'不合规： 'NON_COMPLIANT' */
+  /** 评估状态合规： &#39;COMPLIANT&#39;不合规： &#39;NON_COMPLIANT&#39; */
   ComplianceResult?: string[];
   /** 排序类型, 倒序：desc，顺序：asc */
   OrderType?: string;
+  /** 包含合规包规则统计信息枚举值：1： 是 */
+  IncludeCompliancePackRuleResult?: string;
 }
 
 declare interface ListCompliancePacksResponse {
   /** 总数 */
-  Total: number;
+  Total?: number;
   /** 详情 */
-  Items: ConfigCompliancePack[];
+  Items?: ConfigCompliancePack[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1322,6 +1326,8 @@ declare interface ListDiscoveredResourcesResponse {
   Items?: ResourceListInfo[];
   /** 下一页 */
   NextToken?: string | null;
+  /** 总数 */
+  Count?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

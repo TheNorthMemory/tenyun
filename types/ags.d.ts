@@ -373,7 +373,7 @@ declare interface CreatePreCacheImageTaskResponse {
 declare interface CreateSandboxToolRequest {
   /** 沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一 */
   ToolName: string;
-  /** 沙箱工具类型，目前支持：browser、code-interpreter、custom */
+  /** 沙箱工具类型，目前支持：browser、code-interpreter、custom等枚举值：browser： browsercode-interpreter： code-interpretermobile： mobileosworld： osworldcustom： customswebench： swebenchaio： aioandroid-world： android-worldwaa： waa */
   ToolType: string;
   /** 网络配置 */
   NetworkConfiguration: NetworkConfiguration;

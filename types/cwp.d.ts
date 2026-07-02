@@ -6889,7 +6889,7 @@ declare interface CreateBaselineStrategyResponse {
 declare interface CreateBuyBindTaskRequest {
   /** 订单号 */
   DealName: string;
-  /** 可选参数: 1专业版-包年包月 , 2 旗舰版-包年包月 */
+  /** 授权类型枚举值：1： 专业版-包年包月2： 旗舰版-包年包月 */
   LicenseType: number;
   /** 机器列表 */
   QuuidList?: string[];
@@ -10356,7 +10356,7 @@ declare interface DescribeLoginTypeGlobalConfRequest {
 }
 
 declare interface DescribeLoginTypeGlobalConfResponse {
-  /** 是否开启防卸载 0 否 1 是 9 未设置,和0一样是未开启 */
+  /** 是否开启扫码登录 0 否 1 是 9 未设置,和0一样是未开启 */
   Enable?: number;
   /** 开启范围 0 自选主机 1 全部主机 */
   Scope?: number;
@@ -11191,11 +11191,13 @@ declare interface DescribeProVersionInfoResponse {
 }
 
 declare interface DescribeProVersionStatusRequest {
-  /** 主机安全客户端UUID、填写"all"表示所有主机。 */
+  /** 主机安全客户端UUID、填写&quot;all&quot;表示所有主机。 */
   Uuid: string;
 }
 
 declare interface DescribeProVersionStatusResponse {
+  /** 开通状态。UNOPENED：未开通专业版OPENED：已开通专业版 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11700,6 +11702,8 @@ declare interface DescribeRecommendedProtectCpuRequest {
 }
 
 declare interface DescribeRecommendedProtectCpuResponse {
+  /** 推荐购买数 */
+  Number?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11920,6 +11924,22 @@ declare interface DescribeSafeInfoRequest {
 }
 
 declare interface DescribeSafeInfoResponse {
+  /** 文本内容 */
+  Context?: string;
+  /** 标题 */
+  Title?: string;
+  /** 超链接地址 */
+  Url?: string;
+  /** 受影响机器数 */
+  EffectHostCount?: number;
+  /** 受影响事件名称 */
+  EventName?: string;
+  /** 受影响事件类型 0 无 1 木马 2 漏洞 3基线 */
+  EventCategory?: number;
+  /** 是否展示通知 */
+  IsShow?: boolean;
+  /** Id值 */
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12540,6 +12560,38 @@ declare interface DescribeTrialReportRequest {
 }
 
 declare interface DescribeTrialReportResponse {
+  /** 是否展示 */
+  IsShow?: boolean;
+  /** 新增机器数 */
+  AddMachineCnt?: number;
+  /** 基线风险数(检测项) */
+  BaselineRiskCnt?: number;
+  /** 漏洞数 */
+  VulCnt?: number;
+  /** 木马告警成功数 */
+  MalwareAlarmCnt?: number;
+  /** 爆破告警成功数 */
+  BruteAlarmCnt?: number;
+  /** 自动隔离木马数(成功) */
+  AutoIsolateMalwareCnt?: number;
+  /** 自动阻断数(成功) */
+  AutoBlockBruteCnt?: number;
+  /** 自动防御漏洞数(成功) */
+  AutoDefenceCnt?: number;
+  /** 漏洞自动修复数 */
+  AutoVulFixCnt?: number;
+  /** java内存码告警数 */
+  JavaShellCnt?: number;
+  /** 核心文件监控告警数 */
+  FileTamperCnt?: number;
+  /** 事件调查数 */
+  EventCnt?: number;
+  /** 恶意请求事件数 */
+  DnsCnt?: number;
+  /** 高危命令事件数 */
+  BashCnt?: number;
+  /** 云服务器厂商类型 */
+  CloudFrom?: CloudFromCnt[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14863,7 +14915,7 @@ declare interface ModifyJavaMemShellsStatusResponse {
 declare interface ModifyLicenseBindsRequest {
   /** 资源ID */
   ResourceId: string;
-  /** 授权类型 */
+  /** 授权类型枚举值：1： 专业版-包年包月2： 旗舰版-包年包月 */
   LicenseType: number;
   /** 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过) */
   IsAll?: boolean;
@@ -14901,7 +14953,7 @@ declare interface ModifyLicenseOrderResponse {
 declare interface ModifyLicenseUnBindsRequest {
   /** 资源ID */
   ResourceId: string;
-  /** 授权类型- 0 按量付费-专业版- 1 包年包月-专业版- 2 包年包月-旗舰版- 3 包年包月-轻量版 */
+  /** 授权类型枚举值：1： 专业版-包年包月2： 旗舰版-包年包月 */
   LicenseType: number;
   /** 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过) */
   IsAll?: boolean;

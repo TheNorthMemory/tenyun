@@ -272,6 +272,8 @@ declare interface CodeFile {
   Path?: string | null;
   /** 父文件夹路径 */
   ParentFolderPath?: string | null;
+  /** 返回保存后的versionId */
+  VersionId?: string | null;
 }
 
 /** 数据探索脚本配置 */
@@ -404,6 +406,20 @@ declare interface CompareQualityResultItem {
   CompareType: number | null;
   /** 值比较类型 */
   ValueComputeType: number | null;
+}
+
+/** 存算配置映射列表，对应页面“存算引擎配置” */
+declare interface ComputeConfigMapping {
+  /** 任务类型ID枚举值：32： DLC_SQL46： DLC_SPARK50： DLC_PYSPARK */
+  TaskTypeId?: number | null;
+  /** 存算配置项。当前支持：COMPUTE_ENGINE、DLC_ENGINE_RESOURCE_GROUP枚举值：COMPUTE_ENGINE： DLC 标准计算引擎DLC_ENGINE_RESOURCE_GROUP： DLC 标准引擎资源组 */
+  ComputeConfigItem?: string | null;
+  /** 指定任务列表，非空时表示任务级覆盖，当前仅支持 DLC_SQL */
+  TaskIds?: string[] | null;
+  /** ComputeConfigItem=COMPUTE_ENGINE 时表示原引擎名；ComputeConfigItem=DLC_ENGINE_RESOURCE_GROUP 时表示原 DLC 标准引擎资源组名 */
+  SourceValue?: string | null;
+  /** ComputeConfigItem=COMPUTE_ENGINE 时表示目标引擎名；ComputeConfigItem=DLC_ENGINE_RESOURCE_GROUP 时表示目标 DLC 标准引擎资源组名 */
+  TargetValue?: string | null;
 }
 
 /** 创建告警规则响应结果 */
@@ -2182,6 +2198,8 @@ declare interface QualityProdSchedulerTask {
   InChargeIdList?: string[] | null;
   /** 负责人name */
   InChargeNameList?: string[] | null;
+  /** 生产调度任务状态，参考调度任务侧状态信息，“DELETED”状态为质量侧单独加的，查不到任务时认为任务“DELETED”'Y': '调度中','F': '已下线','O': '已暂停','INVALID': '已失效','DELETED': '已删除' */
+  TaskStatus?: string | null;
 }
 
 /** 数据质量规则 */
@@ -2394,6 +2412,8 @@ declare interface QualityRuleExecResult {
   AspectTaskId?: string | null;
   /** 数据目录 */
   CatalogName?: string | null;
+  /** 规则执行状态（0：初始状态，1：运行中，2：运行成功，3：运行失败，4：被杀死） */
+  RuleExecStatus?: number | null;
 }
 
 /** 规则变量替换 */
@@ -2472,6 +2492,10 @@ declare interface QualityRuleGroup {
   AspectTaskId?: string | null;
   /** 数据目录名称 */
   CatalogName?: string | null;
+  /** 负责人ID */
+  InChargeId?: string | null;
+  /** 负责人名称 */
+  InChargeName?: string | null;
 }
 
 /** 任务配置 */
@@ -2574,6 +2598,8 @@ declare interface QualityRuleGroupExecStrategy {
   EngineParam?: string | null;
   /** 数据目录名称，不填默认为DataLakeCatalog（更新质量监控时该参数无效） */
   CatalogName?: string | null;
+  /** 执行失败是否阻塞下游枚举值：0： 失败不阻塞（默认）1： 失败阻塞默认值：0仅作用于“关联生产调度”类型的质量监控 */
+  ExecFailBlock?: number | null;
 }
 
 /** 质量监控分页 */
@@ -3782,6 +3808,8 @@ declare interface TaskVersion {
   Status?: string | null;
   /** 审批人（只有提交版本有） */
   ApproveUserUin?: string | null;
+  /** 是否为使用版本 */
+  UsedVersion?: boolean | null;
 }
 
 /** 任务版本列表信息 */
@@ -4190,6 +4218,8 @@ declare interface TriggerTaskVersion {
   Status?: string | null;
   /** 审批人（只有提交版本有） */
   ApproveUserUin?: string | null;
+  /** 是否生产态使用版本，保存版本没有该字段 */
+  UsedVersion?: boolean | null;
 }
 
 /** 任务版本列表信息 */
@@ -4264,6 +4294,8 @@ declare interface TriggerWorkflowDetail {
   SchedulerStatus?: string | null;
   /** 工作流运行参数配置 */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig | null;
+  /** 触发方式：定时触发：TIME_TRIGGER 。这里配置之后，内部的触发方式可不填，否则需要保持一致枚举值：TIME_TRIGGER： 定时触发 */
+  TriggerMode?: string | null;
 }
 
 /** 获取工作流的列表信息item */
@@ -4528,6 +4560,10 @@ declare interface UpdateTriggerWorkflowPartially {
   GeneralTaskParams?: WorkflowGeneralTaskParam[];
   /** 工作流运行参数配置 */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
+  /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的Trigger状态可不配置，如果配置，内容会被该值覆盖。枚举值：ACTIVE： 启动PAUSED： 暂停 */
+  SchedulerStatus?: string;
+  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
+  TriggerMode?: string;
 }
 
 /** 更新工作流结果 */
@@ -4740,8 +4776,8 @@ declare interface WorkflowSchedulerConfigurationInfo {
 
 /** 工作流调度配置 */
 declare interface WorkflowTriggerConfig {
-  /** 触发方式，- 定时触发：TIME_TRIGGER- 持续运行：CONTINUE_RUN- 文件到达：FILE_ARRIVAL注意：- TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；- FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填； */
-  TriggerMode: string | null;
+  /** 触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高定时触发：TIME_TRIGGER持续运行：CONTINUE_RUN（暂不支持）文件到达：FILE_ARRIVAL（暂不支持）注意：TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；枚举值：TIME_TRIGGER： 定时触发 */
+  TriggerMode?: string | null;
   /** WorkflowTriggerConfig转换成Json格式，对账使用 */
   ExtraInfo?: string | null;
   /** 调度时区 */
@@ -4758,13 +4794,13 @@ declare interface WorkflowTriggerConfig {
   CrontabExpression?: string | null;
   /** triggerId, uuid */
   TriggerId?: string | null;
-  /** 文件到达模式下	存储系统中的监听路径 */
+  /** 文件到达模式下 存储系统中的监听路径 */
   FileArrivalPath?: string | null;
-  /** 文件到达模式下	触发最短间隔时间（单位：秒） */
+  /** 文件到达模式下 触发最短间隔时间（单位：秒） */
   TriggerMinimumIntervalSecond?: number | null;
-  /** 文件到达模式下	触发等待时间（单位：秒） */
+  /** 文件到达模式下 触发等待时间（单位：秒） */
   TriggerWaitTimeSecond?: number | null;
-  /** Trigger 状态 启动ACTIVE，暂停PAUSED */
+  /** Trigger 状态 启动ACTIVE，暂停PAUSED。外部的TriggerStatus优先级大于当前值枚举值：ACTIVE： 启动PAUSED： 暂停 */
   SchedulerStatus?: string | null;
 }
 
@@ -4901,10 +4937,12 @@ declare interface CreateDataBackfillPlanRequest {
   IntegrationResourceGroupId?: string;
   /** 自定义参数，可以重新指定任务的参数，方便补录实例执行新的逻辑 */
   RedefineParamList?: KVPair[];
-  /** 补录是实例数据时间顺序，生效必须满足2个条件:1. 必须同周期任务2. 优先按依赖关系执行，无依赖关系影响的情况下按配置执行顺序执行 可选值- NORMAL: 不设置- ORDER: 顺序- REVERSE: 逆序不设置默认为NORMAL */
+  /** 补录是实例数据时间顺序，生效必须满足2个条件:必须同周期任务优先按依赖关系执行，无依赖关系影响的情况下按配置执行顺序执行可选值NORMAL: 不设置ORDER: 顺序REVERSE: 逆序不设置默认为NORMAL */
   DataTimeOrder?: string;
-  /** 补录实例重新生成周期，如果设置会重新指定补录任务实例的生成周期，目前只会将天实例转换成每月1号生成的实例* MONTH_CYCLE: 月 */
+  /** 补录实例重新生成周期，如果设置会重新指定补录任务实例的生成周期，目前只会将天实例转换成每月1号生成的实例MONTH_CYCLE: 月 */
   RedefineCycleType?: string;
+  /** 存算配置映射列表，对应页面“存算引擎配置” */
+  ComputeConfigMappings?: ComputeConfigMapping[];
 }
 
 declare interface CreateDataBackfillPlanResponse {
@@ -5221,6 +5259,10 @@ declare interface CreateTriggerWorkflowRequest {
   GeneralTaskParams?: WorkflowGeneralTaskParam[];
   /** 工作流调度运行配置 */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
+  /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的Trigger状态可不配置，如果配置，内容会被该值覆盖枚举值：ACTIVE： 启动PAUSED： 暂停 */
+  SchedulerStatus?: string;
+  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
+  TriggerMode?: string;
 }
 
 declare interface CreateTriggerWorkflowResponse {
@@ -7133,6 +7175,8 @@ declare interface ListTaskVersionsRequest {
   PageNumber?: number;
   /** 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200。 */
   PageSize?: number;
+  /** 是否为使用版本 */
+  UsedVersion?: boolean;
 }
 
 declare interface ListTaskVersionsResponse {
@@ -7813,6 +7857,8 @@ declare interface UpdateCodeFileRequest {
   CodeFileConfig?: CodeFileConfig;
   /** 代码文件内容 */
   CodeFileContent?: string;
+  /**  */
+  SubmitAction?: boolean;
 }
 
 declare interface UpdateCodeFileResponse {
@@ -8163,8 +8209,12 @@ declare interface UpdateTriggerWorkflowRequest {
   BundleInfo?: string;
   /** 通用参数配置 */
   GeneralTaskParams?: WorkflowGeneralTaskParam[];
-  /**  */
+  /** 调度运行配置 */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
+  /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的SchedulerStatus可不配置，如果配置，内容会被改值覆盖。枚举值：ACTIVE： 启动PAUSED： 暂停 */
+  SchedulerStatus?: string;
+  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
+  TriggerMode?: string;
 }
 
 declare interface UpdateTriggerWorkflowResponse {
@@ -24294,7 +24344,7 @@ declare interface Wedata {
   CreateCodeFile(data: CreateCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFileResponse>;
   /** 新建代码文件夹 {@link CreateCodeFolderRequest} {@link CreateCodeFolderResponse} */
   CreateCodeFolder(data: CreateCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodeFolderResponse>;
-  /** 配置CodeStudio实体权限 {@link CreateCodePermissionsRequest} {@link CreateCodePermissionsResponse} */
+  /** 配置Studio实体权限 {@link CreateCodePermissionsRequest} {@link CreateCodePermissionsResponse} */
   CreateCodePermissions(data: CreateCodePermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCodePermissionsResponse>;
   /** 创建数据补录计划 {@link CreateDataBackfillPlanRequest} {@link CreateDataBackfillPlanResponse} */
   CreateDataBackfillPlan(data: CreateDataBackfillPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataBackfillPlanResponse>;
@@ -24340,7 +24390,7 @@ declare interface Wedata {
   DeleteCodeFile(data: DeleteCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeFileResponse>;
   /** 删除代码文件夹 {@link DeleteCodeFolderRequest} {@link DeleteCodeFolderResponse} */
   DeleteCodeFolder(data: DeleteCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodeFolderResponse>;
-  /** 删除CodeStudio实体权限 {@link DeleteCodePermissionsRequest} {@link DeleteCodePermissionsResponse} */
+  /** 删除Studio实体权限 {@link DeleteCodePermissionsRequest} {@link DeleteCodePermissionsResponse} */
   DeleteCodePermissions(data: DeleteCodePermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCodePermissionsResponse>;
   /** 异步删除补录计划 {@link DeleteDataBackfillPlanAsyncRequest} {@link DeleteDataBackfillPlanAsyncResponse} */
   DeleteDataBackfillPlanAsync(data: DeleteDataBackfillPlanAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataBackfillPlanAsyncResponse>;
@@ -24394,7 +24444,7 @@ declare interface Wedata {
   GetAlarmMessage(data: GetAlarmMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetAlarmMessageResponse>;
   /** 查看代码文件详情 {@link GetCodeFileRequest} {@link GetCodeFileResponse} */
   GetCodeFile(data: GetCodeFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetCodeFileResponse>;
-  /** 获取codestudio文件夹详情 {@link GetCodeFolderRequest} {@link GetCodeFolderResponse} */
+  /** 获取文件夹详情 {@link GetCodeFolderRequest} {@link GetCodeFolderResponse} */
   GetCodeFolder(data: GetCodeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetCodeFolderResponse>;
   /** 查看补录计划配置详情 {@link GetDataBackfillPlanRequest} {@link GetDataBackfillPlanResponse} */
   GetDataBackfillPlan(data: GetDataBackfillPlanRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataBackfillPlanResponse>;
@@ -24402,7 +24452,7 @@ declare interface Wedata {
   GetDataSource(data: GetDataSourceRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceResponse>;
   /** 查看数据源关联任务列表 {@link GetDataSourceRelatedTasksRequest} {@link GetDataSourceRelatedTasksResponse} */
   GetDataSourceRelatedTasks(data: GetDataSourceRelatedTasksRequest, config?: AxiosRequestConfig): AxiosPromise<GetDataSourceRelatedTasksResponse>;
-  /** 查看当前用户对CodeStudio实体的最大权限 {@link GetMyCodeMaxPermissionRequest} {@link GetMyCodeMaxPermissionResponse} */
+  /** 查看当前用户对Studio实体的最大权限 {@link GetMyCodeMaxPermissionRequest} {@link GetMyCodeMaxPermissionResponse} */
   GetMyCodeMaxPermission(data: GetMyCodeMaxPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<GetMyCodeMaxPermissionResponse>;
   /** 查询当前用户对工作流文件夹的递归最大权限 {@link GetMyWorkflowMaxPermissionRequest} {@link GetMyWorkflowMaxPermissionResponse} */
   GetMyWorkflowMaxPermission(data: GetMyWorkflowMaxPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<GetMyWorkflowMaxPermissionResponse>;
@@ -24474,7 +24524,7 @@ declare interface Wedata {
   ListCatalog(data: ListCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<ListCatalogResponse>;
   /** 获取文件夹内容 {@link ListCodeFolderContentsRequest} {@link ListCodeFolderContentsResponse} */
   ListCodeFolderContents(data: ListCodeFolderContentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCodeFolderContentsResponse>;
-  /** 查看CodeStudio实体权限 {@link ListCodePermissionsRequest} {@link ListCodePermissionsResponse} */
+  /** 查看Studio实体权限 {@link ListCodePermissionsRequest} {@link ListCodePermissionsResponse} */
   ListCodePermissions(data: ListCodePermissionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCodePermissionsResponse>;
   /** 查询表列血缘列表 {@link ListColumnLineageRequest} {@link ListColumnLineageResponse} */
   ListColumnLineage(data: ListColumnLineageRequest, config?: AxiosRequestConfig): AxiosPromise<ListColumnLineageResponse>;
@@ -24528,7 +24578,7 @@ declare interface Wedata {
   ListResourceFolders(data: ListResourceFoldersRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceFoldersResponse>;
   /** 查看资源组列表 {@link ListResourceGroupsRequest} {@link ListResourceGroupsResponse} */
   ListResourceGroups(data?: ListResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceGroupsResponse>;
-  /** 获取sql文件夹内容列表 {@link ListSQLFolderContentsRequest} {@link ListSQLFolderContentsResponse} */
+  /** 获取SQL文件夹内容列表 {@link ListSQLFolderContentsRequest} {@link ListSQLFolderContentsResponse} */
   ListSQLFolderContents(data: ListSQLFolderContentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSQLFolderContentsResponse>;
   /** 查询SQL运行记录 {@link ListSQLScriptRunsRequest} {@link ListSQLScriptRunsResponse} */
   ListSQLScriptRuns(data: ListSQLScriptRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListSQLScriptRunsResponse>;

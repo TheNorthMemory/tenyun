@@ -1037,6 +1037,8 @@ declare interface AddPermissionPolicyToRoleConfigurationRequest {
   CustomPolicyDocument?: string;
   /** 自定义策略内容列表（跟RolePolicyNames一一对应） */
   CustomPolicyDocuments?: string[];
+  /** 是否公共策略枚举值：1： 是0： 不是默认值：1 */
+  PolicyType?: number;
 }
 
 declare interface AddPermissionPolicyToRoleConfigurationResponse {

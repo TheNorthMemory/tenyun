@@ -2024,6 +2024,12 @@ declare interface VideoRedrawInput {
   Url: string;
 }
 
+/** Aigc 转绘、替换等任务参数 */
+declare interface VideoRedrawTaskInfo {
+  /** 转绘视频风格，如动漫、赛博朋克、水墨等 */
+  Style?: string;
+}
+
 /** 水印信息。 */
 declare interface WatermarkInfo {
   /** 水印 ID。 */
@@ -3055,6 +3061,8 @@ declare interface CreateVideoRedrawTaskRequest {
   Input: VideoRedrawInput;
   /** 用户自定义cos信息 */
   CosInfo?: VideoRedrawCosInfo;
+  /** 转绘任务参数 */
+  TaskInfo?: VideoRedrawTaskInfo;
 }
 
 declare interface CreateVideoRedrawTaskResponse {

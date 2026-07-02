@@ -3730,6 +3730,8 @@ declare interface ImageProcessOutputConfig {
 declare interface ImageProcessPrompt {
   /** 图片处理相关的prompt。 */
   Prompt?: string;
+  /** prompt 对应的 role。 */
+  Role?: string;
 }
 
 /** 图片处理结果信息 */

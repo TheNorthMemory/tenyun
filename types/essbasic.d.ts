@@ -1186,6 +1186,8 @@ declare interface PresetApproverInfo {
   IdCardNumber?: string;
   /** 预设参与方的证件类型，需要与IdCardNumber同时传入。证件类型，支持以下类型ID_CARD: 居民身份证 */
   IdCardType?: string;
+  /** 企业用户动态签署方场景指定预设企业名称。注意：1. 若为企业动态签署方场景，此参数必须要指定。2. 企业动态签署方场景暂不支持指定姓名证件手机号等参数，仅支持指定企业名称。3. 暂不支持指定子客企业，此处预设的企业仅支持SaaS企业。 */
+  OrganizationName?: string;
 }
 
 /** 同步的员工的信息 */
@@ -1731,7 +1733,7 @@ declare interface ChannelCreateBatchQuickSignUrlRequest {
   CacheApproverInfo?: boolean;
   /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。 */
   CanBatchReject?: boolean;
-  /** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。 */
+  /** 预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。若为个人动态签署方，支持预设姓名、证件、手机号。若为企业员工动态签署方，仅支持预设企业名称（仅限预设SaaS企业参与方，不支持子客企业）。 */
   PresetApproverInfo?: PresetApproverInfo;
   /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 若批量签署的合同中第一份待签署合同所选择的印章或者签名无法完全覆盖后续合同要求，或者当前签署人没有指定印章使用权限，则无法使用此功能，会自动退化为逐份确认。 */
   CanSkipReadFlow?: boolean;

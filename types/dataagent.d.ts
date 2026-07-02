@@ -464,6 +464,38 @@ declare interface DeleteSceneResponse {
   RequestId?: string;
 }
 
+declare interface ExecuteAgentApiRequest {
+  /** 参数路径 */
+  RequestPath?: string;
+  /** 参数值 */
+  RequestData?: string;
+  /** post还是get枚举值：post： post请求get： get请求 */
+  RequestType?: string;
+}
+
+declare interface ExecuteAgentApiResponse {
+  /** 请求路径 */
+  RequestPath?: string;
+  /** 返回的具体指 */
+  AgentData?: string;
+  /** 错误码信息 */
+  ErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExecuteAgentApiV1Request {
+  /** 参数路径 */
+  RequestPath?: string;
+  /** post还是get枚举值：post： post请求get： get请求 */
+  RequestType?: string;
+}
+
+declare interface ExecuteAgentApiV1Response {
+  /** 唯一请求 ID，每次请求都会返回。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。 */
+  RequestId?: string;
+}
+
 declare interface GetJobsByKnowledgeBaseIdRequest {
   /** 实例ID */
   InstanceId?: string;
@@ -751,6 +783,10 @@ declare interface Dataagent {
   DeleteDataAgentSession(data?: DeleteDataAgentSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataAgentSessionResponse>;
   /** 删除场景 {@link DeleteSceneRequest} {@link DeleteSceneResponse} */
   DeleteScene(data?: DeleteSceneRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSceneResponse>;
+  /** 执行下发agent对应的命令 {@link ExecuteAgentApiRequest} {@link ExecuteAgentApiResponse} */
+  ExecuteAgentApi(data?: ExecuteAgentApiRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteAgentApiResponse>;
+  /** 流式执行下发agent对应的命令 {@link ExecuteAgentApiV1Request} {@link ExecuteAgentApiV1Response} */
+  ExecuteAgentApiV1(data?: ExecuteAgentApiV1Request, config?: AxiosRequestConfig): AxiosPromise<ExecuteAgentApiV1Response>;
   /** 根据知识库id查询上传job列表 {@link GetJobsByKnowledgeBaseIdRequest} {@link GetJobsByKnowledgeBaseIdResponse} */
   GetJobsByKnowledgeBaseId(data?: GetJobsByKnowledgeBaseIdRequest, config?: AxiosRequestConfig): AxiosPromise<GetJobsByKnowledgeBaseIdResponse>;
   /** 获取知识库文件列表 {@link GetKnowledgeBaseFileListRequest} {@link GetKnowledgeBaseFileListResponse} */

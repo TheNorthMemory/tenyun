@@ -148,6 +148,36 @@ declare interface Cluster {
   SecurityGroupIds?: string[] | null;
   /** 弹性网卡方案，0：POD弹性网卡，1：Node弹性网卡。枚举值：0： POD弹性网卡1： Node弹性网卡 */
   NetEniType?: number;
+  /** 桶列表信息 */
+  ClusterBuckets?: ClusterBucketInfo[] | null;
+  /** 集群隔离时间，0为7天，1为15天 */
+  IsolationPolicyVersion?: number | null;
+}
+
+/** ClusterBucketInfo 结构 */
+declare interface ClusterBucketInfo {
+  /** 桶唯一id */
+  SerialId?: string | null;
+  /** 集群id */
+  ClusterId?: number | null;
+  /** 桶名字 */
+  Bucket?: string;
+  /** 桶类型枚举值：0： 普通桶1： 加速桶 */
+  BucketType?: number | null;
+  /** 鉴权类型枚举值：0： 不鉴权1： 鉴权 */
+  AuthMode?: number | null;
+  /** 是否默认属性 */
+  IsDefault?: number | null;
+  /** 桶状态枚举值：1： 正常0： 禁用 */
+  Status?: number | null;
+  /** 作业数量 */
+  JobCount?: number | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 创建时间参数格式：yyyy-MM-dd HH:mm:ss */
+  CreateTime?: string | null;
+  /** 更新时间参数格式：yyyy-MM-dd HH:mm:ss */
+  UpdateTime?: string | null;
 }
 
 /** 工作空间集群组信息 */
@@ -512,12 +542,16 @@ declare interface JobConfig {
   TaskManagerMem?: number | null;
   /** 运行中配置 */
   JobConfigItem?: JobConfig | null;
-  /** checkpoint 超时时间 */
+  /** checkpoint 超时时间单位：秒 */
   CheckpointTimeoutSecond?: number;
-  /** checkpoint 间隔时间 */
+  /** checkpoint 间隔时间单位：秒 */
   CheckpointIntervalSecond?: number;
   /** 变量替换模式枚举值：0： 表变量替换1： 全局SQL变量替换默认值：0 */
   VariableReplaceMode?: number;
+  /** 快照桶 */
+  StateCOSBucket?: string | null;
+  /** 日志桶 */
+  LogCOSBucket?: string | null;
 }
 
 /** 描述作业发生的一个事件 */
@@ -636,7 +670,7 @@ declare interface JobV1 {
   CuMem?: number | null;
   /** 作业状态描述 */
   StatusDesc?: string | null;
-  /** 运行状态时表示单次运行时间 */
+  /** 运行状态时表示单次运行时间单位：毫秒 */
   CurrentRunMillis?: number | null;
   /** 作业所在的集群ID */
   ClusterId?: string | null;
@@ -678,6 +712,14 @@ declare interface JobV1 {
   ExpectJobDefaultAlarmStatus?: number;
   /** jdk版本 */
   JdkVersion?: string;
+  /** 状态桶名字 */
+  StateCOSBucket?: string | null;
+  /** 新的状态桶名字 */
+  NewStateCOSBucket?: string | null;
+  /** 同类型枚举值：0： 普通桶1： 加速桶 */
+  StateCOSBucketType?: number | null;
+  /** 新的桶类型枚举值：0： 普通桶1： 加速桶 */
+  NewStateCOSBucketType?: number | null;
 }
 
 /** 日志查询的每行日志信息 */
@@ -986,7 +1028,7 @@ declare interface Savepoint {
   UpdateTime?: number | null;
   /** 路径 */
   Path?: string | null;
-  /** 大小 */
+  /** 大小单位：Byte */
   Size?: number | null;
   /** 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint */
   RecordType?: number | null;
@@ -994,14 +1036,20 @@ declare interface Savepoint {
   JobRuntimeId?: number | null;
   /** 描述 */
   Description?: string | null;
-  /** 固定超时时间 */
+  /** 固定超时时间单位：毫秒 */
   Timeout?: number | null;
   /** 快照 serialId */
   SerialId?: string | null;
-  /** 耗时 */
+  /** 耗时单位：毫秒 */
   TimeConsuming?: number | null;
   /** 快照路径状态 1：可用；2：不可用； */
   PathStatus?: number | null;
+  /** Flink版本 */
+  FlinkVersion?: string | null;
+  /** CheckPoint是否增量 */
+  IsIncremental?: string | null;
+  /** checkpoint 大小单位：Byte */
+  CheckpointSize?: number;
 }
 
 /** session集群引用资源信息 */
@@ -1056,6 +1104,8 @@ declare interface Setats {
   Name?: string;
   /** Setats集群描述 */
   Remark?: string;
+  /** 集群隔离时间，0为7天，1为15天 */
+  IsolationPolicyVersion?: number;
 }
 
 /** setats 机器规格 */
@@ -1244,6 +1294,8 @@ declare interface TreeJobSets {
   DecodeSqlCode?: string | null;
   /** 发布版本配置id */
   PublishedJobConfigId?: number;
+  /** 完整的文件夹路径，仅在平铺模式下返回 */
+  FolderPath?: string;
 }
 
 /** 树状结构资源对象 */
@@ -1531,12 +1583,18 @@ declare interface CreateJobConfigRequest {
   UseOldSystemConnector?: number;
   /** 压缩参数 */
   ProgramArgsAfterGzip?: string;
-  /** checkpoint 超时时间 */
+  /** checkpoint 超时时间单位：秒 */
   CheckpointTimeoutSecond?: number;
-  /** checkpoint 间隔时间 */
+  /** checkpoint 间隔时间单位：秒 */
   CheckpointIntervalSecond?: number;
   /** 变量替换模式枚举值：0： 表变量替换1： SQL全局变量替换默认值：1 */
   VariableReplaceMode?: number;
+  /** user */
+  OperatorName?: string;
+  /** 配置更新范围 0=全量(默认) 1=仅开发 2=仅运维 */
+  ConfigScope?: number;
+  /** 状态桶名字 */
+  StateCOSBucket?: string;
 }
 
 declare interface CreateJobConfigResponse {
@@ -1695,6 +1753,8 @@ declare interface DeleteJobConfigsRequest {
   JobConfigVersions: number[];
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 配置更新范围 0=全量(默认) 1=仅开发 2=仅运维取值范围：[0, 2] */
+  ConfigScope?: number;
 }
 
 declare interface DeleteJobConfigsResponse {
@@ -2083,6 +2143,8 @@ declare interface DescribeTreeJobsRequest {
   Filters?: Filter[];
   /** 工作空间 Serialid */
   WorkSpaceId?: string;
+  /** 返回形式枚举值：0： 树形结构1： 平铺结构 */
+  FlatMode?: number;
 }
 
 declare interface DescribeTreeJobsResponse {

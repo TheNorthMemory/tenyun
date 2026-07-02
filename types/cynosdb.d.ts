@@ -2668,6 +2668,10 @@ declare interface ProxyGroup {
   AppId?: number;
   /** 读写节点开通数据库代理 */
   OpenRw?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** 数据库代理组详细信息 */
@@ -2748,6 +2752,10 @@ declare interface ProxyNodeInfo {
   Zone?: string;
   /** 数据库代理节点名字 */
   OssProxyNodeName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** 数据库代理规格 */

@@ -721,6 +721,8 @@ declare interface CreateOIDCConfigRequest {
   IdentityKey: string;
   /** 描述 */
   Description?: string;
+  /** OIDC公钥自动轮转开关枚举值：0： 关闭1： 开启默认值：0 */
+  AutoRotateKey?: number;
 }
 
 declare interface CreateOIDCConfigResponse {
@@ -1028,6 +1030,8 @@ declare interface DescribeOIDCConfigResponse {
   Description?: string;
   /** 名称 */
   Name?: string;
+  /** OIDC公钥自动轮转开关枚举值：0： 关闭1： 开启默认值：0 */
+  AutoRotateKey?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1923,6 +1927,8 @@ declare interface UpdateOIDCConfigRequest {
   IdentityKey: string;
   /** 描述 */
   Description?: string;
+  /** OIDC公钥自动轮转开关枚举值：0： 关闭1： 开启默认值：0 */
+  AutoRotateKey?: number;
 }
 
 declare interface UpdateOIDCConfigResponse {

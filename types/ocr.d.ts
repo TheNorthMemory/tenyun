@@ -4427,9 +4427,9 @@ declare interface PermitOCRResponse {
 }
 
 declare interface QrcodeOCRRequest {
-  /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG格式。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG、PDF格式。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。 */
   ImageUrl?: string;
 }
 

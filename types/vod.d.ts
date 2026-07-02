@@ -2061,6 +2061,18 @@ declare namespace V20180717 {
     MetaData?: MediaMetaData;
   }
 
+  /** AIGC 配额 */
+  interface AigcQuotaItem {
+    /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
+    QuotaType?: string;
+    /** 仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken */
+    ApiToken?: string;
+    /** 任务的配额数单位：当QuotaLimit=Image时，单位为张当QuotaLimit=Video时，单位为秒当QuotaLimit=Text时，单位为token */
+    QuotaLimit?: number;
+    /** 已经使用的用量数单位：当QuotaLimit=Image时，单位为张当QuotaLimit=Video时，单位为秒当QuotaLimit=Text时，单位为token */
+    Usage?: number;
+  }
+
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
     /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&amp;2.1std_720PKling2.0&amp;2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling3.0_720PKling3.0Sound_720PKling3.0CustomVoice_720PKling3.0_1080PKling3.0Sound_1080PKling3.0CustomVoice_1080PKling3.0CustomVoice_2KKling3.0CustomVoice_4KKling3.0MotionControl_720PKling3.0MotionControl_1080PKling3.0MotionControl_2KKling3.0MotionControl_4KKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&amp;2.3_768PHailuo02&amp;2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2_Refer_540PViduQ2_Refer_540P_OffPeakViduQ2_Refer_720PViduQ2_Refer_720P_OffPeakViduQ2_Refer_1080PViduQ2_Refer_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_1080PViduQ2pro_Refer_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3_Refer_720PViduQ3_Refer_720P_OffPeakViduQ3_Refer_1080PViduQ3_Refer_1080P_OffPeakViduQ3_Refer_2KViduQ3_Refer_2K_OffPeakViduQ3_Refer_4KViduQ3_Refer_4K_OffPeakViduQ3pro_540PViduQ3pro_540P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakViduQ3turbo_540PViduQ3turbo_540P_OffPeakViduQ3turbo_720PViduQ3turbo_720P_OffPeakViduQ3turbo_1080PViduQ3turbo_1080P_OffPeakViduQ3turbo_2KViduQ3turbo_2K_OffPeakViduQ3turbo_4KViduQ3turbo_4K_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingFaceInfoCustomVoiceSubjectunknown */
@@ -8781,6 +8793,22 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcQuotaRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
+    QuotaType: string;
+    /** 任务的配额数单位：当QuotaLimit=Image时，单位为张当QuotaLimit=Video时，单位为秒当QuotaLimit=Text时，单位为token */
+    QuotaLimit: number;
+    /** 仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken */
+    ApiToken?: string;
+  }
+
+  interface CreateAigcQuotaResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAigcSubjectRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -9721,6 +9749,20 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DeleteAigcQuotaRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
+    QuotaType: string;
+    /** 仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken */
+    ApiToken?: string;
+  }
+
+  interface DeleteAigcQuotaResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteAnimatedGraphicsTemplateRequest {
     /** 转动图模板唯一标识。 */
     Definition: number;
@@ -10173,6 +10215,28 @@ declare namespace V20180717 {
   interface DescribeAigcFaceInfoResponse {
     /** 人脸信息。 */
     FaceInfoSet?: AigcFaceInfo[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeAigcQuotasRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
+    QuotaType: string;
+    /** 仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken */
+    ApiToken?: string;
+    /** 分页返回的记录条数，将返回第 Offset 到第 Offset+Limit-1 条。取值范围：[1, 100]默认值：10 */
+    Limit?: number;
+    /** 分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。默认值：0 */
+    Offset?: number;
+  }
+
+  interface DescribeAigcQuotasResponse {
+    /** 配额列表 */
+    QuotaSet?: AigcQuotaItem[];
+    /** 总条数 */
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11839,6 +11903,22 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface ModifyAigcQuotaRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
+    QuotaType: string;
+    /** 任务的配额数单位：当QuotaLimit=Image时，单位为张当QuotaLimit=Video时，单位为秒当QuotaLimit=Text时，单位为token */
+    QuotaLimit: number;
+    /** 仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken */
+    ApiToken?: string;
+  }
+
+  interface ModifyAigcQuotaResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyAnimatedGraphicsTemplateRequest {
     /** 转动图模板唯一标识。 */
     Definition: number;
@@ -13317,6 +13397,8 @@ declare interface Vod {
   CreateAigcCustomVoice(data: V20180717.CreateAigcCustomVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomVoiceResponse>;
   /** 创建 AIGC 生图任务 {@link V20180717.CreateAigcImageTaskRequest} {@link V20180717.CreateAigcImageTaskResponse} */
   CreateAigcImageTask(data: V20180717.CreateAigcImageTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcImageTaskResponse>;
+  /** 创建 AIGC 配额 {@link V20180717.CreateAigcQuotaRequest} {@link V20180717.CreateAigcQuotaResponse} */
+  CreateAigcQuota(data: V20180717.CreateAigcQuotaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcQuotaResponse>;
   /** 创建 AIGC 自定义主体（Vidu） {@link V20180717.CreateAigcSubjectRequest} {@link V20180717.CreateAigcSubjectResponse} */
   CreateAigcSubject(data: V20180717.CreateAigcSubjectRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcSubjectResponse>;
   /** 创建 AIGC 视频转绘任务 {@link V20180717.CreateAigcVideoRedrawTaskRequest} {@link V20180717.CreateAigcVideoRedrawTaskResponse} */
@@ -13399,6 +13481,8 @@ declare interface Vod {
   DeleteAigcAdvancedCustomElement(data: V20180717.DeleteAigcAdvancedCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcAdvancedCustomElementResponse>;
   /** 删除 AIGC API Token {@link V20180717.DeleteAigcApiTokenRequest} {@link V20180717.DeleteAigcApiTokenResponse} */
   DeleteAigcApiToken(data: V20180717.DeleteAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcApiTokenResponse>;
+  /** 删除 AIGC 配额 {@link V20180717.DeleteAigcQuotaRequest} {@link V20180717.DeleteAigcQuotaResponse} */
+  DeleteAigcQuota(data: V20180717.DeleteAigcQuotaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAigcQuotaResponse>;
   /** 删除转动图模板 {@link V20180717.DeleteAnimatedGraphicsTemplateRequest} {@link V20180717.DeleteAnimatedGraphicsTemplateResponse} */
   DeleteAnimatedGraphicsTemplate(data: V20180717.DeleteAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteAnimatedGraphicsTemplateResponse>;
   /** 删除数字水印模板 {@link V20180717.DeleteBlindWatermarkTemplateRequest} {@link V20180717.DeleteBlindWatermarkTemplateResponse} */
@@ -13467,6 +13551,8 @@ declare interface Vod {
   DescribeAigcFaceInfo(data: V20180717.DescribeAigcFaceInfoRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcFaceInfoResponse>;
   /** 异步获取 AIGC 人脸信息 {@link V20180717.DescribeAigcFaceInfoAsyncRequest} {@link V20180717.DescribeAigcFaceInfoAsyncResponse} */
   DescribeAigcFaceInfoAsync(data: V20180717.DescribeAigcFaceInfoAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcFaceInfoAsyncResponse>;
+  /** 查询 AIGC 配额 {@link V20180717.DescribeAigcQuotasRequest} {@link V20180717.DescribeAigcQuotasResponse} */
+  DescribeAigcQuotas(data: V20180717.DescribeAigcQuotasRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcQuotasResponse>;
   /** 查询 AIGC 用量统计数据 {@link V20180717.DescribeAigcUsageDataRequest} {@link V20180717.DescribeAigcUsageDataResponse} */
   DescribeAigcUsageData(data: V20180717.DescribeAigcUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcUsageDataResponse>;
   /** 获取所有分类 {@link V20180717.DescribeAllClassRequest} {@link V20180717.DescribeAllClassResponse} */
@@ -13615,6 +13701,8 @@ declare interface Vod {
   ModifyAIRecognitionTemplate(data: V20180717.ModifyAIRecognitionTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyAIRecognitionTemplateResponse>;
   /** 修改转自适应码流模板 {@link V20180717.ModifyAdaptiveDynamicStreamingTemplateRequest} {@link V20180717.ModifyAdaptiveDynamicStreamingTemplateResponse} */
   ModifyAdaptiveDynamicStreamingTemplate(data: V20180717.ModifyAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyAdaptiveDynamicStreamingTemplateResponse>;
+  /** 修改 AIGC 配额 {@link V20180717.ModifyAigcQuotaRequest} {@link V20180717.ModifyAigcQuotaResponse} */
+  ModifyAigcQuota(data: V20180717.ModifyAigcQuotaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyAigcQuotaResponse>;
   /** 修改转动图模板 {@link V20180717.ModifyAnimatedGraphicsTemplateRequest} {@link V20180717.ModifyAnimatedGraphicsTemplateResponse} */
   ModifyAnimatedGraphicsTemplate(data: V20180717.ModifyAnimatedGraphicsTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ModifyAnimatedGraphicsTemplateResponse>;
   /** 修改数字水印模板 {@link V20180717.ModifyBlindWatermarkTemplateRequest} {@link V20180717.ModifyBlindWatermarkTemplateResponse} */

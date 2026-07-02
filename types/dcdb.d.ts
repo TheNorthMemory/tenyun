@@ -18,6 +18,8 @@ declare interface AddShardConfig {
   ShardMemory: number;
   /** 分片存储大小，单位 GB */
   ShardStorage: number;
+  /** DCN实例的规格 */
+  DcnInsShardConfigs?: DcnInsShardConfig[];
 }
 
 /** 数据库超期备份配置 */
@@ -384,6 +386,16 @@ declare interface DcnDetailItem {
   PolarisRegion?: string;
   /** 是否支持DCN切换 */
   IsDcnSwitchSupported?: number;
+}
+
+/** DCN实例添加分片时对端实例期望添加的分片规格 */
+declare interface DcnInsShardConfig {
+  /** 实例ID */
+  InstanceId: string;
+  /** 内存大小 */
+  Memory: number;
+  /** 磁盘大小 */
+  Storage: number;
 }
 
 /** 订单信息 */
