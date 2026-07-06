@@ -112,6 +112,124 @@ declare interface GlossaryItem {
   UpdatedTime?: string;
 }
 
+/** 模型信息 */
+declare interface Model {
+  /** 模型名称 */
+  ModelName?: string;
+  /** 模型 ID。 */
+  ModelId?: string;
+  /** 模型显示名称。 */
+  DisplayName?: string;
+  /** 模型描述。 */
+  Description?: string;
+  /** 模型概要。 */
+  Summary?: string;
+  /** 模型类型。取值：Text（文本）、Vision（视觉）、Multimodal（多模态）、Speech（语音）、Embedding（向量）。枚举值：Text： 语言模型Vision： 视觉模型Multimodal： 多模态模型 */
+  ModelType?: string;
+  /** 模型品牌。 */
+  Brand?: string;
+  /** 模型图标。 */
+  ModelImage?: ModelImage;
+  /** 模型供应商。 */
+  Provider?: string;
+  /** 模型状态。取值：online（上线）、offline（下线）。枚举值：online ： 上线pre-offline： 预下线 */
+  Status?: string;
+  /** 标签列表。 */
+  Tags?: string[];
+  /** 计费信息列表。 */
+  ModelChargingInfo?: ModelChargingInfo[];
+  /** 模型规格。 */
+  ModelSpec?: ModelSpec;
+  /** 发布时间。 */
+  ReleaseAt?: string;
+  /** 推荐顺序，值越小排序越靠前。 */
+  RecommendWeight?: number;
+  /** 模型访问信息。包含模型在各站点和地域的可用性配置。为空时表示未配置地域信息，模型不可用。 */
+  ModelAccessInfo?: ModelAccessInfo;
+  /** 体验包信息。 */
+  FreeTrialInfo?: ModelFreeTrialInfo;
+  /** 模型下线时间，Status=pre-offline 时，会配置模型下线时间 */
+  OfflineAt?: string;
+}
+
+/** 模型访问信息 */
+declare interface ModelAccessInfo {
+  /** 各站点的地域可用性列表。为空时表示未配置地域信息，模型不可用。 */
+  ModelSiteRegions?: ModelSiteRegion[];
+}
+
+/** 模型计费信息 */
+declare interface ModelChargingInfo {
+  /** 计费类型。取值：Uniform（统一计费）、Tiered（阶梯计费）。 */
+  Type?: string;
+  /** 计费名称，阶梯计费时表示区间标识，统一计费为空。 */
+  Name?: string;
+  /** 计费场景，用于区分同一产品不同功能的计费。 */
+  Scenario?: string;
+  /** 计费条目列表，顺序即前端展示顺序。 */
+  ChargingItems?: ModelChargingItem[];
+  /** 计费单位。取值：TOKEN（词元）、COUNT（次）、CREDIT（积分）、PICTURE（张）。 */
+  ChargeUnit?: string;
+  /** 计费参考链接。 */
+  Reference?: string;
+}
+
+/** 计费条目 */
+declare interface ModelChargingItem {
+  /** 价格维度标识。取值：Input（输入）、Output（输出）、Cache（缓存命中）、Thinking（思考）、BatchInput（批量输入）、BatchOutput（批量输出）、BatchCache（批量缓存命中）、ImageInput（输入图片）、ImageOutput（输出图片）、Search（搜索调用）。 */
+  PriceName?: string;
+  /** 价格维度展示名，后端直接提供当前语言文本（如 输入、Input），前端无需翻译。 */
+  DisplayName?: string;
+  /** 价格数值。 */
+  Price?: string;
+  /** 价格单位，后端直接提供当前语言文本（如 元/百万tokens、元/张、积分/次）。 */
+  PriceUnit?: string;
+}
+
+/** 模型体验包信息 */
+declare interface ModelFreeTrialInfo {
+  /** 推荐顺序，值越小排序越靠前。为空表示使用模型默认权重。 */
+  RecommendWeight?: number;
+  /** 体验包容量大小。 */
+  CapacitySize?: number;
+  /** 容量单位。取值：token。 */
+  Unit?: string;
+  /** 有效期天数（如90天）。为空表示不限期。 */
+  ValidityDays?: number;
+}
+
+/** 模型图标信息 */
+declare interface ModelImage {
+  /** 图标 URL。 */
+  Url?: string;
+}
+
+/** 模型上线的站点、地域信息 */
+declare interface ModelSiteRegion {
+  /** 站点标识。取值：domestic（国内站）、international（国际站）。 */
+  Site?: string;
+  /** 该站点下可用的地域列表，遵循腾讯云标准地域编码（如 ap-guangzhou、ap-beijing、ap-singapore、na-siliconvalley 等）。为空数组时表示该站点无可用地域。 */
+  Regions?: string[];
+}
+
+/** 模型规格信息 */
+declare interface ModelSpec {
+  /** 每分钟处理 Token 数（Tokens Per Minute）。 */
+  TPM?: string;
+  /** 每分钟请求数（Queries Per Minute）。 */
+  QPM?: string;
+  /** 最大输入 Token 长度。 */
+  MaxInputToken?: string;
+  /** 最大输出 Token 长度。 */
+  MaxOutputToken?: string;
+  /** 上下文窗口长度。 */
+  ContextLength?: string;
+  /** 并发数。 */
+  Concurrency?: string;
+  /** 输入要求描述。 */
+  InputDescription?: string;
+}
+
 /** 修改术语条目项 */
 declare interface ModifyGlossaryEntryInput {
   /** 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。 */
@@ -648,6 +766,10 @@ declare interface DescribeModelListRequest {
 }
 
 declare interface DescribeModelListResponse {
+  /** 模型列表。 */
+  ModelSet?: Model[];
+  /** 符合条件的模型总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

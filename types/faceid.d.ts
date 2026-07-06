@@ -58,7 +58,7 @@ declare interface DetectDetail {
   Comparestatus?: number | null;
   /** 本次一比一结果描述。（仅描述用，文案更新时不会通知。） */
   Comparemsg?: string | null;
-  /** 比对库源类型。包括：公安商业库；业务方自有库（用户上传照片、客户的混合库、混合部署库）；二次验证库；人工审核库； */
+  /** 比对库源类型。包括：商业库；业务方自有库（用户上传照片、客户的混合库、混合部署库）；二次验证库；人工审核库； */
   CompareLibType?: string | null;
   /** 枚举活体检测类型：0：未知1：数字活体2：动作活体3：静默活体4：一闪活体（动作+光线） */
   LivenessMode?: number | null;

@@ -2764,6 +2764,8 @@ declare interface DspmAssetDataScanDetail {
   TaskConfig?: DspmSensitiveScanTaskConfig;
   /** 识别结果分类详情 */
   CategoryDetails?: DspmIdentifyCategoryDetail[];
+  /** 任务ID */
+  TaskId?: number;
 }
 
 /** dspm资产数据库信息 */
@@ -3000,6 +3002,8 @@ declare interface DspmDbAsset {
   AccountOptSupported?: number;
   /** 实例类型 */
   InstanceType?: number;
+  /** 集群类型（MongoDB），与云接口 DescribeDBInstances 的 ClusterType 一致：0-副本集 1-分片；非 MongoDB 资产固定 0 */
+  ClusterType?: number;
   /** 是否支持敏感数据识别。0 不支持；1 支持 */
   IdentifyScanSupported?: number;
 }
@@ -4552,21 +4556,21 @@ declare interface MachineDetail {
   ClusterName?: string;
 }
 
-/** 简要的资产标签元素 */
+/** 简要的资产标签元素，CSIP 内部使用。 */
 declare interface MiniTagItem {
-  /** 标签颜色 */
+  /** 标签展示颜色。 */
   Color?: string;
-  /** 描述 */
+  /** 标签描述。 */
   Description?: string;
-  /** 标签ID */
+  /** 标签 ID。 */
   ID?: number;
-  /** 标签键 */
+  /** 标签键（中文）。 */
   TagKey?: string;
-  /** 标签值 */
+  /** 标签值（中文）。 */
   TagValue?: string;
-  /** 标签键英文 */
+  /** 标签键（英文）。 */
   TagKeyEn?: string;
-  /** 标签值英文 */
+  /** 标签值（英文）。 */
   TagValueEn?: string;
 }
 
@@ -5636,11 +5640,11 @@ declare interface TableField {
   Sensitive?: SensitiveDetail;
 }
 
-/** 标签 */
+/** 云上原生标签键值对。 */
 declare interface Tag {
-  /** 标签名称 */
+  /** 标签键。 */
   Name: string;
-  /** 标签内容 */
+  /** 标签值。 */
   Value: string;
 }
 
@@ -8606,6 +8610,8 @@ declare interface DescribeDspmBackupSettingResponse {
 declare interface DescribeDspmDictionaryListRequest {
   /** 字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项） */
   DictType: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
   /** 筛选条件 */
   Filters?: WhereFilter[];
 }
@@ -8994,6 +9000,8 @@ declare interface DescribeDspmRiskTendencyResponse {
 declare interface DescribeDspmStatisticsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 按照资产类型过滤枚举值：cdb： cdbmariadb： mariadbcynosdb： cynosdb默认值：默认值为空，即不按照资产类型过滤，返回所有资产信息 */
+  AssetType?: string[];
 }
 
 declare interface DescribeDspmStatisticsResponse {

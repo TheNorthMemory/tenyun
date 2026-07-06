@@ -180,11 +180,11 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   BlindWatermark?: BlindWatermarkInput | null;
   /** 转自适应码流后文件的目标存储，不填则继承上层的 OutputStorage 值。 */
   OutputStorage?: TaskOutputStorage | null;
-  /** 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_adaptiveDynamicStreaming_{definition}.{format}。 */
+  /** 转自适应码流后，manifest 文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以.{format}结尾。变量名请参考 文件名变量说明。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}如果不填，则默认为相对路径：{inputName}_adaptiveDynamicStreaming_{definition}.{format}。 */
   OutputObjectPath?: string;
-  /** 转自适应码流后，子流文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`。 */
+  /** 转自适应码流后，子流文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}。 */
   SubStreamObjectName?: string;
-  /** 转自适应码流（仅 HLS）后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：`{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`。 */
+  /** 转自适应码流（仅 HLS）后，分片文件的输出路径，只能为相对路径。如果不填，则默认为相对路径：{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}。 */
   SegmentObjectName?: string;
   /** 外挂字幕功能，指定要插入的字幕文件。 */
   AddOnSubtitles?: AddOnSubtitle[] | null;
@@ -196,8 +196,10 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   SubtitleTemplate?: SubtitleTemplate | null;
   /** 转码参数扩展字段 */
   StdExtInfo?: string;
-  /** 指定pts时间的帧设为关键帧，并切片。单位毫秒（允许相对偏差<=1ms）。当同时指定gop和切片时长时，会共同作用。注意需开启RawPts，保持帧率随源，并确保传入的pts时间在源中是有对应帧的。 */
+  /** 指定pts时间的帧设为关键帧，并切片。单位毫秒（允许相对偏差&lt;=1ms）。当同时指定gop和切片时长时，会共同作用。注意需开启RawPts，保持帧率随源，并确保传入的pts时间在源中是有对应帧的。 */
   KeyPTSList?: number[] | null;
+  /** 外挂音频功能，指定要插入的音频文件。 */
+  AddOnAudios?: AddOnAudio[];
 }
 
 /** 转自适应码流模板详情 */
@@ -250,6 +252,18 @@ declare interface AddBlindWatermarkConfig {
   EmbedInfo?: BlindWatermarkEmbedInfo | null;
 }
 
+/** 外挂音频。 */
+declare interface AddOnAudio {
+  /** 音频文件输入信息。注意：（1）音频流的编码格式支持：aac、ac3、eac3、flac、opus和mp3；（2）当转自适应码流模板中设置的切片类型为ts的时候，音频流的编码格式不能为flac。 */
+  InputInfo: MediaInputInfo;
+  /** 音轨名称，如：中文、English。注意：仅支持中文、英文、数字、空格、下划线(_)、短横线(-)、句点(.)和中英文括号，长度不能超过64个字符。 */
+  AudioName?: string;
+  /** 音轨语言，如：chi、eng，遵循 ISO 639-2 */
+  AudioLanguage?: string;
+  /** 默认音频轨道。为true时指定当前音频为默认音频轨道，最多可指定1条默认音频轨道。默认值：false */
+  DefaultTrack?: boolean;
+}
+
 /** 图片处理编排中使用的输入参数。 */
 declare interface AddOnImageInput {
   /** 图片类型。 */
@@ -274,9 +288,11 @@ declare interface AddOnSubtitle {
   Type?: string | null;
   /** 字幕文件。 */
   Subtitle?: MediaInputInfo | null;
-  /** 字幕名称	。注意：仅支持中文、英文、数字、空格、下划线(_)、短横线(-)、句点(.)和中英文括号，长度不能超过64个字符。 */
+  /** 字幕名称 。注意：仅支持中文、英文、数字、空格、下划线(_)、短横线(-)、句点(.)和中英文括号，长度不能超过64个字符。 */
   SubtitleName?: string | null;
-  /** 字幕输出格式。取值{"WebVTT","TTML"}。默认值："WebVTT" */
+  /** 字幕语言，比如：eng */
+  SubtitleLanguage?: string;
+  /** 字幕输出格式。取值{&quot;WebVTT&quot;,&quot;TTML&quot;}。默认值：&quot;WebVTT&quot; */
   OutputFormat?: string;
   /** 默认字幕轨道。为true时指定当前字幕为默认字幕轨道，最多可指定1条默认字幕轨道。默认值：false */
   DefaultTrack?: boolean;
@@ -2022,6 +2038,12 @@ declare interface AudioTemplateInfo {
   AudioChannel?: number;
   /** 合并音轨信息。注意：此字段只是自适应转码生效， */
   TrackChannelInfo?: AudioTrackChannelInfo | null;
+  /** 音频轨道语言，比如：chi、eng 注意：（1）遵循 ISO 639-2；（2）仅适用于自适应码流模板；（3）值为 source 表示保留源language */
+  AudioLanguage?: string;
+  /** 音频轨道名称，比如：中文、English 注意：（1）仅支持中文、英文、数字、空格、下划线(_)、短横线(-)、句点(.)和中英文括号，长度不能超过64个字符；（2）仅适用于自适应码流模板；（3）值为source表示保留源name */
+  AudioName?: string;
+  /** 默认音频轨道。为true时指定当前音轨为默认音轨轨道，最多可指定1条默认轨道。 默认值：false */
+  DefaultTrack?: boolean;
 }
 
 /** 音频流配置参数 */

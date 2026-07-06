@@ -1755,19 +1755,19 @@ declare interface ChannelCreateBatchSignUrlRequest {
   Name?: string;
   /** 手机号码， 支持国内手机号11位数字(无需加+86前缀或其他字符)。请确认手机号所有方为此业务通知方。注：请确保和合同中填入的一致, 若无法保持一致，请确保在发起和生成批量签署链接时传入相同的参与方证件信息。在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入手机号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。 */
   Mobile?: string;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
-  /** 证件类型，支持以下类型**ID_CARD** : 中国大陆居民身份证 (默认值)**HONGKONG_AND_MACAO** : 中国港澳居民来往内地通行证**HONGKONG_MACAO_AND_TAIWAN** : 中国港澳台居民居住证(格式同中国大陆居民身份证)注：1. `请确保和合同中填入的一致`。2. `在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件类型的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方，且需要和证件号参数一同传递，不能单独进行限制。` */
+  /** 证件类型，支持以下类型**ID_CARD** : 中国大陆居民身份证 (默认值)**HONGKONG_AND_MACAO** : 中国港澳居民来往内地通行证**HONGKONG_MACAO_AND_TAIWAN** : 中国港澳台居民居住证(格式同中国大陆居民身份证)注：请确保和合同中填入的一致。在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件类型的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方，且需要和证件号参数一同传递，不能单独进行限制。 */
   IdCardType?: string;
-  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：1. `请确保和合同中填入的一致`。2. `在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。` */
+  /** 证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。注：请确保和合同中填入的一致。在生成动态签署人补充链接场景中，可以通过传入此值，对补充的个人参与方信息进行限制。仅匹配传入证件号的参与方才能补充合同。此参数预设信息功能暂时仅支持个人动态参与方。 */
   IdCardNumber?: string;
   /** 通知用户方式：**NONE** : 不通知（默认）**SMS** : 短信通知（发送短信通知到Mobile参数所传的手机号） */
   NotifyType?: string;
-  /** 批量签署的合同流程ID数组。此参数必传。注: `在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。` */
+  /** 批量签署的合同流程ID数组。此参数必传。注: 在调用此接口时，请确保合同流程均为本企业发起，且合同数量不超过100个。 */
   FlowIds?: string[];
   /** SaaS平台企业员工签署方的企业名称。目标签署人如果为saas应用企业员工身份，此参数必填。注：请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。请确保此企业已完成腾讯电子签企业认证。**若为子客企业员工，请使用OpenId，OrganizationOpenId参数。如果此子客企业未认证，则此参数需要传子客企业名称** */
   OrganizationName?: string;
-  /** 指定批量签署合同的签名类型，可传递以下值：**0**：手写签名**1**：OCR楷体**2**：姓名印章**3**：图片印章**4**：系统签名**5**：长效手写签名（包含手写签名）注：不传值的情况则计算所有合同中个人签署区的签名类型，规则如下：1.如果所有合同中所有的个人签署区方式包含多种则是手写2.如果所有合同中所有个人签名区签名类型仅为一种则就是那一种签名方式（例如合同1有多个签署区都是指定OCR楷体，合同2中也是多个签署区都是指定OCR楷体...则使用OCR楷体）该参数会覆盖您合同中的签名类型，若您在发起合同时限定了签名类型(赋值签名类型给ComponentTypeLimit)，请将这些签名类型赋予此参数 */
+  /** 指定批量签署合同的签名类型，可传递以下值：0：手写签名1：OCR楷体2：姓名印章3：图片印章4：系统签名5：长效手写签名（包含手写签名）注：不传值的情况则计算所有合同中个人签署区的签名类型，规则如下：1.如果所有合同中所有的个人签署区方式包含多种则是手写2.如果所有合同中所有个人签名区签名类型仅为一种则就是那一种签名方式（例如合同1有多个签署区都是指定OCR楷体，合同2中也是多个签署区都是指定OCR楷体...则使用OCR楷体）该参数会覆盖您合同中的签名类型，若您在发起合同时限定了签名类型(赋值签名类型给ComponentTypeLimit)，请将这些签名类型赋予此参数 */
   SignatureTypes?: number[];
   /** 是否直接跳转至合同内容页面进行签署**false**: 会跳转至批量合同流程的列表, 点击需要批量签署合同后进入合同内容页面进行签署(默认)**true**: 跳过合同流程列表, 直接进入合同内容页面进行签署 */
   JumpToDetail?: boolean;
@@ -1777,22 +1777,22 @@ declare interface ChannelCreateBatchSignUrlRequest {
   OpenId?: string;
   /** 第三方平台子客企业的企业的标识, 即OrganizationOpenId，批签合同经办人为子客企业员工是为必填。 */
   OrganizationOpenId?: string;
-  /** 签署完成后是否自动回跳false：否, 签署完成不会自动跳转回来(默认)true：是, 签署完成会自动跳转回来注: 1. 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效2. 手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考[这个](https://developers.weixin.qq.com/miniprogram/dev/reference/api/App.html#onShow-Object-object)3. 电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
+  /** 签署完成后是否自动回跳false：否, 签署完成不会自动跳转回来(默认)true：是, 签署完成会自动跳转回来注: 该参数只针对APP类型（电子签小程序跳转贵方小程序）场景 的签署链接有效手机应用APP 或 微信小程序需要监控界面的返回走后序逻辑, 微信小程序的文档可以参考这个电子签小程序跳转贵方APP，不支持自动跳转，必需用户手动点击完成按钮（微信的限制） */
   AutoJumpBack?: boolean;
-  /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 **WeChatOfficialAccounts**，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 [公众号 H5 跳转电子签小程序](https://qian.tencent.com/developers/company/openwxminiprogram/#23-%E5%85%AC%E4%BC%97%E5%8F%B7-h5-%E4%B8%AD%E8%B7%B3%E8%BD%AC)。 */
+  /** 仅公众号 H5 跳转电子签小程序时，如需签署完成的“返回应用”功能，在获取签署链接接口的 UrlUseEnv 参数需设置为 WeChatOfficialAccounts，小程序签署成功的结果页面中才会出现“返回应用”按钮。在用户点击“返回应用”按钮之后，会返回到公众号 H5。 参考 公众号 H5 跳转电子签小程序。 */
   UrlUseEnv?: string;
-  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：`1. 当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能` */
+  /** 是否允许此链接中签署方批量拒签。 false (默认): 不允许批量拒签 true : 允许批量拒签。注：1. 当前合同组不支持批量拒签功能。请对合同组中的每个子合同逐一执行拒签操作，以达到拒签整个合同组的效果。2. 如果是链接直接跳转至详情页（JumpToDetail参数为true），也不支持批量拒签功能 */
   CanBatchReject?: boolean;
-  /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：`1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果对印章/签名控件有限制要求，需要保证所有印章/签名控件的限制要求(印章id或印章/签名类型限制)一致，否则无法使用此功能。` */
+  /** 是否允许此链接中签署方批量确认已读文件。 false (默认): 不允许批量确认已读文件。 true : 允许批量确认已读文件。注：1. 此功能为白名单功能，使用前请联系对应客户经理进行开通。2. 使用此功能时，FlowIds参数必传。3. 对于企业签署方，如果对印章/签名控件有限制要求，需要保证所有印章/签名控件的限制要求(印章id或印章/签名类型限制)一致，否则无法使用此功能。 */
   CanSkipReadFlow?: boolean;
 }
 
 declare interface ChannelCreateBatchSignUrlResponse {
-  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: 1. 非小程序和APP集成使用2. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  /** 批量签署链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。注: 非小程序和APP集成使用生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   SignUrl?: string;
   /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
   ExpiredTime?: number;
-  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: 1. 小程序和APP集成使用2. 生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
+  /** 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径注: 小程序和APP集成使用生成的链路后面不能再增加参数（会出现覆盖链接中已有参数导致错误） */
   MiniAppPath?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2221,13 +2221,13 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
   UserName: string;
   /** 证件号码, 应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   IdCardNumber: string;
-  /** 电子印章名字，1-50个中文字符注:`同一企业下电子印章名字不能相同` */
+  /** 电子印章名字，1-50个中文字符注:同一企业下电子印章名字不能相同 */
   SealName: string;
   /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式。 */
   SealImage?: string;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
-  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他注: `其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)OTHER_CARD_TYPE : 其他注: 其他证件类型为白名单功能，使用前请联系对接的客户经理沟通。 */
   IdCardType?: string;
   /** 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。 */
   SealImageCompress?: boolean;
@@ -2244,7 +2244,7 @@ declare interface ChannelCreatePreparedPersonalEsignRequest {
 }
 
 declare interface ChannelCreatePreparedPersonalEsignResponse {
-  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 &quot;印章&quot;-&gt;&quot;印章中心&quot;选择查看的印章，在&quot;印章详情&quot; 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3004,6 +3004,10 @@ declare interface CreateEmployeeChangeUrlRequest {
 declare interface CreateEmployeeChangeUrlResponse {
   /** 修改员工信息的小程序链接跳转到腾讯电子签小程序的实现可以参考微信的官方文档:开放能力/打开 App */
   MiniAppPath?: string;
+  /** H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序 */
+  LongUrl?: string;
+  /** H5跳转到电子签小程序链接的短链形式, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序 */
+  ShortUrl?: string;
   /** 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。 */
   ExpireTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3022,6 +3026,24 @@ declare interface CreateEmployeeQualificationSealQrCodeRequest {
 declare interface CreateEmployeeQualificationSealQrCodeResponse {
   /** 二维码图片的Base64 注: `此二维码的有效时间为7天，过期后需要重新生成新的二维码图片` */
   QrcodeBase64?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateFileConvertTaskRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+  /** 需要进行转换的资源文件类型支持的文件类型如下：枚举值：doc： docdocx： docxxls： xlsxlsx： xlsxjpg： jpgjpeg： jpegpng： pngbmp： bmphtml： htmltxt： txt */
+  ResourceType: string;
+  /** 需要进行转换操作的文件资源名称，带资源后缀名。注: 资源名称长度限制为256个字符 */
+  ResourceName: string;
+  /** 需要进行转换操作的文件资源Id，通过UploadFiles接口获取文件资源Id。注: 目前，此接口仅支持单个文件进行转换。 */
+  ResourceId: string;
+}
+
+declare interface CreateFileConvertTaskResponse {
+  /** 接口返回的文件转换任务Id，可以调用接口查询转换任务状态获取转换任务的状态和转换后的文件资源Id。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3476,6 +3498,26 @@ declare interface DescribeExtendedServiceAuthInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFileConvertTaskRequest {
+  /** 转换任务Id，通过接口创建文件转换任务接口得到的转换任务id */
+  TaskId: string;
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
+  Agent: Agent;
+}
+
+declare interface DescribeFileConvertTaskResponse {
+  /** 任务Id */
+  TaskId?: string;
+  /** 任务状态，需要关注的状态枚举值：0： NeedTranform - 任务已提交4： Processing - 文档转换中8： TaskEnd - 任务处理完成-2： DownloadFailed - 下载失败-6： ProcessFailed - 转换失败-13： ProcessTimeout - 转换文件超时 */
+  TaskStatus?: number;
+  /** 状态描述，需要关注的状态 **NeedTranform** : 任务已提交 **Processing** : 文档转换中 **TaskEnd** : 任务处理完成 **DownloadFailed** : 下载失败 **ProcessFailed** : 转换失败 **ProcessTimeout** : 转换文件超时 */
+  TaskMessage?: string;
+  /** 资源Id（即FileId），用于用PDF文件创建签署流程 */
+  ResourceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFlowDetailInfoRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -3725,7 +3767,7 @@ declare interface OperateTemplateRequest {
   TemplateId: string;
   /** 操作类型，可取值如下:DELETE: 删除ENABLE: 启用DISABLE: 停用COPY: 复制新建 */
   OperateType: string;
-  /** 模板名称，长度不超过64字符。模板复制时指定有效，若为空，则复制后模板名称为 **原模板名称_副本**。 */
+  /** 模板名称，长度不超过64字符。模板复制时指定有效，若为空，则复制后模板名称为 原模板名称_副本。 */
   TemplateName?: string;
 }
 
@@ -5477,6 +5519,8 @@ declare interface Essbasic {
   CreateEmployeeChangeUrl(data: CreateEmployeeChangeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeChangeUrlResponse>;
   /** 创建个人印章授权给企业使用的授权二维码 {@link CreateEmployeeQualificationSealQrCodeRequest} {@link CreateEmployeeQualificationSealQrCodeResponse} */
   CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
+  /** 新建文件转换任务 {@link CreateFileConvertTaskRequest} {@link CreateFileConvertTaskResponse} */
+  CreateFileConvertTask(data: CreateFileConvertTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileConvertTaskResponse>;
   /** 获取签署存证证书查看二维码 {@link CreateFlowBlockchainEvidenceUrlRequest} {@link CreateFlowBlockchainEvidenceUrlResponse} */
   CreateFlowBlockchainEvidenceUrl(data: CreateFlowBlockchainEvidenceUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFlowBlockchainEvidenceUrlResponse>;
   /** 变更本企业待签合同的经办人 {@link CreateFlowForwardsRequest} {@link CreateFlowForwardsResponse} */
@@ -5517,6 +5561,8 @@ declare interface Essbasic {
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfoRequest} {@link DescribeExtendedServiceAuthInfoResponse} */
   DescribeExtendedServiceAuthInfo(data: DescribeExtendedServiceAuthInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfoResponse>;
+  /** 查询文件转换任务状态 {@link DescribeFileConvertTaskRequest} {@link DescribeFileConvertTaskResponse} */
+  DescribeFileConvertTask(data: DescribeFileConvertTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConvertTaskResponse>;
   /** 获取合同信息 {@link DescribeFlowDetailInfoRequest} {@link DescribeFlowDetailInfoResponse} */
   DescribeFlowDetailInfo(data: DescribeFlowDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailInfoResponse>;
   /** 获取合同PDF下载链接 {@link DescribeResourceUrlsByFlowsRequest} {@link DescribeResourceUrlsByFlowsResponse} */

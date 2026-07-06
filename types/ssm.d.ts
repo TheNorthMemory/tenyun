@@ -470,6 +470,8 @@ declare interface GetServiceStatusResponse {
   ResourceId?: string;
   /** 已托管凭据个数 */
   TotalCount?: number;
+  /** 预付费购买 SSM 资源的地域 ID */
+  ResourceRegion?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

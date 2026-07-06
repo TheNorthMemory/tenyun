@@ -1176,6 +1176,8 @@ declare interface SeeComprehensionConfig {
   MaxDuration?: number;
   /** 是否生成关键词默认值：false */
   EnableKeywords?: boolean;
+  /** 自定义摘要提示词 */
+  SummaryPrompt?: string;
 }
 
 /** TWeSee 视觉理解结果 */

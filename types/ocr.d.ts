@@ -5521,7 +5521,7 @@ declare interface Ocr {
   ExtractDocMultiPro(data?: ExtractDocMultiProRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocMultiProResponse>;
   /** 机票行程单识别 {@link FlightInvoiceOCRRequest} {@link FlightInvoiceOCRResponse} */
   FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
-  /** 数学公式识别 {@link FormulaOCRRequest} {@link FormulaOCRResponse} */
+  /** @deprecated 数学公式识别 {@link FormulaOCRRequest} {@link FormulaOCRResponse} */
   FormulaOCR(data?: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
   /** 通用文字识别（高精度版） {@link GeneralAccurateOCRRequest} {@link GeneralAccurateOCRResponse} */
   GeneralAccurateOCR(data?: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
@@ -5577,7 +5577,7 @@ declare interface Ocr {
   RecognizeAgent(data?: RecognizeAgentRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeAgentResponse>;
   /** 身份证识别（安全加密版） {@link RecognizeEncryptedIDCardOCRRequest} {@link RecognizeEncryptedIDCardOCRResponse} */
   RecognizeEncryptedIDCardOCR(data: RecognizeEncryptedIDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeEncryptedIDCardOCRResponse>;
-  /** 公式识别 {@link RecognizeFormulaOCRRequest} {@link RecognizeFormulaOCRResponse} */
+  /** @deprecated 公式识别 {@link RecognizeFormulaOCRRequest} {@link RecognizeFormulaOCRResponse} */
   RecognizeFormulaOCR(data?: RecognizeFormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeFormulaOCRResponse>;
   /** 通用卡证鉴伪 {@link RecognizeGeneralCardWarnRequest} {@link RecognizeGeneralCardWarnResponse} */
   RecognizeGeneralCardWarn(data?: RecognizeGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<RecognizeGeneralCardWarnResponse>;

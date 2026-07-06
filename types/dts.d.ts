@@ -106,6 +106,10 @@ declare interface CompareDetailInfo {
   DifferenceSchema?: DifferenceSchemaDetail;
   /** 对象owner不一致详情，pg用 */
   DifferenceOwner?: DifferenceOwnerDetail;
+  /** 全量阶段表的校验进度。该字段后续逐步取代Difference */
+  FullProgress?: CompareTableInfo;
+  /** 增量阶段表的校验进度 */
+  IncDifference?: CompareTableInfo;
 }
 
 /** 一致性对比对象配置 */
@@ -154,6 +158,14 @@ declare interface CompareOptions {
   ReCheckInterval?: number;
 }
 
+/** 不一致的表的校验结果 */
+declare interface CompareTableInfo {
+  /** 不一致表的数量 */
+  TotalCount?: number;
+  /** 不一致的表的校验结果详情 */
+  Items?: CompareTableResult[] | null;
+}
+
 /** 用于一致性校验的表配置 */
 declare interface CompareTableItem {
   /** 表名称 */
@@ -166,6 +178,34 @@ declare interface CompareTableItem {
   FilterCondition?: string;
   /** 时区选择。如 "+08:00", "-08:00", "+00:00"（空值等价于"+00:00"） */
   FilterTimeZone?: string;
+}
+
+/** 不一致的表的校验结果详情。增量和全量都是这个结构，某些字段对增量没有意义，可以忽略。 */
+declare interface CompareTableResult {
+  /** 库名 */
+  Db?: string;
+  /** schema名 */
+  Schema?: string;
+  /** 表名 */
+  Table?: string;
+  /** 校验结果 */
+  Conclusion?: string;
+  /** 校验状态。仅全量阶段有意义 */
+  Status?: string;
+  /** 校验进度。仅全量阶段有意义 */
+  Progress?: number;
+  /** 不一致行数 */
+  RowCount?: number;
+  /** 该表开始校验的时间 */
+  StartedAt?: string;
+  /** 该表校验结束的时间 */
+  FinishedAt?: string;
+  /** 预计该表校验结束的时间 */
+  ExpectedAt?: string;
+  /** 源端行数，如果是行数校验此值有意义 */
+  SrcItem?: string;
+  /** 目标端行数，如果是行数校验此值有意义 */
+  DstItem?: string;
 }
 
 /** 数据一致性校验结果 */
@@ -1911,9 +1951,9 @@ declare interface DescribeCompareDiffItemsResponse {
 }
 
 declare interface DescribeCompareReportRequest {
-  /** 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
+  /** 迁移任务 Id，可通过DescribeMigrationJobs接口获取。 */
   JobId: string;
-  /** 校验任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
+  /** 校验任务 Id，可通过DescribeMigrationJobs接口获取。 */
   CompareTaskId: string;
   /** 校验不一致结果的 limit */
   DifferenceLimit?: number;

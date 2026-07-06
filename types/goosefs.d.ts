@@ -42,6 +42,8 @@ declare interface ClientNodeAttribute {
   InstanceId?: string;
   /** 自定义挂载点 */
   MountPoint?: string;
+  /** 客户端集群id */
+  ClusterId?: string;
 }
 
 /** 查询Client Token */
@@ -419,6 +421,8 @@ declare interface CreateDataRepositoryTaskRequest {
   TaskPath: string;
   /** 任务名称 */
   TaskName: string;
+  /** 任务路径是否表示绝对路径（暂时仅支持沉降使用） */
+  IsTaskPathAbsolute?: boolean;
   /** 数据流通方式 MSP_AFM 手动加载 RAW_AFM 按需加载 */
   RepositoryType?: string;
   /** 文件列表下载地址，以http开头 */
@@ -427,6 +431,10 @@ declare interface CreateDataRepositoryTaskRequest {
   EnableDataFlowSubPath?: boolean;
   /** 自定义路径(暂时仅供预热使用) */
   DataFlowSubPath?: string;
+  /** 是否开启自定义目的路径（预热任务表示本地路径，沉降任务表示COS桶前缀） */
+  EnableCustomDestPath?: boolean;
+  /** 自定义目的路径（预热任务表示本地路径，沉降任务表示COS桶前缀） */
+  CustomDestPath?: string;
 }
 
 declare interface CreateDataRepositoryTaskResponse {

@@ -1325,6 +1325,10 @@ declare interface CreateDisasterRecoverGroupRequest {
   ClientToken?: string;
   /** 置放群组的亲和度，在置放群组的实例会按该亲和度分布，亲和度的取值范围是：1-10，默认为1 */
   Affinity?: number;
+  /** 置放群组类型，当前支持两种，分散置放群组和分区置放群组(灰度中)，取值范围：PARTITION：分区置放群组，SPREAD：分散置放群组，不传该值默认是分散置放群组。 */
+  Strategy?: string;
+  /** 分区置放群组的分区数量，取值范围：2-30，当置放群组类型是分区置放群组时传入(分区置放群组功能灰度中)。 */
+  PartitionCount?: number;
   /** 标签描述列表。通过指定该参数可以绑定标签到置放群组。 */
   TagSpecification?: TagSpecification[];
 }
@@ -1342,6 +1346,10 @@ declare interface CreateDisasterRecoverGroupResponse {
   CurrentNum?: number;
   /** 分散置放群组创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreateTime?: string;
+  /** 置放群组类型，当前支持两种，分散置放群组和分区置放群组(功能灰度中)，取值范围：PARTITION：分区置放群组，SPREAD：分散置放群组，默认是分散置放群组。 */
+  Strategy?: string;
+  /** 分区置放群组的分区数量，取值范围：2-30，当置放群组类型是分区置放群组时，才有该值(分区置放群组功能灰度中)。 */
+  PartitionCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

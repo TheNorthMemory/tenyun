@@ -2934,6 +2934,26 @@ declare interface CreateExtendedServiceAuthInfosResponse {
   RequestId?: string;
 }
 
+declare interface CreateFileConvertTaskRequest {
+  /** 需要进行转换的资源文件类型支持的文件类型如下：枚举值：doc： docdocx： docxxls： xlsxlsx： xlsxjpg： jpgjpeg： jpegpng： pnghtml： htmlbmp： bmp */
+  ResourceType: string;
+  /** 需要进行转换操作的文件资源名称，带资源后缀名。注: 资源名称长度限制为256个字符 */
+  ResourceName: string;
+  /** 需要进行转换操作的文件资源Id，通过UploadFiles接口获取文件资源Id。注: 目前，此接口仅支持单个文件进行转换。 */
+  ResourceId: string;
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface CreateFileConvertTaskResponse {
+  /** 接口返回的文件转换任务Id，可以调用接口查询转换任务状态获取转换任务的状态和转换后的文件资源Id。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFileCounterSignRequest {
   /** 需要加签的文件Id。注: `暂时只支持pdf类型的文件` */
   FileId: string;
@@ -3917,7 +3937,7 @@ declare interface CreatePreparedPersonalEsignRequest {
   IdCardNumber: string;
   /** 印章名称，长度1-50个字。 */
   SealName: string;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
   /** 证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同 中国大陆居民身份证) */
   IdCardType?: string;
@@ -3929,7 +3949,7 @@ declare interface CreatePreparedPersonalEsignRequest {
   Mobile?: string;
   /** 该字段已不再使用 */
   EnableAutoSign?: boolean;
-  /** 印章颜色（参数ProcessSeal=true时生效）默认值：BLACK黑色取值: BLACK 黑色,RED 红色,BLUE 蓝色。 */
+  /** 印章颜色（参数ProcessSeal=true时生效）默认值：BLACK黑色取值:BLACK 黑色,RED 红色,BLUE 蓝色。 */
   SealColor?: string;
   /** 是否处理印章，默认不做印章处理。取值如下：false：不做任何处理；true：做透明化处理和颜色增强。 */
   ProcessSeal?: boolean;
@@ -3939,7 +3959,7 @@ declare interface CreatePreparedPersonalEsignRequest {
   Agent?: Agent;
   /** 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减 */
   LicenseType?: number;
-  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景注: `不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN` */
+  /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景注: 不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN */
   SceneKey?: string;
 }
 
@@ -4828,6 +4848,28 @@ declare interface DescribeExtendedServiceAuthInfosRequest {
 declare interface DescribeExtendedServiceAuthInfosResponse {
   /** 服务开通和授权的信息列表，根据查询类型返回所有支持的扩展服务开通和授权状况，或者返回特定扩展服务的开通和授权状况。 */
   AuthInfoList?: ExtendAuthInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFileConvertTaskRequest {
+  /** 转换任务Id，通过接口创建文件转换任务接口得到的转换任务id */
+  TaskId: string;
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator: UserInfo;
+  /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
+  Agent?: Agent;
+}
+
+declare interface DescribeFileConvertTaskResponse {
+  /** 任务Id */
+  TaskId?: string;
+  /** 任务状态，需要关注的状态枚举值：0： NeedTranform - 任务已提交4： Processing - 文档转换中8： TaskEnd - 任务处理完成-2： DownloadFailed - 下载失败-6： ProcessFailed - 转换失败-13： ProcessTimeout - 转换文件超时 */
+  TaskStatus?: number;
+  /** 状态描述，需要关注的状态 **NeedTranform** : 任务已提交 **Processing** : 文档转换中 **TaskEnd** : 任务处理完成 **DownloadFailed** : 下载失败 **ProcessFailed** : 转换失败 **ProcessTimeout** : 转换文件超时 */
+  TaskMessage?: string;
+  /** 资源Id（即FileId），用于用PDF文件创建签署流程 */
+  ResourceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5953,6 +5995,8 @@ declare interface Ess {
   CreateEmployeeQualificationSealQrCode(data: CreateEmployeeQualificationSealQrCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEmployeeQualificationSealQrCodeResponse>;
   /** 创建企业扩展服务授权 {@link CreateExtendedServiceAuthInfosRequest} {@link CreateExtendedServiceAuthInfosResponse} */
   CreateExtendedServiceAuthInfos(data: CreateExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExtendedServiceAuthInfosResponse>;
+  /** 新建文件转换任务 {@link CreateFileConvertTaskRequest} {@link CreateFileConvertTaskResponse} */
+  CreateFileConvertTask(data: CreateFileConvertTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileConvertTaskResponse>;
   /** 文件加签接口 {@link CreateFileCounterSignRequest} {@link CreateFileCounterSignResponse} */
   CreateFileCounterSign(data: CreateFileCounterSignRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileCounterSignResponse>;
   /** 模板发起合同-创建签署流程 {@link CreateFlowRequest} {@link CreateFlowResponse} */
@@ -6101,6 +6145,8 @@ declare interface Ess {
   DescribeExtendedServiceAuthDetail(data: DescribeExtendedServiceAuthDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthDetailResponse>;
   /** 查询企业扩展服务授权信息 {@link DescribeExtendedServiceAuthInfosRequest} {@link DescribeExtendedServiceAuthInfosResponse} */
   DescribeExtendedServiceAuthInfos(data: DescribeExtendedServiceAuthInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtendedServiceAuthInfosResponse>;
+  /** 查询文件转换任务状态 {@link DescribeFileConvertTaskRequest} {@link DescribeFileConvertTaskResponse} */
+  DescribeFileConvertTask(data: DescribeFileConvertTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileConvertTaskResponse>;
   /** 文件加签任务结果轮询接口 {@link DescribeFileCounterSignResultRequest} {@link DescribeFileCounterSignResultResponse} */
   DescribeFileCounterSignResult(data?: DescribeFileCounterSignResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileCounterSignResultResponse>;
   /** 查询文件下载URL {@link DescribeFileUrlsRequest} {@link DescribeFileUrlsResponse} */

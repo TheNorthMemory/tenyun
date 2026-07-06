@@ -2073,6 +2073,52 @@ declare namespace V20180717 {
     Usage?: number;
   }
 
+  /** AIGC生文明细 */
+  interface AigcTextDetail {
+    /** 每页条数 */
+    PageSize?: number;
+    /** 上一页响应中返回的 scroll_token,用于翻下一页 */
+    ScrollToken?: string;
+    /** 生文详细数据 */
+    Data?: AigcTextDetailData[];
+  }
+
+  /** Aigc生文明细数据 */
+  interface AigcTextDetailData {
+    /** 请求开始时间(RFC3339) */
+    Timestamp?: string;
+    /** 网关层请求 ID */
+    ReqId?: string;
+    /** 后端模型返回的对话 ID */
+    ChatId?: string;
+    /** 返回给客户端的 HTTP 状态码 */
+    StatusCode?: number;
+    /** 模型名 */
+    Model?: string;
+    /** 应用ID */
+    SubAppId?: number;
+    /** 脱敏后的 api_key:前 8 位 + ****(长度 ≤ 8 时原样返回) */
+    ApiKey?: string;
+    /** 是否流式返回 */
+    Stream?: boolean;
+    /** 输入 token 数 */
+    InputTokens?: number;
+    /** 输出 token 数 */
+    OutputTokens?: number;
+    /** 命中 prompt 缓存的 token 数 */
+    CacheInputTokens?: number;
+    /** 总 token 数 */
+    TotalTokens?: number;
+    /** 生成阶段的tokens/秒 */
+    TPS?: number;
+    /** 首字延迟(Time To First Token)单位：秒 */
+    TTFT?: number;
+    /** 端到端总耗时单位：秒 */
+    Total?: number;
+    /** 入口协议:completions / responses / anthropic */
+    ApiType?: string;
+  }
+
   /** AIGC 统计数据 */
   interface AigcUsageDataItem {
     /** AIGC规格。取值有：Qwen2.0Hunyuan3.0_1KHunyuan3.0_2KHunyuan3.0_4KMingmou1.0_1KMingmou1.0_2KMingmou1.0_4KViduQ2_T2i_1080PViduQ2_T2i_2KViduQ2_T2i_4KViduQ2_I2i_1080PViduQ2_I2i_2KViduQ2_I2i_4KViduQ2_Refer2i_1080PViduQ2_Refer2i_2KViduQ2_Refer2i_4KKling2.1_T2i_1K2KKling2.1_T2i_4KKling2.1_Refer2i_1KKling2.1_Refer2i_2KKling2.1_Refer2i_4KVeo3.1StandardVeo3.1FastKling2.0&amp;2.1std_720PKling2.0&amp;2.1pro_1080PKling2.5pro_720PKling2.5pro_1080PKlingO1_720PKlingO1_1080PKlingO1_NoVideo_720PKlingO1_NoVideo_1080PKling2.6Kling2.6SoundKling2.6MotionControl_720PKling2.6MotionControl_1080PKling3.0_720PKling3.0Sound_720PKling3.0CustomVoice_720PKling3.0_1080PKling3.0Sound_1080PKling3.0CustomVoice_1080PKling3.0CustomVoice_2KKling3.0CustomVoice_4KKling3.0MotionControl_720PKling3.0MotionControl_1080PKling3.0MotionControl_2KKling3.0MotionControl_4KKling_Avatar_I2v_720PKling_Avatar_I2v_1080PKling_IdentifyfaceHailuo02&amp;2.3_768PHailuo02&amp;2.3_1080PHailuo2.3fast_768PHailuo2.3fast_1080PViduQ2_720PViduQ2_720P_OffPeakViduQ2_1080PViduQ2_1080P_OffPeakViduQ2_Refer_540PViduQ2_Refer_540P_OffPeakViduQ2_Refer_720PViduQ2_Refer_720P_OffPeakViduQ2_Refer_1080PViduQ2_Refer_1080P_OffPeakViduQ2pro_720PViduQ2pro_720P_OffPeakViduQ2pro_1080PViduQ2pro_1080P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_720PViduQ2pro_Refer_720P_OffPeakViduQ2pro_Refer_1080PViduQ2pro_Refer_1080P_OffPeakViduQ2turbo_720PViduQ2turbo_720P_OffPeakViduQ2turbo_1080PViduQ2turbo_1080P_OffPeakViduQ3_Refer_720PViduQ3_Refer_720P_OffPeakViduQ3_Refer_1080PViduQ3_Refer_1080P_OffPeakViduQ3_Refer_2KViduQ3_Refer_2K_OffPeakViduQ3_Refer_4KViduQ3_Refer_4K_OffPeakViduQ3pro_540PViduQ3pro_540P_OffPeakViduQ3pro_720PViduQ3pro_720P_OffPeakViduQ3pro_1080PViduQ3pro_1080P_OffPeakViduQ3turbo_540PViduQ3turbo_540P_OffPeakViduQ3turbo_720PViduQ3turbo_720P_OffPeakViduQ3turbo_1080PViduQ3turbo_1080P_OffPeakViduQ3turbo_2KViduQ3turbo_2K_OffPeakViduQ3turbo_4KViduQ3turbo_4K_OffPeakVidu_TemplateEffectHunyuan1.5_720PHunyuan1.5_1080PMingmou1.0_720PMingmou1.0_1080PImageProductImageImageChangeClothesVideoProductShowcaseImageOutPaintingFaceInfoCustomVoiceSubjectunknown */
@@ -10246,7 +10292,7 @@ declare namespace V20180717 {
     StartTime: string;
     /** 结束日期，需大于等于起始日期。使用 ISO 日期格式。 */
     EndTime: string;
-    /** AIGC类型。枚举值：Video： 视频Image： 图片Text： 文本Audio： 音频SceneAigcVideo： 场景化视频处理SceneAigcImage： 场景化图片处理SceneAigcTime： 场景化处理次数 */
+    /** AIGC类型。枚举值：Video： 视频Image： 图片Text： 文本Audio： 音频SceneAigcVideo： 场景化视频处理SceneAigcImage： 场景化图片处理SceneAigcTime： 场景化处理次数TextDetail： 文本详细记录 */
     AigcType: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -10254,11 +10300,19 @@ declare namespace V20180717 {
     APIKey?: string;
     /** API Key */
     APIKeys?: string[];
+    /** 查询游标 */
+    ScrollToken?: string;
+    /** 每页大小，最大 200，超出会被截断为 200 */
+    PageSize?: number;
+    /** 生文RequestId，当AigcType为TextDetail时有效。 */
+    ReqId?: string;
   }
 
   interface DescribeAigcUsageDataResponse {
     /** AIGC统计数据。 */
     AigcUsageDataSet?: AigcUsageDataItem[];
+    /** 生文详细日志 */
+    AigcTextDetails?: AigcTextDetail | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }

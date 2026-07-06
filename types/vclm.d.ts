@@ -192,36 +192,10 @@ declare interface Trajectory {
   Y?: number;
 }
 
-/** 视频编辑参数 */
-declare interface VideoEditParam {
-  /** 魔法词，针对特定场景生效。不同场景传不同的值。默认不传。- 换人场景：1 */
-  Magic?: string;
-}
-
 /** 生成视频时所引用的音色 */
 declare interface Voice {
   /** 音色id */
   VoiceId?: string;
-}
-
-declare interface CheckAnimateImageJobRequest {
-  /** 动作模板ID。 */
-  TemplateId: string;
-  /** 图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
-  ImageUrl?: string;
-  /** 图片base64数据。图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
-  ImageBase64?: string;
-  /** 是否对输入图采用加强检测方案。默认不加强检测（false），仅对输入图做必要的基础检测。开启加强检测（true）有助于提升效果稳定性，将根据选择的动作模板提取建议的人体关键点，并判断输入图中是否包含这些人体关键点。加强检测仅对人像输入图生效，对非人输入图不生效。 */
-  EnableBodyJoins?: boolean;
-  /** 是否开启人脸检测。默认开启人脸检测（true），拦截主体为人像但无人脸、人脸不完整或被遮挡的输入图。可选关闭人脸检测（false）。 */
-  EnableFace?: boolean;
-}
-
-declare interface CheckAnimateImageJobResponse {
-  /** 输入图是否通过校验。 */
-  CheckPass?: boolean;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
 }
 
 declare interface CreateAigcElementRequest {
@@ -308,24 +282,6 @@ declare interface DescribeAigcElementResponse {
   RequestId?: string;
 }
 
-declare interface DescribeAigcVideoJobRequest {
-  /** 任务ID。示例值：1194931538865782784 */
-  JobId?: string;
-}
-
-declare interface DescribeAigcVideoJobResponse {
-  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功示例值：RUN */
-  Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。示例值：FailedOperation.DriverFailed */
-  ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。示例值：驱动失败 */
-  ErrorMessage?: string;
-  /** 结果视频 URL。有效期 24 小时。示例值：https://console.cloud.tencent.com/result.mp4 */
-  ResultUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeHumanActorJobRequest {
   /** 任务ID。 */
   JobId: string;
@@ -358,26 +314,6 @@ declare interface DescribeHunyuanToVideoJobResponse {
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeImageAnimateJobRequest {
-  /** 任务ID。 */
-  JobId?: string;
-}
-
-declare interface DescribeImageAnimateJobResponse {
-  /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
-  Status?: string;
-  /** 错误码。 */
-  ErrorCode?: string;
-  /** 错误信息。 */
-  ErrorMessage?: string;
-  /** 结果视频URL。有效期 24 小时。 */
-  ResultVideoUrl?: string;
-  /** 掩码视频链接 */
-  MaskVideoUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -588,24 +524,6 @@ declare interface DescribeTextToVideoViduJobResponse {
   RequestId?: string;
 }
 
-declare interface DescribeVideoEditJobRequest {
-  /** 任务ID。 */
-  JobId: string;
-}
-
-declare interface DescribeVideoEditJobResponse {
-  /** 任务状态。 WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
-  Status?: string;
-  /** 结果视频URL。有效期 24 小时。 */
-  ResultVideoUrl?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
-  ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
-  ErrorMessage?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeVideoEditKlingJobRequest {
   /** 任务ID */
   JobId?: string;
@@ -676,64 +594,6 @@ declare interface DescribeVideoFaceFusionJobResponse {
   RequestId?: string;
 }
 
-declare interface DescribeVideoStylizationJobRequest {
-  /** 任务ID */
-  JobId: string;
-}
-
-declare interface DescribeVideoStylizationJobResponse {
-  /** 任务ID。 */
-  JobId?: string;
-  /** 任务状态码。取值说明：JobInit: "初始化中"；JobModerationFailed: "审核失败"；JobRunning: "处理中"；JobFailed: "处理失败"；JobSuccess: "处理完成"。 */
-  StatusCode?: string;
-  /** 任务状态描述。取值说明：JobInit: "初始化中"；JobModerationFailed: "审核失败"；JobRunning: "处理中"；JobFailed: "处理失败"；JobSuccess: "处理完成"。 */
-  StatusMsg?: string;
-  /** 处理结果视频Url。URL有效期为24小时。 */
-  ResultVideoUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeVideoVoiceJobRequest {
-  /** 任务ID。 */
-  JobId?: string;
-}
-
-declare interface DescribeVideoVoiceJobResponse {
-  /** 任务状态。 WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
-  Status?: string;
-  /** 结果视频URL。有效期 24 小时。 */
-  ResultVideoUrl?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
-  ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
-  ErrorMessage?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface SubmitAigcVideoJobRequest {
-  /** 模型名称。枚举值：● Vidu；● Kling：可灵；● HY：混元；● YT：优图；示例值：Vidu */
-  Vendor: string;
-  /** 模型版本。枚举值：● 当Vendor为Vidu时，可选值[q2, q2-pro, q2-turbo, q3-pro, q3-turbo]● 当Vendor为Kling时，可选值[v1.6, v2.0, v2.1, v2.5, v2.6]● 当Vendor为HY时，默认值：[v1.5]● 当Vendor为YT时，默认值：[v2.0] */
-  Model: string;
-  /** 模型参数Json-Format字符串 模型参数列表 */
-  ModelParam?: string;
-  /** 正向文本提示词。不能超过2000个字符示例值：一只小猫在草地奔跑 */
-  Prompt?: string;
-  /** 为生成结果图添加显式水印标识的开关，默认为1。1：添加。0：不添加。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。示例值：1 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-}
-
-declare interface SubmitAigcVideoJobResponse {
-  /** 任务ID。 */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SubmitHumanActorJobRequest {
   /** 文本提示词，不能超过5000字符。提示词支持全局和局部控制：- 全局控制：正常输入提示词即可- 局部控制：可用双井号进行特定时间的提示词约束，例如： "画面中的人物正在对着镜头讲话，偶尔做些手势匹配说话的内容。镜头保持固定。#3"（意思是第三秒的时候让人物做出左方引导手势） -- 局部控制时间建议整数，最大可读小数点后两位。 */
   Prompt: string;
@@ -775,34 +635,6 @@ declare interface SubmitHunyuanToVideoJobRequest {
 
 declare interface SubmitHunyuanToVideoJobResponse {
   /** 任务ID */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface SubmitImageAnimateJobRequest {
-  /** 图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
-  ImageUrl?: string;
-  /** 图片base64数据。图片格式：支持PNG、JPG、JPEG、BMP、WEBP格式；图片分辨率：长边分辨率范围【192，4096】；图片大小：不超过10M；图片宽高比：【宽：高】数值在 1:2 到 1:1.2 范围内 */
-  ImageBase64?: string;
-  /** 动作模板ID。取值说明：ke3 科目三；tuziwu 兔子舞；huajiangwu 划桨舞。 */
-  TemplateId?: string;
-  /** 结果视频是否保留模板音频。默认为true */
-  EnableAudio?: boolean;
-  /** 是否对输入图采用加强检测方案。默认不加强检测（false），仅对输入图做必要的基础检测。开启加强检测（true）有助于提升效果稳定性，将根据选择的动作模板提取建议的人体关键点，并判断输入图中是否包含这些人体关键点。加强检测仅对人像输入图生效，对非人输入图不生效。 */
-  EnableBodyJoins?: boolean;
-  /** 是否对结果视频背景进行分割，默认值为false。true：分割结果视频，结果视频（ResultVideoUrl）将为去除背景的绿幕视频，并返回掩码视频（MaskVideoUrl）；false：不分割结果视频，结果视频（ResultVideoUrl）为带背景的视频，掩码视频（MaskVideoUrl）为空字符串。 */
-  EnableSegment?: boolean;
-  /** 为生成视频添加标识的开关，默认为0。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-  /** 是否开启人脸检测。默认开启人脸检测（true），拦截主体为人像但无人脸、人脸不完整或被遮挡的输入图。可选关闭人脸检测（false）。 */
-  EnableFace?: boolean;
-}
-
-declare interface SubmitImageAnimateJobResponse {
-  /** 图片跳舞任务ID。 */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1142,30 +974,6 @@ declare interface SubmitTextToVideoViduJobResponse {
   RequestId?: string;
 }
 
-declare interface SubmitVideoEditJobRequest {
-  /** 参考视频URL。默认为待编辑视频。视频格式：支持MP4视频时长：输入视频时长≤10秒视频大小：不超过200M视频文件：输入的视频帧率及分辨率不做限制（建议输入16：9或9：16的视频；分辨率建议在2160px内，帧率建议在60fps内）；输出视频是帧率会≥16fps，分辨率为720p */
-  VideoUrl: string;
-  /** 视频内容的描述，中文正向提示词。支持视频内容增加、删除、修改等能力最多支持200个 utf-8 字符（首尾空格不计入字符数）不传prompt的时候，Images.N参考图列表必须要传图，且传的图片是经过图片编辑之后的结果图 */
-  Prompt?: string;
-  /** 参考图列表。用于对视频内容做风格迁移、内容替换、内容删减、内容增加做参考。支持传入图片Base64编码或图片URL图片格式：支持jpg，png，jpeg，webp，bmp，tiff 格式图片文件：大小不能超过10MB（base64后）。单边分辨率不超过5000px，不小于50px，图片长宽限制1:4 ~ 4:1。示例值：[{ &quot;Url&quot;: &quot;https://console.cloud.tencent.com/cos/image.png&quot;}] */
-  Images?: Image[];
-  /** 图片base64或者图片urlBase64 和 Url 必须提供一个，如果都提供以Url为准。上传图url大小不超过 8M支持jpg，png，jpeg，webp，bmp，tiff 格式单边分辨率不超过5000，不小于50，长宽限制1:4 ~ 4:1 */
-  Image?: Image;
-  /** 扩展字段。 */
-  VideoEditParam?: VideoEditParam;
-  /** 为生成视频添加标识的开关，默认为1。传0 需前往 控制台 申请开启显式标识自主完成后方可生效。1：添加标识；0：不添加标识；其他数值：默认按1处理。建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成视频的右下角添加“ AI 生成”或“视频由 AI 生成”字样，如需替换为其他的标识图片，需前往 控制台 申请开启显式标识自主完成。 */
-  LogoParam?: LogoParam;
-}
-
-declare interface SubmitVideoEditJobResponse {
-  /** 任务ID。 */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SubmitVideoEditKlingJobRequest {
   /** 文本提示词，可包含正向描述和负向描述可将提示词模板化来满足不同的视频生成需求不能超过2500个字 */
   Prompt?: string;
@@ -1258,61 +1066,19 @@ declare interface SubmitVideoFaceFusionJobResponse {
   RequestId?: string;
 }
 
-declare interface SubmitVideoStylizationJobRequest {
-  /** 风格ID。取值说明：2d_anime：2D动漫；3d_cartoon：3D卡通；3d_china：3D国潮；pixel_art：像素风。 */
-  StyleId: string;
-  /** 输入视频URL。视频要求：- 视频格式：mp4、mov；- 视频时长：1～60秒；- 视频分辨率：540P~2056P，即长宽像素数均在540px～2056px范围内；- 视频大小：不超过200M；- 视频FPS：15～60fps。 */
-  VideoUrl: string;
-  /** 风格化强度。取值说明：low：风格化强度弱；medium：风格化强度中等；high：风格化强度强。默认值为medium。 */
-  StyleStrength?: string;
-}
-
-declare interface SubmitVideoStylizationJobResponse {
-  /** 任务ID。任务有效期为48小时。 */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface SubmitVideoVoiceJobRequest {
-  /** 输入视频的Url 上传视频时长限制：1-15s 视频格式：MP4，MOV 视频大小：不超过1 GB URL地址中不能包含中文字符。 */
-  VideoUrl?: string;
-  /** 描述音效内容的正向提示词。输入上限50个字符。 */
-  Prompt?: string;
-  /** 音效内容的原始负向提示词。输入上限50个字符。 */
-  NegativePrompt?: string;
-  /** 为生成视频添加标识的开关，默认为1。 1：添加标识。 0：不添加标识。 其他数值：默认按1处理。 建议您使用显著标识来提示，该视频是 AI 生成的视频。 */
-  LogoAdd?: number;
-  /** 标识内容设置。 默认在生成视频的右下角添加“视频由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-}
-
-declare interface SubmitVideoVoiceJobResponse {
-  /** 任务ID。 */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Vclm 腾讯混元生视频} */
 declare interface Vclm {
   (): Versions;
-  /** 校验图片跳舞输入图 {@link CheckAnimateImageJobRequest} {@link CheckAnimateImageJobResponse} */
-  CheckAnimateImageJob(data: CheckAnimateImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<CheckAnimateImageJobResponse>;
   /** 创建主体 {@link CreateAigcElementRequest} {@link CreateAigcElementResponse} */
   CreateAigcElement(data: CreateAigcElementRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcElementResponse>;
   /** 删除主体库 {@link DeleteAigcElementRequest} {@link DeleteAigcElementResponse} */
   DeleteAigcElement(data?: DeleteAigcElementRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAigcElementResponse>;
   /** 查询主体 {@link DescribeAigcElementRequest} {@link DescribeAigcElementResponse} */
   DescribeAigcElement(data?: DescribeAigcElementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcElementResponse>;
-  /** 查询生视频任务 {@link DescribeAigcVideoJobRequest} {@link DescribeAigcVideoJobResponse} */
-  DescribeAigcVideoJob(data?: DescribeAigcVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcVideoJobResponse>;
   /** 查询人像驱动任务 {@link DescribeHumanActorJobRequest} {@link DescribeHumanActorJobResponse} */
   DescribeHumanActorJob(data: DescribeHumanActorJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHumanActorJobResponse>;
   /** 查询混元生视频任务 {@link DescribeHunyuanToVideoJobRequest} {@link DescribeHunyuanToVideoJobResponse} */
   DescribeHunyuanToVideoJob(data: DescribeHunyuanToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanToVideoJobResponse>;
-  /** 查询图片跳舞任务 {@link DescribeImageAnimateJobRequest} {@link DescribeImageAnimateJobResponse} */
-  DescribeImageAnimateJob(data?: DescribeImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAnimateJobResponse>;
   /** 查询图生视频通用能力任务 {@link DescribeImageToVideoGeneralJobRequest} {@link DescribeImageToVideoGeneralJobResponse} */
   DescribeImageToVideoGeneralJob(data: DescribeImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageToVideoGeneralJobResponse>;
   /** 查询Kling图生视频任务 {@link DescribeImageToVideoJobRequest} {@link DescribeImageToVideoJobResponse} */
@@ -1331,26 +1097,16 @@ declare interface Vclm {
   DescribeTextToVideoJob(data?: DescribeTextToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoJobResponse>;
   /** 查询Vidu文生视频任务 {@link DescribeTextToVideoViduJobRequest} {@link DescribeTextToVideoViduJobResponse} */
   DescribeTextToVideoViduJob(data: DescribeTextToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTextToVideoViduJobResponse>;
-  /** 查询视频编辑任务 {@link DescribeVideoEditJobRequest} {@link DescribeVideoEditJobResponse} */
-  DescribeVideoEditJob(data: DescribeVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditJobResponse>;
   /** 查询Kling-Omni-Video任务 {@link DescribeVideoEditKlingJobRequest} {@link DescribeVideoEditKlingJobResponse} */
   DescribeVideoEditKlingJob(data?: DescribeVideoEditKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoEditKlingJobResponse>;
   /** 查询视频延长任务 {@link DescribeVideoExtendKlingJobRequest} {@link DescribeVideoExtendKlingJobResponse} */
   DescribeVideoExtendKlingJob(data?: DescribeVideoExtendKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoExtendKlingJobResponse>;
   /** 查询人脸融合大模型任务 {@link DescribeVideoFaceFusionJobRequest} {@link DescribeVideoFaceFusionJobResponse} */
   DescribeVideoFaceFusionJob(data?: DescribeVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoFaceFusionJobResponse>;
-  /** 查询视频风格化任务（下线中） {@link DescribeVideoStylizationJobRequest} {@link DescribeVideoStylizationJobResponse} */
-  DescribeVideoStylizationJob(data: DescribeVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoStylizationJobResponse>;
-  /** 查询视频配音效任务 {@link DescribeVideoVoiceJobRequest} {@link DescribeVideoVoiceJobResponse} */
-  DescribeVideoVoiceJob(data?: DescribeVideoVoiceJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoVoiceJobResponse>;
-  /** 提交生视频任务 {@link SubmitAigcVideoJobRequest} {@link SubmitAigcVideoJobResponse} */
-  SubmitAigcVideoJob(data: SubmitAigcVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitAigcVideoJobResponse>;
   /** 提交人像驱动任务 {@link SubmitHumanActorJobRequest} {@link SubmitHumanActorJobResponse} */
   SubmitHumanActorJob(data: SubmitHumanActorJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHumanActorJobResponse>;
   /** 提交混元生视频任务 {@link SubmitHunyuanToVideoJobRequest} {@link SubmitHunyuanToVideoJobResponse} */
   SubmitHunyuanToVideoJob(data: SubmitHunyuanToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanToVideoJobResponse>;
-  /** 提交图片跳舞任务 {@link SubmitImageAnimateJobRequest} {@link SubmitImageAnimateJobResponse} */
-  SubmitImageAnimateJob(data?: SubmitImageAnimateJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageAnimateJobResponse>;
   /** 提交图生视频通用能力任务 {@link SubmitImageToVideoGeneralJobRequest} {@link SubmitImageToVideoGeneralJobResponse} */
   SubmitImageToVideoGeneralJob(data: SubmitImageToVideoGeneralJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitImageToVideoGeneralJobResponse>;
   /** 提交Kling图生视频任务 {@link SubmitImageToVideoJobRequest} {@link SubmitImageToVideoJobResponse} */
@@ -1369,18 +1125,12 @@ declare interface Vclm {
   SubmitTextToVideoJob(data?: SubmitTextToVideoJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToVideoJobResponse>;
   /** 提交Vidu文生视频任务 {@link SubmitTextToVideoViduJobRequest} {@link SubmitTextToVideoViduJobResponse} */
   SubmitTextToVideoViduJob(data: SubmitTextToVideoViduJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToVideoViduJobResponse>;
-  /** 提交视频编辑任务 {@link SubmitVideoEditJobRequest} {@link SubmitVideoEditJobResponse} */
-  SubmitVideoEditJob(data: SubmitVideoEditJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoEditJobResponse>;
   /** 提交Kling-Omni-Video任务 {@link SubmitVideoEditKlingJobRequest} {@link SubmitVideoEditKlingJobResponse} */
   SubmitVideoEditKlingJob(data?: SubmitVideoEditKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoEditKlingJobResponse>;
   /** 提交视频延长任务接口 {@link SubmitVideoExtendKlingJobRequest} {@link SubmitVideoExtendKlingJobResponse} */
   SubmitVideoExtendKlingJob(data: SubmitVideoExtendKlingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoExtendKlingJobResponse>;
   /** 提交人脸融合大模型任务 {@link SubmitVideoFaceFusionJobRequest} {@link SubmitVideoFaceFusionJobResponse} */
   SubmitVideoFaceFusionJob(data?: SubmitVideoFaceFusionJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoFaceFusionJobResponse>;
-  /** 提交视频风格化任务（下线中） {@link SubmitVideoStylizationJobRequest} {@link SubmitVideoStylizationJobResponse} */
-  SubmitVideoStylizationJob(data: SubmitVideoStylizationJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoStylizationJobResponse>;
-  /** 提交视频配音效任务 {@link SubmitVideoVoiceJobRequest} {@link SubmitVideoVoiceJobResponse} */
-  SubmitVideoVoiceJob(data?: SubmitVideoVoiceJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitVideoVoiceJobResponse>;
 }
 
 export declare type Versions = ["2024-05-23"];

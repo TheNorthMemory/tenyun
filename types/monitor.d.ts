@@ -3427,7 +3427,7 @@ declare namespace V20180724 {
     ShieldPolicyId?: string;
     /** 需要屏蔽的告警等级，取值范围Warn,Remind,Serious */
     ShieldAlarmLevel?: string[];
-    /** 屏蔽类型，为OBJNAME是老版本实例名屏蔽，为POLICY是新版本维度匹配 */
+    /** 屏蔽类型，为OBJNAME是实例屏蔽，为POLICY是策略屏蔽 */
     VersionTag?: string;
     /** 屏蔽规则的描述 */
     Description?: string;
@@ -6816,7 +6816,7 @@ declare interface Monitor {
   DescribePolicyGroupList(data: V20180724.DescribePolicyGroupListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePolicyGroupListResponse>;
   /** 查询策略组在每个地域下面绑定的对象数统计 {@link V20180724.DescribePolicyObjectCountRequest} {@link V20180724.DescribePolicyObjectCountResponse} */
   DescribePolicyObjectCount(data: V20180724.DescribePolicyObjectCountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribePolicyObjectCountResponse>;
-  /** 获取产品事件列表 {@link V20180724.DescribeProductEventListRequest} {@link V20180724.DescribeProductEventListResponse} */
+  /** @deprecated 获取产品事件列表 {@link V20180724.DescribeProductEventListRequest} {@link V20180724.DescribeProductEventListResponse} */
   DescribeProductEventList(data: V20180724.DescribeProductEventListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeProductEventListResponse>;
   /** 查询云产品列表 {@link V20180724.DescribeProductListRequest} {@link V20180724.DescribeProductListResponse} */
   DescribeProductList(data: V20180724.DescribeProductListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeProductListResponse>;

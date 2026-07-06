@@ -6913,24 +6913,24 @@ declare interface DescribeTimingL4DataResponse {
 declare interface DescribeTimingL7AnalysisDataRequest {
   /** 开始时间。 */
   StartTime: string;
-  /** 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。 */
+  /** 结束时间。查询时间范围（EndTime - StartTime）需小于等于 31 天。 */
   EndTime: string;
-  /** 指标列表，取值有:l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；l7Flow_inFlux: L7 客户端请求流量，单位：Byte；l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；l7Flow_request: L7 访问请求数，单位：次； l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms； l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms。 */
+  /** 指标列表，取值有:l7Flow_outFlux: L7 EdgeOne 响应流量，单位：Byte；l7Flow_inFlux: L7 客户端请求流量，单位：Byte；l7Flow_flux: L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte；l7Flow_outBandwidth: L7 EdgeOne 响应带宽，单位：bps；l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps；l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps；l7Flow_request: L7 访问请求数，单位：次； l7Flow_avgResponseTime: L7 访问平均响应耗时，单位：ms； l7Flow_avgFirstByteResponseTime: L7 访问平均首字节响应耗时，单位：ms；l7Flow_requestRate: L7 访问请求速率，单位：qps。 */
   MetricNames: string[];
-  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
+  /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：【腾讯云 EdgeOne】云 API 变更通知。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 * 代替，查询账号级别数据需具备本接口全部站点资源权限。 */
   ZoneIds?: string[];
-  /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
+  /** 查询时间粒度。枚举值：min： 1分钟5min： 5分钟hour： 1小时day： 1天不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
   Interval?: string;
-  /** 筛选数据时使用的过滤条件，取值参考 [指标分析筛选条件说明](https://cloud.tencent.com/document/product/1552/98219) 中针对 L7 访问流量、带宽、请求数的可用筛选项。如需限定站点或内容标识符，请在 `ZoneIds.N` 参数中另行传入对应的值。 */
+  /** 筛选数据时使用的过滤条件，取值参考 指标分析筛选条件说明 中针对 L7 访问流量、带宽、请求数的可用筛选项。如需限定站点或内容标识符，请在 ZoneIds.N 参数中另行传入对应的值。 */
   Filters?: QueryCondition[];
-  /** 数据归属地区。该参数已废弃。请在 `Filters.country` 中按客户端地域过滤数据。 */
+  /** 数据归属地区。该参数已废弃。请在 Filters.country 中按客户端地域过滤数据。 */
   Area?: string;
 }
 
 declare interface DescribeTimingL7AnalysisDataResponse {
   /** 查询结果的总条数。 */
   TotalCount?: number;
-  /** 时序流量数据列表。 */
+  /** 七层时序流量数据列表。对于不同的查询指标，根据指标值类型的不同，会从不同的参数返回时序数据。目前存在的值类型有以下两种： Integer：Integer 值类型的指标将从 Data.N.TypeValue 返回对应时序数据。对应的查询指标 MetricName 有： l7Flow_outFlux：L7 EdgeOne 响应流量，单位：Byte； l7Flow_inFlux：L7 客户端请求流量，单位：Byte； l7Flow_flux：L7 访问总流量（EdgeOne 响应+客户端请求），单位：Byte； l7Flow_outBandwidth：L7 EdgeOne 响应带宽，单位：bps； l7Flow_inBandwidth：L7 客户端请求带宽，单位：bps； l7Flow_bandwidth：L7 访问总带宽（EdgeOne 响应+客户端请求），单位：bps； l7Flow_request：L7 访问请求数，单位：次； l7Flow_avgResponseTime：L7 访问平均响应耗时，单位：ms； l7Flow_avgFirstByteResponseTime：L7 访问平均首字节响应耗时，单位：ms。 Float：Float 值类型的指标将从 Data.N.FloatTypeValue 返回对应时序数据。对应的查询指标 MetricName 有： l7Flow_requestRate：L7 访问请求速率，单位：qps。 */
   Data?: TimingDataRecord[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

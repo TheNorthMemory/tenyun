@@ -7664,6 +7664,8 @@ declare namespace V20180525 {
     ClusterId: string;
     /** 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除 */
     DeleteLogSetAndTopic?: boolean;
+    /** 集群类型 tke/eks默认值：tke */
+    ClusterType?: string;
   }
 
   interface DisableEventPersistenceResponse {
@@ -7714,6 +7716,8 @@ declare namespace V20180525 {
     TopicId?: string;
     /** topic所在region，默认为集群当前region */
     TopicRegion?: string;
+    /** 集群类型 tke/eks默认值：tke */
+    ClusterType?: string;
   }
 
   interface EnableClusterAuditResponse {
@@ -7782,6 +7786,8 @@ declare namespace V20180525 {
     TopicId?: string;
     /** topic所在地域，默认为集群所在地域 */
     TopicRegion?: string;
+    /** 集群类型 tke/eks默认值：tke */
+    ClusterType?: string;
   }
 
   interface EnableEventPersistenceResponse {
@@ -8601,6 +8607,14 @@ declare namespace V20180525 {
     RequestId?: string;
   }
 
+  interface RotateClusterTokenRequest {
+  }
+
+  interface RotateClusterTokenResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface RunPrometheusInstanceRequest {
     /** 实例ID */
     InstanceId: string;
@@ -8732,6 +8746,8 @@ declare namespace V20180525 {
   interface UninstallLogAgentRequest {
     /** 集群ID */
     ClusterId: string;
+    /** 集群类型tke/eks默认值：tke */
+    ClusterType?: string;
   }
 
   interface UninstallLogAgentResponse {
@@ -9533,6 +9549,8 @@ declare interface Tke {
   RestartEKSContainerInstances(data: V20180525.RestartEKSContainerInstancesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.RestartEKSContainerInstancesResponse>;
   /** 集群回滚应用版本 {@link V20180525.RollbackClusterReleaseRequest} {@link V20180525.RollbackClusterReleaseResponse} */
   RollbackClusterRelease(data: V20180525.RollbackClusterReleaseRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.RollbackClusterReleaseResponse>;
+  /** 轮转集群token {@link V20180525.RotateClusterTokenRequest} {@link V20180525.RotateClusterTokenResponse} */
+  RotateClusterToken(data: V20180525.RotateClusterTokenRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.RotateClusterTokenResponse>;
   /** 初始化TMP实例 {@link V20180525.RunPrometheusInstanceRequest} {@link V20180525.RunPrometheusInstanceResponse} */
   RunPrometheusInstance(data: V20180525.RunPrometheusInstanceRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.RunPrometheusInstanceResponse>;
   /** 缩容独立集群master节点 {@link V20180525.ScaleInClusterMasterRequest} {@link V20180525.ScaleInClusterMasterResponse} */

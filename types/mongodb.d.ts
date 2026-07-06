@@ -2331,16 +2331,16 @@ declare interface ModifyInstanceAzResponse {
 }
 
 declare interface ModifyInstanceParamsRequest {
-  /** 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 指定实例 ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 指定需修改的参数名及值。当前所支持的参数名及对应取值范围，请通过 [DescribeInstanceParams ](https://cloud.tencent.com/document/product/240/65903)获取。 */
+  /** 指定需修改的参数名及值。当前所支持的参数名及对应取值范围，请通过 DescribeInstanceParams 获取。 */
   InstanceParams: ModifyMongoDBParamType[];
-  /** 操作类型，包括：- IMMEDIATELY：立即调整。- DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。 */
+  /** 操作类型，包括：IMMEDIATELY：立即调整。DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。 */
   ModifyType?: string;
 }
 
 declare interface ModifyInstanceParamsResponse {
-  /** 修改参数配置是否生效。- true：参数修改后的值已生效。- false：执行失败。 */
+  /** 修改参数配置是否生效。true：参数修改后的值已生效。false：执行失败。 */
   Changed?: boolean;
   /** 该参数暂时无意义(兼容前端保留)。 */
   TaskId?: number;

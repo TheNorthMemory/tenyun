@@ -1459,6 +1459,10 @@ declare interface AllocateEnvRequest {
   AllocateId: string;
   /** 客户平台的应用标识，如果没有则不传 */
   ExternalAppId?: string;
+  /** 自定义标签参数格式：逗号分隔的 key=value 对，key/value 仅允许字母、数字、下划线。k1=v1,k2=v2 */
+  ExternalTag?: string;
+  /** 是否需要云函数默认值：false */
+  RequireFunction?: boolean;
 }
 
 declare interface AllocateEnvResponse {

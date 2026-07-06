@@ -427,6 +427,12 @@ declare interface CreateMemoryPlusSpaceRequest {
   ResourceTags?: ResourceTag[];
   /** 单次批量创建 Memory 实例的数量。取值范围为 1-50。 */
   GoodsNum?: number;
+  /** 计费模式。枚举值：0： 按量计费。1： 包年包月。 */
+  PayMode?: number;
+  /** 包年包月周期 */
+  PayPeriod?: number;
+  /** 是否自动续费 */
+  AutoRenew?: number;
 }
 
 declare interface CreateMemoryPlusSpaceResponse {
@@ -652,6 +658,8 @@ declare interface DescribeMemoryPlusSpaceResponse {
   Status?: number;
   /** Memory 实例计费模式。-1：免费体验。0：包年包月。1：按量计费。 */
   PayMode?: number;
+  /** 是否自动续费枚举值：0： 不自动续费1： 自动续费 */
+  AutoRenew?: number;
   /** Memory 版本信息：v1。 */
   Version?: string;
   /** Memory 当前已写入的记忆条数。 */
@@ -825,6 +833,8 @@ declare interface RecoverAgentInstanceResponse {
 declare interface RecoverMemoryPlusSpaceRequest {
   /** 指定需要恢复的 Memory 实例 ID 列表。 */
   SpaceIds: string[];
+  /** 包年包月续费周期单位：月 */
+  PayPeriod?: number;
 }
 
 declare interface RecoverMemoryPlusSpaceResponse {

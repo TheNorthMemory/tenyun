@@ -3677,7 +3677,7 @@ declare interface CreateRecordingRuleYamlTaskResponse {
 }
 
 declare interface CreateScheduledSqlRequest {
-  /** 源日志主题ID- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 源日志主题ID- 通过获取日志主题列表获取日志主题Id。 */
   SrcTopicId: string;
   /** 任务名称，0~255字符 */
   Name: string;
@@ -3697,12 +3697,16 @@ declare interface CreateScheduledSqlRequest {
   ProcessTimeWindow: string;
   /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay: number;
-  /** 源topicId的地域信息,支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
+  /** 源topicId的地域信息,支持地域见 地域列表 文档 */
   SrcTopicRegion: string;
   /** 调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms */
   ProcessEndTime?: number;
   /** 查询语法规则。 默认值为0。0：Lucene语法，1：CQL语法 */
   SyntaxRule?: number;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+  /** 全文检索标记。1：关闭，2：打开。默认：1 */
+  FullQuery?: number;
 }
 
 declare interface CreateScheduledSqlResponse {
@@ -6219,9 +6223,9 @@ declare interface ModifyRecordingRuleYamlTaskResponse {
 }
 
 declare interface ModifyScheduledSqlRequest {
-  /** 任务ID，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
+  /** 任务ID，通过获取定时SQL分析任务列表获取 */
   TaskId: string;
-  /** 源日志主题，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
+  /** 源日志主题，通过获取定时SQL分析任务列表获取 */
   SrcTopicId?: string;
   /** 任务启动状态. 1开启, 2关闭 */
   EnableFlag?: number;
@@ -6235,12 +6239,16 @@ declare interface ModifyScheduledSqlRequest {
   ProcessTimeWindow?: string;
   /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay?: number;
-  /** 源topicId的地域信息,支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档 */
+  /** 源topicId的地域信息,支持地域见 地域列表 文档 */
   SrcTopicRegion?: string;
   /** 任务名称，0~255字符 */
   Name?: string;
   /** 语法规则。 默认值为0。 0：Lucene语法，1：CQL语法 */
   SyntaxRule?: number;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
+  /** 全文检索查询标记。1：关闭，2：打开。 */
+  FullQuery?: number;
 }
 
 declare interface ModifyScheduledSqlResponse {

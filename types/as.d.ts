@@ -1824,7 +1824,7 @@ declare interface RollbackInstanceRefreshRequest {
   AutoScalingGroupId: string;
   /** 刷新设置。 */
   RefreshSettings: RefreshSettings;
-  /** 原始刷新活动 ID。可以通过调用接口 [DescribeRefreshActivities](https://cloud.tencent.com/document/api/377/99175) ，取返回信息中的 OriginRefreshActivityId 获取原始刷新活动ID。 */
+  /** 原始刷新活动 ID。可以通过调用接口 DescribeRefreshActivities ，取返回信息中的 OriginRefreshActivityId 获取原始刷新活动ID。 */
   OriginRefreshActivityId: string;
   /** 刷新模式，目前仅支持滚动更新，默认值为 ROLLING_UPDATE_RESET。 */
   RefreshMode?: string;

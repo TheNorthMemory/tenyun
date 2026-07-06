@@ -636,6 +636,8 @@ declare interface ClusterCustomParameters {
 declare interface ClusterInfoItem {
   /** 集群id */
   ClusterId?: string;
+  /** 集群ca证书md5值 */
+  ClusterCAMD5?: string;
   /** 集群名字 */
   ClusterName?: string;
   /** 集群版本 */
@@ -648,7 +650,7 @@ declare interface ClusterInfoItem {
   ClusterNodeNum?: number;
   /** 集群区域 */
   Region?: string;
-  /** 防护状态: 已防护: Defended 未防护: UnDefended部分防护: PartDefened */
+  /** 防护状态:已防护: Defended未防护: UnDefended部分防护: PartDefened */
   DefenderStatus?: string;
   /** 集群状态 */
   ClusterStatus?: string;
@@ -658,7 +660,7 @@ declare interface ClusterInfoItem {
   ClusterCheckMode?: string;
   /** 是否自动定期检测 */
   ClusterAutoCheck?: boolean;
-  /** 防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成"N个节点防御容器为就绪"，其他错误直接展示 */
+  /** 防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成&quot;N个节点防御容器为就绪&quot;，其他错误直接展示 */
   DefenderErrorReason?: string;
   /** 防御容器没有ready状态的节点数量 */
   UnreadyNodeNum?: number;
@@ -8904,6 +8906,8 @@ declare interface DescribePurchaseStateInfoResponse {
   DefendHostCoresCnt?: number;
   /** 试用的专业版核数 */
   TrialCoresCnt?: number;
+  /** 无容器核数 */
+  NoContainerCoresCnt?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

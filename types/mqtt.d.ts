@@ -1645,6 +1645,8 @@ declare interface ModifyHttpAuthenticatorRequest {
   Header?: HeaderItem[];
   /** 请求body */
   Body?: BodyItem[];
+  /** 连接UserProperty作为Header转发，默认false */
+  IncludingUserProperties?: boolean;
 }
 
 declare interface ModifyHttpAuthenticatorResponse {

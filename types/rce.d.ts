@@ -2,6 +2,64 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** IP地理位置信息 */
+declare interface IpLocationInfo {
+  /** IP地址所属国家 */
+  Country?: string;
+  /** IP地址所属省份 */
+  Region?: string;
+  /** IP地址所属城市 */
+  City?: string;
+  /** IP地址所属地区 */
+  District?: string;
+  /** IP地址的经度 */
+  Longitude?: string;
+  /** IP地址的纬度 */
+  Latitude?: string;
+  /** IP地址所属时区 */
+  Timezone?: string;
+  /** IP地址的邮政编码 */
+  ZipCode?: string;
+}
+
+/** IP基础网络信息 */
+declare interface IpNetworkInfo {
+  /** 互联网服务提供商 */
+  ISP?: string;
+  /** 自治系统号 */
+  ASN?: string;
+  /** IP注册组织名称 */
+  Organization?: string;
+  /** 是否保留IP */
+  IsReserved?: boolean;
+  /** 是否网关IP */
+  IsGateway?: boolean;
+  /** 是否任播网络 */
+  IsAnycast?: boolean;
+  /** 是否移动网络 */
+  IsMobile?: boolean;
+  /** 是否动态IP */
+  IsDynamic?: boolean;
+  /** 是否网络出口 */
+  IsEgress?: boolean;
+  /** 是否域名解析 */
+  IsDNS?: boolean;
+  /** 是否教育机构 */
+  IsEducation?: boolean;
+  /** 是否组织机构 */
+  IsInstitution?: boolean;
+  /** 是否企业专线 */
+  IsCompany?: boolean;
+  /** 是否家用宽带 */
+  IsResidence?: boolean;
+  /** 是否云服务 */
+  IsCloudService?: boolean;
+  /** 是否基础设施 */
+  IsInfrastructure?: boolean;
+  /** 是否邮箱服务 */
+  IsMXServer?: boolean;
+}
+
 /** 业务入参 */
 declare interface ManageIPPortraitRiskInput {
   /** 用户公网ip（仅支持IPv4） */
@@ -28,6 +86,10 @@ declare interface ManageIPPortraitRiskValueOutput {
   RiskScore?: number;
   /** 风险类型730001：垃圾邮件，当前IP存在未经用户请求或同意，大量发送的广告、欺诈或推广信息，通常通过邮件、短信或社交消息传播。730002：恶意行为，当前IP存在破坏、窃取、干扰或未授权访问为目的的故意行为。730003：恶意工具，当前IP关联用于实施恶意行为的软件或脚本，如病毒、木马、勒索软件、漏洞利用工具等。730004：匿名IP，通过代理、Tor网络等技术手段隐藏真实来源的IP地址，存在逃避定位或实施攻击风险。730005：开放端口，网络上处于开放状态的服务入口，若配置不当或存在漏洞。730006：养号，当前IP存在通过模拟正常操作（如登录、浏览）维护和提升账号的活跃度与可信度行为。730007：IDC，互联网数据中心，可能被黑客利用来托管恶意服务或发动攻击。730008：晒号，当前IP在公开或地下论坛展示、交易非法获取的各类账号（如游戏、社交、金融账号）的行为。730009：盗号，当前IP存在通过钓鱼、撞库、木马等手段，非法获取他人账号的登录凭证（用户名、密码等）行为。730010：代理，作为中间节点转发网络流量，可用于隐藏真实IP、绕过地域限制。730011：扫描，使用工具自动探测目标网络或系统的开放端口、服务、漏洞等。730012：秒拨，当前IP通过不断重新拨号以快速切换IP地址，常被用于绕过基于IP的频率限制或封禁。730013：爬虫，自动抓取网络信息的脚本或程序。730014：VPN 虚拟专用网络。730015：僵尸网络，当前IP由攻击者通过恶意软件控制的、大规模联网设备（如电脑、IoT设备）集群，可能被用于发动DDoS攻击、发送垃圾邮件等。730016：网络攻击，当前IP存在对计算机系统、网络或数据的任何进攻行为。 */
   RiskType?: number[];
+  /** IP地理位置信息 */
+  IpLocation?: IpLocationInfo;
+  /** IP基础网络信息 */
+  IpNetwork?: IpNetworkInfo;
 }
 
 declare interface ManageIPPortraitRiskRequest {

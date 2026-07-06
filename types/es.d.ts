@@ -1107,6 +1107,8 @@ declare namespace V20180416 {
     TagList?: TagInfo[];
     /** License类型oss：开源版basic：基础版platinum：白金版默认值platinum */
     LicenseType?: string;
+    /** License类型oss：开源版basic：基础版platinum：白金版enterprise：企业版默认值platinum */
+    RealLicenseType?: string | null;
     /** 是否为冷热集群true: 冷热集群false: 非冷热集群 */
     EnableHotWarmMode?: boolean | null;
     /** 温节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
@@ -1213,7 +1215,7 @@ declare namespace V20180416 {
     NetConnectScheme?: string | null;
     /** 置放群组相关参数 */
     DisasterRecoverGroupAffinity?: number | null;
-    /** 子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段 */
+    /** 子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，AI搜索增强版：&quot;sp_es_aisearch&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段 */
     SubProductCode?: string | null;
     /** 存算分离cos用量，单位M */
     CosBucketStorageSize?: number | null;
@@ -1239,6 +1241,12 @@ declare namespace V20180416 {
     MayDestroyPoint?: string;
     /** 延迟销毁的时间单位：天 */
     DelayDestroyInterval?: number;
+    /** 开启异常节点自动替换，0关闭，1开启 */
+    EnableAutoReplace?: number;
+    /** 开启mtls，0关闭，1开启 */
+    OpenMTLS?: number;
+    /** 证书类型 */
+    ServerCertSource?: string;
   }
 
   /** ES集群日志详细信息 */

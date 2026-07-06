@@ -557,17 +557,21 @@ declare interface JobConfig {
 /** 描述作业发生的一个事件 */
 declare interface JobEvent {
   /** 内部定义的事件类型 */
-  Type: string;
+  Type?: string;
   /** 事件类型的说明文字 */
-  Description: string;
+  Description?: string;
   /** 事件发生的 Unix 时间戳（秒） */
-  Timestamp: number;
+  Timestamp?: number;
   /** 事件发生时的运行 ID */
-  RunningOrderId: number | null;
+  RunningOrderId?: number | null;
   /** 事件的一些可选说明 */
-  Message: string | null;
+  Message?: string | null;
   /** 异常事件的排查手册链接 */
-  SolutionLink: string | null;
+  SolutionLink?: string | null;
+  /** 异常事件原因分析 */
+  CauseAnalysis?: string;
+  /** 异常事件处理的参考方案 */
+  Solution?: string;
 }
 
 /** 事件信息 */
@@ -1919,6 +1923,10 @@ declare interface DescribeJobEventsRequest {
   RunningOrderIds?: number[];
   /** 工作空间 SerialId */
   WorkSpaceId?: string;
+  /** 返回条数 */
+  Limit?: number;
+  /** 起始偏移个数 */
+  Offset?: number;
 }
 
 declare interface DescribeJobEventsResponse {

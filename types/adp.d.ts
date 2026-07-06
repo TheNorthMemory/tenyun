@@ -224,6 +224,16 @@ declare interface AgentSpec {
   AdvancedConfig?: AgentAdvancedConfig;
 }
 
+/** Agent摘要信息 */
+declare interface AgentSummary {
+  /** AgentId */
+  AgentId?: string;
+  /** Agent 身份画像 */
+  Profile?: AgentProfile;
+  /** 高级设置;scope=0 时返回 */
+  AdvancedConfig?: AgentAdvancedConfig;
+}
+
 /** 系统参数 */
 declare interface AgentSystemVariable {
   /** 系统参数名 */
@@ -1438,6 +1448,16 @@ declare interface SkillClassification {
   SourceLink: string;
 }
 
+/** skill详情 */
+declare interface SkillDetail {
+  /** 调用情况摘要 */
+  ReferenceSummaryList?: SkillReferenceSummary[];
+  /** Skill 摘要 */
+  SkillSummary?: SkillSummary;
+  /** 版本列表 */
+  VersionList?: SkillVersion[];
+}
+
 /** Skill 异常通知。 */
 declare interface SkillNotice {
   /** 通知级别枚举值:| uint | 描述 || --- | --- || 0 | 占位 || 1 | 成功，字符串面："success" || 2 | 警告，字符串面："warning" || 3 | 错误，字符串面："error" | */
@@ -1468,6 +1488,32 @@ declare interface SkillProfile {
   Name: string;
   /** 更新时间（Unix秒） */
   UpdateTime: string;
+}
+
+/** 同一 SkillRefType 下的引用分组（含总数 + 引用详情列表）。 total_count 始终以未过滤的原始总量为准；reference_summary_list 受二次鉴权开关影响。 */
+declare interface SkillReferenceGroup {
+  /** 该类型下的引用详情列表 */
+  ReferenceSummaryList?: SkillReferenceSummary[];
+  /** 枚举项枚举值描述SKILL_REF_UNKNOWN0占位SKILL_REF_OPENCLAW1openclawSKILL_REF_AGENT2agentSKILL_REF_CORP_ASSISTANT3企业助手 */
+  ReferenceType?: number;
+  /** 该类型下的引用总数 */
+  TotalCount?: number;
+}
+
+/** 引用摘要（用于详情页展示，对应DB t_skill_reference） */
+declare interface SkillReferenceSummary {
+  /** 关联ID */
+  ReferenceId?: string;
+  /** 关联名称 */
+  ReferenceName?: string;
+  /** 关联类型枚举值:| uint | 描述 || --- | --- || 0 | 占位 || 1 | ClawPro || 2 | agent | */
+  ReferenceType?: number;
+  /** 空间ID */
+  SpaceId?: string;
+  /** 空间名称 */
+  SpaceName?: string;
+  /** Reference实例拥有者 */
+  Owner?: string;
 }
 
 /** SkillShare Skill 企业共享信息。 */
@@ -1744,6 +1790,24 @@ declare interface CreateConversationResponse {
   RequestId?: string;
 }
 
+declare interface CreatePluginRequest {
+  /** 插件基础资料 */
+  Profile: PluginProfile;
+  /** 插件类型配置 */
+  Config: PluginConfig;
+  /** 当前空间id */
+  SpaceId: string;
+  /** 插件的工具列表 */
+  ToolList?: Tool;
+}
+
+declare interface CreatePluginResponse {
+  /** 插件id */
+  PluginId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateReleaseRequest {
   /** 应用ID */
   AppId: string;
@@ -1762,6 +1826,54 @@ declare interface CreateReleaseResponse {
   NeedApproval?: boolean;
   /** release_id */
   ReleaseId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSkillRequest {
+  /** Skill 创建方式，必填；仅允许枚举值：1： FILE_UPLOAD（文件上传）3： AIGC（AIGC生成） */
+  CreateType: number;
+  /** skill包文件地址（zip）；FILE_UPLOAD / AIGC 均必填 */
+  FileUrl: string;
+  /** 空间ID */
+  SpaceId: string;
+  /** skill展示描述 */
+  DisplayDescription?: string;
+  /** skill展示名称 */
+  DisplayName?: string;
+  /** 图标地址 */
+  IconUrl?: string;
+  /** skill业务唯一标识名（同企业下唯一）；未传时从skill包解析 */
+  Name?: string;
+  /** 版本号 */
+  SkillVersion?: string;
+  /** 版本变更说明 */
+  UpdateDescription?: string;
+}
+
+declare interface CreateSkillResponse {
+  /** 创建成功后的skillID */
+  SkillId?: string;
+  /** 创建成功后的版本ID */
+  VersionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSkillShareRequest {
+  /** 必填，申请备注（弹窗&quot;申请备注&quot;） */
+  ApplyRemark: string;
+  /** 必填，原skill_id */
+  SkillId: string;
+  /** 空间ID，必填 */
+  SpaceId: string;
+  /** 必填，被共享的版本id（必须高于已共享版本） */
+  VersionId: string;
+}
+
+declare interface CreateSkillShareResponse {
+  /** 是否走了审批流（false表示无需审批已直接创建共享任务） */
+  NeedApproval?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1848,6 +1960,20 @@ declare interface CreateWorkspaceCredentialResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAgentRequest {
+  /** 应用Id */
+  AppId: string;
+  /** 待删除AgentId */
+  AgentId: string;
+  /** 协作模式；0-Claw模式；1-Multi-Agent模式 */
+  CollaborationMode?: number;
+}
+
+declare interface DeleteAgentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAppRequest {
   /** app_id */
   AppId: string;
@@ -1874,6 +2000,46 @@ declare interface DeleteConversationRequest {
 }
 
 declare interface DeleteConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePluginRequest {
+  /** 插件id */
+  PluginId: string;
+}
+
+declare interface DeletePluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSkillRequest {
+  /** Skill ID，必填 */
+  SkillId: string;
+  /** 空间ID，必填 */
+  SpaceId: string;
+}
+
+declare interface DeleteSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSkillShareRequest {
+  /** 申请备注，必填（弹窗&quot;申请备注&quot;） */
+  ApplyRemark: string;
+  /** 原 Skill ID，必填（前端无须感知 _shared 后缀） */
+  SkillId: string;
+  /** 空间ID，必填 */
+  SpaceId: string;
+  /** 原版本 ID，必填（与 CreateSkillShare 上架时传的同一 version_id） */
+  VersionId: string;
+}
+
+declare interface DeleteSkillShareResponse {
+  /** 是否走审批流（false 表示无需审批已直接执行下架） */
+  NeedApproval?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1934,6 +2100,28 @@ declare interface DescribeAgentReleasePreviewListResponse {
   ReleaseList?: AgentReleasePreview[];
   /** 总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAgentSummaryListRequest {
+  /** 查询范围；0-单应用查询；1-跨应用查询 */
+  Scope?: number;
+  /** 应用Id，Scope=0 时为目标应用ID（必填）；scope=1 时无需填写 */
+  AppId?: string;
+  /** 过滤条件（name: "SearchWord", "SpaceId", "AgentSource", "AppId"） */
+  FilterList?: Filter[];
+  /** 每页数目 */
+  PageSize?: number;
+  /** 页码 */
+  PageNumber?: number;
+}
+
+declare interface DescribeAgentSummaryListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** Agent摘要信息 */
+  AgentList?: AgentSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2216,6 +2404,36 @@ declare interface DescribeSkillCategoryListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillDetailRequest {
+  /** skillID */
+  SkillId: string;
+  /** 空间ID */
+  SpaceId: string;
+  /** 版本过滤条件(多个Filter之间为AND关系,同一Filter的多个Values为OR关系): - Perspective: 视角枚举,字符串单值,Values 长度必须为 1,多值视为非法;仅作用于详情返回的 version_list 裁剪,不决定接口本身可见性;不传默认 USER (USER=使用者视角,version_list 仅返回已上线版本 / EDITOR=编辑者视角,version_list 返回全部存活版本 / ALL=全量视角,同 EDITOR) */
+  VersionFilterList?: Filter[];
+}
+
+declare interface DescribeSkillDetailResponse {
+  /** skill详情 */
+  SkillDetail?: SkillDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSkillReferenceListRequest {
+  /** Skill ID，必填 */
+  SkillId: string;
+  /** 空间ID，必填 */
+  SpaceId: string;
+}
+
+declare interface DescribeSkillReferenceListResponse {
+  /** 按 SkillRefType 分组的引用汇总：某类型 total_count = 0 时不入组（不返回空占位） 本期同时落 OPENCLAW / AGENT / CORP_ASSISTANT 三路 */
+  ReferenceList?: SkillReferenceGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillSummaryListRequest {
   /** 空间ID，必填 */
   SpaceId: string;
@@ -2308,6 +2526,30 @@ declare interface DescribeVariableResponse {
   RequestId?: string;
 }
 
+declare interface FavoritePluginRequest {
+  /** 插件id */
+  PluginId: string;
+  /** 当前空间id */
+  SpaceId: string;
+}
+
+declare interface FavoritePluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface FavoriteSkillRequest {
+  /** SkillId */
+  SkillId: string;
+  /** 空间ID */
+  SpaceId: string;
+}
+
+declare interface FavoriteSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAgentRequest {
   /** 应用Id */
   AppId?: string;
@@ -2380,6 +2622,50 @@ declare interface ModifyConversationResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPluginRequest {
+  /** 插件id */
+  PluginId: string;
+  /** 插件版本号 */
+  PluginVersion: number;
+  /** 插件基础资料 */
+  Profile?: PluginProfile;
+  /** 插件类型配置 */
+  Config?: PluginConfig;
+  /** 指定需要更新的字段，避免全量覆盖 */
+  UpdateMask?: FieldMask;
+  /** 插件的工具列表，mcp插件不传 */
+  ToolList?: Tool[];
+}
+
+declare interface ModifyPluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySkillRequest {
+  /** SkillId */
+  SkillId: string;
+  /** 空间ID */
+  SpaceId: string;
+  /** skill描述 */
+  DisplayDescription?: string;
+  /** skill名称 */
+  DisplayName?: string;
+  /** skill包文件地址（zip）；传入则触发新版本生成，需与SkillVersion、UpdateDescription配套传入 */
+  FileUrl?: string;
+  /** 图标地址 */
+  IconUrl?: string;
+  /** skill版本号（与FileUrl配套传入） */
+  SkillVersion?: string;
+  /** 版本变更说明（与FileUrl配套传入） */
+  UpdateDescription?: string;
+}
+
+declare interface ModifySkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySpaceRequest {
   /** 工作空间名称,长度最大30个字符 */
   Name?: string;
@@ -2404,6 +2690,20 @@ declare interface ModifyVariableRequest {
 }
 
 declare interface ModifyVariableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReleaseSkillRequest {
+  /** SkillId */
+  SkillId: string;
+  /** 空间ID */
+  SpaceId: string;
+  /** 版本ID */
+  VersionId: string;
+}
+
+declare interface ReleaseSkillResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2454,6 +2754,30 @@ declare interface RollbackReleaseResponse {
   RequestId?: string;
 }
 
+declare interface UnfavoritePluginRequest {
+  /** 插件id */
+  PluginId: string;
+  /** 当前空间id */
+  SpaceId: string;
+}
+
+declare interface UnfavoritePluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UnfavoriteSkillRequest {
+  /** SkillId */
+  SkillId: string;
+  /** 空间ID */
+  SpaceId: string;
+}
+
+declare interface UnfavoriteSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Adp 腾讯云智能体开发平台} */
 declare interface Adp {
   (): Versions;
@@ -2467,8 +2791,14 @@ declare interface Adp {
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 新建会话 {@link CreateConversationRequest} {@link CreateConversationResponse} */
   CreateConversation(data: CreateConversationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConversationResponse>;
+  /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
+  CreatePlugin(data: CreatePluginRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePluginResponse>;
   /** 新增发布任务 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
   CreateRelease(data: CreateReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseResponse>;
+  /** 创建skill {@link CreateSkillRequest} {@link CreateSkillResponse} */
+  CreateSkill(data: CreateSkillRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillResponse>;
+  /** 创建Skill企业共享 {@link CreateSkillShareRequest} {@link CreateSkillShareResponse} */
+  CreateSkillShare(data: CreateSkillShareRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillShareResponse>;
   /** 创建空间 {@link CreateSpaceRequest} {@link CreateSpaceResponse} */
   CreateSpace(data?: CreateSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpaceResponse>;
   /** 创建参数变量 {@link CreateVariableRequest} {@link CreateVariableResponse} */
@@ -2477,10 +2807,18 @@ declare interface Adp {
   CreateWebSocketToken(data: CreateWebSocketTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebSocketTokenResponse>;
   /** 创建工作空间凭证 {@link CreateWorkspaceCredentialRequest} {@link CreateWorkspaceCredentialResponse} */
   CreateWorkspaceCredential(data: CreateWorkspaceCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceCredentialResponse>;
+  /** 删除 Agent {@link DeleteAgentRequest} {@link DeleteAgentResponse} */
+  DeleteAgent(data: DeleteAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
   /** 删除会话 {@link DeleteConversationRequest} {@link DeleteConversationResponse} */
   DeleteConversation(data: DeleteConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConversationResponse>;
+  /** 删除插件 {@link DeletePluginRequest} {@link DeletePluginResponse} */
+  DeletePlugin(data: DeletePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePluginResponse>;
+  /** 删除Skill {@link DeleteSkillRequest} {@link DeleteSkillResponse} */
+  DeleteSkill(data: DeleteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSkillResponse>;
+  /** 删除Skill企业共享 {@link DeleteSkillShareRequest} {@link DeleteSkillShareResponse} */
+  DeleteSkillShare(data: DeleteSkillShareRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSkillShareResponse>;
   /** 删除空间 {@link DeleteSpaceRequest} {@link DeleteSpaceResponse} */
   DeleteSpace(data?: DeleteSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpaceResponse>;
   /** 删除参数变量 {@link DeleteVariableRequest} {@link DeleteVariableResponse} */
@@ -2489,6 +2827,8 @@ declare interface Adp {
   DescribeAgentDetail(data?: DescribeAgentDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDetailResponse>;
   /** 获取Agent发布列表 {@link DescribeAgentReleasePreviewListRequest} {@link DescribeAgentReleasePreviewListResponse} */
   DescribeAgentReleasePreviewList(data: DescribeAgentReleasePreviewListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentReleasePreviewListResponse>;
+  /** 查询 Agent 摘要列表 {@link DescribeAgentSummaryListRequest} {@link DescribeAgentSummaryListResponse} */
+  DescribeAgentSummaryList(data?: DescribeAgentSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSummaryListResponse>;
   /** 获取应用信息 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
   /** 获取应用摘要列表 {@link DescribeAppSummaryListRequest} {@link DescribeAppSummaryListResponse} */
@@ -2513,6 +2853,10 @@ declare interface Adp {
   DescribeReleaseSummary(data: DescribeReleaseSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseSummaryResponse>;
   /** 查询skill分类key {@link DescribeSkillCategoryListRequest} {@link DescribeSkillCategoryListResponse} */
   DescribeSkillCategoryList(data?: DescribeSkillCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillCategoryListResponse>;
+  /** 查询Skill详情 {@link DescribeSkillDetailRequest} {@link DescribeSkillDetailResponse} */
+  DescribeSkillDetail(data: DescribeSkillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillDetailResponse>;
+  /** 查询Skill引用列表 {@link DescribeSkillReferenceListRequest} {@link DescribeSkillReferenceListResponse} */
+  DescribeSkillReferenceList(data: DescribeSkillReferenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillReferenceListResponse>;
   /** 查询skill列表 {@link DescribeSkillSummaryListRequest} {@link DescribeSkillSummaryListResponse} */
   DescribeSkillSummaryList(data: DescribeSkillSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillSummaryListResponse>;
   /** 获取空间列表 {@link DescribeSpaceListRequest} {@link DescribeSpaceListResponse} */
@@ -2523,22 +2867,36 @@ declare interface Adp {
   DescribeVariable(data: DescribeVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableResponse>;
   /** 获取参数变量列表 {@link DescribeVariableListRequest} {@link DescribeVariableListResponse} */
   DescribeVariableList(data: DescribeVariableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableListResponse>;
+  /** 收藏插件 {@link FavoritePluginRequest} {@link FavoritePluginResponse} */
+  FavoritePlugin(data: FavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<FavoritePluginResponse>;
+  /** 收藏skill {@link FavoriteSkillRequest} {@link FavoriteSkillResponse} */
+  FavoriteSkill(data: FavoriteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<FavoriteSkillResponse>;
   /** 修改Agent配置 {@link ModifyAgentRequest} {@link ModifyAgentResponse} */
   ModifyAgent(data?: ModifyAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentResponse>;
   /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改会话信息 {@link ModifyConversationRequest} {@link ModifyConversationResponse} */
   ModifyConversation(data: ModifyConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConversationResponse>;
+  /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */
+  ModifyPlugin(data: ModifyPluginRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPluginResponse>;
+  /** 修改skill {@link ModifySkillRequest} {@link ModifySkillResponse} */
+  ModifySkill(data: ModifySkillRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySkillResponse>;
   /** 编辑空间 {@link ModifySpaceRequest} {@link ModifySpaceResponse} */
   ModifySpace(data?: ModifySpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpaceResponse>;
   /** 更新参数变量 {@link ModifyVariableRequest} {@link ModifyVariableResponse} */
   ModifyVariable(data: ModifyVariableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVariableResponse>;
+  /** 上架skill {@link ReleaseSkillRequest} {@link ReleaseSkillResponse} */
+  ReleaseSkill(data: ReleaseSkillRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseSkillResponse>;
   /** 重置会话 {@link ResetConversationRequest} {@link ResetConversationResponse} */
   ResetConversation(data: ResetConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConversationResponse>;
   /** 重试发布 {@link RetryReleaseRequest} {@link RetryReleaseResponse} */
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
   /** 回滚发布 {@link RollbackReleaseRequest} {@link RollbackReleaseResponse} */
   RollbackRelease(data: RollbackReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackReleaseResponse>;
+  /** 取消收藏插件 {@link UnfavoritePluginRequest} {@link UnfavoritePluginResponse} */
+  UnfavoritePlugin(data: UnfavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoritePluginResponse>;
+  /** 取消收藏skill {@link UnfavoriteSkillRequest} {@link UnfavoriteSkillResponse} */
+  UnfavoriteSkill(data: UnfavoriteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoriteSkillResponse>;
 }
 
 export declare type Versions = ["2026-05-20"];
