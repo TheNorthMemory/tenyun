@@ -2997,7 +2997,7 @@ declare interface CreateEmployeeChangeUrlRequest {
   Agent: Agent;
   /** 待修改的员工OpenId */
   OpenId?: string;
-  /** 待修改的员工手机号，支持海外格式 */
+  /** 待修改的员工手机号，支持海外格式参数格式：国内：+86 1825195xxxx 或者 1825195xxxx 海外：+12 12345xxx */
   NewMobile?: string;
 }
 

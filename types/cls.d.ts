@@ -382,6 +382,10 @@ declare interface CloudProductLogTaskInfo {
   LogType?: string;
   /** 任务状态， 0创建中 1创建完成 2 删除中 */
   Status?: number;
+  /** 投递任务关联topic的标签信息 */
+  TopicTags?: Tag[];
+  /** 投递任务关联logset的标签信息 */
+  LogsetTags?: Tag[];
 }
 
 /** 采集配置信息 */
@@ -1060,6 +1064,28 @@ declare interface DlcDeliverInfo {
   CreateTime?: number;
   /** 任务修改时间。 */
   UpdateTime?: number;
+  /** 自动创建dlc字段默认值：false当您的日志中有新增字段时，系统自动将其投递至DLC */
+  AutoCreateField?: boolean;
+  /** 将投递失败的日志存储至DLC表 */
+  DlcFailHandle?: DlcFailHandle;
+  /** 日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
+}
+
+/** dlc投递失败处理信息 */
+declare interface DlcFailHandle {
+  /** 是否存储到DLC默认值：false用于控制是否开启投递失败的日志存储至DLC表 */
+  StoreToDlc?: boolean;
+  /** DLC表信息 */
+  DlcFailTableInfo?: DlcFailTableInfo;
+}
+
+/** dlc失败日志存储表信息 */
+declare interface DlcFailTableInfo {
+  /** DLC的表名称 */
+  TableName: string;
+  /** 表中的字段名称字段类型必须是String类型 */
+  FieldName: string;
 }
 
 /** 数据湖计算服务（Data Lake Compute，简称DLC）数据字段配置信息 */
@@ -4373,6 +4399,8 @@ declare interface DescribeCloudProductLogTasksRequest {
   Limit?: number;
   /** assumerName按照【云产品标识】进行过滤。类型：String必选：否枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APISlogType按照【日志类型】进行过滤。类型：String必选：否枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESSinstanceId按照【实例ID】进行过滤。类型：String必选：否 */
   Filters?: Filter[];
+  /** 是否携带topic和logset的标签信息 */
+  WithTags?: boolean;
 }
 
 declare interface DescribeCloudProductLogTasksResponse {
@@ -4380,6 +4408,8 @@ declare interface DescribeCloudProductLogTasksResponse {
   Tasks?: CloudProductLogTaskInfo[];
   /** 日志配置总数 */
   TotalCount?: number;
+  /** 额外信息。如查询topic、logset标签信息错误 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5601,13 +5631,17 @@ declare interface ModifyCloudProductLogCollectionRequest {
   AssumerName: string;
   /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：- CDS所有日志类型：ap-guangzhou- CDB-AUDIT: gz- TDSQL-C-AUDIT: gz- MongoDB-AUDIT: gz- MongoDB-SlowLog：ap-guangzhou- MongoDB-ErrorLog：ap-guangzhou- TDMYSQL-SLOW：gz- DCDB所有日志类型：gz- MariaDB所有日志类型：gz- PostgreSQL所有日志类型：gz- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)- APIS所有日志类型：gz */
+  /** 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：CDS所有日志类型：ap-guangzhouCDB-AUDIT: gzTDSQL-C-AUDIT: gzMongoDB-AUDIT: gzMongoDB-SlowLog：ap-guangzhouMongoDB-ErrorLog：ap-guangzhouTDMYSQL-SLOW：gzDCDB所有日志类型：gzMariaDB所有日志类型：gzPostgreSQL所有日志类型：gzBH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)APIS所有日志类型：gz */
   CloudProductRegion: string;
   /** 日志配置拓展信息， 一般用于存储额外的日志投递配置 */
   Extend?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的logset和topic。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
 }
 
 declare interface ModifyCloudProductLogCollectionResponse {
+  /** 额外信息。如修改topic、logset标签失败。 */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -602,6 +602,8 @@ declare interface GetEmailIdentityResponse {
   Attributes?: DNSAttributes[];
   /** dkim密钥长度枚举值：0： 10241： 20482： both */
   DKIMOption?: number;
+  /** tag 标签 */
+  TagList?: TagList[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

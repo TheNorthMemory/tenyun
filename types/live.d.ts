@@ -1802,11 +1802,11 @@ declare interface TemplateInfo {
   Rotate?: number;
   /** 编码质量：baseline/main/high。默认baseline */
   Profile?: string;
-  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  /** 当设置的码率&gt;原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
   BitrateToOrig?: number;
-  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  /** 当设置的高度&gt;原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
   HeightToOrig?: number;
-  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  /** 当设置的帧率&gt;原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
   FpsToOrig?: number;
   /** 是否保留视频。0：否，1：是。 */
   NeedVideo?: number;
@@ -1832,6 +1832,10 @@ declare interface TemplateInfo {
   IsAdaptiveBitRate?: number | null;
   /** 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。 */
   AdaptiveChildren?: ChildTemplateInfo[] | null;
+  /** 是否按需转码，0 否，1 是。 */
+  AudienceDrivenTranscode?: number;
+  /** 按需转码人数阈值。 */
+  AudienceThreshold?: number;
 }
 
 /** 时移计费明细数据。 */
@@ -2901,15 +2905,15 @@ declare interface CreateLiveTranscodeTemplateRequest {
   Rotate?: number;
   /** 编码质量：baseline/main/high。默认baseline */
   Profile?: string;
-  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  /** 当设置的码率&gt;原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
   BitrateToOrig?: number;
-  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  /** 当设置的高度&gt;原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
   HeightToOrig?: number;
-  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  /** 当设置的帧率&gt;原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
   FpsToOrig?: number;
   /** 是否是极速高清模板，0：否，1：是。默认0。 */
   AiTransCode?: number;
-  /** 极速高清视频码率压缩比。极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)取值范围：0.0到0.5 */
+  /** 极速高清视频码率压缩比。极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)取值范围：0.0 到 0.5智能降码：0.5 到 0.9。 */
   AdaptBitratePercent?: number;
   /** 是否以短边作为高度，0：否，1：是。默认0。 */
   ShortEdgeAsHeight?: number;
@@ -2921,6 +2925,10 @@ declare interface CreateLiveTranscodeTemplateRequest {
   IsAdaptiveBitRate?: number;
   /** 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。 */
   AdaptiveChildren?: ChildTemplateInfo[];
+  /** 是否智能降码，1 表示智能降码。如果设置了智能降码，AiTransCode = 1、Height = 0、VideoBitrate = 0、AdaptBitratePercent、AudienceThreshold 必须传递。 */
+  AudienceDrivenTranscode?: number;
+  /** 智能降码人数阈值，当 AudienceDrivenTranscode = 1 时需要传递。取值范围：[100, 1000000] */
+  AudienceThreshold?: number;
 }
 
 declare interface CreateLiveTranscodeTemplateResponse {
@@ -6007,13 +6015,13 @@ declare interface ModifyLiveTranscodeTemplateRequest {
   Rotate?: number;
   /** 编码质量：baseline/main/high。 */
   Profile?: string;
-  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  /** 当设置的码率&gt;原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
   BitrateToOrig?: number;
-  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  /** 当设置的高度&gt;原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
   HeightToOrig?: number;
-  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  /** 当设置的帧率&gt;原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
   FpsToOrig?: number;
-  /** 极速高清视频码率压缩比。极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)取值范围：0.0到0.5 */
+  /** 极速高清视频码率压缩比。极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)取值范围：0.0 到 0.5智能降码：0.5 到 0.9 */
   AdaptBitratePercent?: number;
   /** 是否以短边作为高度，0：否，1：是。默认0。 */
   ShortEdgeAsHeight?: number;
@@ -6025,6 +6033,10 @@ declare interface ModifyLiveTranscodeTemplateRequest {
   IsAdaptiveBitRate?: number;
   /** 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。 */
   AdaptiveChildren?: ChildTemplateInfo[];
+  /** 是否智能降码，1 表示智能降码。 */
+  AudienceDrivenTranscode?: number;
+  /** 智能降码人数阈值，当 AudienceDrivenTranscode = 1 时生效。 取值范围：[100, 1000000]。 */
+  AudienceThreshold?: number;
 }
 
 declare interface ModifyLiveTranscodeTemplateResponse {

@@ -100,7 +100,7 @@ declare interface InstanceInfo {
   Createtime?: string;
   /** 实例持久内存总容量大小，单位：MB。 */
   Size?: number;
-  /** 实例类型。13：标准版。14：集群版。 */
+  /** 实例类型。枚举值：11： 存储版标准架构。12： 存储版集群架构。13： 极速版标准架构。14： 极速版集群架构。 */
   Type?: number;
   /** 实例是否设置自动续费标识。1：设置自动续费。0：未设置自动续费。 */
   AutoRenewFlag?: number;
@@ -172,9 +172,9 @@ declare interface InstanceInfo {
   MachineMemory?: number;
   /** 单分片磁盘大小，单位：MB */
   DiskShardSize?: number;
-  /** 3 */
+  /** 分片数量 */
   DiskShardNum?: number;
-  /** 1 */
+  /** 副本数量 */
   DiskReplicasNum?: number;
   /** 数据压缩开关。ON：开启。OFF：关闭。 */
   Compression?: string;
@@ -227,9 +227,11 @@ declare interface InstanceMultiParam {
 /** 实例节点信息 */
 declare interface InstanceNodeInfo {
   /** 节点ID */
-  NodeId: string;
+  NodeId?: string;
   /** 节点角色 */
-  NodeRole: string;
+  NodeRole?: string;
+  /** 可用区ID */
+  ZoneId?: number;
 }
 
 /** 实例参数 */
@@ -364,6 +366,8 @@ declare interface ProductConf {
 declare interface ProxyNodeInfo {
   /** 节点ID */
   NodeId?: string;
+  /** 可用区ID */
+  ZoneId?: number;
 }
 
 /** Redis节点信息 */
@@ -587,7 +591,7 @@ declare interface CreateBackupManuallyResponse {
 }
 
 declare interface CreateInstancesRequest {
-  /** 产品版本。14：极速版。 */
+  /** 实例版本类型。枚举值：11： 存储版标准架构。12： 存储版集群架构。13： 极速版标准架构。14： 极速版集群架构。 */
   TypeId: number;
   /** 私有网络唯一ID。请登录控制台在私有网络列表查询，如：vpc-azlk3***。 */
   UniqVpcId: string;
@@ -603,13 +607,13 @@ declare interface CreateInstancesRequest {
   ShardNum: number;
   /** 副本数。当前仅支持设置1个副本节点，即每一个分片仅包含1个主节点与1个副本节点，数据主从实时热备。 */
   ReplicasNum: number;
-  /** 实例内存容量，单位：GB。KeeWiDB 内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。 */
+  /** 实例内存容量，单位：GB。极速版内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。单位：GB */
   MachineMemory: number;
   /** 实例所属的可用区ID。具体取值，请参见地域和可用区获取。参数ZoneId和ZoneName至少配置其中一个。 */
   ZoneId?: number;
   /** 实例所属的可用区名称。具体取值，请参见地域和可用区获取。参数ZoneId和ZoneName至少配置其中一个。 */
   ZoneName?: string;
-  /** 创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。 */
+  /** 创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。 */
   InstanceName?: string;
   /** 指明创建的实例是否需要支持免密访问。true：免密实例。false：非免密实例，默认为非免密实例。此时，需要设置访问密码。 */
   NoAuth?: boolean;
@@ -623,11 +627,11 @@ declare interface CreateInstancesRequest {
   SecurityGroupIdList?: string[];
   /** 给实例绑定标签。 */
   ResourceTags?: ResourceTag[];
-  /** 极速版，单分片持久化内存容量。KeeWiDB 内存容量MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。单位：GB。 */
+  /** 极速版，单分片持久化内存容量。MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。单位：GB。 */
   MemSize?: number;
   /** 每个分片硬盘的容量。单位：GB。每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见产品规格。 */
   DiskSize?: number;
-  /** 计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见产品规格。 */
+  /** 计算 CPU 核数。CPU 核数与内存为固定搭配，具体信息，请参见产品规格。 */
   MachineCpu?: number;
   /** 项目id，取值以用户账户&gt;用户账户相关接口查询&gt;项目列表返回的projectId为准。 */
   ProjectId?: number;
@@ -877,7 +881,7 @@ declare interface DescribeInstancesRequest {
   AutoRenew?: number[];
   /** 计费模式。postpaid：按量计费。prepaid：包年包月。 */
   BillingMode?: string;
-  /** 实例类型。13：标准版。14：集群版。 */
+  /** 实例类型。枚举值：11： 存储版标准架构。12： 存储版集群架构。13： 极速版标准架构。14： 极速版集群架构。 */
   Type?: number;
   /** 搜索关键词：支持实例 ID、实例名称、私有网络IP地址。 */
   SearchKeys?: string[];

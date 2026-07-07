@@ -3144,32 +3144,6 @@ declare interface RepairPGUserMigrationHistoryResponse {
   RequestId?: string;
 }
 
-declare interface RollbackPGUserMigrationsRequest {
-  /** 云开发环境ID */
-  EnvId: string;
-  /** 要回滚的条数按照逆序回滚最近N条migration */
-  LastN: number;
-  /** 等待获取数据库锁的最长时间单位：毫秒默认值：5000 */
-  LockTimeoutMs?: number;
-  /** 单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句单位：毫秒默认值：300000 */
-  StatementTimeoutMs?: number;
-  /** 标记API调用来源 */
-  Source?: string;
-}
-
-declare interface RollbackPGUserMigrationsResponse {
-  /** 任务ID可通过DescribeTaskResult 接口查询进度 */
-  TaskId?: string;
-  /** 已成功回滚并删除 history 的 migration */
-  RolledBack?: MigrationSummary[];
-  /** 未提供 Rollback SQL、视为成功并删除 history 的 migration */
-  SkippedRollbackSql?: MigrationSummary[];
-  /** 执行 Rollback SQL 失败的 migration，可为空 */
-  Failed?: MigrationSummary;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface RunCommandsRequest {
   /** 待执行命令 */
   MgoCommands: MgoCommandParam[];
@@ -3467,8 +3441,6 @@ declare interface Tcb {
   RenewEnv(data: RenewEnvRequest, config?: AxiosRequestConfig): AxiosPromise<RenewEnvResponse>;
   /** 修复Migration History {@link RepairPGUserMigrationHistoryRequest} {@link RepairPGUserMigrationHistoryResponse} */
   RepairPGUserMigrationHistory(data: RepairPGUserMigrationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<RepairPGUserMigrationHistoryResponse>;
-  /** 回滚 Migration {@link RollbackPGUserMigrationsRequest} {@link RollbackPGUserMigrationsResponse} */
-  RollbackPGUserMigrations(data: RollbackPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackPGUserMigrationsResponse>;
   /** 执行文档型数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
   RunCommands(data: RunCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandsResponse>;
   /** 执行MySQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */

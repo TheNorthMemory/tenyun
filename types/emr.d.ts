@@ -60,9 +60,9 @@ declare interface AutoScaleGroupAdvanceAttrs {
 declare interface AutoScaleRecord {
   /** 扩缩容规则名。 */
   StrategyName?: string;
-  /** "SCALE_OUT"和"SCALE_IN"，分别表示扩容和缩容。 */
+  /** &quot;SCALE_OUT&quot;和&quot;SCALE_IN&quot;，分别表示扩容和缩容。 */
   ScaleAction?: string;
-  /** 取值为"SUCCESS","FAILED","PART_SUCCESS","IN_PROCESS"，分别表示成功、失败、部分成功和流程中。 */
+  /** 取值为&quot;SUCCESS&quot;,&quot;FAILED&quot;,&quot;PART_SUCCESS&quot;,&quot;IN_PROCESS&quot;，分别表示成功、失败、部分成功和流程中。 */
   ActionStatus?: string;
   /** 流程触发时间。 */
   ActionTime?: string;
@@ -88,6 +88,8 @@ declare interface AutoScaleRecord {
   RetryEnReason?: string;
   /** 重试描述 */
   RetryReason?: string;
+  /** 缺失分类 */
+  ShortageClass?: number;
 }
 
 /** 弹性扩缩容规格配置 */
@@ -456,6 +458,10 @@ declare interface ClusterInstancesInfo {
   ClusterRelationInfoList?: ClusterRelationMeta[] | null;
   /** Redis信息 */
   RedisId?: string;
+  /** 是否开启IO故障自愈 */
+  IsIOHungSelfRecovery?: boolean;
+  /** 元数据信息 */
+  MetaDBGroupInfo?: CustomMetaDBInfo[] | null;
 }
 
 /** 集群间绑定使用信息 */
@@ -768,6 +774,30 @@ declare interface DiskGroup {
   Spec: DiskSpec;
   /** 同类型磁盘数量。 */
   Count: number;
+}
+
+/** 磁盘 */
+declare interface DiskHealthIssue {
+  /** 磁盘id */
+  DiskId?: string;
+  /** 挂载的目录 */
+  MountDir?: string;
+  /** 设备路径 */
+  DeviceName?: string;
+  /** 异常类型 */
+  CheckType?: number;
+  /** 优先级 */
+  Severity?: number;
+  /** 状态 */
+  State?: number;
+  /** 探测来源 */
+  DetectSource?: string;
+  /** 第一次探测时间 */
+  FirstDetectTime?: string;
+  /** 最新探测时间 */
+  LastDetectTime?: string;
+  /** 探测信息 */
+  DetectDetail?: string;
 }
 
 /** 磁盘描述。 */
@@ -1974,6 +2004,8 @@ declare interface NodeHardwareInfo {
   UnderwriteSetAutoRenew?: boolean;
   /** Gpu信息 */
   GpuDesc?: string;
+  /** 磁盘问题描述 */
+  DiskHealthIssues?: DiskHealthIssue[];
 }
 
 /** 节点标记信息 */
@@ -5373,7 +5405,7 @@ declare interface InquiryPriceCreateInstanceRequest {
   Currency: string;
   /** 实例计费模式。取值范围：0：表示按量计费。1：表示包年包月。 */
   PayMode: number;
-  /** 是否开启节点高可用。取值范围：0：表示不开启节点高可用。1：表示开启节点高可用。 */
+  /** 是否开启节点高可用。取值范围：0：表示不开启节点高可用。1：表示开启节点高可用。x07 */
   SupportHA: number;
   /** 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：ProductId为2(EMR-V2.0.1)的时候，必选组件包括：hdfs-2.7.3,yarn-2.7.3,zookeeper-3.4.9,knox-1.2.0ProductId为16(EMR-V2.3.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.5.5,knox-1.2.0ProductId为20(EMR-V2.5.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.1,knox-1.2.0ProductId为30(EMR-V2.6.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0ProductId为38(EMR-V2.7.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1ProductId为57(EMR-V2.8.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1ProductId为7(EMR-V3.0.0)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.4.9,knox-1.2.0ProductId为25(EMR-V3.1.0)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.6.1,knox-1.2.0ProductId为31(EMR-V3.1.1)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.6.1,knox-1.2.0ProductId为28(EMR-V3.2.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,knox-1.2.0ProductId为33(EMR-V3.2.1)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0ProductId为34(EMR-V3.3.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0ProductId为37(EMR-V3.4.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1ProductId为44(EMR-V3.5.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1ProductId为53(EMR-V3.6.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1ProductId为58(EMR-V3.6.1)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.46,knox-1.6.1ProductId为47(EMR-V4.0.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1 */
   Software: string[];
@@ -5403,6 +5435,8 @@ declare interface InquiryPriceCreateInstanceRequest {
   DefaultMetaVersion?: string;
   /** 0:不开通审计；1:开通审计 */
   NeedCdbAudit?: number;
+  /** 自定义db数据 */
+  MetaDBGroupInfo?: CustomMetaDBInfo[];
 }
 
 declare interface InquiryPriceCreateInstanceResponse {
@@ -5565,6 +5599,8 @@ declare interface InstallSoftwareRequest {
   ContainerExtraConf?: ContainerExtraConf;
   /** 是否强制检查自定义组件的合理性，目前仅提供给tf侧使用 */
   CheckServiceDeployInfo?: boolean;
+  /** 自定义metadb信息 */
+  MetaDBGroupInfo?: CustomMetaDBInfo[];
 }
 
 declare interface InstallSoftwareResponse {

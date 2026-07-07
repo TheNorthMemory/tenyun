@@ -118,6 +118,7 @@ import Facefusion, { Versions as FacefusionVersions } from "./facefusion";
 import Faceid, { Versions as FaceidVersions } from "./faceid";
 import Fmu, { Versions as FmuVersions } from "./fmu";
 import Ft, { Versions as FtVersions } from "./ft";
+import Fwm, { Versions as FwmVersions } from "./fwm";
 import Ga2, { Versions as Ga2Versions } from "./ga2";
 import Gaap, { Versions as GaapVersions } from "./gaap";
 import Gme, { Versions as GmeVersions } from "./gme";
@@ -377,6 +378,7 @@ export declare type SERVICE_VERSIONS = {
   faceid: FaceidVersions,
   fmu: FmuVersions,
   ft: FtVersions,
+  fwm: FwmVersions,
   ga2: Ga2Versions,
   gaap: GaapVersions,
   gme: GmeVersions,
@@ -767,6 +769,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   fmu: Fmu,
   /** {@link Ft 人像变换} */
   ft: Ft,
+  /** {@link Fwm 防火墙管理} */
+  fwm: Fwm,
   /** {@link Ga2 全球加速} */
   ga2: Ga2,
   /** {@link Gaap 全球应用加速} */

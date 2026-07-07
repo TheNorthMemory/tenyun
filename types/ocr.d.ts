@@ -4061,7 +4061,7 @@ declare interface IDCardOCRRequest {
   EnableReflectDetail?: boolean;
   /** 用于控制是否开启日期校验，默认值为true，打开会进行日期校验。 */
   EnableDateVerify?: boolean;
-  /** Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic */
+  /** 告警类型枚举值：Basic： 使用基础卡证告警能力（含基础PS告警）Advanced： 开启进阶PS告警能力，PS告警效果更佳但需要更长耗时默认值：Basic */
   CardWarnType?: string;
 }
 
@@ -4082,7 +4082,7 @@ declare interface IDCardOCRResponse {
   Authority?: string;
   /** 证件有效期（国徽面） */
   ValidDate?: string;
-  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9109 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警，-9111 水印告警（仅CardWarnType参数为Advanced时） */
+  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9109 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警（仅CardWarnType参数为Advanced时），-9111 水印告警 */
   AdvancedInfo?: string;
   /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
   ReflectDetailInfos?: ReflectDetailInfo[];

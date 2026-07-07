@@ -763,6 +763,18 @@ declare interface DescribeGlossaryEntriesResponse {
 }
 
 declare interface DescribeModelListRequest {
+  /** 模型 ID 列表。最多支持 10 个，不支持重复。 */
+  ModelIds?: string[];
+  /** 模型名称列表。最多支持 10 个，不支持重复。 */
+  ModelNames?: string[];
+  /** 模型类型列表，筛选指定类型的模型。最多支持 10 个，不支持重复。取值：Text（文本）、Vision（视觉）、Multimodal（多模态）、Speech（语音）、Embedding（向量）。 */
+  ModelTypes?: string[];
+  /** 模型标签 */
+  Tags?: string[];
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。 */
+  Offset?: number;
 }
 
 declare interface DescribeModelListResponse {

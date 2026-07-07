@@ -8319,7 +8319,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 declare interface CreateAigcAudioTaskRequest {
   /** 模型名称。生音乐当前支持的模型: GL、MiniMaxMusic。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：2.0、3.0-clip、3.0-pro。模型MinimaxMusic支持的版本号：2.0、2.5、2.6。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：3.0-clip、3.0-pro。模型MinimaxMusic支持的版本号：2.0、2.5、2.6。 */
   ModelVersion?: string;
   /** 指定场景生音频。音乐: music。 */
   SceneType?: string;
@@ -8363,6 +8363,8 @@ declare interface CreateAigcImageTaskRequest {
   EnhancePrompt?: boolean;
   /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：Kling 2.1，可支持最多 4 张图片输入作为资源图。Kling 3.0-Omni，可支持最多 10 张图片输入作为资源图。Kling O1，可支持最多 10 张图片输入作为资源图。Vidu q2，可支持最多 7 张图片输入作为资源图。Hunyuan 3.0，可支持最多 3 张图片输入作为资源图。MJ v7，可支持最多 3 张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
   ImageInfos?: AigcImageInfo[];
+  /** 指定图片输出张数。目前默认支持输出 1 张。 */
+  OutputImageCount?: number;
   /** 用于传入模型要求的额外参数。 */
   ExtraParameters?: AigcImageExtraParam;
   /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 Hunyuan 3.0，支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。Qwen 0925，支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例： {"size":"1024x1024"}。 */

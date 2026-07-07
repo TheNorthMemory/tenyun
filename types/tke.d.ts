@@ -402,6 +402,8 @@ declare interface MachineSetScaling {
   MaxReplicas?: number;
   /** 节点池扩容策略。ZoneEquality：多可用区打散；ZonePriority：首选可用区优先； */
   CreatePolicy?: string | null;
+  /** 扩缩容模式枚举值：ShutdownAndDelete： 释放模式，默认Shutdown： 停机模式，关机不计费默认值：ShutdownAndDelete */
+  ScaleDownMode?: string;
 }
 
 /** 托管节点池自动升级配置 */
@@ -1039,6 +1041,10 @@ declare interface ModifyClusterMachineRequest {
   SecurityGroupIDs?: string[];
   /** 节点预付费信息 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
+  /** 节点计费类型变更枚举值：POSTPAID_BY_HOUR： 目标计费类型为按量计费PREPAID： 目标计费类型为包年包月计费 */
+  InstanceChargeType?: string;
+  /** 是否同时切换弹性数据云盘计费模式。取值范围： true：表示切换弹性数据云盘计费模式 false：表示不切换弹性数据云盘计费模式 默认取值：true。默认值：true */
+  ModifyPortableDataDisk?: boolean;
 }
 
 declare interface ModifyClusterMachineResponse {
