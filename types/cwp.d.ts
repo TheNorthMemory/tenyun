@@ -6691,7 +6691,7 @@ declare interface ZoneInfo {
 declare interface AddLoginWhiteListsRequest {
   /** 异地登录白名单实体 */
   HostLoginWhiteObj: HostLoginWhiteObj;
-  /** 事件同步处理方式： &quot;&quot; -- 不操作 &quot;All&quot; -- 将符合此配置的所有事件记录加白 &quot;Id&quot; -- 将EventId对应的事件记录加白 */
+  /** 事件同步处理方式： "" -- 不操作 "All" -- 将符合此配置的所有事件记录加白 "Id" -- 将EventId对应的事件记录加白 */
   ProcessType?: string;
   /** 异地登录事件ID，当ProcessType为Id时此项必填 */
   EventId?: number;
@@ -11191,7 +11191,7 @@ declare interface DescribeProVersionInfoResponse {
 }
 
 declare interface DescribeProVersionStatusRequest {
-  /** 主机安全客户端UUID、填写&quot;all&quot;表示所有主机。 */
+  /** 主机安全客户端UUID、填写"all"表示所有主机。 */
   Uuid: string;
 }
 

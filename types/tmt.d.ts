@@ -55,7 +55,7 @@ declare interface ImageTranslateLLMRequest {
   Data: string;
   /** 目标语言，支持语言列表：中文：zh繁体（中国台湾）：zh-TW繁体（中国香港）：zh-HK英文：en日语：ja韩语：ko泰语：th越南语：vi俄语：ru德语：de法语：fr阿拉伯语：ar西班牙语：es意大利语：it印度尼西亚语：id马来西亚语：ms葡萄牙语：pt土耳其语：tr- */
   Target: string;
-  /** 输入图 Url。 使用Url的时候，Data参数需要传入&quot;&quot;。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。 */
+  /** 输入图 Url。 使用Url的时候，Data参数需要传入""。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。 */
   Url?: string;
   /** 调用模式。枚举值：0： 端到端图片翻译大模型pro版1： 端到端图片翻译大模型lite版默认值：0 */
   Mode?: number;
@@ -80,43 +80,11 @@ declare interface ImageTranslateLLMResponse {
   RequestId?: string;
 }
 
-declare interface TextTranslateRequest {
-  /** 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于6000字符。 */
-  SourceText: string;
-  /** 源语言，支持：zh：简体中文zh-TW：繁体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印尼语th：泰语ms：马来西亚语ar：阿拉伯语hi：印地语 */
-  Source: string;
-  /** 目标语言，各源语言的目标语言支持列表如下 zh（简体中文）：zh-TW（繁体中文）、en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）zh-TW（繁体中文）：zh（简体中文）、en（英语）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）en（英语）：zh（中文）、zh-TW（繁体中文）、ja（日语）、ko（韩语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）、vi（越南语）、id（印尼语）、th（泰语）、ms（马来语）、ar（阿拉伯语）、hi（印地语）ja（日语）：zh（中文）、zh-TW（繁体中文）、en（英语）、ko（韩语）ko（韩语）：zh（中文）、zh-TW（繁体中文）、en（英语）、ja（日语）fr（法语）：zh（中文）、zh-TW（繁体中文）、en（英语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）es（西班牙语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）it（意大利语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、de（德语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）de（德语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、tr（土耳其语）、ru（俄语）、pt（葡萄牙语）tr（土耳其语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、ru（俄语）、pt（葡萄牙语）ru（俄语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、pt（葡萄牙语）pt（葡萄牙语）：zh（中文）、zh-TW（繁体中文）、en（英语）、fr（法语）、es（西班牙语）、it（意大利语）、de（德语）、tr（土耳其语）、ru（俄语）vi（越南语）：zh（中文）、zh-TW（繁体中文）、en（英语）id（印尼语）：zh（中文）、zh-TW（繁体中文）、en（英语）th（泰语）：zh（中文）、zh-TW（繁体中文）、en（英语）ms（马来语）：zh（中文）、zh-TW（繁体中文）、en（英语）ar（阿拉伯语）：zh（中文）、zh-TW（繁体中文）、en（英语）hi（印地语）：en（英语） */
-  Target: string;
-  /** 项目ID，可以根据控制台-账号中心-项目管理中的配置填写，如无配置请填写默认项目ID:0 */
-  ProjectId: number;
-  /** 用来标记不希望被翻译的文本内容，如句子中的特殊符号、人名、地名等；每次请求只支持配置一个不被翻译的单词；仅支持配置人名、地名等名词，不要配置动词或短语，否则会影响翻译结果。 */
-  UntranslatedText?: string;
-  /** 需要使用的术语库列表，通过 术语库操作指南 自行创建术语库获取。 */
-  TermRepoIDList?: string[];
-  /** 需要使用的例句库列表，通过 例句库操作指南 自行创建例句库获取。 */
-  SentRepoIDList?: string[];
-}
-
-declare interface TextTranslateResponse {
-  /** 翻译后的文本 */
-  TargetText?: string;
-  /** 源语言，详见入参Source */
-  Source?: string;
-  /** 目标语言，详见入参Target */
-  Target?: string;
-  /** 本次翻译消耗的字符数 */
-  UsedAmount?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 /** {@link Tmt 机器翻译} */
 declare interface Tmt {
   (): Versions;
   /** 端到端图片翻译 {@link ImageTranslateLLMRequest} {@link ImageTranslateLLMResponse} */
   ImageTranslateLLM(data: ImageTranslateLLMRequest, config?: AxiosRequestConfig): AxiosPromise<ImageTranslateLLMResponse>;
-  /** 文本翻译 {@link TextTranslateRequest} {@link TextTranslateResponse} */
-  TextTranslate(data: TextTranslateRequest, config?: AxiosRequestConfig): AxiosPromise<TextTranslateResponse>;
 }
 
 export declare type Versions = ["2018-03-21"];

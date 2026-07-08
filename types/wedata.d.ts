@@ -4959,7 +4959,7 @@ declare interface CreateDataSourceRequest {
   Name: string;
   /** 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem- TCLake- TDSQL_BOUNDLESS */
   Type: string;
-  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同deployType:CONNSTR_PUBLICDB(公网实例)CONNSTR_CVMDB(自建实例)INSTANCE(云实例)mysql: 自建实例{ &quot;deployType&quot;: &quot;CONNSTR_CVMDB&quot;, &quot;url&quot;: &quot;jdbc:mysql://1.1.1.1:1111/example#test#123456&quot;, &quot;username&quot;: &quot;root&quot;, &quot;password&quot;: &quot;example#test#123456&quot;, &quot;region&quot;: &quot;ap-shanghai&quot;, &quot;vpcId&quot;: &quot;vpc-kprq42yo&quot;, &quot;type&quot;: &quot;MYSQL&quot;}mysql: 云实例{ &quot;instanceid&quot;: &quot;cdb-12uxdo5e&quot;, &quot;db&quot;: &quot;db&quot;, &quot;region&quot;: &quot;ap-shanghai&quot;, &quot;username&quot;: &quot;msyql&quot;, &quot;password&quot;: &quot;example#test#123456&quot;, &quot;deployType&quot;: &quot;INSTANCE&quot;, &quot;type&quot;: &quot;TENCENT_MYSQL&quot;}sql_server: { &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;, &quot;url&quot;: &quot;jdbc:sqlserver://1.1.1.1:223;example#test#123456&quot;, &quot;username&quot;: &quot;user_1&quot;, &quot;password&quot;: &quot;example#test#123456&quot;, &quot;type&quot;: &quot;SQLSERVER&quot;}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;, &quot;username&quot;:&quot;&quot; &quot;password&quot;: &quot;example#test#123456&quot;, &quot;ip&quot;: &quot;1.1.1.1&quot;, &quot;port&quot;: &quot;6379&quot;, &quot;redisType&quot;: &quot;NO_ACCOUT&quot;, &quot;type&quot;: &quot;REDIS&quot;}oracle: { &quot;deployType&quot;: &quot;CONNSTR_CVMDB&quot;, &quot;url&quot;: &quot;jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456&quot;, &quot;username&quot;: &quot;oracle&quot;, &quot;password&quot;: &quot;example#test#123456&quot;, &quot;region&quot;: &quot;ap-shanghai&quot;, &quot;vpcId&quot;: &quot;vpc-kprq42yo&quot;, &quot;type&quot;: &quot;ORACLE&quot;}mongodb: advanceParams(自定义参数，会拼接至url后){ &quot;advanceParams&quot;: [ { &quot;key&quot;: &quot;authSource&quot;, &quot;value&quot;: &quot;auth&quot; } ], &quot;db&quot;: &quot;admin&quot;, &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;, &quot;username&quot;: &quot;user&quot;, &quot;password&quot;: &quot;example#test#123456&quot;, &quot;type&quot;: &quot;MONGODB&quot;, &quot;host&quot;: &quot;1.1.1.1:9200&quot;}postgresql:{ &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;, &quot;url&quot;: &quot;jdbc:postgresql://1.1.1.1:1921/example#test#123456&quot;, &quot;username&quot;: &quot;user&quot;, &quot;password&quot;: &quot;example#test#123456&quot;, &quot;type&quot;: &quot;POSTGRE&quot;}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;, &quot;host&quot;: &quot;1.1.1.1:9092&quot;, &quot;ssl&quot;: &quot;GSSAPI&quot;, &quot;authType&quot;: &quot;sasl&quot;, &quot;type&quot;: &quot;KAFKA&quot;, &quot;principal&quot;: &quot;aaaa&quot;, &quot;serviceName&quot;: &quot;kafka&quot;}cos:{ &quot;region&quot;: &quot;ap-shanghai&quot;, &quot;deployType&quot;: &quot;INSTANCE&quot;, &quot;secretId&quot;: &quot;aaaaa&quot;, &quot;secretKey&quot;: &quot;example#test#123456&quot;, &quot;bucket&quot;: &quot;aaa&quot;, &quot;type&quot;: &quot;COS&quot;} */
+  /** 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同deployType:CONNSTR_PUBLICDB(公网实例)CONNSTR_CVMDB(自建实例)INSTANCE(云实例)mysql: 自建实例{ "deployType": "CONNSTR_CVMDB", "url": "jdbc:mysql://1.1.1.1:1111/example#test#123456", "username": "root", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "MYSQL"}mysql: 云实例{ "instanceid": "cdb-12uxdo5e", "db": "db", "region": "ap-shanghai", "username": "msyql", "password": "example#test#123456", "deployType": "INSTANCE", "type": "TENCENT_MYSQL"}sql_server: { "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:sqlserver://1.1.1.1:223;example#test#123456", "username": "user_1", "password": "example#test#123456", "type": "SQLSERVER"}redis: redisType: -NO_ACCOUT(免账号) -SELF_ACCOUNT(自定义账号){ "deployType": "CONNSTR_PUBLICDB", "username":"" "password": "example#test#123456", "ip": "1.1.1.1", "port": "6379", "redisType": "NO_ACCOUT", "type": "REDIS"}oracle: { "deployType": "CONNSTR_CVMDB", "url": "jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456", "username": "oracle", "password": "example#test#123456", "region": "ap-shanghai", "vpcId": "vpc-kprq42yo", "type": "ORACLE"}mongodb: advanceParams(自定义参数，会拼接至url后){ "advanceParams": [ { "key": "authSource", "value": "auth" } ], "db": "admin", "deployType": "CONNSTR_PUBLICDB", "username": "user", "password": "example#test#123456", "type": "MONGODB", "host": "1.1.1.1:9200"}postgresql:{ "deployType": "CONNSTR_PUBLICDB", "url": "jdbc:postgresql://1.1.1.1:1921/example#test#123456", "username": "user", "password": "example#test#123456", "type": "POSTGRE"}kafka: authType: - sasl - jaas - sasl_plaintext - sasl_ssl - GSSAPI ssl: -PLAIN -GSSAPI{ "deployType": "CONNSTR_PUBLICDB", "host": "1.1.1.1:9092", "ssl": "GSSAPI", "authType": "sasl", "type": "KAFKA", "principal": "aaaa", "serviceName": "kafka"}cos:{ "region": "ap-shanghai", "deployType": "INSTANCE", "secretId": "aaaaa", "secretKey": "example#test#123456", "bucket": "aaa", "type": "COS"} */
   ProdConProperties: string;
   /** 开发环境数据源配置信息，若项目为标准模式，则此字段必填 */
   DevConProperties?: string;
@@ -7213,9 +7213,9 @@ declare interface ListTasksRequest {
   ModifyTime?: string[];
   /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
   CreateTime?: string[];
-  /** 任务文件夹路径列表，支持多选，从工作流下的目录开始填写，节点类型无需填写。选择上层文件夹时，自动包含所有子文件夹下的任务。 路径格式为绝对路径，如 &quot;/子目录A&quot;，根目录为 &quot;/&quot; */
+  /** 任务文件夹路径列表，支持多选，从工作流下的目录开始填写，节点类型无需填写。选择上层文件夹时，自动包含所有子文件夹下的任务。 路径格式为绝对路径，如 "/子目录A"，根目录为 "/" */
   TaskFolderPathList?: string[];
-  /** 工作流文件夹路径列表，支持多选。选择上层文件夹时，自动包含所有子文件夹下工作流的任务。 路径格式为绝对路径，如 &quot;/数据开发/子目录&quot;，根目录为 &quot;/&quot;。 */
+  /** 工作流文件夹路径列表，支持多选。选择上层文件夹时，自动包含所有子文件夹下工作流的任务。 路径格式为绝对路径，如 "/数据开发/子目录"，根目录为 "/"。 */
   WorkflowFolderPathList?: string[];
   /** 节点类型列表，用于按任务节点分类筛选，支持多选， 可选值参考下面枚举类型 。 传入后将根据这些节点类型包含的任务类型ID列表进行筛选。枚举值：ETL： 数据集成节点EMR： EMR节点DLC： DLC节点SETATS： SETATS节点TDSQL： TDSQL节点TCHOUSE： TCHOUSE节点GENERAL： 通用节点DATA_QUALITY： 数据质量节点INDICATOR： 指标节点TI_ONE： TI-ONE机器学习节点 */
   TaskNodeTypeList?: string[];
@@ -7307,9 +7307,9 @@ declare interface ListTriggerTasksRequest {
   ModifyTime?: string[];
   /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
   CreateTime?: string[];
-  /** 任务文件夹路径列表，支持多选，从工作流下的目录开始填写，节点类型无需填写。选择上层文件夹时，自动包含所有子文件夹下的任务。 路径格式为绝对路径，如 &quot;/子目录A&quot;，根目录为 &quot;/&quot; */
+  /** 任务文件夹路径列表，支持多选，从工作流下的目录开始填写，节点类型无需填写。选择上层文件夹时，自动包含所有子文件夹下的任务。 路径格式为绝对路径，如 "/子目录A"，根目录为 "/" */
   TaskFolderPathList?: string[];
-  /** 工作流文件夹路径列表，支持多选。选择上层文件夹时，自动包含所有子文件夹下工作流的任务。 路径格式为绝对路径，如 &quot;/数据开发/子目录&quot;，根目录为 &quot;/&quot; */
+  /** 工作流文件夹路径列表，支持多选。选择上层文件夹时，自动包含所有子文件夹下工作流的任务。 路径格式为绝对路径，如 "/数据开发/子目录"，根目录为 "/" */
   WorkflowFolderPathList?: string[];
   /** 节点类型列表，用于按任务节点分类筛选，支持多选，可选值参考下面枚举类型 。 传入后将根据这些节点类型包含的任务类型ID列表进行筛选。枚举值：ETL： 数据集成节点EMR： EMR节点DLC： DLC节点SETATS： SETATS节点TDSQL： TDSQL节点TCHOUSE： TCHOUSE节点GENERAL： 通用节点DATA_QUALITY： 数据质量节点INDICATOR： 指标节点TI_ONE： TI-ONE机器学习节点 */
   TaskNodeTypeList?: string[];
@@ -18905,7 +18905,7 @@ declare namespace V20210820 {
     PageSize?: number;
     /** 排序配置 */
     OrderFields?: OrderField[];
-    /** 可选过滤条件，Filter可选配置(参考): &quot;Name&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;数据源名称&quot; }, &quot;Type&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;类型&quot; }, &quot;ClusterId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;集群id&quot; }, &quot;CategoryId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;分类，项目或空间id&quot; } */
+    /** 可选过滤条件，Filter可选配置(参考): "Name": { "type": "string", "description": "数据源名称" }, "Type": { "type": "string", "description": "类型" }, "ClusterId": { "type": "string", "description": "集群id" }, "CategoryId": { "type": "string", "description": "分类，项目或空间id" } */
     Filters?: Filter[];
   }
 
@@ -19489,11 +19489,11 @@ declare namespace V20210820 {
     LogLevelType?: string;
     /** 文件类型,Log/Code */
     ExecutionFileType?: string;
-    /** 统一执行平台执行id, 注意: ExecutionJobId 跟 &quot;BrokerIp+OriginFileName&quot; 必须有一个不为空 */
+    /** 统一执行平台执行id, 注意: ExecutionJobId 跟 "BrokerIp+OriginFileName" 必须有一个不为空 */
     ExecutionJobId?: string;
-    /** 服务器Ip, 注意: &quot;BrokerIp+OriginFileName&quot;跟ExecutionJobId必须有一个不为空 */
+    /** 服务器Ip, 注意: "BrokerIp+OriginFileName"跟ExecutionJobId必须有一个不为空 */
     BrokerIp?: string;
-    /** 文件Name, 注意: &quot;BrokerIp+OriginFileName&quot;跟ExecutionJobId必须有一个不为空 */
+    /** 文件Name, 注意: "BrokerIp+OriginFileName"跟ExecutionJobId必须有一个不为空 */
     OriginFileName?: string;
     /** 起始行 */
     StartCount?: number;

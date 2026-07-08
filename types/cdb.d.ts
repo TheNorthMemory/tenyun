@@ -334,11 +334,11 @@ declare interface BackupInfo {
   IntranetUrl?: string;
   /** 下载地址 */
   InternetUrl?: string;
-  /** 日志具体类型。可能的值有 &quot;logical&quot;: 逻辑冷备， &quot;physical&quot;: 物理冷备。 */
+  /** 日志具体类型。可能的值有 "logical": 逻辑冷备， "physical": 物理冷备。 */
   Type?: string;
   /** 备份子任务的ID，删除备份文件时使用 */
   BackupId?: number;
-  /** 备份任务状态。可能的值有 &quot;SUCCESS&quot;: 备份成功， &quot;FAILED&quot;: 备份失败， &quot;RUNNING&quot;: 备份进行中。 */
+  /** 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。 */
   Status?: string;
   /** 备份任务的完成时间 */
   FinishTime?: string;
@@ -346,9 +346,9 @@ declare interface BackupInfo {
   Creator?: string;
   /** 备份任务的开始时间 */
   StartTime?: string;
-  /** 备份方法。可能的值有 &quot;full&quot;: 全量备份， &quot;partial&quot;: 部分备份。 */
+  /** 备份方法。可能的值有 "full": 全量备份， "partial": 部分备份。 */
   Method?: string;
-  /** 备份方式。可能的值有 &quot;manual&quot;: 手动备份， &quot;automatic&quot;: 自动备份。 */
+  /** 备份方式。可能的值有 "manual": 手动备份， "automatic": 自动备份。 */
   Way?: string;
   /** 手动备份别名 */
   ManualBackupName?: string;
@@ -432,7 +432,7 @@ declare interface BinlogInfo {
   BinlogFinishTime?: string;
   /** 本地binlog文件所在地域 */
   Region?: string;
-  /** 备份任务状态。可能的值有 &quot;SUCCESS&quot;: 备份成功， &quot;FAILED&quot;: 备份失败， &quot;RUNNING&quot;: 备份进行中。 */
+  /** 备份任务状态。可能的值有 "SUCCESS": 备份成功， "FAILED": 备份失败， "RUNNING": 备份进行中。 */
   Status?: string;
   /** binlog异地备份详细信息 */
   RemoteInfo?: RemoteBackupInfo[];
@@ -1038,7 +1038,7 @@ declare interface InstanceInfo {
   EngineType?: string;
   /** 最大延迟阈值 */
   MaxDelayTime?: number;
-  /** 实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。说明：若返回：&quot;DiskType&quot;: &quot;CLOUD_HSSD&quot;，则表示该实例磁盘类型为增强型 SSD 云硬盘。若返回：&quot;DiskType&quot;: &quot;CLOUD_SSD&quot;，则表示该实例磁盘类型为 SSD 云硬盘。若返回：&quot;DiskType&quot;: &quot;&quot;，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。 */
+  /** 实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。说明：若返回："DiskType": "CLOUD_HSSD"，则表示该实例磁盘类型为增强型 SSD 云硬盘。若返回："DiskType": "CLOUD_SSD"，则表示该实例磁盘类型为 SSD 云硬盘。若返回："DiskType": ""，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。 */
   DiskType?: string;
   /** 当前扩容的CPU核心数。 */
   ExpandCpu?: number;
@@ -1997,23 +1997,23 @@ declare interface AddTimeWindowResponse {
 declare interface AdjustCdbProxyAddressRequest {
   /** 代理组 ID。可通过 DescribeCdbProxyInfo 接口获取。 */
   ProxyGroupId: string;
-  /** 权重分配模式，系统自动分配：&quot;system&quot;， 自定义：&quot;custom&quot; */
+  /** 权重分配模式，系统自动分配："system"， 自定义："custom" */
   WeightMode: string;
-  /** 是否开启延迟剔除，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否开启延迟剔除，取值："true" | "false" */
   IsKickOut: boolean;
   /** 最小保留数量，最小取值：0。说明：当 IsKickOut 为 true 时才有效。 */
   MinCount: number;
   /** 延迟剔除阈值，最小取值：1，取值范围：[1,10000]，整数。 */
   MaxDelay: number;
-  /** 是否开启故障转移，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否开启故障转移，取值："true" | "false" */
   FailOver: boolean;
-  /** 是否自动添加RO，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否自动添加RO，取值："true" | "false" */
   AutoAddRo: boolean;
-  /** 是否是只读，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否是只读，取值："true" | "false" */
   ReadOnly: boolean;
   /** 代理组地址 ID。可通过 DescribeCdbProxyInfo 接口获取。 */
   ProxyAddressId: string;
-  /** 是否开启事务分离，取值：&quot;true&quot; | &quot;false&quot;，默认值 false。 */
+  /** 是否开启事务分离，取值："true" | "false"，默认值 false。 */
   TransSplit?: boolean;
   /** 是否开启连接池。默认关闭。注意：如需使用数据库代理连接池能力，MySQL 8.0 主实例的内核小版本要大于等于 MySQL 8.0 20230630。 */
   ConnectionPool?: boolean;
@@ -2321,21 +2321,21 @@ declare interface CreateBackupResponse {
 declare interface CreateCdbProxyAddressRequest {
   /** 代理组 ID。可通过 DescribeCdbProxyInfo 接口获取。 */
   ProxyGroupId: string;
-  /** 权重分配模式，系统自动分配：&quot;system&quot;， 自定义：&quot;custom&quot; */
+  /** 权重分配模式，系统自动分配："system"， 自定义："custom" */
   WeightMode: string;
-  /** 是否开启延迟剔除，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否开启延迟剔除，取值："true" | "false" */
   IsKickOut: boolean;
   /** 最小保留数量，最小取值：0 */
   MinCount: number;
   /** 延迟剔除阈值，最小取值：1，范围：1 - 10000，整数。 */
   MaxDelay: number;
-  /** 是否开启故障转移，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否开启故障转移，取值："true" | "false" */
   FailOver: boolean;
-  /** 是否自动添加RO，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否自动添加RO，取值："true" | "false" */
   AutoAddRo: boolean;
-  /** 是否是只读，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否是只读，取值："true" | "false" */
   ReadOnly: boolean;
-  /** 是否开启事务分离，取值：&quot;true&quot; | &quot;false&quot; */
+  /** 是否开启事务分离，取值："true" | "false" */
   TransSplit: boolean;
   /** 读写权重分配 */
   ProxyAllocation: ProxyAllocation[];
@@ -2425,7 +2425,7 @@ declare interface CreateCloneInstanceRequest {
   SlaveZone?: string;
   /** 备库 2 的可用区信息，默认为空，克隆强同步主实例时可指定该参数。 */
   BackupZone?: string;
-  /** 克隆实例类型。支持值包括：&quot;UNIVERSAL&quot; - 通用型实例，&quot;EXCLUSIVE&quot; - 独享型实例，&quot;CLOUD_NATIVE_CLUSTER&quot; - 云盘版标准型，&quot;CLOUD_NATIVE_CLUSTER_EXCLUSIVE&quot; - 云盘版加强型。不指定则默认为通用型。 */
+  /** 克隆实例类型。支持值包括："UNIVERSAL" - 通用型实例，"EXCLUSIVE" - 独享型实例，"CLOUD_NATIVE_CLUSTER" - 云盘版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 云盘版加强型。不指定则默认为通用型。 */
   DeviceType?: string;
   /** 新克隆实例节点数。如果需要克隆出三节点实例，请将该值设置为3，或指定 BackupZone 参数；如果需要克隆出双节点实例，请将该值设置为2，默认克隆出双节点实例；如果需要克隆出四节点实例，请将该值设置为4，或指定 FourthZone 参数。 */
   InstanceNodes?: number;
@@ -2549,13 +2549,13 @@ declare interface CreateDBInstanceHourRequest {
   AutoSyncFlag?: number;
   /** 金融围拢 ID 。 */
   CageId?: string;
-  /** 默认参数模板类型。支持值包括：&quot;HIGH_STABILITY&quot; - 高稳定模板，&quot;HIGH_PERFORMANCE&quot; - 高性能模板，默认值是：&quot;HIGH_STABILITY&quot;。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
+  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板，默认值是："HIGH_STABILITY"。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
   ParamTemplateType?: string;
-  /** 告警策略名数组，例如:[&quot;policy-uyoee9wg&quot;]，AlarmPolicyList不为空时该参数无效。 */
+  /** 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。 */
   AlarmPolicyIdList?: string[];
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.默认为false：发送正常请求，通过检查后直接创建实例。 */
   DryRun?: boolean;
-  /** 实例引擎类型，默认为&quot;InnoDB&quot;，支持值包括：&quot;InnoDB&quot;，&quot;RocksDB&quot;。 */
+  /** 实例引擎类型，默认为"InnoDB"，支持值包括："InnoDB"，"RocksDB"。 */
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
@@ -2649,13 +2649,13 @@ declare interface CreateDBInstanceRequest {
   AutoSyncFlag?: number;
   /** 金融围拢 ID。 */
   CageId?: string;
-  /** 默认参数模板类型。支持值包括：&quot;HIGH_STABILITY&quot; - 高稳定模板，&quot;HIGH_PERFORMANCE&quot; - 高性能模板。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
+  /** 默认参数模板类型。支持值包括："HIGH_STABILITY" - 高稳定模板，"HIGH_PERFORMANCE" - 高性能模板。备注：如您需使用云数据库 MySQL 默认参数模板，请设置 ParamTemplateType。 */
   ParamTemplateType?: string;
-  /** 告警策略名数组，例如:[&quot;policy-uyoee9wg&quot;]，AlarmPolicyList不为空时该参数无效。 */
+  /** 告警策略名数组，例如:["policy-uyoee9wg"]，AlarmPolicyList不为空时该参数无效。 */
   AlarmPolicyIdList?: string[];
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回 RequestId。false：发送正常请求，通过检查后直接创建实例。默认为 false。 */
   DryRun?: boolean;
-  /** 实例引擎类型，默认为&quot;InnoDB&quot;，支持值包括：&quot;InnoDB&quot;，&quot;RocksDB&quot;。 */
+  /** 实例引擎类型，默认为"InnoDB"，支持值包括："InnoDB"，"RocksDB"。 */
   EngineType?: string;
   /** 指定实例的IP列表。仅支持主实例指定，按实例顺序，不足则按未指定处理。 */
   Vips?: string[];
@@ -3542,7 +3542,7 @@ declare interface DescribeDBInstanceConfigResponse {
   ProtectMode?: number;
   /** 主实例部署方式，可能的返回值：0 - 单可用部署，1 - 多可用区部署。 */
   DeployMode?: number;
-  /** 实例主可用区信息，格式如 &quot;ap-shanghai-2&quot;。 */
+  /** 实例主可用区信息，格式如 "ap-shanghai-2"。 */
   Zone?: string;
   /** 双节点、三节点、四节点实例第一备库的配置信息。查询双节点时，此参数返回为双节点的备库信息；查询三节点、四节点时，此参数返回为实例的第一备库信息。 */
   SlaveConfig?: SlaveConfig | null;
@@ -3651,9 +3651,9 @@ declare interface DescribeDBInstancesRequest {
   SubnetIds?: number[];
   /** 是否锁定标记，可选值：0 - 不锁定，1 - 锁定，默认为0。 */
   CdbErrors?: number[];
-  /** 返回结果集排序的字段，目前支持：&quot;instanceId&quot;，&quot;instanceName&quot;，&quot;createTime&quot;，&quot;deadlineTime&quot;。 */
+  /** 返回结果集排序的字段，目前支持："instanceId"，"instanceName"，"createTime"，"deadlineTime"。 */
   OrderBy?: string;
-  /** 返回结果集排序方式。目前支持值：&quot;ASC&quot; - 表示升序，&quot;DESC&quot; - 表示降序，默认为 &quot;DESC&quot;。 */
+  /** 返回结果集排序方式。目前支持值："ASC" - 表示升序，"DESC" - 表示降序，默认为 "DESC"。 */
   OrderDirection?: string;
   /** 是否以安全组 ID 为过滤条件。说明：0表示否，1表示是。 */
   WithSecurityGroup?: number;
@@ -3707,7 +3707,7 @@ declare interface DescribeDBInstancesResponse {
 declare interface DescribeDBPriceRequest {
   /** 实例时长，单位：月，最小值 1，最大值为 36；查询按量计费价格时，该字段无效。 */
   Period: number;
-  /** 可用区信息，格式如 &quot;ap-guangzhou-2&quot;。具体能设置的值请通过 DescribeDBZoneConfig 接口查询。InstanceId为空时该参数为必填项。 */
+  /** 可用区信息，格式如 "ap-guangzhou-2"。具体能设置的值请通过 DescribeDBZoneConfig 接口查询。InstanceId为空时该参数为必填项。 */
   Zone?: string;
   /** 实例数量，默认值为 1，最小值 1，最大值为 100。InstanceId为空时该参数为必填项。 */
   GoodsNum?: number;
@@ -3731,7 +3731,7 @@ declare interface DescribeDBPriceRequest {
   InstanceId?: string;
   /** 按量计费阶梯。仅PayType=HOUR_PAID有效，支持值包括：1，2，3。阶梯时长见https://cloud.tencent.com/document/product/236/18335。 */
   Ladder?: number;
-  /** 磁盘类型，查询云盘版、单节点云盘版实例价格可以指定该参数。默认值为 SSD 云硬盘。支持值包括：&quot;CLOUD_SSD&quot; - SSD 云硬盘。&quot;CLOUD_HSSD&quot; - 增强型 SSD 云硬盘。&quot;CLOUD_PREMIUM&quot; - 高性能云硬盘。 */
+  /** 磁盘类型，查询云盘版、单节点云盘版实例价格可以指定该参数。默认值为 SSD 云硬盘。支持值包括："CLOUD_SSD" - SSD 云硬盘。"CLOUD_HSSD" - 增强型 SSD 云硬盘。"CLOUD_PREMIUM" - 高性能云硬盘。 */
   DiskType?: string;
 }
 
@@ -4031,7 +4031,7 @@ declare interface DescribeInstanceUpgradeTypeRequest {
   DstSlaveZone?: number;
   /** 目标实例备机2可用区 ID。可使用 DescribeCdbZoneConfig 获取可用区 ID。 */
   DstBackupZone?: number;
-  /** 目标实例类型。支持值包括：&quot;CUSTOM&quot; - 通用型实例，&quot;EXCLUSIVE&quot; - 独享型实例，&quot;ONTKE&quot; - ONTKE 单节点实例，&quot;CLOUD_NATIVE_CLUSTER&quot; - 云盘版标准型，&quot;CLOUD_NATIVE_CLUSTER_EXCLUSIVE&quot; - 云盘版加强型。 */
+  /** 目标实例类型。支持值包括："CUSTOM" - 通用型实例，"EXCLUSIVE" - 独享型实例，"ONTKE" - ONTKE 单节点实例，"CLOUD_NATIVE_CLUSTER" - 云盘版标准型，"CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - 云盘版加强型。 */
   DstCdbType?: string;
   /** 目标实例主可用区 ID。可使用 DescribeCdbZoneConfig 获取可用区 ID。 */
   DstZoneId?: number;
@@ -4877,7 +4877,7 @@ declare interface ModifyDBInstanceLogToCLSResponse {
 declare interface ModifyDBInstanceModesRequest {
   /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。 */
   InstanceId: string;
-  /** 云数据库的模式，目前仅支持传入 &quot;protectMode&quot; 表示修改主从同步方式。 */
+  /** 云数据库的模式，目前仅支持传入 "protectMode" 表示修改主从同步方式。 */
   Mode: string;
   /** 数据同步方式，可选值：0-异步复制，1-半同步复制，2-强同步复制。 */
   ProtectMode?: number;
@@ -5529,7 +5529,7 @@ declare interface UpgradeDBInstanceRequest {
   BackupZone?: string;
   /** 实例类型，默认为 master，支持值包括：master - 表示主实例，dr - 表示灾备实例，ro - 表示只读实例。 */
   InstanceRole?: string;
-  /** 实例隔离类型。支持值包括： &quot;UNIVERSAL&quot; - 通用型实例， &quot;EXCLUSIVE&quot; - 独享型实例， &quot;BASIC&quot; - 基础版实例。 */
+  /** 实例隔离类型。支持值包括： "UNIVERSAL" - 通用型实例， "EXCLUSIVE" - 独享型实例， "BASIC" - 基础版实例。 */
   DeviceType?: string;
   /** 升级后的实例cpu核数，如果不传将根据 Memory 指定的内存值自动填充最小允许规格的cpu值。说明：如果进行迁移业务，请一定填写实例规格（CPU、内存），不然系统会默认以最小允许规格传参。 */
   Cpu?: number;
@@ -5547,7 +5547,7 @@ declare interface UpgradeDBInstanceRequest {
   ClusterTopology?: ClusterTopology;
   /** 检查原地升级是否需要重启，1 检查， 0 不检查。如果值为1，检查为原地升级需要重启，则会停止升级并进行返回提示，如果为原地升级不重启，则正常执行升级流程。 */
   CheckFastUpgradeReboot?: number;
-  /** 数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源对应的选项为: &quot;high&quot;、&quot;normal&quot;、&quot;low&quot;，默认为空参数详解，：&quot;high&quot;: 对应控制台中的高，数据库负载过高不建议使用&quot;normal&quot;：对应控制台中的标准&quot;low&quot;：对应控制台中的低 */
+  /** 数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源对应的选项为: "high"、"normal"、"low"，默认为空参数详解，："high": 对应控制台中的高，数据库负载过高不建议使用"normal"：对应控制台中的标准"low"：对应控制台中的低 */
   DataCheckSensitive?: string;
   /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
   FourthZone?: string;

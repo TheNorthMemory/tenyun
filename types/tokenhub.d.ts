@@ -500,17 +500,17 @@ declare interface UsageRankItem {
 
 /** 用量时间周期内的时序点列表（按 metric key 索引）。为 JSON 数组的字符串形式,数组长度与响应 Timestamps 一致，无数据点处为 null。具体包含哪些 key 由响应 MetricKeys 决定。 */
 declare interface UsageSeries {
-  /** [tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 &quot;[12,null,15]&quot;。 */
+  /** [tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 "[12,null,15]"。 */
   TotalToken?: string;
-  /** [tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 &quot;[7,null,9]&quot;。 */
+  /** [tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 "[7,null,9]"。 */
   InputTotalToken?: string;
-  /** [tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 &quot;[5,null,6]&quot;。 */
+  /** [tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 "[5,null,6]"。 */
   OutputTotalToken?: string;
-  /** [tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如&quot;[5,null,6]&quot;。 */
+  /** [tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
   CacheTotalToken?: string;
-  /** [search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如&quot;[5,null,6]&quot;。 */
+  /** [search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
   SearchRequestCount?: string;
-  /** [search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如&quot;[5,null,6]&quot;。 */
+  /** [search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
   SearchCount?: string;
 }
 
@@ -528,6 +528,14 @@ declare interface UsageStats {
   SearchRequestCount?: number;
   /** [search 族] 整段累计搜索引擎调用次数 */
   SearchCount?: number;
+}
+
+declare interface CreateApiKeyRequest {
+}
+
+declare interface CreateApiKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateGlossaryEntriesRequest {
@@ -608,6 +616,14 @@ declare interface CreateTokenPlanTeamOrderAndBuyRequest {
 declare interface CreateTokenPlanTeamOrderAndBuyResponse {
   /** 腾讯云订单 ID。用于关联一次购买操作下的所有子订单。 */
   BigOrderId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteApiKeyRequest {
+}
+
+declare interface DeleteApiKeyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -943,7 +959,7 @@ declare interface DescribeUsageRankListRequest {
   MetricType?: string;
   /** 维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。 */
   Target?: string;
-  /** 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；&gt; 10 天 → 86400。仅 ShowAll=false 时使用。 */
+  /** 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；> 10 天 → 86400。仅 ShowAll=false 时使用。 */
   Period?: number;
   /** 翻页起点，从 0 起，默认 0。ShowAll=true 时忽略。页大小固定为 10。 */
   Offset?: number;
@@ -980,6 +996,22 @@ declare interface DescribeUsageRankListResponse {
   PageStats?: UsageStats;
   /** 总统计结果 */
   TotalStats?: UsageStats;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyApiKeyInfoRequest {
+}
+
+declare interface ModifyApiKeyInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyApiKeyStatusRequest {
+}
+
+declare interface ModifyApiKeyStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1063,6 +1095,8 @@ declare interface UpgradeTokenPlanTeamOrderResponse {
 /** {@link Tokenhub TokenHub} */
 declare interface Tokenhub {
   (): Versions;
+  /** 创建 API 密钥 {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
+  CreateApiKey(data?: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
   /** 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
   CreateGlossary(data: CreateGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryResponse>;
   /** 批量创建术语条目 {@link CreateGlossaryEntriesRequest} {@link CreateGlossaryEntriesResponse} */
@@ -1071,6 +1105,8 @@ declare interface Tokenhub {
   CreateTokenPlanApiKeys(data: CreateTokenPlanApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanApiKeysResponse>;
   /** 创建 Token Plan 套餐 {@link CreateTokenPlanTeamOrderAndBuyRequest} {@link CreateTokenPlanTeamOrderAndBuyResponse} */
   CreateTokenPlanTeamOrderAndBuy(data: CreateTokenPlanTeamOrderAndBuyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanTeamOrderAndBuyResponse>;
+  /** 删除 API 密钥 {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
+  DeleteApiKey(data?: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
   /** 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
   DeleteGlossary(data: DeleteGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryResponse>;
   /** 批量删除术语条目 {@link DeleteGlossaryEntriesRequest} {@link DeleteGlossaryEntriesResponse} */
@@ -1101,6 +1137,10 @@ declare interface Tokenhub {
   DescribeTokenPlanList(data?: DescribeTokenPlanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanListResponse>;
   /** 查询用量排行列表 {@link DescribeUsageRankListRequest} {@link DescribeUsageRankListResponse} */
   DescribeUsageRankList(data: DescribeUsageRankListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageRankListResponse>;
+  /** 更新 API 密钥信息 {@link ModifyApiKeyInfoRequest} {@link ModifyApiKeyInfoResponse} */
+  ModifyApiKeyInfo(data?: ModifyApiKeyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyInfoResponse>;
+  /** 更新 API 密钥状态 {@link ModifyApiKeyStatusRequest} {@link ModifyApiKeyStatusResponse} */
+  ModifyApiKeyStatus(data?: ModifyApiKeyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyStatusResponse>;
   /** 批量修改术语条目 {@link ModifyGlossaryEntriesRequest} {@link ModifyGlossaryEntriesResponse} */
   ModifyGlossaryEntries(data: ModifyGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlossaryEntriesResponse>;
   /** 修改 Token Plan 套餐的 API Key 配置 {@link ModifyTokenPlanApiKeyRequest} {@link ModifyTokenPlanApiKeyResponse} */

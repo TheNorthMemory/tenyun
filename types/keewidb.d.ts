@@ -613,11 +613,11 @@ declare interface CreateInstancesRequest {
   ZoneId?: number;
   /** 实例所属的可用区名称。具体取值，请参见地域和可用区获取。参数ZoneId和ZoneName至少配置其中一个。 */
   ZoneName?: string;
-  /** 创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。 */
+  /** 创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。 */
   InstanceName?: string;
   /** 指明创建的实例是否需要支持免密访问。true：免密实例。false：非免密实例，默认为非免密实例。此时，需要设置访问密码。 */
   NoAuth?: boolean;
-  /** 实例访问密码。当参数NoAuth为true时，Password为无需设置，否则Password为必填参数。密码复杂度要求：8-30个字符。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种。不能以"/"开头。 */
+  /** 实例访问密码。当参数NoAuth为true时，Password为无需设置，否则Password为必填参数。密码复杂度要求：8-30个字符。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;<>,.?/ 中的2种。不能以"/"开头。 */
   Password?: string;
   /** 自定义端口。默认为6379，范围[1024,65535]。 */
   VPort?: number;
@@ -633,7 +633,7 @@ declare interface CreateInstancesRequest {
   DiskSize?: number;
   /** 计算 CPU 核数。CPU 核数与内存为固定搭配，具体信息，请参见产品规格。 */
   MachineCpu?: number;
-  /** 项目id，取值以用户账户&gt;用户账户相关接口查询&gt;项目列表返回的projectId为准。 */
+  /** 项目id，取值以用户账户>用户账户相关接口查询>项目列表返回的projectId为准。 */
   ProjectId?: number;
   /** 数据压缩开关。ON：开启，默认开启压缩。OFF：关闭。 */
   Compression?: string;

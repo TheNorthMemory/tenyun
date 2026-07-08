@@ -859,7 +859,7 @@ declare interface CreateClusterRequest {
   ComputeNodeCount?: number;
   /** 调度器类型。默认取值：SLURM。SLURM：SLURM调度器。 */
   SchedulerType?: string;
-  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是&quot;latest&quot;, 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7 */
+  /** 创建调度器的版本号，可填写版本号为“latest” 和 各调度器支持的版本号；如果是"latest", 则代表创建的是平台当前支持的该类型调度器最新版本。如果不填写，默认创建的是“latest”版本调度器各调度器支持的集群版本：SLURM：21.08.8、23.11.7 */
   SchedulerVersion?: string;
   /** 指定有效的镜像ID，格式形如img-xxx。目前支持部分公有镜像和自定义镜像。公共镜像请参考镜像限制 */
   ImageId?: string;

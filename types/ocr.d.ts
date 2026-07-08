@@ -3668,9 +3668,9 @@ declare interface ExtractDocAgentResponse {
   Angle?: number;
   /** 配置结构化文本信息。 */
   StructuralList?: GroupInfo[];
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4053,11 +4053,11 @@ declare interface IDCardOCRRequest {
   ImageUrl?: string;
   /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
   CardSide?: string;
-  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true})API 3.0 Explorer 设置方式参考：Config = {&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true} */
+  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
   Config?: string;
   /** 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。 */
   EnableRecognitionRectify?: boolean;
-  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的&quot;ReflectWarn&quot;:true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
+  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
   EnableReflectDetail?: boolean;
   /** 用于控制是否开启日期校验，默认值为true，打开会进行日期校验。 */
   EnableDateVerify?: boolean;
@@ -4517,7 +4517,7 @@ declare interface RecognizeAgentRequest {
   PdfPageNumber?: number;
   /** 模型选择。枚举值：0： 推理模型。1： 识别、推理模型。默认值：0 */
   SelectModel?: number;
-  /** 任务类型。枚举值：0： 全文识别。识别且输出全文内容。1： 判断。判断输入图的内容是否为Query中的内容，返回结果为是或否。如Query:&quot;增值税发票&quot;，该任务类型下，将判断输入图是否为增值税发票，返回&quot;是&quot;或&quot;否&quot;。2： 分类。判断输入图属于Query中具体哪个分类项。如Query:[&quot;营业执照&quot;,&quot;合同&quot;,&quot;票据&quot;]，在该任务类型下，将判断输入图是否属于&quot;营业执照&quot;、&quot;合同&quot;、&quot;票据&quot;，返回&quot;营业执照&quot;/&quot;合同&quot;/&quot;票据&quot;或&quot;均不符合&quot;。3： 总结提炼。总结输入图与Query相关的内容。如Query:&quot;工作经历&quot;，在该任务类型下，将输出输入图中和&quot;工作经历&quot;相关的内容，或&quot;无相关内容&quot;。4： 信息提取。按照自定义字段提取Key-Value，且支持多层级提取，详见入参SchemaItems说明。入参可参考下面的接口示例QueryType=4场景默认值：0 */
+  /** 任务类型。枚举值：0： 全文识别。识别且输出全文内容。1： 判断。判断输入图的内容是否为Query中的内容，返回结果为是或否。如Query:"增值税发票"，该任务类型下，将判断输入图是否为增值税发票，返回"是"或"否"。2： 分类。判断输入图属于Query中具体哪个分类项。如Query:["营业执照","合同","票据"]，在该任务类型下，将判断输入图是否属于"营业执照"、"合同"、"票据"，返回"营业执照"/"合同"/"票据"或"均不符合"。3： 总结提炼。总结输入图与Query相关的内容。如Query:"工作经历"，在该任务类型下，将输出输入图中和"工作经历"相关的内容，或"无相关内容"。4： 信息提取。按照自定义字段提取Key-Value，且支持多层级提取，详见入参SchemaItems说明。入参可参考下面的接口示例QueryType=4场景默认值：0 */
   QueryType?: number;
   /** 自定义提取字段的结构，详见SchemaList结构。仅当QueryType=4时生效。注：.N表示数组型参数。 */
   SchemaItems?: SchemaList[];
@@ -4547,11 +4547,11 @@ declare interface RecognizeEncryptedIDCardOCRRequest {
   ImageUrl?: string;
   /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
   CardSide?: string;
-  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true})API 3.0 Explorer 设置方式参考：Config = {&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true} */
+  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
   Config?: string;
   /** 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。 */
   EnableRecognitionRectify?: boolean;
-  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的&quot;ReflectWarn&quot;:true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
+  /** 默认值为false。此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。 */
   EnableReflectDetail?: boolean;
   /** Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic */
   CardWarnType?: string;
@@ -5091,7 +5091,7 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   BoolSingleQuestion?: boolean;
   /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
   EnableDeepThink?: boolean;
-  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改； 设置方式参考 {&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true} */
+  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改； 设置方式参考 {"KnowledgePoints":true,"TrueAnswer":true}参数格式：{"KnowledgePoints":true,"TrueAnswer":true} */
   QuestionConfigMap?: string;
   /** 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中 */
   ReferenceAnswer?: string;

@@ -44,6 +44,14 @@ declare interface CommonServiceBaseInfo {
   PreAuthorization?: boolean;
 }
 
+/** 归集业务联系人信息 */
+declare interface ContactCollectInfo {
+  /** 业务联系人姓名 */
+  ContactName?: string;
+  /** 联系人电话 */
+  ContactPhone?: string;
+}
+
 /** 客户信息 */
 declare interface CustomerInfo {
   /** 公司全称 */
@@ -1392,6 +1400,42 @@ declare interface DescribeResourceUsageResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWorkOrderCarCollectListRequest {
+  /** 过滤条件，支持 car-number（车牌号模糊匹配）、driver-name（驾驶员姓名模糊匹配） */
+  Filters?: Filter[];
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100 */
+  Limit?: number;
+}
+
+declare interface DescribeWorkOrderCarCollectListResponse {
+  /** 符合条件的记录总数 */
+  TotalCount?: number;
+  /** 归集车辆信息列表 */
+  CarSet?: PersonnelVisitCar[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkOrderContactCollectListRequest {
+  /** 过滤条件，支持 contact-name（联系人姓名模糊匹配）、contact-phone（联系人电话模糊匹配） */
+  Filters?: Filter[];
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100 */
+  Limit?: number;
+}
+
+declare interface DescribeWorkOrderContactCollectListResponse {
+  /** 符合条件的记录总数 */
+  TotalCount?: number;
+  /** 归集业务联系人信息列表 */
+  ContactSet?: ContactCollectInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeWorkOrderListRequest {
   /** 过滤条件。支持：service-type、order-type、order-status、order-id */
   Filters?: Filter[];
@@ -1408,6 +1452,24 @@ declare interface DescribeWorkOrderListResponse {
   TotalCount?: number;
   /** 查询结果 */
   WorkOrderSet?: WorkOrderData[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkOrderPersonnelCollectListRequest {
+  /** 过滤条件，支持 personnel-name（姓名模糊匹配）、personnel-tel-number（手机号模糊匹配） */
+  Filters?: Filter[];
+  /** 偏移量，默认为0 */
+  Offset?: number;
+  /** 返回数量，默认为20，最大值为100 */
+  Limit?: number;
+}
+
+declare interface DescribeWorkOrderPersonnelCollectListResponse {
+  /** 符合条件的记录总数 */
+  TotalCount?: number;
+  /** 归集人员信息列表 */
+  PersonnelSet?: Personnel[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1545,8 +1607,14 @@ declare interface Chc {
   DescribeRacksDistribution(data: DescribeRacksDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRacksDistributionResponse>;
   /** 查询资源汇总 {@link DescribeResourceUsageRequest} {@link DescribeResourceUsageResponse} */
   DescribeResourceUsage(data?: DescribeResourceUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceUsageResponse>;
+  /** 查询归集车辆信息列表 {@link DescribeWorkOrderCarCollectListRequest} {@link DescribeWorkOrderCarCollectListResponse} */
+  DescribeWorkOrderCarCollectList(data?: DescribeWorkOrderCarCollectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderCarCollectListResponse>;
+  /** 查询归集业务联系人列表 {@link DescribeWorkOrderContactCollectListRequest} {@link DescribeWorkOrderContactCollectListResponse} */
+  DescribeWorkOrderContactCollectList(data?: DescribeWorkOrderContactCollectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderContactCollectListResponse>;
   /** 查询工单列表 {@link DescribeWorkOrderListRequest} {@link DescribeWorkOrderListResponse} */
   DescribeWorkOrderList(data?: DescribeWorkOrderListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderListResponse>;
+  /** 查询归集人员信息列表 {@link DescribeWorkOrderPersonnelCollectListRequest} {@link DescribeWorkOrderPersonnelCollectListResponse} */
+  DescribeWorkOrderPersonnelCollectList(data?: DescribeWorkOrderPersonnelCollectListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderPersonnelCollectListResponse>;
   /** 查询工单统计信息 {@link DescribeWorkOrderStatisticsRequest} {@link DescribeWorkOrderStatisticsResponse} */
   DescribeWorkOrderStatistics(data?: DescribeWorkOrderStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkOrderStatisticsResponse>;
   /** 查询用户可用的工单列表 {@link DescribeWorkOrderTypesRequest} {@link DescribeWorkOrderTypesResponse} */

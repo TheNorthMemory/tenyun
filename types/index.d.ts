@@ -13,6 +13,7 @@ import Afc, { Versions as AfcVersions } from "./afc";
 import Ags, { Versions as AgsVersions } from "./ags";
 import Ai3d, { Versions as Ai3dVersions } from "./ai3d";
 import Aiart, { Versions as AiartVersions } from "./aiart";
+import Alb, { Versions as AlbVersions } from "./alb";
 import Ame, { Versions as AmeVersions } from "./ame";
 import Ams, { Versions as AmsVersions } from "./ams";
 import Anicloud, { Versions as AnicloudVersions } from "./anicloud";
@@ -273,6 +274,7 @@ export declare type SERVICE_VERSIONS = {
   ags: AgsVersions,
   ai3d: Ai3dVersions,
   aiart: AiartVersions,
+  alb: AlbVersions,
   ame: AmeVersions,
   ams: AmsVersions,
   anicloud: AnicloudVersions,
@@ -560,6 +562,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ai3d: Ai3d,
   /** {@link Aiart 腾讯混元生图} */
   aiart: Aiart,
+  /** {@link Alb 应用型负载均衡} */
+  alb: Alb,
   /** {@link Ame 正版曲库直通车} */
   ame: Ame,
   /** {@link Ams 音频内容安全} */

@@ -1383,7 +1383,7 @@ declare namespace V20180525 {
     BasePodNumber?: number;
     /** 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP */
     CiliumMode?: string;
-    /** 集群使用的runtime类型，包括&quot;docker&quot;和&quot;containerd&quot;两种类型，默认为&quot;docker&quot; */
+    /** 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker" */
     ContainerRuntime?: string;
     /** 是否启用 DataPlaneV2（cilium替代kube-proxy） */
     DataPlaneV2?: boolean;
@@ -1411,7 +1411,7 @@ declare namespace V20180525 {
     QGPUShareEnable?: boolean;
     /** 运行时版本 */
     RuntimeVersion?: string;
-    /** 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写&quot;tke-route-eni&quot;，独立网卡模式填写&quot;tke-direct-eni&quot;，默认为共享网卡模式 */
+    /** 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式 */
     VpcCniType?: string;
     /** 集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行，默认为true */
     IsHighAvailability?: boolean;
@@ -8264,7 +8264,7 @@ declare namespace V20180525 {
   interface ModifyClusterTagsRequest {
     /** 集群ID */
     ClusterId: string;
-    /** 集群标签:[{&quot;TagKey&quot;:&quot;env&quot;,&quot;TagValue&quot;:&quot;dev&quot;}]}] */
+    /** 集群标签:[{"TagKey":"env","TagValue":"dev"}]}] */
     Tags?: Tag[];
     /** 是否同步集群内子资源标签 */
     SyncSubresource?: boolean;

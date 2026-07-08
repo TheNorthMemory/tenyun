@@ -60,9 +60,9 @@ declare interface AutoScaleGroupAdvanceAttrs {
 declare interface AutoScaleRecord {
   /** 扩缩容规则名。 */
   StrategyName?: string;
-  /** &quot;SCALE_OUT&quot;和&quot;SCALE_IN&quot;，分别表示扩容和缩容。 */
+  /** "SCALE_OUT"和"SCALE_IN"，分别表示扩容和缩容。 */
   ScaleAction?: string;
-  /** 取值为&quot;SUCCESS&quot;,&quot;FAILED&quot;,&quot;PART_SUCCESS&quot;,&quot;IN_PROCESS&quot;，分别表示成功、失败、部分成功和流程中。 */
+  /** 取值为"SUCCESS","FAILED","PART_SUCCESS","IN_PROCESS"，分别表示成功、失败、部分成功和流程中。 */
   ActionStatus?: string;
   /** 流程触发时间。 */
   ActionTime?: string;
@@ -886,7 +886,7 @@ declare interface DynamicInstanceGroup {
   PodNum?: number | null;
   /** pod弹性最小个数 */
   MinPodNum?: number | null;
-  /** pod弹性最大个数，当MaxPodNum &gt; MinPodNum时，默认表示开启弹性扩缩容，将在范围内扩缩容 */
+  /** pod弹性最大个数，当MaxPodNum > MinPodNum时，默认表示开启弹性扩缩容，将在范围内扩缩容 */
   MaxPodNum?: number | null;
   /** 是否支持存储配置 */
   SupportPV?: boolean | null;
@@ -2752,7 +2752,7 @@ declare interface RepeatStrategy {
 declare interface Resource {
   /** 节点规格描述，如CVM.SA2。 */
   Spec: string;
-  /** 取值范围:&quot;LOCAL_SSD&quot; 3 //本地SSD&quot;CLOUD_SSD&quot; 4 //云SSD&quot;CLOUD_PREMIUM&quot; 5 //高效云盘&quot;CLOUD_HSSD&quot; 6 //增强型SSD云硬盘&quot;CLOUD_THROUGHPUT&quot; 11//吞吐型云硬盘&quot;CLOUD_TSSD&quot; 12 //极速型SSD云硬盘&quot;CLOUD_BSSD&quot; 13 //通用型SSD云硬盘&quot;CLOUD_BIGDATA&quot; 14 //大数据型云硬盘&quot;CLOUD_HIGHIO&quot; 15 //高IO型云硬盘 该类型字段为无效字段，实际系统盘类型会根据数据盘类型和节点类型判断，如果节点支持所选的数据盘类型，系统盘类型会跟数据盘保持一致，建议使用CreateCluster接口 */
+  /** 取值范围:"LOCAL_SSD" 3 //本地SSD"CLOUD_SSD" 4 //云SSD"CLOUD_PREMIUM" 5 //高效云盘"CLOUD_HSSD" 6 //增强型SSD云硬盘"CLOUD_THROUGHPUT" 11//吞吐型云硬盘"CLOUD_TSSD" 12 //极速型SSD云硬盘"CLOUD_BSSD" 13 //通用型SSD云硬盘"CLOUD_BIGDATA" 14 //大数据型云硬盘"CLOUD_HIGHIO" 15 //高IO型云硬盘 该类型字段为无效字段，实际系统盘类型会根据数据盘类型和节点类型判断，如果节点支持所选的数据盘类型，系统盘类型会跟数据盘保持一致，建议使用CreateCluster接口 */
   StorageType: number;
   /** 数据盘类型 取值范围：CLOUD_SSD：表示云SSD。CLOUD_PREMIUM：表示高效云盘。CLOUD_BASIC：表示云硬盘。LOCAL_BASIC：表示本地盘。LOCAL_SSD：表示本地SSD。CLOUD_HSSD：表示增强型SSD云硬盘。CLOUD_THROUGHPUT：表示吞吐型云硬盘。CLOUD_TSSD：表示极速型SSD云硬盘。CLOUD_BIGDATA：表示大数据型云硬盘。CLOUD_HIGHIO：表示高IO型云硬盘。CLOUD_BSSD：表示通用型SSD云硬盘。REMOTE_SSD：表示远端SSD盘。 */
   DiskType: string;
@@ -4180,6 +4180,8 @@ declare interface DeleteGroupsSTDRequest {
 declare interface DeleteGroupsSTDResponse {
   /** 删除返回结果 */
   Data?: ResultItem[];
+  /** 流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4218,6 +4220,8 @@ declare interface DeleteUserManagerUserListRequest {
 }
 
 declare interface DeleteUserManagerUserListResponse {
+  /** 流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5898,6 +5902,8 @@ declare interface ModifyUserGroupRequest {
 }
 
 declare interface ModifyUserGroupResponse {
+  /** 流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5914,6 +5920,8 @@ declare interface ModifyUserManagerPwdRequest {
 }
 
 declare interface ModifyUserManagerPwdResponse {
+  /** 流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5927,13 +5935,15 @@ declare interface ModifyUsersOfGroupSTDRequest {
   Users?: string[];
   /** 用户组描述 */
   Description?: string;
-  /** 枚举类, ADD, DELETE, SYNC枚举类说明:- ADD: 新增的批量用户, 多次新增相同的用户不会报错- DELETE: 从用户组里删除的批量用户, 删除不存在的用户不会报错- SYNC: 用于同步整个用户组, 当列表为空时代表清空整个用户组默认为SYNC */
+  /** 枚举类, ADD, DELETE, SYNC枚举类说明:ADD: 新增的批量用户, 多次新增相同的用户不会报错DELETE: 从用户组里删除的批量用户, 删除不存在的用户不会报错SYNC: 用于同步整个用户组, 当列表为空时代表清空整个用户组默认为SYNC */
   OperateAction?: string;
 }
 
 declare interface ModifyUsersOfGroupSTDResponse {
   /** 是否修改成功 */
   Data?: boolean;
+  /** 流程id */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6061,7 +6071,7 @@ declare interface ScaleOutClusterRequest {
   DisasterRecoverGroupIds?: string[];
   /** 扩容节点绑定标签列表。 */
   Tags?: Tag[];
-  /** 扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
+  /** 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
   HardwareSourceType?: string;
   /** Pod相关资源信息 */
   PodSpecInfo?: PodSpecInfo;
@@ -6135,7 +6145,7 @@ declare interface ScaleOutInstanceRequest {
   DisasterRecoverGroupIds?: string[];
   /** 扩容节点绑定标签列表。 */
   Tags?: Tag[];
-  /** 扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
+  /** 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型 */
   HardwareResourceType?: string;
   /** 使用Pod资源扩容时，指定的Pod规格以及来源等信息 */
   PodSpec?: PodSpec;

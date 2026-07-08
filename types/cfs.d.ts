@@ -186,7 +186,7 @@ declare interface DataRetrievalTaskInfo {
   DataRetrievalId?: string;
   /** 文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取示例值：cfs-xxxxxx */
   FileSystemId?: string;
-  /** 聚合检索条件示例值：from entries|where size &gt;4096 */
+  /** 聚合检索条件示例值：from entries|where size >4096 */
   CompoundCondition?: string;
   /** 列表检索条件 */
   QueryCondition?: string;
@@ -879,7 +879,7 @@ declare interface CreateDataRetrievalRequest {
   FileSystemId: string;
   /** 数据检索名称 示例值：DataDive */
   DataRetrievalName: string;
-  /** 聚合检索条件 示例值：from entries|where size &gt;4096 */
+  /** 聚合检索条件 示例值：from entries|where size >4096 */
   CompoundCondition?: string;
   /** 列表检索条件 */
   QueryCondition?: string;
@@ -1521,7 +1521,7 @@ declare interface ModifyDataRetrievalRequest {
   DataRetrievalId: string;
   /** 数据检索名称示例值：DataDive */
   DataRetrievalName?: string;
-  /** 聚合检索条件 示例值：from entries|where size &gt;4096 */
+  /** 聚合检索条件 示例值：from entries|where size >4096 */
   CompoundCondition?: string;
   /** 列表检索条件 */
   QueryCondition?: string;

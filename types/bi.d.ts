@@ -1194,9 +1194,9 @@ declare interface CreateAuthApiKeyRequest {
 declare interface CreateAuthApiKeyResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** &quot;&quot; */
+  /** "" */
   Extra?: string | null;
-  /** &quot;success&quot; */
+  /** "success" */
   Msg?: string | null;
   /** 数据 */
   Data?: ApiKeyAuthApplyVO | null;
@@ -1638,9 +1638,9 @@ declare interface DeleteAuthApiKeyRequest {
 declare interface DeleteAuthApiKeyResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** &quot;&quot; */
+  /** "" */
   Extra?: string | null;
-  /** &quot;success&quot; */
+  /** "success" */
   Msg?: string | null;
   /** 数据 */
   Data?: string | null;
@@ -1682,9 +1682,9 @@ declare interface DeleteProjectResponse {
   ErrorInfo?: ErrorInfo | null;
   /** ”“ */
   Extra?: string;
-  /** &quot;&quot; */
+  /** "" */
   Data?: string | null;
-  /** &quot;&quot; */
+  /** "" */
   Msg?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1774,9 +1774,9 @@ declare interface DescribeAuthApiKeyInfoRequest {
 declare interface DescribeAuthApiKeyInfoResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** &quot;&quot; */
+  /** "" */
   Extra?: string | null;
-  /** &quot;success&quot; */
+  /** "success" */
   Msg?: string | null;
   /** 数据 */
   Data?: ApiKeyAuthApplyVO | null;
@@ -1942,9 +1942,9 @@ declare interface DescribeProjectInfoRequest {
 declare interface DescribeProjectInfoResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** &quot;&quot; */
+  /** "" */
   Extra?: string | null;
-  /** &quot;&quot; */
+  /** "" */
   Msg?: string | null;
   /** 项目详情 */
   Data?: Project | null;
@@ -2304,9 +2304,9 @@ declare interface ModifyAuthApiKeyRequest {
 declare interface ModifyAuthApiKeyResponse {
   /** 自定义错误信息对象 */
   ErrorInfo?: ErrorInfo | null;
-  /** &quot;&quot; */
+  /** "" */
   Extra?: string | null;
-  /** &quot;success&quot; */
+  /** "success" */
   Msg?: string | null;
   /** 数据 */
   Data?: ApiKeyAuthApplyVO | null;

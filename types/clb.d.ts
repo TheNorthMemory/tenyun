@@ -2,6 +2,24 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 模型路由待关联 Guardrail 防护配置 */
+declare interface AssociateGuardrailConfig {
+  /** Guardrail 防护类型。枚举值：WAF：使用腾讯云 WAF LLM SDK 接入配置对模型路由请求进行安全防护。当前仅支持 WAF；不传时默认为 WAF。 */
+  Type?: string;
+  /** 关联的腾讯云 WAF 实例 ID。当 Type 为 WAF 时必填。接口会校验该 WAF 实例存在且属于当前账号。 */
+  InstanceId?: string;
+  /** WAF LLM SDK 接入服务 ID。该字段对应 WAF LLM SDK 接入配置中的服务标识，用于指定模型路由请求要绑定的 WAF 防护配置。当 Type 为 WAF 时必填。接口会校验该服务配置存在于指定的 WAF 实例下。 */
+  ServiceId?: string;
+  /** 最大检测对话轮数。当 Type 为 WAF 时选填；未传时默认取值为 5。若传入，取值必须为正整数。 */
+  InputCheckDepth?: number;
+}
+
+/** 关联的模型路由实例 */
+declare interface AssociatedModelRouterItem {
+  /** 模型路由实例ID */
+  ModelRouterId?: string;
+}
+
 /** 目标组关联到的规则 */
 declare interface AssociationItem {
   /** 关联到的负载均衡ID */
@@ -146,10 +164,14 @@ declare interface BudgetAssociation {
   KeyId?: string | null;
   /** 模型路由实例ID。当Type为ModelRouter时表示关联资源本身；当Type为Key时表示Key所属实例。 */
   ModelRouterId?: string;
-  /** 关联资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由Key */
-  Type?: string;
+  /** 资源对象的名称。 */
+  ResourceName?: string;
   /** 关联关系的状态枚举值：Active： 已生效Configuring： 配置中ConfigureFailed： 配置失败 */
   Status?: string;
+  /** 关联资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由KeyUserGroup：用户组 */
+  Type?: string;
+  /** 关联的用户组id */
+  UserGroupId?: string;
 }
 
 /** Budget预算配置 */
@@ -450,6 +472,16 @@ declare interface ClustersZone {
   SlaveZone?: string[];
 }
 
+/** ModelAlias 积分系数配置 */
+declare interface Coefficient {
+  /** 缓存命中输入积分系数。用于 provider prompt cache 命中的输入 token。取值范围：[0, 5000]默认值：3 */
+  InputCachedCoefficient?: number;
+  /** 输入积分系数。取值范围：[1, 5000]默认值：25 */
+  InputCoefficient?: number;
+  /** 输出积分系数。取值范围：[1, 5000]默认值：100 */
+  OutputCoefficient?: number;
+}
+
 /** 配置内容 */
 declare interface ConfigListItem {
   /** 配置ID */
@@ -508,6 +540,12 @@ declare interface CrossTargets {
   Region?: string;
 }
 
+/** 模型路由待解除关联 Guardrail 防护配置 */
+declare interface DisassociateGuardrailConfig {
+  /** Guardrail 防护配置 ID。可通过 DescribeModelRouterGuardrails 获取；DisassociateModelRouterGuardrails 使用该字段定位要解除关联的防护配置。 */
+  GuardrailId: string;
+}
+
 /** 独占集群 */
 declare interface ExclusiveCluster {
   /** 4层独占集群列表 */
@@ -558,6 +596,20 @@ declare interface FunctionTarget {
   Function: FunctionInfo;
   /** 权重 */
   Weight?: number;
+}
+
+/** 模型路由 Guardrail 防护配置 */
+declare interface GuardrailConfig {
+  /** Guardrail 防护配置 ID。DescribeModelRouterGuardrails 会返回该字段；DisassociateModelRouterGuardrails 和 ModifyModelRouterGuardrails 需要使用该字段定位要操作的防护配置。 */
+  GuardrailId?: string;
+  /** Guardrail 防护类型。枚举值：WAF：使用腾讯云 WAF LLM SDK 接入配置对模型路由请求进行安全防护。当前仅支持 WAF；AssociateModelRouterGuardrails 不传时默认为 WAF，ModifyModelRouterGuardrails 不传时沿用当前已关联 Guardrail 的 Type。 */
+  Type?: string;
+  /** 关联的腾讯云 WAF 实例 ID。ModifyModelRouterGuardrails 在 Type 为 WAF 时必填。DescribeModelRouterGuardrails 返回。接口会校验该 WAF 实例存在且属于当前账号。 */
+  InstanceId?: string;
+  /** WAF LLM SDK 接入服务 ID。该字段对应 WAF LLM SDK 接入配置中的服务标识，用于指定模型路由请求要绑定的 WAF 防护配置。ModifyModelRouterGuardrails 在 Type 为 WAF 时必填。DescribeModelRouterGuardrails 返回。接口会校验该服务配置存在于指定的 WAF 实例下。 */
+  ServiceId?: string;
+  /** 最大检测对话轮数。ModifyModelRouterGuardrails 选填；未传时沿用当前已关联 Guardrail 的 InputCheckDepth。DescribeModelRouterGuardrails 返回。若传入，取值必须为正整数。 */
+  InputCheckDepth?: number;
 }
 
 /** 健康检查信息。注意，自定义探测相关参数 目前只有少量区域灰度支持。 */
@@ -626,6 +678,42 @@ declare interface InputKeyInfo {
   PlainKey?: string;
 }
 
+/** 意图路由摘要信息对象（不含分层详情）。 */
+declare interface IntentRouterItem {
+  /** 创建时间（ISO 8601格式）。 */
+  CreatedTime?: string;
+  /** 意图路由ID（ir-xxx格式）。 */
+  IntentRouterId?: string;
+  /** 路由名称（例如 IntentRouter/customer-support）。 */
+  RouteName?: string;
+  /** 意图路由描述。 */
+  RouterDescribe?: string;
+  /** 状态。枚举值：Provisioning：创建中Active：正常Configuring：配置中ConfigureFailed：配置失败 */
+  Status?: string;
+  /** 分层配置列表。 */
+  Tiers?: IntentRouterTierItem[];
+  /** 更新时间（ISO 8601格式）。 */
+  UpdatedTime?: string;
+}
+
+/** IntentRouter Tier 字典项 */
+declare interface IntentRouterTierDictItem {
+  /** Tier 标识枚举值：default： 默认general_chat： 通用对话transformation_rewrite： 转换与改写knowledge_qa： 知识问答summarization： 摘要extraction_structuring： 抽取与结构化输出content_generation： 内容生成coding_technical： 编码与技术data_math_analysis： 数据、数学与分析reasoning_planning： 推理与规划tool_agentic_workflow： 工具与智能体工作流 */
+  TierId: string;
+  /** Tier 显示名称（已国际化） */
+  DisplayName?: string;
+  /** Tier 描述（已国际化） */
+  Description?: string;
+}
+
+/** 意图路由分层配置对象，包含分层名称和该分层下的模型列表。 */
+declare interface IntentRouterTierItem {
+  /** 该分层下的模型显示名称列表。 */
+  Models?: string[];
+  /** Tier 标识。枚举值：复杂度分层（4 个固定值，需全部包含）：SIMPLE、MEDIUM、COMPLEX、REASONINGdefault： 默认general_chat： 通用对话transformation_rewrite： 转换与改写knowledge_qa： 知识问答summarization： 摘要extraction_structuring： 抽取与结构化输出content_generation： 内容生成coding_technical： 编码与技术data_math_analysis： 数据、数学与分析reasoning_planning： 推理与规划tool_agentic_workflow： 工具与智能体工作流 */
+  TierName?: string;
+}
+
 /** 网络计费模式，最大出带宽 */
 declare interface InternetAccessible {
   /** TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费，国际站用户不支持该计费模式; BANDWIDTH_PACKAGE 按带宽包计费;BANDWIDTH_PREPAID按带宽预付费。 */
@@ -662,6 +750,56 @@ declare interface Job {
   Status?: string;
   /** 资源ID */
   ResourceIds?: string[];
+}
+
+/** Key 详情 */
+declare interface KeyDetailItem {
+  /** Key 业务 ID */
+  KeyId: string;
+  /** Key 创建时间（ISO 8601） */
+  CreatedAt?: string | null;
+  /** Key 显示名称 */
+  Name?: string | null;
+}
+
+/** Key信息 */
+declare interface KeyInfo {
+  /** 是否禁用Key */
+  Blocked?: boolean;
+  /** Key关联的Budget ID。未关联Budget时返回空字符串。 */
+  BudgetId?: string | null;
+  /** Key关联的Budget名称。未关联Budget时返回空字符串。 */
+  BudgetName?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** Key按Budget刷新周期划分的Credit使用情况。当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。 */
+  CreditUsageSet?: CreditUsage[];
+  /** Key的值 */
+  Key?: string;
+  /** Key的ID */
+  KeyId?: string;
+  /** Key名称 */
+  KeyName?: string;
+  /** 修改时间 */
+  ModifiedTime?: string;
+  /** 限速信息 */
+  RateLimitConfig?: RateLimitConfigForKey;
+  /** Key状态枚举值：Active： 正常 */
+  Status?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+  /** 所属的用户组ID */
+  UserGroupId?: string;
+  /** 所属的用户组名称 */
+  UserGroupName?: string;
+}
+
+/** Key 项 */
+declare interface KeyItem {
+  /** Provider API Key */
+  ApiKey: string;
+  /** Key 标识名称 */
+  Name?: string | null;
 }
 
 /** lb实例包年包月相关配置属性 */
@@ -1060,10 +1198,132 @@ declare interface LoadBalancerTraffic {
   Domain?: string;
 }
 
+/** 每个待探测模态的详细结果。 */
+declare interface ModalityProbeDetail {
+  /** 探测的模态 */
+  Modality?: string;
+  /** 探测结果枚举值：Supported： 模型支持该输入模态Unsupported： 模型不支持该输入模态Inconclusive： 模型未明确是否支持该模态，待重新探测 */
+  Status?: string;
+  /** 探测该模态请求的报错详情 */
+  ErrorInfo?: ProviderTestConnectionErrorInfo;
+}
+
+/** 模型别名对象 */
+declare interface ModelAlias {
+  /** 模型积分系数配置，包含 InputCoefficient、InputCachedCoefficient 和 OutputCoefficient。未配置时输入系数默认为 25，缓存命中输入系数默认为 3，输出系数默认为 100。 */
+  Coefficient?: Coefficient;
+  /** 模型别名名称。若用户配置了模型别名，则为该别名；未配置时为原始模型名称。 */
+  ModelAliasName?: string;
+  /** 该模型别名下各 BYOK 实例（ServiceProvider）的积分系数明细，体现 ModelAlias 与 ServiceProvider 的层级关系。默认返回该别名引用的全部实例；某实例返回 Coefficient 表示其单独配置了 ServiceProvider 维度系数，否则继承顶层 ModelAlias 的 Coefficient。该别名当前无有效 BYOK 引用时返回空数组。 */
+  ServiceProviderCoefficientSet?: ServiceProviderCoefficient[];
+  /** 模型来源。枚举值：BYOK：用户 BYOK 配置的模型。 */
+  Source?: string;
+  /** 状态枚举值：Active： 正常可用Configuring： 变配中ConfigureFailed： 变配失败 */
+  Status?: string;
+}
+
+/** 模型关联信息 */
+declare interface ModelAssociation {
+  /** 该模型最大可支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  InputModalitiesUnion?: string[];
+  /** 模型名称 */
+  ModelName?: string;
+  /** BYOK列表 */
+  ServiceProviders?: ServiceProvider[];
+  /** 模型类型 */
+  Type?: string;
+}
+
+/** 模型可用性 */
+declare interface ModelAvailability {
+  /** 该模型所有健康BYOK实例下支持的输入多模态能力的并集。模型不健康时返回空列表。枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  InputModalities?: string[];
+  /** 模型 */
+  Model?: string;
+  /** 可用性状态枚举值：Available： 可用Unavailable： 不可用Unknown： 未探测 */
+  Status?: string;
+}
+
+/** BYOK的健康检查结果 */
+declare interface ModelHealthCheckResults {
+  /** BYOK的KeyID */
+  ProviderKeyId?: string;
+  /** 模型 */
+  Model?: string;
+  /** 健康检查状态 */
+  Status?: string;
+}
+
+/** model 信息 */
+declare interface ModelItem {
+  /** 模型唯一标识, 用于实际访问 */
+  ModelId: string;
+  /** 该模型当前支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）默认值：text */
+  InputModalities?: string[];
+  /** 模型别名, 可以用于实际访问 */
+  ModelAlias?: string;
+}
+
+/** 模型及其 Key 信息 */
+declare interface ModelKeyInfoItem {
+  /** 接入类型 */
+  AccessType?: string;
+  /** API Base URL */
+  ApiBase?: string | null;
+  /** 模型创建时间（ISO 8601） */
+  CreatedAt?: string | null;
+  /** 自定义host header */
+  HostHeader?: string | null;
+  /** Key 数量 */
+  KeyCount?: number;
+  /** Key 详情列表 */
+  Keys?: KeyDetailItem[];
+  /** model信息 */
+  ModelIdsWithAlias?: ServiceProviderModelItem[];
+  /** 模型供应商 */
+  ModelProvider?: string;
+  /** 模型协议 */
+  Protocol?: string;
+  /** 内部通信占用IP */
+  ServiceIps?: string[];
+  /** 服务提供商ID */
+  ServiceProviderId?: string;
+  /** 服务提供商自定义名称 */
+  ServiceProviderName?: string | null;
+  /** 模型状态枚举值：Active： 运行中Provisioning： 创建中Configuring： 变配中Deleting： 删除中ProvisionFailed： 创建失败ConfigureFailed： 变配失败DeletionFailed： 删除失败Disabled： 已禁用 */
+  Status?: string;
+  /** 子网 ID */
+  SubnetId?: string | null;
+  /** 标签信息 */
+  Tags?: TagInfo[];
+  /** 是否校验上游SSL */
+  VerifySSL?: boolean;
+  /** VPC 实例 ID */
+  VpcId?: string | null;
+}
+
+/** 按模型标识聚合的信息 */
+declare interface ModelNameAggregatedItem {
+  /** 模型标识显示名称（优先使用 model_alias，否则使用 model_name） */
+  ModelName: string;
+  /** 关联的服务商列表 */
+  ServiceProviders?: ServiceProviderItem[];
+  /** 该模型最大可支持的输入多模态能力列表。枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  InputModalitiesUnion?: string[];
+}
+
 /** 查询单个实例详细信息 */
 declare interface ModelRouterDetail {
+  /** 模型路由实例关联的Budget ID。未关联Budget时返回空字符串。 */
+  BudgetId?: string | null;
+  /** 模型路由实例关联的Budget名称。未关联Budget时返回空字符串。 */
+  BudgetName?: string | null;
+  /** 集群信息 */
+  ClusterInfo?: ClusterInfo;
   /** 创建时间 */
   CreatedTime?: string;
+  /** 模型路由实例按Budget刷新周期划分的Credit使用情况。当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。 */
+  CreditUsageSet?: CreditUsage[];
   /** 模型路由实例域名 */
   Domain?: string;
   /** 模型路由ID */
@@ -1080,6 +1340,8 @@ declare interface ModelRouterDetail {
   RateLimitConfig?: RateLimitConfigForModelRouter;
   /** 模型路由的路由配置 */
   RouterSetting?: RouterSettingWithFallBack | null;
+  /** 安全组ID列表 */
+  SecurityGroups?: string[];
   /** 模型路由实例的安全状态枚举值：Normal： 正常Banned： 已封禁Frozen： 已冻结 */
   SecurityStatus?: string;
   /** 模型路由网络配置列表 */
@@ -1096,18 +1358,72 @@ declare interface ModelRouterDetail {
   Vip?: string;
   /** 模型路由实例所属VPC的ID */
   VpcId?: string;
-  /** 模型路由实例关联的Budget ID。未关联Budget时返回空字符串。 */
-  BudgetId?: string | null;
-  /** 模型路由实例关联的Budget名称。未关联Budget时返回空字符串。 */
-  BudgetName?: string | null;
-  /** 模型路由实例的Credit使用情况。 */
-  CreditUsage?: CreditUsage | null;
-  /** 模型路由实例按Budget刷新周期划分的Credit使用情况。当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。 */
-  CreditUsageSet?: CreditUsage[];
-  /** 安全组ID列表 */
-  SecurityGroups?: string[];
-  /** 集群信息 */
-  ClusterInfo?: ClusterInfo;
+}
+
+/** 模型路由日志 */
+declare interface ModelRouterLog {
+  /** API Key的ID */
+  KeyId?: string;
+  /** 模型 */
+  Model?: string;
+  /** 所属厂商 */
+  Provider?: string;
+  /** 请求状态枚举值：failure： 失败success： 成功 */
+  Status?: string;
+  /** 最大重试次数 */
+  MaxRetries?: number;
+  /** 单次请求消耗的总Token数量 */
+  TotalTokens?: number;
+  /** 单次请求输入消耗的Token数量 */
+  InputTokens?: number;
+  /** 单次请求输出消耗的Token数量 */
+  OutputTokens?: number;
+  /** 请求耗时单位：ms */
+  RequestDuration?: number;
+  /** 请求IP */
+  RequesterIp?: string;
+  /** 日志查询起始时间 */
+  StartTime?: string;
+  /** 日志查询结束时间 */
+  EndTime?: string;
+}
+
+/** 模型路由关联的模型 */
+declare interface ModelRouterModel {
+  /** 模型名称 */
+  ModelName: string;
+  /** 所属厂商 */
+  Provider: string;
+  /** 模型类型。枚举值：BYOK： BYOK类型Platform： 平台类型 */
+  Type: string;
+  /** 服务商/模型 ID（byok_model.model_id，形如 model-xxxxxxxx；Platform 类型不传） */
+  ServiceProviderId?: string;
+}
+
+/** 模型路由资源包 */
+declare interface ModelRouterPackage {
+  /** 模型路由资源包总容量 */
+  CapacitySize?: string;
+  /** 模型路由资源包总余量 */
+  CapacityRemain?: string;
+  /** 模型路由资源包容量精确值 */
+  CapacitySizePrecise?: string;
+  /** 模型路由资源包总余量精确值 */
+  CapacityRemainPrecise?: string;
+  /** 模型路由资源包设置用尽续购标志位 0:未设置 1:用尽到期新购取值范围：[0, 1] */
+  AutoPurchaseFlag?: number;
+  /** 模型路由资源包Id */
+  ModelRouterResourcePackageId?: string;
+  /** 模型路由资源包创建时间 */
+  CreateTime?: string;
+  /** 模型路由资源包抵扣开始时间 */
+  DeductionStartTime?: string;
+  /** 模型路由资源包抵扣截止时间 */
+  DeductionEndTime?: string;
+  /** 模型路由资源包失效时间 */
+  ExpiredTime?: string;
+  /** 模型路由资源包状态枚举值：0： 有效1： 已退款2： 已过期3： 已用完 */
+  Status?: number;
 }
 
 /** 模型路由相关配额 */
@@ -1122,6 +1438,36 @@ declare interface ModelRouterQuota {
   Used?: number | null;
   /** 剩余配额数量单位：个 */
   Available?: number | null;
+}
+
+/** 模型路由资源包抵扣信息 */
+declare interface ModelRouterResourcePackageDeduction {
+  /** 实际抵扣量 */
+  ActualDosage?: string;
+  /** 抵扣后包剩余量 */
+  AfterDeductionRemain?: string;
+  /** 抵扣前包剩余量 */
+  BeforeDeductionRemain?: string;
+  /** 抵扣时间 */
+  DeductionTime?: string;
+  /** 原始用量 */
+  Dosage?: string;
+  /** 用量结束时间 */
+  EndTime?: string;
+  /** 产生用量的模型路由实例Id */
+  ModelRouterId?: string;
+  /** 模型路由资源包Id */
+  ModelRouterResourcePackageId?: string;
+  /** 用量开始时间 */
+  StartTime?: string;
+}
+
+/** 模型路由资源包退款价格 */
+declare interface ModelRouterResourcePackageRefundPrice {
+  /** 模型路由资源包Id */
+  ModelRouterPackageId?: string;
+  /** 可退还金额 */
+  Price?: number;
 }
 
 /** 模型路由列表 */
@@ -1162,6 +1508,18 @@ declare interface ModelRouterSet {
   VpcId?: string;
 }
 
+/** BYOK健康探测结果 */
+declare interface ModelTestResult {
+  /** 模型 */
+  Model?: string;
+  /** 健康状况枚举值：Success： 健康Error： 不健康 */
+  Status?: string;
+  /** 错误信息 */
+  ErrorInfo?: ProviderTestConnectionErrorInfo;
+  /** 探测请求 */
+  TestConnectionRequest?: TestConnectionRequestInfo;
+}
+
 /** CLB监听器或规则绑定的多证书信息 */
 declare interface MultiCertInfo {
   /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证 */
@@ -1170,6 +1528,14 @@ declare interface MultiCertInfo {
   CertList: CertInfo[];
   /** 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON */
   SSLVerifyClient?: string;
+}
+
+/** 聊天测试接口多模态附件 */
+declare interface MultiModalityAttachments {
+  /** base64 url编码的文件内容 */
+  Data: string;
+  /** 附件类型枚举值：image： 图像pdf： pdf（文件） */
+  Type: string;
 }
 
 /** OAuth配置信息。 */
@@ -1188,6 +1554,28 @@ declare interface Price {
   BandwidthPrice?: ItemPrice | null;
   /** 描述了lcu价格。 */
   LcuPrice?: ItemPrice | null;
+}
+
+/** Provider 信息 */
+declare interface ProviderItem {
+  /** Provider 标识（如 openai） */
+  Provider: string;
+  /** 显示名称（如 OpenAI） */
+  DisplayName: string;
+  /** 模型协议列表 */
+  Protocols?: string[];
+  /** 英文显示名称 */
+  EnglishDisplayName?: string;
+}
+
+/** BYOK健康检查错误信息 */
+declare interface ProviderTestConnectionErrorInfo {
+  /** 上游模型侧返回的HTTP状态码 */
+  HttpCode?: number;
+  /** 错误状态码 */
+  ErrorStatus?: string;
+  /** 探测请求错误信息 */
+  OriginalMessage?: string;
 }
 
 /** 描述配额信息，所有配额均指当前地域下的配额。 */
@@ -1228,10 +1616,10 @@ declare interface RateLimitConfigForModelRouter {
 
 /** 重新生成的Key信息 */
 declare interface RegeneratedKey {
-  /** Key的ID */
-  KeyId?: string;
   /** 重新生成的明文Key */
   Key?: string;
+  /** Key的ID */
+  KeyId?: string;
 }
 
 /** 资源详细信息 */
@@ -1252,6 +1640,14 @@ declare interface ResourceAvailability {
   Type: string;
   /** 资源可用性，"Available"：可用，"Unavailable"：不可用 */
   Availability: string;
+}
+
+/** 单条模型重写规则。 */
+declare interface RewriteItem {
+  /** 源模型名（重写规则的 key）。特殊值 default 表示兜底规则（命中所有未显式列出的源模型）。 */
+  SourceModel?: string;
+  /** 目标模型名（重写规则的 value）。 */
+  TargetModel?: string;
 }
 
 /** 转发规则之间的重定向关系 */
@@ -1284,12 +1680,12 @@ declare interface RewriteTarget {
 
 /** 路由设置 */
 declare interface RouterSettingWithFallBack {
+  /** 模型间路由策略。枚举值：SimpleShuffle： 简单随机路由LowestCost： 最低积分路由 */
+  CrossModelGroupRoutingStrategy?: string | null;
   /** 回退策略 */
   FallBack?: FallBackItem | null;
   /** 模型内路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
   RoutingStrategy?: string | null;
-  /** 模型间路由策略。枚举值：SimpleShuffle： 简单随机路由CostBasedRouting： 最低积分路由 */
-  CrossModelGroupRoutingStrategy?: string | null;
 }
 
 /** 路由设置 */
@@ -1466,6 +1862,58 @@ declare interface ServiceEndPoints {
   Schema?: string;
 }
 
+/** BYOK信息 */
+declare interface ServiceProvider {
+  /** BYOK类型 */
+  AccessType?: string;
+  /** 单个byok实例下该模型可支持的输入多模态能力列表。枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入 */
+  InputModalities?: string[];
+  /** 模型协议 */
+  Protocol?: string;
+  /** BYOK的所属厂商 */
+  Provider?: string;
+  /** BYOK实例ID */
+  ServiceProviderId?: string;
+  /** BYOK名称 */
+  ServiceProviderName?: string;
+}
+
+/** BYOK 实例（ServiceProvider）维度积分系数明细 */
+declare interface ServiceProviderCoefficient {
+  /** 该 BYOK 实例（ServiceProvider）维度的积分系数。可选字段：仅当该实例单独配置了 ServiceProvider 维度系数时返回，返回值即该实例的生效系数；未返回时表示该实例继承所属 ModelAlias 的 Coefficient。 */
+  Coefficient?: Coefficient | null;
+  /** BYOK 实例（ServiceProvider）ID。 */
+  ServiceProviderId?: string;
+  /** BYOK 实例（ServiceProvider）名称。 */
+  ServiceProviderName?: string;
+}
+
+/** 服务商详情 */
+declare interface ServiceProviderItem {
+  /** 服务提供商 ID */
+  ServiceProviderId: string;
+  /** 用户自定义服务提供商名称 */
+  ServiceProviderName?: string | null;
+  /** 模型供应商 */
+  ModelProvider?: string;
+  /** 该byok实例下该模型可支持的输入多模态能力列表。枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入 */
+  InputModalities?: string[];
+}
+
+/** model 信息 */
+declare interface ServiceProviderModelItem {
+  /** 关联的模型路由实例列表 */
+  AssociatedModelRouters?: AssociatedModelRouterItem[];
+  /** 该模型当前支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）默认值：text */
+  InputModalities?: string[];
+  /** 模型别名, 可以用于实际访问 */
+  ModelAlias?: string | null;
+  /** 模型唯一标识, 原始模型名称 */
+  ModelId?: string;
+  /** 该模型经探测最多支持的输入多模态能力列表枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入模型不健康时列表为空 */
+  ProbedInputModalities?: string[] | null;
+}
+
 /** 升级为性能容量型参数 */
 declare interface SlaUpdateParam {
   /** 负载均衡实例 ID。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。 */
@@ -1480,6 +1928,14 @@ declare interface SnatIp {
   SubnetId: string;
   /** IP地址，如192.168.0.1 */
   Ip?: string;
+}
+
+/** 排序条件 */
+declare interface Sort {
+  /** 排序的字段 */
+  Field?: string;
+  /** 排序方式，支持ASC、DESC */
+  Order?: string;
 }
 
 /** 规格可用性 */
@@ -1692,6 +2148,24 @@ declare interface TargetRegionInfo {
   NumericalVpcId?: number;
 }
 
+/** BYOK健康检查请求 */
+declare interface TestConnectionRequestInfo {
+  /** 请求URL */
+  RequestUrl?: string;
+  /** 请求体 */
+  RequestBody?: string;
+  /** 请求头 */
+  RequestHeaders?: string;
+}
+
+/** 意图路由分层配置对象。支持两种分层协议（二选一，不可混用）：① 复杂度分层——必须包含全部 4 个固定分层：SIMPLE/MEDIUM/COMPLEX/REASONING；② 语义分层——包含 default 及各语义 Tier。TierName 取值见下。 */
+declare interface TierItem {
+  /** 该分层下的模型显示名称列表。至少包含一个模型，模型名称必须是已关联到该模型路由实例的模型。同一分层内不允许重复模型名称。 */
+  Models: string[];
+  /** Tier 标识。枚举值：复杂度分层（4 个固定值，需全部包含）：SIMPLE、MEDIUM、COMPLEX、REASONINGdefault：默认general_chat：通用对话transformation_rewrite：转换与改写knowledge_qa：知识问答summarization：摘要extraction_structuring：抽取与结构化输出content_generation：内容生成coding_technical：编码与技术data_math_analysis：数据、数学与分析reasoning_planning：推理与规划tool_agentic_workflow：工具与智能体工作流 */
+  TierName: string;
+}
+
 /** 运营商类型信息 */
 declare interface TypeInfo {
   /** 运营商类型 */
@@ -1768,6 +2242,34 @@ declare interface ZoneResource {
   Egress?: string;
 }
 
+declare interface AddModelKeyRequest {
+  /** 服务提供商ID */
+  ServiceProviderId: string;
+  /** Key 列表，至少 1 个，最多 10 个 */
+  Keys: KeyItem[];
+}
+
+declare interface AddModelKeyResponse {
+  /** 生成的 Key ID 列表 */
+  KeyIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddModelRewriteRequest {
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+  /** 源模型名（重写规则的 key）。长度 1-255 字符；支持特殊值 default 表示兜底规则（命中所有未显式列出的源模型）。不允许使用 IntentRouter/ 前缀（大小写不敏感），即 IntentRouter 不能作为 source。 */
+  SourceModel: string;
+  /** 目标模型名（重写规则的 value）。长度 1-255 字符；必须是已关联到该模型路由实例的模型（含 IntentRouter/* 也需先通过 AssociateModels 关联）。不允许使用 default；不允许与 SourceModel 相同（大小写不敏感）。 */
+  TargetModel: string;
+}
+
+declare interface AddModelRewriteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssociateBudgetRequest {
   /** Budget ID。 */
   BudgetId: string;
@@ -1788,6 +2290,30 @@ declare interface AssociateCustomizedConfigRequest {
 }
 
 declare interface AssociateCustomizedConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssociateModelRouterGuardrailsRequest {
+  /** 待关联的 Guardrail 防护配置列表。当前最多支持 1 个元素。每个元素必须填写 InstanceId、ServiceId；Type 和 InputCheckDepth 为选填，不传时分别使用默认值 WAF 和 5。本结构不包含 GuardrailId，关联成功后由系统生成。 */
+  Guardrails: AssociateGuardrailConfig[];
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+}
+
+declare interface AssociateModelRouterGuardrailsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssociateModelsToModelRouterRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** 需要关联的模型信息 */
+  Models?: ModelRouterModel[];
+}
+
+declare interface AssociateModelsToModelRouterResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1876,6 +2402,30 @@ declare interface BatchRegisterTargetsResponse {
   RequestId?: string;
 }
 
+declare interface ChatCompletionsRequest {
+  /** virtual key，用于向代理网关鉴权 */
+  ApiKey?: string;
+  /** 多模态附件列表 */
+  Attachments?: MultiModalityAttachments[];
+  /** 聊天内容 */
+  ChatContent?: string;
+  /** 模型名称，配置的模型标识示例：gpt-4o、deepseek-chat */
+  Model?: string;
+  /** 模型路由实例ID */
+  ModelRouterId?: string;
+  /** 请求路径默认值：/v1/chat/completions */
+  RequestPath?: string;
+}
+
+declare interface ChatCompletionsResponse {
+  /** 聊天的返回信息 */
+  ChatResponseMessage?: string;
+  /** 聊天请求发送过程中的失败信息 */
+  ErrorInChat?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloneLoadBalancerRequest {
   /** 负载均衡ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。 */
   LoadBalancerId: string;
@@ -1922,10 +2472,26 @@ declare interface CloneLoadBalancerResponse {
   RequestId?: string;
 }
 
+declare interface CreateBYOKNetworkRequest {
+  /** 子网 ID参数格式：subnet-xxxxxxxx */
+  SubnetId: string;
+  /** VPC 实例 ID参数格式：vpc-xxxxxxxx */
+  VpcId: string;
+  /** BYOK 的自定义名字入参限制：1～256个字符，可选 */
+  ServiceProviderName?: string;
+  /** 标签 */
+  Tags?: TagInfo[];
+}
+
+declare interface CreateBYOKNetworkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBudgetRequest {
-  /** 预算配置数组。数组长度最大为1。BudgetResetAt不支持作为入参设置。 */
+  /** 预算配置数组。数组长度最大为3，最多可同时配置1d、7d、30d三个刷新周期，且每种刷新周期只能出现一次。BudgetResetAt不支持作为入参设置，系统会按配置的刷新周期自动维护刷新时间。 */
   BudgetConfigs?: BudgetConfigInput[];
-  /** Budget名称。不传默认为空字符串。 */
+  /** Budget名称。不传默认为 '-'。 */
   BudgetName?: string;
   /** Budget限速配置。 */
   RateLimitConfig?: RateLimitConfigForBudget;
@@ -1952,6 +2518,24 @@ declare interface CreateClsLogSetRequest {
 declare interface CreateClsLogSetResponse {
   /** 日志集的 ID。 */
   LogsetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateIntentRouterRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 路由名称，用作LiteLLM的model_name。必须以"IntentRouter/"为前缀，后缀仅支持字母、数字、连字符和下划线，后缀长度1-128个字符。 */
+  RouteName: string;
+  /** Tier配置列表。每个Tier至少包含一个模型，模型名称必须是已关联到该实例的模型。 */
+  Tiers: TierItem[];
+  /** 意图路由描述。 */
+  RouterDescribe?: string;
+}
+
+declare interface CreateIntentRouterResponse {
+  /** 创建的意图路由ID（ir-xxx格式）。 */
+  IntentRouterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2162,33 +2746,89 @@ declare interface CreateLoadBalancerSnatIpsResponse {
   RequestId?: string;
 }
 
+declare interface CreateModelRequest {
+  /** 接入类型：PublicBYOK/PublicCustom/PrivateCustom */
+  AccessType: string;
+  /** 模型提供商 */
+  ModelProvider?: string;
+  /** 通用模型标识列表 */
+  ModelIds?: ModelItem[];
+  /** Key 列表 */
+  Keys?: KeyItem[];
+  /** BYOK ID(在自定义模型时在部署网络后必须填写) */
+  ServiceProviderId?: string;
+  /** 服务供应商(创建BYOK自定义名称)。 */
+  ServiceProviderName?: string;
+  /** 模型协议 */
+  Protocol?: string;
+  /** API Base URL */
+  ApiBase?: string;
+  /** VPC ID */
+  VpcId?: string;
+  /** 子网 ID */
+  SubnetId?: string;
+  /** 转发请求时添加的Host请求头 */
+  HostHeader?: string;
+  /** 标签信息 */
+  Tags?: TagInfo[];
+  /** 是否校验服务提供商的SSL证书 */
+  VerifySSL?: boolean;
+}
+
+declare interface CreateModelResponse {
+  /** 服务供应商ID */
+  ServiceProviderId?: string;
+  /** 生成的 Key ID 列表 */
+  KeyIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateModelRouterRequest {
   /** 模型路由类型枚举值：Shared： 共享型Enterprise： 企业级 */
   ModelRouterType: string;
-  /** 模型路由实例名称默认值：- */
-  ModelRouterName?: string;
-  /** 模型路由实例的网络协议枚举值：HTTP： HTTP协议HTTPS： HTTPS协议 */
-  Schema?: string;
-  /** 模型路由的监听端口取值范围：[1, 65535] */
-  Port?: number;
-  /** 证书ID入参限制：当Scheme为HTTPS时，该参数必传 */
-  CertId?: string;
-  /** 网络类型枚举值：Internet： 公网Intranet： 内网 */
-  NetworkType?: string;
-  /** 模型路由实例所属VPC的ID */
-  VpcId?: string;
-  /** 模型路由实例所属子网的ID */
-  SubnetId?: string;
   /** 关联的积分预算ID */
   BudgetId?: string;
+  /** 证书ID入参限制：当Schema为HTTPS时，该参数必传 */
+  CertId?: string;
+  /** 集群信息 */
+  ClusterInfo?: ClusterInfo;
+  /** 模型路由实例名称默认值：- */
+  ModelRouterName?: string;
+  /** 网络类型枚举值：Internet： 公网Intranet： 内网 */
+  NetworkType?: string;
+  /** 模型路由的监听端口取值范围：[1, 65535] */
+  Port?: number;
   /** 限速配置 */
   RateLimitConfig?: RateLimitConfigForModelRouter;
   /** 路由配置 */
   RouterSetting?: RouterSettingWithoutFallBack;
+  /** 模型路由实例的网络协议枚举值：HTTP： HTTP协议HTTPS： HTTPS协议 */
+  Schema?: string;
+  /** 模型路由实例所属子网的ID */
+  SubnetId?: string;
   /** 标签 */
   Tags?: TagInfo[];
-  /** 集群信息 */
-  ClusterInfo?: ClusterInfo;
+  /** 模型路由实例所属VPC的ID */
+  VpcId?: string;
+}
+
+declare interface CreateModelRouterResourcePackageRequest {
+  /** 模型路由资源包容量取值范围：[1000, 10000000]单次购买的模型路由资源包容量下限为1000，上限为10000000 */
+  ModelRouterResourcePackageAmount: number;
+  /** 是否自动续订。0:不自动续订, 1:用尽到期续订 */
+  AutoPurchaseFlag?: number;
+  /** 该笔订单是否自动选择代金券默认值：false（不自动选择代金券）true时会为本笔订单自动匹配满足条件、最优惠的代金券 */
+  AutoVoucher?: boolean;
+}
+
+declare interface CreateModelRouterResourcePackageResponse {
+  /** 模型路由资源包Id */
+  ModelRouterResourcePackageIds?: string[];
+  /** 订单号 */
+  DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateModelRouterResponse {
@@ -2308,6 +2948,18 @@ declare interface DeleteBudgetsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteIntentRouterRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 意图路由ID（ir-xxx格式）。 */
+  IntentRouterId: string;
+}
+
+declare interface DeleteIntentRouterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteKeysRequest {
   /** 模型路由ID */
   ModelRouterId: string;
@@ -2364,6 +3016,16 @@ declare interface DeleteLoadBalancerSnatIpsRequest {
 }
 
 declare interface DeleteLoadBalancerSnatIpsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelRequest {
+  /** 服务提供商ID列表 */
+  ServiceProviderIds: string[];
+}
+
+declare interface DeleteModelResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2456,6 +3118,18 @@ declare interface DeregisterFunctionTargetsResponse {
   RequestId?: string;
 }
 
+declare interface DeregisterModelsFromServiceProviderRequest {
+  /** BYOK的ID */
+  ServiceProviderId: string;
+  /** 模型别名列表 */
+  ModelAliases?: string[];
+}
+
+declare interface DeregisterModelsFromServiceProviderResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeregisterTargetGroupInstancesRequest {
   /** 目标组ID。 */
   TargetGroupId: string;
@@ -2496,6 +3170,20 @@ declare interface DeregisterTargetsRequest {
 }
 
 declare interface DeregisterTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAssociatedModelAvailabilityRequest {
+  /** 模型路由ID */
+  ModelRouterId?: string;
+  /** 模型列表 */
+  Models?: string[];
+}
+
+declare interface DescribeAssociatedModelAvailabilityResponse {
+  /** 模型可用性列表 */
+  ModelAvailability?: ModelAvailability[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2557,12 +3245,12 @@ declare interface DescribeBlockIPTaskResponse {
 declare interface DescribeBudgetAssociationsRequest {
   /** Budget ID。一次只允许查询一个Budget。 */
   BudgetId: string;
-  /** 资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由Key不传时返回全部资源类型。 */
-  Type?: string;
-  /** 本次查询偏移量 */
-  Offset?: number;
   /** 本次查询限制的数量 */
   Limit?: number;
+  /** 本次查询偏移量 */
+  Offset?: number;
+  /** 资源类型。枚举值：ModelRouter：模型路由实例Key：模型路由Key不传时返回全部资源类型。 */
+  Type?: string;
 }
 
 declare interface DescribeBudgetAssociationsResponse {
@@ -2780,6 +3468,56 @@ declare interface DescribeIdleLoadBalancersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIntentRouterTiersRequest {
+}
+
+declare interface DescribeIntentRouterTiersResponse {
+  /** Tier 字典列表（按 tier_id 升序排列） */
+  TierSet?: IntentRouterTierDictItem[];
+  /** Tier 总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIntentRoutersRequest {
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 意图路由ID列表 */
+  IntentRouterIds?: string[];
+}
+
+declare interface DescribeIntentRoutersResponse {
+  /** 意图路由列表。 */
+  IntentRouterSet?: IntentRouterItem[];
+  /** 意图路由总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKeysRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** 过滤列表支持：KeyName、BudgetId、tag-key、tag:<tag-key>。 */
+  Filters?: Filter[];
+  /** API Key的ID列表 */
+  KeyIds?: string[];
+  /** 本次查询限制的数量取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+  /** 本次查询偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeKeysResponse {
+  /** API Key列表 */
+  Keys?: KeyInfo[];
+  /** 符合条件的总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLBListenersRequest {
   /** 需要查询的内网ip列表 */
   Backends: LbRsItem[];
@@ -2938,6 +3676,100 @@ declare interface DescribeLoadBalancersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelAliasesRequest {
+  /** 过滤条件支持的过滤键：ModelAliasName：按模型别名过滤。 */
+  Filters?: Filter[];
+  /** 每页数量，取值范围：[1, 100]，默认值：20。 */
+  Limit?: number;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 排序条件。支持按 InputCoefficient、InputCachedCoefficient 或 OutputCoefficient 排序，Order 支持 ASC、DESC。不传或传空数组时，默认按 OutputCoefficient 降序排列。最多支持 3 个排序条件，排序字段不可重复。 */
+  Sort?: Sort[];
+}
+
+declare interface DescribeModelAliasesResponse {
+  /** 模型别名列表。 */
+  ModelAliasSet?: ModelAlias[];
+  /** 符合条件的总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelAssociationsRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** 翻页限制取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+  /** 翻页偏移量默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeModelAssociationsResponse {
+  /** 模型路由实例与模型的关联关系集合 */
+  ModelAssociationSet?: ModelAssociation[];
+  /** 模型路由实例ID */
+  ModelRouterId?: string;
+  /** 符合条件的总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelKeysRequest {
+  /** 接入类型过滤：PublicBYOK/PublicCustom/PrivateCustom */
+  AccessType?: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 返回数量限制 */
+  Limit?: number;
+  /** 翻页启始索引 */
+  Offset?: number;
+  /** 服务提供商ID */
+  ServiceProviderIds?: string[];
+}
+
+declare interface DescribeModelKeysResponse {
+  /** 模型列表（含 Key 信息） */
+  Models?: ModelKeyInfoItem[];
+  /** 模型总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelNamesRequest {
+  /** 分页偏移量（>=0） */
+  Offset?: number;
+  /** 每页数量（1-100） */
+  Limit?: number;
+  /** 过滤PrivateCustom类型自建模型。如果传递了此参数，则只返回具有相同VPC Id的模型。 */
+  VpcId?: string;
+}
+
+declare interface DescribeModelNamesResponse {
+  /** 模型标识聚合列表 */
+  ModelNames?: ModelNameAggregatedItem[];
+  /** 聚合后的模型标识总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelRewriteRequest {
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+  /** 选填，按源模型名精确过滤（大小写敏感）。长度 1-255 字符；不传则返回该实例的全部重写规则；命中至多 1 条；未命中返回空列表（不报错）。 */
+  SourceModel?: string;
+}
+
+declare interface DescribeModelRewriteResponse {
+  /** 重写规则列表，按 SourceModel 字典序排序。无规则或过滤未命中时为空数组。 */
+  Rewrites?: RewriteItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeModelRouterDetailRequest {
   /** 模型路由实例ID */
   ModelRouterId: string;
@@ -2946,6 +3778,48 @@ declare interface DescribeModelRouterDetailRequest {
 declare interface DescribeModelRouterDetailResponse {
   /** 模型路由实例详情 */
   ModelRouter?: ModelRouterDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelRouterGuardrailsRequest {
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+}
+
+declare interface DescribeModelRouterGuardrailsResponse {
+  /** 当前已关联的 Guardrail 防护配置列表。当前最多返回 1 个元素。 */
+  Guardrails?: GuardrailConfig[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelRouterLogsRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** Key的ID */
+  KeyId?: string;
+  /** 模型名称 */
+  Model?: string;
+  /** 请求状态 */
+  Status?: string;
+  /** 开始时间，与EndTime需要同时传入、开始时间不得早于24小时前，默认仅查询近5分钟日志 */
+  StartTime?: string;
+  /** 结束时间，与StartTime需要同时传入、开始时间不得早于24小时前，默认仅查询近5分钟日志 */
+  EndTime?: string;
+  /** 游标NextToken */
+  NextToken?: string;
+  /** 本次查询最大数量取值范围：[1, 100]默认值：20 */
+  MaxResults?: number;
+}
+
+declare interface DescribeModelRouterLogsResponse {
+  /** 日志列表 */
+  Logs?: ModelRouterLog[];
+  /** 满足条件的数量 */
+  TotalCount?: number;
+  /** 游标NextToken */
+  NextToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2966,8 +3840,58 @@ declare interface DescribeModelRouterQuotaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelRouterResourcePackageDeductionRequest {
+  /** 抵扣起始时间 */
+  DeductionTimeBegin: string;
+  /** 抵扣截止时间 */
+  DeductionTimeEnd: string;
+  /** 模型路由资源包Id */
+  ModelRouterResourcePackageId: string;
+  /** 返回的数量取值范围：[0, 100]默认值：20 */
+  Limit?: number;
+  /** 数据偏移量默认值：0 */
+  Offset?: number;
+  /** 排序方式：asc，desc */
+  SortBy?: string;
+}
+
+declare interface DescribeModelRouterResourcePackageDeductionResponse {
+  /** 模型路由资源包抵扣信息 */
+  ModelRouterResourcePackageDeductionSet?: ModelRouterResourcePackageDeduction[];
+  /** 符合查询条件的详情信息总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelRouterResourcePackagesRequest {
+  /** 模型路由资源包Id。 */
+  ModelRouterResourcePackageIds?: string[];
+  /** 数据偏移量。默认值：0 */
+  Offset?: number;
+  /** 返回的数量，最大值为100。取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+  /** 排序参数，支持以下字段："buyTime", "startTime", "endTime" */
+  OrderBy?: string;
+  /** 排序方式：asc，desc，默认asc */
+  SortBy?: string;
+  /** 查询的过滤条件。每次请求的Filters的上限为10，Filter.Values的上限为100。 Filter.Name和Filter.Values皆为必填项。详细的过滤条件如下： status - Integer - 是否必填：否 - 状态：0-有效 1-已退款 2-已过期 3-已用完。 effect_time_start - String - 是否必填：否 - 生效起始时间,YYYY-MM-DD HH:MM:SS格式。 effect_time_end - String - 是否必填：否 - 生效截止时间。 expire_time_start - String - 是否必填：否 - 失效起始时间。 expire_time_end - String - 是否必填：否 - 失效截止时间。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeModelRouterResourcePackagesResponse {
+  /** 模型路由资源包信息 */
+  ModelRouterResourcePackageSet?: ModelRouterPackage[];
+  /** 符合查询条件的模型路由资源包数量 */
+  TotalCount?: number;
+  /** 资源包的剩余总量 */
+  TotalDosage?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeModelRoutersRequest {
-  /** 过滤条件支持：ModelRouterName、ModelRouterType、Status、BudgetId、tag-key、tag:&lt;tag-key&gt;。 */
+  /** 过滤条件支持：ModelRouterName、ModelRouterType、Status、BudgetId、tag-key、tag:<tag-key>。 */
   Filters?: Filter[];
   /** 每页数量，1-100，默认 20 */
   Limit?: number;
@@ -3026,6 +3950,36 @@ declare interface DescribeRewriteRequest {
 declare interface DescribeRewriteResponse {
   /** 重定向转发规则构成的数组，若无重定向规则，则返回空数组。 */
   RewriteSet?: RuleOutput[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeServiceProviderHealthStatusRequest {
+  /** BYOK的ID */
+  ServiceProviderId: string;
+  /** 本次查询的限制数量取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+  /** 本次查询翻页的偏移量 */
+  Offset?: number;
+}
+
+declare interface DescribeServiceProviderHealthStatusResponse {
+  /** 健康检查的结果 */
+  HealthCheckResults?: ModelHealthCheckResults[];
+  /** 本次请求总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSupportedProvidersRequest {
+}
+
+declare interface DescribeSupportedProvidersResponse {
+  /** Provider 列表 */
+  Providers?: ProviderItem[];
+  /** Provider 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3158,12 +4112,40 @@ declare interface DescribeTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUpperModelsRequest {
+  /** 接入类型：PublicBYOK/PublicCustom/PrivateCustom */
+  AccessType?: string;
+  /** 上游 Provider API 地址示例：https://api.moonshot.cn */
+  ApiBase?: string;
+  /** 上游 Provider API Key用于鉴权访问上游模型列表接口 */
+  ApiKey?: string;
+  /** 自定义 Host Header，可选仅 VPC 内网场景需要，用于指定请求的 Host 头 */
+  HostHeader?: string;
+  /** Key Id 配合ServiceProviderId一同输入，不指定则默认选用最近创建的Key */
+  KeyId?: string;
+  /** 模型列表端点路径，可选默认值：/v1/models */
+  ModelPath?: string;
+  /** 模型协议 */
+  ModelProtocol?: string;
+  /** 模型提供商 */
+  ModelProvider?: string;
+  /** BYOK 业务 ID，可选格式：byok-xxxxxxxx */
+  ServiceProviderId?: string;
+}
+
+declare interface DescribeUpperModelsResponse {
+  /** 上游模型列表 */
+  Models?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserGroupsRequest {
   /** 模型路由实例ID。 */
   ModelRouterId: string;
   /** 用户组ID列表，用于按ID过滤，单次最多100个；可包含「未分组」虚拟分组 ugrp-ungrouped。 */
   UserGroupIds?: string[];
-  /** 过滤列表。支持：UserGroupName、Status、tag-key、tag:&lt;tag-key&gt;。 */
+  /** 过滤列表。支持：UserGroupName、Status、tag-key、tag:<tag-key>。 */
   Filters?: Filter[];
   /** 本次查询限制的数量取值范围：[1, 100]默认值：20 */
   Limit?: number;
@@ -3204,12 +4186,62 @@ declare interface DisassociateCustomizedConfigResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateModelRouterGuardrailsRequest {
+  /** 待解除关联的 Guardrail 防护配置列表。每个元素只需要填写 GuardrailId。 */
+  Guardrails: DisassociateGuardrailConfig[];
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+}
+
+declare interface DisassociateModelRouterGuardrailsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisassociateModelsFromModelRouterRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** 需要解除关联的模型信息 */
+  Models?: ModelRouterModel[];
+}
+
+declare interface DisassociateModelsFromModelRouterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateTargetGroupsRequest {
   /** 待解绑的规则关系数组，支持批量解绑多个监听器，单次批量解除最多20个。 */
   Associations: TargetGroupAssociation[];
 }
 
 declare interface DisassociateTargetGroupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquirePriceCreateModelRouterResourcePackageRequest {
+  /** 模型路由资源包容量取值范围：[1000, 10000000]单次购买的模型路由资源包容量下限为1000，上限为10000000 */
+  ModelRouterResourcePackageAmount: number;
+}
+
+declare interface InquirePriceCreateModelRouterResourcePackageResponse {
+  /** 模型路由资源包价格 */
+  ModelRouterResourcePackagePrice?: ItemPrice;
+  /** 本次购买资源包是否可享受首购优惠1:可享受首购优惠，0:不可享受首购优惠 */
+  FirstBuy?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquirePriceRefundModelRouterResourcePackageRequest {
+  /** 待退款的模型路由资源包Id非有效状态或者设置了自动续订且自动续订已生效的资源包不允许退款。 */
+  ModelRouterResourcePackageIds: string[];
+}
+
+declare interface InquirePriceRefundModelRouterResourcePackageResponse {
+  /** 待退款的模型路由资源包可退价格 */
+  ModelRouterResourcePackageRefundPrice?: ModelRouterResourcePackageRefundPrice[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3335,7 +4367,7 @@ declare interface ModifyBlockIPListResponse {
 declare interface ModifyBudgetAttributesRequest {
   /** Budget ID。 */
   BudgetId: string;
-  /** 预算配置数组。数组长度最大为1。BudgetResetAt不支持作为入参设置。 */
+  /** 预算配置数组。数组长度最大为3，最多可同时配置1d、7d、30d三个刷新周期，且每种刷新周期只能出现一次。BudgetResetAt不支持作为入参设置，系统会按配置的刷新周期自动维护刷新时间。 */
   BudgetConfigs?: BudgetConfigInput[];
   /** Budget名称。 */
   BudgetName?: string;
@@ -3410,6 +4442,24 @@ declare interface ModifyFunctionTargetsRequest {
 }
 
 declare interface ModifyFunctionTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyIntentRouterAttributeRequest {
+  /** 意图路由ID（ir-xxx格式）。 */
+  IntentRouterId: string;
+  /** 模型路由实例ID。 */
+  ModelRouterId: string;
+  /** 新的路由名称。选填；必须以"IntentRouter/"为前缀，后缀仅支持字母、数字、连字符和下划线，后缀长度1-128个字符。不传则不修改。 */
+  RouteName?: string;
+  /** 意图路由描述。 */
+  RouterDescribe?: string;
+  /** 新的分层配置列表（全量替换）。选填；不传则不修改。传入时必须为完整分层集合：复杂度分层须包含全部 4 个分层 SIMPLE/MEDIUM/COMPLEX/REASONING；语义分层须包含 default 及各语义 Tier（取决于实例所用协议，且不可跨协议变更）。每个分层至少包含一个模型，模型名称必须是已关联到该实例的模型。 */
+  Tiers?: TierItem[];
+}
+
+declare interface ModifyIntentRouterAttributeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3582,20 +4632,70 @@ declare interface ModifyLoadBalancersProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyModelAliasAttributesRequest {
+  /** 模型积分系数配置。必填，至少包含 InputCoefficient、InputCachedCoefficient、OutputCoefficient 中的一个字段，未传字段保持原值。InputCoefficient 为非缓存命中输入积分系数。InputCachedCoefficient 为缓存命中输入积分系数，用于 provider prompt cache 命中的输入 token。OutputCoefficient 为输出积分系数。各字段取值范围：[0, 5000]，仅支持整数，0 表示该类 token 不计积分。 */
+  Coefficient: Coefficient;
+  /** 模型别名列表。不传 ServiceProviderIds（按 ModelAlias 账号维度修改）时支持数组批量，同一份 Coefficient 应用到多个别名。传入 ServiceProviderIds（按 ServiceProvider 维度修改）时只能传 1 个别名，锁定唯一 model 别名；去重后不等于 1 个将返回 InvalidParameter。 */
+  ModelAliasNames: string[];
+  /** BYOK 实例（ServiceProvider）ID 列表。可选，数组。传入时按 ServiceProvider 维度修改：把同一份 Coefficient 批量应用到数组内每一个实例（覆盖配置，仅作用于这些实例），此时 ModelAliasNames 只能传 1 个别名（即 1 别名 × N ServiceProvider）；数组需去重、非空、上限 100，任一实例不归属/不存在/该实例下无该别名将整批返回错误。不传时按 ModelAlias（账号）维度修改，作用于该别名下未单独配置覆盖的全部实例。 */
+  ServiceProviderIds?: string[];
+}
+
+declare interface ModifyModelAliasAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelAttributesRequest {
+  /** BYOK的ID参数格式：byok-kot39u7j */
+  ServiceProviderId: string;
+  /** BYOK的自定义名字入参限制：1～256个字符 */
+  ServiceProviderName?: string;
+}
+
+declare interface ModifyModelAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyModelRouterAttributesRequest {
   /** 模型路由ID */
   ModelRouterId: string;
+  /** 新的 HTTPS 证书ID，用于替换实例 HTTPS 服务端点当前绑定的证书。常用于证书到期前的更换场景。使用限制：仅企业型（Enterprise）且服务端点协议为 HTTPS 的实例支持修改证书。证书须为 SSL 证书控制台中状态为“已签发”（可用）且未过期的服务器证书（SVR 类型）。可在 SSL 证书控制台 查看证书ID。替换后新证书立即生效，过程中不会中断业务流量。若传入的证书与当前绑定的证书相同，接口直接返回成功，不做任何变更。不传则证书保持不变。可通过 DescribeModelRouterDetail 接口的 ServiceEndPoints.CertId 字段查询当前绑定的证书。 */
+  CertId?: string;
   /** 模型路由名称 */
   ModelRouterName?: string;
   /** 限速配置 */
   RateLimitConfig?: RateLimitConfigForModelRouter;
   /** 路由配置 */
   RouterSetting?: RouterSettingWithFallBack;
-  /** 新的 HTTPS 证书ID，用于替换实例 HTTPS 服务端点当前绑定的证书。常用于证书到期前的更换场景。使用限制：仅企业型（Enterprise）且服务端点协议为 HTTPS 的实例支持修改证书。证书须为 SSL 证书控制台中状态为“已签发”（可用）且未过期的服务器证书（SVR 类型）。可在 SSL 证书控制台 查看证书ID。替换后新证书立即生效，过程中不会中断业务流量。若传入的证书与当前绑定的证书相同，接口直接返回成功，不做任何变更。不传则证书保持不变。可通过 DescribeModelRouterDetail 接口的 ServiceEndPoints.CertId 字段查询当前绑定的证书。 */
-  CertId?: string;
 }
 
 declare interface ModifyModelRouterAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelRouterGuardrailsRequest {
+  /** 待修改的 Guardrail 防护配置列表。当前最多支持 1 个元素。每个元素必须填写 GuardrailId；当 Type 为 WAF 或未传按 WAF 处理时，InstanceId 和 ServiceId 必填；InputCheckDepth 为选填，不传时沿用当前已关联 Guardrail 的取值。 */
+  Guardrails: GuardrailConfig[];
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+}
+
+declare interface ModifyModelRouterGuardrailsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyModelRouterSecurityGroupsRequest {
+  /** 模型路由实例ID */
+  ModelRouterId: string;
+  /** 需要绑定的安全组ID列表 */
+  SecurityGroups: string[];
+}
+
+declare interface ModifyModelRouterSecurityGroupsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3632,6 +4732,20 @@ declare interface ModifyRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyServiceProviderModelAttributesRequest {
+  /** BYOK 实例 ID */
+  ServiceProviderId: string;
+  /** 待修改的模型的名称（原始模型名称） */
+  ModelName: string;
+  /** 该模型支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  InputModalities?: string[];
+}
+
+declare interface ModifyServiceProviderModelAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTargetGroupAttributeRequest {
   /** 目标组的ID。 */
   TargetGroupId: string;
@@ -3639,7 +4753,7 @@ declare interface ModifyTargetGroupAttributeRequest {
   TargetGroupName?: string;
   /** 目标组的新默认端口。全监听目标组不支持此参数。 */
   Port?: number;
-  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：&lt;ur&gt;WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。&lt;ur&gt; */
+  /** 调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：<ur>WRR:按权重轮询。LEAST_CONN:最小连接数。IP_HASH:按IP哈希。默认为 WRR。<ur> */
   ScheduleAlgorithm?: string;
   /** 健康检查详情。 */
   HealthCheck?: TargetGroupHealthCheck;
@@ -3746,6 +4860,18 @@ declare interface ModifyUserGroupAttributesResponse {
   RequestId?: string;
 }
 
+declare interface RefundModelRouterResourcePackageRequest {
+  /** 待退还的模型路由资源包Id非有效状态或者设置了自动续订且自动续订已生效的资源包不允许退款。 */
+  ModelRouterResourcePackageIds: string[];
+}
+
+declare interface RefundModelRouterResourcePackageResponse {
+  /** 退还模型路由资源包的订单号 */
+  DealNames?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RegenerateKeysRequest {
   /** 模型路由实例ID */
   ModelRouterId: string;
@@ -3754,10 +4880,10 @@ declare interface RegenerateKeysRequest {
 }
 
 declare interface RegenerateKeysResponse {
-  /** 重新生成后的Key的信息 */
-  RegeneratedKeys?: RegeneratedKey[];
   /** 重新生成失败的Key的ID列表 */
   FailedKeyIds?: string[];
+  /** 重新生成后的Key的信息 */
+  RegeneratedKeys?: RegeneratedKey[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3778,6 +4904,18 @@ declare interface RegisterFunctionTargetsRequest {
 }
 
 declare interface RegisterFunctionTargetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RegisterModelsToServiceProviderRequest {
+  /** BYOK的ID */
+  ServiceProviderId: string;
+  /** 需要关联的模型信息 */
+  Models?: ModelItem[];
+}
+
+declare interface RegisterModelsToServiceProviderResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3822,6 +4960,30 @@ declare interface RegisterTargetsWithClassicalLBRequest {
 }
 
 declare interface RegisterTargetsWithClassicalLBResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveModelKeyRequest {
+  /** 服务提供商ID */
+  ServiceProviderId: string;
+  /** Key 业务 ID 列表，至少 1 个，最多 10 个 */
+  KeyIds: string[];
+}
+
+declare interface RemoveModelKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RemoveModelRewriteRequest {
+  /** 模型路由实例 ID。 */
+  ModelRouterId: string;
+  /** 要删除的源模型名（重写规则的 key）。长度 1-255 字符；支持特殊值 default 表示删除兜底规则。当指定的 SourceModel 当前不存在重写规则时，请求幂等成功。 */
+  SourceModel: string;
+}
+
+declare interface RemoveModelRewriteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3930,13 +5092,85 @@ declare interface SetSecurityGroupForLoadbalancersResponse {
   RequestId?: string;
 }
 
+declare interface TestModelInputModalitiesRequest {
+  /** 待探测的模型（原始模型名称） */
+  Model: string;
+  /** 待探测的API Key（明文） */
+  ProviderKey?: string;
+  /** 已创建的BYOK API Key ID（与ProviderKey二选一传入） */
+  ProviderKeyId?: string;
+  /** BYOK类型，当ProviderKey传入时必填 */
+  AccessType?: string;
+  /** 模型厂商协议，当ProviderKey传入时必填 */
+  ModelProtocol?: string;
+  /** 模型的厂商 */
+  ModelProvider?: string;
+  /** 自定义ApiBase，当ProviderKey传入且AccessType且PrivateCustom/PublicCustom时必填 */
+  ApiBase?: string;
+  /** 请求携带的Host头部，当AccessType为PrivateCustom时生效 */
+  HostHeader?: string;
+  /** BYOK实例ID，当AccessType为PrivateCustom时生效，ProviderKey传入时必填 */
+  ServiceProviderId?: string;
+  /** 是否校验服务提供商的SSL证书PublicBYOK时为True且禁止传入；若传入VerifySSL，则优先同步入参逻辑；若传入了ServiceProviderId则同步已创建的Byok实例该Model的逻辑；否则PublicCustom模式下为True，PrivateCustom模式下为False。 */
+  VerifySSL?: boolean;
+}
+
+declare interface TestModelInputModalitiesResponse {
+  /** 探测的模型 */
+  Model?: string;
+  /** 该模型确认支持的输入模态列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）收到上游大模型对于输入模态的响应即为“确认支持” */
+  SupportedModalities?: string[];
+  /** 每个待探测模态的详细请求结果 */
+  ProbeDetails?: ModalityProbeDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TestServiceProviderConnectionRequest {
+  /** 需要探测的模型列表入参限制：上限为20个模型 */
+  Models?: string[];
+  /** 需要探测的Key */
+  ProviderKey?: string;
+  /** 需要探测的KeyId，和ProviderKey二者传一个即可 */
+  ProviderKeyId?: string;
+  /** BYOK类型，当ProviderKey存在时必传 */
+  AccessType?: string;
+  /** 模型的厂商 */
+  ModelProvider?: string;
+  /** 模型厂商协议，当ProviderKey存在时必传 */
+  ModelProtocol?: string;
+  /** BYOK类型，当AccessType为PublicCustom时生效 */
+  ApiBase?: string;
+  /** 请求携带的Host头部，当AccessType为PrivateCustom时生效 */
+  HostHeader?: string;
+  /** BYOK的ID，当AccessType为PrivateCustom时生效 */
+  ServiceProviderId?: string;
+  /** 是否校验服务提供商的SSL证书默认值：AccessType取值为：PublicBYOK时，该参数无效；PublicCustom时，该参数默认为true；PrivateCustom时，该参数默认为false； */
+  VerifySSL?: boolean;
+}
+
+declare interface TestServiceProviderConnectionResponse {
+  /** 探测结果 */
+  Results?: ModelTestResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Clb 负载均衡} */
 declare interface Clb {
   (): Versions;
+  /** 给 BYOK 模型添加 Key {@link AddModelKeyRequest} {@link AddModelKeyResponse} */
+  AddModelKey(data: AddModelKeyRequest, config?: AxiosRequestConfig): AxiosPromise<AddModelKeyResponse>;
+  /** 新增模型重写规则 {@link AddModelRewriteRequest} {@link AddModelRewriteResponse} */
+  AddModelRewrite(data: AddModelRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<AddModelRewriteResponse>;
   /** 关联Budget {@link AssociateBudgetRequest} {@link AssociateBudgetResponse} */
   AssociateBudget(data: AssociateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateBudgetResponse>;
   /** 关联个性化配置 {@link AssociateCustomizedConfigRequest} {@link AssociateCustomizedConfigResponse} */
   AssociateCustomizedConfig(data: AssociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateCustomizedConfigResponse>;
+  /** 关联模型路由 Guardrails 防护 {@link AssociateModelRouterGuardrailsRequest} {@link AssociateModelRouterGuardrailsResponse} */
+  AssociateModelRouterGuardrails(data: AssociateModelRouterGuardrailsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateModelRouterGuardrailsResponse>;
+  /** 将模型关联到模型路由实例 {@link AssociateModelsToModelRouterRequest} {@link AssociateModelsToModelRouterResponse} */
+  AssociateModelsToModelRouter(data: AssociateModelsToModelRouterRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateModelsToModelRouterResponse>;
   /** 规则关联目标组 {@link AssociateTargetGroupsRequest} {@link AssociateTargetGroupsResponse} */
   AssociateTargetGroups(data: AssociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateTargetGroupsResponse>;
   /** 自动生成负载均衡转发规则的重定向关系 {@link AutoRewriteRequest} {@link AutoRewriteResponse} */
@@ -3949,12 +5183,18 @@ declare interface Clb {
   BatchModifyTargetWeight(data: BatchModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyTargetWeightResponse>;
   /** 批量绑定虚拟主机或弹性网卡 {@link BatchRegisterTargetsRequest} {@link BatchRegisterTargetsResponse} */
   BatchRegisterTargets(data: BatchRegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRegisterTargetsResponse>;
+  /** 聊天补全 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
+  ChatCompletions(data?: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
   /** 克隆负载均衡实例 {@link CloneLoadBalancerRequest} {@link CloneLoadBalancerResponse} */
   CloneLoadBalancer(data: CloneLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CloneLoadBalancerResponse>;
+  /** 初始化BYOK VPC网络 {@link CreateBYOKNetworkRequest} {@link CreateBYOKNetworkResponse} */
+  CreateBYOKNetwork(data: CreateBYOKNetworkRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBYOKNetworkResponse>;
   /** 创建Budget {@link CreateBudgetRequest} {@link CreateBudgetResponse} */
   CreateBudget(data?: CreateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBudgetResponse>;
   /** 创建CLB专有日志集 {@link CreateClsLogSetRequest} {@link CreateClsLogSetResponse} */
   CreateClsLogSet(data?: CreateClsLogSetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClsLogSetResponse>;
+  /** 创建意图路由 {@link CreateIntentRouterRequest} {@link CreateIntentRouterResponse} */
+  CreateIntentRouter(data: CreateIntentRouterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIntentRouterResponse>;
   /** 创建 API Key {@link CreateKeyRequest} {@link CreateKeyResponse} */
   CreateKey(data: CreateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyResponse>;
   /** 批量创建Key {@link CreateKeysRequest} {@link CreateKeysResponse} */
@@ -3965,8 +5205,12 @@ declare interface Clb {
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
   /** 添加SnatIp {@link CreateLoadBalancerSnatIpsRequest} {@link CreateLoadBalancerSnatIpsResponse} */
   CreateLoadBalancerSnatIps(data: CreateLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerSnatIpsResponse>;
+  /** 创建 BYOK 模型 {@link CreateModelRequest} {@link CreateModelResponse} */
+  CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
   /** 创建模型路由实例 {@link CreateModelRouterRequest} {@link CreateModelRouterResponse} */
   CreateModelRouter(data: CreateModelRouterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelRouterResponse>;
+  /** 创建模型路由资源包 {@link CreateModelRouterResourcePackageRequest} {@link CreateModelRouterResourcePackageResponse} */
+  CreateModelRouterResourcePackage(data: CreateModelRouterResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelRouterResourcePackageResponse>;
   /** 创建负载均衡七层监听器转发规则 {@link CreateRuleRequest} {@link CreateRuleResponse} */
   CreateRule(data: CreateRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleResponse>;
   /** 创建目标组 {@link CreateTargetGroupRequest} {@link CreateTargetGroupResponse} */
@@ -3977,6 +5221,8 @@ declare interface Clb {
   CreateUserGroup(data: CreateUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserGroupResponse>;
   /** 删除Budget {@link DeleteBudgetsRequest} {@link DeleteBudgetsResponse} */
   DeleteBudgets(data: DeleteBudgetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBudgetsResponse>;
+  /** 删除意图路由 {@link DeleteIntentRouterRequest} {@link DeleteIntentRouterResponse} */
+  DeleteIntentRouter(data: DeleteIntentRouterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIntentRouterResponse>;
   /** 批量删除 API Key {@link DeleteKeysRequest} {@link DeleteKeysResponse} */
   DeleteKeys(data: DeleteKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKeysResponse>;
   /** 删除负载均衡监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
@@ -3987,6 +5233,8 @@ declare interface Clb {
   DeleteLoadBalancerListeners(data: DeleteLoadBalancerListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerListenersResponse>;
   /** 删除SnatIp {@link DeleteLoadBalancerSnatIpsRequest} {@link DeleteLoadBalancerSnatIpsResponse} */
   DeleteLoadBalancerSnatIps(data: DeleteLoadBalancerSnatIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoadBalancerSnatIpsResponse>;
+  /** 删除 BYOK 模型 {@link DeleteModelRequest} {@link DeleteModelResponse} */
+  DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 删除模型路由 {@link DeleteModelRoutersRequest} {@link DeleteModelRoutersResponse} */
   DeleteModelRouters(data?: DeleteModelRoutersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelRoutersResponse>;
   /** 删除负载均衡转发规则之间的重定向关系 {@link DeleteRewriteRequest} {@link DeleteRewriteResponse} */
@@ -3999,12 +5247,16 @@ declare interface Clb {
   DeleteUserGroups(data: DeleteUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserGroupsResponse>;
   /** 将云函数从转发规则上解绑 {@link DeregisterFunctionTargetsRequest} {@link DeregisterFunctionTargetsResponse} */
   DeregisterFunctionTargets(data: DeregisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterFunctionTargetsResponse>;
+  /** 从BYOK实例移除模型列表 {@link DeregisterModelsFromServiceProviderRequest} {@link DeregisterModelsFromServiceProviderResponse} */
+  DeregisterModelsFromServiceProvider(data: DeregisterModelsFromServiceProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterModelsFromServiceProviderResponse>;
   /** 解绑目标组服务器 {@link DeregisterTargetGroupInstancesRequest} {@link DeregisterTargetGroupInstancesResponse} */
   DeregisterTargetGroupInstances(data: DeregisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetGroupInstancesResponse>;
   /** 从负载均衡监听器上解绑后端服务 {@link DeregisterTargetsRequest} {@link DeregisterTargetsResponse} */
   DeregisterTargets(data: DeregisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsResponse>;
   /** 解绑传统型负载均衡的后端服务器 {@link DeregisterTargetsFromClassicalLBRequest} {@link DeregisterTargetsFromClassicalLBResponse} */
   DeregisterTargetsFromClassicalLB(data: DeregisterTargetsFromClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<DeregisterTargetsFromClassicalLBResponse>;
+  /** 查询模型路由下关联模型的可用性 {@link DescribeAssociatedModelAvailabilityRequest} {@link DescribeAssociatedModelAvailabilityResponse} */
+  DescribeAssociatedModelAvailability(data?: DescribeAssociatedModelAvailabilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssociatedModelAvailabilityResponse>;
   /** 查询异步任务信息 {@link DescribeAsyncJobsRequest} {@link DescribeAsyncJobsResponse} */
   DescribeAsyncJobs(data?: DescribeAsyncJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncJobsResponse>;
   /** 查询一个负载均衡所封禁的IP列表（黑名单） {@link DescribeBlockIPListRequest} {@link DescribeBlockIPListResponse} */
@@ -4037,6 +5289,12 @@ declare interface Clb {
   DescribeExclusiveClusters(data?: DescribeExclusiveClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExclusiveClustersResponse>;
   /** 查询负载均衡闲置实例 {@link DescribeIdleLoadBalancersRequest} {@link DescribeIdleLoadBalancersResponse} */
   DescribeIdleLoadBalancers(data?: DescribeIdleLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdleLoadBalancersResponse>;
+  /** 查询意图路由 Tier 字典 {@link DescribeIntentRouterTiersRequest} {@link DescribeIntentRouterTiersResponse} */
+  DescribeIntentRouterTiers(data?: DescribeIntentRouterTiersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntentRouterTiersResponse>;
+  /** 查询意图路由列表 {@link DescribeIntentRoutersRequest} {@link DescribeIntentRoutersResponse} */
+  DescribeIntentRouters(data: DescribeIntentRoutersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntentRoutersResponse>;
+  /** 查询指定模型路由实例的API Key列表 {@link DescribeKeysRequest} {@link DescribeKeysResponse} */
+  DescribeKeys(data: DescribeKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeysResponse>;
   /** 查询后端云主机或弹性网卡绑定的负载均衡 {@link DescribeLBListenersRequest} {@link DescribeLBListenersResponse} */
   DescribeLBListeners(data: DescribeLBListenersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLBListenersResponse>;
   /** 查询负载均衡操作保护 {@link DescribeLBOperateProtectRequest} {@link DescribeLBOperateProtectResponse} */
@@ -4053,10 +5311,28 @@ declare interface Clb {
   DescribeLoadBalancers(data?: DescribeLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersResponse>;
   /** 查询负载均衡详细信息 {@link DescribeLoadBalancersDetailRequest} {@link DescribeLoadBalancersDetailResponse} */
   DescribeLoadBalancersDetail(data?: DescribeLoadBalancersDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancersDetailResponse>;
+  /** 查询模型别名列表 {@link DescribeModelAliasesRequest} {@link DescribeModelAliasesResponse} */
+  DescribeModelAliases(data?: DescribeModelAliasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAliasesResponse>;
+  /** 查询模型路由实例关联的模型 {@link DescribeModelAssociationsRequest} {@link DescribeModelAssociationsResponse} */
+  DescribeModelAssociations(data: DescribeModelAssociationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelAssociationsResponse>;
+  /** 查询 BYOK 模型列表及 Key 信息 {@link DescribeModelKeysRequest} {@link DescribeModelKeysResponse} */
+  DescribeModelKeys(data?: DescribeModelKeysRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelKeysResponse>;
+  /** 查询模型标识聚合列表 {@link DescribeModelNamesRequest} {@link DescribeModelNamesResponse} */
+  DescribeModelNames(data?: DescribeModelNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelNamesResponse>;
+  /** 查询模型重写规则 {@link DescribeModelRewriteRequest} {@link DescribeModelRewriteResponse} */
+  DescribeModelRewrite(data: DescribeModelRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRewriteResponse>;
   /** 查询模型路由详情 {@link DescribeModelRouterDetailRequest} {@link DescribeModelRouterDetailResponse} */
   DescribeModelRouterDetail(data: DescribeModelRouterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterDetailResponse>;
+  /** 查询模型路由 Guardrails 防护 {@link DescribeModelRouterGuardrailsRequest} {@link DescribeModelRouterGuardrailsResponse} */
+  DescribeModelRouterGuardrails(data: DescribeModelRouterGuardrailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterGuardrailsResponse>;
+  /** 查询模型路由日志 {@link DescribeModelRouterLogsRequest} {@link DescribeModelRouterLogsResponse} */
+  DescribeModelRouterLogs(data: DescribeModelRouterLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterLogsResponse>;
   /** 查询模型路由用户配额信息 {@link DescribeModelRouterQuotaRequest} {@link DescribeModelRouterQuotaResponse} */
   DescribeModelRouterQuota(data: DescribeModelRouterQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterQuotaResponse>;
+  /** 查询模型路由资源包抵扣明细 {@link DescribeModelRouterResourcePackageDeductionRequest} {@link DescribeModelRouterResourcePackageDeductionResponse} */
+  DescribeModelRouterResourcePackageDeduction(data: DescribeModelRouterResourcePackageDeductionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterResourcePackageDeductionResponse>;
+  /** 查询模型路由资源包 {@link DescribeModelRouterResourcePackagesRequest} {@link DescribeModelRouterResourcePackagesResponse} */
+  DescribeModelRouterResourcePackages(data?: DescribeModelRouterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRouterResourcePackagesResponse>;
   /** 查询模型路由列表页 {@link DescribeModelRoutersRequest} {@link DescribeModelRoutersResponse} */
   DescribeModelRouters(data?: DescribeModelRoutersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelRoutersResponse>;
   /** 查询配额 {@link DescribeQuotaRequest} {@link DescribeQuotaResponse} */
@@ -4065,6 +5341,10 @@ declare interface Clb {
   DescribeResources(data?: DescribeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourcesResponse>;
   /** 查询负载均衡转发规则的重定向关系 {@link DescribeRewriteRequest} {@link DescribeRewriteResponse} */
   DescribeRewrite(data: DescribeRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRewriteResponse>;
+  /** 查询BYOK健康检查状况 {@link DescribeServiceProviderHealthStatusRequest} {@link DescribeServiceProviderHealthStatusResponse} */
+  DescribeServiceProviderHealthStatus(data: DescribeServiceProviderHealthStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceProviderHealthStatusResponse>;
+  /** 查询平台支持的 Provider 列表 {@link DescribeSupportedProvidersRequest} {@link DescribeSupportedProvidersResponse} */
+  DescribeSupportedProviders(data?: DescribeSupportedProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportedProvidersResponse>;
   /** 查询目标组后端服务状态 {@link DescribeTargetGroupInstanceStatusRequest} {@link DescribeTargetGroupInstanceStatusResponse} */
   DescribeTargetGroupInstanceStatus(data: DescribeTargetGroupInstanceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetGroupInstanceStatusResponse>;
   /** 获取目标组绑定的服务器 {@link DescribeTargetGroupInstancesRequest} {@link DescribeTargetGroupInstancesResponse} */
@@ -4079,14 +5359,24 @@ declare interface Clb {
   DescribeTargets(data: DescribeTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTargetsResponse>;
   /** 查询异步任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data?: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
+  /** 查询上游模型列表 {@link DescribeUpperModelsRequest} {@link DescribeUpperModelsResponse} */
+  DescribeUpperModels(data?: DescribeUpperModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUpperModelsResponse>;
   /** 查询用户组列表 {@link DescribeUserGroupsRequest} {@link DescribeUserGroupsResponse} */
   DescribeUserGroups(data: DescribeUserGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserGroupsResponse>;
   /** 解除Budget关联 {@link DisassociateBudgetRequest} {@link DisassociateBudgetResponse} */
   DisassociateBudget(data: DisassociateBudgetRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateBudgetResponse>;
   /** 去关联个性化配置 {@link DisassociateCustomizedConfigRequest} {@link DisassociateCustomizedConfigResponse} */
   DisassociateCustomizedConfig(data: DisassociateCustomizedConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateCustomizedConfigResponse>;
+  /** 解除模型路由 Guardrails 防护 {@link DisassociateModelRouterGuardrailsRequest} {@link DisassociateModelRouterGuardrailsResponse} */
+  DisassociateModelRouterGuardrails(data: DisassociateModelRouterGuardrailsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateModelRouterGuardrailsResponse>;
+  /** 将模型从模型路由实例解除关联 {@link DisassociateModelsFromModelRouterRequest} {@link DisassociateModelsFromModelRouterResponse} */
+  DisassociateModelsFromModelRouter(data: DisassociateModelsFromModelRouterRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateModelsFromModelRouterResponse>;
   /** 解除规则的目标组关联关系 {@link DisassociateTargetGroupsRequest} {@link DisassociateTargetGroupsResponse} */
   DisassociateTargetGroups(data: DisassociateTargetGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateTargetGroupsResponse>;
+  /** 创建模型路由资源包询价 {@link InquirePriceCreateModelRouterResourcePackageRequest} {@link InquirePriceCreateModelRouterResourcePackageResponse} */
+  InquirePriceCreateModelRouterResourcePackage(data: InquirePriceCreateModelRouterResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateModelRouterResourcePackageResponse>;
+  /** 退还模型路由资源包询价 {@link InquirePriceRefundModelRouterResourcePackageRequest} {@link InquirePriceRefundModelRouterResourcePackageResponse} */
+  InquirePriceRefundModelRouterResourcePackage(data: InquirePriceRefundModelRouterResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRefundModelRouterResourcePackageResponse>;
   /** 创建负载均衡实例询价 {@link InquiryPriceCreateLoadBalancerRequest} {@link InquiryPriceCreateLoadBalancerResponse} */
   InquiryPriceCreateLoadBalancer(data: InquiryPriceCreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<InquiryPriceCreateLoadBalancerResponse>;
   /** 修改负载均衡配置询价 {@link InquiryPriceModifyLoadBalancerRequest} {@link InquiryPriceModifyLoadBalancerResponse} */
@@ -4109,6 +5399,8 @@ declare interface Clb {
   ModifyDomainAttributes(data: ModifyDomainAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDomainAttributesResponse>;
   /** 修改转发规则绑定的云函数 {@link ModifyFunctionTargetsRequest} {@link ModifyFunctionTargetsResponse} */
   ModifyFunctionTargets(data: ModifyFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionTargetsResponse>;
+  /** 修改意图路由属性 {@link ModifyIntentRouterAttributeRequest} {@link ModifyIntentRouterAttributeResponse} */
+  ModifyIntentRouterAttribute(data: ModifyIntentRouterAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIntentRouterAttributeResponse>;
   /** 修改API Key的属性 {@link ModifyKeyAttributesRequest} {@link ModifyKeyAttributesResponse} */
   ModifyKeyAttributes(data: ModifyKeyAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKeyAttributesResponse>;
   /** 禁用或启用Key {@link ModifyKeysBlockStatusRequest} {@link ModifyKeysBlockStatusResponse} */
@@ -4125,10 +5417,20 @@ declare interface Clb {
   ModifyLoadBalancerSla(data: ModifyLoadBalancerSlaRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancerSlaResponse>;
   /** 修改负载均衡所属项目 {@link ModifyLoadBalancersProjectRequest} {@link ModifyLoadBalancersProjectResponse} */
   ModifyLoadBalancersProject(data: ModifyLoadBalancersProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoadBalancersProjectResponse>;
+  /** 批量修改模型别名属性 {@link ModifyModelAliasAttributesRequest} {@link ModifyModelAliasAttributesResponse} */
+  ModifyModelAliasAttributes(data: ModifyModelAliasAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelAliasAttributesResponse>;
+  /** 修改BYOK的属性 {@link ModifyModelAttributesRequest} {@link ModifyModelAttributesResponse} */
+  ModifyModelAttributes(data: ModifyModelAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelAttributesResponse>;
   /** 修改模型路由实例属性 {@link ModifyModelRouterAttributesRequest} {@link ModifyModelRouterAttributesResponse} */
   ModifyModelRouterAttributes(data: ModifyModelRouterAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelRouterAttributesResponse>;
+  /** 修改模型路由 Guardrails 防护 {@link ModifyModelRouterGuardrailsRequest} {@link ModifyModelRouterGuardrailsResponse} */
+  ModifyModelRouterGuardrails(data: ModifyModelRouterGuardrailsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelRouterGuardrailsResponse>;
+  /** 设置模型路由实例安全组 {@link ModifyModelRouterSecurityGroupsRequest} {@link ModifyModelRouterSecurityGroupsResponse} */
+  ModifyModelRouterSecurityGroups(data: ModifyModelRouterSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelRouterSecurityGroupsResponse>;
   /** 修改负载均衡七层监听器的转发规则 {@link ModifyRuleRequest} {@link ModifyRuleResponse} */
   ModifyRule(data: ModifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRuleResponse>;
+  /** 修改byok实例下指定模型的属性 {@link ModifyServiceProviderModelAttributesRequest} {@link ModifyServiceProviderModelAttributesResponse} */
+  ModifyServiceProviderModelAttributes(data: ModifyServiceProviderModelAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceProviderModelAttributesResponse>;
   /** 修改目标组属性 {@link ModifyTargetGroupAttributeRequest} {@link ModifyTargetGroupAttributeResponse} */
   ModifyTargetGroupAttribute(data: ModifyTargetGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetGroupAttributeResponse>;
   /** 批量修改目标组服务器端口 {@link ModifyTargetGroupInstancesPortRequest} {@link ModifyTargetGroupInstancesPortResponse} */
@@ -4141,16 +5443,24 @@ declare interface Clb {
   ModifyTargetWeight(data: ModifyTargetWeightRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTargetWeightResponse>;
   /** 修改用户组属性 {@link ModifyUserGroupAttributesRequest} {@link ModifyUserGroupAttributesResponse} */
   ModifyUserGroupAttributes(data: ModifyUserGroupAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupAttributesResponse>;
+  /** 退还模型路由资源包 {@link RefundModelRouterResourcePackageRequest} {@link RefundModelRouterResourcePackageResponse} */
+  RefundModelRouterResourcePackage(data: RefundModelRouterResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<RefundModelRouterResourcePackageResponse>;
   /** 批量重新生成Key {@link RegenerateKeysRequest} {@link RegenerateKeysResponse} */
   RegenerateKeys(data: RegenerateKeysRequest, config?: AxiosRequestConfig): AxiosPromise<RegenerateKeysResponse>;
   /** 绑定云函数到转发规则上 {@link RegisterFunctionTargetsRequest} {@link RegisterFunctionTargetsResponse} */
   RegisterFunctionTargets(data: RegisterFunctionTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterFunctionTargetsResponse>;
+  /** 添加模型列表到BYOK实例 {@link RegisterModelsToServiceProviderRequest} {@link RegisterModelsToServiceProviderResponse} */
+  RegisterModelsToServiceProvider(data: RegisterModelsToServiceProviderRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterModelsToServiceProviderResponse>;
   /** 注册服务器到目标组 {@link RegisterTargetGroupInstancesRequest} {@link RegisterTargetGroupInstancesResponse} */
   RegisterTargetGroupInstances(data: RegisterTargetGroupInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetGroupInstancesResponse>;
   /** 绑定后端机器到监听器上 {@link RegisterTargetsRequest} {@link RegisterTargetsResponse} */
   RegisterTargets(data: RegisterTargetsRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsResponse>;
   /** 绑定后端服务到传统型负载均衡 {@link RegisterTargetsWithClassicalLBRequest} {@link RegisterTargetsWithClassicalLBResponse} */
   RegisterTargetsWithClassicalLB(data: RegisterTargetsWithClassicalLBRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTargetsWithClassicalLBResponse>;
+  /** 删除 BYOK 模型下的指定 Key {@link RemoveModelKeyRequest} {@link RemoveModelKeyResponse} */
+  RemoveModelKey(data: RemoveModelKeyRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveModelKeyResponse>;
+  /** 删除模型重写规则 {@link RemoveModelRewriteRequest} {@link RemoveModelRewriteResponse} */
+  RemoveModelRewrite(data: RemoveModelRewriteRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveModelRewriteResponse>;
   /** 续费包年包月实例 {@link RenewLoadBalancersRequest} {@link RenewLoadBalancersResponse} */
   RenewLoadBalancers(data: RenewLoadBalancersRequest, config?: AxiosRequestConfig): AxiosPromise<RenewLoadBalancersResponse>;
   /** 替换负载均衡实例所关联的证书 {@link ReplaceCertForLoadBalancersRequest} {@link ReplaceCertForLoadBalancersResponse} */
@@ -4165,6 +5475,10 @@ declare interface Clb {
   SetLoadBalancerStartStatus(data: SetLoadBalancerStartStatusRequest, config?: AxiosRequestConfig): AxiosPromise<SetLoadBalancerStartStatusResponse>;
   /** 绑定或解绑一个安全组到多个负载均衡实例 {@link SetSecurityGroupForLoadbalancersRequest} {@link SetSecurityGroupForLoadbalancersResponse} */
   SetSecurityGroupForLoadbalancers(data: SetSecurityGroupForLoadbalancersRequest, config?: AxiosRequestConfig): AxiosPromise<SetSecurityGroupForLoadbalancersResponse>;
+  /** 测试模型支持的输入多模态能力列表 {@link TestModelInputModalitiesRequest} {@link TestModelInputModalitiesResponse} */
+  TestModelInputModalities(data: TestModelInputModalitiesRequest, config?: AxiosRequestConfig): AxiosPromise<TestModelInputModalitiesResponse>;
+  /** 进行BYOK健康探测 {@link TestServiceProviderConnectionRequest} {@link TestServiceProviderConnectionResponse} */
+  TestServiceProviderConnection(data?: TestServiceProviderConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<TestServiceProviderConnectionResponse>;
 }
 
 export declare type Versions = ["2018-03-17"];

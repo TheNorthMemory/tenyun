@@ -350,7 +350,7 @@ declare interface DBInstance {
   Cpu?: number;
   /** 实例版本代号 */
   Version?: string;
-  /** 实例类型代号：&quot;TS85&quot;-物理机，本地SSD硬盘；&quot;Z3&quot;-物理机早期版本，本地SSD硬盘；&quot;CLOUD_BASIC&quot;-虚拟机，普通云硬盘；&quot;CLOUD_PREMIUM&quot;-虚拟机，高性能云硬盘；&quot;CLOUD_SSD&quot;-虚拟机，云SSD硬盘；&quot;CLOUD_HSSD&quot;-虚拟机，增强型SSD云硬盘；&quot;CLOUD_TSSD&quot;-虚拟机，极速型SSD云硬盘；&quot;CLOUD_BSSD&quot;-虚拟机，通用型SSD云硬盘 */
+  /** 实例类型代号："TS85"-物理机，本地SSD硬盘；"Z3"-物理机早期版本，本地SSD硬盘；"CLOUD_BASIC"-虚拟机，普通云硬盘；"CLOUD_PREMIUM"-虚拟机，高性能云硬盘；"CLOUD_SSD"-虚拟机，云SSD硬盘；"CLOUD_HSSD"-虚拟机，增强型SSD云硬盘；"CLOUD_TSSD"-虚拟机，极速型SSD云硬盘；"CLOUD_BSSD"-虚拟机，通用型SSD云硬盘 */
   Type?: string;
   /** 计费ID */
   Pid?: number;
@@ -3811,7 +3811,7 @@ declare interface DescribeUpgradeInstanceCheckRequest {
   MultiZones?: string;
   /** 多节点架构实例的备节点可用区，默认为空。如果需要在变配的同时修改指定备节点的可用区时必传，当MultiZones = MultiZones时主节点和备节点可用区不能全部相同。备机可用区集合最小为2个，最大不超过5个。 */
   DrZones?: DrZoneInfo[];
-  /** 额外磁盘IO吞吐量取值范围：[0, 650]单位：MB/s不传-保持原值不变；0-取消额外IO；&gt;0-设为新值 */
+  /** 额外磁盘IO吞吐量取值范围：[0, 650]单位：MB/s不传-保持原值不变；0-取消额外IO；>0-设为新值 */
   ThroughputPerformance?: number;
 }
 
@@ -3966,9 +3966,9 @@ declare interface InquiryPriceCreateDBInstancesRequest {
 }
 
 declare interface InquiryPriceCreateDBInstancesResponse {
-  /** 未打折前价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是&quot;每月&quot;。InstanceChargeType=POSTPAID时，单位是&quot;每小时&quot;。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
+  /** 未打折前价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是"每月"。InstanceChargeType=POSTPAID时，单位是"每小时"。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
   OriginalPrice?: number;
-  /** 实际需要支付的价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是&quot;每月&quot;。InstanceChargeType=POSTPAID时，单位是&quot;每小时&quot;。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
+  /** 实际需要支付的价格，其值除以100表示最终的价格。InstanceChargeType=PREPAID时，单位是"每月"。InstanceChargeType=POSTPAID时，单位是"每小时"。例如10010，在InstanceChargeType=PREPAID情况下，表示每月100.10元。 */
   Price?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

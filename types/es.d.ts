@@ -591,7 +591,7 @@ declare namespace V20180416 {
   interface CosBackup {
     /** 是否开启cos自动备份 */
     IsAutoBackup: boolean;
-    /** 自动备份执行时间（精确到小时）, e.g. &quot;22:00&quot; */
+    /** 自动备份执行时间（精确到小时）, e.g. "22:00" */
     BackupTime: string;
     /** 备份快照前缀 */
     SnapshotName?: string;
@@ -1215,7 +1215,7 @@ declare namespace V20180416 {
     NetConnectScheme?: string | null;
     /** 置放群组相关参数 */
     DisasterRecoverGroupAffinity?: number | null;
-    /** 子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，AI搜索增强版：&quot;sp_es_aisearch&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段 */
+    /** 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，AI搜索增强版："sp_es_aisearch"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段 */
     SubProductCode?: string | null;
     /** 存算分离cos用量，单位M */
     CosBucketStorageSize?: number | null;
@@ -2276,7 +2276,7 @@ declare namespace V20180416 {
   interface CreateInstanceRequest {
     /** 可用区 */
     Zone: string;
-    /** 实例版本（支持&quot;5.6.4&quot;、&quot;6.4.3&quot;、&quot;6.8.2&quot;、&quot;7.5.1&quot;、&quot;7.10.1&quot;） */
+    /** 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"、"7.10.1"） */
     EsVersion: string;
     /** 私有网络ID */
     VpcId: string;
@@ -2348,7 +2348,7 @@ declare namespace V20180416 {
     CdcId?: string;
     /** 置放群组亲和度，范围[0,10]，0表示不开启 */
     DisasterRecoverGroupAffinity?: number;
-    /** 子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段 */
+    /** 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段 */
     SubProductCode?: string;
     /** 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离 */
     ReadWriteMode?: number;

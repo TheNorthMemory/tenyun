@@ -192,7 +192,7 @@ declare interface SendMultiStatus {
   Fee?: number;
   /** 用户 session 内容。 */
   SessionContext?: string;
-  /** 短信请求错误码，具体含义请参考 错误码，发送成功返回 &quot;Ok&quot;。 */
+  /** 短信请求错误码，具体含义请参考 错误码，发送成功返回 "Ok"。 */
   Code?: string;
   /** 短信请求错误码描述。 */
   Message?: string;

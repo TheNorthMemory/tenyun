@@ -3246,7 +3246,7 @@ declare interface VpnGateway {
   State?: string;
   /** 网关公网IP。 */
   PublicIpAddress?: string;
-  /** 网关续费类型：&#39;NOTIFY_AND_MANUAL_RENEW&#39;：手动续费，&#39;NOTIFY_AND_AUTO_RENEW&#39;：自动续费，&#39;NOT_NOTIFY_AND_NOT_RENEW&#39;：到期不续费。 */
+  /** 网关续费类型：'NOTIFY_AND_MANUAL_RENEW'：手动续费，'NOTIFY_AND_AUTO_RENEW'：自动续费，'NOT_NOTIFY_AND_NOT_RENEW'：到期不续费。 */
   RenewFlag?: string;
   /** 网关付费类型：POSTPAID_BY_HOUR：按量计费，PREPAID：包年包月预付费。 */
   InstanceChargeType?: string;
@@ -8851,7 +8851,7 @@ declare interface ModifyAddressTemplateGroupAttributeResponse {
 }
 
 declare interface ModifyAddressesBandwidthRequest {
-  /** EIP唯一标识ID列表，形如&#39;eip-xxxx&#39;，可以使用DescribeAddresses接口获取AddressId。 */
+  /** EIP唯一标识ID列表，形如'eip-xxxx'，可以使用DescribeAddresses接口获取AddressId。 */
   AddressIds: string[];
   /** 调整带宽目标值，可调整的带宽上限值参考产品文档带宽上限。 */
   InternetMaxBandwidthOut: number;

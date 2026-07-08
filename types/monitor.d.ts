@@ -2047,7 +2047,7 @@ declare namespace V20180724 {
     ContinuePeriod: number;
     /** 告警发送收敛类型。0连续告警，1指数告警 */
     AlarmNotifyType: number;
-    /** 告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次 */
+    /** 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次 */
     AlarmNotifyPeriod: number;
     /** 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改 */
     RuleId?: number;
@@ -2059,7 +2059,7 @@ declare namespace V20180724 {
     EventId: number;
     /** 告警发送收敛类型。0连续告警，1指数告警 */
     AlarmNotifyType: number;
-    /** 告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次 */
+    /** 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次 */
     AlarmNotifyPeriod: number;
     /** 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改 */
     RuleId?: number;
@@ -2251,7 +2251,7 @@ declare namespace V20180724 {
     RoundInterval: number;
     /** 电话告警轮数 */
     RoundNumber: number;
-    /** 电话告警通知时机。可选&quot;OCCUR&quot;(告警时通知),&quot;RECOVER&quot;(恢复时通知) */
+    /** 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知) */
     SendFor: string[] | null;
     /** 有效时段开始时间 */
     StartTime: number;
@@ -3237,7 +3237,7 @@ declare namespace V20180724 {
   }
 
   interface BindingPolicyObjectRequest {
-    /** 必填。固定值&quot;monitor&quot; */
+    /** 必填。固定值"monitor" */
     Module: string;
     /** 策略组id，例如 4739573。逐渐弃用，建议使用 PolicyId 参数 */
     GroupId?: number;
@@ -3601,7 +3601,7 @@ declare namespace V20180724 {
     OrgId?: number;
     /** 额外组织 ID 数组，已废弃，请使用 OrganizationIds */
     ExtraOrgIds?: string[];
-    /** 生效的所有组织 ID 数组，默认为 [&quot;1&quot;] */
+    /** 生效的所有组织 ID 数组，默认为 ["1"] */
     OrganizationIds?: string[];
   }
 
@@ -4347,7 +4347,7 @@ declare namespace V20180724 {
   }
 
   interface DescribeAlarmPoliciesRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 页数，从 1 开始计数，默认 1 */
     PageNumber?: number;
@@ -4355,11 +4355,11 @@ declare namespace V20180724 {
     PageSize?: number;
     /** 按策略名称模糊搜索 */
     PolicyName?: string;
-    /** 根据监控类型过滤 不选默认查所有类型 &quot;MT_QCE&quot;=云产品监控,当Dimension不为空时，该项为必填项 */
+    /** 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控,当Dimension不为空时，该项为必填项 */
     MonitorTypes?: string[];
     /** 根据命名空间过滤，不同策略类型的值详见策略类型列表当Dimension不为空时，该项为必填项 */
     Namespaces?: string[];
-    /** 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：[[{&quot;name&quot;:&quot;unInstanceId&quot;,&quot;value&quot;:&quot;ins-qr888845g&quot;}]]具体也可以参考下方的示例 2。不同云产品参数示例详见 维度信息Dimensions列表注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时 */
+    /** 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：[[{"name":"unInstanceId","value":"ins-qr888845g"}]]具体也可以参考下方的示例 2。不同云产品参数示例详见 维度信息Dimensions列表注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时 */
     Dimensions?: string;
     /** 根据接收人搜索，可以使用“访问管理”的 拉取子用户 ListUsers 接口获取用户列表 或 查询子用户 GetUser 接口查询子用户详情，此处填入返回结果中的 Uid 字段 */
     ReceiverUids?: number[];
@@ -4367,7 +4367,7 @@ declare namespace V20180724 {
     ReceiverGroups?: number[];
     /** 根据默认策略筛选 不传展示全部策略 DEFAULT=展示默认策略 NOT_DEFAULT=展示非默认策略 */
     PolicyType?: string[];
-    /** 排序字段，例如按照最后修改时间排序，Field: &quot;UpdateTime&quot; */
+    /** 排序字段，例如按照最后修改时间排序，Field: "UpdateTime" */
     Field?: string;
     /** 排序顺序：升序：ASC 降序：DESC */
     Order?: string;
@@ -4415,7 +4415,7 @@ declare namespace V20180724 {
   }
 
   interface DescribeAlarmPolicyRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 告警策略ID */
     PolicyId: string;
@@ -4429,7 +4429,7 @@ declare namespace V20180724 {
   }
 
   interface DescribeAlarmSmsQuotaRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
   }
 
@@ -4551,7 +4551,7 @@ declare namespace V20180724 {
   }
 
   interface DescribeBindingPolicyObjectListRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 策略组id，如果有形如 policy-xxxx 的 id，请填到 PolicyId 字段中，本字段填 0 */
     GroupId: number;
@@ -4593,7 +4593,7 @@ declare namespace V20180724 {
   }
 
   interface DescribeConditionsTemplateListRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 视图名，由 DescribeAllNamespaces 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device */
     ViewName?: string;
@@ -4923,7 +4923,7 @@ declare namespace V20180724 {
   }
 
   interface DescribePolicyConditionListRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
   }
 
@@ -4935,7 +4935,7 @@ declare namespace V20180724 {
   }
 
   interface DescribePolicyGroupInfoRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 策略组id */
     GroupId: number;
@@ -4981,7 +4981,7 @@ declare namespace V20180724 {
   }
 
   interface DescribePolicyGroupListRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 分页参数，每页返回的数量，取值1~100 */
     Limit: number;
@@ -5003,7 +5003,7 @@ declare namespace V20180724 {
     Receivers?: string[];
     /** 过滤条件, 接收人列表 */
     ReceiverUserList?: string[];
-    /** 维度组合字段(json字符串), 例如[[{&quot;name&quot;:&quot;unInstanceId&quot;,&quot;value&quot;:&quot;ins-6e4b2aaa&quot;}]] */
+    /** 维度组合字段(json字符串), 例如[[{"name":"unInstanceId","value":"ins-6e4b2aaa"}]] */
     Dimensions?: string;
     /** 模板策略组id, 多个id用逗号分隔 */
     ConditionTempGroupId?: string;
@@ -5025,7 +5025,7 @@ declare namespace V20180724 {
   }
 
   interface DescribePolicyObjectCountRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 策略组Id */
     GroupId: number;
@@ -5981,7 +5981,7 @@ declare namespace V20180724 {
   }
 
   interface ModifyPolicyGroupRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 策略组id */
     GroupId: number;
@@ -6209,7 +6209,7 @@ declare namespace V20180724 {
   }
 
   interface UnBindingAllPolicyObjectRequest {
-    /** 固定值，为&quot;monitor&quot; */
+    /** 固定值，为"monitor" */
     Module: string;
     /** 策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0 */
     GroupId: number;
@@ -6363,7 +6363,7 @@ declare namespace V20180724 {
   interface UpdateGrafanaConfigRequest {
     /** 实例 ID */
     InstanceId: string;
-    /** JSON 编码后的字符串，如 &quot;{&quot;server&quot;:{&quot;root_url&quot;:&quot;http://custom.domain&quot;}}&quot; */
+    /** JSON 编码后的字符串，如 "{"server":{"root_url":"http://custom.domain"}}" */
     Config: string;
   }
 

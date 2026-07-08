@@ -1060,7 +1060,7 @@ declare interface ModelSource {
 
 /** 数据源挂载配置 */
 declare interface MountConfigureInfo {
-  /** 数据源的相对路径，支持&lt;@subaccount&gt;这样的占位符 */
+  /** 数据源的相对路径，支持<@subaccount>这样的占位符 */
   WorkDir?: string;
 }
 
@@ -1402,6 +1402,58 @@ declare interface PodSSHInfo {
   LoginCommand?: string;
 }
 
+/** 预制镜像详情 */
+declare interface PresetImageInfo {
+  /** 镜像id */
+  ImageId?: string;
+  /** 镜像仓库名称 */
+  ImageRepo?: string;
+  /** 镜像标签 */
+  ImageTag?: string;
+  /** 镜像url地址 */
+  ImageUrl?: string;
+  /** 镜像的大小 */
+  ImageSize?: string;
+  /** 镜像描述 */
+  Description?: string;
+  /** 适用模块 */
+  ApplicableModuleList?: string[];
+  /** 使用场景 */
+  Scenario?: string;
+  /** 框架名称 */
+  Framework?: string;
+  /** 框架版本 */
+  FrameworkVersion?: string;
+  /** 芯片类型 */
+  ChipTypeList?: string[];
+  /** 运行库版本 */
+  ComputeLibVersion?: string;
+  /** python版本 */
+  PythonVersion?: string;
+  /** 操作系统 */
+  OS?: string;
+  /** 运行库列表 */
+  RuntimeLibList?: RuntimeLib[];
+  /** 支持的gpu列表 */
+  SupportGpuList?: string[];
+  /** 扩展属性 */
+  ExtraAttributeList?: Attribute[];
+  /** 是否支持分布式部署 */
+  SupportDistributedDeploy?: boolean;
+  /** 是否最新稳定版本 */
+  IsLatestStable?: boolean;
+  /** 镜像的名称 */
+  ImageName?: string;
+  /** 镜像版本号（内部） */
+  Version?: number;
+  /** 录入时间参数格式：YYYY-MM-DDThh:mm:ssZ */
+  CreateTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DDThh:mm:ssZ */
+  UpdateTime?: string;
+  /** 镜像类型枚举值：TCR： TCR类型的镜像 */
+  ImageType?: string;
+}
+
 /** 私有连接信息 */
 declare interface PrivateLinkInfo {
   /** 私有连接所在的VPCID */
@@ -1658,6 +1710,14 @@ declare interface RollingUpdate {
   MaxUnavailable?: NumOrPercent;
   /** 滚动更新的最大新增实例 */
   MaxSurge?: NumOrPercent;
+}
+
+/** 预制镜像中的运行库详情 */
+declare interface RuntimeLib {
+  /** 运行库名称 */
+  Name?: string;
+  /** 运行库版本号 */
+  Version?: string;
 }
 
 /** notebook ssh端口配置 */
@@ -1938,7 +1998,7 @@ declare interface ServiceInfo {
   ModelHotUpdateEnable: boolean | null;
   /** 服务的规格别名 */
   InstanceAlias?: string;
-  /** 实例数量调节方式,默认为手动支持：自动 - &quot;AUTO&quot;, 手动 - &quot;MANUAL&quot; */
+  /** 实例数量调节方式,默认为手动支持：自动 - "AUTO", 手动 - "MANUAL" */
   ScaleMode?: string | null;
   /** 定时伸缩任务 */
   CronScaleJobs?: CronScaleJob[] | null;
@@ -2491,7 +2551,7 @@ declare interface CreateDataSourceResponse {
 }
 
 declare interface CreateDatasetRequest {
-  /** 数据集名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
+  /** 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   DatasetName: string;
   /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
   TiProjectId?: string;
@@ -2579,7 +2639,7 @@ declare interface CreateModelServiceRequest {
   TiProjectId?: string;
   /** 新增版本时需要填写 */
   ServiceGroupId?: string;
-  /** 不超过60个字，仅支持英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以英文、数字开头 */
+  /** 不超过60个字，仅支持英文、数字、下划线"_"、短横"-"，只能以英文、数字开头 */
   ServiceGroupName?: string;
   /** 模型服务的描述 */
   ServiceDescription?: string;
@@ -2597,7 +2657,7 @@ declare interface CreateModelServiceRequest {
   Resources?: ResourceInfo;
   /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST 2C4GTI.S.LARGE.POST 4C8GTI.S.2XLARGE16.POST 8C16GTI.S.2XLARGE32.POST 8C32GTI.S.4XLARGE32.POST 16C32GTI.S.4XLARGE64.POST 16C64GTI.S.6XLARGE48.POST 24C48GTI.S.6XLARGE96.POST 24C96GTI.S.8XLARGE64.POST 32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST 4C20G T41/4TI.GN7.2XLARGE40.POST 10C40G T41/2TI.GN7.2XLARGE32.POST 8C32G T41TI.GN7.5XLARGE80.POST 20C80G T41TI.GN7.8XLARGE128.POST 32C128G T41TI.GN7.10XLARGE160.POST 40C160G T42TI.GN7.20XLARGE320.POST 80C320G T4*4 */
   InstanceType?: string;
-  /** 扩缩容类型 支持：自动 - &quot;AUTO&quot;, 手动 - &quot;MANUAL&quot;,默认为MANUAL */
+  /** 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL",默认为MANUAL */
   ScaleMode?: string;
   /** 实例数量, 不同计费模式和调节模式下对应关系如下PREPAID 和 POSTPAID_BY_HOUR:手动调节模式下对应 实例数量自动调节模式下对应 基于时间的默认策略的实例数量HYBRID_PAID:后付费实例手动调节模式下对应 实例数量后付费实例自动调节模式下对应 时间策略的默认策略的实例数量 */
   Replicas?: number;
@@ -2693,7 +2753,7 @@ declare interface CreateMountLimitResponse {
 }
 
 declare interface CreateNotebookRequest {
-  /** 名称。不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
   /** 计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
   ChargeType: string;
@@ -2829,11 +2889,11 @@ declare interface CreateTrainingModelResponse {
 }
 
 declare interface CreateTrainingTaskRequest {
-  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
+  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
   /** 计费模式，eg：PREPAID 包年包月（资源组）;POSTPAID_BY_HOUR 按量计费 */
   ChargeType: string;
-  /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{&quot;Role&quot;:&quot;WORKER&quot;, &quot;InstanceType&quot;: &quot;TI.S.MEDIUM.POST&quot;, &quot;InstanceNum&quot;: 1}] */
+  /** 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}] */
   ResourceConfigInfos: ResourceConfigInfo[];
   /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
   TiProjectId?: string;
@@ -3149,7 +3209,7 @@ declare interface DescribeBillingSpecsRequest {
   TiProjectId?: string;
   /** 枚举值：空、TRAIN、NOTEBOOK、INFERENCE或EMS */
   TaskType?: string;
-  /** 资源类型：[&quot;&quot;, &quot;CALC&quot;, &quot;CPU&quot;, &quot;GPU&quot;, &quot;GPU-SW&quot;] */
+  /** 资源类型：["", "CALC", "CPU", "GPU", "GPU-SW"] */
   ResourceType?: string;
 }
 
@@ -3433,9 +3493,9 @@ declare interface DescribeModelServiceGroupsRequest {
   Limit?: number;
   /** 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列 */
   Order?: string;
-  /** 排序的依据字段， 取值范围 &quot;CreateTime&quot; &quot;UpdateTime&quot; */
+  /** 排序的依据字段， 取值范围 "CreateTime" "UpdateTime" */
   OrderField?: string;
-  /** 分页参数，支持的分页过滤Name包括：[&quot;ClusterId&quot;, &quot;ServiceId&quot;, &quot;ServiceGroupName&quot;, &quot;ServiceGroupId&quot;,&quot;Status&quot;,&quot;CreatedBy&quot;,&quot;ModelVersionId&quot;] */
+  /** 分页参数，支持的分页过滤Name包括：["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelVersionId"] */
   Filters?: Filter[];
   /** 标签过滤参数 */
   TagFilters?: TagFilter[];
@@ -3598,6 +3658,30 @@ declare interface DescribePlatformImagesResponse {
   TotalCount?: number;
   /** 镜像列表 */
   PlatformImageInfos?: PlatformImageInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePresetImageListRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
+  /** 业务过滤表达式 */
+  Filters?: Filter[];
+  /** 分页排序 */
+  Offset?: number;
+  /** 单页大小 */
+  Limit?: number;
+  /** 排序字段 */
+  OrderField?: string[];
+  /** 对应字段的排序方式 */
+  Order?: string[];
+}
+
+declare interface DescribePresetImageListResponse {
+  /** 记录总数 */
+  TotalCount?: number;
+  /** 镜像列表 */
+  PresetImageList?: PresetImageInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3875,7 +3959,7 @@ declare interface ModifyModelServiceResponse {
 declare interface ModifyNotebookRequest {
   /** notebook id */
   Id: string;
-  /** 名称。不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头 */
+  /** 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
   /** （不允许修改）计算资源付费模式 ，可选值为：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
   ChargeType: string;
@@ -4889,6 +4973,8 @@ declare interface Tione {
   DescribeNotebooks(data?: DescribeNotebooksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebooksResponse>;
   /** 查询平台镜像信息 {@link DescribePlatformImagesRequest} {@link DescribePlatformImagesResponse} */
   DescribePlatformImages(data?: DescribePlatformImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformImagesResponse>;
+  /** 查询预制镜像列表 {@link DescribePresetImageListRequest} {@link DescribePresetImageListResponse} */
+  DescribePresetImageList(data?: DescribePresetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePresetImageListResponse>;
   /** 公共算法版本列表 {@link DescribePublicAlgoVersionListRequest} {@link DescribePublicAlgoVersionListResponse} */
   DescribePublicAlgoVersionList(data?: DescribePublicAlgoVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicAlgoVersionListResponse>;
   /** 批量查询子账号Linux用户信息 {@link DescribeSubAccountLinuxUserInfosRequest} {@link DescribeSubAccountLinuxUserInfosResponse} */

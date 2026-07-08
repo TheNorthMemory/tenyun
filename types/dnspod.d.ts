@@ -1781,15 +1781,15 @@ declare interface DescribeDomainFilterListRequest {
   Package?: string[];
   /** 根据备注信息获取域名。 */
   Remark?: string;
-  /** 要获取域名的更新时间起始时间点，如 &#39;2021-05-01 03:00:00&#39;。 */
+  /** 要获取域名的更新时间起始时间点，如 '2021-05-01 03:00:00'。 */
   UpdatedAtBegin?: string;
-  /** 要获取域名的更新时间终止时间点，如 &#39;2021-05-10 20:00:00&#39;。 */
+  /** 要获取域名的更新时间终止时间点，如 '2021-05-10 20:00:00'。 */
   UpdatedAtEnd?: string;
   /** 要获取域名的记录数查询区间起点。 */
   RecordCountBegin?: number;
   /** 要获取域名的记录数查询区间终点。 */
   RecordCountEnd?: number;
-  /** 项目ID，&quot;账号中心-项目管理&quot;拿到项目ID */
+  /** 项目ID，"账号中心-项目管理"拿到项目ID */
   ProjectId?: number;
   /** 标签过滤 */
   Tags?: TagItemFilter[];

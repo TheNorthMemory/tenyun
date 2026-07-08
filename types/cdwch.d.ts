@@ -312,7 +312,7 @@ declare interface InstanceDetail {
 
 /** 实例的描述信息 */
 declare interface InstanceInfo {
-  /** 集群实例ID, &quot;cdw-xxxx&quot; 字符串类型 */
+  /** 集群实例ID, "cdw-xxxx" 字符串类型 */
   InstanceId?: string;
   /** 集群实例名称 */
   InstanceName?: string;
@@ -328,7 +328,7 @@ declare interface InstanceInfo {
   VpcId?: string;
   /** 子网名称 */
   SubnetId?: string;
-  /** 付费类型，&quot;hour&quot;, &quot;prepay&quot; */
+  /** 付费类型，"hour", "prepay" */
   PayMode?: string;
   /** 创建时间 */
   CreateTime?: string;
@@ -338,15 +338,15 @@ declare interface InstanceInfo {
   MasterSummary?: NodesSummary;
   /** zookeeper节点描述信息 */
   CommonSummary?: NodesSummary;
-  /** 高可用,&quot;true&quot; &quot;false&quot; */
+  /** 高可用,"true" "false" */
   HA?: string;
-  /** 访问地址，例如 &quot;10.0.0.1:9000&quot; */
+  /** 访问地址，例如 "10.0.0.1:9000" */
   AccessInfo?: string;
   /** 记录ID，数值型 */
   Id?: number;
   /** regionId, 表示地域 */
   RegionId?: number;
-  /** 可用区说明，例如 &quot;广州二区&quot; */
+  /** 可用区说明，例如 "广州二区" */
   ZoneDesc?: string;
   /** 错误流程说明信息 */
   FlowMsg?: string;

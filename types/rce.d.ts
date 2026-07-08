@@ -245,7 +245,7 @@ declare namespace V20201103 {
 
   /** 全栈式风控引擎入参 */
   interface InputManageMarketingRisk {
-    /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要&quot;提交工单&quot;或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值10005：手机号SHA256，中国大陆11位手机号进行SHA256加密，取64位小写值 */
+    /** 用户账号类型；默认开通QQOpenId、手机号MD5权限；如果需要使用微信OpenId入参，则需要"提交工单"或联系对接人进行资格审核，审核通过后方可正常使用微信开放账号。1：QQ开放账号2：微信开放账号10004：手机号MD5，中国大陆11位手机号进行MD5加密，取32位小写值10005：手机号SHA256，中国大陆11位手机号进行SHA256加密，取64位小写值 */
     Account: AccountInfo;
     /** 场景码，用于识别和区分不同的业务场景，可在控制台上新建和管理控制台链接：https://console.cloud.tencent.com/rce/risk/strategy/scene-root活动防刷默认场景码：e_activity_antirush登录保护默认场景码：e_login_protection注册保护默认场景码：e_register_protection */
     SceneCode: string;

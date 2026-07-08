@@ -2827,13 +2827,13 @@ declare interface CheckAttributeLabelReferResponse {
 }
 
 declare interface CreateAppRequest {
-  /** 应用类型；&quot;knowledge_qa&quot; 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式） */
+  /** 应用类型；"knowledge_qa" 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式） */
   AppType: string;
   /** 应用基础配置 */
   BaseConfig: BaseConfig;
   /** 应用模式 standard:标准模式, agent: agent模式，single_workflow：单工作流模式,ClawAgent:Claw模式 */
   Pattern?: string;
-  /** 智能体类型，用于区分应用最终以何种智能体形态对外服务（对话(&quot;dialogue&quot;) / 公众号(&quot;wechat&quot;)）。当前 ADP 创建页面不区分对话/公众号智能体，ADP 创建页默认走对话智能体。 */
+  /** 智能体类型，用于区分应用最终以何种智能体形态对外服务（对话("dialogue") / 公众号("wechat")）。当前 ADP 创建页面不区分对话/公众号智能体，ADP 创建页默认走对话智能体。 */
   AgentType?: string;
 }
 
@@ -3011,7 +3011,7 @@ declare interface CreateVarRequest {
   VarName: string;
   /** 变量描述，最大支持120个字符 */
   VarDesc?: string;
-  /** 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持&quot;STRING&quot;类型使用 */
+  /** 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用 */
   VarType?: string;
   /** 自定义变量默认值，VarDefaultValuexa0默认为空 */
   VarDefaultValue?: string;
@@ -4137,7 +4137,7 @@ declare interface GetVarListRequest {
   VarIds?: string[];
   /** 按变量名称关键词搜索 */
   Keyword?: string;
-  /** 起始偏移量（默认0），取值范围 &gt; 0 */
+  /** 起始偏移量（默认0），取值范围 > 0 */
   Offset?: number;
   /** 限定数量（默认15），取值范围 1-200 */
   Limit?: number;
@@ -4443,7 +4443,7 @@ declare interface ListQACateResponse {
 declare interface ListQARequest {
   /** 应用ID若要操作共享知识库，传KnowledgeBizId */
   BotBizId: string;
-  /** 页码（取值范围&gt;0） */
+  /** 页码（取值范围>0） */
   PageNumber: number;
   /** 每页大小(取值范围1-200) */
   PageSize: number;
@@ -4463,7 +4463,7 @@ declare interface ListQARequest {
   CateBizId?: string;
   /** QA业务ID列表 */
   QaBizIds?: string[];
-  /** 查询类型 filename 名称、 attribute 标签如果不填默认值为&quot;filename&quot; */
+  /** 查询类型 filename 名称、 attribute 标签如果不填默认值为"filename" */
   QueryType?: string;
   /** 是否只展示当前分类的数据 0不是，1是 */
   ShowCurrCate?: number;
@@ -5131,7 +5131,7 @@ declare interface SaveDocRequest {
   IsDownload?: boolean;
   /** 重复文档处理方式，按顺序匹配第一个满足条件的方式处理 */
   DuplicateFileHandles?: DuplicateFileHandle[];
-  /** 自定义切分规则请求参数为一个 JSON Object，具体格式可参见接口示例值。包含以下主要字段：字段名类型说明xlsx_splitterObjectExcel（xlsx）文件切分策略配置，仅当处理 Excel 文件时有效common_splitterObject通用文件（如 txt、pdf 等）切分策略配置，按页或按标签切分table_styleString表格内容的输出格式，如 HTML 或 Markdownxlsx_splitter（Excel 切分策略）用于配置 表格文件的切分方式。类型：Object&quot;xlsx_splitter&quot;: { &quot;header_interval&quot;: [1, 2], &quot;content_start&quot;: 10, &quot;split_row&quot;: 2}字段说明：字段名类型说明header_intervalArray&lt;Number&gt;表头所在的行区间，格式为 [起始行, 结束行]，行号从 1 开始计数。例如 [1, 2] 表示第 1~2 行为表头。content_startNumber表格内容的起始行号（从 1 开始）。split_rowNumber切分行数。common_splitter（通用文件切分策略）用于配置 非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式，支持两种策略：按页切分（page） 或 按标识符切分（tag）。类型：Object&quot;common_splitter&quot;: { &quot;splitter&quot;: &quot;page&quot;, &quot;page_splitter&quot;: { &quot;chunk_length&quot;: 1000, &quot;chunk_overlap_length&quot;: 100 }}字段说明：字段名类型说明splitterString切分策略类型，可选值为：&quot;page&quot;（按页切分） 或 &quot;tag&quot;（按标识符切分）。page_splitterObject按页切分的配置。page_splitter.chunk_length1000切片最大长度。page_splitter.chunk_overlap_length100切片重叠长度。tag_splitterObject自定义切分配置。tag_splitter.tagArray&lt;String&gt;切分标识符。tag_splitter.chunk_lengthNumber切片最大长度。tag_splitter.chunk_overlap_lengthNumber切块重叠长度。???? 补充说明：splitter 字段的值可以是：&quot;page&quot;：只使用按页切分逻辑，此时只需要关心 page_splitter 相关字段。&quot;tag&quot;：只使用按标识符（如分号、换行等）切分逻辑，此时关注 tag_splitter。table_style（表格输出样式）用于指定 表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回，方便前端展示或后续处理。类型：String&quot;table_style&quot;: &quot;md&quot;字段说明：字段名类型说明table_styleString指定表格内容的输出格式。可用值：• &quot;html&quot;：以 HTML 表格形式返回，适合网页展示。• &quot;md&quot;：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。 */
+  /** 自定义切分规则请求参数为一个 JSON Object，具体格式可参见接口示例值。包含以下主要字段：字段名类型说明xlsx_splitterObjectExcel（xlsx）文件切分策略配置，仅当处理 Excel 文件时有效common_splitterObject通用文件（如 txt、pdf 等）切分策略配置，按页或按标签切分table_styleString表格内容的输出格式，如 HTML 或 Markdownxlsx_splitter（Excel 切分策略）用于配置 表格文件的切分方式。类型：Object"xlsx_splitter": { "header_interval": [1, 2], "content_start": 10, "split_row": 2}字段说明：字段名类型说明header_intervalArray<Number>表头所在的行区间，格式为 [起始行, 结束行]，行号从 1 开始计数。例如 [1, 2] 表示第 1~2 行为表头。content_startNumber表格内容的起始行号（从 1 开始）。split_rowNumber切分行数。common_splitter（通用文件切分策略）用于配置 非 Excel 文件（如 TXT、PDF、DOCX 等）的切分方式，支持两种策略：按页切分（page） 或 按标识符切分（tag）。类型：Object"common_splitter": { "splitter": "page", "page_splitter": { "chunk_length": 1000, "chunk_overlap_length": 100 }}字段说明：字段名类型说明splitterString切分策略类型，可选值为："page"（按页切分） 或 "tag"（按标识符切分）。page_splitterObject按页切分的配置。page_splitter.chunk_length1000切片最大长度。page_splitter.chunk_overlap_length100切片重叠长度。tag_splitterObject自定义切分配置。tag_splitter.tagArray<String>切分标识符。tag_splitter.chunk_lengthNumber切片最大长度。tag_splitter.chunk_overlap_lengthNumber切块重叠长度。???? 补充说明：splitter 字段的值可以是："page"：只使用按页切分逻辑，此时只需要关心 page_splitter 相关字段。"tag"：只使用按标识符（如分号、换行等）切分逻辑，此时关注 tag_splitter。table_style（表格输出样式）用于指定 表格类内容（比如从 Excel 或 CSV 中提取的表格）最终以何种格式返回，方便前端展示或后续处理。类型：String"table_style": "md"字段说明：字段名类型说明table_styleString指定表格内容的输出格式。可用值：• "html"：以 HTML 表格形式返回，适合网页展示。• "md"：以 Markdown 表格语法返回，适合文档或 Markdown 渲染环境。 */
   SplitRule?: string;
   /** 文档更新频率，默认值为0不更新 */
   UpdatePeriodInfo?: UpdatePeriodInfo;

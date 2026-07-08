@@ -294,7 +294,7 @@ declare interface AgentToolInputParameter {
   Type?: number;
   /** 是否必填 */
   IsRequired?: boolean;
-  /** 子参数，仅 OBJECT 或 ARRAY&lt;&gt; 类型时使用 */
+  /** 子参数，仅 OBJECT 或 ARRAY<> 类型时使用 */
   SubParameterList?: AgentToolInputParameter[] | null;
   /** 模式下是否对模型隐藏 */
   IsHidden?: boolean;
@@ -1364,7 +1364,7 @@ declare interface RequestParam {
   Name?: string;
   /** OneOf类型的参数 */
   OneOf?: RequestParam[];
-  /** 子参数,ParamType 是OBJECT 或 ARRAY&lt;&gt;类型有用 */
+  /** 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用 */
   SubParams?: RequestParam[];
   /** 枚举项枚举值描述PARAM_TYPE_STRING0字符串PARAM_TYPE_INT1整数PARAM_TYPE_FLOAT2浮点数PARAM_TYPE_BOOL3布尔值PARAM_TYPE_OBJECT4对象PARAM_TYPE_ARRAY_STRING5字符串数组PARAM_TYPE_ARRAY_INT6整数数组PARAM_TYPE_ARRAY_FLOAT7浮点数数组PARAM_TYPE_ARRAY_BOOL8布尔值数组PARAM_TYPE_ARRAY_OBJECT9对象数组PARAM_TYPE_ARRAY_ARRAY20数组嵌套PARAM_TYPE_NULL99空值PARAM_TYPE_UNSPECIFIED100未指定类型，用于OneOf和AnyOf场景 */
   Type?: number;
@@ -1861,7 +1861,7 @@ declare interface CreateSkillResponse {
 }
 
 declare interface CreateSkillShareRequest {
-  /** 必填，申请备注（弹窗&quot;申请备注&quot;） */
+  /** 必填，申请备注（弹窗"申请备注"） */
   ApplyRemark: string;
   /** 必填，原skill_id */
   SkillId: string;
@@ -2027,7 +2027,7 @@ declare interface DeleteSkillResponse {
 }
 
 declare interface DeleteSkillShareRequest {
-  /** 申请备注，必填（弹窗&quot;申请备注&quot;） */
+  /** 申请备注，必填（弹窗"申请备注"） */
   ApplyRemark: string;
   /** 原 Skill ID，必填（前端无须感知 _shared 后缀） */
   SkillId: string;

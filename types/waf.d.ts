@@ -1542,7 +1542,7 @@ declare interface DomainInfo {
   Cname: string;
   /** 域名所属实例类型。sparta-waf：SaaS型WAF实例clb-waf：负载均衡型WAF实例cdc-clb-waf：CDC环境下负载均衡型WAF实例 */
   Edition: string;
-  /** 地域。&quot;多伦多&quot;: &quot;ca&quot;&quot;广州&quot;: &quot;gz&quot;&quot;成都&quot;: &quot;cd&quot;&quot;福州&quot;: &quot;fzec&quot;&quot;深圳&quot;: &quot;szx&quot;&quot;印度&quot;: &quot;in&quot;&quot;济南&quot;: &quot;jnec&quot;&quot;重庆&quot;: &quot;cq&quot;&quot;天津&quot;: &quot;tsn&quot;&quot;欧洲东北&quot;: &quot;ru&quot;&quot;南京&quot;: &quot;nj&quot;&quot;美国硅谷&quot;: &quot;usw&quot;&quot;泰国&quot;: &quot;th&quot;&quot;广州Open&quot;: &quot;gzopen&quot;&quot;深圳金融&quot;: &quot;szjr&quot;&quot;法兰克福&quot;: &quot;de&quot;&quot;日本&quot;: &quot;jp&quot;&quot;弗吉尼亚&quot;: &quot;use&quot;&quot;北京&quot;: &quot;bj&quot;&quot;中国香港&quot;: &quot;hk&quot;&quot;杭州&quot;: &quot;hzec&quot;&quot;北京金融&quot;: &quot;bjjr&quot;&quot;上海金融&quot;: &quot;shjr&quot;&quot;台北&quot;: &quot;tpe&quot;&quot;首尔&quot;: &quot;kr&quot;&quot;上海&quot;: &quot;sh&quot;&quot;新加坡&quot;: &quot;sg&quot;&quot;清远&quot;: &quot;qy&quot; */
+  /** 地域。"多伦多": "ca""广州": "gz""成都": "cd""福州": "fzec""深圳": "szx""印度": "in""济南": "jnec""重庆": "cq""天津": "tsn""欧洲东北": "ru""南京": "nj""美国硅谷": "usw""泰国": "th""广州Open": "gzopen""深圳金融": "szjr""法兰克福": "de""日本": "jp""弗吉尼亚": "use""北京": "bj""中国香港": "hk""杭州": "hzec""北京金融": "bjjr""上海金融": "shjr""台北": "tpe""首尔": "kr""上海": "sh""新加坡": "sg""清远": "qy" */
   Region: string;
   /** 实例名 */
   InstanceName: string;
@@ -4175,7 +4175,7 @@ declare interface AddSpartaProtectionRequest {
   IsWebsocket: number;
   /** 回源负载均衡策略。0：轮询1：IP hash2：加权轮询 */
   LoadBalance: string;
-  /** 服务端口列表配置。NginxServerId：新增域名时填&#39;0&#39;Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
+  /** 服务端口列表配置。NginxServerId：新增域名时填'0'Port：监听端口号Protocol：端口协议UpstreamPort：与Port相同UpstreamProtocol：与Protocol相同 */
   Ports: PortItem[];
   /** 必填项，是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive: string;
@@ -6027,7 +6027,7 @@ declare interface DescribeInstancesResponse {
 }
 
 declare interface DescribeIpAccessControlRequest {
-  /** 域名，当操作对象为全局规则时，Domain参数应填写为&quot;global&quot; */
+  /** 域名，当操作对象为全局规则时，Domain参数应填写为"global" */
   Domain: string;
   /** 计数标识 */
   Count: number;
@@ -6045,7 +6045,7 @@ declare interface DescribeIpAccessControlRequest {
   OffSet?: number;
   /** 每页返回的数量，默认为20 */
   Limit?: number;
-  /** 用于按数据来源过滤黑白名单记录，非必填（默认为空字符串，表示不过滤/查询全部）。 &quot;&quot; (空字符串) ，不按来源过滤，返回所有记录（默认值） custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护 ），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 batch-group（防护对象组），防护对象组维度添加的黑白名单规则 */
+  /** 用于按数据来源过滤黑白名单记录，非必填（默认为空字符串，表示不过滤/查询全部）。 "" (空字符串) ，不按来源过滤，返回所有记录（默认值） custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护 ），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 batch-group（防护对象组），防护对象组维度添加的黑白名单规则 */
   Source?: string;
   /** 排序参数 */
   Sort?: string;

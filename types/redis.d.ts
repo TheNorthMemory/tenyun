@@ -686,7 +686,7 @@ declare interface LogFilter {
   Type?: string;
   /** 过滤条件匹配类型。枚举值：INC： 包含，多个值之前是||的关系EXC： 不包含，多个值之前是||的关系EQS： 等于，多个值之前是||的关系NEQ： 不等于，多个值之前是&amp;&amp;的关系RA： 范围 */
   Compare?: string;
-  /** 过滤条件匹配值。当Compare=RA时，例如：[&quot;1-100&quot;,&quot;200-300&quot;]。 */
+  /** 过滤条件匹配值。当Compare=RA时，例如：["1-100","200-300"]。 */
   Value?: string[];
 }
 
@@ -1351,9 +1351,9 @@ declare interface CloneInstancesRequest {
   VpcId?: string;
   /** 配置克隆实例所属私有网络的子网。基础网络时该参数无需配置。 */
   SubnetId?: string;
-  /** 克隆实例的名称。仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。 */
+  /** 克隆实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。 */
   InstanceName?: string;
-  /** 克隆实例的访问密码。当输入参数NoAuth为true时，可不设置该参数。当实例为Redis2.8、4.0和5.0时，其密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种，不能以&quot;/&quot;开头；当实例为CKV 3.2时，其密码格式为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
+  /** 克隆实例的访问密码。当输入参数NoAuth为true时，可不设置该参数。当实例为Redis2.8、4.0和5.0时，其密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头；当实例为CKV 3.2时，其密码格式为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
   Password?: string;
   /** 自动续费标识。0：默认状态，手动续费。1：自动续费。2：不自动续费，到期自动隔离。 */
   AutoRenew?: number;
@@ -1361,13 +1361,13 @@ declare interface CloneInstancesRequest {
   VPort?: number;
   /** 实例的节点信息。目前支持配置节点的类型（主节点或者副本节点），及其节点的可用区信息。具体信息，请参见RedisNodeInfo。单可用区部署可不配置该参数。 */
   NodeSet?: RedisNodeInfo[];
-  /** 项目 ID。登录Redis 控制台，可在右上角的账号中心 &gt; 项目管理中查找项目ID。 */
+  /** 项目 ID。登录Redis 控制台，可在右上角的账号中心 > 项目管理中查找项目ID。 */
   ProjectId?: number;
   /** 克隆实例需绑定的标签。 */
   ResourceTags?: ResourceTag[];
   /** 指定克隆实例相关的参数模板 ID。若不配置该参数，则系统会依据所选择的兼容版本及架构，自动适配对应的默认模板。请通过DescribeParamTemplates接口，查询实例的参数模板列表，获取模板 ID 编号。 */
   TemplateId?: string;
-  /** 指定克隆实例的告警策略 ID。请登录腾讯云可观测平台控制台，在 告警管理 &gt; 策略管理页面获取策略 ID 信息。 */
+  /** 指定克隆实例的告警策略 ID。请登录腾讯云可观测平台控制台，在 告警管理 > 策略管理页面获取策略 ID 信息。 */
   AlarmPolicyList?: string[];
   /** 克隆指定恢复数据的时间。仅支持已开通秒级备份的实例 */
   CloneTime?: string;
@@ -1429,11 +1429,13 @@ declare interface CreateExportTaskRequest {
   EndTime: string;
   /** 设置日志筛选字段，过滤并下载符合条件的日志。 */
   LogFilter?: LogFilter[];
-  /** 自定义下载的日志字段，多个字段以逗号分隔，例如 &quot;timestamp,operation,user&quot;。指定后仅下载所选字段的数据。不传该参数时，默认下载所有字段。 */
+  /** 自定义下载的日志字段，多个字段以逗号分隔，例如 "timestamp,operation,user"。指定后仅下载所选字段的数据。不传该参数时，默认下载所有字段。 */
   ColumnFilter?: string[];
 }
 
 declare interface CreateExportTaskResponse {
+  /** 文件名称 */
+  FileName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1443,7 +1445,7 @@ declare interface CreateInstanceAccountRequest {
   InstanceId: string;
   /** 自定义的访问数据库的账号名称。仅由字母、数字、下划线、中划线组成。长度不能大于32位。 */
   AccountName: string;
-  /** 设置自定义账号的密码。密码复杂度要求如下：字符个数为[8,64]。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的两种。不能以&quot;/&quot;开头。 */
+  /** 设置自定义账号的密码。密码复杂度要求如下：字符个数为[8,64]。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;<>,.?/ 中的两种。不能以"/"开头。 */
   AccountPassword: string;
   /** 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。master：主节点replication：副本节点 */
   ReadonlyPolicy: string[];
@@ -1475,7 +1477,7 @@ declare interface CreateInstancesRequest {
   BillingMode: number;
   /** 实例所属的可用区ID，可参考地域和可用区 。 */
   ZoneId?: number;
-  /** 访问实例的密码。当输入参数NoAuth为true时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。当实例类型TypeId为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.2、7.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种，不能以&quot;/&quot;开头。当实例类型TypeId为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
+  /** 访问实例的密码。当输入参数NoAuth为true时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。当实例类型TypeId为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.2、7.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&amp;*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。当实例类型TypeId为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。 */
   Password?: string;
   /** 私有网络ID。如果不配置该参数则默认选择基础网络。请登录 私有网络控制台查询具体的ID。 */
   VpcId?: string;
@@ -1495,7 +1497,7 @@ declare interface CreateInstancesRequest {
   RedisReplicasNum?: number;
   /** 标识实例是否需支持副本只读。Redis 2.8 标准版、CKV标准版不支持副本只读。开启副本只读，实例将自动读写分离，写请求路由到主节点，读请求路由到副本节点。如需开启副本只读，建议副本数量大于等于2。 */
   ReplicasReadonly?: boolean;
-  /** 实例名称。命名要求：仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。 */
+  /** 实例名称。命名要求：仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。 */
   InstanceName?: string;
   /** 配置实例是否支持免密码访问。true：免密访问实例。false：非免密访问实例。默认为非免密方式，仅VPC网络的实例支持免密码访问。 */
   NoAuth?: boolean;

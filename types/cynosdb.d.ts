@@ -352,6 +352,16 @@ declare interface BackupRegionAndIds {
   BackupId?: number;
 }
 
+/** 备份使用量信息 */
+declare interface BackupVolumeInfo {
+  /** 备份使用量 */
+  BackupVolume?: number;
+  /** 备份类型 */
+  BackupType?: string;
+  /** 备份方式 */
+  BackupMethod?: string;
+}
+
 /** 计费资源信息 */
 declare interface BillingResourceInfo {
   /** 集群ID */
@@ -568,7 +578,7 @@ declare interface ClusterInstanceDetail {
   MaintainStartTime?: number;
   /** 持续的时间(单位：秒) */
   MaintainDuration?: number;
-  /** 可以执行的时间，枚举值：[&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;] */
+  /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
   MaintainWeekDays?: string[];
   /** serverless实例子状态 */
   ServerlessStatus?: string;
@@ -1496,7 +1506,7 @@ declare interface ExplainRow {
   Table?: string;
   /** 查询匹配的分区 */
   Partitions?: string;
-  /** 访问类型（非常重要，衡量查询效率的关键指标），从优到差排列：system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL。常见值说明： • system：表只有一行记录（系统表） • const：通过主键或唯一索引匹配一行，常见于 WHERE pk = 1 • eq_ref：连接时使用主键或唯一索引，每个索引值只匹配一行 • ref：使用非唯一索引查找，可能匹配多行 • range：索引范围扫描，如 BETWEEN、&gt;、&lt;、IN • index：全索引扫描（遍历整棵索引树） • ALL：全表扫描（最差，需优化） */
+  /** 访问类型（非常重要，衡量查询效率的关键指标），从优到差排列：system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_subquery > index_subquery > range > index > ALL。常见值说明： • system：表只有一行记录（系统表） • const：通过主键或唯一索引匹配一行，常见于 WHERE pk = 1 • eq_ref：连接时使用主键或唯一索引，每个索引值只匹配一行 • ref：使用非唯一索引查找，可能匹配多行 • range：索引范围扫描，如 BETWEEN、>、<、IN • index：全索引扫描（遍历整棵索引树） • ALL：全表扫描（最差，需优化） */
   Type?: string;
   /** 查询中可能使用到的索引。为 NULL 表示没有可用索引。 */
   PossibleKeys?: string;
@@ -1922,7 +1932,7 @@ declare interface LibraDBClusterDetail {
   RenewFlag?: number;
   /** 版本标签 */
   CynosVersionTag?: string;
-  /** 不支持添加ro yes-不支持添加ro， no/null/&quot;&quot; 支持添加ro */
+  /** 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro */
   NoSupportAddRo?: string;
   /** 可用区 */
   Zone?: string;
@@ -3563,7 +3573,7 @@ declare interface AddInstancesRequest {
   SubnetId?: string;
   /** 新增RO组时使用的Port，取值范围为[0,65535) */
   Port?: number;
-  /** 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，&#39;_&#39;,&#39;-&#39;,&#39;.&#39; */
+  /** 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，'_','-','.' */
   InstanceName?: string;
   /** 是否自动选择代金券 1是 0否 默认为0 */
   AutoVoucher?: number;
@@ -4091,9 +4101,9 @@ declare interface CreateClustersRequest {
   InstanceCount?: number;
   /** 该参数无实际意义，已废弃。存储大小，单位GB。 */
   Storage?: number;
-  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（&#39;-&#39;,&#39;_&#39;,&#39;.&#39;） */
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
   ClusterName?: string;
-  /** 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/中的任意三种) */
+  /** 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&amp;*_-+=`|(){}[]:;'<>,.?/中的任意三种) */
   AdminPassword?: string;
   /** 端口，默认3306，取值范围[0, 65535) */
   Port?: number;
@@ -4115,7 +4125,7 @@ declare interface CreateClustersRequest {
   StorageLimit?: number;
   /** 包年包月购买时长 */
   TimeSpan?: number;
-  /** 包年包月购买时长单位，[&#39;s&#39;,&#39;d&#39;,&#39;m&#39;,&#39;y&#39;] */
+  /** 包年包月购买时长单位，['s','d','m','y'] */
   TimeUnit?: string;
   /** 包年包月购买是否自动续费枚举值：0： 默认续费方式1： 自动续费2： 不自动续费默认值：0 */
   AutoRenewFlag?: number;
@@ -4986,6 +4996,40 @@ declare interface DescribeBackupListResponse {
   TotalCount?: number;
   /** 备份文件列表 */
   BackupList?: BackupFileInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackupOverviewRequest {
+  /** 集群id */
+  ClusterId: string;
+}
+
+declare interface DescribeBackupOverviewResponse {
+  /** 备份总容量 */
+  BackupTotalVolume?: number;
+  /** 备份快照容量 */
+  BackupSnapshotVolume?: number;
+  /** 备份逻辑容量 */
+  BackupLogicVolume?: number;
+  /** 日志总容量 */
+  LogTotalVolume?: number;
+  /** 日志binlog容量 */
+  LogBinlogVolume?: number;
+  /** 日志redolog容量 */
+  LogRedoLogVolume?: number;
+  /** 跨地域备份总容量 */
+  CrossTotalVolume?: number;
+  /** 跨地域备份容量 */
+  CrossRegionBackupVolume?: number;
+  /** 跨地域日志容量 */
+  CrossRegionLogVolume?: number;
+  /** 备份容量详情 */
+  BackupVolumeInfos?: BackupVolumeInfo[];
+  /** 跨地域备份容量详情 */
+  CrossRegionBackupVolumeInfos?: BackupVolumeInfo[];
+  /** 跨地域信息 */
+  CrossRegions?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7423,17 +7467,17 @@ declare interface ModifyProxyRwSplitRequest {
   ClusterId: string;
   /** 数据库代理组ID，例如cynosdbmysql-proxy-qwe123 */
   ProxyGroupId: string;
-  /** 一致性类型；“eventual&quot;-最终一致性, &quot;session&quot;-会话一致性, &quot;global&quot;-全局一致性 */
+  /** 一致性类型；“eventual"-最终一致性, "session"-会话一致性, "global"-全局一致性 */
   ConsistencyType?: string;
   /** 一致性超时时间。取值范围：0~1000000（微秒）,设置0则表示若只读实例出现延迟, 导致一致性策略不满足, 请求将一直等待。 */
   ConsistencyTimeOut?: string;
-  /** 读写权重分配模式；系统自动分配：&quot;system&quot;， 自定义：&quot;custom&quot; */
+  /** 读写权重分配模式；系统自动分配："system"， 自定义："custom" */
   WeightMode?: string;
   /** 实例只读权重。 */
   InstanceWeights?: ProxyInstanceWeight[];
-  /** 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值：&quot;yes&quot; , &quot;no&quot; */
+  /** 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值："yes" , "no" */
   FailOver?: string;
-  /** 是否自动添加只读实例，取值：&quot;yes&quot; , &quot;no&quot; */
+  /** 是否自动添加只读实例，取值："yes" , "no" */
   AutoAddRo?: string;
   /** 是否打开读写分离。该参数已废弃，请通过RwType设置读写属性。 */
   OpenRw?: string;
@@ -8073,7 +8117,7 @@ declare interface RollbackToNewClusterRequest {
   UniqVpcId?: string;
   /** 所属子网ID */
   UniqSubnetId?: string;
-  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（&#39;-&#39;,&#39;_&#39;,&#39;.&#39;） */
+  /** 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'） */
   ClusterName?: string;
   /** 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效 */
   RollbackId?: number;
@@ -8567,6 +8611,8 @@ declare interface Cynosdb {
   DescribeBackupList(data: DescribeBackupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListResponse>;
   /** 查询保险箱内的备份 {@link DescribeBackupListByVaultRequest} {@link DescribeBackupListByVaultResponse} */
   DescribeBackupListByVault(data: DescribeBackupListByVaultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupListByVaultResponse>;
+  /** 备份用量总览 {@link DescribeBackupOverviewRequest} {@link DescribeBackupOverviewResponse} */
+  DescribeBackupOverview(data: DescribeBackupOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupOverviewResponse>;
   /** 查询binlog配置 {@link DescribeBinlogConfigRequest} {@link DescribeBinlogConfigResponse} */
   DescribeBinlogConfig(data: DescribeBinlogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogConfigResponse>;
   /** 查询 Binlog下载地址 {@link DescribeBinlogDownloadUrlRequest} {@link DescribeBinlogDownloadUrlResponse} */

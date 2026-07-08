@@ -1099,7 +1099,7 @@ declare interface ListAggregateCompliancePacksRequest {
   RiskLevel?: number[];
   /** 合规包状态 ACTIVE、NO_ACTIVE */
   Status?: string;
-  /** 评估状态合规： &#39;COMPLIANT&#39;不合规： &#39;NON_COMPLIANT&#39; */
+  /** 评估状态合规： 'COMPLIANT'不合规： 'NON_COMPLIANT' */
   ComplianceResult?: string[];
   /** 排序类型, 倒序：desc，顺序：asc */
   OrderType?: string;
@@ -1243,7 +1243,7 @@ declare interface ListCompliancePacksRequest {
   RiskLevel?: number[];
   /** 合规包状态 ACTIVE、NO_ACTIVE */
   Status?: string;
-  /** 评估状态合规： &#39;COMPLIANT&#39;不合规： &#39;NON_COMPLIANT&#39; */
+  /** 评估状态合规： 'COMPLIANT'不合规： 'NON_COMPLIANT' */
   ComplianceResult?: string[];
   /** 排序类型, 倒序：desc，顺序：asc */
   OrderType?: string;

@@ -52,7 +52,7 @@ declare interface ElementImageList {
 declare interface ExtraParam {
   /** 预签名的上传url，支持把视频直接传到客户指定的地址。 */
   UserDesignatedUrl?: string;
-  /** 回调地址需要您在创建任务时主动设置 CallbackUrl，请求方法为 POST，当视频生成结束时，我们将向此地址发送生成结果。数据格式如下：{ &quot;JobId&quot;: &quot;1397428070633955328&quot;, &quot;Status&quot;: &quot;DONE&quot;, &quot;ErrorCode&quot;: &quot;&quot;, &quot;ErrorMessage&quot;: &quot;&quot;, &quot;ResultVideoUrl&quot;: &quot;https://vcg.cos.tencentcos.cn/template_to_video/fa80b846-b933-4981-afad-8a39b46ef2ca.mp4&quot;} */
+  /** 回调地址需要您在创建任务时主动设置 CallbackUrl，请求方法为 POST，当视频生成结束时，我们将向此地址发送生成结果。数据格式如下：{ "JobId": "1397428070633955328", "Status": "DONE", "ErrorCode": "", "ErrorMessage": "", "ResultVideoUrl": "https://vcg.cos.tencentcos.cn/template_to_video/fa80b846-b933-4981-afad-8a39b46ef2ca.mp4"} */
   CallbackUrl?: string;
   /** BGM音频文本。 */
   BGMText?: string;
@@ -346,9 +346,9 @@ declare interface DescribeImageToVideoJobRequest {
 declare interface DescribeImageToVideoJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -372,9 +372,9 @@ declare interface DescribeImageToVideoViduJobRequest {
 declare interface DescribeImageToVideoViduJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -396,9 +396,9 @@ declare interface DescribeMotionControlKlingJobRequest {
 declare interface DescribeMotionControlKlingJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -442,9 +442,9 @@ declare interface DescribeReferenceToVideoViduJobRequest {
 declare interface DescribeReferenceToVideoViduJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -484,9 +484,9 @@ declare interface DescribeTextToVideoJobRequest {
 declare interface DescribeTextToVideoJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -510,9 +510,9 @@ declare interface DescribeTextToVideoViduJobRequest {
 declare interface DescribeTextToVideoViduJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -534,9 +534,9 @@ declare interface DescribeVideoEditKlingJobRequest {
 declare interface DescribeVideoEditKlingJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -560,9 +560,9 @@ declare interface DescribeVideoExtendKlingJobRequest {
 declare interface DescribeVideoExtendKlingJobResponse {
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   Status?: string;
-  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
-  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。 */
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
   ErrorMessage?: string;
   /** 结果视频 URL。有效期 24 小时。 */
   ResultVideoUrl?: string;
@@ -689,9 +689,9 @@ declare interface SubmitImageToVideoJobRequest {
   MultiShot?: boolean;
   /** 分镜方式枚举值：customize，intelligence当MultiShot参数为true时，当前参数必填 */
   ShotType?: string;
-  /** 各分镜信息，如提示词、时长等通过Index、Prompt、Duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长用key:value承载，如下：&quot;MultiPrompt&quot;:[ { &quot;Index&quot;:int, &quot;Prompt&quot;: &quot;string&quot;, &quot;Duration&quot;: &quot;5&quot; }, { &quot;Index&quot;:int, &quot;Prompt&quot;: &quot;string&quot;, &quot;Duration&quot;: &quot;5&quot; }]当MultiShot参数为true且ShotType参数为customize时，当前参数不得为空 */
+  /** 各分镜信息，如提示词、时长等通过Index、Prompt、Duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长用key:value承载，如下："MultiPrompt":[ { "Index":int, "Prompt": "string", "Duration": "5" }, { "Index":int, "Prompt": "string", "Duration": "5" }]当MultiShot参数为true且ShotType参数为customize时，当前参数不得为空 */
   MultiPrompt?: MultiPrompt[];
-  /** 参考主体列表基于主体库中主体的ID配置，用key:value承载，如下： &quot;ElementList&quot;:[ { &quot;ElementId&quot;:long }, { &quot;ElementId&quot;:long } ]最多支持3个参考主体主体分为视频定制主体（简称：视频角色主体）和图片定制主体（简称：多图主体），适用范围不同，请注意区分更多主体信息详见：可灵「主体库 3.0」使用指南 */
+  /** 参考主体列表基于主体库中主体的ID配置，用key:value承载，如下： "ElementList":[ { "ElementId":long }, { "ElementId":long } ]最多支持3个参考主体主体分为视频定制主体（简称：视频角色主体）和图片定制主体（简称：多图主体），适用范围不同，请注意区分更多主体信息详见：可灵「主体库 3.0」使用指南 */
   ElementList?: Element[];
   /** 静态笔刷涂抹区域（用户通过运动笔刷涂抹的 mask 图片）“运动笔刷”能力包含“动态笔刷 DynamicMasks”和“静态笔刷 StaticMask”两种支持传入图片Base64编码或图片URL（确保可访问，格式要求同 Image 字段）图片格式支持.jpg / .jpeg / .png图片长宽比必须与输入图片相同（即Image字段），否则任务失败（failed）StaticMask和 DynamicMasks.Mask这两张图片的分辨率必须一致，否则任务失败（failed） */
   StaticMask?: string;
@@ -701,7 +701,7 @@ declare interface SubmitImageToVideoJobRequest {
   CameraControl?: CameraControl;
   /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
   CallbackUrl?: string;
-  /** 生成视频时所引用的音色的列表一次视频生成任务至多引用2个音色当VoiceList参数不为空且Prompt参数中引用音色ID时，视频生成任务按“有指定音色”计量计费VoiceId参数值通过音色定制接口返回，也可使用系统预置音色，详见音色定制相关API；非对口型API的VoiceIdElementList参数与VoiceList参数互斥，不能共存v3模型不支持指定音色用key:value承载，如下：&quot;VoiceList&quot;:[ {&quot;VoiceId&quot;:&quot;VoiceId_1&quot;}, {&quot;VoiceId&quot;:&quot;VoiceId_2&quot;}] */
+  /** 生成视频时所引用的音色的列表一次视频生成任务至多引用2个音色当VoiceList参数不为空且Prompt参数中引用音色ID时，视频生成任务按“有指定音色”计量计费VoiceId参数值通过音色定制接口返回，也可使用系统预置音色，详见音色定制相关API；非对口型API的VoiceIdElementList参数与VoiceList参数互斥，不能共存v3模型不支持指定音色用key:value承载，如下："VoiceList":[ {"VoiceId":"VoiceId_1"}, {"VoiceId":"VoiceId_2"}] */
   VoiceList?: Voice[];
   /**  */
   ExternalTaskId?: string;
@@ -739,9 +739,9 @@ declare interface SubmitImageToVideoViduJobRequest {
   Bgm?: boolean;
   /** 音频类型，audio为true时必填，默认为all注：该参数目前仅支持q2、q1、2.0系列模型的音频拆分枚举值：all： 音效+人声speech_only： 仅人声sound_effect_only： 仅音效 */
   AudioType?: string;
-  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{&quot;Label&quot;: &quot;your_label&quot;,&quot;ContentProducer&quot;: &quot;your_content_producer&quot;,&quot;ContentPropagator&quot;: &quot;your_content_propagator&quot;,&quot;ProduceID&quot;: &quot;your_product_id&quot;,&quot;PropagateID&quot;: &quot;your_propagate_id&quot;,&quot;ReservedCode1&quot;: &quot;your_reserved_code1&quot;,&quot;ReservedCode2&quot;: &quot;your_reserved_code2&quot;}该参数为空时，默认使用vidu生成的元数据标识 */
+  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{"Label": "your_label","ContentProducer": "your_content_producer","ContentPropagator": "your_content_propagator","ProduceID": "your_product_id","PropagateID": "your_propagate_id","ReservedCode1": "your_reserved_code1","ReservedCode2": "your_reserved_code2"}该参数为空时，默认使用vidu生成的元数据标识 */
   MetaData?: string;
-  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的&quot;status&quot;包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
+  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的"status"包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
   CallbackUrl?: string;
   /** 透传参数不做任何处理，仅数据传输注：最多 1048576个字符 */
   Payload?: string;
@@ -777,7 +777,7 @@ declare interface SubmitMotionControlKlingJobRequest {
   KeepOriginalSound?: string;
   /** 生成视频中人物的朝向，可选择与图片一致或与视频一致 枚举值：image，video，其中： 其中image：与图片中人物朝向一致；此时参考视频时长不得超过10秒； 其中video：与视频中人物朝向一致；此时参考视频时长不得超过30秒； 引用主体时，生成的视频暂时只能参考视频中的人物朝向。 */
   CharacterOrientation?: string;
-  /** 参考主体列表 基于主体库中主体的ID配置，用key:value承载，如下： &quot;element_list&quot;:[ { &quot;element_id&quot;:long }, { &quot;element_id&quot;:long } ] 参考主体数量与有无参考视频、参考图片数量有关，其中： 当使用首帧生成视频时，最多支持3个主体； 当使用首尾帧生成视频时，kling-v3-omni模型最多支持3个主体，kling-video-o1模不支持主体； 有参考视频时，参考图片数量和参考主体数量之和不得超过4，且不支持使用视频角色主体； 无参考视频时，参考图片数量和参考主体数量之和不得超过7； */
+  /** 参考主体列表 基于主体库中主体的ID配置，用key:value承载，如下： "element_list":[ { "element_id":long }, { "element_id":long } ] 参考主体数量与有无参考视频、参考图片数量有关，其中： 当使用首帧生成视频时，最多支持3个主体； 当使用首尾帧生成视频时，kling-v3-omni模型最多支持3个主体，kling-video-o1模不支持主体； 有参考视频时，参考图片数量和参考主体数量之和不得超过4，且不支持使用视频角色主体； 无参考视频时，参考图片数量和参考主体数量之和不得超过7； */
   ElementList?: Element[];
   /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
   CallbackUrl?: string;
@@ -821,7 +821,7 @@ declare interface SubmitPortraitSingJobResponse {
 }
 
 declare interface SubmitReferenceToVideoViduJobRequest {
-  /** 文本提示词生成视频的文本描述。注1：字符长度不能超过 2000 个字符注2：使用Subjects主体参数时，可以通过@主体id 来表示主体内容，例如：&quot;@1 和 @2 在一起吃火锅，并且旁白音说火锅大家都爱吃。&quot; */
+  /** 文本提示词生成视频的文本描述。注1：字符长度不能超过 2000 个字符注2：使用Subjects主体参数时，可以通过@主体id 来表示主体内容，例如："@1 和 @2 在一起吃火锅，并且旁白音说火锅大家都爱吃。" */
   Prompt: string;
   /** 图像参考【非主体调用时传入】支持上传1～7张图片，模型将以此参数中传入的图片中的主题为参考生成具备主体一致的视频。支持传入图片 Base64 编码或图片URL（确保可访问）图片支持 png、jpeg、jpg、webp格式图片像素不能小于 128*128，且比例需要小于1:4或者4:1，且大小不超过50M。 */
   Images?: string[];
@@ -845,9 +845,9 @@ declare interface SubmitReferenceToVideoViduJobRequest {
   Resolution?: string;
   /** 运动幅度默认 auto，可选值：auto、small、medium、large注：使用q2系列模型时该参数不生效 */
   MovementAmplitude?: string;
-  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{&quot;Label&quot;: &quot;your_label&quot;,&quot;ContentProducer&quot;: &quot;yourcontentproducer&quot;,&quot;ContentPropagator&quot;: &quot;your_content_propagator&quot;,&quot;ProduceID&quot;: &quot;yourproductid&quot;, &quot;PropagateID&quot;: &quot;your_propagate_id&quot;,&quot;ReservedCode1&quot;: &quot;yourreservedcode1&quot;, &quot;ReservedCode2&quot;: &quot;your_reserved_code2&quot;}该参数为空时，默认使用vidu生成的元数据标识 */
+  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{"Label": "your_label","ContentProducer": "yourcontentproducer","ContentPropagator": "your_content_propagator","ProduceID": "yourproductid", "PropagateID": "your_propagate_id","ReservedCode1": "yourreservedcode1", "ReservedCode2": "your_reserved_code2"}该参数为空时，默认使用vidu生成的元数据标识 */
   MetaData?: string;
-  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的&quot;status&quot;包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
+  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的"status"包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
   CallbackUrl?: string;
   /** 透传参数不做任何处理，仅数据传输注：最多 1048576个字符 */
   Payload?: string;
@@ -915,7 +915,7 @@ declare interface SubmitTextToVideoJobRequest {
   MultiShot?: boolean;
   /** 分镜方式枚举值：customize，intelligence当MultiShot参数为true时，当前参数必填 */
   ShotType?: string;
-  /** 各分镜提示词，可包含正向描述和负向描述通过index、prompt、duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长当MultiShot参数为true且ShotType参数为customize时，当前参数不得为空用key:value承载，如下： &quot;MultiPrompt&quot;:[ { &quot;Index&quot;:int, &quot;Prompt&quot;: &quot;string&quot;, &quot;Duration&quot;: &quot;5&quot; } ] */
+  /** 各分镜提示词，可包含正向描述和负向描述通过index、prompt、duration参数定义分镜序号及相应提示词和时长，其中：最多支持6个分镜，最小支持1个分镜每个分镜相关内容的最大长度不超过512每个分镜的时长不大于当前任务的总时长，不小于1所有分镜的时长之和等于当前任务的总时长当MultiShot参数为true且ShotType参数为customize时，当前参数不得为空用key:value承载，如下： "MultiPrompt":[ { "Index":int, "Prompt": "string", "Duration": "5" } ] */
   MultiPrompt?: MultiPrompt[];
   /** 控制摄像机运动的协议（如未指定，模型将根据输入的文本/图片进行智能匹配） */
   CameraControl?: CameraControl;
@@ -953,9 +953,9 @@ declare interface SubmitTextToVideoViduJobRequest {
   MovementAmplitude?: string;
   /** 是否使用音视频直出能力，默认为true，枚举值为：false：不需要音视频直出，输出静音视频true：需要音画同步，输出声音的视频（包括台词和音效）注1：仅q3系列模型支持该参数 */
   Audio?: boolean;
-  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{&quot;Label&quot;: &quot;your_label&quot;,&quot;ContentProducer&quot;: &quot;your_content_producer&quot;,&quot;ContentPropagator&quot;: &quot;your_content_propagator&quot;,&quot;ProduceID&quot;: &quot;your_product_id&quot;,&quot;PropagateID&quot;: &quot;your_propagate_id&quot;,&quot;ReservedCode1&quot;: &quot;your_reserved_code1&quot;,&quot;ReservedCode2&quot;: &quot;your_reserved_code2&quot;}该参数为空时，默认使用vidu生成的元数据标识 */
+  /** 元数据标识，json格式字符串，透传字段，您可以 自定义格式 或使用 示例格式 ，示例如下：{"Label": "your_label","ContentProducer": "your_content_producer","ContentPropagator": "your_content_propagator","ProduceID": "your_product_id","PropagateID": "your_propagate_id","ReservedCode1": "your_reserved_code1","ReservedCode2": "your_reserved_code2"}该参数为空时，默认使用vidu生成的元数据标识 */
   MetaData?: string;
-  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成任务完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的&quot;status&quot;包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
+  /** Callback 协议需要您在创建任务时主动设置 callback_url，请求方法为 POST，当视频生成任务完成时，将向此地址发送包含任务最新状态的回调请求。回调请求内容结构与查询任务API的返回体一致回调返回的"status"包括以下状态：success 任务完成（如发送失败，回调三次）failed 任务失败（如发送失败，回调三次） */
   CallbackUrl?: string;
   /** 透传参数 不做任何处理，仅数据传输 注：最多 1048576个字符 */
   Payload?: string;
@@ -981,7 +981,7 @@ declare interface SubmitVideoEditKlingJobRequest {
   Model?: string;
   /**  */
   ExternalTaskId?: string;
-  /** 参考图列表包括主体、场景、风格等参考图片，也可作为首帧或尾帧生成视频；当作为首帧或尾帧生成视频时：通过type参数来定义图片是否为首尾帧：first_frame为首帧，end_frame为尾帧暂时不支持仅尾帧，即有尾帧图时必须有首帧图首帧或首尾帧生视频时，不能使用视频编辑功能用key:value承载，如下：&quot;ImageInfo&quot;:[ { &quot;ImageUrl&quot;:&quot;https://cos.ap-guangzhou.myqcloud.com/test.png&quot;, &quot;Type&quot;:&quot;first_frame&quot; }, { &quot;ImageUrl&quot;:&quot;https://cos.ap-guangzhou.myqcloud.com/test.png&quot;, &quot;Type&quot;:&quot;end_frame&quot; }]支持传入图片URL（确保可访问）图片格式支持.jpg / .jpeg / .png图片文件大小不能超过10MB，图片宽高尺寸不小于300px，不大于8000px，图片宽高比要在1:2.5 ~ 2.5:1之间有参考视频时，参考图片数量不得超过4；无参考视频时，参考图片数量不得超过7数组中超过2张图片时，不支持设置尾帧 */
+  /** 参考图列表包括主体、场景、风格等参考图片，也可作为首帧或尾帧生成视频；当作为首帧或尾帧生成视频时：通过type参数来定义图片是否为首尾帧：first_frame为首帧，end_frame为尾帧暂时不支持仅尾帧，即有尾帧图时必须有首帧图首帧或首尾帧生视频时，不能使用视频编辑功能用key:value承载，如下："ImageInfo":[ { "ImageUrl":"https://cos.ap-guangzhou.myqcloud.com/test.png", "Type":"first_frame" }, { "ImageUrl":"https://cos.ap-guangzhou.myqcloud.com/test.png", "Type":"end_frame" }]支持传入图片URL（确保可访问）图片格式支持.jpg / .jpeg / .png图片文件大小不能超过10MB，图片宽高尺寸不小于300px，不大于8000px，图片宽高比要在1:2.5 ~ 2.5:1之间有参考视频时，参考图片数量不得超过4；无参考视频时，参考图片数量不得超过7数组中超过2张图片时，不支持设置尾帧 */
   ImageList?: ImageInfo[];
   /** 生成视频的画面纵横比（宽:高）枚举值：16:9, 9:16, 1:1未使用首帧参考或视频编辑功能时，当前参数必填 */
   AspectRatio?: string;
@@ -1001,7 +1001,7 @@ declare interface SubmitVideoEditKlingJobRequest {
   ShotType?: string;
   /** 各分镜信息，如提示词、时长等 通过index、prompt、duration参数定义分镜序号及相应提示词和时长，其中： 最多支持6个分镜，最小支持1个分镜 每个分镜相关内容的最大长度不超过512 每个分镜的时长不大于当前任务的总时长，不小于1 所有分镜的时长之和等于当前任务的总时长 */
   MultiPrompt?: MultiPrompt[];
-  /** 参考主体列表 基于主体库中主体的ID配置，用key:value承载，如下： &quot;element_list&quot;:[ { &quot;element_id&quot;:long }, { &quot;element_id&quot;:long } ] 参考主体数量与有无参考视频、参考图片数量有关，其中： 当使用首帧生成视频时，最多支持3个主体； 当使用首尾帧生成视频时，kling-v3-omni模型最多支持3个主体，kling-video-o1模不支持主体； 有参考视频时，参考图片数量和参考主体数量之和不得超过4，且不支持使用视频角色主体； 无参考视频时，参考图片数量和参考主体数量之和不得超过7； */
+  /** 参考主体列表 基于主体库中主体的ID配置，用key:value承载，如下： "element_list":[ { "element_id":long }, { "element_id":long } ] 参考主体数量与有无参考视频、参考图片数量有关，其中： 当使用首帧生成视频时，最多支持3个主体； 当使用首尾帧生成视频时，kling-v3-omni模型最多支持3个主体，kling-video-o1模不支持主体； 有参考视频时，参考图片数量和参考主体数量之和不得超过4，且不支持使用视频角色主体； 无参考视频时，参考图片数量和参考主体数量之和不得超过7； */
   ElementList?: Element[];
   /** 本次任务结果回调通知地址，如果配置，服务端会在任务状态发生变更时主动通知 */
   CallbackUrl?: string;

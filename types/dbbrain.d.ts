@@ -1441,7 +1441,7 @@ declare interface CreateDBDiagReportTaskRequest {
   ContactPerson?: number[];
   /** 接收邮件的联系组ID数组。 */
   ContactGroup?: number[];
-  /** 服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;mariadb&quot; - 云数据库 MariaDB，&quot;dcdb&quot; - 云数据库 TDSQL MySQL，默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -1839,7 +1839,7 @@ declare interface DescribeDBAuditLogTopSqlsRequest {
   StartTime: string;
   /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
   EndTime: string;
-  /** 服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
   Product: string;
   /** 实例 ID 。 */
   InstanceId: string;
@@ -1997,7 +1997,7 @@ declare interface DescribeDBDiagEventsRequest {
   Severities?: number[];
   /** 实例ID列表。可通过 DescribeDiagDBInstances 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&amp;Shard实例ID，如：dcdbt-157xxxk&amp;shard-qxxxx */
   InstanceIds?: string[];
-  /** 服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;mongodb&quot;- 云数据库MongoDB, &quot;postgres&quot;-云数据库postgres,云数据库&quot;redis&quot; - 云数据库 Redis，&quot;mariadb&quot;-数据库mariadb，&quot;cynosdb&quot;-数据库 TDSQL-C, &quot;dcdb&quot;-数据库TDSQL MySQL 默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"mongodb"- 云数据库MongoDB, "postgres"-云数据库postgres,云数据库"redis" - 云数据库 Redis，"mariadb"-数据库mariadb，"cynosdb"-数据库 TDSQL-C, "dcdb"-数据库TDSQL MySQL 默认为"mysql"。 */
   Product?: string;
   /** 偏移量，默认0。 */
   Offset?: number;
@@ -2113,7 +2113,7 @@ declare interface DescribeDBSpaceStatusRequest {
   InstanceId: string;
   /** 时间段天数，截止日期为当日，默认为7天。 */
   RangeDays?: number;
-  /** 服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;dcdb&quot; -（TDSQL MySQL 版）、&quot;mariadb&quot; -（TDSQL MariaDB 版）默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"mongodb" - 云数据库 MongoDB，"dcdb" -（TDSQL MySQL 版）、"mariadb" -（TDSQL MariaDB 版）默认为"mysql"。 */
   Product?: string;
 }
 
@@ -2179,7 +2179,7 @@ declare interface DescribeHealthScoreRequest {
   InstanceId: string;
   /** 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。 */
   Time: string;
-  /** 服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product: string;
 }
 
@@ -2343,7 +2343,7 @@ declare interface DescribeMySqlProcessListRequest {
   Info?: string;
   /** 返回数量，默认20。 */
   Limit?: number;
-  /** 服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;mariadb&quot;-mariadb;&quot;cynosdb&quot;-TDSQL-C for MySQL ;&quot;dcdb&quot;-TDSQL MySQL 默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。 */
   Product?: string;
   /** 会话统计的维度信息,可以多个维度。 */
   StatDimensions?: StatDimension[];
@@ -3023,7 +3023,7 @@ declare interface DescribeUserSqlAdviceRequest {
   SqlText: string;
   /** 库名。 */
   Schema?: string;
-  /** 服务产品类型，支持值&quot;dcdb&quot; - 云数据库TDSQL MySQL；&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL；&quot;dbbrain-mysql&quot; - 自建 MySQL，默认为&quot;mysql&quot;。 */
+  /** 服务产品类型，支持值"dcdb" - 云数据库TDSQL MySQL；"mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。 */
   Product?: string;
 }
 

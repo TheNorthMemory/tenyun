@@ -1017,7 +1017,7 @@ declare interface DescribeRabbitMQServerlessQueuesRequest {
   Limit?: number;
   /** 搜索关键词 */
   SearchWord?: string;
-  /** 队列类型筛选，不填或 &quot;all&quot;：classic 和 quorum 队列；&quot;classic&quot;：筛选 classic 队列；&quot;quorum&quot;：筛选 quorum 队列 */
+  /** 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列 */
   QueueType?: string;
   /** 排序依据的字段：messages_ready - 消息堆积数；publish - 生产速率；deliver - 消费速率；consumers - 在线消费者数量； */
   SortElement?: string;

@@ -58,7 +58,7 @@ declare interface ApproverInfo {
   OrganizationName?: string;
   /** 【在用文件发起合同场景下才有效，模板发起场景下需要在模板中配置】合同中的该名签署方的签署控件列表，列表中可支持下列多种签署控件,控件的详细定义参考开发者中心的Component结构体 个人签名/印章 企业印章 骑缝章等签署控件 */
   SignComponents?: Component[];
-  /** 签署方经办人的证件类型，支持以下类型，样式可以参考常见个人证件类型介绍&lt;ul&gt;ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)注: 港澳居民来往内地通行证 和 港澳台居民居住证 类型的签署人至少要过一次大陆的海关才能使用。 */
+  /** 签署方经办人的证件类型，支持以下类型，样式可以参考常见个人证件类型介绍<ul>ID_CARD 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO 港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)注: 港澳居民来往内地通行证 和 港澳台居民居住证 类型的签署人至少要过一次大陆的海关才能使用。 */
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
@@ -128,7 +128,7 @@ declare interface ApproverOption {
   FlowReadLimit?: string;
   /** 禁止在签署过程中添加签署日期控件 前置条件：文件发起合同时，指定SignBeanTag=1（可以在签署过程中添加签署控件）： 默认值：false，在开启：签署过程中添加签署控件时，添加签署控件会默认自带签署日期控件 可选值：true，在开启：签署过程中添加签署控件时，添加签署控件不会自带签署日期控件 */
   ForbidAddSignDate?: boolean;
-  /** 签署人手机号传参模式枚举值：REPLACE： 接受已有认证手机号并替换GIVEN： 以客户入参输入手机号为主VALIDATE： 若与认证手机号不一致则报错&quot;&quot;： 不走手机号传参模式默认值：&quot;&quot;会触发手机号传参模式的前提是：签署人是指定了具体身份信息的在指定签署人姓名，证件号的情况下会触发 */
+  /** 签署人手机号传参模式枚举值：REPLACE： 接受已有认证手机号并替换GIVEN： 以客户入参输入手机号为主VALIDATE： 若与认证手机号不一致则报错""： 不走手机号传参模式默认值：""会触发手机号传参模式的前提是：签署人是指定了具体身份信息的在指定签署人姓名，证件号的情况下会触发 */
   ApproverMobileMode?: string;
 }
 
@@ -416,7 +416,7 @@ declare interface Component {
   FileIndex: number;
   /** 控件生成的方式： NORMAL : 绝对定位控件 FIELD : 表单域 KEYWORD : 关键字（设置关键字时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找） */
   GenerateMode?: string;
-  /** 控件唯一ID。在绝对定位方式方式下，ComponentId为控件的ID，长度不能超过30，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。在关键字定位方式下，ComponentId不仅为控件的ID，也是关键字整词。此方式下可以通过&quot;^&quot;来决定是否使用关键字整词匹配能力。例：如传入的关键字&lt;font color=&quot;red&quot;&gt;&quot;^甲方签署^&quot;，则会在PDF文件中有且仅有&quot;甲方签署&quot;关键字的地方（&lt;font color=&quot;red&quot;&gt;前后不能有其他字符）进行对应操作。如传入的关键字为&lt;font color=&quot;red&quot;&gt;&quot;甲方签署&quot;，则PDF文件中每个出现关键字的位置（&lt;font color=&quot;red&quot;&gt;前后可以有其他字符）都会执行相应操作。注：控件ID可以在一个PDF中不可重复点击查看ComponentId在模板编辑页面的位置 */
+  /** 控件唯一ID。在绝对定位方式方式下，ComponentId为控件的ID，长度不能超过30，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。在关键字定位方式下，ComponentId不仅为控件的ID，也是关键字整词。此方式下可以通过"^"来决定是否使用关键字整词匹配能力。例：如传入的关键字<font color="red">"^甲方签署^"，则会在PDF文件中有且仅有"甲方签署"关键字的地方（<font color="red">前后不能有其他字符）进行对应操作。如传入的关键字为<font color="red">"甲方签署"，则PDF文件中每个出现关键字的位置（<font color="red">前后可以有其他字符）都会执行相应操作。注：控件ID可以在一个PDF中不可重复点击查看ComponentId在模板编辑页面的位置 */
   ComponentId?: string;
   /** 在绝对定位方式方式下，ComponentName为控件名，长度不能超过20，只能由中文、字母、数字和下划线组成，可以在后续的操作中使用该名称来引用控件。在表单域定位方式下，ComponentName不仅为控件名，也是表单域名称。注：控件名可以在一个PDF中可以重复点击查看ComponentName在模板页面的位置 */
   ComponentName?: string;
@@ -424,7 +424,7 @@ declare interface Component {
   ComponentRequired?: boolean;
   /** 在通过接口拉取控件信息场景下，为出参参数，此控件归属的参与方的角色ID角色（即RecipientId），发起合同时候不要填写此字段留空即可 */
   ComponentRecipientId?: string;
-  /** 在所有的定位方式下，控件的扩展参数，为JSON格式，不同类型的控件会有部分非通用参数。ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72 FontAlign： Left/Right/Center，左对齐/居中/右对齐 FontColor：字符串类型，格式为RGB颜色数字 Bold是否加粗：true/false参数样例：{&quot;FontColor&quot;:&quot;255,0,0&quot;,&quot;FontSize&quot;:12,&quot;Bold&quot;:false}ComponentType为DATE时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72参数样例：{&quot;FontColor&quot;:&quot;255,0,0&quot;,&quot;FontSize&quot;:12}ComponentType为WATERMARK时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72 Opacity： 透明度，范围0 :1 Rotate： 水印旋转角度，范围0 :359 Density： 水印样式，1-宽松，2-标准（默认值），3-密集， Position： 水印位置，None-平铺（默认值），LeftTop-左上，LeftBottom-左下，RightTop-右上，RightBottom-右下，Center-居中 SubType： 水印类型：CUSTOM_WATERMARK-自定义内容，PERSON_INFO_WATERMARK-访问者信息参数样例：&quot;{\&quot;Font\&quot;:\&quot;黑体\&quot;,\&quot;FontSize\&quot;:20,\&quot;Opacity\&quot;:0.1,\&quot;Density\&quot;:2,\&quot;SubType\&quot;:\&quot;PERSON_INFO_WATERMARK\&quot;}&quot;ComponentType为FILL_IMAGE时，支持以下参数： NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true : 不居中 FillMethod : int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SELECTOR时，支持以下参数： WordWrap：bool。是否支持选择控件内容自动折行合成。false：不支持（默认）。 true : 支持自动折行合成ComponentType为SIGN_SIGNATURE、SIGN_PAGING_SIGNATURE类型时，可以通过ComponentTypeLimit参数控制签名方式 HANDWRITE : 需要实时手写的手写签名 HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE) OCR_ESIGN : AI智能识别手写签名 ESIGN : 个人印章类型 SYSTEM_ESIGN : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） IMG_ESIGN : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)参考样例：{&quot;ComponentTypeLimit&quot;: [&quot;SYSTEM_ESIGN&quot;]}印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)ComponentType为SIGN_SEAL 或者 SIGN_PAGING_SEAL类型时，可以通过ComponentTypeLimit参数控制签署方签署时要使用的印章类型，支持指定以下印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他参考样例：{\&quot;ComponentTypeLimit\&quot;:[\&quot;PERSONNEL\&quot;,\&quot;FINANCE\&quot;]} 表示改印章签署区,客户需使用人事专用章或财务专用章盖章签署。ComponentType为SIGN_DATE时，支持以下参数： Font :字符串类型目前只支持"黑体"、"宋体"、"仿宋"，如果不填默认为"黑体" FontSize : 数字类型，范围6-72，默认值为12 FontAlign : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐 Format : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。 Gaps : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： &quot;{&quot;Format&quot;:&quot;yyyy m d&quot;,&quot;FontSize&quot;:12,&quot;Gaps&quot;:&quot;2,2&quot;, &quot;FontAlign&quot;:&quot;Right&quot;}&quot;ComponentType为SIGN_SEAL、SIGN_SIGNATURE类型时，支持以下参数： PageRanges :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例：&quot;{&quot;PageRanges&quot;:[{&quot;BeginPage&quot;:1,&quot;EndPage&quot;:-1}]}&quot;签署印章透明度功能设置，当ComponentType为SIGN_SIGNATURE、SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署印章的透明度： Opacity：印章透明度，支持范围：0.6-1，0.7表示70%的透明度，1表示无透明度参数样例：{&quot;Opacity&quot;:0.7}签署印章大小功能设置，当ComponentType为SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署时按照实际印章的大小进行签署，如果印章没有设置大小，那么默认会是4.2cm的印章大小： UseSealSize：使用印章设置的大小盖章，true表示使用印章设置的大小盖章，false表示使用签署控件的大小进行盖章；不传则为false参数样例：{&quot;UseSealSize&quot;:true}签署意见功能设置，当ComponentType为SIGN_OPINION时，可以通过以下参数设置签署意见的相关内容： Values：签署意见预设的需要用户填写的文本 ValuesArray：签署意见需要用户按顺序点击的分词（组合后应和Values内容一致）参数样例：{&quot;Values&quot;:&quot;我已知晓内容并同意签署&quot;,&quot;ValuesArray&quot;:[&quot;我&quot;,&quot;已知晓&quot;,&quot;内容&quot;,&quot;并&quot;,&quot;同意&quot;,&quot;签署&quot;]}关键字模式下支持关键字找不到的情况下不进行报错的设置 IgnoreKeywordError :1-关键字查找不到时不进行报错场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。参数样例：&quot;{&quot;IgnoreKeywordError&quot;:1}&quot;ComponentType为SIGN_VIRTUAL_COMBINATION或者VIRTUAL_COMBINATION时，支持以下参数：Children: 绝对定位模式下，用来指定此签批控件的组合子控件 参数样例：{&quot;Children&quot;:[&quot;ComponentId_29&quot;,&quot;ComponentId_27&quot;,&quot;ComponentId_28&quot;,&quot;ComponentId_30&quot;]}ChildrenComponents: 关键字定位模式下，用来指定此签批控件的组合子控件 ChildrenComponent结构体定义: 字段名称 类型 描述 ComponentType string 子控件类型-可选值:SIGN_SIGNATURE,SIGN_DATE,SIGN_SELECTOR,SIGN_MULTI_LINE_TEXT ComponentName string 子控件名称 Placeholder string 子控件提示语 ComponentValue string 子控件值（签署方不可设置） ComponentOffsetX float 控件偏移位置X（相对于父控件（签批控件的ComponentX）） ComponentOffsetY float 控件偏移位置Y 相对于父控件（签批控件的ComponentY）） ComponentWidth float 控件宽 ComponentHeight float 控件高 ComponentExtra string 控件的附属信息，根据ComponentType设置 参数样例：输入:{ ChildrenComponents: [ { ComponentType: SIGN_SIGNATURE, ComponentName: 个人签名, Placeholder: 请签名, ComponentOffsetX: 10, ComponentOffsetY: 30, ComponentWidth: 119, ComponentHeight: 43, ComponentExtra: {\ComponentTypeLimit\:[\SYSTEM_ESIGN\]} }, { ComponentType: SIGN_SELECTOR, ComponentName: 是否同意此协议, Placeholder: , ComponentOffsetX: 50, ComponentOffsetY: 130, ComponentWidth: 120, ComponentHeight: 43, ComponentExtra: {\Values\:[\同意\,\不同意\,\再想想\],\FontSize\:12,\FontAlign\:\Left\,\Font\:\黑体\,\MultiSelect\:false} }, { ComponentType: SIGN_MULTI_LINE_TEXT, ComponentName: 批注附言, Placeholder: , ComponentOffsetX: 150, ComponentOffsetY: 300, ComponentWidth: 200, ComponentHeight: 86, ComponentExtra: } ]} */
+  /** 在所有的定位方式下，控件的扩展参数，为JSON格式，不同类型的控件会有部分非通用参数。ComponentType为TEXT、MULTI_LINE_TEXT时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72 FontAlign： Left/Right/Center，左对齐/居中/右对齐 FontColor：字符串类型，格式为RGB颜色数字 Bold是否加粗：true/false参数样例：{"FontColor":"255,0,0","FontSize":12,"Bold":false}ComponentType为DATE时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72参数样例：{"FontColor":"255,0,0","FontSize":12}ComponentType为WATERMARK时，支持以下参数： Font：目前只支持黑体、宋体、仿宋 FontSize： 范围6 :72 Opacity： 透明度，范围0 :1 Rotate： 水印旋转角度，范围0 :359 Density： 水印样式，1-宽松，2-标准（默认值），3-密集， Position： 水印位置，None-平铺（默认值），LeftTop-左上，LeftBottom-左下，RightTop-右上，RightBottom-右下，Center-居中 SubType： 水印类型：CUSTOM_WATERMARK-自定义内容，PERSON_INFO_WATERMARK-访问者信息参数样例："{\"Font\":\"黑体\",\"FontSize\":20,\"Opacity\":0.1,\"Density\":2,\"SubType\":\"PERSON_INFO_WATERMARK\"}"ComponentType为FILL_IMAGE时，支持以下参数： NotMakeImageCenter：bool。是否设置图片居中。false：居中（默认）。 true : 不居中 FillMethod : int. 填充方式。0-铺满（默认）；1-等比例缩放ComponentType为SELECTOR时，支持以下参数： WordWrap：bool。是否支持选择控件内容自动折行合成。false：不支持（默认）。 true : 支持自动折行合成ComponentType为SIGN_SIGNATURE、SIGN_PAGING_SIGNATURE类型时，可以通过ComponentTypeLimit参数控制签名方式 HANDWRITE : 需要实时手写的手写签名 HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE) OCR_ESIGN : AI智能识别手写签名 ESIGN : 个人印章类型 SYSTEM_ESIGN : 系统签名（该类型可以在用户签署时根据用户姓名一键生成一个签名来进行签署） IMG_ESIGN : 图片印章(该类型支持用户在签署将上传的PNG格式的图片作为签名)参考样例：{"ComponentTypeLimit": ["SYSTEM_ESIGN"]}印章的对应关系参考下图![image](https://qcloudimg.tencent-cloud.cn/raw/ee0498856c060c065628a0c5ba780d6b.jpg)ComponentType为SIGN_SEAL 或者 SIGN_PAGING_SEAL类型时，可以通过ComponentTypeLimit参数控制签署方签署时要使用的印章类型，支持指定以下印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他参考样例：{\"ComponentTypeLimit\":[\"PERSONNEL\",\"FINANCE\"]} 表示改印章签署区,客户需使用人事专用章或财务专用章盖章签署。ComponentType为SIGN_DATE时，支持以下参数： Font :字符串类型目前只支持"黑体"、"宋体"、"仿宋"，如果不填默认为"黑体" FontSize : 数字类型，范围6-72，默认值为12 FontAlign : 字符串类型，可取Left/Right/Center，对应左对齐/居中/右对齐 Format : 字符串类型，日期格式，必须是以下五种之一 “yyyy m d”，”yyyy年m月d日”，”yyyy/m/d”，”yyyy-m-d”，”yyyy.m.d”。 Gaps : 字符串类型，仅在Format为“yyyy m d”时起作用，格式为用逗号分开的两个整数，例如”2,2”，两个数字分别是日期格式的前后两个空隙中的空格个数如果extra参数为空，默认为”yyyy年m月d日”格式的居中日期特别地，如果extra中Format字段为空或无法被识别，则extra参数会被当作默认值处理（Font，FontSize，Gaps和FontAlign都不会起效）参数样例： "{"Format":"yyyy m d","FontSize":12,"Gaps":"2,2", "FontAlign":"Right"}"ComponentType为SIGN_SEAL、SIGN_SIGNATURE类型时，支持以下参数： PageRanges :PageRange的数组，通过PageRanges属性设置该印章在PDF所有页面上盖章（适用于标书在所有页面盖章的情况）参数样例："{"PageRanges":[{"BeginPage":1,"EndPage":-1}]}"签署印章透明度功能设置，当ComponentType为SIGN_SIGNATURE、SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署印章的透明度： Opacity：印章透明度，支持范围：0.6-1，0.7表示70%的透明度，1表示无透明度参数样例：{"Opacity":0.7}签署印章大小功能设置，当ComponentType为SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL时，可以通过以下参数设置签署时按照实际印章的大小进行签署，如果印章没有设置大小，那么默认会是4.2cm的印章大小： UseSealSize：使用印章设置的大小盖章，true表示使用印章设置的大小盖章，false表示使用签署控件的大小进行盖章；不传则为false参数样例：{"UseSealSize":true}签署意见功能设置，当ComponentType为SIGN_OPINION时，可以通过以下参数设置签署意见的相关内容： Values：签署意见预设的需要用户填写的文本 ValuesArray：签署意见需要用户按顺序点击的分词（组合后应和Values内容一致）参数样例：{"Values":"我已知晓内容并同意签署","ValuesArray":["我","已知晓","内容","并","同意","签署"]}关键字模式下支持关键字找不到的情况下不进行报错的设置 IgnoreKeywordError :1-关键字查找不到时不进行报错场景说明：如果使用关键字进行定位，但是指定的PDF文件中又没有设置的关键字时，发起合同会进行关键字是否存在的校验，如果关键字不存在，会进行报错返回。如果不希望进行报错，可以设置"IgnoreKeywordError"来忽略错误。请注意，如果关键字签署控件对应的签署方在整个PDF文件中一个签署控件都没有，还是会触发报错逻辑。参数样例："{"IgnoreKeywordError":1}"ComponentType为SIGN_VIRTUAL_COMBINATION或者VIRTUAL_COMBINATION时，支持以下参数：Children: 绝对定位模式下，用来指定此签批控件的组合子控件 参数样例：{"Children":["ComponentId_29","ComponentId_27","ComponentId_28","ComponentId_30"]}ChildrenComponents: 关键字定位模式下，用来指定此签批控件的组合子控件 ChildrenComponent结构体定义: 字段名称 类型 描述 ComponentType string 子控件类型-可选值:SIGN_SIGNATURE,SIGN_DATE,SIGN_SELECTOR,SIGN_MULTI_LINE_TEXT ComponentName string 子控件名称 Placeholder string 子控件提示语 ComponentValue string 子控件值（签署方不可设置） ComponentOffsetX float 控件偏移位置X（相对于父控件（签批控件的ComponentX）） ComponentOffsetY float 控件偏移位置Y 相对于父控件（签批控件的ComponentY）） ComponentWidth float 控件宽 ComponentHeight float 控件高 ComponentExtra string 控件的附属信息，根据ComponentType设置 参数样例：输入:{ ChildrenComponents: [ { ComponentType: SIGN_SIGNATURE, ComponentName: 个人签名, Placeholder: 请签名, ComponentOffsetX: 10, ComponentOffsetY: 30, ComponentWidth: 119, ComponentHeight: 43, ComponentExtra: {\ComponentTypeLimit\:[\SYSTEM_ESIGN\]} }, { ComponentType: SIGN_SELECTOR, ComponentName: 是否同意此协议, Placeholder: , ComponentOffsetX: 50, ComponentOffsetY: 130, ComponentWidth: 120, ComponentHeight: 43, ComponentExtra: {\Values\:[\同意\,\不同意\,\再想想\],\FontSize\:12,\FontAlign\:\Left\,\Font\:\黑体\,\MultiSelect\:false} }, { ComponentType: SIGN_MULTI_LINE_TEXT, ComponentName: 批注附言, Placeholder: , ComponentOffsetX: 150, ComponentOffsetY: 300, ComponentWidth: 200, ComponentHeight: 86, ComponentExtra: } ]} */
   ComponentExtra?: string;
   /** 在通过接口拉取控件信息场景下，为出参参数，此控件是否通过表单域定位方式生成，默认false-不是，发起合同时候不要填写此字段留空即可 */
   IsFormType?: boolean;
@@ -980,7 +980,7 @@ declare interface FlowCreateApprover {
   ApproverIdCardNumber?: string;
   /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项，可以通过查询模板信息接口获得。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
   RecipientId?: string;
-  /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: &lt;font color=&quot;red&quot;&gt;不再使用, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
+  /** 签署意愿确认渠道，默认为WEIXINAPP:人脸识别注: <font color="red">不再使用, 用ApproverSignTypes签署人签署合同时的认证方式代替, 新客户可请用ApproverSignTypes来设置 */
   VerifyChannel?: string[];
   /** 通知签署方经办人的方式, 有以下途径: **SMS** : (默认)短信 **EMAIL** : 邮件 **ALL** : 邮件+短信 **NONE** : 不通知注: 既是发起方又是签署方时，不给此签署方发送短信枚举值：SMS： 短信通知EMAIL： 邮件通知ALL： 邮件通知+短信通知NONE： 不做任何形式的通知 */
   NotifyType?: string;
@@ -1100,7 +1100,7 @@ declare interface FlowGroupInfo {
   Approvers: ApproverInfo[];
   /** 文件资源ID，通过多文件上传UploadFiles接口获得，为32位字符串。注：此字段定义为数组，但仅支持单个文件 */
   FileIds?: string[];
-  /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。可登录腾讯电子签控制台，在 &quot;模板&quot;-&gt;&quot;模板中心&quot;-&gt;&quot;列表展示设置&quot;选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
+  /** 合同模板ID，为32位字符串。建议开发者保存此模板ID，后续用此模板发起合同流程需要此参数。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId?: string;
   /** 签署流程的类型(如销售合同/入职合同等)，最大长度200个字符 */
   FlowType?: string;
@@ -2327,7 +2327,7 @@ declare interface CancelOrganizationFlowsRequest {
   Operator: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。 备注:如果不传递撤回原因，那么默认撤回原因是 &quot;自动撤销（通过接口实现）&quot; */
+  /** 撤回原因，长度不能超过200，只能由中文、字母、数字和下划线组成。 备注:如果不传递撤回原因，那么默认撤回原因是 "自动撤销（通过接口实现）" */
   CancelMessage?: string;
   /** 撤销理由自定义格式, 会展示在合同预览的界面中, 可以选择下面的组合方式：0 : 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同1 : 合同封面页面会展示为: 发起方以CancelMessage的理由撤销当前合同2 : 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以CancelMessage的理由撤销当前合同3 : 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同注: CancelMessage为撤销当前合同的理由枚举值：0： 默认格式, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同1： 合同封面页面会展示为: 发起方以CancelMessage的理由撤销当前合同2： 保留企业名称, 合同封面页面会展示为: 发起方-企业名称以CancelMessage的理由撤销当前合同3： 保留企业名称+经办人名字, 合同封面页面会展示为: 发起方-企业名称-撤销的经办人名字以CancelMessage的理由撤销当前合同注: CancelMessage为撤销当前合同的理由 */
   CancelMessageFormat?: number;
@@ -3317,7 +3317,7 @@ declare interface CreateFlowSignReviewResponse {
 }
 
 declare interface CreateFlowSignUrlRequest {
-  /** 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 &quot;合同&quot; -&gt; &quot;合同中心&quot; 中查看某个合同的FlowId（在页面中展示为合同ID）。点击查看FlowId在控制台中的位置。 */
+  /** 合同流程ID为32位字符串。您可以登录腾讯电子签控制台，在 "合同" -> "合同中心" 中查看某个合同的FlowId（在页面中展示为合同ID）。点击查看FlowId在控制台中的位置。 */
   FlowId: string;
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
@@ -3565,7 +3565,7 @@ declare interface CreateModifyAdminAuthorizationUrlResponse {
 declare interface CreateMultiFlowSignQRCodeRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 合同模板ID，为32位字符串。可登录腾讯电子签控制台，在 &quot;模板&quot;-&gt;&quot;模板中心&quot;-&gt;&quot;列表展示设置&quot;选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
+  /** 合同模板ID，为32位字符串。可登录腾讯电子签控制台，在 "模板"->"模板中心"->"列表展示设置"选中模板 ID 中查看某个模板的TemplateId(在页面中展示为模板ID)。 */
   TemplateId: string;
   /** 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。该名称还将用于合同签署完成后的下载文件名。 */
   FlowName: string;
@@ -3631,7 +3631,7 @@ declare interface CreateOrganizationAuthUrlRequest {
   Operator: UserInfo;
   /** 指定授权方式 支持多选:2: 法人授权方式5: 授权书+对公打款方式 */
   AuthorizationTypes?: number[];
-  /** 认证企业名称，请确认该名称与企业营业执照中注册的名称一致。注：如果名称中包含英文括号()，请使用中文括号（）代替。EndPointType=“H5”或者&quot;SHORT_H5&quot;时，该参数必填 */
+  /** 认证企业名称，请确认该名称与企业营业执照中注册的名称一致。注：如果名称中包含英文括号()，请使用中文括号（）代替。EndPointType=“H5”或者"SHORT_H5"时，该参数必填 */
   OrganizationName?: string;
   /** 企业统一社会信用代码 */
   UniformSocialCreditCode?: string;
@@ -3675,7 +3675,7 @@ declare interface CreateOrganizationAuthUrlRequest {
   BankAccountNumber?: string;
   /** 对方打开链接认证时，对公打款账号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在对公打款不为空时有效 */
   BankAccountNumberSame?: boolean;
-  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为&quot;true&quot; 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  /** 跳转事件，其中包括认证期间收录，授权书审核，企业认证的回跳事件。p.s.Endpoint如果是APP 类型，请传递JumpUrl为"true" 如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5 p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpEvents?: JumpEvent[];
   /** 企业证照类型： USCC :(默认)工商组织营业执照 PRACTICELICENSEOFMEDICALINSTITUTION :医疗机构执业许可证 CLINICFILLINGCERTIFICATE :诊所备案证注意 ：如果企业证照类型是医疗机构执业许可证或者诊所备案证，则参数设置企业授权方式(AuthorizationTypes)和企业认证方式(AuthorizationMethods)都无效.医疗机构执业许可证和诊所备案证的企业授权方式 仅有授权书的方式。企业认证仅有上传营业执照的方式。 */
   OrganizationIdCardType?: string;
@@ -3699,11 +3699,11 @@ declare interface CreateOrganizationAuthUrlResponse {
 declare interface CreateOrganizationBatchSignUrlRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 请指定需执行批量签署的流程ID，数量范围为1-100。您可登录腾讯电子签控制台，浏览 &quot;合同&quot;-&gt;&quot;合同中心&quot; 以查阅某一合同的FlowId（在页面中显示为合同ID）。用户将利用链接对这些合同实施批量操作。 注：生成动态签署方领取时此参数必传。 */
+  /** 请指定需执行批量签署的流程ID，数量范围为1-100。您可登录腾讯电子签控制台，浏览 "合同"->"合同中心" 以查阅某一合同的FlowId（在页面中显示为合同ID）。用户将利用链接对这些合同实施批量操作。 注：生成动态签署方领取时此参数必传。 */
   FlowIds?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 员工在腾讯电子签平台的独特身份标识，为32位字符串。您可登录腾讯电子签控制台，在 &quot;更多能力&quot;-&gt;&quot;组织管理&quot; 中查阅某位员工的UserId（在页面中显示为用户ID）。UserId必须是传入合同（FlowId）中的签署人。1. 若UserId为空，Name和Mobile 必须提供。2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。 */
+  /** 员工在腾讯电子签平台的独特身份标识，为32位字符串。您可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查阅某位员工的UserId（在页面中显示为用户ID）。UserId必须是传入合同（FlowId）中的签署人。1. 若UserId为空，Name和Mobile 必须提供。2. 若UserId 与 Name，Mobile均存在，将优先采用UserId对应的员工。 */
   UserId?: string;
   /** 员工姓名，必须与手机号码一起使用。如果UserId为空，则此字段不能为空。同时，姓名和手机号码必须与传入合同（FlowId）中的签署人信息一致。 */
   Name?: string;
@@ -4109,7 +4109,7 @@ declare interface CreateSealRequest {
   Height?: number;
   /** 电子印章印章颜色(默认红色RED),RED-红色系统目前只支持红色印章创建。 */
   Color?: string;
-  /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的&quot;印章横向文字在这里&quot; */
+  /** 企业印章横向文字，最多可填15个汉字 (若超过印章最大宽度，优先压缩字间距，其次缩小字号)横向文字的位置如下图中的"印章横向文字在这里" */
   SealHorizontalText?: string;
   /** 暂时不支持下弦文字设置 */
   SealChordText?: string;
@@ -4130,11 +4130,11 @@ declare interface CreateSealRequest {
 }
 
 declare interface CreateSealResponse {
-  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 &quot;印章&quot;-&gt;&quot;印章中心&quot;选择查看的印章，在&quot;印章详情&quot; 中查看某个印章的SealId(在页面中展示为印章ID)。 */
+  /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId?: string;
   /** 电子印章预览链接地址，地址默认失效时间为24小时。 */
   ImageUrl?: string;
-  /** 人脸验证操作人链接，用法可以参考&quot;跳转电子签小程序配置&quot;，默认为空。 */
+  /** 人脸验证操作人链接，用法可以参考"跳转电子签小程序配置"，默认为空。 */
   SealOperatorVerifyPath?: string;
   /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
   SealOperatorVerifyQrcodeUrl?: string;
@@ -4167,7 +4167,7 @@ declare interface CreateSingleSignOnEmployeesResponse {
 }
 
 declare interface CreateUserAutoSignEnableUrlRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
@@ -4175,28 +4175,30 @@ declare interface CreateUserAutoSignEnableUrlRequest {
   AutoSignConfig: AutoSignConfig;
   /** 生成的链接类型： 不传(即为空值) 则会生成小程序端开通链接(默认) **H5SIGN** : 生成H5端开通链接 */
   UrlType?: string;
-  /** 是否通知开通方，通知类型:默认为不通知开通方**SMS** : 短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号 */
+  /** 是否通知开通方，通知类型:默认为不通知开通方SMS : 短信通知 ,如果需要短信通知则NotifyAddress填写对方的手机号 */
   NotifyType?: string;
   /** 如果通知类型NotifyType选择为SMS，则此处为手机号, 其他通知类型不需要设置此项 */
   NotifyAddress?: string;
-  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为当前时间往后30天。`如果不传，默认过期时间为当前时间往后7天。` */
+  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为当前时间往后30天。如果不传，默认过期时间为当前时间往后7天。 */
   ExpiredTime?: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 调用方自定义的个性化字段(可自定义此字段的值)，并以base64方式编码，支持的最大数据大小为 20480长度。 在个人自动签的开通、关闭等回调信息场景中，该字段的信息将原封不动地透传给贵方。 */
   UserData?: string;
+  /** 要跳转的链接类型 HTTP：跳转电子签小程序或者H5的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链HTTP_SHORT_URL：跳转电子签小程序或者H5的http_url, 短信通知或者H5跳转适合此类型，此时返回短链APP： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型，注意：仅UrlType为空，即获取小程序端开通链接时有效 */
+  EndPoint?: string;
 }
 
 declare interface CreateUserAutoSignEnableUrlResponse {
-  /** 个人用户自动签的开通链接, 短链形式。过期时间受 `ExpiredTime` 参数控制。 */
+  /** 个人用户自动签的开通链接, 短链/长链接形式。过期时间受 ExpiredTime 参数控制。 */
   Url?: string;
-  /** 腾讯电子签小程序的 AppID，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用注: `如果获取的是H5链接, 则不会返回此值` */
+  /** 腾讯电子签小程序的 AppID，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用注: 如果获取的是H5链接, 则不会返回此值 */
   AppId?: string;
-  /** 腾讯电子签小程序的原始 Id, ，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用注: `如果获取的是H5链接, 则不会返回此值` */
+  /** 腾讯电子签小程序的原始 Id, ，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用注: 如果获取的是H5链接, 则不会返回此值 */
   AppOriginalId?: string;
-  /** 腾讯电子签小程序的跳转路径，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用注: `如果获取的是H5链接, 则不会返回此值` */
+  /** 腾讯电子签小程序的跳转路径，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用注: 如果获取的是H5链接, 则不会返回此值 */
   Path?: string;
-  /** base64 格式的跳转二维码图片，可通过微信扫描后跳转到腾讯电子签小程序的开通界面。注: `如果获取的是H5链接, 则不会返回此二维码图片` */
+  /** base64 格式的跳转二维码图片，可通过微信扫描后跳转到腾讯电子签小程序的开通界面。注: 如果获取的是H5链接, 则不会返回此二维码图片 */
   QrCode?: string;
   /** 返回的链接类型 空: 默认小程序端链接 **H5SIGN** : h5端链接 */
   UrlType?: string;
@@ -4205,7 +4207,7 @@ declare interface CreateUserAutoSignEnableUrlResponse {
 }
 
 declare interface CreateUserAutoSignSealUrlRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
@@ -4213,8 +4215,10 @@ declare interface CreateUserAutoSignSealUrlRequest {
   UserInfo: UserThreeFactor;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为当前时间往后30天。`如果不传，默认过期时间为当前时间往后7天。` */
+  /** 链接的过期时间，格式为Unix时间戳，不能早于当前时间，且最大为当前时间往后30天。如果不传，默认过期时间为当前时间往后7天。 */
   ExpiredTime?: number;
+  /** 要跳转的链接类型 HTTP：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型 ，此时返回长链HTTP_SHORT_URL：跳转电子签小程序的http_url, 短信通知或者H5跳转适合此类型，此时返回短链APP： 第三方APP或小程序跳转电子签小程序的path, APP或者小程序跳转适合此类型 */
+  EndPoint?: string;
 }
 
 declare interface CreateUserAutoSignSealUrlResponse {
@@ -4222,7 +4226,7 @@ declare interface CreateUserAutoSignSealUrlResponse {
   AppId?: string;
   /** 腾讯电子签小程序的原始Id，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用。 */
   AppOriginalId?: string;
-  /** 个人用户自动签的开通链接, 短链形式。过期时间受 `ExpiredTime` 参数控制。 */
+  /** 个人用户自动签的开通链接, 短链或者长链接形式。过期时间受 ExpiredTime 参数控制。 */
   Url?: string;
   /** 腾讯电子签小程序的跳转路径，用于其他小程序/APP等应用跳转至腾讯电子签小程序使用。 */
   Path?: string;
@@ -4983,7 +4987,7 @@ declare interface DescribeFlowEvidenceReportResponse {
 declare interface DescribeFlowInfoRequest {
   /** 执行本接口操作的员工信息。 注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
-  /** 需要查询的流程ID列表，最多可传入100个ID。如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。可登录腾讯电子签控制台，在 &quot;合同&quot;-&gt;&quot;合同中心&quot; 中查看某个合同的FlowId(在页面中展示为合同ID)。点击查看FlowId在控制台中的位置 */
+  /** 需要查询的流程ID列表，最多可传入100个ID。如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。点击查看FlowId在控制台中的位置 */
   FlowIds?: string[];
   /** 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -5841,7 +5845,7 @@ declare interface UpdateIntegrationEmployeesResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 文件对应业务类型,可以选择的类型如下 TEMPLATE : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 DOCUMENT : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 SEAL : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ARCHIVE : 此文件用于归档文件夹，文件类型支持.pdf/.zip格式 [&quot;yDRSRUUgygj6rq2wUuO4zjEyBZ2NHiyT&quot;]枚举值：TEMPLATE： 此上传的文件用户生成合同模板DOCUMENT： 此文件用来发起合同流程SEAL： 此文件用于印章的生成ARCHIVE： 此文件用于归档文件夹 */
+  /** 文件对应业务类型,可以选择的类型如下 TEMPLATE : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 DOCUMENT : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 SEAL : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ARCHIVE : 此文件用于归档文件夹，文件类型支持.pdf/.zip格式 ["yDRSRUUgygj6rq2wUuO4zjEyBZ2NHiyT"]枚举值：TEMPLATE： 此上传的文件用户生成合同模板DOCUMENT： 此文件用来发起合同流程SEAL： 此文件用于印章的生成ARCHIVE： 此文件用于归档文件夹 */
   BusinessType: string;
   /** 执行本接口操作的员工信息。其中OperatorId为必填字段，即用户的UserId。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Caller?: Caller;
@@ -5857,6 +5861,8 @@ declare interface UploadFilesRequest {
   FileUrls?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
+  /** 文件过期时间的时间戳取值范围：[1782835200, 4102329600]单位：秒设置上传文件的过期时间，此功能为付费能力，请联系电子签运营人员开通 */
+  Deadline?: number;
 }
 
 declare interface UploadFilesResponse {
@@ -5864,6 +5870,8 @@ declare interface UploadFilesResponse {
   FileIds?: string[];
   /** 上传成功文件数量 */
   TotalCount?: number;
+  /** 文件过期时间的时间戳单位：秒默认值：当前上传时间的一小时内有效 */
+  Deadline?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

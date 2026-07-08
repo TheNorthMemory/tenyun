@@ -313,7 +313,7 @@ declare interface Volume {
 }
 
 declare interface BatchSendEmailRequest {
-  /** 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照发信人 &lt;邮件地址&gt; 的方式填写，例如：腾讯云团队 &lt;noreply@mail.qcloud.com&gt; */
+  /** 发信邮件地址。请填写发件人邮箱地址，例如：noreply@mail.qcloud.com。如需填写发件人说明，请按照发信人 <邮件地址> 的方式填写，例如：腾讯云团队 <noreply@mail.qcloud.com> */
   FromEmailAddress: string;
   /** 收件人列表ID */
   ReceiverId: number;
@@ -845,7 +845,7 @@ declare interface ListSendTasksResponse {
 }
 
 declare interface SendEmailRequest {
-  /** 发件人邮箱地址。不使用别名时请直接填写发件人邮箱地址，例如：noreply@mail.qcloud.com如需填写发件人别名时，请按照如下方式（注意别名与邮箱地址之间必须使用一个空格隔开）：别名+一个空格+&lt;邮箱地址&gt;，别名中不能带有冒号(:)。 */
+  /** 发件人邮箱地址。不使用别名时请直接填写发件人邮箱地址，例如：noreply@mail.qcloud.com如需填写发件人别名时，请按照如下方式（注意别名与邮箱地址之间必须使用一个空格隔开）：别名+一个空格+<邮箱地址>，别名中不能带有冒号(:)。 */
   FromEmailAddress: string;
   /** 邮件主题 */
   Subject: string;

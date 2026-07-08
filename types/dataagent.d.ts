@@ -140,7 +140,7 @@ declare interface KnowledgeTaskConfig {
   ChunkType?: number;
   /** /智能切片：最小值 1000，默认 4800 自定义切片：正整数即可,默认值 1000 */
   MaxChunkSize?: number;
-  /** 切片分隔符,自定义切片使用：默认值为：[&quot;\n\n&quot;, &quot;\n&quot;, &quot;。&quot;, &quot;！&quot;, &quot;？&quot;, &quot;，&quot;, &quot;&quot;] */
+  /** 切片分隔符,自定义切片使用：默认值为：["\n\n", "\n", "。", "！", "？", "，", ""] */
   Delimiters?: string[] | null;
   /** 自定义切片使用:默认0 可重叠字符长度 */
   ChunkOverlap?: number;

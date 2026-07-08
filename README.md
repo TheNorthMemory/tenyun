@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 256+ 款产品，14602+ 服务数</summary>
+<details><summary>共计 257+ 款产品，14740+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -127,6 +127,7 @@ afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-
 ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(16) |
 ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(19) |
 aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(23) |
+alb | [应用型负载均衡](https://cloud.tencent.com/document/product/1822) | 2025-10-30(48) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
 anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3) |
@@ -174,13 +175,13 @@ cetcd | [云原生xa0etcd](https://cloud.tencent.com/document/product/1577) | 20
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
 cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(141) |
-chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(38) |
+chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(41) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(29) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
 cii | [智能保险助手](https://cloud.tencent.com/document/product/1368) | 2021-04-08(13) | 2020-12-10(3) |
 cim |  | 2019-03-18(1) |
 ckafka | [消息队列 CKafka 版](https://cloud.tencent.com/document/product/597) | 2019-08-19(97) |
-clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(116) |
+clb | [负载均衡](https://cloud.tencent.com/document/product/214) | 2018-03-17(160) |
 cloudapp | [云应用](https://cloud.tencent.com/document/product/1689) | 2022-05-30(3) |
 cloudaudit | [操作审计](https://cloud.tencent.com/document/product/629) | 2019-03-19(19) |
 cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019-11-12(14) |
@@ -194,14 +195,14 @@ cngw | [云原生智能网关](https://cloud.tencent.com/document/product/1826) 
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(63) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(247) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(285) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(3) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(106) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(533) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
-cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(236) |
+cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(237) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(26) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
@@ -335,13 +336,13 @@ teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(32) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(74) | 2019-10-22(22) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(75) | 2019-10-22(22) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(35) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2022-05-01(23) | 2018-05-25(272) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
 tms | [文本内容安全](https://cloud.tencent.com/document/product/1124) | 2020-12-29(3) | 2020-07-13(4) |
-tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(2) |
-tokenhub | [TokenHub](https://cloud.tencent.com/document/product/1823) | 2026-03-22(24) |
+tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-21(1) |
+tokenhub | [TokenHub](https://cloud.tencent.com/document/product/1823) | 2026-03-22(28) |
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/document/product/1495) | 2023-04-18(29) |
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(57) |

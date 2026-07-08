@@ -484,13 +484,13 @@ declare interface InstanceInfo {
   InstanceType?: string | null;
   /** 磁盘类型，CLOUD_HSSD增强型SSD,CLOUD_TCS本地SSD盘 */
   StorageType?: string | null;
-  /** &quot;0000-00-00 00:00:00&quot; */
+  /** "0000-00-00 00:00:00" */
   DestroyedAt?: string | null;
-  /** &quot;0000-00-00 00:00:00&quot; */
+  /** "0000-00-00 00:00:00" */
   ExpireAt?: string | null;
-  /** &quot;0000-00-00 00:00:00&quot; */
+  /** "0000-00-00 00:00:00" */
   IsolatedAt?: string | null;
-  /** &quot;0000-00-00 00:00:00&quot; */
+  /** "0000-00-00 00:00:00" */
   IsolatedFrom?: string | null;
   /** 1 */
   Replications?: number | null;

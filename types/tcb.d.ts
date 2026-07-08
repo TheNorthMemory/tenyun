@@ -1064,8 +1064,6 @@ declare interface PostgreSQLInfo {
   Status?: number;
   /** 地域 */
   Region?: string;
-  /** 数据库引擎版本 */
-  Version?: string;
 }
 
 /** 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。 */
@@ -2266,7 +2264,7 @@ declare interface DescribeCurveDataResponse {
   Time?: number[];
   /** 有效的监控数据, 每个有效监控数据的上报时间可以从时间数组中的对应位置上获取到 */
   NewValues?: number[];
-  /** 聚合方式， ⁠&quot;last&quot;⁠ 表示取时间段内最后一个值，“max”表示取时间段内最大值，“avg”表示取时间段内的平均值 */
+  /** 聚合方式， ⁠"last"⁠ 表示取时间段内最后一个值，“max”表示取时间段内最大值，“avg”表示取时间段内的平均值 */
   Statistics?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2351,7 +2349,7 @@ declare interface DescribeEnvPlansResponse {
 declare interface DescribeEnvsRequest {
   /** 环境ID，如果传了这个参数则只返回该环境的相关信息 */
   EnvId?: string;
-  /** 指定Channels字段为可见渠道列表或不可见渠道列表如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;] */
+  /** 指定Channels字段为可见渠道列表或不可见渠道列表如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"] */
   IsVisible?: boolean;
   /** 渠道列表，代表可见或不可见渠道由IsVisible参数指定 */
   Channels?: string[];
@@ -2736,7 +2734,7 @@ declare interface ExecutePGSqlResponse {
   AffectedRows?: number;
   /** 字段名列表 */
   Columns?: string[] | null;
-  /** 数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 &lt;null&gt;，如果是字符串则为该列的值的字符串表示形式。 */
+  /** 数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 <null>，如果是字符串则为该列的值的字符串表示形式。 */
   Rows?: string[] | null;
   /** SQL执行耗时单位：毫秒 */
   ExecutionTimeMs?: number;

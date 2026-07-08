@@ -872,7 +872,7 @@ declare interface KafkaOption {
   DDLTopicName?: string;
   /** 单topic和自定义topic的描述 */
   TopicRules?: TopicRule[];
-  /** 其他附加信息，对于特定数据类型可设置额外参数。比如针对Canal兼容的功能支持：&quot;canalOfficialFormat&quot;:&quot;on&quot;表示打开Canal兼容功能，默认不带。针对大消息跳过的功能支持：&quot;skipLargeMessage&quot;:&quot;on&quot;表示开启跳过大消息，默认不带；开启时需同时设置&quot;maxMessageSizeMB&quot;为1~100的正整数字符串，表示最大消息大小阈值（MB），超过该大小的消息将被跳过，默认不带。 */
+  /** 其他附加信息，对于特定数据类型可设置额外参数。比如针对Canal兼容的功能支持："canalOfficialFormat":"on"表示打开Canal兼容功能，默认不带。针对大消息跳过的功能支持："skipLargeMessage":"on"表示开启跳过大消息，默认不带；开启时需同时设置"maxMessageSizeMB"为1~100的正整数字符串，表示最大消息大小阈值（MB），超过该大小的消息将被跳过，默认不带。 */
   DataOption?: KeyValuePairOption[];
 }
 
@@ -936,7 +936,7 @@ declare interface MigrateOption {
   IsOverrideRoot?: boolean;
   /** 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值) */
   IsDstReadOnly?: boolean;
-  /** 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数:[&quot;DstWriteMode&quot;:normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务 &quot;IsDstReadOnly&quot;:true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) &quot;ClientOutputBufferHardLimit&quot;:512, 从机缓冲区的硬性容量限制(MB) &quot;ClientOutputBufferSoftLimit&quot;:512, 从机缓冲区的软性容量限制(MB) &quot;ClientOutputBufferPersistTime&quot;:60, 从机缓冲区的软性限制持续时间(秒) &quot;ReplBacklogSize&quot;:512, 环形缓冲区容量限制(MB) &quot;ReplTimeout&quot;:120， 复制超时时间(秒) &quot;IsExpireKey&quot;:&quot;true&quot;,过期key自动淘汰] */
+  /** 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数:["DstWriteMode":normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务 "IsDstReadOnly":true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) "ClientOutputBufferHardLimit":512, 从机缓冲区的硬性容量限制(MB) "ClientOutputBufferSoftLimit":512, 从机缓冲区的软性容量限制(MB) "ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) "ReplBacklogSize":512, 环形缓冲区容量限制(MB) "ReplTimeout":120， 复制超时时间(秒) "IsExpireKey":"true",过期key自动淘汰] */
   ExtraAttr?: KeyValuePairOption[];
   /** pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移) */
   MigrateWay?: string;
@@ -1186,7 +1186,7 @@ declare interface StepDetailInfo {
   StepId?: string;
   /** 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted */
   Status?: string;
-  /** 当前步骤开始的时间，格式为&quot;yyyy-mm-dd hh:mm:ss&quot;，该字段不存在或者为空是无意义 */
+  /** 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 */
   StartTime?: string;
   /** 完成时间 */
   FinishTime?: string;
@@ -1631,7 +1631,7 @@ declare interface ConfigureSyncJobRequest {
   JobMode?: string;
   /** 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
   RunMode?: string;
-  /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如：&quot;2006-01-02 15:04:05&quot; */
+  /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05" */
   ExpectRunTime?: string;
   /** 源端tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，SrcInfos中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。 */
   SrcConnectType?: string;
@@ -2717,7 +2717,7 @@ declare interface ModifyMigrationJobRequest {
   DstInfo: DBEndpointInfo;
   /** 迁移任务名称，最大长度128 */
   JobName?: string;
-  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如：&quot;2006-01-02 15:04:05&quot; */
+  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05" */
   ExpectRunTime?: string;
   /** 标签信息 */
   Tags?: TagItem[];

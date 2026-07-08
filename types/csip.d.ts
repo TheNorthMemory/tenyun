@@ -2500,6 +2500,14 @@ declare interface DspmAccountCount {
   TotalAccountCount?: number;
 }
 
+/** dspm数据识别级别信息 */
+declare interface DspmAddIdentifyLevelItem {
+  /** 级别名称 */
+  LevelName: string;
+  /** 级别敏感程度单位：分数 */
+  LevelScore: number;
+}
+
 /** 申请单信息 */
 declare interface DspmApplyOrder {
   /** 申请单id */
@@ -2816,6 +2824,52 @@ declare interface DspmAssetFieldInfo {
   FieldComment?: string;
 }
 
+/** dspm资产数据识别统计信息 */
+declare interface DspmAssetIdentifyInfo {
+  /** 资产实例id */
+  AssetId?: string;
+  /** 资产名称 */
+  AssetName?: string;
+  /** 资产类型枚举值：cdb： MySQLmariadb： MariaDBmongodb： MongoDB */
+  AssetType?: string;
+  /** 已检出数据库数量 */
+  DetectedDbCount?: number;
+  /** 已检出表数量 */
+  DetectedTableCount?: number;
+  /** 数据项id集合 */
+  RuleIds?: number[];
+  /** 数据项名称集合 */
+  RuleNames?: string[];
+  /** 分类id集合 */
+  CategoryIds?: number[];
+  /** 分类名称集合 */
+  CategoryNames?: string[];
+  /** 最高级别ID */
+  LevelId?: number;
+  /** 最高级别名称 */
+  LevelName?: string;
+  /** 级别敏感程度 */
+  LevelScore?: number;
+  /** 检出时间 */
+  DetectedTime?: string;
+  /** 分类详情 */
+  CategoryDetails?: DspmIdentifyCategoryDetail[];
+  /** APPID */
+  AppId?: number;
+  /** 账号名称 */
+  NickName?: string;
+  /** 账号ID */
+  Uin?: string;
+}
+
+/** dspm数据识别任务状态 */
+declare interface DspmAssetIdentifyTaskStatus {
+  /** 任务ID */
+  TaskId?: number;
+  /** 任务状态枚举值：0： 未识别1： 识别中2： 识别终止3： 识别成功4： 识别失败5： 暂停 */
+  Status?: number;
+}
+
 /** Dspm资产实例 */
 declare interface DspmAssetInstance {
   /** 资产实例Id */
@@ -3060,6 +3114,102 @@ declare interface DspmIdentifyCategoryDetail {
   RuleSet?: DspmIdentifyRuleDetail[];
 }
 
+/** dspm数据识别分类列表项 */
+declare interface DspmIdentifyCategoryItem {
+  /** 分类ID */
+  Id?: number;
+  /** 分类名称 */
+  Name?: string;
+  /** 类型枚举值：0： 内置1： 自定义 */
+  Type?: number;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 无 */
+  ComplianceRelations?: DspmIdentifyRefComplianceInfo[];
+}
+
+/** dspm数据识别分类数据项关联详情 */
+declare interface DspmIdentifyCategoryRuleRelateDetailItem {
+  /** 识别模板ID */
+  ComplianceId?: number;
+  /** 分类ID */
+  CategoryId?: number;
+  /** 数据项ID */
+  RuleId?: number;
+  /** 数据项名称 */
+  RuleName?: string;
+  /** 级别ID */
+  LevelId?: number;
+  /** 级别名称 */
+  LevelName?: string;
+}
+
+/** dspm数据识别分类和数据项关联关系 */
+declare interface DspmIdentifyCategoryRuleRelateItem {
+  /** 数据项ID */
+  RuleId: number;
+  /** 级别ID */
+  LevelId: number;
+}
+
+/** dspm数据识别模板分类关联关系 */
+declare interface DspmIdentifyComplianceCategoryRelation {
+  /** 分类ID */
+  CategoryId?: number;
+  /** 分类名称 */
+  CategoryName?: string;
+  /** 父分类ID */
+  CategoryParentId?: string;
+  /** 是否叶子节点 */
+  IsLeaf?: boolean;
+  /** 分类类型枚举值：0： 内置1： 自定义 */
+  CategoryType?: number;
+  /** 分类层级单位：层 */
+  CategoryGrade?: number;
+  /** 无 */
+  RuleRelations?: DspmIdentifyComplianceRuleRelation[];
+  /** 无 */
+  Children?: DspmIdentifyComplianceCategoryRelation[];
+}
+
+/** dspm分类分级模板列表信息 */
+declare interface DspmIdentifyComplianceItem {
+  /** 识别模板ID */
+  Id?: number;
+  /** 识别模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 启用状态枚举值：0： 不启用1： 启用 */
+  Status?: number;
+  /** 模板类型枚举值：0： 内置1： 自定义 */
+  Type?: number;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 应用状态枚举值：0： 未应用1： 应用中 */
+  ApplyStatus?: number;
+}
+
+/** dspm数据识别模板数据项关联关系 */
+declare interface DspmIdentifyComplianceRuleRelation {
+  /** 数据项ID */
+  RuleId?: number;
+  /** 数据项名称 */
+  RuleName?: string;
+  /** 级别ID */
+  LevelId?: number;
+  /** 级别名称 */
+  LevelName?: string;
+  /** 级别程度单位：分数 */
+  LevelScore?: number;
+  /** 结构化规则状态枚举值：0： 未配置1： 已配置 */
+  StructuredStatus?: number;
+  /** 非结构化规则状态枚举值：0： 未配置1： 已配置 */
+  UnStructuredStatus?: number;
+  /** 数据项开启状态枚举值：0： 未开启1： 已开启 */
+  Status?: number;
+}
+
 /** Dspm身份统计信息 */
 declare interface DspmIdentifyCount {
   /** 身份类型。0-未定义 2-长期身份 3-临时身份 */
@@ -3122,6 +3272,44 @@ declare interface DspmIdentifyInfoItem {
   Uin?: string;
 }
 
+/** dspm数据识别分级组列表项 */
+declare interface DspmIdentifyLevelGroupItem {
+  /** 级别组id */
+  Id?: number;
+  /** 级别组名称 */
+  Name?: string;
+  /** 级别组描述 */
+  Description?: string;
+  /** 级别组类型枚举值：0： 内置1： 自定义 */
+  Type?: number;
+  /** 级别信息 */
+  LevelItems?: DspmIdentifyLevelItem[];
+  /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  UpdateTime?: string;
+  /** 无 */
+  ComplianceRelations?: DspmIdentifyRefComplianceInfo[];
+}
+
+/** dspm数据识别级别信息 */
+declare interface DspmIdentifyLevelItem {
+  /** 级别名称 */
+  LevelName: string;
+  /** 级别风险程度（从低到高）取值范围：[1, 10]单位：程度 */
+  LevelScore: number;
+  /** 级别id */
+  LevelId?: number;
+}
+
+/** dspm关联识别模板信息 */
+declare interface DspmIdentifyRefComplianceInfo {
+  /** 识别模板ID */
+  ComplianceId?: number;
+  /** 识别模板名称 */
+  ComplianceName?: string;
+  /** 识别模板类型枚举值：0： 内置1： 自定义 */
+  ComplianceType?: number;
+}
+
 /** dspm数据项详情 */
 declare interface DspmIdentifyRuleDetail {
   /** 数据项id */
@@ -3134,6 +3322,36 @@ declare interface DspmIdentifyRuleDetail {
   LevelName?: string;
   /** 敏感程度 */
   LevelScore?: number;
+}
+
+/** dspm分类分级数据项列表项 */
+declare interface DspmIdentifyRuleItem {
+  /** 数据项id */
+  Id?: number;
+  /** 数据项名称 */
+  Name?: string;
+  /** 数据项描述 */
+  Description?: string;
+  /** 数据项是否启用枚举值：0： 否1： 是 */
+  Status?: number;
+  /** 数据项类型枚举值：0： 内置1： 自定义 */
+  Type?: number;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 结构化规则配置状态 */
+  StructuredStatus?: boolean;
+  /** 非结构化规则配置状态 */
+  UnStructuredStatus?: boolean;
+  /** 无 */
+  ComplianceRelations?: DspmIdentifyRefComplianceInfo[];
+}
+
+/** dspm结构化数据项测试 */
+declare interface DspmIdentifyRuleStructuredTestItem {
+  /** 参数名 */
+  Name: string;
+  /** 参数类型 */
+  Value?: string;
 }
 
 /** Dspm Ip信息 */
@@ -3404,6 +3622,16 @@ declare interface DspmSensitiveScanTaskConfig {
   IsRunAtOnce?: boolean;
 }
 
+/** dspm统计项 */
+declare interface DspmStatisticsItem {
+  /** 统计项名称 */
+  Name?: string;
+  /** 统计值 */
+  Value?: number;
+  /** 描述 */
+  Desc?: string;
+}
+
 /** dspm支持的产品信息 */
 declare interface DspmSupportedAssetType {
   /** 产品名（用于查询） */
@@ -3614,7 +3842,7 @@ declare interface EdrAlertDetail {
   PublicIp?: string;
   /** 内网IP（资产富化） */
   PrivateIp?: string;
-  /** 告警详情JSON字符串（前端通过JSON.parse解析，空值为&quot;{}&quot;） */
+  /** 告警详情JSON字符串（前端通过JSON.parse解析，空值为"{}"） */
   Content?: string;
   /** 告警名称（子类型中英文名） */
   AlertName?: string;
@@ -3644,7 +3872,7 @@ declare interface EdrAlertDetail {
   SourceDesc?: string;
   /** 处理时间参数格式：2026-05-26 19:45:48 */
   ModifyTime?: string;
-  /** 情报富化结果来源（标识本次详情是否成功命中外部情报）；取值 &quot;VDC&quot; / &quot;IPAnalysis&quot; / &quot;BreakingTI&quot; / 空串 */
+  /** 情报富化结果来源（标识本次详情是否成功命中外部情报）；取值 "VDC" / "IPAnalysis" / "BreakingTI" / 空串 */
   IntelSource?: string;
   /** 综合研判，中英文已翻译，中：恶意/安全/未知；英：Malicious/Safe/Unknown */
   Verdict?: string;
@@ -5412,7 +5640,7 @@ declare interface SkillScanItem {
   SkillName?: string;
   /** Skill 描述，帮助理解 Skill 的主要用途 */
   SkillDescription?: string;
-  /** ZIP 文件的 SHA256 Hash参数格式：sha256:&lt;64位hex&gt; */
+  /** ZIP 文件的 SHA256 Hash参数格式：sha256:<64位hex> */
   ContentHash?: string;
   /** 原始上传 ZIP 文件解压后的实际文件数，也是计费的范围，扫描成功后1个文件计为1次额度 */
   UploadFileCount?: number;
@@ -6569,6 +6797,22 @@ declare interface CreateDspmAssetAccessTopologyExportJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateDspmAssetIdentifyInfoExportJobRequest {
+  /** 资产实例id */
+  AssetId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤器 */
+  Filter?: Filter;
+}
+
+declare interface CreateDspmAssetIdentifyInfoExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDspmAssetsExportJobRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -6653,6 +6897,90 @@ declare interface CreateDspmExportTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateDspmIdentifyCategoryRequest {
+  /** 分类名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateDspmIdentifyCategoryResponse {
+  /** 分类ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyComplianceCategoryRelationRequest {
+  /** 识别模板ID */
+  ComplianceId: number;
+  /** 分类ID */
+  CategoryId: number;
+  /** 父分类ID */
+  ParentCategoryId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateDspmIdentifyComplianceCategoryRelationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyComplianceGroupCopyRequest {
+  /** 来源模板ID */
+  FromId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 模板名称 */
+  Name?: string;
+  /** 模板描述 */
+  Description?: string;
+}
+
+declare interface CreateDspmIdentifyComplianceGroupCopyResponse {
+  /** 模板ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyComplianceGroupRequest {
+  /** 级别名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 描述 */
+  Description?: string;
+  /** 级别组ID */
+  LevelGroupId?: number;
+  /** 状态枚举值：0： 不启用1： 启用 */
+  Status?: number;
+}
+
+declare interface CreateDspmIdentifyComplianceGroupResponse {
+  /** 识别模板ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyComplianceRuleRelationRequest {
+  /** 识别模板ID */
+  ComplianceId: number;
+  /** 分类ID */
+  CategoryId: number;
+  /** 无 */
+  Rules: DspmIdentifyCategoryRuleRelateItem[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateDspmIdentifyComplianceRuleRelationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDspmIdentifyInfoListExportJobRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -6663,6 +6991,46 @@ declare interface CreateDspmIdentifyInfoListExportJobRequest {
 declare interface CreateDspmIdentifyInfoListExportJobResponse {
   /** 任务ID */
   JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyLevelGroupRequest {
+  /** 分级组名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 描述 */
+  Description?: string;
+  /** 无 */
+  LevelItems?: DspmAddIdentifyLevelItem[];
+}
+
+declare interface CreateDspmIdentifyLevelGroupResponse {
+  /** 分级组ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmIdentifyRuleRequest {
+  /** 数据项名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 数据项描述 */
+  Description?: string;
+  /** 数据项启用状态枚举值：0： 未启用1： 启用 */
+  Status?: number;
+  /** 结构化规则 */
+  StructuredRule?: string;
+  /** 非结构化规则 */
+  UnStructuredRule?: string;
+}
+
+declare interface CreateDspmIdentifyRuleResponse {
+  /** 数据项id */
+  Id?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6917,6 +7285,84 @@ declare interface DeleteDspmExportTaskRequest {
 }
 
 declare interface DeleteDspmExportTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmIdentifyCategoryRequest {
+  /** 分类ID集合 */
+  Ids: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmIdentifyCategoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmIdentifyComplianceCategoryRelationRequest {
+  /** 识别模板ID */
+  ComplianceId: number;
+  /** 分类ID */
+  CategoryId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmIdentifyComplianceCategoryRelationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmIdentifyComplianceGroupRequest {
+  /** 识别模板ID集合 */
+  Ids: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmIdentifyComplianceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmIdentifyComplianceRuleRelationRequest {
+  /** 识别模板ID */
+  ComplianceId: number;
+  /** 分类ID */
+  CategoryId: number;
+  /** 数据项ID集合 */
+  RuleIds: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmIdentifyComplianceRuleRelationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmIdentifyLevelGroupRequest {
+  /** 级别组id */
+  Ids: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmIdentifyLevelGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmIdentifyRuleRequest {
+  /** 数据项id */
+  Ids: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmIdentifyRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7542,7 +7988,7 @@ declare interface DescribeCWPMachineDetailResponse {
 declare interface DescribeCWPMachinesRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** 一、主表字段筛选（需要指定 OperatorType）MachineName：主机名称，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;test-server&quot;]MachineIp：内网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;10.0.0.1&quot;]MachineWanIp：外网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;1.2.3.4&quot;]InstanceID：实例ID，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;ins-xxxxx&quot;]MachineStatus / InstanceStatus：实例状态，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;RUNNING&quot;]，可选值：RUNNING/STOPPED/EXPIREDMachineOs：操作系统类型，支持 OperatorType 7(IN)，Values示例：[&quot;1&quot;]，值为数字编码，见下方OsType说明VpcId：VPC ID，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;vpc-xxxxx&quot;]CloudFromEnum：云服务商，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;0&quot;]，值为数字编码，见下方CloudFrom说明Region ：地域，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;ap-guangzhou&quot;]AppId：账号AppId，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;1234567890&quot;]ProjectId：项目ID，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;0&quot;]二、预筛选字段（不需要指定 OperatorType）AgentStatus：Agent状态，单选，Values示例：[&quot;ONLINE&quot;]，可选值：ONLINE/OFFLINE/UNINSTALLProtectType：防护类型（综合），Values示例：[&quot;ULTIMATE&quot;]，可选值：BASIC/PRO/ULTIMATE/NONECsipProtectType：CSIP防护类型，Values示例：[&quot;ULTIMATE&quot;]，可选值：BASIC/PRO/ULTIMATE/NONECloudTags：云标签，Values示例：[&quot;tagKey$tagValue&quot;]，格式：tagKey$tagValue 或 tagKey（只匹配key），最多5个值Tags：资产标签，Values示例：[&quot;123&quot;]，值为标签IDExposedStatus：暴露状态，单选，Values示例：[&quot;EXPOSED&quot;]，可选值：NOT_APPLICABLE/EXPOSED/UNEXPOSED三、特殊筛选字段（不需要指定 OperatorType）NetworkType：网络类型，单选，Values示例：[&quot;1&quot;]，1=VPC网络, 2=基础网络, 3=非腾讯云网络MachineType：机器类型，可多选，Values示例：[&quot;CVM&quot;]，可选值：CVM/BM/ECM/LH/EKS-NATIVE/ECS/EC2/VMSCommon：通用搜索，单选，Values示例：[&quot;关键词&quot;]，同时对内网IP、外网IP、主机名称、实例ID做模糊匹配 */
+  /** 一、主表字段筛选（需要指定 OperatorType）MachineName：主机名称，支持 OperatorType 9(模糊)、7(IN)，Values示例：["test-server"]MachineIp：内网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：["10.0.0.1"]MachineWanIp：外网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：["1.2.3.4"]InstanceID：实例ID，支持 OperatorType 9(模糊)、7(IN)，Values示例：["ins-xxxxx"]MachineStatus / InstanceStatus：实例状态，支持 OperatorType 7(IN)、1(等于)，Values示例：["RUNNING"]，可选值：RUNNING/STOPPED/EXPIREDMachineOs：操作系统类型，支持 OperatorType 7(IN)，Values示例：["1"]，值为数字编码，见下方OsType说明VpcId：VPC ID，支持 OperatorType 7(IN)、1(等于)，Values示例：["vpc-xxxxx"]CloudFromEnum：云服务商，支持 OperatorType 7(IN)、1(等于)，Values示例：["0"]，值为数字编码，见下方CloudFrom说明Region ：地域，支持 OperatorType 7(IN)、1(等于)，Values示例：["ap-guangzhou"]AppId：账号AppId，支持 OperatorType 7(IN)、1(等于)，Values示例：["1234567890"]ProjectId：项目ID，支持 OperatorType 7(IN)、1(等于)，Values示例：["0"]二、预筛选字段（不需要指定 OperatorType）AgentStatus：Agent状态，单选，Values示例：["ONLINE"]，可选值：ONLINE/OFFLINE/UNINSTALLProtectType：防护类型（综合），Values示例：["ULTIMATE"]，可选值：BASIC/PRO/ULTIMATE/NONECsipProtectType：CSIP防护类型，Values示例：["ULTIMATE"]，可选值：BASIC/PRO/ULTIMATE/NONECloudTags：云标签，Values示例：["tagKey$tagValue"]，格式：tagKey$tagValue 或 tagKey（只匹配key），最多5个值Tags：资产标签，Values示例：["123"]，值为标签IDExposedStatus：暴露状态，单选，Values示例：["EXPOSED"]，可选值：NOT_APPLICABLE/EXPOSED/UNEXPOSED三、特殊筛选字段（不需要指定 OperatorType）NetworkType：网络类型，单选，Values示例：["1"]，1=VPC网络, 2=基础网络, 3=非腾讯云网络MachineType：机器类型，可多选，Values示例：["CVM"]，可选值：CVM/BM/ECM/LH/EKS-NATIVE/ECS/EC2/VMSCommon：通用搜索，单选，Values示例：["关键词"]，同时对内网IP、外网IP、主机名称、实例ID做模糊匹配 */
   Filter?: Filter;
   /** 是否需要tat状态信息 */
   NeedTatStatus?: boolean;
@@ -7989,6 +8435,24 @@ declare interface DescribeCosIpInvokeRecordFileResponse {
   Data?: string[];
   /** 文件列表详情 */
   DataSet?: CosAssetFileIdentifyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCosObjectScanTaskRequest {
+  /** 1: 敏感数据识别 2:恶意文件扫描 */
+  TaskType: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 存储桶列表 */
+  BucketSet?: string[];
+}
+
+declare interface DescribeCosObjectScanTaskResponse {
+  /** 存储桶任务详情 */
+  BucketTaskIdSet?: CosBucketTaskInfo[];
+  /** appid维度任务列表 */
+  MemberTaskIdSet?: CosAssetSyncTaskInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8445,6 +8909,46 @@ declare interface DescribeDspmAssetFieldListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDspmAssetFieldSamplesRequest {
+  /** 资产实例ID */
+  AssetId: string;
+  /** 数据库名 */
+  DbName: string;
+  /** 表名 */
+  TableName: string;
+  /** 字段名 */
+  FieldName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** schema名 */
+  SchemaName?: string;
+}
+
+declare interface DescribeDspmAssetFieldSamplesResponse {
+  /** 无 */
+  DataSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAssetIdentifyInfoListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 识别模板id */
+  ComplianceId?: number;
+}
+
+declare interface DescribeDspmAssetIdentifyInfoListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 结果集 */
+  DataSet?: DspmAssetIdentifyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDspmAssetIdsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -8562,7 +9066,7 @@ declare interface DescribeDspmBackupLogListRequest {
   MemberId?: string[];
   /** 排序方式(desc=倒叙,asc=升序) */
   Sort?: string;
-  /** 排序字段(支持&#39;StartTime&#39;) */
+  /** 排序字段(支持'StartTime') */
   Field?: string;
   /** 开始时间 */
   StartTime?: number;
@@ -8643,6 +9147,108 @@ declare interface DescribeDspmExportTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDspmIdentifyCategoryListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyCategoryListResponse {
+  /** 总数单位：数量 */
+  TotalCount?: number;
+  /** 无 */
+  DataSet?: DspmIdentifyCategoryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyComplianceCategoryRuleListRequest {
+  /** 识别模板ID */
+  ComplianceId: number;
+  /** 分类ID */
+  CategoryId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyComplianceCategoryRuleListResponse {
+  /** 总数单位：数量 */
+  TotalCount?: number;
+  /** 无 */
+  DataSet?: DspmIdentifyCategoryRuleRelateDetailItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyComplianceGroupDetailRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 识别模板ID */
+  Id?: number;
+}
+
+declare interface DescribeDspmIdentifyComplianceGroupDetailResponse {
+  /** 识别模板ID */
+  Id?: number;
+  /** 识别模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 模板类型枚举值：0： 内置1： 自定义 */
+  Type?: number;
+  /** 状态枚举值：0： 未启用1： 启用 */
+  Status?: number;
+  /** 关联级别组ID */
+  LevelGroupId?: number;
+  /** 无 */
+  Detail?: DspmIdentifyComplianceCategoryRelation[];
+  /** 关联级别组名称 */
+  LevelGroupName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyComplianceGroupListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyComplianceGroupListResponse {
+  /** 总数单位：数量 */
+  TotalCount?: number;
+  /** 无 */
+  DataSet?: DspmIdentifyComplianceItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyDistributionStatisticsRequest {
+  /** 统计类型枚举值：FieldTop5Asset： 识别字段Top5FieldCategoryDistribution： 识别字段分类分布FieldLevelDistribution： 识别字段级别分布AssetDistribution： 识别资产分布 */
+  StatType: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 资产类型枚举值：cdb： 云数据库MySQLmariadb： 云数据库MariaDB */
+  AssetType?: string;
+  /** 识别模板id */
+  ComplianceId?: number;
+}
+
+declare interface DescribeDspmIdentifyDistributionStatisticsResponse {
+  /** 结果 */
+  DataSet?: DspmStatisticsItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDspmIdentifyIdListRequest {
   /** 筛选项 */
   Filter?: Filter;
@@ -8693,6 +9299,86 @@ declare interface DescribeDspmIdentifyInfoResponse {
   AssetCount?: number | null;
   /** 云账号总数 */
   UinAccountCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyLevelGroupListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyLevelGroupListResponse {
+  /** 总数单位：数量 */
+  TotalCount?: number;
+  /** 无 */
+  DataSet?: DspmIdentifyLevelGroupItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyRuleDetailRequest {
+  /** 数据项id */
+  Id: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmIdentifyRuleDetailResponse {
+  /** 数据项id */
+  Id?: number;
+  /** 数据项名称 */
+  Name?: string;
+  /** 数据项描述 */
+  Description?: string;
+  /** 数据项是否启用枚举值：0： 否1： 是默认值：0 */
+  Status?: number;
+  /** 数据项类型枚举值：0： 内置1： 自定义 */
+  Type?: number;
+  /** 结构化规则 */
+  StructuredRule?: string;
+  /** 非结构化规则 */
+  UnStructuredRule?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyRuleListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmIdentifyRuleListResponse {
+  /** 总数单位：数量 */
+  TotalCount?: number;
+  /** 结果 */
+  DataSet?: DspmIdentifyRuleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmIdentifyRuleTestResultRequest {
+  /** 规则类型枚举值：structured： 结构化规则unstructrued： 非结构化规则 */
+  RuleType: string;
+  /** 规则内容 */
+  RuleContent?: string;
+  /** 数据项id */
+  RuleId?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 结构化测试内容 */
+  StructuredTestContent?: DspmIdentifyRuleStructuredTestItem[];
+  /** 非结构化测试内容 */
+  UnStructuredTestContent?: string;
+}
+
+declare interface DescribeDspmIdentifyRuleTestResultResponse {
+  /** 是否匹配成功枚举值：true： 匹配成功false： 匹配失败 */
+  IsMatch?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10499,6 +11185,32 @@ declare interface ModifyCosAuditMonitorAccountResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCosAuditObjectIdentifyStatusRequest {
+  /** 资源id */
+  ResourceId: string;
+  /** 文本识别状态 */
+  TextIdentifyStatus: number;
+  /** 图片识别状态 */
+  ImageIdentifyStatus: number;
+}
+
+declare interface ModifyCosAuditObjectIdentifyStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCosAuditObjectSampleRateRequest {
+  /** 存储桶资产id集合 */
+  BucketIdSet: number[];
+  /** 采样率集合 */
+  SampleRateSet: number[];
+}
+
+declare interface ModifyCosAuditObjectSampleRateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCosMarkInfoRequest {
   /** 需要修改的存储桶列表 */
   BucketNameSet: CosBucketInfo[];
@@ -10523,6 +11235,18 @@ declare interface ModifyDspmAccessRecordRequest {
 }
 
 declare interface ModifyDspmAccessRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmApplyingIdentifyComplianceGroupRequest {
+  /** 识别模板id */
+  ComplianceId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmApplyingIdentifyComplianceGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10603,6 +11327,22 @@ declare interface ModifyDspmAssetDataScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDspmAssetDataScanTaskStatusRequest {
+  /** 任务ID */
+  TaskIds: number[];
+  /** 任务状态枚举值：1： 识别中2： 识别终止3： 识别成功4： 识别失败5： 暂停0： 未识别 */
+  Status: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmAssetDataScanTaskStatusResponse {
+  /** 无 */
+  DataSet?: DspmAssetIdentifyTaskStatus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDspmAssetLogDeliverySwitchRequest {
   /** 实例id */
   AssetId: string;
@@ -10649,6 +11389,68 @@ declare interface ModifyDspmBackupSettingResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDspmIdentifyCategoryRequest {
+  /** 分类ID */
+  Id: number;
+  /** 分类名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmIdentifyCategoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyComplianceGroupRequest {
+  /** 识别模板ID */
+  Id: number;
+  /** 识别模板名称 */
+  Name?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 描述 */
+  Description?: string;
+  /** 状态枚举值：0： 未启用1： 启用 */
+  Status?: number;
+}
+
+declare interface ModifyDspmIdentifyComplianceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyComplianceGroupStatusRequest {
+  /** 识别模板ID */
+  Id: number;
+  /** 启用状态枚举值：0： 不启用1： 启用 */
+  Status: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmIdentifyComplianceGroupStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyComplianceRuleLevelInfoRequest {
+  /** 识别模板ID */
+  ComplianceId: number;
+  /** 数据项id */
+  RuleId: number;
+  /** 级别项id */
+  LevelId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmIdentifyComplianceRuleLevelInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDspmIdentifyInfoRequest {
   /** 对象。uin或person id */
   Subject: string;
@@ -10657,6 +11459,76 @@ declare interface ModifyDspmIdentifyInfoRequest {
 }
 
 declare interface ModifyDspmIdentifyInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyLevelGroupRequest {
+  /** 级别组id */
+  Id: number;
+  /** 级别组名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 级别组描述 */
+  Description?: string;
+  /** 级别信息 */
+  LevelItems?: DspmIdentifyLevelItem[];
+}
+
+declare interface ModifyDspmIdentifyLevelGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyLevelItemRequest {
+  /** 级别组id */
+  Id: number;
+  /** 级别组名称 */
+  Name?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 敏感程度分取值范围：[1, 10]单位：敏感程度 */
+  LevelScore?: number;
+}
+
+declare interface ModifyDspmIdentifyLevelItemResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyRuleRequest {
+  /** 数据项id */
+  Id: number;
+  /** 数据项名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 数据项描述 */
+  Description?: string;
+  /** 数据项启用状态枚举值：0： 未启用1： 启用 */
+  Status?: number;
+  /** 结构化规则 */
+  StructuredRule?: string;
+  /** 非结构化规则 */
+  UnStructuredRule?: string;
+}
+
+declare interface ModifyDspmIdentifyRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmIdentifyRuleStatusRequest {
+  /** 数据项id */
+  Ids: number[];
+  /** 数据项状态枚举值：0： 关闭1： 开启 */
+  Status: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmIdentifyRuleStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10758,7 +11630,7 @@ declare interface ModifyEDRRuleRequest {
   RuleType: number;
   /** 执行动作 / Action: 0-告警/Alert, 1-放行/Allow, 2-告警并拦截/Alert and Block */
   AlertAction: number;
-  /** 生效资产 / Effective Scope: 0-指定主机/Specified Hosts, 1-全部主机/All Hosts, 2-专业版/Professional, 3-旗舰版/Flagship, 4-专业版+旗舰版/Professional+Flagship QUUIDS []string json:&quot;QUUIDS&quot; // 主机列表 / Host QUUIDS (when Scope=0) */
+  /** 生效资产 / Effective Scope: 0-指定主机/Specified Hosts, 1-全部主机/All Hosts, 2-专业版/Professional, 3-旗舰版/Flagship, 4-专业版+旗舰版/Professional+Flagship QUUIDS []string json:"QUUIDS" // 主机列表 / Host QUUIDS (when Scope=0) */
   CWPScope: number;
   /** 容器生效镜像范围 / Container Image Scope: 0-指定镜像/Specified Images, 1-全部镜像/All Images */
   TCSSScope: number;
@@ -11204,12 +12076,28 @@ declare interface Csip {
   CreateDspmApproveHistoryExportJob(data?: CreateDspmApproveHistoryExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmApproveHistoryExportJobResponse>;
   /** 创建Dspm资产访问拓扑导出任务 {@link CreateDspmAssetAccessTopologyExportJobRequest} {@link CreateDspmAssetAccessTopologyExportJobResponse} */
   CreateDspmAssetAccessTopologyExportJob(data?: CreateDspmAssetAccessTopologyExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetAccessTopologyExportJobResponse>;
+  /** 创建Dspm资产数据识别结果导出任务 {@link CreateDspmAssetIdentifyInfoExportJobRequest} {@link CreateDspmAssetIdentifyInfoExportJobResponse} */
+  CreateDspmAssetIdentifyInfoExportJob(data: CreateDspmAssetIdentifyInfoExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetIdentifyInfoExportJobResponse>;
   /** 创建Dspm资产列表导出任务 {@link CreateDspmAssetsExportJobRequest} {@link CreateDspmAssetsExportJobResponse} */
   CreateDspmAssetsExportJob(data?: CreateDspmAssetsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetsExportJobResponse>;
   /** 创建日志导出任务 {@link CreateDspmExportTaskRequest} {@link CreateDspmExportTaskResponse} */
   CreateDspmExportTask(data?: CreateDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmExportTaskResponse>;
+  /** 创建dspm数据识别分类 {@link CreateDspmIdentifyCategoryRequest} {@link CreateDspmIdentifyCategoryResponse} */
+  CreateDspmIdentifyCategory(data: CreateDspmIdentifyCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyCategoryResponse>;
+  /** 创建dspm数据识别模板分类关联 {@link CreateDspmIdentifyComplianceCategoryRelationRequest} {@link CreateDspmIdentifyComplianceCategoryRelationResponse} */
+  CreateDspmIdentifyComplianceCategoryRelation(data: CreateDspmIdentifyComplianceCategoryRelationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyComplianceCategoryRelationResponse>;
+  /** 创建dspm数据识别模板 {@link CreateDspmIdentifyComplianceGroupRequest} {@link CreateDspmIdentifyComplianceGroupResponse} */
+  CreateDspmIdentifyComplianceGroup(data: CreateDspmIdentifyComplianceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyComplianceGroupResponse>;
+  /** 复制dspm数据识别模板 {@link CreateDspmIdentifyComplianceGroupCopyRequest} {@link CreateDspmIdentifyComplianceGroupCopyResponse} */
+  CreateDspmIdentifyComplianceGroupCopy(data: CreateDspmIdentifyComplianceGroupCopyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyComplianceGroupCopyResponse>;
+  /** 创建dspm数据识别模板数据项关联 {@link CreateDspmIdentifyComplianceRuleRelationRequest} {@link CreateDspmIdentifyComplianceRuleRelationResponse} */
+  CreateDspmIdentifyComplianceRuleRelation(data: CreateDspmIdentifyComplianceRuleRelationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyComplianceRuleRelationResponse>;
   /** 创建Dspm身份列表导出任务 {@link CreateDspmIdentifyInfoListExportJobRequest} {@link CreateDspmIdentifyInfoListExportJobResponse} */
   CreateDspmIdentifyInfoListExportJob(data?: CreateDspmIdentifyInfoListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyInfoListExportJobResponse>;
+  /** 创建dspm数据识别分级组 {@link CreateDspmIdentifyLevelGroupRequest} {@link CreateDspmIdentifyLevelGroupResponse} */
+  CreateDspmIdentifyLevelGroup(data: CreateDspmIdentifyLevelGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyLevelGroupResponse>;
+  /** 创建dspm数据识别数据项 {@link CreateDspmIdentifyRuleRequest} {@link CreateDspmIdentifyRuleResponse} */
+  CreateDspmIdentifyRule(data: CreateDspmIdentifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyRuleResponse>;
   /** 创建Dspm个人身份 {@link CreateDspmPersonalIdentifyRequest} {@link CreateDspmPersonalIdentifyResponse} */
   CreateDspmPersonalIdentify(data: CreateDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmPersonalIdentifyResponse>;
   /** 创建Dspm风险导出任务 {@link CreateDspmRiskExportJobRequest} {@link CreateDspmRiskExportJobResponse} */
@@ -11240,6 +12128,18 @@ declare interface Csip {
   DeleteDspmBackupLogList(data: DeleteDspmBackupLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmBackupLogListResponse>;
   /** 删除导出任务 {@link DeleteDspmExportTaskRequest} {@link DeleteDspmExportTaskResponse} */
   DeleteDspmExportTask(data?: DeleteDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmExportTaskResponse>;
+  /** 删除dspm数据识别分类 {@link DeleteDspmIdentifyCategoryRequest} {@link DeleteDspmIdentifyCategoryResponse} */
+  DeleteDspmIdentifyCategory(data: DeleteDspmIdentifyCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmIdentifyCategoryResponse>;
+  /** 删除dspm数据识别模板分类关联 {@link DeleteDspmIdentifyComplianceCategoryRelationRequest} {@link DeleteDspmIdentifyComplianceCategoryRelationResponse} */
+  DeleteDspmIdentifyComplianceCategoryRelation(data: DeleteDspmIdentifyComplianceCategoryRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmIdentifyComplianceCategoryRelationResponse>;
+  /** 删除dspm数据识别模板 {@link DeleteDspmIdentifyComplianceGroupRequest} {@link DeleteDspmIdentifyComplianceGroupResponse} */
+  DeleteDspmIdentifyComplianceGroup(data: DeleteDspmIdentifyComplianceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmIdentifyComplianceGroupResponse>;
+  /** 删除dspm数据识别模板数据项关联 {@link DeleteDspmIdentifyComplianceRuleRelationRequest} {@link DeleteDspmIdentifyComplianceRuleRelationResponse} */
+  DeleteDspmIdentifyComplianceRuleRelation(data: DeleteDspmIdentifyComplianceRuleRelationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmIdentifyComplianceRuleRelationResponse>;
+  /** 删除dspm数据识别分级组 {@link DeleteDspmIdentifyLevelGroupRequest} {@link DeleteDspmIdentifyLevelGroupResponse} */
+  DeleteDspmIdentifyLevelGroup(data: DeleteDspmIdentifyLevelGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmIdentifyLevelGroupResponse>;
+  /** 删除dspm数据识别数据项 {@link DeleteDspmIdentifyRuleRequest} {@link DeleteDspmIdentifyRuleResponse} */
+  DeleteDspmIdentifyRule(data: DeleteDspmIdentifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmIdentifyRuleResponse>;
   /** 删除Dspm个人身份 {@link DeleteDspmPersonalIdentifyRequest} {@link DeleteDspmPersonalIdentifyResponse} */
   DeleteDspmPersonalIdentify(data: DeleteDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmPersonalIdentifyResponse>;
   /** 删除恢复日志 {@link DeleteDspmRestoreLogListRequest} {@link DeleteDspmRestoreLogListResponse} */
@@ -11350,6 +12250,8 @@ declare interface Csip {
   DescribeCosIpInvokeLog(data: DescribeCosIpInvokeLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosIpInvokeLogResponse>;
   /** 查看cos调用记录文件列表 {@link DescribeCosIpInvokeRecordFileRequest} {@link DescribeCosIpInvokeRecordFileResponse} */
   DescribeCosIpInvokeRecordFile(data: DescribeCosIpInvokeRecordFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosIpInvokeRecordFileResponse>;
+  /** 查看cos扫描任务状态 {@link DescribeCosObjectScanTaskRequest} {@link DescribeCosObjectScanTaskResponse} */
+  DescribeCosObjectScanTask(data: DescribeCosObjectScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosObjectScanTaskResponse>;
   /** 查看cos统计概览 {@link DescribeCosOverviewRequest} {@link DescribeCosOverviewResponse} */
   DescribeCosOverview(data?: DescribeCosOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosOverviewResponse>;
   /** 告警策略列表 {@link DescribeCosPolicyRequest} {@link DescribeCosPolicyResponse} */
@@ -11404,6 +12306,10 @@ declare interface Csip {
   DescribeDspmAssetDatabases(data: DescribeDspmAssetDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetDatabasesResponse>;
   /** 查询dspm资产字段信息列表 {@link DescribeDspmAssetFieldListRequest} {@link DescribeDspmAssetFieldListResponse} */
   DescribeDspmAssetFieldList(data: DescribeDspmAssetFieldListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetFieldListResponse>;
+  /** 查询dspm资产字段样本值 {@link DescribeDspmAssetFieldSamplesRequest} {@link DescribeDspmAssetFieldSamplesResponse} */
+  DescribeDspmAssetFieldSamples(data: DescribeDspmAssetFieldSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetFieldSamplesResponse>;
+  /** 查询dspm资产数据识别信息列表 {@link DescribeDspmAssetIdentifyInfoListRequest} {@link DescribeDspmAssetIdentifyInfoListResponse} */
+  DescribeDspmAssetIdentifyInfoList(data?: DescribeDspmAssetIdentifyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetIdentifyInfoListResponse>;
   /** 查询Dspm资产id列表 {@link DescribeDspmAssetIdsRequest} {@link DescribeDspmAssetIdsResponse} */
   DescribeDspmAssetIds(data?: DescribeDspmAssetIdsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetIdsResponse>;
   /** 查询Dspm资产登录凭据 {@link DescribeDspmAssetLoginCredentialRequest} {@link DescribeDspmAssetLoginCredentialResponse} */
@@ -11424,12 +12330,30 @@ declare interface Csip {
   DescribeDspmDictionaryList(data: DescribeDspmDictionaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmDictionaryListResponse>;
   /** 查询导出任务 {@link DescribeDspmExportTaskRequest} {@link DescribeDspmExportTaskResponse} */
   DescribeDspmExportTask(data?: DescribeDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmExportTaskResponse>;
+  /** 查询dspm数据识别分类列表 {@link DescribeDspmIdentifyCategoryListRequest} {@link DescribeDspmIdentifyCategoryListResponse} */
+  DescribeDspmIdentifyCategoryList(data?: DescribeDspmIdentifyCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyCategoryListResponse>;
+  /** 查询dspm数据识别模板分类关联数据项列表 {@link DescribeDspmIdentifyComplianceCategoryRuleListRequest} {@link DescribeDspmIdentifyComplianceCategoryRuleListResponse} */
+  DescribeDspmIdentifyComplianceCategoryRuleList(data: DescribeDspmIdentifyComplianceCategoryRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyComplianceCategoryRuleListResponse>;
+  /** 查询dspm数据识别模板详情 {@link DescribeDspmIdentifyComplianceGroupDetailRequest} {@link DescribeDspmIdentifyComplianceGroupDetailResponse} */
+  DescribeDspmIdentifyComplianceGroupDetail(data?: DescribeDspmIdentifyComplianceGroupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyComplianceGroupDetailResponse>;
+  /** 查询dspm数据识别模板列表 {@link DescribeDspmIdentifyComplianceGroupListRequest} {@link DescribeDspmIdentifyComplianceGroupListResponse} */
+  DescribeDspmIdentifyComplianceGroupList(data?: DescribeDspmIdentifyComplianceGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyComplianceGroupListResponse>;
+  /** 查询dspm数据识别分布统计 {@link DescribeDspmIdentifyDistributionStatisticsRequest} {@link DescribeDspmIdentifyDistributionStatisticsResponse} */
+  DescribeDspmIdentifyDistributionStatistics(data: DescribeDspmIdentifyDistributionStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyDistributionStatisticsResponse>;
   /** 查询Dspm身份id列表 {@link DescribeDspmIdentifyIdListRequest} {@link DescribeDspmIdentifyIdListResponse} */
   DescribeDspmIdentifyIdList(data?: DescribeDspmIdentifyIdListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyIdListResponse>;
   /** 查询Dspm身份信息 {@link DescribeDspmIdentifyInfoRequest} {@link DescribeDspmIdentifyInfoResponse} */
   DescribeDspmIdentifyInfo(data?: DescribeDspmIdentifyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyInfoResponse>;
   /** 查询Dspm身份信息列表 {@link DescribeDspmIdentifyInfoListRequest} {@link DescribeDspmIdentifyInfoListResponse} */
   DescribeDspmIdentifyInfoList(data?: DescribeDspmIdentifyInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyInfoListResponse>;
+  /** 查询dspm数据识别分级组列表 {@link DescribeDspmIdentifyLevelGroupListRequest} {@link DescribeDspmIdentifyLevelGroupListResponse} */
+  DescribeDspmIdentifyLevelGroupList(data?: DescribeDspmIdentifyLevelGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyLevelGroupListResponse>;
+  /** 查询dspm数据识别数据项详情 {@link DescribeDspmIdentifyRuleDetailRequest} {@link DescribeDspmIdentifyRuleDetailResponse} */
+  DescribeDspmIdentifyRuleDetail(data: DescribeDspmIdentifyRuleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyRuleDetailResponse>;
+  /** 查询dspm数据识别数据项列表 {@link DescribeDspmIdentifyRuleListRequest} {@link DescribeDspmIdentifyRuleListResponse} */
+  DescribeDspmIdentifyRuleList(data?: DescribeDspmIdentifyRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyRuleListResponse>;
+  /** 查询dspm数据识别数据项验证结果 {@link DescribeDspmIdentifyRuleTestResultRequest} {@link DescribeDspmIdentifyRuleTestResultResponse} */
+  DescribeDspmIdentifyRuleTestResult(data: DescribeDspmIdentifyRuleTestResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyRuleTestResultResponse>;
   /** 日志列表信息 {@link DescribeDspmLogListRequest} {@link DescribeDspmLogListResponse} */
   DescribeDspmLogList(data?: DescribeDspmLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmLogListResponse>;
   /** 获取已购Dspm订单的信息 {@link DescribeDspmPayInfoRequest} {@link DescribeDspmPayInfoResponse} */
@@ -11594,10 +12518,16 @@ declare interface Csip {
   ModifyAlarmRiskStatus(data: ModifyAlarmRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmRiskStatusResponse>;
   /** 修改cos审计监测账号 {@link ModifyCosAuditMonitorAccountRequest} {@link ModifyCosAuditMonitorAccountResponse} */
   ModifyCosAuditMonitorAccount(data: ModifyCosAuditMonitorAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditMonitorAccountResponse>;
+  /** 修改cos对象存储识别状态 {@link ModifyCosAuditObjectIdentifyStatusRequest} {@link ModifyCosAuditObjectIdentifyStatusResponse} */
+  ModifyCosAuditObjectIdentifyStatus(data: ModifyCosAuditObjectIdentifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditObjectIdentifyStatusResponse>;
+  /** 设置对象存储内容识别采样率 {@link ModifyCosAuditObjectSampleRateRequest} {@link ModifyCosAuditObjectSampleRateResponse} */
+  ModifyCosAuditObjectSampleRate(data: ModifyCosAuditObjectSampleRateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditObjectSampleRateResponse>;
   /** 修改对象存储备注信息 {@link ModifyCosMarkInfoRequest} {@link ModifyCosMarkInfoResponse} */
   ModifyCosMarkInfo(data: ModifyCosMarkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosMarkInfoResponse>;
   /** 修改Dspm访问管理信息 {@link ModifyDspmAccessRecordRequest} {@link ModifyDspmAccessRecordResponse} */
   ModifyDspmAccessRecord(data?: ModifyDspmAccessRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAccessRecordResponse>;
+  /** 修改dspm当前应用的数据识别模板 {@link ModifyDspmApplyingIdentifyComplianceGroupRequest} {@link ModifyDspmApplyingIdentifyComplianceGroupResponse} */
+  ModifyDspmApplyingIdentifyComplianceGroup(data: ModifyDspmApplyingIdentifyComplianceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmApplyingIdentifyComplianceGroupResponse>;
   /** 修改Dspm审批单状态 {@link ModifyDspmApproveStatusRequest} {@link ModifyDspmApproveStatusResponse} */
   ModifyDspmApproveStatus(data: ModifyDspmApproveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmApproveStatusResponse>;
   /** 修改Dspm资产账号信息 {@link ModifyDspmAssetAccountRequest} {@link ModifyDspmAssetAccountResponse} */
@@ -11606,14 +12536,32 @@ declare interface Csip {
   ModifyDspmAssetAccountPrivileges(data: ModifyDspmAssetAccountPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetAccountPrivilegesResponse>;
   /** 修改Dspm资产数据识别扫描任务 {@link ModifyDspmAssetDataScanTaskRequest} {@link ModifyDspmAssetDataScanTaskResponse} */
   ModifyDspmAssetDataScanTask(data: ModifyDspmAssetDataScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetDataScanTaskResponse>;
+  /** 修改Dspm资产数据识别扫描任务状态 {@link ModifyDspmAssetDataScanTaskStatusRequest} {@link ModifyDspmAssetDataScanTaskStatusResponse} */
+  ModifyDspmAssetDataScanTaskStatus(data: ModifyDspmAssetDataScanTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetDataScanTaskStatusResponse>;
   /** 修改Dspm资产日志投递开关 {@link ModifyDspmAssetLogDeliverySwitchRequest} {@link ModifyDspmAssetLogDeliverySwitchResponse} */
   ModifyDspmAssetLogDeliverySwitch(data: ModifyDspmAssetLogDeliverySwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetLogDeliverySwitchResponse>;
   /** 修改Dspm安全分析开关 {@link ModifyDspmAssetSecurityAnalysisSwitchRequest} {@link ModifyDspmAssetSecurityAnalysisSwitchResponse} */
   ModifyDspmAssetSecurityAnalysisSwitch(data: ModifyDspmAssetSecurityAnalysisSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetSecurityAnalysisSwitchResponse>;
   /** 修改日志备份设置 {@link ModifyDspmBackupSettingRequest} {@link ModifyDspmBackupSettingResponse} */
   ModifyDspmBackupSetting(data?: ModifyDspmBackupSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmBackupSettingResponse>;
+  /** 修改dspm数据识别分类 {@link ModifyDspmIdentifyCategoryRequest} {@link ModifyDspmIdentifyCategoryResponse} */
+  ModifyDspmIdentifyCategory(data: ModifyDspmIdentifyCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyCategoryResponse>;
+  /** 修改dspm数据识别模板 {@link ModifyDspmIdentifyComplianceGroupRequest} {@link ModifyDspmIdentifyComplianceGroupResponse} */
+  ModifyDspmIdentifyComplianceGroup(data: ModifyDspmIdentifyComplianceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyComplianceGroupResponse>;
+  /** 修改dspm数据识别模板状态 {@link ModifyDspmIdentifyComplianceGroupStatusRequest} {@link ModifyDspmIdentifyComplianceGroupStatusResponse} */
+  ModifyDspmIdentifyComplianceGroupStatus(data: ModifyDspmIdentifyComplianceGroupStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyComplianceGroupStatusResponse>;
+  /** 修改dspm数据识别模板数据项关联级别信息 {@link ModifyDspmIdentifyComplianceRuleLevelInfoRequest} {@link ModifyDspmIdentifyComplianceRuleLevelInfoResponse} */
+  ModifyDspmIdentifyComplianceRuleLevelInfo(data: ModifyDspmIdentifyComplianceRuleLevelInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyComplianceRuleLevelInfoResponse>;
   /** 修改Dspm身份信息 {@link ModifyDspmIdentifyInfoRequest} {@link ModifyDspmIdentifyInfoResponse} */
   ModifyDspmIdentifyInfo(data: ModifyDspmIdentifyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyInfoResponse>;
+  /** 修改dspm数据识别分级组 {@link ModifyDspmIdentifyLevelGroupRequest} {@link ModifyDspmIdentifyLevelGroupResponse} */
+  ModifyDspmIdentifyLevelGroup(data: ModifyDspmIdentifyLevelGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyLevelGroupResponse>;
+  /** 修改dspm数据识别分级信息 {@link ModifyDspmIdentifyLevelItemRequest} {@link ModifyDspmIdentifyLevelItemResponse} */
+  ModifyDspmIdentifyLevelItem(data: ModifyDspmIdentifyLevelItemRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyLevelItemResponse>;
+  /** 修改dspm数据识别数据项 {@link ModifyDspmIdentifyRuleRequest} {@link ModifyDspmIdentifyRuleResponse} */
+  ModifyDspmIdentifyRule(data: ModifyDspmIdentifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyRuleResponse>;
+  /** 修改dspm数据识别数据项状态 {@link ModifyDspmIdentifyRuleStatusRequest} {@link ModifyDspmIdentifyRuleStatusResponse} */
+  ModifyDspmIdentifyRuleStatus(data: ModifyDspmIdentifyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyRuleStatusResponse>;
   /** 修改DspmIp信息 {@link ModifyDspmIpInfoRequest} {@link ModifyDspmIpInfoResponse} */
   ModifyDspmIpInfo(data: ModifyDspmIpInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIpInfoResponse>;
   /** 修改Dspm个人身份 {@link ModifyDspmPersonalIdentifyRequest} {@link ModifyDspmPersonalIdentifyResponse} */

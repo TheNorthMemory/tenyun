@@ -1100,7 +1100,7 @@ declare interface MonitorStreamPlayInfo {
 declare interface OriginStreamCustomizationRule {
   /** 匹配规则，可选项如下：.m3u8、.mpd、.ts、.mp4、.m4s、.m4a、.m4i、.m4v、.m4f、.aac、.webm。 */
   MatchRule: string;
-  /** 原站地址类型： 1 =&gt; IP 类型。 2 =&gt; 域名类型。 */
+  /** 原站地址类型： 1 => IP 类型。 2 => 域名类型。 */
   OriginAddressType: number;
   /** 原站 host。 */
   OriginHost: string;
@@ -1112,7 +1112,7 @@ declare interface OriginStreamCustomizationRule {
   PassThroughResponse: string;
   /** 是否透传参数，可取值：on、off。 */
   PassThroughParam: string;
-  /** url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。 url1、url2 长度限制100，不可包含特殊字符。 */
+  /** url改写， 格式为： url1<|>url2; 其中，<|> 为分隔符。 url1、url2 长度限制100，不可包含特殊字符。 */
   UrlReplaceRules: string[];
   /** options 支持，可取值：on、off，默认值：off。 */
   OptionsRequest: string;
@@ -1610,7 +1610,7 @@ declare interface SceneVideoExtraParam {
   AspectRatio?: string;
   /** 错峰模型，仅支持的模型可使用。 */
   OffPeak?: boolean;
-  /** 自动添加水印，默认左上角添加 &quot;AI生成&quot; 标识。 */
+  /** 自动添加水印，默认左上角添加 "AI生成" 标识。 */
   LogoAdd?: boolean;
   /** 使用音画同出。 */
   EnableAudio?: boolean;
@@ -1802,11 +1802,11 @@ declare interface TemplateInfo {
   Rotate?: number;
   /** 编码质量：baseline/main/high。默认baseline */
   Profile?: string;
-  /** 当设置的码率&gt;原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
   BitrateToOrig?: number;
-  /** 当设置的高度&gt;原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
   HeightToOrig?: number;
-  /** 当设置的帧率&gt;原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
   FpsToOrig?: number;
   /** 是否保留视频。0：否，1：是。 */
   NeedVideo?: number;
@@ -2905,11 +2905,11 @@ declare interface CreateLiveTranscodeTemplateRequest {
   Rotate?: number;
   /** 编码质量：baseline/main/high。默认baseline */
   Profile?: string;
-  /** 当设置的码率&gt;原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
   BitrateToOrig?: number;
-  /** 当设置的高度&gt;原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
   HeightToOrig?: number;
-  /** 当设置的帧率&gt;原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
   FpsToOrig?: number;
   /** 是否是极速高清模板，0：否，1：是。默认0。 */
   AiTransCode?: number;
@@ -3785,7 +3785,7 @@ declare interface DescribeDeliverBandwidthListResponse {
 declare interface DescribeDeliverLogDownListRequest {
   /** 开始时间。UTC 格式，例如：2022-02-09T12:36:42Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 ISO 日期格式说明。 */
   StartTime: string;
-  /** 结束时间。UTC 格式，例如：2022-02-09T12:36:42Z。注意：结束时间 - 开始时间 &lt;=7天。北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 ISO 日期格式说明。 */
+  /** 结束时间。UTC 格式，例如：2022-02-09T12:36:42Z。注意：结束时间 - 开始时间 <=7天。北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 ISO 日期格式说明。 */
   EndTime: string;
   /** 域名列表。 */
   DeliverDomains: string[];
@@ -4834,7 +4834,7 @@ declare interface DescribeOriginStreamInfoResponse {
   CacheFollowOrigin?: string | null;
   /** 状态码缓存，数组元素格式：cacheKey:intervalcacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。interval 单位 ms。当原站播放协议为hls时，此字段才会生效。 */
   CacheStatusCode?: string[] | null;
-  /** url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。url1、url2 长度限制100，不可包含特殊字符。当原站播放协议为hls时，此字段才会生效。 */
+  /** url改写， 格式为： url1<|>url2; 其中，<|> 为分隔符。url1、url2 长度限制100，不可包含特殊字符。当原站播放协议为hls时，此字段才会生效。 */
   UrlReplaceRules?: string[] | null;
   /** 是否 options 支持，可取值：on、off。当原站播放协议为hls时，此字段才会生效。 */
   OptionsRequest?: string | null;
@@ -4848,7 +4848,7 @@ declare interface DescribeOriginStreamInfoResponse {
   IndexerKeepParam?: string[] | null;
   /** 当 OriginStreamPlayType 为 hls 时生效，设置分片缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。 */
   FragmentKeepParam?: string[] | null;
-  /** 当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：media_package =&gt; 仅配置普通频道。media_package_pure_ad =&gt; 仅配置广告。media_package_mix_ad =&gt; 同时配置普通频道和广告。 */
+  /** 当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：media_package => 仅配置普通频道。media_package_pure_ad => 仅配置广告。media_package_mix_ad => 同时配置普通频道和广告。 */
   MediaPackageType?: string | null;
   /** 当 OriginStreamType = 2 且 MediaPackageType = media_package 时有效，表示 mediapackage 频道类型，可组合如下值：normal（频道）、ssai（广告）、linear_assembly（线性组装）。 */
   MediaPackageChannelTypes?: string[];
@@ -6015,11 +6015,11 @@ declare interface ModifyLiveTranscodeTemplateRequest {
   Rotate?: number;
   /** 编码质量：baseline/main/high。 */
   Profile?: string;
-  /** 当设置的码率&gt;原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
+  /** 当设置的码率>原始码率时，是否以原始码率为准。0：否， 1：是默认 0。 */
   BitrateToOrig?: number;
-  /** 当设置的高度&gt;原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
+  /** 当设置的高度>原始高度时，是否以原始高度为准。0：否， 1：是默认 0。 */
   HeightToOrig?: number;
-  /** 当设置的帧率&gt;原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
+  /** 当设置的帧率>原始帧率时，是否以原始帧率为准。0：否， 1：是默认 0。 */
   FpsToOrig?: number;
   /** 极速高清视频码率压缩比。极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)取值范围：0.0 到 0.5智能降码：0.5 到 0.9 */
   AdaptBitratePercent?: number;
@@ -6051,11 +6051,11 @@ declare interface ModifyOriginStreamInfoRequest {
   OriginStreamPlayType: string;
   /** 播放协议，可取值：rtmp、flv、hls、dash、hls|dash、customization。自定义回源协议填写 customization。 */
   CdnStreamPlayType: string[];
-  /** 原站类型：1 =&gt; 直播原站。2 =&gt; mediaPackage。 */
+  /** 原站类型：1 => 直播原站。2 => mediaPackage。 */
   OriginStreamType: number;
   /** 原站地址信息，每项用冒号分割域名（ip）、端口信息。端口为空也要带上分号，表示取默认端口。自定义回源协议填写 customization。 */
   OriginAddress: string[];
-  /** 原站地址类型：1 =&gt; IP 类型。2 =&gt; 域名类型。 */
+  /** 原站地址类型：1 => IP 类型。2 => 域名类型。 */
   OriginAddressType: number;
   /** 自定义名称 */
   CustomerName?: string;
@@ -6087,7 +6087,7 @@ declare interface ModifyOriginStreamInfoRequest {
   CacheFollowOrigin?: string;
   /** 状态码缓存，数组元素格式：cacheKey:intervalcacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。interval 单位 ms。当原站播放协议为hls时，传递此字段才会生效。 */
   CacheStatusCode?: string[];
-  /** url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。url1、url2 长度限制100，不可包含特殊字符。当原站播放协议为hls时，传递此字段才会生效。 */
+  /** url改写， 格式为： url1<|>url2; 其中，<|> 为分隔符。url1、url2 长度限制100，不可包含特殊字符。当原站播放协议为hls时，传递此字段才会生效。 */
   UrlReplaceRules?: string[];
   /** options 支持，可取值：on、off，默认值：off。当原站播放协议为hls时，传递此字段才会生效。 */
   OptionsRequest?: string;
@@ -6097,7 +6097,7 @@ declare interface ModifyOriginStreamInfoRequest {
   IndexerKeepParam?: string[];
   /** 当 OriginStreamPlayType 为 hls 时生效，设置分片缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。 */
   FragmentKeepParam?: string[];
-  /** 当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：media_package =&gt; 仅配置普通频道。media_package_pure_ad =&gt; 仅配置广告。media_package_mix_ad =&gt; 同时配置普通频道和广告。注意：配置时候，优先使用 media_package。和 MediaPackageChannelTypes 字段配合使用。 */
+  /** 当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：media_package => 仅配置普通频道。media_package_pure_ad => 仅配置广告。media_package_mix_ad => 同时配置普通频道和广告。注意：配置时候，优先使用 media_package。和 MediaPackageChannelTypes 字段配合使用。 */
   MediaPackageType?: string;
   /** 当 OriginStreamType = 2 且 MediaPackageType = media_package 时有效，表示 mediapackage 频道类型，可组合如下值：normal（频道）、ssai（广告）、linear_assembly（线性组装）。 */
   MediaPackageChannelTypes?: string[];

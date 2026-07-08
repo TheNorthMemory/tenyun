@@ -159,7 +159,7 @@ declare interface CreateSavingPlanOrderRequest {
   CommodityCode: string;
   /** 承诺时长内的小额金额（单位：元） */
   PromiseUseAmount: number;
-  /** 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:&quot;2023-10-01 00:00:00&quot;，仅支持指定日期的0点时刻 */
+  /** 节省计划的指定生效时间，若不传则为当前下单时间。传参数格式:"2023-10-01 00:00:00"，仅支持指定日期的0点时刻 */
   SpecifyEffectTime?: string;
   /** 可重入ID */
   ClientToken?: string;

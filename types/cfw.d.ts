@@ -334,7 +334,7 @@ declare interface ClusterSwitchDetail {
   PeerStatus?: number;
   /** Bypass状态 */
   Bypass?: number;
-  /** 防火墙开关操作时的进度状态：// 开启 — 自动模式（3步）&quot;AUTO_OPEN_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源&quot;AUTO_OPEN_PUSHING_ROUTES&quot; // 步骤3: 创建策略路由// 开启 — 手动模式（1步）&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源// 关闭 — 自动模式（2步）&quot;AUTO_CLOSE_DELETING_ROUTES&quot; // 步骤1: 删除策略路由&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源// 关闭 — 手动模式（1步）&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源// 修改 — 自动模式（3步）&quot;AUTO_MODIFY_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由&quot;AUTO_MODIFY_PUSHING_ROUTES&quot; // 步骤3: 创建新策略路由// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源 */
+  /** 防火墙开关操作时的进度状态：// 开启 — 自动模式（3步）"AUTO_OPEN_ORCHESTRATING" // 步骤1: 预编排策略路由"AUTO_OPEN_CREATING_RESOURCES" // 步骤2: 创建引流网络和资源"AUTO_OPEN_PUSHING_ROUTES" // 步骤3: 创建策略路由// 开启 — 手动模式（1步）"MANUAL_OPEN_CREATING_RESOURCES" // 步骤1: 创建引流网络和资源// 关闭 — 自动模式（2步）"AUTO_CLOSE_DELETING_ROUTES" // 步骤1: 删除策略路由"AUTO_CLOSE_DELETING_RESOURCES" // 步骤2: 删除引流网络和资源// 关闭 — 手动模式（1步）"MANUAL_CLOSE_DELETING_RESOURCES" // 步骤1: 删除引流网络和资源// 修改 — 自动模式（3步）"AUTO_MODIFY_ORCHESTRATING" // 步骤1: 预编排策略路由"AUTO_MODIFY_DELETING_ROUTES" // 步骤2: 删除旧策略路由"AUTO_MODIFY_PUSHING_ROUTES" // 步骤3: 创建新策略路由// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）"MANUAL_MODIFY_UPDATING_RESOURCES" // 步骤1: 更新引流网络和资源 */
   Progress?: string;
   /** 预检查项的结果 */
   CheckResult?: ClusterFwPreAccessCheckResult;
@@ -1224,7 +1224,7 @@ declare interface NatFwSwitchDetailS {
   AttachIns?: AttachInsInfo[] | null;
   /** 终端节点列表 */
   Endpoints?: EndpointInfo[] | null;
-  /** 防火墙开关操作时的进度状态：// 开启 — 自动模式（3步）&quot;AUTO_OPEN_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源&quot;AUTO_OPEN_PUSHING_ROUTES&quot; // 步骤3: 创建策略路由// 开启 — 手动模式（1步）&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源// 关闭 — 自动模式（2步）&quot;AUTO_CLOSE_DELETING_ROUTES&quot; // 步骤1: 删除策略路由&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源// 关闭 — 手动模式（1步）&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源// 修改 — 自动模式（3步）&quot;AUTO_MODIFY_ORCHESTRATING&quot; // 步骤1: 预编排策略路由&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由&quot;AUTO_MODIFY_PUSHING_ROUTES&quot; // 步骤3: 创建新策略路由// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源 */
+  /** 防火墙开关操作时的进度状态：// 开启 — 自动模式（3步）"AUTO_OPEN_ORCHESTRATING" // 步骤1: 预编排策略路由"AUTO_OPEN_CREATING_RESOURCES" // 步骤2: 创建引流网络和资源"AUTO_OPEN_PUSHING_ROUTES" // 步骤3: 创建策略路由// 开启 — 手动模式（1步）"MANUAL_OPEN_CREATING_RESOURCES" // 步骤1: 创建引流网络和资源// 关闭 — 自动模式（2步）"AUTO_CLOSE_DELETING_ROUTES" // 步骤1: 删除策略路由"AUTO_CLOSE_DELETING_RESOURCES" // 步骤2: 删除引流网络和资源// 关闭 — 手动模式（1步）"MANUAL_CLOSE_DELETING_RESOURCES" // 步骤1: 删除引流网络和资源// 修改 — 自动模式（3步）"AUTO_MODIFY_ORCHESTRATING" // 步骤1: 预编排策略路由"AUTO_MODIFY_DELETING_ROUTES" // 步骤2: 删除旧策略路由"AUTO_MODIFY_PUSHING_ROUTES" // 步骤3: 创建新策略路由// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）"MANUAL_MODIFY_UPDATING_RESOURCES" // 步骤1: 更新引流网络和资源 */
   Progress?: string;
   /** 预接入检查结果 */
   CheckResult?: ClusterFwPreAccessCheckResult;
@@ -1426,7 +1426,7 @@ declare interface RegionCidrConfig {
 declare interface RegionFwStatus {
   /** 地域 */
   Region?: string;
-  /** 引流网络部署状态&quot;NotDeployed&quot; 防火墙集群未部署&quot;Deployed&quot; 防火墙集群已部署，但未创建引流网络&quot;DeployedCustomOnly&quot; 防火墙集群已部署，但内网段被全覆盖，无法自动选择引流网络，需自定义设置引流网段&quot;Auto&quot; 防火墙集群已部署，并自动选择网段创建了引流网络&quot;Custom&quot; 防火墙集群已部署，并根据用户自定义网段创建了引流网络 */
+  /** 引流网络部署状态"NotDeployed" 防火墙集群未部署"Deployed" 防火墙集群已部署，但未创建引流网络"DeployedCustomOnly" 防火墙集群已部署，但内网段被全覆盖，无法自动选择引流网络，需自定义设置引流网段"Auto" 防火墙集群已部署，并自动选择网段创建了引流网络"Custom" 防火墙集群已部署，并根据用户自定义网段创建了引流网络 */
   Status?: string;
   /** 引流网络的cidr，如果没有部署引流网络则为空 */
   Cidr?: string;
@@ -3658,6 +3658,8 @@ declare interface DescribeOfflineExportTemporaryCredentialsResponse {
   ReturnCode?: number;
   /** 返回信息 success 成功 其他 不成功 */
   ReturnMsg?: string;
+  /** 临时下载链接 */
+  Link?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4854,7 +4856,7 @@ declare interface UpdateCheckCcnNonDirectFlagRequest {
 }
 
 declare interface UpdateCheckCcnNonDirectFlagResponse {
-  /** 检测更新状态&quot;Checked&quot;：重新检测完成&quot;Checking&quot;: 正在重新检测中，请稍后刷新状态查看 */
+  /** 检测更新状态"Checked"：重新检测完成"Checking": 正在重新检测中，请稍后刷新状态查看 */
   Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

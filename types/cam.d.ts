@@ -472,6 +472,8 @@ declare interface StrategyInfo {
   UpdateTime?: string | null;
   /** 标签列表 */
   Tags?: Tag[];
+  /** 权限级别枚举值：Global： 全局权限Finance： 财务权限CloudProduct： 云产品权限 */
+  PermissionLevel?: string;
 }
 
 /** 子用户信息 */
@@ -1692,7 +1694,7 @@ declare interface ListPoliciesRequest {
 declare interface ListPoliciesResponse {
   /** 策略总数 */
   TotalNum?: number;
-  /** 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中： policyId：策略 id policyName：策略名addTime：策略创建时间type：1 表示自定义策略，2 表示预设策略 description：策略描述 createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略Attachments: 关联的用户数ServiceType: 策略关联的产品IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略 */
+  /** 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中：policyId：策略 idpolicyName：策略名addTime：策略创建时间type：1 表示自定义策略，2 表示预设策略description：策略描述createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略Attachments: 关联的用户数ServiceType: 策略关联的产品IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略 */
   List?: StrategyInfo[];
   /** 保留字段 */
   ServiceTypeList?: string[];

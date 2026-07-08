@@ -437,7 +437,7 @@ declare namespace V20180717 {
     DrmType?: string;
     /** DRM 的密钥提供商，取值范围：SDMC：华曦达；VOD：云点播。默认值为 VOD 。华曦达服务后续逐步下线，请使用VOD DRM加密服务。 */
     DrmKeyProvider?: string;
-    /** DRM的加密类型，取值范围：{&quot;cbcs&quot;, &quot;cenc&quot;} */
+    /** DRM的加密类型，取值范围：{"cbcs", "cenc"} */
     DrmEncryptType?: string;
     /** 自适应转码输入流参数信息，最多输入10路流。 */
     StreamInfos?: AdaptiveStreamTemplate[];
@@ -4823,13 +4823,13 @@ declare namespace V20180717 {
     SubtitleModel?: string;
     /** 是否开启OCR字幕提取，默认取OFF。 当且仅当SubtitleEraseMethod取auto时支持开启OCR字幕提取，开启后将识别自动擦除区域内出现时间最长且最稳定的文字区域为字幕区域，对字幕区域中的文字进行提取和擦除。 ON 开启OFF 关闭 */
     OcrSwitch?: string;
-    /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取&quot;ON&quot;时生效。 zh_en 中英文 multi 其他 其他具体支持识别如下语言： 中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
+    /** 字幕语言，用于指导OCR识别，默认取zh_en；仅当OcrSwitch取"ON"时生效。 zh_en 中英文 multi 其他 其他具体支持识别如下语言： 中文、英文、日文、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语、印地语、阿拉伯语、印度-孟加拉语、印度-古吉拉特语、印度-卡纳达语 、印度-马拉亚拉姆语 、印度-泰米尔语、印度-泰卢固语、斯洛文尼亚语、波兰语、加泰罗尼亚语、波斯尼亚语、捷克语、爱沙尼亚语、克罗地亚语、旁遮普语、马拉地语、阿塞拜疆语、印尼语、卢森堡语 、立陶宛语、拉脱维亚语、马耳他语、斯洛伐克语、土耳其语、哈萨克语、希腊语、爱尔兰语、白俄罗斯语、高棉语、他加禄语、普什图语、波斯语、塔吉克斯坦语 */
     SubtitleLang?: string;
-    /** 字幕文件格式，默认取vtt；仅当OcrSwitch取&quot;ON&quot;时生效。srt srt格式 vtt WebVTT格式 */
+    /** 字幕文件格式，默认取vtt；仅当OcrSwitch取"ON"时生效。srt srt格式 vtt WebVTT格式 */
     SubtitleFormat?: string;
-    /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取&quot;ON&quot;时生效。 ON 开启 OFF 关闭 */
+    /** 是否开启字幕翻译，默认取OFF；仅当OcrSwitch取"ON"时生效。 ON 开启 OFF 关闭 */
     TransSwitch?: string;
-    /** 字幕翻译目标语言，默认取en；仅当TransSwitch取&quot;ON&quot;时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
+    /** 字幕翻译目标语言，默认取en；仅当TransSwitch取"ON"时生效。当前支持以下语言：zh：简体中文en：英语ja：日语ko：韩语fr：法语es：西班牙语it：意大利语de：德语tr：土耳其语ru：俄语pt：葡萄牙语vi：越南语id：印度尼西亚语ms：马来语th：泰语ar：阿拉伯语hi：印地语 */
     TransDstLang?: string;
     /** 自动擦除自定义区域。 对选定区域，利用AI模型自动检测其中存在的擦除目标并擦除。注意：当擦除方式选择custom时，此参数将不会生效；修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。 */
     AutoAreas?: MPSEraseArea[];
@@ -8660,11 +8660,11 @@ declare namespace V20180717 {
     ReferenceType?: string;
     /** 主体音色，可绑定音色库中已有音色。当前参数为空时，当前主体不绑定音色。仅视频定制的主体支持绑定音色。 */
     ElementVoiceId?: string;
-    /** 主体参考视频，可通过视频设定主体及其细节。可上传有声视频，有声视频包含人声则触发音色定制（定制+入音色库+与主体绑定）参考视频时当前参数必填，参考图片时当前参数无效用key:value承载，如下：{ &quot;refer_videos&quot;:[ { &quot;video_url&quot;:&quot;video_url_1&quot; } ]}● 视频格式仅支持MP4/MOV● 仅支持时长介于3s～8s之间、宽高比例需为16:9或9:16的1080P视频● 至多仅支持上传1段视频，视频大小不超过200MB● video_url参数值不得为空 */
+    /** 主体参考视频，可通过视频设定主体及其细节。可上传有声视频，有声视频包含人声则触发音色定制（定制+入音色库+与主体绑定）参考视频时当前参数必填，参考图片时当前参数无效用key:value承载，如下：{ "refer_videos":[ { "video_url":"video_url_1" } ]}● 视频格式仅支持MP4/MOV● 仅支持时长介于3s～8s之间、宽高比例需为16:9或9:16的1080P视频● 至多仅支持上传1段视频，视频大小不超过200MB● video_url参数值不得为空 */
     ElementVideoList?: string;
-    /** 主体参考图，可通过多张图片设定主体及其细节。包括正面参考图和其他角度或特写参考图，其中：至少包括1张正面参考图，由frontal_image参数定义。需包括1～3张其他参考图，需与正面参考图有差异，由image_url参数定义。用key:value承载，如下：{ &quot;frontal_image&quot;:&quot;image_url_0&quot;, &quot;refer_images&quot;:[ { &quot;image_url&quot;:&quot;image_url_1&quot; }, { &quot;image_url&quot;:&quot;image_url_2&quot; }, { &quot;image_url&quot;:&quot;image_url_3&quot; } ]} */
+    /** 主体参考图，可通过多张图片设定主体及其细节。包括正面参考图和其他角度或特写参考图，其中：至少包括1张正面参考图，由frontal_image参数定义。需包括1～3张其他参考图，需与正面参考图有差异，由image_url参数定义。用key:value承载，如下：{ "frontal_image":"image_url_0", "refer_images":[ { "image_url":"image_url_1" }, { "image_url":"image_url_2" }, { "image_url":"image_url_3" } ]} */
     ElementImageList?: string;
-    /** 为主体配置标签，一个主体可以配置多个标签。用key:value承载，其中具体如下：[ { &quot;tag_id&quot;: &quot;o_101&quot; }, { &quot;tag_id&quot;: &quot;o_102&quot; }] */
+    /** 为主体配置标签，一个主体可以配置多个标签。用key:value承载，其中具体如下：[ { "tag_id": "o_101" }, { "tag_id": "o_102" }] */
     TagList?: string;
     /** 若已开通海外自定义主体库，可传入True使用海外自定义主体库。枚举值：True： 使用海外自定义主体库。False： 不使用海外自定义主体库。 */
     DisableModeration?: string;
@@ -8700,7 +8700,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 原音频文件（需要确保可访问） 模型将以此参数中传入的音频音色为示例对音色进行复刻。 入参限制：注1：音频仅支持格式：mp3、m4a、wav； 注2：上传的音频文件的时长最少应不低于 10 秒，最长应不超过 5 分钟； 注3：上传的音频文件大小需不超过20mb； 注4：音频内容免涉版权，否则会被下架或销毁。 */
     AudioFileInfo: AigcAudioCloneInputFileInfo;
-    /** 自定义的声音ID，示例：&quot;vidu01&quot;。入参限制：自定义的 voice_id 长度范围[8,256];首字符必须为英文字母;允许数字、字母、横线、下划线;末位字符不可为 -、_voice_id 不可与已有 id 重复，否则会报错. */
+    /** 自定义的声音ID，示例："vidu01"。入参限制：自定义的 voice_id 长度范围[8,256];首字符必须为英文字母;允许数字、字母、横线、下划线;末位字符不可为 -、_voice_id 不可与已有 id 重复，否则会报错. */
     VoiceId: string;
     /** 复刻试听参数。参数格式：限制 1000 字符以内，模型将使用复刻后的音色朗读本段文本内容，并返回试听音频链接。 注：试听将根据字符数正常收取语音合成费用。 */
     Text: string;
@@ -8828,7 +8828,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1356\&quot;}&quot;}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;2560x1440\&quot;}&quot;}可用于开启输出多张图像，示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;sequential_image_generation\&quot;:\&quot;auto\&quot;}&quot;}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728*1024\&quot;}&quot;}支持设置透明图层：示例：{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}Kling支持设置扩图参数，示例：{AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
+    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{"AdditionalParameters": "{\"size\":\"728x1024\"}"}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{"AdditionalParameters": "{\"size\":\"728x1356\"}"}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}可用于开启输出多张图像，示例：{"AdditionalParameters": "{\"sequential_image_generation\":\"auto\"}"}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{"AdditionalParameters": "{\"size\":\"728*1024\"}"}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{"AdditionalParameters": "{\"size\":\"728*1024\"}"}支持设置透明图层：示例：{"AdditionalParameters": "{\"background\":\"transparent\"}"}Kling支持设置扩图参数，示例：{AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
     ExtInfo?: string;
   }
 
@@ -12128,11 +12128,11 @@ declare namespace V20180717 {
     Mode?: string;
     /** 采用 HTTP 回调通知 接收方式时，用于接收 3.0 格式回调的地址。注意：如果带 NotificationUrl 参数且值为空字符串时将会清空 3.0 格式回调地址。 */
     NotificationUrl?: string;
-    /** 是否接收 视频上传完成 事件通知， 默认 &quot;OFF&quot; 为忽略该事件通知，&quot;ON&quot; 为接收事件通知。 */
+    /** 是否接收 视频上传完成 事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
     UploadMediaCompleteEventSwitch?: string;
-    /** 是否接收 视频删除完成 事件通知， 默认 &quot;OFF&quot; 为忽略该事件通知，&quot;ON&quot; 为接收事件通知。 */
+    /** 是否接收 视频删除完成 事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
     DeleteMediaCompleteEventSwitch?: string;
-    /** 是否接收剪辑固化完成事件通知， 默认 &quot;OFF&quot; 为忽略该事件通知，&quot;ON&quot; 为接收事件通知。 */
+    /** 是否接收剪辑固化完成事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。 */
     PersistenceCompleteEventSwitch?: string;
     /** 回调密钥，由大小写字母及数字组成，最长32字符。配置后将在回调中发送Sign与T字段，可用于鉴权。Sign：string类型。事件通知安全签名 Sign = MD5（SignKey + T）。说明：腾讯云把加密 SignKey 和 T 进行字符串拼接后通过 MD5 计算得出 Sign 值，并将其放在通知消息里，您的后台服务器在收到通知消息后可以根据同样的算法确认 Sign 是否正确，进而确认消息是否确实来自腾讯云后台。T：int64类型。过期时间，事件通知签名过期 UNIX 时间戳。来自腾讯云的消息通知默认过期时间是10分钟，如果一条消息通知中的 t 值所指定的时间已经过期，则可以判定这条通知无效，进而可以防止网络重放攻击。T 的格式为十进制 UNIX 时间戳，即从1970年01月01日（UTC/GMT 的午夜）开始所经过的秒数。 */
     SignKey?: string;
@@ -13332,7 +13332,7 @@ declare namespace V20180717 {
     Precision?: string;
     /** 输出视频类型，取值有：hls: 输出 hls 文件。默认取值 hls。 */
     OutputMediaType?: string;
-    /** 保留字段，特殊用途时使用。 示例值：&quot;&quot; */
+    /** 保留字段，特殊用途时使用。 示例值："" */
     ExtInfo?: string;
   }
 

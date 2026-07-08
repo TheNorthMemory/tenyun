@@ -96,17 +96,17 @@ declare interface AmbientSound {
 
 /** 语音识别使用的参数 */
 declare interface AsrParam {
-  /** 转录服务使用的模型类型。示例值&quot;bigmodel-zh&quot;。语音转文本不同套餐版本支持的语言如下：V2版本(优先推荐)&quot;bigmodel-xxx&quot; ：大模型引擎，推荐使用。&quot;xxx&quot;填写具体语言，例如&quot;bigmodel-zh&quot;。&quot;xxx&quot;可以填写中文 (&quot;zh&quot;)，英语 (&quot;en&quot;)，粤语 (&quot;yue&quot;)，阿拉伯语 (&quot;ar&quot;)，德语 (&quot;de&quot;)，法语 (&quot;fr&quot;)，西班牙语 (&quot;es&quot;)，葡萄牙语 (&quot;pt&quot;)，印度尼西亚语 (&quot;id&quot;)，意大利语 (&quot;it&quot;)，韩语 (&quot;ko&quot;)，俄语 (&quot;ru&quot;)，泰语 (&quot;th&quot;)，越南语 (&quot;vi&quot;)，日语 (&quot;ja&quot;)，土耳其语 (&quot;tr&quot;)，印地语 (&quot;hi&quot;)，马来语 (&quot;ms&quot;)，荷兰语 (&quot;nl&quot;)，瑞典语 (&quot;sv&quot;)，丹麦语 (&quot;da&quot;)，芬兰语 (&quot;fi&quot;)，波兰语 (&quot;pl&quot;)，捷克语 (&quot;cs&quot;)，菲律宾语 (&quot;fil&quot;)，波斯语 (&quot;fa&quot;)，希腊语 (&quot;el&quot;)，匈牙利语 (&quot;hu&quot;)，马其顿语 (&quot;mk&quot;)，罗马尼亚语 (&quot;ro&quot;)。V1版本(旧版)标准语言引擎：&quot;16k_zh_large&quot;: 16k 大模型引擎，同时支持中文、英文、多种中文方言口音等语言的识别。&quot;16k_zh_en&quot;: 最新 16k 中英大模型引擎，同时支持中文、英语、多种中文方言口音的识别，对中英混说场景识别更优。高级语言引擎：&quot;zh-yue&quot;: 中文粤语&quot;vi&quot;: 越南语&quot;ja&quot;: 日语&quot;ko&quot;: 韩语&quot;id&quot;: 印度尼西亚语&quot;th&quot;: 泰语&quot;pt&quot;: 葡萄牙语&quot;tr&quot;: 土耳其语&quot;ar&quot;: 阿拉伯语&quot;es&quot;: 西班牙语&quot;hi&quot;: 印地语&quot;fr&quot;: 法语&quot;ms&quot;: 马来语&quot;fil&quot;: 菲律宾语&quot;de&quot;: 德语&quot;it&quot;: 意大利语&quot;ru&quot;: 俄语&quot;sv&quot;: 瑞典语&quot;da&quot;: 丹麦语&quot;no&quot;: 挪威语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
+  /** 转录服务使用的模型类型。示例值"bigmodel-zh"。语音转文本不同套餐版本支持的语言如下：V2版本(优先推荐)"bigmodel-xxx" ：大模型引擎，推荐使用。"xxx"填写具体语言，例如"bigmodel-zh"。"xxx"可以填写中文 ("zh")，英语 ("en")，粤语 ("yue")，阿拉伯语 ("ar")，德语 ("de")，法语 ("fr")，西班牙语 ("es")，葡萄牙语 ("pt")，印度尼西亚语 ("id")，意大利语 ("it")，韩语 ("ko")，俄语 ("ru")，泰语 ("th")，越南语 ("vi")，日语 ("ja")，土耳其语 ("tr")，印地语 ("hi")，马来语 ("ms")，荷兰语 ("nl")，瑞典语 ("sv")，丹麦语 ("da")，芬兰语 ("fi")，波兰语 ("pl")，捷克语 ("cs")，菲律宾语 ("fil")，波斯语 ("fa")，希腊语 ("el")，匈牙利语 ("hu")，马其顿语 ("mk")，罗马尼亚语 ("ro")。V1版本(旧版)标准语言引擎："16k_zh_large": 16k 大模型引擎，同时支持中文、英文、多种中文方言口音等语言的识别。"16k_zh_en": 最新 16k 中英大模型引擎，同时支持中文、英语、多种中文方言口音的识别，对中英混说场景识别更优。高级语言引擎："zh-yue": 中文粤语"vi": 越南语"ja": 日语"ko": 韩语"id": 印度尼西亚语"th": 泰语"pt": 葡萄牙语"tr": 土耳其语"ar": 阿拉伯语"es": 西班牙语"hi": 印地语"fr": 法语"ms": 马来语"fil": 菲律宾语"de": 德语"it": 意大利语"ru": 俄语"sv": 瑞典语"da": 丹麦语"no": 挪威语注意：如果缺少满足您需求的语言，请联系我们技术人员。 */
   Lang: string;
   /** 语音识别vad的时间，范围为240-2000，默认为1000，单位为ms。更小的值会让语音识别分句更快。示例值：1000 */
   VadSilenceTime?: number;
-  /** 临时热词表：该参数用于提升识别准确率。单个热词限制：&quot;热词|权重&quot;，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如：&quot;腾讯云|5&quot; 或 &quot;ASR|11&quot;。临时热词表限制：多个热词用英文逗号分割，最多支持128个热词，如：&quot;腾讯云|10,语音识别|5,ASR|11&quot;。注意：热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。热词权重设置为100时，当前热词开启热词增强同音同调替换功能，举例：热词配置&quot;蜜制|100&quot;时，与&quot;蜜制&quot;同拼音（mizhi）的&quot;秘制&quot;的识别结果会被强制替换成&quot;蜜制&quot;。因此建议客户根据自己的实际情况开启该功能。建议仅将重要且必须生效的热词设置到100，设置过多权重为100的热词将影响整体字准率。热词不能包含空格，如：ASR 腾讯云示例值：语音助理|10 */
+  /** 临时热词表：该参数用于提升识别准确率。单个热词限制："热词|权重"，单个热词不超过30个字符（最多10个汉字），权重[1-11]或者100，如："腾讯云|5" 或 "ASR|11"。临时热词表限制：多个热词用英文逗号分割，最多支持128个热词，如："腾讯云|10,语音识别|5,ASR|11"。注意：热词权重设置为11时，当前热词将升级为超级热词，建议仅将重要且必须生效的热词设置到11，设置过多权重为11的热词将影响整体字准率。热词权重设置为100时，当前热词开启热词增强同音同调替换功能，举例：热词配置"蜜制|100"时，与"蜜制"同拼音（mizhi）的"秘制"的识别结果会被强制替换成"蜜制"。因此建议客户根据自己的实际情况开启该功能。建议仅将重要且必须生效的热词设置到100，设置过多权重为100的热词将影响整体字准率。热词不能包含空格，如：ASR 腾讯云示例值：语音助理|10 */
   HotWordList?: string;
-  /** 发起模糊识别为高级语言引擎能力, 仅支持填写除&quot;zh-dialect&quot;和&quot;zh-yue&quot;以外的高级语言引擎。注意：最多只能填写4种语言。 */
+  /** 发起模糊识别为高级语言引擎能力, 仅支持填写除"zh-dialect"和"zh-yue"以外的高级语言引擎。注意：最多只能填写4种语言。 */
   AlternativeLanguage?: string[];
   /** vad的远场人声抑制能力（不会对asr识别效果造成影响），范围为[0, 1]，默认为0。推荐设置为1，有较好的远场人声抑制能力。 */
   VadLevel?: number;
-  /** 是否过滤脏词（目前仅支持填写基础语言引擎和标准语言引擎），范围为[0, 2]，默认值为 0。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 &quot; * &quot;。 */
+  /** 是否过滤脏词（目前仅支持填写基础语言引擎和标准语言引擎），范围为[0, 2]，默认值为 0。0：不过滤脏词；1：过滤脏词；2：将脏词替换为 " * "。 */
   FilterDirty?: number;
   /** 是否过滤语气词（目前仅支持填写基础语言引擎和标准语言引擎），范围为[0, 2]，默认值为 0。0：不过滤语气词；1：部分过滤；2：严格过滤。 */
   FilterModal?: number;
@@ -224,7 +224,7 @@ declare interface CloudStorage {
   AccessKey: string;
   /** 云存储的secret_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。 */
   SecretKey: string;
-  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,&#39;_&#39;和&#39;-&#39;，举个例子，录制文件xxx.m3u8在 [&quot;prefix1&quot;, &quot;prefix2&quot;]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。 */
+  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。 */
   FileNamePrefix?: string[];
 }
 
@@ -402,13 +402,13 @@ declare interface McuLayout {
   RenderMode?: number;
   /** 【此参数配置无效，暂不支持】子画面的背景颜色，常用的颜色有：红色：0xcc0033。黄色：0xcc9900。绿色：0xcccc33。蓝色：0x99CCFF。黑色：0x000000。白色：0xFFFFFF。灰色：0x999999。 */
   BackGroundColor?: string;
-  /** 子画面的占位图片url，填写该参数，当用户关闭摄像头或未进入TRTC房间时，会在布局位置填充为指定图片。若指定图片与布局位置尺寸比例不一致，则会对图片进行拉伸处理，优先级高于BackGroundColor。支持png、jpg、jpeg、bmp、gif、webm格式。图片分辨率限制不超过2K，图片大小限制不超过5MB。注：1，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，占位图片将不会生效。2，url可支持字符集：【&#39;0-9&#39;,&#39;a-z&#39;,&#39;A-Z&#39;,&#39;-&#39;, &#39;.&#39;, &#39;_&#39;, &#39;~&#39;, &#39;:&#39;, &#39;/&#39;, &#39;?&#39;, &#39;#&#39;, &#39;[&#39;, &#39;]&#39;,&#39;@&#39;, &#39;!&#39;, &#39;&amp;&#39;, &#39;(&#39;, &#39;)&#39;, &#39;*&#39;, &#39;+&#39;, &#39;,&#39;, &#39;%&#39;, &#39;=&#39;, &#39;;&#39;, &#39;|&#39;】，您需要确保url字符在可支持字符集内，若存在可支持字符集外的字符，占位图片将不会生效。 */
+  /** 子画面的占位图片url，填写该参数，当用户关闭摄像头或未进入TRTC房间时，会在布局位置填充为指定图片。若指定图片与布局位置尺寸比例不一致，则会对图片进行拉伸处理，优先级高于BackGroundColor。支持png、jpg、jpeg、bmp、gif、webm格式。图片分辨率限制不超过2K，图片大小限制不超过5MB。注：1，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，占位图片将不会生效。2，url可支持字符集：【'0-9','a-z','A-Z','-', '.', '_', '~', ':', '/', '?', '#', '[', ']','@', '!', '&amp;', '(', ')', '*', '+', ',', '%', '=', ';', '|'】，您需要确保url字符在可支持字符集内，若存在可支持字符集外的字符，占位图片将不会生效。 */
   BackgroundImageUrl?: string;
   /** 客户自定义裁剪，针对原始输入流裁剪 */
   CustomCrop?: McuCustomCrop;
   /** 子背景图在输出时的显示模式：0为裁剪，1为缩放并显示背景，2为缩放并显示黑底，3为变比例伸缩，4为自定义渲染。不填默认为3。 */
   BackgroundRenderMode?: number;
-  /** 子画面的透明模版url，指向一张包含透明通道的模板图片。填写该参数，后台混流时会提取该模板图片的透明通道，将其缩放作为目标画面的透明通道，再和其他画面进行混合。您可以通过透明模版实现目标画面的半透明效果和任意形状裁剪（如圆角、星形、心形等）。 支持png格式。图片分辨率限制不超过2K，图片大小限制不超过5MB。注：1，模板图片宽高比应接近目标画面宽高比，以避免缩放适配目标画面时出现模板效果变形；2，透明模版只有RenderMode为0（裁剪）时才生效；3，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，透明模板将不会生效。2，url可支持字符集：【&#39;0-9&#39;,&#39;a-z&#39;,&#39;A-Z&#39;,&#39;-&#39;, &#39;.&#39;, &#39;_&#39;, &#39;~&#39;, &#39;:&#39;, &#39;/&#39;, &#39;?&#39;, &#39;#&#39;, &#39;[&#39;, &#39;]&#39;,&#39;@&#39;, &#39;!&#39;, &#39;&amp;&#39;, &#39;(&#39;, &#39;)&#39;, &#39;*&#39;, &#39;+&#39;, &#39;,&#39;, &#39;%&#39;, &#39;=&#39;, &#39;;&#39;, &#39;|&#39;】，您需要确保url字符在可支持字符集内，若存在可支持字符集外的字符，透明模版将不会生效。 */
+  /** 子画面的透明模版url，指向一张包含透明通道的模板图片。填写该参数，后台混流时会提取该模板图片的透明通道，将其缩放作为目标画面的透明通道，再和其他画面进行混合。您可以通过透明模版实现目标画面的半透明效果和任意形状裁剪（如圆角、星形、心形等）。 支持png格式。图片分辨率限制不超过2K，图片大小限制不超过5MB。注：1，模板图片宽高比应接近目标画面宽高比，以避免缩放适配目标画面时出现模板效果变形；2，透明模版只有RenderMode为0（裁剪）时才生效；3，您需要确保图片链接的可访问性，后台单次下载超时时间为10秒，最多重试3次，若最终图片下载失败，透明模板将不会生效。2，url可支持字符集：【'0-9','a-z','A-Z','-', '.', '_', '~', ':', '/', '?', '#', '[', ']','@', '!', '&amp;', '(', ')', '*', '+', ',', '%', '=', ';', '|'】，您需要确保url字符在可支持字符集内，若存在可支持字符集外的字符，透明模版将不会生效。 */
   TransparentUrl?: string;
   /** 子背景图的自定义渲染参数，当BackgroundRenderMode为4时必须配置。 */
   BackgroundCustomRender?: McuBackgroundCustomRender;
@@ -1096,7 +1096,7 @@ declare interface TTSConfig {
 
 /** 伴生转录TTS参数 */
 declare interface TTSParam {
-  /** tts模型参数，仅支持填写&quot;flow_02_turbo&quot;。 */
+  /** tts模型参数，仅支持填写"flow_02_turbo"。 */
   Model: string;
   /** tts语言，必须在TranslationParam 的TargetLang列表中。 */
   Language: string;
@@ -1110,7 +1110,7 @@ declare interface TTSParam {
 
 /** 伴生转录TTS的语音参数配置 */
 declare interface TTSVoice {
-  /** 音色 ID。对于不同的语言，需要填写特定的音色ID，如下所示：中文（&quot;zh&quot;）：男生音色&quot;v-male-s5NqE0rZ&quot;、女生音色&quot;v-female-R2s4N9qJ&quot;。英语（&quot;en&quot;）：男生音色&quot;v-male-X6h4TvP9&quot;、女生音色&quot;v-female-P6q9LmR2&quot;。日语（&quot;ja&quot;）：男生音色&quot;v-male-J3n8DxK2&quot;、女生音色&quot;v-female-J3k7NxR2&quot;。粤语（&quot;yue&quot;）：男生音色&quot;v-male-D7p4XcL2&quot;、女生音色&quot;v-female-C5t1QxH9&quot;。印度尼西亚语（&quot;id&quot;）：男生音色&quot;v-male-B5f2CnS3&quot;、女生音色&quot;v-female-W5n8HgB2&quot;。泰语（&quot;th&quot;）：男生音色&quot;v-male-B5f2CnS3&quot;、女生音色&quot;v-female-W5n8HgB2&quot;。越南语（&quot;vi&quot;）：男生音色&quot;v-male-B5f2CnS3&quot;、女生音色&quot;v-female-W5n8HgB2&quot;。马来语（&quot;ms&quot;）：男生音色&quot;v-male-Q6p8ZxL3&quot;、女生音色&quot;v-female-C8k4NxL6&quot;。如果缺少满足您需求的音色，请联系我们的技术人员。 */
+  /** 音色 ID。对于不同的语言，需要填写特定的音色ID，如下所示：中文（"zh"）：男生音色"v-male-s5NqE0rZ"、女生音色"v-female-R2s4N9qJ"。英语（"en"）：男生音色"v-male-X6h4TvP9"、女生音色"v-female-P6q9LmR2"。日语（"ja"）：男生音色"v-male-J3n8DxK2"、女生音色"v-female-J3k7NxR2"。粤语（"yue"）：男生音色"v-male-D7p4XcL2"、女生音色"v-female-C5t1QxH9"。印度尼西亚语（"id"）：男生音色"v-male-B5f2CnS3"、女生音色"v-female-W5n8HgB2"。泰语（"th"）：男生音色"v-male-B5f2CnS3"、女生音色"v-female-W5n8HgB2"。越南语（"vi"）：男生音色"v-male-B5f2CnS3"、女生音色"v-female-W5n8HgB2"。马来语（"ms"）：男生音色"v-male-Q6p8ZxL3"、女生音色"v-female-C8k4NxL6"。如果缺少满足您需求的音色，请联系我们的技术人员。 */
   VoiceId: string;
   /** 语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0。 */
   Speed?: number;
@@ -1234,7 +1234,7 @@ declare interface TranslationConfig {
 
 /** 翻译相关的参数 */
 declare interface TranslationParam {
-  /** 翻译的目标语言，示例值[&quot;en&quot;, &quot;ja&quot;]。目标语种列表[中文 &quot;zh&quot;，英语 &quot;en&quot;，粤语&quot;yue&quot;，越南语 &quot;vi&quot;，日语 &quot;ja&quot;，韩语 &quot;ko&quot;，印度尼西亚语 &quot;id&quot;，泰语 &quot;th&quot;，葡萄牙语 &quot;pt&quot;，阿拉伯语 &quot;ar&quot;，西班牙语 &quot;es&quot;，法语 &quot;fr&quot;，马来语 &quot;ms&quot;，德语 &quot;de&quot;，意大利语 &quot;it&quot;，俄语 &quot;ru&quot;]。 */
+  /** 翻译的目标语言，示例值["en", "ja"]。目标语种列表[中文 "zh"，英语 "en"，粤语"yue"，越南语 "vi"，日语 "ja"，韩语 "ko"，印度尼西亚语 "id"，泰语 "th"，葡萄牙语 "pt"，阿拉伯语 "ar"，西班牙语 "es"，法语 "fr"，马来语 "ms"，德语 "de"，意大利语 "it"，俄语 "ru"]。 */
   TargetLang?: string[];
   /** 翻译术语表配置。 */
   Terminologies?: TerminologyItem[];

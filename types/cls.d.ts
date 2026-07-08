@@ -620,11 +620,11 @@ declare interface ConsumerContent {
   EnableTag: boolean;
   /** 需要投递的元数据列表，目前仅支持：__SOURCE__，__FILENAME__，__TIMESTAMP__，__HOSTNAME__和__PKGID__ */
   MetaFields: string[];
-  /** 当EnableTag为true时，必须填写TagJsonNotTiled字段。TagJsonNotTiled用于标识tag信息是否json平铺。TagJsonNotTiled为true时不平铺，示例：TAG信息：{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}不平铺：{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}TagJsonNotTiled为false时平铺，示例：TAG信息：{&quot;__TAG__&quot;:{&quot;fieldA&quot;:200,&quot;fieldB&quot;:&quot;text&quot;}}平铺：{&quot;__TAG__.fieldA&quot;:200,&quot;__TAG__.fieldB&quot;:&quot;text&quot;} */
+  /** 当EnableTag为true时，必须填写TagJsonNotTiled字段。TagJsonNotTiled用于标识tag信息是否json平铺。TagJsonNotTiled为true时不平铺，示例：TAG信息：{"__TAG__":{"fieldA":200,"fieldB":"text"}}不平铺：{"__TAG__":{"fieldA":200,"fieldB":"text"}}TagJsonNotTiled为false时平铺，示例：TAG信息：{"__TAG__":{"fieldA":200,"fieldB":"text"}}平铺：{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"} */
   TagJsonNotTiled?: boolean;
   /** 投递时间戳精度，可选项 [1：秒；2：毫秒] ，默认是1。 */
   TimestampAccuracy?: number;
-  /** 投递Json格式。枚举值：0： 转义。示例：日志原文：{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}投递到Ckafka：{&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;{\&quot;b1\&quot;:\&quot;b1b1\&quot;, \&quot;c1\&quot;:\&quot;c1c1\&quot;}&quot;}1： 和原始日志一致，不转义。示例：日志原文：{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}投递到Ckafka：{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}} */
+  /** 投递Json格式。枚举值：0： 转义。示例：日志原文：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}投递到Ckafka：{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}1： 和原始日志一致，不转义。示例：日志原文：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}投递到Ckafka：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}} */
   JsonType?: number;
 }
 
@@ -1350,7 +1350,7 @@ declare interface ExtractRuleInfo {
   ParseProtocol?: string;
   /** 元数据类型。0: 不使用元数据信息；1:使用机器组元数据；2:使用用户自定义元数据；3:使用采集配置路径。注意：COS导入不支持此字段。 */
   MetadataType?: number;
-  /** 采集配置路径正则表达式。请用&quot;()&quot;标识路径中目标字段对应的正则表达式，解析时将&quot;()&quot;视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。若不希望以序号为键名，可以通过命名捕获组&quot;(?&lt;{键名}&gt;{正则})&quot;自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组注意：MetadataType为3时必填。COS导入不支持此字段。 */
+  /** 采集配置路径正则表达式。请用"()"标识路径中目标字段对应的正则表达式，解析时将"()"视为捕获组，并以__TAG__.{i}:{目标字段}的形式与日志一起上报，其中i为捕获组的序号。若不希望以序号为键名，可以通过命名捕获组"(?<{键名}>{正则})"自定义键名，并以__TAG__.{键名}:{目标字段}的形式与日志一起上报。最多支持5个捕获组注意：MetadataType为3时必填。COS导入不支持此字段。 */
   PathRegex?: string;
   /** 用户自定义元数据信息。注意：MetadataType为2时必填。COS导入不支持此字段。 */
   MetaTags?: MetaTagInfo[];
@@ -1512,7 +1512,7 @@ declare interface InstanceData {
 declare interface JsonExpandInfo {
   /** 是否开启JSON嵌套展开功能。开启后将对指定JSON字段进行扁平化展开处理默认值：无（必选参数） */
   Switch: boolean;
-  /** 待展开的JSON字段名列表，支持1~3个字段，字段名不可为空串且不可重复 入参限制：1. 字段数量：1~3个2. 每个字段名长度不超过128个字符3. 字段名不可为空字符串4. 字段名之间不可重复默认值：无（必选参数）取值参考：取值：message；描述：示例字段名示例：[&quot;message&quot;, &quot;data&quot;, &quot;content&quot;] */
+  /** 待展开的JSON字段名列表，支持1~3个字段，字段名不可为空串且不可重复 入参限制：1. 字段数量：1~3个2. 每个字段名长度不超过128个字符3. 字段名不可为空字符串4. 字段名之间不可重复默认值：无（必选参数）取值参考：取值：message；描述：示例字段名示例：["message", "data", "content"] */
   Fields: string[];
   /** 展开后是否丢弃原始的嵌套字段。true: 丢弃原始字段只保留展开后的平铺字段; false: 保留原始字段同时增加展开后的平铺字段枚举值：true / false： 丢弃原字段 / 保留原字段默认值：true非必选，不传时默认为true */
   DropOriginal?: boolean;
@@ -1708,7 +1708,7 @@ declare interface LogRechargeRuleInfo {
   TimeRegex?: string;
   /** 时间字段格式。当DefaultTimeSwitch为false时， TimeFormat不能为空。 */
   TimeFormat?: string;
-  /** 时间字段时区。当DefaultTimeSwitch为false时， TimeZone不能为空。时区格式规则前缀：使用 GMT 或 UTC 作为时区基准偏移量：- 表示西时区（比基准时间晚）+ 表示东时区（比基准时间早）格式为 ±HH:MM（小时:分钟）当前支持：&quot;GMT-12:00&quot; &quot;GMT-11:00&quot; &quot;GMT-10:00&quot; &quot;GMT-09:30&quot; &quot;GMT-09:00&quot; &quot;GMT-08:00&quot; &quot;GMT-07:00&quot; &quot;GMT-06:00&quot; &quot;GMT-05:00&quot; &quot;GMT-04:00&quot; &quot;GMT-03:30&quot; &quot;GMT-03:00&quot; &quot;GMT-02:00&quot; &quot;GMT-01:00&quot; &quot;GMT+00:00&quot;&quot;GMT+01:00&quot;&quot;GMT+02:00&quot;&quot;GMT+03:30&quot;&quot;GMT+04:00&quot;&quot;GMT+04:30&quot;&quot;GMT+05:00&quot;&quot;GMT+05:30&quot;&quot;GMT+05:45&quot;&quot;GMT+06:00&quot;&quot;GMT+06:30&quot;&quot;GMT+07:00&quot;&quot;GMT+08:00&quot;&quot;GMT+09:00&quot;&quot;GMT+09:30&quot;&quot;GMT+10:00&quot;&quot;GMT+10:30&quot;&quot;GMT+11:00&quot;&quot;GMT+11:30&quot;&quot;GMT+12:00&quot;&quot;GMT+12:45&quot;&quot;GMT+13:00&quot;&quot;GMT+14:00&quot;&quot;UTC-11:00&quot;&quot;UTC-10:00&quot;&quot;UTC-09:00&quot;&quot;UTC-08:00&quot;&quot;UTC-12:00&quot;&quot;UTC-07:00&quot;&quot;UTC-06:00&quot;&quot;UTC-05:00&quot;&quot;UTC-04:30&quot;&quot;UTC-04:00&quot;&quot;UTC-03:30&quot;&quot;UTC-03:00&quot;&quot;UTC-02:00&quot;&quot;UTC-01:00&quot;&quot;UTC+00:00&quot;&quot;UTC+01:00&quot;&quot;UTC+02:00&quot;&quot;UTC+03:00&quot;&quot;UTC+03:30&quot;&quot;UTC+04:00&quot;&quot;UTC+04:30&quot;&quot;UTC+05:00&quot;&quot;UTC+05:45&quot;&quot;UTC+06:00&quot;&quot;UTC+06:30&quot;&quot;UTC+07:00&quot;&quot;UTC+08:00&quot;&quot;UTC+09:00&quot;&quot;UTC+09:30&quot;&quot;UTC+10:00&quot;&quot;UTC+11:00&quot;&quot;UTC+12:00&quot;&quot;UTC+13:00&quot; */
+  /** 时间字段时区。当DefaultTimeSwitch为false时， TimeZone不能为空。时区格式规则前缀：使用 GMT 或 UTC 作为时区基准偏移量：- 表示西时区（比基准时间晚）+ 表示东时区（比基准时间早）格式为 ±HH:MM（小时:分钟）当前支持："GMT-12:00" "GMT-11:00" "GMT-10:00" "GMT-09:30" "GMT-09:00" "GMT-08:00" "GMT-07:00" "GMT-06:00" "GMT-05:00" "GMT-04:00" "GMT-03:30" "GMT-03:00" "GMT-02:00" "GMT-01:00" "GMT+00:00""GMT+01:00""GMT+02:00""GMT+03:30""GMT+04:00""GMT+04:30""GMT+05:00""GMT+05:30""GMT+05:45""GMT+06:00""GMT+06:30""GMT+07:00""GMT+08:00""GMT+09:00""GMT+09:30""GMT+10:00""GMT+10:30""GMT+11:00""GMT+11:30""GMT+12:00""GMT+12:45""GMT+13:00""GMT+14:00""UTC-11:00""UTC-10:00""UTC-09:00""UTC-08:00""UTC-12:00""UTC-07:00""UTC-06:00""UTC-05:00""UTC-04:30""UTC-04:00""UTC-03:30""UTC-03:00""UTC-02:00""UTC-01:00""UTC+00:00""UTC+01:00""UTC+02:00""UTC+03:00""UTC+03:30""UTC+04:00""UTC+04:30""UTC+05:00""UTC+05:45""UTC+06:00""UTC+06:30""UTC+07:00""UTC+08:00""UTC+09:00""UTC+09:30""UTC+10:00""UTC+11:00""UTC+12:00""UTC+13:00" */
   TimeZone?: string;
   /** 元数据信息，Kafka导入支持kafka_topic,kafka_partition,kafka_offset,kafka_timestamp */
   Metadata?: string[];
@@ -2636,7 +2636,7 @@ declare interface TopicInfo {
   SubAssumerName?: string;
   /** 主题描述 */
   Describes?: string;
-  /** 开启日志沉降，标准存储的生命周期， hotPeriod &lt; Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
+  /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
   HotPeriod?: number;
   /** kms-cls服务秘钥id */
   KeyId?: string;
@@ -2803,7 +2803,7 @@ declare interface ChatCompletionsRequest {
   Messages: Message[];
   /** 流式调用开关。说明：未传值时默认为非流式调用（false）。流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。非流式调用时：调用方式与普通 HTTP 请求无异。接口响应耗时较长，如需更低时延建议设置为 true。只返回一次最终结果（返回值取 Choices[n].Message 中的值）。注意：通过 SDK 调用时，流式和非流式调用需用不同的方式获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/cls/v20201016/ 目录中）。可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。 */
   Stream?: boolean;
-  /** 额外元数据信息。例如：[{&quot;Key&quot;:&quot;topic_id&quot;,&quot;Value&quot;:&quot;xxxxxxxx-xxxx&quot;},{&quot;Key&quot;:&quot;topic_region&quot;,&quot;Value&quot;:&quot;ap-guangzhou&quot;}]建议按照示例传递元数据信息，否则可能造成结果不准确。例如 text2sql，不传 topic_id, topic_region，将导致无法根据日志主题索引生成准确的检索语句。 */
+  /** 额外元数据信息。例如：[{"Key":"topic_id","Value":"xxxxxxxx-xxxx"},{"Key":"topic_region","Value":"ap-guangzhou"}]建议按照示例传递元数据信息，否则可能造成结果不准确。例如 text2sql，不传 topic_id, topic_region，将导致无法根据日志主题索引生成准确的检索语句。 */
   Metadata?: MetadataItem[];
 }
 
@@ -2921,7 +2921,7 @@ declare interface CreateAlarmNoticeResponse {
 }
 
 declare interface CreateAlarmRequest {
-  /** 告警策略名称。最大支持255个字节。 不支持 &#39;|&#39;。 */
+  /** 告警策略名称。最大支持255个字节。 不支持 '|'。 */
   Name: string;
   /** 监控对象列表。 */
   AlarmTargets: AlarmTarget[];
@@ -3345,9 +3345,9 @@ declare interface CreateDlcDeliverRequest {
   StartTime: number;
   /** dlc配置信息 */
   DlcInfo: DlcInfo;
-  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5&lt;= MaxSize &lt;= 256。 */
+  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。 */
   MaxSize?: number;
-  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300&lt;= Interval &lt;=900。 */
+  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。 */
   Interval?: number;
   /** 投递时间范围的结束时间。 如果为空，则表示不限时。EndTime不为空时，需要大于StartTime。 */
   EndTime?: number;
@@ -3599,7 +3599,7 @@ declare interface CreateNetworkApplicationRequest {
   Name: string;
   /** 日志集ID通过获取日志集列表获取日志集Id。 */
   LogsetId: string;
-  /** 主题名称。名称限制如下：不能为空字符串不能包含字符&#39;|&#39;不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;] */
+  /** 主题名称。名称限制如下：不能为空字符串不能包含字符'|'不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName: string;
 }
 
@@ -3747,7 +3747,7 @@ declare interface CreateSearchViewRequest {
   LogsetId: string;
   /** 日志集所属地域参数格式：ap-guangzhou */
   LogsetRegion: string;
-  /** 视图名称入参限制：最大支持255字符，不能包含&quot;|&quot;字符。 */
+  /** 视图名称入参限制：最大支持255字符，不能包含"|"字符。 */
   ViewName: string;
   /** 视图类型枚举值：log： 日志主题metric： 指标主题Topics字段中配置的主题类型应该与ViewType类型匹配 */
   ViewType: string;
@@ -3849,7 +3849,7 @@ declare interface CreateSplunkDeliverResponse {
 declare interface CreateTopicRequest {
   /** 日志集ID通过获取日志集列表获取日志集Id。 */
   LogsetId: string;
-  /** 主题名称名称限制不能为空字符串不能包含字符&#39;|&#39;不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;] */
+  /** 主题名称名称限制不能为空字符串不能包含字符'|'不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName: string;
   /** 主题分区个数。默认创建1个，最大支持创建10个分区。 */
   PartitionCount?: number;
@@ -5553,7 +5553,7 @@ declare interface ModifyAlarmNoticeResponse {
 declare interface ModifyAlarmRequest {
   /** 告警策略ID。-通过获取告警策略列表获取告警策略ID */
   AlarmId: string;
-  /** 告警策略名称。最大支持255个字节，不支持 &#39;|&#39;。 */
+  /** 告警策略名称。最大支持255个字节，不支持 '|'。 */
   Name?: string;
   /** 监控任务运行时间点。 */
   MonitorTime?: MonitorTime;
@@ -5921,9 +5921,9 @@ declare interface ModifyDlcDeliverRequest {
   StartTime?: number;
   /** 投递时间范围的结束时间。 如果为空，则表示不限时 */
   EndTime?: number;
-  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5&lt;= MaxSize &lt;= 256。 */
+  /** 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。 */
   MaxSize?: number;
-  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300&lt;= Interval &lt;=900。 */
+  /** 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。 */
   Interval?: number;
   /** dlc配置信息 */
   DlcInfo?: DlcInfo;
@@ -6389,7 +6389,7 @@ declare interface ModifySplunkDeliverResponse {
 declare interface ModifyTopicRequest {
   /** 主题ID- 通过获取主题列表获取主题Id。 */
   TopicId: string;
-  /** 主题名称输入限制：不能为空字符串不能包含字符&#39;|&#39;不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;] */
+  /** 主题名称输入限制：不能为空字符串不能包含字符'|'不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"] */
   TopicName?: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
@@ -6411,7 +6411,7 @@ declare interface ModifyTopicRequest {
   IsWebTracking?: boolean;
   /** 主题扩展信息 */
   Extends?: TopicExtendInfo;
-  /** 主题分区数量。默认为1；取值范围及约束：当输入值&lt;=0，系统自动调整为1。如果未传MaxSplitPartitions，需要PartitionCount&lt;=50；如果传递了MaxSplitPartitions，需要PartitionCount&lt;=MaxSplitPartitions； */
+  /** 主题分区数量。默认为1；取值范围及约束：当输入值<=0，系统自动调整为1。如果未传MaxSplitPartitions，需要PartitionCount<=50；如果传递了MaxSplitPartitions，需要PartitionCount<=MaxSplitPartitions； */
   PartitionCount?: number;
   /** 取消切换存储任务的id通过获取日志主题列表获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。 */
   CancelTopicAsyncTaskID?: string;

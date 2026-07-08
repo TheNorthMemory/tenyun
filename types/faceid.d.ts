@@ -118,7 +118,7 @@ declare interface DetectInfoText {
   OcrIdCard?: string | null;
   /** 身份校验环节识别结果：性别。 */
   OcrGender?: string | null;
-  /** 身份校验环节采用的信息上传方式。取值有&quot;NFC&quot;、&quot;OCR&quot;、&quot;手动输入&quot;、&quot;其他&quot; */
+  /** 身份校验环节采用的信息上传方式。取值有"NFC"、"OCR"、"手动输入"、"其他" */
   IdInfoFrom?: string | null;
   /** 本次流程最终活体结果。0为成功 */
   LiveStatus?: number | null;
@@ -184,7 +184,7 @@ declare interface Encryption {
   CiphertextBlob: string | null;
   /** 有加密需求的用户，传入CBC加密的初始向量（客户自定义字符串，长度16字符）。 */
   Iv: string | null;
-  /** 加密使用的算法（支持&#39;AES-256-CBC&#39;、&#39;SM4-GCM&#39;），不传默认为&#39;AES-256-CBC&#39; */
+  /** 加密使用的算法（支持'AES-256-CBC'、'SM4-GCM'），不传默认为'AES-256-CBC' */
   Algorithm?: string | null;
   /** SM4-GCM算法生成的消息摘要（校验消息完整性时使用） */
   TagList?: string[] | null;
@@ -278,7 +278,7 @@ declare interface IntentionVerifyData {
   IntentionVerifyVideo?: string | null;
   /** 意愿确认环节中用户语音转文字的识别结果。若不存在则为空字符串。 */
   AsrResult?: string | null;
-  /** 意愿确认环节（朗读模式）的结果码。取值范围：0: &quot;成功&quot;-1: &quot;系统异常&quot;-2: &quot;参数错误&quot;-3:&quot;业务繁忙，请重试&quot;-4：&quot;后端服务异常，请重试&quot;-5：&quot;后端服务进房异常，请重试&quot;-6：&quot;后端服务录制异常，请重试&quot;-7：&quot;文件存储异常，请重试&quot;-8：&quot;后端服务重复进房，请重试&quot;-9：&quot;实时视频流异常，请重试&quot;-10：&quot;语音识别失败，请重试&quot;-11：&quot;流程已中断，请重试&quot;-12：&quot;流程未完成，请重试&quot;-13：&quot;token校验不通过，请重试&quot;-14：&quot;流程已结束&quot;-15:&quot;超过预设重试次数&quot;-16:&quot;系统未知错误，请联系人工核实&quot;-17:&quot;未检测到用户声音&quot;3001:&quot;请保持人脸在框内&quot;3002:&quot;检测到多张人脸&quot;3003:&quot;人脸检测失败&quot;3011:&quot;人脸比对相似度低&quot;3012:&quot;人脸比对失败&quot;-800: &quot;前端不兼容错误&quot;-801: &quot;用户未授权摄像头和麦克风权限&quot;-802: &quot;核验流程异常中断，请勿切屏或进行其他操作&quot;-803: &quot;用户主动关闭链接/异常断开链接&quot;说明：若在人脸核身过程失败、未进入意愿确认过程，则该参数返回为空，请参考人脸核身错误码结果（DetectInfoText.ErrCode）示例值：0 */
+  /** 意愿确认环节（朗读模式）的结果码。取值范围：0: "成功"-1: "系统异常"-2: "参数错误"-3:"业务繁忙，请重试"-4："后端服务异常，请重试"-5："后端服务进房异常，请重试"-6："后端服务录制异常，请重试"-7："文件存储异常，请重试"-8："后端服务重复进房，请重试"-9："实时视频流异常，请重试"-10："语音识别失败，请重试"-11："流程已中断，请重试"-12："流程未完成，请重试"-13："token校验不通过，请重试"-14："流程已结束"-15:"超过预设重试次数"-16:"系统未知错误，请联系人工核实"-17:"未检测到用户声音"3001:"请保持人脸在框内"3002:"检测到多张人脸"3003:"人脸检测失败"3011:"人脸比对相似度低"3012:"人脸比对失败"-800: "前端不兼容错误"-801: "用户未授权摄像头和麦克风权限"-802: "核验流程异常中断，请勿切屏或进行其他操作"-803: "用户主动关闭链接/异常断开链接"说明：若在人脸核身过程失败、未进入意愿确认过程，则该参数返回为空，请参考人脸核身错误码结果（DetectInfoText.ErrCode）示例值：0 */
   ErrorCode?: number | null;
   /** 意愿确认环节的结果信息。 */
   ErrorMessage?: string | null;
@@ -294,7 +294,7 @@ declare interface IntentionVerifyData {
 declare interface RetrievalLivenessExtraInfo {
   /** 命中的模板类型，其中Common-公共库；Auto-自动聚类库；Owner-自建模板库 */
   HitGroup?: string | null;
-  /** 请求图像与命中攻击模板的相似度，相似度取值范围[0,2]，取值越小表示命中攻击模板的概率越高。默认阈值为0.6，当SimilarityScore≥0.6时判断为正常，SimilarityScore&lt;0.6是判断为攻击。 */
+  /** 请求图像与命中攻击模板的相似度，相似度取值范围[0,2]，取值越小表示命中攻击模板的概率越高。默认阈值为0.6，当SimilarityScore≥0.6时判断为正常，SimilarityScore<0.6是判断为攻击。 */
   SimilarityScore?: number | null;
   /** 命中的模板id */
   HitTemplate?: string | null;
@@ -429,11 +429,11 @@ declare interface CheckEidTokenStatusResponse {
 }
 
 declare interface CheckIdCardInformationRequest {
-  /** 身份证人像面的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl&gt;ImageBase64的优先级使用参数。 */
+  /** 身份证人像面的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。 */
   ImageBase64?: string;
   /** 身份证人像面的 Url 地址支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 配置。以下可选字段均为bool 类型，默认false。CopyWarn，复印件告警。BorderCheckWarn，边框和框内遮挡告警。ReshootWarn，翻拍告警。DetectPsWarn，PS检测告警（疑似存在PS痕迹）。TempIdWarn，临时身份证告警。Quality，图片质量告警（评价图片模糊程度）。SDK 设置方式参考：Config = Json.stringify({&quot;CopyWarn&quot;:true,&quot;ReshootWarn&quot;:true})。API 3.0 Explorer 设置方式参考：Config = {&quot;CopyWarn&quot;:true,&quot;ReshootWarn&quot;:true}。 */
+  /** 配置。以下可选字段均为bool 类型，默认false。CopyWarn，复印件告警。BorderCheckWarn，边框和框内遮挡告警。ReshootWarn，翻拍告警。DetectPsWarn，PS检测告警（疑似存在PS痕迹）。TempIdWarn，临时身份证告警。Quality，图片质量告警（评价图片模糊程度）。SDK 设置方式参考：Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})。API 3.0 Explorer 设置方式参考：Config = {"CopyWarn":true,"ReshootWarn":true}。 */
   Config?: string;
   /** 是否需要对返回中的敏感信息进行加密。默认false。敏感信息包括：Response.IdNum、Response.Name。 */
   IsEncrypt?: boolean;
@@ -464,7 +464,7 @@ declare interface CheckIdCardInformationResponse {
   IdNum?: string;
   /** 身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。 */
   Portrait?: string;
-  /** 告警信息。当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。Code 告警码列表和释义：&#39;-9101&#39;：身份证边框不完整告警。&#39;-9102&#39;：身份证复印件告警。&#39;-9103&#39;：身份证翻拍告警。&#39;-9105&#39;：身份证框内遮挡告警。&#39;-9104&#39;：临时身份证告警。&#39;-9106&#39;：身份证 PS 告警（疑似存在PS痕迹）。&#39;-8001&#39;：图片模糊告警。多个会用“|” 隔开，如 &quot;-9101|-9106|-9104&quot;。 */
+  /** 告警信息。当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。Code 告警码列表和释义：'-9101'：身份证边框不完整告警。'-9102'：身份证复印件告警。'-9103'：身份证翻拍告警。'-9105'：身份证框内遮挡告警。'-9104'：临时身份证告警。'-9106'：身份证 PS 告警（疑似存在PS痕迹）。'-8001'：图片模糊告警。多个会用“|” 隔开，如 "-9101|-9106|-9104"。 */
   Warnings?: string;
   /** 图片质量分数。当请求Config中配置图片模糊告警该参数才有意义。取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。 */
   Quality?: number;
@@ -523,7 +523,7 @@ declare interface DetectAIFakeFacesRequest {
   FaceInputType?: number;
   /** 是否需要对请求信息进行全包体加密。支持的加密算法:AES-256-CBC、SM4-GCM。有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
-  /** 加密后的密文。加密前的数据格式如下:{&quot;FaceInput&quot;:&quot;AAAAA&quot;,&quot;FaceInputType&quot;:1}。 */
+  /** 加密后的密文。加密前的数据格式如下:{"FaceInput":"AAAAA","FaceInputType":1}。 */
   EncryptedBody?: string;
 }
 
@@ -928,7 +928,7 @@ declare interface GetWxNFCResultResponse {
   Nationality?: string | null;
   /** 旅行证件机读区第二行 29~42 位 */
   PersonalNumber?: string | null;
-  /** 证件的验真结果JSON格式如下： {&quot;result_issuer &quot;:&quot;签发者证书合法性验证结果 &quot;,&quot;result_paper&quot;:&quot;证件安全对象合法性验证结果 &quot;,&quot;result_data&quot; :&quot;防数据篡改验证结果 &quot;,&quot;result_chip&quot; :&quot;防证书件芯片被复制验证结果&quot;} 。 - 取值范围： 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真。 */
+  /** 证件的验真结果JSON格式如下： {"result_issuer ":"签发者证书合法性验证结果 ","result_paper":"证件安全对象合法性验证结果 ","result_data" :"防数据篡改验证结果 ","result_chip" :"防证书件芯片被复制验证结果"} 。 - 取值范围： 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真。 */
   CheckMRTD?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1047,7 +1047,7 @@ declare interface LivenessCompareRequest {
   ImageUrl?: string;
   /** 验证数据。数字模式传参：传数字验证码，验证码需先调用获取数字验证码接口得到；动作模式传参：传动作顺序，动作顺序需先调用获取动作顺序接口得到；静默模式传参：空。 */
   ValidateData?: string;
-  /** 额外配置，传入JSON字符串。格式如下：{&quot;BestFrameNum&quot;: 2 //需要返回多张最佳截图，取值范围2-10} */
+  /** 额外配置，传入JSON字符串。格式如下：{"BestFrameNum": 2 //需要返回多张最佳截图，取值范围2-10} */
   Optional?: string;
   /** 用于活体检测的视频，视频的Base64值。Base64编码后的大小不超过8M，支持mp4、avi、flv格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。 */
   VideoBase64?: string;
@@ -1083,7 +1083,7 @@ declare interface LivenessRecognitionRequest {
   VideoUrl?: string;
   /** 验证数据。数字活体模式传参：传数字验证码，验证码需先调用获取数字验证码接口得到；动作活体模式传参：传动作顺序，动作顺序需先调用获取动作顺序接口得到；静默活体模式传参：空。 */
   ValidateData?: string;
-  /** 额外配置，传入JSON字符串。格式如下：{&quot;BestFrameNum&quot;: 2 //需要返回多张最佳截图，取值范围2-10} */
+  /** 额外配置，传入JSON字符串。格式如下：{"BestFrameNum": 2 //需要返回多张最佳截图，取值范围2-10} */
   Optional?: string;
   /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;

@@ -293,7 +293,7 @@ declare interface CreateTranscodeRequest {
   Url: string;
   /** 是否为静态PPT，默认为False；如果IsStaticPPT为False，后缀名为.ppt或.pptx的文档会动态转码成HTML5页面，其他格式的文档会静态转码成图片；如果IsStaticPPT为True，所有格式的文档会静态转码成图片； */
   IsStaticPPT?: boolean;
-  /** 注意: 该参数已废弃, 请使用最新的 云API SDK ，使用 MinScaleResolution字段传递分辨率转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率示例：1280x720，注意分辨率宽高中间为英文字母&quot;xyz&quot;的&quot;x&quot; */
+  /** 注意: 该参数已废弃, 请使用最新的 云API SDK ，使用 MinScaleResolution字段传递分辨率转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x" */
   MinResolution?: string;
   /** 动态PPT转码可以为文件生成该分辨率的缩略图，不传、传空字符串或分辨率格式错误则不生成缩略图，分辨率格式同MinResolution */
   ThumbnailResolution?: string;
@@ -303,7 +303,7 @@ declare interface CreateTranscodeRequest {
   ExtraData?: string;
   /** 注意：该参数已废弃，文档转码优先级， 只有对于PPT动态转码生效，支持填入以下值：- low: 低优先级转码，对于动态转码，能支持500MB（下载超时时间10分钟）以及2000页文档，但资源有限可能会有比较长时间的排队，请酌情使用该功能。- 不填表示正常优先级转码，支持200MB文件（下载超时时间2分钟），500页以内的文档进行转码注意：对于PDF等静态文件转码，无论是正常优先级或者低优先级，最大只能支持200MB */
   Priority?: string;
-  /** 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率。分辨率越高，效果越清晰，转出来的图片资源体积会越大，课件加载耗时会变长，请根据实际使用场景配置此参数。示例：1280x720，注意分辨率宽高中间为英文字母&quot;xyz&quot;的&quot;x&quot; */
+  /** 转码后文档的最小分辨率，不传、传空字符串或分辨率格式错误则使用文档原分辨率。分辨率越高，效果越清晰，转出来的图片资源体积会越大，课件加载耗时会变长，请根据实际使用场景配置此参数。示例：1280x720，注意分辨率宽高中间为英文字母"xyz"的"x" */
   MinScaleResolution?: string;
   /** 此参数仅对动态转码生效。是否对不支持元素开启自动处理的功能，默认不开启。true -- 开启false -- 不开启当设置为true时，可配合AutoHandleUnsupportedElementTypes参数使用，具体有哪些不兼容元素类型，可参考AutoHandleUnsupportedElementTypes参数的说明。 */
   AutoHandleUnsupportedElement?: boolean;

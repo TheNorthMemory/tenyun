@@ -164,9 +164,9 @@ declare interface ApmAppConfig {
   AutoProfilingConfig?: AutoProfilingConfig;
   /** 阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值 */
   EnableThresholdConfig?: boolean;
-  /** 错误率阈值（%），用于判断应用健康状态为&quot;红色&quot; */
+  /** 错误率阈值（%），用于判断应用健康状态为"红色" */
   ErrRateThreshold?: number;
-  /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot; */
+  /** 响应时间预警阈值（ms），用于判断应用健康状态为"黄色" */
   ResponseDurationWarningThreshold?: number;
   /** 是否默认使用探针自带熔断阈值 */
   UseDefaultFuseConfig?: boolean;
@@ -678,9 +678,9 @@ declare interface ServiceDetail {
   InstanceName?: string;
   /** 阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值 */
   EnableThresholdConfig?: boolean | null;
-  /** 错误率阈值（%），用于判断应用健康状态为&quot;红色&quot;单位：% */
+  /** 错误率阈值（%），用于判断应用健康状态为"红色"单位：% */
   ErrRateThreshold?: number | null;
-  /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;单位：ms */
+  /** 响应时间预警阈值（ms），用于判断应用健康状态为"黄色"单位：ms */
   ResponseDurationWarningThreshold?: number | null;
 }
 
@@ -1603,9 +1603,9 @@ declare interface ModifyApmApplicationConfigRequest {
   AutoProfilingConfig?: AutoProfilingConfig;
   /** 阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值 */
   EnableThresholdConfig?: boolean;
-  /** 错误率阈值（%），用于判断应用健康状态为&quot;红色&quot; */
+  /** 错误率阈值（%），用于判断应用健康状态为"红色" */
   ErrRateThreshold?: number;
-  /** 响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot; */
+  /** 响应时间预警阈值（ms），用于判断应用健康状态为"黄色" */
   ResponseDurationWarningThreshold?: number;
   /** 是否使用探针默认熔断阈值 */
   UseDefaultFuseConfig?: boolean;

@@ -1514,11 +1514,11 @@ declare interface KafkaParam {
   UseTableMapping?: boolean;
   /** 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名） */
   UseAutoCreateTopic?: boolean;
-  /** 写入Topic时是否进行压缩，不开启填&quot;none&quot;，开启的话，填写&quot;open&quot;。 */
+  /** 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。 */
   CompressionType?: string;
   /** 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用) */
   MsgMultiple?: number;
-  /** 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写&quot;META_SYNC_INSTANCE_TYPE&quot;, 同步元数据及全部topic内消息的填写&quot;META_AND_DATA_SYNC_INSTANCE_TYPE&quot;; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写&quot;DATA_SYNC_TYPE&quot; */
+  /** 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写"META_SYNC_INSTANCE_TYPE", 同步元数据及全部topic内消息的填写"META_AND_DATA_SYNC_INSTANCE_TYPE"; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写"DATA_SYNC_TYPE" */
   ConnectorSyncType?: string;
   /** 数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false */
   KeepPartition?: boolean;
@@ -2934,7 +2934,7 @@ declare interface CreateInstancePreRequest {
   InstanceName: string;
   /** 可用区。当购买多可用区实例时，当前参数为主可用区。 查看可用区 */
   ZoneId: number;
-  /** 预付费购买时长，例如 &quot;1m&quot;,就是一个月,取值范围 1m~36m */
+  /** 预付费购买时长，例如 "1m",就是一个月,取值范围 1m~36m */
   Period: string;
   /** 国际站标准版实例规格。目前只有国际站标准版使用当前字段区分规格，国内站标准版使用峰值带宽区分规格。除了国际站标准版外的所有实例填写 1 即可。国际站标准版实例：入门型(general)]填写1；[标准型(standard)]填写2；[进阶型(advanced)]填写3；[容量型(capacity)]填写4；[高阶型1(specialized-1)]填写5；[高阶型2(specialized-2)]填写6；[高阶型3(specialized-3)]填写7；[高阶型4(specialized-4)]填写8。 */
   InstanceType: number;
@@ -2950,7 +2950,7 @@ declare interface CreateInstancePreRequest {
   RenewFlag?: number;
   /** CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
-  /** 实例类型: [标准版实例]填写 &quot;standard&quot; (默认), [专业版实例]填写 &quot;profession&quot;,[高级版实例]填写&quot;premium&quot; */
+  /** 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium" */
   SpecificationsType?: string;
   /** 磁盘大小，如果跟控制台规格配比不相符，则无法创建成功。默认取值为500，步长设置为100。可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/122562 */
   DiskSize?: number;
@@ -2960,7 +2960,7 @@ declare interface CreateInstancePreRequest {
   Partition?: number;
   /** 标签 */
   Tags?: Tag[];
-  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。&quot;CLOUD_SSD&quot;：SSD云硬盘；&quot;CLOUD_BASIC&quot;：高性能云硬盘。不传默认为 &quot;CLOUD_BASIC&quot; */
+  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC" */
   DiskType?: string;
   /** 是否创建跨可用区实例，当前参数为 true 时，zoneIds必填 */
   MultiZoneFlag?: boolean;
@@ -3004,7 +3004,7 @@ declare interface CreateMetaAndDataSyncDatahubTaskRequest {
   TopicList?: string[];
   /** Topic 前缀 */
   Prefix?: string;
-  /** Topic前缀分隔符仅支持 &quot;.&quot; / &quot;-&quot; / &quot;_&quot; */
+  /** Topic前缀分隔符仅支持 "." / "-" / "_" */
   Separator?: string;
   /** 连接器任务描述128字符内 */
   Description?: string;
@@ -3034,7 +3034,7 @@ declare interface CreateMetaDataAndOffsetSyncDatahubTaskRequest {
   TopicList?: string[];
   /** Topic 前缀 */
   Prefix?: string;
-  /** Topic前缀分隔符仅支持 &quot;.&quot; / &quot;-&quot; / &quot;_&quot; */
+  /** Topic前缀分隔符仅支持 "." / "-" / "_" */
   Separator?: string;
   /** 标签列表 */
   Tags?: Tag[];
@@ -3096,11 +3096,11 @@ declare interface CreatePostPaidInstanceRequest {
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数 */
   ClusterId?: number;
-  /** 实例版本。目前支持当前支持&quot;2.4.1&quot;, &quot;2.4.2&quot;,&quot;2.8.1&quot;, &quot;3.2.3&quot;，默认取值&quot;2.4.1&quot;。&quot;2.4.1&quot; 与 &quot;2.4.2&quot; 属于同一个版本，传任意一个均可。 */
+  /** 实例版本。目前支持当前支持"2.4.1", "2.4.2","2.8.1", "3.2.3"，默认取值"2.4.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
-  /** 实例类型。&quot;standard&quot;：标准版，&quot;profession&quot;：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
+  /** 实例类型。"standard"：标准版，"profession"：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
   SpecificationsType?: string;
-  /** 专业版实例磁盘类型，标准版实例不需要填写。&quot;CLOUD_SSD&quot;：SSD云硬盘；&quot;CLOUD_BASIC&quot;：高性能云硬盘。不传默认值为 &quot;CLOUD_BASIC&quot; */
+  /** 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认值为 "CLOUD_BASIC" */
   DiskType?: string;
   /** 实例内网峰值带宽，默认值为40。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格，可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/11745 */
   BandWidth?: number;
@@ -3230,7 +3230,7 @@ declare interface CreateTopicRequest {
   EnableWhiteList?: number;
   /** Ip白名单列表，配额限制，enableWhileList=1时必选 */
   IpWhiteList?: string[];
-  /** 清理日志策略，日志清理模式，默认为&quot;delete&quot;。&quot;delete&quot;：日志按保存时间删除，&quot;compact&quot;：日志按 key 压缩，&quot;compact, delete&quot;：日志按 key 压缩且会按保存时间删除。 */
+  /** 清理日志策略，日志清理模式，默认为"delete"。"delete"：日志按保存时间删除，"compact"：日志按 key 压缩，"compact, delete"：日志按 key 压缩且会按保存时间删除。 */
   CleanUpPolicy?: string;
   /** 主题备注入参限制：不超过 64 个字符 */
   Note?: string;
@@ -3778,7 +3778,7 @@ declare interface DescribeInstancesDetailRequest {
   Limit?: number;
   /** 匹配标签key值。 */
   TagKey?: string;
-  /** 过滤器。filter.Name 支持(&#39;Ip&#39;, &#39;VpcId&#39;, &#39;SubNetId&#39;, &#39;InstanceType&#39;,&#39;InstanceId&#39;) ,filter.Values最多传递10个值. */
+  /** 过滤器。filter.Name 支持('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId') ,filter.Values最多传递10个值. */
   Filters?: Filter[];
   /** 已经废弃， 使用InstanceIdList */
   InstanceIds?: string;
@@ -4654,7 +4654,7 @@ declare interface ModifyTopicAttributesRequest {
   InstanceId: string;
   /** 主题名 */
   TopicName: string;
-  /** 主题备注入参限制：不超过64个字符默认值：&quot;&quot; */
+  /** 主题备注入参限制：不超过64个字符默认值："" */
   Note?: string;
   /** IP 白名单开关，1：打开；0：关闭。 */
   EnableWhiteList?: number;

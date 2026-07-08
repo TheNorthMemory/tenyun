@@ -398,7 +398,7 @@ declare interface InstanceExpand {
 
 /** DB Custom 节点登录相关配置。 */
 declare interface LoginSettings {
-  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下： Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) ~ ! @ # $ % ^ &amp; * - + = | { } [ ] : ; &#39; , . ? / ]中的特殊符号。 Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ~ ! @ # $ % ^ &amp; * - + = | { } [ ] : ; &#39; , . ? /]中的特殊符号。 */
+  /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下： Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) ~ ! @ # $ % ^ &amp; * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。 Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ~ ! @ # $ % ^ &amp; * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。 */
   Password?: string;
   /** 密钥ID列表。关联密钥后，就可以通过对应的私钥来访问实例；KeyId可通过接口 DescribeKeyPairs获取，密钥与密码不能同时指定，同时Windows操作系统不支持指定密钥。入参限制：当前仅支持设置单个 ID。 */
   KeyIds?: string[];
@@ -435,7 +435,7 @@ declare interface AddNodesToDBCustomClusterRequest {
   ClusterId: string;
   /** 需上架的节点 ID 列表 */
   NodeIds: string[];
-  /** 节点上架后重设的操作系统镜像ID取值参考：可通过&quot;DescribeDBCustomImages&quot;接口获取支持的镜像。 */
+  /** 节点上架后重设的操作系统镜像ID取值参考：可通过"DescribeDBCustomImages"接口获取支持的镜像。 */
   ImageId: string;
   /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。 */
   LoginSettings: LoginSettings;
@@ -489,7 +489,7 @@ declare interface CreateDBCustomClusterResponse {
 declare interface CreateDBCustomNodesRequest {
   /** 产品支持的可用区枚举值：ap-shanghai-5： 上海五区ap-shanghai-8： 上海八区ap-nanjing-3： 南京三区 */
   Zone: string;
-  /** 镜像ID参数格式：img-xxxxxxx入参限制：必须为当前账号下DB Custom 产品拥有的镜像取值参考：可通过&quot;DescribeDBCustomImages&quot;接口获取支持的镜像。 */
+  /** 镜像ID参数格式：img-xxxxxxx入参限制：必须为当前账号下DB Custom 产品拥有的镜像取值参考：可通过"DescribeDBCustomImages"接口获取支持的镜像。 */
   ImageId: string;
   /** 为节点打通SSH连接的VPC 网络ID。参数格式：vpc-b4zgtest入参限制：必须是当前账号下拥有的VPC 网络ID，且不能跨地域。取值参考：可通过【查询VPC列表】接口获取：https://cloud.tencent.com/document/product/215/15778 */
   VpcId: string;

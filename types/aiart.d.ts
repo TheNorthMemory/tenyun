@@ -99,7 +99,7 @@ declare interface GenerateAvatarRequest {
   InputImage?: string;
   /** 输入图 Url。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000px，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   InputUrl?: string;
-  /** 输入人像图的质量检测开关，默认开启，仅在人像模式下生效。1：开启0：关闭建议开启检测，可提升生成效果，关闭检测可能因输入图像质量较差导致生成效果受损。开启后，将增强对输入图像的质量要求，如果输入图像单边分辨率&lt;500、图像中人脸占比较小、存在多人、没有检测到人脸、人脸不完整、人脸遮挡等，将被拦截。关闭后，将降低对输入图像的质量要求，如果图像中没有检测到人脸或人脸占比过小等，将被拦截。 */
+  /** 输入人像图的质量检测开关，默认开启，仅在人像模式下生效。1：开启0：关闭建议开启检测，可提升生成效果，关闭检测可能因输入图像质量较差导致生成效果受损。开启后，将增强对输入图像的质量要求，如果输入图像单边分辨率<500、图像中人脸占比较小、存在多人、没有检测到人脸、人脸不完整、人脸遮挡等，将被拦截。关闭后，将降低对输入图像的质量要求，如果图像中没有检测到人脸或人脸占比过小等，将被拦截。 */
   Filter?: number;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
   LogoAdd?: number;
@@ -345,13 +345,13 @@ declare interface RefineImageResponse {
 declare interface ReplaceBackgroundRequest {
   /** 商品原图 Url。图片限制：单边分辨率小于4000px，长宽比在2:5 ~ 5:2之间，转成 Base64 字符串后小于 6MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   ProductUrl: string;
-  /** 对新背景的文本描述。最多支持256个 utf-8 字符，支持中、英文。如果 Prompt = &quot;BackgroundTemplate&quot; 代表启用背景模板，需要在参数 BackgroundTemplate 中指定一个背景名称。 */
+  /** 对新背景的文本描述。最多支持256个 utf-8 字符，支持中、英文。如果 Prompt = "BackgroundTemplate" 代表启用背景模板，需要在参数 BackgroundTemplate 中指定一个背景名称。 */
   Prompt: string;
   /** 反向提示词。最多支持256个 utf-8 字符，支持中、英文。 */
   NegativePrompt?: string;
   /** 商品图中的商品主体名称。最多支持50个 utf-8 字符，支持中、英文。建议说明商品主体，否则影响生成效果。 */
   Product?: string;
-  /** 背景模板。仅当 Prompt = &quot;BackgroundTemplate&quot; 时生效，可支持的模板详见 商品背景模板列表 ，请传入字段“背景名称”中的值。 */
+  /** 背景模板。仅当 Prompt = "BackgroundTemplate" 时生效，可支持的模板详见 商品背景模板列表 ，请传入字段“背景名称”中的值。 */
   BackgroundTemplate?: string;
   /** 商品 Mask 图 Url，要求背景透明，保留商品主体。如果不传，将自动使用内置的商品分割算法得到 Mask。支持自定义上传 Mask，如果该参数不为空，则以实际上传的数据为准。图片限制：Mask 图必须和商品原图分辨率一致，转成 Base64 字符串后小于 6MB，格式仅支持 png。 */
   MaskUrl?: string;
@@ -359,7 +359,7 @@ declare interface ReplaceBackgroundRequest {
   Resolution?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
   LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}} */
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{"LogoUrl": "https://cos.ap-guangzhou.myqcloud.com/logo.jpg", "LogoRect": {"X": 10, "Y": 10, "Width": 20, "Height": 20}} */
   LogoParam?: LogoParam;
   /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。 */
   RspImgType?: string;
@@ -383,7 +383,7 @@ declare interface SketchToImageRequest {
   InputUrl?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
   LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}} */
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{"LogoUrl": "https://cos.ap-guangzhou.myqcloud.com/logo.jpg", "LogoRect": {"X": 10, "Y": 10, "Width": 20, "Height": 20}} */
   LogoParam?: LogoParam;
   /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。生成图分辨率较大时建议选择 url，使用 base64 可能因图片过大导致返回失败。 */
   RspImgType?: string;
@@ -405,7 +405,7 @@ declare interface SubmitDrawPortraitJobRequest {
   ImageNum: number;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。 0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
   LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}} */
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{"LogoUrl": "https://cos.ap-guangzhou.myqcloud.com/logo.jpg", "LogoRect": {"X": 10, "Y": 10, "Width": 20, "Height": 20}} */
   LogoParam?: LogoParam;
   /** 清晰度，单位为 px。支持以下选项：sd：基础版，分辨率512:640hd：高清畅享版，分辨率1024:1280hdpro：高清优享版，分辨率1024:1280（推荐）uhd：超清版，分辨率2048:2560不填默认为sd。 */
   Definition?: string;
@@ -421,7 +421,7 @@ declare interface SubmitDrawPortraitJobResponse {
 declare interface SubmitGlamPicJobRequest {
   /** 美照模板图 URL。图片限制：模板图中最多出现5张人脸，单边分辨率大于300px，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   TemplateUrl: string;
-  /** 用户图 URL 列表，以及模板图中需要替换成用户的人脸框信息。一张美照中可包含1 ~ 5个用户形象。每个用户需上传1 ~ 6张照片，仅支持单人照。模板图中的人脸数量需要大于等于用户个数。如果不传每个用户在模板图中的人脸框位置，默认按照模板图人脸框从大到小的顺序进行替换。如需自定义顺序，需要依次上传每个用户在模板图中的人脸框位置。图片限制：每张图片转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的用户图。示例值：[{&quot;ImageUrls&quot;: [&quot;https://cos.ap-guangzhou.myqcloud.com/image.jpg&quot;]}] */
+  /** 用户图 URL 列表，以及模板图中需要替换成用户的人脸框信息。一张美照中可包含1 ~ 5个用户形象。每个用户需上传1 ~ 6张照片，仅支持单人照。模板图中的人脸数量需要大于等于用户个数。如果不传每个用户在模板图中的人脸框位置，默认按照模板图人脸框从大到小的顺序进行替换。如需自定义顺序，需要依次上传每个用户在模板图中的人脸框位置。图片限制：每张图片转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的用户图。示例值：[{"ImageUrls": ["https://cos.ap-guangzhou.myqcloud.com/image.jpg"]}] */
   FaceInfos?: FaceInfo[];
   /** 美照生成数量。支持1 ~ 4张，默认生成4张。 */
   Num?: number;
@@ -433,7 +433,7 @@ declare interface SubmitGlamPicJobRequest {
   Clarity?: string;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
   LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}} */
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{"LogoUrl": "https://cos.ap-guangzhou.myqcloud.com/logo.jpg", "LogoRect": {"X": 10, "Y": 10, "Width": 20, "Height": 20}} */
   LogoParam?: LogoParam;
 }
 
@@ -453,13 +453,13 @@ declare interface SubmitMemeJobRequest {
   InputUrl?: string;
   /** 生成分辨率，单位为 px。真人类型支持256、512，默认为256，卡通类型仅支持512。 */
   Resolution?: number;
-  /** 自定义文案。仅对真人类型的 Pose 生效，将在生成的表情动图中显示指定的文字。如果传入的字符串长度大于10，只截取前10个显示。如果不传，默认使用自带的文案。如果 text = &quot;&quot; 空字符串，代表不在表情动图中添加文案。 */
+  /** 自定义文案。仅对真人类型的 Pose 生效，将在生成的表情动图中显示指定的文字。如果传入的字符串长度大于10，只截取前10个显示。如果不传，默认使用自带的文案。如果 text = "" 空字符串，代表不在表情动图中添加文案。 */
   Text?: string;
   /** 头发遮罩开关。true：裁剪过长的头发。false：不裁剪过长的头发。仅对卡通类型的 Pose 生效，默认为 false。 */
   Haircut?: boolean;
   /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图是 AI 生成的图片。 */
   LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{&quot;LogoUrl&quot;: &quot;https://cos.ap-guangzhou.myqcloud.com/logo.jpg&quot;, &quot;LogoRect&quot;: {&quot;X&quot;: 10, &quot;Y&quot;: 10, &quot;Width&quot;: 20, &quot;Height&quot;: 20}} */
+  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。示例值：{"LogoUrl": "https://cos.ap-guangzhou.myqcloud.com/logo.jpg", "LogoRect": {"X": 10, "Y": 10, "Width": 20, "Height": 20}} */
   LogoParam?: LogoParam;
 }
 
@@ -475,7 +475,7 @@ declare interface SubmitTextToImageJobRequest {
   Prompt: string;
   /** 参考图，最多三张图。 - Base64 或 Url 。单张图片限制：输入图分辨率单边最小50px，最大5000px；图片base64后大小小于6M ；格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
   Images?: string[];
-  /** 生成图分辨率单位为 px。格式：&quot;${宽}:${高}&quot;，说明：分辨率的设置和输入是否有参考图（image_urls/images参数）有关：一、文生图（无参考图）默认分辨率：1024:1024；尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。二、图生图（有参考图）尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。传入尺寸时（输出自适应，不严格遵循传入尺寸）：输入图分辨率分桶与传入尺寸分桶一致时：按输入图长宽比，缩放至接近 1024:1024 面积输出；输入图分辨率分桶与传入尺寸分桶不一致时：从 尺寸列表 中选取最接近传入尺寸的尺寸输出尺寸列表：2048:512、1984:512、1920:512、1856:512、1792:512、1728:512、1664:512、1600:512、1536:512、1472:576、1408:640、1344:704、1280:768、1216:832、1152:896、1088:960、1024:1024、960:1088、896:1152、832:1216、768:1280、704:1344、640:1408、576:1472、512:1536、512:1600、512:1664、512:1728、512:1792、512:1856、512:1920、512:1984、512:2048、768:1024、720:1280、1024:768、1280:720不传入尺寸时：将传入默认值1024:1024。 */
+  /** 生成图分辨率单位为 px。格式："${宽}:${高}"，说明：分辨率的设置和输入是否有参考图（image_urls/images参数）有关：一、文生图（无参考图）默认分辨率：1024:1024；尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。二、图生图（有参考图）尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。传入尺寸时（输出自适应，不严格遵循传入尺寸）：输入图分辨率分桶与传入尺寸分桶一致时：按输入图长宽比，缩放至接近 1024:1024 面积输出；输入图分辨率分桶与传入尺寸分桶不一致时：从 尺寸列表 中选取最接近传入尺寸的尺寸输出尺寸列表：2048:512、1984:512、1920:512、1856:512、1792:512、1728:512、1664:512、1600:512、1536:512、1472:576、1408:640、1344:704、1280:768、1216:832、1152:896、1088:960、1024:1024、960:1088、896:1152、832:1216、768:1280、704:1344、640:1408、576:1472、512:1536、512:1600、512:1664、512:1728、512:1792、512:1856、512:1920、512:1984、512:2048、768:1024、720:1280、1024:768、1280:720不传入尺寸时：将传入默认值1024:1024。 */
   Resolution?: string;
   /** 随机种子，默认随机。不传：随机种子生成。正数：固定种子生成。扩写开启时固定种子不生效，将保持随机。取值范围：1 - 4294967295 */
   Seed?: number;
@@ -587,7 +587,7 @@ declare interface UploadTrainPortraitImagesRequest {
   BaseUrl?: string;
   /** 写真模型训练用的图像 URL 列表，仅常规训练模式需要上传。图片数量：19 - 24 张。图片内容：单人，脸部清晰，和基础图像中的人物为同一人。图片限制：单边分辨率小于2000px，转成 Base64 字符串后小于 5MB。 */
   Urls?: string[];
-  /** 训练图像质量过滤开关配置。支持开启或关闭对训练图像分辨率下限、脸部区域大小、脸部遮挡的过滤，默认开启以上过滤。如果训练图像内包含多人脸或无人脸、和 Base 人像不为同一人也将被过滤，不可关闭该过滤条件。建议：关闭以上过滤可能导致写真生成效果受损，建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图像进行训练。示例值：{&quot;Resolution&quot;:1,&quot;Size&quot;:1,&quot;Occlusion&quot;:1} */
+  /** 训练图像质量过滤开关配置。支持开启或关闭对训练图像分辨率下限、脸部区域大小、脸部遮挡的过滤，默认开启以上过滤。如果训练图像内包含多人脸或无人脸、和 Base 人像不为同一人也将被过滤，不可关闭该过滤条件。建议：关闭以上过滤可能导致写真生成效果受损，建议使用单人、正脸、脸部区域占比较大、脸部清晰无遮挡、无大角度偏转、无夸张表情的图像进行训练。示例值：{"Resolution":1,"Size":1,"Occlusion":1} */
   Filter?: Filter;
   /** 训练模式。默认使用常规训练模式。如果使用快速训练模式和免训练模式，只需要在 BaseUrl 中传入1张图片，Urls.N 中无需传入图片。0：常规训练模式，上传多张图片用于模型训练，完成训练后可生成写真图片。1：快速训练模式，仅需上传1张图片用于模型训练，训练速度更快，完成训练后可生成写真图片。2：免训练模式，仅需上传1张图片，跳过模型训练环节，直接生成写真图片。 */
   TrainMode?: number;

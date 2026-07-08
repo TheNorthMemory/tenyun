@@ -849,9 +849,9 @@ declare interface SearchLogRequest {
   Page: number;
   /** 每页数据大小 */
   Limit: number;
-  /** 事件查询筛选条件；示例如下：[{&quot;key&quot;:&quot;host&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;106.53.106.243&quot;},{&quot;type&quot;:&quot;AND&quot;,&quot;filters&quot;:[{&quot;key&quot;:&quot;region&quot;,&quot;operator&quot;:&quot;like&quot;,&quot;value&quot;:&quot;guangzhou&quot;},{&quot;key&quot;:&quot;type&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;cvm:ErrorEvent:GuestReboot&quot;}]},{&quot;type&quot;:&quot;OR&quot;,&quot;filters&quot;:[{&quot;key&quot;:&quot;field1&quot;,&quot;operator&quot;:&quot;like&quot;,&quot;value&quot;:&quot;access&quot;},{&quot;key&quot;:&quot;field2&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;custom&quot;}]}] */
+  /** 事件查询筛选条件；示例如下：[{"key":"host","operator":"eq","value":"106.53.106.243"},{"type":"AND","filters":[{"key":"region","operator":"like","value":"guangzhou"},{"key":"type","operator":"eq","value":"cvm:ErrorEvent:GuestReboot"}]},{"type":"OR","filters":[{"key":"field1","operator":"like","value":"access"},{"key":"field2","operator":"eq","value":"custom"}]}] */
   Filter?: LogFilter[];
-  /** 事件查询结果排序，[&quot;timestamp&quot;,&quot;subject&quot;] */
+  /** 事件查询结果排序，["timestamp","subject"] */
   OrderFields?: string[];
   /** 排序方式，asc 从旧到新，desc 从新到旧 */
   OrderBy?: string;

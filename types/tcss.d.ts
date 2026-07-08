@@ -92,7 +92,7 @@ declare interface AbnormalProcessEventInfo {
   MatchRuleLevel?: string;
   /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败 ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
   ContainerNetStatus?: string;
-  /** 容器子状态&quot;AGENT_OFFLINE&quot; //Agent离线&quot;NODE_DESTROYED&quot; //节点已销毁&quot;CONTAINER_EXITED&quot; //容器已退出&quot;CONTAINER_DESTROYED&quot; //容器已销毁&quot;SHARED_HOST&quot; // 容器与主机共享网络&quot;RESOURCE_LIMIT&quot; //隔离操作资源超限&quot;UNKNOW&quot; // 原因未知 */
+  /** 容器子状态"AGENT_OFFLINE" //Agent离线"NODE_DESTROYED" //节点已销毁"CONTAINER_EXITED" //容器已退出"CONTAINER_DESTROYED" //容器已销毁"SHARED_HOST" // 容器与主机共享网络"RESOURCE_LIMIT" //隔离操作资源超限"UNKNOW" // 原因未知 */
   ContainerNetSubStatus?: string;
   /** 容器隔离操作来源 */
   ContainerIsolateOperationSrc?: string;
@@ -252,7 +252,7 @@ declare interface AccessControlEventInfo {
   ImageName?: string;
   /** 动作执行结果， BEHAVIOR_NONE: 无 BEHAVIOR_ALERT: 告警 BEHAVIOR_RELEASE：放行 BEHAVIOR_HOLDUP_FAILED:拦截失败 BEHAVIOR_HOLDUP_SUCCESSED：拦截失败 */
   Behavior?: string;
-  /** 状态0:未处理 “EVENT_UNDEAL”:事件未处理 &quot;EVENT_DEALED&quot;:事件已经处理 &quot;EVENT_INGNORE&quot;：事件已经忽略 */
+  /** 状态0:未处理 “EVENT_UNDEAL”:事件未处理 "EVENT_DEALED":事件已经处理 "EVENT_INGNORE"：事件已经忽略 */
   Status?: string;
   /** 事件记录的唯一id */
   Id?: string;
@@ -288,7 +288,7 @@ declare interface AccessControlEventInfo {
   RuleId?: string;
   /** 网络状态未隔离 NORMAL已隔离 ISOLATED隔离中 ISOLATING隔离失败 ISOLATE_FAILED解除隔离中 RESTORING解除隔离失败 RESTORE_FAILED */
   ContainerNetStatus?: string;
-  /** 容器子状态&quot;AGENT_OFFLINE&quot; //Agent离线&quot;NODE_DESTROYED&quot; //节点已销毁&quot;CONTAINER_EXITED&quot; //容器已退出&quot;CONTAINER_DESTROYED&quot; //容器已销毁&quot;SHARED_HOST&quot; // 容器与主机共享网络&quot;RESOURCE_LIMIT&quot; //隔离操作资源超限&quot;UNKNOW&quot; // 原因未知 */
+  /** 容器子状态"AGENT_OFFLINE" //Agent离线"NODE_DESTROYED" //节点已销毁"CONTAINER_EXITED" //容器已退出"CONTAINER_DESTROYED" //容器已销毁"SHARED_HOST" // 容器与主机共享网络"RESOURCE_LIMIT" //隔离操作资源超限"UNKNOW" // 原因未知 */
   ContainerNetSubStatus?: string;
   /** 容器隔离操作来源 */
   ContainerIsolateOperationSrc?: string;
@@ -660,7 +660,7 @@ declare interface ClusterInfoItem {
   ClusterCheckMode?: string;
   /** 是否自动定期检测 */
   ClusterAutoCheck?: boolean;
-  /** 防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成&quot;N个节点防御容器为就绪&quot;，其他错误直接展示 */
+  /** 防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成"N个节点防御容器为就绪"，其他错误直接展示 */
   DefenderErrorReason?: string;
   /** 防御容器没有ready状态的节点数量 */
   UnreadyNodeNum?: number;
@@ -1572,7 +1572,7 @@ declare interface HostInfo {
   Status?: string;
   /** 是否是Containerd */
   IsContainerd?: boolean;
-  /** 主机来源：[&quot;CVM&quot;, &quot;ECM&quot;, &quot;LH&quot;, &quot;BM&quot;] 中的之一为腾讯云服务器；[&quot;Other&quot;]之一非腾讯云服务器； */
+  /** 主机来源：["CVM", "ECM", "LH", "BM"] 中的之一为腾讯云服务器；["Other"]之一非腾讯云服务器； */
   MachineType?: string;
   /** 外网ip */
   PublicIp?: string;
@@ -2258,7 +2258,7 @@ declare interface K8SAPIRuleTypeCountItem {
 
 /** k8s告警类型和中文映射 */
 declare interface K8SAPIRuleTypeZhItem {
-  /** 规则类型枚举值：&quot;rule_type&quot;: &quot;ABNORMAL_CREATE_POD&quot;,： 可疑容器创建 */
+  /** 规则类型枚举值："rule_type": "ABNORMAL_CREATE_POD",： 可疑容器创建 */
   RuleType?: string;
   /** 规则类型对应中文 */
   RuleTypeZh?: string;
@@ -2284,7 +2284,7 @@ declare interface K8sApiAbnormalEventInfo {
   LastCreateTime?: string;
   /** 告警数量 */
   AlarmCount?: number;
-  /** 状态&quot;EVENT_UNDEAL&quot;:未处理&quot;EVENT_DEALED&quot;: 已处理&quot;EVENT_IGNORE&quot;: 忽略&quot;EVENT_DEL&quot;: 删除&quot;EVENT_ADD_WHITE&quot;: 加白 */
+  /** 状态"EVENT_UNDEAL":未处理"EVENT_DEALED": 已处理"EVENT_IGNORE": 忽略"EVENT_DEL": 删除"EVENT_ADD_WHITE": 加白 */
   Status?: string;
   /** 集群masterIP */
   ClusterMasterIP?: string;
@@ -2304,7 +2304,7 @@ declare interface K8sApiAbnormalEventInfo {
   HighLightFields?: string[];
   /** 命中规则 */
   MatchRule?: K8sApiAbnormalRuleScopeInfo;
-  /** 高亮字段对应的命中规则内容(JSON字符串, 如: {&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;})参数格式：{&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;} */
+  /** 高亮字段对应的命中规则内容(JSON字符串, 如: {"field1":"value1","field2":"value2"})参数格式：{"field1":"value1","field2":"value2"} */
   HighLightFieldsVal?: string;
   /** 规则中文 */
   RuleTypeZH?: string;

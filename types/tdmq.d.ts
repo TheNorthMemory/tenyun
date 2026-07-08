@@ -2545,7 +2545,7 @@ declare interface CreateRabbitMQUserRequest {
   InstanceId: string;
   /** 用户名，登录时使用 */
   User: string;
-  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;&#39;,.?/】中的两项 */
+  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;',.?/】中的两项 */
   Password: string;
   /** 描述 */
   Description?: string;
@@ -5101,7 +5101,7 @@ declare interface ModifyRabbitMQUserRequest {
   InstanceId: string;
   /** 用户名，形如rabbitmq。有效的 User 名称可通过登录 TDMQ RabbitMQ 控制台查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。 */
   User: string;
-  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;&#39;,.?/】中的两项 */
+  /** 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;',.?/】中的两项 */
   Password: string;
   /** 描述，不传则不修改 */
   Description?: string;
