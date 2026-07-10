@@ -184,6 +184,8 @@ declare interface ModelChargingItem {
   Price?: string;
   /** 价格单位，后端直接提供当前语言文本（如 元/百万tokens、元/张、积分/次）。 */
   PriceUnit?: string;
+  /** 高峰价格，为空表示无高峰定价 */
+  PeakPrice?: string;
 }
 
 /** 模型体验包信息 */

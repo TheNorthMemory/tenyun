@@ -88,13 +88,13 @@ declare interface HTTPRedirectInfo {
   HttpCode: number;
   /** 重定向的主机地址，默认值${host}。长度3 ~ 128个字符，支持的字符集为：a-z 0-9 _ . -。 */
   Host?: string;
-  /** 重定向的路径，默认值${path}。长度1 ~ 128个字符，支持的字符集为：a-z 0-9 ? = _ . - / : 。 */
+  /** 重定向的路径，默认值${path}。长度1 ~ 128个字符，支持的字符集为：a-z A-Z 0-9 ? = _ . - / : 。 */
   Path?: string;
   /** 重定向的端口，默认值 ${port}。取值1 ~ 65535。 */
   Port?: string;
   /** 重定向的协议，取值：HTTP,HTTPS，默认值${protocol}。 */
   Protocol?: string;
-  /** 重定向的查询字符串，默认值${query}。长度1 ~ 128字符，支持可打印字符，不支持 #[]{}\|<>& 和空格。 */
+  /** 重定向的查询字符串，默认值${query}。长度1 ~ 128字符，支持可打印字符，不支持 #[]{}|<>&amp; 和空格。 */
   Query?: string;
 }
 
@@ -102,9 +102,9 @@ declare interface HTTPRedirectInfo {
 declare interface HTTPRewriteInfo {
   /** 重写的主机地址，默认值${host}。长度3 ~ 128个字符，支持的字符集为：a-z 0-9 _ . -。 */
   Host?: string;
-  /** 重写的路径，默认值${path}。长度1 ~ 128个字符，支持的字符集为：a-z 0-9 ? = _ . - / : 。 */
+  /** 重写的路径，默认值${path}。长度1 ~ 128个字符，支持的字符集为：a-z A-Z 0-9 ? = _ . - / : 。 */
   Path?: string;
-  /** 重写的查询字符串，默认值${query}。长度1 ~ 128字符，支持可打印字符，不支持 #[]{}|<>& 和空格。 */
+  /** 重写的查询字符串，默认值${query}。长度1 ~ 128字符，支持可打印字符，不支持 #[]{}|<>&amp; 和空格。 */
   Query?: string;
 }
 
@@ -712,11 +712,11 @@ declare interface Zone {
 declare interface ZoneMappingInfo {
   /** 子网 ID。 */
   SubnetId: string | null;
-  /** 可用区ID。最多支持添加10个可用区。若当前地域支持2个及以上的可用区，至少需要添加2个可用区。您可以通过调用[DescribeZones](~~36064~~)接口获取可用区ID对应的可用区的信息。 */
+  /** 可用区ID。最多支持添加10个可用区。若当前地域支持2个及以上的可用区，至少需要添加2个可用区。您可以通过调用DescribeZones接口获取可用区ID对应的可用区的信息。 */
   ZoneId: string | null;
   /** 负载均衡 VIP/EIP 信息 */
   LoadBalancerAddress?: LoadBalancerAddress;
-  /** 可用区状态。取值：- **Active**：运行中。- **Stopped**：已停止。- **Shifted**：已移除。- **Starting**：启动中。- **Stopping**：停止中。 */
+  /** 可用区状态。取值：Active：运行中。Stopped：已停止。Shifted：已移除。Starting：启动中。Stopping：停止中。 */
   Status?: string;
 }
 
@@ -733,10 +733,10 @@ declare interface ZoneMappingsItem {
 declare interface AddTargetsToTargetGroupRequest {
   /** 目标组 ID，格式为 lbtg- 后接 8 位字母数字。 */
   TargetGroupId: string;
+  /** 需要添加至目标组的后端服务列表。单次请求最多支持添加 **50** 个后端服务。 */
+  Targets: TargetToAdd[];
   /** 是否预览此次请求。 - **false**（默认）：发送普通请求，直接添加后端服务至目标组。 - **true**：发送预览请求，检查添加后端服务的参数、格式、业务限制等是否符合要求。 */
   DryRun?: boolean;
-  /** 需要添加至目标组的后端服务列表。单次请求最多支持添加 **50** 个后端服务。 */
-  Targets?: TargetToAdd[];
 }
 
 declare interface AddTargetsToTargetGroupResponse {
@@ -895,12 +895,12 @@ declare interface CreateRulesRequest {
   ListenerId: string;
   /** 负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。 */
   LoadBalancerId: string;
+  /** 转发规则列表。 */
+  Rules: RuleInput[];
   /** 客户端Token，用于保证请求的幂等性。 从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符。 若您未指定，则系统自动使用API请求的RequestId作为ClientToken标识。每次API请求的RequestId不一样。 */
   ClientToken?: string;
   /** 是否只预检查此次请求。 */
   DryRun?: boolean;
-  /** 转发规则列表。 */
-  Rules?: RuleInput[];
 }
 
 declare interface CreateRulesResponse {
@@ -911,15 +911,15 @@ declare interface CreateRulesResponse {
 }
 
 declare interface CreateSecurityPolicyRequest {
-  /** 安全策略支持的加密套件列表。加密套件用于协商客户端与服务端之间的加密算法。**配置说明：**- 加密套件的可选范围取决于所选的 TLS 协议版本（TLSVersions 参数）。- 只要加密套件被任意一个已选 TLS 版本支持，即可添加到列表中。- 若 TLSVersions 包含 TLSv1.3：可不指定 TLSv1.3 专属加密套件（系统将自动补全全部 TLSv1.3 套件）；若指定，则必须包含全部 TLSv1.3 专属加密套件，不支持仅指定部分。**获取可用加密套件：**请调用 [DescribeSecurityPolicyCapabilities](https://cloud.tencent.com/document/api/xxx) 接口查询各 TLS 版本支持的加密套件列表。 */
+  /** 安全策略支持的加密套件列表。加密套件用于协商客户端与服务端之间的加密算法。配置说明：加密套件的可选范围取决于所选的 TLS 协议版本（TLSVersions 参数）。只要加密套件被任意一个已选 TLS 版本支持，即可添加到列表中。若 TLSVersions 包含 TLSv1.3：可不指定 TLSv1.3 专属加密套件（系统将自动补全全部 TLSv1.3 套件）；若指定，则必须包含全部 TLSv1.3 专属加密套件，不支持仅指定部分。获取可用加密套件：请调用 DescribeSecurityPolicyCapabilities 接口查询各 TLS 版本支持的加密套件列表。 */
   Ciphers: string[];
-  /** 安全策略支持的 TLS 协议版本列表。TLS（Transport Layer Security）协议用于保障客户端与负载均衡之间的通信安全。**可选值：**- **TLSv1.0**：兼容性最好，但安全性较低，不推荐在生产环境使用。- **TLSv1.1**：安全性略优于 TLSv1.0，但仍不推荐。- **TLSv1.2**：目前主流的安全协议版本，兼顾安全性与兼容性。- **TLSv1.3**：最新版本，安全性最高，性能更优，推荐优先使用。**建议：** 生产环境建议至少选择 TLSv1.2，若客户端支持，优先启用 TLSv1.3。 */
+  /** 安全策略支持的 TLS 协议版本列表。TLS（Transport Layer Security）协议用于保障客户端与负载均衡之间的通信安全。可选值：TLSv1.0：兼容性最好，但安全性较低，不推荐在生产环境使用。TLSv1.1：安全性略优于 TLSv1.0，但仍不推荐。TLSv1.2：目前主流的安全协议版本，兼顾安全性与兼容性。TLSv1.3：最新版本，安全性最高，性能更优，推荐优先使用。建议： 生产环境建议至少选择 TLSv1.2，若客户端支持，优先启用 TLSv1.3。 */
   TLSVersions: string[];
   /** 客户端幂等性令牌。用于保证请求的幂等性，防止因网络超时或客户端重试导致的重复创建。建议使用 UUID 作为令牌值。相同的 ClientToken 在有效期内重复请求时，服务端将返回相同的结果。 */
   ClientToken?: string;
-  /** 是否仅执行预检请求。取值：- **true**：仅执行预检请求，不实际创建资源。预检请求将验证参数格式、权限及资源配额等，帮助您在正式操作前发现潜在问题。- **false**（默认）：执行正常请求，通过预检后将直接创建安全策略。 */
+  /** 是否仅执行预检请求。取值：true：仅执行预检请求，不实际创建资源。预检请求将验证参数格式、权限及资源配额等，帮助您在正式操作前发现潜在问题。false（默认）：执行正常请求，通过预检后将直接创建安全策略。 */
   DryRun?: boolean;
-  /** 安全策略名称。用于标识和区分不同的安全策略。**命名规则：**- 长度为 2~128 个字符。- 必须以英文字母或中文开头。- 可包含英文字母、中文、数字、半角句号（.）、下划线（_）和短划线（-）。**建议：** 使用具有业务含义的名称，例如 "prod-high-security" 或 "测试环境策略"。 */
+  /** 安全策略名称。用于标识和区分不同的安全策略。命名规则：长度为 2~128 个字符。必须以英文字母或中文开头。可包含英文字母、中文、数字、半角句号（.）、下划线（_）和短划线（-）。建议： 使用具有业务含义的名称，例如 "prod-high-security" 或 "测试环境策略"。 */
   SecurityPolicyName?: string;
   /** 安全策略的标签列表。标签用于对资源进行分类和管理，便于按业务、环境、部门等维度筛选和组织资源。每个标签由键值对（Key-Value）组成，同一资源下标签键不可重复。 */
   Tags?: TagInfo[];
@@ -933,25 +933,25 @@ declare interface CreateSecurityPolicyResponse {
 }
 
 declare interface CreateTargetGroupRequest {
-  /** 目标组类型。取值：- **Instance**（默认）：Cvm服务器类型或者Eni网卡类型。 */
+  /** 目标组类型。取值：Instance（默认）：Cvm服务器类型或者Eni网卡类型。 */
   TargetType: string;
   /** 私有网络 ID。 */
   VpcId: string;
-  /** 是否预览此次请求。- **false**（默认）：发送普通请求，直接创建目标组。- **true**：发送预览请求，检查创建目标组的参数、格式、业务限制等是否符合要求。 */
+  /** 是否预览此次请求。false（默认）：发送普通请求，直接创建目标组。true：发送预览请求，检查创建目标组的参数、格式、业务限制等是否符合要求。 */
   DryRun?: boolean;
   /** 健康检查配置。 */
   HealthCheckConfig?: HealthCheckConfig;
   /** 是否开启长连接。 */
   KeepaliveEnabled?: boolean;
-  /** 后端服务协议类型。取值：- **HTTP**（默认）：支持绑定HTTP、HTTPS的监听器- **HTTPS**：支持绑定HTTPS类型的监听器- **GRPC**：支持绑定HTTPS类型的监听器- **GRPCS**：支持绑定HTTPS类型的监听器 */
+  /** 后端服务协议类型。取值：HTTP（默认）：支持绑定HTTP、HTTPS的监听器HTTPS：支持绑定HTTPS类型的监听器GRPC：支持绑定HTTPS类型的监听器GRPCS：支持绑定HTTPS类型的监听器 */
   Protocol?: string;
-  /** 调度算法。取值：- **wrr**（默认）：加权轮训，按照权重选择后端服务器，权重越高的服务器被轮训到的概率越高。- **wlc**：加权最小连接数，当不同后端服务器权重值相同时，当前连接数越小的后端服务器被轮询到的概率越高。 */
+  /** 调度算法。取值：wrr（默认）：加权轮询，按照权重选择后端服务器，权重越高的服务器被轮询到的概率越高。wlc：加权最小连接数，当不同后端服务器权重值相同时，当前连接数越小的后端服务器被轮询到的概率越高。 */
   SchedulerAlgorithm?: string;
   /** 会话保持配置。 */
   StickySessionConfig?: StickySessionConfig;
   /** 标签。 */
   Tags?: TagInfo[];
-  /** 目标组名称。默认为目标组ID。长度为 **1-255** 个字符，可包含数字、大小写字母、中文、半角句号（.）、下划线（_）和短划线（-）。 */
+  /** 目标组名称。默认为目标组ID。长度为 1-255 个字符，可包含数字、大小写字母、中文、半角句号（.）、下划线（_）和短划线（-）。 */
   TargetGroupName?: string;
 }
 
@@ -963,10 +963,10 @@ declare interface CreateTargetGroupResponse {
 }
 
 declare interface DeleteHealthCheckTemplatesRequest {
+  /** 健康检查模板 ID 列表，ID 格式为 hct- 后接字母数字。 */
+  HealthCheckTemplateIds: string[];
   /** 是否预览此次请求。- **false**（默认）：发送普通请求，直接删除模板。- **true**：发送预览请求，检查删除模板的参数、格式、业务限制等是否符合要求。 */
   DryRun?: boolean;
-  /** 健康检查模板 ID 列表，ID 格式为 hct- 后接字母数字。 */
-  HealthCheckTemplateIds?: string[];
 }
 
 declare interface DeleteHealthCheckTemplatesResponse {
@@ -1065,7 +1065,7 @@ declare interface DescribeAsyncJobsResponse {
 }
 
 declare interface DescribeHealthCheckTemplatesRequest {
-  /** 过滤器。通过指定的过滤条件来查询健康检查模版，支持：- Name的值为**HealthCheckTemplateName**。通过名称来筛选健康检查模版。**Values**的值为模版名称列表。- Name的值为**HealthCheckProtocol**。通过健康检查协议来筛选健康检查模版。**Values**的值为协议列表。- 通过标签方式筛选。 */
+  /** 过滤器。通过指定的过滤条件来查询健康检查模板，支持：Name的值为HealthCheckTemplateName。通过名称来筛选健康检查模板。Values的值为模板名称列表。Name的值为HealthCheckProtocol。通过健康检查协议来筛选健康检查模板。Values的值为协议列表。通过标签方式筛选。 */
   Filters?: Filter[];
   /** 健康检查模板 ID 列表，ID 格式为 hct- 后接字母数字。 */
   HealthCheckTemplateIds?: string[];
@@ -1575,10 +1575,10 @@ declare interface ModifyLoadBalancerAttributesResponse {
 declare interface ModifyLoadBalancerModificationProtectionRequest {
   /** 负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。 */
   LoadBalancerId: string;
+  /** 是否开启修改保护。开启后，可防止实例被意外修改或删除。\n- true：开启修改保护\n- false：关闭修改保护 */
+  ModificationProtectionEnabled: boolean;
   /** 是否只预检此次请求。取值：- true：仅执行预检，不实际操作资源。检查参数完整性、请求格式及业务限制，通过返回 DryRunOperation，不通过返回对应错误。- false（默认）：执行正常请求，检查通过后直接操作资源。 */
   DryRun?: boolean;
-  /** 是否开启修改保护。开启后，可防止实例被意外修改或删除。\n- true：开启修改保护\n- false：关闭修改保护 */
-  ModificationProtectionEnabled?: boolean;
   /** 开启修改保护的原因说明。长度为 1~255 个字符，必须是中文和无害字符串中的字符， 可包含中文、字母、数字、短划线（-）、正斜线（/）、半角句号（.）、下划线（_）。 */
   Reason?: string;
 }
@@ -1607,13 +1607,13 @@ declare interface ModifyRulesAttributesResponse {
 declare interface ModifySecurityPolicyAttributesRequest {
   /** 安全策略 ID，格式为 tls- 后接 8 位字母数字。 */
   SecurityPolicyId: string;
-  /** 修改后的加密套件列表。加密套件用于协商客户端与服务端之间的加密算法。**配置说明：**- 加密套件的可选范围取决于所选的 TLS 协议版本（TLSVersions 参数）。- 只要加密套件被任意一个已选 TLS 版本支持，即可添加到列表中。- 若 TLSVersions 包含 TLSv1.3：可不指定 TLSv1.3 专属加密套件（系统将自动补全全部 TLSv1.3 套件）；若指定，则必须包含全部 TLSv1.3 专属加密套件，不支持仅指定部分。**获取可用加密套件：**请调用 [DescribeSecurityPolicyCapabilities](https://cloud.tencent.com/document/api/xxx) 接口查询各 TLS 版本支持的加密套件列表。**注意：** 若不传此参数，则保持原有配置不变。 */
+  /** 修改后的加密套件列表。加密套件用于协商客户端与服务端之间的加密算法。配置说明：加密套件的可选范围取决于所选的 TLS 协议版本（TLSVersions 参数）。只要加密套件被任意一个已选 TLS 版本支持，即可添加到列表中。若 TLSVersions 包含 TLSv1.3：可不指定 TLSv1.3 专属加密套件（系统将自动补全全部 TLSv1.3 套件）；若指定，则必须包含全部 TLSv1.3 专属加密套件，不支持仅指定部分。获取可用加密套件：请调用 DescribeSecurityPolicyCapabilities 接口查询各 TLS 版本支持的加密套件列表。注意： 若不传此参数，则保持原有配置不变。 */
   Ciphers?: string[];
-  /** 是否仅执行预检请求。取值：- **true**：仅执行预检请求，不实际修改资源。预检请求将验证参数格式、权限及配置有效性等，帮助您在正式操作前发现潜在问题。- **false**（默认）：执行正常请求，通过预检后将直接修改安全策略。 */
+  /** 是否仅执行预检请求。取值：true：仅执行预检请求，不实际修改资源。预检请求将验证参数格式、权限及配置有效性等，帮助您在正式操作前发现潜在问题。false（默认）：执行正常请求，通过预检后将直接修改安全策略。 */
   DryRun?: boolean;
-  /** 修改后的安全策略名称。用于标识和区分不同的安全策略。**命名规则：**- 长度为 2~128 个字符。- 必须以英文字母或中文开头。- 可包含英文字母、中文、数字、半角句号（.）、下划线（_）和短划线（-）。**注意：** 若不传此参数，则保持原有名称不变。 */
+  /** 修改后的安全策略名称。用于标识和区分不同的安全策略。命名规则：长度为 2~128 个字符。必须以英文字母或中文开头。可包含英文字母、中文、数字、半角句号（.）、下划线（_）和短划线（-）。注意： 若不传此参数，则保持原有名称不变。 */
   SecurityPolicyName?: string;
-  /** 修改后的 TLS 协议版本列表。TLS（Transport Layer Security）协议用于保障客户端与负载均衡之间的通信安全。**可选值：**- **TLSv1.0**：兼容性最好，但安全性较低，不推荐在生产环境使用。- **TLSv1.1**：安全性略优于 TLSv1.0，但仍不推荐。- **TLSv1.2**：目前主流的安全协议版本，兼顾安全性与兼容性。- **TLSv1.3**：最新版本，安全性最高，性能更优，推荐优先使用。**注意：** - 若不传此参数，则保持原有配置不变。- 修改 TLS 版本时，请同步检查 Ciphers 参数的配置是否兼容。 */
+  /** 修改后的 TLS 协议版本列表。TLS（Transport Layer Security）协议用于保障客户端与负载均衡之间的通信安全。可选值：TLSv1.0：兼容性最好，但安全性较低，不推荐在生产环境使用。TLSv1.1：安全性略优于 TLSv1.0，但仍不推荐。TLSv1.2：目前主流的安全协议版本，兼顾安全性与兼容性。TLSv1.3：最新版本，安全性最高，性能更优，推荐优先使用。注意： 若不传此参数，则保持原有配置不变。修改 TLS 版本时，请同步检查 Ciphers 参数的配置是否兼容。 */
   TLSVersions?: string[];
 }
 
@@ -1623,13 +1623,13 @@ declare interface ModifySecurityPolicyAttributesResponse {
 }
 
 declare interface ModifyTargetGroupAttributesRequest {
-  /** 是否预览此次请求。- **false**（默认）：发送普通请求，直接修改目标组。- **true**：发送预览请求，检查修改目标组的参数、格式、业务限制等是否符合要求。 */
+  /** 是否预览此次请求。false（默认）：发送普通请求，直接修改目标组。true：发送预览请求，检查修改目标组的参数、格式、业务限制等是否符合要求。 */
   DryRun?: boolean;
   /** 健康检查配置。 */
   HealthCheckConfig?: HealthCheckConfig;
   /** 是否开启长连接。 */
   KeepaliveEnabled?: boolean;
-  /** 调度算法。取值：- **wrr**：加权轮训，按照权重选择后端服务器，权重越高的服务器被轮训到的概率越高。- **wlc**：加权最小连接数，当不同后端服务器权重值相同时，当前连接数越小的后端服务器被轮询到的概率越高。 */
+  /** 调度算法。取值：wrr：加权轮询，按照权重选择后端服务器，权重越高的服务器被轮询到的概率越高。wlc：加权最小连接数，当不同后端服务器权重值相同时，当前连接数越小的后端服务器被轮询到的概率越高。 */
   SchedulerAlgorithm?: string;
   /** 会话保持配置。 */
   StickySessionConfig?: StickySessionConfig;
@@ -1647,10 +1647,10 @@ declare interface ModifyTargetGroupAttributesResponse {
 declare interface ModifyTargetsInTargetGroupRequest {
   /** 目标组 ID，格式为 lbtg- 后接 8 位字母数字。 */
   TargetGroupId: string;
+  /** 需要修改的后端服务列表。 */
+  Targets: TargetToModify[];
   /** 是否预览此次请求。 - **false**（默认）：发送普通请求，直接修改后端服务信息。 - **true**：发送预览请求，检查修改后端服务的参数、格式、业务限制等是否符合要求。 */
   DryRun?: boolean;
-  /** 需要修改的后端服务列表。 */
-  Targets?: TargetToModify[];
 }
 
 declare interface ModifyTargetsInTargetGroupResponse {
@@ -1673,10 +1673,10 @@ declare interface NotifyUnbindTargetResponse {
 declare interface RemoveTargetsFromTargetGroupRequest {
   /** 目标组 ID，格式为 lbtg- 后接 8 位字母数字。 */
   TargetGroupId: string;
+  /** 需要从目标组移除的后端服务列表。单次请求最多移除 **50** 个后端服务。 */
+  Targets: TargetToRemove[];
   /** 是否预览此次请求。 - **false**（默认）：发送普通请求，直接移除后端服务。 - **true**：发送预览请求，检查移除后端服务的参数、格式、业务限制等是否符合要求。 */
   DryRun?: boolean;
-  /** 需要从目标组移除的后端服务列表。单次请求最多移除 **50** 个后端服务。 */
-  Targets?: TargetToRemove[];
 }
 
 declare interface RemoveTargetsFromTargetGroupResponse {
@@ -1718,7 +1718,7 @@ declare interface Alb {
   /** 创建目标组 {@link CreateTargetGroupRequest} {@link CreateTargetGroupResponse} */
   CreateTargetGroup(data: CreateTargetGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTargetGroupResponse>;
   /** 删除健康检查模板 {@link DeleteHealthCheckTemplatesRequest} {@link DeleteHealthCheckTemplatesResponse} */
-  DeleteHealthCheckTemplates(data?: DeleteHealthCheckTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHealthCheckTemplatesResponse>;
+  DeleteHealthCheckTemplates(data: DeleteHealthCheckTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHealthCheckTemplatesResponse>;
   /** 删除监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
   /** 删除应用型负载均衡实例 {@link DeleteLoadBalancersRequest} {@link DeleteLoadBalancersResponse} */

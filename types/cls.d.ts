@@ -3353,6 +3353,12 @@ declare interface CreateDlcDeliverRequest {
   EndTime?: number;
   /** 是否开启投递服务日志。1关闭，2开启。默认开启 */
   HasServicesLog?: number;
+  /** 自动创建dlc字段默认值：false当您的日志中有新增字段时，系统自动将其投递至DLC */
+  AutoCreateField?: boolean;
+  /** 将投递失败的日志存储至DLC表 */
+  DlcFailHandle?: DlcFailHandle;
+  /** 日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface CreateDlcDeliverResponse {
@@ -5931,6 +5937,12 @@ declare interface ModifyDlcDeliverRequest {
   HasServicesLog?: number;
   /** 任务状态。枚举值：1： 运行2： 停止 */
   Status?: number;
+  /** 自动创建dlc字段默认值：false当您的日志中有新增字段时，系统自动将其投递至DLC */
+  AutoCreateField?: boolean;
+  /** 将投递失败的日志存储至DLC表 */
+  DlcFailHandle?: DlcFailHandle;
+  /** 日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface ModifyDlcDeliverResponse {

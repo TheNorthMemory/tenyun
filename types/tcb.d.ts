@@ -912,13 +912,13 @@ declare interface MigrationSummary {
   Version?: string;
   /** migration 版本名参数格式：仅允许小写字母和下划线 */
   Name?: string;
-  /** migration query sql 语句checksum服务端自动生成，同版本不同checksum会拒绝执行 */
+  /** migration query sql 语句checksum，服务端自动生成，同版本不同checksum会拒绝执行deprecated */
   Checksum?: string;
-  /** 应用时间 */
+  /** 应用时间deprecated */
   AppliedAt?: string;
-  /** 请求来源 */
+  /** 请求来源deprecated */
   Source?: string;
-  /** migration 创建时间 */
+  /** migration 创建时间deprecated */
   CreatedBy?: string;
 }
 
@@ -2500,19 +2500,19 @@ declare interface DescribePGUserMigrationResponse {
   Name?: string;
   /** 要执行的migration sql 语句 */
   Query?: string;
-  /** 回滚的sql 语句 */
+  /** 回滚的sql 语句deprecated */
   Rollback?: string;
-  /** migration query 语句的checksum值由服务端自动生成，同版本 checksum 不一致会拒绝执行 */
+  /** migration query 语句的checksum值,由服务端自动生成，同版本 checksum 不一致会拒绝执行deprecated */
   Checksum?: string;
-  /** 用于标记调用来源 */
+  /** 用于标记调用来源deprecated */
   Source?: string;
-  /** 用于标记该条migration由谁创建，目前默认调用的用户uin */
+  /** 用于标记该条migration由谁创建，目前默认调用的用户uindeprecated */
   CreatedBy?: string;
-  /** 该migration创建时间 */
+  /** 该migration创建时间deprecated */
   CreatedAt?: string;
-  /** 该migration应用时间 */
+  /** 该migration应用时间deprecated */
   AppliedAt?: string;
-  /** 该migration执行耗时单位：毫秒 */
+  /** 该migration执行耗时单位：毫秒deprecated */
   DurationMs?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3059,8 +3059,10 @@ declare interface PreviewPGUserMigrationsRequest {
   EnvId: string;
   /** 预览要执行的migration 列表 */
   Migrations: MigrationInput[];
-  /** 标记请求来源 */
+  /** 标记请求来源deprecated */
   Source?: string;
+  /** 是否允许 out-of-order local migrations默认值：false */
+  IncludeAll?: boolean;
 }
 
 declare interface PreviewPGUserMigrationsResponse {
@@ -3085,8 +3087,10 @@ declare interface PushPGUserMigrationsRequest {
   LockTimeoutMs?: number;
   /** 单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句单位：毫秒默认值：300000 */
   StatementTimeoutMs?: number;
-  /** 标记请求来源 */
+  /** 标记请求来源deprecated */
   Source?: string;
+  /** 为true时允许 out-of-order local migrations默认值：false */
+  IncludeAll?: boolean;
 }
 
 declare interface PushPGUserMigrationsResponse {

@@ -270,6 +270,8 @@ declare interface BackupConfigInfo {
   CrossRegionsEnable?: string;
   /** 跨地域备份地域 */
   CrossRegions?: string[] | null;
+  /** 跨地域备份保留时间单位：天 */
+  CrossRegionSaveDays?: number;
   /** 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份 */
   BackupTriggerStrategy?: string;
   /** 备份投递关系 */
@@ -392,6 +394,8 @@ declare interface BinlogConfigInfo {
   BinlogCrossRegionsEnable: string;
   /** binlog异地地域 */
   BinlogCrossRegions?: string[] | null;
+  /** 跨地域备份保留时间单位：天 */
+  BinlogCrossRegionSaveDays?: number;
   /** 保险箱信息 */
   AutoCopyVaults?: CreateBackupVaultItem[];
 }
@@ -418,6 +422,16 @@ declare interface BinlogItem {
   EncryptKeyId?: string;
   /** 加密秘钥地域 */
   EncryptRegion?: string;
+  /** 备份的地域分布信息 */
+  ExistRegions?: BinlogRegionInfo[];
+}
+
+/** 各地域binlog保留信息 */
+declare interface BinlogRegionInfo {
+  /** 备份地域 */
+  BackupRegion?: string;
+  /** 备份ID */
+  BackupId?: number;
 }
 
 /** 任务信息 */
@@ -2178,6 +2192,8 @@ declare interface LogicBackupConfigInfo {
   LogicCrossRegions?: string[] | null;
   /** 备份投递关系 */
   AutoCopyVaults?: CreateBackupVaultItem[];
+  /** 天单位：跨地域逻辑备份保留时间 */
+  LogicCrossRegionSaveDays?: number;
 }
 
 /** 手动备份任务信息 */
@@ -6655,7 +6671,7 @@ declare interface InquirePriceCreateRequest {
   InstancePayMode: string;
   /** 存储购买类型，可选值为：PREPAID, POSTPAID */
   StoragePayMode: string;
-  /** 实例设备类型，支持值如下：- common：表示通用型- exclusive：表示独享型 */
+  /** 实例设备类型，支持值如下：common：表示通用型exclusive：表示独享型 */
   DeviceType?: string;
   /** CPU核数，PREPAID与POSTPAID实例类型必传 */
   Cpu?: number;
@@ -6669,6 +6685,10 @@ declare interface InquirePriceCreateRequest {
   TimeSpan?: number;
   /** 时长单位，可选值为：m,d。PREPAID购买类型必传 */
   TimeUnit?: string;
+  /** 存储架构类型。 枚举值：1.0/2.0 默认值：1.0 */
+  StorageVersion?: string;
+  /** 存储是否跨AZ，2.0存储架构下有效 */
+  IsMultiAz?: boolean;
 }
 
 declare interface InquirePriceCreateResponse {
@@ -7033,6 +7053,8 @@ declare interface ModifyBinlogSaveDaysRequest {
   ClusterId: string;
   /** Binlog保留天数 */
   BinlogSaveDays: number;
+  /** 跨地域备份保留时间单位：天 */
+  BinlogCrossRegionSaveDays?: number;
 }
 
 declare interface ModifyBinlogSaveDaysResponse {
@@ -7597,6 +7619,8 @@ declare interface ModifySnapBackupCrossRegionConfigRequest {
   CrossRegionsEnable?: string;
   /** 快照备份所跨地域 */
   CrossRegions?: string[];
+  /** 跨地域备份保留时间单位：天 */
+  CrossRegionSaveDays?: number;
 }
 
 declare interface ModifySnapBackupCrossRegionConfigResponse {

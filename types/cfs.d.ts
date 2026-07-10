@@ -1593,6 +1593,8 @@ declare interface OverrideCfsRulesResponse {
 }
 
 declare interface RunDataRetrievalTaskRequest {
+  /** 数据检索 ID。可通过 DescribeDataRetrieval 接口获取。 */
+  DataRetrievalId: string;
 }
 
 declare interface RunDataRetrievalTaskResponse {
@@ -1942,7 +1944,7 @@ declare interface Cfs {
   /** 批量覆盖式创建权限组规则 {@link OverrideCfsRulesRequest} {@link OverrideCfsRulesResponse} */
   OverrideCfsRules(data: OverrideCfsRulesRequest, config?: AxiosRequestConfig): AxiosPromise<OverrideCfsRulesResponse>;
   /** 执行数据检索任务 {@link RunDataRetrievalTaskRequest} {@link RunDataRetrievalTaskResponse} */
-  RunDataRetrievalTask(data?: RunDataRetrievalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunDataRetrievalTaskResponse>;
+  RunDataRetrievalTask(data: RunDataRetrievalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RunDataRetrievalTaskResponse>;
   /** 文件系统存储量扩容 {@link ScaleUpFileSystemRequest} {@link ScaleUpFileSystemResponse} */
   ScaleUpFileSystem(data: ScaleUpFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleUpFileSystemResponse>;
   /** 设置文件系统配额 {@link SetUserQuotaRequest} {@link SetUserQuotaResponse} */

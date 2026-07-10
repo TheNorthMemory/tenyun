@@ -605,10 +605,12 @@ declare interface DeleteListenerResponse {
 declare interface DescribeAccelerateAreasRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 偏移量。 */
+  /** 偏移量。默认为0。 */
   Offset?: number;
-  /** 符合条件实例数量。 */
+  /** 符合条件实例数量。默认为20，最大200。 */
   Limit?: number;
+  /** 过滤条件。 accelerate-region- String -（过滤条件）终端节点组地域。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeAccelerateAreasResponse {

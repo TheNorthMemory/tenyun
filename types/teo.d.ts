@@ -3262,7 +3262,7 @@ declare interface RealtimeLogDeliveryTask {
   TaskType?: string;
   /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： 七层域名：domain.example.com； 四层代理实例：sid-2s69eb5wcms7。 */
   EntityList?: string[];
-  /** 数据投递类型，取值有： domain：站点加速日志； application：四层代理日志； web-rateLiming：速率限制和 CC 攻击防护日志； web-attack：托管规则日志； web-rule：自定义规则日志； web-bot：Bot管理日志。 */
+  /** 数据投递类型，取值有： l7-access-logs：七层访问日志；application：四层代理日志； function：边缘函数运行日志； web-attack：托管规则日志； domain：站点加速日志； web-rateLiming：速率限制和 CC 攻击防护日志；web-rule：自定义规则日志； web-bot：Bot 管理日志。 */
   LogType?: string;
   /** 数据投递区域，取值有： mainland：中国大陆境内； overseas：全球（不含中国大陆）。 */
   Area?: string;
@@ -5165,23 +5165,23 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   ZoneId: string;
   /** 数据投递区域，可选值：mainland：中国大陆境内；overseas：全球（不含中国大陆）。 */
   Area: string;
-  /** 数据投递类型，可选值：domain：站点加速日志；application：四层代理日志；function：边缘函数运行日志；web-rateLiming：速率限制和 CC 攻击防护日志；web-attack：托管规则日志；web-rule：自定义规则日志；web-bot：Bot管理日志。 */
+  /** 数据投递类型，可选值：l7-access-logs：七层访问日志；application：四层代理日志；function：边缘函数运行日志；web-attack：托管规则日志；以下类型日志合并入 l7-access-logs，不再支持新增：domain：站点加速日志；web-rateLiming：速率限制和 CC 攻击防护日志；web-rule：自定义规则日志；web-bot：Bot 管理日志。 */
   LogType: string;
   /** 实时日志投递任务的名称，格式为数字、英文、-和_组合，最多 200 个字符。 */
   TaskName: string;
-  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 AWS S3 兼容存储桶地址；log_analysis：推送到 EdgeOne 日志分析，仅当 LogType = domain 或 web-attack 时支持。 */
+  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 AWS S3 兼容存储桶地址；log_analysis：推送到 EdgeOne 日志分析，仅当 LogType = l7-access-logs 或 web-attack 时支持。 */
   TaskType: string;
-  /** 实时日志投递任务对应的实体列表。取值示例如下：七层域名：domain.example.com四层代理实例：sid-2s69eb5wcms7边缘函数实例：test-zone-2mxigizoh9l9-1257626257 */
+  /** 实时日志投递任务对应的实体列表。取值示例如下：七层域名：domain.example.com四层代理实例：sid-2s69eb5wcms7边缘函数实例：test-zone-2mxigizoh9l9-1257626257取值参考：DescribeL4Proxy */
   EntityList: string[];
-  /** 投递的预设字段列表。取值参考：[站点加速日志（七层访问日志）](https://cloud.tencent.com/document/product/1552/105791)[四层代理日志](https://cloud.tencent.com/document/product/1552/105792)[边缘函数运行日志](https://cloud.tencent.com/document/product/1552/115585) */
+  /** 投递的预设字段列表。取值参考：七层访问日志（站点加速日志）四层代理日志边缘函数运行日志取值参考：DescribeLogFields */
   Fields: string[];
-  /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，且最多不能超过 200 个字段。单个实时日志推送任务最多添加 5 个请求正文类型的自定义字段。目前仅站点加速日志（LogType=domain）支持添加自定义字段。 */
+  /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE)。 */
   CustomFields?: CustomField[];
   /** 日志投递的过滤条件，不填表示投递全量日志。 */
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填表示采样比例为 100%。 */
   Sample?: number;
-  /** 日志投递的输出格式。不填表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 时，默认格式为 JSON Lines；特别地，当 TaskType 取值为 cls 或 log_analysis 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
+  /** 日志投递的输出格式，使用详情见 自定义日志输出格式。不填表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 时，默认格式为 JSON Lines；特别地，当 TaskType 取值为 cls 或 log_analysis 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
   LogFormat?: LogFormat;
   /** CLS 的配置信息。当 TaskType 取值为 cls 时，该参数必填。 */
   CLS?: CLSTopic;

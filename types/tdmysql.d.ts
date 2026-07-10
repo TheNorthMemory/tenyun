@@ -1475,6 +1475,8 @@ declare interface DescribeDatabasesResponse {
 }
 
 declare interface DescribeFlowRequest {
+  /** 流程ID */
+  FlowId: number;
 }
 
 declare interface DescribeFlowResponse {
@@ -1914,7 +1916,7 @@ declare interface Tdmysql {
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询流程状态 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
-  DescribeFlow(data?: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
+  DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
   /** 查询实例SSL状态 {@link DescribeInstanceSSLStatusRequest} {@link DescribeInstanceSSLStatusResponse} */
   DescribeInstanceSSLStatus(data: DescribeInstanceSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSSLStatusResponse>;
   /** 查询维护时间窗口 {@link DescribeMaintenanceWindowRequest} {@link DescribeMaintenanceWindowResponse} */

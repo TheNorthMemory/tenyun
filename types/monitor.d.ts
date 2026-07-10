@@ -5700,6 +5700,20 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface EnablePredefinedPoliciesRequest {
+    /** 预设配置id */
+    PredefinedConfigID?: string;
+    /** 云产品id */
+    PredefinedGroupID?: string;
+    /** 通知模板id */
+    NoticeIDs?: string[];
+  }
+
+  interface EnablePredefinedPoliciesResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface EnableSSOCamCheckRequest {
     /** Grafana 实例 ID，例如：grafana-abcdefgh */
     InstanceId: string;
@@ -6884,6 +6898,8 @@ declare interface Monitor {
   EnableGrafanaInternet(data: V20180724.EnableGrafanaInternetRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.EnableGrafanaInternetResponse>;
   /** 设置 Grafana 单点登录 {@link V20180724.EnableGrafanaSSORequest} {@link V20180724.EnableGrafanaSSOResponse} */
   EnableGrafanaSSO(data: V20180724.EnableGrafanaSSORequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.EnableGrafanaSSOResponse>;
+  /** 一键启用（创建）某个云产品下的预设策略 {@link V20180724.EnablePredefinedPoliciesRequest} {@link V20180724.EnablePredefinedPoliciesResponse} */
+  EnablePredefinedPolicies(data: V20180724.EnablePredefinedPoliciesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.EnablePredefinedPoliciesResponse>;
   /** 设置SSO登录是否鉴权 {@link V20180724.EnableSSOCamCheckRequest} {@link V20180724.EnableSSOCamCheckResponse} */
   EnableSSOCamCheck(data: V20180724.EnableSSOCamCheckRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.EnableSSOCamCheckResponse>;
   /** Prometheus 内部只读 api 代理 {@link V20180724.ExportPrometheusReadOnlyDynamicAPIRequest} {@link V20180724.ExportPrometheusReadOnlyDynamicAPIResponse} */

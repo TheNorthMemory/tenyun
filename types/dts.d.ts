@@ -1797,6 +1797,8 @@ declare interface CreateSubscribeRequest {
   Tags?: TagItem[];
   /** 任务名，自定义 */
   Name?: string;
+  /** 数据订阅版本，目前支持kafka和kafkaPro（专业版），如果不填，默认kafkaPro */
+  SubscribeVersion?: string;
   /** 订阅实例规格，当前仅支持small、medium、large */
   InstanceClass?: string;
 }

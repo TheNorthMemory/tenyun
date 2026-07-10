@@ -244,6 +244,14 @@ declare interface VoicePrintCountData {
   VoicePrintList?: VoicePrintBaseData[] | null;
 }
 
+/** 声纹分组名称列表 */
+declare interface VoicePrintGroupList {
+  /** 总数量 */
+  Total?: number;
+  /** 分组名称列表 */
+  GroupIds?: string[];
+}
+
 /** [说话人验证数据](https://cloud.tencent.com/document/product/1093/94481) */
 declare interface VoicePrintVerifyData {
   /** 说话人id */
@@ -796,6 +804,16 @@ declare interface VoicePrintEnrollResponse {
   RequestId?: string;
 }
 
+declare interface VoicePrintGroupListRequest {
+}
+
+declare interface VoicePrintGroupListResponse {
+  /** 返回分组名称列表数据 */
+  Data?: VoicePrintGroupList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VoicePrintGroupVerifyRequest {
   /** 音频格式 0: pcm, 1: wav */
   VoiceFormat: number;
@@ -919,6 +937,8 @@ declare interface Asr {
   VoicePrintDelete(data?: VoicePrintDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintDeleteResponse>;
   /** 说话人注册 {@link VoicePrintEnrollRequest} {@link VoicePrintEnrollResponse} */
   VoicePrintEnroll(data: VoicePrintEnrollRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintEnrollResponse>;
+  /** 说话人分组列表 {@link VoicePrintGroupListRequest} {@link VoicePrintGroupListResponse} */
+  VoicePrintGroupList(data?: VoicePrintGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintGroupListResponse>;
   /** 说话人验证1:N {@link VoicePrintGroupVerifyRequest} {@link VoicePrintGroupVerifyResponse} */
   VoicePrintGroupVerify(data: VoicePrintGroupVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<VoicePrintGroupVerifyResponse>;
   /** 说话人更新 {@link VoicePrintUpdateRequest} {@link VoicePrintUpdateResponse} */

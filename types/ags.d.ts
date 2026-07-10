@@ -355,8 +355,10 @@ declare interface CreateAPIKeyResponse {
 declare interface CreatePreCacheImageTaskRequest {
   /** 镜像地址 */
   Image: string;
-  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  /** 镜像仓库类型：enterprise、personal、custom枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
   ImageRegistryType: string;
+  /** 预热超时时长 */
+  TimeoutMinutes?: number;
 }
 
 declare interface CreatePreCacheImageTaskResponse {
@@ -364,7 +366,7 @@ declare interface CreatePreCacheImageTaskResponse {
   Image?: string;
   /** 镜像 Digest */
   ImageDigest?: string;
-  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  /** 镜像仓库类型：enterprise、personal。 */
   ImageRegistryType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

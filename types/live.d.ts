@@ -2316,6 +2316,8 @@ declare interface CreateAuditKeywordsResponse {
   KeywordIds?: string[];
   /** 重复关键词列表。 */
   DupInfos?: AuditKeywordInfo[];
+  /** 新增成功关键词列表 */
+  Keywords?: AuditKeywordInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

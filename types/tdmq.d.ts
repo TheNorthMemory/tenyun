@@ -1028,6 +1028,10 @@ declare interface RabbitMQClusterInfo {
   ConsumeTimeout?: number;
   /** 最大Channel数 */
   ChannelMax?: number;
+  /** 集群类型枚举值：NORMAL： 公有云CDC： 本地专用集群 */
+  ClusterType?: string;
+  /** CDC集群ID */
+  CdcClusterId?: string;
 }
 
 /** RabbitMQ集群规格信息 */
@@ -1288,6 +1292,10 @@ declare interface RabbitMQVipInstance {
   Tags?: Tag[];
   /** 公有数据流Stream接入点 */
   PublicStreamAccessEndpoint?: string;
+  /** 集群类型枚举值：NORMAL： 公有云CDC： 本地专用集群 */
+  ClusterType?: string;
+  /** CDC 集群 ID */
+  CdcClusterId?: string;
 }
 
 /** RabbitMQ的vhost详情 */
@@ -2569,9 +2577,9 @@ declare interface CreateRabbitMQUserResponse {
 declare interface CreateRabbitMQVipInstanceRequest {
   /** 可用区 */
   ZoneIds: number[];
-  /** 私有网络ID，形如 vpc-xxx。有效的 VpcId 可通过登录[私有网络](https://console.cloud.tencent.com/vpc/vpc?rid=1)控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372)，从接口返回中的 unVpcId 字段获取。若在创建子机时 VpcId 与 SubnetId 同时传入 DEFAULT，则强制使用默认 vpc 网络。 */
+  /** 私有网络ID，形如 vpc-xxx。有效的 VpcId 可通过登录私有网络控制台查询；也可以调用接口 DescribeVpcEx，从接口返回中的 unVpcId 字段获取。若在创建子机时 VpcId 与 SubnetId 同时传入 DEFAULT，则强制使用默认 vpc 网络。 */
   VpcId: string;
-  /** 私有网络子网 ID，形如 subnet-xxx。有效的私有网络子网 ID 可通过登录[子网控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的 unSubnetId 字段获取。若在创建子机时 SubnetId 与 VpcId 同时传入 DEFAULT，则强制使用默认 vpc 网络。 */
+  /** 私有网络子网 ID，形如 subnet-xxx。有效的私有网络子网 ID 可通过登录子网控制台查询；也可以调用接口 DescribeSubnets，从接口返回中的 unSubnetId 字段获取。若在创建子机时 SubnetId 与 VpcId 同时传入 DEFAULT，则强制使用默认 vpc 网络。 */
   SubnetId: string;
   /** 集群名称 */
   ClusterName: string;
@@ -2581,7 +2589,7 @@ declare interface CreateRabbitMQVipInstanceRequest {
   NodeNum?: number;
   /** 单节点存储规格,不传默认为200G */
   StorageSize?: number;
-  /** 是否开启默认镜像队列，true 表示为开启，false 表示为不开启。不传默认为 false */
+  /** 是否开启默认镜像队列，true 表示为开启，false 表示为不开启。不传默认为 false。该参数对4.x集群不生效。 */
   EnableCreateDefaultHaMirrorQueue?: boolean;
   /** 仅预付费集群（PayMode 参数为 1 时）使用该参数，表示是否自动续费，true 表示打开自动续费。不传默认为 true */
   AutoRenewFlag?: boolean;
@@ -2601,6 +2609,10 @@ declare interface CreateRabbitMQVipInstanceRequest {
   EnablePublicAccess?: boolean;
   /** 是否打开集群删除保护，不传默认为 false */
   EnableDeletionProtection?: boolean;
+  /** 集群类型枚举值：NORMAL： 公有云CDC： 本地专用集群 */
+  ClusterType?: string;
+  /** CDC 集群 ID */
+  CdcClusterId?: string;
 }
 
 declare interface CreateRabbitMQVipInstanceResponse {
@@ -2613,7 +2625,7 @@ declare interface CreateRabbitMQVipInstanceResponse {
 }
 
 declare interface CreateRabbitMQVirtualHostRequest {
-  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。 */
+  /** 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 TDMQ RabbitMQ 控制台查询。 */
   InstanceId: string;
   /** vhost名 */
   VirtualHost: string;
@@ -2621,7 +2633,7 @@ declare interface CreateRabbitMQVirtualHostRequest {
   Description?: string;
   /** 消息轨迹开关,true打开,false关闭,默认关闭 */
   TraceFlag?: boolean;
-  /** 是否创建镜像队列策略，默认值 true */
+  /** 是否创建镜像队列策略，默认值 true。该参数对4.x集群不生效。 */
   MirrorQueuePolicyFlag?: boolean;
 }
 

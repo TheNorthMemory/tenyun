@@ -281,15 +281,19 @@ declare interface DomainAnalyticsDetail {
 /** 域名解析量统计查询信息 */
 declare interface DomainAnalyticsInfo {
   /** DATE:按天维度统计 HOUR:按小时维度统计 */
-  DnsFormat: string;
+  DnsFormat?: string;
   /** 当前统计周期解析量总计 */
-  DnsTotal: number;
+  DnsTotal?: number;
   /** 当前查询的域名 */
-  Domain: string;
+  Domain?: string;
   /** 当前统计周期开始时间 */
-  StartDate: string;
+  StartDate?: string;
   /** 当前统计周期结束时间 */
-  EndDate: string;
+  EndDate?: string;
+  /** 解析量数据格式枚举值：DATE： 按天维度统计HOUR： 按小时维度统计 */
+  DNSFormat?: string;
+  /** 当前统计周期解析量总计 */
+  DNSTotal?: number;
 }
 
 /** 列表页分页统计信息 */
@@ -346,7 +350,7 @@ declare interface DomainInfo {
   IsMark?: string;
   /** TTL(DNS记录缓存时间)，单位：秒 */
   TTL?: number;
-  /** cname加速启用状态 */
+  /** CNAME加速启用状态 */
   CnameSpeedup?: string;
   /** 域名备注 */
   Remark?: string;
@@ -400,6 +404,10 @@ declare interface DomainInfo {
   SearchEnginePush?: string;
   /** 是否开启辅助 DNS */
   SlaveDNS?: string;
+  /** 域名DNS状态，错误：dnserror，正常：空字符串 */
+  DNSStatus?: string;
+  /** CNAME加速启用状态 */
+  CNAMESpeedup?: string;
 }
 
 /** 域名列表元素 */
@@ -868,6 +876,10 @@ declare interface ResolveCountInfo {
   SubDomain?: string;
   /** 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据 */
   DnsFormat?: string;
+  /** 当前统计周期解析量总计 */
+  DNSTotal?: number;
+  /** 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据 */
+  DNSFormat?: string;
 }
 
 /** 套餐中安全防护信息 */
@@ -965,17 +977,23 @@ declare interface SubdomainAliasAnalyticsItem {
 /** 子域名解析量统计查询信息 */
 declare interface SubdomainAnalyticsInfo {
   /** DATE:按天维度统计 HOUR:按小时维度统计 */
-  DnsFormat: string;
+  DnsFormat?: string;
   /** 当前统计周期解析量总计 */
-  DnsTotal: number;
+  DnsTotal?: number;
   /** 当前查询的域名 */
-  Domain: string;
+  Domain?: string;
   /** 当前统计周期开始时间 */
-  StartDate: string;
+  StartDate?: string;
   /** 当前统计周期结束时间 */
-  EndDate: string;
+  EndDate?: string;
   /** 当前统计的子域名 */
-  Subdomain: string;
+  Subdomain?: string;
+  /** 解析量数据格式枚举值：DATE： 按天维度统计HOUR： 按小时维度统计 */
+  DNSFormat?: string;
+  /** 当前统计周期解析量总计 */
+  DNSTotal?: number;
+  /** 当前统计的子域名 */
+  SubDomain?: string;
 }
 
 /** 标签项 */
@@ -1482,6 +1500,8 @@ declare interface CreateSubdomainValidateTXTValueResponse {
   Value?: string;
   /** 需要添加 TXT 记录的上级域名(可选，主域名和上级域名任选一个添加即可)。 */
   ParentDomain?: string;
+  /** 需要添加 TXT 记录的主机记录。新增规范参数，建议优先使用SubDomain参数 */
+  SubDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1701,6 +1721,8 @@ declare interface DescribeDomainAnalyticsRequest {
   DnsFormat?: string;
   /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。 */
   DomainId?: number;
+  /** 解析量数据格式枚举值：DATE： 按天维度统计HOUR： 按小时维度统计新增规范参数，同时传递DNSFormat和DnsFormat参数时，后端优先使用DNSFormat参数 */
+  DNSFormat?: string;
 }
 
 declare interface DescribeDomainAnalyticsResponse {
@@ -2189,8 +2211,10 @@ declare interface DescribeRecordListRequest {
   Offset?: number;
   /** 限制数量，当前Limit最大支持3000。默认值为100。 */
   Limit?: number;
-  /** 查询不到数据时是否报错枚举值： yes： 报错 no： 不报错，返回空列表默认值：yes */
+  /** 查询不到数据时是否报错枚举值：yes： 报错no： 不报错，返回空列表默认值：yes */
   ErrorOnEmpty?: string;
+  /** 解析记录的主机头，如果传了此参数，则只会返回此主机头对应的解析记录新增规范参数，同时传递SubDomain和Subdomain参数时，后端优先使用SubDomain参数 */
+  SubDomain?: string;
 }
 
 declare interface DescribeRecordListResponse {
@@ -2271,10 +2295,12 @@ declare interface DescribeResolveCountRequest {
   StartDate: string;
   /** 查询的结束时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。 */
   EndDate: string;
-  /** 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据 */
-  DnsFormat: string;
+  /** 数据统计格式枚举值：minute： 按十分钟维度统计数据hour： 按小时维度统计数据day： 按天维度统计数据 */
+  DnsFormat?: string;
   /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
   DomainId?: number;
+  /** 数据统计格式枚举值：minute： 按十分钟维度统计数据hour： 按小时维度统计数据day： 按天维度统计数据新增规范参数，同时传递DNSFormat和DnsFormat参数时，后端优先使用DNSFormat参数 */
+  DNSFormat?: string;
 }
 
 declare interface DescribeResolveCountResponse {
@@ -2385,12 +2411,16 @@ declare interface DescribeSubdomainAnalyticsRequest {
   StartDate: string;
   /** 查询的结束时间，格式：YYYY-MM-DD */
   EndDate: string;
-  /** 要查询解析量的子域名 */
-  Subdomain: string;
   /** DATE:按天维度统计 HOUR:按小时维度统计 */
   DnsFormat?: string;
   /** 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId */
   DomainId?: number;
+  /** 要查询解析量的子域名 */
+  Subdomain?: string;
+  /** 要查询解析量的子域名新增规范参数，同时传递SubDomain和Subdomain参数时，后端优先使用SubDomain参数 */
+  SubDomain?: string;
+  /** 解析量数据格式枚举值：DATE： 按天维度统计HOUR： 按小时维度统计新增规范参数，同时传递DNSFormat和DnsFormat参数时，后端优先使用DNSFormat参数 */
+  DNSFormat?: string;
 }
 
 declare interface DescribeSubdomainAnalyticsResponse {
@@ -2454,6 +2484,8 @@ declare interface DescribeVasListResponse {
   TotalCount?: number;
   /** 增值服务信息列表 */
   VasList?: VasListItem[];
+  /** 增值服务信息列表 */
+  VASList?: VasListItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2623,6 +2655,8 @@ declare interface ModifyDynamicDNSRequest {
   Value?: string;
   /** TTL值，如果不传，默认为域名的TTL值。 */
   Ttl?: number;
+  /** TTL值，如果不传，默认为域名的TTL值。新增规范参数，同时传递TTL和Ttl参数时，后端优先使用TTL参数 */
+  TTL?: number;
 }
 
 declare interface ModifyDynamicDNSResponse {

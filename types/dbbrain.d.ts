@@ -1470,6 +1470,22 @@ declare interface CreateDBDiagReportUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateIgnoreDiagRecordRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 服务产品类型，取值：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、dcdb（TDSQL MySQL 版）、mariadb（TDSQL MariaDB 版）、redis（云数据库 Redis）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）。 */
+  Product: string;
+  /** 诊断项名称，用于指定需要忽略或取消忽略的诊断事件类型。 */
+  DiagItem: string;
+  /** 忽略状态，取值：1（取消忽略），2（忽略）。 */
+  Status: number;
+}
+
+declare interface CreateIgnoreDiagRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateKillTaskRequest {
   /** kill会话任务的关联实例ID。 */
   InstanceId: string;
@@ -4431,6 +4447,8 @@ declare interface Dbbrain {
   CreateDBDiagReportTask(data: CreateDBDiagReportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportTaskResponse>;
   /** 创建健康报告浏览地址 {@link CreateDBDiagReportUrlRequest} {@link CreateDBDiagReportUrlResponse} */
   CreateDBDiagReportUrl(data: CreateDBDiagReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportUrlResponse>;
+  /** 创建忽略诊断项 {@link CreateIgnoreDiagRecordRequest} {@link CreateIgnoreDiagRecordResponse} */
+  CreateIgnoreDiagRecord(data: CreateIgnoreDiagRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIgnoreDiagRecordResponse>;
   /** 创建中断会话的任务 {@link CreateKillTaskRequest} {@link CreateKillTaskResponse} */
   CreateKillTask(data: CreateKillTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKillTaskResponse>;
   /** 创建邮件配置 {@link CreateMailProfileRequest} {@link CreateMailProfileResponse} */

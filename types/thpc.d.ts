@@ -594,6 +594,8 @@ declare interface SpaceDataDisk {
 declare interface SpaceInfo {
   /** 工作空间ID */
   SpaceId?: string;
+  /** 工作空间类别 */
+  SpaceClass?: string;
   /** 工作空间类型 */
   SpaceFamily?: string;
   /** 工作空间规格 */
@@ -620,6 +622,8 @@ declare interface SpaceInfo {
   LatestOperation?: string | null;
   /** 工作空间的最新操作状态 */
   LatestOperationState?: string | null;
+  /** 实例的内网IP */
+  PrivateIpAddresses?: string[];
 }
 
 /** 描述了工作空间的公网可访问性，声明了工作空间的公网使用计费模式，最大带宽等 */

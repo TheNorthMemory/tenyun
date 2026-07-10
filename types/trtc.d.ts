@@ -674,7 +674,7 @@ declare interface MixUserInfo {
 
 /** 云端审核的控制参数。 */
 declare interface ModerationParams {
-  /** 审核任务类型， 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核 默认值1 */
+  /** AI 内容理解任务类型， 1:音频切片理解，2:视频截帧理解，3:音视切片+视频截帧理解 默认值1 枚举值：1： 音频切片理解 */
   ModerationType?: number;
   /** 房间内持续没有用户（主播）上行推流的状态超过MaxIdleTime的时长，自动停止切片，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于1800秒(0.5小时)。示例值：30 */
   MaxIdleTime?: number;
@@ -682,13 +682,13 @@ declare interface ModerationParams {
   SliceAudio?: number;
   /** 视频截帧间隔时长，默认5s, 范围1-60s */
   SliceVideo?: number;
-  /** 供应商枚举，trtc : trtc内容理解（支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）tianyu : 天御内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）ace : ACE内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）shumei : 数美审核（支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）yidun : 网易易盾审核 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核） */
+  /** 供应商枚举，trtc : trtc内容理解 */
   ModerationSupplier?: string;
-  /** 第三方审核商送审需要配置信息, ModerationSupplier为trtc时，这个参数可以不需要初始化 */
+  /** 第三方内容理解供应商需要配置信息, ModerationSupplier为trtc时，这个参数可以不需要初始化 */
   ModerationSupplierParam?: ModerationSupplierParam;
   /** 是否保存文件: 0不保存文件 1保存所有文件 2仅保存命中文件 */
   SaveModerationFile?: number;
-  /** 是否回调所有审核结果:0 默认回调所有结果 1 仅回调命中结果 */
+  /** 是否回调所有内容理解结果:0 默认回调所有结果 1 仅回调命中结果 */
   CallbackAllResults?: number;
   /** 指定订阅流白名单或者黑名单。 */
   SubscribeStreamUserIds?: SubscribeModerationUserIds;
@@ -1539,17 +1539,17 @@ declare interface CreateBasicModerationResponse {
 }
 
 declare interface CreateCloudModerationRequest {
-  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和TRTC的房间所对应的SdkAppId相同。 */
+  /** TRTC的SdkAppId，和TRTC的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
-  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，为TRTC房间所对应的RoomId。 */
+  /** TRTC的RoomId，为TRTC房间所对应的RoomId。 */
   RoomId: string;
-  /** 机器人的UserId，用于进房发起审核任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。 */
+  /** 机器人的UserId，用于进房发起AI 内容理解任务。【*注意】这个UserId不能与当前房间内的主播观众UserId重复。如果一个房间发起多个切片任务时，机器人的userid也不能相互重复，否则会中断前一个切片任务。建议可以把房间ID作为UserId的标识的一部分，即机器人UserId在房间内唯一。 */
   UserId: string;
-  /** 云端审核控制参数。 */
+  /** AI 内容理解控制参数。 */
   ModerationParams: ModerationParams;
   /** 机器人UserId对应的校验签名，即UserId和UserSig相当于机器人进房的登录密码，具体计算方法请参考TRTC计算UserSig的方案。 */
   UserSig: string;
-  /** 云端审核文件上传到云存储的参数。 */
+  /** AI 内容理解文件上传到云存储的参数。 */
   ModerationStorageParams?: ModerationStorageParams;
   /** TRTC房间号的类型。 【*注意】必须和录制的房间所对应的RoomId类型相同: 0: 字符串类型的RoomId 1: 32位整型的RoomId（默认） 示例值：1 */
   RoomIdType?: number;
@@ -1558,7 +1558,7 @@ declare interface CreateCloudModerationRequest {
 }
 
 declare interface CreateCloudModerationResponse {
-  /** 云端审核服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
+  /** AI 内容理解服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1689,12 +1689,12 @@ declare interface DeleteBasicModerationResponse {
 declare interface DeleteCloudModerationRequest {
   /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
-  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId: string;
 }
 
 declare interface DeleteCloudModerationResponse {
-  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1859,14 +1859,14 @@ declare interface DescribeCallDetailInfoResponse {
 declare interface DescribeCloudModerationRequest {
   /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
-  /** 云端审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId: string;
 }
 
 declare interface DescribeCloudModerationResponse {
-  /** 切片任务的唯一Id，在启动切片任务成功后会返回。 */
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId?: string;
-  /** 云端切片任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。 */
+  /** AI内容理解任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。枚举值：InProgress： 进行中 */
   Status?: string;
   /** 订阅黑白名单 */
   SubscribeStreamUserIds?: SubscribeModerationUserIds;
@@ -2421,14 +2421,14 @@ declare interface DismissRoomResponse {
 declare interface ModifyCloudModerationRequest {
   /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
-  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId: string;
   /** 指定订阅流白名单或者黑名单。 */
   SubscribeStreamUserIds?: SubscribeStreamUserIds;
 }
 
 declare interface ModifyCloudModerationResponse {
-  /** 审核任务的唯一Id，在启动切片任务成功后会返回。 */
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3007,7 +3007,7 @@ declare interface Trtc {
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
   /** 创建基础审核任务 {@link CreateBasicModerationRequest} {@link CreateBasicModerationResponse} */
   CreateBasicModeration(data: CreateBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicModerationResponse>;
-  /** 创建云端审核 {@link CreateCloudModerationRequest} {@link CreateCloudModerationResponse} */
+  /** 启动AI 内容理解 {@link CreateCloudModerationRequest} {@link CreateCloudModerationResponse} */
   CreateCloudModeration(data: CreateCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudModerationResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
@@ -3019,7 +3019,7 @@ declare interface Trtc {
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
   /** 停止基础审核任务 {@link DeleteBasicModerationRequest} {@link DeleteBasicModerationResponse} */
   DeleteBasicModeration(data: DeleteBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBasicModerationResponse>;
-  /** 停止云端审核 {@link DeleteCloudModerationRequest} {@link DeleteCloudModerationResponse} */
+  /** 停止AI 内容理解任务 {@link DeleteCloudModerationRequest} {@link DeleteCloudModerationResponse} */
   DeleteCloudModeration(data: DeleteCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudModerationResponse>;
   /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
@@ -3039,7 +3039,7 @@ declare interface Trtc {
   DescribeAsyncTextToSpeech(data: DescribeAsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAsyncTextToSpeechResponse>;
   /** 查询历史用户列表与通话指标 {@link DescribeCallDetailInfoRequest} {@link DescribeCallDetailInfoResponse} */
   DescribeCallDetailInfo(data: DescribeCallDetailInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallDetailInfoResponse>;
-  /** 查询云端审核信息 {@link DescribeCloudModerationRequest} {@link DescribeCloudModerationResponse} */
+  /** 查询AI 内容理解任务信息 {@link DescribeCloudModerationRequest} {@link DescribeCloudModerationResponse} */
   DescribeCloudModeration(data: DescribeCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudModerationResponse>;
   /** 查询云端录制状态 {@link DescribeCloudRecordingRequest} {@link DescribeCloudRecordingResponse} */
   DescribeCloudRecording(data: DescribeCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudRecordingResponse>;
@@ -3099,7 +3099,7 @@ declare interface Trtc {
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
   /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */
   DismissRoomByStrRoomId(data: DismissRoomByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdResponse>;
-  /** 修改云端审核 {@link ModifyCloudModerationRequest} {@link ModifyCloudModerationResponse} */
+  /** 修改AI 内容理解任务 {@link ModifyCloudModerationRequest} {@link ModifyCloudModerationResponse} */
   ModifyCloudModeration(data: ModifyCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudModerationResponse>;
   /** 更新云端录制任务 {@link ModifyCloudRecordingRequest} {@link ModifyCloudRecordingResponse} */
   ModifyCloudRecording(data: ModifyCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudRecordingResponse>;

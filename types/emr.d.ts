@@ -2778,6 +2778,8 @@ declare interface Resource {
   GpuDesc?: string;
   /** 分区置放群组分区数 */
   PartitionNumber?: number;
+  /** 高性能集群ID */
+  HCCHpcClusterId?: string;
 }
 
 /** 资源详情 */

@@ -4413,6 +4413,10 @@ declare interface DescribeDataEngineEventsRequest {
   Offset?: number;
   /** 资源组id */
   SessionId?: string;
+  /** 查询开始时间，用于筛选资源组启停事件的时间范围，不传则不限制开始时间参数格式：YYYY-mm-dd HH:MM:SS */
+  StartTime?: string;
+  /** 查询结束时间，用于筛选资源组启停事件的时间范围，不传则不限制结束时间。需大于等于 StartTime参数格式：YYYY-mm-dd HH:MM:SS */
+  EndTime?: string;
 }
 
 declare interface DescribeDataEngineEventsResponse {

@@ -16101,6 +16101,10 @@ declare namespace V20210820 {
     TaskExtDTO?: TaskExtOpsDto | null;
     /** 任务时区 */
     ScheduleTimeZone?: string | null;
+    /** 代理任务ID */
+    ProxyTaskId?: string | null;
+    /** 代理任务类型ID */
+    ProxyTaskTypeId?: number | null;
   }
 
   /** 任务执行脚本 */

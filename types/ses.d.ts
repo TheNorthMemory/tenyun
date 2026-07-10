@@ -317,7 +317,7 @@ declare interface BatchSendEmailRequest {
   FromEmailAddress: string;
   /** 收件人列表ID */
   ReceiverId: number;
-  /** 邮件主题 */
+  /** 邮件主题当使用模版发送时，支持使用模版变量参数填充 */
   Subject: string;
   /** 任务类型 1: 立即发送 2: 定时发送 3: 周期（频率）发送 */
   TaskType: number;
@@ -847,7 +847,7 @@ declare interface ListSendTasksResponse {
 declare interface SendEmailRequest {
   /** 发件人邮箱地址。不使用别名时请直接填写发件人邮箱地址，例如：noreply@mail.qcloud.com如需填写发件人别名时，请按照如下方式（注意别名与邮箱地址之间必须使用一个空格隔开）：别名+一个空格+<邮箱地址>，别名中不能带有冒号(:)。 */
   FromEmailAddress: string;
-  /** 邮件主题 */
+  /** 邮件主题当使用模版发送时，支持使用模版变量参数填充 */
   Subject: string;
   /** 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。Destination/Cc/Bcc三个参数必须至少存在一个。 */
   Destination?: string[];
