@@ -112,7 +112,7 @@ declare interface KeyMetadata {
   KeyState?: string;
   /** CMK用途，取值为: ENCRYPT_DECRYPT | ASYMMETRIC_DECRYPT_RSA_2048 | ASYMMETRIC_DECRYPT_SM2 | ASYMMETRIC_SIGN_VERIFY_SM2 | ASYMMETRIC_SIGN_VERIFY_RSA_2048 | ASYMMETRIC_SIGN_VERIFY_ECC */
   KeyUsage?: string;
-  /** CMK类型，2 表示符合FIPS标准，4表示符合国密标准 */
+  /** CMK类型，2 表示符合FIPS 140-2标准，4表示符合国密标准枚举值：2： 表示符合FIPS 140-2标准4： 表示符合国密标准 */
   Type?: number;
   /** 创建者 */
   CreatorUin?: number;
@@ -134,7 +134,7 @@ declare interface KeyMetadata {
   HsmClusterId?: string;
   /** 密钥轮转周期（天） */
   RotateDays?: number;
-  /** 上次乱转时间（Unix timestamp） */
+  /** 上次轮转时间（Unix timestamp） */
   LastRotateTime?: number;
   /** 密钥是否是主副本。0:主本，1:同步副本。 */
   IsSyncReplica?: number;
@@ -969,7 +969,7 @@ declare interface ImportDataKeyResponse {
 }
 
 declare interface ImportKeyMaterialRequest {
-  /** 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS版本region的KMS， 导入的密钥材料长度要求为 256 bit。 */
+  /** 使用GetParametersForImport 返回的PublicKey加密后的密钥材料base64编码。对于国密版本region的KMS，导入的密钥材料长度要求为 128 bit，FIPS 140-2版本region的KMS， 导入的密钥材料长度要求为 256 bit。 */
   EncryptedKeyMaterial: string;
   /** 通过调用GetParametersForImport获得的导入令牌。 */
   ImportToken: string;

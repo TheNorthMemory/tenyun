@@ -2609,6 +2609,30 @@ declare namespace V20180717 {
     Gain?: number;
   }
 
+  /** 图片美颜效果项。 */
+  interface BeautyEffectItem {
+    /** 是否开启美颜。枚举值：ON： 开OFF： 关 */
+    Switch?: string;
+    /** 美颜项。 */
+    Type?: string;
+    /** 美颜强度。 */
+    Value?: number;
+    /** 附加资源路径。 */
+    ResourcePath?: string;
+    /** 附加信息。 */
+    ExtInfo?: string;
+  }
+
+  /** 美颜滤镜项。 */
+  interface BeautyFilterItem {
+    /** 是否开启滤镜。枚举值：ON： 开OFF： 关 */
+    Switch?: string;
+    /** 滤镜项。 */
+    Type?: string;
+    /** 滤镜强度。 */
+    Value?: number;
+  }
+
   /** 视频画面黑边、白边、黑屏、白屏检测的控制参数。 */
   interface BlackWhiteEdgeConfigureInfo {
     /** 视频画面黑边、白边、黑屏、白屏检测开关，可选值：ON：开启；OFF：关闭。 */
@@ -4007,6 +4031,14 @@ declare namespace V20180717 {
     FilterType?: string;
     /** IP 列表，支持 X.X.X.X 格式 IPV4 地址，或 X:X:X:X:X:X:X:X 格式 IPV6 地址，或网段格式 /N（IPV4:1≤N≤32；IPV6:1≤N≤128）；最多可填充 200 个 IP 或网段。当 Status 取值为 Enabled 时，IPList 必须赋值。 */
     IPList?: string[];
+  }
+
+  /** 图片美颜配置。 */
+  interface ImageBeautyConfig {
+    /** 美颜效果项。 */
+    BeautyEffectItems?: BeautyEffectItem[];
+    /** 美颜滤镜项。 */
+    BeautyFilterItems?: BeautyFilterItem[];
   }
 
   /** 图片模糊处理。 */
@@ -6105,6 +6137,8 @@ declare namespace V20180717 {
   interface ProcessImageAsyncInput {
     /** 图片处理的FileId。 */
     FileId?: string;
+    /** 图片URL。 */
+    Url?: string;
     /** 图片处理参数。 */
     ImageTaskInput?: ProcessImageAsyncTaskInput;
     /** 图片处理任务的输出媒体文件配置。 */
@@ -6153,12 +6187,14 @@ declare namespace V20180717 {
     MetaData?: MediaMetaData;
   }
 
-  /** 图片异步处理配置 */
+  /** 图片异步处理配置。 */
   interface ProcessImageAsyncTask {
     /** 图片转码输出配置。 */
     EncodeConfig?: ImageEncodeConfig | null;
     /** 图片增强配置。 */
     EnhanceConfig?: ImageEnhanceConfig | null;
+    /** 图片美颜配置。 */
+    BeautyConfig?: ImageBeautyConfig | null;
   }
 
   /** 图片处理配置。 */

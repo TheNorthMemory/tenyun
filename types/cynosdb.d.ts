@@ -5274,6 +5274,18 @@ declare interface DescribeClusterInstanceGrpsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterLevelsRequest {
+  /** 可用区 */
+  Zone: string;
+}
+
+declare interface DescribeClusterLevelsResponse {
+  /** 集群类型列表 */
+  LevelList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterParamLogsRequest {
   /** 集群ID */
   ClusterId: string;
@@ -8661,6 +8673,8 @@ declare interface Cynosdb {
   DescribeClusterInstanceGroups(data: DescribeClusterInstanceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGroupsResponse>;
   /** 查询实例组（废弃） {@link DescribeClusterInstanceGrpsRequest} {@link DescribeClusterInstanceGrpsResponse} */
   DescribeClusterInstanceGrps(data: DescribeClusterInstanceGrpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstanceGrpsResponse>;
+  /** 查询支持集群级别列表 {@link DescribeClusterLevelsRequest} {@link DescribeClusterLevelsResponse} */
+  DescribeClusterLevels(data: DescribeClusterLevelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterLevelsResponse>;
   /** 查询参数修改记录 {@link DescribeClusterParamLogsRequest} {@link DescribeClusterParamLogsResponse} */
   DescribeClusterParamLogs(data: DescribeClusterParamLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterParamLogsResponse>;
   /** 查询集群参数 {@link DescribeClusterParamsRequest} {@link DescribeClusterParamsResponse} */

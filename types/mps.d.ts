@@ -1810,6 +1810,12 @@ declare interface AigcVideoExtraParam {
   EnableBgm?: boolean;
 }
 
+/** 参考音频信息。 */
+declare interface AigcVideoReferenceAudioInfo {
+  /** 参考音频URL信息。需外网可访问。 */
+  AudioUrl?: string;
+}
+
 /** 用于AIGC生视频创作的参考图片信息。 */
 declare interface AigcVideoReferenceImageInfo {
   /** 用于指导视频生成的图片 URL。该URL需外网可访问。同时允许爬虫拉取。 */
@@ -8421,6 +8427,8 @@ declare interface CreateAigcVideoTaskRequest {
   ImageInfos?: AigcVideoReferenceImageInfo[];
   /** 目前仅 Kling O1、Kling 3.0-Omni、Vidu q2-pro、H2 1.0 支持参考视频信息传入。Kling O1、3.0-Omni 可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声。Vidu q2-pro 支持视频参考。H2 1.0 支持视频参考。 */
   VideoInfos?: AigcVideoReferenceVideoInfo[];
+  /** 部分模型支持参考音频传入，使用URL传入。 */
+  AudioInfos?: AigcVideoReferenceAudioInfo[];
   /** 生成视频的时长。注意：Kling，默认：5 秒。O1 支持 3-10 秒。3.0-Omni 支持 3-15 秒，当使用视频参考时只支持 3-10 秒。3.0 支持 3-15 秒。其他版本支持 5、10 秒。Hailuo 的 std 模式可支持 6、10 秒，其他仅 6 秒。默认：6 秒。Vidu，默认：5 秒。q3-pro、q3-turbo、q3、q3-mix 支持 3-16 秒。q2-pro、q2-turbo、q2 支持 1-10 秒。 PixVerse，默认：5 秒。v5.6 支持 5、8、10 秒。v6、c1 支持 1-15 秒。H2，支持 3-15 秒，默认 ：5 秒。 */
   Duration?: number;
   /** 用于传入要求的额外参数。 */

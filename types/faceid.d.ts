@@ -935,20 +935,22 @@ declare interface GetWxNFCResultResponse {
 }
 
 declare interface IdCardOCRVerificationRequest {
-  /** 身份证号。- 姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。- 若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。 */
+  /** 身份证号。姓名和身份证号、ImageBase64、ImageUrl三者必须提供其中之一。若都提供了，则按照姓名和身份证号>ImageBase64>ImageUrl的优先级使用参数。 */
   IdCard?: string;
   /** 姓名。 */
   Name?: string;
-  /** 身份证人像面的 Base64 值。- 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。- 支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
+  /** 身份证人像面的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
   ImageBase64?: string;
-  /** 身份证人像面的 Url 地址。- 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。- 支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。- 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 身份证人像面的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
-  /** 敏感数据加密信息。- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
+  /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
+  /** 告警配置。仅当使用ImageBase64或者ImageUrl时，告警配置生效以下可选字段均为bool 类型，默认false。CopyWarn，复印件告警。BorderCheckWarn，边框和框内遮挡告警。ReshootWarn，翻拍告警。DetectPsWarn，PS检测告警（疑似存在PS痕迹）。TempIdWarn，临时身份证告警。Quality，图片质量告警（评价图片模糊程度）。SDK 设置方式参考：Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})。API 3.0 Explorer 设置方式参考：Config = {"CopyWarn":true,"Quality":true}。 */
+  Config?: string;
 }
 
 declare interface IdCardOCRVerificationResponse {
-  /** 认证结果码，收费情况如下。- 收费结果码：0: 姓名和身份证号一致。-1: 姓名和身份证号不一致。- 不收费结果码：-2: 非法身份证号（长度、校验位等不正确）。-3: 非法姓名（长度、格式等不正确）。-4: 证件库服务异常。-5: 证件库中无此身份证记录。-6: 权威比对系统升级中，请稍后再试。-7: 认证次数超过当日限制。 */
+  /** 认证结果码，收费情况如下。收费结果码：0: 姓名和身份证号一致。-1: 姓名和身份证号不一致。不收费结果码：-2: 非法身份证号（长度、校验位等不正确）。-3: 非法姓名（长度、格式等不正确）。-4: 证件库服务异常。-5: 证件库中无此身份证记录。-6: 权威比对系统升级中，请稍后再试。-7: 认证次数超过当日限制。 */
   Result?: string;
   /** 业务结果描述。 */
   Description?: string;
@@ -964,6 +966,12 @@ declare interface IdCardOCRVerificationResponse {
   Birth?: string | null;
   /** OCR得到的地址。 */
   Address?: string | null;
+  /** 身份证头像照片的base64编码 */
+  Portrait?: string;
+  /** 告警信息。Code 告警码列表和释义： '-9101'：身份证边框不完整告警。 '-9102'：身份证复印件告警。 '-9103'：身份证翻拍告警。 '-9105'：身份证框内遮挡告警。' '-9104'：临时身份证告警。 '-9106'：身份证 PS 告警（疑似存在PS痕迹）。 '-9107'：身份证反光告警。 '-9108'：身份证复印件告警（仅黑白复印件）。 '-9109'：身份证有效日期不合法告警。 '-8001'：图片模糊告警。多个会用“|” 隔开，如 "-9101|-9106|-9104"。 */
+  Warnings?: string;
+  /** 图片质量分数。当请求Config中配置图片模糊告警该参数才有意义。取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。 */
+  Quality?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

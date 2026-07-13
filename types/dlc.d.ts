@@ -1566,6 +1566,8 @@ declare interface Policy {
   Model?: string;
   /** 权限来源是否为管理员 */
   IsAdminPolicy?: boolean;
+  /** user和workgroup对应的确定性字符串PolicyId */
+  PolicyId?: string;
 }
 
 /** 策略集合 */
@@ -3074,6 +3076,8 @@ declare interface AttachUserPolicyRequest {
 }
 
 declare interface AttachUserPolicyResponse {
+  /** 要授权的策略列表 */
+  PolicySet?: Policy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3086,6 +3090,8 @@ declare interface AttachWorkGroupPolicyRequest {
 }
 
 declare interface AttachWorkGroupPolicyResponse {
+  /** 要授权的策略列表 */
+  PolicySet?: Policy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5601,6 +5607,8 @@ declare interface DescribeUserInfoRequest {
   Offset?: number;
   /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
   AccountType?: string;
+  /** TF 资源 ID */
+  PolicyId?: string;
 }
 
 declare interface DescribeUserInfoResponse {
@@ -5749,6 +5757,8 @@ declare interface DescribeWorkGroupInfoRequest {
   Limit?: number;
   /** 偏移量，默认为0 */
   Offset?: number;
+  /** 要授权的策略列表 */
+  PolicyId?: string;
 }
 
 declare interface DescribeWorkGroupInfoResponse {
@@ -5789,6 +5799,8 @@ declare interface DetachUserPolicyRequest {
   PolicySet?: Policy[];
   /** 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户） */
   AccountType?: string;
+  /** 要授权的策略列表 */
+  PolicyIds?: string[];
 }
 
 declare interface DetachUserPolicyResponse {
@@ -5801,6 +5813,8 @@ declare interface DetachWorkGroupPolicyRequest {
   WorkGroupId: number;
   /** 解绑的权限集合 */
   PolicySet?: Policy[];
+  /** 要授权的策略列表 */
+  PolicyIds?: string[];
 }
 
 declare interface DetachWorkGroupPolicyResponse {

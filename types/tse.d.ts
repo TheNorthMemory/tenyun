@@ -214,6 +214,24 @@ declare interface AutoScalerRules {
   Policies?: AutoScalerPolicy[];
 }
 
+/** 灰度命中规则 */
+declare interface BetaLabel {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: BetaLabelMatchString;
+}
+
+/** 命中匹配方式与值 */
+declare interface BetaLabelMatchString {
+  /** 类型枚举值：EXAT： 精确匹配 */
+  Type?: string;
+  /** 值 */
+  Value?: string;
+  /** 值类型枚举值：TEXT： 文本 */
+  ValueType?: string;
+}
+
 /** 服务治理引擎绑定的kubernetes信息 */
 declare interface BoundK8SInfo {
   /** 绑定的kubernetes集群ID */
@@ -944,6 +962,10 @@ declare interface ConfigFileRelease {
   ConfigFileSupportedClient?: number;
   /** 配置文件持久化 */
   ConfigFilePersistent?: ConfigFilePersistent;
+  /** 灰度标签 */
+  BetaLabels?: BetaLabel[];
+  /** 发布类型枚举值：gary： 灰度发布 */
+  ReleaseType?: string;
 }
 
 /** 配置发布删除 */

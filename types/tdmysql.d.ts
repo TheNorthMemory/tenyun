@@ -1480,6 +1480,8 @@ declare interface DescribeFlowRequest {
 }
 
 declare interface DescribeFlowResponse {
+  /** running表示进行中；success表示成功；paused表示暂停；failed表示失败 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

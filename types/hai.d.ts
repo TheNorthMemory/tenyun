@@ -58,6 +58,10 @@ declare interface ComputeDetail {
   CPU?: string;
   /** 内存 */
   Memory?: string;
+  /** 该套餐是否支持包年包月 */
+  PrepaidEnable?: boolean;
+  /** 该套餐是否支持按量计费 */
+  PostpaidEnable?: boolean;
 }
 
 /** 资源相关信息 */
@@ -374,6 +378,16 @@ declare interface SceneInfo {
   SceneName?: string;
 }
 
+/** 服务级包年包月入参 */
+declare interface ServiceChargePrepaid {
+  /** 购买时长，默认1 */
+  Period?: number;
+  /** 时长单位：MONTH(月)/DAY(天) */
+  TimeUnit?: string;
+  /** 自动续费：NOTIFY_AND_AUTO_RENEW/NOTIFY_AND_MANUAL_RENEW/DISABLE_NOTIFY_AND_MANUAL_RENEW */
+  RenewFlag?: string;
+}
+
 /** 服务详情 */
 declare interface ServiceDetail {
   /** 服务id */
@@ -402,6 +416,16 @@ declare interface ServiceDetail {
   RoleComputeSet?: ComputeDetail[];
   /**  */
   TargetReplicas?: number;
+  /** 计费类型：POSTPAID_BY_HOUR(按量)/PREPAID_BY_MONTH(包月) */
+  ChargeType?: string;
+  /** 到期时间(包月)，按量为空 */
+  ExpireTime?: string;
+  /** 自动续费标识(包月) */
+  RenewFlag?: string;
+  /** 受限状态(如欠费隔离) */
+  RestrictState?: string;
+  /** 是否自定义部署：1是 0否 */
+  IsCustomDeploy?: number;
 }
 
 /** 服务元数据信息，如服务名 */
@@ -489,6 +513,8 @@ declare interface CreateInferServiceByTemplateRequest {
   NetworkSetting?: NetworkSetting;
   /** 推理服务安全类型枚举值：STANDARD： 标准推理服务CONFIDENTIAL： 可信推理服务 */
   SecurityType?: string;
+  /** 包年包月参数(ServiceChargeType为包月时必填) */
+  ServiceChargePrepaid?: ServiceChargePrepaid;
 }
 
 declare interface CreateInferServiceByTemplateResponse {
@@ -537,6 +563,8 @@ declare interface DeployInferServiceRequest {
   NetworkSetting?: NetworkSetting;
   /** 安全类型枚举值：STANDARD： 标准推理CONFIDENTIAL： 可信推理 */
   SecurityType?: string;
+  /** 包年包月参数(包月时必填) */
+  ServiceChargePrepaid?: ServiceChargePrepaid;
 }
 
 declare interface DeployInferServiceResponse {

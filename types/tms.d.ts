@@ -4,15 +4,15 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 文本审核返回的详细结果 */
 declare interface DetailResults {
-  /** 该字段用于返回检测结果所对应的全部恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型。 */
+  /** 该字段用于返回检测结果所对应的全部恶意标签。返回值：Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告；以及其他令人反感、不安全或不适宜的内容类型。 */
   Label?: string;
-  /** 该字段用于返回对应当前标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
+  /** 该字段用于返回对应当前标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过 */
   Suggestion?: string;
-  /** 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：*加我微信*）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。 */
+  /** 该字段用于返回检测文本命中的关键词信息，用于标注文本违规的具体原因（如：加我微信）。该参数可能会有多个返回值，代表命中的多个关键词；如返回值为空且Score不为空，则代表识别结果所对应的恶意标签（Label）是来自于语义模型判断的返回值。 */
   Keywords?: string[];
-  /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容；*色情 0*，则表明该文本不属于色情内容。 */
+  /** 该字段用于返回当前标签（Label）下的置信度，取值范围：0（置信度最低）-100（置信度最高 ），越高代表文本越有可能属于当前返回的标签；如：色情 99，则表明该文本非常有可能属于色情内容；色情 0，则表明该文本不属于色情内容。 */
   Score?: number;
-  /** 该字段用于返回自定义关键词对应的词库类型，取值为**1**（黑白库）和**2**（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。 */
+  /** 该字段用于返回自定义关键词对应的词库类型，取值为1（黑白库）和2（自定义关键词库），若未配置自定义关键词库,则默认值为1（黑白库匹配）。 */
   LibType?: number;
   /** 该字段用于返回自定义库的ID，以方便自定义库管理和配置。 */
   LibId?: string;
@@ -72,6 +72,26 @@ declare interface HitInfo {
   LibName?: string;
   /** 位置信息 */
   Positions?: Positions[];
+}
+
+/** 命中的位置坐标，是个左闭右开结构，比如原文是“一二三四五”，命中的文本是“二三”，则位置坐标是{1,3} */
+declare interface HitPosition {
+  /** 起始下标，含（按 rune/字符计算）,一段文本的起始下标是0 */
+  Start?: number;
+  /** 结束下标，不含（按 rune/字符），比如Start：1，End:3,表示第1，第2个字符，不包含第3个字符 */
+  End?: number;
+}
+
+/** 导致命中审核标签的原文片段信息，如果不命中任何审核标签，则不会有该片段信息，该片段信息只鹰用于辅助分析导致命中审核标签的文本所在位置 */
+declare interface HitSnippetInfo {
+  /** 命中的文本片段（明文），已还原到预处理前的原文，注意该字段内容在原文中可能不连续，需要结合HitSnippetInfos[].Positions来还原出所在原文位置 */
+  Snippet?: string;
+  /** 原子能力类型，如果是业务自定义库命中，会给出词库名称 */
+  AtomicName?: string;
+  /** 原子能力ID，如果是业务自定义库导致命中本次审核标签，该值是词库ID */
+  AtomicId?: string;
+  /** 该命中片段在原文中的位置列表，由于文本片段在原文中可能不连续，它可能是有多段位置信息 */
+  Positions?: HitPosition[];
 }
 
 /** 标识命中的违规关键词位置信息 */
@@ -193,15 +213,15 @@ declare interface GetFinancialLLMTaskResultResponse {
 declare interface TextModerationRequest {
   /** 待检测的文本内容，需为UTF-8编码并以Base64格式传入。 */
   Content: string;
-  /** 接口使用的识别策略编号，需在[控制台](https://console.cloud.tencent.com/cms/clouds/manage)获取。详细获取方式请参考以下链接：- **内容安全**（详见步骤四：策略配置）：[点击这里](https://cloud.tencent.com/document/product/1124/37119)- **AI生成识别**（详见服务对接->方式二）：[点击这里](https://cloud.tencent.com/document/product/1124/118694) */
+  /** 接口使用的识别策略编号，需在控制台获取。详细获取方式请参考以下链接：内容安全（详见步骤四：策略配置）：点击这里AI生成识别（详见服务对接->方式二）：点击这里 */
   BizType?: string;
-  /** 该字段表示您为待检测文本分配的数据ID，作用是方便您对数据进行标识和管理。取值：可由英文字母、数字、四种特殊符号（_，-，@，#）组成，**长度不超过64个字符**。 */
+  /** 该字段表示您为待检测文本分配的数据ID，作用是方便您对数据进行标识和管理。取值：可由英文字母、数字、四种特殊符号（_，-，@，#）组成，长度不超过64个字符。 */
   DataId?: string;
   /** 该字段标识用户信息，传入后可增强甄别有违规风险的发布者账号。 */
   User?: User;
   /** 该字段标识设备信息，传入后可增强甄别有违规风险的发布者设备。 */
   Device?: Device;
-  /** Content字段的原始语种，枚举值包括 zh 和 en：- 推荐使用 zh- en 适用于纯英文内容，耗时较高。若需使用 en，请先通过[反馈工单](https://console.cloud.tencent.com/workorder/category?level1_id=141&level2_id=1287&source=14&data_title=%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8&step=1)确认 */
+  /** Content字段的原始语种，枚举值包括 zh 和 en：推荐使用 zhen 适用于纯英文内容，耗时较高。若需使用 en，请先通过反馈工单确认 */
   SourceLanguage?: string;
   /** 服务类型，枚举值包括 TEXT 和 TEXT_AIGC：TEXT：内容安全TEXT_AIGC：AI生成识别 */
   Type?: string;
@@ -212,9 +232,9 @@ declare interface TextModerationRequest {
 declare interface TextModerationResponse {
   /** 该字段用于回显检测对象请求参数中的 BizType，与输入的 BizType 值对应。 */
   BizType?: string;
-  /** 用于标识对本次请求的处置建议，共三种返回值。返回值：**Block**: 建议直接做违规处置，**Review**: 建议人工二次确认，**Pass**: 未识别到风险。 */
+  /** 用于标识对本次请求的处置建议，共三种返回值。返回值：Block: 建议直接做违规处置，Review: 建议人工二次确认，Pass: 未识别到风险。 */
   Suggestion?: string;
-  /** 该字段用于返回检测结果（DetailResults）中所对应的**优先级最高的恶意标签**，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告；以及其他令人反感、不安全或不适宜的内容类型 */
+  /** 该字段用于返回检测结果（DetailResults）中所对应的优先级最高的恶意标签，表示模型推荐的审核结果，建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告；以及其他令人反感、不安全或不适宜的内容类型 */
   Label?: string;
   /** 对应 Label 字段下的二级子标签，表示该 Label 下更细分的违规点。 */
   SubLabel?: string;
@@ -238,6 +258,8 @@ declare interface TextModerationResponse {
   HitType?: string;
   /** 该字段用于回显检测对象请求参数中的 SessionId，与输入的 SessionId 值对应。 */
   SessionId?: string;
+  /** 该字段用于标记导致本次审核命中标签的原文内容位置信息 */
+  HitSnippetInfos?: HitSnippetInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

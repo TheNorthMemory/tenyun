@@ -2657,7 +2657,7 @@ declare interface CreateBatchSignUrlResponse {
 }
 
 declare interface CreateContractComparisonTaskRequest {
-  /** 执行合同审查任务的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行合同审查任务的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 原版文件ID，对比基准的旧版本文件唯一标识，通过UploadFiles接口获取文件资源ID。 */
   OriginFileResourceId: string;
@@ -2665,10 +2665,12 @@ declare interface CreateContractComparisonTaskRequest {
   DiffFileResourceId: string;
   /** 对比任务备注，长度不能超过50个字符。 */
   Comment?: string;
-  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的[回调通知](https://qian.tencent.com/developers/company/callback_types_v2)模块。 */
+  /** 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 1024长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
   /** 标签列表，用户自定义的键值对（Key-Value），可绑定到资源上，用于资源的分类、管理和访问控制。 */
   Tags?: Tag[];
+  /** 文档修订操作类型，对比任务执行前处理修订内容，适用于doc、docx存在修订情况。 类型如下： 0：不做任何操作 1：接受所有修订 */
+  RevisionOperation?: number;
 }
 
 declare interface CreateContractComparisonTaskResponse {
@@ -2883,7 +2885,7 @@ declare interface CreateEmbedWebUrlResponse {
 declare interface CreateEmployeeChangeUrlRequest {
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
   /** 待修改的员工UserId */
   UserId?: string;
@@ -4533,7 +4535,7 @@ declare interface DescribeBillUsageRequest {
   StartTime: string;
   /** 查询结束时间字符串，格式为yyyymmdd,时间跨度不能大于90天 */
   EndTime: string;
-  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:CloudEnterprise: 企业版合同SingleSignature: 单方签章CloudProve: 签署报告CloudOnlineSign: 腾讯会议在线签约ChannelWeCard: 微工卡SignFlow: 合同套餐SignFace: 签署意愿（人脸识别）SignPassword: 签署意愿（密码）SignSMS: 签署意愿（短信）PersonalEssAuth: 签署人实名（腾讯电子签认证）PersonalThirdAuth: 签署人实名（信任第三方认证）OrgEssAuth: 签署企业实名FlowNotify: 短信通知AuthService: 企业工商信息查询 */
   QuotaType?: string;
   /** 是否展示集团子企业的明细，默认否 */
   DisplaySubEnterprise?: boolean;
@@ -5361,7 +5363,7 @@ declare interface DescribeThirdPartyAuthCodeResponse {
 }
 
 declare interface DescribeUserAutoSignStatusRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
@@ -5378,7 +5380,7 @@ declare interface DescribeUserAutoSignStatusResponse {
   LicenseFrom?: number;
   /** 自动签许可到期时间。当且仅当已通过许可开通自动签时有值。值为unix时间戳,单位为秒。 */
   LicenseTo?: number;
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。**0**: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: `不可解绑释放更换他人`**1**: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。0: 使用个人自动签账号许可进行开通，个人自动签账号许可有效期1年，注: 不可解绑释放更换他人1: 不绑定自动签账号许可开通，后续使用合同份额进行合同发起 */
   LicenseType?: number;
   /** 用户开通自动签指定使用的印章，为空则未设置印章，需重新进入开通链接设置印章。 */
   SealId?: string;
@@ -5387,7 +5389,7 @@ declare interface DescribeUserAutoSignStatusResponse {
 }
 
 declare interface DescribeUserFlowTypeRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -5423,7 +5425,7 @@ declare interface DescribeUserVerifyStatusResponse {
 }
 
 declare interface DisableUserAutoSignRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 自动签使用的场景值, 可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
   SceneKey: string;
@@ -5439,7 +5441,7 @@ declare interface DisableUserAutoSignResponse {
 }
 
 declare interface ExportContractComparisonTaskRequest {
-  /** 执行合同审查任务的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行合同审查任务的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。 */
   TaskId: string;

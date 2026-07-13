@@ -56,7 +56,7 @@ declare interface BatchCreateFailedItem {
 declare interface BindingItem {
   /** 资源 ID（模型 ID 或服务 ID）。 */
   ResourceId: string;
-  /** 资源类型。取值：endpoint（服务）、model（模型）。 */
+  /** 资源类型。取值：endpoint（推理服务）、model（模型）。推荐绑定endpoint，绑定model即将下线。已绑定model的apikey仍可使用，但控制台回显将不会展示模型绑定列表。枚举值：endpoint： 绑定到endpoint（默认推理服务或自定义推理服务） */
   ResourceType: string;
   /** 资源状态 */
   Status?: string;
@@ -242,6 +242,16 @@ declare interface ModifyGlossaryEntryInput {
   TargetTerm?: string;
 }
 
+/** Token 限额配置项（创建 API 密钥时用） */
+declare interface QuotaCreateItem {
+  /** 限额周期。取值：d（按日）、m（按月）、lifetime（总额度，不重置）。 */
+  CycleUnit: string;
+  /** 维度当期限额总量（Token 数），不能大于10万亿。使用字符串避免大数精度丢失。 */
+  CycleCredits: string;
+  /** 月度限额起始日。CycleUnit 为 m 时可选，1~31，默认 1。小月（如 2 月）由下游自动取该月最后一天。 */
+  MonthStartDay?: number;
+}
+
 /** Token 限额信息 */
 declare interface QuotaInfo {
   /** 限额包 ID。 */
@@ -258,6 +268,16 @@ declare interface QuotaInfo {
   StartTime?: string;
   /** 限额过期时间。 */
   ExpireTime?: string;
+}
+
+/** Token 限额期望状态 */
+declare interface QuotasDesired {
+  /** 限额周期，必填。取值：d（按日）、m（按月）、lifetime（总额度）。 */
+  CycleUnit: string;
+  /** 单周期额度（Token 数），必填，不能大于10万亿。使用字符串避免大数精度丢失。同维度若与现网不同视为升配/降配。 */
+  CycleCredits: string;
+  /** 月度限额起始日。CycleUnit=m 时可选，1~31，默认 1。小月（如 2 月）由下游自动取该月最后一天。已有月度限额包时，更新月起始日视为周期窗口切换，会 delete 旧包后 add 新包，累计额度会重置 */
+  MonthStartDay?: number;
 }
 
 /** 过滤条件 */
@@ -533,9 +553,27 @@ declare interface UsageStats {
 }
 
 declare interface CreateApiKeyRequest {
+  /** API 密钥名称，创建后不可修改。 */
+  ApiKeyName: string;
+  /** 平台类型。取值：maas */
+  Platform: string;
+  /** 绑定类型。取值：all（全部模型和接入点）、model_custom_endpoint_custom（自定义模型+自定义接入点）。枚举值：all： 全部模型和接入点model_custom_endpoint_custom： 自定义模型+自定义接入点 */
+  BindType: string;
+  /** 备注信息 */
+  Remark?: string;
+  /** 初始状态。取值：enable（启用）、disable（禁用）。不传默认 enable。 */
+  Status?: string;
+  /** 资源绑定列表（model 和 endpoint 混合），每项需显式指定 ResourceType。BindType 为 all 时不填；BindType 为model_custom_endpoint_custom时必填。 */
+  Bindings?: BindingItem[];
+  /** IP 白名单列表。支持 IPv4（如 1.2.3.4）和 CIDR（如 10.0.0.0/24）格式，IPv6暂不支持。最多 50 个条目，不支持重复。不传或传空数组表示不限制 IP。 */
+  IpWhitelist?: string[];
+  /** Token 限额配置多维度列表。可选，不传表示不开启限额。 */
+  Quotas?: QuotaCreateItem[];
 }
 
 declare interface CreateApiKeyResponse {
+  /** apikey id */
+  ApiKeyId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -623,6 +661,10 @@ declare interface CreateTokenPlanTeamOrderAndBuyResponse {
 }
 
 declare interface DeleteApiKeyRequest {
+  /** API 密钥 ID。 */
+  ApiKeyId: string;
+  /** 平台类型。取值：maas。 */
+  Platform: string;
 }
 
 declare interface DeleteApiKeyResponse {
@@ -1003,6 +1045,18 @@ declare interface DescribeUsageRankListResponse {
 }
 
 declare interface ModifyApiKeyInfoRequest {
+  /** API 密钥 ID。 */
+  ApiKeyId: string;
+  /** 平台类型。取值：maas。 */
+  Platform: string;
+  /** API 密钥名称。最大 128 字符。不传表示不修改。 */
+  ApiKeyName?: string;
+  /** 备注。 */
+  Remark?: string;
+  /** IP 白名单列表。支持 IPv4（如 1.2.3.4）、CIDR（如 10.0.0.0/24）格式，IPv6暂不支持。最多 50 个，不支持重复。传入空数组表示清空白名单（不限制 IP）。不传表示不修改。 */
+  IpWhitelist?: string[];
+  /** 【修改限额推荐使用QuotaDesired参数】Token 限额期望状态。可选，不传表示不修改，传入空数组表示清空。和 Quotas（Token限额配置）字段互斥，不支持同时传入 */
+  QuotasDesired?: QuotasDesired[];
 }
 
 declare interface ModifyApiKeyInfoResponse {
@@ -1011,6 +1065,12 @@ declare interface ModifyApiKeyInfoResponse {
 }
 
 declare interface ModifyApiKeyStatusRequest {
+  /** API 密钥 ID。 */
+  ApiKeyId: string;
+  /** 平台类型。取值：maas。 */
+  Platform: string;
+  /** 状态。取值：enable（启用）、disable（禁用）。 */
+  Status: string;
 }
 
 declare interface ModifyApiKeyStatusResponse {
@@ -1098,7 +1158,7 @@ declare interface UpgradeTokenPlanTeamOrderResponse {
 declare interface Tokenhub {
   (): Versions;
   /** 创建 API 密钥 {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
-  CreateApiKey(data?: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
+  CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
   /** 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
   CreateGlossary(data: CreateGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryResponse>;
   /** 批量创建术语条目 {@link CreateGlossaryEntriesRequest} {@link CreateGlossaryEntriesResponse} */
@@ -1108,7 +1168,7 @@ declare interface Tokenhub {
   /** 创建 Token Plan 套餐 {@link CreateTokenPlanTeamOrderAndBuyRequest} {@link CreateTokenPlanTeamOrderAndBuyResponse} */
   CreateTokenPlanTeamOrderAndBuy(data: CreateTokenPlanTeamOrderAndBuyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanTeamOrderAndBuyResponse>;
   /** 删除 API 密钥 {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
-  DeleteApiKey(data?: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
+  DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
   /** 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
   DeleteGlossary(data: DeleteGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryResponse>;
   /** 批量删除术语条目 {@link DeleteGlossaryEntriesRequest} {@link DeleteGlossaryEntriesResponse} */
@@ -1140,9 +1200,9 @@ declare interface Tokenhub {
   /** 查询用量排行列表 {@link DescribeUsageRankListRequest} {@link DescribeUsageRankListResponse} */
   DescribeUsageRankList(data: DescribeUsageRankListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageRankListResponse>;
   /** 更新 API 密钥信息 {@link ModifyApiKeyInfoRequest} {@link ModifyApiKeyInfoResponse} */
-  ModifyApiKeyInfo(data?: ModifyApiKeyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyInfoResponse>;
+  ModifyApiKeyInfo(data: ModifyApiKeyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyInfoResponse>;
   /** 更新 API 密钥状态 {@link ModifyApiKeyStatusRequest} {@link ModifyApiKeyStatusResponse} */
-  ModifyApiKeyStatus(data?: ModifyApiKeyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyStatusResponse>;
+  ModifyApiKeyStatus(data: ModifyApiKeyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyStatusResponse>;
   /** 批量修改术语条目 {@link ModifyGlossaryEntriesRequest} {@link ModifyGlossaryEntriesResponse} */
   ModifyGlossaryEntries(data: ModifyGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlossaryEntriesResponse>;
   /** 修改 Token Plan 套餐的 API Key 配置 {@link ModifyTokenPlanApiKeyRequest} {@link ModifyTokenPlanApiKeyResponse} */
