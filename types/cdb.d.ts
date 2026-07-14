@@ -702,6 +702,20 @@ declare interface DatabasesWithCharacterLists {
   CharacterSet?: string;
 }
 
+/** 投递错误 */
+declare interface DeliverSummary {
+  /** 投递类型，store（存储类），mq（消息通道） */
+  DeliverType?: string;
+  /** 投递子类型：cls，ckafka。 */
+  DeliverSubType?: string;
+  /** 投递者 */
+  DeliverConsumer?: string;
+  /** 投递者名称 */
+  DeliverConsumerName?: string;
+  /** 投递异常错误 */
+  DeliverError?: string;
+}
+
 /** 置放群组信息 */
 declare interface DeployGroupInfo {
   /** 置放群组 ID。 */
@@ -922,7 +936,7 @@ declare interface InstanceDbAuditStatus {
   HighRealStorage?: number;
   /** 低频存储量(单位：GB)。 */
   LowRealStorage?: number;
-  /** 是否为全审计。true-表示全审计。 */
+  /** 是否为全审计（true-表示全审计） */
   AuditAll?: boolean;
   /** 审计开通时间。 */
   CreateAt?: string;
@@ -944,6 +958,10 @@ declare interface InstanceDbAuditStatus {
   TrialCloseTime?: number;
   /** 限免期查询日志时长 */
   TrialDescribeLogHours?: number;
+  /** 投递信息 */
+  DeliverSummary?: DeliverSummary[];
+  /** 是否开启了投递，ON：开启，OFF：关闭 */
+  Deliver?: string;
 }
 
 /** 实例详细信息 */

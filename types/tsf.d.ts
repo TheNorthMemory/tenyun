@@ -260,6 +260,8 @@ declare interface ApplicationAttribute {
   RunningGroupCount?: string;
   /** 异常部署组个数 */
   AbnormalCount?: string;
+  /** 镜像tag数量 */
+  ImageTagCount?: number;
 }
 
 /** 分页的应用描述信息字段 */

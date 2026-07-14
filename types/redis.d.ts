@@ -858,13 +858,13 @@ declare interface RedisBackupSet {
   StartTime?: string;
   /** 备份任务ID。 */
   BackupId?: string;
-  /** 备份类型。- 1：凌晨系统发起的自动备份。- 0：用户发起的手动备份。 */
+  /** 备份类型。1：凌晨系统发起的自动备份。0：用户发起的手动备份。 */
   BackupType?: string;
-  /** 备份状态。 - 1：备份被其它流程锁定。- 2：备份正常，没有被任何流程锁定。- -1：备份已过期。- 3：备份正在被导出。- 4：备份导出成功。 */
+  /** 备份状态。 1：备份被其它流程锁定。2：备份正常，没有被任何流程锁定。-1：备份已过期。3：备份正在被导出。4：备份导出成功。 */
   Status?: number;
   /** 备份的备注信息。 */
   Remark?: string;
-  /** 备份是否被锁定。- 0：未被锁定。- 1：已被锁定。 */
+  /** 备份是否被锁定。0：未被锁定。1：已被锁定。 */
   Locked?: number;
   /** 内部字段，用户可忽略。 */
   BackupSize?: number;
@@ -884,6 +884,8 @@ declare interface RedisBackupSet {
   FileType?: string;
   /** 备份文件过期时间。 */
   ExpireTime?: string;
+  /** 备份文件是否加密 */
+  Encrypted?: boolean;
 }
 
 /** 单个实例信息 */
@@ -1645,9 +1647,9 @@ declare interface DescribeAutoBackupConfigResponse {
 }
 
 declare interface DescribeBackupDetailRequest {
-  /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 备份 ID，可通过接口 [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) 返回的参数 **RedisBackupSet** 获取。 */
+  /** 备份 ID，可通过接口 DescribeInstanceBackups 返回的参数 RedisBackupSet 获取。 */
   BackupId: string;
 }
 
@@ -1658,13 +1660,13 @@ declare interface DescribeBackupDetailResponse {
   StartTime?: string;
   /** 备份结束时间。 */
   EndTime?: string;
-  /** 备份方式。 - 1：手动备份。- 0：自动备份。 */
+  /** 备份方式。 1：手动备份。0：自动备份。 */
   BackupType?: string;
-  /** 备份状态。 - 1：备份被其它流程锁定。- 2：备份正常，没有被任何流程锁定。- -1：备份已过期。- 3：备份正在被导出。- 4：备份导出成功。 */
+  /** 备份状态。 1：备份被其它流程锁定。2：备份正常，没有被任何流程锁定。-1：备份已过期。3：备份正在被导出。4：备份导出成功。 */
   Status?: number;
   /** 备份的备注信息。 */
   Remark?: string;
-  /** 备份是否被锁定。- 0：未被锁定。- 1：已被锁定。 */
+  /** 备份是否被锁定。0：未被锁定。1：已被锁定。 */
   Locked?: number;
   /** 备份文件大小。单位：Byte。 */
   BackupSize?: number;
@@ -1676,6 +1678,14 @@ declare interface DescribeBackupDetailResponse {
   ShardNum?: number;
   /** 副本数量。 */
   ReplicasNum?: number;
+  /** 是否已加密。枚举值：true： 已加密false： 未加密 */
+  Encrypted?: boolean;
+  /** 解密密钥。 */
+  DecryptKey?: string;
+  /** KMS的密钥ID。 */
+  KmsKeyId?: string;
+  /** 加密该备份文件的加密算法。枚举值：AES-256-CBC： 当前仅支持AES-256-CBC */
+  KeyAlgorithm?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

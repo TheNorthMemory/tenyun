@@ -90,7 +90,7 @@ declare interface AccountStatsGroup {
   RectifyRate?: string;
 }
 
-/** 安全组地址模版 */
+/** 安全组地址模板 */
 declare interface AddressTemplateSpecification {
   /** IP地址ID，例如：ipm-2uw6ujo6。 */
   AddressId?: string;
@@ -110,11 +110,11 @@ declare interface AnalysisSgRuleInfoResp {
   CfwOrderIndex?: number;
   /** 源规则内容 */
   SourceId?: string;
-  /** 源规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
+  /** 源规则类型取值范围 0/1/2/3/4/5/6/7/8/90表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)枚举值：0： IP / CIDR1： VPC 实例2： 子网 3： CVM 实例4： CLB 实例5： ENI（弹性网卡）实例6： CDB（云数据库）实例7： 参数模板8： 标签9： 地域 */
   SourceType?: number;
   /** 目的规则内容 */
   TargetId?: string;
-  /** 目的规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
+  /** 目的规则类型取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup)枚举值：0： IP / CIDR1： VPC 实例2： 子网 3： CVM 实例4： CLB 实例5： ENI（弹性网卡）实例6： CDB（云数据库）实例7： 参数模板8： 标签9： 地域 */
   TargetType?: number;
   /** 协议名称取值范围:TCP/ANY/ICMP/UDPANY:表示所有 */
   Protocol?: string;
@@ -172,7 +172,7 @@ declare interface AnalysisSgRuleInfoResp {
 
 /** 通用筛选条件 */
 declare interface CommonFilter {
-  /** 筛选字段名。支持：SecurityGroupId、FwGroupId、Ip（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索） */
+  /** 筛选字段名。支持：SecurityGroupId、FwGroupId、IP（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索） */
   Name?: string | null;
   /** 筛选值列表 */
   Values?: string[] | null;
@@ -318,7 +318,7 @@ declare interface NatAclRule {
   Description?: string | null;
   /** 端口模板ID */
   ParamTemplateId?: string | null;
-  /** 规则归属的成员账号ID（当Scope为cfwnat-xxx或SourceType/DestType为instance/tag时必填） */
+  /** 规则归属的成员账号ID(当Scope为cfwnat-xxx或SourceType/DestType为instance/tag时必填) */
   BelongMemberId?: string | null;
 }
 
@@ -550,11 +550,11 @@ declare interface SecGroupRuleResp {
   IpVersion?: string;
   /** 源规则内容 */
   SourceId?: string;
-  /** 源规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
+  /** 源规则类型取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
   SourceType?: number;
   /** 目的规则内容 */
   TargetId?: string;
-  /** 目的规则类型 取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
+  /** 目的规则类型取值范围 0/1/2/3/4/5/6/7/8/9/1000表示ip(net),1表示VPC实例(instance)2表示子网实例(instance)3表示CVM实例(instance)4表示CLB实例(instance)5表示ENI实例(instance)6表示数据库实例(instance)7表示模板(template)8表示标签(tag)9表示地域(region)100表示资产分组(resourcegroup) */
   TargetType?: number;
   /** 协议名称取值范围:TCP/ANY/ICMP/UDPANY:表示所有 */
   Protocol?: string;
@@ -596,7 +596,7 @@ declare interface SecGroupRuleResp {
   DnsParseCount?: SgDnsParseCount;
   /** 规则生效范围 */
   Scope?: string;
-  /** 规则最新一次是否有改动 取值范围：0/1 0:否 1:是 */
+  /** 规则最近一次是否有改动 取值范围：0/1 0:否 1:是 */
   IsNew?: number;
   /** 规则归属的成员账号（当FwGroupId为cfwg-xxx或SourceType/DestType为instance/tag时必填) */
   BelongMember?: MemberInfo | null;
@@ -676,7 +676,7 @@ declare interface SequenceIndex {
   NewOrderIndex?: number | null;
 }
 
-/** 安全组服务模版 */
+/** 安全组服务模板 */
 declare interface ServiceTemplateSpecification {
   /** 协议端口ID，例如：ppm-f5n1f8da。 */
   ServiceId?: string;

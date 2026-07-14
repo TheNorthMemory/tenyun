@@ -387,11 +387,11 @@ declare interface CreateCloudRecordingResponse {
 declare interface CreateDeviceRequest {
   /** 创建设备所归属的项目ID */
   ProjectId: string;
-  /** 创建设备ID，项目内需要唯一，由小写英文字母、数字和下划线构成，长度不超过18 */
+  /** 创建设备ID，项目内需要唯一，由小写英文字母、数字和下划线构成，长度不超过32 */
   DeviceId: string;
   /** 创建设备名称，长度小于24, 可包含中文、数字、英文字母和下划线 */
   DeviceName: string;
-  /** 设备类型，field为现场设备（受控设备），remote为远端设备（操控设备），不填默认为field */
+  /** 设备类型枚举值：field： 现场设备（受控设备）remote： 远端设备（操控设备） */
   DeviceType: string;
   /** 设备认证口令，由大小写英文字母和数字构成，须为16位 */
   DeviceToken: string;

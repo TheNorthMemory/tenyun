@@ -8343,7 +8343,7 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
 declare interface CreateAigcAudioTaskRequest {
   /** 模型名称。生音乐当前支持的模型: GL、MiniMaxMusic。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：3.0-clip、3.0-pro。模型MinimaxMusic支持的版本号：2.0、2.5、2.6。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：3.0-clip、3.0-pro。模型MiniMaxMusic支持的版本号：2.0、2.5、2.6。 */
   ModelVersion?: string;
   /** 指定场景生音频。音乐: music。 */
   SceneType?: string;

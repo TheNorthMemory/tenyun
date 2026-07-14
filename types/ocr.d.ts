@@ -962,9 +962,9 @@ declare interface ImageCoordinates {
   X?: number | null;
   /** 头像左上角纵坐标 */
   Y?: number | null;
-  /** 头像框宽度 */
+  /** 头像框宽度单位：px */
   Width?: number | null;
-  /** 头像框高度 */
+  /** 头像框高度单位：px */
   Height?: number | null;
 }
 
@@ -1790,9 +1790,9 @@ declare interface Rect {
   X?: number;
   /** 左上角y */
   Y?: number;
-  /** 宽度 */
+  /** 宽度单位：px */
   Width?: number;
-  /** 高度 */
+  /** 高度单位：px */
   Height?: number;
 }
 
@@ -3556,7 +3556,7 @@ declare interface DriverLicenseOCRResponse {
   Class?: string;
   /** 有效期开始时间（YYYY-MM-DD） */
   StartDate?: string;
-  /** 有效期截止时间（新版驾驶证返回 YYYY-MM-DD，老版驾驶证返回有效期限 X年） */
+  /** 有效期截止时间（新版驾驶证返回 YYYY-MM-DD，老版驾驶证返回有效期限 X年；若驾驶证有效期为长期，则返回"长期"） */
   EndDate?: string;
   /** 驾驶证正页证号 */
   CardCode?: string;

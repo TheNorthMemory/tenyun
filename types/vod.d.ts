@@ -2353,6 +2353,8 @@ declare namespace V20180717 {
     FileInfos?: AigcVideoTaskOutputFileInfo[];
     /** 任务类型为 Procedure 的任务 ID。若发起创建 AIGC 生视频任务时指定了任务流模板(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
     ProcedureTaskIds?: string[];
+    /** AIGC 生视频任务的用量信息。 */
+    Usage?: AigcVideoTaskUsage;
   }
 
   /** AIGC 生视频任务的输出文件信息。 */
@@ -2377,6 +2379,14 @@ declare namespace V20180717 {
     MetaData?: MediaMetaData;
     /** 文件的用途类型。枚举值：scene_url： 3D 场景文件，FileUrl 字段有返回值。point_url： 点云文件，FileUrl 字段有返回值。mesh_url： 原始网格模型文，FileUrl 字段有返回值。mesh_simplified_url： 简化后的网格模型文件，FileUrl 字段有返回值。position_info： 场景空间位置信息，FileContent 字段有返回值。image_url： 生成的图片，FileUrl 字段有返回值。 */
     UsageType?: string;
+  }
+
+  /** AIGC 生视频任务的用量。 */
+  interface AigcVideoTaskUsage {
+    /** 输入 Token 数目。 */
+    InputTokens?: number;
+    /** 思考产生的 Token 数目。 */
+    ThoughtTokens?: number;
   }
 
   /** 转动图任务类型 */

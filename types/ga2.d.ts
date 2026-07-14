@@ -361,7 +361,7 @@ declare interface Tag {
 declare interface CreateAccelerateAreasRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 加速地域信息。 */
+  /** 加速地域信息。一次最多创建10组加速地域。 */
   AcceleratorAreas: AcceleratorAreas[];
 }
 
@@ -765,7 +765,7 @@ declare interface DescribeTaskResultResponse {
 declare interface ModifyAccelerateAreasRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 加速地域信息。 */
+  /** 加速地域信息。入参限制：数组长度不能超过10。 */
   AcceleratorAreas: AcceleratorAreas[];
 }
 

@@ -1729,6 +1729,12 @@ declare interface ModifyApmInstanceRequest {
   UrlNumberSegmentThreshold?: number;
   /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
   LogSpanIdKey?: string;
+  /** 是否开启探针头采样 */
+  EnableHeadSampler?: boolean;
+  /** 头采类型枚举值：parentbased_traceidratio： 默认 */
+  HeadSamplerType?: string;
+  /** 头采采样率取值范围：[0, 100] */
+  HeadSamplerArg?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

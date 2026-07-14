@@ -1045,6 +1045,14 @@ declare interface CreateDBInstanceHourRequest {
   HiddenZone?: string;
   /** 参数模板 ID。参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。参数模板 ID 可通过 DescribeDBInstanceParamTpl 接口获取。请选择与实例版本与架构所对应的参数模板 ID。 */
   ParamTemplateId?: string;
+  /** 数据库存储加密取值。No_Encryption：不采用存储加密。TDE：开启 TDE 存储加密方式。 */
+  DataEncryption?: string;
+  /** 如选取 TDE 存储加密，须指定密钥来源。auto 自动生成密钥。manual 手动指定密钥。 */
+  EncryptionKeySource?: string;
+  /** 密钥 ID。如密钥资源选取为指定自定义，须输入指定的密钥 ID。 */
+  KeyId?: string;
+  /** 如果密钥来源为指定自定义密钥，须填写该字段指定密钥的地域信息。 */
+  KmsRegion?: string;
   /** 实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 DescribeSpecInfo 获取。注意：通用 I 型实例必须设置 CPU 大小。 */
   CpuCore?: number;
 }
@@ -1141,6 +1149,14 @@ declare interface CreateDBInstanceRequest {
   HiddenZone?: string;
   /** 参数模板 ID。参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。参数模板 ID 可通过 DescribeDBInstanceParamTpl 接口获取。请选择与实例版本与架构所对应的参数模板 ID。 */
   ParamTemplateId?: string;
+  /** 数据库存储加密取值。No_Encryption：不采用存储加密。TDE：开启 TDE 存储加密方式。 */
+  DataEncryption?: string;
+  /** 如选取 TDE 存储加密，须指定密钥来源。auto 自动生成密钥。manual 手动指定密钥。 */
+  EncryptionKeySource?: string;
+  /** 密钥 ID。如密钥资源选取为指定自定义，须输入指定的密钥 ID。 */
+  KeyId?: string;
+  /** 如果密钥来源为指定自定义密钥，须填写该字段指定密钥的地域信息。 */
+  KmsRegion?: string;
   /** 实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 DescribeSpecInfo 获取注意：通用 I 型实例必须设置 CPU 大小。 */
   CpuCore?: number;
 }
@@ -2391,14 +2407,14 @@ declare interface OpenAuditServiceResponse {
 }
 
 declare interface PromoteDBInstanceToActiveRequest {
-  /** 灾备实例id */
+  /** 指定需转为普通实例的灾备或只读实例 ID。请登录 MongoDB 控制台在实例列表复制灾备或只读实例 ID。 */
   InstanceId: string;
-  /** 主实例id */
+  /** 指定灾备或只读实例所属的主实例。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
   MasterId: string;
 }
 
 declare interface PromoteDBInstanceToActiveResponse {
-  /** 任务id */
+  /** 任务 ID。 */
   FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3201,7 +3217,7 @@ declare interface Mongodb {
   OfflineIsolatedDBInstance(data: OfflineIsolatedDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<OfflineIsolatedDBInstanceResponse>;
   /** 开通审计 {@link OpenAuditServiceRequest} {@link OpenAuditServiceResponse} */
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
-  /** 灾备实例转正 {@link PromoteDBInstanceToActiveRequest} {@link PromoteDBInstanceToActiveResponse} */
+  /** 灾备或只读实例转正 {@link PromoteDBInstanceToActiveRequest} {@link PromoteDBInstanceToActiveResponse} */
   PromoteDBInstanceToActive(data: PromoteDBInstanceToActiveRequest, config?: AxiosRequestConfig): AxiosPromise<PromoteDBInstanceToActiveResponse>;
   /** 修改实例名称 {@link RenameInstanceRequest} {@link RenameInstanceResponse} */
   RenameInstance(data: RenameInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<RenameInstanceResponse>;

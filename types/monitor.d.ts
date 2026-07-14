@@ -1367,7 +1367,7 @@ declare namespace V20180724 {
     Unit: string;
     /** 告警发送收敛类型。0连续告警，1指数告警 */
     AlarmNotifyType: number;
-    /** 告警发送周期单位秒。0 每隔triggerTime秒触发一次 */
+    /** 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次 */
     AlarmNotifyPeriod: number;
     /** 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等，7表示日同比上涨，8表示日同比下降，9表示周同比上涨，10表示周同比下降，11表示周期环比上涨，12表示周期环比下降 */
     CalcType: number | null;
@@ -1407,7 +1407,7 @@ declare namespace V20180724 {
     RuleId: number;
     /** 事件名称 */
     EventShowName: string;
-    /** 告警发送周期单位秒。0 每隔triggerTime秒触发一次 */
+    /** 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次 */
     AlarmNotifyPeriod: number;
     /** 告警发送收敛类型。0连续告警，1指数告警 */
     AlarmNotifyType: number;

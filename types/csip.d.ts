@@ -1890,6 +1890,8 @@ declare interface CosBucketBillingInfo {
 declare interface CosBucketId {
   /** appid */
   AppId?: string;
+  /**  */
+  IsAutoMonitor?: number;
   /** bucket id集合 */
   BucketIdSet?: string[];
 }

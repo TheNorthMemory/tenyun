@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 缓存感知路由候选模型服务 */
+declare interface AIGWCacheAwareRouteCandidate {
+  /** 模型服务ID */
+  ModelServiceId?: string;
+  /** 模型服务名称 */
+  ModelServiceName?: string;
+}
+
+/** 缓存感知路由 */
+declare interface AIGWCacheAwareRouteConfig {
+  /** 前缀缓存感知路由模型服务候选列表 */
+  Candidates?: AIGWCacheAwareRouteCandidate[];
+}
+
 /** 跨服务降级配置 */
 declare interface AIGWCrossServiceFallbackConfig {
   /** 触发条件枚举值：ServiceUnavailable： 服务不可用ConnectionTimeout： 连接超时RateLimited： 限流 */
@@ -66,6 +80,18 @@ declare interface AIGWIntentRouteRule {
   ModelServiceId?: string;
 }
 
+/** AI网关 JWT 凭证物料配置 */
+declare interface AIGWJWTCredentialConfig {
+  /** JWT 消费者标识，iss claim */
+  Key: string;
+  /** 签名算法，取值：HS256 HS384 HS512 RS256 RS384 RS512 ES256 ES384 ES512 */
+  Algorithm: string;
+  /** HS 对称密钥，仅 Algorithm 为 HS256/HS384/HS512 时必填；RS/ES* 时留空 */
+  Secret?: string;
+  /** RS/ES PEM 格式公钥，仅 Algorithm 为 RS256/RS384/RS512/ES256/ES384/ES512 时必填；HS* 时留空 */
+  RSAPublicKey?: string;
+}
+
 /** 路由匹配规则 */
 declare interface AIGWKVMatch {
   /** 键 */
@@ -74,6 +100,18 @@ declare interface AIGWKVMatch {
   Value: string;
   /** 操作类型 */
   Operator: string;
+}
+
+/** 模型服务二级路由配置 */
+declare interface AIGWLLMModelServiceSubRoute {
+  /** 生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个) */
+  SelectedTypes: string[];
+  /** 权重路由配置，最多10个 */
+  WeightedConfig?: CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy[];
+  /** 延迟路由 */
+  LatencyPriorityConfig?: AIGWLatencyPriorityConfig;
+  /** 指定模型路由（暂时只用在Token长度路由时的子路由选择） */
+  ModelServiceConfig?: AIGWRouteModelServiceConfig;
 }
 
 /** 云原生网关模型API 配额降级触发条件信息 */
@@ -90,6 +128,8 @@ declare interface AIGWLLMQuotaLimit {
   RPMLimit?: number;
   /** 该模型服务每分钟 Token 数上限，0 表示该维度不限 */
   TPMLimit?: number;
+  /** 并发限流数 */
+  ConcurrentCountLimit?: number;
 }
 
 /** 延迟优先路由配置 */
@@ -118,6 +158,10 @@ declare interface AIGWLogConfig {
   RequestLogPayloadMaxSize?: number;
   /** 日志记录的响应body的最大字节数取值范围：[512, 1048576]EnableResponseLogPayloads 为true时必填 */
   ResponseLogPayloadMaxSize?: number;
+  /** 请求 payload access log 输出模式枚举值：raw： access log 中 body 记录客户端原始请求processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容 */
+  RequestLogPayloadMode?: string;
+  /** 上游原始 payload access log 输出模式枚举值：raw： access log 中 body 记录客户端原始上游响应processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容 */
+  ResponseLogPayloadMode?: string;
 }
 
 /** AI 网关 B 层日志脱敏配置（写入 LLM Log 前对 payload 掩码） */
@@ -132,12 +176,66 @@ declare interface AIGWLogDesensitizeConfig {
   Scope?: string[];
 }
 
+/** 模型名字重写规则 */
+declare interface AIGWModelRewriteRule {
+  /** 原始模型 */
+  SourceModel?: string;
+  /** 目标模型 */
+  TargetModel?: string;
+}
+
+/** OAuth2 凭证物料配置 */
+declare interface AIGWOAuthCredentialConfig {
+  /** OAuth2 client_id */
+  ClientId: string;
+  /** OAuth2 client_secret */
+  ClientSecret: string;
+}
+
+/** OIDC 凭证物料配置 */
+declare interface AIGWOIDCCredentialConfig {
+  /** IdP 注册的 client_id */
+  ClientId: string;
+  /** IdP 注册的 client_secret */
+  ClientSecret: string;
+  /** IdP Issuer URL */
+  IssuerURL: string;
+  /** IdP 中该用户的 claim 值 */
+  ConsumerClaimValue?: string;
+}
+
+/** AI 网关指定模型路由（暂时只用在Token长度路由时的子路由选择） */
+declare interface AIGWRouteModelServiceConfig {
+  /** 模型服务名字 */
+  ModelServiceName?: string;
+}
+
 /** AI网关标签过滤 */
 declare interface AIGWTagFilter {
   /** 匹配策略枚举值：AND： 并OR： 或 */
   MatchStrategy?: string;
   /** 标签 */
   Tags?: string[];
+}
+
+/** AI 网关token长度路由配置 */
+declare interface AIGWTokenLengthRoute {
+  /** 默认tokenizer编码器枚举值：o200k_base： OpenApi o200k_basecl100k_base： OpenApi cl100k_basep50k_base： OpenApi p50k_baser50k_base： OpenApi r50k_base */
+  DefaultEncodingName?: string;
+  /** token 计数失败、规则为空或未命中任何规则时执行的默认二级路由（暂时只能选择一个指定模型路由） */
+  DefaultTarget?: AIGWLLMModelServiceSubRoute;
+  /** 规则 */
+  Rules?: AIGWTokenLengthRouteRule[];
+}
+
+/** AI 网关Token长度路由规则 */
+declare interface AIGWTokenLengthRouteRule {
+  /** token 长度下界，闭区间；0 合法 */
+  MinTokenLength: number;
+  /** token 长度上界，闭区间 */
+  MaxTokenLength: number;
+  /** 命中该分段后执行的二级路由 */
+  Target: AIGWLLMModelServiceSubRoute;
 }
 
 /** 云原生网关限流插件参数限流的精确Qps阈值 */
@@ -342,6 +440,14 @@ declare interface CNAPIGwSecretKey {
   BindCount?: number;
   /** 密钥归属资源类型。枚举值：Consumer： 消费者ModelService： 模型服务 */
   ResourceType?: string;
+  /** JWT凭证配置 */
+  JWTCredentialConfig?: AIGWJWTCredentialConfig;
+  /** OAuth凭证配置 */
+  OAuthCredentialConfig?: AIGWOAuthCredentialConfig;
+  /** OIDC凭证配置 */
+  OIDCCredentialConfig?: AIGWOIDCCredentialConfig;
+  /** secret key provider方枚举值：Dify： Dify */
+  Provider?: string;
 }
 
 /** 密钥列表 */
@@ -596,6 +702,26 @@ declare interface CloudNativeAPIGatewayLLMModelService {
   Tags?: string;
   /** 绑定的模型服务秘钥 */
   SecretKeyIds?: string[];
+  /** 模型改写规则 */
+  ModelRewriteRules?: AIGWModelRewriteRule[];
+  /** 服务来源ID */
+  SourceId?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 扩展参数 */
+  ExtParams?: KeyValue[];
+  /** 自定义供应商名称 */
+  CustomProviderName?: string;
+  /** 是否开启密钥轮转 */
+  KeyRotationEnabled?: boolean;
+  /** 密钥轮转周期单位：天数 */
+  KeyRotationPeriodDays?: number;
+  /** 外部服务来源ID */
+  ExternalInstanceId?: string;
 }
 
 /** 模型服务路由配置 */
@@ -610,6 +736,10 @@ declare interface CloudNativeAPIGatewayLLMModelServiceRoute {
   IntentRouteConfig?: AIGWIntentRoute;
   /** 延迟路由 */
   LatencyPriorityConfig?: AIGWLatencyPriorityConfig;
+  /** 缓存感知路由配置（前缀缓存） */
+  CacheAwareRouteConfig?: AIGWCacheAwareRouteConfig;
+  /** token 长度路由 */
+  TokenLengthRouteConfig?: AIGWTokenLengthRoute;
 }
 
 /** 模型服务模型名称路由策略 */
@@ -1182,7 +1312,7 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   Name?: string;
   /** 云原生API网关类型。 */
   Type?: string;
-  /** 实例版本：- 2.4.1- 2.5.1 */
+  /** 实例版本：2.4.12.5.1 */
   GatewayVersion?: string;
   /** 云原生API网关节点信息。 */
   NodeConfig?: CloudNativeAPIGatewayNodeConfig;
@@ -1234,6 +1364,8 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   AvailableUpgrade?: boolean;
   /** 可回退的版本 */
   AvailableRollbackVersion?: string;
+  /** 强制跳转HTTPS开关 */
+  ForceHTTPSRedirect?: boolean;
 }
 
 /** 获取云原生API网关实例协议端口列表响应结果 */
@@ -3015,6 +3147,26 @@ declare interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
   QuotaLimit?: AIGWLLMQuotaLimit;
   /** 标签 */
   Tags?: string[];
+  /** 模型改写规则 */
+  ModelRewriteRules?: AIGWModelRewriteRule[];
+  /** 服务来源ID */
+  SourceId?: string;
+  /** 服务来源命名空间 */
+  Namespace?: string;
+  /** 服务来源服务名 */
+  ServiceName?: string;
+  /** 服务来源协议 */
+  Protocol?: string;
+  /** 扩展参数 */
+  ExtParams?: KeyValue[];
+  /** 自定义供应商名字 */
+  CustomProviderName?: string;
+  /** 是否开启密钥轮转 */
+  KeyRotationEnabled?: boolean;
+  /** 密钥轮转周期单位：天数 */
+  KeyRotationPeriodDays?: number;
+  /** 外部服务来源ID */
+  ExternalInstanceId?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
@@ -3157,6 +3309,14 @@ declare interface CreateCloudNativeAPIGatewaySecretKeyRequest {
   SecretValue?: string;
   /** 密钥描述。最长 200 字符。 */
   Description?: string;
+  /** JWT凭证配置 */
+  JWTCredentialConfig?: AIGWJWTCredentialConfig;
+  /** OAuth2.0凭证配置 */
+  OAuthCredentialConfig?: AIGWOAuthCredentialConfig;
+  /** OIDC凭证配置 */
+  OIDCCredentialConfig?: AIGWOIDCCredentialConfig;
+  /** 第三方平台类型枚举值：Dify： Dify平台 */
+  Provider?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewaySecretKeyResponse {
@@ -4055,10 +4215,14 @@ declare interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
 declare interface DescribeCloudNativeAPIGatewayConsumerListRequest {
   /** 网关实例id */
   GatewayId: string;
-  /** 每页条数，范围 [1, 100]，默认 20。 */
+  /** 页显示条数，最大20 */
   Limit: number;
-  /** 起始位置，从 0 开始。 */
+  /** 起始位置 */
   Offset: number;
+  /** 资源类型枚举值：ModelAPI： 模型APIMCPServer： MCP服务 */
+  ResourceType?: string;
+  /** 资源ID */
+  ResourceId?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewayConsumerListResponse {
@@ -4139,6 +4303,8 @@ declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
   ConsumerGroupId?: string;
   /** 是否用于绑定场景。true 时仅返回可被绑定到指定消费者组的模型 API。 */
   UseToBind?: boolean;
+  /** 消费者ID */
+  ConsumerId?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
@@ -5237,6 +5403,24 @@ declare interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
   QuotaLimit?: AIGWLLMQuotaLimit;
   /** 标签 */
   Tags?: string[];
+  /** 模型改写规则 */
+  ModelRewriteRules?: AIGWModelRewriteRule[];
+  /** 来源 id */
+  SourceId?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 服务名字 */
+  ServiceName?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 扩展参数 */
+  ExtParams?: KeyValue[];
+  /** 密钥轮转开关 */
+  KeyRotationEnabled?: boolean;
+  /** 密钥轮转天数 */
+  KeyRotationPeriodDays?: number;
+  /** 外部服务来源ID */
+  ExternalInstanceId?: string;
 }
 
 declare interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {

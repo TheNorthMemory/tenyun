@@ -389,6 +389,8 @@ declare interface BuildCustomerClusterRequest {
   SubnetId?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 可用区 */
+  Zone?: string;
 }
 
 declare interface BuildCustomerClusterResponse {

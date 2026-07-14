@@ -86,7 +86,7 @@ declare interface ApproverInfo {
   ApproverSignTypes?: number[];
   /** 此签署人（员工或者个人）签署前，是否需要发起方企业审批，取值如下：**false**：（默认）不需要审批，直接签署。**true**：需要走审批流程。当到对应参与人签署时，会阻塞其签署操作，等待企业内部审批完成。企业可以通过CreateFlowSignReview审批接口通知腾讯电子签平台企业内部审批结果如果企业通知腾讯电子签平台审核通过，签署方可继续签署动作。如果企业通知腾讯电子签平台审核未通过，平台将继续阻塞签署方的签署动作，直到企业通知平台审核通过。注：此功能可用于与发起方企业内部的审批流程进行关联，支持手动、静默签署合同 */
   ApproverNeedSignReview?: boolean;
-  /** 【在用文件发起合同场景下才有效】在调用用PDF文件创建签署流程创建合同时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID或者印章类型）或签名方式。注：限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个），他方企业或个人只支持限制控件类型。 */
+  /** 【在用文件发起合同场景下才有效】在调用用PDF文件创建签署流程创建合同时,如果设置了外层参数SignBeanTag=1(允许签署过程中添加签署控件),则可通过此参数明确规定合同所使用的签署控件类型（骑缝章、普通章法人章等）和具体的印章（印章ID或者印章类型）或签名方式。注：参考文档和使用示例 */
   AddSignComponentsLimits?: ComponentLimit[];
   /** 签署须知：支持传入富文本，最长字数：500个中文字符 */
   SignInstructionContent?: string;
@@ -458,7 +458,7 @@ declare interface Component {
 declare interface ComponentLimit {
   /** 控件类型，支持以下类型SIGN_SEAL : 印章控件SIGN_PAGING_SEAL : 骑缝章控件SIGN_LEGAL_PERSON_SEAL : 企业法定代表人控件SIGN_SIGNATURE : 用户签名控件 */
   ComponentType: string;
-  /** 签署控件类型的值(可选)，用与限制签署时印章或者签名的选择范围1.当ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时可传入企业印章Id（支持多个）或者以下印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他**注：`限制印章控件或骑缝章控件情况下,仅本企业签署方可以指定具体印章（通过传递ComponentValue,支持多个),他方企业签署人只能限制类型.若同时指定了印章类型和印章Id,以印章Id为主,印章类型会被忽略`**2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 需要实时手写的手写签名HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE)OCR_ESIGN : OCR印章（智慧手写签名）ESIGN : 个人印章SYSTEM_ESIGN : 系统印章3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。 */
+  /** 签署控件类型的值(可选)，用于限制签署时印章或者签名的选择范围1.当 ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时，可指定印章类型或具体企业印章Id。具体场景与规则说明如下：指定印章类型:可传入以下枚举值来限制印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他指定具体印章Id:可通过传递 ComponentValue 来指定具体的企业印章ID（支持传入多个）限制条件：可为本企业（即发起方）的签署人指定本企业具体印章ID。主企业发起或集团账号主代子发起的业务场景下，也支持指定子企业的具体印章ID。他方企业签署人不支持指定具体印章ID注意： 若请求中同时指定了具体的印章ID和印章类型，将以印章ID为准，传入的印章类型参数会被自动忽略。2.当ComponentType 是 SIGN_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 需要实时手写的手写签名HANDWRITTEN_ESIGN : 长效手写签名， 是使用保存到个人中心的印章列表的手写签名(并且包含HANDWRITE)OCR_ESIGN : OCR印章（智慧手写签名）ESIGN : 个人印章SYSTEM_ESIGN : 系统印章3.当ComponentType 是 SIGN_LEGAL_PERSON_SEAL 时无需传递此参数。 */
   ComponentValue?: string[];
 }
 

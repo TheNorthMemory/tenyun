@@ -74,6 +74,42 @@ declare interface DeleteGlossaryEntryInput {
   EntryId: string;
 }
 
+/** 创建推理服务返回的详情信息 */
+declare interface EndpointCreateDetail {
+  /** 预付费包 id */
+  PreResourceId?: string;
+}
+
+/** 推理服务详情 */
+declare interface EndpointDetail {
+  /** 推理服务 ID。 */
+  EndpointId?: string;
+  /** 服务名称。 */
+  EndpointName?: string;
+  /** 模型名称。 */
+  ModelName?: string;
+  /** 模型 ID。 */
+  ModelId?: string;
+  /** 状态。取值：ACTIVE（使用中）、INACTIVE（停止中）。 */
+  Status?: string;
+  /** 服务类型。取值：TEXT_GENERATION（文本生成）、IMAGE_GENERATION（图片生成）、VIDEO_GENERATION（视频生成）。 */
+  ServiceType?: string;
+  /** 计费方式。取值：FREE（免费体验）、TOKEN（按 Token 计费）枚举值：FREE： 免费体验TOKEN： 按 Token 计费 */
+  ChargeType?: string;
+  /** 是否开启付费计费。true 表示已开启付费资源包，false 表示仅使用免费额度。 */
+  PaymentEnabled?: boolean;
+  /** 计费详情信息，JSON 格式字符串。不同 ChargeType 对应不同的 JSON 结构：免费额度信息（所有类型均可能包含）：{"FreeQuota": {"TotalQuota": 200, "UsedQuota": 56, "UsagePercent": 28, "ExpireTime": "2026-06-15T00:00:00Z"}}TPM 类型额外包含：{"Tpm": {"TpmInputLimit": 1000, "TpmOutputLimit": 1000}}其他类型：预留扩展。 */
+  ChargeDetail?: string;
+  /** 停止原因。当状态为 INACTIVE 时返回。取值：FREE_QUOTA_EXHAUSTED（免费额度已用尽）、NO_FREE_PACKAGE（无可用免费包）、INSUFFICIENT_BALANCE（余额不足，格式为 INSUFFICIENT_BALANCE:<待支付资源ID>）、BILLING_ISOLATED（账户欠费隔离）、INTERNAL_ERROR（内部错误）。当值为 INSUFFICIENT_BALANCE 时，冒号后附带待支付的 TPM 包资源 ID，前端可据此引导用户前往对应订单页完成支付。 */
+  StopReason?: string;
+  /** TPM（每分钟 Token 限流）。当推理服务未单独设置时，回退为关联模型的默认 TPM 值。 */
+  TPM?: number;
+  /** 自动调整配额 */
+  AutoAdjustQuota?: number;
+  /** RPM（每分钟请求数限流）。当推理服务未单独设置时，回退为关联模型的默认 RPM 值。 */
+  RPM?: number;
+}
+
 /** 新建术语条目项 */
 declare interface GlossaryEntryInput {
   /** 源语言术语。最大 1000 字符。 */
@@ -186,6 +222,34 @@ declare interface ModelChargingItem {
   PriceUnit?: string;
   /** 高峰价格，为空表示无高峰定价 */
   PeakPrice?: string;
+}
+
+/** 模型接入点概览信息 */
+declare interface ModelEndpointView {
+  /** 推理服务 ID。网关默认创建的 id 与模型 id 相同；控制台自定义推理服务以 ep- 开头。 */
+  EndpointId?: string;
+  /** 推理服务名称。未激活时与 ModelId 相同。 */
+  EndpointName?: string;
+  /** 模型 ID。 */
+  ModelId?: string;
+  /** 模型名称。 */
+  ModelName?: string;
+  /** 状态。取值：ACTIVE（运行中）、INACTIVE（已停止）。 */
+  Status?: string;
+  /** 服务类型。固定为 TEXT_GENERATION（文本生成）。 */
+  ServiceType?: string;
+  /** 计费方式。取值：FREE（免费体验）、TOKEN（按 Token 计费）。未激活时为空。 */
+  ChargeType?: string;
+  /** 是否已开启后付费。true 表示已开启，false 表示未开启。未激活时为 false。 */
+  PaymentEnabled?: boolean;
+  /** 计费详情信息，JSON 格式字符串，包含免费额度用量等信息。未激活时为空。 */
+  ChargeDetail?: string;
+  /** 停止原因。当状态为 INACTIVE 时返回。取值：FREE_QUOTA_EXHAUSTED（免费额度已用尽）、NO_FREE_PACKAGE（无可用免费包）、INSUFFICIENT_BALANCE（余额不足）、BILLING_ISOLATED（账户欠费隔离）、INTERNAL_ERROR（内部错误）。 */
+  StopReason?: string;
+  /** 推理服务的 rpm 限制，没设置就按模型维度 rpm 限制展示 */
+  RPM?: number;
+  /** 推理服务的tpm 限制，没设置就按模型维度 tpm 限制展示 */
+  TPM?: number;
 }
 
 /** 模型体验包信息 */
@@ -578,6 +642,34 @@ declare interface CreateApiKeyResponse {
   RequestId?: string;
 }
 
+declare interface CreateEndpointRequest {
+  /** 服务名称。最大 64 字符。 */
+  EndpointName: string;
+  /** 模型 ID。可通过 DescribeModelList 接口获取。 */
+  ModelId: string;
+  /** 计费方式。取值：FREE（免费体验）、TOKEN（按 Token 计费）、TPM（TPM 保障）、COMPUTE_UNIT（按算力单元计费）。 */
+  ChargeType: string;
+  /** RPM（每分钟请求数）限流上限。可选。必须大于 0，且不能超过用户在该模型上的 RPM 上限。不传则使用默认值（60）。 */
+  RPM?: number;
+  /** TPM（每分钟 Token 数）限流上限，单位为 tokens/min。可选。必须大于 0，且不能超过用户在该模型上的 TPM 上限。设置后会同时作用于输入 TPM 和输出 TPM。不传则使用默认值（0 表示不限流）。 */
+  TPM?: number;
+  /** 自动调整配额 */
+  AutoAdjustQuota?: number;
+  /** 自定义推理服务 id */
+  EndpointId?: string;
+}
+
+declare interface CreateEndpointResponse {
+  /** 推理服务 ID。 */
+  EndpointId?: string;
+  /** 推理服务详情信息。 */
+  Endpoint?: EndpointCreateDetail;
+  /** 停止原因。当推理服务状态为已停止时返回。取值：FREE_QUOTA_EXHAUSTED（免费额度已用尽）、NO_FREE_PACKAGE（无可用免费包）、INSUFFICIENT_BALANCE（余额不足）、BILLING_ISOLATED（账户欠费隔离）、INTERNAL_ERROR（内部错误）。 */
+  StopReason?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateGlossaryEntriesRequest {
   /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
   GlossaryId: string;
@@ -668,6 +760,14 @@ declare interface DeleteApiKeyRequest {
 }
 
 declare interface DeleteApiKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEndpointRequest {
+}
+
+declare interface DeleteEndpointResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -776,6 +876,18 @@ declare interface DescribeApiKeyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEndpointRequest {
+  /** 推理服务 ID。可通过 DescribeEndpointList 接口获取。 */
+  EndpointId: string;
+}
+
+declare interface DescribeEndpointResponse {
+  /** 推理服务详情。 */
+  Endpoint?: EndpointDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGlossariesRequest {
   /** 返回数量。默认为 20，最大值为 100。 */
   Limit?: number;
@@ -818,6 +930,26 @@ declare interface DescribeGlossaryEntriesResponse {
   Page?: number;
   /** 每页大小。 */
   PageSize?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelEndpointListRequest {
+  /** 偏移量，从 0 开始，默认为 0。 */
+  Offset?: number;
+  /** 每页返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 过滤条件列表。支持的过滤字段：Status（状态，取值 ACTIVE/INACTIVE）、ChargeType（计费方式，取值 FREE/TOKEN）、RequestSource（创建来源，取值 MC/GW）、ModelName（模型名称）、ModelId（模型 ID）、PaymentEnabled（是否已开启后付费，取值 true/false）。 */
+  Filters?: RequestFilter[];
+  /** 排序条件列表。支持的排序字段：CreatedTime、UpdatedTime。不传时使用默认排序规则。 */
+  Sorts?: RequestSort[];
+}
+
+declare interface DescribeModelEndpointListResponse {
+  /** 模型接入点列表。 */
+  ModelEndpointSet?: ModelEndpointView[];
+  /** 符合条件的总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1078,6 +1210,16 @@ declare interface ModifyApiKeyStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEndpointRequest {
+  /** 自动调整配额 */
+  AutoAdjustQuota?: number;
+}
+
+declare interface ModifyEndpointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGlossaryEntriesRequest {
   /** 术语库 ID。可通过 DescribeGlossaries 接口获取。 */
   GlossaryId: string;
@@ -1159,6 +1301,8 @@ declare interface Tokenhub {
   (): Versions;
   /** 创建 API 密钥 {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
   CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
+  /** 创建推理服务 {@link CreateEndpointRequest} {@link CreateEndpointResponse} */
+  CreateEndpoint(data: CreateEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEndpointResponse>;
   /** 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
   CreateGlossary(data: CreateGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryResponse>;
   /** 批量创建术语条目 {@link CreateGlossaryEntriesRequest} {@link CreateGlossaryEntriesResponse} */
@@ -1169,6 +1313,8 @@ declare interface Tokenhub {
   CreateTokenPlanTeamOrderAndBuy(data: CreateTokenPlanTeamOrderAndBuyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanTeamOrderAndBuyResponse>;
   /** 删除 API 密钥 {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
   DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
+  /** 删除推理服务 {@link DeleteEndpointRequest} {@link DeleteEndpointResponse} */
+  DeleteEndpoint(data?: DeleteEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEndpointResponse>;
   /** 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
   DeleteGlossary(data: DeleteGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryResponse>;
   /** 批量删除术语条目 {@link DeleteGlossaryEntriesRequest} {@link DeleteGlossaryEntriesResponse} */
@@ -1179,10 +1325,14 @@ declare interface Tokenhub {
   DescribeApiKey(data: DescribeApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyResponse>;
   /** 查询 API 密钥列表 {@link DescribeApiKeyListRequest} {@link DescribeApiKeyListResponse} */
   DescribeApiKeyList(data?: DescribeApiKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApiKeyListResponse>;
+  /** 查询推理服务详情 {@link DescribeEndpointRequest} {@link DescribeEndpointResponse} */
+  DescribeEndpoint(data: DescribeEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEndpointResponse>;
   /** 查询术语库列表 {@link DescribeGlossariesRequest} {@link DescribeGlossariesResponse} */
   DescribeGlossaries(data?: DescribeGlossariesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlossariesResponse>;
   /** 查询术语条目列表 {@link DescribeGlossaryEntriesRequest} {@link DescribeGlossaryEntriesResponse} */
   DescribeGlossaryEntries(data: DescribeGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlossaryEntriesResponse>;
+  /** 查询模型接入点列表 {@link DescribeModelEndpointListRequest} {@link DescribeModelEndpointListResponse} */
+  DescribeModelEndpointList(data?: DescribeModelEndpointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelEndpointListResponse>;
   /** 查询模型列表 {@link DescribeModelListRequest} {@link DescribeModelListResponse} */
   DescribeModelList(data?: DescribeModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelListResponse>;
   /** 查询 Token Plan 套餐详情 {@link DescribeTokenPlanRequest} {@link DescribeTokenPlanResponse} */
@@ -1203,6 +1353,8 @@ declare interface Tokenhub {
   ModifyApiKeyInfo(data: ModifyApiKeyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyInfoResponse>;
   /** 更新 API 密钥状态 {@link ModifyApiKeyStatusRequest} {@link ModifyApiKeyStatusResponse} */
   ModifyApiKeyStatus(data: ModifyApiKeyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyStatusResponse>;
+  /** 修改推理服务 {@link ModifyEndpointRequest} {@link ModifyEndpointResponse} */
+  ModifyEndpoint(data?: ModifyEndpointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEndpointResponse>;
   /** 批量修改术语条目 {@link ModifyGlossaryEntriesRequest} {@link ModifyGlossaryEntriesResponse} */
   ModifyGlossaryEntries(data: ModifyGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlossaryEntriesResponse>;
   /** 修改 Token Plan 套餐的 API Key 配置 {@link ModifyTokenPlanApiKeyRequest} {@link ModifyTokenPlanApiKeyResponse} */

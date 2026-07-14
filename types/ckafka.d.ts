@@ -4394,6 +4394,18 @@ declare interface InstanceScalingDownResponse {
   RequestId?: string;
 }
 
+declare interface IsolatedInstancePreRequest {
+  /** ckafka集群实例Id */
+  InstanceId: string;
+}
+
+declare interface IsolatedInstancePreResponse {
+  /** 返回结果 */
+  Result?: CreateInstancePreResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface JgwOperateResponse {
   /** 返回的code，0为正常，非0为错误 */
   ReturnCode?: string;
@@ -5032,6 +5044,8 @@ declare interface Ckafka {
   InquireCkafkaPrice(data: InquireCkafkaPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireCkafkaPriceResponse>;
   /** 按量实例扩缩容 {@link InstanceScalingDownRequest} {@link InstanceScalingDownResponse} */
   InstanceScalingDown(data: InstanceScalingDownRequest, config?: AxiosRequestConfig): AxiosPromise<InstanceScalingDownResponse>;
+  /** 隔离预付费实例 {@link IsolatedInstancePreRequest} {@link IsolatedInstancePreResponse} */
+  IsolatedInstancePre(data: IsolatedInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<IsolatedInstancePreResponse>;
   /** 修改实例公网IP白名单配置 {@link ModifyAccessPolicyRequest} {@link ModifyAccessPolicyResponse} */
   ModifyAccessPolicy(data: ModifyAccessPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessPolicyResponse>;
   /** 修改Acl预设规则 {@link ModifyAclRuleRequest} {@link ModifyAclRuleResponse} */

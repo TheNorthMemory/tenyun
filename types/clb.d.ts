@@ -434,6 +434,8 @@ declare interface ClusterInfo {
   ClusterId?: string;
   /** 集群类型枚举值：Public： 公有云集群Exclusive： 独占集群默认值：Public */
   Type?: string;
+  /** 集群名称 */
+  ClusterName?: string;
 }
 
 /** 独占集群信息 */

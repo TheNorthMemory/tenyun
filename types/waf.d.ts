@@ -2536,7 +2536,7 @@ declare interface LLMMonPkg {
   InstanceId?: string;
 }
 
-/** 有效大模型安全包信息 */
+/** 大模型安全「后付费」资源信息（数据源：tb_waf_llm_resource），与 DescribeInstances 的 InstanceDetail.LLMPkg 保持一致 */
 declare interface LLMPkg {
   /** 资源id */
   ResourceIds?: string;
@@ -2548,7 +2548,9 @@ declare interface LLMPkg {
   BeginTime?: string;
   /** 结束时间 */
   EndTime?: string;
-  /** 计费项 */
+  /** 申请数量 */
+  InquireNum?: number;
+  /** 计费项标签，如 sv_wsm_waf_llm_prompt_attack */
   InquireKey?: string;
 }
 
