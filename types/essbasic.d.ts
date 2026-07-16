@@ -2,6 +2,26 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 企业变更超管信息。 */
+declare interface AdminChangeInvitationInfo {
+  /** 要变更的企业Id。 使用接口进行变更，所支持的企业有两种。注意：此参数和 ChangeAdminOrganizationOpenId二选一，如果都传递了，但是不一致会进行报错拦截。 */
+  ChangeAdminOrganizationId?: string;
+  /** 要变更的企业Id。 使用接口进行变更，所支持的企业有两种。注意： 此参数和 ChangeAdminOrganizationId二选一，如果都传递了，不一致会进行报错拦截。 */
+  ChangeAdminOrganizationOpenId?: string;
+  /** 组织机构要变更的超管OpenId。 */
+  NewAdminOpenId?: string;
+  /** 组织机构要变更的超管姓名。 */
+  NewAdminName?: string;
+  /** 组织机构要变更的超管手机号。 跟超管变更的操作人保持一致。 */
+  NewAdminMobile?: string;
+  /** 组织机构要变更的超管证件类型支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)跟超管变更的操作人保持一致。枚举值：ID_CARD： 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO： 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN： 中国港澳台居民居住证(格式同中国大陆居民身份证) */
+  NewAdminIdCardType?: string;
+  /** 组织机构新超管证件号。 跟超管变更的操作人保持一致。 */
+  NewAdminIdCardNumber?: string;
+  /** 授权书(PNG或JPG或PDF) base64格式, 大小不超过8M 。 p.s. 如果上传授权书 ，需遵循以下条件 1. 超管的信息（超管姓名，超管手机号）必须为必填参数。 */
+  AuthFiles?: string[];
+}
+
 /** 应用相关信息, 整体应用的层级图如下注: 1. `不同的业务系统可以采用不同的应用，不同应用下的数据是隔离的, 应用A中的某个企业已经实名, 在应用B中此企业还需要重新认证` */
 declare interface Agent {
   /** 应用的唯一标识(由电子签平台自动生成)。不同的业务系统可以采用不同的AppId，不同AppId下的数据是隔离的。可以由控制台开发者中心-应用集成自主生成。位置如下:![image](https://qcloudimg.tencent-cloud.cn/raw/fac77e0d3f28aaec56669f67e65c8db8.png) */
@@ -1060,6 +1080,8 @@ declare interface OrganizationAuthorizationOptions {
   LegalNameSame?: boolean;
   /** 对方打开链接认证时，对公打款账号是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在对公打款账号不为空时有效 */
   BankAccountNumberSame?: boolean;
+  /** 对方打开链接认证时，公司地址是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在公司地址（ProxyAddress）不为空时有效 */
+  AddressSame?: boolean;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -2784,6 +2806,44 @@ declare interface ChannelVerifyPdfResponse {
   RequestId?: string;
 }
 
+declare interface CreateBatchAdminChangeInvitationsRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId */
+  Agent: Agent;
+  /** 组织机构超管变更信息。 一次最多支持10条超管变更信息。 */
+  AdminChangeInvitationInfos: AdminChangeInvitationInfo[];
+}
+
+declare interface CreateBatchAdminChangeInvitationsResponse {
+  /** 批量生成企业认证链接的详细错误信息，顺序与输入参数子企业列表顺序一致。如果所有企业认证链接都成功生成，将不返回错误信息如果存在任何错误，将返回具体的错误描述。（没有错误的企业返回空字符串） */
+  ErrorMessages?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBatchAdminChangeInvitationsUrlRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId */
+  Agent: Agent;
+  /** 组织机构要变更的超管姓名。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的姓名保持一致。 */
+  NewAdminName?: string;
+  /** 组织机构要变更的超管手机号。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的手机号保持一致。 超管手机号 和超管证件号 二选一 必填。 注意： 1. 如果新超管的个人身份在电子签进行了手机号的变更，之前提交的超管变更任务将无法获取。 */
+  NewAdminMobile?: string;
+  /** 组织机构要变更的超管证件类型支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)需要更当前操作人的证件类型保持一致。枚举值：ID_CARD： 中国大陆居民身份证 (默认值)HONGKONG_AND_MACAO： 中国港澳居民来往内地通行证HONGKONG_MACAO_AND_TAIWAN： 中国港澳台居民居住证(格式同中国大陆居民身份证)默认值：ID_CARD */
+  NewAdminIdCardType?: string;
+  /** 组织机构要变更的超管证件号。 在超管变更流程中，必须是超管本人进行操作，需要更当前操作人的证件号保持一致。 超管手机号和超管证件号 二选一必填。 */
+  NewAdminIdCardNumber?: string;
+  /** 要跳转的链接类型 **HTTP**：跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型 ，此时返回长链 （默认类型）。**HTTP_SHORT_URL**：跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型，此时返回短链。**APP**： 第三方APP或小程序跳转电子签小程序的path，APP或者小程序跳转适合此类型。**QR_CODE**： 跳转电子签小程序的http_url的二维码形式，可以在页面展示适合此类型。枚举值：HTTP： 跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型 ，此时返回长链 （默认类型）。HTTP_SHORT_URL： 跳转电子签小程序的http_url，短信通知或者H5跳转适合此类型，此时返回短链。APP： 第三方APP或小程序跳转电子签小程序的path，APP或者小程序跳转适合此类型。QR_CODE： 跳转电子签小程序的http_url的二维码形式，可以在页面展示适合此类型。默认值：HTTP */
+  Endpoint?: string;
+}
+
+declare interface CreateBatchAdminChangeInvitationsUrlResponse {
+  /** 批量企业注册链接-单链接包含多条认证流，根据Endpoint的不同设置，返回不同的链接地址。失效时间：7天跳转链接, 链接的有效期根据企业,员工状态和终端等有区别, 可以参考下表 Endpoint 示例 链接有效期限 HTTP https://res.ess.tencent.cn/cdn/h5-activity-dev/jump-mp.html?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&amp;shortKey=yDCHHURDfBxSB2rj2Bfa 7天 HTTP_SHORT_URL https://test.essurl.cn/8gDKUBAWK8 7天 APP pages/guide/index?to=AUTHORIZATION_ENTERPRISE_FOR_BATCH_SUBMIT&amp;shortKey=yDCHpURDfR6iEkdpsDde 7天 QR_CODE https://dyn.test.ess.tencent.cn/imgs/qrcode_urls/authorization_enterprise_for_batch_submit/yDCHHUUckpbdauq9UEjnoFDCCumAMmv1.png 7天 注： 1.创建的链接应避免被转义，如：&amp;被转义为\u0026；如使用Postman请求后，请选择响应类型为 JSON，否则链接将被转义 */
+  Url?: string;
+  /** 链接过期时间，为 7 天后，创建时间，格式为Unix标准时间戳（秒）。单位：格式为Unix标准时间戳（秒） */
+  ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateBatchInitOrganizationUrlRequest {
   /** 应用相关信息。 此接口Agent.AppId 必填。 */
   Agent: Agent;
@@ -3700,6 +3760,36 @@ declare interface ModifyFlowDeadlineResponse {
   RequestId?: string;
 }
 
+declare interface ModifyOrganizationBusinessInfoRequest {
+  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId注:1. 企业激活时， 此时的Agent.ProxyOrganizationOpenId将会是企业激活后企业的唯一标识，建议开发者保存企业ProxyOrganizationOpenId，后续各项接口调用皆需要此参数。2. 员工认证时， 此时的Agent.ProxyOperator.OpenId将会是员工认证加入企业后的唯一标识，建议开发者保存此员工的OpenId，后续各项接口调用皆需要此参数。3. 同渠道应用(Agent.AppId)下，企业唯一标识ProxyOrganizationOpenId需要保持唯一，员工唯一标识OpenId也要保持唯一 (而不是企业下唯一)。 */
+  Agent: Agent;
+  /** 企业营业执照或相关证照图片的 resourceId，需提前通过上传文件接口获取后传入。注意：电子签不会对上传的营业执照图片做 OCR 识别，该图片仅作为企业信息变更的凭证留存；企业最新的名称、法人、地址等信息仍需通过本接口的其它字段显式传入。 */
+  BizLicenseResourceId: string;
+  /** 变更后的最新工商登记企业名称。仅当企业名称发生变更时传入，未变更则不传（系统自动沿用电子签侧当前企业名称）。 */
+  OrganizationName?: string;
+  /** 变更后的企业注册地址。仅当地址发生变更时传入，未变更则不传；传入后系统会自动解析省/市/区。 */
+  Address?: string;
+  /** 变更后的企业类型。仅当企业类型发生变更时传入，未变更则不传（沿用当前类型）。目前仅支持个体工商户（INDIVIDUALBIZ）变更为企业（ENTERPRISE）。枚举值：INDIVIDUALBIZ： 个体工商户ENTERPRISE： 企业 */
+  OrganizationType?: string;
+  /** 变更后的最新工商登记法人姓名。仅当法人发生变更时传入，未变更则不传（系统自动沿用当前法人姓名）。 */
+  LegalName?: string;
+}
+
+declare interface ModifyOrganizationBusinessInfoResponse {
+  /** 业务状态码。0 表示正常（无阻断）；非 0 表示存在阻断，例如企业名称变更且存在未完结合同时返回 1。枚举值：0： 正常（无阻断）1： 存在未完结合同 */
+  ErrorCode?: number;
+  /** 提示文案。例如企业名称变更且存在未完结合同时返回「存在 X 份未完结的合同，请先撤销或者完成合同」。 */
+  ErrorMessage?: string;
+  /** 未完结合同总数。仅当企业名称变更且存在未完结合同时有值。 */
+  UnfinishedCount?: number;
+  /** SaaS 企业下未完结合同的 flowId 列表。 */
+  FlowIds?: string[];
+  /** 渠道子客企业下未完结合同的 flowId 列表。 */
+  ChannelFlowIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPartnerAutoSignAuthUrlRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -3825,7 +3915,7 @@ declare interface SyncProxyOrganizationOperatorsResponse {
 declare interface SyncProxyOrganizationRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId */
   Agent: Agent;
-  /** 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。注: `如果名称中包含英文括号()，请使用中文括号（）代替。` */
+  /** 第三方平台子客企业名称，请确认该名称与企业营业执照中注册的名称一致。注: 如果名称中包含英文括号()，请使用中文括号（）代替。 */
   ProxyOrganizationName: string;
   /** 营业执照正面照(PNG或JPG) base64格式, 大小不超过5M */
   BusinessLicense?: string;
@@ -3835,11 +3925,11 @@ declare interface SyncProxyOrganizationRequest {
   ProxyLegalName?: string;
   /** 暂未开放 */
   Operator?: UserInfo;
-  /** 第三方平台子客企业法定代表人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)注: `现在仅支持ID_CARD中国大陆居民身份证类型` */
+  /** 第三方平台子客企业法定代表人的证件类型，支持以下类型ID_CARD : 中国大陆居民身份证 (默认值)注: 现在仅支持ID_CARD中国大陆居民身份证类型 */
   ProxyLegalIdCardType?: string;
   /** 第三方平台子客企业法定代表人的证件号码, 应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。 */
   ProxyLegalIdCardNumber?: string;
-  /** 第三方平台子客企业详细住所，最大长度500个字符注：`需要符合省市区详情的格式例如： XX省XX市XX区街道具体地址` */
+  /** 第三方平台子客企业详细住所，最大长度500个字符注：需要符合省市区详情的格式例如： XX省XX市XX区街道具体地址 */
   ProxyAddress?: string;
 }
 
@@ -5507,6 +5597,10 @@ declare interface Essbasic {
   ChannelUpdateSealStatus(data: ChannelUpdateSealStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelUpdateSealStatusResponse>;
   /** 合同验签 {@link ChannelVerifyPdfRequest} {@link ChannelVerifyPdfResponse} */
   ChannelVerifyPdf(data: ChannelVerifyPdfRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelVerifyPdfResponse>;
+  /** 批量创建变更超管任务 {@link CreateBatchAdminChangeInvitationsRequest} {@link CreateBatchAdminChangeInvitationsResponse} */
+  CreateBatchAdminChangeInvitations(data: CreateBatchAdminChangeInvitationsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchAdminChangeInvitationsResponse>;
+  /** 创建企业批量变更超管链接 {@link CreateBatchAdminChangeInvitationsUrlRequest} {@link CreateBatchAdminChangeInvitationsUrlResponse} */
+  CreateBatchAdminChangeInvitationsUrl(data: CreateBatchAdminChangeInvitationsUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchAdminChangeInvitationsUrlResponse>;
   /** 批量操作企业初始化 {@link CreateBatchInitOrganizationUrlRequest} {@link CreateBatchInitOrganizationUrlResponse} */
   CreateBatchInitOrganizationUrl(data: CreateBatchInitOrganizationUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchInitOrganizationUrlResponse>;
   /** 创建企业批量认证链接-单链接 {@link CreateBatchOrganizationAuthorizationUrlRequest} {@link CreateBatchOrganizationAuthorizationUrlResponse} */
@@ -5587,6 +5681,8 @@ declare interface Essbasic {
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
   /** 修改签署流程截止时间 {@link ModifyFlowDeadlineRequest} {@link ModifyFlowDeadlineResponse} */
   ModifyFlowDeadline(data: ModifyFlowDeadlineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowDeadlineResponse>;
+  /** 变更企业信息 {@link ModifyOrganizationBusinessInfoRequest} {@link ModifyOrganizationBusinessInfoResponse} */
+  ModifyOrganizationBusinessInfo(data: ModifyOrganizationBusinessInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationBusinessInfoResponse>;
   /** 更新企业自动签授权链接 {@link ModifyPartnerAutoSignAuthUrlRequest} {@link ModifyPartnerAutoSignAuthUrlResponse} */
   ModifyPartnerAutoSignAuthUrl(data: ModifyPartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPartnerAutoSignAuthUrlResponse>;
   /** 第三方应用模板库管理 {@link OperateChannelTemplateRequest} {@link OperateChannelTemplateResponse} */

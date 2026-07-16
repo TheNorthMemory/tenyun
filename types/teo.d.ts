@@ -2390,6 +2390,36 @@ declare interface LoadBalancer {
   References?: OriginGroupReference[];
 }
 
+/** 日志分析日志下载任务。 */
+declare interface LogAnalysisDownloadTask {
+  /** 任务 ID。 */
+  TaskId?: string;
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 数据归属地区，取值有：mainland：中国大陆境内；overseas：全球（不含中国大陆）。 */
+  Area?: string;
+  /** 开始时间，示例值：2020-04-29T00:00:00Z。 */
+  StartTime?: string;
+  /** 结束时间，示例值：2020-04-30T00:00:00Z。 */
+  EndTime?: string;
+  /** 日志类型，取值有： l7-access-logs：七层访问日志；web-attack：托管规则日志。 */
+  LogType?: string;
+  /** 日志匹配条件，长度上限 12KB。 */
+  Condition?: string;
+  /** 文件格式，取值有：csv 。 */
+  Format?: string;
+  /** 原始日志是否按时间排序返回，取值有：asc：升序；desc：降序。 */
+  Sort?: string;
+  /** 任务状态，取值有：loading：处理中，等待生成下载链接； failed: 处理失败，当前任务无法下载;completed：已完成打包，可以下载。 */
+  Status?: string;
+  /** 任务创建时间，任务创建成功后将保留3天。 */
+  CreateTime?: string;
+  /** 下载地址，仅当 Status = completed 时有返回值。 */
+  Url?: string;
+  /** 下载任务过期时间，过期后下载地址将不可用，请通过本接口获取新的下载地址。 */
+  ExpireTime?: string;
+}
+
 /** 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式。 */
 declare interface LogFormat {
   /** 日志投递的预设输出格式类型，取值有：json：使用预设日志输出格式 JSON Lines，单条日志中的字段以键值对方式呈现；csv：使用预设日志输出格式 csv，单条日志中仅呈现字段值，不呈现字段名称。 */
@@ -2406,6 +2436,14 @@ declare interface LogFormat {
   RecordDelimiter?: string;
   /** 单条日志记录内，插入字段之间作为分隔符的字符串，取值有：\t：制表符；，：半角逗号；;：半角分号。 */
   FieldDelimiter?: string;
+}
+
+/** 日志分析的日志信息 */
+declare interface LogItem {
+  /** 日志产生的时间点，采用 unix 毫秒级时间戳。 */
+  Timestamp?: number;
+  /** 日志的具体内容，采用JSON字符串格式。 */
+  LogJson?: string;
 }
 
 /** 托管规则的项配置 */
@@ -5002,6 +5040,32 @@ declare interface CreateLoadBalancerResponse {
   RequestId?: string;
 }
 
+declare interface CreateLogAnalysisDownloadTaskRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 数据归属地区，可选值：mainland：中国大陆境内；overseas：全球（不含中国大陆）。注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。 */
+  Area: string;
+  /** 开始时间，示例值：2020-04-29T00:00:00Z。套餐版本不同，支持的可查询开始时间至今的最大时间跨度不同，详情请见 套餐选型对比。 */
+  StartTime: string;
+  /** 结束时间，示例值：2020-04-30T00:00:00Z。单次查询的开始时间到结束时间跨度最大为 31 天。 */
+  EndTime: string;
+  /** 日志类型，可选值： l7-access-logs：七层访问日志；web-attack：托管规则日志。默认为 l7-access-logs 。 */
+  LogType?: string;
+  /** 日志匹配条件，最大长度 12KB。 */
+  Condition?: string;
+  /** 文件格式，可选值：csv默认为 csv。 */
+  Format?: string;
+  /** 原始日志的时间排序，可选值： asc：升序； desc：降序。 默认为 desc。 */
+  Sort?: string;
+}
+
+declare interface CreateLogAnalysisDownloadTaskResponse {
+  /** 日志分析下载任务 ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMultiPathGatewayLineRequest {
   /** 站点 ID 。 */
   ZoneId: string;
@@ -6376,6 +6440,60 @@ declare interface DescribeLoadBalancerListResponse {
   TotalCount?: number;
   /** 负载均衡实例列表。 */
   LoadBalancerList?: LoadBalancer[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogAnalysisDetailRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 数据归属地区，可选值：mainland：中国大陆境内；overseas：全球（不含中国大陆）。注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。 */
+  Area: string;
+  /** 开始时间，示例值：2020-04-29T00:00:00Z。套餐版本不同，支持的可查询开始时间至今的最大时间跨度不同，详情请见 套餐选型对比。 */
+  StartTime: string;
+  /** 结束时间，示例值：2020-04-30T00:00:00Z。单次查询的开始时间到结束时间跨度最大为 31 天。 */
+  EndTime: string;
+  /** 日志类型，可选值： l7-access-logs：七层访问日志；web-attack：托管规则日志。默认为 l7-access-logs 。 */
+  LogType?: string;
+  /** 日志匹配条件，最大长度 12KB。 */
+  Condition?: string;
+  /** 分页查询限制数目，默认值：20，最大值 100。 */
+  Limit?: number;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 原始日志是否按时间排序返回；可选值：asc：升序；desc：降序。默认为 desc。 */
+  Sort?: string;
+}
+
+declare interface DescribeLogAnalysisDetailResponse {
+  /** 符合日志匹配条件的日志详情列表。 */
+  LogDetail?: LogItem[];
+  /** 符合日志匹配条件的日志总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLogAnalysisDownloadTasksRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 数据归属地区，可选值： mainland：中国大陆境内； overseas：全球（不含中国大陆）。 注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。 */
+  Area: string;
+  /** 日志类型，可选值： l7-access-logs：七层访问日志；web-attack：托管规则日志。默认为 l7-access-logs 。 */
+  LogType?: string;
+  /** 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：task-id：按照日志下载任务 ID进行过滤，可选值参考 CreateLogAnalysisDownloadTask 接口返回的 TaskId。取值参考：CreateLogAnalysisDownloadTask */
+  Filters?: AdvancedFilter[];
+  /** 分页查询限制数目，默认值：20，最大值 100。 */
+  Limit?: number;
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeLogAnalysisDownloadTasksResponse {
+  /** 符合日志匹配条件的日志分析下载任务总条数。 */
+  TotalCount?: number;
+  /** 符合日志匹配条件的日志分析下载任务列表。 */
+  Tasks?: LogAnalysisDownloadTask[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8575,6 +8693,8 @@ declare interface Teo {
   CreateL7AccRules(data: CreateL7AccRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateL7AccRulesResponse>;
   /** 创建负载均衡实例 {@link CreateLoadBalancerRequest} {@link CreateLoadBalancerResponse} */
   CreateLoadBalancer(data: CreateLoadBalancerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadBalancerResponse>;
+  /** 创建日志分析的日志下载任务 {@link CreateLogAnalysisDownloadTaskRequest} {@link CreateLogAnalysisDownloadTaskResponse} */
+  CreateLogAnalysisDownloadTask(data: CreateLogAnalysisDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogAnalysisDownloadTaskResponse>;
   /** 创建多通道安全加速网关 {@link CreateMultiPathGatewayRequest} {@link CreateMultiPathGatewayResponse} */
   CreateMultiPathGateway(data: CreateMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMultiPathGatewayResponse>;
   /** 创建多通道安全加速网关线路 {@link CreateMultiPathGatewayLineRequest} {@link CreateMultiPathGatewayLineResponse} */
@@ -8737,6 +8857,10 @@ declare interface Teo {
   DescribeL7AccSetting(data: DescribeL7AccSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeL7AccSettingResponse>;
   /** 查询负载均衡实例列表 {@link DescribeLoadBalancerListRequest} {@link DescribeLoadBalancerListResponse} */
   DescribeLoadBalancerList(data: DescribeLoadBalancerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadBalancerListResponse>;
+  /** 查询日志分析日志详情 {@link DescribeLogAnalysisDetailRequest} {@link DescribeLogAnalysisDetailResponse} */
+  DescribeLogAnalysisDetail(data: DescribeLogAnalysisDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogAnalysisDetailResponse>;
+  /** 查询日志分析的日志下载任务 {@link DescribeLogAnalysisDownloadTasksRequest} {@link DescribeLogAnalysisDownloadTasksResponse} */
+  DescribeLogAnalysisDownloadTasks(data: DescribeLogAnalysisDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogAnalysisDownloadTasksResponse>;
   /** 查询多通道安全加速网关详情 {@link DescribeMultiPathGatewayRequest} {@link DescribeMultiPathGatewayResponse} */
   DescribeMultiPathGateway(data: DescribeMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayResponse>;
   /** 查询多通道安全加速网关线路详情 {@link DescribeMultiPathGatewayLineRequest} {@link DescribeMultiPathGatewayLineResponse} */

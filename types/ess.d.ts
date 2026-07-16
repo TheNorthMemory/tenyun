@@ -3687,6 +3687,8 @@ declare interface CreateOrganizationAuthUrlRequest {
   AuthorizationMethod?: number[];
   /** 企业认证页面隐藏上传营业执照 */
   HideBizLicense?: boolean;
+  /** 对方打开链接认证时，公司地址是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在公司地址（OrganizationAddress）不为空时有效 */
+  AddressSame?: boolean;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {

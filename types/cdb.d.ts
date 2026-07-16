@@ -1344,7 +1344,7 @@ declare interface ProxyAddress {
   Desc?: string;
   /** 实例读权重分配 */
   ProxyAllocation?: ProxyAllocation[];
-  /** 接入模式 */
+  /** 接入模式枚举值：nearby： 就近访问balance： 均衡分配direct_nearby： 纯网络转发就近访问direct_balance： 纯网络转发均衡分配 */
   AccessMode?: string;
   /** 是否开启自动负载均衡 */
   AutoLoadBalance?: boolean;
@@ -1352,6 +1352,8 @@ declare interface ProxyAddress {
   ApNodeAsRoNode?: boolean;
   /** libra节点故障，是否转发给其他节点 */
   ApQueryToOtherNode?: boolean;
+  /** 地址所在地域名 */
+  Region?: string;
 }
 
 /** 代理节点权重分布 */
@@ -2039,7 +2041,7 @@ declare interface AdjustCdbProxyAddressRequest {
   ProxyAllocation?: ProxyAllocation[];
   /** 是否开启自适应负载均衡。默认关闭。 */
   AutoLoadBalance?: boolean;
-  /** 访问模式：nearby - 就近访问，balance - 均衡分配，默认就近访问。 */
+  /** 访问模式。枚举值：nearby： 就近访问balance： 均衡分配direct_nearby： 纯网络转发就近访问direct_balance： 纯网络转发均衡分配 */
   AccessMode?: string;
   /** 是否将libra节点当作普通RO节点 */
   ApNodeAsRoNode?: boolean;
@@ -2375,7 +2377,7 @@ declare interface CreateCdbProxyAddressRequest {
   ConnectionPoolType?: string;
   /** 是否开启自适应负载均衡。默认关闭。 */
   AutoLoadBalance?: boolean;
-  /** 接入模式。nearBy - 就近访问，balance - 均衡分配，默认值：nearBy。 */
+  /** 接入模式。枚举值：nearBy： 就近访问balance： 均衡分配direct_nearby： 纯网络转发就近访问direct_balance： 纯网络转发均衡分配默认值：nearBy */
   AccessMode?: string;
 }
 
@@ -2976,7 +2978,7 @@ declare interface DescribeAsyncRequestInfoRequest {
 }
 
 declare interface DescribeAsyncRequestInfoResponse {
-  /** 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。 */
+  /** 任务执行结果。枚举值：INITIAL： 初始化。RUNNING： 运行中。SUCCESS： 执行成功。FAILED： 执行失败。KILLED： 已终止。REMOVED： 已删除。PAUSED： 终止中。UNDEFINED： 任务已创建但未开始执行，在 WaitSwitch = true 场景下，表示任务正在等待维护时间窗到来。 */
   Status?: string;
   /** 任务执行信息描述。 */
   Info?: string;

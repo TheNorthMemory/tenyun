@@ -3864,6 +3864,24 @@ declare interface ImageSpriteTemplate {
   Format?: string;
 }
 
+/** 图片处理任务概览。 */
+declare interface ImageTaskInfo {
+  /** 图片处理任务TaskId。 */
+  TaskId?: string;
+  /** 任务状态。枚举值：FINISH： 任务结束PROCESSING： 任务处理中 */
+  Status?: string;
+  /** 输入文件。 */
+  Input?: string;
+  /** 创建时间。参数格式：YYYY-MM-DDThh:mm:ssZ */
+  CreateTime?: string;
+  /** 开始处理时间。参数格式：YYYY-MM-DDThh:mm:ssZ */
+  BeginProcessTime?: string;
+  /** 结束时间。参数格式：YYYY-MM-DDThh:mm:ssZ */
+  FinishTime?: string;
+  /** 子任务失败标识。 */
+  SubTaskHasFailed?: boolean;
+}
+
 /** 图片任务输入参数 */
 declare interface ImageTaskInput {
   /** 图片编码配置。 */
@@ -9910,6 +9928,32 @@ declare interface DescribeImageTaskDetailResponse {
   RequestId?: string;
 }
 
+declare interface DescribeImageTasksRequest {
+  /** 任务状态过滤条件。 */
+  Status: string;
+  /** 返回记录条数。 */
+  Limit?: number;
+  /** 翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。 */
+  ScrollToken?: string;
+  /** 任务开始时间。参数格式：YYYY-MM-DDThh:mm:ssZ */
+  StartTime?: string;
+  /** 任务结束时间。参数格式：YYYY-MM-DDThh:mm:ssZ */
+  EndTime?: string;
+  /** 筛选子任务状态。 */
+  SubTaskHasFailed?: boolean;
+}
+
+declare interface DescribeImageTasksResponse {
+  /** 符合过滤条件的记录总数。单位：条 */
+  TotalCount?: number;
+  /** 翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空字符串，说明已无更多数据。 */
+  ScrollToken?: string;
+  /** 图片任务概要列表。 */
+  TaskSet?: ImageTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLiveRecordTemplatesRequest {
   /** 录制模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
@@ -12471,6 +12515,8 @@ declare interface Mps {
   DescribeImageSpriteTemplates(data?: DescribeImageSpriteTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSpriteTemplatesResponse>;
   /** 查询图片处理任务详情 {@link DescribeImageTaskDetailRequest} {@link DescribeImageTaskDetailResponse} */
   DescribeImageTaskDetail(data: DescribeImageTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTaskDetailResponse>;
+  /** 查询图片任务列表 {@link DescribeImageTasksRequest} {@link DescribeImageTasksResponse} */
+  DescribeImageTasks(data: DescribeImageTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageTasksResponse>;
   /** 获取直播录制模板 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
   DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
   /** 查询mdp用户开通mps信息 {@link DescribeMDPMPSUserInfoRequest} {@link DescribeMDPMPSUserInfoResponse} */

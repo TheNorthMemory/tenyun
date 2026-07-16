@@ -2579,6 +2579,8 @@ declare namespace V20180717 {
     SampleRate?: number;
     /** 音频通道，可选值：1：单通道2：双通道6：立体声0：音频声道数和原始音频保持一致当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。 */
     AudioChannel?: number;
+    /** 指定输出要保留的音频轨道。默认是全部保留源的。仅当在参数 OverrideParameter 中指定时生效，其他情况下不生效。 */
+    StreamSelects?: number[];
   }
 
   /** 音频轨道上的音频片段信息。 */
@@ -5795,6 +5797,22 @@ declare namespace V20180717 {
     Fps?: number;
   }
 
+  /** 自定义视频转码参数。 */
+  interface OverrideTranscodeParameter {
+    /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
+    Container?: string;
+    /** 是否去除视频数据，取值：0：保留；<\li>1：去除。<\li> */
+    RemoveVideo?: number;
+    /** 是否去除音频数据，取值：0：保留；<\li>1：去除。<\li> */
+    RemoveAudio?: number;
+    /** 视频流配置参数。 */
+    VideoTemplate?: VideoTemplateInfoForUpdate | null;
+    /** 音频流配置参数。 */
+    AudioTemplate?: AudioTemplateInfoForUpdate | null;
+    /** 极速高清转码配置参数。 */
+    TEHDConfig?: TEHDConfigForUpdate | null;
+  }
+
   /** 剪辑固化任务信息。 */
   interface PersistenceCompleteTask {
     /** 固化生成的媒体 ID。 */
@@ -7987,6 +8005,8 @@ declare namespace V20180717 {
     StartTimeOffset?: number;
     /** 转码后视频的终止时间偏移，单位：秒。不填或填0，表示转码后的视频持续到原始视频的末尾终止；当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。 */
     EndTimeOffset?: number;
+    /** 自定义视频转码参数。 */
+    OverrideParameter?: OverrideTranscodeParameter;
     /** 字幕压制信息列表。最大可支持 2 个。 */
     SubtitleInfoSet?: SubtitleInfoInput[];
   }

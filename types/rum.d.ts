@@ -3060,7 +3060,7 @@ declare interface DescribeRumLogExportsV2Request {
 }
 
 declare interface DescribeRumLogExportsV2Response {
-  /** Query result in JSON string format */
+  /** 日志导出列表 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

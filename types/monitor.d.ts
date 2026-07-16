@@ -565,9 +565,9 @@ declare namespace V20180724 {
 
   /** 策略过滤条件 */
   interface AlarmConditionFilter {
-    /** 类型 */
+    /** 类型枚举值：EXPRESSION： 用表达式过滤DIMENSION： 用维度条件过滤BIND_ALL： 绑定全部实例LOG_ALARM： 日志告警专用过滤 */
     Type?: string | null;
-    /** 表达式 */
+    /** 表达式Type为Expression有值 */
     Expression?: string | null;
     /** 过滤条件 */
     Dimensions?: string | null;
@@ -847,15 +847,15 @@ declare namespace V20180724 {
 
   /** 告警策略触发条件 */
   interface AlarmPolicyRule {
-    /** 指标名或事件名，支持的指标可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询，支持的事件可以从 [DescribeAlarmEvents](https://cloud.tencent.com/document/product/248/51284) 查询 。 */
+    /** 指标名或事件名，支持的指标可以从 DescribeAlarmMetrics 查询，支持的事件可以从 DescribeAlarmEvents 查询 。 */
     MetricName?: string | null;
-    /** 秒数 统计周期，支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。 */
+    /** 秒数 统计周期，支持的值可以从 DescribeAlarmMetrics 查询。 */
     Period?: number | null;
-    /** 英文运算符intelligent=无阈值智能检测eq=等于ge=大于等于gt=大于le=小于等于lt=小于ne=不等于day_increase=天同比增长day_decrease=天同比下降day_wave=天同比波动week_increase=周同比增长week_decrease=周同比下降week_wave=周同比波动cycle_increase=环比增长cycle_decrease=环比下降cycle_wave=环比波动re=正则匹配支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。 */
+    /** 英文运算符intelligent=无阈值智能检测eq=等于ge=大于等于gt=大于le=小于等于lt=小于ne=不等于day_increase=天同比增长day_decrease=天同比下降day_wave=天同比波动week_increase=周同比增长week_decrease=周同比下降week_wave=周同比波动cycle_increase=环比增长cycle_decrease=环比下降cycle_wave=环比波动re=正则匹配支持的值可以从 DescribeAlarmMetrics 查询。 */
     Operator?: string | null;
-    /** 阈值，支持的范围可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。 */
+    /** 阈值，支持的范围可以从 DescribeAlarmMetrics 查询。 */
     Value?: string | null;
-    /** 周期数 持续通知周期 1=持续1个周期 2=持续2个周期...，支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询 */
+    /** 周期数 持续通知周期 1=持续1个周期 2=持续2个周期...，支持的值可以从 DescribeAlarmMetrics 查询 */
     ContinuePeriod?: number | null;
     /** 秒数 告警间隔 0=不重复 300=每5分钟告警一次 600=每10分钟告警一次 900=每15分钟告警一次 1800=每30分钟告警一次 3600=每1小时告警一次 7200=每2小时告警一次 10800=每3小时告警一次 21600=每6小时告警一次 43200=每12小时告警一次 86400=每1天告警一次 */
     NoticeFrequency?: number | null;
@@ -1031,7 +1031,7 @@ declare namespace V20180724 {
     MetricId: number;
     /** 告警发送收敛类型。0连续告警，1指数告警 */
     AlarmNotifyType: number;
-    /** 告警发送周期单位秒。0 每隔triggerTime秒触发一次 */
+    /** 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次 */
     AlarmNotifyPeriod: number;
     /** 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等。如果指标有配置默认比较类型值可以不填。 */
     CalcType?: number;
@@ -1051,7 +1051,7 @@ declare namespace V20180724 {
     EventId: number;
     /** 告警发送收敛类型。0连续告警，1指数告警 */
     AlarmNotifyType: number;
-    /** 告警发送周期单位秒。0 每隔triggerTime秒触发一次 */
+    /** 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次 */
     AlarmNotifyPeriod: number;
     /** 如果通过模板创建，需要传入模板中该指标的对应RuleId */
     RuleId?: number;

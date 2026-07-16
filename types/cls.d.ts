@@ -2382,7 +2382,7 @@ declare interface ScheduledSqlTaskInfo {
   ProcessTimeWindow?: string;
   /** 执行延迟(秒)，0~120秒，默认60秒 */
   ProcessDelay?: number;
-  /** 源topicId的地域信息，支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474) 文档。 */
+  /** 源topicId的地域信息，支持地域见 地域列表 文档。 */
   SrcTopicRegion?: string;
   /** 语法规则，0：Lucene语法，1：CQL语法 */
   SyntaxRule?: number;
@@ -2390,6 +2390,8 @@ declare interface ScheduledSqlTaskInfo {
   HasServicesLog?: number;
   /** 全文检索标记。1：关闭，2：打开。 */
   FullQuery?: number;
+  /** 调度周期时间单位取值范围：[1, 2]默认值：1默认值1（分钟），其他值2（秒） */
+  ProcessPeriodUnit?: number;
 }
 
 /** 多日志主题检索错误信息 */
@@ -3731,6 +3733,8 @@ declare interface CreateScheduledSqlRequest {
   ProcessDelay: number;
   /** 源topicId的地域信息,支持地域见 地域列表 文档 */
   SrcTopicRegion: string;
+  /** 调度时间单位取值范围：[1, 2]默认值：1默认值为1（分钟），其他值2（秒） */
+  ProcessPeriodUnit?: number;
   /** 调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms */
   ProcessEndTime?: number;
   /** 查询语法规则。 默认值为0。0：Lucene语法，1：CQL语法 */
@@ -6295,6 +6299,8 @@ declare interface ModifyScheduledSqlRequest {
   HasServicesLog?: number;
   /** 全文检索查询标记。1：关闭，2：打开。 */
   FullQuery?: number;
+  /** 调度周期单位取值范围：[1, 2]默认值：1默认值1（分钟），其他值2（秒） */
+  ProcessPeriodUnit?: number;
 }
 
 declare interface ModifyScheduledSqlResponse {

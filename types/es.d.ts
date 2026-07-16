@@ -651,6 +651,40 @@ declare namespace V20180416 {
     DataStreamArr?: DataStreamInfo[] | null;
   }
 
+  /** forcemerge任务信息 */
+  interface CrontabTaskInfo {
+    /** forcemerge任务id */
+    TaskId?: number | null;
+    /** 集群地域 */
+    RegionId?: number | null;
+    /** 集群id */
+    InstanceId?: number | null;
+    /** forcemerge任务名称 */
+    TaskName?: string | null;
+    /** 任务类型 */
+    TaskType?: string | null;
+    /** 任务执行时间 */
+    TaskTime?: string | null;
+    /** 执行forcemerge的索引 */
+    Target?: string | null;
+    /** 上次执行时间 */
+    LastExecTime?: string | null;
+    /** 状态 */
+    State?: string | null;
+    /** 任务状态 */
+    TaskStatus?: number | null;
+    /** 创建任务时间 */
+    CreateTime?: string | null;
+    /** 任务更新时间 */
+    UpdateTime?: string | null;
+    /** 任务详情 */
+    TaskDetail?: string | null;
+    /** 是否只合并有deleted标记的索引，对应ES _forcemerge API中的only_expunge_deletes参数,默认值false */
+    OnlyExpungeDeletes?: boolean | null;
+    /** 最大合并Segment数量，对应ES _forcemerge API中的max_num_segments参数 */
+    MaxMumSegments?: number | null;
+  }
+
   /** 自治索引信息 */
   interface DataStreamInfo {
     /** 自治索引名 */
@@ -869,6 +903,30 @@ declare namespace V20180416 {
     Value: string;
   }
 
+  /** 多盘的取值范围 */
+  interface DiskCountRange {
+    /** 云盘块数下限 */
+    Min: number;
+    /** 云盘块数上限 */
+    Max: number;
+  }
+
+  /** 磁盘大小范围 */
+  interface DiskSizeRange {
+    /** 最小值 */
+    Min: number;
+    /** 小刻度值 */
+    Sml: number;
+    /** 中刻度值 */
+    Med: number;
+    /** 最大值 */
+    Max: number;
+    /** 磁盘块数最小值 */
+    DiskCountMin?: number | null;
+    /** 磁盘块数最大值 */
+    DiskCountMax?: number | null;
+  }
+
   /** 置放群组异步任务维护的时间段 */
   interface EnableScheduleOperationDuration {
     /** 支持开启异步任务的日期 */
@@ -925,6 +983,84 @@ declare namespace V20180416 {
     BlackIpList?: string[];
     /** 访问白名单 */
     WhiteIpList?: string[];
+  }
+
+  /** 事件详情 */
+  interface EventDataDetail {
+    /** 事件名称 */
+    EventName?: string;
+    /** 事件重要程度;0: 一般 1: 重要 */
+    EventImportance?: number;
+    /** 事件内容 */
+    EventContent?: string;
+    /** ES集群id */
+    InstanceId?: string;
+    /** 集群名称 */
+    InstanceName?: string;
+    /** 节点Id */
+    NodeId?: string;
+    /** 节点类型 */
+    NodeRole?: string;
+    /** 事件状态,0:待处理，1:处理中，2:处理完成 */
+    EventStatus?: number;
+    /** 事件类型;1：硬件异常；2：用户变更；3：智能运维 */
+    EventType?: number;
+    /** 事件任务id */
+    EventTaskId?: number;
+    /** 节点隔离状态，0:未隔离；1:已隔离 */
+    EventIsolationStatus?: number;
+    /** 开始时间 */
+    StartTime?: string;
+    /** 结束时间 */
+    EndTime?: string;
+    /** 子事件异常类型 */
+    SubEventType?: number;
+    /** cvm维修任务Id */
+    CvmRepairId?: string;
+    /** 处理类型 */
+    ProcessType?: string;
+    /** 子事件名称 */
+    SubEventName?: string;
+  }
+
+  /** 事件中心记录信息 */
+  interface EventDataInfoOverview {
+    /** 1：硬件异常；2：用户变更；3：智能运维 */
+    EventType?: number;
+    /** 事件任务Id */
+    EventTaskId?: number;
+    /** 事件名称 */
+    EventName?: string;
+    /** 事件重要程度;0: 一般 1: 重要 */
+    EventImportance?: number;
+    /** 事件内容 */
+    EventContent?: string;
+    /** ES集群Id */
+    InstanceId?: string;
+    /** 集群名称 */
+    InstanceName?: string;
+    /** ES集群节点id */
+    NodeId?: string;
+    /** 节点类型 */
+    NodeRole?: string;
+    /** 事件状态：0:待处理，1:处理中，2:处理完成 */
+    EventStatus?: number;
+    /** 事件发生时间 */
+    StartTime?: string;
+    /** 事件结束时间 */
+    EndTime?: string;
+    /** 子事件类型 */
+    SubEventType?: number;
+    /** 子事件名称 */
+    SubEventName?: string;
+  }
+
+  /** 事件类型详情结构 */
+  interface EventTypeInfo {
+    /** 事件类型 */
+    EventType?: number;
+    /** 事件名称 */
+    EventTypeName?: string;
   }
 
   /** 索引备份失败的数据结构 */
@@ -1501,6 +1637,90 @@ declare namespace V20180416 {
     Zone?: string;
   }
 
+  /** Logstash节点规格资源描述 */
+  interface LogstashNodeTypeResource {
+    /** 规格名称 */
+    NodeTypeName?: string;
+    /** 是否可售 */
+    Available?: boolean;
+    /** 规格信息 */
+    NodeTypeInfo?: NodeTypeInfo;
+    /** SSD盘是否可售 */
+    SsdAvailable?: boolean;
+    /** SSD磁盘取值范围 */
+    SsdDiskSizeRange?: DiskSizeRange;
+    /** SATA盘是否可售 */
+    SataAvailable?: boolean;
+    /** SATA磁盘取值范围 */
+    SataDiskSizeRange?: DiskSizeRange;
+    /** SSD机型售罄原因 */
+    SsdSoldOutReason?: string;
+    /** SATA机型售罄原因 */
+    SataSoldOutReason?: string;
+    /** 本地盘信息 */
+    LocalDiskInfo?: LocalDiskInfo | null;
+    /** 云盘块数取值范围 */
+    DiskCountRange?: DiskCountRange | null;
+    /** 增强型SSD是否可用 */
+    HSsdAvailable?: boolean | null;
+    /** 增强型SSD机型售罄原因 */
+    HSsdSoldOutReason?: string | null;
+    /** 增强型SSD磁盘取值范围 */
+    HSsdDiskSizeRange?: DiskSizeRange | null;
+    /** 吞吐型云盘是否可用 */
+    ThroughputAvailable?: boolean | null;
+    /** 吞吐型云盘售罄原因 */
+    ThroughputSoldOutReason?: string | null;
+    /** 吞吐型云盘取值范围 */
+    ThroughputDiskSizeRange?: DiskSizeRange | null;
+    /** BigData盘是否可售 */
+    BigDataAvailable?: boolean | null;
+    /** BigData盘售罄原因 */
+    BigDataSoldOutReason?: string | null;
+    /** BigData磁盘取值范围 */
+    BigDataDiskSizeRange?: DiskSizeRange | null;
+    /** HighIO盘是否可售 */
+    HighIOAvailable?: boolean | null;
+    /** HighIO盘售罄原因 */
+    HighIOSoldOutReason?: string | null;
+    /** HighIO磁盘取值范围 */
+    HighIODiskSizeRange?: DiskSizeRange | null;
+    /** Bssd盘是否可售 */
+    BssdAvailable?: boolean | null;
+    /** Bssd盘售罄原因 */
+    BssdSoldOutReason?: string | null;
+    /** Bssd盘取值范围 */
+    BssdDiskSizeRange?: DiskSizeRange | null;
+    /** GpuInfo */
+    GpuInfo?: GpuInfo | null;
+  }
+
+  /** Logstash节点维度视图数据 */
+  interface LogstashNodeView {
+    /** 节点ID */
+    NodeId?: string | null;
+    /** 节点IP */
+    NodeIp?: string | null;
+    /** 节点HTTP IP */
+    NodeHttpIp?: string | null;
+    /** 可用区 */
+    Zone?: string | null;
+    /** 节点总磁盘大小 */
+    DiskSize?: number | null;
+    /** 磁盘使用率 */
+    DiskUsage?: number | null;
+    /** 节点内存大小，单位GB */
+    MemSize?: number | null;
+    /** 内存使用率 */
+    MemUsage?: number | null;
+    /** JVM内存使用率 */
+    JvmMemUsage?: number | null;
+    /** 节点cpu个数 */
+    CpuNum?: number | null;
+    /** cpu使用率 */
+    CpuUsage?: number | null;
+  }
+
   /** Logstash管道信息 */
   interface LogstashPipeline {
     /** 管道ID */
@@ -1549,6 +1769,18 @@ declare namespace V20180416 {
     CreateTime?: string | null;
     /** 更新时间 */
     UpdateTime?: string | null;
+  }
+
+  /** Logstash可用区资源描述 */
+  interface LogstashZoneResource {
+    /** 可用区名称 */
+    ZoneName: string;
+    /** 是否可售 */
+    Available: boolean;
+    /** 节点规格资源列表 */
+    NodeTypeList: LogstashNodeTypeResource[];
+    /** 可用节点机型族列表 */
+    AvailNodeFamilies: string[];
   }
 
   /** 实例专用主节点相关信息 */
@@ -1643,6 +1875,102 @@ declare namespace V20180416 {
     MemSize?: number | null;
     /** 硬盘额外性能 */
     DiskEnhance?: number | null;
+    /** 节点Gpu信息 */
+    GpuInfo?: GpuInfo | null;
+  }
+
+  /** 磁盘上下限 */
+  interface NodeTypeDiskSizeRange {
+    /** 机器类型 */
+    NodeType?: string;
+    /** 节点类型 */
+    Type?: string;
+    /** 磁盘类型 */
+    DiskType?: string;
+    /** 磁盘最小值 */
+    Min?: number;
+    /** 中刻度值 */
+    Med?: number;
+    /** 磁盘最大值 */
+    Max?: number;
+    /** 磁盘最小个数 */
+    DiskCountMin?: number;
+    /** 磁盘最大个数 */
+    DiskCountMax?: number;
+    /** 是否加密盘 */
+    DiskEncrypt?: number;
+    /** 是否增强 */
+    DiskEnhance?: number;
+    /** 是否lvm */
+    IsLvm?: number;
+    /** 是否本地盘 */
+    IsLocalDiskType?: boolean;
+  }
+
+  /** 节点规格信息 */
+  interface NodeTypeInfo {
+    /** CPU核数 */
+    Cpu: number;
+    /** 内存大小，单位GB */
+    Mem: number;
+    /** 规格描述 */
+    Desc: string;
+  }
+
+  /** 节点规格资源描述 */
+  interface NodeTypeResource {
+    /** 规格名称 */
+    NodeTypeName?: string;
+    /** 是否可售 */
+    Available?: boolean;
+    /** 规格信息 */
+    NodeTypeInfo?: NodeTypeInfo;
+    /** SSD盘是否可售 */
+    SsdAvailable?: boolean;
+    /** SSD磁盘取值范围 */
+    SsdDiskSizeRange?: DiskSizeRange;
+    /** SATA盘是否可售 */
+    SataAvailable?: boolean;
+    /** SATA磁盘取值范围 */
+    SataDiskSizeRange?: DiskSizeRange;
+    /** SSD机型售罄原因 */
+    SsdSoldOutReason?: string;
+    /** SATA机型售罄原因 */
+    SataSoldOutReason?: string;
+    /** 本地盘信息 */
+    LocalDiskInfo?: LocalDiskInfo | null;
+    /** 云盘块数取值范围 */
+    DiskCountRange?: DiskCountRange;
+    /** HSSD盘是否可售 */
+    HSsdAvailable?: boolean;
+    /** HSSD机型售罄原因 */
+    HSsdSoldOutReason?: string;
+    /** HSSD磁盘取值范围 */
+    HSsdDiskSizeRange?: DiskSizeRange;
+    /** Throughput盘是否可售 */
+    ThroughputAvailable?: boolean;
+    /** Throughput机型售罄原因 */
+    ThroughputSoldOutReason?: string;
+    /** Throughput磁盘取值范围 */
+    ThroughputDiskSizeRange?: DiskSizeRange;
+    /** BigData盘是否可售 */
+    BigDataAvailable?: boolean;
+    /** BigData盘售罄原因 */
+    BigDataSoldOutReason?: string;
+    /** BigData磁盘取值范围 */
+    BigDataDiskSizeRange?: DiskSizeRange;
+    /** HighIO盘是否可售 */
+    HighIOAvailable?: boolean;
+    /** HighIO盘售罄原因 */
+    HighIOSoldOutReason?: string;
+    /** HighIO磁盘取值范围 */
+    HighIODiskSizeRange?: DiskSizeRange;
+    /** Bssd盘是否可售 */
+    BssdAvailable?: boolean | null;
+    /** Bssd盘售罄原因 */
+    BssdSoldOutReason?: string | null;
+    /** Bssd盘取值范围 */
+    BssdDiskSizeRange?: DiskSizeRange | null;
     /** 节点Gpu信息 */
     GpuInfo?: GpuInfo | null;
   }
@@ -1811,6 +2139,14 @@ declare namespace V20180416 {
     TaskType?: number | null;
     /** 预估剩余时间单位：秒 */
     EstimatedTimeRemaining?: number;
+  }
+
+  /** 支持的地域名 */
+  interface RegionsData {
+    /** 地域英文名 */
+    Region: string;
+    /** 地域中文名 */
+    RegionName: string;
   }
 
   /** 创建serverless索引时创建数据接入 */
@@ -2119,6 +2455,18 @@ declare namespace V20180416 {
     SubnetId: string;
     /** 是否为隐藏可用区 */
     Hidden?: boolean;
+  }
+
+  /** 可用区资源描述 */
+  interface ZoneResource {
+    /** 可用区名称 */
+    ZoneName: string;
+    /** 是否可售 */
+    Available: boolean;
+    /** 节点规格资源列表 */
+    NodeTypeList: NodeTypeResource[];
+    /** 可用节点机型族列表 */
+    AvailNodeFamilies: string[];
   }
 
   interface CheckMigrateIndexMetaDataRequest {
@@ -2603,6 +2951,32 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface DescribeAutoScaleDiskInfoRequest {
+    /** 实例名称 */
+    InstanceId: string;
+  }
+
+  interface DescribeAutoScaleDiskInfoResponse {
+    /** 自动扩盘参数列表 */
+    AutoScaleDiskInfoList?: AutoScaleDiskInfo[];
+    /** 0 修改中; 1 正常 */
+    Status?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeClusterDiskRangeRequest {
+    /** 实例名称 */
+    InstanceId: string;
+  }
+
+  interface DescribeClusterDiskRangeResponse {
+    /** 节点磁盘大小上下限 */
+    NodeTypeDiskSizeRangeList?: NodeTypeDiskSizeRange[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeClusterSnapshotRequest {
     /** 集群实例Id，格式：es-xxxx */
     InstanceId: string;
@@ -2623,6 +2997,18 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface DescribeCosBackupStrategyViewsRequest {
+    /** 集群实例ID */
+    InstanceId?: string[];
+  }
+
+  interface DescribeCosBackupStrategyViewsResponse {
+    /** 自动备份策略列表 */
+    CosBackupList?: CosBackup[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeDiagnoseRequest {
     /** ES实例ID */
     InstanceId: string;
@@ -2637,6 +3023,76 @@ declare namespace V20180416 {
     Total?: number;
     /** 诊断报告列表 */
     DiagnoseResults?: DiagnoseResult[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeEsInstanceEventListsRequest {
+    /** 返回数量，默认为20，最大值为100。 */
+    Limit: number;
+    /** 偏移量，默认为0。 */
+    Offset: number;
+    /** 起始时间, e.g. "2019-03-07 16:30:39" */
+    StartTime: string;
+    /** 结束时间, e.g. "2019-03-30 20:18:03" */
+    EndTime: string;
+    /** 集群id，非必填，查询集群相关的事件 */
+    InstanceIds?: string[];
+    /** 查询的类型，包括：硬件异常、用户变更和智能运维等，默认查询所有。1：硬件异常；2：用户变更；3：智能运维 */
+    EventTypes?: number[];
+    /** 事件状态 */
+    EventStatus?: number[];
+  }
+
+  interface DescribeEsInstanceEventListsResponse {
+    /** 事件中心记录总数 */
+    TotalCount?: number;
+    /** 事件中心记录信息 */
+    EventDataInfoList?: EventDataInfoOverview[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeEventDataDetailRequest {
+    /** ES集群Id */
+    InstanceId: string;
+    /** 事件类型,1：硬件异常；2：用户变更；3：智能运维 */
+    EventType: number;
+    /** 异常事件任务id */
+    EventTaskId: number;
+  }
+
+  interface DescribeEventDataDetailResponse {
+    /** 异常事件详情 */
+    EventDataDetail?: EventDataDetail;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeEventInfoListRequest {
+  }
+
+  interface DescribeEventInfoListResponse {
+    /** 事件类型详情 */
+    EventTypeInfoList?: EventTypeInfo[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeForceMergeTaskRequest {
+    /** 集群实例ID */
+    InstanceId: string;
+    /** 分页页数 */
+    Offset?: number;
+    /** 每页展示记录条数 */
+    Limit?: number;
+  }
+
+  interface DescribeForceMergeTaskResponse {
+    /** 新增的forcemerge任务列表Uin */
+    CrontabTaskInfo?: CrontabTaskInfo[];
+    /** 记录总条数 */
+    TotalCount?: number;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -2909,6 +3365,52 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface DescribeLogstashViewsRequest {
+    /** longstash集群ID */
+    LogstashInstanceId: string;
+  }
+
+  interface DescribeLogstashViewsResponse {
+    /** Logstash节点维度视图 */
+    NodesView?: LogstashNodeView[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeRegionsRequest {
+  }
+
+  interface DescribeRegionsResponse {
+    /** 地域总数 */
+    TotalCount?: number;
+    /** 地域详细信息 */
+    RegionSet?: RegionsData[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeRequestInstancePolicyRequest {
+    /** 集群id */
+    InstanceId: string;
+  }
+
+  interface DescribeRequestInstancePolicyResponse {
+    /** GET路径可请求的命令合集 */
+    GetPaths?: string[];
+    /** POST路径可请求的命令合集 */
+    PostPaths?: string[];
+    /** PUT路径可请求的命令合集 */
+    PutPaths?: string[];
+    /** 是否是默认的参数 */
+    IsDefault?: boolean;
+    /** 变更时间 */
+    UpdateTime?: string;
+    /** 变更人 */
+    Operator?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeServerlessInstancesRequest {
     /** 索引集群ID */
     InstanceIds?: string[];
@@ -3023,6 +3525,26 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface DescribeSnapshotViewsRequest {
+    /** 集群实例ID */
+    InstanceId?: string[];
+    /** 快照状态，IN_PROGRESS,SUCCESS,FAILED,PARTIAL */
+    State?: string[];
+    /** 创建方式: true(手动备份); false(自动备份); 空字符串表示全部 */
+    UserBackUp?: string;
+    /** 时间范围, 最近多少天, 0表示查询所有时间范围 */
+    Duration?: number;
+  }
+
+  interface DescribeSnapshotViewsResponse {
+    /** 快照信息 */
+    Snapshots?: Snapshots[] | null;
+    /** 集群快照获取失败信息 */
+    FailedMsgs?: string[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeSpaceKibanaToolsRequest {
     /** space的ID */
     SpaceId: string;
@@ -3033,6 +3555,24 @@ declare namespace V20180416 {
     KibanaToken?: string;
     /** token的过期时间 */
     ExpireTime?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeUpgradeRequest {
+    /** 需要升级的实例ID */
+    InstanceId: string;
+  }
+
+  interface DescribeUpgradeResponse {
+    /** 可以升级到的大版本 */
+    EsVersions?: string[];
+    /** 可以升级到的商业特性 */
+    EsLicenses?: string[];
+    /** 可以升级到的子产品 */
+    EsSubProducts?: string[] | null;
+    /** 可以升级到的商业特性 */
+    EsRealLicenses?: string[] | null;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3291,10 +3831,56 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface QueryZoneResourceForLogstashRequest {
+    /** 要检查的可用区 */
+    Zones: string[];
+    /** 计费类型PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
+    ChargeType?: string;
+  }
+
+  interface QueryZoneResourceForLogstashResponse {
+    /** 可用区资源描述列表 */
+    ZoneResources?: LogstashZoneResource[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface QueryZoneResourceRequest {
+    /** 要检查的可用区 */
+    Zones: string[];
+    /** 操作类型（create数据节点创建，masterCreate专用主节点创建，scaleUp数据节点纵向扩容，masterAdd添加专用主节点，masterScaleUp专用主节点纵向扩容） */
+    OptType: string;
+    /** 实例ID(变配检查需要传递) */
+    InstanceId?: string;
+    /** 集群部署方式0, 单可用区部署1, 多可用区部署 */
+    DeployMode?: number;
+    /** 计费类型PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费 */
+    ChargeType?: string;
+    /** ES版本号如5.6.4，6.4.3，6.8.2，7.5.1 */
+    EsVersion?: string;
+    /** cdcId，使用cdc子网时传递 */
+    CdcId?: string;
+  }
+
+  interface QueryZoneResourceResponse {
+    /** 可用区资源描述列表 */
+    ZoneResources?: ZoneResource[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface RequestInstancesByGetRequest {
+    /** 集群id */
+    InstanceId: string;
+    /** 请求路径 */
+    Uri?: string;
+    /** 调用方 */
+    Caller?: string;
   }
 
   interface RequestInstancesByGetResponse {
+    /** 集群返回信息 */
+    Detail?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3877,10 +4463,24 @@ declare interface Es {
   DeleteServerlessSpaceUser(data: V20180416.DeleteServerlessSpaceUserRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DeleteServerlessSpaceUserResponse>;
   /** 获取快照自动备份策略 {@link V20180416.DescribeAutoBackUpStrategyRequest} {@link V20180416.DescribeAutoBackUpStrategyResponse} */
   DescribeAutoBackUpStrategy(data: V20180416.DescribeAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeAutoBackUpStrategyResponse>;
+  /** 获取自动扩盘参数 {@link V20180416.DescribeAutoScaleDiskInfoRequest} {@link V20180416.DescribeAutoScaleDiskInfoResponse} */
+  DescribeAutoScaleDiskInfo(data: V20180416.DescribeAutoScaleDiskInfoRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeAutoScaleDiskInfoResponse>;
+  /** 获取集群节点磁盘大小上下限信息 {@link V20180416.DescribeClusterDiskRangeRequest} {@link V20180416.DescribeClusterDiskRangeResponse} */
+  DescribeClusterDiskRange(data: V20180416.DescribeClusterDiskRangeRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeClusterDiskRangeResponse>;
   /** 获取快照备份列表 {@link V20180416.DescribeClusterSnapshotRequest} {@link V20180416.DescribeClusterSnapshotResponse} */
   DescribeClusterSnapshot(data: V20180416.DescribeClusterSnapshotRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeClusterSnapshotResponse>;
+  /** 获取集群自动备份策略概览 {@link V20180416.DescribeCosBackupStrategyViewsRequest} {@link V20180416.DescribeCosBackupStrategyViewsResponse} */
+  DescribeCosBackupStrategyViews(data: V20180416.DescribeCosBackupStrategyViewsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeCosBackupStrategyViewsResponse>;
   /** 查询智能运维诊断结果报告 {@link V20180416.DescribeDiagnoseRequest} {@link V20180416.DescribeDiagnoseResponse} */
   DescribeDiagnose(data: V20180416.DescribeDiagnoseRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeDiagnoseResponse>;
+  /** 查询事件中心列表 {@link V20180416.DescribeEsInstanceEventListsRequest} {@link V20180416.DescribeEsInstanceEventListsResponse} */
+  DescribeEsInstanceEventLists(data: V20180416.DescribeEsInstanceEventListsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeEsInstanceEventListsResponse>;
+  /** 查询事件中心记录详情 {@link V20180416.DescribeEventDataDetailRequest} {@link V20180416.DescribeEventDataDetailResponse} */
+  DescribeEventDataDetail(data: V20180416.DescribeEventDataDetailRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeEventDataDetailResponse>;
+  /** 查询事件类型列表 {@link V20180416.DescribeEventInfoListRequest} {@link V20180416.DescribeEventInfoListResponse} */
+  DescribeEventInfoList(data: V20180416.DescribeEventInfoListRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeEventInfoListResponse>;
+  /** 查询新增的forcemerge任务列表 {@link V20180416.DescribeForceMergeTaskRequest} {@link V20180416.DescribeForceMergeTaskResponse} */
+  DescribeForceMergeTask(data: V20180416.DescribeForceMergeTaskRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeForceMergeTaskResponse>;
   /** 获取索引列表 {@link V20180416.DescribeIndexListRequest} {@link V20180416.DescribeIndexListResponse} */
   DescribeIndexList(data: V20180416.DescribeIndexListRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeIndexListResponse>;
   /** 获取索引元数据 {@link V20180416.DescribeIndexMetaRequest} {@link V20180416.DescribeIndexMetaResponse} */
@@ -3901,6 +4501,12 @@ declare interface Es {
   DescribeLogstashInstances(data: V20180416.DescribeLogstashInstancesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeLogstashInstancesResponse>;
   /** 获取Logstash实例管道列表 {@link V20180416.DescribeLogstashPipelinesRequest} {@link V20180416.DescribeLogstashPipelinesResponse} */
   DescribeLogstashPipelines(data: V20180416.DescribeLogstashPipelinesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeLogstashPipelinesResponse>;
+  /** 查询Logstash集群视图 {@link V20180416.DescribeLogstashViewsRequest} {@link V20180416.DescribeLogstashViewsResponse} */
+  DescribeLogstashViews(data: V20180416.DescribeLogstashViewsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeLogstashViewsResponse>;
+  /** 查询ES支持的地域列表 {@link V20180416.DescribeRegionsRequest} {@link V20180416.DescribeRegionsResponse} */
+  DescribeRegions(data: V20180416.DescribeRegionsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeRegionsResponse>;
+  /** 集群可访问API展示 {@link V20180416.DescribeRequestInstancePolicyRequest} {@link V20180416.DescribeRequestInstancePolicyResponse} */
+  DescribeRequestInstancePolicy(data: V20180416.DescribeRequestInstancePolicyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeRequestInstancePolicyResponse>;
   /** Serverless获取索引列表 {@link V20180416.DescribeServerlessInstancesRequest} {@link V20180416.DescribeServerlessInstancesResponse} */
   DescribeServerlessInstances(data: V20180416.DescribeServerlessInstancesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeServerlessInstancesResponse>;
   /** 获取实例对应的监控指标 {@link V20180416.DescribeServerlessMetricsRequest} {@link V20180416.DescribeServerlessMetricsResponse} */
@@ -3909,8 +4515,12 @@ declare interface Es {
   DescribeServerlessSpaceUser(data: V20180416.DescribeServerlessSpaceUserRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeServerlessSpaceUserResponse>;
   /** 获取Serverless索引空间列表 {@link V20180416.DescribeServerlessSpacesRequest} {@link V20180416.DescribeServerlessSpacesResponse} */
   DescribeServerlessSpaces(data: V20180416.DescribeServerlessSpacesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeServerlessSpacesResponse>;
+  /** 获取集群快照列表概览 {@link V20180416.DescribeSnapshotViewsRequest} {@link V20180416.DescribeSnapshotViewsResponse} */
+  DescribeSnapshotViews(data: V20180416.DescribeSnapshotViewsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeSnapshotViewsResponse>;
   /** space维度的kibana获取登录token {@link V20180416.DescribeSpaceKibanaToolsRequest} {@link V20180416.DescribeSpaceKibanaToolsResponse} */
   DescribeSpaceKibanaTools(data: V20180416.DescribeSpaceKibanaToolsRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeSpaceKibanaToolsResponse>;
+  /** 获取实例可升级列表 {@link V20180416.DescribeUpgradeRequest} {@link V20180416.DescribeUpgradeResponse} */
+  DescribeUpgrade(data: V20180416.DescribeUpgradeRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeUpgradeResponse>;
   /** 查询快照信息接口 {@link V20180416.DescribeUserCosSnapshotListRequest} {@link V20180416.DescribeUserCosSnapshotListResponse} */
   DescribeUserCosSnapshotList(data: V20180416.DescribeUserCosSnapshotListRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.DescribeUserCosSnapshotListResponse>;
   /** 查询集群视图 {@link V20180416.DescribeViewsRequest} {@link V20180416.DescribeViewsResponse} */
@@ -3937,6 +4547,10 @@ declare interface Es {
   ModifyEsVipSecurityGroup(data: V20180416.ModifyEsVipSecurityGroupRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyEsVipSecurityGroupResponse>;
   /** 查询IP溯源日志 {@link V20180416.QueryIpTraceLogRequest} {@link V20180416.QueryIpTraceLogResponse} */
   QueryIpTraceLog(data: V20180416.QueryIpTraceLogRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.QueryIpTraceLogResponse>;
+  /** 获取可用区资源情况 {@link V20180416.QueryZoneResourceRequest} {@link V20180416.QueryZoneResourceResponse} */
+  QueryZoneResource(data: V20180416.QueryZoneResourceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.QueryZoneResourceResponse>;
+  /** 获取Logstash可用区资源情况 {@link V20180416.QueryZoneResourceForLogstashRequest} {@link V20180416.QueryZoneResourceForLogstashResponse} */
+  QueryZoneResourceForLogstash(data: V20180416.QueryZoneResourceForLogstashRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.QueryZoneResourceForLogstashResponse>;
   /** 请求es集群本身 {@link V20180416.RequestInstancesRequest} {@link V20180416.RequestInstancesResponse} */
   RequestInstances(data: V20180416.RequestInstancesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.RequestInstancesResponse>;
   /** 请求es集群本身仅 GET 请求 {@link V20180416.RequestInstancesByGetRequest} {@link V20180416.RequestInstancesByGetResponse} */

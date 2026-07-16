@@ -5614,7 +5614,7 @@ declare interface ServiceSupport {
 
 /** Skill 能力标签 */
 declare interface SkillCapabilityTag {
-  /** 能力标签标识，适合程序判定、过滤或聚合使用 */
+  /** 能力标签标识 */
   ID?: string;
   /** 能力标签展示名称 */
   Name?: string;
@@ -5622,7 +5622,7 @@ declare interface SkillCapabilityTag {
 
 /** 融合规则目录项 */
 declare interface SkillRuleCatalogItem {
-  /** 融合规则 ID（9xxxx） */
+  /** 融合规则 ID参数格式：形如 9xxxx */
   RuleID?: string;
   /** 风险类别名称 */
   RuleName?: string;
@@ -5632,7 +5632,7 @@ declare interface SkillRuleCatalogItem {
 declare interface SkillScanEngineResult {
   /** 子引擎类型枚举值：AI：AI 引擎STATIC：静态分析引擎 */
   ScanType?: string;
-  /** 该引擎命中的规则列表 */
+  /** 命中规则列表 */
   RuleList?: SkillScanRuleHit[];
 }
 
@@ -5678,9 +5678,9 @@ declare interface SkillScanItem {
 
 /** 命中规则项 */
 declare interface SkillScanRuleHit {
-  /** 融合规则编号（9xxxx），可与 RuleCatalog 交叉引用 */
+  /** 融合规则编号参数格式：形如 9xxxx */
   RuleID?: string;
-  /** 当前命中规则的具体发现描述，包含文件位置、行为特征、风险点等信息 */
+  /** 风险发现描述 */
   Description?: string;
 }
 
@@ -11173,6 +11173,18 @@ declare interface ModifyAlarmRiskStatusResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCosAuditBucketMonitorStatusRequest {
+  /** 存储桶集合 */
+  BucketNameSet: string[];
+  /** 0 关闭 1 开启 */
+  MonitorStatus: number;
+}
+
+declare interface ModifyCosAuditBucketMonitorStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCosAuditMonitorAccountRequest {
   /** 资源id */
   ResourceId: string;
@@ -12518,6 +12530,8 @@ declare interface Csip {
   ModifyAILinkSetting(data: ModifyAILinkSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAILinkSettingResponse>;
   /** 风险或者告警处理 {@link ModifyAlarmRiskStatusRequest} {@link ModifyAlarmRiskStatusResponse} */
   ModifyAlarmRiskStatus(data: ModifyAlarmRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmRiskStatusResponse>;
+  /** 修改存储桶监测状态 {@link ModifyCosAuditBucketMonitorStatusRequest} {@link ModifyCosAuditBucketMonitorStatusResponse} */
+  ModifyCosAuditBucketMonitorStatus(data: ModifyCosAuditBucketMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditBucketMonitorStatusResponse>;
   /** 修改cos审计监测账号 {@link ModifyCosAuditMonitorAccountRequest} {@link ModifyCosAuditMonitorAccountResponse} */
   ModifyCosAuditMonitorAccount(data: ModifyCosAuditMonitorAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditMonitorAccountResponse>;
   /** 修改cos对象存储识别状态 {@link ModifyCosAuditObjectIdentifyStatusRequest} {@link ModifyCosAuditObjectIdentifyStatusResponse} */
