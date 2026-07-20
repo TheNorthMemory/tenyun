@@ -192,7 +192,7 @@ declare interface ApmApplicationConfigView {
   ExceptionFilter?: string;
   /** HTTP 状态码过滤 */
   ErrorCodeFilter?: string;
-  /** 应用诊断开关（已废弃） */
+  /** 应用诊断开关 */
   EventEnable?: boolean;
   /** URL 收敛开关 0 关 1 开 */
   UrlConvergenceSwitch?: number;
@@ -216,9 +216,9 @@ declare interface ApmApplicationConfigView {
   SnapshotTimeout?: number;
   /** 探针总开关 */
   AgentEnable?: boolean;
-  /** 组件列表开关（已废弃） */
+  /** 组件列表开关 */
   InstrumentList?: Instrument[];
-  /** 链路压缩开关（已废弃） */
+  /** 链路压缩开关 */
   TraceSquash?: boolean;
   /** 链路过滤配置 */
   AgentIgnoreOperation?: string;
@@ -1480,7 +1480,7 @@ declare interface DescribeTopologyNewResponse {
   Nodes?: TopologyNode[] | null;
   /** 边集合 */
   Edges?: TopologyEdgeNew[];
-  /** 拓扑图是否有修改 */
+  /** 拓扑图是否有修改枚举值：0： 拓扑图未修改1： 拓扑图已修改 */
   TopologyModifyFlag?: number | null;
   /** 节点数量 */
   Selectors?: SelectorView | null;

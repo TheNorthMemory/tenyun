@@ -268,6 +268,16 @@ declare interface CfwNatDnatRule {
   Description: string;
 }
 
+/** 状态监控过滤条件。 */
+declare interface CfwStatusMonitorFilter {
+  /** 过滤字段名。 */
+  Name: string | null;
+  /** 过滤值列表，最多 10 个。 */
+  Values: string[] | null;
+  /** 操作符类型，可选；仅支持后端允许的类型。 */
+  OperatorType?: number | null;
+}
+
 /** 预接入检查结果，序列化后写入 cfw_gwlb_lead_switch.check_result 列 */
 declare interface ClusterFwPreAccessCheckResult {
   /** 检查状态，0：进行中，1：通过，2：失败 */
@@ -2161,6 +2171,8 @@ declare interface VpcZoneData {
 declare interface AddAclRuleRequest {
   /** 需要添加的访问控制规则列表 */
   Rules: CreateRuleItem[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则 */
   From?: string;
 }
@@ -2175,6 +2187,8 @@ declare interface AddAclRuleResponse {
 declare interface AddEnterpriseSecurityGroupRulesRequest {
   /** 创建规则数据 */
   Data: SecurityGroupRule[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 添加类型，0：添加到最后，1：添加到最前；2：中间插入；默认0添加到最后 */
   Type?: number;
   /** 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。 */
@@ -2199,6 +2213,8 @@ declare interface AddEnterpriseSecurityGroupRulesResponse {
 declare interface AddNatAcRuleRequest {
   /** 需要添加的nat访问控制规则列表 */
   Rules: CreateNatRuleItem[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则 */
   From?: string;
 }
@@ -2213,6 +2229,8 @@ declare interface AddNatAcRuleResponse {
 declare interface AddVpcAcRuleRequest {
   /** 需要添加的vpc内网间规则列表 */
   Rules: VpcRuleItem[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则 */
   From?: string;
 }
@@ -2317,6 +2335,8 @@ declare interface CreateAlertCenterOmitRequest {
   HandleIdList: string[];
   /** 忽略数据来源：AlertTable 告警中心 InterceptionTable拦截列表 */
   TableType: string;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 处置对象,事件ID列表 */
   HandleEventIdList?: string[];
 }
@@ -2385,6 +2405,8 @@ declare interface CreateBlockIgnoreRuleNewRequest {
   Rules: BanAndAllowRule[];
   /** RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则 7入侵防御规则 */
   RuleType: number;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 删除白名单冲突地址并继续添加/删除封禁列表冲突地址并继续添加；表示是否覆盖重复数据，1为覆盖，非1不覆盖，跳过重复数据 */
   CoverDuplicate?: number;
 }
@@ -2585,6 +2607,8 @@ declare interface DeleteBlockIgnoreRuleNewRequest {
   DeleteAll: number;
   /** blocklist 封禁列表 whitelist 白名单列表 */
   ShowType: string;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 规则列表 */
   Rules?: BanAndAllowRuleDel[];
   /** 封禁：1，放通：100，主要用于全部删除时区分列表类型 */
@@ -2966,6 +2990,56 @@ declare interface DescribeCcnVpcFwSwitchResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCfwAlertsRequest {
+  /** 单页返回告警数。可选，默认 10，最大 50。 */
+  Limit?: number;
+  /** 分页偏移。可选，默认 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeCfwAlertsResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwAnalysisDataRequest {
+  /** 分析场景。必填。full_traffic 表示全流量深度分析；east_west 表示东西向流量分析；alert_comprehensive 表示告警综合分析；asset_exposure 表示资产暴露面分析；access_troubleshoot 表示访问阻断排障分析。 */
+  Scenario: string;
+  /** 查询开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认查询最近 7 天。 */
+  StartTime?: string;
+  /** 查询结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认当前时间。 */
+  EndTime?: string;
+  /** 分析对象类型。可选，默认 user；user 表示租户全局，asset 表示单个资产，vpc 表示 VPC，domain 表示域名。 */
+  ObjectType?: string;
+  /** 分析对象标识。ObjectType 为 asset、vpc 或 domain 时按需传入，可填写 IP、实例 ID、VPC ID 或域名。 */
+  ObjectId?: string;
+  /** 排障目标。可选，主要用于 access_troubleshoot 场景，可填写 IP 或域名。 */
+  Target?: string;
+  /** 需要跳过的分析段名称列表。可选；不传时执行该场景全部分析段。 */
+  SkipSections?: string[];
+}
+
+declare interface DescribeCfwAnalysisDataResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwAssetsRequest {
+  /** 最大返回资产数。可选，默认 100；取值 1 至 1000。 */
+  Limit?: number;
+}
+
+declare interface DescribeCfwAssetsResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCfwEipsRequest {
   /** 1：cfw接入模式，目前仅支持接入模式实例 */
   Mode: number;
@@ -2990,6 +3064,134 @@ declare interface DescribeCfwInsStatusResponse {
   CfwInsStatus?: CfwInsStatus[] | null;
   /** 0 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwLogsRequest {
+  /** 日志类型。首次查询必填；使用 NextToken 续查时不能传。枚举值包括 cfw_netflow_border、cfw_netflow_vpc、cfw_netflow_nat、cfw_netflow_nta、cfw_netflow_dns、cfw_rule_threatinfo、cfw_rule_acl、cfw_rule_vpc_acl、cfw_rule_nat_acl、cfw_ndr_subject_risk、cfw_ndr_dataleak_entry、cfw_ndr_ai_audit、cfw_feature_collect、cfw_behavior_collect、operate_log_all。 */
+  LogType?: string;
+  /** CLS CQL 查询语句。默认 *；使用 NextToken 续查时不能传。 */
+  Query?: string;
+  /** 查询起始时间。支持 RFC3339、YYYY-MM-DD HH:MM:SS、YYYY-MM-DD 或 Unix 时间戳；传入后从该时间向后查询 TimeRange；使用 NextToken 续查时不能传。 */
+  StartTime?: string;
+  /** 查询时间范围。默认 1h；格式为正整数加单位 m/h/d，例如 5m、1h、24h、7d；使用 NextToken 续查时不能传。 */
+  TimeRange?: string;
+  /** 单页返回条数。默认 100，最大 1000；使用 NextToken 续查时不能传。 */
+  Limit?: number;
+  /** 上一页 Response.Data 返回的不透明续查 token。首次查询不传；续查时只传 NextToken。无效、篡改、过期或租户不匹配会被拒绝。 */
+  NextToken?: string;
+}
+
+declare interface DescribeCfwLogsResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwRiskOverviewRequest {
+}
+
+declare interface DescribeCfwRiskOverviewResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwRuleOptimizationRequest {
+  /** 长期零命中规则阈值天数。可选，必须为正整数，默认 180。 */
+  IdleDays?: number;
+  /** 单 IP 离散过多聚合建议的最小数量。可选，最小为 2，默认 10。 */
+  IpAggMin?: number;
+  /** 可迁移 IOC 建议中返回的样例 IOC 数量上限。可选，必须为正整数，默认 50。 */
+  IocSample?: number;
+}
+
+declare interface DescribeCfwRuleOptimizationResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。示例仅展示代表性字段；完整结果还包含 rule_type_name、rule_total、rule_active、rule_skipped_geo_or_cloud、dimension_skipped、thresholds 和 generated_at，finding 还包含 risk_level、affected_rule_uuids、affected_rule_seqs、recommendation_action、reason 和 evidence。结果过大时返回摘要，不返回 findings，并增加 truncated 和 truncated_reason。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwRulesRequest {
+  /** 规则域。必填。枚举：border 互联网边界；nat NAT 边界；vpc VPC 间；enterprise_sg 企业安全组；intrusion_prevention 入侵防御。RuleType=intrusion_prevention 时还必须传 ListType。 */
+  RuleType: string;
+  /** 入侵防御列表类型。仅 RuleType=intrusion_prevention 时使用并必填。blocklist 表示封禁列表，whitelist 表示白名单策略，isolate 表示隔离列表。 */
+  ListType?: string;
+  /** 访问方向过滤。可选。0 表示出站，1 表示入站；不传则不过滤。RuleType=intrusion_prevention 时不支持。 */
+  Direction?: number;
+  /** 规则动作过滤。可选。0 表示观察，1 表示阻断，2 表示放行；不传则不过滤。 */
+  RuleAction?: number;
+  /** 精确规则 ID 过滤。可选。用于按数值规则标识定位单条规则。 */
+  RuleId?: number;
+  /** 单页返回规则数。可选，默认 100，最大 1000。 */
+  Limit?: number;
+  /** 分页偏移。可选，默认 0。 */
+  Offset?: number;
+}
+
+declare interface DescribeCfwRulesResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwStatusMonitorRequest {
+  /** 操作类型。describe_scene 表示发现场景和二级下拉选项；fetch_scene 表示获取具体场景快照。必填。 */
+  Op: string;
+  /** 防火墙场景类型。支持 internet_edge（互联网边界防火墙）、nat_cluster（NAT边界防火墙-集群）、nat_ha（NAT边界防火墙-主备）、vpc_cluster（VPC边界防火墙-集群）、vpc_ha（VPC边界防火墙-主备）。必填。 */
+  FirewallType: string;
+  /** 二级下拉选项 ID。fetch_scene 按需传入；internet_edge 为地域，NAT 为实例 ID，VPC 带宽场景为防火墙组 ID；vpc_cluster 的 connections 汇总场景会忽略该参数。 */
+  SelectionId?: string;
+  /** 二级下拉显示名称。可替代 SelectionId 按名称匹配。 */
+  SelectionName?: string;
+  /** 引擎实例 ID。主要用于 vpc_ha 下一个防火墙组对应多个实例的场景。 */
+  SelectionInstanceId?: string;
+  /** 指标页签。fetch_scene 可传；不传时使用该场景默认值。支持 bandwidth、connections。 */
+  Metric?: string;
+  /** 指标下的视角。fetch_scene 可传；不传时使用该场景默认值。支持 ip、subnet、session、switch、vpc，实际可用组合以 describe_scene 返回为准。 */
+  Perspective?: string;
+  /** NAT 主备连接数 IP 视角范围。external 表示外部 IP，asset 表示资产 IP；仅 nat_ha + connections + ip 使用。 */
+  IpScope?: string;
+  /** 预设时间范围。默认 24h；fetch_scene 使用。支持 5m、15m、30m、1h、6h、24h、3d、7d、30d、today、yesterday、day_before_yesterday、this_week、last_week、this_month。 */
+  TimePreset?: string;
+  /** 自定义开始时间。格式 YYYY-MM-DD HH:MM:SS；必须与 EndTime 同时传，最大跨度 30 天。 */
+  StartTime?: string;
+  /** 自定义结束时间。格式 YYYY-MM-DD HH:MM:SS；必须与 StartTime 同时传，最大跨度 30 天。 */
+  EndTime?: string;
+  /** 页码，从 1 开始。默认 1；fetch_scene 列表视角使用。 */
+  Page?: number;
+  /** 每页条数。默认 10，最大 100；fetch_scene 列表视角使用。 */
+  Limit?: number;
+  /** 是否只获取概览数据。true 时 fetch_scene 只请求 overview，跳过 table/detail，适合只看场景快照汇总。 */
+  OverviewOnly?: boolean;
+  /** 原始偏移量覆盖。可选，传入后覆盖 Page 计算结果；必须大于等于 0 且不超过安全上限。 */
+  Offset?: number;
+  /** 排序字段。可选，只接受当前场景后端允许的安全字段。 */
+  SortBy?: string;
+  /** 排序方向。默认 desc；支持 asc、desc。 */
+  SortOrder?: string;
+  /** 过滤条件列表。可选，最多 5 个；是否支持以及字段名以具体 fetch_scene 场景为准。 */
+  Filters?: CfwStatusMonitorFilter[];
+}
+
+declare interface DescribeCfwStatusMonitorResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。describe_scene 返回 scene 与 selection.available_options；fetch_scene 返回选中场景的 data 快照。 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCfwSwitchesRequest {
+}
+
+declare interface DescribeCfwSwitchesResponse {
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4079,6 +4281,8 @@ declare interface ModifyAcRuleResponse {
 declare interface ModifyAclRuleRequest {
   /** 需要编辑的规则数组，基于Uuid唯一id修改该规则 */
   Rules: CreateRuleItem[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
 }
 
 declare interface ModifyAclRuleResponse {
@@ -4343,6 +4547,8 @@ declare interface ModifyEnterpriseSecurityGroupRuleRequest {
   RuleUuid: number;
   /** 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态 */
   ModifyType: number;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 编辑后的企业安全组规则数据；修改规则状态不用填该字段 */
   Data?: SecurityGroupRule;
   /** 0是关闭,1是开启 */
@@ -4385,6 +4591,8 @@ declare interface ModifyIpsModeSwitchResponse {
 declare interface ModifyNatAcRuleRequest {
   /** 需要编辑的规则数组,基于Uuid唯一id来修改该规则 */
   Rules: CreateNatRuleItem[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
 }
 
 declare interface ModifyNatAcRuleResponse {
@@ -4605,6 +4813,8 @@ declare interface ModifyTableStatusResponse {
 declare interface ModifyVpcAcRuleRequest {
   /** 需要编辑的规则数组 */
   Rules: VpcRuleItem[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
 }
 
 declare interface ModifyVpcAcRuleResponse {
@@ -4669,6 +4879,8 @@ declare interface RemoveAcRuleResponse {
 declare interface RemoveAclRuleRequest {
   /** 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则 */
   RuleUuid: number[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 规则方向：1，入站；0，出站 */
   Direction?: number;
 }
@@ -4685,6 +4897,8 @@ declare interface RemoveEnterpriseSecurityGroupRuleRequest {
   RuleUuid: number;
   /** 删除类型，0是单条删除，RuleUuid填写删除规则id，1为全部删除，RuleUuid填0即可 */
   RemoveType: number;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
 }
 
 declare interface RemoveEnterpriseSecurityGroupRuleResponse {
@@ -4699,6 +4913,8 @@ declare interface RemoveEnterpriseSecurityGroupRuleResponse {
 declare interface RemoveNatAcRuleRequest {
   /** 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则 */
   RuleUuid: number[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 规则方向：1，入站；0，出站 */
   Direction?: number;
 }
@@ -4729,6 +4945,8 @@ declare interface RemoveOfflineExportTaskResponse {
 declare interface RemoveVpcAcRuleRequest {
   /** 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则 */
   RuleUuids: number[];
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
   /** 仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则 */
   IpVersion?: number;
 }
@@ -4957,10 +5175,28 @@ declare interface Cfw {
   DescribeCcnVpcFwPolicyLimit(data?: DescribeCcnVpcFwPolicyLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnVpcFwPolicyLimitResponse>;
   /** 查询CCN VPC防火墙开关配置 {@link DescribeCcnVpcFwSwitchRequest} {@link DescribeCcnVpcFwSwitchResponse} */
   DescribeCcnVpcFwSwitch(data: DescribeCcnVpcFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCcnVpcFwSwitchResponse>;
+  /** 查询防火墙告警事件 {@link DescribeCfwAlertsRequest} {@link DescribeCfwAlertsResponse} */
+  DescribeCfwAlerts(data?: DescribeCfwAlertsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwAlertsResponse>;
+  /** 查询防火墙分析报告数据 {@link DescribeCfwAnalysisDataRequest} {@link DescribeCfwAnalysisDataResponse} */
+  DescribeCfwAnalysisData(data: DescribeCfwAnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwAnalysisDataResponse>;
+  /** 查询防火墙纳管资产 {@link DescribeCfwAssetsRequest} {@link DescribeCfwAssetsResponse} */
+  DescribeCfwAssets(data?: DescribeCfwAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwAssetsResponse>;
   /** 查询防火墙弹性公网IP {@link DescribeCfwEipsRequest} {@link DescribeCfwEipsResponse} */
   DescribeCfwEips(data: DescribeCfwEipsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwEipsResponse>;
   /** cfw实例运行状态查询 {@link DescribeCfwInsStatusRequest} {@link DescribeCfwInsStatusResponse} */
   DescribeCfwInsStatus(data?: DescribeCfwInsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwInsStatusResponse>;
+  /** 查询防火墙日志 {@link DescribeCfwLogsRequest} {@link DescribeCfwLogsResponse} */
+  DescribeCfwLogs(data?: DescribeCfwLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwLogsResponse>;
+  /** 查询防火墙风险概览 {@link DescribeCfwRiskOverviewRequest} {@link DescribeCfwRiskOverviewResponse} */
+  DescribeCfwRiskOverview(data?: DescribeCfwRiskOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRiskOverviewResponse>;
+  /** 查询防火墙规则优化建议 {@link DescribeCfwRuleOptimizationRequest} {@link DescribeCfwRuleOptimizationResponse} */
+  DescribeCfwRuleOptimization(data?: DescribeCfwRuleOptimizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRuleOptimizationResponse>;
+  /** 查询防火墙规则 {@link DescribeCfwRulesRequest} {@link DescribeCfwRulesResponse} */
+  DescribeCfwRules(data: DescribeCfwRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRulesResponse>;
+  /** 查询防火墙状态监控场景 {@link DescribeCfwStatusMonitorRequest} {@link DescribeCfwStatusMonitorResponse} */
+  DescribeCfwStatusMonitor(data: DescribeCfwStatusMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwStatusMonitorResponse>;
+  /** 查询防火墙防护开关状态 {@link DescribeCfwSwitchesRequest} {@link DescribeCfwSwitchesResponse} */
+  DescribeCfwSwitches(data?: DescribeCfwSwitchesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwSwitchesResponse>;
   /** 查询NAT CCN集群模式防火墙开关列表 {@link DescribeClusterNatCcnFwSwitchListRequest} {@link DescribeClusterNatCcnFwSwitchListResponse} */
   DescribeClusterNatCcnFwSwitchList(data?: DescribeClusterNatCcnFwSwitchListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNatCcnFwSwitchListResponse>;
   /** 查询集群模式Vpc间防火墙开关 {@link DescribeClusterVpcFwSwitchsRequest} {@link DescribeClusterVpcFwSwitchsResponse} */

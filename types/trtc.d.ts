@@ -140,7 +140,7 @@ declare interface AudioEncodeParams {
 
 /** TTS音频输出的格式 */
 declare interface AudioFormat {
-  /** 生成的音频格式TextToSpeechSSE 流式接口支持 pcm,mp3, 默认: pcmTextToSpeech 非流式接口支持 pcm,wav,mp3, 默认: pcmAsyncTextToSpeech支持pcm,mp3, 默认: mp3 */
+  /** 生成的音频格式，注意opus格式是ogg/opus编码TextToSpeechSSE 流式接口支持 pcm,mp3,opus 默认: pcmTextToSpeech 非流式接口支持 pcm,wav,mp3,opus 默认: pcmAsyncTextToSpeech支持pcm,mp3,opus 默认: mp3 */
   Format?: string;
   /** 生成的音频采样率，默认24000可选1600024000 */
   SampleRate?: number;

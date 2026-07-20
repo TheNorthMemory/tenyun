@@ -266,6 +266,26 @@ declare interface ConstraintRange {
   Max: string;
 }
 
+/** 数据库引擎信息 */
+declare interface DBEngineInfo {
+  /** 引擎类型 */
+  Type?: string | null;
+  /** 引擎版本 */
+  Version?: string | null;
+  /** 引擎名称 */
+  Name?: string | null;
+  /** 引擎描述 */
+  Description?: string;
+  /** 是否最新版本 */
+  New?: boolean | null;
+  /** 支持的兼容的模式，以,分隔 */
+  SQLMode?: string[];
+  /** 是否支持参数模板 */
+  IsSupportParamTemplate?: boolean;
+  /** 是否支持Serverless模式 */
+  IsSupportServerless?: boolean;
+}
+
 /** 云数据库参数信息。 */
 declare interface DBParamValue {
   /** 参数名称 */
@@ -1074,6 +1094,18 @@ declare interface DeleteUsersRequest {
 declare interface DeleteUsersResponse {
   /** 任务id */
   FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBEnginesRequest {
+}
+
+declare interface DescribeDBEnginesResponse {
+  /** items总数 */
+  TotalCount?: number;
+  /** DB引擎信息 */
+  Items?: DBEngineInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1891,6 +1923,8 @@ declare interface Tdmysql {
   DeleteDBSBackupSets(data: DeleteDBSBackupSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBSBackupSetsResponse>;
   /** 批量删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
+  /** 获取DB引擎版本列表 {@link DescribeDBEnginesRequest} {@link DescribeDBEnginesResponse} */
+  DescribeDBEngines(data?: DescribeDBEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBEnginesResponse>;
   /** 查询实例详情 {@link DescribeDBInstanceDetailRequest} {@link DescribeDBInstanceDetailResponse} */
   DescribeDBInstanceDetail(data: DescribeDBInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceDetailResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */

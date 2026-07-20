@@ -146,6 +146,18 @@ declare interface Transition {
   Type: number;
 }
 
+/** 回收站配置 */
+declare interface TrashConfig {
+  /** 文件系统ID */
+  FileSystemId?: string;
+  /** 数据保留时间（天） */
+  ReservedDays?: number;
+  /** 回收站配置状态（1：打开；2：关闭） */
+  Status?: number;
+  /** 回收站路径 */
+  Path?: string;
+}
+
 declare interface AssociateAccessGroupsRequest {
   /** 挂载点ID */
   MountPointId: string;
@@ -260,6 +272,22 @@ declare interface CreateRestoreTasksResponse {
   RequestId?: string;
 }
 
+declare interface CreateTrashConfigRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 数据保留时间（天） */
+  ReservedDays: number;
+  /** 规则状态（1：打开；2：关闭） */
+  Status: number;
+  /** 字段为空表示开启普通用户回收站 字段不为空表示开启HDFS原生回收站，且值必须为/user/.Trash */
+  Path?: string;
+}
+
+declare interface CreateTrashConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAccessGroupRequest {
   /** 权限组ID */
   AccessGroupId: string;
@@ -306,6 +334,16 @@ declare interface DeleteMountPointRequest {
 }
 
 declare interface DeleteMountPointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTrashConfigRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DeleteTrashConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -464,6 +502,18 @@ declare interface DescribeRestoreTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTrashConfigRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DescribeTrashConfigResponse {
+  /** 回收站配置 */
+  TrashConfig?: TrashConfig;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisassociateAccessGroupsRequest {
   /** 挂载点ID */
   MountPointId: string;
@@ -556,6 +606,20 @@ declare interface ModifyResourceTagsRequest {
 }
 
 declare interface ModifyResourceTagsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTrashConfigRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 数据保留时间（天） */
+  ReservedDays?: number;
+  /** 规则状态（1：打开；2：关闭） */
+  Status?: number;
+}
+
+declare interface ModifyTrashConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1051,6 +1115,8 @@ declare interface Chdfs {
   CreateMountPoint(data: CreateMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMountPointResponse>;
   /** 批量创建回热任务 {@link CreateRestoreTasksRequest} {@link CreateRestoreTasksResponse} */
   CreateRestoreTasks(data: CreateRestoreTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRestoreTasksResponse>;
+  /** 创建回收站配置 {@link CreateTrashConfigRequest} {@link CreateTrashConfigResponse} */
+  CreateTrashConfig(data: CreateTrashConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrashConfigResponse>;
   /** 删除权限组 {@link DeleteAccessGroupRequest} {@link DeleteAccessGroupResponse} */
   DeleteAccessGroup(data: DeleteAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccessGroupResponse>;
   /** 批量删除权限规则 {@link DeleteAccessRulesRequest} {@link DeleteAccessRulesResponse} */
@@ -1061,6 +1127,8 @@ declare interface Chdfs {
   DeleteLifeCycleRules(data: DeleteLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifeCycleRulesResponse>;
   /** 删除挂载点 {@link DeleteMountPointRequest} {@link DeleteMountPointResponse} */
   DeleteMountPoint(data: DeleteMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountPointResponse>;
+  /** 删除回收站配置 {@link DeleteTrashConfigRequest} {@link DeleteTrashConfigResponse} */
+  DeleteTrashConfig(data: DeleteTrashConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrashConfigResponse>;
   /** 查看权限组详细信息 {@link DescribeAccessGroupRequest} {@link DescribeAccessGroupResponse} */
   DescribeAccessGroup(data: DescribeAccessGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessGroupResponse>;
   /** 查看权限组列表 {@link DescribeAccessGroupsRequest} {@link DescribeAccessGroupsResponse} */
@@ -1081,6 +1149,8 @@ declare interface Chdfs {
   DescribeResourceTags(data: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
   /** 查看回热任务列表 {@link DescribeRestoreTasksRequest} {@link DescribeRestoreTasksResponse} */
   DescribeRestoreTasks(data: DescribeRestoreTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRestoreTasksResponse>;
+  /** 查看回收站配置 {@link DescribeTrashConfigRequest} {@link DescribeTrashConfigResponse} */
+  DescribeTrashConfig(data: DescribeTrashConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrashConfigResponse>;
   /** 解绑权限组列表 {@link DisassociateAccessGroupsRequest} {@link DisassociateAccessGroupsResponse} */
   DisassociateAccessGroups(data: DisassociateAccessGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateAccessGroupsResponse>;
   /** 修改权限组属性 {@link ModifyAccessGroupRequest} {@link ModifyAccessGroupResponse} */
@@ -1095,6 +1165,8 @@ declare interface Chdfs {
   ModifyMountPoint(data: ModifyMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMountPointResponse>;
   /** 修改资源标签列表 {@link ModifyResourceTagsRequest} {@link ModifyResourceTagsResponse} */
   ModifyResourceTags(data: ModifyResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceTagsResponse>;
+  /** 修改回收站配置 {@link ModifyTrashConfigRequest} {@link ModifyTrashConfigResponse} */
+  ModifyTrashConfig(data: ModifyTrashConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTrashConfigResponse>;
   /** 创建权限组 {@link V20190718.CreateAccessGroupRequest} {@link V20190718.CreateAccessGroupResponse} */
   CreateAccessGroup(data: V20190718.CreateAccessGroupRequest, config: AxiosRequestConfig & V20190718.VersionHeader): AxiosPromise<V20190718.CreateAccessGroupResponse>;
   /** 批量创建权限规则 {@link V20190718.CreateAccessRulesRequest} {@link V20190718.CreateAccessRulesResponse} */

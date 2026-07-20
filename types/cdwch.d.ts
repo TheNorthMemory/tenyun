@@ -198,6 +198,18 @@ declare interface DatabasePrivilegeInfo {
   TablePrivilegeList?: TablePrivilegeInfo[];
 }
 
+/** 群磁盘加密信息。用于 DescribeInstances / DescribeInstance 返回实例的当前加密配置，供控制台、SDK、运维侧识别该集群是否启用磁盘加密、使用的是哪一把 KMS 根密钥 */
+declare interface DiskEncryptInfo {
+  /** 加密类型枚举值：CUSTOMER_KMS： 客户自定义的KMS密钥信息TENCENT_KEY： 使用腾讯云自动创建的KMS密钥信息 */
+  EncryptType?: string;
+  /** KMS 根密钥ID */
+  KmsKeyId?: string;
+  /** KMS密钥地域 */
+  KmsRegion?: string;
+  /** KMS 根密钥 key 名 */
+  KmsKeyName?: string;
+}
+
 /** 磁盘规格描述 */
 declare interface DiskSpec {
   /** 磁盘类型，例如“CLOUD_SSD", "LOCAL_SSD"等 */
@@ -428,6 +440,8 @@ declare interface InstanceInfo {
   EnableConfigKeyValue?: string;
   /** 实例是否开启HTTPS枚举值：true： 已开启HTTPSfalse： 未开启HTTPS */
   HttpsEnabled?: boolean;
+  /** 集群磁盘加密配置 */
+  DiskEncryptInfo?: DiskEncryptInfo;
 }
 
 /** 实例节点描述信息 */

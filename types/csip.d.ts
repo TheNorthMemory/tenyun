@@ -26,7 +26,7 @@ declare interface AIAgentAsset {
   ExposureStatus?: string;
   /** metadata 有风险时对应路径 */
   MetadataRiskURL?: string;
-  /** 无 */
+  /** 凭据 Skill 安装状态 */
   SkillState?: SkillState;
   /** 流量沙箱插件状态 */
   TrafficPluginState?: TrafficPluginState;
@@ -1890,7 +1890,7 @@ declare interface CosBucketBillingInfo {
 declare interface CosBucketId {
   /** appid */
   AppId?: string;
-  /**  */
+  /** 是否自动监测 */
   IsAutoMonitor?: number;
   /** bucket id集合 */
   BucketIdSet?: string[];
@@ -3126,7 +3126,7 @@ declare interface DspmIdentifyCategoryItem {
   Type?: number;
   /** 更新时间 */
   UpdateTime?: string;
-  /** 无 */
+  /** 关联的识别模板信息 */
   ComplianceRelations?: DspmIdentifyRefComplianceInfo[];
 }
 
@@ -3168,9 +3168,9 @@ declare interface DspmIdentifyComplianceCategoryRelation {
   CategoryType?: number;
   /** 分类层级单位：层 */
   CategoryGrade?: number;
-  /** 无 */
+  /** 关联的数据项信息 */
   RuleRelations?: DspmIdentifyComplianceRuleRelation[];
-  /** 无 */
+  /** 子节点信息 */
   Children?: DspmIdentifyComplianceCategoryRelation[];
 }
 
@@ -3288,7 +3288,7 @@ declare interface DspmIdentifyLevelGroupItem {
   LevelItems?: DspmIdentifyLevelItem[];
   /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
   UpdateTime?: string;
-  /** 无 */
+  /** 关联的识别模板信息 */
   ComplianceRelations?: DspmIdentifyRefComplianceInfo[];
 }
 
@@ -3344,7 +3344,7 @@ declare interface DspmIdentifyRuleItem {
   StructuredStatus?: boolean;
   /** 非结构化规则配置状态 */
   UnStructuredStatus?: boolean;
-  /** 无 */
+  /** 关联的识别模板信息 */
   ComplianceRelations?: DspmIdentifyRefComplianceInfo[];
 }
 

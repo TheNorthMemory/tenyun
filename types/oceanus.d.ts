@@ -1132,6 +1132,18 @@ declare interface SetatsDisk {
   DiskSize?: number | null;
 }
 
+/** 多可用区VPC */
+declare interface SlaveVpcDescriptions {
+  /** 私有网络ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
+  /** 用户AppId */
+  AppId?: number;
+  /** 用户UIN */
+  OwnerUin?: string;
+}
+
 /** 多可用区支持备区域 */
 declare interface SlaveZone {
   /** vpc */
@@ -1318,6 +1330,18 @@ declare interface TreeResourceItem {
   FolderId: string | null;
   /** 分状态统计关联作业数 */
   RefJobStatusCountSet?: RefJobStatusCountItem[] | null;
+}
+
+/** 客户VPC描述信息，包含VpcId和SubnetId参数 */
+declare interface VPCDescription {
+  /** 私有网络ID */
+  VpcId: string;
+  /** 子网ID */
+  SubnetId: string;
+  /** 用户AppId */
+  AppId?: number | null;
+  /** 用户UIN */
+  OwnerUin?: string | null;
 }
 
 /** 变量信息列表 */
@@ -1646,6 +1670,46 @@ declare interface CreateJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateOceanusClusterRequest {
+  /** 集群名称入参限制：支持1-50个英文、汉字、数字、连接线-或下划线_ */
+  ClusterName: string;
+  /** 地域Id，可通过地域管理系统 DescribeRegions查询Product参数设置 oceanus */
+  RegionId: number;
+  /** 可用区Id，可通过地域管理系统 DescribeZones查询Product参数设置 oceanus */
+  ZoneId: number;
+  /** FlinkUI访问密码用户名与密码将用于登录查看作业的 Flink UI 界面，集群用户名:admin */
+  LoginPassword: string;
+  /** 流计算通过 VPC 和弹性网卡来访问同地域中的其他云产品资源，并需要占用一定的子网 IP 数量，请确保所选子网的可用 IP 数量充足 如现有网络不符合您的要求，请前往 VPC 控制台新建私有网络 或 新建子网 */
+  VpcDescriptions: VPCDescription[];
+  /** 流计算使用对象存储 COS 来保存作业的 checkpoint、jar 包、或投递日志等，如本地域无可用存储桶，请前往对象存储控制台新建 为了保证您的正常使用，对应COS的生命周期配置请参考文档 */
+  DefaultCOSBucket: string;
+  /** 集群CU数， 12 CU 是流计算的最小计算资源和计费单位，1CU 包含1个 CPU 和 4GB 内存。 当CU数大于等于 48 时，减免管理节点费用。 */
+  CU?: number;
+  /** 集群描述入参限制：支持1-50个英文、汉字、数字、连接线-或下划线_ */
+  Remark?: string;
+  /** 购买时长，以月为单位取值范围：[1, 48] */
+  Period?: number;
+  /** 集群计费类型枚举值：PREPAID： 包年包月POSTPAID_BY_SECOND： 按量计费默认值：POSTPAID_BY_SECOND */
+  InstanceChargeType?: string;
+  /** 集群类型枚举值：MULTI_AZ_CLUSTER： 多可用区集群 */
+  ClusterType?: string;
+  /** 自动续费标识枚举值：NOTIFY_AND_MANUAL_RENEW： 通知并手动续费NOTIFY_AND_AUTO_RENEW： 通知并自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW： 不通知并不自动续费默认值：NOTIFY_AND_MANUAL_RENEWInstanceChargeType设置PREPAID时，对应包年包月集群，需要设置自动续费标识，按量计费集群不需要设置 */
+  RenewFlag?: string;
+  /** Flink UI访问类型设置枚举值：NetworkAccess_INTERNAL： 内网访问NetworkAccess_EXTERNAL： 公网访问默认值：NetworkAccess_EXTERNAL */
+  FlinkWebUINetworkAccessType?: string;
+  /** 多可用区VPC */
+  SlaveVpcDescriptions?: SlaveVpcDescriptions[];
+  /** 核心内存比值，只支持 [0，2，4，8] */
+  CUMemory?: number;
+}
+
+declare interface CreateOceanusClusterResponse {
+  /** 创建的集群ID参数格式：cluster-xxx */
+  ClusterId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateResourceConfigRequest {
   /** 资源ID */
   ResourceId: string;
@@ -1776,6 +1840,18 @@ declare interface DeleteJobsRequest {
 }
 
 declare interface DeleteJobsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteOceanusClusterRequest {
+  /** 集群ID参数格式：cluster-xxxx */
+  ClusterId: string;
+}
+
+declare interface DeleteOceanusClusterResponse {
+  /** 参数值success代表操作执行成功 */
+  TaskExecResult?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2392,6 +2468,20 @@ declare interface ParseConnectorResponse {
   RequestId?: string;
 }
 
+declare interface RenewOceanusClusterRequest {
+  /** 集群ID参数格式：cluster-xxx */
+  ClusterId: string;
+  /** 续费的时长，单位为月，只支持包年包月集群取值范围：[1, 36] */
+  Period: number;
+}
+
+declare interface RenewOceanusClusterResponse {
+  /** 参数值success代表操作执行成功 */
+  TaskExecResult?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunJobsRequest {
   /** 批量启动作业的描述信息 */
   RunJobDescriptions: RunJobDescription[];
@@ -2420,6 +2510,22 @@ declare interface RunSqlGatewayStatementResponse {
   SessionId?: string;
   /** 返回执行id，可以根据该执行id和会话id获取执行结果 */
   OperationHandleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScaleOceanusClusterRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 集群的目标CU，需大于12CU，并且集群CU需要满足 12 + 7*n (n>=0) */
+  NewCU: number;
+  /** 扩容集群或者缩容集群枚举值：ScaleDown： 缩容集群ScaleUp： 扩容集群默认值：ScaleUp */
+  ScaleMode?: string;
+}
+
+declare interface ScaleOceanusClusterResponse {
+  /** 参数值success代表操作执行成功 */
+  TaskExecResult?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2475,6 +2581,8 @@ declare interface Oceanus {
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
   /** 创建作业配置 {@link CreateJobConfigRequest} {@link CreateJobConfigResponse} */
   CreateJobConfig(data: CreateJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobConfigResponse>;
+  /** 创建Oceanus集群 {@link CreateOceanusClusterRequest} {@link CreateOceanusClusterResponse} */
+  CreateOceanusCluster(data: CreateOceanusClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOceanusClusterResponse>;
   /** 创建资源接口 {@link CreateResourceRequest} {@link CreateResourceResponse} */
   CreateResource(data: CreateResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceResponse>;
   /** 创建资源配置接口 {@link CreateResourceConfigRequest} {@link CreateResourceConfigResponse} */
@@ -2489,6 +2597,8 @@ declare interface Oceanus {
   DeleteJobConfigs(data: DeleteJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobConfigsResponse>;
   /** 删除作业 {@link DeleteJobsRequest} {@link DeleteJobsResponse} */
   DeleteJobs(data: DeleteJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobsResponse>;
+  /** 销毁Oceanus集群 {@link DeleteOceanusClusterRequest} {@link DeleteOceanusClusterResponse} */
+  DeleteOceanusCluster(data: DeleteOceanusClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOceanusClusterResponse>;
   /** 删除资源版本 {@link DeleteResourceConfigsRequest} {@link DeleteResourceConfigsResponse} */
   DeleteResourceConfigs(data: DeleteResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceConfigsResponse>;
   /** 删除资源接口 {@link DeleteResourcesRequest} {@link DeleteResourcesResponse} */
@@ -2545,10 +2655,14 @@ declare interface Oceanus {
   ModifyWorkSpace(data: ModifyWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkSpaceResponse>;
   /** 解析用户自定义Connector {@link ParseConnectorRequest} {@link ParseConnectorResponse} */
   ParseConnector(data: ParseConnectorRequest, config?: AxiosRequestConfig): AxiosPromise<ParseConnectorResponse>;
+  /** 续费Oceanus集群 {@link RenewOceanusClusterRequest} {@link RenewOceanusClusterResponse} */
+  RenewOceanusCluster(data: RenewOceanusClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RenewOceanusClusterResponse>;
   /** 运行作业 {@link RunJobsRequest} {@link RunJobsResponse} */
   RunJobs(data: RunJobsRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobsResponse>;
   /** 执行Statement {@link RunSqlGatewayStatementRequest} {@link RunSqlGatewayStatementResponse} */
   RunSqlGatewayStatement(data: RunSqlGatewayStatementRequest, config?: AxiosRequestConfig): AxiosPromise<RunSqlGatewayStatementResponse>;
+  /** 扩缩容Oceanus集群 {@link ScaleOceanusClusterRequest} {@link ScaleOceanusClusterResponse} */
+  ScaleOceanusCluster(data: ScaleOceanusClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ScaleOceanusClusterResponse>;
   /** 停止作业 {@link StopJobsRequest} {@link StopJobsResponse} */
   StopJobs(data: StopJobsRequest, config?: AxiosRequestConfig): AxiosPromise<StopJobsResponse>;
   /** 触发Savepoint {@link TriggerJobSavepointRequest} {@link TriggerJobSavepointResponse} */

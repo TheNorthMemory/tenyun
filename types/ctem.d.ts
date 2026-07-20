@@ -54,6 +54,8 @@ declare interface Customer {
   SingleIPTaskLimit?: number;
   /** 端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000 */
   PortScanQps?: number;
+  /** 扫描优先级配置 */
+  ScanPriority?: ScanPriorityDisplay | null;
 }
 
 /** API安全详情 */
@@ -464,10 +466,16 @@ declare interface DisplayLeakageCode {
   Suggestion?: string;
   /** 关键词 */
   Keyword?: string;
-  /** 处置状态：0-待处理 1-处理中 2-已处理 */
+  /** 处置状态枚举值：0： 待处理1： 处理中2： 已处理3： 误报 */
   HandlingStatus?: number;
   /** 备注 */
   Remark?: string;
+  /** 仓库命名空间 */
+  RepoNamespace?: string;
+  /** 仓库名称 */
+  RepoName?: string;
+  /** 作者名称 */
+  AuthorName?: string;
 }
 
 /** 数据泄露详情 */
@@ -908,6 +916,22 @@ declare interface JobRecordProgress {
   Todo?: number;
 }
 
+/** 优先级出参 */
+declare interface ScanPriorityDisplay {
+  /** 只对新增资产进行漏洞扫描 */
+  OnlyScanNewAsset?: boolean | null;
+  /** 启用的优先级规则(有序):new_asset,high_risk_port,admin_panel,high_risk_fingerprint */
+  PriorityRules?: string[] | null;
+}
+
+/** 优先级入参 */
+declare interface ScanPriorityReq {
+  /** 只对新增资产进行漏洞扫描 */
+  OnlyScanNewAsset?: boolean;
+  /** 启用的优先级规则(有序):new_asset,high_risk_port,admin_panel,high_risk_fingerprint */
+  PriorityRules?: string[];
+}
+
 declare interface CreateAppRequest {
   /** 企业ID */
   CustomerId: number;
@@ -1009,6 +1033,8 @@ declare interface CreateCustomerRequest {
   HighRiskAck?: boolean;
   /** 知情同意勾选清单，用于审计回放 */
   ScanRateAckChecklist?: string[];
+  /** 扫描优先级配置 */
+  ScanPriority?: ScanPriorityReq;
 }
 
 declare interface CreateCustomerResponse {
@@ -1125,6 +1151,8 @@ declare interface CreateJobRecordRequest {
   HighRiskAck?: boolean;
   /** 知情同意勾选清单，用于审计回放 */
   ScanRateAckChecklist?: string[];
+  /** 扫描优先级配置 */
+  ScanPriority?: ScanPriorityReq;
 }
 
 declare interface CreateJobRecordResponse {
@@ -2631,6 +2659,8 @@ declare interface ModifyCustomerRequest {
   HighRiskAck?: boolean;
   /** 知情同意勾选清单，用于审计回放 */
   ScanRateAckChecklist?: string[];
+  /** 扫描优先级配置 */
+  ScanPriority?: ScanPriorityReq;
 }
 
 declare interface ModifyCustomerResponse {

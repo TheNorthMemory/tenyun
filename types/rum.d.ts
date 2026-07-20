@@ -2919,7 +2919,7 @@ declare interface DescribeRumGroupLogRequest {
   StartTime: string;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 页数，第几页 */
+  /** 页数，第几页（注意：该字段已废弃！） */
   Page: number;
   /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
   Query: string;
@@ -2953,7 +2953,7 @@ declare interface DescribeRumGroupLogV2Request {
   ID: number;
   /** 聚合字段 */
   Label: string;
-  /** 页数，第几页 */
+  /** 页数，第几页（注意：该字段已废弃！） */
   Last?: number;
 }
 

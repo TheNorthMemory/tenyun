@@ -1539,6 +1539,8 @@ declare interface CreateAutoCalloutTaskRequest {
   AvailableWorkTimeConfig?: AvailableTimeConfig[];
   /** 触发策略 */
   TriggerStrategy?: TriggerStrategyItem[];
+  /** 智能体并发限制 */
+  ConcurrencyLimit?: number;
 }
 
 declare interface CreateAutoCalloutTaskResponse {

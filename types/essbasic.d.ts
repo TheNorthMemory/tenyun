@@ -996,9 +996,9 @@ declare interface IntentionQuestionResult {
 
 /** 跳转事件的结构体，其中包括认证期间收录，授权书审核，企业认证的回跳事件。 */
 declare interface JumpEvent {
-  /** 跳转事件枚举，* 1 - 企业收录。* 2 - 超管授权书审核。* 3 - 认证完成。 */
+  /** 跳转事件枚举枚举值：1： 企业收录2： 超管授权书审核3： 企业认证完成4： 员工加入完成 */
   JumpEventType?: number;
-  /** 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。Endpoint如果是APP 类型，请传递"true"如果 Endpoint 是 H5 类型，请参考文档[跳转电子签H5](https://qian.tencent.com/developers/partner/openqianh5)p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  /** 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。Endpoint如果是APP 类型，请传递"true"如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpUrl?: string;
 }
 
@@ -1082,6 +1082,8 @@ declare interface OrganizationAuthorizationOptions {
   BankAccountNumberSame?: boolean;
   /** 对方打开链接认证时，公司地址是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在公司地址（ProxyAddress）不为空时有效 */
   AddressSame?: boolean;
+  /** 对方打开链接认证时，公司营业执照是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在公司营业执照（BusinessLicense）不为空时有效 */
+  BizLicenseSame?: boolean;
 }
 
 /** 企业认证信息参数， 需要保证这些参数跟营业执照中的信息一致。 */
@@ -3773,6 +3775,8 @@ declare interface ModifyOrganizationBusinessInfoRequest {
   OrganizationType?: string;
   /** 变更后的最新工商登记法人姓名。仅当法人发生变更时传入，未变更则不传（系统自动沿用当前法人姓名）。 */
   LegalName?: string;
+  /** 新法人的手机号。仅当法人发生变更时传入，用于向新法人发送短信通知。需为合法的手机号或固定电话格式。 */
+  NewLegalMobile?: string;
 }
 
 declare interface ModifyOrganizationBusinessInfoResponse {
@@ -3782,9 +3786,9 @@ declare interface ModifyOrganizationBusinessInfoResponse {
   ErrorMessage?: string;
   /** 未完结合同总数。仅当企业名称变更且存在未完结合同时有值。 */
   UnfinishedCount?: number;
-  /** SaaS 企业下未完结合同的 flowId 列表。 */
+  /** SaaS 企业下未完结合同的 flowId 列表。注:SaaS企业下的合同ID可能无法查询，可通知子客企业去处理相应的合同 */
   FlowIds?: string[];
-  /** 渠道子客企业下未完结合同的 flowId 列表。 */
+  /** 渠道子客企业下未完结合同的 flowId 列表。注：子客企业在其他渠道下的合同ID可能无法查询，可通知子客企业去处理其他渠道下相应的合同 */
   ChannelFlowIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5681,7 +5685,7 @@ declare interface Essbasic {
   ModifyExtendedService(data: ModifyExtendedServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExtendedServiceResponse>;
   /** 修改签署流程截止时间 {@link ModifyFlowDeadlineRequest} {@link ModifyFlowDeadlineResponse} */
   ModifyFlowDeadline(data: ModifyFlowDeadlineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFlowDeadlineResponse>;
-  /** 变更企业信息 {@link ModifyOrganizationBusinessInfoRequest} {@link ModifyOrganizationBusinessInfoResponse} */
+  /** 变更子客企业信息 {@link ModifyOrganizationBusinessInfoRequest} {@link ModifyOrganizationBusinessInfoResponse} */
   ModifyOrganizationBusinessInfo(data: ModifyOrganizationBusinessInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationBusinessInfoResponse>;
   /** 更新企业自动签授权链接 {@link ModifyPartnerAutoSignAuthUrlRequest} {@link ModifyPartnerAutoSignAuthUrlResponse} */
   ModifyPartnerAutoSignAuthUrl(data: ModifyPartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPartnerAutoSignAuthUrlResponse>;

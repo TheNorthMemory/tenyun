@@ -162,6 +162,30 @@ declare interface DocumentInfo {
   MinScaleResolution?: string;
 }
 
+/** 编辑版本信息 */
+declare interface EditVersions {
+  /** 版本号取值范围：[0, 100]默认值：0 */
+  Version?: number;
+  /** 版本状态枚举值：READY： 已完成FAILED： 失败PROCESSING： 进行中 */
+  Status?: string;
+  /** 是否是主版本枚举值：true： 是false： 否 */
+  IsMain?: boolean;
+  /** 是否源头版本枚举值：true： 是false： 否 */
+  IsSource?: boolean;
+  /** 版本时长取值范围：[0, 1000000]单位：秒 */
+  KeepDurationSec?: number;
+  /** 创建时间取值范围：[0, 10000000] */
+  CreatedAtMs?: number;
+  /** 创建用户id */
+  CreatorUserId?: string;
+  /** 失败原因默认值：空仅失败才会有原因 */
+  FailReason?: string;
+  /** 更新时间取值范围：[0, 100000] */
+  UpdatedAtMs?: number;
+  /** 版本名字 */
+  VersionName?: string;
+}
+
 /** 房间事件对应的信息。 */
 declare interface EventDataInfo {
   /** 事件发生的房间号。 */
@@ -1223,6 +1247,26 @@ declare interface DescribeDocumentsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEditVersionsRequest {
+  /** 应用ID */
+  SdkAppId: number;
+  /** 课堂ID */
+  RoomId: number;
+}
+
+declare interface DescribeEditVersionsResponse {
+  /** 课堂ID */
+  ClassId?: number;
+  /** 当前课堂最新的版本号 */
+  LatestVersionNo?: number;
+  /** 当前课堂设置的主版本号 */
+  MainVersion?: number;
+  /** 当前课堂所有版本信息 */
+  Versions?: EditVersions[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGroupListRequest {
   /** 低代码平台应用ID */
   SdkAppId: number;
@@ -1737,6 +1781,30 @@ declare interface ForbidSendMsgResponse {
   RequestId?: string;
 }
 
+declare interface GetEditVersionTokenRequest {
+  /** 实时互动-教育版的SdkAppId。 */
+  SdkAppId: number;
+  /** 课堂ID */
+  RoomId: number;
+  /** 用户ID */
+  UserId: string;
+  /** token过期时间，0代表无过期时间，单位毫秒。 */
+  ExpireSeconds?: number;
+}
+
+declare interface GetEditVersionTokenResponse {
+  /** 信令回放剪辑页面token */
+  Token?: string;
+  /** 课堂ID */
+  RoomId?: number;
+  /** 用户ID */
+  UserId?: string;
+  /** 版本号，预留默认值：0 */
+  VersionNo?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetPlaybackTokenRequest {
   /** 低代码平台的SdkAppId。 */
   SdkAppId: number;
@@ -2129,6 +2197,28 @@ declare interface SetAppCustomContentResponse {
   RequestId?: string;
 }
 
+declare interface SetMainEditVersionRequest {
+  /** 应用ID */
+  SdkAppId: number;
+  /** 课堂ID */
+  RoomId: number;
+  /** 版本号，可通过DescribeEditVersion接口获取当前课堂全部版本，来查看到版本号。 */
+  VersionNo: number;
+  /** 操作者ID */
+  Operator?: string;
+}
+
+declare interface SetMainEditVersionResponse {
+  /** 课堂ID */
+  ClassId?: number;
+  /** 上一个主版本的版本号 */
+  PreviousMainVersion?: number;
+  /** 当前生效中的主版本号 */
+  MainVersion?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetMarqueeRequest {
   /** 学校ID */
   SdkAppId: number;
@@ -2332,6 +2422,8 @@ declare interface Lcic {
   DescribeDocuments(data: DescribeDocumentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsResponse>;
   /** 获取指定房间下文档 {@link DescribeDocumentsByRoomRequest} {@link DescribeDocumentsByRoomResponse} */
   DescribeDocumentsByRoom(data: DescribeDocumentsByRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocumentsByRoomResponse>;
+  /** 获取课堂的所有编辑版本（含源版本） {@link DescribeEditVersionsRequest} {@link DescribeEditVersionsResponse} */
+  DescribeEditVersions(data: DescribeEditVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEditVersionsResponse>;
   /** 获取群组详情 {@link DescribeGroupRequest} {@link DescribeGroupResponse} */
   DescribeGroup(data: DescribeGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGroupResponse>;
   /** 获取群组列表 {@link DescribeGroupListRequest} {@link DescribeGroupListResponse} */
@@ -2378,6 +2470,8 @@ declare interface Lcic {
   EndRoom(data: EndRoomRequest, config?: AxiosRequestConfig): AxiosPromise<EndRoomResponse>;
   /** 禁言和取消禁言 {@link ForbidSendMsgRequest} {@link ForbidSendMsgResponse} */
   ForbidSendMsg(data: ForbidSendMsgRequest, config?: AxiosRequestConfig): AxiosPromise<ForbidSendMsgResponse>;
+  /** 获取信令回放剪辑token {@link GetEditVersionTokenRequest} {@link GetEditVersionTokenResponse} */
+  GetEditVersionToken(data: GetEditVersionTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetEditVersionTokenResponse>;
   /** 获取单节课的回放token {@link GetPlaybackTokenRequest} {@link GetPlaybackTokenResponse} */
   GetPlaybackToken(data: GetPlaybackTokenRequest, config?: AxiosRequestConfig): AxiosPromise<GetPlaybackTokenResponse>;
   /** 获取课堂事件 {@link GetRoomEventRequest} {@link GetRoomEventResponse} */
@@ -2416,6 +2510,8 @@ declare interface Lcic {
   SendRoomNotificationMessage(data: SendRoomNotificationMessageRequest, config?: AxiosRequestConfig): AxiosPromise<SendRoomNotificationMessageResponse>;
   /** 设置应用自定义内容 {@link SetAppCustomContentRequest} {@link SetAppCustomContentResponse} */
   SetAppCustomContent(data: SetAppCustomContentRequest, config?: AxiosRequestConfig): AxiosPromise<SetAppCustomContentResponse>;
+  /** 切换课堂的主编辑版本 {@link SetMainEditVersionRequest} {@link SetMainEditVersionResponse} */
+  SetMainEditVersion(data: SetMainEditVersionRequest, config?: AxiosRequestConfig): AxiosPromise<SetMainEditVersionResponse>;
   /** 设置跑马灯参数 {@link SetMarqueeRequest} {@link SetMarqueeResponse} */
   SetMarquee(data: SetMarqueeRequest, config?: AxiosRequestConfig): AxiosPromise<SetMarqueeResponse>;
   /** 设置水印 {@link SetWatermarkRequest} {@link SetWatermarkResponse} */

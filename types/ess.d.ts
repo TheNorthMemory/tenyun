@@ -1362,9 +1362,9 @@ declare interface IntentionQuestionResult {
 
 /** 跳转事件的结构体，其中包括认证期间收录，授权书审核，企业认证的回跳事件。 */
 declare interface JumpEvent {
-  /** 跳转事件枚举，* 1 - 企业收录。* 2 - 超管授权书审核。* 3 - 认证完成。 */
+  /** 跳转事件枚举枚举值：1： 企业收录2： 超管授权书审核3： 企业认证完成 */
   JumpEventType?: number;
-  /** 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。Endpoint如果是APP 类型，请传递"true"如果 Endpoint 是 H5 类型，请参考文档[跳转电子签H5](https://qian.tencent.com/developers/company/openqianh5/)p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
+  /** 为认证成功后页面进行回跳的URL，请确保回跳地址的可用性。Endpoint如果是APP 类型，请传递"true"如果 Endpoint 是 H5 类型，请参考文档跳转电子签H5p.s. 如果Endpoint是 APP，传递的跳转地址无效，不会进行跳转，仅会进行回跳。 */
   JumpUrl?: string;
 }
 
@@ -1938,6 +1938,14 @@ declare interface SealInfo {
   SealType: string;
   /** 印章名称 */
   SealName: string;
+}
+
+/** 根据合同对印章授权 */
+declare interface SealPolicyAuthorizationFlows {
+  /** 合同id列表，最大支持50个 */
+  FlowIds?: string[];
+  /** 合同组id列表， 最大支持10个FlowGroupIds(合同组)与FlowIds(合同列表) 两个参数只能选择其中一个，两者同时传会提示参数错误。 */
+  FlowGroupIds?: string[];
 }
 
 /** 签署证书信息结构体 */
@@ -4063,28 +4071,30 @@ declare interface CreateSchemeUrlResponse {
 }
 
 declare interface CreateSealPolicyRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用 */
+  /** 用户在电子文件签署平台标识信息，具体参考UserInfo结构体。可跟下面的UserIds可叠加起作用,同时也支持使用主企业的User进行授权， 当使用主企业的User时， 需要有集团角色。 */
   Users: UserInfo[];
   /** 电子印章ID，为32位字符串。建议开发者保留此印章ID，后续指定签署区印章或者操作印章需此印章ID。可登录腾讯电子签控制台，在 "印章"->"印章中心"选择查看的印章，在"印章详情" 中查看某个印章的SealId(在页面中展示为印章ID)。 */
   SealId: string;
   /** 授权有效期，时间戳秒级。可以传0，代表有效期到2099年12月12日23点59分59秒。 */
   Expired: number;
-  /** 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用 */
+  /** 需要授权的用户UserId集合。跟上面的SealId参数配合使用。选填，跟上面的Users同时起作用。支持使用主企业的UserId进行授权， 当使用主企业的UserId时，该UserId 需要有集团角色。 */
   UserIds?: string[];
-  /** 印章授权内容 */
+  /** 印章授权内容，最多300 个字符。 */
   Policy?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
   /** 个性化配置字段，默认不传。 */
   Options?: Option[];
+  /** 针对用印的合同/合同组授权。当单次用印授权时，可以仅在指定合同获得印章授权。此场景下不会触发印章授权回调。 */
+  AuthorizationFlows?: SealPolicyAuthorizationFlows;
 }
 
 declare interface CreateSealPolicyResponse {
   /** 最终授权成功的用户ID，在腾讯电子签平台的唯一身份标识，为32位字符串。可登录腾讯电子签控制台，在 "更多能力"->"组织管理" 中查看某位员工的UserId(在页面中展示为用户ID)。 */
   UserIds?: string[];
-  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  /** 人脸验证操作人链接，用法可以参考"跳转电子签小程序配置"，默认为空。 */
   SealOperatorVerifyPath?: string;
   /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
   SealOperatorVerifyQrcodeUrl?: string;

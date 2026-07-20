@@ -2011,9 +2011,9 @@ declare interface DescribeDBInstanceSSLConfigResponse {
 }
 
 declare interface DescribeDBInstanceSecurityGroupsRequest {
-  /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId。 */
+  /** 实例ID，可通过DescribeDBInstances接口获取。DBInstanceId、ReadOnlyGroupId、ProxyAddressId至少传一个；如果要查询实例关联的安全组，只传DBInstanceId字段。 */
   DBInstanceId?: string;
-  /** 只读组ID，可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId。 */
+  /** 只读组ID，可通过DescribeReadOnlyGroups接口获取。DBInstanceId、ReadOnlyGroupId、ProxyAddressId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId。 */
   ReadOnlyGroupId?: string;
 }
 
@@ -2795,11 +2795,11 @@ declare interface ModifyDBInstanceSSLConfigResponse {
 }
 
 declare interface ModifyDBInstanceSecurityGroupsRequest {
-  /** 实例或只读组要绑定的安全组列表。安全组信息可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来查询。**注意：**该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
+  /** 实例或只读组要绑定的安全组列表。安全组信息可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来查询。注意：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。 */
   SecurityGroupIdSet: string[];
-  /** 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果都传，忽略ReadOnlyGroupId。 */
+  /** 实例ID，可通过DescribeDBInstances接口获取。DBInstanceId、ReadOnlyGroupId、ProxyAddressId至少传一个；如果要查询实例关联的安全组，只传DBInstanceId字段。 */
   DBInstanceId?: string;
-  /** 只读组ID，可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId */
+  /** 只读组ID，可通过DescribeReadOnlyGroups接口获取。DBInstanceId、ReadOnlyGroupId、ProxyAddressId至少传一个；如果要查询只读组关联的安全组，只传ReadOnlyGroupId。 */
   ReadOnlyGroupId?: string;
 }
 

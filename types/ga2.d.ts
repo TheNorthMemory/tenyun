@@ -468,6 +468,22 @@ declare interface CreateGlobalAcceleratorResponse {
   RequestId?: string;
 }
 
+declare interface CreateListenerAdditionalCertRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 证书ID。当前只能添加服务器证书。 */
+  AdditionalCertificates: string[];
+}
+
+declare interface CreateListenerAdditionalCertResponse {
+  /** 任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateListenerRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -582,6 +598,22 @@ declare interface DeleteGlobalAcceleratorRequest {
 }
 
 declare interface DeleteGlobalAcceleratorResponse {
+  /** 任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteListenerAdditionalCertRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 证书ID。 */
+  AdditionalCertificates: string[];
+}
+
+declare interface DeleteListenerAdditionalCertResponse {
   /** 任务ID。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -944,6 +976,24 @@ declare interface ModifyListenerResponse {
   RequestId?: string;
 }
 
+declare interface ReplaceListenerAdditionalCertRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 监听器ID。 */
+  ListenerId: string;
+  /** 证书ID。 */
+  AdditionalCertificate: string;
+  /** 旧的证书ID。 */
+  OldCertificate: string;
+}
+
+declare interface ReplaceListenerAdditionalCertResponse {
+  /** 任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ga2 全球加速} */
 declare interface Ga2 {
   (): Versions;
@@ -959,6 +1009,8 @@ declare interface Ga2 {
   CreateGlobalAccelerator(data: CreateGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorResponse>;
   /** 创建监听器 {@link CreateListenerRequest} {@link CreateListenerResponse} */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
+  /** 添加扩展证书 {@link CreateListenerAdditionalCertRequest} {@link CreateListenerAdditionalCertResponse} */
+  CreateListenerAdditionalCert(data: CreateListenerAdditionalCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerAdditionalCertResponse>;
   /** 删除加速地域 {@link DeleteAccelerateAreasRequest} {@link DeleteAccelerateAreasResponse} */
   DeleteAccelerateAreas(data: DeleteAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccelerateAreasResponse>;
   /** 删除终端节点组 {@link DeleteEndpointGroupsRequest} {@link DeleteEndpointGroupsResponse} */
@@ -971,6 +1023,8 @@ declare interface Ga2 {
   DeleteGlobalAccelerator(data: DeleteGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorResponse>;
   /** 删除监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
+  /** 删除扩展证书 {@link DeleteListenerAdditionalCertRequest} {@link DeleteListenerAdditionalCertResponse} */
+  DeleteListenerAdditionalCert(data: DeleteListenerAdditionalCertRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerAdditionalCertResponse>;
   /** 查询加速地域 {@link DescribeAccelerateAreasRequest} {@link DescribeAccelerateAreasResponse} */
   DescribeAccelerateAreas(data: DescribeAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerateAreasResponse>;
   /** 查询可选加速区域 {@link DescribeAccelerateRegionsRequest} {@link DescribeAccelerateRegionsResponse} */
@@ -1001,6 +1055,8 @@ declare interface Ga2 {
   ModifyGlobalAccelerator(data: ModifyGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorResponse>;
   /** 修改监听器 {@link ModifyListenerRequest} {@link ModifyListenerResponse} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
+  /** 替换扩展证书 {@link ReplaceListenerAdditionalCertRequest} {@link ReplaceListenerAdditionalCertResponse} */
+  ReplaceListenerAdditionalCert(data: ReplaceListenerAdditionalCertRequest, config?: AxiosRequestConfig): AxiosPromise<ReplaceListenerAdditionalCertResponse>;
 }
 
 export declare type Versions = ["2025-01-15"];

@@ -2116,6 +2116,242 @@ declare interface ImageOptimize {
   Switch: string;
 }
 
+/** 推理 API Token 信息。 */
+declare interface InferenceAPIToken {
+  /** 推理 API Token ID。 */
+  TokenId?: string;
+  /** 推理 API Token 名称。 */
+  Name?: string;
+  /** 推理 API Token 内容。 */
+  Content?: string;
+  /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+}
+
+/** 推理服务自动伸缩配置。 */
+declare interface InferenceAutoScalingConfig {
+  /** 最小实例数量。当配置了伸缩策略并且策略处于有效期时，将不会生效。 */
+  MinInstanceCount: number;
+  /** 伸缩策略列表。最多支持 5 个策略。 */
+  ScalingPolicies?: InferenceScalingPolicy[];
+}
+
+/** 推理服务的容器配置。 */
+declare interface InferenceContainerConfig {
+  /** 镜像类型。取值有：TCR：腾讯云容器镜像服务的镜像。 */
+  ImageType: string;
+  /** TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。 */
+  TcrRepositoryConfig?: InferenceTCRRepositoryConfig | null;
+  /** 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。 */
+  StartupCommand?: string;
+  /** 容器运行时的环境变量。最多支持 10 个变量。 */
+  EnvironmentVariables?: InferenceEnvironmentVariable[];
+}
+
+/** 推理服务容器配置的修改参数。 */
+declare interface InferenceContainerConfigForModify {
+  /** 镜像类型。取值有：TCR：腾讯云容器镜像服务的镜像。 */
+  ImageType?: string;
+  /** TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。 */
+  TcrRepositoryConfig?: InferenceTCRRepositoryConfig;
+  /** 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。 */
+  StartupCommand?: string;
+  /** 容器运行时的环境变量。最多支持 10 个变量。 */
+  EnvironmentVariables?: InferenceEnvironmentVariable[];
+}
+
+/** 推理容器运行时的环境变量。 */
+declare interface InferenceEnvironmentVariable {
+  /** 变量名。仅允许包含大小写字母、数字、下划线，且必须以字母或下划线开头。长度限制不超过 64 个字符。 */
+  Key: string;
+  /** 变量值。支持任意可见字符如字母、数字、符号等。长度限制不超过 2048 个字符。 */
+  Value?: string;
+}
+
+/** 推理硬件规格信息。 */
+declare interface InferenceHardwareSpecification {
+  /** 规格标识。 */
+  Spec?: string;
+  /** 规格名称。 */
+  Name?: string;
+  /** CPU 核数。 */
+  CPUNum?: number;
+  /** 内存大小。单位为 MB。 */
+  MemSize?: number;
+  /** GPU 卡数。 */
+  GPUNum?: number;
+  /** 显存大小。单位为 MB。 */
+  GPUMemSize?: number;
+}
+
+/** 推理服务人工设置实例配置。 */
+declare interface InferenceManualInstanceConfig {
+  /** 固定实例数量。 */
+  FixedInstanceCount: number;
+}
+
+/** 推理服务的资源配置。 */
+declare interface InferenceResourceConfig {
+  /** 扩容缩容的方式。取值有：Auto：根据请求量自动调整实例数量；Manual：人工设置固定的实例数量。 */
+  ScalingMode: string;
+  /** 硬件规格。 */
+  HardwareSpec: string;
+  /** 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。 */
+  AutoScalingConfig?: InferenceAutoScalingConfig | null;
+  /** 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。 */
+  ManualInstanceConfig?: InferenceManualInstanceConfig | null;
+  /** 单实例的并发数。默认值为 1。 */
+  Concurrency?: number;
+}
+
+/** 推理服务资源配置的修改参数。 */
+declare interface InferenceResourceConfigForModify {
+  /** 扩容缩容的方式。取值有：Auto：根据请求量自动调整实例数量；Manual：人工设置固定的实例数量。 */
+  ScalingMode?: string;
+  /** 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。 */
+  AutoScalingConfig?: InferenceAutoScalingConfig;
+  /** 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。 */
+  ManualInstanceConfig?: InferenceManualInstanceConfig;
+  /** 单实例的并发数。默认值为 1。 */
+  Concurrency?: number;
+}
+
+/** 边缘推理弹性伸缩策略。 */
+declare interface InferenceScalingPolicy {
+  /** 策略名称。长度限制为 1~30 个字符。同一服务内策略名称需唯一。 */
+  PolicyName: string;
+  /** 策略类型，创建后不可修改。取值：ScheduledScaling：定时伸缩。 */
+  PolicyType: string;
+  /** 定时伸缩配置。当 PolicyType 取值为 ScheduledScaling 时，该字段必填。 */
+  ScheduledScalingPolicy?: InferenceScheduledScalingPolicy;
+}
+
+/** 边缘推理定时伸缩动作配置，用于描述一条具体的定时伸缩动作。 */
+declare interface InferenceScheduledScalingAction {
+  /** Cron 表达式，用于描述定时伸缩动作的触发时间。采用 5 字段标准 Cron 格式：分钟 小时 日期 月份 星期。不支持秒字段和年份字段。 */
+  CronExpression: string;
+  /** 命中该定时伸缩动作后，推理服务需要调整到的最小实例数。若同一评估窗口内多个定时伸缩动作同时命中，则使用其中最大的 MinInstanceCount。 */
+  MinInstanceCount: number;
+}
+
+/** 边缘推理定时伸缩有效期范围配置。 */
+declare interface InferenceScheduledScalingEffectiveRange {
+  /** 有效期类型。取值有：LongTerm：长期有效；Custom：自定义起止日期。 */
+  EffectiveType: string;
+  /** 有效期起始日期。当 EffectiveType 为 Custom 时必填；当 EffectiveType 为 LongTerm 时不传该字段。 */
+  StartDate?: string;
+  /** 有效期终止日期。当 EffectiveType 为 Custom 时必填，且不得早于 StartDate；当 EffectiveType 为 LongTerm 时不传该字段。 */
+  EndDate?: string;
+}
+
+/** 边缘推理定时伸缩策略配置。 */
+declare interface InferenceScheduledScalingPolicy {
+  /** 定时伸缩动作列表。至少填写 1 个，最多支持 10 个。 */
+  ScheduledActions: InferenceScheduledScalingAction[];
+  /** 有效期范围，用于描述该定时伸缩策略长期有效或仅在指定日期范围内有效。 */
+  EffectiveRange: InferenceScheduledScalingEffectiveRange;
+  /** 时区，使用 [IANA 时区](https://www.iana.org/time-zones) 标识 ScheduledActions 中的触发时间，例如 UTC、Asia/Shanghai、America/New_York、Europe/London、Asia/Kolkata。不传时默认使用 UTC。 */
+  TimeZone?: string;
+}
+
+/** 推理服务信息。 */
+declare interface InferenceService {
+  /** 推理服务 ID。 */
+  ServiceId?: string;
+  /** 推理服务的名称。 */
+  Name?: string;
+  /** 描述信息。 */
+  Description?: string;
+  /** 模型服务需要监听的端口。仅支持 1-65535 之间的整数。 */
+  ListenPort?: number;
+  /** 推理服务的请求路径列表。最多支持 20 个路径。 */
+  RequestPaths?: string[];
+  /** 推理服务的容器配置。 */
+  Containers?: InferenceContainerConfig[];
+  /** 推理服务的资源配置。 */
+  ResourceConfig?: InferenceResourceConfig;
+  /** 推理服务状态，包含以下几种状态：Deploying：部署中；Running：运行中；Stopping：停止中；Stopped：已停止；Exception：异常；Banned：被封禁。 */
+  Status?: string;
+  /** 伸缩状态。取值有：Normal：稳定运行，无进行中的伸缩操作；ScalingOut：扩容中；ScalingIn：缩容中。 */
+  ScalingStatus?: string;
+  /** 当前运行中的实例数量。 */
+  CurrentInstanceCount?: number;
+  /** 推理访问地址，可通过链接访问底层模型进行推理。 */
+  InferenceURL?: string;
+  /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+  /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  UpdateTime?: string;
+}
+
+/** 推理服务单次部署配置。 */
+declare interface InferenceServiceConfig {
+  /** 模型服务需要监听的端口。 */
+  ListenPort?: number;
+  /** 推理服务的请求路径列表。 */
+  RequestPaths?: string[];
+  /** 推理服务的容器配置。 */
+  Containers?: InferenceContainerConfig[];
+  /** 推理服务的资源配置。 */
+  ResourceConfig?: InferenceResourceConfig;
+}
+
+/** 推理服务部署日志信息。 */
+declare interface InferenceServiceDeploymentLogInfo {
+  /** 日志消息内容。 */
+  LogMessage?: string;
+  /** 日志产生时间。 */
+  Timestamp?: string;
+}
+
+/** 推理服务部署历史记录。 */
+declare interface InferenceServiceDeploymentRecord {
+  /** 部署记录 ID。 */
+  RecordId?: string;
+  /** 部署操作类型，取值：create：创建；update：更新；resume：启用；stop：停用。 */
+  Operation?: string;
+  /** 部署状态，取值：processing：部署中；succeeded：部署成功；failed：部署失败。 */
+  Status?: string;
+  /** 部署时长，单位：秒。 */
+  Duration?: number;
+  /** 本次推理服务部署的配置。 */
+  InferenceServiceConfig?: InferenceServiceConfig;
+  /** 部署发起时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+  CreateTime?: string;
+  /** 该部署配置是否是当前生效配置，取值： active：当前生效配置； inactive：历史版本或异常版本配置。 */
+  ActiveStatus?: string;
+}
+
+/** 推理服务监控数据项。 */
+declare interface InferenceServiceMonitorItem {
+  /** 监控数据对应时间点。 */
+  Timestamp?: string;
+  /** 具体数值。 */
+  Value?: number;
+}
+
+/** 推理服务监控数据记录。 */
+declare interface InferenceServiceMonitorRecord {
+  /** 推理服务 ID。 */
+  ServiceId?: string;
+  /** 指标名称。 */
+  MetricName?: string;
+  /** 详细推理服务监控数据。 */
+  InferenceServiceMonitorItems?: InferenceServiceMonitorItem[];
+}
+
+/** 推理的 TCR 镜像仓库配置。 */
+declare interface InferenceTCRRepositoryConfig {
+  /** TCR 服务类型。取值有：Personal：个人版；Enterprise：企业版。 */
+  TCRType: string;
+  /** 镜像地址。 */
+  Image: string;
+  /** 镜像仓库实例 ID。当 TCRType = Enterprise 时必填。 */
+  RegistryId?: string;
+  /** 地域名称。 */
+  RegionName?: string;
+}
+
 /** 智能分析规则 */
 declare interface IntelligenceRule {
   /** 开关，取值有：on：开启；off：关闭。 */
@@ -4938,6 +5174,46 @@ declare interface CreateFunctionRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateInferenceAPITokenRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理 API Token 的名称，长度限制不超过 30 个字符。 */
+  Name: string;
+}
+
+declare interface CreateInferenceAPITokenResponse {
+  /** 推理 API Token ID。 */
+  TokenId?: string;
+  /** 推理 API Token 内容。 */
+  Content?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInferenceServiceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务的名称。长度限制不超过 30 个字符，仅支持小写字母、数字、连字符，以字母开头，数字或字母结尾，不支持重复。 */
+  Name: string;
+  /** 模型服务需要监听的端口。仅支持 1-65535 之间的整数。 */
+  ListenPort: number;
+  /** 推理服务的容器配置。当前仅支持设置 1 个容器。 */
+  Containers: InferenceContainerConfig[];
+  /** 推理服务的资源配置。 */
+  ResourceConfig: InferenceResourceConfig;
+  /** 推理服务的请求路径列表。最多支持 20 个路径。 */
+  RequestPaths?: string[];
+  /** 描述信息。长度限制不超过 60 个字符。 */
+  Description?: string;
+}
+
+declare interface CreateInferenceServiceResponse {
+  /** 服务 ID。 */
+  ServiceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateJustInTimeTranscodeTemplateRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -5544,6 +5820,18 @@ declare interface DeleteFunctionRulesRequest {
 }
 
 declare interface DeleteFunctionRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteInferenceAPITokenRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理 API Token 的 ID。 */
+  TokenId: string;
+}
+
+declare interface DeleteInferenceAPITokenResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6322,6 +6610,138 @@ declare interface DescribeIdentificationsResponse {
   TotalCount?: number;
   /** 站点验证信息列表。 */
   Identifications?: Identification[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceAPITokensRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeInferenceAPITokensResponse {
+  /** Token 的总数。 */
+  TotalCount?: number;
+  /** Token 列表。 */
+  Tokens?: InferenceAPIToken[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceHardwareSpecificationsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeInferenceHardwareSpecificationsResponse {
+  /** 硬件规格列表。 */
+  HardwareSpecifications?: InferenceHardwareSpecification[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceServiceDeploymentLogsRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。 */
+  ServiceId: string;
+  /** 部署记录 ID。 */
+  RecordId: string;
+  /** 需检索日志的开始时间。 */
+  StartTime?: string;
+  /** 需检索日志的结束时间。默认查询时间范围（EndTime - StartTime）为最近 7 天。 */
+  EndTime?: string;
+  /** 排序字段，取值有：timestamp：日志生成时间。默认值为：timestamp。 */
+  SortBy?: string;
+  /** 排序方式，取值有：asc：升序方式；desc：降序方式。默认值为：desc。 */
+  SortOrder?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：20，最大值：1000。 */
+  Limit?: number;
+}
+
+declare interface DescribeInferenceServiceDeploymentLogsResponse {
+  /** 符合条件的部署日志总数。 */
+  TotalCount?: number;
+  /** 部署日志列表。 */
+  DeploymentLogInfoSet?: InferenceServiceDeploymentLogInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceServiceDeploymentRecordsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。 */
+  ServiceId: string;
+  /** 排序字段，取值有：create-time：部署创建时间。默认值为：create-time。 */
+  SortBy?: string;
+  /** 排序方式，取值有：asc：升序方式；desc：降序方式。默认值为：desc。 */
+  SortOrder?: string;
+  /** 分页偏移量，默认值：0。 */
+  Offset?: number;
+  /** 返回记录条数，默认值：20，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeInferenceServiceDeploymentRecordsResponse {
+  /** 部署历史总数。 */
+  TotalCount?: number;
+  /** 推理服务部署历史列表。 */
+  RecordSet?: InferenceServiceDeploymentRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceServiceMonitorDataRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。最多传入10个推理服务 ID。 */
+  ServiceIds: string[];
+  /** 指标列表，最多支持 10 个指标。取值有：cpu_usage_average: CPU 平均使用率，单位：%，指标类型：Float；cpu_usage_max: CPU 最大使用率，单位：%，指标类型：Float；gpu_usage_average: GPU 平均使用率，单位：%，指标类型：Float；gpu_usage_max: GPU 最大使用率，单位：%，指标类型：Float；instance_num_average: 实例平均数量，单位：个，指标类型：Float；instance_num_max: 实例最大数量，单位：个，指标类型：Float；gpu_memory_usage_max: 显存最大使用率，单位：%，指标类型：Float；memory_usage_average: 内存平均使用率，单位：%，指标类型：Float；memory_usage_max: 内存最大使用率，单位：%，指标类型：Float； */
+  MetricNames: string[];
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。查询时间范围（EndTime - StartTime）需小于等于 30 天。 */
+  EndTime: string;
+  /** 查询时间粒度，取值有：min: 1分钟，支持1天范围内的查询；5min: 5分钟，支持7天范围内的查询；hour: 1小时，支持30天范围内的查询；day: 1天，支持30天范围内的查询；不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2小时范围内以 min 粒度查询，2天范围内以 5min 粒度查询，7天范围内以 hour 粒度查询，超过7天以 day 粒度查询。 */
+  Interval?: string;
+}
+
+declare interface DescribeInferenceServiceMonitorDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount?: number;
+  /** 推理服务监控数据。 */
+  InferenceServiceMonitorRecords?: InferenceServiceMonitorRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceServicesRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 过滤条件，上限 20 个，多个条件为且关系，Filters.Values 的上限为 20。详细的过滤条件如下：service-name：按照服务名称进行过滤；service-id：按照服务 ID 过滤；status：按照服务状态过滤。模糊查询时仅支持过滤字段名为 service-name。 */
+  Filters?: AdvancedFilter[];
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：200。 */
+  Limit?: number;
+  /** 可根据该字段对返回结果进行排序，取值有：create-time：创建时间。不填写时默认按照 create-time 排序。 */
+  Order?: string;
+  /** 排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ASCII 码的大小排序。取值有：asc：从小到大排序；desc：从大到小排序。不填写使用默认值 desc。 */
+  Direction?: string;
+}
+
+declare interface DescribeInferenceServicesResponse {
+  /** 满足条件的服务总数。 */
+  TotalCount?: number;
+  /** 推理服务列表。 */
+  Services?: InferenceService[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7828,6 +8248,28 @@ declare interface ModifyHostsCertificateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInferenceServiceRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。 */
+  ServiceId: string;
+  /** 模型服务需要监听的端口。仅支持 1-65535 之间的整数。 */
+  ListenPort?: number;
+  /** 推理服务的请求路径列表。最多支持 20 个路径。 */
+  RequestPaths?: string[];
+  /** 推理服务的容器配置。当前仅支持设置 1 个容器。 */
+  Containers?: InferenceContainerConfigForModify[];
+  /** 推理服务的资源配置。 */
+  ResourceConfig?: InferenceResourceConfigForModify;
+  /** 描述信息。长度限制不超过 60 个字符。 */
+  Description?: string;
+}
+
+declare interface ModifyInferenceServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyL4ProxyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -8342,6 +8784,20 @@ declare interface ModifyZoneWorkModeResponse {
   RequestId?: string;
 }
 
+declare interface OperateInferenceServiceRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。 */
+  ServiceId: string;
+  /** 操作类型，包含以下几种：Stop：停止；Resume：启动；Delete：删除。 */
+  Operation: string;
+}
+
+declare interface OperateInferenceServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RefreshMultiPathGatewaySecretKeyRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -8683,6 +9139,10 @@ declare interface Teo {
   CreateFunctionReplica(data: CreateFunctionReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionReplicaResponse>;
   /** 创建边缘函数触发规则 {@link CreateFunctionRuleRequest} {@link CreateFunctionRuleResponse} */
   CreateFunctionRule(data: CreateFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionRuleResponse>;
+  /** 创建推理 API Token {@link CreateInferenceAPITokenRequest} {@link CreateInferenceAPITokenResponse} */
+  CreateInferenceAPIToken(data: CreateInferenceAPITokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceAPITokenResponse>;
+  /** 创建推理服务 {@link CreateInferenceServiceRequest} {@link CreateInferenceServiceResponse} */
+  CreateInferenceService(data: CreateInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceServiceResponse>;
   /** 创建即时转码模板 {@link CreateJustInTimeTranscodeTemplateRequest} {@link CreateJustInTimeTranscodeTemplateResponse} */
   CreateJustInTimeTranscodeTemplate(data: CreateJustInTimeTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJustInTimeTranscodeTemplateResponse>;
   /** 创建四层代理实例 {@link CreateL4ProxyRequest} {@link CreateL4ProxyResponse} */
@@ -8753,6 +9213,8 @@ declare interface Teo {
   DeleteFunctionReplica(data: DeleteFunctionReplicaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionReplicaResponse>;
   /** 删除边缘函数触发规则 {@link DeleteFunctionRulesRequest} {@link DeleteFunctionRulesResponse} */
   DeleteFunctionRules(data: DeleteFunctionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionRulesResponse>;
+  /** 删除推理 API Token {@link DeleteInferenceAPITokenRequest} {@link DeleteInferenceAPITokenResponse} */
+  DeleteInferenceAPIToken(data: DeleteInferenceAPITokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInferenceAPITokenResponse>;
   /** 删除即时转码模板 {@link DeleteJustInTimeTranscodeTemplatesRequest} {@link DeleteJustInTimeTranscodeTemplatesResponse} */
   DeleteJustInTimeTranscodeTemplates(data: DeleteJustInTimeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJustInTimeTranscodeTemplatesResponse>;
   /** 删除四层代理实例 {@link DeleteL4ProxyRequest} {@link DeleteL4ProxyResponse} */
@@ -8845,6 +9307,18 @@ declare interface Teo {
   DescribeIPRegion(data: DescribeIPRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPRegionResponse>;
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
+  /** 查询推理 API Token {@link DescribeInferenceAPITokensRequest} {@link DescribeInferenceAPITokensResponse} */
+  DescribeInferenceAPITokens(data: DescribeInferenceAPITokensRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceAPITokensResponse>;
+  /** 查询推理硬件规格列表 {@link DescribeInferenceHardwareSpecificationsRequest} {@link DescribeInferenceHardwareSpecificationsResponse} */
+  DescribeInferenceHardwareSpecifications(data: DescribeInferenceHardwareSpecificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceHardwareSpecificationsResponse>;
+  /** 查询推理服务部署日志 {@link DescribeInferenceServiceDeploymentLogsRequest} {@link DescribeInferenceServiceDeploymentLogsResponse} */
+  DescribeInferenceServiceDeploymentLogs(data: DescribeInferenceServiceDeploymentLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceServiceDeploymentLogsResponse>;
+  /** 查询推理服务部署历史列表 {@link DescribeInferenceServiceDeploymentRecordsRequest} {@link DescribeInferenceServiceDeploymentRecordsResponse} */
+  DescribeInferenceServiceDeploymentRecords(data: DescribeInferenceServiceDeploymentRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceServiceDeploymentRecordsResponse>;
+  /** 查询推理服务监控数据 {@link DescribeInferenceServiceMonitorDataRequest} {@link DescribeInferenceServiceMonitorDataResponse} */
+  DescribeInferenceServiceMonitorData(data: DescribeInferenceServiceMonitorDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceServiceMonitorDataResponse>;
+  /** 查询推理服务 {@link DescribeInferenceServicesRequest} {@link DescribeInferenceServicesResponse} */
+  DescribeInferenceServices(data: DescribeInferenceServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceServicesResponse>;
   /** 获取即时转码模板列表 {@link DescribeJustInTimeTranscodeTemplatesRequest} {@link DescribeJustInTimeTranscodeTemplatesResponse} */
   DescribeJustInTimeTranscodeTemplates(data: DescribeJustInTimeTranscodeTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJustInTimeTranscodeTemplatesResponse>;
   /** 查询四层代理实例列表 {@link DescribeL4ProxyRequest} {@link DescribeL4ProxyResponse} */
@@ -9007,6 +9481,8 @@ declare interface Teo {
   ModifyFunctionRulePriority(data: ModifyFunctionRulePriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFunctionRulePriorityResponse>;
   /** 配置域名证书 {@link ModifyHostsCertificateRequest} {@link ModifyHostsCertificateResponse} */
   ModifyHostsCertificate(data: ModifyHostsCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostsCertificateResponse>;
+  /** 修改推理服务 {@link ModifyInferenceServiceRequest} {@link ModifyInferenceServiceResponse} */
+  ModifyInferenceService(data: ModifyInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInferenceServiceResponse>;
   /** 修改四层代理实例 {@link ModifyL4ProxyRequest} {@link ModifyL4ProxyResponse} */
   ModifyL4Proxy(data: ModifyL4ProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyL4ProxyResponse>;
   /** 修改四层代理转发规则 {@link ModifyL4ProxyRulesRequest} {@link ModifyL4ProxyRulesResponse} */
@@ -9067,6 +9543,8 @@ declare interface Teo {
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
   /** 修改站点工作模式 {@link ModifyZoneWorkModeRequest} {@link ModifyZoneWorkModeResponse} */
   ModifyZoneWorkMode(data: ModifyZoneWorkModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneWorkModeResponse>;
+  /** 操作推理服务 {@link OperateInferenceServiceRequest} {@link OperateInferenceServiceResponse} */
+  OperateInferenceService(data: OperateInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OperateInferenceServiceResponse>;
   /** 刷新多通道安全加速网关密钥 {@link RefreshMultiPathGatewaySecretKeyRequest} {@link RefreshMultiPathGatewaySecretKeyResponse} */
   RefreshMultiPathGatewaySecretKey(data: RefreshMultiPathGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshMultiPathGatewaySecretKeyResponse>;
   /** 续费套餐 {@link RenewPlanRequest} {@link RenewPlanResponse} */

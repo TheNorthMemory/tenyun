@@ -399,6 +399,8 @@ declare interface ChatAIRequest {
   OldRecordId?: string;
   /** 知识库id列表 */
   KnowledgeBaseIds?: string[];
+  /** 版本信息 */
+  ArchVersion?: string;
 }
 
 declare interface ChatAIResponse {

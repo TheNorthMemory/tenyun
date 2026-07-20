@@ -30,6 +30,34 @@ declare interface AdvancedConsumerConfiguration {
   PartitionFields?: string[];
 }
 
+/** agent 应用信息 */
+declare interface AgentApplicationInfo {
+  /** 应用id */
+  ApplicationId?: string;
+  /** 应用名称 */
+  ApplicationName?: string;
+  /** 接入类型枚举值：Langfuse： Langfuse​ 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool） */
+  AccessType?: string;
+  /** 应用下资源所属地域例如：ap-guangzhou */
+  Region?: string;
+  /** 日志主题列表 */
+  LogTopics?: AgentTopicInfo[];
+  /** 指标主题列表 */
+  MetricsTopics?: AgentTopicInfo[];
+  /** 创建时间单位：秒秒级时间戳 */
+  CreateTime?: number;
+  /** 更新时间单位：秒秒级时间戳 */
+  UpdateTime?: number;
+}
+
+/** agent 应用主题信息 */
+declare interface AgentTopicInfo {
+  /** 日志主题id */
+  TopicId?: string;
+  /** 主题对应的标识Langfuse类型对应一个trace标识的日志主题 */
+  Flag?: string;
+}
+
 /** 告警多维分析一些配置信息 */
 declare interface AlarmAnalysisConfig {
   /** 键。支持以下key：SyntaxRule：语法规则，value支持 0：Lucene语法；1： CQL语法。QueryIndex：执行语句序号。value支持 -1：自定义； 1：执行语句1； 2：执行语句2。CustomQuery：检索语句。 QueryIndex为-1时有效且必填，value示例： "* | select count(*) as count"。Fields：字段。value支持 __SOURCE__；__FILENAME__；__HOSTNAME__；__TIMESTAMP__；__INDEX_STATUS__；__PKG_LOGID__；__TOPIC__。Format：显示形式。value支持 1：每条日志一行；2：每条日志每个字段一行。Limit：最大日志条数。 value示例： 5。 */
@@ -1618,6 +1646,30 @@ declare interface Label {
   Values?: string[] | null;
 }
 
+/** 采集日志配置信息 */
+declare interface LogConfigInfo {
+  /** 日志主题ID */
+  TopicId?: string;
+  /** 日志集ID */
+  LogsetId?: string;
+  /** 采集日志路径列表 */
+  Path?: string;
+  /** 日志类型 */
+  LogType?: string;
+  /** 提取规则 */
+  ExtractRule?: ExtractRuleInfo;
+  /** 日志格式化格式 */
+  LogFormat?: string | null;
+  /** 黑名单path列表 */
+  ExcludePaths?: ExcludePathInfo[] | null;
+  /** 用户自定义解析字符串 */
+  UserDefineRule?: string | null;
+  /** 采集配置ID */
+  ConfigId?: string | null;
+  /** 使用了元数据的机器组ID列表 */
+  GroupIds?: string[] | null;
+}
+
 /** 日志上下文信息 */
 declare interface LogContextInfo {
   /** 日志来源设备 */
@@ -2300,6 +2352,50 @@ declare interface Relabeling {
   Modulus?: number | null;
 }
 
+/** Remote Write鉴权信息 */
+declare interface RemoteWriteAuthInfo {
+  /** basic auth username */
+  Username?: string | null;
+  /** basic auth password */
+  Password?: string | null;
+  /** basic auth token */
+  Token?: string | null;
+}
+
+/** RemoteWrite配置信息 */
+declare interface RemoteWriteInfo {
+  /** 任务id */
+  TaskId?: string | null;
+  /** 日志主题ID */
+  TopicId?: string | null;
+  /** Remote Write任务名称 */
+  Name?: string | null;
+  /** 网络类型1: 内网2:外网 */
+  NetType?: number | null;
+  /** 私有网络id */
+  VpcId?: string | null;
+  /** 任务运行状态1: 运行中2:暂停3: 失败 */
+  Status?: number | null;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 目标服务名称 */
+  Target?: string | null;
+  /** 目标地址 */
+  RemoteWriteURL?: string | null;
+  /** 鉴权类型0: 无鉴权 1: basic_auth 2: token */
+  AuthType?: number | null;
+  /** 鉴权信息 */
+  AuthInfo?: RemoteWriteAuthInfo | null;
+  /** 日志集 */
+  LogsetId?: string | null;
+  /** 任务状态 */
+  Enable?: number | null;
+  /** 后端服务类型 */
+  VirtualGatewayType?: number | null;
+}
+
 /** 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数 */
 declare interface RuleInfo {
   /** 全文索引配置, 为空时代表未开启全文索引 */
@@ -2326,6 +2422,48 @@ declare interface RuleTagInfo {
   CaseSensitive: boolean;
   /** 元字段索引配置中的字段信息 */
   KeyValues: KeyValueInfo[];
+}
+
+/** aws 导入信息 */
+declare interface S3RechargeInfo {
+  /** 导入任务Id */
+  TaskId?: string;
+  /** 日志主题Id。- 通过获取日志主题列表获取日志主题Id。 */
+  TopicId?: string;
+  /** 日志集Id。通过 获取日志集列表获取日志集Id。 */
+  LogsetId?: string;
+  /** 任务名称 */
+  Name?: string;
+  /** s3存储桶 */
+  Bucket?: string;
+  /** 地域 */
+  S3Region?: string;
+  /** 访问密钥 ID（Access Key ID） */
+  AccessKeyId?: string;
+  /** 自定义端点 */
+  Endpoint?: string;
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
+  LogType?: string;
+  /** s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
+  Prefix?: string;
+  /** 压缩模式。支持: "", "gzip", "lzop", "snappy"。默认值：不压缩 */
+  Compress?: string;
+  /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
+  ExtractRule?: ExtractRuleInfo;
+  /** s3导入任务类型.枚举值：1： 一次性导入任务2： 持续性导入任务 */
+  TaskType?: number;
+  /** 元数据。枚举值：bucket： 桶object： 对象选中元数据将以 TAG.{元数据}:xxx 的形式与日志一起导入。如：TAG.object: csv/object.gz */
+  Metadata?: string[];
+  /** 任务状态枚举值：0： 已创建1： 运行中2： 已停止3： 已完成4： 运行失败 */
+  Status?: number;
+  /** 是否启用枚举值：0： 暂停1： 启用 */
+  Enable?: number;
+  /** 进度条百分值 */
+  Progress?: number;
+  /** 创建时间单位：秒秒级时间戳 */
+  CreateTime?: number;
+  /** 更新时间单位：秒秒级时间戳 */
+  UpdateTime?: number;
 }
 
 /** ScheduledSql的资源信息 */
@@ -2442,6 +2580,10 @@ declare interface SearchViewInfo {
   CreateTime?: number;
   /** 更新时间单位：秒级别时间戳 */
   UpdateTime?: number;
+}
+
+/** 服务日志topic信息 */
+declare interface ServiceLogConfigInfo {
 }
 
 /** 投递规则 */
@@ -2890,6 +3032,26 @@ declare interface CommitConsumerOffsetsResponse {
   RequestId?: string;
 }
 
+declare interface CreateAgentApplicationRequest {
+  /** 应用名称入参限制：不能为空字符串不能包含字符|不能超过64字符 */
+  ApplicationName: string;
+  /** 接入类型枚举值：Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool） */
+  AccessType: string;
+  /** 日志集Id。通过 获取日志集列表获取日志集Id。 */
+  LogsetId: string;
+}
+
+declare interface CreateAgentApplicationResponse {
+  /** 应用id */
+  ApplicationId?: string;
+  /** 日志主题列表 */
+  LogTopics?: AgentTopicInfo[];
+  /** 指标主题列表 */
+  MetricsTopics?: AgentTopicInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAlarmNoticeRequest {
   /** 通知渠道组名称。最大支持255个字节。 不支持 '|'。 */
   Name: string;
@@ -2997,11 +3159,11 @@ declare interface CreateAlarmShieldResponse {
 declare interface CreateCloudProductLogCollectionRequest {
   /** 实例ID通过各个接入云产品官方文档获取 */
   InstanceId: string;
-  /** 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS */
+  /** 云产品标识。支持以下产品APISBHCDBCDSCFSCLBCSIPCWPDCDBDNSPodEMRHTTPDNSKHLllmsgwMariaDBMDPMongoDBPostgreSQLTCSSTDSQL-CTDStoreTencentDB-RedisTEOTokenHubTSE */
   AssumerName: string;
-  /** 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS */
+  /** 各云产品支持的日志类型如下：assumer_name支持的 log_typeAPISAPIS-ACCESSBHBH-COMMANDLOG, BH-FILELOGCDBCDB-AUDITCDSCDS-AUDIT, CDS-RISKCFSCFS-AUDITCLBCMR-SPENDCSIPCSIPCWPCWPDCDBDCDB-AUDIT, DCDB-ERROR, DCDB-SLOWDNSPodDNSPod-RESOLVELOGEMREMR-OPERATIONHTTPDNSHTTPDNS-RESOLVELOGMariaDBMariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOWMDPMDP-SSAIMongoDBMongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLogPostgreSQLPostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOWTCSSTCSSTDSQL-CTDSQL-C-AUDITTDStoreTDMYSQL-SLOWTencentDB-RedisRedis-AUDIT, Redis-ERROR, Redis-SLOWTEOTEO-INEFERENCEllmsgwllmsgw-mcp-security-alarm */
   LogType: string;
-  /** 云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：CDS所有日志类型：ap-guangzhouCDB-AUDIT: gzTDSQL-C-AUDIT: gzMongoDB-AUDIT: gzMongoDB-SlowLog：ap-guangzhouMongoDB-ErrorLog：ap-guangzhouTDMYSQL-SLOW：gzDCDB所有日志类型：gzMariaDB所有日志类型：gzPostgreSQL所有日志类型：gzBH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)APIS所有日志类型：gz */
+  /** 云产品地域。不同 LogType 入参格式存在差异：格式 A：短 region 码（gz / sh / bj …）APIS 全部日志类型：如 gzCDB-AUDITTDSQL-C-AUDITTDMYSQL-SLOWDCDB 全部日志类型MariaDB 全部日志类型PostgreSQL 全部日志类型MongoDB-AUDIT（注意与 SlowLog/ErrorLog/OperationLog 不同）TencentDB-Redis 全部日志类型EMR-OPERATION格式 B：长 region 码（ap-guangzhou / ap-shanghai / ap-singapore …）CDS 全部日志类型：如 ap-guangzhouMongoDB-SlowLog / MongoDB-ErrorLog / MongoDB-OperationLogDNSPod-RESOLVELOGHTTPDNS-RESOLVELOGMDP-SSAICFS-AUDITTEO-INEFERENCETokenHub-ActivityLog / TokenHub-AuditLogllmsgw-mcp-security-alarmCSIP / TCSS / TSE / CWP / KHL 等格式 C：BH 专用 Polaris 名BH 全部日志类型：overseas-polaris（中国香港及其他海外）/ fsi-polaris（金融区）/ general-polaris（普通区）/ intl-sg-prod（国际站） */
   CloudProductRegion: string;
   /** CLS目标地域支持地域参考 地域列表 文档 */
   ClsRegion: string;
@@ -3710,6 +3872,68 @@ declare interface CreateRecordingRuleYamlTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateRemoteWriteTaskRequest {
+  /** 日志主题 ID */
+  TopicId: string;
+  /** 任务名称 */
+  Name: string;
+  /** 目标服务名称 */
+  Target: string;
+  /** 目标地址 */
+  RemoteWriteURL: string;
+  /** 鉴权类型0: 无鉴权1: basic_auth 2: token */
+  AuthType: number;
+  /** 网络类型： 1 内网 2外网 */
+  NetType: number;
+  /** 私有网络id */
+  VpcId?: string;
+  /** 鉴权信息 */
+  AuthInfo?: RemoteWriteAuthInfo;
+  /** 后端服务类型0 CVM1025 CLB */
+  VirtualGatewayType?: number;
+}
+
+declare interface CreateRemoteWriteTaskResponse {
+  /** remoteWrite任务id */
+  TaskId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateS3RechargeRequest {
+  /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
+  TopicId: string;
+  /** s3导入任务名称,最大支持128个字节。同一个TopicId下的s3任务Name必须唯一 */
+  Name: string;
+  /** s3存储桶 */
+  Bucket: string;
+  /** 地域 */
+  S3Region: string;
+  /** 访问密钥 ID（Access Key ID） */
+  AccessKeyId: string;
+  /** 访问密钥Key（Secret Access Key） */
+  SecretAccessKey: string;
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
+  LogType: string;
+  /** 自定义端点 */
+  Endpoint?: string;
+  /** s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
+  Prefix?: string;
+  /** 压缩模式。支持: "", "gzip", "lzop", "snappy"。默认值：不压缩 */
+  Compress?: string;
+  /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
+  ExtractRuleInfo?: ExtractRuleInfo;
+  /** s3导入任务类型.枚举值：1： 一次性导入任务2： 持续性导入任务默认值：1 */
+  TaskType?: number;
+}
+
+declare interface CreateS3RechargeResponse {
+  /** 导入任务Id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateScheduledSqlRequest {
   /** 源日志主题ID- 通过获取日志主题列表获取日志主题Id。 */
   SrcTopicId: string;
@@ -3916,6 +4140,18 @@ declare interface CreateWebCallbackRequest {
 declare interface CreateWebCallbackResponse {
   /** 回调配置ID。 */
   WebCallbackId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAgentApplicationRequest {
+  /** 应用id */
+  ApplicationId: string;
+  /** 是否删除agent应用关联的主题枚举值：false： 不删除agent应用关联的主题true： 删除agent应用关联的主题默认值：false */
+  DeleteTopics?: boolean;
+}
+
+declare interface DeleteAgentApplicationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4258,6 +4494,30 @@ declare interface DeleteRecordingRuleYamlTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRemoteWriteTaskRequest {
+  /** RemoteWrite导入任务ID */
+  TaskId: string;
+  /** 日志主题ID */
+  TopicId: string;
+}
+
+declare interface DeleteRemoteWriteTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteS3RechargeRequest {
+  /** 导入任务Id */
+  TaskId: string;
+  /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
+  TopicId: string;
+}
+
+declare interface DeleteS3RechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteScheduledSqlRequest {
   /** 任务ID，通过[获取定时SQL分析任务列表](https://cloud.tencent.com/document/product/614/95519)获取 */
   TaskId: string;
@@ -4318,6 +4578,52 @@ declare interface DeleteWebCallbackRequest {
 }
 
 declare interface DeleteWebCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAgentApplicationsRequest {
+  /** 过滤项applicationName按照【应用名称】进行过滤。模糊匹配方式查询。类型：String必选：否applicationId按照【应用id】进行过滤。类型：String必选：否accessType按照【接入类型】进行过滤。类型：String支持：Langfuse必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAgentApplicationsResponse {
+  /** 符合查询条件的大模型性能剖析任务列表 */
+  Infos?: AgentApplicationInfo[];
+  /** 符合查询条件的任务总数。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAgentConfigsRequest {
+  /** agent的版本号 */
+  AgentVersion: string;
+  /** agent的IP地址 */
+  AgentIp: string;
+  /** 机器组标签列表 */
+  Labels?: string[];
+  /** agent的instance id */
+  InstanceId?: string;
+}
+
+declare interface DescribeAgentConfigsResponse {
+  /** 采集配置 */
+  LogConfigs: LogConfigInfo[] | null;
+  /** 服务日志的配置信息 */
+  ServiceLogConfigs: ServiceLogConfigInfo[] | null;
+  /** 弃用 */
+  LastVersion: string | null;
+  /** 弃用 */
+  NeedUpdate: boolean | null;
+  /** 弃用 */
+  URL: string | null;
+  /** 弃用 */
+  FileMd5: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5234,6 +5540,44 @@ declare interface DescribeRecordingRuleYamlTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRemoteWriteTasksRequest {
+  /** - taskId按照【任务ID】进行过滤。类型：String必选：否- topicId按照【日志主题】进行过滤。类型：String必选：否- taskStatus按照【任务运行状态】进行过滤。 支持`1`：运行中，`2`：停止，`3`：异常类型：String必选：否- name按照【任务名称】进行模糊过滤。 类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeRemoteWriteTasksResponse {
+  /** RemoteWrite 信息列表 */
+  Infos?: RemoteWriteInfo[];
+  /** RemoteWrite信息总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeS3RechargesRequest {
+  /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
+  TopicId: string;
+  /** name 按照【主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否bucket 按照【S3 存储桶名称】进行过滤。类型：String。必选：否status 按照【任务状态】进行过滤，支持0:已创建, 1:运行中, 2:已停止, 3:已完成, 4:运行失败。 类型：String。必选：否enable 按照【启用状态】进行过滤，支持0:暂停，1:启用。类型：String。必选：否注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeS3RechargesResponse {
+  /** S3导入任务配置列表 */
+  Infos?: S3RechargeInfo[];
+  /** 任务总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScheduledSqlInfoRequest {
   /** 分页的偏移量，默认值为0。 */
   Offset?: number;
@@ -5524,6 +5868,18 @@ declare interface MergePartitionRequest {
 declare interface MergePartitionResponse {
   /** 合并结果集 */
   Partitions?: PartitionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAgentApplicationRequest {
+  /** 应用id */
+  ApplicationId: string;
+  /** 应用名称参数格式：- 不能为空字符串- 不能包含字符|- 不能超过64字符 */
+  ApplicationName: string;
+}
+
+declare interface ModifyAgentApplicationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6272,6 +6628,72 @@ declare interface ModifyRecordingRuleYamlTaskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRemoteWriteTaskRequest {
+  /** 任务id */
+  TaskId: string;
+  /** 日志主题id */
+  TopicId: string;
+  /** 任务状态0 关闭 1 开启 */
+  Enable?: number;
+  /** RemoteWrite任务名称 */
+  Name?: string;
+  /** 1 内网 2外网 */
+  NetType?: number;
+  /** 私有网络id */
+  VpcId?: string;
+  /** 目标服务名称 */
+  Target?: string;
+  /** 目标地址 */
+  RemoteWriteURL?: string;
+  /** 0: 无鉴权 1: basic_auth 2: token */
+  AuthType?: number;
+  /** 鉴权信息 */
+  AuthInfo?: RemoteWriteAuthInfo;
+  /** 后端服务类型-1 没有0 CVM1025 CLB */
+  VirtualGatewayType?: number;
+}
+
+declare interface ModifyRemoteWriteTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyS3RechargeRequest {
+  /** 导入任务Id */
+  TaskId: string;
+  /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
+  TopicId: string;
+  /** s3导入任务名称,最大支持128个字节。同一个TopicId下的s3任务Name必须唯一 */
+  Name?: string;
+  /** s3导入任务类型.枚举值：1： 一次性导入任务2： 持续性导入任务 */
+  TaskType?: number;
+  /** 是否启用枚举值：0： 暂停1： 启用 */
+  Enable?: number;
+  /** s3存储桶 */
+  Bucket?: string;
+  /** 地域 */
+  S3Region?: string;
+  /** 访问密钥 ID（Access Key ID） */
+  AccessKeyId?: string;
+  /** 访问密钥Key（Secret Access Key） */
+  SecretAccessKey?: string;
+  /** 自定义端点 */
+  Endpoint?: string;
+  /** 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log */
+  LogType?: string;
+  /** s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
+  Prefix?: string;
+  /** 压缩模式。支持: "", "gzip", "lzop", "snappy"。 */
+  Compress?: string;
+  /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
+  ExtractRuleInfo?: ExtractRuleInfo;
+}
+
+declare interface ModifyS3RechargeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyScheduledSqlRequest {
   /** 任务ID，通过获取定时SQL分析任务列表获取 */
   TaskId: string;
@@ -6726,6 +7148,42 @@ declare interface SearchLogResponse {
   RequestId?: string;
 }
 
+declare interface SearchS3RechargeInfoRequest {
+  /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
+  TopicId: string;
+  /** s3导入任务名称,最大支持128个字节。 */
+  Name: string;
+  /** s3存储桶 */
+  Bucket: string;
+  /** 地域 */
+  S3Region: string;
+  /** 访问密钥 ID（Access Key ID） */
+  AccessKeyId: string;
+  /** 访问密钥Key（Secret Access Key） */
+  SecretAccessKey: string;
+  /** 自定义端点 */
+  Endpoint?: string;
+  /** s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。 */
+  Prefix?: string;
+  /** 压缩模式。支持: "", "gzip", "lzop", "snappy"。默认值：不压缩 */
+  Compress?: string;
+}
+
+declare interface SearchS3RechargeInfoResponse {
+  /** 匹配到的存储桶下的某个文件的前几行数据 */
+  Data?: string[];
+  /** 匹配到的存储桶下的文件个数 */
+  Sum?: number;
+  /** 当前预览文件路径 */
+  Path?: string;
+  /** 预览获取数据失败原因 */
+  Msg?: string;
+  /** 状态。0：成功10000：参数错误，请确认参数10001：授权失败，请确认授权10002：获取文件列表失败，请稍后再试。若无法解决，请咨询 在线支持 或 提交工单 处理。10003：桶内无相应前缀文件，请使用正确的桶、文件前缀和压缩方式10004：文件下载失败，请稍后再试。若无法解决，请咨询 在线支持 或 提交工单 处理。10005：文件解压缩失败，请选择正确的压缩方式然后再试10006：读取文件内容失败，请确认文件可读10007：文件预览失败，请稍后再试。若无法解决，请咨询 在线支持 或 提交工单 处理。 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SendConsumerHeartbeatRequest {
   /** 上报心跳的消费组标识 */
   ConsumerGroup: string;
@@ -6797,6 +7255,8 @@ declare interface Cls {
   CloseKafkaConsumer(data: CloseKafkaConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CloseKafkaConsumerResponse>;
   /** 提交消费点位 {@link CommitConsumerOffsetsRequest} {@link CommitConsumerOffsetsResponse} */
   CommitConsumerOffsets(data: CommitConsumerOffsetsRequest, config?: AxiosRequestConfig): AxiosPromise<CommitConsumerOffsetsResponse>;
+  /** 创建Agent应用 {@link CreateAgentApplicationRequest} {@link CreateAgentApplicationResponse} */
+  CreateAgentApplication(data: CreateAgentApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentApplicationResponse>;
   /** 创建告警策略 {@link CreateAlarmRequest} {@link CreateAlarmResponse} */
   CreateAlarm(data: CreateAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmResponse>;
   /** 创建通知渠道组 {@link CreateAlarmNoticeRequest} {@link CreateAlarmNoticeResponse} */
@@ -6857,6 +7317,10 @@ declare interface Cls {
   CreateRecordingRuleTask(data: CreateRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleTaskResponse>;
   /** 通过YAML批量创建预聚合任务 {@link CreateRecordingRuleYamlTaskRequest} {@link CreateRecordingRuleYamlTaskResponse} */
   CreateRecordingRuleYamlTask(data: CreateRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleYamlTaskResponse>;
+  /** 创建RemoteWrite任务 {@link CreateRemoteWriteTaskRequest} {@link CreateRemoteWriteTaskResponse} */
+  CreateRemoteWriteTask(data: CreateRemoteWriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRemoteWriteTaskResponse>;
+  /** 创建aws导入任务 {@link CreateS3RechargeRequest} {@link CreateS3RechargeResponse} */
+  CreateS3Recharge(data: CreateS3RechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateS3RechargeResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
   CreateScheduledSql(data: CreateScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledSqlResponse>;
   /** 新建查询视图 {@link CreateSearchViewRequest} {@link CreateSearchViewResponse} */
@@ -6869,6 +7333,8 @@ declare interface Cls {
   CreateTopic(data: CreateTopicRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicResponse>;
   /** 创建告警渠道回调配置 {@link CreateWebCallbackRequest} {@link CreateWebCallbackResponse} */
   CreateWebCallback(data: CreateWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebCallbackResponse>;
+  /** 删除Agent应用 {@link DeleteAgentApplicationRequest} {@link DeleteAgentApplicationResponse} */
+  DeleteAgentApplication(data: DeleteAgentApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentApplicationResponse>;
   /** 删除告警策略 {@link DeleteAlarmRequest} {@link DeleteAlarmResponse} */
   DeleteAlarm(data: DeleteAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmResponse>;
   /** 删除通知渠道组 {@link DeleteAlarmNoticeRequest} {@link DeleteAlarmNoticeResponse} */
@@ -6929,6 +7395,10 @@ declare interface Cls {
   DeleteRecordingRuleTask(data: DeleteRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRuleTaskResponse>;
   /** 删除YAML预聚合任务 {@link DeleteRecordingRuleYamlTaskRequest} {@link DeleteRecordingRuleYamlTaskResponse} */
   DeleteRecordingRuleYamlTask(data: DeleteRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRuleYamlTaskResponse>;
+  /** 删除RemoteWrite任务 {@link DeleteRemoteWriteTaskRequest} {@link DeleteRemoteWriteTaskResponse} */
+  DeleteRemoteWriteTask(data: DeleteRemoteWriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRemoteWriteTaskResponse>;
+  /** 删除aws导入任务 {@link DeleteS3RechargeRequest} {@link DeleteS3RechargeResponse} */
+  DeleteS3Recharge(data: DeleteS3RechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteS3RechargeResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
   DeleteScheduledSql(data: DeleteScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledSqlResponse>;
   /** 删除查询视图 {@link DeleteSearchViewRequest} {@link DeleteSearchViewResponse} */
@@ -6941,6 +7411,10 @@ declare interface Cls {
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 删除告警渠道回调配置 {@link DeleteWebCallbackRequest} {@link DeleteWebCallbackResponse} */
   DeleteWebCallback(data: DeleteWebCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebCallbackResponse>;
+  /** 获取Agent应用列表 {@link DescribeAgentApplicationsRequest} {@link DescribeAgentApplicationsResponse} */
+  DescribeAgentApplications(data?: DescribeAgentApplicationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentApplicationsResponse>;
+  /** 获取采集配置 {@link DescribeAgentConfigsRequest} {@link DescribeAgentConfigsResponse} */
+  DescribeAgentConfigs(data: DescribeAgentConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentConfigsResponse>;
   /** 获取通知渠道组列表 {@link DescribeAlarmNoticesRequest} {@link DescribeAlarmNoticesResponse} */
   DescribeAlarmNotices(data?: DescribeAlarmNoticesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNoticesResponse>;
   /** 获取告警屏蔽配置规则 {@link DescribeAlarmShieldsRequest} {@link DescribeAlarmShieldsResponse} */
@@ -7039,6 +7513,10 @@ declare interface Cls {
   DescribeRecordingRuleTask(data: DescribeRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRuleTaskResponse>;
   /** 获取YAML预聚合任务列表 {@link DescribeRecordingRuleYamlTaskRequest} {@link DescribeRecordingRuleYamlTaskResponse} */
   DescribeRecordingRuleYamlTask(data: DescribeRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRuleYamlTaskResponse>;
+  /** 获取RemoteWrite投递任务列表页 {@link DescribeRemoteWriteTasksRequest} {@link DescribeRemoteWriteTasksResponse} */
+  DescribeRemoteWriteTasks(data?: DescribeRemoteWriteTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteWriteTasksResponse>;
+  /** 获取aws导入配置 {@link DescribeS3RechargesRequest} {@link DescribeS3RechargesResponse} */
+  DescribeS3Recharges(data: DescribeS3RechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeS3RechargesResponse>;
   /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
   DescribeScheduledSqlInfo(data?: DescribeScheduledSqlInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledSqlInfoResponse>;
   /** 获取查询视图列表 {@link DescribeSearchViewsRequest} {@link DescribeSearchViewsResponse} */
@@ -7069,6 +7547,8 @@ declare interface Cls {
   GetMetricLabelValues(data: GetMetricLabelValuesRequest, config?: AxiosRequestConfig): AxiosPromise<GetMetricLabelValuesResponse>;
   /** 合并分区 {@link MergePartitionRequest} {@link MergePartitionResponse} */
   MergePartition(data: MergePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<MergePartitionResponse>;
+  /** 修改Agent应用 {@link ModifyAgentApplicationRequest} {@link ModifyAgentApplicationResponse} */
+  ModifyAgentApplication(data: ModifyAgentApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentApplicationResponse>;
   /** 修改告警策略 {@link ModifyAlarmRequest} {@link ModifyAlarmResponse} */
   ModifyAlarm(data: ModifyAlarmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmResponse>;
   /** 修改通知渠道组 {@link ModifyAlarmNoticeRequest} {@link ModifyAlarmNoticeResponse} */
@@ -7127,6 +7607,10 @@ declare interface Cls {
   ModifyRecordingRuleTask(data: ModifyRecordingRuleTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingRuleTaskResponse>;
   /** 修改YAML创建预聚合任务 {@link ModifyRecordingRuleYamlTaskRequest} {@link ModifyRecordingRuleYamlTaskResponse} */
   ModifyRecordingRuleYamlTask(data: ModifyRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingRuleYamlTaskResponse>;
+  /** 修改RemoteWrite任务 {@link ModifyRemoteWriteTaskRequest} {@link ModifyRemoteWriteTaskResponse} */
+  ModifyRemoteWriteTask(data: ModifyRemoteWriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteWriteTaskResponse>;
+  /** 修改aws导入任务 {@link ModifyS3RechargeRequest} {@link ModifyS3RechargeResponse} */
+  ModifyS3Recharge(data: ModifyS3RechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyS3RechargeResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
   ModifyScheduledSql(data: ModifyScheduledSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledSqlResponse>;
   /** 修改查询视图 {@link ModifySearchViewRequest} {@link ModifySearchViewResponse} */
@@ -7159,6 +7643,8 @@ declare interface Cls {
   SearchDashboardSubscribe(data: SearchDashboardSubscribeRequest, config?: AxiosRequestConfig): AxiosPromise<SearchDashboardSubscribeResponse>;
   /** 检索分析日志 {@link SearchLogRequest} {@link SearchLogResponse} */
   SearchLog(data: SearchLogRequest, config?: AxiosRequestConfig): AxiosPromise<SearchLogResponse>;
+  /** 预览aws导入信息 {@link SearchS3RechargeInfoRequest} {@link SearchS3RechargeInfoResponse} */
+  SearchS3RechargeInfo(data: SearchS3RechargeInfoRequest, config?: AxiosRequestConfig): AxiosPromise<SearchS3RechargeInfoResponse>;
   /** 消费组心跳 {@link SendConsumerHeartbeatRequest} {@link SendConsumerHeartbeatResponse} */
   SendConsumerHeartbeat(data: SendConsumerHeartbeatRequest, config?: AxiosRequestConfig): AxiosPromise<SendConsumerHeartbeatResponse>;
   /** 分裂主题分区 {@link SplitPartitionRequest} {@link SplitPartitionResponse} */

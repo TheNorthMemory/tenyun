@@ -1135,43 +1135,43 @@ declare interface ResponseErrorCodeReq {
 /** 展示服务列表用 */
 declare interface Service {
   /** 内网访问https端口。 */
-  InnerHttpsPort: number | null;
+  InnerHttpsPort?: number | null;
   /** 用户自定义的服务描述。 */
-  ServiceDesc: string | null;
+  ServiceDesc?: string | null;
   /** 服务的前端请求类型。如http、https 或者 http&https。 */
-  Protocol: string | null;
+  Protocol?: string | null;
   /** 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string | null;
+  ModifiedTime?: string | null;
   /** 服务支持的网络类型。 */
-  NetTypes: string[] | null;
+  NetTypes?: string[] | null;
   /** 独占集群名称。 */
-  ExclusiveSetName: string | null;
+  ExclusiveSetName?: string | null;
   /** 服务唯一 ID。 */
-  ServiceId: string | null;
+  ServiceId?: string | null;
   /** IP版本。 */
-  IpVersion: string | null;
+  IpVersion?: string | null;
   /** 已经发布的环境列表。如test、prepub、release。 */
-  AvailableEnvironments: string[] | null;
+  AvailableEnvironments?: string[] | null;
   /** 用户自定义的服务名称。 */
-  ServiceName: string | null;
+  ServiceName?: string | null;
   /** 系统为该服务分配的外网域名。 */
-  OuterSubDomain: string | null;
+  OuterSubDomain?: string | null;
   /** 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string | null;
+  CreatedTime?: string | null;
   /** 内网访问http端口。 */
-  InnerHttpPort: number | null;
+  InnerHttpPort?: number | null;
   /** 系统为该服务自动分配的内网域名。 */
-  InnerSubDomain: string | null;
+  InnerSubDomain?: string | null;
   /** 服务的计费状态。 */
-  TradeIsolateStatus: number | null;
+  TradeIsolateStatus?: number | null;
   /** 服务绑定的标签 */
-  Tags: Tag[] | null;
+  Tags?: Tag[] | null;
   /** 独享实例 */
-  InstanceId: string | null;
+  InstanceId?: string | null;
   /** 集群类型 */
-  SetType: string | null;
+  SetType?: string | null;
   /** 服务部署的集群类型 */
-  DeploymentType: string | null;
+  DeploymentType?: string | null;
 }
 
 /** ServiceConfig配置 */

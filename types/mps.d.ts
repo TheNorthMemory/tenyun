@@ -200,6 +200,8 @@ declare interface AdaptiveDynamicStreamingTaskInput {
   KeyPTSList?: number[] | null;
   /** 外挂音频功能，指定要插入的音频文件。 */
   AddOnAudios?: AddOnAudio[];
+  /** 非空时直接替换模板的 StreamInfos 字段，字段格式与创建自适应模板时的 StreamInfos 完全一致 */
+  StdExtStreamInfos?: AdaptiveStreamTemplate[];
 }
 
 /** 转自适应码流模板详情 */
@@ -538,6 +540,8 @@ declare interface AiAnalysisTaskDubbingOutput {
   VoiceId?: string;
   /** 译制视频存储位置。 */
   OutputStorage?: TaskOutputStorage;
+  /** 额外结果，目前包含字幕文件结果 Url */
+  ExtraOutput?: string;
 }
 
 /** 智能译制结果类型 */
@@ -890,6 +894,18 @@ declare interface AiContentReviewResult {
 declare interface AiContentReviewTaskInput {
   /** 视频内容审核模板 ID。 */
   Definition: number;
+}
+
+/** Ai自动生成漫剧的输入 */
+declare interface AiDramaInput {
+  /** ai漫剧剧本参数格式：无入参限制：无 */
+  Script: string;
+  /** ai漫剧风格枚举值：chinese_ink_wash： 国风水墨fantasy_cyberpunk： 奇幻赛博朋克japanese_anime_2d： 日漫二次元默认值：chinese_ink_wash枚举值：realistic_live_action： 真人写实chinese_ink_wash： 国风水墨fantasy_cyberpunk： 奇幻赛博朋克japanese_anime_2d： 日漫二次元默认值：chinese_ink_wash */
+  Style: string;
+  /** 宽高比枚举值：16:9： 16:99:16： 9:16默认值：16:9 */
+  Ratio: string;
+  /** 输出视频分辨率枚举值：720p： 720p1080p： 1080p默认值：720p */
+  Resolution: string;
 }
 
 /** 分段信息。 */
@@ -3138,6 +3154,38 @@ declare interface DiffusionEnhanceConfig {
   Type?: string | null;
 }
 
+/** cos信息，存储用户请求时填写的cos信息，用于存放结果 */
+declare interface DocToVideoCosInfo {
+  /** cos桶地域 */
+  CosBucketRegion?: string;
+  /** cos桶名称 */
+  CosBucketName?: string;
+  /** cos桶路径 */
+  CosBucketPath?: string;
+}
+
+/** AIGC 文档生成视频输入 */
+declare interface DocToVideoInput {
+  /** 用于生成视频的文档链接。支持的文档类型：pdf、pptx、docx、png、jpg文档数量限制：3个文档大小限制：10MB文档页数限制：100页 */
+  FileUrl: string[];
+  /** 用于生成视频的prompt信息。prompt长度限制：2000字符。 */
+  Prompt: string;
+  /** 文档生成视频模型名称默认值：Wand */
+  ModelName: string;
+  /** 文档生成视频模型版本号默认值：1.0 */
+  ModelVersion: string;
+  /** 生成视频的宽高比。枚举值：16:9： 16:99:16： 9:161:1： 1:1默认值：16:9 */
+  Ratio?: string;
+  /** 生成视频的语言。枚举值：zh： 中文en： 英文ja： 日语ko： 韩语ru： 俄语fr： 法语es： 西班牙语de： 德语默认值：zh */
+  Language?: string;
+  /** 生成视频的时长参考。非准确的视频时长，仅供大模型参考生成。取值范围：[15, 1200]单位：秒 */
+  ReferenceDuration?: number;
+  /** 是否开启AI配音功能。默认值：false */
+  EnableTTS?: boolean;
+  /** 音色ID。仅开启AI配音功能时有效。 */
+  VoiceId?: string;
+}
+
 /** Drm 加密信息。 */
 declare interface DrmInfo {
   /** 加密类型：- simpleaes只能用于HLS，切片格式支持ts和mp4只能使用切片模式，不能使用singlefile模式- fairplay：只能用于HLS，切片格式只能是mp4可以使用切片模式或singlefile模式- widevine：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式- playready：可以用于HLS和DASH，切片格式只能是mp4输出HLS：可以使用切片模式或singlefile模式输出DASH：只能singlefile模式- widevine+fairplay，playready+fairplay，widevine+playready+fairplay: 只能用于HLS，切片格式只能是mp4 可以使用切片模式或singfile模式- widevine+playready: 可用于HLS、MPEG-DASH，切片格式只能是mp4 HLS格式时，可以使用切片模式或singfile模式 MPEG-DASH时，只能使用singlefile模式 */
@@ -3198,6 +3246,20 @@ declare interface EditMediaTaskOutput {
   Path: string;
   /** 编辑后的视频文件元信息。 */
   MetaData?: MediaMetaData | null;
+}
+
+/** embedding 接口的输入:Type 数据类型,现在只支持textData 数据内容，当前只支持为文本 */
+declare interface EmbeddingData {
+  /** 数据类型枚举值：text： 文本 */
+  Type: string;
+  /** 数据内容，当Type 为text时，为文本字符串 */
+  Data: string;
+}
+
+/** embedding 的结果 */
+declare interface EmbeddingResultItem {
+  /** 向量 */
+  Result?: number[];
 }
 
 /** 音视频增强配置 */
@@ -7490,6 +7552,16 @@ declare interface TimeSpotCheck {
   CirclesNumber?: number;
 }
 
+/** token 的用量 */
+declare interface TokensUsage {
+  /** 输入token量 */
+  InputTokens?: number;
+  /** 输出token量 */
+  OutputTokens?: number;
+  /** 总token量，一般是输入+输出 */
+  TotalTokens?: number;
+}
+
 /** 音轨信息 */
 declare interface TrackInfo {
   /** 音轨和声道数字，说明：当：SelectType值为track，此值为整数类型，例如：1；当：SelectType值为track_channel，此值为小数类型，例如：1.0；默认值：1.0注意：整数部分代表音轨序号，以小数部分代表声道。音轨序号即为音轨的stream index，支持输入0和正整数。小数部分最多支持2位小数，并且仅支持0-63，但是如果Codec为aac/eac3/ac3时，小数部分仅支持0-15。例如：对于stream index为1的音轨，1.0代表这个音轨的第1个声道，1.1代表这个音轨的第2个声道。 */
@@ -7822,7 +7894,7 @@ declare interface VODInputInfo {
 
 /** 媒体处理 VOD（点播专业版） 输出对象信息。 */
 declare interface VODOutputStorage {
-  /** 媒体处理生成的文件输出的目标 *Bucket ID* */
+  /** 媒体处理生成的文件输出的目标 Bucket ID */
   Bucket?: string;
   /** 媒体处理生成的文件输出的目标 Bucket 的园区 */
   Region?: string;
@@ -7858,6 +7930,16 @@ declare interface VideoDenoiseConfig {
   Type?: string | null;
 }
 
+/** aigc cos信息，存储用户请求时填写的cos信息，存放结果 */
+declare interface VideoDramaCosInfo {
+  /** cos通地域 */
+  CosBucketRegion?: string;
+  /** cos桶名称 */
+  CosBucketName?: string;
+  /** cos桶路径 */
+  CosBucketPath?: string;
+}
+
 /** 视频增强配置 */
 declare interface VideoEnhanceConfig {
   /** 插帧帧率配置（旧）。新用户建议使用FrameRateWithDen配置插帧帧率，支持分数，且效果更好。注意，FrameRate 与FrameRateWithDen 只能二选一，同时配置可能导致任务失败。源帧率大于等于目标帧率时能力不会生效。 */
@@ -7884,6 +7966,22 @@ declare interface VideoEnhanceConfig {
   DiffusionEnhance?: DiffusionEnhanceConfig | null;
   /** 新插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。 */
   FrameRateWithDen?: FrameRateWithDenConfig | null;
+}
+
+/** aigc cos信息，存储用户请求时填写的cos信息，存放结果 */
+declare interface VideoRedrawCosInfo {
+  /** cos桶地域 */
+  CosBucketRegion?: string;
+  /** cos桶名称 */
+  CosBucketName?: string;
+  /** cos桶路径 */
+  CosBucketPath?: string;
+}
+
+/** 视频转绘的输入源 */
+declare interface VideoRedrawInput {
+  /** 输入待转绘的视频URL */
+  Url: string;
 }
 
 /** 视频流配置参数 */
@@ -8358,6 +8456,20 @@ declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateAiDramaTaskRequest {
+  /** ai漫剧输入 */
+  Input: AiDramaInput;
+  /** 用户cos信息 */
+  CosInfo?: VideoDramaCosInfo;
+}
+
+declare interface CreateAiDramaTaskResponse {
+  /** 任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAigcAudioTaskRequest {
   /** 模型名称。生音乐当前支持的模型: GL、MiniMaxMusic。 */
   ModelName?: string;
@@ -8552,6 +8664,20 @@ declare interface CreateContentReviewTemplateRequest {
 declare interface CreateContentReviewTemplateResponse {
   /** 内容审核模板唯一标识。 */
   Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDocToVideoTaskRequest {
+  /** AIGC文档生成视频的输入信息 */
+  Input: DocToVideoInput;
+  /** 用户cos信息，用于保存生成结果 */
+  CosInfo?: DocToVideoCosInfo;
+}
+
+declare interface CreateDocToVideoTaskResponse {
+  /** 任务id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9084,6 +9210,20 @@ declare interface CreateVideoDatabaseEntryTaskRequest {
 declare interface CreateVideoDatabaseEntryTaskResponse {
   /** 任务ID */
   TaskId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVideoRedrawTaskRequest {
+  /** 输入待转绘视频url信息 */
+  Input: VideoRedrawInput;
+  /** 用户cos信息，用于保存生成结果 */
+  CosInfo?: VideoRedrawCosInfo;
+}
+
+declare interface CreateVideoRedrawTaskResponse {
+  /** 任务id */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11144,6 +11284,24 @@ declare interface EditMediaResponse {
   RequestId?: string;
 }
 
+declare interface EmbeddingDataRequest {
+  /** embedding 的模型，现在只支持 text_embedding_v1枚举值：text_embedding_v1： 文本embedding的模型，可以填写Prompt */
+  Model: string;
+  /** embedding的输入 */
+  Files: EmbeddingData[];
+  /** embedding 的输入prompt */
+  Prompt?: string;
+}
+
+declare interface EmbeddingDataResponse {
+  /** embedding 的结果 */
+  Data?: EmbeddingResultItem[];
+  /** embedding 的 token 用量 */
+  Usage?: TokensUsage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EnableScheduleRequest {
   /** 编排唯一标识。 */
   ScheduleId: number;
@@ -12339,6 +12497,8 @@ declare interface Mps {
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link CreateAdaptiveDynamicStreamingTemplateRequest} {@link CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建AI漫剧任务 {@link CreateAiDramaTaskRequest} {@link CreateAiDramaTaskResponse} */
+  CreateAiDramaTask(data: CreateAiDramaTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAiDramaTaskResponse>;
   /** 创建AIGC生音频任务 {@link CreateAigcAudioTaskRequest} {@link CreateAigcAudioTaskResponse} */
   CreateAigcAudioTask(data?: CreateAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcAudioTaskResponse>;
   /** 创建AIGC生图片任务 {@link CreateAigcImageTaskRequest} {@link CreateAigcImageTaskResponse} */
@@ -12353,6 +12513,8 @@ declare interface Mps {
   CreateBlindWatermarkTemplate(data: CreateBlindWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlindWatermarkTemplateResponse>;
   /** 创建内容审核模板 {@link CreateContentReviewTemplateRequest} {@link CreateContentReviewTemplateResponse} */
   CreateContentReviewTemplate(data?: CreateContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentReviewTemplateResponse>;
+  /** 创建AIGC文档生视频任务 {@link CreateDocToVideoTaskRequest} {@link CreateDocToVideoTaskResponse} */
+  CreateDocToVideoTask(data: CreateDocToVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDocToVideoTaskResponse>;
   /** 创建雪碧图模板 {@link CreateImageSpriteTemplateRequest} {@link CreateImageSpriteTemplateResponse} */
   CreateImageSpriteTemplate(data: CreateImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSpriteTemplateResponse>;
   /** 创建直播录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
@@ -12403,6 +12565,8 @@ declare interface Mps {
   CreateTranscodeTemplate(data: CreateTranscodeTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTranscodeTemplateResponse>;
   /** 创建视频检索的入库任务 {@link CreateVideoDatabaseEntryTaskRequest} {@link CreateVideoDatabaseEntryTaskResponse} */
   CreateVideoDatabaseEntryTask(data: CreateVideoDatabaseEntryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDatabaseEntryTaskResponse>;
+  /** 创建AIGC视频转绘任务 {@link CreateVideoRedrawTaskRequest} {@link CreateVideoRedrawTaskResponse} */
+  CreateVideoRedrawTask(data: CreateVideoRedrawTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoRedrawTaskResponse>;
   /** 创建视频检索任务 {@link CreateVideoSearchTaskRequest} {@link CreateVideoSearchTaskResponse} */
   CreateVideoSearchTask(data: CreateVideoSearchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoSearchTaskResponse>;
   /** 创建水印模板 {@link CreateWatermarkTemplateRequest} {@link CreateWatermarkTemplateResponse} */
@@ -12637,6 +12801,8 @@ declare interface Mps {
   DisassociateSecurityGroup(data?: DisassociateSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateSecurityGroupResponse>;
   /** 编辑视频 {@link EditMediaRequest} {@link EditMediaResponse} */
   EditMedia(data: EditMediaRequest, config?: AxiosRequestConfig): AxiosPromise<EditMediaResponse>;
+  /** embedding 数据 {@link EmbeddingDataRequest} {@link EmbeddingDataResponse} */
+  EmbeddingData(data: EmbeddingDataRequest, config?: AxiosRequestConfig): AxiosPromise<EmbeddingDataResponse>;
   /** 启用编排 {@link EnableScheduleRequest} {@link EnableScheduleResponse} */
   EnableSchedule(data: EnableScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<EnableScheduleResponse>;
   /** 启用工作流 {@link EnableWorkflowRequest} {@link EnableWorkflowResponse} */

@@ -5149,6 +5149,8 @@ declare namespace V20180724 {
     GroupId?: string;
     /** 告警分组名称。查询名称中包含给定字符串的告警分组 */
     GroupName?: string;
+    /** 通过自定义label查询告警规则：返回包含符合过滤条件告警规则的整个分组多个label过滤条件取交集 */
+    Labels?: PrometheusRuleKV[];
   }
 
   interface DescribePrometheusAlertGroupsResponse {

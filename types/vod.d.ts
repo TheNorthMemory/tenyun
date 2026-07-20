@@ -8950,7 +8950,7 @@ declare namespace V20180717 {
   interface CreateAigcVideoRedrawTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** AIGC 视频转绘任务的输入视频的文件信息。 */
+    /** AIGC 视频转绘任务的输入视频的文件信息。输入视频时长需短于 90 秒，大小在2GB内。 */
     FileInfo?: AigcVideoRedrawTaskInputFileInfo;
     /** AIGC 视频转绘任务的输出媒体文件配置。 */
     OutputConfig?: AigcVideoRedrawOutputConfig;
@@ -10286,13 +10286,15 @@ declare namespace V20180717 {
   }
 
   interface DescribeAigcApiTokensRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
   interface DescribeAigcApiTokensResponse {
     /** API Token 列表 */
     ApiTokens?: string[];
+    /** ExtInfo信息，和API Token列表一一对应 */
+    ExtInfos?: string[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -13437,6 +13439,22 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface UpdateAigcApiTokenRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** 要更新Api Key */
+    ApiToken: string;
+    /** Merge（默认，对 ExtInfo JSON 按顶层 key 合并）、Overwrite（直接覆盖） */
+    ActionType?: string;
+    /** token 的扩展信息 */
+    ExtInfo?: string;
+  }
+
+  interface UpdateAigcApiTokenResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface VerifyDomainRecordRequest {
     /** 需要接入点播的加速域名。 */
     Domain: string;
@@ -13935,6 +13953,8 @@ declare interface Vod {
   SimpleHlsClip(data: V20180717.SimpleHlsClipRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SimpleHlsClipResponse>;
   /** 视频拆条 {@link V20180717.SplitMediaRequest} {@link V20180717.SplitMediaResponse} */
   SplitMedia(data: V20180717.SplitMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SplitMediaResponse>;
+  /** 更新AIGC API Token {@link V20180717.UpdateAigcApiTokenRequest} {@link V20180717.UpdateAigcApiTokenResponse} */
+  UpdateAigcApiToken(data: V20180717.UpdateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateAigcApiTokenResponse>;
   /** 验证域名解析 {@link V20180717.VerifyDomainRecordRequest} {@link V20180717.VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: V20180717.VerifyDomainRecordRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.VerifyDomainRecordResponse>;
   /** 微信小程序视频发布 {@link V20180717.WeChatMiniProgramPublishRequest} {@link V20180717.WeChatMiniProgramPublishResponse} */

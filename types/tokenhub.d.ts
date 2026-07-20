@@ -737,12 +737,14 @@ declare interface CreateTokenPlanTeamOrderAndBuyRequest {
   ProductType: string;
   /** 套餐名称。只能包含中文、字母、数字、下划线、连字符，以中文或者字母开头，以中文或字母或数字结尾，2~50个字符 */
   TeamName: string;
-  /** 购买时长。单位：月。必须大于 0。 */
+  /** 购买时长。单位：月。必须大于 0，支持1个月～12个月。 */
   TimeSpan: number;
   /** 购买的套餐规格。套餐类型为专业套餐（enterprise），单位取值为积分；轻享套餐（enterprise-auto），单位取值为 tokens。 */
   CreditOrToken: number;
   /** 是否开启自动续费。默认不开启。 */
   EnableAutoRenew?: boolean;
+  /** 已有套餐 ID（非空时走过期续费，空时走新购） */
+  TeamId?: string;
 }
 
 declare interface CreateTokenPlanTeamOrderAndBuyResponse {
@@ -1309,7 +1311,7 @@ declare interface Tokenhub {
   CreateGlossaryEntries(data: CreateGlossaryEntriesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryEntriesResponse>;
   /** 批量创建 Token Plan 套餐的 API Key {@link CreateTokenPlanApiKeysRequest} {@link CreateTokenPlanApiKeysResponse} */
   CreateTokenPlanApiKeys(data: CreateTokenPlanApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanApiKeysResponse>;
-  /** 创建 Token Plan 套餐 {@link CreateTokenPlanTeamOrderAndBuyRequest} {@link CreateTokenPlanTeamOrderAndBuyResponse} */
+  /** 创建或重新开通 Token Plan 套餐 {@link CreateTokenPlanTeamOrderAndBuyRequest} {@link CreateTokenPlanTeamOrderAndBuyResponse} */
   CreateTokenPlanTeamOrderAndBuy(data: CreateTokenPlanTeamOrderAndBuyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenPlanTeamOrderAndBuyResponse>;
   /** 删除 API 密钥 {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
   DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;

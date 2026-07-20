@@ -710,12 +710,12 @@ declare interface TagSpecification {
 
 /** kubernetes Taint */
 declare interface Taint {
+  /** Taint的Effect */
+  Effect?: string;
   /** Taint的Key */
   Key?: string;
   /** Taint的Value */
   Value?: string;
-  /** Taint的Effect */
-  Effect?: string;
 }
 
 /** 修改原生节点池参数 */
@@ -8944,19 +8944,19 @@ declare namespace V20180525 {
   }
 
   interface UpgradeClusterInstancesRequest {
-    /** 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ） */
+    /** 集群ID（请登录 TKE 控制台 获取集群 ID ） */
     ClusterId: string;
     /** create 表示开始一次升级任务pause 表示停止任务resume表示继续任务abort表示终止任务 */
     Operation: string;
     /** 升级类型，只有Operation是create需要设置reset 大版本重装升级hot 小版本热升级major 大版本原地升级 */
     UpgradeType?: string;
-    /** 需要升级的节点列表，可以通过控制台或 [查询待升级节点接口](https://cloud.tencent.com/document/api/457/50366) 获取 */
+    /** 需要升级的节点列表，可以通过控制台或 查询待升级节点接口 获取 */
     InstanceIds?: string[];
     /** 当节点重新加入集群时候所使用的参数，参考添加已有节点接口 */
     ResetParam?: UpgradeNodeResetParam;
     /** 是否忽略节点升级前检查，默认值 false */
     SkipPreCheck?: boolean;
-    /** 最大可容忍的不可用Pod比例，如果设置 0 表示不做校验 */
+    /** 最大可容忍的不可用Pod百分比，如果设置 0 表示不做校验取值范围：[0, 100]默认值：20 */
     MaxNotReadyPercent?: number;
     /** 是否升级节点运行时，默认false不升级 */
     UpgradeRunTime?: boolean;
@@ -9009,7 +9009,7 @@ declare interface Tke {
   (): Versions;
   /** 创建健康检测策略 {@link CreateHealthCheckPolicyRequest} {@link CreateHealthCheckPolicyResponse} */
   CreateHealthCheckPolicy(data: CreateHealthCheckPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHealthCheckPolicyResponse>;
-  /** 创建 TKE 节点池 {@link CreateNodePoolRequest} {@link CreateNodePoolResponse} */
+  /** 创建 TKE 原生节点池 {@link CreateNodePoolRequest} {@link CreateNodePoolResponse} */
   CreateNodePool(data: CreateNodePoolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNodePoolResponse>;
   /** 删除原生节点池节点 {@link DeleteClusterMachinesRequest} {@link DeleteClusterMachinesResponse} */
   DeleteClusterMachines(data: DeleteClusterMachinesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterMachinesResponse>;
