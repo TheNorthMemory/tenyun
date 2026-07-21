@@ -1000,7 +1000,7 @@ declare interface SlowLogHost {
 
 /** 慢日志详细信息 */
 declare interface SlowLogInfoItem {
-  /** 慢日志开始时间 */
+  /** 慢日志开始时间，格式: "yyyy-MM-dd HH:mm:ss" */
   Timestamp?: string;
   /** sql语句 */
   SqlText?: string;
@@ -2129,7 +2129,7 @@ declare interface DescribeDBSpaceStatusRequest {
   InstanceId: string;
   /** 时间段天数，截止日期为当日，默认为7天。 */
   RangeDays?: number;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"mongodb" - 云数据库 MongoDB，"dcdb" -（TDSQL MySQL 版）、"mariadb" -（TDSQL MariaDB 版）默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"mongodb" - 云数据库 MongoDB，"dcdb" -（TDSQL MySQL 版）、"mariadb" -（TDSQL MariaDB 版）、"tdstore" - 云数据库TDSQL Boundless，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -2783,13 +2783,13 @@ declare interface DescribeSlowLogTimeSeriesStatsResponse {
 }
 
 declare interface DescribeSlowLogTopSqlsRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
   /** 开始时间，如“2019-09-10 12:13:14”。 */
   StartTime: string;
   /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
   EndTime: string;
-  /** 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。 */
+  /** 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。其中：QueryTime-查询耗时ExecTimes-执行次数RowsSent-返回行数LockTime-锁等待时间RowsExamined-扫描行数 */
   SortBy?: string;
   /** 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。 */
   OrderBy?: string;
@@ -2799,7 +2799,7 @@ declare interface DescribeSlowLogTopSqlsRequest {
   Offset?: number;
   /** 数据库名称数组。 */
   SchemaList?: SchemaItem[];
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "tdstore" - 云数据库TDSQL Boundless，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -2843,11 +2843,11 @@ declare interface DescribeSlowLogUserHostStatsResponse {
 }
 
 declare interface DescribeSlowLogsRequest {
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"tdstore" - 云数据库TDSQL Boundless，默认为"mysql"。 */
   Product: string;
-  /** 实例id。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
-  /** sql模板的md5值 */
+  /** sql 模板的 md5 值，可通过 DescribeSlowLogTopSqls 接口获取。 */
   Md5: string;
   /** 开始时间，如“2019-09-10 12:13:14”。 */
   StartTime: string;
@@ -2863,7 +2863,7 @@ declare interface DescribeSlowLogsRequest {
   Key?: string[];
   /** 用户 */
   User?: string[];
-  /** IP */
+  /** IP 来源 */
   Ip?: string[];
   /** 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素 */
   Time?: number[];

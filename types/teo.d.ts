@@ -1054,17 +1054,19 @@ declare interface CompressionParameters {
 
 /** 配置组版本信息。 */
 declare interface ConfigGroupVersionInfo {
-  /** 版本 ID。 */
+  /** 配置组版本 ID，创建配置组版本时 EdgeOne 分配的唯一资源 ID。参数格式：ver-2kplomhisdcb取值参考：CreateConfigGroupVersion 返回值 VersionIdDescribeConfigGroupVersions 返回值 ConfigGroupVersionInfos */
   VersionId: string;
-  /** 版本号。 */
+  /** 配置组版本号。该参数仅作展示使用，配置组每创建一次新版本，该版本号自增加一，初始版本的版本号为 "0"。取值参考：DescribeConfigGroupVersions 返回值 ConfigGroupVersionInfos */
   VersionNumber?: string;
-  /** 配置组 ID。 */
-  GroupId?: string;
-  /** 配置组类型，可选项如下：l7_acceleration: 七层加速配置组；edge_functions: 边缘函数配置组；web_security: Web 防护配置组。 */
+  /** 配置组版本所基于的来源版本 ID，在创建配置组版本时进行指定来源版本 ID，新版本将在该来源版本的配置基础上派生创建。参数格式：ver-2kplomhisdcb取值参考：CreateConfigGroupVersion 返回值 VersionIdDescribeConfigGroupVersions 返回值 ConfigGroupVersionInfos */
+  SourceVersion?: string;
+  /** 版本归属的配置组类型。枚举值：l7_acceleration： 七层加速配置组edge_functions： 边缘函数配置组web_security： Web 防护配置组 */
   GroupType?: string;
+  /** 版本归属的配置组 ID。参数格式：cg-2kplomhisdcb */
+  GroupId?: string;
   /** 版本描述。 */
   Description?: string;
-  /** 版本状态，取值有：creating：创建中；inactive：未生效；active：已生效。 */
+  /** 版本生效状态。枚举值：creating： 版本创建中inactive： 版本未生效active： 版本已生效 */
   Status?: string;
   /** 版本创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
   CreateTime?: string;
@@ -5023,12 +5025,14 @@ declare interface CreateCLSIndexResponse {
 declare interface CreateConfigGroupVersionRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 待新建版本的配置组 ID。 */
+  /** 待新建版本的配置组 ID。您可以通过查询环境信息接口（DescribeEnvironments）获取完整的环境信息，环境信息中包含了每个配置组类型的配置组 ID。取值参考：DescribeEnvironments 返回值 EnvInfos */
   GroupId: string;
-  /** 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置文件内容可参考下方示例。 */
+  /** 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置文件内容可参考下方示例和 配置组语法说明。 */
   Content: string;
   /** 版本描述，可输入最大长度为 50 个字符，可以通过本字段填写该版本的使用场景等。 */
   Description?: string;
+  /** 新版本所基于的来源版本 ID。新版本将在该来源版本的配置基础上派生创建。该字段可选，未传入时默认采用当前生产环境正在生效的版本作为来源版本。取值参考：CreateConfigGroupVersion 返回值 VersionIdDescribeConfigGroupVersions 返回值 ConfigGroupVersionInfos */
+  SourceVersion?: string;
 }
 
 declare interface CreateConfigGroupVersionResponse {

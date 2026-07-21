@@ -7984,6 +7984,12 @@ declare interface VideoRedrawInput {
   Url: string;
 }
 
+/** Aigc 转绘、替换等任务参数 */
+declare interface VideoRedrawTaskInfo {
+  /** 转绘视频风格，如动漫、赛博朋克、水墨等 */
+  Style?: string;
+}
+
 /** 视频流配置参数 */
 declare interface VideoTemplateInfo {
   /** 视频流的编码格式，可选值：h264：H.264 编码h265：H.265 编码h266：H.266 编码av1：AOMedia Video 1 编码vp8：VP8 编码vp9：VP9 编码mpeg2：MPEG2 编码dnxhd：DNxHD 编码mv-hevc：MV-HEVC 编码注意：av1 编码容器目前只支持 mp4 ，webm，mkv。注意：H.266 编码容器目前只支持 mp4 ，hls，ts，mov。注意：VP8、VP9编码容器目前只支持webm，mkv。注意：MPEG2、dnxhd 编码容器目前只支持mxf。注意：MV-HEVC编码容器目前只支持mp4，hls，mov。其中hls格式只支持mp4分片格式。且要求输入源为全景视频（带多视角）。 */
@@ -9219,6 +9225,8 @@ declare interface CreateVideoRedrawTaskRequest {
   Input: VideoRedrawInput;
   /** 用户cos信息，用于保存生成结果 */
   CosInfo?: VideoRedrawCosInfo;
+  /** ai转绘任务信息 */
+  TaskInfo?: VideoRedrawTaskInfo;
 }
 
 declare interface CreateVideoRedrawTaskResponse {

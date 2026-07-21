@@ -22,6 +22,16 @@ declare interface AIOptimizeModel {
   Model: ModelDetailInfo | null;
 }
 
+/** 员工信息 */
+declare interface AccountInfo {
+  /** 员工子账号id */
+  AccountUin?: string;
+  /** 员工昵称 */
+  NickName?: string;
+  /** 员工头像 */
+  Avatar?: string;
+}
+
 /** Agent高级设置 */
 declare interface AgentAdvancedConfig {
   /** 最大推理轮数 */
@@ -380,6 +390,8 @@ declare interface App {
   Status: AppStatusInfo | null;
   /** 应用引用的共享知识库列表 */
   SharedKbList?: AppSharedKbInfo[];
+  /** 企业共享配置 */
+  CorpShareConfig?: CorpShareConfig | null;
 }
 
 /** 应用高级配置 */
@@ -540,13 +552,13 @@ declare interface AppSecretInfo {
   CreateTime: string;
 }
 
-/** 应用分享访问控制配置 */
+/** AppShareAccessControl */
 declare interface AppShareAccessControl {
-  /** 访问控制类型。枚举值: 1:公开访问(所有用户都可访问), 2:内部访问(仅企业用户可访问), 3:账号白名单(指定UIN/手机/邮箱/IP可访问) */
-  AccessType: number;
-  /** 体验链接开关 */
-  Enabled: boolean;
-  /** 白名单(仅 access_type=ACCOUNT_WHITELIST 时生效) */
+  /** 枚举项枚举值描述APP_SHARE_ACCESS_TYPE_UNSPECIFIED0APP_SHARE_ACCESS_TYPE_PUBLIC1公开访问(所有用户都可访问)APP_SHARE_ACCESS_TYPE_INTERNAL2内部访问(仅企业用户可访问)APP_SHARE_ACCESS_TYPE_ACCOUNT_WHITELIST3账号白名单(指定UIN/手机/邮箱/IP可访问) */
+  AccessType?: number;
+  /** 是否开启访问控制枚举值：true： 启用false： 禁用 */
+  Enabled?: boolean;
+  /** 白名单信息 */
   Whitelist?: AppShareWhitelistItem[];
 }
 
@@ -558,11 +570,11 @@ declare interface AppShareURLInfo {
   ShareUrl: string;
 }
 
-/** 应用分享白名单项 */
+/** AppShareWhitelistItem */
 declare interface AppShareWhitelistItem {
-  /** 白名单类型。枚举值: 1:UIN账号, 2:手机号码, 3:邮箱地址, 4:IP地址 */
-  Type: number;
-  /** 白名单值列表(UIN/手机号/邮箱/IP等) */
+  /** 枚举项枚举值描述APP_SHARE_WHITELIST_TYPE_UNSPECIFIED0APP_SHARE_WHITELIST_TYPE_UIN1UIN账号APP_SHARE_WHITELIST_TYPE_PHONE2手机号码APP_SHARE_WHITELIST_TYPE_EMAIL3邮箱地址APP_SHARE_WHITELIST_TYPE_IP4IP地址APP_SHARE_WHITELIST_TYPE_RTX5RTX账号 */
+  Type?: number;
+  /** 白名单数组信息参数格式：白名单值 */
   Values?: string[];
 }
 
@@ -650,6 +662,34 @@ declare interface AppealingStatus {
   RoleInAppeal: boolean;
 }
 
+/** 操作日志 */
+declare interface AuditLog {
+  /** 员工信息 */
+  AccountInfo?: AccountInfo;
+  /** 应用业务id */
+  AppId?: string;
+  /** 应用名称操作日志触发时的名称 */
+  AppName?: string;
+  /** 操作时间参数格式：秒时间戳 */
+  OperateTime?: string;
+  /** 操作类型 */
+  Action?: string;
+  /** 操作对象 */
+  Biz?: string;
+  /** 操作内容 */
+  Content?: string;
+  /** 操作唯一ID */
+  UniqueId?: string;
+}
+
+/** 操作日志元数据 */
+declare interface AuditLogMetaField {
+  /** 操作日志元数据key */
+  Key?: string;
+  /** 操作日志元数据Name */
+  Name?: string;
+}
+
 /** 插件授权配置 */
 declare interface AuthConfig {
   /** 授权方式。枚举值：0：无鉴权1：API Key 鉴权2：CAM 授权3：OAuth 2.0 授权 */
@@ -706,15 +746,33 @@ declare interface CamAuthConfig {
   SecretKeyName?: string;
 }
 
+/** ClawAgent Agent团队协作配置 */
+declare interface ClawAgentAgentTeamConfig {
+  /** 是否开启Agent团队协作 */
+  Enabled?: boolean;
+  /** prompt内容 */
+  PromptContent?: string;
+}
+
 /** ClawAgent配置 */
 declare interface ClawAgentConfig {
   /** 调用方自定义配置(控制C端用户在对话时可动态传入哪些自定义配置) */
   CustomConfig: ClawAgentCustomConfig | null;
+  /** Agent团队协作配置 */
+  AgentTeamConfig?: ClawAgentAgentTeamConfig | null;
+  /** 长期记忆配置 */
+  LongMemoryConfig?: ClawAgentLongMemoryConfig | null;
 }
 
 /** ClawAgent调用方自定义配置开关集合 */
 declare interface ClawAgentCustomConfig {
   /** 是否允许C端用户在对话时动态传入自定义Agent配置 */
+  Enabled?: boolean;
+}
+
+/** ClawAgent长期记忆配置 */
+declare interface ClawAgentLongMemoryConfig {
+  /** 是否开启长期记忆 */
   Enabled?: boolean;
 }
 
@@ -890,6 +948,16 @@ declare interface ConversationWorkspace {
   StorageType?: string | null;
 }
 
+/** CorpShareConfig */
+declare interface CorpShareConfig {
+  /** 企业共享开关 */
+  Enabled?: boolean;
+  /** 枚举项枚举值描述SHARE_SCOPE_TYPE_UNSPECIFIED0SHARE_SCOPE_TYPE_ALL1SHARE_SCOPE_TYPE_ACCOUNT2 */
+  ShareScope?: number;
+  /** 企业共享应用标签 */
+  TagIdList?: string[];
+}
+
 /** 数智人配置 */
 declare interface DigitalHumanConfig {
   /** 数智人形象资产id */
@@ -916,9 +984,9 @@ declare interface DuplexBilling {
   OutputPuPrice?: number;
 }
 
-/** FieldMask */
+/** 字段掩码 */
 declare interface FieldMask {
-  /** 参数名称参数格式：需要获取的指定字段路径 */
+  /** 字段路径列表 */
   Paths?: string[];
 }
 
@@ -944,11 +1012,11 @@ declare interface FileParseModel {
   SupportedFileList?: SupportedFileType[];
 }
 
-/** 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系） */
+/** 列表通用过滤条件（多个Filter之间为AND关系，同一Filter的多个value_list为OR关系） */
 declare interface Filter {
   /** 过滤字段名 */
   Name?: string;
-  /** 操作符，默认 IN（向后兼容）枚举项枚举值描述FILTER_OPERATOR_IN0属于 value_list（默认值，向后兼容；value_list 不可为空）FILTER_OPERATOR_NOT_IN1不属于 value_list（value_list 不可为空） */
+  /** 操作符：0-属于，1-不属于 */
   Operator?: number;
   /** 过滤值数组 */
   ValueList?: string[];
@@ -1189,23 +1257,23 @@ declare interface Plugin {
   /** 创建时间，unix时间戳 */
   CreateTime?: string;
   /** 插件运营管理信息 */
-  Operation?: PluginOperation;
+  Operation?: PluginOperation | null;
   /** 插件id */
   PluginId?: string;
   /** 插件版本号 */
   PluginVersion?: number;
   /** 插件基础信息 */
-  Profile?: PluginProfile;
+  Profile?: PluginProfile | null;
   /** 插件统计信息 */
-  Statistics?: PluginStatistics;
+  Statistics?: PluginStatistics | null;
   /** 插件状态，1:可用，2:不可用 枚举值：1： 可用2： 不可用 */
   Status?: number;
   /** 工具列表 */
-  ToolList?: Tool[];
+  ToolList?: Tool[] | null;
   /** 更新时间，Unix时间戳 */
   UpdateTime?: string;
   /** 用户维度的插件状态信息 */
-  UserState?: PluginUserState;
+  UserState?: PluginUserState | null;
 }
 
 /** 插件配置 */
@@ -1344,8 +1412,12 @@ declare interface ReleaseSummary {
   Status: number;
   /** 状态描述 */
   StatusDescription: string;
+  /** 应用分享访问控制 */
+  AppShareAccessControl?: AppShareAccessControl | null;
   /** 发布渠道ID列表 */
   ChannelIdList?: string[];
+  /** 企业共享配置 */
+  CorpShareConfig?: CorpShareConfig | null;
 }
 
 /** RequestParam */
@@ -1682,10 +1754,14 @@ declare interface Variable {
   ModuleType: number;
   /** 变量名称 */
   Name: string;
-  /** 变量类型。枚举值: 1:字符串, 2:整数, 3:浮点数, 4:布尔值, 5:对象, 6:字符串数组, 7:整数数组, 8:浮点数数组, 9:布尔值数组, 10:对象数组, 11:文件, 12:文档, 13:图片, 14:音频, 15:视频, 16:文件数组, 17:文档数组, 18:图片数组, 19:音频数组, 20:视频数组, 21:数组的数组, 22:密钥/敏感信息, 99:空值 */
+  /** 变量类型枚举值：0： 字符串1： 整数2： 浮点数3： 布尔值4： 对象5： 字符串数组6： 整数数组7： 浮点数数组8： 布尔值数组9： 对象数组10： 文件11： 文档12： 图片13： 音频14： 视频15： 文件数组16： 文档数组17： 图片数组18： 音频数组19： 视频数组20： 数组的数组21： 密钥 */
   Type: number;
   /** 变量ID */
   VariableId: string;
+  /** 是否启用网络策略(仅环境变量生效) */
+  EnableEndpoints?: boolean;
+  /** 网络策略列表(支持: 精确域名、*.通配子域名、可带协议/端口/路径前缀) */
+  EndpointList?: string[];
 }
 
 /** VoiceConfig */
@@ -1798,7 +1874,11 @@ declare interface CreatePluginRequest {
   /** 当前空间id */
   SpaceId: string;
   /** 插件的工具列表 */
-  ToolList?: Tool;
+  ToolList?: Tool[];
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
 }
 
 declare interface CreatePluginResponse {
@@ -1811,8 +1891,12 @@ declare interface CreatePluginResponse {
 declare interface CreateReleaseRequest {
   /** 应用ID */
   AppId: string;
+  /** 应用分享访问控制配置 */
+  AppShareAccessControl?: AppShareAccessControl;
   /** 渠道ID列表 */
   ChannelIdList?: string[];
+  /** 企业共享配置 */
+  CorpShareConfig?: CorpShareConfig;
   /** 发布描述 */
   Description?: string;
   /** 将默认知识库中，仅调试生效的知识批量变更为"调试/发布都生效" */
@@ -1977,6 +2061,8 @@ declare interface DeleteAgentResponse {
 declare interface DeleteAppRequest {
   /** app_id */
   AppId: string;
+  /** 删除原因(非必填,审批时展示) */
+  Reason?: string;
 }
 
 declare interface DeleteAppResponse {
@@ -2007,6 +2093,10 @@ declare interface DeleteConversationResponse {
 declare interface DeletePluginRequest {
   /** 插件id */
   PluginId: string;
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
 }
 
 declare interface DeletePluginResponse {
@@ -2064,6 +2154,24 @@ declare interface DeleteVariableRequest {
 }
 
 declare interface DeleteVariableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccountListRequest {
+  /** 页码从0开始 */
+  PageNumber?: number;
+  /** 分页数量取值范围：[1, 100]单位：个最大100 */
+  PageSize?: number;
+  /** 参数过滤支持SpaceId,NIckName 过滤查询 */
+  FilterList?: Filter[];
+}
+
+declare interface DescribeAccountListResponse {
+  /** 总数 */
+  TotalCount?: string;
+  /** 员工列表 */
+  AccountList?: AccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2131,7 +2239,7 @@ declare interface DescribeAppRequest {
   AppId: string;
   /** 应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域 */
   Domain?: number;
-  /** 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表) */
+  /** 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置) */
   FieldMask?: FieldMask;
   /** 特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态 */
   StatusType?: number;
@@ -2162,6 +2270,38 @@ declare interface DescribeAppSummaryListResponse {
   AppSummaryList?: AppSummary[];
   /** total_count */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogListRequest {
+  /** 空间id */
+  SpaceId?: string;
+  /** 每页数量取值范围：[1, 100] */
+  Limit?: number;
+  /** es查询起始位置对应接口返回SearchAfter */
+  SearchAfter?: string[];
+  /** 参数过滤支持 Action,BizObject,Content支持SpaceId,AccountUin,AppId(最多100个)支持startTime,endTime(秒时间戳) */
+  FilterList?: Filter[];
+}
+
+declare interface DescribeAuditLogListResponse {
+  /** 操作日志列表 */
+  AuditLogList?: AuditLog[];
+  /** es查询起始位置用于入参查询下一页 */
+  SearchAfter?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditLogMetaRequest {
+}
+
+declare interface DescribeAuditLogMetaResponse {
+  /** 操作类型列表 */
+  Actions?: AuditLogMetaField[];
+  /** 操作对象列表 */
+  BizObjects?: AuditLogMetaField[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2579,11 +2719,9 @@ declare interface ModifyAppRequest {
   Description?: string;
   /** 应用名称 */
   Name?: string;
-  /** 分享配置 */
-  ShareConfig?: AppShareAccessControl;
   /** 引用的共享知识库ID列表(全量覆盖) */
   SharedKbIdList?: string[];
-  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, ShareConfig, SharedKbIdList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
+  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
   UpdateMask?: FieldMask;
 }
 
@@ -2635,6 +2773,10 @@ declare interface ModifyPluginRequest {
   UpdateMask?: FieldMask;
   /** 插件的工具列表，mcp插件不传 */
   ToolList?: Tool[];
+  /** 登录用户主账号(集成商模式必填) */
+  LoginUin?: string;
+  /** 登录用户子账号(集成商模式必填) */
+  LoginSubAccountUin?: string;
 }
 
 declare interface ModifyPluginResponse {
@@ -2823,6 +2965,8 @@ declare interface Adp {
   DeleteSpace(data?: DeleteSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpaceResponse>;
   /** 删除参数变量 {@link DeleteVariableRequest} {@link DeleteVariableResponse} */
   DeleteVariable(data: DeleteVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVariableResponse>;
+  /** 查看企业下的员工列表 {@link DescribeAccountListRequest} {@link DescribeAccountListResponse} */
+  DescribeAccountList(data?: DescribeAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountListResponse>;
   /** 查询 Agent 详情 {@link DescribeAgentDetailRequest} {@link DescribeAgentDetailResponse} */
   DescribeAgentDetail(data?: DescribeAgentDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDetailResponse>;
   /** 获取Agent发布列表 {@link DescribeAgentReleasePreviewListRequest} {@link DescribeAgentReleasePreviewListResponse} */
@@ -2833,6 +2977,10 @@ declare interface Adp {
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
   /** 获取应用摘要列表 {@link DescribeAppSummaryListRequest} {@link DescribeAppSummaryListResponse} */
   DescribeAppSummaryList(data: DescribeAppSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSummaryListResponse>;
+  /** 查看操作日志列表 {@link DescribeAuditLogListRequest} {@link DescribeAuditLogListResponse} */
+  DescribeAuditLogList(data?: DescribeAuditLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogListResponse>;
+  /** 获取审计日志元信息 {@link DescribeAuditLogMetaRequest} {@link DescribeAuditLogMetaResponse} */
+  DescribeAuditLogMeta(data?: DescribeAuditLogMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogMetaResponse>;
   /** 查看会话信息 {@link DescribeConversationRequest} {@link DescribeConversationResponse} */
   DescribeConversation(data: DescribeConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationResponse>;
   /** 获取会话列表 {@link DescribeConversationListRequest} {@link DescribeConversationListResponse} */

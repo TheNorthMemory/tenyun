@@ -3695,8 +3695,10 @@ declare interface CreateOrganizationAuthUrlRequest {
   AuthorizationMethod?: number[];
   /** 企业认证页面隐藏上传营业执照 */
   HideBizLicense?: boolean;
-  /** 对方打开链接认证时，公司地址是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时必须与接口传递的信息完全相符。p.s. 仅在公司地址（OrganizationAddress）不为空时有效 */
+  /** 对方打开链接认证时，公司地址是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致。true：启用状态，实际认证时会回显接口传递的值，且不可更改p.s. 仅在公司地址（OrganizationAddress）不为空时有效如下图所示： */
   AddressSame?: boolean;
+  /** 对方打开链接认证时，公司营业执照是否要与接口传递上来的保持一致。false（默认值）：关闭状态，实际认证时允许与接口传递的信息存在不一致，用户可以进行修改true：启用状态，实际认证时回填的信息就是用户传递的值，并且不能修改p.s. 仅在公司营业执照（BusinessLicense）不为空时有效如下图 */
+  BizLicenseSame?: boolean;
 }
 
 declare interface CreateOrganizationAuthUrlResponse {
@@ -5023,7 +5025,7 @@ declare interface DescribeFlowInfoResponse {
 }
 
 declare interface DescribeFlowTemplatesRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -5031,11 +5033,11 @@ declare interface DescribeFlowTemplatesRequest {
   ContentType?: number;
   /** 搜索过滤的条件，本字段允许您通过指定模板 ID 或模板名称来进行查询。模板 ID：Key设置为 template-id ，Values为您想要查询的 模板 ID 列表。 主企业模板 ID：Key设置为 share-template-id ，Values为您想要查询的 主企业模板 ID 列表。用来查询主企业分享模板到子企业场景下，子企业的模板信息，在此情境下，参数 Agent.ProxyOrganizationId（子企业的组织ID）为必填项。 模板名称：Key设置为 template-name ，Values为您想要查询的模板名称列表。模板的用户合同类型：Key设置为 user-flow-type-id ，Values为您想要查询的用户模板类型id列表。 */
   Filters?: Filter[];
-  /** 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。注：`1.offset从0开始，即第一页为0。``2.默认从第一页返回。` */
+  /** 偏移量:从 0 开始，最大20000。 */
   Offset?: number;
-  /** 指定每页返回的数据条数，和Offset参数配合使用。注：`1.默认值为20，单页做大值为200。` */
+  /** 指定每页返回的数据条数，和Offset参数配合使用。注：1.默认值为20，单页做大值为200。 */
   Limit?: number;
-  /** 通过指定[第三方应用的应用号（ApplicationId）](https://qcloudimg.tencent-cloud.cn/raw/60efa1e9049732e5246b20a268882b1a.png)，您可以查询【应用模板库管理】中某个第三方应用下的模板。注意事项：当 ApplicationId 为空时（默认），系统将查询平台企业的所有模板（自建应用使用的模板）。当 ApplicationId 不为空时，系统将从【应用模板库管理】中查询该特定应用下的模板（分享给第三方应用子企业的模板）。 */
+  /** 通过指定第三方应用的应用号（ApplicationId），您可以查询【应用模板库管理】中某个第三方应用下的模板。注意事项：当 ApplicationId 为空时（默认），系统将查询平台企业的所有模板（自建应用使用的模板）。当 ApplicationId 不为空时，系统将从【应用模板库管理】中查询该特定应用下的模板（分享给第三方应用子企业的模板）。 */
   ApplicationId?: string;
   /** 默认为false，查询SaaS模板库列表；为true，查询第三方应用集成平台企业模板库管理列表 */
   IsChannel?: boolean;

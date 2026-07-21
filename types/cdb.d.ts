@@ -2587,6 +2587,8 @@ declare interface CreateDBInstanceHourRequest {
   DiskType?: string;
   /** 集群类型:cage——金融围拢，cdc——CDB ON CDC；dedicate——独享集群 */
   ClusterType?: string;
+  /** 是否对磁盘进行加密。仅云盘版实例支持该功能。 指定为 "on" 表示开启加密， 否则不加密。 购买只读实例、灾备实例、新克隆实例时该参数自动和主实例保持一致。 */
+  DiskEncryption?: string;
   /** 开启或关闭实例销毁保护。on-开启，off-关闭 */
   DestroyProtect?: string;
   /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
@@ -2685,6 +2687,8 @@ declare interface CreateDBInstanceRequest {
   ClusterTopology?: ClusterTopology;
   /** 磁盘类型，单节点（云盘版）或者云盘版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘，CLOUD_PREMIUM 表示高性能云硬盘。说明：单节点（云盘版）、云盘版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 地域和可用区。 */
   DiskType?: string;
+  /** 是否对磁盘进行加密。仅云盘版实例支持该功能。 指定为 "on" 表示开启加密， 否则不加密。 购买只读实例、灾备实例、新克隆实例时该参数自动和主实例保持一致。 */
+  DiskEncryption?: string;
   /** 开启或关闭实例销毁保护。on-开启，off-关闭 */
   DestroyProtect?: string;
   /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */

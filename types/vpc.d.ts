@@ -1308,7 +1308,7 @@ declare interface IKEOptionsSpecification {
   LocalFqdnName?: string;
   /** 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填 */
   RemoteFqdnName?: string;
-  /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，默认是GROUP1。 */
+  /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP15', 'GROUP16', 'GROUP19', 'GROUP20', 'GROUP21', 'GROUP24'，默认是GROUP1。 */
   DhGroupName?: string;
   /** IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800 */
   IKESaLifetimeSeconds?: number;
@@ -1322,11 +1322,11 @@ declare interface IPSECOptionsSpecification {
   EncryptAlgorithm?: string;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
   IntegrityAlgorith?: string | null;
-  /** IPsec SA lifetime(s)：单位秒，取值范围：180-604800 */
+  /** IPsec SA lifetime(s)取值范围：[180, 604800]单位：秒默认值：14400 */
   IPSECSaLifetimeSeconds?: number;
-  /** PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL */
+  /** PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP15','DH-GROUP16','DH-GROUP19','DH-GROUP20','DH-GROUP21','DH-GROUP24'，默认为NULL */
   PfsDhGroup?: string;
-  /** IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800 */
+  /** IPsec SA lifetime(KB)取值范围：[2560, 4294967295]单位：KB默认值：4096000000 */
   IPSECSaLifetimeTraffic?: number;
   /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
   IntegrityAlgorithm?: string;

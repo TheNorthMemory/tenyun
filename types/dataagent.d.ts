@@ -158,6 +158,14 @@ declare interface KnowledgeTaskConfig {
   EnableExtractDb?: number;
 }
 
+/** 模型详情 */
+declare interface ModelList {
+  /** 模型版本名称 */
+  Model?: string;
+  /** 模型厂商 */
+  Vendor?: string;
+}
+
 /** 用户对象的权限 */
 declare interface ModelUserAuthority {
   /** 实例id */
@@ -686,6 +694,20 @@ declare interface QueryKnowledgeTaskResponse {
   RequestId?: string;
 }
 
+declare interface QueryModelsRequest {
+  /** 实例id */
+  InstanceId?: string;
+}
+
+declare interface QueryModelsResponse {
+  /** 模型列表 */
+  Models?: ModelList[];
+  /** 200成功，500失败 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QuerySceneListRequest {
   /** 实例ID */
   InstanceId?: string;
@@ -811,6 +833,8 @@ declare interface Dataagent {
   QueryChunkList(data?: QueryChunkListRequest, config?: AxiosRequestConfig): AxiosPromise<QueryChunkListResponse>;
   /** 查询知识库任务 {@link QueryKnowledgeTaskRequest} {@link QueryKnowledgeTaskResponse} */
   QueryKnowledgeTask(data?: QueryKnowledgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<QueryKnowledgeTaskResponse>;
+  /** 查询模型信息 {@link QueryModelsRequest} {@link QueryModelsResponse} */
+  QueryModels(data?: QueryModelsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryModelsResponse>;
   /** 查询场景列表 {@link QuerySceneListRequest} {@link QuerySceneListResponse} */
   QuerySceneList(data?: QuerySceneListRequest, config?: AxiosRequestConfig): AxiosPromise<QuerySceneListResponse>;
   /** 查询对象的用户权限信息 {@link QueryUserAuthorityRequest} {@link QueryUserAuthorityResponse} */

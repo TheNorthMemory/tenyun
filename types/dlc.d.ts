@@ -4722,6 +4722,22 @@ declare interface DescribeLakeFsTaskResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMCPTaskRequest {
+}
+
+declare interface DescribeMCPTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMCPTaskResultRequest {
+}
+
+declare interface DescribeMCPTaskResultResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNativeSparkSessionsRequest {
   /** 引擎ID */
   DataEngineId?: string;
@@ -6829,6 +6845,10 @@ declare interface Dlc {
   DescribeLakeFsInfo(data?: DescribeLakeFsInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsInfoResponse>;
   /** 获取LakeFs上task执行结果访问信息 {@link DescribeLakeFsTaskResultRequest} {@link DescribeLakeFsTaskResultResponse} */
   DescribeLakeFsTaskResult(data: DescribeLakeFsTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsTaskResultResponse>;
+  /** 查询任务列表MCP {@link DescribeMCPTaskRequest} {@link DescribeMCPTaskResponse} */
+  DescribeMCPTask(data?: DescribeMCPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResponse>;
+  /** MCP获取任务结果查询 {@link DescribeMCPTaskResultRequest} {@link DescribeMCPTaskResultResponse} */
+  DescribeMCPTaskResult(data?: DescribeMCPTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResultResponse>;
   /** 查询标准引擎spark session列表 {@link DescribeNativeSparkSessionsRequest} {@link DescribeNativeSparkSessionsResponse} */
   DescribeNativeSparkSessions(data?: DescribeNativeSparkSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeSparkSessionsResponse>;
   /** 查询网络配置列表 {@link DescribeNetworkConnectionsRequest} {@link DescribeNetworkConnectionsResponse} */

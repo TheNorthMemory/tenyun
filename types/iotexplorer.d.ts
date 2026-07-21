@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** ADP 平台配置 */
+declare interface ADPConfig {
+  /** ADP 平台 AppKey */
+  AppKey?: string;
+}
+
 /** AI视频搜索结果结构体。 */
 declare interface AISearchInfo {
   /** 基于搜索结果的总结 */
@@ -1590,7 +1596,7 @@ declare interface TalkLLMConfig {
   History?: number;
   /** 超时时间，秒 */
   Timeout?: number;
-  /** OpenAI兼容模型Base URL，仅支持 80 和 443 端口，Type=openai时必填 */
+  /** OpenAI兼容模型的Base URL，Type=openai时必填 */
   BaseUrl?: string;
   /** 模型名称，Type=openai时必填 */
   Model?: string;
@@ -1598,6 +1604,8 @@ declare interface TalkLLMConfig {
   ApiKey?: string;
   /** 额外模型请求体参数，JSON对象字符串，只允许JSON object，不允许普通字符串 */
   ExtraBody?: string;
+  /** ADP 平台配置 */
+  ADP?: ADPConfig;
 }
 
 /** LLM配置信息。 */

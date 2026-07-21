@@ -693,7 +693,7 @@ declare interface GetTransformationResponse {
 declare interface ListConnectionsRequest {
   /** 事件集ID */
   EventBusId: string;
-  /** 根据哪个字段进行返回结果排序，目前支持如下以下字段：AddTime, ModTime */
+  /** 根据哪个字段进行返回结果排序枚举值：created_at： 创建时间updated_at： 更新时间name： 连接器名称默认值：updated_at */
   OrderBy?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -713,7 +713,7 @@ declare interface ListConnectionsResponse {
 }
 
 declare interface ListEventBusesRequest {
-  /** 根据哪个字段进行返回结果排序,支持以下字段：created_at（创建时间）, updated_at（修改时间） */
+  /** 根据哪个字段进行返回结果排序枚举值：created_at： 创建时间updated_at： 修改时间name： 事件集名称默认值：updated_at */
   OrderBy?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -771,7 +771,7 @@ declare interface ListPlatformProductsResponse {
 declare interface ListRulesRequest {
   /** 事件集ID */
   EventBusId: string;
-  /** 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）,name（规则名称） */
+  /** 根据哪个字段进行返回结果排序枚举值：created_at： 创建时间updated_at： 修改时间name： 规则名称默认值：updated_at */
   OrderBy?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -795,7 +795,7 @@ declare interface ListTargetsRequest {
   EventBusId: string;
   /** 事件规则ID */
   RuleId: string;
-  /** 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间） */
+  /** 根据哪个字段进行返回结果排序枚举值：created_at： 创建时间updated_at： 修改时间默认值：updated_at */
   OrderBy?: string;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -847,13 +847,13 @@ declare interface SearchLogRequest {
   EventBusId: string;
   /** 页码 */
   Page: number;
-  /** 每页数据大小 */
+  /** 每页数据大小取值范围：[1, 1000]默认值：10 */
   Limit: number;
   /** 事件查询筛选条件；示例如下：[{"key":"host","operator":"eq","value":"106.53.106.243"},{"type":"AND","filters":[{"key":"region","operator":"like","value":"guangzhou"},{"key":"type","operator":"eq","value":"cvm:ErrorEvent:GuestReboot"}]},{"type":"OR","filters":[{"key":"field1","operator":"like","value":"access"},{"key":"field2","operator":"eq","value":"custom"}]}] */
   Filter?: LogFilter[];
-  /** 事件查询结果排序，["timestamp","subject"] */
+  /** 事件查询结果排序枚举值：Timestamp： 事件触发时间Source： 事件源Type： 事件类型RuleIds： 事件规则Subject： 事件对象Region： 事件地域Status： 事件状态 */
   OrderFields?: string[];
-  /** 排序方式，asc 从旧到新，desc 从新到旧 */
+  /** 排序方式，asc 从旧到新，desc 从新到旧枚举值：asc： 从旧到新desc： 从新到旧默认值：desc */
   OrderBy?: string;
 }
 

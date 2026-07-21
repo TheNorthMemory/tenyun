@@ -113,14 +113,14 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 257+ 款产品，14842+ 服务数</summary>
+<details><summary>共计 257+ 款产品，14856+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
 aai |  | 2018-05-22(4) |
 aca | [AI 临床助手](https://cloud.tencent.com/document/product/1388) | 2021-03-23(8) |
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(8) |
-adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(58) |
+adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(61) |
 advisor | [智能顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(3) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
@@ -174,7 +174,7 @@ cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-
 cetcd | [云原生xa0etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(150) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(152) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(41) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(33) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
@@ -204,14 +204,14 @@ cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-2
 cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(238) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
-dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(26) |
+dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(27) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(90) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(24) |
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(83) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(190) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(192) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(97) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(56) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -234,7 +234,7 @@ faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-06-11(44) |
-ga2 | [全球加速](https://cloud.tencent.com/document/product/1817) | 2025-01-15(30) |
+ga2 | [全球加速](https://cloud.tencent.com/document/product/1817) | 2025-01-15(36) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(38) |
 goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(36) |

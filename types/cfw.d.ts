@@ -2352,6 +2352,50 @@ declare interface CreateAlertCenterOmitResponse {
   RequestId?: string;
 }
 
+declare interface CreateAlertCenterRuleAsyncRequest {
+  /** 处置时间1 1天7 7天-2 永久 */
+  HandleTime: number;
+  /** 处置类型当HandleIdList 不为空时：1封禁 2放通当HandleIpList 不为空时：3放通 4封禁 */
+  HandleType: number;
+  /** 当前日志方向： 0 出向 1 入向 */
+  AlertDirection: number;
+  /** 处置方向： 0出向 1入向 0,1出入向 3内网 */
+  HandleDirection: string;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
+  /** 处置对象,ID列表， IdLists,IpList,EventIdList三选一 */
+  HandleIdList?: string[];
+  /** 处置对象,IP列表， IdLists,IpList,EventIdList三选一 */
+  HandleIpList?: string[];
+  /** 处置描述 */
+  HandleComment?: string;
+  /** 放通原因:0默认 1重复 2误报 3紧急放通 */
+  IgnoreReason?: number;
+  /** 封禁域名-保留字段 */
+  BlockDomain?: string;
+  /** 处置对象,事件ID列表， IdLists,IpList,EventIdList三选一 */
+  HandleEventIdList?: string[];
+  /** 加白IP列表 隔离时放通的ip列表 */
+  WhiteIpList?: string[];
+  /** 隔离类型 1 互联网入站 2 互联网出站 4 内网访问 */
+  IsolateType?: number[];
+  /** 隔离资产列表 */
+  AssetIdList?: string[];
+  /** 处置HandleIpList，属于的告警事件ID */
+  TargetEventIdList?: string[];
+}
+
+declare interface CreateAlertCenterRuleAsyncResponse {
+  /** 返回状态码：0 成功非0 失败 */
+  ReturnCode?: number;
+  /** 返回信息：success 成功其他 */
+  ReturnMsg?: string;
+  /** 处置状态码：0 处置成功 1处置中 -1 通用错误，不用处理-3 表示重复，需重新刷新列表其他 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAlertCenterRuleRequest {
   /** 处置时间1 1天7 7天-2 永久 */
   HandleTime: number;
@@ -2816,6 +2860,8 @@ declare interface DescribeAssetSyncResponse {
   ReturnMsg?: string;
   /** 0 成功非0 失败 */
   ReturnCode?: number;
+  /** 已有CVM数量 */
+  CVMCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2991,10 +3037,40 @@ declare interface DescribeCcnVpcFwSwitchResponse {
 }
 
 declare interface DescribeCfwAlertsRequest {
+  /** 告警开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；默认查询最近 1 小时。 */
+  StartTime?: string;
+  /** 告警结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；默认当前时间。 */
+  EndTime?: string;
+  /** 告警严重级别过滤。可选；枚举 low、middle、high。 */
+  Level?: string;
+  /** 流量方向过滤。可选；枚举 outbound 出站、inbound 入站、lateral 横向。 */
+  Direction?: string;
+  /** 处置状态过滤。可选；枚举 unhandled、handled、blocked、passed、isolated、ignored。 */
+  ActionStatus?: string;
+  /** 攻击链阶段过滤。可选；枚举 recon、brute_force、delivery、exploit、c2、lateral_movement、exfiltration。 */
+  KillChain?: string;
+  /** 攻击结果过滤。可选；枚举 attempt、success、fail、unknown。 */
+  AttackResult?: string;
+  /** IPS 策略动作过滤。可选；枚举 observe、block。 */
+  Strategy?: string;
+  /** 攻击事件名称关键字过滤。可选，例如 SQL注入、暴力破解、恶意域名访问。 */
+  EventName?: string;
+  /** 精确告警事件 ID 过滤。用于指定事件的写操作前检查和写操作后核验；事件重新聚合时返回原请求 ID 和当前事件 ID。无匹配返回空结果，多匹配或定位过程异常时失败，不退化为宽查询。 */
+  EventId?: string;
+  /** 源 IP 过滤。可选。 */
+  SrcIp?: string;
+  /** 目的 IP 过滤。可选。 */
+  DstIp?: string;
+  /** 云资源实例 ID 过滤。可选，例如 ins-xxxxxxxx。 */
+  InstanceId?: string;
   /** 单页返回告警数。可选，默认 10，最大 50。 */
   Limit?: number;
   /** 分页偏移。可选，默认 0。 */
   Offset?: number;
+  /** 排序字段。可选，默认 EndTime；枚举 EndTime、StartTime、Count。排序字段。可选，默认 EndTime；枚举 EndTime、StartTime、Count；Count 表示按单个聚合告警事件的告警发生次数/命中次数排序，对应返回中的 occurrence_count */
+  OrderBy?: string;
+  /** 排序方向。可选，默认 desc；枚举 desc、asc。 */
+  Order?: string;
 }
 
 declare interface DescribeCfwAlertsResponse {
@@ -3011,26 +3087,40 @@ declare interface DescribeCfwAnalysisDataRequest {
   StartTime?: string;
   /** 查询结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认当前时间。 */
   EndTime?: string;
-  /** 分析对象类型。可选，默认 user；user 表示租户全局，asset 表示单个资产，vpc 表示 VPC，domain 表示域名。 */
+  /** 分析对象类型。可选，默认 user；user 表示租户全局，asset 表示资产上下文，vpc 表示 VPC 上下文，domain 表示域名上下文。选择非 user 时建议同时传 ObjectId 以限定具体对象；当前未传 ObjectId 时仍按该对象类型执行宽查询。 */
   ObjectType?: string;
-  /** 分析对象标识。ObjectType 为 asset、vpc 或 domain 时按需传入，可填写 IP、实例 ID、VPC ID 或域名。 */
+  /** 分析对象标识。ObjectType 为 asset、vpc 或 domain 时可传，用于限定具体 IP、实例 ID、VPC ID 或域名；当前为可选参数，省略时不会按具体对象过滤。 */
   ObjectId?: string;
-  /** 排障目标。可选，主要用于 access_troubleshoot 场景，可填写 IP 或域名。 */
+  /** 目标 IP 或域名过滤。可选，常用于 access_troubleshoot，也可用于其他 Scenario；传入后优先于 ObjectType/ObjectId，并对该场景全部分析段追加源 IP、目的 IP 或目的域名过滤。 */
   Target?: string;
-  /** 需要跳过的分析段名称列表。可选；不传时执行该场景全部分析段。 */
+  /** 需要跳过的分析段名称列表。可选；不传或传空数组时执行该场景全部分析段。full_traffic 支持 beacon、dns_large、dns_dga、dns_dga_fine、dns_tunnel、icmp_tunnel、mining、p2p、remote_tool、file_transfer、high_risk_outbound、lateral_baseline、vpc_sensitive、smb_write、outbound_baseline、inbound_high_risk、tls_expired、tls_self_signed、first_seen_ip、first_seen_country、first_seen_port；east_west 支持 vpc_inter_vpc、subnet_inter、service_port、lateral_baseline、vpc_sensitive、smb_write、database_lateral；alert_comprehensive 支持 outbound_baseline、lateral_baseline、beacon、inbound_high_risk、first_seen_ip、first_seen_country、first_seen_port；asset_exposure 支持 inbound_high_risk、tls_expired、tls_self_signed、high_risk_outbound；access_troubleshoot 支持 acl_border_block、acl_nat_block、acl_vpc_block、ips_block。传入当前 Scenario 不支持的名称会返回 InvalidParameter。 */
   SkipSections?: string[];
 }
 
 declare interface DescribeCfwAnalysisDataResponse {
-  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  /** 查询结果。Response.Data 是 UTF-8 JSON object 字符串，调用方需要二次 JSON 解析。status 取值为 success、partial 或 error。section 查询失败时，error 只返回固定安全摘要，不包含底层服务内部信息。示例仅展示一个代表性 section；实际返回包含当前场景全部未跳过的 section；summary 包含 total_findings、high_risk_count 和 data_coverage，metadata 包含 scenario、time_range、object 和 query_stats，query_stats 包含 total_queries、successful 和 failed。 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCfwAssetsRequest {
-  /** 最大返回资产数。可选，默认 100；取值 1 至 1000。 */
+  /** 资产类型。可选，默认 host；枚举 host 主机资产、vpc VPC 网络、subnet 子网。 */
+  AssetType?: string;
+  /** IP 地址过滤。可选，支持部分匹配；适用于 host。 */
+  Ip?: string;
+  /** 实例 ID 过滤。可选，适用于 host。 */
+  InstanceId?: string;
+  /** VPC ID 过滤。可选，适用于 host、vpc、subnet。 */
+  VpcId?: string;
+  /** 子网 ID 过滤。可选，适用于 host、subnet。 */
+  SubnetId?: string;
+  /** 实例类型过滤。可选，适用于 host；常见值包括 CVM、CLB、ENI、POD、MYSQL、REDIS、MARIADB、NAT、VPN、HAVIP、NATFW、GAAP、DC。 */
+  InstanceType?: string;
+  /** 最大返回资产数。可选，默认 100，最大 1000。 */
   Limit?: number;
+  /** 上一页 Response.Data 返回的不透明资产或指纹续查 token。首次查询不传；续查时只传 NextToken，不能同时传 AssetType、过滤条件或 Limit。调用方无需区分 token 类型；无效、篡改或租户不匹配会被拒绝。 */
+  NextToken?: string;
 }
 
 declare interface DescribeCfwAssetsResponse {
@@ -3069,28 +3159,32 @@ declare interface DescribeCfwInsStatusResponse {
 }
 
 declare interface DescribeCfwLogsRequest {
-  /** 日志类型。首次查询必填；使用 NextToken 续查时不能传。枚举值包括 cfw_netflow_border、cfw_netflow_vpc、cfw_netflow_nat、cfw_netflow_nta、cfw_netflow_dns、cfw_rule_threatinfo、cfw_rule_acl、cfw_rule_vpc_acl、cfw_rule_nat_acl、cfw_ndr_subject_risk、cfw_ndr_dataleak_entry、cfw_ndr_ai_audit、cfw_feature_collect、cfw_behavior_collect、operate_log_all。 */
+  /** 日志类型。首次查询必填；使用 NextToken 续查时不能传。cfw_netflow_border=互联网边界流量，cfw_netflow_vpc=VPC 东西向流量，cfw_netflow_nat=NAT 防火墙流量，cfw_netflow_nta=NDR/NTA 流量，cfw_netflow_dns=DNS 防火墙日志，cfw_rule_threatinfo=入侵防御/威胁情报告警，cfw_rule_acl=互联网边界访问控制日志，cfw_rule_vpc_acl=VPC 访问控制日志，cfw_rule_nat_acl=NAT 访问控制日志，cfw_ndr_subject_risk=NDR 专题风险，cfw_ndr_dataleak_entry=NDR 敏感数据泄露，cfw_ndr_ai_audit=NDR AI 应用识别与大模型调用审计，cfw_feature_collect=统计特征与基线异常，cfw_behavior_collect=Beacon/DNS/端口/证书/VPC 互访行为，operate_log_all=操作审计日志。 */
   LogType?: string;
-  /** CLS CQL 查询语句。默认 *；使用 NextToken 续查时不能传。 */
+  /** 日志过滤表达式。默认 * 表示不过滤；例如 src_ip:1.1.1.1。可查询字段随 LogType 变化，应优先使用对应 Items 中已返回的字段名，不要猜测不存在的字段；使用 NextToken 续查时不能传。 */
   Query?: string;
   /** 查询起始时间。支持 RFC3339、YYYY-MM-DD HH:MM:SS、YYYY-MM-DD 或 Unix 时间戳；传入后从该时间向后查询 TimeRange；使用 NextToken 续查时不能传。 */
   StartTime?: string;
   /** 查询时间范围。默认 1h；格式为正整数加单位 m/h/d，例如 5m、1h、24h、7d；使用 NextToken 续查时不能传。 */
   TimeRange?: string;
-  /** 单页返回条数。默认 100，最大 1000；使用 NextToken 续查时不能传。 */
+  /** 单页返回条数。首次查询可选，默认 100；取值 1 至 1000；使用 NextToken 续查时不能传。 */
   Limit?: number;
-  /** 上一页 Response.Data 返回的不透明续查 token。首次查询不传；续查时只传 NextToken。无效、篡改、过期或租户不匹配会被拒绝。 */
+  /** 上一页 Response.Data 返回的不透明续查 token。首次查询不传；续查时只传 NextToken。无效、篡改或租户不匹配会被拒绝。 */
   NextToken?: string;
 }
 
 declare interface DescribeCfwLogsResponse {
-  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。Items 是当前页日志数组，字段随 LogType 变化；TotalCount 是当前页返回条数，Limit 是页大小，LogType 和 TimeWindow 回显查询范围。HasMore=true 时必须保存并原样使用 NextToken 续查；HasMore=false 时分页结束。 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeCfwRiskOverviewRequest {
+  /** 自定义开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；必须和 EndTime 同时传。 */
+  StartTime?: string;
+  /** 自定义结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；必须和 StartTime 同时传。 */
+  EndTime?: string;
 }
 
 declare interface DescribeCfwRiskOverviewResponse {
@@ -3101,16 +3195,20 @@ declare interface DescribeCfwRiskOverviewResponse {
 }
 
 declare interface DescribeCfwRuleOptimizationRequest {
-  /** 长期零命中规则阈值天数。可选，必须为正整数，默认 180。 */
+  /** 防火墙规则类型。必填。枚举：border 互联网边界；nat NAT 边界；vpc VPC 间；enterprise_sg 企业安全组。 */
+  RuleType: string;
+  /** 要执行的优化维度白名单。可选，例如 D1、D2、D8；不传默认执行全部支持维度。 */
+  Dimensions?: string[];
+  /** 长期零命中规则阈值天数。可选，默认 180。 */
   IdleDays?: number;
-  /** 单 IP 离散过多聚合建议的最小数量。可选，最小为 2，默认 10。 */
+  /** 单 IP 离散过多聚合建议的最小数量。可选，默认 10。 */
   IpAggMin?: number;
-  /** 可迁移 IOC 建议中返回的样例 IOC 数量上限。可选，必须为正整数，默认 50。 */
+  /** 可迁移 IOC 建议中返回的样例 IOC 数量上限。可选，默认 50。 */
   IocSample?: number;
 }
 
 declare interface DescribeCfwRuleOptimizationResponse {
-  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。示例仅展示代表性字段；完整结果还包含 rule_type_name、rule_total、rule_active、rule_skipped_geo_or_cloud、dimension_skipped、thresholds 和 generated_at，finding 还包含 risk_level、affected_rule_uuids、affected_rule_seqs、recommendation_action、reason 和 evidence。结果过大时返回摘要，不返回 findings，并增加 truncated 和 truncated_reason。 */
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3125,8 +3223,28 @@ declare interface DescribeCfwRulesRequest {
   Direction?: number;
   /** 规则动作过滤。可选。0 表示观察，1 表示阻断，2 表示放行；不传则不过滤。 */
   RuleAction?: number;
+  /** 启用状态过滤。可选。默认只返回启用规则；传 false 只查询禁用规则。 */
+  Enabled?: boolean;
+  /** 是否同时包含启用和禁用规则。可选。true 表示包含两类；不能和 Enabled 同时使用。 */
+  IncludeDisabled?: boolean;
   /** 精确规则 ID 过滤。可选。用于按数值规则标识定位单条规则。 */
   RuleId?: number;
+  /** 精确公开规则标识过滤。可选。推荐在用户提供规则标识时使用。 */
+  RuleUuid?: string;
+  /** 协议过滤。可选。例如 TCP、UDP、ICMP、HTTP、HTTPS、ANY；不传则不过滤。 */
+  Protocol?: string;
+  /** 源地址或源内容关键字过滤。可选，支持模糊匹配。 */
+  SrcIp?: string;
+  /** 目的地址、目的域名或目的内容关键字过滤。可选，支持模糊匹配。 */
+  DstIp?: string;
+  /** 规则描述关键字过滤。可选。 */
+  Description?: string;
+  /** 入侵防御列表关键字搜索。可选，最大 100 字符。blocklist 搜索 ioc/address/comment/rule_source；whitelist 搜索 rule_name/ioc/comment/src_ip/dst_ip；isolate 搜索实例、公网 IP、内网 IP、VPC、地域。 */
+  Keyword?: string;
+  /** 精确实例 ID 过滤。仅 RuleType=intrusion_prevention 且 ListType=isolate 时使用；写操作前后核验应使用该参数而不是 Keyword。 */
+  InstanceId?: string;
+  /** 是否展开模板、资产组、实例等名称。可选，默认 true；传 false 返回原始标识。 */
+  ExpandNames?: boolean;
   /** 单页返回规则数。可选，默认 100，最大 1000。 */
   Limit?: number;
   /** 分页偏移。可选，默认 0。 */
@@ -3145,17 +3263,17 @@ declare interface DescribeCfwStatusMonitorRequest {
   Op: string;
   /** 防火墙场景类型。支持 internet_edge（互联网边界防火墙）、nat_cluster（NAT边界防火墙-集群）、nat_ha（NAT边界防火墙-主备）、vpc_cluster（VPC边界防火墙-集群）、vpc_ha（VPC边界防火墙-主备）。必填。 */
   FirewallType: string;
-  /** 二级下拉选项 ID。fetch_scene 按需传入；internet_edge 为地域，NAT 为实例 ID，VPC 带宽场景为防火墙组 ID；vpc_cluster 的 connections 汇总场景会忽略该参数。 */
+  /** 二级下拉选项 ID。fetch_scene 按需传入，值来自 describe_scene 返回的 selection.available_options[].id；internet_edge 为地域，NAT 为实例 ID，VPC 带宽场景为防火墙组 ID；vpc_cluster 的 connections 汇总场景会忽略该参数。 */
   SelectionId?: string;
-  /** 二级下拉显示名称。可替代 SelectionId 按名称匹配。 */
+  /** 二级下拉显示名称。可替代 SelectionId 按名称匹配，值来自 describe_scene 返回的 selection.available_options[].name。 */
   SelectionName?: string;
-  /** 引擎实例 ID。主要用于 vpc_ha 下一个防火墙组对应多个实例的场景。 */
+  /** 引擎实例 ID。主要用于 vpc_ha 下一个防火墙组对应多个实例的场景，优先使用 describe_scene 返回的 selection.available_options[].instance_id；如只有 instance_ids，则从数组中选择一个字符串值。 */
   SelectionInstanceId?: string;
   /** 指标页签。fetch_scene 可传；不传时使用该场景默认值。支持 bandwidth、connections。 */
   Metric?: string;
   /** 指标下的视角。fetch_scene 可传；不传时使用该场景默认值。支持 ip、subnet、session、switch、vpc，实际可用组合以 describe_scene 返回为准。 */
   Perspective?: string;
-  /** NAT 主备连接数 IP 视角范围。external 表示外部 IP，asset 表示资产 IP；仅 nat_ha + connections + ip 使用。 */
+  /** NAT 主备连接数 IP 视角范围。external 表示外部 IP，asset 表示资产 IP；仅 nat_ha + connections + ip 使用，其他组合传入将返回 InvalidParameter。 */
   IpScope?: string;
   /** 预设时间范围。默认 24h；fetch_scene 使用。支持 5m、15m、30m、1h、6h、24h、3d、7d、30d、today、yesterday、day_before_yesterday、this_week、last_week、this_month。 */
   TimePreset?: string;
@@ -3165,22 +3283,22 @@ declare interface DescribeCfwStatusMonitorRequest {
   EndTime?: string;
   /** 页码，从 1 开始。默认 1；fetch_scene 列表视角使用。 */
   Page?: number;
-  /** 每页条数。默认 10，最大 100；fetch_scene 列表视角使用。 */
+  /** 每页条数。默认 10，取值 1 至 100；fetch_scene 列表视角使用。 */
   Limit?: number;
   /** 是否只获取概览数据。true 时 fetch_scene 只请求 overview，跳过 table/detail，适合只看场景快照汇总。 */
   OverviewOnly?: boolean;
-  /** 原始偏移量覆盖。可选，传入后覆盖 Page 计算结果；必须大于等于 0 且不超过安全上限。 */
+  /** 原始偏移量覆盖。可选，传入后覆盖 Page 计算结果；取值 0 至 10000。 */
   Offset?: number;
-  /** 排序字段。可选，只接受当前场景后端允许的安全字段。 */
+  /** 排序字段。可选。互联网边界 IP、NAT IP/子网视角支持 InputMax、OutputMax；VPC switch 视角支持 SwitchName；VPC ip/vpc 视角支持 FlowMax；其他组合不要传。 */
   SortBy?: string;
   /** 排序方向。默认 desc；支持 asc、desc。 */
   SortOrder?: string;
-  /** 过滤条件列表。可选，最多 5 个；是否支持以及字段名以具体 fetch_scene 场景为准。 */
+  /** 过滤条件列表。保留字段；当前公开 fetch_scene 场景均不支持，调用方不要传。 */
   Filters?: CfwStatusMonitorFilter[];
 }
 
 declare interface DescribeCfwStatusMonitorResponse {
-  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。describe_scene 返回 scene 与 selection.available_options；fetch_scene 返回选中场景的 data 快照。 */
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。describe_scene 的 scene 返回 metric_options、perspective_options、default_metric、default_perspective、selection_required_by_metric、selection_kind_by_metric 和 time_preset_options；selection.available_options 返回可用于 SelectionId/SelectionName/SelectionInstanceId 的选项。fetch_scene 返回选中场景的 data 快照，可能包含 overview、table 或 detail。下方示例是字段结构节选，数组仅展示代表值。 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3190,7 +3308,7 @@ declare interface DescribeCfwSwitchesRequest {
 }
 
 declare interface DescribeCfwSwitchesResponse {
-  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。 */
+  /** 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。border_firewall 返回公网 IP 总数、已防护数、未防护数、操作中数量和防护率；nat_firewall、vpc_firewall 按 cluster/ha 返回实例及子开关汇总；ndr 返回已开启开关数；ips 返回当前防护模式。 */
   Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4588,6 +4706,28 @@ declare interface ModifyIpsModeSwitchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyIsolateTableRequest {
+  /** 资产唯一id */
+  InstanceID: string;
+  /** 操作动作：编辑、删除 */
+  ButtonAction: string;
+  /** AI操作来源枚举值：console： 控制台来源值wechat： 微信 */
+  CfwAiAgentOperationSource?: string;
+  /** 起始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+}
+
+declare interface ModifyIsolateTableResponse {
+  /** 0 成功 非0失败 */
+  ReturnCode?: number;
+  /** success 成功 其他失败 */
+  ReturnMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNatAcRuleRequest {
   /** 需要编辑的规则数组,基于Uuid唯一id来修改该规则 */
   Rules: CreateNatRuleItem[];
@@ -5113,6 +5253,8 @@ declare interface Cfw {
   CreateAlertCenterOmit(data: CreateAlertCenterOmitRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterOmitResponse>;
   /** 告警中心-封禁、放通处置接口 {@link CreateAlertCenterRuleRequest} {@link CreateAlertCenterRuleResponse} */
   CreateAlertCenterRule(data: CreateAlertCenterRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterRuleResponse>;
+  /** 告警中心-异步处置接口 {@link CreateAlertCenterRuleAsyncRequest} {@link CreateAlertCenterRuleAsyncResponse} */
+  CreateAlertCenterRuleAsync(data: CreateAlertCenterRuleAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlertCenterRuleAsyncResponse>;
   /** 批量添加入侵防御封禁列表、放通列表规则 {@link CreateBlockIgnoreRuleListRequest} {@link CreateBlockIgnoreRuleListResponse} */
   CreateBlockIgnoreRuleList(data: CreateBlockIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockIgnoreRuleListResponse>;
   /** 批量添加入侵防御封禁列表、放通列表规则（新） {@link CreateBlockIgnoreRuleNewRequest} {@link CreateBlockIgnoreRuleNewResponse} */
@@ -5190,7 +5332,7 @@ declare interface Cfw {
   /** 查询防火墙风险概览 {@link DescribeCfwRiskOverviewRequest} {@link DescribeCfwRiskOverviewResponse} */
   DescribeCfwRiskOverview(data?: DescribeCfwRiskOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRiskOverviewResponse>;
   /** 查询防火墙规则优化建议 {@link DescribeCfwRuleOptimizationRequest} {@link DescribeCfwRuleOptimizationResponse} */
-  DescribeCfwRuleOptimization(data?: DescribeCfwRuleOptimizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRuleOptimizationResponse>;
+  DescribeCfwRuleOptimization(data: DescribeCfwRuleOptimizationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRuleOptimizationResponse>;
   /** 查询防火墙规则 {@link DescribeCfwRulesRequest} {@link DescribeCfwRulesResponse} */
   DescribeCfwRules(data: DescribeCfwRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCfwRulesResponse>;
   /** 查询防火墙状态监控场景 {@link DescribeCfwStatusMonitorRequest} {@link DescribeCfwStatusMonitorResponse} */
@@ -5329,6 +5471,8 @@ declare interface Cfw {
   ModifyFwGroupSwitch(data: ModifyFwGroupSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFwGroupSwitchResponse>;
   /** 修改IPS的防护模式 {@link ModifyIpsModeSwitchRequest} {@link ModifyIpsModeSwitchResponse} */
   ModifyIpsModeSwitch(data?: ModifyIpsModeSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpsModeSwitchResponse>;
+  /** 隔离列表操作 {@link ModifyIsolateTableRequest} {@link ModifyIsolateTableResponse} */
+  ModifyIsolateTable(data: ModifyIsolateTableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIsolateTableResponse>;
   /** 修改NAT访问控制规则 {@link ModifyNatAcRuleRequest} {@link ModifyNatAcRuleResponse} */
   ModifyNatAcRule(data: ModifyNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatAcRuleResponse>;
   /** 防火墙实例重新选择vpc或nat {@link ModifyNatFwReSelectRequest} {@link ModifyNatFwReSelectResponse} */

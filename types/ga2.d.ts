@@ -38,6 +38,20 @@ declare interface AcceleratorRegionSet {
   IsTencentRegion?: number;
 }
 
+/** Acl信息 */
+declare interface AclEntries {
+  /** 协议。入参限制：支持配置'TCP', 'UDP', 'ALL'； */
+  Protocol: string;
+  /** 端口。 */
+  Port: string;
+  /** 网段。 */
+  SourceCidrBlock: string;
+  /** 执行动作。入参限制：支持配置'ACCEPT', 'DROP'； */
+  Policy: string;
+  /** 描述信息，最大长度不能超过100个字节。 */
+  Description?: string;
+}
+
 /** 终端节点配置 */
 declare interface EndpointConfigurations {
   /** 域名类型。可选值'Domain', 'PublicIp'。 */
@@ -444,6 +458,40 @@ declare interface CreateForwardingRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateGlobalAcceleratorAclPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 默认行为。枚举值：ACCEPT： 默认准许所有流量访问通道DROP： 默认拒绝所有流量访问通道 */
+  DefaultAction: string;
+}
+
+declare interface CreateGlobalAcceleratorAclPolicyResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 访问控制策略ID。 */
+  GlobalAcceleratorAclPolicyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateGlobalAcceleratorAclRuleRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 安全策略ID */
+  GlobalAcceleratorAclPolicyId: string;
+  /** Acl信息。 */
+  AclEntries: AclEntries[];
+}
+
+declare interface CreateGlobalAcceleratorAclRuleResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** ACL规则ID。 */
+  GlobalAcceleratorAclRuleIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateGlobalAcceleratorRequest {
   /** 名称，最大长度不能超过60个字节。 */
   Name: string;
@@ -586,6 +634,36 @@ declare interface DeleteForwardingRuleRequest {
 }
 
 declare interface DeleteForwardingRuleResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlobalAcceleratorAclPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 访问控制策略ID。 */
+  GlobalAcceleratorAclPolicyId: string;
+}
+
+declare interface DeleteGlobalAcceleratorAclPolicyResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGlobalAcceleratorAclRuleRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 安全策略ID */
+  GlobalAcceleratorAclPolicyId: string;
+  /** Acl规则ID。 */
+  GlobalAcceleratorAclRuleIds: string[];
+}
+
+declare interface DeleteGlobalAcceleratorAclRuleResponse {
   /** 异步任务ID。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -918,6 +996,48 @@ declare interface ModifyForwardingRuleResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGlobalAcceleratorAclPolicyRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 访问控制策略ID。 */
+  GlobalAcceleratorAclPolicyId: string;
+  /** 访问控制策略状态。枚举值：OPEN： 打开。CLOSE： 关闭。 */
+  Status: string;
+}
+
+declare interface ModifyGlobalAcceleratorAclPolicyResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGlobalAcceleratorAclRuleRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 安全策略ID */
+  GlobalAcceleratorAclPolicyId: string;
+  /** Acl规则ID。 */
+  GlobalAcceleratorAclRuleId: string;
+  /** 协议。入参限制：支持选择'TCP', 'UDP', 'ALL'。 */
+  Protocol?: string;
+  /** 端口。 */
+  Port?: string;
+  /** 网段。 */
+  SourceCidrBlock?: string;
+  /** 动作。入参限制：支持选择'ACCEPT', 'DROP'。枚举值：ACCEPT： 允许。DROP： 拒绝。 */
+  Policy?: string;
+  /** 描述信息，最大长度不能超过100个字节。 */
+  Description?: string;
+}
+
+declare interface ModifyGlobalAcceleratorAclRuleResponse {
+  /** 异步任务ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyGlobalAcceleratorRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -1007,6 +1127,10 @@ declare interface Ga2 {
   CreateForwardingRule(data: CreateForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardingRuleResponse>;
   /** 创建全球加速实例 {@link CreateGlobalAcceleratorRequest} {@link CreateGlobalAcceleratorResponse} */
   CreateGlobalAccelerator(data: CreateGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorResponse>;
+  /** 创建访问控制策略 {@link CreateGlobalAcceleratorAclPolicyRequest} {@link CreateGlobalAcceleratorAclPolicyResponse} */
+  CreateGlobalAcceleratorAclPolicy(data: CreateGlobalAcceleratorAclPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorAclPolicyResponse>;
+  /** 创建ACL规则 {@link CreateGlobalAcceleratorAclRuleRequest} {@link CreateGlobalAcceleratorAclRuleResponse} */
+  CreateGlobalAcceleratorAclRule(data: CreateGlobalAcceleratorAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorAclRuleResponse>;
   /** 创建监听器 {@link CreateListenerRequest} {@link CreateListenerResponse} */
   CreateListener(data: CreateListenerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateListenerResponse>;
   /** 添加扩展证书 {@link CreateListenerAdditionalCertRequest} {@link CreateListenerAdditionalCertResponse} */
@@ -1021,6 +1145,10 @@ declare interface Ga2 {
   DeleteForwardingRule(data: DeleteForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardingRuleResponse>;
   /** 删除全球加速实例 {@link DeleteGlobalAcceleratorRequest} {@link DeleteGlobalAcceleratorResponse} */
   DeleteGlobalAccelerator(data: DeleteGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorResponse>;
+  /** 删除访控制策略 {@link DeleteGlobalAcceleratorAclPolicyRequest} {@link DeleteGlobalAcceleratorAclPolicyResponse} */
+  DeleteGlobalAcceleratorAclPolicy(data: DeleteGlobalAcceleratorAclPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorAclPolicyResponse>;
+  /** 删除ACL规则 {@link DeleteGlobalAcceleratorAclRuleRequest} {@link DeleteGlobalAcceleratorAclRuleResponse} */
+  DeleteGlobalAcceleratorAclRule(data: DeleteGlobalAcceleratorAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorAclRuleResponse>;
   /** 删除监听器 {@link DeleteListenerRequest} {@link DeleteListenerResponse} */
   DeleteListener(data: DeleteListenerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteListenerResponse>;
   /** 删除扩展证书 {@link DeleteListenerAdditionalCertRequest} {@link DeleteListenerAdditionalCertResponse} */
@@ -1053,6 +1181,10 @@ declare interface Ga2 {
   ModifyForwardingRule(data: ModifyForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardingRuleResponse>;
   /** 修改全球加速实例 {@link ModifyGlobalAcceleratorRequest} {@link ModifyGlobalAcceleratorResponse} */
   ModifyGlobalAccelerator(data: ModifyGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorResponse>;
+  /** 修改访问控制策略 {@link ModifyGlobalAcceleratorAclPolicyRequest} {@link ModifyGlobalAcceleratorAclPolicyResponse} */
+  ModifyGlobalAcceleratorAclPolicy(data: ModifyGlobalAcceleratorAclPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorAclPolicyResponse>;
+  /** 修改ACL规则 {@link ModifyGlobalAcceleratorAclRuleRequest} {@link ModifyGlobalAcceleratorAclRuleResponse} */
+  ModifyGlobalAcceleratorAclRule(data: ModifyGlobalAcceleratorAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorAclRuleResponse>;
   /** 修改监听器 {@link ModifyListenerRequest} {@link ModifyListenerResponse} */
   ModifyListener(data: ModifyListenerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyListenerResponse>;
   /** 替换扩展证书 {@link ReplaceListenerAdditionalCertRequest} {@link ReplaceListenerAdditionalCertResponse} */

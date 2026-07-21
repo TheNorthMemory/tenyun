@@ -204,6 +204,16 @@ declare interface ApiEvent {
   Source?: string;
 }
 
+/** API 安全事件样本 */
+declare interface ApiEventSample {
+  /** 攻击样本的请求部分 */
+  Request?: string;
+  /** 攻击样本的响应 */
+  Response?: string;
+  /** 攻击样本状态码 */
+  Status?: string;
+}
+
 /** guard content */
 declare interface ApiGuardContent {
   /** prompt */
@@ -302,6 +312,12 @@ declare interface ApiSecAttackSource {
   AttackDetail?: string[];
   /** 缺失密码参数，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段 */
   MissPassword?: string;
+  /** 事件描述 */
+  EventDescription?: string;
+  /** 事件描述(英文) */
+  EventDescriptionEng?: string;
+  /** 攻击样本 */
+  Sample?: ApiEventSample;
 }
 
 /** api安全自定义事件规则结构体 */
@@ -600,6 +616,8 @@ declare interface BatchCustomRuleListItem {
   LogicalOp?: string;
   /** 动作灰度的比例 */
   ActionRatio?: number;
+  /** 防护对象组ID */
+  GroupIds?: number[];
 }
 
 /** 批量精准白名单规则详情 */
@@ -1306,6 +1324,8 @@ declare interface ClbObject {
   PreciseDomainDetails?: DomainInfo[];
   /** waf接入状态 */
   WafAccessStatus?: number;
+  /** 备注 */
+  Note?: string;
 }
 
 /** Clb-waf地域信息 */
@@ -2368,6 +2388,8 @@ declare interface IntentContent {
 declare interface IntentDetectResult {
   /** 是否恶意意图枚举值：1： 恶意0： 正常 */
   IsUnSafe?: number;
+  /** 检出分类 */
+  Category?: string;
 }
 
 /** 数据封装 */
@@ -3500,9 +3522,9 @@ declare interface SpartaProtectionPort {
 
 /** 规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：匹配字段匹配参数逻辑符号匹配内容IP（来源IP）不支持参数ipmatch（匹配）ipnmatch（不匹配）多个IP以英文逗号隔开,最多20个IPV6（来源IPv6）不支持参数ipmatch（匹配）ipnmatch（不匹配）支持单个IPV6地址Referer（Referer）不支持参数empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内URL（请求路径）不支持参数eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请以/开头,512个字符以内UserAgent（UserAgent）不支持参数同匹配字段Referer逻辑符号请输入内容,512个字符以内HTTP_METHOD（HTTP请求方法）不支持参数eq（等于）neq（不等于）请输入方法名称,建议大写QUERY_STRING（请求字符串）不支持参数同匹配字段请求路径逻辑符号请输入内容,512个字符以内GET（GET参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内GET_PARAMS_NAMES（GET参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）请输入内容,512个字符以内POST（POST参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_POST_NAMES（POST参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内POST_BODY（完整BODY）不支持参数同匹配字段请求路径逻辑符号请输入BODY内容,512个字符以内COOKIE（Cookie）不支持参数empty（内容为空）null（不存在）rematch（正则匹配）暂不支持GET_COOKIES_NAMES（Cookie参数名）不支持参数同匹配字段GET参数名逻辑符号请输入内容,512个字符以内ARGS_COOKIE（Cookie参数值）支持参数录入同匹配字段GET参数值逻辑符号请输入内容,512个字符以内GET_HEADERS_NAMES（Header参数名）不支持参数exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,建议小写,512个字符以内ARGS_HEADER（Header参数值）支持参数录入contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配）请输入内容,512个字符以内CONTENT_LENGTH（Content-length）支持参数录入numgt（数值大于）numlt（数值小于）numeq（数值等于）请输入0-9999999999999之间的整数IP_GEO（来源IP归属地）支持参数录入geo_in（属于）geo_not_in（不属于）请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}]CAPTCHA_RISK（验证码风险）不支持参数eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在）请输入风险等级值,支持数值范围0-255CAPTCHA_DEVICE_RISK（验证码设备风险）不支持参数eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在）请输入设备风险代码,支持取值：101、201、301、401、501、601、701CAPTCHAR_SCORE（验证码风险评估分）不支持参数numeq（数值等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）exist（存在）请输入评估分数,支持数值范围0-100 */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）belong_to（属于）not_belong_to（不属于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 同匹配字段Referer逻辑符号 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 同匹配字段请求路径逻辑符号 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 exsit（存在参数）nexsit（不存在参数）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 同匹配字段请求路径逻辑符号 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）rematch（正则匹配） 暂不支持 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 支持参数录入 numgt（数值大于）numlt（数值小于）numeq（数值等于） 请输入0-9999999999999之间的整数 IP_GEO（来源IP归属地） 支持参数录入 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] CAPTCHA_RISK（验证码风险） 不支持参数 eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在） 请输入风险等级值,支持数值范围0-255 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在） 请输入设备风险代码,支持取值：101、201、301、401、501、601、701 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）exist（存在） 请输入评估分数,支持数值范围0-100 */
   Field: string;
-  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
+  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） belong_to（属于） not_belong_to（不属于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string;
   /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
   Content: string;
@@ -4021,6 +4043,8 @@ declare interface AddBatchCustomRuleRequest {
   PageId?: string;
   /** 动作灰度比例 */
   ActionRatio?: number;
+  /** 绑定的防护组ID */
+  GroupIds?: number[];
 }
 
 declare interface AddBatchCustomRuleResponse {

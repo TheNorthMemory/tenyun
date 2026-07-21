@@ -964,6 +964,16 @@ declare interface WorkloadGroupConfig {
   EnableMemoryOverCommit?: boolean;
   /** cpu硬限制 */
   CpuHardLimit?: string;
+  /** 4.1+ 新增；默认值为 0（不预留），根据业务可设为 5/10 */
+  MinCpuPercent?: number;
+  /** 4.1+ 新增；默认值为 0（不预留），根据业务可设为 5/10 */
+  MinMemoryPercent?: number;
+  /** 2.1+ 新增；不传走内核默认（Integer.MAX_VALUE=2147483647），建议按业务并发量配置 */
+  MaxConcurrencyNum?: number;
+  /** 2.1+ 新增；0=不排队，建议为 MaxConcurrencyNum 的 50% */
+  MaxQueueSize?: number;
+  /** 2.1+ 新增；单位 ms，建议 5000（5s） */
+  QueueTimeout?: number;
 }
 
 /** 可用区描述信息 */
