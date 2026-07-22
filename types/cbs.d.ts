@@ -450,6 +450,8 @@ declare interface Snapshot {
   LatestModifyTime?: string;
   /** 自动快照策略ID，仅当该快照由自动快照策略方式创建时才会返回。 */
   AutoSnapshotPolicyId?: string;
+  /** 快照模式。取值为 INSTANT_SNAPSHOT 表示极速快照，STANDARD_SNAPSHOT 表示普通快照。枚举值：INSTANT_SNAPSHOT： 极速快照STANDARD_SNAPSHOT： 普通快照 */
+  SnapshotMode?: string;
 }
 
 /** 描述快照跨地域复制的结果。 */
@@ -1337,6 +1339,8 @@ declare interface ModifyRemoteDiskAttributesRequest {
   DiskName?: string;
   /** 新的单副本SSD硬盘项目ID。 */
   ProjectId?: number;
+  /** 云硬盘的自动续费标识枚举值：NOTIFY_AND_AUTO_RENEW： 通知过期且自动续费NOTIFY_AND_MANUAL_RENEW： 通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW： 不通知过期不自动续费 */
+  AutoRenewFlag?: string;
 }
 
 declare interface ModifyRemoteDiskAttributesResponse {

@@ -1210,6 +1210,84 @@ declare interface LockComponentInfo {
   IsDynamicPartitionWrite?: boolean;
 }
 
+/** mcp 请求任务详情的返回 */
+declare interface MCPTaskInfo {
+  /** 任务 ID */
+  Id?: string;
+  /** BatchId */
+  BatchId?: string;
+  /** 状态 */
+  State?: number;
+  /** 任务类型 */
+  TaskType?: string;
+  /** 任务类型 */
+  TaskKind?: string;
+  /** 引擎详情 */
+  EngineTypeDetail?: string;
+  /** SQL 类型 */
+  SQLType?: string;
+  /** SQL */
+  SQL?: string;
+  /** 是否截断 */
+  IsSQLCutOff?: boolean;
+  /** 数据库名称 */
+  DatabaseName?: string;
+  /** 引擎 ID */
+  DataEngineId?: string;
+  /** 资源组名称 */
+  ResourceGroupName?: string;
+  /** JobId */
+  SparkJobId?: string;
+  /** Job 名称 */
+  SparkJobName?: string;
+  /** 操作人 Uin */
+  OperateUin?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 引擎耗时单位：毫秒 */
+  UsedTime?: number;
+  /** 执行总耗时单位：毫秒 */
+  TotalTime?: number;
+  /** 进度 */
+  Progress?: number;
+  /** 输出信息 */
+  OutputMessage?: string;
+  /** 结果集 */
+  DataSet?: string;
+}
+
+/** MCP 任务结果返回 */
+declare interface MCPTaskResultInfo {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 状态 */
+  State?: number;
+  /** 结果集 Schema */
+  ResultSchema?: Column[];
+  /** 结果集 */
+  ResultSet?: string;
+  /** 是否还有其他结果 */
+  NextToken?: string;
+  /** 影响行数 */
+  RowAffectInfo?: string;
+  /** 输出信息 */
+  OutputMessage?: string;
+  /** 展示 format */
+  DisplayFormat?: string;
+  /** 能否下载 */
+  CanDownload?: boolean;
+  /** 结果花费时间单位：毫秒 */
+  QueryResultTime?: number;
+  /** 是否超大 */
+  IsResultOversize?: boolean;
+}
+
 /** DLC分区信息查询返回数据结构 */
 declare interface MixedTablePartitions {
   /** 数据表格式 */
@@ -4723,17 +4801,25 @@ declare interface DescribeLakeFsTaskResultResponse {
 }
 
 declare interface DescribeMCPTaskRequest {
+  /** 任务 ID */
+  TaskId?: string;
 }
 
 declare interface DescribeMCPTaskResponse {
+  /** 任务详细信息 */
+  TaskInfo?: MCPTaskInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeMCPTaskResultRequest {
+  /** 任务ID */
+  TaskId: string;
 }
 
 declare interface DescribeMCPTaskResultResponse {
+  /** 任务结果信息 */
+  TaskResult?: MCPTaskResultInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6848,7 +6934,7 @@ declare interface Dlc {
   /** 查询任务列表MCP {@link DescribeMCPTaskRequest} {@link DescribeMCPTaskResponse} */
   DescribeMCPTask(data?: DescribeMCPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResponse>;
   /** MCP获取任务结果查询 {@link DescribeMCPTaskResultRequest} {@link DescribeMCPTaskResultResponse} */
-  DescribeMCPTaskResult(data?: DescribeMCPTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResultResponse>;
+  DescribeMCPTaskResult(data: DescribeMCPTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResultResponse>;
   /** 查询标准引擎spark session列表 {@link DescribeNativeSparkSessionsRequest} {@link DescribeNativeSparkSessionsResponse} */
   DescribeNativeSparkSessions(data?: DescribeNativeSparkSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeSparkSessionsResponse>;
   /** 查询网络配置列表 {@link DescribeNetworkConnectionsRequest} {@link DescribeNetworkConnectionsResponse} */

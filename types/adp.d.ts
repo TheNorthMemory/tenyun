@@ -940,6 +940,14 @@ declare interface ConversationReference {
   Type: number;
 }
 
+/** 会话重置信息 */
+declare interface ConversationResetInfo {
+  /** 最近一次重置的毫秒级时间戳 */
+  ResetTime?: string;
+  /** 最近一次重置边界；该记录及更早的记录不再作为对话上下文 */
+  ResetThroughRecordId?: string;
+}
+
 /** Workspace 工作空间信息 */
 declare interface ConversationWorkspace {
   /** 工作空间 ID */
@@ -1012,11 +1020,11 @@ declare interface FileParseModel {
   SupportedFileList?: SupportedFileType[];
 }
 
-/** 列表通用过滤条件（多个Filter之间为AND关系，同一Filter的多个value_list为OR关系） */
+/** 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系） */
 declare interface Filter {
   /** 过滤字段名 */
   Name?: string;
-  /** 操作符：0-属于，1-不属于 */
+  /** 操作符，默认 IN（向后兼容）枚举项枚举值描述FILTER_OPERATOR_IN0属于 value_list（默认值，向后兼容；value_list 不可为空）FILTER_OPERATOR_NOT_IN1不属于 value_list（value_list 不可为空） */
   Operator?: number;
   /** 过滤值数组 */
   ValueList?: string[];
@@ -1354,6 +1362,8 @@ declare interface PluginSummary {
   UserState?: PluginUserState;
   /** 插件配置信息 */
   Config?: PluginConfig;
+  /** 工具信息 */
+  ToolList?: ToolSummary[];
 }
 
 /** PluginUserState */
@@ -1740,6 +1750,12 @@ declare interface ToolExample {
   Request?: string;
   /** 响应参数 */
   Response?: string;
+}
+
+/** 工具信息 */
+declare interface ToolSummary {
+  /** 工具Id */
+  ToolId?: string;
 }
 
 /** 变量信息 */
@@ -2378,6 +2394,8 @@ declare interface DescribeConversationMessageListResponse {
   MessageList?: ConversationMessage[];
   /** 消息列表 */
   Messages?: ConversationMessage[];
+  /** 最近一次重置信息 */
+  ResetInfo?: ConversationResetInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2465,6 +2483,8 @@ declare interface DescribePluginRequest {
   SpaceId: string;
   /** 获取指定字段 */
   FieldMask?: FieldMask;
+  /** 插件展示场景。不传或取 0 时不限定场景。枚举值：0：不限定场景1：Agent 模式2：工作流3：智能工作台 */
+  Module?: number;
 }
 
 declare interface DescribePluginResponse {
@@ -2969,7 +2989,7 @@ declare interface Adp {
   DescribeAccountList(data?: DescribeAccountListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountListResponse>;
   /** 查询 Agent 详情 {@link DescribeAgentDetailRequest} {@link DescribeAgentDetailResponse} */
   DescribeAgentDetail(data?: DescribeAgentDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentDetailResponse>;
-  /** 获取Agent发布列表 {@link DescribeAgentReleasePreviewListRequest} {@link DescribeAgentReleasePreviewListResponse} */
+  /** 获取Agent发布预览列表 {@link DescribeAgentReleasePreviewListRequest} {@link DescribeAgentReleasePreviewListResponse} */
   DescribeAgentReleasePreviewList(data: DescribeAgentReleasePreviewListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentReleasePreviewListResponse>;
   /** 查询 Agent 摘要列表 {@link DescribeAgentSummaryListRequest} {@link DescribeAgentSummaryListResponse} */
   DescribeAgentSummaryList(data?: DescribeAgentSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSummaryListResponse>;

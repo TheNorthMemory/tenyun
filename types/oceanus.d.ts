@@ -1178,6 +1178,18 @@ declare interface SlotSharingGroupSpec {
   ManagedMemory?: string | null;
 }
 
+/** 对外接口访问信息 */
+declare interface SqlGatewayEndpoint {
+  /** 类型枚举值：rest： resthiveserver2： hiveserver2pg： pg */
+  Type?: string;
+  /** 地址 */
+  Address?: string;
+  /** 是否开启 */
+  Enabled?: boolean;
+  /** 其他信息 */
+  Extra?: string;
+}
+
 /** SqlGateway配置信息 */
 declare interface SqlGatewayItem {
   /** 唯一标识 */
@@ -1204,6 +1216,12 @@ declare interface SqlGatewayItem {
   Mem?: number;
   /** jdk版本 */
   JdkVersion?: string;
+  /** session id */
+  SessionClusterId?: string | null;
+  /** pg用户名 */
+  PgUser?: string | null;
+  /** 协议 */
+  Endpoints?: SqlGatewayEndpoint[] | null;
 }
 
 /** Sql Gateway 返回Result结构类型 */

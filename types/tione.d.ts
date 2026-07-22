@@ -1834,6 +1834,8 @@ declare interface Service {
   SchedulingPolicy?: SchedulingPolicy;
   /** 外部的资源组信息，表示借调了哪些资源组的资源 */
   ExternalResourceGroups?: ResourceGroupInfo[];
+  /** 服务所属的项目 id,0表示默认空间 */
+  ProjectId?: string;
   /** 变更服务的子账户 */
   Changer?: string;
   /** 变更服务的子账户名称 */
@@ -3003,6 +3005,8 @@ declare interface DeleteModelServiceAuthTokenResponse {
 declare interface DeleteModelServiceGroupRequest {
   /** 服务id */
   ServiceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DeleteModelServiceGroupResponse {
@@ -3013,6 +3017,8 @@ declare interface DeleteModelServiceGroupResponse {
 declare interface DeleteModelServiceRequest {
   /** 服务id */
   ServiceId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 服务分类 */
   ServiceCategory?: string;
 }
@@ -3449,19 +3455,21 @@ declare interface DescribeModelAccelerateVersionsResponse {
 declare interface DescribeModelServiceCallInfoRequest {
   /** 服务组id */
   ServiceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 服务分类 */
   ServiceCategory?: string;
 }
 
 declare interface DescribeModelServiceCallInfoResponse {
   /** 服务调用信息 */
-  ServiceCallInfo?: ServiceCallInfo | null;
+  ServiceCallInfo?: ServiceCallInfo;
   /** 升级网关调用信息 */
-  InferGatewayCallInfo?: InferGatewayCallInfo | null;
+  InferGatewayCallInfo?: InferGatewayCallInfo;
   /** 默认nginx网关的调用信息 */
-  DefaultNginxGatewayCallInfo?: DefaultNginxGatewayCallInfo | null;
+  DefaultNginxGatewayCallInfo?: DefaultNginxGatewayCallInfo;
   /** 太极服务的调用信息 */
-  TJCallInfo?: TJCallInfo | null;
+  TJCallInfo?: TJCallInfo;
   /** 内网调用信息 */
   IntranetCallInfo?: IntranetCallInfo | null;
   /** 基于新网关的服务调用信息 */
@@ -3877,6 +3885,8 @@ declare interface ModifyModelServiceAuthorizationResponse {
 declare interface ModifyModelServiceRequest {
   /** 服务id */
   ServiceId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 模型信息，需要挂载模型时填写 */
   ModelInfo?: ModelInfo;
   /** 镜像信息，配置服务运行所需的镜像地址等信息 */
@@ -3885,7 +3895,7 @@ declare interface ModifyModelServiceRequest {
   Env?: EnvVar[];
   /** 资源描述，指定预付费模式下的cpu,mem,gpu等信息，后付费无需填写 */
   Resources?: ResourceInfo;
-  /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST	2C4GTI.S.LARGE.POST	4C8GTI.S.2XLARGE16.POST	8C16GTI.S.2XLARGE32.POST	8C32GTI.S.4XLARGE32.POST	16C32GTI.S.4XLARGE64.POST	16C64GTI.S.6XLARGE48.POST	24C48GTI.S.6XLARGE96.POST	24C96GTI.S.8XLARGE64.POST	32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST	4C20G T4*1/4TI.GN7.2XLARGE40.POST	10C40G T4*1/2TI.GN7.2XLARGE32.POST	8C32G T4*1TI.GN7.5XLARGE80.POST	20C80G T4*1TI.GN7.8XLARGE128.POST	32C128G T4*1TI.GN7.10XLARGE160.POST	40C160G T4*2TI.GN7.20XLARGE320.POST	80C320G T4*4 */
+  /** 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:TI.S.MEDIUM.POST 2C4GTI.S.LARGE.POST 4C8GTI.S.2XLARGE16.POST 8C16GTI.S.2XLARGE32.POST 8C32GTI.S.4XLARGE32.POST 16C32GTI.S.4XLARGE64.POST 16C64GTI.S.6XLARGE48.POST 24C48GTI.S.6XLARGE96.POST 24C96GTI.S.8XLARGE64.POST 32C64GTI.S.8XLARGE128.POST 32C128GTI.GN7.LARGE20.POST 4C20G T41/4TI.GN7.2XLARGE40.POST 10C40G T41/2TI.GN7.2XLARGE32.POST 8C32G T41TI.GN7.5XLARGE80.POST 20C80G T41TI.GN7.8XLARGE128.POST 32C128G T41TI.GN7.10XLARGE160.POST 40C160G T42TI.GN7.20XLARGE320.POST 80C320G T4*4 */
   InstanceType?: string;
   /** 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL" */
   ScaleMode?: string;

@@ -2,11 +2,31 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 设备风险评估高级版返回结果 */
+declare interface AssessDeviceRiskPremiumRsp {
+  /** 决策信息 */
+  Decision?: Decision;
+  /** 设备风险分信息 */
+  Score?: DataScore;
+  /** 设备基础信息 */
+  Device?: Device;
+  /** IP环境基础信息 */
+  Environment?: Environment | null;
+}
+
+/** 设备风险评估基础版返回结果 */
+declare interface AssessDeviceRiskRsp {
+  /** 设备风险分信息 */
+  Score?: DataScore;
+  /** 设备基础信息 */
+  Device?: Device;
+}
+
 /** 环境风险评估返回结果 */
 declare interface AssessEnvironmentRiskRsp {
-  /** 环境风险分信息 */
+  /** IP环境风险分信息 */
   Score?: DataScore;
-  /** 环境基础信息 */
+  /** IP环境基础信息 */
   Environment?: Environment;
 }
 
@@ -16,6 +36,36 @@ declare interface DataScore {
   RiskLevel?: number;
   /** 风险标签 */
   RiskLabels?: RiskLabel[];
+}
+
+/** 决策信息 */
+declare interface Decision {
+  /** 决策结果pass：通过review：复审reject：拒绝 */
+  DecisionResult?: string;
+}
+
+/** 设备基础信息 */
+declare interface Device {
+  /** 设备ID */
+  DeviceId?: string;
+  /** App版本信息 */
+  AppVersion?: string;
+  /** 品牌 */
+  Brand?: string;
+  /** 客户端IP */
+  ClientIp?: string;
+  /** 机型 */
+  Model?: string;
+  /** 网络类型 */
+  NetworkType?: string;
+  /** 应用包名 */
+  PackageName?: string;
+  /** 平台枚举值：2： Android3： IOS4： H55： 微信小程序 */
+  Platform?: string;
+  /** 系统版本 */
+  SystemVersion?: string;
+  /** SDK版本 */
+  SdkBuildVersion?: string;
 }
 
 /** 环境基础信息 */
@@ -90,6 +140,34 @@ declare interface RiskLabel {
   Id?: string;
   /** 风险描述 */
   Reason?: string;
+}
+
+declare interface AssessDeviceRiskPremiumProRequest {
+  /** 用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取 */
+  DeviceToken: string;
+  /** 客户端 IP 地址 */
+  UserIp?: string;
+}
+
+declare interface AssessDeviceRiskPremiumProResponse {
+  /** 设备风险评估高级版返回结果 */
+  Data?: AssessDeviceRiskPremiumRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AssessDeviceRiskProRequest {
+  /** 用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取 */
+  DeviceToken: string;
+  /** 客户端 IP 地址 */
+  UserIp?: string;
+}
+
+declare interface AssessDeviceRiskProResponse {
+  /** 设备风险评估基础版返回结果 */
+  Data?: AssessDeviceRiskRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AssessEnvironmentRiskRequest {
@@ -881,6 +959,10 @@ declare namespace V20201103 {
 /** {@link Rce 风险识别 RCE} */
 declare interface Rce {
   (): Versions;
+  /** 设备风险评估-高级版 {@link AssessDeviceRiskPremiumProRequest} {@link AssessDeviceRiskPremiumProResponse} */
+  AssessDeviceRiskPremiumPro(data: AssessDeviceRiskPremiumProRequest, config?: AxiosRequestConfig): AxiosPromise<AssessDeviceRiskPremiumProResponse>;
+  /** 设备风险评估-基础版 {@link AssessDeviceRiskProRequest} {@link AssessDeviceRiskProResponse} */
+  AssessDeviceRiskPro(data: AssessDeviceRiskProRequest, config?: AxiosRequestConfig): AxiosPromise<AssessDeviceRiskProResponse>;
   /** 环境风险评估 {@link AssessEnvironmentRiskRequest} {@link AssessEnvironmentRiskResponse} */
   AssessEnvironmentRisk(data: AssessEnvironmentRiskRequest, config?: AxiosRequestConfig): AxiosPromise<AssessEnvironmentRiskResponse>;
   /** IP风险画像 {@link V20250425.ManageIPPortraitRiskRequest} {@link V20250425.ManageIPPortraitRiskResponse} */

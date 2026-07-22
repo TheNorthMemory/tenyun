@@ -68,6 +68,32 @@ declare interface AccessInstanceInfo {
   AccessCidrList: string[];
 }
 
+/** ACL 地理位置支持地域数据 */
+declare interface AclRegInfo {
+  /** 地域KEY */
+  RegionCode?: string;
+  /** 地域名称 */
+  RegionName?: string;
+  /** 上级地域信息 */
+  Parent?: string;
+  /** 中文拼音首字母 */
+  ZhKey?: string;
+  /** 英文首字母 */
+  EnKey?: string;
+  /** 是否为地区 */
+  Area?: number;
+  /** 是否为省份、城市 */
+  IsCity?: number;
+  /** 序号 */
+  Num?: number;
+  /** 是否支持旁路 */
+  ForBypass?: number;
+  /** 是否支持串行 */
+  ForSerial?: number;
+  /** 是否支持NAT */
+  ForNat?: number;
+}
+
 /** AssetZone */
 declare interface AssetZone {
   /** 地域 */
@@ -2780,6 +2806,18 @@ declare interface DescribeAcListsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAclRegInfoRequest {
+  /** 防火墙类型 SERIAL：串行、NAT：NAT防火墙，BYPASS：旁路防火墙 */
+  FwType?: string[];
+}
+
+declare interface DescribeAclRegInfoResponse {
+  /** 规则支持的地域列表 */
+  Data?: AclRegInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAclRuleRequest {
   /** 每页条数 */
   Limit: number;
@@ -5295,6 +5333,8 @@ declare interface Cfw {
   DeleteVpcFwGroup(data?: DeleteVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcFwGroupResponse>;
   /** 访问控制列表 {@link DescribeAcListsRequest} {@link DescribeAcListsResponse} */
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
+  /** 查询ACL规则支持配置的地区 {@link DescribeAclRegInfoRequest} {@link DescribeAclRegInfoResponse} */
+  DescribeAclRegInfo(data?: DescribeAclRegInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRegInfoResponse>;
   /** 查询互联网边界访问控制列表 {@link DescribeAclRuleRequest} {@link DescribeAclRuleResponse} */
   DescribeAclRule(data: DescribeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAclRuleResponse>;
   /** 查询地址模板列表 {@link DescribeAddressTemplateListRequest} {@link DescribeAddressTemplateListResponse} */

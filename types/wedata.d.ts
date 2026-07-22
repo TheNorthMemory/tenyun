@@ -14803,7 +14803,7 @@ declare namespace V20210820 {
     DatabaseName: string;
     /** 表名称 */
     TableName: string;
-    /** catalog值 */
+    /** catalog值,仅使用DLC且开启TcLake的支持,其他类型传空即可 */
     CatalogName?: string;
     /** schema名称 */
     SchemaName?: string;

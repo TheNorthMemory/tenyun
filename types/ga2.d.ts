@@ -220,6 +220,42 @@ declare interface ForwardingRuleSet {
   ForwardingPolicyId?: string;
   /** 七层转发规则ID。 */
   ForwardingRuleId?: string;
+  /** 源站响应头 */
+  HideResponseHeaders?: HideResponseHeaders[];
+  /** 删除源站响应头 */
+  ResponseHeaders?: ResponseHeaders[];
+}
+
+/** GA访问日志 */
+declare interface GlobalAcceleratorAccessLog {
+}
+
+/** 访问控制策略 */
+declare interface GlobalAcceleratorAclPolicies {
+  /** 访问控制策略ID。 */
+  GlobalAcceleratorAclPolicyId?: string;
+  /** 默认动作。 */
+  DefaultAction?: string;
+  /** 状态。 */
+  Status?: string;
+}
+
+/** Acl规则信息 */
+declare interface GlobalAcceleratorAclRuleSet {
+  /** 访问控制策略ID。 */
+  GlobalAcceleratorPolicyId?: string;
+  /** Acl规则ID。 */
+  GlobalAcceleratorAclRuleId?: string;
+  /** 协议。 */
+  Protocol?: string;
+  /** 端口。 */
+  Port?: string;
+  /** 网段。 */
+  SourceCidrBlock?: string;
+  /** 动作。 */
+  Policy?: string;
+  /** 描述。 */
+  Description?: string;
 }
 
 /** 全球加速实例信息 */
@@ -458,6 +494,32 @@ declare interface CreateForwardingRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateGlobalAcceleratorAccessLogRequest {
+  /** GA示例唯一Id */
+  GlobalAcceleratorId: string;
+  /** 监听器Id */
+  ListenerId: string;
+  /** 终端节点组Id */
+  EndpointGroupId: string;
+  /** 日志集所在地域 */
+  CloudRegion: string;
+  /** 日志主题Id */
+  CloudLogId: string;
+  /** 日志集Id */
+  CloudLogSetId: string;
+  /** 指定采集字段枚举值：session_time： 四层，会话持续时间upstream_bytes_received： 四层、七层，从终端节点接收的字节数upstream_bytes_sent： 四层、七层，发送给终端节点的字节数request_method： 七层，GET/POSTscheme： 七层，http/httpsrequest_uri： 七层，客户端原始请求的URIuri： 七层，当前请求的URIhost： 七层，客户端访问域名（七层）remote_user： 七层，基本认证时的用户名（未认证时为"-"）http_user_agent： 七层，客户端浏览器标识http_referer： 七层，请求来源URL（直接从地址栏访问时为"-"）http_x_forwarded_for： 七层，记录客户端原始IP及经过的代理服务器IP链content_type： 七层，content_typebody_bytes_sent： 七层，发送给客户端的http body大小，不包含headerrequest_time： 七层，从接收到客户端请求的第一个字节到发送完响应最后一个字节之间的总时间（单位：秒）sent_http_content_type： 七层，响应内容类型upstream_header_time： 七层，终端节点的响应头到达时间upstream_response_length： 七层，终端节点返回的响应体长度upstream_response_time： 七层，终端节点完整响应时间upstream_status： 七层，终端节点返回的HTTP状态码 */
+  FieldKeys?: string[];
+  /** 日志描述 */
+  FlowLogDescription?: string;
+}
+
+declare interface CreateGlobalAcceleratorAccessLogResponse {
+  /** 日志任务唯一Id */
+  LogPushTaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateGlobalAcceleratorAclPolicyRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -640,6 +702,18 @@ declare interface DeleteForwardingRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteGlobalAcceleratorAccessLogRequest {
+  /** 日志唯一Id */
+  LogPushTaskId: string;
+  /** GA实例唯一Id */
+  GlobalAcceleratorId: string;
+}
+
+declare interface DeleteGlobalAcceleratorAccessLogResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteGlobalAcceleratorAclPolicyRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -742,6 +816,18 @@ declare interface DescribeAccelerateRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAccessLogParamRequest {
+}
+
+declare interface DescribeAccessLogParamResponse {
+  /** 七层可选参数 */
+  L7Param?: string[];
+  /** 四层可选参数 */
+  L4Param?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCrossBorderSettlementRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
@@ -822,6 +908,62 @@ declare interface DescribeForwardingRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGlobalAcceleratorAccessLogRequest {
+  /** ga实例唯一Id */
+  GlobalAcceleratorId: string;
+  /** 查询过滤参数。{ "Name": "listener-id", "Values": ["监听器唯一Id"] },{ "Name": "endpoint-group-id", "Values": ["终端节点组唯一Id"] },{ "Name": "access_log_id", "Values": ["日志唯一Id"] } */
+  Filters?: Filter[];
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量。取值范围：[0, 200] */
+  Limit?: number;
+}
+
+declare interface DescribeGlobalAcceleratorAccessLogResponse {
+  /** 返回日志任务详情 */
+  GlobalAcceleratorAccessLog?: GlobalAcceleratorAccessLog[];
+  /** 日志任务条数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGlobalAcceleratorAclPoliciesRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId: string;
+  /** 偏移量。默认值为0。 */
+  Offset?: number;
+  /** 返回数量，默认值为20，最大值为200。 */
+  Limit?: string;
+}
+
+declare interface DescribeGlobalAcceleratorAclPoliciesResponse {
+  /** 访问控制策略信息。 */
+  GlobalAcceleratorAclPolicySet?: GlobalAcceleratorAclPolicies[];
+  /** 符合条件实例总个数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGlobalAcceleratorAclRulesRequest {
+  /** 访问控制策略ID。 */
+  GlobalAcceleratorAclPolicyId: string;
+  /** 偏移量，默认为0。 */
+  Offset?: number;
+  /** 返回数量。取值范围：[1, 200]默认值：20 */
+  Limit?: number;
+}
+
+declare interface DescribeGlobalAcceleratorAclRulesResponse {
+  /** 符合条件的Acl规则实例。 */
+  GlobalAcceleratorAclRuleSet?: GlobalAcceleratorAclRuleSet[];
+  /** 符合条件的实例个数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGlobalAcceleratorsRequest {
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -882,6 +1024,20 @@ declare interface ModifyAccelerateAreasRequest {
 declare interface ModifyAccelerateAreasResponse {
   /** 异步任务ID。 */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAccessLogStatusRequest {
+  /** 日志唯一Id */
+  LogPushTaskId: string;
+  /** 状态（启动START， 停止STOP）枚举值：START： 启动STOP： 停止 */
+  Status: string;
+  /** GA实例唯一Id */
+  GlobalAcceleratorId: string;
+}
+
+declare interface ModifyAccessLogStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -992,6 +1148,26 @@ declare interface ModifyForwardingRuleRequest {
 declare interface ModifyForwardingRuleResponse {
   /** 异步任务ID。 */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyGlobalAcceleratorAccessLogRequest {
+  /** 日志唯一Id */
+  LogPushTaskId: string;
+  /** GA实例唯一Id */
+  GlobalAcceleratorId: string;
+  /** 日志主题Id */
+  CloudLogId?: string;
+  /** 日志集Id */
+  CloudLogSetId?: string;
+  /** 用户可选日志监听字段枚举值：session_time： 四层，会话持续时间upstream_bytes_received： 四层、七层，从终端节点接收的字节数upstream_bytes_sent： 四层、七层，发送给终端节点的字节数request_method： 七层，GET/POSTscheme： 七层，http/httpsrequest_uri： 七层，客户端原始请求的URIuri： 七层，当前请求的URIhost： 七层，客户端访问域名（七层）remote_user： 七层，基本认证时的用户名（未认证时为"-"）http_user_agent： 七层，客户端浏览器标识http_referer： 七层，请求来源URL（直接从地址栏访问时为"-"）http_x_forwarded_for： 七层，记录客户端原始IP及经过的代理服务器IP链content_type： 七层，content_typebody_bytes_sent： 七层，发送给客户端的http body大小，不包含headerrequest_time： 七层，从接收到客户端请求的第一个字节到发送完响应最后一个字节之间的总时间（单位：秒）sent_http_content_type： 七层，响应内容类型upstream_header_time： 七层，终端节点的响应头到达时间upstream_response_length： 七层，终端节点返回的响应体长度upstream_response_time： 七层，终端节点完整响应时间upstream_status： 七层，终端节点返回的HTTP状态码 */
+  FieldKeys?: string[];
+  /** 日志描述 */
+  FlowLogDescription?: string;
+}
+
+declare interface ModifyGlobalAcceleratorAccessLogResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1127,6 +1303,8 @@ declare interface Ga2 {
   CreateForwardingRule(data: CreateForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateForwardingRuleResponse>;
   /** 创建全球加速实例 {@link CreateGlobalAcceleratorRequest} {@link CreateGlobalAcceleratorResponse} */
   CreateGlobalAccelerator(data: CreateGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorResponse>;
+  /** 创建访问日志 {@link CreateGlobalAcceleratorAccessLogRequest} {@link CreateGlobalAcceleratorAccessLogResponse} */
+  CreateGlobalAcceleratorAccessLog(data: CreateGlobalAcceleratorAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorAccessLogResponse>;
   /** 创建访问控制策略 {@link CreateGlobalAcceleratorAclPolicyRequest} {@link CreateGlobalAcceleratorAclPolicyResponse} */
   CreateGlobalAcceleratorAclPolicy(data: CreateGlobalAcceleratorAclPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlobalAcceleratorAclPolicyResponse>;
   /** 创建ACL规则 {@link CreateGlobalAcceleratorAclRuleRequest} {@link CreateGlobalAcceleratorAclRuleResponse} */
@@ -1145,6 +1323,8 @@ declare interface Ga2 {
   DeleteForwardingRule(data: DeleteForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteForwardingRuleResponse>;
   /** 删除全球加速实例 {@link DeleteGlobalAcceleratorRequest} {@link DeleteGlobalAcceleratorResponse} */
   DeleteGlobalAccelerator(data: DeleteGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorResponse>;
+  /** 删除日志任务 {@link DeleteGlobalAcceleratorAccessLogRequest} {@link DeleteGlobalAcceleratorAccessLogResponse} */
+  DeleteGlobalAcceleratorAccessLog(data: DeleteGlobalAcceleratorAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorAccessLogResponse>;
   /** 删除访控制策略 {@link DeleteGlobalAcceleratorAclPolicyRequest} {@link DeleteGlobalAcceleratorAclPolicyResponse} */
   DeleteGlobalAcceleratorAclPolicy(data: DeleteGlobalAcceleratorAclPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlobalAcceleratorAclPolicyResponse>;
   /** 删除ACL规则 {@link DeleteGlobalAcceleratorAclRuleRequest} {@link DeleteGlobalAcceleratorAclRuleResponse} */
@@ -1157,6 +1337,8 @@ declare interface Ga2 {
   DescribeAccelerateAreas(data: DescribeAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerateAreasResponse>;
   /** 查询可选加速区域 {@link DescribeAccelerateRegionsRequest} {@link DescribeAccelerateRegionsResponse} */
   DescribeAccelerateRegions(data?: DescribeAccelerateRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccelerateRegionsResponse>;
+  /** 查看访问日志上报参数 {@link DescribeAccessLogParamRequest} {@link DescribeAccessLogParamResponse} */
+  DescribeAccessLogParam(data?: DescribeAccessLogParamRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessLogParamResponse>;
   /** 查询跨境账单 {@link DescribeCrossBorderSettlementRequest} {@link DescribeCrossBorderSettlementResponse} */
   DescribeCrossBorderSettlement(data: DescribeCrossBorderSettlementRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCrossBorderSettlementResponse>;
   /** 查询终端节点组 {@link DescribeEndpointGroupsRequest} {@link DescribeEndpointGroupsResponse} */
@@ -1165,6 +1347,12 @@ declare interface Ga2 {
   DescribeForwardingPolicy(data: DescribeForwardingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardingPolicyResponse>;
   /** 查看七层转发规则 {@link DescribeForwardingRuleRequest} {@link DescribeForwardingRuleResponse} */
   DescribeForwardingRule(data: DescribeForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForwardingRuleResponse>;
+  /** 查询访问日志 {@link DescribeGlobalAcceleratorAccessLogRequest} {@link DescribeGlobalAcceleratorAccessLogResponse} */
+  DescribeGlobalAcceleratorAccessLog(data: DescribeGlobalAcceleratorAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalAcceleratorAccessLogResponse>;
+  /** 查看访控制策略 {@link DescribeGlobalAcceleratorAclPoliciesRequest} {@link DescribeGlobalAcceleratorAclPoliciesResponse} */
+  DescribeGlobalAcceleratorAclPolicies(data: DescribeGlobalAcceleratorAclPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalAcceleratorAclPoliciesResponse>;
+  /** 查询ACL规则 {@link DescribeGlobalAcceleratorAclRulesRequest} {@link DescribeGlobalAcceleratorAclRulesResponse} */
+  DescribeGlobalAcceleratorAclRules(data: DescribeGlobalAcceleratorAclRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalAcceleratorAclRulesResponse>;
   /** 查询全球加速实例 {@link DescribeGlobalAcceleratorsRequest} {@link DescribeGlobalAcceleratorsResponse} */
   DescribeGlobalAccelerators(data?: DescribeGlobalAcceleratorsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalAcceleratorsResponse>;
   /** 查询监听器 {@link DescribeListenersRequest} {@link DescribeListenersResponse} */
@@ -1173,6 +1361,8 @@ declare interface Ga2 {
   DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 修改加速地域 {@link ModifyAccelerateAreasRequest} {@link ModifyAccelerateAreasResponse} */
   ModifyAccelerateAreas(data: ModifyAccelerateAreasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccelerateAreasResponse>;
+  /** 修改日志任务状态 {@link ModifyAccessLogStatusRequest} {@link ModifyAccessLogStatusResponse} */
+  ModifyAccessLogStatus(data: ModifyAccessLogStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccessLogStatusResponse>;
   /** 修改终端节点组 {@link ModifyEndpointGroupRequest} {@link ModifyEndpointGroupResponse} */
   ModifyEndpointGroup(data: ModifyEndpointGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEndpointGroupResponse>;
   /** 修改七层转发策略 {@link ModifyForwardingPolicyRequest} {@link ModifyForwardingPolicyResponse} */
@@ -1181,6 +1371,8 @@ declare interface Ga2 {
   ModifyForwardingRule(data: ModifyForwardingRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyForwardingRuleResponse>;
   /** 修改全球加速实例 {@link ModifyGlobalAcceleratorRequest} {@link ModifyGlobalAcceleratorResponse} */
   ModifyGlobalAccelerator(data: ModifyGlobalAcceleratorRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorResponse>;
+  /** 修改访问日志 {@link ModifyGlobalAcceleratorAccessLogRequest} {@link ModifyGlobalAcceleratorAccessLogResponse} */
+  ModifyGlobalAcceleratorAccessLog(data: ModifyGlobalAcceleratorAccessLogRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorAccessLogResponse>;
   /** 修改访问控制策略 {@link ModifyGlobalAcceleratorAclPolicyRequest} {@link ModifyGlobalAcceleratorAclPolicyResponse} */
   ModifyGlobalAcceleratorAclPolicy(data: ModifyGlobalAcceleratorAclPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGlobalAcceleratorAclPolicyResponse>;
   /** 修改ACL规则 {@link ModifyGlobalAcceleratorAclRuleRequest} {@link ModifyGlobalAcceleratorAclRuleResponse} */

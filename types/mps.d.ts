@@ -478,6 +478,12 @@ declare interface AiAnalysisTaskDelLogoOutput {
   VoiceClonedVideo?: string | null;
   /** 音色克隆的标注文件地址 */
   VoiceClonedMarkFile?: string | null;
+  /** 擦除后文件的FileId。 */
+  FileId?: string;
+  /** 基于画面提取的字幕文件FileId。 */
+  OriginSubtitleFileId?: string;
+  /** 基于画面提取的字幕翻译文件FileId 。 */
+  TranslateSubtitleFileId?: string;
 }
 
 /** 智能擦除结果类型 */
@@ -542,6 +548,10 @@ declare interface AiAnalysisTaskDubbingOutput {
   OutputStorage?: TaskOutputStorage;
   /** 额外结果，目前包含字幕文件结果 Url */
   ExtraOutput?: string;
+  /** 译制视频FileId。 */
+  VideoFileId?: string;
+  /** 标记文件FileId。 */
+  SpeakerFileId?: string;
 }
 
 /** 智能译制结果类型 */
@@ -1330,6 +1340,14 @@ declare interface AiRecognitionTaskTransTextSegmentItem {
   Trans?: string;
   /** 字词时间戳信息。 */
   Wordlist?: WordResult[];
+}
+
+/** 大模型修复 */
+declare interface AiRestorationConfig {
+  /** 能力配置开关枚举值：ON： 开启OFF： 关闭默认值：OFF */
+  Switch?: string;
+  /** 强度类型枚举值：weak： 弱normal： 中strong： 强默认值：normal */
+  Type?: string | null;
 }
 
 /** 内容审核 Asr 文字敏感任务输入参数类型 */
@@ -3834,6 +3852,8 @@ declare interface ImageProcessTaskOutput {
   SignedUrl?: string;
   /** 图生文任务的处理结果。 */
   Content?: string;
+  /** VOD标准版FileId */
+  FileId?: string;
 }
 
 /** 图片处理任务结果类型 */
@@ -7196,6 +7216,8 @@ declare interface SubtitleResult {
   Path?: string;
   /** 字幕压制视频路径。 */
   SubtitleEmbedPath?: string;
+  /** 字幕文件FileId。 */
+  SubtitleFileId?: string;
 }
 
 /** 字幕压制模块文字阴影配置 */
@@ -7282,6 +7304,8 @@ declare interface SubtitleTransResultItem {
   Path?: string;
   /** 翻译字幕压制视频路径。 */
   SubtitleEmbedPath?: string;
+  /** 字幕文件FileId。 */
+  SubtitleFileId?: string;
 }
 
 /** 超分配置 */
@@ -7880,26 +7904,32 @@ declare interface UserDefineOcrTextReviewTemplateInfoForUpdate {
   ReviewConfidence?: number;
 }
 
-/** 媒体处理 VOD （点播专业版）对象信息。 */
+/** 媒体处理 VOD 对象信息。 */
 declare interface VODInputInfo {
-  /** 媒体处理对象文件所在的 *Bucket ID* */
+  /** 媒体处理对象文件所在的 Bucket ID */
   Bucket?: string;
   /** 媒体处理对象文件所在的 Bucket 所属园区 */
   Region?: string;
   /** 媒体处理对象文件的输入路径 */
   Object?: string;
-  /** 点播专业版应用Id */
+  /** 点播应用Id。 */
   SubAppId?: number;
+  /** 是否使用VOD标准版。注意：不填表示使用VOD专业版。枚举值：0： 使用VOD专业版1： 使用VOD标准版，可使用FileId发起任务默认值：0 */
+  VodBasic?: number;
+  /** VOD标准版FileId */
+  FileId?: string;
 }
 
-/** 媒体处理 VOD（点播专业版） 输出对象信息。 */
+/** 媒体处理 VOD输出对象信息。 */
 declare interface VODOutputStorage {
   /** 媒体处理生成的文件输出的目标 Bucket ID */
   Bucket?: string;
   /** 媒体处理生成的文件输出的目标 Bucket 的园区 */
   Region?: string;
-  /** 点播专业版应用Id */
+  /** 点播应用Id */
   SubAppId?: number;
+  /** 任务输出是否使用VOD标准版。注意：不填表示使用VOD专业版。枚举值：0： 不使用VOD标准版1： 使用VOD标准版 */
+  VodBasic?: number;
 }
 
 /** 视频分镜理解结果 */
@@ -7960,12 +7990,14 @@ declare interface VideoEnhanceConfig {
   ScratchRepair?: ScratchRepairConfig | null;
   /** 去伪影（毛刺）配置。注意大模型、综合增强、去毛刺三项里最多配置一项 */
   ArtifactRepair?: ArtifactRepairConfig | null;
-  /** 增强场景配置，可选值：common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。填空字符串代表不使用增强场景 */
+  /** 增强场景配置，可选值：common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。short_play（短剧 &amp; AI 仿真人剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。ai_comic（AI漫剧），增强漫画风格画面细节。short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。填空字符串代表不使用增强场景 */
   EnhanceSceneType?: string | null;
   /** 大模型增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。 */
   DiffusionEnhance?: DiffusionEnhanceConfig | null;
   /** 新插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。 */
   FrameRateWithDen?: FrameRateWithDenConfig | null;
+  /** 大模型修复配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。 */
+  AiRestoration?: AiRestorationConfig | null;
 }
 
 /** aigc cos信息，存储用户请求时填写的cos信息，存放结果 */
@@ -8495,7 +8527,7 @@ declare interface CreateAigcAudioTaskRequest {
   StoreCosParam?: AigcStoreCosParam;
   /** 用于传入要求的额外参数。 */
   ExtraParameters?: AigcAudioExtraParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}} */
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}}MiniMaxMusic生纯音乐参数使用示例: "AdditionalParameters":"{"is_instrumental":true}" */
   AdditionalParameters?: string;
   /** 接口操作者名称。 */
   Operator?: string;

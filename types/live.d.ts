@@ -134,6 +134,8 @@ declare interface AvatarScriptInfo {
   CreateTime?: string;
   /** 话术最后更新时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
   UpdateTime?: string;
+  /** 已完成状态的视频URL */
+  MediaUrl?: string;
 }
 
 /** 数字人直播间临时话术信息。 */
