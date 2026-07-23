@@ -2145,12 +2145,12 @@ declare interface InquirePriceRenewDBInstancesResponse {
 declare interface InstanceEnableSSLRequest {
   /** 实例ID */
   InstanceId: string;
-  /** 配置是否要开启SSL访问。- true：开启。- false：关闭。 */
+  /** 配置是否要开启SSL访问。true：开启。false：关闭。 */
   Enable: boolean;
 }
 
 declare interface InstanceEnableSSLResponse {
-  /** SSL开启状态。- 0：关闭。- 1：开启。 */
+  /** SSL开启状态。0：关闭。1：开启。 */
   Status?: number | null;
   /** 证书文件过期时间，格式为：2023-05-01 12:00:00。 */
   ExpiredTime?: string | null;

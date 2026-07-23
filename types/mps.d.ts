@@ -2598,6 +2598,18 @@ declare interface CoverConfigureInfoForUpdate {
   Switch?: string;
 }
 
+/** 生图任务。 */
+declare interface CreateImageConfig {
+  /** 生图模型枚举值：WAND-create-1.0-lite： 轻量生图模型WAND-create-1.0-flash： 质量-速度平衡生图模型WAND-create-1.0-pro： 高质量生图模型 */
+  Model: string;
+  /** 生图指令 */
+  Prompt: string;
+  /** 输出图片的分辨率枚举值：1K： 短边分辨率 10802K： 短边分辨率 14404K： 短边分辨率 2160默认值：1K */
+  Resolution?: string;
+  /** 输出图片的宽高比枚举值：1:1： 宽高比 1:12:3： 宽高比 2:33:2： 宽高比 3:23:4： 宽高比 3:44:3： 宽高比 4:39:16： 宽高比 9:1616:9： 宽高比 16:9默认值：1:1 */
+  AspectRatio?: string;
+}
+
 /** 创建输入的配置信息。 */
 declare interface CreateInput {
   /** 输入名称，可填大小写、数字和下划线，长度为[1, 32]。 */
@@ -3982,6 +3994,8 @@ declare interface ImageTaskInput {
   AiTryOnConfig?: AiTryOnConfig;
   /** Ai套图配置。 */
   AiPosterSuiteConfig?: AiPosterSuiteConfig;
+  /** 生图任务配置 */
+  CreateImageConfig?: CreateImageConfig;
 }
 
 /** 图片基础转换能力 */
@@ -9828,6 +9842,36 @@ declare interface DescribeAigcImageTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAigcTaskStatusRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeAigcTaskStatusResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务状态描述枚举值：PENDING： 任务等待调度RUNNING： 任务运行中FINISHED： 任务执行成功STOP： 任务被中止FAILED： 任务失败TIMEOUT： 任务超时 */
+  TaskStatus?: string;
+  /** 输出url */
+  OutputUrl?: string | null;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务调度时间 */
+  ScheduledTime?: string;
+  /** 任务完成时间 */
+  FinishedTime?: string;
+  /** 任务错误码 */
+  TaskResultCode?: number;
+  /** 任务返回错误信息 */
+  TaskResultMsg?: string;
+  /** 请求结构体 */
+  RequestBody?: string;
+  /** 任务类型 */
+  TaskType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAigcVideoTaskRequest {
   /** 创建AIGC生视频任务时，返回的任务ID。 */
   TaskId: string;
@@ -12138,7 +12182,7 @@ declare interface ParseNotificationResponse {
 
 declare interface ProcessImageRequest {
   /** 图片处理的文件输入信息。 */
-  InputInfo: MediaInputInfo;
+  InputInfo?: MediaInputInfo;
   /** 图片处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。 */
   OutputStorage?: TaskOutputStorage;
   /** 图片处理生成的文件输出的路径。如果不填表示与 InputInfo 中文件所在的目录一致。如果是目录，如`/image/201907/`，表示继承原文件名输出到该目录。 */
@@ -12697,6 +12741,8 @@ declare interface Mps {
   DescribeAigcAudioTask(data: DescribeAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcAudioTaskResponse>;
   /** 查询AIGC生图片任务 {@link DescribeAigcImageTaskRequest} {@link DescribeAigcImageTaskResponse} */
   DescribeAigcImageTask(data: DescribeAigcImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcImageTaskResponse>;
+  /** 查询AIGC场景任务接口 {@link DescribeAigcTaskStatusRequest} {@link DescribeAigcTaskStatusResponse} */
+  DescribeAigcTaskStatus(data: DescribeAigcTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcTaskStatusResponse>;
   /** 查询AIGC生视频任务 {@link DescribeAigcVideoTaskRequest} {@link DescribeAigcVideoTaskResponse} */
   DescribeAigcVideoTask(data: DescribeAigcVideoTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcVideoTaskResponse>;
   /** 获取转动图模板列表 {@link DescribeAnimatedGraphicsTemplatesRequest} {@link DescribeAnimatedGraphicsTemplatesResponse} */
@@ -12920,7 +12966,7 @@ declare interface Mps {
   /** 解析事件通知 {@link ParseNotificationRequest} {@link ParseNotificationResponse} */
   ParseNotification(data: ParseNotificationRequest, config?: AxiosRequestConfig): AxiosPromise<ParseNotificationResponse>;
   /** 发起图片处理 {@link ProcessImageRequest} {@link ProcessImageResponse} */
-  ProcessImage(data: ProcessImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessImageResponse>;
+  ProcessImage(data?: ProcessImageRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessImageResponse>;
   /** 对直播流发起处理 {@link ProcessLiveStreamRequest} {@link ProcessLiveStreamResponse} */
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
   /** 发起媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */

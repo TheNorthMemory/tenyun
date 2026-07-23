@@ -1288,6 +1288,14 @@ declare interface MCPTaskResultInfo {
   IsResultOversize?: boolean;
 }
 
+/** 元数据库基本信息 */
+declare interface MetaDatabaseInfo {
+  /** 数据库名称。 */
+  DatabaseName: string;
+  /** 数据库描述信息，长度 0~2048。 */
+  Comment?: string | null;
+}
+
 /** DLC分区信息查询返回数据结构 */
 declare interface MixedTablePartitions {
   /** 数据表格式 */
@@ -3094,6 +3102,16 @@ declare interface AlterDMSTableResponse {
   RequestId?: string;
 }
 
+declare interface AlterTableCommentRequest {
+  /** 修改表的基本信息 */
+  TableBaseInfo: TableBaseInfo;
+}
+
+declare interface AlterTableCommentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssignMangedTablePropertiesRequest {
   /** 表基本信息 */
   TableBaseInfo: TableBaseInfo;
@@ -3572,6 +3590,26 @@ declare interface CreateInternalTableRequest {
 declare interface CreateInternalTableResponse {
   /** 创建托管存储内表sql语句描述 */
   Execution?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMetaDatabaseRequest {
+  /** 数据源名称，默认DataLakeCatalog */
+  DatasourceConnectionName?: string;
+  /** 元数据库基本信息 */
+  MetaDatabaseInfo?: MetaDatabaseInfo;
+  /** 数据治理配置项 */
+  GovernPolicy?: DataGovernPolicy;
+  /** 智能数据治理配置 */
+  SmartPolicy?: SmartPolicy;
+}
+
+declare interface CreateMetaDatabaseResponse {
+  /** 本批次提交的任务的批次Id */
+  BatchId?: string;
+  /** 任务Id集合，按照执行顺序排列 */
+  TaskIdSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4154,6 +4192,22 @@ declare interface DeleteDataMaskStrategyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteMetaDatabaseRequest {
+  /** 数据库名称 */
+  DatabaseName: string;
+  /** 数据源名称，默认DataLakeCatalog */
+  DatasourceConnectionName?: string;
+}
+
+declare interface DeleteMetaDatabaseResponse {
+  /** 本批次提交的任务的批次Id */
+  BatchId?: string;
+  /** 任务Id集合，按照执行顺序排列 */
+  TaskIdSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNativeSparkSessionRequest {
   /** 引擎id */
   DataEngineId?: string;
@@ -4644,6 +4698,20 @@ declare interface DescribeDataMaskStrategiesResponse {
   TotalCount?: number;
   /** 数据脱敏策略列表 */
   Strategies?: DataMaskStrategy[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDatabaseRequest {
+  /** 数据库名称 */
+  DatabaseName: string;
+  /** 数据连接名称，不填默认为DataLakeCatalog */
+  DatasourceConnectionName?: string;
+}
+
+declare interface DescribeDatabaseResponse {
+  /** 数据库信息 */
+  DatabaseInfo?: DatabaseResponseInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6002,6 +6070,28 @@ declare interface GenerateCreateMangedTableSqlResponse {
   RequestId?: string;
 }
 
+declare interface GenerateInternalTableRequest {
+  /** 表基本信息 */
+  TableBaseInfo: TableBaseInfo;
+  /** 字段信息 */
+  Columns: TColumn[];
+  /** 分区信息 */
+  Partitions?: TPartition[];
+  /** 属性 */
+  Properties?: Property[];
+  /** V2 upsert表 upsert键 */
+  UpsertKeys?: string[];
+}
+
+declare interface GenerateInternalTableResponse {
+  /** 返回sql */
+  Execution?: Execution;
+  /** 是否tciceberg */
+  IsTIcebergSql?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetOptimizerPolicyRequest {
   /** 策略描述 */
   SmartPolicy: SmartPolicy;
@@ -6765,6 +6855,8 @@ declare interface Dlc {
   AlterDMSPartition(data: AlterDMSPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSPartitionResponse>;
   /** DMS元数据更新表 {@link AlterDMSTableRequest} {@link AlterDMSTableResponse} */
   AlterDMSTable(data: AlterDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<AlterDMSTableResponse>;
+  /** 修改表备注 {@link AlterTableCommentRequest} {@link AlterTableCommentResponse} */
+  AlterTableComment(data: AlterTableCommentRequest, config?: AxiosRequestConfig): AxiosPromise<AlterTableCommentResponse>;
   /** 分配原生表表属性 {@link AssignMangedTablePropertiesRequest} {@link AssignMangedTablePropertiesResponse} */
   AssignMangedTableProperties(data: AssignMangedTablePropertiesRequest, config?: AxiosRequestConfig): AxiosPromise<AssignMangedTablePropertiesResponse>;
   /** 绑定数据源与队列 {@link AssociateDatasourceHouseRequest} {@link AssociateDatasourceHouseResponse} */
@@ -6815,6 +6907,8 @@ declare interface Dlc {
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
   /** 创建托管存储内表 {@link CreateInternalTableRequest} {@link CreateInternalTableResponse} */
   CreateInternalTable(data: CreateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalTableResponse>;
+  /** 创建元数据库 {@link CreateMetaDatabaseRequest} {@link CreateMetaDatabaseResponse} */
+  CreateMetaDatabase(data?: CreateMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaDatabaseResponse>;
   /** 创建交互式session（notebook） {@link CreateNotebookSessionRequest} {@link CreateNotebookSessionResponse} */
   CreateNotebookSession(data: CreateNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionResponse>;
   /** 在session中执行代码片段 {@link CreateNotebookSessionStatementRequest} {@link CreateNotebookSessionStatementResponse} */
@@ -6861,6 +6955,8 @@ declare interface Dlc {
   DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
   /** 删除数据脱敏策略 {@link DeleteDataMaskStrategyRequest} {@link DeleteDataMaskStrategyResponse} */
   DeleteDataMaskStrategy(data?: DeleteDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataMaskStrategyResponse>;
+  /** 删除元数据库 {@link DeleteMetaDatabaseRequest} {@link DeleteMetaDatabaseResponse} */
+  DeleteMetaDatabase(data: DeleteMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetaDatabaseResponse>;
   /** 销毁EG SparkSession {@link DeleteNativeSparkSessionRequest} {@link DeleteNativeSparkSessionResponse} */
   DeleteNativeSparkSession(data?: DeleteNativeSparkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeSparkSessionResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
@@ -6913,6 +7009,8 @@ declare interface Dlc {
   DescribeDataEnginesScaleDetail(data?: DescribeDataEnginesScaleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataEnginesScaleDetailResponse>;
   /** 查询数据脱敏策略列表 {@link DescribeDataMaskStrategiesRequest} {@link DescribeDataMaskStrategiesResponse} */
   DescribeDataMaskStrategies(data?: DescribeDataMaskStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataMaskStrategiesResponse>;
+  /** 查询数据库详细信息 {@link DescribeDatabaseRequest} {@link DescribeDatabaseResponse} */
+  DescribeDatabase(data: DescribeDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseResponse>;
   /** 查询数据库列表 {@link DescribeDatabasesRequest} {@link DescribeDatabasesResponse} */
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据源信息 {@link DescribeDatasourceConnectionRequest} {@link DescribeDatasourceConnectionResponse} */
@@ -7049,6 +7147,8 @@ declare interface Dlc {
   DropDMSTable(data?: DropDMSTableRequest, config?: AxiosRequestConfig): AxiosPromise<DropDMSTableResponse>;
   /** 生成创建托管表语句 {@link GenerateCreateMangedTableSqlRequest} {@link GenerateCreateMangedTableSqlResponse} */
   GenerateCreateMangedTableSql(data: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
+  /** 创建内部表 {@link GenerateInternalTableRequest} {@link GenerateInternalTableResponse} */
+  GenerateInternalTable(data: GenerateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateInternalTableResponse>;
   /** 获取策略 {@link GetOptimizerPolicyRequest} {@link GetOptimizerPolicyResponse} */
   GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
   /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */

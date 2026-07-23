@@ -98,6 +98,20 @@ declare interface MountPoint {
   AccessGroupIds?: string[];
 }
 
+/** 路径保护规则 */
+declare interface PathProtectionRule {
+  /** 路径保护规则ID */
+  PathProtectionRuleId: number;
+  /** 规则名称 */
+  Name: string;
+  /** 指定保护路径 */
+  Path: string;
+  /** 规则状态（1：打开；2：关闭） */
+  Status: number;
+  /** 创建时间 */
+  CreateTime: string;
+}
+
 /** 回热任务 */
 declare interface RestoreTask {
   /** 回热任务ID */
@@ -260,6 +274,22 @@ declare interface CreateMountPointResponse {
   RequestId?: string;
 }
 
+declare interface CreatePathProtectionRuleRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 规则名称 */
+  Name: string;
+  /** 指定保护路径 */
+  Path: string;
+  /** 规则状态（1：打开；2：关闭） */
+  Status: number;
+}
+
+declare interface CreatePathProtectionRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRestoreTasksRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -334,6 +364,16 @@ declare interface DeleteMountPointRequest {
 }
 
 declare interface DeleteMountPointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePathProtectionRuleRequest {
+  /** 路径保护规则ID */
+  PathProtectionRuleId: number;
+}
+
+declare interface DeletePathProtectionRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -472,6 +512,18 @@ declare interface DescribeMountPointsResponse {
   RequestId?: string;
 }
 
+declare interface DescribePathProtectionRulesRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DescribePathProtectionRulesResponse {
+  /** 路径保护规则列表 */
+  PathProtectionRules: PathProtectionRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceTagsRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -594,6 +646,22 @@ declare interface ModifyMountPointRequest {
 }
 
 declare interface ModifyMountPointResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPathProtectionRuleRequest {
+  /** 路径保护规则ID */
+  PathProtectionRuleId: number;
+  /** 规则名称 */
+  Name?: string;
+  /** 指定保护路径 */
+  Path?: string;
+  /** 规则状态（1：打开；2：关闭） */
+  Status?: number;
+}
+
+declare interface ModifyPathProtectionRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1113,6 +1181,8 @@ declare interface Chdfs {
   CreateLifeCycleRules(data: CreateLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifeCycleRulesResponse>;
   /** 创建挂载点 {@link CreateMountPointRequest} {@link CreateMountPointResponse} */
   CreateMountPoint(data: CreateMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMountPointResponse>;
+  /** 创建路径保护规则 {@link CreatePathProtectionRuleRequest} {@link CreatePathProtectionRuleResponse} */
+  CreatePathProtectionRule(data: CreatePathProtectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePathProtectionRuleResponse>;
   /** 批量创建回热任务 {@link CreateRestoreTasksRequest} {@link CreateRestoreTasksResponse} */
   CreateRestoreTasks(data: CreateRestoreTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRestoreTasksResponse>;
   /** 创建回收站配置 {@link CreateTrashConfigRequest} {@link CreateTrashConfigResponse} */
@@ -1127,6 +1197,8 @@ declare interface Chdfs {
   DeleteLifeCycleRules(data: DeleteLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLifeCycleRulesResponse>;
   /** 删除挂载点 {@link DeleteMountPointRequest} {@link DeleteMountPointResponse} */
   DeleteMountPoint(data: DeleteMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountPointResponse>;
+  /** 删除路径保护规则 {@link DeletePathProtectionRuleRequest} {@link DeletePathProtectionRuleResponse} */
+  DeletePathProtectionRule(data: DeletePathProtectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePathProtectionRuleResponse>;
   /** 删除回收站配置 {@link DeleteTrashConfigRequest} {@link DeleteTrashConfigResponse} */
   DeleteTrashConfig(data: DeleteTrashConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrashConfigResponse>;
   /** 查看权限组详细信息 {@link DescribeAccessGroupRequest} {@link DescribeAccessGroupResponse} */
@@ -1145,6 +1217,8 @@ declare interface Chdfs {
   DescribeMountPoint(data: DescribeMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointResponse>;
   /** 查看挂载点列表 {@link DescribeMountPointsRequest} {@link DescribeMountPointsResponse} */
   DescribeMountPoints(data?: DescribeMountPointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMountPointsResponse>;
+  /** 查看路径保护规则列表 {@link DescribePathProtectionRulesRequest} {@link DescribePathProtectionRulesResponse} */
+  DescribePathProtectionRules(data: DescribePathProtectionRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePathProtectionRulesResponse>;
   /** 查看资源标签列表 {@link DescribeResourceTagsRequest} {@link DescribeResourceTagsResponse} */
   DescribeResourceTags(data: DescribeResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceTagsResponse>;
   /** 查看回热任务列表 {@link DescribeRestoreTasksRequest} {@link DescribeRestoreTasksResponse} */
@@ -1163,6 +1237,8 @@ declare interface Chdfs {
   ModifyLifeCycleRules(data: ModifyLifeCycleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLifeCycleRulesResponse>;
   /** 修改挂载点属性 {@link ModifyMountPointRequest} {@link ModifyMountPointResponse} */
   ModifyMountPoint(data: ModifyMountPointRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMountPointResponse>;
+  /** 修改路径保护规则属性 {@link ModifyPathProtectionRuleRequest} {@link ModifyPathProtectionRuleResponse} */
+  ModifyPathProtectionRule(data: ModifyPathProtectionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPathProtectionRuleResponse>;
   /** 修改资源标签列表 {@link ModifyResourceTagsRequest} {@link ModifyResourceTagsResponse} */
   ModifyResourceTags(data: ModifyResourceTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceTagsResponse>;
   /** 修改回收站配置 {@link ModifyTrashConfigRequest} {@link ModifyTrashConfigResponse} */

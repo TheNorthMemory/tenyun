@@ -30,6 +30,18 @@ declare interface ProductPrivilegeUnit {
   MatviewName?: string;
 }
 
+/** 凭据对应的账户信息(用户名、主机、版本号、轮转时间) */
+declare interface SecretAccountInfo {
+  /** 账户名称 */
+  AccountName?: string;
+  /** 账户登录主机 */
+  Host?: string[];
+  /** 账号状态（生效中/待轮转） */
+  Version?: string;
+  /** 账号轮转时间 */
+  RotatedTime?: string;
+}
+
 /** 凭据的基础信息 */
 declare interface SecretMetadata {
   /** 凭据名称 */
@@ -231,6 +243,8 @@ declare interface DeleteSecretRequest {
   RecoveryWindowInDays?: number;
   /** 当凭据类型为SSH密钥对凭据时，此字段有效，取值：True -- 表示不仅仅清理此凭据中存储的SSH密钥信息，还会将SSH密钥对从CVM侧进行清理。注意，如果SSH密钥此时绑定了CVM实例，那么会清理失败。False -- 表示仅仅清理此凭据中存储的SSH密钥信息，不在CVM进侧进行清理。 */
   CleanSSHKey?: boolean;
+  /** 删除模式枚举值：0： 仅删除凭据1： 删除凭据和账号 */
+  DeleteMode?: number;
 }
 
 declare interface DeleteSecretResponse {
@@ -238,6 +252,8 @@ declare interface DeleteSecretResponse {
   SecretName?: string;
   /** 凭据删除的日期，unix时间戳。 */
   DeleteTime?: number;
+  /** 异步删除任务 ID */
+  FlowID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -300,6 +316,8 @@ declare interface DescribeRotationHistoryResponse {
   VersionIDs?: string[];
   /** 版本号个数，可以给用户展示的版本号个数上限为10个。 */
   TotalCount?: number;
+  /** 凭据对应账号相关信息 */
+  AccountInfoList?: SecretAccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -352,6 +370,8 @@ declare interface DescribeSecretResponse {
   CreateUinString?: string;
   /** 所属用户UIN 字符串 */
   TargetUinString?: string;
+  /** 对应云产品的账号信息 */
+  AccountInfoList?: SecretAccountInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

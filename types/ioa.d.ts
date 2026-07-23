@@ -2049,7 +2049,7 @@ declare interface Ioa {
   DescribeDLPFileDetectTaskResult(data?: DescribeDLPFileDetectTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectTaskResultResponse>;
   /** 查询设备组子分组 {@link DescribeDeviceChildGroupsRequest} {@link DescribeDeviceChildGroupsResponse} */
   DescribeDeviceChildGroups(data?: DescribeDeviceChildGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceChildGroupsResponse>;
-  /** 基于软件查看终端详情列表 {@link DescribeDeviceDetailListRequest} {@link DescribeDeviceDetailListResponse} */
+  /** @deprecated 基于软件查看终端详情列表 {@link DescribeDeviceDetailListRequest} {@link DescribeDeviceDetailListResponse} */
   DescribeDeviceDetailList(data?: DescribeDeviceDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDetailListResponse>;
   /** 查询终端硬件信息列表 {@link DescribeDeviceHardwareInfoListRequest} {@link DescribeDeviceHardwareInfoListResponse} */
   DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;

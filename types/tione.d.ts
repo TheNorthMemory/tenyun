@@ -3481,6 +3481,8 @@ declare interface DescribeModelServiceCallInfoResponse {
 declare interface DescribeModelServiceGroupRequest {
   /** 服务组ID */
   ServiceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 服务分类 */
   ServiceCategory?: string;
 }
@@ -3541,6 +3543,8 @@ declare interface DescribeModelServiceHotUpdatedResponse {
 declare interface DescribeModelServiceRequest {
   /** 服务id */
   ServiceId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 服务分类 */
   ServiceCategory?: string;
 }

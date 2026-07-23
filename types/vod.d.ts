@@ -2219,10 +2219,18 @@ declare namespace V20180717 {
     SessionContext?: string;
   }
 
+  /** AIGC 视频转绘人物参数信息。 */
+  interface AigcVideoRedrawTaskInfo {
+    /** 用于描述转绘风格。限制50字符。 */
+    Style?: string;
+  }
+
   /** AIGC 视频转绘任务的输入。 */
   interface AigcVideoRedrawTaskInput {
     /** AIGC 视频转绘任务输入文件信息。 */
     FileInfo?: AigcVideoRedrawTaskInputFileInfo;
+    /** AIGC 视频转绘任务参数信息。 */
+    TaskInfo?: AigcVideoRedrawTaskInfo;
     /** AIGC 视频转绘输出配置。 */
     OutputConfig?: AigcVideoRedrawOutputConfig;
   }
