@@ -3099,13 +3099,13 @@ declare interface CreateFlowByFilesResponse {
 }
 
 declare interface CreateFlowEvidenceReportRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 合同流程ID，为32位字符串。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 指定申请的报告类型，可选类型如下： **0** :合同签署报告（默认） **1** :公证处核验报告 */
+  /** 指定申请的报告类型，可选类型如下： 0 :合同签署报告（默认）枚举值：0： 合同签署报告 */
   ReportType?: number;
   /** 混合云模式获取合同文件合并出证，默认：不同意。注：此参数需要联系腾讯电子签运营进行开通后生效 */
   HybridEvidenceFlowFile?: boolean;
@@ -3809,13 +3809,13 @@ declare interface CreatePartnerAuthorizationLinkResponse {
 declare interface CreatePartnerAutoSignAuthUrlRequest {
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
   /** 被授企业id/授权方企业id（即OrganizationId），和AuthorizedOrganizationName二选一传入 */
   AuthorizedOrganizationId?: string;
-  /** 被授企业名称/授权方企业的名字，和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: `如果名称中包含英文括号()，请使用中文括号（）代替。` */
+  /** 被授企业名称/授权方企业的名字，和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 如果名称中包含英文括号()，请使用中文括号（）代替。 */
   AuthorizedOrganizationName?: string;
-  /** 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。支持的印章类型包括：OFFICIAL：企业公章，用于代表企业对外的正式文件和重要事务的认证。CONTRACT：合同专用章，专门用于签署各类合同。FINANCE：财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证。PERSONNEL：人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。 */
+  /** 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。枚举值：OFFICIAL： 企业公章，用于代表企业对外的正式文件和重要事务的认证CONTRACT： 合同专用章，专门用于签署各类合同。FINANCE： 财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证PERSONNEL： 人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。OTHER： 其他类型印章，包含子类型 */
   SealTypes?: string[];
   /** 在处理授权关系时，授权的方向false（默认值）：表示我方授权他方。在这种情况下，AuthorizedOrganizationName 代表的是【被授权方】的企业名称，即接收授权的企业。true：表示他方授权我方。在这种情况下，AuthorizedOrganizationName 代表的是【授权方】的企业名称，即提供授权的企业。 */
   AuthToMe?: boolean;
@@ -4981,18 +4981,18 @@ declare interface DescribeFlowComponentsResponse {
 }
 
 declare interface DescribeFlowEvidenceReportRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 签署报告编号, 由提交申请出证报告任务产生 */
   ReportId: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 指定申请的报告类型，可选类型如下： **0** :合同签署报告（默认） **1** :公证处核验报告 */
+  /** 指定申请的报告类型，可选类型如下： 0 :合同签署报告（默认）枚举值：0： 合同签署报告 */
   ReportType?: number;
 }
 
 declare interface DescribeFlowEvidenceReportResponse {
-  /** 出证报告PDF的下载 URL，`有效期为5分钟`，超过有效期后将无法再下载。 */
+  /** 出证报告PDF的下载 URL，有效期为5分钟，超过有效期后将无法再下载。 */
   ReportUrl?: string;
   /** 出证任务执行的状态, 状态含义如下：**EvidenceStatusExecuting**： 出证任务在执行中**EvidenceStatusSuccess**： 出证任务执行成功**EvidenceStatusFailed** ： 出证任务执行失败 */
   Status?: string;

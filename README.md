@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 257+ 款产品，14877+ 服务数</summary>
+<details><summary>共计 257+ 款产品，14886+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -174,7 +174,7 @@ cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-
 cetcd | [云原生xa0etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(153) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(161) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(41) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(37) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
@@ -237,7 +237,7 @@ fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-
 ga2 | [全球加速](https://cloud.tencent.com/document/product/1817) | 2025-01-15(44) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(38) |
-goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(36) |
+goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(37) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(83) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(19) |
 habo |  | 2018-12-03(2) |

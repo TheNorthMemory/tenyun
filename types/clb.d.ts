@@ -2194,6 +2194,12 @@ declare interface UserGroupInfo {
   BudgetId?: string | null;
   /** 关联的Budget名称。未关联时为空；「未分组」虚拟分组恒为空。 */
   BudgetName?: string | null;
+  /** 关联的提示词 ID。未关联时为空；「未分组」虚拟分组恒为空。参数格式：pmt-1a2b3c4d */
+  PromptId?: string;
+  /** 关联的提示词版本。未关联时为空；「未分组」虚拟分组恒为空。 */
+  PromptVersion?: string;
+  /** 关联的提示词名称。未关联时为空；「未分组」虚拟分组恒为空。 */
+  PromptName?: string;
   /** 用户组多刷新周期 Credit 使用情况。无多周期预算时为空数组。 */
   CreditUsageSet?: CreditUsage[];
   /** 用户组当前包含的 Key 数量。「未分组」虚拟分组（ugrp-ungrouped）返回该模型路由实例下未归属任何用户组的 Key 数量。 */

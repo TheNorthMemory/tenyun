@@ -11176,6 +11176,8 @@ declare interface DescribeVoicesResponse {
   ErrorCode?: number;
   /** 错误信息，成功时返回success */
   Msg?: string;
+  /** 符合查询条件的音色总数 */
+  TotalCount?: number;
   /** 可用音色列表 */
   Voices?: VoiceInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */

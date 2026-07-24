@@ -764,6 +764,20 @@ declare interface ModifyDataRepositoryBandwidthResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDataRepositoryTaskStatusRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 数据流动任务ID */
+  TaskId: string;
+  /** 修改数据流动任务目标状态对应的类型，仅支持任务暂停和恢复（暂停对应pause，恢复对应resume）枚举值：pause： 暂停resume： 恢复 */
+  ModifyType: string;
+}
+
+declare interface ModifyDataRepositoryTaskStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface MountMultipleStorageFileSystemRequest {
   /** 客户端集群所属的文件系统id */
   FileSystemId?: string;
@@ -927,6 +941,8 @@ declare interface Goosefs {
   ListLoadTasks(data: ListLoadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListLoadTasksResponse>;
   /** 修改数据流动带宽 {@link ModifyDataRepositoryBandwidthRequest} {@link ModifyDataRepositoryBandwidthResponse} */
   ModifyDataRepositoryBandwidth(data: ModifyDataRepositoryBandwidthRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataRepositoryBandwidthResponse>;
+  /** 修改数据流动任务的状态 {@link ModifyDataRepositoryTaskStatusRequest} {@link ModifyDataRepositoryTaskStatusResponse} */
+  ModifyDataRepositoryTaskStatus(data: ModifyDataRepositoryTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataRepositoryTaskStatusResponse>;
   /** 挂载多个存储集群 {@link MountMultipleStorageFileSystemRequest} {@link MountMultipleStorageFileSystemResponse} */
   MountMultipleStorageFileSystem(data?: MountMultipleStorageFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<MountMultipleStorageFileSystemResponse>;
   /** 查询生成客户端节点的挂载命令 {@link QueryClientNodeMountCommandRequest} {@link QueryClientNodeMountCommandResponse} */

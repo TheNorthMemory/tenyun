@@ -145,7 +145,7 @@ declare interface RiskLabel {
 declare interface AssessDeviceRiskPremiumProRequest {
   /** 用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取 */
   DeviceToken: string;
-  /** 客户端 IP 地址 */
+  /** 客户端 IP 地址（IPv4或IPv6） */
   UserIp?: string;
 }
 
@@ -159,7 +159,7 @@ declare interface AssessDeviceRiskPremiumProResponse {
 declare interface AssessDeviceRiskProRequest {
   /** 用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取 */
   DeviceToken: string;
-  /** 客户端 IP 地址 */
+  /** 客户端 IP 地址（IPv4或IPv6） */
   UserIp?: string;
 }
 
@@ -171,7 +171,7 @@ declare interface AssessDeviceRiskProResponse {
 }
 
 declare interface AssessEnvironmentRiskRequest {
-  /** 客户端 IP 地址 */
+  /** 客户端 IP 地址（IPv4或IPv6） */
   UserIp: string;
 }
 

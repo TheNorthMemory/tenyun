@@ -824,6 +824,14 @@ declare interface CsvInfo {
   NonExistingField: string;
 }
 
+/** 自定义 KMS 密钥 */
+declare interface CustomKmsInfo {
+  /** KMS支持的地域，详见 腾讯云-密钥管理系统 官方文档参数格式：ap-guangzhou */
+  KmsRegion: string;
+  /** KMS秘钥ID */
+  KmsKeyId: string;
+}
+
 /** 自定义标签结构体 */
 declare interface CustomLabel {
   /** 标签的键。- 必须以字母或下划线开头，但不可以双下划线（__）开头，后面可以跟任意字母，数字或下划线。- 最大支持256个字符。- key不能重复 */
@@ -2782,8 +2790,10 @@ declare interface TopicInfo {
   Describes?: string;
   /** 开启日志沉降，标准存储的生命周期， hotPeriod < Period。标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）HotPeriod=0为没有开启日志沉降。 */
   HotPeriod?: number;
-  /** kms-cls服务秘钥id */
+  /** kms-cls服务秘钥idCustomKmsInfo为空时为系统默认密钥，CustomKmsInfo不为空时为用户自定义密钥 */
   KeyId?: string;
+  /** 用户自定义 KMS 密钥信息 */
+  CustomKmsInfo?: CustomKmsInfo;
   /** 主题类型。0: 日志主题 1: 指标主题 */
   BizType?: number;
   /** 免鉴权开关。 false：关闭； true：开启。开启后将支持指定操作匿名访问该日志主题。详情请参见日志主题。 */
@@ -4103,6 +4113,8 @@ declare interface CreateTopicRequest {
   HotPeriod?: number;
   /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。0或者不传： 不加密1：kms-cls 云产品密钥加密支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo */
   Encryption?: number;
+  /** 用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）当参数 Encryption为 1 时有效。 */
+  CustomKmsInfo?: CustomKmsInfo;
   /** 主题类型0:日志主题，默认值1:指标主题 */
   BizType?: number;
   /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。如果指定该字段，需保证全地域唯一 */
@@ -5741,7 +5753,7 @@ declare interface DescribeTopicsRequest {
   Limit?: number;
   /** 控制Filters相关字段是否为精确匹配。0: 默认值，topicName 和 logsetName 模糊匹配1: topicName 精确匹配2: logsetName精确匹配3: topicName 和logsetName 都精确匹配 */
   PreciseSearch?: number;
-  /** 主题类型- 0:日志主题，默认值- 1:指标主题 */
+  /** 主题类型0:日志主题，默认值1:指标主题 */
   BizType?: number;
 }
 
@@ -6857,6 +6869,8 @@ declare interface ModifyTopicRequest {
   CancelTopicAsyncTaskID?: string;
   /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。只支持传入1：kms-cls 云产品秘钥加密 */
   Encryption?: number;
+  /** 用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）当参数 Encryption为 1 时生效 */
+  CustomKmsInfo?: CustomKmsInfo;
   /** 开启记录公网来源ip和服务端接收时间 */
   IsSourceFrom?: boolean;
   /** 计费模式枚举值：0： 按使用功能计费1： 按原始日志量计费（目前仅面向少部分客户支持）默认值：0 */

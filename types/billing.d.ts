@@ -778,7 +778,7 @@ declare interface AnalyseConditions {
   ActionTypes?: string;
   /** 分账标签 */
   Tags?: string;
-  /** 费用类型，查询费用类型（请使用费用类型code入参)入参枚举如下：cashPayAmount:现金incentivePayAmount:赠送金voucherPayAmount:优惠券tax:税金costBeforeTax:税前价 */
+  /** 费用类型，查询费用类型（请使用费用类型code入参）入参枚举如下枚举值：cashPayAmount： 现金incentivePayAmount： 赠送金voucherPayAmount： 优惠券transferPayAmount： 分成金 */
   FeeType?: string;
   /** 查询成本分析数据的用户UIN */
   PayerUins?: string;

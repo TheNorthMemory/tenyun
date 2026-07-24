@@ -1812,9 +1812,9 @@ declare interface NetDetectState {
 
 /** 网络ACL */
 declare interface NetworkAcl {
-  /** `VPC`实例`ID`。 */
+  /** VPC实例ID。 */
   VpcId?: string;
-  /** 网络ACL实例`ID`。 */
+  /** 网络ACL实例ID。 */
   NetworkAclId?: string;
   /** 网络ACL名称，最大长度为60。 */
   NetworkAclName?: string;
@@ -2774,13 +2774,13 @@ declare interface SslVpnSever {
 
 /** 子网对象 */
 declare interface Subnet {
-  /** `VPC`实例`ID`。 */
+  /** VPC实例ID。 */
   VpcId?: string;
-  /** 子网实例`ID`，例如：subnet-bthucmmy。 */
+  /** 子网实例ID，例如：subnet-bthucmmy。 */
   SubnetId?: string;
   /** 子网名称。 */
   SubnetName?: string;
-  /** 子网的 `IPv4` `CIDR`。 */
+  /** 子网的 IPv4 CIDR。 */
   CidrBlock?: string;
   /** 是否默认子网。 */
   IsDefault?: boolean;
@@ -2792,15 +2792,15 @@ declare interface Subnet {
   RouteTableId?: string;
   /** 创建时间。 */
   CreatedTime?: string;
-  /** 可用`IPv4`数。 */
+  /** 可用IPv4数。 */
   AvailableIpAddressCount?: number;
-  /** 子网的 `IPv6` `CIDR`。 */
+  /** 子网的 IPv6 CIDR。 */
   Ipv6CidrBlock?: string;
-  /** 关联`ACL`ID */
+  /** 关联ACLID */
   NetworkAclId?: string;
-  /** 是否为 `SNAT` 地址池子网。 */
+  /** 是否为 SNAT 地址池子网。 */
   IsRemoteVpcSnat?: boolean;
-  /** 子网`IPv4`总数。 */
+  /** 子网IPv4总数。 */
   TotalIpAddressCount?: number;
   /** 标签键值对。 */
   TagSet?: Tag[];
@@ -3088,27 +3088,27 @@ declare interface UsedDetail {
 
 /** 私有网络(VPC)对象。 */
 declare interface VpcInfo {
-  /** `VPC`名称。 */
+  /** VPC名称。 */
   VpcName?: string;
-  /** `VPC`实例`ID`，例如：vpc-azd4dt1c。 */
+  /** VPC实例ID，例如：vpc-azd4dt1c。 */
   VpcId?: string;
-  /** `VPC`的`IPv4` `CIDR`。 */
+  /** VPC的IPv4 CIDR。 */
   CidrBlock?: string;
-  /** 是否默认`VPC`。 */
+  /** 是否默认VPC。 */
   IsDefault?: boolean;
   /** 是否开启组播。 */
   EnableMulticast?: boolean;
   /** 创建时间。 */
   CreatedTime?: string;
-  /** `DNS`列表。 */
+  /** DNS列表。 */
   DnsServerSet?: string[];
-  /** `DHCP`域名选项值。 */
+  /** DHCP域名选项值。 */
   DomainName?: string;
-  /** `DHCP`选项集`ID`。 */
+  /** DHCP选项集ID。 */
   DhcpOptionsId?: string;
-  /** 是否开启`DHCP`。 */
+  /** 是否开启DHCP。 */
   EnableDhcp?: boolean;
-  /** `VPC`的`IPv6` `CIDR`。 */
+  /** VPC的IPv6 CIDR。 */
   Ipv6CidrBlock?: string;
   /** 标签键值对 */
   TagSet?: Tag[];
@@ -6999,7 +6999,7 @@ declare interface DescribeNetworkAclQuintupleEntriesRequest {
   Offset?: number;
   /** 返回数量，默认为20，最小值为1，最大值为100。 */
   Limit?: number;
-  /** 过滤条件，参数不支持同时指定`NetworkAclId`和`Filters`。protocol - String - 协议，形如：`TCP`。description - String - 描述。destination-cidr - String - 目的CIDR， 形如：'192.168.0.0/24'。source-cidr- String - 源CIDR， 形如：'192.168.0.0/24'。action - String - 动作，形如ACCEPT或DROP。network-acl-quintuple-entry-id - String - 五元组唯一ID，形如：'acli45-ahnu4rv5'。network-acl-direction - String - 方向，形如：'INGRESS'或'EGRESS'。 */
+  /** 过滤条件，参数不支持同时指定NetworkAclId和Filters。protocol - String - 协议，形如：TCP。description - String - 描述。destination-cidr - String - 目的CIDR， 形如：'192.168.0.0/24'。source-cidr- String - 源CIDR， 形如：'192.168.0.0/24'。action - String - 动作，形如ACCEPT或DROP。network-acl-quintuple-entry-id - String - 五元组唯一ID，形如：'acli45-ahnu4rv5'。network-acl-direction - String - 方向，形如：'INGRESS'或'EGRESS'。 */
   Filters?: Filter[];
 }
 
@@ -7021,7 +7021,7 @@ declare interface DescribeNetworkAclsRequest {
   Offset?: number;
   /** 返回数量，默认为20，最小值为1，最大值为100。 */
   Limit?: number;
-  /** 排序字段。支持：NetworkAclId,NetworkAclName,CreatedTime */
+  /** 排序字段。支持：NetworkAclId,NetworkAclName,CreatedTime,ModifyTime */
   OrderField?: string;
   /** 排序方法。顺序：ASC，倒序：DESC。 */
   OrderDirection?: string;
@@ -7059,9 +7059,9 @@ declare interface DescribeNetworkInterfaceLimitResponse {
 }
 
 declare interface DescribeNetworkInterfacesRequest {
-  /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
+  /** 弹性网卡实例ID查询。形如：eni-pxir56ns。每次请求的实例的上限为100。参数不支持同时指定NetworkInterfaceIds和Filters。可通过DescribeNetworkInterfaces接口获取。 */
   NetworkInterfaceIds?: string[];
-  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与`ip-exact-match`配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
+  /** 过滤条件，参数不支持同时指定NetworkInterfaceIds和Filters。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。可通过可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。network-interface-id - String - （过滤条件）弹性网卡实例ID，形如：eni-5k56k7k7。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。attachment.instance-id - String - （过滤条件）绑定的云服务器实例ID，形如：ins-3nqpdn3i。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。groups.security-group-id - String - （过滤条件）绑定的安全组实例ID，例如：sg-f9ekbxeq。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。network-interface-name - String - （过滤条件）网卡实例名称。network-interface-description - String - （过滤条件）网卡实例描述。address-ip - String - （过滤条件）内网IPv4地址，单IP后缀模糊匹配，多IP精确匹配。可以与ip-exact-match配合做单IP的精确匹配查询。ip-exact-match - Boolean - （过滤条件）内网IPv4精确匹配查询，存在多值情况，只取第一个。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。使用请参考示例2tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。is-primary - Boolean - 是否必填：否 - （过滤条件）按照是否主网卡进行过滤。值为true时，仅过滤主网卡；值为false时，仅过滤辅助网卡；此过滤参数未提供时，同时过滤主网卡和辅助网卡。eni-type - String -是否必填：否- （过滤条件）按照网卡类型进行过滤。“0”-辅助网卡，“1”-主网卡，“2”：中继网卡。eni-qos - String -是否必填：否- （过滤条件）按照网卡服务质量进行过滤。PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。address-ipv6 - String - 是否必填：否 -（过滤条件）内网IPv6地址过滤，支持多ipv6地址查询，如果和address-ip一起使用取交集。public-address-ip - String - （过滤条件）公网IPv4地址，精确匹配。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。GUA(全球单播地址), ULA(唯一本地地址)。termination-protection - String - 删除保护。取值: true; false。traffic-protection - String - 流量保护。取值: true; false。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -7695,7 +7695,7 @@ declare interface DescribeSubnetResourceDashboardResponse {
 declare interface DescribeSubnetsRequest {
   /** 子网实例ID查询。形如：subnet-pxir56ns。每次请求的实例的上限为100（该参数指定的子网是否返回，需要结合分页拉取参数Limit和Offset）。参数不支持同时指定SubnetIds和Filters。 */
   SubnetIds?: string[];
-  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - （过滤条件）Subnet实例名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。is-default - Boolean - （过滤条件）是否是默认子网。is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。subnet-name - String - （过滤条件）子网名称。zone - String - （过滤条件）可用区。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
+  /** 过滤条件，参数不支持同时指定SubnetIds和Filters。subnet-id - String - （过滤条件）Subnet实例名称。vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。cidr-block - String - （过滤条件）子网网段，形如: 192.168.1.0 。is-default - Boolean - （过滤条件）是否是默认子网。is-remote-vpc-snat - Boolean - （过滤条件）是否为VPC SNAT地址池子网。subnet-name - String - （过滤条件）子网名称。zone - String - （过滤条件）可用区。tag-key - String -是否必填：否- （过滤条件）按照标签键进行过滤。tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。使用请参考示例2。cdc-id - String - 是否必填：否 - （过滤条件）按照cdc信息进行过滤。过滤出来制定cdc下的子网。is-cdc-subnet - String - 是否必填：否 - （过滤条件）按照是否是cdc子网进行过滤。取值：“0”-非cdc子网，“1”--cdc子网ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。GUA(全球单播地址), ULA(唯一本地地址)。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;
@@ -8067,7 +8067,7 @@ declare interface DescribeVpcTaskResultResponse {
 declare interface DescribeVpcsRequest {
   /** VPC实例ID。形如：vpc-f49l6u0z。每次请求的实例的上限为100。参数不支持同时指定VpcIds和Filters。 */
   VpcIds?: string[];
-  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
+  /** 过滤条件，不支持同时指定VpcIds和Filters参数。支持的过滤条件如下：vpc-name：VPC实例名称，支持模糊查询。is-default ：是否默认VPC。vpc-id ：VPC实例ID，例如：vpc-f49l6u0z。cidr-block：VPC的CIDR。tag-key ：按照标签键进行过滤，非必填参数。tag:tag-key：按照标签键值对进行过滤，非必填参数。 其中 tag-key 请使用具体的标签键进行替换，可参考示例2。 **说明：**若同一个过滤条件（Filter）存在多个Values，则同一Filter下Values间的关系为逻辑或（OR）关系；若存在多个过滤条件（Filter），Filter之间的关系为逻辑与（AND）关系。ipv6-cidr-block - String - （过滤条件）IPv6子网网段，形如: 2402:4e00:1717:8700::/64 。isp-type - String - （过滤条件）运营商类型，形如: BGP 取值范围：'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联通。address-type - String - （过滤条件）IPv6 Cidr 的类型，精确匹配。GUA(全球单播地址), ULA(唯一本地地址)。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: string;

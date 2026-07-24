@@ -368,6 +368,8 @@ declare interface DescribeMcpServerResponseVO {
   RelateAgentAppNum?: number;
   /** 插件配置 */
   PluginConfigs?: PluginConfigDTO[] | null;
+  /** 是否忽略健康检查 */
+  IgnoreHealthCheck?: boolean;
 }
 
 /** ServicesVO */
@@ -1193,6 +1195,8 @@ declare interface CreateMcpServerRequest {
   WrapPaasID?: string;
   /** 插件配置 */
   PluginConfigs?: PluginConfigDTO[];
+  /** 是否忽略健康检查 */
+  IgnoreHealthCheck?: boolean;
 }
 
 declare interface CreateMcpServerResponse {
@@ -1797,6 +1801,8 @@ declare interface ModifyMcpServerRequest {
   WrapPaasID?: string;
   /** 插件配置 */
   PluginConfigs?: PluginConfigDTO[];
+  /** 是否忽略健康检查 */
+  IgnoreHealthCheck?: boolean;
 }
 
 declare interface ModifyMcpServerResponse {

@@ -3051,11 +3051,11 @@ declare interface DescribeRumLogExportsResponse {
 }
 
 declare interface DescribeRumLogExportsV2Request {
-  /** Page size */
+  /** 每页返回任务数 */
   PageSize: number;
-  /** Page number */
+  /** 当前页码 */
   PageNum: number;
-  /** Project ID */
+  /** 项目ID */
   ID: number;
 }
 

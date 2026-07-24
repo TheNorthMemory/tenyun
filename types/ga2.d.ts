@@ -597,11 +597,11 @@ declare interface CreateListenerAdditionalCertResponse {
 declare interface CreateListenerRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 名称，最大长度不能超过60个字节。 */
+  /** 名称，最大长度不能超过128个字符。 */
   Name: string;
   /** 端口范围。 */
   PortRanges: PortRanges;
-  /** 描述信息，最大长度不能超过100个字节。 */
+  /** 描述信息，最大长度不能超过100个字符。 */
   Description?: string;
   /** 监听类型，默认为智能路由。枚举值：Standard： 智能路由。 */
   ListenerType?: string;

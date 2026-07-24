@@ -226,6 +226,74 @@ declare interface BlockIgnoreRule {
   FwType?: number;
 }
 
+/** 告警中心-阻断事件结构体 */
+declare interface BlockInfo {
+  /** 源IP */
+  SrcIP?: string;
+  /** 目的ip */
+  DstIP?: string;
+  /** 端口 */
+  DstPort?: string;
+  /** appid信息 */
+  AppID?: string;
+  /** 资产id */
+  AssetId?: string;
+  /** 资产名称 */
+  AssetName?: string;
+  /** 地域 */
+  Zone?: string;
+  /** 最晚时间 */
+  MaxDate?: string;
+  /** 最近时间 */
+  MinDate?: string;
+  /** 方向 1入站 0出战 */
+  Direction?: number;
+  /** 来源 1拦截列表，2虚拟补丁，3威胁情报，4基础防御 */
+  BlockSource?: number;
+  /** 国加 */
+  Country?: string;
+  /** 次数 */
+  Count?: number;
+  /** 拦截频率 */
+  AvgCount?: number;
+  /** 置顶位 */
+  IsTop?: number;
+  /** 记录唯一标识 */
+  UniqueId?: string;
+  /** 1是 0不是 */
+  ByPass?: number;
+  /** 1是 0不是 */
+  Block?: number;
+  /** 1是 0不是 */
+  Ignore?: number;
+  /** WhiteTag信息 */
+  WhiteTag?: string;
+  /** vpc间防火墙日志，目的资产id */
+  DstAssetId?: string | null;
+  /** vpc间防火墙日志，目的资产名称 */
+  DstAssetName?: string | null;
+  /** vpc间防火墙日志，源VPC id */
+  SrcVpc?: string | null;
+  /** vpc间防火墙日志，源VPC名称 */
+  SrcVpcName?: string | null;
+  /** vpc间防火墙日志，目的VPC id */
+  DstVpc?: string | null;
+  /** vpc间防火墙日志，目的VPC名称 */
+  DstVpcName?: string | null;
+  /** vpc间防火墙开关边id */
+  EdgeId?: string | null;
+  /** vpc间防火墙开关边名称 */
+  EdgeName?: string | null;
+  /** 日志来源 move：vpc间防火墙 */
+  LogSource?: string | null;
+  /** 是否加入隔离列表，1是 0不是 */
+  Isolate?: number | null;
+  /** 是否加入隔离列表，1是 0不是 */
+  Hide?: number;
+  /** 域名 */
+  Domain?: string | null;
+}
+
 /** CCN关联的实例信息 */
 declare interface CcnAssociatedInstance {
   /** 实例ID */
@@ -302,6 +370,14 @@ declare interface CfwStatusMonitorFilter {
   Values: string[] | null;
   /** 操作符类型，可选；仅支持后端允许的类型。 */
   OperatorType?: number | null;
+}
+
+/** 预接入检查项定义 */
+declare interface ClusterFwPreAccessCheckItem {
+  /** 检查项 key，与查询接口 CheckResult.Stages[].Stage 一一对应 */
+  Stage?: string;
+  /** 该检查项的展示文案，已按请求的 Language 返回中文或英文 */
+  Description?: string;
 }
 
 /** 预接入检查结果，序列化后写入 cfw_gwlb_lead_switch.check_result 列 */
@@ -722,6 +798,30 @@ declare interface EdgeIpSwitch {
   SwitchMode?: number;
 }
 
+/** vpc间防火墙规则生效范围列表 */
+declare interface EdgeRange {
+  /** 规则生效的范围id，是在哪对vpc之间还是针对所有vpc间生效 */
+  EdgeId?: string;
+  /** EdgeId对应的名称 */
+  EdgeName?: string;
+  /** 本端网络实例Id */
+  SrcId?: string;
+  /** 本端网络实例所属地域 */
+  SrcRegion?: string;
+  /** 本端网络实例名称 */
+  SrcName?: string;
+  /** 本端网络实例cidr，多个以逗号分隔 */
+  SrcCidr?: string;
+  /** 对端网络实例Id */
+  DstId?: string;
+  /** 对端网络实例所属地域 */
+  DstRegion?: string;
+  /** 对端网络实例名称 */
+  DstName?: string;
+  /** 对端网络实例cidr，多个以逗号分隔 */
+  DstCidr?: string;
+}
+
 /** 私有连接端点信息 */
 declare interface EndpointInfo {
   /** 引流私有连接端点id */
@@ -868,6 +968,14 @@ declare interface FwGateway {
   VpcId: string;
   /** 网关ip地址 */
   IpAddress: string;
+}
+
+/** 防火墙(组)ID 和 名称 */
+declare interface FwGroupIdName {
+  /** 防火墙(组)ID */
+  FwGroupId?: string | null;
+  /** 防火墙(组)名称 */
+  FwGroupName?: string | null;
 }
 
 /** 多种VPC墙模式开关结构 */
@@ -1020,6 +1128,10 @@ declare interface IpStatic {
   Num?: number;
   /** 折线图横坐标时间 */
   StatTime?: string;
+}
+
+/** IPS规则展示字段相关结构 */
+declare interface IpsRuleDetailNew {
 }
 
 /** 日志结果信息 */
@@ -1520,6 +1632,14 @@ declare interface RuleInfoData {
   RegionIso?: string;
 }
 
+/** 规则生效范围信息 */
+declare interface RuleScopeInfo {
+  /** NAT边界防火墙：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度 */
+  Scope?: string | null;
+  /** 生效范围描述 */
+  ScopeDesc?: string | null;
+}
+
 /** 新手引导扫描信息 */
 declare interface ScanInfo {
   /** 进度 */
@@ -1692,6 +1812,16 @@ declare interface SecurityGroupOrderIndexData {
   OrderIndex: number;
   /** 企业安全组规则更新目标执行顺序 */
   NewOrderIndex: number;
+}
+
+/** 安全组地域配置 */
+declare interface SecurityGroupRegion {
+  /** 地域 */
+  Region?: string;
+  /** 地域Id */
+  RegionId?: string;
+  /** 地域中文 */
+  RegionName?: string;
 }
 
 /** 企业安全组规则内容。新增和修改规则内容共用此结构；字段的校验、缺省、归一化及在两种操作中的处理行为见各字段说明。 */
@@ -2264,6 +2394,34 @@ declare interface AddVpcAcRuleRequest {
 declare interface AddVpcAcRuleResponse {
   /** 创建成功后返回新策略ID列表 */
   RuleUuids?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckClusterNatFwPreAccessRequest {
+  /** NAT CCN 开关配置 JSON 字符串，与 OpenClusterNatFwSwitch 的 NatCcnSwitch 完全一致。SwitchMode 必须为 1（自动接入），RoutingMode 必须为 1（策略路由）。 */
+  NatCcnSwitch: NatCcnSwitchConfig;
+  /** 预接入模式枚举值：open： 开启防火墙前预接入检查modify： 编辑修改防火墙开关时预接入检查 */
+  CheckMode: string;
+}
+
+declare interface CheckClusterNatFwPreAccessResponse {
+  /** 检查项清单，按执行顺序返回。前端据此渲染检查项骨架，描述文案已按请求的 Language 返回对应语言（中文/英文）。检查通过轮询 DescribeClusterNatCcnFwSwitchList 接口读取 CheckResult 获取每个阶段的通过/失败状态。 */
+  CheckItems?: ClusterFwPreAccessCheckItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckClusterVpcFwPreAccessRequest {
+  /** CCN 开关配置，长度为 1 的数组 JSON 字符串，结构与 ModifyClusterVpcFwSwitch 的 CcnSwitch 完全一致。SwitchMode 必须为 1（自动接入），RoutingMode 必须为 1（策略路由）。 */
+  CcnSwitch: CcnSwitchInfo[];
+  /** 预接入检查模式枚举值：open： 开启开关时预接入检查modify： 编辑变更开关时预接入检查 */
+  CheckMode: string;
+}
+
+declare interface CheckClusterVpcFwPreAccessResponse {
+  /** 检查项清单，按执行顺序返回。前端据此渲染检查项骨架，描述文案已按请求的 Language 返回对应语言（中文/英文）。检查通过轮询 DescribeClusterVpcFwSwitchs 接口读取 CheckResult 获取每个阶段的通过/失败状态。 */
+  CheckItems?: ClusterFwPreAccessCheckItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2994,6 +3152,50 @@ declare interface DescribeBlockIgnoreListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBlockListRequest {
+  /** 偏移量 */
+  Offset: number;
+  /** 长度 */
+  Limit: number;
+  /** 频率类型 */
+  StatTimeSpan: number;
+  /** 开始时间 */
+  StartTime: string;
+  /** 结束时间 */
+  EndTime: string;
+  /** 查询条件 */
+  SearchValue?: string;
+  /** 升序降序 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 方向 1 入 0出 */
+  Direction?: string;
+  /** 是否处置 1处置 0不是 */
+  ByPass?: string;
+  /** 来源 */
+  Source?: string;
+  /** 国家 1国内 */
+  Country?: string;
+  /** 资产id */
+  AssetId?: string;
+  /** 日志来源 move：vpc间防火墙 */
+  LogSource?: string;
+}
+
+declare interface DescribeBlockListResponse {
+  /** 阻断记录集合 */
+  Data: BlockInfo[];
+  /** 置顶阻断记录集合 */
+  TopData: BlockInfo[];
+  /** 数量 */
+  Total: number;
+  /** 置顶数量 */
+  TopCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBlockStaticListRequest {
   /** 结束时间 */
   EndTime: string;
@@ -3560,6 +3762,18 @@ declare interface DescribeFwEdgeIpsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFwGroupIdNamesRequest {
+  /** Ip版本，0：IPv4，1：IPv6，默认为IPv4 */
+  IpVersion?: number;
+}
+
+declare interface DescribeFwGroupIdNamesResponse {
+  /** 防火墙(组列表) */
+  Data?: FwGroupIdName[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFwGroupInstanceInfoRequest {
   /** 每页条数 */
   Limit: number;
@@ -3634,6 +3848,36 @@ declare interface DescribeIpsModeSwitchResponse {
   ReturnCode?: number;
   /** success 成功 其他失败 */
   ReturnMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeIpsRuleListNewRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移值 */
+  Offset: number;
+  /** 需要查询的索引，特定场景使用，可不填 */
+  Index?: string;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeIpsRuleListNewResponse {
+  /** 总条数 */
+  Total: number;
+  /** 规则详情 */
+  Data: IpsRuleDetailNew[];
+  /** 返回状态码 0 成功 非0不成功 */
+  ReturnCode: number;
+  /** 返回信息 success 成功 其他 不成功 */
+  ReturnMsg: string;
+  /** 字段类型 */
+  Category: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3978,6 +4222,18 @@ declare interface DescribeNatFwVpcDnsLstResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNatRuleScopesRequest {
+}
+
+declare interface DescribeNatRuleScopesResponse {
+  /** 可选生效范围总数 */
+  Total?: number;
+  /** 生效范围列表 */
+  ScopeItems?: RuleScopeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOfflineExportTaskRequest {
   /** 分页参数 */
   Limit: number;
@@ -4106,6 +4362,18 @@ declare interface DescribeSecurityGroupListResponse {
   AllTotal?: number;
   /** 访问控制规则全部启用/全部停用 */
   Enable?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityGroupRegionListRequest {
+}
+
+declare interface DescribeSecurityGroupRegionListResponse {
+  /** 配置信息 */
+  Data?: SecurityGroupRegion[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4310,6 +4578,36 @@ declare interface DescribeVpcAcRuleResponse {
   Total?: number;
   /** 内网间访问控制列表数据 */
   Data?: VpcRuleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVpcAclEdgeRangeRequest {
+  /** 规则列表来源：rules，来源于当前已配置的规则；switchs，来源于开关列表 */
+  FromList: string;
+  /** 需要查询的索引，特定场景使用，可不填 */
+  Index?: string;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** 每页条数 */
+  Limit?: number;
+  /** 偏移值 */
+  Offset?: number;
+  /** 检索的起始时间，可不传 */
+  StartTime?: string;
+  /** 检索的截止时间，可不传 */
+  EndTime?: string;
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeVpcAclEdgeRangeResponse {
+  /** 总条数 */
+  TotalCount: number;
+  /** 内网间访问控制规则的生效范围列表 */
+  EdgeRanges: EdgeRange[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5279,6 +5577,10 @@ declare interface Cfw {
   AddNatAcRule(data: AddNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddNatAcRuleResponse>;
   /** 添加VPC内网间规则 {@link AddVpcAcRuleRequest} {@link AddVpcAcRuleResponse} */
   AddVpcAcRule(data: AddVpcAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddVpcAcRuleResponse>;
+  /** NAT CCN集群防火墙预接入检查 {@link CheckClusterNatFwPreAccessRequest} {@link CheckClusterNatFwPreAccessResponse} */
+  CheckClusterNatFwPreAccess(data: CheckClusterNatFwPreAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CheckClusterNatFwPreAccessResponse>;
+  /** VPC集群防火墙预接入检查 {@link CheckClusterVpcFwPreAccessRequest} {@link CheckClusterVpcFwPreAccessResponse} */
+  CheckClusterVpcFwPreAccess(data: CheckClusterVpcFwPreAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CheckClusterVpcFwPreAccessResponse>;
   /** 关闭NAT CCN集群模式防火墙开关 {@link CloseClusterNatFwSwitchRequest} {@link CloseClusterNatFwSwitchResponse} */
   CloseClusterNatFwSwitch(data: CloseClusterNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<CloseClusterNatFwSwitchResponse>;
   /** 创建访问控制规则 {@link CreateAcRulesRequest} {@link CreateAcRulesResponse} */
@@ -5347,6 +5649,8 @@ declare interface Cfw {
   DescribeBlockByIpTimesList(data: DescribeBlockByIpTimesListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockByIpTimesListResponse>;
   /** 查询入侵防御放通封禁列表 {@link DescribeBlockIgnoreListRequest} {@link DescribeBlockIgnoreListResponse} */
   DescribeBlockIgnoreList(data: DescribeBlockIgnoreListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockIgnoreListResponse>;
+  /** 告警中心阻断资产视图列表 {@link DescribeBlockListRequest} {@link DescribeBlockListResponse} */
+  DescribeBlockList(data: DescribeBlockListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockListResponse>;
   /** 告警中心柱形图 {@link DescribeBlockStaticListRequest} {@link DescribeBlockStaticListResponse} */
   DescribeBlockStaticList(data: DescribeBlockStaticListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockStaticListResponse>;
   /** 查询CCN关联实例信息（不包含云防火墙创建引流实例） {@link DescribeCcnAssociatedInstancesRequest} {@link DescribeCcnAssociatedInstancesResponse} */
@@ -5395,6 +5699,8 @@ declare interface Cfw {
   DescribeEnterpriseSecurityGroupRuleList(data: DescribeEnterpriseSecurityGroupRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnterpriseSecurityGroupRuleListResponse>;
   /** 串行防火墙开关列表 {@link DescribeFwEdgeIpsRequest} {@link DescribeFwEdgeIpsResponse} */
   DescribeFwEdgeIps(data?: DescribeFwEdgeIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwEdgeIpsResponse>;
+  /** 获取用户防火墙(组)的ID名称列表 {@link DescribeFwGroupIdNamesRequest} {@link DescribeFwGroupIdNamesResponse} */
+  DescribeFwGroupIdNames(data?: DescribeFwGroupIdNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwGroupIdNamesResponse>;
   /** 获取租户所有VPC防火墙(组)及VPC防火墙实例卡片信息 {@link DescribeFwGroupInstanceInfoRequest} {@link DescribeFwGroupInstanceInfoResponse} */
   DescribeFwGroupInstanceInfo(data: DescribeFwGroupInstanceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFwGroupInstanceInfoResponse>;
   /** 获取防火墙同步状态 {@link DescribeFwSyncStatusRequest} {@link DescribeFwSyncStatusResponse} */
@@ -5405,6 +5711,8 @@ declare interface Cfw {
   DescribeIPStatusList(data: DescribeIPStatusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPStatusListResponse>;
   /** 获取入侵防御防护模式 {@link DescribeIpsModeSwitchRequest} {@link DescribeIpsModeSwitchResponse} */
   DescribeIpsModeSwitch(data?: DescribeIpsModeSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpsModeSwitchResponse>;
+  /** IPS规则查询接口新 {@link DescribeIpsRuleListNewRequest} {@link DescribeIpsRuleListNewResponse} */
+  DescribeIpsRuleListNew(data: DescribeIpsRuleListNewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpsRuleListNewResponse>;
   /** 租户日志存储统计 {@link DescribeLogStorageStatisticRequest} {@link DescribeLogStorageStatisticResponse} */
   DescribeLogStorageStatistic(data?: DescribeLogStorageStatisticRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogStorageStatisticResponse>;
   /** 日志审计日志查询 {@link DescribeLogsRequest} {@link DescribeLogsResponse} */
@@ -5433,6 +5741,8 @@ declare interface Cfw {
   DescribeNatFwSwitch(data: DescribeNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwSwitchResponse>;
   /** 展示当前natfw 实例对应的vpc dns开关 {@link DescribeNatFwVpcDnsLstRequest} {@link DescribeNatFwVpcDnsLstResponse} */
   DescribeNatFwVpcDnsLst(data: DescribeNatFwVpcDnsLstRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatFwVpcDnsLstResponse>;
+  /** 查询NAT规则生效范围列表 {@link DescribeNatRuleScopesRequest} {@link DescribeNatRuleScopesResponse} */
+  DescribeNatRuleScopes(data?: DescribeNatRuleScopesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatRuleScopesResponse>;
   /** 获取日志离线导出任务列表 {@link DescribeOfflineExportTaskRequest} {@link DescribeOfflineExportTaskResponse} */
   DescribeOfflineExportTask(data: DescribeOfflineExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineExportTaskResponse>;
   /** 获取日志离线导出任务文件下载临时凭证 {@link DescribeOfflineExportTemporaryCredentialsRequest} {@link DescribeOfflineExportTemporaryCredentialsResponse} */
@@ -5445,6 +5755,8 @@ declare interface Cfw {
   DescribeRuleOverview(data?: DescribeRuleOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleOverviewResponse>;
   /** 查询安全组规则列表 {@link DescribeSecurityGroupListRequest} {@link DescribeSecurityGroupListResponse} */
   DescribeSecurityGroupList(data: DescribeSecurityGroupListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupListResponse>;
+  /** 查询安全组地域信息 {@link DescribeSecurityGroupRegionListRequest} {@link DescribeSecurityGroupRegionListResponse} */
+  DescribeSecurityGroupRegionList(data?: DescribeSecurityGroupRegionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupRegionListResponse>;
   /** 查询串行防火墙地域带宽分配信息 {@link DescribeSerialRegionRequest} {@link DescribeSerialRegionResponse} */
   DescribeSerialRegion(data?: DescribeSerialRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSerialRegionResponse>;
   /** 查询全部资产信息 {@link DescribeSourceAssetRequest} {@link DescribeSourceAssetResponse} */
@@ -5463,6 +5775,8 @@ declare interface Cfw {
   DescribeUnHandleEventTabList(data: DescribeUnHandleEventTabListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnHandleEventTabListResponse>;
   /** 查询内网间访问控制列表 {@link DescribeVpcAcRuleRequest} {@link DescribeVpcAcRuleResponse} */
   DescribeVpcAcRule(data: DescribeVpcAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAcRuleResponse>;
+  /** 查询内网间访问控制规则的生效范围 {@link DescribeVpcAclEdgeRangeRequest} {@link DescribeVpcAclEdgeRangeResponse} */
+  DescribeVpcAclEdgeRange(data: DescribeVpcAclEdgeRangeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAclEdgeRangeResponse>;
   /** VPC防火墙CCN策略路由白名单 {@link DescribeVpcFwCcnPolicyWhiteListRequest} {@link DescribeVpcFwCcnPolicyWhiteListResponse} */
   DescribeVpcFwCcnPolicyWhiteList(data?: DescribeVpcFwCcnPolicyWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcFwCcnPolicyWhiteListResponse>;
   /** VPC防火墙(组)开关列表 {@link DescribeVpcFwGroupSwitchRequest} {@link DescribeVpcFwGroupSwitchResponse} */

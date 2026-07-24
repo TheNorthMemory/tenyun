@@ -7879,7 +7879,7 @@ declare interface IdentifyZoneResponse {
 declare interface ImportZoneConfigRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置内容可通过站点配置导出接口（ExportZoneConfig）获取。您可以单独导入「站点加速-全局加速配置」或「站点加速-规则引擎」，传入对应的字段即可，详情可以参考下方示例。 */
+  /** 待导入的配置内容。要求采用 JSON 格式，按照 UTF-8 方式进行编码。配置内容可通过站点配置导出接口（ExportZoneConfig）获取。您可以单独导入「站点加速-全局加速配置」或「站点加速-规则引擎」，传入对应的字段即可，详情可以参考下方示例。注意：ExportZoneConfig 导出的 AccelerationDomain（加速域名配置）、Origin（源站配置）暂不支持通过本接口导入，若 Content 中包含上述配置内容，将导致导入失败。 */
   Content: string;
 }
 

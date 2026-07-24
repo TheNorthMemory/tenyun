@@ -1043,23 +1043,23 @@ declare interface PathMapping {
 /** API网关插件详情。 */
 declare interface Plugin {
   /** 插件ID。 */
-  PluginId: string;
+  PluginId?: string;
   /** 插件名称。 */
-  PluginName: string;
+  PluginName?: string;
   /** 插件类型。 */
-  PluginType: string;
+  PluginType?: string;
   /** 插件定义语句。 */
-  PluginData: string;
+  PluginData?: string;
   /** 插件描述。 */
-  Description: string | null;
+  Description?: string | null;
   /** 插件创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  CreatedTime: string;
+  CreatedTime?: string;
   /** 插件修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
-  ModifiedTime: string;
+  ModifiedTime?: string;
   /** 插件绑定的API总数。 */
-  AttachedApiTotalCount: number | null;
+  AttachedApiTotalCount?: number | null;
   /** 插件绑定的API信息。 */
-  AttachedApis: AttachedApiInfo[] | null;
+  AttachedApis?: AttachedApiInfo[] | null;
 }
 
 /** 插件列表详情。 */
@@ -2343,7 +2343,7 @@ declare interface DescribeApiRequest {
 
 declare interface DescribeApiResponse {
   /** API 详情。 */
-  Result: ApiInfo;
+  Result?: ApiInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2563,7 +2563,7 @@ declare interface DescribePluginRequest {
 
 declare interface DescribePluginResponse {
   /** 插件详情。 */
-  Result: Plugin;
+  Result?: Plugin;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2605,7 +2605,7 @@ declare interface DescribePluginsRequest {
 
 declare interface DescribePluginsResponse {
   /** 插件详情。 */
-  Result: PluginSummary;
+  Result?: PluginSummary;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
