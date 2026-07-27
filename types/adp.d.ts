@@ -630,6 +630,224 @@ declare interface AppToolConfig {
   Outputs?: ResponseParam[];
 }
 
+/** AppTrigger */
+declare interface AppTrigger {
+  /**  */
+  TriggerId?: string;
+  /**  */
+  AppId?: string;
+  /**  */
+  TriggerName?: string;
+  /** 枚举项枚举值描述APP_TRIGGER_TYPE_UNSPECIFIED0未指定APP_TRIGGER_TYPE_SCHEDULED1定时触发APP_TRIGGER_TYPE_WEBHOOK2Webhook 触发 */
+  TriggerType?: number;
+  /** 枚举项枚举值描述APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED0未指定APP_TRIGGER_EXECUTE_TYPE_PROMPT1指令执行APP_TRIGGER_EXECUTE_TYPE_WORKFLOW2工作流执行 */
+  ExecuteType?: number;
+  /**  */
+  PushConfig?: TimerPushConfig;
+  /** 枚举项枚举值描述APP_TRIGGER_STATUS_UNSPECIFIED0未指定APP_TRIGGER_STATUS_ENABLED1启用APP_TRIGGER_STATUS_PAUSED2暂停APP_TRIGGER_STATUS_DELETED3已删除 */
+  Status?: number;
+  /**  */
+  SuccessCount?: string;
+  /**  */
+  FailedCount?: string;
+  /**  */
+  TriggerConfig?: TriggerConfig;
+  /**  */
+  ExecuteConfig?: ExecuteConfig;
+  /**  */
+  TriggerStatus?: TriggerStatus;
+}
+
+/** AppTriggerInstance */
+declare interface AppTriggerInstance {
+  /**  */
+  AppId?: string;
+  /**  */
+  ConversationId?: string;
+  /**  */
+  CreatedAt?: string;
+  /**  */
+  FinishedAt?: string;
+  /**  */
+  InstanceId?: string;
+  /**  */
+  RequestId?: string;
+  /**  */
+  ResultCode?: string;
+  /**  */
+  ResultSummary?: string;
+  /**  */
+  RunId?: string;
+  /** 枚举项枚举值描述APP_TRIGGER_INSTANCE_SOURCE_UNSPECIFIED0未指定APP_TRIGGER_INSTANCE_SOURCE_APP_TRIGGER1来源于应用触发器 */
+  Source?: number;
+  /**  */
+  StartedAt?: string;
+  /** 枚举项枚举值描述TIMER_RUN_STATUS_UNSPECIFIED0未指定TIMER_RUN_STATUS_PENDING1等待执行TIMER_RUN_STATUS_RUNNING2执行中TIMER_RUN_STATUS_RETRY_WAIT3等待重试TIMER_RUN_STATUS_SUCCESS4成功TIMER_RUN_STATUS_DEAD5失败终态 (重试耗尽 / 不可重试)TIMER_RUN_STATUS_CANCELLED6被任务暂停/删除/修改取消 */
+  Status?: number;
+  /**  */
+  TraceId?: string;
+  /**  */
+  TriggerId?: string;
+  /**  */
+  WorkflowRunId?: string;
+}
+
+/** AppTriggerParamBinding */
+declare interface AppTriggerParamBinding {
+  /** 参数名字 */
+  ParamName?: string;
+  /** 参数类型枚举值：0： 字符串1： 整数2： 浮点数4： 对象5： 字符串数组6： 整数数组7： 浮点数数组8： 布尔值数组3： 布尔值9： 对象数组10： 文件11： 文档12： 图片13： 音频14： 视频15： 文件数组16： 文档数组17： 图片数组18： 音频数组19： 视频数组20： 数组嵌套22： 密钥99： 空值100： 未指定类型，用于OneOf和AnyOf场景 */
+  ParamType?: number;
+  /** 参数值 */
+  Value?: AppTriggerParamBindingValue;
+}
+
+/** AppTriggerParamBindingConfig */
+declare interface AppTriggerParamBindingConfig {
+  /**  */
+  ParamList?: AppTriggerParamBinding[];
+}
+
+/** AppTriggerParamBindingValue */
+declare interface AppTriggerParamBindingValue {
+  /** 参数值 */
+  ParamValue?: string;
+  /** 应用变量名 */
+  VariableName?: string;
+}
+
+/** AppTriggerParamSchema */
+declare interface AppTriggerParamSchema {
+  /**  */
+  ParamName?: string;
+  /** 枚举项枚举值描述PARAM_TYPE_STRING0字符串PARAM_TYPE_INT1整数PARAM_TYPE_FLOAT2浮点数PARAM_TYPE_BOOL3布尔值PARAM_TYPE_OBJECT4对象PARAM_TYPE_ARRAY_STRING5字符串数组PARAM_TYPE_ARRAY_INT6整数数组PARAM_TYPE_ARRAY_FLOAT7浮点数数组PARAM_TYPE_ARRAY_BOOL8布尔值数组PARAM_TYPE_ARRAY_OBJECT9对象数组PARAM_TYPE_ARRAY_ARRAY20数组嵌套PARAM_TYPE_NULL99空值PARAM_TYPE_UNSPECIFIED100未指定类型，用于OneOf和AnyOf场景 */
+  ParamType?: number;
+  /**  */
+  Required?: boolean;
+  /**  */
+  SubParamList?: AppTriggerParamSchema[];
+}
+
+/** AppTriggerPromptExecuteConfig */
+declare interface AppTriggerPromptExecuteConfig {
+  /**  */
+  ExecutePrompt?: string;
+  /**  */
+  ParamBindingsApi?: AppTriggerParamBindingConfig;
+}
+
+/** AppTriggerRunLog */
+declare interface AppTriggerRunLog {
+  /**  */
+  ConversationId?: string;
+  /**  */
+  DurationMs?: string;
+  /**  */
+  EndTime?: string;
+  /** 枚举项枚举值描述APP_TRIGGER_FIRE_TYPE_UNSPECIFIED0未指定APP_TRIGGER_FIRE_TYPE_SCHEDULED1定时触发APP_TRIGGER_FIRE_TYPE_WEBHOOK2Webhook 触发APP_TRIGGER_FIRE_TYPE_MANUAL_RUN3手动立即执行APP_TRIGGER_FIRE_TYPE_TEST_RUN4测试执行 */
+  FireType?: number;
+  /**  */
+  InstanceId?: string;
+  /** 枚举项枚举值描述TIMER_RUN_PUSH_STATUS_UNSPECIFIED0未指定TIMER_RUN_PUSH_STATUS_NONE1未配置推送TIMER_RUN_PUSH_STATUS_WAITING2等待推送TIMER_RUN_PUSH_STATUS_SUCCESS3推送成功TIMER_RUN_PUSH_STATUS_FAILED4推送失败 */
+  PushStatus?: number;
+  /**  */
+  ResultCode?: string;
+  /**  */
+  ResultSummary?: string;
+  /**  */
+  RunId?: string;
+  /**  */
+  ScheduledFireTime?: string;
+  /**  */
+  StartTime?: string;
+  /** 枚举项枚举值描述TIMER_RUN_STATUS_UNSPECIFIED0未指定TIMER_RUN_STATUS_PENDING1等待执行TIMER_RUN_STATUS_RUNNING2执行中TIMER_RUN_STATUS_RETRY_WAIT3等待重试TIMER_RUN_STATUS_SUCCESS4成功TIMER_RUN_STATUS_DEAD5失败终态 (重试耗尽 / 不可重试)TIMER_RUN_STATUS_CANCELLED6被任务暂停/删除/修改取消 */
+  Status?: number;
+  /**  */
+  TriggerId?: string;
+  /**  */
+  Unread?: boolean;
+  /**  */
+  WorkflowRunId?: string;
+}
+
+/** AppTriggerScheduleConfig */
+declare interface AppTriggerScheduleConfig {
+  /**  */
+  Schedule?: TimerScheduleConfig;
+}
+
+/** AppTriggerScheduleStatus */
+declare interface AppTriggerScheduleStatus {
+  /**  */
+  LastFireTime?: string;
+  /**  */
+  NextFireTime?: string;
+  /**  */
+  PolicySummary?: string;
+}
+
+/** AppTriggerSummary */
+declare interface AppTriggerSummary {
+  /**  */
+  AppId?: string;
+  /** 枚举项枚举值描述APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED0未指定APP_TRIGGER_EXECUTE_TYPE_PROMPT1指令执行APP_TRIGGER_EXECUTE_TYPE_WORKFLOW2工作流执行 */
+  ExecuteType?: number;
+  /**  */
+  FailedCount?: string;
+  /**  */
+  LastSessionId?: string;
+  /** 枚举项枚举值描述APP_TRIGGER_STATUS_UNSPECIFIED0未指定APP_TRIGGER_STATUS_ENABLED1启用APP_TRIGGER_STATUS_PAUSED2暂停APP_TRIGGER_STATUS_DELETED3已删除 */
+  Status?: number;
+  /**  */
+  SuccessCount?: string;
+  /**  */
+  TriggerId?: string;
+  /**  */
+  TriggerName?: string;
+  /**  */
+  TriggerStatus?: TriggerStatus;
+  /** 枚举项枚举值描述APP_TRIGGER_TYPE_UNSPECIFIED0未指定APP_TRIGGER_TYPE_SCHEDULED1定时触发APP_TRIGGER_TYPE_WEBHOOK2Webhook 触发 */
+  TriggerType?: number;
+  /**  */
+  UnreadRunLogCount?: string;
+}
+
+/** AppTriggerWebhookConfig */
+declare interface AppTriggerWebhookConfig {
+  /**  */
+  ParamSchemaConfig?: AppTriggerWebhookParamSchemaConfig;
+  /**  */
+  WebhookKey?: string;
+  /**  */
+  WebhookToken?: string;
+  /**  */
+  WebhookUrl?: string;
+}
+
+/** AppTriggerWebhookParamSchemaConfig */
+declare interface AppTriggerWebhookParamSchemaConfig {
+  /**  */
+  SchemaList?: AppTriggerParamSchema[];
+}
+
+/** AppTriggerWebhookStatus */
+declare interface AppTriggerWebhookStatus {
+  /**  */
+  WebhookUrl?: string;
+}
+
+/** AppTriggerWorkflowExecuteConfig */
+declare interface AppTriggerWorkflowExecuteConfig {
+  /** 工作流API参数绑定 */
+  ParamBindingsApi?: AppTriggerParamBindingConfig;
+  /** 工作流参数绑定 */
+  ParamBindingsWorkflow?: AppTriggerParamBindingConfig;
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 工作流名字 */
+  WorkflowName?: string;
+}
+
 /** 联网搜索配置(国际版使用) */
 declare interface AppWebSearchConfig {
   /** API密钥 */
@@ -966,6 +1184,18 @@ declare interface CorpShareConfig {
   TagIdList?: string[];
 }
 
+/** CronSchedule */
+declare interface CronSchedule {
+  /** cron表达式 */
+  Expression?: string;
+}
+
+/** DailySchedule */
+declare interface DailySchedule {
+  /** 时间 */
+  TimeOfDay?: string;
+}
+
 /** 数智人配置 */
 declare interface DigitalHumanConfig {
   /** 数智人形象资产id */
@@ -990,6 +1220,14 @@ declare interface DuplexBilling {
   OutputCashPrice?: number;
   /** 输出pu价格单位：pu */
   OutputPuPrice?: number;
+}
+
+/** ExecuteConfig */
+declare interface ExecuteConfig {
+  /** Prompt配置 */
+  PromptConfig?: AppTriggerPromptExecuteConfig;
+  /** 工作流配置 */
+  WorkflowConfig?: AppTriggerWorkflowExecuteConfig;
 }
 
 /** 字段掩码 */
@@ -1050,6 +1288,16 @@ declare interface IntentAchievementInfo {
   Name: string;
 }
 
+/** IntervalSchedule */
+declare interface IntervalSchedule {
+  /** 开始时间 */
+  StartAt?: string;
+  /** 枚举值:| 枚举值 | uint || --- | --- || INTERVAL_UNIT_UNSPECIFIED | 0 || INTERVAL_UNIT_HOUR | 1 || INTERVAL_UNIT_DAY | 2 | */
+  Unit?: number;
+  /** 值 */
+  Value?: number;
+}
+
 /** MCP插件配置信息 */
 declare interface MCPPluginConfig {
   /** MCP插件外部访问地址 */
@@ -1076,6 +1324,12 @@ declare interface MCPToolConfig {
   Inputs?: RequestParam[];
   /** 输出参数 */
   Outputs?: ResponseParam[];
+}
+
+/** ManualOnlySchedule */
+declare interface ManualOnlySchedule {
+  /** 启用 */
+  Enabled?: boolean;
 }
 
 /** 模型完整信息 */
@@ -1256,6 +1510,12 @@ declare interface OAuthConfig {
   ScopeList?: string[];
   /** 获取access token的url地址 */
   TokenUrl?: string;
+}
+
+/** OnceSchedule */
+declare interface OnceSchedule {
+  /** 触发时间 */
+  FireTime?: string;
 }
 
 /** 插件详情 */
@@ -1700,6 +1960,118 @@ declare interface ThinkModel {
   Model: ModelDetailInfo | null;
 }
 
+/** TimerConfig */
+declare interface TimerConfig {
+  /** 推送配置 */
+  PushConfig?: TimerPushConfig;
+  /** 定时配置 */
+  Schedule?: TimerScheduleConfig;
+}
+
+/** TimerProfile */
+declare interface TimerProfile {
+  /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 页面手动创建 || 2 | 自然语言对话创建 | */
+  CreateSource?: number;
+  /** 输入上下文快照 */
+  InputContextSnapshot?: string;
+  /** 模型 */
+  ModelId?: string;
+  /** 提示词 */
+  Prompt?: string;
+  /** skill快照 */
+  SkillSnapshot?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 工具快照 */
+  ToolSnapshot?: string;
+  /** 工作目录 */
+  WorkspaceId?: string;
+}
+
+/** TimerPushConfig */
+declare interface TimerPushConfig {
+  /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 不推送 || 2 | 微信公众号 || 3 | 企业微信 AI 机器人 | */
+  PushChannel?: number;
+  /** 推送会话ID */
+  PushTargetId?: string;
+  /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 用户 (微信公众号 openid) || 2 | 群聊 (企微机器人 chat_id) | */
+  PushTargetType?: number;
+  /**  */
+  PushWebhookUrl?: string;
+}
+
+/** TimerScheduleConfig */
+declare interface TimerScheduleConfig {
+  /** cron配置 */
+  Cron?: CronSchedule;
+  /** 每日触发 */
+  Daily?: DailySchedule;
+  /** 固定间隔 */
+  Interval?: IntervalSchedule;
+  /** 仅手动 */
+  ManualOnly?: ManualOnlySchedule;
+  /** 单次 */
+  Once?: OnceSchedule;
+  /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 仅手动 || 2 | 每天 || 3 | 每周 || 4 | 按间隔 || 5 | 一次性 || 6 | Cron | */
+  ScheduleType?: number;
+  /** 时区 */
+  Timezone?: string;
+  /** 每周固定时间触发 */
+  Weekly?: WeeklySchedule;
+}
+
+/** TimerStatus */
+declare interface TimerStatus {
+  /** 失败次数 */
+  FailedCount?: string;
+  /** 上次触发时间 */
+  LastFireTime?: string;
+  /** 最近一次会话ID */
+  LastSessionId?: string;
+  /** 下次触发时间 */
+  NextFireTime?: string;
+  /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 启用 || 2 | 暂停 || 3 | 一次性任务已完成 | */
+  Status?: number;
+  /** 成功次数 */
+  SuccessCount?: string;
+  /** 未读数量 */
+  UnreadRunLogCount?: string;
+}
+
+/** TimerTask */
+declare interface TimerTask {
+  /** 任务配置 */
+  Config?: TimerConfig;
+  /** staffBizId */
+  OwnerUserId?: string;
+  /** 定时配置概要 */
+  PolicySummary?: string;
+  /** 概要信息 */
+  Profile?: TimerProfile;
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务状态 */
+  Status?: TimerStatus;
+  /** 任务ID */
+  TimerId?: string;
+}
+
+/** TimerTaskSummary */
+declare interface TimerTaskSummary {
+  /** OwnerUserId */
+  OwnerUserId?: string;
+  /** 定时配置概要 */
+  PolicySummary?: string;
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务相关状态 */
+  Status?: TimerStatus;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 任务ID */
+  TimerId?: string;
+}
+
 /** Tool */
 declare interface Tool {
   /** 工具计费信息 */
@@ -1758,6 +2130,22 @@ declare interface ToolSummary {
   ToolId?: string;
 }
 
+/** TriggerConfig */
+declare interface TriggerConfig {
+  /** 定时器配置 */
+  ScheduledConfig?: AppTriggerScheduleConfig;
+  /** Webhook配置 */
+  WebhookConfig?: AppTriggerWebhookConfig;
+}
+
+/** TriggerStatus */
+declare interface TriggerStatus {
+  /** 定时器状态 */
+  ScheduledStatus?: AppTriggerScheduleStatus;
+  /** Webhook状态 */
+  WebhookStatus?: AppTriggerWebhookStatus;
+}
+
 /** 变量信息 */
 declare interface Variable {
   /** 默认文件名称 */
@@ -1788,6 +2176,20 @@ declare interface VoiceConfig {
   VoiceName: string;
   /** 公有云音色id */
   VoiceType: number;
+}
+
+/** WeeklySchedule */
+declare interface WeeklySchedule {
+  /** 定时配置（星期） */
+  Times?: WeeklyTime[];
+}
+
+/** WeeklyTime */
+declare interface WeeklyTime {
+  /** 时间 */
+  TimeOfDay?: string;
+  /** 周几 */
+  Weekday?: number;
 }
 
 declare interface CopyAgentFromAppRequest {
@@ -1852,6 +2254,30 @@ declare interface CreateAppRequest {
 declare interface CreateAppResponse {
   /** app_id */
   AppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAppTriggerRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用触发器执行配置 */
+  ExecuteConfig?: ExecuteConfig;
+  /** 枚举项枚举值描述APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED0未指定APP_TRIGGER_EXECUTE_TYPE_PROMPT1指令执行APP_TRIGGER_EXECUTE_TYPE_WORKFLOW2工作流执行 */
+  ExecuteType?: number;
+  /** 第三方推送配置 */
+  PushConfig?: TimerPushConfig;
+  /** 触发器配置 */
+  TriggerConfig?: TriggerConfig;
+  /** 触发器名字 */
+  TriggerName?: string;
+  /** 枚举项枚举值描述APP_TRIGGER_TYPE_UNSPECIFIED0未指定APP_TRIGGER_TYPE_SCHEDULED1定时触发APP_TRIGGER_TYPE_WEBHOOK2Webhook 触发 */
+  TriggerType?: number;
+}
+
+declare interface CreateAppTriggerResponse {
+  /** 应用触发器ID */
+  TriggerId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1992,6 +2418,42 @@ declare interface CreateSpaceResponse {
   RequestId?: string;
 }
 
+declare interface CreateTimerTaskRequest {
+  /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 页面手动创建 || 2 | 自然语言对话创建 | */
+  CreateSource?: number;
+  /** 输入上下文 */
+  InputContextSnapshot?: string;
+  /** 模型 */
+  ModelId?: string;
+  /** 提示词 */
+  Prompt?: string;
+  /** 推送配置 */
+  PushConfig?: TimerPushConfig;
+  /** 定时配置 */
+  Schedule?: TimerScheduleConfig;
+  /** skill */
+  SkillSnapshot?: string;
+  /** 空间 */
+  SpaceId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 工具 */
+  ToolSnapshot?: string;
+  /** 工作空间 */
+  WorkspaceId?: string;
+  /** 主用户 */
+  LoginUin?: string;
+  /** 子用户 */
+  LoginSubAccountUin?: string;
+}
+
+declare interface CreateTimerTaskResponse {
+  /** 任务ID */
+  TimerId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateVariableRequest {
   /** app_id */
   AppId: string;
@@ -2086,6 +2548,18 @@ declare interface DeleteAppResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAppTriggerRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 触发器ID */
+  TriggerId?: string;
+}
+
+declare interface DeleteAppTriggerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConversationRequest {
   /** 会话 ID */
   ConversationId: string;
@@ -2156,6 +2630,22 @@ declare interface DeleteSpaceRequest {
 }
 
 declare interface DeleteSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTimerTaskRequest {
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务ID */
+  TimerId?: string;
+  /** 主用户 */
+  LoginUin?: string;
+  /** 子用户 */
+  LoginSubAccountUin?: string;
+}
+
+declare interface DeleteTimerTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2286,6 +2776,78 @@ declare interface DescribeAppSummaryListResponse {
   AppSummaryList?: AppSummary[];
   /** total_count */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppTriggerInstanceRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 触发器运行实例ID */
+  InstanceId?: string;
+}
+
+declare interface DescribeAppTriggerInstanceResponse {
+  /** 应用触发器实例 */
+  Instance?: AppTriggerInstance;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppTriggerRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用触发器ID */
+  TriggerId?: string;
+}
+
+declare interface DescribeAppTriggerResponse {
+  /** 应用触发器信息 */
+  Trigger?: AppTrigger;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppTriggerRunLogListRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 过滤参数 */
+  FilterList?: Filter[];
+  /** 页码取值范围：[1, 1000000] */
+  PageNumber?: number;
+  /** 每页数据量取值范围：[1, 100] */
+  PageSize?: number;
+  /** 应用触发器ID */
+  TriggerId?: string;
+}
+
+declare interface DescribeAppTriggerRunLogListResponse {
+  /** 日志列表 */
+  RunLogList?: AppTriggerRunLog[];
+  /** 日志列表数量 */
+  TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAppTriggerSummaryListRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 参数过滤列表 */
+  FilterList?: Filter[];
+  /** 页码取值范围：[1, 1000000] */
+  PageNumber?: number;
+  /** 每页大小取值范围：[1, 100] */
+  PageSize?: number;
+  /** 模糊查询字符串 */
+  Query?: string;
+}
+
+declare interface DescribeAppTriggerSummaryListResponse {
+  /** 应用触发器数量 */
+  TotalCount?: string;
+  /** 应用触发器列表 */
+  TriggerList?: AppTriggerSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2644,6 +3206,72 @@ declare interface DescribeSystemVariableListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTimerTaskRequest {
+  /** 空间id */
+  SpaceId?: string;
+  /** 任务id */
+  TimerId?: string;
+  /** 主用户Uin */
+  LoginUin?: string;
+  /** 子用户Uin */
+  LoginSubAccountUin?: string;
+}
+
+declare interface DescribeTimerTaskResponse {
+  /** 任务 */
+  Task?: TimerTask;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTimerTaskRunLogListRequest {
+  /** 工作空间ID */
+  SpaceId: string;
+  /** 定时任务ID，必须按任务维度查询 */
+  TimerId: string;
+  /** 过滤条件，支持: Status(执行状态，值为枚举int); Unread(仅未读，值为"true"/"false") */
+  FilterList?: Filter[];
+  /** 子用户Uin */
+  LoginSubAccountUin?: string;
+  /** 主用户Uin */
+  LoginUin?: string;
+  /** 页码，从0开始 */
+  PageNumber?: number;
+  /** 每页数目，最大100 */
+  PageSize?: number;
+}
+
+declare interface DescribeTimerTaskRunLogListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTimerTaskSummaryListRequest {
+  /** 查询条件 */
+  FilterList?: Filter[];
+  /** 页码 */
+  PageNumber?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 查询关键字 */
+  Query?: string;
+  /** 空间ID */
+  SpaceId?: string;
+  /** 子用户Uin */
+  LoginSubAccountUin?: string;
+  /** 主用户Uin */
+  LoginUin?: string;
+}
+
+declare interface DescribeTimerTaskSummaryListResponse {
+  /** 任务列表 */
+  TaskList?: TimerTaskSummary[];
+  /** 总数量 */
+  TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVariableListRequest {
   /** 应用ID */
   AppId: string;
@@ -2710,6 +3338,42 @@ declare interface FavoriteSkillResponse {
   RequestId?: string;
 }
 
+declare interface MarkAppTriggerRunLogReadRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用触发器运行实例ID列表 */
+  InstanceIdList?: string[];
+  /** 应用触发器ID */
+  TriggerId?: string;
+}
+
+declare interface MarkAppTriggerRunLogReadResponse {
+  /** 成功标记个数 */
+  MarkedCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface MarkTimerTaskRunLogReadRequest {
+  /** 实例列表 */
+  FireInstanceIdList?: string[];
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务ID */
+  TimerId?: string;
+  /** 主用户 */
+  LoginUin?: string;
+  /** 子用户 */
+  LoginSubAccountUin?: string;
+}
+
+declare interface MarkTimerTaskRunLogReadResponse {
+  /** 标记为已读的数量 */
+  MarkedCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAgentRequest {
   /** 应用Id */
   AppId?: string;
@@ -2750,6 +3414,22 @@ declare interface ModifyAppResponse {
   AppId?: string;
   /** 更新时间 (Unix时间戳,秒级) */
   UpdateTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAppTriggerRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 触发器信息 */
+  Trigger?: AppTrigger;
+  /** 触发器唯一ID */
+  TriggerId?: string;
+  /** 修改字段 */
+  UpdateMask?: FieldMask;
+}
+
+declare interface ModifyAppTriggerResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2844,6 +3524,28 @@ declare interface ModifySpaceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTimerTaskRequest {
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务ID */
+  TimerId?: string;
+  /** 任务 */
+  TimerTask?: TimerTask;
+  /** 修改的内容 */
+  UpdateMask?: FieldMask;
+  /** 主用户Uin */
+  LoginUin?: string;
+  /** 子用户Uin */
+  LoginSubAccountUin?: string;
+}
+
+declare interface ModifyTimerTaskResponse {
+  /** 下次触发时间 */
+  NextFireTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyVariableRequest {
   /** app_id */
   AppId: string;
@@ -2852,6 +3554,34 @@ declare interface ModifyVariableRequest {
 }
 
 declare interface ModifyVariableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PauseAppTriggerRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用触发器ID */
+  TriggerId?: string;
+}
+
+declare interface PauseAppTriggerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PauseTimerTaskRequest {
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务ID */
+  TimerId?: string;
+  /** 主用户 */
+  LoginUin?: string;
+  /** 子用户 */
+  LoginSubAccountUin?: string;
+}
+
+declare interface PauseTimerTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2892,6 +3622,34 @@ declare interface ResetConversationResponse {
   RequestId?: string;
 }
 
+declare interface ResumeAppTriggerRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用触发器ID */
+  TriggerId?: string;
+}
+
+declare interface ResumeAppTriggerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeTimerTaskRequest {
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务ID */
+  TimerId?: string;
+  /** 主用户 */
+  LoginUin?: string;
+  /** 子用户 */
+  LoginSubAccountUin?: string;
+}
+
+declare interface ResumeTimerTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RetryReleaseRequest {
   /** 应用ID */
   AppId: string;
@@ -2912,6 +3670,38 @@ declare interface RollbackReleaseRequest {
 }
 
 declare interface RollbackReleaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunAppTriggerNowRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用触发器ID */
+  TriggerId?: string;
+}
+
+declare interface RunAppTriggerNowResponse {
+  /** 应用触发器实例ID */
+  InstanceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RunTimerTaskNowRequest {
+  /** 空间ID */
+  SpaceId?: string;
+  /** 任务ID */
+  TimerId?: string;
+  /** 主用户 */
+  LoginUin?: string;
+  /** 子用户 */
+  LoginSubAccountUin?: string;
+}
+
+declare interface RunTimerTaskNowResponse {
+  /** 实例ID */
+  FireInstanceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2951,6 +3741,8 @@ declare interface Adp {
   CreateAgent(data: CreateAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentResponse>;
   /** 创建应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
+  /** 创建应用触发器 {@link CreateAppTriggerRequest} {@link CreateAppTriggerResponse} */
+  CreateAppTrigger(data?: CreateAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppTriggerResponse>;
   /** 新建会话 {@link CreateConversationRequest} {@link CreateConversationResponse} */
   CreateConversation(data: CreateConversationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConversationResponse>;
   /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
@@ -2963,6 +3755,8 @@ declare interface Adp {
   CreateSkillShare(data: CreateSkillShareRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillShareResponse>;
   /** 创建空间 {@link CreateSpaceRequest} {@link CreateSpaceResponse} */
   CreateSpace(data?: CreateSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSpaceResponse>;
+  /** 创建定时任务 {@link CreateTimerTaskRequest} {@link CreateTimerTaskResponse} */
+  CreateTimerTask(data?: CreateTimerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTimerTaskResponse>;
   /** 创建参数变量 {@link CreateVariableRequest} {@link CreateVariableResponse} */
   CreateVariable(data: CreateVariableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVariableResponse>;
   /** 创建 WebSocket Token {@link CreateWebSocketTokenRequest} {@link CreateWebSocketTokenResponse} */
@@ -2973,6 +3767,8 @@ declare interface Adp {
   DeleteAgent(data: DeleteAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentResponse>;
   /** 删除应用 {@link DeleteAppRequest} {@link DeleteAppResponse} */
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
+  /** 删除应用触发器 {@link DeleteAppTriggerRequest} {@link DeleteAppTriggerResponse} */
+  DeleteAppTrigger(data?: DeleteAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppTriggerResponse>;
   /** 删除会话 {@link DeleteConversationRequest} {@link DeleteConversationResponse} */
   DeleteConversation(data: DeleteConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConversationResponse>;
   /** 删除插件 {@link DeletePluginRequest} {@link DeletePluginResponse} */
@@ -2983,6 +3779,8 @@ declare interface Adp {
   DeleteSkillShare(data: DeleteSkillShareRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSkillShareResponse>;
   /** 删除空间 {@link DeleteSpaceRequest} {@link DeleteSpaceResponse} */
   DeleteSpace(data?: DeleteSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSpaceResponse>;
+  /** 删除定时任务 {@link DeleteTimerTaskRequest} {@link DeleteTimerTaskResponse} */
+  DeleteTimerTask(data?: DeleteTimerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTimerTaskResponse>;
   /** 删除参数变量 {@link DeleteVariableRequest} {@link DeleteVariableResponse} */
   DeleteVariable(data: DeleteVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVariableResponse>;
   /** 查看企业下的员工列表 {@link DescribeAccountListRequest} {@link DescribeAccountListResponse} */
@@ -2997,6 +3795,14 @@ declare interface Adp {
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
   /** 获取应用摘要列表 {@link DescribeAppSummaryListRequest} {@link DescribeAppSummaryListResponse} */
   DescribeAppSummaryList(data: DescribeAppSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSummaryListResponse>;
+  /** 查询应用触发器详情 {@link DescribeAppTriggerRequest} {@link DescribeAppTriggerResponse} */
+  DescribeAppTrigger(data?: DescribeAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppTriggerResponse>;
+  /** 查询应用触发器实例 {@link DescribeAppTriggerInstanceRequest} {@link DescribeAppTriggerInstanceResponse} */
+  DescribeAppTriggerInstance(data?: DescribeAppTriggerInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppTriggerInstanceResponse>;
+  /** 查询应用触发器运行日志列表 {@link DescribeAppTriggerRunLogListRequest} {@link DescribeAppTriggerRunLogListResponse} */
+  DescribeAppTriggerRunLogList(data?: DescribeAppTriggerRunLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppTriggerRunLogListResponse>;
+  /** 查询应用触发器列表 {@link DescribeAppTriggerSummaryListRequest} {@link DescribeAppTriggerSummaryListResponse} */
+  DescribeAppTriggerSummaryList(data?: DescribeAppTriggerSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppTriggerSummaryListResponse>;
   /** 查看操作日志列表 {@link DescribeAuditLogListRequest} {@link DescribeAuditLogListResponse} */
   DescribeAuditLogList(data?: DescribeAuditLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogListResponse>;
   /** 获取审计日志元信息 {@link DescribeAuditLogMetaRequest} {@link DescribeAuditLogMetaResponse} */
@@ -3031,6 +3837,12 @@ declare interface Adp {
   DescribeSpaceList(data?: DescribeSpaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceListResponse>;
   /** 获取系统变量 {@link DescribeSystemVariableListRequest} {@link DescribeSystemVariableListResponse} */
   DescribeSystemVariableList(data: DescribeSystemVariableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVariableListResponse>;
+  /** 任务详情 {@link DescribeTimerTaskRequest} {@link DescribeTimerTaskResponse} */
+  DescribeTimerTask(data?: DescribeTimerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerTaskResponse>;
+  /** 查询定时任务执行记录列表 {@link DescribeTimerTaskRunLogListRequest} {@link DescribeTimerTaskRunLogListResponse} */
+  DescribeTimerTaskRunLogList(data: DescribeTimerTaskRunLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerTaskRunLogListResponse>;
+  /** 查询定时任务列表(摘要) {@link DescribeTimerTaskSummaryListRequest} {@link DescribeTimerTaskSummaryListResponse} */
+  DescribeTimerTaskSummaryList(data?: DescribeTimerTaskSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimerTaskSummaryListResponse>;
   /** 获取参数变量 {@link DescribeVariableRequest} {@link DescribeVariableResponse} */
   DescribeVariable(data: DescribeVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableResponse>;
   /** 获取参数变量列表 {@link DescribeVariableListRequest} {@link DescribeVariableListResponse} */
@@ -3039,10 +3851,16 @@ declare interface Adp {
   FavoritePlugin(data: FavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<FavoritePluginResponse>;
   /** 收藏skill {@link FavoriteSkillRequest} {@link FavoriteSkillResponse} */
   FavoriteSkill(data: FavoriteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<FavoriteSkillResponse>;
+  /** 应用触发器标记日志已读 {@link MarkAppTriggerRunLogReadRequest} {@link MarkAppTriggerRunLogReadResponse} */
+  MarkAppTriggerRunLogRead(data?: MarkAppTriggerRunLogReadRequest, config?: AxiosRequestConfig): AxiosPromise<MarkAppTriggerRunLogReadResponse>;
+  /** 标记定时任务运行记录已读 {@link MarkTimerTaskRunLogReadRequest} {@link MarkTimerTaskRunLogReadResponse} */
+  MarkTimerTaskRunLogRead(data?: MarkTimerTaskRunLogReadRequest, config?: AxiosRequestConfig): AxiosPromise<MarkTimerTaskRunLogReadResponse>;
   /** 修改Agent配置 {@link ModifyAgentRequest} {@link ModifyAgentResponse} */
   ModifyAgent(data?: ModifyAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentResponse>;
   /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
+  /** 修改应用触发器 {@link ModifyAppTriggerRequest} {@link ModifyAppTriggerResponse} */
+  ModifyAppTrigger(data?: ModifyAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppTriggerResponse>;
   /** 修改会话信息 {@link ModifyConversationRequest} {@link ModifyConversationResponse} */
   ModifyConversation(data: ModifyConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConversationResponse>;
   /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */
@@ -3051,16 +3869,30 @@ declare interface Adp {
   ModifySkill(data: ModifySkillRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySkillResponse>;
   /** 编辑空间 {@link ModifySpaceRequest} {@link ModifySpaceResponse} */
   ModifySpace(data?: ModifySpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySpaceResponse>;
+  /** 修改定时任务 {@link ModifyTimerTaskRequest} {@link ModifyTimerTaskResponse} */
+  ModifyTimerTask(data?: ModifyTimerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTimerTaskResponse>;
   /** 更新参数变量 {@link ModifyVariableRequest} {@link ModifyVariableResponse} */
   ModifyVariable(data: ModifyVariableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVariableResponse>;
+  /** 暂停应用触发器 {@link PauseAppTriggerRequest} {@link PauseAppTriggerResponse} */
+  PauseAppTrigger(data?: PauseAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<PauseAppTriggerResponse>;
+  /** 暂停定时任务 {@link PauseTimerTaskRequest} {@link PauseTimerTaskResponse} */
+  PauseTimerTask(data?: PauseTimerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PauseTimerTaskResponse>;
   /** 上架skill {@link ReleaseSkillRequest} {@link ReleaseSkillResponse} */
   ReleaseSkill(data: ReleaseSkillRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseSkillResponse>;
   /** 重置会话 {@link ResetConversationRequest} {@link ResetConversationResponse} */
   ResetConversation(data: ResetConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConversationResponse>;
+  /** 恢复应用触发器 {@link ResumeAppTriggerRequest} {@link ResumeAppTriggerResponse} */
+  ResumeAppTrigger(data?: ResumeAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeAppTriggerResponse>;
+  /** 启用定时任务 {@link ResumeTimerTaskRequest} {@link ResumeTimerTaskResponse} */
+  ResumeTimerTask(data?: ResumeTimerTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeTimerTaskResponse>;
   /** 重试发布 {@link RetryReleaseRequest} {@link RetryReleaseResponse} */
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
   /** 回滚发布 {@link RollbackReleaseRequest} {@link RollbackReleaseResponse} */
   RollbackRelease(data: RollbackReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackReleaseResponse>;
+  /** 立即执行应用触发器 {@link RunAppTriggerNowRequest} {@link RunAppTriggerNowResponse} */
+  RunAppTriggerNow(data?: RunAppTriggerNowRequest, config?: AxiosRequestConfig): AxiosPromise<RunAppTriggerNowResponse>;
+  /** 立即运行定时任务 {@link RunTimerTaskNowRequest} {@link RunTimerTaskNowResponse} */
+  RunTimerTaskNow(data?: RunTimerTaskNowRequest, config?: AxiosRequestConfig): AxiosPromise<RunTimerTaskNowResponse>;
   /** 取消收藏插件 {@link UnfavoritePluginRequest} {@link UnfavoritePluginResponse} */
   UnfavoritePlugin(data: UnfavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoritePluginResponse>;
   /** 取消收藏skill {@link UnfavoriteSkillRequest} {@link UnfavoriteSkillResponse} */

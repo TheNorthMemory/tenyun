@@ -2264,6 +2264,52 @@ declare interface ClipRangeInfo {
   EndOffset?: number;
 }
 
+/** 爆款复刻 AIGC 生视频相关参数 */
+declare interface CloneViralAIGC {
+  /** 视频时长取值范围：[4, 15] */
+  Duration?: number;
+  /** 宽高比。可选 16:9/4:3/1:1/3:4/9:16/21:9/adaptive */
+  AspectRatio?: string;
+  /** 分辨率。支持720p（默认）/1080p/2k/4k */
+  Resolution?: string;
+  /** 模型等级。flagship（VS2.0，默认）、standard（Kling3.0-Omni） */
+  ModelTier?: string;
+}
+
+/** 爆款复刻内容/风格参数 */
+declare interface CloneViralContent {
+  /** 自定义提示词，对生成视频的要求 */
+  UserPrompt?: string;
+  /** 生成视频的目标语言，默认不指定，支持zh / en / ja / ko / es / pt / instrumental（纯音乐无口播） */
+  Language?: string;
+  /** 目标市场，默认不指定。可选north_america / europe / china / japan / korea / sea / brazil */
+  Market?: string;
+  /** 裂变程度。exact/low/medium/high，默认exact 1:1复刻 */
+  FissionLevel?: string;
+}
+
+/** 爆款复刻模特形象 */
+declare interface CloneViralPersona {
+  /** 模特性别。male/female/any */
+  Gender?: string;
+  /** 年龄段。teenager/youth/middle_aged/senior */
+  Age?: string;
+  /** 外观特征。caucasian/asian/latino/african/middle_eastern */
+  Ethnicity?: string;
+  /** 体型。slim / standard / athletic / chubby */
+  BodyType?: string;
+}
+
+/** 爆款复刻产品信息 */
+declare interface CloneViralProduct {
+  /** 产品图 */
+  Images: string[];
+  /** 产品名 */
+  Name?: string;
+  /** 产品描述 */
+  Description?: string;
+}
+
 /** 色彩增强配置 */
 declare interface ColorEnhanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -8434,6 +8480,30 @@ declare interface BatchStopStreamLinkFlowResponse {
   RequestId?: string;
 }
 
+declare interface CloneViralRequest {
+  /** 爆款视频Url */
+  VideoUrl: string;
+  /** 产品信息 */
+  Product: CloneViralProduct;
+  /** AIGC生视频相关参数 */
+  AIGCParam?: CloneViralAIGC;
+  /** 内容/风格相关参数 */
+  ContentParam?: CloneViralContent;
+  /** 模特形象 */
+  Persona?: CloneViralPersona;
+}
+
+declare interface CloneViralResponse {
+  /** 任务状态，失败时返回FAIL */
+  Status?: string;
+  /** 失败时返回错误信息 */
+  Message?: string;
+  /** 任务创建成功后，返回的任务ID。 调用查询接口，轮询获取任务进度及生成结果。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAIAnalysisTemplateRequest {
   /** 视频内容分析模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -10038,6 +10108,22 @@ declare interface DescribeBlindWatermarkTemplatesResponse {
   TotalCount?: number;
   /** 数字水印模板详情列表。 */
   BlindWatermarkTemplateSet?: BlindWatermarkTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloneViralTaskRequest {
+  /** 创建爆款复刻任务返回的任务ID */
+  TaskId?: string;
+}
+
+declare interface DescribeCloneViralTaskResponse {
+  /** 任务状态枚举值：WAIT： 等待中RUN： 执行中FAIL： 任务失败DONE： 任务成功 */
+  Status?: string;
+  /** 失败时返回错误信息 */
+  Message?: string;
+  /** 当任务状态为 DONE时，返回视频Url列表，视频存储24小时 */
+  VideoUrls?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12577,6 +12663,8 @@ declare interface Mps {
   BatchStartStreamLinkFlow(data: BatchStartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStartStreamLinkFlowResponse>;
   /** 批量停止媒体传输流 {@link BatchStopStreamLinkFlowRequest} {@link BatchStopStreamLinkFlowResponse} */
   BatchStopStreamLinkFlow(data: BatchStopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopStreamLinkFlowResponse>;
+  /** 爆款复刻 {@link CloneViralRequest} {@link CloneViralResponse} */
+  CloneViral(data: CloneViralRequest, config?: AxiosRequestConfig): AxiosPromise<CloneViralResponse>;
   /** 创建内容分析模板 {@link CreateAIAnalysisTemplateRequest} {@link CreateAIAnalysisTemplateResponse} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
   /** 创建内容识别模板 {@link CreateAIRecognitionTemplateRequest} {@link CreateAIRecognitionTemplateResponse} */
@@ -12757,6 +12845,8 @@ declare interface Mps {
   DescribeBatchTaskDetail(data: DescribeBatchTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBatchTaskDetailResponse>;
   /** 获取数字水印模板列表 {@link DescribeBlindWatermarkTemplatesRequest} {@link DescribeBlindWatermarkTemplatesResponse} */
   DescribeBlindWatermarkTemplates(data?: DescribeBlindWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlindWatermarkTemplatesResponse>;
+  /** 查询爆款复刻任务结果 {@link DescribeCloneViralTaskRequest} {@link DescribeCloneViralTaskResponse} */
+  DescribeCloneViralTask(data?: DescribeCloneViralTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneViralTaskResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 查询音色设计任务结果 {@link DescribeDesignTaskRequest} {@link DescribeDesignTaskResponse} */

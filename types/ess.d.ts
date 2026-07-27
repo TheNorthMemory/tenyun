@@ -4135,7 +4135,7 @@ declare interface CreateSealRequest {
   FileToken?: string;
   /** 印章样式, 可以选择的样式如下: **circle**:(默认)圆形印章**ellipse**:椭圆印章 */
   SealStyle?: string;
-  /** 印章尺寸取值描述, 可以选择的尺寸如下: 38_38: 圆形企业公章直径38mm, 当SealStyle是圆形的时候才有效 40_40: 圆形企业公章直径40mm, 当SealStyle是圆形的时候才有效 42_42（默认）: 圆形企业公章直径42mm, 当SealStyle是圆形的时候才有效 45_45: 圆形企业印章直径45mm, 当SealStyle是圆形的时候才有效 50_50: 圆形企业印章直径50mm, 当SealStyle是圆形的时候才有效 58_58: 圆形企业印章直径58mm, 当SealStyle是圆形的时候才有效 40_30: 椭圆形印章40mm x 30mm, 当SealStyle是椭圆的时候才有效 45_30: 椭圆形印章45mm x 30mm, 当SealStyle是椭圆的时候才有效 */
+  /** 印章尺寸，格式为 宽_高（单位：mm，整数），用于签署时按物理尺寸将印章加盖到PDF。取值范围： • 图片上传印章（Image 或 FileToken 非空时生效）：支持自定义尺寸，宽、高均为 10-100 的整数（即 1cm-10cm），宽高比（宽/高）需在 0.1-10 之间。• 系统生成印章（未传 Image 与 FileToken）：仅支持与SealStyle 匹配的固定枚举值： - 圆形印章（SealStyle=cycle）：38_38 / 40_40 / 42_42 / 45_45 / 50_50 / 58_58 - 椭圆印章（SealStyle=ellipse）：40_30 / 45_30字段依赖关系： • 与 SealStyle关联：仅系统生成印章场景下 SealStyle 生效，此时 SealSize 需与 SealStyle对应的枚举匹配；图片上传印章场景 SealStyle 会被忽略，SealSize支持自定义。 • 与 SealType 关联：公章/合同章仅支持圆形枚举，财务/人事/其它章支持圆形或椭圆枚举。• 与 Image / FileToken 关联：SealSize 是加盖到 PDF的物理尺寸，与上传图片的像素分辨率无绑定，图片会按 SealSize 缩放渲染；建议上传图片的宽高比与 SealSize 保持一致，避免拉伸形变。 */
   SealSize?: string;
   /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */
   TaxIdentifyCode?: string;
@@ -5675,14 +5675,16 @@ declare interface ModifyPartnerAuthorizationResponse {
 declare interface ModifyPartnerAutoSignAuthUrlRequest {
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator?: UserInfo;
   /** 被授企业id/授权方企业id（即OrganizationId），和AuthorizedOrganizationName二选一传入 */
   AuthorizedOrganizationId?: string;
-  /** 被授企业名称/授权方企业的名字，和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: `如果名称中包含英文括号()，请使用中文括号（）代替。` */
+  /** 被授企业名称/授权方企业的名字，和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 如果名称中包含英文括号()，请使用中文括号（）代替。 */
   AuthorizedOrganizationName?: string;
   /** 在处理授权关系时，授权的方向false（默认值）：表示我方授权他方。在这种情况下，AuthorizedOrganizationName 代表的是【被授权方】的企业名称，即接收授权的企业。true：表示他方授权我方。在这种情况下，AuthorizedOrganizationName 代表的是【授权方】的企业名称，即提供授权的企业。 */
   AuthToMe?: boolean;
+  /** 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。枚举值：OFFICIAL： 企业公章，用于代表企业对外的正式文件和重要事务的认证CONTRACT： 合同专用章，专门用于签署各类合同。FINANCE： 财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证PERSONNEL： 人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。OTHER： 其他类型印章，包含子类型 */
+  SealTypes?: string[];
 }
 
 declare interface ModifyPartnerAutoSignAuthUrlResponse {
