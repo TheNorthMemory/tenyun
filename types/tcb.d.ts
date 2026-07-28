@@ -516,7 +516,7 @@ declare interface HTTPServiceDomain {
 declare interface HTTPServiceDomainParam {
   /** 域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败 */
   Domain: string;
-  /** 绑定类型枚举值：DIRECT： 直连到HTTP访问服务CDN： 接入云开发CDNCUSTOM： 自定义接入类型（CDN、EO、WAF等接入）默认值：DIRECT */
+  /** 绑定类型枚举值：DIRECT： 直连到HTTP访问服务CDN： 接入云开发CDN（即将下线）CUSTOM： 自定义接入类型（CDN、EO、WAF等接入）EO： 接入云开发EdgeOne默认值：DIRECT */
   AccessType?: string;
   /** 证书ID。当前账户下SSL平台的证书ID，无证书无法使用https访问 */
   CertId?: string;
@@ -606,9 +606,9 @@ declare interface HTTPServiceRoute {
 declare interface HTTPServiceRouteParam {
   /** 路径 */
   Path: string;
-  /** 上游服务类型。创建时必填，修改时可选填枚举值：SCF： 云函数CBR： 云托管STATIC_STORE： 静态托管WEB_SCF： web云函数LH： Lighthouse */
+  /** 上游服务类型。创建时必填，修改时可选填枚举值：SCF： 云函数CBR： 云托管STATIC_STORE： 静态托管WEB_SCF： web云函数LH： LighthouseSTORAGE： 云存储 */
   UpstreamResourceType?: string;
-  /** 上游服务名。创建时必填，修改时可选填 */
+  /** 上游服务名。创建时必填，修改时可选填。HTTPServiceRouteServiceType类型为STATIC_STORE时，可不填，默认staticstore；HTTPServiceRouteServiceType类型为STORAGE时，可不填，默认storage。其他上游类型必须填写准确的服务名 */
   UpstreamResourceName?: string;
   /** 路径重写 */
   PathRewrite?: HTTPServicePathRewrite;
@@ -1004,6 +1004,34 @@ declare interface OrderInfo {
   Flag?: string;
   /** 下单时的参数 */
   ReqBody?: string;
+}
+
+/** 域名归属权验证指引DNS验证信息 */
+declare interface OwnershipVerificationDnsInfo {
+  /** 归属权校验dns子域名 */
+  Subdomain?: string;
+  /** 归属权校验dns记录类型 */
+  RecordType?: string;
+  /** 归属权校验dns记录值 */
+  RecordValue?: string;
+}
+
+/** 域名归属权验证指引文件验证信息 */
+declare interface OwnershipVerificationFileInfo {
+  /** 归属权校验文件路径 */
+  Path?: string;
+  /** 归属权校验文件内容 */
+  Content?: string;
+}
+
+/** 域名归属权验证指引信息 */
+declare interface OwnershipVerificationInfo {
+  /** 归属权校验的域名 */
+  Domain?: string;
+  /** 归属权校验dns校验信息 */
+  DnsVerification?: OwnershipVerificationDnsInfo[];
+  /** 归属权校验文件校验信息 */
+  FileVerification?: OwnershipVerificationFileInfo[];
 }
 
 /** 分页信息 */
@@ -1678,6 +1706,8 @@ declare interface CreateHTTPServiceRouteRequest {
 }
 
 declare interface CreateHTTPServiceRouteResponse {
+  /** 归属权校验不通过返回信息，根据校验信息配置dns或者文件验证，可通过VerifyHTTPServiceRoute接口验证归属权是否通过 */
+  OwnershipVerification?: OwnershipVerificationInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

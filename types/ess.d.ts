@@ -130,6 +130,8 @@ declare interface ApproverOption {
   ForbidAddSignDate?: boolean;
   /** 签署人手机号传参模式枚举值：REPLACE： 接受已有认证手机号并替换GIVEN： 以客户入参输入手机号为主VALIDATE： 若与认证手机号不一致则报错""： 不走手机号传参模式默认值：""会触发手机号传参模式的前提是：签署人是指定了具体身份信息的在指定签署人姓名，证件号的情况下会触发 */
   ApproverMobileMode?: string;
+  /** 在嵌入式文件发起下,若合同是通过文件,当签署人控件指定了印章类型（或印章Id）,在嵌入页面上是否能修改 */
+  ForbidModifySealInfos?: boolean;
 }
 
 /** 指定签署人限制项 */

@@ -470,6 +470,8 @@ declare interface MigrationTaskInfo {
   BucketPath?: string;
   /** 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0 */
   Direction?: number;
+  /** 数据源服务商枚举值：COS： 腾讯云COSOSS： 阿里云OSSOBS： 华为云OBSBOS： 百度云BOSTOS： 火山引擎TOS */
+  SrcService?: string;
 }
 
 /** 挂载点信息 */
@@ -961,13 +963,13 @@ declare interface CreateMigrationTaskRequest {
   SrcSecretId: string;
   /** 数据源账号的 SecretKey */
   SrcSecretKey: string;
-  /** 文件系统实例 ID，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取 */
+  /** 文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取 */
   FileSystemId: string;
   /** 文件系统路径 */
   FsPath: string;
   /** 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖 */
   CoverType: number;
-  /** 数据源服务商。COS：腾讯云COS，OSS：阿里云OSS，OBS：华为云OBS */
+  /** 数据源服务商枚举值：COS： 腾讯云COSOSS： 阿里云OSSOBS： 华为云OBSBOS： 百度云BOSTOS： 火山引擎TOS */
   SrcService: string;
   /** 数据源桶名称；桶迁移时，BucketName 和 BucketAddress 必填其一，清单迁移时无需填写此参数 */
   BucketName?: string;

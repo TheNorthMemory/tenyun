@@ -2941,13 +2941,13 @@ declare interface DescribeRumGroupLogResponse {
 declare interface DescribeRumGroupLogV2Request {
   /** 排序方式 desc asc（必填） */
   OrderBy: string;
-  /** 开始时间（必填） */
+  /** 查询日志开始时间（必填） */
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 过滤条件 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
   Filter: string;
-  /** 结束时间（必填） */
+  /** 查询日志结束时间（必填） */
   EndTime: number;
   /** 项目ID（必填） */
   ID: number;
@@ -2958,7 +2958,7 @@ declare interface DescribeRumGroupLogV2Request {
 }
 
 declare interface DescribeRumGroupLogV2Response {
-  /** Query result in JSON string format */
+  /** 日志聚合结果 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2967,13 +2967,13 @@ declare interface DescribeRumGroupLogV2Response {
 declare interface DescribeRumLogDetailsV2Request {
   /** 排序方式 desc asc */
   OrderBy: string;
-  /** 开始时间（必填）格式为时间戳 毫秒 */
+  /** 查询日志开始时间（必填）格式为时间戳 毫秒 */
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 查询的相关参数 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
   Filter: string;
-  /** 结束时间（必填）格式为时间戳 毫秒 */
+  /** 查询日志结束时间（必填）格式为时间戳 毫秒 */
   EndTime: number;
   /** 项目ID（必填） */
   ID: number;
@@ -3013,22 +3013,22 @@ declare interface DescribeRumLogExportResponse {
 }
 
 declare interface DescribeRumLogExportV2Request {
-  /** Export name */
+  /** Name（string，必填）：导出任务名称标识，需要在使用API创建导出任务时填写。此字段为后续能力扩展预留，不在查询结果中返回。 */
   Name: string;
-  /** Start time */
+  /** 查询日志开始时间(必填) */
   StartTime: number;
-  /** Query statement */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
   Filter: string;
-  /** End time */
+  /** 查询日志结束时间(必填) */
   EndTime: number;
-  /** Project ID */
+  /** 项目ID */
   ID: number;
-  /** c字段 */
+  /** 注意：这个字段必选，不能为空！选择要导出哪些字段的参数，对应日志的列，可查看文档：https://cloud.tencent.com/document/product/248/87223枚举值：level： 日志类型url： URLip： 用户终端IPversion： 版本 */
   Fields?: string[];
 }
 
 declare interface DescribeRumLogExportV2Response {
-  /** Query result in JSON string format */
+  /** 日志导出任务TaskId */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3093,13 +3093,13 @@ declare interface DescribeRumLogListResponse {
 declare interface DescribeRumLogTotalV2Request {
   /** 排序方式 desc asc */
   OrderBy: string;
-  /** 开始时间（必填）格式为时间戳 毫秒 */
+  /** 查询日志开始时间（必填）格式为时间戳 毫秒 */
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 查询的相关参数 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
   Filter: string;
-  /** 结束时间（必填）格式为时间戳 毫秒 */
+  /** 查询日志结束时间（必填）格式为时间戳 毫秒 */
   EndTime: number;
   /** 项目ID（必填） */
   ID: number;
@@ -3137,20 +3137,20 @@ declare interface DescribeRumStatsLogListResponse {
 }
 
 declare interface DescribeRumStatsLogListV2Request {
-  /** 开始时间（必填） */
+  /** 查询日志开始时间（必填） */
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 过滤条件 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
   Filter: string;
-  /** 结束时间（必填） */
+  /** 查询日志结束时间（必填） */
   EndTime: number;
   /** 项目ID（必填） */
   ID: number;
 }
 
 declare interface DescribeRumStatsLogListV2Response {
-  /** Query result in JSON string format */
+  /** 日志时间分布 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

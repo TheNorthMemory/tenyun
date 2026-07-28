@@ -76,6 +76,14 @@ declare interface BackUpJobDisplay {
   EncryptionEnabled?: boolean;
   /** 任务调度id */
   ScheduleId?: number;
+  /** 总任务数（库数） */
+  TotalTasks?: number;
+  /** 已完成任务数 */
+  CompletedTasks?: number;
+  /** 失败任务数 */
+  FailedTasks?: number;
+  /** 备份进度描述，如 3/5 */
+  BackupProgress?: string;
 }
 
 /** 备份实例中关于cos的信息 */

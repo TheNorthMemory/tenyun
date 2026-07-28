@@ -4111,7 +4111,7 @@ declare interface CreateTopicRequest {
   Describes?: string;
   /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
   HotPeriod?: number;
-  /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。0或者不传： 不加密1：kms-cls 云产品密钥加密支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo */
+  /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。0或者不传： 不加密1：kms-cls 云产品密钥加密 */
   Encryption?: number;
   /** 用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）当参数 Encryption为 1 时有效。 */
   CustomKmsInfo?: CustomKmsInfo;

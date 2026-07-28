@@ -1704,6 +1704,12 @@ declare interface ResourceSpec {
   SpecName?: string | null;
 }
 
+/** 资源供应属性 */
+declare interface ResourceSupplyAttribute {
+  /** 资源供应类型。TIDE:潮汐;SPOT:竞价;空:常规按量后付费 */
+  SupplyType?: string;
+}
+
 /** 滚动更新策略 */
 declare interface RollingUpdate {
   /** 滚动更新的最大不可用 */
@@ -1840,6 +1846,8 @@ declare interface Service {
   Changer?: string;
   /** 变更服务的子账户名称 */
   ChangerName?: string;
+  /** 资源供应属性(潮汐/竞价等供应模式);空表示常规按量后付费 */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute | null;
 }
 
 /** 服务的调用信息，服务组下唯一 */
@@ -2729,6 +2737,8 @@ declare interface CreateModelServiceRequest {
   GatewayLogConfig?: LogConfig;
   /** 网关相关配置 */
   GatewayConfig?: GatewayConfig;
+  /** 资源供应属性(潮汐/竞价等供应模式);空表示常规按量后付费 */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute;
 }
 
 declare interface CreateModelServiceResponse {

@@ -290,6 +290,8 @@ declare interface CommonApproverOption {
   FlowReadLimit?: string;
   /** 禁止在签署过程中添加签署日期控件 前置条件：文件发起合同时，指定SignBeanTag=1（可以在签署过程中添加签署控件）： 默认值：false，在开启：签署过程中添加签署控件时，添加签署控件会默认自带签署日期控件 可选值：true，在开启：签署过程中添加签署控件时，添加签署控件不会自带签署日期控件 */
   ForbidAddSignDate?: boolean;
+  /** 在嵌入式文件发起下,若合同是通过文件,当签署人控件指定了印章类型（或印章Id）,在嵌入页面上是否能修改 */
+  ForbidModifySealInfos?: boolean;
 }
 
 /** 通用签署人信息 */
