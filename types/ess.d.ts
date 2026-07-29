@@ -910,6 +910,8 @@ declare interface FlowApproverDetail {
   ApproverRoleName?: string;
   /** 模板配置中的参与方ID,与控件绑定 */
   RecipientId?: string;
+  /** 签署方转交记录列表，标识该签署方是由谁转交而来，按转交时间由远到近进行排序 */
+  ForwardRecords?: ForwardRecord[];
 }
 
 /** 签署链接信息。 */
@@ -1168,6 +1170,20 @@ declare interface FormField {
   ComponentId?: string;
   /** 控件名字，最大长度不超过30字符，和ComponentId选择一项传入即可点击查看在模板中找到控件名字的方式 */
   ComponentName?: string;
+}
+
+/** 签署人的转交记录详情 */
+declare interface ForwardRecord {
+  /** 转交人打码后的姓名 */
+  Name?: string;
+  /** 转交人打码后的手机号 */
+  Mobile?: string;
+  /** 进行转交的原因枚举值：QUIT_FORWARD： 离职转交FORWARD： 员工操作转交 */
+  ForwardType?: string;
+  /** 转交的详情信息 */
+  ForwardMessage?: string;
+  /** 转交时间单位：时间戳（秒级） */
+  ForwardTime?: number;
 }
 
 /** 成员企业信息 */

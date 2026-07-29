@@ -934,6 +934,10 @@ declare interface ClientAttester {
   AttesterSource?: string;
   /** 认证有效时间。默认为 60s，支持的单位有：s：秒，取值范围 60～43200；m：分，取值范围 1～720；h：小时，取值范围 1～12。 */
   AttesterDuration?: string;
+  /** 是否开启认证结果使用限制。 枚举值：on： 开启off： 关闭默认值：off */
+  UsageLimit?: string;
+  /** 认证结果最大使用次数。当 UsageLimit 为 on 时，此字段必填。取值范围：[1, 100000] */
+  MaxUsageCount?: number;
   /** TC-RCE 认证的配置信息。当 AttesterSource 参数值为 TC-RCE 时，此字段必填。 */
   TCRCEOption?: TCRCEOption;
   /** TC-CAPTCHA 认证的配置信息。当 AttesterSource 参数值为 TC-CAPTCHA 时，此字段必填。 */

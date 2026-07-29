@@ -800,6 +800,102 @@ declare interface PolicyRule {
   Description?: string;
 }
 
+/** Proxy 接入地址信息，包含 VIP/VPort、读写分离与连接池相关配置以及对应路由列表。 */
+declare interface ProxyAddress {
+  /** Proxy 接入地址 ID */
+  AddressId?: string;
+  /** Proxy 接入地址 IP */
+  Vip?: string;
+  /** Proxy 接入地址端口 */
+  Vport?: number;
+  /** VPC ID */
+  VpcId?: string;
+  /** 子网 ID */
+  SubnetId?: string;
+  /** 接入地址描述 */
+  Description?: string;
+  /** 是否开启连接池：0-未开启，1-开启 */
+  ConnectionPool?: boolean;
+  /** 路由列表 */
+  Routes?: ProxyRoute[];
+  /** 连接池大小 */
+  ConnectionPoolLimit?: number;
+}
+
+/** Proxy 实例（组）详细信息，包含基础信息、节点列表、接入地址列表。 */
+declare interface ProxyGroupInfo {
+  /** Proxy 实例 ID，格式形如：proxygroup-xxxxxxxx */
+  ProxyGroupId?: string;
+  /** Proxy 状态：running/isolated/offline 等 */
+  Status?: string;
+  /** Proxy 任务状态，无任务时为空 */
+  TaskStatus?: string;
+  /** Proxy 描述 */
+  Description?: string;
+  /** Proxy 内核版本号 */
+  ProxyVersion?: string;
+  /** 连接池阈值（连接数） */
+  ConnectionPoolLimit?: number;
+  /** Proxy 节点列表 */
+  ProxyNodeSet?: ProxyNode[];
+  /** Proxy 接入地址列表 */
+  ProxyAddressSet?: ProxyAddress[];
+  /** 创建时间，格式：YYYY-MM-DD HH:MM:SS */
+  CreateTime?: string;
+}
+
+/** Proxy 节点信息。 */
+declare interface ProxyNode {
+  /** Proxy 节点 ID */
+  ProxyNodeId?: string;
+  /** Proxy 节点所在可用区 */
+  Zone?: string;
+  /** 节点 CPU 核数（核） */
+  Cpu?: number;
+  /** 节点内存大小（MB）单位：MB */
+  Mem?: number;
+  /** 节点状态：running/isolated/abnormal 等 */
+  Status?: string;
+  /** 节点当前连接数 */
+  Connection?: number;
+}
+
+/** Proxy 节点自定义规格信息，每个 Zone 对应一组节点配置。 */
+declare interface ProxyNodeCustom {
+  /** 该可用区下的 Proxy 节点数量取值范围：[1, 16] */
+  NodeCount: number;
+  /** Proxy 节点所在可用区 */
+  Zone: string;
+  /** Proxy 节点 CPU 核数（核） */
+  Cpu: number;
+  /** Proxy 节点内存大小（MB）单位：MB */
+  Mem: number;
+}
+
+/** Proxy 路由信息，描述某个 Proxy 接入地址下到具体 PG 节点的路由规则。 */
+declare interface ProxyRoute {
+  /** 路由指向的 PG 节点 ID（实例或只读节点 ID） */
+  NodeId?: string;
+  /** 节点角色：master/slave/readonly */
+  Role?: string;
+  /** 路由权重，取值范围 [0, 100] */
+  Weight?: number;
+  /** 路由状态：available/unavailable */
+  Status?: string;
+}
+
+/** Proxy可售规格信息 */
+declare interface ProxySpecItem {
+  /** CPU 核数单位：核 */
+  Cpu?: number;
+  /** 内存大小单位：MB */
+  Memory?: number;
+  /** 最小节点数 */
+  MinNodeNum?: number;
+  /** 最大节点数 */
+  MaxNodeNum?: number;
+}
+
 /** 慢SQL查询接口返回 慢SQL列表详情 */
 declare interface RawSlowQuery {
   /** 慢SQL 语句 */
@@ -1244,6 +1340,32 @@ declare interface CreateDBInstanceNetworkAccessResponse {
   FlowId?: number;
   /** 任务ID */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDBProxyRequest {
+  /** 实例 ID，格式形如：postgres-xxxxxxxx */
+  DBInstanceId: string;
+  /** Proxy 所在私有网络 ID，需与主实例所在 VPC 一致 */
+  VpcId: string;
+  /** Proxy 所在私有网络子网 ID */
+  SubnetId: string;
+  /** Proxy 节点自定义规格列表，至少一个元素，按可用区分组 */
+  ProxyNodeCustom: ProxyNodeCustom[];
+  /** Proxy 关联的安全组 ID 列表 */
+  SecurityGroup?: string[];
+  /** Proxy 描述信息长度范围：[0, 256] */
+  Description?: string;
+  /** 连接池阈值（连接数），单位：个 */
+  ConnectionPoolLimit?: number;
+}
+
+declare interface CreateDBProxyResponse {
+  /** 订单号，下单成功返回。 */
+  DealName?: string;
+  /** 创建出的 Proxy 实例 ID，格式形如：proxy-xxxxxxxx。 */
+  ProxyGroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2046,6 +2168,38 @@ declare interface DescribeDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBProxyRequest {
+  /** 实例 ID，格式形如：postgres-xxxxxxxx */
+  DBInstanceId: string;
+  /** Proxy 实例 ID，格式形如：proxy-xxxxxxxx；不传则查询该实例下全部 Proxy */
+  ProxyGroupId?: string;
+}
+
+declare interface DescribeDBProxyResponse {
+  /** Proxy 实例数量。 */
+  Count?: number;
+  /** Proxy 实例详情列表。 */
+  ProxyInfos?: ProxyGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBProxySpecsRequest {
+  /** 实例ID。传入时返回该实例的 Proxy 支持情况和可用区 */
+  DBInstanceId?: string;
+}
+
+declare interface DescribeDBProxySpecsResponse {
+  /** 规格列表 */
+  SpecSet?: ProxySpecItem[];
+  /** 该实例是否支持开通 Proxy（仅传 DBInstanceId 时返回） */
+  SupportProxy?: boolean;
+  /** 可部署可用区列表（仅传 DBInstanceId 时返回） */
+  AvailableZones?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBVersionsRequest {
   /** 实例存储类型，根据磁盘类型返回支持的版本枚举值：PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘CLOUD_PREMIUM： 高性能云硬盘CLOUD_SSD： ssd云硬盘CLOUD_HSSD： 增强型ssd云硬盘默认值：PHYSICAL_LOCAL_SSD */
   StorageType?: string;
@@ -2440,6 +2594,18 @@ declare interface DestroyDBInstanceRequest {
 }
 
 declare interface DestroyDBInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyDBProxyRequest {
+  /** 实例 ID，格式形如：postgres-xxxxxxxx */
+  DBInstanceId: string;
+  /** Proxy 实例 ID，格式形如：proxy-xxxxxxxx；不传时若实例下仅有一个 Proxy 则销毁该 Proxy，存在多个 Proxy 必须显式传入 */
+  ProxyGroupId?: string;
+}
+
+declare interface DestroyDBProxyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2854,6 +3020,50 @@ declare interface ModifyDBInstancesProjectResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBProxyAddressRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** Proxy地址ID */
+  AddressId: string;
+  /** Proxy代理组 ID（不传则默认操作该实例下唯一的代理） */
+  ProxyGroupId?: string;
+  /** 地址描述/备注（最多 256 字符） */
+  Description?: string;
+  /** 连接池开关枚举值：true： 开启false： 关闭 */
+  ConnectionPool?: boolean;
+}
+
+declare interface ModifyDBProxyAddressResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBProxyRequest {
+  /** 实例 ID，格式形如：postgres-xxxxxxxx */
+  DBInstanceId: string;
+  /** Proxy 实例 ID，格式形如：proxy-xxxxxxxx；不传时若实例下仅有一个 Proxy 则修改该 Proxy */
+  ProxyGroupId?: string;
+  /** Proxy 描述信息，长度范围 [0, 256] */
+  Description?: string;
+  /** Proxy 节点变配规格列表，按可用区分组；变配时必填 */
+  ProxyNodeCustom?: ProxyNodeCustom[];
+  /** 负载均衡刷新策略：auto-自动；manual-手动；默认 auto */
+  ReloadBalance?: string;
+  /** 变配执行时机：0-立即执行（默认），1-维护时间窗内执行，2-指定时间窗执行（需配合 SwitchStartTime/SwitchEndTime） */
+  SwitchTag?: number;
+  /** 指定时间窗执行的开始时间，格式 HH:MM:SS，仅 SwitchTag=2 时生效 */
+  SwitchStartTime?: string;
+  /** 指定时间窗执行的结束时间，格式 HH:MM:SS，仅 SwitchTag=2 时生效 */
+  SwitchEndTime?: string;
+}
+
+declare interface ModifyDBProxyResponse {
+  /** 订单号，仅变配（节点规格/数量变更）下单成功时返回；仅修改 Description 时不下单，本字段为空。 */
+  DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDatabaseOwnerRequest {
   /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -3016,6 +3226,20 @@ declare interface RefreshAccountPasswordRequest {
 }
 
 declare interface RefreshAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ReloadBalanceDBProxyNodeRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** Proxy代理组ID（不传则默认操作该实例下唯一的代理） */
+  ProxyGroupId?: string;
+  /** Proxy地址ID。传入时校验归属，实际重平衡为代理组维度 */
+  AddressId?: string;
+}
+
+declare interface ReloadBalanceDBProxyNodeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3219,6 +3443,8 @@ declare interface Postgres {
   CreateBaseBackup(data: CreateBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBaseBackupResponse>;
   /** 创建实例网络 {@link CreateDBInstanceNetworkAccessRequest} {@link CreateDBInstanceNetworkAccessResponse} */
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
+  /** 创建数据库代理 {@link CreateDBProxyRequest} {@link CreateDBProxyResponse} */
+  CreateDBProxy(data: CreateDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBProxyResponse>;
   /** 创建数据库 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
@@ -3293,6 +3519,10 @@ declare interface Postgres {
   DescribeDBInstanceSecurityGroups(data?: DescribeDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstanceSecurityGroupsResponse>;
   /** 查询实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
+  /** 查询数据库代理 {@link DescribeDBProxyRequest} {@link DescribeDBProxyResponse} */
+  DescribeDBProxy(data: DescribeDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBProxyResponse>;
+  /** 查询代理可售规格 {@link DescribeDBProxySpecsRequest} {@link DescribeDBProxySpecsResponse} */
+  DescribeDBProxySpecs(data?: DescribeDBProxySpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBProxySpecsResponse>;
   /** 查询支持的数据库版本 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
   DescribeDBVersions(data?: DescribeDBVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBVersionsResponse>;
   /** 获取实例Xlog列表 {@link DescribeDBXlogsRequest} {@link DescribeDBXlogsResponse} */
@@ -3335,6 +3565,8 @@ declare interface Postgres {
   DescribeZones(data?: DescribeZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZonesResponse>;
   /** 销毁实例 {@link DestroyDBInstanceRequest} {@link DestroyDBInstanceResponse} */
   DestroyDBInstance(data: DestroyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBInstanceResponse>;
+  /** 销毁数据库代理 {@link DestroyDBProxyRequest} {@link DestroyDBProxyResponse} */
+  DestroyDBProxy(data: DestroyDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBProxyResponse>;
   /** 解隔离实例 {@link DisIsolateDBInstancesRequest} {@link DisIsolateDBInstancesResponse} */
   DisIsolateDBInstances(data: DisIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DisIsolateDBInstancesResponse>;
   /** 查询实例创建售卖价格 {@link InquiryPriceCreateDBInstancesRequest} {@link InquiryPriceCreateDBInstancesResponse} */
@@ -3381,6 +3613,10 @@ declare interface Postgres {
   ModifyDBInstanceSpec(data: ModifyDBInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSpecResponse>;
   /** 修改实例所属项目 {@link ModifyDBInstancesProjectRequest} {@link ModifyDBInstancesProjectResponse} */
   ModifyDBInstancesProject(data: ModifyDBInstancesProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstancesProjectResponse>;
+  /** 修改数据库代理 {@link ModifyDBProxyRequest} {@link ModifyDBProxyResponse} */
+  ModifyDBProxy(data: ModifyDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBProxyResponse>;
+  /** 修改代理地址配置 {@link ModifyDBProxyAddressRequest} {@link ModifyDBProxyAddressResponse} */
+  ModifyDBProxyAddress(data: ModifyDBProxyAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBProxyAddressResponse>;
   /** 修改数据库所有者 {@link ModifyDatabaseOwnerRequest} {@link ModifyDatabaseOwnerResponse} */
   ModifyDatabaseOwner(data: ModifyDatabaseOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseOwnerResponse>;
   /** 修改维护时间窗口 {@link ModifyMaintainTimeWindowRequest} {@link ModifyMaintainTimeWindowResponse} */
@@ -3403,6 +3639,8 @@ declare interface Postgres {
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
   /** 刷新启用CAM验证的账户密码 {@link RefreshAccountPasswordRequest} {@link RefreshAccountPasswordResponse} */
   RefreshAccountPassword(data: RefreshAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshAccountPasswordResponse>;
+  /** 代理负载重平衡 {@link ReloadBalanceDBProxyNodeRequest} {@link ReloadBalanceDBProxyNodeResponse} */
+  ReloadBalanceDBProxyNode(data: ReloadBalanceDBProxyNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ReloadBalanceDBProxyNodeResponse>;
   /** 将只读实例从只读组中移除 {@link RemoveDBInstanceFromReadOnlyGroupRequest} {@link RemoveDBInstanceFromReadOnlyGroupResponse} */
   RemoveDBInstanceFromReadOnlyGroup(data: RemoveDBInstanceFromReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveDBInstanceFromReadOnlyGroupResponse>;
   /** 续费实例 {@link RenewInstanceRequest} {@link RenewInstanceResponse} */

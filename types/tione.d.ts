@@ -841,13 +841,17 @@ declare interface LogConfig {
 /** 单条日志数据结构 */
 declare interface LogIdentity {
   /** 单条日志的ID */
-  Id: string | null;
+  Id?: string | null;
   /** 单条日志的内容 */
-  Message: string | null;
+  Message?: string | null;
   /** 这条日志对应的Pod名称 */
-  PodName: string | null;
+  PodName?: string | null;
   /** 日志的时间戳（RFC3339格式的时间字符串） */
-  Timestamp: string | null;
+  Timestamp?: string | null;
+  /** 日志上报请求包的ID */
+  PkgId?: string;
+  /** 请求包内日志的ID */
+  PkgLogId?: string;
 }
 
 /** 物料信息 */
@@ -2222,6 +2226,16 @@ declare interface TrainParam {
   Enum?: string[];
 }
 
+/** 训练诊断工具配置 */
+declare interface TrainToolConfig {
+  /** 是否开启 Hang 检测默认值：false */
+  EnableHangMonitor?: boolean;
+  /** Hang 检测的节点列表 */
+  HangMonitorNodes?: string[];
+  /** Hang 超时时间取值范围：[1, 14400]单位：分 */
+  LogHangTimeoutInMinute?: number;
+}
+
 /** 模型版本列表 */
 declare interface TrainingModelVersionDTO {
   /** 模型id */
@@ -2955,6 +2969,10 @@ declare interface CreateTrainingTaskRequest {
   ExposeNetworkConfig?: ExposeNetworkConfig;
   /** 环境变量 */
   Envs?: EnvVar[];
+  /** 训练诊断工具配置 */
+  TrainToolConfig?: TrainToolConfig;
+  /** 资源供应属性 */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute;
 }
 
 declare interface CreateTrainingTaskResponse {
@@ -3409,6 +3427,8 @@ declare interface DescribeLogsRequest {
   Filters?: Filter[];
   /** 使用OFFSET分页查询时，指定返回的数据偏移量，默认为0 */
   Offset?: number;
+  /** 日志类别枚举值：stdout： stdoutstderr： stderr默认值："" */
+  LogStream?: string;
 }
 
 declare interface DescribeLogsResponse {

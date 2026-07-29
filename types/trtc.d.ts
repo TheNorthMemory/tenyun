@@ -292,6 +292,14 @@ declare interface EventMessage {
   ParamTwo?: number;
 }
 
+/** 拉流输入源 */
+declare interface Input {
+  /** 直播拉流地址入参限制：字符长度小于2048 */
+  Url: string;
+  /** 显式协议枚举值：rtmp： rtmp协议 */
+  Format?: string;
+}
+
 /** 调用服务端主动发起请求到LLM */
 declare interface InvokeLLM {
   /** 请求LLM的内容 */
@@ -326,6 +334,28 @@ declare interface LayoutParams {
   WaterMarkParams?: WaterMarkParams;
   /** 屏幕分享模板、悬浮模板、九宫格模板、画中画模版有效，画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底，不填采用后台的默认渲染方式（屏幕分享大画面为缩放，其他为裁剪）。若此参数不生效，请提交工单寻求帮助。 */
   RenderMode?: number;
+}
+
+/** 直播流ai内容理解参数 */
+declare interface LiveModerationParams {
+  /** AI 内容理解任务类型枚举值：1： 音频切片理解2： 视频截帧理解3： 音视切片+视频截帧理解 默认值：3 */
+  ModerationType?: number;
+  /** 持续没有上行推流的状态超过MaxIdleTime的时长，自动停止切片。取值范围：[30, 1800]单位：秒默认值：30 */
+  MaxIdleTime?: number;
+  /** 视频截帧间隔取值范围：[1, 60]单位：秒默认值：5 */
+  SliceVideo?: number;
+  /** 音频切片时长取值范围：[5, 60]单位：秒默认值：15 */
+  SliceAudio?: number;
+  /** 是否保存文件枚举值：0： 0不保存1： 1保存所有2： 仅命中默认值：1 */
+  SaveModerationFile?: number;
+  /** 是否回调所有内容理解结果枚举值：0： 回调所有结果1： 仅回调命中结果默认值：0 */
+  CallbackAllResults?: number;
+}
+
+/** 直播流aI理解的转存文件存储参数 */
+declare interface LiveModerationStorageParams {
+  /** 直播流ai理解文件转存 */
+  CloudModerationStorage?: CloudModerationStorage;
 }
 
 /** 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。 */
@@ -1018,6 +1048,16 @@ declare interface SmallVideoLayoutParams {
   LocationY?: number;
 }
 
+/** 额外信息透传结构体（房间/主播/业务自定义），原样回带到回调 */
+declare interface SourceInfo {
+  /** 直播间 ID（用于结果透传与去重；数字房间号也用 string 传） */
+  RoomId?: string;
+  /** 房间号类型枚举值：0： 字符串房间号1： 数字房间号 */
+  RoomIdType?: number;
+  /** 主播/被审核方 ID */
+  UserId?: string;
+}
+
 /** 云端录制查询接口，录制文件的信息 */
 declare interface StorageFile {
   /** 录制文件对应的UserId，如果是混流的话的这里返回的是空串。 */
@@ -1648,6 +1688,30 @@ declare interface CreateCloudTranscriptionResponse {
   RequestId?: string;
 }
 
+declare interface CreateLiveStreamModerationRequest {
+  /** TRTC的SdkAppId。 */
+  SdkAppId: number;
+  /** 直播流输入源 */
+  Input: Input;
+  /** 直播流ai理解审核参数 */
+  LiveModerationParams: LiveModerationParams;
+  /** 业务自定义唯一标识，原样透传到回调入参限制：长度限制60字符 */
+  DataId: string;
+  /** 额外信息透传结构体（房间/主播/业务自定义），原样回带到回调 */
+  SourceInfo?: SourceInfo;
+  /** 直播流ai理解转存文件存储参数 */
+  LiveModerationStorageParams?: LiveModerationStorageParams;
+  /** 单路任务最大的生命周期取值范围：[1, 72]单位：小时默认值：48 */
+  ResourceExpiredHour?: number;
+}
+
+declare interface CreateLiveStreamModerationResponse {
+  /** AI 内容理解服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePictureRequest {
   /** 应用id */
   SdkAppId: number;
@@ -1737,6 +1801,20 @@ declare interface DeleteCloudTranscriptionRequest {
 
 declare interface DeleteCloudTranscriptionResponse {
   /** 转录服务分配的任务 ID。任务 ID 是对一次转录生命周期过程的唯一标识，结束转录时会失去意义。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveStreamModerationRequest {
+  /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DeleteLiveStreamModerationResponse {
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1926,6 +2004,22 @@ declare interface DescribeCloudTranscriptionResponse {
   Status?: string;
   /** 转录任务的唯一Id。 */
   TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveStreamModerationRequest {
+  /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
+  SdkAppId: number;
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DescribeLiveStreamModerationResponse {
+  /** AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。 */
+  TaskId?: string;
+  /** AI内容理解任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。枚举值：InProgress： 进行中 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3015,6 +3109,8 @@ declare interface Trtc {
   CreateCloudSliceTask(data: CreateCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudSliceTaskResponse>;
   /** 开始云端转录任务 {@link CreateCloudTranscriptionRequest} {@link CreateCloudTranscriptionResponse} */
   CreateCloudTranscription(data: CreateCloudTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudTranscriptionResponse>;
+  /** 启动直播流AI 内容理解 {@link CreateLiveStreamModerationRequest} {@link CreateLiveStreamModerationResponse} */
+  CreateLiveStreamModeration(data: CreateLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveStreamModerationResponse>;
   /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
   /** 停止基础审核任务 {@link DeleteBasicModerationRequest} {@link DeleteBasicModerationResponse} */
@@ -3027,6 +3123,8 @@ declare interface Trtc {
   DeleteCloudSliceTask(data: DeleteCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudSliceTaskResponse>;
   /** 停止云端转录任务 {@link DeleteCloudTranscriptionRequest} {@link DeleteCloudTranscriptionResponse} */
   DeleteCloudTranscription(data: DeleteCloudTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudTranscriptionResponse>;
+  /** 停止直播流AI 内容理解任务 {@link DeleteLiveStreamModerationRequest} {@link DeleteLiveStreamModerationResponse} */
+  DeleteLiveStreamModeration(data: DeleteLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveStreamModerationResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
   /** 删除声纹信息 {@link DeleteVoicePrintRequest} {@link DeleteVoicePrintResponse} */
@@ -3047,6 +3145,8 @@ declare interface Trtc {
   DescribeCloudSliceTask(data: DescribeCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudSliceTaskResponse>;
   /** 查询云端转录状态 {@link DescribeCloudTranscriptionRequest} {@link DescribeCloudTranscriptionResponse} */
   DescribeCloudTranscription(data: DescribeCloudTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudTranscriptionResponse>;
+  /** 查询直播流AI 内容理解任务信息 {@link DescribeLiveStreamModerationRequest} {@link DescribeLiveStreamModerationResponse} */
+  DescribeLiveStreamModeration(data: DescribeLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamModerationResponse>;
   /** 查询TRTC混流转码用量 {@link DescribeMixTranscodingUsageRequest} {@link DescribeMixTranscodingUsageResponse} */
   DescribeMixTranscodingUsage(data: DescribeMixTranscodingUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMixTranscodingUsageResponse>;
   /** 查询图片 {@link DescribePictureRequest} {@link DescribePictureResponse} */

@@ -58,6 +58,10 @@ declare interface DBCustomClusterNode {
   Zone?: string;
   /** 节点类型枚举值：DB.AT5.32XLARGE512： 高IO型服务器：128核心512GB内存，8*7180GB本地NvME SSDB。DB.AT5.64XLARGE1152： 高IO型服务器：256核心1152GB内存，12*7180GB本地NvME SSDB。DB.AT5.128XLARGE2304： 高IO型服务器：512核心2304GB内存，24*7180GB本地NvME SSDB。DB.AT5.16XLARGE256： 高IO型服务器：64核心256GB内存，4*7180GB本地NvME SSDB。DB.AT5.8XLARGE128： 高IO型服务器：32核心128GB内存，2*7180GB本地NvME SSDB。 */
   NodeType?: string;
+  /** 网络模式枚举值：privatelink： 四层网络联通，放通SSH 通路cross_tenant_eni： 三层网络联通，双网卡模式 */
+  NetworkMode?: string | null;
+  /** 当选择网络模式为三层网络联通模式时，此处的IP地址则为用户可访问的地址。 */
+  EniIP?: string | null;
 }
 
 /** DB Custom 可选的镜像信息。 */
@@ -70,6 +74,8 @@ declare interface DBCustomImage {
   ImageType?: string;
   /** 操作系统架构枚举值：x86_64： X86 64位架构arm64： ARM 64位机构 */
   Architecture?: string;
+  /** 操作系统类型枚举值：windows： windowslinux： linux */
+  OsType?: string;
 }
 
 /** DB Custom 节点信息。 */
@@ -124,6 +130,10 @@ declare interface DBCustomNode {
   RackId?: string;
   /** 底层物理机IP（已加密） */
   HostIp?: string;
+  /** 网络模式枚举值：NetworkModePrivateLink： 四层 SSH 服务联通模式NetworkModeCrossTenantENI： 三层双网卡访问方式 */
+  NetworkMode?: string;
+  /** 当选择NetworkModeCrossTenantENI模式时，节点的访问IP地址 */
+  EniIP?: string;
 }
 
 /** DB实例详情 */
@@ -177,10 +187,10 @@ declare interface DBInstanceDetail {
 /** DB Custom 节点数据盘信息。 */
 declare interface DataDisk {
   /** 磁盘类型枚举值：CLOUD_HSSD： 增强型云硬盘LOCAL_NVME： 本地硬盘 */
-  DiskType?: string;
+  DiskType: string;
   /** 磁盘大小单位：GiB */
-  DiskSize?: number;
-  /** 磁盘名称 */
+  DiskSize: number;
+  /** 磁盘名称DataDisk 作为输入参数时，DiskName 无效。 */
   DiskName?: string;
 }
 
@@ -396,6 +406,14 @@ declare interface InstanceExpand {
   Pid?: number;
 }
 
+/** 标签信息。 */
+declare interface Label {
+  /** 在集群内的节点Label键 */
+  Key?: string;
+  /** 在集群内的节点Label键值 */
+  Value?: string;
+}
+
 /** DB Custom 节点登录相关配置。 */
 declare interface LoginSettings {
   /** 实例登录密码。不同操作系统类型密码复杂度限制不一样，具体如下： Linux实例密码必须8到30位，至少包括两项[a-z]，[A-Z]、[0-9] 和 [( ) ~ ! @ # $ % ^ &amp; * - + = | { } [ ] : ; ' , . ? / ]中的特殊符号。 Windows实例密码必须12到30位，至少包括三项[a-z]，[A-Z]，[0-9] 和 [( ) ~ ! @ # $ % ^ &amp; * - + = | { } [ ] : ; ' , . ? /]中的特殊符号。 */
@@ -417,9 +435,9 @@ declare interface ResourceTag {
 /** DB Custom 节点系统盘信息。 */
 declare interface SystemDisk {
   /** 磁盘类型枚举值：CLOUD_HSSD： 增强型云硬盘 */
-  DiskType?: string;
+  DiskType: string;
   /** 磁盘大小单位：GiB */
-  DiskSize?: number;
+  DiskSize: number;
 }
 
 /** 标签键值对。 */
@@ -428,6 +446,16 @@ declare interface Tag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** 集群节点 taint 信息。 */
+declare interface Taint {
+  /** Taint 的键，格式对齐 K8s 原生约束（prefix DNS 子域 ≤ 253 字符，name ≤ 63 字符），不可使用系统保留前缀 */
+  Key: string;
+  /** 污点效果枚举值：NoSchedule： 不允许新 Pod 调度到该节点（已运行 Pod 不受影响）PreferNoSchedule： 尽量不调度，无法满足时仍可调度NoExecute： 不允许调度，且会驱逐已在节点上运行的不容忍该 Taint 的 Pod */
+  Effect?: string;
+  /** Taint 的值，≤ 63 字符，可为空 */
+  Value?: string;
 }
 
 declare interface AddNodesToDBCustomClusterRequest {
@@ -439,6 +467,16 @@ declare interface AddNodesToDBCustomClusterRequest {
   ImageId: string;
   /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。 */
   LoginSettings: LoginSettings;
+  /** 节点上架成功后初始化新增的自定义 Label入参限制：单次 ≤ 20 对 */
+  Labels?: Label[];
+  /** 节点上架成功后初始化下发的Taint入参限制：单次 ≤ 5 对 */
+  Taints?: Taint[];
+  /** 主机hostname ，仅 HostNameType=1 时必填，其余情况忽略；不支持大写字母入参限制：- 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。不允许使用下划线(_)。Windows 节点：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）节点：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。上架多台节点时：指定模式串 {R:x}：表示生成数字序列 [x, x+n-1]，其中 n为购买节点的数量。例如：输入 server_{R:3}，购买1台时，节点主机名为 server_3；购买2台时，主机名分别为 server_3、server_4。指定模式串 {R:x,F:y}：y表示固定位数（可选），取值范围为 [0,8]，默认值 0表示不固定位数（等效于 {R:x}）。不足位时自动补零，例如：输入server_{R:3,F:3}，购买2台时，节点主机名为 server_003、server_004。若数字位数超过 y（如 {R:99,F:2}），以实际位数为准，例如：app_{R:99,F:2}，购买2台时，节点主机名为 app_99、app_100。指定模式串 {IP}：自动替换为节点的内网IP地址。例如：输入 node-{IP}，节点主机名为 node-10.0.12.8；支持与序号模式串混合使用，例如：输入 web-{IP}-{R:1}，购买2台时，节点主机名分别为 web-10.0.12.8-1、web-10.0.12.9-2。模式串需严格遵循 {R:x,F:y}、{R:x} 或 {IP} 格式，无效格式（如 {}）视为普通文本。支持多个模式串。未指定模式串：节点主机名添加后缀 1、2...n，其中n表示购买节点的数量，例如 server_购买2台时生成 server_1、server_2。 */
+  HostName?: string;
+  /** HostName 来源类型枚举值：0： 复用节点创建时设置的 hostname，为空则报错1： 重新指定 HostName，需同时传 HostName 字段（支持模式串 {R:x}、{R:x,F:y}、{IP}）2： 系统自动分配，用 NodeId 作为 HostName */
+  HostNameType?: number;
+  /** 试运行开关，true 时只执行参数校验，不发起上架流程默认值：false */
+  DryRun?: boolean;
 }
 
 declare interface AddNodesToDBCustomClusterResponse {
@@ -465,7 +503,7 @@ declare interface CheckRoleAuthorizedResponse {
 declare interface CreateDBCustomClusterRequest {
   /** 容器网络，在此集群的所有 POD 与此网络连通 */
   ContainerNetwork: ContainerNetwork;
-  /** 集群名称入参限制：最长128个字符，只能为中文，英文，下划线。 */
+  /** 集群名称入参限制：最长128个字符。 */
   ClusterName?: string;
   /** 集群的API Server的网络信息入参限制：必须为此账号下拥有的网络地址，可以与容器网络保持一致。 */
   ApiServerNetwork?: ApiServerNetwork;
@@ -475,6 +513,8 @@ declare interface CreateDBCustomClusterRequest {
   Tags?: Tag[];
   /** 客户端Token */
   ClientToken?: string;
+  /** 试运行开关，true 时只执行参数校验，不发起创建流程，默认 false */
+  DryRun?: boolean;
 }
 
 declare interface CreateDBCustomClusterResponse {
@@ -495,14 +535,14 @@ declare interface CreateDBCustomNodesRequest {
   VpcId: string;
   /** 为节点打通SSH连接的VPC 子网 ID。 参数格式：subnet-t13dtest入参限制：必须是VPC之下的子网，子网必须与可用区对应。取值参考：可通过【查询子网列表】接口获取：https://cloud.tencent.com/document/product/215/15784 */
   SubnetId: string;
-  /** 购买时长(月): 1/2/3/4/5/6/7/8/9/10/11/12/24/36取值范围：[1, 36]单位：月默认值：1 */
-  Period: number;
   /** 节点机型枚举值：DB.AT5.32XLARGE512： 高IO型服务器：128核心512GB内存，8*7180GB本地NvME SSDB。DB.AT5.64XLARGE1152： 高IO型服务器：256核心1152GB内存，12*7180GB本地NvME SSDB。DB.AT5.128XLARGE2304： 高IO型服务器：512核心2304GB内存，24*7180GB本地NvME SSDB。DB.AT5.16XLARGE256： 高IO型服务器：64核心256GB内存，4*7180GB本地NvME SSDB。DB.AT5.8XLARGE128： 高IO型服务器：32核心128GB内存，2*7180GB本地NvME SSDB。 */
   NodeType: string;
   /** 购买的节点数量取值范围：[1, 20] */
   NodeCount: number;
-  /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。 */
+  /** 节点登录设置。通过该参数可以设置节点的登录方式密码、密钥或保持镜像的原始登录设置。入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。 */
   LoginSettings: LoginSettings;
+  /** 购买时长(月): 1/2/3/4/5/6/7/8/9/10/11/12/24/36取值范围：[1, 36]单位：月默认值：1 */
+  Period?: number;
   /** 自动续费配置枚举值：1： 自动续费2： 不自动续费默认值：不自动续费 */
   AutoRenew?: number;
   /** 节点名称入参限制：最多128个字符 */
@@ -515,6 +555,20 @@ declare interface CreateDBCustomNodesRequest {
   Tags?: Tag[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
+  /** 计费模式枚举值：PREPAID： 包年包月POSTPAID： 按量付费默认值：默认为包年包月(PREPAID) */
+  ChargeType?: string;
+  /** 访问主机的网络模式枚举值：privatelink： 四层网络联通，放通SSH 通路cross_tenant_eni： 三层网络联通，双网卡模式默认值：默认值为：privatelink */
+  NetworkMode?: string;
+  /** 系统盘配置入参限制：仅云盘版机型支持，如DB.SA5机型。本地盘机型DB.AT5机型不支持设置 */
+  SystemDisk?: SystemDisk;
+  /** 数据库盘配置入参限制：仅云盘版机型支持，如DB.SA5机型。本地盘机型DB.AT5机型不支持设置 */
+  DataDisks?: DataDisk[];
+  /** 主机的hostname。参数格式：字符串或者指定模式串入参限制：- 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。不允许使用下划线(_)。Windows 节点：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）节点：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。购买多台节点时：指定模式串 {R:x}：表示生成数字序列 [x, x+n-1]，其中 n为购买节点的数量。例如：输入 server_{R:3}，购买1台时，节点主机名为 server_3；购买2台时，主机名分别为 server_3、server_4。指定模式串 {R:x,F:y}：y表示固定位数（可选），取值范围为 [0,8]，默认值 0表示不固定位数（等效于 {R:x}）。不足位时自动补零，例如：输入server_{R:3,F:3}，购买2台时，节点主机名为 server_003、server_004。若数字位数超过 y（如 {R:99,F:2}），以实际位数为准，例如：app_{R:99,F:2}，购买2台时，节点主机名为 app_99、app_100。指定模式串 {IP}：自动替换为节点的内网IP地址。例如：输入 node-{IP}，节点主机名为 node-10.0.12.8；支持与序号模式串混合使用，例如：输入 web-{IP}-{R:1}，购买2台时，节点主机名分别为 web-10.0.12.8-1、web-10.0.12.9-2。模式串需严格遵循 {R:x,F:y}、{R:x} 或 {IP} 格式，无效格式（如 {}）视为普通文本。支持多个模式串。未指定模式串：节点主机名添加后缀 1、2...n，其中n表示购买节点的数量，例如 server_购买2台时生成 server_1、server_2。 */
+  HostName?: string;
+  /** 试运行开关。枚举值：true： 为 true 时接口只执行参数校验与资源申请检查（库存、配额、网络等），完成后立即返回空响应，不会真正下单，也不会创建节点记录。用于调用方在真正下单前做一次可行性预检。false： 不预检查默认值：false */
+  DryRun?: boolean;
+  /** 设置节点安全组参数格式：设置需要与节点绑定的多个安全组ID，以数组形式配置。 */
+  SecurityGroupIds?: string[];
 }
 
 declare interface CreateDBCustomNodesResponse {
@@ -615,6 +669,8 @@ declare interface DescribeDBCustomClustersResponse {
 }
 
 declare interface DescribeDBCustomImagesRequest {
+  /** 支持镜像过滤的选项取值参考：image-id,按镜像 ID 过滤 os-type,按操作系统类型过滤(linux / windows)image-type，按镜像类型过滤（PUBLIC_IMAGE（公共镜像）/ PRIVATE_IMAGE（私有镜像））architecture，按架构过滤（x86_64 / arm64） */
+  Filters?: Filter[];
   /** 偏移量默认值：0 */
   Offset?: number;
   /** 返回数量取值范围：[1, 100]默认值：20 */
@@ -917,6 +973,8 @@ declare interface RemoveNodesFromDBCustomClusterRequest {
   ClusterId: string;
   /** 要下架的 DB Custom 节点ID列表 */
   NodeIds: string[];
+  /** 节点的登录参数 */
+  LoginSettings?: LoginSettings;
 }
 
 declare interface RemoveNodesFromDBCustomClusterResponse {
@@ -930,7 +988,7 @@ declare interface RenewDBCustomNodeRequest {
   /** 节点ID */
   NodeId: string;
   /** 续费周期取值范围：[1, 36]单位：月默认值：1 */
-  Period: number;
+  Period?: number;
   /** 是否开启自动续费枚举值：0： 不自动续费1： 自动续费默认值：1 */
   AutoRenew?: number;
   /** 是否自动使用代金券 */
@@ -947,27 +1005,27 @@ declare interface RenewDBCustomNodeResponse {
 /** {@link Dbdc 云数据库独享集群} */
 declare interface Dbdc {
   (): Versions;
-  /** DB Custom 集群上架节点 {@link AddNodesToDBCustomClusterRequest} {@link AddNodesToDBCustomClusterResponse} */
+  /** 添加节点到集群 {@link AddNodesToDBCustomClusterRequest} {@link AddNodesToDBCustomClusterResponse} */
   AddNodesToDBCustomCluster(data: AddNodesToDBCustomClusterRequest, config?: AxiosRequestConfig): AxiosPromise<AddNodesToDBCustomClusterResponse>;
   /** 角色授权检查 {@link CheckRoleAuthorizedRequest} {@link CheckRoleAuthorizedResponse} */
   CheckRoleAuthorized(data: CheckRoleAuthorizedRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRoleAuthorizedResponse>;
-  /** 创建 DB Custom 集群 {@link CreateDBCustomClusterRequest} {@link CreateDBCustomClusterResponse} */
+  /** 创建集群 {@link CreateDBCustomClusterRequest} {@link CreateDBCustomClusterResponse} */
   CreateDBCustomCluster(data: CreateDBCustomClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBCustomClusterResponse>;
-  /** 创建 DB Custom 节点 {@link CreateDBCustomNodesRequest} {@link CreateDBCustomNodesResponse} */
+  /** 创建节点 {@link CreateDBCustomNodesRequest} {@link CreateDBCustomNodesResponse} */
   CreateDBCustomNodes(data: CreateDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBCustomNodesResponse>;
-  /** 查询 DB Custom 集群详情 {@link DescribeDBCustomClusterDetailRequest} {@link DescribeDBCustomClusterDetailResponse} */
+  /** 查询集群详情 {@link DescribeDBCustomClusterDetailRequest} {@link DescribeDBCustomClusterDetailResponse} */
   DescribeDBCustomClusterDetail(data: DescribeDBCustomClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterDetailResponse>;
-  /** 查询 DB Custom 集群 Kubeconfig {@link DescribeDBCustomClusterKubeconfigRequest} {@link DescribeDBCustomClusterKubeconfigResponse} */
+  /** 查询集群 Kubeconfig {@link DescribeDBCustomClusterKubeconfigRequest} {@link DescribeDBCustomClusterKubeconfigResponse} */
   DescribeDBCustomClusterKubeconfig(data: DescribeDBCustomClusterKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterKubeconfigResponse>;
-  /** 查询 DB Custom 集群的节点列表 {@link DescribeDBCustomClusterNodesRequest} {@link DescribeDBCustomClusterNodesResponse} */
+  /** 查询集群的节点列表 {@link DescribeDBCustomClusterNodesRequest} {@link DescribeDBCustomClusterNodesResponse} */
   DescribeDBCustomClusterNodes(data: DescribeDBCustomClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterNodesResponse>;
-  /** 查询 DB Custom 集群列表 {@link DescribeDBCustomClustersRequest} {@link DescribeDBCustomClustersResponse} */
+  /** 查询集群列表 {@link DescribeDBCustomClustersRequest} {@link DescribeDBCustomClustersResponse} */
   DescribeDBCustomClusters(data?: DescribeDBCustomClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClustersResponse>;
-  /** 查询 DB Custom 可用的系统镜像列表 {@link DescribeDBCustomImagesRequest} {@link DescribeDBCustomImagesResponse} */
+  /** 查询可用的系统镜像列表 {@link DescribeDBCustomImagesRequest} {@link DescribeDBCustomImagesResponse} */
   DescribeDBCustomImages(data?: DescribeDBCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomImagesResponse>;
-  /** 查询 DB Custom 节点列表 {@link DescribeDBCustomNodesRequest} {@link DescribeDBCustomNodesResponse} */
+  /** 查询节点列表 {@link DescribeDBCustomNodesRequest} {@link DescribeDBCustomNodesResponse} */
   DescribeDBCustomNodes(data?: DescribeDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomNodesResponse>;
-  /** 查询 DB Custom 任务状态 {@link DescribeDBCustomTaskStatusRequest} {@link DescribeDBCustomTaskStatusResponse} */
+  /** 查询任务状态 {@link DescribeDBCustomTaskStatusRequest} {@link DescribeDBCustomTaskStatusResponse} */
   DescribeDBCustomTaskStatus(data: DescribeDBCustomTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomTaskStatusResponse>;
   /** 查询独享集群内的DB实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
@@ -979,21 +1037,21 @@ declare interface Dbdc {
   DescribeInstanceList(data?: DescribeInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceListResponse>;
   /** 查询独享集群列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
-  /** 销毁 DB Custom 集群 {@link DestroyDBCustomClusterRequest} {@link DestroyDBCustomClusterResponse} */
+  /** 销毁集群 {@link DestroyDBCustomClusterRequest} {@link DestroyDBCustomClusterResponse} */
   DestroyDBCustomCluster(data: DestroyDBCustomClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBCustomClusterResponse>;
-  /** 销毁 DB Custom 节点 {@link DestroyDBCustomNodeRequest} {@link DestroyDBCustomNodeResponse} */
+  /** 销毁节点 {@link DestroyDBCustomNodeRequest} {@link DestroyDBCustomNodeResponse} */
   DestroyDBCustomNode(data: DestroyDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBCustomNodeResponse>;
-  /** 隔离 DB Custom 节点 {@link IsolateDBCustomNodeRequest} {@link IsolateDBCustomNodeResponse} */
+  /** 隔离节点 {@link IsolateDBCustomNodeRequest} {@link IsolateDBCustomNodeResponse} */
   IsolateDBCustomNode(data: IsolateDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBCustomNodeResponse>;
-  /** 修改 DB Custom 集群的标签配置 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */
+  /** 修改集群绑定的标签 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */
   ModifyDBCustomClusterTags(data: ModifyDBCustomClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterTagsResponse>;
-  /** 修改 DB Custom 节点的标签配置 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */
+  /** 修改节点绑定的标签 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */
   ModifyDBCustomNodeTags(data: ModifyDBCustomNodeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeTagsResponse>;
   /** 修改独享集群名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
-  /** DB Custom 集群下架节点 {@link RemoveNodesFromDBCustomClusterRequest} {@link RemoveNodesFromDBCustomClusterResponse} */
+  /** 移出集群中的节点 {@link RemoveNodesFromDBCustomClusterRequest} {@link RemoveNodesFromDBCustomClusterResponse} */
   RemoveNodesFromDBCustomCluster(data: RemoveNodesFromDBCustomClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNodesFromDBCustomClusterResponse>;
-  /** DB Custom 节点续费 {@link RenewDBCustomNodeRequest} {@link RenewDBCustomNodeResponse} */
+  /** 续费或解隔离节点 {@link RenewDBCustomNodeRequest} {@link RenewDBCustomNodeResponse} */
   RenewDBCustomNode(data: RenewDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBCustomNodeResponse>;
 }
 

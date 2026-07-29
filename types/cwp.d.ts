@@ -5286,6 +5286,10 @@ declare interface RiskProcessEvent {
   Uuid?: string;
   /** 首次检出方式 0扫描;1实时监控 */
   FirstDetectionMethod?: number;
+  /** quuid */
+  QUUID?: string;
+  /** 进程md5 */
+  ExeMd5?: string;
 }
 
 /** 索引规则 */
@@ -7013,6 +7017,8 @@ declare interface CreateMalwareWhiteListRequest {
   EventId?: number;
   /** 对历史待处理执行加白操作；0是不处理，1是处理 */
   IsHandleHistoryEvents?: number;
+  /** 恶意进程告警id */
+  ProcessEventID?: number;
 }
 
 declare interface CreateMalwareWhiteListResponse {

@@ -10985,6 +10985,24 @@ declare namespace V20210820 {
     UsageTrendList?: ExecutorUsageTrendInfo[] | null;
   }
 
+  /** ExecutorTaskInstanceCount */
+  interface ExecutorTaskInstanceCount {
+    /** 执行资源组ID */
+    ExecutorGroupId?: string | null;
+    /** 数据开发中的任务类型绑定的资源组数量等待调度的任务实例数量 */
+    SchedulingTaskCount?: number | null;
+    /** 数据开发中的任务类型绑定的资源组数量运行中的人物实例数量 */
+    RunningInstanceCount?: number | null;
+    /** 数据开发中的任务类型绑定的资源组数量等待运行的任务实例数量 */
+    WaitingInstanceCount?: number | null;
+    /** 非离线开发调度中任务数 */
+    OthersTaskTypeSchedulingTaskCount?: number | null;
+    /** 非离线开发运行中实例数 */
+    OthersTaskTypeRunningInstanceCount?: number | null;
+    /** 非离线开发等待运行实例数 */
+    OthersTaskTypeWaitingInstanceCount?: string | null;
+  }
+
   /** 资源组/资源包使用趋势 */
   interface ExecutorUsageTrendInfo {
     /** 时间戳，单位：毫秒 */
@@ -19600,6 +19618,20 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface DescribeInstancesByExecutorsRequest {
+    /** 项目ID */
+    ProjectId?: string;
+    /** 执行资源组ID */
+    ExecutorGroupIdList?: string[];
+  }
+
+  interface DescribeInstancesByExecutorsResponse {
+    /** 实例状态统计结果 */
+    Data?: ExecutorTaskInstanceCount[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeIntegrationNodeRequest {
     /** 节点id */
     Id: string;
@@ -24936,6 +24968,8 @@ declare interface Wedata {
   DescribeInstanceLogFile(data: V20210820.DescribeInstanceLogFileRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeInstanceLogFileResponse>;
   /** 获取离线任务实例运行日志列表 {@link V20210820.DescribeInstanceLogListRequest} {@link V20210820.DescribeInstanceLogListResponse} */
   DescribeInstanceLogList(data: V20210820.DescribeInstanceLogListRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeInstanceLogListResponse>;
+  /** 按执行资源组查询任务调度与运行实例数量统计 {@link V20210820.DescribeInstancesByExecutorsRequest} {@link V20210820.DescribeInstancesByExecutorsResponse} */
+  DescribeInstancesByExecutors(data: V20210820.DescribeInstancesByExecutorsRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeInstancesByExecutorsResponse>;
   /** 查询集成节点 {@link V20210820.DescribeIntegrationNodeRequest} {@link V20210820.DescribeIntegrationNodeResponse} */
   DescribeIntegrationNode(data: V20210820.DescribeIntegrationNodeRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.DescribeIntegrationNodeResponse>;
   /** 数据集成大屏概览 {@link V20210820.DescribeIntegrationStatisticsRequest} {@link V20210820.DescribeIntegrationStatisticsResponse} */

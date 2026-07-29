@@ -85,6 +85,40 @@ declare interface CaCertificateItem {
 }
 
 /** 设备证书信息 */
+declare interface DeviceCertificateBackupHistoryItem {
+  /** 客户端id */
+  ClientId?: string;
+  /** 设备证书 */
+  DeviceCertificate?: string;
+  /** 设备证书SN序列号，用于唯一标识一个设备证书 */
+  DeviceCertificateSn?: string;
+  /** 设备证书Cn */
+  DeviceCertificateCn?: string;
+  /** 签发该证书的CA证书的序列号 */
+  CaSn?: string;
+  /** 证书格式，当前仅支持PEM */
+  Format?: string;
+  /** 设备证书状态 ACTIVE：激活 INACTIVE：未激活 REVOKED：吊销 PENDING_ACTIVATION：注册待激活 */
+  Status?: string;
+  /** 组织单位 */
+  OrganizationalUnit?: string;
+  /** 上次激活时间，毫秒级时间戳 。 */
+  LastActivationTime?: number;
+  /** 上次取消激活时间，毫秒级时间戳 。 */
+  LastInactivationTime?: number;
+  /** 证书来源：API, 手动注册JITP 自动注册 */
+  CertificateSource?: string;
+  /** 证书失效日期，毫秒级时间戳 。 */
+  NotAfterTime?: number;
+  /** 证书生效开始日期，毫秒级时间戳 。 */
+  NotBeforeTime?: number;
+  /** 数据来源 */
+  Source?: string;
+  /** 修改时间单位：毫秒级时间戳 */
+  ModificationTime?: number;
+}
+
+/** 设备证书信息 */
 declare interface DeviceCertificateItem {
   /** 客户端id */
   ClientId?: string;
@@ -116,6 +150,24 @@ declare interface DeviceCertificateItem {
   NotAfterTime?: number;
   /** 证书生效开始日期，毫秒级时间戳 。 */
   NotBeforeTime?: number;
+}
+
+/** 设备标识列表 */
+declare interface DeviceIdentityBackupHistoryItem {
+  /** 设备id */
+  DeviceId?: string;
+  /** 1:ENABLED-可用2:DISABLE-不可用 */
+  Status?: number;
+  /** 主要签名key（Base64编码） */
+  PrimaryKey?: string;
+  /** 次要签名key（Base64编码） */
+  SecondaryKey?: string;
+  /** 传播属性列表 */
+  PropagatingProperties?: PropagatingProperty[];
+  /** 数据来源 */
+  Source?: string;
+  /** 修改时间单位：毫秒级时间戳 */
+  ModificationTime?: number;
 }
 
 /** 设备标识列表 */
@@ -1060,6 +1112,30 @@ declare interface DescribeClientListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceCertificateBackupHistoryRequest {
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
+  InstanceId: string;
+  /** 目标集群的集群ID */
+  Destination: string;
+  /** CA证书的SN */
+  CaSn?: string;
+  /** 设备证书的SN */
+  DeviceCertificateSn?: string;
+  /** 同步发生开始时间（毫秒级时间戳） */
+  ModificationTimeStart?: number;
+  /** 同步结束时间（毫秒级时间戳） */
+  ModificationTimeEnd?: number;
+  /** 查询条数，默认20，最大1024 */
+  Limit?: number;
+}
+
+declare interface DescribeDeviceCertificateBackupHistoryResponse {
+  /** 设备证书列表 */
+  Data?: DeviceCertificateBackupHistoryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceCertificateRequest {
   /** 设备证书的SN序列号，用于唯一标识一个设备证书。 */
   DeviceCertificateSn: string;
@@ -1136,6 +1212,28 @@ declare interface DescribeDeviceIdentitiesRequest {
 declare interface DescribeDeviceIdentitiesResponse {
   /** 返回的设备标识列表 */
   Data?: DeviceIdentityItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceIdentityBackupHistoryRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 灾备集群的集群ID */
+  Destination: string;
+  /** 设备ID */
+  DeviceId?: string;
+  /** 同步发生的开始时间 */
+  ModificationTimeStart?: number;
+  /** 同步发生的结束时间 */
+  ModificationTimeEnd?: number;
+  /** 查询条数 */
+  Limit?: number;
+}
+
+declare interface DescribeDeviceIdentityBackupHistoryResponse {
+  /** 返回的设备标识列表 */
+  Data?: DeviceIdentityBackupHistoryItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1550,6 +1648,46 @@ declare interface DescribeUserListResponse {
   TotalCount?: number;
   /** 角色信息列表 */
   Data?: MQTTUserItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWillMessageRequest {
+  /** 实例ID，从 DescribeInstanceList接口或控制台获得。 */
+  InstanceId: string;
+  /** 客户端id */
+  ClientId: string;
+}
+
+declare interface DescribeWillMessageResponse {
+  /** 保留消息Topic */
+  Topic?: string;
+  /** 消息服务质量 */
+  Qos?: number;
+  /** 是否保留消息 */
+  Retained?: boolean;
+  /** 消息负载(Base64编码) */
+  Payload?: string;
+  /** 创建时间，毫秒级时间戳 。 */
+  CreateTime?: number;
+  /** 更新时间，毫秒级时间戳 。 */
+  UpdateTime?: number;
+  /** 遗嘱消息延迟时间，单位秒 */
+  WillDelayInterval?: number;
+  /** 响应内容类型 */
+  ContentType?: string;
+  /** 响应主题 */
+  ResponseTopic?: string;
+  /** 关联数据（Base64编码） */
+  CorrelationData?: string;
+  /** 消息过期时间，单位秒 */
+  MessageExpiryInterval?: number;
+  /** 负载格式指示器 1:UTF-8文本 */
+  PayloadFormatIndicator?: number;
+  /** 用户属性 */
+  UserProperties?: UserProperty[];
+  /** 遗嘱消息发布时间 */
+  PublishAfter?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2005,12 +2143,16 @@ declare interface Mqtt {
   DescribeClientList(data: DescribeClientListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientListResponse>;
   /** 查询设备证书详情 {@link DescribeDeviceCertificateRequest} {@link DescribeDeviceCertificateResponse} */
   DescribeDeviceCertificate(data: DescribeDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateResponse>;
+  /** 查询设备证书同步记录 {@link DescribeDeviceCertificateBackupHistoryRequest} {@link DescribeDeviceCertificateBackupHistoryResponse} */
+  DescribeDeviceCertificateBackupHistory(data: DescribeDeviceCertificateBackupHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificateBackupHistoryResponse>;
   /** 查询设备证书 {@link DescribeDeviceCertificatesRequest} {@link DescribeDeviceCertificatesResponse} */
   DescribeDeviceCertificates(data: DescribeDeviceCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCertificatesResponse>;
   /** 查询设备标识列表 {@link DescribeDeviceIdentitiesRequest} {@link DescribeDeviceIdentitiesResponse} */
   DescribeDeviceIdentities(data: DescribeDeviceIdentitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceIdentitiesResponse>;
   /** 查询设备标识 {@link DescribeDeviceIdentityRequest} {@link DescribeDeviceIdentityResponse} */
   DescribeDeviceIdentity(data: DescribeDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceIdentityResponse>;
+  /** 查询设备标识同步记录 {@link DescribeDeviceIdentityBackupHistoryRequest} {@link DescribeDeviceIdentityBackupHistoryResponse} */
+  DescribeDeviceIdentityBackupHistory(data: DescribeDeviceIdentityBackupHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceIdentityBackupHistoryResponse>;
   /** 查询MQTT实例公网接入点 {@link DescribeInsPublicEndpointsRequest} {@link DescribeInsPublicEndpointsResponse} */
   DescribeInsPublicEndpoints(data: DescribeInsPublicEndpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInsPublicEndpointsResponse>;
   /** 查询MQTT实例VPC接入点 {@link DescribeInsVPCEndpointsRequest} {@link DescribeInsVPCEndpointsResponse} */
@@ -2045,6 +2187,8 @@ declare interface Mqtt {
   DescribeTopicList(data: DescribeTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicListResponse>;
   /** 查询MQTT用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
+  /** 查询客户端遗嘱消息 {@link DescribeWillMessageRequest} {@link DescribeWillMessageResponse} */
+  DescribeWillMessage(data: DescribeWillMessageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWillMessageResponse>;
   /** 踢出客户端 {@link KickOutClientRequest} {@link KickOutClientResponse} */
   KickOutClient(data: KickOutClientRequest, config?: AxiosRequestConfig): AxiosPromise<KickOutClientResponse>;
   /** 修改授权策略 {@link ModifyAuthorizationPolicyRequest} {@link ModifyAuthorizationPolicyResponse} */

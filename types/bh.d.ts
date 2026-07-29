@@ -648,6 +648,8 @@ declare interface LoginSetting {
   LockTime: number;
   /** 用户多少天不活跃，账号自动锁定 */
   InactiveUserLock?: number;
+  /** 运维账号单点登录开关：0-关闭，1-开启 */
+  EnableSingleLogin?: number;
 }
 
 /** OAuth认证配置 */

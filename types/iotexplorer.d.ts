@@ -2481,6 +2481,8 @@ declare interface CreateDeviceSDPAnswerRequest {
   SDPOffer: string;
   /** 客户自定义拉流标识 */
   RequesterTag?: string;
+  /** 默认值：0，如果需要webrtc推流拉流在同一个SDP中，需要值为1，常用于单PC模式枚举值：0： 默认值，传统多pc推流模式1： 单pc模式，如果需要webrtc单pc推拉流，采用此模式，此模式下注意SDP需要包含推拉流全部信息默认值：0 */
+  EnableSubPub?: number;
 }
 
 declare interface CreateDeviceSDPAnswerResponse {
