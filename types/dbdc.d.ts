@@ -64,6 +64,32 @@ declare interface DBCustomClusterNode {
   EniIP?: string | null;
 }
 
+/** DB Custom 集群内节点配置信息。 */
+declare interface DBCustomClusterNodeConfig {
+  /** 节点ID */
+  NodeId?: string;
+  /** 节点的标签信息 */
+  Labels?: Label[] | null;
+  /** 节点的污点信息 */
+  Taints?: Taint[] | null;
+}
+
+/** DB Custom 集群内节点资源信息。 */
+declare interface DBCustomClusterNodeResource {
+  /** 节点ID */
+  NodeId?: string;
+  /** 节点物理资源总容量 */
+  Capacity?: MetaResource | null;
+  /** 节点可分配容量= Capacity - 系统预留 */
+  Allocatable?: MetaResource | null;
+  /** 节点上所有非终态 Pod 的 requests 申请量之和（含系统 Pod） */
+  Requests?: MetaResource | null;
+  /** 节点上所有非终态 Pod 的 limits 上限之和（含系统 Pod） */
+  Limits?: MetaResource | null;
+  /** 节点可再调度余量 = max(0, Allocatable - Requests) */
+  Available?: MetaResource | null;
+}
+
 /** DB Custom 可选的镜像信息。 */
 declare interface DBCustomImage {
   /** 镜像ID */
@@ -134,6 +160,26 @@ declare interface DBCustomNode {
   NetworkMode?: string;
   /** 当选择NetworkModeCrossTenantENI模式时，节点的访问IP地址 */
   EniIP?: string;
+}
+
+/** DB Custom 节点机型信息。 */
+declare interface DBCustomNodeTypeInfo {
+  /** 可用区标识，如 ap-guangzhou-6 */
+  Zone?: string;
+  /** 机型标识枚举值：DB.SA5.2XLARGE32： DB.SA5机型DB.AT5.8XLARGE128： DB.AT5机型 */
+  NodeType?: string;
+  /** 机型系列，如 DB.AT5、DB.SA5 */
+  NodeFamily?: string;
+  /** CPU 核数单位：核 */
+  CPU?: number;
+  /** 内存大小单位：GiB */
+  Memory?: number;
+  /** 机型售卖状态枚举值：SELL： 正常售卖SOLD_OUT： 售罄 */
+  Status?: string;
+  /** 该机型允许的系统盘类型列表（如 CLOUD_BSSD、CLOUD_HSSD）； */
+  SystemDiskTypes?: string[];
+  /** 该机型允许的数据盘类型列表（如 CLOUD_BSSD、CLOUD_HSSD）； */
+  DataDiskTypes?: string[];
 }
 
 /** DB实例详情 */
@@ -424,12 +470,68 @@ declare interface LoginSettings {
   KeepImageLogin?: string;
 }
 
+/** 资源信息。 */
+declare interface MetaResource {
+  /** CPU核心单位：核 */
+  Cpu?: number;
+  /** 内存单位：GiB */
+  Memory?: number;
+  /** POD数量单位：个 */
+  Pods?: number;
+}
+
+/** 安全组规则 */
+declare interface PolicyRule {
+  /** 规则动作，枚举值：ACCEPT： 允许DROP： 拒绝 */
+  Action?: string;
+  /** 来源/目标 IP 或 CIDR，如 0.0.0.0/0 */
+  CidrIp?: string;
+  /** 端口范围，如 80、8080-8090、ALL */
+  PortRange?: string;
+  /** 协议类型，如 tcp、udp、icmp、ALL */
+  IpProtocol?: string;
+  /** 协议端口模板 ID */
+  ServiceModule?: string;
+  /** IP 地址模板 ID */
+  AddressModule?: string;
+  /** 规则 ID */
+  Id?: string;
+  /** 规则备注描述 */
+  Desc?: string;
+}
+
+/** 地域信息。 */
+declare interface RegionInfo {
+  /** 地域 */
+  Region?: string;
+  /** 售卖状态枚举值：SELL： 正常售卖SOLD_OUT： 售罄 */
+  RegionState?: string;
+}
+
 /** 标签对象，包含tagKey & tagValue */
 declare interface ResourceTag {
   /** 标签键 */
   TagKey: string;
   /** 标签值 */
   TagValue: string;
+}
+
+/** 安全组详情 */
+declare interface SecurityGroup {
+  /** 安全组ID */
+  SecurityGroupId?: string;
+  /** 所属项目 ID */
+  ProjectId?: number;
+  /** 安全组创建时间 */
+  CreateTime?: string;
+  /** 安全组入方向规则列表 */
+  Inbound?: PolicyRule[];
+  /** 安全组出方向规则列表 */
+  Outbound?: PolicyRule[];
+  /** 安全组名称 */
+  SecurityGroupName?: string;
+  /** 安全组备注说明 */
+  SecurityGroupRemark?: string;
 }
 
 /** DB Custom 节点系统盘信息。 */
@@ -456,6 +558,14 @@ declare interface Taint {
   Effect?: string;
   /** Taint 的值，≤ 63 字符，可为空 */
   Value?: string;
+}
+
+/** 可用区信息。 */
+declare interface ZoneInfo {
+  /** 支持的可用区 */
+  Zone?: string;
+  /** 可用区状态枚举值：SELL： 正常售卖SOLD_OUT： 售罄 */
+  ZoneState?: string;
 }
 
 declare interface AddNodesToDBCustomClusterRequest {
@@ -626,6 +736,34 @@ declare interface DescribeDBCustomClusterKubeconfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBCustomClusterNodeConfigRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 按照一个或者多个 NodeId 查询。入参限制：每次请求的数量上限为100 */
+  NodeIds: string[];
+}
+
+declare interface DescribeDBCustomClusterNodeConfigResponse {
+  /** 当前账号下拥有的DB Custom 节点列表信息 */
+  NodeSet?: DBCustomClusterNodeConfig[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBCustomClusterNodeResourcesRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 按照一个或者多个 NodeId 查询。入参限制：每次请求的数量上限为50 */
+  NodeIds: string[];
+}
+
+declare interface DescribeDBCustomClusterNodeResourcesResponse {
+  /** 当前账号下拥有的DB Custom 节点列表信息 */
+  NodeSet?: DBCustomClusterNodeResource[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBCustomClusterNodesRequest {
   /** DB Custom 集群ID */
   ClusterId: string;
@@ -642,6 +780,28 @@ declare interface DescribeDBCustomClusterNodesResponse {
   TotalCount?: number;
   /** 分页后节点列表信息 */
   NodeSet?: DBCustomClusterNode[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBCustomClusterResourcesRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeDBCustomClusterResourcesResponse {
+  /** 参与汇总的工作节点总数（不含控制面节点）单位：台 */
+  NodeCount?: number;
+  /** 集群所有节点的资源物理总容量之和 */
+  Capacity?: MetaResource;
+  /** 集群所有节点的可分配容量之和（= Capacity - 系统预留） */
+  Allocatable?: MetaResource;
+  /** 集群所有非终态 Pod 的 requests 申请量之和（含系统 Pod） */
+  Requests?: MetaResource;
+  /** 集群所有非终态 Pod 的 limits 上限之和（含系统 Pod，Pods 字段无语义，固定为 0） */
+  Limits?: MetaResource;
+  /** 集群可再调度余量（所有节点 max(0, Allocatable - Requests) 累加求和） */
+  Available?: MetaResource;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -686,6 +846,30 @@ declare interface DescribeDBCustomImagesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBCustomNodeSecurityGroupsRequest {
+  /** 节点id */
+  NodeId: string;
+}
+
+declare interface DescribeDBCustomNodeSecurityGroupsResponse {
+  /** 与节点绑定的安全组id，数组格式，根据内部安全组ID的顺序来确认优先级。 */
+  Groups?: SecurityGroup[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBCustomNodeTypesRequest {
+  /** 支持通过地域，可用区，机型系列，机型标识进行过滤入参限制：region、zone、node-family、node-type */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDBCustomNodeTypesResponse {
+  /** 节点机型详细信息 */
+  NodeTypeSet?: DBCustomNodeTypeInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBCustomNodesRequest {
   /** 按照一个或者多个 NodeId 查询。入参限制：每次请求的数量上限为100 */
   NodeIds?: string[];
@@ -708,6 +892,16 @@ declare interface DescribeDBCustomNodesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBCustomRegionsRequest {
+}
+
+declare interface DescribeDBCustomRegionsResponse {
+  /** 支持售卖的地域列表信息 */
+  RegionSet?: RegionInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBCustomTaskStatusRequest {
   /** DB Custom 任务ID */
   TaskId: number;
@@ -716,6 +910,16 @@ declare interface DescribeDBCustomTaskStatusRequest {
 declare interface DescribeDBCustomTaskStatusResponse {
   /** 任务 ID枚举值：Running： 运行中Succeeded： 成功Failed： 失败 */
   Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBCustomZonesRequest {
+}
+
+declare interface DescribeDBCustomZonesResponse {
+  /** 查询支持售卖的地域对应的可用区，State字段值如为SELL则代表正常售卖。 */
+  ZoneSet?: ZoneInfo[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -928,6 +1132,28 @@ declare interface IsolateDBCustomNodeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBCustomClusterNodeConfigRequest {
+  /** 目标集群 ID */
+  ClusterId: string;
+  /** 要修改的节点 ID 列表入参限制：数量范围 1~50 个 */
+  NodeIds: string[];
+  /** 新增或覆盖的集群 Label入参限制：- 单次 ≤ 20 对；合并后节点总量不超过 20Key 格式对齐 K8s 原生（两段式，prefix DNS 子域 ≤ 253 字符，name ≤ 63 字符）Value ≤ 63 字符，可为空不可操作系统保留前缀 */
+  UpsertLabels?: Label[];
+  /** 要删除的 Label key 列表，按 key 精确匹配，key 不存在时幂等放行。入参限制：- Key 格式对齐 K8s 原生（两段式，prefix DNS 子域 ≤ 253 字符，name ≤ 63 字符）Value ≤ 63 字符，可为空不可操作系统保留前缀 */
+  DeleteLabelKeys?: string[];
+  /** 新增或覆盖的 Taint。入参限制：- 单次 ≤ 5 对；合并后节点总量不超过 5。唯一性键为 (Key, Effect)，匹配到已有 (Key, Effect) 时覆盖 Value，否则新增Effect 合法值：NoSchedule / PreferNoSchedule / NoExecute同一 Key 允许多个不同 Effect 的 Taint 并存 */
+  UpsertTaints?: Taint[];
+  /** 要删除的 Taint 过滤器列表入参限制：- 唯一性键为 (Key, Effect)，匹配到已有 (Key, Effect) 时覆盖 Value，否则新增Effect 合法值：NoSchedule / PreferNoSchedule / NoExecute同一 Key 允许多个不同 Effect 的 Taint 并存 */
+  DeleteTaints?: Taint[];
+}
+
+declare interface ModifyDBCustomClusterNodeConfigResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBCustomClusterTagsRequest {
   /** DB Custom 集群ID参数格式：dbcc-xxxxxxxx */
   ClusterId: string;
@@ -938,6 +1164,18 @@ declare interface ModifyDBCustomClusterTagsRequest {
 }
 
 declare interface ModifyDBCustomClusterTagsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBCustomNodeSecurityGroupsRequest {
+  /** 节点id */
+  NodeId: string;
+  /** 安全组id，数组格式，根据内部安全组ID的顺序来确认优先级。 */
+  SecurityGroupIds: string[];
+}
+
+declare interface ModifyDBCustomNodeSecurityGroupsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1017,16 +1255,30 @@ declare interface Dbdc {
   DescribeDBCustomClusterDetail(data: DescribeDBCustomClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterDetailResponse>;
   /** 查询集群 Kubeconfig {@link DescribeDBCustomClusterKubeconfigRequest} {@link DescribeDBCustomClusterKubeconfigResponse} */
   DescribeDBCustomClusterKubeconfig(data: DescribeDBCustomClusterKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterKubeconfigResponse>;
+  /** 查询集群内节点的配置信息 {@link DescribeDBCustomClusterNodeConfigRequest} {@link DescribeDBCustomClusterNodeConfigResponse} */
+  DescribeDBCustomClusterNodeConfig(data: DescribeDBCustomClusterNodeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterNodeConfigResponse>;
+  /** 查询集群内节点的资源信息 {@link DescribeDBCustomClusterNodeResourcesRequest} {@link DescribeDBCustomClusterNodeResourcesResponse} */
+  DescribeDBCustomClusterNodeResources(data: DescribeDBCustomClusterNodeResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterNodeResourcesResponse>;
   /** 查询集群的节点列表 {@link DescribeDBCustomClusterNodesRequest} {@link DescribeDBCustomClusterNodesResponse} */
   DescribeDBCustomClusterNodes(data: DescribeDBCustomClusterNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterNodesResponse>;
+  /** 查询集群资源信息 {@link DescribeDBCustomClusterResourcesRequest} {@link DescribeDBCustomClusterResourcesResponse} */
+  DescribeDBCustomClusterResources(data: DescribeDBCustomClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterResourcesResponse>;
   /** 查询集群列表 {@link DescribeDBCustomClustersRequest} {@link DescribeDBCustomClustersResponse} */
   DescribeDBCustomClusters(data?: DescribeDBCustomClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClustersResponse>;
   /** 查询可用的系统镜像列表 {@link DescribeDBCustomImagesRequest} {@link DescribeDBCustomImagesResponse} */
   DescribeDBCustomImages(data?: DescribeDBCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomImagesResponse>;
+  /** 查询节点安全组信息 {@link DescribeDBCustomNodeSecurityGroupsRequest} {@link DescribeDBCustomNodeSecurityGroupsResponse} */
+  DescribeDBCustomNodeSecurityGroups(data: DescribeDBCustomNodeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomNodeSecurityGroupsResponse>;
+  /** 查询节点支持的机型列表 {@link DescribeDBCustomNodeTypesRequest} {@link DescribeDBCustomNodeTypesResponse} */
+  DescribeDBCustomNodeTypes(data?: DescribeDBCustomNodeTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomNodeTypesResponse>;
   /** 查询节点列表 {@link DescribeDBCustomNodesRequest} {@link DescribeDBCustomNodesResponse} */
   DescribeDBCustomNodes(data?: DescribeDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomNodesResponse>;
+  /** 查询地域列表 {@link DescribeDBCustomRegionsRequest} {@link DescribeDBCustomRegionsResponse} */
+  DescribeDBCustomRegions(data?: DescribeDBCustomRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomRegionsResponse>;
   /** 查询任务状态 {@link DescribeDBCustomTaskStatusRequest} {@link DescribeDBCustomTaskStatusResponse} */
   DescribeDBCustomTaskStatus(data: DescribeDBCustomTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomTaskStatusResponse>;
+  /** 查询指定地域的可用区列表 {@link DescribeDBCustomZonesRequest} {@link DescribeDBCustomZonesResponse} */
+  DescribeDBCustomZones(data?: DescribeDBCustomZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomZonesResponse>;
   /** 查询独享集群内的DB实例列表 {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
   DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 查询主机列表 {@link DescribeHostListRequest} {@link DescribeHostListResponse} */
@@ -1043,8 +1295,12 @@ declare interface Dbdc {
   DestroyDBCustomNode(data: DestroyDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBCustomNodeResponse>;
   /** 隔离节点 {@link IsolateDBCustomNodeRequest} {@link IsolateDBCustomNodeResponse} */
   IsolateDBCustomNode(data: IsolateDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBCustomNodeResponse>;
+  /** 修改集群中节点的配置 {@link ModifyDBCustomClusterNodeConfigRequest} {@link ModifyDBCustomClusterNodeConfigResponse} */
+  ModifyDBCustomClusterNodeConfig(data: ModifyDBCustomClusterNodeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterNodeConfigResponse>;
   /** 修改集群绑定的标签 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */
   ModifyDBCustomClusterTags(data: ModifyDBCustomClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterTagsResponse>;
+  /** 修改节点安全组 {@link ModifyDBCustomNodeSecurityGroupsRequest} {@link ModifyDBCustomNodeSecurityGroupsResponse} */
+  ModifyDBCustomNodeSecurityGroups(data: ModifyDBCustomNodeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeSecurityGroupsResponse>;
   /** 修改节点绑定的标签 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */
   ModifyDBCustomNodeTags(data: ModifyDBCustomNodeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeTagsResponse>;
   /** 修改独享集群名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */

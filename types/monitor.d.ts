@@ -2099,6 +2099,30 @@ declare namespace V20180724 {
     NoticeID?: string;
   }
 
+  /** 通知模板配置的发送用户的信息 */
+  interface NoticeOnCallUsersInfo {
+    /** 通知模板id参数格式：notice-xxxxxxxx */
+    NoticeId?: string;
+    /** 发送组信息，对应通知模板中的每项配置 */
+    SendGroups?: NoticeSendGroup[];
+  }
+
+  /** 通知模板发送组信息 */
+  interface NoticeSendGroup {
+    /** 发送组类型枚举值：USER： 用户GROUP： 用户组OnCallForm： 值班表 */
+    ReceiverType?: string;
+    /** 通知人信息 */
+    Users?: NoticeUserInfo[];
+  }
+
+  /** 通知模板中配置的发送用户信息 */
+  interface NoticeUserInfo {
+    /** 腾讯云用户id，不是账号uin */
+    UserId?: string;
+    /** 用户名 */
+    UserName?: string;
+  }
+
   /** 告警通知内容模板支持的变量或者函数列表 */
   interface NotificationContentTemplateSupport {
     /** 监控类型 */
@@ -4292,6 +4316,18 @@ declare namespace V20180724 {
   interface DescribeAlarmNoticeCallbacksResponse {
     /** 告警回调通知 */
     URLNotices?: URLNotice[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest {
+    /** prometheus告警分组ID参数格式：alert-xxxxxxxx */
+    AlertId: string;
+  }
+
+  interface DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse {
+    /** 告警通知模板列表 */
+    Notices?: NoticeOnCallUsersInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6764,6 +6800,8 @@ declare interface Monitor {
   DescribeAlarmNotice(data: V20180724.DescribeAlarmNoticeRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmNoticeResponse>;
   /** 查询账号下所有回调URL列表 {@link V20180724.DescribeAlarmNoticeCallbacksRequest} {@link V20180724.DescribeAlarmNoticeCallbacksResponse} */
   DescribeAlarmNoticeCallbacks(data: V20180724.DescribeAlarmNoticeCallbacksRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmNoticeCallbacksResponse>;
+  /** 使用Prometheus策略ID查询告警通知人信息 {@link V20180724.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest} {@link V20180724.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse} */
+  DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID(data: V20180724.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse>;
   /** 查询通知模板列表 {@link V20180724.DescribeAlarmNoticesRequest} {@link V20180724.DescribeAlarmNoticesResponse} */
   DescribeAlarmNotices(data: V20180724.DescribeAlarmNoticesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmNoticesResponse>;
   /** 查询告警策略列表（支持按实例等条件筛选） {@link V20180724.DescribeAlarmPoliciesRequest} {@link V20180724.DescribeAlarmPoliciesResponse} */

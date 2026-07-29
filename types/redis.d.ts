@@ -1291,10 +1291,12 @@ declare interface ChangeMasterInstanceResponse {
 }
 
 declare interface ChangeReplicaToMasterRequest {
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 副本节点组 ID，请通过接口[DescribeInstanceZoneInfo](https://cloud.tencent.com/document/product/239/50312)获取多 AZ备节点组的 ID 信息。单 AZ，则无需配置该参数。 */
+  /** 副本节点组 ID，请通过接口DescribeInstanceZoneInfo获取多 AZ备节点组的 ID 信息。单 AZ，则无需配置该参数。 */
   GroupId?: number;
+  /** 紧急模式。枚举值：false： 标准模式（安全推荐）true： 极速模式：（高危加速）跳过校验、极速提主。高位操作，极易在异常情况下产生单主节点。默认值：false */
+  Emergency?: boolean;
 }
 
 declare interface ChangeReplicaToMasterResponse {

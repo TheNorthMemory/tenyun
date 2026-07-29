@@ -449,8 +449,10 @@ declare namespace V20180717 {
     CreateTime?: string;
     /** 模板最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
-    /** 切片类型，仅当 Format 为 HLS 时有效。 */
+    /** 切片类型。ts: HLS，内部映射为ts-segmentfmp4: HLS/DASH，HLS情况下内部映射为mp4-mp4-segment，DASH情况下内部映射为mp4-mp4-byterangets-segment：HLS+TS 切片ts-byterange：HLS+TS byte rangemp4-segment：HLS+MP4 切片mp4-byterange：HLS+MP4 byte rangets-packed-audio：HLS+TS+Packed Audio 切片mp4-packed-audio：HLS+MP4+Packed Audio 切片ts-ts-segment：HLS+TS+TS 切片ts-ts-byterange：HLS+TS+TS byte rangemp4-mp4-segment：HLS+MP4+MP4 切片mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte rangets-packed-audio-byterange：HLS+TS+Packed Audio byte rangemp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-mp4-byterange。 */
     SegmentType?: string;
+    /** 切片平均时长单位：秒默认值：6转自适应码流使用SegmentDuration设置分片时长，而非HlsTime字段. */
+    SegmentDuration?: number;
   }
 
   /** 自适应转码流参数模板 */
@@ -8039,7 +8041,7 @@ declare namespace V20180717 {
 
   /** 第三方Drm 加密信息。 */
   interface ThirdPartyDrmInfo {
-    /** 加密类型：FairPlay：只能用于HLS，切片格式只能是mp4Widevine：可以用于HLS和DASH，切片格式只能是mp4PlayReady：可以用于HLS和DASH，切片格式只能是mp4Widevine+FairPlay，PlayReady+FairPlay，Widevine PlayReady FairPlay组合: 只能用于HLS，切片格式只能是mp4Widevine PlayReady组合: 可用于HLS、MPEG-DASH，切片格式只能是mp4 */
+    /** 加密类型：FairPlay：只能用于HLS，切片格式只能是mp4或mp4-mp4-segmentWidevine：可以用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterangePlayReady：可以用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterangeWidevine+FairPlay，PlayReady+FairPlay，Widevine PlayReady FairPlay组合: 只能用于HLS，切片格式只能是mp4或mp4-mp4-segmentWidevine PlayReady组合: 可用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterange */
     DrmTypes: string[];
     /** 第三方DRM厂商信息。 */
     SPEKEDrm?: SPEKEDrm;

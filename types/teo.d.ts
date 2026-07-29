@@ -2034,9 +2034,9 @@ declare interface IPExpireInfo {
 
 /** IP 网段组 */
 declare interface IPGroup {
-  /** 组 Id，创建时填 0 即可。 */
+  /** IP 组 Id，创建时填 0 即可。 */
   GroupId: number;
-  /** 组名称。 */
+  /** IP 组名称。 */
   Name: string;
   /** IP 组内容，仅支持 IP 及 IP 网段。 */
   Content: string[];
@@ -2044,6 +2044,26 @@ declare interface IPGroup {
   IPTotalCount?: number;
   /** IP 定时过期信息。作为入参，用于为指定的 IP 地址或网段配置定时过期时间。作为出参，包含以下两类信息：当前未到期的定时过期信息：尚未触发的过期配置。一周内已到期的定时过期信息：已触发的过期配置。 */
   IPExpireInfo?: IPExpireInfo[];
+  /** IP 组被引用的数量。 */
+  RefCount?: number;
+}
+
+/** 引用 IP 组的安全模块 */
+declare interface IPGroupReference {
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 实体类型。枚举值：WebSec.ZonePolicy： 站点级防护策略WebSec.HostPolicy： 域名级防护策略WebSec.Template： 策略模板DDoS.L4Proxy： 四层代理 DDoS 防护DDoS.L3Transit： 三层代播 DDoS 防护 */
+  EntityType?: string;
+  /** 实体标识，根据 EntityType 不同代表不同的含义：WebSec.ZonePolicy：站点 ID；WebSec.HostPolicy：域名；WebSec.Template：模板 ID；DDoS.L4Proxy：实例 ID；DDoS.L3Transit：实例 ID。 */
+  EntityId?: string;
+  /** 实体标识，根据 EntityType 不同代表不同的含义：WebSec.ZonePolicy：空；WebSec.HostPolicy：空；WebSec.Template：模板名称；DDoS.L4Proxy：空；DDoS.L3Transit：空。 */
+  EntityName?: string;
+  /** 子实体类型。枚举值：WebSec.ExceptionRule： 防护例外规则WebSec.BasicAccessRule： 基础访问管控WebSec.PreciseMatchRule： 精确匹配规则WebSec.RateLimitRule： 精准速率限制WebSec.BotCustomRule： 高级 Bot 管理 - 自定义规则DDoS.L4Proxy.IpAccessControl： 四层代理 DDoS 防护 - IP 黑白名单DDoS.L3Transit.IpAccessControl： 三层代播 DDoS 防护 - IP 黑白名单 */
+  SubEntityType?: string;
+  /** 子实体标识，根据 SubEntityType 不同代表不同的含义：WebSec.ExceptionRule：规则 ID；WebSec.BasicAccessRule：规则 ID；WebSec.PreciseMatchRule：规则 ID；WebSec.RateLimitRule：规则 ID；WebSec.BotCustomRule：规则 ID；DDoS.L4Proxy.IpAccessControl：空；DDoS.L3Transit.IpAccessControl：空。EntityType 与 SubEntityType 为对应关系，不同的 EntityType 支持不同的 SubEntityType。WebSec.ZonePolicy，WebSec.HostPolicy 和 WebSec.Template 支持如下 SubEntityType：WebSec.ExceptionRule；WebSec.BasicAccessRule；WebSec.PreciseMatchRule；WebSec.RateLimitRule；WebSec.BotCustomRule。DDoS.L4Proxy 支持如下 SubEntityType：DDoS.L4Proxy.IpAccessControl；DDoS.L3Transit 支持如下 SubEntityType：DDoS.L3Transit.IpAccessControl。 */
+  SubEntityId?: string;
+  /** 子实体名称，根据 SubEntityType 不同代表不同的含义：WebSec.ExceptionRule：规则名称；WebSec.BasicAccessRule：规则名称；WebSec.PreciseMatchRule：规则名称；WebSec.RateLimitRule：规则名称；WebSec.BotCustomRule：规则名称；DDoS.L4Proxy.IpAccessControl：规则名称，block 表示黑名单，allow 表示白名单；DDoS.L3Transit.IpAccessControl：规则名称，block 表示黑名单，allow 表示白名单。 */
+  SubEntityName?: string;
 }
 
 /** IP 归属信息查询 */
@@ -6592,6 +6612,26 @@ declare interface DescribeHostsSettingResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIPGroupReferencesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** IP 组 ID。 */
+  GroupId: number;
+  /** 分页偏移量。默认值：0 */
+  Offset?: number;
+  /** 分页查询引用 IP 组的配置条数。取值范围：[1, 200]默认值：20 */
+  Limit?: number;
+}
+
+declare interface DescribeIPGroupReferencesResponse {
+  /** 引用对应 IP 组的配置信息。 */
+  References?: IPGroupReference[];
+  /** 查询结果总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIPRegionRequest {
   /** 待查询的 IP 列表，支持 IPV4 和 IPV6，最大可查询 100 条。 */
   IPs: string[];
@@ -9311,6 +9351,8 @@ declare interface Teo {
   DescribeFunctions(data: DescribeFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFunctionsResponse>;
   /** 查询域名详细配置（旧） {@link DescribeHostsSettingRequest} {@link DescribeHostsSettingResponse} */
   DescribeHostsSetting(data: DescribeHostsSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostsSettingResponse>;
+  /** 查询 IP 分组引用信息 {@link DescribeIPGroupReferencesRequest} {@link DescribeIPGroupReferencesResponse} */
+  DescribeIPGroupReferences(data: DescribeIPGroupReferencesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPGroupReferencesResponse>;
   /** 查询 IP 归属信息 {@link DescribeIPRegionRequest} {@link DescribeIPRegionResponse} */
   DescribeIPRegion(data: DescribeIPRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIPRegionResponse>;
   /** 查询站点的验证信息 {@link DescribeIdentificationsRequest} {@link DescribeIdentificationsResponse} */

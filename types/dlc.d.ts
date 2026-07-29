@@ -3727,6 +3727,66 @@ declare interface CreateScriptResponse {
 }
 
 declare interface CreateSparkAppForTDLCRequest {
+  /** spark作业名 */
+  AppName: string;
+  /** spark作业类型，1代表spark jar作业，2代表spark streaming作业 */
+  AppType: number;
+  /** 执行spark作业的数据引擎名称 */
+  DataEngine: string;
+  /** spark作业程序包文件路径 */
+  AppFile: string;
+  /** 数据访问策略，CAM Role arn，控制台通过数据作业—>作业配置获取，SDK通过DescribeUserRoles接口获取对应的值； */
+  RoleArn: number;
+  /** 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  AppDriverSize: string;
+  /** 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu） */
+  AppExecutorSize: string;
+  /** spark作业executor个数 */
+  AppExecutorNums: number;
+  /** 该字段已下线，请使用字段Datasource */
+  Eni?: string;
+  /** spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
+  IsLocal?: string;
+  /** spark作业主类 */
+  MainClass?: string;
+  /** spark配置，以换行符分隔 */
+  AppConf?: string;
+  /** spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
+  IsLocalJars?: string;
+  /** spark 作业依赖jar包（--jars），以逗号分隔 */
+  AppJars?: string;
+  /** spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
+  IsLocalFiles?: string;
+  /** spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔 */
+  AppFiles?: string;
+  /** spark作业程序入参，空格分割 */
+  CmdArgs?: string;
+  /** 最大重试次数，只对spark流任务生效 */
+  MaxRetries?: number;
+  /** 数据源名称 */
+  DataSource?: string;
+  /** pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
+  IsLocalPythonFiles?: string;
+  /** pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔 */
+  AppPythonFiles?: string;
+  /** spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用） */
+  IsLocalArchives?: string;
+  /** spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔 */
+  AppArchives?: string;
+  /** Spark Image 版本号 */
+  SparkImage?: string;
+  /** Spark Image 版本名称 */
+  SparkImageVersion?: string;
+  /** 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums */
+  AppExecutorMaxNumbers?: number;
+  /** 关联dlc查询脚本id */
+  SessionId?: string;
+  /** 任务资源配置是否继承集群模板，0（默认）不继承，1：继承 */
+  IsInherit?: number;
+  /** 是否使用session脚本的sql运行任务：false：否，true：是 */
+  IsSessionStarted?: boolean;
+  /** 依赖包信息 */
+  DependencyPackages?: DependencyPackage[];
 }
 
 declare interface CreateSparkAppForTDLCResponse {
@@ -7012,7 +7072,7 @@ declare interface Dlc {
   /** 创建spark作业 {@link CreateSparkAppRequest} {@link CreateSparkAppResponse} */
   CreateSparkApp(data: CreateSparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppResponse>;
   /** 创建tdlc spark作业 {@link CreateSparkAppForTDLCRequest} {@link CreateSparkAppForTDLCResponse} */
-  CreateSparkAppForTDLC(data?: CreateSparkAppForTDLCRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppForTDLCResponse>;
+  CreateSparkAppForTDLC(data: CreateSparkAppForTDLCRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppForTDLCResponse>;
   /** 启动Spark作业 {@link CreateSparkAppTaskRequest} {@link CreateSparkAppTaskResponse} */
   CreateSparkAppTask(data: CreateSparkAppTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSparkAppTaskResponse>;
   /** 创建并执行Spark SQL批任务 {@link CreateSparkSessionBatchSQLRequest} {@link CreateSparkSessionBatchSQLResponse} */

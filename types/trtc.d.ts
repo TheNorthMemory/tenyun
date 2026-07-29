@@ -158,28 +158,6 @@ declare interface AudioParams {
   BitRate: number;
 }
 
-/** 审核存储参数 */
-declare interface AuditStorageParams {
-  /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
-  CloudAuditStorage?: CloudAuditStorage;
-}
-
-/** 腾讯云对象存储COS以及第三方云存储的账号信息 */
-declare interface CloudAuditStorage {
-  /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中示例值：0 */
-  Vendor: number;
-  /** 腾讯云对象存储的[地域信息]（https://cloud.tencent.com/document/product/436/6224 */
-  Region: string;
-  /** 云存储桶名称。 */
-  Bucket: string;
-  /** 云存储的access_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretId值。示例值：test-accesskey */
-  AccessKey: string;
-  /** 云存储的secret_key账号信息。若存储至腾讯云对象存储COS，请前往https://console.cloud.tencent.com/cam/capi 查看或创建，对应链接中密钥字段的SecretKey值。示例值：test-secretkey */
-  SecretKey: string;
-  /** 云存储bucket 的指定位置，由字符串数组组成。合法的字符串范围az,AZ,0~9,'_'和'-'，举个例子，录制文件xxx.m3u8在 ["prefix1", "prefix2"]作用下，会变成prefix1/prefix2/TaskId/xxx.m3u8。示例值：["prefix1", "prefix2"] */
-  FileNamePrefix?: string[];
-}
-
 /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
 declare interface CloudModerationStorage {
   /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS S32: 阿里云 OSS示例值：0 */
@@ -1558,26 +1536,6 @@ declare interface ControlAIConversationResponse {
   RequestId?: string;
 }
 
-declare interface CreateBasicModerationRequest {
-  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和TRTC的房间所对应的SdkAppId相同。 */
-  SdkAppId: number;
-  /** TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351)，为TRTC房间所对应的RoomId。 */
-  RoomId: string;
-  /** 目标审核用户id */
-  UserId: string;
-  /** TRTC房间号的类型。【*注意】必须和TRTC的房间所对应的RoomId类型相同:0: 字符串类型的RoomId1: 32位整型的RoomId（默认） */
-  RoomIdType?: number;
-  /** 音频文件上传到云存储的参数 */
-  AuditStorageParams?: AuditStorageParams;
-}
-
-declare interface CreateBasicModerationResponse {
-  /** 审核服务分配的任务ID。任务ID是对一次审核任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数 */
-  TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateCloudModerationRequest {
   /** TRTC的SdkAppId，和TRTC的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
@@ -1732,20 +1690,6 @@ declare interface CreatePictureRequest {
 declare interface CreatePictureResponse {
   /** 图片id */
   PictureId?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteBasicModerationRequest {
-  /** TRTC的SDKAppId，和TRTC的房间所使用的SDKAppId相同。 */
-  SdkAppId: number;
-  /** 审核任务的唯一Id，在启动审核任务成功后会返回。 */
-  TaskId: string;
-}
-
-declare interface DeleteBasicModerationResponse {
-  /** 审核任务的唯一Id。 */
-  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3099,8 +3043,6 @@ declare interface Trtc {
   AsyncTextToSpeech(data: AsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncTextToSpeechResponse>;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
-  /** 创建基础审核任务 {@link CreateBasicModerationRequest} {@link CreateBasicModerationResponse} */
-  CreateBasicModeration(data: CreateBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBasicModerationResponse>;
   /** 启动AI 内容理解 {@link CreateCloudModerationRequest} {@link CreateCloudModerationResponse} */
   CreateCloudModeration(data: CreateCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudModerationResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
@@ -3113,8 +3055,6 @@ declare interface Trtc {
   CreateLiveStreamModeration(data: CreateLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveStreamModerationResponse>;
   /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
-  /** 停止基础审核任务 {@link DeleteBasicModerationRequest} {@link DeleteBasicModerationResponse} */
-  DeleteBasicModeration(data: DeleteBasicModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBasicModerationResponse>;
   /** 停止AI 内容理解任务 {@link DeleteCloudModerationRequest} {@link DeleteCloudModerationResponse} */
   DeleteCloudModeration(data: DeleteCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudModerationResponse>;
   /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */

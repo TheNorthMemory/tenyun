@@ -478,6 +478,10 @@ declare interface AiAnalysisTaskDelLogoOutput {
   VoiceClonedVideo?: string | null;
   /** 音色克隆的标注文件地址 */
   VoiceClonedMarkFile?: string | null;
+  /** 仅做擦除的视频结果路径 */
+  ErasedVideoPath?: string;
+  /** 音色克隆编辑信息用于音色克隆二次修改的编辑信息 */
+  DubbingEditInfoUrl?: string;
   /** 擦除后文件的FileId。 */
   FileId?: string;
   /** 基于画面提取的字幕文件FileId。 */
@@ -2272,7 +2276,7 @@ declare interface CloneViralAIGC {
   AspectRatio?: string;
   /** 分辨率。支持720p（默认）/1080p/2k/4k */
   Resolution?: string;
-  /** 模型等级。flagship（VS2.0，默认）、standard（Kling3.0-Omni） */
+  /** 模型等级。flagship（默认）、standard */
   ModelTier?: string;
 }
 

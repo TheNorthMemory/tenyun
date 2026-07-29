@@ -5586,6 +5586,20 @@ declare interface UpgradeDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeRoGroupRequest {
+  /** 实例id。 */
+  InstanceId: string;
+  /** RO组的ID。 */
+  UniqRoGroupId: string;
+}
+
+declare interface UpgradeRoGroupResponse {
+  /** 异步任务ID。 */
+  AsyncRequestId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyRootAccountRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -5953,6 +5967,8 @@ declare interface Cdb {
   UpgradeDBInstance(data: UpgradeDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceResponse>;
   /** 升级实例版本 {@link UpgradeDBInstanceEngineVersionRequest} {@link UpgradeDBInstanceEngineVersionResponse} */
   UpgradeDBInstanceEngineVersion(data: UpgradeDBInstanceEngineVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceEngineVersionResponse>;
+  /** 只读组升级为纯网络转发模式 {@link UpgradeRoGroupRequest} {@link UpgradeRoGroupResponse} */
+  UpgradeRoGroup(data: UpgradeRoGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeRoGroupResponse>;
   /** 验证root账号权限 {@link VerifyRootAccountRequest} {@link VerifyRootAccountResponse} */
   VerifyRootAccount(data: VerifyRootAccountRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyRootAccountResponse>;
 }

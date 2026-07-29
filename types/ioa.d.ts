@@ -542,6 +542,8 @@ declare interface DescribeDeviceHardwareInfoItem {
   Monitor?: string;
   /** 终端备注名 */
   RemarkName?: string;
+  /** BiosUUID（启动盘标识符） */
+  BiosUuid?: string;
 }
 
 /** 终端硬件信息列表响应详情 */
@@ -814,6 +816,8 @@ declare interface DeviceDetail {
   DiskAccessPermission?: number;
   /** 终端备注名 */
   RemarkName?: string;
+  /** BiosUUID（启动盘标识符） */
+  BiosUuid?: string;
 }
 
 /** 业务响应数据 */

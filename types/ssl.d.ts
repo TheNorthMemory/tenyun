@@ -138,6 +138,10 @@ declare interface CertificateExtra {
   SMCert?: number;
   /** 公司类型，取值：1（个人）；2（公司） */
   CompanyType?: number;
+  /** 下一张订阅服务续期证书ID */
+  ServiceRenewCertificateId?: string;
+  /** 上一张订阅服务来源证书ID */
+  ServiceOriginCertificateId?: string;
 }
 
 /** 获取证书列表（DescribeCertificates）返回参数键为 Certificates 的内容。 */
@@ -148,7 +152,7 @@ declare interface Certificates {
   ProjectId?: string;
   /** 证书来源：trustasia：亚洲诚信，upload：用户上传。wosign：沃通sheca：上海CA */
   From?: string;
-  /** 证书套餐类型：null：用户上传证书（没有套餐类型），2：TrustAsia TLS RSA CA， 3：SecureSite 增强型企业版（EV Pro）， 4：SecureSite 增强型（EV）， 5：SecureSite 企业型专业版（OV Pro），6：SecureSite 企业型（OV）， 7：SecureSite 企业型（OV）通配符， 8：Geotrust 增强型（EV）， 9：Geotrust 企业型（OV）， 10：Geotrust 企业型（OV）通配符， 11：TrustAsia 域名型多域名 SSL 证书， 12：TrustAsia 域名型（DV）通配符， 13：TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14：TrustAsia 企业型（OV）SSL 证书（D3）， 15：TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16：TrustAsia 增强型 （EV）SSL 证书（D3）， 17：TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18：GlobalSign 企业型（OV）SSL 证书， 19：GlobalSign 企业型通配符 （OV）SSL 证书， 20：GlobalSign 增强型 （EV）SSL 证书， 21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22：GlobalSign 企业型多域名（OV）SSL 证书， 23：GlobalSign 企业型通配符多域名（OV）SSL 证书，24：GlobalSign 增强型多域名（EV）SSL 证书，25：Wotrus 域名型证书，26：Wotrus 域名型多域名证书，27：Wotrus 域名型通配符证书，28：Wotrus 企业型证书，29：Wotrus 企业型多域名证书，30：Wotrus 企业型通配符证书，31：Wotrus 增强型证书，32：Wotrus 增强型多域名证书，33：WoTrus-国密域名型证书，34：WoTrus-国密域名型证书（多域名），35：WoTrus-国密域名型证书（通配符），37：WoTrus-国密企业型证书，38：WoTrus-国密企业型证书（多域名），39：WoTrus-国密企业型证书（通配符），40：WoTrus-国密增强型证书，41：WoTrus-国密增强型证书（多域名），42：TrustAsia-域名型证书（通配符多域名），43：DNSPod-企业型(OV)SSL证书44：DNSPod-企业型(OV)通配符SSL证书45：DNSPod-企业型(OV)多域名SSL证书46：DNSPod-增强型(EV)SSL证书47：DNSPod-增强型(EV)多域名SSL证书48：DNSPod-域名型(DV)SSL证书49：DNSPod-域名型(DV)通配符SSL证书50：DNSPod-域名型(DV)多域名SSL证书51：DNSPod（国密）-企业型(OV)SSL证书52：DNSPod（国密）-企业型(OV)通配符SSL证书53：DNSPod（国密）-企业型(OV)多域名SSL证书54：DNSPod（国密）-域名型(DV)SSL证书55：DNSPod（国密）-域名型(DV)通配符SSL证书56：DNSPod（国密）-域名型(DV)多域名SSL证书57：SecureSite 企业型专业版多域名(OV Pro)58：SecureSite 企业型多域名(OV)59：SecureSite 增强型专业版多域名(EV Pro)60：SecureSite 增强型多域名(EV)61：Geotrust 增强型多域名(EV)75：SecureSite 企业型(OV)76：SecureSite 企业型(OV)通配符77：SecureSite 增强型(EV)78：Geotrust 企业型(OV)79：Geotrust 企业型(OV)通配符80：Geotrust 增强型(EV)81：GlobalSign 企业型（OV）SSL证书82：GlobalSign 企业型通配符 （OV）SSL证书83：TrustAsia C1 DV Free85：GlobalSign 增强型 （EV）SSL证书88：GlobalSign 企业型通配符多域名 （OV）SSL证书89：GlobalSign 企业型多域名 （OV）SSL证书90：GlobalSign 增强型多域名（EV） SSL证书91：Geotrust 增强型多域名(EV)92：SecureSite 企业型专业版多域名(OV Pro)93：SecureSite 企业型多域名(OV)94：SecureSite 增强型专业版多域名(EV Pro)95：SecureSite 增强型多域名(EV)96：SecureSite 增强型专业版(EV Pro)97：SecureSite 企业型专业版(OV Pro)98：CFCA 企业型(OV)SSL证书99：CFCA 企业型多域名(OV)SSL证书100：CFCA 企业型通配符(OV)SSL证书101：CFCA 增强型(EV)SSL证书 */
+  /** 证书套餐类型：null：用户上传证书（没有套餐类型），2：TrustAsia TLS RSA CA，3：SecureSite 增强型企业版（EV Pro），4：SecureSite 增强型（EV），5：SecureSite 企业型专业版（OV Pro），6：SecureSite 企业型（OV），7：SecureSite 企业型（OV）通配符，8：Geotrust 增强型（EV），9：Geotrust 企业型（OV），10：Geotrust 企业型（OV）通配符，11：TrustAsia 域名型多域名 SSL 证书，12：TrustAsia 域名型（DV）通配符，13：TrustAsia 企业型通配符（OV）SSL 证书（D3），14：TrustAsia 企业型（OV）SSL 证书（D3），15：TrustAsia 企业型多域名 （OV）SSL 证书（D3），16：TrustAsia 增强型 （EV）SSL 证书（D3），17：TrustAsia 增强型多域名（EV）SSL 证书（D3），18：GlobalSign 企业型（OV）SSL 证书，19：GlobalSign 企业型通配符 （OV）SSL 证书，20：GlobalSign 增强型 （EV）SSL 证书，21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3），22：GlobalSign 企业型多域名（OV）SSL 证书，23：GlobalSign 企业型通配符多域名（OV）SSL 证书，24：GlobalSign 增强型多域名（EV）SSL 证书，25：Wotrus 域名型证书，26：Wotrus 域名型多域名证书，27：Wotrus 域名型通配符证书，28：Wotrus 企业型证书，29：Wotrus 企业型多域名证书，30：Wotrus 企业型通配符证书，31：Wotrus 增强型证书，32：Wotrus 增强型多域名证书，33：WoTrus-国密域名型证书，34：WoTrus-国密域名型证书（多域名），35：WoTrus-国密域名型证书（通配符），37：WoTrus-国密企业型证书，38：WoTrus-国密企业型证书（多域名），39：WoTrus-国密企业型证书（通配符），40：WoTrus-国密增强型证书，41：WoTrus-国密增强型证书（多域名），42：TrustAsia-域名型证书（通配符多域名），43：DNSPod-企业型(OV)SSL证书44：DNSPod-企业型(OV)通配符SSL证书45：DNSPod-企业型(OV)多域名SSL证书46：DNSPod-增强型(EV)SSL证书47：DNSPod-增强型(EV)多域名SSL证书48：DNSPod-域名型(DV)SSL证书49：DNSPod-域名型(DV)通配符SSL证书50：DNSPod-域名型(DV)多域名SSL证书51：DNSPod（国密）-企业型(OV)SSL证书52：DNSPod（国密）-企业型(OV)通配符SSL证书53：DNSPod（国密）-企业型(OV)多域名SSL证书54：DNSPod（国密）-域名型(DV)SSL证书55：DNSPod（国密）-域名型(DV)通配符SSL证书56：DNSPod（国密）-域名型(DV)多域名SSL证书57：SecureSite 企业型专业版多域名(OV Pro)58：SecureSite 企业型多域名(OV)59：SecureSite 增强型专业版多域名(EV Pro)60：SecureSite 增强型多域名(EV)61：Geotrust 增强型多域名(EV)75：SecureSite 企业型(OV)76：SecureSite 企业型(OV)通配符77：SecureSite 增强型(EV)78：Geotrust 企业型(OV)79：Geotrust 企业型(OV)通配符80：Geotrust 增强型(EV)81：GlobalSign 企业型（OV）SSL证书82：GlobalSign 企业型通配符 （OV）SSL证书83：TrustAsia C1 DV Free85：GlobalSign 增强型 （EV）SSL证书88：GlobalSign 企业型通配符多域名 （OV）SSL证书89：GlobalSign 企业型多域名 （OV）SSL证书90：GlobalSign 增强型多域名（EV） SSL证书91：Geotrust 增强型多域名(EV)92：SecureSite 企业型专业版多域名(OV Pro)93：SecureSite 企业型多域名(OV)94：SecureSite 增强型专业版多域名(EV Pro)95：SecureSite 增强型多域名(EV)96：SecureSite 增强型专业版(EV Pro)97：SecureSite 企业型专业版(OV Pro)98：CFCA 企业型(OV)SSL证书99：CFCA 企业型多域名(OV)SSL证书100：CFCA 企业型通配符(OV)SSL证书101：CFCA 增强型(EV)SSL证书 */
   PackageType?: string;
   /** 证书类型：CA = 客户端证书，SVR = 服务器证书。 */
   CertificateType?: string;
@@ -258,12 +262,16 @@ declare interface Certificates {
   IsHostingUploadRenewCert?: boolean;
   /** 订阅服务ID */
   ServiceId?: string;
-  /** 订阅服务状态枚举值： initing： 未激活 running： 生效中 expired： 已过期 refunded： 已退款 nearExpire： 即将到期 */
+  /** 订阅服务状态枚举值：initing： 未激活running： 生效中expired： 已过期refunded： 已退款nearExpire： 即将到期 */
   ServiceStatus?: string;
   /** 订阅服务开始时间 */
   CertServiceBeginTime?: string;
   /** 订阅服务结束时间 */
   CertServiceEndTime?: string;
+  /** 是否开启订阅服务共享 */
+  CertServiceShareEnabled?: boolean;
+  /** 当前订阅服务下已经签发未过期的证书数量 */
+  CertServiceValidCertificateCount?: number;
 }
 
 /** clb实例详情 */
@@ -3091,6 +3099,8 @@ declare interface UploadUpdateCertificateInstanceRequest {
   CertificatePrivateKey: string;
   /** 云资源需要部署的地域列表，支持地域的云资源类型必传，取值：clb */
   ResourceTypesRegions?: ResourceTypeRegions[];
+  /** 证书ID */
+  CertificateId?: string;
 }
 
 declare interface UploadUpdateCertificateInstanceResponse {

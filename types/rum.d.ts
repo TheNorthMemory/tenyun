@@ -2945,7 +2945,7 @@ declare interface DescribeRumGroupLogV2Request {
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
   /** 查询日志结束时间（必填） */
   EndTime: number;
@@ -2971,7 +2971,7 @@ declare interface DescribeRumLogDetailsV2Request {
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
   /** 查询日志结束时间（必填）格式为时间戳 毫秒 */
   EndTime: number;
@@ -3017,13 +3017,13 @@ declare interface DescribeRumLogExportV2Request {
   Name: string;
   /** 查询日志开始时间(必填) */
   StartTime: number;
-  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
   /** 查询日志结束时间(必填) */
   EndTime: number;
   /** 项目ID */
   ID: number;
-  /** 注意：这个字段必选，不能为空！选择要导出哪些字段的参数，对应日志的列，可查看文档：https://cloud.tencent.com/document/product/248/87223枚举值：level： 日志类型url： URLip： 用户终端IPversion： 版本 */
+  /** 注意：这个字段必选，不能为空！选择要导出哪些字段的参数，对应日志的列，可查看文档：日志查询相关枚举值：level： 日志类型url： URLip： 用户终端IPversion： 版本 */
   Fields?: string[];
 }
 
@@ -3097,7 +3097,7 @@ declare interface DescribeRumLogTotalV2Request {
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
   /** 查询日志结束时间（必填）格式为时间戳 毫秒 */
   EndTime: number;
@@ -3141,7 +3141,7 @@ declare interface DescribeRumStatsLogListV2Request {
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
-  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223 */
+  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
   /** 查询日志结束时间（必填） */
   EndTime: number;

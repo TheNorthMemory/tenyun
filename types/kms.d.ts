@@ -66,6 +66,8 @@ declare interface DataKeyMetadata {
   AccountUin?: number;
   /** 成员账号名称 */
   AccountName?: string;
+  /** 创建者UIN */
+  CreatorUinString?: string;
 }
 
 /** 同步任务的目标地域列表，包括地域和集群信息。如果集群为空，表示公有云共享集群，如果集群不为空，表示独享集群。 */
@@ -156,6 +158,8 @@ declare interface KeyMetadata {
   AccountUin?: number;
   /** 成员账号名称 */
   AccountName?: string;
+  /** 创建者UIN */
+  CreatorUinString?: string;
 }
 
 /** 共享成员账号信息 */
@@ -934,6 +938,10 @@ declare interface GetServiceStatusResponse {
   QpsTotalLimit?: number;
   /** 地域下的QPS */
   RegionsQps?: RegionQps[];
+  /** 资源的地域信息 */
+  ResourceZone?: number;
+  /** 资源的地域可用区信息 */
+  ResourceRegion?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

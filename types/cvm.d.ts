@@ -1433,27 +1433,27 @@ declare interface CreateLaunchTemplateRequest {
   LaunchTemplateName: string;
   /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。 */
   Placement: Placement;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-xxx`。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的`ImageId`字段。 */
+  /** 指定有效的镜像ID，格式形如img-xxx。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：公共镜像、自定义镜像、共享镜像的镜像ID可通过登录控制台查询；服务镜像市场的镜像ID可通过云市场查询。通过调用接口 DescribeImages ，传入InstanceType获取当前机型支持的镜像列表，取返回信息中的ImageId字段。 */
   ImageId: string;
   /** 实例启动模板版本描述。长度为2~256个英文或中文字符，默认为空字符。 */
   LaunchTemplateVersionDescription?: string;
-  /** 实例机型。不同实例机型指定了不同的资源规格。对于付费模式为PREPAID或POSTPAID\_BY\_HOUR的实例创建，具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格](https://cloud.tencent.com/document/product/213/11518)描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。 */
+  /** 实例机型。不同实例机型指定了不同的资源规格。对于付费模式为PREPAID或POSTPAID_BY_HOUR的实例创建，具体取值可通过调用接口DescribeInstanceTypeConfigs来获得最新的规格表或参见实例规格描述。若不指定该参数，则系统将根据当前地域的资源售卖情况动态指定默认机型。对于付费模式为CDHPAID的实例创建，该参数以"CDH_"为前缀，根据CPU和内存配置生成，具体形式为：CDH_XCXG，例如对于创建CPU为1核，内存为1G大小的专用宿主机的实例，该参数应该为CDH_1C1G。 */
   InstanceType?: string;
   /** 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
   SystemDisk?: SystemDisk;
-  /** 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘，详情请参考[ 云硬盘使用限制](https://cloud.tencent.com/document/product/362/5145)。 */
+  /** 实例数据盘配置信息。若不指定该参数，则默认不购买数据盘。支持购买的时候指定21块数据盘，其中最多包含1块LOCAL_BASIC数据盘或者LOCAL_SSD数据盘，最多包含20块CLOUD_BASIC数据盘、CLOUD_PREMIUM数据盘或者CLOUD_SSD数据盘，详情请参考 云硬盘使用限制。 */
   DataDisks?: DataDisk[];
   /** 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。若不指定该参数，则默认使用基础网络。若在此参数中指定了私有网络IP，即表示每个实例的主网卡IP；同时，InstanceCount参数必须与私有网络IP的个数一致且不能大于20。 */
   VirtualPrivateCloud?: VirtualPrivateCloud;
   /** 公网带宽相关信息设置。若不指定该参数，则默认公网带宽为0Mbps。 */
   InternetAccessible?: InternetAccessible;
-  /** 购买实例数量。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见[CVM实例购买限制](https://cloud.tencent.com/document/product/213/2664)。 */
+  /** 购买实例数量。默认取值：1。指定购买实例的数量不能超过用户所能购买的剩余配额数量，具体配额相关限制详见CVM实例购买限制。 */
   InstanceCount?: number;
-  /** 实例显示名称。不指定实例显示名称则默认显示‘未命名’。购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server_{R:3}`，购买1台时，实例显示名称为`server_3`；购买2台时，实例显示名称分别为`server_3`，`server_4`。支持指定多个模式串`{R:x}`。购买多台实例，如果不指定模式串，则在实例显示名称添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server_`，购买2台时，实例显示名称分别为`server_1`，`server_2`。最多支持128个字符（包含模式串）。 */
+  /** 实例显示名称。不指定实例显示名称则默认显示‘未命名’。购买多台实例，如果指定模式串{R:x}，表示生成数字[x, x+n-1]，其中n表示购买实例的数量，例如server_{R:3}，购买1台时，实例显示名称为server_3；购买2台时，实例显示名称分别为server_3，server_4。支持指定多个模式串{R:x}。购买多台实例，如果不指定模式串，则在实例显示名称添加后缀1、2...n，其中n表示购买实例的数量，例如server_，购买2台时，实例显示名称分别为server_1，server_2。最多支持128个字符（包含模式串）。 */
   InstanceName?: string;
   /** 实例登录设置。通过该参数可以设置实例的登录方式为密钥或保持镜像的原始登录设置。 */
   LoginSettings?: LoginSettings;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的 `SecurityGroupId` 字段来获取。若不指定该参数，则绑定指定项目下的默认安全组，如默认安全组不存在则将自动创建。 */
+  /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的 SecurityGroupId 字段来获取。若不指定该参数，则绑定指定项目下的默认安全组，如默认安全组不存在则将自动创建。 */
   SecurityGroupIds?: string[];
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。若不指定该参数，则默认公共镜像开启云监控、云安全服务；自定义镜像与镜像市场镜像默认不开启云监控，云安全服务，而使用镜像里保留的服务。 */
   EnhancedService?: EnhancedService;
@@ -1463,38 +1463,38 @@ declare interface CreateLaunchTemplateRequest {
   HostName?: string;
   /** 定时任务。通过该参数可以为实例指定定时任务，目前仅支持定时销毁。 */
   ActionTimer?: ActionTimer;
-  /** 置放群组id，仅支持指定一个。该参数可以通过调用 [ DescribeDisasterRecoverGroups ](https://cloud.tencent.com/document/api/213/17810) 的返回值中的 `DisasterRecoverGroupId` 字段来获取。 */
+  /** 置放群组id，仅支持指定一个。该参数可以通过调用 DescribeDisasterRecoverGroups 的返回值中的 DisasterRecoverGroupId 字段来获取。 */
   DisasterRecoverGroupIds?: string[];
   /** 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云服务器实例。 */
   TagSpecification?: TagSpecification[];
   /** 实例的市场相关选项，如竞价实例相关参数，若指定实例的付费模式为竞价付费则该参数必传。 */
   InstanceMarketOptions?: InstanceMarketOptionsRequest;
-  /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。 */
+  /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅Windows和Linux启动时运行命令。 */
   UserData?: string;
   /** 是否只预检此次请求。true：发送检查请求，不会创建实例。检查项包括是否填写了必需参数，请求格式，业务限制和云服务器库存。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId.false（默认）：发送正常请求，通过检查后直接创建实例。 */
   DryRun?: boolean;
-  /** CAM角色名称。可通过[ DescribeRoleList ](https://cloud.tencent.com/document/product/598/36223)接口返回值中的`RoleName `获取。 */
+  /** CAM角色名称。可通过 DescribeRoleList 接口返回值中的RoleName获取。 */
   CamRoleName?: string;
-  /** 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。该参数可以通过调用 [DescribeHpcClusters](https://cloud.tencent.com/document/api/213/83220) 的返回值中的 `HpcClusterId` 字段来获取。 */
+  /** 高性能计算集群ID。若创建的实例为高性能计算实例，需指定实例放置的集群，否则不可指定。该参数可以通过调用 DescribeHpcClusters 的返回值中的 HpcClusterId 字段来获取。 */
   HpcClusterId?: string;
-  /** 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
+  /** 实例计费类型。PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：按小时后付费CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）SPOTPAID：竞价付费默认值：POSTPAID_BY_HOUR。 */
   InstanceChargeType?: string;
   /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
   InstanceChargePrepaid?: InstanceChargePrepaid;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：TRUE：表示开启实例保护，不允许通过api接口删除实例FALSE：表示关闭实例保护，允许通过api接口删除实例默认取值：FALSE。 */
   DisableApiTermination?: boolean;
-  /** 实例是否开启巨型帧，取值范围： true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。 支持巨型帧的实例规格： [实例规格](https://cloud.tencent.com/document/product/213/11518) */
+  /** 实例是否开启巨型帧，取值范围：<li/> true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。<li/>false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。 支持巨型帧的实例规格： 实例规格 */
   EnableJumboFrame?: boolean;
   /** 标签描述列表。通过指定该参数可以绑定标签到实例启动模板。 */
   LaunchTemplateTagSpecification?: TagSpecification[];
-  /** 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。**注：内测中**。 */
+  /** 自定义metadata，支持创建 CVM 时添加自定义元数据键值对。注：内测中。 */
   Metadata?: Metadata;
-  /** 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。- Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] - Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3] **注：内测中**。 */
+  /** 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3]注：内测中。 */
   TemplateDataModifyAction?: string;
 }
 
 declare interface CreateLaunchTemplateResponse {
-  /** 当通过本接口来创建实例启动模板时会返回该参数，表示创建成功的实例启动模板`ID`。 */
+  /** 当通过本接口来创建实例启动模板时会返回该参数，表示创建成功的实例启动模板ID。 */
   LaunchTemplateId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

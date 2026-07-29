@@ -1231,11 +1231,11 @@ declare interface DescribeLoadBalancerDetailResponse {
 }
 
 declare interface DescribeLoadBalancersRequest {
-  /** 查询过滤条件，支持以下几个字段- **LoadBalancerId**: 负载均衡实例 ID- **LoadBalancerName**: 负载均衡名称- **LoadBalancerStatus**: 负载均衡状态- **VpcId**: 私有网络 ID- **tag:tag-key**：按标签键值对筛选，tag-key 请替换为实际的标签键。例如 `tag:env` 表示按标签键 `env` 筛选。- **AddressType**: 网络类型 - **Intranet**: 内网 - **Internet**: 公网 - **AddressIpVersion**: - **IPv4**: IPv4 地址 - **IPv6** IPv6 地址 */
+  /** 查询过滤条件，支持以下几个字段LoadBalancerId: 负载均衡实例 IDLoadBalancerName: 负载均衡名称LoadBalancerStatus: 负载均衡状态VpcId: 私有网络 IDtag:tag-key：按标签键值对筛选，tag-key 请替换为实际的标签键。例如 tag:env 表示按标签键 env 筛选。AddressType: 网络类型Intranet: 内网Internet: 公网 AddressIpVersion:IPv4: IPv4 地址IPv6 IPv6 地址SecurityGroupId: 安全组ID */
   Filters?: Filter[];
-  /** 分批次查询时每次显示的条目数。取值范围：**1**~**100**，默认值：**20**。 */
+  /** 分批次查询时每次显示的条目数。取值范围：1~100，默认值：20。 */
   MaxResults?: number;
-  /** 是否拥有下一次查询的令牌（Token）。取值：- 第一次查询和没有下一次查询时，均无需填写。- 如果有下一次查询，取值为上一次API调用返回的**NextToken**值。 */
+  /** 是否拥有下一次查询的令牌（Token）。取值：第一次查询和没有下一次查询时，均无需填写。如果有下一次查询，取值为上一次API调用返回的NextToken值。 */
   NextToken?: string;
 }
 
@@ -1244,7 +1244,7 @@ declare interface DescribeLoadBalancersResponse {
   LoadBalancers?: LoadBalancer[];
   /** 分批次查询时每次显示的条目数。 */
   MaxResults?: number;
-  /** 是否拥有下一次查询的令牌（Token）。取值：- 如果**NextToken**为空表示没有下一次查询。- 如果**NextToken**有返回值，该取值表示下一次查询开始的令牌。 */
+  /** 是否拥有下一次查询的令牌（Token）。取值：如果NextToken为空表示没有下一次查询。如果NextToken有返回值，该取值表示下一次查询开始的令牌。 */
   NextToken?: string;
   /** 列表条目数。 */
   TotalCount?: number;

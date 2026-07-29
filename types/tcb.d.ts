@@ -112,6 +112,62 @@ declare interface BanConfig {
   CountryBlackList?: string[];
 }
 
+/** 构建命令 */
+declare interface BuildCommands {
+  /** 平台生成默认 install step 时执行 */
+  InstallCmd?: string;
+  /** 平台生成默认build step 时执行 */
+  BuildCmd?: string;
+  /** 平台生成默认deploy step 时执行 */
+  DeployCmd?: string;
+}
+
+/** 构建密钥 */
+declare interface BuildSecret {
+  /** 标准化为 DNS Label 风格；构建时注入为 $SECRET_<NAME>（同时也提供原大写形式 $SECRET_<NAME_UPPERCASE>） */
+  Name?: string;
+  /** 平台 AES 加密落库；DescribeVersion 永不回显明文 */
+  Value?: string;
+}
+
+/** 构建触发的源码来源: git,cos,inline */
+declare interface BuildSource {
+  /** 源码来源类型，取值："git" "zip" */
+  Type?: string;
+  /** Git 仓库 HTTPS URL；或 COS 下载完整 URL；与 CodeUrlWithAuth / CosTimestamp 之一非空（zip 二阶段上传时可留空） */
+  Repo?: string;
+  /** 分支 tag commit；Git 默认 main，zip 模式下忽略 */
+  Ref?: string;
+  /** "git" "github" "gitlab" "gitee" "coding"；私有仓必填，平台据此走 OAuth 鉴权 */
+  Channel?: string;
+  /** 是否私有仓；true 时平台自动注入 CodeUrlWithAuth */
+  IsPrivate?: boolean;
+  /** 调用方显式传入的带鉴权 clone URL 或带签名的 zip 下载直链（优先级最高，会覆盖平台 OAuth / 自动签名） */
+  CodeUrlWithAuth?: string;
+  /** 仅 Type=zip/cos 时使用。配合 zip 二阶段上传：填 DescribeCloudAppCosInfo 返回的 UnixTimestamp，平台据此自动签名出 ZIP_FILE_URL */
+  CosTimestamp?: string;
+  /** 仅 Type=zip/cos 时使用。zip 文件后缀，默认 .zip；与 CosTimestamp 配合定位 COS 对象 */
+  CosSuffix?: string;
+}
+
+/** 构建步骤 */
+declare interface BuildStep {
+  /** 步骤名（建议 kebab-case，如 build-image），出现在 DescribeCloudAppVersion.Steps[].Name */
+  Name?: string;
+  /** shell 脚本，支持单行或多行 */
+  Command?: string;
+}
+
+/** 步骤构建执行状态 */
+declare interface BuildStepStatus {
+  /** 构建步骤名称 */
+  Name?: string;
+  /** 构建状态 */
+  Status?: string;
+  /** 构建耗时 */
+  Duration?: string;
+}
+
 /** 部署服务信息 */
 declare interface CloudAppServiceItem {
   /** 服务名 */
@@ -132,6 +188,26 @@ declare interface CloudAppServiceItem {
   LatestBuildTime?: string;
   /** 部署类型 */
   DeployType?: string;
+}
+
+/** 服务版本信息 */
+declare interface CloudAppVersionItem {
+  /** 版本名 */
+  VersionName?: string;
+  /** 构建方式 */
+  BuildType?: string;
+  /** 构建Id */
+  BuildId?: string;
+  /** 构建状态 */
+  Status?: string;
+  /** 框架名 */
+  Framework?: string;
+  /** 构建配置 */
+  StaticConfig?: StaticConfig;
+  /** 构建时间 */
+  BuildTime?: string;
+  /** 构建步骤 */
+  Steps?: BuildStepStatus[] | null;
 }
 
 /** cls日志信息 */
@@ -1244,6 +1320,50 @@ declare interface SMSTemplateParams {
   Value?: string | null;
 }
 
+/** 静态托管的执行命令 */
+declare interface StaticCmd {
+  /** 构建命令 */
+  BuildCmd?: string;
+  /** 安装命令 */
+  InstallCmd?: string;
+  /** 部署命令 */
+  DeployCmd?: string;
+}
+
+/** 云应用静态托管配置 */
+declare interface StaticConfig {
+  /** 框架类型：vue、react、nextjs 等 */
+  Framework?: string | null;
+  /** Node.js 版本，默认 20 */
+  NodeJsVersion?: string | null;
+  /** 访问路径 */
+  AppPath?: string | null;
+  /** 构建目录 */
+  BuildPath?: string | null;
+  /** ZIP 文件地址（BuildType=ZIP/TEMPLATE 时使用） */
+  ZipFileUrl?: string | null;
+  /** COS 时间戳 */
+  CosTimestamp?: string | null;
+  /** COS 文件后缀 */
+  CosSuffix?: string | null;
+  /** 代码源平台：github、gitlab、gitee */
+  CodeSource?: string | null;
+  /** 代码仓库 */
+  CodeRepo?: string | null;
+  /** 代码分支 */
+  CodeBranch?: string | null;
+  /** 构建参数 JSON 字符串 */
+  StaticCmd?: StaticCmd | null;
+  /** 构建环境变量 JSON 字符串 */
+  StaticEnv?: StaticEnvironment | null;
+}
+
+/** 静态托管的环境变量参数 */
+declare interface StaticEnvironment {
+  /** 环境变量数组 */
+  Variables?: Variable[] | null;
+}
+
 /** 静态CDN资源信息 */
 declare interface StaticStorageInfo {
   /** 静态CDN域名 */
@@ -1406,6 +1526,14 @@ declare interface ValueDetail {
   PackageDeductValue?: number;
   /** 资源点按量用量 */
   ReportValue?: number;
+}
+
+/** 对象变量 */
+declare interface Variable {
+  /** 变量的名称 */
+  Key?: string;
+  /** 变量的值 */
+  Value?: string;
 }
 
 /** 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，自定义短信包可以通过自定义apis或者自定义短信模板的方式接入，推荐使用云开发默认短信包，方便快捷。- 如果使用自定义APIs发送短信，方法命名规则方法名称：发送验证码方法标识：SendVerificationCode入参Mobile：字符串（手机号，如：“+86 + 手机号”）VerificationCode：字符串（验证码，如：“123456”）返回值ErrorCode：int（0 表示成功，非 0 表示失败）ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息）- 如果使用自定义短信模板发送短信时，需要按照对应的短信服务商的要求，申请并审核通过对应的短信模板后，在云开发平台配置自定义短信模板，云开发平台对于短信模板不会做其他操作和限制，只做短信发送的逻辑，其他的操作限制都由短信服务商自身提供。 */
@@ -1644,6 +1772,40 @@ declare interface CreateBillDealResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudAppRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务名 */
+  ServiceName: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 构建类型 */
+  BuildType?: string;
+  /** 静态应用创建配置信息 */
+  StaticConfig?: StaticConfig;
+  /** 源码定义 */
+  Source?: BuildSource;
+  /** Commands 与 CustomSteps 至少填一个 */
+  Commands?: BuildCommands;
+  /** Commands 与 CustomSteps 至少填一个，docker 镜像构建场景强烈建议用 CustomSteps */
+  Env?: Variable[];
+  /** 非敏感环境变量，构建容器中以 $KEY 引用 */
+  CustomSteps?: BuildStep[];
+  /** 敏感凭证（AES 加密落库），构建容器中以 $SECRET_NAME 引用 */
+  Secrets?: BuildSecret[];
+}
+
+declare interface CreateCloudAppResponse {
+  /** 构建Id */
+  BuildId?: string;
+  /** 版本名称 */
+  VersionName?: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomLoginKeyRequest {
   /** 环境id */
   EnvId: string;
@@ -1874,6 +2036,40 @@ declare interface DeleteAuthDomainResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudAppRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 服务名 */
+  ServiceName: string;
+}
+
+declare interface DeleteCloudAppResponse {
+  /** 是否删除成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudAppVersionRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 服务名 */
+  ServiceName: string;
+  /** 版本名 */
+  VersionName: string;
+}
+
+declare interface DeleteCloudAppVersionResponse {
+  /** 是否删除成功 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteHTTPServiceRouteRequest {
   /** 环境ID */
   EnvId: string;
@@ -2056,6 +2252,62 @@ declare interface DescribeClientResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudAppCosInfoRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 服务名 */
+  ServiceName: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 时间戳 */
+  UnixTimestamp?: string;
+  /** 文件后缀 */
+  Suffix?: string;
+  /** 是否需要下载 */
+  NeedDownload?: boolean;
+}
+
+declare interface DescribeCloudAppCosInfoResponse {
+  /** 上传url */
+  UploadUrl?: string;
+  /** 上传header */
+  UploadHeaders?: KVPair[];
+  /** 下载链接 */
+  DownloadUrl?: string;
+  /** 下载Httpheader */
+  DownloadHeaders?: KVPair[];
+  /** 时间戳 */
+  UnixTimestamp?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudAppInfoRequest {
+}
+
+declare interface DescribeCloudAppInfoResponse {
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 框架名称 */
+  Framework?: string;
+  /** 域名 */
+  Domain?: string;
+  /** 构建路径 */
+  AppPath?: string;
+  /** 服务创建时间 */
+  CreateTime?: string;
+  /** 最新版本名 */
+  LatestVersionName?: string;
+  /** 最新版本状态 */
+  LatestStatus?: string;
+  /** 最新版本构建时间 */
+  LatestBuildTime?: string;
+  /** 部署类型 */
+  DeployType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudAppListRequest {
   /** 环境ID */
   EnvId: string;
@@ -2074,6 +2326,60 @@ declare interface DescribeCloudAppListResponse {
   ServiceList?: CloudAppServiceItem[];
   /** 总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudAppVersionListRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 服务名 */
+  ServiceName: string;
+  /** 页大小 */
+  PageSize?: number;
+  /** 页号 */
+  PageNo?: number;
+}
+
+declare interface DescribeCloudAppVersionListResponse {
+  /** 版本列表 */
+  VersionList?: CloudAppVersionItem[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudAppVersionRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 服务名 */
+  ServiceName: string;
+  /** 部署类型 */
+  DeployType: string;
+  /** 版本名 */
+  VersionName?: string;
+  /** 构建id */
+  BuildId?: string;
+}
+
+declare interface DescribeCloudAppVersionResponse {
+  /** 构建类型 */
+  BuildType?: string;
+  /** 构建Id */
+  BuildId?: string;
+  /** 构建状态 */
+  Status?: string;
+  /** 框架 */
+  Framework?: string;
+  /** 静态托管配置信息 */
+  StaticConfig?: StaticConfig;
+  /** 构建时间 */
+  BuildTime?: string;
+  /** []BuildStepStatus 的 JSON 序列化 */
+  Steps?: BuildStepStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3317,6 +3623,8 @@ declare interface Tcb {
   CreateAuthDomain(data: CreateAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthDomainResponse>;
   /** 创建计费订单 {@link CreateBillDealRequest} {@link CreateBillDealResponse} */
   CreateBillDeal(data: CreateBillDealRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBillDealResponse>;
+  /** 创建云应用 {@link CreateCloudAppRequest} {@link CreateCloudAppResponse} */
+  CreateCloudApp(data: CreateCloudAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudAppResponse>;
   /** 自定义登录密钥生成 {@link CreateCustomLoginKeyRequest} {@link CreateCustomLoginKeyResponse} */
   CreateCustomLoginKey(data: CreateCustomLoginKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomLoginKeyResponse>;
   /** 创建环境 {@link CreateEnvRequest} {@link CreateEnvResponse} */
@@ -3343,6 +3651,10 @@ declare interface Tcb {
   DeleteApiKey(data: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
   /** 删除合法域名 {@link DeleteAuthDomainRequest} {@link DeleteAuthDomainResponse} */
   DeleteAuthDomain(data: DeleteAuthDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthDomainResponse>;
+  /** 删除云应用服务 {@link DeleteCloudAppRequest} {@link DeleteCloudAppResponse} */
+  DeleteCloudApp(data: DeleteCloudAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudAppResponse>;
+  /** 删除云应用服务版本 {@link DeleteCloudAppVersionRequest} {@link DeleteCloudAppVersionResponse} */
+  DeleteCloudAppVersion(data: DeleteCloudAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudAppVersionResponse>;
   /** 删除HTTP访问服务路由 {@link DeleteHTTPServiceRouteRequest} {@link DeleteHTTPServiceRouteResponse} */
   DeleteHTTPServiceRoute(data: DeleteHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHTTPServiceRouteResponse>;
   /** 删除第三方认证源 {@link DeleteProviderRequest} {@link DeleteProviderResponse} */
@@ -3365,8 +3677,16 @@ declare interface Tcb {
   DescribeBillingInfo(data?: DescribeBillingInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBillingInfoResponse>;
   /** 查询应用客户端详情 {@link DescribeClientRequest} {@link DescribeClientResponse} */
   DescribeClient(data: DescribeClientRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientResponse>;
+  /** 获取云应用cos信息 {@link DescribeCloudAppCosInfoRequest} {@link DescribeCloudAppCosInfoResponse} */
+  DescribeCloudAppCosInfo(data: DescribeCloudAppCosInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppCosInfoResponse>;
+  /** 查询云应用服务信息 {@link DescribeCloudAppInfoRequest} {@link DescribeCloudAppInfoResponse} */
+  DescribeCloudAppInfo(data?: DescribeCloudAppInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppInfoResponse>;
   /** 查询云应用服务列表 {@link DescribeCloudAppListRequest} {@link DescribeCloudAppListResponse} */
   DescribeCloudAppList(data: DescribeCloudAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppListResponse>;
+  /** 查询云应用服务版本信息 {@link DescribeCloudAppVersionRequest} {@link DescribeCloudAppVersionResponse} */
+  DescribeCloudAppVersion(data: DescribeCloudAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppVersionResponse>;
+  /** 查询云应用服务版本列表 {@link DescribeCloudAppVersionListRequest} {@link DescribeCloudAppVersionListResponse} */
+  DescribeCloudAppVersionList(data: DescribeCloudAppVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppVersionListResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
   /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */

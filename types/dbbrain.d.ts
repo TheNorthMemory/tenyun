@@ -276,6 +276,16 @@ declare interface DiagHistoryEventItem {
   Vport?: number;
 }
 
+/** 健康报告URL信息 */
+declare interface DiagReportUrlItem {
+  /** 异步任务ID。 */
+  AsyncRequestId?: number | null;
+  /** 报告下载地址。 */
+  ReportUrl?: string | null;
+  /** 链接过期时间，Unix时间戳（秒），-1表示永不过期。 */
+  ExpireTime?: number | null;
+}
+
 /** 异常事件信息。 */
 declare interface EventInfo {
   /** 事件 ID 。 */
@@ -316,16 +326,18 @@ declare interface HealthReportTask {
   Source?: string;
   /** 任务完成进度，单位%。 */
   Progress?: number;
-  /** 任务创建时间。 */
+  /** 任务创建时间，如“2025-09-30 12:13:14”。 */
   CreateTime?: string;
-  /** 任务开始执行时间。 */
+  /** 任务开始执行时间，如“2025-09-30 13:13:14”。 */
   StartTime?: string;
-  /** 任务完成执行时间。 */
+  /** 任务完成执行时间，如“2025-09-30 14:13:14”。 */
   EndTime?: string;
   /** 任务所属实例的基础信息。 */
   InstanceInfo?: InstanceBasicInfo;
   /** 健康报告中的健康信息。 */
   HealthStatus?: HealthStatus;
+  /** 任务所属实例的标签信息 */
+  Tags?: TagInfo[];
 }
 
 /** 获取健康得分返回的详情。 */
@@ -418,7 +430,7 @@ declare interface InstanceBasicInfo {
   EngineVersion?: string;
   /** CPU数量，对于Redis为0。 */
   Cpu?: number;
-  /** 实例部署模式。 */
+  /** 实例部署模式。MySQL 实例类型取值包括"STANDARD"-标准类型,"CUSTOM"-普通类型, "EXCLUSIVE"-独占类型, "CUSTOMER_AGENT"-用户代理类型, "CUSTOMER_DIRECT"-用户直连类型,"CLOUD_NATIVE_CLUSTER_EXCLUSIVE"-云原生独占集群, "CLOUD_NATIVE_CLUSTER"-云原生集群。 */
   DeployMode?: string;
   /** 实例内存配置。 */
   InstanceConf?: RedisInstanceConf;
@@ -528,6 +540,26 @@ declare interface InstanceInfo {
   AgentStatus?: string;
   /** 自建MySQL的实例状态，"not_attached" - 未连接，"attached" - 连接正常，"failed" - 连接失败，"stopped" - 停止监控，unknown- 未知。 */
   InstanceStatus?: string;
+}
+
+/** 数据库实例基本信息 */
+declare interface InstanceItem {
+  /** 实例ID。 */
+  InstanceId?: string;
+  /** 数据库类型，如 mysql、cynosdb、mariadb、dcdb、mongodb、postgres、redis、dbbrain-mysql、tdstore。 */
+  Product?: string;
+  /** 地域英文ID。 */
+  Region?: string;
+  /** 集群ID，仅集群类产品返回。 */
+  ClusterId?: string | null;
+  /** 引擎版本。 */
+  EngineVersion?: string | null;
+  /** 实例状态，1表示运行中。 */
+  Status?: number | null;
+  /** 实例创建时间。 */
+  CreateTime?: string | null;
+  /** 实例到期时间。 */
+  DeadlineTime?: string | null;
 }
 
 /** 指标信息。 */
@@ -1174,6 +1206,28 @@ declare interface TableSpaceTimeSeries {
   SeriesData?: MonitorFloatMetricSeriesData;
 }
 
+/** 标签过滤组。组内 TagPairs 之间为 OR 关系；不同 TagFilterGroup 之间为 AND 关系。 */
+declare interface TagFilterGroup {
+  /** 过滤条件-标签组 */
+  TagPairs?: TagPair[];
+}
+
+/** 实例标签信息 */
+declare interface TagInfo {
+  /** 实例标签key */
+  TagKey?: string;
+  /** 实例标签value */
+  TagValue?: string;
+}
+
+/** 标签键值对过滤条件。 */
+declare interface TagPair {
+  /** 过滤条件-标签key */
+  TagKey?: string;
+  /** 过滤条件标签-value */
+  TagValue?: string[];
+}
+
 /** 展示 redis kill 会话任务状态。 */
 declare interface TaskInfo {
   /** 异步任务 ID。 */
@@ -1466,6 +1520,22 @@ declare interface CreateDBDiagReportUrlResponse {
   ReportUrl?: string;
   /** 健康报告浏览地址到期时间戳（秒）。 */
   ExpireTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDBDiagReportUrlsRequest {
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"cynosdb" - 云数据库 TDSQL-C for MySQL，"mongodb" - 云数据库 MongoDB，"postgres" - 云数据库 PostgreSQL。 */
+  Product: string;
+  /** 异步任务ID列表。 */
+  AsyncRequestIds: number[];
+}
+
+declare interface CreateDBDiagReportUrlsResponse {
+  /** URL条目总数。 */
+  TotalCount?: number | null;
+  /** 报告URL信息列表。 */
+  Items?: DiagReportUrlItem[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2069,7 +2139,7 @@ declare interface DescribeDBDiagReportTasksRequest {
   StartTime?: string;
   /** 最后一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。 */
   EndTime?: string;
-  /** 实例ID数组，用于筛选指定实例的任务列表。 */
+  /** 实例ID数组，用于筛选指定实例的任务列表。。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceIds?: string[];
   /** 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 计划任务；"MANUAL" - 手动触发。 */
   Sources?: string[];
@@ -2083,6 +2153,8 @@ declare interface DescribeDBDiagReportTasksRequest {
   Limit?: number;
   /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product?: string;
+  /** 根据任务所属实例的标签信息进行过滤 */
+  TagFilters?: TagFilterGroup[];
 }
 
 declare interface DescribeDBDiagReportTasksResponse {
@@ -2090,6 +2162,18 @@ declare interface DescribeDBDiagReportTasksResponse {
   TotalCount?: number;
   /** 任务列表。 */
   Tasks?: HealthReportTask[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBInstancesRequest {
+  /** 实例ID列表，最多支持100个。支持多种数据库产品的实例ID，系统会根据实例ID前缀自动识别产品类型。 */
+  InstanceIds: string[];
+}
+
+declare interface DescribeDBInstancesResponse {
+  /** 实例列表。 */
+  Items?: InstanceItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4447,6 +4531,8 @@ declare interface Dbbrain {
   CreateDBDiagReportTask(data: CreateDBDiagReportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportTaskResponse>;
   /** 创建健康报告浏览地址 {@link CreateDBDiagReportUrlRequest} {@link CreateDBDiagReportUrlResponse} */
   CreateDBDiagReportUrl(data: CreateDBDiagReportUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportUrlResponse>;
+  /** 批量创建健康报告下载链接 {@link CreateDBDiagReportUrlsRequest} {@link CreateDBDiagReportUrlsResponse} */
+  CreateDBDiagReportUrls(data: CreateDBDiagReportUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBDiagReportUrlsResponse>;
   /** 创建忽略诊断项 {@link CreateIgnoreDiagRecordRequest} {@link CreateIgnoreDiagRecordResponse} */
   CreateIgnoreDiagRecord(data: CreateIgnoreDiagRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIgnoreDiagRecordResponse>;
   /** 创建中断会话的任务 {@link CreateKillTaskRequest} {@link CreateKillTaskResponse} */
@@ -4505,6 +4591,8 @@ declare interface Dbbrain {
   DescribeDBDiagReportContent(data: DescribeDBDiagReportContentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportContentResponse>;
   /** 查询健康报告生成任务列表 {@link DescribeDBDiagReportTasksRequest} {@link DescribeDBDiagReportTasksResponse} */
   DescribeDBDiagReportTasks(data?: DescribeDBDiagReportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBDiagReportTasksResponse>;
+  /** 查询数据库实例信息（支持批量多数据库实例类型查询） {@link DescribeDBInstancesRequest} {@link DescribeDBInstancesResponse} */
+  DescribeDBInstances(data: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 获取性能趋势 {@link DescribeDBPerfTimeSeriesRequest} {@link DescribeDBPerfTimeSeriesResponse} */
   DescribeDBPerfTimeSeries(data: DescribeDBPerfTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBPerfTimeSeriesResponse>;
   /** 获取指定时间段内的实例空间使用概览 {@link DescribeDBSpaceStatusRequest} {@link DescribeDBSpaceStatusResponse} */
