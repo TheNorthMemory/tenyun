@@ -712,6 +712,8 @@ declare interface CreateVpnConnRoute {
   DestinationCidrBlock: string;
   /** 优先级；可选值0，100。 */
   Priority?: number;
+  /** 路由备注；可选值 */
+  Description?: string;
 }
 
 /** 合规化审批单 */
@@ -1310,17 +1312,17 @@ declare interface IKEOptionsSpecification {
   RemoteFqdnName?: string;
   /** DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP15', 'GROUP16', 'GROUP19', 'GROUP20', 'GROUP21', 'GROUP24'，默认是GROUP1。 */
   DhGroupName?: string;
-  /** IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800 */
+  /** IKE SA Lifetime，单位：秒，设置IKE SA的生存周期取值范围：[60, 604800]默认值：86400 */
   IKESaLifetimeSeconds?: number;
-  /** IKE版本 */
+  /** IKE版本枚举值：IKEV1： IKEV1版本IKEV2： IKEV2版本默认值：IKEV1 */
   IKEVersion?: string;
 }
 
 /** IPSec配置，腾讯云提供IPSec安全会话设置 */
 declare interface IPSECOptionsSpecification {
-  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128 */
+  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'默认值：AES-CBC-128 */
   EncryptAlgorithm?: string;
-  /** 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为 */
+  /** 认证算法：可选值：'MD5', 'SHA1', 'SHA-256', 'SHA-512', 'SHA-384', 'SM3'默认值：SHA1 */
   IntegrityAlgorith?: string | null;
   /** IPsec SA lifetime(s)取值范围：[180, 604800]单位：秒默认值：14400 */
   IPSECSaLifetimeSeconds?: number;
@@ -5089,7 +5091,7 @@ declare interface CreateVpnConnectionResponse {
 }
 
 declare interface CreateVpnGatewayRequest {
-  /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口返回值中的VpcId获取。 */
+  /** VPC实例ID。可通过DescribeVpcs。接口返回值中的VpcId获取入参限制：当Type为CCN/SSL_CCN 类型时传 ""，IPSEC/SSL 类型必须传对应VPC实例ID。 */
   VpcId: string;
   /** VPN网关名称，最大长度不能超过60个字节。 */
   VpnGatewayName: string;
@@ -5107,7 +5109,7 @@ declare interface CreateVpnGatewayRequest {
   Tags?: Tag[];
   /** CDC实例ID。 */
   CdcId?: string;
-  /** SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。仅 SSL / SSL_CCN 类型需要选这个参数。 */
+  /** SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个默认值：5仅 SSL / SSL_CCN 类型需要填这个参数。 */
   MaxConnection?: number;
   /** BGP ASN。 */
   BgpAsn?: number;
@@ -9805,7 +9807,7 @@ declare interface ModifyVpnConnectionAttributeRequest {
   DpdEnable?: number;
   /** DPD超时时间。即探测确认对端不存在需要的时间。dpdEnable为1（开启）时有效。默认30，单位为秒 */
   DpdTimeout?: string;
-  /** DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试） */
+  /** DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）默认值：restart */
   DpdAction?: string;
   /** 对端网关ID，4.0及以上网关下的通道支持更新。 */
   CustomerGatewayId?: string;

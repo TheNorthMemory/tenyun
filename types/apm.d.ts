@@ -434,6 +434,8 @@ declare interface ApmInstanceDetail {
   UrlNumberSegmentThreshold?: number;
   /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
   LogSpanIdKey?: string;
+  /** 是否禁用 AI 能力单位：无 */
+  DisableAiAbility?: number;
 }
 
 /** 指标列表单元 */
@@ -1729,12 +1731,14 @@ declare interface ModifyApmInstanceRequest {
   UrlNumberSegmentThreshold?: number;
   /** spanId的索引key: 当CLS索引类型为键值索引时生效 */
   LogSpanIdKey?: string;
-  /** 是否开启探针头采样 */
+  /** 是否开启探针头采样（受限） */
   EnableHeadSampler?: boolean;
-  /** 头采类型枚举值：parentbased_traceidratio： 默认 */
+  /** 头采类型枚举值：parentbased_traceidratio： 默认（受限） */
   HeadSamplerType?: string;
-  /** 头采采样率取值范围：[0, 100] */
+  /** 头采采样率取值范围：[0, 100]（受限） */
   HeadSamplerArg?: number;
+  /** 是否禁用 AI 能力单位：无 */
+  DisableAiAbility?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

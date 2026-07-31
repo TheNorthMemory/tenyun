@@ -494,7 +494,7 @@ declare interface PolicyRule {
   ServiceModule?: string;
   /** IP 地址模板 ID */
   AddressModule?: string;
-  /** 规则 ID */
+  /** 安全组 ID */
   Id?: string;
   /** 规则备注描述 */
   Desc?: string;

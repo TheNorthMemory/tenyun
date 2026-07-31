@@ -2191,7 +2191,7 @@ declare interface AddLiveDomainResponse {
 }
 
 declare interface AddLiveWatermarkRequest {
-  /** 水印图片 URL。URL中禁止包含的字符： ;(){}$>`#"\'| */
+  /** 水印图片 URL。URL中禁止包含的字符： ;(){}$>`#"'| */
   PictureUrl: string;
   /** 水印名称。最长30字节。 */
   WatermarkName: string;
@@ -2203,9 +2203,9 @@ declare interface AddLiveWatermarkRequest {
   Width?: number;
   /** 水印高度，占直播原始画面高度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。 */
   Height?: number;
-  /** 背景水印宽度。默认宽度1920。 */
+  /** 背景水印宽度。默认宽度1920。取值范围：[360, 4096]单位：px */
   BackgroundWidth?: number;
-  /** 背景水印高度。默认高度1080。 */
+  /** 背景水印高度。默认高度1080。取值范围：[360, 4096]单位：px */
   BackgroundHeight?: number;
 }
 

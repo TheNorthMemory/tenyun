@@ -474,6 +474,8 @@ declare interface TokenPlanListItem {
   StopReason?: string;
   /** 可创建 API Key 上限。 */
   ApiKeyMax?: number;
+  /** 当前已创建的 APIKey 数量 */
+  ApiKeyCount?: number;
   /** 云计费预付费资源包 ID。 */
   PrepayResourceID?: string;
   /** 创建人。若为子账号创建的套餐，则该值为子账号UIN。 */

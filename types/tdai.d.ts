@@ -246,12 +246,18 @@ declare interface MemoryPlusInfo {
   Status?: number;
   /** 地域 */
   Region?: string;
+  /** 计费模式枚举值：-1： 免费版0： 按量付费1： 包年包月 */
+  PayMode?: number;
+  /** 是否自动续费枚举值：0： 不自动续费1： 自动续费 */
+  AutoRenew?: number;
   /** 记忆条数 */
   MemoryUsage?: number;
   /** 当月积分数 */
   CreditUsage?: number;
   /** 资源标签 */
   ResourceTags?: ResourceTag[];
+  /** 版本号 */
+  Version?: string;
   /** 创建时间 */
   CreatedAt?: string;
   /** 隔离时间 */

@@ -8816,8 +8816,10 @@ declare namespace V20180717 {
     DisableHigherVideoResolution?: number;
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
-    /** 切片类型，当 Format 为 HLS 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。默认值：ts。 */
+    /** 分片类型，可选值：ts: HLS，内部映射为ts-segmentmp4: HLS/DASH，HLS情况下内部映射为mp4-mp4-segment，DASH情况下内部映射为mp4-mp4-byterangets-segment：HLS+TS 切片ts-byterange：HLS+TS byte rangemp4-segment：HLS+MP4 切片mp4-byterange：HLS+MP4 byte rangets-packed-audio：HLS+TS+Packed Audio 切片mp4-packed-audio：HLS+MP4+Packed Audio 切片ts-ts-segment：HLS+TS+TS 切片ts-ts-byterange：HLS+TS+TS byte rangemp4-mp4-segment：HLS+MP4+MP4 切片mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte rangets-packed-audio-byterange：HLS+TS+Packed Audio byte rangemp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-mp4-byterange。FairPlay：只能用于HLS，切片格式只能是mp4或mp4-mp4-segment Widevine：可以用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterangeWidevine+FairPlay: 只能用于HLS，切片格式只能是mp4或mp4-mp4-segment */
     SegmentType?: string;
+    /** 切片时长。取值范围：[1, 10]单位：秒默认值：6 */
+    SegmentDuration?: number;
   }
 
   interface CreateAdaptiveDynamicStreamingTemplateResponse {
@@ -12120,7 +12122,7 @@ declare namespace V20180717 {
   interface ModifyAdaptiveDynamicStreamingTemplateRequest {
     /** 自适应转码模板唯一标识。 */
     Definition: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 模板名称，长度限制：64 个字符。 */
     Name?: string;
@@ -12134,8 +12136,10 @@ declare namespace V20180717 {
     StreamInfos?: AdaptiveStreamTemplate[];
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
-    /** 切片类型，当 Format 为 HLS 时有效，可选值：ts：ts 切片；fmp4：fmp4 切片。 */
+    /** 分片类型，可选值：ts: HLS，内部映射为ts-segmentmp4: HLS/DASH，HLS情况下内部映射为mp4-mp4-segment，DASH情况下内部映射为mp4-mp4-byterangets-segment：HLS+TS 切片ts-byterange：HLS+TS byte rangemp4-segment：HLS+MP4 切片mp4-byterange：HLS+MP4 byte rangets-packed-audio：HLS+TS+Packed Audio 切片mp4-packed-audio：HLS+MP4+Packed Audio 切片ts-ts-segment：HLS+TS+TS 切片ts-ts-byterange：HLS+TS+TS byte rangemp4-mp4-segment：HLS+MP4+MP4 切片mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte rangets-packed-audio-byterange：HLS+TS+Packed Audio byte rangemp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-mp4-byterange。FairPlay：只能用于HLS，切片格式只能是mp4或mp4-mp4-segment Widevine：可以用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterange Widevine+FairPlay: 只能用于HLS，切片格式只能是mp4或mp4-mp4-segment */
     SegmentType?: string;
+    /** 切片平均时长。取值范围：[1, 10]单位：秒 */
+    SegmentDuration?: number;
   }
 
   interface ModifyAdaptiveDynamicStreamingTemplateResponse {

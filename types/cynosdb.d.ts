@@ -4191,6 +4191,10 @@ declare interface CreateClustersRequest {
   ClusterLevel?: string;
   /** 内核小版本号 */
   CynosVersion?: string;
+  /** 同步方式。可选值：async、semisync、sync。 */
+  SyncWay?: string;
+  /** 半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。取值范围：[1000, 4294967295]单位：毫秒默认值：10000 */
+  SemiSyncTimeout?: number;
 }
 
 declare interface CreateClustersResponse {
@@ -8205,6 +8209,12 @@ declare interface RollbackToNewClusterRequest {
   AutoArchive?: string;
   /** 是否从保存备份中恢复 */
   FromSaveBackup?: boolean;
+  /** 同步方式。可选值：async、semisync、sync，默认异步。 */
+  SyncWay?: string;
+  /** 半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。取值范围：[1000, 4294967295]单位：毫秒默认值：10000 */
+  SemiSyncTimeout?: number;
+  /** 备可用区 */
+  SlaveZone?: string;
 }
 
 declare interface RollbackToNewClusterResponse {

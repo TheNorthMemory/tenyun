@@ -290,9 +290,9 @@ declare interface GlobalAcceleratorSet {
 
 /** 隐藏Header */
 declare interface HideResponseHeaders {
-  /** key入参限制：长度不能超过128如果字符串包含$，那仅能配置'$remote_addr', '$remote_port'，否则不支持。 */
+  /** key参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()<>@,;:\"/[ ]?={ }入参限制：长度在1-40。 */
   Key: string;
-  /** value当前传''值即可。 */
+  /** value当前仅支持传空字符串"" */
   Value: string;
 }
 

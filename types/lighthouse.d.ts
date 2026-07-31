@@ -78,6 +78,46 @@ declare interface Blueprint {
   Tags?: Tag[];
 }
 
+/** 镜像套餐详细信息。 */
+declare interface BlueprintBundle {
+  /** 套餐ID。可以通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回的BundleId获取。 */
+  BundleId?: string;
+  /** 是否支持 Linux/Unix 平台。 */
+  SupportLinuxUnixPlatform?: boolean;
+  /** 是否支持 Windows 平台。 */
+  SupportWindowsPlatform?: boolean;
+  /** 套餐当前单位价格信息。 */
+  Price?: Price;
+  /** 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄)。 */
+  BundleSalesState?: string;
+  /** 套餐类型。 */
+  BundleType?: string;
+  /** 套餐类型描述信息。 */
+  BundleTypeDescription?: string;
+  /** 套餐类型权重。取值越小排序越靠前。 */
+  BundleTypePriority?: number;
+  /** 套餐展示标签。 */
+  BundleDisplayLabel?: string;
+  /** 支持人数。 */
+  SupportSlot?: number;
+  /** 内存大小，单位 GB。 */
+  Memory?: number;
+  /** 系统盘类型。取值范围： CLOUD_SSD：SSD 云硬盘 CLOUD_PREMIUM：高性能云硬盘 */
+  SystemDiskType?: string;
+  /** 系统盘大小。单位GB。 */
+  SystemDiskSize?: number;
+  /** 每月网络流量，单位 GB。 */
+  MonthlyTraffic?: number;
+  /** CPU 核数。 */
+  CPU?: number;
+  /** 峰值带宽，单位 Mbps。 */
+  InternetMaxBandwidthOut?: number;
+  /** 网络计费类型。 */
+  InternetChargeType?: string;
+  /** 流量是否无上限。 */
+  TrafficUnlimited?: boolean;
+}
+
 /** 描述镜像实例信息。 */
 declare interface BlueprintInstance {
   /** 镜像信息。 */
@@ -1463,6 +1503,26 @@ declare interface DescribeAllScenesResponse {
   /** 使用场景详细信息列表。 */
   SceneInfoSet?: SceneInfo[];
   /** 使用场景详细信息总数量。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBlueprintBundlesRequest {
+  /** 镜像ID。可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。当前仅支持传入镜像类型为游戏专区(“GAME_PORTAL”)的镜像Id。 */
+  BlueprintId: string;
+  /** 套餐ID列表。可以通过DescribeBlueprintBundles接口返回的BundleId获取。 */
+  BundleIds?: string[];
+  /** 返回数量，默认为 20，最大值为 100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
+  Limit?: number;
+  /** 偏移量，默认为 0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
+  Offset?: number;
+}
+
+declare interface DescribeBlueprintBundlesResponse {
+  /** 镜像套餐详细信息列表。 */
+  BlueprintBundleSet?: BlueprintBundle[];
+  /** 符合要求的套餐总数，用于分页展示。 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2947,6 +3007,8 @@ declare interface Lighthouse {
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 查询全地域使用场景列表 {@link DescribeAllScenesRequest} {@link DescribeAllScenesResponse} */
   DescribeAllScenes(data?: DescribeAllScenesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllScenesResponse>;
+  /** 查询镜像套餐列表 {@link DescribeBlueprintBundlesRequest} {@link DescribeBlueprintBundlesResponse} */
+  DescribeBlueprintBundles(data: DescribeBlueprintBundlesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintBundlesResponse>;
   /** 查询镜像实例信息 {@link DescribeBlueprintInstancesRequest} {@link DescribeBlueprintInstancesResponse} */
   DescribeBlueprintInstances(data: DescribeBlueprintInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlueprintInstancesResponse>;
   /** 查询镜像信息 {@link DescribeBlueprintsRequest} {@link DescribeBlueprintsResponse} */

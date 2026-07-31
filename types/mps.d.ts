@@ -910,6 +910,16 @@ declare interface AiContentReviewTaskInput {
   Definition: number;
 }
 
+/** 智能抠图配置。 */
+declare interface AiCutoutConfig {
+  /** 能力配置开关，可选值： ON：开启； OFF：关闭。 默认值：ON。 */
+  Switch?: string;
+  /** 抠图目标类型指定："foreground"（默认）/ "pattern" */
+  Type?: string;
+  /** 图案抠图配置。仅在Type为pattern时生效。 */
+  PatternConfig?: PatternConfig;
+}
+
 /** Ai自动生成漫剧的输入 */
 declare interface AiDramaInput {
   /** ai漫剧剧本参数格式：无入参限制：无 */
@@ -920,6 +930,18 @@ declare interface AiDramaInput {
   Ratio: string;
   /** 输出视频分辨率枚举值：720p： 720p1080p： 1080p默认值：720p */
   Resolution: string;
+}
+
+/** 智能扩图配置。 */
+declare interface AiExpansionConfig {
+  /** 能力配置开关，可选值： ON：开启； OFF：关闭。 默认值：ON。 */
+  Switch?: string;
+  /** 目标比例，如 "16:9" */
+  AspectRatio?: string;
+  /** 目标宽度（像素）取值范围：[0, 2048] */
+  Width?: number;
+  /** 目标高度（像素）取值范围：[0, 2048] */
+  Height?: number;
 }
 
 /** 分段信息。 */
@@ -1756,6 +1778,14 @@ declare interface AiSampleWordInfo {
   Keyword: string;
   /** 关键词标签数组长度限制：20 个标签；单个标签长度限制：128 个字符。 */
   Tags?: string[];
+}
+
+/** 智能分镜拆解配置。 */
+declare interface AiStoryboardConfig {
+  /** 能力配置开关，可选值： ON：开启； OFF：关闭。 默认值：ON。 */
+  Switch?: string;
+  /** 指定提取的分镜图的序号，从0开始计数，不填写则返回所有分镜图。 */
+  ProcessIndex?: number;
 }
 
 /** 虚拟试穿任务配置。 */
@@ -4046,6 +4076,12 @@ declare interface ImageTaskInput {
   AiPosterSuiteConfig?: AiPosterSuiteConfig;
   /** 生图任务配置 */
   CreateImageConfig?: CreateImageConfig;
+  /** Ai抠图配置 */
+  AiCutoutConfig?: AiCutoutConfig;
+  /** Ai扩图配置 */
+  AiExpansionConfig?: AiExpansionConfig;
+  /** Ai分镜拆解配置 */
+  AiStoryboardConfig?: AiStoryboardConfig;
 }
 
 /** 图片基础转换能力 */
@@ -5452,6 +5488,20 @@ declare interface OverrideTranscodeParameter {
   StdExtInfo?: string;
   /** 要插入的字幕文件。 */
   AddOnSubtitles?: AddOnSubtitle[];
+}
+
+/** 印花提取配置。 */
+declare interface PatternConfig {
+  /** 透明度阈值取值范围：[0, 255]默认值：30 */
+  TransparencyThreshold?: number;
+  /** 不透明阈值，必须大于TransparencyThreshold取值范围：[0, 255]默认值：127 */
+  OpaqueThreshold?: number;
+  /** 边缘采样步数，默认5取值范围：[1, 10] */
+  EdgeSamplingStep?: number;
+  /** 边缘扩展步数，默认5 */
+  EdgeExpansionStep?: number;
+  /** 边缘融合强度，默认0.5取值范围：[0, 1.0] */
+  EdgeBlendingIntensity?: number;
 }
 
 /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
