@@ -2885,11 +2885,11 @@ declare interface CreateDynamicFlowApproverResponse {
 }
 
 declare interface CreateEmbedWebUrlRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** WEB嵌入资源类型，支持以下类型CREATE_SEAL: 生成创建印章的嵌入页面CREATE_TEMPLATE：生成创建模板的嵌入页面MODIFY_TEMPLATE：生成编辑模板的嵌入页面CREATE_CONTRACT_DRAFT_COOPEDIT：生成创建起草合同的嵌入页面PREVIEW_TEMPLATE：生成预览模板的嵌入页面PREVIEW_SEAL_LIST：生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL：生成预览印章详情的嵌入页面EXTEND_SERVICE：生成高级签署能力的嵌入页面PREVIEW_FLOW：生成预览合同的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL：生成查看合同详情的嵌入页面（仅支持PC端）注意：不同的嵌入类型，操作人需要的权限项不同（权限配置可参考[权限配置](https://qian.tencent.com/document/61355)）。EmbedType权限 CREATE_SEAL印章管理-添加印章CREATE_TEMPLATE模板管理-创建模板MODIFY_TEMPLATE模板管理-编辑模板CREATE_CONTRACT_DRAFT_COOPEDIT合同管理-起草合同PREVIEW_TEMPLATE拥有下面三种权限的一种就行模板管理-查询模板（本企业全部模板）模板管理-查询模板（本部门全部模板）模板管理-查询模板（本人创建模板）PREVIEW_SEAL_LIST印章管理PREVIEW_SEAL_DETAIL印章管理EXTEND_SERVICE无要求PREVIEW_FLOW是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员PREVIEW_FLOW_DETAIL是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 */
+  /** WEB嵌入资源类型，支持以下类型枚举值：CREATE_SEAL： 生成创建印章的嵌入页面CREATE_TEMPLATE： 生成创建模板的嵌入页面MODIFY_TEMPLATE： 生成编辑模板的嵌入页面CREATE_CONTRACT_DRAFT_COOPEDIT： 生成创建起草合同的嵌入页面PREVIEW_TEMPLATE： 生成预览模板的嵌入页面PREVIEW_SEAL_LIST： 生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL： 生成预览印章详情的嵌入页面EXTEND_SERVICE： 生成高级签署能力的嵌入页面PREVIEW_FLOW： 生成预览合同的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL： 生成查看合同详情的嵌入页面（仅支持PC端）CHANNEL_TEMPLATE： 生成应用模板库管理的嵌入页面（仅支持PC端）CHANNEL_COMPONENT： 生成应用模板控件管理的嵌入页面（仅支持PC端）注意： 不同的嵌入类型，操作人需要的权限项不同（权限配置可参考权限配置）。 EmbedType权限 CREATE_SEAL印章管理-添加印章 CREATE_TEMPLATE模板管理-创建模板 MODIFY_TEMPLATE模板管理-编辑模板 CREATE_CONTRACT_DRAFT_COOPEDIT合同管理-起草合同 PREVIEW_TEMPLATE拥有下面三种权限的一种就行 模板管理-查询模板（本企业全部模板） 模板管理-查询模板（本部门全部模板） 模板管理-查询模板（本人创建模板） PREVIEW_SEAL_LIST印章管理 PREVIEW_SEAL_DETAIL印章管理 EXTEND_SERVICE无要求 PREVIEW_FLOW是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 PREVIEW_FLOW_DETAIL是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 CHANNEL_TEMPLATE开发者中心-应用模板库管理 CHANNEL_COMPONENT开发者中心-应用模板控件管理 */
   EmbedType: string;
-  /** WEB嵌入的业务资源ID当EmbedType取值为PREVIEW_SEAL_DETAIL，必填，取值为印章id。为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*为MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id。为CREATE_CONTRACT_DRAFT_COOPEDIT，非必填，取值为资源 id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id。注意： 1. CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口[创建文件转换任务](https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateConvertTaskApi) 和[查询转换任务状态](https://qian.tencent.com/developers/companyApis/templatesAndFiles/GetTaskResultApi) 来进行转换成PDF资源。 2. CREATE_CONTRACT_DRAFT_COOPEDIT中的BusinessId仅支持DOC 和 DOCX 的文件，并且大小不能超过 10M。 */
+  /** WEB嵌入的业务资源ID当EmbedType取值为PREVIEW_SEAL_DETAIL，必填，取值为印章id。为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*为MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id。为CREATE_CONTRACT_DRAFT_COOPEDIT，非必填，取值为资源 id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id。注意：CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口创建文件转换任务 和查询转换任务状态 来进行转换成PDF资源。CREATE_CONTRACT_DRAFT_COOPEDIT中的BusinessId仅支持DOC 和 DOCX 的文件，并且大小不能超过 10M。 */
   BusinessId?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -2899,6 +2899,8 @@ declare interface CreateEmbedWebUrlRequest {
   Option?: EmbedUrlOption;
   /** 目前仅支持EmbedType=CREATE_TEMPLATE时传入 指定后，创建，编辑，删除模板时，回调都会携带该userData 支持的格式：json字符串的BASE64编码字符串 示例： json字符串：{"ComeFrom":"xxx"}，BASE64编码：eyJDb21lRnJvbSI6Inh4eCJ9 eyJDb21lRnJvbSI6Inh4eCJ9，为符合要求的userData数据格式 */
   UserData?: string;
+  /** 第三方应用号ID当EmbedType取以下值时，该字段生效CHANNEL_TEMPLATE：生成指定应用的模板库管理页面CHANNEL_COMPONENT：生成指定应用的控件管理页面 */
+  ApplicationId?: string;
 }
 
 declare interface CreateEmbedWebUrlResponse {

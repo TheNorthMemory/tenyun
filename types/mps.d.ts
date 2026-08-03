@@ -944,6 +944,14 @@ declare interface AiExpansionConfig {
   Height?: number;
 }
 
+/** 视频裂变输入 */
+declare interface AiFissionInput {
+  /** 视频裂变参考图url */
+  ImageUrls: string[];
+  /** 视频裂变商品信息参考文案 */
+  Text?: string;
+}
+
 /** 分段信息。 */
 declare interface AiParagraphInfo {
   /** 分段摘要 */
@@ -2898,6 +2906,18 @@ declare interface CreateOutputSRTSettingsDestinations {
   Port: number;
 }
 
+/** 商品裂变模特信息 */
+declare interface CustomModel {
+  /** 性别枚举值：male： 男性female： 女性any： 不限 */
+  Gender?: string;
+  /** 年龄范围枚举值：teen： 青年young_adult： 成年middle_aged： 中年mature： 成熟 */
+  Age?: string;
+  /** 外貌枚举值：caucasian： 白人asian： 亚裔latino： 拉丁裔african： 非裔middle_eastern： 中东 */
+  Appearance?: string;
+  /** 身材枚举值：slim： 苗条standard： 标准athletic： 健壮chubby： 丰满 */
+  BodyType?: string;
+}
+
 /** 自定义描述变量 */
 declare interface CustomVariable {
   /** 用户自定义变量类型。参数格式：PascalCase格式。不能为UserPrompt。默认平台模板未适配自定义内容，如需适配需提交工单。 */
@@ -3540,6 +3560,28 @@ declare interface FaceEnhanceConfig {
 declare interface FailOverOption {
   /** 热备 */
   FailOverType?: string;
+}
+
+/** 商品裂变任务信息 */
+declare interface FissionTaskInfo {
+  /** 视频输出时长取值范围：[1, 15]单位：秒默认值：15 */
+  Duration?: number;
+  /** 模型档位枚举值：standard： 标准版flagship： 旗舰版 */
+  ModelTier?: string;
+  /** 视频画面比例枚举值：9:16： 9:1616:9： 16:91:1： 1:13:4： 3:44:3： 4:3 */
+  Ratio?: string;
+  /** 输出分辨率枚举值：720p： 720p1080p： 1080p2k： 2k4k： 4k */
+  Resolution?: string;
+  /** 目标市场枚举值：north_america： 北美europe： 欧洲china： 中国japan： 日本korea： 韩国southeast_asia： 东南亚brazil： 巴西global： 全球other： 其他影响默认出镜模特族裔与本地化风格；未指定 CustomModel 时按市场自动决定人种 */
+  Market?: string;
+  /** 口播/字幕语言枚举值：english： 英文chinese： 中文japanese： 日语korean： 汉语spanish： 西班牙语portuguese： 葡萄牙语music_only： 纯音乐无口播 */
+  Language?: string;
+  /** 视频类型枚举值：ugc： UGC种草talk： 产品口播display： 产品展示（纯商品、无人声）unboxing： 开箱分享reaction： 反应展示 */
+  VideoType?: string;
+  /** 裂变数量取值范围：[0, 1]单位：个 */
+  SplitCount?: number;
+  /** 定制出镜模特 */
+  CustomModel?: CustomModel;
 }
 
 /** 流的音频数据。 */
@@ -8558,6 +8600,40 @@ declare interface CloneViralResponse {
   RequestId?: string;
 }
 
+declare interface CloneVoiceRequest {
+  /** 克隆音频base64编码 */
+  AudioData?: string;
+  /** 克隆音频Url，AudioData为空时有效 */
+  AudioUrl?: string;
+  /** 克隆音频语言，默认中文。 当前支持语言同语音合成TextLang */
+  AudioLang?: string;
+  /** 音色属性。音色查询和匹配使用 */
+  VoiceProfile?: VoiceProfile;
+  /** 试听文本 */
+  Text?: string;
+  /** 试听文本语言，不填默认自动检测。当前支持语言同语音合成 */
+  TextLang?: string;
+  /** 输出相关参数，可以指定输出音频形式等。默认输出音频base64。 */
+  Output?: SyncDubbingOutputOption;
+  /** 扩展参数，json字符串 */
+  ExtParam?: string;
+}
+
+declare interface CloneVoiceResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 克隆生成的音色ID */
+  VoiceId?: string;
+  /** 合成音频的base64编码 */
+  AudioData?: string;
+  /** 合成音频Url，有效期24小时 */
+  AudioUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAIAnalysisTemplateRequest {
   /** 视频内容分析模板名称，长度限制：64 个字符。 */
   Name?: string;
@@ -8640,6 +8716,22 @@ declare interface CreateAiDramaTaskRequest {
 }
 
 declare interface CreateAiDramaTaskResponse {
+  /** 任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAiFissionTaskRequest {
+  /** ai视频裂变输入信息 */
+  Input: AiFissionInput;
+  /** 用户cos信息 */
+  CosInfo?: VideoDramaCosInfo;
+  /** ai视频裂变任务信息 */
+  TaskInfo?: FissionTaskInfo;
+}
+
+declare interface CreateAiFissionTaskResponse {
   /** 任务id */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -12626,6 +12718,34 @@ declare interface TextToSpeechAsyncResponse {
   RequestId?: string;
 }
 
+declare interface TextToSpeechRequest {
+  /** 语音合成文本 */
+  Text: string;
+  /** 音色ID */
+  VoiceId: string;
+  /** 文本语言。不填默认自动识别当前支持语言：zh 中文 (Chinese)en 英语 (English)ja 日语 (Japanese)de 德语 (German)fr 法语 (French)ko 韩语 (Korean)ru 俄语 (Russian)uk 乌克兰语 (Ukrainian)pt 葡萄牙语 (Portuguese)it 意大利语 (Italian)es 西班牙语 (Spanish)id 印度尼西亚语 (Indonesian)nl 荷兰语 (Dutch)tr 土耳其语 (Turkish)fil 菲律宾语 (Filipino)ms 马来语 (Malay)el 希腊语 (Greek)fi 芬兰语 (Finnish)hr 克罗地亚语 (Croatian)sk 斯洛伐克语 (Slovak)pl 波兰语 (Polish)sv 瑞典语 (Swedish)hi 印地语 (Hindi)bg 保加利亚语 (Bulgarian)ro 罗马尼亚语 (Romanian)ar 阿拉伯语 (Arabic)cs 捷克语 (Czech)da 丹麦语 (Danish)ta 泰米尔语 (Tamil)hun 匈牙利语（Hungarian）vi 越南语（Vietnamese）no 挪威语（Norwegian）yue 粤语（Cantonese）th 泰语（Thai）he 希伯来语（Hebrew）ca 加泰罗尼亚语（Catalan）nn 尼诺斯克语（Nynorsk）af 阿非利卡语（Afrikaans）fa 波斯语（Persian）sl 斯洛文尼亚语（Slovenian） */
+  TextLang?: string;
+  /** 输出相关参数 */
+  Output?: SyncDubbingOutputOption;
+  /** 扩展参数，json字符串synExt Object 语音合成扩展参数 duration Float 合成音频时长（单位秒），默认不控制时长。示例：5.2 format String 输出音频格式，默认wav，支持wav、mp3 sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,24000,32000,44100] */
+  ExtParam?: string;
+}
+
+declare interface TextToSpeechResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 合成音频的base64编码，默认wav格式 */
+  AudioData?: string;
+  /** 合成音频url，有效期24小时 */
+  AudioUrl?: string;
+  /** 扩展信息，json字符串 duration: 结果音频时长，单位秒 */
+  ExtInfo?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TextTranslationRequest {
   /** 待翻译的文本，文本统一使用utf-8格式编码，非utf-8格式编码字符会翻译失败，请传入有效文本，html标记等非常规翻译文本可能会翻译失败。单次请求的文本长度需要低于2000字符。 */
   SourceText: string;
@@ -12719,6 +12839,8 @@ declare interface Mps {
   BatchStopStreamLinkFlow(data: BatchStopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopStreamLinkFlowResponse>;
   /** 爆款复刻 {@link CloneViralRequest} {@link CloneViralResponse} */
   CloneViral(data: CloneViralRequest, config?: AxiosRequestConfig): AxiosPromise<CloneViralResponse>;
+  /** 音色克隆 {@link CloneVoiceRequest} {@link CloneVoiceResponse} */
+  CloneVoice(data?: CloneVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloneVoiceResponse>;
   /** 创建内容分析模板 {@link CreateAIAnalysisTemplateRequest} {@link CreateAIAnalysisTemplateResponse} */
   CreateAIAnalysisTemplate(data?: CreateAIAnalysisTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIAnalysisTemplateResponse>;
   /** 创建内容识别模板 {@link CreateAIRecognitionTemplateRequest} {@link CreateAIRecognitionTemplateResponse} */
@@ -12727,6 +12849,8 @@ declare interface Mps {
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
   /** 创建AI漫剧任务 {@link CreateAiDramaTaskRequest} {@link CreateAiDramaTaskResponse} */
   CreateAiDramaTask(data: CreateAiDramaTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAiDramaTaskResponse>;
+  /** 创建AI视频裂变任务 {@link CreateAiFissionTaskRequest} {@link CreateAiFissionTaskResponse} */
+  CreateAiFissionTask(data: CreateAiFissionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAiFissionTaskResponse>;
   /** 创建AIGC生音频任务 {@link CreateAigcAudioTaskRequest} {@link CreateAigcAudioTaskResponse} */
   CreateAigcAudioTask(data?: CreateAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAigcAudioTaskResponse>;
   /** 创建AIGC生图片任务 {@link CreateAigcImageTaskRequest} {@link CreateAigcImageTaskResponse} */
@@ -13135,6 +13259,8 @@ declare interface Mps {
   StopStreamPackageLinearAssemblyChannel(data: StopStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamPackageLinearAssemblyChannelResponse>;
   /** 同步配音 {@link SyncDubbingRequest} {@link SyncDubbingResponse} */
   SyncDubbing(data?: SyncDubbingRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDubbingResponse>;
+  /** 同步语音合成 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */
+  TextToSpeech(data: TextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechResponse>;
   /** 异步语音合成 {@link TextToSpeechAsyncRequest} {@link TextToSpeechAsyncResponse} */
   TextToSpeechAsync(data: TextToSpeechAsyncRequest, config?: AxiosRequestConfig): AxiosPromise<TextToSpeechAsyncResponse>;
   /** 文本翻译 {@link TextTranslationRequest} {@link TextTranslationResponse} */

@@ -416,6 +416,8 @@ declare interface Database {
   SchemaName?: string;
   /** 迁移或同步后的 schema name */
   NewSchemaName?: string;
+  /** schema选择模式，pg和sqlserver需要使用枚举值：All： 当前对象下的所有对象Partial： 部分对象 */
+  SchemaMode?: string;
   /** 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。 */
   TableMode?: string;
   /** 表图对象集合，当 TableMode 为 Partial 时，此项需要填写 */

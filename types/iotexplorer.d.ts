@@ -32,6 +32,18 @@ declare interface ActivateDeviceInfo {
   RegisteredDeviceNetType: RegisteredDeviceNetTypeInfo;
 }
 
+/** 激活码统计信息。 */
+declare interface ActivationLicense {
+  /** 激活码类型 */
+  ServiceType?: string;
+  /** 支付模式 */
+  TotalLicenseNum?: number;
+  /** 计费标签项 */
+  UsedLicenseNum?: number;
+  /** 计费标识 */
+  Period?: string;
+}
+
 /** 云api直接绑定设备出参 */
 declare interface AppDeviceInfo {
   /** 产品ID/设备名 */
@@ -784,6 +796,14 @@ declare interface IotApplication {
   InterconnectionProducts?: string;
 }
 
+/** 激活码统计信息。 */
+declare interface LicenseOverview {
+  /** 激活码统计信息 */
+  ActivationLicense?: ActivationLicense[];
+  /** 激活码类型 */
+  LicenseType?: string;
+}
+
 /** 增值服务数量统计 */
 declare interface LicenseServiceNumInfo {
   /** 服务类型 */
@@ -1516,6 +1536,8 @@ declare interface TalkAgentInfo {
   CreateTime?: number;
   /** 更新时间，Unix 秒 */
   UpdateTime?: number;
+  /** 事件回调配置 */
+  EventCallbackConfig?: TalkEventCallbackConfig;
 }
 
 /** 基础配置信息。 */
@@ -1558,6 +1580,14 @@ declare interface TalkConversationConfigInfo {
   SemanticVADEnabled?: boolean;
   /** 是否启用噪声过滤 */
   NoiseFilterEnabled?: boolean;
+}
+
+/** 事件回调配置 */
+declare interface TalkEventCallbackConfig {
+  /** 是否开启 */
+  Enabled?: boolean;
+  /** Topic 名称 */
+  Topic?: string;
 }
 
 /** IoT工具配置列表 */
@@ -1768,7 +1798,7 @@ declare interface TalkWebhookAuth {
 
 /** Webhook工具配置列表 */
 declare interface TalkWebhookEndpoint {
-  /** Webhook地址，仅支持 80 和 443 端口 */
+  /** Webhook地址 */
   Url: string;
   /** 超时时间，0~30 秒取值范围：[0, 30] */
   Timeout?: number;
@@ -3007,6 +3037,8 @@ declare interface CreateTWeTalkAgentRequest {
   WebhookTools?: TalkWebhookTool[];
   /** 元信息扩展JSON对象字符串 */
   Metadata?: string;
+  /** 回调配置 */
+  EventCallbackConfig?: TalkEventCallbackConfig;
 }
 
 declare interface CreateTWeTalkAgentResponse {
@@ -4248,6 +4280,8 @@ declare interface DescribeLicenseOverviewRequest {
 }
 
 declare interface DescribeLicenseOverviewResponse {
+  /** 实例概览 */
+  Data?: LicenseOverview[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6111,6 +6145,8 @@ declare interface ModifyTWeTalkAgentRequest {
   WebhookTools?: TalkWebhookTool[];
   /** 元信息扩展JSON对象字符串 */
   Metadata?: string;
+  /** 回调配置 */
+  EventCallbackConfig?: TalkEventCallbackConfig;
 }
 
 declare interface ModifyTWeTalkAgentResponse {

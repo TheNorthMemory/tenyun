@@ -1168,6 +1168,24 @@ declare interface ModifyDBCustomClusterTagsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBCustomNodeAttributesRequest {
+  /** 节点ID参数格式：dbcn-hq98qjym */
+  NodeId: string;
+  /** 主机 HostName入参限制：参数设置规则参见：创建 DB Custom 节点接口的 HostName 参数说明。注意：节点在没有加入到集群之前才支持修改主机 HostName。 */
+  HostName?: string;
+  /** 节点名称入参限制：参数设置规则参见：创建 DB Custom 节点接口的 NodeName 参数说明。 */
+  NodeName?: string;
+  /** 修改实例 HostName 是否自动重启实例，不传默认自动重启。枚举值：true： 修改主机 HostName，并自动重启主机false： 修改主机 HostName，不自动重启主机，需要手动重启使新主机 HostName 生效默认值：true */
+  AutoReboot?: boolean;
+}
+
+declare interface ModifyDBCustomNodeAttributesResponse {
+  /** 上架节点的任务ID */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBCustomNodeSecurityGroupsRequest {
   /** 节点id */
   NodeId: string;
@@ -1299,6 +1317,8 @@ declare interface Dbdc {
   ModifyDBCustomClusterNodeConfig(data: ModifyDBCustomClusterNodeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterNodeConfigResponse>;
   /** 修改集群绑定的标签 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */
   ModifyDBCustomClusterTags(data: ModifyDBCustomClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterTagsResponse>;
+  /** 修改节点属性 {@link ModifyDBCustomNodeAttributesRequest} {@link ModifyDBCustomNodeAttributesResponse} */
+  ModifyDBCustomNodeAttributes(data: ModifyDBCustomNodeAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeAttributesResponse>;
   /** 修改节点安全组 {@link ModifyDBCustomNodeSecurityGroupsRequest} {@link ModifyDBCustomNodeSecurityGroupsResponse} */
   ModifyDBCustomNodeSecurityGroups(data: ModifyDBCustomNodeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeSecurityGroupsResponse>;
   /** 修改节点绑定的标签 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */

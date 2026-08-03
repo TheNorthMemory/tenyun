@@ -807,6 +807,8 @@ declare interface CreateNodePoolRequest {
   Native?: CreateNativeNodePoolParam;
   /** 节点 Annotation 列表 */
   Annotations?: Annotation[];
+  /** 跳过校验选项，支持 "VpcDnsCheck" */
+  SkipValidateOptions?: string[];
 }
 
 declare interface CreateNodePoolResponse {
@@ -4586,6 +4588,8 @@ declare namespace V20180525 {
     Tags?: Tag[];
     /** 删除保护开关 */
     DeletionProtection?: boolean;
+    /** 跳过校验选项，目前支持 "VpcDnsCheck" */
+    SkipValidateOptions?: string[];
   }
 
   interface CreateClusterNodePoolResponse {

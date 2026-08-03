@@ -500,6 +500,10 @@ declare interface MountInfo {
   CcnID?: string;
   /** 云联网中CFS Turbo使用的网段 */
   CidrBlock?: string;
+  /** 占用用户ip列表 */
+  ServerList?: string[];
+  /** 是否占用超过200个ip */
+  ServerListTruncated?: boolean;
 }
 
 /** 文件系统绑定权限组信息 */

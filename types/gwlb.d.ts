@@ -120,7 +120,7 @@ declare interface TargetGroupBackend {
 declare interface TargetGroupHealthCheck {
   /** 是否开启健康检查。 */
   HealthSwitch?: boolean;
-  /** 健康检查使用的协议。支持PING和TCP两种方式，默认为PING。- icmp: 使用PING的方式进行健康检查- tcp: 使用TCP连接的方式进行健康检查 */
+  /** 健康检查使用的协议。支持PING和TCP两种方式，默认为PING。icmp: 使用PING的方式进行健康检查tcp: 使用TCP连接的方式进行健康检查 */
   Protocol?: string;
   /** 健康检查端口，探测协议为tcp时，该参数必填。 */
   Port?: number;

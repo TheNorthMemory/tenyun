@@ -2497,6 +2497,48 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface CheckUpdateInstanceRequest {
+    /** 实例ID */
+    InstanceId: string;
+    /** 已废弃，请使用NodeInfoList变配后的节点个数（2-50个） */
+    NodeNum?: number;
+    /** 已废弃，请使用NodeInfoList变配后的节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE64：16核64G */
+    NodeType?: string;
+    /** 已废弃，请使用NodeInfoList变配后的磁盘大小（单位GB） */
+    DiskSize?: number;
+    /** 已废弃，请使用NodeInfoList变配后的专用主节点个数（仅支持3个和5个） */
+    MasterNodeNum?: number;
+    /** 已废弃，请使用NodeInfoList变配后的专用主节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE64：16核64G */
+    MasterNodeType?: string;
+    /** 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括修改一种节点的个数修改一种节点的节点规格及磁盘大小增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）上述操作一次只能进行一种，且磁盘类型不支持修改 */
+    NodeInfoList?: NodeInfo[];
+    /** 更新配置时是否强制重启true强制重启false不强制重启默认值为false */
+    ForceRestart?: boolean;
+    /** 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启 */
+    ScaleType?: number;
+    /** 多可用区部署 */
+    MultiZoneInfo?: ZoneDetail[];
+    /** 可视化节点配置 */
+    WebNodeTypeInfo?: WebNodeTypeInfo;
+    /** COS自动备份信息 */
+    CosBackup?: CosBackup;
+    /** 读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离 */
+    ReadWriteMode?: number;
+  }
+
+  interface CheckUpdateInstanceResponse {
+    /** 是否允许变配操作 */
+    AllowUpdate?: boolean;
+    /** 不允许变配的原因 */
+    ErrMsg?: string | null;
+    /** 是否需要设置分片迁移并发相关参数 */
+    NeedSetShards?: boolean;
+    /** 是否需要开启置放群组异步任务 */
+    EnableScheduleRecoverGroupTask?: boolean;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAutoBackUpStrategyRequest {
     /** 实例名称 */
     InstanceId: string;
@@ -3783,6 +3825,22 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface ModifyAutoScaleDiskInfoRequest {
+    /** 实例名称 */
+    InstanceId: string;
+    /** 自动扩盘参数列表 */
+    AutoScaleDiskInfoList?: AutoScaleDiskInfo[];
+    /** 需要删除的自动扩盘节点类型 */
+    DeleteNodeTypeList?: string[];
+  }
+
+  interface ModifyAutoScaleDiskInfoResponse {
+    /** true 成功; false 失败 */
+    Status?: boolean;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyEsVipSecurityGroupRequest {
     /** es集群的实例id */
     InstanceId: string;
@@ -4501,6 +4559,8 @@ declare interface Es {
   RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
   /** 检查cos迁移索引元数据 {@link V20180416.CheckMigrateIndexMetaDataRequest} {@link V20180416.CheckMigrateIndexMetaDataResponse} */
   CheckMigrateIndexMetaData(data: V20180416.CheckMigrateIndexMetaDataRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CheckMigrateIndexMetaDataResponse>;
+  /** ES集群实例变配检查接口 {@link V20180416.CheckUpdateInstanceRequest} {@link V20180416.CheckUpdateInstanceResponse} */
+  CheckUpdateInstance(data: V20180416.CheckUpdateInstanceRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CheckUpdateInstanceResponse>;
   /** 新建自动备份快照策略 {@link V20180416.CreateAutoBackUpStrategyRequest} {@link V20180416.CreateAutoBackUpStrategyResponse} */
   CreateAutoBackUpStrategy(data: V20180416.CreateAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.CreateAutoBackUpStrategyResponse>;
   /** 创建集群快照 {@link V20180416.CreateClusterSnapshotRequest} {@link V20180416.CreateClusterSnapshotResponse} */
@@ -4617,6 +4677,8 @@ declare interface Es {
   ModifyAutoBackUpCommonInfo(data: V20180416.ModifyAutoBackUpCommonInfoRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyAutoBackUpCommonInfoResponse>;
   /** 修改自动备份快照策略 {@link V20180416.ModifyAutoBackUpStrategyRequest} {@link V20180416.ModifyAutoBackUpStrategyResponse} */
   ModifyAutoBackUpStrategy(data: V20180416.ModifyAutoBackUpStrategyRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyAutoBackUpStrategyResponse>;
+  /** 修改自动扩盘参数 {@link V20180416.ModifyAutoScaleDiskInfoRequest} {@link V20180416.ModifyAutoScaleDiskInfoResponse} */
+  ModifyAutoScaleDiskInfo(data: V20180416.ModifyAutoScaleDiskInfoRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyAutoScaleDiskInfoResponse>;
   /** 修改集群VIP绑定的安全组 {@link V20180416.ModifyEsVipSecurityGroupRequest} {@link V20180416.ModifyEsVipSecurityGroupResponse} */
   ModifyEsVipSecurityGroup(data: V20180416.ModifyEsVipSecurityGroupRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.ModifyEsVipSecurityGroupResponse>;
   /** 查询IP溯源日志 {@link V20180416.QueryIpTraceLogRequest} {@link V20180416.QueryIpTraceLogResponse} */

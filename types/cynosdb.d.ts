@@ -8388,6 +8388,14 @@ declare interface SwitchProxyVpcResponse {
   RequestId?: string;
 }
 
+declare interface TransferClusterPrepayToPostpayRequest {
+}
+
+declare interface TransferClusterPrepayToPostpayResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TransferClusterZoneRequest {
   /** 源集群Id */
   ClusterId: string;
@@ -8406,6 +8414,14 @@ declare interface TransferClusterZoneRequest {
 declare interface TransferClusterZoneResponse {
   /** 异步任务id */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TransferStoragePrepayToPostpayRequest {
+}
+
+declare interface TransferStoragePrepayToPostpayResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8995,8 +9011,12 @@ declare interface Cynosdb {
   SwitchClusterZone(data: SwitchClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchClusterZoneResponse>;
   /** 更换数据库代理vpc {@link SwitchProxyVpcRequest} {@link SwitchProxyVpcResponse} */
   SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;
+  /** 预付费集群转后付费集群 {@link TransferClusterPrepayToPostpayRequest} {@link TransferClusterPrepayToPostpayResponse} */
+  TransferClusterPrepayToPostpay(data?: TransferClusterPrepayToPostpayRequest, config?: AxiosRequestConfig): AxiosPromise<TransferClusterPrepayToPostpayResponse>;
   /** 跨可用区迁移 {@link TransferClusterZoneRequest} {@link TransferClusterZoneResponse} */
   TransferClusterZone(data: TransferClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<TransferClusterZoneResponse>;
+  /** 预付费存储转后付费存储 {@link TransferStoragePrepayToPostpayRequest} {@link TransferStoragePrepayToPostpayResponse} */
+  TransferStoragePrepayToPostpay(data?: TransferStoragePrepayToPostpayRequest, config?: AxiosRequestConfig): AxiosPromise<TransferStoragePrepayToPostpayResponse>;
   /** cynos解绑资源包 {@link UnbindClusterResourcePackagesRequest} {@link UnbindClusterResourcePackagesResponse} */
   UnbindClusterResourcePackages(data: UnbindClusterResourcePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindClusterResourcePackagesResponse>;
   /** 更新内核小版本 {@link UpgradeClusterVersionRequest} {@link UpgradeClusterVersionResponse} */

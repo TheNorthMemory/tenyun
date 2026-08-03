@@ -396,6 +396,8 @@ declare interface DisplayHttp {
   AnalysisState?: number;
   /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
   AggregationCount?: number;
+  /** 可用性标签：解析已失效/端口连接超时/网站请求超时/服务错误（5xx）/高延迟（非宕机） */
+  AvailabilityTag?: string;
 }
 
 /** 任务详情 */
@@ -688,6 +690,8 @@ declare interface DisplaySubDomain {
   DnsValue?: string;
   /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
   AggregationCount?: number;
+  /** 可用性标签：解析已失效/端口连接超时/网站请求超时/服务错误（5xx）/高延迟（非宕机） */
+  AvailabilityTag?: string;
 }
 
 /** 影子资产详情 */

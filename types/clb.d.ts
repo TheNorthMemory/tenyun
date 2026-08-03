@@ -438,6 +438,14 @@ declare interface ClusterInfo {
   ClusterName?: string;
 }
 
+/** 创建模型路由时的集群信息 */
+declare interface ClusterInfoInput {
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群类型枚举值：Exclusive： 独占集群Public： 公有云共享集群 */
+  Type?: string;
+}
+
 /** 独占集群信息 */
 declare interface ClusterItem {
   /** 集群唯一ID */
@@ -478,6 +486,8 @@ declare interface ClustersZone {
 declare interface Coefficient {
   /** 缓存命中输入积分系数。用于 provider prompt cache 命中的输入 token。取值范围：[0, 5000]默认值：3 */
   InputCachedCoefficient?: number;
+  /** 缓存创建积分系数 */
+  InputCacheCreationCoefficient?: number;
   /** 输入积分系数。取值范围：[1, 5000]默认值：25 */
   InputCoefficient?: number;
   /** 输出积分系数。取值范围：[1, 5000]默认值：100 */
@@ -1314,6 +1324,16 @@ declare interface ModelNameAggregatedItem {
   InputModalitiesUnion?: string[];
 }
 
+/** 模型路由计费信息 */
+declare interface ModelRouterBillingConfigInput {
+  /** 模型路由计费模式枚举值：POSTPAID_BY_HOUR： 按量计费RESOURCE_PACKAGE： 按资源包抵扣 */
+  ChargeType?: string;
+  /** 实例规格枚举值：t1.nano-01： 入门版t1.nano-02： 轻量版t1.nano-03： 轻量增强版t1.micro-01： 微型版t1.micro-02： 基础版t1.small-01： 标准版t1.small-02： 标准增强版t1.medium-01： 进阶版t1.medium-02： 进阶增强版t1.large-01： 专业版t1.large-02： 专业增强版t1.xlarge-01： 旗舰版t1.xlarge-02： 至尊版 */
+  SlaType?: string;
+  /** 是否关联资源包抵扣枚举值：true： 关联false： 不关联 */
+  AssociateResourcePackage?: boolean;
+}
+
 /** 查询单个实例详细信息 */
 declare interface ModelRouterDetail {
   /** 模型路由实例关联的Budget ID。未关联Budget时返回空字符串。 */
@@ -1360,6 +1380,10 @@ declare interface ModelRouterDetail {
   Vip?: string;
   /** 模型路由实例所属VPC的ID */
   VpcId?: string;
+  /** 带宽单位：Mbps */
+  Bandwidth?: number;
+  /** 弹性公网IP的ID */
+  EipAddressId?: string;
 }
 
 /** 模型路由日志 */
@@ -1398,8 +1422,24 @@ declare interface ModelRouterModel {
   Provider: string;
   /** 模型类型。枚举值：BYOK： BYOK类型Platform： 平台类型 */
   Type: string;
-  /** 服务商/模型 ID（byok_model.model_id，形如 model-xxxxxxxx；Platform 类型不传） */
+  /** BYOK实例ID */
   ServiceProviderId?: string;
+  /** 当前 CMR、当前绑定模型下该 BYOK实例的调度优先级。取值范围：[0, 2]默认值：0 */
+  Order?: number;
+  /** 当前CMR、当前绑定模型的同一有效Order层内，BYOK实例之间的相对选择权重。取值范围：[0, 100]默认值：10 */
+  Weight?: number;
+}
+
+/** CMR实例待解绑的模型信息 */
+declare interface ModelRouterModelToDisassociate {
+  /** 模型名称 */
+  ModelName: string;
+  /** 所属厂商 */
+  Provider: string;
+  /** 模型类型。枚举值：BYOK： BYOK类型Platform： 平台类型 */
+  Type: string;
+  /** BYOK实例ID */
+  ServiceProviderId: string;
 }
 
 /** 模型路由资源包 */
@@ -1508,6 +1548,10 @@ declare interface ModelRouterSet {
   Vip?: string;
   /** 模型路由实例所属VPC的ID */
   VpcId?: string;
+  /** 带宽单位：Mbps */
+  Bandwidth?: number;
+  /** 弹性公网IP的ID */
+  EipAddressId?: string;
 }
 
 /** BYOK健康探测结果 */
@@ -1682,18 +1726,40 @@ declare interface RewriteTarget {
 
 /** 路由设置 */
 declare interface RouterSettingWithFallBack {
-  /** 模型间路由策略。枚举值：SimpleShuffle： 简单随机路由LowestCost： 最低积分路由 */
+  /** 模型间路由策略。枚举值：SimpleShuffle： 简单随机路由CostBasedRouting： 最低积分路由 */
   CrossModelGroupRoutingStrategy?: string | null;
   /** 回退策略 */
   FallBack?: FallBackItem | null;
   /** 模型内路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
   RoutingStrategy?: string | null;
+  /** CMR实例级别请求组内重试次数取值范围：[0, 5]默认值：2 */
+  NumRetries?: number | null;
+  /** L2模型组内路由调度算法参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs | null;
 }
 
 /** 路由设置 */
 declare interface RouterSettingWithoutFallBack {
   /** 路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
   RoutingStrategy?: string;
+  /** 模型间路由策略。枚举值：SimpleShuffle： 简单随机路由CostBasedRouting： 最低积分路由 */
+  CrossModelGroupRoutingStrategy?: string;
+  /** L2模型组内路由调度算法参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs;
+  /** CMR实例级别请求组内重试次数取值范围：[0, 5]默认值：2 */
+  NumRetries?: number;
+}
+
+/** L2模型内路由算法策略参数 */
+declare interface RoutingStrategyArgs {
+  /** 最低繁忙路由算法相对近优容差。取值范围：[0, 100]默认值：0仅最低繁忙路由算法生效。0 表示请求仅会路由到在途数最小的上游大模型部署，0.10 表示请求路由到的上游大模型部署在途请求数最多比最小在途数高10%，依次类推。 */
+  LeastBusyBuffer?: number;
+  /** 用量均衡路由算法相对近优容差取值范围：[0, 100]默认值：0仅用量均衡路由算法生效。0 表示请求仅会路由到TPM最低的上游大模型部署；0.10 表示请求最多会路由到比TPM最小值高10%的上游大模型部署，依次类推。 */
+  UsageBasedBuffer?: number;
+  /** 最低延迟路由算法相对近优容差取值范围：[0, 100]默认值：0仅最低延迟路由算法生效。0 表示请求仅会路由到延迟最低的上游大模型部署；0.10 表示请求最多会路由到比延迟最小值高10%的上游大模型部署，依次类推。 */
+  LowestLatencyBuffer?: number;
+  /** 最低积分系数路由算法相对近优容差取值范围：[0, 100]默认值：0仅最低积分系数路由算法生效。0 表示请求仅会路由到积分系数最低的上游大模型部署；0.10 表示请求最多会路由到比积分系数最小值高10%的上游大模型部署，依次类推。 */
+  LowestCostBuffer?: number;
 }
 
 /** 修改节点标签的数据类型 */
@@ -1878,6 +1944,12 @@ declare interface ServiceProvider {
   ServiceProviderId?: string;
   /** BYOK名称 */
   ServiceProviderName?: string;
+  /** 绑定的指定模型组内BYOK实例的调度优先级取值范围[0,2]，优先级随数值增大而降低。 */
+  Order?: number;
+  /** 绑定的指定模型组Order相同层级内BYOK实例的调度权重 */
+  Weight?: number;
+  /** CMR实例-BYOK实例的模型调度绑定关系状态枚举值：Configuring： 变配中ConfigureFailed： 变配失败Deleting： 删除中Provisioning： 创建中Active： 正常可用ProvisionFailed： 创建失败DeletionFailed： 删除失败 */
+  AssociationStatus?: string;
 }
 
 /** BYOK 实例（ServiceProvider）维度积分系数明细 */
@@ -2797,10 +2869,10 @@ declare interface CreateModelRouterRequest {
   ModelRouterType: string;
   /** 关联的积分预算ID */
   BudgetId?: string;
-  /** 证书ID入参限制：当Schema为HTTPS时，该参数必传 */
+  /** 证书ID入参限制：当Scheme为HTTPS时，该参数必传 */
   CertId?: string;
   /** 集群信息 */
-  ClusterInfo?: ClusterInfo;
+  ClusterInfo?: ClusterInfoInput;
   /** 模型路由实例名称默认值：- */
   ModelRouterName?: string;
   /** 网络类型枚举值：Internet： 公网Intranet： 内网 */
@@ -2819,6 +2891,10 @@ declare interface CreateModelRouterRequest {
   Tags?: TagInfo[];
   /** 模型路由实例所属VPC的ID */
   VpcId?: string;
+  /** 模型路由实例计费信息 */
+  ModelRouterBillingConfig?: ModelRouterBillingConfigInput;
+  /** 客户端Token，用于保证请求的幂等性。 从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符。 */
+  ClientToken?: string;
 }
 
 declare interface CreateModelRouterResourcePackageRequest {
@@ -4210,7 +4286,7 @@ declare interface DisassociateModelsFromModelRouterRequest {
   /** 模型路由实例ID */
   ModelRouterId: string;
   /** 需要解除关联的模型信息 */
-  Models?: ModelRouterModel[];
+  Models?: ModelRouterModelToDisassociate[];
 }
 
 declare interface DisassociateModelsFromModelRouterResponse {
@@ -4677,6 +4753,8 @@ declare interface ModifyModelRouterAttributesRequest {
   RateLimitConfig?: RateLimitConfigForModelRouter;
   /** 路由配置 */
   RouterSetting?: RouterSettingWithFallBack;
+  /** 带宽取值范围：[1, 2048]单位：Mbps */
+  Bandwidth?: number;
 }
 
 declare interface ModifyModelRouterAttributesResponse {
