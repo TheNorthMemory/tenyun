@@ -136,14 +136,14 @@ declare interface AIGWJWTAuthPluginConfig {
 
 /** AI网关 JWT 凭证物料配置 */
 declare interface AIGWJWTCredentialConfig {
-  /** JWT 消费者标识，iss claim */
-  Key: string;
   /** 签名算法，取值：HS256 HS384 HS512 RS256 RS384 RS512 ES256 ES384 ES512 */
   Algorithm: string;
-  /** HS 对称密钥，仅 Algorithm 为 HS256/HS384/HS512 时必填；RS/ES* 时留空 */
-  Secret?: string;
+  /** JWT 消费者标识，iss claim */
+  Key: string;
   /** RS/ES PEM 格式公钥，仅 Algorithm 为 RS256/RS384/RS512/ES256/ES384/ES512 时必填；HS* 时留空 */
   RSAPublicKey?: string;
+  /** HS 对称密钥，仅 Algorithm 为 HS256/HS384/HS512 时必填；RS/ES* 时留空 */
+  Secret?: string;
 }
 
 /** 路由匹配规则 */
@@ -182,6 +182,8 @@ declare interface AIGWLLMQuotaLimit {
   RPMLimit?: number;
   /** 该模型服务每分钟 Token 数上限，0 表示该维度不限 */
   TPMLimit?: number;
+  /** 并发数限流 */
+  ConcurrentCountLimit?: number;
 }
 
 /** 单个消费者 Token 用量查询结果 */
@@ -464,10 +466,12 @@ declare interface AIGWOAuthAuthPluginConfig {
 
 /** OAuth2 凭证物料配置 */
 declare interface AIGWOAuthCredentialConfig {
-  /** 客户端ID */
+  /** OAuth2 client_id */
   ClientId: string;
-  /** 客户端密钥 */
+  /** OAuth2 client_secret */
   ClientSecret: string;
+  /** OAuth2 授权回调地址 */
+  RedirectURIs?: string;
 }
 
 /** 资源端 OIDC 认证插件配置 */
@@ -502,7 +506,7 @@ declare interface AIGWOIDCAuthPluginConfig {
 declare interface AIGWOIDCCredentialConfig {
   /** IdP 注册的 client_id */
   ClientId: string;
-  /** 客户端密钥参数格式：IdP 注册的 client_secret */
+  /** IdP 注册的 client_secret */
   ClientSecret: string;
   /** IdP Issuer URL */
   IssuerURL: string;
@@ -513,13 +517,17 @@ declare interface AIGWOIDCCredentialConfig {
 /** 精确缓存 redis 配置 */
 declare interface AIGWRedisConfig {
   /** Host */
-  Host: string;
+  Host?: string;
   /** 端口 */
-  Port: number;
+  Port?: number;
   /** 用户名 */
   Username?: string;
   /** 密码 */
   Password?: string;
+  /** Redis配置ID */
+  RedisConfigId?: string;
+  /** Redis部署类型，如standalone（单机）、cluster（集群） */
+  Type?: string;
 }
 
 /** AI 网关指定模型路由（暂时只用在Token长度路由时的子路由选择） */
@@ -602,10 +610,10 @@ declare interface CNAPIGwConsumerGroup {
 
 /** 创建资源通用结果 */
 declare interface CNAPIGwCreateCommonResult {
-  /** 是否成功 */
-  Success?: boolean;
   /** 对应的id 值 */
   ID?: string;
+  /** 是否成功 */
+  Success?: boolean;
 }
 
 /** MCP Tool 信息 */
@@ -668,44 +676,74 @@ declare interface CNAPIGwMCPToolParam {
   BackendName?: string;
 }
 
+/** 通过OpenAPI文件导入MCP tools的预览内容 */
+declare interface CNAPIGwMCPToolPreview {
+  /** MCP Tool入参的ContentType枚举值：application/json： json格式application/x-www-form-urlencoded： 表单格式 */
+  ContentType?: string;
+  /** MCP Tool的描述 */
+  Description?: string | null;
+  /** MCP Tool的参数 */
+  InputParams?: CNAPIGwMCPToolParam[];
+  /** MCP Tool的请求方法 */
+  Method?: string;
+  /** MCP Tool名字 */
+  Name?: string;
+  /** MCP Tool的请求路径 */
+  Path?: string;
+  /** MCP Tool的状态枚举值：Valid： 可导入Invalid： 不可导入 */
+  Status?: string;
+  /** 不可导入的原因 */
+  StatusMessage?: string | null;
+  /** 虚拟MCP Server的tools的完整url路径 */
+  UpstreamUrl?: string | null;
+}
+
+/** DescribeCloudNativeAPIGatewayMCPToolsFromFile接口的出参 */
+declare interface CNAPIGwParseMCPToolsResult {
+  /** MCP Tools列表 */
+  DataList?: CNAPIGwMCPToolPreview[];
+  /** MCP tools的数量 */
+  TotalCount?: number;
+}
+
 /** 密钥信息 */
 declare interface CNAPIGwSecretKey {
-  /** 密钥id */
-  SecretKeyId?: string;
-  /** 密钥名字 */
-  Name?: string;
-  /** 密钥协议类型。 */
-  SecretType?: string;
-  /** 状态。枚举值：Enable： 启用Disable： 禁用 */
-  Status?: string;
-  /** 密钥生成方式。枚举值：System： 系统自动生成Custom： 用户自定义KMS： 使用 KMS 密钥 */
-  GenerateType?: string;
-  /** 密钥明文 */
-  SecretValue?: string;
-  /** KMS凭证名字 */
-  KmsKeyName?: string | null;
-  /** KMS凭证版本 */
-  KmsKeyVersion?: string | null;
-  /** 描述 */
-  Description?: string | null;
+  /** 绑定数 */
+  BindCount?: number;
   /** 是否可以绑定 */
   CanBind?: boolean | null;
   /** 创建时间 */
   CreateTime?: string;
-  /** 修改时间 */
-  ModifyTime?: string;
-  /** 绑定数 */
-  BindCount?: number;
-  /** 密钥归属资源类型。枚举值：Consumer： 消费者ModelService： 模型服务 */
-  ResourceType?: string;
+  /** 描述 */
+  Description?: string | null;
+  /** 密钥生成方式。枚举值：System： 系统自动生成Custom： 用户自定义KMS： 使用 KMS 密钥 */
+  GenerateType?: string;
   /** JWT凭证配置 */
   JWTCredentialConfig?: AIGWJWTCredentialConfig;
-  /** OAuth2凭证配置 */
+  /** KMS凭证名字 */
+  KmsKeyName?: string | null;
+  /** KMS凭证版本 */
+  KmsKeyVersion?: string | null;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 密钥名字 */
+  Name?: string;
+  /** OAuth凭证配置 */
   OAuthCredentialConfig?: AIGWOAuthCredentialConfig;
   /** OIDC凭证配置 */
   OIDCCredentialConfig?: AIGWOIDCCredentialConfig;
-  /** Agent 密钥类型 */
+  /** secret key provider方枚举值：Dify： Dify */
   Provider?: string;
+  /** 密钥归属资源类型。枚举值：Consumer： 消费者ModelService： 模型服务 */
+  ResourceType?: string;
+  /** 密钥id */
+  SecretKeyId?: string;
+  /** 密钥协议类型。 */
+  SecretType?: string;
+  /** 密钥明文 */
+  SecretValue?: string;
+  /** 状态。枚举值：Enable： 启用Disable： 禁用 */
+  Status?: string;
 }
 
 /** LLM 模型 API */
@@ -736,7 +774,7 @@ declare interface CloudNativeAPIGatewayLLMModelAPI {
   ModelServiceName?: string;
   /** 模型服务路由策略（是指如何路由到模型服务） */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute;
-  /** 无 */
+  /** HTTP 请求头匹配规则，用于按请求头路由到不同模型服务。 */
   MatchHeaders?: AIGWKVMatch[];
   /** 是否开启跨服务fallback */
   EnableCrossServiceFallback?: boolean;
@@ -1101,6 +1139,14 @@ declare interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
   KeyRotationEnabled?: boolean;
   /** 密钥轮转周期单位：天数 */
   KeyRotationPeriodDays?: number;
+  /** 来源服务 ID。 */
+  SourceId?: string;
+  /** 命名空间。 */
+  Namespace?: string;
+  /** 服务名称。 */
+  ServiceName?: string;
+  /** 协议类型，如 OpenAI、Custom。 */
+  Protocol?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
@@ -1167,28 +1213,30 @@ declare interface CreateCloudNativeAPIGatewayMCPToolResponse {
 declare interface CreateCloudNativeAPIGatewaySecretKeyRequest {
   /** 实例 ID */
   GatewayId: string;
-  /** 密钥协议类型。枚举值：ApiKeyBasicHmacOAuth2JWT */
-  SecretType: string;
-  /** 密钥名称，2-60 字符。 */
-  Name: string;
   /** 密钥生成方式。枚举值：System：系统自动生成Custom：用户自定义（需传 SecretValue）KMS：使用 KMS 密钥（需传 KmsKeyName 与 KmsKeyVersion） */
   GenerateType: string;
+  /** 密钥名称，2-60 字符。 */
+  Name: string;
   /** 密钥归属资源类型。枚举值：Consumer：消费者ModelService：模型服务 */
   ResourceType: string;
-  /** KMS 密钥名称。GenerateType=KMS 时必填。 */
-  KmsKeyName?: string;
-  /** KMS 密钥版本。GenerateType=KMS 时必填。 */
-  KmsKeyVersion?: string;
-  /** 密钥值，长度 8-256。GenerateType=Custom 时必填。 */
-  SecretValue?: string;
+  /** 密钥协议类型。枚举值：ApiKeyBasicHmacOAuth2JWT */
+  SecretType: string;
   /** 密钥描述。最长 200 字符。 */
   Description?: string;
   /** JWT凭证配置 */
   JWTCredentialConfig?: AIGWJWTCredentialConfig;
-  /** Oauth2凭证配置 */
+  /** KMS 密钥名称。GenerateType=KMS 时必填。 */
+  KmsKeyName?: string;
+  /** KMS 密钥版本。GenerateType=KMS 时必填。 */
+  KmsKeyVersion?: string;
+  /** OAuth2.0凭证配置 */
   OAuthCredentialConfig?: AIGWOAuthCredentialConfig;
   /** OIDC凭证配置 */
   OIDCCredentialConfig?: AIGWOIDCCredentialConfig;
+  /** 第三方平台类型枚举值：Dify： Dify平台 */
+  Provider?: string;
+  /** 密钥值，长度 8-256。GenerateType=Custom 时必填。 */
+  SecretValue?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewaySecretKeyResponse {
@@ -1345,6 +1393,8 @@ declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
   ConsumerGroupId?: string;
   /** 是否用于绑定场景。true 时仅返回可被绑定到指定消费者组的模型 API。 */
   UseToBind?: boolean;
+  /** 消费者 ID（以 consumer- 开头）。 */
+  ConsumerId?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
@@ -1542,6 +1592,24 @@ declare interface DescribeCloudNativeAPIGatewayMCPToolResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest {
+  /** OpenAPI文件内容 */
+  Content: string;
+  /** 文件内容格式 */
+  Format: string;
+  /** 网关实例ID */
+  GatewayId: string;
+  /** MCP Server ID */
+  MCPServerId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
+  /** 解析结果 */
+  Result?: CNAPIGwParseMCPToolsResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
   /** 实例 ID */
   GatewayId: string;
@@ -1687,6 +1755,14 @@ declare interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
   KeyRotationEnabled?: boolean;
   /** 密钥轮转周期单位：天数 */
   KeyRotationPeriodDays?: number;
+  /** 来源服务 ID。 */
+  SourceId?: string;
+  /** 命名空间。 */
+  Namespace?: string;
+  /** 服务名称。 */
+  ServiceName?: string;
+  /** 协议类型，如 OpenAI、Custom。 */
+  Protocol?: string;
 }
 
 declare interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
@@ -1910,6 +1986,22 @@ declare interface UnbindCloudNativeAPIGatewaySecretKeyResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCloudNativeAPIGatewayMCPToolsRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** MCP Server ID */
+  MCPServerId: string;
+  /** 待导入的MCP Tools列表 */
+  Tools: CNAPIGwMCPTool[];
+}
+
+declare interface UpdateCloudNativeAPIGatewayMCPToolsResponse {
+  /** 导入任务的ID */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cngw 云原生智能网关} */
 declare interface Cngw {
   (): Versions;
@@ -1977,6 +2069,8 @@ declare interface Cngw {
   DescribeCloudNativeAPIGatewayMCPToolACLList(data: DescribeCloudNativeAPIGatewayMCPToolACLListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolACLListResponse>;
   /** 查询AI网关MCP Tool 列表 {@link DescribeCloudNativeAPIGatewayMCPToolListRequest} {@link DescribeCloudNativeAPIGatewayMCPToolListResponse} */
   DescribeCloudNativeAPIGatewayMCPToolList(data: DescribeCloudNativeAPIGatewayMCPToolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolListResponse>;
+  /** 查询导入的OpenAPI文件里可导入Tools {@link DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest} {@link DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse} */
+  DescribeCloudNativeAPIGatewayMCPToolsFromFile(data: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse>;
   /** 查询AI网关密钥详情 {@link DescribeCloudNativeAPIGatewaySecretKeyRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyResponse} */
   DescribeCloudNativeAPIGatewaySecretKey(data: DescribeCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyResponse>;
   /** 查询AI网关密钥值 {@link DescribeCloudNativeAPIGatewaySecretKeyValueRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyValueResponse} */
@@ -2011,6 +2105,8 @@ declare interface Cngw {
   RemoveCloudNativeAPIGatewayConsumerInGroup(data: RemoveCloudNativeAPIGatewayConsumerInGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse>;
   /** 解绑AI网关密钥 {@link UnbindCloudNativeAPIGatewaySecretKeyRequest} {@link UnbindCloudNativeAPIGatewaySecretKeyResponse} */
   UnbindCloudNativeAPIGatewaySecretKey(data: UnbindCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCloudNativeAPIGatewaySecretKeyResponse>;
+  /** 批量导入MCP tools {@link UpdateCloudNativeAPIGatewayMCPToolsRequest} {@link UpdateCloudNativeAPIGatewayMCPToolsResponse} */
+  UpdateCloudNativeAPIGatewayMCPTools(data: UpdateCloudNativeAPIGatewayMCPToolsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCloudNativeAPIGatewayMCPToolsResponse>;
 }
 
 export declare type Versions = ["2023-04-18"];

@@ -9840,17 +9840,17 @@ declare namespace V20180717 {
     SampleType: string;
     /** 采样间隔。当 SampleType 为 Percent 时，指定采样间隔的百分比。当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。 */
     SampleInterval: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 采样截图模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Width?: number;
-    /** 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
-    /** 图片格式，取值为 jpg 和 png。默认为 jpg。 */
+    /** 图片格式，取值为 jpg、png 和 webp。默认为 jpg。 */
     Format?: string;
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
@@ -9920,17 +9920,17 @@ declare namespace V20180717 {
   }
 
   interface CreateSnapshotByTimeOffsetTemplateRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 指定时间点截图模板名称，长度限制：64 个字符。 */
     Name?: string;
-    /** 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图宽度（或长边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Width?: number;
-    /** 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
+    /** 截图高度（或短边）的最大值，取值范围：0 和 [32, 4096]，单位：px。当 Width、Height 均为 0，则分辨率同源；当 Width 为 0，Height 非 0，则 Width 按比例缩放；当 Width 非 0，Height 为 0，则 Height 按比例缩放；当 Width、Height 均非 0，则分辨率按用户指定。默认值：0。 */
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
-    /** 图片格式，取值可以为 jpg 和 png。默认为 jpg。 */
+    /** 图片格式，取值为 jpg、png 和 webp。默认为 jpg。 */
     Format?: string;
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
@@ -12914,7 +12914,7 @@ declare namespace V20180717 {
   interface ModifySampleSnapshotTemplateRequest {
     /** 采样截图模板唯一标识。 */
     Definition: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 采样截图模板名称，长度限制：64 个字符。 */
     Name?: string;
@@ -12928,7 +12928,7 @@ declare namespace V20180717 {
     SampleType?: string;
     /** 采样间隔。当 SampleType 为 Percent 时，指定采样间隔的百分比。当 SampleType 为 Time 时，指定采样间隔的时间，单位为秒。 */
     SampleInterval?: number;
-    /** 图片格式，取值为 jpg 和 png。 */
+    /** 图片格式，取值为 jpg、png 和 webp。默认为 jpg。 */
     Format?: string;
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
@@ -12944,7 +12944,7 @@ declare namespace V20180717 {
   interface ModifySnapshotByTimeOffsetTemplateRequest {
     /** 指定时间点截图模板唯一标识。 */
     Definition: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 指定时间点截图模板名称，长度限制：64 个字符。 */
     Name?: string;
@@ -12954,7 +12954,7 @@ declare namespace V20180717 {
     Height?: number;
     /** 分辨率自适应，可选值：open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。默认值：open。 */
     ResolutionAdaptive?: string;
-    /** 图片格式，取值可以为 jpg 和 png。 */
+    /** 图片格式，取值为 jpg、png 和 webp。默认为 jpg。 */
     Format?: string;
     /** 模板描述信息，长度限制：256 个字符。 */
     Comment?: string;
@@ -13692,6 +13692,8 @@ declare namespace V20180717 {
     StreamDomains?: string[];
     /** 直播推流Path，当媒资来源是直播录制时有效。 */
     StreamPaths?: string[];
+    /** 知识库ID，匹配集合中任意元素。 */
+    KnowledgeBases?: string[];
   }
 
   interface SearchMediaResponse {

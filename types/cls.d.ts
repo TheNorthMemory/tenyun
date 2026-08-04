@@ -2728,6 +2728,8 @@ declare interface ToolCall {
   Function?: ToolCallFunction;
   /** 索引值 */
   Index?: number;
+  /** 模型返回的思考签名，执行工具后需在后续请求中原样回传 */
+  ThoughtSignature?: string;
 }
 
 /** 具体的Tool Call Function调用 */

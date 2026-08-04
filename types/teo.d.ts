@@ -60,7 +60,7 @@ declare interface AccelerationDomain {
   ZoneId?: string;
   /** 加速域名名称。 */
   DomainName?: string;
-  /** 加速域名状态，取值有：online：已生效；process：部署中；offline：已停用；forbidden：已封禁；init：未生效，待激活站点。 */
+  /** 加速域名状态枚举值：online： 已生效process： 部署中offline： 已停用init： 未生效，待激活站点 */
   DomainStatus?: string;
   /** CNAME 地址。 */
   Cname?: string;
@@ -1630,17 +1630,19 @@ declare interface ExceptionRule {
   Name?: string;
   /** 例外规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
   Condition?: string;
-  /** 例外规则执行选项，取值有：WebSecurityModules: 指定例外规则的安全防护模块。ManagedRules：指定托管规则。 */
+  /** 例外规则执行选项，取值有：WebSecurityModules: 指定例外规则的安全防护模块，需配合 ⁠WebSecurityModulesForException⁠ 使用；WebSecuritySubmodules: 指定例外规则的安全防护子模块，需配合 ⁠WebSecuritySubmodulesForException⁠ 使用；ManagedRules：指定例外规则的具体托管规则，需配合 ⁠ManagedRulesForException⁠ 使用；ManagedRuleGroups：指定例外规则的托管规则组，需配合 ⁠ManagedRuleGroupsForException⁠ 使用。 */
   SkipScope?: string;
-  /** 跳过请求的具体类型，取值有：SkipOnAllRequestFields: 跳过所有请求；SkipOnSpecifiedRequestFields: 跳过指定请求字段。仅当 SkipScope 为 ManagedRules 时有效。 */
+  /** 跳过请求的具体类型，取值有：SkipOnAllRequestFields: 跳过所有请求；SkipOnSpecifiedRequestFields: 跳过指定请求字段。仅当 SkipScope 为 ManagedRules 或 ManagedRuleGroups 时有效。 */
   SkipOption?: string;
-  /** 指定例外规则的安全防护模块，仅当 SkipScope 为 WebSecurityModules 时有效。取值有：websec-mod-managed-rules：托管规则；websec-mod-rate-limiting：速率限制；websec-mod-custom-rules：自定义规则；websec-mod-adaptive-control：自适应频控、智能客户端过滤、慢速攻击防护、流量盗刷防护；websec-mod-bot：Bot管理。 */
+  /** 指定例外规则的安全防护模块，仅当 SkipScope 为 WebSecurityModules 时有效，取值有：websec-mod-managed-rules：托管规则；websec-mod-rate-limiting：速率限制；websec-mod-custom-rules：自定义规则；websec-mod-adaptive-control：自适应频控、智能客户端过滤、慢速攻击防护、流量盗刷防护；websec-mod-bot：Bot管理。 */
   WebSecurityModulesForException?: string[];
-  /** 指定例外规则的具体托管规则，仅当 SkipScope 为 ManagedRules 时有效，且此时不能指定 ManagedRuleGroupsForException 。 */
+  /** 指定例外规则的安全防护子模块，仅当 SkipScope 为 WebSecuritySubmodules 时有效，取值有：托管规则（ManagedRules）模块功能：websec-mod-managed-rules/managed-rule-groups：规则集；websec-mod-managed-rules/frequent-scanning-protection：高频扫描防护；速率限制（RateLimitingRules）模块功能：websec-mod-rate-limiting-rules：速率限制规则；自定义规则（CustomRules）模块功能：websec-mod-custom-rules：自定义规则；HTTP DDoS 防护（HttpDDoSProtection）模块功能：websec-mod-http-ddos-protection/adaptive-frequency-control：自适应频控；websec-mod-http-ddos-protection/client-filtering：智能客户端过滤；websec-mod-http-ddos-protection/bandwidth-abuse-defense：流量盗刷防护；高级 Bot 管理（BotManagement）模块功能：websec-mod-bot-management/basic-feature：基础特征管理；websec-mod-bot-management/ip-reputation：客户端画像分析；websec-mod-bot-management/bot-intelligence：智能 Bot 分析；websec-mod-bot-management/custom-rules：自定义规则；websec-mod-bot-management/browser-impersonation-detection：主动特征识别；websec-mod-bot-management/client-attestation-rules：客户端认证；基础 Bot 管理（BotManagementLite）模块功能：websec-mod-bot-management-lite/ai-crawler-detection：AI 爬虫处置；websec-mod-bot-management-lite/captcha-page-challenge：人机校验页。 */
+  WebSecuritySubmodulesForException?: string[];
+  /** 指定例外规则的具体托管规则，仅当 SkipScope 为 ManagedRules 时有效。 */
   ManagedRulesForException?: string[];
-  /** 指定例外规则的托管规则组，仅当 SkipScope 为 ManagedRules 时有效，且此时不能指定 ManagedRulesForException 。 */
+  /** 指定例外规则的托管规则组，仅当 SkipScope 为 ManagedRuleGroups 时有效。 */
   ManagedRuleGroupsForException?: string[];
-  /** 指定例外规则跳过指定请求字段的具体配置，仅当 SkipScope 为 ManagedRules 并且 SkipOption 为 SkipOnSpecifiedRequestFields 时有效。 */
+  /** 指定例外规则跳过指定请求字段的具体配置，仅当 SkipScope 为 ManagedRules 或 ManagedRuleGroups 并且 SkipOption 为 SkipOnSpecifiedRequestFields 时有效。 */
   RequestFieldsForException?: RequestFieldsForException[];
   /** 例外规则是否开启。取值有：on：开启off：关闭 */
   Enabled?: string;
@@ -2092,6 +2094,8 @@ declare interface IPReputationGroup {
 
 /** IP SSL相关信息 */
 declare interface IPSSLConfig {
+  /** IP SSL 关联域名所属站点ID。如果Status值为 unbound 时，该字段为空值。 */
+  ZoneId?: string | null;
   /** IP SSL关联的域名。如果Status值为 unbound 时，该字段为空值。 */
   AssociatedDomain?: string | null;
   /** 关联状态， 取值如下：bound：IP SSL配置已绑定binding：IP SSL配置绑定中unbinding：IP SSL配置解绑中unbound：IP SSL配置未绑定 */
@@ -3068,7 +3072,7 @@ declare interface OriginCertificateVerify {
 declare interface OriginDetail {
   /** 源站类型，取值有：IP_DOMAIN：IPV4、IPV6 或域名类型源站；COS：腾讯云 COS 对象存储源站；AWS_S3：AWS S3 对象存储源站；ORIGIN_GROUP：源站组类型源站；VOD：云点播；SPACE：源站卸载，当前仅白名单开放；LB：负载均衡，当前仅白名单开放。 */
   OriginType?: string;
-  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；当 OriginType = VOD 时，该参数请填写云点播应用 ID ； */
+  /** 源站地址，根据 OriginType 的取值分为以下情况：当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；当 OriginType = COS 时，该参数为 COS 桶的访问域名；当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；如果引用了其它站点的源站组，格式为{源站组 ID}@{ZoneID}。例如：og-testorigin@zone-38moq1z10wwwy当 OriginType = VOD 时，该参数请填写云点播应用 ID ；当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；如果引用了其它站点的负载均衡，格式为{负载均衡 ID}@{ZoneID}。例如：lb-2rxpamcyqfzg@zone-38moq1z10wwwy当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。 */
   Origin?: string;
   /** 备用源站组 ID，该参数仅在 OriginType = ORIGIN_GROUP 且配置了备源站组时会生效。 */
   BackupOrigin?: string;

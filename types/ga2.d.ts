@@ -7,7 +7,7 @@ declare interface AcceleratorAreas {
   /** 加速地域。 */
   AccelerateRegion: string;
   /** 带宽。 */
-  Bandwidth: number;
+  Bandwidth?: number;
   /** 支持'BGP', 'QUALITY_BGP', 'STATIC_IP'，默认BGP。枚举值：BGP： BGPSTATIC_IP： 三网QUALITY_BGP： 精品BGP */
   IspType?: string;
   /** 仅支持IPv4，默认是IPv4。 */
@@ -66,7 +66,7 @@ declare interface EndpointConfigurations {
 
 /** 终端节点组配置 */
 declare interface EndpointGroupConfiguration {
-  /** 终端节点组名称。最大长度不能超过128个字节。必须以字母（a-z, A-Z）或中文字符开头。 */
+  /** 终端节点组名称。参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _ */
   Name: string;
   /** 终端节点组所在地域。 */
   EndpointGroupRegion: string;
@@ -555,11 +555,11 @@ declare interface CreateGlobalAcceleratorAclRuleResponse {
 }
 
 declare interface CreateGlobalAcceleratorRequest {
-  /** 名称，最大长度不能超过128个字节，不能为空。参数格式：满足正则 ^[a-zA-Z\u4e00-\u9fa5]（首字符是英文字母或汉字），并且不满足正则 ^[\d._-]*$（整串不能只由数字/./_/-组成）。 */
+  /** 名称。参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _ */
   Name: string;
   /** 计费模式，PREPAID：表示预付费，即包年包月，POSTPAID：表示后付费，即按量计费。默认：POSTPAID。当前仅支持后付费。 */
   InstanceChargeType?: string;
-  /** 描述信息，最大长度不能超过100个字节。 */
+  /** 描述信息。参数格式：最大长度不超过100 个字符。 */
   Description?: string;
   /** 跨境类型；HighQuality：精品BGP-IP跨境；Unicom：联通专线跨境。 */
   CrossBorderType?: string;
@@ -597,7 +597,7 @@ declare interface CreateListenerAdditionalCertResponse {
 declare interface CreateListenerRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 名称，最大长度不能超过128个字符。 */
+  /** 名称。参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _ */
   Name: string;
   /** 端口范围。 */
   PortRanges: PortRanges;
@@ -611,7 +611,7 @@ declare interface CreateListenerRequest {
   IdleTimeout?: number;
   /** 四层获取源IP方式，支持'TOA', 'ProxyProtocol', 'ProxyProtocolV2'。需要开启四层获取源IP方式，才填写此参数。 */
   GetRealIpType?: string;
-  /** 是否开启会话保持。支持配置'Open', 'Close'。枚举值：Open： 开启。Close： 关闭。 */
+  /** 是否开启会话保持。支持配置'Open', 'Close'。枚举值：Open： 开启。Close： 关闭。仅支持4层监听器 ，7层不支持修改 */
   ClientAffinity?: string;
   /** 请求超时时间。取值范围：[1, 180]默认值：60当HTTPS监听器时才可配置此参数。 */
   RequestTimeout?: number;
@@ -621,9 +621,9 @@ declare interface CreateListenerRequest {
   CertificationType?: string;
   /** 加密算法套件。支持配置'tls_policy_1.0-2', 'tls_policy_1.1-2', 'tls_policy_1.2', 'tls_policy_1.2_strict', 'tls_policy_1.2_strict-1.3'。 */
   CipherPolicyId?: string;
-  /** 服务器证书。当是HTTPS监听器时，此字段必传。 */
+  /** 服务器证书。入参限制：当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。当是HTTPS监听器时，此字段必传。 */
   ServerCertificates?: string[];
-  /** 客户端证书。当时HTTPS监听器且开启双向认证时，此字段必传。 */
+  /** 客户端证书。入参限制：1、当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。2、证书必须为CA证书。当时HTTPS监听器且开启双向认证时，此字段必传。 */
   ClientCaCertificates?: string[];
   /** HTTPS监听器支持选择版本枚举值：HTTP/1.1： HTTP/1.1HTTP/2： HTTP/2 */
   HttpVersion?: string;
@@ -1051,7 +1051,7 @@ declare interface ModifyEndpointGroupRequest {
   EndpointGroupId: string;
   /** 终端节点配置。 */
   EndpointConfigurations?: EndpointConfigurations[];
-  /** 名称。入参限制：最大长度不能超过128个字节。以大小写字母或中文开头。 */
+  /** 名称。参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _ */
   Name?: string;
   /** 描述信息。入参限制：最大长度不能超过100个字节。 */
   Description?: string;
@@ -1195,7 +1195,7 @@ declare interface ModifyGlobalAcceleratorAclRuleRequest {
   GlobalAcceleratorAclPolicyId: string;
   /** Acl规则ID。 */
   GlobalAcceleratorAclRuleId: string;
-  /** 协议。入参限制：支持选择'TCP', 'UDP', 'ALL'。 */
+  /** 协议。入参限制：支持选择'TCP', 'UDP'。 */
   Protocol?: string;
   /** 端口。 */
   Port?: string;
@@ -1217,9 +1217,9 @@ declare interface ModifyGlobalAcceleratorAclRuleResponse {
 declare interface ModifyGlobalAcceleratorRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 名称，最大长度不能超过60个字节。 */
+  /** 名称。参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _ */
   Name?: string;
-  /** 描述信息，最大长度不能超过100个字节。 */
+  /** 描述信息。参数格式：最大长度不超过100 个字符。 */
   Description?: string;
   /** 跨境类型。枚举值：HighQuality： 精品跨境。Unicom： 联通跨境。 */
   CrossBorderType?: string;
@@ -1239,7 +1239,7 @@ declare interface ModifyListenerRequest {
   GlobalAcceleratorId: string;
   /** 监听器ID。 */
   ListenerId: string;
-  /** 名称，最大长度不能超过60个字节。 */
+  /** 名称。参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _ */
   Name?: string;
   /** 描述信息，最大长度不能超过100个字节。 */
   Description?: string;
@@ -1257,9 +1257,9 @@ declare interface ModifyListenerRequest {
   CertificationType?: string;
   /** 加密算法套件。入参限制：支持选择tls_policy_1.0-2', 'tls_policy_1.1-2', 'tls_policy_1.2', 'tls_policy_1.2_strict', 'tls_policy_1.2_strict-1.3'。HTTPS监听器才支持此参数修改。 */
   CipherPolicyId?: string;
-  /** 服务器证书。HTTPS监听器才支持此参数修改。 */
+  /** 服务器证书。入参限制：当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。HTTPS监听器才支持此参数修改。 */
   ServerCertificates?: string[];
-  /** 客户端证书。HTTPS监听器才支持此参数修改，并且开启双向认证。 */
+  /** 客户端证书。入参限制：1、当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。2、证书必须为CA证书。HTTPS监听器才支持此参数修改，并且开启双向认证。 */
   ClientCaCertificates?: string[];
   /** 获取源IP方式。入参限制：支持选择'ProxyProtocol', 'Close', 'ProxyProtocolV2', 'TOA'。TCP监听器才支持此参数修改。 */
   GetRealIpType?: string;

@@ -388,7 +388,7 @@ declare interface McuFeedBackRoomParams {
   RoomIdType: number;
   /** 回推房间使用的UserId(https://cloud.tencent.com/document/product/647/46351)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。 */
   UserId: string;
-  /** 回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
+  /** 回推房间UserId对应的用户签名，相当于登录密码，具体计算方法请参考TRTC计算UserSig的方案。 */
   UserSig: string;
 }
 

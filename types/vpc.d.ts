@@ -1292,7 +1292,7 @@ declare interface HighPriorityRouteTable {
 
 /** IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议 */
 declare interface IKEOptionsSpecification {
-  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC */
+  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'AES128GCM128', 'AES192GCM128', 'AES256GCM128'默认值：3DES-CBC仅4.0VPN网关支持 'AES128GCM128', 'AES192GCM128', 'AES256GCM128' */
   PropoEncryAlgorithm?: string;
   /** 认证算法：可选值：'MD5'，'SHA'，'SHA-256'，'SHA-512'， 默认为SHA。 */
   PropoAuthenAlgorithm?: string;
@@ -1320,7 +1320,7 @@ declare interface IKEOptionsSpecification {
 
 /** IPSec配置，腾讯云提供IPSec安全会话设置 */
 declare interface IPSECOptionsSpecification {
-  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'默认值：AES-CBC-128 */
+  /** 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL', 'AES128GCM128', 'AES192GCM128', 'AES256GCM128'默认值：AES-CBC-128仅4.0VPN网关支持 'AES128GCM128', 'AES192GCM128', 'AES256GCM128' */
   EncryptAlgorithm?: string;
   /** 认证算法：可选值：'MD5', 'SHA1', 'SHA-256', 'SHA-512', 'SHA-384', 'SM3'默认值：SHA1 */
   IntegrityAlgorith?: string | null;

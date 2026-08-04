@@ -2999,6 +2999,8 @@ declare interface DeleteDatasetRequest {
   DatasetId: string;
   /** 是否删除cos标签文件 */
   DeleteLabelEnable: boolean;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DeleteDatasetResponse {
@@ -3123,6 +3125,8 @@ declare interface DescribeAnnotatedTaskListRequest {
   Offset: number;
   /** 页面大小，默认为10 */
   Limit: number;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 过滤条件数组，支持数据集ID，标注场景、任务状态、数据集名称、人物名称的过滤，后面两个支持模糊查询 */
   Filters?: Filter[];
   /** 标签过滤条件 */

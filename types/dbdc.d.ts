@@ -156,7 +156,7 @@ declare interface DBCustomNode {
   RackId?: string;
   /** 底层物理机IP（已加密） */
   HostIp?: string;
-  /** 网络模式枚举值：NetworkModePrivateLink： 四层 SSH 服务联通模式NetworkModeCrossTenantENI： 三层双网卡访问方式 */
+  /** 网络模式枚举值：privatelink： 四层 SSH 服务联通模式cross_tenant_eni： 三层双网卡访问方式 */
   NetworkMode?: string;
   /** 当选择NetworkModeCrossTenantENI模式时，节点的访问IP地址 */
   EniIP?: string;

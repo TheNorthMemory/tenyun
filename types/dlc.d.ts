@@ -144,6 +144,68 @@ declare interface CSVSerde {
   Separator?: string;
 }
 
+/** 集群组响应 */
+declare interface ClusterGroup {
+  /** 集群组 ID（系统生成） */
+  Id?: string | null;
+  /** 集群组名称 */
+  Name?: string | null;
+  /** 集群组描述 */
+  Description?: string | null;
+  /** 配置 */
+  Config?: string | null;
+  /** 应用 ID（多租户） */
+  AppId?: number | null;
+  /** 创建者主账号 UIN */
+  Uin?: string | null;
+  /** 创建者子账号 UIN */
+  SubAccountUin?: string | null;
+  /** 创建时间 */
+  CreateTime?: number | null;
+  /** 更新时间 */
+  UpdateTime?: number | null;
+  /** 是否已软删除 */
+  Deleted?: boolean | null;
+  /** 删除时间（软删时写入，活跃记录为 null） */
+  DeleteTime?: number | null;
+}
+
+/** 集群pod详情 */
+declare interface ClusterPod {
+  /** Pod名称 */
+  PodName?: string;
+  /** Pod IP */
+  PodIp?: string;
+  /** Pod状态 */
+  Status?: string;
+  /** Pod阶段 */
+  Phase?: string;
+  /** 所属节点 */
+  NodeName?: string;
+  /** 节点IP */
+  NodeIp?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** CPU请求 */
+  CpuRequest?: string;
+  /** CPU限制 */
+  CpuLimit?: string;
+  /** 内存请求 */
+  MemoryRequest?: string;
+  /** 内存限制 */
+  MemoryLimit?: string;
+  /** GPU数量 */
+  GpuCount?: string;
+  /** 容器镜像 */
+  Image?: string;
+  /** Pod角色(head/worker) */
+  Role?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number;
+  /** 启动时间（毫秒时间戳） */
+  StartTime?: number;
+}
+
 /** 数据表列信息。 */
 declare interface Column {
   /** 列名称，不区分大小写，最大支持25个字符。 */
@@ -950,6 +1012,106 @@ declare interface EngineSessionImage {
   SparkImageTag?: string | null;
 }
 
+/** 环境变量标签 */
+declare interface Env {
+  /** 名称 */
+  Name?: string;
+  /** 值 */
+  Value?: string;
+}
+
+/** 数据实验室事件项 */
+declare interface EventItem {
+  /** 事件时间（Unix 时间戳，毫秒） */
+  EventTime?: number;
+  /** 组件名称，来源于 event.involvedObject.kind */
+  Component?: string;
+  /** 事件级别，来源于 event.type 的原始值（如 Normal、Warning） */
+  Level?: string;
+  /** 事件内容，来源于 event.message */
+  Message?: string;
+  /** 关联的 K8s 对象名称，来源于 event.involvedObject.name */
+  InvolvedObjectName?: string;
+  /** 事件来源组件，来源于 event.source.component */
+  SourceComponent?: string;
+  /** 事件原因，来源于 event.reason */
+  Reason?: string;
+}
+
+/** 事件日志项 */
+declare interface EventLogItem {
+  /** 事件时间（Unix 时间戳，秒级） */
+  EventTime?: number;
+  /** 组件名称 */
+  Component?: string;
+  /** 日志级别（INFO/WARN/ERROR） */
+  Level?: string;
+  /** 事件内容 */
+  Message?: string;
+}
+
+/** 案例分类详情 */
+declare interface ExampleCategories {
+  /** 分类名称 */
+  Categories?: string;
+}
+
+/** 案例难度详情 */
+declare interface ExampleDifficulties {
+  /** 案例难度 */
+  Difficulty?: string;
+}
+
+/** 案例实体 */
+declare interface ExampleEntity {
+  /** ID */
+  Id?: number;
+  /** 案例ID */
+  ExampleId?: string;
+  /** 标题 */
+  Title?: string;
+  /** 描述 */
+  Description?: string;
+  /** README */
+  Readme?: string;
+  /** 案例归档URL */
+  CodeArchiveUrl?: string;
+  /** 图片URL */
+  Image?: string;
+  /** 实验室镜像地址 */
+  LabImage?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
+  /** 分类 */
+  Category?: string;
+  /** 标签 */
+  Tags?: string[];
+  /** 案例热度 */
+  Popularity?: number;
+  /** 难度 */
+  Difficulty?: string;
+  /** 预估时间（分钟） */
+  EstimatedTime?: number;
+  /** 排序 */
+  SortOrder?: number;
+  /** 是否启用 */
+  IsEnabled?: boolean;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 是否删除 */
+  Deleted?: number;
+}
+
+/** 案例标签返回值 */
+declare interface ExampleTag {
+  /** 案例标签名称 */
+  Tag?: string;
+  /** 标签数量 */
+  Count?: number;
+}
+
 /** SQL语句对象 */
 declare interface Execution {
   /** 自动生成SQL语句。 */
@@ -1020,6 +1182,38 @@ declare interface GroupInfo {
   WorkGroupId?: number;
   /** 策略类型 */
   StrategyType?: string;
+}
+
+/** head组规格 */
+declare interface HeadSpecDTO {
+  /** head/worker名称 */
+  Name?: string;
+  /** Pod CPU核数 */
+  PodCpu?: number;
+  /** Pod 内存大小 */
+  PodMem?: number;
+  /** GPU类型 */
+  GpuType?: string;
+  /** GPU数量 */
+  GpuNum?: number;
+  /** 环境变量列表 */
+  Envs?: Env[];
+  /** 标签列表 */
+  Labels?: Label[];
+  /** 资源标签列表（用于追加到 headGroupSpec/workerGroupSpec 的 resources map 中，对应 Ray/K8s 的自定义资源声明），Value 必须为字符串形式的整数 */
+  ResourcesLabels?: Label[];
+  /** Pod数量 */
+  PodNum?: number;
+  /** 是否支持高级可用 */
+  HighAvailability?: boolean;
+  /** 资源类型,CPU,GPU */
+  ResourceType?: string;
+  /** 机型 */
+  InstanceType?: string;
+  /** 规格数量 */
+  Spec?: number;
+  /** 资源ID(唯一) */
+  BillingItem?: string;
 }
 
 /** hive类型数据源的信息 */
@@ -1120,6 +1314,136 @@ declare interface JobLogResult {
   PkgLogId?: string | null;
 }
 
+/** 任务Pod信息 */
+declare interface JobPodEntity {
+  /** Pod名称 */
+  PodName?: string;
+  /** Pod IP */
+  PodIp?: string;
+  /** Pod状态 */
+  Status?: string;
+  /** Pod阶段 */
+  Phase?: string;
+  /** 所属节点 */
+  NodeName?: string;
+  /** 节点IP */
+  NodeIp?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** CPU请求 */
+  CpuRequest?: string;
+  /** CPU限制 */
+  CpuLimit?: string;
+  /** 内存请求 */
+  MemoryRequest?: string;
+  /** 内存限制 */
+  MemoryLimit?: string;
+  /** GPU数量 */
+  GpuCount?: string;
+  /** 容器镜像 */
+  Image?: string;
+  /** Pod角色(head/worker) */
+  Role?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 启动时间 */
+  StartTime?: number;
+}
+
+/** 作业配置 */
+declare interface JobSpec {
+  /** 配置ID */
+  Id?: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** ResourceConfigId */
+  ResourceConfigId?: string;
+  /** 资源配置模板是否变更 */
+  ResourceConfigChanged?: boolean;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 集群组Id */
+  GroupId?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 默认计算组名称 */
+  ClusterGroup?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 优先级 */
+  Priority?: number;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 该配置产生的作业实例数量 */
+  JobInstanceCount?: number;
+  /** 是否有运行中的作业实例 */
+  HasRunningJobs?: boolean;
+  /** 高级参数，JSON 字符串 */
+  AdvancedOptions?: string;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略 */
+  DispatchStrategy?: string;
+  /** 作业提交目标：GROUP（按计算组分派）/ CLUSTER（指定集群）/ SERVERLESS（按 Serverless 拉起） */
+  SubmissionTarget?: string;
+  /** 集群组名称 */
+  GroupName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+}
+
+/** 任务状态历史记录 */
+declare interface JobStatusHistory {
+  /** 历史记录ID */
+  Id?: number;
+  /** 作业ID */
+  JobId?: string;
+  /** 作业名称 */
+  JobName?: string;
+  /** 源状态 */
+  FromState?: string;
+  /** 目标状态 */
+  ToState?: string;
+  /** 触发事件 */
+  Event?: string;
+  /** 消息 */
+  Message?: string;
+  /** 转换时间（毫秒时间戳） */
+  TransitionTime?: number;
+}
+
 /** 配置格式 */
 declare interface KVPair {
   /** 配置的key值 */
@@ -1144,6 +1468,14 @@ declare interface KerberosInfo {
   KeyTab?: string;
   /** 服务主体 */
   ServicePrincipal?: string;
+}
+
+/** 节点标签模型 */
+declare interface Label {
+  /** 名称 */
+  Name?: string;
+  /** 值 */
+  Value?: string;
 }
 
 /** LakeFileSystem使用的临时token */
@@ -1610,6 +1942,20 @@ declare interface Partition {
   CreateTime?: number;
 }
 
+/** Workspace 持久化工作目录配置 */
+declare interface PersistentWorkDir {
+  /** 是否启用持久化工作目录；为空或 false 时沿用 emptyDir 行为 */
+  Enabled?: boolean;
+  /** 持久化存储类型：COS / CFS */
+  Type?: string;
+  /** COS Bucket 名称（Type=COS 时必填） */
+  Bucket?: string;
+  /** CFS 文件系统 ID（Type=CFS 时必填） */
+  FileSystemId?: string;
+  /** Bucket / 文件系统下的子路径，必须以 '/' 开头且不含 '..' */
+  VolumeSubPath?: string;
+}
+
 /** 权限对象 */
 declare interface Policy {
   /** 需要授权的数据库名，填 * 代表当前Catalog下所有数据库。当授权类型为管理员级别时，只允许填 “*”，当授权类型为数据连接级别时只允许填空，其他类型下可以任意指定数据库。 */
@@ -1696,10 +2042,192 @@ declare interface PythonSparkImage {
   UpdateTime?: string;
 }
 
+/** Ray集群实体 */
+declare interface RayClusterEntity {
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+}
+
+/** 集群状态历史详情 */
+declare interface RayClusterHistory {
+  /** 历史记录ID */
+  Id?: number;
+  /** 集群/数据实验室ID */
+  ClusterId?: string;
+  /** 集群/数据实验室名称 */
+  ClusterName?: string;
+  /** 源状态 */
+  FromState?: string;
+  /** 目标状态 */
+  ToState?: string;
+  /** 触发事件 */
+  Event?: string;
+  /** 消息 */
+  Message?: string;
+  /** 转换时间（毫秒时间戳） */
+  TransitionTime?: number;
+}
+
+/** Ray 任务事件项 */
+declare interface RayJobEventItem {
+  /** 事件时间（Unix 时间戳，毫秒） */
+  EventTime?: number;
+  /** 组件名称，来源于 event.involvedObject.kind */
+  Component?: string;
+  /** 事件级别，来源于 event.type 的原始值（如 Normal、Warning） */
+  Level?: string;
+  /** 事件内容，来源于 event.message */
+  Message?: string;
+  /** 关联的 K8s 对象名称，来源于 event.involvedObject.name */
+  InvolvedObjectName?: string;
+  /** 事件来源组件，来源于 event.source.component */
+  SourceComponent?: string;
+  /** 事件原因，来源于 event.reason */
+  Reason?: string;
+}
+
+/** Ray任务提交实体 */
+declare interface RayJobSubmitEntity {
+  /** 任务ID */
+  Id?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 任务名称 */
+  JobName?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户主账号UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 历史记录链接 */
+  HistoryUrl?: string;
+  /** 运行时间(ms) */
+  RunningTime?: number;
+  /** 完成时间 */
+  FinishTime?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 失败原因/错误信息 */
+  ErrorMessage?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 来源配置ID */
+  SpecId?: string;
+  /** 来源配置名称 */
+  SpecName?: string;
+  /** 高级参数，JSON 字符串（透传到 Neutrino） */
+  AdvancedOptions?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 作业来源（如 RAY_JOB / RAY_SERVE / 平台直提交等） */
+  JobSource?: string;
+}
+
 /** 数据治理资源配置项 */
 declare interface ResourceConf {
   /** 当为TCLake优化资源时，优化任务的并行度 */
   Parallelism?: number;
+}
+
+/** 资源配置响应 */
+declare interface ResourceConfig {
+  /** 模板ID */
+  Id?: string;
+  /** 模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 模板类型(ray,spark) */
+  Type?: string;
+  /** Head节点配置 */
+  Head?: HeadSpecDTO;
+  /** Worker节点配置 */
+  Worker?: WorkerSpecDTO[];
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
 }
 
 /** 数据优化资源信息结构 */
@@ -1856,6 +2384,14 @@ declare interface Sort {
   Field: string;
   /** 是否按照ASC排序，否则DESC排序 */
   Asc: boolean;
+}
+
+/** 排序字段定义 */
+declare interface SortField {
+  /** 排序字段名，对应实体属性名（驼峰命名） */
+  Field?: string;
+  /** 排序方向：ASC（升序）或DESC（降序），默认ASC */
+  Order?: string;
 }
 
 /** 合并策略sort类型的规则定义 */
@@ -2320,6 +2856,14 @@ declare interface TableResponseInfo {
   InputFormatShort?: string;
 }
 
+/** 标签 */
+declare interface Tag {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
+}
+
 /** 标签对信息 */
 declare interface TagInfo {
   /** 标签键 */
@@ -2690,6 +3234,14 @@ declare interface TextFile {
   Regex?: string;
 }
 
+/** 通用的键值对数据结构 */
+declare interface TypeKVPair {
+  /** key值 */
+  Key?: string | null;
+  /** value值 */
+  Value?: string | null;
+}
+
 /** UDF权限信息 */
 declare interface UDFPolicyInfo {
   /** 权限类型示例：select，alter，drop */
@@ -2952,6 +3504,40 @@ declare interface WorkGroups {
   WorkGroupSet?: WorkGroupMessage[] | null;
   /** 工作组总数 */
   TotalCount?: number;
+}
+
+/** worker组规格 */
+declare interface WorkerSpecDTO {
+  /** worker名称 */
+  Name?: string;
+  /** Pod CPU核数 */
+  PodCpu?: number;
+  /** Pod 内存大小 */
+  PodMem?: number;
+  /** GPU类型 */
+  GpuType?: string;
+  /** GPU数量 */
+  GpuNum?: number;
+  /** 环境变量列表 */
+  Envs?: Env[];
+  /** 标签列表 */
+  Labels?: Label[];
+  /** 资源标签列表（用于追加到 headGroupSpec/workerGroupSpec 的 resources map 中，对应 Ray/K8s 的自定义资源声明），Value 必须为字符串形式的整数 */
+  ResourcesLabels?: Label[];
+  /** 最小Pod数量 */
+  MinPodNum?: number;
+  /** 最大Pod数量 */
+  MaxPodNum?: number;
+  /** 是否开启弹性伸缩（true=开启，false/null=关闭）。开启后按 MinPodNum/MaxPodNum 弹性伸缩，关闭则按固定副本数运行 */
+  EnableAutoScaling?: boolean;
+  /** 资源类型,CPU,GPU */
+  ResourceType?: string;
+  /** 机型，例如X40/T20 */
+  InstanceType?: string;
+  /** 规格数量 */
+  Spec?: number;
+  /** 资源ID(唯一) */
+  BillingItem?: string;
 }
 
 /** Smart Optimizer高级参数配置数据结构 */
@@ -3226,6 +3812,16 @@ declare interface CancelNotebookSessionStatementResponse {
   RequestId?: string;
 }
 
+declare interface CancelRayJobRequest {
+  /** 任务ID */
+  Id: string;
+}
+
+declare interface CancelRayJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelSparkSessionBatchSQLRequest {
   /** 批任务唯一标识 */
   BatchId: string;
@@ -3328,6 +3924,84 @@ declare interface CheckLockMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface CopyJobSpecRequest {
+  /** 原配置ID */
+  SpecId: string;
+  /** 新配置名称（可选，留空则自动命名为 '原名-copy'） */
+  NewName?: string;
+}
+
+declare interface CopyJobSpecResponse {
+  /** 配置ID */
+  Id?: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 资源配置模板是否变更 */
+  ResourceConfigChanged?: boolean;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 该配置产生的作业实例数量 */
+  JobInstanceCount?: number;
+  /** 是否有运行中的作业实例 */
+  HasRunningJobs?: boolean;
+  /** 高级参数配置，json类型 */
+  AdvancedOptions?: string;
+  /** 默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId） */
+  GroupId?: string | null;
+  /** 默认集群 ID（与 GroupId 互斥） */
+  ClusterId?: string | null;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number | null;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略枚举值：RANDOM： 随机分配NULL： 无 */
+  DispatchStrategy?: string;
+  /** 作业提交目标：GROUP（按计算组分派）/ CLUSTER（指定集群）/ SERVERLESS（按 Serverless 拉起）枚举值：GROUP： 按计算组分派CLUSTER： 指定集群SERVERLESS： 按 Serverless 拉起 */
+  SubmissionTarget?: string;
+  /** 集群组名称 */
+  GroupName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCHDFSBindingProductRequest {
   /** 需要绑定的元数据加速桶名 */
   MountPoint: string;
@@ -3344,6 +4018,42 @@ declare interface CreateCHDFSBindingProductRequest {
 declare interface CreateCHDFSBindingProductResponse {
   /** 绑定信息 */
   MountPointAssociates?: MountPointAssociates[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateClusterGroupRequest {
+  /** 集群组名称 */
+  Name: string;
+  /** 集群组描述 */
+  Description?: string;
+  /** 集群组配置 */
+  Config?: string;
+}
+
+declare interface CreateClusterGroupResponse {
+  /** 集群组 ID */
+  Id?: string;
+  /** 集群组名称 */
+  Name?: string;
+  /** 集群组描述 */
+  Description?: string;
+  /** 应用 ID（多租户） */
+  AppId?: number;
+  /** 创建者主账号 UIN */
+  Uin?: string;
+  /** 创建者子账号 UIN */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 修改时间 */
+  UpdateTime?: number;
+  /** 集群组配置 */
+  Config?: string | null;
+  /** 是否已软删除 */
+  Deleted?: boolean | null;
+  /** 删除时间（软删时写入，活跃记录为 null） */
+  DeleteTime?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3594,6 +4304,240 @@ declare interface CreateInternalTableResponse {
   RequestId?: string;
 }
 
+declare interface CreateJobSpecRequest {
+  /** 入口命令不能为空 */
+  Entrypoint: string;
+  /** 配置名称（可选，不填则自动生成） */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 资源配置模板ID */
+  ResourceConfigId?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 高级参数json */
+  AdvancedOptions?: string;
+  /** 默认计算组名称（与 ClusterId 互斥；与老字段 ClusterGroup 等价，新调用方优先使用 GroupId） */
+  GroupId?: string;
+  /** 默认集群 ID（与 GroupId 互斥，同时非空将返回 InvalidParameter.ClusterAndGroupConflict） */
+  ClusterId?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略枚举值：RANDOM： 随机分配 */
+  DispatchStrategy?: string;
+}
+
+declare interface CreateJobSpecResponse {
+  /** 配置ID */
+  Id?: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 资源配置模板ID */
+  ResourceConfigId?: string;
+  /** 资源配置模板是否变更 */
+  ResourceConfigChanged?: boolean;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 该配置下未进入终态的作业实例数量 */
+  JobInstanceCount?: number;
+  /** 是否有运行中的作业实例 */
+  HasRunningJobs?: boolean;
+  /** 高级参数json */
+  AdvancedOptions?: string;
+  /** 默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId） */
+  GroupId?: string | null;
+  /** 默认集群 ID（与 GroupId 互斥） */
+  ClusterId?: string | null;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number | null;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略枚举值：RANDOM： 随机分配 */
+  DispatchStrategy?: string;
+  /** 作业提交目标枚举值：GROUP： 按计算组分派 */
+  SubmissionTarget?: string;
+  /** 计算组名称 */
+  GroupName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLabRequest {
+  /** 数据实验室名称 */
+  Name: string;
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage: string;
+  /** 资源分区ID */
+  ResourcePartitionId: string;
+  /** 队列名称 */
+  Queue: string;
+  /** 数据实验室描述 */
+  Description?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 存储卷和挂载卷配置 */
+  Catalog?: string;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 服务类型列表(VSCODE, JUPYTER, WEBSHELL)，不填则使用默认配置 */
+  ServiceTypes?: string[];
+  /** 案例ID，当 startMode=EXAMPLE 时必填 */
+  ExampleId?: string;
+  /** 案例代码包地址，当 startMode=EXAMPLE 时填写 */
+  CodeArchiveUrl?: string;
+  /** Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never） */
+  LabImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+}
+
+declare interface CreateLabResponse {
+  /** 案例模板ID（从案例创建时返回） */
+  ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMetaDatabaseRequest {
   /** 数据源名称，默认DataLakeCatalog */
   DatasourceConnectionName?: string;
@@ -3690,6 +4634,128 @@ declare interface CreateNotebookSessionStatementSupportBatchSQLRequest {
 declare interface CreateNotebookSessionStatementSupportBatchSQLResponse {
   /** Session Statement详情 */
   NotebookSessionStatementBatches?: NotebookSessionStatementBatchInformation;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRayClusterRequest {
+  /** 集群名称（可选，不填写则默认使用集群ID） */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属计算组 ID */
+  GroupId?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 存储卷和挂载卷配置 */
+  Catalog?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+}
+
+declare interface CreateRayClusterResponse {
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateResourceConfigRequest {
+  /** 模板名称 */
+  Name: string;
+  /** 描述 */
+  Description?: string;
+  /** Head节点配置 */
+  Head?: HeadSpecDTO;
+  /** Worker节点配置 */
+  Worker?: WorkerSpecDTO[];
+  /** 模板类型，不填默认是Ray */
+  Type?: string;
+}
+
+declare interface CreateResourceConfigResponse {
+  /** 模板ID */
+  Id?: string;
+  /** 模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 模板类型 */
+  Type?: string;
+  /** Head节点配置 */
+  Head?: HeadSpecDTO;
+  /** Worker节点配置 */
+  Worker?: WorkerSpecDTO[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4242,6 +5308,40 @@ declare interface DeleteCHDFSBindingProductResponse {
   RequestId?: string;
 }
 
+declare interface DeleteClusterGroupRequest {
+  /** 集群组 ID */
+  Id: string;
+  /** 是否强制删除（Detach 模式）；false=Block（默认），true=Detach */
+  Force?: boolean;
+}
+
+declare interface DeleteClusterGroupResponse {
+  /** 集群组 ID（系统生成） */
+  Id?: string;
+  /** 集群组名称（同一 AppId 下唯一） */
+  Name?: string;
+  /** 集群组描述 */
+  Description?: string;
+  /** 集群组配置 */
+  Config?: string | null;
+  /** 应用 ID（多租户） */
+  AppId?: number;
+  /** 创建者主账号 UIN */
+  Uin?: string;
+  /** 创建者子账号 UIN */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 是否已软删除（false=活跃, true=已删除） */
+  Deleted?: boolean | null;
+  /** 删除时间（软删时写入，活跃记录为 null） */
+  DeleteTime?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDataEngineRequest {
   /** 删除虚拟集群的名称数组 */
   DataEngineNames: string[];
@@ -4258,6 +5358,26 @@ declare interface DeleteDataMaskStrategyRequest {
 }
 
 declare interface DeleteDataMaskStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteJobSpecRequest {
+  /** 配置ID */
+  SpecId: string;
+}
+
+declare interface DeleteJobSpecResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLabRequest {
+  /** 工作区ID */
+  Id: string;
+}
+
+declare interface DeleteLabResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4298,6 +5418,36 @@ declare interface DeleteNotebookSessionRequest {
 }
 
 declare interface DeleteNotebookSessionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRayClusterRequest {
+  /** 集群ID */
+  Id: string;
+}
+
+declare interface DeleteRayClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRayJobRequest {
+  /** 任务ID */
+  Id: string;
+}
+
+declare interface DeleteRayJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteResourceConfigRequest {
+  /** 模板ID */
+  Id: string;
+}
+
+declare interface DeleteResourceConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4410,6 +5560,58 @@ declare interface DescribeAdvancedStoreLocationResponse {
   LakeFsStatus?: string;
   /** 托管存储桶类型 */
   BucketType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterGroupClustersRequest {
+  /** 计算组 ID */
+  Id: string;
+  /** 返回样例 ClusterId 的最大数量（默认 5） */
+  SampleLimit?: number;
+  /** Cluster 状态列表枚举值：running： 运行中 */
+  Status?: string[];
+}
+
+declare interface DescribeClusterGroupClustersResponse {
+  /** 活跃 cluster 总数 */
+  Count?: number;
+  /** 前 N 个样例 */
+  SampleClusters?: RayClusterEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterGroupRequest {
+  /** 集群组 ID */
+  Id: string;
+  /** 是否包含已软删除的记录（默认 false，仅返回活跃记录；true 时允许返回 deleted=1 的记录，用于悬挂 cluster 回显场景） */
+  IncludeDeleted?: boolean;
+}
+
+declare interface DescribeClusterGroupResponse {
+  /** 集群组 ID（系统生成） */
+  Id?: string;
+  /** 集群组名称（同一 AppId 下唯一） */
+  Name?: string;
+  /** 集群组描述 */
+  Description?: string;
+  /** 集群组配置 */
+  Config?: string;
+  /** 应用 ID（多租户） */
+  AppId?: number;
+  /** 创建者主账号 UIN */
+  Uin?: string;
+  /** 创建者子账号 UIN */
+  SubAccountUin?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number;
+  /** 是否已软删除（false=活跃，true=已删除） */
+  Deleted?: boolean;
+  /** 删除时间（软删时写入，活跃记录为 null） */
+  DeleteTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6172,6 +7374,330 @@ declare interface GenerateInternalTableResponse {
   RequestId?: string;
 }
 
+declare interface GetExampleDetailRequest {
+  /** 案例ID */
+  ExampleId: string;
+}
+
+declare interface GetExampleDetailResponse {
+  /** ID */
+  Id?: number;
+  /** 案例ID */
+  ExampleId?: string;
+  /** 标题 */
+  Title?: string;
+  /** 描述 */
+  Description?: string;
+  /** README */
+  Readme?: string;
+  /** 案例归档URL */
+  CodeArchiveUrl?: string;
+  /** 图片URL */
+  Image?: string;
+  /** 实验室镜像 */
+  LabImage?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
+  /** 分类 */
+  Category?: string;
+  /** 案例标签 */
+  Tags?: string[];
+  /** 难度 */
+  Difficulty?: string;
+  /** 预估时间（分钟） */
+  EstimatedTime?: number;
+  /** 排序 */
+  SortOrder?: number;
+  /** 是否启用 */
+  IsEnabled?: boolean;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 是否删除 */
+  Deleted?: number;
+  /** 案例热度 */
+  Popularity?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetJobSpecRequest {
+  /** 配置ID */
+  SpecId: string;
+}
+
+declare interface GetJobSpecResponse {
+  /** 配置ID */
+  Id?: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 资源配置模板是否变更 */
+  ResourceConfigChanged?: boolean | null;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string | null;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 该配置产生的作业实例数量 */
+  JobInstanceCount?: number;
+  /** 是否有运行中的作业实例 */
+  HasRunningJobs?: boolean;
+  /** 高级参数json */
+  AdvancedOptions?: string;
+  /** 默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId） */
+  GroupId?: string | null;
+  /** 默认集群 ID（与 GroupId 互斥） */
+  ClusterId?: string | null;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number | null;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略枚举值：RANDOM： 随机分配 */
+  DispatchStrategy?: string;
+  /** 作业提交目标枚举值：GROUP： 按计算组分派 */
+  SubmissionTarget?: string;
+  /** 计算组名称 */
+  GroupName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabDetailRequest {
+  /** 工作区ID */
+  Id: string;
+}
+
+declare interface GetLabDetailResponse {
+  /** 案例模板ID（startMode=EXAMPLE 时使用） */
+  ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 删除时间 */
+  DeleteTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabEventRequest {
+  /** 数据实验室ID */
+  Id: string;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface GetLabEventResponse {
+  /** 是否已经返回所有符合条件的日志，true 表示已全部返回 */
+  ListOver?: boolean;
+  /** 事件列表 */
+  Events?: EventItem[];
+  /** 事件开始时间单位：毫秒 */
+  StartTime?: number;
+  /** 事件结束时间单位：毫秒 */
+  EndTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabHistoryRequest {
+  /** 数据实验室ID */
+  Id: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+}
+
+declare interface GetLabHistoryResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 集群状态历史详情列表 */
+  Items?: RayClusterHistory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabPodYamlRequest {
+  /** 数据实验室ID */
+  Id: string;
+  /** Pod名称 */
+  PodName?: string;
+}
+
+declare interface GetLabPodYamlResponse {
+  /** Pod YAML */
+  Yaml?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabPodsRequest {
+  /** 数据实验室ID */
+  Id: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface GetLabPodsResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 集群的Pod列表 */
+  Items?: ClusterPod[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabServiceUrlsRequest {
+  /** 数据实验室ID */
+  Id: string;
+}
+
+declare interface GetLabServiceUrlsResponse {
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  ServiceUrls?: KVPair[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetLabYamlRequest {
+  /** 数据实验室Id */
+  Id: string;
+}
+
+declare interface GetLabYamlResponse {
+  /** RayCluster YAML */
+  Yaml?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetOptimizerPolicyRequest {
   /** 策略描述 */
   SmartPolicy: SmartPolicy;
@@ -6180,6 +7706,428 @@ declare interface GetOptimizerPolicyRequest {
 declare interface GetOptimizerPolicyResponse {
   /** 智能优化策略 */
   SmartOptimizerPolicy?: SmartOptimizerPolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayClusterEventRequest {
+  /** Ray集群ID */
+  Id: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+  /** 翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值 */
+  Context?: string;
+}
+
+declare interface GetRayClusterEventResponse {
+  /** 翻页上下文，下一次分页请求时传入此值 */
+  Context?: string;
+  /** 是否已经返回所有符合条件的日志，true 表示已全部返回 */
+  ListOver?: boolean;
+  /** 事件列表 */
+  Events?: EventItem[];
+  /** 事件开始时间单位：毫秒 */
+  StartTime?: number;
+  /** 事件结束时间单位：毫秒 */
+  EndTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayClusterHistoryRequest {
+  /** 集群/数据实验室ID */
+  Id: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+}
+
+declare interface GetRayClusterHistoryResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 集群状态历史详情列表 */
+  Items?: RayClusterHistory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayClusterPodYamlRequest {
+  /** 集群ID */
+  Id: string;
+  /** Pod名称 */
+  PodName?: string;
+}
+
+declare interface GetRayClusterPodYamlResponse {
+  /** Pod YAML */
+  Yaml?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayClusterPodsRequest {
+  /** 集群ID */
+  Id: string;
+  /** 起始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 截止时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 过滤条件列表 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface GetRayClusterPodsResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 集群的Pod列表 */
+  Items?: ClusterPod[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayClusterRequest {
+  /** 集群ID */
+  Id: string;
+}
+
+declare interface GetRayClusterResponse {
+  /** 获取Ray集群详情请求 */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayClusterYamlRequest {
+  /** 集群ID */
+  Id: string;
+}
+
+declare interface GetRayClusterYamlResponse {
+  /** RayCluster YAML */
+  Yaml?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobEventLogRequest {
+  /** ray-jobID */
+  Id: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 排序字段列表（列表字段） */
+  SortFields?: SortField[];
+}
+
+declare interface GetRayJobEventLogResponse {
+  /** 事件总数 */
+  TotalCount?: number;
+  /** 事件列表 */
+  Events?: EventLogItem[];
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobEventRequest {
+  /** ray-job ID */
+  Id: string;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+  /** 翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值 */
+  Context?: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 事件类型过滤，仅允许 ASCII 字母（如 Normal、Warning） */
+  EventType?: string;
+}
+
+declare interface GetRayJobEventResponse {
+  /** 翻页上下文，下一次分页请求时传入此值 */
+  Context?: string;
+  /** 是否已经返回所有符合条件的日志，true 表示已全部返回 */
+  ListOver?: boolean;
+  /** 事件列表 */
+  Events?: RayJobEventItem[];
+  /** 事件开始时间单位：毫秒 */
+  StartTime?: number;
+  /** 事件结束时间单位：毫秒 */
+  EndTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobHistoryRequest {
+  /** ray-jobID */
+  Id: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+}
+
+declare interface GetRayJobHistoryResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 作业状态历史列表 */
+  Items?: JobStatusHistory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobPodYamlRequest {
+  /** 任务ID */
+  Id?: string;
+  /** Pod名称 */
+  PodName?: string;
+}
+
+declare interface GetRayJobPodYamlResponse {
+  /** Pod Yaml */
+  Yaml?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobPodsRequest {
+  /** 任务ID */
+  Id: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 提交时间起始过滤-时间戳（毫秒，可选 */
+  StartTime?: number;
+  /** 提交时间截止过滤-时间戳（毫秒，可选） */
+  EndTime?: number;
+  /** 过滤条件（列表名称） */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface GetRayJobPodsResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 作业pod列表 */
+  Items?: JobPodEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobRequest {
+  /** 任务ID */
+  Id: string;
+}
+
+declare interface GetRayJobResponse {
+  /** 任务ID */
+  Id?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 任务名称 */
+  JobName?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户主账号UIN */
+  Uin?: string;
+  /** 创建账号 */
+  SubAccountUin?: string;
+  /** 历史记录链接 */
+  HistoryUrl?: string;
+  /** 运行时间(ms) */
+  RunningTime?: number;
+  /** 完成时间 */
+  FinishTime?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 失败原因/错误信息 */
+  ErrorMessage?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 来源配置ID */
+  SpecId?: string;
+  /** 来源配置名称 */
+  SpecName?: string;
+  /** 高级参数，JSON 字符串（透传到 Neutrino） */
+  AdvancedOptions?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 业务来源标识（调用上下文，长度上限 64，禁止控制字符） */
+  JobSource?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRayJobYamlRequest {
+  /** 任务ID */
+  Id: string;
+}
+
+declare interface GetRayJobYamlResponse {
+  /** RayJob YAML */
+  Yaml?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetResourceConfigRequest {
+  /** 模板ID */
+  Id: string;
+}
+
+declare interface GetResourceConfigResponse {
+  /** 模板ID */
+  Id?: string;
+  /** 模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 模板类型 */
+  Type?: string;
+  /** Head节点配置 */
+  Head?: HeadSpecDTO;
+  /** Worker节点配置 */
+  Worker?: WorkerSpecDTO[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6214,6 +8162,87 @@ declare interface InitializeTCLakeResponse {
   RequestId?: string;
 }
 
+declare interface LabResponse {
+  /** 案例模板ID（startMode=EXAMPLE 时使用） */
+  ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage?: string;
+  /** Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never） */
+  LabImagePullPolicy?: string;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string | null;
+  /** 集群状态 */
+  Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 删除时间 */
+  DeleteTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Token 认证密钥（开启 token 认证时由系统生成） */
+  Token?: string;
+}
+
 declare interface LaunchStandardEngineResourceGroupsRequest {
   /** 标准引擎资源组名称 */
   EngineResourceGroupNames: string[];
@@ -6222,6 +8251,340 @@ declare interface LaunchStandardEngineResourceGroupsRequest {
 declare interface LaunchStandardEngineResourceGroupsResponse {
   /** 批量操作资源组时，操作失败的资源组相关信息 */
   OperateEngineResourceGroupFailMessages?: OperateEngineResourceGroupFailMessage[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListClusterGroupsRequest {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 提交时间起始过滤-时间戳（毫秒，可选） */
+  StartTime?: number;
+  /** 提交时间截止过滤-时间戳（毫秒，可选） */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListClusterGroupsResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 集群组列表 */
+  Items?: ClusterGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListExampleCategoriesRequest {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+}
+
+declare interface ListExampleCategoriesResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 分类列表 */
+  Items?: ExampleCategories[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListExampleDifficultiesRequest {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+}
+
+declare interface ListExampleDifficultiesResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 分类列表 */
+  Items?: ExampleDifficulties[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListExampleTagsRequest {
+  /** 案例标签 */
+  Category?: string;
+}
+
+declare interface ListExampleTagsResponse {
+  /** 标签总数 */
+  Total?: number;
+  /** 当前页码 */
+  Page?: number;
+  /** 每页显示标签数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 标签实体 */
+  Items?: ExampleTag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListExamplesRequest {
+  /** 分类 */
+  Category?: string;
+  /** 关键词 */
+  Keyword?: string;
+  /** 标签数组，多个标签 AND 关系；与 Category/Keyword 之间也是 AND */
+  Tags?: string[];
+  /** DEFAULT（sort_order ASC, create_time DESC）/ POPULARITY（按热度降序），非法值降级为 DEFAULT */
+  OrderBy?: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+}
+
+declare interface ListExamplesResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 案例管理列表 */
+  Items?: ExampleEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListJobSpecsRequest {
+  /** 页数 */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 创建时间范围 - 开始时间（时间戳（毫秒））单位：ms */
+  StartTime?: number;
+  /** 创建时间范围 - 结束时间（时间戳（毫秒））单位：ms */
+  EndTime?: number;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListJobSpecsResponse {
+  /** 总数量 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 作业配置列表 */
+  Items?: JobSpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListJobsBySpecRequest {
+  /** 配置ID */
+  SpecId: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 提交时间起始过滤-时间戳（毫秒，可选） */
+  StartTime?: number;
+  /** 提交时间截止过滤-时间戳（毫秒，可选） */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListJobsBySpecResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 数据列表 */
+  Items?: RayJobSubmitEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListLabsRequest {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListLabsResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 数据实验室列表 */
+  Items?: LabResponse[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRayClusterJobsRequest {
+  /** 集群ID（必填） */
+  ClusterId: string;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 额外过滤条件（ClusterId 已由外层单独传入，无需再在此处指定） */
+  Filters?: Filter[];
+  /** 提交时间起始过滤-时间戳（毫秒，可选） */
+  StartTime?: number;
+  /** 提交时间截止过滤-时间戳（毫秒，可选） */
+  EndTime?: number;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListRayClusterJobsResponse {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 该集群下的Ray作业列表 */
+  Items?: RayJobSubmitEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRayClustersRequest {
+  /** 起始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 截止时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 过滤条件列表 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListRayClustersResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 每页数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** Ray cluster列表 */
+  Items?: RayClusterEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRayJobsRequest {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 过滤条件列表（列表的字段名称） */
+  Filters?: Filter[];
+  /** 提交时间起始过滤-时间戳（毫秒，可选） */
+  StartTime?: number;
+  /** 提交时间截止过滤-时间戳（毫秒，可选） */
+  EndTime?: number;
+  /** 排序字段列表（列表字段） */
+  SortFields?: SortField[];
+}
+
+declare interface ListRayJobsResponse {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** ray作业列表 */
+  Items?: RayJobSubmitEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListResourceConfigsRequest {
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 过滤条件列表（列表字段名称） */
+  Filters?: Filter[];
+  /** 提交时间起始过滤-时间戳（毫秒） */
+  StartTime?: number;
+  /** 提交时间截止过滤-时间戳（毫秒） */
+  EndTime?: number;
+  /** 排序字段列表（列表字段名称） */
+  SortFields?: SortField[];
+}
+
+declare interface ListResourceConfigsResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 资源配置模板列表 */
+  Items?: ResourceConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6310,6 +8673,64 @@ declare interface ModifyAdvancedStoreLocationResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterPriorityRequest {
+  /** 集群ID */
+  Id: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority: number;
+}
+
+declare interface ModifyClusterPriorityResponse {
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子账号UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDataEngineDescriptionRequest {
   /** 要修改的引擎的名称 */
   DataEngineName: string;
@@ -6326,6 +8747,88 @@ declare interface ModifyGovernEventRuleRequest {
 }
 
 declare interface ModifyGovernEventRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLabPriorityRequest {
+  /** 数据实验室ID */
+  Id: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority: number;
+}
+
+declare interface ModifyLabPriorityResponse {
+  /** 案例模板ID（startMode=EXAMPLE 时使用） */
+  ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage?: string;
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6680,12 +9183,334 @@ declare interface RollbackDataEngineImageResponse {
   RequestId?: string;
 }
 
+declare interface RunJobSpecRequest {
+  /** 配置ID */
+  SpecId: string;
+  /** 外部工作流引擎业务键 flowId */
+  FlowId?: string;
+  /** 外部工作流引擎业务键 executionId */
+  ExecutionId?: string;
+  /** 业务来源标识（调用上下文，长度上限 64，禁止控制字符） */
+  JobSource?: string;
+}
+
+declare interface RunJobSpecResponse {
+  /** 任务ID */
+  Id?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 任务名称 */
+  JobName?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 运行时间(ms) */
+  RunningTime?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 来源配置ID */
+  SpecId?: string;
+  /** 来源配置名称 */
+  SpecName?: string;
+  /** 高级参数 */
+  AdvancedOptions?: string;
+  /** 优先级 */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 业务来源标识（调用上下文，长度上限 64，禁止控制字符） */
+  JobSource?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetOptimizerPolicyRequest {
   /** 优化策略 */
   SmartPolicy: SmartPolicy;
 }
 
 declare interface SetOptimizerPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartLabRequest {
+  /** 工作区ID */
+  Id: string;
+}
+
+declare interface StartLabResponse {
+  /** 案例模板ID（startMode=EXAMPLE 时使用） */
+  ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage?: string;
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartRayClusterRequest {
+  /** 集群ID */
+  Id: string;
+}
+
+declare interface StartRayClusterResponse {
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子账号UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopLabRequest {
+  /** 工作区ID */
+  Id: string;
+}
+
+declare interface StopLabResponse {
+  /** 案例模板ID（startMode=EXAMPLE 时使用） */
+  ExampleId?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage?: string;
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Token 认证密钥（开启 token 认证时由系统生成） */
+  Token?: string;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopRayClusterRequest {
+  /** 集群ID */
+  Id: string;
+}
+
+declare interface StopRayClusterResponse {
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子账号UIN */
+  SubAccountUin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6756,6 +9581,44 @@ declare interface UnlockMetaDataRequest {
 }
 
 declare interface UnlockMetaDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateClusterGroupRequest {
+  /** 集群组 ID（定位要更新的集群组） */
+  Id: string;
+  /** 集群组名称（可选，为空则保持原名） */
+  Name?: string;
+  /** 集群组描述 */
+  Description?: string;
+  /** 集群组配置 */
+  Config?: string;
+}
+
+declare interface UpdateClusterGroupResponse {
+  /** 集群组 ID */
+  Id?: string;
+  /** 集群组名称 */
+  Name?: string;
+  /** 集群组描述 */
+  Description?: string;
+  /** 集群组配置 */
+  Config?: string;
+  /** 应用 ID（多租户） */
+  AppId?: number;
+  /** 创建者主账号 UIN */
+  Uin?: string;
+  /** 创建者子账号 UIN */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 是否已软删除 */
+  Deleted?: boolean | null;
+  /** 删除时间（软删时写入，活跃记录为 null） */
+  DeleteTime?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6840,6 +9703,304 @@ declare interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
   RequestId?: string;
 }
 
+declare interface UpdateJobSpecPriorityRequest {
+  /** 配置ID */
+  SpecId: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority: number;
+}
+
+declare interface UpdateJobSpecPriorityResponse {
+  /** 配置ID */
+  Id?: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 资源配置模板是否变更 */
+  ResourceConfigChanged?: boolean;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 默认计算组 ID */
+  GroupId?: string | null;
+  /** 默认集群 ID（与 GroupId 互斥） */
+  ClusterId?: string | null;
+  /** 集群分派策略（本期仅支持 RANDOM；NULL 时退化为依赖 ClusterGroup 配置兜底） */
+  DispatchStrategy?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number | null;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 该配置下未进入终态的作业实例数量 */
+  JobInstanceCount?: number;
+  /** 是否有运行中的作业实例 */
+  HasRunningJobs?: boolean;
+  /** 高级参数，JSON 字符串（内容为 Key-Value 对象） */
+  AdvancedOptions?: string;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateJobSpecRequest {
+  /** 配置ID */
+  SpecId: string;
+  /** 入口命令 */
+  Entrypoint: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 资源配置模板ID */
+  ResourceConfigId?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 高级参数json */
+  AdvancedOptions?: string;
+  /** 默认计算组名称（与 ClusterId 互斥；与老字段 ClusterGroup 等价，新调用方优先使用 GroupId） */
+  GroupId?: string;
+  /** 默认集群 ID（与 GroupId 互斥，同时非空将返回 InvalidParameter.ClusterAndGroupConflict） */
+  ClusterId?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略枚举值：RANDOM： 随机分配 */
+  DispatchStrategy?: string;
+}
+
+declare interface UpdateJobSpecResponse {
+  /** 配置ID */
+  Id?: string;
+  /** 配置名称 */
+  Name?: string;
+  /** 配置描述 */
+  Description?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（Builtin: 内置, Custom: 自定义） */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 资源配置模板是否变更 */
+  ResourceConfigChanged?: boolean;
+  /** 默认资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 默认队列名称 */
+  Queue?: string;
+  /** 作业包URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 该配置产生的作业实例数量 */
+  JobInstanceCount?: number;
+  /** 是否有运行中的作业实例 */
+  HasRunningJobs?: boolean;
+  /** 高级参数json */
+  AdvancedOptions?: string;
+  /** 默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId） */
+  GroupId?: string | null;
+  /** 默认集群 ID（与 GroupId 互斥） */
+  ClusterId?: string | null;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number | null;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 集群分派策略枚举值：RANDOM： 随机分配 */
+  DispatchStrategy?: string;
+  /** 作业提交目标枚举值：GROUP： 按计算组分派 */
+  SubmissionTarget?: string;
+  /** 计算组名称 */
+  GroupName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateLabRequest {
+  /** 数据实验室名称 */
+  Name: string;
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage: string;
+  /** 数据实验室描述 */
+  Description?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源分区ID */
+  ResourcePartitionId?: string;
+  /** 队列名称 */
+  Queue?: string;
+  /** 案例ID，当 startMode=EXAMPLE 时必填 */
+  ExampleId?: string;
+  /** 案例代码包地址，当 startMode=EXAMPLE 时填写 */
+  CodeArchiveUrl?: string;
+  /** Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never） */
+  LabImagePullPolicy?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+}
+
+declare interface UpdateLabResponse {
+  /** 案例模板ID（startMode=EXAMPLE 时使用） */
+  ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
+  /** 数据实验室服务入口（服务类型 -> 访问地址） */
+  Services?: TypeKVPair[];
+  /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
+  LabImage?: string;
+  /** Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never） */
+  LabImagePullPolicy?: string;
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
+  Image?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
+  PersistentWorkDir?: PersistentWorkDir;
+  /** 是否开启token认证 */
+  EnableToken?: boolean;
+  /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  LabImagePullType?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateNetworkConnectionRequest {
   /** 网络配置描述 */
   NetworkConnectionDesc?: string;
@@ -6848,6 +10009,188 @@ declare interface UpdateNetworkConnectionRequest {
 }
 
 declare interface UpdateNetworkConnectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRayClusterRequest {
+  /** 集群ID */
+  Id: string;
+  /** 集群名称（可选，不填写则默认使用集群ID） */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属计算组 ID */
+  GroupId?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 存储卷和挂载卷配置 */
+  Catalog?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+}
+
+declare interface UpdateRayClusterResponse {
+  /** 集群ID */
+  Id?: string;
+  /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
+  Type?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 集群描述 */
+  Description?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 集群状态 */
+  Status?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 计算组 ID */
+  GroupId?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 高级参数（规范化后的扁平 KV JSON） */
+  AdvancedOptions?: string;
+  /** 优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRayJobPriorityRequest {
+  /** 任务ID */
+  Id: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority: number;
+}
+
+declare interface UpdateRayJobPriorityResponse {
+  /** 任务ID */
+  Id?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 任务名称 */
+  JobName?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户主账号UIN */
+  Uin?: string;
+  /** 创建账号 */
+  SubAccountUin?: string;
+  /** 历史记录链接 */
+  HistoryUrl?: string;
+  /** 运行时间(ms) */
+  RunningTime?: number;
+  /** 完成时间 */
+  FinishTime?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 镜像地址 */
+  Image?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 来源配置ID */
+  SpecId?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 业务来源标识（调用上下文，长度上限 64，禁止控制字符） */
+  JobSource?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateResourceConfigRequest {
+  /** 资源配置模板Id */
+  Id: string;
+  /** 模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** Head节点配置 */
+  Head?: HeadSpecDTO;
+  /** Worker节点配置 */
+  Worker?: WorkerSpecDTO[];
+  /** 模板类型(不传默认Ray) */
+  Type?: string;
+}
+
+declare interface UpdateResourceConfigResponse {
+  /** 模板ID */
+  Id?: string;
+  /** 模板名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** Head节点配置 */
+  Head?: HeadSpecDTO;
+  /** Worker节点配置 */
+  Worker?: WorkerSpecDTO[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 模板类型 */
+  Type?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 创建者UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7023,6 +10366,8 @@ declare interface Dlc {
   CancelNotebookSessionStatement(data: CancelNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<CancelNotebookSessionStatementResponse>;
   /** 批量取消Session 中执行的任务 {@link CancelNotebookSessionStatementBatchRequest} {@link CancelNotebookSessionStatementBatchResponse} */
   CancelNotebookSessionStatementBatch(data: CancelNotebookSessionStatementBatchRequest, config?: AxiosRequestConfig): AxiosPromise<CancelNotebookSessionStatementBatchResponse>;
+  /** 取消Ray任务 {@link CancelRayJobRequest} {@link CancelRayJobResponse} */
+  CancelRayJob(data: CancelRayJobRequest, config?: AxiosRequestConfig): AxiosPromise<CancelRayJobResponse>;
   /** 取消Spark SQL批任务 {@link CancelSparkSessionBatchSQLRequest} {@link CancelSparkSessionBatchSQLResponse} */
   CancelSparkSessionBatchSQL(data: CancelSparkSessionBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CancelSparkSessionBatchSQLResponse>;
   /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
@@ -7037,8 +10382,12 @@ declare interface Dlc {
   CheckDataEngineImageCanBeUpgrade(data: CheckDataEngineImageCanBeUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeUpgradeResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
+  /** 复制作业配置 {@link CopyJobSpecRequest} {@link CopyJobSpecResponse} */
+  CopyJobSpec(data: CopyJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<CopyJobSpecResponse>;
   /** 创建元数据加速桶和产品绑定关系 {@link CreateCHDFSBindingProductRequest} {@link CreateCHDFSBindingProductResponse} */
   CreateCHDFSBindingProduct(data: CreateCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCHDFSBindingProductResponse>;
+  /** 创建集群组 {@link CreateClusterGroupRequest} {@link CreateClusterGroupResponse} */
+  CreateClusterGroup(data: CreateClusterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterGroupResponse>;
   /** DMS元数据创建库 {@link CreateDMSDatabaseRequest} {@link CreateDMSDatabaseResponse} */
   CreateDMSDatabase(data?: CreateDMSDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDMSDatabaseResponse>;
   /** DMS元数据创建表 {@link CreateDMSTableRequest} {@link CreateDMSTableResponse} */
@@ -7057,6 +10406,10 @@ declare interface Dlc {
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
   /** 创建托管存储内表 {@link CreateInternalTableRequest} {@link CreateInternalTableResponse} */
   CreateInternalTable(data: CreateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalTableResponse>;
+  /** 创建作业配置 {@link CreateJobSpecRequest} {@link CreateJobSpecResponse} */
+  CreateJobSpec(data: CreateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobSpecResponse>;
+  /** 创建实验室 {@link CreateLabRequest} {@link CreateLabResponse} */
+  CreateLab(data: CreateLabRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLabResponse>;
   /** 创建元数据库 {@link CreateMetaDatabaseRequest} {@link CreateMetaDatabaseResponse} */
   CreateMetaDatabase(data?: CreateMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaDatabaseResponse>;
   /** 创建交互式session（notebook） {@link CreateNotebookSessionRequest} {@link CreateNotebookSessionResponse} */
@@ -7065,6 +10418,10 @@ declare interface Dlc {
   CreateNotebookSessionStatement(data: CreateNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionStatementResponse>;
   /** 创建交互式session并执行SQL任务 {@link CreateNotebookSessionStatementSupportBatchSQLRequest} {@link CreateNotebookSessionStatementSupportBatchSQLResponse} */
   CreateNotebookSessionStatementSupportBatchSQL(data: CreateNotebookSessionStatementSupportBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
+  /** 创建集群 {@link CreateRayClusterRequest} {@link CreateRayClusterResponse} */
+  CreateRayCluster(data?: CreateRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRayClusterResponse>;
+  /** 创建资源配置模板 {@link CreateResourceConfigRequest} {@link CreateResourceConfigResponse} */
+  CreateResourceConfig(data: CreateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceConfigResponse>;
   /** 创建查询结果下载任务 {@link CreateResultDownloadRequest} {@link CreateResultDownloadResponse} */
   CreateResultDownload(data: CreateResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResultDownloadResponse>;
   /** 创建sql脚本 {@link CreateScriptRequest} {@link CreateScriptResponse} */
@@ -7103,16 +10460,28 @@ declare interface Dlc {
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
   /** 删除元数据加速桶和产品绑定关系 {@link DeleteCHDFSBindingProductRequest} {@link DeleteCHDFSBindingProductResponse} */
   DeleteCHDFSBindingProduct(data: DeleteCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCHDFSBindingProductResponse>;
+  /** 删除集群组 {@link DeleteClusterGroupRequest} {@link DeleteClusterGroupResponse} */
+  DeleteClusterGroup(data: DeleteClusterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteClusterGroupResponse>;
   /** 删除数据引擎 {@link DeleteDataEngineRequest} {@link DeleteDataEngineResponse} */
   DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
   /** 删除数据脱敏策略 {@link DeleteDataMaskStrategyRequest} {@link DeleteDataMaskStrategyResponse} */
   DeleteDataMaskStrategy(data?: DeleteDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataMaskStrategyResponse>;
+  /** 删除作业配置 {@link DeleteJobSpecRequest} {@link DeleteJobSpecResponse} */
+  DeleteJobSpec(data: DeleteJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobSpecResponse>;
+  /** 删除实验室 {@link DeleteLabRequest} {@link DeleteLabResponse} */
+  DeleteLab(data: DeleteLabRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLabResponse>;
   /** 删除元数据库 {@link DeleteMetaDatabaseRequest} {@link DeleteMetaDatabaseResponse} */
   DeleteMetaDatabase(data: DeleteMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetaDatabaseResponse>;
   /** 销毁EG SparkSession {@link DeleteNativeSparkSessionRequest} {@link DeleteNativeSparkSessionResponse} */
   DeleteNativeSparkSession(data?: DeleteNativeSparkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeSparkSessionResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
   DeleteNotebookSession(data: DeleteNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookSessionResponse>;
+  /** 删除集群 {@link DeleteRayClusterRequest} {@link DeleteRayClusterResponse} */
+  DeleteRayCluster(data: DeleteRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRayClusterResponse>;
+  /** 删除Ray任务 {@link DeleteRayJobRequest} {@link DeleteRayJobResponse} */
+  DeleteRayJob(data: DeleteRayJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRayJobResponse>;
+  /** 删除资源配置模板 {@link DeleteResourceConfigRequest} {@link DeleteResourceConfigResponse} */
+  DeleteResourceConfig(data: DeleteResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceConfigResponse>;
   /** 删除sql脚本 {@link DeleteScriptRequest} {@link DeleteScriptResponse} */
   DeleteScript(data: DeleteScriptRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScriptResponse>;
   /** 删除spark作业 {@link DeleteSparkAppRequest} {@link DeleteSparkAppResponse} */
@@ -7133,6 +10502,10 @@ declare interface Dlc {
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
   /** 查询高级设置 {@link DescribeAdvancedStoreLocationRequest} {@link DescribeAdvancedStoreLocationResponse} */
   DescribeAdvancedStoreLocation(data?: DescribeAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdvancedStoreLocationResponse>;
+  /** 查询集群组详情 {@link DescribeClusterGroupRequest} {@link DescribeClusterGroupResponse} */
+  DescribeClusterGroup(data: DescribeClusterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterGroupResponse>;
+  /** 查询计算组关联 cluster 列表 {@link DescribeClusterGroupClustersRequest} {@link DescribeClusterGroupClustersResponse} */
+  DescribeClusterGroupClusters(data: DescribeClusterGroupClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterGroupClustersResponse>;
   /** 查询集群监控信息 {@link DescribeClusterMonitorInfosRequest} {@link DescribeClusterMonitorInfosResponse} */
   DescribeClusterMonitorInfos(data: DescribeClusterMonitorInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterMonitorInfosResponse>;
   /** 查询DLCCatalog访问权限 {@link DescribeDLCCatalogAccessRequest} {@link DescribeDLCCatalogAccessResponse} */
@@ -7303,14 +10676,84 @@ declare interface Dlc {
   GenerateCreateMangedTableSql(data: GenerateCreateMangedTableSqlRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateCreateMangedTableSqlResponse>;
   /** 创建内部表 {@link GenerateInternalTableRequest} {@link GenerateInternalTableResponse} */
   GenerateInternalTable(data: GenerateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateInternalTableResponse>;
+  /** 获取案例管理详情 {@link GetExampleDetailRequest} {@link GetExampleDetailResponse} */
+  GetExampleDetail(data: GetExampleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetExampleDetailResponse>;
+  /** 获取作业配置详情 {@link GetJobSpecRequest} {@link GetJobSpecResponse} */
+  GetJobSpec(data: GetJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<GetJobSpecResponse>;
+  /** 获取实验室详情 {@link GetLabDetailRequest} {@link GetLabDetailResponse} */
+  GetLabDetail(data: GetLabDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabDetailResponse>;
+  /** 获取实验室事件 {@link GetLabEventRequest} {@link GetLabEventResponse} */
+  GetLabEvent(data: GetLabEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabEventResponse>;
+  /** 获取实验室的状态变更历史记录 {@link GetLabHistoryRequest} {@link GetLabHistoryResponse} */
+  GetLabHistory(data: GetLabHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabHistoryResponse>;
+  /** 获取实验室Pod的YAML内容 {@link GetLabPodYamlRequest} {@link GetLabPodYamlResponse} */
+  GetLabPodYaml(data: GetLabPodYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabPodYamlResponse>;
+  /** 获取实验室Pod列表 {@link GetLabPodsRequest} {@link GetLabPodsResponse} */
+  GetLabPods(data: GetLabPodsRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabPodsResponse>;
+  /** 获取实验室服务访问地址 {@link GetLabServiceUrlsRequest} {@link GetLabServiceUrlsResponse} */
+  GetLabServiceUrls(data: GetLabServiceUrlsRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabServiceUrlsResponse>;
+  /** 获取实验室对应的RayCluster YAML内容 {@link GetLabYamlRequest} {@link GetLabYamlResponse} */
+  GetLabYaml(data: GetLabYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetLabYamlResponse>;
   /** 获取策略 {@link GetOptimizerPolicyRequest} {@link GetOptimizerPolicyResponse} */
   GetOptimizerPolicy(data: GetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOptimizerPolicyResponse>;
+  /** 获取集群详情 {@link GetRayClusterRequest} {@link GetRayClusterResponse} */
+  GetRayCluster(data: GetRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayClusterResponse>;
+  /** 获取集群事件 {@link GetRayClusterEventRequest} {@link GetRayClusterEventResponse} */
+  GetRayClusterEvent(data: GetRayClusterEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayClusterEventResponse>;
+  /** 获取集群状态历史 {@link GetRayClusterHistoryRequest} {@link GetRayClusterHistoryResponse} */
+  GetRayClusterHistory(data: GetRayClusterHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayClusterHistoryResponse>;
+  /** 获取集群Pod的YAML内容 {@link GetRayClusterPodYamlRequest} {@link GetRayClusterPodYamlResponse} */
+  GetRayClusterPodYaml(data: GetRayClusterPodYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayClusterPodYamlResponse>;
+  /** 获取集群的Pod列表 {@link GetRayClusterPodsRequest} {@link GetRayClusterPodsResponse} */
+  GetRayClusterPods(data: GetRayClusterPodsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayClusterPodsResponse>;
+  /** 获取RayCluster的YAML内容 {@link GetRayClusterYamlRequest} {@link GetRayClusterYamlResponse} */
+  GetRayClusterYaml(data: GetRayClusterYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayClusterYamlResponse>;
+  /** 获取Ray任务详情 {@link GetRayJobRequest} {@link GetRayJobResponse} */
+  GetRayJob(data: GetRayJobRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobResponse>;
+  /** 获取Ray任务事件 {@link GetRayJobEventRequest} {@link GetRayJobEventResponse} */
+  GetRayJobEvent(data: GetRayJobEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobEventResponse>;
+  /** 获取作业事件日志 {@link GetRayJobEventLogRequest} {@link GetRayJobEventLogResponse} */
+  GetRayJobEventLog(data: GetRayJobEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobEventLogResponse>;
+  /** 获取Ray任务历史记录 {@link GetRayJobHistoryRequest} {@link GetRayJobHistoryResponse} */
+  GetRayJobHistory(data: GetRayJobHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobHistoryResponse>;
+  /** 获取Pod的YAML内容 {@link GetRayJobPodYamlRequest} {@link GetRayJobPodYamlResponse} */
+  GetRayJobPodYaml(data?: GetRayJobPodYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobPodYamlResponse>;
+  /** 获取作业的Pod列表 {@link GetRayJobPodsRequest} {@link GetRayJobPodsResponse} */
+  GetRayJobPods(data: GetRayJobPodsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobPodsResponse>;
+  /** 获取RayJob的YAML内容 {@link GetRayJobYamlRequest} {@link GetRayJobYamlResponse} */
+  GetRayJobYaml(data: GetRayJobYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobYamlResponse>;
+  /** 获取资源配置模板详情 {@link GetResourceConfigRequest} {@link GetResourceConfigResponse} */
+  GetResourceConfig(data: GetResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceConfigResponse>;
   /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */
   GrantDLCCatalogAccess(data: GrantDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GrantDLCCatalogAccessResponse>;
   /** 开通TCLake {@link InitializeTCLakeRequest} {@link InitializeTCLakeResponse} */
   InitializeTCLake(data?: InitializeTCLakeRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeTCLakeResponse>;
   /** 批量启动标准引擎资源组 {@link LaunchStandardEngineResourceGroupsRequest} {@link LaunchStandardEngineResourceGroupsResponse} */
   LaunchStandardEngineResourceGroups(data: LaunchStandardEngineResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<LaunchStandardEngineResourceGroupsResponse>;
+  /** 列出所有集群组 {@link ListClusterGroupsRequest} {@link ListClusterGroupsResponse} */
+  ListClusterGroups(data?: ListClusterGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClusterGroupsResponse>;
+  /** 获取所有案例分类 {@link ListExampleCategoriesRequest} {@link ListExampleCategoriesResponse} */
+  ListExampleCategories(data?: ListExampleCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExampleCategoriesResponse>;
+  /** 获取所有案例难度（去重） {@link ListExampleDifficultiesRequest} {@link ListExampleDifficultiesResponse} */
+  ListExampleDifficulties(data?: ListExampleDifficultiesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExampleDifficultiesResponse>;
+  /** 列出案例标签 {@link ListExampleTagsRequest} {@link ListExampleTagsResponse} */
+  ListExampleTags(data?: ListExampleTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ListExampleTagsResponse>;
+  /** 分页查询案例列表 {@link ListExamplesRequest} {@link ListExamplesResponse} */
+  ListExamples(data?: ListExamplesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExamplesResponse>;
+  /** 列出作业配置 {@link ListJobSpecsRequest} {@link ListJobSpecsResponse} */
+  ListJobSpecs(data?: ListJobSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobSpecsResponse>;
+  /** 查询配置下的作业实例列表 {@link ListJobsBySpecRequest} {@link ListJobsBySpecResponse} */
+  ListJobsBySpec(data: ListJobsBySpecRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsBySpecResponse>;
+  /** 列出实验室 {@link ListLabsRequest} {@link ListLabsResponse} */
+  ListLabs(data?: ListLabsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLabsResponse>;
+  /** 列出指定集群下的作业 {@link ListRayClusterJobsRequest} {@link ListRayClusterJobsResponse} */
+  ListRayClusterJobs(data: ListRayClusterJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRayClusterJobsResponse>;
+  /** 列出所有集群 {@link ListRayClustersRequest} {@link ListRayClustersResponse} */
+  ListRayClusters(data?: ListRayClustersRequest, config?: AxiosRequestConfig): AxiosPromise<ListRayClustersResponse>;
+  /** 列出Ray任务 {@link ListRayJobsRequest} {@link ListRayJobsResponse} */
+  ListRayJobs(data?: ListRayJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRayJobsResponse>;
+  /** 列出所有资源配置模板 {@link ListResourceConfigsRequest} {@link ListResourceConfigsResponse} */
+  ListResourceConfigs(data?: ListResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceConfigsResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 日志名称列表 {@link ListTaskJobLogNameRequest} {@link ListTaskJobLogNameResponse} */
@@ -7319,10 +10762,14 @@ declare interface Dlc {
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
   /** 修改高级设置 {@link ModifyAdvancedStoreLocationRequest} {@link ModifyAdvancedStoreLocationResponse} */
   ModifyAdvancedStoreLocation(data: ModifyAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAdvancedStoreLocationResponse>;
+  /** 修改集群优先级 {@link ModifyClusterPriorityRequest} {@link ModifyClusterPriorityResponse} */
+  ModifyClusterPriority(data: ModifyClusterPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterPriorityResponse>;
   /** 修改引擎描述信息 {@link ModifyDataEngineDescriptionRequest} {@link ModifyDataEngineDescriptionResponse} */
   ModifyDataEngineDescription(data: ModifyDataEngineDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataEngineDescriptionResponse>;
   /** 修改数据治理事件阈值 {@link ModifyGovernEventRuleRequest} {@link ModifyGovernEventRuleResponse} */
   ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
+  /** 修改实验室优先级 {@link ModifyLabPriorityRequest} {@link ModifyLabPriorityResponse} */
+  ModifyLabPriority(data: ModifyLabPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabPriorityResponse>;
   /** 更新spark作业 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
   /** 批量修改Spark作业参数配置 {@link ModifySparkAppBatchRequest} {@link ModifySparkAppBatchResponse} */
@@ -7355,8 +10802,18 @@ declare interface Dlc {
   RevokeDLCCatalogAccess(data: RevokeDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDLCCatalogAccessResponse>;
   /** 回滚引擎镜像版本 {@link RollbackDataEngineImageRequest} {@link RollbackDataEngineImageResponse} */
   RollbackDataEngineImage(data: RollbackDataEngineImageRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackDataEngineImageResponse>;
+  /** 基于配置运行作业 {@link RunJobSpecRequest} {@link RunJobSpecResponse} */
+  RunJobSpec(data: RunJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<RunJobSpecResponse>;
   /** 设置优化策略 {@link SetOptimizerPolicyRequest} {@link SetOptimizerPolicyResponse} */
   SetOptimizerPolicy(data: SetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetOptimizerPolicyResponse>;
+  /** 启动实验室 {@link StartLabRequest} {@link StartLabResponse} */
+  StartLab(data: StartLabRequest, config?: AxiosRequestConfig): AxiosPromise<StartLabResponse>;
+  /** 启动集群 {@link StartRayClusterRequest} {@link StartRayClusterResponse} */
+  StartRayCluster(data: StartRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<StartRayClusterResponse>;
+  /** 停止实验室 {@link StopLabRequest} {@link StopLabResponse} */
+  StopLab(data: StopLabRequest, config?: AxiosRequestConfig): AxiosPromise<StopLabResponse>;
+  /** 停止集群 {@link StopRayClusterRequest} {@link StopRayClusterResponse} */
+  StopRayCluster(data: StopRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<StopRayClusterResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */
@@ -7369,6 +10826,8 @@ declare interface Dlc {
   UnboundDatasourceHouse(data?: UnboundDatasourceHouseRequest, config?: AxiosRequestConfig): AxiosPromise<UnboundDatasourceHouseResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
+  /** 更新集群组 {@link UpdateClusterGroupRequest} {@link UpdateClusterGroupResponse} */
+  UpdateClusterGroup(data: UpdateClusterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClusterGroupResponse>;
   /** 更新数据引擎配置 {@link UpdateDataEngineRequest} {@link UpdateDataEngineResponse} */
   UpdateDataEngine(data: UpdateDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineResponse>;
   /** 修改引擎配置 {@link UpdateDataEngineConfigRequest} {@link UpdateDataEngineConfigResponse} */
@@ -7377,8 +10836,20 @@ declare interface Dlc {
   UpdateDataMaskStrategy(data?: UpdateDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataMaskStrategyResponse>;
   /** 更新标准引擎资源组网络配置信息 {@link UpdateEngineResourceGroupNetworkConfigInfoRequest} {@link UpdateEngineResourceGroupNetworkConfigInfoResponse} */
   UpdateEngineResourceGroupNetworkConfigInfo(data: UpdateEngineResourceGroupNetworkConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineResourceGroupNetworkConfigInfoResponse>;
+  /** 更新作业配置 {@link UpdateJobSpecRequest} {@link UpdateJobSpecResponse} */
+  UpdateJobSpec(data: UpdateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobSpecResponse>;
+  /** 更新作业配置优先级 {@link UpdateJobSpecPriorityRequest} {@link UpdateJobSpecPriorityResponse} */
+  UpdateJobSpecPriority(data: UpdateJobSpecPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobSpecPriorityResponse>;
+  /** 更新实验室配置 {@link UpdateLabRequest} {@link UpdateLabResponse} */
+  UpdateLab(data: UpdateLabRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLabResponse>;
   /** 更新网络配置 {@link UpdateNetworkConnectionRequest} {@link UpdateNetworkConnectionResponse} */
   UpdateNetworkConnection(data?: UpdateNetworkConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateNetworkConnectionResponse>;
+  /** 更新集群配置 {@link UpdateRayClusterRequest} {@link UpdateRayClusterResponse} */
+  UpdateRayCluster(data: UpdateRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRayClusterResponse>;
+  /** 更新作业优先级 {@link UpdateRayJobPriorityRequest} {@link UpdateRayJobPriorityResponse} */
+  UpdateRayJobPriority(data: UpdateRayJobPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRayJobPriorityResponse>;
+  /** 更新资源配置模板 {@link UpdateResourceConfigRequest} {@link UpdateResourceConfigResponse} */
+  UpdateResourceConfig(data: UpdateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceConfigResponse>;
   /** 更新行过滤规则 {@link UpdateRowFilterRequest} {@link UpdateRowFilterResponse} */
   UpdateRowFilter(data: UpdateRowFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRowFilterResponse>;
   /** 更新标准引擎资源组基础信息 {@link UpdateStandardEngineResourceGroupBaseInfoRequest} {@link UpdateStandardEngineResourceGroupBaseInfoResponse} */

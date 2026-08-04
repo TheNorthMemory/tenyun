@@ -16,6 +16,16 @@ declare interface APIKeyInfo {
   CreatedAt?: string;
 }
 
+/** 用于记录 Agent Bucket 的 Storage Source */
+declare interface AgentBucketStorageSource {
+  /** 用于传入 AgentBucket 的 LibraryID */
+  LibraryId?: string;
+  /** 用于传入 AgentBucket 的 spaceId */
+  SpaceId?: string;
+  /** 用于传入 AgentBucket 的 AccessDomain */
+  AccessDomain?: string;
+}
+
 /** 沙箱工具日志推送CLS相关配置 */
 declare interface CLSConfig {
   /** 沙箱工具日志推送所使用的CLS日志主题ID */
@@ -44,7 +54,7 @@ declare interface CosStorageSource {
 declare interface CustomConfiguration {
   /** 镜像地址 */
   Image?: string;
-  /** 镜像仓库类型：enterprise、personal。 */
+  /** 镜像仓库类型：enterprise、personal、custom枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
   ImageRegistryType?: string;
   /** 启动命令 */
   Command?: string[];
@@ -66,7 +76,7 @@ declare interface CustomConfiguration {
 declare interface CustomConfigurationDetail {
   /** 镜像地址 */
   Image?: string;
-  /** 镜像仓库类型：TCR、CCR。 */
+  /** 镜像仓库类型：enterprise、personal、custom。枚举值：enterprise： TCR 企业容器镜像服务personal： CCR 个人容器镜像服务 */
   ImageRegistryType?: string;
   /** 镜像 Digest */
   ImageDigest?: string;
@@ -126,7 +136,7 @@ declare interface HttpGetAction {
 declare interface ImageStorageSource {
   /** 镜像地址 */
   Reference?: string;
-  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  /** 镜像仓库类型：enterprise、personal。 */
   ImageRegistryType?: string;
   /** 镜像内部的路径 */
   SubPath?: string;
@@ -287,7 +297,7 @@ declare interface StorageMount {
   /** 存储挂载配置名称 */
   Name?: string;
   /** 存储配置 */
-  StorageSource?: StorageSource;
+  StorageSource?: StorageSource | null;
   /** 沙箱实例本地挂载路径 */
   MountPath?: string;
   /** 存储挂载读写权限配置，默认为false */
@@ -302,6 +312,8 @@ declare interface StorageSource {
   Image?: ImageStorageSource;
   /** 文件存储配置 */
   Cfs?: CfsStorageSource;
+  /** AgentBucket 存储配置 */
+  AgentBucket?: AgentBucketStorageSource;
 }
 
 /** 标签 */
@@ -357,8 +369,6 @@ declare interface CreatePreCacheImageTaskRequest {
   Image: string;
   /** 镜像仓库类型：enterprise、personal、custom枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
   ImageRegistryType: string;
-  /** 预热超时时长 */
-  TimeoutMinutes?: number;
 }
 
 declare interface CreatePreCacheImageTaskResponse {
@@ -443,7 +453,7 @@ declare interface DescribePreCacheImageTaskRequest {
   Image: string;
   /** 镜像 Digest */
   ImageDigest: string;
-  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  /** 镜像仓库类型：enterprise、personal、custom 。枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
   ImageRegistryType: string;
 }
 
@@ -452,7 +462,7 @@ declare interface DescribePreCacheImageTaskResponse {
   Image?: string;
   /** 镜像 Digest */
   ImageDigest?: string;
-  /** 镜像仓库类型：`enterprise`、`personal`。 */
+  /** 镜像仓库类型：enterprise、personal。 */
   ImageRegistryType?: string;
   /** 镜像预热状态 */
   Status?: string;
@@ -507,6 +517,8 @@ declare interface DescribeSandboxToolListResponse {
 declare interface PauseSandboxInstanceRequest {
   /** 沙箱实例ID */
   InstanceId: string;
+  /** 可选。带内存暂停，恢复后保留进程和内存状态。true=带内存；false=仅磁盘；不传=系统默认（当前默认 true，带内存）。 */
+  Memory?: boolean;
 }
 
 declare interface PauseSandboxInstanceResponse {
@@ -519,6 +531,8 @@ declare interface PauseSandboxInstanceResponse {
 declare interface ResumeSandboxInstanceRequest {
   /** 沙箱实例ID */
   InstanceId: string;
+  /** 超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h */
+  Timeout?: string;
 }
 
 declare interface ResumeSandboxInstanceResponse {
@@ -539,7 +553,7 @@ declare interface StartSandboxInstanceRequest {
   MountOptions?: MountOption[];
   /** 沙箱实例自定义配置 */
   CustomConfiguration?: CustomConfiguration;
-  /** 沙箱访问认证模式枚举值：DEFAULT： 默认，即 TOKEN 认证TOKEN： Token认证，即所有端口访问都需携带TOKENNONE： 免认证，即所有端口访问无需携带TOKENPUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN默认值：DEFAULT */
+  /** 沙箱访问认证模式枚举值：DEFAULT： 默认，即TOKEN认证TOKEN： Token认证，即所有端口访问都需携带TokenNONE： 免认证，即所有端口访问无需携带TokenPUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带Token，其他端口无需携带Token默认值：DEFAULT */
   AuthMode?: string;
   /** 沙箱元数据 */
   Metadata?: MetadataVar[];

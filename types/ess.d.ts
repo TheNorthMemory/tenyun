@@ -3143,9 +3143,9 @@ declare interface CreateFlowEvidenceReportResponse {
 }
 
 declare interface CreateFlowForwardsRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 合同对应参与方需要修改的目标经办人。其UserId可在企业控制台中组织管理里面找到。或者使用获取员工信息接口得到。注意：`需要保证目标经办人已经加入企业且已实名` */
+  /** 合同对应参与方需要修改的目标经办人。其UserId可在企业控制台中组织管理里面找到。或者使用获取员工信息接口得到。注意：需要保证目标经办人已经加入企业且已实名 */
   TargetUserId: string;
   /** 企业签署方的合同及对应签署方 */
   FlowForwardInfos: FlowForwardInfo[];

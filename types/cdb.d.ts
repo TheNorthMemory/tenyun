@@ -798,7 +798,7 @@ declare interface DiskTypeConfigItem {
 
 /** 灾备实例信息 */
 declare interface DrInfo {
-  /** 灾备实例状态 */
+  /** 灾备实例状态枚举值：0： 创建中1： 运行中4： 正在进行隔离操作5： 已隔离 */
   Status?: number;
   /** 可用区信息 */
   Zone?: string;

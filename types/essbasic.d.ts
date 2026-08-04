@@ -3137,7 +3137,7 @@ declare interface CreateFlowBlockchainEvidenceUrlResponse {
 }
 
 declare interface CreateFlowForwardsRequest {
-  /** 合同对应参与方需要修改的目标经办人对应的OpenId。注意：`需要保证目标经办人已经加入企业且已实名` */
+  /** 合同对应参与方需要修改的目标经办人对应的OpenId。注意：需要保证目标经办人已经加入企业且已实名 */
   TargetOpenId: string;
   /** 企业签署方的合同及对应签署方 */
   FlowForwardInfos: FlowForwardInfo[];
