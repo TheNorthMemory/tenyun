@@ -46,6 +46,26 @@ declare interface AuthorizationPolicyPriority {
   Priority: number;
 }
 
+/** MQTT集群用户信息 */
+declare interface BlockRuleItem {
+  /** 封禁策略名 */
+  Name?: string;
+  /** 封禁策略类型 */
+  Type?: number;
+  /** 备注信息 */
+  Remark?: string;
+  /** 包含规则 */
+  Include?: string;
+  /** 排除规则 */
+  Excludes?: string[];
+  /** 过期时间，毫秒级时间戳 。 */
+  ExpireTime?: number;
+  /** 修改时间，毫秒级时间戳 。 */
+  UpdateTime?: number;
+  /** 创建时间，毫秒级时间戳 。 */
+  CreateTime?: number;
+}
+
 /** HTTP 认证器body */
 declare interface BodyItem {
   /** body key */
@@ -658,6 +678,32 @@ declare interface CreateAuthorizationPolicyResponse {
   RequestId?: string;
 }
 
+declare interface CreateBlockRuleRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 封禁规则名，不可重复，只支持数字字母中划线 */
+  Name: string;
+  /** 封禁规则类型 CLIENT_ID(1), 默认值 USERNAME(2), IP_ADDRESS(3); */
+  Type?: number;
+  /** 包含表达式支持*（多个字符）和？（一个字符） */
+  Include?: string;
+  /** 排除表达式支持*（多个字符）和？（一个字符），最多三条。 */
+  Excludes?: string[];
+  /** 过期时间，毫秒级时间戳 */
+  ExpireTime?: number;
+  /** 备注，最长 128 字符 */
+  Remark?: string;
+}
+
+declare interface CreateBlockRuleResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 封禁规则名 */
+  Name?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeviceIdentityRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -912,6 +958,18 @@ declare interface DeleteAuthorizationPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBlockRuleRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 封禁规则名 */
+  BlockRuleName: string;
+}
+
+declare interface DeleteBlockRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCaCertificateRequest {
   /** 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -1040,6 +1098,20 @@ declare interface DescribeAuthorizationPoliciesRequest {
 declare interface DescribeAuthorizationPoliciesResponse {
   /** 规则 */
   Data?: AuthorizationPolicyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBlockRuleListRequest {
+  /** 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+}
+
+declare interface DescribeBlockRuleListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 封禁规则列表 */
+  Data?: BlockRuleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1742,6 +1814,26 @@ declare interface ModifyAuthorizationPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBlockRuleRequest {
+  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  InstanceId: string;
+  /** 待修改的封禁规则名 */
+  Name: string;
+  /** 包含表达式支持*（多个字符）和？（一个字符） */
+  Include?: string;
+  /** 排除表达式支持*（多个字符）和？（一个字符），最多三条。 */
+  Excludes?: string[];
+  /** 过期时间，毫秒级时间戳 */
+  ExpireTime?: number;
+  /** 备注，最长 128 字符 */
+  Remark?: string;
+}
+
+declare interface ModifyBlockRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceIdentityRequest {
   /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
   InstanceId: string;
@@ -2087,6 +2179,8 @@ declare interface Mqtt {
   ApplyRegistrationCode(data: ApplyRegistrationCodeRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyRegistrationCodeResponse>;
   /** 创建授权策略 {@link CreateAuthorizationPolicyRequest} {@link CreateAuthorizationPolicyResponse} */
   CreateAuthorizationPolicy(data: CreateAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuthorizationPolicyResponse>;
+  /** 创建封禁规则 {@link CreateBlockRuleRequest} {@link CreateBlockRuleResponse} */
+  CreateBlockRule(data: CreateBlockRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBlockRuleResponse>;
   /** 创建设备标识 {@link CreateDeviceIdentityRequest} {@link CreateDeviceIdentityResponse} */
   CreateDeviceIdentity(data: CreateDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceIdentityResponse>;
   /** 创建一个MQTTHTTP认证器 {@link CreateHttpAuthenticatorRequest} {@link CreateHttpAuthenticatorResponse} */
@@ -2113,6 +2207,8 @@ declare interface Mqtt {
   DeleteAuthenticator(data: DeleteAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthenticatorResponse>;
   /** 删除授权策略 {@link DeleteAuthorizationPolicyRequest} {@link DeleteAuthorizationPolicyResponse} */
   DeleteAuthorizationPolicy(data: DeleteAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuthorizationPolicyResponse>;
+  /** 删除封禁规则 {@link DeleteBlockRuleRequest} {@link DeleteBlockRuleResponse} */
+  DeleteBlockRule(data: DeleteBlockRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBlockRuleResponse>;
   /** 删除Ca证书 {@link DeleteCaCertificateRequest} {@link DeleteCaCertificateResponse} */
   DeleteCaCertificate(data: DeleteCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCaCertificateResponse>;
   /** 为MQTT客户端删除一条订阅 {@link DeleteClientSubscriptionRequest} {@link DeleteClientSubscriptionResponse} */
@@ -2135,6 +2231,8 @@ declare interface Mqtt {
   DescribeAuthenticator(data: DescribeAuthenticatorRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthenticatorResponse>;
   /** 查询授权策略 {@link DescribeAuthorizationPoliciesRequest} {@link DescribeAuthorizationPoliciesResponse} */
   DescribeAuthorizationPolicies(data?: DescribeAuthorizationPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuthorizationPoliciesResponse>;
+  /** 查询封禁策略列表 {@link DescribeBlockRuleListRequest} {@link DescribeBlockRuleListResponse} */
+  DescribeBlockRuleList(data: DescribeBlockRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlockRuleListResponse>;
   /** 查询Ca证书详情 {@link DescribeCaCertificateRequest} {@link DescribeCaCertificateResponse} */
   DescribeCaCertificate(data: DescribeCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificateResponse>;
   /** 查询集群CA证书列表 {@link DescribeCaCertificatesRequest} {@link DescribeCaCertificatesResponse} */
@@ -2193,6 +2291,8 @@ declare interface Mqtt {
   KickOutClient(data: KickOutClientRequest, config?: AxiosRequestConfig): AxiosPromise<KickOutClientResponse>;
   /** 修改授权策略 {@link ModifyAuthorizationPolicyRequest} {@link ModifyAuthorizationPolicyResponse} */
   ModifyAuthorizationPolicy(data: ModifyAuthorizationPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuthorizationPolicyResponse>;
+  /** 修改封禁规则 {@link ModifyBlockRuleRequest} {@link ModifyBlockRuleResponse} */
+  ModifyBlockRule(data: ModifyBlockRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlockRuleResponse>;
   /** 修改设备标识 {@link ModifyDeviceIdentityRequest} {@link ModifyDeviceIdentityResponse} */
   ModifyDeviceIdentity(data: ModifyDeviceIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceIdentityResponse>;
   /** 修改MQTTHTTP认证器 {@link ModifyHttpAuthenticatorRequest} {@link ModifyHttpAuthenticatorResponse} */

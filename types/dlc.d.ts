@@ -1140,6 +1140,46 @@ declare interface Filter {
   Values?: string[];
 }
 
+/** 流程活动详情 */
+declare interface FlowActivityDetail {
+  /** 活动编码 */
+  ActivityCode?: string;
+  /** 活动状态 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 耗时（秒） */
+  Duration?: number | null;
+}
+
+/** 流程详情 */
+declare interface FlowDetail {
+  /** 流程ID（数据库主键） */
+  FlowId?: number;
+  /** Temporal Workflow ID */
+  WorkFlowId?: string | null;
+  /** 流程编码 */
+  WorkFlowCode?: string;
+  /** 流程进度，0~100 */
+  Progress?: number;
+  /** 流程状态 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 流程活动列表 */
+  Activities?: FlowActivityDetail[] | null;
+}
+
+/** 流程简要信息 */
+declare interface FlowInfo {
+  /** 流程ID */
+  FlowId?: number;
+  /** 流程编码 */
+  WorkFlowCode?: string;
+  /** 流程状态 */
+  Status?: number;
+}
+
 /** GPU 机型 */
 declare interface GPUInfo {
   /** 计费项 */
@@ -1290,6 +1330,56 @@ declare interface IcebergTablePartition {
   LastUpdateSnapshotId?: string;
   /** 分区的location */
   Location?: LocationInfo;
+}
+
+/** 推理模型信息 */
+declare interface InferenceModelInfo {
+  /** Model ID */
+  ModelId?: string | null;
+  /** 模型业务唯一标识 */
+  ModelUid?: string | null;
+  /** 模型名称 */
+  Name?: string | null;
+  /** 模型提供方 */
+  Provider?: string | null;
+  /** 模型描述 */
+  Description?: string | null;
+  /** 模型类型 */
+  ModelType?: string | null;
+  /** 支持的引擎 */
+  SupportedEngines?: string[];
+  /** 参数量 */
+  ParameterSize?: string | null;
+  /** 模型标签 */
+  Tags?: string[] | null;
+  /** 最新版本号 */
+  LatestVersion?: string | null;
+  /** 版本总数 */
+  VersionCount?: number | null;
+  /** 关联的推理服务数量 */
+  ServiceCount?: number | null;
+  /** 是否有存储（内置模型和用户上传模型均为 true） */
+  HasStorage?: boolean | null;
+  /** 存储地域 */
+  StorageRegion?: string | null;
+  /** 是否使用用户自带存储桶 */
+  HasCustomStorage?: boolean | null;
+  /** 存储后端类型（如 COS、GOOSEFS、CFSTURBO） */
+  StorageType?: string | null;
+  /** 是否是内置模型 */
+  BuiltIn?: boolean | null;
+  /** 任务类型列表 */
+  Tasks?: string[] | null;
+  /** 云账户的 APP ID */
+  AppId?: number | null;
+  /** 云账户的 UIN */
+  Uin?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** 云账户的 Sub UIN */
+  SubAccountUin?: string;
 }
 
 /** ip端口对信息 */
@@ -1620,6 +1710,14 @@ declare interface MCPTaskResultInfo {
   IsResultOversize?: boolean;
 }
 
+/** 校验消息项 */
+declare interface MessageItem {
+  /** 计费项标识 */
+  BillingItem?: string;
+  /** 校验失败描述信息 */
+  Message?: string;
+}
+
 /** 元数据库基本信息 */
 declare interface MetaDatabaseInfo {
   /** 数据库名称。 */
@@ -1942,6 +2040,56 @@ declare interface Partition {
   CreateTime?: number;
 }
 
+/** 资源分区详情 */
+declare interface PartitionDetail {
+  /** 分区编码 */
+  PartitionCode?: string;
+  /** 分区名称 */
+  PartitionName?: string;
+  /** 分区描述 */
+  Description?: string | null;
+  /** 地域 */
+  Region?: number;
+  /** 产品信息 */
+  ProductInfo?: string | null;
+  /** 资源池编码 */
+  ResourcePoolCode?: string | null;
+  /** 资源配额列表 */
+  ResourceQuota?: ResourceQuota[] | null;
+  /** 付费模式 */
+  PayMode?: number;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 调度器类型 */
+  Scheduler?: string | null;
+  /** 状态 */
+  Status?: number;
+}
+
+/** 资源分区信息 */
+declare interface PartitionInfo {
+  /** 分区名称 */
+  Name?: string;
+  /** 分区编码 */
+  PartitionCode?: string;
+  /** 描述 */
+  Description?: string | null;
+  /** 状态：11-发货中，1-运行中，2-隔离中，3-已销毁 */
+  Status?: number;
+  /** 队列数量 */
+  QueueCount?: number;
+  /** 资源配置（配额） */
+  ResourceQuota?: ResourceQuota[] | null;
+  /** 计费类型：1-包年包月，0-按量计费 */
+  PayMode?: number;
+  /** 创建时间 */
+  CreateTime?: string | null;
+  /** 更新时间 */
+  UpdateTime?: string | null;
+  /** 过期时间 */
+  ExpireTime?: string | null;
+}
+
 /** Workspace 持久化工作目录配置 */
 declare interface PersistentWorkDir {
   /** 是否启用持久化工作目录；为空或 false 时沿用 emptyDir 行为 */
@@ -2040,6 +2188,22 @@ declare interface PythonSparkImage {
   CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
+}
+
+/** 队列信息 */
+declare interface QueueInfo {
+  /** 队列ID */
+  Id?: number;
+  /** 队列名称 */
+  QueueName?: string;
+  /** 资源用量列表 */
+  ResourceUsage?: ResourceUsage[] | null;
+  /** 队列描述 */
+  Description?: string | null;
+  /** 是否为默认队列 */
+  IsDefault?: number;
+  /** 队列类型：1-独占型，2-共享型 */
+  QueueType?: number;
 }
 
 /** Ray集群实体 */
@@ -2198,6 +2362,16 @@ declare interface RayJobSubmitEntity {
   JobSource?: string;
 }
 
+/** 可售卖地域信息 */
+declare interface RegionInfo {
+  /** 地域编码，如 ap-chongqing */
+  RegionCode?: string;
+  /** 地域名称，如 重庆 */
+  RegionName?: string;
+  /** 地域状态：AVAILABLE-可用，UNAVAILABLE-不可用 */
+  Status?: string;
+}
+
 /** 数据治理资源配置项 */
 declare interface ResourceConf {
   /** 当为TCLake优化资源时，优化任务的并行度 */
@@ -2248,6 +2422,52 @@ declare interface ResourceInfo {
   ResourceGroupName?: string;
   /** 资源配置信息 */
   ResourceConf?: ResourceConf;
+}
+
+/** 资源配额 */
+declare interface ResourceQuota {
+  /** 可售卖资源规格 */
+  ResourceSpec?: ResourceSpec;
+  /** 配额数量 */
+  Quota?: number;
+}
+
+/** 可售卖资源规格信息 */
+declare interface ResourceSaleInfo {
+  /** 可售卖资源规格 */
+  ResourceSpec?: ResourceSpec;
+  /** 规格步长 */
+  Step?: number | null;
+  /** 最大资源数量，仅GU有值 */
+  MaxSpec?: number | null;
+}
+
+/** 资源规格 */
+declare interface ResourceSpec {
+  /** 资源包类型 */
+  ResourceType?: string;
+  /** 机型，例如X40/T20，仅GU有值 */
+  InstanceType?: string | null;
+  /** 四层计费项 */
+  BillingItem?: string;
+  /** 规格描述 */
+  SpecDesc?: string;
+  /** 规格，格式为 {gpu}:{cpu}:{mem}:{vram} */
+  Spec?: string;
+  /** GPU类型，仅GU有值 */
+  GpuType?: string | null;
+  /** 单个物理节点上该计费项对应的最大 GPU 卡数，CPU / HM_CPU 恒为 0 */
+  MaxCardPerNode?: number;
+}
+
+/** 资源用量信息，描述某种资源类型的用量范围 */
+declare interface ResourceUsage {
+  /** 资源规格 */
+  ResourceSpec?: ResourceSpec;
+  /** 最小用量 */
+  Min?: number;
+  /** 最大用量 */
+  Max?: number;
 }
 
 /** SQL查询任务 */
@@ -3924,6 +4144,50 @@ declare interface CheckLockMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface CheckModifyPartitionRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 目标资源配额列表（计费项+目标数量） */
+  TargetResourceQuotaList: ResourceQuota[];
+}
+
+declare interface CheckModifyPartitionResponse {
+  /** 是否允许变配：true-允许，false-不允许 */
+  CanModify?: boolean;
+  /** 校验失败时的不足资源描述信息列表，校验通过时为null */
+  MessageList?: MessageItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckQueueNameRequest {
+  /** 队列名称 */
+  QueueName: string;
+  /** 分区编码，用于校验同分区下队列名称是否重复 */
+  PartitionCode?: string;
+}
+
+declare interface CheckQueueNameResponse {
+  /** 校验是否通过：true-通过，false-不通过 */
+  IsValid?: string;
+  /** 校验失败原因，校验通过时为空 */
+  Message?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckResourceNameRequest {
+  /** 资源名称 */
+  ResourceName: string;
+}
+
+declare interface CheckResourceNameResponse {
+  /** 校验是否通过 */
+  IsValid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CopyJobSpecRequest {
   /** 原配置ID */
   SpecId: string;
@@ -4286,6 +4550,76 @@ declare interface CreateImportTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateInferenceModelRequest {
+  /** 模型名称（最长 256） */
+  Name: string;
+  /** 模型类型（如 LLM、Embedding、Reranker、ASR、TTS 等） */
+  ModelType: string;
+  /** 初始版本号（必填，如 v1、v1.5） */
+  InitialVersion: string;
+  /** 模型提供方 */
+  Provider?: string;
+  /** 模型描述 */
+  Description?: string;
+  /** 模型参数量（如 7B、1.5B） */
+  ParameterSize?: string;
+  /** 模型标签列表 */
+  Tags?: string[];
+  /** 模型存储 URI（可选，如 cos://bucket-name/models/name/） */
+  StorageUri?: string;
+  /** 是否使用用户自带存储桶（默认 false 表示平台托管） */
+  UseCustomStorage?: boolean;
+  /** 任务类型列表（如 ["Text Generation", "Embedding"]） */
+  Tasks?: string[];
+  /** 模型 UID（可选，前端预先生成的 UID，不传则后端自动生成） */
+  ModelUid?: string;
+}
+
+declare interface CreateInferenceModelResponse {
+  /** 模型ID */
+  ModelId?: string | null;
+  /** 模型UID */
+  ModelUid?: string;
+  /** 模型名称 */
+  Name?: string;
+  /** 模型提供方 */
+  Provider?: string;
+  /** 模型描述 */
+  Description?: string;
+  /** 模型类型 */
+  ModelType?: string;
+  /** 参数大小 */
+  ParameterSize?: string;
+  /** 模型标签 */
+  Tags?: string[];
+  /** 最新版本 */
+  LatestVersion?: string;
+  /** 版本总数 */
+  VersionCount?: number;
+  /** 关联的推理服务数量 */
+  ServiceCount?: number;
+  /** 是否有存储 */
+  HasStorage?: boolean;
+  /** 是否使用用户自带存储桶 */
+  HasCustomStorage?: boolean;
+  /** 存储后端类型 */
+  StorageType?: string;
+  /** 是否内置模型 */
+  BuiltIn?: boolean;
+  /** 任务类型列表 */
+  Tasks?: string[];
+  /** APPID */
+  AppId?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** Sub UIN */
+  SubAccountUin?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInternalTableRequest {
   /** 表基本信息 */
   TableBaseInfo: TableBaseInfo;
@@ -4634,6 +4968,54 @@ declare interface CreateNotebookSessionStatementSupportBatchSQLRequest {
 declare interface CreateNotebookSessionStatementSupportBatchSQLResponse {
   /** Session Statement详情 */
   NotebookSessionStatementBatches?: NotebookSessionStatementBatchInformation;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePartitionQueueRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 队列名称 */
+  QueueName: string;
+  /** 资源规格列表，定义队列的资源类型及大小范围 */
+  ResourceUsages: ResourceUsage[];
+  /** 队列类型：1-独占型，2-共享型 */
+  QueueType: number;
+  /** 队列描述 */
+  Description?: string;
+}
+
+declare interface CreatePartitionQueueResponse {
+  /** 新创建的资源队列ID */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePartitionRequest {
+  /** 交易类型：purchase-新购，renew-续费，modify-变配 */
+  ActionType: string;
+  /** 付费模式：0-后付费，1-预付费 */
+  PayMode: number;
+  /** 资源配额列表（计费项+数量） */
+  ResourceQuotaList: ResourceQuota[];
+  /** 时间大小，预付费时为购买月数，后付费时为3600 */
+  TimeSpan: number;
+  /** 时间单位，预付费为m（月），后付费为s（秒） */
+  TimeUnit: string;
+  /** 自动续费标志：0-默认，1-自动续费，2-不自动续费（仅预付费有效） */
+  AutoRenewFlag?: number;
+  /** 弹性资源池名称，用于订单页展示 */
+  Name?: string;
+  /** 队列描述 */
+  Description?: string;
+}
+
+declare interface CreatePartitionResponse {
+  /** 子订单号 */
+  DealName?: string;
+  /** 大订单号 */
+  BigDealId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5422,6 +5804,20 @@ declare interface DeleteNotebookSessionResponse {
   RequestId?: string;
 }
 
+declare interface DeletePartitionQueueRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 队列名称 */
+  QueueName: string;
+  /** 队列ID */
+  Id: number;
+}
+
+declare interface DeletePartitionQueueResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRayClusterRequest {
   /** 集群ID */
   Id: string;
@@ -6102,6 +6498,42 @@ declare interface DescribeEngineUsageInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFlowDetailListRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 页码，从1开始，默认为1 */
+  Page?: number;
+  /** 每页返回数量，默认为10 */
+  PageSize?: number;
+}
+
+declare interface DescribeFlowDetailListResponse {
+  /** 流程详情列表 */
+  FlowDetailList?: FlowDetail[];
+  /** 总记录数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeFlowListRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 页码，从1开始，默认为1 */
+  Page?: number;
+  /** 每页返回数量，默认为10 */
+  PageSize?: number;
+}
+
+declare interface DescribeFlowListResponse {
+  /** 流程列表 */
+  FlowInfoList?: FlowInfo[];
+  /** 总记录数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeForbiddenTableProRequest {
 }
 
@@ -6364,6 +6796,62 @@ declare interface DescribeOtherCHDFSBindingListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePartitionDetailRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+}
+
+declare interface DescribePartitionDetailResponse {
+  /** 分区详情 */
+  PartitionDetail?: PartitionDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePartitionQueuesRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+  /** 筛选条件列表 */
+  Filters?: Filter[];
+  /** 页码 */
+  Page?: number;
+  /** 每页返回数量 */
+  PageSize?: number;
+}
+
+declare interface DescribePartitionQueuesResponse {
+  /** 队列列表 */
+  QueueList?: QueueInfo[];
+  /** 默认队列信息 */
+  DefaultQueue?: QueueInfo;
+  /** 总记录数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePartitionsRequest {
+  /** 页码，从1开始，默认为1 */
+  Page?: number;
+  /** 每页返回数量，默认为10 */
+  PageSize?: number;
+  /** 排序字段列表，按数组顺序依次应用，可选 */
+  SortFields?: SortField[];
+  /** 筛选条件列表，多个条件之间为AND关系，可选 */
+  Filters?: Filter[];
+}
+
+declare interface DescribePartitionsResponse {
+  /** 资源包列表 */
+  Partitions?: PartitionInfo[];
+  /** 总记录数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceGroupUsageInfoRequest {
   /** 资源组ID */
   SessionId: string;
@@ -6398,6 +6886,26 @@ declare interface DescribeResultDownloadResponse {
   SecretKey?: string;
   /** 临时Token */
   Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSaleRegionsRequest {
+}
+
+declare interface DescribeSaleRegionsResponse {
+  /** 可售卖地域列表 */
+  RegionList?: RegionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSaleResourceInfoRequest {
+}
+
+declare interface DescribeSaleResourceInfoResponse {
+  /** 可售卖资源规格列表 */
+  SaleResourceInfoList?: ResourceSaleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7422,6 +7930,62 @@ declare interface GetExampleDetailResponse {
   RequestId?: string;
 }
 
+declare interface GetInferenceModelRequest {
+  /** 模型UID */
+  ModelUid?: string;
+}
+
+declare interface GetInferenceModelResponse {
+  /** 模型ID */
+  ModelId?: string;
+  /** 模型UID */
+  ModelUid?: string;
+  /** 模型名称 */
+  Name?: string;
+  /** 模型提供方 */
+  Provider?: string;
+  /** 模型描述 */
+  Description?: string;
+  /** 模型类型 */
+  ModelType?: string;
+  /** 模型参数量 */
+  ParameterSize?: string;
+  /** 模型标签列表 */
+  Tags?: string[];
+  /** 最新版本号 */
+  LatestVersion?: string;
+  /** 版本总数 */
+  VersionCount?: number;
+  /** 关联的推理服务数量 */
+  ServiceCount?: number;
+  /** 是否有存储 */
+  HasStorage?: boolean;
+  /** 存储地域 */
+  StorageRegion?: string;
+  /** 是否使用用户自带存储桶 */
+  HasCustomStorage?: boolean;
+  /** 存储后端类型 */
+  StorageType?: string;
+  /** 是否内置模型 */
+  BuiltIn?: boolean;
+  /** 任务类型列表 */
+  Tasks?: string[];
+  /** 模型支持的推理引擎列表 */
+  SupportedEngines?: string[];
+  /** UIN */
+  Uin?: string;
+  /** APPID */
+  AppId?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** Sub UIN */
+  SubAccountUin?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetJobSpecRequest {
   /** 配置ID */
   SpecId: string;
@@ -8379,6 +8943,40 @@ declare interface ListExamplesResponse {
   RequestId?: string;
 }
 
+declare interface ListInferenceModelsRequest {
+  /** 页码（从1开始） */
+  Page?: number;
+  /** 每页数量（最大 200） */
+  PageSize?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 过滤器 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  SortFields?: SortField[];
+  /** 模型参数最小值 */
+  ParameterSizeMin?: number;
+  /** 模型参数最大值 */
+  ParameterSizeMax?: number;
+}
+
+declare interface ListInferenceModelsResponse {
+  /** 推理模型列表 */
+  Items?: InferenceModelInfo[] | null;
+  /** 总记录数 */
+  Total?: number | null;
+  /** 当前页码 */
+  Page?: number | null;
+  /** 每页数量 */
+  PageSize?: number | null;
+  /** 总页数 */
+  TotalPages?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListJobSpecsRequest {
   /** 页数 */
   Page?: number;
@@ -8829,6 +9427,38 @@ declare interface ModifyLabPriorityResponse {
   SubAccountName?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPartitionDescriptionRequest {
+  /** 分区编码 */
+  PartitionCode: string;
+  /** 分区描述 */
+  Description: string;
+}
+
+declare interface ModifyPartitionDescriptionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPartitionQueueRequest {
+  /** 资源队列ID */
+  Id: number;
+  /** 分区编码 */
+  PartitionCode?: string;
+  /** 队列名称 */
+  QueueName?: string;
+  /** 队列描述 */
+  Description?: string;
+  /** 资源规格列表，定义队列的资源类型及大小范围 */
+  ResourceUsages?: ResourceUsage[];
+  /** 队列类型：1-独占型，2-共享型 */
+  QueueType?: number;
+}
+
+declare interface ModifyPartitionQueueResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9703,6 +10333,64 @@ declare interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
   RequestId?: string;
 }
 
+declare interface UpdateInferenceModelRequest {
+  /** 推理模型UID */
+  ModelUid: string;
+  /** 模型名称（可选，不传则不修改） */
+  Name?: string;
+  /** 模型描述（可选） */
+  Description?: string;
+  /** 模型参数量（可选，如 7B、1.5B） */
+  ParameterSize?: string;
+  /** 模型标签列表（可选） */
+  Tags?: string[];
+}
+
+declare interface UpdateInferenceModelResponse {
+  /** 推理模型ID */
+  ModelId?: string;
+  /** 推理模型UID */
+  ModelUid?: string;
+  /** 模型名称 */
+  Name?: string;
+  /** 模型提供方 */
+  Provider?: string;
+  /** 模型描述 */
+  Description?: string;
+  /** 模型类型 */
+  ModelType?: string;
+  /** 模型参数量 */
+  ParameterSize?: string;
+  /** 标签 */
+  Tags?: string[];
+  /** 最新版本号 */
+  LatestVersion?: string;
+  /** 版本总数 */
+  VersionCount?: number;
+  /** 关联的推理服务数量 */
+  ServiceCount?: number;
+  /** 是否有存储 */
+  HasStorage?: boolean;
+  /** 是否使用用户自带存储桶 */
+  HasCustomStorage?: boolean;
+  /** 存储后端类型 */
+  StorageType?: string;
+  /** 是否内置模型 */
+  BuiltIn?: boolean;
+  /** 任务类型列表 */
+  Tasks?: string[];
+  /** APPID */
+  AppId?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** SUB UIN */
+  SubAccountUin?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateJobSpecPriorityRequest {
   /** 配置ID */
   SpecId: string;
@@ -10382,6 +11070,12 @@ declare interface Dlc {
   CheckDataEngineImageCanBeUpgrade(data: CheckDataEngineImageCanBeUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeUpgradeResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
+  /** 变配校验 {@link CheckModifyPartitionRequest} {@link CheckModifyPartitionResponse} */
+  CheckModifyPartition(data: CheckModifyPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckModifyPartitionResponse>;
+  /** 资源队列名称合法性检测 {@link CheckQueueNameRequest} {@link CheckQueueNameResponse} */
+  CheckQueueName(data: CheckQueueNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckQueueNameResponse>;
+  /** 校验资源名称 {@link CheckResourceNameRequest} {@link CheckResourceNameResponse} */
+  CheckResourceName(data: CheckResourceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckResourceNameResponse>;
   /** 复制作业配置 {@link CopyJobSpecRequest} {@link CopyJobSpecResponse} */
   CopyJobSpec(data: CopyJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<CopyJobSpecResponse>;
   /** 创建元数据加速桶和产品绑定关系 {@link CreateCHDFSBindingProductRequest} {@link CreateCHDFSBindingProductResponse} */
@@ -10404,6 +11098,8 @@ declare interface Dlc {
   CreateExportTask(data: CreateExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExportTaskResponse>;
   /** 创建导入任务 {@link CreateImportTaskRequest} {@link CreateImportTaskResponse} */
   CreateImportTask(data: CreateImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImportTaskResponse>;
+  /** 创建推理模型 {@link CreateInferenceModelRequest} {@link CreateInferenceModelResponse} */
+  CreateInferenceModel(data: CreateInferenceModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceModelResponse>;
   /** 创建托管存储内表 {@link CreateInternalTableRequest} {@link CreateInternalTableResponse} */
   CreateInternalTable(data: CreateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalTableResponse>;
   /** 创建作业配置 {@link CreateJobSpecRequest} {@link CreateJobSpecResponse} */
@@ -10418,6 +11114,10 @@ declare interface Dlc {
   CreateNotebookSessionStatement(data: CreateNotebookSessionStatementRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionStatementResponse>;
   /** 创建交互式session并执行SQL任务 {@link CreateNotebookSessionStatementSupportBatchSQLRequest} {@link CreateNotebookSessionStatementSupportBatchSQLResponse} */
   CreateNotebookSessionStatementSupportBatchSQL(data: CreateNotebookSessionStatementSupportBatchSQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookSessionStatementSupportBatchSQLResponse>;
+  /** 新增资源包 {@link CreatePartitionRequest} {@link CreatePartitionResponse} */
+  CreatePartition(data: CreatePartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionResponse>;
+  /** 新增资源队列 {@link CreatePartitionQueueRequest} {@link CreatePartitionQueueResponse} */
+  CreatePartitionQueue(data: CreatePartitionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartitionQueueResponse>;
   /** 创建集群 {@link CreateRayClusterRequest} {@link CreateRayClusterResponse} */
   CreateRayCluster(data?: CreateRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRayClusterResponse>;
   /** 创建资源配置模板 {@link CreateResourceConfigRequest} {@link CreateResourceConfigResponse} */
@@ -10476,6 +11176,8 @@ declare interface Dlc {
   DeleteNativeSparkSession(data?: DeleteNativeSparkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeSparkSessionResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
   DeleteNotebookSession(data: DeleteNotebookSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookSessionResponse>;
+  /** 删除资源队列 {@link DeletePartitionQueueRequest} {@link DeletePartitionQueueResponse} */
+  DeletePartitionQueue(data: DeletePartitionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePartitionQueueResponse>;
   /** 删除集群 {@link DeleteRayClusterRequest} {@link DeleteRayClusterResponse} */
   DeleteRayCluster(data: DeleteRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRayClusterResponse>;
   /** 删除Ray任务 {@link DeleteRayJobRequest} {@link DeleteRayJobResponse} */
@@ -10546,6 +11248,10 @@ declare interface Dlc {
   DescribeEngineNodeSpec(data?: DescribeEngineNodeSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineNodeSpecResponse>;
   /** 查询数据引擎资源使用情况 {@link DescribeEngineUsageInfoRequest} {@link DescribeEngineUsageInfoResponse} */
   DescribeEngineUsageInfo(data: DescribeEngineUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineUsageInfoResponse>;
+  /** 查询流程详情列表 {@link DescribeFlowDetailListRequest} {@link DescribeFlowDetailListResponse} */
+  DescribeFlowDetailList(data: DescribeFlowDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowDetailListResponse>;
+  /** 查询分区流程列表 {@link DescribeFlowListRequest} {@link DescribeFlowListResponse} */
+  DescribeFlowList(data: DescribeFlowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowListResponse>;
   /** 查询被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
   DescribeForbiddenTablePro(data?: DescribeForbiddenTableProRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForbiddenTableProResponse>;
   /** 查询托管存储指定目录的Summary {@link DescribeLakeFsDirSummaryRequest} {@link DescribeLakeFsDirSummaryResponse} */
@@ -10578,10 +11284,20 @@ declare interface Dlc {
   DescribeNotebookSessions(data: DescribeNotebookSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotebookSessionsResponse>;
   /** 查询其他产品元数据加速桶绑定列表 {@link DescribeOtherCHDFSBindingListRequest} {@link DescribeOtherCHDFSBindingListResponse} */
   DescribeOtherCHDFSBindingList(data: DescribeOtherCHDFSBindingListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOtherCHDFSBindingListResponse>;
+  /** 获取分区详情 {@link DescribePartitionDetailRequest} {@link DescribePartitionDetailResponse} */
+  DescribePartitionDetail(data: DescribePartitionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionDetailResponse>;
+  /** 查询指定分区的所有队列列表 {@link DescribePartitionQueuesRequest} {@link DescribePartitionQueuesResponse} */
+  DescribePartitionQueues(data: DescribePartitionQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionQueuesResponse>;
+  /** 查询分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
+  DescribePartitions(data?: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
   /** 展示标准引擎资源组资源用量 {@link DescribeResourceGroupUsageInfoRequest} {@link DescribeResourceGroupUsageInfoResponse} */
   DescribeResourceGroupUsageInfo(data: DescribeResourceGroupUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupUsageInfoResponse>;
   /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
   DescribeResultDownload(data: DescribeResultDownloadRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResultDownloadResponse>;
+  /** 查询可售卖的地域列表 {@link DescribeSaleRegionsRequest} {@link DescribeSaleRegionsResponse} */
+  DescribeSaleRegions(data?: DescribeSaleRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaleRegionsResponse>;
+  /** 查询可售卖资源规格 {@link DescribeSaleResourceInfoRequest} {@link DescribeSaleResourceInfoResponse} */
+  DescribeSaleResourceInfo(data?: DescribeSaleResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaleResourceInfoResponse>;
   /** 查询SQL脚本列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
   /** 获取内置镜像信息 {@link DescribeSessionImageVersionRequest} {@link DescribeSessionImageVersionResponse} */
@@ -10678,6 +11394,8 @@ declare interface Dlc {
   GenerateInternalTable(data: GenerateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateInternalTableResponse>;
   /** 获取案例管理详情 {@link GetExampleDetailRequest} {@link GetExampleDetailResponse} */
   GetExampleDetail(data: GetExampleDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetExampleDetailResponse>;
+  /** 获取单个模型详情 {@link GetInferenceModelRequest} {@link GetInferenceModelResponse} */
+  GetInferenceModel(data?: GetInferenceModelRequest, config?: AxiosRequestConfig): AxiosPromise<GetInferenceModelResponse>;
   /** 获取作业配置详情 {@link GetJobSpecRequest} {@link GetJobSpecResponse} */
   GetJobSpec(data: GetJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<GetJobSpecResponse>;
   /** 获取实验室详情 {@link GetLabDetailRequest} {@link GetLabDetailResponse} */
@@ -10740,6 +11458,8 @@ declare interface Dlc {
   ListExampleTags(data?: ListExampleTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ListExampleTagsResponse>;
   /** 分页查询案例列表 {@link ListExamplesRequest} {@link ListExamplesResponse} */
   ListExamples(data?: ListExamplesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExamplesResponse>;
+  /** 列出推理模型 {@link ListInferenceModelsRequest} {@link ListInferenceModelsResponse} */
+  ListInferenceModels(data?: ListInferenceModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListInferenceModelsResponse>;
   /** 列出作业配置 {@link ListJobSpecsRequest} {@link ListJobSpecsResponse} */
   ListJobSpecs(data?: ListJobSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobSpecsResponse>;
   /** 查询配置下的作业实例列表 {@link ListJobsBySpecRequest} {@link ListJobsBySpecResponse} */
@@ -10770,6 +11490,10 @@ declare interface Dlc {
   ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
   /** 修改实验室优先级 {@link ModifyLabPriorityRequest} {@link ModifyLabPriorityResponse} */
   ModifyLabPriority(data: ModifyLabPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabPriorityResponse>;
+  /** 修改分区描述 {@link ModifyPartitionDescriptionRequest} {@link ModifyPartitionDescriptionResponse} */
+  ModifyPartitionDescription(data: ModifyPartitionDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPartitionDescriptionResponse>;
+  /** 编辑资源队列 {@link ModifyPartitionQueueRequest} {@link ModifyPartitionQueueResponse} */
+  ModifyPartitionQueue(data: ModifyPartitionQueueRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPartitionQueueResponse>;
   /** 更新spark作业 {@link ModifySparkAppRequest} {@link ModifySparkAppResponse} */
   ModifySparkApp(data: ModifySparkAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppResponse>;
   /** 批量修改Spark作业参数配置 {@link ModifySparkAppBatchRequest} {@link ModifySparkAppBatchResponse} */
@@ -10836,6 +11560,8 @@ declare interface Dlc {
   UpdateDataMaskStrategy(data?: UpdateDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataMaskStrategyResponse>;
   /** 更新标准引擎资源组网络配置信息 {@link UpdateEngineResourceGroupNetworkConfigInfoRequest} {@link UpdateEngineResourceGroupNetworkConfigInfoResponse} */
   UpdateEngineResourceGroupNetworkConfigInfo(data: UpdateEngineResourceGroupNetworkConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineResourceGroupNetworkConfigInfoResponse>;
+  /** 更新推理模型 {@link UpdateInferenceModelRequest} {@link UpdateInferenceModelResponse} */
+  UpdateInferenceModel(data: UpdateInferenceModelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInferenceModelResponse>;
   /** 更新作业配置 {@link UpdateJobSpecRequest} {@link UpdateJobSpecResponse} */
   UpdateJobSpec(data: UpdateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateJobSpecResponse>;
   /** 更新作业配置优先级 {@link UpdateJobSpecPriorityRequest} {@link UpdateJobSpecPriorityResponse} */

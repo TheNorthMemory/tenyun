@@ -858,6 +858,22 @@ declare interface FlowGroupOptions {
   SelfOrganizationApproverSignEach?: boolean;
   /** 非发起方企业经办人（即：签署人为个人或者不为发起方企业的员工）是否需要对子合同进行独立的意愿确认**false**（默认）：非发起方企业经办人签署时对所有子合同进行统一的意愿确认。**true**：非发起方企业经办人签署时需要对子合同进行独立的意愿确认。 */
   OtherApproverSignEach?: boolean;
+  /** 是否不可编辑合同名称 true-不可编辑 false-可编辑(默认) */
+  NoEditFlowName?: boolean;
+  /** 是否不可编辑合同类型 true-不可编辑 false-可编辑(默认) */
+  NoEditFlowType?: boolean;
+  /** 是否不可编辑合同截止日期 true-不可编辑 false-可编辑(默认) */
+  NoEditDeadline?: boolean;
+  /** 签署控件配置(如是否默认展示日期)，用于嵌入式发起页面配置 */
+  SignComponentConfig?: SignComponentConfig;
+  /** 是否禁止编辑水印控件属性 true-禁止 false-否(默认) */
+  ForbidEditWatermark?: boolean;
+  /** 发起成功后是否隐藏签署码 true-隐藏 false-否(默认) */
+  HideSignCodeAfterStart?: boolean;
+  /** 发起成功后是否签署合同,仅当前经办人为签署人时生效 true-展示签署 false-否(默认) */
+  SignAfterStart?: boolean;
+  /** 发起成功后是否预览合同 true-展示预览按钮 false-否(默认) */
+  PreviewAfterStart?: boolean;
 }
 
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
@@ -2187,10 +2203,16 @@ declare interface ChannelCreatePrepareFlowGroupRequest {
   BaseFlowInfos: BaseFlowInfo[];
   /** 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。 */
   FlowGroupName: string;
-  /** 资源类型，取值有： **1**：模板 **2**：文件 */
+  /** 资源类型，取值有： 1：模板 2：文件 */
   ResourceType: number;
   /** 合同的发起企业和发起人信息，点击查看合同发起企业和人展示的位置此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）合同的发起企业和发起人必需已经完成实名，并加入企业 */
   Agent?: Agent;
+  /** 合同组发起参数控制，包括对合同组名称、过期时间、发起后签署以及查看等操作 */
+  FlowGroupOptions?: FlowGroupOptions;
+  /** 合同组类型，会应用到所有子合同 */
+  FlowGroupType?: string;
+  /** 合同组过期时间，会应用到所有子合同 */
+  FlowGroupDeadline?: number;
 }
 
 declare interface ChannelCreatePrepareFlowGroupResponse {

@@ -1084,7 +1084,7 @@ declare interface AuditLogInfo {
   DbUser?: string;
   /** 影响行数 */
   EffectRow?: number;
-  /** 执行时间 */
+  /** 执行时间,单位：毫秒 */
   ExecTime?: number;
   /** 命中规则 */
   HitRule?: string;
@@ -3544,6 +3544,12 @@ declare interface DspmRiskStrategy {
   Uin?: string;
   /** 策略id */
   StrategyId?: number;
+  /** 规则来源 */
+  RuleSource?: string | null;
+  /** 支持的资产类型 */
+  AssetTypes?: string[];
+  /** 风险描述 */
+  RiskDescription?: string;
 }
 
 /** Dspm 风险分组策略 */
@@ -3562,6 +3568,8 @@ declare interface DspmRiskStrategyGroup {
   RiskType?: string;
   /** 策略列表 */
   StrategyList?: DspmRiskStrategy[];
+  /** 规则来源 */
+  RuleSource?: string | null;
 }
 
 /** Dspm风险趋势 */
@@ -3700,6 +3708,8 @@ declare interface DspmWhitelistStrategy {
   NickName?: string;
   /** 资产所属账号uin */
   Uin?: string;
+  /** 白名单类型 */
+  WhitelistType?: string;
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
@@ -7077,7 +7087,7 @@ declare interface CreateDspmRiskExportJobResponse {
 
 declare interface CreateDspmWhitelistStrategyRequest {
   /** 策略类型 */
-  StrategyType: string;
+  StrategyType?: string;
   /** 集团账号的成员id */
   MemberId?: string[];
   /** 白名单 */
@@ -7094,6 +7104,8 @@ declare interface CreateDspmWhitelistStrategyRequest {
   RiskId?: string;
   /** 备注 */
   Remark?: string;
+  /** 白名单的类型枚举值：static_risk： 静态配置扫描的白名单规则audit： 审计白名单规则ueba： ueba相关的白名单规则 */
+  WhitelistType?: string;
 }
 
 declare interface CreateDspmWhitelistStrategyResponse {
@@ -9444,7 +9456,7 @@ declare interface DescribeDspmLogListRequest {
   RowNumMin?: number;
   /** 影响行数最大值 */
   RowNumMax?: number;
-  /** 数据库类型 */
+  /** 数据库类型, 支持的值：cdb，mariadb */
   DbTypes?: string[];
   /** 返回码 */
   RetNo?: number;
@@ -11620,6 +11632,12 @@ declare interface ModifyDspmRiskStrategyRequest {
   RiskLevel?: string;
   /** 策略id */
   StrategyId?: number[];
+  /** 策略名 */
+  Name?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 支持的数据库类型 */
+  DbTypes?: string;
 }
 
 declare interface ModifyDspmRiskStrategyResponse {
@@ -12123,7 +12141,7 @@ declare interface Csip {
   /** 创建Dspm风险导出任务 {@link CreateDspmRiskExportJobRequest} {@link CreateDspmRiskExportJobResponse} */
   CreateDspmRiskExportJob(data?: CreateDspmRiskExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmRiskExportJobResponse>;
   /** 创建Dspm白名单策略 {@link CreateDspmWhitelistStrategyRequest} {@link CreateDspmWhitelistStrategyResponse} */
-  CreateDspmWhitelistStrategy(data: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
+  CreateDspmWhitelistStrategy(data?: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
   /** 创建IaC检测接入Token {@link CreateIaCAccessTokenRequest} {@link CreateIaCAccessTokenResponse} */
   CreateIaCAccessToken(data: CreateIaCAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCAccessTokenResponse>;
   /** 创建IaC检测文件导出任务 {@link CreateIaCFileExportJobRequest} {@link CreateIaCFileExportJobResponse} */

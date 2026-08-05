@@ -1216,6 +1216,20 @@ declare interface ReEncryptResponse {
   RequestId?: string;
 }
 
+declare interface RotateKeyRequest {
+  /** CMK的全局唯一标识符 */
+  KeyId: string;
+  /** 成员账号信息，用于多账号场景 */
+  MemberAccount?: MemberAccount;
+}
+
+declare interface RotateKeyResponse {
+  /** 轮转任务ID，用于标识本次轮转任务。可以通过调用DescribeKey，返回上次轮转时间和下次轮转时间，判断是否轮转成功。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ScheduleDataKeyDeletionRequest {
   /** 数据密钥的唯一标志符 */
   DataKeyId: string;
@@ -1481,6 +1495,8 @@ declare interface Kms {
   PostQuantumCryptoVerify(data: PostQuantumCryptoVerifyRequest, config?: AxiosRequestConfig): AxiosPromise<PostQuantumCryptoVerifyResponse>;
   /** 密文刷新 {@link ReEncryptRequest} {@link ReEncryptResponse} */
   ReEncrypt(data: ReEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<ReEncryptResponse>;
+  /** 立即轮转密钥 {@link RotateKeyRequest} {@link RotateKeyResponse} */
+  RotateKey(data: RotateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<RotateKeyResponse>;
   /** 计划删除数据密钥 {@link ScheduleDataKeyDeletionRequest} {@link ScheduleDataKeyDeletionResponse} */
   ScheduleDataKeyDeletion(data: ScheduleDataKeyDeletionRequest, config?: AxiosRequestConfig): AxiosPromise<ScheduleDataKeyDeletionResponse>;
   /** CMK计划删除接口 {@link ScheduleKeyDeletionRequest} {@link ScheduleKeyDeletionResponse} */

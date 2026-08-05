@@ -862,6 +862,22 @@ declare interface CreateVolumeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteEnvironmentCacheRequest {
+  /** 环境ID。 */
+  EnvironmentId: string;
+  /** 缓存类型枚举值：RUNTIME： 清理默认缓存卷的运行缓存目录INPUT： 清理默认缓存卷的输入缓存目录ALL： 清空环境下全部有效缓存卷PATH： 指定缓存卷下指定路径，需要在Path中填入实际绝对路径 */
+  CacheType: string;
+  /** 指定路径删除入参限制：以盘符开头的绝对路径地址 */
+  Path?: string;
+}
+
+declare interface DeleteEnvironmentCacheResponse {
+  /** 工作流UUID。 */
+  WorkflowUuid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteEnvironmentRequest {
   /** 环境ID。 */
   EnvironmentId: string;
@@ -1445,6 +1461,8 @@ declare interface Omics {
   CreateVolume(data: CreateVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVolumeResponse>;
   /** 删除环境 {@link DeleteEnvironmentRequest} {@link DeleteEnvironmentResponse} */
   DeleteEnvironment(data: DeleteEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentResponse>;
+  /** 删除环境缓存 {@link DeleteEnvironmentCacheRequest} {@link DeleteEnvironmentCacheResponse} */
+  DeleteEnvironmentCache(data: DeleteEnvironmentCacheRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEnvironmentCacheResponse>;
   /** 删除缓存卷 {@link DeleteVolumeRequest} {@link DeleteVolumeResponse} */
   DeleteVolume(data: DeleteVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeResponse>;
   /** 删除缓存卷数据 {@link DeleteVolumeDataRequest} {@link DeleteVolumeDataResponse} */

@@ -976,6 +976,8 @@ declare interface Objects {
   Databases?: Database[] | null;
   /** 高级对象类型，如function、procedure。注意：如果要迁移同步高级对象，此配置中应该包含对应的高级对象类型。当需要同步高级对象时，初始化类型必须包含结构初始化类型，即任务的Options.InitType字段值为Structure或Full */
   AdvancedObjects?: string[];
+  /** 此字段已废弃。对于临时表的同步应该使用Objects.Databases[n].Tables[n].TmpTables传入。 */
+  OnlineDDL?: OnlineDDL;
   /** 库/表/视图级 DML/DDL 白名单 */
   DatabasesOpFilter?: DBOpFilter[];
 }
@@ -986,6 +988,12 @@ declare interface OffsetTimeMap {
   PartitionNo?: number;
   /** kafka offset */
   Offset?: number;
+}
+
+/** OnlineDDL类型 */
+declare interface OnlineDDL {
+  /** 状态，ON-启用，OFF-不启用。 */
+  Status: string;
 }
 
 /** DDL/DML 过滤规则 */

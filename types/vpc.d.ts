@@ -5043,13 +5043,13 @@ declare interface CreateVpcResponse {
 declare interface CreateVpnConnectionRequest {
   /** VPN网关实例ID。 */
   VpnGatewayId: string;
-  /** 对端网关ID。例如：cgw-2wqq41m9，可通过[DescribeCustomerGateways](https://cloud.tencent.com/document/product/215/17516)接口查询对端网关。 */
+  /** 对端网关ID。例如：cgw-2wqq41m9，可通过DescribeCustomerGateways接口查询对端网关。 */
   CustomerGatewayId: string;
   /** 通道名称，可任意命名，但不得超过60个字符。 */
   VpnConnectionName: string;
   /** 预共享密钥。 */
   PreShareKey: string;
-  /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口返回值中的VpcId获取。CCN VPN 形的通道 可以不传VPCID */
+  /** VPC实例ID。VPC类型网关可通过DescribeVpcs接口返回值中的VpcId获取，CCN类型网关传空值即可。 */
   VpcId?: string;
   /** SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。 */
   SecurityPolicyDatabases?: SecurityPolicyDatabase[];
@@ -5065,7 +5065,7 @@ declare interface CreateVpnConnectionRequest {
   HealthCheckLocalIp?: string;
   /** 健康检查对端地址，默认值为随机在169.254.128.0/17分配一个IP。 */
   HealthCheckRemoteIp?: string;
-  /** 通道类型, 例如:["STATIC", "StaticRoute", "Policy"] */
+  /** 通道类型, 例如:["STATIC", "StaticRoute", "Policy", "Bgp"]枚举值：StaticRoute： 目的路由类型Policy： SPD策略类型Bgp： BGP类型默认值：STATIC */
   RouteType?: string;
   /** 协商类型，默认为active（主动协商）。可选值：active（主动协商），passive（被动协商），flowTrigger（流量协商） */
   NegotiationType?: string;
@@ -5073,7 +5073,7 @@ declare interface CreateVpnConnectionRequest {
   DpdEnable?: number;
   /** DPD超时时间。即探测确认对端不存在需要的时间。dpdEnable为1（开启）时有效。默认30，单位为秒 */
   DpdTimeout?: string;
-  /** DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试） */
+  /** DPD超时后的动作。入参限制：dpdEnable为1（开启）时有效。枚举值：clear： 断开restart： 重试默认值：restart */
   DpdAction?: string;
   /** 创建通道路由信息。 */
   Route?: CreateVpnConnRoute;

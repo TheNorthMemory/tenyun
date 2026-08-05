@@ -40,6 +40,8 @@ declare interface DBCustomCluster {
   CreatedTime?: string;
   /** 集群的标签信息 */
   Tags?: Tag[] | null;
+  /** 是否启用集群删除保护枚举值：true： 启用false： 不启用 */
+  DeletionProtection?: boolean;
 }
 
 /** DB Custom 集群节点信息。 */
@@ -625,6 +627,8 @@ declare interface CreateDBCustomClusterRequest {
   ClientToken?: string;
   /** 试运行开关，true 时只执行参数校验，不发起创建流程，默认 false */
   DryRun?: boolean;
+  /** 是否启用集群删除保护枚举值：true： 启用false： 不启用默认值：true */
+  DeletionProtection?: boolean;
 }
 
 declare interface CreateDBCustomClusterResponse {
@@ -720,6 +724,8 @@ declare interface DescribeDBCustomClusterDetailResponse {
   ApiServerNetwork?: ApiServerNetwork | null;
   /** 容器网络，在此集群中的所有Pod将与此网络连通 */
   ContainerNetwork?: ContainerNetwork | null;
+  /** 是否启用集群删除保护枚举值：true： 启用false： 不启用 */
+  DeletionProtection?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

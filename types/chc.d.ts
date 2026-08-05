@@ -588,6 +588,20 @@ declare interface RackUsage {
   UsedRate?: number;
 }
 
+/** SLA 信息 */
+declare interface SLAInfo {
+  /** SLA 状态枚举值：InSLA： SLA 内Overdue： 已超时Completed： 已完成 */
+  SLAStatus?: string;
+  /** 到期时间 */
+  DueTime?: string;
+  /** 剩余时长单位：小时 */
+  RemainingHours?: number;
+  /** 超时时长单位：小时 */
+  OverdueHours?: number;
+  /** SLA 工作日天数单位：天 */
+  SLADays?: number;
+}
+
 /** 客户自行上门信息 */
 declare interface SelfOperation {
   /** 联系人员电话 */
@@ -720,6 +734,8 @@ declare interface WorkOrderData {
   FinishTime?: string;
   /** 工单关联的dcops单号 */
   TicketId?: string;
+  /** SLA */
+  SLAInfo?: SLAInfo;
 }
 
 /** 带有分类的工单类型列表 */
@@ -1174,6 +1190,10 @@ declare interface DescribeDeviceWorkOrderDetailResponse {
   BaseInfo?: DeviceOrderBaseInfo;
   /** 工单的拒绝原因，工单状态为reject的时候返回 */
   RejectReason?: string;
+  /** 工单 SLA 信息 */
+  SLAInfo?: SLAInfo;
+  /** 前序未完成的工单号 */
+  PreOrderSet?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
