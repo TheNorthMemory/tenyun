@@ -918,6 +918,8 @@ declare interface AiCutoutConfig {
   Type?: string;
   /** 图案抠图配置。仅在Type为pattern时生效。 */
   PatternConfig?: PatternConfig;
+  /** 抠图模型选择，可不填。枚举值：auto： 自动选择合适的模型WAND-cutout-1.0-lite： 标准版，速度最快WAND-cutout-2.0-lite： 增强版，速度最快WAND-cutout-2.0-flash： 增强版，质量-速度平衡 */
+  Model?: string;
 }
 
 /** Ai自动生成漫剧的输入 */
@@ -8941,6 +8943,8 @@ declare interface CreateDocToVideoTaskRequest {
   Input: DocToVideoInput;
   /** 用户cos信息，用于保存生成结果 */
   CosInfo?: DocToVideoCosInfo;
+  /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
+  ResourceId?: string;
 }
 
 declare interface CreateDocToVideoTaskResponse {

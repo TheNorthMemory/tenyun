@@ -1977,7 +1977,7 @@ declare interface ChannelCreateFlowByFilesRequest {
   Operator?: UserInfo;
   /** 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下： 0 :合同（默认值） 1 :文件 2 :协议 3 :文书效果如下: */
   FlowDisplayType?: number;
-  /** 是否为预览模式，取值如下： false：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 true：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 */
+  /** 是否为预览模式，取值如下： false：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 true：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。 */
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: 此参数在NeedPreview 为true时有效 */
   PreviewType?: number;
@@ -2617,9 +2617,9 @@ declare interface ChannelDescribeOrganizationSealsRequest {
   Offset?: number;
   /** 查询授权用户信息类型，取值如下： 0：（默认）不返回授权用户信息 1：返回授权用户的信息 */
   InfoType?: number;
-  /** 印章id，是否查询特定的印章（没有输入返回所有）注: `没有输入返回所有记录，最大返回100条。` */
+  /** 印章id，是否查询特定的印章（没有输入返回所有）注: 没有输入返回所有记录，最大返回100条。 */
   SealId?: string;
-  /** 电子印章类型 , 可选类型如下: **OFFICIAL**: 公章**CONTRACT**: 合同专用章;**FINANCE**: 财务专用章;**PERSONNEL**: 人事专用章**INVOICE**: 发票专用章**LEGAL_PERSON_SEAL**: 法定代表人章;**EMPLOYEE_QUALIFICATION_SEAL**: 员工执业章**OTHER**: 其他类型印章注: `1.为空时查询所有类型的印章。` */
+  /** 电子印章类型 , 可选类型如下: OFFICIAL: 公章CONTRACT: 合同专用章;FINANCE: 财务专用章;PERSONNEL: 人事专用章INVOICE: 发票专用章LEGAL_PERSON_SEAL: 法定代表人章;EMPLOYEE_QUALIFICATION_SEAL: 员工执业章OTHER: 其他类型印章OTHER_XX: 其他印章子类型注: 1.为空时查询所有类型的印章。注: 2.OTHER_XX该类型为其他印章子类型，如需使用，请联系对接客服申请开通。具体可传入的子类型值，需在申请开通后由客服提供。 */
   SealTypes?: string[];
   /** 需查询的印章状态列表。 空，()仅查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章。 */
   SealStatuses?: string[];
@@ -3199,22 +3199,22 @@ declare interface CreateFlowsByTemplatesRequest {
   Agent: Agent;
   /** 要创建的合同信息列表，最多支持一次创建20个合同 */
   FlowInfos: FlowInfo[];
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作注:`如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到` */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作注1: 如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到注2: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。 */
   NeedPreview?: boolean;
-  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: `此参数在NeedPreview 为true时有效` */
+  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: 此参数在NeedPreview 为true时有效 */
   PreviewType?: number;
   /** 操作者的信息，不用传 */
   Operator?: UserInfo;
 }
 
 declare interface CreateFlowsByTemplatesResponse {
-  /** 生成的合同流程ID数组，合同流程ID为32位字符串。建议开发者妥善保存此流程ID数组，以便于顺利进行后续操作。[点击产看FlowId在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/05af26573d5106763b4cfbb9f7c64b41.png) */
+  /** 生成的合同流程ID数组，合同流程ID为32位字符串。建议开发者妥善保存此流程ID数组，以便于顺利进行后续操作。点击产看FlowId在控制台上的位置 */
   FlowIds?: string[];
   /** 第三方应用平台的业务信息, 与创建合同的FlowInfos数组中的CustomerData一一对应 */
   CustomerData?: string[];
   /** 创建消息，对应多个合同ID，成功为“”,创建失败则对应失败消息 */
   ErrorMessages?: string[];
-  /** 合同预览链接URL数组。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过[合同文档合成完成回调](https://qian.tencent.com/developers/partner/callback_types_contracts_sign#%E5%8D%81%E4%B8%80-%E5%90%88%E5%90%8C%E6%96%87%E6%A1%A3%E5%90%88%E6%88%90%E5%AE%8C%E6%88%90%E5%9B%9E%E8%B0%83)获取或使用返回的TaskInfo中的TaskId通过[查询转换任务状态](https://qian.tencent.com/developers/partnerApis/files/ChannelGetTaskResultApi)接口查询得到 */
+  /** 合同预览链接URL数组。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过合同文档合成完成回调获取或使用返回的TaskInfo中的TaskId通过查询转换任务状态接口查询得到 */
   PreviewUrls?: string[];
   /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
   TaskInfos?: TaskInfo[];
@@ -3347,6 +3347,8 @@ declare interface CreateSealByImageRequest {
   SealHorizontalText?: string;
   /** 印章样式, 可以选择的样式如下: **circle**:(默认)圆形印章**ellipse**:椭圆印章 */
   SealStyle?: string;
+  /** 印章其他子类型。仅当 SealType=OTHER 且 GenerateSource=SealGenerateSourceSystem 时生效（ 不支持图片上传方式创建子类型印章）。 注1：调用时请勿传入 SealHorizontalText 字段，系统将自动使用子印章类型名称填充该字段。 注2：本字段为白名单受控功能。如需使用，请联系客服开通并获取支持的子类型枚举值。 */
+  SubSealType?: string;
   /** 印章尺寸，格式为 宽_高（单位：mm，整数），用于签署时按物理尺寸将印章加盖到PDF。取值范围： • 图片上传印章（Image 或 FileToken 非空时生效）：支持自定义尺寸，宽、高均为 10-100 的整数（即 1cm-10cm），宽高比（宽/高）需在 0.1-10 之间。• 系统生成印章（未传 Image 与 FileToken）：仅支持与SealStyle 匹配的固定枚举值： - 圆形印章（SealStyle=cycle）：38_38 / 40_40 / 42_42 / 45_45 / 50_50 / 58_58 - 椭圆印章（SealStyle=ellipse）：40_30 / 45_30字段依赖关系： • 与 SealStyle关联：仅系统生成印章场景下 SealStyle 生效，此时 SealSize 需与 SealStyle对应的枚举匹配；图片上传印章场景 SealStyle 会被忽略，SealSize支持自定义。 • 与 SealType 关联：公章/合同章仅支持圆形枚举，财务/人事/其它章支持圆形或椭圆枚举。• 与 Image / FileToken 关联：SealSize 是加盖到 PDF的物理尺寸，与上传图片的像素分辨率无绑定，图片会按 SealSize 缩放渲染；建议上传图片的宽高比与 SealSize 保持一致，避免拉伸形变。 */
   SealSize?: string;
   /** 企业税号注:1.印章类型SealType是INVOICE类型时，此参数才会生效2.印章类型SealType是INVOICE类型，且该字段没有传入值或传入空时，会取该企业对应的统一社会信用代码作为默认的企业税号（如果是通过授权书授权方式认证的企业，此参数必传不能为空） */

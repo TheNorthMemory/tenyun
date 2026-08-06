@@ -1383,6 +1383,8 @@ declare interface CloneInstancesRequest {
   EnableSSL?: boolean;
   /** 开启 SSL 时，是否将实例的内网 IPv4 地址写入证书的域名别名（SAN）中。仅在 EnableSSL 为 true 时生效。枚举值：true： 允许使用内网 IP 进行 SSL 证书校验。false： 不添加证书的 SAN 扩展信息。默认值：false */
   SSLBindPrivateIPv4?: boolean;
+  /** 指实例类型枚举值：local： 通用 I 型localv2： 通用 II 型不传则默认和原实例类型保持一致 */
+  ProductVersion?: string;
 }
 
 declare interface CloneInstancesResponse {

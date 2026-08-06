@@ -168,7 +168,7 @@ declare interface Model {
   ModelImage?: ModelImage;
   /** 模型供应商。 */
   Provider?: string;
-  /** 模型状态。取值：online（上线）、offline（下线）。枚举值：online ： 上线pre-offline： 预下线 */
+  /** 模型状态。取值：online（上线）、offline（下线）。枚举值：online ： 上线pre-offline： 预下线discontinued： 停止新购maintenance： 维护中 */
   Status?: string;
   /** 标签列表。 */
   Tags?: string[];
@@ -186,6 +186,8 @@ declare interface Model {
   FreeTrialInfo?: ModelFreeTrialInfo;
   /** 模型下线时间，Status=pre-offline 时，会配置模型下线时间 */
   OfflineAt?: string;
+  /** 停止新购时间 */
+  DiscontinuedAt?: string;
 }
 
 /** 模型访问信息 */

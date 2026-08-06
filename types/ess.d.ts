@@ -2829,17 +2829,17 @@ declare interface CreateDigitalDataSignResponse {
 declare interface CreateDocumentRequest {
   /** 本合同的发起人，点击查看合同发起人展示的位置注：支持填入集团子公司经办人 userId代发合同。 */
   Operator: UserInfo;
-  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/253071cc2f7becb063c7cf71b37b7861.png) */
+  /** 用户配置的合同模板ID，会基于此模板创建合同文档，为32位字符串。点击查看模板Id在控制台上的位置 */
   TemplateId: string;
-  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由[创建签署流程](https://qian.tencent.com/developers/companyApis/startFlows/CreateFlow)接口创建得到。 */
+  /** 合同流程ID，为32位字符串。此接口的合同流程ID需要由创建签署流程接口创建得到。 */
   FlowId?: string;
   /** 文件名列表，单个文件名最大长度200个字符，暂时仅支持单文件发起。设置后流程对应的文件名称当前设置的值。 */
   FileNames?: string[];
-  /** 电子文档的填写控件的填充内容。具体方式可以参考[FormField](https://qian.tencent.com/developers/companyApis/dataTypes/#formfield)结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成附件控件支持传入图片、文件资源id，并将内容合成到合同文件中。支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt、pdf。需要注意如果传入的资源类型都是图片类型，图片资源会放置在合同文件的末尾，如果传入的资源有非图片类型资源，会将资源放置在附件控件所在页面的下一页。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
+  /** 电子文档的填写控件的填充内容。具体方式可以参考FormField结构体的定义。支持自动签传递印章，可通过指定自动签控件id，指定印章id来完成附件控件支持传入图片、文件资源id，并将内容合成到合同文件中。支持的文件类型有doc、docx、xls、xlsx、html、jpg、jpeg、png、bmp、txt、pdf。需要注意如果传入的资源类型都是图片类型，图片资源会放置在合同文件的末尾，如果传入的资源有非图片类型资源，会将资源放置在附件控件所在页面的下一页。注：只有在控制台编辑模板时，归属给发起方的填写控件（如下图）才能在创建文档的时候进行内容填充。![image](https://qcloudimg.tencent-cloud.cn/raw/a54a76a58c454593d06d8e9883ecc9b3.png) */
   FormFields?: FormField[];
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 1.以预览模式创建的合同仅供查看，因此参与方无法进行签署操作;；2.以预览模式调用该接口返回的FlowId为临时Flowld，无法用于发起和拉取信息。 注: `当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知` */
+  /** 是否为预览模式，取值如下： false：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 true：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 1.以预览模式创建的合同仅供查看，因此参与方无法进行签署操作;；2.以预览模式调用该接口返回的FlowId为临时Flowld，无法用于发起和拉取信息。 注1: 当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容，动态表格合成完后会触发文档合成完成的回调通知注2: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。 */
   NeedPreview?: boolean;
-  /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子。注: `1.此参数在NeedPreview 为true时有效` */
+  /** 预览模式下产生的预览链接类型 0 :(默认) 文件流 ,点开后下载预览的合同PDF文件 1 :H5链接 ,点开后在浏览器中展示合同的样子。注: 1.此参数在NeedPreview 为true时有效 */
   PreviewType?: number;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
@@ -2848,9 +2848,9 @@ declare interface CreateDocumentRequest {
 }
 
 declare interface CreateDocumentResponse {
-  /** 合同流程的底层电子文档ID，为32位字符串。注:后续需用同样的FlowId再次调用[发起签署流程](https://qian.tencent.com/developers/companyApis/startFlows/StartFlow)，合同才能进入签署环节 */
+  /** 合同流程的底层电子文档ID，为32位字符串。注:后续需用同样的FlowId再次调用发起签署流程，合同才能进入签署环节 */
   DocumentId?: string;
-  /** 合同预览链接URL。注: `1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL``2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容,完整的预览链接需通过[合同文档合成完成回调](https://qian.tencent.com/developers/company/callback_types_contracts_sign/#%E4%B9%9D-%E5%90%88%E5%90%8C%E6%96%87%E6%A1%A3%E5%90%88%E6%88%90%E5%AE%8C%E6%88%90%E5%9B%9E%E8%B0%83)获取。 */
+  /** 合同预览链接URL。注: 1.如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL`2.当使用的模板中存在动态表格控件时，预览结果中没有动态表格的填写内容,完整的预览链接需通过合同文档合成完成回调获取。 */
   PreviewFileUrl?: string;
   /** 签署方信息，如角色ID、角色名称等 */
   Approvers?: ApproverItem[];
@@ -3087,7 +3087,7 @@ declare interface CreateFlowByFilesRequest {
   CcInfos?: CcInfo[];
   /** 可以设置以下时间节点来给抄送人发送短信通知来查看合同内容： **0**：合同发起时通知（默认值） **1**：签署完成后通知 */
   CcNotifyType?: number;
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。注: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。 */
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: 此参数在NeedPreview 为true时有效 */
   PreviewType?: number;
@@ -4155,6 +4155,8 @@ declare interface CreateSealRequest {
   GenerateSource?: string;
   /** 电子印章类型 , 可选类型如下: OFFICIAL: (默认)公章CONTRACT: 合同专用章;FINANCE: 财务专用章;PERSONNEL: 人事专用章INVOICE: 发票专用章OTHER: 其他注: 同企业下只能有一个公章, 重复创建会报错 */
   SealType?: string;
+  /** 印章其他子类型。仅当 SealType=OTHER 且 GenerateSource=SealGenerateSourceSystem 时生效（ 不支持图片上传方式创建子类型印章）。 注1：调用时请勿传入 SealHorizontalText 字段，系统将自动使用子印章类型名称填充该字段。 注2：本字段为白名单受控功能。如需使用，请联系客服开通并获取支持的子类型枚举值。 */
+  SubSealType?: string;
   /** 电子印章图片文件名称，1-50个中文字符。 */
   FileName?: string;
   /** 电子印章图片base64编码，大小不超过10M（原始图片不超过5M），只支持PNG或JPG图片格式注: 通过图片创建的电子印章，需电子签平台人工审核 */
@@ -5283,7 +5285,7 @@ declare interface DescribeOrganizationGroupOrganizationsResponse {
 }
 
 declare interface DescribeOrganizationSealsRequest {
-  /** 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。` */
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
   /** 指定分页每页返回的数据条数，如果不传默认为 20，单页最大支持 200。 */
   Limit?: number;
@@ -5293,7 +5295,7 @@ declare interface DescribeOrganizationSealsRequest {
   InfoType?: number;
   /** 印章id，是否查询特定的印章（没有输入返回所有） */
   SealId?: string;
-  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； FINANCE：财务专用章； PERSONNEL：人事专用章；INVOICE：发票专用章；LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。OTHER其他类型印章 */
+  /** 印章种类列表（均为组织机构印章）。 若无特定需求，将展示所有类型的印章。 目前支持以下几种： OFFICIAL：企业公章； CONTRACT：合同专用章； FINANCE：财务专用章； PERSONNEL：人事专用章；INVOICE：发票专用章；LEGAL_PERSON_SEAL：法定代表人章。 EMPLOYEE_QUALIFICATION_SEAL：员工执业章。OTHER其他类型印章 OTHER_xx其他印章子类型 注: 1.为空时查询所有类型的印章。注: 2.OTHER_XX该类型为其他印章子类型，如需使用，请联系对接客服申请开通。具体可传入的子类型值，需在申请开通后由客服提供。 */
   SealTypes?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

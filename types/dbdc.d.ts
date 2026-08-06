@@ -64,6 +64,8 @@ declare interface DBCustomClusterNode {
   NetworkMode?: string | null;
   /** 当选择网络模式为三层网络联通模式时，此处的IP地址则为用户可访问的地址。 */
   EniIP?: string | null;
+  /** 节点绑定的安全组 */
+  SecurityGroupIds?: string[] | null;
 }
 
 /** DB Custom 集群内节点配置信息。 */
@@ -162,6 +164,8 @@ declare interface DBCustomNode {
   NetworkMode?: string;
   /** 当选择NetworkModeCrossTenantENI模式时，节点的访问IP地址 */
   EniIP?: string;
+  /** 节点绑定的安全组 */
+  SecurityGroupIds?: string[] | null;
 }
 
 /** DB Custom 节点机型信息。 */

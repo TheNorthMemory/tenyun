@@ -798,9 +798,9 @@ declare interface GroupInfo {
   Latency?: number;
   /** 各分区的消费状态 */
   StateOfPartition?: MonitorInfo[];
-  /** 消费者组创建时间，格式为YYYY-MM-DD hh:mm:ss */
+  /** 消费者组创建时间。 */
   CreatedAt?: string;
-  /** 消费者组修改时间，格式为YYYY-MM-DD hh:mm:ss */
+  /** 消费者组修改时间。 */
   UpdatedAt?: string;
   /** 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作 */
   ConsumerGroupState?: string;
@@ -1328,6 +1328,8 @@ declare interface SubscribeInfo {
   Errors?: SubsErr[] | null;
   /** 订阅实例规格 */
   InstanceClass?: string;
+  /** 新版订阅消费端路由阶段 */
+  ConsumerRoutePhase?: string;
 }
 
 /** 订阅的kafka分区数和分区规则。mariadb，percona，tdsqlmysql，tdpg不支持自定义分区，所以DistributeRules和DefaultRuleType可以不填，但是NumberOfPartitions是必填。 */
@@ -1895,6 +1897,8 @@ declare interface DeleteConsumerGroupRequest {
   ConsumerGroupName: string;
   /** 账号名称。实际的账户全称形如：account-#{SubscribeId}-#{AccountName}。请务必保证账户名称正确。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。 */
   AccountName: string;
+  /**  */
+  BackendJobId?: string;
 }
 
 declare interface DeleteConsumerGroupResponse {
@@ -2017,7 +2021,7 @@ declare interface DescribeCompareTasksResponse {
 }
 
 declare interface DescribeConsumerGroupsRequest {
-  /** 订阅实例id，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
+  /** 订阅实例id，可通过DescribeSubscribeJobs接口获取。 */
   SubscribeId: string;
   /** 返回记录的起始偏移量。默认0 */
   Offset?: number;
@@ -2263,7 +2267,7 @@ declare interface DescribeSubscribeCheckJobResponse {
 }
 
 declare interface DescribeSubscribeDetailRequest {
-  /** 订阅实例ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
+  /** 订阅实例ID，可通过DescribeSubscribeJobs接口获取。 */
   SubscribeId: string;
 }
 
@@ -2282,15 +2286,15 @@ declare interface DescribeSubscribeDetailResponse {
   Status?: string;
   /** 订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error */
   SubsStatus?: string;
-  /** 修改时间，时间格式如：Y-m-d h:m:s */
+  /** 修改时间。 */
   ModifyTime?: string;
-  /** 创建时间，时间格式如：Y-m-d h:m:s */
+  /** 创建时间。 */
   CreateTime?: string;
-  /** 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  /** 隔离时间。 */
   IsolateTime?: string;
-  /** 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  /** 包年包月任务的到期时间。 */
   ExpireTime?: string;
-  /** 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00 */
+  /** 下线时间。 */
   OfflineTime?: string;
   /** 付费方式，可能值为：0-包年包月，1-按量计费 */
   PayType?: number;

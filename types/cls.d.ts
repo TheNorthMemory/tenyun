@@ -4408,6 +4408,24 @@ declare interface DeleteKafkaRechargeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLogRequest {
+  /** 日志主题id */
+  TopicId: string;
+  /** 检索时间范围-开始时间单位：ms */
+  From: number;
+  /** 检索时间范围-结束时间单位：ms */
+  To: number;
+  /** 日志检索条件，仅支持 CQL 语法，不支持 Lucene 语法对符合检索条件的日志进行删除 */
+  QueryString: string;
+}
+
+declare interface DeleteLogResponse {
+  /** 影响日志条数 */
+  AffectedRows?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLogsetRequest {
   /** 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
@@ -6454,6 +6472,28 @@ declare interface ModifyKafkaRechargeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLogRequest {
+  /** 日志主题id */
+  TopicId: string;
+  /** 检索时间范围-开始时间单位：ms */
+  From: number;
+  /** 检索时间范围-结束时间单位：ms */
+  To: number;
+  /** 日志检索条件，仅支持 CQL 语法，不支持 Lucene 语法对符合检索条件的日志进行修改 */
+  QueryString: string;
+  /** 修改模式枚举值：PARTIAL： 只修改指定的日志字段REPLACE： 整体替换原有日志（不包含预置字段及元数据字段） */
+  ModifyMode: string;
+  /** 修改内容不支持修改预置字段(__FILENAME__、__SOURCE__等，但不包括__CONTENT__)及元数据字段(__TAG__开头的字段) */
+  ModifyContent: string;
+}
+
+declare interface ModifyLogResponse {
+  /** 影响日志条数 */
+  AffectedRows?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLogsetRequest {
   /** 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
   LogsetId: string;
@@ -7393,6 +7433,8 @@ declare interface Cls {
   DeleteIndex(data: DeleteIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIndexResponse>;
   /** 删除Kafka数据订阅任务 {@link DeleteKafkaRechargeRequest} {@link DeleteKafkaRechargeResponse} */
   DeleteKafkaRecharge(data: DeleteKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKafkaRechargeResponse>;
+  /** 删除日志 {@link DeleteLogRequest} {@link DeleteLogResponse} */
+  DeleteLog(data: DeleteLogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogResponse>;
   /** 删除日志集 {@link DeleteLogsetRequest} {@link DeleteLogsetResponse} */
   DeleteLogset(data: DeleteLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogsetResponse>;
   /** 删除机器组 {@link DeleteMachineGroupRequest} {@link DeleteMachineGroupResponse} */
@@ -7607,6 +7649,8 @@ declare interface Cls {
   ModifyKafkaConsumerGroupOffset(data?: ModifyKafkaConsumerGroupOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaConsumerGroupOffsetResponse>;
   /** 修改Kafka数据订阅任务 {@link ModifyKafkaRechargeRequest} {@link ModifyKafkaRechargeResponse} */
   ModifyKafkaRecharge(data: ModifyKafkaRechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKafkaRechargeResponse>;
+  /** 修改日志 {@link ModifyLogRequest} {@link ModifyLogResponse} */
+  ModifyLog(data: ModifyLogRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogResponse>;
   /** 修改日志集 {@link ModifyLogsetRequest} {@link ModifyLogsetResponse} */
   ModifyLogset(data: ModifyLogsetRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogsetResponse>;
   /** 修改机器组 {@link ModifyMachineGroupRequest} {@link ModifyMachineGroupResponse} */

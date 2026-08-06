@@ -70,6 +70,24 @@ declare interface AgentParams {
   MaxIdleTime?: number;
 }
 
+/** 声网拉流参数 */
+declare interface AgoraParam {
+  /** 声网提供的应用标识 */
+  AppId?: string;
+  /** 声网提供的频道名 */
+  Channel?: string;
+  /** 声网录制的频道模式， 可选值如下：（默认值为0） 0: 通信（默认）,即常见的 1 对 1 单聊或群聊， 频道内任何用户可以自由说话； 1: 直播，有两种用户角色: 主播和观众。枚举值：0:： 通信（默认）1： 直播 */
+  ChannelProfile?: number;
+  /** 绑定频道生成的临时Token */
+  Token?: string;
+  /** 用户ID */
+  Uid?: number;
+  /** 信任用户的列表 */
+  TrustedUserIdList?: number[];
+  /** 非信任用户的列表 */
+  UntrustedUserIdList?: number[];
+}
+
 /** 字幕对齐 */
 declare interface AlignmentItem {
   /** 字幕文本 */
@@ -273,9 +291,11 @@ declare interface EventMessage {
 /** 拉流输入源 */
 declare interface Input {
   /** 直播拉流地址入参限制：字符长度小于2048 */
-  Url: string;
+  Url?: string;
   /** 显式协议枚举值：rtmp： rtmp协议 */
   Format?: string;
+  /** 声网拉流进房参数 */
+  AgoraParam?: AgoraParam;
 }
 
 /** 调用服务端主动发起请求到LLM */
@@ -1654,7 +1674,7 @@ declare interface CreateLiveStreamModerationRequest {
   /** 直播流ai理解审核参数 */
   LiveModerationParams: LiveModerationParams;
   /** 业务自定义唯一标识，原样透传到回调入参限制：长度限制60字符 */
-  DataId: string;
+  DataId?: string;
   /** 额外信息透传结构体（房间/主播/业务自定义），原样回带到回调 */
   SourceInfo?: SourceInfo;
   /** 直播流ai理解转存文件存储参数 */

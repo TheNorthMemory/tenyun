@@ -724,6 +724,12 @@ declare interface JobV1 {
   StateCOSBucketType?: number | null;
   /** 新的桶类型枚举值：0： 普通桶1： 加速桶 */
   NewStateCOSBucketType?: number | null;
+  /** 健康分数 */
+  HealthScore?: number;
+  /** 最新诊断时间参数格式：RFC3339 */
+  LastDiagnoseTime?: string;
+  /** 负责人Uin */
+  ManagerUin?: string;
 }
 
 /** 日志查询的每行日志信息 */

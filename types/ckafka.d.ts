@@ -2310,6 +2310,34 @@ declare interface TdwParam {
   TdwPort?: number;
 }
 
+/** 限流规则详情 */
+declare interface ThrottleRuleDetail {
+  /** 限流规则标识 */
+  ThrottleRuleId?: number;
+  /** 限流类型枚举值：1： 用户/客户端限流2： 消费组限流3： topic限流 */
+  ThrottleType?: number;
+  /** 客户端id */
+  ClientId?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 消费限流值,单位MB/s */
+  ConsumeThrottle?: number;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** topic名称 */
+  TopicName?: string;
+  /** topicId */
+  TopicId?: string;
+}
+
+/** 限流规则列表返回 */
+declare interface ThrottleRuleResult {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 规则列表 */
+  ThrottleRuleList?: ThrottleRuleDetail[];
+}
+
 /** 返回的topic对象 */
 declare interface Topic {
   /** 主题的ID */
@@ -3187,6 +3215,32 @@ declare interface CreateRouteResponse {
   RequestId?: string;
 }
 
+declare interface CreateThrottleRuleRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 限流类型:枚举值：1： 用户/客户端限流2： 消费组维度限流3： Topic限流 */
+  ThrottleType: number;
+  /** 消费组名 */
+  GroupNameList?: string[];
+  /** 消费限流值,生产消费限流值,必填一个单位MB/s */
+  ConsumeThrottle?: number;
+  /** 生产限流值,生产消费限流值,单位MB/s */
+  ProduceThrottle?: number;
+  /** 用户客户端id */
+  ClientIdList?: string[];
+  /** 用户名 */
+  UserNameList?: string[];
+  /** topic名称 */
+  TopicNameList?: string[];
+}
+
+declare interface CreateThrottleRuleResponse {
+  /** 返回信息 */
+  Result?: JgwOperateResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTokenRequest {
   /** ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
   InstanceId: string;
@@ -3433,6 +3487,20 @@ declare interface DeleteRouteTriggerTimeRequest {
 }
 
 declare interface DeleteRouteTriggerTimeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteThrottleRuleRequest {
+  /** 限流规则Id */
+  ThrottleRuleId: string;
+  /** 实例标识 */
+  InstanceId: string;
+}
+
+declare interface DeleteThrottleRuleResponse {
+  /** 返回信息 */
+  Result?: JgwOperateResponse;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3921,6 +3989,26 @@ declare interface DescribeTaskStatusRequest {
 declare interface DescribeTaskStatusResponse {
   /** 返回结果 */
   Result?: TaskStatusResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeThrottleRulesRequest {
+  /** 实例Id */
+  InstanceId: string;
+  /** 关键字 */
+  SearchWord?: string;
+  /** 返回数量，不填则默认为20，最大值200 */
+  Limit?: number;
+  /** 偏移数，默认为0 */
+  Offset?: number;
+  /** 限流维度枚举值：1： 实例维度限流2： topic维度限流默认值：1 */
+  ThrottleDimension?: number;
+}
+
+declare interface DescribeThrottleRulesResponse {
+  /** 返回信息 */
+  Result?: ThrottleRuleResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4661,6 +4749,22 @@ declare interface ModifyRoutineMaintenanceTaskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyThrottleRuleRequest {
+  /** 规则标识 */
+  ThrottleRuleId: number;
+  /** 实例Id */
+  InstanceId: string;
+  /** 消费限流值单位MB/s */
+  ConsumeThrottle?: number;
+}
+
+declare interface ModifyThrottleRuleResponse {
+  /** 返回信息 */
+  Result?: JgwOperateResponse;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTopicAttributesRequest {
   /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
@@ -4926,6 +5030,8 @@ declare interface Ckafka {
   CreatePrometheus(data: CreatePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrometheusResponse>;
   /** 添加实例路由 {@link CreateRouteRequest} {@link CreateRouteResponse} */
   CreateRoute(data: CreateRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRouteResponse>;
+  /** 批量创建限流规则 {@link CreateThrottleRuleRequest} {@link CreateThrottleRuleResponse} */
+  CreateThrottleRule(data: CreateThrottleRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThrottleRuleResponse>;
   /** 创建token {@link CreateTokenRequest} {@link CreateTokenResponse} */
   CreateToken(data: CreateTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTokenResponse>;
   /** 创建主题 {@link CreateTopicRequest} {@link CreateTopicResponse} */
@@ -4956,6 +5062,8 @@ declare interface Ckafka {
   DeleteRoute(data: DeleteRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteResponse>;
   /** 修改路由触发时间 {@link DeleteRouteTriggerTimeRequest} {@link DeleteRouteTriggerTimeResponse} */
   DeleteRouteTriggerTime(data: DeleteRouteTriggerTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRouteTriggerTimeResponse>;
+  /** 删除限流规则 {@link DeleteThrottleRuleRequest} {@link DeleteThrottleRuleResponse} */
+  DeleteThrottleRule(data: DeleteThrottleRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteThrottleRuleResponse>;
   /** 删除主题 {@link DeleteTopicRequest} {@link DeleteTopicResponse} */
   DeleteTopic(data: DeleteTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
@@ -5012,6 +5120,8 @@ declare interface Ckafka {
   DescribeSecurityGroupRoutes(data?: DescribeSecurityGroupRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupRoutesResponse>;
   /** 查询任务状态 {@link DescribeTaskStatusRequest} {@link DescribeTaskStatusResponse} */
   DescribeTaskStatus(data: DescribeTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskStatusResponse>;
+  /** 查询实例限流规则列表 {@link DescribeThrottleRulesRequest} {@link DescribeThrottleRulesResponse} */
+  DescribeThrottleRules(data: DescribeThrottleRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThrottleRulesResponse>;
   /** 获取主题列表 {@link DescribeTopicRequest} {@link DescribeTopicResponse} */
   DescribeTopic(data: DescribeTopicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicResponse>;
   /** 获取主题属性 {@link DescribeTopicAttributesRequest} {@link DescribeTopicAttributesResponse} */
@@ -5066,6 +5176,8 @@ declare interface Ckafka {
   ModifyPassword(data: ModifyPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPasswordResponse>;
   /** 设置自动化运维属性 {@link ModifyRoutineMaintenanceTaskRequest} {@link ModifyRoutineMaintenanceTaskResponse} */
   ModifyRoutineMaintenanceTask(data: ModifyRoutineMaintenanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutineMaintenanceTaskResponse>;
+  /** 修改实例限流规则 {@link ModifyThrottleRuleRequest} {@link ModifyThrottleRuleResponse} */
+  ModifyThrottleRule(data: ModifyThrottleRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyThrottleRuleResponse>;
   /** 设置主题属性 {@link ModifyTopicAttributesRequest} {@link ModifyTopicAttributesResponse} */
   ModifyTopicAttributes(data: ModifyTopicAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicAttributesResponse>;
   /** 暂停连接器任务 {@link PauseDatahubTaskRequest} {@link PauseDatahubTaskResponse} */
