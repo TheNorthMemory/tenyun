@@ -1812,7 +1812,7 @@ declare interface RuleInput {
   Domain?: string;
   /** 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~86400，单位：秒。 */
   SessionExpireTime?: number;
-  /** 健康检查信息。详情请参见：[健康检查](https://cloud.tencent.com/document/product/214/6097) */
+  /** 健康检查信息。详情请参见：健康检查 */
   HealthCheck?: HealthCheck;
   /** 证书信息；此参数和MultiCertInfo不能同时传入。 */
   Certificate?: CertificateInput;
@@ -1824,7 +1824,7 @@ declare interface RuleInput {
   DefaultServer?: boolean;
   /** 是否开启Http2，注意，只有HTTPS域名才能开启Http2。 */
   Http2?: boolean;
-  /** 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组 */
+  /** 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组枚举值：NODE： 绑定普通节点TARGETGROUP： 绑定目标组 v1TARGETGROUP-V2： 绑定目标组 v2 */
   TargetType?: string;
   /** TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。 */
   TrpcCallee?: string;

@@ -2050,6 +2050,8 @@ declare interface KongActiveHealthCheck {
   HttpPath?: string;
   /** GET HTTP 请求的超时时间，单位：秒。默认 60。 */
   Timeout?: number;
+  /** Host头 */
+  HostHeader?: string;
 }
 
 /** 云原生网关证书 */
@@ -2140,6 +2142,8 @@ declare interface KongRoutePreview {
   RegexPriority?: number;
   /** querystring参数 */
   QueryStringParameters?: KVMapping[];
+  /** 路由来源 */
+  RouteSource?: string;
 }
 
 /** 云原生网关服务详细信息 */
@@ -2210,10 +2214,30 @@ declare interface KongServicePreview {
   Path?: string | null;
 }
 
+/** kong实例的服务和路由列表 */
+declare interface KongServiceRoute {
+  /** 服务信息 */
+  Service?: KongServicePreview;
+  /** 路由总条数 */
+  RouteTotalCount?: number;
+  /** 是否有未返回的路由 */
+  RouteHasMore?: boolean;
+  /** 路由信息 */
+  Routes?: KongRoutePreview[];
+}
+
 /** kong服务路由列表 */
 declare interface KongServiceRouteList {
   /** 无 */
   RouteList?: KongRoutePreview[];
+  /** 总数 */
+  TotalCount?: number;
+}
+
+/** 返回kong的服务和路由列表 */
+declare interface KongServiceWithRoutes {
+  /**  */
+  ServiceList?: KongServiceRoute[];
   /** 总数 */
   TotalCount?: number;
 }
@@ -4100,6 +4124,24 @@ declare interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCNGWServicesWithRoutesRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 列表数量 */
+  Limit?: number;
+  /** 列表 offset */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType */
+  Filters?: ListFilter[];
+}
+
+declare interface DescribeCNGWServicesWithRoutesResponse {
+  /** 无 */
+  Result?: KongServiceWithRoutes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayCORSRequest {
   /** 网关ID */
   GatewayId: string;
@@ -4421,6 +4463,14 @@ declare interface DescribeCloudNativeAPIGatewayRoutesRequest {
   RouteName?: string;
   /** 过滤条件，多个过滤条件之间是与的关系，支持 name, path, host, method, service, protocol */
   Filters?: ListFilter[];
+  /** 路由类型 */
+  RouteTypes?: string[];
+  /** 是否将灰度规则可能带来的路由排在原始路由前 */
+  GrayRoutesFirst?: boolean;
+  /** 排序字段 */
+  OrderField?: string;
+  /** 排序方式枚举值：DESC： 降序ASC： 升序 */
+  OrderType?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewayRoutesResponse {
@@ -4517,6 +4567,10 @@ declare interface DescribeCloudNativeAPIGatewayServicesRequest {
   Offset?: number;
   /** 过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType */
   Filters?: ListFilter[];
+  /** 排序字段 */
+  OrderField?: string;
+  /** 排序方式枚举值：DESC： 降序ASC： 升序 */
+  OrderType?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewayServicesResponse {
@@ -6102,6 +6156,8 @@ declare interface Tse {
   DescribeAutoScalerResourceStrategies(data: DescribeAutoScalerResourceStrategiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalerResourceStrategiesResponse>;
   /** 查看弹性伸缩策略绑定的网关分组 {@link DescribeAutoScalerResourceStrategyBindingGroupsRequest} {@link DescribeAutoScalerResourceStrategyBindingGroupsResponse} */
   DescribeAutoScalerResourceStrategyBindingGroups(data: DescribeAutoScalerResourceStrategyBindingGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalerResourceStrategyBindingGroupsResponse>;
+  /** 查询云原生网关服务和路由列表 {@link DescribeCNGWServicesWithRoutesRequest} {@link DescribeCNGWServicesWithRoutesResponse} */
+  DescribeCNGWServicesWithRoutes(data: DescribeCNGWServicesWithRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNGWServicesWithRoutesResponse>;
   /** 获取云原生API网关实例信息 {@link DescribeCloudNativeAPIGatewayRequest} {@link DescribeCloudNativeAPIGatewayResponse} */
   DescribeCloudNativeAPIGateway(data: DescribeCloudNativeAPIGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayResponse>;
   /** 查询云原生网关跨域配置 {@link DescribeCloudNativeAPIGatewayCORSRequest} {@link DescribeCloudNativeAPIGatewayCORSResponse} */

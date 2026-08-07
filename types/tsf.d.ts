@@ -4928,6 +4928,8 @@ declare interface DeployContainerApplicationRequest {
   DoNotStart?: boolean;
   /** 镜像Secret列表 */
   ImagePullSecretList?: string[];
+  /** 用于区分使用sidecar的版本是稳定版还是发行版枚举值：stable： sidecar稳定版release： sidecar发行版 */
+  MeshSidecarVersion?: string;
 }
 
 declare interface DeployContainerApplicationResponse {

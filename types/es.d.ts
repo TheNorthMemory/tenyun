@@ -1517,6 +1517,8 @@ declare namespace V20180416 {
     Zone?: string;
     /** ts-0noqayxu-az6-hot-03222010-0 */
     NodeId?: string;
+    /** 客户侧Ip信息 */
+    UserIp?: string;
   }
 
   /** 节点本地盘信息 */

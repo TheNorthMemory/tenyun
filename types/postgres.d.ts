@@ -1519,7 +1519,7 @@ declare interface CreateReadOnlyDBInstanceRequest {
   ActivityId?: number;
   /** 只读组ID。 */
   ReadOnlyGroupId?: string;
-  /** 实例需要绑定的Tag信息，默认为空；可以通过调用 DescribeTags 返回值中的 Tags 字段来获取。 */
+  /** 实例需要绑定的Tag信息，默认为空；可以通过调用 DescribeTags 返回值中的 Tags 字段来获取。当前字段未完整支持多个tag形式，不推荐使用，建议使用新字段Tags */
   TagList?: Tag;
   /** 实例所属安全组，该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。 */
   SecurityGroupIds?: string[];
@@ -1533,6 +1533,8 @@ declare interface CreateReadOnlyDBInstanceRequest {
   DedicatedClusterId?: string;
   /** 实例是否开启删除保护: true-开启删除保护；false-关闭删除保护。 */
   DeletionProtection?: boolean;
+  /** 实例需要绑定的Tag信息，默认为空；可以通过调用 DescribeTags 返回值中的 Tags 字段来获取。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateReadOnlyDBInstanceResponse {
@@ -2975,11 +2977,11 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 declare interface ModifyDBInstanceSpecRequest {
-  /** 实例ID，形如：postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID，形如：postgres-6bwgamo3。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
-  /** 修改后的实例内存大小，单位GiB。 */
+  /** 修改后的实例内存大小，单位GB。 */
   Memory: number;
-  /** 修改后的实例磁盘大小，单位GiB。该参数的设置步长为10。 */
+  /** 修改后的实例磁盘大小，单位GB。该参数的设置步长为10。 */
   Storage: number;
   /** 是否自动使用代金券：0：否1：是默认值：0 */
   AutoVoucher?: number;
@@ -2993,8 +2995,10 @@ declare interface ModifyDBInstanceSpecRequest {
   SwitchStartTime?: string;
   /** 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。 */
   SwitchEndTime?: string;
-  /** 修改后的实例CPU大小，单位Core。不填写该参数时，默认根据Memory确定Cpu大小。如Memory为2，支持的规格有1核2GiB，则不传入Cpu时，Cpu默认为1。 */
+  /** 修改后的实例CPU大小，单位Core。不填写该参数时，默认根据Memory确定Cpu大小。如Memory为2，支持的规格有1核2GB，则不传入Cpu时，Cpu默认为1。 */
   Cpu?: number;
+  /** 变配时同步修改的参数列表 */
+  SyncModifyParams?: ParamEntry[];
 }
 
 declare interface ModifyDBInstanceSpecResponse {

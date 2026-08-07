@@ -302,6 +302,34 @@ declare interface ConfigRule {
   ManageTriggerType?: string[];
 }
 
+/** 配置规则资源评估结果 */
+declare interface ConfigRuleResourceEvaluationResult {
+  /** 规则ID */
+  RuleId?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则身份标识 */
+  RuleIdentifier?: string;
+  /** 规则描述 */
+  RuleDescription?: string;
+  /** 规则归属账号 */
+  RuleOwnerId?: number;
+  /** 规则风险等级 */
+  RuleRiskLevel?: number;
+  /** 资源ID */
+  ResourceId?: string;
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 资源名称 */
+  ResourceName?: string;
+  /** 资源地域 */
+  ResourceRegion?: string;
+  /** 资源标签 */
+  ResourceTags?: Tag[];
+  /** 合规详情 */
+  Annotation?: Annotation;
+}
+
 /** 规则编号信息 */
 declare interface Control {
   /** 规则编号 */
@@ -1144,6 +1172,24 @@ declare interface ListAggregateConfigRuleEvaluationResultsResponse {
   RequestId?: string;
 }
 
+declare interface ListAggregateConfigRuleResourceEvaluationResultsRequest {
+  /** 账号组Id */
+  AccountGroupId?: string;
+  /** 返回数量，最大值1000，不填写返回全部 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+}
+
+declare interface ListAggregateConfigRuleResourceEvaluationResultsResponse {
+  /** 配置规则资源评估结果列表 */
+  Items?: ConfigRuleResourceEvaluationResult[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListAggregateConfigRulesRequest {
   /** 每页限制 */
   Limit: number;
@@ -1278,6 +1324,22 @@ declare interface ListConfigRuleEvaluationResultsResponse {
   Total: number;
   /** 详情 */
   Items: EvaluationResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListConfigRuleResourceEvaluationResultsRequest {
+  /** 返回数量，最大值1000，不填写返回全部 */
+  Limit?: number;
+  /** 偏移量，默认为0 */
+  Offset?: number;
+}
+
+declare interface ListConfigRuleResourceEvaluationResultsResponse {
+  /** 配置规则资源评估结果列表 */
+  Items?: ConfigRuleResourceEvaluationResult[];
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1777,6 +1839,8 @@ declare interface Config {
   ListAggregateCompliancePacks(data: ListAggregateCompliancePacksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateCompliancePacksResponse>;
   /** 账号组获取评估结果（规则维度） {@link ListAggregateConfigRuleEvaluationResultsRequest} {@link ListAggregateConfigRuleEvaluationResultsResponse} */
   ListAggregateConfigRuleEvaluationResults(data: ListAggregateConfigRuleEvaluationResultsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateConfigRuleEvaluationResultsResponse>;
+  /** 账号组查询配置规则资源评估结果 {@link ListAggregateConfigRuleResourceEvaluationResultsRequest} {@link ListAggregateConfigRuleResourceEvaluationResultsResponse} */
+  ListAggregateConfigRuleResourceEvaluationResults(data?: ListAggregateConfigRuleResourceEvaluationResultsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateConfigRuleResourceEvaluationResultsResponse>;
   /** 账号组获取规则列表 {@link ListAggregateConfigRulesRequest} {@link ListAggregateConfigRulesResponse} */
   ListAggregateConfigRules(data: ListAggregateConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAggregateConfigRulesResponse>;
   /** 账号组获取资源列表 {@link ListAggregateDiscoveredResourcesRequest} {@link ListAggregateDiscoveredResourcesResponse} */
@@ -1789,6 +1853,8 @@ declare interface Config {
   ListCompliancePacks(data: ListCompliancePacksRequest, config?: AxiosRequestConfig): AxiosPromise<ListCompliancePacksResponse>;
   /** 获取评估结果（规则维度） {@link ListConfigRuleEvaluationResultsRequest} {@link ListConfigRuleEvaluationResultsResponse} */
   ListConfigRuleEvaluationResults(data: ListConfigRuleEvaluationResultsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConfigRuleEvaluationResultsResponse>;
+  /** 查询配置规则资源评估结果 {@link ListConfigRuleResourceEvaluationResultsRequest} {@link ListConfigRuleResourceEvaluationResultsResponse} */
+  ListConfigRuleResourceEvaluationResults(data?: ListConfigRuleResourceEvaluationResultsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConfigRuleResourceEvaluationResultsResponse>;
   /** 获取规则列表 {@link ListConfigRulesRequest} {@link ListConfigRulesResponse} */
   ListConfigRules(data: ListConfigRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConfigRulesResponse>;
   /** 获取资源列表 {@link ListDiscoveredResourcesRequest} {@link ListDiscoveredResourcesResponse} */

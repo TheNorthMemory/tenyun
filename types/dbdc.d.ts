@@ -1142,6 +1142,18 @@ declare interface IsolateDBCustomNodeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBCustomClusterAttributesRequest {
+  /** 集群ID参数格式：dbcc-hj7gab15 */
+  ClusterId: string;
+  /** 是否启用集群删除保护枚举值：true： 启用false： 不启用 */
+  DeletionProtection?: boolean;
+}
+
+declare interface ModifyDBCustomClusterAttributesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBCustomClusterNodeConfigRequest {
   /** 目标集群 ID */
   ClusterId: string;
@@ -1323,6 +1335,8 @@ declare interface Dbdc {
   DestroyDBCustomNode(data: DestroyDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyDBCustomNodeResponse>;
   /** 隔离节点 {@link IsolateDBCustomNodeRequest} {@link IsolateDBCustomNodeResponse} */
   IsolateDBCustomNode(data: IsolateDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBCustomNodeResponse>;
+  /** 修改集群属性 {@link ModifyDBCustomClusterAttributesRequest} {@link ModifyDBCustomClusterAttributesResponse} */
+  ModifyDBCustomClusterAttributes(data: ModifyDBCustomClusterAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterAttributesResponse>;
   /** 修改集群中节点的配置 {@link ModifyDBCustomClusterNodeConfigRequest} {@link ModifyDBCustomClusterNodeConfigResponse} */
   ModifyDBCustomClusterNodeConfig(data: ModifyDBCustomClusterNodeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterNodeConfigResponse>;
   /** 修改集群绑定的标签 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */

@@ -526,7 +526,7 @@ declare interface CreateNatRuleItem {
 declare interface CreateRuleItem {
   /** 规则方向：1 表示入站，0 表示出站；其它整数或省略会校验失败。方向还决定 SourceType、TargetType、Scope 与 Protocol 的可用组合。 */
   Direction: number;
-  /** 规则顺序，必须填写。传 -1 时追加到当前方向末尾；正序号表示在对应位置插入并顺延后续规则；0 按 1 处理，其他负数及超范围值不应使用。新增请求包含多条规则时，Direction 必须相同；追加时全部传 -1，插入时按请求顺序传连续递增的正序号。修改请求只接受一条规则。 */
+  /** 规则顺序。不传默认为-1，传 -1 时追加到当前方向末尾；正序号表示在对应位置插入并顺延后续规则；0 按 1 处理，其他负数及超范围值不应使用。新增请求包含多条规则时，Direction 必须相同；追加时全部传 -1，插入时按请求顺序传连续递增的正序号。修改请求只接受一条规则。 */
   OrderIndex: number;
   /** 目的端口。Protocol 为 ICMP 时忽略本字段并置为空字符串；其它协议必须提供可解析字符串，可按逗号分隔填写正整数单端口或“起始/结束”范围，起始值不得大于结束值，-1/-1 表示全部端口。FTP 只接受单个正整数。domain 或域名模板目的在 side 或 all 范围下仅接受 -1/-1 或 0/65535。 */
   Port: string;
@@ -552,7 +552,7 @@ declare interface CreateRuleItem {
   ParamTemplateId?: string;
   /** 规则来源：0 表示普通规则，2 表示隔离资产出向访问规则。新增时可以省略，省略按 0 处理；显式传值及修改时仅接受 0 或 2，修改时应传入原规则值。 */
   RuleSource?: number;
-  /** 生效范围，解析不区分大小写：serial 表示仅互联网边界串行防火墙，side 表示仅互联网边界旁路防火墙，all 表示同时作用于串行和旁路防火墙；省略、空字符串或其它值会校验失败。国际站环境会将有效输入统一归一化为 serial。协议、端口、目的类型及协议端口模板的联动限制见 Protocol、Port 和 ParamTemplateId。 */
+  /** 生效范围，必填，解析不区分大小写：serial 表示仅互联网边界串行防火墙，side 表示仅互联网边界旁路防火墙，all 表示同时作用于串行和旁路防火墙；省略、空字符串或其它值会校验失败。国际站环境会将有效输入统一归一化为 serial。协议、端口、目的类型及协议端口模板的联动限制见 Protocol、Port 和 ParamTemplateId。 */
   Scope?: string;
   /** 规则数值 ID。普通新增、指定位置新增和批量导入会忽略该字段；From=batch_import_cover 时可使用正整数 ID；修改时必须提供当前账号已有且可修改的正整数 ID，用于定位并完整替换原规则，省略、非正整数或不存在的 ID 会导致请求失败。 */
   Uuid?: number;
@@ -1042,6 +1042,20 @@ declare interface IPDefendStatus {
   IP: string;
   /** 防护状态 1:防护打开; -1:地址错误; 其他:未防护 */
   Status: number;
+}
+
+/** 入侵防御白名单策略。必填字段：RuleName、FwType、EndTime、Info；Comment 选填 */
+declare interface IdsWhiteRule {
+  /** 策略备注，最多 200 个字符；可省略或传空字符串。 */
+  Comment?: string;
+  /** 策略截止时间，北京时间（UTC+8）YYYY-MM-DD HH:MM:SS，必须晚于当前时间；永久有效传 3000-01-01 00:00:00。 */
+  EndTime?: string;
+  /** 使用 JSON integer 表示生效范围位图，取值 1–31；各项按位相加：1 互联网旁路、2 NAT、4 VPC、8 互联网串行、16 NDR。例如：12 表示 VPC+互联网串行，31 表示全部范围。匹配条件支持的范围：- 源/目的 IP、域名、IPS 规则：支持 1、2、4、8、16 及其组合。- 威胁情报：固定为 1。- 资产：使用 4、16 或 20。- UserAgent、Url、XForwardedFor、HostName、FileName、FileMd5：固定为 16；RuleType=9 同样固定为 16。 */
+  FwType?: number;
+  /** 匹配条件。按 RuleType 填写对应字段，无值字段省略。除 UserAgent 外，同字段多值用逗号分隔；UserAgent 多值用 <#cfw-splite#>。 */
+  Info?: WhiteRuleInfo;
+  /** 策略名称，填写 1–50 个字符。 */
+  RuleName?: string;
 }
 
 /** 实例详情结果 */
@@ -2324,6 +2338,36 @@ declare interface VpcZoneData {
   Region: string;
 }
 
+/** 白名单匹配条件；各字段的适用 RuleType 和取值要求见字段说明。 */
+declare interface WhiteRuleInfo {
+  /** 访问目的。RuleType=2：本字段与 SrcIP 两个字段中恰好填写一个，值为精确 IP；RuleType=5：本字段与 SrcIP 两个字段中恰好填写一个，值为资产 instance_id；RuleType=6：与 SrcIP 至少一项为具体 IP，另一项可省略或使用同 IP 版本的 0.0.0.0/0、::/0，两项均为具体 IP 时使用相同 IP 版本；FwType=16 时具体目的 IPv4 可带端口。RuleType=8：IP、CIDR、IP:端口或 CIDR:端口，可与 SrcIP 组合；RuleType=9：IP、CIDR 或带端口地址，可与 NDR 专属条件组合；搭配 IdsRuleId 时使用 IPv4 或 IPv4:端口。IPv6 带端口时使用 [IPv6]:端口；已选字段的多值用逗号分隔。 */
+  DstIP?: string;
+  /** 文件 MD5，仅 RuleType=9。32 位十六进制；多值逗号分隔，最多 10 个。 */
+  FileMd5?: string;
+  /** 文件名，仅 RuleType=9；支持精确匹配及 ?、* 通配符，区分大小写；多值用逗号分隔，最多 10 个。 */
+  FileName?: string;
+  /** HTTP Host，仅 RuleType=9；填写主机名或 IP，支持 ?、* 通配符并区分大小写；多值用逗号分隔。 */
+  HostName?: string;
+  /** 服务端内部字段。 */
+  Id?: number;
+  /** IPS 规则 ID，取自 DescribeIpsRuleListNew.Data[].RuleID。RuleType=6 必填；RuleType=9 可选，填写时同时填写 SrcIP 或 DstIP。 */
+  IdsRuleId?: string;
+  /** 服务端保留字段。 */
+  IdsRuleName?: string;
+  /** RuleType=3 填一个合法域名；RuleType=4 填情报 IP、CIDR 或域名。 */
+  Ioc?: string;
+  /** 访问源。RuleType=2：本字段与 DstIP 两个字段中恰好填写一个，值为精确 IP；RuleType=5：本字段与 DstIP 两个字段中恰好填写一个，值为资产 instance_id；RuleType=6：与 DstIP 至少一项为具体 IP，另一项可省略或使用同 IP 版本的 0.0.0.0/0、::/0，两项均为具体 IP 时使用相同 IP 版本；RuleType=8：IP 或 CIDR；RuleType=9：IP 或 CIDR，可与 NDR 专属条件组合；搭配 IdsRuleId 时使用 IPv4。源地址使用无端口格式；已选字段的多值用逗号分隔。 */
+  SrcIP?: string;
+  /** HTTP URL，仅 RuleType=9；支持精确匹配及 ?、* 通配符，区分大小写；多值用逗号分隔，最多 10 个。 */
+  Url?: string;
+  /** HTTP User-Agent，仅 RuleType=9；支持精确匹配及 ?、* 通配符，区分大小写；单值少于 255 个字符，最多 2 个，多值用 <#cfw-splite#> 分隔。 */
+  UserAgent?: string;
+  /** 白名单策略唯一 ID。 */
+  WhiteId?: string;
+  /** HTTP X-Forwarded-For，仅 RuleType=9；精确 IP，多值逗号分隔，最多 50 个。 */
+  XForwardedFor?: string;
+}
+
 declare interface AddAclRuleRequest {
   /** 待添加的互联网边界规则列表，不能为空。每条规则均须满足方向、访问源和目的、动作、范围、协议端口及模板限制；整个请求还须满足规则配额和可生效规则数量限制。账号相关值必须来自只读查询：地址模板调用 DescribeAddressTemplateList，请求用 TemplateType=1 或 5 过滤，并确认返回项 Data[].Type 为 1 或 5；将 Data[].Uuid（mb_ 前缀）写入对应 Content，不要使用 Data[].TemplateId（ip-/dm- 前缀）。协议端口模板请求用 TemplateType=6 过滤，并将 Data[].TemplateId（pp- 前缀）写入 ParamTemplateId。资产实例调用 DescribeCfwAssets，解析返回结果后使用 assets[].instance_id；资产分组调用 DescribeResourceGroupNew，传 QueryType=resource、GroupId="0"、ShowType=all，解析返回结果后使用 GroupId；资源标签传 QueryType=tag，跳过“全部资产”根节点，以一级节点 GroupName 为 Key、所选二级子节点 GroupName 为 Value 构造 JSON，不要写入 GroupId。地域调用 DescribeAclRegInfo：Scope=serial 传 FwType=["SERIAL"]，Scope=side 传 FwType=["BYPASS"]，Scope=all 同时传两项，并使用 Data[].RegionCode。不得使用展示名称或自行拼接。覆盖导入的范围仅由首条规则的 Direction 决定。 */
   Rules: CreateRuleItem[];
@@ -2786,6 +2830,20 @@ declare interface CreateVpcFwGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateWhiteRuleRequest {
+  /** 使用 JSON integer 表示白名单类型，一次请求使用一种：- 2 精确外部 IP：Rules[].Info.SrcIP、Rules[].Info.DstIP 两个字段中恰好填写一个。- 3 域名：填写 Rules[].Info.Ioc。- 4 威胁情报：填写 Rules[].Info.Ioc，FwType=1。- 5 资产：Rules[].Info.SrcIP、Rules[].Info.DstIP 两个字段中恰好填写一个，值取 DescribeCfwAssets 的 instance_id。- 6 IPS 自定义：Rules[].Info.IdsRuleId 必填，Rules[].Info.SrcIP、Rules[].Info.DstIP 至少一项为具体 IP；FwType=16 时目的 IPv4 可带端口；FwType 包含 1 时具体 IP 至少一项属于当前账号资产。- 8 IP 扩展：在 Rules[].Info 中填写 CIDR、端口或源/目的组合。- 9 NDR 扩展：FwType=16，Rules[].Info 至少填写一个 UserAgent、Url、XForwardedFor、HostName、FileName、FileMd5；可组合 SrcIP、DstIP，搭配 IdsRuleId 时同时填写 SrcIP 或 DstIP。 */
+  RuleType: number;
+  /** JSON object 数组，至少一项；每项填写 1–50 个字符的 RuleName，且同一请求内名称唯一。列表内共用一个 RuleType，不同类型分次调用。Rules[].Info 多值字段按笛卡尔积展开，一次请求展开后最多 100 条。WhiteId 由服务端生成，Id 和 IdsRuleName 由服务端管理。 */
+  Rules: IdsWhiteRule[];
+  /** 使用 JSON integer。仅 RuleType=2 使用：0 或省略表示保留冲突封禁并跳过冲突项；1 表示删除同 IP、同方向冲突封禁后创建白名单，选择 1 前先确认该删除操作。其它 RuleType 省略本参数。 */
+  CoverDuplicate?: number;
+}
+
+declare interface CreateWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAcRuleRequest {
   /** 删除规则对应的id值, 对应获取规则列表接口的Id 值 */
   Id: number;
@@ -2924,6 +2982,20 @@ declare interface DeleteVpcFwGroupRequest {
 }
 
 declare interface DeleteVpcFwGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWhiteRuleRequest {
+  /** JSON string 数组，至少一项；元素取自 DescribeWhiteRule.Data[].WhiteId，可批量。 */
+  WhiteIdList?: string[];
+}
+
+declare interface DeleteWhiteRuleResponse {
+  /** 状态码，0 表示请求被接受处理。 */
+  ReturnCode?: number;
+  /** 状态信息；成功一般为 success。 */
+  ReturnMsg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5326,6 +5398,20 @@ declare interface ModifyVpcFwSequenceRulesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyWhiteRuleRequest {
+  /** JSON object，提交完整策略。将 DescribeWhiteRule.Data[].WhiteId 写入 Rule.Info.WhiteId；RuleName、FwType、EndTime、Comment、Info 按本次请求整体保存，Id 和 IdsRuleName 由服务端管理。 */
+  Rule: IdsWhiteRule;
+  /** 使用 JSON integer，沿用 DescribeWhiteRule.Data[].RuleType：- 2 精确外部 IP：Rule.Info.SrcIP、Rule.Info.DstIP 两个字段中恰好填写一个。- 3 域名。- 4 威胁情报。- 5 资产：Rule.Info.SrcIP、Rule.Info.DstIP 两个字段中恰好填写一个。- 6 IPS 自定义：Rule.Info.IdsRuleId 必填，Rule.Info.SrcIP、Rule.Info.DstIP 至少一项为具体 IP；Rule.FwType=16 时目的 IPv4 可带端口；Rule.FwType 包含 1 时具体 IP 至少一项属于当前账号资产。- 8 IP 扩展：在 Rule.Info 中填写 CIDR、端口或源/目的组合。- 9 NDR 扩展：Rule.FwType=16，Rule.Info 至少包含一个 NDR 专属条件；搭配 IdsRuleId 时同时填写 Rule.Info.SrcIP 或 Rule.Info.DstIP。 */
+  RuleType: number;
+  /** 使用 JSON integer。仅 RuleType=2 使用：0 或省略表示保留冲突封禁；1 表示删除同 IP、同方向冲突封禁后保存，选择 1 前先确认该删除操作。其它 RuleType 省略本参数。 */
+  CoverDuplicate?: number;
+}
+
+declare interface ModifyWhiteRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OpenClusterNatFwSwitchRequest {
   /** NAT CCN防火墙开关配置 */
   NatCcnSwitch: NatCcnSwitchConfig;
@@ -5613,6 +5699,8 @@ declare interface Cfw {
   CreateSecurityGroupRules(data: CreateSecurityGroupRulesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupRulesResponse>;
   /** 创建VPC间防火墙(防火墙组) {@link CreateVpcFwGroupRequest} {@link CreateVpcFwGroupResponse} */
   CreateVpcFwGroup(data: CreateVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcFwGroupResponse>;
+  /** 创建入侵防御白名单 {@link CreateWhiteRuleRequest} {@link CreateWhiteRuleResponse} */
+  CreateWhiteRule(data: CreateWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteRuleResponse>;
   /** 删除规则 {@link DeleteAcRuleRequest} {@link DeleteAcRuleResponse} */
   DeleteAcRule(data: DeleteAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAcRuleResponse>;
   /** 删除地址模板规则 {@link DeleteAddressTemplateRequest} {@link DeleteAddressTemplateResponse} */
@@ -5633,6 +5721,8 @@ declare interface Cfw {
   DeleteSecurityGroupRule(data: DeleteSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecurityGroupRuleResponse>;
   /** 删除防火墙(组)，或者删除其中实例 {@link DeleteVpcFwGroupRequest} {@link DeleteVpcFwGroupResponse} */
   DeleteVpcFwGroup(data?: DeleteVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcFwGroupResponse>;
+  /** 白名单删除 {@link DeleteWhiteRuleRequest} {@link DeleteWhiteRuleResponse} */
+  DeleteWhiteRule(data?: DeleteWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWhiteRuleResponse>;
   /** 访问控制列表 {@link DescribeAcListsRequest} {@link DescribeAcListsResponse} */
   DescribeAcLists(data?: DescribeAcListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAcListsResponse>;
   /** 查询ACL规则支持配置的地区 {@link DescribeAclRegInfoRequest} {@link DescribeAclRegInfoResponse} */
@@ -5863,6 +5953,8 @@ declare interface Cfw {
   ModifyVpcFwGroup(data: ModifyVpcFwGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcFwGroupResponse>;
   /** vpc间规则快速排序 {@link ModifyVpcFwSequenceRulesRequest} {@link ModifyVpcFwSequenceRulesResponse} */
   ModifyVpcFwSequenceRules(data?: ModifyVpcFwSequenceRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVpcFwSequenceRulesResponse>;
+  /** 编辑入侵防御白名单 {@link ModifyWhiteRuleRequest} {@link ModifyWhiteRuleResponse} */
+  ModifyWhiteRule(data: ModifyWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWhiteRuleResponse>;
   /** 开启NAT CCN集群模式防火墙开关 {@link OpenClusterNatFwSwitchRequest} {@link OpenClusterNatFwSwitchResponse} */
   OpenClusterNatFwSwitch(data: OpenClusterNatFwSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<OpenClusterNatFwSwitchResponse>;
   /** 删除互联网边界规则 {@link RemoveAcRuleRequest} {@link RemoveAcRuleResponse} */

@@ -934,12 +934,176 @@ declare interface Filter {
   Values: string[];
 }
 
+/** 键值对 */
+declare interface KVMapping {
+  /** 键值映射的键 */
+  Key?: string;
+  /** 键值映射的值 */
+  Value?: string;
+}
+
 /** Key/Value结构 */
 declare interface KeyValue {
   /** 条件的Key */
   Key?: string;
   /** 条件的Value */
   Value?: string;
+}
+
+/** 云原生网关路由信息 */
+declare interface KongRoutePreview {
+  /** 服务ID */
+  ID: string;
+  /** 服务名字 */
+  Name?: string;
+  /** 请求方法列表 */
+  Methods?: string[] | null;
+  /** 路由Paths列表 */
+  Paths?: string[] | null;
+  /** 路由Hosts列表 */
+  Hosts?: string[] | null;
+  /** 协议列表 */
+  Protocols?: string[];
+  /** 是否保留Host头 */
+  PreserveHost?: boolean;
+  /** HTTPS重定向状态码 */
+  HttpsRedirectStatusCode?: number;
+  /** 是否去除路径前缀 */
+  StripPath?: boolean;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 强制转换 https */
+  ForceHttps?: boolean | null;
+  /** 服务名 */
+  ServiceName?: string;
+  /** 服务ID */
+  ServiceID?: string;
+  /** 目的端口 */
+  DestinationPorts?: number[];
+  /** headers */
+  Headers?: KVMapping[];
+  /** 是否缓存请求body，默认true */
+  RequestBuffering?: boolean;
+  /** 是否缓存响应body，默认true */
+  ResponseBuffering?: boolean;
+  /** 正则优先级 */
+  RegexPriority?: number;
+  /** querystring参数 */
+  QueryStringParameters?: KVMapping[];
+  /** 路由来源 */
+  RouteSource?: string;
+}
+
+/** 云原生网关服务预览信息 */
+declare interface KongServicePreview {
+  /** 服务ID */
+  ID: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 是否可编辑 */
+  Editable?: boolean;
+  /** 服务名字 */
+  Name?: string;
+  /** 请求路径 */
+  Path?: string | null;
+  /** 标签 */
+  Tags?: string[];
+  /** 后端配置 */
+  UpstreamInfo?: KongUpstreamInfo;
+  /** 后端类型 */
+  UpstreamType?: string;
+}
+
+/** kong实例的服务和路由列表 */
+declare interface KongServiceRoute {
+  /** 服务信息 */
+  Service?: KongServicePreview;
+  /** 路由总数 */
+  RouteTotalCount?: number;
+  /** 是否还有更多路由 */
+  RouteHasMore?: boolean;
+  /** 路由列表 */
+  Routes?: KongRoutePreview[];
+}
+
+/** 返回kong的服务和路由列表 */
+declare interface KongServiceWithRoutes {
+  /** 服务及路由列表 */
+  ServiceList?: KongServiceRoute[];
+  /** 总数 */
+  TotalCount?: number;
+}
+
+/** Kong Upstream中的Target */
+declare interface KongTarget {
+  /** 目标主机地址 */
+  Host: string;
+  /** 端口 */
+  Port: number;
+  /** 权重 */
+  Weight: number;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** CVM实例ID */
+  CvmInstanceId?: string;
+  /** CVM实例名称 */
+  CvmInstanceName?: string;
+  /** 健康状态 */
+  Health?: string;
+  /** Target的来源 */
+  Source?: string;
+  /** target标签 */
+  Tags?: string[];
+}
+
+/** 服务的后端配置 */
+declare interface KongUpstreamInfo {
+  /** 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing */
+  Algorithm?: string;
+  /** CVM弹性伸缩组端口 */
+  AutoScalingCvmPort?: number;
+  /** CVM弹性伸缩组ID */
+  AutoScalingGroupID?: string;
+  /** CVM弹性伸缩组生命周期挂钩状态 */
+  AutoScalingHookStatus?: string;
+  /** CVM弹性伸缩组使用的CVM TAT命令状态 */
+  AutoScalingTatCmdStatus?: string;
+  /** upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查） */
+  HealthStatus?: string;
+  /** IP或域名 */
+  Host?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 端口 */
+  Port?: number;
+  /** 精确的服务来源类型，新建服务来源时候传入的类型 */
+  RealSourceType?: string;
+  /** 云函数是否开启CAM鉴权，不填时默认为开启(true) */
+  ScfCamAuthEnable?: boolean;
+  /** 云函数是否开启Base64编码，默认为false */
+  ScfIsBase64Encoded?: boolean;
+  /** 云函数是否开启响应集成，默认为false */
+  ScfIsIntegratedResponse?: boolean;
+  /** SCF函数名 */
+  ScfLambdaName?: string;
+  /** SCF函数版本 */
+  ScfLambdaQualifier?: string;
+  /** SCF函数命名空间 */
+  ScfNamespace?: string;
+  /** SCF函数类型 */
+  ScfType?: string;
+  /** 服务（注册中心或Kubernetes中的服务）名字 */
+  ServiceName?: string;
+  /** 冷启动时间，单位秒 */
+  SlowStart?: number;
+  /** 服务来源ID */
+  SourceID?: string;
+  /** 服务来源的名字 */
+  SourceName?: string;
+  /** 服务来源类型 */
+  SourceType?: string;
+  /** 服务后端类型是IPList时提供 */
+  Targets?: KongTarget[] | null;
 }
 
 /** LLM 模型 API 列表 */
@@ -956,6 +1120,14 @@ declare interface ListCloudNativeAPIGatewayLLMModelService {
   TotalCount?: number;
   /** 模型服务列表。 */
   DataList?: CloudNativeAPIGatewayLLMModelService[];
+}
+
+/** 列表过滤条件，模糊匹配 */
+declare interface ListFilter {
+  /** 过滤字段 */
+  Key?: string;
+  /** 过滤值 */
+  Value?: string;
 }
 
 declare interface AddCloudNativeAPIGatewayConsumerGroupAuthRequest {
@@ -1332,6 +1504,24 @@ declare interface DeleteCloudNativeAPIGatewaySecretKeyRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewaySecretKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCNGWServicesWithRoutesRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 列表数量 */
+  Limit?: number;
+  /** 列表 offset */
+  Offset?: number;
+  /** 过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType */
+  Filters?: ListFilter[];
+}
+
+declare interface DescribeCNGWServicesWithRoutesResponse {
+  /** 服务及路由查询结果 */
+  Result?: KongServiceWithRoutes;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2039,6 +2229,8 @@ declare interface Cngw {
   DeleteCloudNativeAPIGatewayMCPTool(data: DeleteCloudNativeAPIGatewayMCPToolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayMCPToolResponse>;
   /** 删除AI网关密钥 {@link DeleteCloudNativeAPIGatewaySecretKeyRequest} {@link DeleteCloudNativeAPIGatewaySecretKeyResponse} */
   DeleteCloudNativeAPIGatewaySecretKey(data: DeleteCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewaySecretKeyResponse>;
+  /** 查询云原生网关服务和路由列表 {@link DescribeCNGWServicesWithRoutesRequest} {@link DescribeCNGWServicesWithRoutesResponse} */
+  DescribeCNGWServicesWithRoutes(data: DescribeCNGWServicesWithRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNGWServicesWithRoutesResponse>;
   /** 查询AI网关消费者详情 {@link DescribeCloudNativeAPIGatewayConsumerRequest} {@link DescribeCloudNativeAPIGatewayConsumerResponse} */
   DescribeCloudNativeAPIGatewayConsumer(data: DescribeCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConsumerResponse>;
   /** 查询AI网关消费者分组 {@link DescribeCloudNativeAPIGatewayConsumerGroupRequest} {@link DescribeCloudNativeAPIGatewayConsumerGroupResponse} */

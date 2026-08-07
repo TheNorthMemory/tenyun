@@ -118,6 +118,8 @@ declare interface Database {
   CreatedAt?: string | null;
   /** 最后修改时间 */
   UpdatedAt?: string | null;
+  /** 降冷开启时间 */
+  CoolDownTime?: string | null;
 }
 
 /** 查询过滤器 */

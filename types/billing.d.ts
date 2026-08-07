@@ -2302,6 +2302,8 @@ declare interface GatherResourceSummary {
   SplitItemId?: string | null;
   /** 分拆项名称：涉及分拆产品的分拆后的分拆项 */
   SplitItemName?: string | null;
+  /** 归集方式枚举值：0： 未归集1： 自动命中2： 手动分配待生效3： 手动分配已生效 */
+  EffectiveMode?: string;
 }
 
 /** 归集规则列表 */
@@ -4076,7 +4078,7 @@ declare interface DescribeGatherResourceRequest {
   Month?: string;
   /** 分账单元唯一标识，用作筛选 */
   TreeNodeUniqKey?: string;
-  /** 资源目录类别，枚举值如下：all - 全部none - 未归集 */
+  /** 资源目录类别，枚举值如下：all - 全部none - 未归集枚举值：all： 全部none： 未归集allocation： 已公摊资源gather： 已归集资源 */
   GatherType?: string;
   /** 排序字段，枚举值如下：realCost - 折后总价cashPayAmount - 现金金额voucherPayAmount - 代金券金额incentivePayAmount - 赠送金金额transferPayAmount -分成金金额 */
   Sort?: string;

@@ -8773,9 +8773,9 @@ declare interface CreateAigcAudioTaskResponse {
 }
 
 declare interface CreateAigcImageTaskRequest {
-  /** 模型名称。当前支持的模型列表：Hunyuan，Qwen，Vidu，Kling，MJ。 */
+  /** 模型名称。当前支持的模型列表：Hunyuan，Qwen，Vidu，Kling。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [3.0]。Vidu，可选 [q2]。Kling，可选 [2.1、O1、3.0、3.0-Omni]。Qwen，可选 [0925]。MJ，可选 [v7] */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [3.0]。Vidu，可选 [q2]。Kling，可选 [2.1、O1、3.0、3.0-Omni]。Qwen，可选 [0925]。 */
   ModelVersion?: string;
   /** 场景化生图使用，仅部分模型支持。枚举值：3d_panorama： 全景图。仅Hunyuan支持。 */
   SceneType?: string;
@@ -8785,7 +8785,7 @@ declare interface CreateAigcImageTaskRequest {
   NegativePrompt?: string;
   /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
   EnhancePrompt?: boolean;
-  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：Kling 2.1，可支持最多 4 张图片输入作为资源图。Kling 3.0-Omni，可支持最多 10 张图片输入作为资源图。Kling O1，可支持最多 10 张图片输入作为资源图。Vidu q2，可支持最多 7 张图片输入作为资源图。Hunyuan 3.0，可支持最多 3 张图片输入作为资源图。MJ v7，可支持最多 3 张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
+  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：Kling 2.1，可支持最多 4 张图片输入作为资源图。Kling 3.0-Omni，可支持最多 10 张图片输入作为资源图。Kling O1，可支持最多 10 张图片输入作为资源图。Vidu q2，可支持最多 7 张图片输入作为资源图。Hunyuan 3.0，可支持最多 3 张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
   ImageInfos?: AigcImageInfo[];
   /** 指定图片输出张数。目前默认支持输出 1 张。 */
   OutputImageCount?: number;

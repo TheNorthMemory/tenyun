@@ -2397,6 +2397,14 @@ declare namespace V20180717 {
     InputTokens?: number;
     /** 思考产生的 Token 数目。 */
     ThoughtTokens?: number;
+    /** 输入图片数目。 */
+    InputImageCount?: number;
+    /** 输入视频的时长。单位：秒。 */
+    InputSeconds?: number;
+    /** 输出视频时长。单位：秒。 */
+    OutputSeconds?: number;
+    /** 输入输出总时长。默认值：秒。 */
+    TotalSeconds?: number;
   }
 
   /** 转动图任务类型 */
@@ -6493,7 +6501,7 @@ declare namespace V20180717 {
 
   /** 资源包中包含的资源。 */
   interface ProductInstanceResource {
-    /** 资源类型。Storage：存储资源包。Traffic：流量资源包。Transcode：普通转码资源包。TESHD：极速高清转码资源包。Review：音视频审核转码资源包。MediaProcess：媒体处理时长资源包。 */
+    /** 资源类型。枚举值：Storage： 存储资源Traffic： 流量资源Transcode： 转码资源TESHD： 极速高清转码资源Review： 音视频审核资源MediaProcess： 媒体处理资源MLLMMediaProcess： 大模型媒体处理资源 */
     ResourceType?: string;
     /** 资源包额度。音视频存储资源包，单位为字节。音视频转码资源包，单位为秒。音视频审核资源包，单位为秒。音视频极速高清资源包，单位为秒。音视频加速资源包，单位为字节。媒体处理时长资源包，单位为秒。 */
     Amount?: number;
@@ -9150,11 +9158,11 @@ declare namespace V20180717 {
   interface CreateAigcImageTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 模型名称。取值：OGGGSIQwenHunyuanViduKling */
+    /** 模型名称。取值：OGGGHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Jimeng，可选值为 4.0；当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；当 ModelName 是 Qwen，可选值为 0925；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene； */
+    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene； */
     ModelVersion: string;
-    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；Kling O1：10张；SI 4.0：14张；SI 4.5：14张；SI 5.0-lite：14张；Vidu q2：7张；Hunyuan 3.0：3张；Qwen 0925：1张；MJ v7：3张。 */
+    /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；Kling O1：10张；Vidu q2：7张；Hunyuan 3.0：3张； */
     FileInfos?: AigcImageTaskInputFileInfo[];
     /** 生成图片的提示词。当 FileInfos 为空时，此参数必填。 */
     Prompt?: string;
@@ -9176,7 +9184,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{"AdditionalParameters": "{\"size\":\"728x1024\"}"}SI 系列支持自由设置分辨率宽高：SI 4.0：合法总像素范围 [1280x720=921600, 4096x4096=16777216]，示例：{"AdditionalParameters": "{\"size\":\"728x1356\"}"}SI 4.5：合法总像素范围 [2560x1440=3686400, 4096x4096=16777216]，示例：{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}SI 5.0-lite：合法总像素范围 [2560x1440=3686400, 3072x3072x1.1025=10404496]，示例：{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}可用于开启输出多张图像，示例：{"AdditionalParameters": "{\"sequential_image_generation\":\"auto\"}"}。除此之外，还需要在Prompt中说明需要输出图片张数，如：输出3张图片。Qwen 0925支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例：{"AdditionalParameters": "{\"size\":\"728*1024\"}"}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{"AdditionalParameters": "{\"size\":\"728*1024\"}"}支持设置透明图层：示例：{"AdditionalParameters": "{\"background\":\"transparent\"}"}Kling支持设置扩图参数，示例：{AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
+    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{"AdditionalParameters": "{\"size\":\"728x1024\"}"}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{"AdditionalParameters": "{\"size\":\"728*1024\"}"}支持设置透明图层：示例：{"AdditionalParameters": "{\"background\":\"transparent\"}"}Kling支持设置扩图参数，示例：{AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
     ExtInfo?: string;
   }
 

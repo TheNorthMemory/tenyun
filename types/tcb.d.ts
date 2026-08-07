@@ -210,6 +210,18 @@ declare interface CloudAppVersionItem {
   Steps?: BuildStepStatus[] | null;
 }
 
+/** BuildLog */
+declare interface CloudBaseRunBuildLog {
+  /** 总数 */
+  Total: number | null;
+  /** 触达ID */
+  Delivered: number | null;
+  /** 文档 */
+  Text: string | null;
+  /** 是否更多 */
+  More: boolean | null;
+}
+
 /** cls日志信息 */
 declare interface ClsInfo {
   /** cls所属地域 */
@@ -2428,6 +2440,26 @@ declare interface DescribeCloudBaseBuildServiceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudBaseRunBuildLogRequest {
+  /** 环境ID */
+  EnvId?: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 版本名称 */
+  ServiceVersion?: string;
+  /** 构建ID */
+  BuildId?: number;
+  /** 偏移记录 */
+  Start?: number;
+}
+
+declare interface DescribeCloudBaseRunBuildLogResponse {
+  /** 日志 */
+  Log?: CloudBaseRunBuildLog | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudBaseRunServerVersionRequest {
   /** 环境ID */
   EnvId: string;
@@ -3733,6 +3765,8 @@ declare interface Tcb {
   DescribeCloudAppVersionList(data: DescribeCloudAppVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudAppVersionListResponse>;
   /** 获取云托管代码上传和下载url {@link DescribeCloudBaseBuildServiceRequest} {@link DescribeCloudBaseBuildServiceResponse} */
   DescribeCloudBaseBuildService(data: DescribeCloudBaseBuildServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseBuildServiceResponse>;
+  /** 查询构建日志 {@link DescribeCloudBaseRunBuildLogRequest} {@link DescribeCloudBaseRunBuildLogResponse} */
+  DescribeCloudBaseRunBuildLog(data?: DescribeCloudBaseRunBuildLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunBuildLogResponse>;
   /** 查询云托管服务版本的详情 {@link DescribeCloudBaseRunServerVersionRequest} {@link DescribeCloudBaseRunServerVersionResponse} */
   DescribeCloudBaseRunServerVersion(data: DescribeCloudBaseRunServerVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudBaseRunServerVersionResponse>;
   /** 开通 MySql 结果查询 {@link DescribeCreateMySQLResultRequest} {@link DescribeCreateMySQLResultResponse} */
@@ -3987,8 +4021,6 @@ declare interface Tcb {
   DescribeCloudBaseGWAPI(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunBaseImages(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeCloudBaseRunBuildLog(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudBaseRunBuildServer(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

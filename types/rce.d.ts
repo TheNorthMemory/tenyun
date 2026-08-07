@@ -36,6 +36,8 @@ declare interface DataScore {
   RiskLevel?: number;
   /** 风险标签 */
   RiskLabels?: RiskLabel[];
+  /** 综合风险分数。取值范围：[1, 1000]数值越大，风险越大。 */
+  RiskScore?: number | null;
 }
 
 /** 决策信息 */
@@ -66,6 +68,10 @@ declare interface Device {
   SystemVersion?: string;
   /** SDK版本 */
   SdkBuildVersion?: string;
+  /** 验签token，验签功能启用请联系我们。 */
+  SignToken?: string;
+  /** token生成时间戳，毫秒级。 */
+  TokenTime?: string;
 }
 
 /** 环境基础信息 */

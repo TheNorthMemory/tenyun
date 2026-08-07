@@ -770,16 +770,6 @@ declare interface FinancialBillItemDetails {
   Remark?: string | null;
 }
 
-/** 机票行程单识别结果 */
-declare interface FlightInvoiceInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：票价、合计金额、填开日期、有效身份证件号码、电子客票号码、验证码、旅客姓名、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李。 */
-  Name: string;
-  /** 识别出的字段名称对应的值，也就是字段 Name 对应的字符串结果。 */
-  Value: string;
-  /** 多个行程的字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。 */
-  Row: number;
-}
-
 /** 机票行程卡条目 */
 declare interface FlightItem {
   /** 出发航站楼 */
@@ -976,14 +966,6 @@ declare interface ImageSize {
   Height?: number | null;
 }
 
-/** 保险单据信息 */
-declare interface InsuranceBillInfo {
-  /** 识别出的字段名称(关键字)，支持以下字段：【病案首页】姓名、性别、出生日期、出院诊断、疾病编码、入院病情等。【费用清单】医疗参保人员类别、身份证号、入院方式、结账日期、项目、金额等。【结算单】名称、单价、数量、金额、医保内、医保外等。【医疗发票】姓名、性别、住院时间、收费项目、金额、合计等。 */
-  Name?: string;
-  /** 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。 */
-  Value?: string;
-}
-
 /** 票据检测结果 */
 declare interface InvoiceDetectInfo {
   /** 识别出的图片在混贴票据图片中的旋转角度。 */
@@ -1102,7 +1084,7 @@ declare interface LicensePlateInfo {
   Rect?: Rect;
   /** 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。 */
   Color?: string;
-  /** 车牌类别， 如： 实体车牌、非实体车牌 */
+  /** 车牌类别， 如： 标准实体车牌、非标准实体车牌、临牌、喷漆车牌 */
   LicensePlateCategory?: string;
 }
 
@@ -1664,46 +1646,22 @@ declare interface QrcodeResultsInfo {
   Position?: QrcodePositionObj;
 }
 
-/** 数学试题识别结构化对象 */
-declare interface QuestionBlockObj {
-  /** 数学试题识别结构化信息数组 */
-  QuestionArr: QuestionObj[];
-  /** 题目主体区域检测框在图片中的像素坐标 */
-  QuestionBboxCoord: Rect;
-}
-
 /** 试题识别结果 */
 declare interface QuestionInfo {
   /** 旋转角度 */
   Angle?: number;
-  /** 预处理后图片高度 */
+  /** 预处理后图片高度单位：px */
   Height?: number;
-  /** 预处理后图片宽度 */
+  /** 预处理后图片宽度单位：px */
   Width?: number;
   /** 文档元素 */
   ResultList?: ResultList[] | null;
-  /** 输入图片高度 */
+  /** 输入图片高度单位：px */
   OrgHeight?: number;
-  /** 输入图片宽度 */
+  /** 输入图片宽度单位：px */
   OrgWidth?: number;
   /** 预处理后的图片base64编码 */
   ImageBase64?: string;
-}
-
-/** 试题识别结构化信息 */
-declare interface QuestionObj {
-  /** 题号 */
-  QuestionTextNo: string;
-  /** 题型：1: "选择题"2: "填空题"3: "解答题" */
-  QuestionTextType: number;
-  /** 题干 */
-  QuestionText: string;
-  /** 选择题选项，包含1个或多个option */
-  QuestionOptions: string;
-  /** 所有子题的question属性 */
-  QuestionSubquestion: string;
-  /** 示意图检测框在的图片中的像素坐标 */
-  QuestionImageCoords: Rect[];
 }
 
 /** 定额发票 */
@@ -2266,22 +2224,6 @@ declare interface TextDetectionEn {
   CandWord?: CandWord[];
   /** 识别出来的单词信息（包括单词Character和单词置信度confidence） */
   Words?: Words[];
-}
-
-/** 数学试题识别结果 */
-declare interface TextEduPaper {
-  /** 识别出的字段名称（关键字） */
-  Item?: string;
-  /** 识别出的字段名称对应的值，也就是字段Item对应的字符串结果 */
-  DetectedText?: string;
-  /** 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height） */
-  Itemcoord?: ItemCoord;
-}
-
-/** 数学公式识别结果 */
-declare interface TextFormula {
-  /** 识别出的文本行内容 */
-  DetectedText?: string;
 }
 
 /** 公式识别结果 */
@@ -3588,26 +3530,6 @@ declare interface DriverLicenseOCRResponse {
   RequestId?: string;
 }
 
-declare interface EduPaperOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 扩展配置信息。配置格式：{"option1":value1,"option2":value2}1. task_type：任务类型【0: 关闭版式分析与处理 1: 开启版式分析处理】可选参数，Int32类型，默认值为12. is_structuralization：是否结构化输出【true：返回包体同时返回通用和结构化输出 false：返回包体返回通用输出】 可选参数，Bool类型，默认值为true3. if_readable_format：是否按照版式整合通用文本/公式输出结果 可选参数，Bool类型，默认值为false示例：{"task_type": 1,"is_structuralization": true,"if_readable_format": true} */
-  Config?: string;
-}
-
-declare interface EduPaperOCRResponse {
-  /** 检测到的文本信息，具体内容请点击左侧链接。 */
-  EduPaperInfos?: TextEduPaper[];
-  /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。 */
-  Angle?: number;
-  /** 结构化方式输出，具体内容请点击左侧链接。 */
-  QuestionBlockInfos?: QuestionBlockObj[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface EnglishOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -3766,48 +3688,12 @@ declare interface ExtractDocBasicResponse {
   RequestId?: string;
 }
 
-declare interface ExtractDocMultiProRequest {
-  /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。 */
-  PdfPageNumber?: number;
-  /** 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
-  ItemNames?: string[];
-  /** true：仅输出自定义字段flase：输出默认字段+自定义字段默认true */
-  ItemNamesShowMode?: boolean;
-  /** 是否开启全文字段识别 */
-  ReturnFullText?: boolean;
-  /** 配置id支持：DispatchWeightNote -- 磅单发货单识别模板ReceiptWeightNote -- 磅单收货单识别模板默认：DispatchWeightNote */
-  ConfigId?: string;
-  /** 是否开启全文字段坐标值的识别 */
-  EnableCoord?: boolean;
-  /** 是否开启父子key识别，默认是 */
-  OutputParentKey?: boolean;
-  /** 模板的单个属性配置 */
-  ConfigAdvanced?: ConfigAdvanced;
-}
-
-declare interface ExtractDocMultiProResponse {
-  /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负 */
-  Angle?: number;
-  /** 配置结构化文本信息 */
-  StructuralList?: GroupInfo[];
-  /** 还原文本信息 */
-  WordList?: WordItem[];
-  /** 样本识别字段数 */
-  TokenNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ExtractDocMultiRequest {
   /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
   /** 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为前3页。 */
+  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别。 */
   PdfPageNumber?: number;
   /** 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"] */
   ItemNames?: string[];
@@ -3815,7 +3701,7 @@ declare interface ExtractDocMultiRequest {
   ItemNamesShowMode?: boolean;
   /** 是否开启全文字段识别 */
   ReturnFullText?: boolean;
-  /** 配置id支持：General -- 通用场景 InvoiceEng -- 国际invoice模板 WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模板SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 中国香港水电煤单识别模板OverseasCheques -- 海外支票RegistrationCertificate -- 备案证​GridPhoto -- 电网系统照片​SignaturePage -- 签署页​SalesDeliveryNote -- 销售发货单 */
+  /** 配置id支持：General -- 通用场景InvoiceEng -- 国际invoice模板WayBillEng --海运订单模板CustomsDeclaration -- 进出口报关单WeightNote -- 磅单MedicalMeter -- 血压仪表识别BillOfLading -- 海运提单EntrustmentBook -- 海运托书Statement -- 对账单识别模板BookingConfirmation -- 配舱通知书识别模板AirWayBill -- 航空运单识别模板Table -- 表格模板SteelLabel -- 实物标签识别模板CarInsurance -- 车辆保险单识别模板MultiRealEstateCertificate -- 房产材料识别模板MultiRealEstateMaterial -- 房产证明识别模板HongKongUtilityBill -- 中国香港水电煤单识别模板OverseasCheques -- 海外支票RegistrationCertificate -- 备案证u200bGridPhoto -- 电网系统照片u200bSignaturePage -- 签署页u200bSalesDeliveryNote -- 销售发货单 */
   ConfigId?: string;
   /** 是否开启全文字段坐标值的识别 */
   EnableCoord?: boolean;
@@ -3823,8 +3709,12 @@ declare interface ExtractDocMultiRequest {
   OutputParentKey?: boolean;
   /** 模板的单个属性配置 */
   ConfigAdvanced?: ConfigAdvanced;
-  /** cn时，添加的key为中文 en时，添加的key为英语 */
+  /** cn时，添加的key为中文en时，添加的key为英语 */
   OutputLanguage?: string;
+  /** 自定义抽取需要的字段名称、字段类型、字段提示词 */
+  NewItemNames?: ItemNames[];
+  /** 文档抽取（多模态）识别服务所用的算法模型版本-目前入参支持“1.0”和“2.0“两个输入。2026年7月20日开始，默认为“2.0”，之前使用过本接口的账号若未填写本参数默认为“1.0”。2026年7月20日后开通服务的账号仅支持输入“2.0”。不同算法模型版本对应的文档抽取识别算法不同，新版本的整体效果会优于旧版本，建议使用“2.0”版本。示例值：2.0 */
+  MultiModelVersion?: string;
 }
 
 declare interface ExtractDocMultiResponse {
@@ -3836,40 +3726,6 @@ declare interface ExtractDocMultiResponse {
   WordList?: WordItem[];
   /** 样本识别字段数 */
   TokenNum?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface FlightInvoiceOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-  /** 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。 */
-  IsPdf?: boolean;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。 */
-  PdfPageNumber?: number;
-}
-
-declare interface FlightInvoiceOCRResponse {
-  /** 机票行程单识别结果，具体内容请点击左侧链接。 */
-  FlightInvoiceInfos?: FlightInvoiceInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface FormulaOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface FormulaOCRResponse {
-  /** 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负 */
-  Angle?: number;
-  /** 检测到的文本信息，具体内容请点击左侧链接。 */
-  FormulaInfos?: TextFormula[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4168,20 +4024,6 @@ declare interface ImageEnhancementResponse {
   RequestId?: string;
 }
 
-declare interface InsuranceBillOCRRequest {
-  /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
-  ImageBase64?: string;
-  /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
-  ImageUrl?: string;
-}
-
-declare interface InsuranceBillOCRResponse {
-  /** 保险单据识别结果，具体内容请点击左侧链接。 */
-  InsuranceBillInfos?: InsuranceBillInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface LicensePlateOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -4200,7 +4042,7 @@ declare interface LicensePlateOCRResponse {
   Color?: string;
   /** 全部车牌信息。 */
   LicensePlateInfos?: LicensePlateInfo[];
-  /** 车牌类别， 如： 实体车牌、非实体车牌 示例值：实体车牌 */
+  /** 车牌类别， 如： 标准实体车牌、非标准实体车牌、临牌，喷漆车牌 示例值：实体车牌 */
   LicensePlateCategory?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4393,6 +4235,8 @@ declare interface MultimodalDocParseRequest {
   EnableSubImg?: boolean;
   /** 需要识别的页码范围，单次调用最多支持300页。参数格式：1-10 */
   PageRange?: string;
+  /** 任务类型枚举值：0： 文档解析1： 图片OCR识别2： 切片文字识别3： 切片表格识别4： 切片代码识别默认值：0 */
+  TaskType?: number;
 }
 
 declare interface MultimodalDocParseResponse {
@@ -5149,14 +4993,18 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   BoolSingleQuestion?: boolean;
   /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
   EnableDeepThink?: boolean;
-  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改； 设置方式参考 {"KnowledgePoints":true,"TrueAnswer":true}参数格式：{"KnowledgePoints":true,"TrueAnswer":true} */
+  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改；当key为DisableAnswerAnalysis value为true表示不输出答案解析；当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）；参数格式：{"KnowledgePoints":true,"TrueAnswer":true} */
   QuestionConfigMap?: string;
   /** 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中 */
   ReferenceAnswer?: string;
-  /** 图片/PDF的 Base64 列表值，最多三张。每张图片要求参考ImageBase64 1. 如果ImageBase64List或者ImageUrlList 都没值则取ImageBase64 或者ImageUrl 2.如果ImageBase64List或者ImageUrlList 有一个值，则不取ImageBase64 或者ImageUrl值，优先去list 3.如果ImageBase64List或者ImageUrlList 都有值，则取ImageUrlList */
+  /** 批量base64图片入口，每个base64参考单独ImageBase64参数规则。当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景） */
   ImageBase64List?: string[];
-  /** 图片/PDF的 Url 地址Base64 列表值，最多三张。每张图片要求参考ImageUrl。 图片生效规则同ImageBase64List */
+  /** 批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景） */
   ImageUrlList?: string[];
+  /** 辅助批改类型枚举值：0： 无辅助批改，直接模型批改1： 单题文本辅助批改，配合AnswerAssistMap使用2： 整页辅助批改，待批改试卷使用ImageUrl/ImageBase64，答案部分使用ImageBase64List.N/ImageUrlList.N默认值：0 */
+  AssistMarkType?: number;
+  /** 单题辅助批改文本内容列表，当AssistMarkType为1时生效，用于提供题目相关的辅助文本信息。当key为ReferenceAnswer，value可以输入单题的辅助答案文本。当key为QuestionAuxStem，value可以输入单题的辅助题干。 */
+  AnswerAssistMap?: string;
 }
 
 declare interface SubmitQuestionMarkAgentJobResponse {
@@ -5166,6 +5014,8 @@ declare interface SubmitQuestionMarkAgentJobResponse {
   QuestionInfo?: QuestionInfo[];
   /** 题目切题数量，作为计费题目数总量 */
   QuestionCount?: string;
+  /** 客户图片url */
+  OriginalImageUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5563,8 +5413,6 @@ declare interface Ocr {
   DescribeQuestionMarkAgentJob(data?: DescribeQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionMarkAgentJobResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
-  /** 数学试题识别 {@link EduPaperOCRRequest} {@link EduPaperOCRResponse} */
-  EduPaperOCR(data?: EduPaperOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EduPaperOCRResponse>;
   /** 英文识别 {@link EnglishOCRRequest} {@link EnglishOCRResponse} */
   EnglishOCR(data?: EnglishOCRRequest, config?: AxiosRequestConfig): AxiosPromise<EnglishOCRResponse>;
   /** 企业证照识别 {@link EnterpriseLicenseOCRRequest} {@link EnterpriseLicenseOCRResponse} */
@@ -5579,12 +5427,6 @@ declare interface Ocr {
   ExtractDocBasic(data?: ExtractDocBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocBasicResponse>;
   /** 文档抽取（多模态版） {@link ExtractDocMultiRequest} {@link ExtractDocMultiResponse} */
   ExtractDocMulti(data?: ExtractDocMultiRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocMultiResponse>;
-  /** 文档抽取（多模态Pro版） {@link ExtractDocMultiProRequest} {@link ExtractDocMultiProResponse} */
-  ExtractDocMultiPro(data?: ExtractDocMultiProRequest, config?: AxiosRequestConfig): AxiosPromise<ExtractDocMultiProResponse>;
-  /** 机票行程单识别 {@link FlightInvoiceOCRRequest} {@link FlightInvoiceOCRResponse} */
-  FlightInvoiceOCR(data?: FlightInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FlightInvoiceOCRResponse>;
-  /** @deprecated 数学公式识别 {@link FormulaOCRRequest} {@link FormulaOCRResponse} */
-  FormulaOCR(data?: FormulaOCRRequest, config?: AxiosRequestConfig): AxiosPromise<FormulaOCRResponse>;
   /** 通用文字识别（高精度版） {@link GeneralAccurateOCRRequest} {@link GeneralAccurateOCRResponse} */
   GeneralAccurateOCR(data?: GeneralAccurateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralAccurateOCRResponse>;
   /** 通用印刷体识别 {@link GeneralBasicOCRRequest} {@link GeneralBasicOCRResponse} */
@@ -5607,8 +5449,6 @@ declare interface Ocr {
   IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
   /** 文本图像增强 {@link ImageEnhancementRequest} {@link ImageEnhancementResponse} */
   ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
-  /** 保险单据识别 {@link InsuranceBillOCRRequest} {@link InsuranceBillOCRResponse} */
-  InsuranceBillOCR(data?: InsuranceBillOCRRequest, config?: AxiosRequestConfig): AxiosPromise<InsuranceBillOCRResponse>;
   /** 车牌识别 {@link LicensePlateOCRRequest} {@link LicensePlateOCRResponse} */
   LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;
   /** 马来西亚身份证识别 {@link MLIDCardOCRRequest} {@link MLIDCardOCRResponse} */
