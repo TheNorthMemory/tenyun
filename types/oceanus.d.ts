@@ -1694,6 +1694,52 @@ declare interface CreateJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateMetaDatabaseRequest {
+  /** 无 */
+  CatalogId: number;
+  /** 库名 */
+  DatabaseName: string;
+  /** 备注 */
+  Comment?: string;
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+}
+
+declare interface CreateMetaDatabaseResponse {
+  /** 无 */
+  DatabaseId: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateMetaTableRequest {
+  /** Catalog Id */
+  CatalogId: number;
+  /** 库Id */
+  DatabaseId: number;
+  /** 建表语句参数格式：需要base64加密 */
+  SqlCode: string;
+  /** 备注 */
+  Comment?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 引用资源 */
+  ResourceRefs?: ResourceRef[];
+  /** Flink版本 */
+  FlinkVersion?: string;
+  /** 工作空间 SerialId */
+  WorkSpaceId?: string;
+  /** 异步id */
+  AsyncTaskId?: string;
+}
+
+declare interface CreateMetaTableResponse {
+  /** 表Id */
+  TableId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateOceanusClusterRequest {
   /** 集群名称入参限制：支持1-50个英文、汉字、数字、连接线-或下划线_ */
   ClusterName: string;
@@ -2462,6 +2508,26 @@ declare interface ModifyJobResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMetaTableRequest {
+  /** 集群唯一id */
+  ClusterId: string;
+  /** 元数据表唯一id */
+  TableId: string;
+  /** SQL参数格式：base64加密 */
+  SqlCode: string;
+  /** Flink版本 */
+  FlinkVersion: string;
+  /** 空间唯一id */
+  WorkSpaceId: string;
+  /** 备注 */
+  Remark: string;
+}
+
+declare interface ModifyMetaTableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWorkSpaceRequest {
   /** 工作空间 SerialId */
   WorkSpaceId: string;
@@ -2521,7 +2587,7 @@ declare interface RunJobsResponse {
 declare interface RunSqlGatewayStatementRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 需要执行的sql，该sql会被Sql Gateway执行，当前支持的是paimon修改需求，因此主要是DDL语句 */
+  /** 需要执行的sql，需要对其进行base64编译后传入 */
   Sql: string;
   /** Sql Gateway会话ID，可不填，如果不填则会自动创建一个会话ID，每个会话ID都有一个存活时间，测试环境为10分钟，线上默认是30分钟 */
   SessionId?: string;
@@ -2605,6 +2671,10 @@ declare interface Oceanus {
   CreateJob(data: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
   /** 创建作业配置 {@link CreateJobConfigRequest} {@link CreateJobConfigResponse} */
   CreateJobConfig(data: CreateJobConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobConfigResponse>;
+  /** 创建元数据库 {@link CreateMetaDatabaseRequest} {@link CreateMetaDatabaseResponse} */
+  CreateMetaDatabase(data: CreateMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaDatabaseResponse>;
+  /** 创建元数据表 {@link CreateMetaTableRequest} {@link CreateMetaTableResponse} */
+  CreateMetaTable(data: CreateMetaTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaTableResponse>;
   /** 创建Oceanus集群 {@link CreateOceanusClusterRequest} {@link CreateOceanusClusterResponse} */
   CreateOceanusCluster(data: CreateOceanusClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOceanusClusterResponse>;
   /** 创建资源接口 {@link CreateResourceRequest} {@link CreateResourceResponse} */
@@ -2675,6 +2745,8 @@ declare interface Oceanus {
   ModifyFolder(data?: ModifyFolderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyFolderResponse>;
   /** 更新作业 {@link ModifyJobRequest} {@link ModifyJobResponse} */
   ModifyJob(data: ModifyJobRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobResponse>;
+  /** 元数据表编辑 {@link ModifyMetaTableRequest} {@link ModifyMetaTableResponse} */
+  ModifyMetaTable(data: ModifyMetaTableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMetaTableResponse>;
   /** 修改工作空间 {@link ModifyWorkSpaceRequest} {@link ModifyWorkSpaceResponse} */
   ModifyWorkSpace(data: ModifyWorkSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkSpaceResponse>;
   /** 解析用户自定义Connector {@link ParseConnectorRequest} {@link ParseConnectorResponse} */

@@ -20,6 +20,8 @@ declare interface AssessDeviceRiskRsp {
   Score?: DataScore;
   /** 设备基础信息 */
   Device?: Device;
+  /** IP环境基础信息 */
+  Environment?: Environment | null;
 }
 
 /** 环境风险评估返回结果 */
@@ -44,6 +46,8 @@ declare interface DataScore {
 declare interface Decision {
   /** 决策结果pass：通过review：复审reject：拒绝 */
   DecisionResult?: string;
+  /** 命中策略后的决策动作，可在控制台配置 */
+  Disposition?: string | null;
 }
 
 /** 设备基础信息 */
