@@ -204,6 +204,16 @@ declare interface GatewayInfo {
   Status?: number;
   /** 网关实例数 */
   InstanceSize?: number;
+  /** 网关内网IP。 */
+  GatewayIp?: string;
+  /** 用户名。 */
+  Username?: string;
+  /** 网关接入token。 */
+  Token?: string;
+  /** 网关注册URL。 */
+  RegisterCenterUrl?: string;
+  /** 网关上报URL。 */
+  TelemetryUrl?: string;
 }
 
 /** 分组的基本信息 */

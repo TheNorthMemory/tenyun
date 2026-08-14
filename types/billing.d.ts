@@ -3770,13 +3770,13 @@ declare interface DescribeCostDetailRequest {
   Limit: number;
   /** 偏移量 */
   Offset: number;
-  /** 周期开始时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。 */
+  /** 周期开始时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。 */
   BeginTime?: string;
-  /** 周期结束时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。 */
+  /** 周期结束时间，查询粒度为天级别，需传入时分秒参数，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为同一月份，暂不支持跨月拉取。可拉取的数据是开通消耗账单后，且距今 18 个月内的数据。 */
   EndTime?: string;
   /** 是否需要访问列表的总记录数，用于前端分页1-表示需要， 0-表示不需要 */
   NeedRecordNum?: number;
-  /** 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。不能早于开通消耗账单的月份，最多可拉取18个月内的数据。 */
+  /** 月份，格式为yyyy-mm，Month和BeginTime&amp;EndTime必传一个，如果有传BeginTime&amp;EndTime则Month字段无效。不能早于开通消耗账单的月份，最多可拉取18个月内的数据。 */
   Month?: string;
   /** 查询指定产品信息 */
   ProductCode?: string;
@@ -3784,6 +3784,12 @@ declare interface DescribeCostDetailRequest {
   PayMode?: string;
   /** 查询指定资源信息 */
   ResourceId?: string;
+  /** 产品名称代码 */
+  BusinessCode?: string;
+  /** 项目ID:资源所属项目ID */
+  ProjectId?: string;
+  /** 地域ID */
+  RegionId?: string;
 }
 
 declare interface DescribeCostDetailResponse {
@@ -3936,6 +3942,10 @@ declare interface DescribeCostSummaryByResourceRequest {
   NeedConditionValue?: number;
   /** 过滤条件，只支持ResourceKeyword(资源关键字，支持资源id及资源名称模糊查询)，ProjectIds（项目id），RegionIds(地域id)，PayModes(付费模式，可选prePay和postPay)，HideFreeCost（是否隐藏0元流水，可选0和1），OrderByCost（按费用排序规则，可选desc和asc） */
   Conditions?: Conditions;
+  /** 分账标签键，用户自定义 */
+  TagKey?: string;
+  /** 分账标签值，该参数为空表示该标签键下未设置标签值的记录 */
+  TagValue?: string;
 }
 
 declare interface DescribeCostSummaryByResourceResponse {

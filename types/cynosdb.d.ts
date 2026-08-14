@@ -862,7 +862,7 @@ declare interface CynosdbClusterDetail {
   ClusterName?: string;
   /** 地域 */
   Region?: string;
-  /** 可用区 */
+  /** 集群主可用区 */
   Zone?: string;
   /** 物理可用区 */
   PhysicalZone?: string;
@@ -922,7 +922,7 @@ declare interface CynosdbClusterDetail {
   IsFreeze?: string;
   /** 任务列表 */
   Tasks?: ObjectTask[];
-  /** 主可用区 */
+  /** 读写实例当前所在可用区 */
   MasterZone?: string;
   /** 从可用区列表 */
   SlaveZones?: string[];
@@ -972,6 +972,8 @@ declare interface CynosdbClusterDetail {
   ClusterLevel?: string;
   /** 是否开启透明加密 */
   IsOpenTDE?: boolean;
+  /** 实例当前所在可用区 */
+  RealZone?: string;
 }
 
 /** 实例错误日志返回类型 */
@@ -1002,7 +1004,7 @@ declare interface CynosdbInstance {
   ProjectId?: number;
   /** 地域 */
   Region?: string;
-  /** 可用区 */
+  /** 集群主可用区 */
   Zone?: string;
   /** 实例状态 */
   Status?: string;
@@ -1082,7 +1084,7 @@ declare interface CynosdbInstance {
   IsFreeze?: string;
   /** 资源标签 */
   ResourceTags?: Tag[] | null;
-  /** 主可用区 */
+  /** 读写实例当前所在可用区 */
   MasterZone?: string;
   /** 备可用区 */
   SlaveZones?: string[] | null;
@@ -1104,6 +1106,8 @@ declare interface CynosdbInstance {
   NodeList?: string[];
   /** 全球数据库唯一标识 */
   GdnId?: string;
+  /** 实例当前所在可用区 */
+  RealZone?: string;
 }
 
 /** 实例详情 */

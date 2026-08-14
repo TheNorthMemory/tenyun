@@ -1302,7 +1302,7 @@ declare interface ModelKeyInfoItem {
   ServiceProviderId?: string;
   /** 服务提供商自定义名称 */
   ServiceProviderName?: string | null;
-  /** 模型状态枚举值：Active： 运行中Provisioning： 创建中Configuring： 变配中Deleting： 删除中ProvisionFailed： 创建失败ConfigureFailed： 变配失败DeletionFailed： 删除失败Disabled： 已禁用 */
+  /** 模型状态枚举值：Active： 运行中Provisioning： 创建中Configuring： 变配中 */
   Status?: string;
   /** 子网 ID */
   SubnetId?: string | null;
@@ -1312,6 +1312,8 @@ declare interface ModelKeyInfoItem {
   VerifySSL?: boolean;
   /** VPC 实例 ID */
   VpcId?: string | null;
+  /** 健康检查配置 */
+  HealthCheckConfig?: ServiceProviderHealthCheckConfigOutput;
 }
 
 /** 按模型标识聚合的信息 */
@@ -1960,6 +1962,18 @@ declare interface ServiceProviderCoefficient {
   ServiceProviderId?: string;
   /** BYOK 实例（ServiceProvider）名称。 */
   ServiceProviderName?: string;
+}
+
+/** 健康检查配置 */
+declare interface ServiceProviderHealthCheckConfigInput {
+  /** 是否开启健康检查枚举值：true： 是false： 否 */
+  HealthCheckEnabled?: boolean;
+}
+
+/** 健康检查配置 */
+declare interface ServiceProviderHealthCheckConfigOutput {
+  /** 是否开启健康检查枚举值：true： 是false： 否 */
+  HealthCheckEnabled?: boolean;
 }
 
 /** 服务商详情 */
@@ -2853,6 +2867,8 @@ declare interface CreateModelRequest {
   Tags?: TagInfo[];
   /** 是否校验服务提供商的SSL证书 */
   VerifySSL?: boolean;
+  /** 健康检查配置 */
+  HealthCheckConfig?: ServiceProviderHealthCheckConfigInput;
 }
 
 declare interface CreateModelResponse {
@@ -3829,6 +3845,8 @@ declare interface DescribeModelNamesRequest {
   Limit?: number;
   /** 过滤PrivateCustom类型自建模型。如果传递了此参数，则只返回具有相同VPC Id的模型。 */
   VpcId?: string;
+  /** 过滤器，Name取值：ModelName：按照模型名称过滤。ServiceProviderId：按照BYOK ID过滤。InputModalitiesUnion：按照模态过滤。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeModelNamesResponse {

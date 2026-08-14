@@ -782,6 +782,18 @@ declare interface DeleteAggregateConfigRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAggregatorsRequest {
+  /** 账号组ID */
+  AccountGroupId: string;
+  /** 账号组创建者ID */
+  OwnerUin: number;
+}
+
+declare interface DeleteAggregatorsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAlarmPolicyRequest {
   /** 告警策略id */
   AlarmPolicyId: number;
@@ -1642,6 +1654,24 @@ declare interface UpdateAggregateConfigRuleResponse {
   RequestId?: string;
 }
 
+declare interface UpdateAggregatorRequest {
+  /** 账号组名称 */
+  Name: string;
+  /** 账号组描述 */
+  Description: string;
+  /** 账号组类型枚举值：RD： 全局账号组CUSTOM： 自定义账号组 */
+  AccountGroupId: string;
+  /** 账号组创建者ID */
+  OwnerUin: number;
+  /** 账号组成员信息列表，最多100个 */
+  AggregatorAccounts?: AggregatorAccount[];
+}
+
+declare interface UpdateAggregatorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAlarmPolicyRequest {
   /** 告警策略id */
   AlarmPolicyId: number;
@@ -1799,6 +1829,8 @@ declare interface Config {
   DeleteAggregateCompliancePack(data: DeleteAggregateCompliancePackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAggregateCompliancePackResponse>;
   /** 账号组删除规则 {@link DeleteAggregateConfigRuleRequest} {@link DeleteAggregateConfigRuleResponse} */
   DeleteAggregateConfigRule(data: DeleteAggregateConfigRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAggregateConfigRuleResponse>;
+  /** 删除账号组 {@link DeleteAggregatorsRequest} {@link DeleteAggregatorsResponse} */
+  DeleteAggregators(data: DeleteAggregatorsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAggregatorsResponse>;
   /** 删除告警 {@link DeleteAlarmPolicyRequest} {@link DeleteAlarmPolicyResponse} */
   DeleteAlarmPolicy(data: DeleteAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmPolicyResponse>;
   /** 删除合规包 {@link DeleteCompliancePackRequest} {@link DeleteCompliancePackResponse} */
@@ -1891,6 +1923,8 @@ declare interface Config {
   UpdateAggregateConfigDeliver(data: UpdateAggregateConfigDeliverRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAggregateConfigDeliverResponse>;
   /** 账号组编辑规则 {@link UpdateAggregateConfigRuleRequest} {@link UpdateAggregateConfigRuleResponse} */
   UpdateAggregateConfigRule(data: UpdateAggregateConfigRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAggregateConfigRuleResponse>;
+  /** 编辑账号组 {@link UpdateAggregatorRequest} {@link UpdateAggregatorResponse} */
+  UpdateAggregator(data: UpdateAggregatorRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAggregatorResponse>;
   /** 更新告警 {@link UpdateAlarmPolicyRequest} {@link UpdateAlarmPolicyResponse} */
   UpdateAlarmPolicy(data: UpdateAlarmPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAlarmPolicyResponse>;
   /** 编辑合规包 {@link UpdateCompliancePackRequest} {@link UpdateCompliancePackResponse} */

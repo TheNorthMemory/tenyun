@@ -1678,6 +1678,18 @@ declare interface DeleteDBInstanceNetworkAccessResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDatabaseRequest {
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
+  DBInstanceId: string;
+  /** 数据库名称 */
+  DatabaseName: string;
+}
+
+declare interface DeleteDatabaseResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLogBackupRequest {
   /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -3471,6 +3483,8 @@ declare interface Postgres {
   DeleteBaseBackup(data: DeleteBaseBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaseBackupResponse>;
   /** 删除实例网络 {@link DeleteDBInstanceNetworkAccessRequest} {@link DeleteDBInstanceNetworkAccessResponse} */
   DeleteDBInstanceNetworkAccess(data: DeleteDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBInstanceNetworkAccessResponse>;
+  /** 删除数据库 {@link DeleteDatabaseRequest} {@link DeleteDatabaseResponse} */
+  DeleteDatabase(data: DeleteDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDatabaseResponse>;
   /** 删除实例日志备份 {@link DeleteLogBackupRequest} {@link DeleteLogBackupResponse} */
   DeleteLogBackup(data: DeleteLogBackupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogBackupResponse>;
   /** 删除参数模板 {@link DeleteParameterTemplateRequest} {@link DeleteParameterTemplateResponse} */

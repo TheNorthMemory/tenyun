@@ -78,39 +78,39 @@ declare interface ChcHost {
   InstanceState?: string;
   /** 设备类型。 */
   DeviceType?: string;
-  /** 所属可用区 */
+  /** 所属可用区。 */
   Placement?: Placement;
   /** 带外网络。 */
   BmcVirtualPrivateCloud?: VirtualPrivateCloud;
-  /** 带外网络Ip。 */
+  /** 带外网络IP。 */
   BmcIp?: string;
-  /** 带外网络安全组Id。 */
+  /** 带外网络安全组ID。 */
   BmcSecurityGroupIds?: string[];
   /** 部署网络。 */
   DeployVirtualPrivateCloud?: VirtualPrivateCloud;
-  /** 部署网络Ip。 */
+  /** 部署网络IP。 */
   DeployIp?: string;
-  /** 部署网络安全组Id。 */
+  /** 部署网络安全组ID。 */
   DeploySecurityGroupIds?: string[];
-  /** 关联的云主机Id。 */
+  /** 关联的云主机ID。 */
   CvmInstanceId?: string;
   /** 服务器导入的时间。 */
   CreatedTime?: string;
-  /** 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量 */
+  /** 机型的硬件描述，分别为CPU核数，内存容量和磁盘容量。 */
   HardwareDescription?: string;
-  /** CHC物理服务器的CPU核数 */
+  /** CHC物理服务器的CPU核数。 */
   CPU?: number;
-  /** CHC物理服务器的内存大小，单位为GB */
+  /** CHC物理服务器的内存大小，单位为GB。 */
   Memory?: number;
-  /** CHC物理服务器的磁盘信息 */
+  /** CHC物理服务器的磁盘信息。 */
   Disk?: string;
-  /** 带外网络下分配的MAC地址 */
+  /** 带外网络下分配的MAC地址。 */
   BmcMAC?: string;
-  /** 部署网络下分配的MAC地址 */
+  /** 部署网络下分配的MAC地址。 */
   DeployMAC?: string;
-  /** 设备托管类型。HOSTING: 托管TENANT: 租赁 */
+  /** 设备托管类型。枚举值：HOSTING： 托管类型。TENANT： 租赁类型。 */
   TenantType?: string;
-  /** chc dhcp选项，用于minios调试。 */
+  /** CHC DHCP选项，用于客户自建PXE环境。 */
   DeployExtraConfig?: ChcDeployExtraConfig;
   /** GPU型号。 */
   Gpu?: string;
@@ -124,7 +124,7 @@ declare interface ChcHost {
   ChcInstanceFamily?: string;
   /** CHC云主机机型簇名称。 */
   ChcInstanceFamilyName?: string;
-  /** 转售客户的AppId。 */
+  /** 转售客户的AppID。 */
   ResaleAppId?: string;
   /** 转售客户的账号ID。 */
   ResaleAccountId?: string;
@@ -132,16 +132,22 @@ declare interface ChcHost {
   SaleStatus?: string;
   /** CHC物理服务器关联的标签列表。 */
   Tags?: Tag[];
-  /** 最近操作 */
+  /** 最近操作。 */
   LatestOperation?: string;
-  /** 最近操作错误码 */
+  /** 最近操作错误码。 */
   LatestOperationErrorCode?: string;
-  /** 最近操作错误详情和建议项 */
+  /** 最近操作错误详情和建议项。 */
   LatestOperationErrorMsg?: string;
-  /** 最近操作名称 */
+  /** 最近操作名称。 */
   LatestOperationName?: string;
-  /** 最近操作状态 */
+  /** 最近操作状态。枚举值：SUCCESS： 成功。FAILED： 失败。 */
   LatestOperationState?: string;
+  /** 所在的CHC网关的ID，只有专属网关才会返回。 */
+  ChcGatewayId?: string;
+  /** 所属的CDC集群ID。 */
+  DedicatedClusterId?: string;
+  /** 业务网卡网络模式。枚举值：DEPLOY： 部署网络模式BUSINESS： 业务网络模式 */
+  NetworkMode?: string;
 }
 
 /** CHC物理服务器实例禁止操作的返回结构体 */
@@ -880,6 +886,24 @@ declare interface MetadataItem {
   Value: string;
 }
 
+/** 创建实例时的网卡配置信息，包含主网卡和辅助网卡的VPC、子网、IP分配等网络参数。此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+declare interface NetworkInterfaces {
+  /** 表示是主网卡还是辅助网卡。注意：枚举值要全部大写；NetworkInterfaces数组中必须要有PRIMARY，且PRIMARY只能存在一个，SECONDARY可以存在多个。枚举值：PRIMARY： 主网卡SECONDARY： 辅助网卡 */
+  InterfaceType: string;
+  /** 私有网络ID，形如vpc-xxx。有效的VpcId可通过登录控制台查询；也可以调用接口 DescribeVpcs ，从接口返回中的VpcId字段获取。若在创建子机时VpcId与SubnetId同时传入DEFAULT，则强制使用默认vpc网络。 */
+  VpcId: string;
+  /** 私有网络子网ID，形如subnet-xxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 DescribeSubnets ，从接口返回中的SubnetId字段获取。若在创建子机时SubnetId与VpcId同时传入DEFAULT，则强制使用默认vpc网络。 */
+  SubnetId: string;
+  /** 此字段是必填字段，表示每张网卡自动分配私有网卡IP个数。注意：不允许客户同时指定ip且动态分配ip。取值范围：[1, 50] */
+  PrivateIpv4AddressCount: number;
+  /** 指定存量的网卡ID用于绑定。只对辅助网卡生效，主网卡的生成采用既有流程。注：客户手动指定已有弹性网卡时，相关接口InstanceCount必须为1。主网卡不支持指定。 */
+  NetworkInterfaceId?: string;
+  /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的 SecurityGroupId 字段来获取。若不指定该参数，则绑定指定项目下的默认安全组，如默认安全组不存在则将自动创建。每个用户在每个地域每个项目下最多可设置50个安全组。 */
+  SecurityGroupIds?: string[];
+  /** 是否随CVM删除绑定的弹性网卡，参数只对辅助网卡生效。默认保留辅助网卡兼容当前线上行为。该参数放置在主网卡上不生效，主网卡会随着CVM一同销毁。默认值：false */
+  DeleteWithInstance?: boolean;
+}
+
 /** 描述了单台实例操作次数限制 */
 declare interface OperationCountLimit {
   /** 实例操作。取值范围：`INSTANCE_DEGRADE`：降配操作`INTERNET_CHARGE_TYPE_CHANGE`：修改网络带宽计费模式 */
@@ -1495,6 +1519,8 @@ declare interface CreateLaunchTemplateRequest {
   Metadata?: Metadata;
   /** 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3]注：内测中。 */
   TemplateDataModifyAction?: string;
+  /** 多网卡参数信息。 此功能仅部分地区灰度开放，如需使用请提交工单咨询 */
+  NetworkInterfaces?: NetworkInterfaces[];
 }
 
 declare interface CreateLaunchTemplateResponse {
@@ -1567,6 +1593,8 @@ declare interface CreateLaunchTemplateVersionRequest {
   Metadata?: Metadata;
   /** 只允许传递 Update 和 Replace 参数，在模板使用自定义 Metadata 且在 RunInstances 也传递 Metadata 时生效。默认采用 Replace。Update：设模板 t含本参数值为Update、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k1:v1, k2:v3] Replace：模板 t含本参数值为Replace、 metadata=[k1:v1, k2:v2] ，则RunInstances（给metadata=[k2:v3]）+ t 创建的 cvm 使用metadata=[k2:v3]注：内测中。 */
   TemplateDataModifyAction?: string;
+  /** 多网卡参数信息。 此功能仅部分地区灰度开放，如需使用请提交工单咨询 */
+  NetworkInterfaces?: NetworkInterfaces[];
 }
 
 declare interface CreateLaunchTemplateVersionResponse {
@@ -2545,6 +2573,8 @@ declare interface InquiryPriceRunInstancesRequest {
   CpuTopology?: CpuTopology;
   /** 实例启动模板。 */
   LaunchTemplate?: LaunchTemplate;
+  /** 多网卡参数信息。 此功能仅部分地区灰度开放，如需使用请提交工单咨询 */
+  NetworkInterfaces?: NetworkInterfaces[];
 }
 
 declare interface InquiryPriceRunInstancesResponse {
@@ -3100,6 +3130,8 @@ declare interface RunInstancesRequest {
   DisableApiTermination?: boolean;
   /** 实例是否开启巨型帧，取值范围：<li/> true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。<li/>false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。 支持巨型帧的实例规格： 实例规格 */
   EnableJumboFrame?: boolean;
+  /** 多网卡参数信息。 此功能仅部分地区灰度开放，如需使用请提交工单咨询 */
+  NetworkInterfaces?: NetworkInterfaces[];
 }
 
 declare interface RunInstancesResponse {

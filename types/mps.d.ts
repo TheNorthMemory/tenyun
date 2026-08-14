@@ -1872,6 +1872,34 @@ declare interface AigcStoreCosParam {
   CosBucketPath?: string;
 }
 
+/** Aigc任务详细信息 */
+declare interface AigcTaskListItem {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务类型枚举值：VideoRedraw： 转绘任务AIDrama： AI漫剧任务 */
+  TaskType?: string;
+  /** 任务状态枚举值：PENDING： 任务等待调度RUNNING： 任务运行中FINISHED： 任务执行成功STOP： 任务被中止FAILED： 任务失败TIMEOUT： 任务超时 */
+  TaskStatus?: string;
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务开始调度时间 */
+  ScheduledTime?: string;
+  /** 任务结束时间 */
+  FinishedTime?: string;
+  /** 任务结果Url */
+  Urls?: string[];
+  /** 任务执行错误码 */
+  TaskResultCode?: number;
+  /** 任务执行错误信息 */
+  TaskResultMsg?: string;
+  /** 输出视频的分辨率 */
+  Resolution?: string | null;
+  /** 输出视频的宽高比 */
+  Ratio?: string | null;
+  /** 任务请求包 */
+  RequestBody?: string | null;
+}
+
 /** 用于AIGC创作视频时用到的扩展参数信息。 */
 declare interface AigcVideoExtraParam {
   /** 生成视频的分辨率，分辨率与选择模型及设置的视频时长相关。 不同模型支持的分辨率选项:Kling 720P(默认)，1080P。Kling 3.0、Kling 3.0-Omni 支持 4K。Hailuo 768P(默认)，1080P。Vidu 540P，720P(默认)，1080P。PixVerse 540P，720P(默认)，1080P。H2 720P，1080P(默认)。注意：除模型可支持的分辨率外，还可以生成 2K、4K分辨率。 */
@@ -3566,7 +3594,7 @@ declare interface FailOverOption {
 
 /** 商品裂变任务信息 */
 declare interface FissionTaskInfo {
-  /** 视频输出时长取值范围：[1, 15]单位：秒默认值：15 */
+  /** 视频输出时长取值范围：[4, 15]单位：秒默认值：15 */
   Duration?: number;
   /** 模型档位枚举值：standard： 标准版flagship： 旗舰版 */
   ModelTier?: string;
@@ -3576,7 +3604,7 @@ declare interface FissionTaskInfo {
   Resolution?: string;
   /** 目标市场枚举值：north_america： 北美europe： 欧洲china： 中国japan： 日本korea： 韩国southeast_asia： 东南亚brazil： 巴西global： 全球other： 其他影响默认出镜模特族裔与本地化风格；未指定 CustomModel 时按市场自动决定人种 */
   Market?: string;
-  /** 口播/字幕语言枚举值：english： 英文chinese： 中文japanese： 日语korean： 汉语spanish： 西班牙语portuguese： 葡萄牙语music_only： 纯音乐无口播 */
+  /** 口播/字幕语言枚举值：english： 英文chinese： 中文japanese： 日语korean： 韩语spanish： 西班牙语portuguese： 葡萄牙语music_only： 纯音乐无口播 */
   Language?: string;
   /** 视频类型枚举值：ugc： UGC种草talk： 产品口播display： 产品展示（纯商品、无人声）unboxing： 开箱分享reaction： 反应展示 */
   VideoType?: string;
@@ -4126,6 +4154,8 @@ declare interface ImageTaskInput {
   AiExpansionConfig?: AiExpansionConfig;
   /** Ai分镜拆解配置 */
   AiStoryboardConfig?: AiStoryboardConfig;
+  /** 图片理解配置 */
+  UnderstandImageConfig?: UnderstandImageConfig;
 }
 
 /** 图片基础转换能力 */
@@ -6012,6 +6042,20 @@ declare interface QualityControlTemplate {
   Strategy?: QualityControlStrategy;
 }
 
+/** 查询AIGC任务列表过滤条件 */
+declare interface QueryTaskFilter {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务类型 */
+  TaskType?: string;
+  /** 任务状态 */
+  TaskStatus?: string;
+  /** 分辨率 */
+  Resolution?: string;
+  /** 宽高比 */
+  Ratio?: string;
+}
+
 /** RTMP转推的目标地址信息。 */
 declare interface RTMPAddressDestination {
   /** 转推RTMP的目标Url，格式如'rtmp://domain/live'。 */
@@ -7860,6 +7904,14 @@ declare interface UnattachSecurityGroupInOutInfo {
   FlowRegion: string;
 }
 
+/** 图片理解任务。 */
+declare interface UnderstandImageConfig {
+  /** 图片理解模型枚举值：WAND-understand-1.0-lite： 轻量理解模型WAND-understand-1.0-flash： 质量-速度平衡理解模型WAND-understand-1.0-pro： 高质量理解模型 */
+  Model: string;
+  /** 图片理解指令 */
+  Prompt: string;
+}
+
 /** 智能擦除模板隐私保护配置 */
 declare interface UpdateSmartErasePrivacyConfig {
   /** 隐私保护擦除方式。- blur 模糊- mosaic 马赛克 */
@@ -8320,6 +8372,8 @@ declare interface VoiceInfo {
   Labels?: string[];
   /** 推荐场景如：教育 */
   Scenes?: string[];
+  /** 音色所属引擎 */
+  Engine?: string;
 }
 
 /** 音色属性 */
@@ -10062,6 +10116,28 @@ declare interface DescribeAigcImageTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAigcTaskListRequest {
+  /** 开始查询页 */
+  PageNum?: number;
+  /** 当前页要获取多少数据 */
+  PageSize?: number;
+  /** 查询过滤条件 */
+  QueryTaskFilter?: QueryTaskFilter;
+}
+
+declare interface DescribeAigcTaskListResponse {
+  /** 当前任务待返回总数 */
+  Total?: number;
+  /** 开始查询页 */
+  PageNum?: number;
+  /** 当前页要获取数据条目数 */
+  PageSize?: number;
+  /** 任务详情数据 */
+  Tasks?: AigcTaskListItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAigcTaskStatusRequest {
   /** 任务ID */
   TaskId: string;
@@ -10264,7 +10340,7 @@ declare interface DescribeBlindWatermarkTemplatesResponse {
 
 declare interface DescribeCloneViralTaskRequest {
   /** 创建爆款复刻任务返回的任务ID */
-  TaskId?: string;
+  TaskId: string;
 }
 
 declare interface DescribeCloneViralTaskResponse {
@@ -13013,6 +13089,8 @@ declare interface Mps {
   DescribeAigcAudioTask(data: DescribeAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcAudioTaskResponse>;
   /** 查询AIGC生图片任务 {@link DescribeAigcImageTaskRequest} {@link DescribeAigcImageTaskResponse} */
   DescribeAigcImageTask(data: DescribeAigcImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcImageTaskResponse>;
+  /** 查询AIGC任务列表详情 {@link DescribeAigcTaskListRequest} {@link DescribeAigcTaskListResponse} */
+  DescribeAigcTaskList(data?: DescribeAigcTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcTaskListResponse>;
   /** 查询AIGC场景任务接口 {@link DescribeAigcTaskStatusRequest} {@link DescribeAigcTaskStatusResponse} */
   DescribeAigcTaskStatus(data: DescribeAigcTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcTaskStatusResponse>;
   /** 查询AIGC生视频任务 {@link DescribeAigcVideoTaskRequest} {@link DescribeAigcVideoTaskResponse} */
@@ -13028,7 +13106,7 @@ declare interface Mps {
   /** 获取数字水印模板列表 {@link DescribeBlindWatermarkTemplatesRequest} {@link DescribeBlindWatermarkTemplatesResponse} */
   DescribeBlindWatermarkTemplates(data?: DescribeBlindWatermarkTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBlindWatermarkTemplatesResponse>;
   /** 查询爆款复刻任务结果 {@link DescribeCloneViralTaskRequest} {@link DescribeCloneViralTaskResponse} */
-  DescribeCloneViralTask(data?: DescribeCloneViralTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneViralTaskResponse>;
+  DescribeCloneViralTask(data: DescribeCloneViralTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloneViralTaskResponse>;
   /** 获取智能审核模板列表 {@link DescribeContentReviewTemplatesRequest} {@link DescribeContentReviewTemplatesResponse} */
   DescribeContentReviewTemplates(data?: DescribeContentReviewTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentReviewTemplatesResponse>;
   /** 查询音色设计任务结果 {@link DescribeDesignTaskRequest} {@link DescribeDesignTaskResponse} */

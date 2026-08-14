@@ -5527,13 +5527,13 @@ declare interface ModifyCloudNativeAPIGatewayRouteRequest {
   RouteID: string;
   /** 路由的名字，实例级别唯一，可以不提供 */
   RouteName?: string;
-  /** 路由的方法，其中方法可选值：- GET- POST- DELETE- PUT- OPTIONS- PATCH- HEAD- ANY- TRACE- COPY- MOVE- PROPFIND- PROPPATCH- MKCOL- LOCK- UNLOCK */
+  /** 路由的方法，其中方法可选值：GETPOSTDELETEPUTOPTIONSPATCHHEADANYTRACECOPYMOVEPROPFINDPROPPATCHMKCOLLOCKUNLOCK */
   Methods?: string[];
   /** 路由的域名 */
   Hosts?: string[];
   /** 路由的路径 */
   Paths?: string[];
-  /** 路由的协议，可选- https- http */
+  /** 路由的协议，可选httpshttp */
   Protocols?: string[];
   /** 转发到后端时是否保留Host */
   PreserveHost?: boolean;

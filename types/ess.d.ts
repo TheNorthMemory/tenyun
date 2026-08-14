@@ -548,17 +548,17 @@ declare interface CreateFlowOption {
   CustomCreateFlowDescription?: string;
   /** 禁止添加签署方，若为true则在发起流程的可嵌入页面隐藏“添加签署人按钮” */
   ForbidAddApprover?: boolean;
-  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 禁止编辑签署人注意：如果设置参数为 true， 则 参数签署人 [FlowApproverList](https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow) 不能为空 */
+  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 禁止编辑签署人注意：如果设置参数为 true， 则 参数签署人 FlowApproverList 不能为空 */
   ForbidEditApprover?: boolean;
   /** 禁止设置签署流程属性 (顺序、合同签署认证方式等)，若为true则在发起流程的可嵌入页面隐藏签署流程设置面板 */
   ForbidEditFlowProperties?: boolean;
-  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注: 空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注:空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
   HideComponentTypes?: string[];
-  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注: 空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注:空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
   ShowComponentTypes?: string[];
   /** 发起流程的可嵌入页面结果页配置 */
   ResultPageConfig?: CreateResultPageConfig[];
-  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
   /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
   ForbidEditWatermark?: boolean;
@@ -576,6 +576,8 @@ declare interface CreateFlowOption {
   SignAfterStart?: boolean;
   /** 发起过程中是否保存草稿 */
   NeedFlowDraft?: boolean;
+  /** 若指定了合同抄送人，此参数用来控制操作人能否在嵌入式页面看见或编辑（修改、增加、删除）抄送人信息。枚举值：0： 不可见不可编辑1： 可见不可编辑2： 可见可编辑默认值：0 */
+  CcInfoVisibility?: number;
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */
@@ -3855,6 +3857,8 @@ declare interface CreatePartnerAutoSignAuthUrlRequest {
   SealTypes?: string[];
   /** 在处理授权关系时，授权的方向false（默认值）：表示我方授权他方。在这种情况下，AuthorizedOrganizationName 代表的是【被授权方】的企业名称，即接收授权的企业。true：表示他方授权我方。在这种情况下，AuthorizedOrganizationName 代表的是【授权方】的企业名称，即提供授权的企业。 */
   AuthToMe?: boolean;
+  /** 限制授权方式枚举值：0： 默认，授权页面展示全部授权方式1： 仅按印章类型授权2： 仅按印章id授权 */
+  LimitAuthType?: number;
 }
 
 declare interface CreatePartnerAutoSignAuthUrlResponse {
@@ -5727,6 +5731,8 @@ declare interface ModifyPartnerAutoSignAuthUrlRequest {
   AuthToMe?: boolean;
   /** 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。枚举值：OFFICIAL： 企业公章，用于代表企业对外的正式文件和重要事务的认证CONTRACT： 合同专用章，专门用于签署各类合同。FINANCE： 财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证PERSONNEL： 人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。OTHER： 其他类型印章，包含子类型 */
   SealTypes?: string[];
+  /** 限制授权方式枚举值：0： 默认，授权页面展示全部授权方式 1： 仅按印章类型授权2： 仅按印章id授权 */
+  LimitAuthType?: number;
 }
 
 declare interface ModifyPartnerAutoSignAuthUrlResponse {
@@ -5905,7 +5911,7 @@ declare interface UpdateIntegrationEmployeesResponse {
 }
 
 declare interface UploadFilesRequest {
-  /** 文件对应业务类型,可以选择的类型如下 TEMPLATE : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 DOCUMENT : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 SEAL : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ARCHIVE : 此文件用于归档文件夹，文件类型支持.pdf/.zip格式 ["yDRSRUUgygj6rq2wUuO4zjEyBZ2NHiyT"]枚举值：TEMPLATE： 此上传的文件用户生成合同模板DOCUMENT： 此文件用来发起合同流程SEAL： 此文件用于印章的生成ARCHIVE： 此文件用于归档文件夹 */
+  /** 文件对应业务类型,可以选择的类型如下枚举值：TEMPLATE： 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用DOCUMENT： 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可SEAL： 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.pngARCHIVE： 此文件用于归档文件夹，文件类型支持.pdf/.zip格式BUSINESSLICENSE： 此文件用于上传营业执照，用于后续创建企业认证链接认证企业的时候提供营业执照，文件类型支持.jpg/.jpeg/.png，限制8M以内 */
   BusinessType: string;
   /** 执行本接口操作的员工信息。其中OperatorId为必填字段，即用户的UserId。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Caller?: Caller;
@@ -5921,7 +5927,7 @@ declare interface UploadFilesRequest {
   FileUrls?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 文件过期时间的时间戳取值范围：[1782835200, 4102329600]单位：秒设置上传文件的过期时间，此功能为付费能力，请联系电子签运营人员开通 */
+  /** 文件的截止有效期，最长有效期是当前时间后的一年。如果超过截止有效期则文件会失效。此功能是白名单功能，如需使用，请联系电子签开通如果没有传入，则默认过期时间是上传时间加1小时 */
   Deadline?: number;
 }
 

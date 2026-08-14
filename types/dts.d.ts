@@ -74,13 +74,13 @@ declare interface CompareAbstractInfo {
   NearlyTableCount?: number;
   /** 不一致的数据行数量 */
   DifferentRows?: number;
-  /** 源库行数，当对比类型为**行数对比**时此项有意义 */
+  /** 源库行数，当对比类型为行数对比时此项有意义 */
   SrcSampleRows?: number;
-  /** 目标库行数，当对比类型为**行数对比**时此项有意义 */
+  /** 目标库行数，当对比类型为行数对比时此项有意义 */
   DstSampleRows?: number;
-  /** 开始时间 */
+  /** 开始时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartedAt?: string;
-  /** 结束时间 */
+  /** 结束时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   FinishedAt?: string;
 }
 
@@ -196,11 +196,11 @@ declare interface CompareTableResult {
   Progress?: number;
   /** 不一致行数 */
   RowCount?: number;
-  /** 该表开始校验的时间 */
+  /** 该表开始校验的时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartedAt?: string;
-  /** 该表校验结束的时间 */
+  /** 该表校验结束的时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   FinishedAt?: string;
-  /** 预计该表校验结束的时间 */
+  /** 预计该表校验结束的时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   ExpectedAt?: string;
   /** 源端行数，如果是行数校验此值有意义 */
   SrcItem?: string;
@@ -234,11 +234,11 @@ declare interface CompareTaskItem {
   CompareProcess?: ProcessProgress;
   /** 对比结果, 可能的值：same - 一致；different - 不一致；skipAll - 跳过 */
   Conclusion?: string;
-  /** 任务创建时间 */
+  /** 任务创建时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   CreatedAt?: string;
-  /** 任务启动时间 */
+  /** 任务启动时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartedAt?: string;
-  /** 对比结束时间 */
+  /** 对比结束时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   FinishedAt?: string;
   /** 对比类型，dataCheck(完整数据对比)、sampleDataCheck(抽样数据对比)、rowsCount(行数对比) */
   Method?: string;
@@ -502,7 +502,7 @@ declare interface DiffChunkItem {
   SrcItem?: string[] | null;
   /** 目标端数据 */
   DstItem?: string[] | null;
-  /** 完成时间 */
+  /** 完成时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   FinishedAt?: string | null;
 }
 
@@ -594,7 +594,7 @@ declare interface DifferenceItem {
   UpperBoundary?: string;
   /** 对比消耗时间,单位为 ms */
   CostTime?: number;
-  /** 完成时间 */
+  /** 完成时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   FinishedAt?: string;
 }
 
@@ -828,13 +828,13 @@ declare interface JobItem {
   JobId?: string;
   /** 数据迁移任务名称 */
   JobName?: string;
-  /** 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务创建(提交)时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   CreateTime?: string;
-  /** 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务更新时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   UpdateTime?: string;
-  /** 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务开始执行时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartTime?: string;
-  /** 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务执行结束时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   EndTime?: string;
   /** 迁移任务错误信息 */
   BriefMsg?: string;
@@ -842,7 +842,7 @@ declare interface JobItem {
   Status?: string;
   /** 任务运行模式，值包括：immediate(立即运行)，timed(定时运行) */
   RunMode?: string;
-  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如：2022-07-11 16:20:49 */
+  /** 期待启动时间，当 RunMode 取值为 timed 时此值必填。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   ExpectRunTime?: string;
   /** 任务操作信息 */
   Action?: MigrateAction;
@@ -938,7 +938,7 @@ declare interface MigrateOption {
   IsOverrideRoot?: boolean;
   /** 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值) */
   IsDstReadOnly?: boolean;
-  /** 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数:["DstWriteMode":normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务 "IsDstReadOnly":true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) "ClientOutputBufferHardLimit":512, 从机缓冲区的硬性容量限制(MB) "ClientOutputBufferSoftLimit":512, 从机缓冲区的软性容量限制(MB) "ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) "ReplBacklogSize":512, 环形缓冲区容量限制(MB) "ReplTimeout":120， 复制超时时间(秒) "IsExpireKey":"true",过期key自动淘汰] */
+  /** 其他附加信息，对于特定库可设置额外参数。Redis可定义如下的参数:["DstWriteMode":normal, 目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务 "IsDstReadOnly":true, 是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) "ClientOutputBufferHardLimit":512, 从机缓冲区的硬性容量限制(MB) "ClientOutputBufferSoftLimit":512, 从机缓冲区的软性容量限制(MB) "ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) "ReplBacklogSize":512, 环形缓冲区容量限制(MB) "ReplTimeout":120， 复制超时时间(秒) "IsExpireKey":"true",过期key自动淘汰]Tidb可定义如下的参数["tidb_increment_enable":true, 增量迁移开关,可取值true(开启增量,平台从下列ticdc_kafka_字段提取用户自建Kafka配置)、false或不传(仅做结构+全量迁移,忽略所有ticdc_kafka_字段) ,严格匹配字符串true(不区分大小写)才算开启 "ticdc_kafka_broker":"1.1.1.1:9092", TiCDC输出的Kafka broker地址(用户自建Kafka,平台不负责创建/回收topic),增量开启时必填 "ticdc_kafka_topic":"tidb_topic", TiCDC输出的Kafka topic,增量开启时必填(连通性测试场景可不填) "ticdc_kafka_data_format":"open-protocol", 数据格式,可取值open-protocol(默认,不传时按此处理)、canal-json,其他值校验不通过 "ticdc_kafka_security_protocol":"PLAINTEXT", 传输层安全协议,可取值PLAINTEXT(默认,无认证,忽略下方认证字段)、SASL_PLAINTEXT、SASL_SSL,其他值校验不通过 "ticdc_kafka_sasl_mechanism":"SCRAM-SHA-256", SASL认证机制,可取值SCRAM-SHA-256、SCRAM-SHA-512,当security_protocol为SASL_PLAINTEXT/SASL_SSL时必填 "ticdc_kafka_username":"user", Kafka SASL用户名,当security_protocol为SASL_PLAINTEXT/SASL_SSL时必填 "ticdc_kafka_password":"password", Kafka SASL密码,当security_protocol为SASL_PLAINTEXT/SASL_SSL时必填(不做trim,允许首尾空格) "ticdc_kafka_ssl_ca_base64_content":"base64字符串", base64编码的CA证书内容,仅security_protocol=SASL_SSL时使用,可选(为空表示信任系统根证书)] */
   ExtraAttr?: KeyValuePairOption[];
   /** pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移) */
   MigrateWay?: string;
@@ -1220,9 +1220,9 @@ declare interface StepInfo {
   StepId?: string;
   /** 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停) */
   Status?: string;
-  /** 步骤开始时间，可能为空 */
+  /** 步骤开始时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartTime?: string;
-  /** 完成时间 */
+  /** 完成时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   FinishTime?: string;
   /** 错误信息 */
   Errors?: StepTip[] | null;
@@ -1398,7 +1398,7 @@ declare interface SyncJobInfo {
   PayMode?: string;
   /** 运行模式，Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
   RunMode?: string;
-  /** 期待运行时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 期待运行时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   ExpectRunTime?: string;
   /** 支持的所有操作 */
   AllActions?: string[];
@@ -1436,13 +1436,13 @@ declare interface SyncJobInfo {
   DstNodeType?: string;
   /** 目标端信息，若SrcNodeType=cluster，则源端信息在这个字段里，mongodb链路使用此参数透传。 */
   DstInfos?: SyncDBEndpointInfos;
-  /** 创建时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 创建时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   CreateTime?: string;
-  /** 开始时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 开始时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartTime?: string;
   /** 任务状态，UnInitialized(未初始化)、Initialized(已初始化)、Checking(校验中)、CheckPass(校验通过)、CheckNotPass(校验不通过)、ReadyRunning(准备运行)、Running(运行中)、Pausing(暂停中)、Paused(已暂停)、Stopping(停止中)、Stopped(已结束)、ResumableErr(任务错误)、Resuming(恢复中)、Failed(失败)、Released(已释放)、Resetting(重置中)、Unknown(未知) */
   Status?: string;
-  /** 结束时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 结束时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   EndTime?: string;
   /** 标签相关信息 */
   Tags?: TagItem[];
@@ -1546,11 +1546,11 @@ declare interface TradeInfo {
   InstanceClass?: string;
   /** 计费任务状态， normal(计费或待计费)、resizing(变配中)、reversing(冲正中，比较短暂的状态)、isolating(隔离中，比较短暂的状态)、isolated(已隔离)、offlining(下线中)、offlined(已下线)、notBilled(未计费) */
   TradeStatus?: string;
-  /** 到期时间，格式为"yyyy-mm-dd hh:mm:ss" */
+  /** 到期时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   ExpireTime?: string;
-  /** 下线时间，格式为"yyyy-mm-dd hh:mm:ss" */
+  /** 下线时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   OfflineTime?: string;
-  /** 隔离时间，格式为"yyyy-mm-dd hh:mm:ss" */
+  /** 隔离时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   IsolateTime?: string;
   /** 下线原因 */
   OfflineReason?: string;
@@ -1643,7 +1643,7 @@ declare interface ConfigureSyncJobRequest {
   JobMode?: string;
   /** 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行) */
   RunMode?: string;
-  /** 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05" */
+  /** 期待启动时间，当 RunMode 取值为 Timed 时此值必填。当 DateTimeISOFormat=true 时按 RFC 3339 传入（如 2026-04-23T20:21:35+08:00），否则按 yyyy-mm-dd hh:mm:ss（北京时间）传入 */
   ExpectRunTime?: string;
   /** 源端tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，SrcInfos中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。 */
   SrcConnectType?: string;
@@ -1659,7 +1659,7 @@ declare interface ConfigureSyncJobRequest {
   DstInfos?: SyncDBEndpointInfos;
   /** 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster */
   DstNodeType?: string;
-  /** 同步任务选项；该字段下的RateLimitOption暂时无法生效、如果需要修改限速、可通过ModifySyncRateLimit接口完成限速 */
+  /** 同步任务选项 */
   Options?: Options;
   /** 自动重试的时间段、可设置5至720分钟、0表示不重试 */
   AutoRetryTimeRangeMinutes?: number;
@@ -1999,7 +1999,7 @@ declare interface DescribeCompareReportResponse {
 }
 
 declare interface DescribeCompareTasksRequest {
-  /** 迁移任务 Id，可通过 [DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084) 接口获取。 */
+  /** 迁移任务 Id，可通过 DescribeMigrationJobs 接口获取。 */
   JobId: string;
   /** 分页设置，表示每页显示多少条任务，默认为 20 */
   Limit?: number;
@@ -2111,7 +2111,7 @@ declare interface DescribeMigrationCheckJobResponse {
 }
 
 declare interface DescribeMigrationDetailRequest {
-  /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
+  /** 数据迁移任务ID，可通过DescribeMigrationJobs接口获取。 */
   JobId: string;
 }
 
@@ -2120,13 +2120,13 @@ declare interface DescribeMigrationDetailResponse {
   JobId?: string;
   /** 数据迁移任务名称 */
   JobName?: string;
-  /** 任务创建(提交)时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务创建(提交)时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   CreateTime?: string;
-  /** 任务更新时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务更新时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   UpdateTime?: string;
-  /** 任务开始执行时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务开始执行时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   StartTime?: string;
-  /** 任务执行结束时间，格式为 yyyy-mm-dd hh:mm:ss */
+  /** 任务执行结束时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   EndTime?: string;
   /** 迁移任务简要错误信息 */
   BriefMsg?: string;
@@ -2146,7 +2146,7 @@ declare interface DescribeMigrationDetailResponse {
   Tags?: TagItem[];
   /** 运行模式，取值如：immediate(表示立即运行)、timed(表示定时运行) */
   RunMode?: string;
-  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05" */
+  /** 期待启动时间，当 RunMode 取值为 timed 时此值必填。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 yyyy-mm-dd hh:mm:ss（北京时间） */
   ExpectRunTime?: string;
   /** 迁移选项，描述任务如何执行迁移等一系列配置信息 */
   MigrateOption?: MigrateOption;
@@ -2229,9 +2229,9 @@ declare interface DescribeModifyCheckSyncJobResultResponse {
 }
 
 declare interface DescribeOffsetByTimeRequest {
-  /** 数据订阅实例的 ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
+  /** 数据订阅实例的 ID，可通过DescribeSubscribeJobs接口获取。 */
   SubscribeId: string;
-  /** 时间点，格式为：Y-m-d h:m:s。如果输入时间比当前时间晚的多，相当于查询最新offset；如果输入时间比当前时间早的多，相当于查询最老offset；如果输入空，默认0时间，等价于查询最老offset。 */
+  /** 时间。当 DateTimeISOFormat=true 时按 RFC 3339 传入（如 2026-04-23T20:21:35+08:00），否则按 Y-m-d h:m:s（北京时间）传入。如果输入时间比当前时间晚的多，相当于查询最新 offset；如果输入时间比当前时间早的多，相当于查询最老 offset；如果输入空，默认 0 时间，等价于查询最老 offset。参数格式：2026-04-23T20:21:35+08:00 */
   Time: string;
 }
 
@@ -2286,15 +2286,15 @@ declare interface DescribeSubscribeDetailResponse {
   Status?: string;
   /** 订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error */
   SubsStatus?: string;
-  /** 修改时间。 */
+  /** 修改时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 Y-m-d h:m:s（北京时间）。 */
   ModifyTime?: string;
-  /** 创建时间。 */
+  /** 创建时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 Y-m-d h:m:s（北京时间）。 */
   CreateTime?: string;
-  /** 隔离时间。 */
+  /** 隔离时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 Y-m-d h:m:s（北京时间）。 */
   IsolateTime?: string;
-  /** 包年包月任务的到期时间。 */
+  /** 包年包月任务的到期时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 Y-m-d h:m:s（北京时间）。 */
   ExpireTime?: string;
-  /** 下线时间。 */
+  /** 下线时间。当 DateTimeISOFormat=true 时返回 RFC 3339 格式（如 2026-04-23T20:21:35+08:00），否则返回 Y-m-d h:m:s（北京时间）。 */
   OfflineTime?: string;
   /** 付费方式，可能值为：0-包年包月，1-按量计费 */
   PayType?: number;
@@ -2499,7 +2499,7 @@ declare interface DescribeSyncGtidCompareReportResponse {
 }
 
 declare interface DescribeSyncJobsRequest {
-  /** 同步任务id，如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 同步任务id，如sync-werwfs23，可通过DescribeSyncJobs接口获取。 */
   JobId?: string;
   /** 同步任务id列表，如["sync-n3gh7md9"] */
   JobIds?: string[];
@@ -2733,7 +2733,7 @@ declare interface ModifyMigrationJobRequest {
   DstInfo: DBEndpointInfo;
   /** 迁移任务名称，最大长度128 */
   JobName?: string;
-  /** 期待启动时间，当RunMode取值为timed时，此值必填，形如："2006-01-02 15:04:05" */
+  /** 期待启动时间，当RunMode取值为timed时，此值必填。参数格式：当 DateTimeISOFormat=true 时按 RFC 3339 传入（如 2026-04-23T20:21:35+08:00），否则按 yyyy-mm-dd hh:mm:ss（北京时间）传入 */
   ExpectRunTime?: string;
   /** 标签信息 */
   Tags?: TagItem[];
@@ -2839,7 +2839,7 @@ declare interface ModifySyncJobConfigResponse {
 }
 
 declare interface ModifySyncRateLimitRequest {
-  /** 同步任务ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 同步任务ID，可通过DescribeSyncJobs接口获取。 */
   JobId: string;
   /** 同步任务全量导出线程数、有效值为 1-16 */
   DumpThread?: number;
@@ -2899,17 +2899,17 @@ declare interface RecoverSyncJobResponse {
 }
 
 declare interface ResetConsumerGroupOffsetRequest {
-  /** 订阅实例id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 订阅实例id，可通过DescribeSyncJobs接口获取。 */
   SubscribeId: string;
-  /** 订阅的kafka topic，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 订阅的kafka topic，可通过DescribeSyncJobs接口获取。 */
   TopicName: string;
-  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/api/571/102947)接口获取。 */
+  /** 消费组名称。实际的消费组全称形如：consumer-grp-#{SubscribeId}-#{ConsumerGroupName}。可通过DescribeConsumerGroups接口获取。 */
   ConsumerGroupName: string;
-  /** 需要修改offset的分区编号，可通过[DescribeOffsetByTime](https://cloud.tencent.com/document/api/571/102946)接口获取。 */
+  /** 需要修改offset的分区编号，可通过DescribeOffsetByTime接口获取。 */
   PartitionNos: number[];
   /** 重置方式。枚举值为 earliest-从最开始位置开始消费；latest-从最新位置开始消费；datetime-从指定时间前最近的checkpoint开始消费 */
   ResetMode: string;
-  /** 当 ResetMode 为 datetime 时，该项需要填，格式为：Y-m-d h:m:s。如果不填，默认用0时间，效果与earliest相同。 */
+  /** 当 ResetMode 为 datetime 时该项需要填。当 DateTimeISOFormat=true 时按 RFC 3339 传入（如 2026-04-23T20:21:35+08:00），否则按 Y-m-d h:m:s（北京时间）传入。如果不填，默认用 0 时间，效果与 earliest 相同。 参数格式：2026-04-23T20:21:35+08:00 */
   ResetDatetime?: string;
 }
 
@@ -2973,7 +2973,7 @@ declare interface ResumeSubscribeResponse {
 }
 
 declare interface ResumeSyncJobRequest {
-  /** 同步任务id，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 同步任务id，可通过DescribeSyncJobs接口获取。 */
   JobId: string;
 }
 

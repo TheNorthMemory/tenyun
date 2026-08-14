@@ -432,13 +432,13 @@ declare interface CcnInstance {
   InstanceId: string;
   /** 关联实例ID所属大区，例如：ap-guangzhou。 */
   InstanceRegion: string;
-  /** 关联实例类型，可选值：`VPC`：私有网络`DIRECTCONNECT`：专线网关`BMVPC`：黑石私有网络`VPNGW`：VPNGW类型 */
+  /** 关联实例类型，可选值：VPC：私有网络DIRECTCONNECT：专线网关BMVPC：黑石私有网络VPNGW：VPNGW类型 */
   InstanceType: string;
   /** 备注 */
   Description?: string;
   /** 实例关联的路由表ID。 */
   RouteTableId?: string;
-  /** 实例付费方式 */
+  /** 实例付费方式枚举值：PayByCcnOwner： CCN所在账号付费PayByInstanceOwner： 关联实例所在账号付费 */
   OrderType?: string;
 }
 

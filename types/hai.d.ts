@@ -410,11 +410,11 @@ declare interface ServiceDetail {
   DeploymentConfigs?: DeploymentConfig[];
   /** 服务超参数配置 */
   HyperParam?: HyperParam;
-  /**  */
+  /** 安全类型 */
   SecurityType?: string;
-  /**  */
+  /** 角色算力配置列表 */
   RoleComputeSet?: ComputeDetail[];
-  /**  */
+  /** 目标副本数 */
   TargetReplicas?: number;
   /** 计费类型：POSTPAID_BY_HOUR(按量)/PREPAID_BY_MONTH(包月) */
   ChargeType?: string;

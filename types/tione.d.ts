@@ -126,6 +126,8 @@ declare interface CFSConfig {
   MountType?: string | null;
   /** 协议 1: NFS, 2: TURBO */
   Protocol?: string | null;
+  /** 是否平台预置存储 */
+  IsPresetStorage?: boolean;
 }
 
 /** 配置CFSTurbo参数 */
@@ -1472,6 +1474,12 @@ declare interface PrivateLinkInfo {
   State?: string | null;
   /** grpc内网调用地址 */
   InnerGrpcAddr?: string[];
+  /** 创建者 UIN */
+  CreatedBy?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 子用户名称 */
+  SubUinName?: string;
 }
 
 /** 探针结构信息 */
@@ -1712,6 +1720,8 @@ declare interface ResourceSpec {
 declare interface ResourceSupplyAttribute {
   /** 资源供应类型。TIDE:潮汐;SPOT:竞价;空:常规按量后付费 */
   SupplyType?: string;
+  /** 集群类型枚举值：DEFAULT： 默认集群THIRD： 第三方集群默认值：DEFAULT */
+  ClusterType?: string;
 }
 
 /** 滚动更新策略 */
@@ -2380,7 +2390,7 @@ declare interface TrainingTaskDetail {
   ResourceGroupName?: string | null;
   /** 任务信息 */
   Message?: string | null;
-  /** 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
+  /** 任务状态枚举值：SUBMITTING： 排队中STARTING： 启动中RUNNING： 运行中STOPPING： 停止中STOPPED： 已停止FAILED： 异常SUCCEED： 已完成SUBMIT_FAILED： 提交失败 */
   Status?: string;
   /** 回调地址 */
   CallbackUrl?: string | null;
@@ -2414,7 +2424,7 @@ declare interface TrainingTaskSetItem {
   ResourceConfigInfos?: ResourceConfigInfo[];
   /** 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD */
   TrainingMode?: string | null;
-  /** 任务状态，eg：SUBMITTING提交中、PENDING排队中、STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成 */
+  /** 任务状态枚举值：SUBMITTING： 提交中PENDING： 排队中STARTING： 启动中RUNNING： 运行中STOPPING： 停止中STOPPED： 已停止FAILED： 异常SUCCEED： 已完成SUBMIT_FAILED： 提交失败 */
   Status?: string;
   /** 运行时长 */
   RuntimeInSeconds?: number | null;
@@ -2973,6 +2983,8 @@ declare interface CreateTrainingTaskRequest {
   TrainToolConfig?: TrainToolConfig;
   /** 资源供应属性 */
   ResourceSupplyAttribute?: ResourceSupplyAttribute;
+  /** 队列ID */
+  Queues?: string[];
 }
 
 declare interface CreateTrainingTaskResponse {
@@ -3311,6 +3323,8 @@ declare interface DescribeDataSourcesResponse {
 }
 
 declare interface DescribeDatasetsRequest {
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 数据集id列表 */
   DatasetIds?: string[];
   /** 数据集查询过滤条件，多个Filter之间的关系为逻辑与（AND）关系，过滤字段Filter.Name，类型为StringDatasetName，数据集名称DatasetScope，数据集范围，SCOPE_DATASET_PRIVATE或SCOPE_DATASET_PUBLIC */
@@ -3377,6 +3391,8 @@ declare interface DescribeEventsResponse {
 declare interface DescribeExportRequest {
   /** 日志下载任务的ID */
   ExportId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
 }
 
 declare interface DescribeExportResponse {

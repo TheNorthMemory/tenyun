@@ -140,6 +140,8 @@ declare interface AlarmNotice {
   NoticeRules?: NoticeRule[];
   /** 免登录操作告警开关。参数值： 1：关闭 2：开启（默认开启） */
   AlarmShieldStatus?: number;
+  /** 告警详情需要安全认证登录开关，未传时默认"关闭"枚举值：1： 关闭（默认值）2： 开启 */
+  SecureDetailStatus?: number;
   /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
   JumpDomain?: string;
   /** 投递相关信息。 */
@@ -154,7 +156,7 @@ declare interface AlarmNotice {
   DeliverFlag?: number;
   /** 通知渠道组配置的告警屏蔽统计状态数量信息。 */
   AlarmShieldCount?: AlarmShieldCount | null;
-  /** 统一设定自定义回调参数。- true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。- false:优先使用告警策略中单独配置的请求头及请求内容。 */
+  /** 统一设定自定义回调参数。true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。false:优先使用告警策略中单独配置的请求头及请求内容。 */
   CallbackPrioritize?: boolean;
 }
 
@@ -3047,10 +3049,10 @@ declare interface CommitConsumerOffsetsResponse {
 declare interface CreateAgentApplicationRequest {
   /** 应用名称入参限制：不能为空字符串不能包含字符|不能超过64字符 */
   ApplicationName: string;
-  /** 接入类型枚举值：Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool） */
+  /** 接入类型枚举值：Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool）Agent： 用户创建 Agent 应用时，系统按统一规范自动创建对应的 CLS 主题（Topic），并为主题打上统一标签，便于后续在 Agent 可观测场景下做统一管理与检索。 */
   AccessType: string;
   /** 日志集Id。通过 获取日志集列表获取日志集Id。 */
-  LogsetId: string;
+  LogsetId?: string;
 }
 
 declare interface CreateAgentApplicationResponse {
@@ -3069,7 +3071,7 @@ declare interface CreateAlarmNoticeRequest {
   Name: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持50个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
-  /** 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）需要发送通知的告警类型。可选值：- Trigger - 告警触发- Recovery - 告警恢复- All - 告警触发和告警恢复 */
+  /** 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）需要发送通知的告警类型。可选值：Trigger - 告警触发Recovery - 告警恢复All - 告警触发和告警恢复 */
   Type?: string;
   /** 【简易模式】（简易模式/告警模式二选一，分别配置相应参数）通知接收对象。 */
   NoticeReceivers?: NoticeReceiver[];
@@ -3079,13 +3081,15 @@ declare interface CreateAlarmNoticeRequest {
   NoticeRules?: NoticeRule[];
   /** 查询数据链接。http:// 或者 https:// 开头，不能/结尾 */
   JumpDomain?: string;
-  /** 投递日志开关。可取值如下：1：关闭（默认值）；2：开启 投递日志开关开启时， DeliverConfig参数必填。 */
+  /** 投递日志开关。可取值如下：1：关闭（默认值）；2：开启投递日志开关开启时， DeliverConfig参数必填。 */
   DeliverStatus?: number;
   /** 投递日志配置参数。当DeliverStatus开启时，必填。 */
   DeliverConfig?: DeliverConfig;
-  /** 免登录操作告警开关。可取值如下：- 1：关闭- 2：开启（默认值） */
+  /** 免登录操作告警开关。可取值如下：1：关闭2：开启（默认值） */
   AlarmShieldStatus?: number;
-  /** 统一设定自定义回调参数。- true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。- false:优先使用告警策略中单独配置的请求头及请求内容。 */
+  /** 告警详情安全认证跳转开关，未传时默认"关闭"枚举值：1： 关闭（默认值）2： 开启 */
+  SecureDetailStatus?: number;
+  /** 统一设定自定义回调参数。true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。false:优先使用告警策略中单独配置的请求头及请求内容。 */
   CallbackPrioritize?: boolean;
 }
 
@@ -5917,7 +5921,7 @@ declare interface ModifyAgentApplicationResponse {
 }
 
 declare interface ModifyAlarmNoticeRequest {
-  /** 通知渠道组ID。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/api/614/56462)获取通知渠道组ID */
+  /** 通知渠道组ID。-通过获取通知渠道组列表获取通知渠道组ID */
   AlarmNoticeId: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的通知渠道组。最大支持10个标签键值对，并且不能有重复的键值对。 */
   Tags?: Tag[];
@@ -5929,7 +5933,7 @@ declare interface ModifyAlarmNoticeRequest {
   NoticeReceivers?: NoticeReceiver[];
   /** 接口回调信息（包括企业微信等）。 */
   WebCallbacks?: WebCallback[];
-  /** 通知规则。注意: - Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。- 传其中一组数据，则另一组数据置空。 */
+  /** 通知规则。注意: Type、NoticeReceivers和WebCallbacks是一组配置，NoticeRules是另一组配置，2组配置互斥。传其中一组数据，则另一组数据置空。 */
   NoticeRules?: NoticeRule[];
   /** 调用链接域名。http:// 或者 https:// 开头，不能/结尾 */
   JumpDomain?: string;
@@ -5939,7 +5943,9 @@ declare interface ModifyAlarmNoticeRequest {
   DeliverConfig?: DeliverConfig;
   /** 免登录操作告警开关。参数值： 1：关闭 2：开启（默认开启） */
   AlarmShieldStatus?: number;
-  /** 统一设定自定义回调参数。- true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。- false:优先使用告警策略中单独配置的请求头及请求内容。 */
+  /** 告警详情安全认证跳转开关，未传时默认"关闭"枚举值：1： 关闭（默认值）2： 开启 */
+  SecureDetailStatus?: number;
+  /** 统一设定自定义回调参数。true: 使用通知内容模板中的自定义回调参数覆盖告警策略中单独配置的请求头及请求内容。false:优先使用告警策略中单独配置的请求头及请求内容。 */
   CallbackPrioritize?: boolean;
 }
 

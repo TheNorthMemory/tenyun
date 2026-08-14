@@ -272,6 +272,16 @@ declare interface AccessKeyUser {
   CloudType?: number;
 }
 
+/** 账号简要信息 */
+declare interface AccountBriefInfo {
+  /** 账号 AppID */
+  AppID?: number;
+  /** 账号昵称 */
+  Nick?: string;
+  /** 账号 Uin */
+  Uin?: string;
+}
+
 /** 告警下拉字段 */
 declare interface AlertExtraInfo {
   /** 相关攻击事件 */
@@ -1272,6 +1282,48 @@ declare interface CICDToken {
   LastScanTime?: string;
 }
 
+/** CSIP扫描任务主机额外资产信息 */
+declare interface CSIPMachineExtraInfo {
+  /** 公网IP */
+  WanIP?: string;
+  /** 内网IP */
+  PrivateIP?: string;
+  /** 实例ID（CVM/BM/ECM唯一标识） */
+  InstanceID?: string;
+}
+
+/** 文件查杀手动扫描详情 */
+declare interface CSIPMalwareScanUuidDetailItem {
+  /** UUID */
+  Uuid?: string;
+  /** QUUID */
+  Quuid?: string;
+  /** 机器APPID */
+  MachineAppId?: number;
+  /** 机器名 */
+  MachineName?: string;
+  /** 机器IP */
+  MachineIP?: string;
+  /** 类型 */
+  OsType?: string;
+  /** 主机额外信息（公网IP、内网IP、实例ID） */
+  MachineExtraInfo?: CSIPMachineExtraInfo;
+  /** 状态 */
+  Status?: number;
+  /** 风险个数 */
+  RiskCount?: number;
+  /** 扫描耗时（秒） */
+  UsedTimeS?: number;
+  /** 异常码 */
+  Exception?: number;
+  /** 异常信息 */
+  ExceptionMessage?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+}
+
 /** 安全中心标签 */
 declare interface CSIPTag {
   /** 标签颜色 */
@@ -1554,10 +1606,50 @@ declare interface CloudCountDesc {
   CloudDesc?: string;
 }
 
+/** 集群定位信息 */
+declare interface ClusterIDWithAppIdItem {
+  /** 集群ID */
+  ClusterID: string;
+  /** 集群所属AppId */
+  AppId: number;
+}
+
+/** 集群定位信息 */
+declare interface ClusterWithAppIdItem {
+  /** 集群ID */
+  ClusterID: string | null;
+  /** 集群所属AppId */
+  AppId: number | null;
+}
+
 /** AI Agent 命令沙箱插件状态 */
 declare interface CommandPluginState {
   /** 插件安装状态（上层聚合）枚举值：NONE：未安装INSTALLING：安装中INSTALLED：已安装INSTALL_FAIL：安装失败 */
   InstallStatus?: string;
+}
+
+/** 关联组件&路径详情 */
+declare interface ComponentDetailItem {
+  /** 组件名称 */
+  Name?: string;
+  /** 命中版本 */
+  Version?: string;
+  /** 关联路径 */
+  Path?: string;
+  /** 修复命令 */
+  FixCommand?: string;
+}
+
+/** 高级镜像条件匹配（三个匹配串有且仅有一个非空） */
+declare interface ConditionMatch {
+  /** 镜像ID匹配串（三选一，有且仅有一个非空） */
+  ImageIDMatchString?: string;
+  /** 镜像名匹配串（三选一，有且仅有一个非空） */
+  ImageNameMatchString?: string;
+  /** 镜像地址匹配串（三选一，有且仅有一个非空） */
+  ImageAddressMatchString?: string;
+  /** 匹配条件，取值：EQUALS-等于/NOT_EQUALS-不等于/STARTS_WITH-以…开头/NOT_STARTS_WITH-不以…开头/ENDS_WITH-以…结尾/NOT_ENDS_WITH-不以…结尾/CONTAINS-包含/NOT_CONTAINS-不包含 */
+  MatchType?: string;
 }
 
 /** 容器环境信息 */
@@ -2194,6 +2286,16 @@ declare interface CosSourceIpInfo {
   UA?: string[];
   /** 调用vpc信息 */
   VpcInfo?: CosInvokeIpVpcInfo;
+}
+
+/** 创建任务返回项 */
+declare interface CreatedTaskItem {
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 任务类型：HOST-主机扫描/CONTAINER-容器扫描 */
+  TaskType?: string | null;
+  /** 任务所属账号AppId */
+  AppId?: number | null;
 }
 
 /** 生效机器范围，用于指定凭证在哪些机器上生效 */
@@ -3062,6 +3164,10 @@ declare interface DspmDbAsset {
   ClusterType?: number;
   /** 是否支持敏感数据识别。0 不支持；1 支持 */
   IdentifyScanSupported?: number;
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 集群名 */
+  ClusterName?: string | null;
 }
 
 /** 数据库资产Id信息 */
@@ -3484,6 +3590,12 @@ declare interface DspmRisk {
   NickName?: string;
   /** 资产所属账号uin */
   Uin?: string;
+  /** MongoDb的集群类型，非 MongoDB 资产固定 0枚举值：0： 副本集1： 分片默认值：0 */
+  ClusterType?: number;
+  /** 集群ID */
+  ClusterId?: string | null;
+  /** 集群名 */
+  ClusterName?: string | null;
 }
 
 /** Dspm 风险统计数 */
@@ -3712,6 +3824,26 @@ declare interface DspmWhitelistStrategy {
   WhitelistType?: string;
 }
 
+/** EDR任务列表 */
+declare interface EDRExportJobItem {
+  /** 任务ID */
+  JobId?: string;
+  /** 任务名 */
+  JobName?: string;
+  /** 数据源 */
+  Source?: string;
+  /** 导出状态 */
+  ExportStatus?: string;
+  /** 导出进度 */
+  ExportProgress?: number;
+  /** 失败信息 */
+  FailureMsg?: string;
+  /** 超时时间 */
+  Timeout?: string;
+  /** 插入时间 */
+  InsertTime?: string;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
 declare interface EDRFilter {
   /** 过滤键的名称。 */
@@ -3719,6 +3851,16 @@ declare interface EDRFilter {
   /** 一个或者多个过滤值。 */
   Values: string[];
   /** 模糊搜索 */
+  ExactMatch?: boolean;
+}
+
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
+declare interface EDRFilters {
+  /** 过滤键的名称。 */
+  Name: string;
+  /** 一个或者多个过滤值。 */
+  Values: string[];
+  /** 是否模糊匹配，前端框架会带上，可以不管 */
   ExactMatch?: boolean;
 }
 
@@ -3790,6 +3932,130 @@ declare interface EDRRule {
   InstanceIDs?: string[];
   /** 排除实例ID */
   ExcludeInstanceIDs?: string[];
+  /** 生效集群ID列表（TCSSScope=0 时有值；空返回 []） */
+  ClusterIDs?: string[];
+  /** 排除集群ID列表（空返回 []） */
+  ExcludeClusterIDs?: string[];
+  /** 容器条件匹配 */
+  ConditionMatches?: ConditionMatch[];
+  /** 安全中心标签 */
+  TagItems?: EDRRuleTagItem[];
+}
+
+/** 安全中心标签 */
+declare interface EDRRuleTagItem {
+  /** 安全中心标签ID */
+  ID?: number;
+  /** 标签中文Key */
+  TagKey?: string;
+  /** 标签英文key */
+  TagKeyEn?: string;
+  /** 标签中文值 */
+  TagValue?: string;
+  /** 标签英文值 */
+  TagValueEn?: string;
+  /** 标签描述 */
+  Description?: string;
+  /** 标签颜色 */
+  Color?: string;
+}
+
+/** 扫描任务记录项 */
+declare interface EDRScanRecordItem {
+  /** 任务主键 ID */
+  TaskId?: number | null;
+  /** 任务名称，如 Malware_20260702_030000 */
+  TaskName?: string | null;
+  /** 扫描类型枚举值：MANNAL： 手动扫描CYCLE： 定时扫描 */
+  TriggerType?: string | null;
+  /** 定时调度描述（ScanType=1 时有值），如“每天 03:00:00” */
+  ScheduleDesc?: string | null;
+  /** 任务资产类型：0=主机扫描，1=容器扫描 */
+  TaskType?: string | null;
+  /** 扫描目标涉及的账号AppId列表 */
+  TargetAppIDs?: number[] | null;
+  /** 任务创建者账号名称 */
+  AccountName?: string | null;
+  /** 云类型：0=腾讯云，1=AWS，2=Azure，4=阿里云 */
+  CloudType?: number | null;
+  /** 资产选择方式：all=全部资产，tag=按标签选择，direct=直接选择 */
+  AssetSelectionType?: string | null;
+  /** 扫描资产总数 */
+  TotalAssetCount?: number | null;
+  /** 创建者账号AppId（前端据此判断操作权限） */
+  CreateAppID?: number | null;
+  /** 创建者账号uin */
+  Creator?: string | null;
+  /** 创建者账号名称 */
+  CreatorName?: string | null;
+  /** 创建者云类型：0=腾讯云, 1=AWS, 2=Azure, 4=阿里云 */
+  CreatorCloudType?: number | null;
+  /** 任务开始时间，格式 2006-01-02 15:04:05 */
+  StartTime?: string | null;
+  /** 任务结束时间，未结束为空字符串 */
+  EndTime?: string | null;
+  /** WAIT：待扫描，SCANNING：扫描中，FINISHED：已完成，FAILED：失败，CANCELED：已停止枚举值：WAIT： 待扫描SCANNING： 扫描中FINISHED： 已完成FAILED： 失败CANCELED： 已停止 */
+  Status?: string | null;
+}
+
+/** 容器资产扫描详情项 */
+declare interface EDRScanTaskContainerItem {
+  /** 容器ID */
+  ContainerID?: string | null;
+  /** 容器名称 */
+  ContainerName?: string | null;
+  /** Pod名称 */
+  PodName?: string | null;
+  /** 集群ID */
+  ClusterID?: string | null;
+  /** 集群名称 */
+  ClusterName?: string | null;
+  /** 集群类型 */
+  ClusterType?: string | null;
+  /** 资产所属账号名称（后端富化） */
+  AccountName?: string | null;
+  /** 所属账号AppId */
+  AppId?: number | null;
+  /** 云类型 */
+  CloudType?: number | null;
+  /** 扫描状态：WAIT/SCANNING/FINISHED/FAILED */
+  Status?: string | null;
+  /** 告警数 */
+  RiskCount?: number | null;
+  /** 失败原因 */
+  FailReason?: string | null;
+  /** 解决方案 */
+  FixSuggestion?: string | null;
+}
+
+/** 主机资产扫描详情项 */
+declare interface EDRScanTaskHostItem {
+  /** 主机唯一标识 */
+  Quuid?: string | null;
+  /** 主机名称 */
+  HostName?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 公网IP */
+  PublicIp?: string | null;
+  /** 内网IP */
+  PrivateIp?: string | null;
+  /** 操作系统 */
+  OsType?: string | null;
+  /** 资产所属账号名称（后端富化） */
+  AccountName?: string | null;
+  /** 资产所属账号AppId */
+  AppId?: number | null;
+  /** 云类型 */
+  CloudType?: number | null;
+  /** 扫描状态：WAIT/SCANNING/FINISHED/FAILED */
+  Status?: string | null;
+  /** 风险数 */
+  RiskCount?: number | null;
+  /** 失败原因 */
+  FailReason?: string | null;
+  /** 解决方案 */
+  FixSuggestion?: string | null;
 }
 
 /** EDR告警大类对应的告警数量 */
@@ -3798,6 +4064,24 @@ declare interface EdrAlertCategoryCount {
   AlertCategory?: string;
   /** 告警数量 */
   Count?: number;
+}
+
+/** EDR告警数量统计项 */
+declare interface EdrAlertCountItem {
+  /** 查询实例ID */
+  InstanceId?: string;
+  /** 总告警条数 */
+  TotalCount?: number;
+  /** 病毒木马（VIRUS_TROJAN）数量 */
+  VirusTrojanCount?: number;
+  /** 异常登录（ABNORMAL_LOGIN）数量 */
+  AbnormalLoginCount?: number;
+  /** 主机行为（HOST_BEHAVIOR）数量 */
+  HostBehaviorCount?: number;
+  /** 网络行为（NETWORK_BEHAVIOR）数量 */
+  NetworkBehaviorCount?: number;
+  /** 存在告警的主机数量（仅 GlobalCount 模式有值） */
+  InstancesCount?: number;
 }
 
 /** EDR告警详情（含content JSON + 资产/情报富化字段） */
@@ -3898,6 +4182,26 @@ declare interface EdrAlertDetail {
   NetResponsePayload?: string;
   /** 服务进程信息（base64 编码后的 JSON 字符串） */
   NetSvcPs?: string;
+  /** 容器名称 */
+  ContainerName?: string;
+  /** 容器镜像名称 */
+  ImageName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
+  /** 容器运行状态（原始枚举 RUNNING/PAUSED/STOPPED…，前端自行映射）枚举值：RUNNING： 运行PAUSED： 暂停STOPPED： 停止CREATED： 已经创建DESTROYED： 已销毁RESTARTING： 重启中REMOVING： 迁移中DEAD： DEADUNKNOWN： 未知 */
+  RunStatus?: string;
+  /** POD 名称 */
+  PodName?: string;
+  /** POD IP */
+  PodIp?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** POD 负载类型 */
+  PodWorkloadType?: string;
+  /** 集群 ca 证书 md5 */
+  ClusterCaMD5?: string;
+  /** POD 唯一 id */
+  PodUniqueId?: string;
 }
 
 /** EDR告警列表信息 */
@@ -3932,6 +4236,8 @@ declare interface EdrAlertItem {
   IsProVersion?: number;
   /** 告警来源 */
   AlertSource?: string;
+  /** 机器类型（列表接口专有；不限于容器告警，主机告警同样返回）。按 Quuid 富化自 machines.machine_type，原始枚举值原样透传、不做 i18n 翻译，前端自行映射展示。取值如 CVM / LH / Other / EKS-NATIVE 等；查不到对应机器信息时降级为空串 ""（与 InstanceName / PublicIp / PrivateIp 等资产富化字段降级行为一致）。告警详情接口（DescribeEdrAlertInfo）不返回此字段 */
+  MachineType?: string;
   /** 镜像ID */
   ImageId?: string;
   /** 容器id */
@@ -3956,6 +4262,12 @@ declare interface EdrAlertItem {
   PrivateIp?: string;
   /** 该机器是否开启应用防护 */
   RaspOpen?: boolean;
+  /** 容器名称 */
+  ContainerName?: string;
+  /** 容器镜像名称 */
+  ImageName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
 }
 
 /** EDR告警定位信息（ID + AlertID + AppID 三元组） */
@@ -3974,7 +4286,7 @@ declare interface EdrAlertTarget {
   AlertSubType?: string;
 }
 
-/** EDR告警定位信息，用于永久忽略 */
+/** EDR告警定位信息，用于永久忽略/取消忽略 */
 declare interface EdrAlertTargetForIgnore {
   /** 告警主键ID */
   Id: number;
@@ -3984,8 +4296,26 @@ declare interface EdrAlertTargetForIgnore {
   AlertId?: string;
   /** 主机UUID（可选） */
   Quuid?: string;
-  /** 实例ID（可选，用于白名单写入） */
+  /** 实例ID（可选，用于白名单删除） */
   InstanceId?: string;
+}
+
+/** 容器告警分组统计项（仅返回 TotalCount，不做告警大类拆分） */
+declare interface EdrContainerAlertCountItem {
+  /** 集群 ID（按集群分组时有值，否则空串） */
+  ClusterId?: string;
+  /** 容器 ID（按容器分组时有值，否则空串） */
+  ContainerId?: string;
+  /** 该集群/容器的告警总条数 */
+  TotalCount?: number;
+}
+
+/** 容器告警全局统计 */
+declare interface EdrContainerGlobalCount {
+  /** 总告警条数 */
+  TotalCount?: number;
+  /** 存在告警的集群数量（COUNT(DISTINCT cluster_id)，排除空 cluster_id） */
+  ClustersCount?: number;
 }
 
 /** 统计条目 */
@@ -4136,9 +4466,9 @@ declare interface FilterDataObject {
   Text?: string;
 }
 
-/** 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：ResultStatus（通过状态）、AssetName（资产名称/ID模糊）、IP（IP地址模糊）、Tag（资产标签模糊） */
+/** 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：Status（执行结果，Values: SUCCESS/FAILED/USER_CANCELED/CHECKING） */
 declare interface Filters {
-  /** 过滤条件名称。取值：ResultStatus（通过状态，Values: PASS/NOT_PASS）、AssetName（资产名称/ID，模糊匹配）、IP（IP地址，模糊匹配）、Tag（资产标签，模糊匹配） */
+  /** 过滤条件名称。取值：Status（执行结果，Values: SUCCESS/FAILED/USER_CANCELED/CHECKING） */
   Name?: string;
   /** 过滤条件值列表 */
   Values?: string[];
@@ -4254,6 +4584,120 @@ declare interface HitRules {
   RuleName: string;
 }
 
+/** 主机简要信息 */
+declare interface HostBriefInfo {
+  /** 云主机实例 ID参数格式：形如 ins-instance */
+  InstanceID?: string;
+  /** 主机 QUUID（CWP 内部唯一标识） */
+  QUUID?: string;
+  /** 主机 UUID */
+  UUID?: string;
+  /** 公网 IP 地址 */
+  PublicIP?: string;
+  /** 内网 IP 地址 */
+  PrivateIP?: string;
+  /** CWP Agent 状态枚举值：ONLINE：在线OFFLINE：离线UNINSTALLED：未安装 */
+  AgentStatus?: string;
+  /** 云主机实例状态枚举值：RUNNING：运行中STOPPED：已停止UNKNOWN：未知 */
+  InstanceStatus?: string;
+  /** 主机名称 */
+  Name?: string;
+  /** 所属账号信息 */
+  Account?: AccountBriefInfo;
+  /** 资产标签列表（CSIP 内部资产标签） */
+  TagItem?: MiniTagItem[];
+  /** 云上标签列表（云资产侧 Tag） */
+  CloudTag?: Tag[];
+}
+
+/** 主机漏洞风险 */
+declare interface HostKBRisk {
+  /** 风险记录 ID（kb_risk.id） */
+  RiskID?: number;
+  /** Windows KB 补丁详细信息 */
+  KBDetail?: KBDetail;
+  /** 受影响主机数 */
+  EffectHostCount?: number;
+  /** 最近扫描时间参数格式：YYYY-MM-DDTHH:mm:ssZ */
+  LatestScanTime?: string;
+  /** 所属账号列表 */
+  Account?: AccountBriefInfo[];
+  /** 修复状态枚举值：PENDING：待修复SCANNING：扫描中FIXED：已修复IGNORED：已加白FIXING：修复中FIX_FAILED：修复失败 */
+  RiskStatus?: string;
+}
+
+/** 主机漏洞组件 */
+declare interface HostVulComponent {
+  /** 主机简要信息 */
+  HostInfo?: HostBriefInfo;
+  /** 受影响组件版本 */
+  EffectVersion?: string;
+  /** 组件在主机上的安装路径 */
+  Path?: string;
+  /** 关联进程 ID */
+  ProcessID?: string;
+  /** 修复命令（仅展示） */
+  FixCommand?: string;
+  /** 组件名字 */
+  Name?: string;
+}
+
+/** 主机漏洞概要 */
+declare interface HostVulOverview {
+  /** 需立即修复漏洞数（VPR 评级为 URGENT 的漏洞数量） */
+  UrgentRepairCount?: number;
+  /** 已开启漏洞防御的主机数 */
+  DefendHostCount?: number;
+  /** 主机总数 */
+  TotalHostCount?: number;
+  /** 已修复漏洞总次数 */
+  FixedVulCount?: number;
+  /** Linux 软件漏洞数 */
+  LinuxVulCount?: number;
+  /** Windows 系统补丁数 */
+  WindowVulCount?: number;
+  /** Web-CMS 漏洞数 */
+  WebCMSVulCount?: number;
+  /** 应用漏洞数 */
+  AppVulCount?: number;
+  /** 应急漏洞数 */
+  EmergencyCount?: number;
+  /** 漏洞知识库总数 */
+  VulItemCount?: number;
+  /** 最近扫描时间参数格式：YYYY-MM-DDTHH:mm:ssZ */
+  LatestScanTime?: string;
+  /** 是否开启周期扫描枚举值：1： 开启0： 未开启 */
+  EnableTimingScan?: number;
+  /** 严重修复数 */
+  CriticalRepairCount?: number;
+  /** 严重修复Linux漏洞数 */
+  CriticalRepairLinuxVulCount?: number;
+  /** 严重修复应用漏洞数 */
+  CriticalRepairAppVulCount?: number;
+  /** 严重修复Web-CMS漏洞数 */
+  CriticalRepairWebCMSVulCount?: number;
+  /** 严重修复紧急漏洞数 */
+  CriticalRepairEmergencyCount?: number;
+}
+
+/** 主机漏洞风险 */
+declare interface HostVulRisk {
+  /** 风险记录 ID（host_vul_risk.id） */
+  RiskID?: number;
+  /** 受影响主机数 */
+  EffectHostCount?: number;
+  /** 最近扫描时间参数格式：YYYY-MM-DD HH:mm:ss */
+  LatestScanTime?: string;
+  /** 所属账号列表 */
+  Account?: AccountBriefInfo[];
+  /** 漏洞防御状态枚举值：ENABLED：已开启NOT_SUPPORTED：不支持NOT_ENABLED：未开启 */
+  DefendStatus?: string;
+  /** 修复状态枚举值：PENDING：待修复SCANNING：扫描中FIXED：已修复IGNORED：已加白FIXING：修复中FIX_FAILED：修复失败NOTSCAN：未扫描WITHOUT_RISK：无风险NEED_REBOOT：修复待重启 */
+  RiskStatus?: string;
+  /** 漏洞详细信息 */
+  VulDetail?: VulDetailInfo;
+}
+
 /** IP威胁情报信息（通过TIX IPAnalysis接口获取） */
 declare interface IPIntelInfo {
   /** 情报标签（如常规木马、漏洞软件、窃密木马） */
@@ -4314,6 +4758,14 @@ declare interface IaCFileRisk {
   Suggestion?: string;
 }
 
+/** 镜像ID和对应的appid账号信息 */
+declare interface ImageIDWithAppIdItem {
+  /** 账号ID */
+  AppId?: number;
+  /** 容器镜像ID */
+  ImageID?: string;
+}
+
 /** 计费项信息 */
 declare interface InquireInfo {
   /** 计费项名称 */
@@ -4322,11 +4774,11 @@ declare interface InquireInfo {
   Value?: number;
 }
 
-/** instance_id和对应的appid账号信息 */
+/** 主机实例定位信息 */
 declare interface InstanceIDWithAppIdItem {
-  /** APPID */
+  /** 机器所属AppId */
   AppId: number;
-  /** 实例ID */
+  /** 机器实例ID */
   InstanceID: string;
 }
 
@@ -4402,6 +4854,78 @@ declare interface IpAssetListVO {
   IsNewAsset?: number;
   /** 资产认证状态，0-待认证，1-认证成功，2-认证中，3+-认证失败 */
   VerifyStatus?: number;
+}
+
+/** Windows KB详细信息 */
+declare interface KBDetail {
+  /** KB 补丁内部 ID（kb_info.id） */
+  ID?: number;
+  /** KB 编号参数格式：形如 KB5001234 */
+  Number?: string;
+  /** KB 补丁名称 */
+  Name?: string;
+  /** 参考链接（微软官方文档地址） */
+  ReferUrl?: string;
+  /** 发布时间参数格式：YYYY-MM-DD HH:mm:ss */
+  PublishTime?: string;
+  /** 安装该 KB 后是否需要重启枚举值：true：需要false：不需要 */
+  NeedRestart?: boolean;
+  /** 关联漏洞列表 */
+  RelateVulList?: VulBriefInfo[];
+  /** 关联漏洞总数 */
+  RelateVulCount?: number;
+  /** 关联os版本 */
+  RelateProduct?: string;
+}
+
+/** KB补丁修复汇总信息 */
+declare interface KBFixSummaryItem {
+  /** KB补丁ID */
+  KBId?: number;
+  /** KB补丁名称 */
+  KBName?: string;
+  /** KB编号（如 KB5001234） */
+  KBNo?: string;
+  /** 关联漏洞数 */
+  RelatedVulCount?: number;
+  /** 受影响主机数 */
+  AffectedCount?: number;
+  /** 修复后是否需要重启系统 */
+  NeedReboot?: boolean;
+  /** 前置依赖补丁（逗号分隔的KB编号列表） */
+  KBPreCondition?: string;
+}
+
+/** 可更新补丁主机信息 */
+declare interface KBUpdateMachineItem {
+  /** KB补丁ID */
+  KBId?: number;
+  /** 主机实例ID */
+  InstanceId?: string;
+  /** 主机名称 */
+  MachineName?: string;
+  /** 主机IP */
+  MachineIp?: string;
+  /** 公网IP */
+  PublicIp?: string;
+  /** 操作系统名称 */
+  OsName?: string;
+  /** 主机在线状态枚举值：ONLINE：在线OFFLINE：离线 */
+  MachineStatus?: string;
+  /** 是否支持自动更新补丁枚举值：0：不支持1：支持 */
+  SupportAutoFix?: number;
+  /** 当前修复状态枚举值：0：未修复1：修复中2：修复失败3：修复成功4：修复超时 */
+  FixStatus?: number;
+  /** 最近一次修复时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  LatestFixTime?: string;
+  /** 不可修复原因，SupportAutoFix为0时返回 */
+  NotFixableReason?: string;
+  /** 资产标签列表 */
+  TagItems?: MiniTagItem[];
+  /** 所属账号AppId */
+  AppId?: number;
+  /** 付费版本信息枚举值：BASIC：基础版PRO：专业版ULTIMATE：旗舰版 */
+  PayVersion?: string;
 }
 
 /** 凭证数据结构，用于列表查询和详情查询的响应 */
@@ -4820,6 +5344,18 @@ declare interface MiniTagItem {
   TagValueEn?: string;
 }
 
+/** 告警对应的多攻击阶段 */
+declare interface MultiAttackStageItem {
+  /** 表id */
+  Id?: number;
+  /** APPID */
+  AppId?: number;
+  /** 告警ID */
+  AlertId?: string;
+  /** 攻击阶段列表 */
+  AttackStages?: string[];
+}
+
 /** 网卡资产 */
 declare interface NICAsset {
   /** appid */
@@ -5152,17 +5688,17 @@ declare interface RegionConfig {
   RegionNameEN?: string;
 }
 
-/** 地域信息 */
+/** 云资产所在地域信息。 */
 declare interface RegionInfo {
-  /** 地域 */
+  /** 地域标志，如 ap-guangzhou、ap-shanghai、ap-beijing。 */
   Region?: string;
-  /** 地域编码 */
-  RegionCode?: string;
-  /** 地域ID */
-  RegionId?: number;
-  /** 地域名称 */
+  /** 地域中文名，如华南地区（广州）、华东地区（上海）、华北地区（北京）。 */
   RegionName?: string;
-  /** 地域英文名称 */
+  /** 地域数字 ID。 */
+  RegionId?: number;
+  /** 地域简码，如 gz、sh、bj。 */
+  RegionCode?: string;
+  /** 地域英文名。 */
   RegionNameEn?: string;
 }
 
@@ -6158,6 +6694,34 @@ declare interface UserDspmInfo {
   IsDataCleaning?: boolean;
 }
 
+/** 漏洞VPR标签 */
+declare interface VPRLabel {
+  /** 标签名称枚举值：IN_THE_WILD：在野利用EXP：有 EXPPOC：有 POCINTERNET_EXPOSED：外网暴露NO_RESTART：无需重启HIGH_VALUE_ASSET：重要资产MALWARE_WEAPONIZED：已武器化 */
+  Name?: string;
+  /** 标签等级枚举值：HIGH：高MEDIUM：中LOW：低 */
+  Level?: string;
+  /** 标签说明 */
+  Remark?: string;
+}
+
+/** VRP评级信息 */
+declare interface VPRRatingInfo {
+  /** VPR 评级结果枚举值：URGENT：立即修复SUGGESTED：建议修复DEFERRABLE：可延迟修复 */
+  Result?: string;
+  /** 评级说明 */
+  Remark?: string;
+  /** 分阶段评级详情列表 */
+  Stage?: VPRRatingStage[];
+}
+
+/** VRP评级阶段 */
+declare interface VPRRatingStage {
+  /** 阶段名称（例如：威胁活跃度、可利用性、漏洞严重性等） */
+  Stage?: string;
+  /** 该阶段的评级结果 */
+  Result?: string;
+}
+
 /** 应急漏洞基本数据 */
 declare interface VULBaseInfo {
   /** 风险等级high 高危/ middle 中危 / low 低危 /info 提示 */
@@ -6432,6 +6996,346 @@ declare interface Vpc {
   IsCore?: number;
 }
 
+/** 漏洞简要信息 */
+declare interface VulBriefInfo {
+  /** 漏洞 ID（vul_vuls.id） */
+  VulID?: number;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** CVE 编号参数格式：形如 CVE-2018-5377 */
+  CVEID?: string;
+  /** VPR 风险标签列表 */
+  Label?: VPRLabel[];
+  /** CVSS 评分取值范围：[0.0, 10.0] */
+  CvssScore?: number;
+  /** 威胁等级枚举值：INVALID：无效INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 漏洞披露时间参数格式：YYYY-MM-DD HH:mm:ss */
+  PublishTime?: string;
+}
+
+/** 主机漏洞组件概要 */
+declare interface VulComponentSummary {
+  /** 组件名称 */
+  Name: string;
+  /** 关联主机数 */
+  RelateHostCount?: number;
+}
+
+/** 漏洞全部信息 */
+declare interface VulDetailInfo {
+  /** 漏洞ID */
+  ID?: number;
+  /** 漏洞名字 */
+  Name?: string;
+  /** CveID */
+  CVEID?: string;
+  /** 漏洞分类枚举值：LINUX：Linux 软件漏洞WINDOWS：Windows 系统补丁WEB_CMS：Web-CMS 漏洞APPLICATION：应用漏洞EMERGENCY：应急漏洞 */
+  Category?: string;
+  /** 漏洞披露时间参数格式：YYYY-MM-DD HH:mm:ss */
+  PublishTime?: string;
+  /** 检测方式枚举值：VersionCompare： 版本对比POC： POC检测 */
+  CheckMethod?: string;
+  /** 漏洞防御状态枚举值：ENABLED：已开启NOT_SUPPORTED：不支持NOT_ENABLED：未开启 */
+  DefendStatus?: string;
+  /** 是否支持一键修复枚举值：true：支持false：不支持 */
+  SupportFix?: boolean;
+  /** VPR 评级信息（包含评级结果、说明和分阶段评分） */
+  VRPRatingInfo?: VPRRatingInfo;
+  /** CVSS 评分取值范围：[0.0, 10.0] */
+  CvssScore?: number;
+  /** VPR 风险标签列表（如在野利用、有 EXP、有 POC、外网暴露、无需重启等） */
+  Label?: VPRLabel[];
+  /** 漏洞备注 */
+  Remark?: string;
+  /** 漏洞概述说明 */
+  Summary?: string;
+  /** 已开启漏洞防御的主机数 */
+  DefendHostCount?: number;
+  /** 未开启漏洞防御的主机数 */
+  NotDefendHostCount?: number;
+  /** 最近扫描时间参数格式：YYYY-MM-DD HH:mm:ss */
+  LatestScanTime?: string;
+  /** CVSS 危害等级枚举值：INVALID：无效INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  CVSSLevel?: string;
+  /** 受影响软件描述列表（每项形如 openssl < 1.1.1k） */
+  VulAffect?: string[];
+  /** 是否被 KVE（已知被利用漏洞）库收录枚举值：true：已收录false：未收录 */
+  KVERecord?: boolean;
+  /** KVE 收录时间参数格式：YYYY-MM-DD HH:mm:ss */
+  KVERecordTime?: string;
+  /** EPSS 评分（漏洞利用概率预测）取值范围：[0.0, 1.0] */
+  EPSSScore?: number;
+  /** 受影响厂商列表 */
+  AffectVendor?: string[];
+  /** 受影响产品列表 */
+  AffectProduct?: string[];
+  /** 漏洞利用机制说明 */
+  Mechanism?: string;
+  /** 漏洞利用前置条件说明 */
+  Precondition?: string;
+  /** 漏洞最新传播趋势数据列表（按日期） */
+  LatestTrend?: VulSpreadTrend[];
+  /** 修复方案 */
+  FixSolution?: string;
+  /** 参考链接 */
+  RefLink?: string;
+  /** 漏洞危害描述 */
+  HarmDescription?: string;
+  /** 漏洞影响产品 */
+  AffectVendorProduct?: VulVendorProduct[];
+}
+
+/** 漏洞修复项，指定一个漏洞/KB补丁及其需要修复的目标主机 */
+declare interface VulFixItem {
+  /** 需要修复的主机实例ID列表入参限制：单项最多1000个实例ID */
+  InstanceIds: string[];
+  /** 漏洞ID，VulId和KBId二选一 */
+  VulId?: number;
+  /** KB补丁ID，VulId和KBId二选一 */
+  KBId?: number;
+}
+
+/** 漏洞/KB补丁维度修复状态 */
+declare interface VulFixStatusItem {
+  /** 漏洞ID（KB补丁修复任务时为空） */
+  VulId?: number;
+  /** KB补丁ID（漏洞修复任务时为空） */
+  KBId?: number;
+  /** 漏洞名称或KB补丁名称 */
+  VulName?: string;
+  /** 该漏洞的修复状态枚举值：0：修复中1：全部成功2：部分失败3：全部失败 */
+  FixStatus?: number;
+  /** 该漏洞/KB补丁关联的主机总数 */
+  HostCount?: number;
+  /** 该漏洞/KB补丁修复成功的主机数 */
+  SuccessHostCount?: number;
+  /** 该漏洞/KB补丁修复失败的主机数 */
+  FailHostCount?: number;
+}
+
+/** 漏洞修复汇总信息 */
+declare interface VulFixSummaryItem {
+  /** 漏洞ID */
+  VulId?: number;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** CVE编号 */
+  CveId?: string;
+  /** 受影响主机数 */
+  AffectedCount?: number;
+  /** 修复后是否需要重启系统 */
+  NeedReboot?: boolean;
+  /** 是否支持一键修复true-支持 false-不支持 */
+  FixSwitch?: boolean;
+}
+
+/** 漏洞修复任务明细项 */
+declare interface VulFixTaskDetailItem {
+  /** 明细记录ID */
+  Id?: number;
+  /** 关联的修复任务ID */
+  TaskId?: number;
+  /** 修复的漏洞ID */
+  VulId?: number;
+  /** 修复的KB补丁ID */
+  KBId?: number;
+  /** 主机实例ID */
+  InstanceId?: string;
+  /** 主机名称 */
+  MachineName?: string;
+  /** 主机内网IP */
+  MachineIp?: string;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** 执行状态枚举值：0：初始状态1：已下发任务11：客户端已确认2：修复完成3：客户端离线4：超时5：失败6：不支持9：等待快照创建完成中10：快照创建失败 */
+  Status?: number;
+  /** 修复结果枚举值：0： 初始状态1： 修复成功2： 修复失败3： 修复中 */
+  FixStatus?: number;
+  /** 快照状态枚举值：-1：无需创建快照0：未开始1：进行中2：已完成3：创建失败 */
+  SnapshotStatus?: number;
+  /** 异常提示信息 */
+  ExceptionMessage?: string;
+  /** 修复启动时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  StartTime?: string;
+  /** 修复结束时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  EndTime?: string;
+  /** 快照创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  SnapshotCreateTime?: string;
+  /** 快照到期时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  SnapshotExpireTime?: string;
+  /** 快照创建失败原因（当 SnapshotStatus=3 时有值） */
+  SnapshotFailReason?: string;
+}
+
+/** 漏洞修复任务概要信息 */
+declare interface VulFixTaskInfo {
+  /** 修复任务主键ID */
+  Id?: number;
+  /** 任务ID */
+  TaskId?: number;
+  /** 修复状态枚举值：0：初始化1：修复中2：修复成功3：部分修复失败4：全部修复失败5：停止修复 */
+  FixStatus?: number;
+  /** 修复资产总数 */
+  AssetCount?: number;
+  /** 修复成功数 */
+  SuccessCount?: number;
+  /** 修复失败数 */
+  FailCount?: number;
+  /** 修复中数量 */
+  FixingCount?: number;
+  /** 排队中数量（等待下发或等待快照创建） */
+  QueueCount?: number;
+  /** 修复进度百分比取值范围：[0, 100]补充说明：计算方式为(SuccessCount+FailCount)/AssetCount×100 */
+  Progress?: number;
+  /** 修复成功的漏洞数 */
+  SuccessVulCount?: number;
+  /** 修复失败的漏洞数 */
+  FailVulCount?: number;
+  /** 修复的漏洞名称列表 */
+  VulNames?: string[];
+  /** 修复启动时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  StartTime?: string;
+  /** 修复结束时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  EndTime?: string;
+  /** 漏洞维度修复状态列表，每个漏洞的修复状态详情 */
+  VulFixStatusList?: VulFixStatusItem[];
+}
+
+/** 漏洞修复任务列表项 */
+declare interface VulFixTaskItem {
+  /** 修复任务主键ID */
+  Id?: number;
+  /** 任务ID，用于交互的hash标识 */
+  TaskId?: number;
+  /** 任务JobId，对应后台任务系统的任务ID */
+  JobId?: string;
+  /** 修复的漏洞ID列表 */
+  VulIds?: number[];
+  /** 修复的KB补丁ID列表 */
+  KBIds?: number[];
+  /** 修复资产总数 */
+  AssetCount?: number;
+  /** 修复成功的主机数 */
+  SuccessCount?: number;
+  /** 修复失败的主机数 */
+  FailCount?: number;
+  /** 修复进度百分比取值范围：[0, 100]补充说明：计算方式为(SuccessCount+FailCount)/AssetCount×100 */
+  Progress?: number;
+  /** 修复任务用户数 */
+  TargetAppIdsCount?: number;
+  /** 修复状态枚举值：0：初始化1：修复中2：修复成功3：部分修复失败4：全部修复失败5：停止修复 */
+  FixStatus?: number;
+  /** 最大修复时间单位：秒 */
+  Timeout?: number;
+  /** 修复启动时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  StartTime?: string;
+  /** 修复结束时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  EndTime?: string;
+  /** 记录创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  CreateTime?: string;
+  /** 修复的漏洞名称列表，便于列表页直接展示 */
+  VulNames?: string[];
+  /** 漏洞类型列表枚举值：LINUX：Linux软件漏洞WINDOWS：Windows系统补丁漏洞WEB_CMS：Web-CMS漏洞APPLICATION：应用漏洞EMERGENCY：应急漏洞 */
+  VulCategory?: string[];
+  /** 创建者AppId */
+  AppId?: number;
+}
+
+/** 可修复主机信息 */
+declare interface VulFixableMachineItem {
+  /** 漏洞ID列表，按 SupportAutoFix 维度分组：SupportAutoFix=1 时为可修复的漏洞ID，SupportAutoFix=0 时为不可修复的漏洞ID */
+  VulIds?: number[];
+  /** 主机实例ID */
+  InstanceId?: string;
+  /** 主机名称 */
+  MachineName?: string;
+  /** 主机IP */
+  MachineIp?: string;
+  /** 公网IP */
+  PublicIp?: string;
+  /** 操作系统类型枚举值：linux：Linux操作系统windows：Windows操作系统 */
+  OsType?: string;
+  /** 操作系统名称 */
+  OsName?: string;
+  /** 主机在线状态枚举值：ONLINE：在线OFFLINE：离线 */
+  MachineStatus?: string;
+  /** 是否支持自动修复枚举值：0：不支持1：支持 */
+  SupportAutoFix?: number;
+  /** 当前修复状态枚举值：0：未修复1：修复中2：修复失败3：修复成功4：修复超时 */
+  FixStatus?: number;
+  /** 最近一次修复时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  LatestFixTime?: string;
+  /** 不可修复原因，SupportAutoFix为0时返回 */
+  NotFixableReason?: string;
+  /** 修复命令列表，SupportAutoFix为1时返回 */
+  FixCommands?: string[];
+  /** 关联组件列表 */
+  Components?: string[];
+  /** 资产标签列表 */
+  TagItems?: MiniTagItem[];
+  /** 所属账号AppId */
+  AppId?: number;
+  /** 付费版本信息枚举值：BASIC：基础版PRO：专业版ULTIMATE：旗舰版 */
+  PayVersion?: string;
+}
+
+/** 已修复漏洞信息 */
+declare interface VulFixedItem {
+  /** 漏洞ID */
+  VulId?: number;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** 漏洞等级枚举值：LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** VPR 评级信息（包含评级结果、说明和分阶段评分），与 DescribeHostVulRiskList 一致 */
+  VRPRatingInfo?: VPRRatingInfo;
+  /** 漏洞类型枚举值：LINUX：Linux软件漏洞WINDOWS：Windows系统补丁漏洞WEB_CMS：Web-CMS漏洞APPLICATION：应用漏洞EMERGENCY：应急漏洞 */
+  VulCategory?: string;
+  /** CVE编号 */
+  CveId?: string;
+  /** 修复主机名称 */
+  MachineName?: string;
+  /** 修复主机实例ID */
+  InstanceId?: string;
+  /** 关联组件&路径数量 */
+  ComponentCount?: number;
+  /** 关联组件&路径列表 */
+  Components?: string[];
+  /** 最近一次修复时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  LatestFixTime?: string;
+}
+
+/** 主机简要信息 */
+declare interface VulHostBriefInfo {
+  /** 云主机实例 ID参数格式：形如 ins-xxxxxxxx */
+  InstanceID?: string;
+  /** 主机名称 */
+  Name?: string;
+  /** 公网 IP 地址 */
+  PublicIP?: string;
+  /** 内网 IP 地址 */
+  PrivateIP?: string;
+  /** 防护版本枚举值：NONE：无防护BASIC：基础版PRO：专业版ULTIMATE：旗舰版PRO_LH：轻量版 */
+  DefendVersion?: string;
+  /** 漏洞防御状态枚举值：ENABLED：已开启NOT_SUPPORTED：不支持NOT_ENABLED：未开启 */
+  DefendStatus?: string;
+  /** 所属账号信息 */
+  Account?: AccountBriefInfo;
+  /** 云主机实例状态枚举值：RUNNING：运行中STOPPED：已停止UNKNOWN：未知 */
+  InstanceStatus?: string;
+  /** 修复状态枚举值枚举值：PENDING： 待修复SCANNING： 扫描中FIXED： 已修复IGNORED： 已忽略FIXING： 修复中FIX_FAILED： 修复失败NEED_REBOOT： 修复待重启 */
+  RiskStatus?: string;
+  /** VPR 评级信息（含评级结果与各维度详情） */
+  VPRRating?: VPRRatingInfo;
+  /** CWP Agent 状态枚举值：ONLINE：在线OFFLINE：离线UNINSTALLED：未安装 */
+  AgentStatus?: string;
+  /** 资产标签列表（CSIP 内部资产标签） */
+  TagItem?: MiniTagItem[];
+  /** 云上标签列表（云资产侧 Tag） */
+  CloudTag?: Tag[];
+}
+
 /** 漏洞影响组件信息 */
 declare interface VulImpactComponentInfo {
   /** 组件名称 */
@@ -6478,6 +7382,78 @@ declare interface VulRiskItem {
   AppID?: number;
 }
 
+/** 漏洞扫描任务记录 */
+declare interface VulScanTask {
+  /** 任务id */
+  Id?: number;
+  /** 任务id */
+  JobId?: string;
+  /** 任务所属用户appid */
+  AppId?: number;
+  /** 任务类型枚举值：0： 一键扫描1： 周期扫描 */
+  TaskType?: number;
+  /** 漏洞分类枚举值：LINUX： Linux软件漏洞WINDOWS： Windows系统补丁WEB_CMS： Web-CMS漏洞APPLICATION： 应用漏洞EMERGENCY： 应急漏洞 */
+  VulCategory?: string[];
+  /** 漏洞名称 */
+  VulName?: string[];
+  /** kb名称 */
+  KbName?: string[];
+  /** 是否应急漏洞枚举值：0： 否1： 是 */
+  Emergency?: number;
+  /** 扫描账号数量（0: 全部账号, others: 账号数量） */
+  Account?: number;
+  /** 扫描开始时间 */
+  StartTime?: string;
+  /** 扫描结束时间 */
+  EndTime?: string;
+  /** 扫描状态（INITIALIZING: 初始化, SCANNING: 扫描中, SUCCESS: 扫描成功, TOTAL_FAIL: 全部扫描失败）枚举值：STOPPED： 已停止 */
+  Status?: string;
+  /** 漏洞威胁等级枚举值：LOW： 低危MEDIUM： 中危HIGH： 高危CRITICAL： 严重 */
+  Level?: string[];
+  /** 扫描方式枚举值：VersionCompare： 版本对比POC： POC检测VersionComparePOC： 版本对比+POC检测 */
+  Method?: string[];
+  /** 资产列表 */
+  AssetList?: string[];
+  /** 资产范围枚举值：0： 所有资产1： 自选资产2： 自选排除资产 */
+  AssetRange?: number;
+}
+
+/** 漏洞扫描任务详情 */
+declare interface VulScanTaskDetail {
+  /** 任务id */
+  Id?: string;
+  /** 创建者AppId */
+  AppId?: number;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 公网ip */
+  PublicIp?: string;
+  /** 内网ip */
+  PrivateIp?: string;
+  /** 操作系统 */
+  OS?: string;
+  /** 扫描状态（SUCCESS: 扫描完成/成功, OFFLINE: 客户端离线, TIMEOUT: 扫描超时, FAILED: 扫描失败, UNSUPPORTED: 客户端版本过低/不支持扫描, TERMINATED: 已终止, TERMINATING: 终止中）枚举值：SCANNING： 扫描中 */
+  Status?: string;
+  /** 扫描开始时间 */
+  StartTime?: string;
+  /** 扫描结束时间 */
+  EndTime?: string;
+  /** 漏洞数量 */
+  Vuls?: number;
+  /** 失败原因 */
+  Description?: string;
+}
+
+/** 漏洞传播趋势 */
+declare interface VulSpreadTrend {
+  /** 日期参数格式：YYYY-MM-DD */
+  Date?: string;
+  /** 该日期的传播趋势数值 */
+  Trend?: number;
+}
+
 /** 漏洞趋势-攻击趋势、影响用户、影响资产 */
 declare interface VulTrend {
   /** 影响的资产数 */
@@ -6488,6 +7464,40 @@ declare interface VulTrend {
   AttackCount?: number;
   /** 时间 */
   Date?: string;
+}
+
+/** 漏洞影响厂商和产品 */
+declare interface VulVendorProduct {
+  /** 供应商 */
+  Vendor?: string;
+  /** 产品名称 */
+  Product?: string;
+  /** 影响版本 */
+  VersionRange?: string[];
+}
+
+/** 漏洞白名单 */
+declare interface VulWhitelist {
+  /** id */
+  Id?: number;
+  /** 漏洞名称 */
+  Name?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 所属账号 */
+  AppId?: number;
+  /** 资产列表 */
+  AssetList?: string[];
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 策略开关（0-关闭, 1-开启） */
+  Switch?: number;
+  /** 资产范围枚举值：0： 全部资产1： 自选资产2： 全选排除资产 */
+  AssetRange?: number;
+  /** 补丁KB id */
+  KBId?: number;
+  /** 漏洞Id */
+  VulId?: number;
 }
 
 /** 网站风险对象 */
@@ -6564,6 +7574,24 @@ declare interface AddNewBindRoleUserResponse {
   RequestId?: string;
 }
 
+declare interface AddVulWhitelistRequest {
+  /** 漏洞ID */
+  VulId?: number[];
+  /** 补丁ID */
+  KbId?: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 备注 */
+  Remark?: string;
+  /** 资产列表 */
+  AssetList?: string[];
+}
+
+declare interface AddVulWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AssetBaseInfoResponse {
   /** vpc-id */
   VpcId?: string;
@@ -6625,6 +7653,20 @@ declare interface AssetBaseInfoResponse {
   ProtectedDay?: number;
 }
 
+declare interface CancelEdrAlertIgnoreRequest {
+  /** 告警定位列表（支持跨账号），最多500条 */
+  Targets: EdrAlertTargetForIgnore[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CancelEdrAlertIgnoreResponse {
+  /** 数量 */
+  CancelledCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccessKeyCheckTaskRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -6659,6 +7701,34 @@ declare interface CreateAccessKeySyncTaskResponse {
   Code?: number;
   /** 错误信息 */
   Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCSIPManualMalwareScanRequest {
+  /** 扫描模式：0=全盘扫描 / 1=快速扫描，与 cwp_malware Scan RPC 的 scan_type 字段语义一致 */
+  ScanPattern: number;
+  /** 生效范围档位：0=指定主机（ScopeSpecified） / 1=全选 CSIP 付费机器（ScopeAll）。旧前端不传时零值默认 0，保持兼容 */
+  Scope: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 是否启用内存马扫描（0/1），透传给 cwp_malware */
+  EnableMemShellScan?: number;
+  /** 单机扫描超时秒数；<=0 时取默认 3600 */
+  Timeout?: number;
+  /** 多账号体系目标 AppId 列表；为空时 fallback 到 [req.AppID]（仅自身）。无论 Scope=0/1，均经过 csip.ValidateTargetAppIDsViaCSIP 校验 */
+  TargetAppIDs?: number[];
+  /** 扫描引擎类型，cloudapi 层透传给 cwp_malware，不持久化到主表，引擎模式 1标准模式 2增强模式 3严格模式枚举值：1： 标准模式2： 增强模式3： 严格模式 */
+  EngineType?: number;
+  /** 指定机器列表，实例ID版本 */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 全选时候排除的机器，实例ID版本 */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+}
+
+declare interface CreateCSIPManualMalwareScanResponse {
+  /** 任务ID */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7115,6 +8185,78 @@ declare interface CreateDspmWhitelistStrategyResponse {
   RequestId?: string;
 }
 
+declare interface CreateEDRManualScanRequest {
+  /** 资产选择方式：all-全部资产/tag-按标签选择(仅主机)/direct-直接选择 */
+  AssetSelectionType: string;
+  /** 检测模式：full-全盘检测/quick-快速检测/include-仅检测指定路径/exclude-排除指定路径 */
+  ScanType: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 直接选择的主机列表（AssetSelectionType=direct或all时使用） */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 剔除的主机列表（AssetSelectionType=all时使用） */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 主机对应的标签ID */
+  TagIds?: number[];
+  /** 直接选择的集群列表 */
+  ClusterIDsWithAppId?: ClusterWithAppIdItem[];
+  /** 剔除的集群列表（AssetSelectionType=all时使用） */
+  ExcludeClusterIDsWithAppId?: ClusterWithAppIdItem[];
+  /** 自选路径列表（ScanType=include或exclude时必填，最多100条） */
+  CustomPaths?: string[];
+  /** 超时时间（秒），上限7200 */
+  Timeout?: number;
+  /** 是否开启深度检测：0-否/1-是 */
+  EnableMemShellScan?: number;
+}
+
+declare interface CreateEDRManualScanResponse {
+  /** 创建的任务列表（主机和容器分别一条） */
+  Tasks?: CreatedTaskItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateEdrAlertExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效 */
+  Filters?: EDRFilter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列: [LatestDetectTime] */
+  By?: string;
+  /** 自定义任务名，允许重复；传空自动生成默认名 alert_{appid}_{时间戳}（如 alert_1234567890_20260501114522）；仅支持数字/字母/下划线/短横线/中文，≤100 字符（按字符/rune 计，中文按 1 个字符），校验失败返回 InvalidParameter（文案 TextEdrExportJobNameInvalid） */
+  JobName?: string;
+}
+
+declare interface CreateEdrAlertExportJobResponse {
+  /** 导出任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHostVulExportJobRequest {
+  /** 导出的action枚举值：LinuxHostVulRiskList： linux漏洞风险列表WebCmsHostVulRiskList： WebCms漏洞风险列表AppHostVulRiskList： App漏洞风险列表EmergencyHostVulRiskList： 紧急漏洞风险列表KBRiskList： Windows kb风险列表RelateHostList： 关联主机列表WhiteList： 漏洞白名单 */
+  BusinessAction: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：KbID：KB风险关联主机情况下需要额外加入KB风险IDVulID：漏洞风险关联主机情况下需要额外加入vul风险ID */
+  Filters?: Filters[];
+}
+
+declare interface CreateHostVulExportJobResponse {
+  /** 任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateIaCAccessTokenRequest {
   /** CI/CD名称 */
   Name: string;
@@ -7211,6 +8353,126 @@ declare interface CreateSkillScanResponse {
   Status?: string;
   /** 可读的操作结果描述 */
   Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVulFixRetryTaskRequest {
+  /** 需要重试的修复任务ID */
+  TaskId: number;
+  /** 指定需要重试的主机实例ID列表，不传则对所有失败主机进行重试 */
+  InstanceIds?: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateVulFixRetryTaskResponse {
+  /** 重试生成的新任务ID，用于后续查询任务状态 */
+  TaskId?: number;
+  /** 本次重试的主机数量 */
+  RetryCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVulFixTaskRequest {
+  /** 修复项列表，每项指定一个漏洞/KB补丁及其需要修复的主机入参限制：最多100项，总实例数不超过5000 */
+  FixItems: VulFixItem[];
+  /** 最大修复时间单位：秒默认值：3600 */
+  Timeout?: number;
+  /** 是否在修复前创建磁盘快照默认值：false */
+  CreateSnapshot?: boolean;
+  /** 快照名称，CreateSnapshot为true时有效入参限制：最长128个字符 */
+  SnapshotName?: string;
+  /** 快照保存天数，CreateSnapshot为true时有效 */
+  SaveDays?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateVulFixTaskResponse {
+  /** 修复任务ID，用于后续查询任务状态 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVulFixedExportJobRequest {
+  /** 过滤条件（与 DescribeVulFixedList 一致）支持的Filter.Name：Keyword - 模糊匹配，按关键字搜索（漏洞名称/CVE编号/主机名称/实例ID）VulName - 模糊匹配，按漏洞名称搜索Level - 精确匹配，按漏洞等级筛选：LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重VprLevel - 精确匹配，按VPR评级筛选：1-Low 2-Medium 3-High 4-CriticalVulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞MachineName - 模糊匹配，按主机名称搜索InstanceId - 模糊匹配，按实例ID搜索FixTime - 范围匹配，修复时间范围，传入两个值表示起止时间 */
+  Filters?: Filters[];
+  /** 排序字段枚举值：FixTime：按修复时间排序VulName：按漏洞名称排序 */
+  Order?: string;
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  By?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateVulFixedExportJobResponse {
+  /** 导出任务ID取值参考：前端轮询导出任务状态时使用 */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVulReScanRequest {
+  /** 漏洞ID */
+  VulId?: number[];
+  /** 补丁编号 */
+  KbNo?: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 资产列表 */
+  AssetList?: string[];
+}
+
+declare interface CreateVulReScanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVulScanManualRequest {
+  /** 超时时间（秒） */
+  Timeout: number;
+  /** 资产范围（0-全部资产，1-自选资产，2-剔除资产，3-自动资产匹配） */
+  AssetRange: number;
+  /** 扫描方式（VersionCompare: 版本对比, POC: POC检测, VersionComparePOC: 版本对比+POC检测） */
+  Method?: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 漏洞id */
+  VulId?: number[];
+  /** kb编号 */
+  KbNo?: string[];
+  /** 漏扫类型枚举值：LINUX： Linux软件漏洞WINDOWS： Windows系统补丁WEB_CMS： Web-CMS漏洞APPLICATION： 应用漏洞EMERGENCY： 应急漏洞 */
+  VulCategory?: string[];
+  /** 漏洞等级（INVALID: 无效, INFO: 提示, LOW: 低危, MEDIUM: 中危, HIGH: 高危, CRITICAL: 严重） */
+  Level?: string[];
+  /** 资产列表（Quuid列表） */
+  AssetList?: string[];
+  /** 标签id */
+  TagIds?: number[];
+}
+
+declare interface CreateVulScanManualResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCSIPMalwareScanTaskRequest {
+  /** 任务ID */
+  TaskIds: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteCSIPMalwareScanTaskResponse {
+  /** 实际物理删除的任务数（主表 affected rows） */
+  SuccessCount?: number;
+  /** 因运行中（子表 status IN {0,1,11} 计数 > 0）而未删除的 TaskId 列表；越权 / 不存在的 ID 不出现在此 */
+  FailedIds?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7421,6 +8683,36 @@ declare interface DeleteDspmWhitelistStrategyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteEDRRulesRequest {
+  /** 规则ID数组. (最大100条) */
+  RuleIDs: string[];
+  /** 规则类型，0-system 1-custom，目前只支持删除自定义规则 */
+  RuleType: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 删除策略对应的APPID */
+  TargetAppIDs?: number[];
+}
+
+declare interface DeleteEDRRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteEDRScanTaskRequest {
+  /** 任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteEDRScanTaskResponse {
+  /** 被删除任务的taskId */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteIaCAccessTokenRequest {
   /** 删除ID列表 */
   Id: number[];
@@ -7449,6 +8741,18 @@ declare interface DeleteRiskScanTaskRequest {
 }
 
 declare interface DeleteRiskScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVulWhitelistRequest {
+  /** id列表 */
+  Id?: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteVulWhitelistResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7491,6 +8795,18 @@ declare interface DescribeAILinkSettingResponse {
   ExcludeQuuids?: string[];
   /** 新增资产自动包含 0 不包含 1包含 */
   AutoInclude?: number;
+  /** 标签 */
+  TagIDs?: string[];
+  /** 0，1枚举值：0： 部分1： 全部 */
+  TCSSScope?: number;
+  /** 集群ID */
+  ClusterIDs?: string[];
+  /** 排除集群ID */
+  ExcludeClusterIDs?: string[];
+  /** 实例ID */
+  InstanceIds?: string[];
+  /** 排除实例ID */
+  ExcludeInstanceIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7921,6 +9237,72 @@ declare interface DescribeCLSLogListV3Response {
   SamplingRate?: number;
   /** 主题信息 */
   Topics?: LogSearchTopics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCSIPMalwareScanTaskDetailRequest {
+  /** 任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效 */
+  Filters?: EDRFilter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 排序方式: [ASC:升序|DESC:降序] */
+  Order?: string;
+  /** 可选排序列，暂不支持排序，默认按照id降序排列 */
+  By?: string;
+}
+
+declare interface DescribeCSIPMalwareScanTaskDetailResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 列表 */
+  List?: CSIPMalwareScanUuidDetailItem[];
+  /** 扫描开始时间，格式 2006-01-02 15:04:05 */
+  ScanBeginTime?: string;
+  /** 扫描结束时间，格式 2006-01-02 15:04:05，扫描未完成时为空字符串 */
+  ScanEndTime?: string;
+  /** 扫描机器总数 */
+  ScanMachineCount?: number;
+  /** 影响机器数（有风险的机器数） */
+  RiskMachineCount?: number;
+  /** 扫描内容，0-全盘扫描 1-快速扫描 */
+  ScanContent?: string[];
+  /** 任务类型，0-一键扫描 1-定时扫描 2-重新扫描 */
+  Type?: number;
+  /** 预估剩余扫描时间（分钟），扫描完成时为0 */
+  ScanLeftTime?: number;
+  /** 是否所有机器正在停止中，true表示停止中 */
+  StoppingAll?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCSIPMalwareScanTaskProgressRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 任务ID */
+  TaskId?: number;
+}
+
+declare interface DescribeCSIPMalwareScanTaskProgressResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 任务整体状态枚举值：0： NeverScanned1： Scanning2： Finished3： Stopping4： Stopped */
+  Status?: number;
+  /** 进度百分比 0~100（公式：20 + 80 × finished/total，含运行中机器时强制 ≤ 99；Status=Stopped 时强制 100） */
+  Schedule?: number;
+  /** 子表机器总数 */
+  TotalCount?: number;
+  /** 进入终态的机器数（含 Terminating(6) / Terminated(7)） */
+  FinishedCount?: number;
+  /** 累计风险告警数（来自主表 total_risk_count） */
+  RiskCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9801,6 +11183,114 @@ declare interface DescribeEDRRuleListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEDRScanRecordListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用查询参数（含Filters/Limit/Offset/Order/By） */
+  Filter?: Filter;
+}
+
+declare interface DescribeEDRScanRecordListResponse {
+  /** 符合条件的总数 */
+  TotalCount?: number;
+  /** 扫描任务记录列表 */
+  RecordList?: EDRScanRecordItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEDRScanTaskDetailRequest {
+  /** 任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用查询参数（含Filters/Limit/Offset） */
+  Filter?: Filter;
+}
+
+declare interface DescribeEDRScanTaskDetailResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 整体状态：WAIT/SCANNING/FINISHED/FAILED/CANCELED/TERMINATED/TIMEOUT */
+  Status?: string;
+  /** 任务类型：HOST/CONTAINER */
+  TaskType?: string;
+  /** 触发方式：MANUAL/CYCLE */
+  TriggerType?: string;
+  /** 任务开始时间 */
+  StartTime?: string;
+  /** 任务结束时间 */
+  EndTime?: string;
+  /** 检测模式：full/quick/include/exclude */
+  ScanType?: string;
+  /** 自选路径列表 */
+  CustomPaths?: string[] | null;
+  /** 超时时间（秒） */
+  Timeout?: number;
+  /** 是否开启深度检测：0-否/1-是 */
+  EnableMemShellScan?: number;
+  /** 创建者账号AppId */
+  CreateAppID?: number;
+  /** 任务创建者账号名称（后端富化） */
+  AccountName?: string;
+  /** 创建者云类型 */
+  CloudType?: number;
+  /** 任务总资产数 */
+  TotalAssetCount?: number;
+  /** 已完成资产数 */
+  FinishedAssetCount?: number;
+  /** 风险资产数 */
+  RiskAssetCount?: number;
+  /** 主机资产列表（TaskType=HOST时有值） */
+  HostList?: EDRScanTaskHostItem[] | null;
+  /** 容器资产列表（TaskType=CONTAINER时有值） */
+  ContainerList?: EDRScanTaskContainerItem[] | null;
+  /** 当前筛选条件下资产列表总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrAlertCountForAssetRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 主机instance_id列表，为空时返回MemberId对应appid范围内的汇总统计，非空时按每个instance_id粒度分别返回统计 */
+  InstanceIds?: string[];
+  /** 筛选条件列表，与DescribeEdrAlertList保持一致。支持的Name取值及对应Values枚举：Status - string - 是否必填：否 - 告警状态。Values取值：PENDING（待处理）、WHITELISTED（已加白）、PROCESSED（已处理）、IGNORED（已忽略）Level - string - 是否必填：否 - 告警等级。Values取值：CRITICAL（严重）、HIGH（高危）、MEDIUM（中危）、LOW（低危）、INFO（提示）DetectMode - string - 是否必填：否 - 检测模式。Values取值：PRECISE（精准）、BALANCED（均衡）、DEEP（深度）AlertCategory - string - 是否必填：否 - 告警大类。Values取值：VIRUS_TROJAN（病毒木马）、ABNORMAL_LOGIN（异常登录）、HOST_BEHAVIOR（主机行为）、NETWORK_BEHAVIOR（网络行为）、AI_LINK_ENGINE（AI关联引擎）AlertSubType - string - 是否必填：否 - 告警子类型。Values取值：MALWARE_FILE（恶意文件）、MALWARE_PROCESS（恶意进程）、RISK_LOGIN（异常登录）、BRUTE_FORCE（密码破解）、DNS（恶意请求）、BASH（高危命令）、PRIV_ESCALATION（本地提权）、REVERSE_SHELL（反弹Shell）、NET_ATTACK（网络攻击）、VUL_DEFENCE（漏洞防御）、MEMORY_SHELL_INJECT（内存马注入）、MEMORY_SHELL_SCAN（内存马扫描）、MULTI_BEHAVIOR_ATTACK（多行为攻击）AttackStage - string - 是否必填：否 - ATT&amp;CK攻击阶段。Values取值：TA0001~TA0011、TA0040、TA0042、TA0043，空字符串表示未分类AlertSource - string - 是否必填：否 - 告警来源。Values取值：HOST（主机）StartTime - string - 是否必填：否 - 起始时间，格式YYYY-MM-DD HH:MM:SS，不传默认近180天EndTime - string - 是否必填：否 - 结束时间，格式YYYY-MM-DD HH:MM:SS，不传默认当前时间 */
+  Filters?: EDRFilters[];
+}
+
+declare interface DescribeEdrAlertCountForAssetResponse {
+  /** 全局汇总统计（Quuids为空时返回） */
+  GlobalCount?: EdrAlertCountItem | null;
+  /** 按quuid粒度统计列表（Quuids非空时返回） */
+  Items?: EdrAlertCountItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrAlertCountForContainerRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 集群 ID 列表（≤500）；非空且 ContainerIds 为空时按集群分组统计 */
+  ClusterIds?: string[];
+  /** 容器 ID 列表（≤500）；非空时按容器分组统计（优先级高于 ClusterIds） */
+  ContainerIds?: string[];
+  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效ContainerId - string - 是否必填：否 - 容器ID（精确/IN，容器维度筛选）ClusterId - string - 是否必填：否 - 集群ID（精确/IN，容器维度筛选）ClusterName - string - 是否必填：否 - 集群名称（前缀模糊）ContainerName - string - 是否必填：否 - 容器名称（前缀模糊）AlertSource - string - 是否必填：否 - 告警来源：HOST-主机告警 / CONTAINER-容器告警，不传返回全部 */
+  Filters?: EDRFilter[];
+}
+
+declare interface DescribeEdrAlertCountForContainerResponse {
+  /** 全局模式返回（两个 ID 数组都为空时）；分组模式为 null */
+  GlobalCount?: EdrContainerGlobalCount;
+  /** 分组模式返回（ContainerIds 或 ClusterIds 非空时）；空返回 [] */
+  Items?: EdrContainerAlertCountItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEdrAlertInfoRequest {
   /** 告警定位信息（含跨账号AppID） */
   Target: EdrAlertTarget;
@@ -9839,6 +11329,74 @@ declare interface DescribeEdrAlertListResponse {
   AttackStageCounts?: AttackStageCount[];
   /** 告警大类统计（随筛选变化，排除 AlertCategory filter） */
   AlertCategoryCounts?: EdrAlertCategoryCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrAlertMultiAttackStagesRequest {
+  /** 目标告警信息 */
+  Targets: EdrAlertTarget[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeEdrAlertMultiAttackStagesResponse {
+  /** 多攻击阶段详情 */
+  List?: MultiAttackStageItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrAlertSummaryRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeEdrAlertSummaryResponse {
+  /** 严重+高危待处理数（Level IN CRITICAL,HIGH，DB 内部值 1,5） */
+  CriticalPendingCount?: number;
+  /** 全部待处理数 */
+  TotalPendingCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrExportJobDownloadURLRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 导出任务 ID */
+  JobId?: string;
+}
+
+declare interface DescribeEdrExportJobDownloadURLResponse {
+  /** COS 预签名下载链接（2 小时有效） */
+  DownloadUrl?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeEdrExportJobListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效 */
+  Filters?: EDRFilter[];
+  /** 限制条数,默认10,最大100 */
+  Limit?: number;
+  /** 偏移量,默认0 */
+  Offset?: number;
+  /** 按 任务创建时间排序方向，仅支持 ASC / DESC枚举值：ASC： 升序DESC： 降序 */
+  Order?: string;
+  /** 排序字段，目前仅支持 InsertTime（按任务下发时间排序），不传默认 InsertTime；传入其他值返回 InvalidParameter */
+  By?: string;
+}
+
+declare interface DescribeEdrExportJobListResponse {
+  /** 下载文件数量 */
+  TotalCount?: number;
+  /** 下载文件信息 */
+  List?: EDRExportJobItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9951,6 +11509,82 @@ declare interface DescribeHighBaseLineRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHostKBRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对 KB 编号/名称模糊匹配）RiskStatus：修复状态InstanceID：实例IDNewestKB: 最新补丁(0/1) */
+  Filters?: Filters[];
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 排序方向枚举值：ASC：升序DESC：降序默认值：DESC */
+  Order?: string;
+  /** 排序字段枚举值：LatestScanTime：最近扫描时间默认值：LatestScanTime */
+  By?: string;
+}
+
+declare interface DescribeHostKBRiskListResponse {
+  /** 主机 KB 补丁风险列表 */
+  List?: HostKBRisk[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostVulItemVPRInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 漏洞ID */
+  VulID?: number;
+}
+
+declare interface DescribeHostVulItemVPRInfoResponse {
+  /** VPR Label */
+  Label?: VPRLabel[];
+  /** VPR评级过程和结果 */
+  VRPRatingInfo?: VPRRatingInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostVulOverviewRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeHostVulOverviewResponse {
+  /** 主机漏洞概览数据 */
+  Overview?: HostVulOverview;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostVulRiskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：CVSSLevel：CVSS level过滤Keyword：关键字模糊搜索（多词使用｜分隔，对漏洞名/CVEID 模糊匹配）Category：漏洞分类（LINUX/WEB_CMS/APPLICATION/EMERGENCY）VPRLevel：VPR 评级RiskStatus：修复状态Label：VPR风险标签InstanceID：实例IDCheckMethod：检测方法 */
+  Filters?: Filters[];
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 排序方向枚举值：ASC：升序DESC：降序默认值：DESC */
+  Order?: string;
+  /** 排序字段枚举值：LatestScanTime：最近扫描时间默认值：LatestScanTime */
+  By?: string;
+}
+
+declare interface DescribeHostVulRiskListResponse {
+  /** 主机漏洞风险列表（按漏洞维度聚合） */
+  List?: HostVulRisk[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIaCFileListRequest {
   /** 过滤条件 */
   Filter?: Filter;
@@ -10045,6 +11679,46 @@ declare interface DescribeIpInvokeRecordResponse {
   RequestId?: string;
 }
 
+declare interface DescribeKBDetailRequest {
+  /** KB 补丁内部 ID（kb_info.id） */
+  KBID: number;
+}
+
+declare interface DescribeKBDetailResponse {
+  /** Windows KB 补丁详细信息 */
+  KBDetail?: KBDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKBUpdatableMachineListRequest {
+  /** KB补丁ID列表，最多支持100个 */
+  KBIds: number[];
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 过滤条件支持的Filter.Name：InstanceId - 精确匹配，按主机实例ID筛选MachineName - 模糊匹配，按主机名称搜索MachineIp - 模糊匹配，按主机IP搜索SupportAutoFix - 精确匹配，按是否支持自动修复筛选：0-不支持 1-支持 */
+  Filters?: Filters[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeKBUpdatableMachineListResponse {
+  /** 可更新补丁主机列表 */
+  Data?: KBUpdateMachineItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 可一键修复的主机数量 */
+  FixableCount?: number;
+  /** 不可一键修复的主机数量 */
+  NotFixableCount?: number;
+  /** KB补丁维度汇总信息，展示被修复的补丁列表概要 */
+  KBSummary?: KBFixSummaryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeKeySandboxCredentialListRequest {
   /** 过滤条件列表，支持的过滤条件如下：CredentialName - 凭证名称（模糊匹配）CredentialType - 凭证类型（精确匹配），取值：access、sts */
   Filter?: Filter;
@@ -10125,6 +11799,36 @@ declare interface DescribeNICAssetsResponse {
   VpcList?: FilterDataObject[];
   /** appid列表 */
   AppIdList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNetAttackSettingRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeNetAttackSettingResponse {
+  /** 0 关闭网络攻击检测，1开启网络攻击检测 */
+  NetAttackEnable?: number;
+  /** 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略 */
+  NetAttackAlarmStatus?: number;
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
+  /** 主机范围 */
+  CWPScope?: number;
+  /** 指定主机instance_id列表 */
+  InstanceIDs?: string[];
+  /** 排除主机instance_id列表 */
+  ExcludeInstanceIDs?: string[];
+  /** 标签ID列表 */
+  TagIDs?: string[];
+  /** 容器范围 */
+  TCSSScope?: number;
+  /** 指定集群ID列表 */
+  ClusterIDs?: string[];
+  /** 排除集群ID列表 */
+  ExcludeClusterIDs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10283,6 +11987,34 @@ declare interface DescribeRepositoryImageAssetsResponse {
   Total?: number;
   /** region列表 */
   RegionList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReverseShellSystemPolicyConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeReverseShellSystemPolicyConfigResponse {
+  /** 内网告警展示 */
+  InnerNetAlarmShow?: boolean;
+  /** 内网ip展示 */
+  InnerIPShow?: boolean;
+  /** 主机范围 */
+  CWPScope?: number;
+  /** 指定主机instance_id列表 */
+  InstanceIDs?: string[];
+  /** 排除主机instance_id列表 */
+  ExcludeInstanceIDs?: string[];
+  /** 标签ID列表 */
+  TagIDs?: string[];
+  /** 容器范围 */
+  TCSSScope?: number;
+  /** 指定集群ID列表 */
+  ClusterIDs?: string[];
+  /** 排除集群ID列表 */
+  ExcludeClusterIDs?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11083,6 +12815,244 @@ declare interface DescribeVpcAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVulComponentRelateHostRequest {
+  /** 漏洞 ID（vul_vuls.id） */
+  VulID: number;
+  /** 组件名称 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配） */
+  Filters?: Filters[];
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeVulComponentRelateHostResponse {
+  /** 受该组件影响的主机列表 */
+  List?: HostVulComponent[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulFixTaskDetailRequest {
+  /** 修复任务ID */
+  TaskId: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 过滤条件支持的Filter.Name：InstanceId - 精确匹配，按主机实例ID筛选VulId - 精确匹配，按漏洞ID筛选，过滤出某个漏洞下的主机KBId - 精确匹配，按KB补丁ID筛选，过滤出某个KB补丁下的主机Status - 精确匹配，按执行状态筛选：0-初始状态 1-已下发 11-客户端已确认 2-修复完成 3-客户端离线 4-超时 5-失败 6-不支持 9-等待快照创建完成中 10-快照创建失败FixStatus - 精确匹配，按修复结果筛选：0-初始状态 1-修复成功 2-修复失败SnapshotStatus - 精确匹配，按快照状态筛选：-1-无需创建快照 0-未开始 1-进行中 2-已完成 3-创建失败 */
+  Filters?: Filters[];
+  /** 排序字段枚举值：StartTime：按修复启动时间排序EndTime：按修复结束时间排序 */
+  Order?: string;
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  By?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulFixTaskDetailResponse {
+  /** 任务明细列表 */
+  Data?: VulFixTaskDetailItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 任务概要信息 */
+  TaskInfo?: VulFixTaskInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulFixTaskListRequest {
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 过滤条件支持的Filter.Name：TaskId - 精确匹配，按任务ID筛选JobId - 精确匹配，按任务JobId筛选，对应后台任务系统的任务IDFixStatus - 精确匹配，按修复状态筛选：0-初始化 1-修复中 2-修复成功 3-部分修复失败 4-全部修复失败 5-停止修复StartTime - 范围匹配，修复启动时间范围，传入两个值表示起止时间AppId - 精确匹配，按创建者AppId筛选VulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞TaskName - 模糊匹配，按漏洞名称/CVE编号/KB补丁名称筛选，匹配任务关联的漏洞或KB补丁 */
+  Filters?: Filters[];
+  /** 排序字段枚举值：StartTime：按修复启动时间排序EndTime：按修复结束时间排序CreateTime：按创建时间排序 */
+  Order?: string;
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  By?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulFixTaskListResponse {
+  /** 修复任务列表 */
+  Data?: VulFixTaskItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulFixableMachineListRequest {
+  /** 漏洞ID列表，最多支持100个 */
+  VulIds: number[];
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 过滤条件支持的Filter.Name：Keyword - 模糊匹配，按资产ID、资产名称搜索ComponentName - 模糊匹配，按关联组件名称搜索InstanceId - 精确匹配，按主机实例ID筛选MachineName - 模糊匹配，按主机名称搜索MachineIp - 模糊匹配，按主机IP搜索OsType - 精确匹配，按操作系统类型筛选：linux/windowsSupportAutoFix - 精确匹配，按是否支持自动修复筛选：0-不支持 1-支持Tag - 精确匹配，按资产标签筛选AppId - 精确匹配，按所属账号筛选 */
+  Filters?: Filters[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulFixableMachineListResponse {
+  /** 可修复主机列表 */
+  Data?: VulFixableMachineItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 可一键修复的主机数量 */
+  FixableCount?: number;
+  /** 不可一键修复的主机数量 */
+  NotFixableCount?: number;
+  /** 漏洞维度汇总信息，展示被修复的漏洞列表概要 */
+  VulSummary?: VulFixSummaryItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulFixedHostDetailRequest {
+  /** 漏洞ID */
+  VulId: number;
+  /** 主机实例ID */
+  InstanceId: string;
+  /** 分页偏移量，用于关联组件&amp;路径列表分页取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量，用于关联组件&amp;路径列表分页取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulFixedHostDetailResponse {
+  /** 漏洞名称 */
+  VulName?: string;
+  /** CVE编号 */
+  CveId?: string;
+  /** 漏洞类型枚举值：LINUX：Linux软件漏洞WINDOWS：Windows系统补丁漏洞WEB_CMS：Web-CMS漏洞APPLICATION：应用漏洞 */
+  VulCategory?: string;
+  /** 修复完成时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  FixTime?: string;
+  /** 主机实例ID */
+  InstanceId?: string;
+  /** 主机名称 */
+  MachineName?: string;
+  /** 主机公网IP */
+  PublicIp?: string | null;
+  /** 主机内网IP */
+  PrivateIp?: string;
+  /** 关联组件&amp;路径详情列表 */
+  ComponentDetails?: ComponentDetailItem[];
+  /** 关联组件&amp;路径总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulFixedListRequest {
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 过滤条件支持的Filter.Name：Keyword - 模糊匹配，按关键字搜索（漏洞名称/CVE编号/主机名称/实例ID）VulName - 模糊匹配，按漏洞名称搜索Level - 精确匹配，按漏洞等级筛选：LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重VprLevel - 精确匹配，按VPR评级筛选：1-Low 2-Medium 3-High 4-CriticalVulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞MachineName - 模糊匹配，按主机名称搜索InstanceId - 模糊匹配，按实例ID搜索FixTime - 范围匹配，修复时间范围，传入两个值表示起止时间 */
+  Filters?: Filters[];
+  /** 排序字段枚举值：FixTime：按修复时间排序VulName：按漏洞名称排序 */
+  Order?: string;
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  By?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulFixedListResponse {
+  /** 已修复漏洞列表 */
+  Data?: VulFixedItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulHostRelateComponentRequest {
+  /** 漏洞 ID（vul_vuls.id） */
+  VulID: number;
+  /** 实例ID */
+  InstanceID: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulHostRelateComponentResponse {
+  /** 受该组件影响的主机列表 */
+  List?: HostVulComponent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulIgnoreRuleListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件，支持以下 Name：Keyword - 漏洞名/备注，模糊匹配Switch - 开关状态，过滤值：0（关闭）/ 1（开启） */
+  Filters?: Filters[];
+  /** 分页大小，默认 10，最大 100 */
+  Limit?: number;
+  /** 分页偏移，从 0 开始 */
+  Offset?: number;
+  /** 排序方向：asc（升序）/ desc（降序），默认 desc */
+  Order?: string;
+  /** 排序字段，默认按更新时间（UpdateTime）排序 */
+  By?: string;
+}
+
+declare interface DescribeVulIgnoreRuleListResponse {
+  /** 白名单列表 */
+  List?: VulWhitelist[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulItemListRequest {
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对漏洞名/CVE/VulID 模糊匹配）Category：漏洞分类（LINUX/WINDOWS/WEB_CMS/APPLICATION/EMERGENCY）Level：威胁等级VPRLevel：VPR 评级Label：风险标签CheckMethod：检测方式（VERSION_COMPARE/POC/VERSION_COMPARE_POC）DefendStatus：漏洞防御状态（ENABLED/NOT_SUPPORTED/NOT_ENABLED）SupportFix：是否支持一键修复（true/false）Emergency: 紧急漏洞获取 (0/1)Top5HotVul: 热点top 5 漏洞 (0/1) */
+  Filters?: Filters[];
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 排序方向枚举值：ASC：升序DESC：降序默认值：DESC */
+  Order?: string;
+  /** 排序字段枚举值：PublishTime：漏洞披露时间默认值：PublishTime */
+  By?: string;
+}
+
+declare interface DescribeVulItemListResponse {
+  /** 漏洞条目列表 */
+  List?: VulDetailInfo[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulLabelListRequest {
+}
+
+declare interface DescribeVulLabelListResponse {
+  /** 漏洞条目列表 */
+  List?: VPRLabel[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVulRiskListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -11107,6 +13077,162 @@ declare interface DescribeVulRiskListResponse {
   TotalCount?: number;
   /** 漏洞列表 */
   VulRiskList?: VulRiskItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulRiskRelateComponentRequest {
+  /** 漏洞 ID（vul_vuls.id） */
+  VulID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对组件名称模糊匹配） */
+  Filters?: Filters[];
+}
+
+declare interface DescribeVulRiskRelateComponentResponse {
+  /** 该漏洞影响的组件列表 */
+  List?: VulComponentSummary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulRiskRelateHostRequest {
+  /** KB 补丁内部 ID（kb_info.id） */
+  KBID: number;
+  /** 漏洞 ID（vul_vuls.id） */
+  VulID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）CloudTag: 云标签Tag: 安全中心标签 */
+  Filters?: Filters[];
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 排序方向枚举值：ASC：升序DESC：降序默认值：DESC */
+  Order?: string;
+  /** 排序字段枚举值：LatestScanTime：最近扫描时间VPRLevel：VPR 评级RiskStatus：修复状态默认值：LatestScanTime */
+  By?: string;
+}
+
+declare interface DescribeVulRiskRelateHostResponse {
+  /** 该漏洞影响的主机列表 */
+  List?: VulHostBriefInfo[];
+  /** 符合条件的总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulScanPeriodicRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeVulScanPeriodicResponse {
+  /** 周期扫描开关（0-关闭, 1-开启） */
+  Status?: number;
+  /** 漏洞类型枚举值：LINUX： Linux软件漏洞WINDOWS： Windows系统补丁WEB_CMS： Web-CMS漏洞APPLICATION： 应用漏洞EMERGENCY： 应急漏洞 */
+  VulCategory?: string[];
+  /** 漏洞等级（INVALID: 无效, INFO: 提示, LOW: 低危, MEDIUM: 中危, HIGH: 高危, CRITICAL: 严重） */
+  Level?: string[];
+  /** 扫描方式（VersionCompare: 版本对比, POC: POC检测, VersionComparePOC: 版本对比+POC检测） */
+  Method?: string;
+  /** 周期扫描类型枚举值：1： 每天2： 每周3： 每月 */
+  CycleType?: number;
+  /** 开始时间（09:00:00） */
+  StartTime?: string;
+  /** 结束时间（18:00:00） */
+  EndTime?: string;
+  /** 资产范围（0-全部资产，1-自选资产，2-剔除资产） */
+  AssetRange?: number;
+  /** 资产列表（instance_id列表） */
+  AssetList?: string[];
+  /** 周期值单位：周几或者每月几号 */
+  CycleValue?: number[];
+  /** 超时时长单位：秒 */
+  Timeout?: number;
+  /** 是否运行被同步配置 0-不允许，1-允许 */
+  AllowSync?: number;
+  /** 管理员账号是否开启了自动同步配置开关 0-关闭，1-开启 */
+  EnableSync?: number;
+  /** 配置信息来自哪个账号，为空表示自己设置 */
+  AdminInfo?: AccountBriefInfo;
+  /** 标签id */
+  TagIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulScanTaskDetailRequest {
+  /** 任务id */
+  Id: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件，支持以下 Name：InstanceId - 资产实例 ID，精确匹配InstanceName - 资产实例名称，模糊匹配（ExactMatch=1 时精确匹配）Ip - 资产 IP 地址，精确匹配Status - 扫描状态，精确匹配 */
+  Filters?: Filters[];
+  /** 分页大小，默认 10，最大 100 */
+  Limit?: number;
+  /** 分页偏移，从 0 开始 */
+  Offset?: number;
+  /** 排序方向：asc（升序）/ desc（降序），默认 desc */
+  Order?: string;
+  /** 排序字段，默认按创建时间（CreateTime）排序 */
+  By?: string;
+}
+
+declare interface DescribeVulScanTaskDetailResponse {
+  /** 任务详情列表 */
+  List?: VulScanTaskDetail[];
+  /** 总数 */
+  Total?: number;
+  /** 漏洞数量 */
+  Vuls?: number;
+  /** 扫描数量 */
+  Scanned?: number;
+  /** 风险数量 */
+  Risk?: number;
+  /** 失败数量 */
+  Failed?: number;
+  /** 扫描进度（0-100） */
+  Progress?: number;
+  /** 任务pdf报告地址 */
+  TaskPdf?: string;
+  /** 任务excel报告地址 */
+  TaskExcel?: string;
+  /** 任务开始时间，格式：2006-01-02T15:04:05+08:00 */
+  StartTime?: string;
+  /** 任务结束时间，格式：2006-01-02T15:04:05+08:00 */
+  EndTime?: string;
+  /** 漏洞ID */
+  VulId?: number[];
+  /** KB编号 */
+  KbNo?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVulScanTaskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件，支持以下 Name：JobId - 任务 ID 精确匹配TaskType- 任务类型精确匹配 */
+  Filters?: Filters[];
+  /** 分页大小取值范围：[1, 100]单位：条默认值：10 */
+  Limit?: number;
+  /** 分页偏移取值范围：[0, 99999]单位：条 */
+  Offset?: number;
+  /** 过滤方向枚举值：DESC： 倒序ASC： 正序 */
+  Order?: string;
+  /** 排序字段默认值：ScanTime */
+  By?: string;
+}
+
+declare interface DescribeVulScanTaskListResponse {
+  /** 任务列表 */
+  List?: VulScanTask[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11151,6 +13277,40 @@ declare interface DownloadDspmExportLogResponse {
   RequestId?: string;
 }
 
+declare interface ExportCSIPMalwareScanTaskDetailRequest {
+  /** CSIP扫描任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** Status - int - 是否必填：否 - 扫描状态过滤Quuid - string - 是否必填：否 - 主机Quuid过滤MachineName - string - 是否必填：否 - 主机名称模糊搜索InstanceID - string - 是否必填：否 - 实例ID过滤（单值模糊匹配，多值精确匹配）IP - string - 是否必填：否 - IP地址过滤（内网IP+公网IP双向模糊匹配） */
+  Filters?: EDRFilter[];
+}
+
+declare interface ExportCSIPMalwareScanTaskDetailResponse {
+  /** 导出任务ID，用于查询导出结果 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExportEDRRulesRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件：Name、RuleContent、RuleType、ContentType、Action、Level、DetectMode、DetectType、AttackStage、Status */
+  Filters?: EDRFilter[];
+  /** 排序，大小写无关：ASC 升序，DESC降序 */
+  Order?: string;
+  /** 排序列，ModifyTime */
+  By?: string;
+}
+
+declare interface ExportEDRRulesResponse {
+  /** 任务ID,需要到接口 异步导出任务获取DownloadUrl下载地址 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAILinkSettingRequest {
   /** 0 关闭AI-Link智链引擎，1 开启AI-Link智链引擎 */
   AILinkEnable: number;
@@ -11170,6 +13330,18 @@ declare interface ModifyAILinkSettingRequest {
   ExcludeQuuids?: string[];
   /** 新增资产自动包含 0 不包含 1包含 */
   AutoInclude?: number;
+  /** 标签ID */
+  TagIDs?: string[];
+  /** 0,1枚举值：0： 部分1： 全部 */
+  TCSSScope?: number;
+  /** 集群ID */
+  ClusterIDs?: string[];
+  /** 排除集群ID */
+  ExcludeClusterIDs?: string[];
+  /** 实例ID */
+  InstanceIds?: string[];
+  /** 排除实例ID */
+  ExcludeInstanceIds?: string[];
 }
 
 declare interface ModifyAILinkSettingResponse {
@@ -11718,9 +13890,69 @@ declare interface ModifyEDRRuleRequest {
   InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
   /** 全选资产排除的实例ID和APPID */
   ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 安全中心标签ID列表（主机资产范围「按标签选择」，仅对主机生效）；上限 100（超限截断）。标签来源接口 DescribeAssetTagTree */
+  TagIDs?: string[];
+  /** 指定生效集群列表（每项含 AppId + ClusterID，TCSSScope=0 时使用）。入参数组上限 3000（超限截断保留前 3000 项） */
+  ClusterIDsWithAppId?: ClusterIDWithAppIdItem[];
+  /** 排除集群列表（每项含 AppId + ClusterID）；入参数组上限 3000（超限截断保留前 3000 项） */
+  ExcludeClusterIDsWithAppId?: ClusterIDWithAppIdItem[];
+  /** 直接选择镜像（每项含 AppId + ImageID，在集群基础上进一步过滤）。多账号场景下各账号只存属于自己的镜像；入参数组上限 3000（超限截断保留前 3000 项） */
+  ImageIDsWithAppId?: ImageIDWithAppIdItem[];
+  /** 容器条件匹配 */
+  ConditionMatches?: ConditionMatch[];
 }
 
 declare interface ModifyEDRRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEDRRuleStatusRequest {
+  /** 开启状态：0-开启，1-关闭 */
+  Status: number;
+  /** 策略ID数组 */
+  RuleIDs: string[];
+  /** 策略类型，0-system 1-custom */
+  RuleType: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 修改策略对应的APPID */
+  TargetAppIDs?: number[];
+}
+
+declare interface ModifyEDRRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEDRRulesActionRequest {
+  /** 策略ID数组 */
+  RuleIDs: string[];
+  /** 目标 Action：0-告警 1-放行 2-告警并拦截 */
+  AlertAction: number;
+  /** 目标账号 AppId 列表 */
+  TargetAppIDs: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyEDRRulesActionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEdrAlertIsolationRequest {
+  /** 告警定位列表（1-500） */
+  Targets: EdrAlertTarget[];
+  /** 操作类型：Isolate（隔离）/ RestoreIsolate（恢复隔离）/ KillProcess（进程查杀）枚举值：Isolate： 隔离RestoreIsolate： 恢复隔离KillProcess： 进程查杀 */
+  Status: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 是否终止关联进程，仅 Status=Isolate 有效，Status=KillProcess 时忽略 */
+  KillProcess?: boolean;
+}
+
+declare interface ModifyEdrAlertIsolationResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11735,6 +13967,20 @@ declare interface ModifyEdrAlertPermanentIgnoreRequest {
 declare interface ModifyEdrAlertPermanentIgnoreResponse {
   /** 成功忽略的告警数 */
   IgnoredCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEdrAlertStatusRequest {
+  /** 目标告警信息 */
+  Targets: EdrAlertTarget[];
+  /** 想达到的告警状态枚举值：PROCESSED： 已处理WHITELISTED： 已加白IGNORED： 已忽略DELETED： 已删除-软删除 */
+  Status: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyEdrAlertStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11761,6 +14007,36 @@ declare interface ModifyMachineRemarkRequest {
 }
 
 declare interface ModifyMachineRemarkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNetAttackSettingRequest {
+  /** 0 关闭网络攻击检测，1开启网络攻击检测 */
+  NetAttackEnable: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略 */
+  NetAttackAlarmStatus?: number;
+  /** 新增资产自动包含 0 不包含 1包含 */
+  AutoInclude?: number;
+  /** 主机范围：0-指定 1-全部 2-专业版 3-旗舰版 4-专业+旗舰 */
+  CWPScope?: number;
+  /** 指定主机列表（CWPScope=0时使用） */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 排除主机列表 */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 标签ID列表 */
+  TagIDs?: string[];
+  /** 容器范围：0-指定集群 1-全部集群 */
+  TCSSScope?: number;
+  /** 指定集群列表（TCSSScope=0时使用） */
+  ClusterIDsWithAppId?: ClusterIDWithAppIdItem[];
+  /** 排除集群列表 */
+  ExcludeClusterIDsWithAppId?: ClusterIDWithAppIdItem[];
+}
+
+declare interface ModifyNetAttackSettingResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11827,6 +14103,34 @@ declare interface ModifyPolicyStatusRequest {
 }
 
 declare interface ModifyPolicyStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyReverseShellSystemPolicyConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 内网告警展示 */
+  InnerNetAlarmShow?: boolean;
+  /** 内网ip展示 */
+  InnerIPShow?: boolean;
+  /** 主机范围：0-指定 1-全部 2-专业版 3-旗舰版 4-专业+旗舰 */
+  CWPScope?: number;
+  /** 指定主机列表（CWPScope=0时使用） */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 排除主机列表 */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 标签ID列表 */
+  TagIDs?: string[];
+  /** 容器范围：0-指定集群 1-全部集群 */
+  TCSSScope?: number;
+  /** 指定集群列表（TCSSScope=0时使用） */
+  ClusterIDsWithAppId?: ClusterIDWithAppIdItem[];
+  /** 排除集群列表 */
+  ExcludeClusterIDsWithAppId?: ClusterIDWithAppIdItem[];
+}
+
+declare interface ModifyReverseShellSystemPolicyConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11903,6 +14207,78 @@ declare interface ModifyUebaRuleSwitchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyVulScanPeriodicRequest {
+  /** 周期扫描开关（0-关闭, 1-开启） */
+  Status: number;
+  /** 漏洞类型枚举值：LINUX： Linux软件漏洞WINDOWS： Windows系统补丁WEB_CMS： Web-CMS漏洞APPLICATION： 应用漏洞EMERGENCY： 应急漏洞 */
+  VulCategory: string[];
+  /** 漏洞等级枚举值：LOW： 低危MEDIUM： 中危HIGH： 高危CRITICAL： 严重 */
+  Level: string[];
+  /** 扫描方式（VersionCompare: 版本对比, POC: POC检测, VersionComparePOC: 版本对比+POC检测） */
+  Method: string;
+  /** 开始时间（09:00:00） */
+  StartTime: string;
+  /** 结束时间（18:00:00） */
+  EndTime: string;
+  /** 资产范围（0-全部资产，1-自选资产，2-剔除资产，3-自动资产匹配） */
+  AssetRange: number;
+  /** 周期扫描类型枚举值：1： 每天2： 每周3： 每月 */
+  CycleType: number;
+  /** 扫描超时时长单位：秒 */
+  Timeout: number;
+  /** 周期值取值范围：[1, 31]单位：周几或者每月几号 */
+  CycleValue?: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 资产列表（instance_id列表） */
+  AssetList?: string[];
+  /** 是否运行被同步配置 0-不允许，1-允许 */
+  AllowSync?: number;
+  /** 管理员账号是否开启了自动同步配置开关 0-关闭，1-开启 */
+  EnableSync?: number;
+  /** 配置同步给哪些账号appid */
+  SyncTo?: number[];
+  /** 标签ID */
+  TagIds?: number[];
+}
+
+declare interface ModifyVulScanPeriodicResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVulWhitelistConfigRequest {
+  /** id列表 */
+  Id?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 备注 */
+  Remark?: string;
+  /** 资产范围枚举值：0： 全部资产1： 自选资产2： 全选剔除资产 */
+  AssetRange?: number;
+  /** 资产列表（Quuid列表） */
+  AssetList?: string[];
+}
+
+declare interface ModifyVulWhitelistConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVulWhitelistSwitchRequest {
+  /** id列表 */
+  Id?: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 策略开关枚举值：0： 关闭1： 开启 */
+  Switch?: number;
+}
+
+declare interface ModifyVulWhitelistSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetDspmAssetAccountPasswordRequest {
   /** 实例id */
   AssetId: string;
@@ -11951,6 +14327,42 @@ declare interface RevertDspmAssetAccountResponse {
   RequestId?: string;
 }
 
+declare interface ScanCSIPTaskAgainRequest {
+  /** 扫描任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 限定本次重扫的目标主机列表；为空时取主表对应子表的全量 实例ID；长度上限 1000 */
+  InstanceIDList?: string[];
+  /** 扫描超时时长（秒），可选。非零时更新一键扫描超时配置并同步更新子表 timeout 字段。上限 7200 秒（2小时），超出返回 InvalidParameter。 */
+  TimeoutPeriod?: number;
+}
+
+declare interface ScanCSIPTaskAgainResponse {
+  /** 本次实际触发重扫的机器数（= 状态白名单过滤后的候选机器数）单位：个 */
+  SuccessCount?: number;
+  /** 原任务 ID（与入参一致；CWP 原版同样返回原 ID 而非新 ID，重扫为原地复用） */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScanEDRTaskAgainRequest {
+  /** 原任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 主机Quuid或ContainerID（详情页单资产重扫时传，为空则全量重扫） */
+  AssetId?: string;
+}
+
+declare interface ScanEDRTaskAgainResponse {
+  /** 新建任务的TaskId */
+  NewTaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SendDspmAssetLoginSmsCodeRequest {
   /** 个人id */
   PersonId: string;
@@ -11965,6 +14377,34 @@ declare interface SendDspmAssetLoginSmsCodeResponse {
   RequestId?: string;
 }
 
+declare interface StopCSIPManualMalwareScanRequest {
+  /** 任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface StopCSIPManualMalwareScanResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopEDRScanTaskRequest {
+  /** 任务ID */
+  TaskId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface StopEDRScanTaskResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopRiskCenterTaskRequest {
   /** 任务id 列表 */
   TaskIdList: TaskIdListKey[];
@@ -11975,6 +14415,20 @@ declare interface StopRiskCenterTaskRequest {
 declare interface StopRiskCenterTaskResponse {
   /** Status为0， 停止成功 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopVulScanTaskRequest {
+  /** 任务id */
+  Id?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 停止扫描的资产instance_id */
+  AssetList?: string[];
+}
+
+declare interface StopVulScanTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12092,10 +14546,16 @@ declare interface Csip {
   AddDspmAssetManager(data: AddDspmAssetManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddDspmAssetManagerResponse>;
   /** csip角色授权绑定接口 {@link AddNewBindRoleUserRequest} {@link AddNewBindRoleUserResponse} */
   AddNewBindRoleUser(data?: AddNewBindRoleUserRequest, config?: AxiosRequestConfig): AxiosPromise<AddNewBindRoleUserResponse>;
+  /** 添加漏洞白名单 {@link AddVulWhitelistRequest} {@link AddVulWhitelistResponse} */
+  AddVulWhitelist(data?: AddVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddVulWhitelistResponse>;
+  /** 取消忽略EDR多行为告警 {@link CancelEdrAlertIgnoreRequest} {@link CancelEdrAlertIgnoreResponse} */
+  CancelEdrAlertIgnore(data: CancelEdrAlertIgnoreRequest, config?: AxiosRequestConfig): AxiosPromise<CancelEdrAlertIgnoreResponse>;
   /** 发起访问密钥的检测任务 {@link CreateAccessKeyCheckTaskRequest} {@link CreateAccessKeyCheckTaskResponse} */
   CreateAccessKeyCheckTask(data?: CreateAccessKeyCheckTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeyCheckTaskResponse>;
   /** 创建访问密钥的资产同步任务 {@link CreateAccessKeySyncTaskRequest} {@link CreateAccessKeySyncTaskResponse} */
   CreateAccessKeySyncTask(data?: CreateAccessKeySyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeySyncTaskResponse>;
+  /** CSIP 手动扫描创建接口 {@link CreateCSIPManualMalwareScanRequest} {@link CreateCSIPManualMalwareScanResponse} */
+  CreateCSIPManualMalwareScan(data: CreateCSIPManualMalwareScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCSIPManualMalwareScanResponse>;
   /** 创建对象存储资产同步任务 {@link CreateCosAssetSyncTaskRequest} {@link CreateCosAssetSyncTaskResponse} */
   CreateCosAssetSyncTask(data?: CreateCosAssetSyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCosAssetSyncTaskResponse>;
   /** 创建cos文件内容扫描任务 {@link CreateCosObjectScanTaskRequest} {@link CreateCosObjectScanTaskResponse} */
@@ -12142,6 +14602,12 @@ declare interface Csip {
   CreateDspmRiskExportJob(data?: CreateDspmRiskExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmRiskExportJobResponse>;
   /** 创建Dspm白名单策略 {@link CreateDspmWhitelistStrategyRequest} {@link CreateDspmWhitelistStrategyResponse} */
   CreateDspmWhitelistStrategy(data?: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
+  /** 创建手动EDR扫描任务 {@link CreateEDRManualScanRequest} {@link CreateEDRManualScanResponse} */
+  CreateEDRManualScan(data: CreateEDRManualScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEDRManualScanResponse>;
+  /** 创建EDR告警导出任务 {@link CreateEdrAlertExportJobRequest} {@link CreateEdrAlertExportJobResponse} */
+  CreateEdrAlertExportJob(data?: CreateEdrAlertExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEdrAlertExportJobResponse>;
+  /** 创建主机漏洞列表导出任务 {@link CreateHostVulExportJobRequest} {@link CreateHostVulExportJobResponse} */
+  CreateHostVulExportJob(data: CreateHostVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostVulExportJobResponse>;
   /** 创建IaC检测接入Token {@link CreateIaCAccessTokenRequest} {@link CreateIaCAccessTokenResponse} */
   CreateIaCAccessToken(data: CreateIaCAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCAccessTokenResponse>;
   /** 创建IaC检测文件导出任务 {@link CreateIaCFileExportJobRequest} {@link CreateIaCFileExportJobResponse} */
@@ -12152,6 +14618,18 @@ declare interface Csip {
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
   /** 上传 Skill 触发安全检测 {@link CreateSkillScanRequest} {@link CreateSkillScanResponse} */
   CreateSkillScan(data: CreateSkillScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillScanResponse>;
+  /** 重试漏洞修复任务 {@link CreateVulFixRetryTaskRequest} {@link CreateVulFixRetryTaskResponse} */
+  CreateVulFixRetryTask(data: CreateVulFixRetryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulFixRetryTaskResponse>;
+  /** 提交漏洞修复任务 {@link CreateVulFixTaskRequest} {@link CreateVulFixTaskResponse} */
+  CreateVulFixTask(data: CreateVulFixTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulFixTaskResponse>;
+  /** 创建已修复漏洞列表导出任务 {@link CreateVulFixedExportJobRequest} {@link CreateVulFixedExportJobResponse} */
+  CreateVulFixedExportJob(data?: CreateVulFixedExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulFixedExportJobResponse>;
+  /** 创建漏洞重新扫描 {@link CreateVulReScanRequest} {@link CreateVulReScanResponse} */
+  CreateVulReScan(data?: CreateVulReScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulReScanResponse>;
+  /** 创建漏洞扫描（一键扫描） {@link CreateVulScanManualRequest} {@link CreateVulScanManualResponse} */
+  CreateVulScanManual(data: CreateVulScanManualRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVulScanManualResponse>;
+  /** CSIP 手动扫描任务删除接口 {@link DeleteCSIPMalwareScanTaskRequest} {@link DeleteCSIPMalwareScanTaskResponse} */
+  DeleteCSIPMalwareScanTask(data: DeleteCSIPMalwareScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCSIPMalwareScanTaskResponse>;
   /** 删除cosak资产 {@link DeleteCosAkAssetRequest} {@link DeleteCosAkAssetResponse} */
   DeleteCosAkAsset(data: DeleteCosAkAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCosAkAssetResponse>;
   /** 删除cos策略 {@link DeleteCosPolicyRequest} {@link DeleteCosPolicyResponse} */
@@ -12184,12 +14662,18 @@ declare interface Csip {
   DeleteDspmRestoreLogList(data: DeleteDspmRestoreLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmRestoreLogListResponse>;
   /** 删除Dspm白名单策略 {@link DeleteDspmWhitelistStrategyRequest} {@link DeleteDspmWhitelistStrategyResponse} */
   DeleteDspmWhitelistStrategy(data?: DeleteDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmWhitelistStrategyResponse>;
+  /** 删除EDR策略 {@link DeleteEDRRulesRequest} {@link DeleteEDRRulesResponse} */
+  DeleteEDRRules(data: DeleteEDRRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEDRRulesResponse>;
+  /** 删除EDR扫描任务 {@link DeleteEDRScanTaskRequest} {@link DeleteEDRScanTaskResponse} */
+  DeleteEDRScanTask(data: DeleteEDRScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEDRScanTaskResponse>;
   /** 删除IaC检测接入Token {@link DeleteIaCAccessTokenRequest} {@link DeleteIaCAccessTokenResponse} */
   DeleteIaCAccessToken(data: DeleteIaCAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIaCAccessTokenResponse>;
   /** 删除IaC检测文件 {@link DeleteIaCFileRequest} {@link DeleteIaCFileResponse} */
   DeleteIaCFile(data: DeleteIaCFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIaCFileResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 删除漏洞白名单 {@link DeleteVulWhitelistRequest} {@link DeleteVulWhitelistResponse} */
+  DeleteVulWhitelist(data?: DeleteVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVulWhitelistResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
   DescribeAIAgentAssetList(data?: DescribeAIAgentAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentAssetListResponse>;
   /** 查询AI-Link智链引擎配置 {@link DescribeAILinkSettingRequest} {@link DescribeAILinkSettingResponse} */
@@ -12230,6 +14714,10 @@ declare interface Csip {
   DescribeCLSLogIndexV3(data: DescribeCLSLogIndexV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogIndexV3Response>;
   /** 日志分析cls日志检索v3 {@link DescribeCLSLogListV3Request} {@link DescribeCLSLogListV3Response} */
   DescribeCLSLogListV3(data: DescribeCLSLogListV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogListV3Response>;
+  /** CSIP 扫描任务主机详情接口 {@link DescribeCSIPMalwareScanTaskDetailRequest} {@link DescribeCSIPMalwareScanTaskDetailResponse} */
+  DescribeCSIPMalwareScanTaskDetail(data: DescribeCSIPMalwareScanTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPMalwareScanTaskDetailResponse>;
+  /** CSIP 手动扫描进度查询接口 {@link DescribeCSIPMalwareScanTaskProgressRequest} {@link DescribeCSIPMalwareScanTaskProgressResponse} */
+  DescribeCSIPMalwareScanTaskProgress(data?: DescribeCSIPMalwareScanTaskProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPMalwareScanTaskProgressResponse>;
   /** 资产风险概览统计接口 {@link DescribeCSIPRiskStatisticsRequest} {@link DescribeCSIPRiskStatisticsResponse} */
   DescribeCSIPRiskStatistics(data?: DescribeCSIPRiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPRiskStatisticsResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
@@ -12422,10 +14910,26 @@ declare interface Csip {
   DescribeDspmWhitelistStrategy(data?: DescribeDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmWhitelistStrategyResponse>;
   /** 获取EDR策略列表 {@link DescribeEDRRuleListRequest} {@link DescribeEDRRuleListResponse} */
   DescribeEDRRuleList(data?: DescribeEDRRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEDRRuleListResponse>;
+  /** 查询EDR扫描任务列表 {@link DescribeEDRScanRecordListRequest} {@link DescribeEDRScanRecordListResponse} */
+  DescribeEDRScanRecordList(data?: DescribeEDRScanRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEDRScanRecordListResponse>;
+  /** 查询EDR扫描任务详情 {@link DescribeEDRScanTaskDetailRequest} {@link DescribeEDRScanTaskDetailResponse} */
+  DescribeEDRScanTaskDetail(data: DescribeEDRScanTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEDRScanTaskDetailResponse>;
+  /** 获取EDR告警数量统计（资产模块） {@link DescribeEdrAlertCountForAssetRequest} {@link DescribeEdrAlertCountForAssetResponse} */
+  DescribeEdrAlertCountForAsset(data?: DescribeEdrAlertCountForAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertCountForAssetResponse>;
+  /** 容器场景告警数量统计 {@link DescribeEdrAlertCountForContainerRequest} {@link DescribeEdrAlertCountForContainerResponse} */
+  DescribeEdrAlertCountForContainer(data?: DescribeEdrAlertCountForContainerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertCountForContainerResponse>;
   /** 获取EDR告警详情 {@link DescribeEdrAlertInfoRequest} {@link DescribeEdrAlertInfoResponse} */
   DescribeEdrAlertInfo(data: DescribeEdrAlertInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertInfoResponse>;
   /** 获取EDR告警列表 {@link DescribeEdrAlertListRequest} {@link DescribeEdrAlertListResponse} */
   DescribeEdrAlertList(data?: DescribeEdrAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertListResponse>;
+  /** EDR告警多攻击阶段查询 {@link DescribeEdrAlertMultiAttackStagesRequest} {@link DescribeEdrAlertMultiAttackStagesResponse} */
+  DescribeEdrAlertMultiAttackStages(data: DescribeEdrAlertMultiAttackStagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertMultiAttackStagesResponse>;
+  /** 获取EDR告警统计 {@link DescribeEdrAlertSummaryRequest} {@link DescribeEdrAlertSummaryResponse} */
+  DescribeEdrAlertSummary(data?: DescribeEdrAlertSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrAlertSummaryResponse>;
+  /** 获取EDR导出下载链接 {@link DescribeEdrExportJobDownloadURLRequest} {@link DescribeEdrExportJobDownloadURLResponse} */
+  DescribeEdrExportJobDownloadURL(data?: DescribeEdrExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrExportJobDownloadURLResponse>;
+  /** 导出EDR任务列表 {@link DescribeEdrExportJobListRequest} {@link DescribeEdrExportJobListResponse} */
+  DescribeEdrExportJobList(data?: DescribeEdrExportJobListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrExportJobListResponse>;
   /** 查询云边界分析资产分类 {@link DescribeExposeAssetCategoryRequest} {@link DescribeExposeAssetCategoryResponse} */
   DescribeExposeAssetCategory(data?: DescribeExposeAssetCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExposeAssetCategoryResponse>;
   /** 查询云边界分析路径节点 {@link DescribeExposePathRequest} {@link DescribeExposePathResponse} */
@@ -12436,6 +14940,14 @@ declare interface Csip {
   DescribeGatewayAssets(data?: DescribeGatewayAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayAssetsResponse>;
   /** 查询云边界分析-暴露路径下主机节点的高危基线风险列表 {@link DescribeHighBaseLineRiskListRequest} {@link DescribeHighBaseLineRiskListResponse} */
   DescribeHighBaseLineRiskList(data?: DescribeHighBaseLineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHighBaseLineRiskListResponse>;
+  /** 获取主机KB风险列表 {@link DescribeHostKBRiskListRequest} {@link DescribeHostKBRiskListResponse} */
+  DescribeHostKBRiskList(data?: DescribeHostKBRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostKBRiskListResponse>;
+  /** 获取主机漏洞VPR信息 {@link DescribeHostVulItemVPRInfoRequest} {@link DescribeHostVulItemVPRInfoResponse} */
+  DescribeHostVulItemVPRInfo(data?: DescribeHostVulItemVPRInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulItemVPRInfoResponse>;
+  /** 获取主机漏洞概览 {@link DescribeHostVulOverviewRequest} {@link DescribeHostVulOverviewResponse} */
+  DescribeHostVulOverview(data?: DescribeHostVulOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulOverviewResponse>;
+  /** 获取主机漏洞风险列表 {@link DescribeHostVulRiskListRequest} {@link DescribeHostVulRiskListResponse} */
+  DescribeHostVulRiskList(data?: DescribeHostVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulRiskListResponse>;
   /** 获取IaC检测文件列表 {@link DescribeIaCFileListRequest} {@link DescribeIaCFileListResponse} */
   DescribeIaCFileList(data?: DescribeIaCFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCFileListResponse>;
   /** 获取IaC检测文件概览 {@link DescribeIaCFileOverviewRequest} {@link DescribeIaCFileOverviewResponse} */
@@ -12448,6 +14960,10 @@ declare interface Csip {
   DescribeIpInvokeRecord(data?: DescribeIpInvokeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInvokeRecordResponse>;
   /** 调用记录详情 {@link DescribeIpInvokeRecordDetailRequest} {@link DescribeIpInvokeRecordDetailResponse} */
   DescribeIpInvokeRecordDetail(data?: DescribeIpInvokeRecordDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInvokeRecordDetailResponse>;
+  /** 获取KB详情 {@link DescribeKBDetailRequest} {@link DescribeKBDetailResponse} */
+  DescribeKBDetail(data: DescribeKBDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBDetailResponse>;
+  /** 查询可更新补丁主机信息 {@link DescribeKBUpdatableMachineListRequest} {@link DescribeKBUpdatableMachineListResponse} */
+  DescribeKBUpdatableMachineList(data: DescribeKBUpdatableMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBUpdatableMachineListResponse>;
   /** 查询凭证详情 {@link DescribeKeySandboxCredentialRequest} {@link DescribeKeySandboxCredentialResponse} */
   DescribeKeySandboxCredential(data: DescribeKeySandboxCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeySandboxCredentialResponse>;
   /** 查询凭证列表 {@link DescribeKeySandboxCredentialListRequest} {@link DescribeKeySandboxCredentialListResponse} */
@@ -12456,6 +14972,8 @@ declare interface Csip {
   DescribeListenerList(data?: DescribeListenerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeListenerListResponse>;
   /** 网卡列表 {@link DescribeNICAssetsRequest} {@link DescribeNICAssetsResponse} */
   DescribeNICAssets(data?: DescribeNICAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNICAssetsResponse>;
+  /** 查询网络攻击设置 {@link DescribeNetAttackSettingRequest} {@link DescribeNetAttackSettingResponse} */
+  DescribeNetAttackSetting(data?: DescribeNetAttackSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetAttackSettingResponse>;
   /** 获取通知资产范围配置 {@link DescribeNotifyAssetConfigRequest} {@link DescribeNotifyAssetConfigResponse} */
   DescribeNotifyAssetConfig(data?: DescribeNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifyAssetConfigResponse>;
   /** 获取通知设置 {@link DescribeNotifySettingRequest} {@link DescribeNotifySettingResponse} */
@@ -12474,6 +14992,8 @@ declare interface Csip {
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 仓库镜像列表 {@link DescribeRepositoryImageAssetsRequest} {@link DescribeRepositoryImageAssetsResponse} */
   DescribeRepositoryImageAssets(data?: DescribeRepositoryImageAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryImageAssetsResponse>;
+  /** 查询反弹Shell系统策略配置 {@link DescribeReverseShellSystemPolicyConfigRequest} {@link DescribeReverseShellSystemPolicyConfigResponse} */
+  DescribeReverseShellSystemPolicyConfig(data?: DescribeReverseShellSystemPolicyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReverseShellSystemPolicyConfigResponse>;
   /** 查看受影响的存储桶列表 {@link DescribeRiskBucketListRequest} {@link DescribeRiskBucketListResponse} */
   DescribeRiskBucketList(data: DescribeRiskBucketListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskBucketListResponse>;
   /** 获取风险对应的调用记录 {@link DescribeRiskCallRecordRequest} {@link DescribeRiskCallRecordResponse} */
@@ -12544,12 +15064,46 @@ declare interface Csip {
   DescribeVULRiskDetail(data?: DescribeVULRiskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskDetailResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
+  /** 获取漏洞组件关联主机 {@link DescribeVulComponentRelateHostRequest} {@link DescribeVulComponentRelateHostResponse} */
+  DescribeVulComponentRelateHost(data: DescribeVulComponentRelateHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulComponentRelateHostResponse>;
+  /** 获取漏洞修复任务详情 {@link DescribeVulFixTaskDetailRequest} {@link DescribeVulFixTaskDetailResponse} */
+  DescribeVulFixTaskDetail(data: DescribeVulFixTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulFixTaskDetailResponse>;
+  /** 获取漏洞修复任务记录列表 {@link DescribeVulFixTaskListRequest} {@link DescribeVulFixTaskListResponse} */
+  DescribeVulFixTaskList(data?: DescribeVulFixTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulFixTaskListResponse>;
+  /** 查询可修复主机信息 {@link DescribeVulFixableMachineListRequest} {@link DescribeVulFixableMachineListResponse} */
+  DescribeVulFixableMachineList(data: DescribeVulFixableMachineListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulFixableMachineListResponse>;
+  /** 获取已修复漏洞的主机修复详情 {@link DescribeVulFixedHostDetailRequest} {@link DescribeVulFixedHostDetailResponse} */
+  DescribeVulFixedHostDetail(data: DescribeVulFixedHostDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulFixedHostDetailResponse>;
+  /** 获取被修复漏洞列表 {@link DescribeVulFixedListRequest} {@link DescribeVulFixedListResponse} */
+  DescribeVulFixedList(data?: DescribeVulFixedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulFixedListResponse>;
+  /** 获取漏洞主机关联组件 {@link DescribeVulHostRelateComponentRequest} {@link DescribeVulHostRelateComponentResponse} */
+  DescribeVulHostRelateComponent(data: DescribeVulHostRelateComponentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulHostRelateComponentResponse>;
+  /** 获取漏洞忽略列表 {@link DescribeVulIgnoreRuleListRequest} {@link DescribeVulIgnoreRuleListResponse} */
+  DescribeVulIgnoreRuleList(data?: DescribeVulIgnoreRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulIgnoreRuleListResponse>;
+  /** 获取漏洞列表 {@link DescribeVulItemListRequest} {@link DescribeVulItemListResponse} */
+  DescribeVulItemList(data?: DescribeVulItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulItemListResponse>;
+  /** 获取漏洞标签列表 {@link DescribeVulLabelListRequest} {@link DescribeVulLabelListResponse} */
+  DescribeVulLabelList(data?: DescribeVulLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulLabelListResponse>;
   /** 查询云边界分析-暴露路径下主机节点的漏洞列表 {@link DescribeVulRiskListRequest} {@link DescribeVulRiskListResponse} */
   DescribeVulRiskList(data?: DescribeVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulRiskListResponse>;
+  /** 获取漏洞风险关联组件 {@link DescribeVulRiskRelateComponentRequest} {@link DescribeVulRiskRelateComponentResponse} */
+  DescribeVulRiskRelateComponent(data: DescribeVulRiskRelateComponentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulRiskRelateComponentResponse>;
+  /** 获取漏洞风险关联主机 {@link DescribeVulRiskRelateHostRequest} {@link DescribeVulRiskRelateHostResponse} */
+  DescribeVulRiskRelateHost(data: DescribeVulRiskRelateHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulRiskRelateHostResponse>;
+  /** 获取漏洞扫描配置（周期扫描） {@link DescribeVulScanPeriodicRequest} {@link DescribeVulScanPeriodicResponse} */
+  DescribeVulScanPeriodic(data?: DescribeVulScanPeriodicRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanPeriodicResponse>;
+  /** 获取漏洞扫描任务详情 {@link DescribeVulScanTaskDetailRequest} {@link DescribeVulScanTaskDetailResponse} */
+  DescribeVulScanTaskDetail(data: DescribeVulScanTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanTaskDetailResponse>;
+  /** 获取漏洞扫描任务记录 {@link DescribeVulScanTaskListRequest} {@link DescribeVulScanTaskListResponse} */
+  DescribeVulScanTaskList(data?: DescribeVulScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanTaskListResponse>;
   /** 漏洞管理-漏洞视角的漏洞风险列表 {@link DescribeVulViewVulRiskListRequest} {@link DescribeVulViewVulRiskListResponse} */
   DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
   /** 下载导出日志 {@link DownloadDspmExportLogRequest} {@link DownloadDspmExportLogResponse} */
   DownloadDspmExportLog(data?: DownloadDspmExportLogRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadDspmExportLogResponse>;
+  /** 导出CSIP扫描任务主机详情 {@link ExportCSIPMalwareScanTaskDetailRequest} {@link ExportCSIPMalwareScanTaskDetailResponse} */
+  ExportCSIPMalwareScanTaskDetail(data: ExportCSIPMalwareScanTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ExportCSIPMalwareScanTaskDetailResponse>;
+  /** 导出EDR策略列表 {@link ExportEDRRulesRequest} {@link ExportEDRRulesResponse} */
+  ExportEDRRules(data?: ExportEDRRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ExportEDRRulesResponse>;
   /** 修改AI-Link智链引擎配置 {@link ModifyAILinkSettingRequest} {@link ModifyAILinkSettingResponse} */
   ModifyAILinkSetting(data: ModifyAILinkSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAILinkSettingResponse>;
   /** 风险或者告警处理 {@link ModifyAlarmRiskStatusRequest} {@link ModifyAlarmRiskStatusResponse} */
@@ -12616,12 +15170,22 @@ declare interface Csip {
   ModifyDspmWhitelistStrategy(data?: ModifyDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmWhitelistStrategyResponse>;
   /** 编辑或者创建EDR策略 {@link ModifyEDRRuleRequest} {@link ModifyEDRRuleResponse} */
   ModifyEDRRule(data: ModifyEDRRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEDRRuleResponse>;
+  /** 修改EDR策略开关状态 {@link ModifyEDRRuleStatusRequest} {@link ModifyEDRRuleStatusResponse} */
+  ModifyEDRRuleStatus(data: ModifyEDRRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEDRRuleStatusResponse>;
+  /** 批量修改EDR策略动作 {@link ModifyEDRRulesActionRequest} {@link ModifyEDRRulesActionResponse} */
+  ModifyEDRRulesAction(data: ModifyEDRRulesActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEDRRulesActionResponse>;
+  /** EDR告警隔离和恢复 {@link ModifyEdrAlertIsolationRequest} {@link ModifyEdrAlertIsolationResponse} */
+  ModifyEdrAlertIsolation(data: ModifyEdrAlertIsolationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdrAlertIsolationResponse>;
   /** 永久忽略EDR多行为告警 {@link ModifyEdrAlertPermanentIgnoreRequest} {@link ModifyEdrAlertPermanentIgnoreResponse} */
   ModifyEdrAlertPermanentIgnore(data: ModifyEdrAlertPermanentIgnoreRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdrAlertPermanentIgnoreResponse>;
+  /** EDR告警状态处置 {@link ModifyEdrAlertStatusRequest} {@link ModifyEdrAlertStatusResponse} */
+  ModifyEdrAlertStatus(data: ModifyEdrAlertStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdrAlertStatusResponse>;
   /** 修改IaC检测接入Token存储周期 {@link ModifyIaCTokenPeriodRequest} {@link ModifyIaCTokenPeriodResponse} */
   ModifyIaCTokenPeriod(data: ModifyIaCTokenPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIaCTokenPeriodResponse>;
   /** 修改主机备注信息 {@link ModifyMachineRemarkRequest} {@link ModifyMachineRemarkResponse} */
   ModifyMachineRemark(data: ModifyMachineRemarkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMachineRemarkResponse>;
+  /** 修改网络攻击设置 {@link ModifyNetAttackSettingRequest} {@link ModifyNetAttackSettingResponse} */
+  ModifyNetAttackSetting(data: ModifyNetAttackSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetAttackSettingResponse>;
   /** 修改通知资产范围配置 {@link ModifyNotifyAssetConfigRequest} {@link ModifyNotifyAssetConfigResponse} */
   ModifyNotifyAssetConfig(data?: ModifyNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyAssetConfigResponse>;
   /** 修改通知设置 {@link ModifyNotifySettingRequest} {@link ModifyNotifySettingResponse} */
@@ -12632,22 +15196,40 @@ declare interface Csip {
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
   /** 修改策略状态 {@link ModifyPolicyStatusRequest} {@link ModifyPolicyStatusResponse} */
   ModifyPolicyStatus(data: ModifyPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyStatusResponse>;
+  /** 修改反弹Shell系统策略配置 {@link ModifyReverseShellSystemPolicyConfigRequest} {@link ModifyReverseShellSystemPolicyConfigResponse} */
+  ModifyReverseShellSystemPolicyConfig(data?: ModifyReverseShellSystemPolicyConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReverseShellSystemPolicyConfigResponse>;
   /** 修改风险中心风险状态 {@link ModifyRiskCenterRiskStatusRequest} {@link ModifyRiskCenterRiskStatusResponse} */
   ModifyRiskCenterRiskStatus(data: ModifyRiskCenterRiskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterRiskStatusResponse>;
   /** 修改风险中心扫描任务 {@link ModifyRiskCenterScanTaskRequest} {@link ModifyRiskCenterScanTaskResponse} */
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 更新自定义策略的开关 {@link ModifyUebaRuleSwitchRequest} {@link ModifyUebaRuleSwitchResponse} */
   ModifyUebaRuleSwitch(data: ModifyUebaRuleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUebaRuleSwitchResponse>;
+  /** 修改漏洞扫描配置（周期扫描） {@link ModifyVulScanPeriodicRequest} {@link ModifyVulScanPeriodicResponse} */
+  ModifyVulScanPeriodic(data: ModifyVulScanPeriodicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulScanPeriodicResponse>;
+  /** 修改漏洞白名单配置 {@link ModifyVulWhitelistConfigRequest} {@link ModifyVulWhitelistConfigResponse} */
+  ModifyVulWhitelistConfig(data?: ModifyVulWhitelistConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulWhitelistConfigResponse>;
+  /** 修改漏洞白名单开关 {@link ModifyVulWhitelistSwitchRequest} {@link ModifyVulWhitelistSwitchResponse} */
+  ModifyVulWhitelistSwitch(data?: ModifyVulWhitelistSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulWhitelistSwitchResponse>;
   /** 重置Dspm资产账号密码 {@link ResetDspmAssetAccountPasswordRequest} {@link ResetDspmAssetAccountPasswordResponse} */
   ResetDspmAssetAccountPassword(data: ResetDspmAssetAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDspmAssetAccountPasswordResponse>;
   /** 重试导出任务 {@link RetryDspmExportLogRequest} {@link RetryDspmExportLogResponse} */
   RetryDspmExportLog(data?: RetryDspmExportLogRequest, config?: AxiosRequestConfig): AxiosPromise<RetryDspmExportLogResponse>;
   /** 恢复Dspm资产账号 {@link RevertDspmAssetAccountRequest} {@link RevertDspmAssetAccountResponse} */
   RevertDspmAssetAccount(data: RevertDspmAssetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<RevertDspmAssetAccountResponse>;
+  /** CSIP 手动扫描重扫接口 {@link ScanCSIPTaskAgainRequest} {@link ScanCSIPTaskAgainResponse} */
+  ScanCSIPTaskAgain(data: ScanCSIPTaskAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanCSIPTaskAgainResponse>;
+  /** 重新扫描EDR任务 {@link ScanEDRTaskAgainRequest} {@link ScanEDRTaskAgainResponse} */
+  ScanEDRTaskAgain(data: ScanEDRTaskAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanEDRTaskAgainResponse>;
   /** 发送Dspm资产访问验证码 {@link SendDspmAssetLoginSmsCodeRequest} {@link SendDspmAssetLoginSmsCodeResponse} */
   SendDspmAssetLoginSmsCode(data: SendDspmAssetLoginSmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendDspmAssetLoginSmsCodeResponse>;
+  /** CSIP 手动扫描停止接口 {@link StopCSIPManualMalwareScanRequest} {@link StopCSIPManualMalwareScanResponse} */
+  StopCSIPManualMalwareScan(data: StopCSIPManualMalwareScanRequest, config?: AxiosRequestConfig): AxiosPromise<StopCSIPManualMalwareScanResponse>;
+  /** 停止或取消EDR扫描任务 {@link StopEDRScanTaskRequest} {@link StopEDRScanTaskResponse} */
+  StopEDRScanTask(data: StopEDRScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopEDRScanTaskResponse>;
   /** 停止扫风险中心扫描任务 {@link StopRiskCenterTaskRequest} {@link StopRiskCenterTaskResponse} */
   StopRiskCenterTask(data: StopRiskCenterTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRiskCenterTaskResponse>;
+  /** 停止漏洞扫描（任务扫描） {@link StopVulScanTaskRequest} {@link StopVulScanTaskResponse} */
+  StopVulScanTask(data?: StopVulScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopVulScanTaskResponse>;
   /** 同步Dspm资产 {@link SyncDspmAssetsRequest} {@link SyncDspmAssetsResponse} */
   SyncDspmAssets(data?: SyncDspmAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmAssetsResponse>;
   /** 同步Dspm用户列表 {@link SyncDspmUsersRequest} {@link SyncDspmUsersResponse} */

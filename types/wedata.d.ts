@@ -3364,7 +3364,7 @@ declare interface TaskCode {
 
 /** 任务代码 */
 declare interface TaskCodeResult {
-  /** 代码内容 */
+  /** base64编码的代码内容 */
   CodeInfo?: string | null;
   /** 代码文件大小，单位KB */
   CodeFileSize?: string | null;

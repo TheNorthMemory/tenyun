@@ -870,6 +870,8 @@ declare interface DatasourceConnectionConfig {
   TccHive?: TccHive;
   /** MongoDB 数据源 */
   MongoDB?: DataSourceInfo;
+  /** TCHouseP数据源 */
+  TCHouseP?: TCHousePInfo;
 }
 
 /** 数据源信息 */
@@ -1372,6 +1374,26 @@ declare interface IcebergTablePartition {
   LastUpdateSnapshotId?: string;
   /** 分区的location */
   Location?: LocationInfo;
+}
+
+/** 镜像响应类 */
+declare interface ImageDto {
+  /** 镜像ID */
+  Id?: number;
+  /** 镜像名称 */
+  Name?: string;
+  /** 镜像地址 */
+  Url?: string;
+  /** 镜像描述 */
+  Description?: string;
+  /** 镜像类型（Ray/Workspace） */
+  Type?: string;
+  /** 镜像内置的 Ray 版本号 */
+  RayVersion?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
 }
 
 /** 推理引擎具体信息 */
@@ -2650,6 +2672,8 @@ declare interface ResourceSaleInfo {
   Step?: number | null;
   /** 最大资源数量，仅GU有值 */
   MaxSpec?: number | null;
+  /** 库存情况，对当前地域该计费项实时可新增数量的分级预估。取值复用 BcpConstants 库存状态常量：EnoughStock：余量充足（>100）NormalStock：余量正常（50~100）UnderStock：余量紧张（1~49）WithoutStock：无库存（0）该值为底层提供的预估值，不代表保证可发货量，仅用于展示库存概况。当请求 Region 与资源池地域不一致、cold-start 缓存未 ready、或该计费项在快照中缺失时返回 null。 */
+  StatusCategory?: string | null;
 }
 
 /** 资源规格 */
@@ -3184,6 +3208,26 @@ declare interface TCHouseD {
   AccessInfo?: string;
 }
 
+/** TCHouseP 结构 */
+declare interface TCHousePInfo {
+  /** 实例id */
+  InstanceId?: string | null;
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** JdbcUrl */
+  JdbcUrl?: string | null;
+  /** 用户名 */
+  User?: string | null;
+  /** 密码 */
+  Password?: string | null;
+  /** 地址 */
+  Location?: DatasourceConnectionLocation | null;
+  /** 数据库名称 */
+  DbName?: string | null;
+  /** 地址信息 */
+  AccessInfo?: string | null;
+}
+
 /** 表字段描述信息 */
 declare interface TColumn {
   /** 字段名称 */
@@ -3474,6 +3518,8 @@ declare interface TaskFullRespInfo {
   ActiveCore?: number;
   /** 排队时间单位：毫秒 */
   QueueTime?: number;
+  /** 资源组类型 */
+  ResourceGroupType?: string;
 }
 
 /** 任务监控信息 */
@@ -7266,7 +7312,7 @@ declare interface DescribeSaleResourceInfoRequest {
 }
 
 declare interface DescribeSaleResourceInfoResponse {
-  /** 可售卖资源规格列表 */
+  /** 可售卖资源规格列表，包含规格、步长、单账户上限、以及库存情况 */
   SaleResourceInfoList?: ResourceSaleInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -9419,6 +9465,32 @@ declare interface ListExamplesResponse {
   TotalPages?: number;
   /** 案例管理列表 */
   Items?: ExampleEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListImagesRequest {
+  /** 关键词搜索（模糊匹配名称或描述） */
+  Keyword?: string;
+  /** 镜像类型过滤（Ray/Workspace） */
+  Type?: string;
+  /** 页数 */
+  Page?: number;
+  /** 数量 */
+  PageSize?: number;
+}
+
+declare interface ListImagesResponse {
+  /** 总记录数 */
+  Total?: number;
+  /** 当前页码（从1开始） */
+  Page?: number;
+  /** 页数 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 镜像列表 */
+  Items?: ImageDto[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12212,6 +12284,8 @@ declare interface Dlc {
   ListExampleTags(data?: ListExampleTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ListExampleTagsResponse>;
   /** 分页查询案例列表 {@link ListExamplesRequest} {@link ListExamplesResponse} */
   ListExamples(data?: ListExamplesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExamplesResponse>;
+  /** 列出所有镜像 {@link ListImagesRequest} {@link ListImagesResponse} */
+  ListImages(data?: ListImagesRequest, config?: AxiosRequestConfig): AxiosPromise<ListImagesResponse>;
   /** 列出推理引擎及其信息 {@link ListInferenceEnginesRequest} {@link ListInferenceEnginesResponse} */
   ListInferenceEngines(data?: ListInferenceEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<ListInferenceEnginesResponse>;
   /** 列出推理模型 {@link ListInferenceModelsRequest} {@link ListInferenceModelsResponse} */

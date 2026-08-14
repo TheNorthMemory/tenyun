@@ -218,6 +218,8 @@ declare interface NoticeContentTmplItem {
   GoogleChatRobot?: GoogleChatRobotNoticeTmplMatcher[];
   /** Slack */
   SlackRobot?: SlackRobotNoticeTmplMatcher[];
+  /** Teams 工作流渠道 */
+  TeamsWorkflowRobot?: TeamsWorkflowRobotNoticeTmplMatcher[];
 }
 
 /** 通知历史中关联的通知模板信息 */
@@ -348,6 +350,24 @@ declare interface TeamsRobotNoticeTmplMatcher {
   MatchingStatus: string[];
   /** 模板配置 */
   Template: TeamsRobotNoticeTmpl;
+}
+
+/** Microsoft Teams 工作流内容模板配置 */
+declare interface TeamsWorkflowRobotNoticeTmpl {
+  /** 内容模板 */
+  ContentTmpl: string;
+  /** 区分 TeamsWorkflow 是自定义内容还是自定义 POST BODY枚举值：WorkflowText： 自定义内容WorkflowJson： 自定义 POST BODY */
+  Version: string;
+  /** 标题模版 */
+  TitleTmpl?: string;
+}
+
+/** Microsoft Teams 工作流通知模板的匹配器 */
+declare interface TeamsWorkflowRobotNoticeTmplMatcher {
+  /** 匹配状态 Invalid; Trigger 告警触发; Recovery 告警恢复枚举值：Trigger： 告警触发Recovery： 告警恢复 */
+  MatchingStatus: string[];
+  /** 模板配置 */
+  Template: TeamsWorkflowRobotNoticeTmpl;
 }
 
 /** 触发数字分身任务响应 */

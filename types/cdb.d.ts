@@ -916,6 +916,14 @@ declare interface InstanceAuditLogFilters {
   Value?: string[];
 }
 
+/** 修改计费模式时，如果需要从按量计费转为包年包月，则需指定时长和自动续费标志 */
+declare interface InstanceChargePrepaid {
+  /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。 */
+  Period?: number;
+  /** 自动续费标识，0：不自动续费，1：自动续费 */
+  RenewFlag?: number;
+}
+
 /** 实例审计详情信息 */
 declare interface InstanceDbAuditStatus {
   /** 实例ID。 */
@@ -4990,6 +4998,34 @@ declare interface ModifyDBInstanceVipVportResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceChargeTypeRequest {
+  /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
+  InstanceId: string;
+  /** 修改后的计费类型枚举值：PREPAID： 包年包月POSTPAID_BY_HOUR： 按量计费 */
+  InstanceChargeType: string;
+  /** 修改后包年包月相关参数设置 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+}
+
+declare interface ModifyInstanceChargeTypeResponse {
+  /** 订单ID */
+  DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyInstanceDestroyProtectRequest {
+  /** 实例 ID 列表 */
+  InstanceIds: string[];
+  /** 开启或关闭实例销毁保护 */
+  DestroyProtect: string;
+}
+
+declare interface ModifyInstanceDestroyProtectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceParamRequest {
   /** 实例 ID 列表。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceIds: string[];
@@ -5582,6 +5618,8 @@ declare interface UpgradeDBInstanceResponse {
   DealIds?: string[];
   /** 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。 */
   AsyncRequestId?: string;
+  /** 任务列表的任务ID */
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5891,6 +5929,10 @@ declare interface Cdb {
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改云数据库实例的IP和端口号 {@link ModifyDBInstanceVipVportRequest} {@link ModifyDBInstanceVipVportResponse} */
   ModifyDBInstanceVipVport(data: ModifyDBInstanceVipVportRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceVipVportResponse>;
+  /** 修改实例的计费模式 {@link ModifyInstanceChargeTypeRequest} {@link ModifyInstanceChargeTypeResponse} */
+  ModifyInstanceChargeType(data: ModifyInstanceChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceChargeTypeResponse>;
+  /** 更新实例销毁保护状态 {@link ModifyInstanceDestroyProtectRequest} {@link ModifyInstanceDestroyProtectResponse} */
+  ModifyInstanceDestroyProtect(data: ModifyInstanceDestroyProtectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceDestroyProtectResponse>;
   /** 修改实例参数 {@link ModifyInstanceParamRequest} {@link ModifyInstanceParamResponse} */
   ModifyInstanceParam(data: ModifyInstanceParamRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamResponse>;
   /** 修改实例密码复杂度 {@link ModifyInstancePasswordComplexityRequest} {@link ModifyInstancePasswordComplexityResponse} */

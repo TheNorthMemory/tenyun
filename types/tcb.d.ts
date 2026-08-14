@@ -586,9 +586,9 @@ declare interface HTTPServiceDomain {
   IsDefault?: boolean;
   /** 域名开启状态 */
   Enable?: boolean;
-  /** 状态。PROCESSING、FAIL，SUCCESS。 */
+  /** 状态。枚举值：PROCESSING： 处理中FAIL： 失败EO_PENDING_VERIFICATION： 待验证edgeone归属权SUCCESS： 成功 */
   Status?: string;
-  /** DNS解析状态。OK： 解析正常，INVALID：解析不正确，域名未解析到当前Cname域名。 */
+  /** DNS解析状态枚举值：OK： 正常，命中目标 cnameEMPTY： 解析为空，域名尚未配置 CNAME 或未生效INVALID： 异常，解析到其他非目标地址 */
   DNSStatus?: string;
   /** HTTP访问服务路由信息 */
   Routes?: HTTPServiceRoute[];

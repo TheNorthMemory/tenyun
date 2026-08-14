@@ -100,6 +100,12 @@ declare interface AgentAppServiceVO {
   AgentCredentialVO?: DescribeAgentCredentialResp;
 }
 
+/** API Key类型凭据 */
+declare interface AgentCredentialApiKeyDTO {
+  /** API Key */
+  Value?: string;
+}
+
 /** 凭证内容 */
 declare interface AgentCredentialContentDTO {
   /** 如果认证类型为sts时，该项必填 */
@@ -108,6 +114,10 @@ declare interface AgentCredentialContentDTO {
   STSService?: string;
   /** 如果认证类型为reqKey时，该项必填 */
   Headers?: AgentCredentialContentHeaderDTO[];
+  /** 如果认证类型为apiKey时，该项必填 */
+  ApiKeys?: AgentCredentialApiKeyDTO[] | null;
+  /** 容错策略，仅Type为apiKey时支持 */
+  FaultTolerance?: FaultToleranceDTO | null;
 }
 
 /** 凭证内容头 */
@@ -496,6 +506,12 @@ declare interface DescribeModelServiceResponseVO {
   ModelProtocol?: string | null;
   /** 自定义模型协议配置 */
   RawCustomModelProtocolConfig?: string;
+  /** 路由策略 */
+  RouteStrategy?: string | null;
+  /** token长度路由配置 */
+  TokenLengthRoute?: TokenLengthRouteDTO[] | null;
+  /** 任务复杂度路由配置 */
+  TaskComplexityRoute?: TaskComplexityRouteDTO | null;
 }
 
 /** 查询模型列表的响应 */
@@ -534,6 +550,22 @@ declare interface DescribeModelsSort {
   LastUpdateTime?: number;
   /** 模型名称 */
   Name?: number;
+}
+
+/** API Key容错策略配置 */
+declare interface FaultToleranceDTO {
+  /** 是否启用API Key容错配置 */
+  Enabled?: boolean;
+  /** 异常判定状态码，固定3位数字或字母 */
+  ErrorCodes?: string[];
+  /** 连续异常次数单位：次 */
+  ErrorCount?: number;
+  /** 隔离时长单位：秒 */
+  IsolationTime?: number;
+  /** 最多切换次数置0为不开启自动切换 */
+  MaxSwitchCount?: number;
+  /** 切换总时间预算单位：秒 */
+  SwitchTimeout?: number;
 }
 
 /** FieldValue结构体 */
@@ -992,6 +1024,16 @@ declare interface TargetServerGroupDTO {
   CreateTime?: string | null;
 }
 
+/** 任务复杂度路由参数 */
+declare interface TaskComplexityRouteDTO {
+  /** 倾向度取值范围：[0, 1] */
+  ComplexityBias?: number | null;
+  /** 简单模型 */
+  SimpleTargetModels?: TargetModelDTO[] | null;
+  /** 复杂模型 */
+  ComplexTargetModels?: TargetModelDTO[] | null;
+}
+
 /** 内容安全配置 */
 declare interface TmsConfigDTO {
   /** 检测范围,请求/响应 */
@@ -1008,6 +1050,16 @@ declare interface TmsConfigDTO {
   InterceptMessage?: string | null;
   /** 检测上下文 */
   ContextScope?: string | null;
+}
+
+/** token长度路由参数 */
+declare interface TokenLengthRouteDTO {
+  /** Token 区间下限 */
+  MinTokens?: number | null;
+  /** Token 区间上限 */
+  MaxTokens?: number | null;
+  /** 模型 */
+  TargetModels?: TargetModelDTO[] | null;
 }
 
 /** Token限流配置 */
@@ -1293,6 +1345,12 @@ declare interface CreateModelServiceRequest {
   ModelProtocol?: string;
   /** 自定义模型协议配置 */
   RawCustomModelProtocolConfig?: string;
+  /** 路由策略枚举值：weight： 权重taskComplexity： 任务复杂度tokenLength： token长度 */
+  RouteStrategy?: string;
+  /** token长度路由策略 */
+  TokenLengthRoute?: TokenLengthRouteDTO[];
+  /** 任务复杂度路由策略 */
+  TaskComplexityRoute?: TaskComplexityRouteDTO;
 }
 
 declare interface CreateModelServiceResponse {
@@ -1901,6 +1959,12 @@ declare interface ModifyModelServiceRequest {
   ModelProtocol?: string;
   /** 自定义模型协议配置 */
   RawCustomModelProtocolConfig?: string;
+  /** 路由策略枚举值：weight： 权重taskComplexity： 任务复杂度tokenLength： token长度 */
+  RouteStrategy?: string;
+  /** token长度路由策略 */
+  TokenLengthRoute?: TokenLengthRouteDTO[];
+  /** 任务复杂度路由策略 */
+  TaskComplexityRoute?: TaskComplexityRouteDTO;
 }
 
 declare interface ModifyModelServiceResponse {

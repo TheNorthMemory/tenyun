@@ -1304,6 +1304,8 @@ declare interface ClbObject {
   BotStatus?: number;
   /** api防护开关 */
   ApiStatus?: number;
+  /** LLMWAF开关 */
+  LLMStatus?: number;
   /** 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式 */
   ObjectFlowMode?: number;
   /** 数值形式的私有网络 ID */

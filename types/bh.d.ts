@@ -712,6 +712,18 @@ declare interface OperationTask {
   FirstTime?: string;
 }
 
+/** 开通堡垒机的子网 */
+declare interface ParamInitResourceSubnet {
+  /** xa0子网id */
+  SubnetId: string;
+  /** 子网名称 */
+  SubnetName: string;
+  /** 子网可用区 */
+  Zone: string;
+  /** 子网cidr */
+  SubnetCidrBlock: string;
+}
+
 /** 密码要求设置。 */
 declare interface PasswordSetting {
   /** 密码最小长度，8-20，默认8。 */
@@ -810,6 +822,8 @@ declare interface Resource {
   DomainCount?: number;
   /** 已经使用的网络域个数 */
   UsedDomainCount?: number;
+  /** 开启的网络域个数（不包含默认网络域） */
+  EnabledDomainCount?: number;
   /** 0 非试用版，1 试用版 */
   Trial?: number;
   /** 日志投递规格信息 */
@@ -826,6 +840,8 @@ declare interface Resource {
   IntranetVpcId?: string;
   /** 开通内网访问的subnetId */
   IntranetSubnetId?: string;
+  /** 开通内网访问的子网集合 */
+  IntranetSubnetIdSet?: string[];
   /** 开通内网访问vpc的网段 */
   IntranetVpcCidr?: string;
   /** 堡垒机内网ip自定义域名 */
@@ -866,6 +882,32 @@ declare interface Resource {
   BillingRegion?: string;
   /** 计费侧可用区 */
   BillingZone?: string;
+  /** 部署的cvm个数 */
+  DeployCvmCount?: number;
+  /** 堡垒机实例的可用区信息 */
+  ResourceZoneSet?: ResourceDeployZone[];
+}
+
+/** 堡垒机实例部署的可用区 */
+declare interface ResourceDeployZone {
+  /** 部署堡垒机的VpcId */
+  VpcId?: string;
+  /** 部署堡垒机vpc的名称 */
+  VpcName?: string;
+  /** 部署堡垒机vpc的cidr */
+  VpcCidrBlock?: string;
+  /** 部署堡垒机的子网Id */
+  SubnetId?: string;
+  /** 部署堡垒机的子网名称 */
+  SubnetName?: string;
+  /** 子网cidr */
+  SubnetCidrBlock?: string;
+  /** 部署堡垒机的地域 */
+  Region?: string;
+  /** 部署堡垒机的可用区 */
+  Zone?: string;
+  /** 子网的作用场景枚举值：DEPLOY： 部署堡垒机的子网INTERNAL： 开通内网访问的子网 */
+  SubnetUsageType?: string;
 }
 
 /** 立即执行改密任务的入参 */
@@ -1915,6 +1957,16 @@ declare interface DeployResourceRequest {
   IntranetAccess?: number;
   /** 0-关闭公网访问堡垒机，1-开启公网访问堡垒机 */
   ExternalAccess?: number;
+  /** 开通堡垒机的子网信息 */
+  DeploySubnets?: ParamInitResourceSubnet[];
+  /** 开通内网访问的VPC ID */
+  IntranetVpcId?: string;
+  /** 开通内网访问的VPC 网段 */
+  IntranetVpcCidrBlock?: string;
+  /** 开通内网访问的VPC名称 */
+  IntranetVpcName?: string;
+  /** 开通内网访问的子网信息 */
+  IntranetSubnets?: ParamInitResourceSubnet[];
 }
 
 declare interface DeployResourceResponse {
@@ -2623,12 +2675,18 @@ declare interface EnableIntranetAccessRequest {
   ResourceId?: string;
   /** 开通内网访问的vpc id */
   VpcId?: string;
+  /** vpc名称 */
+  VpcName?: string;
+  /** vpc地域 */
+  VpcRegion?: string;
   /** vpc的网段 */
   VpcCidrBlock?: string;
   /** 开通内网访问的subnet id */
   SubnetId?: string;
   /** 内网ip的自定义域名，可为空 */
   DomainName?: string;
+  /** 开通内网的子网信息 */
+  IntranetSubnets?: ParamInitResourceSubnet[];
 }
 
 declare interface EnableIntranetAccessResponse {

@@ -3051,7 +3051,7 @@ declare interface CreateConsoleLoginUrlRequest {
   TopNavigationStatus?: string;
   /** 是否自动激活子客企业，有下面两种选项：false（默认设置）：不自动激活子客户。您需要通过控制台或调用激活或者续期子企业接口手动完成激活过程。true：若持有的许可证充足，子客户企业注册完成后将自动激活，无需手动操作或访问控制台。注：如果应用扩展服务中的自动激活子客企业为打开态， 则忽略本接口的AutoActive这个参数（若持有的许可证充足，子客户企业注册完成后将自动激活），具体位置参考下图： */
   AutoActive?: boolean;
-  /** 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。 */
+  /** 营业执照正面照（支持PNG或JPG格式）需以base64格式提供，且文件大小不得超过5MB。和BusinessLicenseId二选一即可 */
   BusinessLicense?: string;
   /** 组织机构企业注册地址。 请确认该企业注册地址与企业营业执照中注册的地址一致。 */
   ProxyAddress?: string;
@@ -3069,6 +3069,8 @@ declare interface CreateConsoleLoginUrlRequest {
   JumpEvents?: JumpEvent[];
   /** 企业证照类型： **USCC** :(默认)工商组织营业执照 **PRACTICELICENSEOFMEDICALINSTITUTION** :医疗机构执业许可证 **CLINICFILLINGCERTIFICATE* :诊所备案证枚举值：USCC： 工商组织营业执照PRACTICELICENSEOFMEDICALINSTITUTION： 医疗机构执业许可证CLINICFILLINGCERTIFICATE： 诊所备案证 */
   ProxyOrganizationIdCardType?: string;
+  /** 营业执照正面照（支持PNG或JPG格式）的FileId（通过UploadFiles获取），且文件大小不得超过8MB。和BusinessLicense二选一即可 */
+  BusinessLicenseId?: string;
 }
 
 declare interface CreateConsoleLoginUrlResponse {
@@ -3289,6 +3291,8 @@ declare interface CreatePartnerAutoSignAuthUrlRequest {
   AuthorizedOrganizationIds?: string[];
   /** 被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationIds二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。2. 被授权企业必须和当前企业在同一应用号下 3. 数组最大长度50 */
   AuthorizedOrganizationNames?: string[];
+  /** 限制授权方式枚举值：0： 默认，授权页面展示全部授权方式1： 仅按印章类型授权2： 仅按印章id授权默认值：0 */
+  LimitAuthType?: number;
 }
 
 declare interface CreatePartnerAutoSignAuthUrlResponse {
@@ -3833,6 +3837,8 @@ declare interface ModifyPartnerAutoSignAuthUrlRequest {
   AuthToMe?: boolean;
   /** 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。枚举值：OFFICIAL： 企业公章，用于代表企业对外的正式文件和重要事务的认证CONTRACT： 合同专用章，专门用于签署各类合同。FINANCE： 财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证PERSONNEL： 人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。OTHER： 其他类型印章，包含子类型 */
   SealTypes?: string[];
+  /** 限制授权方式枚举值：0： 默认，授权页面展示全部授权方式 1： 仅按印章类型授权 3： 仅按印章id授权默认值：0 */
+  LimitAuthType?: string;
 }
 
 declare interface ModifyPartnerAutoSignAuthUrlResponse {
@@ -3973,13 +3979,13 @@ declare interface SyncProxyOrganizationResponse {
 declare interface UploadFilesRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
-  /** 文件对应业务类型,可以选择的类型如下 TEMPLATE : 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用 DOCUMENT : 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可 SEAL : 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.png ARCHIVE : 此文件用于归档文件夹，文件类型支持.pdf/.zip格式枚举值：TEMPLATE： 此上传的文件用户生成合同模板DOCUMENT： 此文件用来发起合同流程SEAL： 此文件用于印章的生成ARCHIVE： 此文件用于归档文件夹 */
+  /** 文件对应业务类型,可以选择的类型如下枚举值：TEMPLATE： 此上传的文件用户生成合同模板，文件类型支持.pdf/.doc/.docx/.html格式，如果非pdf文件需要通过创建文件转换任务转换后才能使用DOCUMENT： 此文件用来发起合同流程，文件类型支持.pdf/.doc/.docx/.jpg/.png/.xls.xlsx/.html。如果上传的是非pdf文件，用来发起流程，还需要通过创建文件转换任务转换后得到的pdf文件才能用于发起合同接口。如果上传的文件不是用来发起合同，直接上传后使用返回的文件资源Id即可SEAL： 此文件用于印章的生成，文件类型支持.jpg/.jpeg/.pngARCHIVE： 此文件用于归档文件夹，文件类型支持.pdf/.zip格式BUSINESSLICENSE： 此文件用于上传营业执照，用于后续生成子客登录链接认证子客的时候提供营业执照，文件类型支持.jpg/.jpeg/.png，限制8M以内 */
   BusinessType: string;
   /** 上传文件内容数组，一次最多可上传20个文件。若上传多个文件，所有文件必须为相同类型，例如全部为PDF或全部为Word文件。不支持混合文件类型的上传。 */
   FileInfos?: UploadFile[];
   /** 操作者的信息 */
   Operator?: UserInfo;
-  /** 文件的截止有效期，最长有效期是当前时间后的一年。如果超过截止有效期则文件会失效。此功能是白名单功能，如需使用，请联系电子签开通如果没有传入，则默认过期时间是上传时间加10分钟 */
+  /** 文件的截止有效期，最长有效期是当前时间后的一年。如果超过截止有效期则文件会失效。此功能是白名单功能，如需使用，请联系电子签开通如果没有传入，则默认过期时间是上传时间加1小时 */
   Deadline?: number;
 }
 

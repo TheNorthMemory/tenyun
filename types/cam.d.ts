@@ -290,6 +290,8 @@ declare interface LoginActionFlagIntl {
   Mail?: number;
   /** u2f硬件token */
   U2FToken?: number;
+  /** passkey通行密钥 */
+  Passkey?: number;
 }
 
 /** 登录和敏感操作flag */

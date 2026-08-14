@@ -1056,6 +1056,48 @@ declare interface CompressionParameters {
   Algorithms?: string[];
 }
 
+/** 地区策略配置。 */
+declare interface ConfigGroupFunctionRegionSelection {
+  /** 指定执行的函数，取值为函数在站点内的唯一标识。当 TriggerType 为 direct 时生效。 */
+  Function: string;
+  /** 国家/地区列表。示例值：CN：中国，CN.GD：中国广东。取值请参考：国家/地区及对应代码枚举。 */
+  Regions: string[];
+}
+
+/** 边缘函数触发规则。 */
+declare interface ConfigGroupFunctionTrigger {
+  /** 匹配条件。 */
+  Condition: string;
+  /** 函数选择配置类型：枚举值：direct： 直接指定执行函数weight： 基于权重比选择函数region： 基于客户端 IP 的国家/地区选择函数 */
+  TriggerType?: string;
+  /** 指定执行的函数，取值为函数在站点内的唯一标识。当 TriggerType 为 direct 时生效。 */
+  Function?: string;
+  /** 基于客户端 IP 国家/地区的函数选择配置。 */
+  RegionMappingSelections?: ConfigGroupFunctionRegionSelection[];
+  /** 基于权重的函数选择配置。 */
+  WeightedSelections?: ConfigGroupFunctionWeightedSelection[];
+  /** 规则描述。 */
+  Remark?: string;
+}
+
+/** 权重策略配置。 */
+declare interface ConfigGroupFunctionWeightedSelection {
+  /** 指定执行的函数，取值为函数在站点内的唯一标识。当 TriggerType 为 direct 时生效。 */
+  Function: string;
+  /** 选中权重。取值范围0-100，所有的权重之和需要为100。 选中概率计算方式为： weight/100。例如设置了两个函数 A 和 B ，其中 A 的权重为30，那么 B 的权重必须为70，最终选中 A 的概率为30%，选中 B 的概率为70%。 */
+  Weight: number;
+}
+
+/** 七层加速规则，执行顺序由数组顺序决定。 */
+declare interface ConfigGroupRuleEngineItem {
+  /** 规则名称。名称长度限制不超过 255 个字符。 */
+  RuleName?: string;
+  /** 规则注释。可以填写多个注释。 */
+  Description?: string[];
+  /** 子规则分支。此列表当前只支持填写一项规则，多填无效。 */
+  Branches?: RuleBranch[] | null;
+}
+
 /** 配置组版本信息。 */
 declare interface ConfigGroupVersionInfo {
   /** 配置组版本 ID，创建配置组版本时 EdgeOne 分配的唯一资源 ID。参数格式：ver-2kplomhisdcb取值参考：CreateConfigGroupVersion 返回值 VersionIdDescribeConfigGroupVersions 返回值 ConfigGroupVersionInfos */
@@ -1124,6 +1166,42 @@ declare interface CurrentOriginACL {
   IsPlaned?: string | null;
 }
 
+/** 定制配置 */
+declare interface CustomAction {
+  /** 定制配置的配置项 Id。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口的返回值 CustomActionSet[].ActionId 获取。 */
+  ActionId: string;
+  /** 该定制配置项下各参数字段的取值。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取。 */
+  Parameters: CustomActionParameter[];
+}
+
+/** 定制配置的单个字段参数内容。 */
+declare interface CustomActionParameter {
+  /** 定制配置项下各参数字段名称。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters[].Name 获取，如 "Seconds"、"Ports"、"StatusCode"。 */
+  Name: string;
+  /** 定制配置项下各参数字段值的类型。枚举值：String： 字符串类型。Integer： 整型类型。Float： 浮点数类型。Boolean： 布尔类型。ArrayOfString： 字符串数组类型。ArrayOfInteger： 整型数组类型。ArrayOfFloat： 浮点数数组类型。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters[].Type 获取。 */
+  ValueType: string;
+  /** 字符串类型参数值。当 ValueType 为 String 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  StringValue?: string;
+  /** 整型类型参数值。当 ValueType 为 Integer 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  IntegerValue?: number;
+  /** 浮点数类型参数值。当 ValueType 为 Float 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  FloatValue?: number;
+  /** 布尔类型参数值。当 ValueType 为 Boolean 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  BooleanValue?: boolean;
+  /** 字符串数组类型参数值。当 ValueType 为 ArrayOfString 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  StringArrayValue?: string[];
+  /** 整型数组类型参数值。当 ValueType 为 ArrayOfInteger 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  IntegerArrayValue?: number[];
+  /** 浮点数数组类型参数值。当 ValueType 为 ArrayOfFloat 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口返回值 CustomActionSet[].Parameters 获取参数值的默认值、单位、限制等说明。 */
+  FloatArrayValue?: number[];
+}
+
+/** 定制配置操作参数。 */
+declare interface CustomActionParameters {
+  /** 需要配置的定制配置列表。 */
+  CustomActions: CustomAction[];
+}
+
 /** 实时日志投递到自定义 HTTP(S) 接口的配置信息。 */
 declare interface CustomEndpoint {
   /** 实时日志投递的自定义 HTTP 接口地址，暂仅支持 HTTP/HTTPS 协议。 */
@@ -1156,6 +1234,16 @@ declare interface CustomErrorPage {
   Content?: string;
   /** 自定义错误页面引用。 */
   References?: ErrorPageReference[];
+}
+
+/** 实时日志投递任务中的自定义日志字段，字段支持自定义命名和配置取值表达式，使用详情见 [自定义日志字段表达式]()。 */
+declare interface CustomExpressionField {
+  /** 自定义日志字段名称。可输入1-100个字符，允许的字符为字母、数字、_，仅能以字母开头，该名称不能重复。 */
+  Name: string;
+  /** 自定义日志字段的取值表达式，表达式长度上限 4KB，语法说明详见 自定义日志字段表达式。 */
+  Expression: string;
+  /** 是否投递该字段，不填表示不投递此字段。 */
+  Enabled?: boolean;
 }
 
 /** 实时日志投递任务中的自定义日志字段。 */
@@ -1984,6 +2072,18 @@ declare interface HostName {
   Value?: string;
 }
 
+/** 域名级策略。 */
+declare interface HostPolicy {
+  /** 站点级策略，针对站点下所有域名生效的策略，详情见 站点级策略。 */
+  Host?: string;
+  /** 当前域名使用的策略类型。取值有：ZoneDefault：使用站点级策略，即 ZoneDefaultPolicy 中定义的策略配置。Custom：使用域名级策略。使用该选项时，必须同时配置 Policy 字段，指定详细策略配置。Template：使用策略模板。使用该选项时，必须同时配置 TemplateId 字段，指定当前域名使用的策略模板。 */
+  PolicyType?: string;
+  /** 可选。当 PolicyType 为 Custom 时，该字段为当前域名的详细策略配置，对当前域名生效。 */
+  Policy?: SecurityPolicy;
+  /** 可选。当 PolicyType 为 Template 时，该字段用于指定当前域名所使用的策略模板的 Id。 */
+  TemplateId?: string;
+}
+
 /** Hsts配置 */
 declare interface Hsts {
   /** 是否开启，取值有：on：开启；off：关闭。 */
@@ -2158,6 +2258,16 @@ declare interface InferenceAPIToken {
   CreateTime?: string;
 }
 
+/** 推理服务的亲和配置 */
+declare interface InferenceAffinityConfig {
+  /** 推理服务亲和总开关。枚举值：On： 开启推理服务亲和；Off： 关闭推理服务亲和。 */
+  Switch: string;
+  /** 推理服务亲和方式。枚举值：SessionId： 根据会话 ID 实现亲和。默认值：SessionId。 */
+  AffinityMode?: string;
+  /** 推理服务亲和性配置。当 AffinityMode 为 SessionId 时必填。 */
+  SessionIdAffinityConfig?: SessionIdAffinityConfig;
+}
+
 /** 推理服务自动伸缩配置。 */
 declare interface InferenceAutoScalingConfig {
   /** 最小实例数量。当配置了伸缩策略并且策略处于有效期时，将不会生效。 */
@@ -2324,6 +2434,8 @@ declare interface InferenceServiceConfig {
   Containers?: InferenceContainerConfig[];
   /** 推理服务的资源配置。 */
   ResourceConfig?: InferenceResourceConfig;
+  /** 推理服务亲和性配置。 */
+  AffinityConfig?: InferenceAffinityConfig;
 }
 
 /** 推理服务部署日志信息。 */
@@ -2686,21 +2798,23 @@ declare interface LogAnalysisDownloadTask {
   ExpireTime?: string;
 }
 
-/** 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式。 */
+/** 实时日志投递的输出格式。您可以直接通过 FormatType 参数使用指定预设日志输出格式（JSON Lines / csv），也可以在预设日志输出格式基础上，通过其他参数来自定义变体输出格式，使用详情见 [自定义日志输出格式](https://cloud.tencent.com/document/product/1552/110448)。 */
 declare interface LogFormat {
-  /** 日志投递的预设输出格式类型，取值有：json：使用预设日志输出格式 JSON Lines，单条日志中的字段以键值对方式呈现；csv：使用预设日志输出格式 csv，单条日志中仅呈现字段值，不呈现字段名称。 */
+  /** 日志输出格式，取值有：json：使用预设日志输出格式 JSON Lines，单条日志中的字段以键值对方式呈现；csv：使用预设日志输出格式 csv，单条日志中仅呈现字段值，不呈现字段名称。template：使用用户自定义输出模板，单条日志中支持按照自定义模板进行自定义排版和拼接，需配合 RecordTemplate 字段使用。 */
   FormatType: string;
   /** 在每个日志投递批次之前添加的字符串。每个日志投递批次可能包含多条日志记录。 */
   BatchPrefix?: string;
   /** 在每个日志投递批次后附加的字符串。 */
   BatchSuffix?: string;
-  /** 在每条日志记录之前添加的字符串。 */
+  /** 单条日志前缀，在每条日志记录之前添加的字符串。 */
   RecordPrefix?: string;
-  /** 在每条日志记录后附加的字符串。 */
+  /** 单条日志后缀，在每条日志记录后附加的字符串。 */
   RecordSuffix?: string;
-  /** 插入日志记录之间作为分隔符的字符串，取值有：\n：换行符；\t：制表符；，：半角逗号。 */
+  /** 日志分隔符，插入日志记录之间作为分隔的字符串，取值有：\n：换行符；\t：制表符；，：半角逗号。 */
   RecordDelimiter?: string;
-  /** 单条日志记录内，插入字段之间作为分隔符的字符串，取值有：\t：制表符；，：半角逗号；;：半角分号。 */
+  /** 日志模板，单条日志的输出模板，长度限制 4KB，仅当 FormatType = template 生效。支持对配置的推送字段按照模板进行自定义排版和拼接。 */
+  RecordTemplate?: string;
+  /** 字段分隔符，单条日志记录内，插入字段之间作为分隔符的字符串，仅当 FormatType = csv 生效。取值有：\t：制表符；，：半角逗号；;：半角分号。 */
   FieldDelimiter?: string;
 }
 
@@ -3562,7 +3676,7 @@ declare interface RealtimeLogDeliveryTask {
   TaskName?: string;
   /** 实时日志投递任务的状态，取值有： enabled: 已启用； disabled: 已停用；deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。 */
   DeliveryStatus?: string;
-  /** 实时日志投递任务类型，取值有： cls: 推送到腾讯云 CLS； custom_endpoint：推送到自定义 HTTP(S) 地址； s3：推送到 AWS S3 兼容存储桶地址；log_analysis：推送到 EdgeOne 日志分析。 */
+  /** 实时日志投递任务类型，取值有： cls: 推送到腾讯云 CLS； custom_endpoint：推送到自定义 HTTP(S) 地址； s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址；log_analysis：推送到 EdgeOne 日志分析。 */
   TaskType?: string;
   /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： 七层域名：domain.example.com； 四层代理实例：sid-2s69eb5wcms7。 */
   EntityList?: string[];
@@ -3574,6 +3688,8 @@ declare interface RealtimeLogDeliveryTask {
   Fields?: string[];
   /** 投递的自定义字段列表。 */
   CustomFields?: CustomField[];
+  /** 投递的自定义表达式字段列表。 */
+  CustomExpressionFields?: CustomExpressionField[];
   /** 日志投递的过滤条件。 */
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。 */
@@ -3584,7 +3700,7 @@ declare interface RealtimeLogDeliveryTask {
   CLS?: CLSTopic | null;
   /** 自定义 HTTP 服务的配置信息。 */
   CustomEndpoint?: CustomEndpoint | null;
-  /** AWS S3 兼容存储桶的配置信息。 */
+  /** S3 兼容（兼容 SigV4 鉴权算法）的对象存储的配置信息。 */
   S3?: S3 | null;
   /** 创建时间。 */
   CreateTime?: string;
@@ -3762,7 +3878,7 @@ declare interface RuleCondition {
 
 /** 规则引擎操作。 */
 declare interface RuleEngineAction {
-  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；AdvancedOriginRouting：高级回源优化；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；Shield：源站卸载配置；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站； SiteFailover：源站故障转移；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置；ContentCompression：内容压缩配置；OriginAuthentication：回源鉴权配置。 */
+  /** 操作名称。名称需要与参数结构体对应，例如 Name=Cache，则 CacheParameters 必填。Cache：节点缓存 TTL；CacheKey：自定义 Cache Key；CachePrefresh：缓存预刷新；AccessURLRedirect：访问 URL 重定向；UpstreamURLRewrite：回源 URL 重写；QUIC：QUIC；WebSocket：WebSocket；Authentication：Token 鉴权；MaxAge：浏览器缓存 TTL；StatusCodeCache：状态码缓存 TTL；OfflineCache：离线缓存；SmartRouting：智能加速；AdvancedOriginRouting：高级回源优化；RangeOriginPull：分片回源 ；UpstreamHTTP2：HTTP2 回源；HostHeader：Host Header 重写；ForceRedirectHTTPS：访问协议强制 HTTPS 跳转配置；OriginPullProtocol：回源 HTTPS；Compression：智能压缩配置；HSTS：HSTS；ClientIPHeader：存储客户端请求 IP 的头部信息配置；OCSPStapling：OCSP 装订；HTTP2：HTTP2 接入；PostMaxSize：POST 请求上传文件流式传输最大限制配置；ClientIPCountry：回源时携带客户端 IP 所属地域信息；UpstreamFollowRedirect：回源跟随重定向参数配置；UpstreamRequest：回源请求参数；Shield：源站卸载配置；TLSConfig：SSL/TLS 安全；ModifyOrigin：修改源站； SiteFailover：源站故障转移；HTTPUpstreamTimeout：七层回源超时配置；HttpResponse：HTTP 应答；ErrorPage：自定义错误页面；ModifyResponseHeader：修改 HTTP 节点响应头；ModifyRequestHeader：修改 HTTP 节点请求头；ResponseSpeedLimit：单连接下载限速；SetContentIdentifier：设置内容标识符；Vary：Vary 特性配置；ContentCompression：内容压缩配置；OriginAuthentication：回源鉴权配置；CustomAction：定制配置。 */
   Name: string;
   /** 节点缓存 TTL 配置参数，当 Name 取值为 Cache 时，该参数必填。 */
   CacheParameters?: CacheParameters | null;
@@ -3846,6 +3962,8 @@ declare interface RuleEngineAction {
   ContentCompressionParameters?: ContentCompressionParameters;
   /** 回源鉴权配置参数，当 Name 取值为 OriginAuthentication 时，该参数必填。该参数为白名单功能，如有需要，请联系腾讯云工程师处理。 */
   OriginAuthenticationParameters?: OriginAuthenticationParameters;
+  /** 定制配置操作参数，当 Name 取值为 CustomAction 时，该参数必填。您可以通过 DescribeAvailableCustomActionsForRuleEngine 接口的返回值 CustomActionSet 获取您当前支持的定制配置项列表。 */
+  CustomActionParameters?: CustomActionParameters;
 }
 
 /** 规则引擎规则详情。 */
@@ -4106,6 +4224,14 @@ declare interface ServerCertInfo {
   SignAlgo?: string;
   /** 证书归属域名名称。 */
   CommonName?: string;
+}
+
+/** 基于会话ID的亲和配置。 */
+declare interface SessionIdAffinityConfig {
+  /** 会话 ID 参数的传递位置。不填写时默认为 Header。枚举值：Header： 在请求头中传递参数。默认值：Header。 */
+  Source?: string;
+  /** 传递会话 ID 的请求头名称。当 Source 为 Header 时必填。不填写时默认为 EO-Infer-Session-Id。入参限制：长度为 1-64 个字符，仅支持字母、数字、中划线。默认值：EO-Infer-Session-Id。 */
+  HeaderName?: string;
 }
 
 /** 会话速率和周期特征校验配置。 */
@@ -4622,6 +4748,26 @@ declare interface WafRule {
   ObserveRuleIDs: number[];
 }
 
+/** 序列化的安全结构 */
+declare interface WebSecurity {
+  /** 站点级策略的配置详情。 */
+  ZoneDefaultPolicy?: SecurityPolicy;
+  /** 域名级策略的配置详情。 */
+  HostPolicy?: HostPolicy;
+  /** 策略模板的配置详情。 */
+  Templates?: WebSecurityTemplates;
+}
+
+/** 模板的安全配置。 */
+declare interface WebSecurityTemplates {
+  /** 策略模板的 ID */
+  TemplateId?: string;
+  /** 策略模板名称。由中文、英文、数字和下划线组成，不能以下划线开头，且长度不能超过 32 个字符。 */
+  TemplateName?: string;
+  /** 策略模板的策略配置，配置对所有关联了该策略模板的域名生效。 */
+  Policy?: SecurityPolicy;
+}
+
 /** WebSocket配置 */
 declare interface WebSocket {
   /** WebSocket 超时时间配置开关，取值有：on：使用Timeout作为WebSocket超时时间；off：平台仍支持WebSocket连接，此时使用系统默认的15秒为超时时间。 */
@@ -4748,6 +4894,20 @@ declare interface ZoneConfigParameters {
   ZoneName?: string;
   /** 站点配置信息。 */
   ZoneConfig?: ZoneConfig | null;
+}
+
+/** 站点完整配置结构。 */
+declare interface ZoneFullConfig {
+  /** 语法版本，当前默认为 1.0，输入其他值将会报错。 */
+  FormatVersion: string;
+  /** 站点级配置，包含「站点加速」中所有配置项，且所有项均为必选，否则配置无效。 */
+  ZoneConfig?: ZoneConfig;
+  /** 规则级配置，包含「规则引擎」中所有规则，且数组可为空，表示不启用任何规则。 */
+  Rules?: ConfigGroupRuleEngineItem[];
+  /** Web 安全防护配置，对应控制台中「安全防护 - Web 防护」里支持的功能。 */
+  WebSecurity?: WebSecurity;
+  /** 边缘函数触发规则配置，包含触发「边缘函数」中所有规则，且数组可为空，表示不启用任何规则。 */
+  FunctionTriggers?: ConfigGroupFunctionTrigger[];
 }
 
 /** 返回站点信息 */
@@ -5233,6 +5393,8 @@ declare interface CreateInferenceServiceRequest {
   Containers: InferenceContainerConfig[];
   /** 推理服务的资源配置。 */
   ResourceConfig: InferenceResourceConfig;
+  /** 推理服务亲和性配置。 */
+  AffinityConfig?: InferenceAffinityConfig;
   /** 推理服务的请求路径列表。最多支持 20 个路径。 */
   RequestPaths?: string[];
   /** 描述信息。长度限制不超过 60 个字符。 */
@@ -5549,6 +5711,8 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   Fields: string[];
   /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE)。 */
   CustomFields?: CustomField[];
+  /** 投递的自定义表达式字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，使用详情见 [自定义日志字段表达式]()。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE) 。**注意**：若 CustomExpressionFields 中存在命名 与 Fields 和 CustomFields 中同名的字段，以 CustomExpressionFields 中的取值为准。 */
+  CustomExpressionFields?: CustomExpressionField[];
   /** 日志投递的过滤条件，不填表示投递全量日志。 */
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填表示采样比例为 100%。 */
@@ -7786,6 +7950,16 @@ declare interface DownloadL7LogsResponse {
   RequestId?: string;
 }
 
+declare interface DummyParseZoneFullConfigRequest {
+}
+
+declare interface DummyParseZoneFullConfigResponse {
+  /** 站点完整配置结构。 */
+  ZoneFullConfig?: ZoneFullConfig;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EdgeKVDeleteRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -8313,6 +8487,8 @@ declare interface ModifyInferenceServiceRequest {
   Containers?: InferenceContainerConfigForModify[];
   /** 推理服务的资源配置。 */
   ResourceConfig?: InferenceResourceConfigForModify;
+  /** 推理服务亲和性配置 */
+  AffinityConfig?: InferenceAffinityConfig;
   /** 描述信息。长度限制不超过 60 个字符。 */
   Description?: string;
 }
@@ -8579,17 +8755,19 @@ declare interface ModifyRealtimeLogDeliveryTaskRequest {
   TaskName?: string;
   /** 实时日志投递任务的状态，取值有：enabled: 启用；disabled: 停用。不填保持原有配置。 */
   DeliveryStatus?: string;
-  /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下：七层域名：domain.example.com；四层代理实例：sid-2s69eb5wcms7。不填保持原有配置。 */
+  /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下：七层域名：domain.example.com；四层代理实例：sid-2s69eb5wcms7。不填保持原有配置。取值参考：DescribeApplicationProxies */
   EntityList?: string[];
-  /** 投递的预设字段列表。不填保持原有配置。 */
+  /** 投递的预设字段列表。不填保持原有配置。取值参考：DescribeLogFields */
   Fields?: string[];
-  /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。不填保持原有配置。自定义字段名称不能重复，且最多不能超过 200 个字段。单个实时日志推送任务最多添加 5 个请求正文类型的自定义字段。目前仅站点加速日志（LogType=domain）支持添加自定义字段。 */
+  /** 投递的自定义日志字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，详见 自定义日志字段表达式。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段，允许配置的自定义字段个数有配额限制，如遇配额不足请 联系我们 。 */
   CustomFields?: CustomField[];
+  /** 投递的自定义表达式字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，使用详情见 [自定义日志字段表达式]()。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE) 。**注意**：若 CustomExpressionFields 中存在命名 与 Fields 和 CustomFields 中同名的字段，以 CustomExpressionFields 中的取值为准。 */
+  CustomExpressionFields?: CustomExpressionField[];
   /** 日志投递的过滤条件。不填表示投递全量日志。 */
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填保持原有配置。 */
   Sample?: number;
-  /** 日志投递的输出格式。不填保持原有配置。特别地，当 TaskType 取值为 cls 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
+  /** 日志投递的输出格式，使用详情见 自定义日志输出格式。不填表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 时，默认格式为 JSON Lines；特别地，当 TaskType 取值为 cls 或 log_analysis 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
   LogFormat?: LogFormat;
   /** 自定义 HTTP 服务的配置信息，不填保持原有配置。 */
   CustomEndpoint?: CustomEndpoint;
@@ -9475,6 +9653,8 @@ declare interface Teo {
   DownloadL4Logs(data: DownloadL4LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL4LogsResponse>;
   /** 下载七层离线日志 {@link DownloadL7LogsRequest} {@link DownloadL7LogsResponse} */
   DownloadL7Logs(data: DownloadL7LogsRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadL7LogsResponse>;
+  /** 站点完整配置结构定义 {@link DummyParseZoneFullConfigRequest} {@link DummyParseZoneFullConfigResponse} */
+  DummyParseZoneFullConfig(data?: DummyParseZoneFullConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DummyParseZoneFullConfigResponse>;
   /** 删除 KV 数据 {@link EdgeKVDeleteRequest} {@link EdgeKVDeleteResponse} */
   EdgeKVDelete(data: EdgeKVDeleteRequest, config?: AxiosRequestConfig): AxiosPromise<EdgeKVDeleteResponse>;
   /** 查询 KV 数据 {@link EdgeKVGetRequest} {@link EdgeKVGetResponse} */

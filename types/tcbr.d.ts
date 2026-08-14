@@ -398,6 +398,12 @@ declare interface ServerBaseConfig {
   PublicNetConf?: PublicNetConf;
 }
 
+/** 差异化更新配置信息 */
+declare interface ServerBaseConfigDiff {
+  /** 字符串参数 Key：EnvParam */
+  StrParams?: ObjectKV[];
+}
+
 /** 服务基本信息 */
 declare interface ServerBaseInfo {
   /** 服务名 */
@@ -1052,6 +1058,24 @@ declare interface StopVersionInstanceResponse {
   RequestId?: string;
 }
 
+declare interface SubmitServerConfigChangeDiffRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 服务名 */
+  ServerName: string;
+  /** 配置信息 deprecated */
+  Conf?: ServerBaseConfigDiff;
+  /** 配置信息 */
+  Items?: DiffConfigItem[];
+}
+
+declare interface SubmitServerConfigChangeDiffResponse {
+  /** 任务Id 大于 0 需要请求 DescribeServerManageTask 接口获取任务进度，等于 0 则表示同步 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SubmitServerRollbackRequest {
   /** 环境Id */
   EnvId: string;
@@ -1137,6 +1161,8 @@ declare interface Tcbr {
   StartVersionInstance(data: StartVersionInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartVersionInstanceResponse>;
   /** 停止版本实例 {@link StopVersionInstanceRequest} {@link StopVersionInstanceResponse} */
   StopVersionInstance(data: StopVersionInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopVersionInstanceResponse>;
+  /** 提交配置差异化更新 {@link SubmitServerConfigChangeDiffRequest} {@link SubmitServerConfigChangeDiffResponse} */
+  SubmitServerConfigChangeDiff(data: SubmitServerConfigChangeDiffRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitServerConfigChangeDiffResponse>;
   /** 回滚版本 {@link SubmitServerRollbackRequest} {@link SubmitServerRollbackResponse} */
   SubmitServerRollback(data: SubmitServerRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitServerRollbackResponse>;
   /** 更新云托管服务 {@link UpdateCloudRunServerRequest} {@link UpdateCloudRunServerResponse} */

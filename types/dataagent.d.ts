@@ -100,6 +100,14 @@ declare interface FileInfo {
   WebUrl?: string;
   /** 文件能力标识列表 */
   Capabilities?: string[];
+  /** 0:关闭 1:开启图谱构建（入库时构建图谱），默认0 */
+  EnableGraphBuild?: number;
+  /** 0:关闭 1:开启树构建（入库时构建树），默认0 */
+  EnableTreeBuild?: number;
+  /** 图谱构建状态：null=未启用图谱; 0=待入库; 1=入库中; 2=入库成功; -1=入库失败（仅 EnableGraphBuild=1 时有意义） */
+  GraphBuildStatus?: number;
+  /** 图谱构建状态：null=未启用图谱; 0=待入库; 1=入库中; 2=入库成功; -1=入库失败（仅 EnableGraphBuild=1 时有意义） */
+  TreeBuildStatus?: number;
 }
 
 /** 文件任务状态 */
@@ -156,6 +164,10 @@ declare interface KnowledgeTaskConfig {
   EnableImageUnderstanding?: number;
   /** 是否开启表格结构化提取枚举值：0： 不开启表格提取1： 开启表格提取默认值：1 */
   EnableExtractDb?: number;
+  /** 0:关闭 1:开启图谱构建（入库时），默认0 */
+  EnableGraphBuild?: number;
+  /** 0:关闭 1:开启树构建（入库时），默认0 */
+  EnableTreeBuild?: number;
 }
 
 /** 模型详情 */
@@ -262,6 +274,10 @@ declare interface SearchConfig {
   KnowledgeBaseIds?: string[];
   /** AutoRag搜索状态：0-未完成，1-已完成。仅当AutoRag=1时，该字段有效 */
   SearchStatus?: number;
+  /** 0:关闭 1:开启图谱检索，默认0 */
+  EnableGraphSearch?: number;
+  /** 0:关闭 1:开启树检索，默认0 */
+  EnableTreeSearch?: number;
 }
 
 /** 步骤扩展结构 */

@@ -6397,10 +6397,12 @@ declare interface SwitchBackupStreamResponse {
 declare interface SwitchCasterToEmergencyRequest {
   /** 导播台ID。 */
   CasterId: number;
+  /** 是否启用从头开始播放功能，仅对单点播输入源生效默认值：false */
+  FromBeginning?: boolean;
 }
 
 declare interface SwitchCasterToEmergencyResponse {
-  /** 备播状态，范围[0,1,2]0. 正常直播状态1. 备播状态2. 备播切换正常直播中，在配置了延播时长时出现 */
+  /** 备播状态，范围[0,1,2]正常直播状态备播状态备播切换正常直播中，在配置了延播时长时出现 */
   EmergencyStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

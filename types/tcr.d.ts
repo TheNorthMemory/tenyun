@@ -246,6 +246,20 @@ declare interface ModelList {
   Digest?: string;
 }
 
+/** 修改同步规则参数，用于 ModifyReplication 接口更新已有的实例同步规则配置。 */
+declare interface ModifyReplicationRule {
+  /** 目标命名空间 */
+  DestNamespace?: string;
+  /** 是否覆盖 */
+  Override?: boolean;
+  /** 是否同步删除事件 */
+  Deletion?: boolean;
+  /** 过滤同步条件 */
+  Filters?: ReplicationFilter[];
+  /** 是否开启规则 */
+  Enabled?: boolean;
+}
+
 /** 命名空间信息 */
 declare interface NamespaceInfo {
   /** 命名空间 */
@@ -2908,6 +2922,22 @@ declare interface ModifyNamespaceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyReplicationRequest {
+  /** 复制源实例ID */
+  SourceRegistryId: string;
+  /** 实例同步规则名称 */
+  RuleName: string;
+  /** 同步规则 */
+  Rule: ModifyReplicationRule;
+  /** 规则描述 */
+  Description?: string;
+}
+
+declare interface ModifyReplicationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRepositoryAccessPersonalRequest {
   /** 仓库名称 */
   RepoName: string;
@@ -3333,6 +3363,8 @@ declare interface Tcr {
   ModifyInstanceToken(data: ModifyInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceTokenResponse>;
   /** 更新命名空间信息 {@link ModifyNamespaceRequest} {@link ModifyNamespaceResponse} */
   ModifyNamespace(data: ModifyNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNamespaceResponse>;
+  /** 更新实例同步规则 {@link ModifyReplicationRequest} {@link ModifyReplicationResponse} */
+  ModifyReplication(data: ModifyReplicationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReplicationResponse>;
   /** 更新镜像仓库信息 {@link ModifyRepositoryRequest} {@link ModifyRepositoryResponse} */
   ModifyRepository(data: ModifyRepositoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRepositoryResponse>;
   /** 更新个人版仓库访问属性 {@link ModifyRepositoryAccessPersonalRequest} {@link ModifyRepositoryAccessPersonalResponse} */

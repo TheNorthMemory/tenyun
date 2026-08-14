@@ -1855,7 +1855,7 @@ declare namespace V20180416 {
     NodeNum: number;
     /** 节点规格ES.S1.SMALL2：1核2GES.S1.MEDIUM4：2核4GES.S1.MEDIUM8：2核8GES.S1.LARGE16：4核16GES.S1.2XLARGE32：8核32GES.S1.4XLARGE32：16核32GES.S1.4XLARGE64：16核64G */
     NodeType: string;
-    /** 节点类型hotData: 热数据节点warmData: 冷数据节点dedicatedMaster: 专用主节点默认值为hotData */
+    /** 节点类型枚举值：hotData： 热数据节点warmData： 冷数据节点dedicatedMaster： 专用主节点dedicatedCoordinating： 专用协调节点dedicatedMl： 专用机器学习节点 */
     Type?: string;
     /** 节点磁盘类型CLOUD_SSD：SSD云硬盘CLOUD_PREMIUM：高硬能云硬盘默认值CLOUD_SSD */
     DiskType?: string;
@@ -3628,6 +3628,8 @@ declare namespace V20180416 {
     BasePath?: string;
     /** 云上集群迁移集群名 */
     ClusterInstanceId?: string;
+    /** es 集群仓库 */
+    PaasEsRepository?: string;
   }
 
   interface DescribeUserCosSnapshotListResponse {
