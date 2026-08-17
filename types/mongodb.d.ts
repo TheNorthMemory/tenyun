@@ -1001,14 +1001,14 @@ declare interface CreateDBInstanceHourRequest {
   NodeNum: number;
   /** 指版本信息。具体支持的版本信息 ，请通过接口 DescribeSpecInfo 获取。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
-  /** 产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
+  /** 产品推荐规格类型GE.LD.T1：本地盘（通用 I 型）。GE.CD.T1：云盘（通用 I 型）。产品受限白名单规格类型HIO10G：本地盘（高 IO 万兆型），已售罄，建议选择 GE.LD.T1。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。 说明： 受限白名单规格类型需白名单权限，如需开通，请提交工单申请。 */
   MachineCode: string;
   /** 实例数量，最小值1，最大值为30。 */
   GoodsNum: number;
-  /** 可用区信息，输入格式如：ap-guangzhou-2。具体信息，请通过接口 DescribeSpecInfo 获取。该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。 */
-  Zone: string;
   /** 实例架构类型。REPLSET：副本集。SHARD：分片集群。 */
   ClusterType: string;
+  /** 可用区信息，输入格式如：ap-guangzhou-2。具体信息，请通过接口 DescribeSpecInfo 获取。该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。 */
+  Zone: string;
   /** 私有网络ID。仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录私有网络控制台获取可使用的私有网络 ID。实例创建成功之后，支持更换私有网络。具体操作，请参见更换网络。 */
   VpcId?: string;
   /** 私有网络 VPC 的子网 ID。必须在已选的私有网络内指定一个子网。请登录私有网络控制台获取可使用的子网 ID。实例创建成功之后，支持更换私有网络及子网。具体操作，请参见更换网络。 */
@@ -1103,7 +1103,7 @@ declare interface CreateDBInstanceRequest {
   Zone: string;
   /** 指定购买实例的购买时长。取值可选：[1,2,3,4,5,6,7,8,9,10,11,12,24,36]；单位：月。 */
   Period: number;
-  /** 产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
+  /** 产品推荐规格类型GE.LD.T1：本地盘（通用 I 型）。GE.CD.T1：云盘（通用 I 型）。产品受限白名单规格类型HIO10G：本地盘（高 IO 万兆型），已售罄，建议选择 GE.LD.T1。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。 说明： 受限白名单规格类型需白名单权限，如需开通，请提交工单申请。 */
   MachineCode: string;
   /** 实例架构类型。REPLSET：副本集。SHARD：分片集群。 */
   ClusterType: string;

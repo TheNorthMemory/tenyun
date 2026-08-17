@@ -1256,8 +1256,24 @@ declare interface GatewayInfo {
   Mode?: number | null;
 }
 
+/** 推理模型接入goosefs参数 */
+declare interface GooseFSConfig {
+  /** goosefs集群id */
+  ClusterId: string;
+  /** goosefs命名空间名称 */
+  GooseFSPath: string;
+  /** 主从节点信息 */
+  MasterAddresses: string[];
+}
+
 /** 运行中部署的 GPU 资源汇总 */
 declare interface GpuSummaryItem {
+  /** GPU 型号 */
+  GpuType?: string | null;
+  /** GPU 总数（gpuNum × replicas） */
+  GpuCount?: number | null;
+  /** 运行中的副本数 */
+  Replicas?: number | null;
 }
 
 /** 数据脱敏用户组信息 */
@@ -1466,6 +1482,8 @@ declare interface InferenceModelInfo {
   UpdateTime?: number | null;
   /** 云账户的 Sub UIN */
   SubAccountUin?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[] | null;
 }
 
 /** 推理服务信息 */
@@ -2672,7 +2690,7 @@ declare interface ResourceSaleInfo {
   Step?: number | null;
   /** 最大资源数量，仅GU有值 */
   MaxSpec?: number | null;
-  /** 库存情况，对当前地域该计费项实时可新增数量的分级预估。取值复用 BcpConstants 库存状态常量：EnoughStock：余量充足（>100）NormalStock：余量正常（50~100）UnderStock：余量紧张（1~49）WithoutStock：无库存（0）该值为底层提供的预估值，不代表保证可发货量，仅用于展示库存概况。当请求 Region 与资源池地域不一致、cold-start 缓存未 ready、或该计费项在快照中缺失时返回 null。 */
+  /** 库存情况，对当前地域该计费项实时可新增数量的分级预估。取值复用 BcpConstants 库存状态常量：EnoughStock：余量充足NormalStock：余量正常UnderStock：余量紧张WithoutStock：无库存该值为底层提供的预估值，不代表保证可发货量，仅用于展示库存概况。当请求 Region 与资源池地域不一致、cold-start 缓存未 ready、或该计费项在快照中缺失时返回 null。 */
   StatusCategory?: string | null;
 }
 
@@ -4849,6 +4867,12 @@ declare interface CreateInferenceModelRequest {
   Tasks?: string[];
   /** 模型 UID（可选，前端预先生成的 UID，不传则后端自动生成） */
   ModelUid?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[];
+  /** 模型文件来源于goosefs */
+  GooseFSConfig?: GooseFSConfig;
+  /** 模型上传来源类型枚举值：Local： 本地上传COS： COS上传CFS： CFS上传CFSTurbo： CFSTurbo上传GooseFS： GooseFS上传 */
+  StorageType?: string;
 }
 
 declare interface CreateInferenceModelResponse {
@@ -4892,6 +4916,8 @@ declare interface CreateInferenceModelResponse {
   UpdateTime?: number;
   /** Sub UIN */
   SubAccountUin?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4933,6 +4959,14 @@ declare interface CreateInferenceServiceRequest {
   AutoscalerOptions?: string;
   /** ApiKeyIds */
   ApiKeyIds?: string[];
+  /** AdvancedOptions 高级参数 JSON 字符串（可选），扁平 KV 结构，作用于 K8s RayService CR YAML 字段级 */
+  AdvancedOptions?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[];
+  /** 自定义RayServe提交 */
+  IsCustom?: boolean;
+  /** python runtime env */
+  RuntimeEnv?: string;
 }
 
 declare interface CreateInferenceServiceResponse {
@@ -4988,6 +5022,14 @@ declare interface CreateInferenceServiceResponse {
   CpuResourceSummary?: CpuSummaryItem;
   /** 资源配置（JSON 字符串，取自第一个部署） */
   ResourceConfig?: string;
+  /** AdvancedOptions 高级参数 JSON 字符串（扁平 KV 结构，取自第一个部署） */
+  AdvancedOptions?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[];
+  /** 部署模式 */
+  DeploymentMode?: string;
+  /** 是否是自定义 RayServe 创建 */
+  IsCustom?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5275,6 +5317,10 @@ declare interface CreateModelVersionRequest {
   StorageUri?: string;
   /** 是否使用用户自带存储桶（默认 false 表示平台托管） */
   UseCustomStorage?: boolean;
+  /** 创建模型时，模型从goosfe里面选取，则需要传递该参数 */
+  GooseFSConfig?: GooseFSConfig;
+  /** 模型上传路径类型枚举值：LOCAL： 本地上传CFS： CFS上传COS： COS上传CFSTurbo： CFSTurbo上传GooseFS： GooseFS上传选择cos、cfs、cfstrubo则必须要传storageuri，选择local时不能传递goosefsconfig */
+  StorageType?: string;
 }
 
 declare interface CreateModelVersionResponse {
@@ -7005,6 +7051,8 @@ declare interface DescribeMCPTaskResponse {
 declare interface DescribeMCPTaskResultRequest {
   /** 任务ID */
   TaskId: string;
+  /** 下一次请求数据 */
+  NextToken?: string;
 }
 
 declare interface DescribeMCPTaskResultResponse {
@@ -8390,6 +8438,8 @@ declare interface GetInferenceModelResponse {
   UpdateTime?: number;
   /** Sub UIN */
   SubAccountUin?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8450,6 +8500,12 @@ declare interface GetInferenceServiceResponse {
   CpuResourceSummary?: CpuSummaryItem;
   /** 资源配置（JSON 字符串，取自第一个部署） */
   ResourceConfig?: string;
+  /** 部署模式 */
+  DeploymentMode?: string;
+  /** 是否为自定义代码部署 */
+  IsCustom?: boolean;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10543,6 +10599,8 @@ declare interface RestartInferenceServiceResponse {
   CpuResourceSummary?: CpuSummaryItem;
   /** 资源配置（JSON 字符串，取自第一个部署） */
   ResourceConfig?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10833,6 +10891,12 @@ declare interface StopInferenceServiceResponse {
   CpuResourceSummary?: CpuSummaryItem;
   /** 资源配置（JSON 字符串，取自第一个部署） */
   ResourceConfig?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[] | null;
+  /** 部署模式 */
+  DeploymentMode?: string;
+  /** 是否为自定义代码部署 */
+  IsCustom?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11158,6 +11222,8 @@ declare interface UpdateInferenceModelRequest {
   ParameterSize?: string;
   /** 模型标签列表（可选） */
   Tags?: string[];
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[];
 }
 
 declare interface UpdateInferenceModelResponse {
@@ -11201,6 +11267,8 @@ declare interface UpdateInferenceModelResponse {
   UpdateTime?: number;
   /** SUB UIN */
   SubAccountUin?: string;
+  /** 系统标签列表（TagKey-TagValue） */
+  ResourceTags?: Tag[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

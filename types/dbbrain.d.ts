@@ -2081,6 +2081,8 @@ declare interface DescribeDBDiagEventsRequest {
   EndTime: string;
   /** 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。 */
   Severities?: number[];
+  /** 诊断项列表，对于MySQL支持Connectivity,IUDSlow,SlowSql,SlowQueries,WaitRowLock,TrxNotCommit,DDLWaitMDL,IUDWaitMDL,QueryWaitMDL,DeadLock,ReadLock,SqlWaitMDL,FlushWaitLock,HighActiveSession,HighRequest,ManyPrepareStatement,SpaceUsage,MemoryUsage,CpuUsage,DbHealthCheck,LowTableOpenCacheHit,RiskAccount,BigTable,ReplIOError,ReplROResources,ReplSqlError,ReplDelayByDDL,ReplDelayByTrx,ReplDelayByRLock,AutoIncrement,AutoIncrementOverflowV2,BinlogDumpNonGtid,ReplDelay,Switch,BackendInstanceMigration,RoRemove,OutOfStorage,OutOfMemory,CpuUsagePeak,MemoryUsagePeak,SpaceUsagePeak,SqlJoinColumnTypeInconsistent,HighLatencyInTimeWindow */
+  DiagItems?: string[];
   /** 实例ID列表。可通过 DescribeDiagDBInstances 接口获取。查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&amp;Shard实例ID，如：dcdbt-157xxxk&amp;shard-qxxxx */
   InstanceIds?: string[];
   /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"mongodb"- 云数据库MongoDB, "postgres"-云数据库postgres,云数据库"redis" - 云数据库 Redis，"mariadb"-数据库mariadb，"cynosdb"-数据库 TDSQL-C, "dcdb"-数据库TDSQL MySQL 默认为"mysql"。 */

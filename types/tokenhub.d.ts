@@ -154,6 +154,8 @@ declare interface Model {
   ModelName?: string;
   /** 模型 ID。 */
   ModelId?: string;
+  /** 模型id别名列表 */
+  ExtraModelIds?: string[];
   /** 模型显示名称。 */
   DisplayName?: string;
   /** 模型描述。 */
@@ -224,6 +226,12 @@ declare interface ModelChargingItem {
   PriceUnit?: string;
   /** 高峰价格，为空表示无高峰定价 */
   PeakPrice?: string;
+  /** 规格描述，例如视觉/语音类模型有值（如 有参考视频 540P、图生视频 首帧 720P、动作控制 1080P、有声-未指定音色），其他模型为空。 */
+  Specification?: string;
+  /** Token 用量描述，例如视觉/语音类模型有值（如 第1秒 62,500 Tokens，后续每秒 15,625 Tokens），其他模型为空。 */
+  Usage?: string;
+  /** 参考费用/预估费用描述，例如视觉/语音类模型有值（如 第1秒 0.625 元，后续每秒 0.15625 元），其他模型为空。 */
+  ReferencePrice?: string;
 }
 
 /** 模型接入点概览信息 */
@@ -234,10 +242,14 @@ declare interface ModelEndpointView {
   EndpointName?: string;
   /** 模型 ID。 */
   ModelId?: string;
+  /** 模型id别名列表 */
+  ExtraModelIds?: string[];
   /** 模型名称。 */
   ModelName?: string;
   /** 状态。取值：ACTIVE（运行中）、INACTIVE（已停止）。 */
   Status?: string;
+  /** 模型状态枚举值：online： 在线pre-offline： 预下线discontinued： 停止新购maintenance： 维护中offline： 下线 */
+  ModelStatus?: string;
   /** 服务类型。固定为 TEXT_GENERATION（文本生成）。 */
   ServiceType?: string;
   /** 计费方式。取值：FREE（免费体验）、TOKEN（按 Token 计费）。未激活时为空。 */

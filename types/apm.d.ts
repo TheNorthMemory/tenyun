@@ -178,6 +178,10 @@ declare interface ApmAppConfig {
   HeadSamplerType?: string;
   /** 采样阈值，100等于关闭采样，0表示全采样 */
   HeadSamplerArg?: number;
+  /** 是否为跨账号枚举值：0： 否1： 是 */
+  CrossAccountStatus?: number;
+  /** 跨账号关联ID */
+  CrossAccountPeerId?: string;
 }
 
 /** 应用相关的配置列表项 */
@@ -436,6 +440,10 @@ declare interface ApmInstanceDetail {
   LogSpanIdKey?: string;
   /** 是否禁用 AI 能力单位：无 */
   DisableAiAbility?: number;
+  /** 是否为跨账号枚举值：0： 否1： 是 */
+  CrossAccountStatus?: number;
+  /** 跨账号关联ID */
+  CrossAccountPeerId?: string;
 }
 
 /** 指标列表单元 */
@@ -1611,12 +1619,16 @@ declare interface ModifyApmApplicationConfigRequest {
   ResponseDurationWarningThreshold?: number;
   /** 是否使用探针默认熔断阈值 */
   UseDefaultFuseConfig?: boolean;
-  /** 是否开启探针头采样 */
+  /** 是否开启探针头采样（受限） */
   EnableHeadSampler?: boolean;
-  /** 头采样类型枚举值：parentbased_traceidratio： 跟随parent */
+  /** 头采样类型枚举值：parentbased_traceidratio： 跟随parent（受限） */
   HeadSamplerType?: string;
-  /** 采样率取值范围：[0, 100]默认值：100 */
+  /** 采样率取值范围：[0, 100]默认值：100（受限） */
   HeadSamplerArg?: number;
+  /** 是否为跨账号枚举值：0： 否1： 是 */
+  CrossAccountStatus?: number;
+  /** 跨账号关联ID */
+  CrossAccountPeerId?: string;
 }
 
 declare interface ModifyApmApplicationConfigResponse {
@@ -1739,6 +1751,10 @@ declare interface ModifyApmInstanceRequest {
   HeadSamplerArg?: number;
   /** 是否禁用 AI 能力单位：无 */
   DisableAiAbility?: number;
+  /** 是否为跨账号枚举值：0： 否1： 是 */
+  CrossAccountStatus?: number;
+  /** 跨账号关联ID */
+  CrossAccountPeerId?: string;
 }
 
 declare interface ModifyApmInstanceResponse {

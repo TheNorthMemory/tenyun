@@ -1264,15 +1264,15 @@ declare interface SeeStatItem {
 declare interface SeeTaskInfo {
   /** 任务 ID */
   TaskId?: string;
-  /** 任务状态。可能取值：- `1`：失败- `2`：空结果- `3`：有效结果- `4`：处理中 */
+  /** 任务状态。可能取值：1：失败2：空结果3：有效结果4：处理中 */
   Status?: number;
   /** 任务元数据 */
   Metadata?: SeeTaskMetadata;
-  /** 算法类目。可能取值：- `COMPREHENSION`：视觉理解- `HIGHLIGHT`：视频浓缩 */
+  /** 算法类目。可能取值：COMPREHENSION：视觉理解HIGHLIGHT：视频浓缩 */
   ServiceCategory?: string;
-  /** 算法类型。可能取值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解- `COMP_HIGHLIGHT`：视频浓缩 */
+  /** 算法类型。可能取值：VID_COMP：视频理解IMG_COMP：图片理解COMP_HIGHLIGHT：视频浓缩 */
   ServiceType?: string;
-  /** 套餐规格。可能取值：- `POSTPAID`：后付费（适用于视频理解、图片理解）- `BASIC`：包年包月基础版（适用于视频理解） */
+  /** 套餐规格。可能取值：POSTPAID：后付费（适用于视频理解、图片理解）BASIC：包年包月基础版（适用于视频理解） */
   ServiceTier?: string;
   /** 视觉理解结果（适用于视频理解、图片理解） */
   ComprehensionResult?: SeeComprehensionResult;
@@ -1292,6 +1292,8 @@ declare interface SeeTaskInfo {
   CreateTime?: number;
   /** 最后更新时间 */
   UpdateTime?: number;
+  /** 直传 COS 的对象 URI */
+  COSURI?: string;
 }
 
 /** TWeSee 任务元数据 */
@@ -1982,6 +1984,14 @@ declare interface VisionRecognitionTask {
   Files?: string[];
   /** 任务输出文件信息列表 */
   FilesInfo?: CloudStorageAIServiceTaskFileInfo[];
+}
+
+/** TWeSee 语义理解任务过滤条件 */
+declare interface VisionRecognitionTaskFilter {
+  /** 需要过滤的字段 */
+  Key: string;
+  /** 需要过滤的值 */
+  Values: string[];
 }
 
 /** 视频摘要配置 */
@@ -2817,6 +2827,8 @@ declare interface CreateTWeSeeDirectUploadCredentialRequest {
   StorageRegion?: string;
   /** 上传方式枚举值：single： 单文件上传manifest： 上传源文件与 Manifest（先上传多个源文件，然后上传 Manifest JSON 触发分析）默认值：single */
   UploadMethod?: string;
+  /** 上传目标枚举值：session： 一次性上传会话（默认，通过入参传递 ComprehensionConfig 等上传参数）stream： 上传到指定设备（加载对应设备的 ComprehensionConfig 等配置）默认值：session */
+  UploadTarget?: string;
 }
 
 declare interface CreateTWeSeeDirectUploadCredentialResponse {
@@ -5697,13 +5709,13 @@ declare interface ListTWeSeeTasksRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类目。可选值：- `COMPREHENSION`：视觉理解- `HIGHLIGHT`：视频浓缩 */
+  /** 算法类目。可选值：COMPREHENSION：视觉理解HIGHLIGHT：视频浓缩 */
   ServiceCategory: string;
   /** 分页拉取数量 */
   Limit: number;
   /** 分页拉取偏移 */
   Offset?: number;
-  /** 算法类型。当 ServiceCategory 为 `COMPREHENSION` 时，可选值包括：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解- `CONT_PERSON_MOTIONLESS`：静姿检测当 ServiceCategory 为 `HIGHLIGHT` 时，可选值包括：- `COMP_HIGHLIGHT`：视频浓缩 */
+  /** 算法类型。当 ServiceCategory 为 COMPREHENSION 时，可选值包括：VID_COMP：视频理解IMG_COMP：图片理解CONT_PERSON_MOTIONLESS：静姿检测当 ServiceCategory 为 HIGHLIGHT 时，可选值包括：COMP_HIGHLIGHT：视频浓缩 */
   ServiceTypes?: string[];
   /** 通道 ID */
   ChannelId?: number;
@@ -5711,10 +5723,12 @@ declare interface ListTWeSeeTasksRequest {
   StartTimeMs?: number;
   /** 查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
   EndTimeMs?: number;
-  /** 要查询的任务的状态条件。不传则不按照状态过滤，可选值：- `1`：失败- `2`：空结果- `3`：有效结果 */
+  /** 要查询的任务的状态条件。不传则不按照状态过滤，可选值：1：失败2：空结果3：有效结果 */
   Status?: number;
   /** 下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL */
   FileURLExpireTime?: number;
+  /** 任务结果过滤条件 */
+  Filters?: VisionRecognitionTaskFilter[];
 }
 
 declare interface ListTWeSeeTasksResponse {

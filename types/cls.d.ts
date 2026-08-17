@@ -3677,11 +3677,11 @@ declare interface CreateKafkaRechargeResponse {
 }
 
 declare interface CreateLogsetRequest {
-  /** 日志集名字。- 最大支持255个字符。不支持`|`字符。 */
+  /** 日志集名字。最大支持255个字符。不支持|字符。 */
   LogsetName: string;
   /** 标签描述列表。最大支持10个标签键值对，并且不能有重复的键值对 */
   Tags?: Tag[];
-  /** 日志集ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符。- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。- 如果指定该字段，需保证全地域唯一 */
+  /** 日志集ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符。尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。如果指定该字段，需保证全地域唯一 */
   LogsetId?: string;
 }
 
@@ -4413,7 +4413,7 @@ declare interface DeleteKafkaRechargeResponse {
 }
 
 declare interface DeleteLogRequest {
-  /** 日志主题id */
+  /** 日志主题id仅在创建日志主题时，开启了日志修改/删除开关的主题，支持日志修改/删除。该功能暂时仅面向白名单内客户使用。 */
   TopicId: string;
   /** 检索时间范围-开始时间单位：ms */
   From: number;
@@ -6479,7 +6479,7 @@ declare interface ModifyKafkaRechargeResponse {
 }
 
 declare interface ModifyLogRequest {
-  /** 日志主题id */
+  /** 日志主题id仅在创建日志主题时，开启了日志修改/删除开关的主题，支持日志修改/删除。该功能暂时仅面向白名单内客户使用。 */
   TopicId: string;
   /** 检索时间范围-开始时间单位：ms */
   From: number;

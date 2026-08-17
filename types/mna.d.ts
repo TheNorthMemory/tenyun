@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 接入点信息 */
+declare interface AccessPointInfo {
+  /** 接入点运营商。 */
+  Vendor?: string;
+  /** 接入点地址。 */
+  PublicAddr?: string;
+  /** 接入点地域。 */
+  Region?: string;
+  /** 接入点大区。 */
+  BigArea?: string;
+  /** 接入点是否可用。枚举值：true： 接入点可用false： 接入点不可用 */
+  Available?: boolean;
+  /** 集群ID */
+  GwGroupId?: string;
+}
+
 /** 激活设备 */
 declare interface ActivateHardware {
   /** 厂商名称 */
@@ -190,6 +206,22 @@ declare interface FlowPackageInfo {
   TruncFlag?: boolean;
   /** 流量包精确余量，单位：MB */
   CapacityRemainPrecise?: number;
+}
+
+/** 客户自有网关集群信息 */
+declare interface GatewayClusterInfo {
+  /** 集群 ID。 */
+  ClusterId?: string;
+  /** 集群名称。 */
+  ClusterName?: string;
+  /** 创建时间。 */
+  CreateTime?: number;
+  /** 公网访问 IP。 */
+  PublicIp?: string;
+  /** 集群下网关实例数量。 */
+  InstanceCount?: number;
+  /** 网关列表。 */
+  GatewayList?: GatewayInfo[];
 }
 
 /** 网关信息 */
@@ -422,6 +454,22 @@ declare interface AddApplicationResponse {
   RequestId?: string;
 }
 
+declare interface AddCustomerGatewayClusterRequest {
+  /** 集群名称。最大 64 字符，支持字母、数字、中划线、下划线、点及中文。 */
+  ClusterName: string;
+  /** 部署大区标识。最大 32 字符。例如 CN 表示中国大陆。 */
+  BigArea: string;
+  /** 地域标识。最大 32 字符。例如 ap-guangzhou。 */
+  RegionId?: string;
+}
+
+declare interface AddCustomerGatewayClusterResponse {
+  /** 集群 ID。 */
+  ClusterId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddDeviceRequest {
   /** 新建设备的名称 */
   DeviceName: string;
@@ -450,6 +498,32 @@ declare interface AddDeviceResponse {
   DeviceId?: string;
   /** 签名字符串 */
   Signature?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface AddGatewayRequest {
+  /** 集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。 */
+  ClusterId: string;
+  /** 网关登录用户名。最大 64 字符。 */
+  Username: string;
+  /** 网关登录密码。最大 128 字符。 */
+  Password: string;
+  /** 网关内网IP。 */
+  GatewayIp: string;
+  /** 地域标识。最大 32 字符。例如 ap-guangzhou。可通过 DescribeAccessPointList 接口获取。 */
+  RegionId?: string;
+}
+
+declare interface AddGatewayResponse {
+  /** 网关ID。 */
+  GatewayId?: string;
+  /** 网关鉴权 Token。 */
+  Token?: string;
+  /** 网关注册地址。 */
+  RegisterCenterUrl?: string;
+  /** 网关上报地址。 */
+  TelemetryUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -520,12 +594,36 @@ declare interface DeleteApplicationResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCustomerGatewayClusterRequest {
+  /** 集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。 */
+  ClusterId: string;
+}
+
+declare interface DeleteCustomerGatewayClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDeviceRequest {
   /** 删除设备的唯一ID */
   DeviceId: string;
 }
 
 declare interface DeleteDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGatewayRequest {
+  /** 集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。 */
+  ClusterId: string;
+  /** 网关ID。 */
+  GatewayId: string;
+  /** 网关内网IP。 */
+  GatewayIp: string;
+}
+
+declare interface DeleteGatewayResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -546,6 +644,18 @@ declare interface DeleteL3ConnRequest {
 }
 
 declare interface DeleteL3ConnResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessPointListRequest {
+  /** 地域列表 */
+  Regions?: string[];
+}
+
+declare interface DescribeAccessPointListResponse {
+  /** 接入点列表 */
+  AccessPointList?: AccessPointInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -628,6 +738,24 @@ declare interface GetApplicationResponse {
   Remark?: string;
   /** 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入） */
   AccessScope?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetCustomerGatewayClusterListRequest {
+  /** 按集群名称模糊匹配的关键字。最大 64 字符。 */
+  Keyword?: string;
+  /** 当前查看页码。 */
+  PageNumber?: number;
+  /** 每页显示记录数。 */
+  PageSize?: number;
+}
+
+declare interface GetCustomerGatewayClusterListResponse {
+  /** 集群列表。 */
+  ClusterList?: GatewayClusterInfo[];
+  /** 集群总数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1192,6 +1320,18 @@ declare interface ModifyDeviceAccessRegionsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDeviceAccessScopeRequest {
+  /** 设备ID */
+  DeviceIds: string[];
+  /** 接入网关类型枚举值：0： 公有云网关1： 客户私有网关默认值：0如果不传，则默认修改为接入公有云网关。 */
+  AccessScope?: number;
+}
+
+declare interface ModifyDeviceAccessScopeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPackageRenewFlagRequest {
   /** 流量包的唯一资源ID */
   ResourceId: string;
@@ -1308,6 +1448,18 @@ declare interface UpdateApplicationKeyResponse {
   RequestId?: string;
 }
 
+declare interface UpdateCustomerGatewayClusterRequest {
+  /** 集群 ID。可通过 GetCustomerGatewayClusterList 接口获取。 */
+  ClusterId: string;
+  /** 公网访问 IP。最大 64 字符，需为合法的 IPv4 或 IPv6 地址。 */
+  PublicIp: string;
+}
+
+declare interface UpdateCustomerGatewayClusterResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateDeviceRequest {
   /** 设备id */
   DeviceId: string;
@@ -1401,8 +1553,12 @@ declare interface Mna {
   ActivateHardware(data: ActivateHardwareRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateHardwareResponse>;
   /** 新建应用 {@link AddApplicationRequest} {@link AddApplicationResponse} */
   AddApplication(data: AddApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<AddApplicationResponse>;
+  /** 创建客户自有网关集群 {@link AddCustomerGatewayClusterRequest} {@link AddCustomerGatewayClusterResponse} */
+  AddCustomerGatewayCluster(data: AddCustomerGatewayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomerGatewayClusterResponse>;
   /** 新建设备 {@link AddDeviceRequest} {@link AddDeviceResponse} */
   AddDevice(data: AddDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceResponse>;
+  /** 注册客户自有网关实例 {@link AddGatewayRequest} {@link AddGatewayResponse} */
+  AddGateway(data: AddGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<AddGatewayResponse>;
   /** 新建分组 {@link AddGroupRequest} {@link AddGroupResponse} */
   AddGroup(data: AddGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddGroupResponse>;
   /** 添加硬件设备 {@link AddHardwareRequest} {@link AddHardwareResponse} */
@@ -1413,12 +1569,18 @@ declare interface Mna {
   CreateEncryptedKey(data?: CreateEncryptedKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEncryptedKeyResponse>;
   /** 删除应用 {@link DeleteApplicationRequest} {@link DeleteApplicationResponse} */
   DeleteApplication(data: DeleteApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApplicationResponse>;
+  /** 删除客户自有网关集群 {@link DeleteCustomerGatewayClusterRequest} {@link DeleteCustomerGatewayClusterResponse} */
+  DeleteCustomerGatewayCluster(data: DeleteCustomerGatewayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomerGatewayClusterResponse>;
   /** 删除设备 {@link DeleteDeviceRequest} {@link DeleteDeviceResponse} */
   DeleteDevice(data: DeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceResponse>;
+  /** 删除客户自有网关实例 {@link DeleteGatewayRequest} {@link DeleteGatewayResponse} */
+  DeleteGateway(data: DeleteGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatewayResponse>;
   /** 删除分组 {@link DeleteGroupRequest} {@link DeleteGroupResponse} */
   DeleteGroup(data: DeleteGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGroupResponse>;
   /** 删除互通规则 {@link DeleteL3ConnRequest} {@link DeleteL3ConnResponse} */
   DeleteL3Conn(data: DeleteL3ConnRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteL3ConnResponse>;
+  /** 获取接入点列表 {@link DescribeAccessPointListRequest} {@link DescribeAccessPointListResponse} */
+  DescribeAccessPointList(data?: DescribeAccessPointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessPointListResponse>;
   /** 查询可接入地域列表 {@link DescribeAccessRegionsRequest} {@link DescribeAccessRegionsResponse} */
   DescribeAccessRegions(data?: DescribeAccessRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRegionsResponse>;
   /** 下载活跃设备数量统计 {@link DownloadActiveDeviceCountRequest} {@link DownloadActiveDeviceCountResponse} */
@@ -1427,6 +1589,8 @@ declare interface Mna {
   GetActiveDeviceCount(data?: GetActiveDeviceCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetActiveDeviceCountResponse>;
   /** 获取应用信息 {@link GetApplicationRequest} {@link GetApplicationResponse} */
   GetApplication(data?: GetApplicationRequest, config?: AxiosRequestConfig): AxiosPromise<GetApplicationResponse>;
+  /** 查询客户自有网关集群列表 {@link GetCustomerGatewayClusterListRequest} {@link GetCustomerGatewayClusterListResponse} */
+  GetCustomerGatewayClusterList(data?: GetCustomerGatewayClusterListRequest, config?: AxiosRequestConfig): AxiosPromise<GetCustomerGatewayClusterListResponse>;
   /** 根据设备名统计目标IP地址 {@link GetDestIPByNameRequest} {@link GetDestIPByNameResponse} */
   GetDestIPByName(data: GetDestIPByNameRequest, config?: AxiosRequestConfig): AxiosPromise<GetDestIPByNameResponse>;
   /** 获取设备详细信息 {@link GetDeviceRequest} {@link GetDeviceResponse} */
@@ -1481,6 +1645,8 @@ declare interface Mna {
   GroupDeleteDevice(data: GroupDeleteDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<GroupDeleteDeviceResponse>;
   /** 修改设备接入地域 {@link ModifyDeviceAccessRegionsRequest} {@link ModifyDeviceAccessRegionsResponse} */
   ModifyDeviceAccessRegions(data: ModifyDeviceAccessRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAccessRegionsResponse>;
+  /** 修改设备接入网关类型 {@link ModifyDeviceAccessScopeRequest} {@link ModifyDeviceAccessScopeResponse} */
+  ModifyDeviceAccessScope(data: ModifyDeviceAccessScopeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceAccessScopeResponse>;
   /** 修改流量包自动续费标识 {@link ModifyPackageRenewFlagRequest} {@link ModifyPackageRenewFlagResponse} */
   ModifyPackageRenewFlag(data: ModifyPackageRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPackageRenewFlagResponse>;
   /** 订购流量包 {@link OrderFlowPackageRequest} {@link OrderFlowPackageResponse} */
@@ -1495,6 +1661,8 @@ declare interface Mna {
   UpdateApplicationInfo(data: UpdateApplicationInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApplicationInfoResponse>;
   /** 更新应用密钥 {@link UpdateApplicationKeyRequest} {@link UpdateApplicationKeyResponse} */
   UpdateApplicationKey(data: UpdateApplicationKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApplicationKeyResponse>;
+  /** 更新客户自有网关集群 {@link UpdateCustomerGatewayClusterRequest} {@link UpdateCustomerGatewayClusterResponse} */
+  UpdateCustomerGatewayCluster(data: UpdateCustomerGatewayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCustomerGatewayClusterResponse>;
   /** 更新设备 {@link UpdateDeviceRequest} {@link UpdateDeviceResponse} */
   UpdateDevice(data: UpdateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeviceResponse>;
   /** 更新分组信息 {@link UpdateGroupRequest} {@link UpdateGroupResponse} */

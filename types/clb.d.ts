@@ -1336,6 +1336,16 @@ declare interface ModelRouterBillingConfigInput {
   AssociateResourcePackage?: boolean;
 }
 
+/** 模型路由计费信息 */
+declare interface ModelRouterBillingConfigOutput {
+  /** 模型路由计费模式枚举值：POSTPAID_BY_HOUR： 按量计费RESOURCE_PACKAGE： 按资源包抵扣 */
+  ChargeType?: string | null;
+  /** 实例规格枚举值：t1.nano-01： 入门版t1.nano-02： 轻量版t1.nano-03： 轻量增强版t1.micro-01： 微型版t1.micro-02： 基础版t1.small-01： 标准版t1.small-02： 标准增强版t1.medium-01： 进阶版t1.medium-02： 进阶增强版t1.large-01： 专业版t1.large-02： 专业增强版t1.xlarge-01： 旗舰版t1.xlarge-02： 至尊版 */
+  SlaType?: string | null;
+  /** 是否关联资源包抵扣枚举值：true： 关联false： 不关联 */
+  AssociateResourcePackage?: boolean | null;
+}
+
 /** 查询单个实例详细信息 */
 declare interface ModelRouterDetail {
   /** 模型路由实例关联的Budget ID。未关联Budget时返回空字符串。 */
@@ -1386,6 +1396,8 @@ declare interface ModelRouterDetail {
   Bandwidth?: number;
   /** 弹性公网IP的ID */
   EipAddressId?: string;
+  /** 计费信息 */
+  BillingConfig?: ModelRouterBillingConfigOutput;
 }
 
 /** 模型路由日志 */
@@ -1551,9 +1563,11 @@ declare interface ModelRouterSet {
   /** 模型路由实例所属VPC的ID */
   VpcId?: string;
   /** 带宽单位：Mbps */
-  Bandwidth?: number;
+  Bandwidth?: number | null;
   /** 弹性公网IP的ID */
   EipAddressId?: string;
+  /** 计费信息 */
+  BillingConfig?: ModelRouterBillingConfigOutput;
 }
 
 /** BYOK健康探测结果 */
@@ -1738,6 +1752,8 @@ declare interface RouterSettingWithFallBack {
   NumRetries?: number | null;
   /** L2模型组内路由调度算法参数 */
   RoutingStrategyArgs?: RoutingStrategyArgs | null;
+  /** 粘连配置参数 */
+  StickyConfig?: StickyConfig;
 }
 
 /** 路由设置 */
@@ -1750,6 +1766,8 @@ declare interface RouterSettingWithoutFallBack {
   RoutingStrategyArgs?: RoutingStrategyArgs;
   /** CMR实例级别请求组内重试次数取值范围：[0, 5]默认值：2 */
   NumRetries?: number;
+  /** 粘连路由配置参数 */
+  StickyConfig?: StickyConfig;
 }
 
 /** L2模型内路由算法策略参数 */
@@ -2032,6 +2050,12 @@ declare interface SpecAvailability {
   SpecType?: string;
   /** 规格可用性。资源可用性，"Available"：可用，"Unavailable"：不可用 */
   Availability?: string;
+}
+
+/** 粘连路由配置 */
+declare interface StickyConfig {
+  /** 是否开启粘连路由 */
+  Enabled?: boolean;
 }
 
 /** 模型路由实例的标签信息 */
@@ -2897,7 +2921,7 @@ declare interface CreateModelRouterRequest {
   Port?: number;
   /** 限速配置 */
   RateLimitConfig?: RateLimitConfigForModelRouter;
-  /** 路由配置 */
+  /** 路由配置新创建实例时，默认会开启粘连路由 */
   RouterSetting?: RouterSettingWithoutFallBack;
   /** 模型路由实例的网络协议枚举值：HTTP： HTTP协议HTTPS： HTTPS协议 */
   Schema?: string;
@@ -2911,6 +2935,10 @@ declare interface CreateModelRouterRequest {
   ModelRouterBillingConfig?: ModelRouterBillingConfigInput;
   /** 客户端Token，用于保证请求的幂等性。 从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符。 */
   ClientToken?: string;
+  /** 弹性公网IP的ID */
+  EipAddressId?: string;
+  /** 单位取值范围：[1, 2048]单位：Mbps */
+  Bandwidth?: number;
 }
 
 declare interface CreateModelRouterResourcePackageRequest {
