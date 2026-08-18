@@ -3440,7 +3440,7 @@ declare interface EraseArea {
   RightBottomX: number;
   /** 区域右下角Y坐标。如当Unit取1即使用百分比单位时，0.9表示区域右下角离整个画面左上角的纵向距离为画面高度的90%。 */
   RightBottomY: number;
-  /** 坐标单位- 1 百分比- 2 像素值 */
+  /** 坐标单位1 百分比2 像素值 */
   Unit: number;
 }
 
@@ -8686,6 +8686,8 @@ declare interface CloneVoiceResponse {
   AudioData?: string;
   /** 合成音频Url，有效期24小时 */
   AudioUrl?: string;
+  /** 扩展信息，json字符串 */
+  ExtInfo?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12565,7 +12567,7 @@ declare interface ProcessMediaRequest {
   InputInfo: MediaInputInfo;
   /** 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。注意：当InputInfo.Type为URL时，该参数是必填项 */
   OutputStorage?: TaskOutputStorage;
-  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
+  /** 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如/movie/201907/。如果不填，表示与 InputInfo 中文件所在的目录一致。 */
   OutputDir?: string;
   /** 编排ID。注意1：对于OutputStorage、OutputDir参数：当服务编排中子任务节点配置了OutputStorage、OutputDir时，该子任务节点中配置的输出作为子任务的输出。当服务编排中子任务节点没有配置OutputStorage、OutputDir时，若创建任务接口（ProcessMedia）有指定输出，将覆盖原有编排的默认输出。即输出设置的优先级：编排子任务节点 > 任务接口指定 > 对应编排内的配置 注意2：对于TaskNotifyConfig参数，若创建任务接口（ProcessMedia）有设置，将覆盖原有编排的默认回调。注意3：编排的 Trigger 只是用来自动化触发场景，在手动发起的请求中已经配置的 Trigger 无意义。 */
   ScheduleId?: number;
@@ -12595,7 +12597,9 @@ declare interface ProcessMediaRequest {
   TaskType?: string;
   /** 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。 */
   ResourceId?: string;
-  /** 是否跳过元信息获取，可选值： 0：表示不跳过 1：表示跳过 默认值：0 */
+  /** 媒体编排任务组注意：填写此参数ScheduleId字段将失效，Activities优先级大于ScheduleId */
+  Activities?: Activity[];
+  /** 是否跳过元信息获取，可选值：0：表示不跳过1：表示跳过默认值：0 */
   SkipMateData?: number;
 }
 

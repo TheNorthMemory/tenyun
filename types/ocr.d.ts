@@ -5268,6 +5268,48 @@ declare interface VerifyBizLicenseEnterprise4Response {
   RequestId?: string;
 }
 
+declare interface VerifyGeneralCardWarnRequest {
+  /** 卡证类型参数，仅支持传入下列指定值，请按实际情况选择对应卡证类型，目前支持以下类型：身份证件0101 身份证0102 护照经营证照0201 营业执照权属登记0301 行驶证资格许可0401 驾驶证 */
+  CardType: string;
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M。 */
+  ImageBase64?: string;
+}
+
+declare interface VerifyGeneralCardWarnResponse {
+  /** 区域篡改提示 */
+  Tamper?: GeneralCardWarnInfo;
+  /** AIGC合成提示 */
+  Synthesis?: GeneralCardWarnInfo;
+  /** 模板图片提示 */
+  Template?: GeneralCardWarnInfo;
+  /** 屏幕翻拍提示 */
+  RemakeScreen?: GeneralCardWarnInfo;
+  /** 截图提示 */
+  Screenshot?: GeneralCardWarnInfo;
+  /** 模糊提示 */
+  Blur?: GeneralCardWarnInfo;
+  /** 边框不完整提示 */
+  BorderIncomplete?: GeneralCardWarnInfo;
+  /** 复印件提示 */
+  Copy?: GeneralCardWarnInfo;
+  /** 反光提示 */
+  Reflection?: GeneralCardWarnInfo;
+  /** 遮挡提示 */
+  Cover?: GeneralCardWarnInfo;
+  /** 重叠提示 */
+  Overlap?: GeneralCardWarnInfo;
+  /** 电子证照提示（目前仅支持电子身份证、电子营业执照识别） */
+  Electron?: GeneralCardWarnInfo;
+  /** 文字水印提示 */
+  TextWatermark?: GeneralCardWarnInfo;
+  /** 水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。 */
+  WatermarkContent?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyOfdVatInvoiceOCRRequest {
   /** OFD文件的 Url 地址。 */
   OfdFileUrl?: string;
@@ -5531,6 +5573,8 @@ declare interface Ocr {
   VerifyBizLicenseEnterprise3(data: VerifyBizLicenseEnterprise3Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise3Response>;
   /** 营业执照核验（企业四要素） {@link VerifyBizLicenseEnterprise4Request} {@link VerifyBizLicenseEnterprise4Response} */
   VerifyBizLicenseEnterprise4(data: VerifyBizLicenseEnterprise4Request, config?: AxiosRequestConfig): AxiosPromise<VerifyBizLicenseEnterprise4Response>;
+  /** 卡证鉴伪（大模型版） {@link VerifyGeneralCardWarnRequest} {@link VerifyGeneralCardWarnResponse} */
+  VerifyGeneralCardWarn(data: VerifyGeneralCardWarnRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyGeneralCardWarnResponse>;
   /** OFD发票识别 {@link VerifyOfdVatInvoiceOCRRequest} {@link VerifyOfdVatInvoiceOCRResponse} */
   VerifyOfdVatInvoiceOCR(data?: VerifyOfdVatInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyOfdVatInvoiceOCRResponse>;
   /** 场景鉴伪（大模型版） {@link VerifyScenePhotoRequest} {@link VerifyScenePhotoResponse} */
