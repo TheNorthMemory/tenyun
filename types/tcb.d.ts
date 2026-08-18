@@ -590,13 +590,15 @@ declare interface HTTPServiceDomain {
   Status?: string;
   /** DNS解析状态枚举值：OK： 正常，命中目标 cnameEMPTY： 解析为空，域名尚未配置 CNAME 或未生效INVALID： 异常，解析到其他非目标地址 */
   DNSStatus?: string;
+  /** 是否CNAME到平台任一网关入口，默认接入/CDN/EO，不含CustomCname枚举值：EMPTY： 解析为空OK： 命中INVALID： 解析到其他非目标地址 */
+  PlatformCnameDNSStatus?: string;
   /** HTTP访问服务路由信息 */
   Routes?: HTTPServiceRoute[];
   /** 扩展字段，内部包含headers处理等 */
   Extension?: HTTPServiceExtension;
-  /** 域名创建时间 */
+  /** 域名创建时间，格式 YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8 */
   CreateTime?: string;
-  /** 域名更新时间 */
+  /** 域名更新时间，格式 YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8 */
   UpdateTime?: string;
 }
 
@@ -666,7 +668,7 @@ declare interface HTTPServiceQPSPerClient {
 declare interface HTTPServiceRoute {
   /** 路径 */
   Path?: string;
-  /** 路径重写 */
+  /** 路径重写规则 */
   PathRewrite?: HTTPServicePathRewrite;
   /** 上游服务类型。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse */
   UpstreamResourceType?: string;
@@ -684,9 +686,9 @@ declare interface HTTPServiceRoute {
   Enable?: boolean;
   /** 扩展字段，内部包含headers处理等 */
   Extension?: HTTPServiceExtension;
-  /** 路由创建时间 */
+  /** 路由创建时间，格式 YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8 */
   CreateTime?: string;
-  /** 路由更新时间 */
+  /** 路由更新时间，格式 YYYY-MM-DDTHH:mm:ss±HH:mm，时区为 UTC+8 */
   UpdateTime?: string;
 }
 

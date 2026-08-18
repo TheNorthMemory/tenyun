@@ -6612,7 +6612,7 @@ declare interface DescribeAssetImageRegistryRegistryDetailResponse {
   Insecure?: number;
   /** 联通性检测结果详情 */
   ConnDetectDetail?: RegistryConnDetectResult[];
-  /** tcr情况下instance_id */
+  /** TCR实例ID */
   InstanceID?: string;
   /** 同步方式，0全量同步，1增量同步 */
   SyncMode?: number;

@@ -352,7 +352,7 @@ declare interface Registry {
   RegionId?: number;
   /** 是否支持匿名 */
   EnableAnonymous?: boolean;
-  /** Token有效时间 */
+  /** Token有效时间，单位：小时 */
   TokenValidTime?: number;
   /** 实例内部访问地址 */
   InternalEndpoint?: string;
@@ -762,7 +762,7 @@ declare interface TagInfo {
   DockerVersion?: string;
   /** 标注的制品操作系统 */
   OS?: string;
-  /** 制品大小 */
+  /** 制品大小，单位：Byte */
   SizeByte?: number;
   /** 序号 */
   Id?: number;

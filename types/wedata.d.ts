@@ -3970,6 +3970,8 @@ declare interface TriggerTaskBrief {
   ExecutionStartTime?: string | null;
   /** 依赖策略 */
   DependencyTriggerPolicy?: string | null;
+  /** 运行账号ID */
+  ExecuteUserUin?: string | null;
 }
 
 /** 任务配置信息 */
@@ -4266,6 +4268,8 @@ declare interface TriggerWorkflowBrief {
   UserUinInCharge?: string | null;
   /** 工作流参数 */
   WorkflowParams?: string;
+  /** 运行账号ID */
+  ExecuteUserUin?: string | null;
 }
 
 /** 查询工作流详细信息 */
@@ -4296,6 +4300,8 @@ declare interface TriggerWorkflowDetail {
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig | null;
   /** 触发方式：定时触发：TIME_TRIGGER 。这里配置之后，内部的触发方式可不填，否则需要保持一致枚举值：TIME_TRIGGER： 定时触发 */
   TriggerMode?: string | null;
+  /** 运行账号ID */
+  ExecuteUserUin?: string | null;
 }
 
 /** 获取工作流的列表信息item */
@@ -4316,6 +4322,8 @@ declare interface TriggerWorkflowInfo {
   WorkflowDesc?: string | null;
   /** 创建人ID */
   CreateUserUin?: string | null;
+  /** 运行账号ID */
+  ExecuteUserUin?: string | null;
 }
 
 /** 工作流列表查询 */
@@ -4398,6 +4406,14 @@ declare interface TriggerWorkflowRunBrief {
   UserNameInCharge?: string | null;
   /** 责任人ID */
   UserUinInCharge?: string | null;
+  /** 关联实体是否存在 */
+  AssociatedEntityExist?: boolean | null;
+  /** 父工作流运行ID 【由嵌套工作流触发独有】 */
+  ParentWorkflowExecutionId?: string | null;
+  /** 父任务运行ID 【由嵌套工作流触发独有】 */
+  ParentTaskExecutionId?: string | null;
+  /** 父任务运行名称 【由嵌套工作流触发独有】 */
+  ParentTaskExecutionName?: string | null;
 }
 
 /** 查询工作流结果 */
@@ -4562,8 +4578,10 @@ declare interface UpdateTriggerWorkflowPartially {
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
   /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的Trigger状态可不配置，如果配置，内容会被该值覆盖。枚举值：ACTIVE： 启动PAUSED： 暂停 */
   SchedulerStatus?: string;
-  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
+  /** 触发方式：定时触发：TIME_TRIGGER ，文件到达：FILE_ARRIVAL。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达 */
   TriggerMode?: string;
+  /** 运行账号ID */
+  ExecuteUserUin?: string;
 }
 
 /** 更新工作流结果 */
@@ -4776,7 +4794,7 @@ declare interface WorkflowSchedulerConfigurationInfo {
 
 /** 工作流调度配置 */
 declare interface WorkflowTriggerConfig {
-  /** 触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高定时触发：TIME_TRIGGER持续运行：CONTINUE_RUN（暂不支持）文件到达：FILE_ARRIVAL（暂不支持）注意：TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；枚举值：TIME_TRIGGER： 定时触发 */
+  /** 触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高定时触发：TIME_TRIGGER文件到达：FILE_ARRIVAL持续运行：CONTINUE_RUN（暂不支持）注意：TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达 */
   TriggerMode?: string | null;
   /** WorkflowTriggerConfig转换成Json格式，对账使用 */
   ExtraInfo?: string | null;
@@ -4796,12 +4814,16 @@ declare interface WorkflowTriggerConfig {
   TriggerId?: string | null;
   /** 文件到达模式下 存储系统中的监听路径 */
   FileArrivalPath?: string | null;
-  /** 文件到达模式下 触发最短间隔时间（单位：秒） */
-  TriggerMinimumIntervalSecond?: number | null;
-  /** 文件到达模式下 触发等待时间（单位：秒） */
-  TriggerWaitTimeSecond?: number | null;
   /** Trigger 状态 启动ACTIVE，暂停PAUSED。外部的TriggerStatus优先级大于当前值枚举值：ACTIVE： 启动PAUSED： 暂停 */
   SchedulerStatus?: string | null;
+  /** 文件到达模式下 文件匹配规则入参限制：文件名匹配仅支持文件名和 *，不能包含路径分隔符 / */
+  FileNamePattern?: string | null;
+  /** 文件到达模式下 是否递归检测子目录取值范围：[0, 1]默认值：1默认 1（开启） 0 （关闭） */
+  Recursive?: number | null;
+  /** 文件到达模式下 触发最短间隔时间单位：秒 */
+  TriggerMinimumIntervalSecond?: number | null;
+  /** 文件到达模式下 触发等待时间单位：秒 */
+  TriggerWaitTimeSecond?: number | null;
 }
 
 declare interface AddCalcEnginesToProjectRequest {
@@ -5263,6 +5285,8 @@ declare interface CreateTriggerWorkflowRequest {
   SchedulerStatus?: string;
   /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
   TriggerMode?: string;
+  /** 运行账号ID,未传时默认使用当前登录用户ID */
+  ExecuteUserUin?: string;
 }
 
 declare interface CreateTriggerWorkflowResponse {
@@ -7325,7 +7349,7 @@ declare interface ListTriggerTasksResponse {
 declare interface ListTriggerWorkflowRunsRequest {
   /** 项目ID */
   ProjectId: string;
-  /** 过滤参数, 工作流名称或ID查询名称: Keyword, 工作流ID查询名称: WorkflowId,文件夹查询名称: FolderId, 负责人查询名称: InChargeUin, 工作流执行id: ExecutionId, 计划调度时间区间: ScheduleTimeGreaterEqual, ScheduleTimeLessEqual */
+  /** 过滤参数, 工作流名称或ID查询名称: Keyword, 工作流ID查询名称: WorkflowId,文件夹查询名称: FolderId, 负责人查询名称: InChargeUin, 运行账号ID查询名称: ExecuteUserUin, 工作流执行id: ExecutionId, 计划调度时间区间: ScheduleTimeGreaterEqual, ScheduleTimeLessEqual */
   Filters?: Filter[];
   /** 排序字段，排序字段名称	如下开始时间：CreateTime，结束时间：EndTime，计划调度时间：ScheduleTime */
   OrderFields?: OrderField[];
@@ -7359,6 +7383,8 @@ declare interface ListTriggerWorkflowsRequest {
   OwnerUin?: string;
   /** 创建人ID */
   CreateUserUin?: string;
+  /** 运行账号ID */
+  ExecuteUserUin?: string;
   /** 修改时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
   ModifyTime?: string[];
   /** 创建时间区间 yyyy-MM-dd HH:mm:ss，需要在数组填入两个时间 */
@@ -8177,7 +8203,7 @@ declare interface UpdateTriggerWorkflowPartiallyRequest {
   WorkflowId: string;
   /** 责任人ID */
   NewSetting?: UpdateTriggerWorkflowPartially;
-  /** 删除字段内容，采用属性路径的形式标识，删除的值以":"分割，多个值以","分割 // 删除调度参数中 ParamKey 为 aa,bb 的属性 "WorkflowParams:aa,bb" // 删除配置的 TriggerId 为 da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0 的调度配置"TriggerWorkflowSchedulerConfigurations :da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0" // 删除spark sql通用参数 "GeneralTaskParams: SPARK_SQL" */
+  /** 删除字段内容，采用属性路径的形式标识，删除的值以":"分割，多个值以","分割 // 删除调度参数中 ParamKey 为 aa,bb 的属性 "WorkflowParams:aa,bb" // 删除配置的 TriggerId 为 da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0 的调度配置"TriggerWorkflowSchedulerConfigurations :da46d950-d5ca-4cfb-a5a9-f3c2eeea1bf0"// 删除spark sql通用参数 "GeneralTaskParams: SPARK_SQL" */
   FieldToRemoveList?: string[];
 }
 
@@ -8213,8 +8239,10 @@ declare interface UpdateTriggerWorkflowRequest {
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
   /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的SchedulerStatus可不配置，如果配置，内容会被改值覆盖。枚举值：ACTIVE： 启动PAUSED： 暂停 */
   SchedulerStatus?: string;
-  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
+  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达 */
   TriggerMode?: string;
+  /** 运行账号ID */
+  ExecuteUserUin?: string;
 }
 
 declare interface UpdateTriggerWorkflowResponse {
@@ -16779,7 +16807,7 @@ declare namespace V20210820 {
     Links?: TaskLinkDsDTO[] | null;
     /** 参数列表 */
     Params?: ParameterTaskDsDto[] | null;
-    /** 工作流类型, 取值示例- cycle 周期工作流- manual 手动工作流 */
+    /** 工作流类型, 取值示例cycle 周期工作流manual 手动工作流 */
     WorkflowType?: string | null;
     /** 最近更新人名称 */
     UpdateUser?: string | null;
@@ -16789,6 +16817,10 @@ declare namespace V20210820 {
     BundleId?: string | null;
     /** BundleId信息 */
     BundleInfo?: string | null;
+    /** 运行账号ID */
+    ExecuteUserUin?: string | null;
+    /** 运行账号名称 */
+    ExecuteUserName?: string | null;
   }
 
   /** 工作流 */

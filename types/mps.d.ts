@@ -64,6 +64,8 @@ declare interface ActionConfigInfo {
 declare interface Activity {
   /** 原子任务类型：input: 起始节点output：终止节点action-trans：转码action-samplesnapshot：采样截图action-AIAnalysis: 分析action-AIRecognition：识别action-aiReview：审核action-animated-graphics：转动图action-image-sprite：雪碧图action-snapshotByTimeOffset: 时间点截图action-adaptive-substream：自适应码流action-AIQualityControl：媒体质检action-SmartSubtitles：智能字幕action-exec-rules：判断规则action-SmartErase：智能擦除 */
   ActivityType: string;
+  /** 前驱节点索引数组。注意：创建和修改编排时，该参数无效，由服务端自动生成。 */
+  PredriveIndex?: number[];
   /** 后驱节点索引数组 */
   ReardriveIndex?: number[];
   /** 原子任务参数 */
@@ -2726,6 +2728,8 @@ declare interface CreateImageConfig {
   Resolution?: string;
   /** 输出图片的宽高比枚举值：1:1： 宽高比 1:12:3： 宽高比 2:33:2： 宽高比 3:23:4： 宽高比 3:44:3： 宽高比 4:39:16： 宽高比 9:1616:9： 宽高比 16:9默认值：1:1 */
   AspectRatio?: string;
+  /** 附加参数。 */
+  AdditionalParameters?: string;
 }
 
 /** 创建输入的配置信息。 */

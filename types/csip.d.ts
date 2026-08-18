@@ -6694,6 +6694,34 @@ declare interface UserDspmInfo {
   IsDataCleaning?: boolean;
 }
 
+/** VPR解释卡片中的单个维度 */
+declare interface VPRExplainDimension {
+  /** 标签key */
+  Key?: string;
+  /** 标签名称 */
+  Name?: string;
+  /** 标签子项 */
+  Items?: VPRExplainDimensionItem[];
+}
+
+/** VPR解释卡片中的单个标签项 */
+declare interface VPRExplainDimensionItem {
+  /** 标签 */
+  Key?: string;
+  /** 标签名称 */
+  Name?: string;
+  /** 标签描述 */
+  Remark?: string;
+}
+
+/** VPR评级解释卡片 */
+declare interface VPRExplainInfo {
+  /** 漏洞情报 */
+  VulIntel?: VPRExplainDimension[];
+  /** 资产上下文 */
+  AssetContext?: VPRExplainDimension[];
+}
+
 /** 漏洞VPR标签 */
 declare interface VPRLabel {
   /** 标签名称枚举值：IN_THE_WILD：在野利用EXP：有 EXPPOC：有 POCINTERNET_EXPOSED：外网暴露NO_RESTART：无需重启HIGH_VALUE_ASSET：重要资产MALWARE_WEAPONIZED：已武器化 */
@@ -7298,12 +7326,14 @@ declare interface VulFixedItem {
   MachineName?: string;
   /** 修复主机实例ID */
   InstanceId?: string;
-  /** 关联组件&路径数量 */
+  /** 关联组件&amp;路径数量 */
   ComponentCount?: number;
-  /** 关联组件&路径列表 */
+  /** 关联组件&amp;路径列表 */
   Components?: string[];
   /** 最近一次修复时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
   LatestFixTime?: string;
+  /** VPR评级依据 */
+  VPRExplainInfo?: VPRExplainInfo;
 }
 
 /** 主机简要信息 */

@@ -842,6 +842,14 @@ declare interface DescribeAutoSnapshotPoliciesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDedicatedClusterDiskStatisticsRequest {
+}
+
+declare interface DescribeDedicatedClusterDiskStatisticsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDiskAssociatedAutoSnapshotPolicyRequest {
   /** 要查询的云硬盘ID，通过[DescribeDisks](https://cloud.tencent.com/document/api/362/16315)接口查询。 */
   DiskId: string;
@@ -1509,6 +1517,8 @@ declare interface Cbs {
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 查询定期快照策略 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
+  /** 查询 CVM CDC 独享集群云硬盘统计信息 {@link DescribeDedicatedClusterDiskStatisticsRequest} {@link DescribeDedicatedClusterDiskStatisticsResponse} */
+  DescribeDedicatedClusterDiskStatistics(data?: DescribeDedicatedClusterDiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterDiskStatisticsResponse>;
   /** 查询云硬盘关联定期快照策略 {@link DescribeDiskAssociatedAutoSnapshotPolicyRequest} {@link DescribeDiskAssociatedAutoSnapshotPolicyResponse} */
   DescribeDiskAssociatedAutoSnapshotPolicy(data: DescribeDiskAssociatedAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskAssociatedAutoSnapshotPolicyResponse>;
   /** 查询备份点列表 {@link DescribeDiskBackupsRequest} {@link DescribeDiskBackupsResponse} */

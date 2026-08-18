@@ -252,9 +252,9 @@ declare interface ChannelOrganizationInfo {
   AdminName?: string;
   /** 企业超级管理员作为第三方平台子客企业员工的唯一标识 */
   AdminOpenId?: string;
-  /** 企业超级管理员的手机号码**注**：`手机号码脱敏（隐藏部分用*替代）` */
+  /** 企业超级管理员的手机号码注：手机号码脱敏（隐藏部分用*替代） */
   AdminMobile?: string;
-  /** 企业认证状态字段。值如下： **"UNVERIFIED"**： 未认证的企业 **"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业 **"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业 **"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业 **"VERIFYING"**： 认证中的企业 **"VERIFIED"**： 已认证的企业 */
+  /** 企业认证状态枚举值及说明如下： 枚举值 说明 UNVERIFIED 企业未认证 VERIFYING 企业认证中，还未选择授权方式 VERIFYINGLEGALPENDINGAUTHORIZATION 企业认证中，待法人授权或法人认证 VERIFYINGAUTHORIZATIONFILEPENDING 企业认证中，已上传授权书，授权书待审核 VERIFYINGAUTHORIZATIONFILEREJECT 企业认证中，授权书审核被驳回 VERIFIED 企业已认证成功 企业认证流程的典型流转路径如下：UNVERIFIED → VERIFYING（提交企业信息，选择授权方式） ├─ 法人授权 → VERIFYINGLEGALPENDINGAUTHORIZATION → VERIFIED ├─ 法人认证 → VERIFYINGLEGALPENDINGAUTHORIZATION → VERIFIED └─ 授权书 → VERIFYINGAUTHORIZATIONFILEPENDING ├─ 审核通过 → VERIFIED └─ 审核驳回 → VERIFYINGAUTHORIZATIONFILEREJECT枚举值：UNVERIFIED： 企业未认证VERIFYING： 企业认证中，还未选择授权方式VERIFYINGLEGALPENDINGAUTHORIZATION： 企业认证中，待法人授权或法人认证VERIFYINGAUTHORIZATIONFILEPENDING： 企业认证中，已上传授权书，授权书待审核VERIFYINGAUTHORIZATIONFILEREJECT： 企业认证中，授权书审核被驳回VERIFIED： 企业已认证成功 */
   AuthorizationStatus?: string;
   /** 企业认证方式字段。值如下： **"AuthorizationInit"**： 暂未选择授权方式 **"AuthorizationFile"**： 授权书 **"AuthorizationLegalPerson"**： 法人授权超管 **"AuthorizationLegalIdentity"**： 法人直接认证 */
   AuthorizationType?: string;
@@ -262,6 +262,8 @@ declare interface ChannelOrganizationInfo {
   ActiveStatus?: number;
   /** 账号到期时间，时间戳 */
   LicenseExpireTime?: number;
+  /** 是否已提交企业认证信息默认值：false此参数表示客户是否已提交企业信息。如图所示，在点击提交按钮之前，该字段为 false；点击提交按钮之后，该字段变为 true。注意：该字段并非在变为 true 后就不再变化。任何导致当前认证记录失效的操作都会将其重置为 false，包括但不限于：重新提交企业信息、审核被拒绝后重新上传企业信息等操作。 */
+  HasSubmittedAuthInfo?: boolean;
 }
 
 /** 角色信息 */
@@ -406,25 +408,25 @@ declare interface ComponentLimit {
 
 /** 创建合同个性化参数 */
 declare interface CreateFlowOption {
-  /** 是否允许修改合同信息，**true**：可以**false**：（默认）不可以 */
+  /** 是否允许修改合同信息，true：可以false：（默认）不可以 */
   CanEditFlow?: boolean;
-  /** 是否允许发起合同弹窗隐藏合同名称**true**：允许**false**：（默认）不允许 */
+  /** 是否允许发起合同弹窗隐藏合同名称true：允许false：（默认）不允许 */
   HideShowFlowName?: boolean;
-  /** 是否允许发起合同弹窗隐藏合同类型，**true**：允许**false**：（默认）不允许 */
+  /** 是否允许发起合同弹窗隐藏合同类型，true：允许false：（默认）不允许 */
   HideShowFlowType?: boolean;
-  /** 是否允许发起合同弹窗隐藏合同到期时间**true**：允许**false**：（默认）不允许 */
+  /** 是否允许发起合同弹窗隐藏合同到期时间true：允许false：（默认）不允许 */
   HideShowDeadline?: boolean;
-  /** 是否允许发起合同步骤跳过指定签署方步骤**true**：允许**false**：（默认）不允许 */
+  /** 是否允许发起合同步骤跳过指定签署方步骤true：允许false：（默认）不允许 */
   CanSkipAddApprover?: boolean;
-  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 禁止编辑签署人注意：* 如果设置参数为 true， 则 参数签署人 [FlowApproverList](https://qian.tencent.com/developers/partnerApis/embedPages/ChannelCreatePrepareFlow) 不能为空* 此参数对子客和自动签无效，不允许进行修改。 */
+  /** 是否可以编辑签署人包括新增，修改，删除 （默认） false -可以编辑签署人 true - 禁止编辑签署人注意：如果设置参数为 true， 则 参数签署人 FlowApproverList 不能为空此参数对子客和自动签无效，不允许进行修改。 */
   ForbidEditApprover?: boolean;
   /** 定制化发起合同弹窗的描述信息，长度不能超过500，只能由中文、字母、数字和标点组成。 */
   CustomCreateFlowDescription?: string;
-  /** 禁止编辑填写控件**true**：禁止编辑填写控件**false**：（默认）允许编辑填写控件 */
+  /** 禁止编辑填写控件true：禁止编辑填写控件false：（默认）允许编辑填写控件 */
   ForbidEditFillComponent?: boolean;
-  /** 跳过上传文件步骤**true**：跳过**false**：（默认）不跳过，需要传ResourceId */
+  /** 跳过上传文件步骤true：跳过false：（默认）不跳过，需要传ResourceId */
   SkipUploadFile?: boolean;
-  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
+  /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
   /** 是否禁止编辑（展示）水印控件属性（默认） false -否 true - 禁止编辑 */
   ForbidEditWatermark?: boolean;
@@ -440,9 +442,9 @@ declare interface CreateFlowOption {
   HideSignCodeAfterStart?: boolean;
   /** 发起过程中是否保存草稿 */
   NeedFlowDraft?: boolean;
-  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注: 空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  /** 在发起流程的可嵌入页面要隐藏的控件列表，和 ShowComponentTypes 参数 只能二选一使用（注:空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
   HideComponentTypes?: string[];
-  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注: 空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
+  /** 在发起流程的可嵌入页面要显示的控件列表，和 HideComponentTypes 参数 只能二选一使用（注:空数组代表未指定），具体的控件类型如下SIGN_SIGNATURE : 个人签名/印章SIGN_SEAL : 企业印章SIGN_PAGING_SEAL : 骑缝章SIGN_LEGAL_PERSON_SEAL : 法定代表人章SIGN_APPROVE : 签批SIGN_OPINION : 签署意见SIGN_PAGING_SIGNATURE : 手写签名骑缝控件BUSI-FULL-NAME : 企业全称BUSI-CREDIT-CODE : 统一社会信用代码BUSI-LEGAL-NAME : 法人/经营者姓名PERSONAL-NAME : 签署人姓名PERSONAL-MOBILE : 签署人手机号PERSONAL-IDCARD-TYPE : 签署人证件类型PERSONAL-IDCARD : 签署人证件号TEXT : 单行文本MULTI_LINE_TEXT : 多行文本CHECK_BOX : 勾选框SELECTOR : 选择器DIGIT : 数字DATE : 日期FILL_IMAGE : 图片ATTACHMENT : 附件EMAIL : 邮箱LOCATION : 地址EDUCATION : 学历GENDER : 性别DISTRICT : 省市区 */
   ShowComponentTypes?: string[];
   /** 禁止添加签署方，若为true则在发起流程的可嵌入页面隐藏“添加签署人按钮” */
   ForbidAddApprover?: boolean;
@@ -450,6 +452,8 @@ declare interface CreateFlowOption {
   ForbidEditFlowProperties?: boolean;
   /** 发起流程的可嵌入页面结果页配置 */
   ResultPageConfig?: CreateResultPageConfig;
+  /** 若指定了合同抄送人，此参数用来控制操作人能否在嵌入式页面看见或编辑（修改、增加、删除）抄送人信息。枚举值：0： 不可见不可编辑1： 可见不可编辑2： 可见可编辑默认值：0 */
+  CcInfoVisibility?: number;
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */

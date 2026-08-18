@@ -504,7 +504,7 @@ declare interface CvmAndIpInfo {
 
 /** Datahub资源配置 */
 declare interface DatahubResource {
-  /** 资源类型 type类型如下: KAFKA,EB_ES,EB_COS,EB_CLS,EB_,MONGODB,HTTP,TDW,ES,CLICKHOUSE,DTS,CLS,COS,TOPIC,MYSQL,MQTT,MYSQL_DATA,DORIS,POSTGRESQL,TDSQL_C_POSTGRESQL,TDSQL_POSTGRESQL,WAREHOUSE_POSTGRESQL,TDSQL_C_MYSQL,MARIADB,SQLSERVER,CTSDB,SCF */
+  /** 资源类型 type类型如下:KAFKA,EB_ES,EB_COS,EB_CLS,EB_,MONGODB,HTTP,TDW,ES,CLICKHOUSE,DTS,CLS,COS,TOPIC,MYSQL,MQTT,MYSQL_DATA,DORIS,POSTGRESQL,TDSQL_C_POSTGRESQL,TDSQL_POSTGRESQL,WAREHOUSE_POSTGRESQL,TDSQL_C_MYSQL,MARIADB,SQLSERVER,CTSDB,SCF */
   Type: string;
   /** ckafka配置，Type为KAFKA时必填 */
   KafkaParam?: KafkaParam | null;
@@ -540,12 +540,16 @@ declare interface DatahubResource {
   ScfParam?: ScfParam | null;
   /** MQTT配置，Type为 MQTT 时必填 */
   MqttParam?: MqttParam | null;
+  /** IceBerg配置 */
+  IcebergParam?: IcebergParam;
 }
 
 /** Datahub请求的taskid */
 declare interface DatahubTaskIdRes {
   /** 任务id */
   TaskId?: string;
+  /** DatahubId */
+  DatahubId?: string | null;
 }
 
 /** Datahub任务信息 */
@@ -694,6 +698,8 @@ declare interface DescribeConnectResource {
   KafkaConnectParam?: KafkaConnectParam | null;
   /** MQTT配置，Type 为 MQTT 时返回 */
   MqttConnectParam?: MqttConnectParam | null;
+  /** Iceberg配置，Type为ICEBERG时返回 */
+  IcebergConnectParam?: IcebergConnectParam;
   /** 标签列表 */
   Tags?: Tag[];
 }
@@ -742,8 +748,12 @@ declare interface DescribeConnectResourceResp {
   KafkaConnectParam?: KafkaConnectParam | null;
   /** MQTT配置，Type 为 MQTT 时返回 */
   MqttConnectParam?: MqttConnectParam | null;
+  /** Iceberg配置，Type为ICEBERG时返回 */
+  IcebergConnectParam?: IcebergConnectParam;
   /** 标签列表 */
   Tags?: Tag[];
+  /** iceberg数据库和表信息 */
+  IcebergDatabases?: IcebergDatabaseInfo[];
 }
 
 /** 查询连接源列表的返参 */
@@ -1002,6 +1012,14 @@ declare interface EsConnectParam {
   UniqVpcId?: string;
   /** 是否更新到关联的Datahub任务 */
   IsUpdate?: boolean | null;
+  /** es类型枚举值：CLUSTER： 普通集群esSERVERLESS： serverless形态es */
+  EsType?: string;
+  /** es版本默认值：7.14.2 */
+  EsVersion?: string;
+  /** endpointUrl，es的serverless版本的访问入口地址 */
+  EndpointUrl?: string;
+  /** 集群版 ES 连接协议，默认http协议枚举值：http： http协议https： https协议 */
+  Protocol?: string;
 }
 
 /** Es修改连接源参数 */
@@ -1022,6 +1040,14 @@ declare interface EsModifyConnectParam {
   SelfBuilt?: boolean;
   /** 是否更新到关联的Datahub任务 */
   IsUpdate?: boolean;
+  /** es类型枚举值：CLUSTER： 普通集群esSERVERLESS： serverless形态es */
+  EsType?: string;
+  /** es版本，默认7.14.2默认值：7.14.2 */
+  EsVersion?: string;
+  /** endpointUrl，es的serverless版本的访问入口地址 */
+  EndpointUrl?: string;
+  /** 集群版 ES 连接协议，默认http协议枚举值：http： http协议https： https协议 */
+  Protocol?: string;
 }
 
 /** Es类型入参 */
@@ -1066,6 +1092,8 @@ declare interface EsParam {
   DateField?: string;
   /** 用来区分当前索引映射，属于新建索引还是存量索引。"EXIST_MAPPING"：从存量索引中选择；"NEW_MAPPING"：新建索引 */
   RecordMappingMode?: string;
+  /** 集群版 ES 连接协议，默认http协议枚举值：http： http协议https： https协议 */
+  Protocol?: string;
 }
 
 /** 消息字段与 es 索引的映射关系 */
@@ -1204,6 +1232,58 @@ declare interface GroupOffsetTopic {
   Topic?: string;
   /** 该主题分区数组，其中每个元素为一个 json object */
   Partitions?: GroupOffsetPartition[];
+}
+
+/** Iceberg连接源参数 */
+declare interface IcebergConnectParam {
+  /** EMR实例的HiveMetaStore节点IP参数格式：多个使用英文分号;分隔创建连接时必选，编辑连接时不接收该参数 */
+  ServiceVip?: string;
+  /** EMR实例ID创建连接时必选，编辑连接时不接收该参数 */
+  Resource?: string;
+  /** EMR实例的集群网络vpcId创建连接时必选，编辑连接时不接收该参数 */
+  UniqVpcId?: string;
+  /** 认证类型枚举值：NONE： 无认证KERBEROS： Kerberos认证开启Kerberos认证的EMR实例，此处需传入KERBEROS，创建连接时必选，编辑连接时非必选 */
+  AuthType?: string;
+  /** EMR实例的HiveMetaStore节点IP绑定的弹性网卡Id列表数量和顺序必须与ServiceVip字段中的多个IP对应，创建连接时必选，编辑连接时不接收该参数 */
+  EniIdList?: string[];
+  /** Catalog数据目录类型枚举值：HIVE： Hive Catalog默认值：HIVE仅支持Hive Catalog */
+  CatalogType?: string;
+  /** 用于Kerberos认证的user.keytab文件的内容入参限制：文件内容需使用Base64编码AuthType为KERBEROS时必传 */
+  KeyTabContent?: string;
+  /** 用于Kerberos认证的krb5.conf文件的内容入参限制：文件内容需使用Base64编码AuthType为KERBEROS时必传 */
+  KRB5ConfContent?: string;
+  /** 用户的Kerberos身份凭证 */
+  KerberosUserPrincipal?: string;
+  /** HiveMetastore服务端配置的Kerberos Principalhive-site.xml中hive.metastore.kerberos.principal的值 */
+  KerberosPrincipal?: string;
+  /** 是否更新并重启所有关联的连接器任务编辑连接时使用，如果不传，则根据认证类型及认证参数是否发生变化，来判断是否更新并重启所有关联的连接器任务 */
+  IsUpdate?: boolean;
+}
+
+/** iceberg数据 */
+declare interface IcebergDatabaseInfo {
+  /** 数据库名 */
+  Name?: string;
+  /** 表名称 */
+  Tables?: string[];
+}
+
+/** Iceberg接入参数 */
+declare interface IcebergParam {
+  /** Iceberg 连接资源 (EMR 实例) */
+  Resource?: string;
+  /** 目标数据库名（Hive catalog 下的 namespace），必填 */
+  Database?: string;
+  /** 目标表名 */
+  TableName?: string;
+  /** 消息解析格式，当前仅支持 JSON枚举值：JSON： JSON解析格式 */
+  SchemeType?: string;
+  /** 表字段扩展开关枚举值：true： 开false： 关 */
+  EnableFieldExtension?: boolean;
+  /** Upset/CDC 模式，默认off枚举值：Off： OffUPSERT： UPSERTCDC： CDC */
+  UpsertMode?: string;
+  /** 主键字段：UPSERT / CDC 模式必填（多个字段以英文逗号分隔） */
+  PrimaryKeys?: string;
 }
 
 /** InquireCkafkaPrice接口询价返回值 */
@@ -2876,6 +2956,8 @@ declare interface CreateConnectResourceRequest {
   KafkaConnectParam?: KafkaConnectParam;
   /** MQTT配置，Type为 MQTT 时必填 */
   MqttConnectParam?: MqttConnectParam;
+  /** Iceberg配置，Type为ICEBERG时必填 */
+  IcebergConnectParam?: IcebergConnectParam;
   /** 标签列表 */
   Tags?: Tag[];
 }
@@ -4568,6 +4650,8 @@ declare interface ModifyConnectResourceRequest {
   KafkaConnectParam?: KafkaConnectParam;
   /** MQTT配置，Type为 MQTT 时必填 */
   MqttConnectParam?: MqttConnectParam;
+  /** Iceberg配置，Type为ICEBERG时必填 */
+  IcebergConnectParam?: IcebergConnectParam;
 }
 
 declare interface ModifyConnectResourceResponse {

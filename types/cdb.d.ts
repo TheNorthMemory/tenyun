@@ -2593,6 +2593,8 @@ declare interface CreateDBInstanceHourRequest {
   ClusterTopology?: ClusterTopology;
   /** 硬盘类型，单节点（云盘）或者云盘版实例可以指定此参数。CLOUD_SSD 表示 SSD 云硬盘，CLOUD_HSSD 表示增强型 SSD 云硬盘，CLOUD_PREMIUM 表示高性能云硬盘。说明：单节点（云盘）、云盘版实例硬盘类型所支持的地域略有不同，具体支持情况请参考 地域和可用区。 */
   DiskType?: string;
+  /** CDC集群ID，非CDC场景无需指定该入参 */
+  CdcId?: string;
   /** 集群类型:cage——金融围拢，cdc——CDB ON CDC；dedicate——独享集群 */
   ClusterType?: string;
   /** 是否对磁盘进行加密。仅云盘版实例支持该功能。 指定为 "on" 表示开启加密， 否则不加密。 购买只读实例、灾备实例、新克隆实例时该参数自动和主实例保持一致。 */

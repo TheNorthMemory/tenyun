@@ -304,6 +304,24 @@ declare interface InternetAccessible {
   InternetMaxBandwidthOut?: number | null;
 }
 
+/** 描述了单项的价格信息。 */
+declare interface ItemPrice {
+  /** 预支合计费用的原价，预付费模式使用，单位：元。 */
+  OriginalPrice?: number | null;
+  /** 预支合计费用的折扣价，预付费模式使用，单位：元。 */
+  DiscountPrice?: number | null;
+  /** 折扣，如20.0代表2折。 */
+  Discount?: number | null;
+  /** 后续合计费用的原价，后付费模式使用，单位：元。如返回了其他时间区间项，如UnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时 */
+  UnitPrice?: number | null;
+  /** 后续合计费用的折扣价，后付费模式使用，单位：元如返回了其他时间区间项，如DiscountUnitPriceSecondStep，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时 */
+  DiscountUnitPrice?: number | null;
+  /** 后续计价单元，后付费模式使用，可取值范围：HOUR：表示计价单元是按每小时来计算。当前涉及该计价单元的场景有：实例按小时后付费（POSTPAID_BY_HOUR）、带宽按小时后付费（BANDWIDTH_POSTPAID_BY_HOUR）：GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场景有：流量按小时后付费（TRAFFIC_POSTPAID_BY_HOUR）。 */
+  ChargeUnit?: string | null;
+  /** 后续合计费用的折扣价，后付费模式使用，单位：元如返回了其他时间区间项，如UnitPriceDiscountfloat，则本项代表时间区间在(0, 96)小时；若未返回其他时间区间项，则本项代表全时段，即(0, ∞)小时 */
+  UnitPriceDiscount?: number;
+}
+
 /** 提交Job作业信息 */
 declare interface Job {
   /** 任务配置信息。 */
@@ -466,6 +484,14 @@ declare interface OutputRedirect {
 declare interface Placement {
   /** 实例所属的可用区名称。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。 */
   Zone: string | null;
+}
+
+/** 价格 */
+declare interface Price {
+  /** 工作空间价格 */
+  SpacePrice?: ItemPrice;
+  /** 网络价格 */
+  BandwidthPrice?: ItemPrice;
 }
 
 /** 扩容队列配置。 */
@@ -1218,6 +1244,24 @@ declare interface DetachNodesResponse {
   RequestId?: string;
 }
 
+declare interface InquirePriceModifyWorkspacesChargeTypeRequest {
+  /** 工作空间 ID 列表。每次请求的工作空间计费模式必须一致。 */
+  SpaceIds: string[];
+  /** 转换的目标计费模式。当前仅支持 PREPAID（按量计费转包年包月）。 */
+  SpaceChargeType: string;
+  /** 是否只进行参数和资源预检。true：不发起询价、组单或正式下单；false：执行对应操作。默认为 false。 */
+  DryRun?: boolean;
+  /** 预付费参数。Period 和 RenewFlag 均为可选字段；未传入时后端使用默认值 Period=1、RenewFlag=NOTIFY_AND_MANUAL_RENEW。 */
+  SpaceChargePrepaid?: SpaceChargePrepaid;
+}
+
+declare interface InquirePriceModifyWorkspacesChargeTypeResponse {
+  /** 该参数表示对应规格工作空间的价格 */
+  Price?: Price;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterDeletionProtectionRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1266,6 +1310,22 @@ declare interface ModifyWorkspacesAttributeRequest {
 }
 
 declare interface ModifyWorkspacesAttributeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWorkspacesChargeTypeRequest {
+  /** 工作空间 ID 列表。每次请求的工作空间计费模式必须一致。 */
+  SpaceIds: string[];
+  /** 转换的目标计费模式。当前仅支持 PREPAID（按量计费转包年包月）。 */
+  SpaceChargeType: string;
+  /** 是否只进行参数和资源预检。true：不发起询价、组单或正式下单；false：执行对应操作。默认为 false。 */
+  DryRun?: boolean;
+  /** 预付费参数。Period 和 RenewFlag 均为可选字段；未传入时后端使用默认值 Period=1、RenewFlag=NOTIFY_AND_MANUAL_RENEW。 */
+  SpaceChargePrepaid?: SpaceChargePrepaid;
+}
+
+declare interface ModifyWorkspacesChargeTypeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2367,6 +2427,8 @@ declare interface Thpc {
   DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 从集群解绑节点 {@link DetachNodesRequest} {@link DetachNodesResponse} */
   DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
+  /** 询价工作空间转换计费模式 {@link InquirePriceModifyWorkspacesChargeTypeRequest} {@link InquirePriceModifyWorkspacesChargeTypeResponse} */
+  InquirePriceModifyWorkspacesChargeType(data: InquirePriceModifyWorkspacesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyWorkspacesChargeTypeResponse>;
   /** 修改集群删除保护状态 {@link ModifyClusterDeletionProtectionRequest} {@link ModifyClusterDeletionProtectionResponse} */
   ModifyClusterDeletionProtection(data: ModifyClusterDeletionProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDeletionProtectionResponse>;
   /** 修改节点初始化脚本 {@link ModifyInitNodeScriptsRequest} {@link ModifyInitNodeScriptsResponse} */
@@ -2375,6 +2437,8 @@ declare interface Thpc {
   ModifyNodeAttribute(data: ModifyNodeAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodeAttributeResponse>;
   /** 修改工作空间的属性 {@link ModifyWorkspacesAttributeRequest} {@link ModifyWorkspacesAttributeResponse} */
   ModifyWorkspacesAttribute(data: ModifyWorkspacesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesAttributeResponse>;
+  /** 工作空间转换计费模式 {@link ModifyWorkspacesChargeTypeRequest} {@link ModifyWorkspacesChargeTypeResponse} */
+  ModifyWorkspacesChargeType(data: ModifyWorkspacesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesChargeTypeResponse>;
   /** 修改工作空间的续费标识 {@link ModifyWorkspacesRenewFlagRequest} {@link ModifyWorkspacesRenewFlagResponse} */
   ModifyWorkspacesRenewFlag(data: ModifyWorkspacesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesRenewFlagResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
