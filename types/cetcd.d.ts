@@ -510,7 +510,7 @@ declare interface UpgradeEtcdInstanceResponse {
   RequestId?: string;
 }
 
-/** {@link Cetcd 云原生xa0etcd} */
+/** {@link Cetcd 云原生etcd} */
 declare interface Cetcd {
   (): Versions;
   /** 创建etcd实例 {@link CreateEtcdInstanceRequest} {@link CreateEtcdInstanceResponse} */

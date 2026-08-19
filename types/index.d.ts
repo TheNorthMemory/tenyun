@@ -650,7 +650,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   cdwpg: Cdwpg,
   /** {@link Cdz 专属可用区} */
   cdz: Cdz,
-  /** {@link Cetcd 云原生xa0etcd} */
+  /** {@link Cetcd 云原生etcd} */
   cetcd: Cetcd,
   /** {@link Cfg 智能顾问-混沌演练} */
   cfg: Cfg,

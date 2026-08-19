@@ -372,6 +372,8 @@ declare interface DescribeSecretResponse {
   TargetUinString?: string;
   /** 对应云产品的账号信息 */
   AccountInfoList?: SecretAccountInfo[];
+  /**  */
+  NextRotationTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -451,6 +453,10 @@ declare interface GetSecretValueRequest {
   SecretName: string;
   /** 指定对应凭据的版本号。对于云产品凭据如Mysql凭据，通过指定凭据名称和历史版本号来获取历史轮转凭据的明文信息，如果要获取当前正在使用的凭据版本的明文，需要将版本号指定为：SSM_Current。 */
   VersionId: string;
+  /**  */
+  EncryptionPublicKey?: string;
+  /**  */
+  EncryptionAlgorithm?: string;
 }
 
 declare interface GetSecretValueResponse {
@@ -529,6 +535,8 @@ declare interface ListSecretsRequest {
   ProductName?: string;
   /** 凭据加密类型枚举值：0： KMS 密钥加密1： 软密钥加密默认值：0 */
   EncryptType?: number;
+  /** 云产品实例 ID */
+  InstanceID?: string;
 }
 
 declare interface ListSecretsResponse {

@@ -552,6 +552,8 @@ declare interface JobConfig {
   StateCOSBucket?: string | null;
   /** 日志桶 */
   LogCOSBucket?: string | null;
+  /** 是否支持滚动删除，0，手动删除，1，自动滚动删除 */
+  IsLocked?: number;
 }
 
 /** 描述作业发生的一个事件 */

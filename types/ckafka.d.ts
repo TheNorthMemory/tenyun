@@ -586,6 +586,8 @@ declare interface DatahubTaskInfo {
   SyncThrottleLimit?: number;
   /** 任务是否自动扩容标识枚举值：true： 自动扩容false： 手动扩容默认值：true */
   AutoExpandFlag?: boolean;
+  /** 不影响任务执行的警告信息 */
+  WarnMessage?: string;
 }
 
 /** Datahub主题 */
@@ -806,6 +808,8 @@ declare interface DescribeDatahubTaskRes {
   SyncThrottleLimit?: number;
   /** 自动扩容 true:自动扩容 false:手动扩容默认值：true */
   AutoExpandFlag?: boolean;
+  /** 不影响任务执行的警告信息 */
+  WarnMessage?: string;
 }
 
 /** 查询Datahub任务列表 */
@@ -4126,6 +4130,8 @@ declare interface DescribeTopicDetailRequest {
   OrderType?: number;
   /** 目前支持 ReplicaNum （副本数）筛选 */
   Filters?: Filter[];
+  /** 搜索topic时是否忽略大小写敏感 */
+  SearchWordIgnoreCaseFlag?: boolean;
 }
 
 declare interface DescribeTopicDetailResponse {
@@ -5010,7 +5016,7 @@ declare interface TopicDetailResponse {
 declare interface UpgradeBrokerVersionRequest {
   /** ckafka集群实例Id */
   InstanceId: string;
-  /** 版本升级类型枚举值：1： 小版本迁移升级(推荐) */
+  /** 版本升级类型枚举值：1： 小版本迁移升级(推荐)5： 小版原地升级 */
   Type: number;
   /** 版本号 */
   SourceVersion: string;

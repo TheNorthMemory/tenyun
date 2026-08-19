@@ -2131,7 +2131,7 @@ declare interface DescribeDBInstanceParametersResponse {
 }
 
 declare interface DescribeDBInstanceSSLConfigRequest {
-  /** 实例ID，形如postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID，形如postgres-6bwgamo3。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
 }
 
@@ -2142,6 +2142,12 @@ declare interface DescribeDBInstanceSSLConfigResponse {
   CAUrl?: string;
   /** 服务器证书中配置的内网或外网连接地址 */
   ConnectAddress?: string;
+  /** CA证书公钥，仅云盘版 */
+  CACert?: string;
+  /** JKS公钥，仅云盘版 */
+  CAJKS?: string;
+  /** CAP7B公钥，仅云盘版 */
+  CAP7B?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

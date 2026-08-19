@@ -970,6 +970,16 @@ declare interface BillingAttribute {
   Value?: string;
 }
 
+/** 调用来源 */
+declare interface CallSource {
+  /** 调用主体 ID，含义由 subject_type 决定（如 app_id、kb_id 等） */
+  SubjectId?: string;
+  /** 调用主体名称 */
+  SubjectName?: string;
+  /** 调用主体类型：APP/KB/WIDGET/OPEN_CLAW/KB_RECALL_TEST/WORKBENCH/MODEL_API枚举项枚举值描述METRIC_SOURCE_TYPE_UNSPECIFIED0METRIC_SOURCE_TYPE_APP1应用开发METRIC_SOURCE_TYPE_KB2知识库METRIC_SOURCE_TYPE_WIDGET3WidgetMETRIC_SOURCE_TYPE_OPEN_CLAW4ClawProMETRIC_SOURCE_TYPE_KB_RECALL_TEST5知识库召回测试METRIC_SOURCE_TYPE_WORKBENCH6智能工作台METRIC_SOURCE_TYPE_MODEL_API7模型 API 调用 */
+  SubjectType?: number;
+}
+
 /** CAM授权信息 */
 declare interface CamAuthConfig {
   /** 角色名称 */
@@ -992,18 +1002,10 @@ declare interface ClawAgentAgentTeamConfig {
 
 /** ClawAgent配置 */
 declare interface ClawAgentConfig {
-  /** 调用方自定义配置(控制C端用户在对话时可动态传入哪些自定义配置) */
-  CustomConfig: ClawAgentCustomConfig | null;
   /** Agent团队协作配置 */
   AgentTeamConfig?: ClawAgentAgentTeamConfig | null;
   /** 长期记忆配置 */
   LongMemoryConfig?: ClawAgentLongMemoryConfig | null;
-}
-
-/** ClawAgent调用方自定义配置开关集合 */
-declare interface ClawAgentCustomConfig {
-  /** 是否允许C端用户在对话时动态传入自定义Agent配置 */
-  Enabled?: boolean;
 }
 
 /** ClawAgent长期记忆配置 */
@@ -1040,6 +1042,60 @@ declare interface ComplexBillingItem {
   CashPrice?: number;
   /** pu价格单位：pu */
   PuPrice?: number;
+}
+
+/** 并发超限明细 */
+declare interface ConcurrencyLimitDetail {
+  /** 调用来源（subject_type 决定 subject_id/subject_name 的含义，如 APP 时 subject_id=app_id、subject_name=app_name） */
+  CallSource?: CallSource;
+  /** 超限发生时间（Unix秒） */
+  EventTime?: string;
+  /** 模型名称 */
+  ModelName?: string;
+  /** 请求内容（用户请求的原始查询文本） */
+  RequestQuery?: string;
+  /** 空间 ID */
+  SpaceId?: string;
+}
+
+/** 消耗分类 */
+declare interface ConsumptionClassification {
+  /** 消耗场景（如推理/训练/评测等） */
+  ConsumptionScene?: string;
+  /** 消耗目标（如具体模型名/插件名/平台功能名） */
+  ConsumptionTarget?: string;
+  /** 消耗类型，取值集合由业务方定义（如 model/plugin/platform 等） */
+  ConsumptionType?: string;
+  /** 套餐包名称 */
+  PackageName?: string;
+}
+
+/** 资源消耗明细 */
+declare interface ConsumptionDetail {
+  /** 消耗分类（类型/目标/场景/套餐包） */
+  Classification?: ConsumptionClassification;
+  /** 消耗发生时间，Unix 秒 */
+  EventTime?: string;
+  /** 用量来源类型枚举项枚举值描述METRIC_SOURCE_TYPE_UNSPECIFIED0METRIC_SOURCE_TYPE_APP1应用开发METRIC_SOURCE_TYPE_KB2知识库METRIC_SOURCE_TYPE_WIDGET3WidgetMETRIC_SOURCE_TYPE_OPEN_CLAW4ClawProMETRIC_SOURCE_TYPE_KB_RECALL_TEST5知识库召回测试METRIC_SOURCE_TYPE_WORKBENCH6智能工作台METRIC_SOURCE_TYPE_MODEL_API7模型 API 调用 */
+  MetricSourceType?: number;
+  /** 名称 */
+  Name?: string;
+  /** 空间名称 */
+  SpaceName?: string;
+  /** 消耗用量（数值/单位/PU 消耗） */
+  Usage?: ConsumptionUsage;
+  /** 用户名称 */
+  UserName?: string;
+}
+
+/** 消耗用量 */
+declare interface ConsumptionUsage {
+  /** 消耗PU */
+  ConsumptionPU?: number;
+  /** 用量数值 */
+  Usage?: number;
+  /** 用量单位，枚举值 DosageUnit枚举项枚举值描述DOSAGE_UNIT_TOKEN0token（默认）DOSAGE_UNIT_PAGE_COUNT1page_count（页数）DOSAGE_UNIT_TIMES2times（次数）DOSAGE_UNIT_SECOND3second（秒）DOSAGE_UNIT_ITEM4item（条）DOSAGE_UNIT_SHEET5sheet（张）DOSAGE_UNIT_CHARACTER6character（字符）DOSAGE_UNIT_GB7GBDOSAGE_UNIT_NUMBER8number（个数）DOSAGE_UNIT_MILL_SECOND9mill_second（毫秒） */
+  UsageUnit?: number;
 }
 
 /** Conversation 会话信息 */
@@ -1244,10 +1300,12 @@ declare interface ConversationWorkspace {
 declare interface CorpShareConfig {
   /** 企业共享开关 */
   Enabled?: boolean;
-  /** 枚举项枚举值描述SHARE_SCOPE_TYPE_UNSPECIFIED0SHARE_SCOPE_TYPE_ALL1SHARE_SCOPE_TYPE_ACCOUNT2 */
+  /** 共享范围类型，1：企业全员，2：指定账户，3：指定空间 */
   ShareScope?: number;
   /** 企业共享应用标签 */
   TagIdList?: string[];
+  /** 共享范围信息(用户时StrId为uin,Name为用户名称;空间时StrId为空间ID,Name为空间名称) */
+  ShareScopeList?: Identity[];
 }
 
 /** CronSchedule */
@@ -1346,6 +1404,18 @@ declare interface GenerateModel {
   Model: ModelDetailInfo | null;
 }
 
+/** 通用身份信息（支持数字 ID 与字符串 ID 两种形态） */
+declare interface Identity {
+  /** 描述 */
+  Description?: string;
+  /** 数字 ID */
+  Id?: string;
+  /** 名称 */
+  Name?: string;
+  /** 字符串 ID */
+  StrId?: string;
+}
+
 /** 输入框配置 */
 declare interface InputBoxConfig {
   /** 输入框按钮，1：上传图片、2：上传文档，3：腾讯文档，4：联网搜索 */
@@ -1402,6 +1472,18 @@ declare interface MCPToolConfig {
 declare interface ManualOnlySchedule {
   /** 启用 */
   Enabled?: boolean;
+}
+
+/** 总览 KPI 卡片指标项 */
+declare interface MetricOverview {
+  /** 指标键，取值参考 MetricOverview 注释中的 key 白名单 */
+  Key?: string;
+  /** 环比百分比，无环比时填 0 */
+  Mom?: number;
+  /** 指标单位，枚举值 DosageUnit；key 与 unit 的对应关系参考 MetricOverview 注释白名单枚举项枚举值描述DOSAGE_UNIT_TOKEN0token（默认）DOSAGE_UNIT_PAGE_COUNT1page_count（页数）DOSAGE_UNIT_TIMES2times（次数）DOSAGE_UNIT_SECOND3second（秒）DOSAGE_UNIT_ITEM4item（条）DOSAGE_UNIT_SHEET5sheet（张）DOSAGE_UNIT_CHARACTER6character（字符）DOSAGE_UNIT_GB7GBDOSAGE_UNIT_NUMBER8number（个数）DOSAGE_UNIT_MILL_SECOND9mill_second（毫秒） */
+  Unit?: number;
+  /** 指标数值 */
+  Value?: number;
 }
 
 /** 模型完整信息 */
@@ -1552,6 +1634,34 @@ declare interface ModelStatus {
   ResourceStatus?: number;
 }
 
+/** 模型调用明细 */
+declare interface ModelUsageDetail {
+  /** 调用类型，来源于计费 scene_billing（与 filter.call_type 对应） */
+  CallType?: string;
+  /** 是否默认知识库 */
+  IsDefaultKB?: boolean;
+  /** 模型名称 */
+  ModelName?: string;
+  /** MODEL 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数 */
+  ResourceConsumptionList?: ResourceConsumption[];
+  /** 本次调用消耗 PU 量 */
+  ConsumptionPU?: number;
+}
+
+/** 模型资源用量聚合明细（MODEL 域专属） */
+declare interface ModelUsageSummary {
+  /** 调用次数（业务调用维度的顶层计数） */
+  CallCount?: number;
+  /** 是否默认知识库 */
+  IsDefaultKB?: boolean;
+  /** 模型名称，标识使用的 AI 模型 */
+  ModelName?: string;
+  /** MODEL 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数 */
+  ResourceConsumptionList?: ResourceConsumption[];
+  /** 模型消耗 PU 总量（聚合维度内的 PU 消耗之和） */
+  ConsumptionPU?: number;
+}
+
 /** 多智能体配置 */
 declare interface MultiAgentConfig {
   /** Agent协同配置 */
@@ -1588,6 +1698,12 @@ declare interface OAuthConfig {
 declare interface OnceSchedule {
   /** 触发时间 */
   FireTime?: string;
+}
+
+/** 平台资源用量聚合明细（PLATFORM 域专属） */
+declare interface PlatformUsageSummary {
+  /** PLATFORM 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量，label 取 PlatformBizType 枚举名称字符串；典型如 unit=TIMES + label=PLATFORM_BIZ_TYPE_SECURITY_AUDIT/WEB_SEARCH/OPEN_CLAW/APP_INVOKE，unit=ITEM + label=PLATFORM_BIZ_TYPE_LONG_TERM_MEMORY */
+  ResourceConsumptionList?: ResourceConsumption[];
 }
 
 /** 插件详情 */
@@ -1698,6 +1814,24 @@ declare interface PluginSummary {
   ToolList?: ToolSummary[];
 }
 
+/** 插件调用明细 */
+declare interface PluginUsageDetail {
+  /** 插件名称 */
+  PluginName?: string;
+  /** PLUGIN 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_*），label 为空表示 total_tokens */
+  ResourceConsumptionList?: ResourceConsumption[];
+  /** 插件工具名（tool_name） */
+  ToolName?: string;
+}
+
+/** 插件资源用量聚合明细（PLUGIN 域专属） */
+declare interface PluginUsageSummary {
+  /** 调用次数（业务调用维度的顶层计数） */
+  CallCount?: number;
+  /** PLUGIN 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_*），label 为空表示 total_tokens */
+  ResourceConsumptionList?: ResourceConsumption[];
+}
+
 /** PluginUserState */
 declare interface PluginUserState {
   /** 是否已收藏该插件 */
@@ -1782,6 +1916,16 @@ declare interface RequestParam {
   SubParams?: RequestParam[];
   /** 枚举项枚举值描述PARAM_TYPE_STRING0字符串PARAM_TYPE_INT1整数PARAM_TYPE_FLOAT2浮点数PARAM_TYPE_BOOL3布尔值PARAM_TYPE_OBJECT4对象PARAM_TYPE_ARRAY_STRING5字符串数组PARAM_TYPE_ARRAY_INT6整数数组PARAM_TYPE_ARRAY_FLOAT7浮点数数组PARAM_TYPE_ARRAY_BOOL8布尔值数组PARAM_TYPE_ARRAY_OBJECT9对象数组PARAM_TYPE_ARRAY_ARRAY20数组嵌套PARAM_TYPE_NULL99空值PARAM_TYPE_UNSPECIFIED100未指定类型，用于OneOf和AnyOf场景 */
   Type?: number;
+}
+
+/** 单项消耗计量 */
+declare interface ResourceConsumption {
+  /** 功能标签，PLATFORM 场景取 PlatformBizType 枚举名称；MODEL/PLUGIN 场景为空 */
+  Label?: string;
+  /** 消耗计量单位枚举项枚举值描述DOSAGE_UNIT_TOKEN0token（默认）DOSAGE_UNIT_PAGE_COUNT1page_count（页数）DOSAGE_UNIT_TIMES2times（次数）DOSAGE_UNIT_SECOND3second（秒）DOSAGE_UNIT_ITEM4item（条）DOSAGE_UNIT_SHEET5sheet（张）DOSAGE_UNIT_CHARACTER6character（字符）DOSAGE_UNIT_GB7GBDOSAGE_UNIT_NUMBER8number（个数）DOSAGE_UNIT_MILL_SECOND9mill_second（毫秒） */
+  Unit?: number;
+  /** 消耗数值 */
+  Value?: number;
 }
 
 /** ResponseParam */
@@ -2032,6 +2176,14 @@ declare interface ThinkModel {
   Model: ModelDetailInfo | null;
 }
 
+/** 查询时间范围（Unix 秒） */
+declare interface TimeRange {
+  /** 结束时间，Unix 秒 */
+  EndTime: string;
+  /** 开始时间，Unix 秒 */
+  StartTime: string;
+}
+
 /** TimerPushConfig */
 declare interface TimerPushConfig {
   /** 枚举值:| uint | 描述 || --- | --- || 0 | || 1 | 不推送 || 2 | 微信公众号 || 3 | 企业微信 AI 机器人 | */
@@ -2142,6 +2294,40 @@ declare interface TriggerStatus {
   WebhookStatus?: AppTriggerWebhookStatus;
 }
 
+/** 资源调用时序明细 */
+declare interface UsageDetail {
+  /** 调用来源 */
+  CallSource?: CallSource;
+  /** 计量 ID，用于对账/回溯 */
+  DosageId?: string;
+  /** 调用时间戳（Unix 秒） */
+  EventTime?: string;
+  /** MODEL 域专属 */
+  Model?: ModelUsageDetail;
+  /** PLUGIN 域专属 */
+  Plugin?: PluginUsageDetail;
+  /** 调用链路追踪 ID */
+  TraceId?: string;
+  /** 用户 ID */
+  UserId?: string;
+}
+
+/** 资源用量聚合明细 */
+declare interface UsageSummary {
+  /** MODEL 域专属 */
+  Model?: ModelUsageSummary;
+  /** PLATFORM 域专属 */
+  Platform?: PlatformUsageSummary;
+  /** PLUGIN 域专属 */
+  Plugin?: PluginUsageSummary;
+  /** 来源 ID；CORP 视图=space_id（企业视图按 space 分组），SPACE 视图=app_id（uint64 字符串），APP 视图=app_id */
+  SourceId?: string;
+  /** 来源名称；CORP 视图=space_name，SPACE 视图=app_name，APP 视图=app_name */
+  SourceName?: string;
+  /** 视图类型，决定 SourceId/SourceName 的业务含义枚举项枚举值描述VIEW_TYPE_UNSPECIFIED0未指定（无效值，请求勿传）VIEW_TYPE_CORP1企业视图VIEW_TYPE_SPACE2空间视图VIEW_TYPE_APP3应用视图 */
+  ViewType?: number;
+}
+
 /** 变量信息 */
 declare interface Variable {
   /** 默认文件名称 */
@@ -2162,6 +2348,14 @@ declare interface Variable {
   EnableEndpoints?: boolean;
   /** 网络策略列表(支持: 精确域名、*.通配子域名、可带协议/端口/路径前缀) */
   EndpointList?: string[];
+}
+
+/** 视图范围 */
+declare interface ViewScope {
+  /** 视图类型；枚举值：VIEW_TYPE_CORP(1) 企业视图、VIEW_TYPE_SPACE(2) 空间视图、VIEW_TYPE_APP(3) 应用视图枚举项枚举值描述VIEW_TYPE_UNSPECIFIED0未指定（无效值，请求勿传）VIEW_TYPE_CORP1企业视图VIEW_TYPE_SPACE2空间视图VIEW_TYPE_APP3应用视图 */
+  ViewType: number;
+  /** 视图范围 ID；VIEW_TYPE_CORP 留空；VIEW_TYPE_SPACE 填 space_id；VIEW_TYPE_APP 填 app_id（uint64 雪花 ID 的十进制字符串） */
+  ScopeId?: string;
 }
 
 /** VoiceConfig */
@@ -2852,6 +3046,50 @@ declare interface DescribeAuditLogMetaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConcurrencyLimitDetailListRequest {
+  /** 查询时间范围（Unix 秒） */
+  TimeRange: TimeRange;
+  /** 视图范围：企业视图 / 空间视图/ 应用视图 */
+  ViewScope: ViewScope;
+  /** 扩展过滤。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：concurrency_type（qpm_tpm/dedicated，默认 qpm_tpm）、model_name（必填）、space_id、app_id/resource_id/source_id（应用ID，多选）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数） */
+  FilterList?: Filter[];
+  /** 页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，最大 100 */
+  PageSize?: number;
+}
+
+declare interface DescribeConcurrencyLimitDetailListResponse {
+  /** 并发超限明细列表 */
+  ConcurrencyLimitDetailList?: ConcurrencyLimitDetail[];
+  /** 总记录数，用于前端分页 */
+  TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumptionDetailListRequest {
+  /** 查询时间范围（Unix 秒） */
+  TimeRange: TimeRange;
+  /** 视图范围：企业视图 / 空间视图 */
+  ViewScope: ViewScope;
+  /** 扩展过滤。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：metric_source_type（METRIC_SOURCE_TYPE_* 或整数）、source_ids（多选来源ID）、resource_id/source_id（单选来源ID，source_ids 未传时生效）、space_id、user_id */
+  FilterList?: Filter[];
+  /** 页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，最大 100 */
+  PageSize?: number;
+}
+
+declare interface DescribeConsumptionDetailListResponse {
+  /** 资源消耗明细列表 */
+  ConsumptionDetailList?: ConsumptionDetail[];
+  /** 总记录数，用于前端分页 */
+  TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConversationListRequest {
   /** 会话类型，传 CONVERSATION_TYPE_UNSPECIFIED 表示全部 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接) */
   Type: number;
@@ -2980,6 +3218,26 @@ declare interface DescribeLatestReleaseResponse {
   IsChanged?: boolean;
   /** 发布信息 */
   ReleaseSummary?: ReleaseSummary;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMetricOverviewListRequest {
+  /** 看板域，必填，决定返回哪个域的 KPI 数据枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量RESOURCE_TYPE_PLATFORM3平台功能用量RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限RESOURCE_TYPE_KB_CAPACITY5知识库容量RESOURCE_TYPE_USAGE_SUMMARY6用量汇总RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细） */
+  ResourceType: number;
+  /** 查询时间范围（Unix 秒） */
+  TimeRange: TimeRange;
+  /** 视图范围：企业视图 / 空间视图 */
+  ViewScope: ViewScope;
+  /** 扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name（模型名）、user_id（用户ID）、space_id（空间ID）、resource_id/source_id（来源ID）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数） */
+  FilterList?: Filter[];
+}
+
+declare interface DescribeMetricOverviewListResponse {
+  /** 所有域 Overview 统一出参：KPI 卡片列表，key 字符串标识指标，客户端按 resource_type 解析；key 白名单参考 platform.common.v2.MetricOverview 注释 */
+  MetricList?: MetricOverview[];
+  /** 总记录数，等于 MetricList 长度，仅为列表接口一致性预留 */
+  TotalCount?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3172,6 +3430,54 @@ declare interface DescribeSystemVariableListRequest {
 declare interface DescribeSystemVariableListResponse {
   /** system_variable_list */
   SystemVariableList?: SystemVariable[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUsageDetailListRequest {
+  /** 资源类型，限定为 RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量RESOURCE_TYPE_PLATFORM3平台功能用量RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限RESOURCE_TYPE_KB_CAPACITY5知识库容量RESOURCE_TYPE_USAGE_SUMMARY6用量汇总RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细） */
+  ResourceType: number;
+  /** 查询时间范围（Unix 秒） */
+  TimeRange: TimeRange;
+  /** 视图范围：企业视图 / 空间视图 / 应用视图 */
+  ViewScope: ViewScope;
+  /** 扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name、user_id、space_id、resource_id/source_id、metric_source_type（METRIC_SOURCE_TYPE_* 或整数）、call_type（调用类型） */
+  FilterList?: Filter[];
+  /** 页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，最大 100 */
+  PageSize?: number;
+}
+
+declare interface DescribeUsageDetailListResponse {
+  /** 总记录数，用于前端分页 */
+  TotalCount?: string;
+  /** 资源调用时序明细列表 */
+  UsageDetailList?: UsageDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUsageSummaryListRequest {
+  /** 资源类型，限定为 MODEL / PLUGIN / PLATFORM枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量RESOURCE_TYPE_PLATFORM3平台功能用量RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限RESOURCE_TYPE_KB_CAPACITY5知识库容量RESOURCE_TYPE_USAGE_SUMMARY6用量汇总RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细） */
+  ResourceType: number;
+  /** 查询时间范围（Unix 秒） */
+  TimeRange: TimeRange;
+  /** 视图范围：企业视图 / 空间视图 / 应用视图 */
+  ViewScope: ViewScope;
+  /** 扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name（模型名）、user_id（用户ID）、space_id（空间ID）、resource_id/source_id（来源ID）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数） */
+  FilterList?: Filter[];
+  /** 页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，最大 100 */
+  PageSize?: number;
+}
+
+declare interface DescribeUsageSummaryListResponse {
+  /** 总记录数，用于前端分页 */
+  TotalCount?: string;
+  /** 资源用量聚合明细列表 */
+  UsageSummaryList?: UsageSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3615,6 +3921,10 @@ declare interface Adp {
   DescribeAuditLogList(data?: DescribeAuditLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogListResponse>;
   /** 获取审计日志元信息 {@link DescribeAuditLogMetaRequest} {@link DescribeAuditLogMetaResponse} */
   DescribeAuditLogMeta(data?: DescribeAuditLogMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogMetaResponse>;
+  /** 查询并发超限明细 {@link DescribeConcurrencyLimitDetailListRequest} {@link DescribeConcurrencyLimitDetailListResponse} */
+  DescribeConcurrencyLimitDetailList(data: DescribeConcurrencyLimitDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyLimitDetailListResponse>;
+  /** 查询资源消耗明细 {@link DescribeConsumptionDetailListRequest} {@link DescribeConsumptionDetailListResponse} */
+  DescribeConsumptionDetailList(data: DescribeConsumptionDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumptionDetailListResponse>;
   /** 查看会话信息 {@link DescribeConversationRequest} {@link DescribeConversationResponse} */
   DescribeConversation(data: DescribeConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationResponse>;
   /** 获取会话列表 {@link DescribeConversationListRequest} {@link DescribeConversationListResponse} */
@@ -3623,6 +3933,8 @@ declare interface Adp {
   DescribeConversationMessageList(data: DescribeConversationMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationMessageListResponse>;
   /** 拉取最新发布信息 {@link DescribeLatestReleaseRequest} {@link DescribeLatestReleaseResponse} */
   DescribeLatestRelease(data: DescribeLatestReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestReleaseResponse>;
+  /** 查询看板总览KPI卡片 {@link DescribeMetricOverviewListRequest} {@link DescribeMetricOverviewListResponse} */
+  DescribeMetricOverviewList(data: DescribeMetricOverviewListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricOverviewListResponse>;
   /** 查询模型列表 {@link DescribeModelListRequest} {@link DescribeModelListResponse} */
   DescribeModelList(data: DescribeModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelListResponse>;
   /** 获取插件详情 {@link DescribePluginRequest} {@link DescribePluginResponse} */
@@ -3645,6 +3957,10 @@ declare interface Adp {
   DescribeSpaceList(data?: DescribeSpaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceListResponse>;
   /** 获取系统变量 {@link DescribeSystemVariableListRequest} {@link DescribeSystemVariableListResponse} */
   DescribeSystemVariableList(data: DescribeSystemVariableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVariableListResponse>;
+  /** 查询资源调用时序明细 {@link DescribeUsageDetailListRequest} {@link DescribeUsageDetailListResponse} */
+  DescribeUsageDetailList(data: DescribeUsageDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageDetailListResponse>;
+  /** 查询资源用量聚合明细 {@link DescribeUsageSummaryListRequest} {@link DescribeUsageSummaryListResponse} */
+  DescribeUsageSummaryList(data: DescribeUsageSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageSummaryListResponse>;
   /** 获取参数变量 {@link DescribeVariableRequest} {@link DescribeVariableResponse} */
   DescribeVariable(data: DescribeVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableResponse>;
   /** 获取参数变量列表 {@link DescribeVariableListRequest} {@link DescribeVariableListResponse} */

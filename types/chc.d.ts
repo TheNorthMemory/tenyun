@@ -1531,12 +1531,12 @@ declare interface DescribeWorkOrderTypesResponse {
 }
 
 declare interface ExportCustomerWorkOrderDetailRequest {
-  /** 服务工单类型 */
-  WorkOrderType: string[];
   /** 要导出的工单的起始时间 */
   BeginDateTime: string;
   /** 要导出的工单的结束时间 */
   EndDateTime: string;
+  /** 服务工单类型 */
+  WorkOrderType?: string[];
 }
 
 declare interface ExportCustomerWorkOrderDetailResponse {

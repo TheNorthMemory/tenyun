@@ -6138,6 +6138,14 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface ModifyPrometheusInstanceAccessPointsRequest {
+  }
+
+  interface ModifyPrometheusInstanceAccessPointsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyPrometheusInstanceAttributesRequest {
     /** 实例 ID */
     InstanceId: string;
@@ -6998,6 +7006,8 @@ declare interface Monitor {
   ModifyPrometheusConfig(data: V20180724.ModifyPrometheusConfigRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusConfigResponse>;
   /** @deprecated 修改全局告警通知渠道 {@link V20180724.ModifyPrometheusGlobalNotificationRequest} {@link V20180724.ModifyPrometheusGlobalNotificationResponse} */
   ModifyPrometheusGlobalNotification(data: V20180724.ModifyPrometheusGlobalNotificationRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusGlobalNotificationResponse>;
+  /** 修改 Prometheus 实例的访问入口（开启关闭 HTTP、HTTPS 等） {@link V20180724.ModifyPrometheusInstanceAccessPointsRequest} {@link V20180724.ModifyPrometheusInstanceAccessPointsResponse} */
+  ModifyPrometheusInstanceAccessPoints(data: V20180724.ModifyPrometheusInstanceAccessPointsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusInstanceAccessPointsResponse>;
   /** 修改 Prometheus 实例相关属性 {@link V20180724.ModifyPrometheusInstanceAttributesRequest} {@link V20180724.ModifyPrometheusInstanceAttributesResponse} */
   ModifyPrometheusInstanceAttributes(data: V20180724.ModifyPrometheusInstanceAttributesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyPrometheusInstanceAttributesResponse>;
   /** 通过yaml的方式修改Prometheus聚合实例 {@link V20180724.ModifyPrometheusRecordRuleYamlRequest} {@link V20180724.ModifyPrometheusRecordRuleYamlResponse} */

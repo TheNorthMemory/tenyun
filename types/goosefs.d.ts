@@ -44,6 +44,8 @@ declare interface ClientNodeAttribute {
   MountPoint?: string;
   /** 客户端集群id */
   ClusterId?: string;
+  /**  */
+  MountPoints?: MountPointEntry[];
 }
 
 /** 查询Client Token */
@@ -86,6 +88,12 @@ declare interface CustomerClusterAttr {
   Status?: number;
   /** 客户端集群挂载存储集合 */
   ClusterMountSet?: ClusterMountAttr[];
+  /**  */
+  Zone?: string;
+  /**  */
+  MountStorageNum?: number;
+  /**  */
+  StorageFileSystemId?: string;
 }
 
 /** 数据预热任务参数 */
@@ -276,6 +284,14 @@ declare interface MetadataLoadAttrs {
   LoadByPath?: string;
   /** 通过文件列表批量预热，入参为 cos://bucket-appid/ 开头的 COS 路径，且仅支持 txt 格式文件，长度不能超过255个字符。入参数LoadType为LoadByList，该参数不应为空 */
   LoadByList?: string;
+}
+
+/** 客户端挂载点 */
+declare interface MountPointEntry {
+  /**  */
+  StorageFileSystemId?: string;
+  /**  */
+  MountDir?: string;
 }
 
 /** 角色凭证 */

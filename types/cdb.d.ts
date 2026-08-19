@@ -1530,6 +1530,8 @@ declare interface RoGroup {
   RoGroupZone?: string;
   /** 延迟复制时间。单位：秒。值范围：1-259200，整数。 */
   DelayReplicationTime?: number;
+  /** 只读组类型。枚举值：normal： 普通RO组direct： 纯网络转发模式default： 默认RO组默认值：normal */
+  RoGroupType?: string;
 }
 
 /** RO 组的配置信息 */

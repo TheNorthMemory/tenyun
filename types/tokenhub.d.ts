@@ -996,6 +996,14 @@ declare interface DescribeModelListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelQuotaRequest {
+}
+
+declare interface DescribeModelQuotaResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTokenPlanApiKeyListRequest {
   /** 套餐 ID。可通过DescribeTokenPlanList接口获取。 */
   TeamId: string;
@@ -1353,6 +1361,8 @@ declare interface Tokenhub {
   DescribeModelEndpointList(data?: DescribeModelEndpointListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelEndpointListResponse>;
   /** 查询模型列表 {@link DescribeModelListRequest} {@link DescribeModelListResponse} */
   DescribeModelList(data?: DescribeModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelListResponse>;
+  /** 查询模型配额 {@link DescribeModelQuotaRequest} {@link DescribeModelQuotaResponse} */
+  DescribeModelQuota(data?: DescribeModelQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelQuotaResponse>;
   /** 查询 Token Plan 套餐详情 {@link DescribeTokenPlanRequest} {@link DescribeTokenPlanResponse} */
   DescribeTokenPlan(data: DescribeTokenPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanResponse>;
   /** 查询 Token Plan 套餐的 API Key 详情 {@link DescribeTokenPlanApiKeyRequest} {@link DescribeTokenPlanApiKeyResponse} */

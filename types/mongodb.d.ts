@@ -588,6 +588,18 @@ declare interface ModifyNetworkAddress {
   OldIpAddress: string;
 }
 
+/** 单shark变配入参 */
+declare interface ModifyShardSpecInfo {
+  /** 分片ID */
+  ReplicaSetId?: string;
+  /** CPU核数。单位：C。 */
+  Cpu?: number;
+  /** 内存大小，单位：GB。 */
+  Memory?: number;
+  /** 硬盘大小，单位：GB。 */
+  Volume?: number;
+}
+
 /** 节点属性 */
 declare interface NodeProperty {
   /** 节点所在的可用区。 */
@@ -2313,8 +2325,10 @@ declare interface ModifyDBInstanceSpecRequest {
   RemoveNodeList?: RemoveNodeList[];
   /** 实例配置变更后的CPU大小。单位：C。该参数为空值时，默认取实例当前的 CPU 大小。当前所支持的CPU规格，请参见产品规格。 */
   Cpu?: number;
-  /** 实例配置变更后的产品规格类型。该参数为空值时，默认取实例当前的产品规格类型。当前支持的产品规格类型如下：产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请通用 I 型不能变更到白名单规格类型 */
+  /** 实例配置变更后的产品规格类型。该参数为空值时，默认取实例当前的产品规格类型。当前支持的产品规格类型如下：产品推荐规格类型：GE.LD.T2：本地盘（通用II型）。GE.CD.T2：云盘（通用II型）。EX.LD.T2：本地盘（独享II型）。产品白名单规格类型：GE.LD.T1：本地盘（通用I型），预计将逐步售罄，建议选择通用II型。GE.CD.T1：云盘（通用I型），预计将逐步售罄，建议选择通用II型。HIO10G：本地盘（高IO万兆型），已售罄，建议选择通用II型。HCD：云盘（云盘版），已售罄，建议选择通用II型。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请默认不能变更到白名单规格类型产品推荐的规格类型之间不支持相互变更 */
   MachineCode?: string;
+  /** 单分片变配列表，用于指定需要单独调整规格的分片。每次设置时 CPU、内存、磁盘都必须指定；如果指定多个分片，所有分片的目标规格必须一致；未指定的分片保持不变。仅分片集群支持，副本集不支持。注意：此参数与整实例级别的变配参数（如 Memory、Volume、CpuNum 等）互斥，不能同时传入。 */
+  ModifyShardList?: ModifyShardSpecInfo[];
 }
 
 declare interface ModifyDBInstanceSpecResponse {

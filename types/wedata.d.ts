@@ -4170,6 +4170,10 @@ declare interface TriggerTaskRunBrief {
   ExecutionResult?: string | null;
   /** 依赖策略 */
   DependencyTriggerPolicy?: string | null;
+  /** 关联实体是否存在，true表示任务/工作流等实体存在，false表示实体已被删除 */
+  AssociatedEntityExist?: boolean | null;
+  /** 调度执行类型枚举值：0： 正常调度1： 空跑调度2： 用户驱动，手动触发 */
+  ScheduleRunType?: string | null;
 }
 
 /** 任务调度配置信息 */
@@ -13397,6 +13401,14 @@ declare namespace V20210820 {
     BytesLogSpeed?: BytesSpeed[];
   }
 
+  /** 历史实例信息 */
+  interface RealtimeTaskInstanceVO {
+    /** 实例生成时间 */
+    InstanceDate?: string;
+    /** 实例id */
+    RunningOrderId?: number;
+  }
+
   /** 通用记录字段，与服务端约定传入合法的键值对 */
   interface RecordField {
     /** 字段名称，拓展字段名称 */
@@ -19810,6 +19822,8 @@ declare namespace V20210820 {
     AgentStatus?: AgentStatus | null;
     /** 任务版本信息 */
     TaskVersion?: TaskVersionInstance | null;
+    /** 历史实例信息 */
+    TaskVersionList?: RealtimeTaskInstanceVO[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -21061,6 +21075,8 @@ declare namespace V20210820 {
     Keyword?: string;
     /** 任务类型，不传时按 INTEGRATION 处理 枚举值：INTEGRATION： 集成任务VALIDATE： 对账任务 */
     JobType?: string;
+    /** 滚动查询游标 */
+    Context?: string;
   }
 
   interface DescribeStreamTaskLogListResponse {
@@ -21068,6 +21084,8 @@ declare namespace V20210820 {
     ListOver?: boolean | null;
     /** 日志集合 */
     LogContentList?: LogContentInfo[] | null;
+    /** 滚动查询游标 */
+    Context?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -21141,6 +21159,12 @@ declare namespace V20210820 {
     TaskId?: string;
     /** 分区信息 */
     PartitionName?: string;
+    /** 资源组ID */
+    ResourceGroupId?: string;
+    /** 执行SQL */
+    Sql?: string;
+    /** 引擎名 */
+    EngineId?: string;
   }
 
   interface DescribeTableContentPreviewResponse {

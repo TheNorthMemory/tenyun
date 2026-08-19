@@ -114,6 +114,18 @@ declare interface CdcSize {
   DiskAvailable?: number;
 }
 
+/** CDC 独享集群云硬盘统计信息。 */
+declare interface DedicatedClusterDiskStatistic {
+  /** 硬盘介质类型。取值范围：<li>CLOUD_BASIC：表示普通云硬盘<li>CLOUD_PREMIUM：表示高性能云硬盘<li>CLOUD_SSD：表示SSD云硬盘<li>CLOUD_HSSD：表示增强型SSD云硬盘<li>CLOUD_TSSD：表示极速型SSD云硬盘。 */
+  DiskType?: string;
+  /** 云硬盘总容量。单位：GiB */
+  TotalDiskSize?: number;
+  /** 已使用的云硬盘容量。单位：GiB */
+  UsedDiskSize?: number;
+  /** 可用的云硬盘容量。单位：GiB */
+  AvailableDiskSize?: number;
+}
+
 /** 描述购买云硬盘时的费用明细。 */
 declare interface DetailPrice {
   /** 后付费云硬盘的计价单元，取值范围：HOUR：表示后付费云硬盘的计价单元是按小时计算。 */
@@ -392,6 +404,12 @@ declare interface RemoteDiskChargePrepaid {
   CurInstanceDeadline?: string;
   /** 自动续费标识。取值范围： NOTIFY_AND_AUTO_RENEW：通知过期且自动续费 NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费 DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费默认取值：NOTIFY_AND_MANUAL_RENEW。 */
   RenewFlag?: string;
+}
+
+/** 单副本SSD硬盘详情。 */
+declare interface RemoteDiskDetail {
+  /** 单副本SSD硬盘所在的位置。 */
+  Placement?: Placement;
 }
 
 /** 快照分享信息集合 */
@@ -843,9 +861,13 @@ declare interface DescribeAutoSnapshotPoliciesResponse {
 }
 
 declare interface DescribeDedicatedClusterDiskStatisticsRequest {
+  /** 云服务器独享集群ID。 */
+  DedicatedClusterId: string;
 }
 
 declare interface DescribeDedicatedClusterDiskStatisticsResponse {
+  /** 云服务器独享集群云硬盘统计信息。 */
+  DedicatedClusterDiskStatisticSet?: DedicatedClusterDiskStatistic[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1002,6 +1024,10 @@ declare interface DescribeRemoteDisksRequest {
 }
 
 declare interface DescribeRemoteDisksResponse {
+  /** 单副本SSD硬盘的详细信息列表。 */
+  RemoteDiskSet?: RemoteDiskDetail[];
+  /** 符合条件的单副本SSD硬盘数量。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1517,8 +1543,8 @@ declare interface Cbs {
   DeleteSnapshots(data: DeleteSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSnapshotsResponse>;
   /** 查询定期快照策略 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
-  /** 查询 CVM CDC 独享集群云硬盘统计信息 {@link DescribeDedicatedClusterDiskStatisticsRequest} {@link DescribeDedicatedClusterDiskStatisticsResponse} */
-  DescribeDedicatedClusterDiskStatistics(data?: DescribeDedicatedClusterDiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterDiskStatisticsResponse>;
+  /** 查询 云服务器独享集群云硬盘统计信息 {@link DescribeDedicatedClusterDiskStatisticsRequest} {@link DescribeDedicatedClusterDiskStatisticsResponse} */
+  DescribeDedicatedClusterDiskStatistics(data: DescribeDedicatedClusterDiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClusterDiskStatisticsResponse>;
   /** 查询云硬盘关联定期快照策略 {@link DescribeDiskAssociatedAutoSnapshotPolicyRequest} {@link DescribeDiskAssociatedAutoSnapshotPolicyResponse} */
   DescribeDiskAssociatedAutoSnapshotPolicy(data: DescribeDiskAssociatedAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiskAssociatedAutoSnapshotPolicyResponse>;
   /** 查询备份点列表 {@link DescribeDiskBackupsRequest} {@link DescribeDiskBackupsResponse} */

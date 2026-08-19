@@ -1398,6 +1398,16 @@ declare interface ExtractRuleInfo {
   AdvanceFilterRules?: AdvanceFilterRuleInfo[] | null;
   /** 原始日志的键名称(Key)；所有原始日志， 均以您指定的键名称（Key），原始日志内容作为值（Value）进行上传，为空时表示不开启原始日志上传。COS导入不支持此字段。 */
   RawLogKey?: string;
+  /** 采集范围。空数组表示采集全部Unit，非空数组表示采集指定Unit */
+  Units?: string[];
+  /** 是否采集内核日志默认值：true */
+  IncludeKernel?: boolean;
+  /** 是否使用journal原始时间。true ：用 journal 原始时间；false： 用采集时间 默认值：false */
+  UseJournalTime?: boolean;
+  /** 字段间分隔符数组（长度 = keys.length），每个元素是前一字段结尾到当前字段开头的分隔串 */
+  KeysDelimiter?: string[];
+  /** 字段标志位数组（长度 = keys.length），0 = 普通字段，1 = 包含子字段需二次拆分 */
+  KeysFlag?: number[];
 }
 
 /** 文件路径信息 */
@@ -3261,13 +3271,13 @@ declare interface CreateConfigExtraResponse {
 }
 
 declare interface CreateConfigRequest {
-  /** 采集配置名称- 名称种不得包含特殊字符｜- 名称最长255字符，超过截断 */
+  /** 采集配置名称名称种不得包含特殊字符｜名称最长255字符，超过截断 */
   Name: string;
-  /** 采集配置所属日志主题ID即TopicId- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 采集配置所属日志主题ID即TopicId通过获取日志主题列表获取日志主题Id。 */
   Output: string;
   /** 日志采集路径，包含文件名，支持多个路径，多个路径之间英文逗号分隔，文件采集情况下必填 */
   Path?: string;
-  /** 采集的日志类型，默认为minimalist_log。支持以下类型：- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）；- service_syslog代表：syslog 采集（详见[采集 Syslog](https://cloud.tencent.com/document/product/614/81454)）；- windows_event_log代表：Windows事件日志（详见[采集 Windows 事件日志](https://cloud.tencent.com/document/product/614/96678)）。 */
+  /** 采集的日志类型，默认为minimalist_log。支持以下类型：json_log代表：JSON-文件日志（详见使用 JSON 提取模式采集日志）；delimiter_log代表：分隔符-文件日志（详见使用分隔符提取模式采集日志）；minimalist_log代表：单行全文-文件日志（详见使用单行全文提取模式采集日志）；fullregex_log代表：单行完全正则-文件日志（详见使用单行-完全正则提取模式采集日志）；multiline_log代表：多行全文-文件日志（详见使用多行全文提取模式采集日志）；multiline_fullregex_log代表：多行完全正则-文件日志（详见使用多行-完全正则提取模式采集日志）；user_define_log代表：组合解析（适用于多格式嵌套的日志，详见使用组合解析提取模式采集日志）；service_syslog代表：syslog 采集（详见采集 Syslog）；windows_event_log代表：Windows事件日志（详见采集 Windows 事件日志）。journal_log代表：journal日志采集 */
   LogType?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRule?: ExtractRuleInfo;
@@ -3275,9 +3285,9 @@ declare interface CreateConfigRequest {
   ExcludePaths?: ExcludePathInfo[];
   /** 用户自定义采集规则，Json格式序列化的字符串。当LogType为user_define_log时，必填。 */
   UserDefineRule?: string;
-  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`控制台默认占位值：`{\"ClsAgentDefault\":0}` */
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}控制台默认占位值：{\"ClsAgentDefault\":0} */
   AdvancedConfig?: string;
-  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）- file: 文件类型采集- windows_event：windows事件采集- syslog：系统日志采集 */
+  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）file: 文件类型采集windows_event：windows事件采集syslog：系统日志采集 */
   InputType?: string;
 }
 
@@ -6095,25 +6105,25 @@ declare interface ModifyConfigExtraResponse {
 }
 
 declare interface ModifyConfigRequest {
-  /** 采集规则配置ID，通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)返回信息获取。 */
+  /** 采集规则配置ID，通过获取采集规则配置返回信息获取。 */
   ConfigId: string;
-  /** 采集规则配置名称- 不能包含特殊字符｜- 长度不能超过255字符，超过会被截断 */
+  /** 采集规则配置名称不能包含特殊字符｜长度不能超过255字符，超过会被截断 */
   Name?: string;
   /** 日志采集路径，包含文件名 */
   Path?: string;
-  /** 采集的日志类型。支持以下类型：- json_log代表：JSON-文件日志（详见[使用 JSON 提取模式采集日志](https://cloud.tencent.com/document/product/614/17419)）；- delimiter_log代表：分隔符-文件日志（详见[使用分隔符提取模式采集日志](https://cloud.tencent.com/document/product/614/17420)）；- minimalist_log代表：单行全文-文件日志（详见[使用单行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17421)）；- fullregex_log代表：单行完全正则-文件日志（详见[使用单行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52365)）；- multiline_log代表：多行全文-文件日志（详见[使用多行全文提取模式采集日志](https://cloud.tencent.com/document/product/614/17422)）；- multiline_fullregex_log代表：多行完全正则-文件日志（详见[使用多行-完全正则提取模式采集日志](https://cloud.tencent.com/document/product/614/52366)）；- user_define_log代表：组合解析（适用于多格式嵌套的日志，详见[使用组合解析提取模式采集日志](https://cloud.tencent.com/document/product/614/61310)）；- service_syslog代表：syslog 采集（详见[采集 Syslog](https://cloud.tencent.com/document/product/614/81454)）；- windows_event_log代表：Windows事件日志（详见[采集 Windows 事件日志](https://cloud.tencent.com/document/product/614/96678)）。 */
+  /** 采集的日志类型。支持以下类型：json_log代表：JSON-文件日志（详见使用 JSON 提取模式采集日志）；delimiter_log代表：分隔符-文件日志（详见使用分隔符提取模式采集日志）；minimalist_log代表：单行全文-文件日志（详见使用单行全文提取模式采集日志）；fullregex_log代表：单行完全正则-文件日志（详见使用单行-完全正则提取模式采集日志）；multiline_log代表：多行全文-文件日志（详见使用多行全文提取模式采集日志）；multiline_fullregex_log代表：多行完全正则-文件日志（详见使用多行-完全正则提取模式采集日志）；user_define_log代表：组合解析（适用于多格式嵌套的日志，详见使用组合解析提取模式采集日志）；service_syslog代表：syslog 采集（详见采集 Syslog）；windows_event_log代表：Windows事件日志（详见采集 Windows 事件日志）。journal_log代表：journal日志采集 */
   LogType?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRule?: ExtractRuleInfo;
   /** 采集黑名单路径列表 */
   ExcludePaths?: ExcludePathInfo[];
-  /** 采集配置关联的日志主题（TopicId）- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 采集配置关联的日志主题（TopicId）通过获取日志主题列表获取日志主题Id。 */
   Output?: string;
   /** 用户自定义解析字符串，Json格式序列化的字符串。 */
   UserDefineRule?: string;
-  /** 高级采集配置。 Json字符串， Key/Value定义为如下：- ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时- ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数- ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}` */
+  /** 高级采集配置。 Json字符串， Key/Value定义为如下：ClsAgentFileTimeout(超时属性), 取值范围: 大于等于0的整数， 0为不超时ClsAgentMaxDepth(最大目录深度)，取值范围: 大于等于0的整数ClsAgentParseFailMerge(合并解析失败日志)，取值范围: true或false样例：{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true} */
   AdvancedConfig?: string;
-  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）- file: 文件类型采集- windows_event：windows事件采集- syslog：系统日志采集 */
+  /** 日志输入类型（注：windows场景必填且仅支持file和windows_event类型）file: 文件类型采集windows_event：windows事件采集syslog：系统日志采集 */
   InputType?: string;
 }
 
