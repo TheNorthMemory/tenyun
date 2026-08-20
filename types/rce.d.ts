@@ -358,6 +358,8 @@ declare interface Device {
   SignToken?: string;
   /** token生成时间戳，毫秒级。 */
   TokenTime?: string;
+  /** 隐私浏览器类型，当检测到隐私浏览器时返回，仅H5。 */
+  PrivacyBrowser?: string;
 }
 
 /** 数字订单 */

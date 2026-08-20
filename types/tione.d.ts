@@ -2539,6 +2539,8 @@ declare interface ChatCompletionRequest {
   Model: string;
   /** 输入对话历史。旧的对话在前，数组中最后一项应该为这次的问题。 */
   Messages: Message[];
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 仅当模型为自行部署的开源大模型时生效。采样随机值，默认值为0.7，取值范围[0,2]。较高的值(如0.8)将使输出更加随机，而较低的值(如0.2)将使输出更加确定。建议仅修改此参数或TopP，但不建议两者都修改。 */
   Temperature?: number;
   /** 仅当模型为自行部署的开源大模型时生效。核采样，默认值为1，取值范围[0,1]。指的是预先设置一个概率界限 p，然后将所有可能生成的token，根据概率大小从高到低排列，依次选取。当这些选取的token的累积概率大于或等于 p 值时停止，然后从已经选取的token中进行采样，生成下一个token。例如top_p为0.1时意味着模型只考虑累积概率为10%的token。建议仅修改此参数或Temperature，不建议两者都修改。 */
@@ -2657,6 +2659,8 @@ declare interface CreateExportResponse {
 declare interface CreateModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** token 名称 */
   Name?: string;
   /** Description 描述 */
@@ -3035,6 +3039,8 @@ declare interface DeleteExportResponse {
 declare interface DeleteModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** token 值 */
   AuthTokenValue?: string;
 }
@@ -3913,6 +3919,8 @@ declare interface DescribeWorkspacesResponse {
 declare interface ModifyModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
+  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  TiProjectId?: string;
   /** 是否需要重置，如果为 true，重置 token 值 */
   NeedReset?: boolean;
   /** AuthToken 数据 */

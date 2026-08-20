@@ -408,8 +408,28 @@ declare interface RemoteDiskChargePrepaid {
 
 /** 单副本SSD硬盘详情。 */
 declare interface RemoteDiskDetail {
+  /** 单副本SSD硬盘的创建时间。 */
+  CreateTime?: string;
+  /** 单副本SSD硬盘到期时间。按小时后付费单副本SSD硬盘可能为空。 */
+  DeadlineTime?: string | null;
+  /** 单副本SSD硬盘计费类型。枚举值：PREPAID： 预付费POSTPAID_BY_HOUR： 按小时后付费 */
+  DiskChargeType?: string;
+  /** 单副本SSD硬盘大小，单位为 GiB。 */
+  DiskSize?: number;
+  /** 单副本SSD硬盘挂载的云服务器实例ID。未挂载时为空字符串。 */
+  InstanceId?: string | null;
   /** 单副本SSD硬盘所在的位置。 */
   Placement?: Placement;
+  /** 单副本SSD硬盘ID。 */
+  RemoteDiskId?: string;
+  /** 单副本SSD硬盘名称。 */
+  RemoteDiskName?: string;
+  /** 单副本SSD硬盘状态。枚举值：UNATTACHED： 未挂载ATTACHED： 已挂载TORECYCLE： 待回收 */
+  RemoteDiskState?: string;
+  /** 单副本SSD硬盘类型。枚举值：REMOTE_SSD： 单副本SSD硬盘ELASTIC_REMOTE_SSD： 弹性单副本SSD硬盘 */
+  RemoteDiskType?: string;
+  /** 自动续费标识。枚举值：NOTIFY_AND_AUTO_RENEW： 通知过期且自动续费NOTIFY_AND_MANUAL_RENEW： 通知过期不自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW： 不通知过期不自动续费 */
+  RenewFlag?: string | null;
 }
 
 /** 快照分享信息集合 */

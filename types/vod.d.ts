@@ -1865,6 +1865,10 @@ declare namespace V20180717 {
     Prompt?: string;
     /** 要阻止模型生成视频的提示词。最大支持1000字符。 */
     NegativePrompt?: string;
+    /** 参考音频信息 */
+    AudioInfos?: AigcAudioReferenceAudioInfo[];
+    /** 参考视频信息 */
+    VideoInfos?: AigcAudioReferenceVideoInfo[];
     /** 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： Enabled：开启； Disabled：关闭； */
     EnhancePrompt?: boolean;
     /** AIGC 生图输出结果文件输出。 */
@@ -2269,7 +2273,7 @@ declare namespace V20180717 {
     Status?: string;
     /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
     ErrCode?: number;
-    /** 扩展错误码。枚举值：RequestLimitExceeded： 调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。 */
+    /** 扩展错误码。枚举值：RequestLimitExceeded： 调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数值错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。InvalidParameter： 非法参数。InvalidParameter.MediaFormat： 无效的媒体格式。ContentModerationFailed： 内容审核未通过。ResourceInsufficient： 资源不足。ModelGenerateFailed： 模型生成失败。ResourceNotFound： 资源不存在。OperationCanceled： 操作已取消。TaskTimeout： 任务超时。 */
     ErrCodeExt?: string;
     /** 错误信息。 */
     Message?: string;
@@ -11703,7 +11707,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;

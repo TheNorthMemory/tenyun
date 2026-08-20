@@ -4038,6 +4038,12 @@ declare interface ImageProcessTaskResult {
   Progress?: number | null;
 }
 
+/** 图片质量评估任务。 */
+declare interface ImageQualityConfig {
+  /** 图片质量评估维度枚举值：Brightness： 亮度评估Contrast： 对比度评估Sharpness： 清晰度评估IQA： 综合质量评估 */
+  Attributes: string[];
+}
+
 /** 综合增强配置 */
 declare interface ImageQualityEnhanceConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -4160,6 +4166,8 @@ declare interface ImageTaskInput {
   AiStoryboardConfig?: AiStoryboardConfig;
   /** 图片理解配置 */
   UnderstandImageConfig?: UnderstandImageConfig;
+  /** 图片质量评估配置 */
+  ImageQualityConfig?: ImageQualityConfig;
 }
 
 /** 图片基础转换能力 */
@@ -10388,7 +10396,7 @@ declare interface DescribeDesignTaskRequest {
 }
 
 declare interface DescribeDesignTaskResponse {
-  /** 错误码，成功时返回0 */
+  /** 错误码，成功时返回0，处理中返回100 */
   ErrorCode?: number;
   /** 错误信息，成功时返回success */
   Msg?: string;

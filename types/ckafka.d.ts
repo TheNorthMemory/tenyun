@@ -2326,6 +2326,14 @@ declare interface SecurityGroupRoute {
   Vip?: string;
 }
 
+/** 安全组路由操作结果返回值 */
+declare interface SecurityGroupRouteOperateResp {
+  /** 操作返回的code，0为正常，非0为错误 */
+  ReturnCode?: string | null;
+  /** 操作返回的信息 */
+  ReturnMessage?: string | null;
+}
+
 /** 安全组路由信息返回结果 */
 declare interface SecurityGroupRouteResp {
   /** 符合条件的安全组路由信息总数 */
@@ -2733,6 +2741,20 @@ declare interface AclResponse {
   TotalCount?: number;
   /** ACL列表 */
   AclList?: Acl[];
+}
+
+declare interface AssociateRoutesSecurityGroupRequest {
+  /** 绑定路由的列表 */
+  InstanceRoutes: InstanceRoute[];
+  /** 安全组id */
+  SecurityGroupId: string;
+}
+
+declare interface AssociateRoutesSecurityGroupResponse {
+  /** 返回结果 */
+  Result?: SecurityGroupRouteOperateResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface AuthorizeTokenRequest {
@@ -4273,6 +4295,20 @@ declare interface DescribeUserResponse {
   RequestId?: string;
 }
 
+declare interface DisassociateRoutesSecurityGroupRequest {
+  /** 解绑路由的列表 */
+  InstanceRoutes: InstanceRoute[];
+  /** 安全组id */
+  SecurityGroupId: string;
+}
+
+declare interface DisassociateRoutesSecurityGroupResponse {
+  /** 返回结果 */
+  Result?: SecurityGroupRouteOperateResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface FetchDatahubMessageByOffsetRequest {
   /** 弹性topic名称，可通过[DescribeDatahubTopics](https://cloud.tencent.com/document/product/597/86863)接口获取 */
   Name: string;
@@ -4807,6 +4843,20 @@ declare interface ModifyPasswordResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRouteSecurityGroupsRequest {
+  /** 实例路由 */
+  InstanceRoute: InstanceRoute;
+  /** 修改后的安全组有序列表。注意:不指定此参数或传空列表则代表解绑所有关联的安全组。 */
+  SecurityGroupIds?: string[];
+}
+
+declare interface ModifyRouteSecurityGroupsResponse {
+  /** 返回结果 */
+  Result?: SecurityGroupRouteOperateResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyRoutineMaintenanceTaskRequest {
   /** ckafka集群实例id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
   InstanceId: string;
@@ -5078,6 +5128,8 @@ declare interface ZoneResponse {
 /** {@link Ckafka 消息队列 CKafka 版} */
 declare interface Ckafka {
   (): Versions;
+  /** 绑定路由安全组 {@link AssociateRoutesSecurityGroupRequest} {@link AssociateRoutesSecurityGroupResponse} */
+  AssociateRoutesSecurityGroup(data: AssociateRoutesSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AssociateRoutesSecurityGroupResponse>;
   /** 实例授权token {@link AuthorizeTokenRequest} {@link AuthorizeTokenResponse} */
   AuthorizeToken(data: AuthorizeTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AuthorizeTokenResponse>;
   /** 批量添加 ACL 策略 {@link BatchCreateAclRequest} {@link BatchCreateAclResponse} */
@@ -5230,6 +5282,8 @@ declare interface Ckafka {
   DescribeTypeInstances(data?: DescribeTypeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTypeInstancesResponse>;
   /** 根据实例id查询用户信息 {@link DescribeUserRequest} {@link DescribeUserResponse} */
   DescribeUser(data: DescribeUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserResponse>;
+  /** 解绑路由安全组 {@link DisassociateRoutesSecurityGroupRequest} {@link DisassociateRoutesSecurityGroupResponse} */
+  DisassociateRoutesSecurityGroup(data: DisassociateRoutesSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DisassociateRoutesSecurityGroupResponse>;
   /** 查询Datahub Topic消息 {@link FetchDatahubMessageByOffsetRequest} {@link FetchDatahubMessageByOffsetResponse} */
   FetchDatahubMessageByOffset(data: FetchDatahubMessageByOffsetRequest, config?: AxiosRequestConfig): AxiosPromise<FetchDatahubMessageByOffsetResponse>;
   /** 查询Datahub Topic最新消息列表 {@link FetchLatestDatahubMessageListRequest} {@link FetchLatestDatahubMessageListResponse} */
@@ -5264,6 +5318,8 @@ declare interface Ckafka {
   ModifyInstancePre(data: ModifyInstancePreRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePreResponse>;
   /** 修改密码 {@link ModifyPasswordRequest} {@link ModifyPasswordResponse} */
   ModifyPassword(data: ModifyPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPasswordResponse>;
+  /** 修改路由安全组关联 {@link ModifyRouteSecurityGroupsRequest} {@link ModifyRouteSecurityGroupsResponse} */
+  ModifyRouteSecurityGroups(data: ModifyRouteSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRouteSecurityGroupsResponse>;
   /** 设置自动化运维属性 {@link ModifyRoutineMaintenanceTaskRequest} {@link ModifyRoutineMaintenanceTaskResponse} */
   ModifyRoutineMaintenanceTask(data: ModifyRoutineMaintenanceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoutineMaintenanceTaskResponse>;
   /** 修改实例限流规则 {@link ModifyThrottleRuleRequest} {@link ModifyThrottleRuleResponse} */

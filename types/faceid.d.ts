@@ -539,27 +539,27 @@ declare interface DetectAIFakeFacesResponse {
 }
 
 declare interface DetectAuthRequest {
-  /** 业务流程ID。- 用于细分客户使用场景, 可为业务配置不同的业务流程。- 申请开通服务后，登录腾讯云[慧眼人脸核身控制](https://console.cloud.tencent.com/faceid)进行创建，审核通过后即可调用。- 如有疑问，请添加[腾讯云人脸核身小助手](https://cloud.tencent.com/document/product/1007/56130)进行咨询。 */
+  /** 业务流程ID。用于细分客户使用场景, 可为业务配置不同的业务流程。申请开通服务后，登录腾讯云慧眼人脸核身控制进行创建，审核通过后即可调用。如有疑问，请添加腾讯云人脸核身小助手进行咨询。 */
   RuleId: string;
   /** 本接口不需要传递此参数。 */
   TerminalType?: string;
-  /** 验证人的身份证号码。- 是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示。 */
+  /** 验证人的身份证号码。调用 detectAuth 时，该字段是否必传，以在控制台申请 ruleId 时的配置提示为准，具体必填字段请参阅控制台界面。若身份证号包含字母，该字母必须为大写 X，小写 x 将无法通过校验。 */
   IdCard?: string;
-  /** 验证人的姓名。- 是否必传基于[控制台](https://console.cloud.tencent.com/faceid/access)申请业务流程时配置的提示。- 最长长度32位。中文请使用UTF-8编码。 */
+  /** 验证人的姓名。调用 detectAuth 时，该字段是否必传，以在控制台申请 ruleId 时的配置提示为准，具体必填字段请参阅控制台界面。最长长度32位。中文请使用UTF-8编码。 */
   Name?: string;
-  /** 认证结束后重定向的回调链接地址，仅微信H5场景使用。- 最长长度1024位。- 默认值：[腾讯云人脸核身产品介绍页](URL Here)https://cloud.tencent.com/product/faceid?Is=sdk-topnav */
+  /** 认证结束后重定向的回调链接地址，仅微信H5场景使用。最长长度1024位。默认值：[腾讯云人脸核身产品介绍页](URL Here)https://cloud.tencent.com/product/faceid?Is=sdk-topnav */
   RedirectUrl?: string;
-  /** 透传字段，在获取验证结果时返回。- 最长长度1024位。 */
+  /** 透传字段，在获取验证结果时返回。最长长度1024位。 */
   Extra?: string;
-  /** 用于人脸比对的图像数据，使用base64编码。- Base64编码后的图片数据大小不超过3M。- 仅支持jpg、png格式。- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
+  /** 用于人脸比对的图像数据，使用base64编码。Base64编码后的图片数据大小不超过3M。仅支持jpg、png格式。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
   ImageBase64?: string;
   /** 敏感数据加密信息。对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
-  /** 意愿核身（朗读模式）使用的文案。- 若未使用意愿核身（朗读模式），则该字段无需传入。- 最长可接受120的字符串长度。 */
+  /** 意愿核身（朗读模式）使用的文案。若未使用意愿核身（朗读模式），则该字段无需传入。最长可接受120的字符串长度。 */
   IntentionVerifyText?: string;
-  /** 意愿核身（语音播报+语音回答模式）使用的文案。- 包括：系统语音播报的文本、需要核验的标准文本。- 问答模式支持1-10轮（不超过10轮）的意愿确认。 */
+  /** 意愿核身（语音播报+语音回答模式）使用的文案。包括：系统语音播报的文本、需要核验的标准文本。问答模式支持1-10轮（不超过10轮）的意愿确认。 */
   IntentionQuestions?: IntentionQuestion[];
-  /** 意愿核身（点头确认模式）使用的文案。- 若未使用意愿核身（点头确认模式），则该字段无需传入。- 点头确认模式支持1-10轮（不超过10轮）的意愿确认。 */
+  /** 意愿核身（点头确认模式）使用的文案。若未使用意愿核身（点头确认模式），则该字段无需传入。点头确认模式支持1-10轮（不超过10轮）的意愿确认。 */
   IntentionActions?: IntentionActionConfig[];
   /** 意愿核身流程配置。 */
   Config?: RuleIdConfig;
@@ -568,7 +568,7 @@ declare interface DetectAuthRequest {
 declare interface DetectAuthResponse {
   /** 用于发起核身流程的URL，仅微信H5场景使用。 */
   Url?: string;
-  /** 一次核验流程的唯一标识。- 有效时间为7,200秒，超过有效期再进行人脸核验会报错，请在有效期内进行核验。- 完成人脸核验后，需根据此标识调用[获取实名核身结果信息增强版](https://cloud.tencent.com/document/api/1007/41957)获取用户最终验证结果信息。 */
+  /** 一次核验流程的唯一标识。有效时间为7,200秒，超过有效期再进行人脸核验会报错，请在有效期内进行核验。完成人脸核验后，需根据此标识调用获取实名核身结果信息增强版获取用户最终验证结果信息。 */
   BizToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -737,15 +737,15 @@ declare interface GetEidTokenResponse {
 }
 
 declare interface GetFaceIdResultRequest {
-  /** SDK人脸核身流程的标识。- 调用[GetFaceIdToken](https://cloud.tencent.com/document/product/1007/49198)接口时生成。 */
+  /** SDK人脸核身流程的标识。调用GetFaceIdToken接口时生成。 */
   FaceIdToken: string;
-  /** 是否需要拉取视频。- 默认false：不需要。 */
+  /** 是否需要拉取视频。默认false：不需要。 */
   IsNeedVideo?: boolean;
-  /** 是否需要拉取截帧。- 默认false：不需要。 */
+  /** 是否需要拉取截帧。默认false：不需要。 */
   IsNeedBestFrame?: boolean;
   /** 是否对回包整体进行加密。 */
   IsEncryptResponse?: boolean;
-  /** 是否需要对返回中的敏感信息进行加密。 只需指定加密算法Algorithm即可，其余字段传入默认值。 */
+  /** 是否需要对返回中的敏感信息进行加密。只需指定加密算法Algorithm即可，其余字段传入默认值。 */
   Encryption?: Encryption;
 }
 
@@ -754,30 +754,32 @@ declare interface GetFaceIdResultResponse {
   IdCard?: string;
   /** 姓名。 */
   Name?: string;
-  /** 业务核验结果。- 参考：https://cloud.tencent.com/document/product/1007/47912。 */
+  /** 业务核验结果。参考：https://cloud.tencent.com/document/product/1007/47912。 */
   Result?: string;
   /** 业务核验描述。 */
   Description?: string;
-  /** 相似度。- 取值：0-100。- 数值越大相似度越高。 */
+  /** 相似度。取值：0-100。数值越大相似度越高。 */
   Similarity?: number;
-  /** 用户核验的视频base64。- 如果选择了使用cos，返回完整cos地址，如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey。 */
+  /** 用户核验的视频base64。如果选择了使用cos，返回完整cos地址，如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey。 */
   VideoBase64?: string | null;
-  /** 用户核验视频的截帧base64。- 如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey。 */
+  /** 用户核验视频的截帧base64。如果选择了使用cos，返回完整cos地址如https://bucket.cos.ap-guangzhou.myqcloud.com/objectKey。 */
   BestFrameBase64?: string | null;
   /** 获取token时透传的信息。 */
   Extra?: string | null;
-  /** plus版：描述当前请求所在设备的风险标签。- 详情如下：06-疑似黑产设备。null-无设备风险。- 增强版：此字段不生效，默认为null。 */
+  /** plus版：描述当前请求所在设备的风险标签。详情如下：01-设备疑似被Root/设备疑似越狱。02-设备疑似被注入。03-设备疑似为模拟器。04-设备疑似存在风险操作。05-摄像头疑似被劫持。06-疑似黑产设备。null-无设备风险。增强版：此字段不生效，默认为null。 */
   DeviceInfoTag?: string | null;
-  /** 行为风险标签。- 仅错误码返回1007（设备疑似被劫持）时返回风险标签。- 标签说明：02：攻击风险 */
+  /** 行为风险标签。仅错误码返回1007（设备疑似被劫持）时返回风险标签。标签说明：02：攻击风险 */
   RiskInfoTag?: string | null;
-  /** plus版：描述当前请求活体阶段被拒绝的详细原因。- 详情如下：01-用户全程闭眼。02-用户未完成指定动作。03-疑似翻拍攻击。04-疑似合成图片。05-疑似合成视频。06-疑似合成动作。07-疑似黑产模板。08-疑似存在水印。09-反光校验未通过。10-最佳帧校验未通过。11-人脸质量过差。12-人脸距离不匹配。13-疑似对抗样本攻击。null-无。- 增强版：此字段不生效，默认为null。 */
+  /** plus版：描述当前请求活体阶段被拒绝的详细原因。详情如下：01-用户全程闭眼。02-用户未完成指定动作。03-疑似翻拍攻击。04-疑似合成图片。05-疑似合成视频。06-疑似合成动作。07-疑似黑产模板。08-疑似存在水印。09-反光校验未通过。10-最佳帧校验未通过。11-人脸质量过差。12-人脸距离不匹配。13-疑似对抗样本攻击。null-无。增强版：此字段不生效，默认为null。 */
   LivenessInfoTag?: string | null;
-  /** plus版：描述当前请求所在设备的风险等级，共4级。- 详情如下：1 - 安全。2 - 低风险。3 - 中风险。4 - 高危。null - 未获取到风险等级。- 增强版：此字段不生效，默认为null。 */
+  /** plus版：描述当前请求所在设备的风险等级，共4级。详情如下：1 - 安全。2 - 低风险。3 - 中风险。4 - 高危。null - 未获取到风险等级。增强版：此字段不生效，默认为null。 */
   DeviceInfoLevel?: string | null;
   /** 敏感数据加密信息。 */
   Encryption?: Encryption | null;
   /** 加密后的数据。 */
   EncryptedBody?: string | null;
+  /** 用户核验的身份证人像页base64 */
+  IdCardFrontBase64?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -805,29 +807,33 @@ declare interface GetFaceIdRiskInfoResponse {
 }
 
 declare interface GetFaceIdTokenRequest {
-  /** 比对库。- 取值范围：LOCAL：本地上传照片。BUSINESS：商业库。 */
+  /** 比对库。取值范围：LOCAL：本地上传照片。BUSINESS：商业库。 */
   CompareLib: string;
-  /** 身份证。- CompareLib为商业库时必传。 */
+  /** 身份证。CompareLib为商业库时必传。 */
   IdCard?: string;
-  /** 姓名。- CompareLib为商业库时必传。 */
+  /** 姓名。CompareLib为商业库时必传。 */
   Name?: string;
-  /** 图片的Base64。- CompareLib为上传照片比对时必传。- Base64后图片最大8MB。- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
+  /** 图片的Base64。CompareLib为上传照片比对时必传。Base64后图片最大8MB。请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。 */
   ImageBase64?: string;
   /** SDK中生成的Meta字符串。 */
   Meta?: string;
-  /** 透传参数。- 1000长度字符串 */
+  /** 透传参数。1000长度字符串 */
   Extra?: string;
-  /** 是否使用cos桶。- 默认为false。- 设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。- 开通地址见https://console.cloud.tencent.com/faceid/cos- 【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。 */
+  /** 是否使用cos桶。默认为false。设置该参数为true后，核身过程中的视频图片将会存储在人脸核身控制台授权cos的bucket中，拉取结果时会返回对应资源完整cos地址。开通地址见https://console.cloud.tencent.com/faceid/cos【注意】选择该参数为true后将不返回base64数据，请根据接入情况谨慎修改。 */
   UseCos?: boolean;
   /** 敏感数据加密信息。对传入信息（姓名、身份证号、自传照片）有加密需求的用户可使用此参数，详情请点击左侧链接。 */
   Encryption?: Encryption;
-  /** 用于细分客户使用场景。- 申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。- 如有疑问，请添加腾讯云人脸核身小助手进行咨询。 */
+  /** 用于细分客户使用场景。申请开通服务后，可以在腾讯云慧眼人脸核身控制台（https://console.cloud.tencent.com/faceid） 自助接入里面创建，审核通过后即可调用。如有疑问，请添加腾讯云人脸核身小助手进行咨询。 */
   RuleId?: string;
+  /** SDK和用户设备的元信息。该字段的值由HuiYan SDK以JSON字符串格式返回。 说明：不要修改返回值，直接传递即可。 */
+  MetaData?: string;
 }
 
 declare interface GetFaceIdTokenResponse {
   /** token值。- 有效期 10分钟。- 只能完成1次核身。 */
   FaceIdToken?: string;
+  /** 客户端配置信息，SDK将使用该配置进行后续操作。请将返回值原样传递给客户端SDK。 */
+  ClientConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

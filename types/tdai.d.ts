@@ -90,6 +90,12 @@ declare interface AgentInstance {
   Description?: string;
   /** 发货进度详情 */
   CreatingProgress?: CreatingProgress;
+  /** 实例关联的角色名称 */
+  RoleName?: string;
+  /** 实例下线时间参数格式：2026-08-12 17:02:43 */
+  OfflineTime?: string;
+  /** 商业化资源归属 */
+  ProductName?: string;
 }
 
 /** 会话信息 */
@@ -395,6 +401,8 @@ declare interface CreateAgentInstanceRequest {
   SoulId?: number;
   /** 无 */
   Description?: string;
+  /** 企业版是否使用平台大账号模式发货 */
+  UsePlatformAccount?: boolean;
 }
 
 declare interface CreateAgentInstanceResponse {

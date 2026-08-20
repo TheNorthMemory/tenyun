@@ -3029,10 +3029,12 @@ declare interface CreateTopicRequest {
   PartitionCount?: number;
   /** 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。 */
   TopicType?: string;
-  /** 存储时间，单位天，默认为 30。- 日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。- 日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。 */
+  /** 存储时间，单位天，默认为 30。日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。 */
   Period?: number;
   /** 日志主题的存储类型，可选值 HOT（标准存储），COLD（低频存储）；默认为HOT。 */
   StorageType?: string;
+  /** 标签最多支持一次传入20个 */
+  Tags?: TagInfo[];
 }
 
 declare interface CreateTopicResponse {

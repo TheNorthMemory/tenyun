@@ -974,6 +974,10 @@ declare interface CynosdbClusterDetail {
   IsOpenTDE?: boolean;
   /** 实例当前所在可用区 */
   RealZone?: string;
+  /** 超限开启状态枚举值：yes： 超限开启no： 超限关闭默认值：no */
+  StorageOverUse?: string;
+  /** 自动扩容开启状态枚举值：yes： 已开启no： 关闭默认值：no */
+  StorageAutoExpand?: string;
 }
 
 /** 实例错误日志返回类型 */

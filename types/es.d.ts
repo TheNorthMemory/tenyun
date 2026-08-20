@@ -4334,15 +4334,15 @@ declare namespace V20180416 {
   }
 
   interface UpdateIpTraceStatusRequest {
-    /** 集群ID */
+    /** 集群ID。该字段为必填字段。 */
     InstanceId?: string;
-    /** IP溯源配置开关 */
+    /** IP溯源配置开关。该字段为必填字段。 */
     OpenIpTrace?: boolean;
-    /** IP溯源开启持续时间，单位：秒 */
+    /** IP溯源开启持续时间，单位：秒。该字段为必填字段。 */
     DurationTime?: number;
-    /** IP溯源配置 */
+    /** IP溯源配置。该字段为必填字段。 */
     IpTraceConfig?: IpTraceConfig;
-    /** 是否过滤kibana节点IP */
+    /** 是否过滤kibana节点IP。 */
     FilterKibanaIp?: boolean;
   }
 

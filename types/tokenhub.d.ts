@@ -997,9 +997,25 @@ declare interface DescribeModelListResponse {
 }
 
 declare interface DescribeModelQuotaRequest {
+  /** 模型 ID。可通过 DescribeModelList 获取。 */
+  ModelId: string;
 }
 
 declare interface DescribeModelQuotaResponse {
+  /** 模型 ID。 */
+  ModelId?: string;
+  /** TPM 限制（Tokens Per Minute）。模型无配额配置时不返回此字段。 */
+  TPMLimit?: number;
+  /** RPM 限制（Request Per Minute）。模型无配额配置时不返回此字段。 */
+  RPMLimit?: number;
+  /** TPM 保障包 input 配额 */
+  TPMInputQuotaLimit?: number;
+  /** TPM 保障包 output 配额 */
+  TPMOutputQuotaLimit?: number;
+  /** TPM 预留 input 配额 */
+  TPMInputReserveLimit?: number;
+  /** TPM 预留 output 配额 */
+  TPMOutputReserveLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1362,7 +1378,7 @@ declare interface Tokenhub {
   /** 查询模型列表 {@link DescribeModelListRequest} {@link DescribeModelListResponse} */
   DescribeModelList(data?: DescribeModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelListResponse>;
   /** 查询模型配额 {@link DescribeModelQuotaRequest} {@link DescribeModelQuotaResponse} */
-  DescribeModelQuota(data?: DescribeModelQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelQuotaResponse>;
+  DescribeModelQuota(data: DescribeModelQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelQuotaResponse>;
   /** 查询 Token Plan 套餐详情 {@link DescribeTokenPlanRequest} {@link DescribeTokenPlanResponse} */
   DescribeTokenPlan(data: DescribeTokenPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanResponse>;
   /** 查询 Token Plan 套餐的 API Key 详情 {@link DescribeTokenPlanApiKeyRequest} {@link DescribeTokenPlanApiKeyResponse} */
