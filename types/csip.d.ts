@@ -1768,6 +1768,26 @@ declare interface BaselineCustomItemConf {
   CustomItemID: number;
 }
 
+/** 基线风险修复历史记录 */
+declare interface BaselineFixRecord {
+  /** 修复记录主键 ID。 */
+  ID?: number;
+  /** 租户 AppID。 */
+  AppID?: number;
+  /** 被修复的检测项基础信息。 */
+  ItemInfo?: BaselineItem;
+  /** 本次修复涉及的主机资产信息，无数据时为 null。 */
+  HostInfo?: BaselineHostAsset | null;
+  /** 集群资产信息，无数据时为 null。 */
+  ClusterInfo?: BaselineClusterAsset | null;
+  /** 资产类型：HOST（主机）、CLUSTER（容器集群）。 */
+  AssetType?: string;
+  /** 修复完成时间。 */
+  FixTime?: string;
+  /** 该风险首次被发现的时间。 */
+  DiscoveryTime?: string;
+}
+
 /** 基线主机资产，承载子任务/风险记录关联的主机详情。 */
 declare interface BaselineHostAsset {
   /** 云主机实例 ID，格式形如 ins-instanceid。 */
@@ -1988,6 +2008,34 @@ declare interface BaselineRiskLevelStatistic {
 declare interface BaselineSubCategory {
   /** 子分类基础信息。 */
   Category?: BaselineCategory;
+}
+
+/** 基线扫描的子任务，按检测资产维度拆分（一台主机或一个集群对应一条子任务）。 */
+declare interface BaselineSubTask {
+  /** 子任务 ID。 */
+  ID?: number;
+  /** 所属主任务 ID（对应 BaselineMainTask.ID）。 */
+  TaskID?: number;
+  /** 子任务执行结果。取值：SUCCESS：成功FAILED：失败USER_CANCELED：用户取消CHECKING：检测中UNKNOWN：未知状态 */
+  Status?: string;
+  /** 子任务所属租户 Appid。 */
+  Appid?: number;
+  /** 子任务开始执行时间。 */
+  StartTime?: string;
+  /** 子任务结束时间，未结束时为空。 */
+  FinishTime?: string;
+  /** 检测资产大类，区分主机基线与容器集群基线。取值：HOST：主机CLUSTER：容器集群 */
+  CheckAssetType?: string;
+  /** CheckAssetType=HOST 时返回的主机资产信息，CLUSTER 时为空。 */
+  HostAsset?: BaselineHostAsset | null;
+  /** 状态码：失败时返回失败码（如 AGENT_OFFLINE、SCAN_TIMEOUT、CLIENT_SCAN_FAILED 等），检测中时返回检测状态，成功或用户取消时为空。 */
+  ErrCode?: string;
+  /** 失败时的详细原因描述，成功、用户取消或检测中时为空。 */
+  ErrMessage?: string;
+  /** 失败时的解决方案建议，成功、用户取消或检测中时为空。 */
+  Solution?: string;
+  /** CheckAssetType=CLUSTER 时返回的集群资产信息，HOST 时为空。 */
+  ClusterAsset?: BaselineClusterAsset | null;
 }
 
 /** 集团管理员侧的基线同步配置。 */
@@ -2482,6 +2530,30 @@ declare interface CallRecord {
   ReqClient?: string[];
 }
 
+/** 子项扣分及待办信息 */
+declare interface CategoryItem {
+  /** 子项ID枚举值：vulnerability：漏洞治理cloud_config：云产品配置治理system_baseline：系统基线风险intrusion_alert：入侵威胁告警cloud_api_alert：云API告警ai_agent_alert：AI Agent安全告警object_storage_alert：对象存储异常告警database_alert：数据库安全告警protection_config：推荐防护配置未开启edition_coverage：专业版/旗舰版覆盖率不足product_expiry：产品7天内到期 */
+  CategoryId?: string;
+  /** 子项名称 */
+  CategoryName?: string;
+  /** 子类说明 */
+  CategoryDesc?: string;
+  /** 子项扣分上限 */
+  MaxDeductScore?: number;
+  /** 子项实际扣分 */
+  DeductScore?: number;
+  /** 风险总数 */
+  RiskCount?: number;
+  /** 等级明细，风险/威胁类子项有值 */
+  SeverityItems?: SeverityItem[];
+  /** 扣分原因描述 */
+  DeductReason?: string;
+  /** 处理建议文案 */
+  ActionText?: string;
+  /** 防护配置详情，仅防护配置维度子项返回 */
+  ProtectionDetail?: ProtectionDetail;
+}
+
 /** 资产树-资产分类节点 */
 declare interface CategoryNode {
   /** 资产分类名称 */
@@ -2630,6 +2702,14 @@ declare interface ClientSettingHost {
   MessageDesc?: string;
   /** 实例状态RUNNING: 运行中STOPED: 已关机EXPIRED: 待回收 */
   InstanceStatus?: string;
+}
+
+/** 云厂商资产数量明细 */
+declare interface CloudAssetInfo {
+  /** 云厂商类型枚举值：tencent：腾讯云aliyun：阿里云aws：AWShuawei：华为云azure：Azure */
+  CloudType?: string;
+  /** 该云厂商的资产数量取值范围：[0, +∞) */
+  Count?: number;
 }
 
 /** 多云账户统计信息 */
@@ -4036,6 +4116,28 @@ declare interface DetectTypeCount {
   DetectType?: number;
   /** 策略数量 */
   Count?: number;
+}
+
+/** 维度扣分项 */
+declare interface DimensionItem {
+  /** 维度ID枚举值：risk_governance：风险治理threat_detection：威胁检测protection_config：防护配置 */
+  DimensionId?: string;
+  /** 维度名称 */
+  DimensionName?: string;
+  /** 维度扣分上限 */
+  MaxDeductScore?: number;
+  /** 维度实际扣分 */
+  DeductScore?: number;
+  /** 子项列表 */
+  Categories?: CategoryItem[];
+}
+
+/** 维度趋势数据 */
+declare interface DimensionTrendData {
+  /** 维度ID枚举值：risk_governance：风险治理threat_detection：威胁检测 */
+  DimensionId?: string;
+  /** 每日数据点 */
+  DataPoints?: TrendDataPoint[];
 }
 
 /** 磁盘分区信息 */
@@ -5946,6 +6048,18 @@ declare interface Element {
   Value?: string;
 }
 
+/** 即将到期产品 */
+declare interface ExpiringProduct {
+  /** 产品ID */
+  ProductId?: string;
+  /** 产品名称 */
+  ProductName?: string;
+  /** 距到期天数单位：天 */
+  DaysToExpire?: number;
+  /** 到期时间 */
+  ExpireTime?: string;
+}
+
 /** 导出任务信息 */
 declare interface ExportJobItem {
   /** 任务ID */
@@ -6280,6 +6394,14 @@ declare interface HitRules {
   RuleId: number;
   /** 规则 */
   RuleName: string;
+}
+
+/** 主机安全模块自动扩容配置 */
+declare interface HostAutoScaleConfig {
+  /** 主机自动扩容开关枚举值：ON：开启OFF：关闭补充说明：不传则不修改；映射底层自动加购开关 auto_repurchase_switch */
+  Switch?: string;
+  /** 扩容版本枚举值：PRO：专业版ULTIMATE：旗舰版补充说明：不传则不修改 */
+  ProtectType?: string;
 }
 
 /** 主机简要信息 */
@@ -6702,6 +6824,38 @@ declare interface KeyValueInt {
   Value?: number;
 }
 
+/** 绑定失败明细 */
+declare interface LicenseBindFailedItem {
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 失败原因 */
+  ExceptionMessage?: string | null;
+  /** 修复建议 */
+  FixMessage?: string | null;
+  /** 机器额外信息 */
+  MachineExtraInfo?: MachineExtraInfo | null;
+}
+
+/** 过滤条件 */
+declare interface LicenseBindFilter {
+  /** 过滤字段名，目前支持 Status */
+  Name?: string;
+  /** 过滤值列表 */
+  Values?: string[];
+}
+
+/** 单台机器的绑定状态明细 */
+declare interface LicenseBindScheduleItem {
+  /** 实例ID */
+  Quuid?: string | null;
+  /** 绑定状态：0-初始化 1-成功 2-失败 3-跳过 */
+  Status?: number | null;
+  /** 错误信息 */
+  ErrMsg?: string | null;
+  /** 修复建议 */
+  FixMessage?: string | null;
+}
+
 /** 授权绑定任务详情 */
 declare interface LicenseBindTaskDetail {
   /** 云服务器UUID */
@@ -6714,6 +6868,36 @@ declare interface LicenseBindTaskDetail {
   FixMessage?: string;
   /** 机器额外信息 */
   MachineExtraInfo?: MachineExtraInfo;
+}
+
+/** 单个计费项的授权状态汇总 */
+declare interface LicenseStatusItem {
+  /** 资源ID */
+  ResourceId?: string;
+  /** 授权类型（ENTERPRISE_HP=旗舰版/ADVANCED_HP=专业版/RASP） */
+  LicenseType?: string;
+  /** 授权名称（旗舰版/专业版/RASP） */
+  Name?: string;
+  /** 授权类别 0-主机授权 1-RASP授权 */
+  Category?: number;
+  /** 总数 */
+  TotalNum?: number;
+  /** 已用 */
+  UsedNum?: number;
+  /** 剩余 */
+  RemainNum?: number;
+  /** 最早开始时间（格式：2006-01-02 15:04:05） */
+  BeginTime?: string;
+  /** 最晚到期时间（格式：2006-01-02 15:04:05） */
+  EndTime?: string;
+}
+
+/** 解绑失败明细 */
+declare interface LicenseUnbindFailedItem {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 失败原因 */
+  ExceptionMessage?: string;
 }
 
 /** 轻量应用服务器防火墙规则 */
@@ -7284,6 +7468,22 @@ declare interface ModifyProtectionSetting {
   SafeInject?: number;
 }
 
+/** 修改规则项 */
+declare interface ModifyRuleItem {
+  /** 规则类型枚举值：dimension：维度级规则category：子项级规则severity：等级级规则 */
+  RuleType?: string;
+  /** 维度ID */
+  DimensionId?: string;
+  /** 子项ID，category和severity级别必填 */
+  CategoryId?: string;
+  /** 等级，severity级别必填枚举值：critical：严重high：高危medium：中危low：低危 */
+  Severity?: string;
+  /** 扣分上限 */
+  MaxDeductScore?: number;
+  /** 单次扣分 */
+  DeductPerItem?: number;
+}
+
 /** 告警对应的多攻击阶段 */
 declare interface MultiAttackStageItem {
   /** 表id */
@@ -7714,6 +7914,34 @@ declare interface ProductSupport {
   CveId?: string;
 }
 
+/** 推荐防护配置项 */
+declare interface ProtectionConfigItem {
+  /** 配置项ID */
+  ConfigId?: string;
+  /** 配置项名称 */
+  ConfigName?: string;
+  /** 配置项描述 */
+  ConfigDescription?: string;
+  /** 配置分组枚举值：auto_risk_discovery：自动风险发现auto_defense：自动防御client_hardening：客户端强化 */
+  ConfigGroup?: string;
+  /** 是否已开启 */
+  Enabled?: boolean;
+}
+
+/** 防护配置详情 */
+declare interface ProtectionDetail {
+  /** 各配置项开启状态 */
+  ConfigItems?: ProtectionConfigItem[];
+  /** 应防护资产数 */
+  EligibleAssetCount?: number;
+  /** 已防护资产数 */
+  ProtectedAssetCount?: number;
+  /** 覆盖率百分比取值范围：[0, 100] */
+  CoveragePercent?: number;
+  /** 即将到期产品列表 */
+  ExpiringProducts?: ExpiringProduct[];
+}
+
 /** 资产树-云厂商节点 */
 declare interface ProviderNode {
   /** 云厂商 */
@@ -7722,6 +7950,64 @@ declare interface ProviderNode {
   ProviderName?: string;
   /** 下属资产分类节点 */
   Categories?: CategoryNode[];
+}
+
+/** 资产信息 */
+declare interface PublicAssetInfo {
+  /** 租户ID */
+  AppID?: number;
+  /** 云厂商 */
+  Provider?: string;
+  /** 云厂商名称 */
+  ProviderName?: string;
+  /** 云账号ID */
+  CloudAccountID?: string;
+  /** 云账号名称 */
+  CloudAccountName?: string;
+  /** 资产ID */
+  AssetID?: string;
+  /** 资产名称 */
+  AssetName?: string;
+  /** 资产类型 */
+  AssetType?: string;
+  /** 资产类型名称 */
+  AssetTypeName?: string;
+  /** 资产标签 */
+  Tags?: AssetTag[];
+  /** 公网地址 */
+  Address?: string;
+  /** 公网地址类型 */
+  AddressType?: string;
+  /** 解析地址 */
+  ResolvedAddress?: string[];
+  /** 地域 */
+  Region?: string;
+  /** 防护状态 */
+  ProtectStatus?: number;
+  /** 风险数量 */
+  RiskCount?: number;
+  /** 告警数量 */
+  AlarmCount?: number;
+  /** 实例创建时间 */
+  CreatedAt?: string;
+  /** 首次同步时间 */
+  FirstSyncTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 严重风险总数 */
+  CriticalRiskCount?: number;
+  /** 高风险总数 */
+  HighRiskCount?: number;
+  /** 中风险总数 */
+  MediumRiskCount?: number;
+  /** 低风险总数 */
+  LowRiskCount?: number;
+  /** 资产唯一ID */
+  AssetRID?: string;
+  /** 云安全中心标签 */
+  CustomTags?: CustomTag[];
+  /** 资产类型图标 */
+  AssetTypeIconURL?: string;
 }
 
 /** 公网IP和域名资产列表key */
@@ -8030,6 +8316,16 @@ declare interface RiskRuleItem {
   RiskInfluence?: string;
 }
 
+/** 最后一天风险摘要项 */
+declare interface RiskTrendItem {
+  /** 风险项类型：intrusion_alert / vulnerability */
+  Key?: string;
+  /** 展示名称，按请求语言返回；漏洞项按是否付费区分文案 */
+  Name?: string;
+  /** 风险数量 */
+  Count?: number;
+}
+
 /** 告警数据攻击者或受害者信息 */
 declare interface RoleInfo {
   /** IP */
@@ -8118,6 +8414,44 @@ declare interface RuleStatisticsItem {
   Value?: string;
   /** 统计信息 */
   Count?: string;
+}
+
+/** SCF 函数别名精简信息 */
+declare interface SCFAliasInfo {
+  /** 别名名称 */
+  Name?: string;
+  /** 别名指向的主版本号 */
+  FunctionVersion?: string;
+}
+
+/** SCF 函数精简信息 */
+declare interface SCFFunctionInfo {
+  /** 函数 ID参数格式：形如 lam-xxxxxxxx */
+  FunctionId?: string;
+  /** 函数名称 */
+  FunctionName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 函数状态枚举值：Active：可用Creating：创建中Updating：更新中CreateFailed：创建失败Deleting：删除中 */
+  Status?: string;
+  /** 函数类型枚举值：Event：事件函数（当前接口仅返回该类型） */
+  Type?: string;
+}
+
+/** SCF 函数版本精简信息 */
+declare interface SCFFunctionVersionInfo {
+  /** 函数版本名称参数格式：$LATEST 或数字版本号，如 1、2、3 */
+  Version?: string;
+  /** 版本状态。当前实现与 Version 字段同值返回 */
+  Status?: string;
+}
+
+/** SCF 命名空间精简信息 */
+declare interface SCFNamespaceInfo {
+  /** 命名空间名称 */
+  Name?: string;
+  /** 命名空间类型枚举值：Default：默认命名空间Custom：自定义命名空间 */
+  Type?: string;
 }
 
 /** STS临时密钥凭据（出参专用），用于查询详情接口的响应。SecretID和SecretKey字段返回打码后的值，System返回原文 */
@@ -8272,6 +8606,32 @@ declare interface ScfCustomDomainEndpointItem {
   Qualifier?: string;
 }
 
+/** 评分规则项 */
+declare interface ScoreRuleItem {
+  /** 规则类型枚举值：dimension：维度级规则category：子项级规则severity：等级级规则 */
+  RuleType?: string;
+  /** 维度ID */
+  DimensionId?: string;
+  /** 维度名称 */
+  DimensionName?: string;
+  /** 子项ID */
+  CategoryId?: string;
+  /** 子项扣分规则说明 */
+  CategoryDesc?: string;
+  /** 子项名称 */
+  CategoryName?: string;
+  /** 等级枚举值：critical：严重high：高危medium：中危low：低危 */
+  Severity?: string;
+  /** 扣分上限 */
+  MaxDeductScore?: number;
+  /** 单次扣分 */
+  DeductPerItem?: number;
+  /** 单项扣分是否不可编辑（防护配置维度子项为 true） */
+  DeductPerItemDisabled?: boolean;
+  /** 排序序号 */
+  SortOrder?: number;
+}
+
 /** 安全组策略 */
 declare interface SecurityGroupPolicyItem {
   /** 端口 */
@@ -8376,6 +8736,22 @@ declare interface ServiceSupport {
   SupportTotalCount?: number;
   /** 是否支持该产品1支持；0不支持 */
   IsSupport?: boolean;
+}
+
+/** 等级扣分明细 */
+declare interface SeverityItem {
+  /** 风险等级枚举值：critical：严重high：高危medium：中危low：低危 */
+  Severity?: string;
+  /** 等级中文名 */
+  SeverityName?: string;
+  /** 该等级风险数量 */
+  RiskCount?: number;
+  /** 单次扣分 */
+  DeductPerItem?: number;
+  /** 等级扣分上限 */
+  MaxDeductScore?: number;
+  /** 实际扣分 */
+  DeductScore?: number;
 }
 
 /** Skill 能力标签 */
@@ -8810,6 +9186,14 @@ declare interface TrafficRuleState {
   Module?: string;
   /** 沙箱规则状态枚举值：ON： 开启OFF： 关闭 */
   Status?: string;
+}
+
+/** 趋势数据点 */
+declare interface TrendDataPoint {
+  /** 日期参数格式：YYYY-MM-DD */
+  Date?: string;
+  /** 风险数量，无数据时为0 */
+  RiskCount?: number;
 }
 
 /** 用户行为分析 自定义策略结构体 */
@@ -9882,6 +10266,98 @@ declare interface VulWhitelist {
   VulId?: number;
 }
 
+/** 通知资产范围 */
+declare interface WebhookAssetScope {
+  /** 资产范围类型（对齐 NotifyAssetRange）枚举值：1：全部主机（可剔除）2：自选主机3：按标签选择 */
+  AssetRange: number;
+  /** 选中的主机 quuid 列表，仅 AssetRange=2 生效 */
+  InstanceIds?: string[];
+  /** 排除的主机 quuid 列表，仅 AssetRange=1 生效 */
+  ExcludedInstanceIds?: string[];
+  /** 安全中心标签 ID 列表，仅 AssetRange=3 生效 */
+  TagIds?: number[];
+  /** 腾讯云标签列表，仅 AssetRange=3 生效入参限制：AssetRange=3 时 TagIds + CloudTags 不能同时为空 */
+  CloudTags?: string[];
+}
+
+/** 自定义透传字段 */
+declare interface WebhookCustomField {
+  /** 字段名入参限制：长度 1-64 */
+  Key?: string;
+  /** 字段值入参限制：长度 1-256 */
+  Value?: string;
+}
+
+/** 单个通知项 */
+declare interface WebhookNotifyItem {
+  /** 模块编码（与 ModifyNotifySettingAlert 共用枚举）枚举值：Vul：漏洞与云安全态势Alert：告警中心AkSk：云API风险治理Agent：客户端/主机资产LogAnalysis：日志分析 */
+  Module?: string;
+  /** 子模块编码枚举值（部分）：MALWARE_FILE：恶意文件MALWARE_PROCESS：恶意进程RISK_LOGIN：异常登录BRUTE_FORCE：密码破解MALICIOUS_REQUEST：恶意请求HIGH_RISK_COMMAND：高危命令PRIVILEGE_ESCALATION：本地提权REVERSE_SHELL：反弹ShellNETWORK_ATTACK：网络攻击MULTI_BEHAVIOR_ATTACK：多行为攻击AGENT_OFFLINE：客户端离线AGENT_UNINSTALL：客户端卸载完整枚举见 DescribeWebhookNotifyItemTree */
+  SubModule?: string;
+  /** 风险等级集合枚举值：CRITICAL：严重HIGH：高危MEDIUM：中危LOW：低危INFO：提示不支持等级的子模块传空数组 */
+  Levels?: string[];
+  /** 处理状态等 */
+  Items?: string[];
+}
+
+/** 通知策略完整信息 */
+declare interface WebhookPolicy {
+  /** 策略 ID */
+  ID?: number;
+  /** 策略名称 */
+  Name?: string;
+  /** 启用状态枚举值：ON：启用OFF：禁用 */
+  Status?: string;
+  /** 通知项列表（模块+子模块+等级+处置状态） */
+  NotifyItems?: WebhookNotifyItem[];
+  /** 接收的成员账号范围 */
+  MemberId?: string[];
+  /** 通知资产范围 */
+  AssetScope?: WebhookAssetScope;
+  /** 接收格式枚举值：TEXT：文本格式JSON：JSON 格式 */
+  ReceiveFormat?: string;
+  /** 推送语言枚举值：zh：中文en：英文 */
+  MsgLanguage?: string;
+  /** 自定义透传字段列表，关闭时为空数组 */
+  CustomFields?: WebhookCustomField[];
+  /** 接收机器人 ID 列表 */
+  ReceiverIDList?: number[];
+  /** 接收机器人精简信息（列表行展示用） */
+  ReceiverList?: WebhookReceiverBrief[];
+}
+
+/** 接收机器人信息 */
+declare interface WebhookReceiver {
+  /** 机器人 ID */
+  ID?: number;
+  /** 机器人名称入参限制：长度 1-20 个字符 */
+  Name?: string;
+  /** 机器人类型枚举值：WEBHOOK：webhook 类型SCF：云函数类型 */
+  Type?: string;
+  /** Webhook 地址，仅 Type=WEBHOOK 时返回，否则为空串 */
+  WebhookAddr?: string;
+  /** 云函数地域，仅 Type=SCF 时返回 */
+  SCFRegion?: string;
+  /** 云函数命名空间，仅 Type=SCF 时返回 */
+  Namespace?: string;
+  /** 云函数函数名，仅 Type=SCF 时返回 */
+  FunctionName?: string;
+  /** 云函数函数版本，仅 Type=SCF 时返回 */
+  FunctionVersion?: string;
+  /** 云函数函数别名，仅 Type=SCF 时返回 */
+  Alias?: string;
+}
+
+/** 接收机器人精简信息 */
+declare interface WebhookReceiverBrief {
+  /** 机器人 ID */
+  ID?: number;
+  /** 机器人名称 */
+  Name?: string;
+  /** 机器人类型枚举值：WEBHOOK：webhook 类型SCF：云函数类型 */
+  Type?: string;
+}
+
 /** 网站风险对象 */
 declare interface WebsiteRisk {
   /** 影响资产 */
@@ -10151,6 +10627,20 @@ declare interface CheckRiskRequest {
 declare interface CheckRiskResponse {
   /** 风险操作返回信息 */
   Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CopyBaselinePolicyRequest {
+  /** 被复制的策略ID */
+  PolicyID: number;
+  /** 复制的目标AppID */
+  TargetAppIDList: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CopyBaselinePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11679,6 +12169,18 @@ declare interface DeleteAssetTagResponse {
   RequestId?: string;
 }
 
+declare interface DeleteBaselineSelfDefinedPolicyListRequest {
+  /** 待删除的自定义策略 ID 列表，不可为空且元素不可为 0。 */
+  PolicyIDList: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteBaselineSelfDefinedPolicyListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCSIPMalwareScanTaskRequest {
   /** 任务ID */
   TaskIds: number[];
@@ -12037,6 +12539,26 @@ declare interface DeleteVulWhitelistRequest {
 }
 
 declare interface DeleteVulWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWebhookPoliciesRequest {
+  /** 策略 ID 列表入参限制：单次最多 100 个 */
+  IDList: number[];
+}
+
+declare interface DeleteWebhookPoliciesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWebhookReceiversRequest {
+  /** 机器人 ID 列表入参限制：单次最多 50 个 */
+  IDList: number[];
+}
+
+declare interface DeleteWebhookReceiversResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12917,6 +13439,20 @@ declare interface DescribeBaselineAggregatedPolicyListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBaselineCalculatingStatisticsPolicyIDListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeBaselineCalculatingStatisticsPolicyIDListResponse {
+  /** 当前统计计算中的系统父分类 ID 列表。 */
+  SystemCategoryIDList?: number[];
+  /** 当前统计计算中的自定义策略 ID 列表。 */
+  SelfDefinedPolicyIDList?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBaselineCategoryItemListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -12933,6 +13469,30 @@ declare interface DescribeBaselineCategoryItemListRequest {
 declare interface DescribeBaselineCategoryItemListResponse {
   /** 基线检测项列表。 */
   ItemList?: BaselineItem[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaselineFixRecordListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用过滤条件。支持字段：ItemName（检测项名称，模糊）、PolicyName（所属基线名称，模糊）、InstanceName（主机名称，模糊）、InstanceID（实例ID，精准）、IP（IP 地址，模糊）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。 */
+  Filters?: Filters[];
+  /** 分页查询每页数量，最大值 100；超过时服务端将自动回退为默认值 10。 */
+  Limit?: number;
+  /** 分页查询起始偏移量，从 0 开始。 */
+  Offset?: number;
+  /** 排序方向，取值 asc（升序）或 desc（降序），默认 desc。 */
+  Order?: string;
+  /** 排序字段名。取值：FixTime（修复时间）、ID（记录 ID）。默认按 ID 倒序。 */
+  By?: string;
+}
+
+declare interface DescribeBaselineFixRecordListResponse {
+  /** 基线风险修复记录列表。 */
+  List?: BaselineFixRecord[];
   /** 凭据总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -13035,6 +13595,44 @@ declare interface DescribeBaselineOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBaselinePolicyCategoryListRequest {
+  /** 基线策略ID */
+  PolicyID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeBaselinePolicyCategoryListResponse {
+  /** 系统父分类列表，含每个父分类下的子分类与检测项 ID 列表。 */
+  SystemCategoryList?: BaselineSystemCategory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaselinePolicyItemListRequest {
+  /** 基线策略ID */
+  PolicyID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 基线父分类 ID，用于筛选指定父分类下的检测项。 */
+  ParentCategoryID?: number;
+  /** 分页查询每页返回条数，默认值 10，最大值 100。 */
+  Limit?: number;
+  /** 分页查询偏移量，默认值 0。 */
+  Offset?: number;
+  /** 通用过滤条件列表。支持的过滤字段：CategoryID：子分类 ID，精确匹配Name：检测项名称，模糊匹配RiskLevel：风险等级，精确匹配。取值：LOW、MEDIUM、HIGH、CRITICALSupportCustomValue：是否支持编辑，精确匹配。取值：true、false */
+  Filters?: Filters[];
+}
+
+declare interface DescribeBaselinePolicyItemListResponse {
+  /** 基线检测项列表。 */
+  ItemList?: BaselineItem[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBaselinePolicyListRequest {
   /** 基线策略类型。取值：SYSTEM：系统策略（CSIP 内置）SELF：用户自定义策略 */
   PolicyType: string;
@@ -13051,6 +13649,46 @@ declare interface DescribeBaselinePolicyListRequest {
 declare interface DescribeBaselinePolicyListResponse {
   /** 基线策略列表。 */
   List?: BaselinePolicy[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaselinePolicyNameExistAppidListRequest {
+  /** 策略名称 */
+  PolicyName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeBaselinePolicyNameExistAppidListResponse {
+  /** AppID 列表 */
+  AppidList?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaselineSubTaskListRequest {
+  /** 基线主任务 ID。 */
+  TaskID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用过滤条件，支持的字段包括：TaskID（主任务 ID，精确）、Status（子任务状态）、CheckAssetType、InstanceID/ClusterID 等。 */
+  Filters?: Filters[];
+  /** 分页查询每页数量，最大值 100；超过时服务端将自动回退为默认值 10。 */
+  Limit?: number;
+  /** 分页查询起始偏移量，从 0 开始。 */
+  Offset?: number;
+  /** 排序方向，取值 asc（升序）或 desc（降序），默认 desc。 */
+  Order?: string;
+  /** 排序字段名，由具体接口定义可选字段。 */
+  By?: string;
+}
+
+declare interface DescribeBaselineSubTaskListResponse {
+  /** 子任务列表。 */
+  List?: BaselineSubTask[];
   /** 凭据总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -13273,6 +13911,38 @@ declare interface DescribeCLSLogListV3Response {
   SamplingRate?: number;
   /** 主题信息 */
   Topics?: LogSearchTopics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCSIPLicenseBindScheduleRequest {
+  /** ModifyCSIPLicenseBinds返回的任务ID */
+  TaskId: number;
+  /** 分页大小，默认10 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 过滤条件，支持按 Status 过滤（0-初始化 1-成功 2-失败 3-跳过） */
+  Filters?: LicenseBindFilter[];
+}
+
+declare interface DescribeCSIPLicenseBindScheduleResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 任务状态：INIT-初始化 / RUNNING-进行中 / DONE-已完成 / FAILED-已失败 */
+  Status?: string;
+  /** 进度百分比 0-100 */
+  Schedule?: number;
+  /** 全部机器数（不受过滤影响） */
+  Total?: number;
+  /** 成功数 */
+  SuccessNum?: number;
+  /** 失败数 */
+  FailedNum?: number;
+  /** 失败明细（全量，含机器额外信息） */
+  FailedList?: LicenseBindFailedItem[];
+  /** 逐机器明细（受 Filters + 分页影响） */
+  List?: LicenseBindScheduleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15073,6 +15743,18 @@ declare interface DescribeDbAssetsResponse {
   AppIdList?: FilterDataObject[];
   /** 公网内网枚举 */
   PublicPrivateAttr?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDefaultSecurityScoreRuleRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDefaultSecurityScoreRuleResponse {
+  /** 内置默认规则列表 */
+  Rules?: ScoreRuleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -17041,6 +17723,20 @@ declare interface DescribeLastScanTaskInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLicenseStatusRequest {
+}
+
+declare interface DescribeLicenseStatusResponse {
+  /** 授权状态列表（旗舰版→专业版→RASP） */
+  List?: LicenseStatusItem[];
+  /** 自动加购开关 0-关 1-开 */
+  AutoRepurchaseSwitch?: number;
+  /** 合并剩余解绑次数 = (旗舰版total + 专业版total) × 2 - 当月已解绑次数 */
+  UnbindCountLeft?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLighthouseFirewallRulesRequest {
   /** 资产ID */
   AssetID: string;
@@ -17351,6 +18047,20 @@ declare interface DescribeModifyMachinesLoginTypeTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMultiCloudAssetCountRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeMultiCloudAssetCountResponse {
+  /** 云上资产总数取值范围：[0, +∞) */
+  TotalCount?: number;
+  /** 各云厂商资产数量明细 */
+  CloudAssetInfos?: CloudAssetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNFSScanConfRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -17459,6 +18169,16 @@ declare interface DescribeNetAttackSettingResponse {
   ClusterIDs?: string[];
   /** 排除集群ID列表 */
   ExcludeClusterIDs?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNotifyAgentOfflineDurationRequest {
+}
+
+declare interface DescribeNotifyAgentOfflineDurationResponse {
+  /** 离线时长，分钟级20-50m，步长10；小时级1-24h，步长1 */
+  Duration?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -17719,6 +18439,34 @@ declare interface DescribeProcessDaemonHostResponse {
   Total?: number;
   /** 主机列表 */
   List?: ClientSettingHost[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePublicCloudAssetsRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤内容 */
+  Filters?: Filters[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 排序类型 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribePublicCloudAssetsResponse {
+  /** 资产数量 */
+  TotalCount?: number;
+  /** 资产集合 */
+  Assets?: PublicAssetInfo[];
+  /** 资产类型集合 */
+  AssetTypeList?: AttributeOptionSet[];
+  /** 地域集合 */
+  RegionList?: AttributeOptionSet[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18225,6 +18973,88 @@ declare interface DescribeRiskTrendDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSCFAliasListRequest {
+  /** 云函数所在地域参数格式：腾讯云标准 Region，如 ap-guangzhou */
+  SCFRegion: string;
+  /** 命名空间名称取值参考：通过 DescribeSCFNamespaceList 接口获取 */
+  Namespace: string;
+  /** 函数名称取值参考：通过 DescribeSCFFunctionList 接口获取 */
+  FunctionName: string;
+  /** 单页条数取值范围：[1, 100]默认值：20 */
+  Limit: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeSCFAliasListResponse {
+  /** SCF 函数别名列表 */
+  List?: SCFAliasInfo[];
+  /** 别名总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSCFFunctionListRequest {
+  /** 云函数所在地域参数格式：腾讯云标准 Region，如 ap-guangzhou */
+  SCFRegion: string;
+  /** 命名空间名称取值参考：通过 DescribeSCFNamespaceList 接口获取 */
+  Namespace: string;
+  /** 单页条数取值范围：[1, 100]默认值：20 */
+  Limit: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeSCFFunctionListResponse {
+  /** SCF 函数列表（仅返回 Event 类型） */
+  List?: SCFFunctionInfo[];
+  /** 函数总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSCFFunctionVersionListRequest {
+  /** 云函数所在地域参数格式：腾讯云标准 Region，如 ap-guangzhou */
+  SCFRegion: string;
+  /** 命名空间名称取值参考：通过 DescribeSCFNamespaceList 接口获取 */
+  Namespace: string;
+  /** 函数名称取值参考：通过 DescribeSCFFunctionList 接口获取 */
+  FunctionName: string;
+  /** 单页条数取值范围：[1, 100]默认值：20 */
+  Limit: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeSCFFunctionVersionListResponse {
+  /** SCF 函数版本列表 */
+  List?: SCFFunctionVersionInfo[];
+  /** 版本总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSCFNamespaceListRequest {
+  /** 云函数所在地域参数格式：腾讯云标准 Region，如 ap-guangzhou / ap-shanghai */
+  SCFRegion: string;
+  /** 单页条数取值范围：[1, 100]默认值：20 */
+  Limit: number;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeSCFNamespaceListResponse {
+  /** SCF 命名空间列表 */
+  List?: SCFNamespaceInfo[];
+  /** 命名空间总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScanReportListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -18369,6 +19199,60 @@ declare interface DescribeSecurityGroupPolicyResponse {
   Egress?: SecurityGroupPolicyItem[];
   /** 入站规则 */
   Ingress?: SecurityGroupPolicyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityRiskTrendRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSecurityRiskTrendResponse {
+  /** 按维度分组的趋势数据 */
+  TrendData?: DimensionTrendData[];
+  /** 最后一天风险摘要（告警 + 适用漏洞项） */
+  RiskItems?: RiskTrendItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityScoreOverviewRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSecurityScoreOverviewResponse {
+  /** 安全评分取值范围：[0, 100] */
+  Score?: number;
+  /** 安全等级枚举值：safe：安全(90-100分)good：良好(70-89分)medium：一般(40-69分)danger：危险(0-39分) */
+  Level?: string;
+  /** 评分状态枚举值：success：全部数据源正常partial_error：部分数据源使用了缓存stale：使用上次完整快照error：无法计算 */
+  ScoreStatus?: string;
+  /** 初始分默认值：100 */
+  InitialScore?: number;
+  /** 存在风险的分类数量（X类风险建议尽快处理） */
+  RiskCategoryCount?: number;
+  /** 总扣分 */
+  DeductScore?: number;
+  /** 计算时间参数格式：YYYY-MM-DDTHH:mm:ss+08:00 */
+  CalculatedAt?: string;
+  /** 维度明细，含子项扣分和待办 */
+  Dimensions?: DimensionItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSecurityScoreRuleRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSecurityScoreRuleResponse {
+  /** 是否为默认规则，用户未自定义时为true */
+  IsDefault?: boolean;
+  /** 当前生效规则列表 */
+  Rules?: ScoreRuleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -19259,6 +20143,50 @@ declare interface DescribeVulViewVulRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeWebhookPolicyListRequest {
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 200]默认值：20 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：Name：按策略名称模糊搜索Status：启用状态，可选值：ON / OFFReceiveFormat：接收格式，可选值：TEXT / JSONModule：通知项模块，可选值：Vul / Alert / AkSk / Agent / LogAnalysisReceiverID：关联的接收机器人 ID */
+  Filters?: Filters[];
+  /** 排序字段枚举值：InsertTime：创建时间UpdateTime：更新时间默认值：UpdateTime */
+  Order?: string;
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  By?: string;
+}
+
+declare interface DescribeWebhookPolicyListResponse {
+  /** 策略列表 */
+  Data?: WebhookPolicy[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWebhookReceiverListRequest {
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 200]默认值：20 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：Name：按机器人名称模糊搜索Type：机器人类型，可选值：WEBHOOK（webhook） / SCF（云函数） */
+  Filters?: Filters[];
+  /** 排序字段枚举值：InsertTime：创建时间UpdateTime：更新时间默认值：UpdateTime */
+  Order?: string;
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  By?: string;
+}
+
+declare interface DescribeWebhookReceiverListResponse {
+  /** 接收机器人列表 */
+  Data?: WebhookReceiver[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DisableAIScheduleRequest {
   /** AI 定时任务 ID。可通过 DescribeAIScheduleList 接口获取。 */
   ScheduleId?: string;
@@ -19625,6 +20553,22 @@ declare interface ModifyBanModeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBaselinePolicyEnableRequest {
+  /** 待修改的基线策略 ID 列表，不可为空且元素不可为 0。 */
+  PolicyIDList: number[];
+  /** 基线策略类型。取值：SYSTEM：系统策略（CSIP 内置）SELF：用户自定义策略 */
+  PolicyType: string;
+  /** 目标启用状态。0 停用，1 启用。 */
+  Enable: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyBaselinePolicyEnableResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBaselinePolicyRequest {
   /** 待新建或编辑的基线策略详情。 */
   Policy: BaselinePolicy;
@@ -19633,6 +20577,42 @@ declare interface ModifyBaselinePolicyRequest {
 }
 
 declare interface ModifyBaselinePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBaselineSyncConfRequest {
+  /** 待更新的基线同步配置。 */
+  SyncConf: BaselineSyncConf;
+  /** 集团账号场景下的成员账号 Appid 列表。非集团账号或仅查询当前账号时传空。 */
+  MemberId?: string[];
+}
+
+declare interface ModifyBaselineSyncConfResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBaselineUserOtherConfRequest {
+  /** 待更新的用户其他配置；AgentScanTimeout 必须在 [60, 86400] 秒范围内。 */
+  UserConf: BaselineUserOtherConf;
+  /** 集团账号场景下的成员账号 Appid 列表。非集团账号或仅查询当前账号时传空。 */
+  MemberId?: string[];
+}
+
+declare interface ModifyBaselineUserOtherConfResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyBaselineUserWeakPasswordConfRequest {
+  /** 弱口令字典原文（明文），允许为空字符串以清空配置。 */
+  UserConf: string;
+  /** 集团账号场景下的成员账号 Appid 列表。非集团账号或仅查询当前账号时传空。 */
+  MemberId?: string[];
+}
+
+declare interface ModifyBaselineUserWeakPasswordConfResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -19663,6 +20643,84 @@ declare interface ModifyBruteAttackRulesRequest {
 }
 
 declare interface ModifyBruteAttackRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCSIPLicenseBindsRequest {
+  /** 资源ID（指定绑定到哪个订单） */
+  ResourceId: string;
+  /** 待绑定的实例ID列表（IsAll=true时可不传） */
+  InstanceIDs?: string[];
+  /** 是否绑定全部未绑定机器（true时自动算差集） */
+  IsAll?: boolean;
+  /** 授权版本。枚举值：ENTERPRISE_HP(旗舰版) / ADVANCED_HP(专业版) / RASP(RASP)。推荐使用此参数，与InquireKey二选一。 */
+  LicenseType?: string;
+}
+
+declare interface ModifyCSIPLicenseBindsResponse {
+  /** 异步任务ID，用于调用DescribeLicenseBindSchedule轮询进度 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCSIPLicenseUnBindsRequest {
+  /** 待解绑的实例ID列表（IsAll=true时可不传） */
+  InstanceIDs?: string[];
+  /** 是否解绑全部已绑定主机授权机器 */
+  IsAll?: boolean;
+}
+
+declare interface ModifyCSIPLicenseUnBindsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 成功数 */
+  SuccessNum?: number;
+  /** 失败数 */
+  FailedNum?: number;
+  /** 失败明细 */
+  FailedList?: LicenseUnbindFailedItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCSIPRaspLicenseBindsRequest {
+  /** 资源ID（指定绑定到哪个订单） */
+  ResourceId: string;
+  /** 授权类型。枚举值：rasp(RASP) / enterprise_hp(旗舰版)。为空默认 rasp */
+  LicenseType: string;
+  /** 资产类型。枚举值：host(主机) / cluster(容器节点) / eks(EKS超级节点)。为空默认 host */
+  AssetType: string;
+  /** 待绑定的实例ID列表（IsAll=true时可不传） */
+  InstanceIDs?: string[];
+  /** 是否绑定全部未绑定机器（true时自动算差集） */
+  IsAll?: boolean;
+}
+
+declare interface ModifyCSIPRaspLicenseBindsResponse {
+  /** 异步任务ID，用于调用DescribeCSIPLicenseBindSchedule轮询进度 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCSIPRaspLicenseUnBindsRequest {
+  /** 待解绑的实例ID列表（IsAll=true时可不传） */
+  InstanceIDs?: string[];
+  /** 是否解绑全部已绑定RASP机器 */
+  IsAll?: boolean;
+}
+
+declare interface ModifyCSIPRaspLicenseUnBindsResponse {
+  /** 总数 */
+  Total?: number;
+  /** 成功数 */
+  SuccessNum?: number;
+  /** 失败数 */
+  FailedNum?: number;
+  /** 失败明细 */
+  FailedList?: LicenseUnbindFailedItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -20619,6 +21677,16 @@ declare interface ModifyNetAttackSettingResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNotifyAgentOfflineDurationRequest {
+  /** 离线时长，分钟级20-50m，步长10；小时级1-24h，步长1 */
+  Duration: string;
+}
+
+declare interface ModifyNotifyAgentOfflineDurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNotifyAssetConfigRequest {
   /** 资产范围配置 */
   Items?: NotifyAssetConfigItem[];
@@ -20669,6 +21737,16 @@ declare interface ModifyOrganizationAccountStatusRequest {
 declare interface ModifyOrganizationAccountStatusResponse {
   /** 返回值为0，则修改成功 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPayConfigRequest {
+  /** 主机安全模块自动扩容配置补充说明：不传则不修改主机配置；本期至少需传本模块。后续可扩展 ContainerConfig / AIAgentConfig 命名模块字段 */
+  HostConfig?: HostAutoScaleConfig;
+}
+
+declare interface ModifyPayConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -20829,6 +21907,20 @@ declare interface ModifyRiskScanCronConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifySecurityScoreRuleRequest {
+  /** 完整规则列表，必须包含所有维度、子项、等级的规则 */
+  Rules: ModifyRuleItem[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifySecurityScoreRuleResponse {
+  /** 修改后的完整规则列表 */
+  Rules?: ScoreRuleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyShareUserCSPMRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -20931,6 +22023,76 @@ declare interface ModifyVulWhitelistSwitchRequest {
 }
 
 declare interface ModifyVulWhitelistSwitchResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWebhookPolicyRequest {
+  /** 策略名称入参限制：长度 1-20 个字符，租户内唯一 */
+  Name: string;
+  /** 启用状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+  /** 通知项列表入参限制：至少 1 项，Module/SubModule 必须为 DescribeWebhookNotifyItemTree 返回的合法组合 */
+  NotifyItems: WebhookNotifyItem[];
+  /** 通知资产范围 */
+  AssetScope: WebhookAssetScope;
+  /** 接收格式枚举值：TEXT：文本格式JSON：JSON 格式 */
+  ReceiveFormat: string;
+  /** 接收机器人 ID 列表入参限制：至少 1 个，最多 50 个 */
+  ReceiverIDList: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 策略 ID。大于 0 表示修改；等于 0 或不传表示新增默认值：0 */
+  ID?: number;
+  /** 推送语言枚举值：zh：中文en：英文默认值：国内站默认 zh，国际站默认 en */
+  MsgLanguage?: string;
+  /** 自定义透传字段列表入参限制：EnableCustomFields=true 时必填，最多 20 个 */
+  CustomFields?: WebhookCustomField[];
+}
+
+declare interface ModifyWebhookPolicyResponse {
+  /** 新增或被修改的策略 ID */
+  ID?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWebhookPolicyStatusRequest {
+  /** 策略 ID */
+  ID: number;
+  /** 目标状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+}
+
+declare interface ModifyWebhookPolicyStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWebhookReceiverRequest {
+  /** 机器人名称入参限制：长度 1-20 个字符，租户内唯一 */
+  Name: string;
+  /** 机器人类型枚举值：WEBHOOK：webhook 类型SCF：云函数类型 */
+  Type: string;
+  /** 机器人 ID。大于 0 表示修改已有记录；等于 0 或不传表示新增默认值：0 */
+  ID?: number;
+  /** Webhook 地址入参限制：Type=WEBHOOK 时必填，长度 1-2048，必须为合法 http(s) URL，且不允许内网地址 */
+  WebhookAddr?: string;
+  /** 云函数地域，例如 ap-guangzhou入参限制：Type=SCF 时必填 */
+  SCFRegion?: string;
+  /** 云函数命名空间入参限制：Type=SCF 时必填取值参考：通过 DescribeSCFNamespaceList 接口获取 */
+  Namespace?: string;
+  /** 云函数名称入参限制：Type=SCF 时必填取值参考：通过 DescribeSCFFunctionList 接口获取 */
+  FunctionName?: string;
+  /** 云函数版本入参限制：Type=SCF 时必填，例如 $LATEST取值参考：通过 DescribeSCFFunctionVersionList 接口获取 */
+  FunctionVersion?: string;
+  /** 云函数别名入参限制：Type=SCF 时必填，例如 $DEFAULT取值参考：通过 DescribeSCFAliasList 接口获取 */
+  Alias?: string;
+}
+
+declare interface ModifyWebhookReceiverResponse {
+  /** 新增或被修改的机器人 ID */
+  ID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -21063,6 +22225,42 @@ declare interface ScanBaselineItemListRequest {
 }
 
 declare interface ScanBaselineItemListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScanBaselinePolicyListRequest {
+  /** 基线策略类型。取值：SYSTEM：系统策略（CSIP 内置）SELF：用户自定义策略 */
+  PolicyType: string;
+  /** 待重新扫描的基线策略 ID 列表，不可为空且元素不可为 0。 */
+  PolicyIDList: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ScanBaselinePolicyListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ScanBaselineRiskListRequest {
+  /** 基线策略类型。取值：SYSTEM：系统策略（CSIP 内置）SELF：用户自定义策略 */
+  PolicyType: string;
+  /** 目标基线策略 ID，必须大于 0。 */
+  PolicyID: number;
+  /** 基线系统父分类 ID。 */
+  ParentCategoryID: number;
+  /** 待重新扫描的风险记录 RiskID 列表，不可为空且元素不可为空字符串。 */
+  RiskIDList: string[];
+  /** 检测项ID */
+  ItemID: number;
+  /** 基线子分类 ID。 */
+  CategoryID?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ScanBaselineRiskListResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -21277,6 +22475,20 @@ declare interface SyncDspmUsersResponse {
   RequestId?: string;
 }
 
+declare interface TestWebhookReceiverRequest {
+  /** 机器人配置ID */
+  ID: number;
+  /** 自定义测试内容（明文）。不传时使用系统默认测试样例入参限制：长度 0-2048 */
+  Data?: string;
+}
+
+declare interface TestWebhookReceiverResponse {
+  /** 测试结果（需base64解码得到明文） */
+  RespData?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UninstallClusterAgentRequest {
   /** 集群CA证书MD5列表（单/批量统一）用途：指定需要卸载容器安全Agent的集群取值参考：通过 DescribeClusterListV2 接口返回项中的 ClusterCaMD5 字段获取说明：capi 层不对该字段做存在性/类型校验，按 cluster_ca_md5 透传到接入侧 ClusterUninstall RPC */
   ClusterCaMD5List: string[];
@@ -21416,6 +22628,8 @@ declare interface Csip {
   CheckIsUltimateVersion(data?: CheckIsUltimateVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIsUltimateVersionResponse>;
   /** 风险验证 {@link CheckRiskRequest} {@link CheckRiskResponse} */
   CheckRisk(data: CheckRiskRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRiskResponse>;
+  /** 复制基线策略 {@link CopyBaselinePolicyRequest} {@link CopyBaselinePolicyResponse} */
+  CopyBaselinePolicy(data: CopyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CopyBaselinePolicyResponse>;
   /** 创建AI 定时任务 {@link CreateAIScheduleRequest} {@link CreateAIScheduleResponse} */
   CreateAISchedule(data?: CreateAIScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIScheduleResponse>;
   /** 发起访问密钥的检测任务 {@link CreateAccessKeyCheckTaskRequest} {@link CreateAccessKeyCheckTaskResponse} */
@@ -21566,6 +22780,8 @@ declare interface Csip {
   DeleteAssetFilterView(data: DeleteAssetFilterViewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetFilterViewResponse>;
   /** 删除资产标签 {@link DeleteAssetTagRequest} {@link DeleteAssetTagResponse} */
   DeleteAssetTag(data: DeleteAssetTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetTagResponse>;
+  /** 删除自定义基线策略 {@link DeleteBaselineSelfDefinedPolicyListRequest} {@link DeleteBaselineSelfDefinedPolicyListResponse} */
+  DeleteBaselineSelfDefinedPolicyList(data: DeleteBaselineSelfDefinedPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineSelfDefinedPolicyListResponse>;
   /** CSIP 手动扫描任务删除接口 {@link DeleteCSIPMalwareScanTaskRequest} {@link DeleteCSIPMalwareScanTaskResponse} */
   DeleteCSIPMalwareScanTask(data: DeleteCSIPMalwareScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCSIPMalwareScanTaskResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
@@ -21622,6 +22838,10 @@ declare interface Csip {
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
   /** 删除漏洞白名单 {@link DeleteVulWhitelistRequest} {@link DeleteVulWhitelistResponse} */
   DeleteVulWhitelist(data?: DeleteVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVulWhitelistResponse>;
+  /** 批量删除通知策略 {@link DeleteWebhookPoliciesRequest} {@link DeleteWebhookPoliciesResponse} */
+  DeleteWebhookPolicies(data: DeleteWebhookPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookPoliciesResponse>;
+  /** 批量删除接收机器人 {@link DeleteWebhookReceiversRequest} {@link DeleteWebhookReceiversResponse} */
+  DeleteWebhookReceivers(data: DeleteWebhookReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookReceiversResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
   DescribeAIAgentAssetList(data?: DescribeAIAgentAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentAssetListResponse>;
   /** 获取AI分析文件下载链接 {@link DescribeAIAnalysisFileDownloadURLRequest} {@link DescribeAIAnalysisFileDownloadURLResponse} */
@@ -21712,8 +22932,12 @@ declare interface Csip {
   DescribeBaselineAggregatedItemList(data: DescribeBaselineAggregatedItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAggregatedItemListResponse>;
   /** 获取基线聚合策略结果列表 {@link DescribeBaselineAggregatedPolicyListRequest} {@link DescribeBaselineAggregatedPolicyListResponse} */
   DescribeBaselineAggregatedPolicyList(data?: DescribeBaselineAggregatedPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineAggregatedPolicyListResponse>;
+  /** 获取基线统计中的策略ID {@link DescribeBaselineCalculatingStatisticsPolicyIDListRequest} {@link DescribeBaselineCalculatingStatisticsPolicyIDListResponse} */
+  DescribeBaselineCalculatingStatisticsPolicyIDList(data?: DescribeBaselineCalculatingStatisticsPolicyIDListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineCalculatingStatisticsPolicyIDListResponse>;
   /** 获取基线分类检测项列表 {@link DescribeBaselineCategoryItemListRequest} {@link DescribeBaselineCategoryItemListResponse} */
   DescribeBaselineCategoryItemList(data?: DescribeBaselineCategoryItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineCategoryItemListResponse>;
+  /** 获取基线修复记录列表 {@link DescribeBaselineFixRecordListRequest} {@link DescribeBaselineFixRecordListResponse} */
+  DescribeBaselineFixRecordList(data?: DescribeBaselineFixRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineFixRecordListResponse>;
   /** 获取基线检测项风险列表 {@link DescribeBaselineItemRiskListRequest} {@link DescribeBaselineItemRiskListResponse} */
   DescribeBaselineItemRiskList(data: DescribeBaselineItemRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemRiskListResponse>;
   /** 获取主任务检测项列表 {@link DescribeBaselineMainTaskItemListRequest} {@link DescribeBaselineMainTaskItemListResponse} */
@@ -21722,8 +22946,16 @@ declare interface Csip {
   DescribeBaselineMainTaskList(data?: DescribeBaselineMainTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineMainTaskListResponse>;
   /** 获取基线概览数据 {@link DescribeBaselineOverviewRequest} {@link DescribeBaselineOverviewResponse} */
   DescribeBaselineOverview(data?: DescribeBaselineOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineOverviewResponse>;
+  /** 获取基线策略配置的分类列表 {@link DescribeBaselinePolicyCategoryListRequest} {@link DescribeBaselinePolicyCategoryListResponse} */
+  DescribeBaselinePolicyCategoryList(data: DescribeBaselinePolicyCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyCategoryListResponse>;
+  /** 获取基线策略配置的检测项列表 {@link DescribeBaselinePolicyItemListRequest} {@link DescribeBaselinePolicyItemListResponse} */
+  DescribeBaselinePolicyItemList(data: DescribeBaselinePolicyItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyItemListResponse>;
   /** 获取基线策略列表 {@link DescribeBaselinePolicyListRequest} {@link DescribeBaselinePolicyListResponse} */
   DescribeBaselinePolicyList(data: DescribeBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyListResponse>;
+  /** 获取策略名字存在的用户ID列表 {@link DescribeBaselinePolicyNameExistAppidListRequest} {@link DescribeBaselinePolicyNameExistAppidListResponse} */
+  DescribeBaselinePolicyNameExistAppidList(data: DescribeBaselinePolicyNameExistAppidListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselinePolicyNameExistAppidListResponse>;
+  /** 获取基线子任务列表 {@link DescribeBaselineSubTaskListRequest} {@link DescribeBaselineSubTaskListResponse} */
+  DescribeBaselineSubTaskList(data: DescribeBaselineSubTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineSubTaskListResponse>;
   /** 获取基线同步配置 {@link DescribeBaselineSyncConfRequest} {@link DescribeBaselineSyncConfResponse} */
   DescribeBaselineSyncConf(data?: DescribeBaselineSyncConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineSyncConfResponse>;
   /** 获取基线系统分类列表 {@link DescribeBaselineSystemCategoryListRequest} {@link DescribeBaselineSystemCategoryListResponse} */
@@ -21746,6 +22978,8 @@ declare interface Csip {
   DescribeCLSLogIndexV3(data: DescribeCLSLogIndexV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogIndexV3Response>;
   /** 日志分析cls日志检索v3 {@link DescribeCLSLogListV3Request} {@link DescribeCLSLogListV3Response} */
   DescribeCLSLogListV3(data: DescribeCLSLogListV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogListV3Response>;
+  /** 查询绑定任务进度 {@link DescribeCSIPLicenseBindScheduleRequest} {@link DescribeCSIPLicenseBindScheduleResponse} */
+  DescribeCSIPLicenseBindSchedule(data: DescribeCSIPLicenseBindScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPLicenseBindScheduleResponse>;
   /** CSIP 扫描任务主机详情接口 {@link DescribeCSIPMalwareScanTaskDetailRequest} {@link DescribeCSIPMalwareScanTaskDetailResponse} */
   DescribeCSIPMalwareScanTaskDetail(data: DescribeCSIPMalwareScanTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPMalwareScanTaskDetailResponse>;
   /** CSIP 手动扫描进度查询接口 {@link DescribeCSIPMalwareScanTaskProgressRequest} {@link DescribeCSIPMalwareScanTaskProgressResponse} */
@@ -21908,6 +23142,8 @@ declare interface Csip {
   DescribeDbAssetInfo(data: DescribeDbAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetInfoResponse>;
   /** 数据库资产列表 {@link DescribeDbAssetsRequest} {@link DescribeDbAssetsResponse} */
   DescribeDbAssets(data?: DescribeDbAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDbAssetsResponse>;
+  /** 获取默认安全评分规则 {@link DescribeDefaultSecurityScoreRuleRequest} {@link DescribeDefaultSecurityScoreRuleResponse} */
+  DescribeDefaultSecurityScoreRule(data?: DescribeDefaultSecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultSecurityScoreRuleResponse>;
   /** 域名列表 {@link DescribeDomainAssetsRequest} {@link DescribeDomainAssetsResponse} */
   DescribeDomainAssets(data?: DescribeDomainAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDomainAssetsResponse>;
   /** 查询Dspm访问记录 {@link DescribeDspmAccessRecordRequest} {@link DescribeDspmAccessRecordResponse} */
@@ -22104,6 +23340,8 @@ declare interface Csip {
   DescribeKeySandboxCredentialList(data?: DescribeKeySandboxCredentialListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKeySandboxCredentialListResponse>;
   /** 获取最近一次立即检测任务信息 {@link DescribeLastScanTaskInfoRequest} {@link DescribeLastScanTaskInfoResponse} */
   DescribeLastScanTaskInfo(data?: DescribeLastScanTaskInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLastScanTaskInfoResponse>;
+  /** 查询授权状态汇总 {@link DescribeLicenseStatusRequest} {@link DescribeLicenseStatusResponse} */
+  DescribeLicenseStatus(data?: DescribeLicenseStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLicenseStatusResponse>;
   /** 查询指定lighthouse实例对应的防火墙规则 {@link DescribeLighthouseFirewallRulesRequest} {@link DescribeLighthouseFirewallRulesResponse} */
   DescribeLighthouseFirewallRules(data: DescribeLighthouseFirewallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLighthouseFirewallRulesResponse>;
   /** 查询clb监听器列表 {@link DescribeListenerListRequest} {@link DescribeListenerListResponse} */
@@ -22128,6 +23366,8 @@ declare interface Csip {
   DescribeMandatoryVulSet(data?: DescribeMandatoryVulSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMandatoryVulSetResponse>;
   /** 获取批量修改主机登录方式任务列表 {@link DescribeModifyMachinesLoginTypeTasksRequest} {@link DescribeModifyMachinesLoginTypeTasksResponse} */
   DescribeModifyMachinesLoginTypeTasks(data?: DescribeModifyMachinesLoginTypeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModifyMachinesLoginTypeTasksResponse>;
+  /** 获取多云资产数量 {@link DescribeMultiCloudAssetCountRequest} {@link DescribeMultiCloudAssetCountResponse} */
+  DescribeMultiCloudAssetCount(data?: DescribeMultiCloudAssetCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiCloudAssetCountResponse>;
   /** 获取NFS扫描全局配置 {@link DescribeNFSScanConfRequest} {@link DescribeNFSScanConfResponse} */
   DescribeNFSScanConf(data?: DescribeNFSScanConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNFSScanConfResponse>;
   /** 获取NFS扫描配置机器列表 {@link DescribeNFSScanHostRequest} {@link DescribeNFSScanHostResponse} */
@@ -22138,6 +23378,8 @@ declare interface Csip {
   DescribeNatRules(data: DescribeNatRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatRulesResponse>;
   /** 查询网络攻击设置 {@link DescribeNetAttackSettingRequest} {@link DescribeNetAttackSettingResponse} */
   DescribeNetAttackSetting(data?: DescribeNetAttackSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetAttackSettingResponse>;
+  /** 查询客户端离线时长 {@link DescribeNotifyAgentOfflineDurationRequest} {@link DescribeNotifyAgentOfflineDurationResponse} */
+  DescribeNotifyAgentOfflineDuration(data?: DescribeNotifyAgentOfflineDurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifyAgentOfflineDurationResponse>;
   /** 获取通知资产范围配置 {@link DescribeNotifyAssetConfigRequest} {@link DescribeNotifyAssetConfigResponse} */
   DescribeNotifyAssetConfig(data?: DescribeNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifyAssetConfigResponse>;
   /** 获取通知设置 {@link DescribeNotifySettingRequest} {@link DescribeNotifySettingResponse} */
@@ -22166,6 +23408,8 @@ declare interface Csip {
   DescribeProcessDaemonGlobalConf(data?: DescribeProcessDaemonGlobalConfRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessDaemonGlobalConfResponse>;
   /** 获取进程守护机器列表 {@link DescribeProcessDaemonHostRequest} {@link DescribeProcessDaemonHostResponse} */
   DescribeProcessDaemonHost(data?: DescribeProcessDaemonHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProcessDaemonHostResponse>;
+  /** 公网资产列表 {@link DescribePublicCloudAssetsRequest} {@link DescribePublicCloudAssetsResponse} */
+  DescribePublicCloudAssets(data?: DescribePublicCloudAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicCloudAssetsResponse>;
   /** 公网列表 {@link DescribePublicIpAssetsRequest} {@link DescribePublicIpAssetsResponse} */
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 查询应用防护授权列表 {@link DescribeRaspLicenseListRequest} {@link DescribeRaspLicenseListResponse} */
@@ -22210,6 +23454,14 @@ declare interface Csip {
   DescribeRiskScanCronConfig(data?: DescribeRiskScanCronConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskScanCronConfigResponse>;
   /** 查看风险趋势图信息 {@link DescribeRiskTrendDataRequest} {@link DescribeRiskTrendDataResponse} */
   DescribeRiskTrendData(data?: DescribeRiskTrendDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskTrendDataResponse>;
+  /** 查询 SCF 函数别名列表 {@link DescribeSCFAliasListRequest} {@link DescribeSCFAliasListResponse} */
+  DescribeSCFAliasList(data: DescribeSCFAliasListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSCFAliasListResponse>;
+  /** 查询 SCF 函数列表 {@link DescribeSCFFunctionListRequest} {@link DescribeSCFFunctionListResponse} */
+  DescribeSCFFunctionList(data: DescribeSCFFunctionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSCFFunctionListResponse>;
+  /** 查询 SCF 函数版本列表 {@link DescribeSCFFunctionVersionListRequest} {@link DescribeSCFFunctionVersionListResponse} */
+  DescribeSCFFunctionVersionList(data: DescribeSCFFunctionVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSCFFunctionVersionListResponse>;
+  /** 查询 SCF 命名空间列表 {@link DescribeSCFNamespaceListRequest} {@link DescribeSCFNamespaceListResponse} */
+  DescribeSCFNamespaceList(data: DescribeSCFNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSCFNamespaceListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
   /** 查询云边界分析扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
@@ -22224,6 +23476,12 @@ declare interface Csip {
   DescribeSearchBugInfo(data: DescribeSearchBugInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSearchBugInfoResponse>;
   /** 安全组策略 {@link DescribeSecurityGroupPolicyRequest} {@link DescribeSecurityGroupPolicyResponse} */
   DescribeSecurityGroupPolicy(data: DescribeSecurityGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupPolicyResponse>;
+  /** 获取安全风险趋势 {@link DescribeSecurityRiskTrendRequest} {@link DescribeSecurityRiskTrendResponse} */
+  DescribeSecurityRiskTrend(data?: DescribeSecurityRiskTrendRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityRiskTrendResponse>;
+  /** 获取安全评分概览 {@link DescribeSecurityScoreOverviewRequest} {@link DescribeSecurityScoreOverviewResponse} */
+  DescribeSecurityScoreOverview(data?: DescribeSecurityScoreOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityScoreOverviewResponse>;
+  /** 获取安全评分规则 {@link DescribeSecurityScoreRuleRequest} {@link DescribeSecurityScoreRuleResponse} */
+  DescribeSecurityScoreRule(data?: DescribeSecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityScoreRuleResponse>;
   /** 查询 Skill 安全检测计费信息 {@link DescribeSkillScanPayInfoRequest} {@link DescribeSkillScanPayInfoResponse} */
   DescribeSkillScanPayInfo(data?: DescribeSkillScanPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanPayInfoResponse>;
   /** 查询 Skill 安全检测结果 {@link DescribeSkillScanResultRequest} {@link DescribeSkillScanResultResponse} */
@@ -22302,6 +23560,10 @@ declare interface Csip {
   DescribeVulScanTaskList(data?: DescribeVulScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulScanTaskListResponse>;
   /** 漏洞管理-漏洞视角的漏洞风险列表 {@link DescribeVulViewVulRiskListRequest} {@link DescribeVulViewVulRiskListResponse} */
   DescribeVulViewVulRiskList(data?: DescribeVulViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVulViewVulRiskListResponse>;
+  /** 查询通知策略列表 {@link DescribeWebhookPolicyListRequest} {@link DescribeWebhookPolicyListResponse} */
+  DescribeWebhookPolicyList(data?: DescribeWebhookPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookPolicyListResponse>;
+  /** 查询接收机器人列表 {@link DescribeWebhookReceiverListRequest} {@link DescribeWebhookReceiverListResponse} */
+  DescribeWebhookReceiverList(data?: DescribeWebhookReceiverListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebhookReceiverListResponse>;
   /** 停用AI 定时任务 {@link DisableAIScheduleRequest} {@link DisableAIScheduleResponse} */
   DisableAISchedule(data?: DisableAIScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DisableAIScheduleResponse>;
   /** 下载导出日志 {@link DownloadDspmExportLogRequest} {@link DownloadDspmExportLogResponse} */
@@ -22344,10 +23606,26 @@ declare interface Csip {
   ModifyBanMode(data: ModifyBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanModeResponse>;
   /** 更改基线策略 {@link ModifyBaselinePolicyRequest} {@link ModifyBaselinePolicyResponse} */
   ModifyBaselinePolicy(data: ModifyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselinePolicyResponse>;
+  /** 更改基线策略开关 {@link ModifyBaselinePolicyEnableRequest} {@link ModifyBaselinePolicyEnableResponse} */
+  ModifyBaselinePolicyEnable(data: ModifyBaselinePolicyEnableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselinePolicyEnableResponse>;
+  /** 更改基线同步配置 {@link ModifyBaselineSyncConfRequest} {@link ModifyBaselineSyncConfResponse} */
+  ModifyBaselineSyncConf(data: ModifyBaselineSyncConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselineSyncConfResponse>;
+  /** 更改基线用户其他配置 {@link ModifyBaselineUserOtherConfRequest} {@link ModifyBaselineUserOtherConfResponse} */
+  ModifyBaselineUserOtherConf(data: ModifyBaselineUserOtherConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselineUserOtherConfResponse>;
+  /** 修改基线用户弱口令配置 {@link ModifyBaselineUserWeakPasswordConfRequest} {@link ModifyBaselineUserWeakPasswordConfResponse} */
+  ModifyBaselineUserWeakPasswordConf(data: ModifyBaselineUserWeakPasswordConfRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselineUserWeakPasswordConfResponse>;
   /** 设置暴力破解阻断开关状态 {@link ModifyBruteAttackBanStatusRequest} {@link ModifyBruteAttackBanStatusResponse} */
   ModifyBruteAttackBanStatus(data?: ModifyBruteAttackBanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBruteAttackBanStatusResponse>;
   /** 修改暴力破解规则 {@link ModifyBruteAttackRulesRequest} {@link ModifyBruteAttackRulesResponse} */
   ModifyBruteAttackRules(data: ModifyBruteAttackRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBruteAttackRulesResponse>;
+  /** 绑定授权 {@link ModifyCSIPLicenseBindsRequest} {@link ModifyCSIPLicenseBindsResponse} */
+  ModifyCSIPLicenseBinds(data: ModifyCSIPLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPLicenseBindsResponse>;
+  /** 解绑主机授权 {@link ModifyCSIPLicenseUnBindsRequest} {@link ModifyCSIPLicenseUnBindsResponse} */
+  ModifyCSIPLicenseUnBinds(data?: ModifyCSIPLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPLicenseUnBindsResponse>;
+  /** 绑定RASP授权 {@link ModifyCSIPRaspLicenseBindsRequest} {@link ModifyCSIPRaspLicenseBindsResponse} */
+  ModifyCSIPRaspLicenseBinds(data: ModifyCSIPRaspLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPRaspLicenseBindsResponse>;
+  /** 解绑RASP授权 {@link ModifyCSIPRaspLicenseUnBindsRequest} {@link ModifyCSIPRaspLicenseUnBindsResponse} */
+  ModifyCSIPRaspLicenseUnBinds(data?: ModifyCSIPRaspLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPRaspLicenseUnBindsResponse>;
   /** 修改存储桶监测状态 {@link ModifyCosAuditBucketMonitorStatusRequest} {@link ModifyCosAuditBucketMonitorStatusResponse} */
   ModifyCosAuditBucketMonitorStatus(data: ModifyCosAuditBucketMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditBucketMonitorStatusResponse>;
   /** 修改cos审计监测账号 {@link ModifyCosAuditMonitorAccountRequest} {@link ModifyCosAuditMonitorAccountResponse} */
@@ -22450,6 +23728,8 @@ declare interface Csip {
   ModifyNFSScanHost(data?: ModifyNFSScanHostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNFSScanHostResponse>;
   /** 修改网络攻击设置 {@link ModifyNetAttackSettingRequest} {@link ModifyNetAttackSettingResponse} */
   ModifyNetAttackSetting(data: ModifyNetAttackSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetAttackSettingResponse>;
+  /** 修改客户端离线时长 {@link ModifyNotifyAgentOfflineDurationRequest} {@link ModifyNotifyAgentOfflineDurationResponse} */
+  ModifyNotifyAgentOfflineDuration(data: ModifyNotifyAgentOfflineDurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyAgentOfflineDurationResponse>;
   /** 修改通知资产范围配置 {@link ModifyNotifyAssetConfigRequest} {@link ModifyNotifyAssetConfigResponse} */
   ModifyNotifyAssetConfig(data?: ModifyNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyAssetConfigResponse>;
   /** 修改通知设置 {@link ModifyNotifySettingRequest} {@link ModifyNotifySettingResponse} */
@@ -22458,6 +23738,8 @@ declare interface Csip {
   ModifyNotifySettingAlert(data: ModifyNotifySettingAlertRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifySettingAlertResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
   ModifyOrganizationAccountStatus(data: ModifyOrganizationAccountStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyOrganizationAccountStatusResponse>;
+  /** 修改付费配置信息 {@link ModifyPayConfigRequest} {@link ModifyPayConfigResponse} */
+  ModifyPayConfig(data?: ModifyPayConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPayConfigResponse>;
   /** 修改策略状态 {@link ModifyPolicyStatusRequest} {@link ModifyPolicyStatusResponse} */
   ModifyPolicyStatus(data: ModifyPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPolicyStatusResponse>;
   /** 重保防护包防护设置 {@link ModifyProtectionSettingRequest} {@link ModifyProtectionSettingResponse} */
@@ -22472,6 +23754,8 @@ declare interface Csip {
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 更新用户周期检测计划 {@link ModifyRiskScanCronConfigRequest} {@link ModifyRiskScanCronConfigResponse} */
   ModifyRiskScanCronConfig(data?: ModifyRiskScanCronConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskScanCronConfigResponse>;
+  /** 修改安全评分规则 {@link ModifySecurityScoreRuleRequest} {@link ModifySecurityScoreRuleResponse} */
+  ModifySecurityScoreRule(data: ModifySecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityScoreRuleResponse>;
   /** 更新CSPM共享配额 {@link ModifyShareUserCSPMRequest} {@link ModifyShareUserCSPMResponse} */
   ModifyShareUserCSPM(data?: ModifyShareUserCSPMRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShareUserCSPMResponse>;
   /** 更新自定义策略的开关 {@link ModifyUebaRuleSwitchRequest} {@link ModifyUebaRuleSwitchResponse} */
@@ -22482,6 +23766,12 @@ declare interface Csip {
   ModifyVulWhitelistConfig(data?: ModifyVulWhitelistConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulWhitelistConfigResponse>;
   /** 修改漏洞白名单开关 {@link ModifyVulWhitelistSwitchRequest} {@link ModifyVulWhitelistSwitchResponse} */
   ModifyVulWhitelistSwitch(data?: ModifyVulWhitelistSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVulWhitelistSwitchResponse>;
+  /** 新增或修改通知策略 {@link ModifyWebhookPolicyRequest} {@link ModifyWebhookPolicyResponse} */
+  ModifyWebhookPolicy(data: ModifyWebhookPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebhookPolicyResponse>;
+  /** 启用或禁用通知策略 {@link ModifyWebhookPolicyStatusRequest} {@link ModifyWebhookPolicyStatusResponse} */
+  ModifyWebhookPolicyStatus(data: ModifyWebhookPolicyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebhookPolicyStatusResponse>;
+  /** 新增或修改接收机器人 {@link ModifyWebhookReceiverRequest} {@link ModifyWebhookReceiverResponse} */
+  ModifyWebhookReceiver(data: ModifyWebhookReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebhookReceiverResponse>;
   /** 风险操作 {@link OperateRiskRequest} {@link OperateRiskResponse} */
   OperateRisk(data: OperateRiskRequest, config?: AxiosRequestConfig): AxiosPromise<OperateRiskResponse>;
   /** 自定义风险规则策略 {@link OperateRiskRulePolicyRequest} {@link OperateRiskRulePolicyResponse} */
@@ -22496,6 +23786,10 @@ declare interface Csip {
   ScanBaselineAssetItemList(data: ScanBaselineAssetItemListRequest, config?: AxiosRequestConfig): AxiosPromise<ScanBaselineAssetItemListResponse>;
   /** 扫描基线检测项 {@link ScanBaselineItemListRequest} {@link ScanBaselineItemListResponse} */
   ScanBaselineItemList(data: ScanBaselineItemListRequest, config?: AxiosRequestConfig): AxiosPromise<ScanBaselineItemListResponse>;
+  /** 扫描基线策略 {@link ScanBaselinePolicyListRequest} {@link ScanBaselinePolicyListResponse} */
+  ScanBaselinePolicyList(data: ScanBaselinePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<ScanBaselinePolicyListResponse>;
+  /** 扫描基线风险 {@link ScanBaselineRiskListRequest} {@link ScanBaselineRiskListResponse} */
+  ScanBaselineRiskList(data: ScanBaselineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<ScanBaselineRiskListResponse>;
   /** CSIP 手动扫描重扫接口 {@link ScanCSIPTaskAgainRequest} {@link ScanCSIPTaskAgainResponse} */
   ScanCSIPTaskAgain(data: ScanCSIPTaskAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanCSIPTaskAgainResponse>;
   /** 重新扫描EDR任务 {@link ScanEDRTaskAgainRequest} {@link ScanEDRTaskAgainResponse} */
@@ -22524,6 +23818,8 @@ declare interface Csip {
   SyncDspmAssets(data?: SyncDspmAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmAssetsResponse>;
   /** 同步Dspm用户列表 {@link SyncDspmUsersRequest} {@link SyncDspmUsersResponse} */
   SyncDspmUsers(data?: SyncDspmUsersRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmUsersResponse>;
+  /** 测试接收机器人 {@link TestWebhookReceiverRequest} {@link TestWebhookReceiverResponse} */
+  TestWebhookReceiver(data: TestWebhookReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<TestWebhookReceiverResponse>;
   /** 卸载集群容器安全Agent {@link UninstallClusterAgentRequest} {@link UninstallClusterAgentResponse} */
   UninstallClusterAgent(data: UninstallClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallClusterAgentResponse>;
   /** 修改告警或者风险状态 {@link UpdateAccessKeyAlarmStatusRequest} {@link UpdateAccessKeyAlarmStatusResponse} */

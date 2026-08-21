@@ -747,6 +747,8 @@ declare interface DescribeServicesRequest {
   Limit?: number;
   /** 偏移量 */
   Offset?: number;
+  /** 实例状态枚举值：RUNNING： 运行中CREATING： 创建中CREATE_FAILED： 部署失败DELETING： 删除中UPDATING： 更新中RESTARTING： 重启中ISOLATING： 隔离中ARREARS： 欠费中RESTORING： 冲正恢复中 */
+  States?: string[];
 }
 
 declare interface DescribeServicesResponse {

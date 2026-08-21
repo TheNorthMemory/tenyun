@@ -2716,6 +2716,10 @@ declare interface VatElectronicItemInfo {
   TravelDate?: string;
   /** 等级，仅旅客运输服务发票返回 */
   TravelLevel?: string;
+  /** 通行日期起 */
+  DateStart?: string;
+  /** 通行日期止 */
+  DateEnd?: string;
 }
 
 /** 增值税发票、购车发票、全电发票的基础要素字段信息。 */
@@ -5365,7 +5369,7 @@ declare interface VerifyOfdVatInvoiceOCRResponse {
 }
 
 declare interface VerifyScenePhotoRequest {
-  /** 场景类型参数，如果场景无法细分请选用该大类的第一个子类，目前支持以下类型：经营场所照0101 门头照0102 店内照0103 流动经营照 */
+  /** 场景类型参数，如果场景无法细分请选用该大类的第一个子类，目前支持以下类型：经营场所照0101 门头照0102 店内照0103 流动经营照 车牌业务照0201 车牌 */
   Scene: string;
   /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M。 */
   ImageUrl?: string;

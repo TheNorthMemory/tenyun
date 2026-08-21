@@ -2899,6 +2899,8 @@ declare namespace V20180525 {
     Status?: string;
     /** 镜像id */
     ImageId?: string;
+    /** 架构 */
+    Arch?: string;
   }
 
   /** 策略实例信息 */
@@ -6840,6 +6842,8 @@ declare namespace V20180525 {
   }
 
   interface DescribeOSImagesRequest {
+    /** 镜像拉取接口增加过滤字段 */
+    Filters?: Filter[];
   }
 
   interface DescribeOSImagesResponse {

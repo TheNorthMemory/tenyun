@@ -992,6 +992,16 @@ declare interface CamAuthConfig {
   SecretKeyName?: string;
 }
 
+/** CategoryPermission */
+declare interface CategoryPermission {
+  /** 当前用户是否可新增子分类 */
+  CanAdd?: boolean;
+  /** 当前用户是否可删除该分类 */
+  CanDelete?: boolean;
+  /** 当前用户是否可编辑该分类 */
+  CanEdit?: boolean;
+}
+
 /** ClawAgent Agent团队协作配置 */
 declare interface ClawAgentAgentTeamConfig {
   /** 是否开启Agent团队协作 */
@@ -1662,6 +1672,90 @@ declare interface ModelUsageSummary {
   ConsumptionPU?: number;
 }
 
+/** MsgRecord */
+declare interface MsgRecord {
+  /** 答案 */
+  Answer?: string;
+  /** 应用ID */
+  AppId?: string;
+  /** 分类ID */
+  CategoryId?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 意图 */
+  Intent?: string;
+  /** 意图分类 */
+  IntentCategory?: string;
+  /** 是否是智能分类 */
+  IsSmart?: boolean;
+  /** 问题 */
+  Question?: string;
+  /** 记录ID */
+  RecordId?: string;
+  /** 表示消息的回复方式，枚举 ReplyMethod：0=未指定, 1=大模型直接回复, 2=保守回复, 3=拒答, 4=敏感回复, 5=问答对优先回复, 6=欢迎语, 7=并发超限, 8=全局干预知识, 9=任务流程过程回复, 10=任务流程答案, 11=搜索引擎, 12=知识润色, 13=图片理解, 14=实时文档, 15=澄清确认, 16=工作流回复, 17=工作流结束, 18=智能体回复, 19=多意图, 20=中断, 21=智能体计划预览, 22=智能体计划结果, 23=智能体结构化输出。 */
+  ReplyMethod?: number;
+  /** 返回结果 */
+  Result?: MsgRecordResult;
+  /** 分数 */
+  Score?: number;
+  /** 会话ID */
+  SessionId?: string;
+  /** 来源 */
+  Source?: MsgRecordSource;
+  /** trace_id */
+  TraceId?: string;
+}
+
+/** MsgRecordCategory */
+declare interface MsgRecordCategory {
+  /** 分类的业务 ID */
+  CategoryId?: string;
+  /** 子分类列表，树形嵌套 */
+  Children?: MsgRecordCategory[];
+  /** 分类名称 */
+  Name?: string;
+  /** 当前用户对该分类的操作权限 */
+  Permission?: CategoryPermission;
+  /** 该分类下消息记录的数量 */
+  TotalCount?: string;
+}
+
+/** MsgRecordResult */
+declare interface MsgRecordResult {
+  /** 表示该条消息的调用结果：0=CALL_RESULT_UNKNOWN（全部/未知）, 1=CALL_RESULT_SUCCESS（成功）, 2=CALL_RESULT_FAILED（失败）；fail_reason（string）为调用失败时的失败原因描述。 */
+  CallResult?: number;
+  /** 自定义变量，json字符串 */
+  CustomerVariable?: string;
+  /** 失败原因 */
+  FailReason?: string;
+  /** 首token耗时 */
+  FirstTokenLatency?: number;
+  /** 输入token数 */
+  InputToken?: number;
+  /** 输出token数 */
+  OutputToken?: number;
+  /** 总token数 */
+  TotalToken?: number;
+  /** 总token耗时 */
+  TotalTokenLatency?: number;
+}
+
+/** MsgRecordSource */
+declare interface MsgRecordSource {
+  /** 对话消息的接入渠道类型：0=未指定, 1=坐席, 2=体验页面(腾讯云), 3=评测端对话, 4=体验页面(手机号), 5=对话端API接入, 6=评测任务对话, 10=工作流调试, 10000=微信公众号, 10001=微信服务号, 10002=企微应用, 10003=网页组件, 10004=微信客服, 10005=微信小程序, 10006=元器, 10007=应用宝, 10008=元宝, 10009=企微智能机器人, 10010=元器API, 10011=LINE, 10012=Telegram, 10100=电脑管家, 20001=荣耀智能体平台, 20002=小米应用商店；user_id（string）为该渠道下的访客唯一标识。 */
+  ChannelType?: number;
+  /** 用户ID */
+  FromId?: string;
+  /** 消息发送者的用户来源类型：1=用户（访客/C端用户）, 2=机器人（AI回复）, 3=坐席（人工客服）；from_id（string）为该来源类型下的用户唯一标识 ID。 */
+  FromType?: number;
+  /** 用户头像 */
+  UserAvatar?: string;
+  /** 访客ID */
+  UserId?: string;
+  /** 访客名称 */
+  UserNickname?: string;
+}
+
 /** 多智能体配置 */
 declare interface MultiAgentConfig {
   /** Agent协同配置 */
@@ -2134,6 +2228,14 @@ declare interface SkillVersion {
   UpdateDesc?: string;
 }
 
+/** 排序条件 */
+declare interface Sort {
+  /** 排序字段名，如 create_time */
+  Name: string;
+  /** 排序方向，1 升序，2 降序枚举项枚举值描述SORT_ORDER_INVALID0无效SORT_ORDER_ASC1升序SORT_ORDER_DESC2降序 */
+  Direction?: number;
+}
+
 /** 空间信息 */
 declare interface Space {
   /** 空间id */
@@ -2502,6 +2604,22 @@ declare interface CreateConversationResponse {
   RequestId?: string;
 }
 
+declare interface CreateMsgRecordCategoryRequest {
+  /** 分类名称 */
+  Name: string;
+  /** 应用 ID */
+  AppId: string;
+  /** 父分类业务 ID，0 表示一级分类（未分类） */
+  ParentId?: string;
+}
+
+declare interface CreateMsgRecordCategoryResponse {
+  /** 新建分类的业务 ID */
+  CategoryId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePluginRequest {
   /** 插件基础资料 */
   Profile: PluginProfile;
@@ -2738,6 +2856,18 @@ declare interface DeleteConversationRequest {
 }
 
 declare interface DeleteConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMsgRecordCategoryRequest {
+  /** 应用 ID */
+  AppId: string;
+  /** 待删除的分类业务 ID */
+  CategoryId: string;
+}
+
+declare interface DeleteMsgRecordCategoryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3266,6 +3396,46 @@ declare interface DescribeModelListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMsgRecordCategoryListRequest {
+  /** 应用 ID */
+  AppId: string;
+}
+
+declare interface DescribeMsgRecordCategoryListResponse {
+  /** 消息记录分类树列表 */
+  CategoryList?: MsgRecordCategory[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMsgRecordListRequest {
+  /** 应用 ID */
+  AppId: string;
+  /** 过滤条件列表，支持：ChannelType（渠道类型，0 全部）、FeedbackType（反馈类型，-1 为全部）、QueryType、Query、CategoryId、ReplyMethod、StartTime、EndTime（秒时间戳）、Cursor（游标信息，上一页取响应 PrevCursor，下一页取响应 NextCursor）、Direction（方向，next 下一页，prev 上一页）、CallResult（调用结果，默认 0 为全部，1 为成功，2 为失败）、FailReason、Intent */
+  FilterList?: Filter[];
+  /** 页码，从 0 开始；不传时按 0 处理 */
+  PageNumber?: number;
+  /** 每页数量，最大 100；不传或传 0 时按默认分页大小处理 */
+  PageSize?: number;
+  /** 排序条件，只支持按 CreateTime 排序 */
+  Sort?: Sort;
+}
+
+declare interface DescribeMsgRecordListResponse {
+  /** 是否有更多页 */
+  HasMore?: boolean;
+  /** 消息记录列表 */
+  MsgRecordList?: MsgRecord[];
+  /** 下一页游标信息 */
+  NextCursor?: string;
+  /** 上一页游标信息 */
+  PrevCursor?: string;
+  /** 符合条件的总记录数，用于前端分页显示 */
+  TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePluginRequest {
   /** 插件id */
   PluginId: string;
@@ -3638,6 +3808,20 @@ declare interface ModifyConversationResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMsgRecordCategoryRequest {
+  /** 应用 ID */
+  AppId: string;
+  /** 待修改的分类业务 ID */
+  CategoryId: string;
+  /** 修改后的分类名称 */
+  Name: string;
+}
+
+declare interface ModifyMsgRecordCategoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPluginRequest {
   /** 插件id */
   PluginId: string;
@@ -3863,6 +4047,8 @@ declare interface Adp {
   CreateAppTrigger(data?: CreateAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppTriggerResponse>;
   /** 新建会话 {@link CreateConversationRequest} {@link CreateConversationResponse} */
   CreateConversation(data: CreateConversationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConversationResponse>;
+  /** 创建消息记录分类 {@link CreateMsgRecordCategoryRequest} {@link CreateMsgRecordCategoryResponse} */
+  CreateMsgRecordCategory(data: CreateMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMsgRecordCategoryResponse>;
   /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
   CreatePlugin(data: CreatePluginRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePluginResponse>;
   /** 新增发布任务 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
@@ -3887,6 +4073,8 @@ declare interface Adp {
   DeleteAppTrigger(data?: DeleteAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppTriggerResponse>;
   /** 删除会话 {@link DeleteConversationRequest} {@link DeleteConversationResponse} */
   DeleteConversation(data: DeleteConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConversationResponse>;
+  /** 删除消息记录分类 {@link DeleteMsgRecordCategoryRequest} {@link DeleteMsgRecordCategoryResponse} */
+  DeleteMsgRecordCategory(data: DeleteMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMsgRecordCategoryResponse>;
   /** 删除插件 {@link DeletePluginRequest} {@link DeletePluginResponse} */
   DeletePlugin(data: DeletePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePluginResponse>;
   /** 删除Skill {@link DeleteSkillRequest} {@link DeleteSkillResponse} */
@@ -3937,6 +4125,10 @@ declare interface Adp {
   DescribeMetricOverviewList(data: DescribeMetricOverviewListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricOverviewListResponse>;
   /** 查询模型列表 {@link DescribeModelListRequest} {@link DescribeModelListResponse} */
   DescribeModelList(data: DescribeModelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelListResponse>;
+  /** 查询消息记录分类列表 {@link DescribeMsgRecordCategoryListRequest} {@link DescribeMsgRecordCategoryListResponse} */
+  DescribeMsgRecordCategoryList(data: DescribeMsgRecordCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgRecordCategoryListResponse>;
+  /** 查询消息列表 {@link DescribeMsgRecordListRequest} {@link DescribeMsgRecordListResponse} */
+  DescribeMsgRecordList(data: DescribeMsgRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgRecordListResponse>;
   /** 获取插件详情 {@link DescribePluginRequest} {@link DescribePluginResponse} */
   DescribePlugin(data: DescribePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginResponse>;
   /** 获取插件概要列表 {@link DescribePluginSummaryListRequest} {@link DescribePluginSummaryListResponse} */
@@ -3977,6 +4169,8 @@ declare interface Adp {
   ModifyAppTrigger(data?: ModifyAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppTriggerResponse>;
   /** 修改会话信息 {@link ModifyConversationRequest} {@link ModifyConversationResponse} */
   ModifyConversation(data: ModifyConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConversationResponse>;
+  /** 修改消息记录分类 {@link ModifyMsgRecordCategoryRequest} {@link ModifyMsgRecordCategoryResponse} */
+  ModifyMsgRecordCategory(data: ModifyMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMsgRecordCategoryResponse>;
   /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */
   ModifyPlugin(data: ModifyPluginRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPluginResponse>;
   /** 修改skill {@link ModifySkillRequest} {@link ModifySkillResponse} */

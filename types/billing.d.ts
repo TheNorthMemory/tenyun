@@ -3346,13 +3346,13 @@ declare interface DescribeBillDetailForOrganizationRequest {
   Offset: number;
   /** 数量，最大值为100 */
   Limit: number;
-  /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。 */
+  /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往账单概览页面顶部查看确认您的账单统计周期类型。 */
   PeriodType?: string;
-  /** 月份，格式为yyyy-mm，Month和BeginTime&EndTime必传一个，如果有传BeginTime&EndTime则Month字段无效。最多可拉取近18个月内的数据。 */
+  /** 月份，格式为yyyy-mm，Month和BeginTime&amp;EndTime必传一个，如果有传BeginTime&amp;EndTime则Month字段无效。最多可拉取近18个月内的数据。 */
   Month?: string;
-  /** 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取18个月内的数据。 */
+  /** 周期开始时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取18个月内的数据。 */
   BeginTime?: string;
-  /** 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取近18个月内的数据。 */
+  /** 周期结束时间，格式为yyyy-mm-dd hh:ii:ss，Month和BeginTime&amp;EndTime必传一个，如果有该字段则Month字段无效。BeginTime和EndTime必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据。最多可拉取近18个月内的数据。 */
   EndTime?: string;
   /** 是否需要访问列表的总记录数，用于前端分页1-表示需要， 0-表示不需要 */
   NeedRecordNum?: number;
@@ -3360,7 +3360,7 @@ declare interface DescribeBillDetailForOrganizationRequest {
   PayMode?: string;
   /** 查询指定资源信息 */
   ResourceId?: string;
-  /** 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：包年包月新购包年包月续费包年包月配置变更包年包月退款 按量计费扣费 线下项目扣费 线下产品扣费 调账扣费 调账补偿 按量计费小时结 按量计费日结 按量计费月结 竞价实例小时结 线下项目调账补偿 线下产品调账补偿 优惠扣费 优惠补偿 按量计费迁入资源 按量计费迁出资源 包年包月迁入资源 包年包月迁出资源 预付费用 小时费用 预留实例退款 按量计费冲正 包年包月转按量 保底扣款 节省计划小时费用 */
+  /** 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：包年包月新购包年包月续费包年包月配置变更包年包月退款按量计费扣费线下项目扣费线下产品扣费调账扣费调账补偿按量计费小时结按量计费日结按量计费月结竞价实例小时结线下项目调账补偿线下产品调账补偿优惠扣费优惠补偿按量计费迁入资源按量计费迁出资源包年包月迁入资源包年包月迁出资源预付费用小时费用预留实例退款按量计费冲正包年包月转按量保底扣款节省计划小时费用 */
   ActionType?: string;
   /** 项目ID:资源所属项目ID */
   ProjectId?: number;
@@ -3496,11 +3496,11 @@ declare interface DescribeBillResourceSummaryForOrganizationRequest {
   Limit: number;
   /** 月份，格式为yyyy-mm。不能早于开通账单2.0的月份 */
   Month: string;
-  /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。 */
+  /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往账单概览页面顶部查看确认您的账单统计周期类型。 */
   PeriodType?: string;
   /** 是否需要访问列表的总记录数，用于前端分页1-表示需要， 0-表示不需要 */
   NeedRecordNum?: number;
-  /** 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：包年包月新购包年包月续费包年包月配置变更包年包月退款 按量计费扣费 线下项目扣费 线下产品扣费 调账扣费 调账补偿 按量计费小时结 按量计费日结 按量计费月结 竞价实例小时结 线下项目调账补偿 线下产品调账补偿 优惠扣费 优惠补偿 按量计费迁入资源 按量计费迁出资源 包年包月迁入资源 包年包月迁出资源 预付费用 小时费用 预留实例退款 按量计费冲正 包年包月转按量 保底扣款 节省计划小时费用 */
+  /** 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：包年包月新购包年包月续费包年包月配置变更包年包月退款按量计费扣费线下项目扣费线下产品扣费调账扣费调账补偿按量计费小时结按量计费日结按量计费月结竞价实例小时结线下项目调账补偿线下产品调账补偿优惠扣费优惠补偿按量计费迁入资源按量计费迁出资源包年包月迁入资源包年包月迁出资源预付费用小时费用预留实例退款按量计费冲正包年包月转按量保底扣款节省计划小时费用 */
   ActionType?: string;
   /** 查询指定资源信息 */
   ResourceId?: string;

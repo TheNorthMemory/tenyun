@@ -7922,6 +7922,8 @@ declare interface UnderstandImageConfig {
   Model: string;
   /** 图片理解指令 */
   Prompt: string;
+  /** 图片理解模型参数，类型为 JSON 字符串。 */
+  Parameters?: string;
 }
 
 /** 智能擦除模板隐私保护配置 */

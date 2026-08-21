@@ -1841,7 +1841,7 @@ declare namespace V20180717 {
     Status?: string;
     /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
     ErrCode?: number;
-    /** 扩展错误码。空字符串表示成功，其它值表示失败。 */
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。枚举值：RequestLimitExceeded： 调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数值错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。InvalidParameter： 非法参数。InvalidParameter.MediaFormat： 无效的媒体格式。ContentModerationFailed： 内容审核未通过。ResourceInsufficient： 资源不足。ModelGenerateFailed： 模型生成失败。ResourceNotFound： 资源不存在。OperationCanceled： 操作已取消。TaskTimeout： 任务超时。 */
     ErrCodeExt?: string;
     /** 错误信息。 */
     Message?: string;
@@ -1985,7 +1985,7 @@ declare namespace V20180717 {
     Status?: string;
     /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
     ErrCode?: number;
-    /** 扩展错误码。空字符串表示成功，其它值表示失败。枚举值：RequestLimitExceeded： 模型调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。 */
+    /** 扩展错误码。空字符串表示成功，其它值表示失败。枚举值：RequestLimitExceeded： 模型调用超出并发限制。InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。InvalidParameterValue： 参数错误。FailedOperation： 模型任务堆积。InternalError： 内部错误。InvalidParameter： 非法参数。InvalidParameter.MediaFormat： 无效的媒体格式。ContentModerationFailed： 内容审核未通过。ResourceInsufficient： 资源不足。ModelGenerateFailed： 模型生成失败。ResourceNotFound： 资源不存在。OperationCanceled： 操作已取消。TaskTimeout： 任务超时。 */
     ErrCodeExt?: string;
     /** 错误信息。 */
     Message?: string;
@@ -9164,7 +9164,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：OGGGHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene； */
+    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1、3.1-lite；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene；当 ModelName 是Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；Kling O1：10张；Vidu q2：7张；Hunyuan 3.0：3张； */
     FileInfos?: AigcImageTaskInputFileInfo[];
@@ -9204,7 +9204,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
     QuotaType: string;
-    /** 任务的配额数单位：- 当QuotaType=Image时，单位为张- 当QuotaType=Video时，单位为秒- 当QuotaType=Text时，单位为token */
+    /** 任务的配额数。单位：张/秒/token数。当 QuotaType 为 Image 时，单位为张；当 QuotaType 为 Video 时，单位为秒；当 QuotaType 为 Text 时，单位为 token 数。 */
     QuotaLimit: number;
     /** 仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken */
     ApiToken?: string;
@@ -9272,7 +9272,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：Kling：可灵；Vidu；Hailuo：海螺；Hunyuan：混元；Mingmou：明眸；GV；OS；PixVerse; */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast、H3；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast、H3、H3_regen；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
     ModelVersion: string;
     /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图片/视频/声音生成、视频编辑等模式。首尾帧视频生成：首帧图片的Usage字段为FirstFrame，尾帧图片的Usage字段为LastFrame，支持各一张，可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片/视频/声音生成：可传入单个或者多个图片/视频/声音作为参考，Usage字段为Reference；参考模式，可以调整生成视频的宽高比例。视频编辑：Vidu、Kling可输入视频进行编辑。传入视频的同时也可以传入图片，图片的Usage字段为Reference。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。x0b关于模型某个版本是否支持参考图片/视频/声音、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
@@ -12382,7 +12382,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
     QuotaType: string;
-    /** 任务的配额数单位：- 当QuotaType=Image时，单位为张- 当QuotaType=Video时，单位为秒- 当QuotaType=Text时，单位为token */
+    /** 任务的配额数。单位：张/秒/token数。当 QuotaType 为 Image 时，单位为张；当 QuotaType 为 Video 时，单位为秒；当 QuotaType 为 Text 时，单位为 token 数。 */
     QuotaLimit: number;
     /** 仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken */
     ApiToken?: string;
@@ -13909,11 +13909,11 @@ declare interface Vod {
   CreateAdaptiveDynamicStreamingTemplate(data: V20180717.CreateAdaptiveDynamicStreamingTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAdaptiveDynamicStreamingTemplateResponse>;
   /** 创建 AIGC 高级自定义主体 {@link V20180717.CreateAigcAdvancedCustomElementRequest} {@link V20180717.CreateAigcAdvancedCustomElementResponse} */
   CreateAigcAdvancedCustomElement(data: V20180717.CreateAigcAdvancedCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcAdvancedCustomElementResponse>;
-  /** 创建AIGC API Token {@link V20180717.CreateAigcApiTokenRequest} {@link V20180717.CreateAigcApiTokenResponse} */
+  /** 创建 AIGC API Token {@link V20180717.CreateAigcApiTokenRequest} {@link V20180717.CreateAigcApiTokenResponse} */
   CreateAigcApiToken(data: V20180717.CreateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcApiTokenResponse>;
   /** 创建 AIGC 声音复刻 {@link V20180717.CreateAigcAudioCloneRequest} {@link V20180717.CreateAigcAudioCloneResponse} */
   CreateAigcAudioClone(data: V20180717.CreateAigcAudioCloneRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcAudioCloneResponse>;
-  /** 创建AIGC生音频任务 {@link V20180717.CreateAigcAudioTaskRequest} {@link V20180717.CreateAigcAudioTaskResponse} */
+  /** 创建 AIGC 生音频任务 {@link V20180717.CreateAigcAudioTaskRequest} {@link V20180717.CreateAigcAudioTaskResponse} */
   CreateAigcAudioTask(data: V20180717.CreateAigcAudioTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcAudioTaskResponse>;
   /** 创建AIGC自定义主体 {@link V20180717.CreateAigcCustomElementRequest} {@link V20180717.CreateAigcCustomElementResponse} */
   CreateAigcCustomElement(data: V20180717.CreateAigcCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomElementResponse>;

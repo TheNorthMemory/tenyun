@@ -1214,9 +1214,9 @@ declare interface TimeValue {
 
 /** 转录服务加入TRTC房间的参数。 */
 declare interface TranscriptionParam {
-  /** 转录服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351)，注意这个userId不能与其他TRTC或者转录服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。 */
+  /** 转录服务在TRTC房间使用的UserId，注意这个userId不能与其他TRTC或者转录服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。 */
   UserId: string;
-  /** 转录服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910)的方案。 */
+  /** 转录服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算UserSig的方案。 */
   UserSig: string;
   /** 转录用户白名单，开始服务时，为空或不填表示转录所有主播音频，填具体值表示转录指定主播音频。使用黑白名单时，同一个用户同时在黑白名单时，以黑名单为主。 */
   SubscribeList?: TranscriptionUserInfoParams[];
@@ -3047,6 +3047,8 @@ declare interface VoiceCloneRequest {
   Model?: string;
   /** 需要合成的语言，默认为空，表示自动识别flow_02_turbo支持以下语言：zh：中文en：英文ja：日语ko：韩语yue：粤语ms：马来语ar：阿拉伯语id：印尼语th：泰语vi：越南语flow_01_ex支持以下语言：zh：中文（简体） (Chinese Simplified)zh-tw：中文（繁体） (Chinese Traditional)en：英语 (English)ja：日语 (Japanese)ko：韩语 (Korean)ms：马来语 (Malay)yue：粤语 (Cantonese)ar：阿拉伯语 (Arabic)ru：俄语 (Russian)es：西班牙语 (Spanish)fr：法语 (French)pt：葡萄牙语 (Portuguese)de：德语 (German)tr：土耳其语 (Turkish)nl：荷兰语 (Dutch)uk：乌克兰语 (Ukrainian)vi：越南语 (Vietnamese)id：印尼语 (Indonesian)it：意大利语 (Italian)th：泰语 (Thai)pl：波兰语 (Polish)ro：罗马尼亚语 (Romanian)el：希腊语 (Greek)cs：捷克语 (Czech)fi：芬兰语 (Finnish)hi：印地语 (Hindi)bg：保加利亚语 (Bulgarian)da：丹麦语 (Danish)he：希伯来语 (Hebrew)fa：波斯语（法尔西语） (Persian)sk：斯洛伐克语 (Slovak)sv：瑞典语 (Swedish)hr：克罗地亚语 (Croatian)tl：菲律宾语（他加禄语） (Filipino)hu：匈牙利语 (Hungarian)no：挪威语 (Norwegian)sl：斯洛文尼亚语 (Slovenian)ca：加泰罗尼亚语 (Catalan)nn：新挪威语 (Nynorsk)ta：泰米尔语 (Tamil)af：南非荷兰语 (Afrikaans) */
   Language?: string;
+  /** 拓展参数 */
+  ExtraParams?: string;
 }
 
 declare interface VoiceCloneResponse {

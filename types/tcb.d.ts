@@ -1674,6 +1674,22 @@ declare interface AssumeRoleForAllocatedEnvResponse {
   RequestId?: string;
 }
 
+declare interface BindClsRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** CLS地域 */
+  ClsRegion: string;
+  /** CLS 日志集id */
+  ClsLogsetId: string;
+  /** CLS 日志主题ID */
+  ClsTopicId: string;
+}
+
+declare interface BindClsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindStorageSourceRequest {
   /** 环境ID */
   EnvId: string;
@@ -3689,6 +3705,8 @@ declare interface Tcb {
   AllocateEnv(data: AllocateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<AllocateEnvResponse>;
   /** 为环境池里的环境申请角色临时凭证 {@link AssumeRoleForAllocatedEnvRequest} {@link AssumeRoleForAllocatedEnvResponse} */
   AssumeRoleForAllocatedEnv(data: AssumeRoleForAllocatedEnvRequest, config?: AxiosRequestConfig): AxiosPromise<AssumeRoleForAllocatedEnvResponse>;
+  /** 绑定用户自定义CLS日志主题 {@link BindClsRequest} {@link BindClsResponse} */
+  BindCls(data: BindClsRequest, config?: AxiosRequestConfig): AxiosPromise<BindClsResponse>;
   /** 云存储绑定外部存储源 {@link BindStorageSourceRequest} {@link BindStorageSourceResponse} */
   BindStorageSource(data: BindStorageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<BindStorageSourceResponse>;
   /** 检查是否开通Tcb服务 {@link CheckTcbServiceRequest} {@link CheckTcbServiceResponse} */

@@ -72,6 +72,7 @@ import Cloudapp, { Versions as CloudappVersions } from "./cloudapp";
 import Cloudaudit, { Versions as CloudauditVersions } from "./cloudaudit";
 import Cloudhsm, { Versions as CloudhsmVersions } from "./cloudhsm";
 import Cloudmate, { Versions as CloudmateVersions } from "./cloudmate";
+import Cloudrc, { Versions as CloudrcVersions } from "./cloudrc";
 import Cloudstudio, { Versions as CloudstudioVersions } from "./cloudstudio";
 import Cls, { Versions as ClsVersions } from "./cls";
 import Cme, { Versions as CmeVersions } from "./cme";
@@ -177,6 +178,7 @@ import Omics, { Versions as OmicsVersions } from "./omics";
 import Open, { Versions as OpenVersions } from "./open";
 import Organization, { Versions as OrganizationVersions } from "./organization";
 import Partners, { Versions as PartnersVersions } from "./partners";
+import Portal, { Versions as PortalVersions } from "./portal";
 import Postgres, { Versions as PostgresVersions } from "./postgres";
 import Privatedns, { Versions as PrivatednsVersions } from "./privatedns";
 import Pts, { Versions as PtsVersions } from "./pts";
@@ -333,6 +335,7 @@ export declare type SERVICE_VERSIONS = {
   cloudaudit: CloudauditVersions,
   cloudhsm: CloudhsmVersions,
   cloudmate: CloudmateVersions,
+  cloudrc: CloudrcVersions,
   cloudstudio: CloudstudioVersions,
   cls: ClsVersions,
   cme: CmeVersions,
@@ -438,6 +441,7 @@ export declare type SERVICE_VERSIONS = {
   open: OpenVersions,
   organization: OrganizationVersions,
   partners: PartnersVersions,
+  portal: PortalVersions,
   postgres: PostgresVersions,
   privatedns: PrivatednsVersions,
   pts: PtsVersions,
@@ -679,6 +683,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   cloudhsm: Cloudhsm,
   /** {@link Cloudmate Cloud Mate} */
   cloudmate: Cloudmate,
+  /** {@link Cloudrc 资源中心} */
+  cloudrc: Cloudrc,
   /** {@link Cloudstudio Cloud Studio（云端 IDE）} */
   cloudstudio: Cloudstudio,
   /** {@link Cls 日志服务} */
@@ -888,6 +894,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   organization: Organization,
   /** {@link Partners 渠道合作伙伴} */
   partners: Partners,
+  /** {@link Portal 官网门户服务} */
+  portal: Portal,
   /** {@link Postgres 云数据库 PostgreSQL} */
   postgres: Postgres,
   /** {@link Privatedns 私有域解析 Private DNS} */

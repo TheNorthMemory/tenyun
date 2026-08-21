@@ -3506,7 +3506,7 @@ declare interface VmGroup {
   MicroserviceType?: string;
   /** 应用类型 */
   ApplicationType?: string;
-  /** 部署组资源类型 */
+  /** 部署组资源类型枚举值：GW： 网关DEF： 普通业务部署组SVL： Serverless */
   GroupResourceType?: string;
   /** 部署组更新时间戳 */
   UpdatedTime?: number;
@@ -3556,6 +3556,64 @@ declare interface VmGroup {
   RepositoryType?: string;
   /** 是否自动重启 */
   LivenessAutoRestart?: boolean;
+  /** Mesh Sidecar 数据面版本通道枚举值：stable： 稳定版release： 最新版 */
+  MeshSidecarVersion?: string;
+  /** 业务日志配置 ID 列表 */
+  BusinessLogConfigIdList?: string;
+  /** 业务系统 ID */
+  BusinessLogDeliveryConfigIdList?: string;
+  /** String型普通说明场景 */
+  BusinessSystemId?: string;
+  /** 业务系统名称 */
+  BusinessSystemName?: string;
+  /** CLS 机器组 ID */
+  ClsMachineGroupId?: string;
+  /** 是否开启服务治理 */
+  EnableGovernance?: boolean;
+  /** 是否开启可观测 */
+  EnableTelemetry?: boolean;
+  /** 是否开启 OT Agent */
+  EnableTelemetryAgent?: boolean;
+  /** 是否开启单元化 */
+  EnabledUnit?: boolean;
+  /** 独享注册中心/配置中心实例列表 */
+  ExclusiveInstances?: ExclusiveInstance[];
+  /** 框架接入类型 */
+  FrameworkType?: string;
+  /** 服务治理实例模式 */
+  GovernanceType?: string;
+  /** 部署组关联实例 ID 列表 */
+  InstanceIdList?: string[];
+  /** 部署组是否处于停止状态 */
+  IsStop?: string;
+  /** K8s 命名空间名称 */
+  K8sNamespaceName?: string;
+  /** 请求语言 */
+  Language?: string;
+  /** 微服务子类型 */
+  MicroserviceSubType?: string;
+  /** 非侵入接入子类型 */
+  NonInvasiveType?: string;
+  /** 预停止脚本内容 */
+  PreStopScript?: string;
+  /** 实际使用的 K8s 命名空间名称 */
+  RealNamespaceName?: string;
+  /** Mesh 服务端口与健康检查配置列表 */
+  ServiceConfigList?: ServiceConfig[];
+  /** 服务治理配置聚合对象 */
+  ServiceGovernanceConfig?: ServiceGovernanceConfig;
+  /** 部署组标签列表 */
+  Tags?: Tag[];
+  /** Tapm OT Agent 版本 */
+  TapmOtAgentVersion?: string;
+  /** 单元环境类型 */
+  UnitEnvType?: string;
+  /** 单元 ID */
+  UnitId?: string;
+  /** 单元类型 */
+  UnitName?: string;
+  /** 部署组资源类型 */
+  UnitType?: string;
 }
 
 /** 虚拟机部署组其他字段 */

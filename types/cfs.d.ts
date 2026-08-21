@@ -256,7 +256,7 @@ declare interface FileSystemInfo {
   CreationToken?: string;
   /** 文件系统 ID */
   FileSystemId?: string;
-  /** 文件系统状态。取值范围：- creating:创建中- mounting:挂载中- create_failed:创建失败- available:可使用- unserviced:停服中- upgrading:升级中 */
+  /** 文件系统状态。取值范围：creating:创建中mounting:挂载中create_failed:创建失败available:可使用unserviced:停服中upgrading:升级中 */
   LifeCycleState?: string;
   /** 文件系统已使用容量。单位：Byte */
   SizeByte?: number;
@@ -306,6 +306,8 @@ declare interface FileSystemInfo {
   ExstraPerformanceInfo?: ExstraPerformanceInfo[] | null;
   /** basic：标准版元数据类型enhanced：增项版元数据类型 */
   MetaType?: string;
+  /** 业务场景。枚举值：AgentSandbox： 创建 AgentCFS */
+  Scenario?: string;
 }
 
 /** 条件过滤 */
@@ -713,19 +715,19 @@ declare interface CreateAutoSnapshotPolicyResponse {
 }
 
 declare interface CreateCfsFileSystemRequest {
-  /** 可用区名称，例如ap-beijing-1，请参考 概览 文档中的地域与可用区列表 */
+  /** 可用区名称取值参考：查询可用区列表 */
   Zone: string;
-  /** 网络类型，可选值为 VPC，CCN；其中 VPC 为私有网络， CCN 为云联网。通用标准型/性能型请选择VPC，Turbo标准型/性能型请选择CCN。 */
+  /** 网络类型枚举值：VPC： 私有网络CCN： 云联网通用标准型/性能型（含增强型）、吞吐型请选择VPCTurbo标准型/性能型可选VPC或CCN当 Scenario=AgentSandbox 时，即创建 AgentCFS时无需传入，传入将被忽略。 */
   NetInterface: string;
-  /** 权限组 ID,pgroupbasic 是默认权限组，通过控制查询权限组列表接口获取DescribeCfsPGroups */
+  /** 权限组 ID。权限组规定了一组可来访白名单及操作权限。取值参考：DescribeCfsPGroupspgroupbasic 为【默认权限组】，【默认权限组】允许所有IP地址访问及读写权限。 注意：当 Scenario=AgentSandbox 时，即创建 AgentCFS ，必须传入 pgroupbasic【默认权限组】，传其他值报错。 */
   PGroupId: string;
-  /** 文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择TURBO，不支持NFS、CIFS */
+  /** 文件系统协议类型枚举值：NFS： 通用标准型（含增强型）、通用性能型（含增强型）支持创建此协议的实例CIFS： 即SMB协议，仅部分可用区的通用标准型、吞吐型支持此协议。TURBO： Turbo标准型/Turbo性能型/AgentCFS是支持创建此协议的实例默认值：NFS */
   Protocol?: string;
-  /** 文件系统存储类型，默认值为 SD ；其中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。 */
+  /** 文件系统存储类型其中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。枚举值：SD： 通用标准型（含增强型）。通用标准型 version = v1.5，通用标准型（增强型） version = v3.1。HP： 通用性能型（含增强型）。通用性能型 version = v1.5，通用性能型（增强型） version = v3.1。TB： Turbo标准型TP： Turbo性能型THP： 吞吐型默认值：SD */
   StorageType?: string;
-  /** 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取，DescribeVpcs */
+  /** 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填。取值参考：查询VPC列表当 Scenario=AgentSandbox 时，即创建 AgentCFS 时无需传入，传入将被忽略。 */
   VpcId?: string;
-  /** 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取，DescribeSubnets */
+  /** 子网 ID，若网络类型选择的是VPC，该字段为必填。取值参考：查询子网列表当 Scenario=AgentSandbox 时，即创建 AgentCFS 时无需传入，传入将被忽略。 */
   SubnetId?: string;
   /** 指定IP地址，仅VPC网络支持；若不填写、将在该子网下随机分配 IP，Turbo系列当前不支持指定 */
   MountIP?: string;
@@ -737,22 +739,24 @@ declare interface CreateCfsFileSystemRequest {
   ResourceTags?: TagInfo[];
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。用于保证请求幂等性的字符串失效时间为2小时。 */
   ClientToken?: string;
-  /** 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取，通过接口DescribeCcns */
+  /** 云联网ID， 若网络类型选择的是CCN，该字段为必填取值参考：查询CCN列表当 Scenario=AgentSandbox 时，即创建 AgentCFS 时无需传入，传入将被忽略 */
   CcnId?: string;
-  /** 云联网中CFS使用的网段， 若网络类型选择的是Ccn，该字段为必填，且不能和Ccn中已经绑定的网段冲突 */
+  /** 云联网中CFS使用的网段， 若网络类型选择的是CCN，该字段为必填，且不能和Ccn中已经绑定的网段冲突当 Scenario=AgentSandbox 时，即创建 AgentCFS 时无需传入，传入将被忽略 */
   CidrBlock?: string;
-  /** 文件系统容量，turbo系列必填，单位为GiB。 turbo标准型单位GB，起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。turbo性能型起售10TiB，即10240 GiB；扩容步长10TiB，10240 GiB。 */
+  /** 文件系统容量，turbo系列必填单位：GiBTurbo标准型起售20TiB，即20480 GiB，扩容步长10TiB，即10240 GiB。Turbo性能型起售10TiB，即10240 GiB，扩容步长10TiB，即10240 GiB。 */
   Capacity?: number;
-  /** 文件系统快照ID，通过查询快照列表获取该参数，DescribeCfsSnapshots */
+  /** 文件系统快照 ID取值参考：DescribeCfsSnapshots */
   SnapshotId?: string;
-  /** 定期快照策略ID，通过查询快照策略信息获取,DescribeAutoSnapshotPolicies */
+  /** 定期快照策略 ID取值参考：DescribeAutoSnapshotPolicies */
   AutoSnapshotPolicyId?: string;
-  /** 是否开启默认扩容，仅turbo类型文件存储支持 */
+  /** 是否开启自动扩容策略，仅turbo类型文件存储支持 */
   EnableAutoScaleUp?: boolean;
-  /** v1.5：创建普通版的通用文件系统；v3.1：创建增强版的通用文件系统说明：增强版的通用系统需要开通白名单才能使用，如有需要请提交工单与我们联系。 */
+  /** 文件系统版本号。枚举值：v1.5： 创建通用标准型/通用性能型文件系统v3.1： 创建通用标准型（增强型）/通用性能型（增强型）文件系统，如需创建增强型，此为必填项。v4.0： 创建Turbo标准型、Turbo性能型、吞吐型文件系统，非必填项创建通用标准型（增强型）、通用性能型（增强型）须加白主账号，如需使用请联系我们。 */
   CfsVersion?: string;
-  /** turbo文件系统元数据属性basic：创建标准型的元数据enhanced：创建增强型的元数据 */
+  /** turbo文件系统元数据类型枚举值：basic： 创建标准版元数据。enhanced： 创建增强版元数据详情参见Turbo 文件系统元数据类型 */
   MetaType?: string;
+  /** 业务场景。枚举值：AgentSandbox： 创建 AgentCFS 时必传 */
+  Scenario?: string;
 }
 
 declare interface CreateCfsFileSystemResponse {

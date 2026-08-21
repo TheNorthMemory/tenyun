@@ -207,9 +207,9 @@ declare interface DownloadVRSModelResponse {
 declare interface GetTrainingTextRequest {
   /** 复刻类型。5 - 一句话声音复刻。 */
   TaskType?: number;
-  /** 音色场景。（仅支持一句话声音复刻，其余复刻类型不生效） 0 - 通用场景（默认）； 1 - 聊天场景； 2 - 阅读场景； 3 - 资讯播报场景。 */
+  /** 音色场景。（仅支持一句话声音复刻，其余复刻类型不生效）0 - 通用场景（默认）；1 - 聊天场景；2 - 阅读场景；3 - 资讯播报场景。 */
   Domain?: number;
-  /** 文本语种。（仅支持一句话声音复刻，其余复刻类型不生效） 1 - 中文（默认）。 */
+  /** 文本语种。（仅支持一句话声音复刻，其余复刻类型不生效）1 - 中文（默认）。 */
   TextLanguage?: number;
 }
 

@@ -1222,6 +1222,14 @@ declare interface SeeComprehensionResult {
   Keywords?: string[];
 }
 
+/** TWeSee 任务删除条件 */
+declare interface SeeDeleteTaskCondition {
+  /** 条件类型。枚举值：TaskId： 精确匹配任务 IDTimeRange： 匹配任务时间范围与指定范围有重合的任务。值的格式为 UnixTimestampStart,UnixTimestampEnd，其中起止时间均为秒级 UNIX 时间戳，且结束时间不早于起始时间CreateTimeBefore： 匹配在指定时间前创建的任务。值为秒级 UNIX 时间戳COSURI： 精确匹配任务来源 COS URI，值必须以 cos:// 开头COSURIPrefix： 按前缀匹配任务来源 COS URI，值必须以 cos:// 开头 */
+  Type: string;
+  /** 条件值列表。同一条件内的多个值之间为 OR 关系，至少传入一个非空值。 */
+  Values: string[];
+}
+
 /** TWeSee 标签持续检测配置 */
 declare interface SeeDetectContinuousConfig {
   /** 检测标签。可选值：- `person_motionless`：人物静止 */
@@ -3290,6 +3298,24 @@ declare interface DeleteTWeSeeCallbackRequest {
 }
 
 declare interface DeleteTWeSeeCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTWeSeeTasksByConditionRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类目。枚举值：COMPREHENSION： 视觉理解HIGHLIGHT： 视频浓缩 */
+  ServiceCategory: string;
+  /** 任务删除条件，至少传入一个条件。不同条件之间为 AND 关系，同一条件的 Values 之间为 OR 关系。 */
+  Conditions: SeeDeleteTaskCondition[];
+  /** 通道 ID默认值：0 */
+  ChannelId?: number;
+}
+
+declare interface DeleteTWeSeeTasksByConditionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6913,6 +6939,8 @@ declare interface Iotexplorer {
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
   /** 删除 TWeSee 回调目标 {@link DeleteTWeSeeCallbackRequest} {@link DeleteTWeSeeCallbackResponse} */
   DeleteTWeSeeCallback(data: DeleteTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeCallbackResponse>;
+  /** 删除 TWeSee 任务 {@link DeleteTWeSeeTasksByConditionRequest} {@link DeleteTWeSeeTasksByConditionResponse} */
+  DeleteTWeSeeTasksByCondition(data: DeleteTWeSeeTasksByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeTasksByConditionResponse>;
   /** 删除TWeTalk智能体 {@link DeleteTWeTalkAIBotRequest} {@link DeleteTWeTalkAIBotResponse} */
   DeleteTWeTalkAIBot(data: DeleteTWeTalkAIBotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkAIBotResponse>;
   /** 删除TWeTalk Agent {@link DeleteTWeTalkAgentRequest} {@link DeleteTWeTalkAgentResponse} */

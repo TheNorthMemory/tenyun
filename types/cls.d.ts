@@ -1344,6 +1344,8 @@ declare interface ExportInfo {
   SyntaxRule?: number;
   /** 导出字段 */
   DerivedFields?: string[];
+  /** 日志导出创建时间，毫秒时间戳单位：ms */
+  CreateTimestamp?: number;
 }
 
 /** 跨账户投递外部角色 */

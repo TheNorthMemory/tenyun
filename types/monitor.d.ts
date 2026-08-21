@@ -1809,6 +1809,14 @@ declare namespace V20180724 {
     Version: string | null;
   }
 
+  /** Grafana 版本 */
+  interface GrafanaVersion {
+    /** 版本别名 */
+    Alias: string;
+    /** 版本 */
+    Version: string;
+  }
+
   /** 实例维度组合数组 */
   interface Instance {
     /** 实例的维度组合 */
@@ -3607,6 +3615,8 @@ declare namespace V20180724 {
     GrafanaInitPassword?: string;
     /** 标签 */
     TagSpecification?: PrometheusTag[];
+    /** 自定义版本，可用版本从 DescribeGrafanaVersions 接口获取 */
+    DockerImage?: string;
     /** 是否自动选择代金券，默认为 false */
     AutoVoucher?: boolean;
   }
@@ -4842,6 +4852,16 @@ declare namespace V20180724 {
   interface DescribeGrafanaNotificationChannelsResponse {
     /** 告警通道数组 */
     NotificationChannelSet?: GrafanaNotificationChannel[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeGrafanaVersionsRequest {
+  }
+
+  interface DescribeGrafanaVersionsResponse {
+    /** 可选版本 */
+    Versions?: GrafanaVersion[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -6872,6 +6892,8 @@ declare interface Monitor {
   DescribeGrafanaIntegrations(data: V20180724.DescribeGrafanaIntegrationsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeGrafanaIntegrationsResponse>;
   /** 列出 Grafana 告警通道 {@link V20180724.DescribeGrafanaNotificationChannelsRequest} {@link V20180724.DescribeGrafanaNotificationChannelsResponse} */
   DescribeGrafanaNotificationChannels(data: V20180724.DescribeGrafanaNotificationChannelsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeGrafanaNotificationChannelsResponse>;
+  /** 列出 Grafana 版本 {@link V20180724.DescribeGrafanaVersionsRequest} {@link V20180724.DescribeGrafanaVersionsResponse} */
+  DescribeGrafanaVersions(data: V20180724.DescribeGrafanaVersionsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeGrafanaVersionsResponse>;
   /** 列出 Grafana 白名单 {@link V20180724.DescribeGrafanaWhiteListRequest} {@link V20180724.DescribeGrafanaWhiteListResponse} */
   DescribeGrafanaWhiteList(data: V20180724.DescribeGrafanaWhiteListRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeGrafanaWhiteListResponse>;
   /** 列出实例已安装的插件 {@link V20180724.DescribeInstalledPluginsRequest} {@link V20180724.DescribeInstalledPluginsResponse} */
