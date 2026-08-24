@@ -1030,6 +1030,18 @@ declare interface DescribeZoneInstanceConfigInfosResponse {
   RequestId?: string;
 }
 
+declare interface DetachApplicationRoleRequest {
+  /** 集群 ID */
+  ClusterId?: string;
+  /** 解绑的 CVM 实例列表 */
+  Instances?: string[];
+}
+
+declare interface DetachApplicationRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterMachineRequest {
   /** 集群 ID */
   ClusterId: string;
@@ -9045,6 +9057,8 @@ declare interface Tke {
   DescribeNodePoolsElasticityStrength(data?: DescribeNodePoolsElasticityStrengthRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodePoolsElasticityStrengthResponse>;
   /** 查询原生节点机型配置 {@link DescribeZoneInstanceConfigInfosRequest} {@link DescribeZoneInstanceConfigInfosResponse} */
   DescribeZoneInstanceConfigInfos(data?: DescribeZoneInstanceConfigInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneInstanceConfigInfosResponse>;
+  /** 解绑原生节点 Application Role {@link DetachApplicationRoleRequest} {@link DetachApplicationRoleResponse} */
+  DetachApplicationRole(data?: DetachApplicationRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DetachApplicationRoleResponse>;
   /** 修改原生节点 {@link ModifyClusterMachineRequest} {@link ModifyClusterMachineResponse} */
   ModifyClusterMachine(data: ModifyClusterMachineRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterMachineResponse>;
   /** 修改健康检测策略 {@link ModifyHealthCheckPolicyRequest} {@link ModifyHealthCheckPolicyResponse} */

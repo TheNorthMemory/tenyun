@@ -692,6 +692,20 @@ declare interface ImageInfo {
   ImageName?: string | null;
   /** 是否支持数据构建 */
   SupportDataPipeline?: boolean | null;
+  /** 镜像仓库用户名密码信息(仅当ImageType为CUSTOM第三方镜像的时候需要) */
+  ImageSecret?: ImageSecret | null;
+}
+
+/** 自定义镜像仓库凭据 */
+declare interface ImageSecret {
+  /** 用于加密密码的KMS公钥ID */
+  KeyId?: string | null;
+  /** 用户名 */
+  Username?: string | null;
+  /** 密码,base64编码； 当keyId不为空时，密码是加密后的 */
+  Password?: string | null;
+  /** 用户凭据ID */
+  SecretId?: string | null;
 }
 
 /** 多模态对话图片信息 */

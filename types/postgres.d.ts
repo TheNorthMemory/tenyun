@@ -820,6 +820,22 @@ declare interface ProxyAddress {
   Routes?: ProxyRoute[];
   /** 连接池大小 */
   ConnectionPoolLimit?: number;
+  /** 读写分离开关。启用后 proxy 将读请求分发到只读节点，写请求仍走主节点。 */
+  RwSplitEnable?: boolean;
+  /** 权重模式枚举值：system： 系统自动分配custom： 用户自定义权重 */
+  WeightMode?: string;
+  /** 新增只读是否自动加入读写分离 */
+  RoAutoAdd?: boolean;
+  /** 延迟剔除开关 */
+  LatencyRemove?: boolean;
+  /** 延迟剔除阈值单位：秒 */
+  LatencyRemoveTime?: number;
+  /** 最小保留路由数。在延迟/故障剔除时，至少保留的路由数量，防止所有节点被剔除导致服务不可用。 */
+  MinRouteNum?: number;
+  /** 只读全部异常时是否回切到主 */
+  FailOver?: boolean;
+  /** 负载均衡策略枚举值：0： 按活跃连接数(默认)1： 按请求数 */
+  LoadBalancePolicy?: number;
 }
 
 /** Proxy 实例（组）详细信息，包含基础信息、节点列表、接入地址列表。 */
@@ -880,7 +896,7 @@ declare interface ProxyRoute {
   Role?: string;
   /** 路由权重，取值范围 [0, 100] */
   Weight?: number;
-  /** 路由状态：available/unavailable */
+  /** 路由状态：online/offline枚举值：online： 节点处于在线状态offline： 节点处于下线状态 */
   Status?: string;
 }
 
@@ -3053,9 +3069,25 @@ declare interface ModifyDBProxyAddressRequest {
   Description?: string;
   /** 连接池开关枚举值：true： 开启false： 关闭 */
   ConnectionPool?: boolean;
+  /** 权重模式枚举值：system： 系统自动分配权重custom： 自定义权重，此模式下ProxyAllocation参数必传默认值：system */
+  WeightMode?: string;
+  /** system入参限制：路由权重列表。若 WeightMode 传的是system或不传 ，则传入的权重不生效，由系统分配默认权重。 */
+  ProxyAllocation?: ProxyRoute[];
+  /** 新增只读实例是否自动加入当前连接地址，仅后续新建实例生效 */
+  RoAutoAdd?: boolean;
+  /** 延迟剔除开关 */
+  LatencyRemove?: boolean;
+  /** 延迟剔除阈值，仅在延迟剔除开关打开时有效单位：秒 */
+  LatencyRemoveTime?: number;
+  /** 最小保留路由数。在延迟/故障剔除时，至少保留的路由数量，防止所有节点被剔除导致服务不可用。 */
+  MinRouteNum?: number;
+  /** 负载均衡策略枚举值：0： 按活跃连接数(默认)1： 按请求数 */
+  LoadBalancePolicy?: number;
 }
 
 declare interface ModifyDBProxyAddressResponse {
+  /** 异步任务 ID，用于 DescribeTasks 查询进度 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

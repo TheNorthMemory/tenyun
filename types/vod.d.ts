@@ -7969,6 +7969,8 @@ declare namespace V20180717 {
   interface SubtitleInfoInput {
     /** 字幕 ID。 */
     Id: string;
+    /** 指定要压制到视频中的字幕轨道下标。取值从0开始，0表示使用源视频中的第一条字幕轨。仅当 Id 取值为SUBTITLE_ID_PLACE_HOLDER 时，该参数有效。StreamIndex 必须与源文件中的字幕轨索引一致。例如，源文件中的字幕轨为 stream#0:3，则 StreamIndex 应为3，否则可能导致任务处理失败。 */
+    StreamIndex?: number;
     /** 字体类型。枚举值：hei.ttf： 黑体song.ttf： 宋体kai.ttf（推荐）或 simkai.ttf： 楷体msyh.ttf： 微软雅黑msyhbd.ttf： 微软雅黑加粗hkjgt.ttf： 华康金刚体dhttx.ttf： 典黑体特细xqgdzt.ttf： 喜鹊古字典体qpcyt.ttf： 巧拼超圆体arial.ttf： 仅支持英文dinalternate.ttf： DIN Alternate Boldhelveticalt.ttf： Helveticahelveticains.ttf： Helvetica Inserattrajanpro.ttf： TrajanPro-Boldkorean.ttf： 韩语japanese.ttf： 日语thai.ttf： 泰语roboto.ttf： Robotonotosans.ttf： NotoSansnotosansthai.ttf： 泰语NotoSansThaisarabun.ttf： 泰语Sarabunkanit.ttf： 泰语Kanitcharmonman.ttf： 泰语Charmonmannotonaskharabic.ttf： 阿拉伯语NotoNaskhArabicnotosansdevanagari.ttf： 印度语NotoSansDevanagarinotosanstc.ttf： 粤语思源黑体NotoSansTCnotosanskr.ttf： 韩语NotoSansKRgothica1.ttf： 韩语GothicA1nanummyeongjo.ttf： 韩语NanumMyeongjonotosansjp.ttf： 日语NotoSansJPnotoserifjp.ttf： 日语NotoSerifJPshipporimincho.ttf： 日语ShipporiMincho默认值：hei.ttf 黑体 */
     FontType?: string;
     /** 字体大小，不指定则以字幕文件中为准。支持像素和百分比格式：像素：Npx，N范围：(0,4096]。百分比：N%，N范围：(0,100]；例如，10%表示字幕字体大小=10%*源视频高度。不填且字幕文件中无设置时，默认源视频高度的5%。 */

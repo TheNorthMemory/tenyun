@@ -3144,6 +3144,18 @@ declare interface ModifyInstanceParamsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstancePasswordPolicyRequest {
+  /** 实例 ID。请登录 Redis 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 实例的密码复杂度策略控制对象，包含密码长度及各类字符（字母/数字/特殊符号）最小数量的校验指标。 */
+  PasswordPolicy: PasswordPolicy;
+}
+
+declare interface ModifyInstancePasswordPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstancePasswordRequest {
   /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -3769,6 +3781,8 @@ declare interface Redis {
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 修改Redis密码 {@link ModifyInstancePasswordRequest} {@link ModifyInstancePasswordResponse} */
   ModifyInstancePassword(data: ModifyInstancePasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePasswordResponse>;
+  /** 修改存量实例密码复杂度 {@link ModifyInstancePasswordPolicyRequest} {@link ModifyInstancePasswordPolicyResponse} */
+  ModifyInstancePasswordPolicy(data: ModifyInstancePasswordPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstancePasswordPolicyResponse>;
   /** 设置实例输入模式 {@link ModifyInstanceReadOnlyRequest} {@link ModifyInstanceReadOnlyResponse} */
   ModifyInstanceReadOnly(data: ModifyInstanceReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceReadOnlyResponse>;
   /** 修改审计日志 {@link ModifyLogRequest} {@link ModifyLogResponse} */

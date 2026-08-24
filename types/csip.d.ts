@@ -36,6 +36,52 @@ declare interface AIAgentAsset {
   CommandPluginState?: CommandPluginState;
 }
 
+/** AIAgent 资产凭据详情 */
+declare interface AIAgentCredential {
+  /** 凭据 ID */
+  ID?: number;
+  /** 凭据名称 */
+  CredName?: string;
+  /** 凭据类型枚举值：OAUTH： oauth 类型凭据API_TOKEN： token 类型凭据CLOUD_AK： aksk 类型凭据 */
+  CredType?: string;
+  /** 凭据所在位置标识 */
+  Locations?: AIAgentCredentialLocation[];
+  /** 最近扫描发现时间 */
+  DetectTime?: string;
+  /** 该凭据的泄露位置总数 */
+  HitCount?: number;
+}
+
+/** AIAgent 资产凭证位置 */
+declare interface AIAgentCredentialLocation {
+  /** 实例 ID */
+  InstanceID?: string;
+  /** 容器 ID */
+  ContainerID?: string;
+  /** 凭据所在路径 */
+  Path?: string;
+  /** 凭据所在行号 */
+  Line?: number;
+  /** 凭据脱敏片段 */
+  Content?: string;
+  /** 凭据是否托管枚举值：1： 托管0： 未托管 */
+  Status?: number;
+  /** 凭据托管 ID */
+  DelegateID?: number;
+}
+
+/** AI Agent 的 skill 详情 */
+declare interface AIAgentSkillInfo {
+  /** skill 名称 */
+  Name?: string;
+  /** skill 路径 */
+  Path?: string;
+  /** skill 版本 */
+  Version?: string;
+  /** skill 描述 */
+  Description?: string;
+}
+
 /** AI安全助手会话信息 */
 declare interface AIAnalysisSession {
   /** 标题 */
@@ -58,19 +104,19 @@ declare interface AIRecommendAction {
 
 /** AI助手用户身份信息 */
 declare interface AIScheduleUserIdentity {
-  /**  */
+  /** appid */
   AppId?: number;
-  /**  */
+  /** 账号Uin */
   Uin?: string;
-  /**  */
+  /** 子账号uin */
   SubUin?: string;
-  /**  */
+  /** 用户ID */
   UserId?: string;
-  /**  */
+  /** 机器人ID */
   BotId?: string;
-  /**  */
+  /** 聊天ID */
   ChatId?: string;
-  /**  */
+  /** 渠道标识，如 wecom / qq / wx / feishu / dingtalk / cloud */
   Channel?: string;
 }
 
@@ -760,6 +806,30 @@ declare interface AssetClusterPod {
   IsCore?: number;
   /** 是否新资产 1新 */
   IsNewAsset?: number;
+}
+
+/** 资产中组件信息 */
+declare interface AssetComponent {
+  /** 组件名 */
+  Name?: string;
+  /** 组件版本 */
+  Version?: string;
+  /** 组件类型 */
+  Type?: string;
+  /** 首次发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  FirstFoundTime?: string;
+  /** 最后发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestFoundTime?: string;
+  /** 组件id */
+  Id?: string;
+  /** 组件所属账号名 */
+  OwnerAccountName?: string;
+  /** 组件所属账号appid */
+  OwnerAppId?: number;
+  /** 组件所属账号uin */
+  OwnerUin?: string;
+  /** 影响镜像数 */
+  AffectedImageCount?: number;
 }
 
 /** 资产详情信息 */
@@ -1792,7 +1862,7 @@ declare interface BaselineFixRecord {
 declare interface BaselineHostAsset {
   /** 云主机实例 ID，格式形如 ins-instanceid。 */
   InstanceID?: string;
-  /** CWP（云镜）侧主机唯一标识 QUUID。 */
+  /** 主机唯一标识 QUUID。 */
   QUUID?: string;
   /** 主机 Agent 上报的 UUID。 */
   UUID?: string;
@@ -2564,6 +2634,44 @@ declare interface CategoryNode {
   AssetTypes?: AssetTypeNode[];
 }
 
+/** 用于联通性检测主机信息 */
+declare interface CheckConnectivityHostInfo {
+  /** 主机id */
+  HostId?: string;
+  /** 主机ip */
+  HostIp?: string;
+  /** 主机名 */
+  HostName?: string;
+  /** docker版本 */
+  DockerVersion?: string;
+  /** docker文件系统类型 */
+  DockerFileSystemDriver?: string;
+  /** 状态 */
+  Status?: string;
+  /** 是否是容器 */
+  IsContainerd?: boolean;
+  /** 主机类型 */
+  MachineType?: string;
+  /** 公网ip */
+  PublicIp?: string;
+  /** 主机UUID */
+  Uuid?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 主机所在region id */
+  HostRegionId?: number;
+  /** 主机所在地域 */
+  HostRegion?: string;
+  /** 集群所属项目 */
+  Project?: ProjectInfo;
+  /** 集群标签 */
+  Tags?: Tags[];
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群名 */
+  ClusterName?: string;
+}
+
 /** 检查项视角风险 */
 declare interface CheckViewRiskItem {
   /** 检查项规则ID */
@@ -3046,6 +3154,34 @@ declare interface CommandPluginState {
   InstallStatus?: string;
 }
 
+/** 命令沙箱文件访问规则基础信息 */
+declare interface CommandSandboxFileRule {
+  /** 规则 ID */
+  RuleID?: number;
+  /** 规则来源类型枚举值：SYSTEM ： 系统预置规则CUSTOM： 自定义规则 */
+  RuleType?: string;
+  /** 规则更新时间 */
+  UpdateTime?: string;
+  /** 规则内容 */
+  RuleContent?: CommandSandboxFileRuleBase;
+}
+
+/** 命令沙箱文件访问规则基础信息 */
+declare interface CommandSandboxFileRuleBase {
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则资产范围类型枚举值：HOST： 主机CONTAINER： 容器 */
+  BelongAssetType?: string;
+  /** 规则生效范围 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 规则行为类型枚举值：RO： 只读RW： 可读写 */
+  Action?: string;
+  /** 白名单路径 */
+  PathWhitelist?: string[];
+  /** 规则状态枚举值：ON ： 启用OFF ： 禁用 */
+  Status?: string;
+}
+
 /** 云资源配置检测章节项 */
 declare interface ComplianceChapterItem {
   /** 菜单ID */
@@ -3134,6 +3270,14 @@ declare interface ConditionMatch {
   ImageAddressMatchString?: string;
   /** 匹配条件，取值：EQUALS-等于/NOT_EQUALS-不等于/STARTS_WITH-以…开头/NOT_STARTS_WITH-不以…开头/ENDS_WITH-以…结尾/NOT_ENDS_WITH-不以…结尾/CONTAINS-包含/NOT_CONTAINS-不包含 */
   MatchType?: string;
+}
+
+/** 联通性检查配置 */
+declare interface ConnectivityDetectConfig {
+  /** 主机quuid */
+  Quuid?: string;
+  /** 主机uuid */
+  Uuid?: string;
 }
 
 /** 容器应用信息 */
@@ -6622,12 +6766,836 @@ declare interface IaCFileRisk {
   Suggestion?: string;
 }
 
+/** 镜像资产详情 */
+declare interface ImageAssetDetail {
+  /** 镜像摘要 */
+  ImageDigest?: string;
+  /** 仓库地址 */
+  ImageRepoAddress?: string;
+  /** 仓库类型 */
+  RegistryType?: string;
+  /** 镜像名 */
+  ImageName?: string;
+  /** 镜像tag */
+  ImageTag?: string;
+  /** 最后扫描时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestScanTime?: string;
+  /** 扫描状态枚举值：0： 初始状态1： 已下发2： 扫描中3： 扫描完成4： 扫描超时5： 扫描失败 */
+  ScanStatus?: number;
+  /** 漏洞数 */
+  VulCnt?: number;
+  /** 木马数 */
+  VirusCnt?: number;
+  /** 敏感信息数 */
+  SensitiveCnt?: number;
+  /** 仓库实例id */
+  InstanceId?: string;
+  /** 镜像仓库名 */
+  InstanceName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 是否授权 */
+  IsAuthorized?: number;
+  /** 镜像大小 */
+  ImageSize?: number;
+  /** 镜像id */
+  ImageId?: string;
+  /** 仓库所在地域 */
+  RegistryRegion?: string;
+  /** 镜像创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ImageCreateTime?: string;
+  /** id */
+  Id?: string;
+  /** 镜像所属账号名 */
+  OwnerAccountName?: string;
+  /** 镜像所属账号uin */
+  OwnerUin?: string;
+  /** 镜像所属账号appid */
+  OwnerAppId?: number;
+  /** 低风险漏洞数 */
+  LowLevelVulCnt?: number;
+  /** 中风险漏洞数 */
+  MediumLevelVulCnt?: number;
+  /** 高风险漏洞数 */
+  HighLevelVulCnt?: number;
+  /** 严重风险漏洞数 */
+  CriticalLevelVulCnt?: number;
+  /** 低危木马数 */
+  LowLevelVirusCnt?: number;
+  /** 中危木马数 */
+  MediumLevelVirusCnt?: number;
+  /** 高危木马数 */
+  HighLevelVirusCnt?: number;
+  /** 严重木马数 */
+  CriticalLevelVirusCnt?: number;
+  /** 应急漏洞数 */
+  EmergencyVulCnt?: number;
+  /** 低危敏感信息数 */
+  LowLevelSensitiveCnt?: number;
+  /** 中危敏感信息数 */
+  MediumLevelSensitiveCnt?: number;
+  /** 高危敏感信息数 */
+  HighLevelSensitiveCnt?: number;
+  /** 严重敏感信息数 */
+  CriticalLevelSensitiveCnt?: number;
+}
+
+/** 镜像资产信息 */
+declare interface ImageAssetInfo {
+  /** 镜像仓库地址 */
+  ImageRepoAddress?: string;
+  /** 镜像摘要 */
+  ImageDigest?: string;
+  /** 镜像仓库类型 */
+  RegistryType?: string;
+  /** 镜像名 */
+  ImageName?: string;
+  /** 镜像tag */
+  ImageTag?: string;
+  /** 镜像大小 */
+  ImageSize?: number;
+  /** 最后扫描时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestScanTime?: string;
+  /** 扫描状态枚举值：INIT： 未扫描SCANNING： 扫描中FINISH： 扫描成功TIMEOUT： 扫描超时FAILED： 扫描失败STOPPING： 终止中CANCELLED： 扫描已取消CREATING： 扫描任务创建中LICENSE_NOT_ENOUGH： 授权不足 */
+  ScanStatus?: string;
+  /** 漏洞数 */
+  VulCnt?: number;
+  /** 木马数 */
+  VirusCnt?: number;
+  /** 敏感信息数 */
+  SensitiveCnt?: number;
+  /** 镜像操作系统 */
+  OsName?: string;
+  /** 所属仓库实例id */
+  InstanceId?: string;
+  /** 所属镜像仓库实例名 */
+  InstanceName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 是否授权 */
+  IsAuthorized?: number;
+  /** 镜像仓库所在region */
+  RegistryRegion?: string;
+  /** id */
+  Id?: string;
+  /** 镜像id */
+  ImageId?: string;
+  /** 镜像创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ImageCreateTime?: string;
+  /** 是否是最新镜像 */
+  IsLatestImage?: boolean;
+  /** 低风险漏洞数 */
+  LowLevelVulCnt?: number;
+  /** 中风险漏洞数 */
+  MediumLevelVulCnt?: number;
+  /** 高风险漏洞数 */
+  HighLevelVulCnt?: number;
+  /** 严重风险漏洞数 */
+  CriticalLevelVulCnt?: number;
+  /** 所属账号名 */
+  OwnerAccountName?: string;
+  /** 所属账号appid */
+  OwnerAppId?: number;
+  /** 所属账号uin */
+  OwnerUin?: string;
+  /** 低危木马数 */
+  LowLevelVirusCnt?: number;
+  /** 中危木马数 */
+  MediumLevelVirusCnt?: number;
+  /** 高危木马数 */
+  HighLevelVirusCnt?: number;
+  /** 严重木马数 */
+  CriticalLevelVirusCnt?: number;
+  /** 应急漏洞数 */
+  EmergencyVulCnt?: number;
+  /** 低危敏感信息数 */
+  LowLevelSensitiveCnt?: number;
+  /** 中危敏感信息数 */
+  MediumLevelSensitiveCnt?: number;
+  /** 高危敏感信息数 */
+  HighLevelSensitiveCnt?: number;
+  /** 严重敏感信息数 */
+  CriticalLevelSensitiveCnt?: number;
+  /** 风险数 */
+  RiskCnt?: number;
+  /** 扫描失败原因 */
+  ScanFailReason?: string;
+  /** 扫描失败解决方案 */
+  ScanSolution?: string;
+  /** 地域信息 */
+  RegionInfo?: RegionInfo;
+  /** 最近扫描任务Id */
+  ScanTaskId?: number;
+}
+
+/** 镜像关联资产数 */
+declare interface ImageAssociatedAssetCount {
+  /** 镜像id */
+  Id?: number;
+  /** 镜像关联主机数 */
+  HostCount?: number;
+  /** 镜像关联容器数 */
+  ContainerCount?: number;
+  /** 镜像所属账号名 */
+  OwnerAccountName?: string;
+  /** 镜像所属账号appid */
+  OwnerAppId?: number;
+  /** 镜像所属账号uin */
+  OwnerUin?: string;
+}
+
+/** 镜像关联主机资产 */
+declare interface ImageAssociatedContainer {
+  /** 容器id */
+  ContainerId?: string;
+  /** 容器名 */
+  ContainerName?: string;
+  /** pod名 */
+  PodName?: string;
+  /** pod ip */
+  PodIp?: string;
+  /** pod所属账号名 */
+  OwnerAccountName?: string;
+  /** pod所属账号appid */
+  OwnerAppId?: number;
+  /** pod所属账号uin */
+  OwnerUin?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群名 */
+  ClusterName?: string;
+  /** 集群状态枚举值：Running： 运行中Exception： 异常Unknown： 未知Creating： 创建中 */
+  ClusterStatus?: string;
+  /** 镜像cmd */
+  Cmd?: string;
+  /** Pod唯一id */
+  PodId?: string;
+  /** 集群唯一Id */
+  ClusterCaMd5?: string;
+}
+
+/** 镜像关联主机资产 */
+declare interface ImageAssociatedHostAsset {
+  /** 主机uuid */
+  Uuid?: string;
+  /** 主机quuid */
+  QUuid?: string;
+  /** 主机名 */
+  HostName?: string;
+  /** 主机所属账号名 */
+  OwnerAccountName?: string;
+  /** 主机所属账号appid */
+  OwnerAppId?: number;
+  /** 主机所属账号uin */
+  OwnerUin?: string;
+  /** 主机内网地址 */
+  InnerIp?: string;
+  /** 主机公网地址 */
+  PublicIp?: string;
+  /** 主机上agent状态枚举值：ONLINE： 在线OFFLINE： 离线UNINSTALL： 已卸载 */
+  AgentStatus?: string;
+  /** 主机实例id */
+  InstanceID?: string;
+  /** 主机状态 */
+  InstanceState?: string;
+}
+
+/** 镜像组件信息 */
+declare interface ImageComponent {
+  /** 组件名 */
+  Name?: string;
+  /** 组件版本 */
+  Version?: string;
+  /** 组件所在路径 */
+  Path?: string;
+  /** 组件类型枚举值：SYSTEM_COMPONENT： 系统组件APP_COMPONENT： 应用组件 */
+  Type?: string;
+  /** 镜像id */
+  ImageID?: string;
+  /** 漏洞数 */
+  VulCount?: number;
+  /** 镜像组件Id */
+  Id?: string;
+  /** 组件Id */
+  ComponentId?: number;
+}
+
 /** 镜像ID和对应的appid账号信息 */
 declare interface ImageIDWithAppIdItem {
   /** 账号ID */
   AppId?: number;
   /** 容器镜像ID */
   ImageID?: string;
+}
+
+/** 镜像层信息 */
+declare interface ImageLayer {
+  /** 镜像层序号 */
+  LayerIndex?: number;
+  /** 镜像层id */
+  LayerId?: string;
+  /** 镜像层命令行 */
+  LayerCmd?: string;
+  /** 镜像层大小 */
+  Size?: number;
+  /** 严重漏洞数 */
+  CriticalLevelVulCnt?: number;
+  /** 高危漏洞数 */
+  HighLevelVulCnt?: number;
+  /** 中危漏洞数 */
+  MediumLevelVulCnt?: number;
+  /** 低危漏洞数 */
+  LowLevelVulCnt?: number;
+  /** 木马数 */
+  VirusCnt?: number;
+  /** 敏感信息数 */
+  SensitiveCnt?: number;
+  /** 镜像层创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LayerCreateTime?: string;
+}
+
+/** 镜像漏洞信息 */
+declare interface ImageLayerVul {
+  /** 所有者账号名 */
+  OwnerAccountName?: string;
+  /** 所有者账号uin */
+  OwnerUin?: string;
+  /** 所有者账号appid */
+  OwnerAppId?: number;
+  /** 漏洞记录id */
+  ID?: number;
+  /** 镜像层id */
+  LayerId?: string;
+  /** 首次发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  FirstFoundTime?: string;
+  /** 最后发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestFoundTime?: string;
+  /** 漏洞信息 */
+  VulInfo?: ImageVulBaseInfo;
+  /** 镜像id */
+  ImageId?: string;
+}
+
+/** 镜像仓库联通性任务结果 */
+declare interface ImageRegistryConnectivityTaskResult {
+  /** 检查结果 */
+  ConnDetectMessage?: string;
+  /** 检查状态 */
+  ConnDetectStatus?: string;
+  /** 失败原因 */
+  FailReason?: string;
+  /** 主机Quuid */
+  Quuid?: string;
+  /** 排查解决方案 */
+  Solution?: string;
+  /** 主机Uuid */
+  Uuid?: string;
+}
+
+/** 镜像仓库探测主机参数 */
+declare interface ImageRegistryDetectionHostParam {
+  /** 主机uuid */
+  InstanceUuid?: string;
+  /** 地域 */
+  Region?: string;
+  /** 主机quuid */
+  Quuid?: string;
+}
+
+/** 镜像仓库扫描子任务信息 */
+declare interface ImageRegistryExportJobInfo {
+  /** 导出任务id */
+  JobID?: string;
+  /** 任务状态枚举值：SUCCESS： 任务成功 */
+  Status?: string;
+  /** 任务所属账号appid */
+  OwnerAppId?: number;
+  /** 导出类型 */
+  ExportType?: string;
+  /** 任务名 */
+  Name?: string;
+  /** 导出时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ExportCreateTime?: string;
+}
+
+/** 镜像仓库信息 */
+declare interface ImageRegistryInfo {
+  /** 仓库id */
+  RegistryId?: number;
+  /** 仓库名 */
+  Name?: string;
+  /** 仓库类型 */
+  RegistryType?: string;
+  /** 仓库url */
+  Url?: string;
+  /** 网络连接类型 */
+  NetType?: string;
+  /** 仓库所在地域 */
+  RegistryRegion?: string;
+  /** 仓库版本 */
+  RegistryVersion?: string;
+  /** 仓库实例id */
+  InstanceID?: string;
+  /** 最后同步时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestSyncTime?: string;
+  /** 同步失败解决方案 */
+  SyncSolution?: string;
+  /** 同步方式 */
+  SyncMode?: number;
+  /** 连接探测详情 */
+  ConnDetectDetail?: RegistryConnDetectResult[];
+  /** 连接类型 */
+  ConnDetectType?: string;
+  /** 仓库所属账号名 */
+  OwnerAccountName?: string;
+  /** 仓库所属账号appid */
+  OwnerAppId?: number;
+  /** 仓库所属账号uin */
+  OwnerUin?: string;
+  /** 同步状态枚举值：doing： 同步中success： 同步成功failed： 同步失败 */
+  SyncStatus?: string;
+  /** 同步失败原因 */
+  SyncFailReason?: string;
+  /** 地域信息 */
+  RegionInfo?: RegionInfo;
+  /** 镜像仓库用户名 */
+  UserName?: string;
+}
+
+/** 镜像仓库命名空间信息 */
+declare interface ImageRegistryNamespaceInfo {
+  /** 命名空间 */
+  Namespace: string;
+}
+
+/** 镜像仓库扫描子任务信息 */
+declare interface ImageRegistryScanSubTaskInfo {
+  /** 任务子id */
+  SubTaskId?: number;
+  /** 镜像id */
+  ImageId?: string;
+  /** 镜像名 */
+  ImageName?: string;
+  /** 镜像tag */
+  ImageTag?: string;
+  /** 任务状态枚举值：FINISHED： 扫描完成SCANNING： 扫描中CANCELLED： 已取消SCAN_EXCEPTION： 扫描异常 */
+  ScanStatus?: string;
+  /** 失败原因 */
+  FailedReason?: string;
+  /** 解决方案 */
+  Solution?: string;
+  /** 定时任务所属账号名 */
+  OwnerAccountName?: string;
+  /** 定时任务所属账号uin */
+  OwnerUin?: string;
+  /** 定时任务所属账号appid */
+  OwnerAppId?: number;
+  /** 是否最新镜像 */
+  IsLatestImage?: boolean;
+  /** 镜像地址 */
+  ImageRepoAddress?: string;
+  /** 镜像仓库类型 */
+  RegistryType?: string;
+}
+
+/** 镜像仓库扫描任务信息 */
+declare interface ImageRegistryScanTaskInfo {
+  /** 任务id */
+  Id?: number;
+  /** 定时扫描任务id */
+  TimedScanConfigId?: number;
+  /** 自动匹配模式枚举值：BY_CLUSTER： 按集群选择LATEST_VERSION： 仅扫描最新版本镜像LOCAL_IMAGE： 本地镜像 */
+  AutoMatchMode?: string[];
+  /** 扫描资产模式枚举值：ALL： 全部MANUAL： 手动选择AUTO_MATCH： 自动匹配 */
+  ScopeMode?: string;
+  /** 任务触发类型枚举值：TIMED： 定时任务MANUAL： 手动触发 */
+  TriggerType?: string;
+  /** 扫描类别枚举值：CVE： 漏洞RISK： 风险VIRUS： 木马 */
+  ScanType?: string[];
+  /** 扫描的镜像id */
+  ImageIds?: number[];
+  /** 任务状态枚举值：RUNNING： 执行中SUCCESS： 任务成功TIMEOUT： 任务超时FAILED： 任务失败CANCELLED： 已取消 */
+  Status?: string;
+  /** 定时任务所属账号名 */
+  OwnerAccountName?: string;
+  /** 定时任务所属账号appid */
+  OwnerAppId?: number;
+  /** 定时任务所属账号uin */
+  OwnerUin?: string;
+  /** 扫描镜像数 */
+  ScanImageCount?: number;
+  /** 扫描成功镜像数 */
+  SuccessImageCount?: number;
+  /** 扫描失败镜像数 */
+  FailureImageCount?: number;
+  /** 任务忽略的镜像数 */
+  IgnoredImageCount?: number;
+  /** 任务被取消镜像数 */
+  CancelledImageCount?: number;
+  /** 扫描启动时间参数格式：hh:mm */
+  ScanStartTime?: string;
+  /** 扫描停止时间参数格式：hh:mm */
+  ScanEndTime?: string;
+  /** 超时时间，单位秒 */
+  Timeout?: number;
+  /** 任务取消原因 */
+  CancelReason?: string;
+  /** 任务名 */
+  Name?: string;
+  /** 扫描任务调度配置 */
+  Schedule?: ImageScanScheduleConfig;
+  /** 扫描任务目标 */
+  Target?: ImageScanAssetTarget;
+  /** 扫描任务过滤配置 */
+  Filter?: ImageScanRegistryFilter;
+}
+
+/** 镜像仓库周期扫描任务信息 */
+declare interface ImageRegistryTimedScanTaskInfo {
+  /** 任务id */
+  Id?: number;
+  /** 任务名 */
+  Name?: string;
+  /** 是否启用 */
+  Enable?: boolean;
+  /** 扫描类别枚举值：CVE： 漏洞RISK： 风险VIRUS： 木马 */
+  ScanType?: string[];
+  /** 定时任务调度配置 */
+  Schedule?: ImageScanScheduleConfig;
+  /** 扫描目标镜像过滤配置 */
+  Target?: ImageScanAssetTarget;
+  /** 镜像过滤配置 */
+  Filter?: ImageScanRegistryFilter;
+  /** 超时时间，单位秒 */
+  Timeout?: number;
+  /** 最后扫描时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LastScanTime?: string;
+  /** 定时任务所属账号名 */
+  OwnerAccountName?: string;
+  /** 定时任务所属账号appid */
+  OwnerAppId?: number;
+  /** 定时任务所属账号uin */
+  OwnerUin?: string;
+  /** 配置创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  CreateTime?: string;
+  /** 配置更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  UpdateTime?: string;
+}
+
+/** 镜像仓库类型统计 */
+declare interface ImageRegistryTypeCountItem {
+  /** 仓库类型 */
+  RegistryType?: string;
+  /** 仓库个数 */
+  Count?: number;
+}
+
+/** 镜像扫描镜像匹配配置 */
+declare interface ImageScanAssetTarget {
+  /** 目标镜像匹配模式枚举值：ALL： 全部镜像MANUAL： 手动选择AUTO_MATCH： 自动匹配 */
+  Mode?: string;
+  /** 全部镜像模式下扫描排除的镜像id */
+  ExcludeImages?: string[];
+  /** 手动选择模式下需要扫描的镜像id */
+  Images?: string[];
+  /** 自动匹配模式下匹配配置 */
+  AutoMatch?: ImageScanAutoMatchConfig;
+}
+
+/** 镜像扫描自动匹配配置 */
+declare interface ImageScanAutoMatchConfig {
+  /** 匹配方式枚举值：BY_CLUSTER： 按集群选择RUNNING_CONTAINER： 容器集群上运行的镜像LATEST_VERSION： 最新版本镜像LOCAL_HOST： 主机节点上运行的镜像 */
+  Modes?: string[];
+  /** 集群id */
+  Clusters?: string[];
+}
+
+/** 镜像仓库扫描过滤器 */
+declare interface ImageScanRegistryFilter {
+  /** 仓库类型 */
+  RegistryType?: string[];
+  /** 仓库命名空间 */
+  Namespace?: string[];
+}
+
+/** 镜像扫描周期配置 */
+declare interface ImageScanScheduleConfig {
+  /** 周期类型枚举值：DAILY： 每天WEEKLY： 每周MONTHLY： 每月 */
+  CycleType?: string;
+  /** 具体日期。周类型时: 1-7 (周一到周日); 月类型时: 1-31; 日类型时不生效。 */
+  CycleDays?: number[];
+  /** 扫描开始时间参数格式：hh:mm */
+  StartTime?: string;
+  /** 时区 */
+  Timezone?: string;
+}
+
+/** 镜像敏感信息 */
+declare interface ImageSensitiveInfo {
+  /** 敏感信息行为类型枚举值：1： 以root账号启动2： 代码泄露3： 凭据泄露 */
+  Behavior?: number;
+  /** 规则类型 */
+  Type?: number;
+  /** 风险级别枚举值：1： 低风险2： 中分线3： 高风险4： 严重风险 */
+  Level?: string;
+  /** 风险描述 */
+  Describe?: string;
+  /** 风险内容 */
+  InstructionContent?: string;
+  /** 镜像id */
+  ImageId?: string;
+  /** 所属账号名 */
+  OwnerAccountName?: string;
+  /** 所属账号uin */
+  OwnerUin?: string;
+  /** 所属账号appid */
+  OwnerAppId?: number;
+  /** 影响镜像数 */
+  AffectImageCount?: number;
+  /** 镜像层Id */
+  LayerId?: string;
+  /** 镜像Id */
+  Id?: number;
+  /** 首次发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  FirstFoundTime?: string;
+  /** 最近发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestFoundTime?: string;
+  /** 镜像层序号 */
+  LayerIndex?: number;
+}
+
+/** 容器镜像敏感信息白名单 */
+declare interface ImageSensitiveWhitelist {
+  /** 敏感信息白名单id */
+  RuleId?: number;
+  /** 白名单所属账号名 */
+  OwnerAccountName?: string;
+  /** 白名单所属账号uin */
+  OwnerUin?: string;
+  /** 白名单所属账号appid */
+  OwnerAppId?: number;
+  /** 加白的敏感信息类型枚举值：1： root启动2： 代码泄露3： 凭据泄露 */
+  Behavior?: number;
+  /** 白名单范围枚举值：0： 自选镜像1： 全部镜像 */
+  Scope?: number;
+  /** 白名单生效镜像id */
+  ImageIds?: number[];
+  /** 备注 */
+  Remark?: string;
+  /** 生效状态枚举值：0： 白名单失效1： 白名单生效 */
+  Status?: number;
+  /** 敏感信息白名单名 */
+  Name?: string;
+  /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  UpdateTime?: string;
+}
+
+/** 镜像病毒信息 */
+declare interface ImageVirus {
+  /** 木马路径 */
+  Path?: string;
+  /** 风险级别 */
+  RiskLevel?: string;
+  /** 类别 */
+  Category?: string;
+  /** 木马名 */
+  VirusName?: string;
+  /** 木马Tag */
+  Tags?: string;
+  /** 文件类型 */
+  FileType?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 文件md5 */
+  FileMd5?: string;
+  /** 文件大小 */
+  FileSize?: number;
+  /** 首次检测时间参数格式：YYYY-MM-DD hh:mm:ss */
+  FirstDetectedTime?: string;
+  /** 最后检测时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestDetectedTime?: string;
+  /** 镜像id */
+  ImageId?: string;
+  /** 所属账号名 */
+  OwnerAccountName?: string;
+  /** 所属账号uin */
+  OwnerUin?: string;
+  /** 所属账号appid */
+  OwnerAppId?: number;
+  /** 检出平台 */
+  CheckPlatform?: string;
+  /** 影响镜像数 */
+  AffectImageCount?: number;
+  /** 镜像层id */
+  LayerId?: string;
+  /** 木马记录id */
+  Id?: number;
+  /** 木马处置建议 */
+  Suggestion?: string;
+  /** 木马描述 */
+  Description?: string;
+  /** 木马类型 */
+  VirusType?: string;
+}
+
+/** 容器镜像木马白名单 */
+declare interface ImageVirusWhitelist {
+  /** 白名单id */
+  RuleId?: number;
+  /** 白名单所属账号名 */
+  OwnerAccountName?: string;
+  /** 白名单所属账号uin */
+  OwnerUin?: string;
+  /** 白名单所属账号appid */
+  OwnerAppId?: number;
+  /** 白名单范围枚举值：0： 自选镜像1： 全部镜像 */
+  Scope?: number;
+  /** 白名单生效镜像id */
+  ImageIds?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 白名单状态枚举值：0： 失效1： 有效 */
+  Status?: number;
+  /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  UpdateTime?: string;
+  /** 木马白名单名 */
+  Name?: string;
+}
+
+/** 容器镜像木马白名单 */
+declare interface ImageVirusWhitelistDetail {
+  /** 白名单规则id */
+  RuleId?: number;
+  /** 白名单所属账号名 */
+  OwnerAccountName?: string;
+  /** 白名单所属账号uin */
+  OwnerUin?: string;
+  /** 白名单所属账号appid */
+  OwnerAppId?: number;
+  /** 白名单生效范围枚举值：1： 全部镜像0： 指定镜像 */
+  Scope?: number;
+  /** 镜像id */
+  ImageIds?: number[];
+  /** 备注 */
+  Remark?: string;
+  /** 木马白名单md5列表 */
+  Md5List?: string[];
+}
+
+/** 镜像漏洞信息 */
+declare interface ImageVul {
+  /** 所有者账号名 */
+  OwnerAccountName?: string;
+  /** 所有者账号uin */
+  OwnerUin?: string;
+  /** 所有者账号appid */
+  OwnerAppId?: number;
+  /** 记录id */
+  ID?: number;
+  /** 首次发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  FirstFoundTime?: string;
+  /** 最后发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestFoundTime?: string;
+  /** 漏洞详情 */
+  VulInfo?: ImageVulBaseInfo;
+  /** 镜像id */
+  ImageId?: string;
+}
+
+/** 镜像漏洞信息 */
+declare interface ImageVulBaseInfo {
+  /** 受影响的组件信息 */
+  AffectedComponents?: VulAffectedComponent[];
+  /** 漏洞名 */
+  Name?: string;
+  /** 漏洞CVEID */
+  CVEID?: string;
+  /** 漏洞类别 */
+  Category?: string;
+  /** 漏洞发布时间 */
+  PublishTime?: string;
+  /** 漏洞检测方式 */
+  CheckMethod?: string;
+  /** 是否支持防御枚举值：ENABLED： 支持防御NOT_ENABLED： 不支持防御 */
+  DefendStatus?: string;
+  /** 是否支持修复 */
+  SupportFix?: boolean;
+  /** CVSS分数 */
+  CvssScore?: string;
+  /** 漏洞危害描述 */
+  Remark?: string;
+  /** 漏洞描述 */
+  Summary?: string;
+  /** 危害等级 */
+  CVSSLevel?: string;
+  /** 主要影响类型 */
+  VulAffect?: string;
+  /** 是否存在在野利用 */
+  KVERecord?: boolean;
+  /** EPSS 概率分数 */
+  EPSSScore?: number;
+  /** 影响厂商 */
+  AffectVendor?: string;
+  /** 影响目标产品 */
+  AffectProduct?: string;
+  /** 漏洞原理 */
+  Mechanism?: string;
+  /** 攻击前提条件 */
+  Precondition?: string;
+  /** 漏洞修复建议 */
+  FixSolution?: string;
+  /** 漏洞相关链接 */
+  RefLink?: string;
+  /** 漏洞标签 */
+  Label?: string[];
+  /** 漏洞Id */
+  PocId?: string;
+}
+
+/** 镜像漏洞信息 */
+declare interface ImageVulSummary {
+  /** 所有者账号名 */
+  OwnerAccountName?: string;
+  /** 所有者账号uin */
+  OwnerUin?: string;
+  /** 所有者账号appid */
+  OwnerAppId?: number;
+  /** 首次发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  FirstFoundTime?: string;
+  /** 最后发现时间参数格式：YYYY-MM-DD hh:mm:ss */
+  LatestFoundTime?: string;
+  /** 影响镜像数 */
+  AffectImageCount?: number;
+  /** 漏洞信息 */
+  VulInfo?: ImageVulBaseInfo;
+  /** 记录id */
+  ID?: number;
+}
+
+/** 容器镜像漏洞白名单 */
+declare interface ImageVulWhitelist {
+  /** 漏洞白名单id */
+  RuleId?: number;
+  /** 白名单所属账号名 */
+  OwnerAccountName?: string;
+  /** 白名单所属账号uin */
+  OwnerUin?: string;
+  /** 白名单所属账号appid */
+  OwnerAppId?: number;
+  /** 白名单范围枚举值：0： 自选镜像1： 全部镜像 */
+  Scope?: number;
+  /** 白名单生效镜像id */
+  ImageIds?: number[];
+  /** 备注 */
+  Remark?: string;
+  /** 漏洞id */
+  PocId?: string;
+  /** 漏洞白名单名 */
+  VulName?: string;
+  /** 白名单状态枚举值：0： 失效1： 生效 */
+  Status?: number;
+  /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  UpdateTime?: string;
 }
 
 /** 计费项信息 */
@@ -6822,6 +7790,14 @@ declare interface KeyValueInt {
   Key?: number;
   /** 值 */
   Value?: number;
+}
+
+/** 自定义告警/风险等级 */
+declare interface LevelOption {
+  /** 告警/风险类型 */
+  Type?: string;
+  /** 告警等级 (1: 提示, 2: 低危, 3: 中危, 4: 高危, 5: 严重) */
+  Level?: number[];
 }
 
 /** 绑定失败明细 */
@@ -7914,6 +8890,14 @@ declare interface ProductSupport {
   CveId?: string;
 }
 
+/** 主机所属项目 */
+declare interface ProjectInfo {
+  /** 项目名 */
+  ProjectName?: string;
+  /** 项目id */
+  ProjectId?: number;
+}
+
 /** 推荐防护配置项 */
 declare interface ProtectionConfigItem {
   /** 配置项ID */
@@ -8104,6 +9088,22 @@ declare interface RegionInfo {
   RegionCode?: string;
   /** 地域英文名。 */
   RegionNameEn?: string;
+}
+
+/** 镜像仓库联通性检测结果 */
+declare interface RegistryConnDetectResult {
+  /** 链接信息 */
+  ConnDetectMessage?: string;
+  /** 链接状态 */
+  ConnDetectStatus?: string;
+  /** 失败原因 */
+  FailReason?: string;
+  /** 主机quuid */
+  Quuid?: string;
+  /** 失败解决方案 */
+  Solution?: string;
+  /** 主机uuid */
+  Uuid?: string;
 }
 
 /** 相关攻击事件结构 */
@@ -8770,6 +9770,52 @@ declare interface SkillRuleCatalogItem {
   RuleName?: string;
 }
 
+/** Skill 安全检测告警列表单条记录 */
+declare interface SkillScanAlertItem {
+  /** 告警记录 ID */
+  ID?: number;
+  /** 租户 AppID */
+  AppID?: number;
+  /** 主机 UUID */
+  UUID?: string;
+  /** 主机 IP 地址 */
+  HostIP?: string;
+  /** 实例 ID参数格式：形如 ins-xxxxxxxx */
+  InstanceID?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** Skill 名称 */
+  SkillName?: string;
+  /** Skill 文件路径 */
+  SkillPath?: string;
+  /** Skill 作用域 */
+  Scope?: string;
+  /** Skill 版本号 */
+  Version?: string;
+  /** 文件内容 SHA256 哈希值参数格式：sha256:<64位hex> */
+  ContentHash?: string;
+  /** 风险等级枚举值：malicious：恶意suspicious：可疑 */
+  RiskLevel?: string;
+  /** 安全评分取值范围：[0, 100] */
+  SecurityScore?: number;
+  /** 主命中规则 ID */
+  PrimaryRuleID?: string;
+  /** 命中规则 ID 列表（9xxxx），按 RuleID 去重展示名称通过响应外层 RuleCatalog 字典翻译历史告警未持久化该字段时返回空数组 */
+  HitRules?: string[];
+  /** 检测引擎版本号 */
+  EngineVersion?: number;
+  /** 处理状态枚举值：0：未处理1：已处理2：已忽略3：已信任4：已删除（软删除） */
+  Status?: number;
+  /** 告警级别枚举值：high：高危medium：中危 */
+  Level?: string;
+  /** 首次检出时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  CreateTime?: string;
+  /** 最后更新时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  UpdateTime?: string;
+}
+
 /** 子引擎扫描结果 */
 declare interface SkillScanEngineResult {
   /** 子引擎类型枚举值：AI：AI 引擎STATIC：静态分析引擎 */
@@ -9168,6 +10214,44 @@ declare interface TaskLogURL {
   AppId?: string;
 }
 
+/** tcr仓库实例 */
+declare interface TcrRegistry {
+  /** 仓库实例id */
+  RegistryId?: string;
+  /** 仓库名 */
+  RegistryName?: string;
+  /** 仓库域名 */
+  PublicDomain?: string;
+  /** 仓库所在region */
+  RegistryRegion?: string;
+  /** 仓库id */
+  RegistryRegionId?: number;
+}
+
+/** 定时任务预览镜像信息 */
+declare interface TimedScanTaskPreviewInfo {
+  /** 预览数据id */
+  Id?: number;
+  /** 镜像id */
+  ImageId?: string;
+  /** 镜像名 */
+  ImageName?: string;
+  /** 镜像tag */
+  ImageTag?: string;
+  /** 镜像仓库类型 */
+  RegistryType?: string;
+  /** 定时任务所属账号名 */
+  OwnerAccountName?: string;
+  /** 定时任务所属账号uin */
+  OwnerUin?: string;
+  /** 定时任务所属账号appid */
+  OwnerAppId?: number;
+  /** 是否最新镜像 */
+  IsLatestImage?: boolean;
+  /** 镜像地址 */
+  ImageRepoAddress?: string;
+}
+
 /** AI Agent 流量沙箱插件状态 */
 declare interface TrafficPluginState {
   /** 插件安装状态（上层聚合）枚举值：NONE：未安装INSTALLING：安装中INSTALLED：已安装INSTALL_FAIL：安装失败 */
@@ -9186,6 +10270,150 @@ declare interface TrafficRuleState {
   Module?: string;
   /** 沙箱规则状态枚举值：ON： 开启OFF： 关闭 */
   Status?: string;
+}
+
+/** ACL 告警数据结构 */
+declare interface TrafficSandboxACLAlertInfo {
+  /** 告警记录 ID */
+  ID?: number;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** 命中的用户规则 ID */
+  RuleID?: number;
+  /** 命中的用户规则名称 */
+  RuleName?: string;
+  /** Agent UUID */
+  UUID?: string;
+  /** 实例 ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 进程 exe 路径 */
+  Exe?: string;
+  /** 进程命令行参数入参限制：最大 4096 字节，超长时可能被截断 */
+  Param?: string;
+  /** 目标地址，形如 GET http://xxxx 或 ip:port */
+  Target?: string;
+  /** 协议类型枚举值：httphttps */
+  Protocol?: string;
+  /** 告警级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 处理状态枚举值：PENDING：未处理HANDLED：已处理IGNORE：已忽略PASS：已加白BLOCK：已拦截 */
+  Status?: string;
+  /** 告警次数 */
+  Count?: number;
+  /** 首次告警时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  FirstAlertTime?: string;
+  /** 最后告警时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  LastAlertTime?: string;
+  /** 命中动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction?: string;
+}
+
+/** ACL 目标（IP/端口）匹配规则 */
+declare interface TrafficSandboxACLDstRule {
+  /** 目标 IP 列表入参限制：每项支持三种格式：单个 IP（如 10.0.0.1）、网段（如 10.0.0.1/24）、IP 范围（如 10.0.0.1-10.0.2.0） */
+  DstIP?: string[];
+  /** 排除的目标 IP 列表入参限制：格式同 DstIP */
+  DstIPExcept?: string[];
+  /** 目标端口或端口范围入参限制：单端口如 80，端口范围如 8000-9000 */
+  DstPort?: string[];
+  /** 排除的目标端口列表入参限制：格式同 DstPort */
+  DstPortExcept?: string[];
+}
+
+/** ACL 规则内容，子规则 ID 由服务端内部管理不对外暴露 */
+declare interface TrafficSandboxACLRuleContentItem {
+  /** 目标（IP/端口）匹配规则 */
+  DstRule?: TrafficSandboxACLDstRule;
+  /** URL/协议/方法匹配规则 */
+  URLRule?: TrafficSandboxACLURLRule;
+}
+
+/** ACL 用户规则数据结构 */
+declare interface TrafficSandboxACLRuleInfo {
+  /** 规则 ID */
+  ID?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 规则状态枚举值：ON：启用OFF：禁用 */
+  Status?: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** 引用的系统规则内容快照 */
+  SystemRuleContent?: TrafficSandboxACLRuleContentItem[];
+  /** 用户自定义规则内容 */
+  UserRuleContent?: TrafficSandboxACLRuleContentItem[];
+  /** 规则的生效范围 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 未生效资产列表：策略目标生效资产中流量沙箱插件未已安装（TrafficPluginState.InstallStatus 不为 INSTALLED）的 AI Agent 资产，返回机器的 InstanceId / ContainerId 及 TrafficPluginState。无未生效资产时返回空数组 */
+  InactiveAssets?: TrafficSandboxInactiveAsset[];
+  /** 创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  InsertTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  UpdateTime?: string;
+  /** 规则动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警记录 */
+  RuleAction?: string;
+}
+
+/** ACL 系统规则数据结构 */
+declare interface TrafficSandboxACLSystemRuleItem {
+  /** 系统规则 ID */
+  ID?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 系统规则内容 */
+  RuleContent?: TrafficSandboxACLRuleContentItem[];
+}
+
+/** ACL URL/协议/方法匹配规则 */
+declare interface TrafficSandboxACLURLRule {
+  /** URL 列表入参限制：每项支持域名通配符，如 *.example.com、api.*.example.com、example.com/api/* */
+  URL?: string[];
+  /** 排除的 URL 列表入参限制：格式同 URL */
+  URLExcept?: string[];
+  /** 协议类型列表枚举值：http：HTTP 协议https：HTTPS 协议 */
+  Protocol?: string[];
+  /** HTTP 方法列表枚举值：GETPOSTHEADPUTDELETEOPTIONSPATCH */
+  Method?: string[];
+}
+
+/** 流量沙箱生效资产元素 */
+declare interface TrafficSandboxAssetScope {
+  /** 实例 ID，仅主机资产填写 */
+  InstanceId?: string;
+  /** 容器 ID，仅容器资产类型时填写 */
+  ContainerId?: string;
+}
+
+/** DLP 系统规则数据结构 */
+declare interface TrafficSandboxDLPSystemRuleItem {
+  /** 系统规则 ID */
+  ID?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则内容，Hyperscan 兼容的正则表达式（仅供展示给用户查看，不可编辑） */
+  RuleContent?: string;
+}
+
+/** 流量沙箱规则的生效范围 */
+declare interface TrafficSandboxEffectScope {
+  /** 生效模式枚举值：INCLUDE：指定资产生效EXCLUDE：剔除指定资产（默认全部生效） */
+  EffectType: string;
+  /** 生效资产列表入参限制：EffectType=INCLUDE 时必填且非空；EffectType=EXCLUDE 时可传空数组 */
+  EffectAssets?: TrafficSandboxAssetScope[];
+}
+
+/** 策略目标生效资产中流量沙箱插件未已安装的 AI Agent 资产（未生效资产） */
+declare interface TrafficSandboxInactiveAsset {
+  /** 实例 ID，仅主机资产填写 */
+  InstanceId?: string;
+  /** 容器 ID，仅容器资产填写 */
+  ContainerId?: string;
+  /** 流量沙箱插件状态 */
+  TrafficPluginState?: TrafficPluginState;
 }
 
 /** 趋势数据点 */
@@ -9746,6 +10974,20 @@ declare interface Vpc {
   IsNewAsset?: number;
   /** 是否核心资产1是 2不是 */
   IsCore?: number;
+}
+
+/** 仓库镜像受漏洞影响的组件明细列表 */
+declare interface VulAffectedComponent {
+  /** 组件id */
+  ComponentId?: number;
+  /** 镜像层id */
+  LayerId?: string;
+  /** 组件名 */
+  Name?: string;
+  /** 组件版本号 */
+  Version?: string;
+  /** 修复漏洞的版本号 */
+  FixedVersion?: string;
 }
 
 /** 漏洞简要信息 */
@@ -10436,6 +11678,46 @@ declare interface AddDspmAssetManagerResponse {
   RequestId?: string;
 }
 
+declare interface AddImageRegistryRequest {
+  /** 镜像仓库名 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像仓库账号 */
+  Username?: string;
+  /** 镜像仓库密码 */
+  Password?: string;
+  /** 镜像仓库url */
+  Url?: string;
+  /** 镜像仓库类型枚举值：tcr： tcr类型仓库ccr： ccr类型仓库harbor： harbor类型仓库jfrog： jfrog类型仓库quay： quay类型仓库aws： aws类型仓库azure： azure类型仓库 */
+  RegistryType?: string;
+  /** 网络类型枚举值：public： 公网空： 内网，默认值 */
+  NetType?: string;
+  /** api版本 */
+  RegistryVersion?: string;
+  /** 镜像仓库所在region */
+  RegistryRegion?: string;
+  /** 访问限速值 */
+  SpeedLimit?: number;
+  /** 是否忽略证书枚举值：0： 验证证书1： 忽略证书 */
+  Insecure?: number;
+  /** 是否立即同步 */
+  NeedScan?: boolean;
+  /** 同步模式，0-全量同步 */
+  SyncMode?: number;
+  /** 镜像仓库实例id */
+  InstanceId?: string;
+  /** 扫描使用的链接配置 */
+  ConnectivityDetectConfig?: ConnectivityDetectConfig[];
+}
+
+declare interface AddImageRegistryResponse {
+  /** 镜像仓库id */
+  RegistryId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddLoginWhiteListsRequest {
   /** 异地登录白名单实体 */
   HostLoginWhiteObj: HostLoginWhiteObj;
@@ -10563,6 +11845,68 @@ declare interface BatchModifyBaselinePolicyResponse {
   RequestId?: string;
 }
 
+declare interface BatchModifyImageRegistryTimedScanTaskConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 任务id */
+  Id?: number[];
+  /** 是否启用 */
+  Enable?: boolean;
+  /** 扫描类别枚举值：CVE： 漏洞RISK： 风险VIRUS： 木马 */
+  ScanType?: string[];
+  /** 定时任务调度配置 */
+  Schedule?: ImageScanScheduleConfig;
+  /** 超时时间，单位秒 */
+  Timeout?: number;
+}
+
+declare interface BatchModifyImageRegistryTimedScanTaskConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchModifyImageSensitiveWhitelistRequest {
+  /** 敏感信息白名单id */
+  RuleId: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 白名单状态 */
+  Status?: number;
+}
+
+declare interface BatchModifyImageSensitiveWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchModifyImageVirusWhitelistRequest {
+  /** 木马白名单id */
+  RuleId: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 是否启用枚举值：0： 禁用1： 启用 */
+  Status?: number;
+}
+
+declare interface BatchModifyImageVirusWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchModifyImageVulWhitelistRequest {
+  /** 漏洞白名单id */
+  RuleId: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 白名单状态 */
+  Status?: number;
+}
+
+declare interface BatchModifyImageVulWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindClusterOwnerRequest {
   /** 集群资产id */
   ClusterAssetIds: string[];
@@ -10601,6 +11945,20 @@ declare interface CheckCWPExposePathPermissionRequest {
 declare interface CheckCWPExposePathPermissionResponse {
   /** 用户旗舰版信息 */
   UltimateList?: UltimateAppItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckImageRegistryInstanceNameDuplicateRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像仓库名 */
+  Name?: string;
+}
+
+declare interface CheckImageRegistryInstanceNameDuplicateResponse {
+  /** 是否重复 */
+  IsDuplicated?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10725,6 +12083,44 @@ declare interface CreateAllAssetsExportJobRequest {
 declare interface CreateAllAssetsExportJobResponse {
   /** 导出任务ID */
   JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAssetComponentListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 保存文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateAssetComponentListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAssetComponentRelatedImageListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 组件id */
+  Id?: string;
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateAssetComponentRelatedImageListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11803,6 +13199,334 @@ declare interface CreateIaCFileReScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateImageAssetListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageAssetListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageAssociatedContainerListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像id */
+  Id?: number;
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageAssociatedContainerListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageAssociatedHostListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像id */
+  Id?: number;
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageAssociatedHostListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageComponentListExportJobRequest {
+  /** 镜像id */
+  Id: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageComponentListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageLayerVulListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** layer id */
+  Id?: string;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageLayerVulListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageRegistryConnectivityTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像仓库名 */
+  RegistryName?: string;
+  /** 镜像仓库所在region */
+  RegistryRegion?: string;
+  /** 镜像仓库类型 */
+  RegistryType?: string;
+  /** 镜像仓库API版本 */
+  ApiVersion?: string;
+  /** 账号 */
+  UserName?: string;
+  /** 密码 */
+  Password?: string;
+  /** 镜像仓库url */
+  Url?: string;
+  /** 链接检查参数 */
+  Params?: ImageRegistryDetectionHostParam[];
+  /** 仓库id */
+  RegistryId?: number;
+  /** 仓库实例id */
+  InstanceId?: string;
+}
+
+declare interface CreateImageRegistryConnectivityTaskResponse {
+  /** 检查任务id */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageRegistryListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageRegistryListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageRegistryScanTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 扫描类型枚举值：VUL： 漏洞VIRUS： 木马RISK： 敏感信息 */
+  ScanType?: string[];
+  /** 超时时间，单位秒 */
+  Timeout?: number;
+  /** 任务名 */
+  Name?: string;
+  /** 扫描目标镜像过滤配置 */
+  Target?: ImageScanAssetTarget;
+  /** 镜像过滤配置 */
+  Filter?: ImageScanRegistryFilter;
+}
+
+declare interface CreateImageRegistryScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageRegistryTimedScanTaskConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 任务名 */
+  Name?: string;
+  /** 是否启用枚举值：true： 启用false： 不启用 */
+  Enable?: boolean;
+  /** 扫描类别枚举值：VUL： 漏洞VIRUS： 木马RISK： 敏感信息 */
+  ScanType?: string[];
+  /** 定时任务调度配置 */
+  Schedule?: ImageScanScheduleConfig;
+  /** 扫描目标镜像过滤配置 */
+  Target?: ImageScanAssetTarget;
+  /** 镜像过滤配置 */
+  Filter?: ImageScanRegistryFilter;
+  /** CreateImageRegistryTimedScanTaskConfig */
+  Timeout?: number;
+}
+
+declare interface CreateImageRegistryTimedScanTaskConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageSensitiveInfoListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageSensitiveInfoListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageSensitiveWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 加白的敏感信息类型枚举值：1： root启动2： 代码泄露3： 凭据泄露 */
+  Behavior?: number;
+  /** 生效镜像id */
+  ImageIds?: string[];
+  /** 白名单生效范围枚举值：0： 自选镜像1： 全部镜像 */
+  Scope?: number;
+  /** 生效状态枚举值：0： 失效1： 生效 */
+  Status?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateImageSensitiveWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageVirusListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageVirusListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageVirusWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 木马白名单md5 */
+  Md5List?: string[];
+  /** 白名单生效范围枚举值：0： 自选镜像1： 全部镜像 */
+  Scope?: number;
+  /** 镜像id */
+  ImageIds?: number[];
+  /** 备注 */
+  Remark?: string;
+  /** 木马id */
+  VirusId?: number[];
+  /** 木马白名单名 */
+  Name?: string;
+  /** 状态枚举值：0： 禁用1： 启用 */
+  Status?: number;
+}
+
+declare interface CreateImageVirusWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageVulListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageVulListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageVulSummaryListExportJobRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 是否保存到导出任务中枚举值：0： 不保存1： 保存 */
+  Save?: number;
+  /** 导出文件名 */
+  ExportName?: string;
+}
+
+declare interface CreateImageVulSummaryListExportJobResponse {
+  /** 导出任务ID */
+  JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateImageVulWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 漏洞id */
+  PocId?: string[];
+  /** 生效镜像id */
+  ImageIds?: string[];
+  /** 白名单生效范围枚举值：0： 自选镜像1： 全部镜像 */
+  Scope?: number;
+  /** 生效状态枚举值：0： 失效1： 生效 */
+  Status?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface CreateImageVulWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePodContainerListExportJobRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -12495,6 +14219,78 @@ declare interface DeleteIaCFileResponse {
   RequestId?: string;
 }
 
+declare interface DeleteImageRegistryRequest {
+  /** 镜像仓库id */
+  RegistryId: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteImageRegistryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteImageRegistryScanTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 扫描任务id */
+  TaskId?: number[];
+}
+
+declare interface DeleteImageRegistryScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteImageRegistryTimedScanTaskConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 定时任务id */
+  Ids?: number[];
+}
+
+declare interface DeleteImageRegistryTimedScanTaskConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteImageSensitiveWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 敏感信息白名单id */
+  RuleId?: number[];
+}
+
+declare interface DeleteImageSensitiveWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteImageVirusWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 木马白名单id */
+  RuleId?: number[];
+}
+
+declare interface DeleteImageVirusWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteImageVulWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 漏洞白名单id */
+  RuleId?: number[];
+}
+
+declare interface DeleteImageVulWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLoginWhiteListRequest {
   /** 白名单ID (最大 100 条) */
   Ids: number[];
@@ -12527,6 +14323,16 @@ declare interface DeleteRiskScanTaskRequest {
 }
 
 declare interface DeleteRiskScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSandboxLLMAuditRuleRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100，去重后生效 */
+  IDList: number[];
+}
+
+declare interface DeleteSandboxLLMAuditRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12574,6 +14380,64 @@ declare interface DescribeAIAgentAssetListResponse {
   /** 资产列表 */
   AssetList?: AIAgentAsset[];
   /** 资产总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIAgentCredentialListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选器 */
+  Filter?: Filter;
+  /** 是否只展示凭据位置统计数据 */
+  SummaryOnly?: boolean;
+}
+
+declare interface DescribeAIAgentCredentialListResponse {
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 凭据列表 */
+  CredentialList?: AIAgentCredential[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIAgentCredentialLocationListRequest {
+  /** 凭据组行 ID（来自 DescribeAIAgentCredentialList 响应 AIAgentCredentialItem.ID） */
+  ID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+}
+
+declare interface DescribeAIAgentCredentialLocationListResponse {
+  /** 凭据泄露位置列表（按 update_time DESC 排序） */
+  Locations?: AIAgentCredentialLocation[];
+  /** 该凭据的泄露位置总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIAgentSkillListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** Agent 名称 */
+  AgentName?: string;
+  /** 实例 ID */
+  InstanceID?: string;
+  /** 容器 ID */
+  ContainerID?: string;
+}
+
+declare interface DescribeAIAgentSkillListResponse {
+  /** skill 列表 */
+  SkillList?: AIAgentSkillInfo[];
+  /** 总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -13075,6 +14939,40 @@ declare interface DescribeAlertListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssetComponentListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeAssetComponentListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 资产组件信息列表 */
+  ComponentList?: AssetComponent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAssetComponentRelatedImageListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 组件id */
+  Id?: string;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeAssetComponentRelatedImageListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 包含组件的镜像信息 */
+  ImageList?: ImageAssetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssetDetailRequest {
   /** 资产ID */
   AssetID: string;
@@ -13353,6 +15251,20 @@ declare interface DescribeAssumeRoleRequest {
 declare interface DescribeAssumeRoleResponse {
   /** 是否绑定角色。0-未绑定 1-已绑定 */
   Bind?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBackendScanEngineRegionListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeBackendScanEngineRegionListResponse {
+  /** 地域列表 */
+  Regions?: RegionInfo[];
+  /** 默认地域 */
+  DefaultRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14283,6 +16195,22 @@ declare interface DescribeCallRecordResponse {
   Data?: CallRecord[];
   /** 调用记录总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCheckConnectivityHostListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeCheckConnectivityHostListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 主机列表 */
+  HostList?: CheckConnectivityHostInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -17601,6 +19529,436 @@ declare interface DescribeIaCTokenListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeImageAssetDetailRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** id */
+  Id?: string;
+}
+
+declare interface DescribeImageAssetDetailResponse {
+  /** 镜像详情 */
+  Detail?: ImageAssetDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageAssetListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageAssetListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 镜像信息 */
+  ImageList?: ImageAssetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageAssociatedAssetCountRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像id */
+  Id?: number[];
+  /** 预览数据镜像Id */
+  PreviewId?: number[];
+}
+
+declare interface DescribeImageAssociatedAssetCountResponse {
+  /** 镜像关联资产统计数 */
+  ImageCountList?: ImageAssociatedAssetCount[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageAssociatedContainerListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像id */
+  Id?: number;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageAssociatedContainerListResponse {
+  /** 镜像关联容器信息 */
+  ContainerList?: ImageAssociatedContainer[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageAssociatedHostListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像id */
+  Id?: number;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageAssociatedHostListResponse {
+  /** 镜像关联主机信息列表 */
+  HostList?: ImageAssociatedHostAsset[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageComponentListRequest {
+  /** 镜像id */
+  Id: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageComponentListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 组件信息列表 */
+  ComponentList?: ImageComponent[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageExportJobListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageExportJobListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 任务列表 */
+  JobList?: ImageRegistryExportJobInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageLayerListRequest {
+  /** 镜像id */
+  Id: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageLayerListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 镜像层信息 */
+  LayerList?: ImageLayer[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageLayerVulListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 镜像层id */
+  Id?: string;
+}
+
+declare interface DescribeImageLayerVulListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 镜像层漏洞列表 */
+  ImageLayerVulList?: ImageLayerVul[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryAssetOverviewRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeImageRegistryAssetOverviewResponse {
+  /** 镜像总数 */
+  ImageCnt?: number;
+  /** 已扫描镜像数 */
+  ImageScannedCnt?: number;
+  /** 组件数 */
+  ComponentCnt?: number;
+  /** 漏洞数 */
+  VulCnt?: number;
+  /** 木马数 */
+  VirusCnt?: number;
+  /** 敏感信息数 */
+  SensitiveCnt?: number;
+  /** 定时扫描配置数 */
+  TimedScanTaskConfigCnt?: number;
+  /** 总配额 */
+  TotalQuota?: number;
+  /** 已使用配额 */
+  UsedQuota?: number;
+  /** 剩余配额 */
+  RemainingQuota?: number;
+  /** 试用配额 */
+  TrialQuota?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryConnectivityTaskResultRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 链接检查任务id */
+  TaskId?: string;
+}
+
+declare interface DescribeImageRegistryConnectivityTaskResultResponse {
+  /** 链接检查结果 */
+  ConnDetectResult?: ImageRegistryConnectivityTaskResult[];
+  /** 任务是否结束枚举值：1： 任务已结束0： 任务未结束 */
+  Finished?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageRegistryListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 镜像仓库列表 */
+  ImageRegistryList?: ImageRegistryInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryNamespaceListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageRegistryNamespaceListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 命名空间列表 */
+  NamespaceList?: ImageRegistryNamespaceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryScanSubTaskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 扫描任务id */
+  TaskId?: number;
+}
+
+declare interface DescribeImageRegistryScanSubTaskListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 扫描子任务列表 */
+  SubTaskList?: ImageRegistryScanSubTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryScanTaskListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageRegistryScanTaskListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 扫描任务列表 */
+  TaskList?: ImageRegistryScanTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryTimedScanTaskConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageRegistryTimedScanTaskConfigResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 定时任务列表 */
+  TaskInfo?: ImageRegistryTimedScanTaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageRegistryTimedScanTaskPreviewRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+  /** 定时任务配置Id */
+  TaskId?: number;
+  /** 预览类型 */
+  TargetType?: string;
+}
+
+declare interface DescribeImageRegistryTimedScanTaskPreviewResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 预览镜像列表 */
+  Images?: TimedScanTaskPreviewInfo[];
+  /** 预览数据更新时间 */
+  PreviewUpdatedAt?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageSensitiveInfoListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageSensitiveInfoListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 风险列表 */
+  SensitiveInfoList?: ImageSensitiveInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageSensitiveWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageSensitiveWhitelistResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 敏感信息白名单列表 */
+  WhiteList?: ImageSensitiveWhitelist[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageVirusListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageVirusListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 木马列表 */
+  VirusList?: ImageVirus[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageVirusWhitelistDetailRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 规则id */
+  RuleId?: number;
+}
+
+declare interface DescribeImageVirusWhitelistDetailResponse {
+  /** 白名单详情 */
+  Detail?: ImageVirusWhitelistDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageVirusWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageVirusWhitelistResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 木马白名单列表 */
+  WhiteList?: ImageVirusWhitelist[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageVulListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageVulListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 漏洞列表 */
+  ImageVulList?: ImageVul[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageVulSummaryListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageVulSummaryListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 漏洞概览列表 */
+  ImageVulSummaryList?: ImageVulSummary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeImageVulWhitelistRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeImageVulWhitelistResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 漏洞白名单列表 */
+  WhiteList?: ImageVulWhitelist[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIpInvokeRecordDetailRequest {
   /** 过滤器 */
   Filter?: Filter;
@@ -18195,6 +20553,24 @@ declare interface DescribeNotifyAssetConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNotifySettingAkRequest {
+}
+
+declare interface DescribeNotifySettingAkResponse {
+  /** 告警类型/等级 (类型: AbnBehavior-异常行为, LeakDetect-泄露监测; 等级: 1-提示, 2-低危, 3-中危, 4-高危, 5-严重) */
+  Alert?: LevelOption[];
+  /** 告警通知粒度枚举值：0： 按告警聚合推送1： 按调用记录推送 */
+  AlertGranularity?: number;
+  /** 资产事件枚举值：NewAk： AK新增 */
+  Asset?: string[];
+  /** 通知开始时间参数格式：hh:mm:ss */
+  BeginTime?: string;
+  /** 通知结束时间参数格式：hh:mm:ss */
+  EndTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNotifySettingAlertRequest {
 }
 
@@ -18519,6 +20895,36 @@ declare interface DescribeRaspLicenseListResponse {
   TotalCount?: number;
   /** 数组对象 */
   List?: RaspLicenseList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryOverviewRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeRegistryOverviewResponse {
+  /** 镜像仓库总数 */
+  RegistryCount?: number;
+  /** 连接镜像仓库失败数 */
+  RegistryConnectFailedCount?: number;
+  /** 镜像仓库类型数列表 */
+  RegistryTypeList?: ImageRegistryTypeCountItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryRegionListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeRegistryRegionListResponse {
+  /** 地域列表 */
+  Regions?: RegionInfo[];
+  /** 默认地域 */
+  DefaultRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -19055,6 +21461,96 @@ declare interface DescribeSCFNamespaceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSandboxACLAlertListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：ID：按告警记录 ID 查询单条BelongAssetType：归属资产类型，可选值：HOST（主机） / CONTAINER（容器）RuleName：按命中规则名称搜索RuleAction：命中动作，可选值：PASS（加白） / BLOCK（拦截并告警） / MONITOR（告警）InstanceId：按资产实例 ID 精确过滤（用于资产详情页查看该资产的告警列表等场景）InstanceName：按资产实例名模糊搜索，多个值之间为"或"关系Status：处理状态，可选值：PENDING（未处理） / HANDLED（已处理） / IGNORE（已忽略） / PASS（已加白） / BLOCK（已拦截） */
+  Filters?: Filters[];
+}
+
+declare interface DescribeSandboxACLAlertListResponse {
+  /** 告警列表 */
+  Data?: TrafficSandboxACLAlertInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxACLRuleListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：RuleID：规则 ID，用于查询单条规则RuleName：按规则名称搜索Status：规则状态，可选值：ON（启用） / OFF（禁用）Level：规则级别，可选值：INFO（提示） / LOW（低危） / MEDIUM（中危） / HIGH（高危） / CRITICAL（严重）RuleAction：规则动作，可选值：PASS（加白） / BLOCK（拦截并告警） / MONITOR（告警）BelongAssetType：归属资产类型，可选值：HOST（主机） / CONTAINER（容器） */
+  Filters?: Filters[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSandboxACLRuleListResponse {
+  /** 规则列表 */
+  Data?: TrafficSandboxACLRuleInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxACLSystemRuleListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：RuleName：按规则名称搜索 */
+  Filters?: Filters[];
+}
+
+declare interface DescribeSandboxACLSystemRuleListResponse {
+  /** 系统规则列表 */
+  Data?: TrafficSandboxACLSystemRuleItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxDLPSystemRuleListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：RuleName：按规则名称模糊搜索 */
+  Filters?: Filters[];
+}
+
+declare interface DescribeSandboxDLPSystemRuleListResponse {
+  /** 系统规则列表 */
+  Data?: TrafficSandboxDLPSystemRuleItem[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxFileRuleListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeSandboxFileRuleListResponse {
+  /** 规则总数 */
+  TotalCount?: number;
+  /** 规则列表 */
+  RuleList?: CommandSandboxFileRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeScanReportListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -19257,6 +21753,98 @@ declare interface DescribeSecurityScoreRuleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSkillScanAlertDetailRequest {
+  /** 告警记录 ID取值参考：通过 DescribeSkillScanAlertList 接口获取 */
+  ID: number;
+  /** 集团账号的成员 id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSkillScanAlertDetailResponse {
+  /** 告警记录 ID */
+  ID?: number;
+  /** 租户 AppID */
+  AppID?: number;
+  /** 主机 UUID */
+  UUID?: string;
+  /** 主机 IP 地址 */
+  HostIP?: string;
+  /** 实例 ID参数格式：形如 ins-xxxxxxxx */
+  InstanceID?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** Skill 名称 */
+  SkillName?: string;
+  /** Skill 文件路径 */
+  SkillPath?: string;
+  /** Skill 作用域 */
+  Scope?: string;
+  /** Skill 版本号 */
+  Version?: string;
+  /** 文件内容 SHA256 哈希值参数格式：sha256:<64位hex> */
+  ContentHash?: string;
+  /** 风险等级枚举值：malicious：恶意suspicious：可疑 */
+  RiskLevel?: string;
+  /** 安全评分取值范围：[0, 100] */
+  SecurityScore?: number;
+  /** 主命中规则 ID */
+  PrimaryRuleID?: string;
+  /** 检测引擎版本号 */
+  EngineVersion?: number;
+  /** 处理状态枚举值：0：未处理1：已处理2：已忽略3：已信任 */
+  Status?: number;
+  /** 告警级别枚举值：high：高危medium：中危 */
+  Level?: string;
+  /** 首次检出时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  CreateTime?: string;
+  /** Skill 功能描述（引擎实时查询返回） */
+  SkillDescription?: string;
+  /** 综合风险摘要，概括本次检测发现的主要风险/攻击链（引擎实时查询返回）。传 Language=en-US 时返回英文文案 */
+  RiskDescription?: string;
+  /** 处置建议（引擎实时查询返回） */
+  Mitigation?: string;
+  /** Skill 能力标签列表（引擎实时查询返回） */
+  CapabilityTags?: SkillCapabilityTag[];
+  /** 融合规则目录列表（引擎实时查询返回） */
+  RuleCatalog?: SkillRuleCatalogItem[];
+  /** 扫描结果详情列表（引擎实时查询返回） */
+  ScanItems?: SkillScanEngineResult[];
+  /** 检测报告链接（引擎实时查询返回） */
+  ReportURL?: string;
+  /** 扫描完成时间（引擎实时查询返回）参数格式：ISO8601 格式 */
+  ScannedAt?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSkillScanAlertListRequest {
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 200]默认值：10 */
+  Limit?: number;
+  /** 过滤条件列表，支持的过滤字段：BelongAssetType（归属资产类型 HOST/CONTAINER，未指定默认 HOST）、ContainerId（容器 ID，仅容器告警生效）、RiskLevel（风险等级，精确匹配）、Status（处理状态，精确匹配）、SkillName（Skill 名称，模糊匹配）、UUID（主机 UUID，精确匹配）、Level（告警级别，精确匹配）、ContentHash（文件 SHA256，精确匹配）、InstanceID（实例 ID，精确匹配）、InstanceName（实例名称，模糊匹配）、SkillPath（Skill 路径，模糊匹配） */
+  Filters?: Filters[];
+  /** 排序方式枚举值：ASC：升序DESC：降序默认值：DESC */
+  Order?: string;
+  /** 排序字段枚举值：CreateTime：首次检出时间SecurityScore：安全评分UpdateTime：更新时间默认值：CreateTime */
+  By?: string;
+  /** 集团账号的成员 id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSkillScanAlertListResponse {
+  /** 符合条件的告警总数 */
+  TotalCount?: number;
+  /** 告警列表 */
+  AlertList?: SkillScanAlertItem[];
+  /** 融合规则目录全集（rule_id → rule_name），前端据此翻译 AlertList[].HitRules[].RuleID。语言通过云API公共参数 Language 切换 */
+  RuleCatalog?: SkillRuleCatalogItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillScanPayInfoRequest {
 }
 
@@ -19369,6 +21957,30 @@ declare interface DescribeSubnetAssetsResponse {
   AppIdList?: FilterDataObject[];
   /** 可用区列表 */
   ZoneList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTCRInstanceListRequest {
+  /** 访问密钥Id */
+  AccessKey?: string;
+  /** 访问密钥Key */
+  SecretKey?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像仓库所在region */
+  RegistryRegion?: string[];
+  /** 镜像仓库id */
+  RegistryId?: string;
+  /** 筛选项 */
+  Filter?: Filter;
+}
+
+declare interface DescribeTCRInstanceListResponse {
+  /** 仓库信息 */
+  Registries?: TcrRegistry[];
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -21465,6 +24077,142 @@ declare interface ModifyIaCTokenPeriodResponse {
   RequestId?: string;
 }
 
+declare interface ModifyImageRegistryRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像仓库名 */
+  Name?: string;
+  /** 账号 */
+  Username?: string;
+  /** 密码 */
+  Password?: string;
+  /** 镜像仓库url */
+  Url?: string;
+  /** 镜像仓库类型 */
+  RegistryType?: string;
+  /** 网络类型 */
+  NetType?: string;
+  /** 镜像仓库版本 */
+  RegistryVersion?: string;
+  /** 镜像仓库所属region */
+  RegistryRegion?: string;
+  /** 限速值 */
+  SpeedLimit?: number;
+  /** 安全模式（证书校验）枚举值：0： 安全模式1： 非安全模式 */
+  Insecure?: number;
+  /** 是否自动扫描 */
+  NeedScan?: boolean;
+  /** 同步方式枚举值：0： 全量同步1： 增量同步 */
+  SyncMode?: number;
+  /** 镜像仓库实例id */
+  InstanceId?: string;
+  /** 联通性检测配置 */
+  ConnectivityDetectConfig?: ConnectivityDetectConfig[];
+  /** 镜像仓库id */
+  Id?: number;
+}
+
+declare interface ModifyImageRegistryResponse {
+  /** 镜像仓库id */
+  RegistryId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyImageRegistryTimedScanTaskConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 任务id */
+  Id?: number;
+  /** 任务名 */
+  Name?: string;
+  /** 是否启用 */
+  Enable?: boolean;
+  /** 扫描类别枚举值：CVE： 漏洞RISK： 风险VIRUS： 木马 */
+  ScanType?: string[];
+  /** 定时任务调度配置 */
+  Schedule?: ImageScanScheduleConfig;
+  /** 扫描目标镜像过滤配置 */
+  Target?: ImageScanAssetTarget;
+  /** 镜像过滤配置 */
+  Filter?: ImageScanRegistryFilter;
+  /** 超时时间，单位秒 */
+  Timeout?: number;
+}
+
+declare interface ModifyImageRegistryTimedScanTaskConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyImageSensitiveWhitelistRequest {
+  /** 敏感信息白名单id */
+  RuleId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 加白的敏感信息类型枚举值：1： root启动2： 代码泄露3： 凭据泄露 */
+  Behavior?: number;
+  /** 镜像id */
+  ImageIds?: string[];
+  /** 生效范围 */
+  Scope?: number;
+  /** 白名单状态 */
+  Status?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyImageSensitiveWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyImageVirusWhitelistRequest {
+  /** 木马白名单id */
+  RuleId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 木马白名单md5 */
+  Md5List?: string[];
+  /** 白名单生效范围 */
+  Scope?: number;
+  /** 生效白名单的镜像id列表 */
+  ImageIds?: string[];
+  /** 备注 */
+  Remark?: string;
+  /** 是否启用枚举值：0： 禁用1： 启用 */
+  Status?: number;
+  /** 白名单名称 */
+  Name?: string;
+}
+
+declare interface ModifyImageVirusWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyImageVulWhitelistRequest {
+  /** 漏洞白名单id */
+  RuleId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 漏洞id */
+  PocId?: string;
+  /** 镜像id */
+  ImageIds?: string[];
+  /** 生效范围 */
+  Scope?: number;
+  /** 白名单状态 */
+  Status?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyImageVulWhitelistResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLoginWhiteRecordRequest {
   /** 白名单用户（多个用户逗号隔开） */
   UserName: string;
@@ -21697,6 +24445,34 @@ declare interface ModifyNotifyAssetConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyNotifyMemberRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyNotifyMemberResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyNotifySettingAkRequest {
+  /** 告警类型/等级 (类型: AbnBehavior-异常行为, LeakDetect-泄露监测; 等级: 1-提示, 2-低危, 3-中危, 4-高危, 5-严重) */
+  Alert?: LevelOption[];
+  /** 告警通知粒度枚举值：0： 按告警聚合推送1： 按调用记录推送 */
+  AlertGranularity?: number;
+  /** 资产事件枚举值：NewAk： AK新增 */
+  Asset?: string[];
+  /** 通知开始时间参数格式：hh:mm:ss */
+  BeginTime?: string;
+  /** 通知结束时间参数格式：hh:mm:ss */
+  EndTime?: string;
+}
+
+declare interface ModifyNotifySettingAkResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNotifySettingAlertRequest {
   /** 通知配置 */
   Settings: NotifySetting[];
@@ -21907,6 +24683,18 @@ declare interface ModifyRiskScanCronConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifySandboxLLMAuditRuleStatusRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100 */
+  IDList: number[];
+  /** 目标状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+}
+
+declare interface ModifySandboxLLMAuditRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySecurityScoreRuleRequest {
   /** 完整规则列表，必须包含所有维度、子项、等级的规则 */
   Rules: ModifyRuleItem[];
@@ -21933,6 +24721,22 @@ declare interface ModifyShareUserCSPMResponse {
   Result?: number;
   /** 成功或失败信息 */
   Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySkillScanAlertStatusRequest {
+  /** 告警记录 ID 列表入参限制：单次最多 100 个取值参考：通过 DescribeSkillScanAlertList 接口获取 */
+  IDs: number[];
+  /** 目标处理状态枚举值：1：已处理2：已忽略3：已信任4：已删除（软删除） */
+  Status: number;
+  /** 集团账号的成员 id */
+  MemberId?: string[];
+}
+
+declare interface ModifySkillScanAlertStatusResponse {
+  /** 成功修改的告警数量 */
+  SuccessCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -22399,6 +25203,20 @@ declare interface StopEDRScanTaskResponse {
   RequestId?: string;
 }
 
+declare interface StopImageRegistryScanTaskRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 镜像id */
+  ImageId?: string[];
+  /** 扫描任务id */
+  TaskId?: number;
+}
+
+declare interface StopImageRegistryScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopPreventUninstallRequest {
   /** 是否关闭全局 0 否 1 是 */
   StopGlobal: number;
@@ -22471,6 +25289,20 @@ declare interface SyncDspmUsersRequest {
 }
 
 declare interface SyncDspmUsersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SyncImageRegistryRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 是否同步全部仓库枚举值：true： 是false： 否 */
+  All?: boolean;
+  /** 待同步的镜像仓库Id列表 */
+  RegistryIds?: number[];
+}
+
+declare interface SyncImageRegistryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -22610,6 +25442,8 @@ declare interface Csip {
   AccessAIAnalysisSMTP(data?: AccessAIAnalysisSMTPRequest, config?: AxiosRequestConfig): AxiosPromise<AccessAIAnalysisSMTPResponse>;
   /** 添加资产管理员 {@link AddDspmAssetManagerRequest} {@link AddDspmAssetManagerResponse} */
   AddDspmAssetManager(data: AddDspmAssetManagerRequest, config?: AxiosRequestConfig): AxiosPromise<AddDspmAssetManagerResponse>;
+  /** 添加镜像仓库信息 {@link AddImageRegistryRequest} {@link AddImageRegistryResponse} */
+  AddImageRegistry(data: AddImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<AddImageRegistryResponse>;
   /** 批量添加异地登录白名单 {@link AddLoginWhiteListsRequest} {@link AddLoginWhiteListsResponse} */
   AddLoginWhiteLists(data: AddLoginWhiteListsRequest, config?: AxiosRequestConfig): AxiosPromise<AddLoginWhiteListsResponse>;
   /** csip角色授权绑定接口 {@link AddNewBindRoleUserRequest} {@link AddNewBindRoleUserResponse} */
@@ -22618,12 +25452,22 @@ declare interface Csip {
   AddVulWhitelist(data?: AddVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<AddVulWhitelistResponse>;
   /** 批量更改基线策略 {@link BatchModifyBaselinePolicyRequest} {@link BatchModifyBaselinePolicyResponse} */
   BatchModifyBaselinePolicy(data: BatchModifyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyBaselinePolicyResponse>;
+  /** 批量修改镜像仓库定时扫描任务配置 {@link BatchModifyImageRegistryTimedScanTaskConfigRequest} {@link BatchModifyImageRegistryTimedScanTaskConfigResponse} */
+  BatchModifyImageRegistryTimedScanTaskConfig(data?: BatchModifyImageRegistryTimedScanTaskConfigRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyImageRegistryTimedScanTaskConfigResponse>;
+  /** 批量修改容器镜像敏感信息白名单 {@link BatchModifyImageSensitiveWhitelistRequest} {@link BatchModifyImageSensitiveWhitelistResponse} */
+  BatchModifyImageSensitiveWhitelist(data: BatchModifyImageSensitiveWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyImageSensitiveWhitelistResponse>;
+  /** 批量修改镜像木马白名单 {@link BatchModifyImageVirusWhitelistRequest} {@link BatchModifyImageVirusWhitelistResponse} */
+  BatchModifyImageVirusWhitelist(data: BatchModifyImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyImageVirusWhitelistResponse>;
+  /** 批量修改容器镜像漏洞白名单 {@link BatchModifyImageVulWhitelistRequest} {@link BatchModifyImageVulWhitelistResponse} */
+  BatchModifyImageVulWhitelist(data: BatchModifyImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyImageVulWhitelistResponse>;
   /** 绑定集群负责人 {@link BindClusterOwnerRequest} {@link BindClusterOwnerResponse} */
   BindClusterOwner(data: BindClusterOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<BindClusterOwnerResponse>;
   /** 取消忽略EDR多行为告警 {@link CancelEdrAlertIgnoreRequest} {@link CancelEdrAlertIgnoreResponse} */
   CancelEdrAlertIgnore(data: CancelEdrAlertIgnoreRequest, config?: AxiosRequestConfig): AxiosPromise<CancelEdrAlertIgnoreResponse>;
   /** 判断用户是否购买旗舰版(适用于主机资产) {@link CheckCWPExposePathPermissionRequest} {@link CheckCWPExposePathPermissionResponse} */
   CheckCWPExposePathPermission(data?: CheckCWPExposePathPermissionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCWPExposePathPermissionResponse>;
+  /** 检查镜像仓库实例名是否重复 {@link CheckImageRegistryInstanceNameDuplicateRequest} {@link CheckImageRegistryInstanceNameDuplicateResponse} */
+  CheckImageRegistryInstanceNameDuplicate(data?: CheckImageRegistryInstanceNameDuplicateRequest, config?: AxiosRequestConfig): AxiosPromise<CheckImageRegistryInstanceNameDuplicateResponse>;
   /** 判断当前用户是否购买旗舰版 {@link CheckIsUltimateVersionRequest} {@link CheckIsUltimateVersionResponse} */
   CheckIsUltimateVersion(data?: CheckIsUltimateVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckIsUltimateVersionResponse>;
   /** 风险验证 {@link CheckRiskRequest} {@link CheckRiskResponse} */
@@ -22638,6 +25482,10 @@ declare interface Csip {
   CreateAccessKeySyncTask(data?: CreateAccessKeySyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeySyncTaskResponse>;
   /** 创建全部资产导出任务 {@link CreateAllAssetsExportJobRequest} {@link CreateAllAssetsExportJobResponse} */
   CreateAllAssetsExportJob(data?: CreateAllAssetsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllAssetsExportJobResponse>;
+  /** 创建镜像资产中组件列表导出任务 {@link CreateAssetComponentListExportJobRequest} {@link CreateAssetComponentListExportJobResponse} */
+  CreateAssetComponentListExportJob(data?: CreateAssetComponentListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetComponentListExportJobResponse>;
+  /** 创建镜像仓库组件关联镜像列表导出任务 {@link CreateAssetComponentRelatedImageListExportJobRequest} {@link CreateAssetComponentRelatedImageListExportJobResponse} */
+  CreateAssetComponentRelatedImageListExportJob(data?: CreateAssetComponentRelatedImageListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetComponentRelatedImageListExportJobResponse>;
   /** 创建资产搜索视图 {@link CreateAssetFilterViewRequest} {@link CreateAssetFilterViewResponse} */
   CreateAssetFilterView(data: CreateAssetFilterViewRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetFilterViewResponse>;
   /** 创建主机进程列表导出任务 {@link CreateAssetProcessExportJobRequest} {@link CreateAssetProcessExportJobResponse} */
@@ -22744,6 +25592,38 @@ declare interface Csip {
   CreateIaCFileExportJob(data?: CreateIaCFileExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCFileExportJobResponse>;
   /** 创建IaC检测文件重新扫描任务 {@link CreateIaCFileReScanTaskRequest} {@link CreateIaCFileReScanTaskResponse} */
   CreateIaCFileReScanTask(data: CreateIaCFileReScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateIaCFileReScanTaskResponse>;
+  /** 创建镜像资产列表导出任务 {@link CreateImageAssetListExportJobRequest} {@link CreateImageAssetListExportJobResponse} */
+  CreateImageAssetListExportJob(data?: CreateImageAssetListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAssetListExportJobResponse>;
+  /** 创建镜像关联容器资产导出任务 {@link CreateImageAssociatedContainerListExportJobRequest} {@link CreateImageAssociatedContainerListExportJobResponse} */
+  CreateImageAssociatedContainerListExportJob(data?: CreateImageAssociatedContainerListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAssociatedContainerListExportJobResponse>;
+  /** 创建镜像关联主机资产列表导出任务 {@link CreateImageAssociatedHostListExportJobRequest} {@link CreateImageAssociatedHostListExportJobResponse} */
+  CreateImageAssociatedHostListExportJob(data?: CreateImageAssociatedHostListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageAssociatedHostListExportJobResponse>;
+  /** 创建镜像组件列表导出任务 {@link CreateImageComponentListExportJobRequest} {@link CreateImageComponentListExportJobResponse} */
+  CreateImageComponentListExportJob(data: CreateImageComponentListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageComponentListExportJobResponse>;
+  /** 创建镜像层漏洞列表导出任务 {@link CreateImageLayerVulListExportJobRequest} {@link CreateImageLayerVulListExportJobResponse} */
+  CreateImageLayerVulListExportJob(data?: CreateImageLayerVulListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageLayerVulListExportJobResponse>;
+  /** 创建镜像仓库联通性检查任务 {@link CreateImageRegistryConnectivityTaskRequest} {@link CreateImageRegistryConnectivityTaskResponse} */
+  CreateImageRegistryConnectivityTask(data?: CreateImageRegistryConnectivityTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageRegistryConnectivityTaskResponse>;
+  /** 创建镜像仓库列表导出任务 {@link CreateImageRegistryListExportJobRequest} {@link CreateImageRegistryListExportJobResponse} */
+  CreateImageRegistryListExportJob(data?: CreateImageRegistryListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageRegistryListExportJobResponse>;
+  /** 创建镜像扫描任务 {@link CreateImageRegistryScanTaskRequest} {@link CreateImageRegistryScanTaskResponse} */
+  CreateImageRegistryScanTask(data?: CreateImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageRegistryScanTaskResponse>;
+  /** 创建镜像仓库镜像扫描任务配置 {@link CreateImageRegistryTimedScanTaskConfigRequest} {@link CreateImageRegistryTimedScanTaskConfigResponse} */
+  CreateImageRegistryTimedScanTaskConfig(data?: CreateImageRegistryTimedScanTaskConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageRegistryTimedScanTaskConfigResponse>;
+  /** 创建镜像敏感信息列表导出任务 {@link CreateImageSensitiveInfoListExportJobRequest} {@link CreateImageSensitiveInfoListExportJobResponse} */
+  CreateImageSensitiveInfoListExportJob(data?: CreateImageSensitiveInfoListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSensitiveInfoListExportJobResponse>;
+  /** 创建容器镜像敏感信息白名单 {@link CreateImageSensitiveWhitelistRequest} {@link CreateImageSensitiveWhitelistResponse} */
+  CreateImageSensitiveWhitelist(data?: CreateImageSensitiveWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageSensitiveWhitelistResponse>;
+  /** 创建镜像木马病毒列表导出任务 {@link CreateImageVirusListExportJobRequest} {@link CreateImageVirusListExportJobResponse} */
+  CreateImageVirusListExportJob(data?: CreateImageVirusListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageVirusListExportJobResponse>;
+  /** 创建镜像木马白名单 {@link CreateImageVirusWhitelistRequest} {@link CreateImageVirusWhitelistResponse} */
+  CreateImageVirusWhitelist(data?: CreateImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageVirusWhitelistResponse>;
+  /** 创建镜像漏洞列表导出任务 {@link CreateImageVulListExportJobRequest} {@link CreateImageVulListExportJobResponse} */
+  CreateImageVulListExportJob(data?: CreateImageVulListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageVulListExportJobResponse>;
+  /** 创建镜像漏洞概览列表导出任务 {@link CreateImageVulSummaryListExportJobRequest} {@link CreateImageVulSummaryListExportJobResponse} */
+  CreateImageVulSummaryListExportJob(data?: CreateImageVulSummaryListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageVulSummaryListExportJobResponse>;
+  /** 创建容器镜像漏洞白名单 {@link CreateImageVulWhitelistRequest} {@link CreateImageVulWhitelistResponse} */
+  CreateImageVulWhitelist(data?: CreateImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<CreateImageVulWhitelistResponse>;
   /** 创建Pod关联容器列表导出任务 {@link CreatePodContainerListExportJobRequest} {@link CreatePodContainerListExportJobResponse} */
   CreatePodContainerListExportJob(data?: CreatePodContainerListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePodContainerListExportJobResponse>;
   /** 创建Pod关联服务列表导出任务 {@link CreatePodServiceListExportJobRequest} {@link CreatePodServiceListExportJobResponse} */
@@ -22830,12 +25710,26 @@ declare interface Csip {
   DeleteIaCAccessToken(data: DeleteIaCAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIaCAccessTokenResponse>;
   /** 删除IaC检测文件 {@link DeleteIaCFileRequest} {@link DeleteIaCFileResponse} */
   DeleteIaCFile(data: DeleteIaCFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIaCFileResponse>;
+  /** 删除镜像仓库信息 {@link DeleteImageRegistryRequest} {@link DeleteImageRegistryResponse} */
+  DeleteImageRegistry(data: DeleteImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageRegistryResponse>;
+  /** 删除镜像仓库扫描任务 {@link DeleteImageRegistryScanTaskRequest} {@link DeleteImageRegistryScanTaskResponse} */
+  DeleteImageRegistryScanTask(data?: DeleteImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageRegistryScanTaskResponse>;
+  /** 删除镜像仓库定时扫描任务配置 {@link DeleteImageRegistryTimedScanTaskConfigRequest} {@link DeleteImageRegistryTimedScanTaskConfigResponse} */
+  DeleteImageRegistryTimedScanTaskConfig(data?: DeleteImageRegistryTimedScanTaskConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageRegistryTimedScanTaskConfigResponse>;
+  /** 删除容器镜像敏感信息白名单 {@link DeleteImageSensitiveWhitelistRequest} {@link DeleteImageSensitiveWhitelistResponse} */
+  DeleteImageSensitiveWhitelist(data?: DeleteImageSensitiveWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageSensitiveWhitelistResponse>;
+  /** 删除镜像木马白名单 {@link DeleteImageVirusWhitelistRequest} {@link DeleteImageVirusWhitelistResponse} */
+  DeleteImageVirusWhitelist(data?: DeleteImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageVirusWhitelistResponse>;
+  /** 删除容器镜像漏洞白名单 {@link DeleteImageVulWhitelistRequest} {@link DeleteImageVulWhitelistResponse} */
+  DeleteImageVulWhitelist(data?: DeleteImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageVulWhitelistResponse>;
   /** 删除异地登录白名单规则 {@link DeleteLoginWhiteListRequest} {@link DeleteLoginWhiteListResponse} */
   DeleteLoginWhiteList(data: DeleteLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteListResponse>;
   /** 删除机器清理记录 {@link DeleteMachineClearHistoryRequest} {@link DeleteMachineClearHistoryResponse} */
   DeleteMachineClearHistory(data: DeleteMachineClearHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineClearHistoryResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 删除 LLM 审计规则 {@link DeleteSandboxLLMAuditRuleRequest} {@link DeleteSandboxLLMAuditRuleResponse} */
+  DeleteSandboxLLMAuditRule(data: DeleteSandboxLLMAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxLLMAuditRuleResponse>;
   /** 删除漏洞白名单 {@link DeleteVulWhitelistRequest} {@link DeleteVulWhitelistResponse} */
   DeleteVulWhitelist(data?: DeleteVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVulWhitelistResponse>;
   /** 批量删除通知策略 {@link DeleteWebhookPoliciesRequest} {@link DeleteWebhookPoliciesResponse} */
@@ -22844,6 +25738,12 @@ declare interface Csip {
   DeleteWebhookReceivers(data: DeleteWebhookReceiversRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWebhookReceiversResponse>;
   /** 获取 AI Agent 资产列表 {@link DescribeAIAgentAssetListRequest} {@link DescribeAIAgentAssetListResponse} */
   DescribeAIAgentAssetList(data?: DescribeAIAgentAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentAssetListResponse>;
+  /** 获取 AI Agent 资产凭据扫描列表 {@link DescribeAIAgentCredentialListRequest} {@link DescribeAIAgentCredentialListResponse} */
+  DescribeAIAgentCredentialList(data?: DescribeAIAgentCredentialListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentCredentialListResponse>;
+  /** 查询 AI Agent 凭据泄露位置列表 {@link DescribeAIAgentCredentialLocationListRequest} {@link DescribeAIAgentCredentialLocationListResponse} */
+  DescribeAIAgentCredentialLocationList(data: DescribeAIAgentCredentialLocationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentCredentialLocationListResponse>;
+  /** 获取 AI Agent Skill 列表 {@link DescribeAIAgentSkillListRequest} {@link DescribeAIAgentSkillListResponse} */
+  DescribeAIAgentSkillList(data?: DescribeAIAgentSkillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAgentSkillListResponse>;
   /** 获取AI分析文件下载链接 {@link DescribeAIAnalysisFileDownloadURLRequest} {@link DescribeAIAnalysisFileDownloadURLResponse} */
   DescribeAIAnalysisFileDownloadURL(data?: DescribeAIAnalysisFileDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIAnalysisFileDownloadURLResponse>;
   /** 获取AI分析历史记录 {@link DescribeAIAnalysisHistoryRequest} {@link DescribeAIAnalysisHistoryResponse} */
@@ -22894,6 +25794,10 @@ declare interface Csip {
   DescribeAgentRunPolicy(data?: DescribeAgentRunPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentRunPolicyResponse>;
   /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
+  /** 查询资产中组件列表 {@link DescribeAssetComponentListRequest} {@link DescribeAssetComponentListResponse} */
+  DescribeAssetComponentList(data?: DescribeAssetComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentListResponse>;
+  /** 查询镜像仓库组件关联镜像列表 {@link DescribeAssetComponentRelatedImageListRequest} {@link DescribeAssetComponentRelatedImageListResponse} */
+  DescribeAssetComponentRelatedImageList(data?: DescribeAssetComponentRelatedImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentRelatedImageListResponse>;
   /** 资产详情 {@link DescribeAssetDetailRequest} {@link DescribeAssetDetailResponse} */
   DescribeAssetDetail(data: DescribeAssetDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetDetailResponse>;
   /** 资产搜索视图列表 {@link DescribeAssetFilterViewsRequest} {@link DescribeAssetFilterViewsResponse} */
@@ -22924,6 +25828,8 @@ declare interface Csip {
   DescribeAssetViewVulRiskList(data?: DescribeAssetViewVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetViewVulRiskListResponse>;
   /** 查询是否绑定角色 {@link DescribeAssumeRoleRequest} {@link DescribeAssumeRoleResponse} */
   DescribeAssumeRole(data?: DescribeAssumeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssumeRoleResponse>;
+  /** 查询后台扫描引擎地域列表 {@link DescribeBackendScanEngineRegionListRequest} {@link DescribeBackendScanEngineRegionListResponse} */
+  DescribeBackendScanEngineRegionList(data?: DescribeBackendScanEngineRegionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackendScanEngineRegionListResponse>;
   /** 获取爆破阻断模式 {@link DescribeBanModeRequest} {@link DescribeBanModeResponse} */
   DescribeBanMode(data?: DescribeBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBanModeResponse>;
   /** 获取阻断按钮状态 {@link DescribeBanStatusRequest} {@link DescribeBanStatusResponse} */
@@ -23010,6 +25916,8 @@ declare interface Csip {
   DescribeCWPTaskDuration(data: DescribeCWPTaskDurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCWPTaskDurationResponse>;
   /** 获取调用记录 {@link DescribeCallRecordRequest} {@link DescribeCallRecordResponse} */
   DescribeCallRecord(data?: DescribeCallRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCallRecordResponse>;
+  /** 查询联通性检测主机列表 {@link DescribeCheckConnectivityHostListRequest} {@link DescribeCheckConnectivityHostListResponse} */
+  DescribeCheckConnectivityHostList(data?: DescribeCheckConnectivityHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckConnectivityHostListResponse>;
   /** 检查项视角云资源配置风险 {@link DescribeCheckViewRisksRequest} {@link DescribeCheckViewRisksResponse} */
   DescribeCheckViewRisks(data?: DescribeCheckViewRisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCheckViewRisksResponse>;
   /** 查询腾讯云指定CLB实例对应的监听器列表 {@link DescribeClbListenerListRequest} {@link DescribeClbListenerListResponse} */
@@ -23326,6 +26234,56 @@ declare interface Csip {
   DescribeIaCFileReport(data: DescribeIaCFileReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCFileReportResponse>;
   /** 获取IaC检测接入Token列表 {@link DescribeIaCTokenListRequest} {@link DescribeIaCTokenListResponse} */
   DescribeIaCTokenList(data?: DescribeIaCTokenListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCTokenListResponse>;
+  /** 查询镜像资产详情 {@link DescribeImageAssetDetailRequest} {@link DescribeImageAssetDetailResponse} */
+  DescribeImageAssetDetail(data?: DescribeImageAssetDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAssetDetailResponse>;
+  /** 查询镜像资产列表 {@link DescribeImageAssetListRequest} {@link DescribeImageAssetListResponse} */
+  DescribeImageAssetList(data?: DescribeImageAssetListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAssetListResponse>;
+  /** 查询镜像关联资产数 {@link DescribeImageAssociatedAssetCountRequest} {@link DescribeImageAssociatedAssetCountResponse} */
+  DescribeImageAssociatedAssetCount(data?: DescribeImageAssociatedAssetCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAssociatedAssetCountResponse>;
+  /** 查询镜像关联容器资产 {@link DescribeImageAssociatedContainerListRequest} {@link DescribeImageAssociatedContainerListResponse} */
+  DescribeImageAssociatedContainerList(data?: DescribeImageAssociatedContainerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAssociatedContainerListResponse>;
+  /** 查询镜像关联主机资产列表 {@link DescribeImageAssociatedHostListRequest} {@link DescribeImageAssociatedHostListResponse} */
+  DescribeImageAssociatedHostList(data?: DescribeImageAssociatedHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageAssociatedHostListResponse>;
+  /** 查询镜像组件列表 {@link DescribeImageComponentListRequest} {@link DescribeImageComponentListResponse} */
+  DescribeImageComponentList(data: DescribeImageComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageComponentListResponse>;
+  /** 查询镜像仓库导出任务列表 {@link DescribeImageExportJobListRequest} {@link DescribeImageExportJobListResponse} */
+  DescribeImageExportJobList(data?: DescribeImageExportJobListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageExportJobListResponse>;
+  /** 查询镜像层信息列表 {@link DescribeImageLayerListRequest} {@link DescribeImageLayerListResponse} */
+  DescribeImageLayerList(data: DescribeImageLayerListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageLayerListResponse>;
+  /** 查询镜像层漏洞列表 {@link DescribeImageLayerVulListRequest} {@link DescribeImageLayerVulListResponse} */
+  DescribeImageLayerVulList(data?: DescribeImageLayerVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageLayerVulListResponse>;
+  /** 查询镜像仓库资产总览 {@link DescribeImageRegistryAssetOverviewRequest} {@link DescribeImageRegistryAssetOverviewResponse} */
+  DescribeImageRegistryAssetOverview(data?: DescribeImageRegistryAssetOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryAssetOverviewResponse>;
+  /** 查询镜像仓库联通性检查任务结果 {@link DescribeImageRegistryConnectivityTaskResultRequest} {@link DescribeImageRegistryConnectivityTaskResultResponse} */
+  DescribeImageRegistryConnectivityTaskResult(data?: DescribeImageRegistryConnectivityTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryConnectivityTaskResultResponse>;
+  /** 查询镜像仓库列表 {@link DescribeImageRegistryListRequest} {@link DescribeImageRegistryListResponse} */
+  DescribeImageRegistryList(data?: DescribeImageRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryListResponse>;
+  /** 查询镜像仓库命名空间列表 {@link DescribeImageRegistryNamespaceListRequest} {@link DescribeImageRegistryNamespaceListResponse} */
+  DescribeImageRegistryNamespaceList(data?: DescribeImageRegistryNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryNamespaceListResponse>;
+  /** 查询镜像仓库扫描子任务信息 {@link DescribeImageRegistryScanSubTaskListRequest} {@link DescribeImageRegistryScanSubTaskListResponse} */
+  DescribeImageRegistryScanSubTaskList(data?: DescribeImageRegistryScanSubTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryScanSubTaskListResponse>;
+  /** 查询镜像仓库镜像扫描任务列表 {@link DescribeImageRegistryScanTaskListRequest} {@link DescribeImageRegistryScanTaskListResponse} */
+  DescribeImageRegistryScanTaskList(data?: DescribeImageRegistryScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryScanTaskListResponse>;
+  /** 查看镜像仓库定时扫描任务配置 {@link DescribeImageRegistryTimedScanTaskConfigRequest} {@link DescribeImageRegistryTimedScanTaskConfigResponse} */
+  DescribeImageRegistryTimedScanTaskConfig(data?: DescribeImageRegistryTimedScanTaskConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimedScanTaskConfigResponse>;
+  /** 查询镜像仓库定时扫描任务预览 {@link DescribeImageRegistryTimedScanTaskPreviewRequest} {@link DescribeImageRegistryTimedScanTaskPreviewResponse} */
+  DescribeImageRegistryTimedScanTaskPreview(data?: DescribeImageRegistryTimedScanTaskPreviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageRegistryTimedScanTaskPreviewResponse>;
+  /** 查询镜像敏感信息列表 {@link DescribeImageSensitiveInfoListRequest} {@link DescribeImageSensitiveInfoListResponse} */
+  DescribeImageSensitiveInfoList(data?: DescribeImageSensitiveInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSensitiveInfoListResponse>;
+  /** 查询容器镜像敏感信息白名单 {@link DescribeImageSensitiveWhitelistRequest} {@link DescribeImageSensitiveWhitelistResponse} */
+  DescribeImageSensitiveWhitelist(data?: DescribeImageSensitiveWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageSensitiveWhitelistResponse>;
+  /** 查询镜像木马病毒列表 {@link DescribeImageVirusListRequest} {@link DescribeImageVirusListResponse} */
+  DescribeImageVirusList(data?: DescribeImageVirusListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageVirusListResponse>;
+  /** 查询镜像木马白名单 {@link DescribeImageVirusWhitelistRequest} {@link DescribeImageVirusWhitelistResponse} */
+  DescribeImageVirusWhitelist(data?: DescribeImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageVirusWhitelistResponse>;
+  /** 查询镜像木马白名单详情 {@link DescribeImageVirusWhitelistDetailRequest} {@link DescribeImageVirusWhitelistDetailResponse} */
+  DescribeImageVirusWhitelistDetail(data?: DescribeImageVirusWhitelistDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageVirusWhitelistDetailResponse>;
+  /** 查询镜像漏洞列表 {@link DescribeImageVulListRequest} {@link DescribeImageVulListResponse} */
+  DescribeImageVulList(data?: DescribeImageVulListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageVulListResponse>;
+  /** 查询镜像漏洞概览列表 {@link DescribeImageVulSummaryListRequest} {@link DescribeImageVulSummaryListResponse} */
+  DescribeImageVulSummaryList(data?: DescribeImageVulSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageVulSummaryListResponse>;
+  /** 查询容器镜像漏洞白名单 {@link DescribeImageVulWhitelistRequest} {@link DescribeImageVulWhitelistResponse} */
+  DescribeImageVulWhitelist(data?: DescribeImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeImageVulWhitelistResponse>;
   /** 查看ip调用记录详情 {@link DescribeIpInvokeRecordRequest} {@link DescribeIpInvokeRecordResponse} */
   DescribeIpInvokeRecord(data?: DescribeIpInvokeRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpInvokeRecordResponse>;
   /** 调用记录详情 {@link DescribeIpInvokeRecordDetailRequest} {@link DescribeIpInvokeRecordDetailResponse} */
@@ -23384,6 +26342,8 @@ declare interface Csip {
   DescribeNotifyAssetConfig(data?: DescribeNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifyAssetConfigResponse>;
   /** 获取通知设置 {@link DescribeNotifySettingRequest} {@link DescribeNotifySettingResponse} */
   DescribeNotifySetting(data?: DescribeNotifySettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifySettingResponse>;
+  /** 获取通知设置（云API风险治理） {@link DescribeNotifySettingAkRequest} {@link DescribeNotifySettingAkResponse} */
+  DescribeNotifySettingAk(data?: DescribeNotifySettingAkRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifySettingAkResponse>;
   /** 获取告警中心通知高级配置 {@link DescribeNotifySettingAlertRequest} {@link DescribeNotifySettingAlertResponse} */
   DescribeNotifySettingAlert(data?: DescribeNotifySettingAlertRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNotifySettingAlertResponse>;
   /** 查询集团账号详情 {@link DescribeOrganizationInfoRequest} {@link DescribeOrganizationInfoResponse} */
@@ -23414,6 +26374,10 @@ declare interface Csip {
   DescribePublicIpAssets(data?: DescribePublicIpAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicIpAssetsResponse>;
   /** 查询应用防护授权列表 {@link DescribeRaspLicenseListRequest} {@link DescribeRaspLicenseListResponse} */
   DescribeRaspLicenseList(data?: DescribeRaspLicenseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRaspLicenseListResponse>;
+  /** 查询仓库总览 {@link DescribeRegistryOverviewRequest} {@link DescribeRegistryOverviewResponse} */
+  DescribeRegistryOverview(data?: DescribeRegistryOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryOverviewResponse>;
+  /** 查询镜像仓库地域列表 {@link DescribeRegistryRegionListRequest} {@link DescribeRegistryRegionListResponse} */
+  DescribeRegistryRegionList(data?: DescribeRegistryRegionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryRegionListResponse>;
   /** 仓库镜像列表 {@link DescribeRepositoryImageAssetsRequest} {@link DescribeRepositoryImageAssetsResponse} */
   DescribeRepositoryImageAssets(data?: DescribeRepositoryImageAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoryImageAssetsResponse>;
   /** 查询反弹Shell系统策略配置 {@link DescribeReverseShellSystemPolicyConfigRequest} {@link DescribeReverseShellSystemPolicyConfigResponse} */
@@ -23462,6 +26426,16 @@ declare interface Csip {
   DescribeSCFFunctionVersionList(data: DescribeSCFFunctionVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSCFFunctionVersionListResponse>;
   /** 查询 SCF 命名空间列表 {@link DescribeSCFNamespaceListRequest} {@link DescribeSCFNamespaceListResponse} */
   DescribeSCFNamespaceList(data: DescribeSCFNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSCFNamespaceListResponse>;
+  /** 查询 ACL 告警列表 {@link DescribeSandboxACLAlertListRequest} {@link DescribeSandboxACLAlertListResponse} */
+  DescribeSandboxACLAlertList(data?: DescribeSandboxACLAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxACLAlertListResponse>;
+  /** 查询用户 ACL 规则列表 {@link DescribeSandboxACLRuleListRequest} {@link DescribeSandboxACLRuleListResponse} */
+  DescribeSandboxACLRuleList(data?: DescribeSandboxACLRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxACLRuleListResponse>;
+  /** 查询 ACL 系统规则列表 {@link DescribeSandboxACLSystemRuleListRequest} {@link DescribeSandboxACLSystemRuleListResponse} */
+  DescribeSandboxACLSystemRuleList(data?: DescribeSandboxACLSystemRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxACLSystemRuleListResponse>;
+  /** 查询 DLP 系统规则列表 {@link DescribeSandboxDLPSystemRuleListRequest} {@link DescribeSandboxDLPSystemRuleListResponse} */
+  DescribeSandboxDLPSystemRuleList(data?: DescribeSandboxDLPSystemRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxDLPSystemRuleListResponse>;
+  /** 获取命令沙箱文件访问规则列表 {@link DescribeSandboxFileRuleListRequest} {@link DescribeSandboxFileRuleListResponse} */
+  DescribeSandboxFileRuleList(data?: DescribeSandboxFileRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxFileRuleListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
   /** 查询云边界分析扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
@@ -23482,6 +26456,10 @@ declare interface Csip {
   DescribeSecurityScoreOverview(data?: DescribeSecurityScoreOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityScoreOverviewResponse>;
   /** 获取安全评分规则 {@link DescribeSecurityScoreRuleRequest} {@link DescribeSecurityScoreRuleResponse} */
   DescribeSecurityScoreRule(data?: DescribeSecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityScoreRuleResponse>;
+  /** 查询Skill安全检测告警详情 {@link DescribeSkillScanAlertDetailRequest} {@link DescribeSkillScanAlertDetailResponse} */
+  DescribeSkillScanAlertDetail(data: DescribeSkillScanAlertDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanAlertDetailResponse>;
+  /** 查询Skill安全检测告警列表 {@link DescribeSkillScanAlertListRequest} {@link DescribeSkillScanAlertListResponse} */
+  DescribeSkillScanAlertList(data?: DescribeSkillScanAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanAlertListResponse>;
   /** 查询 Skill 安全检测计费信息 {@link DescribeSkillScanPayInfoRequest} {@link DescribeSkillScanPayInfoResponse} */
   DescribeSkillScanPayInfo(data?: DescribeSkillScanPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanPayInfoResponse>;
   /** 查询 Skill 安全检测结果 {@link DescribeSkillScanResultRequest} {@link DescribeSkillScanResultResponse} */
@@ -23492,6 +26470,8 @@ declare interface Csip {
   DescribeSubUserInfo(data?: DescribeSubUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserInfoResponse>;
   /** 子网列表 {@link DescribeSubnetAssetsRequest} {@link DescribeSubnetAssetsResponse} */
   DescribeSubnetAssets(data?: DescribeSubnetAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubnetAssetsResponse>;
+  /** 获取TCR实例列表 {@link DescribeTCRInstanceListRequest} {@link DescribeTCRInstanceListResponse} */
+  DescribeTCRInstanceList(data?: DescribeTCRInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTCRInstanceListResponse>;
   /** 打标策略生效资产列表 {@link DescribeTagRuleAssetsRequest} {@link DescribeTagRuleAssetsResponse} */
   DescribeTagRuleAssets(data?: DescribeTagRuleAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagRuleAssetsResponse>;
   /** 获取任务扫描报告列表 {@link DescribeTaskLogListRequest} {@link DescribeTaskLogListResponse} */
@@ -23712,6 +26692,16 @@ declare interface Csip {
   ModifyExposureTag(data: ModifyExposureTagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyExposureTagResponse>;
   /** 修改IaC检测接入Token存储周期 {@link ModifyIaCTokenPeriodRequest} {@link ModifyIaCTokenPeriodResponse} */
   ModifyIaCTokenPeriod(data: ModifyIaCTokenPeriodRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIaCTokenPeriodResponse>;
+  /** 修改镜像仓库信息 {@link ModifyImageRegistryRequest} {@link ModifyImageRegistryResponse} */
+  ModifyImageRegistry(data?: ModifyImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageRegistryResponse>;
+  /** 修改镜像仓库定时扫描任务配置 {@link ModifyImageRegistryTimedScanTaskConfigRequest} {@link ModifyImageRegistryTimedScanTaskConfigResponse} */
+  ModifyImageRegistryTimedScanTaskConfig(data?: ModifyImageRegistryTimedScanTaskConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageRegistryTimedScanTaskConfigResponse>;
+  /** 修改容器镜像敏感信息白名单 {@link ModifyImageSensitiveWhitelistRequest} {@link ModifyImageSensitiveWhitelistResponse} */
+  ModifyImageSensitiveWhitelist(data: ModifyImageSensitiveWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSensitiveWhitelistResponse>;
+  /** 修改镜像木马白名单 {@link ModifyImageVirusWhitelistRequest} {@link ModifyImageVirusWhitelistResponse} */
+  ModifyImageVirusWhitelist(data: ModifyImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageVirusWhitelistResponse>;
+  /** 修改容器镜像漏洞白名单 {@link ModifyImageVulWhitelistRequest} {@link ModifyImageVulWhitelistResponse} */
+  ModifyImageVulWhitelist(data: ModifyImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageVulWhitelistResponse>;
   /** 更新合并后登录审计白名单信息 {@link ModifyLoginWhiteRecordRequest} {@link ModifyLoginWhiteRecordResponse} */
   ModifyLoginWhiteRecord(data: ModifyLoginWhiteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginWhiteRecordResponse>;
   /** 修改机器清理配置 {@link ModifyMachineAutoClearConfigRequest} {@link ModifyMachineAutoClearConfigResponse} */
@@ -23732,8 +26722,12 @@ declare interface Csip {
   ModifyNotifyAgentOfflineDuration(data: ModifyNotifyAgentOfflineDurationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyAgentOfflineDurationResponse>;
   /** 修改通知资产范围配置 {@link ModifyNotifyAssetConfigRequest} {@link ModifyNotifyAssetConfigResponse} */
   ModifyNotifyAssetConfig(data?: ModifyNotifyAssetConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyAssetConfigResponse>;
+  /** 修改通知成员账号 {@link ModifyNotifyMemberRequest} {@link ModifyNotifyMemberResponse} */
+  ModifyNotifyMember(data?: ModifyNotifyMemberRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifyMemberResponse>;
   /** 修改通知设置 {@link ModifyNotifySettingRequest} {@link ModifyNotifySettingResponse} */
   ModifyNotifySetting(data?: ModifyNotifySettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifySettingResponse>;
+  /** 修改通知设置（云API风险治理） {@link ModifyNotifySettingAkRequest} {@link ModifyNotifySettingAkResponse} */
+  ModifyNotifySettingAk(data?: ModifyNotifySettingAkRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifySettingAkResponse>;
   /** 修改告警中心通知高级配置 {@link ModifyNotifySettingAlertRequest} {@link ModifyNotifySettingAlertResponse} */
   ModifyNotifySettingAlert(data: ModifyNotifySettingAlertRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotifySettingAlertResponse>;
   /** 修改集团账号状态 {@link ModifyOrganizationAccountStatusRequest} {@link ModifyOrganizationAccountStatusResponse} */
@@ -23754,10 +26748,14 @@ declare interface Csip {
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 更新用户周期检测计划 {@link ModifyRiskScanCronConfigRequest} {@link ModifyRiskScanCronConfigResponse} */
   ModifyRiskScanCronConfig(data?: ModifyRiskScanCronConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskScanCronConfigResponse>;
+  /** 批量启用或禁用 LLM 审计规则 {@link ModifySandboxLLMAuditRuleStatusRequest} {@link ModifySandboxLLMAuditRuleStatusResponse} */
+  ModifySandboxLLMAuditRuleStatus(data: ModifySandboxLLMAuditRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxLLMAuditRuleStatusResponse>;
   /** 修改安全评分规则 {@link ModifySecurityScoreRuleRequest} {@link ModifySecurityScoreRuleResponse} */
   ModifySecurityScoreRule(data: ModifySecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityScoreRuleResponse>;
   /** 更新CSPM共享配额 {@link ModifyShareUserCSPMRequest} {@link ModifyShareUserCSPMResponse} */
   ModifyShareUserCSPM(data?: ModifyShareUserCSPMRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShareUserCSPMResponse>;
+  /** 批量修改Skill安全检测告警状态 {@link ModifySkillScanAlertStatusRequest} {@link ModifySkillScanAlertStatusResponse} */
+  ModifySkillScanAlertStatus(data: ModifySkillScanAlertStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySkillScanAlertStatusResponse>;
   /** 更新自定义策略的开关 {@link ModifyUebaRuleSwitchRequest} {@link ModifyUebaRuleSwitchResponse} */
   ModifyUebaRuleSwitch(data: ModifyUebaRuleSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUebaRuleSwitchResponse>;
   /** 修改漏洞扫描配置（周期扫描） {@link ModifyVulScanPeriodicRequest} {@link ModifyVulScanPeriodicResponse} */
@@ -23806,6 +26804,8 @@ declare interface Csip {
   StopCSIPManualMalwareScan(data: StopCSIPManualMalwareScanRequest, config?: AxiosRequestConfig): AxiosPromise<StopCSIPManualMalwareScanResponse>;
   /** 停止或取消EDR扫描任务 {@link StopEDRScanTaskRequest} {@link StopEDRScanTaskResponse} */
   StopEDRScanTask(data: StopEDRScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopEDRScanTaskResponse>;
+  /** 停止镜像仓库镜像扫描任务 {@link StopImageRegistryScanTaskRequest} {@link StopImageRegistryScanTaskResponse} */
+  StopImageRegistryScanTask(data?: StopImageRegistryScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopImageRegistryScanTaskResponse>;
   /** 关闭防卸载功能 {@link StopPreventUninstallRequest} {@link StopPreventUninstallResponse} */
   StopPreventUninstall(data: StopPreventUninstallRequest, config?: AxiosRequestConfig): AxiosPromise<StopPreventUninstallResponse>;
   /** 关闭进程防护功能 {@link StopProcessDaemonRequest} {@link StopProcessDaemonResponse} */
@@ -23818,6 +26818,8 @@ declare interface Csip {
   SyncDspmAssets(data?: SyncDspmAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmAssetsResponse>;
   /** 同步Dspm用户列表 {@link SyncDspmUsersRequest} {@link SyncDspmUsersResponse} */
   SyncDspmUsers(data?: SyncDspmUsersRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDspmUsersResponse>;
+  /** 镜像仓库同步 {@link SyncImageRegistryRequest} {@link SyncImageRegistryResponse} */
+  SyncImageRegistry(data?: SyncImageRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<SyncImageRegistryResponse>;
   /** 测试接收机器人 {@link TestWebhookReceiverRequest} {@link TestWebhookReceiverResponse} */
   TestWebhookReceiver(data: TestWebhookReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<TestWebhookReceiverResponse>;
   /** 卸载集群容器安全Agent {@link UninstallClusterAgentRequest} {@link UninstallClusterAgentResponse} */

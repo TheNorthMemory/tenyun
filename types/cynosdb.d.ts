@@ -304,6 +304,8 @@ declare interface BackupFileInfo {
   SnapShotType?: string;
   /** 备份文件备注 */
   BackupName?: string;
+  /** 备份文件所在地域 */
+  ExistRegions?: BackupRegionAndIds[];
   /** 投递状态 */
   CopyStatus?: string;
   /** 秘钥id */
@@ -5418,6 +5420,24 @@ declare interface DescribeClusterServerlessScalePlansResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterStorageAutoExpandRequest {
+  /** 集群ID */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterStorageAutoExpandResponse {
+  /** 存储使用率阈值 */
+  StorageUsageThreshold?: number;
+  /** 扩容步长 */
+  ExpandStep?: number;
+  /** 最大存储上限 */
+  MaxStorageLimit?: number;
+  /** 是否开启：yes-开启，no-关闭 */
+  StorageAutoExpand?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterTransparentEncryptInfoRequest {
   /** 集群id */
   ClusterId: string;
@@ -8725,6 +8745,8 @@ declare interface Cynosdb {
   DescribeClusterReadOnly(data: DescribeClusterReadOnlyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterReadOnlyResponse>;
   /** 查询集群Serverless弹性计划 {@link DescribeClusterServerlessScalePlansRequest} {@link DescribeClusterServerlessScalePlansResponse} */
   DescribeClusterServerlessScalePlans(data: DescribeClusterServerlessScalePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterServerlessScalePlansResponse>;
+  /** 查看自动扩容配置 {@link DescribeClusterStorageAutoExpandRequest} {@link DescribeClusterStorageAutoExpandResponse} */
+  DescribeClusterStorageAutoExpand(data: DescribeClusterStorageAutoExpandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStorageAutoExpandResponse>;
   /** 查询集群透明加密信息 {@link DescribeClusterTransparentEncryptInfoRequest} {@link DescribeClusterTransparentEncryptInfoResponse} */
   DescribeClusterTransparentEncryptInfo(data: DescribeClusterTransparentEncryptInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterTransparentEncryptInfoResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */

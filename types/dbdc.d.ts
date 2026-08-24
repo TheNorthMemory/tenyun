@@ -1253,6 +1253,8 @@ declare interface RemoveNodesFromDBCustomClusterRequest {
   NodeIds: string[];
   /** 节点的登录参数 */
   LoginSettings?: LoginSettings;
+  /** 当节点中还有业务 Pod 在运行，默认会拦截从集群中移除节点的操作。如果该参数为 true，表示强制执行此操作。枚举值：true： 是false： 否默认值：false */
+  Force?: boolean;
 }
 
 declare interface RemoveNodesFromDBCustomClusterResponse {
