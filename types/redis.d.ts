@@ -2156,6 +2156,18 @@ declare interface DescribeInstanceParamsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstancePasswordPolicyRequest {
+  /** 实例 ID。请登录 Redis 控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeInstancePasswordPolicyResponse {
+  /** 实例密码复杂度策略。 */
+  PasswordPolicy?: PasswordPolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSecurityGroupRequest {
   /** 实例 ID 列表，数组长度限制[0,100]。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceIds: string[];
@@ -3683,6 +3695,8 @@ declare interface Redis {
   DescribeInstanceParamRecords(data: DescribeInstanceParamRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamRecordsResponse>;
   /** 查询实例的参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询实例当前密码复杂度配置 {@link DescribeInstancePasswordPolicyRequest} {@link DescribeInstancePasswordPolicyResponse} */
+  DescribeInstancePasswordPolicy(data: DescribeInstancePasswordPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancePasswordPolicyResponse>;
   /** 查询实例安全组信息 {@link DescribeInstanceSecurityGroupRequest} {@link DescribeInstanceSecurityGroupResponse} */
   DescribeInstanceSecurityGroup(data: DescribeInstanceSecurityGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSecurityGroupResponse>;
   /** 获取集群版实例分片信息 {@link DescribeInstanceShardsRequest} {@link DescribeInstanceShardsResponse} */

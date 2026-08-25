@@ -965,7 +965,7 @@ declare interface AssessEnvironmentRiskResponse {
 }
 
 declare interface AssessRiskRequest {
-  /** 事件码，标准事件包含：枚举值：login： 登录register： 注册create_order： 创建订单transaction： 交易支付charge_back： 拒付sms： 短信logout： 登出modify_account： 修改账号modify_password： 修改密码security_verification： 安全验证add_promotion： 参加营销活动redeem： 兑奖withdraw： 提现cust_event： 自定义事件，cust_xxxscan_code： 扫码lucky_draw： 抽奖task： 做任务invitation： 邀请claim_red_packet： 领红包browse： 浏览自定义事件可与RCE约定后进行风险评估 */
+  /** 事件码。用于指定业务接入的场景节点。 账号保护产品下的标准事件包含： login： 登录 register： 注册 sms： 短信 logout： 登出 modify_account： 修改账号 modify_password： 修改密码 security_verification： 安全验证交易保护产品下的标准事件包含：create_order： 创建订单 transaction： 交易支付 charge_back： 拒付营销保护产品下的标准事件包含：add_promotion： 参加营销活动 redeem： 兑奖 withdraw： 提现 cust_event： 自定义事件，cust_xxx scan_code： 扫码 lucky_draw： 抽奖 task： 做任务 invitation： 邀请 claim_red_packet： 领红包 browse： 浏览自定义事件可与RCE约定后进行风险评估 */
   EventCode: string;
   /** 事件的发生时间参数格式：符合ISO 8601标准的带UTC时区的毫秒级时间 */
   EventTime: string;
@@ -987,9 +987,9 @@ declare interface AssessRiskRequest {
   Browser?: Browser;
   /** 应用程序、操作系统和移动设备详细信息，若您已集成我们的设备指纹SDK，则无需传入此字段 */
   App?: App;
-  /** 数据授权信息，国内地域必填 */
+  /** 数据授权信息，境内地域必填 */
   DataAuthorization?: DataAuthorization;
-  /** 手机号码加密方式，国内地域必填枚举值：md5： md5加密plain： 明文 */
+  /** 手机号码加密方式，境内地域必填枚举值：md5： md5加密plain： 明文 */
   UserPhoneEncrypt?: string;
   /** 微信开放账号 */
   WeChatOpenId?: string;
@@ -1007,7 +1007,7 @@ declare interface AssessRiskResponse {
 }
 
 declare interface ReportEventRequest {
-  /** 事件码，标准事件包含：枚举值：login： 登录register： 注册create_order： 创建订单transaction： 交易支付charge_back： 拒付sms： 短信logout： 登出modify_account： 修改账号modify_password： 修改密码security_verification： 安全验证add_promotion： 参加营销活动redeem： 兑奖withdraw： 提现cust_event： 自定义事件，cust_xxxscan_code： 扫码lucky_draw： 抽奖task： 做任务invitation： 邀请claim_red_packet： 领红包browse： 浏览自定义事件可与RCE约定后进行风险评估 */
+  /** 事件码。用于指定业务接入的场景节点。 账号保护产品下的标准事件包含： login： 登录 register： 注册 sms： 短信 logout： 登出 modify_account： 修改账号 modify_password： 修改密码 security_verification： 安全验证交易保护产品下的标准事件包含：create_order： 创建订单 transaction： 交易支付 charge_back： 拒付营销保护产品下的标准事件包含：add_promotion： 参加营销活动 redeem： 兑奖 withdraw： 提现 cust_event： 自定义事件，cust_xxx scan_code： 扫码 lucky_draw： 抽奖 task： 做任务 invitation： 邀请 claim_red_packet： 领红包 browse： 浏览自定义事件可与RCE约定后进行风险评估 */
   EventCode: string;
   /** 事件的发生时间参数格式：符合ISO 8601标准的带UTC时区的毫秒级时间 */
   EventTime: string;
@@ -1029,9 +1029,9 @@ declare interface ReportEventRequest {
   Browser?: Browser;
   /** 应用程序、操作系统和移动设备详细信息，若您已集成我们的设备指纹SDK，则无需传入此字段 */
   App?: App;
-  /** 数据授权信息，国内地域必填 */
+  /** 数据授权信息，境内地域必填 */
   DataAuthorization?: DataAuthorization;
-  /** 手机号码加密方式，国内地域必填枚举值：md5： md5加密plain： 明文 */
+  /** 手机号码加密方式，境内地域必填枚举值：md5： md5加密plain： 明文 */
   UserPhoneEncrypt?: string;
   /** 微信开放账号 */
   WeChatOpenId?: string;

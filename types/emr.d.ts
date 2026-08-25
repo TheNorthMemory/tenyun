@@ -130,6 +130,8 @@ declare interface AutoScaleResourceConf {
   EnableMNode?: number;
   /** 伸缩组更多设置 */
   ExtraAdvanceAttrs?: AutoScaleGroupAdvanceAttrs | null;
+  /** 自定义主机名 */
+  CustomNodeName?: string;
 }
 
 /** 引导脚本 */
@@ -2074,6 +2076,8 @@ declare interface NodeResourceSpec {
   LocalDataDisk?: DiskSpecInfo[] | null;
   /** 节点配置信息，目前仅提供给terraform平台校验参数使用 */
   SoftwareConfig?: ServiceDeploy[];
+  /** 自定义主机名 */
+  CustomNodeName?: string;
 }
 
 /** Pod强制调度节点选择条件 */
@@ -2234,6 +2238,8 @@ declare interface OperationLog {
   OperationDesc?: string;
   /** 安全级别 */
   SecurityLevel?: string;
+  /** 操作者名称 */
+  OperatorName?: string;
 }
 
 /** 描述排序，用于排序. */

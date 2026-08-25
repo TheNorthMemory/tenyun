@@ -29,6 +29,7 @@ import As, { Versions as AsVersions } from "./as";
 import Ba, { Versions as BaVersions } from "./ba";
 import Batch, { Versions as BatchVersions } from "./batch";
 import Bda, { Versions as BdaVersions } from "./bda";
+import Bdrc, { Versions as BdrcVersions } from "./bdrc";
 import Bh, { Versions as BhVersions } from "./bh";
 import Bi, { Versions as BiVersions } from "./bi";
 import Billing, { Versions as BillingVersions } from "./billing";
@@ -292,6 +293,7 @@ export declare type SERVICE_VERSIONS = {
   ba: BaVersions,
   batch: BatchVersions,
   bda: BdaVersions,
+  bdrc: BdrcVersions,
   bh: BhVersions,
   bi: BiVersions,
   billing: BillingVersions,
@@ -598,6 +600,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   batch: Batch,
   /** {@link Bda 人体分析} */
   bda: Bda,
+  /** {@link Bdrc 灾备中心} */
+  bdrc: Bdrc,
   /** {@link Bh 运维安全中心（堡垒机）} */
   bh: Bh,
   /** {@link Bi 商业智能分析 BI} */

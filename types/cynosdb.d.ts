@@ -1012,7 +1012,7 @@ declare interface CynosdbInstance {
   Region?: string;
   /** 集群主可用区 */
   Zone?: string;
-  /** 实例状态 */
+  /** 实例状态枚举值：creating： 创建中running： 运行中isolating： 隔离中isolated： 已隔离activating： 从回收站重新恢复offlining： 下线中offlined： 已下线deleting： 删除中deleted： 已删除 */
   Status?: string;
   /** 实例状态中文描述 */
   StatusDesc?: string;
@@ -8419,9 +8419,21 @@ declare interface SwitchProxyVpcResponse {
 }
 
 declare interface TransferClusterPrepayToPostpayRequest {
+  /** 集群id */
+  ClusterId: string;
 }
 
 declare interface TransferClusterPrepayToPostpayResponse {
+  /** 预付费总订单号 */
+  BigDealIds?: string[] | null;
+  /** 冻结流水 */
+  TranId?: string | null;
+  /** 订单号 */
+  DealNames?: string[] | null;
+  /** 资源id */
+  ResourceIds?: string[] | null;
+  /** 集群id */
+  ClusterIds?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9044,7 +9056,7 @@ declare interface Cynosdb {
   /** 更换数据库代理vpc {@link SwitchProxyVpcRequest} {@link SwitchProxyVpcResponse} */
   SwitchProxyVpc(data: SwitchProxyVpcRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyVpcResponse>;
   /** 预付费集群转后付费集群 {@link TransferClusterPrepayToPostpayRequest} {@link TransferClusterPrepayToPostpayResponse} */
-  TransferClusterPrepayToPostpay(data?: TransferClusterPrepayToPostpayRequest, config?: AxiosRequestConfig): AxiosPromise<TransferClusterPrepayToPostpayResponse>;
+  TransferClusterPrepayToPostpay(data: TransferClusterPrepayToPostpayRequest, config?: AxiosRequestConfig): AxiosPromise<TransferClusterPrepayToPostpayResponse>;
   /** 跨可用区迁移 {@link TransferClusterZoneRequest} {@link TransferClusterZoneResponse} */
   TransferClusterZone(data: TransferClusterZoneRequest, config?: AxiosRequestConfig): AxiosPromise<TransferClusterZoneResponse>;
   /** 预付费存储转后付费存储 {@link TransferStoragePrepayToPostpayRequest} {@link TransferStoragePrepayToPostpayResponse} */

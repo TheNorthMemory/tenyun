@@ -6914,6 +6914,20 @@ declare interface DestroyPostCLSFlowResponse {
   RequestId?: string;
 }
 
+declare interface EnableClientMsgRequest {
+  /** 0表示关闭1表示开启 */
+  Status: number;
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface EnableClientMsgResponse {
+  /** 0：成功，1：失败 */
+  RetCode: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EnableRateLimitsV2Request {
   /** 域名 */
   Domain: string;
@@ -8334,6 +8348,18 @@ declare interface QueryBypassAllStatusResponse {
   RequestId?: string;
 }
 
+declare interface QueryClientMsgRequest {
+  /** 域名 */
+  Domain: string;
+}
+
+declare interface QueryClientMsgResponse {
+  /** 0表示关闭，1表示开启 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RefreshAccessCheckResultRequest {
   /** 域名 */
   Domain: string;
@@ -9015,6 +9041,8 @@ declare interface Waf {
   DestroyPostCKafkaFlow(data: DestroyPostCKafkaFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCKafkaFlowResponse>;
   /** 销毁CLS投递流任务 {@link DestroyPostCLSFlowRequest} {@link DestroyPostCLSFlowResponse} */
   DestroyPostCLSFlow(data: DestroyPostCLSFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPostCLSFlowResponse>;
+  /** 配置是否开启透传客户端信息 {@link EnableClientMsgRequest} {@link EnableClientMsgResponse} */
+  EnableClientMsg(data: EnableClientMsgRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClientMsgResponse>;
   /** 批量更改自研版限流规则开关 {@link EnableRateLimitsV2Request} {@link EnableRateLimitsV2Response} */
   EnableRateLimitsV2(data: EnableRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<EnableRateLimitsV2Response>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
@@ -9159,6 +9187,8 @@ declare interface Waf {
   PostAttackDownloadTask(data: PostAttackDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<PostAttackDownloadTaskResponse>;
   /** 查询该用户是否被加入了全局的bypass列表 {@link QueryBypassAllStatusRequest} {@link QueryBypassAllStatusResponse} */
   QueryBypassAllStatus(data?: QueryBypassAllStatusRequest, config?: AxiosRequestConfig): AxiosPromise<QueryBypassAllStatusResponse>;
+  /** 查询是否开启透传客户端信息 {@link QueryClientMsgRequest} {@link QueryClientMsgResponse} */
+  QueryClientMsg(data: QueryClientMsgRequest, config?: AxiosRequestConfig): AxiosPromise<QueryClientMsgResponse>;
   /** 刷新接入检查的结果 {@link RefreshAccessCheckResultRequest} {@link RefreshAccessCheckResultResponse} */
   RefreshAccessCheckResult(data: RefreshAccessCheckResultRequest, config?: AxiosRequestConfig): AxiosPromise<RefreshAccessCheckResultResponse>;
   /** 删除一键bypass规则 {@link RemoveBypassAllRuleRequest} {@link RemoveBypassAllRuleResponse} */

@@ -3404,8 +3404,10 @@ declare interface CropEnhanceImageOCRResponse {
   CroppedWidth?: number;
   /** 处理后图的高 */
   CroppedHeight?: number;
-  /** 图像处理后的jpg图片，base64格式 */
+  /** 图像处理后的jpg图片，base64格式该字段后续不返回内容，请使用CroppedImageUrl */
   CroppedImage?: string;
+  /** 图像处理后的jpg图片参数格式：url格式 */
+  CroppedImageUrl?: string;
   /** 切图区域的4个角点坐标, 是个长度为8的数组[0,1,2,3,4,5,6,7](0,1) 左上角坐标(2,3) 右上角坐标(4,5) 右下角坐标(6,7) 左下角坐标 */
   Position?: number[];
   /** 图像角度，AdjustOrientation =1时生效, 返回值如下 -1: 失败 0、90、180、270 */

@@ -2056,6 +2056,8 @@ declare interface Project {
   Status?: number;
   /** 项目模式，SIMPLE：简单模式 STANDARD：标准模式 */
   ProjectModel?: string | null;
+  /** 项目的额外配置参数，{Key: "scheduleMode", Value: "task|workflow"} */
+  WorkspaceExt?: WorkspaceExt[];
 }
 
 /** 查询数据源分页列表 */
@@ -3972,6 +3974,8 @@ declare interface TriggerTaskBrief {
   DependencyTriggerPolicy?: string | null;
   /** 运行账号ID */
   ExecuteUserUin?: string | null;
+  /** 周期类型 */
+  CycleType?: string | null;
 }
 
 /** 任务配置信息 */
@@ -4828,6 +4832,14 @@ declare interface WorkflowTriggerConfig {
   TriggerMinimumIntervalSecond?: number | null;
   /** 文件到达模式下 触发等待时间单位：秒 */
   TriggerWaitTimeSecond?: number | null;
+}
+
+/** 项目扩展信息 */
+declare interface WorkspaceExt {
+  /** 参数名 */
+  Key?: string | null;
+  /** 参数值 */
+  Value?: string | null;
 }
 
 declare interface AddCalcEnginesToProjectRequest {
@@ -7654,6 +7666,8 @@ declare interface ProjectRequest {
   DisplayName: string;
   /** 项目模式，SIMPLE（默认）：简单模式 STANDARD：标准模式 */
   ProjectModel?: string;
+  /** 项目调度模式，task：任务模式 workflow：工作流模式 */
+  ScheduleMode?: string;
 }
 
 declare interface RegisterLineageRequest {
@@ -21165,6 +21179,8 @@ declare namespace V20210820 {
     Sql?: string;
     /** 引擎名 */
     EngineId?: string;
+    /** 引擎类型详情SparkSQL：SparkSQLPrestoSQL：PrestoSparkBatch：Spark作业StandardPresto：PrestoStandardSpark：Spark */
+    EngineTypeDetail?: string;
   }
 
   interface DescribeTableContentPreviewResponse {

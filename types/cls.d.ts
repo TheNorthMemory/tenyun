@@ -3587,7 +3587,7 @@ declare interface CreateEsRechargeResponse {
 }
 
 declare interface CreateExportRequest {
-  /** 日志主题Id- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。 */
+  /** 日志主题Id通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
   /** 日志导出数量, 最大值5000万 */
   Count: number;
@@ -3601,7 +3601,7 @@ declare interface CreateExportRequest {
   Order?: string;
   /** 日志导出数据格式。json，csv，默认为json */
   Format?: string;
-  /** 语法规则, 默认值为0。0：Lucene语法，1：CQL语法。 */
+  /** 检索语法规则，默认值为1，推荐使用1 。0：Lucene语法1：CQL语法（CLS Query Language，日志服务专用检索语法）详细说明参见检索条件语法规则。 */
   SyntaxRule?: number;
   /** 导出字段 */
   DerivedFields?: string[];

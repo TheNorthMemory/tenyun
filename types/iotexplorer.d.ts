@@ -1204,6 +1204,10 @@ declare interface SeeComprehensionConfig {
   EnableKeywords?: boolean;
   /** 自定义摘要提示词 */
   SummaryPrompt?: string;
+  /** 是否开启人脸检测 */
+  EnableFaceDetection?: boolean;
+  /** 画面旋转角度枚举值：0： 不旋转90： 顺时针旋转90度-90： 逆时针旋转90度180： 旋转180度默认值：0 */
+  InputRotateDegree?: number;
 }
 
 /** TWeSee 视觉理解结果 */
@@ -1256,6 +1260,44 @@ declare interface SeeEventIdFilterConfig {
   Exclude?: string[];
 }
 
+/** TWeSee 人脸元数据 */
+declare interface SeeFaceInfo {
+  /** 人脸框坐标，依次为左、上、右、下，取值范围为 0 到 1 */
+  BoundingBox?: number[];
+  /** 人脸 ID */
+  FaceId?: string;
+  /** 人脸裁剪图 URL */
+  CropImageURL?: string;
+  /** 是否为代表人脸 */
+  IsPrototype?: boolean;
+  /** 人员 ID */
+  PersonId?: string;
+  /** 创建来源。0：自动识别；1：图片导入 */
+  Source?: number;
+  /** 人脸所在画面的毫秒级 UNIX 时间戳 */
+  TimestampMs?: number;
+}
+
+/** TWeSee 人脸识别结果 */
+declare interface SeeFaceRecognitionResult {
+  /** 识别到的人员列表 */
+  Persons?: SeeTaskPersonInfo[];
+}
+
+/** TWeSee 人员信息 */
+declare interface SeePersonInfo {
+  /** 代表人脸列表 */
+  Faces?: SeeFaceInfo[];
+  /** 是否已标记为持久记忆 */
+  IsRemembered?: boolean;
+  /** 人员名称 */
+  Name?: string;
+  /** 人员 ID */
+  PersonId?: string;
+  /** 创建来源。0：自动识别；1：用户创建 */
+  Source?: number;
+}
+
 /** TWeSee 统计数据点 */
 declare interface SeeStatItem {
   /** 时间 */
@@ -1266,6 +1308,18 @@ declare interface SeeStatItem {
   CostBasic?: number;
   /** 高级能力用量 */
   CostAdvanced?: number;
+}
+
+/** TWeSee 任务人脸元数据 */
+declare interface SeeTaskFaceInfo {
+  /** 人脸裁剪图下载 URL，仅在请求 FileURLExpireTime 时返回 */
+  CropImageURL?: string;
+  /** 人脸 ID */
+  FaceId?: string;
+  /** 人员 ID */
+  PersonId?: string;
+  /** 人脸所在画面的毫秒级 UNIX 时间戳 */
+  TimestampMs?: number;
 }
 
 /** TWeSee 任务详情 */
@@ -1288,6 +1342,8 @@ declare interface SeeTaskInfo {
   CompHighlightResult?: SeeCompHighlightResult;
   /** 标签持续检测结果 */
   DetectContinuousResult?: SeeDetectContinuousResult;
+  /** 人脸检测结果 */
+  FaceRecognitionResult?: SeeFaceRecognitionResult;
   /** 完成该任务所消耗的基础能力额度 */
   CostBasic?: number;
   /** 完成该任务所消耗的高级能力额度 */
@@ -1318,6 +1374,20 @@ declare interface SeeTaskMetadata {
   EndTimeMs?: number;
   /** 自定义事件 ID */
   CustomId?: string;
+}
+
+/** TWeSee 任务人员信息 */
+declare interface SeeTaskPersonInfo {
+  /** 该人员在任务中的人脸列表 */
+  Faces?: SeeTaskFaceInfo[];
+  /** 是否已标记为持久记忆 */
+  IsRemembered?: boolean;
+  /** 人员名称 */
+  Name?: string;
+  /** 人员 ID */
+  PersonId?: string;
+  /** 创建来源。0：自动识别；1：用户创建 */
+  Source?: number;
 }
 
 /** 已订阅Topic信息 */
@@ -2858,6 +2928,26 @@ declare interface CreateTWeSeeDirectUploadCredentialResponse {
   RequestId?: string;
 }
 
+declare interface CreateTWeSeePersonRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人员名称，最多 64 个字符 */
+  Name: string;
+  /** 人脸 ID 列表，最多 5 个 */
+  FaceIds?: string[];
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+}
+
+declare interface CreateTWeSeePersonResponse {
+  /** 人员信息 */
+  Person?: SeePersonInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTWeSeePostPaidServiceRequest {
   /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
   ServiceType: string;
@@ -3298,6 +3388,40 @@ declare interface DeleteTWeSeeCallbackRequest {
 }
 
 declare interface DeleteTWeSeeCallbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTWeSeeFaceRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人脸 ID */
+  FaceId: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+}
+
+declare interface DeleteTWeSeeFaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTWeSeePersonRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人员 ID */
+  PersonId: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+  /** 是否同时删除关联人脸，默认值为 false。人员仍有关联人脸时可设为 true 同步删除 */
+  DeleteFaces?: boolean;
+}
+
+declare interface DeleteTWeSeePersonResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4536,6 +4660,44 @@ declare interface DescribeTWeSeeConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeSeeFaceRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人脸 ID */
+  FaceId: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+}
+
+declare interface DescribeTWeSeeFaceResponse {
+  /** 人脸元数据 */
+  Face?: SeeFaceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTWeSeePersonRequest {
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人员 ID */
+  PersonId: string;
+  /** 产品 ID */
+  ProductId: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+  /** 返回的代表人脸数量，取值范围为 1 到 5，默认值为 1 */
+  FaceLimit?: number;
+}
+
+declare interface DescribeTWeSeePersonResponse {
+  /** 人员信息 */
+  Person?: SeePersonInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTWeSeePostPaidServiceRequest {
   /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
   ServiceType: string;
@@ -5330,6 +5492,26 @@ declare interface GetWechatDeviceTicketResponse {
   RequestId?: string;
 }
 
+declare interface ImportTWeSeeFacesRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 图片 URL，支持 HTTP(S) URL 或 JPG、PNG、BMP 格式的 data URL，图片大小不超过 5 MiB */
+  ImageURL: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+}
+
+declare interface ImportTWeSeeFacesResponse {
+  /** 检测到的人脸列表 */
+  Faces?: SeeFaceInfo[];
+  /** 本次人脸导入任务 ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InheritCloudStorageUserRequest {
   /** 产品ID */
   ProductId: string;
@@ -5497,7 +5679,7 @@ declare interface InvokeExternalSourceAIServiceTaskResponse {
 declare interface InvokeTWeSeeComprehensionRequest {
   /** 输入视频 / 图片的 URL */
   InputURL: string;
-  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  /** 算法类型。可选值：VID_COMP：视频理解IMG_COMP：图片理解 */
   ServiceType: string;
   /** 任务元数据 */
   Metadata?: SeeTaskMetadata;
@@ -5512,7 +5694,7 @@ declare interface InvokeTWeSeeComprehensionRequest {
 declare interface InvokeTWeSeeComprehensionResponse {
   /** 任务 ID */
   TaskId?: string;
-  /** 任务状态。可能取值：- `1`：失败- `2`：空结果- `3`：有效结果- `4`：处理中 */
+  /** 任务状态。可能取值：1：失败2：空结果3：有效结果4：处理中 */
   Status?: number;
   /** 视觉理解结果 */
   ComprehensionResult?: SeeComprehensionResult;
@@ -5726,6 +5908,36 @@ declare interface ListTWeSeeCallbackResponse {
   List?: SeeCallbackInfo[];
   /** 已创建的回调目标总数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTWeSeePersonsRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 分页拉取数量，取值范围为 1 到 100 */
+  Limit: number;
+  /** 分页拉取偏移，默认值为 0 */
+  Offset?: number;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+  /** 每个人员返回的代表人脸数量，取值范围为 1 到 5，默认值为 1 */
+  FaceLimit?: number;
+  /** 人员记忆状态。true：仅查询持久记忆人员；false：仅查询非持久记忆人员；不传时查询全部人员 */
+  IsRemembered?: boolean;
+}
+
+declare interface ListTWeSeePersonsResponse {
+  /** 本次请求的分页数量 */
+  Limit?: number;
+  /** 本次请求的分页偏移 */
+  Offset?: number;
+  /** 人员列表 */
+  Persons?: SeePersonInfo[];
+  /** 符合条件的人员总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6084,6 +6296,48 @@ declare interface ModifyTWeSeeConfigRequest {
 }
 
 declare interface ModifyTWeSeeConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTWeSeeFaceRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人员 ID */
+  PersonId: string;
+  /** 人脸 ID */
+  FaceId: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+  /** 是否设为代表人脸。关联未归属的人脸时，默认值为 true */
+  IsPrototype?: boolean;
+}
+
+declare interface ModifyTWeSeeFaceResponse {
+  /** 人脸元数据 */
+  Face?: SeeFaceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyTWeSeePersonRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人员 ID */
+  PersonId: string;
+  /** 通道 ID，默认值为 0 */
+  ChannelId?: number;
+  /** 是否标记为持久记忆。 */
+  IsRemembered?: boolean;
+  /** 人员名称，最多 64 个字符 */
+  Name?: string;
+}
+
+declare interface ModifyTWeSeePersonResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6891,6 +7145,8 @@ declare interface Iotexplorer {
   CreateTWeSeeCallback(data: CreateTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeCallbackResponse>;
   /** 创建 TWeSee COS 直传凭据 {@link CreateTWeSeeDirectUploadCredentialRequest} {@link CreateTWeSeeDirectUploadCredentialResponse} */
   CreateTWeSeeDirectUploadCredential(data: CreateTWeSeeDirectUploadCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeDirectUploadCredentialResponse>;
+  /** 创建 TWeSee 人员 {@link CreateTWeSeePersonRequest} {@link CreateTWeSeePersonResponse} */
+  CreateTWeSeePerson(data: CreateTWeSeePersonRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeePersonResponse>;
   /** 开通 TWeSee 后付费服务v2 {@link CreateTWeSeePostPaidServiceRequest} {@link CreateTWeSeePostPaidServiceResponse} */
   CreateTWeSeePostPaidService(data: CreateTWeSeePostPaidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeePostPaidServiceResponse>;
   /** 创建 TWeSee 语义理解任务 {@link CreateTWeSeeRecognitionTaskRequest} {@link CreateTWeSeeRecognitionTaskResponse} */
@@ -6939,6 +7195,10 @@ declare interface Iotexplorer {
   DeleteStudioProduct(data: DeleteStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStudioProductResponse>;
   /** 删除 TWeSee 回调目标 {@link DeleteTWeSeeCallbackRequest} {@link DeleteTWeSeeCallbackResponse} */
   DeleteTWeSeeCallback(data: DeleteTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeCallbackResponse>;
+  /** 删除 TWeSee 人脸 {@link DeleteTWeSeeFaceRequest} {@link DeleteTWeSeeFaceResponse} */
+  DeleteTWeSeeFace(data: DeleteTWeSeeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeFaceResponse>;
+  /** 删除 TWeSee 人员 {@link DeleteTWeSeePersonRequest} {@link DeleteTWeSeePersonResponse} */
+  DeleteTWeSeePerson(data: DeleteTWeSeePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeePersonResponse>;
   /** 删除 TWeSee 任务 {@link DeleteTWeSeeTasksByConditionRequest} {@link DeleteTWeSeeTasksByConditionResponse} */
   DeleteTWeSeeTasksByCondition(data: DeleteTWeSeeTasksByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeTasksByConditionResponse>;
   /** 删除TWeTalk智能体 {@link DeleteTWeTalkAIBotRequest} {@link DeleteTWeTalkAIBotResponse} */
@@ -7067,6 +7327,10 @@ declare interface Iotexplorer {
   DescribeTWeSeeCallback(data: DescribeTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeCallbackResponse>;
   /** 查询 TWeSee 配置 {@link DescribeTWeSeeConfigRequest} {@link DescribeTWeSeeConfigResponse} */
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
+  /** 查询 TWeSee 人脸详情 {@link DescribeTWeSeeFaceRequest} {@link DescribeTWeSeeFaceResponse} */
+  DescribeTWeSeeFace(data: DescribeTWeSeeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeFaceResponse>;
+  /** 查询 TWeSee 人员详情 {@link DescribeTWeSeePersonRequest} {@link DescribeTWeSeePersonResponse} */
+  DescribeTWeSeePerson(data: DescribeTWeSeePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeePersonResponse>;
   /** 查询 TWeSee 后付费服务 {@link DescribeTWeSeePostPaidServiceRequest} {@link DescribeTWeSeePostPaidServiceResponse} */
   DescribeTWeSeePostPaidService(data: DescribeTWeSeePostPaidServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeePostPaidServiceResponse>;
   /** 查询 TWeSee 语义理解任务 {@link DescribeTWeSeeRecognitionTaskRequest} {@link DescribeTWeSeeRecognitionTaskResponse} */
@@ -7153,6 +7417,8 @@ declare interface Iotexplorer {
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 查询微信授权票据 {@link GetWechatDeviceTicketRequest} {@link GetWechatDeviceTicketResponse} */
   GetWechatDeviceTicket(data: GetWechatDeviceTicketRequest, config?: AxiosRequestConfig): AxiosPromise<GetWechatDeviceTicketResponse>;
+  /** 导入 TWeSee 人脸 {@link ImportTWeSeeFacesRequest} {@link ImportTWeSeeFacesResponse} */
+  ImportTWeSeeFaces(data: ImportTWeSeeFacesRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTWeSeeFacesResponse>;
   /** 继承云存用户 {@link InheritCloudStorageUserRequest} {@link InheritCloudStorageUserResponse} */
   InheritCloudStorageUser(data: InheritCloudStorageUserRequest, config?: AxiosRequestConfig): AxiosPromise<InheritCloudStorageUserResponse>;
   /** 查询 TWeSee 预付费新购价格 {@link InquireTWeSeeSubscriptionCreatePriceRequest} {@link InquireTWeSeeSubscriptionCreatePriceResponse} */
@@ -7183,6 +7449,8 @@ declare interface Iotexplorer {
   ListProductOtaModules(data: ListProductOtaModulesRequest, config?: AxiosRequestConfig): AxiosPromise<ListProductOtaModulesResponse>;
   /** 查询 TWeSee 回调目标列表 {@link ListTWeSeeCallbackRequest} {@link ListTWeSeeCallbackResponse} */
   ListTWeSeeCallback(data: ListTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ListTWeSeeCallbackResponse>;
+  /** 查询 TWeSee 人员列表 {@link ListTWeSeePersonsRequest} {@link ListTWeSeePersonsResponse} */
+  ListTWeSeePersons(data: ListTWeSeePersonsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTWeSeePersonsResponse>;
   /** 查询 TWeSee 任务列表 {@link ListTWeSeeTasksRequest} {@link ListTWeSeeTasksResponse} */
   ListTWeSeeTasks(data: ListTWeSeeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTWeSeeTasksResponse>;
   /** 获取Topic列表 {@link ListTopicPolicyRequest} {@link ListTopicPolicyResponse} */
@@ -7219,6 +7487,10 @@ declare interface Iotexplorer {
   ModifyTWeSeeCallback(data: ModifyTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeCallbackResponse>;
   /** 修改 TWeSee 配置 {@link ModifyTWeSeeConfigRequest} {@link ModifyTWeSeeConfigResponse} */
   ModifyTWeSeeConfig(data: ModifyTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeConfigResponse>;
+  /** 修改 TWeSee 人脸 {@link ModifyTWeSeeFaceRequest} {@link ModifyTWeSeeFaceResponse} */
+  ModifyTWeSeeFace(data: ModifyTWeSeeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeFaceResponse>;
+  /** 修改 TWeSee 人员 {@link ModifyTWeSeePersonRequest} {@link ModifyTWeSeePersonResponse} */
+  ModifyTWeSeePerson(data: ModifyTWeSeePersonRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeePersonResponse>;
   /** 修改 TWeSee 预付费订阅 {@link ModifyTWeSeeSubscriptionRequest} {@link ModifyTWeSeeSubscriptionResponse} */
   ModifyTWeSeeSubscription(data: ModifyTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeSubscriptionResponse>;
   /** 修改 TWeSee 预付费订阅续费标识 {@link ModifyTWeSeeSubscriptionRenewFlagRequest} {@link ModifyTWeSeeSubscriptionRenewFlagResponse} */

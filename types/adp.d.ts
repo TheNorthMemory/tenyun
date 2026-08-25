@@ -3411,7 +3411,7 @@ declare interface DescribeMsgRecordCategoryListResponse {
 declare interface DescribeMsgRecordListRequest {
   /** 应用 ID */
   AppId: string;
-  /** 过滤条件列表，支持：ChannelType（渠道类型，0 全部）、FeedbackType（反馈类型，-1 为全部）、QueryType、Query、CategoryId、ReplyMethod、StartTime、EndTime（秒时间戳）、Cursor（游标信息，上一页取响应 PrevCursor，下一页取响应 NextCursor）、Direction（方向，next 下一页，prev 上一页）、CallResult（调用结果，默认 0 为全部，1 为成功，2 为失败）、FailReason、Intent */
+  /** ChannelType : 0-表示全部 2-体验页面（腾讯云）3-调试页面（腾讯云）4-体验页面（手机号）5-对话端API接入 6-应用评测 7-调试API' 10000-微信服务号 10001-微信订阅号 10002-企微应用 10004-微信客服 10005-微信小程序 10006-腾讯元器 10007-应用宝 10009-企微智能机器人 10014-企微智能机器人 10011-LINE 10012-Telegram 10013-钉钉机器人 10016-飞书机器人 30000-定时任务 30001-触发器 FeedbackType : 反馈类型，-1-表示全部 0-未评价 1-点赞 2-点踩 QueryType : 检索类型（按平台约定取值）, SessionId-sessionID Question-问题 Answer-回复 Intent-意图 User-用户 Query : 对应QueryType输入的过滤条件 CategoryId : 分类ID ReplyMethod : 回复类型 0-全部回复类型 1-拒答问题回复 2-问答直接回复 3-审核失败回复 4-知识润色回复 6-工作流回复 8-图片理解回复 9-搜索引擎回复 10-大模型直接回复 11-兜底回复 StartTime : 开始时间，秒级时间戳 EndTime: 结束时间，秒级时间戳 Cursor : 游标信息，上一页取响应 PrevCursor，下一页取响应 NextCursor Direction : 方向，next 下一页，prev 上一页CallResult : 调用结果：0 全部 / 1 成功 / 2 失败 / 3 用户取消 <FailReason : 失败原因 0-全部 1-审核失败 2-达到QPM上限 3-达到TPM上限 4-达到并发上限 5-系统异常 Intent : 意图 */
   FilterList?: Filter[];
   /** 页码，从 0 开始；不传时按 0 处理 */
   PageNumber?: number;

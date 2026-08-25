@@ -1383,6 +1383,10 @@ declare namespace V20180416 {
     OpenMTLS?: number;
     /** 证书类型 */
     ServerCertSource?: string;
+    /** 集群待迁移的VIP */
+    OldEsVip?: string;
+    /** 集群待迁移的TCP地址 */
+    OldEsPrivateTcpUrl?: string;
   }
 
   /** ES集群日志详细信息 */

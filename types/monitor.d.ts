@@ -3919,7 +3919,7 @@ declare namespace V20180724 {
   interface CreateSSOAccountRequest {
     /** Grafana 实例 ID，例如：grafana-abcdefgh */
     InstanceId: string;
-    /** 用户账号 ID ，例如：10000000 */
+    /** 用户子账号 ID ，例如：10000000 */
     UserId: string;
     /** 权限(只取数组中的第一个，其中 Organization 暂未使用，可不填) */
     Role: GrafanaAccountRole[];
@@ -3928,7 +3928,7 @@ declare namespace V20180724 {
   }
 
   interface CreateSSOAccountResponse {
-    /** 已添加的用户 UIN */
+    /** 已添加的子账号ID */
     UserId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;

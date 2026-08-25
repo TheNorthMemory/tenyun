@@ -1021,7 +1021,7 @@ declare interface ListDataKeyDetailRequest {
   SearchKeyAlias?: string;
   /** 根据DateKey类型筛选， "TENCENT_KMS" 表示筛选密钥材料由KMS创建的数据密钥， "EXTERNAL" 表示筛选密钥材料需要用户导入的 EXTERNAL类型数据密钥，"ALL" 或者不设置表示两种类型都查询，大小写敏感。 */
   Origin?: string;
-  /** KMS 高级版对应的 HSM 集群 ID。 */
+  /** KMS 高级版对应的 HSM 集群 ID。当指定集群ID时查询集群的密钥列表；当指定default时,查询公有云共享版的密钥列表；当为空，默认查询所有的密钥列表包括集群和非集群。 */
   HsmClusterId?: string;
   /** 根密钥全局唯一标识符 */
   KeyId?: string;
@@ -1081,7 +1081,7 @@ declare interface ListKeyDetailRequest {
   KeyUsage?: string;
   /** 标签过滤条件 */
   TagFilters?: TagFilter[];
-  /** KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。 */
+  /** KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。当指定集群ID时查询集群的密钥列表；当指定default时,查询公有云共享版的密钥列表；当为空，默认查询所有的密钥列表包括集群和非集群。 */
   HsmClusterId?: string;
   /** 可信服务成员账号信息数组 */
   MemberAccounts?: MemberAccount[];

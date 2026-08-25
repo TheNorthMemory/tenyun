@@ -16,6 +16,14 @@ declare interface APIKeyInfo {
   CreatedAt?: string;
 }
 
+/** Deployment 对 Sandbox Instance 的亲和配置。 */
+declare interface AffinityConfiguration {
+  /** Affinity 模式。枚举值：BEST_EFFORT：优先复用原 Instance，不可用时允许改选。STRICT：只复用原 Instance，不可用时失败且不改选。EXCLUSIVE：一个 Affinity ID 独占一个 Instance，不能迁移。缺失或空字符串表示关闭 Affinity。 */
+  Mode?: string;
+  /** 请求和响应使用的 Affinity Header 名称。必须符合 HTTP field-name token 语法，长度为 1..128 个 ASCII 字节，且不能使用平台保留 Header。 */
+  HeaderName?: string;
+}
+
 /** 用于记录 Agent Bucket 的 Storage Source */
 declare interface AgentBucketStorageSource {
   /** 用于传入 AgentBucket 的 LibraryID */
@@ -38,6 +46,12 @@ declare interface CfsStorageSource {
   FileSystemId?: string;
   /** CFS挂载路径 */
   Path?: string;
+}
+
+/** 桌面电脑环境类沙箱配置 */
+declare interface ComputerConfiguration {
+  /** waa沙箱工具配置 */
+  WAAConfiguration?: WAAConfiguration;
 }
 
 /** 沙箱实例对象存储挂载配置 */
@@ -106,6 +120,32 @@ declare interface DNSConfig {
   Options?: string[];
 }
 
+/** Deployment 稳定访问入口定义 */
+declare interface Deployment {
+  /** Deployment 稳定 ID，格式为 dpl- 加 8 位小写 base36 字符。 */
+  DeploymentId?: string;
+  /** 唯一且创建后不可修改的名称，必须符合 DNS-1123 命名规范。 */
+  DeploymentName?: string;
+  /** 用于关联 Sandbox Tool 的标识，格式为 sdt- 加 8 位小写 base36 字符。 */
+  ToolId?: string;
+  /** 完整的活跃容量配置。 */
+  ScalingConfiguration?: ScalingConfiguration;
+  /** 完整的空闲生命周期配置。 */
+  LifecycleConfiguration?: LifecycleConfiguration;
+  /** 可选 Affinity 配置；未启用时省略。 */
+  AffinityConfiguration?: AffinityConfiguration;
+  /** Deployment 控制面状态。枚举值：ACTIVE：入口可用。DELETING：入口已关闭并正在异步删除。DELETE_FAILED：最近一次异步删除失败，可再次调用 DeleteDeployment。 */
+  Status?: string;
+  /** DELETE_FAILED 状态下 1..1024 个 UTF-8 字节的安全失败摘要，格式为 {Code}[.{SubCode}]: {Message}；其他状态省略。 */
+  StatusReason?: string;
+  /** 创建时间，UTC、秒精度 RFC3339 格式。 */
+  CreatedTime?: string;
+  /** 最近一次成功公共配置写入或 Deployment 状态迁移时间，UTC、秒精度 RFC3339 格式。 */
+  UpdatedTime?: string;
+  /** 标签 */
+  Tags?: Tag[];
+}
+
 /** 环境变量 */
 declare interface EnvVar {
   /** 环境变量名 */
@@ -142,6 +182,14 @@ declare interface ImageStorageSource {
   SubPath?: string;
   /** 镜像 Digest，请求时无需传入 */
   Digest?: string;
+}
+
+/** Deployment 管理的 Sandbox Instance 的空闲生命周期配置 */
+declare interface LifecycleConfiguration {
+  /** Sandbox Instance 没有活跃 Deployment 请求或连接后进入 IdleAction 的秒数，必须大于等于 30。 */
+  IdleTimeoutSeconds?: number;
+  /** 空闲处理动作。枚举值：STOP：停止并释放 Sandbox Instance。PAUSE：暂停并保留 Sandbox Instance 状态。 */
+  IdleAction?: string;
 }
 
 /** 沙箱工具日志采集相关配置 */
@@ -248,6 +296,8 @@ declare interface SandboxInstance {
   MountOptions?: MountOption[];
   /** 沙箱实例自定义配置 */
   CustomConfiguration?: CustomConfigurationDetail;
+  /** 桌面电脑环境类沙箱配置 */
+  ComputerConfiguration?: ComputerConfiguration;
   /** 网络模式枚举值：PUBLIC： 公网访问SANDBOX： 无网络INTERNAL_SERVICE： 腾讯云内部公共服务可以覆盖工具级别的网络配置。但如果一个工具本身就不支持 VPC 网络，那么即便在实例设置里选了 VPC 模式，也是无效的 */
   NetworkMode?: string;
   /** 沙箱实例元数据 */
@@ -288,8 +338,20 @@ declare interface SandboxTool {
   CustomConfiguration?: CustomConfigurationDetail;
   /** 沙箱工具日志推送相关配置 */
   LogConfiguration?: LogConfiguration;
+  /** 桌面电脑环境类沙箱配置 */
+  ComputerConfiguration?: ComputerConfiguration;
   /** 用于说明沙箱工具处于该状态的原因 */
   StatusReason?: string;
+}
+
+/** Deployment 活跃容量配置 */
+declare interface ScalingConfiguration {
+  /** 活跃 Sandbox Instance 下限，必须大于等于 0。 */
+  MinInstanceCount?: number;
+  /** 活跃 Sandbox Instance 上限，必须大于等于 1，并且不小于 MinInstanceCount。 */
+  MaxInstanceCount?: number;
+  /** 每个活跃 Sandbox Instance 同时持有的 Deployment 请求或连接 Lease 上限，必须大于等于 1。 */
+  MaxInstanceRequestConcurrency?: number;
 }
 
 /** 沙箱工具中实例存储挂载配置 */
@@ -332,6 +394,26 @@ declare interface VPCConfig {
   SecurityGroupIds?: string[];
 }
 
+/** waa自定义配置项 */
+declare interface WAAConfiguration {
+  /** 自定义waa镜像ID */
+  ImageId?: string;
+}
+
+declare interface AcquireDeploymentTokenRequest {
+  /** 目标 ACTIVE Deployment 的稳定 ID。 */
+  DeploymentId: string;
+}
+
+declare interface AcquireDeploymentTokenResponse {
+  /** 只用于目标 Deployment 数据面入口的短期 bearer Token，格式为 dpt_ 加非空、无 padding 的 Base64URL opaque 后缀。 */
+  Token?: string;
+  /** Token 的绝对过期时间，UTC、秒精度 RFC3339 格式。 */
+  ExpiresAt?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AcquireSandboxInstanceTokenRequest {
   /** 沙箱实例ID，生成的访问Token将仅可用于访问此沙箱实例 */
   InstanceId: string;
@@ -360,6 +442,28 @@ declare interface CreateAPIKeyResponse {
   APIKey?: string;
   /** API密钥ID */
   KeyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDeploymentRequest {
+  /** 唯一的 Deployment 名称，必须符合 DNS-1123 命名规范，创建后不可修改。 */
+  DeploymentName: string;
+  /** 用于关联 Sandbox Tool 的标识，格式为 sdt- 加 8 位小写 base36 字符。 */
+  ToolId?: string;
+  /** 伸缩配置；省略的成员由服务端补全默认值。 */
+  ScalingConfiguration?: ScalingConfiguration;
+  /** 空闲生命周期配置；省略的成员由服务端补全默认值。 */
+  LifecycleConfiguration?: LifecycleConfiguration;
+  /** Affinity 配置；省略或空 Mode 表示不启用。 */
+  AffinityConfiguration?: AffinityConfiguration;
+  /** 标签 */
+  Tags?: Tag[];
+}
+
+declare interface CreateDeploymentResponse {
+  /** 已创建并完成默认值物化的 Deployment。 */
+  Deployment?: Deployment;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -426,6 +530,16 @@ declare interface DeleteAPIKeyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDeploymentRequest {
+  /** 待删除的 Deployment ID。 */
+  DeploymentId: string;
+}
+
+declare interface DeleteDeploymentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSandboxToolRequest {
   /** 沙箱工具ID */
   ToolId: string;
@@ -444,6 +558,36 @@ declare interface DescribeAPIKeyListResponse {
   APIKeySet?: APIKeyInfo[];
   /** 列表中API密钥数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeploymentListRequest {
+  /** 分页偏移量，默认 0，必须大于等于 0。 */
+  Offset?: number;
+  /** 分页返回数量，默认 20，范围 1..200。 */
+  Limit?: number;
+  /** 查询过滤条件。Filter.Name 枚举值：deployment-id：按 DeploymentId 精确匹配deployment-name：按 DeploymentName 精确匹配deployment-name-like：按 DeploymentName 进行普通文本包含匹配，%、_ 等字符没有通配语义tool-id：按 ToolId 精确匹配status：按 Deployment 状态精确匹配，支持 ACTIVE、DELETING、DELETE_FAILED所有匹配均区分大小写。不同 Filter 之间为 AND，同一 Filter 的 Values 之间为 OR。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeDeploymentListResponse {
+  /** 当前页完整 Deployment；无匹配时为空数组。 */
+  DeploymentSet?: Deployment[];
+  /** 应用 Filters 后、分页前的结果总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeploymentRequest {
+  /** 待查询的 Deployment ID。 */
+  DeploymentId: string;
+}
+
+declare interface DescribeDeploymentResponse {
+  /** 完整 Deployment。 */
+  Deployment?: Deployment;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -510,6 +654,24 @@ declare interface DescribeSandboxToolListResponse {
   SandboxToolSet?: SandboxTool[];
   /** 符合条件的沙箱工具总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDeploymentRequest {
+  /** 待修改的 Deployment ID。 */
+  DeploymentId: string;
+  /** 完整替换伸缩配置；提供时必须包含全部三个成员。 */
+  ScalingConfiguration?: ScalingConfiguration;
+  /** 完整替换生命周期配置；提供时必须包含全部两个成员。 */
+  LifecycleConfiguration?: LifecycleConfiguration;
+  /** 标签 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyDeploymentResponse {
+  /** 修改后的完整 Deployment。 */
+  Deployment?: Deployment;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -611,26 +773,38 @@ declare interface UpdateSandboxToolResponse {
 /** {@link Ags Agent 沙箱服务} */
 declare interface Ags {
   (): Versions;
+  /** 获取 Deployment Token {@link AcquireDeploymentTokenRequest} {@link AcquireDeploymentTokenResponse} */
+  AcquireDeploymentToken(data: AcquireDeploymentTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AcquireDeploymentTokenResponse>;
   /** 获取沙箱实例的访问Token {@link AcquireSandboxInstanceTokenRequest} {@link AcquireSandboxInstanceTokenResponse} */
   AcquireSandboxInstanceToken(data: AcquireSandboxInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AcquireSandboxInstanceTokenResponse>;
   /** 创建新的API密钥 {@link CreateAPIKeyRequest} {@link CreateAPIKeyResponse} */
   CreateAPIKey(data?: CreateAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAPIKeyResponse>;
+  /** 创建 Deployment {@link CreateDeploymentRequest} {@link CreateDeploymentResponse} */
+  CreateDeployment(data: CreateDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeploymentResponse>;
   /** 创建预热镜像任务 {@link CreatePreCacheImageTaskRequest} {@link CreatePreCacheImageTaskResponse} */
   CreatePreCacheImageTask(data: CreatePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreCacheImageTaskResponse>;
   /** 创建沙箱工具 {@link CreateSandboxToolRequest} {@link CreateSandboxToolResponse} */
   CreateSandboxTool(data: CreateSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxToolResponse>;
   /** 删除API密钥 {@link DeleteAPIKeyRequest} {@link DeleteAPIKeyResponse} */
   DeleteAPIKey(data: DeleteAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAPIKeyResponse>;
+  /** 删除 Deployment {@link DeleteDeploymentRequest} {@link DeleteDeploymentResponse} */
+  DeleteDeployment(data: DeleteDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeploymentResponse>;
   /** 删除沙箱工具 {@link DeleteSandboxToolRequest} {@link DeleteSandboxToolResponse} */
   DeleteSandboxTool(data: DeleteSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxToolResponse>;
   /** 获取API密钥列表 {@link DescribeAPIKeyListRequest} {@link DescribeAPIKeyListResponse} */
   DescribeAPIKeyList(data?: DescribeAPIKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIKeyListResponse>;
+  /** 查询 Deployment {@link DescribeDeploymentRequest} {@link DescribeDeploymentResponse} */
+  DescribeDeployment(data: DescribeDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentResponse>;
+  /** 查询 Deployment 列表 {@link DescribeDeploymentListRequest} {@link DescribeDeploymentListResponse} */
+  DescribeDeploymentList(data?: DescribeDeploymentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentListResponse>;
   /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
   DescribePreCacheImageTask(data: DescribePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageTaskResponse>;
   /** 查询沙箱实例列表 {@link DescribeSandboxInstanceListRequest} {@link DescribeSandboxInstanceListResponse} */
   DescribeSandboxInstanceList(data?: DescribeSandboxInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstanceListResponse>;
   /** 查询沙箱工具列表 {@link DescribeSandboxToolListRequest} {@link DescribeSandboxToolListResponse} */
   DescribeSandboxToolList(data?: DescribeSandboxToolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxToolListResponse>;
+  /** 修改 Deployment {@link ModifyDeploymentRequest} {@link ModifyDeploymentResponse} */
+  ModifyDeployment(data: ModifyDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeploymentResponse>;
   /** 暂停沙箱实例 {@link PauseSandboxInstanceRequest} {@link PauseSandboxInstanceResponse} */
   PauseSandboxInstance(data: PauseSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<PauseSandboxInstanceResponse>;
   /** 恢复沙箱实例 {@link ResumeSandboxInstanceRequest} {@link ResumeSandboxInstanceResponse} */

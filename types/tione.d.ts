@@ -2082,6 +2082,8 @@ declare interface ServiceInfo {
   SchedulingStrategy?: string;
   /** 服务实际运行的节点数 */
   NodeCount?: number;
+  /** 推理模板Id参数格式：推理模板 ID */
+  InferTemplateId?: string;
 }
 
 /** 服务的限流限速等配置 */
@@ -2781,6 +2783,8 @@ declare interface CreateModelServiceRequest {
   GatewayConfig?: GatewayConfig;
   /** 资源供应属性(潮汐/竞价等供应模式);空表示常规按量后付费 */
   ResourceSupplyAttribute?: ResourceSupplyAttribute;
+  /** 推理模板 ID */
+  InferTemplateId?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -4033,6 +4037,8 @@ declare interface ModifyModelServiceRequest {
   SchedulingStrategy?: string;
   /** 目标工作空间，不为0则进行迁移，源服务只允许在默认空间 */
   TargetProjectId?: number;
+  /** 推理模板 ID，在内置大模型场景下使用 */
+  InferTemplateId?: string;
 }
 
 declare interface ModifyModelServiceResponse {

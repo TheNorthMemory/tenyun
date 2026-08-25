@@ -2708,6 +2708,16 @@ declare interface CheckViewRiskItem {
   AssetTypeIconURL?: string;
 }
 
+/** 租户ckafka信息 */
+declare interface CkafkaInstance {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例地域 */
+  RegionId?: string;
+}
+
 /** CLB监听器 */
 declare interface ClbListenerItem {
   /** 监听器ID */
@@ -4242,6 +4252,32 @@ declare interface DbAssetInfo {
   Tag?: Tag[];
 }
 
+/** 过滤规则 */
+declare interface DescribeDspmAuditFilterStrategy {
+  /** 策略ID */
+  AuditFilterStrategyId?: number;
+  /** 策略名 */
+  Name?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 规则内容 */
+  Rule?: string;
+  /** 是否启用枚举值：0： 禁用1： 启用 */
+  IsEnabled?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 创建时间参数格式：2026-07-16T11:44:45+08 */
+  CreateTime?: string;
+  /** 更新时间参数格式：2026-07-16T11:44:45+08 */
+  ModifyTime?: string;
+  /** 云账号ID */
+  AppId?: number;
+  /** 用户标识 */
+  Uin?: string;
+  /** 账号昵称 */
+  NickName?: string;
+}
+
 /** 云边界风险待治理风险信息 */
 declare interface DescribeExposureStatisticsItem {
   /** 风险标题 */
@@ -4888,6 +4924,56 @@ declare interface DspmAssetTypeCount {
   ClosingCount?: number;
   /** 资产安全分析未开启数 */
   CloseCount?: number;
+}
+
+/** 审计会话列表信息 */
+declare interface DspmAuditSessionInfo {
+  /** 审计日志数 */
+  SqlCount?: number;
+  /** 登出时间 */
+  LogoutTime?: number;
+  /** 客户端 IP */
+  ClientIp?: string;
+  /** 客户端端口 */
+  ClientPort?: number;
+  /** 数据库 IP */
+  DbIp?: string;
+  /** 数据库名称 */
+  DbName?: string;
+  /** 数据库端口 */
+  DbPort?: number;
+  /** 数据库用户 */
+  DbUser?: string;
+  /** 审计单元 ID */
+  InstanceId?: number;
+  /** 操作时间(时间) */
+  OpTime?: number;
+  /** 返回码 */
+  RetNo?: number;
+  /** 会话Id */
+  SessionId?: string;
+  /** 登录时间 */
+  LoginTime?: number;
+  /** 数据资产名称 */
+  InstanceName?: string;
+  /** 数据资产名称 */
+  AssetName?: string;
+  /** 流量来源 */
+  SourceType?: string;
+  /** 流量来源英文 */
+  SourceTypeEn?: string;
+  /** 资产所属账号app id */
+  AppId?: number;
+  /** 流量来源 */
+  SourceTypeEnDisplayName?: string;
+  /** 昵称 */
+  NickName?: string;
+  /** 用户ID */
+  Uin?: string;
+  /** 数据库类型枚举值：MongoDB： mongodb */
+  DbType?: string;
+  /** 资产类型枚举值：cdb： mysqlmongodb： mongodb */
+  AssetType?: string;
 }
 
 /** 列权限信息 */
@@ -7942,6 +8028,64 @@ declare interface LogContextInfo {
   Context?: string;
 }
 
+/** 日志投递信息配置 */
+declare interface LogDeliveryCkafkaConfig {
+  /** 接入类型 */
+  VipType?: number;
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 虚拟ip VipType 为7 有效 */
+  Vip?: string;
+  /** 虚拟端口 VipType 为7有效 */
+  Vport?: string;
+  /** 域名 VipType 为1有效 */
+  Domain?: string;
+  /** 域名端口 VipType 为1有效 */
+  DomainPort?: string;
+  /** 实例地域 */
+  RegionId?: string;
+  /** 实例vpc */
+  VpcId?: string;
+  /** 实例子网 */
+  SubnetId?: string;
+  /** 实例健康状态， 1：健康，2：告警，3：异常', 4: 实例不存在 */
+  Healthy?: number;
+  /** 日志类型 */
+  LogType?: number;
+  /** 投递的topicid */
+  TopicId?: string;
+  /** 投递的topicname */
+  TopicName?: string;
+  /** 投递状态 */
+  Status?: number;
+  /** 状态信息 */
+  StatusMessages?: string;
+  /** 开启or关闭，投递状态1为开启，0 关闭，默认开启，但是如果没有topic 则关闭 */
+  IsOpen?: number;
+}
+
+/** 日志类型投递主题配置 */
+declare interface LogDeliveryInfo {
+  /** 日志类型 */
+  LogType: number;
+  /** 投递的topicid */
+  TopicId: string;
+  /** 投递的topicname */
+  TopicName: string;
+}
+
+/** 日志投递日志类型 */
+declare interface LogDeliveryType {
+  /** 日志投递类型 */
+  LogType?: number;
+  /** 投递日志类型的名称 */
+  LogTypeName?: string;
+  /** 投递日志类型的描述 */
+  LogTypeDesc?: string;
+}
+
 /** 日志动态索引信息 */
 declare interface LogDynamicIndex {
   /** 状态 */
@@ -9376,6 +9520,18 @@ declare interface RoleInfo {
   ContainerID?: string;
 }
 
+/** 路由信息 */
+declare interface RouteInfo {
+  /** 接入ip */
+  Vip: string;
+  /** 接入端口 */
+  Vport: string;
+  /** 接入域名 */
+  Domain: string;
+  /** 接入域名端口 */
+  DomainPort: string;
+}
+
 /** EDR命令行规则 */
 declare interface RuleContentCmdLine {
   /** 进程命令行信息 */
@@ -10250,6 +10406,14 @@ declare interface TimedScanTaskPreviewInfo {
   IsLatestImage?: boolean;
   /** 镜像地址 */
   ImageRepoAddress?: string;
+}
+
+/** ckafka实例的topic信息 */
+declare interface TopicInfo {
+  /** ckafka主题id */
+  TopicId?: string;
+  /** ckafka主题名称 */
+  TopicName?: string;
 }
 
 /** AI Agent 流量沙箱插件状态 */
@@ -12697,6 +12861,28 @@ declare interface CreateDspmAssetsExportJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateDspmAuditFilterStrategyRequest {
+  /** 策略名 */
+  Name: string;
+  /** 规则内容参数格式：json */
+  Rule: string;
+  /** 是否启用枚举值：1： 启用0： 禁用 */
+  IsEnabled: number;
+  /** 策略描述 */
+  Description?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface CreateDspmAuditFilterStrategyResponse {
+  /** 策略ID */
+  AuditFilterStrategyId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDspmExportTaskRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -12923,6 +13109,16 @@ declare interface CreateDspmPersonalIdentifyResponse {
   RequestId?: string;
 }
 
+declare interface CreateDspmResourceRequest {
+}
+
+declare interface CreateDspmResourceResponse {
+  /** 资产id */
+  ResourceId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDspmRiskExportJobRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -12933,6 +13129,38 @@ declare interface CreateDspmRiskExportJobRequest {
 declare interface CreateDspmRiskExportJobResponse {
   /** 任务ID */
   JobID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDspmRiskStrategyRequest {
+  /** 策略名 */
+  Name: string;
+  /** 策略规则，JSON 字符串 */
+  Rule: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 英文策略名 */
+  EnName?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 英文策略描述 */
+  EnDescription?: string;
+  /** 风险等级，可选值：Info/Low/Medium/High。不传默认 Medium */
+  RiskLevel?: string;
+  /** 是否启用。0-禁用，1-启用，不传默认启用 */
+  IsEnabled?: number;
+  /** 风险类型。当前仅支持 alarm，不传默认 alarm */
+  RiskType?: string;
+  /** 策略类别。当前仅支持 SQLOperationAnomaly，不传默认 SQLOperationAnomaly */
+  StrategyCategory?: string;
+}
+
+declare interface CreateDspmRiskStrategyResponse {
+  /** 策略id */
+  StrategyId?: number;
+  /** 策略类型 */
+  StrategyType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14007,6 +14235,18 @@ declare interface DeleteDspmAssetAccountResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDspmAuditFilterStrategyRequest {
+  /** 策略ID */
+  AuditFilterStrategyId: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmAuditFilterStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDspmBackupLogListRequest {
   /** 备份日志Id */
   Id: number;
@@ -14015,6 +14255,16 @@ declare interface DeleteDspmBackupLogListRequest {
 }
 
 declare interface DeleteDspmBackupLogListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmCkafkaConfigRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmCkafkaConfigResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14127,6 +14377,32 @@ declare interface DeleteDspmRestoreLogListRequest {
 }
 
 declare interface DeleteDspmRestoreLogListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmRiskStrategyRequest {
+  /** 策略id，仅支持删除自定义策略（rule_source=custom）；内置策略请通过 ModifyDspmRiskStrategy 的 IsEnabled 禁用 */
+  StrategyId: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteDspmRiskStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDspmShareUserDataRequest {
+  /** 用户appid */
+  DeleteDataAppId: number;
+}
+
+declare interface DeleteDspmShareUserDataResponse {
+  /** 0-成功，1-失败 */
+  Result?: number;
+  /** 成功或失败信息 */
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18111,6 +18387,22 @@ declare interface DescribeDspmAssetsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDspmAuditFilterStrategyRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeDspmAuditFilterStrategyResponse {
+  /** 策略内容 */
+  StrategySet?: DescribeDspmAuditFilterStrategy[];
+  /** 策略总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDspmBackupLogListRequest {
   /** 限制数目 */
   Limit: number;
@@ -18161,6 +18453,50 @@ declare interface DescribeDspmBackupSettingResponse {
   OnlineLogMaxSaveTime?: number;
   /** 最大在线日志条数，单位是：个 */
   MaxOnlineLogCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmCkafkaRouteListRequest {
+  /** Ckafka接入类型 */
+  VipType: number;
+  /** Ckafka实例的地域 */
+  RegionId: string;
+  /** Ckafka实例的id */
+  InstanceId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** Ckafka实例的名称 */
+  InstanceName?: string;
+}
+
+declare interface DescribeDspmCkafkaRouteListResponse {
+  /** Ckafka实例的路由列表 */
+  List?: RouteInfo[];
+  /** Ckafka实例的路由列表个数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmCkafkaTopicListRequest {
+  /** ckafka的实例接入类型 */
+  VipType: number;
+  /** ckafka的实例地域 */
+  RegionId: string;
+  /** ckafka的实例id */
+  InstanceId: string;
+  /** ckafka的实例名称 */
+  InstanceName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmCkafkaTopicListResponse {
+  /** ckafka实例的主题列表 */
+  List?: TopicInfo[];
+  /** ckafka实例的主题列表的总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18437,6 +18773,20 @@ declare interface DescribeDspmIdentifyRuleTestResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDspmLogDeliveryTypeRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmLogDeliveryTypeResponse {
+  /** 支持日志投递的类型列表 */
+  List?: LogDeliveryType[];
+  /** 支持日志投递类型的总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDspmLogListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -18515,6 +18865,20 @@ declare interface DescribeDspmLogListResponse {
   TotalCount?: number;
   /** 日志信息列表 */
   List?: AuditLogInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmLogTypeConfigListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmLogTypeConfigListResponse {
+  /** 用户ckafka配置，以及日志投递配置 */
+  List?: LogDeliveryCkafkaConfig[];
+  /** 配置总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18603,6 +18967,18 @@ declare interface DescribeDspmPersonalIdentifyListResponse {
   TotalCount?: number;
   /** 个人身份信息 */
   InfoSet?: DspmPersonIdentifyItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmResourceRequest {
+}
+
+declare interface DescribeDspmResourceResponse {
+  /** 资产id */
+  ResourceId?: string;
+  /** 资产状态: 0 未初始化，1 正常，2 隔离，3 销毁，4 初始化失败，5 初始化中 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18737,6 +19113,48 @@ declare interface DescribeDspmRiskTendencyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDspmSessionListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 限制数目 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 登陆状态(0 全部 1 成功 2 失败) */
+  LoginType?: number;
+  /** 数据库端口 */
+  DbName?: string;
+  /** 数据库名称 */
+  DbPort?: number;
+  /** 数据库 IP */
+  DbIp?: string;
+  /** 资产 ID */
+  AssetsId?: number;
+  /** 会话 ID */
+  SessionId?: string;
+  /** 客户端 IP */
+  ClientSideIp?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 流量来源 取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两者都传或不传则返回所有 */
+  SourceTypes?: string[];
+  /** ["MySQL"] */
+  DbTypes?: string[];
+}
+
+declare interface DescribeDspmSessionListResponse {
+  /** 总数目 */
+  TotalCount?: number;
+  /** 审计会话列表信息 */
+  List?: DspmAuditSessionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDspmStatisticsRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -18787,6 +19205,20 @@ declare interface DescribeDspmSyncUsersStatusRequest {
 declare interface DescribeDspmSyncUsersStatusResponse {
   /** 用户同步任务状态。0-未执行。1-执行中 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmUserCkafkaInstanceListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmUserCkafkaInstanceListResponse {
+  /** 租户ckafka列表 */
+  List?: CkafkaInstance[];
+  /** 返回租户ckafka数量 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23565,6 +23997,28 @@ declare interface ModifyDspmAssetSecurityAnalysisSwitchResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDspmAuditFilterStrategyRequest {
+  /** 策略ID */
+  AuditFilterStrategyId: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 策略名称 */
+  Name?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 策略规则内容 */
+  Rule?: string;
+  /** 是否启用枚举值：0： 不启用1： 启用 */
+  IsEnabled?: number;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyDspmAuditFilterStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDspmBackupSettingRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -23579,6 +24033,58 @@ declare interface ModifyDspmBackupSettingRequest {
 }
 
 declare interface ModifyDspmBackupSettingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmCkafkaSaveRequest {
+  /** 接入类型，当前支持 1和7, 类型vip网络类型（1:外网TGW 2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境） */
+  VipType: number;
+  /** 实例的地域 */
+  RegionId: string;
+  /** 实例的id */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 实例的接入信息 */
+  RouteInfo: RouteInfo;
+  /** 接入为域名的时候，有效 */
+  Username: string;
+  /** 接入为域名的时候，有效 */
+  Password: string;
+  /** 日志投递的主题配置 */
+  LogDeliveryInfo: LogDeliveryInfo[];
+  /** 已存在配置时是否覆盖，默认 false（不覆盖，保持兼容） */
+  IsOverwrite?: boolean;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmCkafkaSaveResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmCkafkaStartRequest {
+  /** 日志类型的主题投递 */
+  LogDeliveryInfo: LogDeliveryInfo[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmCkafkaStartResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmCkafkaStopRequest {
+  /** 日志投递类型的配置 */
+  LogDeliveryInfo: LogDeliveryInfo[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmCkafkaStopResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23737,6 +24243,22 @@ declare interface ModifyDspmIpInfoRequest {
 }
 
 declare interface ModifyDspmIpInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDspmLogDeliveryTypeRequest {
+  /** 日志类型 */
+  LogType: number;
+  /** 投递的topicid */
+  TopicId: string;
+  /** 投递的topicname */
+  TopicName: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyDspmLogDeliveryTypeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -24725,6 +25247,22 @@ declare interface ModifyShareUserCSPMResponse {
   RequestId?: string;
 }
 
+declare interface ModifyShareUserDspmRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 增加监测账号 */
+  SharedAppIDList?: number[];
+}
+
+declare interface ModifyShareUserDspmResponse {
+  /** 0-成功，1-失败 */
+  Result?: number;
+  /** 成功或失败信息 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySkillScanAlertStatusRequest {
   /** 告警记录 ID 列表入参限制：单次最多 100 个取值参考：通过 DescribeSkillScanAlertList 接口获取 */
   IDs: number[];
@@ -25115,6 +25653,32 @@ declare interface SendDspmAssetLoginSmsCodeRequest {
 }
 
 declare interface SendDspmAssetLoginSmsCodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SendDspmCkafkaTestRequest {
+  /** 1为外网，7为支撑环境接入 */
+  VipType: number;
+  /** ckafka实例id */
+  InstanceId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 为7有效 */
+  Vip?: string;
+  /** 为7有效 */
+  Vport?: string;
+  /** 域名，VipType为1有效 */
+  Domain?: string;
+  /** 域名端口，VipType为1有效 */
+  DomainPort?: string;
+  /** 用户名，VipType为1有效 */
+  Username?: string;
+  /** 用户密码，VipType为1有效 */
+  Password?: string;
+}
+
+declare interface SendDspmCkafkaTestResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -25546,6 +26110,8 @@ declare interface Csip {
   CreateDspmAssetIdentifyInfoExportJob(data: CreateDspmAssetIdentifyInfoExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetIdentifyInfoExportJobResponse>;
   /** 创建Dspm资产列表导出任务 {@link CreateDspmAssetsExportJobRequest} {@link CreateDspmAssetsExportJobResponse} */
   CreateDspmAssetsExportJob(data?: CreateDspmAssetsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAssetsExportJobResponse>;
+  /** 创建Dspm审计过滤策略 {@link CreateDspmAuditFilterStrategyRequest} {@link CreateDspmAuditFilterStrategyResponse} */
+  CreateDspmAuditFilterStrategy(data: CreateDspmAuditFilterStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmAuditFilterStrategyResponse>;
   /** 创建日志导出任务 {@link CreateDspmExportTaskRequest} {@link CreateDspmExportTaskResponse} */
   CreateDspmExportTask(data?: CreateDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmExportTaskResponse>;
   /** 创建dspm数据识别分类 {@link CreateDspmIdentifyCategoryRequest} {@link CreateDspmIdentifyCategoryResponse} */
@@ -25566,8 +26132,12 @@ declare interface Csip {
   CreateDspmIdentifyRule(data: CreateDspmIdentifyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmIdentifyRuleResponse>;
   /** 创建Dspm个人身份 {@link CreateDspmPersonalIdentifyRequest} {@link CreateDspmPersonalIdentifyResponse} */
   CreateDspmPersonalIdentify(data: CreateDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmPersonalIdentifyResponse>;
+  /** 创建Dspm实例 {@link CreateDspmResourceRequest} {@link CreateDspmResourceResponse} */
+  CreateDspmResource(data?: CreateDspmResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmResourceResponse>;
   /** 创建Dspm风险导出任务 {@link CreateDspmRiskExportJobRequest} {@link CreateDspmRiskExportJobResponse} */
   CreateDspmRiskExportJob(data?: CreateDspmRiskExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmRiskExportJobResponse>;
+  /** 创建Dspm自定义风险策略 {@link CreateDspmRiskStrategyRequest} {@link CreateDspmRiskStrategyResponse} */
+  CreateDspmRiskStrategy(data: CreateDspmRiskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmRiskStrategyResponse>;
   /** 创建Dspm白名单策略 {@link CreateDspmWhitelistStrategyRequest} {@link CreateDspmWhitelistStrategyResponse} */
   CreateDspmWhitelistStrategy(data?: CreateDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDspmWhitelistStrategyResponse>;
   /** 创建动态资产导出任务 {@link CreateDynamicAssetsExportJobRequest} {@link CreateDynamicAssetsExportJobResponse} */
@@ -25676,8 +26246,12 @@ declare interface Csip {
   DeleteDspmApplyOrder(data?: DeleteDspmApplyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmApplyOrderResponse>;
   /** 删除Dspm资产账号 {@link DeleteDspmAssetAccountRequest} {@link DeleteDspmAssetAccountResponse} */
   DeleteDspmAssetAccount(data: DeleteDspmAssetAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmAssetAccountResponse>;
+  /** 删除Dspm审计过滤策略 {@link DeleteDspmAuditFilterStrategyRequest} {@link DeleteDspmAuditFilterStrategyResponse} */
+  DeleteDspmAuditFilterStrategy(data: DeleteDspmAuditFilterStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmAuditFilterStrategyResponse>;
   /** 删除备份日志 {@link DeleteDspmBackupLogListRequest} {@link DeleteDspmBackupLogListResponse} */
   DeleteDspmBackupLogList(data: DeleteDspmBackupLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmBackupLogListResponse>;
+  /** 取消日志投递配置 {@link DeleteDspmCkafkaConfigRequest} {@link DeleteDspmCkafkaConfigResponse} */
+  DeleteDspmCkafkaConfig(data?: DeleteDspmCkafkaConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmCkafkaConfigResponse>;
   /** 删除导出任务 {@link DeleteDspmExportTaskRequest} {@link DeleteDspmExportTaskResponse} */
   DeleteDspmExportTask(data?: DeleteDspmExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmExportTaskResponse>;
   /** 删除dspm数据识别分类 {@link DeleteDspmIdentifyCategoryRequest} {@link DeleteDspmIdentifyCategoryResponse} */
@@ -25696,6 +26270,10 @@ declare interface Csip {
   DeleteDspmPersonalIdentify(data: DeleteDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmPersonalIdentifyResponse>;
   /** 删除恢复日志 {@link DeleteDspmRestoreLogListRequest} {@link DeleteDspmRestoreLogListResponse} */
   DeleteDspmRestoreLogList(data: DeleteDspmRestoreLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmRestoreLogListResponse>;
+  /** 删除Dspm自定义风险策略 {@link DeleteDspmRiskStrategyRequest} {@link DeleteDspmRiskStrategyResponse} */
+  DeleteDspmRiskStrategy(data: DeleteDspmRiskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmRiskStrategyResponse>;
+  /** 删除dspm共享用户数据 {@link DeleteDspmShareUserDataRequest} {@link DeleteDspmShareUserDataResponse} */
+  DeleteDspmShareUserData(data: DeleteDspmShareUserDataRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmShareUserDataResponse>;
   /** 删除Dspm白名单策略 {@link DeleteDspmWhitelistStrategyRequest} {@link DeleteDspmWhitelistStrategyResponse} */
   DeleteDspmWhitelistStrategy(data?: DeleteDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDspmWhitelistStrategyResponse>;
   /** 删除EDR策略 {@link DeleteEDRRulesRequest} {@link DeleteEDRRulesResponse} */
@@ -26102,10 +26680,16 @@ declare interface Csip {
   DescribeDspmAssetTableList(data: DescribeDspmAssetTableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetTableListResponse>;
   /** 查询Dspm资产列表 {@link DescribeDspmAssetsRequest} {@link DescribeDspmAssetsResponse} */
   DescribeDspmAssets(data?: DescribeDspmAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAssetsResponse>;
+  /** 查询Dspm审计过滤策略 {@link DescribeDspmAuditFilterStrategyRequest} {@link DescribeDspmAuditFilterStrategyResponse} */
+  DescribeDspmAuditFilterStrategy(data?: DescribeDspmAuditFilterStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAuditFilterStrategyResponse>;
   /** 查询备份日志列表 {@link DescribeDspmBackupLogListRequest} {@link DescribeDspmBackupLogListResponse} */
   DescribeDspmBackupLogList(data: DescribeDspmBackupLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmBackupLogListResponse>;
   /** 查询日志备份配置 {@link DescribeDspmBackupSettingRequest} {@link DescribeDspmBackupSettingResponse} */
   DescribeDspmBackupSetting(data?: DescribeDspmBackupSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmBackupSettingResponse>;
+  /** 查询Ckafka实例的路由信息 {@link DescribeDspmCkafkaRouteListRequest} {@link DescribeDspmCkafkaRouteListResponse} */
+  DescribeDspmCkafkaRouteList(data: DescribeDspmCkafkaRouteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmCkafkaRouteListResponse>;
+  /** 查询实例的主题列表 {@link DescribeDspmCkafkaTopicListRequest} {@link DescribeDspmCkafkaTopicListResponse} */
+  DescribeDspmCkafkaTopicList(data: DescribeDspmCkafkaTopicListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmCkafkaTopicListResponse>;
   /** 查询dspm字典信息列表 {@link DescribeDspmDictionaryListRequest} {@link DescribeDspmDictionaryListResponse} */
   DescribeDspmDictionaryList(data: DescribeDspmDictionaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmDictionaryListResponse>;
   /** 查询导出任务 {@link DescribeDspmExportTaskRequest} {@link DescribeDspmExportTaskResponse} */
@@ -26134,14 +26718,20 @@ declare interface Csip {
   DescribeDspmIdentifyRuleList(data?: DescribeDspmIdentifyRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyRuleListResponse>;
   /** 查询dspm数据识别数据项验证结果 {@link DescribeDspmIdentifyRuleTestResultRequest} {@link DescribeDspmIdentifyRuleTestResultResponse} */
   DescribeDspmIdentifyRuleTestResult(data: DescribeDspmIdentifyRuleTestResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmIdentifyRuleTestResultResponse>;
+  /** 查询日志投递的日志类型 {@link DescribeDspmLogDeliveryTypeRequest} {@link DescribeDspmLogDeliveryTypeResponse} */
+  DescribeDspmLogDeliveryType(data?: DescribeDspmLogDeliveryTypeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmLogDeliveryTypeResponse>;
   /** 日志列表信息 {@link DescribeDspmLogListRequest} {@link DescribeDspmLogListResponse} */
   DescribeDspmLogList(data?: DescribeDspmLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmLogListResponse>;
+  /** 查询租户日志投递配置 {@link DescribeDspmLogTypeConfigListRequest} {@link DescribeDspmLogTypeConfigListResponse} */
+  DescribeDspmLogTypeConfigList(data?: DescribeDspmLogTypeConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmLogTypeConfigListResponse>;
   /** 获取已购Dspm订单的信息 {@link DescribeDspmPayInfoRequest} {@link DescribeDspmPayInfoResponse} */
   DescribeDspmPayInfo(data?: DescribeDspmPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmPayInfoResponse>;
   /** 查询Dspm访客申请记录 {@link DescribeDspmPersonApplyHistoryRequest} {@link DescribeDspmPersonApplyHistoryResponse} */
   DescribeDspmPersonApplyHistory(data?: DescribeDspmPersonApplyHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmPersonApplyHistoryResponse>;
   /** 查询Dspm个人身份信息列表 {@link DescribeDspmPersonalIdentifyListRequest} {@link DescribeDspmPersonalIdentifyListResponse} */
   DescribeDspmPersonalIdentifyList(data?: DescribeDspmPersonalIdentifyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmPersonalIdentifyListResponse>;
+  /** 查询Dspm实例 {@link DescribeDspmResourceRequest} {@link DescribeDspmResourceResponse} */
+  DescribeDspmResource(data?: DescribeDspmResourceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmResourceResponse>;
   /** 查询Dspm风险记录 {@link DescribeDspmRiskRequest} {@link DescribeDspmRiskResponse} */
   DescribeDspmRisk(data?: DescribeDspmRiskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskResponse>;
   /** 查询Dspm风险详情 {@link DescribeDspmRiskDetailRequest} {@link DescribeDspmRiskDetailResponse} */
@@ -26152,6 +26742,8 @@ declare interface Csip {
   DescribeDspmRiskStrategyGroup(data?: DescribeDspmRiskStrategyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskStrategyGroupResponse>;
   /** 查询Dspm风险趋势 {@link DescribeDspmRiskTendencyRequest} {@link DescribeDspmRiskTendencyResponse} */
   DescribeDspmRiskTendency(data?: DescribeDspmRiskTendencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmRiskTendencyResponse>;
+  /** 审计会话列表信息 {@link DescribeDspmSessionListRequest} {@link DescribeDspmSessionListResponse} */
+  DescribeDspmSessionList(data?: DescribeDspmSessionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSessionListResponse>;
   /** 查询Dspm统计信息 {@link DescribeDspmStatisticsRequest} {@link DescribeDspmStatisticsResponse} */
   DescribeDspmStatistics(data?: DescribeDspmStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmStatisticsResponse>;
   /** 查询Dspm支持的资产类型信息 {@link DescribeDspmSupportedAssetTypeRequest} {@link DescribeDspmSupportedAssetTypeResponse} */
@@ -26160,6 +26752,8 @@ declare interface Csip {
   DescribeDspmSyncAssetsStatus(data?: DescribeDspmSyncAssetsStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSyncAssetsStatusResponse>;
   /** 查询Dspm同步用户状态 {@link DescribeDspmSyncUsersStatusRequest} {@link DescribeDspmSyncUsersStatusResponse} */
   DescribeDspmSyncUsersStatus(data?: DescribeDspmSyncUsersStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmSyncUsersStatusResponse>;
+  /** 查询租户ckafka实例列表 {@link DescribeDspmUserCkafkaInstanceListRequest} {@link DescribeDspmUserCkafkaInstanceListResponse} */
+  DescribeDspmUserCkafkaInstanceList(data?: DescribeDspmUserCkafkaInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmUserCkafkaInstanceListResponse>;
   /** 查询Dspm白名单策略 {@link DescribeDspmWhitelistStrategyRequest} {@link DescribeDspmWhitelistStrategyResponse} */
   DescribeDspmWhitelistStrategy(data?: DescribeDspmWhitelistStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmWhitelistStrategyResponse>;
   /** 动态资产列表 {@link DescribeDynamicAssetsRequest} {@link DescribeDynamicAssetsResponse} */
@@ -26636,8 +27230,16 @@ declare interface Csip {
   ModifyDspmAssetLogDeliverySwitch(data: ModifyDspmAssetLogDeliverySwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetLogDeliverySwitchResponse>;
   /** 修改Dspm安全分析开关 {@link ModifyDspmAssetSecurityAnalysisSwitchRequest} {@link ModifyDspmAssetSecurityAnalysisSwitchResponse} */
   ModifyDspmAssetSecurityAnalysisSwitch(data: ModifyDspmAssetSecurityAnalysisSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAssetSecurityAnalysisSwitchResponse>;
+  /** 修改Dspm审计过滤策略 {@link ModifyDspmAuditFilterStrategyRequest} {@link ModifyDspmAuditFilterStrategyResponse} */
+  ModifyDspmAuditFilterStrategy(data: ModifyDspmAuditFilterStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmAuditFilterStrategyResponse>;
   /** 修改日志备份设置 {@link ModifyDspmBackupSettingRequest} {@link ModifyDspmBackupSettingResponse} */
   ModifyDspmBackupSetting(data?: ModifyDspmBackupSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmBackupSettingResponse>;
+  /** 租户Ckafka配置保存 {@link ModifyDspmCkafkaSaveRequest} {@link ModifyDspmCkafkaSaveResponse} */
+  ModifyDspmCkafkaSave(data: ModifyDspmCkafkaSaveRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmCkafkaSaveResponse>;
+  /** 日志投递开启 {@link ModifyDspmCkafkaStartRequest} {@link ModifyDspmCkafkaStartResponse} */
+  ModifyDspmCkafkaStart(data: ModifyDspmCkafkaStartRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmCkafkaStartResponse>;
+  /** 日志类型投递关闭 {@link ModifyDspmCkafkaStopRequest} {@link ModifyDspmCkafkaStopResponse} */
+  ModifyDspmCkafkaStop(data: ModifyDspmCkafkaStopRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmCkafkaStopResponse>;
   /** 修改dspm数据识别分类 {@link ModifyDspmIdentifyCategoryRequest} {@link ModifyDspmIdentifyCategoryResponse} */
   ModifyDspmIdentifyCategory(data: ModifyDspmIdentifyCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyCategoryResponse>;
   /** 修改dspm数据识别模板 {@link ModifyDspmIdentifyComplianceGroupRequest} {@link ModifyDspmIdentifyComplianceGroupResponse} */
@@ -26658,6 +27260,8 @@ declare interface Csip {
   ModifyDspmIdentifyRuleStatus(data: ModifyDspmIdentifyRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIdentifyRuleStatusResponse>;
   /** 修改DspmIp信息 {@link ModifyDspmIpInfoRequest} {@link ModifyDspmIpInfoResponse} */
   ModifyDspmIpInfo(data: ModifyDspmIpInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmIpInfoResponse>;
+  /** 修改日志投递配置信息 {@link ModifyDspmLogDeliveryTypeRequest} {@link ModifyDspmLogDeliveryTypeResponse} */
+  ModifyDspmLogDeliveryType(data: ModifyDspmLogDeliveryTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmLogDeliveryTypeResponse>;
   /** 修改Dspm个人身份 {@link ModifyDspmPersonalIdentifyRequest} {@link ModifyDspmPersonalIdentifyResponse} */
   ModifyDspmPersonalIdentify(data: ModifyDspmPersonalIdentifyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDspmPersonalIdentifyResponse>;
   /** 恢复备份日志 {@link ModifyDspmRestoreLogTaskRequest} {@link ModifyDspmRestoreLogTaskResponse} */
@@ -26754,6 +27358,8 @@ declare interface Csip {
   ModifySecurityScoreRule(data: ModifySecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityScoreRuleResponse>;
   /** 更新CSPM共享配额 {@link ModifyShareUserCSPMRequest} {@link ModifyShareUserCSPMResponse} */
   ModifyShareUserCSPM(data?: ModifyShareUserCSPMRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShareUserCSPMResponse>;
+  /** 修改dspm监测账号 {@link ModifyShareUserDspmRequest} {@link ModifyShareUserDspmResponse} */
+  ModifyShareUserDspm(data?: ModifyShareUserDspmRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShareUserDspmResponse>;
   /** 批量修改Skill安全检测告警状态 {@link ModifySkillScanAlertStatusRequest} {@link ModifySkillScanAlertStatusResponse} */
   ModifySkillScanAlertStatus(data: ModifySkillScanAlertStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySkillScanAlertStatusResponse>;
   /** 更新自定义策略的开关 {@link ModifyUebaRuleSwitchRequest} {@link ModifyUebaRuleSwitchResponse} */
@@ -26794,6 +27400,8 @@ declare interface Csip {
   ScanEDRTaskAgain(data: ScanEDRTaskAgainRequest, config?: AxiosRequestConfig): AxiosPromise<ScanEDRTaskAgainResponse>;
   /** 发送Dspm资产访问验证码 {@link SendDspmAssetLoginSmsCodeRequest} {@link SendDspmAssetLoginSmsCodeResponse} */
   SendDspmAssetLoginSmsCode(data: SendDspmAssetLoginSmsCodeRequest, config?: AxiosRequestConfig): AxiosPromise<SendDspmAssetLoginSmsCodeResponse>;
+  /** 租户Ckafka联通性测试 {@link SendDspmCkafkaTestRequest} {@link SendDspmCkafkaTestResponse} */
+  SendDspmCkafkaTest(data: SendDspmCkafkaTestRequest, config?: AxiosRequestConfig): AxiosPromise<SendDspmCkafkaTestResponse>;
   /** 开启或者修改防卸载功能 {@link StartOrModifyPreventUninstallRequest} {@link StartOrModifyPreventUninstallResponse} */
   StartOrModifyPreventUninstall(data: StartOrModifyPreventUninstallRequest, config?: AxiosRequestConfig): AxiosPromise<StartOrModifyPreventUninstallResponse>;
   /** 开启或者修改进程守护 {@link StartOrModifyProcessDaemonRequest} {@link StartOrModifyProcessDaemonResponse} */

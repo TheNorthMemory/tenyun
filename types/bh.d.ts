@@ -1935,15 +1935,15 @@ declare interface DeployResourceRequest {
   Zone: string;
   /** 需要开通服务的VPC */
   VpcId: string;
-  /** 需要开通服务的子网ID */
+  /** 需要开通服务的子网ID，此字段即将废除，请填写DeploySubnets包含的子网 */
   SubnetId: string;
-  /** 需要开通服务的子网网段 */
+  /** 需要开通服务的子网网段，此字段即将废除，请填写DeploySubnets包含的子网 */
   CidrBlock: string;
   /** 需要开通服务的VPC名称 */
   VpcName?: string;
   /** 需要开通服务的VPC对应的网段 */
   VpcCidrBlock?: string;
-  /** 需要开通服务的子网名称 */
+  /** 需要开通服务的子网名称，此字段即将废除，请填写DeploySubnets包含的子网 */
   SubnetName?: string;
   /** 需要开通实例所属的CDC集群ID */
   CdcClusterId?: string;
@@ -1957,7 +1957,7 @@ declare interface DeployResourceRequest {
   IntranetAccess?: number;
   /** 0-关闭公网访问堡垒机，1-开启公网访问堡垒机 */
   ExternalAccess?: number;
-  /** 开通堡垒机的子网信息 */
+  /** 开通堡垒机的子网信息，最多支持2个子网 */
   DeploySubnets?: ParamInitResourceSubnet[];
   /** 开通内网访问的VPC ID */
   IntranetVpcId?: string;
@@ -1965,7 +1965,7 @@ declare interface DeployResourceRequest {
   IntranetVpcCidrBlock?: string;
   /** 开通内网访问的VPC名称 */
   IntranetVpcName?: string;
-  /** 开通内网访问的子网信息 */
+  /** 开通内网访问的子网信息，最多支持2个子网 */
   IntranetSubnets?: ParamInitResourceSubnet[];
 }
 
