@@ -1361,10 +1361,12 @@ declare interface CreateAIAgentCallRequest {
   Callers?: string[];
   /** 提示词变量 */
   PromptVariables?: Variable[];
-  /** 通用变量： 提示词变量 欢迎语变量 欢迎语延迟播放(秒级)：welcome-message-delay dify变量 1. dify-inputs-xxx 为dify的inputs变量2. dify-inputs-user 为dify的user值3. dify-inputs-conversation_id 为dify的conversation_id值 */
+  /** 通用变量： 提示词变量 欢迎语变量 欢迎语延迟播放(秒级)：welcome-message-delay dify变量 dify-inputs-xxx 为dify的inputs变量dify-inputs-user 为dify的user值dify-inputs-conversation_id 为dify的conversation_id值 */
   Variables?: Variable[];
   /** 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数 */
   MaxRingTimeoutSecond?: number;
+  /** 智能体并发不足时，排队等待超时时间，单位秒取值范围：[0, 5]默认值：5 */
+  AcquireTimeoutSecond?: number;
 }
 
 declare interface CreateAIAgentCallResponse {

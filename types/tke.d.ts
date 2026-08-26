@@ -730,7 +730,7 @@ declare interface UpdateNativeNodePoolParam {
   UpgradeSettings?: MachineUpgradeSettings;
   /** 是否开启自愈能力 */
   AutoRepair?: boolean;
-  /** 计费类型枚举值：POSTPAID_BY_HOUR： 目标计费类型为按量计费PREPAID： 目标计费类型为包年包月计费 */
+  /** 计费类型枚举值：POSTPAID_BY_HOUR： 目标计费类型为按量计费PREPAID： 目标计费类型为包年包月计费UNDERWRITE： 目标计费类型为包销计费 */
   InstanceChargeType?: string;
   /** 包年包月机型计费配置 */
   InstanceChargePrepaid?: InstanceChargePrepaid;

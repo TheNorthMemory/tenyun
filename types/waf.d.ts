@@ -3524,9 +3524,9 @@ declare interface SpartaProtectionPort {
 
 /** 规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）null（不存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）belong_to（属于）not_belong_to（不属于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 同匹配字段Referer逻辑符号 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 同匹配字段请求路径逻辑符号 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 exsit（存在参数）nexsit（不存在参数）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 同匹配字段请求路径逻辑符号 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）rematch（正则匹配） 暂不支持 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 exsit（存在参数）nexsit（不存在参数）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 支持参数录入 numgt（数值大于）numlt（数值小于）numeq（数值等于） 请输入0-9999999999999之间的整数 IP_GEO（来源IP归属地） 支持参数录入 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] CAPTCHA_RISK（验证码风险） 不支持参数 eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在） 请输入风险等级值,支持数值范围0-255 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 eq（等于）neq（不等于）belong（属于）not_belong（不属于）null（不存在）exist（存在） 请输入设备风险代码,支持取值：101、201、301、401、501、601、701 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）exist（存在） 请输入评估分数,支持数值范围0-100 */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同，具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 同匹配字段Referer逻辑符号 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）rematch（正则匹配） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 empty（内容为空）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）rematch（正则匹配） 请输入内容,512个字符以内 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 eq（等于）neq（不等于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numge（数值大于等于）numle（数值小于等于） 请输入0-9999999999999之间的整数 IP_GEO（来源IP归属地） 不支持参数 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] HOST（请求Host） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入Host值,512个字符以内 CAPTCHA_RISK（验证码风险） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） 请输入风险等级值,支持数值范围0-255 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） 请输入设备风险代码,支持取值：101、201、301、401、501、601、701 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）nnull（存在） 请输入评估分数,支持数值范围0-100 */
   Field: string;
-  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） null （不存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） strprefix （ 前缀匹配） strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ 属于） ipnmatch （ 不属于） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） belong_to（属于） not_belong_to（不属于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
+  /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） nempty （ 内容不为空） null （不存在） nnull （存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） belong_to （属于） not_belong_to （不属于） strprefix （ 前缀匹配）strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ IP匹配） ipnmatch （ IP不匹配） rematch （ 正则匹配） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） cel （ CEL表达式） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string;
   /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
   Content: string;
@@ -4093,19 +4093,19 @@ declare interface AddBypassAllRuleResponse {
 }
 
 declare interface AddCustomRuleRequest {
-  /** 规则名称 */
+  /** 规则名称入参限制：1-128个字符，不允许特殊字符 */
   Name: string;
-  /** 优先级 */
+  /** 优先级，0-100的整数，数字越小，代表这条规则的执行优先级越高默认值：0 */
   SortId: string;
   /** 策略详情 */
   Strategies: Strategy[];
   /** 需要添加策略的域名 */
   Domain: string;
-  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
+  /** 动作类型取值说明：1-阻断，2-人机识别（滑块），3-观察，4-重定向，5-JS校验，6-人机识别（无感验证-拦截），7-人机识别（无感验证-观察），8-语音验证码入参限制：必填，取值范围为1-8约束条件：当ActionType为4（重定向）时，Redirect参数不能为空 */
   ActionType: string;
   /** 如果动作是重定向，则表示重定向的地址；其他情况可以为空 */
   Redirect?: string;
-  /** 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59. 0表示永不过期 */
+  /** 过期时间，单位为秒级时间戳，例如1677254399表示过期时间为2023-02-24 23:59:59取值说明：0表示永不过期默认值：0（解析失败时也默认为0） */
   ExpireTime?: string;
   /** WAF实例类型，sparta-waf表示SAAS型WAF，clb-waf表示负载均衡型WAF */
   Edition?: string;
@@ -4125,9 +4125,9 @@ declare interface AddCustomRuleRequest {
   Status?: number;
   /** 拦截页面id */
   PageId?: string;
-  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系默认值：and入参限制：不区分大小写，仅支持and或or */
   LogicalOp?: string;
-  /** 按照动作灰度的比例，默认是100 */
+  /** 动作灰度比例，即规则命中后执行动作的流量百分比取值范围：1-100默认值：100（全量生效） */
   ActionRatio?: number;
 }
 
@@ -4467,7 +4467,7 @@ declare interface CreateIpAccessControlRequest {
   SourceType?: string;
   /** 备注 */
   Note?: string;
-  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行 */
+  /** 规则执行的方式，TimedJob为定时执行，CronJob为周期执行，JobType为空时，永久生效 */
   JobType?: string;
   /** 定时配置详情 */
   JobDateTime?: JobDateTime;
@@ -4771,11 +4771,11 @@ declare interface DeleteCCRuleResponse {
 declare interface DeleteCustomRuleRequest {
   /** 删除的域名 */
   Domain: string;
-  /** 删除的规则ID */
+  /** 删除的规则ID说明：支持批量删除，多个规则ID用英文逗号分隔与DomainRuleIdList二选一，优先使用DomainRuleIdList */
   RuleId: string;
   /** WAF的版本，clb-waf代表负载均衡WAF、sparta-waf代表SaaS WAF，默认是sparta-waf。 */
   Edition?: string;
-  /** 批量删除的规则列表 */
+  /** 批量删除的规则列表说明：支持跨域名批量删除，每个元素指定域名和规则ID。如果不为空则忽略Domain和RuleId字段 */
   DomainRuleIdList?: DomainRuleId[];
 }
 
@@ -6165,6 +6165,8 @@ declare interface DescribeLLMContentSecCheckRequest {
   SessionId?: string;
   /** 意图检测请求内容 */
   IntentContent?: IntentContent;
+  /** 客户端来源IP地址，用于白名单匹配等场景，支持IPv4和IPv6格式 */
+  ClientIP?: string;
 }
 
 declare interface DescribeLLMContentSecCheckResponse {
@@ -7523,9 +7525,9 @@ declare interface ModifyCustomRuleRequest {
   Domain: string;
   /** 编辑的规则ID */
   RuleId: number;
-  /** 编辑的规则名称 */
+  /** 编辑的规则名称入参限制：1-128个字符，不允许特殊字符 */
   RuleName: string;
-  /** 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验 */
+  /** 动作类型取值说明：1-阻断，2-人机识别（滑块），3-观察，4-重定向，5-JS校验，6-人机识别（无感验证-拦截），7-人机识别（无感验证-观察），8-语音验证码入参限制：必填，取值范围为1-8约束条件：当RuleAction为4（重定向）时，Redirect参数不能为空 */
   RuleAction: string;
   /** 匹配条件数组 */
   Strategies: Strategy[];
@@ -7549,9 +7551,9 @@ declare interface ModifyCustomRuleRequest {
   Status?: number;
   /** 拦截页面id */
   PageId?: string;
-  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系 */
+  /** 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系默认值：and入参限制：不区分大小写，仅支持and或or */
   LogicalOp?: string;
-  /** 规则生效比例 */
+  /** 动作灰度比例，即规则命中后执行动作的流量百分比取值范围：1-100默认值：100（全量生效） */
   ActionRatio?: number;
 }
 
@@ -8731,34 +8733,34 @@ declare interface UpsertIpAccessControlResponse {
 }
 
 declare interface UpsertSessionRequest {
-  /** 域名 */
+  /** 域名入参限制：必填，必须为合法域名格式 */
   Domain: string;
-  /** session来源位置 */
+  /** 会话来源位置取值说明：get-从URL查询参数中提取，post-从POST Body中提取，cookie-从Cookie中提取，header-从HTTP Header中提取入参限制：必填，取值范围为get/post/cookie/header */
   Source: string;
-  /** 提取类别 */
+  /** 提取类别取值说明：location-按位置提取（使用StartOffset和EndOffset），match-按字符串匹配提取（使用KeyOrStartMat和EndMat），exact_key-按精准Key提取（使用Key字段）入参限制：必填，取值范围为location/match/exact_key */
   Category: string;
-  /** 提取key或者起始匹配模式 */
+  /** 提取key或者起始匹配模式入参限制：最长32个字符，不允许包含MongoDB注入字符说明：当Category为match时，表示匹配的起始字符串；当Category为exact_key时，表示精确匹配的key名 */
   KeyOrStartMat: string;
-  /** 结束匹配模式 */
+  /** 结束匹配模式入参限制：必填，最长32个字符，不允许包含MongoDB注入字符说明：当Category为match时，表示匹配的结束字符串 */
   EndMat: string;
-  /** 起始偏移位置 */
+  /** 起始偏移位置入参限制：必填，整数字符串约束条件：EndOffset不能小于StartOffset，且EndOffset-StartOffset+1不能超过256说明：当Category为location时生效，表示从会话值中提取的起始字节位置 */
   StartOffset: string;
-  /** 结束偏移位置 */
+  /** 结束偏移位置入参限制：必填，整数字符串约束条件：不能小于StartOffset，且EndOffset-StartOffset+1不能超过256说明：当Category为location时生效，表示从会话值中提取的结束字节位置 */
   EndOffset: string;
   /** 版本 */
   Edition?: string;
-  /** Session名 */
+  /** 会话名称说明：用于标识会话的可读名称 */
   SessionName?: string;
-  /** Session对应ID */
+  /** 会话ID说明：传-1表示新增会话（系统自动生成ID），传已有ID表示更新该会话配置约束条件：新增时每个域名最多10条会话规则 */
   SessionID?: number;
-  /** 精准匹配时配置的key */
+  /** 会话标识参数（精准匹配key）入参限制：key中"."分隔的层级不超过2层说明：当Category为exact_key时使用，表示要精确匹配的参数名 */
   Key?: string;
 }
 
 declare interface UpsertSessionResponse {
   /** 结果 */
   Data?: string;
-  /** SessionID */
+  /** 会话ID说明：新增时返回系统生成的SessionID，更新时返回请求中传入的SessionID */
   SessionID?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -9215,7 +9217,7 @@ declare interface Waf {
   UpsertCCRule(data: UpsertCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertCCRuleResponse>;
   /** Waf IP黑白名单Upsert接口 {@link UpsertIpAccessControlRequest} {@link UpsertIpAccessControlResponse} */
   UpsertIpAccessControl(data: UpsertIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertIpAccessControlResponse>;
-  /** Waf 会话定义 Upsert接口 {@link UpsertSessionRequest} {@link UpsertSessionResponse} */
+  /** 新增或更新会话定义 {@link UpsertSessionRequest} {@link UpsertSessionResponse} */
   UpsertSession(data: UpsertSessionRequest, config?: AxiosRequestConfig): AxiosPromise<UpsertSessionResponse>;
 }
 

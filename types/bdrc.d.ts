@@ -1422,11 +1422,13 @@ declare interface CreateFileBackupPlanRequest {
   /** 备份策略ID */
   PolicyId: string;
   /** 备份库ID */
-  BackupStorageId: string;
+  BackupStorageId?: string;
   /** 计划名称 */
   PlanName?: string;
   /** 实例配置列表，[1,20] */
   Resources?: ResourcePlan[];
+  /** 资源类型枚举值：CVM_AGENT： CVM文件备份CFS_AGENT： 文件系统备份COS_AGENT： COS备份默认值：CVM_AGENT */
+  ResourceType?: string;
 }
 
 declare interface CreateFileBackupPlanResponse {

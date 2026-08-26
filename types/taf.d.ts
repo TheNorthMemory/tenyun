@@ -42,7 +42,7 @@ declare interface ManagePortraitRiskResponse {
   RequestId?: string;
 }
 
-/** {@link Taf 流量反欺诈} */
+/** {@link Taf 广告作弊检测} */
 declare interface Taf {
   (): Versions;
   /** 虚假流量识别 {@link ManagePortraitRiskRequest} {@link ManagePortraitRiskResponse} */

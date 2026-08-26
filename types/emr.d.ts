@@ -868,6 +868,8 @@ declare interface DynamicInstanceForm {
   ImageInfoV2?: ImageInfoV2 | null;
   /** GooseFS盘 */
   GooseFSVolumes?: GooseFSVolume[];
+  /** 开启HistoryServer */
+  EnableHistoryServer?: boolean;
 }
 
 /** 创建DynamicInstance提交的表单数据中的group部分 */
@@ -1258,6 +1260,24 @@ declare interface GooseFSVolume {
   MountOptions?: string;
   /** 默认JVM参数 */
   JvmOptions?: string;
+}
+
+/** GPU机型镜像与驱动配置 */
+declare interface GpuImageDriverSpec {
+  /** 镜像ID */
+  ImageId?: string;
+  /** 驱动名称 */
+  DriverName?: string;
+  /** 驱动版本 */
+  DriverVersion?: string;
+  /** CUDA名称 */
+  CUDAName?: string;
+  /** CUDA版本 */
+  CUDAVersion?: string;
+  /** CUDNN名称 */
+  CUDNNName?: string;
+  /** CUDNN版本 */
+  CUDNNVersion?: string;
 }
 
 /** 集群所有伸缩组全局参数信息 */
@@ -2786,6 +2806,10 @@ declare interface Resource {
   PartitionNumber?: number;
   /** 高性能集群ID */
   HCCHpcClusterId?: string;
+  /** 自定义主机名 */
+  CustomNodeName?: string;
+  /** GPU镜像驱动配置 */
+  GpuImageDriver?: GpuImageDriverSpec;
 }
 
 /** 资源详情 */
@@ -3582,6 +3606,20 @@ declare interface UserManagerUserBriefInfo {
   SupportDownLoadKeyTab?: boolean;
   /** keytab文件的下载地址 */
   DownLoadKeyTabUrl?: string;
+  /** 用户组 */
+  Groups?: string[];
+  /** 客户UIN */
+  Uin?: string;
+  /** 用户状态 */
+  State?: number;
+  /** 是否展示密码更新时间 */
+  DisplayPasswdUpdateTime?: boolean;
+  /** 密码最近更新时间 */
+  PasswdUpdateTime?: string;
+  /** 已经使用的天数单位：天 */
+  PasswdUsedDay?: number;
+  /** 已经使用的小时数单位：时 */
+  PasswdUsedHour?: number;
 }
 
 /** VPC 参数 */
@@ -3927,6 +3965,10 @@ declare interface CreateCloudInstanceRequest {
   ContainerExtraConf?: ContainerExtraConf;
   /** spark监控 */
   EnableSparkAppMonitorInfo?: EnableSparkAppMonitorInfo;
+  /** 已有EMR资源节点组Id列表 */
+  ComputeResourceGroupIds?: string[];
+  /** 是否开启实例保护 */
+  TerminateProtection?: boolean;
 }
 
 declare interface CreateCloudInstanceResponse {

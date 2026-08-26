@@ -507,6 +507,8 @@ declare interface CreateSandboxToolRequest {
   StorageMounts?: StorageMount[];
   /** 沙箱工具自定义配置 */
   CustomConfiguration?: CustomConfiguration;
+  /** 桌面电脑环境类沙箱配置 */
+  ComputerConfiguration?: ComputerConfiguration;
   /** 沙箱工具日志推送相关配置 */
   LogConfiguration?: LogConfiguration;
   /** 常驻沙箱标识 */
@@ -763,6 +765,8 @@ declare interface UpdateSandboxToolRequest {
   Tags?: Tag[];
   /** 沙箱工具自定义配置 */
   CustomConfiguration?: CustomConfiguration;
+  /** 桌面电脑环境类沙箱配置 */
+  ComputerConfiguration?: ComputerConfiguration;
 }
 
 declare interface UpdateSandboxToolResponse {

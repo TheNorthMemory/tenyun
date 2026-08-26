@@ -942,7 +942,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   sts: Sts,
   /** {@link Svp 节省计划} */
   svp: Svp,
-  /** {@link Taf 流量反欺诈} */
+  /** {@link Taf 广告作弊检测} */
   taf: Taf,
   /** {@link Tag 标签} */
   tag: Tag,

@@ -21181,6 +21181,8 @@ declare namespace V20210820 {
     EngineId?: string;
     /** 引擎类型详情SparkSQL：SparkSQLPrestoSQL：PrestoSparkBatch：Spark作业StandardPresto：PrestoStandardSpark：Spark */
     EngineTypeDetail?: string;
+    /** 数据源ID */
+    DatasourceId?: number;
   }
 
   interface DescribeTableContentPreviewResponse {

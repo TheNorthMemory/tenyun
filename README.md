@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，15643+ 服务数</summary>
+<details><summary>共计 260+ 款产品，15702+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -197,7 +197,7 @@ cngw | [云原生智能网关](https://cloud.tencent.com/document/product/1826) 
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(67) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
-csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(720) |
+csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(752) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(3) |
@@ -279,7 +279,7 @@ memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/2
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(63) |
 mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(86) | 2018-04-08(13) |
-monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(9) | 2018-07-24(182) |
+monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(32) | 2018-07-24(186) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(224) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(79) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
@@ -315,7 +315,7 @@ sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) 
 ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24) |
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(7) |
 svp | [节省计划](https://cloud.tencent.com/document/product/1761) | 2024-01-25(5) |
-taf | [流量反欺诈](https://cloud.tencent.com/document/product/1031) | 2020-02-10(1) |
+taf | [广告作弊检测](https://cloud.tencent.com/document/product/1031) | 2020-02-10(1) |
 tag | [标签](https://cloud.tencent.com/document/product/651) | 2018-08-13(31) |
 tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-10-28(29) |
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(24) |

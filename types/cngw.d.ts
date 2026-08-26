@@ -348,6 +348,10 @@ declare interface AIGWLogConfig {
   RequestLogPayloadMode?: string;
   /** 上游原始 payload access log 输出模式枚举值：raw： access log 中 body 记录客户端原始上游响应processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容 */
   ResponseLogPayloadMode?: string;
+  /** 请求 Body 大小裁剪策略枚举值：Bounded： 裁剪大小UnBounded： 不裁剪大小 */
+  RequestLogPayloadTruncationPolicy?: string;
+  /** 响应 Body 大小裁剪策略枚举值：Bounded： 裁剪大小UnBounded： 不裁剪大小 */
+  ResponseLogPayloadTruncationPolicy?: string;
 }
 
 /** AI 网关日志脱敏配置 */

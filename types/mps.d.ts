@@ -5286,7 +5286,7 @@ declare interface MediaTranscodeItem {
   OutputStorage?: TaskOutputStorage;
   /** 转码后的视频文件路径。 */
   Path?: string;
-  /** 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/862/37042)。 */
+  /** 转码规格 ID，参见转码参数模板。 */
   Definition?: number;
   /** 视频流码率平均值与音频流码率平均值之和， 单位：bps。 */
   Bitrate?: number;
@@ -5306,8 +5306,22 @@ declare interface MediaTranscodeItem {
   AudioStreamSet?: MediaAudioStreamItem[];
   /** 视频流信息。 */
   VideoStreamSet?: MediaVideoStreamItem[];
-  /** 视频转码使用增强项说明，增强项解释hdr：HDR配置wd_fps：插帧帧率配置video_super_resolution：	超分配置repair：综合增强配置denoise：视频降噪配置color_enhance：色彩增强配置scratch：去划痕配置artifact：去伪影（毛刺）配置sharp：细节增强配置low_light：低光照增强配置face_enhance：人脸增强配置 */
+  /** 视频转码使用增强项说明，增强项解释hdr：HDR配置wd_fps：插帧帧率配置video_super_resolution： 超分配置repair：综合增强配置denoise：视频降噪配置color_enhance：色彩增强配置scratch：去划痕配置artifact：去伪影（毛刺）配置sharp：细节增强配置low_light：低光照增强配置face_enhance：人脸增强配置 */
   CallBackExtInfo?: string | null;
+  /** MediaTranscodeItem */
+  Usage?: MediaUsageItem;
+}
+
+/** AIGC用量数据展示 */
+declare interface MediaUsageItem {
+  /** 输入图片数单位：个数 */
+  InputImageCount?: number;
+  /** 输入秒数单位：秒 */
+  InputSeconds?: number;
+  /** 输出秒数单位：秒 */
+  OutputSeconds?: number;
+  /** 总秒数单位：秒 */
+  TotalSeconds?: number;
 }
 
 /** 点播文件视频流信息 */
@@ -11372,7 +11386,7 @@ declare interface DescribeTextToSpeechAsyncTaskRequest {
 }
 
 declare interface DescribeTextToSpeechAsyncTaskResponse {
-  /** 错误码，成功时返回0 */
+  /** 错误码，成功时返回0，处理中返回100 */
   ErrorCode?: number;
   /** 错误信息，成功时返回success */
   Msg?: string;

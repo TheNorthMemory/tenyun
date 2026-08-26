@@ -2621,6 +2621,8 @@ declare interface UpgradeDCDBInstanceRequest {
   SwitchEndTime?: string;
   /** 是否自动重试。 0：不自动重试 1：自动重试 */
   SwitchAutoRetry?: number;
+  /** 多个分片同时发起扩容，并发切换中的切换时间间隔，即当前分片切换开始时间和下一个分片的切换开始时间间隔，不传默认为1。取值范围：[1, 180]单位：秒 */
+  SwitchInterval?: number;
 }
 
 declare interface UpgradeDCDBInstanceResponse {
@@ -2647,6 +2649,8 @@ declare interface UpgradeDedicatedDCDBInstanceRequest {
   SwitchStartTime?: string;
   /** 切换时间窗口结束时间 */
   SwitchEndTime?: string;
+  /** 多个分片同时发起扩容，并发切换中的切换时间间隔，即当前分片切换开始时间和下一个分片的切换开始时间间隔，不传默认为1。取值范围：[1, 180]单位：秒 */
+  SwitchInterval?: number;
 }
 
 declare interface UpgradeDedicatedDCDBInstanceResponse {
@@ -2675,6 +2679,8 @@ declare interface UpgradeHourDCDBInstanceRequest {
   SwitchAutoRetry?: number;
   /** 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区 */
   Zones?: string[];
+  /** 多个分片同时发起扩容，并发切换中的切换时间间隔，即当前分片切换开始时间和下一个分片的切换开始时间间隔，不传默认为1。取值范围：[1, 180]单位：秒 */
+  SwitchInterval?: number;
 }
 
 declare interface UpgradeHourDCDBInstanceResponse {

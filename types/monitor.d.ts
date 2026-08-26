@@ -66,6 +66,30 @@ declare interface AIWorkbenchSREDigitalTwinWorkLogList {
   Total?: number;
 }
 
+/** Agent 信息 */
+declare interface AgentInfo {
+  /** Agent ID */
+  AgentId?: string | null;
+  /** Agent 名称 */
+  Name?: string | null;
+  /** Agent 描述 */
+  Description?: string | null;
+  /** Agent 分类 */
+  Category?: string | null;
+  /** 状态: draft/configured/running/standby/disabled */
+  Status?: string | null;
+  /** 关联技能 ID 列表 */
+  SkillIds?: string[] | null;
+  /** 关联的资源地图 ID */
+  ResourceMapId?: string | null;
+  /** 关联的mcp id */
+  MCPIds?: string[] | null;
+  /** 资源标签 */
+  CamTags?: Tag[] | null;
+  /** agent运行时所需环境变量 */
+  EnvVars?: EnvVar[] | null;
+}
+
 /** 告警中的Label */
 declare interface AlarmLable {
   /** label name */
@@ -112,6 +136,30 @@ declare interface AlarmNotifyHistory {
   Labels?: AlarmLable[];
 }
 
+/** 产物实体 */
+declare interface ArtifactInfo {
+  /** 产物 ID */
+  ArtifactId?: string | null;
+  /** 产物名称 */
+  Name?: string | null;
+  /** 物理类型 */
+  MimeType?: string | null;
+  /** 文件大小(字节) */
+  SizeBytes?: number | null;
+  /** 是否公共 */
+  IsGlobal?: boolean | null;
+  /** 创建时间 Unix 秒时间戳 */
+  CreatedAt?: number | null;
+  /** 修改时间 */
+  UpdatedAt?: number | null;
+  /** 产生该制品的 Agent ID */
+  AgentId?: string | null;
+  /** 产生该制品的 Skill ID */
+  SkillId?: string | null;
+  /** 用于解析调用下载接口 */
+  StoragePath?: string | null;
+}
+
 /** 接受人详情信息 */
 declare interface ChannelsReceivers {
   /** 通知渠道名称 */
@@ -120,6 +168,14 @@ declare interface ChannelsReceivers {
   Receivers?: string[] | null;
   /** 发送结果,0-无效,1-成功,2-失败,3-无需发送 */
   SendStatus?: string | null;
+}
+
+/** 每个 ContentBlockInfo 对应下游 ContentBlock 转换而来的一个 AGUI 事件。 */
+declare interface ContentBlockInfo {
+  /** 类型 */
+  Type?: string;
+  /** 数据内容 */
+  Data?: string;
 }
 
 /** 钉钉机器人内容模板配置 */
@@ -136,6 +192,44 @@ declare interface DingDingRobotNoticeTmplMatcher {
   MatchingStatus: string[];
   /** 模板配置 */
   Template: DingDingRobotNoticeTmpl;
+}
+
+/** 环境变量entry */
+declare interface EnvEntry {
+  /** 环境变量value */
+  Value?: string | null;
+  /** 是否脱敏 */
+  Sensitive?: boolean | null;
+}
+
+/** agent运行时所需环境变量 */
+declare interface EnvVar {
+  /** 环境变量key */
+  Key?: string | null;
+  /** 环境变量value */
+  Value?: EnvEntry | null;
+}
+
+/** 执行记录实体 */
+declare interface ExecutionInfo {
+  /** 任务名 */
+  Name?: string;
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 执行 ID */
+  ExecutionId?: string | null;
+  /** Agent ID */
+  AgentId?: string | null;
+  /** 会话 ID */
+  SessionId?: string | null;
+  /** 触发类型: manual / cron / webhook */
+  TriggerType?: string | null;
+  /** 状态: pending/running/completed/failed/timeout/cancelled */
+  Status?: string | null;
+  /** 执行摘要 */
+  Summary?: string | null;
+  /** 执行耗时(毫秒) */
+  DurationMs?: number | null;
 }
 
 /** 飞书机器人内容模板配置 */
@@ -166,6 +260,62 @@ declare interface GoogleChatRobotNoticeTmplMatcher {
   MatchingStatus: string[];
   /** 模板配置 */
   Template: GoogleChatRobotNoticeTmpl;
+}
+
+/** 分身提示词配置 */
+declare interface InstructionConfig {
+  /** 角色定义 */
+  RolePosition?: string;
+  /** 核心职责 */
+  CoreDuty?: string;
+  /** 核心原则 */
+  CoreTruths?: string;
+  /** 风格约束 */
+  Vibe?: string;
+  /** 注意事项 */
+  Boundaries?: string;
+}
+
+/** MCP 实体 */
+declare interface MCPInfo {
+  /** mcp的ID */
+  MCPId?: string | null;
+  /** MCP 名称 */
+  Name?: string | null;
+  /** MCP 描述 */
+  Description?: string | null;
+  /** MCP URL */
+  Url?: string | null;
+  /** 传输协议: sse / streamable_http / stdio */
+  Transport?: string | null;
+  /** 认证类型: none / bearer / basic / api_key */
+  AuthType?: string | null;
+  /** 认证密钥(响应时脱敏) */
+  AuthSecret?: string | null;
+  /** 超时时间(秒) */
+  Timeout?: number | null;
+  /** 重试次数 */
+  RetryCount?: number | null;
+  /** 请求头 JSON */
+  Headers?: string | null;
+  /** 是否启用 */
+  Enabled?: boolean | null;
+}
+
+/** 消息实体 */
+declare interface MessageInfo {
+  /** 实体id */
+  EntryId?: string | null;
+  /** 会话 ID */
+  SessionId?: string | null;
+  /** 角色: user / assistant */
+  Role?: string | null;
+  /** 消息内容 */
+  Content?: string | null;
+  /** 状态 */
+  Status?: string;
+  /** 块内容 */
+  ContentBlocks?: ContentBlockInfo[] | null;
 }
 
 /** 自定义通知内容模板 */
@@ -252,6 +402,24 @@ declare interface PageByNoResult {
   End?: boolean;
 }
 
+/** 按第几页进行分页的入参 */
+declare interface PageByNumParams {
+  /** 每个分页的数量 */
+  PerPage?: number;
+  /** 第几个分页，从1开始 */
+  PageNo?: number;
+}
+
+/** 分页结果参数 */
+declare interface PageByNumResult {
+  /** 总共有多少数据 */
+  TotalCount?: number | null;
+  /** 总共有多少个分页 */
+  TotalPage?: number | null;
+  /** 当前的分页号 */
+  CurrentPageNo?: number | null;
+}
+
 /** 告警通知自定义PagerDutyRobot内容模板 */
 declare interface PagerDutyRobotNoticeTmpl {
   /** 请求体模板 仅支持json */
@@ -324,6 +492,56 @@ declare interface QCloudYeheWeChatNoticeTmplItem {
   AlarmTimeTmpl?: string;
 }
 
+/** 资源实例 */
+declare interface ResourceInstance {
+  /** 实例 ID */
+  Id?: string | null;
+  /** 服务名称 */
+  Service?: string | null;
+  /** 地域 */
+  Region?: string | null;
+  /** 是否就绪 */
+  IsReady?: boolean | null;
+}
+
+/** 资源地图实体 */
+declare interface ResourceMapInfo {
+  /** 资源地图 ID */
+  ResourceMapId?: string | null;
+  /** 资源地图名称 */
+  Name?: string | null;
+  /** 资源地图描述 */
+  Description?: string | null;
+  /** 总实例数 */
+  InstanceCount?: number | null;
+}
+
+/** 会话实体 */
+declare interface SessionInfo {
+  /** 会话 ID */
+  SessionId?: string | null;
+  /** Agent ID */
+  AgentId?: string | null;
+  /** 会话标题 */
+  Title?: string | null;
+  /** 状态: active / archived / deleted */
+  Status?: string | null;
+  /** 如果该会话由任务触发，则携带触发其会话的任务ID */
+  TaskId?: string | null;
+}
+
+/** 技能实体 */
+declare interface SkillInfo {
+  /** 技能 ID */
+  SkillId?: string | null;
+  /** 技能名称 */
+  Name?: string | null;
+  /** 技能描述 */
+  Description?: string | null;
+  /** 是否启用 */
+  Enabled?: boolean | null;
+}
+
 /** 企业微信机器人内容模板配置 */
 declare interface SlackRobotNoticeTmpl {
   /** 内容模板 */
@@ -336,6 +554,48 @@ declare interface SlackRobotNoticeTmplMatcher {
   MatchingStatus: string[];
   /** 模板配置 */
   Template: SlackRobotNoticeTmpl;
+}
+
+/** 标签 */
+declare interface Tag {
+  /** 标签key */
+  Key: string;
+  /** 标签value */
+  Value: string;
+}
+
+/** 任务实体 */
+declare interface TaskInfo {
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 任务名称 */
+  Name?: string | null;
+  /** 任务描述 */
+  Description?: string | null;
+  /** 关联 Agent ID */
+  AgentId?: string | null;
+  /** 提示词模板 */
+  PromptTemplate?: string | null;
+  /** 输出格式: markdown / json */
+  OutputFormat?: string | null;
+  /** 触发类型: manual / cron / webhook */
+  TriggerType?: string | null;
+  /** Cron 表达式 */
+  CronExpr?: string | null;
+  /** Cron 时区 */
+  CronTimezone?: string | null;
+  /** 关联技能 ID 列表 */
+  SkillIds?: string[] | null;
+  /** 关联 MCP 端点 ID 列表 */
+  McpEndpointIds?: string[] | null;
+  /** 超时时间(秒) */
+  TimeoutSec?: number | null;
+  /** 重试次数 */
+  RetryCount?: number | null;
+  /** 通知id */
+  NotifyIds?: string[] | null;
+  /** 是否启用 */
+  Enabled?: boolean | null;
 }
 
 /** 企业微信机器人内容模板配置 */
@@ -416,6 +676,86 @@ declare interface WebhookNoticeTmplMatcher {
   Template?: WebhookNoticeTmpl;
 }
 
+declare interface CancelAIWorkbenchChatRequest {
+  /** 会话id */
+  SessionId?: string;
+}
+
+declare interface CancelAIWorkbenchChatResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAIWorkbenchAgentRequest {
+  /** Agent 名称 */
+  Name?: string;
+  /** Agent 描述 */
+  Description?: string;
+  /** Agent 分类 */
+  Category?: string;
+  /** Agent 标签 */
+  Tags?: string[];
+  /** Agent 提示词 */
+  Instruction?: InstructionConfig;
+  /** 关联技能 ID 列表 */
+  SkillIds?: string[];
+  /** 来源: builtin / custom */
+  Source?: string;
+  /** 关联的资源地图 ID */
+  ResourceMapId?: string;
+  /** 关联的mcp工具 */
+  MCPIds?: string[];
+  /** 资源标签 */
+  CamTags?: Tag[];
+  /** agent运行时环境变量 */
+  EnvVars?: EnvVar[];
+}
+
+declare interface CreateAIWorkbenchAgentResponse {
+  /** Agent ID */
+  AgentId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAIWorkbenchTaskRequest {
+  /** 任务名称 */
+  Name?: string;
+  /** 任务描述 */
+  Description?: string;
+  /** 关联 Agent ID */
+  AgentId?: string;
+  /** 提示词模板 */
+  PromptTemplate?: string;
+  /** 输出格式: markdown / json */
+  OutputFormat?: string;
+  /** 触发类型: manual / cron / webhook */
+  TriggerType?: string;
+  /** Cron 表达式 */
+  CronExpr?: string;
+  /** Cron 时区 */
+  CronTimezone?: string;
+  /** 关联资源地图 ID */
+  ResourceMapId?: string;
+  /** 技能 ID 列表 */
+  SkillIds?: string[];
+  /** MCP 端点 ID 列表 */
+  McpEndpointIds?: string[];
+  /** 超时时间(秒) */
+  TimeoutSec?: number;
+  /** 重试次数 */
+  RetryCount?: number;
+  /** 是否启用 */
+  Enabled?: boolean;
+}
+
+declare interface CreateAIWorkbenchTaskResponse {
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNoticeContentTmplRequest {
   /** 模板名称 */
   TmplName: string;
@@ -434,12 +774,74 @@ declare interface CreateNoticeContentTmplResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAIWorkbenchAgentRequest {
+  /** Agent ID */
+  AgentId?: string;
+}
+
+declare interface DeleteAIWorkbenchAgentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAIWorkbenchTaskRequest {
+  /** 任务 ID */
+  TaskId?: string;
+}
+
+declare interface DeleteAIWorkbenchTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteNoticeContentTmplsRequest {
   /** 要删除的模板id */
   TmplIDs?: string[];
 }
 
 declare interface DeleteNoticeContentTmplsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchAgentRequest {
+  /** Agent ID */
+  AgentId?: string;
+}
+
+declare interface DescribeAIWorkbenchAgentResponse {
+  /** Agent 信息 */
+  Agent?: AgentInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchArtifactRequest {
+  /** 产物 ID */
+  ArtifactId: string;
+  /** 是否需要下载 URL1 = 需要，0 或不传 = 不需要 */
+  NeedDownloadURL?: number;
+}
+
+declare interface DescribeAIWorkbenchArtifactResponse {
+  /** 产物信息 */
+  Artifact?: ArtifactInfo | null;
+  /** COS 预签名下载 URL */
+  DownloadURL?: string | null;
+  /** 下载 URL 过期时间（RFC3339 格式） */
+  DownloadURLExpiredAt?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchExecutionRequest {
+  /** 执行 ID */
+  ExecutionId?: string;
+}
+
+declare interface DescribeAIWorkbenchExecutionResponse {
+  /** 执行记录 */
+  Execution?: ExecutionInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -490,6 +892,30 @@ declare interface DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse {
   JSONStrPaths?: string[];
   /** 数字分身工作日志列表 */
   Data?: AIWorkbenchSREDigitalTwinWorkLogList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchSessionRequest {
+  /** 会话 ID */
+  SessionId?: string;
+}
+
+declare interface DescribeAIWorkbenchSessionResponse {
+  /** 会话信息 */
+  Session?: SessionInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIWorkbenchSkillRequest {
+  /** 技能 ID */
+  SkillId?: string;
+}
+
+declare interface DescribeAIWorkbenchSkillResponse {
+  /** 技能信息 */
+  Skill?: SkillInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -552,6 +978,254 @@ declare interface DescribeNoticeContentTmplResponse {
   RequestId?: string;
 }
 
+declare interface GetAIWorkbenchArtifactDownloadURLRequest {
+  /** 会话ID */
+  SessionId: string;
+  /** 制品ID */
+  ArtifactId?: string;
+}
+
+declare interface GetAIWorkbenchArtifactDownloadURLResponse {
+  /** COS 预签名 HTTPS 下载 URL */
+  DownloadURL?: string | null;
+  /** URL 过期时间（RFC3339 格式） */
+  ExpiredAt?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchAgentsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 状态筛选 */
+  Status?: string;
+  /** 分类筛选 */
+  Category?: string;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 来源筛选 */
+  Source?: string;
+  /** Agent ID 列表筛选 */
+  AgentIds?: string[];
+}
+
+declare interface ListAIWorkbenchAgentsResponse {
+  /** Agent 列表 */
+  Agents?: AgentInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchArtifactsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 会话ID */
+  SessionIds?: string[];
+  /** 消息内容类型 */
+  MimeTypes?: string[];
+  /** 排序枚举值：ASC： 正序DESC： 倒序 */
+  OrderDirection?: string;
+}
+
+declare interface ListAIWorkbenchArtifactsResponse {
+  /** 产物列表 */
+  Artifacts?: ArtifactInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchExecutionsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 按 Agent 筛选 */
+  AgentId?: string;
+  /** 按状态筛选 */
+  Status?: string;
+  /** 执行 ID 列表筛选 */
+  ExecutionIds?: string[];
+  /** 任务id */
+  TaskIds?: string[];
+  /** 触发方式 */
+  TriggerType?: string;
+  /** 关键值 */
+  Keyword?: string;
+  /** 是否启用 */
+  Enabled?: boolean;
+}
+
+declare interface ListAIWorkbenchExecutionsResponse {
+  /** 执行列表 */
+  Executions?: ExecutionInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchMCPsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 按传输协议筛选 */
+  Transport?: string;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 是否启用筛选 */
+  Enabled?: boolean;
+  /** 关联的mcp */
+  MCPIds?: string[];
+  /** MCP类型（内置/私有）枚举值：builtin： 平台内置private： 用户自定义 */
+  Type?: string;
+}
+
+declare interface ListAIWorkbenchMCPsResponse {
+  /** MCP 列表 */
+  MCPs?: MCPInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchMessagesRequest {
+  /** 会话 ID */
+  SessionId?: string;
+  /** 游标分页的定位标记 */
+  Cursor?: string;
+  /** 窗口大小 */
+  Limit?: number;
+  /** 拉取顺序 */
+  Direction?: string;
+}
+
+declare interface ListAIWorkbenchMessagesResponse {
+  /** 消息列表 */
+  Messages?: MessageInfo[] | null;
+  /** 下一个游标 */
+  NextCursor?: string | null;
+  /** 还有后续吗 */
+  HasMore?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchResourceInstancesRequest {
+  /** 资源地图 ID */
+  ResourceMapId?: string;
+  /** 分页参数 */
+  PageParams?: PageByNumParams;
+}
+
+declare interface ListAIWorkbenchResourceInstancesResponse {
+  /** 资源实例列表 */
+  Instances?: ResourceInstance[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchResourceMapsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 按名称搜索 */
+  Keyword?: string;
+}
+
+declare interface ListAIWorkbenchResourceMapsResponse {
+  /** 资源地图列表 */
+  ResourceMaps?: ResourceMapInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchSessionsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 按 Agent 筛选 */
+  AgentId?: string;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 会话 ID 列表筛选 */
+  SessionIds?: string[];
+}
+
+declare interface ListAIWorkbenchSessionsResponse {
+  /** 会话列表 */
+  Sessions?: SessionInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchSkillsRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 按类型筛选 */
+  Type?: string;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 是否启用筛选 */
+  Enabled?: boolean;
+  /** 技能 ID 列表筛选 */
+  SkillIds?: string[];
+}
+
+declare interface ListAIWorkbenchSkillsResponse {
+  /** 技能列表 */
+  Skills?: SkillInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAIWorkbenchTasksRequest {
+  /** 每页数量 */
+  PerPage?: number;
+  /** 页码 */
+  PageNo?: number;
+  /** 按 Agent 筛选 */
+  AgentId?: string;
+  /** 按触发类型筛选 */
+  TriggerType?: string;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 任务 ID 列表筛选 */
+  TaskIds?: string[];
+  /** 是否启用筛选 */
+  Enabled?: boolean;
+}
+
+declare interface ListAIWorkbenchTasksResponse {
+  /** 任务列表 */
+  Tasks?: TaskInfo[] | null;
+  /** 分页结果 */
+  PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNoticeContentTmplRequest {
   /** 模板名称 */
   TmplName: string;
@@ -576,6 +1250,52 @@ declare interface TriggerAIWorkbenchSREDigitalTwinTaskResponse {
   JSONStrPaths?: string[];
   /** 数字分身任务信息 */
   Data?: TriggerDigitalTwinTaskResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TriggerAIWorkbenchTaskRequest {
+  /** 任务 ID */
+  TaskId?: string;
+}
+
+declare interface TriggerAIWorkbenchTaskResponse {
+  /** 执行 ID */
+  ExecutionId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateAIWorkbenchAgentRequest {
+  /** Agent ID */
+  AgentId?: string;
+  /** Agent 名称 */
+  Name?: string;
+  /** Agent 描述 */
+  Description?: string;
+  /** Agent 分类 */
+  Category?: string;
+  /** Agent 标签 */
+  Tags?: string[];
+  /** Agent 提示词 */
+  Instruction?: InstructionConfig;
+  /** 关联技能 ID 列表 */
+  SkillIds?: string[];
+  /** 来源 */
+  Source?: string;
+  /** 状态 */
+  Status?: string;
+  /** 关联的资源地图 ID */
+  ResourceMapId?: string;
+  /** 关联的mcp */
+  MCPIds?: string[];
+  /** agent运行时环境变量 */
+  EnvVars?: EnvVar[];
+}
+
+declare interface UpdateAIWorkbenchAgentResponse {
+  /** 更新后的 Agent 信息 */
+  Agent?: AgentInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2531,6 +3251,8 @@ declare namespace V20180724 {
     NotScrape?: boolean;
     /** 是否丢弃所有指标，true 代表丢弃所有指标，false 代表采集默认指标 */
     DropAll?: boolean;
+    /** 是否采集全部指标枚举值：false： 不采集true： 采集默认值：false */
+    CollectAll?: boolean;
     /** 是否开启默认预聚合规则 */
     OpenDefaultRecord?: boolean;
   }
@@ -3103,6 +3825,14 @@ declare namespace V20180724 {
     Yaml: string | null;
   }
 
+  /** 告警屏蔽的指标 */
+  interface ShieldMetric {
+    /** 屏蔽指标 */
+    Metric: string;
+    /** 屏蔽指标展示名称 */
+    MetricShowName: string;
+  }
+
   /** 单个有序数据点 */
   interface SingleOrderedDataPoint {
     /** 实例对象维度组合 */
@@ -3364,6 +4094,50 @@ declare namespace V20180724 {
   }
 
   interface CleanGrafanaInstanceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CreateAlarmHistoryShieldRequest {
+    /** 模块名，这里填“monitor” */
+    Module: string;
+    /** 屏蔽策略名称 */
+    Name: string;
+    /** 监控类型 */
+    MonitorType: string;
+    /** 屏蔽策略id */
+    ShieldPolicyId: string;
+    /** 屏蔽时间类型 FOREVER_SHIELD:永久屏蔽 PERIOD_SHIELD:绝对时间范围屏蔽 LOOP_SHIELD:相对时间范围屏蔽 */
+    ShieldTimeType: string;
+    /** 命名空间即策略类型 */
+    NameSpace?: string;
+    /** 屏蔽对象 */
+    ShieldObject?: string[];
+    /** 指标名称 */
+    MetricName?: string;
+    /** 屏蔽指标 为空则为全部指标 */
+    ShieldMetric?: string[];
+    /** 开始时间 相对时间范围:36000 绝对时间范围:1648742400 缺省:0 */
+    StartTime?: number;
+    /** 结束时间 相对时间范围:72000 绝对时间范围:1649088000 缺省:0 */
+    EndTime?: number;
+    /** 循环开始日期 2022/04/01 缺省:0 */
+    LoopStartDate?: number;
+    /** 循环结束日期 2022/04/05 缺省:0 */
+    LoopEndDate?: number;
+    /** 需要屏蔽的告警等级，取值范围Warn,Remind,Serious */
+    ShieldAlarmLevel?: string;
+    /** 屏蔽规则的描述 */
+    Description?: string;
+    /** 时区，东八区+8，西八区减8，以此类推 */
+    TimeZone?: number;
+    /** 被屏蔽的告警会话ID(历史的alarmId) */
+    SessionId?: string;
+  }
+
+  interface CreateAlarmHistoryShieldResponse {
+    /** 屏蔽规则的Id */
+    ShieldId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3934,6 +4708,20 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface DeleteAlarmHistoryShieldsRequest {
+    /** 模块名，这里填“monitor” */
+    Module: string;
+    /** 屏蔽策略Id列表 */
+    Shields: string[];
+    /** 监控类型 */
+    MonitorType?: string;
+  }
+
+  interface DeleteAlarmHistoryShieldsResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteAlarmNoticesRequest {
     /** 模块名，这里填“monitor” */
     Module: string;
@@ -4318,6 +5106,72 @@ declare namespace V20180724 {
     TotalCount?: number;
     /** 告警历史列表 */
     Histories?: AlarmHistory[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DescribeAlarmHistoryShieldRequest {
+    /** 模块名，这里填“monitor” */
+    Module: string;
+    /** 策略id */
+    ShieldPolicyId: string;
+    /** 告警历史维度 */
+    ShieldObject?: string[];
+    /** 指标名称 */
+    MetricName?: string;
+    /** 屏蔽策略Id */
+    ShieldId?: string;
+    /** 告警等级 */
+    ShieldAlarmLevel?: string;
+    /** 告警历史会话ID */
+    SessionId?: string;
+    /** 监控类型 */
+    MonitorType?: string;
+  }
+
+  interface DescribeAlarmHistoryShieldResponse {
+    /** 告警屏蔽规则的ID */
+    ShieldId?: string;
+    /** 监控类型 */
+    MonitorType?: string;
+    /** 屏蔽策略名称 */
+    Name?: string;
+    /** 是否开启 1=开启 0=关闭 */
+    Enable?: number;
+    /** 监控类型展示名称 */
+    MonitorTypeShowName?: string;
+    /** 命名空间即策略类型 */
+    NameSpace?: string;
+    /** 策略类型展示名称 */
+    NameSpaceShowName?: string;
+    /** 屏蔽对象 */
+    ShieldObject?: string[] | null;
+    /** 屏蔽指标列表 */
+    ShieldMetric?: ShieldMetric[] | null;
+    /** 屏蔽时间类型 FOREVER_SHIELD:永久屏蔽 PERIOD_SHIELD:绝对时间范围屏蔽 LOOP_SHIELD:相对时间范围屏蔽 */
+    ShieldTimeType?: string;
+    /** 开始时间 10:00 */
+    StartTime?: number | null;
+    /** 结束时间 20:00 */
+    EndTime?: number | null;
+    /** 循环开始日期 2022/04/01 */
+    LoopStartDate?: number | null;
+    /** 循环结束日期 2022/04/05 */
+    LoopEndDate?: number | null;
+    /** NOT_TRIGGERED:未生效 TRIGGERING:生效中 EXPIRED:已过期 */
+    CurrentStatus?: string;
+    /** 需要屏蔽的策略ID */
+    ShieldPolicyId?: string | null;
+    /** 需要屏蔽的告警等级 */
+    ShieldAlarmLevel?: string[] | null;
+    /** 屏蔽类型，1为维度屏蔽，0为实例名称屏蔽 */
+    ShieldTag?: string | null;
+    /** 指标名称 */
+    MetricName?: string;
+    /** 时区 */
+    TimeZone?: number | null;
+    /** 告警历史会话ID */
+    SessionId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -5920,6 +6774,46 @@ declare namespace V20180724 {
     RequestId?: string;
   }
 
+  interface ModifyAlarmHistoryShieldRequest {
+    /** 模块名，这里填“monitor” */
+    Module: string;
+    /** 屏蔽策略的Id */
+    ShieldId: string;
+    /** 屏蔽策略名称 */
+    Name: string;
+    /** 监控类型 */
+    MonitorType: string;
+    /** 屏蔽时间类型 FOREVER_SHIELD:永久屏蔽 PERIOD_SHIELD:绝对时间范围屏蔽 LOOP_SHIELD:相对时间范围屏蔽 */
+    ShieldTimeType: string;
+    /** 需要屏蔽的策略ID */
+    ShieldPolicyId: string;
+    /** 命名空间即策略类型 */
+    NameSpace?: string;
+    /** 屏蔽对象 */
+    ShieldObject?: string[];
+    /** 指标名称 */
+    MetricName?: string;
+    /** 开始时间 相对时间范围:36000 绝对时间范围:1648742400 缺省:0 */
+    StartTime?: number;
+    /** 结束时间 相对时间范围:72000 绝对时间范围:1649088000 缺省:0 */
+    EndTime?: number;
+    /** 循环开始日期 2022/04/01 缺省:0 */
+    LoopStartDate?: number;
+    /** 循环结束日期 2022/04/05 缺省:0 */
+    LoopEndDate?: number;
+    /** 需要屏蔽的告警等级 */
+    ShieldAlarmLevel?: string;
+    /** 时区，东八区+8，西八区减8，以此类推 */
+    TimeZone?: number;
+    /** 告警历史会话ID */
+    SessionId?: string;
+  }
+
+  interface ModifyAlarmHistoryShieldResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface ModifyAlarmNoticeRequest {
     /** 模块名，这里填“monitor” */
     Module: string;
@@ -6718,24 +7612,70 @@ declare namespace V20180724 {
 /** {@link Monitor 腾讯云可观测平台} */
 declare interface Monitor {
   (): Versions;
+  /** 取消对话执行 {@link CancelAIWorkbenchChatRequest} {@link CancelAIWorkbenchChatResponse} */
+  CancelAIWorkbenchChat(data?: CancelAIWorkbenchChatRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAIWorkbenchChatResponse>;
+  /** 创建 Agent {@link CreateAIWorkbenchAgentRequest} {@link CreateAIWorkbenchAgentResponse} */
+  CreateAIWorkbenchAgent(data?: CreateAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIWorkbenchAgentResponse>;
+  /** 创建任务 {@link CreateAIWorkbenchTaskRequest} {@link CreateAIWorkbenchTaskResponse} */
+  CreateAIWorkbenchTask(data?: CreateAIWorkbenchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIWorkbenchTaskResponse>;
   /** 创建通知内容模板 {@link CreateNoticeContentTmplRequest} {@link CreateNoticeContentTmplResponse} */
   CreateNoticeContentTmpl(data: CreateNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentTmplResponse>;
+  /** 删除 Agent {@link DeleteAIWorkbenchAgentRequest} {@link DeleteAIWorkbenchAgentResponse} */
+  DeleteAIWorkbenchAgent(data?: DeleteAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIWorkbenchAgentResponse>;
+  /** 删除任务 {@link DeleteAIWorkbenchTaskRequest} {@link DeleteAIWorkbenchTaskResponse} */
+  DeleteAIWorkbenchTask(data?: DeleteAIWorkbenchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIWorkbenchTaskResponse>;
   /** 批量删除通知内容模板 {@link DeleteNoticeContentTmplsRequest} {@link DeleteNoticeContentTmplsResponse} */
   DeleteNoticeContentTmpls(data?: DeleteNoticeContentTmplsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentTmplsResponse>;
+  /** 查询 Agent 详情 {@link DescribeAIWorkbenchAgentRequest} {@link DescribeAIWorkbenchAgentResponse} */
+  DescribeAIWorkbenchAgent(data?: DescribeAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchAgentResponse>;
+  /** 查询制品详情 {@link DescribeAIWorkbenchArtifactRequest} {@link DescribeAIWorkbenchArtifactResponse} */
+  DescribeAIWorkbenchArtifact(data: DescribeAIWorkbenchArtifactRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchArtifactResponse>;
+  /** 查询执行详情 {@link DescribeAIWorkbenchExecutionRequest} {@link DescribeAIWorkbenchExecutionResponse} */
+  DescribeAIWorkbenchExecution(data?: DescribeAIWorkbenchExecutionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchExecutionResponse>;
   /** 查询AI工作台SRE数字分身任务列表 {@link DescribeAIWorkbenchSREDigitalTwinTaskListRequest} {@link DescribeAIWorkbenchSREDigitalTwinTaskListResponse} */
   DescribeAIWorkbenchSREDigitalTwinTaskList(data: DescribeAIWorkbenchSREDigitalTwinTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSREDigitalTwinTaskListResponse>;
   /** 查询AI工作台SRE数字分身工作日志详细信息 {@link DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest} {@link DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse} */
   DescribeAIWorkbenchSREDigitalTwinWorkLogDetail(data: DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse>;
   /** 查询AI工作台SRE数字分身任务工作日志列表 {@link DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest} {@link DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse} */
   DescribeAIWorkbenchSREDigitalTwinWorkLogList(data: DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse>;
+  /** 查询会话详情 {@link DescribeAIWorkbenchSessionRequest} {@link DescribeAIWorkbenchSessionResponse} */
+  DescribeAIWorkbenchSession(data?: DescribeAIWorkbenchSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSessionResponse>;
+  /** 查询技能详情 {@link DescribeAIWorkbenchSkillRequest} {@link DescribeAIWorkbenchSkillResponse} */
+  DescribeAIWorkbenchSkill(data?: DescribeAIWorkbenchSkillRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSkillResponse>;
   /** 查询告警通知历史 {@link DescribeAlarmNotifyHistoriesRequest} {@link DescribeAlarmNotifyHistoriesResponse} */
   DescribeAlarmNotifyHistories(data: DescribeAlarmNotifyHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNotifyHistoriesResponse>;
   /** 获取通知内容模板 {@link DescribeNoticeContentTmplRequest} {@link DescribeNoticeContentTmplResponse} */
   DescribeNoticeContentTmpl(data: DescribeNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentTmplResponse>;
+  /** 获取AI工作台制品的下载地址 {@link GetAIWorkbenchArtifactDownloadURLRequest} {@link GetAIWorkbenchArtifactDownloadURLResponse} */
+  GetAIWorkbenchArtifactDownloadURL(data: GetAIWorkbenchArtifactDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetAIWorkbenchArtifactDownloadURLResponse>;
+  /** 查询 Agent 列表 {@link ListAIWorkbenchAgentsRequest} {@link ListAIWorkbenchAgentsResponse} */
+  ListAIWorkbenchAgents(data?: ListAIWorkbenchAgentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchAgentsResponse>;
+  /** 查询制品列表 {@link ListAIWorkbenchArtifactsRequest} {@link ListAIWorkbenchArtifactsResponse} */
+  ListAIWorkbenchArtifacts(data?: ListAIWorkbenchArtifactsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchArtifactsResponse>;
+  /** 查询执行列表 {@link ListAIWorkbenchExecutionsRequest} {@link ListAIWorkbenchExecutionsResponse} */
+  ListAIWorkbenchExecutions(data?: ListAIWorkbenchExecutionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchExecutionsResponse>;
+  /** 查询 MCP 列表 {@link ListAIWorkbenchMCPsRequest} {@link ListAIWorkbenchMCPsResponse} */
+  ListAIWorkbenchMCPs(data?: ListAIWorkbenchMCPsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchMCPsResponse>;
+  /** 查询消息列表 {@link ListAIWorkbenchMessagesRequest} {@link ListAIWorkbenchMessagesResponse} */
+  ListAIWorkbenchMessages(data?: ListAIWorkbenchMessagesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchMessagesResponse>;
+  /** 列出资源实例 {@link ListAIWorkbenchResourceInstancesRequest} {@link ListAIWorkbenchResourceInstancesResponse} */
+  ListAIWorkbenchResourceInstances(data?: ListAIWorkbenchResourceInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchResourceInstancesResponse>;
+  /** 查询资源地图列表 {@link ListAIWorkbenchResourceMapsRequest} {@link ListAIWorkbenchResourceMapsResponse} */
+  ListAIWorkbenchResourceMaps(data?: ListAIWorkbenchResourceMapsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchResourceMapsResponse>;
+  /** 查询会话列表 {@link ListAIWorkbenchSessionsRequest} {@link ListAIWorkbenchSessionsResponse} */
+  ListAIWorkbenchSessions(data?: ListAIWorkbenchSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchSessionsResponse>;
+  /** 查询技能列表 {@link ListAIWorkbenchSkillsRequest} {@link ListAIWorkbenchSkillsResponse} */
+  ListAIWorkbenchSkills(data?: ListAIWorkbenchSkillsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchSkillsResponse>;
+  /** 查询任务列表 {@link ListAIWorkbenchTasksRequest} {@link ListAIWorkbenchTasksResponse} */
+  ListAIWorkbenchTasks(data?: ListAIWorkbenchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchTasksResponse>;
   /** 修改通知内容模板 {@link ModifyNoticeContentTmplRequest} {@link ModifyNoticeContentTmplResponse} */
   ModifyNoticeContentTmpl(data: ModifyNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentTmplResponse>;
   /** 触发AI工作台SRE数字分身任务 {@link TriggerAIWorkbenchSREDigitalTwinTaskRequest} {@link TriggerAIWorkbenchSREDigitalTwinTaskResponse} */
   TriggerAIWorkbenchSREDigitalTwinTask(data: TriggerAIWorkbenchSREDigitalTwinTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerAIWorkbenchSREDigitalTwinTaskResponse>;
+  /** 手动触发任务 {@link TriggerAIWorkbenchTaskRequest} {@link TriggerAIWorkbenchTaskResponse} */
+  TriggerAIWorkbenchTask(data?: TriggerAIWorkbenchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerAIWorkbenchTaskResponse>;
+  /** 更新 Agent {@link UpdateAIWorkbenchAgentRequest} {@link UpdateAIWorkbenchAgentResponse} */
+  UpdateAIWorkbenchAgent(data?: UpdateAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIWorkbenchAgentResponse>;
   /** 绑定 Grafana 服务实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: V20180724.BindPrometheusManagedGrafanaRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindPrometheusManagedGrafanaResponse>;
   /** 绑定策略对象 {@link V20180724.BindingPolicyObjectRequest} {@link V20180724.BindingPolicyObjectResponse} */
@@ -6746,6 +7686,8 @@ declare interface Monitor {
   CheckAddressByPrometheus(data: V20180724.CheckAddressByPrometheusRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CheckAddressByPrometheusResponse>;
   /** 强制销毁 Grafana 实例 {@link V20180724.CleanGrafanaInstanceRequest} {@link V20180724.CleanGrafanaInstanceResponse} */
   CleanGrafanaInstance(data: V20180724.CleanGrafanaInstanceRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CleanGrafanaInstanceResponse>;
+  /** 创建小程序告警屏蔽规则 {@link V20180724.CreateAlarmHistoryShieldRequest} {@link V20180724.CreateAlarmHistoryShieldResponse} */
+  CreateAlarmHistoryShield(data: V20180724.CreateAlarmHistoryShieldRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateAlarmHistoryShieldResponse>;
   /** 创建通知模板 {@link V20180724.CreateAlarmNoticeRequest} {@link V20180724.CreateAlarmNoticeResponse} */
   CreateAlarmNotice(data: V20180724.CreateAlarmNoticeRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateAlarmNoticeResponse>;
   /** 创建腾讯云可观测平台告警策略 {@link V20180724.CreateAlarmPolicyRequest} {@link V20180724.CreateAlarmPolicyResponse} */
@@ -6794,6 +7736,8 @@ declare interface Monitor {
   CreateRecordingRule(data: V20180724.CreateRecordingRuleRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateRecordingRuleResponse>;
   /** 授权腾讯云用户 {@link V20180724.CreateSSOAccountRequest} {@link V20180724.CreateSSOAccountResponse} */
   CreateSSOAccount(data: V20180724.CreateSSOAccountRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.CreateSSOAccountResponse>;
+  /** 删除小程序告警屏蔽规则 {@link V20180724.DeleteAlarmHistoryShieldsRequest} {@link V20180724.DeleteAlarmHistoryShieldsResponse} */
+  DeleteAlarmHistoryShields(data: V20180724.DeleteAlarmHistoryShieldsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlarmHistoryShieldsResponse>;
   /** 删除告警通知模板（批量） {@link V20180724.DeleteAlarmNoticesRequest} {@link V20180724.DeleteAlarmNoticesResponse} */
   DeleteAlarmNotices(data: V20180724.DeleteAlarmNoticesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DeleteAlarmNoticesResponse>;
   /** 删除告警策略 {@link V20180724.DeleteAlarmPolicyRequest} {@link V20180724.DeleteAlarmPolicyResponse} */
@@ -6842,6 +7786,8 @@ declare interface Monitor {
   DescribeAlarmEvents(data: V20180724.DescribeAlarmEventsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmEventsResponse>;
   /** 查询告警历史 {@link V20180724.DescribeAlarmHistoriesRequest} {@link V20180724.DescribeAlarmHistoriesResponse} */
   DescribeAlarmHistories(data: V20180724.DescribeAlarmHistoriesRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmHistoriesResponse>;
+  /** 获取小程序告警屏蔽规则 {@link V20180724.DescribeAlarmHistoryShieldRequest} {@link V20180724.DescribeAlarmHistoryShieldResponse} */
+  DescribeAlarmHistoryShield(data: V20180724.DescribeAlarmHistoryShieldRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmHistoryShieldResponse>;
   /** 查询告警指标列表 {@link V20180724.DescribeAlarmMetricsRequest} {@link V20180724.DescribeAlarmMetricsResponse} */
   DescribeAlarmMetrics(data: V20180724.DescribeAlarmMetricsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.DescribeAlarmMetricsResponse>;
   /** 查询单个通知模板的详情 {@link V20180724.DescribeAlarmNoticeRequest} {@link V20180724.DescribeAlarmNoticeResponse} */
@@ -7002,6 +7948,8 @@ declare interface Monitor {
   GetTopNMonitorData(data: V20180724.GetTopNMonitorDataRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.GetTopNMonitorDataResponse>;
   /** 安装 Grafana Plugin {@link V20180724.InstallPluginsRequest} {@link V20180724.InstallPluginsResponse} */
   InstallPlugins(data: V20180724.InstallPluginsRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.InstallPluginsResponse>;
+  /** 修改小程序告警屏蔽规则 {@link V20180724.ModifyAlarmHistoryShieldRequest} {@link V20180724.ModifyAlarmHistoryShieldResponse} */
+  ModifyAlarmHistoryShield(data: V20180724.ModifyAlarmHistoryShieldRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyAlarmHistoryShieldResponse>;
   /** 修改通知模板 {@link V20180724.ModifyAlarmNoticeRequest} {@link V20180724.ModifyAlarmNoticeResponse} */
   ModifyAlarmNotice(data: V20180724.ModifyAlarmNoticeRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.ModifyAlarmNoticeResponse>;
   /** 修改告警策略触发条件 {@link V20180724.ModifyAlarmPolicyConditionRequest} {@link V20180724.ModifyAlarmPolicyConditionResponse} */

@@ -364,6 +364,48 @@ declare interface AccessKeyUser {
   CloudType?: number;
 }
 
+/** 访问密钥告警规则白名单 */
+declare interface AccessKeyWhiteList {
+  /** 白名单ID */
+  ID?: number;
+  /** 白名单策略名称 */
+  Name?: string;
+  /** ak加白列表 */
+  AKList?: string[];
+  /** ip加白列表 */
+  IPList?: string[];
+  /** ip类型列表 IP类型 0:账号内（未备注） 1:账号外（未备注） 2:账号内 (已备注) 3:账号外 (已备注) 4:局域网（未备注）5:局域网（已备注） */
+  IPTypeList?: number[];
+  /** 接口加白列表 */
+  ActionList?: string[];
+  /** 调用方式加白0 全部调用方式1 控制台2 API-1 不存在 */
+  CallType?: number;
+  /** 错误码白名单（其他错误码待补充）0 成功 */
+  ErrorCodeList?: number[];
+  /** 策略内容/描述 */
+  Remark?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** ak输入类型 0:从现有选择1:手动输入2:临时密钥3:长期密钥4:全部密钥-1:无 */
+  AkImportType?: number;
+  /** 主账号AppID */
+  AppID?: number;
+  /** 所属主账号uin */
+  Uin?: string;
+  /** 所属主账号 昵称 */
+  Nickname?: string;
+  /** 是否处理过去的告警 */
+  NeedDealPastAlarm?: boolean;
+  /** 处理状态0 处理完成1 正在处理 */
+  DealStatus?: number;
+  /** 接口选择0:自定义输入1:产品+接口形式交互选择2:全部接口 */
+  ActionType?: number;
+  /** 绑定策略id列表，为空代表全局生效 */
+  AlarmPolicyID?: number[];
+}
+
 /** 账号简要信息 */
 declare interface AccountBriefInfo {
   /** 账号 AppID */
@@ -3542,9 +3584,15 @@ declare interface CosAssetDataScanDetail {
   ErrorInfo?: string;
   /** 识别结果分类详情 */
   CategoryDetails?: CosIdentifyCategoryDetail[];
+  /** 无 */
+  RuleDetails?: CosIdentifyRuleDetail[];
+  /** 无 */
+  LevelDetails?: CosIdentifyLevelDetail[];
+  /** 是否已发起全量扫描 */
+  IsFullScanned?: boolean;
 }
 
-/** cos审计文件数据识别信息 */
+/** 对象存储审计文件数据识别信息 */
 declare interface CosAssetFileIdentifyInfo {
   /** 文件名称 */
   FileName?: string;
@@ -3552,6 +3600,20 @@ declare interface CosAssetFileIdentifyInfo {
   DirName?: string;
   /** 分类数据项详情 */
   CategoryDetails?: CosIdentifyCategoryDetail[];
+  /** 存储桶信息 */
+  BucketInfo?: CosBucketInfo;
+  /** 最后一次扫描时间 */
+  LastScanTime?: number;
+  /** 处置状态 */
+  HandleStatus?: number;
+  /** 结果唯一标识 */
+  ResultId?: string;
+  /** 规则详情 */
+  RuleDetails?: CosIdentifyRuleDetail[];
+  /** 级别详情 */
+  LevelDetails?: CosIdentifyLevelDetail[];
+  /** 模板ID */
+  ComplianceId?: number;
 }
 
 /** Cos资产信息 */
@@ -3710,6 +3772,10 @@ declare interface CosBucketBillingInfo {
   IsHaveOldPostOrder?: boolean;
   /** 后付费产品列表 */
   PostProductList?: number[];
+  /** 该 AppId 新增桶默认采样率，单位为 0～1 比率取值范围：[0.001, 1] */
+  DefaultSampleRate?: number;
+  /** 是否白名单，仅用于控制前端范围和精度 */
+  BucketSamplingRateWhitelist?: boolean;
 }
 
 /** 存储桶id */
@@ -3746,6 +3812,10 @@ declare interface CosBucketTaskInfo {
   TaskId?: string;
   /** 最后一次扫描时间 */
   LastScanTime?: number;
+  /** 识别文件数量 */
+  IdentifyFileCount?: number;
+  /** 敏感文件数量 */
+  SensitiveFileCount?: number;
 }
 
 /** cos字典信息 */
@@ -3764,6 +3834,16 @@ declare interface CosIdentifyCategoryDetail {
   CategoryName?: string;
   /** 数据项集合 */
   RuleSet?: CosIdentifyRuleDetail[];
+}
+
+/** cos审计级别结果项 */
+declare interface CosIdentifyLevelDetail {
+  /** 级别id */
+  LevelId?: number;
+  /** 级别名称 */
+  LevelName?: string;
+  /** 级别敏感程度 */
+  LevelScore?: number;
 }
 
 /** cos数据项详情 */
@@ -3814,7 +3894,7 @@ declare interface CosInvokeLog {
   RequestContent?: string;
 }
 
-/** cos概览页面数据结构 */
+/** 对象存储审计概览页面数据结构 */
 declare interface CosOverview {
   /** 资产总数 */
   AssetCount?: number;
@@ -3834,6 +3914,8 @@ declare interface CosOverview {
   RiskTop?: CosRiskInfo[];
   /** 告警风险top */
   AlarmTop?: CosRiskInfo[];
+  /** 高等级敏感文件数 */
+  HighLevelSensitiveFileCount?: number;
 }
 
 /** cos权限信息 */
@@ -8826,6 +8908,16 @@ declare interface OrderDetail {
   SourceType?: number;
 }
 
+/** 订单配额信息 */
+declare interface OrderQuotaInfo {
+  /** 配额键 */
+  QuotaKey?: string | null;
+  /** 配额总量 */
+  QuotaNum?: number | null;
+  /** 配额已使用量 */
+  QuotaUsed?: number | null;
+}
+
 /** 集团账号详情 */
 declare interface OrganizationInfo {
   /** 成员账号名称 */
@@ -10552,6 +10644,108 @@ declare interface TrafficSandboxAssetScope {
   ContainerId?: string;
 }
 
+/** DLP 告警数据结构 */
+declare interface TrafficSandboxDLPAlertInfo {
+  /** 告警记录 ID */
+  ID?: number;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** 命中的用户规则 ID */
+  RuleID?: number;
+  /** 命中的用户规则名称 */
+  RuleName?: string;
+  /** Agent UUID */
+  UUID?: string;
+  /** 实例 ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 集群 ID入参限制：仅容器告警返回 */
+  ClusterId?: string;
+  /** 容器 ID入参限制：仅容器告警返回 */
+  ContainerId?: string;
+  /** 容器名称入参限制：仅容器告警返回 */
+  ContainerName?: string;
+  /** 进程 exe 路径 */
+  Exe?: string;
+  /** 进程命令行参数 */
+  Param?: string;
+  /** 目标地址 */
+  Target?: string;
+  /** 匹配范围枚举值：req_head：请求头req_body：请求体rsp_head：响应头rsp_body：响应体 */
+  MatchScope?: string;
+  /** agent 上报的 match_content 完整内容入参限制：最长 256 字节；前一半字符已脱敏打码 */
+  MatchContent?: string;
+  /** 真正触发规则的匹配片段入参限制：前一半字符已脱敏打码；规则缺失/未命中时退化为与 MatchContent 相同 */
+  MatchContentSample?: string;
+  /** 上传协议 */
+  UpProto?: string;
+  /** 文件名称 */
+  FileName?: string;
+  /** 文件类型 */
+  FileType?: string;
+  /** 文件大小单位：Byte */
+  FileSize?: number;
+  /** 告警级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 处理状态枚举值：PENDING：未处理HANDLED：已处理IGNORE：已忽略PASS：已加白BLOCK：已拦截 */
+  Status?: string;
+  /** 告警次数 */
+  Count?: number;
+  /** 首次告警时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  FirstAlertTime?: string;
+  /** 最后告警时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  LastAlertTime?: string;
+  /** 命中动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction?: string;
+}
+
+/** 文件大小限制区间，单位 Byte；Min/Max 为 0 表示该侧无限制 */
+declare interface TrafficSandboxDLPFileSizeRange {
+  /** 下限，单位 Byte；0 表示无下限 */
+  Min?: number;
+  /** 上限，单位 Byte；0 表示无上限 */
+  Max?: number;
+}
+
+/** DLP 规则内容。子规则 ID 由服务端内部管理不对外暴露，作用域由后端默认应用到全部范围 */
+declare interface TrafficSandboxDLPRuleContentItem {
+  /** 子规则名称入参限制：长度 1-128 */
+  RuleName?: string;
+  /** 规则内容入参限制：正则表达式，最大长度 2048 */
+  RuleContent?: string;
+}
+
+/** DLP 用户规则数据结构 */
+declare interface TrafficSandboxDLPRuleInfo {
+  /** 规则 ID */
+  ID?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 规则状态枚举值：ON：启用OFF：禁用 */
+  Status?: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** 引用的系统规则内容快照 */
+  SystemRuleContent?: TrafficSandboxDLPRuleContentItem[];
+  /** 用户自定义规则内容 */
+  UserRuleContent?: TrafficSandboxDLPRuleContentItem[];
+  /** 用户规则的结构化视图，按检测维度返回规则内容，便于前端按「文件名称/文件大小/文件格式/外发域名/外发内容」分区渲染。只读输出字段，不影响 Create/Modify 入参 */
+  UserRuleInfo?: TrafficSandboxDLPUserRuleInfo;
+  /** 规则的生效范围 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 未生效资产列表：策略目标生效资产中流量沙箱插件未已安装（TrafficPluginState.InstallStatus 不为 INSTALLED）的 AI Agent 资产，返回机器的 InstanceId / ContainerId 及 TrafficPluginState。无未生效资产时返回空数组 */
+  InactiveAssets?: TrafficSandboxInactiveAsset[];
+  /** 创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  InsertTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  UpdateTime?: string;
+  /** 规则动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction?: string;
+}
+
 /** DLP 系统规则数据结构 */
 declare interface TrafficSandboxDLPSystemRuleItem {
   /** 系统规则 ID */
@@ -10560,6 +10754,36 @@ declare interface TrafficSandboxDLPSystemRuleItem {
   RuleName?: string;
   /** 规则内容，Hyperscan 兼容的正则表达式（仅供展示给用户查看，不可编辑） */
   RuleContent?: string;
+}
+
+/** 外发内容检测行（名称 + 正则） */
+declare interface TrafficSandboxDLPTrafficRuleItem {
+  /** 子规则名称 */
+  RuleName?: string;
+  /** 正则内容（Hyperscan 兼容） */
+  RuleContent?: string;
+}
+
+/** 外发域名检测维度（URL / 排除 URL） */
+declare interface TrafficSandboxDLPURLRuleItem {
+  /** 外发对象列表（域名/URL） */
+  URL?: string[];
+  /** 排除对象列表 */
+  URLExcept?: string[];
+}
+
+/** DLP 用户规则结构化视图，按「检测规则」5 个检测维度返回，便于前端按维度渲染。只读输出字段，不影响 Create/Modify 入参 */
+declare interface TrafficSandboxDLPUserRuleInfo {
+  /** 文件名称匹配维度：汇总去重后的文件名/正则列表 */
+  FileName?: string[];
+  /** 文件大小限制维度（区间） */
+  FileSize?: TrafficSandboxDLPFileSizeRange;
+  /** 文件格式限制维度：汇总去重后的格式/类目列表 */
+  FileType?: string[];
+  /** 外发域名检测维度（单值对象） */
+  URLRule?: TrafficSandboxDLPURLRuleItem;
+  /** 外发内容检测维度（可多行，名称 + 正则） */
+  TrafficRule?: TrafficSandboxDLPTrafficRuleItem[];
 }
 
 /** 流量沙箱规则的生效范围 */
@@ -10578,6 +10802,86 @@ declare interface TrafficSandboxInactiveAsset {
   ContainerId?: string;
   /** 流量沙箱插件状态 */
   TrafficPluginState?: TrafficPluginState;
+}
+
+/** LLM 审计告警数据结构 */
+declare interface TrafficSandboxLLMAuditAlertInfo {
+  /** 告警记录 ID */
+  ID?: number;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** 命中的用户规则 ID */
+  RuleID?: number;
+  /** 命中的用户规则名称 */
+  RuleName?: string;
+  /** 命中的 LLM 审计系统规则名称 */
+  SystemRuleName?: string;
+  /** 实例 ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 集群 ID */
+  ClusterId?: string;
+  /** 容器 ID */
+  ContainerId?: string;
+  /** 容器名称 */
+  ContainerName?: string;
+  /** 命中风险描述 */
+  HitPayload?: string;
+  /** 命中动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction?: string;
+  /** 告警级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 处理状态枚举值：PENDING：未处理HANDLED：已处理IGNORE：已忽略PASS：已加白BLOCK：已拦截 */
+  Status?: string;
+  /** 首次告警时间 */
+  FirstAlertTime?: string;
+  /** 最后告警时间 */
+  LastAlertTime?: string;
+}
+
+/** LLM 审计用户规则数据结构 */
+declare interface TrafficSandboxLLMAuditRuleInfo {
+  /** 规则 ID */
+  ID?: number;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** 规则状态枚举值：ON：启用OFF：禁用 */
+  Status?: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType?: string;
+  /** 引用的系统规则列表（含系统规则名称） */
+  SystemRuleRefs?: TrafficSandboxLLMAuditRuleRef[];
+  /** 规则的生效范围 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 未生效资产列表：策略目标生效资产中流量沙箱插件未已安装（TrafficPluginState.InstallStatus 不为 INSTALLED）的 AI Agent 资产，返回机器的 InstanceId / ContainerId 及 TrafficPluginState。无未生效资产时返回空数组 */
+  InactiveAssets?: TrafficSandboxInactiveAsset[];
+  /** 创建时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  InsertTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  UpdateTime?: string;
+  /** 规则动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction?: string;
+}
+
+/** LLM 审计规则对 LLM 审计系统规则的引用项 */
+declare interface TrafficSandboxLLMAuditRuleRef {
+  /** LLM 审计系统规则 ID（字符串） */
+  SystemRuleID?: string;
+  /** LLM 审计系统规则名称 */
+  SystemRuleName?: string;
+}
+
+/** LLM 审计系统子规则（LLM 审计系统规则） */
+declare interface TrafficSandboxLLMAuditSystemRuleItem {
+  /** LLM 审计系统规则 ID（字符串） */
+  RuleID?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 规则描述 */
+  Description?: string;
 }
 
 /** 趋势数据点 */
@@ -10690,6 +10994,26 @@ declare interface UltimateAppItem {
   AppID?: number;
   /** 是否旗舰版 */
   IsUltimateVersion?: boolean;
+}
+
+/** 账号ak数量信息 */
+declare interface UserAKInfo {
+  /** APPID */
+  AppID?: number;
+  /** UIN */
+  Uin?: string;
+  /** 账号昵称 */
+  NickName?: string;
+  /** 账号下ak数量 */
+  AKNum?: number;
+  /** 是否被共享，1-被共享，2-未被共享 */
+  IsShared?: number;
+  /** 是否单独购买，1-单独购买，2-未单独购买 */
+  IsSelfBuy?: number;
+  /** 配额来源账号 */
+  ShareFromAppID?: number;
+  /** 云厂商类型0:腾讯云1:亚马逊云2:微软云3:谷歌云4:阿里云5:华为云 */
+  CloudType?: number;
 }
 
 /** 账号CSPM信息 */
@@ -12958,6 +13282,8 @@ declare interface CreateDspmIdentifyCategoryRequest {
   Name: string;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyCategoryResponse {
@@ -12976,6 +13302,8 @@ declare interface CreateDspmIdentifyComplianceCategoryRelationRequest {
   ParentCategoryId: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyComplianceCategoryRelationResponse {
@@ -12992,6 +13320,8 @@ declare interface CreateDspmIdentifyComplianceGroupCopyRequest {
   Name?: string;
   /** 模板描述 */
   Description?: string;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyComplianceGroupCopyResponse {
@@ -13012,6 +13342,8 @@ declare interface CreateDspmIdentifyComplianceGroupRequest {
   LevelGroupId?: number;
   /** 状态枚举值：0： 不启用1： 启用 */
   Status?: number;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyComplianceGroupResponse {
@@ -13030,6 +13362,8 @@ declare interface CreateDspmIdentifyComplianceRuleRelationRequest {
   Rules: DspmIdentifyCategoryRuleRelateItem[];
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyComplianceRuleRelationResponse {
@@ -13060,6 +13394,8 @@ declare interface CreateDspmIdentifyLevelGroupRequest {
   Description?: string;
   /** 无 */
   LevelItems?: DspmAddIdentifyLevelItem[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyLevelGroupResponse {
@@ -13082,6 +13418,8 @@ declare interface CreateDspmIdentifyRuleRequest {
   StructuredRule?: string;
   /** 非结构化规则 */
   UnStructuredRule?: string;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface CreateDspmIdentifyRuleResponse {
@@ -13366,6 +13704,24 @@ declare interface CreateHighBaseLineRisksExportJobRequest {
 
 declare interface CreateHighBaseLineRisksExportJobResponse {
   /** 导出任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateHostImageListExportJobRequest {
+  /** 集群CA证书MD5（32位十六进制，必填） */
+  ClusterCaMD5: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用ListFilter结构（含Filters数组 + ListFindOption分页）支持的过滤字段：Host / ImageId / ImageName / HasRunningContainer */
+  Filter?: Filter;
+  /** 导出字段列表（不传则导出全部字段）枚举值：ImageId：镜像IDImageName：镜像名ImageVersion：镜像版本ContainerCount：关联容器数HostCount：关联主机数CreateTime：创建时间NickName：所属账号昵称（单账号模式下自动排除）ScanStatus：扫描状态LastScanTime：最近扫描完成时间VulCountCritical：critical级别漏洞数VulCountHigh：high级别漏洞数VulCountMedium：medium级别漏洞数VulCountLow：low级别漏洞数VirusCountCritical：critical级别木马数VirusCountHigh：high级别木马数VirusCountMedium：medium级别木马数VirusCountLow：low级别木马数SensitiveCountCritical：critical级别敏感信息数SensitiveCountHigh：high级别敏感信息数SensitiveCountMedium：medium级别敏感信息数SensitiveCountLow：low级别敏感信息数 */
+  ExportFields?: string[];
+}
+
+declare interface CreateHostImageListExportJobResponse {
+  /** 导出任务ID取值参考：前端轮询导出任务状态时使用 */
   JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -13883,6 +14239,98 @@ declare interface CreateRiskDetailExportJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateSandboxACLRuleRequest {
+  /** 规则名称入参限制：长度 1-128 */
+  RuleName: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType: string;
+  /** 生效范围入参限制：EffectScope.EffectType=INCLUDE 时 EffectAssets 必须非空 */
+  EffectScope: TrafficSandboxEffectScope;
+  /** 初始状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+  /** 规则动作(RuleAction)枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction: string;
+  /** 引用的系统规则 ID 列表入参限制：最多 100 个；与 UserRuleContent 至少提供其一 */
+  SystemRuleIDList?: number[];
+  /** 用户自定义规则内容入参限制：最多 100 条子规则；与 SystemRuleIDList 至少提供其一 */
+  UserRuleContent?: TrafficSandboxACLRuleContentItem[];
+}
+
+declare interface CreateSandboxACLRuleResponse {
+  /** 新建规则的 ID */
+  ID?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSandboxDLPRuleRequest {
+  /** 规则名称入参限制：长度 1-128 */
+  RuleName: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level: string;
+  /** 规则动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType: string;
+  /** 生效范围 */
+  EffectScope: TrafficSandboxEffectScope;
+  /** 初始状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+  /** 引用的系统规则 ID 列表入参限制：最多 1000 个；与 UserRuleContent 至少提供其一 */
+  SystemRuleIDList?: number[];
+  /** 用户自定义规则内容入参限制：最多 100 条子规则；与 UserRuleInfo 二选一传入即可，二者同时传入时以 UserRuleInfo 为准 */
+  UserRuleContent?: TrafficSandboxDLPRuleContentItem[];
+  /** 新增可选的结构化入参，支持 5 个检测维度（文件名称/文件大小/文件格式/外发域名/外发内容），各维度可选、至少命中一项。与 UserRuleContent 同时传入时优先生效 */
+  UserRuleInfo?: TrafficSandboxDLPUserRuleInfo;
+}
+
+declare interface CreateSandboxDLPRuleResponse {
+  /** 新建规则的 ID */
+  ID?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSandboxFileRuleRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 规则内容 */
+  RuleContent?: CommandSandboxFileRuleBase;
+}
+
+declare interface CreateSandboxFileRuleResponse {
+  /** 规则 ID */
+  RuleID?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSandboxLLMAuditRuleRequest {
+  /** 规则名称入参限制：长度 1-128 */
+  RuleName: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType: string;
+  /** 引用的 LLM 审计系统规则 ID 列表（字符串，由 DescribeSandboxLLMAuditSystemRuleList 返回的 LLMRules[].RuleID / ToolCallRules[].RuleID 提供）入参限制：非空，最多 1000 个；单个元素长度 1-128 */
+  SystemRuleIDList: string[];
+  /** 生效范围 */
+  EffectScope: TrafficSandboxEffectScope;
+  /** 初始状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+  /** 规则动作(RuleAction)枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警 */
+  RuleAction: string;
+}
+
+declare interface CreateSandboxLLMAuditRuleResponse {
+  /** 新建规则的 ID */
+  ID?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateScanStatisticExportJobRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -13970,7 +14418,7 @@ declare interface CreateVulFixTaskRequest {
   Timeout?: number;
   /** 是否在修复前创建磁盘快照默认值：false */
   CreateSnapshot?: boolean;
-  /** 快照名称，CreateSnapshot为true时有效入参限制：最长128个字符 */
+  /** 快照名称，CreateSnapshot为true时有效入参限制：最长60个字符超长自动截断 */
   SnapshotName?: string;
   /** 快照保存天数，CreateSnapshot为true时有效 */
   SaveDays?: number;
@@ -14286,6 +14734,8 @@ declare interface DeleteDspmIdentifyCategoryRequest {
   Ids: number[];
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DeleteDspmIdentifyCategoryResponse {
@@ -14300,6 +14750,8 @@ declare interface DeleteDspmIdentifyComplianceCategoryRelationRequest {
   CategoryId: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DeleteDspmIdentifyComplianceCategoryRelationResponse {
@@ -14312,6 +14764,8 @@ declare interface DeleteDspmIdentifyComplianceGroupRequest {
   Ids: number[];
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DeleteDspmIdentifyComplianceGroupResponse {
@@ -14328,6 +14782,8 @@ declare interface DeleteDspmIdentifyComplianceRuleRelationRequest {
   RuleIds: number[];
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DeleteDspmIdentifyComplianceRuleRelationResponse {
@@ -14340,6 +14796,8 @@ declare interface DeleteDspmIdentifyLevelGroupRequest {
   Ids: number[];
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DeleteDspmIdentifyLevelGroupResponse {
@@ -14352,6 +14810,8 @@ declare interface DeleteDspmIdentifyRuleRequest {
   Ids: number[];
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DeleteDspmIdentifyRuleResponse {
@@ -14599,6 +15059,40 @@ declare interface DeleteRiskScanTaskRequest {
 }
 
 declare interface DeleteRiskScanTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSandboxACLRuleRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100，去重后生效 */
+  IDList: number[];
+}
+
+declare interface DeleteSandboxACLRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSandboxDLPRuleRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100，去重后生效 */
+  IDList: number[];
+}
+
+declare interface DeleteSandboxDLPRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSandboxFileRuleRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 规则 ID 组 */
+  IDList?: number[];
+}
+
+declare interface DeleteSandboxFileRuleResponse {
+  /** 规则 ID 组 */
+  IDList?: number[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15109,6 +15603,22 @@ declare interface DescribeAccessKeyUserListRequest {
 declare interface DescribeAccessKeyUserListResponse {
   /** 账号列表 */
   Data?: AccessKeyUser[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessKeyWhiteListRequest {
+  /** 过滤器 */
+  Filter?: Filter;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeAccessKeyWhiteListResponse {
+  /** 告警规则列表 */
+  Data?: AccessKeyWhiteList[];
   /** 总数 */
   Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -16103,6 +16613,42 @@ declare interface DescribeCLSLogListV3Response {
   RequestId?: string;
 }
 
+declare interface DescribeCSCPayInfoRequest {
+}
+
+declare interface DescribeCSCPayInfoResponse {
+  /** 租户AppID。 */
+  AppID?: number;
+  /** 订单状态。取值：0（未购买）、1（正常）、2（隔离）、3（销毁）、4（修改）、5（续费）、6（试用）、7（过期）、8（试用到期）。 */
+  OrderStatus?: number;
+  /** 付费模式。取值：0（后付费）、1（预付费）。 */
+  PayMode?: number;
+  /** 订单开始时间，格式：2006-01-02 15:04:05。 */
+  BeginTime?: string;
+  /** 订单结束时间，格式：2006-01-02 15:04:05。 */
+  EndTime?: string;
+  /** 自动续费标志。取值：0（未设置）、1（自动续费）、2（不自动续费）。 */
+  AutoRenew?: number;
+  /** 购买时长。 */
+  TimeSpan?: number;
+  /** 时间单位，如 m（月）。 */
+  TimeUnit?: string;
+  /** 资源ID。 */
+  ResourceId?: string;
+  /** 当前服务器时间，格式：2006-01-02 15:04:05。 */
+  TimeNow?: string;
+  /** 账号UIN。 */
+  Uin?: string;
+  /** 账号昵称。 */
+  NickName?: string;
+  /** 是否为新用户。取值：1（新用户）、0（旧用户）。 */
+  NewUser?: number;
+  /** 用户计费信息，Key为L4 */
+  QuotaList?: OrderQuotaInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCSIPLicenseBindScheduleRequest {
   /** ModifyCSIPLicenseBinds返回的任务ID */
   TaskId: number;
@@ -16211,6 +16757,52 @@ declare interface DescribeCSIPRiskStatisticsRequest {
 declare interface DescribeCSIPRiskStatisticsResponse {
   /** 资产概况数据 */
   Data?: CsipRiskCenterStatistics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCSPMPayInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeCSPMPayInfoResponse {
+  /** APPID */
+  AppID?: number;
+  /** 订单状态 0未购买 1正常，2隔离，3销毁，6试用中，7到期 */
+  OrderStatus?: number;
+  /** 已购CSPM扫描配额 */
+  CSPMNum?: number;
+  /** 已消耗CSPM扫描配额 */
+  UsedCount?: number;
+  /** 赠送CSPM扫描配额 */
+  GrantedCSPMNum?: number;
+  /** 支付模式，0-后付费 1-预付费 */
+  PayMode?: number;
+  /** 是否单独购买，1-单独购买，2-被其它账号共享 */
+  IsSelfBuy?: number;
+  /** 订单开始时间 */
+  BeginTime?: string;
+  /** 订单到期时间 */
+  EndTime?: string;
+  /** 0-用户未设置,1-用户设置自动续费,2-用户设置不自动续费 */
+  AutoRenew?: number;
+  /** 订单时长 */
+  TimeSpan?: number;
+  /** 时长单位 */
+  TimeUnit?: string;
+  /** 资源id */
+  ResourceId?: string;
+  /** 公测结束时间 */
+  BetaEndTime?: string;
+  /** 系统当前时间 */
+  TimeNow?: string;
+  /** 是否分享给其它账号，1-是，2-否 */
+  IsShareToOther?: number;
+  /** uin */
+  Uin?: string;
+  /** 昵称 */
+  NickName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18508,6 +19100,8 @@ declare interface DescribeDspmDictionaryListRequest {
   MemberId?: string[];
   /** 筛选条件 */
   Filters?: WhereFilter[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmDictionaryListResponse {
@@ -18542,6 +19136,8 @@ declare interface DescribeDspmIdentifyCategoryListRequest {
   MemberId?: string[];
   /** 过滤条件 */
   Filter?: Filter;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyCategoryListResponse {
@@ -18562,6 +19158,8 @@ declare interface DescribeDspmIdentifyComplianceCategoryRuleListRequest {
   MemberId?: string[];
   /** 过滤条件 */
   Filter?: Filter;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyComplianceCategoryRuleListResponse {
@@ -18578,6 +19176,8 @@ declare interface DescribeDspmIdentifyComplianceGroupDetailRequest {
   MemberId?: string[];
   /** 识别模板ID */
   Id?: number;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyComplianceGroupDetailResponse {
@@ -18610,6 +19210,8 @@ declare interface DescribeDspmIdentifyComplianceGroupListRequest {
   MemberId?: string[];
   /** 过滤条件 */
   Filter?: Filter;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyComplianceGroupListResponse {
@@ -18698,6 +19300,8 @@ declare interface DescribeDspmIdentifyLevelGroupListRequest {
   MemberId?: string[];
   /** 过滤条件 */
   Filter?: Filter;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyLevelGroupListResponse {
@@ -18714,6 +19318,8 @@ declare interface DescribeDspmIdentifyRuleDetailRequest {
   Id: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyRuleDetailResponse {
@@ -18740,6 +19346,8 @@ declare interface DescribeDspmIdentifyRuleListRequest {
   MemberId?: string[];
   /** 筛选项 */
   Filter?: Filter;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyRuleListResponse {
@@ -18764,6 +19372,8 @@ declare interface DescribeDspmIdentifyRuleTestResultRequest {
   StructuredTestContent?: DspmIdentifyRuleStructuredTestItem[];
   /** 非结构化测试内容 */
   UnStructuredTestContent?: string;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface DescribeDspmIdentifyRuleTestResultResponse {
@@ -21949,6 +22559,46 @@ declare interface DescribeSandboxACLSystemRuleListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSandboxDLPAlertListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：ID：按告警记录 ID 查询单条BelongAssetType：归属资产类型，可选值：HOST（主机） / CONTAINER（容器）RuleName：按命中规则名称搜索RuleAction：命中动作，可选值：PASS（加白） / BLOCK（拦截并告警） / MONITOR（告警）InstanceId：按资产实例 ID 精确过滤（用于资产详情页查看该资产的告警列表等场景）InstanceName：按资产实例名模糊搜索，多个值之间为"或"关系Status：处理状态，可选值：PENDING（未处理） / HANDLED（已处理） / IGNORE（已忽略） / PASS（已加白） / BLOCK（已拦截） */
+  Filters?: Filters[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSandboxDLPAlertListResponse {
+  /** 告警列表 */
+  Data?: TrafficSandboxDLPAlertInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxDLPRuleListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：RuleID：规则 ID，用于查询单条规则RuleName：按规则名称搜索Status：规则状态，可选值：ON（启用） / OFF（禁用）Level：规则级别，可选值：INFO（提示） / LOW（低危） / MEDIUM（中危） / HIGH（高危） / CRITICAL（严重）RuleAction：规则动作，可选值：PASS（加白） / BLOCK（拦截并告警） / MONITOR（告警）BelongAssetType：归属资产类型，可选值：HOST（主机） / CONTAINER（容器） */
+  Filters?: Filters[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSandboxDLPRuleListResponse {
+  /** 规则列表 */
+  Data?: TrafficSandboxDLPRuleInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSandboxDLPSystemRuleListRequest {
   /** 偏移量，默认 0 */
   Offset?: number;
@@ -21979,6 +22629,56 @@ declare interface DescribeSandboxFileRuleListResponse {
   TotalCount?: number;
   /** 规则列表 */
   RuleList?: CommandSandboxFileRule[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxLLMAuditAlertListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：ID：按告警记录 ID 查询单条BelongAssetType：归属资产类型，可选值：HOST（主机） / CONTAINER（容器）RuleName：按用户规则名称搜索RuleAction：命中动作，可选值：PASS（加白） / BLOCK（拦截并告警） / MONITOR（告警）InstanceId：按资产实例 ID 精确过滤（用于资产详情页查看该资产的告警列表等场景）InstanceName：按资产实例名模糊搜索，多个值之间为"或"关系Status：处理状态，可选值：PENDING（未处理） / HANDLED（已处理） / IGNORE（已忽略） / PASS（已加白） / BLOCK（已拦截） */
+  Filters?: Filters[];
+}
+
+declare interface DescribeSandboxLLMAuditAlertListResponse {
+  /** 告警列表 */
+  Data?: TrafficSandboxLLMAuditAlertInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxLLMAuditRuleListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 过滤条件支持的过滤项：RuleID：规则 ID，用于查询单条规则RuleName：按规则名称搜索Status：规则状态，可选值：ON（启用） / OFF（禁用）Level：规则级别，可选值：INFO（提示） / LOW（低危） / MEDIUM（中危） / HIGH（高危） / CRITICAL（严重）RuleAction：规则动作，可选值：PASS（加白） / BLOCK（拦截并告警） / MONITOR（告警）BelongAssetType：归属资产类型，可选值：HOST（主机） / CONTAINER（容器） */
+  Filters?: Filters[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSandboxLLMAuditRuleListResponse {
+  /** 规则列表 */
+  Data?: TrafficSandboxLLMAuditRuleInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSandboxLLMAuditSystemRuleListRequest {
+}
+
+declare interface DescribeSandboxLLMAuditSystemRuleListResponse {
+  /** LLM 推理防护规则列表 */
+  LLMRules?: TrafficSandboxLLMAuditSystemRuleItem[];
+  /** ToolCall 防护规则列表 */
+  ToolCallRules?: TrafficSandboxLLMAuditSystemRuleItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -22349,6 +23049,20 @@ declare interface DescribeSourceIPAssetResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSourceIPDetailRequest {
+  /** 源IP的ID */
+  ID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeSourceIPDetailResponse {
+  /** 访问密钥资产详情 */
+  SourceIPInfo?: SourceIPAsset;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubUserInfoRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -22565,6 +23279,24 @@ declare interface DescribeUebaUserSummaryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserAKInfoListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件 */
+  Filter?: Filter;
+}
+
+declare interface DescribeUserAKInfoListResponse {
+  /** 账号ak列表 */
+  List?: UserAKInfo[];
+  /** 已勾选账号ak总数 */
+  SelectedAKNum?: number;
+  /** ak总数 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserCSPMInfoListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -22713,6 +23445,20 @@ declare interface DescribeVdbAndPocInfoResponse {
   VdbUpdateTime?: string;
   /** 漏洞库更新时间。 */
   PocUpdateTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVoucherEligibilityRequest {
+  /** 活动 ID。 */
+  ActivityID: number;
+  /** 代金券批次 ID。 */
+  ActID: number;
+}
+
+declare interface DescribeVoucherEligibilityResponse {
+  /** 是否有资格领取代金券。取值：1（有资格）、0（无资格）。 */
+  Available?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23345,6 +24091,30 @@ declare interface InstallClusterAgentResponse {
   RequestId?: string;
 }
 
+declare interface InstallKeySandboxSkillRequest {
+  /** 机器实例ID列表入参限制：最多一次操作100个 */
+  InstanceIdList: string[];
+  /** 集团账号的成员ID */
+  MemberId?: string[];
+}
+
+declare interface InstallKeySandboxSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InstallSandboxPluginRequest {
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType: string;
+  /** 安装目标范围入参限制：EffectType=INCLUDE 时 EffectAssets 必须非空；EffectType=EXCLUDE 时 EffectAssets 可为空数组（表示对全部 AI Agent 资产下发） */
+  EffectScope: TrafficSandboxEffectScope;
+}
+
+declare interface InstallSandboxPluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAILinkSettingRequest {
   /** 0 关闭AI-Link智链引擎，1 开启AI-Link智链引擎 */
   AILinkEnable: number;
@@ -23769,6 +24539,26 @@ declare interface ModifyCSIPRaspLicenseUnBindsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterDefendStatusRequest {
+  /** 防护开关 */
+  DefendStatus: boolean;
+  /** 关闭防护时是否同步解绑集群下主机 License枚举值：true：同步解绑集群所有节点主机授权false：仅停止容器计费，节点保留主机安全防护默认值：false补充说明：仅 DefendStatus=false（关闭防护）时生效 */
+  UnbindHostLicense?: boolean;
+  /** 集群id数组 */
+  ClusterAssetIds?: string[];
+  /** 被调用的集团账号的成员id */
+  OperatedMemberId?: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 集群ca证书md5值，集群的唯一标识 */
+  ClusterCaMD5List?: string[];
+}
+
+declare interface ModifyClusterDefendStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCosAuditBucketMonitorStatusRequest {
   /** 存储桶集合 */
   BucketNameSet: string[];
@@ -23811,12 +24601,22 @@ declare interface ModifyCosAuditObjectIdentifyStatusResponse {
 
 declare interface ModifyCosAuditObjectSampleRateRequest {
   /** 存储桶资产id集合 */
-  BucketIdSet: number[];
+  BucketIdSet?: number[];
   /** 采样率集合 */
-  SampleRateSet: number[];
+  SampleRateSet?: number[];
+  /** appid；传 DefaultSampleRate 时必填；只修改已有桶时可选 */
+  TargetAppId?: number;
+  /** 传入时修改 TargetAppId 的新增桶默认值； 不传时不修改默认值取值范围：[0.001, 1] */
+  DefaultSampleRate?: number;
 }
 
 declare interface ModifyCosAuditObjectSampleRateResponse {
+  /** 本次是否实际提交了默认采样率 */
+  DefaultSampleRateUpdated?: boolean;
+  /** DefaultSampleRateUpdated=true 时返回修改后的值 */
+  DefaultSampleRate?: number;
+  /** 本次成功提交的已有桶数量 */
+  UpdatedBucketCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23870,6 +24670,8 @@ declare interface ModifyDspmApplyingIdentifyComplianceGroupRequest {
   ComplianceId: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmApplyingIdentifyComplianceGroupResponse {
@@ -24096,6 +24898,8 @@ declare interface ModifyDspmIdentifyCategoryRequest {
   Name: string;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyCategoryResponse {
@@ -24114,6 +24918,8 @@ declare interface ModifyDspmIdentifyComplianceGroupRequest {
   Description?: string;
   /** 状态枚举值：0： 未启用1： 启用 */
   Status?: number;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyComplianceGroupResponse {
@@ -24128,6 +24934,8 @@ declare interface ModifyDspmIdentifyComplianceGroupStatusRequest {
   Status: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyComplianceGroupStatusResponse {
@@ -24144,6 +24952,8 @@ declare interface ModifyDspmIdentifyComplianceRuleLevelInfoRequest {
   LevelId: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyComplianceRuleLevelInfoResponse {
@@ -24174,6 +24984,8 @@ declare interface ModifyDspmIdentifyLevelGroupRequest {
   Description?: string;
   /** 级别信息 */
   LevelItems?: DspmIdentifyLevelItem[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyLevelGroupResponse {
@@ -24190,6 +25002,8 @@ declare interface ModifyDspmIdentifyLevelItemRequest {
   MemberId?: string[];
   /** 敏感程度分取值范围：[1, 10]单位：敏感程度 */
   LevelScore?: number;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyLevelItemResponse {
@@ -24212,6 +25026,8 @@ declare interface ModifyDspmIdentifyRuleRequest {
   StructuredRule?: string;
   /** 非结构化规则 */
   UnStructuredRule?: string;
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyRuleResponse {
@@ -24226,6 +25042,8 @@ declare interface ModifyDspmIdentifyRuleStatusRequest {
   Status: number;
   /** 集团账号的成员id */
   MemberId?: string[];
+  /** 操作来源：空/dspm=数据库风险监测入口，cos=对象存储风险监测入口 */
+  OperationSource?: string;
 }
 
 declare interface ModifyDspmIdentifyRuleStatusResponse {
@@ -25205,6 +26023,148 @@ declare interface ModifyRiskScanCronConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifySandboxACLRuleRequest {
+  /** 规则 ID */
+  ID: number;
+  /** 规则名称入参限制：长度 1-128默认值：不传则不修改 */
+  RuleName?: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重默认值：不传则不修改 */
+  Level?: string;
+  /** 引用的系统规则 ID 列表入参限制：传空数组表示清空；不传表示不修改 */
+  SystemRuleIDList?: number[];
+  /** 用户自定义规则内容入参限制：传空数组表示清空；不传表示不修改 */
+  UserRuleContent?: TrafficSandboxACLRuleContentItem[];
+  /** 生效范围默认值：不传则不修改 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 规则动作(RuleAction)枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警默认值：不传则不修改 */
+  RuleAction?: string;
+  /** 目标状态枚举值：ON：启用OFF：禁用默认值：不传则不修改 */
+  Status?: string;
+}
+
+declare interface ModifySandboxACLRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxACLRuleStatusRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100 */
+  IDList: number[];
+  /** 目标状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+}
+
+declare interface ModifySandboxACLRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxAlertStatusRequest {
+  /** 告警类型枚举值：ACL：访问控制DLP：数据泄露防护LLM_AUDIT：LLM 审计 */
+  AlertType: string;
+  /** 归属资产类型枚举值：HOST：主机CONTAINER：容器 */
+  BelongAssetType: string;
+  /** 告警记录 ID 列表入参限制：非空，长度 1-100，去重后生效 */
+  IDList: number[];
+  /** 目标操作枚举值：HANDLED：已处理IGNORE：已忽略PASS：已加白DELETE：删除（不可恢复） */
+  Status: string;
+}
+
+declare interface ModifySandboxAlertStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxDLPRuleRequest {
+  /** 规则 ID */
+  ID: number;
+  /** 规则名称入参限制：长度 1-128默认值：不传则不修改 */
+  RuleName?: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重默认值：不传则不修改 */
+  Level?: string;
+  /** 规则动作枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警默认值：不传则不修改 */
+  RuleAction?: string;
+  /** 引用的系统规则 ID 列表入参限制：最多 1000 个；传入时整体覆盖原有集合；不传表示不修改 */
+  SystemRuleIDList?: number[];
+  /** 用户自定义规则内容入参限制：传入时整体覆盖原有集合（允许传空数组以清空）；不传表示不修改 */
+  UserRuleContent?: TrafficSandboxDLPRuleContentItem[];
+  /** 结构化入参，支持 5 个检测维度（文件名称/文件大小/文件格式/外发域名/外发内容），各维度可选、至少命中一项。传入时整体覆盖原有集合；不传表示不修改。与 UserRuleContent 同时传入时优先生效 */
+  UserRuleInfo?: TrafficSandboxDLPUserRuleInfo;
+  /** 生效范围默认值：不传则不修改 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 目标状态枚举值：ON：启用OFF：禁用默认值：不传则不修改 */
+  Status?: string;
+}
+
+declare interface ModifySandboxDLPRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxDLPRuleStatusRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100 */
+  IDList: number[];
+  /** 目标状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+}
+
+declare interface ModifySandboxDLPRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxFileRuleRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 规则 ID */
+  RuleID?: number;
+  /** 规则内容 */
+  RuleContent?: CommandSandboxFileRuleBase;
+}
+
+declare interface ModifySandboxFileRuleResponse {
+  /** 规则 ID */
+  RuleID?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxFileRuleStatusRequest {
+  /** 规则 ID 列表入参限制：非空，长度 1-100 */
+  IDList: number[];
+  /** 目标状态枚举值：ON：启用OFF：禁用 */
+  Status: string;
+}
+
+declare interface ModifySandboxFileRuleStatusResponse {
+  /** 操作规则 ID 列表 */
+  IDList?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySandboxLLMAuditRuleRequest {
+  /** 规则 ID */
+  ID: number;
+  /** 规则名称入参限制：长度 1-128默认值：不传则不修改 */
+  RuleName?: string;
+  /** 规则级别枚举值：INFO：提示LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重默认值：不传则不修改 */
+  Level?: string;
+  /** 引用的 LLM 审计系统规则 ID 列表（字符串）入参限制：不传表示不修改；传值则覆盖全量，长度 1-1000；单个元素长度 1-128 */
+  SystemRuleIDList?: string[];
+  /** 生效范围默认值：不传则不修改 */
+  EffectScope?: TrafficSandboxEffectScope;
+  /** 规则动作(RuleAction)枚举值：PASS：加白BLOCK：拦截并告警MONITOR：告警默认值：不传则不修改 */
+  RuleAction?: string;
+  /** 目标状态枚举值：ON：启用OFF：禁用默认值：不传则不修改 */
+  Status?: string;
+}
+
+declare interface ModifySandboxLLMAuditRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySandboxLLMAuditRuleStatusRequest {
   /** 规则 ID 列表入参限制：非空，长度 1-100 */
   IDList: number[];
@@ -25227,6 +26187,22 @@ declare interface ModifySecurityScoreRuleRequest {
 declare interface ModifySecurityScoreRuleResponse {
   /** 修改后的完整规则列表 */
   Rules?: ScoreRuleItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyShareUserAKRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 增加监测账号 */
+  SharedAppIDList?: number[];
+}
+
+declare interface ModifyShareUserAKResponse {
+  /** 0-成功，1-失败 */
+  Result?: number;
+  /** 成功或失败信息 */
+  Msg?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -25897,6 +26873,18 @@ declare interface UninstallClusterAgentResponse {
   RequestId?: string;
 }
 
+declare interface UninstallKeySandboxSkillRequest {
+  /** 机器实例ID列表入参限制：最多一次操作100个 */
+  InstanceIdList: string[];
+  /** 集团账号的成员ID */
+  MemberId?: string[];
+}
+
+declare interface UninstallKeySandboxSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateAccessKeyAlarmStatusRequest {
   /** 状态 0:未处理 1:已处理 2:已忽略 */
   Status: number;
@@ -26154,6 +27142,8 @@ declare interface Csip {
   CreateExposuresExportJob(data?: CreateExposuresExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExposuresExportJobResponse>;
   /** 创建高危基线风险列表导出任务 {@link CreateHighBaseLineRisksExportJobRequest} {@link CreateHighBaseLineRisksExportJobResponse} */
   CreateHighBaseLineRisksExportJob(data: CreateHighBaseLineRisksExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHighBaseLineRisksExportJobResponse>;
+  /** 创建主机镜像列表导出任务 {@link CreateHostImageListExportJobRequest} {@link CreateHostImageListExportJobResponse} */
+  CreateHostImageListExportJob(data: CreateHostImageListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostImageListExportJobResponse>;
   /** 创建主机漏洞列表导出任务 {@link CreateHostVulExportJobRequest} {@link CreateHostVulExportJobResponse} */
   CreateHostVulExportJob(data: CreateHostVulExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostVulExportJobResponse>;
   /** 创建IaC检测接入Token {@link CreateIaCAccessTokenRequest} {@link CreateIaCAccessTokenResponse} */
@@ -26204,6 +27194,14 @@ declare interface Csip {
   CreateRiskCenterScanTask(data: CreateRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskCenterScanTaskResponse>;
   /** 创建云资源配置风险详情导出任务 {@link CreateRiskDetailExportJobRequest} {@link CreateRiskDetailExportJobResponse} */
   CreateRiskDetailExportJob(data: CreateRiskDetailExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskDetailExportJobResponse>;
+  /** 创建 ACL 规则 {@link CreateSandboxACLRuleRequest} {@link CreateSandboxACLRuleResponse} */
+  CreateSandboxACLRule(data: CreateSandboxACLRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxACLRuleResponse>;
+  /** 创建 DLP 规则 {@link CreateSandboxDLPRuleRequest} {@link CreateSandboxDLPRuleResponse} */
+  CreateSandboxDLPRule(data: CreateSandboxDLPRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxDLPRuleResponse>;
+  /** 创建命令沙箱文件访问规则 {@link CreateSandboxFileRuleRequest} {@link CreateSandboxFileRuleResponse} */
+  CreateSandboxFileRule(data?: CreateSandboxFileRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxFileRuleResponse>;
+  /** 创建 LLM 审计规则 {@link CreateSandboxLLMAuditRuleRequest} {@link CreateSandboxLLMAuditRuleResponse} */
+  CreateSandboxLLMAuditRule(data: CreateSandboxLLMAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxLLMAuditRuleResponse>;
   /** 创建暴露面扫描结果导出任务 {@link CreateScanStatisticExportJobRequest} {@link CreateScanStatisticExportJobResponse} */
   CreateScanStatisticExportJob(data?: CreateScanStatisticExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanStatisticExportJobResponse>;
   /** 创建立即检测任务 {@link CreateScanTaskRequest} {@link CreateScanTaskResponse} */
@@ -26306,6 +27304,12 @@ declare interface Csip {
   DeleteMachineClearHistory(data: DeleteMachineClearHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMachineClearHistoryResponse>;
   /** 删除风险中心扫描任务 {@link DeleteRiskScanTaskRequest} {@link DeleteRiskScanTaskResponse} */
   DeleteRiskScanTask(data: DeleteRiskScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRiskScanTaskResponse>;
+  /** 删除 ACL 规则 {@link DeleteSandboxACLRuleRequest} {@link DeleteSandboxACLRuleResponse} */
+  DeleteSandboxACLRule(data: DeleteSandboxACLRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxACLRuleResponse>;
+  /** 删除 DLP 规则 {@link DeleteSandboxDLPRuleRequest} {@link DeleteSandboxDLPRuleResponse} */
+  DeleteSandboxDLPRule(data: DeleteSandboxDLPRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxDLPRuleResponse>;
+  /** 批量删除命令沙箱文件访问规则 {@link DeleteSandboxFileRuleRequest} {@link DeleteSandboxFileRuleResponse} */
+  DeleteSandboxFileRule(data?: DeleteSandboxFileRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxFileRuleResponse>;
   /** 删除 LLM 审计规则 {@link DeleteSandboxLLMAuditRuleRequest} {@link DeleteSandboxLLMAuditRuleResponse} */
   DeleteSandboxLLMAuditRule(data: DeleteSandboxLLMAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxLLMAuditRuleResponse>;
   /** 删除漏洞白名单 {@link DeleteVulWhitelistRequest} {@link DeleteVulWhitelistResponse} */
@@ -26364,6 +27368,8 @@ declare interface Csip {
   DescribeAccessKeyUserDetail(data: DescribeAccessKeyUserDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyUserDetailResponse>;
   /** 获取访问密钥的账号列表 {@link DescribeAccessKeyUserListRequest} {@link DescribeAccessKeyUserListResponse} */
   DescribeAccessKeyUserList(data?: DescribeAccessKeyUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyUserListResponse>;
+  /** 获取访问密钥告警白名单 {@link DescribeAccessKeyWhiteListRequest} {@link DescribeAccessKeyWhiteListResponse} */
+  DescribeAccessKeyWhiteList(data?: DescribeAccessKeyWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessKeyWhiteListResponse>;
   /** 查询客户端配置的设置 {@link DescribeAgentConfigSettingRequest} {@link DescribeAgentConfigSettingResponse} */
   DescribeAgentConfigSetting(data?: DescribeAgentConfigSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentConfigSettingResponse>;
   /** 查询agent运行配置 {@link DescribeAgentRunModeRequest} {@link DescribeAgentRunModeResponse} */
@@ -26462,6 +27468,8 @@ declare interface Csip {
   DescribeCLSLogIndexV3(data: DescribeCLSLogIndexV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogIndexV3Response>;
   /** 日志分析cls日志检索v3 {@link DescribeCLSLogListV3Request} {@link DescribeCLSLogListV3Response} */
   DescribeCLSLogListV3(data: DescribeCLSLogListV3Request, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSLogListV3Response>;
+  /** 查询合并版计费信息 {@link DescribeCSCPayInfoRequest} {@link DescribeCSCPayInfoResponse} */
+  DescribeCSCPayInfo(data?: DescribeCSCPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSCPayInfoResponse>;
   /** 查询绑定任务进度 {@link DescribeCSIPLicenseBindScheduleRequest} {@link DescribeCSIPLicenseBindScheduleResponse} */
   DescribeCSIPLicenseBindSchedule(data: DescribeCSIPLicenseBindScheduleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPLicenseBindScheduleResponse>;
   /** CSIP 扫描任务主机详情接口 {@link DescribeCSIPMalwareScanTaskDetailRequest} {@link DescribeCSIPMalwareScanTaskDetailResponse} */
@@ -26470,6 +27478,8 @@ declare interface Csip {
   DescribeCSIPMalwareScanTaskProgress(data?: DescribeCSIPMalwareScanTaskProgressRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPMalwareScanTaskProgressResponse>;
   /** 资产风险概览统计接口 {@link DescribeCSIPRiskStatisticsRequest} {@link DescribeCSIPRiskStatisticsResponse} */
   DescribeCSIPRiskStatistics(data?: DescribeCSIPRiskStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSIPRiskStatisticsResponse>;
+  /** 获取已购CSPM订单的信息 {@link DescribeCSPMPayInfoRequest} {@link DescribeCSPMPayInfoResponse} */
+  DescribeCSPMPayInfo(data?: DescribeCSPMPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSPMPayInfoResponse>;
   /** cvm详情 {@link DescribeCVMAssetInfoRequest} {@link DescribeCVMAssetInfoResponse} */
   DescribeCVMAssetInfo(data: DescribeCVMAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCVMAssetInfoResponse>;
   /** cvm列表 {@link DescribeCVMAssetsRequest} {@link DescribeCVMAssetsResponse} */
@@ -27026,10 +28036,20 @@ declare interface Csip {
   DescribeSandboxACLRuleList(data?: DescribeSandboxACLRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxACLRuleListResponse>;
   /** 查询 ACL 系统规则列表 {@link DescribeSandboxACLSystemRuleListRequest} {@link DescribeSandboxACLSystemRuleListResponse} */
   DescribeSandboxACLSystemRuleList(data?: DescribeSandboxACLSystemRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxACLSystemRuleListResponse>;
+  /** 查询 DLP 告警列表 {@link DescribeSandboxDLPAlertListRequest} {@link DescribeSandboxDLPAlertListResponse} */
+  DescribeSandboxDLPAlertList(data?: DescribeSandboxDLPAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxDLPAlertListResponse>;
+  /** 查询用户 DLP 规则列表 {@link DescribeSandboxDLPRuleListRequest} {@link DescribeSandboxDLPRuleListResponse} */
+  DescribeSandboxDLPRuleList(data?: DescribeSandboxDLPRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxDLPRuleListResponse>;
   /** 查询 DLP 系统规则列表 {@link DescribeSandboxDLPSystemRuleListRequest} {@link DescribeSandboxDLPSystemRuleListResponse} */
   DescribeSandboxDLPSystemRuleList(data?: DescribeSandboxDLPSystemRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxDLPSystemRuleListResponse>;
   /** 获取命令沙箱文件访问规则列表 {@link DescribeSandboxFileRuleListRequest} {@link DescribeSandboxFileRuleListResponse} */
   DescribeSandboxFileRuleList(data?: DescribeSandboxFileRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxFileRuleListResponse>;
+  /** 查询 LLM 审计告警列表 {@link DescribeSandboxLLMAuditAlertListRequest} {@link DescribeSandboxLLMAuditAlertListResponse} */
+  DescribeSandboxLLMAuditAlertList(data?: DescribeSandboxLLMAuditAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxLLMAuditAlertListResponse>;
+  /** 查询 LLM 审计规则列表 {@link DescribeSandboxLLMAuditRuleListRequest} {@link DescribeSandboxLLMAuditRuleListResponse} */
+  DescribeSandboxLLMAuditRuleList(data?: DescribeSandboxLLMAuditRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxLLMAuditRuleListResponse>;
+  /** 查询 LLM 审计系统规则列表 {@link DescribeSandboxLLMAuditSystemRuleListRequest} {@link DescribeSandboxLLMAuditSystemRuleListResponse} */
+  DescribeSandboxLLMAuditSystemRuleList(data?: DescribeSandboxLLMAuditSystemRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxLLMAuditSystemRuleListResponse>;
   /** 获取扫描报告列表 {@link DescribeScanReportListRequest} {@link DescribeScanReportListResponse} */
   DescribeScanReportList(data?: DescribeScanReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScanReportListResponse>;
   /** 查询云边界分析扫描结果统计信息 {@link DescribeScanStatisticRequest} {@link DescribeScanStatisticResponse} */
@@ -27060,6 +28080,8 @@ declare interface Csip {
   DescribeSkillScanResult(data: DescribeSkillScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanResultResponse>;
   /** 获取访问密钥资产（源IP视角） {@link DescribeSourceIPAssetRequest} {@link DescribeSourceIPAssetResponse} */
   DescribeSourceIPAsset(data?: DescribeSourceIPAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIPAssetResponse>;
+  /** 获取访问密钥资产详情（源IP视角） {@link DescribeSourceIPDetailRequest} {@link DescribeSourceIPDetailResponse} */
+  DescribeSourceIPDetail(data: DescribeSourceIPDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIPDetailResponse>;
   /** 查询集团的子账号列表 {@link DescribeSubUserInfoRequest} {@link DescribeSubUserInfoResponse} */
   DescribeSubUserInfo(data?: DescribeSubUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubUserInfoResponse>;
   /** 子网列表 {@link DescribeSubnetAssetsRequest} {@link DescribeSubnetAssetsResponse} */
@@ -27082,6 +28104,8 @@ declare interface Csip {
   DescribeUebaRule(data?: DescribeUebaRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaRuleResponse>;
   /** 获取用户行为分析的用户概览 {@link DescribeUebaUserSummaryRequest} {@link DescribeUebaUserSummaryResponse} */
   DescribeUebaUserSummary(data?: DescribeUebaUserSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUebaUserSummaryResponse>;
+  /** 获取用户AK信息列表 {@link DescribeUserAKInfoListRequest} {@link DescribeUserAKInfoListResponse} */
+  DescribeUserAKInfoList(data?: DescribeUserAKInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAKInfoListResponse>;
   /** 获取用户CSPM配额信息 {@link DescribeUserCSPMInfoListRequest} {@link DescribeUserCSPMInfoListResponse} */
   DescribeUserCSPMInfoList(data?: DescribeUserCSPMInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserCSPMInfoListResponse>;
   /** 获取账号的调用记录 {@link DescribeUserCallRecordRequest} {@link DescribeUserCallRecordResponse} */
@@ -27098,6 +28122,8 @@ declare interface Csip {
   DescribeVULRiskDetail(data?: DescribeVULRiskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVULRiskDetailResponse>;
   /** 获取病毒库及POC的更新信息 {@link DescribeVdbAndPocInfoRequest} {@link DescribeVdbAndPocInfoResponse} */
   DescribeVdbAndPocInfo(data?: DescribeVdbAndPocInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVdbAndPocInfoResponse>;
+  /** 检查代金券领取资格 {@link DescribeVoucherEligibilityRequest} {@link DescribeVoucherEligibilityResponse} */
+  DescribeVoucherEligibility(data: DescribeVoucherEligibilityRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherEligibilityResponse>;
   /** vpc列表 {@link DescribeVpcAssetsRequest} {@link DescribeVpcAssetsResponse} */
   DescribeVpcAssets(data?: DescribeVpcAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcAssetsResponse>;
   /** 获取漏洞组件关联主机 {@link DescribeVulComponentRelateHostRequest} {@link DescribeVulComponentRelateHostResponse} */
@@ -27154,6 +28180,10 @@ declare interface Csip {
   ExportTasks(data: ExportTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ExportTasksResponse>;
   /** 安装集群容器安全Agent {@link InstallClusterAgentRequest} {@link InstallClusterAgentResponse} */
   InstallClusterAgent(data: InstallClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<InstallClusterAgentResponse>;
+  /** 安装密钥沙箱SKILL {@link InstallKeySandboxSkillRequest} {@link InstallKeySandboxSkillResponse} */
+  InstallKeySandboxSkill(data: InstallKeySandboxSkillRequest, config?: AxiosRequestConfig): AxiosPromise<InstallKeySandboxSkillResponse>;
+  /** 安装流量沙箱插件 {@link InstallSandboxPluginRequest} {@link InstallSandboxPluginResponse} */
+  InstallSandboxPlugin(data: InstallSandboxPluginRequest, config?: AxiosRequestConfig): AxiosPromise<InstallSandboxPluginResponse>;
   /** 修改AI-Link智链引擎配置 {@link ModifyAILinkSettingRequest} {@link ModifyAILinkSettingResponse} */
   ModifyAILinkSetting(data: ModifyAILinkSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAILinkSettingResponse>;
   /** 修改AI 定时任务 {@link ModifyAIScheduleRequest} {@link ModifyAIScheduleResponse} */
@@ -27200,6 +28230,8 @@ declare interface Csip {
   ModifyCSIPRaspLicenseBinds(data: ModifyCSIPRaspLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPRaspLicenseBindsResponse>;
   /** 解绑RASP授权 {@link ModifyCSIPRaspLicenseUnBindsRequest} {@link ModifyCSIPRaspLicenseUnBindsResponse} */
   ModifyCSIPRaspLicenseUnBinds(data?: ModifyCSIPRaspLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPRaspLicenseUnBindsResponse>;
+  /** 修改集群防护状态 {@link ModifyClusterDefendStatusRequest} {@link ModifyClusterDefendStatusResponse} */
+  ModifyClusterDefendStatus(data: ModifyClusterDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDefendStatusResponse>;
   /** 修改存储桶监测状态 {@link ModifyCosAuditBucketMonitorStatusRequest} {@link ModifyCosAuditBucketMonitorStatusResponse} */
   ModifyCosAuditBucketMonitorStatus(data: ModifyCosAuditBucketMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditBucketMonitorStatusResponse>;
   /** 修改cos审计监测账号 {@link ModifyCosAuditMonitorAccountRequest} {@link ModifyCosAuditMonitorAccountResponse} */
@@ -27207,7 +28239,7 @@ declare interface Csip {
   /** 修改cos对象存储识别状态 {@link ModifyCosAuditObjectIdentifyStatusRequest} {@link ModifyCosAuditObjectIdentifyStatusResponse} */
   ModifyCosAuditObjectIdentifyStatus(data: ModifyCosAuditObjectIdentifyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditObjectIdentifyStatusResponse>;
   /** 设置对象存储内容识别采样率 {@link ModifyCosAuditObjectSampleRateRequest} {@link ModifyCosAuditObjectSampleRateResponse} */
-  ModifyCosAuditObjectSampleRate(data: ModifyCosAuditObjectSampleRateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditObjectSampleRateResponse>;
+  ModifyCosAuditObjectSampleRate(data?: ModifyCosAuditObjectSampleRateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosAuditObjectSampleRateResponse>;
   /** 修改对象存储备注信息 {@link ModifyCosMarkInfoRequest} {@link ModifyCosMarkInfoResponse} */
   ModifyCosMarkInfo(data: ModifyCosMarkInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCosMarkInfoResponse>;
   /** 更新CSPM自动配额管理者共享开关 {@link ModifyCspmShardConfigRequest} {@link ModifyCspmShardConfigResponse} */
@@ -27352,10 +28384,28 @@ declare interface Csip {
   ModifyRiskCenterScanTask(data: ModifyRiskCenterScanTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskCenterScanTaskResponse>;
   /** 更新用户周期检测计划 {@link ModifyRiskScanCronConfigRequest} {@link ModifyRiskScanCronConfigResponse} */
   ModifyRiskScanCronConfig(data?: ModifyRiskScanCronConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRiskScanCronConfigResponse>;
+  /** 修改 ACL 规则 {@link ModifySandboxACLRuleRequest} {@link ModifySandboxACLRuleResponse} */
+  ModifySandboxACLRule(data: ModifySandboxACLRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxACLRuleResponse>;
+  /** 批量启用或禁用 ACL 规则 {@link ModifySandboxACLRuleStatusRequest} {@link ModifySandboxACLRuleStatusResponse} */
+  ModifySandboxACLRuleStatus(data: ModifySandboxACLRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxACLRuleStatusResponse>;
+  /** 批量更新告警处理状态 {@link ModifySandboxAlertStatusRequest} {@link ModifySandboxAlertStatusResponse} */
+  ModifySandboxAlertStatus(data: ModifySandboxAlertStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxAlertStatusResponse>;
+  /** 修改 DLP 规则 {@link ModifySandboxDLPRuleRequest} {@link ModifySandboxDLPRuleResponse} */
+  ModifySandboxDLPRule(data: ModifySandboxDLPRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxDLPRuleResponse>;
+  /** 批量启用或禁用 DLP 规则 {@link ModifySandboxDLPRuleStatusRequest} {@link ModifySandboxDLPRuleStatusResponse} */
+  ModifySandboxDLPRuleStatus(data: ModifySandboxDLPRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxDLPRuleStatusResponse>;
+  /** 修改命令沙箱文件访问规则 {@link ModifySandboxFileRuleRequest} {@link ModifySandboxFileRuleResponse} */
+  ModifySandboxFileRule(data?: ModifySandboxFileRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxFileRuleResponse>;
+  /** 批量启用或禁用命令沙箱文件访问规则 {@link ModifySandboxFileRuleStatusRequest} {@link ModifySandboxFileRuleStatusResponse} */
+  ModifySandboxFileRuleStatus(data: ModifySandboxFileRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxFileRuleStatusResponse>;
+  /** 修改 LLM 审计规则 {@link ModifySandboxLLMAuditRuleRequest} {@link ModifySandboxLLMAuditRuleResponse} */
+  ModifySandboxLLMAuditRule(data: ModifySandboxLLMAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxLLMAuditRuleResponse>;
   /** 批量启用或禁用 LLM 审计规则 {@link ModifySandboxLLMAuditRuleStatusRequest} {@link ModifySandboxLLMAuditRuleStatusResponse} */
   ModifySandboxLLMAuditRuleStatus(data: ModifySandboxLLMAuditRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySandboxLLMAuditRuleStatusResponse>;
   /** 修改安全评分规则 {@link ModifySecurityScoreRuleRequest} {@link ModifySecurityScoreRuleResponse} */
   ModifySecurityScoreRule(data: ModifySecurityScoreRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySecurityScoreRuleResponse>;
+  /** 修改ak监测账号 {@link ModifyShareUserAKRequest} {@link ModifyShareUserAKResponse} */
+  ModifyShareUserAK(data?: ModifyShareUserAKRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShareUserAKResponse>;
   /** 更新CSPM共享配额 {@link ModifyShareUserCSPMRequest} {@link ModifyShareUserCSPMResponse} */
   ModifyShareUserCSPM(data?: ModifyShareUserCSPMRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyShareUserCSPMResponse>;
   /** 修改dspm监测账号 {@link ModifyShareUserDspmRequest} {@link ModifyShareUserDspmResponse} */
@@ -27432,6 +28482,8 @@ declare interface Csip {
   TestWebhookReceiver(data: TestWebhookReceiverRequest, config?: AxiosRequestConfig): AxiosPromise<TestWebhookReceiverResponse>;
   /** 卸载集群容器安全Agent {@link UninstallClusterAgentRequest} {@link UninstallClusterAgentResponse} */
   UninstallClusterAgent(data: UninstallClusterAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallClusterAgentResponse>;
+  /** 卸载密钥沙箱SKILL {@link UninstallKeySandboxSkillRequest} {@link UninstallKeySandboxSkillResponse} */
+  UninstallKeySandboxSkill(data: UninstallKeySandboxSkillRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallKeySandboxSkillResponse>;
   /** 修改告警或者风险状态 {@link UpdateAccessKeyAlarmStatusRequest} {@link UpdateAccessKeyAlarmStatusResponse} */
   UpdateAccessKeyAlarmStatus(data: UpdateAccessKeyAlarmStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAccessKeyAlarmStatusResponse>;
   /** 编辑访问密钥备注 {@link UpdateAccessKeyRemarkRequest} {@link UpdateAccessKeyRemarkResponse} */
