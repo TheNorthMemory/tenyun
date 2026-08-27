@@ -304,6 +304,10 @@ declare interface MQTTEndpointItem {
   Port?: number;
   /** 接入点ip */
   Ip?: string;
+  /** 端口是否打开 */
+  PortEnable?: boolean;
+  /** vpce唯一id */
+  VpcEndpointId?: string;
 }
 
 /** MQTT 实例信息 */

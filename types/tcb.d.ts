@@ -568,6 +568,58 @@ declare interface GatewayVersionItem {
   CustomConfig?: WxGatewayCustomConfig;
 }
 
+/** HTTPService缓存动作（Type + 具体子字段的标签联合，Type 与被设置的子字段必须一一对应） */
+declare interface HTTPServiceCacheAction {
+  /** HTTPService 缓存动作类型枚举值：Cache： 节点缓存 + 浏览器缓存统一动作（节点秒数 CacheTime、浏览器秒数 MaxAgeTime）CacheKey： 仅开启EO边缘加速通道下发 */
+  Type?: string;
+  /** 节点缓存配置。Type=Cache 时必填 */
+  Cache?: HTTPServiceCacheParams;
+  /** 自定义缓存键。Type=CacheKey 时必填 */
+  CacheKey?: HTTPServiceCacheKeyParams;
+}
+
+/** 自定义缓存键参数。约束：FullURLCache=on 与 QueryStringSwitch=on 互斥使用示例：- 整 URL 参与缓存键：{FullURLCache: "on", QueryStringSwitch: "off"}- URL 路径 + 仅保留 x/y：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "includeCustom", QueryStringValues: ["x", "y"]}- URL 路径 + 忽略 debug：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "excludeCustom", QueryStringValues: ["debug"]} */
+declare interface HTTPServiceCacheKeyParams {
+  /** 全 URL 缓存开关枚举值：on： 开启off： 关闭 */
+  FullURLCache?: string;
+  /** 查询参数是否参与缓存键枚举值：on： 开启off： 关闭 */
+  QueryStringSwitch?: string;
+  /** QueryStringSwitch=on 时必填枚举值：includeCustom： 白名单excludeCustom： 黑名单 */
+  QueryStringAction?: string;
+  /** 参数名列表入参限制：最多 100 项，单项 1~128 字节 */
+  QueryStringValues?: string[];
+}
+
+/** HTTPService 缓存参数（节点缓存 + 浏览器缓存共用行为模式）。FollowOrigin / NoCache / (CacheTime||MaxAgeTime) 三者互斥，必须开启其一：- FollowOrigin=true：节点与浏览器缓存均遵循源站；- NoCache=true：节点与浏览器缓存均不缓存（Cache-Control: no-cache）；- CacheTime>0 或 MaxAgeTime>0：至少设置其一，分别控制节点、浏览器缓存秒数，可独立设置。 */
+declare interface HTTPServiceCacheParams {
+  /** 遵循源站 */
+  FollowOrigin?: boolean;
+  /** 不缓存 */
+  NoCache?: boolean;
+  /** 自定义缓存时间（秒）取值范围：[0, 31536000]单位：秒 */
+  CacheTime?: number;
+  /** 浏览器缓存秒数（对应 max-age）取值范围：[0, 31536000]单位：秒 */
+  MaxAgeTime?: number;
+}
+
+/** HTTPService 缓存规则条目 */
+declare interface HTTPServiceCacheRule {
+  /** 自定义描述，最多 128 字节 */
+  Description?: string;
+  /** 规则开关：nil/true 启用，false 禁用 */
+  Enable?: boolean;
+  /** HTTPService 规则匹配条件（必填） */
+  Condition?: HTTPServiceRuleCondition;
+  /** HTTPService 缓存动作列表，同一规则内相同 Type 至多一个 */
+  Actions?: HTTPServiceCacheAction[];
+}
+
+/** HTTPService 缓存配置（域名维度） */
+declare interface HTTPServiceCacheSet {
+  /** HTTPService 缓存配置列表。Rules 按数组顺序为优先级顺序，Rules[n-1] 优先级最高 */
+  Rules?: HTTPServiceCacheRule[];
+}
+
 /** 查询HTTP访问服务输出的域名信息，每个域名内包含所有路由信息 */
 declare interface HTTPServiceDomain {
   /** 域名 */
@@ -622,10 +674,12 @@ declare interface HTTPServiceDomainParam {
   Extension?: HTTPServiceExtension;
 }
 
-/** HTTP访问服务路由扩展字段 */
+/** HTTPService 路由扩展字段 */
 declare interface HTTPServiceExtension {
   /** 添加请求头列表 */
   HeadersHandler?: HTTPServiceHeadersHandler;
+  /** HTTPService 缓存配置，包含Cache 节点缓存 / MaxAge 浏览器缓存 / CacheKey 自定义缓存键 */
+  Cache?: HTTPServiceCacheSet;
 }
 
 /** HTTP访问服务路由添加header */
@@ -722,6 +776,16 @@ declare interface HTTPServiceRouteQPSPolicy {
   QPSTotal?: number;
   /** 客户端限频配置 */
   QPSPerClient?: HTTPServiceQPSPerClient;
+}
+
+/** HTTPService缓存规则匹配条件（必填） */
+declare interface HTTPServiceRuleCondition {
+  /** Target 匹配对象枚举值：url_path： 请求 URI 路径（不含查询串），例：/static/logo.jpgfile_extension： 请求文件扩展名（EO 从 path 中解析），例：jpgfull_uri： 完整 URI（路径 + 查询串），例：/download?type=hd */
+  Target?: string;
+  /** MatchType 字符串匹配类型枚举值：prefix： 前缀匹配suffix： 后缀匹配contains： 包含匹配exact： 精确匹配 */
+  MatchType?: string;
+  /** Values 匹配值集合，Values 内任一命中即认为条件成立（OR 语义）入参限制：单项 1~1024 字节，最多 100 条 */
+  Values?: string[];
 }
 
 /** 扩缩容策略 */

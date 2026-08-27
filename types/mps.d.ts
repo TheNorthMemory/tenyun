@@ -8660,6 +8660,32 @@ declare interface BatchStopStreamLinkFlowResponse {
   RequestId?: string;
 }
 
+declare interface ChangeVoiceRequest {
+  /** 待转换音频base64编码 */
+  AudioData?: string;
+  /** 待转换音频Url，AudioData为空时有效 */
+  AudioUrl?: string;
+  /** 音色ID */
+  VoiceId?: string;
+  /** 输出相关参数 */
+  Output?: SyncDubbingOutputOption;
+  /** 扩展参数，json字符串 */
+  ExtParam?: string;
+}
+
+declare interface ChangeVoiceResponse {
+  /** 错误码，成功时返回0 */
+  ErrorCode?: number;
+  /** 错误信息，成功时返回success */
+  Msg?: string;
+  /** 结果音频的base64编码，默认mp3格式 */
+  AudioData?: string;
+  /** 结果音频url，有效期24小时 */
+  AudioUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloneViralRequest {
   /** 爆款视频Url */
   VideoUrl: string;
@@ -12949,6 +12975,8 @@ declare interface Mps {
   BatchStartStreamLinkFlow(data: BatchStartStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStartStreamLinkFlowResponse>;
   /** 批量停止媒体传输流 {@link BatchStopStreamLinkFlowRequest} {@link BatchStopStreamLinkFlowResponse} */
   BatchStopStreamLinkFlow(data: BatchStopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<BatchStopStreamLinkFlowResponse>;
+  /** 同步音色转换 {@link ChangeVoiceRequest} {@link ChangeVoiceResponse} */
+  ChangeVoice(data?: ChangeVoiceRequest, config?: AxiosRequestConfig): AxiosPromise<ChangeVoiceResponse>;
   /** 爆款复刻 {@link CloneViralRequest} {@link CloneViralResponse} */
   CloneViral(data: CloneViralRequest, config?: AxiosRequestConfig): AxiosPromise<CloneViralResponse>;
   /** 音色克隆 {@link CloneVoiceRequest} {@link CloneVoiceResponse} */

@@ -453,6 +453,14 @@ declare interface CreateDataRepositoryTaskRequest {
   EnableCustomDestPath?: boolean;
   /** 自定义目的路径（预热任务表示本地路径，沉降任务表示COS桶前缀） */
   CustomDestPath?: string;
+  /** 输出的COS桶，用于存放任务执行的相关结果（当前用于存放任务失败时的失败文件列表） */
+  OutputBucket?: string;
+  /** 输出的COS桶的前缀，用于存放任务执行的相关结果（当前用于存放任务失败时的失败文件列表） */
+  OutputPrefix?: string;
+  /** 是否支持自定义数据源路径(暂时仅支持清单过滤使用) */
+  EnableCustomSrcPath?: boolean;
+  /** 自定义数据源路径(暂时仅支持清单过滤使用) */
+  CustomSrcPath?: string;
 }
 
 declare interface CreateDataRepositoryTaskResponse {

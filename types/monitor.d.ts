@@ -194,6 +194,46 @@ declare interface DingDingRobotNoticeTmplMatcher {
   Template: DingDingRobotNoticeTmpl;
 }
 
+/** 转发过滤条件信息 */
+declare interface DispenseCondition {
+  /** 对外指标名 */
+  ExtMetric?: string;
+  /** 过滤条件表 */
+  DispenseFilters?: DispenseFilter[];
+  /** 过滤条件id */
+  ConditionId?: number;
+}
+
+/** 过滤表 */
+declare interface DispenseFilter {
+  /** 维度名称 */
+  Key?: string;
+  /** 维度值列表 */
+  Values?: string[];
+  /** 表示式 */
+  Expression?: string;
+}
+
+/** 全局维度 */
+declare interface DispenseGlobalTag {
+  /** 维度key */
+  Key?: string;
+  /** 维度值 */
+  Value?: string;
+}
+
+/** 转发地域信息 */
+declare interface DispenseRegion {
+  /** 地域缩写 */
+  Region?: string;
+  /** 地域中文名 */
+  RegionCnName?: string;
+  /** 地域英文名 */
+  RegionEnName?: string;
+  /** 规则数量 */
+  RuleNumber?: number;
+}
+
 /** 环境变量entry */
 declare interface EnvEntry {
   /** 环境变量value */
@@ -230,6 +270,22 @@ declare interface ExecutionInfo {
   Summary?: string | null;
   /** 执行耗时(毫秒) */
   DurationMs?: number | null;
+}
+
+/** 对外指标 */
+declare interface ExtMetric {
+  /** 指标名 */
+  MetricName?: string | null;
+  /** 中文指标名 */
+  MetricCName?: string | null;
+  /** 中文含义 */
+  CNMeaning?: string | null;
+  /** 英文含义 */
+  EnMeaning?: string | null;
+  /** 单位 */
+  Unit?: string | null;
+  /** 是否配置对外维度 */
+  DimensionFlag?: boolean;
 }
 
 /** 飞书机器人内容模板配置 */
@@ -274,6 +330,14 @@ declare interface InstructionConfig {
   Vibe?: string;
   /** 注意事项 */
   Boundaries?: string;
+}
+
+/** kafka连通性 */
+declare interface KafkaConnectivity {
+  /** 地域 */
+  Region?: string;
+  /** 连通 */
+  Result?: boolean;
 }
 
 /** MCP 实体 */
@@ -446,6 +510,28 @@ declare interface PagerDutyRobotNoticeTmplMatcher {
   Template?: PagerDutyRobotNoticeTmpl;
 }
 
+/** 转发目标对象信息 */
+declare interface Producer {
+  /** 转发协议类型，0-stormRetPb, 1-tcbDispensePb, 2-stormRetJson, 3-ADPPb(废弃)，4-中台pb */
+  ProtocolType: number | null;
+  /** 目标类型 */
+  Type: string | null;
+  /** 转发kafka地址 */
+  Brokers: string | null;
+  /** 转发kafka topic */
+  Topic: string | null;
+  /** 是否合并指标,默认是1，合并 */
+  Merge?: number;
+  /** 全局维度组 */
+  GlobalTags?: DispenseGlobalTag[];
+  /** 默认维度组，只提供维度即可 */
+  DefaultTags?: string[];
+  /** Kafka用户名 */
+  Username?: string;
+  /** Kafka密码 */
+  Password?: string;
+}
+
 /** 官网通知内容模板 */
 declare interface QCloudYeheNoticeTmpl {
   /** 邮件通知渠道 */
@@ -514,6 +600,30 @@ declare interface ResourceMapInfo {
   Description?: string | null;
   /** 总实例数 */
   InstanceCount?: number | null;
+}
+
+/** 转发规则 */
+declare interface Rule {
+  /** 规则Id */
+  RuleId?: number;
+  /** 规则名称 */
+  Name?: string;
+  /** 对外namespace */
+  ExtNamespace?: string;
+  /** 对外指标列表 */
+  ExtMetric?: ExtMetric[];
+  /** 输出信息 */
+  Producer?: Producer;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 规则触发状态 */
+  Status?: number;
+  /** 指标粒度周期 */
+  Period?: number[] | null;
+  /** 转发过滤条件 */
+  DispenseConditions?: DispenseCondition[] | null;
+  /** 转发地域列表 */
+  DispenseRegions?: string[];
 }
 
 /** 会话实体 */
@@ -756,6 +866,30 @@ declare interface CreateAIWorkbenchTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateDispenseExternalRuleRequest {
+  /** 规则名称 */
+  Name: string;
+  /** 云监控对外命名空间 */
+  ExtNamespace: string;
+  /** 转发目标消信息 */
+  Producer: Producer;
+  /** 转发部署地域列表 */
+  DispenseRegions?: string[];
+  /** 云监控对外指标 */
+  ExtMetrics?: string[];
+  /** 指标统计周期 */
+  Period?: number[];
+  /** 转发过滤条件信息 */
+  DispenseConditions?: DispenseCondition[];
+}
+
+declare interface CreateDispenseExternalRuleResponse {
+  /** 转发规则Id */
+  RuleId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateNoticeContentTmplRequest {
   /** 模板名称 */
   TmplName: string;
@@ -790,6 +924,16 @@ declare interface DeleteAIWorkbenchTaskRequest {
 }
 
 declare interface DeleteAIWorkbenchTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDispenseExternalRuleRequest {
+  /** 需要删除的规则Id */
+  RuleIdList: number[];
+}
+
+declare interface DeleteDispenseExternalRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -942,6 +1086,84 @@ declare interface DescribeAlarmNotifyHistoriesResponse {
   AlarmNotifyHistoryList?: AlarmNotifyHistory[];
   /** 分页情况 */
   PageResult?: PageByNoResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDispenseExternalRuleListRequest {
+  /** 页数 */
+  Page: number;
+  /** 页面大小 */
+  PageSize: number;
+  /** 转发部署地域 */
+  DispenseRegions?: string[];
+  /** 关键字搜索规则名 */
+  Keyword?: string;
+}
+
+declare interface DescribeDispenseExternalRuleListResponse {
+  /** 指标列表 */
+  RuleList?: Rule[] | null;
+  /** 列表大小 */
+  TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDispenseExternalRuleRequest {
+  /** 规则id */
+  RuleId: number;
+}
+
+declare interface DescribeDispenseExternalRuleResponse {
+  /** 规则 */
+  Rule?: Rule;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDispenseRegionRequest {
+}
+
+declare interface DescribeDispenseRegionResponse {
+  /** 转发地域列表 */
+  RegionList?: DispenseRegion[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtMetricRequest {
+  /** 对外命名空间 */
+  ExtNamespace: string;
+}
+
+declare interface DescribeExtMetricResponse {
+  /** 对外指标 */
+  ExtMetricList?: ExtMetric[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeExtNamespaceRequest {
+}
+
+declare interface DescribeExtNamespaceResponse {
+  /** 对外命名空间列表 */
+  ExtNamespaceList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKafkaRequest {
+  /** kafka地址 */
+  Brokers: string;
+  /** 转发部署地域列表 */
+  DispenseRegions?: string[];
+}
+
+declare interface DescribeKafkaResponse {
+  /** 连通性列表 */
+  KafkaConnectivityList?: KafkaConnectivity[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1222,6 +1444,42 @@ declare interface ListAIWorkbenchTasksResponse {
   Tasks?: TaskInfo[] | null;
   /** 分页结果 */
   PageResult?: PageByNumResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDispenseExternalRuleRequest {
+  /** 规则名称 */
+  Name: string;
+  /** 云监控对外命名空间 */
+  ExtNamespace: string;
+  /** 转发目标消信息 */
+  Producer: Producer;
+  /** 规则ID */
+  RuleId: number;
+  /** 转发部署地域列表 */
+  DispenseRegions?: string[];
+  /** 云监控对外指标 */
+  ExtMetrics?: string[];
+  /** 指标统计周期 */
+  Period?: number[];
+  /** 转发过滤信息 */
+  DispenseConditions?: DispenseCondition[];
+}
+
+declare interface ModifyDispenseExternalRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDispenseExternalRuleStatusRequest {
+  /** 规则id列表 */
+  RuleIdList: number[];
+  /** 状态 */
+  Status: number;
+}
+
+declare interface ModifyDispenseExternalRuleStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7618,12 +7876,16 @@ declare interface Monitor {
   CreateAIWorkbenchAgent(data?: CreateAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIWorkbenchAgentResponse>;
   /** 创建任务 {@link CreateAIWorkbenchTaskRequest} {@link CreateAIWorkbenchTaskResponse} */
   CreateAIWorkbenchTask(data?: CreateAIWorkbenchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIWorkbenchTaskResponse>;
+  /** 转发规则创建3.0 {@link CreateDispenseExternalRuleRequest} {@link CreateDispenseExternalRuleResponse} */
+  CreateDispenseExternalRule(data: CreateDispenseExternalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDispenseExternalRuleResponse>;
   /** 创建通知内容模板 {@link CreateNoticeContentTmplRequest} {@link CreateNoticeContentTmplResponse} */
   CreateNoticeContentTmpl(data: CreateNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNoticeContentTmplResponse>;
   /** 删除 Agent {@link DeleteAIWorkbenchAgentRequest} {@link DeleteAIWorkbenchAgentResponse} */
   DeleteAIWorkbenchAgent(data?: DeleteAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIWorkbenchAgentResponse>;
   /** 删除任务 {@link DeleteAIWorkbenchTaskRequest} {@link DeleteAIWorkbenchTaskResponse} */
   DeleteAIWorkbenchTask(data?: DeleteAIWorkbenchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIWorkbenchTaskResponse>;
+  /** 转发规则删除3.0 {@link DeleteDispenseExternalRuleRequest} {@link DeleteDispenseExternalRuleResponse} */
+  DeleteDispenseExternalRule(data: DeleteDispenseExternalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDispenseExternalRuleResponse>;
   /** 批量删除通知内容模板 {@link DeleteNoticeContentTmplsRequest} {@link DeleteNoticeContentTmplsResponse} */
   DeleteNoticeContentTmpls(data?: DeleteNoticeContentTmplsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNoticeContentTmplsResponse>;
   /** 查询 Agent 详情 {@link DescribeAIWorkbenchAgentRequest} {@link DescribeAIWorkbenchAgentResponse} */
@@ -7644,6 +7906,18 @@ declare interface Monitor {
   DescribeAIWorkbenchSkill(data?: DescribeAIWorkbenchSkillRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIWorkbenchSkillResponse>;
   /** 查询告警通知历史 {@link DescribeAlarmNotifyHistoriesRequest} {@link DescribeAlarmNotifyHistoriesResponse} */
   DescribeAlarmNotifyHistories(data: DescribeAlarmNotifyHistoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmNotifyHistoriesResponse>;
+  /** 转发规则查询3.0 {@link DescribeDispenseExternalRuleRequest} {@link DescribeDispenseExternalRuleResponse} */
+  DescribeDispenseExternalRule(data: DescribeDispenseExternalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDispenseExternalRuleResponse>;
+  /** 转发规则查询列表3.0 {@link DescribeDispenseExternalRuleListRequest} {@link DescribeDispenseExternalRuleListResponse} */
+  DescribeDispenseExternalRuleList(data: DescribeDispenseExternalRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDispenseExternalRuleListResponse>;
+  /** 查询转发部署地域 {@link DescribeDispenseRegionRequest} {@link DescribeDispenseRegionResponse} */
+  DescribeDispenseRegion(data?: DescribeDispenseRegionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDispenseRegionResponse>;
+  /** 查询对外指标 {@link DescribeExtMetricRequest} {@link DescribeExtMetricResponse} */
+  DescribeExtMetric(data: DescribeExtMetricRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtMetricResponse>;
+  /** 转发查询对外命名空间 {@link DescribeExtNamespaceRequest} {@link DescribeExtNamespaceResponse} */
+  DescribeExtNamespace(data?: DescribeExtNamespaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtNamespaceResponse>;
+  /** 转发kafka连通性查询 {@link DescribeKafkaRequest} {@link DescribeKafkaResponse} */
+  DescribeKafka(data: DescribeKafkaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKafkaResponse>;
   /** 获取通知内容模板 {@link DescribeNoticeContentTmplRequest} {@link DescribeNoticeContentTmplResponse} */
   DescribeNoticeContentTmpl(data: DescribeNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNoticeContentTmplResponse>;
   /** 获取AI工作台制品的下载地址 {@link GetAIWorkbenchArtifactDownloadURLRequest} {@link GetAIWorkbenchArtifactDownloadURLResponse} */
@@ -7668,6 +7942,10 @@ declare interface Monitor {
   ListAIWorkbenchSkills(data?: ListAIWorkbenchSkillsRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchSkillsResponse>;
   /** 查询任务列表 {@link ListAIWorkbenchTasksRequest} {@link ListAIWorkbenchTasksResponse} */
   ListAIWorkbenchTasks(data?: ListAIWorkbenchTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListAIWorkbenchTasksResponse>;
+  /** 转发规则修改3.0 {@link ModifyDispenseExternalRuleRequest} {@link ModifyDispenseExternalRuleResponse} */
+  ModifyDispenseExternalRule(data: ModifyDispenseExternalRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDispenseExternalRuleResponse>;
+  /** 转发规则开启或关闭3.0 {@link ModifyDispenseExternalRuleStatusRequest} {@link ModifyDispenseExternalRuleStatusResponse} */
+  ModifyDispenseExternalRuleStatus(data: ModifyDispenseExternalRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDispenseExternalRuleStatusResponse>;
   /** 修改通知内容模板 {@link ModifyNoticeContentTmplRequest} {@link ModifyNoticeContentTmplResponse} */
   ModifyNoticeContentTmpl(data: ModifyNoticeContentTmplRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNoticeContentTmplResponse>;
   /** 触发AI工作台SRE数字分身任务 {@link TriggerAIWorkbenchSREDigitalTwinTaskRequest} {@link TriggerAIWorkbenchSREDigitalTwinTaskResponse} */

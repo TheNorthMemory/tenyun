@@ -1146,6 +1146,34 @@ declare interface IpStatic {
 
 /** IPS规则展示字段相关结构 */
 declare interface IpsRuleDetailNew {
+  /** 规则ID */
+  RuleID?: string;
+  /** 规则名称 */
+  EventName?: string;
+  /** 规则描述 */
+  EventNameDesc?: string;
+  /** 规则类型 */
+  Category?: string;
+  /** 置信度 */
+  Confidence?: string;
+  /** 自增id */
+  Id?: number;
+  /** 漏洞对象 */
+  VulTarget?: string;
+  /** 漏洞编号 */
+  Cve?: string;
+  /** 状态 0 关闭 1打开 */
+  Status?: number;
+  /** 0观察, 1阻断 */
+  Action?: number;
+  /** 默认策略 */
+  DefaultAction?: number;
+  /** 基础防御/虚拟补丁 */
+  RuleType?: number;
+  /** 危险等级 */
+  Level?: string;
+  /** FwType字段 1 border 2 nat 4 vpc */
+  FwType?: number | null;
 }
 
 /** 日志结果信息 */
@@ -3095,6 +3123,8 @@ declare interface DescribeAddressTemplateListRequest {
   TemplateType?: string;
   /** 模板Id */
   TemplateId?: string;
+  /** 模板来源 */
+  SourceType?: string;
 }
 
 declare interface DescribeAddressTemplateListResponse {
@@ -3114,6 +3144,8 @@ declare interface DescribeAddressTemplateListResponse {
   UsedTemplateCount?: number;
   /** 地址模板配额数量 */
   TemplateQuotaCount?: number;
+  /** 容器服务地址模板数量 */
+  TkeTemplateCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3941,15 +3973,15 @@ declare interface DescribeIpsRuleListNewRequest {
 
 declare interface DescribeIpsRuleListNewResponse {
   /** 总条数 */
-  Total: number;
+  Total?: number;
   /** 规则详情 */
-  Data: IpsRuleDetailNew[];
+  Data?: IpsRuleDetailNew[];
   /** 返回状态码 0 成功 非0不成功 */
-  ReturnCode: number;
+  ReturnCode?: number;
   /** 返回信息 success 成功 其他 不成功 */
-  ReturnMsg: string;
+  ReturnMsg?: string;
   /** 字段类型 */
-  Category: string[] | null;
+  Category?: string[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

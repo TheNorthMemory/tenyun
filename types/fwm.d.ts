@@ -172,11 +172,11 @@ declare interface AnalysisSgRuleInfoResp {
 
 /** 通用筛选条件 */
 declare interface CommonFilter {
-  /** 筛选字段名。支持：SecurityGroupId、FwGroupId、IP（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索） */
+  /** 筛选字段名 */
   Name?: string | null;
   /** 筛选值列表 */
   Values?: string[] | null;
-  /** 操作类型。1=等于，7=in，9=模糊匹配 */
+  /** 操作类型：1-精确匹配 9-模糊匹配 */
   OperatorType?: number | null;
 }
 
@@ -288,6 +288,8 @@ declare interface MemberInfo {
   Nickname?: string;
   /** 成员Id */
   MemberId?: string;
+  /** 所属部门 */
+  NodeName?: string;
 }
 
 /** NAT边界规则 */
@@ -426,6 +428,14 @@ declare interface OrganMemberItem {
   MemberCreateTime?: string | null;
   /** 账号加入方式 */
   JoinType?: string;
+  /** 云防火墙套餐状态枚举值：0： 未购买2： 已购买3： 试用中4： 已过期 */
+  CfwPayStatus?: number;
+  /** 是否具备云防火墙使用能力 */
+  CfwCapable?: number;
+  /** 私有安全组纳管开关， 0:未纳管，1:已纳管 */
+  SgManaged?: number;
+  /** 是否是后付费云防版本枚举值：1： 后付费0： 非后付费-1： 未知 */
+  IsCfwPostPay?: number;
 }
 
 /** 集团概览 */

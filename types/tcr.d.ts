@@ -402,6 +402,24 @@ declare interface RegistryStatus {
   Conditions?: RegistryCondition[];
 }
 
+/** 策略执行记录 */
+declare interface ReplicationExecution {
+  /** 执行记录ID */
+  ExecutionID?: number | null;
+  /** 策略ID */
+  PolicyID?: number | null;
+  /** 执行状态 */
+  Status?: string | null;
+  /** 执行任务总数 */
+  Total?: number | null;
+  /** 执行任务成功数 */
+  Succeed?: number | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+}
+
 /** 同步规则过滤器 */
 declare interface ReplicationFilter {
   /** 类型（name、tag和resource） */
@@ -478,6 +496,24 @@ declare interface ReplicationRule {
   Filters: ReplicationFilter[];
   /** 是否同步删除事件 */
   Deletion?: boolean;
+}
+
+/** 实例同步/实例复制任务列表 */
+declare interface ReplicationTask {
+  /** 资源类型 */
+  ResourceType?: string | null;
+  /** 源资源 */
+  SrcResource?: string | null;
+  /** 目的资源 */
+  DstResource?: string | null;
+  /** Job任务ID */
+  JobID?: string | null;
+  /** 任务执行状态 */
+  Status?: string | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
 }
 
 /** 仓库的信息 */
@@ -2242,6 +2278,28 @@ declare interface DescribeRegionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeReplicationExecutionsRequest {
+  /** 实例ID */
+  RegistryId: string;
+  /** 策略ID */
+  PolicyId?: number;
+  /** 复制实例ID */
+  ReplicationInstanceId?: string;
+  /** 页数，默认为1 */
+  Page?: number;
+  /** 每页展示个数，默认为100 */
+  PageSize?: number;
+}
+
+declare interface DescribeReplicationExecutionsResponse {
+  /** 镜像分发执行记录列表 */
+  ReplicationExecutionList?: ReplicationExecution[] | null;
+  /** 执行记录总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeReplicationInstanceCreateTasksRequest {
   /** 同步实例Id，见实例返回列表中的同步实例ID */
   ReplicationRegistryId: string;
@@ -2316,6 +2374,26 @@ declare interface DescribeReplicationPoliciesResponse {
   ReplicationPolicyInfoList?: ReplicationPolicyInfo[] | null;
   /** 策略总数 */
   TotalCount?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeReplicationTasksRequest {
+  /** 实例ID */
+  RegistryId: string;
+  /** 执行记录ID */
+  ExecutionId: number;
+  /** 页数，默认为1 */
+  Page?: number;
+  /** 每页展示个数，默认为100 */
+  PageSize?: number;
+}
+
+declare interface DescribeReplicationTasksResponse {
+  /** 任务列表 */
+  ReplicationTaskList?: ReplicationTask[] | null;
+  /** 任务列表总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3293,6 +3371,8 @@ declare interface Tcr {
   DescribeNamespaces(data: DescribeNamespacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNamespacesResponse>;
   /** 列出TCR可用区域 {@link DescribeRegionsRequest} {@link DescribeRegionsResponse} */
   DescribeRegions(data?: DescribeRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegionsResponse>;
+  /** 获取复制实例策略执行记录 {@link DescribeReplicationExecutionsRequest} {@link DescribeReplicationExecutionsResponse} */
+  DescribeReplicationExecutions(data: DescribeReplicationExecutionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationExecutionsResponse>;
   /** 查询创建从实例任务状态 {@link DescribeReplicationInstanceCreateTasksRequest} {@link DescribeReplicationInstanceCreateTasksResponse} */
   DescribeReplicationInstanceCreateTasks(data: DescribeReplicationInstanceCreateTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstanceCreateTasksResponse>;
   /** 查询从实例同步状态 {@link DescribeReplicationInstanceSyncStatusRequest} {@link DescribeReplicationInstanceSyncStatusResponse} */
@@ -3301,6 +3381,8 @@ declare interface Tcr {
   DescribeReplicationInstances(data: DescribeReplicationInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationInstancesResponse>;
   /** 查询实例同步策略列表 {@link DescribeReplicationPoliciesRequest} {@link DescribeReplicationPoliciesResponse} */
   DescribeReplicationPolicies(data: DescribeReplicationPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationPoliciesResponse>;
+  /** 获取复制实例任务列表 {@link DescribeReplicationTasksRequest} {@link DescribeReplicationTasksResponse} */
+  DescribeReplicationTasks(data: DescribeReplicationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReplicationTasksResponse>;
   /** 查询镜像仓库信息 {@link DescribeRepositoriesRequest} {@link DescribeRepositoriesResponse} */
   DescribeRepositories(data: DescribeRepositoriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRepositoriesResponse>;
   /** 获取满足输入搜索条件的个人版镜像仓库 {@link DescribeRepositoryFilterPersonalRequest} {@link DescribeRepositoryFilterPersonalResponse} */

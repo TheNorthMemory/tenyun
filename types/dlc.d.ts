@@ -5447,21 +5447,21 @@ declare interface CreatePartitionQueueResponse {
 }
 
 declare interface CreatePartitionRequest {
-  /** 交易类型：purchase-新购，renew-续费，modify-变配 */
+  /** 交易类型：purchase-新购 */
   ActionType: string;
-  /** 付费模式：0-后付费，1-预付费 */
+  /** 付费模式：1-预付费 */
   PayMode: number;
   /** 资源配额列表（计费项+数量） */
   ResourceQuotaList: ResourceQuota[];
-  /** 时间大小，预付费时为购买月数，后付费时为3600 */
+  /** 时间大小，预付费时为购买月数 */
   TimeSpan: number;
-  /** 时间单位，预付费为m（月），后付费为s（秒） */
+  /** 时间单位，预付费为m（月） */
   TimeUnit: string;
   /** 自动续费标志：0-默认，1-自动续费，2-不自动续费（仅预付费有效） */
   AutoRenewFlag?: number;
   /** 弹性资源池名称，用于订单页展示 */
   Name?: string;
-  /** 队列描述 */
+  /** 资源包描述 */
   Description?: string;
 }
 

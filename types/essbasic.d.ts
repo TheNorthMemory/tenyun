@@ -3338,6 +3338,30 @@ declare interface CreatePersonAuthCertificateImageResponse {
   RequestId?: string;
 }
 
+declare interface CreateRequestWithEncryptionRequest {
+  /** 操作的接口名称。取值参考接口文档输入参数章节关于公共参数 Action 的说明。 */
+  RequestAction: string;
+  /** 第三方应用的唯一标识，对应通用参数 Agent.AppId。 */
+  ApplicationId: string;
+  /** 加密算法使用的初始化向量。固定为 16 字节，将 IV 原始字节使用标准 Base64 编码后传入。 */
+  IV: string;
+  /** 使用 AES-CBC 或 SM4-CBC 加密请求内容得到的密文。加密前请求内容采用 PKCS#7 Padding；将密文原始字节使用标准 Base64 编码后传入。 */
+  EncryptedData: string;
+  /** 用于校验请求数据完整性。对 IV 原始字节和密文原始字节直接拼接（不加拼接符）后计算 HMAC-SHA256，再将计算结果使用标准 Base64 编码后传入。 */
+  EncryptionSignature?: string;
+}
+
+declare interface CreateRequestWithEncryptionResponse {
+  /** 加密算法使用的初始化向量。固定为 16 字节，将 IV 原始字节使用标准 Base64 编码后传入。 */
+  IV?: string;
+  /** 使用 AES-CBC 或 SM4-CBC 加密返回内容得到的密文。加密前返回内容采用 PKCS#7 Padding；将密文原始字节使用标准 Base64 编码后传入。 */
+  EncryptedData?: string;
+  /** 用于校验请求数据完整性。对 IV 原始字节和密文原始字节直接拼接（不加拼接符）后计算 HMAC-SHA256，再将计算结果使用标准 Base64 编码后传入。 */
+  EncryptionSignature?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSealByImageRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
   Agent: Agent;
@@ -5683,6 +5707,8 @@ declare interface Essbasic {
   CreatePartnerAutoSignAuthUrl(data: CreatePartnerAutoSignAuthUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePartnerAutoSignAuthUrlResponse>;
   /** 获取个人用户认证证书图片 {@link CreatePersonAuthCertificateImageRequest} {@link CreatePersonAuthCertificateImageResponse} */
   CreatePersonAuthCertificateImage(data: CreatePersonAuthCertificateImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonAuthCertificateImageResponse>;
+  /** 以加密请求体方式创建请求 {@link CreateRequestWithEncryptionRequest} {@link CreateRequestWithEncryptionResponse} */
+  CreateRequestWithEncryption(data: CreateRequestWithEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRequestWithEncryptionResponse>;
   /** 创建企业电子印章 {@link CreateSealByImageRequest} {@link CreateSealByImageResponse} */
   CreateSealByImage(data: CreateSealByImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSealByImageResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSignUrlsRequest} {@link CreateSignUrlsResponse} */

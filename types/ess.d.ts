@@ -4052,6 +4052,28 @@ declare interface CreateReleaseFlowResponse {
   RequestId?: string;
 }
 
+declare interface CreateRequestWithEncryptionRequest {
+  /** 操作的接口名称。取值参考接口文档输入参数章节关于公共参数 Action 的说明。 */
+  RequestAction: string;
+  /** 加密算法使用的初始化向量。固定为 16 字节，将 IV 原始字节使用标准 Base64 编码后传入。 */
+  IV: string;
+  /** 使用 AES-CBC 或 SM4-CBC 加密请求内容得到的密文。加密前请求内容采用 PKCS#7 Padding；将密文原始字节使用标准 Base64 编码后传入。 */
+  EncryptedData: string;
+  /** 用于校验请求数据完整性。对 IV 原始字节和密文原始字节直接拼接（不加拼接符）后计算 HMAC-SHA256，再将计算结果使用标准 Base64 编码后传入。 */
+  EncryptionSignature?: string;
+}
+
+declare interface CreateRequestWithEncryptionResponse {
+  /** 加密算法使用的初始化向量。固定为 16 字节，将 IV 原始字节使用标准 Base64 编码后传入。 */
+  IV?: string;
+  /** 使用 AES-CBC 或 SM4-CBC 加密返回内容得到的密文。加密前返回内容采用 PKCS#7 Padding；将密文原始字节使用标准 Base64 编码后传入。 */
+  EncryptedData?: string;
+  /** 用于校验请求数据完整性。对 IV 原始字节和密文原始字节直接拼接（不加拼接符）后计算 HMAC-SHA256，再将计算结果使用标准 Base64 编码后传入。 */
+  EncryptionSignature?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRiskIdentificationTaskFeedbackRequest {
   /** 执行合同审查任务的员工信息。 */
   Operator: UserInfo;
@@ -6145,6 +6167,8 @@ declare interface Ess {
   CreatePreparedPersonalEsign(data: CreatePreparedPersonalEsignRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreparedPersonalEsignResponse>;
   /** 发起解除协议 {@link CreateReleaseFlowRequest} {@link CreateReleaseFlowResponse} */
   CreateReleaseFlow(data: CreateReleaseFlowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseFlowResponse>;
+  /** 以加密请求体方式创建请求 {@link CreateRequestWithEncryptionRequest} {@link CreateRequestWithEncryptionResponse} */
+  CreateRequestWithEncryption(data: CreateRequestWithEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRequestWithEncryptionResponse>;
   /** 创建合同审查任务反馈 {@link CreateRiskIdentificationTaskFeedbackRequest} {@link CreateRiskIdentificationTaskFeedbackResponse} */
   CreateRiskIdentificationTaskFeedback(data: CreateRiskIdentificationTaskFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRiskIdentificationTaskFeedbackResponse>;
   /** 获取跳转至腾讯电子签小程序的签署链接 {@link CreateSchemeUrlRequest} {@link CreateSchemeUrlResponse} */

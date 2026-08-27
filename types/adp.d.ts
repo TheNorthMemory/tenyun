@@ -66,6 +66,20 @@ declare interface AgentDetail {
   SkillList?: AgentSkill[];
   /** 高级配置 */
   AdvancedConfig?: AgentAdvancedConfig;
+  /** 调用方执行的 Function Tool 列表入参限制：仅在 C 端用户态 Agent 场景可用，B 端配置态 Agent 忽略该字段与 */
+  ExternalToolList?: AgentExternalToolConfig[];
+}
+
+/** 调用方执行的 Function Tool 配置 */
+declare interface AgentExternalToolConfig {
+  /** 工具类型入参限制：目前仅支持 "function" */
+  Type?: string;
+  /** 工具名称 */
+  Name?: string;
+  /** 工具描述 */
+  Description?: string;
+  /** 工具入参定义 */
+  Parameters?: RequestParam[];
 }
 
 /** Agent输入值，支持直接赋值和引用 */
@@ -232,6 +246,8 @@ declare interface AgentSpec {
   SkillList?: AgentSkillConfig[];
   /** 高级设置 */
   AdvancedConfig?: AgentAdvancedConfig;
+  /** 调用方执行的 Function Tool 列表入参限制：仅在 C 端用户态 Agent 场景可用，B 端配置态 Agent 忽略该字段与 */
+  ExternalToolList?: AgentExternalToolConfig[];
 }
 
 /** Agent摘要信息 */

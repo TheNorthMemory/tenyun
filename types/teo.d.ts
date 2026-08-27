@@ -9515,7 +9515,7 @@ declare interface Teo {
   DescribeDDoSAttackTopData(data: DescribeDDoSAttackTopDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackTopDataResponse>;
   /** 查询站点的独立 DDoS 防护信息 {@link DescribeDDoSProtectionRequest} {@link DescribeDDoSProtectionResponse} */
   DescribeDDoSProtection(data: DescribeDDoSProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSProtectionResponse>;
-  /** 查询默认证书列表 {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
+  /** 查询默认证书列表（旧） {@link DescribeDefaultCertificatesRequest} {@link DescribeDefaultCertificatesResponse} */
   DescribeDefaultCertificates(data?: DescribeDefaultCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDefaultCertificatesResponse>;
   /** 查询版本发布历史 {@link DescribeDeployHistoryRequest} {@link DescribeDeployHistoryResponse} */
   DescribeDeployHistory(data: DescribeDeployHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeployHistoryResponse>;

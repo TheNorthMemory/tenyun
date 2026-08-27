@@ -18,6 +18,8 @@ declare interface AlarmGroup {
   AlarmRecipientType?: number;
   /** 根据AlarmRecipientType的类型该列表具有不同的业务id 1（指定人员）: 告警接收人id列表 2（任务责任人）：无需配置 3（值班表）：值班表id列表 */
   AlarmRecipientIds?: string[];
+  /** 自定义邮箱列表 */
+  CustomEmails?: string[] | null;
 }
 
 /** 告警信息 */
@@ -42,6 +44,8 @@ declare interface AlarmMessage {
   AlarmWays?: string[];
   /** 告警接收人 */
   AlarmRecipients?: string[];
+  /** 自定义邮箱列表 */
+  CustomEmails?: string[] | null;
 }
 
 /** 告警免打扰时间区间 */
@@ -4178,6 +4182,8 @@ declare interface TriggerTaskRunBrief {
   AssociatedEntityExist?: boolean | null;
   /** 调度执行类型枚举值：0： 正常调度1： 空跑调度2： 用户驱动，手动触发 */
   ScheduleRunType?: string | null;
+  /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSION： 无权限 */
+  Privilege?: string | null;
 }
 
 /** 任务调度配置信息 */
@@ -4422,6 +4428,8 @@ declare interface TriggerWorkflowRunBrief {
   ParentTaskExecutionId?: string | null;
   /** 父任务运行名称 【由嵌套工作流触发独有】 */
   ParentTaskExecutionName?: string | null;
+  /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSION： 无权限 */
+  Privilege?: string | null;
 }
 
 /** 查询工作流结果 */
@@ -4828,9 +4836,13 @@ declare interface WorkflowTriggerConfig {
   FileNamePattern?: string | null;
   /** 文件到达模式下 是否递归检测子目录取值范围：[0, 1]默认值：1默认 1（开启） 0 （关闭） */
   Recursive?: number | null;
-  /** 文件到达模式下 触发最短间隔时间单位：秒 */
+  /** 文件到达模式下 最小触发间隔取值范围：[1, 1440]单位：分钟 */
+  TriggerMinimumInterval?: number | null;
+  /** 文件到达模式下 文件批次等待时间取值范围：[1, 60]单位：分钟 */
+  TriggerWaitTime?: number | null;
+  /** 文件到达模式下 触发最短间隔时间单位：秒后续废弃 勿用 */
   TriggerMinimumIntervalSecond?: number | null;
-  /** 文件到达模式下 触发等待时间单位：秒 */
+  /** 文件到达模式下 触发等待时间单位：秒后续废弃 勿用 */
   TriggerWaitTimeSecond?: number | null;
 }
 
@@ -9197,6 +9209,8 @@ declare namespace V20210820 {
     ScriptChange?: boolean | null;
     /** 代码模版脚本，base64编码返回 */
     Content?: string | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 文件夹列表 */
@@ -10245,6 +10259,8 @@ declare namespace V20210820 {
     DlcRegion?: string | null;
     /** 资源组或自定义 */
     IsInherit?: string | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 批量操作任务列表分页 */
@@ -10357,6 +10373,8 @@ declare namespace V20210820 {
     ExecutorGroupName?: string | null;
     /** 任务类型id，取值范围：26 离线集成任务30 Python任务31 PySpark任务34 HiveSQL任务35 Shell任务36 SparkSQL任务21 JdbcSQL任务23 TDSQL-PostgreSQL任务32 DLCSQL任务33 Impala任务41 Kettle任务42 Tchouse-X任务43 TCHouse-X SQL任务46 DLCSpark任务50 DLC-PySpark任务47 TiOne任务48 Trino任务39 Spark任务92 MapReduce任务38 Shell表单模式任务130 BranchNode任务131 MergeNode任务132 Notebook任务133 SSH任务134 StarRocks任务137 For-each任务 */
     TaskTypeId?: number | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 查询任务绑定的事件的响应 */
@@ -11155,6 +11173,8 @@ declare namespace V20210820 {
     Folders?: FolderDsDto[] | null;
     /** 搜索类型 */
     FindType?: string | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 文件夹属性 */
@@ -11867,6 +11887,8 @@ declare namespace V20210820 {
     WorkflowRunName?: string | null;
     /** 代理任务类型（仅 嵌套场景使用，非 嵌套 场景为 null） */
     ProxyTaskType?: TaskTypeOpsDto | null;
+    /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSIONS： 无权限 */
+    Privilege?: string | null;
   }
 
   /** 任务运行历史分页记录 */
@@ -12613,6 +12635,8 @@ declare namespace V20210820 {
     RunScheduleRangeEndTime?: string | null;
     /** 指定时间段补录生效日，星期一到星期日，1-7枚举值：星期一： 1星期二： 2 */
     RunScheduleRangeWeekDays?: number[] | null;
+    /** 资源权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 可见CAN_MANAGE： 可管理 */
+    Privilege?: string | null;
   }
 
   /** 补录计划集合 */
@@ -12713,6 +12737,8 @@ declare namespace V20210820 {
     ParentSpInstanceDataTime?: string | null;
     /** 数据时间列表 */
     ScheduleTimeList?: string[] | null;
+    /** 对象权限枚举值：CAN_VIEW： 只读权限CAN_MANAGE： 管理权限NO_PERMISSIONS： 无权限 */
+    Privilege?: string | null;
   }
 
   /** 手动工作流触发运行记录分页查询 */
@@ -15723,6 +15749,8 @@ declare namespace V20210820 {
     DependencyTriggerPolicy?: string | null;
     /** 任务最后更新时间戳 */
     LastUpdateTimestamp?: number | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 属性配置 */
@@ -16177,6 +16205,8 @@ declare namespace V20210820 {
     ProxyTaskId?: string | null;
     /** 代理任务类型ID */
     ProxyTaskTypeId?: number | null;
+    /** 对象权限枚举值：CAN_MANAGE： 管理权限CAN_VIEW： 只读权限NO_PERMISSIONS： 无权限 */
+    Privilege?: string | null;
   }
 
   /** 任务执行脚本 */
@@ -16803,6 +16833,8 @@ declare namespace V20210820 {
     OwnerId?: string | null;
     /** 工作流类型，周期cycle，手动manual */
     WorkflowType?: string | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 工作流信息 */
@@ -16847,6 +16879,8 @@ declare namespace V20210820 {
     ExecuteUserUin?: string | null;
     /** 运行账号名称 */
     ExecuteUserName?: string | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 工作流 */
@@ -16889,6 +16923,8 @@ declare namespace V20210820 {
     BundleInfo?: string;
     /** 引用该手动工作流的嵌套工作流任务ID列表 */
     NestedBySpTaskIds?: string[] | null;
+    /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSION： 无权限 */
+    Privilege?: string | null;
   }
 
   /** 用户生产工作流列表分页 */
@@ -16951,6 +16987,8 @@ declare namespace V20210820 {
     CalendarId?: string | null;
     /** 时区配置 */
     ScheduleTimeZone?: string | null;
+    /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
+    Privilege?: string | null;
   }
 
   /** 工作流调度详情 */

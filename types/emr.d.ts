@@ -4037,6 +4037,8 @@ declare interface CreateClusterRequest {
   WebUiVersion?: number;
   /** 系统盘是否加密 */
   EnableCbsSysEncryptFlag?: boolean;
+  /** 自定义metadb数据 */
+  MetaDBGroupInfo?: CustomMetaDBInfo[];
 }
 
 declare interface CreateClusterResponse {
@@ -4992,6 +4994,18 @@ declare interface DescribeKyuubiQueryInfoResponse {
   TotalCount?: number;
   /** Kyuubi查询信息列表 */
   KyuubiQueryInfoList?: KyuubiQueryInfo[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMetaDBInfoRequest {
+  /** 集群id */
+  InstanceId: string;
+}
+
+declare interface DescribeMetaDBInfoResponse {
+  /** 自定义db数据 */
+  MetaDBGroupInfo?: CustomMetaDBInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6469,6 +6483,8 @@ declare interface Emr {
   DescribeJobFlow(data: DescribeJobFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobFlowResponse>;
   /** 查询Kyuubi查询信息 {@link DescribeKyuubiQueryInfoRequest} {@link DescribeKyuubiQueryInfoResponse} */
   DescribeKyuubiQueryInfo(data: DescribeKyuubiQueryInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKyuubiQueryInfoResponse>;
+  /** 获取集群db数据 {@link DescribeMetaDBInfoRequest} {@link DescribeMetaDBInfoResponse} */
+  DescribeMetaDBInfo(data: DescribeMetaDBInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetaDBInfoResponse>;
   /** 查询节点数据盘信息 {@link DescribeNodeDataDisksRequest} {@link DescribeNodeDataDisksResponse} */
   DescribeNodeDataDisks(data: DescribeNodeDataDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeDataDisksResponse>;
   /** 快速获取节点规格配置 {@link DescribeNodeResourceConfigFastRequest} {@link DescribeNodeResourceConfigFastResponse} */

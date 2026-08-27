@@ -1186,31 +1186,31 @@ declare interface GlobalRoute {
 
 /** 描述 HAVIP 信息 */
 declare interface HaVip {
-  /** `HAVIP`的`ID`，是`HAVIP`的唯一标识。 */
+  /** HAVIP的ID，是HAVIP的唯一标识。 */
   HaVipId?: string;
-  /** `HAVIP`名称。 */
+  /** HAVIP名称。 */
   HaVipName?: string;
   /** 虚拟IP地址。 */
   Vip?: string;
-  /** `HAVIP`所在私有网络`ID`。 */
+  /** HAVIP所在私有网络ID。 */
   VpcId?: string;
-  /** `HAVIP`所在子网`ID`。 */
+  /** HAVIP所在子网ID。 */
   SubnetId?: string;
-  /** `HAVIP`关联弹性网卡`ID`。 */
+  /** HAVIP关联弹性网卡ID。 */
   NetworkInterfaceId?: string;
-  /** 被绑定的实例`ID`。 */
+  /** 被绑定的实例ID。 */
   InstanceId?: string;
-  /** 绑定`EIP`。 */
+  /** 绑定EIP。 */
   AddressIp?: string;
-  /** 状态：`AVAILABLE`：运行中`UNBIND`：未绑定 */
+  /** 状态：AVAILABLE：运行中UNBIND：未绑定 */
   State?: string;
   /** 创建时间。 */
   CreatedTime?: string;
   /** 使用havip的业务标识。 */
   Business?: string;
-  /** `HAVIP`的飘移范围。 */
+  /** HAVIP的飘移范围。 */
   HaVipAssociationSet?: HaVipAssociation[];
-  /** 是否开启`HAVIP`的漂移范围校验。 */
+  /** 是否开启HAVIP的漂移范围校验。 */
   CheckAssociate?: boolean;
   /** CDC实例ID。 */
   CdcId?: string;
@@ -6633,9 +6633,9 @@ declare interface DescribeGlobalRoutesResponse {
 }
 
 declare interface DescribeHaVipsRequest {
-  /** `HAVIP`唯一`ID`，形如：`havip-9o233uri`。 */
+  /** HAVIP唯一ID，形如：havip-9o233uri。 */
   HaVipIds?: string[];
-  /** 过滤条件，参数不支持同时指定`HaVipIds`和`Filters`。havip-id - String - `HAVIP`唯一`ID`，形如：`havip-9o233uri`。havip-name - String - `HAVIP`名称。vpc-id - String - `HAVIP`所在私有网络`ID`。subnet-id - String - `HAVIP`所在子网`ID`。vip - String - `HAVIP`的地址`VIP`。address-ip - String - `HAVIP`绑定的弹性公网`IP`。havip-association.instance-id - String - `HAVIP`绑定的子机或网卡。havip-association.instance-type - String - `HAVIP`绑定的类型，取值:CVM, ENI。check-associate - Bool - 是否开启HaVip飘移时校验绑定的子机或网卡。cdc-id - String - CDC实例ID。type- String - HAVIP类型。取值: NORMAL(普通); GWLB(网关负载均衡); OPTIMIZATION(优化模式)。 */
+  /** 过滤条件，参数不支持同时指定HaVipIds和Filters。Filter 数量限制为10个，以及单Filter 的value值限制为5个。havip-id - String - HAVIP唯一ID，形如：havip-9o233uri。havip-name - String - HAVIP名称。vpc-id - String - HAVIP所在私有网络ID。subnet-id - String - HAVIP所在子网ID。vip - String - HAVIP的地址VIP。address-ip - String - HAVIP绑定的弹性公网IP。havip-association.instance-id - String - HAVIP绑定的子机或网卡。havip-association.instance-type - String - HAVIP绑定的类型，取值:CVM, ENI。check-associate - Bool - 是否开启HaVip飘移时校验绑定的子机或网卡。cdc-id - String - CDC实例ID。type - String - HAVIP类型。取值: NORMAL(普通); GWLB(网关负载均衡); OPTIMIZATION(优化模式)。termination-protection - String - 删除保护。取值: true; false。traffic-protection - String - 流量保护。取值: true; false。 */
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
@@ -6646,7 +6646,7 @@ declare interface DescribeHaVipsRequest {
 declare interface DescribeHaVipsResponse {
   /** 符合条件的对象数。 */
   TotalCount?: number;
-  /** `HAVIP`对象数组。 */
+  /** HAVIP对象数组。 */
   HaVipSet?: HaVip[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
