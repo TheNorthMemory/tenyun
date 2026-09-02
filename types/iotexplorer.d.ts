@@ -1310,6 +1310,22 @@ declare interface SeeStatItem {
   CostAdvanced?: number;
 }
 
+/** TWeSee 每日与每周总结配置 */
+declare interface SeeSummarizeConfig {
+  /** 是否开启每日总结 */
+  EnableDailySummary?: boolean;
+  /** 是否开启每周总结 */
+  EnableWeeklySummary?: boolean;
+  /** 生成总结的详细程度枚举值：low： 精简medium： 概要（默认值） */
+  SummaryVerbosity?: string;
+}
+
+/** TWeSee 每日或每周总结结果 */
+declare interface SeeSummarizeResult {
+  /** 总结文本 */
+  Summary?: string;
+}
+
 /** TWeSee 任务人脸元数据 */
 declare interface SeeTaskFaceInfo {
   /** 人脸裁剪图下载 URL，仅在请求 FileURLExpireTime 时返回 */
@@ -1330,9 +1346,9 @@ declare interface SeeTaskInfo {
   Status?: number;
   /** 任务元数据 */
   Metadata?: SeeTaskMetadata;
-  /** 算法类目。可能取值：COMPREHENSION：视觉理解HIGHLIGHT：视频浓缩 */
+  /** 算法类目。枚举值：COMPREHENSION： 视觉理解HIGHLIGHT： 视频浓缩SUMMARIZATION： 每日/每周总结 */
   ServiceCategory?: string;
-  /** 算法类型。可能取值：VID_COMP：视频理解IMG_COMP：图片理解COMP_HIGHLIGHT：视频浓缩 */
+  /** 算法类型。枚举值：VID_COMP： 视频理解IMG_COMP： 图片理解COMP_HIGHLIGHT： 视频浓缩DAILY_SUM： 每日总结WEEKLY_SUM： 每周总结 */
   ServiceType?: string;
   /** 套餐规格。可能取值：POSTPAID：后付费（适用于视频理解、图片理解）BASIC：包年包月基础版（适用于视频理解） */
   ServiceTier?: string;
@@ -1344,6 +1360,8 @@ declare interface SeeTaskInfo {
   DetectContinuousResult?: SeeDetectContinuousResult;
   /** 人脸检测结果 */
   FaceRecognitionResult?: SeeFaceRecognitionResult;
+  /** 每日或每周总结结果 */
+  SummarizeResult?: SeeSummarizeResult;
   /** 完成该任务所消耗的基础能力额度 */
   CostBasic?: number;
   /** 完成该任务所消耗的高级能力额度 */
@@ -3431,7 +3449,7 @@ declare interface DeleteTWeSeeTasksByConditionRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类目。枚举值：COMPREHENSION： 视觉理解HIGHLIGHT： 视频浓缩 */
+  /** 算法类目。枚举值：COMPREHENSION： 视觉理解HIGHLIGHT： 视频浓缩SUMMARIZATION： 每日/每周总结 */
   ServiceCategory: string;
   /** 任务删除条件，至少传入一个条件。不同条件之间为 AND 关系，同一条件的 Values 之间为 OR 关系。 */
   Conditions: SeeDeleteTaskCondition[];
@@ -4731,7 +4749,7 @@ declare interface DescribeTWeSeeSubscriptionRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  /** 算法类型。可选值：VID_COMP：视频理解 */
   ServiceType: string;
   /** 通道 ID */
   ChannelId?: number;
@@ -4740,13 +4758,13 @@ declare interface DescribeTWeSeeSubscriptionRequest {
 declare interface DescribeTWeSeeSubscriptionResponse {
   /** 资源 ID */
   ResourceId?: string;
-  /** 套餐规格。可能取值：- `BASIC`：包年包月基础版（适用于视频理解） */
+  /** 套餐规格。可能取值：BASIC：包年包月基础版（适用于视频理解） */
   ServiceTier?: string;
   /** 到期时间，秒级时间戳 */
   ExpireTime?: number;
-  /** 启用状态，`true` 为开启，`false` 为关闭 */
+  /** 启用状态，true 为开启，false 为关闭 */
   Enabled?: boolean;
-  /** 订阅状态。可能取值：- `NORMAL`：正常- `ISOLATED`：隔离 */
+  /** 订阅状态。可能取值：NORMAL：正常ISOLATED：隔离 */
   Status?: string;
   /** 视觉理解配置（适用于视频理解、图片理解） */
   ComprehensionConfig?: SeeComprehensionConfig;
@@ -4754,6 +4772,8 @@ declare interface DescribeTWeSeeSubscriptionResponse {
   CompHighlightConfig?: SeeCompHighlightConfig;
   /** 云存事件 ID 过滤规则配置项 */
   EventIdFilterConfig?: SeeEventIdFilterConfig;
+  /** 每日与每周总结配置 */
+  SummarizeConfig?: SeeSummarizeConfig;
   /** 当前周期基础能力总额度 */
   QuotaBasic?: number;
   /** 当前周期基础能力已用额度 */
@@ -4771,6 +4791,8 @@ declare interface DescribeTWeSeeSubscriptionResponse {
 declare interface DescribeTWeSeeTaskRequest {
   /** 任务 ID */
   TaskId: string;
+  /** 下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL单位：秒 */
+  FileURLExpireTime?: number;
 }
 
 declare interface DescribeTWeSeeTaskResponse {
@@ -5943,30 +5965,30 @@ declare interface ListTWeSeePersonsResponse {
 }
 
 declare interface ListTWeSeeTasksRequest {
-  /** 产品 ID */
-  ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类目。可选值：COMPREHENSION：视觉理解HIGHLIGHT：视频浓缩 */
-  ServiceCategory: string;
   /** 分页拉取数量 */
   Limit: number;
-  /** 分页拉取偏移 */
-  Offset?: number;
-  /** 算法类型。当 ServiceCategory 为 COMPREHENSION 时，可选值包括：VID_COMP：视频理解IMG_COMP：图片理解CONT_PERSON_MOTIONLESS：静姿检测当 ServiceCategory 为 HIGHLIGHT 时，可选值包括：COMP_HIGHLIGHT：视频浓缩 */
-  ServiceTypes?: string[];
+  /** 产品 ID */
+  ProductId: string;
+  /** 算法类目。可选值：COMPREHENSION：视觉理解HIGHLIGHT：视频浓缩SUMMARIZATION：每日/每周总结 */
+  ServiceCategory: string;
   /** 通道 ID */
   ChannelId?: number;
-  /** 查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
-  StartTimeMs?: number;
   /** 查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
   EndTimeMs?: number;
-  /** 要查询的任务的状态条件。不传则不按照状态过滤，可选值：1：失败2：空结果3：有效结果 */
-  Status?: number;
   /** 下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL */
   FileURLExpireTime?: number;
   /** 任务结果过滤条件 */
   Filters?: VisionRecognitionTaskFilter[];
+  /** 分页拉取偏移 */
+  Offset?: number;
+  /** 算法类型。当 ServiceCategory 为 COMPREHENSION 时，可选值包括：VID_COMP：视频理解IMG_COMP：图片理解CONT_PERSON_MOTIONLESS：静姿检测当 ServiceCategory 为 HIGHLIGHT 时，可选值包括：COMP_HIGHLIGHT：视频浓缩当 ServiceCategory 为 SUMMARIZATION 时，可选值包括：DAILY_SUM：每日总结WEEKLY_SUM：每周总结 */
+  ServiceTypes?: string[];
+  /** 查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
+  StartTimeMs?: number;
+  /** 要查询的任务的状态条件。不传则不按照状态过滤，可选值：1：失败2：空结果3：有效结果 */
+  Status?: number;
 }
 
 declare interface ListTWeSeeTasksResponse {
@@ -6361,22 +6383,24 @@ declare interface ModifyTWeSeeSubscriptionRenewFlagResponse {
 }
 
 declare interface ModifyTWeSeeSubscriptionRequest {
-  /** 产品 ID */
-  ProductId: string;
   /** 设备名称 */
   DeviceName: string;
+  /** 产品 ID */
+  ProductId: string;
   /** 算法类型。可选值：- `VID_COMP`：视频理解 */
   ServiceType: string;
   /** 通道 ID */
   ChannelId?: number;
-  /** 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改 */
-  Enabled?: boolean;
-  /** 视觉理解配置（适用于视频理解、图片理解），不传则不修改 */
-  ComprehensionConfig?: SeeComprehensionConfig;
   /** 视频语义浓缩配置（适用于视频语义浓缩），不传则不修改 */
   CompHighlightConfig?: SeeCompHighlightConfig;
+  /** 视觉理解配置（适用于视频理解、图片理解），不传则不修改 */
+  ComprehensionConfig?: SeeComprehensionConfig;
+  /** 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改 */
+  Enabled?: boolean;
   /** 云存事件 ID 过滤规则配置，不传则不修改 */
   EventIdFilterConfig?: SeeEventIdFilterConfig;
+  /** 每日与每周总结配置，不传则不修改 */
+  SummarizeConfig?: SeeSummarizeConfig;
 }
 
 declare interface ModifyTWeSeeSubscriptionResponse {

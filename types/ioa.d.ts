@@ -134,6 +134,14 @@ declare interface CreatePrivilegeCodeRspData {
   Code?: string | null;
 }
 
+/** 资源集 */
+declare interface DeleteResourceData {
+  /** 资源类型 ,1:资源 2:资源组(只支持32位) */
+  ResourceType: number | null;
+  /** 资源或资源组Id(只支持32位) */
+  ResourceId: number | null;
+}
+
 /** 账号分组信息 */
 declare interface DescribeAccountGroupsData {
   /** 账号分组名全路径，点分格式 */
@@ -544,6 +552,18 @@ declare interface DescribeDeviceHardwareInfoItem {
   RemarkName?: string;
   /** BiosUUID（启动盘标识符） */
   BiosUuid?: string;
+  /** 多网卡数据 */
+  NetworkCards?: DeviceNetworkCardBrief[];
+  /** 多显卡数据 */
+  VideoCards?: DeviceVideoCardBrief[];
+  /** 主板型号 */
+  MainBoard?: string;
+  /** 主板序列号 */
+  BaseBoardSn?: string;
+  /** 主板制造商 */
+  BaseBoardManufacturer?: string;
+  /** 声卡 */
+  AudioCard?: string;
 }
 
 /** 终端硬件信息列表响应详情 */
@@ -868,6 +888,22 @@ declare interface DeviceGroupDetail {
   BindAccountName?: string;
 }
 
+/** 多网卡MAC地址等列表数据 */
+declare interface DeviceNetworkCardBrief {
+  /** MAC地址 */
+  MacAddress?: string;
+  /** 网卡名称 */
+  NetworkCardName?: string;
+  /** 网卡类型枚举值：1： 物理网卡2： 虚拟网卡 */
+  NetworkCardType?: number;
+  /** 网卡状态枚举值：1： 启用中2： 未启用 */
+  NetworkCardStatus?: number;
+  /** IPv4地址 */
+  Ipv4Address?: string;
+  /** IPv6地址 */
+  Ipv6Address?: string;
+}
+
 /** 分页的具体数据对象 */
 declare interface DeviceNetworkInfo {
   /** 本地地址 */
@@ -920,6 +956,12 @@ declare interface DeviceServiceInfo {
   State?: number | null;
   /** 启动用户 */
   User?: string | null;
+}
+
+/** 设备显卡简要信息 */
+declare interface DeviceVideoCardBrief {
+  /** 显卡名称 */
+  VideoCardName?: string;
 }
 
 /** 终端自定义分组列表数据 */
@@ -1420,6 +1462,18 @@ declare interface CreatePrivilegeCodeRequest {
 declare interface CreatePrivilegeCodeResponse {
   /** 业务响应数据 */
   Data?: CreatePrivilegeCodeRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAccountGroupResourcesRequest {
+  /** 资源集 */
+  ResourceList: DeleteResourceData[];
+  /** 账户组Id(只支持32位) */
+  AccountGroupId: number;
+}
+
+declare interface DeleteAccountGroupResourcesResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2029,6 +2083,8 @@ declare interface Ioa {
   CreateDeviceVirtualGroup(data: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
   /** 创建特权码、卸载码 {@link CreatePrivilegeCodeRequest} {@link CreatePrivilegeCodeResponse} */
   CreatePrivilegeCode(data: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
+  /** 删除账户组资源 {@link DeleteAccountGroupResourcesRequest} {@link DeleteAccountGroupResourcesResponse} */
+  DeleteAccountGroupResources(data: DeleteAccountGroupResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResourcesResponse>;
   /** 删除终端自定义分组 {@link DeleteDeviceVirtualGroupRequest} {@link DeleteDeviceVirtualGroupResponse} */
   DeleteDeviceVirtualGroup(data?: DeleteDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceVirtualGroupResponse>;
   /** 查询账号分组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */

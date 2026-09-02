@@ -770,7 +770,7 @@ declare interface PulsarNetworkAccessPointInfo {
   SecurityGroupIds?: string[];
 }
 
-/** Pulsar专业版集群信息 */
+/** Pulsar标准版或专业版集群信息 */
 declare interface PulsarProClusterInfo {
   /** 集群Id。 */
   ClusterId?: string;
@@ -790,7 +790,7 @@ declare interface PulsarProClusterInfo {
   MaxStorage?: number;
   /** 是否可以修改路由 */
   CanEditRoute?: boolean | null;
-  /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
+  /** 代表是专业版和标准版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储PULSAR.S2标准版 */
   BillingLabelVersion?: string | null;
   /** 实例到期时间戳，毫秒级精度。 */
   ExpireTime?: number | null;
@@ -798,7 +798,7 @@ declare interface PulsarProClusterInfo {
   AutoCreateTopicStatus?: boolean | null;
   /** 自动创建主题的默认分区数，如果没开启就是0 */
   DefaultPartitionNumber?: number | null;
-  /** 用户自定义的租户别名，如果没有，会复用专业集群 ID */
+  /** 用户自定义的租户别名，如果没有，会复用集群 ID */
   Tenant?: string;
   /** 删除保护开关标识 */
   DeleteProtection?: number;
@@ -806,9 +806,11 @@ declare interface PulsarProClusterInfo {
   ElasticTpsEnabled?: number;
   /** 是否开启数据加密枚举值：0： 关闭数据加密1： 开启数据加密 */
   EncryptionStatus?: number;
+  /** 是否开启磁盘自动扩容。枚举值：0-关闭，1-开启 */
+  AutoExpansionEnabled?: number;
 }
 
-/** Pulsar专业版集群规格信息 */
+/** Pulsar标准版或专业版集群规格信息 */
 declare interface PulsarProClusterSpecInfo {
   /** 集群规格名称 */
   SpecName?: string;
@@ -838,7 +840,7 @@ declare interface PulsarProClusterSpecInfo {
   TotalTps?: number;
 }
 
-/** Pulsar专业版实例信息 */
+/** Pulsar标准版或专业版实例信息 */
 declare interface PulsarProInstance {
   /** 实例id */
   InstanceId?: string;
@@ -876,7 +878,7 @@ declare interface PulsarProInstance {
   Tags?: Tag[] | null;
   /** 集群创建时间 */
   CreateTime?: string | null;
-  /** 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储 */
+  /** 代表是专业版和标准版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储PULSAR.S2标准版 */
   BillingLabelVersion?: string | null;
   /** 自定义租户 */
   Tenant?: string;
@@ -2487,7 +2489,7 @@ declare interface CreateEnvironmentRoleResponse {
 }
 
 declare interface CreateProClusterRequest {
-  /** 多可用区部署选择三个可用区，示例[200002,200003,200004]单可用区部署选择一个可用区，示例[200002]当选择PULSAR.P2.MINI1 时只支持两个可用区，其他支持三个可用区 */
+  /** 多可用区部署选择三个可用区，示例[200002,200003,200004]单可用区部署选择一个可用区，示例[200002]专业版：当选择PULSAR.P2.MINI1时只支持两个可用区，其他规格支持三个可用区标准版（PULSAR.S2系列）：只支持两个可用区 */
   ZoneIds: number[];
   /** 集群规格代号参考 专业集群规格 */
   ProductName: string;
@@ -2507,6 +2509,10 @@ declare interface CreateProClusterRequest {
   Tags?: Tag[];
   /** 集群版本信息 */
   InstanceVersion?: string;
+  /** 用户自定义租户名，可选。不能为空，支持数字、字母以及符号 “-_=:.”，长度不超过 64 个字符。未传时使用默认规则（实例 ID 作为租户名）。 */
+  UserTenant?: string;
+  /** 是否开启弹性TPS（1：开启，0：关闭），仅专业版P1固定存储集群支持 */
+  ElasticTpsEnabled?: number;
 }
 
 declare interface CreateProClusterResponse {
@@ -5687,7 +5693,7 @@ declare interface Tdmq {
   CreateEnvironment(data: CreateEnvironmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentResponse>;
   /** 创建环境角色授权 {@link CreateEnvironmentRoleRequest} {@link CreateEnvironmentRoleResponse} */
   CreateEnvironmentRole(data: CreateEnvironmentRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvironmentRoleResponse>;
-  /** 创建专业集群 {@link CreateProClusterRequest} {@link CreateProClusterResponse} */
+  /** 创建Pulsar标准版或专业版实例 {@link CreateProClusterRequest} {@link CreateProClusterResponse} */
   CreateProCluster(data: CreateProClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProClusterResponse>;
   /** 创建RabbitMQ路由关系 {@link CreateRabbitMQBindingRequest} {@link CreateRabbitMQBindingResponse} */
   CreateRabbitMQBinding(data: CreateRabbitMQBindingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRabbitMQBindingResponse>;
@@ -5779,7 +5785,7 @@ declare interface Tdmq {
   DescribeBindVpcs(data?: DescribeBindVpcsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindVpcsResponse>;
   /** 获取集群详情 {@link DescribeClusterDetailRequest} {@link DescribeClusterDetailResponse} */
   DescribeClusterDetail(data: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
-  /** 获取集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
+  /** 获取虚拟集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询cmq队列详情 {@link DescribeCmqQueueDetailRequest} {@link DescribeCmqQueueDetailResponse} */
   DescribeCmqQueueDetail(data: DescribeCmqQueueDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCmqQueueDetailResponse>;
@@ -5811,9 +5817,9 @@ declare interface Tdmq {
   DescribePublisherSummary(data: DescribePublisherSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublisherSummaryResponse>;
   /** 获取生产者信息 {@link DescribePublishersRequest} {@link DescribePublishersResponse} */
   DescribePublishers(data: DescribePublishersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublishersResponse>;
-  /** 获取Pulsar专业版集群实例信息 {@link DescribePulsarProInstanceDetailRequest} {@link DescribePulsarProInstanceDetailResponse} */
+  /** 获取Pulsar标准版或专业版实例信息 {@link DescribePulsarProInstanceDetailRequest} {@link DescribePulsarProInstanceDetailResponse} */
   DescribePulsarProInstanceDetail(data: DescribePulsarProInstanceDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstanceDetailResponse>;
-  /** 查询Pulsar专业版实例列表 {@link DescribePulsarProInstancesRequest} {@link DescribePulsarProInstancesResponse} */
+  /** 查询Pulsar标准版和专业版实例列表 {@link DescribePulsarProInstancesRequest} {@link DescribePulsarProInstancesResponse} */
   DescribePulsarProInstances(data?: DescribePulsarProInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePulsarProInstancesResponse>;
   /** 查询RabbitMQ路由关系列表 {@link DescribeRabbitMQBindingsRequest} {@link DescribeRabbitMQBindingsResponse} */
   DescribeRabbitMQBindings(data: DescribeRabbitMQBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRabbitMQBindingsResponse>;
@@ -5905,7 +5911,7 @@ declare interface Tdmq {
   ImportRocketMQConsumerGroups(data: ImportRocketMQConsumerGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQConsumerGroupsResponse>;
   /** @deprecated 平滑迁移：导入topic列表 {@link ImportRocketMQTopicsRequest} {@link ImportRocketMQTopicsResponse} */
   ImportRocketMQTopics(data: ImportRocketMQTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<ImportRocketMQTopicsResponse>;
-  /** 更新集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
+  /** 更新虚拟集群信息 {@link ModifyClusterRequest} {@link ModifyClusterResponse} */
   ModifyCluster(data: ModifyClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterResponse>;
   /** 修改cmq队列属性 {@link ModifyCmqQueueAttributeRequest} {@link ModifyCmqQueueAttributeResponse} */
   ModifyCmqQueueAttribute(data: ModifyCmqQueueAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCmqQueueAttributeResponse>;

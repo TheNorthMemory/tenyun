@@ -1432,6 +1432,8 @@ declare interface NonTaxIncomeBill {
   ReceiverBank?: string;
   /** 条目 */
   NonTaxItems?: NonTaxItem[];
+  /** 票据名称 */
+  BillName?: string;
 }
 
 /** 非税收入条目 */
@@ -2720,6 +2722,8 @@ declare interface VatElectronicItemInfo {
   DateStart?: string;
   /** 通行日期止 */
   DateEnd?: string;
+  /** 车架号 */
+  VinNo?: string;
 }
 
 /** 增值税发票、购车发票、全电发票的基础要素字段信息。 */

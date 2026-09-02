@@ -2,11 +2,11 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
-/** 数据库账号信息 */
+/** 账号信息 */
 declare interface Account {
-  /** 账号名，可输入1 - 32个字符。 */
+  /** 账号名称 */
   User: string;
-  /** 账号的主机。IP 形式，支持填入%。 */
+  /** 账号的主机地址 */
   Host: string;
 }
 
@@ -2941,9 +2941,9 @@ declare interface DeleteTimeWindowResponse {
 declare interface DescribeAccountPrivilegesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据库的账号名称。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
+  /** 数据库的账号名称。可通过 DescribeAccounts 接口获取。 */
   User: string;
-  /** 数据库的账号域名。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
+  /** 数据库的账号域名。可通过 DescribeAccounts 接口获取。 */
   Host: string;
 }
 
@@ -4625,9 +4625,9 @@ declare interface ModifyAccountMaxUserConnectionsResponse {
 declare interface ModifyAccountPasswordRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据库账号的新密码。密码应至少包含字母、数字和字符（_+-&=!@#$%^*()）中的两种，长度为8-64个字符。 */
+  /** 数据库账号的新密码。密码应至少包含字母、数字和字符（_+-&amp;=!@#$%^*()）中的两种，长度为8-64个字符。 */
   NewPassword: string;
-  /** 云数据库账号。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
+  /** 云数据库账号。可通过 DescribeAccounts 接口获取。 */
   Accounts: Account[];
   /** 该字段已废弃。 */
   SkipValidatePassword?: boolean;
@@ -4643,13 +4643,13 @@ declare interface ModifyAccountPasswordResponse {
 declare interface ModifyAccountPrivilegesRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据库的账号，包括用户名和域名。可通过 [DescribeAccounts](https://cloud.tencent.com/document/api/236/17499) 接口获取。 */
+  /** 数据库的账号，包括用户名和域名。可通过 DescribeAccounts 接口获取。 */
   Accounts: Account[];
   /** 全局权限。其中，GlobalPrivileges 中权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "PROCESS", "DROP","REFERENCES","INDEX","ALTER","SHOW DATABASES","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER","CREATE USER","RELOAD","REPLICATION CLIENT","REPLICATION SLAVE"。注意，ModifyAction为空时，不传该参数表示清除该权限。 */
   GlobalPrivileges?: string[];
-  /** 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。注意，ModifyAction为空时，不传该参数表示清除该权限。 */
+  /** 数据库的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE TEMPORARY TABLES","LOCK TABLES","EXECUTE","CREATE VIEW","SHOW VIEW","CREATE ROUTINE","ALTER ROUTINE","EVENT","TRIGGER"。注意，ModifyAction为空时，不传该参数表示清除该权限。 */
   DatabasePrivileges?: DatabasePrivilege[];
-  /** 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE",	"DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。注意，ModifyAction为空时，不传该参数表示清除该权限。 */
+  /** 数据库中表的权限。Privileges 权限的可选值为：权限的可选值为："SELECT","INSERT","UPDATE","DELETE","CREATE", "DROP","REFERENCES","INDEX","ALTER","CREATE VIEW","SHOW VIEW", "TRIGGER"。注意，ModifyAction为空时，不传该参数表示清除该权限。 */
   TablePrivileges?: TablePrivilege[];
   /** 数据库表中列的权限。Privileges 权限的可选值为："SELECT","INSERT","UPDATE","REFERENCES"。注意，ModifyAction为空时，不传该参数表示清除该权限。 */
   ColumnPrivileges?: ColumnPrivilege[];

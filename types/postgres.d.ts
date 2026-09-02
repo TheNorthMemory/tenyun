@@ -1262,6 +1262,22 @@ declare interface CloseDBExtranetAccessResponse {
   RequestId?: string;
 }
 
+declare interface CloseDBProxyAddressRequest {
+  /** 实例 ID，指定要关闭代理地址的目标实例 */
+  DBInstanceId: string;
+  /** 代理地址 ID，指定要关闭（删除）的代理地址 */
+  AddressId: string;
+  /** 代理组 ID。不传则按实例自动查找其默认代理组 */
+  ProxyGroupId?: string;
+}
+
+declare interface CloseDBProxyAddressResponse {
+  /** 异步任务 ID，可通过 DescribeFlow 查询任务进度 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAccountRequest {
   /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -1296,6 +1312,8 @@ declare interface CreateAuditLogFileRequest {
 }
 
 declare interface CreateAuditLogFileResponse {
+  /** 文件名称 */
+  FileName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1355,6 +1373,44 @@ declare interface CreateDBInstanceNetworkAccessResponse {
   /** 流程ID，FlowId等同于TaskId */
   FlowId?: number;
   /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateDBProxyAddressRequest {
+  /** 实例 ID，指定要创建代理地址的目标实例 */
+  DBInstanceId: string;
+  /** VPC ID，代理地址所属的私有网络 */
+  VpcId: string;
+  /** 子网 ID，代理地址所属的子网 */
+  SubnetId: string;
+  /** 代理组 ID。不传则按实例自动查找其默认代理组 */
+  ProxyGroupId?: string;
+  /** 安全组 ID 列表，用于代理地址的网络安全控制 */
+  SecurityGroup?: string[];
+  /** 代理地址备注信息，最长 256 个字符 */
+  Description?: string;
+  /** 连接池开关。true：开启连接池；false：关闭连接池 */
+  ConnectionPool?: boolean;
+  /** 权重模式。取值：system：系统自动分配权重custom：手动指定权重，需配合 ProxyAllocation 参数使用 */
+  WeightMode?: string;
+  /** 路由权重列表。WeightMode 为 custom 时必填。若WeightMode传system或不传 ，则传入的权重不生效，由系统分配默认权重。 */
+  ProxyAllocation?: ProxyRoute[];
+  /** 是否自动将新增的只读实例加入读写分离。true：自动加入；false：不自动加入 */
+  RoAutoAdd?: boolean;
+  /** 延迟剔除开关。true：开启延迟剔除，当只读实例延迟超过阈值时自动剔除路由；false：关闭延迟剔除。开启时 LatencyRemoveTime 必填 */
+  LatencyRemove?: boolean;
+  /** 延迟剔除阈值，单位秒，取值范围 [1, 10000]。LatencyRemove 为 true 时必填 */
+  LatencyRemoveTime?: number;
+  /** 最小路由节点数，取值范围 [0, 256]。用于防止延迟剔除将所有节点剔除后的兜底策略 */
+  MinRouteNum?: number;
+  /** 负载均衡策略枚举值：0： 按活跃连接数(默认)1： 按请求数 */
+  LoadBalancePolicy?: number;
+}
+
+declare interface CreateDBProxyAddressResponse {
+  /** 异步任务 ID。可通过 DescribeTasks 接口查询任务执行进度 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2216,6 +2272,26 @@ declare interface DescribeDBProxyResponse {
   Count?: number;
   /** Proxy 实例详情列表。 */
   ProxyInfos?: ProxyGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBProxySSLConfigRequest {
+  /** 实例 ID。 */
+  DBInstanceId: string;
+  /** 代理组 ID。 */
+  ProxyGroupId: string;
+  /** 代理连接地址 ID。 */
+  ProxyAddressId: string;
+}
+
+declare interface DescribeDBProxySSLConfigResponse {
+  /** SSL 是否开启。true 表示已开启，false 表示未开启。 */
+  SSLEnabled?: boolean;
+  /** SSL 连接的地址（VIP 或域名）。 */
+  ConnectAddress?: string;
+  /** CA 证书下载地址。仅在 SSL 开启时有值。 */
+  CAUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3118,6 +3194,26 @@ declare interface ModifyDBProxyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBProxySSLConfigRequest {
+  /** 实例 ID，指定要修改 SSL 配置的数据库代理所属的目标实例 */
+  DBInstanceId: string;
+  /** 代理组 ID，指定要修改 SSL 配置的代理组 */
+  ProxyGroupId: string;
+  /** 代理地址 ID，指定要修改 SSL 配置的代理连接地址 */
+  ProxyAddressId: string;
+  /** SSL 开关。true：开启 SSL；false：关闭 SSL */
+  SSLEnabled: boolean;
+  /** 连接地址。SSLEnabled 为 true 时必填，需与代理地址的 Vip 保持一致，用于 SSL 证书校验 */
+  ConnectAddress?: string;
+}
+
+declare interface ModifyDBProxySSLConfigResponse {
+  /** 异步任务 ID。可通过 DescribeTasks 接口查询任务执行进度。当 SSL 状态无变更时返回 0，无需等待任务 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDatabaseOwnerRequest {
   /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
   DBInstanceId: string;
@@ -3487,6 +3583,8 @@ declare interface Postgres {
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 关闭实例公网地址 {@link CloseDBExtranetAccessRequest} {@link CloseDBExtranetAccessResponse} */
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
+  /** 关闭数据库代理地址 {@link CloseDBProxyAddressRequest} {@link CloseDBProxyAddressResponse} */
+  CloseDBProxyAddress(data: CloseDBProxyAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBProxyAddressResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
@@ -3499,6 +3597,8 @@ declare interface Postgres {
   CreateDBInstanceNetworkAccess(data: CreateDBInstanceNetworkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceNetworkAccessResponse>;
   /** 创建数据库代理 {@link CreateDBProxyRequest} {@link CreateDBProxyResponse} */
   CreateDBProxy(data: CreateDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBProxyResponse>;
+  /** 创建代理连接地址 {@link CreateDBProxyAddressRequest} {@link CreateDBProxyAddressResponse} */
+  CreateDBProxyAddress(data: CreateDBProxyAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBProxyAddressResponse>;
   /** 创建数据库 {@link CreateDatabaseRequest} {@link CreateDatabaseResponse} */
   CreateDatabase(data: CreateDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDatabaseResponse>;
   /** 创建实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
@@ -3577,6 +3677,8 @@ declare interface Postgres {
   DescribeDBInstances(data?: DescribeDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBInstancesResponse>;
   /** 查询数据库代理 {@link DescribeDBProxyRequest} {@link DescribeDBProxyResponse} */
   DescribeDBProxy(data: DescribeDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBProxyResponse>;
+  /** 查询代理 SSL 配置 {@link DescribeDBProxySSLConfigRequest} {@link DescribeDBProxySSLConfigResponse} */
+  DescribeDBProxySSLConfig(data: DescribeDBProxySSLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBProxySSLConfigResponse>;
   /** 查询代理可售规格 {@link DescribeDBProxySpecsRequest} {@link DescribeDBProxySpecsResponse} */
   DescribeDBProxySpecs(data?: DescribeDBProxySpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBProxySpecsResponse>;
   /** 查询支持的数据库版本 {@link DescribeDBVersionsRequest} {@link DescribeDBVersionsResponse} */
@@ -3673,6 +3775,8 @@ declare interface Postgres {
   ModifyDBProxy(data: ModifyDBProxyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBProxyResponse>;
   /** 修改代理地址配置 {@link ModifyDBProxyAddressRequest} {@link ModifyDBProxyAddressResponse} */
   ModifyDBProxyAddress(data: ModifyDBProxyAddressRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBProxyAddressResponse>;
+  /** 修改代理 SSL 配置 {@link ModifyDBProxySSLConfigRequest} {@link ModifyDBProxySSLConfigResponse} */
+  ModifyDBProxySSLConfig(data: ModifyDBProxySSLConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBProxySSLConfigResponse>;
   /** 修改数据库所有者 {@link ModifyDatabaseOwnerRequest} {@link ModifyDatabaseOwnerResponse} */
   ModifyDatabaseOwner(data: ModifyDatabaseOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseOwnerResponse>;
   /** 修改维护时间窗口 {@link ModifyMaintainTimeWindowRequest} {@link ModifyMaintainTimeWindowResponse} */

@@ -859,6 +859,8 @@ declare interface DescribeCkSqlApisRequest {
   UserName?: string;
   /** 账户的类型 */
   UserType?: string;
+  /** 实例类型枚举值：SSC： 弹性版实例Standard： 标准版实例 */
+  InstanceType?: string;
 }
 
 declare interface DescribeCkSqlApisResponse {
@@ -1139,6 +1141,8 @@ declare interface ModifyUserNewPrivilegeRequest {
   GlobalPrivileges?: string[];
   /** 数据库表权限 */
   DatabasePrivilegeList?: DatabasePrivilegeInfo[];
+  /** 实例类型枚举值：SSC： 弹性版实例Standard： 标准版实例 */
+  InstanceType?: string;
 }
 
 declare interface ModifyUserNewPrivilegeResponse {

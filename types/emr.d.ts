@@ -5942,9 +5942,11 @@ declare interface ModifySLInstanceRequest {
   /** 需要变更的区域名称。 */
   Zone: string;
   /** 该区域变配后的目标节点数量，所有区域节点总数应大于等于3，小于等于50。 */
-  NodeNum: number;
-  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808 */
+  NodeNum?: number;
+  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6---****-fae360632808 */
   ClientToken?: string;
+  /** 存储空间大小，需要是100的倍数，且不允许比当前存储空间小（只允许扩容）单位：GB */
+  DiskSize?: number;
 }
 
 declare interface ModifySLInstanceResponse {

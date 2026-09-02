@@ -2410,6 +2410,8 @@ declare interface Package {
   PackageName?: string;
   /** 资源包类型CCU-计算资源包，DISK-存储资源包 */
   PackageType?: string;
+  /** 资源包套餐版本base-基础，common-通用，enterprise-企业 */
+  PackageVersion?: string;
   /** 资源包使用地域china-中国内地通用，overseas-港澳台及海外通用 */
   PackageRegion?: string;
   /** 资源包状态creating-创建中；using-使用中；expired-已过期；normal_finish-使用完；apply_refund-申请退费中；refund-已退费。 */
@@ -4731,11 +4733,11 @@ declare interface DescribeAccountPrivilegesRequest {
   AccountName: string;
   /** 主机 */
   Host: string;
-  /** 数据库名，为*时，忽略Type/TableName, 表示修改用户全局权限； */
-  Db: string;
-  /** 指定数据库下的对象类型，可选"table"，"*" */
-  Type: string;
-  /** 当Type="table"时，用来指定表名 */
+  /** 数据库名。为*时，忽略Type/TableName，表示查询用户全局权限；不传时默认为*。 */
+  Db?: string;
+  /** 指定数据库下的对象类型，可选"table"、"*"。不传时默认为*；Type为table时，必须指定TableName。 */
+  Type?: string;
+  /** 当Type="table"时，用来指定表名；Type为table时必填。 */
   TableName?: string;
 }
 
@@ -7156,6 +7158,20 @@ declare interface ModifyClusterGlobalEncryptionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyClusterLevelRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 集群级别 */
+  ClusterLevel: string;
+}
+
+declare interface ModifyClusterLevelResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClusterNameRequest {
   /** 集群ID */
   ClusterId: string;
@@ -8923,6 +8939,8 @@ declare interface Cynosdb {
   ModifyClusterDatabase(data: ModifyClusterDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDatabaseResponse>;
   /** 开关全局加密 {@link ModifyClusterGlobalEncryptionRequest} {@link ModifyClusterGlobalEncryptionResponse} */
   ModifyClusterGlobalEncryption(data: ModifyClusterGlobalEncryptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterGlobalEncryptionResponse>;
+  /** 修改集群级别 {@link ModifyClusterLevelRequest} {@link ModifyClusterLevelResponse} */
+  ModifyClusterLevel(data: ModifyClusterLevelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterLevelResponse>;
   /** 修改集群名称 {@link ModifyClusterNameRequest} {@link ModifyClusterNameResponse} */
   ModifyClusterName(data: ModifyClusterNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterNameResponse>;
   /** 修改集群参数 {@link ModifyClusterParamRequest} {@link ModifyClusterParamResponse} */

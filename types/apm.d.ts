@@ -694,6 +694,16 @@ declare interface ServiceDetail {
   ResponseDurationWarningThreshold?: number | null;
 }
 
+/** 应用对应的链路上下游应用集合 */
+declare interface ServiceRelation {
+  /** 应用名 */
+  ServiceName?: string;
+  /** 上游应用集合 */
+  UpstreamServices?: string[];
+  /** 下游应用集合 */
+  DownstreamServices?: string[];
+}
+
 /** Span 对象 */
 declare interface Span {
   /** Trace ID */
@@ -1394,6 +1404,32 @@ declare interface DescribeOPRAllVulCountResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRelatedServicesOnTraceRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
+  /** 查询开始时间 */
+  StartTime: number;
+  /** 查询结束时间 */
+  EndTime: number;
+  /** 应用名 */
+  ServiceName?: string;
+  /** 是否为应用拓扑查询 */
+  IsServiceTopology?: boolean;
+}
+
+declare interface DescribeRelatedServicesOnTraceResponse {
+  /** 查询的总链路数 */
+  TotalTraces?: number;
+  /** 查询到的应用的数量 */
+  TotalServices?: number;
+  /** 挑选的链路数量 */
+  SelectedTraces?: number;
+  /** 相关的服务/应用名列表 */
+  ServiceRelations?: ServiceRelation[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeServiceOverviewRequest {
   /** 业务系统 ID */
   InstanceId: string;
@@ -1899,6 +1935,8 @@ declare interface Apm {
   DescribeMetricRecords(data: DescribeMetricRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMetricRecordsResponse>;
   /** 查询用户名下漏洞数 {@link DescribeOPRAllVulCountRequest} {@link DescribeOPRAllVulCountResponse} */
   DescribeOPRAllVulCount(data: DescribeOPRAllVulCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOPRAllVulCountResponse>;
+  /** 根据链路查询目标服务的上下游服务 {@link DescribeRelatedServicesOnTraceRequest} {@link DescribeRelatedServicesOnTraceResponse} */
+  DescribeRelatedServicesOnTrace(data: DescribeRelatedServicesOnTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedServicesOnTraceResponse>;
   /** 获取应用概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
   /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */

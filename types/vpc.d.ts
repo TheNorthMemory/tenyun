@@ -286,23 +286,23 @@ declare interface CCN {
   InstanceChargeType?: string;
   /** 计量类型 */
   InstanceMeteringType?: string;
-  /** 限速类型，`INTER_REGION_LIMIT` 为地域间限速；`OUTER_REGION_LIMIT` 为地域出口限速。 */
+  /** 限速类型，INTER_REGION_LIMIT 为地域间限速；OUTER_REGION_LIMIT 为地域出口限速。 */
   BandwidthLimitType?: string;
   /** 标签键值对。 */
   TagSet?: Tag[];
-  /** 是否支持云联网路由优先级的功能。`False`：不支持，`True`：支持。 */
+  /** 是否支持云联网路由优先级的功能。False：不支持，True：支持。 */
   RoutePriorityFlag?: boolean;
   /** 实例关联的路由表个数。 */
   RouteTableCount?: number;
-  /** 是否开启云联网多路由表特性。`False`：未开启，`True`：开启。 */
+  /** 是否开启云联网多路由表特性。False：未开启，True：开启。 */
   RouteTableFlag?: boolean;
-  /** `true`：实例已被封禁，流量不通，`false`:解封禁。 */
+  /** true：实例已被封禁，流量不通，false:解封禁。 */
   IsSecurityLock?: boolean;
-  /** 是否开启云联网路由传播策略。`False` 未开启，`True` 开启。 */
+  /** 是否开启云联网路由传播策略。False 未开启，True 开启。 */
   RouteBroadcastPolicyFlag?: boolean;
-  /** 是否开启等价路由功能。`False` 未开启，`True` 开启。 */
+  /** 是否开启等价路由功能。False 未开启，True 开启。 */
   RouteECMPFlag?: boolean;
-  /** 是否开启路由重叠功能。`False` 未开启，`True` 开启。 */
+  /** 是否开启路由重叠功能。False 未开启，True 开启。 */
   RouteOverlapFlag?: boolean;
   /** 是否开启QOS。 */
   TrafficMarkingPolicyFlag?: boolean;
@@ -320,13 +320,15 @@ declare interface CCN {
   RouteTablePolicyValueCommunityFlag?: boolean;
   /** 是否支持策略路由 */
   PolicyBasedRoutingFlag?: boolean;
+  /** 服务等级模式枚举值：0： 云联网模式1： 地域间模式 */
+  ServiceLevelMode?: number;
 }
 
 /** 云联网（CCN）关联实例（Instance）对象 */
 declare interface CcnAttachedInstance {
   /** 云联网实例ID。 */
   CcnId?: string;
-  /** 关联实例类型：`VPC`：私有网络`DIRECTCONNECT`：专线网关`BMVPC`：黑石私有网络 */
+  /** 关联实例类型：VPC：私有网络DIRECTCONNECT：专线网关BMVPC：黑石私有网络 */
   InstanceType?: string;
   /** 关联实例ID。 */
   InstanceId?: string;
@@ -338,7 +340,7 @@ declare interface CcnAttachedInstance {
   InstanceUin?: string;
   /** 关联实例CIDR。 */
   CidrBlock?: string[];
-  /** 关联实例状态：`PENDING`：申请中`ACTIVE`：已连接`EXPIRED`：已过期`REJECTED`：已拒绝`DELETED`：已删除`FAILED`：失败的（2小时后将异步强制解关联）`ATTACHING`：关联中`DETACHING`：解关联中`DETACHFAILED`：解关联失败（2小时后将异步强制解关联） */
+  /** 关联实例状态：PENDING：申请中ACTIVE：已连接EXPIRED：已过期REJECTED：已拒绝DELETED：已删除FAILED：失败的（2小时后将异步强制解关联）ATTACHING：关联中DETACHING：解关联中DETACHFAILED：解关联失败（2小时后将异步强制解关联） */
   State?: string;
   /** 关联时间。 */
   AttachedTime?: string;
@@ -352,6 +354,10 @@ declare interface CcnAttachedInstance {
   RouteTableId?: string;
   /** 路由表名称 */
   RouteTableName?: string;
+  /** 别名类型 */
+  AliasType?: string;
+  /** 别名ID */
+  AliasInstanceId?: string;
 }
 
 /** 用于描述云联网地域间限速带宽实例的信息。 */
@@ -564,6 +570,10 @@ declare interface CcnRoute {
   AliasType?: string;
   /** 实例id */
   AliasInstanceId?: string;
+  /** 路由表ID */
+  RouteTableId?: string;
+  /** AS-PATH */
+  AsPath?: string;
 }
 
 /** 云联网路由传播策略之路由条件 */
@@ -598,7 +608,7 @@ declare interface CcnRouteTableBroadcastPolicy {
   RouteConditions: CcnRouteBroadcastPolicyRouteCondition[];
   /** 传播条件 */
   BroadcastConditions: CcnRouteBroadcastPolicyRouteCondition[];
-  /** 路由行为，`accept` 允许，`drop` 拒绝 */
+  /** 路由行为，accept 允许，drop 拒绝 */
   Action: string;
   /** 策略描述 */
   Description?: string;
@@ -1362,8 +1372,12 @@ declare interface InstanceBind {
   InstanceRegion?: string;
   /** 实例所属的账户uin。 */
   InstanceUin?: string;
-  /** 关联实例状态：`PENDING`：申请中`ACTIVE`：已连接`EXPIRED`：已过期`REJECTED`：已拒绝`DELETED`：已删除`FAILED`：失败的（2小时后将异步强制解关联）`ATTACHING`：关联中`DETACHING`：解关联中`DETACHFAILED`：解关联失败（2小时后将异步强制解关联） */
+  /** 关联实例状态：PENDING：申请中ACTIVE：已连接EXPIRED：已过期REJECTED：已拒绝DELETED：已删除FAILED：失败的（2小时后将异步强制解关联）ATTACHING：关联中DETACHING：解关联中DETACHFAILED：解关联失败（2小时后将异步强制解关联） */
   State?: string;
+  /** 别名类型 */
+  AliasType?: string;
+  /** 别名实例ID */
+  AliasInstanceId?: string;
 }
 
 /** 预付费（包年包月）计费对象。 */

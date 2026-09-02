@@ -1639,7 +1639,7 @@ declare interface SetUserQuotaRequest {
   UserId?: string;
   /** 容量硬限制，单位GiB。设置范围10-10000000。 */
   CapacityHardLimit?: number;
-  /** 文件硬限制，单位个。设置范围1000-100000000 */
+  /** 文件硬限制取值范围：[1000, 1000000000]单位：个默认值：无默认值 */
   FileHardLimit?: number;
   /** 需设置配额的目录路径，必须以 /cfs/ 开头，代表文件存储实例内部的逻辑路径，而非本地挂载点路径。不同目录之间不可存在包含关系。示例：若挂载的是CFS根目录 /，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/test1/test2若挂载的是CFS子目录 /subdir，需对挂载路径下的 test1/test2 设置配额，则入参值为 /cfs/subdir/test1/test2 */
   DirectoryPath?: string;

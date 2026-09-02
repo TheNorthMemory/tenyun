@@ -58,12 +58,14 @@ declare interface ArchiveLogModel {
   StartTime?: string | null;
 }
 
-/** serverless实例的ccu范围 */
+/** serverless实例的资源范围ResourceType 为 cpu 时表示 ccu为 nodecount 时表示节点数范围 */
 declare interface AutoScalingConfig {
   /** ccu最小值 */
   RangeMin: number | null;
   /** ccu最大值 */
   RangeMax: number | null;
+  /** 返回的 range 参数对应的资源类型枚举值：cpu： 返回的是 cpu 调整返回限制，当不存在mem限制时代表 ccunodecount： 返回的是水平扩缩容的节点数限制范围 */
+  ResourceType?: string;
 }
 
 /** 备份方式统计对象-提供给备份空间统计接口 */
@@ -568,6 +570,8 @@ declare interface InstanceInfo {
   AnalysisRelationInfos?: AnalysisRelationInfo[];
   /** 分析引擎实例信息 */
   AnalysisInstanceInfo?: AnalysisInstanceInfo;
+  /** 有关该实例的多个自动变配相关配置，ccu、nodecount 值 */
+  AutoScaleConfigs?: AutoScalingConfig[];
 }
 
 /** 节点信息 */
@@ -778,6 +782,14 @@ declare interface ServerlessCcu {
   MinCcu?: number;
   /** ccu最大值范围 */
   MaxCcu?: number[];
+}
+
+/** Serverless 实例允许调整的 hybrid 节点数量上下限 */
+declare interface ServerlessNodeNumSpec {
+  /** 最小节点数 */
+  MinNodeNum?: number;
+  /** 最大节点数 */
+  MaxNodeNum?: number;
 }
 
 /** 慢日志信息 */
@@ -1005,7 +1017,7 @@ declare interface CreateDBInstancesRequest {
   TemplateId?: string;
   /** 兼容模式，enum:MySQL,HBase */
   SQLMode?: string;
-  /** svls实例的ccu变配配置 */
+  /** SVLS 实例的ccu变配配置入参限制：同时传入 AutoScaleConfigs 时此参数不再生效 */
   AutoScaleConfig?: AutoScalingConfig;
   /** 绑定安全组列表 */
   SecurityGroupIds?: string[];
@@ -1015,6 +1027,8 @@ declare interface CreateDBInstancesRequest {
   Password?: string;
   /** 是否开启透明加密，0：不开启，1：开启 */
   EncryptionEnable?: number;
+  /** SVLS 实例的自动变配相关限制入参限制：传入时 AutoScaleConfig 参数不再生效 */
+  AutoScaleConfigs?: AutoScalingConfig[];
 }
 
 declare interface CreateDBInstancesResponse {
@@ -1238,6 +1252,8 @@ declare interface DescribeDBInstanceDetailResponse {
   EncryptionEnable?: number;
   /** 真实使用的kms地域，用于后续调用kms服务 */
   EncryptionKmsRegion?: string;
+  /** serverless自动变配配置 */
+  AutoScaleConfigs?: AutoScalingConfig[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1251,6 +1267,10 @@ declare interface DescribeDBInstancesRequest {
   Offset?: number;
   /** 指定查询引擎类型枚举值：libra： 列存引擎 */
   EngineType?: string;
+  /** 查询Order By字段，支持 StorageNodeNum/CreateTime/CreateVersion */
+  OrderBy?: string;
+  /** 排序方向枚举值：ASC： 升序DESC： 降序默认值：DESC */
+  OrderDirection?: string;
 }
 
 declare interface DescribeDBInstancesResponse {
@@ -1602,6 +1622,8 @@ declare interface DescribeSpecsResponse {
   HybridNodeSpecs?: StorageNodeSpec[] | null;
   /** svls节点售卖规格列表 */
   ServerlessCcuSpec?: ServerlessCcu[];
+  /** serverless节点数量配置 */
+  ServerlessNodeNumSpec?: ServerlessNodeNumSpec;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

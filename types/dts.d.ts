@@ -1599,7 +1599,7 @@ declare interface CompleteMigrateJobResponse {
 }
 
 declare interface ConfigureSubscribeJobRequest {
-  /** 数据订阅实例的 ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。 */
+  /** 数据订阅实例的 ID，可通过DescribeSyncJobs接口获取。 */
   SubscribeId: string;
   /** 数据订阅的类型，当 DatabaseType 不为 mongodb 时，枚举值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 DatabaseType 为 mongodb 时，枚举值为 all-全实例更新；database-订阅单库；collection-订阅单集合 */
   SubscribeMode: string;
@@ -2771,7 +2771,7 @@ declare interface ModifySubscribeNameResponse {
 }
 
 declare interface ModifySubscribeObjectsRequest {
-  /** 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。 */
+  /** 数据订阅实例的ID，可通过DescribeSubscribeJobs接口获取。 */
   SubscribeId: string;
   /** 数据订阅的类型，非mongo任务的枚举值：0-全实例更新；1-数据更新；2-结构更新；3-数据更新+结构更新。mongo任务的枚举值：0-全实例更新；4-订阅单库；5-订阅单集合 */
   SubscribeObjectType: number;

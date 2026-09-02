@@ -1901,7 +1901,7 @@ declare namespace V20180717 {
     FileUrl?: string;
     /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
     FileId?: string;
-    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    /** 输出音频的元信息。 */
     MetaData?: MediaMetaData;
     /** 时长单位：秒 */
     Duration?: number;
@@ -1935,6 +1935,116 @@ declare namespace V20180717 {
     FileId?: string;
     /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。 */
     Url?: string;
+  }
+
+  /** 用于生成混元 3D 模型的已有模型信息。 */
+  interface AigcHunyuan3DMeshInfo {
+    /** 输入的文件类型。取值有： File：点播文件； Url：可访问的 Url； */
+    Type?: string;
+    /** 文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：图片格式的取值为：支持 glb、obj。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：文件格式的取值为：支持 glb、obj。 */
+    Url?: string;
+  }
+
+  /** AIGC 混元 3D 的多视角图信息。 */
+  interface AigcHunyuan3DMultiViewImageInfo {
+    /** 输入的文件类型。取值有： File：点播媒体文件； Url：可访问的 Url； */
+    Type?: string;
+    /** 文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：图片格式的取值为：支持 jpg、jpeg、png、bmp、webp。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：图片格式的取值为：支持 jpg、jpeg、png、bmp、webp。 */
+    Url?: string;
+    /** 视角图片类型。枚举值：front： 正视图 （必填）back： 背视图left： 左视图right： 右视图top： 顶视图bottom： 底视图left_front： 左前 45°right_front： 右前 45°必须包含 front 视角；同一 ViewType 不允许重复。 */
+    ViewType?: string;
+  }
+
+  /** AIGC 混元 3D 任务的输出媒体文件配置。 */
+  interface AigcHunyuan3DOutputConfig {
+    /** 存储模式。取值有： Temporary：临时存储；默认值：Temporary */
+    StorageMode?: string;
+  }
+
+  /** AIGC 混元 3D 的参考图片信息。 */
+  interface AigcHunyuan3DReferenceImageInfo {
+    /** 输入的文件类型。取值有： File：点播文件； Url：可访问的 Url； */
+    Type?: string;
+    /** 文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 视频上传完成事件通知 或 云点播控制台 获取该字段。当 Type 取值为 File 时，本参数有效。说明：图片格式的取值为：支持 jpg、jpeg、png、bmp、webp。 */
+    FileId?: string;
+    /** 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：图片格式的取值为：支持 jpg、jpeg、png、bmp、webp。 */
+    Url?: string;
+  }
+
+  /** AIGC 混元 3D 任务信息。 */
+  interface AigcHunyuan3DTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** AIGC 混元 3D 任务的输入信息。 */
+    Input?: AigcHunyuan3DTaskInput;
+    /** AIGC 混元 3D 任务的输出信息。 */
+    Output?: AigcHunyuan3DTaskOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+  }
+
+  /** AIGC 混元 3D 任务的输入。 */
+  interface AigcHunyuan3DTaskInput {
+    /** 生成 3D 的参考图片信息。 */
+    ImageInfos?: AigcHunyuan3DReferenceImageInfo[];
+    /** 用于生成 3D 模型的多视角图片信息。数组长度必须在2-8之间，且必须包含 front 视角。 */
+    MultiViewImageInfos?: AigcHunyuan3DMultiViewImageInfo[];
+    /** 生成 3D 模型的提示词。 */
+    Prompt?: string;
+    /** 生成类型。枚举值：Normal： 生成完整 3D 资产（几何 + 纹理）；Geometry： 只生成几何体（无纹理，输出速度更快）；Texture： 只生成纹理（需要填写 MeshInfos） */
+    GenerateType?: string;
+    /** 用于生成 3D 模型的参考 3D 模型。 */
+    MeshInfos?: AigcHunyuan3DMeshInfo[];
+    /** 是否开启输出 PBR 材质。枚举值：Enabled： 开启；Disabled： 关闭。 */
+    EnablePBR?: string;
+    /** 面片数。仅 GenerateType 取值为 Normal 和 Geometry 时生效。 */
+    FaceCount?: number;
+    /** 是否保留 UV 展开。枚举值：Enabled： 保留；Disabled： 不保留。 */
+    KeepUV?: string;
+    /** 结果格式。除默认返回的 obj 和 glb 外，附加输出的一种格式。枚举值：FBX： FBX 格式文件。 */
+    ResultFormat?: string;
+    /** 随机种子，同一 Seed 输入下结果可复现。 */
+    Seed?: number;
+    /** 风格控制词。 */
+    Style?: string;
+    /** 任务的输出媒体文件配置。 */
+    OutputConfig?: AigcHunyuan3DOutputConfig;
+  }
+
+  /** AIGC 混元 3D 任务的输出信息。 */
+  interface AigcHunyuan3DTaskOutput {
+    /** AIGC 混元 3D 任务的输出文件信息。 */
+    FileInfos?: AigcHunyuan3DTaskOutputFileInfo[];
+  }
+
+  /** AIGC 混元 3D 任务的输出文件信息。 */
+  interface AigcHunyuan3DTaskOutputFileInfo {
+    /** 存储模式。取值有： Permanent：永久存储； Temporary：临时存储； 默认值：Temporary */
+    StorageMode?: string;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
+    ExpireTime?: string;
+    /** 文件类型，例如 OBJ、GLB、FBX 等。 */
+    FileType?: string;
+    /** 输出文件地址。 */
+    FileUrl?: string;
+    /** 输出文件预览地址。无文件预览地址时为空。 */
+    PreviewFileUrl?: string;
   }
 
   /** AIGC 生图任务的输出媒体文件配置。 */
@@ -2063,7 +2173,7 @@ declare namespace V20180717 {
     FileUrl?: string;
     /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
     FileId?: string;
-    /** 输出图片的元信息。当 StorageMode 为 Permanent 时有效。 */
+    /** 输出图片的元信息。 */
     MetaData?: MediaMetaData;
   }
 
@@ -2389,7 +2499,7 @@ declare namespace V20180717 {
     FileContent?: string;
     /** 媒体文件 ID。当 StorageMode 为 Permanent 时有效。 */
     FileId?: string;
-    /** 输出视频的元信息。当 StorageMode 为 Permanent 时有效。 */
+    /** 输出视频的元信息。 */
     MetaData?: MediaMetaData;
     /** 文件的用途类型。枚举值：scene_url： 3D 场景文件，FileUrl 字段有返回值。point_url： 点云文件，FileUrl 字段有返回值。mesh_url： 原始网格模型文，FileUrl 字段有返回值。mesh_simplified_url： 简化后的网格模型文件，FileUrl 字段有返回值。position_info： 场景空间位置信息，FileContent 字段有返回值。image_url： 生成的图片，FileUrl 字段有返回值。 */
     UsageType?: string;
@@ -2799,6 +2909,52 @@ declare namespace V20180717 {
     SrcFileId?: string;
     /** 视频剪辑输出的文件信息。 */
     FileInfo?: ClipFileInfo2017;
+  }
+
+  /** 音色克隆任务输入。 */
+  interface CloneVoiceAsyncInput {
+    /** 克隆音频Url，AudioData为空时有效 */
+    AudioUrl?: string;
+    /** 输入音频fileId */
+    AudioFileId?: string;
+    /** 音频语言 */
+    LanguageBoost?: string;
+    /** 扩展参数，json字符串 */
+    ExtParam?: string;
+  }
+
+  /** 音色克隆任务输出。 */
+  interface CloneVoiceAsyncOutput {
+    /** 音色ID */
+    VoiceId?: string;
+    /** 试听音频 */
+    DemoAudio?: string;
+    /** 扩展信息 */
+    ExtInfo?: string;
+  }
+
+  /** 语音克隆任务。 */
+  interface CloneVoiceAsyncTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 视频处理类错误码 列表。 */
+    ErrCodeExt?: string;
+    /** 音色克隆任务输入信息。 */
+    Input?: CloneVoiceAsyncInput;
+    /** 音色克隆任务输出信息。 */
+    Output?: CloneVoiceAsyncOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 拉取上传进度，取值范围 [0-100] 。 */
+    Progress?: number;
   }
 
   /** 色彩增强控制参数 */
@@ -3385,6 +3541,50 @@ declare namespace V20180717 {
     Sha1?: string;
   }
 
+  /** 音色设计任务输入。 */
+  interface DesignVoiceAsyncInput {
+    /** 音色描述 */
+    Prompt?: string;
+    /** 音色信息 */
+    VoiceSettings?: VoiceSettings;
+    /** 试听文本 */
+    PreviewText?: string;
+    /** 扩展参数，json字符串 */
+    ExtParam?: string;
+  }
+
+  /** 音色设计任务输出。 */
+  interface DesignVoiceAsyncOutput {
+    /** 音色ID */
+    VoiceId?: string;
+    /** 试听音频 */
+    TrialAudio?: string;
+  }
+
+  /** 音色设计任务。 */
+  interface DesignVoiceAsyncTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 视频处理类错误码 列表。 */
+    ErrCodeExt?: string;
+    /** 音色设计任务输入信息。 */
+    Input?: DesignVoiceAsyncInput;
+    /** 音色设计任务输出信息。 */
+    Output?: DesignVoiceAsyncOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 拉取上传进度，取值范围 [0-100] 。 */
+    Progress?: number;
+  }
+
   /** 大模型增强配置。 */
   interface DiffusionEnhanceInfo {
     /** 大模型增强开关，可选值：ON：开启；OFF：关闭。 */
@@ -3627,7 +3827,7 @@ declare namespace V20180717 {
   interface EventContent {
     /** 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。 */
     EventHandle?: string;
-    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。AigcImageTaskComplete：AIGC 生图任务完成。AigcVideoTaskComplete：AIGC 生视频任务完成。DescribeAigcFaceInfoAsyncComplete：异步获取 AIGC 人脸信息任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
+    /** 支持事件类型：NewFileUpload：视频上传完成；ProcedureStateChanged：任务流状态变更；FileDeleted：视频删除完成；RestoreMediaComplete：视频取回完成；PullComplete：视频转拉完成；EditMediaComplete：视频编辑完成；SplitMediaComplete：视频拆分完成；ComposeMediaComplete：制作媒体文件完成；WechatMiniProgramPublishComplete：微信小程序发布完成。RemoveWatermark：智能去除水印完成。RebuildMediaComplete：音画质重生完成事件（不推荐使用）。ReviewAudioVideoComplete：音视频审核完成；ExtractTraceWatermarkComplete：提取溯源水印完成；ExtractCopyRightWatermarkComplete：提取版权水印完成；DescribeFileAttributesComplete：获取文件属性完成；QualityInspectComplete：音画质检测完成；QualityEnhanceComplete：音画质重生任务完成；PersistenceComplete：剪辑固化完成；ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。ProcessMediaByMPSComplete：MPS视频处理完成。AigcImageTaskComplete：AIGC 生图任务完成。AigcVideoTaskComplete：AIGC 生视频任务完成。AigcHunyuan3DTaskComplete：AIGC 混元 3D 任务完成。DescribeAigcFaceInfoAsyncComplete：异步获取 AIGC 人脸信息任务完成。兼容 2017 版的事件类型：TranscodeComplete：视频转码完成；ConcatComplete：视频拼接完成；ClipComplete：视频剪辑完成；CreateImageSpriteComplete：视频截取雪碧图完成；CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。 */
     EventType?: string;
     /** 视频上传完成事件，当事件类型为 NewFileUpload 时有效。 */
     FileUploadEvent?: FileUploadTask | null;
@@ -3701,6 +3901,8 @@ declare namespace V20180717 {
     CreateAigcCustomVoiceCompleteEvent?: CreateAigcCustomVoiceTask;
     /** 异步获取 AIGC 人脸信息，仅当 EventType 为 DescribeAigcFaceInfoAsyncComplete，该字段有值。 */
     DescribeAigcFaceInfoAsyncCompleteEvent?: DescribeAigcFaceInfoAsyncTask;
+    /** AIGC 混元 3D 任务信息，仅当 EventType 为 AigcHunyuan3DTaskComplete，该字段有值。 */
+    AigcHunyuan3DCompleteEvent?: AigcHunyuan3DTask;
   }
 
   /** 提取盲水印输入信息 */
@@ -5329,9 +5531,9 @@ declare namespace V20180717 {
 
   /** 指定删除点播视频时的删除内容 */
   interface MediaDeleteItem {
-    /** 所指定的删除部分。如果未填写该字段则参数无效。可选值有：OriginalFiles（删除原文件，删除后无法发起转码、微信发布等任何视频处理操作）；TranscodeFiles（删除转码文件）；AdaptiveDynamicStreamingFiles（删除转自适应码流文件）；WechatPublishFiles（删除微信发布文件）；WechatMiniProgramPublishFiles（删除微信小程序发布文件）。注意： 取值为OriginalFiles时，文件上传时携带的封面文件会被删除；取值为TranscodeFiles时，媒体处理产生的封面文件会被删除。 */
+    /** 所指定的删除部分。如果未填写该字段则参数无效。可选值有：OriginalFiles（删除原文件，删除后无法发起转码、微信发布等任何视频处理操作）；TranscodeFiles（删除转码文件）；AdaptiveDynamicStreamingFiles（删除转自适应码流文件）；WechatPublishFiles（删除微信发布文件）；WechatMiniProgramPublishFiles（删除微信小程序发布文件）。MpsAiMediaAiAnalysisFiles（删除ProcessMediaByMPS产生的智能分析产物）。MpsAiMediaSmartEraseFiles（删除ProcessMediaByMPS产生的智能擦除产物）。MpsAiMediaSmartSubtitleFiles（删除ProcessMediaByMPS产生的智能字幕产物）。注意： 取值为OriginalFiles时，文件上传时携带的封面文件会被删除；取值为TranscodeFiles时，媒体处理产生的封面文件会被删除。 */
     Type: string;
-    /** 删除由Type参数指定的种类下的视频模板号，模板定义参见[转码模板](https://cloud.tencent.com/document/product/266/33478)。默认值为0，表示删除参数Type指定种类下所有的视频。 */
+    /** 删除由Type参数指定的种类下的视频模板号，模板定义参见转码模板。默认值为0，表示删除参数Type指定种类下所有的视频。 */
     Definition?: number;
   }
 
@@ -8197,6 +8399,60 @@ declare namespace V20180717 {
     ReviewConfidence?: number;
   }
 
+  /** 语音合成任务输入。 */
+  interface TextToSpeechAsyncInput {
+    /** 音色ID */
+    VoiceId?: string;
+    /** 语音合成文本 */
+    Text?: string;
+    /** 语音合成语言 */
+    LanguageBoost?: string;
+    /** 扩展参数，json字符串 */
+    ExtParam?: string;
+  }
+
+  /** 语音合成任务输出。 */
+  interface TextToSpeechAsyncOutput {
+    /** 合成音频结果URL */
+    AudioUrl?: string;
+    /** 使用的音色ID */
+    VoiceId?: string;
+    /** 扩展信息 */
+    ExtInfo?: string;
+    /** 合成音频结果FileId */
+    FileId?: string;
+  }
+
+  /** 异步配音输出参数设置 */
+  interface TextToSpeechAsyncOutputOption {
+    /** 合成结果输出类型枚举值：fileId：生成新的点播fileIdurl：音频url，有效期24小时 */
+    Type?: string;
+  }
+
+  /** 语音合成任务。 */
+  interface TextToSpeechAsyncTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 视频处理类错误码 列表。 */
+    ErrCodeExt?: string;
+    /** 语音合成任务输入信息。 */
+    Input?: TextToSpeechAsyncInput;
+    /** 语音合成任务输出信息。 */
+    Output?: TextToSpeechAsyncOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 拉取上传进度，取值范围 [0-100] 。 */
+    Progress?: number;
+  }
+
   /** 文字水印模板 */
   interface TextWatermarkTemplateInput {
     /** 字体类型，目前可以支持两种：simkai.ttf：可以支持中文和英文；arial.ttf：仅支持英文。 */
@@ -8497,6 +8753,52 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** 视频配音任务输入。 */
+  interface VideoDubbingAsyncInput {
+    /** 输入视频Url */
+    InputUrl?: string;
+    /** 输入视频FileId */
+    InputFileId?: string;
+    /** 视频源语言，默认zh */
+    SrcLanguage?: string;
+    /** 视频目标语言，默认en */
+    DstLanguage?: string;
+    /** 配音模型 */
+    Model?: string;
+  }
+
+  /** 视频配音任务输出。 */
+  interface VideoDubbingAsyncOutput {
+    /** 配音结果Url */
+    ResultUrl?: string;
+    /** 配音结果FileId */
+    FileId?: string;
+  }
+
+  /** 音色设计任务。 */
+  interface VideoDubbingAsyncTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+    ErrCode?: number;
+    /** 错误信息。 */
+    Message?: string;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 视频处理类错误码 列表。 */
+    ErrCodeExt?: string;
+    /** 视频配音任务输入信息。 */
+    Input?: VideoDubbingAsyncInput;
+    /** 视频配音任务输出信息。 */
+    Output?: VideoDubbingAsyncOutput;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 拉取上传进度，取值范围 [0-100] 。 */
+    Progress?: number;
+  }
+
   /** 视频增强配置。 */
   interface VideoEnhanceConfig {
     /** 增强场景配置，可选值：common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。填空字符串代表不使用增强场景 */
@@ -8639,6 +8941,68 @@ declare namespace V20180717 {
   interface VoiceConfigureInfoForUpdate {
     /** 音频（静音、低音、爆音）检测开关，可选值：ON：开启；OFF：关闭。 */
     Switch?: string;
+  }
+
+  /** 音色信息 */
+  interface VoiceInfo {
+    /** 音色ID */
+    VoiceId?: string;
+    /** 音色名 */
+    Name?: string;
+    /** 音色描述信息 */
+    Description?: string;
+    /** 音色类别枚举值：system：系统音色clone：克隆音色design：设计音色 */
+    Category?: string;
+    /** 性别枚举值：male： 男famale： 女 */
+    Gender?: string;
+    /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+    Age?: string;
+    /** 支持语种列表如：en */
+    Languages?: string[];
+    /** 试听音频URL */
+    AudioUrl?: string;
+    /** 标签列表如：温柔 */
+    Labels?: string[];
+    /** 推荐场景如：教育 */
+    Scenes?: string[];
+  }
+
+  /** 音色属性 */
+  interface VoiceSettings {
+    /** 音色名 */
+    Name?: string;
+    /** 音色描述 */
+    Description?: string;
+    /** 性别枚举值：male： 男性female： 女性unknown： 未知 */
+    Gender?: string;
+    /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+    Age?: string;
+    /** 语言，当前支持：zh 中文 (Chinese)en 英语 (English)ja 日语 (Japanese)de 德语 (German)fr 法语 (French)ko 韩语 (Korean)ru 俄语 (Russian)uk 乌克兰语 (Ukrainian)pt 葡萄牙语 (Portuguese)it 意大利语 (Italian)es 西班牙语 (Spanish)id 印度尼西亚语 (Indonesian)nl 荷兰语 (Dutch)tr 土耳其语 (Turkish)fil 菲律宾语 (Filipino)ms 马来语 (Malay)el 希腊语 (Greek)fi 芬兰语 (Finnish)hr 克罗地亚语 (Croatian)sk 斯洛伐克语 (Slovak)pl 波兰语 (Polish)sv 瑞典语 (Swedish)hi 印地语 (Hindi)bg 保加利亚语 (Bulgarian)ro 罗马尼亚语 (Romanian)ar 阿拉伯语 (Arabic)cs 捷克语 (Czech)da 丹麦语 (Danish)ta 泰米尔语 (Tamil)hun 匈牙利语（Hungarian）vi 越南语（Vietnamese）no 挪威语（Norwegian）yue 粤语（Cantonese）th 泰语（Thai）he 希伯来语（Hebrew）ca 加泰罗尼亚语（Catalan）nn 尼诺斯克语（Nynorsk）af 阿非利卡语（Afrikaans）fa 波斯语（Persian）sl 斯洛文尼亚语（Slovenian） */
+    Languages?: string[];
+    /** 标签 */
+    Labels?: string[];
+    /** 使用场景 */
+    Scenes?: string[];
+  }
+
+  /** 音色更新字段 */
+  interface VoiceUpdateFields {
+    /** 音色名 */
+    Name?: string;
+    /** 音色描述 */
+    Description?: string;
+    /** 性别枚举值：male： 男female： 女unknown： 未知 */
+    Gender?: string;
+    /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+    Age?: string;
+    /** 语言 */
+    Languages?: string[];
+    /** 标签 */
+    Labels?: string[];
+    /** 场景 */
+    Scenes?: string[];
+    /** 试听音频 */
+    AudioUrl?: string;
   }
 
   /** 即时转码水印模板配置。 */
@@ -8857,6 +9221,32 @@ declare namespace V20180717 {
   }
 
   interface AttachMediaSubtitlesResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CloneVoiceAsyncRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 克隆音频base64编码。 */
+    AudioData?: string;
+    /** 克隆音频Url，AudioData为空时有效 */
+    AudioUrl?: string;
+    /** 克隆文件FileID，AudioData及AudioUrl为空时有效 */
+    AudioFileId?: string;
+    /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
+    LanguageBoost?: string;
+    /** 音色克隆拓展参数。ExtParam 支持的字段： text (string)：试听合成文本，最大 1000 字符；为空或不传时不返回试听音频。 */
+    ExtParam?: string;
+    /** 标识来源上下文，用于透传用户请求信息，在回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+  }
+
+  interface CloneVoiceAsyncResponse {
+    /** 任务ID，使用该ID查询结果 */
+    TaskId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -10511,6 +10901,18 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DeleteVoiceRequest {
+    /** 音色Id */
+    VoiceId: string;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+  }
+
+  interface DeleteVoiceResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DeleteWatermarkTemplateRequest {
     /** 水印模板唯一标识。 */
     Definition: number;
@@ -11709,7 +12111,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别AigcHunyuan3DTask：AIGC 混元 3D 任务DesignVoiceAsync：音色设计CloneVoiceAsync：音色克隆TextToSpeechAsync：语音生成VideoDubbingAsync：视频翻译配音 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -11793,6 +12195,16 @@ declare namespace V20180717 {
     CreateAigcAudioCloneTask?: CreateAigcAudioCloneTask;
     /** 异步获取 AIGC 人脸信息，仅当 TaskType 为 DescribeAigcFaceInfoAsync，该字段有值。 */
     DescribeAigcFaceInfoAsyncTask?: DescribeAigcFaceInfoAsyncTask;
+    /** 混元 3D 任务，仅当 TaskType 为 AigcHunyuan3DTask，该字段有值。 */
+    AigcHunyuan3DTask?: AigcHunyuan3DTask;
+    /** 音色设计，仅当 TaskType 为 DesignVoiceAsync，该字段有值。 */
+    DesignVoiceAsyncTask?: DesignVoiceAsyncTask;
+    /** 音色克隆，仅当 TaskType 为 CloneVoiceAsync，该字段有值。 */
+    CloneVoiceAsyncTask?: CloneVoiceAsyncTask;
+    /** 语音合成，仅当 TaskType 为 TextToSpeechAsync，该字段有值。 */
+    TextToSpeechAsyncTask?: TextToSpeechAsyncTask;
+    /** 视频翻译配音，仅当 TaskType 为VideoDubbingAsync，该字段有值。 */
+    VideoDubbingAsyncTask?: VideoDubbingAsyncTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11875,6 +12287,40 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeVoicesRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 音色ID */
+    VoiceId?: string;
+    /** 音色类别枚举值：system： 系统音色clone： 克隆音色design： 设计音色all： 所有音色（默认） */
+    VoiceType?: string;
+    /** 音色名 */
+    VoiceName?: string;
+    /** 音色描述 */
+    Description?: string;
+    /** 性别枚举值：male： 男female： 女unknown： 未知 */
+    Gender?: string;
+    /** 年龄枚举值：child： 儿童teenager： 少年youth： 青年middle_aged： 中年senior： 老年unknown： 未知 */
+    Age?: string;
+    /** 语言 */
+    Languages?: string[];
+    /** 标签 */
+    Labels?: string[];
+    /** 场景 */
+    Scenes?: string[];
+    /** 扩展参数，json字符串其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色 */
+    ExtParam?: string;
+  }
+
+  interface DescribeVoicesResponse {
+    /** 可用音色列表 */
+    Voices?: VoiceInfo[];
+    /** 可用音色总数 */
+    TotalCount?: number;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeWatermarkTemplatesRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -11917,6 +12363,30 @@ declare namespace V20180717 {
     TotalCount?: number;
     /** 关键词信息。 */
     WordSet?: AiSampleWord[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface DesignVoiceAsyncRequest {
+    /** 音色描述 */
+    Prompt: string;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 音色设置 */
+    VoiceSettings?: VoiceSettings;
+    /** 试听合成文本，最大 500 字符 */
+    PreviewText?: string;
+    /** 扩展参数，json字符串 */
+    ExtParam?: string;
+    /** 标识来源上下文，用于透传用户请求信息，在回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+  }
+
+  interface DesignVoiceAsyncResponse {
+    /** 任务id，查询任务时使用 */
+    TaskId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -13827,6 +14297,32 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface TextToSpeechAsyncRequest {
+    /** 语音合成文本 */
+    Text: string;
+    /** 音色ID */
+    VoiceId: string;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
+    LanguageBoost?: string;
+    /** 文本合成语音（异步）拓展参数。ExtParam 支持的字段：model (string)：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；默认 minimax-speech-2.8-hd。text_lang (string)：文本语言，如 zh / en；与入参 LanguageBoost 同义，同时传入时以 ExtParam 为准。audio_setting (object)：音频输出与音色微调参数（注意：异步接口的语速、音量、音调、情绪均在 audio_setting 下，与同步接口的 voice_setting 不同），可选字段：speed (float)：语速，[0.5, 2.0]，默认 1.0。vol (float)：音量，(0, 10]，默认 1.0。pitch (int)：音调，[-12, 12]，默认 0。emotion (string)：情绪，可选 happy / sad / angry / fearful / disgusted / surprised / calm / fluent / whisper。sample_rate (int)：采样率，可选 8000 / 16000 / 22050 / 24000 / 32000 / 44100，默认 16000。format (string)：音频格式，可选 mp3 / wav，默认 wav。duration (float)：目标时长（秒）。cut_silence (bool)：是否裁剪静音段。 */
+    ExtParam?: string;
+    /** 输出相关参数可以指定输出形式等。默认输出音频url。 */
+    Output?: TextToSpeechAsyncOutputOption;
+    /** 标识来源上下文，用于透传用户请求信息，在回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+  }
+
+  interface TextToSpeechAsyncResponse {
+    /** 任务ID，使用该ID查询结果 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface UpdateAigcApiTokenRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -13839,6 +14335,24 @@ declare namespace V20180717 {
   }
 
   interface UpdateAigcApiTokenResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface UpdateVoiceRequest {
+    /** 音色Id */
+    VoiceId: string;
+    /** 更新音色字段 */
+    VoiceFields: VoiceUpdateFields;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 扩展参数，json字符串 */
+    ExtParam?: string;
+  }
+
+  interface UpdateVoiceResponse {
+    /** 更新后的音色信息 */
+    Voice?: VoiceInfo;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -13897,6 +14411,8 @@ declare interface Vod {
   ApplyUpload(data: V20180717.ApplyUploadRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.ApplyUploadResponse>;
   /** 关联媒体字幕 {@link V20180717.AttachMediaSubtitlesRequest} {@link V20180717.AttachMediaSubtitlesResponse} */
   AttachMediaSubtitles(data: V20180717.AttachMediaSubtitlesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.AttachMediaSubtitlesResponse>;
+  /** 异步语音克隆 {@link V20180717.CloneVoiceAsyncRequest} {@link V20180717.CloneVoiceAsyncResponse} */
+  CloneVoiceAsync(data: V20180717.CloneVoiceAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CloneVoiceAsyncResponse>;
   /** 确认上传 {@link V20180717.CommitUploadRequest} {@link V20180717.CommitUploadResponse} */
   CommitUpload(data: V20180717.CommitUploadRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CommitUploadResponse>;
   /** 视频合成 {@link V20180717.ComposeMediaRequest} {@link V20180717.ComposeMediaResponse} */
@@ -14063,6 +14579,8 @@ declare interface Vod {
   DeleteTranscodeTemplate(data: V20180717.DeleteTranscodeTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteTranscodeTemplateResponse>;
   /** 删除点播加速域名 {@link V20180717.DeleteVodDomainRequest} {@link V20180717.DeleteVodDomainResponse} */
   DeleteVodDomain(data: V20180717.DeleteVodDomainRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteVodDomainResponse>;
+  /** 删除音色 {@link V20180717.DeleteVoiceRequest} {@link V20180717.DeleteVoiceResponse} */
+  DeleteVoice(data: V20180717.DeleteVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteVoiceResponse>;
   /** 删除水印模板 {@link V20180717.DeleteWatermarkTemplateRequest} {@link V20180717.DeleteWatermarkTemplateResponse} */
   DeleteWatermarkTemplate(data: V20180717.DeleteWatermarkTemplateRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DeleteWatermarkTemplateResponse>;
   /** 删除关键词样本 {@link V20180717.DeleteWordSamplesRequest} {@link V20180717.DeleteWordSamplesResponse} */
@@ -14193,10 +14711,14 @@ declare interface Vod {
   DescribeTranscodeTemplates(data: V20180717.DescribeTranscodeTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeTranscodeTemplatesResponse>;
   /** 查询点播域名列表 {@link V20180717.DescribeVodDomainsRequest} {@link V20180717.DescribeVodDomainsResponse} */
   DescribeVodDomains(data: V20180717.DescribeVodDomainsRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeVodDomainsResponse>;
+  /** 查询可用音色 {@link V20180717.DescribeVoicesRequest} {@link V20180717.DescribeVoicesResponse} */
+  DescribeVoices(data: V20180717.DescribeVoicesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeVoicesResponse>;
   /** 获取水印模板列表 {@link V20180717.DescribeWatermarkTemplatesRequest} {@link V20180717.DescribeWatermarkTemplatesResponse} */
   DescribeWatermarkTemplates(data: V20180717.DescribeWatermarkTemplatesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeWatermarkTemplatesResponse>;
   /** 获取关键词样本列表 {@link V20180717.DescribeWordSamplesRequest} {@link V20180717.DescribeWordSamplesResponse} */
   DescribeWordSamples(data: V20180717.DescribeWordSamplesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeWordSamplesResponse>;
+  /** 异步音色设计 {@link V20180717.DesignVoiceAsyncRequest} {@link V20180717.DesignVoiceAsyncResponse} */
+  DesignVoiceAsync(data: V20180717.DesignVoiceAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DesignVoiceAsyncResponse>;
   /** 编辑视频 {@link V20180717.EditMediaRequest} {@link V20180717.EditMediaResponse} */
   EditMedia(data: V20180717.EditMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.EditMediaResponse>;
   /** 使用模板发起音画质重生 {@link V20180717.EnhanceMediaByTemplateRequest} {@link V20180717.EnhanceMediaByTemplateResponse} */
@@ -14349,8 +14871,12 @@ declare interface Vod {
   SimpleHlsClip(data: V20180717.SimpleHlsClipRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SimpleHlsClipResponse>;
   /** 视频拆条 {@link V20180717.SplitMediaRequest} {@link V20180717.SplitMediaResponse} */
   SplitMedia(data: V20180717.SplitMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SplitMediaResponse>;
+  /** 异步语音合成 {@link V20180717.TextToSpeechAsyncRequest} {@link V20180717.TextToSpeechAsyncResponse} */
+  TextToSpeechAsync(data: V20180717.TextToSpeechAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.TextToSpeechAsyncResponse>;
   /** 更新AIGC API Token {@link V20180717.UpdateAigcApiTokenRequest} {@link V20180717.UpdateAigcApiTokenResponse} */
   UpdateAigcApiToken(data: V20180717.UpdateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateAigcApiTokenResponse>;
+  /** 更新音色信息 {@link V20180717.UpdateVoiceRequest} {@link V20180717.UpdateVoiceResponse} */
+  UpdateVoice(data: V20180717.UpdateVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateVoiceResponse>;
   /** 验证域名解析 {@link V20180717.VerifyDomainRecordRequest} {@link V20180717.VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: V20180717.VerifyDomainRecordRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.VerifyDomainRecordResponse>;
   /** 微信小程序视频发布 {@link V20180717.WeChatMiniProgramPublishRequest} {@link V20180717.WeChatMiniProgramPublishResponse} */

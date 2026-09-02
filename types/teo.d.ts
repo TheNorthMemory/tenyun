@@ -3968,6 +3968,56 @@ declare interface RuleEngineAction {
   CustomActionParameters?: CustomActionParameters;
 }
 
+/** 规则引擎操作定制配置。 */
+declare interface RuleEngineCustomAction {
+  /** 定制配置唯一 ID。 */
+  ActionId?: string;
+  /** 定制配置名称。 */
+  Name?: string;
+  /** 定制配置描述。 */
+  Description?: string;
+  /** 定制配置参数定义列表。 */
+  Parameters?: RuleEngineCustomActionParameterSchema[];
+  /** 定制配置支持的匹配条件。支持匹配条件参考官方文档 通用参考-配置语法-变量。 */
+  SupportedConditions?: string[];
+}
+
+/** 规则引擎操作定制配置参数结构定义。 */
+declare interface RuleEngineCustomActionParameterSchema {
+  /** 参数字段名称。 */
+  Name?: string;
+  /** 参数字段类型，取值有：Boolean：布尔；Integer：整型；Float：浮点型；String：字符串；ArrayOfInteger：整型数组；ArrayOfFloat：浮点型数组；ArrayOfString：字符串数组。 */
+  ValueType?: string;
+  /** 参数字段描述。 */
+  Description?: string;
+  /** 参数字段默认值。 */
+  Default?: string;
+  /** 参数字段单位。 */
+  Unit?: string;
+  /** 参数字段是否必填。默认值：false若填充，则适用于所有参数字段类型校验；若不填充则不校验。 */
+  Required?: boolean;
+  /** 参数字段最小值。若填充，适用于整数、浮点数、整数数组、浮点数数组类型参数的数值校验；若不填充则不校验。 */
+  MinValue?: number;
+  /** 参数字段最大值。若填充，适用于整数、浮点数、整数数组、浮点数数组类型参数的数值校验；若不填充则不校验。 */
+  MaxValue?: number;
+  /** 参数字段最小长度。若填充，适用于字符串、字符串数组类型参数的数值校验；若不填充则不校验。 */
+  MinLength?: number;
+  /** 参数字段最大长度。若填充，适用于字符串、字符串数组类型参数的数值校验；若不填充则不校验。 */
+  MaxLength?: number;
+  /** 参数字段最小项数。若填充，适用于各类数组类型参数的数值校验；若不填充则不校验。 */
+  MinItems?: number;
+  /** 参数字段最大项数。若填充，适用于各类数组类型参数的数值校验；若不填充则不校验。 */
+  MaxItems?: number;
+  /** 参数字段项是否唯一。默认值：false若填充，适用于各类数组类型参数的数值校验；若不填充则不校验。 */
+  UniqueItems?: boolean;
+  /** 参数字段允许的格式。若填充，需要校验字符串或者字符串数组内容合适；若不填充则不校验。 */
+  AllowedPattern?: string;
+  /** 参数字段允许的取值，若为空则不校验。若本参数填充，则说明对应参数为枚举类型，仅允许填充本参数数组中的值；若不填充则不校验。 */
+  AllowedValues?: string[];
+  /** 参数字段最小步长。若填充，适用于浮点型和浮点型数组类型参数的数值校验；若不填充则不校验。 */
+  MultipleOf?: string;
+}
+
 /** 规则引擎规则详情。 */
 declare interface RuleEngineItem {
   /** 规则状态。取值有： enable: 启用； disable: 未启用。 */
@@ -6332,6 +6382,30 @@ declare interface DescribeApplicationProxiesResponse {
   ApplicationProxies?: ApplicationProxy[];
   /** 记录总数。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAvailableCustomActionsForRuleEngineRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 过滤条件，多个条件为且关系，Filters.Values 的上限为 20。该参数不填写时，返回当前站点下所有可用的规则引擎定制配置。详细的过滤条件如下：action-id：按照定制配置唯一标识 ID 进行过滤；name：按照定制配置名称进行过滤。模糊查询时仅支持过滤字段名为 name。 */
+  Filters?: AdvancedFilter[];
+  /** 分页查询限制数目。取值范围：[0, 1000]默认值：20 */
+  Limit?: number;
+  /** 分页偏移量。默认值：0 */
+  Offset?: number;
+  /** 排序字段，取值有：action-id：按照定制配置唯一标识 ID 排序；create-time：按照定制配置创建时间排序。默认值：action-id。 */
+  SortBy?: string;
+  /** 排序方式，取值有：asc：升序排序；desc：降序排序。默认值：desc。 */
+  SortOrder?: string;
+}
+
+declare interface DescribeAvailableCustomActionsForRuleEngineResponse {
+  /** 符合条件的规则引擎定制配置的总数。 */
+  TotalCount?: number;
+  /** 符合条件的规则引擎定制配置的列表。 */
+  CustomActionSet?: RuleEngineCustomAction[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9493,6 +9567,8 @@ declare interface Teo {
   DescribeAliasDomains(data: DescribeAliasDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAliasDomainsResponse>;
   /** 查询应用代理列表（旧） {@link DescribeApplicationProxiesRequest} {@link DescribeApplicationProxiesResponse} */
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
+  /** 查询规则引擎可用的定制配置列表 {@link DescribeAvailableCustomActionsForRuleEngineRequest} {@link DescribeAvailableCustomActionsForRuleEngineResponse} */
+  DescribeAvailableCustomActionsForRuleEngine(data: DescribeAvailableCustomActionsForRuleEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableCustomActionsForRuleEngineResponse>;
   /** 查询当前账户可购买套餐信息列表 {@link DescribeAvailablePlansRequest} {@link DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
   /** 查询计费数据 {@link DescribeBillingDataRequest} {@link DescribeBillingDataResponse} */

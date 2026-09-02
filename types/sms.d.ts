@@ -200,6 +200,28 @@ declare interface SendMultiStatus {
   IsoCode?: string;
 }
 
+/** 短信发送记录信息 */
+declare interface SendRecord {
+  /** 下发的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613601238015， 其中前面有一个+号 ，86为国家码，13601238015为手机号。 */
+  PhoneNumber?: string;
+  /** 发送流水号，与短信发送接口返回的发送流水号一致。 */
+  SerialNo?: string;
+  /** 发送状态。枚举值：1： 提交失败2： 提交成功，送达成功3： 提交成功，发送中4： 提交成功，送达失败 */
+  SendStatus?: number;
+  /** 请求状态码，可参考 短信 API 3.0 发送错误码。 */
+  RequestCode?: string;
+  /** 回执状态码，仅发送状态为 2（提交成功，送达成功）和 4（提交成功，送达失败）时有值，其余状态为空字符串，可参考 回执状态错误码。 */
+  StatusCode?: string;
+  /** 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 国际/港澳台短信价格总览。 */
+  IsoCode?: string;
+  /** 短信下发内容，为保证信息安全，短信中的部分入参信息会脱敏存储，对应发送记录查询结果中包含的打码内容，用户实际接收到的短信内容为正常完整内容。有疑问可咨询 腾讯云小助手 。 */
+  Content?: string;
+  /** 发送时间，UNIX 时间戳（秒）。单位：秒 */
+  SendTime?: number;
+  /** 用户实际收到短信的时间，UNIX 时间戳（秒），仅发送状态为2（提交成功，送达成功）时有值 ，其余状态默认为 0 。单位：秒 */
+  UserReceiveTime?: number;
+}
+
 /** 发送短信状态 */
 declare interface SendStatus {
   /** 发送流水号。 */
@@ -346,6 +368,30 @@ declare interface DescribePhoneNumberInfoRequest {
 declare interface DescribePhoneNumberInfoResponse {
   /** 获取号码信息。 */
   PhoneNumberInfoSet?: PhoneNumberInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSendRecordListRequest {
+  /** 下发的手机号码，依据 E.164 标准为：+[国家（或地区）码][手机号] ，示例如：+8613601238015， 其中前面有一个+号 ，86为国家码，13601238015为手机号。 */
+  PhoneNumber: string;
+  /** 短信 SdkAppId 在 短信控制台 添加应用后生成的实际 SdkAppId。 */
+  SmsSdkAppId: string;
+  /** 查询起始时间，以短信发送时间为准，UNIX 时间戳（单位：秒）。注：最早可查询当前时间前 72 小时的数据。单位：秒 */
+  BeginTime: number;
+  /** 查询截止时间，以短信发送时间为准，UNIX 时间戳（时间：秒）。注：不可以超过当前时间。单位：秒默认值：腾讯云服务当前时间 */
+  EndTime?: number;
+  /** 单次查询最大条数。取值范围：[1, 50]默认值：20 */
+  Limit?: number;
+  /** 偏移量。 取值范围：[0, 1000]默认值：0注：查询范围内超过 1000 条记录将被截断，最大查询 1000 条，查询记录按发送时间降序。 */
+  Offset?: number;
+}
+
+declare interface DescribeSendRecordListResponse {
+  /** 短信下发记录集合。 */
+  SendRecordSet?: SendRecord[];
+  /** 查询时间范围内的下发记录总数，注：最大支持查询单个下发手机号码 72 小时内的 1000 条记录。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -567,11 +613,11 @@ declare interface SendSmsResponse {
 }
 
 declare interface SendStatusStatisticsRequest {
-  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。 */
+  /** 起始时间，格式为yyyymmddhh，精确到小时，例如2024050113，表示2024年5月1号13时。注：统计范围包含当前小时。参数格式：yyyymmddhh */
   BeginTime: string;
-  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。注：EndTime 必须大于等于 BeginTime。 */
+  /** 结束时间，格式为yyyymmddhh，精确到小时，例如2024050118，表示2024年5月1号18时。注：EndTime 必须大于等于 BeginTime，统计范围包含当前小时。参数格式：yyyymmddhh */
   EndTime: string;
-  /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
+  /** 短信 SdkAppId 在 短信控制台 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
   /** 最大上限。注：目前固定设置为0。 */
   Limit: number;
@@ -1125,6 +1171,8 @@ declare interface Sms {
   DeleteSmsTemplate(data: DeleteSmsTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSmsTemplateResponse>;
   /** 号码信息查询 {@link DescribePhoneNumberInfoRequest} {@link DescribePhoneNumberInfoResponse} */
   DescribePhoneNumberInfo(data: DescribePhoneNumberInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePhoneNumberInfoResponse>;
+  /** 查询短信下发记录 {@link DescribeSendRecordListRequest} {@link DescribeSendRecordListResponse} */
+  DescribeSendRecordList(data: DescribeSendRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSendRecordListResponse>;
   /** 短信签名状态查询 {@link DescribeSmsSignListRequest} {@link DescribeSmsSignListResponse} */
   DescribeSmsSignList(data: DescribeSmsSignListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSmsSignListResponse>;
   /** 短信模板状态查询 {@link DescribeSmsTemplateListRequest} {@link DescribeSmsTemplateListResponse} */

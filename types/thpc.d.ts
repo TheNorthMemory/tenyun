@@ -240,6 +240,26 @@ declare interface ExpansionNodeConfigOverview {
   DataDisks?: DataDisk[] | null;
 }
 
+/** 扩容方式配置，定义用什么创建节点。 */
+declare interface ExpansionPolicy {
+  /** 扩容方式。可选值：LAUNCH_TEMPLATE（启动模板）、MULTI_CARD（多卡型混扩）。 */
+  ExpansionMode?: string;
+  /** 启动模板 ID 列表，最多 10 个。ExpansionMode=LAUNCH_TEMPLATE 时使用。 */
+  LaunchTemplateIds?: string[] | null;
+  /** 参考实例 ID，根据已有实例配置生成启动模板。 */
+  ReferenceInstanceId?: string | null;
+  /** 启动模板扩容覆盖配置。ExpansionMode=MULTI_CARD 时使用。 */
+  TemplateOverrides?: TemplateOverrides | null;
+  /** 候选规格排序策略。 */
+  ExpansionPriority?: ExpansionPriority | null;
+}
+
+/** 候选计算资源规格排序策略。LARGE_FIRST/SMALL_FIRST 表示按规格大小选择候选资源，GPU 场景按卡数判断大小。 */
+declare interface ExpansionPriority {
+  /** 候选规格排序方式。可选值：LARGE_FIRST（大规格优先）、SMALL_FIRST（小规格优先）。 */
+  InstanceSpecPriority?: string | null;
+}
+
 /** >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等> * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。> * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。 */
 declare interface Filter {
   /** 需要过滤的字段。 */
@@ -586,6 +606,14 @@ declare interface RunSecurityServiceEnabled {
   Enabled?: boolean;
 }
 
+/** 伸缩策略配置，定义队列的容量语义。 */
+declare interface ScalingPolicy {
+  /** 期望节点数。 */
+  DesiredCapacity?: number | null;
+  /** 伸缩单位。可选值：NODE（按节点）、GPU_CARD（按 GPU 卡）。 */
+  ScalingUnit?: string | null;
+}
+
 /** 描述了工作空间的计费模式 */
 declare interface SpaceChargePrepaid {
   /** 购买实例的时长，单位：月。取值范围：1, 2, 3, 12, 24, 36。默认取值为1。 */
@@ -772,6 +800,18 @@ declare interface TaskDependence {
   EndTask: string;
 }
 
+/** 启动模板扩容覆盖配置。ExpansionMode=MULTI_CARD 时通过此对象指定机型族、卡数折算等覆盖参数。 */
+declare interface TemplateOverrides {
+  /** 候选机型族列表，最多 10 个。MULTI_CARD 模式的明确标志字段。 */
+  InstanceFamilies?: string[] | null;
+  /** 每节点 GPU 卡数。 */
+  GpuCountPerNode?: number | null;
+  /** 是否启用混合 GPU 卡数折算，默认 false。未传时保持已持久化的混卡开关。 */
+  EnableMixedGpuCount?: boolean | null;
+  /** 是否启用多可用区扩容。未传时保持已持久化的分区策略，局部更新不得覆盖。 */
+  EnableMultiZone?: boolean | null;
+}
+
 /** 描述了VPC相关信息 */
 declare interface VirtualPrivateCloud {
   /** 私有网络ID，形如`vpc-xxx`。有效的VpcId可通过登录[控制台](https://console.cloud.tencent.com/vpc/vpc?rid=1)查询；也可以调用接口 [DescribeVpcEx](/document/api/215/1372) ，从接口返回中的`unVpcId`字段获取。若在创建子机时VpcId与SubnetId同时传入`DEFAULT`，则强制使用默认vpc网络。 */
@@ -930,6 +970,28 @@ declare interface CreateClusterResponse {
   RequestId?: string;
 }
 
+declare interface CreateScheduledActionRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** 队列名称。 */
+  QueueName: string;
+  /** 定时伸缩任务名称。 */
+  ScheduledActionName: string;
+  /** 定时伸缩任务生效起始时间，格式：YYYY-MM-DD HH:MM:SS。 */
+  StartTime: string;
+  /** 定时触发后队列期望节点数。 */
+  DesiredCapacity: number;
+  /** 定时伸缩任务生效结束时间，格式：YYYY-MM-DD HH:MM:SS。不传则永久有效。 */
+  EndTime?: string;
+  /** 重复策略，遵循 cron 表达式格式。不传则只执行一次。 */
+  Recurrence?: string;
+}
+
+declare interface CreateScheduledActionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkspacesRequest {
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
@@ -1040,6 +1102,16 @@ declare interface DeleteQueueResponse {
   RequestId?: string;
 }
 
+declare interface DeleteScheduledActionRequest {
+  /** 定时伸缩任务 ID 列表，最多 20 个。 */
+  ScheduledActionIds: string[];
+}
+
+declare interface DeleteScheduledActionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoScalingConfigurationRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1122,6 +1194,18 @@ declare interface DescribeInitNodeScriptsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceFamiliesRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** GPU 厂商过滤条件。 */
+  Vendor?: string;
+}
+
+declare interface DescribeInstanceFamiliesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobSubmitInfoRequest {
   /** 作业ID */
   JobId: string;
@@ -1194,6 +1278,30 @@ declare interface DescribeNodesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeQueueAutoScalingOverviewRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** 队列名称列表。不传则返回所有队列的弹性伸缩概览信息。 */
+  QueueNames?: string[];
+}
+
+declare interface DescribeQueueAutoScalingOverviewResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQueueAutoScalingRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** 队列名称。不传则返回所有队列的弹性伸缩配置。 */
+  QueueName?: string;
+}
+
+declare interface DescribeQueueAutoScalingResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQueuesRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1208,6 +1316,22 @@ declare interface DescribeQueuesResponse {
   QueueSet?: QueueOverview[];
   /** 符合条件的队列数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScheduledActionsRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** 队列名称。 */
+  QueueName?: string;
+  /** 定时伸缩任务 ID 列表。 */
+  ScheduledActionIds?: string[];
+  /** 任务状态过滤条件。 */
+  Status?: string;
+}
+
+declare interface DescribeScheduledActionsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1240,6 +1364,60 @@ declare interface DetachNodesRequest {
 }
 
 declare interface DetachNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface InquirePriceCreateWorkspacesRequest {
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
+  /** 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目，所属宿主机（在专用宿主机上创建子机时指定）等属性。 注：如果您不指定LaunchTemplate参数，则Placement为必选参数。若同时传递Placement和LaunchTemplate，则默认覆盖LaunchTemplate中对应的Placement的值。 */
+  Placement?: SpacePlacement;
+  /** 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。 */
+  SpaceChargePrepaid?: SpaceChargePrepaid;
+  /** 工作空间计费类型 */
+  SpaceChargeType?: string;
+  /** 工作空间规格 */
+  SpaceType?: string;
+  /** 镜像ID */
+  ImageId?: string;
+  /** 工作空间系统盘信息 */
+  SystemDisk?: SpaceSystemDisk;
+  /** 工作空间数据盘信息 */
+  DataDisks?: SpaceDataDisk[];
+  /** 私有网络相关信息 */
+  VirtualPrivateCloud?: SpaceVirtualPrivateCloud;
+  /** 公网带宽相关信息设置 */
+  InternetAccessible?: SpaceInternetAccessible;
+  /** 购买工作空间数量 */
+  SpaceCount?: number;
+  /** 工作空间显示名称 */
+  SpaceName?: string;
+  /** 工作空间登陆设置 */
+  LoginSettings?: LoginSettings;
+  /** 工作空间所属安全组 */
+  SecurityGroupIds?: string[];
+  /** 增强服务 */
+  EnhancedService?: EnhancedService;
+  /** 是否只预检此次请求 */
+  DryRun?: boolean;
+  /** 提供给工作空间使用的用户数据 */
+  UserData?: string;
+  /** 置放群组id */
+  DisasterRecoverGroupIds?: string[];
+  /** 标签描述列表 */
+  TagSpecification?: TagSpecification[];
+  /** 高性能计算集群ID */
+  HpcClusterId?: string;
+  /** CAM角色名称 */
+  CamRoleName?: string;
+  /** 实例主机名。点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows 实例：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。其他类型（Linux 等）实例：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。购买多台实例，如果指定模式串`{R:x}`，表示生成数字`[x, x+n-1]`，其中`n`表示购买实例的数量，例如`server{R:3}`，购买1台时，实例主机名为`server3`；购买2台时，实例主机名分别为`server3`，`server4`。支持指定多个模式串`{R:x}`。购买多台实例，如果不指定模式串，则在实例主机名添加后缀`1、2...n`，其中`n`表示购买实例的数量，例如`server`，购买2台时，实例主机名分别为`server1`，`server2`。 */
+  HostName?: string;
+}
+
+declare interface InquirePriceCreateWorkspacesResponse {
+  /** 该参数表示对应配置实例的价格 */
+  Price?: Price;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1302,6 +1480,22 @@ declare interface ModifyNodeAttributeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyScheduledActionRequest {
+  /** 定时伸缩任务 ID。 */
+  ScheduledActionId: string;
+  /** 定时伸缩任务名称。 */
+  ScheduledActionName?: string;
+  /** 定时触发后队列期望节点数。 */
+  DesiredCapacity?: number;
+  /** 任务状态。 */
+  Status?: string;
+}
+
+declare interface ModifyScheduledActionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyWorkspacesAttributeRequest {
   /** 工作空间列表 */
   SpaceIds: string[];
@@ -1356,6 +1550,22 @@ declare interface SetAutoScalingConfigurationRequest {
 }
 
 declare interface SetAutoScalingConfigurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetQueueAutoScalingRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** 队列名称。 */
+  QueueName: string;
+  /** 伸缩容量策略，用于设置目标容量及容量单位。单独传入时仅更新容量相关配置，未传字段保持原值。 */
+  ScalingPolicy?: ScalingPolicy;
+  /** 扩容策略，用于配置启动模板、机型族、GPU 卡数、规格优先级和多可用区等扩容方式。单独传入时仅更新扩容相关配置，未传字段保持原值。 */
+  ExpansionPolicy?: ExpansionPolicy;
+}
+
+declare interface SetQueueAutoScalingResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1441,6 +1651,8 @@ declare namespace V20220401 {
     ResultDetail?: string | null;
     /** 集群活动起因。 */
     Cause?: string;
+    /** 队列名称。集群级活动（如创建/删除集群）此字段为空，队列级活动（如扩容/缩容）为对应队列名。 */
+    QueueName?: string | null;
     /** 集群活动描述。 */
     Description?: string;
     /** 集群活动相关节点活动集合。 */
@@ -1986,6 +2198,8 @@ declare namespace V20220401 {
     Offset?: number;
     /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
     Limit?: number;
+    /** queue-name 按照【队列名称】进行过滤。队列名称形如：compute。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+    Filters?: Filter[];
   }
 
   interface DescribeClusterActivitiesResponse {
@@ -2391,6 +2605,8 @@ declare interface Thpc {
   AttachNodes(data: AttachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNodesResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data?: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
+  /** 创建定时伸缩任务 {@link CreateScheduledActionRequest} {@link CreateScheduledActionResponse} */
+  CreateScheduledAction(data: CreateScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledActionResponse>;
   /** 创建工作空间 {@link CreateWorkspacesRequest} {@link CreateWorkspacesResponse} */
   CreateWorkspaces(data?: CreateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspacesResponse>;
   /** 删除集群 {@link DeleteClusterRequest} {@link DeleteClusterResponse} */
@@ -2403,6 +2619,8 @@ declare interface Thpc {
   DeleteNodes(data: DeleteNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNodesResponse>;
   /** 删除队列 {@link DeleteQueueRequest} {@link DeleteQueueResponse} */
   DeleteQueue(data: DeleteQueueRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQueueResponse>;
+  /** 删除定时伸缩任务 {@link DeleteScheduledActionRequest} {@link DeleteScheduledActionResponse} */
+  DeleteScheduledAction(data: DeleteScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledActionResponse>;
   /** 查询弹性伸缩配置信息 {@link DescribeAutoScalingConfigurationRequest} {@link DescribeAutoScalingConfigurationResponse} */
   DescribeAutoScalingConfiguration(data: DescribeAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingConfigurationResponse>;
   /** 查询集群活动历史记录 {@link DescribeClusterActivitiesRequest} {@link DescribeClusterActivitiesResponse} */
@@ -2413,6 +2631,8 @@ declare interface Thpc {
   DescribeClusters(data?: DescribeClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClustersResponse>;
   /** 查询节点初始化脚本列表 {@link DescribeInitNodeScriptsRequest} {@link DescribeInitNodeScriptsResponse} */
   DescribeInitNodeScripts(data: DescribeInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInitNodeScriptsResponse>;
+  /** 查询可用机型族列表 {@link DescribeInstanceFamiliesRequest} {@link DescribeInstanceFamiliesResponse} */
+  DescribeInstanceFamilies(data: DescribeInstanceFamiliesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceFamiliesResponse>;
   /** 查询作业提交信息 {@link DescribeJobSubmitInfoRequest} {@link DescribeJobSubmitInfoResponse} */
   DescribeJobSubmitInfo(data: DescribeJobSubmitInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobSubmitInfoResponse>;
   /** 查询作业任务 {@link DescribeJobsRequest} {@link DescribeJobsResponse} */
@@ -2421,12 +2641,20 @@ declare interface Thpc {
   DescribeJobsOverview(data: DescribeJobsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobsOverviewResponse>;
   /** 查询指定集群节点列表 {@link DescribeNodesRequest} {@link DescribeNodesResponse} */
   DescribeNodes(data?: DescribeNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodesResponse>;
+  /** 查询队列弹性伸缩配置 {@link DescribeQueueAutoScalingRequest} {@link DescribeQueueAutoScalingResponse} */
+  DescribeQueueAutoScaling(data: DescribeQueueAutoScalingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueAutoScalingResponse>;
+  /** 查询队列弹性伸缩概览 {@link DescribeQueueAutoScalingOverviewRequest} {@link DescribeQueueAutoScalingOverviewResponse} */
+  DescribeQueueAutoScalingOverview(data: DescribeQueueAutoScalingOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueueAutoScalingOverviewResponse>;
   /** 查询队列列表 {@link DescribeQueuesRequest} {@link DescribeQueuesResponse} */
   DescribeQueues(data: DescribeQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQueuesResponse>;
+  /** 查询定时伸缩任务 {@link DescribeScheduledActionsRequest} {@link DescribeScheduledActionsResponse} */
+  DescribeScheduledActions(data: DescribeScheduledActionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledActionsResponse>;
   /** 查询工作空间列表 {@link DescribeWorkspacesRequest} {@link DescribeWorkspacesResponse} */
   DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 从集群解绑节点 {@link DetachNodesRequest} {@link DetachNodesResponse} */
   DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
+  /** 创建工作空间询价 {@link InquirePriceCreateWorkspacesRequest} {@link InquirePriceCreateWorkspacesResponse} */
+  InquirePriceCreateWorkspaces(data?: InquirePriceCreateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateWorkspacesResponse>;
   /** 询价工作空间转换计费模式 {@link InquirePriceModifyWorkspacesChargeTypeRequest} {@link InquirePriceModifyWorkspacesChargeTypeResponse} */
   InquirePriceModifyWorkspacesChargeType(data: InquirePriceModifyWorkspacesChargeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceModifyWorkspacesChargeTypeResponse>;
   /** 修改集群删除保护状态 {@link ModifyClusterDeletionProtectionRequest} {@link ModifyClusterDeletionProtectionResponse} */
@@ -2435,6 +2663,8 @@ declare interface Thpc {
   ModifyInitNodeScripts(data: ModifyInitNodeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInitNodeScriptsResponse>;
   /** 修改节点属性 {@link ModifyNodeAttributeRequest} {@link ModifyNodeAttributeResponse} */
   ModifyNodeAttribute(data: ModifyNodeAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNodeAttributeResponse>;
+  /** 修改定时伸缩任务 {@link ModifyScheduledActionRequest} {@link ModifyScheduledActionResponse} */
+  ModifyScheduledAction(data: ModifyScheduledActionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledActionResponse>;
   /** 修改工作空间的属性 {@link ModifyWorkspacesAttributeRequest} {@link ModifyWorkspacesAttributeResponse} */
   ModifyWorkspacesAttribute(data: ModifyWorkspacesAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesAttributeResponse>;
   /** 工作空间转换计费模式 {@link ModifyWorkspacesChargeTypeRequest} {@link ModifyWorkspacesChargeTypeResponse} */
@@ -2443,6 +2673,8 @@ declare interface Thpc {
   ModifyWorkspacesRenewFlag(data: ModifyWorkspacesRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspacesRenewFlagResponse>;
   /** 设置弹性伸缩配置信息 {@link SetAutoScalingConfigurationRequest} {@link SetAutoScalingConfigurationResponse} */
   SetAutoScalingConfiguration(data: SetAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<SetAutoScalingConfigurationResponse>;
+  /** 配置队列弹性伸缩 {@link SetQueueAutoScalingRequest} {@link SetQueueAutoScalingResponse} */
+  SetQueueAutoScaling(data: SetQueueAutoScalingRequest, config?: AxiosRequestConfig): AxiosPromise<SetQueueAutoScalingResponse>;
   /** 提交作业任务 {@link SubmitJobRequest} {@link SubmitJobResponse} */
   SubmitJob(data: SubmitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitJobResponse>;
   /** 终止作业任务 {@link TerminateJobRequest} {@link TerminateJobResponse} */

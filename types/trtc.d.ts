@@ -1714,6 +1714,16 @@ declare interface CreatePictureResponse {
   RequestId?: string;
 }
 
+declare interface CreateRecognizeVocabV3Request {
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
+}
+
+declare interface CreateRecognizeVocabV3Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudModerationRequest {
   /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -1792,6 +1802,14 @@ declare interface DeletePictureRequest {
 }
 
 declare interface DeletePictureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRecognizeVocabV3Request {
+}
+
+declare interface DeleteRecognizeVocabV3Response {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2476,6 +2494,30 @@ declare interface DismissRoomResponse {
   RequestId?: string;
 }
 
+declare interface DownloadRecognizeVocabV3Request {
+}
+
+declare interface DownloadRecognizeVocabV3Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRecognizeVocabListV3Request {
+}
+
+declare interface GetRecognizeVocabListV3Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetRecognizeVocabV3Request {
+}
+
+declare interface GetRecognizeVocabV3Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudModerationRequest {
   /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -2590,6 +2632,14 @@ declare interface RemoveUserRequest {
 }
 
 declare interface RemoveUserResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SetVocabStateV3Request {
+}
+
+declare interface SetVocabStateV3Response {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2990,6 +3040,14 @@ declare interface UpdatePublishCdnStreamResponse {
   RequestId?: string;
 }
 
+declare interface UpdateRecognizeVocabV3Request {
+}
+
+declare interface UpdateRecognizeVocabV3Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateStreamIngestRequest {
   /** TRTC的SDKAppId，和任务的房间所对应的SDKAppId相同 */
   SdkAppId: number;
@@ -3077,6 +3135,8 @@ declare interface Trtc {
   CreateLiveStreamModeration(data: CreateLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveStreamModerationResponse>;
   /** 上传图片 {@link CreatePictureRequest} {@link CreatePictureResponse} */
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
+  /** 创建智能识别热词表V3 {@link CreateRecognizeVocabV3Request} {@link CreateRecognizeVocabV3Response} */
+  CreateRecognizeVocabV3(data: CreateRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<CreateRecognizeVocabV3Response>;
   /** 停止AI 内容理解任务 {@link DeleteCloudModerationRequest} {@link DeleteCloudModerationResponse} */
   DeleteCloudModeration(data: DeleteCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudModerationResponse>;
   /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
@@ -3089,6 +3149,8 @@ declare interface Trtc {
   DeleteLiveStreamModeration(data: DeleteLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveStreamModerationResponse>;
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
+  /** 删除智能识别热词表V3 {@link DeleteRecognizeVocabV3Request} {@link DeleteRecognizeVocabV3Response} */
+  DeleteRecognizeVocabV3(data?: DeleteRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DeleteRecognizeVocabV3Response>;
   /** 删除声纹信息 {@link DeleteVoicePrintRequest} {@link DeleteVoicePrintResponse} */
   DeleteVoicePrint(data: DeleteVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVoicePrintResponse>;
   /** 查询AI对话状态 {@link DescribeAIConversationRequest} {@link DescribeAIConversationResponse} */
@@ -3161,6 +3223,12 @@ declare interface Trtc {
   DismissRoom(data: DismissRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomResponse>;
   /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */
   DismissRoomByStrRoomId(data: DismissRoomByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdResponse>;
+  /** 下载智能识别热词表V3 {@link DownloadRecognizeVocabV3Request} {@link DownloadRecognizeVocabV3Response} */
+  DownloadRecognizeVocabV3(data?: DownloadRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DownloadRecognizeVocabV3Response>;
+  /** 列举智能识别热词表V3 {@link GetRecognizeVocabListV3Request} {@link GetRecognizeVocabListV3Response} */
+  GetRecognizeVocabListV3(data?: GetRecognizeVocabListV3Request, config?: AxiosRequestConfig): AxiosPromise<GetRecognizeVocabListV3Response>;
+  /** 获取智能识别热词表V3 {@link GetRecognizeVocabV3Request} {@link GetRecognizeVocabV3Response} */
+  GetRecognizeVocabV3(data?: GetRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<GetRecognizeVocabV3Response>;
   /** 修改AI 内容理解任务 {@link ModifyCloudModerationRequest} {@link ModifyCloudModerationResponse} */
   ModifyCloudModeration(data: ModifyCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudModerationResponse>;
   /** 更新云端录制任务 {@link ModifyCloudRecordingRequest} {@link ModifyCloudRecordingResponse} */
@@ -3175,6 +3243,8 @@ declare interface Trtc {
   RemoveUser(data: RemoveUserRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserResponse>;
   /** 移出用户（字符串房间号） {@link RemoveUserByStrRoomIdRequest} {@link RemoveUserByStrRoomIdResponse} */
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
+  /** 设置智能识别热词表状态V3 {@link SetVocabStateV3Request} {@link SetVocabStateV3Response} */
+  SetVocabStateV3(data?: SetVocabStateV3Request, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateV3Response>;
   /** 开始AI对话任务 {@link StartAIConversationRequest} {@link StartAIConversationResponse} */
   StartAIConversation(data: StartAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<StartAIConversationResponse>;
   /** 开始AI转录任务 {@link StartAITranscriptionRequest} {@link StartAITranscriptionResponse} */
@@ -3211,6 +3281,8 @@ declare interface Trtc {
   UpdateAIConversation(data: UpdateAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIConversationResponse>;
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
+  /** 更新智能识别热词表V3 {@link UpdateRecognizeVocabV3Request} {@link UpdateRecognizeVocabV3Response} */
+  UpdateRecognizeVocabV3(data?: UpdateRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<UpdateRecognizeVocabV3Response>;
   /** 更新输入在线媒体流 {@link UpdateStreamIngestRequest} {@link UpdateStreamIngestResponse} */
   UpdateStreamIngest(data: UpdateStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStreamIngestResponse>;
   /** 更新声纹信息 {@link UpdateVoicePrintRequest} {@link UpdateVoicePrintResponse} */

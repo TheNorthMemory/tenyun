@@ -3992,6 +3992,8 @@ declare interface DescribeLiveCloudEffectConfigRequest {
 declare interface DescribeLiveCloudEffectConfigResponse {
   /** 模板生礼物的模板信息列表。 */
   EffectTemplateList?: CloudEffectTemplateInfo[];
+  /** 惩罚特效模板信息列表。 */
+  PunishmentEffectTemplateList?: CloudEffectTemplateInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

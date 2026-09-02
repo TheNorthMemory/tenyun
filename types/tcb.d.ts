@@ -1913,6 +1913,8 @@ declare interface CreateCloudAppRequest {
   CustomSteps?: BuildStep[];
   /** 敏感凭证（AES 加密落库），构建容器中以 $SECRET_NAME 引用 */
   Secrets?: BuildSecret[];
+  /** 选择 NodeRuntime 版本: 16,18,20,22,24 等 */
+  NodeJsVersion?: string;
 }
 
 declare interface CreateCloudAppResponse {
@@ -3210,6 +3212,8 @@ declare interface ExecutePGSqlResponse {
   AffectedRows?: number;
   /** 字段名列表 */
   Columns?: string[] | null;
+  /** 字段类型名 */
+  ColumnTypes?: string[] | null;
   /** 数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 <null>，如果是字符串则为该列的值的字符串表示形式。 */
   Rows?: string[] | null;
   /** SQL执行耗时单位：毫秒 */
@@ -3346,6 +3350,18 @@ declare interface ModifyDatabaseACLRequest {
 }
 
 declare interface ModifyDatabaseACLResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyEnvExtraRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 开启或关闭 超限转按量。可取值： TRUE/FALSE （字符串类型）非法制、不传、为空 则不变更该字段。 */
+  EnableOverrun?: string;
+}
+
+declare interface ModifyEnvExtraResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3943,6 +3959,8 @@ declare interface Tcb {
   ModifyDatabaseACL(data: ModifyDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseACLResponse>;
   /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
+  /** 修改环境额外配置 {@link ModifyEnvExtraRequest} {@link ModifyEnvExtraResponse} */
+  ModifyEnvExtra(data: ModifyEnvExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvExtraResponse>;
   /** 更新云开发环境套餐 {@link ModifyEnvPlanRequest} {@link ModifyEnvPlanResponse} */
   ModifyEnvPlan(data: ModifyEnvPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvPlanResponse>;
   /** 修改HTTP访问服务路由 {@link ModifyHTTPServiceRouteRequest} {@link ModifyHTTPServiceRouteResponse} */

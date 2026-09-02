@@ -998,6 +998,8 @@ declare interface UserInfo {
   AppUserName?: string | null;
   /** 飞书OpenId */
   LarkOpenId?: string | null;
+  /** 用户类型 */
+  IdentityType?: string | null;
 }
 
 /** 用户资源入参 */
@@ -1088,6 +1090,8 @@ declare interface UserRoleListDataUserRoleInfo {
   EmailActivationStatus?: number | null;
   /** 用户组信息 */
   UserGroupList?: UserGroupDTO[] | null;
+  /** 用户类型 */
+  IdentityType?: string | null;
 }
 
 /** 用户标签信息 */
@@ -2185,6 +2189,8 @@ declare interface DescribeUserRoleListRequest {
   ProjectId?: string;
   /** 是否只获取绑定企微应用的 */
   IsOnlyBindAppUser?: boolean;
+  /** 用户类型 */
+  IdentityType?: string;
 }
 
 declare interface DescribeUserRoleListResponse {

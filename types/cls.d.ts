@@ -7165,9 +7165,9 @@ declare interface SearchDashboardSubscribeResponse {
 }
 
 declare interface SearchLogRequest {
-  /** 要检索分析的日志的起始时间，Unix时间戳（毫秒） */
+  /** 要检索分析的日志的起始时间，Unix时间戳（毫秒）时间范围为左闭右开区间 [From, To)，包含 From 时刻 */
   From: number;
-  /** 要检索分析的日志的结束时间，Unix时间戳（毫秒） */
+  /** 要检索分析的日志的结束时间，Unix时间戳（毫秒）时间范围为左闭右开区间 [From, To)，不包含 To 时刻 */
   To: number;
   /** 检索分析语句，最大长度为12KB语句由 [检索条件] | [SQL语句]构成，无需对日志进行统计分析时，可省略其中的管道符 | 及SQL语句使用*或空字符串可查询所有日志默认值：空字符串 */
   QueryString?: string;

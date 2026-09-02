@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 多协议 ApiBase 单条目。 */
+declare interface ApiBaseItem {
+  /** 后端转发协议 */
+  Protocol?: string;
+  /** Api Base URL */
+  ApiBase?: string;
+}
+
 /** 模型路由待关联 Guardrail 防护配置 */
 declare interface AssociateGuardrailConfig {
   /** Guardrail 防护类型。枚举值：WAF：使用腾讯云 WAF LLM SDK 接入配置对模型路由请求进行安全防护。当前仅支持 WAF；不传时默认为 WAF。 */
@@ -1282,6 +1290,8 @@ declare interface ModelKeyInfoItem {
   AccessType?: string;
   /** API Base URL */
   ApiBase?: string | null;
+  /** 多协议 API Base URL */
+  ApiBases?: ApiBaseItem[] | null;
   /** 模型创建时间（ISO 8601） */
   CreatedAt?: string | null;
   /** 自定义host header */
@@ -1314,6 +1324,12 @@ declare interface ModelKeyInfoItem {
   VpcId?: string | null;
   /** 健康检查配置 */
   HealthCheckConfig?: ServiceProviderHealthCheckConfigOutput;
+  /** 私网管道 ID */
+  CMRPrivateNetworkTunnelId?: string | null;
+  /** 私网管道名称 */
+  CMRPrivateNetworkTunnelName?: string | null;
+  /** 健康检查配置 */
+  HealthCheckConfigs?: ServiceProviderHealthCheckConfigItemOutput[];
 }
 
 /** 按模型标识聚合的信息 */
@@ -1393,7 +1409,7 @@ declare interface ModelRouterDetail {
   /** 模型路由实例所属VPC的ID */
   VpcId?: string;
   /** 带宽单位：Mbps */
-  Bandwidth?: number;
+  Bandwidth?: number | null;
   /** 弹性公网IP的ID */
   EipAddressId?: string;
   /** 计费信息 */
@@ -1986,6 +2002,34 @@ declare interface ServiceProviderCoefficient {
 declare interface ServiceProviderHealthCheckConfigInput {
   /** 是否开启健康检查枚举值：true： 是false： 否 */
   HealthCheckEnabled?: boolean;
+}
+
+/** 健康检查配置 */
+declare interface ServiceProviderHealthCheckConfigItemInput {
+  /** 是否开启健康检查枚举值：true： 是false： 否 */
+  HealthCheckEnabled?: boolean;
+  /** 健康检查间隔。支持以300s为步长配置。取值范围：[300, 14400]单位：s默认值：300 */
+  HealthCheckInterval?: number;
+  /** 不健康阈值。表示当模型连续多少次不健康时认为该模型不健康。取值范围：[1, 10] */
+  HealthCheckUnhealthyThreshold?: number;
+  /** 健康检查使用的最大Token数量。部分模型如gpt系列可能仅支持大于等于16。取值范围：[1, 1024]默认值：1 */
+  HealthCheckMaxTokens?: number;
+  /** 健康检查协议枚举值：chat： 表示/chat/completion协议messages： 表示/v1/messages协议responses： 表示/v1/messages协议 */
+  HealthCheckProtocol?: string;
+}
+
+/** 健康检查配置 */
+declare interface ServiceProviderHealthCheckConfigItemOutput {
+  /** 是否开启健康检查枚举值：true： 是false： 否 */
+  HealthCheckEnabled?: boolean;
+  /** 健康检查间隔。支持以300s为步长配置。单位：s默认值：300 */
+  HealthCheckInterval?: number;
+  /** 不健康阈值。表示当模型连续多少次不健康时认为该模型不健康。取值范围：[1, 10]默认值：1 */
+  HealthCheckUnhealthyThreshold?: number;
+  /** 健康检查使用的最大Token数量。部分模型如gpt系列可能仅支持大于等于16。默认值：1 */
+  HealthCheckMaxTokens?: number;
+  /** 健康检查协议枚举值：chat： 表示/chat/completion协议messages： 表示/v1/messages协议responses： 表示/v1/messages协议 */
+  HealthCheckProtocol?: string | null;
 }
 
 /** 健康检查配置 */
@@ -2881,6 +2925,8 @@ declare interface CreateModelRequest {
   Protocol?: string;
   /** API Base URL */
   ApiBase?: string;
+  /** 多协议 Api Base URL */
+  ApiBases?: ApiBaseItem[];
   /** VPC ID */
   VpcId?: string;
   /** 子网 ID */
@@ -2893,6 +2939,10 @@ declare interface CreateModelRequest {
   VerifySSL?: boolean;
   /** 健康检查配置 */
   HealthCheckConfig?: ServiceProviderHealthCheckConfigInput;
+  /** 私网管道 ID */
+  CMRPrivateNetworkTunnelId?: string;
+  /** 健康检查配置 */
+  HealthCheckConfigs?: ServiceProviderHealthCheckConfigItemInput[];
 }
 
 declare interface CreateModelResponse {
@@ -4261,8 +4311,10 @@ declare interface DescribeUpperModelsRequest {
   ModelProtocol?: string;
   /** 模型提供商 */
   ModelProvider?: string;
-  /** BYOK 业务 ID，可选格式：byok-xxxxxxxx */
+  /** BYOK 业务 ID，可选格式：byok-xxxxxxxx，预留参数 */
   ServiceProviderId?: string;
+  /** CMR 私网管道ID */
+  CMRPrivateNetworkTunnelId?: string;
 }
 
 declare interface DescribeUpperModelsResponse {
@@ -5247,6 +5299,10 @@ declare interface TestModelInputModalitiesRequest {
   ServiceProviderId?: string;
   /** 是否校验服务提供商的SSL证书PublicBYOK时为True且禁止传入；若传入VerifySSL，则优先同步入参逻辑；若传入了ServiceProviderId则同步已创建的Byok实例该Model的逻辑；否则PublicCustom模式下为True，PrivateCustom模式下为False。 */
   VerifySSL?: boolean;
+  /** 健康检查协议枚举值：chat： 表示/chat/completion协议messages： 表示/v1/messages协议responses： 表示/responses协议 */
+  HealthCheckProtocol?: string;
+  /** CMR私网管道ID */
+  CMRPrivateNetworkTunnelId?: string;
 }
 
 declare interface TestModelInputModalitiesResponse {
@@ -5281,6 +5337,10 @@ declare interface TestServiceProviderConnectionRequest {
   ServiceProviderId?: string;
   /** 是否校验服务提供商的SSL证书默认值：AccessType取值为：PublicBYOK时，该参数无效；PublicCustom时，该参数默认为true；PrivateCustom时，该参数默认为false； */
   VerifySSL?: boolean;
+  /** 健康检查协议枚举值：chat： 表示/chat/completion协议messages： 表示/v1/messages协议responses： 表示/responses协议 */
+  HealthCheckProtocol?: string;
+  /** CMR 私网管道ID */
+  CMRPrivateNetworkTunnelId?: string;
 }
 
 declare interface TestServiceProviderConnectionResponse {

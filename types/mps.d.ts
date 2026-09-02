@@ -322,6 +322,16 @@ declare interface AdvancedSuperResolutionConfig {
   ShortSide?: number | null;
 }
 
+/** Agent结果文件上传COS时，需传入的信息。 需创建并授权MPS_QcsRole角色。 */
+declare interface AgentStoreCosParam {
+  /** 存储至 cos 的 bucket 桶名称。需要cos存储时，该值必填。 示例值：bucket。 */
+  CosBucketName?: string;
+  /** 存储至 cos 的 bucket 区域。与bucket所属区域相同，上传cos时必填。 示例值：ap-guangzhou */
+  CosBucketRegion?: string;
+  /** 存储至 cos 的 bucket 路径。可选。示例值：my_file */
+  CosBucketPath?: string;
+}
+
 /** 智能分析结果 */
 declare interface AiAnalysisResult {
   /** 任务的类型，可以取的值有：Classification：智能分类Cover：智能封面Tag：智能标签FrameTag：智能按帧标签Highlight：智能精彩集锦DeLogo：智能擦除Description：大模型摘要Dubbing：智能译制VideoRemake: 视频去重VideoComprehension: 视频（音频）理解Cutout：视频抠图Reel：智能成片 */
@@ -376,7 +386,7 @@ declare interface AiAnalysisTaskClassificationOutput {
 declare interface AiAnalysisTaskClassificationResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
   ErrCode?: number;
@@ -408,7 +418,7 @@ declare interface AiAnalysisTaskCoverOutput {
 declare interface AiAnalysisTaskCoverResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
   ErrCode?: number;
@@ -592,7 +602,7 @@ declare interface AiAnalysisTaskFrameTagOutput {
 declare interface AiAnalysisTaskFrameTagResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
   ErrCode?: number;
@@ -1756,9 +1766,9 @@ declare interface AiSamplePerson {
   TagSet?: string[];
   /** 应用场景。 */
   UsageSet?: string[];
-  /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 创建时间，使用 ISO 日期格式。 */
   CreateTime?: string;
-  /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 最后修改时间，使用 ISO 日期格式。 */
   UpdateTime?: string;
 }
 
@@ -3596,6 +3606,16 @@ declare interface FailOverOption {
   FailOverType?: string;
 }
 
+/** Query 返回的单个产物文件 */
+declare interface File3D {
+  /** 文件类型，OBJ / GLB / FBX / STL / USDZ枚举值：OBJ： 3D 通用交换格式GLB： glTF 2.0 二进制（"3D 界的 JPEG"）FBX： Autodesk 影视/游戏工业标准STL： 3D 打印/CAD 三角面片USDZ： Pixar/Apple 打包场景描述 */
+  Type?: string;
+  /** 文件下载 URL（临时签名，TTL 一般 24h） */
+  Url?: string;
+  /** 预览图 URL（若有） */
+  PreviewImageUrl?: string;
+}
+
 /** 商品裂变任务信息 */
 declare interface FissionTaskInfo {
   /** 视频输出时长取值范围：[4, 15]单位：秒默认值：15 */
@@ -5096,7 +5116,7 @@ declare interface MediaMetaData {
 declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
   ErrCode: number;
@@ -5106,9 +5126,9 @@ declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
   Input: AdaptiveDynamicStreamingTaskInput;
   /** 对视频转自适应码流任务的输出。 */
   Output: AdaptiveDynamicStreamingInfoItem | null;
-  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
   BeginProcessTime?: string | null;
-  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
   FinishTime?: string | null;
 }
 
@@ -5116,7 +5136,7 @@ declare interface MediaProcessTaskAdaptiveDynamicStreamingResult {
 declare interface MediaProcessTaskAnimatedGraphicResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
   ErrCode?: number;
@@ -5126,9 +5146,9 @@ declare interface MediaProcessTaskAnimatedGraphicResult {
   Input?: AnimatedGraphicTaskInput;
   /** 转动图任务的输出。 */
   Output?: MediaAnimatedGraphicsItem | null;
-  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
   BeginProcessTime?: string | null;
-  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
   FinishTime?: string | null;
 }
 
@@ -5246,7 +5266,7 @@ declare interface MediaProcessTaskTranscodeResult {
 
 /** 采样截图信息 */
 declare interface MediaSampleSnapshotItem {
-  /** 采样截图规格 ID，参见[采样截图参数模板](https://cloud.tencent.com/document/product/266/33480)。 */
+  /** 采样截图规格 ID，参见采样截图参数模板。 */
   Definition?: number;
   /** 采样方式，取值范围：Percent：根据百分比间隔采样。Time：根据时间间隔采样。 */
   SampleType?: string;
@@ -6548,7 +6568,7 @@ declare interface ScheduleRecognitionTaskResult {
 declare interface ScheduleReviewTaskResult {
   /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
   Status?: string;
-  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369) 列表。 */
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
   ErrCodeExt?: string;
   /** 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。 */
   ErrCode?: number;
@@ -6558,9 +6578,9 @@ declare interface ScheduleReviewTaskResult {
   Input?: AiContentReviewTaskInput;
   /** 审核任务的输出。 */
   Output?: AiContentReviewResult[] | null;
-  /** 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
   BeginProcessTime?: string | null;
-  /** 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
   FinishTime?: string | null;
 }
 
@@ -8378,6 +8398,14 @@ declare interface VideoTemplateInfoForUpdate {
   CompressType?: string | null;
 }
 
+/** 多视角图生 3D 场景下，MultiViewImages 数组中的单个视角。 */
+declare interface ViewImage {
+  /** 视角类型枚举值：front： 正视图 （必填）back： 背视图left： 左视图right： 右视图top： 顶视图bottom： 底视图left_front： 左前 45°right_front： 右前 45°MultiViewImages 数组长度 ≥ 2 ; 必须包含 front 视角; 同一 ViewType 不允许重复; 每项必须提供 ViewImageUrl */
+  ViewType: string;
+  /** 图片 URL（http / https） */
+  ViewImageUrl: string;
+}
+
 /** 音色信息 */
 declare interface VoiceInfo {
   /** 音色ID */
@@ -8816,6 +8844,26 @@ declare interface CreateAdaptiveDynamicStreamingTemplateRequest {
 declare interface CreateAdaptiveDynamicStreamingTemplateResponse {
   /** 自适应转码模板唯一标识。 */
   Definition?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAgentRecordTaskRequest {
+  /** 直播间URL */
+  LiveRoomUrl: string;
+  /** 最长录制时长单位：分最长支持720分 */
+  MaxDurationMinutes: number;
+  /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
+  StoreCosParam: AgentStoreCosParam;
+  /** 定时录制开始时刻参数格式：2026-07-01T15:31:32+08:00空表示提交后立即开始录制；非空表示从该时刻开始录制 */
+  StartTime?: string;
+  /** 中断策略枚举值：STOP_ON_INTERRUPT： 直播流中断后立即结束录制CONTINUE_UNTIL_END： 直播流中断时忽略中断，继续录制直到任务结束时间默认值：STOP_ON_INTERRUPT */
+  InterruptPolicy?: string;
+}
+
+declare interface CreateAgentRecordTaskResponse {
+  /** 任务创建成功后，返回的任务ID。调用查询接口，轮询获取任务进度及生成结果。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10138,6 +10186,22 @@ declare interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAgentRecordTaskRequest {
+  /** 创建Agent录制任务时，返回的任务ID。 */
+  TaskId: string;
+}
+
+declare interface DescribeAgentRecordTaskResponse {
+  /** 任务当前状态。 枚举值：WAITING： 等待中RUNNING： 执行中SUCCESS： 成功FAILED： 失败 */
+  Status?: string;
+  /** 当任务状态为 FAILED 时，返回失败信息。 */
+  ErrorMessage?: string;
+  /** 当任务状态为 SUCCESS 时，返回录制文件Url列表。 */
+  RecordUrls?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAigcAudioTaskRequest {
   /** 创建AIGC生视频任务时，返回的任务ID。 */
   TaskId: string;
@@ -10581,6 +10645,8 @@ declare interface DescribeMDPMPSUserInfoResponse {
 declare interface DescribeMediaMetaDataRequest {
   /** 需要获取元信息的文件输入信息。 */
   InputInfo: MediaInputInfo;
+  /** 指定为slow时，增加接口超时时间枚举值：slow： 增加接口超时时间 */
+  Mode?: string;
 }
 
 declare interface DescribeMediaMetaDataResponse {
@@ -12664,6 +12730,26 @@ declare interface ProcessMediaResponse {
   RequestId?: string;
 }
 
+declare interface QueryHunyuan3DTaskRequest {
+  /** 任务ID */
+  TaskId?: string;
+}
+
+declare interface QueryHunyuan3DTaskResponse {
+  /** 任务状态枚举值：WAIT： 已排队，等待执行RUN： 正在执行DONE： 已成功完成，ResultFile3Ds 有值FAIL： 已失败，ErrorCode / ErrorMessage 有值 */
+  Status?: string;
+  /** 进度百分比，0~100。未知时为 0；DONE 时应为 100；FAIL 时保留最后一次已知值 */
+  Progress?: number;
+  /** 仅 Status=FAIL 时有值，字符串错误码（如 InternalError.ModelInference） */
+  ErrorCode?: string;
+  /** 仅 Status=FAIL 时有值，详细文案 */
+  ErrorMessage?: string;
+  /** 仅 Status=DONE 时有值，产物文件列表 */
+  ResultFile3Ds?: File3D[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QueryProjectRequest {
   /** 项目id */
   ProjectId?: string;
@@ -12790,6 +12876,38 @@ declare interface StopStreamPackageLinearAssemblyChannelRequest {
 }
 
 declare interface StopStreamPackageLinearAssemblyChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitHunyuan3DTaskRequest {
+  /** 文生 3D 的提示词入参限制：最长 1024 utf-8 字符 */
+  Prompt?: string;
+  /** 图生 3D 的图片 URL（http/https） */
+  ImageUrl?: string;
+  /** 多视角图生 3D，至少 2 张，且必须包含 front 视角 */
+  MultiViewImages?: ViewImage[];
+  /** 生成类型枚举值：Normal： 生成完整 3D 资产（几何 + 纹理）Geometry： 只生成几何体（无纹理，输出速度更快）Texture： 只生成纹理（需要传 MeshUrl）默认值：Normal */
+  GenerateType?: string;
+  /** 已有 3D 模型的 URL（仅支持 .glb / .obj）。传了 MeshUrl → 强制 GenerateType=Texture（贴纹理场景） */
+  MeshUrl?: string;
+  /** 是否输出 PBR 材质默认值：false */
+  EnablePBR?: boolean;
+  /** 面片数，范围 [3000, 1500000]。仅 Normal / Geometry 分支生效取值范围：[3000, 1500000]默认值：500000 */
+  FaceCount?: number;
+  /** 是否保留 UV 展开默认值：false */
+  KeepUV?: boolean;
+  /** 除默认返回的 obj + glb 外，附加输出的一种格式。当前仅支持 FBX */
+  ResultFormat?: string;
+  /** 随机种子，同一 Seed 输入下结果可复现 */
+  Seed?: number;
+  /** 风格控制词 */
+  Style?: string;
+}
+
+declare interface SubmitHunyuan3DTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12987,6 +13105,8 @@ declare interface Mps {
   CreateAIRecognitionTemplate(data?: CreateAIRecognitionTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIRecognitionTemplateResponse>;
   /** 创建转自适应码流模板 {@link CreateAdaptiveDynamicStreamingTemplateRequest} {@link CreateAdaptiveDynamicStreamingTemplateResponse} */
   CreateAdaptiveDynamicStreamingTemplate(data: CreateAdaptiveDynamicStreamingTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAdaptiveDynamicStreamingTemplateResponse>;
+  /** 创建Agent录制任务 {@link CreateAgentRecordTaskRequest} {@link CreateAgentRecordTaskResponse} */
+  CreateAgentRecordTask(data: CreateAgentRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentRecordTaskResponse>;
   /** 创建AI漫剧任务 {@link CreateAiDramaTaskRequest} {@link CreateAiDramaTaskResponse} */
   CreateAiDramaTask(data: CreateAiDramaTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAiDramaTaskResponse>;
   /** 创建AI视频裂变任务 {@link CreateAiFissionTaskRequest} {@link CreateAiFissionTaskResponse} */
@@ -13145,6 +13265,8 @@ declare interface Mps {
   DescribeAIRecognitionTemplates(data?: DescribeAIRecognitionTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIRecognitionTemplatesResponse>;
   /** 获取转自适应码流模板列表 {@link DescribeAdaptiveDynamicStreamingTemplatesRequest} {@link DescribeAdaptiveDynamicStreamingTemplatesResponse} */
   DescribeAdaptiveDynamicStreamingTemplates(data?: DescribeAdaptiveDynamicStreamingTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdaptiveDynamicStreamingTemplatesResponse>;
+  /** 查询Agent录制任务 {@link DescribeAgentRecordTaskRequest} {@link DescribeAgentRecordTaskResponse} */
+  DescribeAgentRecordTask(data: DescribeAgentRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentRecordTaskResponse>;
   /** 查询AIGC生音频任务 {@link DescribeAigcAudioTaskRequest} {@link DescribeAigcAudioTaskResponse} */
   DescribeAigcAudioTask(data: DescribeAigcAudioTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAigcAudioTaskResponse>;
   /** 查询AIGC生图片任务 {@link DescribeAigcImageTaskRequest} {@link DescribeAigcImageTaskResponse} */
@@ -13383,6 +13505,8 @@ declare interface Mps {
   ProcessLiveStream(data: ProcessLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessLiveStreamResponse>;
   /** 发起媒体处理 {@link ProcessMediaRequest} {@link ProcessMediaResponse} */
   ProcessMedia(data: ProcessMediaRequest, config?: AxiosRequestConfig): AxiosPromise<ProcessMediaResponse>;
+  /** 查询混元3D任务结果 {@link QueryHunyuan3DTaskRequest} {@link QueryHunyuan3DTaskResponse} */
+  QueryHunyuan3DTask(data?: QueryHunyuan3DTaskRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuan3DTaskResponse>;
   /** 剧集项目查询 {@link QueryProjectRequest} {@link QueryProjectResponse} */
   QueryProject(data?: QueryProjectRequest, config?: AxiosRequestConfig): AxiosPromise<QueryProjectResponse>;
   /** 识别音频 {@link RecognizeAudioRequest} {@link RecognizeAudioResponse} */
@@ -13399,6 +13523,8 @@ declare interface Mps {
   StopStreamLinkFlow(data: StopStreamLinkFlowRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamLinkFlowResponse>;
   /** 停止线性组装频道 {@link StopStreamPackageLinearAssemblyChannelRequest} {@link StopStreamPackageLinearAssemblyChannelResponse} */
   StopStreamPackageLinearAssemblyChannel(data: StopStreamPackageLinearAssemblyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<StopStreamPackageLinearAssemblyChannelResponse>;
+  /** 提交混元3D任务 {@link SubmitHunyuan3DTaskRequest} {@link SubmitHunyuan3DTaskResponse} */
+  SubmitHunyuan3DTask(data?: SubmitHunyuan3DTaskRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuan3DTaskResponse>;
   /** 同步配音 {@link SyncDubbingRequest} {@link SyncDubbingResponse} */
   SyncDubbing(data?: SyncDubbingRequest, config?: AxiosRequestConfig): AxiosPromise<SyncDubbingResponse>;
   /** 同步语音合成 {@link TextToSpeechRequest} {@link TextToSpeechResponse} */

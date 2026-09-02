@@ -294,6 +294,8 @@ declare interface FeiShuRobotNoticeTmpl {
   ContentTmpl: string;
   /** 标题模板 */
   TitleTmpl?: string;
+  /** 通知内容模版标题自定义颜色 */
+  TitleColor?: RobotNoticeTitleColor;
 }
 
 /** 飞书机器人通知模板的匹配器 */
@@ -600,6 +602,24 @@ declare interface ResourceMapInfo {
   Description?: string | null;
   /** 总实例数 */
   InstanceCount?: number | null;
+}
+
+/** 告警通知内容模版自定义标题颜色 */
+declare interface RobotNoticeTitleColor {
+  /** 通知内容模版自定义标题颜色默认颜色 */
+  Default?: string;
+  /** 通知内容模版自定义标题颜色规则，label 匹配设置颜色 */
+  Rules?: RobotNoticeTitleColorRules[];
+}
+
+/** 告警通知内容模版自定义标题颜色 key-value 匹配规则 */
+declare interface RobotNoticeTitleColorRules {
+  /** 通知内容模版自定义颜色 Label 匹配的 Key */
+  Key: string;
+  /** 通知内容模版自定义颜色 Label 匹配的 Value */
+  Value: string;
+  /** 通知内容模版自定义颜色 */
+  Color: string;
 }
 
 /** 转发规则 */
@@ -4437,21 +4457,21 @@ declare namespace V20180724 {
     PolicyName: string;
     /** 监控类型 MT_QCE=云产品监控 */
     MonitorType: string;
-    /** 告警策略类型，由 [DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device */
+    /** 告警策略类型，由 DescribeAllNamespaces 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device */
     Namespace: string;
     /** 备注，不超过100字符，仅支持中英文、数字、下划线、- */
     Remark?: string;
     /** 是否启用 0=停用 1=启用，可不传 默认为1 */
     Enable?: number;
-    /** 项目 Id，对于区分项目的产品必须传入非 -1 的值。 -1=无项目 0=默认项目，如不传 默认为 -1。支持的项目 Id 可以在控制台 [账号中心-项目管理](https://console.cloud.tencent.com/project) 中查看。 */
+    /** 项目 Id，对于区分项目的产品必须传入非 -1 的值。 -1=无项目 0=默认项目，如不传 默认为 -1。支持的项目 Id 可以在控制台 账号中心-项目管理 中查看。 */
     ProjectId?: number;
-    /** 触发条件模板 Id，该参数与 Condition 参数二选一。如果策略绑定触发条件模板，则传该参数；否则不传该参数，而是传 Condition 参数。触发条件模板 Id 可以从 [DescribeConditionsTemplateList](https://cloud.tencent.com/document/api/248/70250) 接口获取。 */
+    /** 触发条件模板 Id，该参数与 Condition 参数二选一。如果策略绑定触发条件模板，则传该参数；否则不传该参数，而是传 Condition 参数。触发条件模板 Id 可以从 DescribeConditionsTemplateList 接口获取。 */
     ConditionTemplateId?: number;
-    /** 指标触发条件，支持的指标可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。 */
+    /** 指标触发条件，支持的指标可以从 DescribeAlarmMetrics 查询。 */
     Condition?: AlarmPolicyCondition;
-    /** 事件触发条件，支持的事件可以从 [DescribeAlarmEvents](https://cloud.tencent.com/document/product/248/51284) 查询。 */
+    /** 事件触发条件，支持的事件可以从 DescribeAlarmEvents 查询。 */
     EventCondition?: AlarmPolicyEventCondition;
-    /** 通知规则 Id 列表，由 [DescribeAlarmNotices](https://cloud.tencent.com/document/product/248/51280) 获得 */
+    /** 通知规则 Id 列表，由 DescribeAlarmNotices 获得 */
     NoticeIds?: string[];
     /** 触发任务列表 */
     TriggerTasks?: AlarmPolicyTriggerTask[];
@@ -4459,6 +4479,8 @@ declare namespace V20180724 {
     Filter?: AlarmPolicyFilter;
     /** 聚合维度列表，指定按哪些维度 key 来做 group by */
     GroupBy?: string[];
+    /** 是否绑定全部对象。如果是的话，不需要再传filter或者调用BindPolicyObject，0=否，1=是，默认为否取值范围：[0, 1]默认值：0不是所有策略类型都支持绑定全部对象 */
+    IsBindAll?: number;
     /** 模板绑定的标签 */
     Tags?: Tag[];
     /** 日志告警信息 */
@@ -4478,7 +4500,7 @@ declare namespace V20180724 {
   interface CreateAlarmPolicyResponse {
     /** 告警策略 ID */
     PolicyId?: string;
-    /** 可用于实例、实例组的绑定和解绑接口（[BindingPolicyObject](https://cloud.tencent.com/document/product/248/40421)、[UnBindingAllPolicyObject](https://cloud.tencent.com/document/product/248/40568)、[UnBindingPolicyObject](https://cloud.tencent.com/document/product/248/40567)）的策略 ID */
+    /** 可用于实例、实例组的绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID */
     OriginId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;

@@ -118,7 +118,7 @@ declare interface AuthorizedUser {
 declare interface AutoSignConfig {
   /** 自动签开通个人用户信息, 包括名字,身份证等 */
   UserInfo: UserThreeFactor;
-  /** 是否回调证书信息:**false**: 不需要(默认)**true**:需要注：`该字段已经失效，请勿设置此参数。` */
+  /** 是否回调证书信息:**false**: 不需要(默认)**true**:需要注：该字段已经失效，请勿设置此参数。 */
   CertInfoCallback?: boolean;
   /** 是否支持用户自定义签名印章:**false**: 不能自己定义(默认)**true**: 可以自己定义 */
   UserDefineSeal?: boolean;
@@ -128,9 +128,9 @@ declare interface AutoSignConfig {
   CallbackUrl?: string;
   /** 开通时候的身份验证方式, 取值为：**WEIXINAPP** : 微信人脸识别**INSIGHT** : 慧眼人脸识别**TELECOM** : 运营商三要素验证注：如果是小程序开通链接，仅支持传 WEIXINAPP。为空默认 WEIXINAPP如果是 H5 开通链接，支持传 INSIGHT / TELECOM。为空默认 INSIGHT */
   VerifyChannels?: string[];
-  /** 设置用户开通自动签时是否绑定个人自动签账号许可。1: (默认)不绑定自动签账号许可开通，开通后一直有效, 后续使用合同份额进行合同发起注：`该字段已经失效，请勿设置此参数。` */
+  /** 设置用户开通自动签时是否绑定个人自动签账号许可。1: (默认)不绑定自动签账号许可开通，开通后一直有效, 后续使用合同份额进行合同发起注：该字段已经失效，请勿设置此参数。 */
   LicenseType?: number;
-  /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：`仅支持H5开通场景`, `跳转链接仅支持 https:// , qianapp:// 开头`跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。`APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。`APP拦截地址跳转可参考：Android，IOS 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：`appendResult=qian`。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，例如：qianapp://YOUR_CUSTOM_URL?action=sign&result=success&from=tencent_ess */
+  /** 开通成功后前端页面跳转的url，此字段的用法场景请联系客户经理确认。注：仅支持H5开通场景, 跳转链接仅支持 https:// , qianapp:// 开头跳转场景：**贵方H5 -> 腾讯电子签H5 -> 贵方H5** : JumpUrl格式: https://YOUR_CUSTOM_URL/xxxx，只需满足 https:// 开头的正确且合规的网址即可。**贵方原生App -> 腾讯电子签H5 -> 贵方原生App** : JumpUrl格式: qianapp://YOUR_CUSTOM_URL，只需满足 qianapp:// 开头的URL即可。APP实现方，需要拦截Webview地址跳转，发现url是qianapp:// 开头时跳转到原生页面。APP拦截地址跳转可参考：返回应用JumpUrl格式 成功结果返回：若贵方需要在跳转回时通过链接query参数提示开通成功，JumpUrl中的query应携带如下参数：appendResult=qian。这样腾讯电子签H5会在跳转回的url后面会添加query参数提示贵方签署成功，例如：qianapp://YOUR_CUSTOM_URL?action=sign&amp;result=success&amp;from=tencent_ess */
   JumpUrl?: string;
 }
 
@@ -2091,7 +2091,7 @@ declare interface ChannelCreateFlowSignUrlRequest {
   Agent: Agent;
   /** 合同流程ID，为32位字符串。建议开发者妥善保存此流程ID，以便于顺利进行后续操作。可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。 */
   FlowId: string;
-  /** 流程签署人列表，其中结构体的ApproverType必传。若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。若为子客企业签署方则需传OpenId、OrganizationOpenId、OrganizationName， 其他可不传。（如果对应OrganizationOpenId 子客已经认证激活了，则可以省去OrganizationName）此结构体和发起接口参与方结构体复用，除了上述参数外，可传递的参数有：RecipientId: 发起合同会返回，可以直接用于指定需要生成链接的签署方。ApproverSignTypes: 指定签署方签署时候的认证方式，仅此链接生效。SignTypeSelector: 可以指定签署方签署合同的认证校验方式的选择模式。Intention: 指定H5签署视频核身的意图配置，仅视频签署需要使用。注:1. 签署人只能有手写签名、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时未支持。2. 生成发起方预览链接时，该字段（FlowApproverInfos）传空或者不传 */
+  /** 流程签署人列表，其中结构体的ApproverType必传。若为个人签署方或saas企业签署方，则Name，Mobile必传。OrganizationName 传对应企业名称。若为子客企业签署方则需传OpenId、OrganizationOpenId、OrganizationName， 其他可不传。（如果对应OrganizationOpenId 子客已经认证激活了，则可以省去OrganizationName）此结构体和发起接口参与方结构体复用，除了上述参数外，可传递的参数有：RecipientId: 发起合同会返回，可以直接用于指定需要生成链接的签署方。ApproverSignTypes: 指定签署方签署时候的认证方式，仅此链接生效。SignTypeSelector: 可以指定签署方签署合同的认证校验方式的选择模式。Intention: 指定H5签署视频核身的意图配置，仅视频签署需要使用。注:签署人只能使用签名类型、时间类型、印章类型、签批类型的签署控件和内容填写控件，其他类型的签署控件暂时不支持。对于签名控件类型，支持手写签名、系统签名、个人印章等类型的签名方式，取决于合同发起时的设定。另外，签署的时候不支持拉取个人签署方已有签名图片资产，且创建的签名图片为一次性使用，不会保存为签署方个人资产。生成发起方预览链接时，该字段（FlowApproverInfos）可以传空或者不传。 */
   FlowApproverInfos?: FlowApproverInfo[];
   /** 用于指定进入视频签署的限制次数，次数取值范围：1 - 10，不设置则默认为5次，仅视频签署时生效。 */
   VideoVerifyTimesLimit?: number;

@@ -54,6 +54,8 @@ declare interface Library {
   DirNum?: string;
   /** 媒体库文件数，由于数字类型精度限制，该字段为 String 类型。 */
   FileNum?: string;
+  /** 媒体库关联的标签列表。 */
+  Tags?: ResourceTag[];
 }
 
 /** 媒体库配置项 */
@@ -102,6 +104,22 @@ declare interface LibraryExtension {
   LibraryQuota?: number | null;
 }
 
+/** 资源标签的键和值 */
+declare interface ResourceTag {
+  /** 标签键。 */
+  TagKey: string;
+  /** 标签值。 */
+  TagValue: string;
+}
+
+/** 标签过滤条件 */
+declare interface TagFilter {
+  /** 用于筛选媒体库的标签键。 */
+  TagKey: string;
+  /** 用于筛选媒体库的标签值列表。 */
+  TagValue?: string[];
+}
+
 /** 流量资源包信息 */
 declare interface TrafficPackage {
   /** 流量资源包所抵扣的实例 ID */
@@ -137,6 +155,8 @@ declare interface CreateLibraryRequest {
   BucketRegion?: string;
   /** 媒体库配置项，部分参数新建后不可更改 */
   LibraryExtension?: LibraryExtension;
+  /** 媒体库标签列表。 */
+  Tags?: ResourceTag[];
 }
 
 declare interface CreateLibraryResponse {
@@ -169,6 +189,8 @@ declare interface DescribeLibrariesRequest {
   Offset?: number;
   /** 单次列出的数量限制，不超过100. */
   Limit?: number;
+  /**  */
+  TagFilters?: TagFilter[];
 }
 
 declare interface DescribeLibrariesResponse {
@@ -187,9 +209,9 @@ declare interface DescribeLibrarySecretRequest {
 
 declare interface DescribeLibrarySecretResponse {
   /** 查询的媒体库 ID */
-  LibraryId: string;
+  LibraryId?: string;
   /** 查询到的媒体库密钥 */
-  LibrarySecret: string;
+  LibrarySecret?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -271,6 +293,8 @@ declare interface ModifyLibraryRequest {
   Remark?: string;
   /** 媒体库配置项，部分参数在新建后不可更改，且仅修改传入的参数。如不传该参数则不修改任何配置项。 */
   LibraryExtension?: LibraryExtension;
+  /** 媒体库标签列表。 */
+  Tags?: ResourceTag[];
 }
 
 declare interface ModifyLibraryResponse {
