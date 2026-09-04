@@ -1649,7 +1649,7 @@ declare interface CreateProxySessionKillTaskResponse {
 }
 
 declare interface CreateRedisBigKeyAnalysisTaskRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
   /** 服务产品类型，支持值包括 "redis" - 云数据库 Redis。 */
   Product: string;
@@ -1657,6 +1657,8 @@ declare interface CreateRedisBigKeyAnalysisTaskRequest {
   ShardIds?: number[];
   /** Top Key前缀的分隔符列表。目前仅支持以下分割符：[",", ";", ":", "_", "-", "+", "@", "=", "|", "#", "."]，当列表为空时，默认选择所有分隔符。 */
   KeyDelimiterList?: string[];
+  /** 历史备份文件ID */
+  BackupId?: string;
 }
 
 declare interface CreateRedisBigKeyAnalysisTaskResponse {

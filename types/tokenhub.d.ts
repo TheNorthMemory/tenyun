@@ -108,6 +108,8 @@ declare interface EndpointDetail {
   AutoAdjustQuota?: number;
   /** RPM（每分钟请求数限流）。当推理服务未单独设置时，回退为关联模型的默认 RPM 值。 */
   RPM?: number;
+  /** 模型状态枚举值：online： 在线pre-offline： 预下线discontinued： 停止新购maintenance： 维护offline： 下线 */
+  ModelStatus?: string;
 }
 
 /** 新建术语条目项 */

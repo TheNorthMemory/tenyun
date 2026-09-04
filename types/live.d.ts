@@ -578,6 +578,10 @@ declare interface ChildTemplateInfo {
   HlsContainerFormat?: string | null;
   /** 编码标签。可选值：hvc1、hev1。注：HLS 分片类型选择 fmp4 时生效。 */
   HlsMp4VideoCodecTag?: string | null;
+  /** 子流音频编码类型。默认为"自动适配" */
+  Acodec?: string;
+  /** 子流音频码率单位：Kbps */
+  AudioBitrate?: number;
 }
 
 /** 客户端ip播放汇总信息。 */
@@ -1788,7 +1792,7 @@ declare interface TemplateInfo {
   Vcodec?: string;
   /** 视频码率。范围：0kbps - 8000kbps。0为保持原始码率。注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。 */
   VideoBitrate?: number;
-  /** 音频编码：aac，默认aac。注意：当前该参数未生效，待后续支持！ */
+  /** 音频编码。默认为自动适配 */
   Acodec?: string;
   /** 音频码率。取值范围：0kbps - 500kbps。默认0。 */
   AudioBitrate?: number;
@@ -2885,7 +2889,7 @@ declare interface CreateLiveTranscodeTemplateRequest {
   TemplateName: string;
   /** 视频码率。范围：0kbps - 8000kbps。0为保持原始码率。注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。 */
   VideoBitrate: number;
-  /** 音频编码：aac，默认aac。注意：当前该参数未生效，待后续支持！ */
+  /** 音频编码。默认为自动适配 */
   Acodec?: string;
   /** 音频码率，默认0。范围：0-500。 */
   AudioBitrate?: number;
@@ -5997,7 +6001,7 @@ declare interface ModifyLiveTranscodeTemplateRequest {
   TemplateId: number;
   /** 视频编码：h264/h265/origin，默认origin。origin: 保持原始编码格式 */
   Vcodec?: string;
-  /** 音频编码：aac，默认aac。注意：当前该参数未生效，待后续支持！ */
+  /** 音频编码。默认为自动适配 */
   Acodec?: string;
   /** 音频码率，默认0。范围：0-500。 */
   AudioBitrate?: number;

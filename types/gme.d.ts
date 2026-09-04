@@ -811,6 +811,8 @@ declare interface DescribeApplicationListRequest {
   TagSet?: Tag[];
   /** 查找过滤关键字列表 */
   Filters?: Filter[];
+  /** 是否查询GME3.0应用取值范围：[0, 1]默认值：0 */
+  NewVersion?: number;
 }
 
 declare interface DescribeApplicationListResponse {

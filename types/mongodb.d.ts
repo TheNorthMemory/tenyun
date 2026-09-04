@@ -610,17 +610,17 @@ declare interface NodeProperty {
   Address?: string;
   /** 节点公网访问外网地址(IP或域名，示例为IP方式)。 */
   WanServiceAddress?: string;
-  /** 节点角色。- PRIMARY：主节点。- SECONDARY：从节点。- READONLY：只读节点。- ARBITER：仲裁节点。 */
+  /** 节点角色。PRIMARY：主节点。SECONDARY：从节点。READONLY：只读节点。ARBITER：仲裁节点。 */
   Role?: string;
-  /** 节点是否为 Hidden 节点。- true：Hidden 节点。- false：非 Hidden 节点。 */
+  /** 节点是否为 Hidden 节点。true：Hidden 节点。false：非 Hidden 节点。 */
   Hidden?: boolean;
-  /** 节点状态。- NORMAL：正常运行中。- STARTUP：正在启动。- STARTUP2：正在启动，处理中间数据。- RECOVERING：恢复中，暂不可用。- DOWN：已掉线。- UNKNOWN：未知状态。- ROLLBACK：回滚中。- REMOVED：已移除。 */
+  /** 节点状态。NORMAL：正常运行中。STARTUP：正在启动。STARTUP2：正在启动，处理中间数据。RECOVERING：恢复中，暂不可用。DOWN：已掉线。UNKNOWN：未知状态。ROLLBACK：回滚中。REMOVED：已移除。 */
   Status?: string;
   /** 主从同步延迟时间，单位：秒。 */
   SlaveDelay?: number;
   /** 节点优先级。其取值范围为[0,100]，数值越高，优先级越高。 */
   Priority?: number;
-  /** 节点投票权。- 1：具有投票权。- 0：无投票权。 */
+  /** 节点投票权。1：具有投票权。0：无投票权。 */
   Votes?: number;
   /** 节点标签。 */
   Tags?: NodeTag[] | null;
@@ -1013,7 +1013,7 @@ declare interface CreateDBInstanceHourRequest {
   NodeNum: number;
   /** 指版本信息。具体支持的版本信息 ，请通过接口 DescribeSpecInfo 获取。MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
-  /** 产品推荐规格类型GE.LD.T1：本地盘（通用 I 型）。GE.CD.T1：云盘（通用 I 型）。产品受限白名单规格类型HIO10G：本地盘（高 IO 万兆型），已售罄，建议选择 GE.LD.T1。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。 说明： 受限白名单规格类型需白名单权限，如需开通，请提交工单申请。 */
+  /** 产品推荐规格类型GE.LD.T2：本地盘（通用 II 型）。EX.LD.T2：本地盘（独享 II 型）。GE.CD.T1：云盘（通用 I 型）。产品受限白名单规格类型GE.LD.T1：本地盘（通用 I 型），预计将逐步售罄，建议选择 GE.LD.T2。HIO10G：本地盘（高 IO 万兆型），已售罄，建议选择 GE.LD.T2。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。 说明： 受限白名单规格类型需白名单权限，如需开通，请提交工单申请。 */
   MachineCode: string;
   /** 实例数量，最小值1，最大值为30。 */
   GoodsNum: number;
@@ -1035,7 +1035,7 @@ declare interface CreateDBInstanceHourRequest {
   Clone?: number;
   /** 父实例 ID。当参数Clone为3或者4时，即实例为只读或灾备实例时，该参数必须配置。请登录 MongoDB 控制台在实例列表复制父实例 ID。 */
   Father?: string;
-  /** 安全组 ID。 请登录安全组控制台页面获取与数据库实例同地域的安全组 ID。 */
+  /** 安全组 ID。 请登录安全组控制台页面获取与数据库实例同地域的安全组 ID。根据最新的云服务安全规则，所有实例均需绑定安全组。 */
   SecurityGroup?: string[];
   /** 克隆实例回档时间。若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。回档时间范围：仅能回档7天内时间点的数据。 */
   RestoreTime?: string;
@@ -1115,7 +1115,7 @@ declare interface CreateDBInstanceRequest {
   Zone: string;
   /** 指定购买实例的购买时长。取值可选：[1,2,3,4,5,6,7,8,9,10,11,12,24,36]；单位：月。 */
   Period: number;
-  /** 产品推荐规格类型GE.LD.T1：本地盘（通用 I 型）。GE.CD.T1：云盘（通用 I 型）。产品受限白名单规格类型HIO10G：本地盘（高 IO 万兆型），已售罄，建议选择 GE.LD.T1。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。 说明： 受限白名单规格类型需白名单权限，如需开通，请提交工单申请。 */
+  /** 产品推荐规格类型GE.LD.T2：本地盘（通用 II 型）。EX.LD.T2：本地盘（独享 II 型）。GE.CD.T1：云盘（通用 I 型）。产品受限白名单规格类型GE.LD.T1：本地盘（通用 I 型），预计将逐步售罄，建议选择 GE.LD.T2HIO10G：本地盘（高 IO 万兆型），已售罄，建议选择 GE.LD.T2。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。 说明： 受限白名单规格类型需白名单权限，如需开通，请提交工单申请。 */
   MachineCode: string;
   /** 实例架构类型。REPLSET：副本集。SHARD：分片集群。 */
   ClusterType: string;
@@ -1597,17 +1597,17 @@ declare interface DescribeDBInstanceNamespaceResponse {
 }
 
 declare interface DescribeDBInstanceNodePropertyRequest {
-  /** 实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 实例 ID。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 节点 ID。请登录 [MongoDB 控制台的节点管理](https://console.cloud.tencent.com/mongodb)复制节点 ID。 */
+  /** 节点 ID。请登录 MongoDB 控制台的节点管理复制节点 ID。 */
   NodeIds?: string[];
-  /** 节点角色。可选值包括：- PRIMARY：主节点。- SECONDARY：从节点。- READONLY：只读节点。- ARBITER：仲裁节点。 */
+  /** 节点角色。可选值包括：PRIMARY：主节点。SECONDARY：从节点。READONLY：只读节点。ARBITER：仲裁节点。 */
   Roles?: string[];
   /** 该参数指定节点是否为 Hidden 节点，默认为 false。 */
   OnlyHidden?: boolean;
   /** 该参数指定选举新主节点的优先级。其取值范围为[0,100]，数值越高，优先级越高。 */
   Priority?: number;
-  /** 该参数指定节点投票权。- 1：具有投票权。- 0：无投票权。 */
+  /** 该参数指定节点投票权。1：具有投票权。0：无投票权。 */
   Votes?: number;
   /** 节点标签。 */
   Tags?: NodeTag[];
@@ -1618,6 +1618,8 @@ declare interface DescribeDBInstanceNodePropertyResponse {
   Mongos?: NodeProperty[];
   /** 副本集节点信息。 */
   ReplicateSets?: ReplicateSetInfo[];
+  /** Dynamo节点信息 */
+  DynamoProxies?: NodeProperty[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2081,7 +2083,7 @@ declare interface InquirePriceCreateDBInstancesRequest {
   Volume: number;
   /** 实例版本信息。具体支持的版本，请通过接口DescribeSpecInfo查询，其返回的数据结构SpecItems中的参数MongoVersionCode为实例所支持的版本信息。版本信息与版本号对应关系如下：MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。 */
   MongoVersion: string;
-  /** 产品推荐规格类型：GE.LD.T1：本地盘（通用I型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：HIO10G：本地盘（高IO万兆型）。HCD：云盘（云盘版）。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
+  /** 产品推荐规格类型：GE.LD.T2：本地盘（通用II型）。EX.LD.T2：本地盘（独享II型）。GE.CD.T1：云盘（通用I型）。产品白名单规格类型：GE.LD.T1：本地盘（通用I型），预计将逐步售罄，建议选择 GE.LD.T2。HIO10G：本地盘（高IO万兆型），已售罄，建议选择 GE.LD.T2。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请 */
   MachineCode: string;
   /** 实例数量，取值范围为[1,10]。 */
   GoodsNum: number;
@@ -2325,7 +2327,7 @@ declare interface ModifyDBInstanceSpecRequest {
   RemoveNodeList?: RemoveNodeList[];
   /** 实例配置变更后的CPU大小。单位：C。该参数为空值时，默认取实例当前的 CPU 大小。当前所支持的CPU规格，请参见产品规格。 */
   Cpu?: number;
-  /** 实例配置变更后的产品规格类型。该参数为空值时，默认取实例当前的产品规格类型。当前支持的产品规格类型如下：产品推荐规格类型：GE.LD.T2：本地盘（通用II型）。GE.CD.T2：云盘（通用II型）。EX.LD.T2：本地盘（独享II型）。产品白名单规格类型：GE.LD.T1：本地盘（通用I型），预计将逐步售罄，建议选择通用II型。GE.CD.T1：云盘（通用I型），预计将逐步售罄，建议选择通用II型。HIO10G：本地盘（高IO万兆型），已售罄，建议选择通用II型。HCD：云盘（云盘版），已售罄，建议选择通用II型。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请默认不能变更到白名单规格类型产品推荐的规格类型之间不支持相互变更 */
+  /** 实例配置变更后的产品规格类型。该参数为空值时，默认取实例当前的产品规格类型。当前支持的产品规格类型如下：产品推荐规格类型：GE.LD.T2：本地盘（通用II型）。EX.LD.T2：本地盘（独享II型）。GE.LD.T1：本地盘（通用I型）。产品白名单规格类型：GE.LD.T1：本地盘（通用I型），预计将逐步售罄。HIO10G：本地盘（高IO万兆型），已售罄，建议选择 GE.LD.T1。HCD：云盘（云盘版），已售罄，建议选择 GE.CD.T1。注意：白名单规格类型为白名单控制，如若需要，请 提交工单 申请默认不能变更到白名单规格类型产品推荐的规格类型之间不支持相互变更 */
   MachineCode?: string;
   /** 单分片变配列表，用于指定需要单独调整规格的分片。每次设置时 CPU、内存、磁盘都必须指定；如果指定多个分片，所有分片的目标规格必须一致；未指定的分片保持不变。仅分片集群支持，副本集不支持。注意：此参数与整实例级别的变配参数（如 Memory、Volume、CpuNum 等）互斥，不能同时传入。 */
   ModifyShardList?: ModifyShardSpecInfo[];

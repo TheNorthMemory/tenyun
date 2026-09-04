@@ -208,9 +208,9 @@ declare interface LogSources {
 
 /** metadata 项 */
 declare interface MetadataVar {
-  /** 沙箱元数据名 */
+  /** 元数据名 */
   Name?: string;
-  /** 沙箱元数据值 */
+  /** 元数据值 */
   Value?: string;
 }
 

@@ -74,6 +74,8 @@ declare interface ClusterActivity {
   StartTime?: string;
   /** 集群活动结束时间。 */
   EndTime?: string;
+  /** 队列名称。集群级活动（如创建/删除集群）此字段为空，队列级活动（如扩容/缩容）为对应队列名。 */
+  QueueName?: string | null;
 }
 
 /** 集群概览信息。 */
@@ -916,6 +918,26 @@ declare interface AttachNodesResponse {
   RequestId?: string;
 }
 
+declare interface BindClusterVpcRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 私有网络ID，形如vpc-xxx。可通过调用DescribeVpcs获取。 */
+  VpcId: string;
+  /** 私有网络子网ID，形如subnet-xxx。可通过调用DescribeSubnets获取。 */
+  SubnetId: string;
+}
+
+declare interface BindClusterVpcResponse {
+  /** 集群ID。 */
+  ClusterId?: string;
+  /** 绑定的私有网络ID。 */
+  VpcId?: string;
+  /** 绑定的子网ID。 */
+  SubnetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateClusterRequest {
   /** 集群中实例所在的位置。 */
   Placement?: Placement;
@@ -1139,6 +1161,8 @@ declare interface DescribeClusterActivitiesRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。 */
   Limit?: number;
+  /** queue-name 按照【队列名称】进行过滤。队列名称形如：compute。类型：String必选：否每次请求的Filters的上限为10，Filter.Values的上限为5。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeClusterActivitiesResponse {
@@ -1146,6 +1170,40 @@ declare interface DescribeClusterActivitiesResponse {
   ClusterActivitySet?: ClusterActivity[];
   /** 集群活动历史记录数量。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterDedicatedProxyRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterDedicatedProxyResponse {
+  /** 代理是否已开通。true表示已开通，false表示从未开通。 */
+  Enabled?: boolean;
+  /** 终端节点ID。未开通代理时为空。 */
+  EndPointId?: string | null;
+  /** 终端节点VIP地址。未开通代理时为空。 */
+  EndPointVip?: string | null;
+  /** 终端节点是否就绪。true表示已就绪可用，false表示未就绪或未开通。 */
+  EndPointReady?: boolean;
+  /** 终端节点状态。取值范围：ACTIVE：已激活BINDCHANGE：变更中BINDINGCREATE：创建中BINDINGDELETE：删除中ABNORMAL：异常UNKNOWN：未知ASSUME_ROLE_FAILED：授权失败 */
+  EndPointStatus?: string | null;
+  /** 上次同步的终端节点状态（DB记录值）。 */
+  LastKnownStatus?: string | null;
+  /** 终端节点服务ID。 */
+  EndPointServiceId?: string | null;
+  /** 私有网络ID。 */
+  VpcId?: string | null;
+  /** 子网ID。 */
+  SubnetId?: string | null;
+  /** 代理创建时间。未开通时为空。 */
+  CreateTime?: string | null;
+  /** 上次状态同步时间。cron未同步过时为null。 */
+  LastSyncTime?: string | null;
+  /** 本次实时查询时间。未开通时为空。 */
+  RealtimeQueryTime?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1364,6 +1422,94 @@ declare interface DetachNodesRequest {
 }
 
 declare interface DetachNodesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DisableClusterDedicatedProxyRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DisableClusterDedicatedProxyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableClusterDedicatedProxyRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 私有网络ID，形如vpc-xxx。可通过调用DescribeVpcs获取。若不指定，则使用集群已绑定的VPC。 */
+  VpcId?: string;
+  /** 私有网络子网ID，形如subnet-xxx。可通过调用DescribeSubnets获取。与VpcId需同时指定或同时不指定。 */
+  SubnetId?: string;
+}
+
+declare interface EnableClusterDedicatedProxyResponse {
+  /** 终端节点ID。 */
+  EndPointId?: string;
+  /** 终端节点VIP地址。 */
+  EndPointVip?: string;
+  /** 终端节点是否就绪。true表示已就绪，false表示未就绪。 */
+  EndPointReady?: boolean;
+  /** 终端节点状态。取值范围：ACTIVE：已激活BINDCHANGE：变更中BINDINGCREATE：创建中BINDINGDELETE：删除中 */
+  EndPointStatus?: string;
+  /** 私有网络ID。 */
+  VpcId?: string;
+  /** 子网ID。 */
+  SubnetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateRegisterCodeRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** 队列名称。 */
+  QueueName?: string;
+  /** 指定生成的注册码的过期时间, 单位为秒取值范围：[1, 604800]默认值：604800 */
+  ExpireSeconds?: number;
+}
+
+declare interface GenerateRegisterCodeResponse {
+  /** 集群队列的注册码,用于机器注册进入队列时使用默认值：无 */
+  RegisterCode?: string;
+  /** 注册码的过期时间, unix时间戳格式 */
+  ExpireAt?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateRegisterCommandRequest {
+  /** IDC集群ID，形如hpc-xxxxxxxx。 */
+  ClusterId: string;
+  /** 是否通过内网专线代理连接。true：IDC机器需经PrivateLink代理接入false：IDC机器可直连（默认值） */
+  Proxy?: boolean;
+  /** 私有网络ID，形如vpc-xxx。仅当Proxy=true且集群未绑定VPC时必填。与SubnetId需同时指定或同时不指定。 */
+  VpcId?: string;
+  /** 私有网络子网ID，形如subnet-xxx。仅当Proxy=true且集群未绑定VPC时必填。与VpcId需同时指定或同时不指定。 */
+  SubnetId?: string;
+  /** 注册码绑定的队列名称。不指定时由系统取集群默认队列。 */
+  QueueName?: string;
+  /** 注册码有效期，单位：秒。默认值为604800（7天）。 */
+  ExpireSeconds?: number;
+}
+
+declare interface GenerateRegisterCommandResponse {
+  /** 渲染好的节点注册命令，可直接在IDC机器上以root身份执行。 */
+  RegisterCommand?: string;
+  /** 节点注册码。作为不透明凭证使用，请妥善保管，仅在节点注册纳管时传入。 */
+  RegisterCode?: string;
+  /** 注册码到期的Unix时间戳，单位：秒。 */
+  ExpireAt?: number;
+  /** 回显本次是否走内网专线代理。 */
+  Proxy?: boolean;
+  /** 代理终端节点VIP地址。当Proxy=true且终端节点就绪时非空。 */
+  EndPointVip?: string;
+  /** 终端节点状态。取值范围：ACTIVE：已激活BINDCHANGE：变更中BINDINGCREATE：创建中BINDINGDELETE：删除中 */
+  EndPointStatus?: string;
+  /** 回显集群ID。 */
+  ClusterId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2603,6 +2749,8 @@ declare interface Thpc {
   AddQueue(data: AddQueueRequest, config?: AxiosRequestConfig): AxiosPromise<AddQueueResponse>;
   /** 绑定计算资源到集群 {@link AttachNodesRequest} {@link AttachNodesResponse} */
   AttachNodes(data: AttachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<AttachNodesResponse>;
+  /** 绑定IDC集群VPC {@link BindClusterVpcRequest} {@link BindClusterVpcResponse} */
+  BindClusterVpc(data: BindClusterVpcRequest, config?: AxiosRequestConfig): AxiosPromise<BindClusterVpcResponse>;
   /** 创建集群 {@link CreateClusterRequest} {@link CreateClusterResponse} */
   CreateCluster(data?: CreateClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateClusterResponse>;
   /** 创建定时伸缩任务 {@link CreateScheduledActionRequest} {@link CreateScheduledActionResponse} */
@@ -2625,6 +2773,8 @@ declare interface Thpc {
   DescribeAutoScalingConfiguration(data: DescribeAutoScalingConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoScalingConfigurationResponse>;
   /** 查询集群活动历史记录 {@link DescribeClusterActivitiesRequest} {@link DescribeClusterActivitiesResponse} */
   DescribeClusterActivities(data: DescribeClusterActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterActivitiesResponse>;
+  /** 查询IDC集群专线代理状态 {@link DescribeClusterDedicatedProxyRequest} {@link DescribeClusterDedicatedProxyResponse} */
+  DescribeClusterDedicatedProxy(data: DescribeClusterDedicatedProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDedicatedProxyResponse>;
   /** 查询集群存储选项 {@link DescribeClusterStorageOptionRequest} {@link DescribeClusterStorageOptionResponse} */
   DescribeClusterStorageOption(data: DescribeClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStorageOptionResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
@@ -2653,6 +2803,14 @@ declare interface Thpc {
   DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 从集群解绑节点 {@link DetachNodesRequest} {@link DetachNodesResponse} */
   DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
+  /** 关闭IDC集群专线代理 {@link DisableClusterDedicatedProxyRequest} {@link DisableClusterDedicatedProxyResponse} */
+  DisableClusterDedicatedProxy(data: DisableClusterDedicatedProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterDedicatedProxyResponse>;
+  /** 开启IDC集群专线代理 {@link EnableClusterDedicatedProxyRequest} {@link EnableClusterDedicatedProxyResponse} */
+  EnableClusterDedicatedProxy(data: EnableClusterDedicatedProxyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterDedicatedProxyResponse>;
+  /** 创建注册码 {@link GenerateRegisterCodeRequest} {@link GenerateRegisterCodeResponse} */
+  GenerateRegisterCode(data: GenerateRegisterCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateRegisterCodeResponse>;
+  /** 生成IDC集群节点注册命令 {@link GenerateRegisterCommandRequest} {@link GenerateRegisterCommandResponse} */
+  GenerateRegisterCommand(data: GenerateRegisterCommandRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateRegisterCommandResponse>;
   /** 创建工作空间询价 {@link InquirePriceCreateWorkspacesRequest} {@link InquirePriceCreateWorkspacesResponse} */
   InquirePriceCreateWorkspaces(data?: InquirePriceCreateWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceCreateWorkspacesResponse>;
   /** 询价工作空间转换计费模式 {@link InquirePriceModifyWorkspacesChargeTypeRequest} {@link InquirePriceModifyWorkspacesChargeTypeResponse} */

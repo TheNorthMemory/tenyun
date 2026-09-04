@@ -2851,6 +2851,18 @@ declare interface DescribeAccountBalanceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAccountWarningRequest {
+}
+
+declare interface DescribeAccountWarningResponse {
+  /** 余额阈值（单位：国内分、国际美分） */
+  Threshold?: string | null;
+  /** 是否开启余额告警 1 开启 0 关闭 */
+  Open?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAllocateConditionsRequest {
   /** 账单月份，格式为2024-02，不传默认当前月 */
   Month?: string;
@@ -3530,11 +3542,11 @@ declare interface DescribeBillResourceSummaryRequest {
   Limit: number;
   /** 月份，格式为yyyy-mm。不能早于开通账单2.0的月份 */
   Month: string;
-  /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往[账单概览](https://console.cloud.tencent.com/expense/bill/overview)页面顶部查看确认您的账单统计周期类型。 */
+  /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往账单概览页面顶部查看确认您的账单统计周期类型。 */
   PeriodType?: string;
   /** 是否需要访问列表的总记录数，用于前端分页1-表示需要， 0-表示不需要 */
   NeedRecordNum?: number;
-  /** 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：包年包月新购包年包月续费包年包月配置变更包年包月退款 按量计费扣费 线下项目扣费 线下产品扣费 调账扣费 调账补偿 按量计费小时结 按量计费日结 按量计费月结 竞价实例小时结 线下项目调账补偿 线下产品调账补偿 优惠扣费 优惠补偿 按量计费迁入资源 按量计费迁出资源 包年包月迁入资源 包年包月迁出资源 预付费用 小时费用 预留实例退款 按量计费冲正 包年包月转按量 保底扣款 节省计划小时费用 */
+  /** 查询交易类型（请使用交易类型名称入参），入参示例枚举如下：包年包月新购包年包月续费包年包月配置变更包年包月退款按量计费扣费线下项目扣费线下产品扣费调账扣费调账补偿按量计费小时结按量计费日结按量计费月结竞价实例小时结线下项目调账补偿线下产品调账补偿优惠扣费优惠补偿按量计费迁入资源按量计费迁出资源包年包月迁入资源包年包月迁出资源预付费用小时费用预留实例退款按量计费冲正包年包月转按量保底扣款节省计划小时费用 */
   ActionType?: string;
   /** 查询指定资源信息 */
   ResourceId?: string;
@@ -4325,6 +4337,22 @@ declare interface DescribeVoucherUsageDetailsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAccountWarningRequest {
+  /** 余额阈值（单位：国内分、国际美分） */
+  Threshold: number;
+  /** 是否开启余额告警 1 开启 0 关闭 */
+  Open: number;
+}
+
+declare interface ModifyAccountWarningResponse {
+  /** 余额阈值（单位：国内分、国际美分） */
+  Threshold: string | null;
+  /** 是否开启余额告警 1 开启 0 关闭 */
+  Open: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAllocationRuleRequest {
   /** 所编辑公摊规则ID */
   RuleId: number;
@@ -4538,6 +4566,8 @@ declare interface Billing {
   DeleteGatherRule(data: DeleteGatherRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGatherRuleResponse>;
   /** 获取账户余额 {@link DescribeAccountBalanceRequest} {@link DescribeAccountBalanceResponse} */
   DescribeAccountBalance(data?: DescribeAccountBalanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountBalanceResponse>;
+  /** 云api查余额告警阈值接口 {@link DescribeAccountWarningRequest} {@link DescribeAccountWarningResponse} */
+  DescribeAccountWarning(data?: DescribeAccountWarningRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountWarningResponse>;
   /** 查询资源目录筛选条件 {@link DescribeAllocateConditionsRequest} {@link DescribeAllocateConditionsResponse} */
   DescribeAllocateConditions(data?: DescribeAllocateConditionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllocateConditionsResponse>;
   /** 查询分账账单筛选条件 {@link DescribeAllocationBillConditionsRequest} {@link DescribeAllocationBillConditionsResponse} */
@@ -4636,6 +4666,8 @@ declare interface Billing {
   DescribeVoucherInfo(data: DescribeVoucherInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherInfoResponse>;
   /** 获取代金券使用记录 {@link DescribeVoucherUsageDetailsRequest} {@link DescribeVoucherUsageDetailsResponse} */
   DescribeVoucherUsageDetails(data: DescribeVoucherUsageDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoucherUsageDetailsResponse>;
+  /** 云api设置余额告警阈值接口 {@link ModifyAccountWarningRequest} {@link ModifyAccountWarningResponse} */
+  ModifyAccountWarning(data: ModifyAccountWarningRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountWarningResponse>;
   /** 编辑公摊规则 {@link ModifyAllocationRuleRequest} {@link ModifyAllocationRuleResponse} */
   ModifyAllocationRule(data: ModifyAllocationRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAllocationRuleResponse>;
   /** 修改分账单元 {@link ModifyAllocationUnitRequest} {@link ModifyAllocationUnitResponse} */

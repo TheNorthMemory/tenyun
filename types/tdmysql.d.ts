@@ -832,6 +832,54 @@ declare interface SlowLogData {
   Explain?: Explain[] | null;
 }
 
+/** 灾备实例关系 */
+declare interface StandbyDBInstanceRelation {
+  /** 主实例 ID */
+  PrimaryInstanceId?: string;
+  /** 主实例名称 */
+  PrimaryInstanceName?: string | null;
+  /** 主实例地域 */
+  PrimaryRegion?: string;
+  /** 主实例子网 IP */
+  PrimaryVip?: string;
+  /** 主实例子网端口 */
+  PrimaryVport?: number;
+  /** 主实例可用区 */
+  PrimaryZones?: string[];
+  /** 主实例运行状态 */
+  PrimaryStatus?: string;
+  /** 备实例 ID */
+  SecondaryInstanceId?: string;
+  /** 备实例名称 */
+  SecondaryInstanceName?: string | null;
+  /** 备实例地域 */
+  SecondaryRegion?: string;
+  /** 备实例子网 IP */
+  SecondaryVip?: string;
+  /** 备实例子网端口 */
+  SecondaryVport?: number;
+  /** 备实例可用区 */
+  SecondaryZones?: string[];
+  /** 备实例运行状态 */
+  SecondaryStatus?: string;
+  /** 连接类型，log_service 或 raft */
+  ConnType?: string;
+  /** 同步类型，sync 或 async */
+  SyncMode?: string;
+  /** 同步状态，1: 正在同步；2: 同步异常 */
+  SyncStatus?: number;
+  /** 同步状态描述，同步状态异常时的错误信息 */
+  SyncStatusDesc?: string | null;
+  /** 灾备状态描述，"creating" "running" "modifying"，无灾备关系时为空 */
+  StandbyStatus?: string | null;
+  /** 主实例版本 */
+  PrimaryCreateVersion?: string;
+  /** 备实例版本 */
+  SecondaryCreateVersion?: string;
+  /** 时延 单位为秒 */
+  SyncDelay?: number;
+}
+
 /** 存储节点规格 */
 declare interface StorageNodeSpec {
   /** 规格码 */
@@ -888,6 +936,22 @@ declare interface UserInfo {
   CreateTime?: string;
   /** 更新时间 */
   UpdateTime?: string;
+}
+
+declare interface BreakStandbyDBInstanceRelationRequest {
+  /** 备实例 ID */
+  InstanceId: string;
+  /** 是否强制断开 */
+  IsForce?: boolean;
+  /** 时延，单位是秒,0不检查 */
+  SyncDelay?: number;
+}
+
+declare interface BreakStandbyDBInstanceRelationResponse {
+  /** 任务 ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CancelIsolateDBInstancesRequest {
@@ -1056,6 +1120,70 @@ declare interface CreateDBSBackupResponse {
   BackupSetId?: number;
   /** 是否成功 */
   IsSuccess?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateStandbyDBInstanceRequest {
+  /** 主实例 id */
+  PrimaryInstanceId: string;
+  /** 创建实例区域 */
+  Zone: string;
+  /** 字符型vpcid */
+  VpcId: string;
+  /** 字符型subnetid */
+  SubnetId: string;
+  /** 购买规格 */
+  SpecCode: string;
+  /** 存储节点磁盘容量，单位GB */
+  Disk: number;
+  /** 存储节点数量 */
+  StorageNodeNum: number;
+  /** 存储节点副本数量，最大为5，要求为奇数 */
+  Replications: number;
+  /** 全能型副本数 */
+  FullReplications?: number;
+  /** 实例名称，要求长度1-60，允许包含中文、英文大小写、数字、-、_ */
+  InstanceName?: string;
+  /** 时间单位，y：年，m：月，d：日 */
+  TimeUnit?: string;
+  /** 商品的时间大小 */
+  TimeSpan?: number;
+  /** 存储节点CPU核数 */
+  StorageNodeCpu?: number;
+  /** 存储节点内存大小 */
+  StorageNodeMem?: number;
+  /** 付费模式，0表示按需计费/后付费，1表示预付费 */
+  PayMode?: string;
+  /** 自定义端口 */
+  Vport?: number;
+  /** 多AZ可用区列表 */
+  Zones?: string[];
+  /** 是否使用优惠卷 */
+  AutoVoucher?: boolean;
+  /** 优惠卷列表 */
+  VoucherIds?: string[];
+  /** 实例架构类型，19.0.0 起支持 "hybrid"" */
+  InstanceType?: string;
+  /** 磁盘类型,CLOUD_HSSD增强型SSD,CLOUD_TCS本地SSD盘 */
+  StorageType?: string;
+  /** 标签键值对数组 */
+  ResourceTags?: ResourceTag[];
+  /** 主实例地域 */
+  PrimaryInstanceRegion?: string;
+  /** 实例模式，normal:标准型；enhanced:加强型 */
+  InstanceMode?: string;
+  /** dbaadmin密码 */
+  Password?: string;
+  /** 绑定安全组id列表 */
+  SecurityGroupIds?: string[];
+}
+
+declare interface CreateStandbyDBInstanceResponse {
+  /** 实例 ID */
+  InstanceId?: string;
+  /** 任务ID */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1628,6 +1756,18 @@ declare interface DescribeSpecsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeStandbyDBInstanceRelationDetailRequest {
+  /** 实例 ID */
+  InstanceIds: string[];
+}
+
+declare interface DescribeStandbyDBInstanceRelationDetailResponse {
+  /** 灾备关系 */
+  RelationInfos?: StandbyDBInstanceRelation[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserPrivilegesRequest {
   /** 实例 ID，形如：tdsql3-5baee8df。 */
   InstanceId: string;
@@ -1931,6 +2071,8 @@ declare interface UpgradeInstanceResponse {
 /** {@link Tdmysql TDSQL} */
 declare interface Tdmysql {
   (): Versions;
+  /** 断开灾备实例主备连接 {@link BreakStandbyDBInstanceRelationRequest} {@link BreakStandbyDBInstanceRelationResponse} */
+  BreakStandbyDBInstanceRelation(data: BreakStandbyDBInstanceRelationRequest, config?: AxiosRequestConfig): AxiosPromise<BreakStandbyDBInstanceRelationResponse>;
   /** 批量解除隔离实例 {@link CancelIsolateDBInstancesRequest} {@link CancelIsolateDBInstancesResponse} */
   CancelIsolateDBInstances(data: CancelIsolateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIsolateDBInstancesResponse>;
   /** 创建克隆实例 {@link CreateCloneInstanceRequest} {@link CreateCloneInstanceResponse} */
@@ -1939,6 +2081,8 @@ declare interface Tdmysql {
   CreateDBInstances(data: CreateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstancesResponse>;
   /** 创建实例手工备份 {@link CreateDBSBackupRequest} {@link CreateDBSBackupResponse} */
   CreateDBSBackup(data: CreateDBSBackupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBSBackupResponse>;
+  /** 创建灾备实例 {@link CreateStandbyDBInstanceRequest} {@link CreateStandbyDBInstanceResponse} */
+  CreateStandbyDBInstance(data: CreateStandbyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStandbyDBInstanceResponse>;
   /** 批量创建用户 {@link CreateUsersRequest} {@link CreateUsersResponse} */
   CreateUsers(data: CreateUsersRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUsersResponse>;
   /** 删除实例手工备份 {@link DeleteDBSBackupSetsRequest} {@link DeleteDBSBackupSetsResponse} */
@@ -1985,6 +2129,8 @@ declare interface Tdmysql {
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
   /** 查询售卖组件规格 {@link DescribeSpecsRequest} {@link DescribeSpecsResponse} */
   DescribeSpecs(data?: DescribeSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpecsResponse>;
+  /** 获取灾备实例关系详情 {@link DescribeStandbyDBInstanceRelationDetailRequest} {@link DescribeStandbyDBInstanceRelationDetailResponse} */
+  DescribeStandbyDBInstanceRelationDetail(data: DescribeStandbyDBInstanceRelationDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStandbyDBInstanceRelationDetailResponse>;
   /** 查询用户权限 {@link DescribeUserPrivilegesRequest} {@link DescribeUserPrivilegesResponse} */
   DescribeUserPrivileges(data: DescribeUserPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserPrivilegesResponse>;
   /** 查询用户列表 {@link DescribeUsersRequest} {@link DescribeUsersResponse} */

@@ -931,7 +931,7 @@ declare interface DescribeConsumerClientListResponse {
 declare interface DescribeConsumerClientRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
-  /** 客户端ID，从 [DescribeConsumerClientList](https://cloud.tencent.com/document/api/1493/120140) 接口中的 [ConsumerClient](https://cloud.tencent.com/document/api/1493/96031) 出参中获得。 */
+  /** 客户端ID，从 DescribeConsumerClientList 接口中的 ConsumerClient 出参中获得。 */
   ClientId: string;
   /** 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。 */
   Filters?: Filter[];
@@ -948,6 +948,8 @@ declare interface DescribeConsumerClientResponse {
   Client?: ConsumerClient | null;
   /** 主题消费信息 */
   TopicList?: TopicConsumeStats[] | null;
+  /** 订阅主题总数 */
+  TopicTotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1300,6 +1302,8 @@ declare interface DescribeMessageResponse {
   LiteTopic?: string;
   /** 消息消费情况列表总条数 */
   MessageTracksCount?: number | null;
+  /** 5.x 时间轮定时消息状态，仅在查询定时消息（命中 RMQ_SYS_WHEEL_TIMER）时返回。枚举值：PENDING（未到期）、DELIVERED（已到期投递）、RECALLED（已撤回）、NOT_FOUND（消息不存在）、UNSUPPORTED（该消息类型不支持状态查询，如 4.x DelayLevel 延迟消息）。 */
+  DelayMessageStatus?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -74,6 +74,8 @@ declare interface PlaybackPolicy {
   LicenseDurationSeconds?: number;
   /** 开始播放后，允许最长播放时间单位：秒 */
   PlaybackDurationSeconds?: number;
+  /** 是否允许下发离线license默认值：falsewidevine方案，当CanPersistent为true时，根据license request中请求的是online还是offline license自动匹配下发。当CanPersistent为false时，只下发online license。fairplay方案。当CanPersistent为true时，只下发offline license。当CanPersistent为false时，只下发online license。 */
+  CanPersistent?: boolean;
 }
 
 declare interface AddFairPlayPemRequest {

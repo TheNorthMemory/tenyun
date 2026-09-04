@@ -398,6 +398,8 @@ declare interface DescribeDLPEdgeNodeGroupsRspItem {
   GroupId?: string;
   /** 包含边缘节点数量 */
   EdgeCount?: number;
+  /** 分组中英文 */
+  GroupNameI18n?: I18nString[];
 }
 
 /** 业务响应数据 */
@@ -1004,6 +1006,8 @@ declare interface DirectoryConfigData {
   SourceId?: string;
   /** 是否在登录页展示 */
   DisplayOnLoginPage?: boolean;
+  /** 名称多语言 */
+  NameI18n?: I18nString[];
 }
 
 /** 创建/编辑企业目录配置之后返回结果数据 */
@@ -1026,6 +1030,8 @@ declare interface DirectoryConfigResultData {
   AuthSupportPlatforms?: string[];
   /** 认证方式，授权认证/扫码认证 等 */
   AuthMethods?: string[];
+  /** 名称多语言支持 */
+  NameI18n?: I18nString[];
 }
 
 /** 业务响应数据 */
@@ -1134,7 +1140,7 @@ declare interface GrantResourceOperationByVirtualGroups {
   VirtualAccountGroupId: number;
 }
 
-/** GrantedAccountItem */
+/** 账号分组授权信息 */
 declare interface GrantedAccountGroupItem {
   /** 账户组Id */
   AccountGroupId?: number;
@@ -1188,6 +1194,14 @@ declare interface GrantedVirtualGroupItem {
   ExpireTime?: number;
   /** 关联id */
   RelationId?: number;
+}
+
+/** I18nString 国际化字符串（对齐云API平台已注册数据结构 ID:131745，用途：入参/出参） 使用方式：通常以 repeated I18nString 数组承载多语言，一条元素装一种语言。 出参示例：[{"Lang":"zh-CN","Value":"策略名"},{"Lang":"en-US","Value":"Policy Name"}] 入参约定：客户端至少提供 zh-CN 一条；后端建议在业务层调用 i18n.MustZhCn 校验。 */
+declare interface I18nString {
+  /** 语言枚举枚举值：zh-CN： 简体中文en-US： 英文 */
+  Lang?: string;
+  /** 这是一段业务字符串 */
+  Value?: string;
 }
 
 /** 操作的设备列表 */
@@ -1361,6 +1375,8 @@ declare interface CreateCompanyDirectoryConfigRequest {
   Description?: string;
   /** 使用场景：API 创建，快速上手，普通配置等 */
   Scene?: string;
+  /** 名称多语言 */
+  NameI18n?: I18nString[];
 }
 
 declare interface CreateCompanyDirectoryConfigResponse {
@@ -1466,6 +1482,13 @@ declare interface CreatePrivilegeCodeResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccountGroupRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 分组或者目录id(只支持32位) */
+  AccountGroupId?: number;
+}
+
 declare interface DeleteAccountGroupResourcesRequest {
   /** 资源集 */
   ResourceList: DeleteResourceData[];
@@ -1474,6 +1497,11 @@ declare interface DeleteAccountGroupResourcesRequest {
 }
 
 declare interface DeleteAccountGroupResourcesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAccountGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1493,7 +1521,9 @@ declare interface DeleteDeviceVirtualGroupResponse {
 }
 
 declare interface DescribeAccountGroupsRequest {
-  /** 搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。 */
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** （仅SaaS版本适用）搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。 */
   Deepin?: number;
   /** 查询条件过滤参数1、Name，string类型，按分组名过滤是否必填：否操作符: like排序条件1、Itime，string类型，按分组创建时间排序是否必填：否2、Utime，string类型，按分组更新时间排序是否必填：否 */
   Condition?: Condition;
@@ -2019,6 +2049,8 @@ declare interface ModifyCompanyDirectoryConfigRequest {
   Id?: number;
   /** 描述 */
   Description?: string;
+  /** 名称多语言 */
+  NameI18n?: I18nString[];
 }
 
 declare interface ModifyCompanyDirectoryConfigResponse {
@@ -2083,11 +2115,13 @@ declare interface Ioa {
   CreateDeviceVirtualGroup(data: CreateDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceVirtualGroupResponse>;
   /** 创建特权码、卸载码 {@link CreatePrivilegeCodeRequest} {@link CreatePrivilegeCodeResponse} */
   CreatePrivilegeCode(data: CreatePrivilegeCodeRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivilegeCodeResponse>;
+  /** 删除账户分组或者目录 {@link DeleteAccountGroupRequest} {@link DeleteAccountGroupResponse} */
+  DeleteAccountGroup(data?: DeleteAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResponse>;
   /** 删除账户组资源 {@link DeleteAccountGroupResourcesRequest} {@link DeleteAccountGroupResourcesResponse} */
   DeleteAccountGroupResources(data: DeleteAccountGroupResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResourcesResponse>;
   /** 删除终端自定义分组 {@link DeleteDeviceVirtualGroupRequest} {@link DeleteDeviceVirtualGroupResponse} */
   DeleteDeviceVirtualGroup(data?: DeleteDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceVirtualGroupResponse>;
-  /** 查询账号分组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
+  /** 获取账号分组信息 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 软件分类的聚合软件列表查询 {@link DescribeAggrSoftCategorySoftListRequest} {@link DescribeAggrSoftCategorySoftListResponse} */
   DescribeAggrSoftCategorySoftList(data?: DescribeAggrSoftCategorySoftListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftCategorySoftListResponse>;

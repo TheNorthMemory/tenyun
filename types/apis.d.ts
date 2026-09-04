@@ -6,9 +6,9 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface AgentAppMcpServerDTO {
   /** mcp server id */
   ID: string;
-  /** 是否需要鉴权 */
+  /** 是否需要鉴权（已废弃，请勿使用） */
   NeedAuth?: boolean | null;
-  /** 凭据代填的ID */
+  /** 凭据代填的ID（已废弃，请勿使用） */
   AgentCredentialID?: string | null;
   /** 应用为OAuth2认证时，sse模式请求mcp时的资源标识 */
   SSEResourceIdentifier?: string | null;
@@ -70,9 +70,9 @@ declare interface AgentAppServiceDTO {
   InvokeLimitConfigStatus?: boolean;
   /** 限流配置 */
   InvokeLimitConfig?: InvokeLimitConfigDTO;
-  /** 是否要认证 */
+  /** 是否要认证（已废弃，请勿使用） */
   NeedAuth?: boolean;
-  /** 凭据ID */
+  /** 凭据ID（已废弃，请勿使用） */
   AgentCredentialID?: string;
 }
 
@@ -380,6 +380,14 @@ declare interface DescribeMcpServerResponseVO {
   PluginConfigs?: PluginConfigDTO[] | null;
   /** 是否忽略健康检查 */
   IgnoreHealthCheck?: boolean;
+  /** 凭据ID */
+  CredentialID?: string;
+  /** 凭据名称 */
+  CredentialName?: string;
+  /** 访问域名 */
+  Domain?: string | null;
+  /** 访问协议枚举值：http： httphttps： https */
+  RequestProtocolType?: string | null;
 }
 
 /** ServicesVO */
@@ -512,6 +520,10 @@ declare interface DescribeModelServiceResponseVO {
   TokenLengthRoute?: TokenLengthRouteDTO[] | null;
   /** 任务复杂度路由配置 */
   TaskComplexityRoute?: TaskComplexityRouteDTO | null;
+  /** 访问域名 */
+  Domain?: string | null;
+  /** 访问协议枚举值：http： httphttps： https */
+  RequestProtocolType?: string | null;
 }
 
 /** 查询模型列表的响应 */
@@ -636,6 +648,10 @@ declare interface LimitWindowsDTO {
   Interval?: number | null;
   /** 累计上限，k */
   Limit?: number | null;
+  /** 限流类型枚举值：minute： 时间窗口day： 自然日month： 自然月timeRange： 时间范围 */
+  Type?: string | null;
+  /** 时间区间配置 */
+  TimeRange?: TimeRange | null;
 }
 
 /** 出入参说明 */
@@ -946,6 +962,12 @@ declare interface ServiceVO {
   Timeout?: number | null;
   /** 绑定的mcp server数量 */
   McpServerNum?: number | null;
+  /** 凭据ID */
+  CredentialID?: string;
+  /** 凭据名称 */
+  CredentialName?: string;
+  /** 访问协议枚举值：http： httphttps： https */
+  RequestProtocolType?: string | null;
 }
 
 /** 匹配条件请求参数 */
@@ -1032,6 +1054,14 @@ declare interface TaskComplexityRouteDTO {
   SimpleTargetModels?: TargetModelDTO[] | null;
   /** 复杂模型 */
   ComplexTargetModels?: TargetModelDTO[] | null;
+}
+
+/** 时间区间配置 */
+declare interface TimeRange {
+  /** 起始时间参数格式：格式：09:00:00 */
+  Start?: string;
+  /** 结束时间参数格式：格式：12:00:00 */
+  End?: string;
 }
 
 /** 内容安全配置 */
@@ -1249,6 +1279,12 @@ declare interface CreateMcpServerRequest {
   PluginConfigs?: PluginConfigDTO[];
   /** 是否忽略健康检查 */
   IgnoreHealthCheck?: boolean;
+  /** 凭据ID */
+  CredentialID?: string;
+  /** 访问域名 */
+  Domain?: string;
+  /** 访问协议枚举值：http： httphttps： https */
+  RequestProtocolType?: string;
 }
 
 declare interface CreateMcpServerResponse {
@@ -1351,6 +1387,10 @@ declare interface CreateModelServiceRequest {
   TokenLengthRoute?: TokenLengthRouteDTO[];
   /** 任务复杂度路由策略 */
   TaskComplexityRoute?: TaskComplexityRouteDTO;
+  /** 访问域名 */
+  Domain?: string;
+  /** 访问协议 */
+  RequestProtocolType?: string;
 }
 
 declare interface CreateModelServiceResponse {
@@ -1861,6 +1901,12 @@ declare interface ModifyMcpServerRequest {
   PluginConfigs?: PluginConfigDTO[];
   /** 是否忽略健康检查 */
   IgnoreHealthCheck?: boolean;
+  /** 凭据ID */
+  CredentialID?: string;
+  /** 访问域名 */
+  Domain?: string;
+  /** 访问协议枚举值：http： httphttps： https */
+  RequestProtocolType?: string;
 }
 
 declare interface ModifyMcpServerResponse {
@@ -1965,6 +2011,10 @@ declare interface ModifyModelServiceRequest {
   TokenLengthRoute?: TokenLengthRouteDTO[];
   /** 任务复杂度路由策略 */
   TaskComplexityRoute?: TaskComplexityRouteDTO;
+  /** 访问域名 */
+  Domain?: string;
+  /** 访问协议 */
+  RequestProtocolType?: string;
 }
 
 declare interface ModifyModelServiceResponse {

@@ -70,6 +70,8 @@ declare interface ApproverOption {
   ForbidAddSignDate?: boolean;
   /** 签署人手机号传参模式枚举值：REPLACE： 接受已有认证手机号并替换GIVEN： 以客户入参输入手机号为主VALIDATE： 若与认证手机号不一致则报错""： 不走手机号传参模式默认值：""会触发手机号传参模式的前提是：签署人是指定了具体身份信息的渠道方签署人不会触发非渠道方签署人在指定签署人姓名，证件号的情况下会触发 */
   ApproverMobileMode?: string;
+  /** 【仅 SignBeanTag=1 时有效】 签署方自行添加签署印章类控件（SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL）时，「盖章区适配签署方印章尺寸」开关的控制策略枚举值：0： 默认关闭，可开启。与现网一致1： 关闭且置灰——按控件默认的4.2cm尺寸盖章，签署方无法开启开关2： 默认开启且可修改——默认按印章实际尺寸盖章，签署方可手动关闭3： 开启且置灰——强制按印章实际尺寸盖章，签署方不可修改 */
+  AddSignComponentUseSealSize?: number;
 }
 
 /** 指定签署人限制项 */

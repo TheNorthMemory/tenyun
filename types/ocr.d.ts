@@ -650,6 +650,8 @@ declare interface Element {
   ResultList?: ResultList[] | null;
   /** 元素索引 */
   Index?: number;
+  /** 元素所在页单位：页默认值：1 */
+  PageIndex?: number;
 }
 
 /** 敏感数据加密 */
@@ -1816,8 +1818,10 @@ declare interface ResultList {
   Answer?: Element[] | null;
   /** 解析 */
   Parse?: Element[];
-  /** 整题的坐标 */
+  /** 整题的坐标，多页单题跨页/单页单题跨栏场景下，存在一道题有多个坐标 */
   Coord?: Polygon[] | null;
+  /** 多坐标返回，显示坐标所在页默认值：[] */
+  CoordPageIndex?: number[];
 }
 
 /** 销货清单 */
@@ -3482,6 +3486,24 @@ declare interface DescribeQuestionMarkAgentJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeQuestionSplitJobRequest {
+  /** 任务唯一ID。由服务端生成。 */
+  JobId?: string;
+}
+
+declare interface DescribeQuestionSplitJobResponse {
+  /** 切题详情 */
+  QuestionInfo?: QuestionInfo[];
+  /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。 */
+  ErrorMessage?: string;
+  /** 任务状态。枚举值：WAIT： 等待中RUN： 执行中FAIL： 任务失败DONE： 任务成功 */
+  JobStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DriverLicenseOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5030,6 +5052,24 @@ declare interface SubmitQuestionMarkAgentJobResponse {
   RequestId?: string;
 }
 
+declare interface SubmitQuestionSplitJobRequest {
+  /** 批量ImageUrl图片入口。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。入参限制：要求pdf只能有一个url或base64 */
+  ImageUrlList?: string[];
+  /** 批量base64图片入口。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。入参限制：要求pdf只能有一个url或base64 */
+  ImageBase64List?: string[];
+  /** 选择切题模型枚举值：youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题youtu_crop_pro： 属于切题精调大模型，针对双栏、跨栏等复杂版式识别精度大幅提升，但推理耗时更长默认值：youtu_crop */
+  ModelType?: string;
+}
+
+declare interface SubmitQuestionSplitJobResponse {
+  /** 任务唯一ID。由服务端生成。 */
+  JobId?: string;
+  /** PDF 转完之后的图片压缩包列表地址。 */
+  ImageZipUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TableOCRRequest {
   /** 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 3M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5463,6 +5503,8 @@ declare interface Ocr {
   DescribeMarkEssayAgentJob(data?: DescribeMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarkEssayAgentJobResponse>;
   /** 试题批改Agent（查询任务） {@link DescribeQuestionMarkAgentJobRequest} {@link DescribeQuestionMarkAgentJobResponse} */
   DescribeQuestionMarkAgentJob(data?: DescribeQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionMarkAgentJobResponse>;
+  /** 异步试卷切题（查询任务） {@link DescribeQuestionSplitJobRequest} {@link DescribeQuestionSplitJobResponse} */
+  DescribeQuestionSplitJob(data?: DescribeQuestionSplitJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionSplitJobResponse>;
   /** 驾驶证识别 {@link DriverLicenseOCRRequest} {@link DriverLicenseOCRResponse} */
   DriverLicenseOCR(data?: DriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<DriverLicenseOCRResponse>;
   /** 英文识别 {@link EnglishOCRRequest} {@link EnglishOCRResponse} */
@@ -5565,6 +5607,8 @@ declare interface Ocr {
   SubmitMarkEssayAgentJob(data?: SubmitMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMarkEssayAgentJobResponse>;
   /** 试题批改Agent（提交任务） {@link SubmitQuestionMarkAgentJobRequest} {@link SubmitQuestionMarkAgentJobResponse} */
   SubmitQuestionMarkAgentJob(data?: SubmitQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitQuestionMarkAgentJobResponse>;
+  /** 异步试卷切题（提交任务） {@link SubmitQuestionSplitJobRequest} {@link SubmitQuestionSplitJobResponse} */
+  SubmitQuestionSplitJob(data?: SubmitQuestionSplitJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitQuestionSplitJobResponse>;
   /** 表格识别（V1) {@link TableOCRRequest} {@link TableOCRResponse} */
   TableOCR(data?: TableOCRRequest, config?: AxiosRequestConfig): AxiosPromise<TableOCRResponse>;
   /** 快速文本检测 {@link TextDetectRequest} {@link TextDetectResponse} */

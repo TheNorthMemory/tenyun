@@ -288,6 +288,14 @@ declare interface EventMessage {
   ParamTwo?: number;
 }
 
+/** 热词的词和权重 */
+declare interface HotWord {
+  /** 热词 */
+  Word: string;
+  /** 权重 */
+  Weight: number;
+}
+
 /** 拉流输入源 */
 declare interface Input {
   /** 直播拉流地址入参限制：字符长度小于2048 */
@@ -500,7 +508,7 @@ declare interface McuPublishCdnParam {
 declare interface McuRecordParams {
   /** 转推录制模式， 0/不填: 暂不支持，行为未定义；1: 不开启录制；2: 开启录制（使用控制台自动录制模板参数，参考：[跳转文档](https://cloud.tencent.com/document/product/647/111748)）；3: 开启录制（使用API指定参数）。 */
   UniRecord?: number;
-  /** 录制任务 key，标识一个录制任务；您可以通过该参数，将多个转推任务录制成一个文件。不指定该参数时，只录制当前转推任务。【限制长度为128字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】 */
+  /** 录制任务标识 key，显式关联多个转推任务到一个录制任务；一般不需设置，默认录制本次转推内容。如果有特殊需求，比如将多段转推内容分时录制到同一个文件，可以通过设置此参数来控制。举例: 时间点10:00 发起转推任务:A + RecorderKey:abc，10:05分发起转推任务B+ RecorderKey:abc，那么录制文件会包含，转推A(10:00~10:05分的内容)+转推B的内容。【限制长度为128字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】 */
   RecordKey?: string;
   /** 【仅当UniRecord=3时此参数有效】续录等待时间，对应录制模板“续录等待时长”，单位：秒。该值需大于等于 5，且小于等于 86400(24小时)，默认值为 30。启用续录时，录制任务空闲超过RecordWaitTime的时长，自动结束。 */
   RecordWaitTime?: number;
@@ -1372,6 +1380,24 @@ declare interface VideoParams {
   Gop: number;
 }
 
+/** 词表内容 */
+declare interface Vocab {
+  /** 热词表名称 */
+  Name?: string;
+  /** 热词表描述 */
+  Description?: string;
+  /** 热词表ID */
+  VocabId?: string;
+  /** 词权重列表 */
+  WordWeights?: HotWord[];
+  /** 词表创建时间 */
+  CreateTime?: string;
+  /** 词表更新时间 */
+  UpdateTime?: string;
+  /** 热词表状态，1为默认状态即在识别时默认加载该热词表进行识别，0为初始状态 */
+  State?: number;
+}
+
 /** TTS的声音参数配置 */
 declare interface Voice {
   /** 音色 ID，可从音色列表获取，或使用声音克隆生成的自定义音色 ID */
@@ -1715,11 +1741,21 @@ declare interface CreatePictureResponse {
 }
 
 declare interface CreateRecognizeVocabV3Request {
+  /** 词表名称（同 SdkAppId 下唯一） */
+  Name: string;
   /** 客户维度唯一标识 */
   SdkAppId: number;
+  /** 描述 */
+  Description?: string;
+  /** 热词+权重数组 */
+  WordWeights?: HotWord[];
+  /** 文本形式热词 */
+  WordWeightStr?: string;
 }
 
 declare interface CreateRecognizeVocabV3Response {
+  /** 词表 id */
+  VocabId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1807,6 +1843,10 @@ declare interface DeletePictureResponse {
 }
 
 declare interface DeleteRecognizeVocabV3Request {
+  /** 词表 id */
+  VocabId: string;
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
 }
 
 declare interface DeleteRecognizeVocabV3Response {
@@ -2495,25 +2535,61 @@ declare interface DismissRoomResponse {
 }
 
 declare interface DownloadRecognizeVocabV3Request {
+  /** 词表 id */
+  VocabId: string;
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
 }
 
 declare interface DownloadRecognizeVocabV3Response {
+  /** 词表 id */
+  VocabId?: string;
+  /** 文本形式热词 */
+  WordWeightStr?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface GetRecognizeVocabListV3Request {
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
 }
 
 declare interface GetRecognizeVocabListV3Response {
+  /** 词表列表 */
+  VocabList?: Vocab[];
+  /** 词表个数单位：个 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface GetRecognizeVocabV3Request {
+  /** 词表 id */
+  VocabId: string;
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
 }
 
 declare interface GetRecognizeVocabV3Response {
+  /** 词表名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 词表 id */
+  VocabId?: string;
+  /** 热词+权重数组 */
+  WordWeights?: HotWord[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 是否设置默认词表枚举值：0： 否1： 是 */
+  State?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2637,9 +2713,17 @@ declare interface RemoveUserResponse {
 }
 
 declare interface SetVocabStateV3Request {
+  /** 词表 id */
+  VocabId: string;
+  /** 是否设置为默认词表 */
+  State: number;
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
 }
 
 declare interface SetVocabStateV3Response {
+  /** 词表 id */
+  VocabId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2739,7 +2823,7 @@ declare interface StartMCUMixTranscodeResponse {
 }
 
 declare interface StartPublishCdnStreamRequest {
-  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和转推的房间所对应的SdkAppId相同。 */
+  /** TRTC的SdkAppId，和转推的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
   /** 主房间信息RoomId，转推的TRTC房间所对应的RoomId。 */
   RoomId: string;
@@ -2761,7 +2845,7 @@ declare interface StartPublishCdnStreamRequest {
   SeiParams?: McuSeiParams;
   /** 回推房间信息，一个任务最多支持回推10个房间，和转推CDN参数必须要有一个。注：回推房间需使用10.4及以上SDK版本，如您有需求，请联系腾讯云技术支持。 */
   FeedBackRoomParams?: McuFeedBackRoomParams[];
-  /** 转推录制参数，[参考文档](https://cloud.tencent.com/document/product/647/111748)。 */
+  /** 转推录制参数，参考文档。 */
   RecordParams?: McuRecordParams;
 }
 
@@ -3011,7 +3095,7 @@ declare interface UpdateAIConversationResponse {
 }
 
 declare interface UpdatePublishCdnStreamRequest {
-  /** TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351)，和转推的房间所对应的SdkAppId相同。 */
+  /** TRTC的SdkAppId，和转推的房间所对应的SdkAppId相同。 */
   SdkAppId: number;
   /** 唯一标识转推任务。 */
   TaskId: string;
@@ -3041,9 +3125,23 @@ declare interface UpdatePublishCdnStreamResponse {
 }
 
 declare interface UpdateRecognizeVocabV3Request {
+  /** 词表 id */
+  VocabId: string;
+  /** 客户维度唯一标识 */
+  SdkAppId: number;
+  /** 词表名称 */
+  Name?: string;
+  /** 词表描述 */
+  Description?: string;
+  /** 热词数组 */
+  WordWeights?: HotWord[];
+  /** base64 编码的词表文本 */
+  WordWeightStr?: string;
 }
 
 declare interface UpdateRecognizeVocabV3Response {
+  /** 词表 id */
+  VocabId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3150,7 +3248,7 @@ declare interface Trtc {
   /** 删除图片 {@link DeletePictureRequest} {@link DeletePictureResponse} */
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
   /** 删除智能识别热词表V3 {@link DeleteRecognizeVocabV3Request} {@link DeleteRecognizeVocabV3Response} */
-  DeleteRecognizeVocabV3(data?: DeleteRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DeleteRecognizeVocabV3Response>;
+  DeleteRecognizeVocabV3(data: DeleteRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DeleteRecognizeVocabV3Response>;
   /** 删除声纹信息 {@link DeleteVoicePrintRequest} {@link DeleteVoicePrintResponse} */
   DeleteVoicePrint(data: DeleteVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVoicePrintResponse>;
   /** 查询AI对话状态 {@link DescribeAIConversationRequest} {@link DescribeAIConversationResponse} */
@@ -3224,11 +3322,11 @@ declare interface Trtc {
   /** 解散房间（字符串房间号） {@link DismissRoomByStrRoomIdRequest} {@link DismissRoomByStrRoomIdResponse} */
   DismissRoomByStrRoomId(data: DismissRoomByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<DismissRoomByStrRoomIdResponse>;
   /** 下载智能识别热词表V3 {@link DownloadRecognizeVocabV3Request} {@link DownloadRecognizeVocabV3Response} */
-  DownloadRecognizeVocabV3(data?: DownloadRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DownloadRecognizeVocabV3Response>;
+  DownloadRecognizeVocabV3(data: DownloadRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DownloadRecognizeVocabV3Response>;
   /** 列举智能识别热词表V3 {@link GetRecognizeVocabListV3Request} {@link GetRecognizeVocabListV3Response} */
-  GetRecognizeVocabListV3(data?: GetRecognizeVocabListV3Request, config?: AxiosRequestConfig): AxiosPromise<GetRecognizeVocabListV3Response>;
+  GetRecognizeVocabListV3(data: GetRecognizeVocabListV3Request, config?: AxiosRequestConfig): AxiosPromise<GetRecognizeVocabListV3Response>;
   /** 获取智能识别热词表V3 {@link GetRecognizeVocabV3Request} {@link GetRecognizeVocabV3Response} */
-  GetRecognizeVocabV3(data?: GetRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<GetRecognizeVocabV3Response>;
+  GetRecognizeVocabV3(data: GetRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<GetRecognizeVocabV3Response>;
   /** 修改AI 内容理解任务 {@link ModifyCloudModerationRequest} {@link ModifyCloudModerationResponse} */
   ModifyCloudModeration(data: ModifyCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudModerationResponse>;
   /** 更新云端录制任务 {@link ModifyCloudRecordingRequest} {@link ModifyCloudRecordingResponse} */
@@ -3244,7 +3342,7 @@ declare interface Trtc {
   /** 移出用户（字符串房间号） {@link RemoveUserByStrRoomIdRequest} {@link RemoveUserByStrRoomIdResponse} */
   RemoveUserByStrRoomId(data: RemoveUserByStrRoomIdRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveUserByStrRoomIdResponse>;
   /** 设置智能识别热词表状态V3 {@link SetVocabStateV3Request} {@link SetVocabStateV3Response} */
-  SetVocabStateV3(data?: SetVocabStateV3Request, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateV3Response>;
+  SetVocabStateV3(data: SetVocabStateV3Request, config?: AxiosRequestConfig): AxiosPromise<SetVocabStateV3Response>;
   /** 开始AI对话任务 {@link StartAIConversationRequest} {@link StartAIConversationResponse} */
   StartAIConversation(data: StartAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<StartAIConversationResponse>;
   /** 开始AI转录任务 {@link StartAITranscriptionRequest} {@link StartAITranscriptionResponse} */
@@ -3282,7 +3380,7 @@ declare interface Trtc {
   /** 更新转推任务 {@link UpdatePublishCdnStreamRequest} {@link UpdatePublishCdnStreamResponse} */
   UpdatePublishCdnStream(data: UpdatePublishCdnStreamRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePublishCdnStreamResponse>;
   /** 更新智能识别热词表V3 {@link UpdateRecognizeVocabV3Request} {@link UpdateRecognizeVocabV3Response} */
-  UpdateRecognizeVocabV3(data?: UpdateRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<UpdateRecognizeVocabV3Response>;
+  UpdateRecognizeVocabV3(data: UpdateRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<UpdateRecognizeVocabV3Response>;
   /** 更新输入在线媒体流 {@link UpdateStreamIngestRequest} {@link UpdateStreamIngestResponse} */
   UpdateStreamIngest(data: UpdateStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStreamIngestResponse>;
   /** 更新声纹信息 {@link UpdateVoicePrintRequest} {@link UpdateVoicePrintResponse} */

@@ -2,6 +2,42 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 标注上下文 */
+declare interface AnnotationContext {
+  /** 任务目标（整段视频的总目标） */
+  TaskGoal?: string;
+  /** 关键物体列表 */
+  KeyObjects?: string[];
+  /** 原子动词参考列表 */
+  AtomicVerbs?: string[];
+}
+
+/** 批量输入源 */
+declare interface BatchS3SourceInfo {
+  /** 存储桶名称 */
+  Bucket: string;
+  /** 存储服务地址 */
+  Endpoint: string;
+  /** 存储区域 */
+  Region: string;
+  /** 视频目录前缀，如 video/，仅列举视频文件 */
+  Prefix: string;
+  /** 访问凭证，需对该桶有读取权限 */
+  Secret: SecretInfo;
+  /** 文件名正则过滤规则，仅文件名匹配的文件会处理，不传不过滤 */
+  Filter?: string;
+  /** 是否腾讯云 COS：1 是，0 否。使用腾讯云 COS 时必须传 1取值范围：[0, 1] */
+  IsCos?: number;
+}
+
+/** 回调配置 */
+declare interface CallbackInfo {
+  /** 回调地址 */
+  Url: string;
+  /** 回调签名密钥，用于回调请求的签名校验 */
+  Secret: string;
+}
+
 /** 云端录制文件上传到云存储的参数（对象存储cos） */
 declare interface CloudStorage {
   /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS【注意】目前第三方云存储仅支持AWS，更多第三方云存储陆续支持中示例值：0 */
@@ -92,6 +128,28 @@ declare interface DurationDetails {
   DeductDuration?: number;
 }
 
+/** 任务信息 */
+declare interface Job {
+  /** 任务 ID */
+  JobId?: string;
+  /** 任务类型：1 单视频，2 批量枚举值：1： 单视频2： 批量 */
+  JobType?: number;
+  /** 标注模式：3 精标注枚举值：3： 精标注 */
+  AnnotationType?: number;
+  /** 任务状态：1 处理中，2 异常，3 成功枚举值：1： 处理中2： 异常3： 成功 */
+  Status?: number;
+  /** 文件列举状态：0 列举中，1 全部加载，2 超过数量上限截断（仅批量任务）枚举值：0： 列举中1： 全部加载2： 超过数量上限截断（仅批量任务） */
+  IngestStatus?: number;
+  /** 输入路径（S3源为桶名/对象路径：批量任务为目录前缀，单文件为文件完整路径；HTTP源为完整URL） */
+  InputPath?: string;
+  /** 处理项总数 */
+  TotalNumber?: number;
+  /** 创建时间，Unix 时间戳（秒） */
+  CreateTime?: string;
+  /** 完成时间，Unix 时间戳（秒），未完成为 0 */
+  FinishTime?: string;
+}
+
 /** 按授权查看的license列表 */
 declare interface License {
   /** 该类型的license个数 */
@@ -124,6 +182,36 @@ declare interface MultiNet {
   RecvBps?: number[];
 }
 
+/** 单文件结果投递 */
+declare interface OutputInfo {
+  /** 存储桶名称 */
+  Bucket: string;
+  /** 存储服务地址 */
+  Endpoint: string;
+  /** 存储区域 */
+  Region: string;
+  /** 输出文件路径，如 output/result.json */
+  Key: string;
+  /** 访问凭证，需对该桶有写入权限 */
+  Secret: SecretInfo;
+}
+
+/** 批量结果投递 */
+declare interface OutputStorage {
+  /** 存储桶名称 */
+  Bucket: string;
+  /** 存储服务地址 */
+  Endpoint: string;
+  /** 存储区域 */
+  Region: string;
+  /** 访问凭证，需对该桶有写权限 */
+  Secret: SecretInfo;
+  /** 输出目录前缀，不传写入桶根目录 */
+  Prefix?: string;
+  /** 输出文件名规则，支持变量 $FileName、$FileType、$TaskId、$YYYY、$mm、$dd、$HH、$MM、$SS，须至少含一个变量，默认 $FileName_$TaskId.json */
+  NameRule?: string;
+}
+
 /** 权限信息 */
 declare interface PolicyInfo {
   /** 远端设备ID */
@@ -132,6 +220,12 @@ declare interface PolicyInfo {
   FieldDeviceIds: string[];
   /** 最近添加时间 */
   ModifyTime: string;
+}
+
+/** 标注处理参数 */
+declare interface ProcessParams {
+  /** 标注处理模式，预留字段 */
+  Mode?: string;
 }
 
 /** 项目信息 */
@@ -170,6 +264,30 @@ declare interface RecentSessionInfo {
   StartTime?: number;
   /** 最后更新时间 */
   LatestUpdateTime?: number;
+}
+
+/** 单文件 COS 输入源 */
+declare interface S3SourceInfo {
+  /** 存储桶名称 */
+  Bucket: string;
+  /** 存储服务地址 */
+  Endpoint: string;
+  /** 存储区域 */
+  Region: string;
+  /** 视频文件路径 */
+  Key: string;
+  /** 访问凭证，需对该桶有读取权限 */
+  Secret: SecretInfo;
+  /** 是否腾讯云 COS：1 是，0 否。使用腾讯云 COS 时必须传 1取值范围：[0, 1] */
+  IsCos?: number;
+}
+
+/** 访问凭证 */
+declare interface SecretInfo {
+  /** 密钥 ID */
+  SecretId: string;
+  /** 密钥 Key */
+  SecretKey: string;
 }
 
 /** 会话数据详单（按设备区分） */
@@ -286,6 +404,24 @@ declare interface SessionIntervalStatistic {
   NotBadSessionRatio: number;
 }
 
+/** 处理项信息 */
+declare interface Task {
+  /** 处理项 ID */
+  TaskId?: string;
+  /** 视频文件名 */
+  FileName?: string;
+  /** 处理项状态：1 未处理，2 处理中，3 超时，4 异常，5待确认，6 成功枚举值：1： 未处理2： 处理中3： 超时4： 异常5： 待确认6： 成功 */
+  Status?: number;
+  /** 视频完整路径（S3源为桶名/文件key；HTTP源为完整URL） */
+  InputPath?: string;
+  /** 失败原因，成功为空 */
+  ErrorMsg?: string;
+  /** 创建时间，Unix 时间戳（秒） */
+  CreateTime?: string;
+  /** 完成时间，Unix 时间戳（秒），进行中为 0 */
+  FinishTime?: string;
+}
+
 /** 原视频流参数列表 */
 declare interface VideoList {
   /** 项目id */
@@ -360,6 +496,28 @@ declare interface BoundLicensesResponse {
   RequestId?: string;
 }
 
+declare interface CreateBatchVideoAnnotationJobRequest {
+  /** 批量输入源信息（目录前缀） */
+  InputStorage: BatchS3SourceInfo;
+  /** 标注模式（当前仅开放精标注）枚举值：3： 精标注 */
+  AnnotationType: number;
+  /** 标注上下文信息 */
+  AnnotationContext?: AnnotationContext;
+  /** 标注处理参数，预留字段，当前无效 */
+  ProcessParams?: ProcessParams;
+  /** 批量结果输出存储信息，不传则不投递 */
+  OutputStorage?: OutputStorage;
+  /** 回调信息，配置后当任务下子处理项状态从处理中变为其他状态时，服务端会向回调地址发送请求（退避重试三次，不保证回调一定送达，需保证目标地址接收服务有效），建议接收方做好幂等处理。回调请求格式如下：请求头名称值X-Annotation-Signaturehex(HMAC-SHA256(请求体原始字节, CallbackInfo.Secret))请求体（application/json）参数名类型必选描述JobIdstring是任务 IDTaskIdstring是处理项 IDFileNamestring是视频文件名Statusint是触发本次回调的处理项状态：3 超时，4 异常，5 待确认，6 成功StatusChangedAtint是状态变更时间，Unix 时间戳（秒）RawResultstring否当前生效的结果 JSON 原文：成功=标注产物；待确认=原始标注；确认后=确认版内容。超时/异常无内容 */
+  CallbackInfo?: CallbackInfo;
+}
+
+declare interface CreateBatchVideoAnnotationJobResponse {
+  /** 任务 ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudRecordingRequest {
   /** 项目id */
   ProjectId: string;
@@ -418,6 +576,52 @@ declare interface CreateProjectResponse {
   RequestId?: string;
 }
 
+declare interface CreateVideoAnnotationJobRequest {
+  /** 输入源类型：1 S3 兼容存储，2 HTTP URL枚举值：1： S3 兼容存储2： HTTP URL */
+  InputType: number;
+  /** 标注模式（当前仅开放精标注）枚举值：3： 精标注 */
+  AnnotationType: number;
+  /** S3 存储输入源信息，InputType=1 时必填 */
+  S3SourceInfo?: S3SourceInfo;
+  /** 视频 HTTP URL。InputType=2 时必填。格式如 https://example.com/video.mp4 */
+  HttpUrl?: string;
+  /** 标注上下文信息 */
+  AnnotationContext?: AnnotationContext;
+  /** 标注处理参数，预留字段，当前无效 */
+  ProcessParams?: ProcessParams;
+  /** 结果输出信息 */
+  OutputInfo?: OutputInfo;
+  /** 回调信息，配置后当处理项状态从处理中变为其他状态时，服务端会向回调地址发送请求（退避重试三次，不保证回调一定送达，需保证目标地址接收服务有效），建议接收方做好幂等处理。回调请求格式如下：请求头名称值X-Annotation-Signaturehex(HMAC-SHA256(请求体原始字节, CallbackInfo.Secret))请求体（application/json）参数名类型必选描述JobIdstring是任务 IDTaskIdstring是处理项 IDFileNamestring是视频文件名Statusint是触发本次回调的处理项状态：3 超时，4 异常，5 待确认，6 成功StatusChangedAtint是状态变更时间，Unix 时间戳（秒）RawResultstring否当前生效的结果 JSON 原文：成功=标注产物；待确认=原始标注；确认后=确认版内容。超时/异常无内容 */
+  CallbackInfo?: CallbackInfo;
+}
+
+declare interface CreateVideoAnnotationJobResponse {
+  /** 任务 ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAnnotationJobRequest {
+  /** 任务 ID */
+  JobId: string;
+}
+
+declare interface DeleteAnnotationJobResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAnnotationTaskRequest {
+  /** 处理项 ID */
+  TaskId: string;
+}
+
+declare interface DeleteAnnotationTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudRecordingRequest {
   /** 录制任务的唯一Id，在启动录制成功后会返回。 */
   TaskId: string;
@@ -434,6 +638,84 @@ declare interface DeleteProjectRequest {
 }
 
 declare interface DeleteProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAnnotationJobsRequest {
+  /** 分页偏移，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 20，最大 100取值范围：[10, 100] */
+  Limit?: number;
+  /** 按任务状态过滤：1 处理中，2 异常，3 成功。不传查全部枚举值：1： 处理中2： 异常3： 成功 */
+  Status?: number;
+  /** 按输入路径前缀过滤，不传不过滤 */
+  InputPath?: string;
+}
+
+declare interface DescribeAnnotationJobsResponse {
+  /** 符合条件的任务总数 */
+  TotalCount?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 每页数量 */
+  Limit?: number;
+  /** 任务列表 */
+  Jobs?: Job[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAnnotationResultsRequest {
+  /** 处理项 ID */
+  TaskId: string;
+}
+
+declare interface DescribeAnnotationResultsResponse {
+  /** 处理项 ID */
+  TaskId?: string;
+  /** 视频文件名 */
+  FileName?: string;
+  /** 处理项状态：1 未处理，2 处理中，3 超时，4 异常，5待确认，6 成功枚举值：1： 未处理2： 处理中3： 超时4： 异常5： 待确认6： 成功 */
+  Status?: number;
+  /** 失败原因，成功为空 */
+  ErrorMsg?: string;
+  /** 标注结果 JSON 原文，非成功状态为空 */
+  Result?: string;
+  /** 标注结果字节数 */
+  ResultSize?: number;
+  /** 创建时间，Unix 时间戳（秒） */
+  CreateTime?: string;
+  /** 完成时间，Unix 时间戳（秒），进行中为 0 */
+  FinishTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAnnotationTasksRequest {
+  /** 任务 ID */
+  JobId: string;
+  /** 分页偏移，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 20，最大 100取值范围：[10, 100] */
+  Limit?: number;
+  /** 按文件名前缀过滤，不传不过滤 */
+  FileName?: string;
+  /** 按处理项状态过滤：1 未处理，2 处理中，3 超时，4 异常，5待确认，6 成功。不传查全部枚举值：1： 未处理2： 处理中3： 超时4： 异常5： 待确认6： 成功 */
+  Status?: number;
+}
+
+declare interface DescribeAnnotationTasksResponse {
+  /** 任务 ID */
+  JobId?: string;
+  /** 处理项总数 */
+  TotalCount?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 每页数量 */
+  Limit?: number;
+  /** 处理项列表 */
+  Tasks?: Task[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -900,6 +1182,16 @@ declare interface ModifyProjectSecModeResponse {
   RequestId?: string;
 }
 
+declare interface RetryAnnotationTaskRequest {
+  /** 处理项 ID，仅超时（3）或异常（4）状态可重试 */
+  TaskId: string;
+}
+
+declare interface RetryAnnotationTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartPublishLiveStreamRequest {
   /** 是否转码，0表示无需转码，1表示需要转码。是否收取转码费是由WithTranscoding参数决定的，WithTranscoding为0，表示旁路转推，不会收取转码费用，WithTranscoding为1，表示混流转推，会收取转码费用。 示例值：1 */
   WithTranscoding: number;
@@ -937,16 +1229,30 @@ declare interface Trro {
   BatchDeletePolicy(data: BatchDeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeletePolicyResponse>;
   /** 设备绑定license {@link BoundLicensesRequest} {@link BoundLicensesResponse} */
   BoundLicenses(data: BoundLicensesRequest, config?: AxiosRequestConfig): AxiosPromise<BoundLicensesResponse>;
+  /** 创建批量视频标注任务 {@link CreateBatchVideoAnnotationJobRequest} {@link CreateBatchVideoAnnotationJobResponse} */
+  CreateBatchVideoAnnotationJob(data: CreateBatchVideoAnnotationJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBatchVideoAnnotationJobResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */
   CreateCloudRecording(data: CreateCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudRecordingResponse>;
   /** 创建设备 {@link CreateDeviceRequest} {@link CreateDeviceResponse} */
   CreateDevice(data: CreateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeviceResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
+  /** 创建视频标注任务 {@link CreateVideoAnnotationJobRequest} {@link CreateVideoAnnotationJobResponse} */
+  CreateVideoAnnotationJob(data: CreateVideoAnnotationJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoAnnotationJobResponse>;
+  /** 删除标注任务 {@link DeleteAnnotationJobRequest} {@link DeleteAnnotationJobResponse} */
+  DeleteAnnotationJob(data: DeleteAnnotationJobRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnnotationJobResponse>;
+  /** 删除标注处理项 {@link DeleteAnnotationTaskRequest} {@link DeleteAnnotationTaskResponse} */
+  DeleteAnnotationTask(data: DeleteAnnotationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAnnotationTaskResponse>;
   /** 停止云端录制 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
   DeleteCloudRecording(data: DeleteCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudRecordingResponse>;
   /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
+  /** 查询标注任务列表 {@link DescribeAnnotationJobsRequest} {@link DescribeAnnotationJobsResponse} */
+  DescribeAnnotationJobs(data?: DescribeAnnotationJobsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnnotationJobsResponse>;
+  /** 查询标注结果 {@link DescribeAnnotationResultsRequest} {@link DescribeAnnotationResultsResponse} */
+  DescribeAnnotationResults(data: DescribeAnnotationResultsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnnotationResultsResponse>;
+  /** 查询标注处理项列表 {@link DescribeAnnotationTasksRequest} {@link DescribeAnnotationTasksResponse} */
+  DescribeAnnotationTasks(data: DescribeAnnotationTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnnotationTasksResponse>;
   /** 查询设备信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */
   DescribeDeviceInfo(data: DescribeDeviceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceInfoResponse>;
   /** 获取设备列表 {@link DescribeDeviceListRequest} {@link DescribeDeviceListResponse} */
@@ -989,6 +1295,8 @@ declare interface Trro {
   ModifyProject(data: ModifyProjectRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectResponse>;
   /** 修改项目安全模式 {@link ModifyProjectSecModeRequest} {@link ModifyProjectSecModeResponse} */
   ModifyProjectSecMode(data: ModifyProjectSecModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProjectSecModeResponse>;
+  /** 重试标注处理项 {@link RetryAnnotationTaskRequest} {@link RetryAnnotationTaskResponse} */
+  RetryAnnotationTask(data: RetryAnnotationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryAnnotationTaskResponse>;
   /** 开启旁路转推 {@link StartPublishLiveStreamRequest} {@link StartPublishLiveStreamResponse} */
   StartPublishLiveStream(data: StartPublishLiveStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishLiveStreamResponse>;
   /** 停止旁路转推 {@link StopPublishLiveStreamRequest} {@link StopPublishLiveStreamResponse} */

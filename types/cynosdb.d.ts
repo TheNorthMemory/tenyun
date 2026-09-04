@@ -4550,6 +4550,8 @@ declare interface DeleteAccountsRequest {
 }
 
 declare interface DeleteAccountsResponse {
+  /** 任务 ID */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

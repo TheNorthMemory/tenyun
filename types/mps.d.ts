@@ -366,6 +366,8 @@ declare interface AiAnalysisResult {
   CutoutTask?: AiAnalysisTaskCutoutResult | null;
   /** 视频内容分析AI解说二创任务的查询结果，当任务类型为Reel时有效。 */
   ReelTask?: AiAnalysisTaskReelResult | null;
+  /** 智能分析通用任务的查询结果，当任务类型为Generic时有效。 */
+  GenericTask?: AiAnalysisTaskGenericResult | null;
 }
 
 /** 智能分类任务输入类型 */
@@ -612,6 +614,36 @@ declare interface AiAnalysisTaskFrameTagResult {
   Input?: AiAnalysisTaskFrameTagInput;
   /** 智能按帧标签任务输出。 */
   Output?: AiAnalysisTaskFrameTagOutput | null;
+}
+
+/** 智能分析通用任务输入类型 */
+declare interface AiAnalysisTaskGenericInput {
+  /** 智能分析模板 ID。 */
+  Definition?: number;
+  /** 扩展参数。 */
+  ExtendedParameter?: string;
+}
+
+/** 智能分析通用结果信息 */
+declare interface AiAnalysisTaskGenericOutput {
+  /** 存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+  /** 任务结果。 */
+  Result?: string;
+}
+
+/** 智能分析通用结果类型 */
+declare interface AiAnalysisTaskGenericResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。枚举值：PROCESSING： 处理中SUCCESS： 成功FAIL： 失败 */
+  Status?: string;
+  /** 错误码，0：成功，其他值：失败。 */
+  ErrCode?: number;
+  /** 错误信息。 */
+  Message?: string;
+  /** 智能分析任务输入。 */
+  Input?: AiAnalysisTaskGenericInput;
+  /** 智能分析任务输出。 */
+  Output?: AiAnalysisTaskGenericOutput | null;
 }
 
 /** 片头片尾任务输入类型 */
@@ -1942,6 +1974,20 @@ declare interface AigcVideoReferenceImageInfo {
   ReferenceType?: string;
 }
 
+/** 参考主体信息。对于Vidu模型：Id -> server_id， 通过主体创建接口获取的主体ID。name -> 主体ID， 后续通过@主体ID方式使用。对于Kling模型:id -> element_id， 主体ID, 通过主体创建接口获取的主体ID。 */
+declare interface AigcVideoReferenceSubjectInfo {
+  /** 参考主体的 ID。 */
+  Id?: string;
+  /** 主体名称。 */
+  Name?: string;
+  /** 主体音色ID。 */
+  VoiceId?: string;
+  /** 主体图片列表。 */
+  ImageUrls?: string[];
+  /** 主体视频列表。 */
+  VideoUrls?: string[];
+}
+
 /** 用于AIGC视频生成的参考视频素材。 */
 declare interface AigcVideoReferenceVideoInfo {
   /** 参考视频url。需要外网可访问。可作为特征参考视频，也可作为待编辑视频，默认为待编辑视频；可选择性保留视频原声通过ReferType参数区分参考视频类型：feature为特征参考视频，base为待编辑视频参考视频为待编辑视频时，不能定义视频首尾帧。 */
@@ -3192,6 +3238,8 @@ declare interface DescribeOutput {
   StreamUrls?: StreamUrlDetail[];
   /** 对于含有多个音/视频轨的流，可以指定需要使用的轨道 */
   StreamSelector?: StreamSelector;
+  /** 启用或者禁用输出枚举值：DISABLED： 禁用ENABLED： 启用 */
+  State?: string;
 }
 
 /** 查询输出的HLS拉流URL信息。 */
@@ -8899,25 +8947,23 @@ declare interface CreateAiFissionTaskResponse {
 }
 
 declare interface CreateAigcAudioTaskRequest {
-  /** 模型名称。生音乐当前支持的模型: GL、MiniMaxMusic。 */
+  /** 模型名称。生音乐当前支持的模型: GL、MiniMaxMusic、EL、Mureka。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：3.0-clip、3.0-pro。模型MiniMaxMusic支持的版本号：2.0、2.5、2.6。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。模型GL支持的版本号：3.0-clip、3.0-pro。模型MiniMaxMusic支持的版本号：2.0、2.5、2.6， 3.0。模型EL支持的版本号: compose_v2、sound_t2s_v2。模型Mureka支持的版本号: song_8、song_9、song_9.5、instrumental_8、instrumental_9、instrumental_9.5。 */
   ModelVersion?: string;
   /** 指定场景生音频。音乐: music。 */
   SceneType?: string;
-  /** 生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。 */
+  /** 生成音乐的描述。(注：最大支持2000字符)。 */
   Prompt?: string;
-  /** 参考视频信息。仅部分模型支持。 */
+  /** 参考视频信息。仅部分模型支持。Kling的视频生音效。EL的视频配背景音乐。 */
   VideoInfos?: AigcAudioReferenceVideoInfo[];
-  /** 传入参考音频信息。比如传入音频生成音乐时需要传入。 */
+  /** 传入参考音频信息。MiniMaxMusic的翻唱功能使用。比如传入音频生成音乐时需要传入。 */
   AudioInfos?: AigcAudioReferenceAudioInfo[];
-  /** 输出音频格式，默认不填。mp3、wav。 */
-  OutputAudioFormat?: string;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
   /** 用于传入要求的额外参数。 */
   ExtraParameters?: AigcAudioExtraParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}}MiniMaxMusic生纯音乐参数使用示例: "AdditionalParameters":"{"is_instrumental":true}" */
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}}MiniMaxMusic生纯音乐参数使用示例: "AdditionalParameters":"{"is_instrumental":true}"。支持的透传参数有: lyrics，is_instrumental，aigc_watermark，sample_rate，bitrate。EL生音乐支持透传的参数有:PromptInfluence，WithTimestamps，CompositionPlan，ForceInstrumental等参数。 */
   AdditionalParameters?: string;
   /** 接口操作者名称。 */
   Operator?: string;
@@ -8987,6 +9033,8 @@ declare interface CreateAigcVideoTaskRequest {
   VideoInfos?: AigcVideoReferenceVideoInfo[];
   /** 部分模型支持参考音频传入，使用URL传入。 */
   AudioInfos?: AigcVideoReferenceAudioInfo[];
+  /** 主体信息。 */
+  SubjectInfos?: AigcVideoReferenceSubjectInfo[];
   /** 生成视频的时长。注意：Kling，默认：5 秒。O1 支持 3-10 秒。3.0-Omni 支持 3-15 秒，当使用视频参考时只支持 3-10 秒。3.0 支持 3-15 秒。其他版本支持 5、10 秒。Hailuo 的 std 模式可支持 6、10 秒，其他仅 6 秒。默认：6 秒。Vidu，默认：5 秒。q3-pro、q3-turbo、q3、q3-mix 支持 3-16 秒。q2-pro、q2-turbo、q2 支持 1-10 秒。 PixVerse，默认：5 秒。v5.6 支持 5、8、10 秒。v6、c1 支持 1-15 秒。H2，支持 3-15 秒，默认 ：5 秒。 */
   Duration?: number;
   /** 用于传入要求的额外参数。 */
@@ -10198,6 +10246,8 @@ declare interface DescribeAgentRecordTaskResponse {
   ErrorMessage?: string;
   /** 当任务状态为 SUCCESS 时，返回录制文件Url列表。 */
   RecordUrls?: string[];
+  /** 直播状态枚举值：LIVE： 直播中PAUSED： 直播暂停ENDED： 直播结束 */
+  LiveStatus?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -3430,6 +3430,34 @@ declare interface ModifyLoginConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPGInstanceSpecRequest {
+  /** 环境 id */
+  EnvId: string;
+  /** cpu 核数单位：核数 */
+  Cpu?: number;
+  /** 内存容量单位：GB */
+  Memory?: number;
+  /** 磁盘容量单位：GB */
+  Storage?: number;
+  /** 类型枚举值：0： 立即执行1： 指定时间执行2： 维护时间执行 */
+  SwitchTag?: number;
+  /** SwitchTag=1 时，启动时间参数格式：YYYY-MM-dd HH:mm:ss */
+  SwitchStartTime?: string;
+  /** SwitchTag=1 时结束时间参数格式：YYYY-MM-dd HH:mm:ss */
+  SwitchEndTime?: string;
+  /** 预检 */
+  DryRun?: boolean;
+}
+
+declare interface ModifyPGInstanceSpecResponse {
+  /** 账单名 */
+  DealName?: string;
+  /** 账单标识 */
+  BillId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProviderRequest {
   /** 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。 */
   EnvId: string;
@@ -3967,6 +3995,8 @@ declare interface Tcb {
   ModifyHTTPServiceRoute(data: ModifyHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHTTPServiceRouteResponse>;
   /** 修改登录策略 {@link ModifyLoginConfigRequest} {@link ModifyLoginConfigResponse} */
   ModifyLoginConfig(data: ModifyLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginConfigResponse>;
+  /** 修改 PG 独享实例规格 {@link ModifyPGInstanceSpecRequest} {@link ModifyPGInstanceSpecResponse} */
+  ModifyPGInstanceSpec(data: ModifyPGInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPGInstanceSpecResponse>;
   /** 修改第三方认证源 {@link ModifyProviderRequest} {@link ModifyProviderResponse} */
   ModifyProvider(data: ModifyProviderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProviderResponse>;
   /** 修改资源基础权限 {@link ModifyResourcePermissionRequest} {@link ModifyResourcePermissionResponse} */

@@ -4833,8 +4833,10 @@ declare interface ModifyModelAliasAttributesResponse {
 declare interface ModifyModelAttributesRequest {
   /** BYOK的ID参数格式：byok-kot39u7j */
   ServiceProviderId: string;
-  /** BYOK的自定义名字入参限制：1～256个字符 */
+  /** BYOK的自定义名字入参限制：1～255个字符 */
   ServiceProviderName?: string;
+  /** 多协议 Api Base URL */
+  ApiBases?: ApiBaseItem[];
 }
 
 declare interface ModifyModelAttributesResponse {

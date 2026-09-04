@@ -208,6 +208,20 @@ declare interface LinuxNodeAttribute {
   MountPoint?: string;
 }
 
+/** 数据预热任务参数 */
+declare interface LoadDataAttrs {
+  /** 预热类型，枚举值 LoadByPath｜LoadByList */
+  LoadType: string;
+  /** 是否跳过相同文件，默认为 true */
+  SkipIfExists?: boolean;
+  /** 预热路径，入参单条挂载路径。入参数LoadType为LoadByPath，该参数不应为空 */
+  LoadByPath?: string;
+  /** 通过文件列表批量预热，入参为 cos://bucket-appid/ 开头的 COS 路径，且仅支持 txt 格式文件，长度不能超过255个字符。入参数LoadType为LoadByList，该参数不应为空 */
+  LoadByList?: string;
+  /** 副本数配置，枚举值，可选值 SingleReplica（单副本，默认）｜MaxReplica（最大副本） */
+  Replica?: string;
+}
+
 /** 预热任务参数 */
 declare interface LoadTaskAttrs {
   /** 预热任务 ID */
@@ -222,6 +236,8 @@ declare interface LoadTaskAttrs {
   MetadataLoadAttrs?: MetadataLoadAttrs;
   /** 数据预热任务参数。入参数TaskType为DistributedLoad时，该参数不应为空。 */
   DistributedLoadAttrs?: DistributedLoadAttrs;
+  /** 仅预热数据参数。入参数TaskType为LoadData时，该参数不应为空。 */
+  LoadDataAttrs?: LoadDataAttrs;
   /** 将任务执行报告写入 COS 的路径，如果不需要报告则入参空 */
   ReportPath?: string;
   /** 枚举，Completed，Running，Waiting，Cancelled */
@@ -250,6 +266,8 @@ declare interface LoadTaskCreationAttrs {
   DistributedLoadAttrs?: DistributedLoadAttrs;
   /** 将任务执行报告写入 COS 的路径，如果不需要报告则入参空 */
   ReportPath?: string;
+  /** 仅预热数据任务参数。入参数TaskType为LoadData时，该参数不应为空。 */
+  LoadDataAttrs?: LoadDataAttrs;
 }
 
 /** 关联的对象Bucket, 并将其映射到文件系统某个路径上 */

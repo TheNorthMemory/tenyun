@@ -42,6 +42,18 @@ declare interface ApplicationStatics {
   CountApps: number;
 }
 
+/** 架构信息 */
+declare interface ArchitectureInfo {
+  /** 架构类型 */
+  Architecture?: string;
+  /** 架构类型名称 */
+  ArchitectureName?: string;
+  /** 架构类型展示顺序 */
+  Order?: number;
+  /** 架构包含的机型族 */
+  InstanceFamilies?: string[];
+}
+
 /** 通用的参数 */
 declare interface Arg {
   /** key */
@@ -1796,6 +1808,8 @@ declare interface ModifyDynamicInstanceForm {
   ImageInfoV2?: ImageInfoV2;
   /** GooseFS盘 */
   GooseFSVolumes?: GooseFSVolume[];
+  /** 是否开启日志收集 */
+  EnableHistoryServer?: boolean;
 }
 
 /** 强制修改标签 */
@@ -2212,6 +2226,10 @@ declare interface NodeSpecInstanceType {
   NeedHpcClusterId?: boolean;
   /** 是否是GPU机型 */
   IsGpuInstance?: boolean;
+  /** K8S场景GPU资源定义 */
+  GpuResourceKey?: string;
+  /** GPU卡数 */
+  GpuNum?: number;
 }
 
 /** 节点机型类型 */
@@ -2702,6 +2720,8 @@ declare interface RayCluster {
   DashboardUrl?: string;
   /** 命名空间 */
   Namespace?: string;
+  /** raycluster挂载的volume数量 */
+  StorageCount?: number;
 }
 
 /** Redis 实例信息 */
@@ -4510,6 +4530,10 @@ declare interface DescribeDynamicInstanceDetailResponse {
   RayClusterYaml?: string;
   /** 镜像信息 */
   ImageInfoV2?: ImageInfoV2;
+  /** 是否开启日志收集 */
+  EnableHistoryServer?: boolean;
+  /** tensorboard 链接 */
+  TensorBoardUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5073,7 +5097,7 @@ declare interface DescribeNodeSpecRequest {
   NodeType: string;
   /** 0:旧计费页面,1:新计费页面。 错填，默认为旧计费 */
   TradeType: number;
-  /** 产品Id，不填为0，则表示所有productId，前台使用必填44	EMR	V3.5.043	EMR	V3.4.0.tlinux42	EMR	V2.7.0.tlinux41	DRUID	V1.1.067	STARROCKS	V2.2.045	DRUID	V1.1.0.tlinux40	EMRCLOUD	v3.2.047	EMR	V4.0.048	STARROCKS	V1.2.049	STARROCKS	V1.3.050	KAFKA	V2.0.051	STARROCKS	V1.4.052	EMR-TKE	V1.0.053	EMR	V3.6.054	STARROCKS	V2.0.055	EMR-TKE	V1.0.156	EMR-TKE	DLCV1.0.057	EMR	V2.8.058	EMR	V3.6.159	SERVERLESS	V1.0.060	EMR-TKE	V1.1.062	STARROCKS	V2.1.163	STARROCKS	V2.1.1.tlinux64	EMR-TKE	TCCV1.0.065	EMR-TKE-AI	V1.0.066	RSS	V1.0.024	EMR	TianQiong-V1.0.03	EMR	V2.0.1.tlinux4	EMR	V2.1.07	EMR	V3.0.08	EMR	V3.0.0.tlinux9	EMR	V2.2.011	CLICKHOUSE	V1.0.012	CLICKHOUSE	V1.0.0.tlinux16	EMR	V2.3.017	CLICKHOUSE	V1.1.018	CLICKHOUSE	V1.1.0.tlinux19	EMR	V2.4.020	EMR	V2.5.021	USERCUSTOM	V1.0.022	CLICKHOUSE	V1.2.039	STARROCKS	V1.1.025	EMR	V3.1.026	DORIS	V1.0.027	KAFKA	V1.0.028	EMR	V3.2.029	EMR	V2.5.130	EMR	V2.6.032	DORIS	V1.1.033	EMR	V3.2.134	EMR	V3.3.035	DORIS	V1.2.036	STARROCKS	V1.0.037	EMR	V3.4.038	EMR	V2.7.0 */
+  /** 产品Id，不填为0，则表示所有productId，前台使用必填44 EMR V3.5.043 EMR V3.4.0.tlinux42 EMR V2.7.0.tlinux41 DRUID V1.1.067 STARROCKS V2.2.045 DRUID V1.1.0.tlinux40 EMRCLOUD v3.2.047 EMR V4.0.048 STARROCKS V1.2.049 STARROCKS V1.3.050 KAFKA V2.0.051 STARROCKS V1.4.052 EMR-TKE V1.0.053 EMR V3.6.054 STARROCKS V2.0.055 EMR-TKE V1.0.156 EMR-TKE DLCV1.0.057 EMR V2.8.058 EMR V3.6.159 SERVERLESS V1.0.060 EMR-TKE V1.1.062 STARROCKS V2.1.163 STARROCKS V2.1.1.tlinux64 EMR-TKE TCCV1.0.065 EMR-TKE-AI V1.0.066 RSS V1.0.024 EMR TianQiong-V1.0.03 EMR V2.0.1.tlinux4 EMR V2.1.07 EMR V3.0.08 EMR V3.0.0.tlinux9 EMR V2.2.011 CLICKHOUSE V1.0.012 CLICKHOUSE V1.0.0.tlinux16 EMR V2.3.017 CLICKHOUSE V1.1.018 CLICKHOUSE V1.1.0.tlinux19 EMR V2.4.020 EMR V2.5.021 USERCUSTOM V1.0.022 CLICKHOUSE V1.2.039 STARROCKS V1.1.025 EMR V3.1.026 DORIS V1.0.027 KAFKA V1.0.028 EMR V3.2.029 EMR V2.5.130 EMR V2.6.032 DORIS V1.1.033 EMR V3.2.134 EMR V3.3.035 DORIS V1.2.036 STARROCKS V1.0.037 EMR V3.4.038 EMR V2.7.0 */
   ProductId: number;
   /** 场景名 */
   SceneName: string;
@@ -5086,6 +5110,8 @@ declare interface DescribeNodeSpecRequest {
 declare interface DescribeNodeSpecResponse {
   /** 节点规格类型 */
   NodeSpecs?: DescribeNodeSpec[];
+  /** 机型架构信息 */
+  Architectures?: ArchitectureInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5565,7 +5591,7 @@ declare interface InquiryPriceScaleOutInstanceRequest {
   TimeUnit: string;
   /** 扩容的时长。结合TimeUnit一起使用。TimeUnit为s时，该参数只能填写3600，表示按量计费实例。TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月 */
   TimeSpan: number;
-  /** 实例所属的可用区ID，例如100003。该参数可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/213/15707) 的返回值中的ZoneId字段来获取。 */
+  /** 实例所属的可用区ID，例如100003。该参数可以通过调用 DescribeZones 的返回值中的ZoneId字段来获取。 */
   ZoneId: number;
   /** 实例计费模式。取值范围：0：表示按量计费。1：表示包年包月。 */
   PayMode: number;
@@ -5587,6 +5613,8 @@ declare interface InquiryPriceScaleOutInstanceRequest {
   ComputeResourceId?: string;
   /** 扩容资源类型 */
   HardwareResourceType?: string;
+  /** 节点组ID */
+  NodeGroupId?: string;
 }
 
 declare interface InquiryPriceScaleOutInstanceResponse {

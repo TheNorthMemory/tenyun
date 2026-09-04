@@ -494,7 +494,7 @@ declare interface CdbSellConfig {
 
 /** 售卖实例类型 */
 declare interface CdbSellType {
-  /** 售卖实例名称。Z3：是高可用类型，对应规格中的 DeviceType，包含 UNIVERSAL，EXCLUSIVE。CVM：是基础版类型，对应规格中的 DeviceType 是 BASIC（已下线）。TKE：是基础版v2类型，对应规格中的 DeviceType 是 BASIC_V2。CLOUD_NATIVE_CLUSTER：表示云盘版标准型。CLOUD_NATIVE_CLUSTER_EXCLUSIVE：表示云盘版加强型。ECONOMICAL：表示经济型。 */
+  /** 售卖实例名称。Z3：是高可用类型，对应规格中的 DeviceType，包含 UNIVERSAL，EXCLUSIVE。CVM：是基础版类型，对应规格中的 DeviceType 是 BASIC（已下线）。TKE：是基础版v2类型，对应规格中的 DeviceType 是 BASIC_V2。CLOUD_NATIVE_CLUSTER：表示云盘版标准型。CLOUD_NATIVE_CLUSTER_EXCLUSIVE：表示云盘版加强型。CLOUD_NATIVE_CLUSTER_ULTRA：表示云盘版旗舰型。CLOUD_NATIVE_SINGLE_NODE：表示云盘版单节点ECONOMICAL：表示经济型。 */
   TypeName?: string;
   /** 引擎版本号 */
   EngineVersion?: string[];
@@ -4951,7 +4951,7 @@ declare interface ModifyDBInstanceProjectResponse {
 }
 
 declare interface ModifyDBInstanceReadOnlyStatusRequest {
-  /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用[查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。 */
+  /** 实例ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同，可使用查询实例列表 接口获取，其值为输出参数中字段 InstanceId 的值。此接口不支持设置云盘版实例为只读。 */
   InstanceId: string;
   /** 是否设置为只读。其中：1表示设置实例为只读，0表示解除只读状态 */
   ReadOnly: number;

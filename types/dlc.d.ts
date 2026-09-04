@@ -50,6 +50,58 @@ declare interface AnalysisTaskResults {
   ShuffleWriteBytesSum?: number;
 }
 
+/** API Key 响应 */
+declare interface ApiKeyInfo {
+  /** apiKey的Id */
+  ApiKeyId?: string;
+  /** apiKey名称 */
+  Name?: string;
+  /** apiKey */
+  ApiKey?: string;
+  /** 推理服务Id */
+  ServiceId?: string;
+  /** 推理服务名称 */
+  ServiceName?: string;
+  /** 状态枚举值：Active： 正常 */
+  Status?: string;
+  /** appid */
+  AppId?: number;
+  /** 主账号uin */
+  Uin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 子账号uin */
+  SubAccountUin?: string;
+}
+
+/** API Key 响应类. */
+declare interface ApiKeyResponseInfo {
+  /** apiKey的id */
+  ApiKeyId?: string;
+  /** apikey名称 */
+  Name?: string;
+  /** apikey内容 */
+  ApiKey?: string;
+  /** 推理服务id */
+  ServiceId?: string;
+  /** 推理服务名称 */
+  ServiceName?: string;
+  /** apikey状态枚举值：Active： 正常 */
+  Status?: string;
+  /** appid */
+  AppId?: number;
+  /** 主账号uin */
+  Uin?: string;
+  /** 子账号uin */
+  SubAccountUin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+}
+
 /** 元数据基本对象 */
 declare interface Asset {
   /** 主键 */
@@ -108,6 +160,142 @@ declare interface BatchSqlTask {
   Message?: string;
 }
 
+/** 评测容器自身资源规格 */
+declare interface BenchmarkResourceInfo {
+  /** 评测容器所在资源包 ID */
+  ResourcePartitionId?: string;
+  /** 评测容器所在资源组 */
+  Queue?: string;
+  /** 评测容器计费项（规格） */
+  BillingItem?: string;
+  /** 规格数量 */
+  Spec?: number;
+}
+
+/** 模型评测汇总信息（排行榜数据项） */
+declare interface BenchmarkSummaryInfo {
+  /** 模型名称 */
+  ModelName?: string | null;
+  /** 模型提供方 */
+  Provider?: string | null;
+  /** 模型类型 */
+  ModelType?: string | null;
+  /** 参数量 */
+  ParameterSize?: string | null;
+  /** 评测所用的服务名称 */
+  ServiceName?: string | null;
+  /** 评测任务名称 */
+  TaskName?: string | null;
+  /** 该模型的评测任务总数 */
+  BenchmarkCount?: number | null;
+  /** 输入 Token 数 */
+  InputTokens?: number | null;
+  /** 输出 Token 数 */
+  OutputTokens?: number | null;
+  /** 每秒请求数 (QPS) */
+  RequestsPerSecond?: number | null;
+  /** 最大并发数 */
+  MaxConcurrency?: number | null;
+  /** TTFT 平均值(ms) */
+  TimeToFirstTokenAvg?: number | null;
+  /** TTFT 中间值(ms) */
+  TimeToFirstTokenMedian?: number | null;
+  /** TTFT P99 值(ms) */
+  TimeToFirstTokenP99?: number | null;
+  /** TPOT 平均值(ms) */
+  TimePerOutputTokenAvg?: number | null;
+  /** TPOT 中间值(ms) */
+  TimePerOutputTokenMedian?: number | null;
+  /** TPOT P99 值(ms) */
+  TimePerOutputTokenP99?: number | null;
+  /** ITL 平均值(ms) */
+  InterTokenLatencyAvg?: number | null;
+  /** ITL 中间值(ms) */
+  InterTokenLatencyMedian?: number | null;
+  /** ITL P99 值(ms) */
+  InterTokenLatencyP99?: number | null;
+  /** E2E 平均值(ms) */
+  EndToEndAvg?: number | null;
+  /** E2E 中间值(ms) */
+  EndToEndMedian?: number | null;
+  /** E2E P99 值(ms) */
+  EndToEndP99?: number | null;
+  /** 评测完成时间（毫秒时间戳） */
+  CreateTime?: number | null;
+}
+
+/** 性能评测任务信息 */
+declare interface BenchmarkTaskInfo {
+  /** benchmark任务id */
+  TaskId?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 关联的推理服务ID */
+  ServiceId?: string | null;
+  /** 关联的推理服务名称 */
+  ServiceName?: string | null;
+  /** 任务状态（Running/Completed/Failed/Pending/Stopped） */
+  Status?: string | null;
+  /** 输入 Token 数 */
+  InputTokens?: number | null;
+  /** 输出 Token 数 */
+  OutputTokens?: number | null;
+  /** 每秒请求数 (QPS) */
+  RequestsPerSecond?: number | null;
+  /** 最大并发数 */
+  MaxConcurrency?: number | null;
+  /** Prompts 总数 */
+  TotalPrompts?: number | null;
+  /** 是否经 Ingress 网关（true=网关, false=集群内直连 SVC） */
+  UseGateway?: boolean | null;
+  /** 直连模式下使用的部署名称（仅 UseGateway=false 时有值） */
+  DeploymentName?: string | null;
+  /** API Key ID（走网关时使用的 API Key 标识） */
+  ApiKeyId?: string;
+  /** API Key 名称 */
+  ApiKeyName?: string;
+  /** TTFT 平均值(ms) */
+  TimeToFirstTokenAvg?: number | null;
+  /** TTFT 中间值(ms) */
+  TimeToFirstTokenMedian?: number | null;
+  /** TTFT P99 值(ms) */
+  TimeToFirstTokenP99?: number | null;
+  /** TPOT 平均值(ms) */
+  TimePerOutputTokenAvg?: number | null;
+  /** TPOT 中间值(ms) */
+  TimePerOutputTokenMedian?: number | null;
+  /** TPOT P99 值(ms) */
+  TimePerOutputTokenP99?: number | null;
+  /** ITL 平均值(ms) */
+  InterTokenLatencyAvg?: number | null;
+  /** ITL 中间值(ms) */
+  InterTokenLatencyMedian?: number | null;
+  /** ITL P99 值(ms) */
+  InterTokenLatencyP99?: number | null;
+  /** E2E 平均值(ms) */
+  EndToEndAvg?: number | null;
+  /** E2E 中间值(ms) */
+  EndToEndMedian?: number | null;
+  /** E2E P99 值(ms) */
+  EndToEndP99?: number | null;
+  /** Token 吞吐量 (output tokens/s) */
+  TokenThroughput?: number | null;
+  /** 请求吞吐量 (requests/s) */
+  RequestThroughput?: number | null;
+  /** 错误信息（失败时） */
+  ErrorMessage?: string | null;
+  /** appid */
+  AppId?: number | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** 主账号uin */
+  Uin?: string;
+  /** 子账号uin */
+  SubAccountUin?: string;
+}
+
 /** chdfs产品vpc信息 */
 declare interface CHDFSProductVpcInfo {
   /** vpc id */
@@ -142,6 +330,62 @@ declare interface CSVSerde {
   Quote?: string;
   /** CSV序列化分隔符，默认为"\t"，最长8个字符, 如 Separator: "\t" */
   Separator?: string;
+}
+
+/** 用于返回训练作业的checkpoint的配置信息 */
+declare interface CheckpointConfig {
+  /** Checkpoint 产出存储的 Catalog 配置 JSON（结构同顶层 Catalog） */
+  Catalog?: string;
+  /** 保存策略：steps / epoch / none，默认 steps；GRPO 仅支持 steps / none */
+  SaveStrategy?: string;
+  /** 保存频率（每 N 步或每 N epoch），默认 500 */
+  SaveFreq?: number;
+  /** 最大保留数量，0 表示不限制，默认 3 */
+  MaxKeep?: number;
+  /** 容器内输出目录回退值（可选；正常场景由 Checkpoint 挂载路径决定，仅在挂载路径为空时生效，默认 /workspace/output/{mode}） */
+  OutputDir?: string;
+}
+
+/** Checkpoint 训练指标（仅 checkpoint 目录且 snapshot 存在时有值） */
+declare interface CheckpointMetrics {
+  /** 当前 checkpoint 对应的 epoch */
+  Epoch?: number;
+  /** 全局训练步数 */
+  Step?: number;
+  /** 训练 loss（归一化后） */
+  Loss?: number;
+  /** 评估 loss（归一化后） */
+  EvalLoss?: number;
+  /** 学习率 */
+  LearningRate?: number;
+  /** snapshot 中的原始 metrics 键值对列表（前端可展开查看） */
+  RawMetrics?: MetricItem[];
+}
+
+/** Checkpoint 挂载摘要 */
+declare interface CheckpointMountInfo {
+  /** 存储类型：COS / CFS / CFS_TURBO / GOOSEFS */
+  StorageType?: string;
+  /** 容器内挂载路径 */
+  MountPath?: string;
+  /** COS key 前缀 或 CFS/GooseFS 子路径 */
+  VolumeSubPath?: string;
+  /** 实际访问的 COS bucket */
+  Bucket?: string;
+  /** COS region */
+  Region?: string;
+  /** 是否平台托管桶（影响凭证选择） */
+  PlatformManaged?: boolean;
+  /** 快照在平台 COS 桶中的 key（仅 CFS/GooseFS 有值） */
+  SnapshotKey?: string;
+}
+
+/** CLS 日志主题条目 */
+declare interface ClsTopicItem {
+  /** 日志主题 ID */
+  TopicId?: string;
+  /** 日志主题名称 */
+  TopicName?: string;
 }
 
 /** 集群组响应 */
@@ -844,6 +1088,20 @@ declare interface DatabaseResponseInfo {
   IsInformationSchema?: boolean | null;
 }
 
+/** 数据文件名（可选），JSONL/parquet 文件名，位于挂载目录下；后训练场景等价于旧 Dataset 字段。数据集 COS 路径指向具体文件时后端自动提取文件名，无需填写 */
+declare interface DatasetMount {
+  /** 数据集ID */
+  DatasetId?: string;
+  /** 数据集名称 */
+  DatasetName?: string;
+  /** 挂载信息 */
+  Catalog?: string;
+  /** 验证集信息 */
+  Eval?: EvalDatasetConfig;
+  /** 数据集为单个文件时，若需挂载单个文件，需提供文件名 */
+  FileName?: string;
+}
+
 /** 数据源属性 */
 declare interface DatasourceConnectionConfig {
   /** Mysql数据源连接的属性 */
@@ -948,6 +1206,124 @@ declare interface DependencyPackage {
   PackagePath?: string | null;
 }
 
+/** 部署信息 */
+declare interface DeploymentInfo {
+  /** 部署 ID */
+  DeploymentId?: string | null;
+  /** 部署名称 */
+  Name?: string | null;
+  /** 关联的服务ID */
+  ServiceId?: string | null;
+  /** 部署使用的模型版本号 */
+  ModelVersion?: string | null;
+  /** 部署状态（Running/Stopped/Deploying/Failed） */
+  Status?: string | null;
+  /** 推理引擎（vLLM/SGLang 等） */
+  Engine?: string | null;
+  /** 期望副本数 */
+  Replicas?: number | null;
+  /** 可用副本数 */
+  AvailableReplicas?: number | null;
+  /** 资源配置（JSON 字符串） */
+  ResourceConfig?: string | null;
+  /** ray head 是否开启高可用 */
+  HeadHighAvailabilityEnabled?: boolean;
+  /** 高级参数（JSON 字符串） */
+  AdvancedParams?: string | null;
+  /** 是否开启自动伸缩 */
+  AutoscalingEnabled?: boolean | null;
+  /** 模型存储配置（Catalog JSON，记录模型 COS 挂载信息） */
+  ModelStorageConfig?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** Neutrino Serve ID (RayService CR name) */
+  NeutrinoServeId?: string | null;
+  /** Ray Dashboard 访问地址（通过 Ingress 代理，仅 Running 状态的部署有值） */
+  RayDashboardUrl?: string | null;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string | null;
+  /** 资源队列名称 */
+  Queue?: string | null;
+  /** App id */
+  AppId?: number;
+  /** Uin */
+  Uin?: string;
+  /** SubAccountUin */
+  SubAccountUin?: string;
+  /** AdvancedOptions 高级参数（JSON 字符串，扁平 KV 结构，key 形如 spec.rayClusterConfig.headGroupSpec.serviceType） */
+  AdvancedOptions?: string | null;
+  /** 自定义镜像地址（为空则使用引擎默认镜像） */
+  Image?: string | null;
+  /** 资源分区名称（后端按 ResourcePartitionId 反查 ResourceService 填充；分区不存在或 ResourceManager 未启用时可能为 null） */
+  ResourcePartitionName?: string | null;
+}
+
+/** 部署副本信息 */
+declare interface DeploymentReplicaInfo {
+  /** 关联的部署ID */
+  DeploymentId?: number | null;
+  /** 副本名称 */
+  Name?: string | null;
+  /** 副本状态（Running/Pending/Failed/Terminated） */
+  Status?: string | null;
+  /** 重启次数 */
+  RestartCount?: number | null;
+  /** 节点类型（head/worker） */
+  NodeType?: string | null;
+  /** 启动时间（毫秒时间戳） */
+  StartTime?: number | null;
+  /** Pod IP */
+  PodIp?: string | null;
+  /** 节点名称 */
+  NodeName?: string | null;
+  /** 节点 IP */
+  NodeIp?: string | null;
+  /** 命名空间 */
+  Namespace?: string | null;
+  /** CPU 请求 */
+  CpuRequest?: string | null;
+  /** CPU 限制 */
+  CpuLimit?: string | null;
+  /** 内存请求 */
+  MemoryRequest?: string | null;
+  /** 内存限制 */
+  MemoryLimit?: string | null;
+  /** GPU 数量 */
+  GpuCount?: number | null;
+  /** 容器镜像 */
+  Image?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+}
+
+/** 部署的资源规格 */
+declare interface DeploymentResourceInfo {
+  /** 部署业务唯一标识（deploymentUid） */
+  DeploymentId?: string;
+  /** 部署名称 */
+  DeploymentName?: string;
+  /** 部署状态 */
+  Status?: string;
+  /** Worker 节点 BillingItem */
+  WorkerBillingItem?: string;
+  /** Worker 节点规格倍数 */
+  WorkerSpec?: number;
+  /** Worker 节点资源类型，枚举： • GU — GPU 计费单位 • CU — CPU 计费单位 */
+  WorkerResourceType?: string;
+  /** Head 节点 BillingItem */
+  HeadBillingItem?: string;
+  /** Head 节点规格倍数 */
+  HeadSpec?: number;
+  /** Head 节点资源类型。当前实现恒为 CU */
+  HeadResourceType?: string;
+  /** GPU 型号。CPU 部署或型号未知时为空串 "" */
+  GpuType?: string;
+  /** 期望副本数 */
+  Replicas?: number;
+}
+
 /** 引擎资源弹性伸缩计划 */
 declare interface ElasticPlan {
   /** 最小集群数 */
@@ -980,6 +1356,14 @@ declare interface ElasticsearchInfo {
   DbName?: string | null;
   /** 访问Elasticsearch的ip、端口信息 */
   ServiceInfo?: IpPortPair[] | null;
+}
+
+/** EMR-TKE 集群资源用量 */
+declare interface EmrResourceUsage {
+  /** CPU 用量，例如 2core */
+  Cpu?: string;
+  /** 内存用量，例如 4GB */
+  Mem?: string;
 }
 
 /** 描述一个推理引擎的能力 */
@@ -1044,6 +1428,22 @@ declare interface Env {
   Name?: string;
   /** 值 */
   Value?: string;
+}
+
+/** 验证数据集配置（作为 DatasetMount 属性，与训练集一对一） */
+declare interface EvalDatasetConfig {
+  /** 验证集模式：none / split / separate */
+  EvalMode?: string;
+  /** 自动拆分比例（1-20，即 1%-20%），仅 split 生效 */
+  EvalSplitRatio?: number;
+  /** 独立验证数据集 ID（dataset 表），仅 separate 生效；与 Catalog 二选一 */
+  EvalDatasetId?: string;
+  /** 验证数据集名称（dataset 表 name 字段，与 EvalDatasetId 配对） */
+  EvalDatasetName?: string;
+  /** 原始 Catalog 卷定义 JSON（仅 separate 生效，无数据集 ID 时使用，直接并入顶层 Catalog；与 EvalDatasetId 二选一） */
+  Catalog?: string;
+  /** 验证用单文件名（可选，JSONL/parquet 文件名，位于挂载目录下；仅基于单个文件验证时指定） */
+  FileName?: string;
 }
 
 /** 数据实验室事件项 */
@@ -1142,6 +1542,14 @@ declare interface ExampleTag {
 declare interface Execution {
   /** 自动生成SQL语句。 */
   SQL: string;
+}
+
+/** 绑定失败的条目. */
+declare interface FailedItem {
+  /** apiKey的Id */
+  ApiKeyId?: string;
+  /** 失败原因 */
+  Reason?: string;
 }
 
 /** FavorInfo */
@@ -1762,6 +2170,20 @@ declare interface LakeFsInfo {
   Status?: string;
   /** 托管存储桶标签列表 */
   TagList?: TagInfo[];
+  /** 是否是多AZ存储桶 */
+  MultiAZ?: boolean;
+  /** 存储桶配置信息 */
+  Configuration?: KVPair[];
+}
+
+/** 负载均衡条目（字段严格对齐 CLB DescribeLoadBalancers） */
+declare interface LbItem {
+  /** 负载均衡实例 ID，例如 lb-xxxxxxxx */
+  LoadBalancerId?: string;
+  /** 负载均衡实例名称 */
+  LoadBalancerName?: string;
+  /** 网络类型：OPEN=公网属性；INTERNAL=内网属性 */
+  LoadBalancerType?: string;
 }
 
 /** 关联的推理服务信息 */
@@ -1894,6 +2316,14 @@ declare interface MetaDatabaseInfo {
   Comment?: string | null;
 }
 
+/** 原始指标键值对 */
+declare interface MetricItem {
+  /** 指标名 */
+  Key?: string;
+  /** 指标值（字符串形式） */
+  Value?: string;
+}
+
 /** 监控指标数据 */
 declare interface MetricsData {
   /** 每秒请求数（QPS） */
@@ -1942,6 +2372,68 @@ declare interface MixedTablePartitions {
   IcebergPartitions?: IcebergTablePartition[];
   /** hive表分区信息 */
   HivePartitions?: HiveTablePartition[];
+}
+
+/** MLFlow 实验追踪配置 */
+declare interface MlFlowConfig {
+  /** MlFlow 追踪模式：local=MlFlow Sidecar / remote=已有 MlFlow Server / none=不启用 */
+  MlFlowMode?: string;
+  /** 已有MlFlow Server 的 ID（仅 mlFlowMode=remote 时填写，前端下拉选择后传入） */
+  MlFlowServerId?: string;
+  /** MlFlow Sidecar 持久化存储的 COS 路径（仅 mlFlowMode=local 时填写） */
+  MlFlowCosPath?: string;
+}
+
+/** 资源配置（规格模式 BillingItem+Spec，或手动模式 PodCpu+PodMem，二选一）。" + "未传时使用默认值（4C8G） */
+declare interface MlFlowResourceConfig {
+  /** 资源 ID（规格模式必填） */
+  BillingItem?: string;
+  /** 购买份数（规格模式必填，每 Pod 的规格倍数） */
+  Spec?: number;
+  /** pod CPU 核数（手动模式必填，单 Pod 粒度） */
+  PodCpu?: number;
+  /** pod 内存大小 GB（手动模式必填，单 Pod 粒度） */
+  PodMem?: number;
+}
+
+/** MlFlow Server 业务信息 */
+declare interface MlFlowServerInfo {
+  /** MLflow 实例的 ID */
+  ServerId?: string;
+  /** 实例名称 */
+  ServerName?: string;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string;
+  /** 资源包名 */
+  ResourcePartitionName?: string;
+  /** 资源组（逻辑队列名，可选） */
+  Queue?: string;
+  /** 集群内MLflow访问地址。用于训练作业上报 metrics */
+  TrackingUri?: string;
+  /** 集群外访问地址（Ingress URL） */
+  UiUrl?: string;
+  /** 状态：CREATED / CREATING / RUNNING / FAILED / STOPPED枚举值：CREATED： 已创建CREATING： 创建中RUNNING： 运行中FAILED： 失败STOPPED： 已停止 */
+  Status?: string;
+  /** 仅失败时展示错误信息 */
+  ErrorMessage?: string;
+  /** MLflow 镜像地址 */
+  Image?: string;
+  /** 存储配置 JSON，具体结构按 storageMode 解释（cos / cfs / local） */
+  StorageConfig?: string;
+  /** 存储模式枚举值：cos： cos 对象存储cfs： cfs 文件系统存储 */
+  StorageMode?: string;
+  /** 应用 ID */
+  AppId?: number;
+  /** 创建者 UIN */
+  Uin?: string;
+  /** 创建时间（epoch 毫秒）单位：毫秒 */
+  CreateTime?: number;
+  /** 更新时间（epoch 毫秒）单位：毫秒 */
+  UpdateTime?: number;
+  /** 资源配置 JSON */
+  ResourceConfig?: string;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[] | null;
 }
 
 /** 模型版本信息 */
@@ -2346,6 +2838,36 @@ declare interface PersistentWorkDir {
   VolumeSubPath?: string;
 }
 
+/** MlFlow Server Pod 信息 */
+declare interface PodItem {
+  /** Pod 名称 */
+  PodName?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** K8s Pod Phase */
+  Phase?: string;
+  /** 计算后的状态 */
+  Status?: string;
+  /** Pod IP */
+  PodIp?: string;
+  /** 调度节点名 */
+  NodeName?: string;
+  /** 容器镜像 */
+  Image?: string;
+  /** CPU 请求 */
+  CpuRequest?: string;
+  /** CPU 限制 */
+  CpuLimit?: string;
+  /** 内存请求 */
+  MemoryRequest?: string;
+  /** 内存限制 */
+  MemoryLimit?: string;
+  /** 创建时间（epoch millis） */
+  CreateTime?: number;
+  /** 启动时间（epoch millis） */
+  StartTime?: number;
+}
+
 /** 权限对象 */
 declare interface Policy {
   /** 需要授权的数据库名，填 * 代表当前Catalog下所有数据库。当授权类型为管理员级别时，只允许填 “*”，当授权类型为数据连接级别时只允许填空，其他类型下可以任意指定数据库。 */
@@ -2400,12 +2922,36 @@ declare interface Policys {
   TotalCount?: number;
 }
 
+/** 后训练资源规格配置 */
+declare interface PostTrainingResources {
+  /** Head 节点资源规格 */
+  Head?: HeadSpecDTO;
+  /** Worker 节点资源规格 */
+  Worker?: WorkerSpecDTO[];
+}
+
 /** Presto监控指标 */
 declare interface PrestoMonitorMetrics {
   /** Alluxio本地缓存命中率 */
   LocalCacheHitRate?: number | null;
   /** Fragment缓存命中率 */
   FragmentCacheHitRate?: number | null;
+}
+
+/** Prometheus 实例概览 */
+declare interface PrometheusInstanceItem {
+  /** Prometheus 实例 ID，例如 prom-xxxxxxxx */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 所属 VPC ID */
+  VpcId?: string;
+  /** 所属子网 ID */
+  SubnetId?: string;
+  /** 实例状态：1=创建中, 2=运行中, 3=异常, 4=重启中, 5=销毁中, 6=已停机, 7=已删除, 8=欠费停服中, 9=欠费已停服 */
+  InstanceStatus?: number;
+  /** 是否与 TKE 集群同 VPC；true 会被前置排序 */
+  SameVpcWithTke?: boolean;
 }
 
 /** 数据库和数据表属性信息 */
@@ -2604,6 +3150,34 @@ declare interface RayJobSubmitEntity {
   JobSource?: string;
 }
 
+/** 推荐的推理高级参数 */
+declare interface RecommendedAdvancedParams {
+  /** 是否启用 trust_remote_code */
+  EnableRemoteCode?: boolean | null;
+  /** GPU 显存利用率（百分比，例如 90 表示 90%） */
+  GpuMemoryUtilization?: number | null;
+  /** Tensor 并行度 */
+  TensorParallelSize?: number | null;
+  /** Pipeline 并行度 */
+  PipelineParallelSize?: number | null;
+  /** Data 并行度 */
+  DataParallelSize?: number | null;
+  /** 推理引擎参数列表 */
+  EngineArgs?: RecommendedKeyValue[] | null;
+  /** 环境变量列表 */
+  EnvVars?: RecommendedKeyValue[] | null;
+  /** Ray Actor Options 列表 */
+  RayOptions?: RecommendedKeyValue[] | null;
+}
+
+/** Key-Value 键值对 */
+declare interface RecommendedKeyValue {
+  /** 键 */
+  Key?: string | null;
+  /** 值 */
+  Value?: string | null;
+}
+
 /** 可售卖地域信息 */
 declare interface RegionInfo {
   /** 地域编码，如 ap-chongqing */
@@ -2792,6 +3366,22 @@ declare interface SessionResourceTemplate {
   ExecutorMaxNumbers?: number;
   /** 运行时参数 */
   RunningTimeParameters?: DataEngineConfigPair[];
+}
+
+/** 共享挂载文件/目录项 */
+declare interface SharedMountFileItem {
+  /** 文件或目录名 */
+  Name?: string;
+  /** 类型：file / directory */
+  Type?: string;
+  /** 文件大小（字节，仅 Type=file 时有值） */
+  Size?: number;
+  /** 最后修改时间（毫秒时间戳，仅 Type=file 时有值） */
+  LastModified?: number;
+  /** 相对 MountPath 的完整路径 */
+  Path?: string;
+  /** Checkpoint 训练指标（仅 checkpoint 目录且 snapshot 存在时有值） */
+  Metrics?: CheckpointMetrics;
 }
 
 /** 混合表中，change表的数据保存时间，单位为天 */
@@ -3024,7 +3614,7 @@ declare interface SparkSessionInfo {
   ResourceGroupId?: string;
   /** engine session id */
   EngineSessionId?: string;
-  /** engine session name */
+  /** engine sessionname */
   EngineSessionName?: string;
   /** 自动销毁时间 */
   IdleTimeoutMin?: number;
@@ -3042,6 +3632,10 @@ declare interface SparkSessionInfo {
   TotalSpecMax?: number;
   /** 状态，STARTING、RUNNING、TERMINATED */
   State?: string;
+  /** 应用 ID */
+  ApplicationId?: string;
+  /** 应用启动时间 */
+  ApplicationStartTime?: number;
 }
 
 /** 节点规格信息 */
@@ -3558,6 +4152,14 @@ declare interface TaskMonitorInfo {
   QueryStats?: string;
 }
 
+/** 各模型类型对应的可选任务列表 */
+declare interface TaskOptions {
+  /** 模型类型 */
+  ModelType?: string;
+  /** 任务场景 */
+  Tasks?: string[];
+}
+
 /** 任务实例。 */
 declare interface TaskResponseInfo {
   /** 任务所属Database的名称。 */
@@ -3746,6 +4348,242 @@ declare interface TextFile {
   Format?: string;
   /** 处理文本用的正则表达式。 */
   Regex?: string;
+}
+
+/** 训练作业实例详情 */
+declare interface TrainingJobInstance {
+  /** 实例 ID（即 RayJob UUID） */
+  InstanceId?: string;
+  /** 关联配置 ID */
+  SpecId?: string;
+  /** 配置名称 */
+  SpecName?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 综合状态 */
+  Status?: string;
+  /** 错误信息 */
+  ErrorMessage?: string;
+  /** RayJob 实际启动时间（毫秒） */
+  JobCreateTime?: number;
+  /** RayJob 运行时长（毫秒） */
+  JobRunningTime?: number;
+  /** Ray Dashboard History 链接 */
+  HistoryUrl?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 队列名称 */
+  Queue?: string;
+  /** 提交时 runtime_env JSON */
+  RuntimeEnv?: string;
+  /** 提交时 entrypoint */
+  Entrypoint?: string;
+  /** 提交时镜像 */
+  Image?: string;
+  /** 提交时资源配置 JSON */
+  ResourceConfig?: string;
+  /** 提交时存储卷挂载配置 JSON */
+  Catalog?: string;
+  /** 提交时高级参数 JSON */
+  AdvancedOptions?: string;
+  /** 训练子类型快照（LAB / CUSTOM_CODE / POST_TRAINING） */
+  Kind?: string;
+  /** 提交时代码包 URL */
+  CodePackageUrl?: string;
+  /** 提交时 MLflow 配置 JSON */
+  MlFlowConfig?: string;
+  /** Checkpoint 挂载摘要（实例级） */
+  CheckpointMountInfo?: CheckpointMountInfo;
+  /** 训练方式（sft / dpo / cpt / grpo），仅 POST_TRAINING 有值 */
+  Mode?: string;
+  /** 基础模型 modelUid（仅 POST_TRAINING 有值，用于关联推理模型仓库） */
+  BaseModelUid?: string;
+  /** 基础模型名称（仅 POST_TRAINING 有值） */
+  BaseModelName?: string;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 创建实例时的数据集挂载列表快照（List<DatasetMount>，仅详情返回） */
+  Datasets?: DatasetMount[];
+  /** 创建实例时的 Checkpoint 产出配置快照（仅详情返回） */
+  Checkpoint?: CheckpointConfig;
+  /** 创建实例时的调优参数快照（仅 POST_TRAINING，仅详情返回） */
+  TuningParams?: TrainingTuningParams;
+  /** 创建实例时的断点续训意图声明快照（仅详情返回） */
+  ResumeTraining?: boolean;
+}
+
+/** 训练作业配置 */
+declare interface TrainingJobSpec {
+  /** 训练作业配置 ID */
+  SpecId?: string | null;
+  /** 训练作业配置名称 */
+  SpecName?: string | null;
+  /** 配置描述 */
+  Description?: string | null;
+  /** 提交模式（LAB / CUSTOM_CODE / POST_TRAINING / UNKNOWN） */
+  Kind?: string | null;
+  /** 启动命令 */
+  Entrypoint?: string | null;
+  /** 镜像地址 */
+  Image?: string | null;
+  /** 镜像拉取类型（BuiltIn / Custom / CustomCcr） */
+  ImagePullType?: string;
+  /** 镜像拉取策略（Always / IfNotPresent / Never） */
+  ImagePullPolicy?: string;
+  /** 代码包 COS URL */
+  CodePackageUrl?: string | null;
+  /** Ray runtime_env 配置 JSON */
+  RuntimeEnv?: string | null;
+  /** 资源配置模板 ID */
+  ResourceConfigId?: string;
+  /** 资源配置 JSON */
+  ResourceConfig?: string | null;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string | null;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 队列名称 */
+  Queue?: string | null;
+  /** Checkpoint 挂载摘要 */
+  CheckpointMountInfo?: CheckpointMountInfo | null;
+  /** 存储卷挂载配置 JSON */
+  Catalog?: string | null;
+  /** 创建人 */
+  Creator?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** 关联实例总数 */
+  InstanceCount?: number | null;
+  /** 是否存在运行中实例 */
+  HasRunningInstances?: boolean | null;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number | null;
+  /** 提交时 MLflow 配置 JSON（含 MlFlowMode / MlFlowTrackingUri 等） */
+  MlFlowConfig?: string;
+  /** 产出模型名称（用于后续模型注册） */
+  OutputModelName?: string;
+  /** 训练模式：sft / dpo / cpt / grpo（仅 POST_TRAINING 有值） */
+  Mode?: string;
+  /** 基础模型 modelUid（仅 POST_TRAINING 有值） */
+  BaseModelUid?: string;
+  /** 基础模型名称（仅 POST_TRAINING 有值） */
+  BaseModelName?: string;
+  /** 提交时的数据集挂载列表（List<DatasetMount>，仅详情返回） */
+  Datasets?: DatasetMount[];
+  /** 提交时的 Checkpoint 产出配置（仅详情返回） */
+  LastInstanceStatus?: string;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
+  /** 提交时的 Checkpoint 产出配置（仅详情返回） */
+  Checkpoint?: CheckpointConfig;
+  /** 提交时的调优参数（仅 POST_TRAINING，仅详情返回） */
+  TuningParams?: TrainingTuningParams;
+  /** 提交时的断点续训意图声明（仅详情返回） */
+  ResumeTraining?: boolean;
+  /** 高级参数 JSON（透传给 Neutrino advanced_options） */
+  AdvancedOptions?: string;
+}
+
+/** 零代码后训练参数 */
+declare interface TrainingParams {
+  /** 每卡 batch size，SFT/DPO 用。GRPO 返回 null */
+  PerDeviceBatchSize?: number;
+  /** 梯度累积步数，用于放大有效 batch；GRPO 返回 null。 */
+  GradientAccumulationSteps?: number;
+  /** 是否开启梯度检查点（省显存换计算），GRPO 返回 null。 */
+  GradientCheckpointing?: boolean;
+  /** 最大序列/上下文长度，所有模式都返回。 */
+  CutoffLen?: number;
+  /** 推荐学习率；SFT/DPO 按算法+微调方式给值，GRPO 返回 null（由入口脚本默认值决定）。 */
+  LearningRate?: number;
+  /** 推荐训练轮次，所有模式都返回。 */
+  Epochs?: number;
+  /** 推荐 LoRA rank（仅 finetuneType=lora 有值，全参微调/GRPO 返回 null）。 */
+  LoraRank?: number;
+  /** warmup 步数占总步数比例；GRPO 返回 null。 */
+  WarmupRatio?: number;
+  /** GRPO 每步训练的 prompt 总数；SFT/DPO 返回 null。 */
+  TrainBatchSize?: number;
+  /** GRPO PPO 阶段 mini-batch 大小；SFT/DPO 返回 null。 */
+  PPOMiniBatchSize?: number;
+  /** GRPO rollout（vLLM/sglang）占用 GPU 显存比例（0~1）；SFT/DPO 返回 null。 */
+  GpuMemoryUtilization?: number;
+  /** GRPO rollout 单次最大生成长度；SFT/DPO 返回 null。 */
+  MaxResponseLength?: number;
+  /** GRPO 每个 prompt 的采样数（group size）；SFT/DPO 返回 null。 */
+  NumSamplesPerPrompt?: number;
+}
+
+/** 调优参数（高级参数，仅 POST_TRAINING 使用；CUSTOM_CODE / LAB 禁止传入） */
+declare interface TrainingTuningParams {
+  /** 微调方式：lora / full / freeze；默认由算法决定（SFT/DPO=lora，CPT/GRPO=full） */
+  FineTuneType?: string;
+  /** LoRA rank，仅 finetuneType=lora 时生效 */
+  LoraRank?: number;
+  /** LoRA alpha */
+  LoraAlpha?: number;
+  /** LoRA dropout */
+  LoraDropout?: number;
+  /** LoRA 目标层，默认 all */
+  LoraTarget?: string;
+  /** 训练模式：balanced / quality / speed / custom */
+  TrainingMode?: string;
+  /** 训练轮数 */
+  Epochs?: number;
+  /** 学习率 */
+  LearningRate?: number;
+  /** 每卡 batch size */
+  PerDeviceBatchSize?: number;
+  /** 梯度累积步数 */
+  GradientAccumulationSteps?: number;
+  /** 上下文长度 */
+  CutoffLen?: number;
+  /** 最大样本数 */
+  MaxSamples?: number;
+  /** 是否启用 gradient checkpointing，默认 true */
+  GradientCheckPointing?: boolean;
+  /** 学习率调度器类型，默认 cosine */
+  LrScheduler?: string;
+  /** warmup 比例，默认 0.03 */
+  WarmupRatio?: number;
+  /** DPO beta，仅 mode=dpo 时生效 */
+  DPOBeta?: number;
+  /** DPO loss：sigmoid / hinge / ipo / kto_pair */
+  DPOLoss?: string;
+  /** 兼容旧请求；当前 GRPO 默认使用 verl 内置 rule reward */
+  RewardFunctionCode?: string;
+  /** 兼容旧请求；当前 GRPO 默认使用 verl 内置 rule reward */
+  RewardFunctionCosPath?: string;
+  /** GRPO KL 系数，默认 0.001 */
+  KLCoefficient?: number;
+  /** 每个 prompt 的采样数（group size），默认 8 */
+  NumSamplesPerPrompt?: number;
+  /** 最大响应生成长度，默认 1024 */
+  MaxResponseLength?: number;
+  /** rollout 生成温度，默认 1.0 */
+  RollOutTemperature?: number;
+  /** rollout backend：vllm / sglang，默认 vllm */
+  RollOutBackend?: string;
+  /** PPO clip ratio，默认 0.2 */
+  ClipRatio?: number;
+  /** PPO mini batch size，默认 128 */
+  PPOMiniBatchSize?: number;
+  /** PPO epochs（每批数据的更新轮数），默认 1 */
+  PPOEpochs?: number;
+  /** 训练总 batch size（每步 prompt 数量），默认 128 */
+  TrainBatchSize?: number;
+  /** rollout tensor model parallel size，默认 1 */
+  TensorModelParallelSize?: number;
+  /** vLLM GPU memory utilization，默认 0.5 */
+  GpuMemoryUtilization?: number;
 }
 
 /** 通用的键值对数据结构 */
@@ -4094,6 +4932,86 @@ declare interface AddDMSPartitionsResponse {
   RequestId?: string;
 }
 
+declare interface AddDeploymentRequest {
+  /** ServiceId */
+  ServiceId: string;
+  /** 部署名称 */
+  DeploymentName: string;
+  /** 推理引擎（vllm / xgboost） */
+  Engine: string;
+  /** 副本数 */
+  Replicas: number;
+  /** 资源分区 ID（目标 K8s 集群分区） */
+  ResourcePartitionId: string;
+  /** 模型版本（如 v1, v2），未提供时使用最新版本 */
+  ModelVersion?: string;
+  /** 是否开启 ray head 高可用 */
+  HeadHighAvailabilityEnabled?: boolean;
+  /** 高级参数（JSON 字符串，可选） */
+  AdvancedParams?: string;
+  /** 队列名（K8s namespace） */
+  Queue?: string;
+  /** 是否启用弹性伸缩 */
+  AutoscalingEnabled?: boolean;
+  /** 镜像名称 */
+  Image?: string;
+  /** 高级参数 */
+  AdvancedOptions?: string;
+}
+
+declare interface AddDeploymentResponse {
+  /** DeploymentId */
+  DeploymentId?: string | null;
+  /** 部署名称 */
+  Name?: string | null;
+  /** 关联的服务ID */
+  ServiceId?: string | null;
+  /** 部署使用的模型版本号 */
+  ModelVersion?: string | null;
+  /** 部署状态（Running/Stopped/Deploying/Failed） */
+  Status?: string | null;
+  /** 推理引擎（vLLM/SGLang 等） */
+  Engine?: string | null;
+  /** 期望副本数 */
+  Replicas?: number | null;
+  /** 可用副本数 */
+  AvailableReplicas?: number | null;
+  /** 资源配置（JSON 字符串） */
+  ResourceConfig?: string | null;
+  /** 是否开启 ray head 高可用 */
+  HeadHighAvailabilityEnabled?: boolean;
+  /** 高级参数（JSON 字符串） */
+  AdvancedParams?: string | null;
+  /** 是否开启自动伸缩 */
+  AutoscalingEnabled?: boolean | null;
+  /** 模型存储配置（Catalog JSON，记录模型 COS 挂载信息） */
+  ModelStorageConfig?: string | null;
+  /** AppId */
+  AppId?: number | null;
+  /** Uin */
+  Uin?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** Neutrino Serve ID (RayService CR name) */
+  NeutrinoServeId?: string | null;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string | null;
+  /** 资源队列名称 */
+  Queue?: string | null;
+  /** SubAccountUin */
+  SubAccountUin?: string;
+  /** 镜像名称 */
+  Image?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 高级参数 */
+  AdvancedOptions?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddOptimizerEnginesRequest {
   /** 数据目录名称 */
   Catalog: string;
@@ -4292,6 +5210,22 @@ declare interface AttachWorkGroupPolicyResponse {
   RequestId?: string;
 }
 
+declare interface BindApiKeyRequest {
+  /** apiKey的Id */
+  ApiKeyIds: string[];
+  /** 服务Id */
+  ServiceId: string;
+}
+
+declare interface BindApiKeyResponse {
+  /** ApiKey成功返回 */
+  SuccessList?: ApiKeyResponseInfo[];
+  /** 失败列表 */
+  FailedList?: FailedItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindWorkGroupsToUserRequest {
   /** 绑定的用户和工作组信息 */
   AddInfo: WorkGroupIdSetOfUserId;
@@ -4370,6 +5304,30 @@ declare interface CancelTasksResponse {
   RequestId?: string;
 }
 
+declare interface CancelTrainingJobInstanceRequest {
+  /** 实例 ID（即 RayJob UUID，与 JobId 同值，保留兼容） */
+  InstanceId?: string;
+}
+
+declare interface CancelTrainingJobInstanceResponse {
+  /** 训练实例详情 */
+  Instance?: TrainingJobInstance;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckApiKeyNameRequest {
+  /** apiKey名称 */
+  Name: string;
+}
+
+declare interface CheckApiKeyNameResponse {
+  /** apiKey是否存在 */
+  Exists?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckDataEngineConfigPairsValidityRequest {
   /** 引擎小版本ID */
   ChildImageVersionId?: string;
@@ -4418,6 +5376,22 @@ declare interface CheckDataEngineImageCanBeUpgradeResponse {
   RequestId?: string;
 }
 
+declare interface CheckJobSpecNameRequest {
+  /** 训练作业配置名 */
+  SpecName?: string;
+  /** 排除的配置 ID（编辑场景排除自己；创建场景不传） */
+  SpecId?: string;
+}
+
+declare interface CheckJobSpecNameResponse {
+  /** 名称是否可用（未重名且不含保留字） */
+  Available?: boolean;
+  /** 不可用时的原因；可用时为 null */
+  Reason?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CheckLockMetaDataRequest {
   /** 锁ID */
   LockId: number;
@@ -4434,6 +5408,18 @@ declare interface CheckLockMetaDataResponse {
   LockId?: number;
   /** 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED */
   LockState?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckModelIdentifierRequest {
+  /** 模型标识符 */
+  ModelIdentifier: string;
+}
+
+declare interface CheckModelIdentifierResponse {
+  /** 模型标识符是否已存在 */
+  Exists?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4478,6 +5464,18 @@ declare interface CheckResourceNameRequest {
 declare interface CheckResourceNameResponse {
   /** 校验是否通过 */
   IsValid?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckServiceNameRequest {
+  /** 服务名称 */
+  ServiceName: string;
+}
+
+declare interface CheckServiceNameResponse {
+  /** 名称是否已存在 */
+  Exists?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4556,6 +5554,118 @@ declare interface CopyJobSpecResponse {
   GroupName?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateApiKeyRequest {
+  /** API Key 名称 */
+  Name: string;
+  /** 绑定的推理服务ID（可选，为空表示创建后不绑定任何服务） */
+  ServiceId?: string;
+}
+
+declare interface CreateApiKeyResponse {
+  /** API Key ID（唯一标识） */
+  ApiKeyId?: string;
+  /** API Key 名称（用户创建时指定的可读名称） */
+  Name?: string;
+  /** API Key 值（完整密钥字符串，用于鉴权时携带在请求头中） */
+  ApiKey?: string;
+  /** 关联的推理服务ID */
+  ServiceId?: string;
+  /** 关联的推理服务名称 */
+  ServiceName?: string;
+  /** API Key 状态，可选值：Active（活跃可用）/ Revoked（已停用）。空闲 Key 通常为 Active 状态 */
+  Status?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 主账号UIN */
+  Uin?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number;
+  /** 子账号UIN（实际操作者） */
+  SubAccountUin?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateBenchmarkTaskRequest {
+  /** 推理服务Id */
+  ServiceId: string;
+  /** 任务名称（可选，不填则自动生成） */
+  TaskName?: string;
+  /** 每个 Prompt 的平均输入 Token 数 */
+  InputTokens?: number;
+  /** 模型输出的最大 Token 数 */
+  OutputTokens?: number;
+  /** 每秒发送的请求数 (QPS) */
+  RequestsPerSecond?: number;
+  /** 最大同时并发请求数 */
+  MaxConcurrency?: number;
+  /** 评测使用的 Prompt 总数 */
+  TotalPrompts?: number;
+  /** 是否经 Ingress 网关访问推理服务（默认 true；false 则集群内直连 SVC） */
+  UseGateway?: boolean;
+  /** ray部署集群Id */
+  DeploymentId?: string;
+  /** apiKey的Id */
+  ApiKeyId?: string;
+  /** 评测容器所在资源包 ID */
+  ResourcePartitionId?: string;
+  /** 评测容器所在资源包下的资源组名称 */
+  Queue?: string;
+  /** 评测容器计费项（规格）。仅允许 CPU 计费项。 */
+  BillingItem?: string;
+  /** 评测容器计费项规格倍数 */
+  Spec?: number;
+}
+
+declare interface CreateBenchmarkTaskResponse {
+  /** benchmark任务id */
+  TaskId?: string;
+  /** benchmark任务名称 */
+  TaskName?: string;
+  /** 推理服务id */
+  ServiceId?: string;
+  /** 推理服务名称 */
+  ServiceName?: string;
+  /** 任务状态枚举值：Completed： 完成 */
+  Status?: string;
+  /** 输入token量 */
+  InputTokens?: number;
+  /** 输出token量 */
+  OutputTokens?: number;
+  /** 每秒请求量 */
+  RequestsPerSecond?: number;
+  /** 最大并发量 */
+  MaxConcurrency?: number;
+  /** prompts总量 */
+  TotalPrompts?: number;
+  /** 是否使用Gateway */
+  UseGateway?: boolean;
+  /** 部署集群名称 */
+  DeploymentName?: string;
+  /** apikey的id */
+  ApiKeyId?: string;
+  /** apikey名称 */
+  ApiKeyName?: string;
+  /** 主账号uin */
+  Uin?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** appid */
+  AppId?: number;
+  /** 子账号uin */
+  SubAccountUin?: string;
+  /** 与本次评测关联的部署及其资源规格。 */
+  DeploymentResources?: DeploymentResourceInfo[];
+  /** 评测容器自身使用的资源规格 */
+  Resources?: BenchmarkResourceInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5306,6 +6416,32 @@ declare interface CreateMetaDatabaseResponse {
   RequestId?: string;
 }
 
+declare interface CreateMlflowServerRequest {
+  /** MlFlow Server 名称 */
+  ServerName?: string;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string;
+  /** 资源组（逻辑队列名，可选） */
+  Queue?: string;
+  /** MlFlow 镜像 */
+  Image?: string;
+  /** 存储配置 JSON，按 StorageMode 解释：cos={bucket,region,path}，cfs={fileSystemId,path}（cos/cfs 必填，local 为空） */
+  StorageConfig?: string;
+  /** 存储模式: cos / cfs / local */
+  StorageMode?: string;
+  /** MlFlow的资源配置 */
+  ResourceConfig?: MlFlowResourceConfig;
+  /** 标签列表（TagKey-TagValue），用于将 MLflow Server 与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+}
+
+declare interface CreateMlflowServerResponse {
+  /** MlFlow Server 业务信息 */
+  MlFlowServer?: MlFlowServerInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateModelVersionRequest {
   /** 模型UID */
   ModelUid: string;
@@ -6046,6 +7182,18 @@ declare interface CreateTcIcebergTableResponse {
   RequestId?: string;
 }
 
+declare interface CreateTrainingJobInstanceRequest {
+  /** 训练作业配置 ID */
+  SpecId: string;
+}
+
+declare interface CreateTrainingJobInstanceResponse {
+  /** 训练实例详情配置 */
+  Instance?: TrainingJobInstance;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateUserRequest {
   /** 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。 */
   UserId: string;
@@ -6126,6 +7274,26 @@ declare interface CreateWorkGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteApiKeyRequest {
+  /** apiKey的Id */
+  ApiKeyId?: string;
+}
+
+declare interface DeleteApiKeyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBenchmarkTaskRequest {
+  /** 评测任务ID */
+  TaskId: string;
+}
+
+declare interface DeleteBenchmarkTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCHDFSBindingProductRequest {
   /** 需要解绑的元数据加速桶名 */
   MountPoint: string;
@@ -6198,6 +7366,28 @@ declare interface DeleteDataMaskStrategyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDeploymentRequest {
+  /** DeploymentId */
+  DeploymentId: string;
+}
+
+declare interface DeleteDeploymentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteInferenceServiceRequest {
+  /** 推理服务ID */
+  ServiceId: string;
+  /** 删除关联的 APIKeys */
+  DeleteBoundApiKeys?: boolean;
+}
+
+declare interface DeleteInferenceServiceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteJobSpecRequest {
   /** 配置ID */
   SpecId: string;
@@ -6230,6 +7420,42 @@ declare interface DeleteMetaDatabaseResponse {
   BatchId?: string;
   /** 任务Id集合，按照执行顺序排列 */
   TaskIdSet?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteMlflowServerRequest {
+  /** MlFlow Server的ID */
+  ServerId?: string;
+}
+
+declare interface DeleteMlflowServerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelRequest {
+  /** 模型 UID */
+  ModelUid: string;
+}
+
+declare interface DeleteModelResponse {
+  /** 删除的模型版本数量 */
+  DeletedVersionCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelVersionRequest {
+  /** 模型UID */
+  ModelUid: string;
+  /** 要删除的版本号（如 v1, v2） */
+  ModelVersion: string;
+}
+
+declare interface DeleteModelVersionResponse {
+  /** 是否整个模型已被删除（最后一个版本被删除时为 true） */
+  ModelDeleted?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6352,6 +7578,26 @@ declare interface DeleteThirdPartyAccessUserResponse {
   RequestId?: string;
 }
 
+declare interface DeleteTrainingJobInstanceRequest {
+  /** 训练实例 ID */
+  InstanceId?: string;
+}
+
+declare interface DeleteTrainingJobInstanceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTrainingJobSpecRequest {
+  /** 训练作业配置 ID */
+  SpecId: string;
+}
+
+declare interface DeleteTrainingJobSpecResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteUserRequest {
   /** 需要删除的用户的Id */
   UserIds: string[];
@@ -6410,6 +7656,68 @@ declare interface DescribeAdvancedStoreLocationResponse {
   LakeFsStatus?: string;
   /** 托管存储桶类型 */
   BucketType?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBindablePrometheusRequest {
+  /** TKE 集群 ID */
+  ClusterId: string;
+  /** Prometheus 实例 ID（用于列表精确搜索） */
+  InstanceId?: string;
+  /** 分页大小，默认 20，最大 100 */
+  Limit?: number;
+  /** 分页偏移，默认 0 */
+  Offset?: number;
+}
+
+declare interface DescribeBindablePrometheusResponse {
+  /** TKE 集群是否已绑定 Prometheus 实例 */
+  Bound?: boolean;
+  /** Prometheus 实例总数（未分页前）；Bound=false 时有意义 */
+  TotalCount?: number;
+  /** Prometheus 实例列表；Bound=false 时返回；已按同 VPC 优先稳定排序 */
+  Instances?: PrometheusInstanceItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClsTopicsRequest {
+  /** 日志主题名称（模糊匹配），可为空 */
+  TopicName?: string;
+  /** 日志主题 ID（精确匹配），可为空 */
+  TopicId?: string;
+  /** 分页偏移量，从 0 开始，默认 0 */
+  Offset?: number;
+  /** 分页每页条数，默认 20，最大 100 */
+  Limit?: number;
+}
+
+declare interface DescribeClsTopicsResponse {
+  /** 满足条件的日志主题总数（与入参 Limit 无关） */
+  TotalCount?: number;
+  /** 日志主题列表 */
+  Topics?: ClsTopicItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterEventLogSwitchRequest {
+  /** TKE 集群 ID */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterEventLogSwitchResponse {
+  /** TKE 集群 ID（回显） */
+  ClusterId?: string;
+  /** 事件日志是否已开启 */
+  Enable?: boolean;
+  /** 关联的 CLS 日志集 ID（Enable=true 时返回） */
+  LogsetId?: string;
+  /** 关联的 CLS 日志主题 ID（Enable=true 时返回） */
+  TopicId?: string;
+  /** 关联的 CLS 日志主题所在地域（Enable=true 时返回） */
+  TopicRegion?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6898,6 +8206,26 @@ declare interface DescribeDatasourceConnectionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEmrClusterInfoRequest {
+  /** EMR 集群 ID，例如 emr-40ybwbbn */
+  InstanceId: string;
+}
+
+declare interface DescribeEmrClusterInfoResponse {
+  /** EMR 集群 ID，例如 emr-40ybwbbn */
+  ClusterId?: string;
+  /** EMR 集群名称 */
+  ClusterName?: string;
+  /** 集群绑定的 COS Bucket 名称 */
+  CosBucket?: string;
+  /** 关联的 TKE 集群 ID，例如 cls-xxxxxxxx */
+  TkeClusterId?: string;
+  /** 集群资源用量（Cpu / Mem） */
+  ResourceUsage?: EmrResourceUsage | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEngineNetworksRequest {
   /** 排序字段 */
   SortBy?: string;
@@ -7058,6 +8386,104 @@ declare interface DescribeMCPTaskResultRequest {
 declare interface DescribeMCPTaskResultResponse {
   /** 任务结果信息 */
   TaskResult?: MCPTaskResultInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMlFlowConfigRequest {
+  /** 训练实例 ID */
+  InstanceId: string;
+}
+
+declare interface DescribeMlFlowConfigResponse {
+  /** MLflow 的实验 ID，对应训练作业配置 */
+  ExperimentID?: string;
+  /** MLflow 的 RunID，对应训练作业实例 ID */
+  RunID?: string;
+  /** 实例级 MLflow 模式：local / remote / none。云上一般为 Remote枚举值：remote： 使用远程 MLflow local： 使用本地启动的 MLflownone： 不启用 MLflow */
+  MlFlowMode?: string;
+  /** 实例级 MLflow 访问 URL */
+  MlFlowUrl?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMlflowServerEventsRequest {
+  /** MlFlowServer的ID */
+  ServerId?: string;
+  /** 查询起始时间，单位ms */
+  StartTime?: number;
+  /** 查询结束时间，单位ms */
+  EndTime?: number;
+  /** 翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值 */
+  Context?: string;
+  /** 事件类型过滤，仅允许 ASCII 字母（如 Normal、Warning） */
+  EventType?: string;
+  /** 每次查询数量 */
+  PageSize?: number;
+  /** 排序字段，目前只支持EventTime */
+  SortFields?: SortField[];
+}
+
+declare interface DescribeMlflowServerEventsResponse {
+  /** 翻页上下文，下一次分页请求时传入此值 */
+  Context?: string;
+  /** 是否已经返回所有符合条件的日志，true 表示已全部返回 */
+  ListOver?: boolean;
+  /** 本次检索实际使用的起始时间（Unix 时间戳，毫秒） */
+  StartTime?: number;
+  /** 本次检索实际使用的结束时间（Unix 时间戳，毫秒） */
+  EndTime?: number;
+  /** 事件列表 */
+  Events?: EventItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMlflowServerPodsRequest {
+  /** MlFlowServer所使用的ID */
+  ServerId?: string;
+}
+
+declare interface DescribeMlflowServerPodsResponse {
+  /** MlFlowServer的Pod列表，实际上只有1个POD */
+  Items?: PodItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeMlflowServerRequest {
+  /** MlFlowServer的ID */
+  ServerId?: string;
+}
+
+declare interface DescribeMlflowServerResponse {
+  /** MlFlowServer的详情 */
+  MlFlowServer?: MlFlowServerInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelEnginesRequest {
+  /** 模型业务唯一标识 */
+  ModelUid: string;
+}
+
+declare interface DescribeModelEnginesResponse {
+  /** 可用的推理引擎列表 */
+  Engines?: InferenceEngineInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeModelTaskOptionsRequest {
+  /** 模型类型（如 LLM、Embedding、ML），不传返回全部类型的 Tasks */
+  ModelType?: string;
+}
+
+declare interface DescribeModelTaskOptionsResponse {
+  /** 各模型类型对应的可选任务列表 */
+  TaskOptions?: TaskOptions[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7304,6 +8730,42 @@ declare interface DescribePartitionsResponse {
   Partitions?: PartitionInfo[];
   /** 总记录数 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePostTrainingPresetRequest {
+  /** 使用的大模型微调算法枚举值：sft： Supervised Fine-Tuning，监督微调dpo： Direct Preference Optimization，模型偏好训练微调grpo： Group Relative Policy Optimization，组相对策略优化 */
+  Mode: string;
+  /** 训练模式，会根据不同训练模式推荐不同的训练参数枚举值：balanced： 均衡模式，标准配置，兼顾训练速度和模型效果quality： 质量优先，更低学习率 / 更多轮次 / 更大 LoRA rank，追求最佳效果speed： 速度优先，大 batch / 关闭 grad_ckpt / 短序列，最快迭代验证custom： 自定义模式，手动调整各项参数默认值：balanced */
+  TrainingMode: string;
+  /** 参数微调方式枚举值：lora： 轻量级微调大模型的方法full： 全参数大模型微调 */
+  FineTuneType: string;
+  /** 模型参数大小，如 0.8B，就是 0.8的参数量。370B 模型，就是 370 */
+  ParameterSize?: number;
+}
+
+declare interface DescribePostTrainingPresetResponse {
+  /** 推荐的训练资源 */
+  Resource?: PostTrainingResources;
+  /** 推荐的训练参数 */
+  TrainingParams?: TrainingParams;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRecommendedParamsRequest {
+  /** 模型业务唯一标识 */
+  ModelUid: string;
+  /** 推理引擎 ID，如 vllm、xgboost（必填） */
+  Engine: string;
+}
+
+declare interface DescribeRecommendedParamsResponse {
+  /** 推荐来源: builtin | matched | default */
+  Source?: string | null;
+  /** 推荐的高级参数 */
+  AdvancedParams?: RecommendedAdvancedParams | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7946,6 +9408,84 @@ declare interface DescribeThirdPartyAccessUserRequest {
 declare interface DescribeThirdPartyAccessUserResponse {
   /** 用户信息 */
   UserInfo?: OpendThirdAccessUserInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTkeClusterImportInfoRequest {
+  /** EMR 集群 ID（注意：不是 TKE 集群 ID）。 */
+  EmrClusterId: string;
+}
+
+declare interface DescribeTkeClusterImportInfoResponse {
+  /** 分区名称。 */
+  PartitionName?: string;
+  /** EMR 集群 ID。 */
+  EmrClusterId?: string;
+  /** COS Bucket 名称。 */
+  CosBucketId?: string;
+  /** Prometheus 托管实例 ID。 */
+  PrometheusInstanceId?: string;
+  /** Prometheus 托管实例名称；查询失败或未命中返回空字符串。 */
+  PrometheusInstanceName?: string;
+  /** 负载均衡实例 ID。 */
+  LoadBalancerId?: string;
+  /** 负载均衡实例名称；查询失败或未命中返回空字符串。 */
+  LoadBalancerName?: string;
+  /** 容器日志 CLS 日志主题 ID。 */
+  ContainerLogTopicId?: string;
+  /** 容器日志 CLS 日志主题名称；查询失败或未命中返回空字符串。 */
+  ContainerLogTopicName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTrainingCheckpointsRequest {
+  /** 训练作业实例ID */
+  InstanceId?: string;
+  /** 当前浏览的子路径 */
+  SubPath?: string;
+}
+
+declare interface DescribeTrainingCheckpointsResponse {
+  /** 当前层级文件/目录列表 */
+  Items?: SharedMountFileItem[];
+  /** 当前挂载路径 */
+  MountPath?: string;
+  /** 当前浏览的子路径 */
+  SubPath?: string;
+  /** 存储类型：COS / CFS / CFS_TURBO / GOOSEFS */
+  StorageType?: string;
+  /** 存储路径（COS 桶路径或 CFS/GooseFSx 挂载路径） */
+  StoragePath?: string;
+  /** 错误或提示信息（仅在请求异常时有值） */
+  Message?: string;
+  /** 快照时间戳（仅 CFS/GooseFSx 存储时有值） */
+  SnapshotTimestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTrainingJobInstanceRequest {
+  /** 训练实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeTrainingJobInstanceResponse {
+  /** 训练实例详情 */
+  Instance?: TrainingJobInstance;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTrainingJobSpecRequest {
+  /** 配置 ID */
+  SpecId?: string;
+}
+
+declare interface DescribeTrainingJobSpecResponse {
+  /** 训练作业配置详情 */
+  Spec?: TrainingJobSpec;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9296,6 +10836,70 @@ declare interface GrantDLCCatalogAccessResponse {
   RequestId?: string;
 }
 
+declare interface ImportExternalClusterRequest {
+  /** 资源池对应的分区名称。 */
+  PartitionName: string;
+  /** 集群类型。TKE：直接导入裸 TKE 集群，ClusterId 填 TKE 集群 ID（如 cls-xxxxxxxx）；EMR：通过 EMR 集群导入，ClusterId 填 EMR 集群 ID（如 emr-xxxxxxxx）。 */
+  ClusterType: string;
+  /** 集群 ID。ClusterType=TKE 时填 TKE 集群 ID（如 cls-xxxxxxxx）；ClusterType=EMR 时填 EMR 集群 ID（如 emr-xxxxxxxx）。 */
+  ClusterId: string;
+  /** COS Bucket 名称（含 AppId 后缀），例如 my-bucket-1250000000。 */
+  CosBucketId?: string;
+  /** Prometheus 托管实例 ID，例如 prom-xxxxxxxx。 */
+  PrometheusInstanceId?: string;
+  /** 负载均衡实例 ID，例如 lb-xxxxxxxx。 */
+  LoadBalancerId?: string;
+  /** 节点标签键值对（Key-Value 列表），用于将资源池调度限定到具备对应标签的节点。 */
+  NodeLabels?: KVPair[];
+  /** 资源池对应的默认分区描述，透传给下游 ResourceManager 用于分区创建。 */
+  PartitionDescription?: string;
+  /** 目标账号 AppId（跨账号导入时填写，不填则使用当前账号）。TargetAppId 和 TargetUin 必须同时填写或同时不填。 */
+  TargetAppId?: number;
+  /** 目标账号 UIN（跨账号导入时填写，不填则使用当前账号）。TargetAppId 和 TargetUin 必须同时填写或同时不填。 */
+  TargetUin?: string;
+}
+
+declare interface ImportExternalClusterResponse {
+  /** 已落库的 resource_pool 主行 ID。 */
+  ResourcePoolId?: number;
+  /** 资源池唯一编码。 */
+  ResourcePoolCode?: string;
+  /** 注册工作流 ID，可用于查询进度。 */
+  WorkflowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportTkeClusterRequest {
+  /** 资源池对应的分区名称。 */
+  PartitionName: string;
+  /** EMR 集群 ID（注意：不是 TKE 集群 ID）。 */
+  EmrClusterId: string;
+  /** COS Bucket 名称（含 AppId 后缀），例如 my-bucket-1250000000。 */
+  CosBucketId?: string;
+  /** Prometheus 托管实例 ID，例如 prom-xxxxxxxx。 */
+  PrometheusInstanceId?: string;
+  /** 负载均衡实例 ID，例如 lb-xxxxxxxx。 */
+  LoadBalancerId?: string;
+  /** 容器日志 CLS 日志主题 ID。 */
+  ContainerLogTopicId?: string;
+  /** 节点标签键值对（Key-Value 列表），用于将资源池调度限定到具备对应标签的 EMR-TKE 节点。 */
+  NodeLabels?: KVPair[];
+  /** 资源池对应的默认分区描述，透传给下游 ResourceManager 用于分区创建。 */
+  PartitionDescription?: string;
+}
+
+declare interface ImportTkeClusterResponse {
+  /** 已落库的 resource_pool 主行 ID。 */
+  ResourcePoolId?: number;
+  /** 资源池唯一编码。 */
+  ResourcePoolCode?: string;
+  /** 注册工作流 ID，可用于查询进度。 */
+  WorkflowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InitializeTCLakeRequest {
 }
 
@@ -9401,6 +11005,120 @@ declare interface LaunchStandardEngineResourceGroupsResponse {
   RequestId?: string;
 }
 
+declare interface ListApiKeysRequest {
+  /** 页码（默认1） */
+  Page?: number;
+  /** 每页数量（默认200） */
+  PageSize?: number;
+  /** 创建时间起始过滤-毫秒时间戳 */
+  StartTime?: number;
+  /** 创建时间截止过滤-毫秒时间戳 */
+  EndTime?: number;
+  /** 过滤条件。支持的过滤字段：Keyword（Key 名称模糊搜索，取第一个 Value）、Status（状态精确匹配，取第一个 Value，如 Active、Revoked） */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListApiKeysResponse {
+  /** ApiKey列表 */
+  Items?: ApiKeyInfo[];
+  /** ApiKey总记录数 */
+  Total?: number;
+  /** ApiKey总页数 */
+  Page?: number;
+  /** 单页最大记录数 */
+  PageSize?: number;
+  /** 记录总页数 */
+  TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListAvailableApiKeysRequest {
+  /** 页数 */
+  Page?: number;
+  /** 单页大小 */
+  PageSize?: number;
+}
+
+declare interface ListAvailableApiKeysResponse {
+  /** 总共apikey数量 */
+  Total?: number;
+  /** 页数 */
+  Page?: number;
+  /** 单页大小 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 具体apikey 列表 */
+  Items?: ApiKeyInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListBenchmarkSummaryRequest {
+  /** 页码（从1开始） */
+  Page?: number;
+  /** 每页数量（最大 200） */
+  PageSize?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  SortFields?: SortField[];
+}
+
+declare interface ListBenchmarkSummaryResponse {
+  /** 模型评测汇总列表（排行榜数据） */
+  Items?: BenchmarkSummaryInfo[] | null;
+  /** 总记录数 */
+  Total?: number | null;
+  /** 当前页码 */
+  Page?: number | null;
+  /** 每页数量 */
+  PageSize?: number | null;
+  /** 总页数 */
+  TotalPages?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListBenchmarkTasksRequest {
+  /** 推理服务Id */
+  ServiceId: string;
+  /** 页数 */
+  Page?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  SortFields?: SortField[];
+}
+
+declare interface ListBenchmarkTasksResponse {
+  /** benchmark列表 */
+  Items?: BenchmarkTaskInfo[];
+  /** 总量 */
+  Total?: number;
+  /** 页数 */
+  Page?: number;
+  /** 页大小 */
+  PageSize?: number;
+  /** 页总量 */
+  TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListClusterGroupsRequest {
   /** 当前页码（从1开始） */
   Page?: number;
@@ -9427,6 +11145,70 @@ declare interface ListClusterGroupsResponse {
   TotalPages?: number;
   /** 集群组列表 */
   Items?: ClusterGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDeploymentReplicasRequest {
+  /** DeploymentId */
+  DeploymentId: string;
+  /** 页码（从1开始） */
+  Page?: number;
+  /** 每页数量（最大 200） */
+  PageSize?: number;
+  /** 起始时间单位： ms */
+  StartTime?: number;
+  /** 结束时间单位： ms */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段 */
+  SortFields?: SortField[];
+}
+
+declare interface ListDeploymentReplicasResponse {
+  /** 副本列表 */
+  Items?: DeploymentReplicaInfo[] | null;
+  /** 总记录数 */
+  Total?: number | null;
+  /** 当前页码 */
+  Page?: number | null;
+  /** 每页数量 */
+  PageSize?: number | null;
+  /** 总页数 */
+  TotalPages?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListDeploymentsRequest {
+  /** 推理服务ID */
+  ServiceId: string;
+  /** 页码（从1开始） */
+  Page?: number;
+  /** 每页数量（最大 200） */
+  PageSize?: number;
+  /** 创建时间起始单位：ms */
+  StartTime?: number;
+  /** 创建时间截止单位：ms */
+  EndTime?: number;
+  /** 额外过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListDeploymentsResponse {
+  /** 部署列表 */
+  Items?: DeploymentInfo[] | null;
+  /** 总记录数 */
+  Total?: number | null;
+  /** 当前页码 */
+  Page?: number | null;
+  /** 每页数量 */
+  PageSize?: number | null;
+  /** 总页数 */
+  TotalPages?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9737,6 +11519,68 @@ declare interface ListLabsResponse {
   RequestId?: string;
 }
 
+declare interface ListMlflowServerTrainingInstancesRequest {
+  /** MlFlowServer的ID */
+  ServerId?: string;
+  /** 分页过滤条件 */
+  Filters?: Filter[];
+  /** 分页筛选条件 */
+  SortFields?: SortField[];
+  /** 分页开始时间范围 */
+  StartTime?: number;
+  /** 分页结束时间范围 */
+  EndTime?: number;
+  /** 分页当前页号 */
+  Page?: number;
+  /** 分页每页大小 */
+  PageSize?: number;
+}
+
+declare interface ListMlflowServerTrainingInstancesResponse {
+  /** 返回训练实例列表 */
+  Items?: TrainingJobInstance[];
+  /** 总数 */
+  Total?: number;
+  /** 当前页 */
+  Page?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListMlflowServersRequest {
+  /** 当前页码，从 1 开始（默认 1） */
+  Page?: number;
+  /** 每页数量（默认 200，最大 200） */
+  PageSize?: number;
+  /** 创建时间起始过滤（毫秒时间戳）单位：ms */
+  StartTime?: number;
+  /** 创建时间截止过滤（毫秒时间戳）单位：ms */
+  EndTime?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+}
+
+declare interface ListMlflowServersResponse {
+  /** MlFlow列表 */
+  Items?: MlFlowServerInfo[];
+  /** MlFlow总数 */
+  Total?: number;
+  /** 当前页码，从 1 开始（默认 1） */
+  Page?: number;
+  /** 每页数量（默认 200，最大 200） */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListModelVersionsRequest {
   /** 模型UID */
   ModelUid: string;
@@ -9857,6 +11701,26 @@ declare interface ListRayJobsResponse {
   RequestId?: string;
 }
 
+declare interface ListRegionLbsRequest {
+  /** TKE 集群 ID，用于查询集群所属 VPC，进而过滤同 VPC 下的独占型 CLB，例如 cls-xxxxxxxx */
+  ClusterId: string;
+  /** 负载均衡实例 ID 列表，最多 20 个；不传则查询同地域全部实例 */
+  LoadBalancerIds?: string[];
+  /** 分页偏移量，从 0 开始，默认 0 */
+  Offset?: number;
+  /** 分页每页条数，默认 20，最大 100 */
+  Limit?: number;
+}
+
+declare interface ListRegionLbsResponse {
+  /** 满足条件的负载均衡实例总数（与入参 Limit 无关） */
+  TotalCount?: number;
+  /** 负载均衡信息列表 */
+  Lbs?: LbItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListResourceConfigsRequest {
   /** 当前页码（从1开始） */
   Page?: number;
@@ -9883,6 +11747,38 @@ declare interface ListResourceConfigsResponse {
   TotalPages?: number;
   /** 资源配置模板列表 */
   Items?: ResourceConfig[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListServiceApiKeysRequest {
+  /** 推理服务ID */
+  ServiceId: string;
+  /** 创建时间起始过滤-毫秒时间戳 */
+  StartTime?: number;
+  /** 创建时间截止过滤-毫秒时间戳 */
+  EndTime?: number;
+  /** 额外过滤条件 */
+  Filters?: Filter[];
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+  /** 页码（默认1） */
+  Page?: number;
+  /** 每页数量（默认200） */
+  PageSize?: number;
+}
+
+declare interface ListServiceApiKeysResponse {
+  /** API Key记录 */
+  Items?: ApiKeyInfo[];
+  /** API Key记录总数 */
+  Total?: number;
+  /** 当前页码 */
+  Page?: number;
+  /** 每页记录数量 */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9933,6 +11829,82 @@ declare interface ListTaskJobLogNameRequest {
 declare interface ListTaskJobLogNameResponse {
   /** 日志名称列表 */
   Names?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTkeCosBucketsRequest {
+  /** cos 桶名字 */
+  BucketName?: string;
+  /** 分页 Limit */
+  Limit?: number;
+  /** 分页 Offset */
+  Offset?: number;
+}
+
+declare interface ListTkeCosBucketsResponse {
+  /** cos 桶列表 */
+  Buckets?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTrainingJobInstanceRequest {
+  /** 当前页码，从 1 开始（默认 1） */
+  Page?: number;
+  /** 每页数量（默认 10） */
+  PageSize?: number;
+  /** 过滤条件列表，每项含 Name、Operator、Values */
+  Filters?: Filter[];
+  /** 排序字段列表，每项含 Field、Order（ASC/DESC） */
+  SortFields?: SortField[];
+  /** 创建时间起始过滤（毫秒时间戳）单位：ms */
+  StartTime?: number;
+  /** 创建时间截止过滤（毫秒时间戳）单位：ms */
+  EndTime?: number;
+}
+
+declare interface ListTrainingJobInstanceResponse {
+  /** 训练作业实例列表 */
+  Items?: TrainingJobInstance[];
+  /** 列表元素个数 */
+  Total?: number;
+  /** 当前页码，从 1 开始（默认 1） */
+  Page?: number;
+  /** 每页数量（默认 200，最大 200） */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListTrainingJobSpecRequest {
+  /** 当前页码，从 1 开始（默认 1） */
+  Page?: number;
+  /** 每页数量（默认 200，最大 200） */
+  PageSize?: number;
+  /** 创建时间起始过滤（毫秒时间戳）单位：ms */
+  StartTime?: number;
+  /** 创建时间截止过滤（毫秒时间戳）单位：ms */
+  EndTime?: number;
+  /** 过滤条件列表，每项含 Name、Operator、Values。提交模式过滤：LAB / CUSTOM_CODE / POST_TRAINING。示例：{"Name":"kind","Operator":"EQ","Values":["LAB"]} */
+  Filters?: Filter[];
+  /** 排序字段列表，每项含 Field、Order（ASC/DESC）。默认按 updateTime DESC */
+  SortFields?: SortField[];
+}
+
+declare interface ListTrainingJobSpecResponse {
+  /** 训练配置列表信息 */
+  Items?: TrainingJobSpec[];
+  /** 训练配置总数 */
+  Total?: number;
+  /** 当前页码，从 1 开始（默认 1） */
+  Page?: number;
+  /** 每页数量（默认 200，最大 200） */
+  PageSize?: number;
+  /** 总页数 */
+  TotalPages?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10325,6 +12297,66 @@ declare interface ModifySparkAppResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTrainingJobSpecRequest {
+  /** 配置 ID */
+  SpecId?: string;
+  /** 配置名称（不传则不更新） */
+  SpecName?: string;
+  /** 配置描述（不传则不更新） */
+  Description?: string;
+  /** 启动命令（不传则不更新） */
+  Entrypoint?: string;
+  /** 镜像地址（不传则不更新） */
+  Image?: string;
+  /** 镜像拉取类型（BuiltIn / Custom / CustomCcr，不传则不更新） */
+  ImagePullType?: string;
+  /** 镜像拉取策略（Always / IfNotPresent / Never，不传则不更新） */
+  ImagePullPolicy?: string;
+  /** 代码包 COS URL（不传则不更新） */
+  CodePackageUrl?: string;
+  /** 运行时环境配置 JSON（不传则不更新） */
+  RuntimeEnv?: string;
+  /** 资源配置模板 ID（可选） */
+  ResourceConfigId?: string;
+  /** 资源配置 JSON（不传则不更新） */
+  ResourceConfig?: string;
+  /** 资源分区 ID（不传则不更新） */
+  ResourcePartitionId?: string;
+  /** 队列名称（不传则不更新） */
+  Queue?: string;
+  /** 存储卷挂载配置 JSON（不传则不更新） */
+  Catalog?: string;
+  /** 作业优先级 1-9（不传则不更新） */
+  Priority?: number;
+  /** 高级参数 JSON（不传则不更新） */
+  AdvancedOptions?: string;
+  /** MlFlow 实验追踪配置（不传则不更新） */
+  MlFlowConfig?: MlFlowConfig;
+  /** 标签列表（TagKey-TagValue），null 不修改，空数组清空，非空全量替换 */
+  Tags?: Tag[];
+  /** 基础模型ID（用于模型挂载） */
+  BaseModelUid?: string;
+  /** 输出模型名（用于产出模型自动注册） */
+  OutputModelName?: string;
+  /** 训练模式：sft / dpo / cpt / grpo（仅 POST_TRAINING 有值） */
+  Mode?: string;
+  /** 数据集挂载列表（整体替换，不传则不更新） */
+  Datasets?: DatasetMount[];
+  /** Checkpoint 产出配置（整体替换，不传则不更新） */
+  Checkpoint?: CheckpointConfig;
+  /** 是否启用断点续训（创建时的意图声明；实际续训由实例级「断点续训」按钮触发，不传则不更新） */
+  ResumeTraining?: boolean;
+  /** 调优参数（整体替换，未填字段回模板默认值；不传则不更新；仅 POST_TRAINING） */
+  TuningParams?: TrainingTuningParams;
+}
+
+declare interface ModifyTrainingJobSpecResponse {
+  /** 训练作业配置详情 */
+  Spec?: TrainingJobSpec;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserRequest {
   /** 用户Id，和CAM侧Uin匹配 */
   UserId: string;
@@ -10535,6 +12567,58 @@ declare interface ReportHeartbeatMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface RerunBenchmarkTaskRequest {
+  /** 评测任务ID */
+  TaskId: string;
+}
+
+declare interface RerunBenchmarkTaskResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 关联的推理服务ID */
+  ServiceId?: string;
+  /** 关联的推理服务名称 */
+  ServiceName?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 输入 Token 数 */
+  InputTokens?: number;
+  /** 输出 Token 数 */
+  OutputTokens?: number;
+  /** 每秒请求数 (QPS) */
+  RequestsPerSecond?: number;
+  /** 最大并发数 */
+  MaxConcurrency?: number;
+  /** Prompts 总数 */
+  TotalPrompts?: number;
+  /** 是否经网关。true=通过网关访问；false=集群内直连 SVC */
+  UseGateway?: boolean;
+  /** 直连模式下使用的部署名称（仅 UseGateway=false 时有值） */
+  DeploymentName?: string;
+  /** API Key ID（走网关时使用的 API Key 标识） */
+  ApiKeyId?: string;
+  /** API Key 名称 */
+  ApiKeyName?: string;
+  /** 主账号UIN */
+  Uin?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number;
+  /** 应用ID */
+  AppId?: number;
+  /** 子账号UIN（实际操作者） */
+  SubAccountUin?: string;
+  /** 评测容器自身使用的资源规格 */
+  Resources?: BenchmarkResourceInfo;
+  /** 与本次评测关联的部署及其资源规格 */
+  DeploymentResources?: DeploymentResourceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RestartDataEngineRequest {
   /** 引擎ID */
   DataEngineId: string;
@@ -10543,6 +12627,66 @@ declare interface RestartDataEngineRequest {
 }
 
 declare interface RestartDataEngineResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RestartDeploymentRequest {
+  /** DeploymentId */
+  DeploymentId: string;
+}
+
+declare interface RestartDeploymentResponse {
+  /** DeploymentId */
+  DeploymentId?: string | null;
+  /** 部署名称 */
+  Name?: string | null;
+  /** 关联的服务ID */
+  ServiceId?: string | null;
+  /** 部署使用的模型版本号 */
+  ModelVersion?: string | null;
+  /** 部署状态（Running/Stopped/Deploying/Failed） */
+  Status?: string | null;
+  /** 推理引擎（vLLM/SGLang 等） */
+  Engine?: string | null;
+  /** 期望副本数 */
+  Replicas?: number | null;
+  /** 可用副本数 */
+  AvailableReplicas?: number | null;
+  /** 资源配置（JSON 字符串） */
+  ResourceConfig?: string | null;
+  /** 高级参数（JSON 字符串） */
+  AdvancedParams?: string | null;
+  /** 是否开启自动伸缩 */
+  AutoscalingEnabled?: boolean | null;
+  /** 最小副本数（自动伸缩时使用） */
+  MinReplicas?: number | null;
+  /** 最大副本数（自动伸缩时使用） */
+  MaxReplicas?: number | null;
+  /** 模型存储配置（Catalog JSON，记录模型 COS 挂载信息） */
+  ModelStorageConfig?: string | null;
+  /** AppId */
+  AppId?: number | null;
+  /** Uin */
+  Uin?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** Neutrino Serve ID (RayService CR name) */
+  NeutrinoServeId?: string | null;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string | null;
+  /** 资源队列名称 */
+  Queue?: string | null;
+  /** SubAccountUin */
+  SubAccountUin?: string;
+  /** ray head 是否开启高可用 */
+  HeadHighAvailabilityEnabled?: boolean;
+  /** 镜像名称 */
+  Image?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10601,6 +12745,18 @@ declare interface RestartInferenceServiceResponse {
   ResourceConfig?: string;
   /** 系统标签列表（TagKey-TagValue） */
   ResourceTags?: Tag[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResumeTrainingJobInstanceRequest {
+  /** 训练实例ID */
+  InstanceId?: string;
+}
+
+declare interface ResumeTrainingJobInstanceResponse {
+  /** 训练实例详情 */
+  Instance?: TrainingJobInstance;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10777,6 +12933,18 @@ declare interface StartLabResponse {
   RequestId?: string;
 }
 
+declare interface StartMlflowServerRequest {
+  /** MlFlow Server的ID */
+  ServerId?: string;
+}
+
+declare interface StartMlflowServerResponse {
+  /** MlFlowServer的详情 */
+  MlFlowServer?: MlFlowServerInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartRayClusterRequest {
   /** 集群ID */
   Id: string;
@@ -10835,6 +13003,122 @@ declare interface StartRayClusterResponse {
   StopTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopBenchmarkTaskRequest {
+  /** 评测任务ID */
+  TaskId: string;
+}
+
+declare interface StopBenchmarkTaskResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 关联的推理服务ID */
+  ServiceId?: string;
+  /** 关联的推理服务名称 */
+  ServiceName?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 输入 Token 数 */
+  InputTokens?: number;
+  /** 输出 Token 数 */
+  OutputTokens?: number;
+  /** 每秒请求数 (QPS) */
+  RequestsPerSecond?: number;
+  /** 最大并发数 */
+  MaxConcurrency?: number;
+  /** Prompts 总数 */
+  TotalPrompts?: number;
+  /** 是否经网关。true=通过网关访问；false=集群内直连 SVC */
+  UseGateway?: boolean;
+  /** 直连模式下使用的部署名称（仅 UseGateway=false 时有值） */
+  DeploymentName?: string;
+  /** API Key ID（走网关时使用的 API Key 标识） */
+  ApiKeyId?: string;
+  /** API Key 名称 */
+  ApiKeyName?: string;
+  /** 主账号UIN */
+  Uin?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number;
+  /** 应用ID */
+  AppId?: number;
+  /** 子账号UIN（实际操作者） */
+  SubAccountUin?: string;
+  /** 评测容器自身使用的资源规格 */
+  Resources?: BenchmarkResourceInfo;
+  /** 与本次评测关联的部署及其资源规格。语义按模式区分： • 网关模式（UseGateway=true）：Service 下所有 Running 部署（长度可能 > 1） • 直连模式（UseGateway=false）：仅绑定的那个部署（长度恒为 1） */
+  DeploymentResources?: DeploymentResourceInfo[];
+  /** 发生错误时的错误信息 */
+  ErrorMessage?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopDeploymentRequest {
+  /** DeploymentId */
+  DeploymentId: string;
+}
+
+declare interface StopDeploymentResponse {
+  /** DeploymentId */
+  DeploymentId?: string | null;
+  /** 部署名称 */
+  Name?: string | null;
+  /** 关联的服务ID */
+  ServiceId?: string | null;
+  /** 部署使用的模型版本号 */
+  ModelVersion?: string | null;
+  /** 部署状态（Running/Stopped/Deploying/Failed） */
+  Status?: string | null;
+  /** 推理引擎（vLLM/SGLang 等） */
+  Engine?: string | null;
+  /** 期望副本数 */
+  Replicas?: number | null;
+  /** 可用副本数 */
+  AvailableReplicas?: number | null;
+  /** 资源配置（JSON 字符串） */
+  ResourceConfig?: string | null;
+  /** 高级参数（JSON 字符串） */
+  AdvancedParams?: string | null;
+  /** 是否开启自动伸缩 */
+  AutoscalingEnabled?: boolean | null;
+  /** 最小副本数（自动伸缩时使用） */
+  MinReplicas?: number | null;
+  /** 最大副本数（自动伸缩时使用） */
+  MaxReplicas?: number | null;
+  /** 模型存储配置（Catalog JSON，记录模型 COS 挂载信息） */
+  ModelStorageConfig?: string | null;
+  /** AppId */
+  AppId?: number | null;
+  /** Uin */
+  Uin?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string | null;
+  /** 资源队列名称 */
+  Queue?: string | null;
+  /** SubAccountUin */
+  SubAccountUin?: string;
+  /** ray head 是否开启高可用 */
+  HeadHighAvailabilityEnabled?: boolean;
+  /** 镜像名称 */
+  Image?: string;
+  /** 镜像拉取方式 */
+  ImagePullType?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10967,6 +13251,16 @@ declare interface StopLabResponse {
   RequestId?: string;
 }
 
+declare interface StopMlflowServerRequest {
+  /** MlFlowServer的ID */
+  ServerId?: string;
+}
+
+declare interface StopMlflowServerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopRayClusterRequest {
   /** 集群ID */
   Id: string;
@@ -11019,6 +13313,66 @@ declare interface StopRayClusterResponse {
   StopTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitTrainingJobRequest {
+  /** 训练作业配置名称（≤255 字符） */
+  SpecName?: string;
+  /** 描述（≤1024 字符） */
+  Description?: string;
+  /** 启动命令 */
+  Entrypoint?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 镜像拉取策略（Always / IfNotPresent / Never） */
+  ImagePullPolicy?: string;
+  /** 代码包 COS URL */
+  CodePackageUrl?: string;
+  /** Ray runtime_env 配置 JSON（含 pip 依赖、env_vars 等，结构参见 2.1） */
+  RuntimeEnv?: string;
+  /** 资源配置模板 ID(可选) */
+  ResourceConfigId?: string;
+  /** 资源配置 JSON */
+  ResourceConfig?: string;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string;
+  /** 队列名称 */
+  Queue?: string;
+  /** 存储卷挂载配置 JSON（含 Source 字段标记用途） */
+  Catalog?: string;
+  /** 高级参数 JSON（不传则不更新） */
+  AdvancedOptions?: string;
+  /** 基础模型Uid */
+  BaseModelUid?: string;
+  /** 算法模式：sft / dpo / cpt / grpo（仅 POST_TRAINING 必填，CUSTOM_CODE / LAB 禁止传入） */
+  Mode?: string;
+  /** 数据集挂载列表（元素含 DatasetId 或 Catalog 二选一 + DatasetName + Eval 属性） */
+  Datasets?: DatasetMount[];
+  /** Checkpoint 产出配置（POST_TRAINING 必填；CUSTOM_CODE / LAB 可选） */
+  Checkpoint?: CheckpointConfig;
+  /** 是否启用断点续训 */
+  ResumeTraining?: boolean;
+  /** 调优参数（高级参数，仅 POST_TRAINING 使用；CUSTOM_CODE / LAB 禁止传入） */
+  TuningParams?: TrainingTuningParams;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 提交来源标签：LAB / CUSTOM_CODE（可选，用于溯源，不影响处理逻辑） */
+  Kind?: string;
+  /** MlFlow 实验追踪配置（可选，不传则不启用 MlFlow） */
+  MlFlowConfig?: MlFlowConfig;
+  /** 标签列表（TagKey-TagValue），用于将任务与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 产出模型名称（用于后续模型注册，当前仅保存） */
+  OutputModelName?: string;
+}
+
+declare interface SubmitTrainingJobResponse {
+  /** 训练作业配置详情 */
+  Spec?: TrainingJobSpec;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11089,6 +13443,40 @@ declare interface UnlockMetaDataRequest {
 }
 
 declare interface UnlockMetaDataResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateApiKeyStatusRequest {
+  /** apiKey的Id */
+  ApiKeyId: string;
+  /** apiKey的状态枚举值：Revoked： 不可用 */
+  Status: string;
+}
+
+declare interface UpdateApiKeyStatusResponse {
+  /** apiKey的Id */
+  ApiKeyId?: string;
+  /** apiKey名称 */
+  Name?: string;
+  /** apiKey内容 */
+  ApiKey?: string;
+  /** 推理服务id */
+  ServiceId?: string;
+  /** 推理服务名称 */
+  ServiceName?: string;
+  /** apiKey状态枚举值：Revoked： 不可用 */
+  Status?: string;
+  /** appid */
+  AppId?: number;
+  /** uin */
+  Uin?: string;
+  /** apiKey创建时间 */
+  CreateTime?: number;
+  /** apiKey更新时间 */
+  UpdateTime?: number;
+  /** 子账号uin */
+  SubAccountUin?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11193,6 +13581,62 @@ declare interface UpdateDataMaskStrategyRequest {
 }
 
 declare interface UpdateDataMaskStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateDeploymentRequest {
+  /** DeploymentId */
+  DeploymentId: string;
+  /** 模型版本（如 v1, v2），未提供时保持当前版本 */
+  ModelVersion?: string;
+  /** 推理引擎（vllm） */
+  Engine?: string;
+  /** 副本数 */
+  Replicas?: number;
+  /** 是否启用弹性伸缩 */
+  AutoscalingEnabled?: boolean;
+}
+
+declare interface UpdateDeploymentResponse {
+  /** DeploymentId */
+  DeploymentId?: string | null;
+  /** 部署名称 */
+  Name?: string | null;
+  /** 关联的服务ID */
+  ServiceId?: string | null;
+  /** 部署使用的模型版本号 */
+  ModelVersion?: string | null;
+  /** 部署状态（Running/Stopped/Deploying/Failed） */
+  Status?: string | null;
+  /** 推理引擎（vLLM/SGLang 等） */
+  Engine?: string | null;
+  /** 期望副本数 */
+  Replicas?: number | null;
+  /** 可用副本数 */
+  AvailableReplicas?: number | null;
+  /** 资源配置（JSON 字符串） */
+  ResourceConfig?: string | null;
+  /** 是否开启自动伸缩 */
+  AutoscalingEnabled?: boolean | null;
+  /** 模型存储配置（Catalog JSON，记录模型 COS 挂载信息） */
+  ModelStorageConfig?: string | null;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: number | null;
+  /** 更新时间（毫秒时间戳） */
+  UpdateTime?: number | null;
+  /** 资源分区 ID */
+  ResourcePartitionId?: string | null;
+  /** 资源队列名称 */
+  Queue?: string | null;
+  /** ray head 是否开启高可用 */
+  HeadHighAvailabilityEnabled?: boolean;
+  /** 镜像名称 */
+  Image?: string;
+  /** 资源分区名称 */
+  ResourcePartitionName?: string;
+  /** 高级参数 */
+  AdvancedOptions?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11777,6 +14221,66 @@ declare interface UpdateRowFilterResponse {
   RequestId?: string;
 }
 
+declare interface UpdateServiceAuthConfigRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** 是否启用 API-Key 鉴权 */
+  ApiKeyAuthEnabled: boolean;
+}
+
+declare interface UpdateServiceAuthConfigResponse {
+  /** 服务ID */
+  ServiceId?: string | null;
+  /** 服务名称 */
+  Name?: string | null;
+  /** 关联的模型UID */
+  ModelUid?: string | null;
+  /** 关联的模型名称 */
+  ModelName?: string | null;
+  /** 关联的模型版本号 */
+  ModelVersion?: string | null;
+  /** 模型标识符（OpenAI 兼容 API 中的 model 字段） */
+  ModelIdentifier?: string | null;
+  /** 关联模型的类型（LLM / VLM / Embedding / Reranker / TTS / ASR / CV / NLP / ML） */
+  ModelType?: string | null;
+  /** 服务状态（Running/Stopped/Deploying/Failed） */
+  Status?: string | null;
+  /** 服务端点URL */
+  EndpointUrl?: string | null;
+  /** OpenAI 兼容统一入口 URL（通过 API-Key 路由，适用于 LLM/Embedding/Reranker） */
+  UnifiedEndpointUrl?: string | null;
+  /** KServe V2 协议统一入口 URL（通过 API-Key + model name 路由，适用于 XGBoost 等传统 ML 模型） */
+  UnifiedV2EndpointUrl?: string | null;
+  /** 应用ID */
+  AppId?: number | null;
+  /** 主账号UIN */
+  Uin?: string | null;
+  /** 创建时间（Unix 时间戳，毫秒） */
+  CreateTime?: number | null;
+  /** 更新时间（Unix 时间戳，毫秒） */
+  UpdateTime?: number | null;
+  /** 部署数量 */
+  DeploymentCount?: number | null;
+  /** 是否存在至少一个运行中的部署 */
+  HasRunningDeployment?: boolean | null;
+  /** Ray Dashboard 访问地址（通过 Ingress 代理） */
+  RayDashboardUrl?: string | null;
+  /** 是否启用 API-Key 鉴权 */
+  ApiKeyAuthEnabled?: boolean | null;
+  /** 是否强制开启 API-Key 鉴权（生产环境为 true，不允许关闭） */
+  ApiKeyAuthForceEnabled?: boolean | null;
+  /** 是否跳过 TLS 证书验证（自签证书场景，前端 curl 命令需加 -k 参数） */
+  SkipTlsVerify?: boolean | null;
+  /** 子账号UIN（实际操作者） */
+  SubAccountUin?: string;
+  /** 运行中部署的 CPU 资源汇总 */
+  CpuResourceSummary?: CpuSummaryItem;
+  /** 资源配置（JSON 字符串，取自第一个部署） */
+  ResourceConfig?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateStandardEngineResourceGroupBaseInfoRequest {
   /** 引擎资源组名称 */
   EngineResourceGroupName: string;
@@ -11908,6 +14412,8 @@ declare interface Dlc {
   (): Versions;
   /** DMS元数据新增分区 {@link AddDMSPartitionsRequest} {@link AddDMSPartitionsResponse} */
   AddDMSPartitions(data?: AddDMSPartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<AddDMSPartitionsResponse>;
+  /** 为已有推理服务新增部署 {@link AddDeploymentRequest} {@link AddDeploymentResponse} */
+  AddDeployment(data: AddDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeploymentResponse>;
   /** 添加数据优化资源 {@link AddOptimizerEnginesRequest} {@link AddOptimizerEnginesResponse} */
   AddOptimizerEngines(data: AddOptimizerEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<AddOptimizerEnginesResponse>;
   /** 添加用户到工作组 {@link AddUsersToWorkGroupRequest} {@link AddUsersToWorkGroupResponse} */
@@ -11930,6 +14436,8 @@ declare interface Dlc {
   AttachUserPolicy(data: AttachUserPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachUserPolicyResponse>;
   /** 绑定鉴权策略到工作组 {@link AttachWorkGroupPolicyRequest} {@link AttachWorkGroupPolicyResponse} */
   AttachWorkGroupPolicy(data: AttachWorkGroupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachWorkGroupPolicyResponse>;
+  /** 绑定 API Key 到推理服务 {@link BindApiKeyRequest} {@link BindApiKeyResponse} */
+  BindApiKey(data: BindApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<BindApiKeyResponse>;
   /** 绑定工作组到用户 {@link BindWorkGroupsToUserRequest} {@link BindWorkGroupsToUserResponse} */
   BindWorkGroupsToUser(data: BindWorkGroupsToUserRequest, config?: AxiosRequestConfig): AxiosPromise<BindWorkGroupsToUserResponse>;
   /** 取消session中执行的任务 {@link CancelNotebookSessionStatementRequest} {@link CancelNotebookSessionStatementResponse} */
@@ -11944,22 +14452,36 @@ declare interface Dlc {
   CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** 批量取消任务 {@link CancelTasksRequest} {@link CancelTasksResponse} */
   CancelTasks(data: CancelTasksRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTasksResponse>;
+  /** 暂停（取消）实例 {@link CancelTrainingJobInstanceRequest} {@link CancelTrainingJobInstanceResponse} */
+  CancelTrainingJobInstance(data?: CancelTrainingJobInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTrainingJobInstanceResponse>;
+  /** 检查 API Key 名称是否重复 {@link CheckApiKeyNameRequest} {@link CheckApiKeyNameResponse} */
+  CheckApiKeyName(data: CheckApiKeyNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckApiKeyNameResponse>;
   /** 检查引擎用户自定义参数的有效性 {@link CheckDataEngineConfigPairsValidityRequest} {@link CheckDataEngineConfigPairsValidityResponse} */
   CheckDataEngineConfigPairsValidity(data?: CheckDataEngineConfigPairsValidityRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineConfigPairsValidityResponse>;
   /** 查看集群是否能回滚 {@link CheckDataEngineImageCanBeRollbackRequest} {@link CheckDataEngineImageCanBeRollbackResponse} */
   CheckDataEngineImageCanBeRollback(data: CheckDataEngineImageCanBeRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeRollbackResponse>;
   /** 查看集群镜像是否能够升级 {@link CheckDataEngineImageCanBeUpgradeRequest} {@link CheckDataEngineImageCanBeUpgradeResponse} */
   CheckDataEngineImageCanBeUpgrade(data: CheckDataEngineImageCanBeUpgradeRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDataEngineImageCanBeUpgradeResponse>;
+  /** 检查作业配置名是否可用 {@link CheckJobSpecNameRequest} {@link CheckJobSpecNameResponse} */
+  CheckJobSpecName(data?: CheckJobSpecNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckJobSpecNameResponse>;
   /** 元数据锁检查 {@link CheckLockMetaDataRequest} {@link CheckLockMetaDataResponse} */
   CheckLockMetaData(data: CheckLockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLockMetaDataResponse>;
+  /** 检查模型标识符是否重复 {@link CheckModelIdentifierRequest} {@link CheckModelIdentifierResponse} */
+  CheckModelIdentifier(data: CheckModelIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<CheckModelIdentifierResponse>;
   /** 变配校验 {@link CheckModifyPartitionRequest} {@link CheckModifyPartitionResponse} */
   CheckModifyPartition(data: CheckModifyPartitionRequest, config?: AxiosRequestConfig): AxiosPromise<CheckModifyPartitionResponse>;
   /** 资源队列名称合法性检测 {@link CheckQueueNameRequest} {@link CheckQueueNameResponse} */
   CheckQueueName(data: CheckQueueNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckQueueNameResponse>;
   /** 校验资源名称 {@link CheckResourceNameRequest} {@link CheckResourceNameResponse} */
   CheckResourceName(data: CheckResourceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckResourceNameResponse>;
+  /** 检查推理服务名称是否重复 {@link CheckServiceNameRequest} {@link CheckServiceNameResponse} */
+  CheckServiceName(data: CheckServiceNameRequest, config?: AxiosRequestConfig): AxiosPromise<CheckServiceNameResponse>;
   /** 复制作业配置 {@link CopyJobSpecRequest} {@link CopyJobSpecResponse} */
   CopyJobSpec(data: CopyJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<CopyJobSpecResponse>;
+  /** 创建 API Key {@link CreateApiKeyRequest} {@link CreateApiKeyResponse} */
+  CreateApiKey(data: CreateApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateApiKeyResponse>;
+  /** 创建性能评测任务 {@link CreateBenchmarkTaskRequest} {@link CreateBenchmarkTaskResponse} */
+  CreateBenchmarkTask(data: CreateBenchmarkTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBenchmarkTaskResponse>;
   /** 创建元数据加速桶和产品绑定关系 {@link CreateCHDFSBindingProductRequest} {@link CreateCHDFSBindingProductResponse} */
   CreateCHDFSBindingProduct(data: CreateCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCHDFSBindingProductResponse>;
   /** 创建集群组 {@link CreateClusterGroupRequest} {@link CreateClusterGroupResponse} */
@@ -11992,6 +14514,8 @@ declare interface Dlc {
   CreateLab(data: CreateLabRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLabResponse>;
   /** 创建元数据库 {@link CreateMetaDatabaseRequest} {@link CreateMetaDatabaseResponse} */
   CreateMetaDatabase(data?: CreateMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMetaDatabaseResponse>;
+  /** 创建 MLflow Server 请求 {@link CreateMlflowServerRequest} {@link CreateMlflowServerResponse} */
+  CreateMlflowServer(data?: CreateMlflowServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMlflowServerResponse>;
   /** 创建模型新版本 {@link CreateModelVersionRequest} {@link CreateModelVersionResponse} */
   CreateModelVersion(data: CreateModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelVersionResponse>;
   /** 创建交互式session（notebook） {@link CreateNotebookSessionRequest} {@link CreateNotebookSessionResponse} */
@@ -12036,6 +14560,8 @@ declare interface Dlc {
   CreateTasksInOrder(data: CreateTasksInOrderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTasksInOrderResponse>;
   /** 创建TC-Iceberg表 {@link CreateTcIcebergTableRequest} {@link CreateTcIcebergTableResponse} */
   CreateTcIcebergTable(data: CreateTcIcebergTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTcIcebergTableResponse>;
+  /** 基于配置创建实例并提交 RayJob {@link CreateTrainingJobInstanceRequest} {@link CreateTrainingJobInstanceResponse} */
+  CreateTrainingJobInstance(data: CreateTrainingJobInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingJobInstanceResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
   /** 创建用户角色 {@link CreateUserRoleRequest} {@link CreateUserRoleResponse} */
@@ -12044,6 +14570,10 @@ declare interface Dlc {
   CreateUserVpcConnection(data: CreateUserVpcConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserVpcConnectionResponse>;
   /** 创建工作组 {@link CreateWorkGroupRequest} {@link CreateWorkGroupResponse} */
   CreateWorkGroup(data: CreateWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkGroupResponse>;
+  /** 删除 API Key {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
+  DeleteApiKey(data?: DeleteApiKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteApiKeyResponse>;
+  /** 删除性能评测任务 {@link DeleteBenchmarkTaskRequest} {@link DeleteBenchmarkTaskResponse} */
+  DeleteBenchmarkTask(data: DeleteBenchmarkTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBenchmarkTaskResponse>;
   /** 删除元数据加速桶和产品绑定关系 {@link DeleteCHDFSBindingProductRequest} {@link DeleteCHDFSBindingProductResponse} */
   DeleteCHDFSBindingProduct(data: DeleteCHDFSBindingProductRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCHDFSBindingProductResponse>;
   /** 删除集群组 {@link DeleteClusterGroupRequest} {@link DeleteClusterGroupResponse} */
@@ -12052,12 +14582,22 @@ declare interface Dlc {
   DeleteDataEngine(data: DeleteDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataEngineResponse>;
   /** 删除数据脱敏策略 {@link DeleteDataMaskStrategyRequest} {@link DeleteDataMaskStrategyResponse} */
   DeleteDataMaskStrategy(data?: DeleteDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDataMaskStrategyResponse>;
+  /** 删除指定部署 {@link DeleteDeploymentRequest} {@link DeleteDeploymentResponse} */
+  DeleteDeployment(data: DeleteDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeploymentResponse>;
+  /** 删除推理服务 {@link DeleteInferenceServiceRequest} {@link DeleteInferenceServiceResponse} */
+  DeleteInferenceService(data: DeleteInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInferenceServiceResponse>;
   /** 删除作业配置 {@link DeleteJobSpecRequest} {@link DeleteJobSpecResponse} */
   DeleteJobSpec(data: DeleteJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteJobSpecResponse>;
   /** 删除实验室 {@link DeleteLabRequest} {@link DeleteLabResponse} */
   DeleteLab(data: DeleteLabRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLabResponse>;
   /** 删除元数据库 {@link DeleteMetaDatabaseRequest} {@link DeleteMetaDatabaseResponse} */
   DeleteMetaDatabase(data: DeleteMetaDatabaseRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMetaDatabaseResponse>;
+  /** 删除 Mlflow Server {@link DeleteMlflowServerRequest} {@link DeleteMlflowServerResponse} */
+  DeleteMlflowServer(data?: DeleteMlflowServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMlflowServerResponse>;
+  /** 删除模型及其所有版本 {@link DeleteModelRequest} {@link DeleteModelResponse} */
+  DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
+  /** 删除模型版本 {@link DeleteModelVersionRequest} {@link DeleteModelVersionResponse} */
+  DeleteModelVersion(data: DeleteModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelVersionResponse>;
   /** 销毁EG SparkSession {@link DeleteNativeSparkSessionRequest} {@link DeleteNativeSparkSessionResponse} */
   DeleteNativeSparkSession(data?: DeleteNativeSparkSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeSparkSessionResponse>;
   /** 删除交互式session（notebook） {@link DeleteNotebookSessionRequest} {@link DeleteNotebookSessionResponse} */
@@ -12080,6 +14620,10 @@ declare interface Dlc {
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 移除第三方平台访问用户 {@link DeleteThirdPartyAccessUserRequest} {@link DeleteThirdPartyAccessUserResponse} */
   DeleteThirdPartyAccessUser(data?: DeleteThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteThirdPartyAccessUserResponse>;
+  /** 删除训练作业实例 {@link DeleteTrainingJobInstanceRequest} {@link DeleteTrainingJobInstanceResponse} */
+  DeleteTrainingJobInstance(data?: DeleteTrainingJobInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingJobInstanceResponse>;
+  /** 软删除训练作业配置 {@link DeleteTrainingJobSpecRequest} {@link DeleteTrainingJobSpecResponse} */
+  DeleteTrainingJobSpec(data: DeleteTrainingJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingJobSpecResponse>;
   /** 删除用户 {@link DeleteUserRequest} {@link DeleteUserResponse} */
   DeleteUser(data: DeleteUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserResponse>;
   /** 删除用户vpc连接 {@link DeleteUserVpcConnectionRequest} {@link DeleteUserVpcConnectionResponse} */
@@ -12090,6 +14634,12 @@ declare interface Dlc {
   DeleteWorkGroup(data: DeleteWorkGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkGroupResponse>;
   /** 查询高级设置 {@link DescribeAdvancedStoreLocationRequest} {@link DescribeAdvancedStoreLocationResponse} */
   DescribeAdvancedStoreLocation(data?: DescribeAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdvancedStoreLocationResponse>;
+  /** 查询 TKE 集群可绑定的 Prometheus 实例 {@link DescribeBindablePrometheusRequest} {@link DescribeBindablePrometheusResponse} */
+  DescribeBindablePrometheus(data: DescribeBindablePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindablePrometheusResponse>;
+  /** 查询 CLS 日志主题列表 {@link DescribeClsTopicsRequest} {@link DescribeClsTopicsResponse} */
+  DescribeClsTopics(data?: DescribeClsTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClsTopicsResponse>;
+  /** 查询 TKE 集群事件日志开关 {@link DescribeClusterEventLogSwitchRequest} {@link DescribeClusterEventLogSwitchResponse} */
+  DescribeClusterEventLogSwitch(data: DescribeClusterEventLogSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterEventLogSwitchResponse>;
   /** 查询集群组详情 {@link DescribeClusterGroupRequest} {@link DescribeClusterGroupResponse} */
   DescribeClusterGroup(data: DescribeClusterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterGroupResponse>;
   /** 查询计算组关联 cluster 列表 {@link DescribeClusterGroupClustersRequest} {@link DescribeClusterGroupClustersResponse} */
@@ -12128,6 +14678,8 @@ declare interface Dlc {
   DescribeDatabases(data?: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询数据源信息 {@link DescribeDatasourceConnectionRequest} {@link DescribeDatasourceConnectionResponse} */
   DescribeDatasourceConnection(data?: DescribeDatasourceConnectionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatasourceConnectionResponse>;
+  /** 查询 EMR 集群详细信息 {@link DescribeEmrClusterInfoRequest} {@link DescribeEmrClusterInfoResponse} */
+  DescribeEmrClusterInfo(data: DescribeEmrClusterInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrClusterInfoResponse>;
   /** 查询引擎网络信息 {@link DescribeEngineNetworksRequest} {@link DescribeEngineNetworksResponse} */
   DescribeEngineNetworks(data?: DescribeEngineNetworksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEngineNetworksResponse>;
   /** 获取引擎节点规格 {@link DescribeEngineNodeSpecRequest} {@link DescribeEngineNodeSpecResponse} */
@@ -12152,6 +14704,18 @@ declare interface Dlc {
   DescribeMCPTask(data?: DescribeMCPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResponse>;
   /** MCP获取任务结果查询 {@link DescribeMCPTaskResultRequest} {@link DescribeMCPTaskResultResponse} */
   DescribeMCPTaskResult(data: DescribeMCPTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTaskResultResponse>;
+  /** 查询训练实例的 MLflow 接入配置 {@link DescribeMlFlowConfigRequest} {@link DescribeMlFlowConfigResponse} */
+  DescribeMlFlowConfig(data: DescribeMlFlowConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMlFlowConfigResponse>;
+  /** 查询 MLflow Server详情 {@link DescribeMlflowServerRequest} {@link DescribeMlflowServerResponse} */
+  DescribeMlflowServer(data?: DescribeMlflowServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMlflowServerResponse>;
+  /** 查询 MlFlow Server K8s 事件 {@link DescribeMlflowServerEventsRequest} {@link DescribeMlflowServerEventsResponse} */
+  DescribeMlflowServerEvents(data?: DescribeMlflowServerEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMlflowServerEventsResponse>;
+  /** 查询 MlFlow Server Pods 列表 {@link DescribeMlflowServerPodsRequest} {@link DescribeMlflowServerPodsResponse} */
+  DescribeMlflowServerPods(data?: DescribeMlflowServerPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMlflowServerPodsResponse>;
+  /** 获取模型可用的推理引擎列表 {@link DescribeModelEnginesRequest} {@link DescribeModelEnginesResponse} */
+  DescribeModelEngines(data: DescribeModelEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelEnginesResponse>;
+  /** 查询指定模型类型下可选的任务类型列表 {@link DescribeModelTaskOptionsRequest} {@link DescribeModelTaskOptionsResponse} */
+  DescribeModelTaskOptions(data?: DescribeModelTaskOptionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelTaskOptionsResponse>;
   /** 查询标准引擎spark session列表 {@link DescribeNativeSparkSessionsRequest} {@link DescribeNativeSparkSessionsResponse} */
   DescribeNativeSparkSessions(data?: DescribeNativeSparkSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNativeSparkSessionsResponse>;
   /** 查询网络配置列表 {@link DescribeNetworkConnectionsRequest} {@link DescribeNetworkConnectionsResponse} */
@@ -12176,6 +14740,10 @@ declare interface Dlc {
   DescribePartitionQueues(data: DescribePartitionQueuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionQueuesResponse>;
   /** 查询分区列表 {@link DescribePartitionsRequest} {@link DescribePartitionsResponse} */
   DescribePartitions(data?: DescribePartitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePartitionsResponse>;
+  /** 获取零代码后训练的推荐参数配置 {@link DescribePostTrainingPresetRequest} {@link DescribePostTrainingPresetResponse} */
+  DescribePostTrainingPreset(data: DescribePostTrainingPresetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostTrainingPresetResponse>;
+  /** 获取推荐高级参数 {@link DescribeRecommendedParamsRequest} {@link DescribeRecommendedParamsResponse} */
+  DescribeRecommendedParams(data: DescribeRecommendedParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecommendedParamsResponse>;
   /** 展示标准引擎资源组资源用量 {@link DescribeResourceGroupUsageInfoRequest} {@link DescribeResourceGroupUsageInfoResponse} */
   DescribeResourceGroupUsageInfo(data: DescribeResourceGroupUsageInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupUsageInfoResponse>;
   /** 查询结果下载任务 {@link DescribeResultDownloadRequest} {@link DescribeResultDownloadResponse} */
@@ -12240,6 +14808,14 @@ declare interface Dlc {
   DescribeTasksOverview(data?: DescribeTasksOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksOverviewResponse>;
   /** 查询开通的第三方平台访问用户信息 {@link DescribeThirdPartyAccessUserRequest} {@link DescribeThirdPartyAccessUserResponse} */
   DescribeThirdPartyAccessUser(data?: DescribeThirdPartyAccessUserRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeThirdPartyAccessUserResponse>;
+  /** 查询已导入的 TKE 集群详情 {@link DescribeTkeClusterImportInfoRequest} {@link DescribeTkeClusterImportInfoResponse} */
+  DescribeTkeClusterImportInfo(data: DescribeTkeClusterImportInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTkeClusterImportInfoResponse>;
+  /** 列出训练实例下的 Checkpoint 文件 {@link DescribeTrainingCheckpointsRequest} {@link DescribeTrainingCheckpointsResponse} */
+  DescribeTrainingCheckpoints(data?: DescribeTrainingCheckpointsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingCheckpointsResponse>;
+  /** 查询训练实例详情 {@link DescribeTrainingJobInstanceRequest} {@link DescribeTrainingJobInstanceResponse} */
+  DescribeTrainingJobInstance(data: DescribeTrainingJobInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingJobInstanceResponse>;
+  /** 获取训练作业配置详情 {@link DescribeTrainingJobSpecRequest} {@link DescribeTrainingJobSpecResponse} */
+  DescribeTrainingJobSpec(data?: DescribeTrainingJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingJobSpecResponse>;
   /** 获取UDF权限信息 {@link DescribeUDFPolicyRequest} {@link DescribeUDFPolicyResponse} */
   DescribeUDFPolicy(data: DescribeUDFPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUDFPolicyResponse>;
   /** 查询可更新配置的引擎列表 {@link DescribeUpdatableDataEnginesRequest} {@link DescribeUpdatableDataEnginesResponse} */
@@ -12338,12 +14914,28 @@ declare interface Dlc {
   GetResourceConfig(data: GetResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceConfigResponse>;
   /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */
   GrantDLCCatalogAccess(data: GrantDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<GrantDLCCatalogAccessResponse>;
+  /** 导入外部集群（注册资源池） {@link ImportExternalClusterRequest} {@link ImportExternalClusterResponse} */
+  ImportExternalCluster(data: ImportExternalClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ImportExternalClusterResponse>;
+  /** 导入 TKE 集群（注册 EMR-TKE 资源池） {@link ImportTkeClusterRequest} {@link ImportTkeClusterResponse} */
+  ImportTkeCluster(data: ImportTkeClusterRequest, config?: AxiosRequestConfig): AxiosPromise<ImportTkeClusterResponse>;
   /** 开通TCLake {@link InitializeTCLakeRequest} {@link InitializeTCLakeResponse} */
   InitializeTCLake(data?: InitializeTCLakeRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeTCLakeResponse>;
   /** 批量启动标准引擎资源组 {@link LaunchStandardEngineResourceGroupsRequest} {@link LaunchStandardEngineResourceGroupsResponse} */
   LaunchStandardEngineResourceGroups(data: LaunchStandardEngineResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<LaunchStandardEngineResourceGroupsResponse>;
+  /** 列出 API Key {@link ListApiKeysRequest} {@link ListApiKeysResponse} */
+  ListApiKeys(data?: ListApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListApiKeysResponse>;
+  /** 列出空闲 API Key（未绑定服务） {@link ListAvailableApiKeysRequest} {@link ListAvailableApiKeysResponse} */
+  ListAvailableApiKeys(data?: ListAvailableApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListAvailableApiKeysResponse>;
+  /** 查询评测排行榜 {@link ListBenchmarkSummaryRequest} {@link ListBenchmarkSummaryResponse} */
+  ListBenchmarkSummary(data?: ListBenchmarkSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<ListBenchmarkSummaryResponse>;
+  /** 列出性能评测任务 {@link ListBenchmarkTasksRequest} {@link ListBenchmarkTasksResponse} */
+  ListBenchmarkTasks(data: ListBenchmarkTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListBenchmarkTasksResponse>;
   /** 列出所有集群组 {@link ListClusterGroupsRequest} {@link ListClusterGroupsResponse} */
   ListClusterGroups(data?: ListClusterGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListClusterGroupsResponse>;
+  /** 列出部署的副本列表 {@link ListDeploymentReplicasRequest} {@link ListDeploymentReplicasResponse} */
+  ListDeploymentReplicas(data: ListDeploymentReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeploymentReplicasResponse>;
+  /** 分页列出推理服务的部署列表 {@link ListDeploymentsRequest} {@link ListDeploymentsResponse} */
+  ListDeployments(data: ListDeploymentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeploymentsResponse>;
   /** 获取所有案例分类 {@link ListExampleCategoriesRequest} {@link ListExampleCategoriesResponse} */
   ListExampleCategories(data?: ListExampleCategoriesRequest, config?: AxiosRequestConfig): AxiosPromise<ListExampleCategoriesResponse>;
   /** 获取所有案例难度（去重） {@link ListExampleDifficultiesRequest} {@link ListExampleDifficultiesResponse} */
@@ -12366,6 +14958,10 @@ declare interface Dlc {
   ListJobsBySpec(data: ListJobsBySpecRequest, config?: AxiosRequestConfig): AxiosPromise<ListJobsBySpecResponse>;
   /** 列出实验室 {@link ListLabsRequest} {@link ListLabsResponse} */
   ListLabs(data?: ListLabsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLabsResponse>;
+  /** 查询 MlFlow Server 关联的训练实例列表 {@link ListMlflowServerTrainingInstancesRequest} {@link ListMlflowServerTrainingInstancesResponse} */
+  ListMlflowServerTrainingInstances(data?: ListMlflowServerTrainingInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<ListMlflowServerTrainingInstancesResponse>;
+  /** 列出 MLflow Server {@link ListMlflowServersRequest} {@link ListMlflowServersResponse} */
+  ListMlflowServers(data?: ListMlflowServersRequest, config?: AxiosRequestConfig): AxiosPromise<ListMlflowServersResponse>;
   /** 列出模型所有版本 {@link ListModelVersionsRequest} {@link ListModelVersionsResponse} */
   ListModelVersions(data: ListModelVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelVersionsResponse>;
   /** 列出指定集群下的作业 {@link ListRayClusterJobsRequest} {@link ListRayClusterJobsResponse} */
@@ -12374,12 +14970,22 @@ declare interface Dlc {
   ListRayClusters(data?: ListRayClustersRequest, config?: AxiosRequestConfig): AxiosPromise<ListRayClustersResponse>;
   /** 列出Ray任务 {@link ListRayJobsRequest} {@link ListRayJobsResponse} */
   ListRayJobs(data?: ListRayJobsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRayJobsResponse>;
+  /** 列出用户同地域负载均衡 {@link ListRegionLbsRequest} {@link ListRegionLbsResponse} */
+  ListRegionLbs(data: ListRegionLbsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRegionLbsResponse>;
   /** 列出所有资源配置模板 {@link ListResourceConfigsRequest} {@link ListResourceConfigsResponse} */
   ListResourceConfigs(data?: ListResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceConfigsResponse>;
+  /** 列出指定推理服务绑定的 API Key {@link ListServiceApiKeysRequest} {@link ListServiceApiKeysResponse} */
+  ListServiceApiKeys(data: ListServiceApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListServiceApiKeysResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 日志名称列表 {@link ListTaskJobLogNameRequest} {@link ListTaskJobLogNameResponse} */
   ListTaskJobLogName(data: ListTaskJobLogNameRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogNameResponse>;
+  /** 获取tke纳管的用户cos {@link ListTkeCosBucketsRequest} {@link ListTkeCosBucketsResponse} */
+  ListTkeCosBuckets(data?: ListTkeCosBucketsRequest, config?: AxiosRequestConfig): AxiosPromise<ListTkeCosBucketsResponse>;
+  /** 列出训练作业实例 {@link ListTrainingJobInstanceRequest} {@link ListTrainingJobInstanceResponse} */
+  ListTrainingJobInstance(data?: ListTrainingJobInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ListTrainingJobInstanceResponse>;
+  /** 列出TCRay训练作业配置 {@link ListTrainingJobSpecRequest} {@link ListTrainingJobSpecResponse} */
+  ListTrainingJobSpec(data?: ListTrainingJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ListTrainingJobSpecResponse>;
   /** 元数据锁 {@link LockMetaDataRequest} {@link LockMetaDataResponse} */
   LockMetaData(data: LockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<LockMetaDataResponse>;
   /** 修改高级设置 {@link ModifyAdvancedStoreLocationRequest} {@link ModifyAdvancedStoreLocationResponse} */
@@ -12402,6 +15008,8 @@ declare interface Dlc {
   ModifySparkAppBatch(data: ModifySparkAppBatchRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppBatchResponse>;
   /** 更新tdlc spark作业 {@link ModifySparkAppForTDLCRequest} {@link ModifySparkAppForTDLCResponse} */
   ModifySparkAppForTDLC(data: ModifySparkAppForTDLCRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySparkAppForTDLCResponse>;
+  /** 就地更新训练作业配置 {@link ModifyTrainingJobSpecRequest} {@link ModifyTrainingJobSpecResponse} */
+  ModifyTrainingJobSpec(data?: ModifyTrainingJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTrainingJobSpecResponse>;
   /** 修改用户信息 {@link ModifyUserRequest} {@link ModifyUserResponse} */
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 修改用户类型 {@link ModifyUserTypeRequest} {@link ModifyUserTypeResponse} */
@@ -12428,10 +15036,16 @@ declare interface Dlc {
   RenewDataEngine(data: RenewDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDataEngineResponse>;
   /** 上报元数据心跳 {@link ReportHeartbeatMetaDataRequest} {@link ReportHeartbeatMetaDataResponse} */
   ReportHeartbeatMetaData(data?: ReportHeartbeatMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<ReportHeartbeatMetaDataResponse>;
+  /** 重新运行性能评测任务 {@link RerunBenchmarkTaskRequest} {@link RerunBenchmarkTaskResponse} */
+  RerunBenchmarkTask(data: RerunBenchmarkTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RerunBenchmarkTaskResponse>;
   /** 重启引擎 {@link RestartDataEngineRequest} {@link RestartDataEngineResponse} */
   RestartDataEngine(data: RestartDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDataEngineResponse>;
+  /** 再次运行部署（以当前配置重新部署） {@link RestartDeploymentRequest} {@link RestartDeploymentResponse} */
+  RestartDeployment(data: RestartDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<RestartDeploymentResponse>;
   /** 重启推理服务 {@link RestartInferenceServiceRequest} {@link RestartInferenceServiceResponse} */
   RestartInferenceService(data: RestartInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<RestartInferenceServiceResponse>;
+  /** 断点续训（克隆实例） {@link ResumeTrainingJobInstanceRequest} {@link ResumeTrainingJobInstanceResponse} */
+  ResumeTrainingJobInstance(data?: ResumeTrainingJobInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeTrainingJobInstanceResponse>;
   /** 撤销DLCCatalog访问权限 {@link RevokeDLCCatalogAccessRequest} {@link RevokeDLCCatalogAccessResponse} */
   RevokeDLCCatalogAccess(data: RevokeDLCCatalogAccessRequest, config?: AxiosRequestConfig): AxiosPromise<RevokeDLCCatalogAccessResponse>;
   /** 回滚引擎镜像版本 {@link RollbackDataEngineImageRequest} {@link RollbackDataEngineImageResponse} */
@@ -12442,14 +15056,24 @@ declare interface Dlc {
   SetOptimizerPolicy(data: SetOptimizerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<SetOptimizerPolicyResponse>;
   /** 启动实验室 {@link StartLabRequest} {@link StartLabResponse} */
   StartLab(data: StartLabRequest, config?: AxiosRequestConfig): AxiosPromise<StartLabResponse>;
+  /** 启动 MlFlow Server（apply K8s 资源，幂等可重试） {@link StartMlflowServerRequest} {@link StartMlflowServerResponse} */
+  StartMlflowServer(data?: StartMlflowServerRequest, config?: AxiosRequestConfig): AxiosPromise<StartMlflowServerResponse>;
   /** 启动集群 {@link StartRayClusterRequest} {@link StartRayClusterResponse} */
   StartRayCluster(data: StartRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<StartRayClusterResponse>;
+  /** 停止性能评测任务 {@link StopBenchmarkTaskRequest} {@link StopBenchmarkTaskResponse} */
+  StopBenchmarkTask(data: StopBenchmarkTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopBenchmarkTaskResponse>;
+  /** 停止部署 {@link StopDeploymentRequest} {@link StopDeploymentResponse} */
+  StopDeployment(data: StopDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<StopDeploymentResponse>;
   /** 停止推理服务 {@link StopInferenceServiceRequest} {@link StopInferenceServiceResponse} */
   StopInferenceService(data: StopInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<StopInferenceServiceResponse>;
   /** 停止实验室 {@link StopLabRequest} {@link StopLabResponse} */
   StopLab(data: StopLabRequest, config?: AxiosRequestConfig): AxiosPromise<StopLabResponse>;
+  /** 停止 MlFlow Server {@link StopMlflowServerRequest} {@link StopMlflowServerResponse} */
+  StopMlflowServer(data?: StopMlflowServerRequest, config?: AxiosRequestConfig): AxiosPromise<StopMlflowServerResponse>;
   /** 停止集群 {@link StopRayClusterRequest} {@link StopRayClusterResponse} */
   StopRayCluster(data: StopRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<StopRayClusterResponse>;
+  /** 统一提交训练作业 {@link SubmitTrainingJobRequest} {@link SubmitTrainingJobResponse} */
+  SubmitTrainingJob(data?: SubmitTrainingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTrainingJobResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */
   SuspendResumeDataEngine(data: SuspendResumeDataEngineRequest, config?: AxiosRequestConfig): AxiosPromise<SuspendResumeDataEngineResponse>;
   /** 切换主备集群 {@link SwitchDataEngineRequest} {@link SwitchDataEngineResponse} */
@@ -12462,6 +15086,8 @@ declare interface Dlc {
   UnboundDatasourceHouse(data?: UnboundDatasourceHouseRequest, config?: AxiosRequestConfig): AxiosPromise<UnboundDatasourceHouseResponse>;
   /** 元数据解锁 {@link UnlockMetaDataRequest} {@link UnlockMetaDataResponse} */
   UnlockMetaData(data: UnlockMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<UnlockMetaDataResponse>;
+  /** 更新 API Key 状态 {@link UpdateApiKeyStatusRequest} {@link UpdateApiKeyStatusResponse} */
+  UpdateApiKeyStatus(data: UpdateApiKeyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateApiKeyStatusResponse>;
   /** 更新集群组 {@link UpdateClusterGroupRequest} {@link UpdateClusterGroupResponse} */
   UpdateClusterGroup(data: UpdateClusterGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateClusterGroupResponse>;
   /** 更新数据引擎配置 {@link UpdateDataEngineRequest} {@link UpdateDataEngineResponse} */
@@ -12470,6 +15096,8 @@ declare interface Dlc {
   UpdateDataEngineConfig(data: UpdateDataEngineConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataEngineConfigResponse>;
   /** 更新数据脱敏策略 {@link UpdateDataMaskStrategyRequest} {@link UpdateDataMaskStrategyResponse} */
   UpdateDataMaskStrategy(data?: UpdateDataMaskStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDataMaskStrategyResponse>;
+  /** 更新部署配置 {@link UpdateDeploymentRequest} {@link UpdateDeploymentResponse} */
+  UpdateDeployment(data: UpdateDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateDeploymentResponse>;
   /** 更新标准引擎资源组网络配置信息 {@link UpdateEngineResourceGroupNetworkConfigInfoRequest} {@link UpdateEngineResourceGroupNetworkConfigInfoResponse} */
   UpdateEngineResourceGroupNetworkConfigInfo(data: UpdateEngineResourceGroupNetworkConfigInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateEngineResourceGroupNetworkConfigInfoResponse>;
   /** 更新推理模型 {@link UpdateInferenceModelRequest} {@link UpdateInferenceModelResponse} */
@@ -12490,6 +15118,8 @@ declare interface Dlc {
   UpdateResourceConfig(data: UpdateResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateResourceConfigResponse>;
   /** 更新行过滤规则 {@link UpdateRowFilterRequest} {@link UpdateRowFilterResponse} */
   UpdateRowFilter(data: UpdateRowFilterRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRowFilterResponse>;
+  /** 更新推理服务的 API-Key 鉴权配置 {@link UpdateServiceAuthConfigRequest} {@link UpdateServiceAuthConfigResponse} */
+  UpdateServiceAuthConfig(data: UpdateServiceAuthConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateServiceAuthConfigResponse>;
   /** 更新标准引擎资源组基础信息 {@link UpdateStandardEngineResourceGroupBaseInfoRequest} {@link UpdateStandardEngineResourceGroupBaseInfoResponse} */
   UpdateStandardEngineResourceGroupBaseInfo(data: UpdateStandardEngineResourceGroupBaseInfoRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStandardEngineResourceGroupBaseInfoResponse>;
   /** 更新标准引擎资源组参数配置信息 {@link UpdateStandardEngineResourceGroupConfigInfoRequest} {@link UpdateStandardEngineResourceGroupConfigInfoResponse} */

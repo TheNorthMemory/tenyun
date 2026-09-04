@@ -2273,7 +2273,7 @@ declare namespace V20180717 {
     OffPeak?: string;
     /** 是否开启vidu智能插帧。取值有： Enabled：开启； Disabled：关闭； */
     FrameInterpolate?: string;
-    /** 是否开启图标水印。取值有： Enabled：开启； Disabled：关闭；目前支持的模型有 Vidu，其他模型暂不支持。 */
+    /** 是否开启图标水印。取值有： Enabled：开启； Disabled：关闭； */
     LogoAdd?: string;
     /** 是否为生成的视频添加背景音乐。枚举值：Enabled： 系统将从预设 BGM 库中自动挑选合适的音乐并添加。Disabled： 不添加BGM。默认值：Disabled */
     EnableBGM?: string;
@@ -8453,6 +8453,12 @@ declare namespace V20180717 {
     Progress?: number;
   }
 
+  /** 同步语音合成输出参数设置 */
+  interface TextToSpeechSyncOutputOption {
+    /** 合成结果输出类型枚举值：hex： 音频base64编码url： 音频url，有效期24小时 */
+    Type?: string;
+  }
+
   /** 文字水印模板 */
   interface TextWatermarkTemplateInput {
     /** 字体类型，目前可以支持两种：simkai.ttf：可以支持中文和英文；arial.ttf：仅支持英文。 */
@@ -9247,6 +9253,32 @@ declare namespace V20180717 {
   interface CloneVoiceAsyncResponse {
     /** 任务ID，使用该ID查询结果 */
     TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
+  interface CloneVoiceSyncRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 克隆音频base64编码。 */
+    AudioData?: string;
+    /** 克隆音频Url，AudioData为空时有效 */
+    AudioUrl?: string;
+    /** 克隆文件FileID，AudioData及AudioUrl为空时有效 */
+    AudioFileId?: string;
+    /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
+    LanguageBoost?: string;
+    /** 同步音色克隆拓展参数。ExtParam 支持的字段： text (string)：试听合成文本，最大 1000 字符；非空时必须同时传 tts_model，克隆成功后返回试听音频 DemoAudio。 model (string)：克隆模型，缺省 minimax-voice-clone。 tts_model (string)：合成试听音频用的模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；text 非空时必填。 text_lang (string)：试听文本语言。 voice_profile (object)：音色画像，可选字段： name (string)：音色名称。 description (string)：音色描述。 gender (string)：性别，可选 male / female / unknown。 age (string)：年龄段，可选 child / teenager / youth / middle_aged / senior / unknown。 languages (string[])：支持语言，如 ["zh", "en"]。 labels (string[])：音色标签，如 ["磁性"]。 scenes (string[])：适用场景，如 ["解说"]。 */
+    ExtParam?: string;
+  }
+
+  interface CloneVoiceSyncResponse {
+    /** 克隆得到的音色 */
+    VoiceId?: string;
+    /** 试听音频 */
+    DemoAudio?: string;
+    /** 拓展信息 */
+    ExtInfo?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -14323,6 +14355,32 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface TextToSpeechSyncRequest {
+    /** 合成文本，语音合成时必填，文本长度不超过2000字节 */
+    Text: string;
+    /** 音色Id，指定音色合成时填写，支持系统音色和设计、克隆音色。 */
+    VoiceId: string;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: string;
+    /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
+    LanguageBoost?: string;
+    /** 输出相关参数可以指定输出形式等。默认输出音频base64。 */
+    Output?: TextToSpeechSyncOutputOption;
+    /** 同步语音合成拓展参数。ExtParam 支持的字段： model (string)：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；默认 minimax-speech-2.8-hd。 voice_setting (object)：音色微调，可选字段： speed (float)：语速，[0.5, 2.0]，默认 1.0。 vol (float)：音量，(0, 10]，默认 1.0。 pitch (int)：音调，[-12, 12]，默认 0。 emotion (string)：情绪，可选 happy / sad / angry / fearful / disgusted / surprised / calm / fluent / whisper。 audio_setting (object)：音频输出参数，可选字段： sample_rate (int)：采样率，可选 8000 / 16000 / 22050 / 24000 / 32000 / 44100，默认 16000。 format (string)：音频格式，可选 mp3 / wav，默认 wav。 duration (float)：目标时长（秒）。 cut_silence (bool)：是否裁剪静音段。 */
+    ExtParam?: string;
+  }
+
+  interface TextToSpeechSyncResponse {
+    /** 合成音频的base64编码，wav格式。 */
+    AudioData?: string;
+    /** 合成音频url，有效期24小时 */
+    AudioUrl?: string;
+    /** 扩展信息，json字符串duration: 结果音频时长，单位秒 */
+    ExtInfo?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface UpdateAigcApiTokenRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -14413,6 +14471,8 @@ declare interface Vod {
   AttachMediaSubtitles(data: V20180717.AttachMediaSubtitlesRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.AttachMediaSubtitlesResponse>;
   /** 异步语音克隆 {@link V20180717.CloneVoiceAsyncRequest} {@link V20180717.CloneVoiceAsyncResponse} */
   CloneVoiceAsync(data: V20180717.CloneVoiceAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CloneVoiceAsyncResponse>;
+  /** 同步语音克隆 {@link V20180717.CloneVoiceSyncRequest} {@link V20180717.CloneVoiceSyncResponse} */
+  CloneVoiceSync(data: V20180717.CloneVoiceSyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CloneVoiceSyncResponse>;
   /** 确认上传 {@link V20180717.CommitUploadRequest} {@link V20180717.CommitUploadResponse} */
   CommitUpload(data: V20180717.CommitUploadRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CommitUploadResponse>;
   /** 视频合成 {@link V20180717.ComposeMediaRequest} {@link V20180717.ComposeMediaResponse} */
@@ -14873,6 +14933,8 @@ declare interface Vod {
   SplitMedia(data: V20180717.SplitMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SplitMediaResponse>;
   /** 异步语音合成 {@link V20180717.TextToSpeechAsyncRequest} {@link V20180717.TextToSpeechAsyncResponse} */
   TextToSpeechAsync(data: V20180717.TextToSpeechAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.TextToSpeechAsyncResponse>;
+  /** 同步语音合成 {@link V20180717.TextToSpeechSyncRequest} {@link V20180717.TextToSpeechSyncResponse} */
+  TextToSpeechSync(data: V20180717.TextToSpeechSyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.TextToSpeechSyncResponse>;
   /** 更新AIGC API Token {@link V20180717.UpdateAigcApiTokenRequest} {@link V20180717.UpdateAigcApiTokenResponse} */
   UpdateAigcApiToken(data: V20180717.UpdateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateAigcApiTokenResponse>;
   /** 更新音色信息 {@link V20180717.UpdateVoiceRequest} {@link V20180717.UpdateVoiceResponse} */

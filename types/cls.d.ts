@@ -2416,6 +2416,10 @@ declare interface RemoteWriteInfo {
   Enable?: number | null;
   /** 后端服务类型 */
   VirtualGatewayType?: number | null;
+  /** 云时序数据库实例ID */
+  InstanceId?: string | null;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number | null;
 }
 
 /** 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数 */
@@ -2955,9 +2959,9 @@ declare interface ApplyConfigToMachineGroupResponse {
 }
 
 declare interface CancelRebuildIndexTaskRequest {
-  /** 日志主题ID */
+  /** 日志主题ID取值参考：DescribeTopics */
   TopicId: string;
-  /** 索引重建任务ID */
+  /** 索引重建任务ID取值参考：DescribeRebuildIndexTasks */
   TaskId: string;
 }
 
@@ -3909,7 +3913,7 @@ declare interface CreateRemoteWriteTaskRequest {
   Target: string;
   /** 目标地址 */
   RemoteWriteURL: string;
-  /** 鉴权类型0: 无鉴权1: basic_auth 2: token */
+  /** 鉴权类型0: 无鉴权1: basic_auth2: token */
   AuthType: number;
   /** 网络类型： 1 内网 2外网 */
   NetType: number;
@@ -3919,6 +3923,10 @@ declare interface CreateRemoteWriteTaskRequest {
   AuthInfo?: RemoteWriteAuthInfo;
   /** 后端服务类型0 CVM1025 CLB */
   VirtualGatewayType?: number;
+  /** 云时序数据库实例ID */
+  InstanceId?: string;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 默认值：2 */
+  HasServicesLog?: number;
 }
 
 declare interface CreateRemoteWriteTaskResponse {
@@ -5281,23 +5289,23 @@ declare interface DescribeKafkaRechargesResponse {
 }
 
 declare interface DescribeLogContextRequest {
-  /** 要查询的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 要查询的日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   TopicId: string;
-  /** 日志时间, 即 [检索分析日志](https://cloud.tencent.com/document/product/614/56447) 接口返回信息中Results结构体中的Time，需按照 UTC+8 时区将该毫秒级Unix时间戳转换为 YYYY-mm-dd HH:MM:SS.FFF 格式的字符串。 */
+  /** 日志时间, 即 检索分析日志 接口返回信息中Results结构体中的Time，需按照 UTC+8 时区将该毫秒级Unix时间戳转换为 YYYY-mm-dd HH:MM:SS.FFF 格式的字符串。 */
   BTime: string;
-  /** 日志包序号，即 [检索分析日志](https://cloud.tencent.com/document/product/614/56447) 接口返回信息中Results结构体中的PkgId。 */
+  /** 日志包序号，即 检索分析日志 接口返回信息中Results结构体中的PkgId。 */
   PkgId: string;
-  /** 日志包内一条日志的序号，即 [检索分析日志](https://cloud.tencent.com/document/product/614/56447) 接口返回信息中Results结构中的PkgLogId。 */
+  /** 日志包内一条日志的序号，即 检索分析日志 接口返回信息中Results结构中的PkgLogId。 */
   PkgLogId: number;
-  /** 前${PrevLogs}条日志，默认值10。 */
+  /** 前${PrevLogs}条日志，默认值10，最大100。 */
   PrevLogs?: number;
-  /** 后${NextLogs}条日志，默认值10。 */
+  /** 后${NextLogs}条日志，默认值10，最大100。 */
   NextLogs?: number;
   /** 检索语句，对日志上下文进行过滤，最大长度为12KB语句由 [检索条件]构成，不支持SQL语句 */
   Query?: string;
-  /** 上下文检索的开始时间，单位：毫秒级时间戳注意：- From为空时，表示上下文检索的开始时间不做限制- From和To非空时，From < To- 暂时仅支持上海 / 弗吉尼亚/ 新加坡地域 */
+  /** 上下文检索的开始时间，单位：毫秒级时间戳注意：From为空时，表示上下文检索的开始时间不做限制From和To非空时，From < To */
   From?: number;
-  /** 上下文检索的结束时间，单位：毫秒级时间戳。注意：- To为空时，表示上下文检索的结束时间不做限制- From和To非空时，From < To- 暂时仅支持上海 / 弗吉尼亚/ 新加坡地域 */
+  /** 上下文检索的结束时间，单位：毫秒级时间戳。注意：To为空时，表示上下文检索的结束时间不做限制From和To非空时，From < To */
   To?: number;
 }
 
@@ -6723,6 +6731,10 @@ declare interface ModifyRemoteWriteTaskRequest {
   AuthInfo?: RemoteWriteAuthInfo;
   /** 后端服务类型-1 没有0 CVM1025 CLB */
   VirtualGatewayType?: number;
+  /** 云时序数据库实例ID */
+  InstanceId?: string;
+  /** 是否开启投递服务日志。1：关闭，2：开启。 */
+  HasServicesLog?: number;
 }
 
 declare interface ModifyRemoteWriteTaskResponse {

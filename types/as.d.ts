@@ -168,20 +168,22 @@ declare interface AutoScalingNotification {
 
 /** 启动配置的数据盘配置信息。若不指定该参数，则默认不购买数据盘，当前仅支持购买的时候指定一个数据盘。 */
 declare interface DataDisk {
-  /** 数据盘类型。数据盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值与系统盘类型（SystemDisk.DiskType）保持一致。 */
+  /** 数据盘类型。数据盘类型限制详见云硬盘类型。取值范围：LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘默认取值与系统盘类型（SystemDisk.DiskType）保持一致。 */
   DiskType?: string;
-  /** 数据盘大小，单位：GB。不同数据盘类型取值范围不同，具体限制详见：[CVM实例配置](https://cloud.tencent.com/document/product/213/2177)。默认值为0，表示不购买数据盘。更多限制详见[产品文档](https://cloud.tencent.com/document/product/362/5145)。 */
+  /** 数据盘大小，单位：GB。不同数据盘类型取值范围不同，具体限制详见：CVM实例配置。默认值为0，表示不购买数据盘。更多限制详见产品文档。 */
   DiskSize?: number;
-  /** 数据盘快照 ID，可通过 [DescribeSnapshots](https://cloud.tencent.com/document/product/362/15647) 接口获取该参数。 */
+  /** 数据盘快照 ID，可通过 DescribeSnapshots 接口获取该参数。 */
   SnapshotId?: string | null;
   /** 数据盘是否随子机销毁。取值范围：TRUE：子机销毁时，销毁数据盘，只支持按小时后付费云盘FALSE：子机销毁时，保留数据盘 */
   DeleteWithInstance?: boolean | null;
-  /** 数据盘是否加密。取值范围：TRUE：加密FALSE：不加密 */
+  /** 是否加密数据盘。TRUE 表示加密，FALSE 表示不加密；具体盘型、地域及 KMS 规则由 CVM 校验。 */
   Encrypt?: boolean | null;
-  /** 云硬盘性能，单位：MB/s。使用此参数可给云硬盘购买额外的性能，功能介绍和类型限制详见：[增强型 SSD 云硬盘额外性能说明](https://cloud.tencent.com/document/product/362/51896)。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且 需容量 > 460GB。 */
+  /** 云硬盘性能，单位：MB/s。使用此参数可给云硬盘购买额外的性能，功能介绍和类型限制详见：增强型 SSD 云硬盘额外性能说明。当前仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且 需容量 > 460GB。 */
   ThroughputPerformance?: number | null;
   /** 突发性能。是否开启突发性能，默认取值为 false。当前该参数仅支持极速型云盘（CLOUD_TSSD）和增强型SSD云硬盘（CLOUD_HSSD）且需容量 > 460GB。注：内测中，需提单申请后使用。 */
   BurstPerformance?: boolean | null;
+  /** 数据盘加密使用的 KMS 密钥 ID。密钥有效性、权限以及与盘型和地域的适配性由 CVM 校验。 */
+  KmsKeyId?: string;
 }
 
 /** 伸缩活动状态详细描述。 */
@@ -412,7 +414,7 @@ declare interface LaunchConfiguration {
   AutoScalingGroupAbstractSet?: AutoScalingGroupAbstract[];
   /** 自定义数据。 */
   UserData?: string | null;
-  /** 启动配置创建时间，为标准`UTC`时间。 */
+  /** 启动配置创建时间，为标准UTC时间。 */
   CreatedTime?: string;
   /** 实例的增强服务启用情况与其设置。 */
   EnhancedService?: EnhancedService;
@@ -432,9 +434,9 @@ declare interface LaunchConfiguration {
   Tags?: Tag[];
   /** 版本号。 */
   VersionNumber?: number;
-  /** 更新时间，为标准`UTC`时间。 */
+  /** 更新时间，为标准UTC时间。 */
   UpdatedTime?: string;
-  /** CAM角色名称。可通过[DescribeRoleList](https://cloud.tencent.com/document/product/598/36223)接口返回值中的roleName获取。 */
+  /** CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。 */
   CamRoleName?: string;
   /** 上次操作时，InstanceTypesCheckPolicy 取值。 */
   LastOperationInstanceTypesCheckPolicy?: string;
@@ -456,6 +458,8 @@ declare interface LaunchConfiguration {
   ImageFamily?: string;
   /** 本地专用集群 ID。 */
   DedicatedClusterId?: string;
+  /** 启动配置的弹性网卡配置。 */
+  NetworkInterfaces?: NetworkInterface[];
 }
 
 /** 生命周期挂钩动作的执行结果信息。 */
@@ -556,6 +560,18 @@ declare interface MetricAlarm {
   Statistic?: string;
   /** 精确告警阈值，本参数不作为入参输入，仅用作查询接口出参：CPU_UTILIZATION：(0, 100]，单位：%MEM_UTILIZATION：(0, 100]，单位：%LAN_TRAFFIC_OUT：>0，单位：Mbps LAN_TRAFFIC_IN：>0，单位：MbpsWAN_TRAFFIC_OUT：>0，单位：MbpsWAN_TRAFFIC_IN：>0，单位：MbpsTCP_CURR_ESTAB：>0, 单位：Count */
   PreciseThreshold?: number;
+}
+
+/** 启动配置中的弹性网卡配置。 */
+declare interface NetworkInterface {
+  /** 网卡类型。本字段在每个网卡项的请求中必填。枚举值：PRIMARY： 主网卡SECONDARY： 辅助网卡配置上层 NetworkInterfaces 时，数组必须显式包含且只能包含一个 PRIMARY，AS 不自动补齐主网卡。 */
+  InterfaceType: string;
+  /** 网卡请求分配的内网 IPv4 地址总数，包含主 IP。取值范围：[1, 40]SECONDARY 网卡请求时必填；PRIMARY 网卡请求时可选，未填写时仅在实际扩容构造 CVM 请求副本时按 1 处理，不写回启动配置。显式传入的值由 AS 透传给 CVM，最终由 CVM/VPC 校验。 */
+  PrivateIpv4AddressCount?: number;
+  /** 弹性网卡绑定的安全组 ID 列表。入参限制：最多 10 个。对于 PRIMARY，网卡中显式配置的非空列表优先于启动配置中的 SecurityGroupIds 参数；网卡中未配置时使用启动配置中的 SecurityGroupIds 参数，两处均未配置时 AS 不指定安全组，继续按 CVM 缺省规则处理。对于 SECONDARY，仅透传网卡中显式配置的非空列表，不继承启动配置中的 SecurityGroupIds 参数。 */
+  SecurityGroupIds?: string[];
+  /** 实例销毁时是否保留辅助网卡，仅对 SECONDARY 有效。枚举值：false： 不保留辅助网卡，辅助网卡随实例销毁true： 保留辅助网卡默认值：falsePRIMARY 不允许配置 true。 */
+  IsKeepENI?: boolean;
 }
 
 /** 通知目标 */
@@ -770,10 +786,14 @@ declare interface SpotMixedAllocationPolicy {
 
 /** 启动配置的系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。 */
 declare interface SystemDisk {
-  /** 系统盘类型。系统盘类型限制详见[云硬盘类型](https://cloud.tencent.com/document/product/362/2353)。取值范围LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘默认取值：CLOUD_PREMIUM。 */
+  /** 系统盘类型。系统盘类型限制详见云硬盘类型。取值范围LOCAL_BASIC：本地硬盘LOCAL_SSD：本地SSD硬盘CLOUD_BASIC：普通云硬盘CLOUD_PREMIUM：高性能云硬盘CLOUD_SSD：SSD云硬盘CLOUD_BSSD：通用型SSD云硬盘CLOUD_HSSD：增强型SSD云硬盘CLOUD_TSSD：极速型SSD云硬盘默认取值：CLOUD_PREMIUM。 */
   DiskType?: string;
   /** 系统盘大小，单位：GB。默认值为 50 */
   DiskSize?: number;
+  /** 是否加密系统盘。TRUE 表示加密，FALSE 表示不加密；具体盘型、地域及 KMS 规则由 CVM 校验。 */
+  Encrypt?: boolean;
+  /** 系统盘加密使用的 KMS 密钥 ID。密钥有效性、权限以及与盘型和地域的适配性由 CVM 校验。 */
+  KmsKeyId?: string;
 }
 
 /** 资源类型及标签键值对 */
@@ -851,6 +871,8 @@ declare interface ClearLaunchConfigurationAttributesRequest {
   ClearInstanceTags?: boolean;
   /** 是否清空 MetaData，非必填，默认为 false。填 true 代表清空 MetaData，清空后基于此新创建的云主机将不会关联自定义的 Metadata。 */
   ClearMetadata?: boolean;
+  /** 是否清除启动配置中的 NetworkInterfaces。取值 TRUE 时清除；未传或 FALSE 时不处理该字段。 */
+  ClearNetworkInterfaces?: boolean;
 }
 
 declare interface ClearLaunchConfigurationAttributesResponse {
@@ -997,7 +1019,7 @@ declare interface CreateLaunchConfigurationRequest {
   InstanceTags?: InstanceTag[];
   /** 标签描述列表。通过指定该参数可以支持绑定标签到启动配置。每个启动配置最多支持30个标签。 */
   Tags?: Tag[];
-  /** 云服务器主机名（HostName）的相关设置。不支持windows实例设置主机名。 新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。会校验主机名(如果存在后缀则加上后缀)是否超过最大位数46。 */
+  /** 云服务器主机名（HostName）的相关设置。不支持windows实例设置主机名。新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。会校验主机名(如果存在后缀则加上后缀)是否超过最大位数46。 */
   HostNameSettings?: HostNameSettings;
   /** 云服务器实例名（InstanceName）的相关设置。如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。会校验实例名称(如果存在后缀则加上后缀)是否超过最大位数108。 */
   InstanceNameSettings?: InstanceNameSettings;
@@ -1017,6 +1039,8 @@ declare interface CreateLaunchConfigurationRequest {
   DedicatedClusterId?: string;
   /** 自定义metadata。 */
   Metadata?: Metadata;
+  /** 扩容实例的弹性网卡配置。入参限制：最多 17 项。配置该参数时必须显式包含且只能包含一个 PRIMARY，AS 不自动补齐主网卡；显式空数组非法；竞价实例不支持此参数。VPC 和子网由伸缩组按当前候选子网自动注入；不配置时不传给 CVM。启动配置中的 SecurityGroupIds 参数仍保留。 */
+  NetworkInterfaces?: NetworkInterface[];
 }
 
 declare interface CreateLaunchConfigurationResponse {
@@ -1536,7 +1560,7 @@ declare interface ModifyAutoScalingGroupRequest {
   DesiredCapacity?: number;
   /** 启动配置ID。可以通过如下方式获取可用的启动配置ID:通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 查询启动配置ID。通过调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。 */
   LaunchConfigurationId?: string;
-  /** 最大实例数，取值范围为 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。 */
+  /** 最大实例数，取值范围为 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。取值范围：[0, 2000] */
   MaxSize?: number;
   /** 最小实例数，取值范围为 [0,2000]。需满足最大值大于等于期望值，期望值大于等于最小值。 */
   MinSize?: number;
@@ -1600,11 +1624,11 @@ declare interface ModifyDesiredCapacityResponse {
 }
 
 declare interface ModifyLaunchConfigurationAttributesRequest {
-  /** 启动配置ID。可通过登录 [控制台](https://console.cloud.tencent.com/autoscaling/config) 或调用接口 [DescribeLaunchConfigurations](https://cloud.tencent.com/document/api/377/20445) ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。 */
+  /** 启动配置ID。可通过登录 控制台 或调用接口 DescribeLaunchConfigurations ，取返回信息中的 LaunchConfigurationId 获取启动配置ID。 */
   LaunchConfigurationId: string;
-  /** 指定有效的[镜像](https://cloud.tencent.com/document/product/213/4940)ID，格式形如`img-8toqc6s3`。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：`公共镜像`、`自定义镜像`、`共享镜像`的镜像ID可通过登录[控制台](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE)查询；`服务镜像市场`的镜像ID可通过[云市场](https://market.cloud.tencent.com/list)查询。通过调用接口 [DescribeImages](https://cloud.tencent.com/document/api/213/15715) ，取返回信息中的`ImageId`字段。 */
+  /** 指定有效的镜像ID，格式形如img-8toqc6s3。镜像类型分为四种：公共镜像自定义镜像共享镜像服务市场镜像可通过以下方式获取可用的镜像ID：公共镜像、自定义镜像、共享镜像的镜像ID可通过登录控制台查询；服务镜像市场的镜像ID可通过云市场查询。通过调用接口 DescribeImages ，取返回信息中的ImageId字段。 */
   ImageId?: string;
-  /** 实例类型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定多实例类型，并使原有的InstanceType失效。具体取值可通过调用接口[DescribeInstanceTypeConfigs](https://cloud.tencent.com/document/api/213/15749)来获得最新的规格表或参见[实例规格描述](https://cloud.tencent.com/document/product/213/11518)。 */
+  /** 实例类型列表，不同实例机型指定了不同的资源规格，最多支持10种实例机型。InstanceType 指定单一实例类型，通过设置 InstanceTypes可以指定多实例类型，并使原有的InstanceType失效。具体取值可通过调用接口DescribeInstanceTypeConfigs来获得最新的规格表或参见实例规格描述。 */
   InstanceTypes?: string[];
   /** 实例类型校验策略，在实际修改 InstanceTypes 时发挥作用，取值包括 ALL 和 ANY，默认取值为ANY。 ALL，所有实例类型（InstanceType）都可用则通过校验，否则校验报错。 ANY，存在任何一个实例类型（InstanceType）可用则通过校验，否则校验报错。 实例类型不可用的常见原因包括该实例类型售罄、对应云盘售罄等。如果 InstanceTypes 中一款机型不存在或者已下线，则无论 InstanceTypesCheckPolicy 采用何种取值，都会校验报错。 */
   InstanceTypesCheckPolicy?: string;
@@ -1612,7 +1636,7 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   LaunchConfigurationName?: string;
   /** 经过 Base64 编码后的自定义数据，最大长度不超过16KB。如果要清空UserData，则指定其为空字符串。 */
   UserData?: string;
-  /** 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的`SecurityGroupId`字段来获取。若指定该参数，请至少提供一个安全组，列表顺序有先后。 */
+  /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的SecurityGroupId字段来获取。若指定该参数，请至少提供一个安全组，列表顺序有先后。 */
   SecurityGroupIds?: string[];
   /** 公网带宽相关信息设置。当公网出带宽上限为0Mbps时，不支持修改为开通分配公网IP；相应的，当前为开通分配公网IP时，修改的公网出带宽上限值必须大于0Mbps。 */
   InternetAccessible?: InternetAccessible;
@@ -1630,28 +1654,30 @@ declare interface ModifyLaunchConfigurationAttributesRequest {
   DataDisks?: DataDisk[];
   /** 云服务器主机名（HostName）的相关设置。不支持windows实例设置主机名。新增该属性时，必须传递云服务器的主机名，其它未传递字段会设置为默认值。会校验主机名(如果存在后缀则加上后缀)是否超过最大位数46。 */
   HostNameSettings?: HostNameSettings;
-  /** 云服务器（InstanceName）实例名的相关设置。 如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。会校验实例名(如果存在后缀则加上后缀)是否超过最大位数108。 */
+  /** 云服务器（InstanceName）实例名的相关设置。如果用户在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 参照此字段进行设置，并传递给 CVM；如果用户未在启动配置中设置此字段，则伸缩组创建出的实例 InstanceName 按照“as-{{ 伸缩组AutoScalingGroupName }}”进行设置，并传递给 CVM。新增该属性时，必须传递云服务器的实例名称，其它未传递字段会设置为默认值。会校验实例名(如果存在后缀则加上后缀)是否超过最大位数108。 */
   InstanceNameSettings?: InstanceNameSettings;
   /** 增强服务。通过该参数可以指定是否开启云安全、云监控等服务。 */
   EnhancedService?: EnhancedService;
-  /** CAM角色名称。可通过[DescribeRoleList](https://cloud.tencent.com/document/product/598/36223)接口返回值中的roleName获取。 */
+  /** CAM角色名称。可通过DescribeRoleList接口返回值中的roleName获取。 */
   CamRoleName?: string;
-  /** 高性能计算集群ID。可通过调用[DescribeHpcClusters](https://cloud.tencent.com/document/product/213/83220)接口获取该参数。注意：此字段默认为空。 */
+  /** 高性能计算集群ID。可通过调用DescribeHpcClusters接口获取该参数。注意：此字段默认为空。 */
   HpcClusterId?: string;
   /** IPv6公网带宽相关信息设置。若新建实例包含IPv6地址，该参数可为新建实例的IPv6地址分配公网带宽。关联启动配置的伸缩组Ipv6AddressCount参数为0时，该参数不会生效。 */
   IPv6InternetAccessible?: IPv6InternetAccessible;
-  /** 置放群组id，仅支持指定一个。可通过调用[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)接口获取该参数。 */
+  /** 置放群组id，仅支持指定一个。可通过调用DescribeDisasterRecoverGroups接口获取该参数。 */
   DisasterRecoverGroupIds?: string[];
   /** 实例登录设置，包括密码、密钥或保持镜像的原始登录设置。请注意，指定新的登录设置会覆盖原有登录设置。例如，如果您之前使用密码登录，使用该参数将登录设置修改为密钥，则原有密码被清除。 */
   LoginSettings?: LoginSettings;
   /** 实例标签列表。通过指定该参数，可以为扩容的实例绑定标签。最多支持指定10个标签。该参数会覆盖原有的实例标签列表，如需新增标签，需将新标签和原有标签一并传入。 */
   InstanceTags?: InstanceTag[];
-  /** 镜像族名称。可通过调用[DescribeImages](https://cloud.tencent.com/document/product/213/15715)接口获取该参数。 */
+  /** 镜像族名称。可通过调用DescribeImages接口获取该参数。 */
   ImageFamily?: string;
   /** 本地专用集群ID。 */
   DedicatedClusterId?: string;
   /** 自定义metadata。 */
   Metadata?: Metadata;
+  /** 替换启动配置中的弹性网卡配置。入参限制：最多 17 项；必须显式包含且只能包含一个 PRIMARY，AS 不自动补齐主网卡；显式空数组非法。字段规则与 CreateLaunchConfiguration 一致。清除请调用 ClearLaunchConfigurationAttributes 并传 ClearNetworkInterfaces=true。 */
+  NetworkInterfaces?: NetworkInterface[];
 }
 
 declare interface ModifyLaunchConfigurationAttributesResponse {

@@ -2106,6 +2106,16 @@ declare interface CKafkaTopicInfo {
   TopicName?: string;
 }
 
+/** 主机标签 */
+declare interface CWPTags {
+  /** 记录ID */
+  Rid: number;
+  /** 标签名 */
+  Name: string;
+  /** 标签ID */
+  TagId: number;
+}
+
 /** 批量修复漏洞二次弹窗 漏洞主机信息 */
 declare interface CanFixVulInfo {
   /** 漏洞id */
@@ -2544,7 +2554,7 @@ declare interface FileTamperRuleInfo {
   AddWhiteType?: string;
 }
 
-/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
+/** 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态、时间等若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。* 最多只能有5个Filter* 同一个Filter存在多个Values，Values值数量最多不能超过5个。 */
 declare interface Filter {
   /** 过滤键的名称。 */
   Name: string;
@@ -3752,8 +3762,10 @@ declare interface OrderDetail {
   ResourceID?: string;
   /** 计费项 */
   InquireKey?: string;
-  /** 订单状态- 1 正常- 2 隔离期- 3 已销毁 */
+  /** 订单状态1 正常2 隔离期3 已销毁 */
   Status?: number;
+  /** 源类型 */
+  SourceType?: number;
 }
 
 /** 订单变配参数对象 */
@@ -4622,23 +4634,25 @@ declare interface RaspLicenseList {
   PrivateIP?: string;
   /** 云标签信息 */
   Tags?: Tags[];
-  /** 防护版本信息- CriticalProtection 重保防护包- Pro 容器安全-专业版- Ultimate 主机安全-旗舰版 */
+  /** 主机标签信息(仅AssetType=CWP/TCSS_HOST有值) */
+  CWPTags?: CWPTags[];
+  /** 防护版本信息CriticalProtection 重保防护包Pro 容器安全-专业版Ultimate 主机安全-旗舰版 */
   ProtectionVersion?: string[];
-  /** 防护设置- 0 未配置- 1 已配置 */
+  /** 防护设置0 未配置1 已配置 */
   ConfigurationSetting?: number;
-  /** 总开关- 0 未开启- 1已开启 */
+  /** 总开关0 未开启1已开启 */
   Enable?: number;
-  /** 漏洞防御开关- 0 未开启- 1 开启 */
+  /** 漏洞防御开关0 未开启1 开启 */
   VulDefEnable?: number;
-  /** 漏洞防御模式- 0 标准- 1 重保 */
+  /** 漏洞防御模式0 标准1 重保 */
   VulDefMode?: number;
-  /** 漏洞防御动作- 0 仅检测- 1 检测+防御 */
+  /** 漏洞防御动作0 仅检测1 检测+防御 */
   VulDefAction?: number;
-  /** 内存马防御开关- 0 未开启- 1 开启 */
+  /** 内存马防御开关0 未开启1 开启 */
   MemShellDefEnable?: number;
-  /** 更多防护- 0 不注入会重启的进程 - 1 注入会重启的进程 */
+  /** 更多防护0 不注入会重启的进程 1 注入会重启的进程 */
   SafeInject?: number;
-  /** 性能阈值配置开关- 0 未开启- 1 开启 */
+  /** 性能阈值配置开关0 未开启1 开启 */
   PerformanceLimit?: number;
   /** CPU阈值,取值1-99 */
   PerformanceLimitCpu?: number;
@@ -4646,7 +4660,7 @@ declare interface RaspLicenseList {
   PerformanceLimitMem?: number;
   /** 内存剩余阈值 */
   PerformanceLimitMemAmount?: number;
-  /** 插件状态- 0 使用正常- 1 存在异常- 2 未使用 */
+  /** 插件状态0 使用正常1 存在异常2 未使用 */
   RaspException?: number;
   /** 最近更新时间 */
   LatestUpdateTime?: string;
@@ -11577,7 +11591,7 @@ declare interface DescribeRaspEventTCSSResponse {
 }
 
 declare interface DescribeRaspLicenseListRequest {
-  /** 过滤条件- AssetType 资产类型(CWP 主机安全资产, TCSS_HOST 容器主机节点,TCSS_EKS 容器超级节点)- PluginStatus 插件状态(Normal 使用正常,Abnormal 存在异常,Unused 未使用)- ProtectionSwitch 防护开关(Enable 开启,Disable 未开启)- ProtectionVersion 防护版本(Rasp 重保授权包,Unauthorized 未授权)- InstanceID 实例ID- InstanceName 实例名称- InstanceIP 实例IP(内网IP/外网IP)- NodeID 容器节点ID- NodeName 容器节点名称- ClusterID 容器集群ID- ClusterName 容器集群名称 */
+  /** 过滤条件- AssetType 资产类型(CWP 主机安全资产, TCSS_HOST 容器主机节点,TCSS_EKS 容器超级节点)- PluginStatus 插件状态(Normal 使用正常,Abnormal 存在异常,Unused 未使用)- ProtectionSwitch 防护开关(Enable 开启,Disable 未开启)- ProtectionVersion 防护版本(Rasp 重保授权包,Unauthorized 未授权)- InstanceID 实例ID- InstanceName 实例名称- InstanceIP 实例IP(内网IP/外网IP)- NodeID 容器节点ID- NodeName 容器节点名称- ClusterID 容器集群ID- ClusterName 容器集群名称- CWPTags 主机标签(值为标签ID,多个取并集,仅AssetType=CWP/TCSS_HOST生效) */
   Filters?: Filters[];
   /** 限制条数,默认10 */
   Limit?: number;
@@ -11731,7 +11745,7 @@ declare interface DescribeReverseShellEventsRequest {
   Limit?: number;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 过滤条件。Keywords - String - 是否必填：否 - 关键字(主机内网IP|进程名) */
+  /** 过滤条件。ProcName - String - 是否必填：否 - 进程名(模糊匹配进程名或父进程名)MachineName - String - 是否必填：否 - 主机名称(模糊匹配)InstanceID - String - 是否必填：否 - 实例ID(模糊匹配)IP - String - 是否必填：否 - 主机IP(内网IP或公网IP,模糊匹配)Quuid - String - 是否必填：否 - 主机QUUID(支持多个)Uuid - String - 是否必填：否 - 主机UUIDStatus - String - 是否必填：否 - 处理状态(0:待处理 2:已加入白名单 3:已处理 4:已忽略)DetectBy - String - 是否必填：否 - 检测方式(0:行为分析 1:命令特征检测)ID - String - 是否必填：否 - 事件ID(支持多个)CreateBeginTime - String - 是否必填：否 - 发生开始时间CreateEndTime - String - 是否必填：否 - 发生结束时间 */
   Filters?: Filter[];
   /** 排序方式：根据请求次数排序：asc-升序/desc-降序 */
   Order?: string;

@@ -1188,6 +1188,8 @@ declare interface ConversationContent {
   Tasks?: ConversationAgentTask[];
   /** 工作流输入参数 */
   WorkflowInput?: string | null;
+  /** MCP-APP调用信息 */
+  McpApp?: ConversationMcpApp | null;
 }
 
 /** 对话体验配置 */
@@ -1210,6 +1212,18 @@ declare interface ConversationExperience {
   Method: number;
   /** 推荐问生成prompt模式。枚举值: 1:仅结合知识库输出推荐问的prompt */
   RecommendPromptMode: number;
+}
+
+/** MCP App 内容，供历史会话重建可交互 App */
+declare interface ConversationMcpApp {
+  /** 能力边界：一次请求只能读该 plugin 的资源 */
+  PluginId?: string;
+  /** ui:// 资源，前端据此调 ReadMCPResource 拉 HTML */
+  ResourceUri?: string;
+  /** agent-exec 侧 thread */
+  ThreadId?: string;
+  /** JSON：完整 CallToolResult 原文，供历史会话重建时重放 */
+  ToolResult?: string | null;
 }
 
 /** Message 消息信息 */
@@ -1484,6 +1498,8 @@ declare interface MCPPluginConfig {
   Timeout?: number;
   /** 授权信息 */
   AuthConfig?: AuthConfig;
+  /** 是否支持交互界面（MCP Apps），插件级标签，默认false */
+  SupportsApps?: boolean;
 }
 
 /** MCPToolConfig */
@@ -1492,6 +1508,24 @@ declare interface MCPToolConfig {
   Inputs?: RequestParam[];
   /** 输出参数 */
   Outputs?: ResponseParam[];
+  /** 工具meta信息 */
+  Meta?: MCPToolMeta | null;
+  /** 是否支持交互界面（MCP Apps），插件级标签 默认值：false */
+  SupportsApps?: boolean;
+}
+
+/** 对应 MCP 协议工具 _meta，承载 MCP Apps 工具的 UI 元信息（本期仅消费 resourceUri） */
+declare interface MCPToolMeta {
+  /** 工具的 UI 扩展元信息，对应 MCP 协议的 _meta.ui，声明工具关联的交互式界面资源（ResourceUri）及调用方可见性（Visibility）。仅当工具支持 MCP Apps 或声明了可见性时返回；纯文本工具该字段为空。详见 MCPToolUIMeta 结构定义。 */
+  Ui?: MCPToolUIMeta;
+}
+
+/** 对应 MCP 协议 _meta.ui，定义 MCP Apps 工具的交互界面元信息（本期仅消费 resourceUri，visibility） */
+declare interface MCPToolUIMeta {
+  /** 关联的 UI 资源 URI，ui:// scheme，格式为 ui://<插件标识>/<资源名>-<版本>。该字段是 MCP Apps 交互式界面的入口，非空时表示工具支持 Apps（"文本 + 交互式界面"展示），为空则为纯文本工具。由工具同步结果自动识别填充，不支持手工编辑。 */
+  ResourceUri?: string;
+  /** 工具的调用方可见性声明，取值范围：model（模型可调用）、app（应用界面可调用），可多选，如 ["model","app"]。与 ResourceUri 相互独立（SEP-1865），可单独存在，例如纯后端 app-only 工具为 ["app"]。当 ResourceUri 非空且本字段缺省时，按规范归一化为 ["model","app"]；存量非 Apps 工具保持为空。枚举值：model： 支持modelapp： 支持app */
+  Visibility?: string[];
 }
 
 /** ManualOnlySchedule */
@@ -3308,10 +3342,10 @@ declare interface DescribeConversationMessageListResponse {
   MessageList?: ConversationMessage[];
   /** 消息列表 */
   Messages?: ConversationMessage[];
-  /** 最近一次重置信息 */
-  ResetInfo?: ConversationResetInfo | null;
   /** 单次对话记录统计列表，与 message_list 通过 record_id / related_record_id 关联 */
   RecordSummaryList?: ConversationRecordSummary[] | null;
+  /** 最近一次重置信息 */
+  ResetInfo?: ConversationResetInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
