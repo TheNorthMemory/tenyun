@@ -886,7 +886,7 @@ declare interface MetadataItem {
   Value: string;
 }
 
-/** 创建实例时的网卡配置信息，包含主网卡和辅助网卡的VPC、子网、IP分配等网络参数。此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
+/** 创建实例时的网卡配置信息，包含主网卡和辅助网卡的VPC、子网、IP分配等网络参数。请注意此参数与VirtualPrivateCloud互斥，即使用NetworkInterfaces后请勿再填充VirtualPrivateCloud结构体。此功能仅部分地区灰度开放，如需使用[请提交工单咨询](https://console.cloud.tencent.com/workorder/category) */
 declare interface NetworkInterfaces {
   /** 表示是主网卡还是辅助网卡。注意：枚举值要全部大写；NetworkInterfaces数组中必须要有PRIMARY，且PRIMARY只能存在一个，SECONDARY可以存在多个。枚举值：PRIMARY： 主网卡SECONDARY： 辅助网卡 */
   InterfaceType: string;

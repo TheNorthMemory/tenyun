@@ -590,6 +590,16 @@ declare interface ElectronicTrainTicket {
   CheckCode?: string | null;
   /** 发票状态代码，0正常 1 未更新 2作废 3已红冲 */
   StateCode?: string | null;
+  /** 发票类型 */
+  Type?: string | null;
+  /** 空调特征 */
+  AirConditionerFeature?: string | null;
+  /** 票种，不替代 VatInvoice.Type。 */
+  TicketType?: string | null;
+  /** 原始税率 */
+  OriginalTaxRate?: string | null;
+  /** 全电发票号码，映射源字段 qdfphm。 */
+  FullElectronicNumber?: string;
 }
 
 /** 电子发票（火车票） */
@@ -1516,16 +1526,20 @@ declare interface OverseasInvoice {
 
 /** 通行费发票信息 */
 declare interface PassInvoiceInfo {
-  /** 通行费车牌号 */
-  NumberPlate: string;
-  /** 通行费类型 */
-  Type: string;
+  /** 通行费车牌号；数电通行费源字段 cph 写入该字段。 */
+  NumberPlate?: string;
+  /** 通行费类型；数电通行费源字段 cllx 写入该字 */
+  Type?: string;
   /** 通行日期起 */
-  PassDateBegin: string;
+  PassDateBegin?: string;
   /** 通行日期止 */
-  PassDateEnd: string;
+  PassDateEnd?: string;
   /** 税收分类编码 */
-  TaxClassifyCode: string;
+  TaxClassifyCode?: string;
+  /** 通行费车牌号 */
+  CarType?: string;
+  /** 通行费车辆类型 */
+  PlateNumber?: string;
 }
 
 /** 信息区证件内容 */
@@ -1756,6 +1770,18 @@ declare interface Rect {
   Width?: number;
   /** 高度单位：px */
   Height?: number;
+}
+
+/** 红字发票信息 */
+declare interface RedLetterInvoiceItem {
+  /** 红字发票代码 */
+  Code?: string | null;
+  /** 红字发票号码 */
+  Number?: string | null;
+  /** 红字开票日期 */
+  Date?: string | null;
+  /** 红字发票状态 */
+  State?: string | null;
 }
 
 /** 反光点覆盖区域详情结果 */
@@ -2569,53 +2595,75 @@ declare interface UsedCarPurchaseInvoice {
 /** 二手车销售统一发票信息 */
 declare interface UsedVehicleInvoiceInfo {
   /** 所属税局 */
-  TaxBureau: string;
+  TaxBureau?: string;
   /** 买方单位/个人 */
-  Buyer: string;
+  Buyer?: string;
   /** 买方单位代码/身份证号码 */
-  BuyerNo: string;
+  BuyerNo?: string;
   /** 买方单位/个人地址 */
-  BuyerAddress: string;
+  BuyerAddress?: string;
   /** 买方单位电话 */
-  BuyerTel: string;
+  BuyerTel?: string;
   /** 卖方单位/个人 */
-  Seller: string;
+  Seller?: string;
   /** 卖方单位代码/身份证号码 */
-  SellerNo: string;
+  SellerNo?: string;
   /** 卖方单位/个人地址 */
-  SellerAddress: string;
+  SellerAddress?: string;
   /** 卖方单位电话 */
-  SellerTel: string;
+  SellerTel?: string;
   /** 车牌照号 */
-  VehicleLicenseNo: string;
+  VehicleLicenseNo?: string;
   /** 登记证号 */
-  RegisterNo: string;
+  RegisterNo?: string;
   /** 车架号/车辆识别代码 */
-  VehicleIdentifyNo: string;
+  VehicleIdentifyNo?: string;
   /** 转入地车辆管理所名称 */
-  ManagementOffice: string;
+  ManagementOffice?: string;
   /** 车价合计 */
-  VehicleTotalPrice: string;
+  VehicleTotalPrice?: string;
   /** 经营、拍卖单位 */
-  Auctioneer: string;
+  Auctioneer?: string;
   /** 经营、拍卖单位地址 */
-  AuctioneerAddress: string;
+  AuctioneerAddress?: string;
   /** 经营、拍卖单位纳税人识别号 */
-  AuctioneerTaxpayerNum: string;
+  AuctioneerTaxpayerNum?: string;
   /** 经营、拍卖单位开户银行、账号 */
-  AuctioneerBankAccount: string;
+  AuctioneerBankAccount?: string;
   /** 经营、拍卖单位电话 */
-  AuctioneerTel: string;
+  AuctioneerTel?: string;
   /** 二手车市场 */
-  Market: string;
+  Market?: string;
   /** 二手车市场纳税人识别号 */
-  MarketTaxpayerNum: string;
+  MarketTaxpayerNum?: string;
   /** 二手车市场地址 */
-  MarketAddress: string;
+  MarketAddress?: string;
   /** 二手车市场开户银行账号 */
-  MarketBankAccount: string;
+  MarketBankAccount?: string;
   /** 二手车市场电话 */
-  MarketTel: string;
+  MarketTel?: string;
+  /** 车价合计中文大写 */
+  VehicleTotalPriceCN?: string | null;
+  /** 发票风险等级 */
+  InvoiceRiskLevel?: string | null;
+  /** 车辆类型 */
+  CarType?: string | null;
+  /** 厂牌型号 */
+  PlateModel?: string | null;
+  /** 作废人 */
+  AbandonerName?: string | null;
+  /** 作废日期 */
+  AbandonDate?: string | null;
+  /** 开票方类型：1 经营单位，2 拍卖单位，03 二手车市场。 */
+  IssuerType?: string | null;
+  /** 开票方纳税人识别号 */
+  IssuerTaxCode?: string | null;
+  /** 自行编码 */
+  CustomCode?: string | null;
+  /** 商品编码 */
+  TaxClassifyCode?: string;
+  /** 零税率标识：空：非零税率，0：出口零税，1：免税，2：不征税，3 普通零税率 */
+  ZeroTaxRateMark?: string;
 }
 
 /** value信息组 */
@@ -2766,7 +2814,7 @@ declare interface VatInvoice {
   CheckCode?: string;
   /** 是否作废（红冲）是否作废（红冲）Y：已作废，N：未作废，H：红冲，HP：部分红冲，HF：全额红冲 */
   IsAbandoned?: string;
-  /** 是否有销货清单 Y: 有清单 N：无清单 卷票无 */
+  /** 是否有销货清单Y: 有清单 N：无清单卷票无 */
   HasSellerList?: string;
   /** 销货清单标题 */
   SellerListTitle?: string;
@@ -2792,6 +2840,36 @@ declare interface VatInvoice {
   SellerAgentName?: string;
   /** 代开销售方税号 */
   SellerAgentTaxID?: string;
+  /** 地区代码 */
+  RegionCode?: string | null;
+  /** 复核人 */
+  ReviewerName?: string | null;
+  /** 开票人 */
+  IssuerName?: string | null;
+  /** 收款人 */
+  PayeeName?: string | null;
+  /** 开票机号 */
+  MachineCode?: string | null;
+  /** 税控码/密码区 */
+  TaxControlCode?: string | null;
+  /** 价税合计（中文大写） */
+  AmountWithTaxCN?: string | null;
+  /** 税率 */
+  TaxRate?: string | null;
+  /** 特殊票种代码 */
+  SpecialTicketCode?: string | null;
+  /** 红字发票信息列表 */
+  RedLetterInvoices?: RedLetterInvoiceItem[] | null;
+  /** 全电类型 */
+  FullElectronicType?: string | null;
+  /** OFD版式文件下载链接 */
+  OfdUrl?: string | null;
+  /** PDF版式文件下载链接 */
+  PdfUrl?: string | null;
+  /** 原发票代码，对应蓝字发票代码。 */
+  OriginalCode?: string;
+  /** 原发票号码，对应蓝字发票号码。 */
+  OriginalNumber?: string;
 }
 
 /** 发票商品 */
@@ -2913,25 +2991,25 @@ declare interface VatInvoiceInfo {
 /** 增值税发票项目明细 */
 declare interface VatInvoiceItem {
   /** 行号 */
-  LineNo: string;
+  LineNo?: string;
   /** 名称 */
-  Name: string;
+  Name?: string;
   /** 规格 */
-  Spec: string;
+  Spec?: string;
   /** 单位 */
-  Unit: string;
+  Unit?: string;
   /** 数量 */
-  Quantity: string;
+  Quantity?: string;
   /** 单价 */
-  UnitPrice: string;
+  UnitPrice?: string;
   /** 不含税金额 */
-  AmountWithoutTax: string;
+  AmountWithoutTax?: string;
   /** 税率 */
-  TaxRate: string;
+  TaxRate?: string;
   /** 税额 */
-  TaxAmount: string;
+  TaxAmount?: string;
   /** 税收分类编码 */
-  TaxClassifyCode: string;
+  TaxClassifyCode?: string;
   /** 运输工具类型 */
   VehicleType?: string;
   /** 运输工具牌号 */
@@ -2946,6 +3024,16 @@ declare interface VatInvoiceItem {
   ConstructionPlace?: string;
   /** 建筑项目名称 */
   ConstructionName?: string;
+  /** 原始税率 */
+  OriginalTaxRate?: string | null;
+  /** 原始税额 */
+  OriginalTaxAmount?: string | null;
+  /** 零税率标识 */
+  ZeroTaxRateMark?: string | null;
+  /** 含税单价 */
+  TaxIncludedUnitPrice?: string | null;
+  /** 含税金额 */
+  TaxIncludedAmount?: number | null;
 }
 
 /** 增值税发票项目信息 */

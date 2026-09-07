@@ -166,6 +166,8 @@ declare interface DBCustomNode {
   EniIP?: string;
   /** 节点绑定的安全组 */
   SecurityGroupIds?: string[] | null;
+  /** 置放群组ID */
+  DisasterRecoverGroupId?: string;
 }
 
 /** DB Custom 节点机型信息。 */
@@ -328,6 +330,32 @@ declare interface DeviceInfo {
   RawDeviceNum?: number;
   /** 数据库实例个数 */
   InstanceNum?: number;
+}
+
+/** DB Custom 置放群组信息。 */
+declare interface DisasterRecoverGroup {
+  /** 置放群组ID */
+  DisasterRecoverGroupId?: string;
+  /** 置放群组名称 */
+  Name?: string;
+  /** 置放群组类型枚举值：HOST： 物理机 */
+  Type?: string;
+  /** 置放群组状态枚举值：Creating： 创建中Available： 正常可使用CreateFailed： 创建失败Deleting： 删除中Modifying： 变更中 */
+  Status?: string;
+  /** 置放群组内最大容纳节点数 */
+  NodeQuotaTotal?: number;
+  /** 置放群组内当前节点数 */
+  CurrentNum?: number;
+  /** 亲和度取值范围：[1, 10] */
+  Affinity?: number;
+  /** 置放群组策略枚举值：SPREAD： 分散置放群组 */
+  Strategy?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 标签信息 */
+  Tags?: Tag[] | null;
+  /** 置放群组内 DB Custom 节点数量 */
+  NodeIds?: string[];
 }
 
 /** 描述键值对过滤器，用于条件过滤查询。 */
@@ -644,6 +672,42 @@ declare interface CreateDBCustomClusterResponse {
   RequestId?: string;
 }
 
+declare interface CreateDBCustomDisasterRecoverGroupRequest {
+  /** 置放群组名称入参限制：长度1-60个字符，支持中、英文 */
+  Name: string;
+  /** 置放群组类型枚举值：HOST： 物理机默认值：HOST当前仅支持物理机类型 */
+  Type?: string;
+  /** 置放群组策略入参限制：当前仅支持分散置放群组枚举值：SPREAD： 分散置放群组默认值：SPREAD */
+  Strategy?: string;
+  /** 置放群组的亲和度，在置放群组的实例会按该亲和度分布取值范围：[1, 10]默认值：1 */
+  Affinity?: number;
+  /** 标签 */
+  Tags?: Tag[];
+  /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
+  ClientToken?: string;
+}
+
+declare interface CreateDBCustomDisasterRecoverGroupResponse {
+  /** 置放群组ID */
+  DisasterRecoverGroupId?: string;
+  /** 置放群组名称 */
+  Name?: string;
+  /** 置放群组类型枚举值：HOST： 物理机 */
+  Type?: string;
+  /** 状态枚举值：Creating： 创建中 */
+  Status?: string;
+  /** 置放群组内可容纳的节点数量 */
+  NodeQuotaTotal?: number;
+  /** 置放群组内已有节点数量 */
+  CurrentNum?: number;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 置放群组策略枚举值：SPREAD： 分散置放群组 */
+  Strategy?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDBCustomNodesRequest {
   /** 产品支持的可用区枚举值：ap-shanghai-5： 上海五区ap-shanghai-8： 上海八区ap-nanjing-3： 南京三区 */
   Zone: string;
@@ -687,6 +751,8 @@ declare interface CreateDBCustomNodesRequest {
   DryRun?: boolean;
   /** 设置节点安全组参数格式：设置需要与节点绑定的多个安全组ID，以数组形式配置。 */
   SecurityGroupIds?: string[];
+  /** 置放群组ID入参限制：仅支持指定一个 */
+  DisasterRecoverGroupIds?: string[];
 }
 
 declare interface CreateDBCustomNodesResponse {
@@ -694,6 +760,32 @@ declare interface CreateDBCustomNodesResponse {
   NodeIds?: string[];
   /** 创建节点的任务ID */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDBCustomDisasterRecoverGroupsRequest {
+  /** 置放群组ID入参限制：数量上限为10。若置放群组内有节点，需要先移除。 */
+  DisasterRecoverGroupIds: string[];
+}
+
+declare interface DeleteDBCustomDisasterRecoverGroupsResponse {
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDBCustomNodesDisasterRecoverGroupRequest {
+  /** 节点ID入参限制：单次数量上限为100 */
+  NodeIds: string[];
+  /** 置放群组ID入参限制：只支持传一个ID */
+  DisasterRecoverGroupIds: string[];
+}
+
+declare interface DeleteDBCustomNodesDisasterRecoverGroupResponse {
+  /** 任务ID */
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -834,6 +926,42 @@ declare interface DescribeDBCustomClustersResponse {
   TotalCount?: number;
   /** 集群列表信息 */
   ClusterSet?: DBCustomCluster[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBCustomDisasterRecoverGroupQuotaRequest {
+}
+
+declare interface DescribeDBCustomDisasterRecoverGroupQuotaResponse {
+  /** 可创建置放群组数量的上限 */
+  GroupQuota?: number;
+  /** 已经创建的置放群组数量 */
+  CurrentNum?: number;
+  /** 物理机类型置放群组内节点的配额数 */
+  NodeInHostGroupQuota?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDBCustomDisasterRecoverGroupsRequest {
+  /** 置放群组ID入参限制：单次数量上限是10 */
+  DisasterRecoverGroupIds?: string[];
+  /** 查询筛选条件。支持的筛选条件包括：tag-key：按标签键进行过滤。tag-value：按标签值进行过滤。入参限制：数量上限为5 */
+  Filters?: Filter[];
+  /** 根据标签键和标签值筛选 DB Custom 置放群组入参限制：数量上限为5 */
+  Tags?: Tag[];
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 返回数量取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+}
+
+declare interface DescribeDBCustomDisasterRecoverGroupsResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 置放群组列表 */
+  DisasterRecoverGroupSet?: DisasterRecoverGroup[] | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1179,13 +1307,43 @@ declare interface ModifyDBCustomClusterNodeConfigResponse {
 declare interface ModifyDBCustomClusterTagsRequest {
   /** DB Custom 集群ID参数格式：dbcc-xxxxxxxx */
   ClusterId: string;
-  /** 为 DB Custom 集群绑定的标签信息入参限制：参考标签平台的限制策略 */
+  /** 为 DB Custom 集群绑定的标签信息入参限制：参考标签平台的限制策略如果集群未关联输入的标签键，则增加关联；若已关联，则将该集群关联的键对应的标签值修改为输入值。本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。 */
   AddTags?: Tag[];
-  /** 为 DB Custom 集群删除的标签Key */
+  /** 为 DB Custom 集群解关联的标签Key本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。 */
   DeleteTagKeys?: string[];
 }
 
 declare interface ModifyDBCustomClusterTagsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBCustomDisasterRecoverGroupAttributeRequest {
+  /** 置放群组ID */
+  DisasterRecoverGroupId: string;
+  /** 置放群组名称入参限制：长度1-60个字符，支持中、英文 */
+  Name?: string;
+  /** 置放群组的亲和度，在置放群组的节点会按该亲和度分布取值范围：[1, 10] */
+  Affinity?: number;
+}
+
+declare interface ModifyDBCustomDisasterRecoverGroupAttributeResponse {
+  /** 任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBCustomDisasterRecoverGroupTagsRequest {
+  /** 置放群组ID */
+  DisasterRecoverGroupId: string;
+  /** 为 DB Custom 置放群组绑定的标签信息入参限制：参考标签侧的限制如果置放群组未关联输入的标签键，则增加关联；若已关联，则将该置放群组关联的键对应的标签值修改为输入值。本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。 */
+  AddTags?: Tag[];
+  /** 需要解关联的标签Key本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。 */
+  DeleteTagKeys?: string[];
+}
+
+declare interface ModifyDBCustomDisasterRecoverGroupTagsResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1223,13 +1381,29 @@ declare interface ModifyDBCustomNodeSecurityGroupsResponse {
 declare interface ModifyDBCustomNodeTagsRequest {
   /** DB Custom 节点ID参数格式：dbcn-0zan5xxk */
   NodeId: string;
-  /** 为节点绑定的标签信息入参限制：参考标签侧的限制 */
+  /** 为节点绑定的标签信息入参限制：参考标签侧的限制如果节点未关联输入的标签键，则增加关联；若已关联，则将该节点关联的键对应的标签值修改为输入值。本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。 */
   AddTags?: Tag[];
-  /** 需要删除的标签Key */
+  /** 需要解关联的标签Key本接口中 AddTags 和 DeleteTagKeys 二者必须存在其一，且二者不能包含相同的标签键。 */
   DeleteTagKeys?: string[];
 }
 
 declare interface ModifyDBCustomNodeTagsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDBCustomNodesDisasterRecoverGroupRequest {
+  /** 节点ID入参限制：单次数量上限为100 */
+  NodeIds: string[];
+  /** 置放群组ID入参限制：支持传一个ID */
+  DisasterRecoverGroupIds: string[];
+  /** 是否强制更换节点宿主机枚举值：true： 表示允许节点更换宿主机，允许重启。本地盘节点不支持指定此参数。false： 不允许节点更换宿主机，只在当前宿主机上加入置放群组。这可能导致更换置放群组失败。默认值：false */
+  Force?: boolean;
+}
+
+declare interface ModifyDBCustomNodesDisasterRecoverGroupResponse {
+  /** 任务ID */
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1291,8 +1465,14 @@ declare interface Dbdc {
   CheckRoleAuthorized(data: CheckRoleAuthorizedRequest, config?: AxiosRequestConfig): AxiosPromise<CheckRoleAuthorizedResponse>;
   /** 创建集群 {@link CreateDBCustomClusterRequest} {@link CreateDBCustomClusterResponse} */
   CreateDBCustomCluster(data: CreateDBCustomClusterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBCustomClusterResponse>;
+  /** 创建置放群组 {@link CreateDBCustomDisasterRecoverGroupRequest} {@link CreateDBCustomDisasterRecoverGroupResponse} */
+  CreateDBCustomDisasterRecoverGroup(data: CreateDBCustomDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBCustomDisasterRecoverGroupResponse>;
   /** 创建节点 {@link CreateDBCustomNodesRequest} {@link CreateDBCustomNodesResponse} */
   CreateDBCustomNodes(data: CreateDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBCustomNodesResponse>;
+  /** 删除置放群组 {@link DeleteDBCustomDisasterRecoverGroupsRequest} {@link DeleteDBCustomDisasterRecoverGroupsResponse} */
+  DeleteDBCustomDisasterRecoverGroups(data: DeleteDBCustomDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBCustomDisasterRecoverGroupsResponse>;
+  /** 移除节点的置放群组 {@link DeleteDBCustomNodesDisasterRecoverGroupRequest} {@link DeleteDBCustomNodesDisasterRecoverGroupResponse} */
+  DeleteDBCustomNodesDisasterRecoverGroup(data: DeleteDBCustomNodesDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBCustomNodesDisasterRecoverGroupResponse>;
   /** 查询集群详情 {@link DescribeDBCustomClusterDetailRequest} {@link DescribeDBCustomClusterDetailResponse} */
   DescribeDBCustomClusterDetail(data: DescribeDBCustomClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterDetailResponse>;
   /** 查询集群 Kubeconfig {@link DescribeDBCustomClusterKubeconfigRequest} {@link DescribeDBCustomClusterKubeconfigResponse} */
@@ -1307,6 +1487,10 @@ declare interface Dbdc {
   DescribeDBCustomClusterResources(data: DescribeDBCustomClusterResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClusterResourcesResponse>;
   /** 查询集群列表 {@link DescribeDBCustomClustersRequest} {@link DescribeDBCustomClustersResponse} */
   DescribeDBCustomClusters(data?: DescribeDBCustomClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomClustersResponse>;
+  /** 查询置放群组配额 {@link DescribeDBCustomDisasterRecoverGroupQuotaRequest} {@link DescribeDBCustomDisasterRecoverGroupQuotaResponse} */
+  DescribeDBCustomDisasterRecoverGroupQuota(data?: DescribeDBCustomDisasterRecoverGroupQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomDisasterRecoverGroupQuotaResponse>;
+  /** 查询置放群组列表 {@link DescribeDBCustomDisasterRecoverGroupsRequest} {@link DescribeDBCustomDisasterRecoverGroupsResponse} */
+  DescribeDBCustomDisasterRecoverGroups(data?: DescribeDBCustomDisasterRecoverGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomDisasterRecoverGroupsResponse>;
   /** 查询可用的系统镜像列表 {@link DescribeDBCustomImagesRequest} {@link DescribeDBCustomImagesResponse} */
   DescribeDBCustomImages(data?: DescribeDBCustomImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCustomImagesResponse>;
   /** 查询节点安全组信息 {@link DescribeDBCustomNodeSecurityGroupsRequest} {@link DescribeDBCustomNodeSecurityGroupsResponse} */
@@ -1343,12 +1527,18 @@ declare interface Dbdc {
   ModifyDBCustomClusterNodeConfig(data: ModifyDBCustomClusterNodeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterNodeConfigResponse>;
   /** 修改集群绑定的标签 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */
   ModifyDBCustomClusterTags(data: ModifyDBCustomClusterTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterTagsResponse>;
+  /** 修改置放群组的属性 {@link ModifyDBCustomDisasterRecoverGroupAttributeRequest} {@link ModifyDBCustomDisasterRecoverGroupAttributeResponse} */
+  ModifyDBCustomDisasterRecoverGroupAttribute(data: ModifyDBCustomDisasterRecoverGroupAttributeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomDisasterRecoverGroupAttributeResponse>;
+  /** 修改置放群组绑定的标签 {@link ModifyDBCustomDisasterRecoverGroupTagsRequest} {@link ModifyDBCustomDisasterRecoverGroupTagsResponse} */
+  ModifyDBCustomDisasterRecoverGroupTags(data: ModifyDBCustomDisasterRecoverGroupTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomDisasterRecoverGroupTagsResponse>;
   /** 修改节点属性 {@link ModifyDBCustomNodeAttributesRequest} {@link ModifyDBCustomNodeAttributesResponse} */
   ModifyDBCustomNodeAttributes(data: ModifyDBCustomNodeAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeAttributesResponse>;
   /** 修改节点安全组 {@link ModifyDBCustomNodeSecurityGroupsRequest} {@link ModifyDBCustomNodeSecurityGroupsResponse} */
   ModifyDBCustomNodeSecurityGroups(data: ModifyDBCustomNodeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeSecurityGroupsResponse>;
   /** 修改节点绑定的标签 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */
   ModifyDBCustomNodeTags(data: ModifyDBCustomNodeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeTagsResponse>;
+  /** 修改节点的置放群组 {@link ModifyDBCustomNodesDisasterRecoverGroupRequest} {@link ModifyDBCustomNodesDisasterRecoverGroupResponse} */
+  ModifyDBCustomNodesDisasterRecoverGroup(data: ModifyDBCustomNodesDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodesDisasterRecoverGroupResponse>;
   /** 修改独享集群名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
   /** 移出集群中的节点 {@link RemoveNodesFromDBCustomClusterRequest} {@link RemoveNodesFromDBCustomClusterResponse} */

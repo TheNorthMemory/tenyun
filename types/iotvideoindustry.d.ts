@@ -404,6 +404,14 @@ declare interface RecordTaskItem {
   WarnId?: number;
   /** 录制id，NVR下属设备有效 */
   RecordId?: string;
+  /** 视频自增ID */
+  InitID?: number;
+  /** 过期时间 */
+  ExpectDeleteTime?: number;
+  /** 录制时长 */
+  RecordTimeLen?: number;
+  /** 文件大小 */
+  FileSize?: number;
 }
 
 /** 场景列表元素 */

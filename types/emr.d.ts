@@ -2042,6 +2042,10 @@ declare interface NodeHardwareInfo {
   GpuDesc?: string;
   /** 磁盘问题描述 */
   DiskHealthIssues?: DiskHealthIssue[];
+  /** 所在节点组ID */
+  NodeGroupId?: string;
+  /** 所在节点组名称 */
+  NodeGroupName?: string;
 }
 
 /** 节点标记信息 */

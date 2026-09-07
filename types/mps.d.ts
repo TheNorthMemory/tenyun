@@ -1942,6 +1942,10 @@ declare interface AigcTaskListItem {
   Ratio?: string | null;
   /** 任务请求包 */
   RequestBody?: string | null;
+  /** 任务其他信息 */
+  TaskInfo?: string | null;
+  /** 任务子状态 */
+  Stage?: string | null;
 }
 
 /** 用于AIGC创作视频时用到的扩展参数信息。 */
@@ -2398,7 +2402,7 @@ declare interface ClipRangeInfo {
 declare interface CloneViralAIGC {
   /** 视频时长取值范围：[4, 15] */
   Duration?: number;
-  /** 宽高比。可选 16:9/4:3/1:1/3:4/9:16/21:9/adaptive */
+  /** 宽高比。旗舰版支持 16:9/4:3/1:1/3:4/9:16/21:9/adaptive，标准版支持16:9/1:1/9:16 */
   AspectRatio?: string;
   /** 分辨率。支持720p（默认）/1080p/2k/4k */
   Resolution?: string;
@@ -2416,6 +2420,24 @@ declare interface CloneViralContent {
   Market?: string;
   /** 裂变程度。exact/low/medium/high，默认exact 1:1复刻 */
   FissionLevel?: string;
+}
+
+/** 爆款复刻输出COS信息 */
+declare interface CloneViralCosInfo {
+  /** 区域 */
+  Region?: string;
+  /** COS桶 */
+  Bucket?: string;
+  /** 目录。空时默认根目录 */
+  Dir?: string;
+}
+
+/** 爆款复刻输出配置 */
+declare interface CloneViralOutputOption {
+  /** 输出类型。默认url枚举值：url： 临时链接，有效期24小时cos： 指定cos桶和路径 */
+  Type?: string;
+  /** 自定义cos信息 */
+  CosInfo?: CloneViralCosInfo;
 }
 
 /** 爆款复刻模特形象 */
@@ -3376,6 +3398,12 @@ declare interface DiffusionEnhanceConfig {
   Type?: string | null;
 }
 
+/** AIGC 文档生成视频背景图片信息 */
+declare interface DocToVideoBackgroundInfo {
+  /** 用于生成视频的背景图片 URL。 */
+  ImageUrl?: string;
+}
+
 /** cos信息，存储用户请求时填写的cos信息，用于存放结果 */
 declare interface DocToVideoCosInfo {
   /** cos桶地域 */
@@ -3406,6 +3434,24 @@ declare interface DocToVideoInput {
   EnableTTS?: boolean;
   /** 音色ID。仅开启AI配音功能时有效。 */
   VoiceId?: string;
+  /** 是否开启 PPTX 保真复刻模式。开启状态下，会尽可能复刻输入 PPTX 文档的内容，无法完美复刻。暂时无法复刻动画效果，开启状态下，需保证输入文档中至少有一个 PPTX 文档。如果有多个 PPTX 文档，则只会对首个文档进行保真复刻。默认值：false */
+  PPTXFidelity?: boolean;
+  /** 生成视频的模式。枚举值：stage： 确认后生成模式auto： 端到端直接生成模式 */
+  Mode?: string;
+  /** 用于生成视频的背景图片信息。仅在 PreserveLayout 为 false 时起作用。 */
+  Background?: DocToVideoBackgroundInfo;
+  /** 用于生成视频的水印图片信息。仅在 PreserveLayout 为 false 时起作用。 */
+  Watermark?: DocToVideoWatermarkInfo;
+  /** 是否开启字幕生成。默认值：false */
+  EnableCaption?: boolean;
+}
+
+/** AIGC 文档生成视频水印图片信息 */
+declare interface DocToVideoWatermarkInfo {
+  /** 用于生成视频的水印图片 URL。 */
+  ImageUrl?: string;
+  /** 水印图片位置。枚举值：top-left： 左上角top-right： 右上角bottom-left： 左下角bottom-right： 右下角 */
+  Position?: string;
 }
 
 /** Drm 加密信息。 */
@@ -6140,7 +6186,7 @@ declare interface QualityControlTemplate {
 declare interface QueryTaskFilter {
   /** 任务ID */
   TaskId?: string;
-  /** 任务类型 */
+  /** 任务类型枚举值：RedrawVideo： 视频重绘AIDrama： AI漫剧DocGenVideo： 文档生视频FissionVideo： 视频裂变 */
   TaskType?: string;
   /** 任务状态 */
   TaskStatus?: string;
@@ -6148,6 +6194,12 @@ declare interface QueryTaskFilter {
   Resolution?: string;
   /** 宽高比 */
   Ratio?: string;
+  /** 任务执行模式枚举值：auto： 直接生成phased： 确认后再生成 */
+  ExecuteMode?: string;
+  /** 裂变任务视频类型过滤: ugc、talk、display、unboxing、reaction枚举值：ugc： UGC种草talk： 产品口播display： 产品展示unboxing： 开箱分享reaction： 反应展示 */
+  VideoType?: string;
+  /** 模型类型枚举值：standard： 标准版flagship： 高级版 */
+  ModelTier?: string;
 }
 
 /** RTMP转推的目标地址信息。 */
@@ -8773,6 +8825,8 @@ declare interface CloneViralRequest {
   ContentParam?: CloneViralContent;
   /** 模特形象 */
   Persona?: CloneViralPersona;
+  /** 输出相关参数 */
+  Output?: CloneViralOutputOption;
 }
 
 declare interface CloneViralResponse {
@@ -10334,6 +10388,10 @@ declare interface DescribeAigcTaskStatusResponse {
   RequestBody?: string;
   /** 任务类型 */
   TaskType?: string;
+  /** 任务其他信息 */
+  TaskInfo?: string | null;
+  /** 任务子状态 */
+  Stage?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10520,6 +10578,8 @@ declare interface DescribeCloneViralTaskResponse {
   Message?: string;
   /** 当任务状态为 DONE时，返回视频Url列表，视频存储24小时 */
   VideoUrls?: string[];
+  /** 任务请求体 */
+  RequestBody?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

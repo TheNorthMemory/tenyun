@@ -434,6 +434,14 @@ declare interface Explain {
   Extra?: string | null;
 }
 
+/** 任务类型信息，供前端下拉筛选使用 */
+declare interface FlowType {
+  /** 任务类型名称，后续可以对 DescribeFlows 出参中的 FlowName 进行筛选 */
+  FlowName?: string | null;
+  /** 任务类型中文描述 */
+  FlowDesc?: string | null;
+}
+
 /** 实例列表过滤条件 */
 declare interface InstanceFilter {
   /** 过滤key，支持InstanceId、VpcId、SubnetId、Vip、Vport、Status、InstanceName、TagKey */
@@ -1240,6 +1248,14 @@ declare interface DeleteUsersResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBCharsetsRequest {
+}
+
+declare interface DescribeDBCharsetsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBEnginesRequest {
 }
 
@@ -1666,6 +1682,36 @@ declare interface DescribeFlowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFlowTypesRequest {
+}
+
+declare interface DescribeFlowTypesResponse {
+  /** 任务类型信息，供前端下拉筛选使用 */
+  FlowTypes?: FlowType[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceDataReservedSpaceRequest {
+  /** 实例ID */
+  InstanceId: string;
+}
+
+declare interface DescribeInstanceDataReservedSpaceResponse {
+  /** 实际保留比例（%，单节点） */
+  ReservedRate?: number;
+  /** 实际保留空间 GB（单节点）单位：GB */
+  ReservedSpaceGB?: number;
+  /** 用户可用空间 GB（单节点）单位：GB */
+  UsableSpaceGB?: number;
+  /** true=旧版本（<21.6.4.0），值取自老参数 tdstore_enter_readonly_threshold；false=新版本 */
+  IsLegacy?: boolean;
+  /** 内核版本号 */
+  KernelVersion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSSLStatusRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1940,6 +1986,20 @@ declare interface ModifyDBSBackupSetCommentResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceDataReservedSpaceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 拟修改的目标保留空间大小单位：GB */
+  ReservedSpaceGB: number;
+}
+
+declare interface ModifyInstanceDataReservedSpaceResponse {
+  /** 参数下发 flow 任务 ID（复用 ModifyDBParameters 链路，异步 flow 但秒级生效） */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceNameRequest {
   /** 需要修改的实例id */
   InstanceId: string;
@@ -2018,6 +2078,16 @@ declare interface ModifyUserPrivilegesResponse {
   RequestId?: string;
 }
 
+declare interface ResetDbaAdminPrivilegesRequest {
+  /** 实例id */
+  InstanceId: string;
+}
+
+declare interface ResetDbaAdminPrivilegesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ResetUsersPasswordRequest {
   /** 实例id */
   InstanceId: string;
@@ -2089,6 +2159,8 @@ declare interface Tdmysql {
   DeleteDBSBackupSets(data: DeleteDBSBackupSetsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBSBackupSetsResponse>;
   /** 批量删除用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
+  /** 查询支持字符集 {@link DescribeDBCharsetsRequest} {@link DescribeDBCharsetsResponse} */
+  DescribeDBCharsets(data?: DescribeDBCharsetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBCharsetsResponse>;
   /** 获取DB引擎版本列表 {@link DescribeDBEnginesRequest} {@link DescribeDBEnginesResponse} */
   DescribeDBEngines(data?: DescribeDBEnginesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBEnginesResponse>;
   /** 查询实例详情 {@link DescribeDBInstanceDetailRequest} {@link DescribeDBInstanceDetailResponse} */
@@ -2119,6 +2191,10 @@ declare interface Tdmysql {
   DescribeDatabases(data: DescribeDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabasesResponse>;
   /** 查询流程状态 {@link DescribeFlowRequest} {@link DescribeFlowResponse} */
   DescribeFlow(data: DescribeFlowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowResponse>;
+  /** 查询任务类型列表 {@link DescribeFlowTypesRequest} {@link DescribeFlowTypesResponse} */
+  DescribeFlowTypes(data?: DescribeFlowTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowTypesResponse>;
+  /** 查询实例数据保留空间 {@link DescribeInstanceDataReservedSpaceRequest} {@link DescribeInstanceDataReservedSpaceResponse} */
+  DescribeInstanceDataReservedSpace(data: DescribeInstanceDataReservedSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceDataReservedSpaceResponse>;
   /** 查询实例SSL状态 {@link DescribeInstanceSSLStatusRequest} {@link DescribeInstanceSSLStatusResponse} */
   DescribeInstanceSSLStatus(data: DescribeInstanceSSLStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSSLStatusResponse>;
   /** 查询维护时间窗口 {@link DescribeMaintenanceWindowRequest} {@link DescribeMaintenanceWindowResponse} */
@@ -2153,6 +2229,8 @@ declare interface Tdmysql {
   ModifyDBSBackupPolicy(data: ModifyDBSBackupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSBackupPolicyResponse>;
   /** 修改实例备份备注 {@link ModifyDBSBackupSetCommentRequest} {@link ModifyDBSBackupSetCommentResponse} */
   ModifyDBSBackupSetComment(data: ModifyDBSBackupSetCommentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBSBackupSetCommentResponse>;
+  /** 修改实例数据保留空间 {@link ModifyInstanceDataReservedSpaceRequest} {@link ModifyInstanceDataReservedSpaceResponse} */
+  ModifyInstanceDataReservedSpace(data: ModifyInstanceDataReservedSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceDataReservedSpaceResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
   /** 修改实例所属网络 {@link ModifyInstanceNetworkRequest} {@link ModifyInstanceNetworkResponse} */
@@ -2163,6 +2241,8 @@ declare interface Tdmysql {
   ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
   /** 修改用户权限 {@link ModifyUserPrivilegesRequest} {@link ModifyUserPrivilegesResponse} */
   ModifyUserPrivileges(data: ModifyUserPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserPrivilegesResponse>;
+  /** 重置DbaAdmin权限 {@link ResetDbaAdminPrivilegesRequest} {@link ResetDbaAdminPrivilegesResponse} */
+  ResetDbaAdminPrivileges(data: ResetDbaAdminPrivilegesRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDbaAdminPrivilegesResponse>;
   /** 批量重置用户密码 {@link ResetUsersPasswordRequest} {@link ResetUsersPasswordResponse} */
   ResetUsersPassword(data: ResetUsersPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetUsersPasswordResponse>;
   /** 重启实例 {@link RestartDBInstancesRequest} {@link RestartDBInstancesResponse} */

@@ -566,6 +566,16 @@ declare interface DisassociateGuardrailConfig {
   GuardrailId: string;
 }
 
+/** embedding配置。 */
+declare interface EmbeddingConfig {
+  /** 模型内路由策略 */
+  RoutingStrategy?: string | null;
+  /** 路由参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs | null;
+  /** 同一模型请求重试次数 */
+  NumRetries?: number | null;
+}
+
 /** 独占集群 */
 declare interface ExclusiveCluster {
   /** 4层独占集群列表 */
@@ -1230,7 +1240,7 @@ declare interface ModalityProbeDetail {
 
 /** 模型别名对象 */
 declare interface ModelAlias {
-  /** 模型积分系数配置，包含 InputCoefficient、InputCachedCoefficient 和 OutputCoefficient。未配置时输入系数默认为 25，缓存命中输入系数默认为 3，输出系数默认为 100。 */
+  /** 模型积分系数配置，包含 InputCoefficient 和 OutputCoefficient。未配置时输入系数和输出系数均返回 1。 */
   Coefficient?: Coefficient;
   /** 模型别名名称。若用户配置了模型别名，则为该别名；未配置时为原始模型名称。 */
   ModelAliasName?: string;
@@ -1240,6 +1250,8 @@ declare interface ModelAlias {
   Source?: string;
   /** 状态枚举值：Active： 正常可用Configuring： 变配中ConfigureFailed： 变配失败 */
   Status?: string;
+  /** 模型能力 */
+  Capability?: string;
 }
 
 /** 模型关联信息 */
@@ -1252,6 +1264,8 @@ declare interface ModelAssociation {
   ServiceProviders?: ServiceProvider[];
   /** 模型类型 */
   Type?: string;
+  /** 输出模态 */
+  Capability?: string;
 }
 
 /** 模型可用性 */
@@ -1330,6 +1344,10 @@ declare interface ModelKeyInfoItem {
   CMRPrivateNetworkTunnelName?: string | null;
   /** 健康检查配置 */
   HealthCheckConfigs?: ServiceProviderHealthCheckConfigItemOutput[];
+  /** 模型输出模态 */
+  Capability?: string | null;
+  /** 请求后缀 */
+  EndpointPath?: string | null;
 }
 
 /** 按模型标识聚合的信息 */
@@ -1414,6 +1432,8 @@ declare interface ModelRouterDetail {
   EipAddressId?: string;
   /** 计费信息 */
   BillingConfig?: ModelRouterBillingConfigOutput;
+  /** Embedding配置 */
+  EmbeddingConfig?: EmbeddingConfig;
 }
 
 /** 模型路由日志 */
@@ -2943,6 +2963,10 @@ declare interface CreateModelRequest {
   CMRPrivateNetworkTunnelId?: string;
   /** 健康检查配置 */
   HealthCheckConfigs?: ServiceProviderHealthCheckConfigItemInput[];
+  /** 模型输出模态 */
+  Capability?: string;
+  /** 请求后缀 */
+  EndpointPath?: string;
 }
 
 declare interface CreateModelResponse {
@@ -2989,6 +3013,8 @@ declare interface CreateModelRouterRequest {
   EipAddressId?: string;
   /** 单位取值范围：[1, 2048]单位：Mbps */
   Bandwidth?: number;
+  /** Embedding 配置 */
+  EmbeddingConfig?: EmbeddingConfig;
 }
 
 declare interface CreateModelRouterResourcePackageRequest {
@@ -3883,6 +3909,8 @@ declare interface DescribeModelAssociationsRequest {
   Limit?: number;
   /** 翻页偏移量默认值：0 */
   Offset?: number;
+  /** 模型输出模态 */
+  Capability?: string;
 }
 
 declare interface DescribeModelAssociationsResponse {
@@ -4817,12 +4845,14 @@ declare interface ModifyLoadBalancersProjectResponse {
 }
 
 declare interface ModifyModelAliasAttributesRequest {
-  /** 模型积分系数配置。必填，至少包含 InputCoefficient、InputCachedCoefficient、OutputCoefficient 中的一个字段，未传字段保持原值。InputCoefficient 为非缓存命中输入积分系数。InputCachedCoefficient 为缓存命中输入积分系数，用于 provider prompt cache 命中的输入 token。OutputCoefficient 为输出积分系数。各字段取值范围：[0, 5000]，仅支持整数，0 表示该类 token 不计积分。 */
+  /** 模型积分系数配置。必填，包含 InputCoefficient 和 OutputCoefficient。InputCoefficient 为输入积分系数。OutputCoefficient 为输出积分系数。取值范围：[1, 200]，最多支持 1 位小数。 */
   Coefficient: Coefficient;
-  /** 模型别名列表。不传 ServiceProviderIds（按 ModelAlias 账号维度修改）时支持数组批量，同一份 Coefficient 应用到多个别名。传入 ServiceProviderIds（按 ServiceProvider 维度修改）时只能传 1 个别名，锁定唯一 model 别名；去重后不等于 1 个将返回 InvalidParameter。 */
+  /** 模型别名 */
   ModelAliasNames: string[];
   /** BYOK 实例（ServiceProvider）ID 列表。可选，数组。传入时按 ServiceProvider 维度修改：把同一份 Coefficient 批量应用到数组内每一个实例（覆盖配置，仅作用于这些实例），此时 ModelAliasNames 只能传 1 个别名（即 1 别名 × N ServiceProvider）；数组需去重、非空、上限 100，任一实例不归属/不存在/该实例下无该别名将整批返回错误。不传时按 ModelAlias（账号）维度修改，作用于该别名下未单独配置覆盖的全部实例。 */
   ServiceProviderIds?: string[];
+  /** 模型能力 */
+  Capability?: string;
 }
 
 declare interface ModifyModelAliasAttributesResponse {
@@ -4837,6 +4867,10 @@ declare interface ModifyModelAttributesRequest {
   ServiceProviderName?: string;
   /** 多协议 Api Base URL */
   ApiBases?: ApiBaseItem[];
+  /** 非chat输出模态的Api Base URL */
+  ApiBase?: string;
+  /** 非chat输出模态的请求后缀 */
+  EndpointPath?: string;
 }
 
 declare interface ModifyModelAttributesResponse {
@@ -4857,6 +4891,10 @@ declare interface ModifyModelRouterAttributesRequest {
   RouterSetting?: RouterSettingWithFallBack;
   /** 带宽取值范围：[1, 2048]单位：Mbps */
   Bandwidth?: number;
+  /** 模型输出模态 */
+  Capability?: string;
+  /** embedding 模态配置 */
+  EmbeddingConfig?: EmbeddingConfig;
 }
 
 declare interface ModifyModelRouterAttributesResponse {
@@ -5343,6 +5381,8 @@ declare interface TestServiceProviderConnectionRequest {
   HealthCheckProtocol?: string;
   /** CMR 私网管道ID */
   CMRPrivateNetworkTunnelId?: string;
+  /** 对应模型的能力枚举值：chat： 生文能力embedding： 向量能力 */
+  Capability?: string;
 }
 
 declare interface TestServiceProviderConnectionResponse {

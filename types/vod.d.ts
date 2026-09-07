@@ -2959,7 +2959,7 @@ declare namespace V20180717 {
 
   /** 色彩增强控制参数 */
   interface ColorEnhanceInfo {
-    /** 色彩增强控制开关，可选值：ON：开启综合增强；OFF：关闭综合增强。 */
+    /** 色彩增强控制开关枚举值：ON： 开启色彩增强OFF： 关闭色彩增强 */
     Switch: string;
     /** 色彩增强类型，仅当色彩增强控制开关为 ON 时有效，可选值：weak：轻色彩增强；normal：正常色彩增强；strong：强色彩增强。默认值：weak。 */
     Type?: string;
@@ -4587,6 +4587,20 @@ declare namespace V20180717 {
     Definition?: number;
     /** 入库时间 */
     ImportTime?: string;
+  }
+
+  /** 知识库信息。 */
+  interface KnowledgeBaseInfo {
+    /** 知识库ID。 */
+    KnowledgeBaseId?: string;
+    /** 知识库名称。 */
+    Name?: string;
+    /** 知识库描述。 */
+    Description?: string;
+    /** 知识库状态。枚举值：creating： 创建中active： 正常deleting： 删除中 */
+    Status?: string;
+    /** 知识库创建时间。 */
+    CreateTime?: string;
   }
 
   /** 媒资智能知识库信息 */
@@ -9242,7 +9256,7 @@ declare namespace V20180717 {
     AudioFileId?: string;
     /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
     LanguageBoost?: string;
-    /** 音色克隆拓展参数。ExtParam 支持的字段： text (string)：试听合成文本，最大 1000 字符；为空或不传时不返回试听音频。 */
+    /** 音色克隆拓展参数。ExtParam 支持的字段： text (string)：试听合成文本，最大 1000 字符；非空时必须同时传 tts_model，克隆成功后返回试听音频 DemoAudio。 model (string)：克隆模型，缺省 minimax-voice-clone。 tts_model (string)：合成试听音频用的模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；text 非空时必填。 text_lang (string)：试听文本语言。 voice_profile (object)：音色画像，可选字段： name (string)：音色名称。 description (string)：音色描述。 gender (string)：性别，可选 male / female / unknown。 age (string)：年龄段，可选 child / teenager / youth / middle_aged / senior / unknown。 languages (string[])：支持语言，如 ["zh", "en"]。 labels (string[])：音色标签，如 ["磁性"]。 scenes (string[])：适用场景，如 ["解说"]。 */
     ExtParam?: string;
     /** 标识来源上下文，用于透传用户请求信息，在回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
@@ -9588,7 +9602,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：OGGGHunyuanViduKling */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1、3.1-lite；当 ModelName 是 Hunyuan，可选值为 3.0；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene；当 ModelName 是Mingmou，可选值为 1.0； */
+    /** 模型版本。取值：当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；当 ModelName 是 GG，可选值为 2.5、3.0、3.1、3.1-lite；当 ModelName 是 Hunyuan，可选值为 3.0、3d_2.0、3.5-preview；当 ModelName 是 Vidu，可选值为 q2；当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1、scene；当 ModelName 是Mingmou，可选值为 1.0； */
     ModelVersion: string;
     /** AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：GG 2.5： 3张；GG 3.0：14张；GG 3.1：14张；Kling 2.1：4张；Kling 3.0：1张；Kling 3.0-Omni：10张；Kling O1：10张；Vidu q2：7张；Hunyuan 3.0：3张； */
     FileInfos?: AigcImageTaskInputFileInfo[];
@@ -9696,7 +9710,7 @@ declare namespace V20180717 {
     SubAppId: number;
     /** 模型名称。取值：Kling：可灵；Vidu；Hailuo：海螺；Hunyuan：混元；Mingmou：明眸；GV；OS；PixVerse; */
     ModelName: string;
-    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast、H3、H3_regen；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；当 ModelName 是 GV，可选值为 3.1、3.1-fast；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
+    /** 模型版本。取值：当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast、H3、H3_regen、H3-Max；当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni、3.0-turbo、scene；当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo、q3-mix、q3-drama、q3-ad、scene、avatar-q2-pro、avatar-q2-turbo、lip-sync；当 ModelName 是 GV，可选值为 3.1、3.1-fast、3.1-lite、omni；当 ModelName 是 OS，可选值为 2.0；当 ModelName 是 Hunyuan，可选值为 1.5、3d_2.0；当 ModelName 是 Mingmou，可选值为 1.0；当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1； */
     ModelVersion: string;
     /** 用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图片/视频/声音生成、视频编辑等模式。首尾帧视频生成：首帧图片的Usage字段为FirstFrame，尾帧图片的Usage字段为LastFrame，支持各一张，可以单独传首帧，不能单独传尾帧。首尾帧生成会参考图片比例。参考图片/视频/声音生成：可传入单个或者多个图片/视频/声音作为参考，Usage字段为Reference；参考模式，可以调整生成视频的宽高比例。视频编辑：Vidu、Kling可输入视频进行编辑。传入视频的同时也可以传入图片，图片的Usage字段为Reference。注意：图片大小不超过10M。支持的图片格式：jpeg、jpg、png。x0b关于模型某个版本是否支持参考图片/视频/声音、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。 */
     FileInfos?: AigcVideoTaskInputFileInfo[];
@@ -9714,7 +9728,7 @@ declare namespace V20180717 {
     EnhancePrompt?: string;
     /** 生视频任务的输出媒体文件配置。 */
     OutputConfig?: AigcVideoOutputConfig;
-    /** 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。 */
+    /** 输入文件的区域信息。取值如下：当输入文件存储在海外时：Oversea；当输入文件存储在美西时：OverseaUSWest；当输入文件存储在国内时：Mainland。默认值：Mainland */
     InputRegion?: string;
     /** 场景类型。取值如下：当 ModelName 为 Kling 时： motion_control 表示动作控制； avatar_i2v 表示数字人； lip_sync 表示对口型；当 ModelName 为 Vidu 时： template_effect 表示特效模板；其他 ModelName 暂不支持。 */
     SceneType?: string;
@@ -10031,6 +10045,8 @@ declare namespace V20180717 {
   }
 
   interface CreateKnowledgeBaseResponse {
+    /** 创建成功后的知识库ID。 */
+    KnowledgeBaseId?: string;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -11677,6 +11693,10 @@ declare namespace V20180717 {
   }
 
   interface DescribeKnowledgeBasesResponse {
+    /** 符合条件的知识库总数。包含隐式的默认知识库。 */
+    TotalCount?: number;
+    /** 知识库信息列表。 */
+    KnowledgeBaseSet?: KnowledgeBaseInfo[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -12143,7 +12163,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别AigcHunyuan3DTask：AIGC 混元 3D 任务DesignVoiceAsync：音色设计CloneVoiceAsync：音色克隆TextToSpeechAsync：语音生成VideoDubbingAsync：视频翻译配音 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；AigcAudioTask：AIGC 生音频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别AigcHunyuan3DTask：AIGC 混元 3D 任务DesignVoiceAsync：音色设计CloneVoiceAsync：音色克隆TextToSpeechAsync：语音生成VideoDubbingAsync：视频翻译配音 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -14364,7 +14384,7 @@ declare namespace V20180717 {
     SubAppId?: string;
     /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
     LanguageBoost?: string;
-    /** 输出相关参数可以指定输出形式等。默认输出音频base64。 */
+    /** 输出相关参数可以指定输出形式等。默认输出音频URL。 */
     Output?: TextToSpeechSyncOutputOption;
     /** 同步语音合成拓展参数。ExtParam 支持的字段： model (string)：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；默认 minimax-speech-2.8-hd。 voice_setting (object)：音色微调，可选字段： speed (float)：语速，[0.5, 2.0]，默认 1.0。 vol (float)：音量，(0, 10]，默认 1.0。 pitch (int)：音调，[-12, 12]，默认 0。 emotion (string)：情绪，可选 happy / sad / angry / fearful / disgusted / surprised / calm / fluent / whisper。 audio_setting (object)：音频输出参数，可选字段： sample_rate (int)：采样率，可选 8000 / 16000 / 22050 / 24000 / 32000 / 44100，默认 16000。 format (string)：音频格式，可选 mp3 / wav，默认 wav。 duration (float)：目标时长（秒）。 cut_silence (bool)：是否裁剪静音段。 */
     ExtParam?: string;

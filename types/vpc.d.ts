@@ -9113,12 +9113,14 @@ declare interface ModifyFlowLogAttributeResponse {
 }
 
 declare interface ModifyGatewayFlowQosRequest {
-  /** 网关实例ID，目前我们支持的网关实例类型有，专线网关实例ID，形如，`dcg-ltjahce6`；Nat网关实例ID，形如，`nat-ltjahce6`；VPN网关实例ID，形如，`vpn-ltjahce6`。 */
+  /** 网关实例ID，目前我们支持的网关实例类型有，专线网关实例ID，形如，dcg-ltjahce6；Nat网关实例ID，形如，nat-ltjahce6；VPN网关实例ID，形如，vpn-ltjahce6。 */
   GatewayId: string;
   /** 流控带宽值。取值大于0，表示限流到指定的Mbps；取值等于0，表示完全限流；取值为-1，不限流。 */
   Bandwidth: number;
-  /** 限流的云服务器内网IP。 */
+  /** 限流的云服务器内网IP。参数格式：10.0.0.2 */
   IpAddresses: string[];
+  /** 限流方向，取值为In代表入向，Out代表出向。当前仅标准型Nat实例网关流控带宽方向可设置入向限流。 */
+  Direction?: string;
 }
 
 declare interface ModifyGatewayFlowQosResponse {
