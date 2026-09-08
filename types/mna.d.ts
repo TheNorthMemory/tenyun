@@ -851,6 +851,10 @@ declare interface GetFlowPackagesRequest {
   DeviceId?: string;
   /** 流量包状态，0：未生效，1：有效期内，2：已过期 */
   Status?: number;
+  /** 生效时间在此时间之后 */
+  ActiveTimeStart?: string;
+  /** 生效时间在此时间之前 */
+  ActiveTimeEnd?: string;
 }
 
 declare interface GetFlowPackagesResponse {

@@ -904,7 +904,7 @@ declare interface TaskView {
   EndTime?: string | null;
 }
 
-/** 描述了VPC相关信息，包括子网，IP信息等 */
+/** 描述了主网卡VPC相关信息，包括子网，IP信息等 */
 declare interface VirtualPrivateCloud {
   /** 私有网络ID，形如vpc-xxx。有效的VpcId可通过登录控制台查询；也可以调用接口 DescribeVpcs ，从接口返回中的VpcId字段获取。若在创建子机时VpcId与SubnetId同时传入DEFAULT，则强制使用默认vpc网络。 */
   VpcId: string;

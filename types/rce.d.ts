@@ -554,6 +554,10 @@ declare interface LoginEvent {
   UserLoginName?: string;
   /** 登录结果 */
   LoginResult?: Result;
+  /** 用户注册时间。参数格式：要求符合ISO 8601标准的带时区的毫秒级时间，格式"YYYY-MM-DDTHH:mm:ss.sssZ" ，例如"2025-10-19T09:11:10.145+08:00" */
+  RegisterTime?: string;
+  /** 是否付费用户。枚举值：true： 付费用户false： 非付费用户 */
+  IsPaidUser?: boolean;
   /** 与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
   Cust?: Cust[];
 }

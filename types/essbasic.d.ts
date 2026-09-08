@@ -1398,8 +1398,10 @@ declare interface RuleIdConfig {
 
 /** 签署控件的配置信息，用在嵌入式发起的页面配置，包括 - 签署控件 是否默认展示日期. */
 declare interface SignComponentConfig {
-  /** 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。- false 展示签署日期（默认）- true 不展示签署日期 ![image](https://qcloudimg.tencent-cloud.cn/raw/448514412e2f69f6129425beda4ff568.png)。 */
+  /** 签署控件默认属性配置，是否默认展示签署日期， 在页面中可以进行修改。false 展示签署日期（默认）true 不展示签署日期。 */
   HideDate?: boolean;
+  /** 【仅 SignBeanTag=1 时有效】 签署方自行添加签署印章类控件（SIGN_SEAL、SIGN_PAGING_SEAL、SIGN_LEGAL_PERSON_SEAL）时，「盖章区适配签署方印章尺寸」开关的控制策略枚举值：0： 默认关闭，可开启。与现网一致1： 关闭且置灰——按控件默认的4.2cm尺寸盖章，签署方无法开启开关2： 默认开启且可修改——默认按印章实际尺寸盖章，签署方可手动关闭3： 开启且置灰——强制按印章实际尺寸盖章，签署方不可修改默认值：0 */
+  AddSignComponentUseSealSize?: number;
 }
 
 /** 签署二维码的基本信息，用于创建二维码，用户可扫描该二维码进行签署操作。 */
@@ -1860,28 +1862,6 @@ declare interface ChannelCreateBoundFlowsResponse {
   RequestId?: string;
 }
 
-declare interface ChannelCreateConvertTaskApiRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
-  Agent: Agent;
-  /** 需要进行转换的资源文件类型支持的文件类型如下：docdocxxlsxlsxjpgjpegpngbmphtmltxt */
-  ResourceType: string;
-  /** 需要进行转换操作的文件资源名称，带资源后缀名。注: `资源名称长度限制为256个字符` */
-  ResourceName: string;
-  /** 需要进行转换操作的文件资源Id，通过UploadFiles接口获取文件资源Id。注: `目前，此接口仅支持单个文件进行转换。` */
-  ResourceId: string;
-  /** 调用方用户信息，不用传 */
-  Operator?: UserInfo;
-  /** 暂未开放 */
-  Organization?: OrganizationInfo;
-}
-
-declare interface ChannelCreateConvertTaskApiResponse {
-  /** 接口返回的文件转换任务Id，可以调用接口查询转换任务状态获取转换任务的状态和转换后的文件资源Id。 */
-  TaskId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ChannelCreateDynamicFlowApproverRequest {
   /** 动态合同信息 */
   FillDynamicFlowList: DynamicFlowInfo[];
@@ -2044,9 +2024,9 @@ declare interface ChannelCreateFlowGroupByTemplatesRequest {
 declare interface ChannelCreateFlowGroupByTemplatesResponse {
   /** 合同组ID，为32位字符串。建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。 */
   FlowGroupId?: string;
-  /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:`此数组的顺序和入参中的FlowInfos顺序一致` */
+  /** 合同组中每个合同流程ID，每个ID均为32位字符串。注:此数组的顺序和入参中的FlowInfos顺序一致 */
   FlowIds?: string[];
-  /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
+  /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过查询转换任务状态接口查询任务详情； */
   TaskInfos?: TaskInfo[];
   /** 合同组签署方信息 */
   Approvers?: FlowGroupApprovers[];
@@ -2728,32 +2708,6 @@ declare interface ChannelDisableUserAutoSignResponse {
   RequestId?: string;
 }
 
-declare interface ChannelGetTaskResultApiRequest {
-  /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId第三方平台子客企业标识: Agent.ProxyOrganizationOpenId第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId第三方平台子客企业和员工必须已经经过实名认证 */
-  Agent: Agent;
-  /** 转换任务Id，通过接口创建文件转换任务接口得到的转换任务id */
-  TaskId: string;
-  /** 操作者的信息，不用传 */
-  Operator?: UserInfo;
-  /** 暂未开放 */
-  Organization?: OrganizationInfo;
-}
-
-declare interface ChannelGetTaskResultApiResponse {
-  /** 任务Id */
-  TaskId?: string;
-  /** 任务状态，需要关注的状态**0** :NeedTranform - 任务已提交**4** :Processing - 文档转换中**8** :TaskEnd - 任务处理完成**-2** :DownloadFailed - 下载失败**-6** :ProcessFailed - 转换失败**-13**:ProcessTimeout - 转换文件超时 */
-  TaskStatus?: number;
-  /** 状态描述，需要关注的状态 **NeedTranform** : 任务已提交 **Processing** : 文档转换中 **TaskEnd** : 任务处理完成 **DownloadFailed** : 下载失败 **ProcessFailed** : 转换失败 **ProcessTimeout** : 转换文件超时 */
-  TaskMessage?: string;
-  /** 资源Id（即FileId），用于[用PDF文件创建签署流程](https://qian.tencent.com/developers/partnerApis/startFlows/ChannelCreateFlowByFiles) */
-  ResourceId?: string;
-  /** 预览文件Url，有效期30分钟 当前字段返回为空，发起的时候，将ResourceId 放入发起即可 */
-  PreviewUrl?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ChannelModifyRoleRequest {
   /** 代理企业和员工的信息。 */
   Agent: Agent;
@@ -3207,7 +3161,7 @@ declare interface CreateFlowsByTemplatesRequest {
   Agent: Agent;
   /** 要创建的合同信息列表，最多支持一次创建20个合同 */
   FlowInfos: FlowInfo[];
-  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作注1: 如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过ChannelGetTaskResultApi接口查询得到注2: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。 */
+  /** 是否为预览模式，取值如下： **false**：非预览模式（默认），会产生合同流程并返回合同流程编号FlowId。 **true**：预览模式，不产生合同流程，不返回合同流程编号FlowId，而是返回预览链接PreviewUrl，有效期为300秒，用于查看真实发起后合同的样子。 注意： 以预览模式创建的合同仅供查看，因此参与方无法进行签署操作注1: 如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过回调通知的方式或使用返回的TaskInfo中的TaskId通过查询转换任务状态接口查询得到注2: 预览服务按照合同份额 1:2的比例赠送预览次数。例如：购买 100 份合同，将赠送 200 次合同预览额度。当赠送的预览额度使用完后，如需继续使用预览服务，则需要单独购买预览服务额度。 */
   NeedPreview?: boolean;
   /** 预览模式下产生的预览链接类型 **0** :(默认) 文件流 ,点开后下载预览的合同PDF文件 **1** :H5链接 ,点开后在浏览器中展示合同的样子注: 此参数在NeedPreview 为true时有效 */
   PreviewType?: number;
@@ -3224,7 +3178,7 @@ declare interface CreateFlowsByTemplatesResponse {
   ErrorMessages?: string[];
   /** 合同预览链接URL数组。注：如果是预览模式(即NeedPreview设置为true)时, 才会有此预览链接URL如果预览的文件中指定了动态表格控件，此时此接口返回的是合成前的文档预览链接，合成完成后的文档预览链接需要通过合同文档合成完成回调获取或使用返回的TaskInfo中的TaskId通过查询转换任务状态接口查询得到 */
   PreviewUrls?: string[];
-  /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过ChannelGetTaskResultApi接口查询任务详情； */
+  /** 复杂文档合成任务（如，包含动态表格的预览任务）的任务信息数组；如果文档需要异步合成，此字段会返回该异步任务的任务信息，后续可以通过查询转换任务状态接口查询任务详情； */
   TaskInfos?: TaskInfo[];
   /** 签署方信息，如角色ID、角色名称等 */
   FlowApprovers?: FlowApproverItem[];
@@ -5585,8 +5539,6 @@ declare interface Essbasic {
   ChannelCreateBatchSignUrl(data: ChannelCreateBatchSignUrlRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBatchSignUrlResponse>;
   /** 领取未归属的合同 {@link ChannelCreateBoundFlowsRequest} {@link ChannelCreateBoundFlowsResponse} */
   ChannelCreateBoundFlows(data: ChannelCreateBoundFlowsRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateBoundFlowsResponse>;
-  /** 创建文件转换任务 {@link ChannelCreateConvertTaskApiRequest} {@link ChannelCreateConvertTaskApiResponse} */
-  ChannelCreateConvertTaskApi(data: ChannelCreateConvertTaskApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateConvertTaskApiResponse>;
   /** 渠道版补充动态合同签署人接口 {@link ChannelCreateDynamicFlowApproverRequest} {@link ChannelCreateDynamicFlowApproverResponse} */
   ChannelCreateDynamicFlowApprover(data: ChannelCreateDynamicFlowApproverRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelCreateDynamicFlowApproverResponse>;
   /** 获取常规模块嵌入页面链接 {@link ChannelCreateEmbedWebUrlRequest} {@link ChannelCreateEmbedWebUrlResponse} */
@@ -5655,8 +5607,6 @@ declare interface Essbasic {
   ChannelDescribeUserAutoSignStatus(data: ChannelDescribeUserAutoSignStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDescribeUserAutoSignStatusResponse>;
   /** 关闭个人自动签功能 {@link ChannelDisableUserAutoSignRequest} {@link ChannelDisableUserAutoSignResponse} */
   ChannelDisableUserAutoSign(data: ChannelDisableUserAutoSignRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelDisableUserAutoSignResponse>;
-  /** 查询转换任务状态 {@link ChannelGetTaskResultApiRequest} {@link ChannelGetTaskResultApiResponse} */
-  ChannelGetTaskResultApi(data: ChannelGetTaskResultApiRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelGetTaskResultApiResponse>;
   /** 更新角色 {@link ChannelModifyRoleRequest} {@link ChannelModifyRoleResponse} */
   ChannelModifyRole(data: ChannelModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ChannelModifyRoleResponse>;
   /** @deprecated 续期医疗自动签许可 {@link ChannelRenewAutoSignLicenseRequest} {@link ChannelRenewAutoSignLicenseResponse} */

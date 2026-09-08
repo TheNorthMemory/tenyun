@@ -858,7 +858,7 @@ declare interface RedisBackupSet {
   StartTime?: string;
   /** 备份任务ID。 */
   BackupId?: string;
-  /** 备份类型。1：凌晨系统发起的自动备份。0：用户发起的手动备份。 */
+  /** 备份类型。枚举值：0： 用户发起的手动备份1： 凌晨系统发起的自动备份2： 变配触发的备份 */
   BackupType?: string;
   /** 备份状态。 1：备份被其它流程锁定。2：备份正常，没有被任何流程锁定。-1：备份已过期。3：备份正在被导出。4：备份导出成功。 */
   Status?: number;
@@ -1883,7 +1883,7 @@ declare interface DescribeInstanceBackupsRequest {
   BeginTime?: string;
   /** 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。 */
   EndTime?: string;
-  /** 备份任务的状态：1：备份在流程中。2：备份正常。3：备份转RDB文件处理中。4：已完成RDB转换。-1：备份已过期。-2：备份已删除。 */
+  /** 备份的状态：枚举值：1： 备份在流程中。2： 备份正常。默认值：2 */
   Status?: number[];
   /** 实例名称，支持根据实例名称模糊搜索。 */
   InstanceName?: string;

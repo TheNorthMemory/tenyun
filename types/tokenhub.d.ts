@@ -1018,6 +1018,10 @@ declare interface DescribeModelQuotaResponse {
   TPMInputReserveLimit?: number;
   /** TPM 预留 output 配额 */
   TPMOutputReserveLimit?: number;
+  /** TPM 预留后付费 input 配额 */
+  TPMInputReservePostPaidLimit?: number;
+  /** TPM 预留后付费 output 配额 */
+  TPMOutputReservePostPaidLimit?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

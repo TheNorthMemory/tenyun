@@ -2605,6 +2605,8 @@ declare interface CreateDBInstanceHourRequest {
   DestroyProtect?: string;
   /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
   FourthZone?: string;
+  /** 弹性扩容参数（如果不传，则不开启） */
+  AutoStrategy?: AutoStrategy;
 }
 
 declare interface CreateDBInstanceHourResponse {
@@ -2705,6 +2707,8 @@ declare interface CreateDBInstanceRequest {
   DestroyProtect?: string;
   /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
   FourthZone?: string;
+  /** 弹性扩容参数（如果不传，则不开启） */
+  AutoStrategy?: AutoStrategy;
 }
 
 declare interface CreateDBInstanceResponse {

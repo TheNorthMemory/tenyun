@@ -3446,6 +3446,16 @@ declare interface DocToVideoInput {
   EnableCaption?: boolean;
 }
 
+/** AIGC 文档生视频任务重新生成的输入信息 */
+declare interface DocToVideoRegenerateInput {
+  /** 重新生成的范围。枚举值：full： 该阶段全量重新生成（例如：修改整体的场景数量）scenes： 按场景局部重新生成（例如：修改某场景的具体内容） */
+  Scope: string;
+  /** 重新生成时的提示词。 */
+  Prompt: string;
+  /** 按页局部重新生成时的目标页 ID 数组。仅 Scope=scenes 时必填。不可重复，单次重新生成最多 5 页。 */
+  SceneIds?: string[];
+}
+
 /** AIGC 文档生成视频水印图片信息 */
 declare interface DocToVideoWatermarkInfo {
   /** 用于生成视频的水印图片 URL。 */
@@ -5472,6 +5482,18 @@ declare interface Metadata {
   Key?: string;
   /** Value。 */
   Value?: string;
+}
+
+/** 修改 AIGC 文档生视频任务状态输入 */
+declare interface ModifyDocToVideoTaskStatusInput {
+  /** 修改动作类型。枚举值：confirm： 确认已完成阶段并推进下一阶段regenerate： 重新生成指定阶段 */
+  Action: string;
+  /** 修改目标阶段。枚举值：STAGE_1：Action=confirm 时：确认大纲、继续生成后续配音、动画效果、字幕；Action=regenerate 时：重新生成大纲。STAGE_2：Action=confirm 时：确认生成的配音、动画效果、字幕，生成最终成片；Action=regenerate 时：重新生成配音、动画效果、字幕。 */
+  Stage: string;
+  /** 需要进行修改的目标任务 ID。 */
+  SourceTaskId: string;
+  /** 重新生成参数。仅 Action=regenerate 时必填。 */
+  Regenerate?: DocToVideoRegenerateInput;
 }
 
 /** 修改输入信息的参数。 */
@@ -12158,6 +12180,18 @@ declare interface ModifyContentReviewTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDocToVideoTaskStatusRequest {
+  /** 修改AIGC文档生视频任务状态的输入 */
+  Input: ModifyDocToVideoTaskStatusInput;
+}
+
+declare interface ModifyDocToVideoTaskStatusResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyImageSpriteTemplateRequest {
   /** 雪碧图模板唯一标识。 */
   Definition: number;
@@ -13557,6 +13591,8 @@ declare interface Mps {
   ModifyBlindWatermarkTemplate(data: ModifyBlindWatermarkTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBlindWatermarkTemplateResponse>;
   /** 修改内容审核模板 {@link ModifyContentReviewTemplateRequest} {@link ModifyContentReviewTemplateResponse} */
   ModifyContentReviewTemplate(data: ModifyContentReviewTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentReviewTemplateResponse>;
+  /** 修改AIGC文档生视频任务状态 {@link ModifyDocToVideoTaskStatusRequest} {@link ModifyDocToVideoTaskStatusResponse} */
+  ModifyDocToVideoTaskStatus(data: ModifyDocToVideoTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocToVideoTaskStatusResponse>;
   /** 修改雪碧图模板 {@link ModifyImageSpriteTemplateRequest} {@link ModifyImageSpriteTemplateResponse} */
   ModifyImageSpriteTemplate(data: ModifyImageSpriteTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageSpriteTemplateResponse>;
   /** 修改直播录制模板 {@link ModifyLiveRecordTemplateRequest} {@link ModifyLiveRecordTemplateResponse} */

@@ -898,6 +898,48 @@ declare interface HttpStatusInfo {
   Num?: number;
 }
 
+/** 数字人直播间克隆形象信息 */
+declare interface LiveAvatarCloneFigureInfo {
+  /** 克隆形象任务ID */
+  TaskId?: string;
+  /** 场景模式枚举值：PHOTO： 图生形象GREEN_SCREEN： 绿幕形象REAL_SHOT： 实景形象 */
+  SceneType?: string;
+  /** 形象名称 */
+  FigureName?: string;
+  /** 性别：男或者女 */
+  Gender?: string;
+  /** 状态枚举值：SUCCESS： 成功FAILED： 失败PROCESSING： 生成中 */
+  Status?: string;
+  /** 进度条 */
+  Progress?: number;
+  /** 克隆好的形象在系统的key */
+  AvatarKey?: string;
+  /** 形象的图像 */
+  FigureImg?: string;
+  /** 失败原因，成功时，该字段没值 */
+  FailReason?: string;
+  /** 训练视频 */
+  MaterialUrl?: string;
+  /** 该克隆音色创建的时间参数格式：YYYY-MM-DD */
+  CreateTime?: string;
+  /** 更新时间参数格式：YYYY-MM */
+  UpdateTime?: string;
+  /** 是否有续期 */
+  RenewStatus?: string;
+  /** 是否过期 */
+  IsExpired?: boolean;
+  /** 有效期时间参数格式：YYYY-MM */
+  ExpireTime?: string;
+  /** 是否循环播放(实景克隆形象能使用) */
+  NeedPlayback?: number;
+  /** 训练幅度，0：表示只有有头部动；1表示头部和手势都有训练单位：1 */
+  PhotoVersion?: number;
+  /** 待确认视频 */
+  ConfirmDemoUrls?: string;
+  /** 形象克隆完成时间参数格式：YYYY-MM */
+  EstimatedCompleteTime?: string;
+}
+
 /** 用作批量绑定域名和证书。 */
 declare interface LiveCertDomainInfo {
   /** 域名。 */
@@ -2450,11 +2492,43 @@ declare interface CreateCommonMixStreamResponse {
   RequestId?: string;
 }
 
+declare interface CreateLiveAvatarCloneFigureRequest {
+  /** 形象克隆场景类型枚举值：PHOTO： 图生数字人GREEN_SCREEN： 绿幕数字人REAL_SHOT： 实景数字人 */
+  SceneType: string;
+  /** 克隆的形象的名字 */
+  FigureName: string;
+  /** 克隆的形象的url */
+  MaterialUrl: string;
+  /** 克隆的形象的性别枚举值：MALE： 男FEMALE： 女UNHNOWN： 不知道 */
+  Gender?: string;
+  /** 授权pdf */
+  IdentityWrittenUrl?: string;
+  /** 授权视频 */
+  IdentityVideoUrl?: string;
+  /** 图生视频时，动作训练幅度大小枚举值：0： 只有头部轻微动1： 头部跟身体均动 */
+  PhotoVersion?: number;
+}
+
+declare interface CreateLiveAvatarCloneFigureResponse {
+  /** 该图克隆形象生成的任务id */
+  TaskId?: string;
+  /** 该克隆形象返回的状态枚举值：SUBMITTING： 已受理CHECKING： 检查中QUEUE： 排队中MAKING： 训练中CONFIRMING： 效果确认SUCCESS： 成功FAIL： 失败 */
+  Status?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLiveAvatarRoomRequest {
   /** 直播间名称。 */
   Name: string;
   /** 操作者。 */
   Operator?: string;
+  /** 形象ID */
+  AvatarKey?: string;
+  /** 音色ID */
+  TimbreKey?: string;
+  /** 房间模式枚举值：INTERACT： 交互模式FREE： 自由模式NORMAL： 普通模式 */
+  LiveMode?: string;
 }
 
 declare interface CreateLiveAvatarRoomResponse {
@@ -3174,6 +3248,16 @@ declare interface DeleteCasterResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLiveAvatarCloneFigureRequest {
+  /** 待查的克隆形象的TaskId */
+  TaskId: string;
+}
+
+declare interface DeleteLiveAvatarCloneFigureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLiveAvatarRoomRequest {
   /** 直播间ID。 */
   RoomId: string;
@@ -3852,6 +3936,26 @@ declare interface DescribeLiveAvatarBackgroundListRequest {
 declare interface DescribeLiveAvatarBackgroundListResponse {
   /** 数字人背景图片信息列表。 */
   InfoList?: AvatarBackgroundInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveAvatarCloneFigureListRequest {
+  /** 待查询的克隆形象的TaskId */
+  TaskId?: string;
+  /** 根据状态查询克隆形象枚举值：SUBMITTING： 已受理CHECKING： 检查中QUEUE： 排队中MAKING： 训练中CONFIRMING： 效果确认SUCCESS： 成功FAIL： 失败 */
+  Status?: string;
+  /** 期望返回克隆形象的个数（最多20个） */
+  Limit?: string;
+  /** 期望返回克隆形象的起始偏移位置（默认为0） */
+  Offset?: string;
+}
+
+declare interface DescribeLiveAvatarCloneFigureListResponse {
+  /** 克隆形象列表 */
+  CloneFigureList?: LiveAvatarCloneFigureInfo[];
+  /** 克隆形象总个数单位：个 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6259,6 +6363,14 @@ declare interface StartLiveAvatarRoomRequest {
   Operator?: string;
   /** 房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间枚举值：AIGC： AIGC形象房间PRESET： 预设形象房间 */
   RoomType?: string;
+  /** 交互模式下的协议，支持rtmp和trtc，默认是rtmp */
+  SessionProtocol?: string;
+  /** 使用trtc协议时，在trtc的appid */
+  TrtcSdkAppId?: string;
+  /** 进入房间时需要用UserSign来校验权限 */
+  TrtcUserSig?: string;
+  /** 要进入的房间 */
+  TrtcRoomId?: string;
 }
 
 declare interface StartLiveAvatarRoomResponse {
@@ -6497,6 +6609,8 @@ declare interface Live {
   CreateCasterPvw(data: CreateCasterPvwRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterPvwResponse>;
   /** 创建通用混流 {@link CreateCommonMixStreamRequest} {@link CreateCommonMixStreamResponse} */
   CreateCommonMixStream(data: CreateCommonMixStreamRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCommonMixStreamResponse>;
+  /** 创建数字人直播间克隆形象 {@link CreateLiveAvatarCloneFigureRequest} {@link CreateLiveAvatarCloneFigureResponse} */
+  CreateLiveAvatarCloneFigure(data: CreateLiveAvatarCloneFigureRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveAvatarCloneFigureResponse>;
   /** 创建数字人直播间 {@link CreateLiveAvatarRoomRequest} {@link CreateLiveAvatarRoomResponse} */
   CreateLiveAvatarRoom(data: CreateLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveAvatarRoomResponse>;
   /** 创建数字人直播间话术 {@link CreateLiveAvatarScriptRequest} {@link CreateLiveAvatarScriptResponse} */
@@ -6559,6 +6673,8 @@ declare interface Live {
   DeleteCasterMarkWordInfo(data: DeleteCasterMarkWordInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterMarkWordInfoResponse>;
   /** 删除导播台推流信息 {@link DeleteCasterOutputInfoRequest} {@link DeleteCasterOutputInfoResponse} */
   DeleteCasterOutputInfo(data: DeleteCasterOutputInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterOutputInfoResponse>;
+  /** 删除数字人直播间克隆形象 {@link DeleteLiveAvatarCloneFigureRequest} {@link DeleteLiveAvatarCloneFigureResponse} */
+  DeleteLiveAvatarCloneFigure(data: DeleteLiveAvatarCloneFigureRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveAvatarCloneFigureResponse>;
   /** 删除数字人直播间 {@link DeleteLiveAvatarRoomRequest} {@link DeleteLiveAvatarRoomResponse} */
   DeleteLiveAvatarRoom(data: DeleteLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveAvatarRoomResponse>;
   /** 删除数字人直播间话术 {@link DeleteLiveAvatarScriptRequest} {@link DeleteLiveAvatarScriptResponse} */
@@ -6655,6 +6771,8 @@ declare interface Live {
   DescribeHttpStatusInfoList(data: DescribeHttpStatusInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpStatusInfoListResponse>;
   /** 查询直播数字人背景列表 {@link DescribeLiveAvatarBackgroundListRequest} {@link DescribeLiveAvatarBackgroundListResponse} */
   DescribeLiveAvatarBackgroundList(data?: DescribeLiveAvatarBackgroundListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarBackgroundListResponse>;
+  /** 查询数字人直播间克隆形象 {@link DescribeLiveAvatarCloneFigureListRequest} {@link DescribeLiveAvatarCloneFigureListResponse} */
+  DescribeLiveAvatarCloneFigureList(data?: DescribeLiveAvatarCloneFigureListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarCloneFigureListResponse>;
   /** 查询直播数字人形象列表 {@link DescribeLiveAvatarImageListRequest} {@link DescribeLiveAvatarImageListResponse} */
   DescribeLiveAvatarImageList(data?: DescribeLiveAvatarImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveAvatarImageListResponse>;
   /** 查询数字人直播间 {@link DescribeLiveAvatarRoomsRequest} {@link DescribeLiveAvatarRoomsResponse} */

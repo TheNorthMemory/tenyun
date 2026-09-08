@@ -549,6 +549,8 @@ declare namespace V20180416 {
     SesTopicPasswd?: string;
     /** / */
     LogstashListenPort?: number;
+    /** serverless 的 spaceid */
+    SesSpaceId?: string;
   }
 
   /** 容器日志采集配置 */

@@ -1055,7 +1055,7 @@ declare interface WebhookTrigger {
   /** 触发器所属命名空间 Id */
   NamespaceId?: number;
   /** 触发器所属命名空间名称 */
-  NamespaceName?: string;
+  NamespaceName?: string | null;
 }
 
 /** 触发器日志 */

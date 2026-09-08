@@ -1464,18 +1464,6 @@ declare interface EventItem {
   Reason?: string;
 }
 
-/** 事件日志项 */
-declare interface EventLogItem {
-  /** 事件时间（Unix 时间戳，秒级） */
-  EventTime?: number;
-  /** 组件名称 */
-  Component?: string;
-  /** 日志级别（INFO/WARN/ERROR） */
-  Level?: string;
-  /** 事件内容 */
-  Message?: string;
-}
-
 /** 案例分类详情 */
 declare interface ExampleCategories {
   /** 分类名称 */
@@ -10576,36 +10564,6 @@ declare interface GetRayClusterYamlResponse {
   RequestId?: string;
 }
 
-declare interface GetRayJobEventLogRequest {
-  /** ray-jobID */
-  Id: string;
-  /** 开始时间 */
-  StartTime?: number;
-  /** 结束时间 */
-  EndTime?: number;
-  /** 当前页码（从1开始） */
-  Page?: number;
-  /** 页数 */
-  PageSize?: number;
-  /** 排序字段列表（列表字段） */
-  SortFields?: SortField[];
-}
-
-declare interface GetRayJobEventLogResponse {
-  /** 事件总数 */
-  TotalCount?: number;
-  /** 事件列表 */
-  Events?: EventLogItem[];
-  /** 当前页码（从1开始） */
-  Page?: number;
-  /** 页数 */
-  PageSize?: number;
-  /** 总页数 */
-  TotalPages?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetRayJobEventRequest {
   /** ray-job ID */
   Id: string;
@@ -14900,8 +14858,6 @@ declare interface Dlc {
   GetRayJob(data: GetRayJobRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobResponse>;
   /** 获取Ray任务事件 {@link GetRayJobEventRequest} {@link GetRayJobEventResponse} */
   GetRayJobEvent(data: GetRayJobEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobEventResponse>;
-  /** 获取作业事件日志 {@link GetRayJobEventLogRequest} {@link GetRayJobEventLogResponse} */
-  GetRayJobEventLog(data: GetRayJobEventLogRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobEventLogResponse>;
   /** 获取Ray任务历史记录 {@link GetRayJobHistoryRequest} {@link GetRayJobHistoryResponse} */
   GetRayJobHistory(data: GetRayJobHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobHistoryResponse>;
   /** 获取Pod的YAML内容 {@link GetRayJobPodYamlRequest} {@link GetRayJobPodYamlResponse} */

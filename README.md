@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，15855+ 服务数</summary>
+<details><summary>共计 260+ 款产品，15858+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -213,7 +213,7 @@ dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/132
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
 dcdb | [TDSQL MySQL 版](https://cloud.tencent.com/document/product/557) | 2018-04-11(83) |
-dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(361) |
+dlc | [数据湖计算 DLC](https://cloud.tencent.com/document/product/1342) | 2021-01-25(360) |
 dnspod | [DNSPod](https://cloud.tencent.com/document/product/1427) | 2021-03-23(97) |
 domain | [域名注册](https://cloud.tencent.com/document/product/242) | 2018-08-08(56) |
 drm | [数字版权管理](https://cloud.tencent.com/document/product/1000) | 2018-11-15(11) |
@@ -229,7 +229,7 @@ eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(102) |
 es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(10) | 2018-04-16(90) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(157) |
-essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(101) | 2020-12-22(53) |
+essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(99) | 2020-12-22(53) |
 evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(5) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(38) |
@@ -268,7 +268,7 @@ keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(69) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(85) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(120) |
-live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(231) |
+live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(234) |
 lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(106) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(11) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(17) |
@@ -278,9 +278,9 @@ market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-1
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
 mmps | [小程序安全](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(63) |
-mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(86) | 2018-04-08(13) |
+mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(88) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(42) | 2018-07-24(186) |
-mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(229) |
+mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(230) |
 mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(79) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |

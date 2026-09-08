@@ -162,6 +162,8 @@ declare interface AppAsset {
   ClientAppPath?: string;
   /** 客户端工具类型 */
   ClientAppKind?: string;
+  /** 客户端工具启动参数 */
+  ClientAppArgs?: string[];
   /** 应用资产url */
   Url?: string;
   /** 托管状态枚举值：0： 未托管1： 已托管 */
@@ -3175,6 +3177,8 @@ declare interface ResetDeviceAccountPrivateKeyResponse {
 declare interface ResetUserRequest {
   /** 用户ID集合 */
   IdSet: number[];
+  /** 重置类型枚举值：0： 同时重置本地认证密码、OTP验证码1： 仅重置本地认证密码2： 仅重置OTP验证码默认值：0 */
+  ResetType?: number;
 }
 
 declare interface ResetUserResponse {

@@ -84,6 +84,8 @@ declare interface AccelerationDomain {
   CreatedOn?: string;
   /** 修改时间。 */
   ModifiedOn?: string;
+  /** 域名因合规问题产生的地区访问限制列表。 */
+  ComplianceRestrictions?: ComplianceRestriction[];
 }
 
 /** 加速域名所对应的证书信息。 */
@@ -1024,6 +1026,14 @@ declare interface CodeAction {
   Parameters: RuleCodeActionParams[];
 }
 
+/** 因政府法律法规、用户协议等规定，对资源进行地区访问限制信息。 */
+declare interface ComplianceRestriction {
+  /** 下发访问限制的原因。枚举值：ICP_RECORD_REQUIRED： 未备案；GOVERNMENT_ORDER： 政府指令。 */
+  Reason?: string;
+  /** 限制访问地区的具体国家/地区码，使用“ISO 3166 国家/地区代码标准”。参数格式：查看链接：https://www.iso.org/iso-3166-country-codes.html。 */
+  Region?: string;
+}
+
 /** 组件被引用的实例信息，用于展示该组件与边缘函数等资源的绑定关系。当边缘函数需要访问组件（如 KV 命名空间）时，会建立引用关系，通过此结构体可查看引用的具体实例详情及所属站点信息。 */
 declare interface ComponentReference {
   /** 引用的实例类型。取值有：edge-function：边缘函数。 */
@@ -1866,6 +1876,8 @@ declare interface Function {
   Content?: string;
   /** 函数默认域名。 */
   Domain?: string;
+  /** 边缘函数默认域名因合规问题产生的地区访问限制列表。 */
+  DomainComplianceRestrictions?: ComplianceRestriction[];
   /** 创建时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
   CreateTime?: string;
   /** 修改时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。 */
