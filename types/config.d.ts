@@ -1501,6 +1501,8 @@ declare interface OpenAggregateConfigRuleResponse {
 }
 
 declare interface OpenConfigRecorderRequest {
+  /** 1:从控制中心调用 */
+  FromMode?: number;
 }
 
 declare interface OpenConfigRecorderResponse {

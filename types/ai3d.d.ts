@@ -359,7 +359,7 @@ declare interface SubmitProfileTo3DJobResponse {
 }
 
 declare interface SubmitReduceFaceJobRequest {
-  /** 源3D模型文件。其中参数 Type 和 Url 必填，参数 PreviewImageUrl 无意义，可忽略。Type可选值：OBJ，GLB */
+  /** 源3D模型文件。其中参数 Type 和 Url 必填，参数 PreviewImageUrl 无意义，可忽略。Type可选值：OBJ，GLB，FBX */
   File3D: File3D;
   /** 多边形类型，表示模型的表面由几边形网格构成，默认为triangle,参考值:triangle:三角形面。quadrilateral：四边形面。 */
   PolygonType?: string;

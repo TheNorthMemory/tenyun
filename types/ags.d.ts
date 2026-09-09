@@ -52,6 +52,8 @@ declare interface CfsStorageSource {
 declare interface ComputerConfiguration {
   /** waa沙箱工具配置 */
   WAAConfiguration?: WAAConfiguration;
+  /** 配置内置 OSWorld */
+  OSWorldConfiguration?: OSWorldConfiguration;
 }
 
 /** 沙箱实例对象存储挂载配置 */
@@ -232,6 +234,12 @@ declare interface NetworkConfiguration {
   NetworkMode: string;
   /** VPC网络相关配置 */
   VpcConfig?: VPCConfig;
+}
+
+/** OSWorld 内置版本配置 */
+declare interface OSWorldConfiguration {
+  /** 指定内置 OSWorld 版本枚举值：osworld1： osworld v1osworld2： osworld v2默认值：osworld1 */
+  Version?: string;
 }
 
 /** 端口配置 */

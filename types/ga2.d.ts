@@ -987,7 +987,7 @@ declare interface DescribeListenersRequest {
   GlobalAcceleratorId: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。 */
+  /** 返回数量。取值范围：[1, 200]默认值：20 */
   Limit?: number;
   /** 过滤条件。 listener-id- String -（过滤条件）监听器实例ID。 */
   Filters?: Filter[];

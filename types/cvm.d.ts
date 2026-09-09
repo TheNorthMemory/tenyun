@@ -2726,11 +2726,11 @@ declare interface ModifyInstanceDiskTypeResponse {
 }
 
 declare interface ModifyInstancesAttributeRequest {
-  /** 一个或多个待操作的实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/213/15728) API返回值中的`InstanceId`获取。每次请求允许操作的实例数量上限是100。 */
+  /** 一个或多个待操作的实例ID。可通过DescribeInstances API返回值中的InstanceId获取。每次请求允许操作的实例数量上限是100。 */
   InstanceIds: string[];
   /** 修改后实例名称。可任意命名，但不得超过60个字符。 */
   InstanceName?: string;
-  /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16 KB。关于获取此参数的详细介绍，请参阅 [Windows](https://cloud.tencent.com/document/product/213/17526) 和 [Linux](https://cloud.tencent.com/document/product/213/17525) 启动时运行命令。 */
+  /** 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16 KB。关于获取此参数的详细介绍，请参阅 Windows 和 Linux 启动时运行命令。 */
   UserData?: string;
   /** 指定实例的修改后的安全组Id列表，子机将重新关联指定列表的安全组，原本关联的安全组会被解绑。 */
   SecurityGroups?: string[];
@@ -2740,10 +2740,12 @@ declare interface ModifyInstancesAttributeRequest {
   HostName?: string;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
   DisableApiTermination?: boolean;
-  /** 角色类别，与CamRoleName搭配使用，该值可从CAM [ DescribeRoleList ](https://cloud.tencent.com/document/product/598/36223)或[ GetRole ](https://cloud.tencent.com/document/product/598/36221)接口返回RoleType字段获取，当前只接受user、system和service_linked三种类别。举例：一般CamRoleName中包含“LinkedRoleIn”（如TKE_QCSLinkedRoleInPrometheusService）时，DescribeRoleList和GetRole返回的RoleType为service_linked，则本参数也需要传递service_linked。该参数默认值为user，若CameRoleName为非service_linked类型，本参数可不传递。 */
+  /** 角色类别，与CamRoleName搭配使用，该值可从CAM DescribeRoleList 或 GetRole 接口返回RoleType字段获取，当前只接受user、system和service_linked三种类别。举例：一般CamRoleName中包含“LinkedRoleIn”（如TKE_QCSLinkedRoleInPrometheusService）时，DescribeRoleList和GetRole返回的RoleType为service_linked，则本参数也需要传递service_linked。该参数默认值为user，若CameRoleName为非service_linked类型，本参数可不传递。 */
   CamRoleType?: string;
-  /** 修改实例主机名是否自动重启实例，不传默认自动重启。- true: 修改主机名，并自动重启实例；- false: 修改主机名，不自动重启实例，需要手动重启使新主机名生效。注意点：本参数仅对修改主机名生效。 */
+  /** 修改实例主机名是否自动重启实例，不传默认自动重启。true: 修改主机名，并自动重启实例；false: 修改主机名，不自动重启实例，需要手动重启使新主机名生效。注意点：本参数仅对修改主机名生效。 */
   AutoReboot?: boolean;
+  /** 实例是否开启巨型帧，取值范围：true：表示实例开启巨型帧，只有支持巨型帧的机型可设置为true。false：表示实例关闭巨型帧，只有支持巨型帧的机型可设置为false。支持巨型帧的实例规格： 实例规格 */
+  EnableJumboFrame?: boolean;
 }
 
 declare interface ModifyInstancesAttributeResponse {

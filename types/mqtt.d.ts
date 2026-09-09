@@ -763,7 +763,7 @@ declare interface CreateHttpAuthenticatorResponse {
 }
 
 declare interface CreateInsPublicEndpointRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 带宽,单位Mbps */
   Bandwidth: number;
@@ -777,11 +777,11 @@ declare interface CreateInsPublicEndpointResponse {
 }
 
 declare interface CreateInstanceRequest {
-  /** 实例类型，需要和SkuCode保持对应关系，可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/api/1778/116232) 接口获取。BASIC 基础版PRO 专业版PLATINUM 铂金版 */
+  /** 实例类型，需要和SkuCode保持对应关系，可参考 获取MQTT产品售卖规格 接口获取。BASIC 基础版PRO 专业版PLATINUM 铂金版 */
   InstanceType: string;
   /** 集群名称不能为空, 3-64个字符，只能包含数字、字母、“-”和“_”。 */
   Name: string;
-  /** 商品规格，需要和InstanceType保持对应关系，可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/api/1778/116232) 接口获取。 */
+  /** 商品规格，需要和InstanceType保持对应关系，可参考 获取MQTT产品售卖规格 接口获取。 */
   SkuCode: string;
   /** 备注信息，最长 128 字符 */
   Remark?: string;
@@ -811,7 +811,7 @@ declare interface CreateInstanceResponse {
 }
 
 declare interface CreateJWKSAuthenticatorRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** JWKS服务地址，（Text字段和Endpoint字段必须选择一个填写） */
   Endpoint?: string;
@@ -881,7 +881,7 @@ declare interface CreateMessageEnrichmentRuleResponse {
 }
 
 declare interface CreateTopicRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 主题，不能为空，只能包含字母、数字、“-”及“_”，3-100 字符。 */
   Topic: string;
@@ -939,7 +939,7 @@ declare interface DeactivateDeviceCertificateResponse {
 }
 
 declare interface DeleteAuthenticatorRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 认证器类型:JWT：JWT认证器JWKS：JWKS认证器HTTP：HTTP认证器 */
   Type: string;
@@ -1025,7 +1025,7 @@ declare interface DeleteDeviceIdentityResponse {
 }
 
 declare interface DeleteInsPublicEndpointRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1035,7 +1035,7 @@ declare interface DeleteInsPublicEndpointResponse {
 }
 
 declare interface DeleteInstanceRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1169,7 +1169,7 @@ declare interface DescribeCaCertificatesResponse {
 }
 
 declare interface DescribeClientListRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 客户端ID */
   ClientId?: string;
@@ -1341,7 +1341,7 @@ declare interface DescribeDeviceIdentityResponse {
 }
 
 declare interface DescribeInsPublicEndpointsRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1361,7 +1361,7 @@ declare interface DescribeInsPublicEndpointsResponse {
 }
 
 declare interface DescribeInsVPCEndpointsRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
 }
 
@@ -1669,7 +1669,7 @@ declare interface DescribeSharedSubscriptionsResponse {
 }
 
 declare interface DescribeTopicListRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 查询条件列表:支持TopicName模糊查询 */
   Filters?: Filter[];
@@ -1889,7 +1889,7 @@ declare interface ModifyHttpAuthenticatorResponse {
 }
 
 declare interface ModifyInsPublicEndpointRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 带宽，单位：Mbps */
   Bandwidth: number;
@@ -1923,7 +1923,7 @@ declare interface ModifyInstanceCertBindingResponse {
 }
 
 declare interface ModifyInstanceRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 要修改实例名称，不能为空, 3-64个字符，只能包含数字、字母、“-”和“_”。 */
   Name?: string;
@@ -1951,7 +1951,7 @@ declare interface ModifyInstanceResponse {
 }
 
 declare interface ModifyJWKSAuthenticatorRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** JWKS服务器地址，（Text字段和Endpoint字段必须选择一个填写） */
   Endpoint?: string;
@@ -1961,7 +1961,7 @@ declare interface ModifyJWKSAuthenticatorRequest {
   RefreshInterval?: number;
   /** JWKS文本，认证服务器地址为空时生效。（Text字段和Endpoint字段必须选择一个填写） */
   Text?: string;
-  /** 认证字段；username-对应 MQTT CONNECT Packet 中 username 字段， password-对应 MQTT CONNECT Packet 中 password 字段。默认username */
+  /** 认证字段；username-对应 MQTT CONNECT Packet 中 username 字段，password-对应 MQTT CONNECT Packet 中 password 字段。默认username */
   From?: string;
   /** 说明，不能超过 128 个字符 */
   Remark?: string;
@@ -2021,7 +2021,7 @@ declare interface ModifyMessageEnrichmentRuleResponse {
 }
 
 declare interface ModifyTopicRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 主题，不能为空，只能包含字母、数字、“-”及“_”，3-100 字符。 */
   Topic: string;
@@ -2035,7 +2035,7 @@ declare interface ModifyTopicResponse {
 }
 
 declare interface ModifyUserRequest {
-  /** 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 用户名 */
   Username: string;
@@ -2065,7 +2065,7 @@ declare interface ModifyX509ConfigResponse {
 }
 
 declare interface PublishMessageRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 消息负载 Payload，是消息的实际内容，需要按 encoding 指定的编码方式进行编码 */
   Payload: string;

@@ -4,17 +4,17 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 
 /** 音频输出参数 */
 declare interface AudioResult {
-  /** 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。 */
+  /** 该字段用于返回审核内容是否命中审核模型；取值：0（未命中）、1（命中）。 */
   HitFlag?: number;
-  /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
+  /** 该字段用于返回检测结果所对应的恶意标签。返回值：Normal：正常，Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
   Label?: string;
-  /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
+  /** 该字段用于返回后续操作建议。当您获取到判定结果后，返回值表示具体的后续建议操作。返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过 */
   Suggestion?: string;
-  /** 该字段用于返回当前标签下的置信度，取值范围：0（**置信度最低**）-100（**置信度最高** ），越高代表文本越有可能属于当前返回的标签；如：*色情 99*，则表明该文本非常有可能属于色情内容。 */
+  /** 该字段用于返回当前标签下的置信度，取值范围：0（置信度最低）-100（置信度最高 ），越高代表文本越有可能属于当前返回的标签；如：色情 99，则表明该文本非常有可能属于色情内容。 */
   Score?: number;
-  /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。 */
+  /** 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别5小时的音频文件，若超出时长限制，接口将会报错。 */
   Text?: string;
-  /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
+  /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用COS预签名功能更新签名时效。 */
   Url?: string;
   /** 该字段用于返回音频文件的时长，单位为毫秒。 */
   Duration?: string;
@@ -46,6 +46,8 @@ declare interface AudioResult {
   Sentences?: Sentence[];
   /** 切片请求ID */
   RequestId?: string;
+  /** 命中信息 */
+  HitSnippetInfos?: HitSnippetInfo[];
 }
 
 /** 音频小语种检测结果 */
@@ -128,6 +130,44 @@ declare interface DecodeParams {
   ImageFrequency?: number;
 }
 
+/** 命中音时间位置 */
+declare interface Duration {
+  /** 音频开始偏移单位：s */
+  Start?: number;
+  /** 音频结束偏移单位：s */
+  End?: number;
+}
+
+/** 命中信息 */
+declare interface HitSnippetInfo {
+  /** 命中内容 */
+  Target?: string;
+  /** 文本命中的文本块 */
+  Snippet?: string;
+  /** 命中场景 */
+  Scene?: string;
+  /** 命中类型 */
+  AtomicCategory?: string;
+  /** 命中类型库/模型名称 */
+  AtomicName?: string;
+  /** 命中原子能力 */
+  AtomicId?: string;
+  /** 命中单位 */
+  UnitId?: string;
+  /** 命中单位名称 */
+  UnitName?: string;
+  /** 命中颗粒ID */
+  ParticleId?: string;
+  /** 命中文本在原文起始位置 */
+  Positions?: Position[];
+  /** 命中图片框位置 */
+  Rect?: Rect;
+  /** 命中音时间位置 */
+  Duration?: Duration;
+  /** 分数 */
+  Score?: number;
+}
+
 /** Result结果详情 */
 declare interface ImageResult {
   /** 违规标志0 未命中1 命中 */
@@ -140,7 +180,7 @@ declare interface ImageResult {
   Score?: number;
   /** 画面截帧图片结果集 */
   Results?: ImageResultResult[];
-  /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。 */
+  /** 该字段用于返回审核结果的访问链接（URL）。备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用COS预签名功能更新签名时效。 */
   Url?: string;
   /** 附加字段 */
   Extra?: string;
@@ -152,6 +192,8 @@ declare interface ImageResult {
   HitType?: string;
   /** 截帧请求ID */
   RequestId?: string;
+  /** 命中信息 */
+  HitSnippetInfos?: HitSnippetInfo[];
 }
 
 /** 图片输出结果的子结果 */
@@ -246,6 +288,8 @@ declare interface InputInfo {
   TextContent?: string;
   /** 文章标题 */
   Title?: string;
+  /** 其他信息 */
+  Extra?: string;
 }
 
 /** 歌曲识别结果 */
@@ -292,6 +336,14 @@ declare interface OcrHitInfo {
   Positions?: TextPosition[];
 }
 
+/** 命中文本偏移信息 */
+declare interface Position {
+  /** 起始偏移 */
+  Start?: number;
+  /** 结束偏移 */
+  End?: number;
+}
+
 /** 审核切片asr文本信息 */
 declare interface RcbAsr {
   /** 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。 */
@@ -306,6 +358,20 @@ declare interface RecognitionResult {
   Label?: string;
   /** 识别标签列表 */
   Tags?: Tag[];
+}
+
+/** 位置信息 */
+declare interface Rect {
+  /** X坐标 */
+  X?: number;
+  /** Y坐标 */
+  Y?: number;
+  /** 宽 */
+  Width?: number;
+  /** 高 */
+  Height?: number;
+  /** 旋转角度 */
+  Rotate?: number;
 }
 
 /** 明细数据相关的cos url */
@@ -358,6 +424,8 @@ declare interface StorageInfo {
   TextContent?: string;
   /** 文章标题 */
   Title?: string;
+  /** 额外信息 */
+  Extra?: string;
 }
 
 /** 音频切片识别标签 */
@@ -516,6 +584,8 @@ declare interface VideoLLMDetail {
   TargetText?: string[];
   /** 违规建议 */
   Suggestion?: string;
+  /** 其他信息 */
+  Extra?: string;
 }
 
 /** 单个视频切片审核结果 */
@@ -634,6 +704,8 @@ declare interface DescribeTaskDetailResponse {
   SegmentCosUrlList?: SegmentCosUrlList;
   /** 该字段用于返回视频中视频切片审核的结果 */
   VideoSegments?: VideoSegment[];
+  /** 命中信息 */
+  HitSnippetInfos?: HitSnippetInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

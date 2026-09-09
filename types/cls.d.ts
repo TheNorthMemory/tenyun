@@ -656,6 +656,8 @@ declare interface ConsumerContent {
   TimestampAccuracy?: number;
   /** 投递Json格式。枚举值：0： 转义。示例：日志原文：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}投递到Ckafka：{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}1： 和原始日志一致，不转义。示例：日志原文：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}投递到Ckafka：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}} */
   JsonType?: number;
+  /** 数值类型自动转换开关枚举值：true： JSON 结构中第一层级的 value 中的数字字符串（如 "123" ）会被自动转换为数值类型（int / float）。false： JSON 结构中第一层级的 value 中的数字字符串（如 "123" ）为字符串。默认值：false */
+  AutoConvertNumber?: boolean;
 }
 
 /** kafka协议消费组信息 */
@@ -696,14 +698,16 @@ declare interface ConsumerInfo {
   Compression?: number | null;
   /** 投递任务创建毫秒时间戳 */
   CreateTime?: number | null;
-  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  /** 角色访问描述名 创建角色 */
   RoleArn?: string | null;
   /** 外部ID */
   ExternalId?: string | null;
-  /** 任务运行状态。支持`0`,`1`,`2` - `0`: 停止 - `1`: 运行中 - `2`: 异常 */
+  /** 任务运行状态。支持0,1,2 - 0: 停止 - 1: 运行中 - 2: 异常 */
   TaskStatus?: number | null;
   /** 高级配置 */
   AdvancedConfig?: AdvancedConsumerConfiguration;
+  /** 日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 /** 自建k8s-容器文件路径信息 */
@@ -1186,6 +1190,58 @@ declare interface DynamicIndex {
   Status?: boolean;
 }
 
+/** eBPF 三维过滤器集合 */
+declare interface EBPFCollectFilters {
+  /** 进程名过滤 */
+  ProcessName: EBPFProcessNameFilter;
+  /** 目的端点过滤 */
+  DestEndpoint: EBPFDestEndpointFilter;
+  /** DNS 过滤 */
+  DNS: EBPFDNSFilter;
+}
+
+/** eBPF 采集规则 */
+declare interface EBPFCollectRule {
+  /** 采集规则名称 */
+  RuleName: string;
+  /** 采集对象枚举值：1： 所有进程 */
+  TrackTarget: number;
+  /** 三维过滤器 */
+  Filters: EBPFCollectFilters;
+}
+
+/** eBPF DNS 过滤器 */
+declare interface EBPFDNSFilter {
+  /** 过滤模式枚举值：0： 不过滤1： 白名单2： 黑名单 */
+  Mode: number;
+  /** 域名列表，支持 *.example.com 通配 */
+  Domains?: string[];
+}
+
+/** eBPF 目的 IP/端口过滤器 */
+declare interface EBPFDestEndpointFilter {
+  /** 过滤模式枚举值：0： 不过滤1： 白名单2： 黑名单 */
+  Mode: number;
+  /** 端点列表 */
+  Endpoints?: EBPFEndpoint[];
+}
+
+/** eBPF 目的端点（IP + 可选端口） */
+declare interface EBPFEndpoint {
+  /** 目标 IP，支持 IPv4/IPv6 */
+  IP: string;
+  /** 目标端口（1-65535），为空表示仅按 IP 过滤 */
+  Port?: number | null;
+}
+
+/** eBPF 进程名过滤器 */
+declare interface EBPFProcessNameFilter {
+  /** 过滤模式枚举值：0： 不过滤1： 白名单2： 黑名单 */
+  Mode: number;
+  /** 进程名列表 */
+  ProcessNames?: string[];
+}
+
 /** 数据加工-高级设置-环境变量 */
 declare interface EnvInfo {
   /** 环境变量名 */
@@ -1586,12 +1642,14 @@ declare interface KafkaConsumerContent {
   Format: number;
   /** 是否投递 TAG 信息Format为0时，此字段不需要赋值 */
   EnableTag: boolean;
-  /** 元数据信息列表, 可选值为：\_\_SOURCE\_\_、\_\_FILENAME\_\_、\_\_TIMESTAMP\_\_、\_\_HOSTNAME\_\_、\_\_PKGID\_\_Format为0时，此字段不需要赋值 */
+  /** 元数据信息列表, 可选值为：__SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__、__PKGID__Format为0时，此字段不需要赋值 */
   MetaFields: string[];
-  /** tag数据处理方式：1:不平铺（默认值）；2:平铺。不平铺示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`不平铺：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺示例：TAG信息：`{"__TAG__":{"fieldA":200,"fieldB":"text"}}`平铺：`{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}` */
+  /** tag数据处理方式：1:不平铺（默认值）；2:平铺。不平铺示例：TAG信息：{"__TAG__":{"fieldA":200,"fieldB":"text"}}不平铺：{"__TAG__":{"fieldA":200,"fieldB":"text"}}平铺示例：TAG信息：{"__TAG__":{"fieldA":200,"fieldB":"text"}}平铺：{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"} */
   TagTransaction?: number;
-  /** 消费数据Json格式：1：不转义（默认格式）2：转义投递Json格式。JsonType为1：和原始日志一致，不转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType为2：转义。示例：日志原文：`{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`投递到Ckafka：`{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}` */
+  /** 消费数据Json格式：1：不转义（默认格式）2：转义投递Json格式。JsonType为1：和原始日志一致，不转义。示例：日志原文：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}投递到Ckafka：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}JsonType为2：转义。示例：日志原文：{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}投递到Ckafka：{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"} */
   JsonType?: number;
+  /** 数值类型自动转换开关枚举值：true： JSON 结构中第一层级的 value 中的数字字符串（如 "123" ）会被自动转换为数值类型（int / float）。false： JSON 结构中第一层级的 value 中的数字字符串（如 "123" ）为字符串。默认值：false */
+  AutoConvertNumber?: boolean;
 }
 
 /** Kafka访问协议 */
@@ -2264,6 +2322,38 @@ declare interface PreviewLogStatistic {
   DstTopicName?: string | null;
 }
 
+/** 产品接入任务详情 */
+declare interface ProductIngestTaskDetail {
+  /** 接入任务id */
+  TaskId?: string;
+  /** 接入任务信息 */
+  ProductIngestTaskItem?: ProductIngestTaskItem;
+  /** 接入实例选择方式枚举值：0： 全部实例1： 按标签筛选2： 手动选择 */
+  SelectionMode?: number;
+  /** 所选实例id列表 */
+  InstanceIds?: string[];
+  /** 所选接入实例所处范围标签 */
+  Tags?: Tag[];
+  /** eBPF 采集规则 */
+  EBPFCollectRule?: EBPFCollectRule | null;
+}
+
+/** 数据接入列表行 */
+declare interface ProductIngestTaskItem {
+  /** 接入任务id */
+  TaskId?: string;
+  /** 接入任务名称 */
+  Name?: string;
+  /** 产品分组 */
+  Product?: string;
+  /** 状态枚举值：0： 接入中1： 已接入2： 接入失败3： 删除中4： 已删除5： 删除失败 */
+  Status?: number;
+  /** 接入任务创建时间单位：ms */
+  CreateTime?: number;
+  /** 接入任务修改时间单位：ms */
+  UpdateTime?: number;
+}
+
 /** 索引重建任务信息 */
 declare interface RebuildIndexTaskInfo {
   /** 索引重建任务ID */
@@ -2374,6 +2464,24 @@ declare interface Relabeling {
   Modulus?: number | null;
 }
 
+/** 工作区关联的日志集 */
+declare interface RelationLogset {
+  /** 日志集id */
+  LogsetId?: string;
+  /** 日志集名称 */
+  LogsetName?: string;
+}
+
+/** 工作区关联的Topic */
+declare interface RelationTopic {
+  /** 日志主题id */
+  TopicId?: string;
+  /** 日志主题名称 */
+  TopicName?: string;
+  /** 日志主题类型枚举值：entity： 实体主题relation： 关系主题ebpf： ebpf采集主题 */
+  Type?: string;
+}
+
 /** Remote Write鉴权信息 */
 declare interface RemoteWriteAuthInfo {
   /** basic auth username */
@@ -2420,6 +2528,58 @@ declare interface RemoteWriteInfo {
   InstanceId?: string | null;
   /** 是否开启投递服务日志。1：关闭，2：开启。 */
   HasServicesLog?: number | null;
+}
+
+/** 资源图谱基本信息 */
+declare interface ResourceGraphDetailInfo {
+  /** 资源图谱id */
+  ResourceGraphId?: string;
+  /** 工作区名称 */
+  Name?: string;
+  /** 工作区描述 */
+  Description?: string;
+  /** 工作区状态枚举值：0： 初始化中1： 成功2： 失败3： 删除中4： 已删除5： 删除失败 */
+  Status?: number;
+  /** 已接入产品数量 */
+  AccessCount?: number;
+  /** 接入的产品列表 */
+  Products?: string[];
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 关联的日志集 */
+  RelationLogset?: RelationLogset;
+  /** 关联的topic */
+  RelationTopics?: RelationTopic[];
+  /** 工作区绑定的标签信息 */
+  Tags?: Tag[];
+}
+
+/** 资源图谱实体关联的日志主题信息 */
+declare interface ResourceGraphEntityRelatedTopic {
+  /** 日志主题id */
+  TopicId: string;
+  /** 日志主题所在地域 */
+  Region: string;
+  /** 日志类型枚举值：bussinesslog： 业务日志 */
+  LogType: string;
+  /** 日志类型枚举值：0： 日志主题1： 指标主题 */
+  BizType?: number;
+}
+
+/** 资源图谱tke集群接入信息 */
+declare interface ResourceGraphTkeClusterInfo {
+  /** tke集群id */
+  ClusterId?: string;
+  /** 资源图谱id */
+  ResourceGraphId?: string;
+  /** 资源图谱名称 */
+  ResourceGraphName?: string;
+  /** 资源图谱接入任务id */
+  TaskId?: string;
+  /** 资源图谱接入任务名称 */
+  TaskName?: string;
 }
 
 /** 索引规则，FullText、KeyValue、Tag参数必须输入一个有效参数 */
@@ -3377,7 +3537,7 @@ declare interface CreateConsumerGroupResponse {
 }
 
 declare interface CreateConsumerRequest {
-  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 投递任务绑定的日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   TopicId: string;
   /** 是否投递日志的元数据信息，默认为 true。当NeedContent为true时：字段Content有效。当NeedContent为false时：字段Content无效。 */
   NeedContent?: boolean;
@@ -3387,12 +3547,14 @@ declare interface CreateConsumerRequest {
   Ckafka?: Ckafka;
   /** 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4] */
   Compression?: number;
-  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  /** 角色访问描述名 创建角色 */
   RoleArn?: string;
   /** 外部ID */
   ExternalId?: string;
   /** 高级配置项 */
   AdvancedConfig?: AdvancedConsumerConfiguration;
+  /** 日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface CreateConsumerResponse {
@@ -3932,6 +4094,46 @@ declare interface CreateRemoteWriteTaskRequest {
 declare interface CreateRemoteWriteTaskResponse {
   /** remoteWrite任务id */
   TaskId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateResourceGraphProductIngestTaskRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 接入任务名称 */
+  Name: string;
+  /** 待接入的云产品；支持tke、cdb、mongodb、redis */
+  CloudProduct: string;
+  /** 实例选择方案枚举值：0： 所有示例1： 按标签选择2： 手动选择 */
+  SelectionMode: number;
+  /** 实例id。当选择方式使用“指定实例”时，需要填写 */
+  InstanceIds?: string[];
+  /** eBPF 采集规则 */
+  EBPFCollectRule?: EBPFCollectRule;
+  /** 标签。当实例选择方案使用“按标签选择”时，需要填写 */
+  Tags?: Tag[];
+}
+
+declare interface CreateResourceGraphProductIngestTaskResponse {
+  /** 接入任务id */
+  TaskId?: string;
+  /** 接入任务状态枚举值：0： 初始化中1： 正常2： 接入失败3： 删除中4： 已删除5： 删除失败6： 修改中7： 修改失败 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateResourceGraphRequest {
+  /** 资源图谱名称 */
+  Name: string;
+  /** 资源图谱描述 */
+  Description?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateResourceGraphResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4562,6 +4764,28 @@ declare interface DeleteRemoteWriteTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteResourceGraphProductIngestTaskRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 接入任务id */
+  TaskId: string;
+}
+
+declare interface DeleteResourceGraphProductIngestTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteResourceGraphRequest {
+  /** 待删除的资源图谱id */
+  ResourceGraphId: string;
+}
+
+declare interface DeleteResourceGraphResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteS3RechargeRequest {
   /** 导入任务Id */
   TaskId: string;
@@ -4929,6 +5153,8 @@ declare interface DescribeConsumerOffsetsRequest {
   TopicId?: string;
   /** 分区id */
   PartitionId?: string;
+  /** 获取offset方式。 0 表示 fetch_offset，1 表示 list_offset */
+  OffsetType?: number;
 }
 
 declare interface DescribeConsumerOffsetsResponse {
@@ -4949,7 +5175,7 @@ declare interface DescribeConsumerPreviewResponse {
 }
 
 declare interface DescribeConsumerRequest {
-  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 投递任务绑定的日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   TopicId: string;
 }
 
@@ -4964,6 +5190,18 @@ declare interface DescribeConsumerResponse {
   Ckafka?: Ckafka;
   /** 压缩方式[0:NONE；2:SNAPPY；3:LZ4] */
   Compression?: number;
+  /** 任务创建时间 */
+  CreateTime?: number;
+  /** 角色访问描述名 创建角色 */
+  RoleArn?: string;
+  /** 外部ID */
+  ExternalId?: string;
+  /** 任务运行状态。支持0,1,2 - 0: 停止 - 1: 运行中 - 2: 异常 */
+  TaskStatus?: number;
+  /** 高级配置 */
+  AdvancedConfig?: AdvancedConsumerConfiguration;
+  /** 日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5614,6 +5852,174 @@ declare interface DescribeRemoteWriteTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResourceGraphDetailRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+}
+
+declare interface DescribeResourceGraphDetailResponse {
+  /** 资源图谱详情信息 */
+  ResourceGraphDetailInfo?: ResourceGraphDetailInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphEntitiesRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** Product 按【产品分组】精确匹配，可用参数：all / business_service / tke / cdb / redis / mongodb 。类型：String。必选：否EntityClassName 按【实体类型】精确匹配，可用参数：all / app.service.application / tc.tke.cluster / tc.tkex.project / tc.cdb.instance / tc.redis.instance / tc.mongodb.instance / k8s.cluster / k8s.namespace / k8s.node / k8s.pod / k8s.ip / k8s.service / k8s.deployment / k8s.statefulset / k8s.statefulsetplus / k8s.daemonset / k8s.storageclass / k8s.persistentvolume / k8s.persistentvolumeclaim / k8s.secret。类型：String。必选：否Name 按【实体名称】模糊匹配。类型：String。必选：否ResourceId 按 【实体资源id】精确匹配。类型：String。必选：否注意：每次请求的 Filters 上限 10。 */
+  Filters?: Filter[];
+  /** 查询偏移 */
+  NextCursor?: string;
+  /** 分页单页数量，默认 20，最大 100 */
+  Limit?: number;
+  /** 查询开始时间单位：毫秒 */
+  FromTime?: number;
+  /** 查询结束时间单位：毫秒 */
+  ToTime?: number;
+}
+
+declare interface DescribeResourceGraphEntitiesResponse {
+  /** 分页的游标，有值则下次分页请求原样带上，无值则表示无下一页 */
+  NextCursor?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphEntityDependencyRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 实体id */
+  EntityId: string;
+  /** 距离Entity的深度 */
+  Depth?: number;
+  /** 返回数量 */
+  Limit?: number;
+  /** 查询范围-开始时间单位：毫秒 */
+  FromTime?: number;
+  /** 查询范围-结束时间单位：毫秒 */
+  ToTime?: number;
+}
+
+declare interface DescribeResourceGraphEntityDependencyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphEntityDetailRequest {
+  /** 实体 ID */
+  EntityId: string;
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 查询范围-开始时间单位：毫秒 */
+  FromTime?: number;
+  /** 查询范围-结束时间单位：毫秒 */
+  ToTime?: number;
+}
+
+declare interface DescribeResourceGraphEntityDetailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphFailureDetailRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+}
+
+declare interface DescribeResourceGraphFailureDetailResponse {
+  /** 失败详情信息 */
+  ErrorMessage?: string;
+  /** 最近一次失败时间单位：秒 */
+  LastFailedTime?: number;
+  /** 重试次数 */
+  RetryCount?: number;
+  /** 首次失败时间单位：秒 */
+  FirstFailedAt?: number;
+  /** 引起失败的操作 */
+  Operation?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphIngestTaskFailureDetailRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 接入任务id */
+  TaskId: string;
+}
+
+declare interface DescribeResourceGraphIngestTaskFailureDetailResponse {
+  /** 接入任务报错信息详情 */
+  ErrorMessage?: string;
+  /** 最近一次失败时间单位：秒 */
+  LastFailedTime?: number;
+  /** 重试次数 */
+  RetryCount?: number;
+  /** 第一次失败时间单位：秒 */
+  FirstFailedAt?: number;
+  /** 引起失败的操作 */
+  Operation?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphProductIngestTaskDetailRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 接入任务id */
+  TaskId: string;
+}
+
+declare interface DescribeResourceGraphProductIngestTaskDetailResponse {
+  /** 接入任务详情 */
+  ProductIngestTaskDetail?: ProductIngestTaskDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphProductIngestTaskListRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 过滤条件taskId 按照【接入任务id】进行过滤，默认为模糊匹配。类型：String。必选：否 product 按照【接入产品】进行过滤，默认为模糊匹配。类型：String。必选：否 name 按照【接入任务名称】进行过滤，默认为模糊匹配。类型：String。必选：否 status 按照【接入任务状态】进行过滤。类型：int。必选：否 ；0：初始化中；1：已接入；2：接入失败；3：删除中；5：删除失败注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。 */
+  Filters?: Filter[];
+  /** 分页偏移量，默认 0 */
+  Offset?: number;
+  /** 分页单页数量，默认 20，最大 100 */
+  Limit?: number;
+}
+
+declare interface DescribeResourceGraphProductIngestTaskListResponse {
+  /** 接入任务列表 */
+  ProductIngestTaskItems?: ProductIngestTaskItem[];
+  /** 筛选后总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphTkeClusterStatusRequest {
+  /** 待检测的tke集群id */
+  ClusterIds: string[];
+}
+
+declare interface DescribeResourceGraphTkeClusterStatusResponse {
+  /** 已接入的tke集群信息 */
+  ConnectedClusterInfos?: ResourceGraphTkeClusterInfo[];
+  /** 未接入的tke集群id */
+  UnconnectedClusterIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceGraphsRequest {
+}
+
+declare interface DescribeResourceGraphsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeS3RechargesRequest {
   /** 日志主题Id。通过获取日志主题列表获取日志主题Id。 */
   TopicId: string;
@@ -6213,7 +6619,7 @@ declare interface ModifyConsumerGroupResponse {
 }
 
 declare interface ModifyConsumerRequest {
-  /** 投递任务绑定的日志主题Id。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 投递任务绑定的日志主题Id。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   TopicId: string;
   /** 投递任务是否生效，默认不生效 */
   Effective?: boolean;
@@ -6225,12 +6631,14 @@ declare interface ModifyConsumerRequest {
   Ckafka?: Ckafka;
   /** 投递时压缩方式，取值0，2，3。[0：NONE；2：SNAPPY；3：LZ4] */
   Compression?: number;
-  /** 角色访问描述名 [创建角色](https://cloud.tencent.com/document/product/598/19381) */
+  /** 角色访问描述名 创建角色 */
   RoleArn?: string;
   /** 外部ID */
   ExternalId?: string;
   /** 高级配置 */
   AdvancedConfig?: AdvancedConsumerConfiguration;
+  /** 日志预过滤-数据写入 ckafka 的原始数据进行预过滤处理 */
+  DSLFilter?: string;
 }
 
 declare interface ModifyConsumerResponse {
@@ -6744,6 +7152,56 @@ declare interface ModifyRemoteWriteTaskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyResourceGraphEntityTopicsRelationRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 实体id仅支持手动关联tke以下实体：node、pod、deployment、statefulset、daemonset */
+  EntityId: string;
+  /** 资源图谱实体关联的topic */
+  TopicInfos?: ResourceGraphEntityRelatedTopic[];
+}
+
+declare interface ModifyResourceGraphEntityTopicsRelationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyResourceGraphProductIngestTaskRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 待修改的任务id */
+  TaskId: string;
+  /** 实例选择方案枚举值：0： 所有示例1： 按标签选择2： 手动选择 */
+  SelectionMode?: number;
+  /** 实例id。当选择方式使用“指定实例”时，需要填写 */
+  InstanceIds?: string[];
+  /** eBPF 采集规则（仅 EBPF 产品） */
+  EBPFCollectRule?: EBPFCollectRule;
+  /** 标签。当实例选择方案使用“按标签选择”时，需要填写 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyResourceGraphProductIngestTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyResourceGraphRequest {
+  /** 待修改的资源图谱id */
+  ResourceGraphId: string;
+  /** 修改后的资源图谱名称 */
+  Name?: string;
+  /** 修改后的资源图谱描述 */
+  Description?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
+  Tags?: Tag[];
+}
+
+declare interface ModifyResourceGraphResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyS3RechargeRequest {
   /** 导入任务Id */
   TaskId: string;
@@ -7118,6 +7576,28 @@ declare interface QueryRangeMetricResponse {
   RequestId?: string;
 }
 
+declare interface RetryResourceGraphProductIngestTaskRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+  /** 接入任务id */
+  TaskId: string;
+}
+
+declare interface RetryResourceGraphProductIngestTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RetryResourceGraphRequest {
+  /** 资源图谱id */
+  ResourceGraphId: string;
+}
+
+declare interface RetryResourceGraphResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RetryShipperTaskRequest {
   /** 投递规则Id。- 通过 [获取投递任务列表](https://cloud.tencent.com/document/product/614/58745)获取ShipperId。 */
   ShipperId: string;
@@ -7407,6 +7887,10 @@ declare interface Cls {
   CreateRecordingRuleYamlTask(data: CreateRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRecordingRuleYamlTaskResponse>;
   /** 创建RemoteWrite任务 {@link CreateRemoteWriteTaskRequest} {@link CreateRemoteWriteTaskResponse} */
   CreateRemoteWriteTask(data: CreateRemoteWriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRemoteWriteTaskResponse>;
+  /** 创建资源图谱 {@link CreateResourceGraphRequest} {@link CreateResourceGraphResponse} */
+  CreateResourceGraph(data: CreateResourceGraphRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceGraphResponse>;
+  /** 创建资源图谱的产品接入任务 {@link CreateResourceGraphProductIngestTaskRequest} {@link CreateResourceGraphProductIngestTaskResponse} */
+  CreateResourceGraphProductIngestTask(data: CreateResourceGraphProductIngestTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourceGraphProductIngestTaskResponse>;
   /** 创建aws导入任务 {@link CreateS3RechargeRequest} {@link CreateS3RechargeResponse} */
   CreateS3Recharge(data: CreateS3RechargeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateS3RechargeResponse>;
   /** 创建定时SQL分析任务 {@link CreateScheduledSqlRequest} {@link CreateScheduledSqlResponse} */
@@ -7487,6 +7971,10 @@ declare interface Cls {
   DeleteRecordingRuleYamlTask(data: DeleteRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRecordingRuleYamlTaskResponse>;
   /** 删除RemoteWrite任务 {@link DeleteRemoteWriteTaskRequest} {@link DeleteRemoteWriteTaskResponse} */
   DeleteRemoteWriteTask(data: DeleteRemoteWriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRemoteWriteTaskResponse>;
+  /** 删除资源图谱 {@link DeleteResourceGraphRequest} {@link DeleteResourceGraphResponse} */
+  DeleteResourceGraph(data: DeleteResourceGraphRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGraphResponse>;
+  /** 删除资源图谱的产品接入任务 {@link DeleteResourceGraphProductIngestTaskRequest} {@link DeleteResourceGraphProductIngestTaskResponse} */
+  DeleteResourceGraphProductIngestTask(data: DeleteResourceGraphProductIngestTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteResourceGraphProductIngestTaskResponse>;
   /** 删除aws导入任务 {@link DeleteS3RechargeRequest} {@link DeleteS3RechargeResponse} */
   DeleteS3Recharge(data: DeleteS3RechargeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteS3RechargeResponse>;
   /** 删除定时SQL分析任务 {@link DeleteScheduledSqlRequest} {@link DeleteScheduledSqlResponse} */
@@ -7605,6 +8093,26 @@ declare interface Cls {
   DescribeRecordingRuleYamlTask(data: DescribeRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRecordingRuleYamlTaskResponse>;
   /** 获取RemoteWrite投递任务列表页 {@link DescribeRemoteWriteTasksRequest} {@link DescribeRemoteWriteTasksResponse} */
   DescribeRemoteWriteTasks(data?: DescribeRemoteWriteTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRemoteWriteTasksResponse>;
+  /** 查询资源图谱详情 {@link DescribeResourceGraphDetailRequest} {@link DescribeResourceGraphDetailResponse} */
+  DescribeResourceGraphDetail(data: DescribeResourceGraphDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphDetailResponse>;
+  /** 查询实体列表 {@link DescribeResourceGraphEntitiesRequest} {@link DescribeResourceGraphEntitiesResponse} */
+  DescribeResourceGraphEntities(data: DescribeResourceGraphEntitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphEntitiesResponse>;
+  /** 查询实体依赖拓扑 {@link DescribeResourceGraphEntityDependencyRequest} {@link DescribeResourceGraphEntityDependencyResponse} */
+  DescribeResourceGraphEntityDependency(data: DescribeResourceGraphEntityDependencyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphEntityDependencyResponse>;
+  /** 查询实体详情 {@link DescribeResourceGraphEntityDetailRequest} {@link DescribeResourceGraphEntityDetailResponse} */
+  DescribeResourceGraphEntityDetail(data: DescribeResourceGraphEntityDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphEntityDetailResponse>;
+  /** 查询资源图谱失败详情 {@link DescribeResourceGraphFailureDetailRequest} {@link DescribeResourceGraphFailureDetailResponse} */
+  DescribeResourceGraphFailureDetail(data: DescribeResourceGraphFailureDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphFailureDetailResponse>;
+  /** 查询资源图谱接入任务失败详情 {@link DescribeResourceGraphIngestTaskFailureDetailRequest} {@link DescribeResourceGraphIngestTaskFailureDetailResponse} */
+  DescribeResourceGraphIngestTaskFailureDetail(data: DescribeResourceGraphIngestTaskFailureDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphIngestTaskFailureDetailResponse>;
+  /** 查询资源图谱的产品接入任务详情 {@link DescribeResourceGraphProductIngestTaskDetailRequest} {@link DescribeResourceGraphProductIngestTaskDetailResponse} */
+  DescribeResourceGraphProductIngestTaskDetail(data: DescribeResourceGraphProductIngestTaskDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphProductIngestTaskDetailResponse>;
+  /** 查询资源图谱的产品接入任务列表 {@link DescribeResourceGraphProductIngestTaskListRequest} {@link DescribeResourceGraphProductIngestTaskListResponse} */
+  DescribeResourceGraphProductIngestTaskList(data: DescribeResourceGraphProductIngestTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphProductIngestTaskListResponse>;
+  /** 查询资源图谱tke集群接入状态 {@link DescribeResourceGraphTkeClusterStatusRequest} {@link DescribeResourceGraphTkeClusterStatusResponse} */
+  DescribeResourceGraphTkeClusterStatus(data: DescribeResourceGraphTkeClusterStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphTkeClusterStatusResponse>;
+  /** 查询资源图谱列表 {@link DescribeResourceGraphsRequest} {@link DescribeResourceGraphsResponse} */
+  DescribeResourceGraphs(data?: DescribeResourceGraphsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGraphsResponse>;
   /** 获取aws导入配置 {@link DescribeS3RechargesRequest} {@link DescribeS3RechargesResponse} */
   DescribeS3Recharges(data: DescribeS3RechargesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeS3RechargesResponse>;
   /** 获取定时SQL分析任务列表 {@link DescribeScheduledSqlInfoRequest} {@link DescribeScheduledSqlInfoResponse} */
@@ -7701,6 +8209,12 @@ declare interface Cls {
   ModifyRecordingRuleYamlTask(data: ModifyRecordingRuleYamlTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRecordingRuleYamlTaskResponse>;
   /** 修改RemoteWrite任务 {@link ModifyRemoteWriteTaskRequest} {@link ModifyRemoteWriteTaskResponse} */
   ModifyRemoteWriteTask(data: ModifyRemoteWriteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRemoteWriteTaskResponse>;
+  /** 编辑资源图谱 {@link ModifyResourceGraphRequest} {@link ModifyResourceGraphResponse} */
+  ModifyResourceGraph(data: ModifyResourceGraphRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGraphResponse>;
+  /** 修改资源图谱实体与日志主题关系 {@link ModifyResourceGraphEntityTopicsRelationRequest} {@link ModifyResourceGraphEntityTopicsRelationResponse} */
+  ModifyResourceGraphEntityTopicsRelation(data: ModifyResourceGraphEntityTopicsRelationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGraphEntityTopicsRelationResponse>;
+  /** 编辑资源图谱的产品接入任务 {@link ModifyResourceGraphProductIngestTaskRequest} {@link ModifyResourceGraphProductIngestTaskResponse} */
+  ModifyResourceGraphProductIngestTask(data: ModifyResourceGraphProductIngestTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyResourceGraphProductIngestTaskResponse>;
   /** 修改aws导入任务 {@link ModifyS3RechargeRequest} {@link ModifyS3RechargeResponse} */
   ModifyS3Recharge(data: ModifyS3RechargeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyS3RechargeResponse>;
   /** 修改定时SQL分析任务 {@link ModifyScheduledSqlRequest} {@link ModifyScheduledSqlResponse} */
@@ -7727,6 +8241,10 @@ declare interface Cls {
   QueryMetric(data: QueryMetricRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMetricResponse>;
   /** 指标查询（范围查询） {@link QueryRangeMetricRequest} {@link QueryRangeMetricResponse} */
   QueryRangeMetric(data: QueryRangeMetricRequest, config?: AxiosRequestConfig): AxiosPromise<QueryRangeMetricResponse>;
+  /** 重试资源图谱 {@link RetryResourceGraphRequest} {@link RetryResourceGraphResponse} */
+  RetryResourceGraph(data: RetryResourceGraphRequest, config?: AxiosRequestConfig): AxiosPromise<RetryResourceGraphResponse>;
+  /** 重试资源图谱接入任务 {@link RetryResourceGraphProductIngestTaskRequest} {@link RetryResourceGraphProductIngestTaskResponse} */
+  RetryResourceGraphProductIngestTask(data: RetryResourceGraphProductIngestTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryResourceGraphProductIngestTaskResponse>;
   /** 重试失败的投递任务 {@link RetryShipperTaskRequest} {@link RetryShipperTaskResponse} */
   RetryShipperTask(data: RetryShipperTaskRequest, config?: AxiosRequestConfig): AxiosPromise<RetryShipperTaskResponse>;
   /** 预览cos导入信息 {@link SearchCosRechargeInfoRequest} {@link SearchCosRechargeInfoResponse} */

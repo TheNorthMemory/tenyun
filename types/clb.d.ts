@@ -5383,6 +5383,8 @@ declare interface TestServiceProviderConnectionRequest {
   CMRPrivateNetworkTunnelId?: string;
   /** 对应模型的能力枚举值：chat： 生文能力embedding： 向量能力 */
   Capability?: string;
+  /** 端点路径 */
+  EndpointPath?: string;
 }
 
 declare interface TestServiceProviderConnectionResponse {

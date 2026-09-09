@@ -5647,6 +5647,8 @@ declare interface DescribeInstanceSpecsRequest {
   DeviceType?: string;
   /** 集群级别。例如 P0, P1。若未指定可用区，针对于不支持亲和性的可用区将降级查询非亲和性资源。 */
   ClusterLevel?: string;
+  /** 可用区 */
+  Zone?: string;
 }
 
 declare interface DescribeInstanceSpecsResponse {

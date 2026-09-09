@@ -11392,7 +11392,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeCurrentPlaylistRequest {
-    /** 点播[应用](/document/product/266/14574) ID。 */
+    /** 点播应用 ID。 */
     SubAppId: number;
     /** 轮播播单唯一标识。 */
     RoundPlayId: string;

@@ -1801,9 +1801,9 @@ declare interface CreateStaffResponse {
 declare interface CreateUserSigRequest {
   /** 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc */
   SdkAppId: number;
-  /** 用户 ID，该值必须与 ClientData 字段中 Uid 的值一致 */
+  /** 用户 ID */
   Uid: string;
-  /** 用户签名数据，必填字段，为标准 JSON 格式 */
+  /** 用户签名数据 */
   ClientData: string;
   /** 有效期，单位秒，不超过 1 小时 */
   ExpiredTime: number;

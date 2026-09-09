@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，15858+ 服务数</summary>
+<details><summary>共计 260+ 款产品，15883+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -189,7 +189,7 @@ cloudhsm | [云加密机](https://cloud.tencent.com/document/product/639) | 2019
 cloudmate | [Cloud Mate](https://cloud.tencent.com/document/product/1816) | 2025-10-30(1) |
 cloudrc | [资源中心](https://cloud.tencent.com/document/product/1791) | 2024-06-06(2) |
 cloudstudio | [Cloud Studio（云端 IDE）](https://cloud.tencent.com/document/product/1039) | 2023-05-08(9) |
-cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(208) |
+cls | [日志服务](https://cloud.tencent.com/document/product/614) | 2020-10-16(227) |
 cme | [多媒体创作引擎](https://cloud.tencent.com/document/product/1156) | 2019-10-29(52) |
 cmq | [消息队列 CMQ](https://cloud.tencent.com/document/product/406) | 2019-03-04(2) |
 cms | 内容安全 | 2019-03-21(6) |
@@ -232,7 +232,7 @@ ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(99) | 2020-12-22(53) |
 evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(5) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
-faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(38) |
+faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(37) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-06-11(44) |
@@ -287,14 +287,14 @@ ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(3) |
 npp | 号码保护 | 2019-08-23(8) |
-oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(53) |
+oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(54) |
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(80) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(32) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(134) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
 portal | [官网门户服务](https://cloud.tencent.com/document/product/1842) | 2023-04-13(1) |
-postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(124) |
+postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(130) |
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [风险识别 RCE](https://cloud.tencent.com/document/product/1343) | 2026-01-30(5) | 2025-04-25(1)<br/>2020-11-03(11) |
@@ -321,7 +321,7 @@ tat | [自动化助手](https://cloud.tencent.com/document/product/1340) | 2020-
 tbaas | [腾讯云区块链服务平台 TBaaS](https://cloud.tencent.com/document/product/663) | 2018-04-16(24) |
 tbp | [腾讯智能对话平台](https://cloud.tencent.com/document/product/1060) | 2019-06-27(2) | 2019-03-11(4) |
 tcaplusdb | [游戏数据库 TcaplusDB](https://cloud.tencent.com/document/product/596) | 2019-08-23(52) |
-tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(105+210) |
+tcb | [云开发 CloudBase](https://cloud.tencent.com/document/product/876) | 2018-06-08(102+210) |
 tcbr | [云托管 CloudBase Run](https://cloud.tencent.com/document/product/1243) | 2022-02-17(22+7) |
 tccatalog | [多模态智能数据湖 TCLake](https://cloud.tencent.com/document/product/1784) | 2024-10-24(4) |
 tchd | [腾讯云健康看板](https://cloud.tencent.com/document/product/1688) | 2023-03-06(2) |
@@ -336,7 +336,7 @@ tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
 teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(231) | 2022-01-06(5) |
-thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(49) | 2022-04-01(16)<br/>2021-11-09(4) |
+thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(52) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |
 tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(75) | 2019-10-22(22) |

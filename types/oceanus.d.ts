@@ -2058,6 +2058,22 @@ declare interface DescribeJobConfigsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJobDetailRequest {
+  /** flink rest api 路径 */
+  Path?: string;
+  /** 作业id */
+  JobSerialId?: string;
+  /** 请求rest api 方法 */
+  Method?: string;
+}
+
+declare interface DescribeJobDetailResponse {
+  /** flink rest api 响应 */
+  Data?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobEventsRequest {
   /** 作业的 ID */
   JobId: string;
@@ -2709,6 +2725,8 @@ declare interface Oceanus {
   DescribeFolder(data: DescribeFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFolderResponse>;
   /** 查询作业配置 {@link DescribeJobConfigsRequest} {@link DescribeJobConfigsResponse} */
   DescribeJobConfigs(data: DescribeJobConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobConfigsResponse>;
+  /** 显示作业详情 {@link DescribeJobDetailRequest} {@link DescribeJobDetailResponse} */
+  DescribeJobDetail(data?: DescribeJobDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobDetailResponse>;
   /** 获取指定作业的事件 {@link DescribeJobEventsRequest} {@link DescribeJobEventsResponse} */
   DescribeJobEvents(data: DescribeJobEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobEventsResponse>;
   /** 获取作业运行时的信息 {@link DescribeJobRuntimeInfoRequest} {@link DescribeJobRuntimeInfoResponse} */

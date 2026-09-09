@@ -3096,7 +3096,7 @@ declare interface CreateInstancePreRequest {
   Partition?: number;
   /** 标签 */
   Tags?: Tag[];
-  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC" */
+  /** 专业版/高级版实例磁盘类型，标准版实例不需要填写。枚举值：CLOUD_SSD： SSD云硬盘CLOUD_PREMIUM： 高性能云硬盘默认值：CLOUD_PREMIUM */
   DiskType?: string;
   /** 是否创建跨可用区实例，当前参数为 true 时，zoneIds必填 */
   MultiZoneFlag?: boolean;
@@ -3236,7 +3236,7 @@ declare interface CreatePostPaidInstanceRequest {
   KafkaVersion?: string;
   /** 实例类型。"standard"：标准版，"profession"：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
   SpecificationsType?: string;
-  /** 专业版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认值为 "CLOUD_BASIC" */
+  /** 专业版实例磁盘类型，标准版实例不需要填写枚举值：CLOUD_SSD： SSD云硬盘CLOUD_PREMIUM： 高性能云硬盘默认值：CLOUD_PREMIUM */
   DiskType?: string;
   /** 实例内网峰值带宽，默认值为40。单位 MB/s。标准版需传入当前实例规格所对应的峰值带宽。注意如果创建的实例为专业版实例，峰值带宽，分区数等参数配置需要满足专业版的计费规格，可以通过以下链接查看计费规格：https://cloud.tencent.com/document/product/597/11745 */
   BandWidth?: number;
@@ -3442,19 +3442,19 @@ declare interface CreateUserResponse {
 }
 
 declare interface DeleteAclRequest {
-  /** ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取 */
+  /** ckafka集群实例Id，可通过DescribeInstances接口获取 */
   InstanceId: string;
   /** Acl资源类型，(2:TOPIC，3:GROUP，4:CLUSTER) */
   ResourceType: number;
   /** 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。 */
   ResourceName: string;
-  /** Acl操作方式，(2:ALL，3:READ，4:WRITE，5:CREATE，6:DELETE，7:ALTER，8:DESCRIBE，9:CLUSTER_ACTION，10:DESCRIBE_CONFIGS，11:ALTER_CONFIGS，12:IDEMPOTENT_WRITE) */
+  /** Acl操作方式枚举值：2： ALL3： READ4： WRITE5： CREATE6： DELETE7： ALTER8： DESCRIBE9： CLUSTER_ACTION10： DESCRIBE_CONFIGS11： ALTER_CONFIGS12： IDEMPOTENT_WRITE合法取值与 ResourceType 相关，传入组合以外的值将返回参数错误。本参数必须与 PermissionType 同时传入ResourceType=2（TOPIC）：2、3、4、5、6、7、8、10、11ResourceType=3（GROUP）：2、3、6、8ResourceType=4（CLUSTER）：2、5、7、8、9、10、11、12 */
   Operation: number;
-  /** 权限类型，(2:DENY，3:ALLOW)，当前ckafka支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用 */
+  /** 权限类型，当前ckafka支持ALLOW(相当于白名单)，其它用于后续兼容开源kafka的acl时使用枚举值：2： DENY3： ALLOW本参数必须与 Operation 同时传入 */
   PermissionType: number;
-  /** 默认为\*，表示任何host都可以访问，当前ckafka不支持host为\*，但是后面开源kafka的产品化会直接支持 */
+  /** 默认为*，表示任何host都可以访问，当前ckafka不支持host为*，但是后面开源kafka的产品化会直接支持删除时与 Principal、Operation、PermissionType 一起参与精确匹配 */
   Host?: string;
-  /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户 */
+  /** 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户删除时不校验该用户是否仍存在，允许清理已删除用户的残留策略；该参数与 Host、Operation、PermissionType 一起参与精确匹配 */
   Principal?: string;
 }
 

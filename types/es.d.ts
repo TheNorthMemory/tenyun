@@ -1389,6 +1389,8 @@ declare namespace V20180416 {
     OldEsVip?: string;
     /** 集群待迁移的TCP地址 */
     OldEsPrivateTcpUrl?: string;
+    /** 是否需要从VIP下线旧节点 */
+    NeedOfflineOldNodesNotify?: boolean;
   }
 
   /** ES集群日志详细信息 */

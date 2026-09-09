@@ -1208,6 +1208,20 @@ declare interface DescribeClusterDedicatedProxyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeClusterMonitorStatusRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DescribeClusterMonitorStatusResponse {
+  /** 集群监控状态 */
+  MonitorStatus?: string;
+  /** 集群关联的prometheus实例ID */
+  PrometheusId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClusterStorageOptionRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1436,6 +1450,16 @@ declare interface DisableClusterDedicatedProxyResponse {
   RequestId?: string;
 }
 
+declare interface DisableClusterMonitorRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+}
+
+declare interface DisableClusterMonitorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface EnableClusterDedicatedProxyRequest {
   /** 集群ID。 */
   ClusterId: string;
@@ -1458,6 +1482,18 @@ declare interface EnableClusterDedicatedProxyResponse {
   VpcId?: string;
   /** 子网ID。 */
   SubnetId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnableClusterMonitorRequest {
+  /** 集群ID。 */
+  ClusterId: string;
+  /** Prometheus实例ID */
+  PrometheusId: string;
+}
+
+declare interface EnableClusterMonitorResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2775,6 +2811,8 @@ declare interface Thpc {
   DescribeClusterActivities(data: DescribeClusterActivitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterActivitiesResponse>;
   /** 查询IDC集群专线代理状态 {@link DescribeClusterDedicatedProxyRequest} {@link DescribeClusterDedicatedProxyResponse} */
   DescribeClusterDedicatedProxy(data: DescribeClusterDedicatedProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDedicatedProxyResponse>;
+  /** 查询集群的监控状态 {@link DescribeClusterMonitorStatusRequest} {@link DescribeClusterMonitorStatusResponse} */
+  DescribeClusterMonitorStatus(data: DescribeClusterMonitorStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterMonitorStatusResponse>;
   /** 查询集群存储选项 {@link DescribeClusterStorageOptionRequest} {@link DescribeClusterStorageOptionResponse} */
   DescribeClusterStorageOption(data: DescribeClusterStorageOptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterStorageOptionResponse>;
   /** 查询集群列表 {@link DescribeClustersRequest} {@link DescribeClustersResponse} */
@@ -2805,8 +2843,12 @@ declare interface Thpc {
   DetachNodes(data: DetachNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DetachNodesResponse>;
   /** 关闭IDC集群专线代理 {@link DisableClusterDedicatedProxyRequest} {@link DisableClusterDedicatedProxyResponse} */
   DisableClusterDedicatedProxy(data: DisableClusterDedicatedProxyRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterDedicatedProxyResponse>;
+  /** 关闭集群的监控能力 {@link DisableClusterMonitorRequest} {@link DisableClusterMonitorResponse} */
+  DisableClusterMonitor(data: DisableClusterMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<DisableClusterMonitorResponse>;
   /** 开启IDC集群专线代理 {@link EnableClusterDedicatedProxyRequest} {@link EnableClusterDedicatedProxyResponse} */
   EnableClusterDedicatedProxy(data: EnableClusterDedicatedProxyRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterDedicatedProxyResponse>;
+  /** 启动集群的监控能力 {@link EnableClusterMonitorRequest} {@link EnableClusterMonitorResponse} */
+  EnableClusterMonitor(data: EnableClusterMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClusterMonitorResponse>;
   /** 创建注册码 {@link GenerateRegisterCodeRequest} {@link GenerateRegisterCodeResponse} */
   GenerateRegisterCode(data: GenerateRegisterCodeRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateRegisterCodeResponse>;
   /** 生成IDC集群节点注册命令 {@link GenerateRegisterCommandRequest} {@link GenerateRegisterCommandResponse} */

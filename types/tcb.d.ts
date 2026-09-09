@@ -602,6 +602,28 @@ declare interface HTTPServiceCacheParams {
   MaxAgeTime?: number;
 }
 
+/** 清除任务详情 */
+declare interface HTTPServiceCachePurgeTask {
+  /** 缓存类型枚举值：EO： EOTCBCDN： 云开发cdn默认值：EO */
+  CacheType?: string;
+  /** 任务id */
+  TaskId?: string;
+  /** 状态枚举值：PROCESSING： 处理中SUCCESS： 成功FAILED： 失败TIMEOUT： 超时CANCELED： 取消 */
+  Status?: string;
+  /** 刷新类型枚举值：PURGE_URL： URL 刷新PURGE_PREFIX： 目录刷新PURGE_HOST： Hostname 刷新 */
+  PurgeType?: string;
+  /** 清除缓存分为直接删除和标记过期两种方式。URL 类型默认为“直接删除”，其它清除类型默认为“标记过期”枚举值：INVALIDATE： 标记过期：节点缓存标记为过期，用户请求时回源校验，源站 304 则复用，200 则更新DELETE： 直接删除：从节点直接删除缓存，用户下次请求强制回源拉新 */
+  Method?: string;
+  /** 刷新目标列表（URL / 前缀 / host） */
+  Targets?: string[];
+  /** 失败原因 */
+  FailReason?: string;
+  /** 任务创建时间参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0 */
+  CreateTime?: string;
+  /** 任务更新时间参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0 */
+  UpdateTime?: string;
+}
+
 /** HTTPService 缓存规则条目 */
 declare interface HTTPServiceCacheRule {
   /** 自定义描述，最多 128 字节 */
@@ -1556,52 +1578,6 @@ declare interface User {
   Description?: string;
 }
 
-/** 云服务器登录方式 */
-declare interface VMLoginConfiguration {
-  /** 登录方式。扫码登录时指定为 SCAN_LOGIN */
-  LoginType?: string;
-  /** 是否自动生成密码 */
-  AutoGeneratePassword?: string;
-  /** 指定密码登录 */
-  Password?: string;
-  /** 绑定密钥ID */
-  KeyIds?: string[];
-}
-
-/** 虚拟主机价格 */
-declare interface VMPrice {
-  /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
-  Currency?: string;
-  /** 原始价格 */
-  OriginalPrice?: number;
-  /** 折扣率 */
-  Discount?: number;
-  /** 折扣后的价格 */
-  DiscountPrice?: number;
-  /** 折扣前每天资源点 */
-  OriginalCredits?: number;
-  /** 折扣后每天所需资源点 */
-  DiscountCredits?: number;
-}
-
-/** VM规格 */
-declare interface VMSpec {
-  /** LightHouse=轻量云服务器CVM=云服务器 */
-  Type?: string;
-  /** 轻量云服务器规格。当Type=LightHouse时有效 */
-  LightHouseSpec?: VMSpecLightHouse;
-  /** 价格信息 */
-  Price?: VMPrice;
-}
-
-/** vm规格 */
-declare interface VMSpecLightHouse {
-  /** LH主机的BundleId */
-  BundleId?: string;
-  /** 主机配置详情json */
-  BundleConfig?: string;
-}
-
 /** 资源用量明细结构 */
 declare interface ValueDetail {
   /** 时间 */
@@ -1652,16 +1628,6 @@ declare interface VerifyHTTPServiceRouteCheckItem {
   Message?: string;
   /** 域名归属权验证指引信息，仅在所有权校验未通过时有值 */
   OwnershipVerification?: OwnershipVerificationInfo;
-}
-
-/** 云主机实例 */
-declare interface VmInstance {
-  /** 实例id */
-  InstanceId?: string;
-  /** 实例状态 */
-  Status?: string;
-  /** 实例地域 */
-  Region?: string;
 }
 
 /** 安全网关自定义配置 */
@@ -2098,26 +2064,6 @@ declare interface CreateUserResponse {
   RequestId?: string;
 }
 
-declare interface CreateVmInstanceRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 服务器类型：LightHouse = 轻量云服务器CVM = 云服务器 */
-  Type: string;
-  /** 轻量云服务器套餐ID。 当Type=LightHouse时必传 */
-  LightHouseBundleId?: string;
-  /** 轻量云服务器镜像ID。当Type=LightHouse时必传 */
-  LightHouseBlueprintId?: string;
-  /** 服务器别名 */
-  InstanceName?: string;
-  /** 登录方式 */
-  LoginConfiguration?: VMLoginConfiguration;
-}
-
-declare interface CreateVmInstanceResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DeleteAIModelRequest {
   /** 环境id */
   EnvId: string;
@@ -2244,18 +2190,6 @@ declare interface DeleteUsersRequest {
 declare interface DeleteUsersResponse {
   /** 删除用户结果 */
   Data?: DeleteUsersResp;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteVmInstanceRequest {
-  /** 服务器实例id */
-  InstanceId: string;
-  /** 环境id */
-  EnvId: string;
-}
-
-declare interface DeleteVmInstanceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2866,6 +2800,36 @@ declare interface DescribeGatewayVersionsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHTTPServiceCachePurgeTaskRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** HTTPService域名 */
+  Domain: string;
+  /** 缓存类型枚举值：EO： EO缓存CDN： CDN缓存默认值：EO */
+  CacheType?: string;
+  /** 任务id，PurgeHTTPServiceCache返回的TaskId，可选 */
+  TaskId?: string;
+  /** 按刷新类型过滤枚举值：PURGE_URL： URL 刷新PURGE_PREFIX： 目录刷新PURGE_HOST： Hostname 刷新 */
+  PurgeType?: string;
+  /** 查询开始时间，TaskId为空时，默认开始时间是7天前参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0 */
+  StartTime?: string;
+  /** 查询结束时间，TaskId为空时，默认结束时间是当前参数格式：格式 YYYY-MM-DDTHH:mm:ss±HH:mmZ，时区为 UTC+0 */
+  EndTime?: string;
+  /** 分页偏移量。默认 0 */
+  Offset?: number;
+  /** 分页限制。默认20，最大值1000 */
+  Limit?: number;
+}
+
+declare interface DescribeHTTPServiceCachePurgeTaskResponse {
+  /** 任务列表 */
+  Tasks?: HTTPServiceCachePurgeTask[];
+  /** 域名总数，分页查询使用总数判断是否已经拉取到所有数据 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHTTPServiceRouteRequest {
   /** 环境ID */
   EnvId: string;
@@ -3132,32 +3096,6 @@ declare interface DescribeUserListResponse {
   RequestId?: string;
 }
 
-declare interface DescribeVmInstancesRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 服务器类型： LightHouse = 轻量云服务器 CVM = 云服务器 */
-  Type: string;
-}
-
-declare interface DescribeVmInstancesResponse {
-  /** 主机实例列表 */
-  InstanceList?: VmInstance[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeVmSpecRequest {
-  /** 类型：LightHouse = 轻量云服务器CVM = 云服务器 */
-  Type?: string;
-}
-
-declare interface DescribeVmSpecResponse {
-  /** 规格列表 */
-  SpecList?: VMSpec[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DestroyEnvRequest {
   /** 环境Id */
   EnvId: string;
@@ -3232,32 +3170,6 @@ declare interface GetProvidersResponse {
   Total?: number | null;
   /** 三方认证源列表 */
   Data?: Provider[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface InquireVmPriceRequest {
-  /** 服务器类型：LightHouse = 轻量云服务器CVM = 云服务器 */
-  Type: string;
-  /** 轻量云服务器套餐ID。当Type=LightHouse时必传 */
-  LightHouseBundleId?: string;
-  /** 轻量云服务器镜像ID。当Type=LightHouse时必传 */
-  LightHouseBlueprintId?: string;
-}
-
-declare interface InquireVmPriceResponse {
-  /** 价格货币单位。取值范围CNY:人民币。USD:美元。 */
-  Currency?: string;
-  /** 原价（主机原始每月价格） */
-  OriginalPrice?: number;
-  /** 折扣率 */
-  Discount?: number;
-  /** 折扣后每月价格 */
-  DiscountPrice?: number;
-  /** 折扣前每天资源点 */
-  OriginalCredits?: number;
-  /** 折扣后每天资源点 */
-  DiscountCredits?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3598,6 +3510,28 @@ declare interface PreviewPGUserMigrationsResponse {
   RequestId?: string;
 }
 
+declare interface PurgeHTTPServiceCacheRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** HTTPService域名 */
+  Domain: string;
+  /** Targets参数格式：Targets 刷新目标列表，语义随 PurgeType 变化入参限制：单次请求最多传 20 个 Target，单条 URL/prefix/host 最长 2048 */
+  Targets: string[];
+  /** 需要刷新的缓存类型：CDN 或 EO枚举值：EO： EO缓存CDN： CDN缓存默认值：EO */
+  CacheType?: string;
+  /** PurgeType 刷新方式（purge 粒度），TCBCDN仅支持purge_url枚举值：PURGE_URL： URL 列表（需含协议，如 https://a.com/b.jpg）PURGE_PREFIX： URL 前缀列表（需含协议，如 https://a.com/dir/），仅EO支持PURGE_HOST： Hostname 列表（可为 host 或 http(s)://host），仅EO支持默认值：PURGE_URL */
+  PurgeType?: string;
+}
+
+declare interface PurgeHTTPServiceCacheResponse {
+  /** 需要刷新的缓存类型：TCBCDN 或 EO枚举值：EO： EO缓存CDN： CDN缓存 */
+  CacheType?: string;
+  /** 刷新任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PushPGUserMigrationsRequest {
   /** 云开发环境ID */
   EnvId: string;
@@ -3861,8 +3795,6 @@ declare interface Tcb {
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
   /** 创建tcb用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 创建服务器实例 {@link CreateVmInstanceRequest} {@link CreateVmInstanceResponse} */
-  CreateVmInstance(data: CreateVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVmInstanceResponse>;
   /** 删除AI模型 {@link DeleteAIModelRequest} {@link DeleteAIModelResponse} */
   DeleteAIModel(data: DeleteAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIModelResponse>;
   /** 删除云开发平台的API Key {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
@@ -3881,8 +3813,6 @@ declare interface Tcb {
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
   /** 删除tcb用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
-  /** 销毁服务器实例 {@link DeleteVmInstanceRequest} {@link DeleteVmInstanceResponse} */
-  DeleteVmInstance(data: DeleteVmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVmInstanceResponse>;
   /** 查询AI模型列表 {@link DescribeAIModelsRequest} {@link DescribeAIModelsResponse} */
   DescribeAIModels(data: DescribeAIModelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIModelsResponse>;
   /** 查询云开发平台的API Key列表 {@link DescribeApiKeyListRequest} {@link DescribeApiKeyListResponse} */
@@ -3931,6 +3861,8 @@ declare interface Tcb {
   DescribeEnvs(data?: DescribeEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvsResponse>;
   /** 查询网关版本信息 {@link DescribeGatewayVersionsRequest} {@link DescribeGatewayVersionsResponse} */
   DescribeGatewayVersions(data: DescribeGatewayVersionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGatewayVersionsResponse>;
+  /** 查询HTTP访问服务缓存清除任务 {@link DescribeHTTPServiceCachePurgeTaskRequest} {@link DescribeHTTPServiceCachePurgeTaskResponse} */
+  DescribeHTTPServiceCachePurgeTask(data: DescribeHTTPServiceCachePurgeTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPServiceCachePurgeTaskResponse>;
   /** 查询HTTP访问服务路由信息 {@link DescribeHTTPServiceRouteRequest} {@link DescribeHTTPServiceRouteResponse} */
   DescribeHTTPServiceRoute(data: DescribeHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHTTPServiceRouteResponse>;
   /** 查询静态托管域名任务状态 {@link DescribeHostingDomainTaskRequest} {@link DescribeHostingDomainTaskResponse} */
@@ -3959,10 +3891,6 @@ declare interface Tcb {
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
   /** 查询tcb用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
-  /** 查询环境下的服务器实例 {@link DescribeVmInstancesRequest} {@link DescribeVmInstancesResponse} */
-  DescribeVmInstances(data: DescribeVmInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVmInstancesResponse>;
-  /** 获取VM规格 {@link DescribeVmSpecRequest} {@link DescribeVmSpecResponse} */
-  DescribeVmSpec(data?: DescribeVmSpecRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVmSpecResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
   /** 销毁MySql {@link DestroyMySQLRequest} {@link DestroyMySQLResponse} */
@@ -3973,8 +3901,6 @@ declare interface Tcb {
   ExecutePGSql(data: ExecutePGSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ExecutePGSqlResponse>;
   /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
-  /** 查询云服务器价格 {@link InquireVmPriceRequest} {@link InquireVmPriceResponse} */
-  InquireVmPrice(data: InquireVmPriceRequest, config?: AxiosRequestConfig): AxiosPromise<InquireVmPriceResponse>;
   /** 查询目标环境已应用的 Migration {@link ListPGUserMigrationsRequest} {@link ListPGUserMigrationsResponse} */
   ListPGUserMigrations(data: ListPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPGUserMigrationsResponse>;
   /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
@@ -4009,6 +3935,8 @@ declare interface Tcb {
   ModifyUser(data: ModifyUserRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserResponse>;
   /** 预览SQL migrations 在远端的执行计划，不实际执行 SQL {@link PreviewPGUserMigrationsRequest} {@link PreviewPGUserMigrationsResponse} */
   PreviewPGUserMigrations(data: PreviewPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewPGUserMigrationsResponse>;
+  /** 清除HTTP服务域名缓存 {@link PurgeHTTPServiceCacheRequest} {@link PurgeHTTPServiceCacheResponse} */
+  PurgeHTTPServiceCache(data: PurgeHTTPServiceCacheRequest, config?: AxiosRequestConfig): AxiosPromise<PurgeHTTPServiceCacheResponse>;
   /** 批量应用 Migrations {@link PushPGUserMigrationsRequest} {@link PushPGUserMigrationsResponse} */
   PushPGUserMigrations(data: PushPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<PushPGUserMigrationsResponse>;
   /** 释放从环境池里分配的环境 {@link ReleaseEnvRequest} {@link ReleaseEnvResponse} */

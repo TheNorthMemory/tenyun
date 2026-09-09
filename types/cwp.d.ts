@@ -7109,6 +7109,8 @@ declare interface CreateScanMalwareSettingRequest {
   ScanPattern: number;
   /** 服务器分类：1:专业版服务器；2:自选服务器 */
   HostType: number;
+  /** 自定义路径列表，仅ScanPattern=2/3时生效：2表示仅扫描这些路径，3表示扫描时排除这些路径。最少1条，最多200条 */
+  CustomPaths?: string[];
   /** 自选服务器时生效，主机quuid的string数组 */
   QuuidList?: string[];
   /** 超时时间单位 秒 默认3600 秒 */
@@ -10902,6 +10904,8 @@ declare interface DescribeMalwareTimingScanSettingRequest {
 declare interface DescribeMalwareTimingScanSettingResponse {
   /** 检测模式 0 全盘检测 1快速检测 */
   CheckPattern?: number;
+  /** 自定义路径列表，CheckPattern=2/3时生效 */
+  CustomPaths?: string[];
   /** 检测周期 开始时间 */
   StartTime?: string;
   /** 检测周期 超时结束时间 */
@@ -10912,6 +10916,8 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   QuuidList?: string[];
   /** 监控模式 0 标准 1深度 */
   MonitoringPattern?: number;
+  /** 监控自定义路径列表，MonitoringPattern=2/3时生效 */
+  MonitorCustomPaths?: string[];
   /** 周期 1每天 */
   Cycle?: number;
   /** 定时检测开关 0 关闭1 开启 */
@@ -15187,6 +15193,10 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   Cycle: number;
   /** 实时监控 0 关闭 1开启 */
   RealTimeMonitoring: number;
+  /** 自定义路径列表，仅CheckPattern=2/3时生效：2表示仅检测这些路径，3表示检测时排除这些路径。最少1条，最多200条 */
+  CustomPaths?: string[];
+  /** 监控自定义路径列表，仅MonitoringPattern=2/3时生效：2表示仅监控这些路径，3表示监控时排除这些路径。最少1条，最多200条 */
+  MonitorCustomPaths?: string[];
   /** 自选服务器时必须 主机quuid的string数组 */
   QuuidList?: string[];
   /** 是否自动隔离 1隔离 0 不隔离 */

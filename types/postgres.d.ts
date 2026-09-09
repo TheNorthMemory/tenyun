@@ -22,6 +22,8 @@ declare interface AccountInfo {
   UserType?: string;
   /** 用户账号是否启用CAM验证 */
   OpenCam?: boolean;
+  /** 该账号实际加入了哪些预设角色 */
+  PGRoles?: string[];
 }
 
 /** 慢查询分析接口返回的分析详情，按照参数抽象之后进行分类 */
@@ -424,7 +426,7 @@ declare interface Database {
 declare interface DatabaseObject {
   /** 支持使用的数据库对象类型有：account,database,schema,sequence,procedure,type,function,table,view,matview,column。 */
   ObjectType: string;
-  /** 所描述的数据库对象名称 */
+  /** 所描述的数据库对象名称，或者当ModifyType为grantRole / revokeRole时，必须等于顶层UserName */
   ObjectName: string;
   /** 所要描述的数据库对象，所属的数据库名称。当描述对象类型不为database时，此参数必选。 */
   DatabaseName?: string;
@@ -438,7 +440,7 @@ declare interface DatabaseObject {
 declare interface DatabasePrivilege {
   /** 数据库对象，当ObjectType为database时，DatabaseName/SchemaName/TableName可为空；当ObjectType为schema时，SchemaName/TableName可为空；当ObjectType为column时，TableName不可为空，其余情况均可为空。 */
   Object?: DatabaseObject | null;
-  /** 指定账号对数据库对象拥有的权限列表 */
+  /** 指定账号对数据库对象拥有的权限列表，或者角色权限修改 */
   PrivilegeSet?: string[] | null;
 }
 
@@ -642,7 +644,7 @@ declare interface LogInstanceInfo {
 declare interface ModifyPrivilege {
   /** 要修改的数据库对象及权限列表 */
   DatabasePrivilege?: DatabasePrivilege;
-  /** 修改的方式，当前仅支持grantObject、revokeObject、alterRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型。 */
+  /** 修改的方式，当前仅支持grantObject、revokeObject、alterRole、grantRole、revoke，当前仅支持grantObject、revokeObject、alterRole、grantRole、revokeRole。gRole。grantObject代表授权、revokeObject代表收回权、alterRole代表修改账号类型、grantRole代表加入对应角色、revokeRole 代表移出对应角色。 */
   ModifyType?: string;
   /** 当ModifyType为revokeObject才需要此参数，参数为true时，撤销权限会级联撤销。默认为false。 */
   IsCascade?: boolean;
@@ -1273,6 +1275,30 @@ declare interface CloseDBProxyAddressRequest {
 
 declare interface CloseDBProxyAddressResponse {
   /** 异步任务 ID，可通过 DescribeFlow 查询任务进度 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CloseMem0ServiceRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+}
+
+declare interface CloseMem0ServiceResponse {
+  /** 关闭mem0服务任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ClosePostgRESTServiceRequest {
+  /** 实例ID参数格式：postgres-0uwjmh8t */
+  DBInstanceId: string;
+}
+
+declare interface ClosePostgRESTServiceResponse {
+  /** 关闭PostgREST服务任务ID */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2478,6 +2504,40 @@ declare interface DescribeMaintainTimeWindowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMem0ServiceRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+}
+
+declare interface DescribeMem0ServiceResponse {
+  /** mem0服务运行状态枚举值：running： mem0服务正常运行none： 未开通creating： 正在开通deleting： mem0服务关闭中 */
+  Status?: string;
+  /** Mem0服务创建时间 */
+  CreateTime?: string;
+  /** Mem0服务最后更新时间 */
+  UpdateTime?: string;
+  /** Mem0服务访问地址 */
+  InnerAddress?: string;
+  /** Mem0服务使用的AgenticBase */
+  AgenticBaseId?: string;
+  /** Mem0服务使用的LLM提供方枚举值：tokenhub： 腾讯云大模型服务平台TokenHub */
+  LLMMode?: string;
+  /** Mem0服务使用的LLM模型 */
+  LLMModel?: string;
+  /** Mem0服务当前使用的Embedding 模型 */
+  EmbeddingModel?: string;
+  /** Embedding 向量维度，目前固定1024 */
+  EmbeddingDims?: number;
+  /** Mem0服务使用的PG数据库 */
+  PGDatabaseName?: string;
+  /** Mem0服务使用的PG用户名 */
+  PGUserName?: string;
+  /** Mem0的网络状态 */
+  NetworkAccessList?: DBInstanceNetInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeOrdersRequest {
   /** 订单名集合 */
   DealNames: string[];
@@ -2548,6 +2608,24 @@ declare interface DescribeParamsEventResponse {
   TotalCount?: number;
   /** 实例参数修改事件详情 */
   EventItems?: EventItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePostgRESTServiceRequest {
+  /** 实例ID参数格式：postgres-19nmz2xb */
+  DBInstanceId: string;
+}
+
+declare interface DescribePostgRESTServiceResponse {
+  /** PostgREST服务运行状态枚举值：closed： 已关闭creating： 创建中running： 运行中默认值：closed */
+  Status?: string;
+  /** 创建时间参数格式：2026-05-10 10:00:00 */
+  CreateTime?: string;
+  /** PostgREST服务网络连接信息 */
+  NetworkAccessList?: DBInstanceNetInfo[] | null;
+  /** PostgREST服务JWT值 */
+  JWTSecret?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3358,6 +3436,44 @@ declare interface OpenDBExtranetAccessResponse {
   RequestId?: string;
 }
 
+declare interface OpenMem0ServiceRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** AgenticBaseID，开启Mem0服务前请先开通AgenticBase套餐 */
+  AgenticBaseId: string;
+  /** Mem0服务使用的LLM模型枚举值：auto： 自动选择合适的模型deepseek-v4-flash： deepseek-v4-flashdeepseek-v4-pro： deepseek-v4-proglm-5： glm-5glm-5-turbo： glm-5-turboglm-5.1： glm-5.1kimi-k2.5： kimi-k2.5kimi-k2.6： kimi-k2.6minimax-m2.5： minimax-m2.5minimax-m2.7： minimax-m2.7 */
+  LLMModel: string;
+  /** 请前往腾讯云Tokenhub开通服务将ApiKey填入 */
+  EmbeddingApiKey: string;
+}
+
+declare interface OpenMem0ServiceResponse {
+  /** 开启Mem0服务任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface OpenPostgRESTServiceRequest {
+  /** 实例ID */
+  DBInstanceId: string;
+  /** 是否开启外网 */
+  EnableWanNet?: boolean;
+  /** PostgREST服务参数 */
+  RestConfig?: ParamEntry[];
+  /** VPC参数格式：私有网络ID，形如vpc-e6w23k31。非必选，不传默认使用实例的vpc */
+  VpcId?: string;
+  /** 私有网络子网ID，形如subnet-51lcif9y。非必选，不传则使用实例的子网 */
+  SubnetId?: string;
+}
+
+declare interface OpenPostgRESTServiceResponse {
+  /** 开启PostgREST服务任务ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RebalanceReadOnlyGroupRequest {
   /** 只读组ID。可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取 */
   ReadOnlyGroupId: string;
@@ -3585,6 +3701,10 @@ declare interface Postgres {
   CloseDBExtranetAccess(data: CloseDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBExtranetAccessResponse>;
   /** 关闭数据库代理地址 {@link CloseDBProxyAddressRequest} {@link CloseDBProxyAddressResponse} */
   CloseDBProxyAddress(data: CloseDBProxyAddressRequest, config?: AxiosRequestConfig): AxiosPromise<CloseDBProxyAddressResponse>;
+  /** 关闭实例Mem0服务 {@link CloseMem0ServiceRequest} {@link CloseMem0ServiceResponse} */
+  CloseMem0Service(data: CloseMem0ServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseMem0ServiceResponse>;
+  /** 关闭实例PostgREST服务 {@link ClosePostgRESTServiceRequest} {@link ClosePostgRESTServiceResponse} */
+  ClosePostgRESTService(data: ClosePostgRESTServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ClosePostgRESTServiceResponse>;
   /** 创建数据库账号 {@link CreateAccountRequest} {@link CreateAccountResponse} */
   CreateAccount(data: CreateAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountResponse>;
   /** 创建审计日志文件 {@link CreateAuditLogFileRequest} {@link CreateAuditLogFileResponse} */
@@ -3699,6 +3819,8 @@ declare interface Postgres {
   DescribeLogBackups(data?: DescribeLogBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogBackupsResponse>;
   /** 查询维护时间窗口 {@link DescribeMaintainTimeWindowRequest} {@link DescribeMaintainTimeWindowResponse} */
   DescribeMaintainTimeWindow(data: DescribeMaintainTimeWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintainTimeWindowResponse>;
+  /** 查询Mem0服务信息详情 {@link DescribeMem0ServiceRequest} {@link DescribeMem0ServiceResponse} */
+  DescribeMem0Service(data: DescribeMem0ServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMem0ServiceResponse>;
   /** 查询订单信息 {@link DescribeOrdersRequest} {@link DescribeOrdersResponse} */
   DescribeOrders(data: DescribeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOrdersResponse>;
   /** 查询参数模板详情 {@link DescribeParameterTemplateAttributesRequest} {@link DescribeParameterTemplateAttributesResponse} */
@@ -3707,6 +3829,8 @@ declare interface Postgres {
   DescribeParameterTemplates(data?: DescribeParameterTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParameterTemplatesResponse>;
   /** 查询参数修改事件 {@link DescribeParamsEventRequest} {@link DescribeParamsEventResponse} */
   DescribeParamsEvent(data: DescribeParamsEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamsEventResponse>;
+  /** 查询PostgREST服务信息详情 {@link DescribePostgRESTServiceRequest} {@link DescribePostgRESTServiceResponse} */
+  DescribePostgRESTService(data: DescribePostgRESTServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePostgRESTServiceResponse>;
   /** 查询售卖规格配置 {@link DescribeProductConfigRequest} {@link DescribeProductConfigResponse} */
   DescribeProductConfig(data?: DescribeProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductConfigResponse>;
   /** 查询只读组列表 {@link DescribeReadOnlyGroupsRequest} {@link DescribeReadOnlyGroupsResponse} */
@@ -3795,6 +3919,10 @@ declare interface Postgres {
   OpenAuditService(data: OpenAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenAuditServiceResponse>;
   /** 开通实例公网地址 {@link OpenDBExtranetAccessRequest} {@link OpenDBExtranetAccessResponse} */
   OpenDBExtranetAccess(data: OpenDBExtranetAccessRequest, config?: AxiosRequestConfig): AxiosPromise<OpenDBExtranetAccessResponse>;
+  /** 开启实例Mem0服务 {@link OpenMem0ServiceRequest} {@link OpenMem0ServiceResponse} */
+  OpenMem0Service(data: OpenMem0ServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenMem0ServiceResponse>;
+  /** 开启实例PostgREST服务 {@link OpenPostgRESTServiceRequest} {@link OpenPostgRESTServiceResponse} */
+  OpenPostgRESTService(data: OpenPostgRESTServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OpenPostgRESTServiceResponse>;
   /** 均衡只读组内实例的负载 {@link RebalanceReadOnlyGroupRequest} {@link RebalanceReadOnlyGroupResponse} */
   RebalanceReadOnlyGroup(data: RebalanceReadOnlyGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RebalanceReadOnlyGroupResponse>;
   /** 刷新启用CAM验证的账户密码 {@link RefreshAccountPasswordRequest} {@link RefreshAccountPasswordResponse} */

@@ -160,6 +160,14 @@ declare interface BucketInfo {
   Object: string;
 }
 
+/** 命中音频时间位置 */
+declare interface Duration {
+  /** 开始时间单位：秒 */
+  Start?: number;
+  /** 结束时间单位：秒 */
+  End?: number;
+}
+
 /** 关键词命中位置信息 */
 declare interface HitInfo {
   /** 标识模型命中还是关键词命中 */
@@ -170,6 +178,34 @@ declare interface HitInfo {
   LibName?: string;
   /** 位置信息 */
   Positions?: Position[];
+}
+
+/** 机审命中信息 */
+declare interface HitSnippetInfos {
+  /** 命中内容 */
+  Target?: string;
+  /** 文本命中的文本块 */
+  Snippet?: string;
+  /** 命中场景 */
+  Scene?: string;
+  /** 命中类型 */
+  AtomicCategory?: string;
+  /** 命中类型库/模型名称 */
+  AtomicName?: string;
+  /** 命中原子能力 */
+  AtomicId?: string;
+  /** 命中单位 */
+  UnitId?: string;
+  /** 命中单位名称 */
+  UnitName?: string;
+  /** 命中颗粒ID */
+  ParticleId?: string;
+  /** 命中文本在原文起始位置 */
+  Positions?: Position[];
+  /** 命中音时间位置 */
+  Duration?: Duration;
+  /** 分数 */
+  Score?: number;
 }
 
 /** 输入信息详情 */
@@ -184,6 +220,10 @@ declare interface InputInfo {
   ImageUrlList?: string[];
   /** 大模型审核场景下，base64编码的审核要求内容 */
   TextContent?: string;
+  /** 标题 */
+  Title?: string;
+  /** 其他信息 */
+  Extra?: string;
 }
 
 /** 歌曲识别结果 */
@@ -269,7 +309,7 @@ declare interface SpeakerResults {
   /** 开始时间 */
   StartTime?: number;
   /** 结束时间 */
-  EndTime?: string;
+  EndTime?: number;
 }
 
 /** 用于表示数据存储的相关信息 */
@@ -523,7 +563,7 @@ declare interface CreateAudioModerationTaskResponse {
 }
 
 declare interface DescribeTaskDetailRequest {
-  /** 该字段表示创建音频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。备注：查询接口单次最大查询量为**20条每次**。 */
+  /** 该字段表示创建音频审核任务后返回的任务ID（在Results参数中），用于标识需要查询任务详情的审核任务。备注：查询接口单次最大查询量为20条每次。 */
   TaskId: string;
   /** 该布尔字段表示是否展示全部的音频片段，取值：True(展示全部的音频分片)、False(只展示命中审核规则的音频分片)；默认值为False。 */
   ShowAllSegments?: boolean;
@@ -538,17 +578,17 @@ declare interface DescribeTaskDetailResponse {
   BizType?: string;
   /** 该字段用于返回调用音频审核接口时传入的TaskInput参数中的任务名称，方便任务的识别与管理。 */
   Name?: string;
-  /** 该字段用于返回所查询内容的任务状态。取值：**FINISH**（任务已完成）、**PENDING** （任务等待中）、**RUNNING** （任务进行中）、**ERROR** （任务出错）、**CANCELLED** （任务已取消）。 */
+  /** 该字段用于返回所查询内容的任务状态。取值：FINISH（任务已完成）、PENDING （任务等待中）、RUNNING （任务进行中）、ERROR （任务出错）、CANCELLED （任务已取消）。 */
   Status?: string;
-  /** 该字段用于返回调用音频审核接口时输入的音频审核类型，取值为：**AUDIO**（点播音频）和**LIVE_AUDIO**（直播音频），默认值为AUDIO。 */
+  /** 该字段用于返回调用音频审核接口时输入的音频审核类型，取值为：AUDIO（点播音频）和LIVE_AUDIO（直播音频），默认值为AUDIO。 */
   Type?: string;
-  /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：**Block**：建议屏蔽，**Review** ：建议人工复审，**Pass**：建议通过 */
+  /** 该字段用于返回基于恶意标签的后续操作建议。当您获取到判定结果后，返回值表示系统推荐的后续操作；建议您按照业务所需，对不同违规类型与建议值进行处理。返回值：Block：建议屏蔽，Review ：建议人工复审，Pass：建议通过 */
   Suggestion?: string;
-  /** 该字段用于返回检测结果所对应的恶意标签。返回值：**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
+  /** 该字段用于返回检测结果所对应的恶意标签。返回值：Porn：色情，Abuse：谩骂，Ad：广告，Custom：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。 */
   Labels?: TaskLabel[];
   /** 该字段用于返回审核服务的媒体内容信息，主要包括传入文件类型和访问地址。 */
   InputInfo?: InputInfo;
-  /** 该字段用于返回音频文件识别出的对应文本内容，最大支持**前1000个字符**。 */
+  /** 该字段用于返回音频文件识别出的对应文本内容，最大支持前1000个字符。 */
   AudioText?: string;
   /** 该字段用于返回音频片段的审核结果，主要包括开始时间和音频审核的相应结果。具体输出内容请参见AudioSegments及AudioResult数据结构的详细描述。 */
   AudioSegments?: AudioSegments[];
@@ -564,6 +604,8 @@ declare interface DescribeTaskDetailResponse {
   Label?: string;
   /** 媒体信息 */
   MediaInfo?: MediaInfo;
+  /** 命中信息 */
+  HitSnippetInfos?: HitSnippetInfos[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
