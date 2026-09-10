@@ -182,78 +182,30 @@ declare interface ModelUserAuthority {
   UpdateTime?: string;
 }
 
-/** 问答结构 */
-declare interface Record {
-  /** 问题内容 */
-  Question: string;
-  /** 回答内容 */
-  Answer?: string;
-  /** 思考内容 */
-  Think?: string;
-  /** 任务列表 */
-  TaskList?: Task[];
-  /** 记录创建时间 */
-  CreateTime?: string;
-  /** 记录更新时间 */
-  UpdateTime?: string;
+/** 记录列表 */
+declare interface RecordList {
+  /** 会话上下文 */
+  Context?: string;
   /** 记录id */
   RecordId?: string;
-  /** 总结内容 */
-  FinalSummary?: string;
-  /** 会话ID */
+  /** 追踪id */
+  TraceId?: string;
+  /** 会话id */
   SessionId?: string;
-  /** 1=赞，2=踩，0=无反馈 */
+  /** 问题 */
+  Question?: string;
+  /** 回答 */
+  Answer?: string;
+  /** 0-否定反馈, 1-肯定反馈 */
   Feedback?: number;
-  /** 数据库信息 */
-  DbInfo?: string;
   /** 错误信息 */
   ErrorContext?: string;
-  /** TaskList的string字符串 */
-  TaskListStr?: string;
-  /** 知识库id列表 */
-  KnowledgeBaseIds?: string[];
-  /** 上下文 */
-  Context?: string;
-}
-
-/** 步骤扩展结构 */
-declare interface StepExpand {
-  /** 标题 */
-  Title?: string;
-  /** 状态 */
-  Status?: string;
-  /** cellid数组 */
-  CellIds?: string[];
-}
-
-/** 任务步骤 */
-declare interface StepInfo {
-  /** 步骤id */
-  Id: number;
-  /** 步骤名称 */
-  Name: string;
-  /** 步骤状态 */
-  Status: string;
-  /** 类型(text/expand) */
-  Type: string;
-  /** 总结 */
-  Summary?: string;
-  /** 步骤扩展结构 */
-  Expand?: StepExpand;
-  /** 描述 */
-  Desc?: string;
-}
-
-/** 任务信息 */
-declare interface Task {
-  /** 任务ID */
-  Id?: number;
-  /** 任务名称 */
-  Name?: string;
-  /** 任务状态 */
-  Status?: string;
-  /** 任务步骤列表 */
-  StepInfoList?: StepInfo[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 模型信息 */
+  Model?: string;
 }
 
 /** 上传任务 */
@@ -474,24 +426,6 @@ declare interface GetKnowledgeBaseListResponse {
   RequestId?: string;
 }
 
-declare interface GetSessionDetailsRequest {
-  /** 实例ID */
-  InstanceId?: string;
-  /** 会话ID */
-  SessionId?: string;
-}
-
-declare interface GetSessionDetailsResponse {
-  /** 会话记录详情 */
-  RecordList?: Record[];
-  /** 记录总数 */
-  RecordCount?: number;
-  /** 当前在运行的record信息 */
-  RunRecord?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetUploadJobDetailsRequest {
   /** 实例ID */
   InstanceId?: string;
@@ -646,6 +580,32 @@ declare interface QueryUserAuthorityResponse {
   RequestId?: string;
 }
 
+declare interface QueryUserSessionDetailRequest {
+  /** 会话id */
+  SessionId?: string;
+  /** 分页参数 */
+  Limit?: number;
+  /** 偏移量 */
+  Offset?: number;
+  /** 实例id */
+  InstanceId?: string;
+}
+
+declare interface QueryUserSessionDetailResponse {
+  /** 用户 Id */
+  SubAccountUin?: string;
+  /** 会话id */
+  SessionId?: string;
+  /** 会话详情数组 */
+  RecordList?: RecordList[];
+  /** 记录总数 */
+  TotalCount?: number;
+  /** 运行中的聊天请求, 返回为json字符串 */
+  RunRecord?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopChatAIRequest {
   /** 会话ID */
   SessionId?: string;
@@ -701,8 +661,6 @@ declare interface Dataagent {
   GetKnowledgeBaseFileList(data: GetKnowledgeBaseFileListRequest, config?: AxiosRequestConfig): AxiosPromise<GetKnowledgeBaseFileListResponse>;
   /** 获取知识库列表 {@link GetKnowledgeBaseListRequest} {@link GetKnowledgeBaseListResponse} */
   GetKnowledgeBaseList(data: GetKnowledgeBaseListRequest, config?: AxiosRequestConfig): AxiosPromise<GetKnowledgeBaseListResponse>;
-  /** 获取会话详情 {@link GetSessionDetailsRequest} {@link GetSessionDetailsResponse} */
-  GetSessionDetails(data?: GetSessionDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetSessionDetailsResponse>;
   /** 查询上传任务详情 {@link GetUploadJobDetailsRequest} {@link GetUploadJobDetailsResponse} */
   GetUploadJobDetails(data?: GetUploadJobDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<GetUploadJobDetailsResponse>;
   /** 获取用户实例列表 {@link GetUserInstanceListRequest} {@link GetUserInstanceListResponse} */
@@ -721,6 +679,8 @@ declare interface Dataagent {
   QueryModels(data?: QueryModelsRequest, config?: AxiosRequestConfig): AxiosPromise<QueryModelsResponse>;
   /** 查询对象的用户权限信息 {@link QueryUserAuthorityRequest} {@link QueryUserAuthorityResponse} */
   QueryUserAuthority(data: QueryUserAuthorityRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserAuthorityResponse>;
+  /** 获取用户session详情 {@link QueryUserSessionDetailRequest} {@link QueryUserSessionDetailResponse} */
+  QueryUserSessionDetail(data?: QueryUserSessionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<QueryUserSessionDetailResponse>;
   /** 终止问答返回流 {@link StopChatAIRequest} {@link StopChatAIResponse} */
   StopChatAI(data?: StopChatAIRequest, config?: AxiosRequestConfig): AxiosPromise<StopChatAIResponse>;
   /** cos上传提交文件 {@link UploadAndCommitFileRequest} {@link UploadAndCommitFileResponse} */

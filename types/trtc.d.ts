@@ -1286,6 +1286,12 @@ declare interface TranslationParam {
   Terminologies?: TerminologyItem[];
 }
 
+/** ai对话需要透传给客户端的数据 */
+declare interface TransparentData {
+  /** 透传给客户端的信息 */
+  Data: string;
+}
+
 /** 实时音视频用量在某一时间段的统计信息。 */
 declare interface TrtcUsage {
   /** 时间点，格式为YYYY-MM-DD HH:mm:ss。多天查询时，HH:mm:ss为00:00:00。 */
@@ -1569,12 +1575,14 @@ declare interface AsyncTextToSpeechResponse {
 declare interface ControlAIConversationRequest {
   /** 任务唯一标识 */
   TaskId: string;
-  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话 */
+  /** 控制命令，目前支持命令如下：- ServerPushText，服务端发送文本给AI机器人，AI机器人会播报该文本. - InvokeLLM，服务端发送文本给大模型，触发对话。- TransparentData，透传信息给客户端。 */
   Command: string;
   /** 服务端发送播报文本命令，当Command为ServerPushText时必填 */
   ServerPushText?: ServerPushText;
   /** 服务端发送命令主动请求大模型,当Command为InvokeLLM时会把content请求到大模型,头部增加X-Invoke-LLM="1" */
   InvokeLLM?: InvokeLLM;
+  /** ai对话需要透传给客户端的信息 */
+  TransparentData?: TransparentData;
 }
 
 declare interface ControlAIConversationResponse {

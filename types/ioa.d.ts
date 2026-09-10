@@ -370,6 +370,42 @@ declare interface DescribeBusinessResourceData {
   ConnectorGroupType?: string;
   /** 域名后缀 */
   DomainSuffix?: string;
+  /** 连通性检查开关，0-关闭 1-开启，默认1(只支持32位) */
+  ConnectivityCheckSwitch?: number;
+  /** 连通性检查测试间隔数值，最小为1，默认1(只支持32位) */
+  ConnectivityCheckInterval?: number;
+  /** 连通性检查测试间隔单位 minutes/hours/days，默认hours */
+  ConnectivityCheckIntervalUnit?: string;
+  /** URL审计开关：0-关闭 1-开启，默认0 */
+  URLAuditState?: number;
+  /** URL审计证书ID列表，多个用分号分隔 */
+  URLAuditId?: string;
+  /** URL审计路径，多个用分号分隔 */
+  URLPath?: string;
+  /** 检测方式：0-未检测 1-主动 2-流量 */
+  ReachableType?: number;
+  /** API密钥名称 */
+  APISecretName?: string;
+  /** API密钥Key */
+  APISecretKey?: string;
+  /** 是否为敏感资源：0-否 1-是 */
+  EnableSensitiveRes?: number;
+  /** 用户接入IP限制开关：0-不启用 1-启用 */
+  EnableIPPolicy?: number;
+  /** IP分组属性：0-白名单 1-黑名单 */
+  IPPolicyAttr?: number;
+  /** IP分组ID列表 */
+  IPPolicyIds?: number[];
+  /** IP分组名称（分号分隔） */
+  IPPolicyNames?: string;
+  /** 访问浏览器规则开关：0-不启用 1-启用 */
+  EnableUserAgent?: number;
+  /** 浏览器规则属性：0-白名单 1-黑名单 */
+  UserAgentAttr?: number;
+  /** 浏览器规则ID列表 */
+  UserAgentIds?: string[];
+  /** 浏览器规则名称（分号分隔） */
+  UserAgentNames?: string;
 }
 
 /** 业务资源分页返回对象 */

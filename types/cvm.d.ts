@@ -514,6 +514,8 @@ declare interface Instance {
   DefaultLoginPort?: number;
   /** 实例的最新操作错误信息。 */
   LatestOperationErrorMsg?: string | null;
+  /** 实例是否开启巨型帧 */
+  EnableJumboFrame?: boolean;
   /** 自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。注：内测中。 */
   Metadata?: Metadata;
   /** 实例绑定的公网IPv6地址。 */

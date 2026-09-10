@@ -1760,6 +1760,32 @@ declare interface RailwayTicketInfo {
   NumberOfOriginalInvoice?: string;
 }
 
+/** 推理输出配置 */
+declare interface ReasoningConfig {
+  /** 实际使用的推理输出模式：enum 或 string。 */
+  OutputMode?: string;
+  /** 枚举值集合，仅在 OutputMode=enum 时生效。 VLM 输出必须精确命中此集合中的某个值。 */
+  EnumValues?: string[];
+  /** 文本输出最大长度，仅在 OutputMode=string 时生效。取值范围：[1, 500]默认值：200 */
+  MaxLength?: number;
+  /** 是否在推理调用时向 VLM 传入原图进行多模态理解。 true（默认）：VLM 同时接收原图和渲染后的 Prompt，具备多模态理解能力，可直接"看"图片内容进行推理。 false：不传入原图，仅以渲染后的 Prompt（含变量注入值）进行纯文本推理。适用于推理逻辑完全基于结构化出参字段（如水印文字、置信度比较等）的场景，可降低推理延迟和计费成本。 建议：当 ReasoningPrompt 中未涉及"观察图片"、"直接看图"等多模态指令，且推理规则完全基于 ${变量名} 引用的文字结果时，可设为 false 以优化性能。 */
+  EnableImageInput?: boolean;
+}
+
+/** VLM 推理结果 */
+declare interface ReasoningResult {
+  /** 实际使用的推理输出模式：enum 或 string。 */
+  OutputMode?: string;
+  /** 枚举模式下的推理结果值。当 OutputMode=enum 时返回，必定命中请求中 EnumValues 的某个值。 若 VLM 输出无法匹配任何枚举值，则返回 UNCERTAIN。 */
+  EnumValue?: string;
+  /** 文本模式下的推理结果值。当 OutputMode=string 时返回。 若 VLM 无法得出结论，则返回 UNCERTAIN。 */
+  TextValue?: string;
+  /** VLM 原始输出文本（未经过结构化校验）。 */
+  RawOutput?: string;
+  /** 变量替换后的实际 Prompt（脱敏后）。 */
+  RenderedPrompt?: string;
+}
+
 /** 矩形坐标 */
 declare interface Rect {
   /** 左上角x */
@@ -5509,6 +5535,10 @@ declare interface VerifyScenePhotoRequest {
   ImageUrl?: string;
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M。 */
   ImageBase64?: string;
+  /** 推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。入参限制：长度限制：1–2000 字符 */
+  ReasoningPrompt?: string;
+  /** 推理输出配置。当 ReasoningPrompt 传入时建议同步传入，未传入时使用默认配置（OutputMode=enum, EnumValues=["true","false"], EnableImageInput=true）。 */
+  ReasoningConfig?: ReasoningConfig;
 }
 
 declare interface VerifyScenePhotoResponse {
@@ -5524,6 +5554,10 @@ declare interface VerifyScenePhotoResponse {
   TextWatermark?: SceneWarnInfo;
   /** 水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。 */
   WatermarkContent?: string;
+  /** 模板图片提示 */
+  Template?: SceneWarnInfo;
+  /** VLM 推理结果。仅当请求中传入 ReasoningPrompt 时返回，否则不返回此字段。 */
+  ReasoningResult?: ReasoningResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

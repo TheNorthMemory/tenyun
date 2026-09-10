@@ -144,6 +144,28 @@ declare interface AgentPluginConfig {
   AuthType?: number;
   /** OAuth 授权同意模式；0-开发者授权；1-使用者授权（仅在auth_type=3时生效） */
   OAuthConsent?: number;
+  /** 凭证配置 */
+  CredentialConfig?: AgentPluginCredentialConfig;
+}
+
+/** Agent 插件凭据配置 */
+declare interface AgentPluginCredentialConfig {
+  /** 插件鉴权值来源枚举值：0： 未指定1： 使用插件默认鉴权值，仅 APIKey/AccessKey 支持2： 引用凭证3： 引用变量 */
+  AuthValueSource?: number;
+  /** 凭证ID入参限制：AuthValueSource=2时必填 */
+  CredentialId?: string;
+  /** 参数配置 */
+  ParamList?: AgentPluginCredentialParam[];
+}
+
+/** Agent 插件凭据参数配置（变量模式） */
+declare interface AgentPluginCredentialParam {
+  /** 参数位置枚举值：0： Header 鉴权1： Query 鉴权 */
+  KeyLocation?: number;
+  /** 参数名称 */
+  Name?: string;
+  /** 参数取值来源 */
+  Input?: AgentInput;
 }
 
 /** Agent 插件参数配置 */
@@ -996,6 +1018,16 @@ declare interface CallSource {
   SubjectType?: number;
 }
 
+/** 回调配置 */
+declare interface CallbackConfig {
+  /** 回调AESKey */
+  CallbackAesKey?: string;
+  /** 回调Token */
+  CallbackToken?: string;
+  /** 回调URL */
+  CallbackUrl?: string;
+}
+
 /** CAM授权信息 */
 declare interface CamAuthConfig {
   /** 角色名称 */
@@ -1016,6 +1048,56 @@ declare interface CategoryPermission {
   CanDelete?: boolean;
   /** 当前用户是否可编辑该分类 */
   CanEdit?: boolean;
+}
+
+/** 渠道信息 */
+declare interface Channel {
+  /** 渠道ID */
+  ChannelId?: string;
+  /** 渠道状态（仅B端）：1-未发布，2-运行中，3-已下线（与ConnectStatus互斥） */
+  ChannelStatus?: number;
+  /** 连接状态（仅C端）：1-初始，2-连接成功，3-连接失败（与ChannelStatus互斥） */
+  ConnectStatus?: number;
+  /** 创建时间（Unix秒） */
+  CreateTime?: string;
+  /** 渠道规格 */
+  Spec?: ChannelSpec | null;
+  /** 更新时间（Unix秒） */
+  UpdateTime?: string;
+  /** 最后更新人 */
+  Updater?: string;
+}
+
+/** 渠道规格（聚合场景/类型/名称/备注/配置） */
+declare interface ChannelSpec {
+  /** 渠道名称 */
+  ChannelName?: string;
+  /** 渠道类型，详见ChannelType枚举枚举值：10000： 微信服务号(Wechat)10002： 企微应用(WeComApp)10004： 微信客服(WechatCustomerService)10009： 企微智能机器人(WeComRobot)10013： 钉钉机器人(DingTalk)10014： 企微智能机器人WebSocket(WeComRobot)10015： 微信ClawBot(WechatClawBot)10011： LINE(Line)10012： Telegram(Telegram)10016： 飞书机器人(Lark) C端场景（Scene=1时）只支持10014和10015 */
+  ChannelType?: number;
+  /** 备注 */
+  Description?: string;
+  /** 钉钉机器人配置 */
+  DingTalk?: DingTalkChannelConfig | null;
+  /** 飞书机器人配置 */
+  Lark?: LarkChannelConfig | null;
+  /** LINE配置 */
+  Line?: LineChannelConfig | null;
+  /** 渠道场景：0-B端场景，1-C端场景 */
+  Scene?: number;
+  /** Telegram配置 */
+  Telegram?: TelegramChannelConfig | null;
+  /** 归属用户+Agent运行态标识（C端） */
+  UserAgent?: UserAgentReference | null;
+  /** 微信公众号/小程序配置 */
+  Wechat?: WechatChannelConfig | null;
+  /** 微信ClawBot配置 */
+  WechatClawBot?: WechatClawBotChannelConfig | null;
+  /** 微信客服配置 */
+  WechatCustomerService?: WechatCustomerServiceChannelConfig | null;
+  /** 企微应用配置 */
+  WecomApp?: WecomAppChannelConfig | null;
+  /** 企微机器人配置 */
+  WecomRobot?: WecomRobotChannelConfig | null;
 }
 
 /** ClawAgent Agent团队协作配置 */
@@ -1378,6 +1460,14 @@ declare interface DigitalHumanConfig {
   PreviewUrl: string;
 }
 
+/** 钉钉机器人渠道配置 */
+declare interface DingTalkChannelConfig {
+  /** 钉钉机器人ClientId（AppKey） */
+  AppKey?: string;
+  /** 钉钉机器人ClientSecret（AppSecret） */
+  AppSecret?: string;
+}
+
 /** DuplexBilling */
 declare interface DuplexBilling {
   /** 枚举项枚举值描述UNKNOW0TOKEN1按tokenPAGE_COUNT2按页数TIMES3按次数TIMES_THOUSAND4按千次数SECOND5按时长CHARACTER6按字符数CHARACTER_THOUSAND7按千字符数SHEET8按张NUMBER9按个数 */
@@ -1478,6 +1568,24 @@ declare interface IntervalSchedule {
   Unit?: number;
   /** 值 */
   Value?: number;
+}
+
+/** 飞书机器人渠道配置 */
+declare interface LarkChannelConfig {
+  /** 飞书机器人AppId */
+  AppId?: string;
+  /** 飞书机器人AppSecret */
+  AppSecret?: string;
+}
+
+/** LINE渠道配置 */
+declare interface LineChannelConfig {
+  /** LINE Channel Access Token */
+  AccessToken?: string;
+  /** LINE回调地址 */
+  CallbackUrl?: string;
+  /** LINE Channel Secret */
+  ChannelSecret?: string;
 }
 
 /** MCP插件配置信息 */
@@ -2150,6 +2258,14 @@ declare interface SkillClassification {
   SourceLink: string;
 }
 
+/** Skill 企业共享配置。 */
+declare interface SkillCorpShareConfig {
+  /** 枚举项枚举值描述SHARE_SCOPE_TYPE_UNSPECIFIED0SHARE_SCOPE_TYPE_ALL1SHARE_SCOPE_TYPE_ACCOUNT2SHARE_SCOPE_TYPE_SPACE3枚举值：0： 未指定1： 全企业共享3： 按空间共享 */
+  ShareScope?: number;
+  /** 共享范围信息，仅支持空间；StrId 为空间ID，Name 为空间名称 */
+  ShareScopeList?: Identity[];
+}
+
 /** skill详情 */
 declare interface SkillDetail {
   /** 调用情况摘要 */
@@ -2190,6 +2306,8 @@ declare interface SkillProfile {
   Name: string;
   /** 更新时间（Unix秒） */
   UpdateTime: string;
+  /** 空间 */
+  SpaceId?: string;
 }
 
 /** 同一 SkillRefType 下的引用分组（含总数 + 引用详情列表）。 total_count 始终以未过滤的原始总量为准；reference_summary_list 受二次鉴权开关影响。 */
@@ -2232,6 +2350,8 @@ declare interface SkillShare {
   SkillId: string;
   /** 共享状态枚举值:| uint | 描述 || --- | --- || 0 | 未共享 || 1 | 已共享 || 2 | 审批中 | */
   Status: number;
+  /** 企业共享范围 */
+  CorpShareConfig?: SkillCorpShareConfig;
 }
 
 /** SkillSummary 列表中的 Skill 摘要。 */
@@ -2264,7 +2384,7 @@ declare interface SkillVersion {
   Version: string;
   /** 当前生效版本ID */
   VersionId: string;
-  /** Skill 版本发布流程状态： - 0 INITIALIZED 初始化（版本初始态） - 1 AUDITING 审核中（f_analysis_status ∈ {PENDING, RUNNING}） - 2 PENDING_RELEASE 待发布（低/中风险，等用户确认上架） - 3 RELEASED 已发布 - 4 UNRELEASED 未发布（HIGH / UNAVAILABLE / FAILED / 用户放弃，含历史"不通过"语义） 与 SkillAnalysisStatus 解耦：前者是用户视角发布生命周期，后者是安全检测阶段。 */
+  /** Skill 版本发布流程状态： - 0 INITIALIZED 初始化（版本初始态） - 1 AUDITING 审核中（f_analysis_status ∈ {PENDING, RUNNING}） - 2 PENDING_RELEASE 待发布（低/中风险，等用户确认上架） - 3 RELEASED 已发布 - 4 UNRELEASED 未发布（HIGH / UNAVAILABLE / FAILED / 用户放弃，含历史"不通过"语义）与 SkillAnalysisStatus 解耦：前者是用户视角发布生命周期，后者是安全检测阶段。 */
   VersionStatus?: number;
   /** Skill包的md5信息 */
   SkillMd5?: string;
@@ -2276,6 +2396,8 @@ declare interface SkillVersion {
   SkillMarkdownUrl?: string;
   /** 版本变更说明 */
   UpdateDesc?: string;
+  /** 变更用户 */
+  Updater?: string;
 }
 
 /** 排序条件 */
@@ -2320,6 +2442,12 @@ declare interface SystemVariable {
   Description: string;
   /** 变量名称 */
   Name: string;
+}
+
+/** Telegram渠道配置 */
+declare interface TelegramChannelConfig {
+  /** Telegram Bot Token */
+  BotToken?: string;
 }
 
 /** 思考模型配置 */
@@ -2480,6 +2608,14 @@ declare interface UsageSummary {
   ViewType?: number;
 }
 
+/** 用户+Agent归属引用 */
+declare interface UserAgentReference {
+  /** claw agent 运行态标识 */
+  AgentId?: string;
+  /** 归属用户标识 */
+  UserId?: string;
+}
+
 /** 变量信息 */
 declare interface Variable {
   /** 默认文件名称 */
@@ -2488,7 +2624,7 @@ declare interface Variable {
   DefaultValue: string;
   /** 变量描述 */
   Description: string;
-  /** 模块类型。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数 */
+  /** 变量模块类型枚举值：0： API参数1： 环境参数2： 应用参数3： 系统参数 */
   ModuleType: number;
   /** 变量名称 */
   Name: string;
@@ -2500,6 +2636,10 @@ declare interface Variable {
   EnableEndpoints?: boolean;
   /** 网络策略列表(支持: 精确域名、*.通配子域名、可带协议/端口/路径前缀) */
   EndpointList?: string[];
+  /** 是否内置变量 */
+  IsBuiltin?: boolean;
+  /** 是否可注入到沙箱环境 */
+  EnableSandbox?: boolean;
 }
 
 /** 视图范围 */
@@ -2518,6 +2658,94 @@ declare interface VoiceConfig {
   VoiceName: string;
   /** 公有云音色id */
   VoiceType: number;
+}
+
+/** 微信公众号/小程序渠道配置 */
+declare interface WechatChannelConfig {
+  /** 授权二维码URL（创建后回填） */
+  QrcodeUrl?: string;
+  /** 公众号/小程序AppId（授权后回填） */
+  WechatAppId?: string;
+  /** 公众号/小程序RefreshToken（授权后回填） */
+  WechatRefreshToken?: string;
+}
+
+/** 微信ClawBot渠道配置 */
+declare interface WechatClawBotChannelConfig {
+  /** ClawBot机器人ID（扫码后回填） */
+  BotId?: string;
+  /** ClawBot机器人Token（扫码后回填） */
+  BotToken?: string;
+  /** 二维码状态（wait/confirmed/expired） */
+  QrcodeStatus?: string;
+  /** 二维码URL（创建后回填） */
+  QrcodeUrl?: string;
+  /** 微信用户ID（扫码后回填） */
+  WechatUserId?: string;
+}
+
+/** 微信客服渠道配置 */
+declare interface WechatCustomerServiceChannelConfig {
+  /** 企业微信应用Secret */
+  AgentSecret?: string;
+  /** 头像URL */
+  Avatar?: string;
+  /** 回调配置 */
+  Callback?: CallbackConfig;
+  /** 客服账号ID */
+  CustomerServiceId?: string;
+  /** 客服账号名称 */
+  Name?: string;
+  /** 客服形象二维码URL */
+  ShareCodeUrl?: string;
+  /** 企业微信企业ID */
+  WecomCorpId?: string;
+}
+
+/** 企微应用渠道配置 */
+declare interface WecomAppChannelConfig {
+  /** 回调配置 */
+  Callback?: CallbackConfig;
+  /** 第三方企业ID */
+  ThirdChannelCorpId?: string;
+  /** 第三方渠道ID */
+  ThirdChannelId?: string;
+  /** 企微应用ID */
+  WecomAgentId?: string;
+  /** 企微应用Secret */
+  WecomAgentSecret?: string;
+  /** 企业ID */
+  WecomCorpId?: string;
+}
+
+/** 企微机器人回调接入配置 */
+declare interface WecomRobotCallbackAccess {
+  /** 回调配置 */
+  Callback?: CallbackConfig;
+  /** 机器人名称 */
+  RobotName?: string;
+  /** 企微企业ID */
+  WecomCorpId?: string;
+  /** 企微机器人ID */
+  WecomRobotId?: string;
+}
+
+/** 企微机器人渠道配置 */
+declare interface WecomRobotChannelConfig {
+  /** 回调接入配置 */
+  Callback?: WecomRobotCallbackAccess | null;
+  /** WebSocket长连接配置 */
+  Websocket?: WecomRobotWebsocketAccess | null;
+}
+
+/** 企微机器人WebSocket接入配置 */
+declare interface WecomRobotWebsocketAccess {
+  /** 绑定类型：1-扫码绑定，2-填写表单绑定 */
+  BindType?: number;
+  /** 企微机器人BotId */
+  BotId?: string;
+  /** 企微机器人BotSecret */
+  BotSecret?: string;
 }
 
 /** WeeklySchedule */
@@ -2624,6 +2852,22 @@ declare interface CreateAppTriggerRequest {
 declare interface CreateAppTriggerResponse {
   /** 应用触发器ID */
   TriggerId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateChannelRequest {
+  /** 应用业务ID */
+  AppId: string;
+  /** 渠道规格（场景/类型/名称/备注/配置，必填） */
+  Spec?: ChannelSpec;
+}
+
+declare interface CreateChannelResponse {
+  /** 渠道ID */
+  ChannelId?: string;
+  /** 二维码URL（扫码类渠道创建后回填，其他场景为空） */
+  QrcodeUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2886,6 +3130,20 @@ declare interface DeleteAppTriggerRequest {
 }
 
 declare interface DeleteAppTriggerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteChannelRequest {
+  /** 应用业务ID */
+  AppId: string;
+  /** 渠道业务ID */
+  ChannelId: string;
+  /** 渠道场景：0-B端场景，1-C端场景 */
+  Scene?: number;
+}
+
+declare interface DeleteChannelResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3222,6 +3480,44 @@ declare interface DescribeAuditLogMetaResponse {
   Actions?: AuditLogMetaField[];
   /** 操作对象列表 */
   BizObjects?: AuditLogMetaField[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeChannelListRequest {
+  /** 应用业务ID */
+  AppId: string;
+  /** 渠道场景：0-B端场景，1-C端场景 */
+  Scene?: number;
+  /** 过滤条件（可选，支持ChannelType/ChannelStatus等维度） */
+  FilterList?: Filter[];
+  /** 页码（从1开始） */
+  PageNumber?: number;
+  /** 每页数量（最大100） */
+  PageSize?: number;
+}
+
+declare interface DescribeChannelListResponse {
+  /** 渠道列表 */
+  ChannelList?: Channel[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeChannelRequest {
+  /** 应用业务ID */
+  AppId: string;
+  /** 渠道业务ID */
+  ChannelId: string;
+  /** 渠道场景：0-B端场景，1-C端场景 */
+  Scene?: number;
+}
+
+declare interface DescribeChannelResponse {
+  /** 渠道信息（含spec） */
+  Channel?: Channel;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3832,6 +4128,24 @@ declare interface ModifyAppTriggerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyChannelRequest {
+  /** 应用业务ID */
+  AppId: string;
+  /** 渠道业务ID */
+  ChannelId: string;
+  /** 渠道场景：0-B端场景，1-C端场景 */
+  Scene?: number;
+  /** 待更新的渠道规格 */
+  Spec?: ChannelSpec;
+  /** 更新字段掩码,B端(Scene=0)：支持：【spec.description" ,"spec.wecom_robot.callback.wecom_robot_id"】C端(Scene=1)：支持：【"spec.description" , "spec.wecom_robot.websocket.bot_id" ,"spec.wecom_robot.websocket.bot_secret"】 */
+  UpdateMask?: FieldMask;
+}
+
+declare interface ModifyChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConversationRequest {
   /** 会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接) */
   Type: number;
@@ -4095,6 +4409,8 @@ declare interface Adp {
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 创建应用触发器 {@link CreateAppTriggerRequest} {@link CreateAppTriggerResponse} */
   CreateAppTrigger(data?: CreateAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppTriggerResponse>;
+  /** 创建渠道 {@link CreateChannelRequest} {@link CreateChannelResponse} */
+  CreateChannel(data: CreateChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelResponse>;
   /** 新建会话 {@link CreateConversationRequest} {@link CreateConversationResponse} */
   CreateConversation(data: CreateConversationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConversationResponse>;
   /** 创建消息记录分类 {@link CreateMsgRecordCategoryRequest} {@link CreateMsgRecordCategoryResponse} */
@@ -4121,6 +4437,8 @@ declare interface Adp {
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
   /** 删除应用触发器 {@link DeleteAppTriggerRequest} {@link DeleteAppTriggerResponse} */
   DeleteAppTrigger(data?: DeleteAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppTriggerResponse>;
+  /** 删除渠道 {@link DeleteChannelRequest} {@link DeleteChannelResponse} */
+  DeleteChannel(data: DeleteChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChannelResponse>;
   /** 删除会话 {@link DeleteConversationRequest} {@link DeleteConversationResponse} */
   DeleteConversation(data: DeleteConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConversationResponse>;
   /** 删除消息记录分类 {@link DeleteMsgRecordCategoryRequest} {@link DeleteMsgRecordCategoryResponse} */
@@ -4159,6 +4477,10 @@ declare interface Adp {
   DescribeAuditLogList(data?: DescribeAuditLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogListResponse>;
   /** 获取审计日志元信息 {@link DescribeAuditLogMetaRequest} {@link DescribeAuditLogMetaResponse} */
   DescribeAuditLogMeta(data?: DescribeAuditLogMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogMetaResponse>;
+  /** 查询渠道 {@link DescribeChannelRequest} {@link DescribeChannelResponse} */
+  DescribeChannel(data: DescribeChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelResponse>;
+  /** 查询渠道列表 {@link DescribeChannelListRequest} {@link DescribeChannelListResponse} */
+  DescribeChannelList(data: DescribeChannelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelListResponse>;
   /** 查询并发超限明细 {@link DescribeConcurrencyLimitDetailListRequest} {@link DescribeConcurrencyLimitDetailListResponse} */
   DescribeConcurrencyLimitDetailList(data: DescribeConcurrencyLimitDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyLimitDetailListResponse>;
   /** 查询资源消耗明细 {@link DescribeConsumptionDetailListRequest} {@link DescribeConsumptionDetailListResponse} */
@@ -4217,6 +4539,8 @@ declare interface Adp {
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改应用触发器 {@link ModifyAppTriggerRequest} {@link ModifyAppTriggerResponse} */
   ModifyAppTrigger(data?: ModifyAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppTriggerResponse>;
+  /** 更新渠道 {@link ModifyChannelRequest} {@link ModifyChannelResponse} */
+  ModifyChannel(data: ModifyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChannelResponse>;
   /** 修改会话信息 {@link ModifyConversationRequest} {@link ModifyConversationResponse} */
   ModifyConversation(data: ModifyConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConversationResponse>;
   /** 修改消息记录分类 {@link ModifyMsgRecordCategoryRequest} {@link ModifyMsgRecordCategoryResponse} */

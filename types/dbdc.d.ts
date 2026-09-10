@@ -66,6 +66,8 @@ declare interface DBCustomClusterNode {
   EniIP?: string | null;
   /** 节点绑定的安全组 */
   SecurityGroupIds?: string[] | null;
+  /** 节点最新进行中的任务类型枚举值：add-nodes-to-cluster： 添加节点到集群remove-nodes-from-cluster： 从集群中移除节点modify-nodes-attributes： 修改节点属性modify-nodes-drg： 修改节点置放群组 */
+  LatestRunningTaskType?: string;
 }
 
 /** DB Custom 集群内节点配置信息。 */
@@ -168,6 +170,8 @@ declare interface DBCustomNode {
   SecurityGroupIds?: string[] | null;
   /** 置放群组ID */
   DisasterRecoverGroupId?: string;
+  /** 节点最新进行中的任务类型枚举值：add-nodes-to-cluster： 添加节点到集群remove-nodes-from-cluster： 从集群中移除节点modify-nodes-attributes： 修改节点属性modify-nodes-drg： 修改节点置放群组 */
+  LatestRunningTaskType?: string;
 }
 
 /** DB Custom 节点机型信息。 */
@@ -739,7 +743,7 @@ declare interface CreateDBCustomNodesRequest {
   ClientToken?: string;
   /** 计费模式枚举值：PREPAID： 包年包月POSTPAID： 按量付费默认值：默认为包年包月(PREPAID) */
   ChargeType?: string;
-  /** 访问主机的网络模式枚举值：privatelink： 四层网络联通，放通SSH 通路cross_tenant_eni： 三层网络联通，双网卡模式默认值：默认值为：privatelink */
+  /** 访问主机的网络模式枚举值：cross_tenant_eni： 三层网络联通，双网卡模式默认值：默认值为：cross_tenant_eni原 privatelink 访问主机的网络模式已下线。 */
   NetworkMode?: string;
   /** 系统盘配置入参限制：仅云盘版机型支持，如DB.SA5机型。本地盘机型DB.AT5机型不支持设置 */
   SystemDisk?: SystemDisk;
@@ -1272,9 +1276,15 @@ declare interface IsolateDBCustomNodeResponse {
 
 declare interface ModifyDBCustomClusterAttributesRequest {
   /** 集群ID参数格式：dbcc-hj7gab15 */
-  ClusterId: string;
+  ClusterId?: string;
+  /** 集群 ID 列表入参限制：最多支持 100 个ClusterId 和 ClusterIds 必须传一个且不能同时传 */
+  ClusterIds?: string[];
   /** 是否启用集群删除保护枚举值：true： 启用false： 不启用 */
   DeletionProtection?: boolean;
+  /** 集群名称入参限制：最长128个字符 */
+  ClusterName?: string;
+  /** 集群描述入参限制：最长200个字符 */
+  ClusterDescription?: string;
 }
 
 declare interface ModifyDBCustomClusterAttributesResponse {
@@ -1350,7 +1360,9 @@ declare interface ModifyDBCustomDisasterRecoverGroupTagsResponse {
 
 declare interface ModifyDBCustomNodeAttributesRequest {
   /** 节点ID参数格式：dbcn-hq98qjym */
-  NodeId: string;
+  NodeId?: string;
+  /** 节点 ID 列表入参限制：最多支持 100 个NodeId 和 NodeIds 必须传一个且不能同时传 */
+  NodeIds?: string[];
   /** 主机 HostName入参限制：参数设置规则参见：创建 DB Custom 节点接口的 HostName 参数说明。注意：节点在没有加入到集群之前才支持修改主机 HostName。 */
   HostName?: string;
   /** 节点名称入参限制：参数设置规则参见：创建 DB Custom 节点接口的 NodeName 参数说明。 */
@@ -1522,7 +1534,7 @@ declare interface Dbdc {
   /** 隔离节点 {@link IsolateDBCustomNodeRequest} {@link IsolateDBCustomNodeResponse} */
   IsolateDBCustomNode(data: IsolateDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBCustomNodeResponse>;
   /** 修改集群属性 {@link ModifyDBCustomClusterAttributesRequest} {@link ModifyDBCustomClusterAttributesResponse} */
-  ModifyDBCustomClusterAttributes(data: ModifyDBCustomClusterAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterAttributesResponse>;
+  ModifyDBCustomClusterAttributes(data?: ModifyDBCustomClusterAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterAttributesResponse>;
   /** 修改集群中节点的配置 {@link ModifyDBCustomClusterNodeConfigRequest} {@link ModifyDBCustomClusterNodeConfigResponse} */
   ModifyDBCustomClusterNodeConfig(data: ModifyDBCustomClusterNodeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomClusterNodeConfigResponse>;
   /** 修改集群绑定的标签 {@link ModifyDBCustomClusterTagsRequest} {@link ModifyDBCustomClusterTagsResponse} */
@@ -1532,7 +1544,7 @@ declare interface Dbdc {
   /** 修改置放群组绑定的标签 {@link ModifyDBCustomDisasterRecoverGroupTagsRequest} {@link ModifyDBCustomDisasterRecoverGroupTagsResponse} */
   ModifyDBCustomDisasterRecoverGroupTags(data: ModifyDBCustomDisasterRecoverGroupTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomDisasterRecoverGroupTagsResponse>;
   /** 修改节点属性 {@link ModifyDBCustomNodeAttributesRequest} {@link ModifyDBCustomNodeAttributesResponse} */
-  ModifyDBCustomNodeAttributes(data: ModifyDBCustomNodeAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeAttributesResponse>;
+  ModifyDBCustomNodeAttributes(data?: ModifyDBCustomNodeAttributesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeAttributesResponse>;
   /** 修改节点安全组 {@link ModifyDBCustomNodeSecurityGroupsRequest} {@link ModifyDBCustomNodeSecurityGroupsResponse} */
   ModifyDBCustomNodeSecurityGroups(data: ModifyDBCustomNodeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeSecurityGroupsResponse>;
   /** 修改节点绑定的标签 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */

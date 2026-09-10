@@ -550,6 +550,14 @@ declare interface ComputeResourceAdvanceParams {
   NodePoolJoinMode?: string;
 }
 
+/** 配置下发参数 */
+declare interface ConfSubContext {
+  /** 配置文件名字 */
+  FileName: string;
+  /** 配置文件参数,需要转为base64 */
+  Params: string;
+}
+
 /** 资源调度 - 队列修改信息 */
 declare interface ConfigModifyInfoV2 {
   /** 操作类型，可选值：- 0：新建队列- 1：编辑-全量覆盖- 2：新建子队列- 3：删除- 4：克隆，与新建子队列的行为一样，特别的对于`fair`，可以复制子队列到新建队列- 6：编辑-增量更新 */
@@ -1186,6 +1194,28 @@ declare interface Execution {
   JobType: string;
   /** 任务参数，提供除提交指令以外的参数。 */
   Args: string[];
+}
+
+/** 指定要导出配置的上下文结构 */
+declare interface ExportConfContext {
+  /** 服务配置 */
+  ServiceType: number;
+  /** 文件名 */
+  FileName: string;
+  /** 服务名称 */
+  ServiceName?: string;
+}
+
+/** 导出配置结构体 */
+declare interface ExportConfMeta {
+  /** 组件名称 */
+  ServiceName?: string | null;
+  /** 文件名 */
+  Classification?: string | null;
+  /** 组件版本 */
+  ServiceVersion?: string | null;
+  /** 导出配置参数 */
+  Properties?: string | null;
 }
 
 /** 容器集群外部访问设置 */
@@ -4648,6 +4678,26 @@ declare interface DescribeEmrOverviewMetricsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeExportConfsRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 指定需要导出的配置 */
+  ExportConfContexts: ExportConfContext[];
+  /** 导出类型枚举值：0： 全部配置1： 只导出自定义和修改过的配置 */
+  ExportType?: number;
+  /** 节点ip */
+  Ip?: string;
+  /** 配置组名称 */
+  ConfGroupName?: string;
+}
+
+declare interface DescribeExportConfsResponse {
+  /** 导出配置参数 */
+  ExportConfParamList?: ExportConfMeta[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeGlobalConfigRequest {
   /** emr集群的英文id */
   InstanceId: string;
@@ -5986,6 +6036,26 @@ declare interface ModifySLInstanceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyServiceParamsByExportConfsRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 导入配置项 */
+  ExportConfParamList: ExportConfMeta[];
+  /** ip */
+  IpList?: string[];
+  /** 配置组 */
+  ConfGroupName?: string;
+}
+
+declare interface ModifyServiceParamsByExportConfsResponse {
+  /** 流程id */
+  FlowId?: number;
+  /** 变更项 */
+  WaitModifyConfList?: ConfSubContext[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserGroupRequest {
   /** 集群字符串ID */
   InstanceId: string;
@@ -6485,6 +6555,8 @@ declare interface Emr {
   DescribeEmrApplicationStatics(data: DescribeEmrApplicationStaticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrApplicationStaticsResponse>;
   /** 查询监控概览页指标数据 {@link DescribeEmrOverviewMetricsRequest} {@link DescribeEmrOverviewMetricsResponse} */
   DescribeEmrOverviewMetrics(data: DescribeEmrOverviewMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEmrOverviewMetricsResponse>;
+  /** 查询导出配置 {@link DescribeExportConfsRequest} {@link DescribeExportConfsResponse} */
+  DescribeExportConfs(data: DescribeExportConfsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportConfsResponse>;
   /** 查询YARN资源调度的全局配置 {@link DescribeGlobalConfigRequest} {@link DescribeGlobalConfigResponse} */
   DescribeGlobalConfig(data: DescribeGlobalConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGlobalConfigResponse>;
   /** 用户管理-查询用户组 {@link DescribeGroupsSTDRequest} {@link DescribeGroupsSTDResponse} */
@@ -6595,6 +6667,8 @@ declare interface Emr {
   ModifySLInstance(data: ModifySLInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceResponse>;
   /** Serverless HBase修改实例名称 {@link ModifySLInstanceBasicRequest} {@link ModifySLInstanceBasicResponse} */
   ModifySLInstanceBasic(data: ModifySLInstanceBasicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySLInstanceBasicResponse>;
+  /** 导入配置并下发 {@link ModifyServiceParamsByExportConfsRequest} {@link ModifyServiceParamsByExportConfsResponse} */
+  ModifyServiceParamsByExportConfs(data: ModifyServiceParamsByExportConfsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceParamsByExportConfsResponse>;
   /** 用户管理-修改用户组 {@link ModifyUserGroupRequest} {@link ModifyUserGroupResponse} */
   ModifyUserGroup(data: ModifyUserGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGroupResponse>;
   /** 修改用户密码（用户管理） {@link ModifyUserManagerPwdRequest} {@link ModifyUserManagerPwdResponse} */

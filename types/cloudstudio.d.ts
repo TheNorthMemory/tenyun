@@ -103,8 +103,6 @@ declare interface CreateWorkspaceRequest {
   TenantUniqVpcId?: string;
   /** 子网ID */
   TenantSubnetId?: string;
-  /** 地域 */
-  Region?: string;
 }
 
 declare interface CreateWorkspaceResponse {

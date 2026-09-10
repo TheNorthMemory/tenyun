@@ -2401,7 +2401,7 @@ declare interface DescribeMetricTopProxiesResponse {
 }
 
 declare interface DescribeMongoDBProcessListRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
   /** 服务产品类型，支持值：mongodb */
   Product: string;

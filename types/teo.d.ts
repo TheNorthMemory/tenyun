@@ -5313,18 +5313,18 @@ declare interface CreateContentIdentifierResponse {
 declare interface CreateCustomizeErrorPageRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 自定义错误页名称，名称为 2-30 个字符。 */
+  /** 自定义响应页面名称，名称为 2-30 个字符。 */
   Name: string;
-  /** 自定义错误页面类型，取值有：text/html； application/json；text/plain；text/xml。 */
+  /** 自定义响应页面类型，取值有：text/htmlapplication/jsonplain/texttext/xmltext/csstext/javascriptapplication/javascripttext/markdown */
   ContentType: string;
-  /** 自定义错误页面描述，描述不超过 60 个字符。 */
+  /** 自定义响应页面描述，描述不超过 60 个字符。 */
   Description?: string;
-  /** 自定义错误页面内容，内容不超过 2KB。 */
+  /** 自定义响应页面内容，内容不超过 16KB。 */
   Content?: string;
 }
 
 declare interface CreateCustomizeErrorPageResponse {
-  /** 页面 ID。 */
+  /** 自定义响应页面 ID。 */
   PageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -8385,17 +8385,17 @@ declare interface ModifyContentIdentifierResponse {
 }
 
 declare interface ModifyCustomErrorPageRequest {
-  /** 自定义错误页面 ID。 */
+  /** 自定义响应页面 ID。 */
   PageId: string;
   /** 站点 ID。 */
   ZoneId: string;
-  /** 自定义错误页名称，名称为2 - 60个字符。 */
+  /** 自定义响应页面名称，名称为 2 - 60 个字符。 */
   Name?: string;
-  /** 自定义错误页描述，描述内容不超过60个字符。 */
+  /** 自定义响应页面描述，描述内容不超过 60 个字符。 */
   Description?: string;
-  /** 自定义错误页面类型，取值有：text/html。 application/json。plain/text。text/xml。 */
+  /** 自定义响应页面类型，取值有：text/htmlapplication/jsonplain/texttext/xmltext/csstext/javascriptapplication/javascripttext/markdown */
   ContentType?: string;
-  /** 自定义错误页面内容。内容不超过 2KB。 */
+  /** 自定义响应页面内容。内容不超过 16KB。 */
   Content?: string;
 }
 
