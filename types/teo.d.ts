@@ -7998,7 +7998,7 @@ declare interface DownloadL4LogsRequest {
   /** 结束时间。 */
   EndTime: string;
   /** 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
-  ZoneIds?: string[];
+  ZoneIds: string[];
   /** 四层实例 ID 集合。 */
   ProxyIds?: string[];
   /** 分页查询的限制数目，默认值为 20，最大查询条目为 300。 */
@@ -8022,7 +8022,7 @@ declare interface DownloadL7LogsRequest {
   /** 结束时间。 */
   EndTime: string;
   /** 站点ID集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。 */
-  ZoneIds?: string[];
+  ZoneIds: string[];
   /** 子域名集合，不填默认选择全部子域名。 */
   Domains?: string[];
   /** 分页查询的限制数目，默认值为 20，最大查询条目为 300。 */

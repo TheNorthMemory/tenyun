@@ -732,6 +732,12 @@ declare interface JobV1 {
   LastDiagnoseTime?: string;
   /** 负责人Uin */
   ManagerUin?: string;
+  /** 启动位点 */
+  StartupPoint?: string;
+  /** 是否有事件 */
+  IsEvent?: boolean;
+  /** 是否告警 */
+  IsAlarm?: boolean;
 }
 
 /** 日志查询的每行日志信息 */

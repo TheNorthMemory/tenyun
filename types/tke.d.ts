@@ -108,6 +108,8 @@ declare interface CreateNativeNodePoolParam {
   AutomationService?: boolean;
   /** 原生节点池密码 */
   Password?: string;
+  /** 自定义镜像 ID */
+  CustomImage?: string;
 }
 
 /** 描述了k8s节点数据盘相关配置与信息。 */
@@ -550,6 +552,8 @@ declare interface NativeNodePoolInfo {
   DataDisks?: DataDisk[] | null;
   /** 原生节点机型 Native, NativeCVM */
   MachineType?: string;
+  /** 自定义镜像 ID */
+  CustomImage?: string | null;
 }
 
 /** 节点统计列表 */
@@ -770,6 +774,8 @@ declare interface UpdateNativeNodePoolParam {
   AutomationService?: boolean;
   /** 原生节点池密码 */
   Password?: string;
+  /** 自定义镜像 ID */
+  CustomImage?: string;
 }
 
 declare interface CreateHealthCheckPolicyRequest {

@@ -2248,7 +2248,7 @@ declare interface UserFlowType {
 
 /** 用户信息 */
 declare interface UserInfo {
-  /** 用户在平台的编号 */
+  /** 用户在平台中的编号（UserId）UserId 获取方式：点击查看 */
   UserId?: string;
   /** 用户的来源渠道，一般不用传，特定场景根据接口说明传值 */
   Channel?: string;

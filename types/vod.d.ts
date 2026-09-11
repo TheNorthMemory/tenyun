@@ -745,6 +745,18 @@ declare namespace V20180717 {
     Definition: number;
   }
 
+  /** 智能抠图配置。 */
+  interface AiCutOutConfig {
+    /** 能力配置开关，可选值： ON：开启； OFF：关闭。 默认值：ON。 */
+    Switch?: string;
+    /** 抠图目标类型指定："foreground" / "pattern" */
+    Type?: string;
+    /** 图案抠图配置。仅在Type为pattern时生效。 */
+    PatternConfig?: PatternConfig | null;
+    /** 抠图模型选择，可不填。枚举值：auto： 自动选择合适的模型WAND-cutout-1.0-lite： 标准版，速度最快WAND-cutout-2.0-lite： 增强版，速度更快WAND-cutout-2.0-flash： 增强版，质量-速度平衡WAND-cutout-3.0-lite： 增强版，速度更快WAND-cutout-3.0-flash： 增强版，质量-速度平衡 */
+    Model?: string;
+  }
+
   /** 智能识别结果。 */
   interface AiRecognitionResult {
     /** 任务的类型，取值范围：FaceRecognition：人脸识别，AsrWordsRecognition：语音关键词识别，OcrWordsRecognition：文本关键词识别，AsrFullTextRecognition：语音全文识别，AsrTranslateRecognition：语音翻译识别，OcrFullTextRecognition：文本全文识别，HeadTailRecognition：视频片头片尾识别，ObjectRecognition：物体识别。 */
@@ -6215,6 +6227,20 @@ declare namespace V20180717 {
     TEHDConfig?: TEHDConfigForUpdate | null;
   }
 
+  /** 印花提取配置。 */
+  interface PatternConfig {
+    /** 透明度阈值取值范围：[0, 255]默认值：30 */
+    TransparencyThreshold?: number;
+    /** 不透明阈值，必须大于TransparencyThreshold取值范围：[0, 255]默认值：127 */
+    OpaqueThreshold?: number;
+    /** 边缘采样步数取值范围：[1, 10]默认值：5 */
+    EdgeSamplingStep?: number;
+    /** 边缘扩展步数默认值：5 */
+    EdgeExpansionStep?: number;
+    /** 边缘融合强度取值范围：[0.0, 1.0]默认值：0.5 */
+    EdgeBlendingIntensity?: number;
+  }
+
   /** 剪辑固化任务信息。 */
   interface PersistenceCompleteTask {
     /** 固化生成的媒体 ID。 */
@@ -6627,6 +6653,8 @@ declare namespace V20180717 {
     EnhanceConfig?: ImageEnhanceConfig | null;
     /** 图片美颜配置。 */
     BeautyConfig?: ImageBeautyConfig | null;
+    /** Ai抠图配置 */
+    AiCutOutConfig?: AiCutOutConfig;
   }
 
   /** 图片处理配置。 */

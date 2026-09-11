@@ -22,6 +22,34 @@ declare interface AIOptimizeModel {
   Model: ModelDetailInfo | null;
 }
 
+/** AccessKey鉴权配置 */
+declare interface AccessKeyAuthConfig {
+  /** Access Key字段配置 */
+  ParamList?: AccessKeyParamConfig[];
+  /** Access Key透传配置 */
+  PassThroughConfig?: AccessKeyPassThroughConfig | null;
+  /** Access Key 使用模式枚举值：1： Access Key透传 */
+  UsageMode?: number;
+}
+
+/** Access Key 字段配置 */
+declare interface AccessKeyParamConfig {
+  /** Access Key 字段类型，1:AccessKeyId，2:AccessKeySecret，3:SessionToken */
+  FieldType?: number;
+  /** 是否必填 */
+  IsRequired?: boolean;
+  /** header/query 字段名 */
+  ParamName?: string;
+  /** AccessKey密钥默认值，允许为空 */
+  ParamValue?: string;
+}
+
+/** Access Key 透传配置 */
+declare interface AccessKeyPassThroughConfig {
+  /** Access Key 字段统一注入位置，0:Header，1:Query */
+  KeyLocation?: number;
+}
+
 /** 员工信息 */
 declare interface AccountInfo {
   /** 员工子账号id */
@@ -974,6 +1002,8 @@ declare interface AuthConfig {
   CamAuthConfig?: CamAuthConfig | null;
   /** OAuth2.0授权配置 */
   OAuthConfig?: OAuthConfig | null;
+  /** AccessKey授权配置 */
+  AccessKeyAuthConfig?: AccessKeyAuthConfig;
 }
 
 /** BackgroundImage 背景图片配置 */
@@ -1038,6 +1068,10 @@ declare interface CamAuthConfig {
   SecretIdName?: string;
   /** SecretKey字段名称 */
   SecretKeyName?: string;
+  /** CAM Access Key 字段配置 */
+  ParamList?: AccessKeyParamConfig[];
+  /** 是否支持CAM角色授权 */
+  SupportRoleAuth?: boolean;
 }
 
 /** CategoryPermission */
@@ -1518,11 +1552,11 @@ declare interface FileParseModel {
   SupportedFileList?: SupportedFileType[];
 }
 
-/** 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系） */
+/** 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系；BETWEEN 时 value_list 必须恰好 2 个元素表示闭区间 [start, end]） */
 declare interface Filter {
   /** 过滤字段名 */
   Name?: string;
-  /** 操作符，默认 IN（向后兼容）枚举项枚举值描述FILTER_OPERATOR_IN0属于 value_list（默认值，向后兼容；value_list 不可为空）FILTER_OPERATOR_NOT_IN1不属于 value_list（value_list 不可为空） */
+  /** 操作符，默认 IN（向后兼容）枚举项枚举值描述FILTER_OPERATOR_IN0属于 value_list（默认值，向后兼容；value_list 不可为空）FILTER_OPERATOR_NOT_IN1不属于 value_list（value_list 不可为空）FILTER_OPERATOR_BETWEEN2之间（闭区间 [start, end]；value_list 必须恰好 2 个元素，允许其一为空表示单边开区间） */
   Operator?: number;
   /** 过滤值数组 */
   ValueList?: string[];
@@ -2048,22 +2082,28 @@ declare interface PluginStatistics {
 
 /** 插件概要信息（用于插件列表） */
 declare interface PluginSummary {
+  /** 插件配置信息 */
+  Config?: PluginConfig;
+  /** 是否已配置共享 */
+  IsShared?: boolean;
   /** 插件运营管理信息 */
   Operation?: PluginOperation;
   /** 插件id */
   PluginId?: string;
   /** 插件基础信息 */
   Profile?: PluginProfile;
+  /** 插件所属空间 ID；内置插件为空 */
+  SpaceId?: string;
   /** 插件统计信息 */
   Statistics?: PluginStatistics;
   /** 插件状态，1:可用，2:不可用 枚举值：1： 可用2： 不可用 */
   Status?: number;
-  /** 用户维度的插件状态信息 */
-  UserState?: PluginUserState;
-  /** 插件配置信息 */
-  Config?: PluginConfig;
   /** 工具信息 */
   ToolList?: ToolSummary[];
+  /** 用户维度的插件状态信息 */
+  UserState?: PluginUserState;
+  /** 更新时间，Unix时间戳单位：秒 */
+  UpdateTime?: string;
 }
 
 /** 插件调用明细 */
@@ -3001,6 +3041,8 @@ declare interface CreateSkillShareRequest {
   SpaceId: string;
   /** 必填，被共享的版本id（必须高于已共享版本） */
   VersionId: string;
+  /** 共享配置 */
+  CorpShareConfig?: SkillCorpShareConfig;
 }
 
 declare interface CreateSkillShareResponse {
@@ -3803,7 +3845,7 @@ declare interface DescribePluginResponse {
 declare interface DescribePluginSummaryListRequest {
   /** 空间ID，查询空间内的插件列表时使用 */
   SpaceId: string;
-  /** 过滤条件列表 支持：PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType */
+  /** 过滤条件列表，支持 PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType、AuthType、IsShared、IsCreatedByMe */
   FilterList?: Filter[];
   /** 是否只返回已收藏插件。取 true 时，仅返回当前用户已收藏的插件；取 false 或不传时不按收藏状态过滤。 */
   IsFavoriteOnly?: boolean;
@@ -3817,6 +3859,8 @@ declare interface DescribePluginSummaryListRequest {
   Query?: string;
   /** 排序方式。枚举值：0：未指定，默认排序1：按相关性排序2：按更新时间排序3：默认排序4：按热度排序 */
   SortType?: number;
+  /** 筛选当前空间/企业共享插件取值范围：[0, 2] */
+  PluginSpaceRelation?: number;
 }
 
 declare interface DescribePluginSummaryListResponse {
@@ -3896,6 +3940,8 @@ declare interface DescribeSkillReferenceListRequest {
 declare interface DescribeSkillReferenceListResponse {
   /** 按 SkillRefType 分组的引用汇总：某类型 total_count = 0 时不入组（不返回空占位） 本期同时落 OPENCLAW / AGENT / CORP_ASSISTANT 三路 */
   ReferenceList?: SkillReferenceGroup[];
+  /** 当前用户是否允许强制删除有引用的Skill */
+  AllowForceModify?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -26,6 +26,84 @@ declare interface AIAnalysisTemplateItem {
   Type?: string | null;
 }
 
+/** AI配音任务 */
+declare interface AIDubbingTaskInput {
+  /** AI配音模板id。 */
+  Definition?: number;
+  /** AI配音自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定配音参数。 */
+  RawParameter?: RawAIDubbingParameter;
+  /** AI配音自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分配音参数时，将使用填写的参数覆盖AI配音模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定配音参数。 */
+  OverrideParameter?: OverrideAIDubbingParameter;
+  /** 文件的目标存储，不填则继承上层的 OutputStorage 值。 */
+  OutputStorage?: TaskOutputStorage;
+  /** 外部源字幕文件信息。 */
+  SrcSubtitleInfo?: MediaInputInfo;
+  /** 外部字幕文件信息，译文字幕。 */
+  DstSubtitleInfos?: DstSubtitleInput[];
+  /** 文件的输出路径，可以为相对路径或者绝对路径。若需定义输出路径，路径需以.{format}结尾。变量名请参考 文件名变量说明。相对路径示例：文件名_{变量名}.{format}文件名.{format}绝对路径示例：/自定义路径/文件名_{变量名}.{format}注意：目前不支持BatchProcessMedia接口。 */
+  OutputObjectPath?: string;
+  /** AI配音扩展参数，序列化的 json 字符串。 */
+  ExtendedParameter?: string;
+  /** 关联剧集ID。注意：配音模式为按角色智能配音时此值生效。 */
+  DramaId?: string;
+}
+
+/** AI配音结果信息 */
+declare interface AIDubbingTaskOutput {
+  /** 基于画面提取的字幕文件路径。 */
+  OriginSubtitlePath?: string;
+  /** 基于画面提取的字幕翻译文件路径。 */
+  TranslateSubtitlePath?: string;
+  /** 音色克隆后的视频文件地址 */
+  VoiceClonedVideo?: string;
+  /** 音色克隆的标注文件地址 */
+  VoiceClonedMarkFile?: string;
+  /** 视频输出路径。 */
+  VideoPath?: string;
+  /** 基于画面提取的字幕文件FileId。 */
+  OriginSubtitleFileId?: string;
+  /** 基于画面提取的字幕翻译文件FileId 。 */
+  TranslateSubtitleFileId?: string;
+  /** 标记文件路径。 */
+  SpeakerPath?: string;
+  /** 标记文件Fileid。 */
+  SpeakerFileId?: string;
+  /** 擦除视频输出FileId。 */
+  EraseVideoFileId?: string;
+  /** 擦除视频输出路径。 */
+  EraseVideoPath?: string;
+  /** 译文配音音频文件路径。 */
+  DstAudioPath?: string;
+  /** 译文配音音频文件FileId。 */
+  DstAudioFileId?: string;
+  /** 音色克隆编辑信息用于音色克隆二次修改的编辑信息 */
+  DubbingEditInfoUrl?: string;
+  /** 擦除的字幕位置。注意：仅对字幕提取且开启返回字幕位置时有效。 */
+  SubtitlePos?: SubtitlePosition | null;
+  /** AI配音任务输出文件的存储位置。 */
+  OutputStorage?: TaskOutputStorage;
+}
+
+/** AI配音任务结果 */
+declare interface AIDubbingTaskResult {
+  /** 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。 */
+  Status?: string;
+  /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 媒体处理类错误码 列表。 */
+  ErrCodeExt?: string;
+  /** 错误信息。 */
+  Message?: string;
+  /** AI配音任务输入。 */
+  Input?: AIDubbingTaskInput | null;
+  /** AI配音任务输出。 */
+  Output?: AIDubbingTaskOutput | null;
+  /** 任务进度。 */
+  Progress?: number;
+  /** 任务开始执行的时间，采用 ISO 日期格式。 */
+  BeginProcessTime?: string;
+  /** 任务执行完毕的时间，采用 ISO 日期格式。 */
+  FinishTime?: string;
+}
+
 /** 视频内容识别模板详情 */
 declare interface AIRecognitionTemplateItem {
   /** 视频内容识别模板唯一标识。 */
@@ -100,6 +178,8 @@ declare interface ActivityPara {
   SmartSubtitlesTask?: SmartSubtitlesTaskInput | null;
   /** 智能擦除任务 */
   SmartEraseTask?: SmartEraseTaskInput | null;
+  /** AI配音任务。 */
+  AIDubbingTask?: AIDubbingTaskInput;
 }
 
 /** 编排子任务输出 */
@@ -130,11 +210,13 @@ declare interface ActivityResItem {
   SmartSubtitlesTask?: ScheduleSmartSubtitleTaskResult | null;
   /** 智能擦除任务输出 */
   SmartEraseTask?: SmartEraseTaskResult | null;
+  /** AI配音任务输出。 */
+  AIDubbingTask?: AIDubbingTaskResult;
 }
 
 /** 编排任务输出 */
 declare interface ActivityResult {
-  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。SmartSubtitles：智能字幕。SmartErase：智能擦除。 */
+  /** 原子任务类型。Transcode：转码。SampleSnapshot：采样截图。AnimatedGraphics：转动图。SnapshotByTimeOffset：时间点截图。ImageSprites：雪碧图。AdaptiveDynamicStreaming：自适应码流。AiContentReview：内容审核。AIRecognition：智能识别。AIAnalysis：智能分析。AiQualityControl：媒体质检。SmartSubtitles：智能字幕。SmartErase：智能擦除。Dubbing: AI配音 */
   ActivityType?: string;
   /** 原子任务输出。 */
   ActivityResItem?: ActivityResItem;
@@ -3474,6 +3556,72 @@ declare interface DrmInfo {
   SpekeDrm?: SpekeDrm;
 }
 
+/** AI配音外部翻译字幕信息 */
+declare interface DstSubtitleInput {
+  /** 外部翻译字幕信息。 */
+  DstSubtitleInfo?: MediaInputInfo;
+}
+
+/** dubbing任务配置 */
+declare interface DubbingConfig {
+  /** 配音类型，可选值：FullAutoEmotionClone：全自动高情感克隆配音；RoleBasedSmartDubbing：按角色智能配音；SingleVoice：指定单一音色； */
+  DubbingMode: string;
+  /** 背景音音量，范围0-100默认值：80 */
+  BackgroundVolume?: number;
+  /** 二次微调开关，可选值：ON: 开启二次微调；OFF: 不开启二次微调；默认值：OFF仅 RoleBasedSmartDubbing 时允许设为 ON */
+  SecondaryTuning?: string;
+  /** 指定音色仅 SingleVoice 时有效且 Create 必填 */
+  VoiceId?: string;
+  /** 配音版本，可选值：v1，v2默认值：v2只在（FullAutoEmotionClone：全自动高情感克隆配音）模式下生效 */
+  DubbingVersion?: string;
+}
+
+/** dubbing任务压制字幕配置 */
+declare interface DubbingEmbedSubtitleConfig {
+  /** 压制字幕id。 */
+  SubtitleEmbedId?: number;
+  /** 沿用原字幕位置。默认值：1 */
+  UseOriginalPos?: number;
+  /** 沿用原字幕字号。默认值：1 */
+  UseOriginalSize?: number;
+}
+
+/** dubbing任务输出配置 */
+declare interface DubbingOutputConfig {
+  /** 输出方式枚举值：FinalVideoOnly： 默认，仅成片视频AudioAndSubtitle： 译文音频+译文字幕Custom： 自定义默认值：FinalVideoOnly使用外部字幕时无译文音频+字幕返回 */
+  OutputMode?: string;
+  /** 输出成片视频开关枚举值：ON： 打开OFF： 关闭默认值：ON仅 Custom 模式生效 */
+  OutputFinalVideo?: string;
+  /** 输出字幕文件（同时包含原语音字幕、目标语言字幕）开关枚举值：ON： 开启OFF： 关闭默认值：OFF */
+  OutputSubtitle?: string;
+  /** 输出译文配音音频开关枚举值：ON： 开启OFF： 关闭默认值：OFF仅 Custom 模式生效 */
+  OutputDstAudio?: string;
+  /** 压制字幕配置信息。 */
+  EmbedSubtitleConfig?: DubbingEmbedSubtitleConfig;
+}
+
+/** dubbing任务翻译配置 */
+declare interface DubbingSubtitleConfig {
+  /** 字幕来源。枚举值：OCR： OCR文本识别，识别视频画面上的文本。ASR： ASR语音识别，识别视频语音对话。External： 外部字幕文件，提供原文/译文字幕URL。 */
+  SubtitleSource?: string;
+  /** 使用ASR辅助OCR。枚举值：ON： 开启使用ASR辅助OCR。OFF： 不开启使用ASR辅助OCR。默认值：OFF仅 SubtitleSource=OCR 时允许设为 ON */
+  AsrAssistOcr?: string;
+  /** 擦除原字幕。枚举值：ON： 擦除原字幕。OFF： 保留原字幕。默认值：OFFSubtitleSource=External 时不允许设为 ON */
+  EraseOriginalSubtitle?: string;
+  /** 字幕位置信息。 */
+  SelectingSubtitleAreasConfig?: SelectingSubtitleAreasConfig;
+}
+
+/** dubbing任务翻译配置 */
+declare interface DubbingTranslateConfig {
+  /** 源语言。 */
+  VideoSrcLanguage: string;
+  /** 翻译目标语言。 */
+  TranslateDstLanguage: string;
+  /** 智能简化译文。枚举值：ON： 开启智能简化译文。OFF： 关闭智能简化译文。默认值：OFF */
+  SimplifyTranslation?: string;
+}
+
 /** 编辑点播视频文件信息 */
 declare interface EditMediaFileInfo {
   /** 视频的输入信息。 */
@@ -5688,6 +5836,18 @@ declare interface OutputSRTSourceAddressResp {
   Port: number | null;
 }
 
+/** AI配音自定义参数 */
+declare interface OverrideAIDubbingParameter {
+  /** 翻译配置信息。 */
+  TranslateConfig?: DubbingTranslateConfig;
+  /** 字幕配置信息。 */
+  SubtitleConfig?: DubbingSubtitleConfig;
+  /** 配音配置信息。 */
+  DubbingConfig?: DubbingConfig;
+  /** 输出配置信息。 */
+  OutputConfig?: DubbingOutputConfig;
+}
+
 /** 智能擦除自定义参数 */
 declare interface OverrideEraseParameter {
   /** 擦除类型subtitle 去字幕watermark 去水印privacy 隐私保护 */
@@ -6252,6 +6412,18 @@ declare interface RTPAddressDestination {
 declare interface RTSPPullSourceAddress {
   /** RTSP源站的Url地址。 */
   Url: string;
+}
+
+/** AI配音自定义参数 */
+declare interface RawAIDubbingParameter {
+  /** 翻译配置信息。 */
+  TranslateConfig?: DubbingTranslateConfig;
+  /** 字幕配置信息。 */
+  SubtitleConfig?: DubbingSubtitleConfig;
+  /** 配音配置信息。 */
+  DubbingConfig?: DubbingConfig;
+  /** 输出配置信息。 */
+  OutputConfig?: DubbingOutputConfig;
 }
 
 /** 图片水印模板输入参数 */
@@ -8659,33 +8831,33 @@ declare interface WordResult {
 /** 工作流信息详情。 */
 declare interface WorkflowInfo {
   /** 工作流 ID。 */
-  WorkflowId: number;
+  WorkflowId?: number;
   /** 工作流名称。 */
-  WorkflowName: string;
+  WorkflowName?: string;
   /** 工作流状态，取值范围：Enabled：已启用，Disabled：已禁用。 */
-  Status: string;
+  Status?: string;
   /** 工作流绑定的输入规则，当上传视频命中该规则到该对象时即触发工作流。 */
-  Trigger: WorkflowTrigger;
+  Trigger?: WorkflowTrigger;
   /** 媒体处理的文件输出存储位置。 */
-  OutputStorage: TaskOutputStorage | null;
+  OutputStorage?: TaskOutputStorage;
   /** 媒体处理类型任务参数。 */
-  MediaProcessTask: MediaProcessTaskInput | null;
+  MediaProcessTask?: MediaProcessTaskInput;
   /** 视频内容审核类型任务参数。 */
-  AiContentReviewTask: AiContentReviewTaskInput | null;
+  AiContentReviewTask?: AiContentReviewTaskInput | null;
   /** 视频内容分析类型任务参数。 */
-  AiAnalysisTask: AiAnalysisTaskInput | null;
+  AiAnalysisTask?: AiAnalysisTaskInput | null;
   /** 视频内容识别类型任务参数。 */
-  AiRecognitionTask: AiRecognitionTaskInput | null;
+  AiRecognitionTask?: AiRecognitionTaskInput | null;
   /** 任务的事件通知信息，不填代表不获取事件通知。 */
-  TaskNotifyConfig: TaskNotifyConfig | null;
+  TaskNotifyConfig?: TaskNotifyConfig;
   /** 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
-  TaskPriority: number;
+  TaskPriority?: number;
   /** 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。 */
-  OutputDir: string;
+  OutputDir?: string;
   /** 工作流创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  CreateTime: string;
+  CreateTime?: string;
   /** 工作流最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
-  UpdateTime: string;
+  UpdateTime?: string;
 }
 
 /** 媒体处理任务信息 */
@@ -8716,6 +8888,8 @@ declare interface WorkflowTask {
   SmartSubtitlesTaskResult?: SmartSubtitlesResult[] | null;
   /** 智能擦除任务的执行结果 */
   SmartEraseTaskResult?: SmartEraseTaskResult | null;
+  /** AI配音任务的执行结果。 */
+  AiDubbingTaskResult?: AIDubbingTaskResult;
 }
 
 /** 输入规则，当上传视频命中该规则时，即触发工作流。 */
@@ -12849,6 +13023,8 @@ declare interface ProcessMediaRequest {
   SmartSubtitlesTask?: SmartSubtitlesTaskInput;
   /** 智能擦除类型任务参数 */
   SmartEraseTask?: SmartEraseTaskInput;
+  /** AI配音类型任务参数 */
+  AIDubbingTask?: AIDubbingTaskInput;
   /** 任务的事件通知信息，不填代表不获取事件通知。 */
   TaskNotifyConfig?: TaskNotifyConfig;
   /** 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。 */

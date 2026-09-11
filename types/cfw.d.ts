@@ -570,6 +570,60 @@ declare interface CustomWhiteRule {
   SrcIP?: string;
 }
 
+/** NDR出站数据泄露-告警事件 */
+declare interface DataLeakOutAlertEvent {
+  /** 风险ID */
+  RiskID?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例类型 */
+  InstanceType?: string;
+  /** 地域 */
+  Region?: string;
+  /** 源IP */
+  SrcIP?: string;
+  /** 目的IP端口，多个以逗号连接：1.1.1.1:80,1.1.1.1:8080 */
+  DstIPPort?: string;
+  /** hostname */
+  Hostname?: string;
+  /** 目的服务类型 */
+  DstServiceType?: string;
+  /** 目的服务名称 */
+  DstServiceName?: string;
+  /** 以逗号连接的敏感类型ID集合: 10001,10002,10003 */
+  LeakTypeSet?: string;
+  /** 事件数量 */
+  EventCount?: number;
+  /** 首次识别时间 */
+  FirstIdentificationTime?: string;
+  /** 最近识别时间 */
+  LatestIdentificationTime?: string;
+  /** 风险等级 */
+  Level?: number;
+  /** 处置状态 */
+  Status?: number;
+  /** 备注 */
+  Comment?: string;
+  /** API */
+  ApiPattern?: string;
+  /** AI分析状态 */
+  AnalysisStatus?: number;
+  /** AI分析失败原因（失败时） */
+  AnalysisFailReason?: string;
+  /** API业务类型 */
+  ApiBizType?: string;
+  /** 风险类型（风险场景） */
+  RiskScenario?: string;
+  /** AI建议风险等级 */
+  AiSuggestedLevel?: number;
+  /** 目的IP地理信息 */
+  DstGeoLocation?: string;
+  /** 最高敏感等级 */
+  HighestLevel?: string;
+}
+
 /** 数据库白名单规则数据 */
 declare interface DatabaseWhiteListRuleData {
   /** 访问源 */
@@ -4120,6 +4174,38 @@ declare interface DescribeNDRAssetIdentificationListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNDRDataLeakOutAlertListRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移量 */
+  Offset: number;
+  /** 排序方式，asc正序 desc倒序 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 查询过滤条件，多个条件之间为AND的关系 */
+  Filters?: OperatorFilter[];
+}
+
+declare interface DescribeNDRDataLeakOutAlertListResponse {
+  /** 符合查询条件的总条数 */
+  Total?: number;
+  /** 查询结果列表 */
+  Data?: DataLeakOutAlertEvent[];
+  /** 实例类型可选项 */
+  InstanceTypeOptions?: FieldOption[];
+  /** 地域可选项 */
+  RegionOptions?: FieldOption[];
+  /** 目标服务类型可选项 */
+  DstServiceTypeOptions?: FieldOption[];
+  /** 风险场景（类型）可选项 */
+  RiskScenarioOptions?: FieldOption[];
+  /** AI分析任务状态可选项 */
+  AnalysisStatusOptions?: FieldOption[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNatAcRuleRequest {
   /** 每页条数 */
   Limit: number;
@@ -5843,6 +5929,8 @@ declare interface Cfw {
   DescribeNDRAssetIdentificationCursorList(data: DescribeNDRAssetIdentificationCursorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationCursorListResponse>;
   /** 获取NDR资产识别结果列表 {@link DescribeNDRAssetIdentificationListRequest} {@link DescribeNDRAssetIdentificationListResponse} */
   DescribeNDRAssetIdentificationList(data: DescribeNDRAssetIdentificationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationListResponse>;
+  /** 获取NDR出站敏感数据泄露风险列表 {@link DescribeNDRDataLeakOutAlertListRequest} {@link DescribeNDRDataLeakOutAlertListResponse} */
+  DescribeNDRDataLeakOutAlertList(data: DescribeNDRDataLeakOutAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRDataLeakOutAlertListResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */
   DescribeNatAcRule(data: DescribeNatAcRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNatAcRuleResponse>;
   /** 查询NAT CCN防火墙开关配置 {@link DescribeNatCcnFwSwitchRequest} {@link DescribeNatCcnFwSwitchResponse} */

@@ -48,6 +48,22 @@ declare interface AIModelSecret {
   ApiKey?: string;
 }
 
+/** Agent 创建云函数镜像配置 */
+declare interface AgentRuntimeCodeImageConfig {
+  /** 镜像仓库类型，个人版或者企业版：personal/enterprise */
+  ImageType: string;
+  /** {domain}/{namespace}/{imageName}:{tag}@{digest} */
+  ImageUri: string;
+  /** 用于企业版TCR获取镜像拉取临时凭证，ImageType为"enterprise"时必填 */
+  RegistryId?: string;
+  /** 容器的启动命令。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 Entrypoint。传入规范，填写可运行的指令，例如 python */
+  Command?: string;
+  /** 容器的启动参数。该参数为可选参数，如果不填写，则默认使用 Dockerfile 中的 CMD。传入规范，以“空格”作为参数的分割标识，例如 -u app.py */
+  Args?: string;
+  /** 镜像加速开关，默认False */
+  ContainerImageAccelerate?: boolean;
+}
+
 /** API Key 访问凭证信息。描述云开发环境下 API Key 的完整信息，包括标识符、名称、令牌值、创建时间和过期时间。支持两种类型：api_key（服务端管理员访问凭证，用于服务端接口调用的身份认证，可设置有效期，单个环境最多 5 个）和 publish_key（前端匿名访问凭证，固定有效期，每个环境仅保留一个）。注意：令牌值（ApiKey 字段）仅在创建时返回完整明文，列表查询时将进行脱敏处理。 */
 declare interface ApiKeyToken {
   /** API Key 的唯一标识符，由系统基于 UUID 自动生成的 Base64 URL 编码字符串。后续对该 API Key 进行删除、修改名称或精确查询操作时，均需使用该值作为定位参数 */
@@ -258,6 +274,24 @@ declare interface ClusterDetail {
   ClusterStatus?: string | null;
   /** serverless状态 */
   ServerlessStatus?: string;
+}
+
+/** base64编码后的代码块 */
+declare interface CodeReq {
+  /** 包含函数代码的zip格式文件 */
+  ZipFile?: string;
+  /** 对象存储桶名称（填写存储桶名称自定义部分，不包含-appid） */
+  CosBucketName?: string;
+  /** 对象存储中代码包文件路径，以/开头 */
+  CosObjectName?: string;
+  /** 对象存储的地域，地域为北京时需要传入ap-beijing,北京一区时需要传递ap-beijing-1，其他的地域不需要传递。 */
+  CosBucketRegion?: string;
+  /** 如果是从TempCos创建的话，需要传入TempCosObjectName */
+  TempCosObjectName?: string;
+  /** 如果是通过Demo创建的话，需要传入DemoId */
+  DemoId?: string;
+  /** 上传云开发cos后返回的时间戳 */
+  CosTimestamp?: string;
 }
 
 /** 本类型用于UpdateTable接口中描述待创建索引信息 */
@@ -536,12 +570,104 @@ declare interface Filter {
   Values?: string[];
 }
 
+/** 云函数 */
+declare interface Function {
+  /** 修改时间 */
+  ModTime?: string;
+  /** 创建时间 */
+  AddTime?: string;
+  /** 运行时 */
+  Runtime?: string;
+  /** 函数名称 */
+  FunctionName?: string;
+  /** 函数ID */
+  FunctionId?: string;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 函数状态，状态值 */
+  Status?: string;
+  /** 函数状态详情 */
+  StatusDesc?: string;
+  /** 函数描述 */
+  Description?: string;
+  /** 函数标签 */
+  Tags?: Tag[] | null;
+  /** 函数类型，取值为 HTTP 或者 Event */
+  Type?: string;
+  /** 函数状态失败原因 */
+  StatusReasons?: StatusReason[] | null;
+  /** 函数所有版本预置并发内存总和 */
+  TotalProvisionedConcurrencyMem?: number;
+  /** 函数并发保留内存 */
+  ReservedConcurrencyMem?: number;
+  /** 函数异步属性，取值 TRUE 或者 FALSE */
+  AsyncRunEnable?: string;
+  /** 异步函数是否开启调用追踪，取值 TRUE 或者 FALSE */
+  TraceEnable?: string;
+}
+
+/** 云函数公网访问固定ip配置 */
+declare interface FunctionEipConfig {
+  /** Eip开启状态，取值['ENABLE','DISABLE'] */
+  EipStatus?: string | null;
+}
+
+/** 固定 IP 配置 */
+declare interface FunctionEipConfigFixed {
+  /** 是否固定 IP，TRUE / FALSE */
+  EipFixed?: string;
+}
+
+/** 函数的环境变量参数 */
+declare interface FunctionEnvironment {
+  /** 环境变量数组 */
+  Variables?: Variable[];
+}
+
 /** 函数的信息 */
 declare interface FunctionInfo {
   /** 命名空间 */
   Namespace?: string;
   /** 所属地域。当前支持ap-shanghai */
   Region?: string;
+}
+
+/** 云函数Layer版本 */
+declare interface FunctionLayer {
+  /** 层名称 */
+  LayerName?: string;
+  /** 层版本号 */
+  LayerVersion?: number;
+}
+
+/** 云函数公网访问配置 */
+declare interface FunctionPublicNetConfig {
+  /** 是否开启公网访问能力取值['DISABLE','ENABLE'] */
+  PublicNetStatus?: string | null;
+  /** Eip配置 */
+  EipConfig?: FunctionEipConfig | null;
+}
+
+/** 触发器类型 */
+declare interface FunctionTrigger {
+  /** 触发器最后修改时间 */
+  ModTime: string;
+  /** 触发器类型 */
+  Type: string;
+  /** 触发器详细配置 */
+  TriggerDesc: string;
+  /** 触发器名称 */
+  TriggerName: string;
+  /** 触发器创建时间 */
+  AddTime: string;
+}
+
+/** 私有网络参数配置 */
+declare interface FunctionVpcConfig {
+  /** 私有网络 的 id */
+  VpcId?: string;
+  /** 子网的 id */
+  SubnetId?: string;
 }
 
 /** 网关版本详情 */
@@ -1272,6 +1398,12 @@ declare interface PostgreSQLInfo {
   Region?: string;
 }
 
+/** 云函数配置 */
+declare interface PrivateConfig {
+  /** 云函数的语言 */
+  Language?: string;
+}
+
 /** 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。 */
 declare interface Provider {
   /** 身份源的唯一标识符，用于在系统内区分不同的身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。创建后不可修改 */
@@ -1508,6 +1640,14 @@ declare interface StaticStoreInfo {
   Status?: string | null;
   /** 地域 */
   Region?: string | null;
+}
+
+/** 状态原因描述 */
+declare interface StatusReason {
+  /** 错误码 */
+  ErrorCode?: string;
+  /** 错误描述 */
+  ErrorMessage?: string;
 }
 
 /** StorageInfo 资源信息 */
@@ -1948,6 +2088,76 @@ declare interface CreateEnvResponse {
   RequestId?: string;
 }
 
+declare interface CreateFunctionRequest {
+  /** 创建的函数名称 */
+  FunctionName: string;
+  /** 环境ID */
+  EnvId: string;
+  /** 函数处理方法名称 */
+  Handler?: string;
+  /** 函数运行时内存大小 */
+  MemorySize?: number;
+  /** 函数最长执行时间 */
+  Timeout?: number;
+  /** 此参数公司内部展示。是否使用GPU进行计算 */
+  UseGpu?: string;
+  /** 在线依赖安装 */
+  InstallDependency?: string;
+  /** 此参数公司内部展示。用于小程序，GPU集群，不对外 */
+  Stamp?: string;
+  /** 函数绑定的角色 */
+  Role?: string;
+  /** 函数描述 */
+  Description?: string;
+  /** 函数运行环境 */
+  Runtime?: string;
+  /** 函数日志投递到的CLS TopicID */
+  ClsTopicId?: string;
+  /** 函数日志投递到的CLS LogsetID */
+  ClsLogsetId?: string;
+  /** 包含函数代码文件的zip格式文件 */
+  Code?: CodeReq;
+  /** 云函数配置项 */
+  PrivateConfig?: PrivateConfig;
+  /** 函数类型，默认值为Event，创建触发器函数请填写Event，创建HTTP函数级服务请填写HTTP */
+  Type?: string;
+  /** HTTP函数支持的访问协议。当前支持WebSockets协议，值为WS */
+  ProtocolType?: string;
+  /** 环境变量 */
+  Environment?: FunctionEnvironment;
+  /** 函数初始化超时时间，默认 65s，镜像部署函数默认 90s。 */
+  InitTimeout?: number;
+  /** 代码来源，支持ZipFile, Cos, Demo 其中之一 */
+  CodeSource?: string;
+  /** 函数的私有网络配置 */
+  VpcConfig?: FunctionVpcConfig;
+  /** 函数要关联的Layer版本列表，Layer会按照在列表中顺序依次覆盖。 */
+  Layers?: FunctionLayer[];
+  /** 公网访问配置 */
+  PublicNetConfig?: FunctionPublicNetConfig;
+  /** 是否开启异步属性，TRUE 为开启，FALSE为关闭 */
+  AsyncRunEnable?: string;
+  /** 是否开启事件追踪，TRUE 为开启，FALSE为关闭 */
+  TraceEnable?: string;
+  /** 是否自动创建cls主题，TRUE 为开启，FALSE为关闭 */
+  AutoCreateClsTopic?: string;
+  /** 是否自动创建cls索引，TRUE 为开启，FALSE为关闭 */
+  AutoDeployClsTopicIndex?: string;
+  /** 是否开启Dns缓存能力。只支持EVENT函数。默认为FALSE，TRUE 为开启，FALSE为关闭 */
+  DnsCache?: string;
+  /** EipConfig固定ip配置 */
+  EipConfig?: FunctionEipConfigFixed;
+}
+
+declare interface CreateFunctionResponse {
+  /** 调用scf返回的错误码 */
+  SCFErrorCode?: string;
+  /** 错误码对应的描述信息 */
+  SCFErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateHTTPServiceRouteRequest {
   /** 环境ID */
   EnvId: string;
@@ -2134,6 +2344,22 @@ declare interface DeleteCloudAppVersionRequest {
 declare interface DeleteCloudAppVersionResponse {
   /** 是否删除成功 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteFunctionRequest {
+  /** 环境 ID。可通过 DescribeEnvs 接口获取。 */
+  EnvId: string;
+  /** 函数名称。最大 60 字符，以字母开头，支持字母、数字、下划线和连字符。可通过 ListFunctions 或 GetFunction 获取。 */
+  FunctionName: string;
+  /** 函数版本。取值：$LATEST（最新版本）。不填默认 $LATEST。当前仅支持 $LATEST。 */
+  Qualifier?: string;
+}
+
+declare interface DeleteFunctionResponse {
+  /** 函数 ID，仅 CBF 云函数返回 */
+  FunctionId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3136,6 +3362,28 @@ declare interface DestroyStaticStoreResponse {
   RequestId?: string;
 }
 
+declare interface DownloadFunctionRequest {
+  /** 函数的名称 */
+  FunctionName: string;
+  /** 环境ID */
+  EnvId: string;
+  /** 函数的版本 */
+  Qualifier?: string;
+}
+
+declare interface DownloadFunctionResponse {
+  /** 调用SCF报错的错误码 */
+  SCFErrorCode?: string;
+  /** 调用SCF报错的错误信息 */
+  SCFErrorMsg?: string;
+  /** 返回的不跨域url */
+  Url?: string;
+  /** 函数的SHA256编码 */
+  CodeSha256?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExecutePGSqlRequest {
   /** 云开发环境ID */
   EnvId: string;
@@ -3160,6 +3408,86 @@ declare interface ExecutePGSqlResponse {
   RequestId?: string;
 }
 
+declare interface GetFunctionRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 函数名 */
+  FunctionName?: string;
+  /** 函数的版本 */
+  Qualifier?: string;
+  /** 环境 */
+  Namespace?: string;
+  /** 是否返回代码 */
+  ShowCode?: string;
+}
+
+declare interface GetFunctionResponse {
+  /** 函数最后修改时间 */
+  ModTime?: string;
+  /** 函数代码（>1M 不返回） */
+  CodeInfo?: string;
+  /** 函数描述 */
+  Description?: string;
+  /** 触发器列表 */
+  Triggers?: FunctionTrigger[] | null;
+  /** 入口函数 */
+  Handler?: string;
+  /** 代码大小（字节） */
+  CodeSize?: number;
+  /** 超时时间（秒） */
+  Timeout?: number;
+  /** 函数版本 */
+  FunctionVersion?: string;
+  /** 内存大小（MB） */
+  MemorySize?: number;
+  /** 运行环境 */
+  Runtime?: string;
+  /** 函数名称 */
+  FunctionName?: string;
+  /** VPC 配置 */
+  VpcConfig?: FunctionVpcConfig | null;
+  /** 是否使用 GPU ("TRUE"/"FALSE") */
+  UseGpu?: string;
+  /** 代码校验结果 ("success"/"failed") */
+  CodeResult?: string;
+  /** 代码错误码 */
+  ErrNo?: number;
+  /** 命名空间 */
+  Namespace?: string;
+  /** 角色 */
+  Role?: string;
+  /** 是否自动安装依赖 ("TRUE"/"FALSE") */
+  InstallDependency?: string;
+  /** 函数状态 ("Active", "Inactive" 等) */
+  Status?: string;
+  /** 函数 ID */
+  FunctionId?: string;
+  /** 标签列表 */
+  Tags?: Tag[] | null;
+  /** 函数类型 ("HTTP" 或 "Event") */
+  Type?: string;
+  /** 是否启用 L5 ("TRUE"/"FALSE") */
+  L5Enable?: string;
+  /** 函数创建时间 */
+  AddTime?: string;
+  /** 对应scf.GetFunction接口的OnsEnable，是否启用 Ons ("TRUE"/"FALSE") */
+  OnsEnable?: string;
+  /** 计费状态 ("Available" 等) */
+  AvailableStatus?: string;
+  /** 函数版本（查询时传入的） */
+  Qualifier?: string;
+  /** 初始化超时时间（秒） */
+  InitTimeout?: number;
+  /** 是否开启异步 ("TRUE"/"FALSE") */
+  AsyncRunEnable?: string;
+  /** 是否开启事件追踪 ("TRUE"/"FALSE") */
+  TraceEnable?: string;
+  /** 镜像配置 */
+  ImageConfig?: AgentRuntimeCodeImageConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetProvidersRequest {
   /** 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。 */
   EnvId: string;
@@ -3170,6 +3498,34 @@ declare interface GetProvidersResponse {
   Total?: number | null;
   /** 三方认证源列表 */
   Data?: Provider[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListFunctionsRequest {
+  /** 命名空间 */
+  EnvId: string;
+  /** 以升序还是降序的方式返回结果，可选值 ASC 和 DESC */
+  Order?: string;
+  /** 根据哪个字段进行返回结果排序,支持以下字段：AddTime, ModTime, FunctionName */
+  Orderby?: string;
+  /** 数据偏移量，默认值为 0 */
+  Offset?: number;
+  /** 返回数据长度，默认值为 20 */
+  Limit?: number;
+  /** 支持FunctionName模糊匹配 */
+  SearchKey?: string;
+  /** 函数描述，支持模糊搜索 */
+  Description?: string;
+  /** 过滤特定属性或者有特定标签的函数。- 传值方式key-value 进行传值 例如："Filters": [{ "Name": "Status", "Values": ["CreateFailed","Creating"]}, {"Name": "Type","Values": ["HTTP"]}]上述条件的函数是，函数状态为创建失败或者创建中，且函数类型为 HTTP 函数如果通过标签进行过滤：- tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。示例值："Filters": [{"Name":"tag-dmtest","Values":["dmtest"]}]入参限制：1.每次请求的Filters的上限为10，Filter.Values的上限为5。2.[VpcId', 'SubnetId', 'ClsTopicId', 'ClsLogsetId', 'Role', 'CfsId', 'CfsMountInsId', 'Eip'] 过滤的Name 为这些属性时， values 只能传一个值3.['Status', 'Runtime', 'Type', 'PublicNetStatus', 'AsyncRunEnable', 'TraceEnable', 'Stamp'] 过滤的Name 为这些属性时 ，values 可以传多个值 */
+  Filters?: Filter[];
+}
+
+declare interface ListFunctionsResponse {
+  /** 函数列表 */
+  Functions?: Function[] | null;
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3700,6 +4056,82 @@ declare interface UpdateAIModelResponse {
   RequestId?: string;
 }
 
+declare interface UpdateFunctionCodeRequest {
+  /** 创建的函数名称 */
+  FunctionName: string;
+  /** 环境ID */
+  EnvId: string;
+  /** 函数处理方法名称 */
+  Handler?: string;
+  /** 函数所属命名空间 */
+  Namespace?: string;
+  /** 在线依赖安装 */
+  InstallDependency?: string;
+  /** 在更新时是否同步发布新版本，默认为：FALSE，不发布 示例值：FALSE */
+  Publish?: string;
+  /** 包含函数代码文件的zip格式文件 */
+  Code?: CodeReq;
+  /** 代码来源方式，支持 ZipFile, Cos, Inline 之一 示例值：Cos */
+  CodeSource?: string;
+}
+
+declare interface UpdateFunctionCodeResponse {
+  /** 调用scf返回的错误码 */
+  SCFErrorCode?: string;
+  /** 错误码对应的描述信息 */
+  SCFErrorMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateFunctionConfigurationRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 要修改的函数名称 */
+  FunctionName?: string;
+  /** 函数描述。最大支持 1000 个英文字母、数字、空格、逗号和英文句号，支持中文 */
+  Description?: string;
+  /** 函数运行时内存大小，默认为 128 M，可选范围64M、128 M-3072 M，以 128MB 为阶梯。 */
+  MemorySize?: number;
+  /** 函数最长执行时间，单位为秒，可选值范围 1-900 秒，默认为 3 秒 */
+  Timeout?: number;
+  /** 函数的环境变量 */
+  Environment?: FunctionEnvironment;
+  /** 函数的私有网络配置 */
+  VpcConfig?: FunctionVpcConfig;
+  /** 公网访问配置 */
+  PublicNetConfig?: FunctionPublicNetConfig;
+  /** 函数运行环境，创建时指定，目前不支持修改。 */
+  Runtime?: string;
+  /** 函数绑定的角色 */
+  Role?: string;
+  /** 在线依赖安装，TRUE 表示安装，仅支持 Node.js 函数。 默认值：FALSE */
+  InstallDependency?: string;
+  /** 日志投递到的cls日志集ID */
+  ClsTopicId?: string;
+  /** 日志投递到的cls Topic ID */
+  ClsLogsetId?: string;
+  /** 在更新时是否同步发布新版本默认值：FALSE */
+  Publish?: string;
+  /** 是否开启L5访问能力，TRUE 为开启，FALSE为关闭 */
+  L5Enable?: string;
+  /** 函数要关联的层版本列表，层的版本会按照在列表中顺序依次覆盖。 */
+  Layers?: FunctionLayer[];
+  /** 函数初始化执行超时时间 */
+  InitTimeout?: number;
+  /** 是否开启Dns缓存能力。只支持EVENT函数。默认值：FALSE */
+  DnsCache?: string;
+  /** 忽略系统日志上报 */
+  IgnoreSysLog?: string;
+  /** 固定IP配置 */
+  EipConfig?: FunctionEipConfigFixed[];
+}
+
+declare interface UpdateFunctionConfigurationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateTableRequest {
   /** 表名 */
   TableName: string;
@@ -3783,6 +4215,8 @@ declare interface Tcb {
   CreateEnv(data: CreateEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResponse>;
   /** 创建环境相关资源 {@link CreateEnvResourceRequest} {@link CreateEnvResourceResponse} */
   CreateEnvResource(data: CreateEnvResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateEnvResourceResponse>;
+  /** 创建云函数 {@link CreateFunctionRequest} {@link CreateFunctionResponse} */
+  CreateFunction(data: CreateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionResponse>;
   /** 创建HTTP访问服务路由 {@link CreateHTTPServiceRouteRequest} {@link CreateHTTPServiceRouteResponse} */
   CreateHTTPServiceRoute(data: CreateHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHTTPServiceRouteResponse>;
   /** 创建托管域名 {@link CreateHostingDomainRequest} {@link CreateHostingDomainResponse} */
@@ -3805,6 +4239,8 @@ declare interface Tcb {
   DeleteCloudApp(data: DeleteCloudAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudAppResponse>;
   /** 删除云应用服务版本 {@link DeleteCloudAppVersionRequest} {@link DeleteCloudAppVersionResponse} */
   DeleteCloudAppVersion(data: DeleteCloudAppVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudAppVersionResponse>;
+  /** 删除云函数 {@link DeleteFunctionRequest} {@link DeleteFunctionResponse} */
+  DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
   /** 删除HTTP访问服务路由 {@link DeleteHTTPServiceRouteRequest} {@link DeleteHTTPServiceRouteResponse} */
   DeleteHTTPServiceRoute(data: DeleteHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHTTPServiceRouteResponse>;
   /** 删除第三方认证源 {@link DeleteProviderRequest} {@link DeleteProviderResponse} */
@@ -3897,10 +4333,16 @@ declare interface Tcb {
   DestroyMySQL(data: DestroyMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMySQLResponse>;
   /** 销毁静态托管资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
+  /** 获取云函数地址并下载 {@link DownloadFunctionRequest} {@link DownloadFunctionResponse} */
+  DownloadFunction(data: DownloadFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadFunctionResponse>;
   /** 在PostgreSQL数据库上执行SQL查询 {@link ExecutePGSqlRequest} {@link ExecutePGSqlResponse} */
   ExecutePGSql(data: ExecutePGSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ExecutePGSqlResponse>;
+  /** 获取云函数详情 {@link GetFunctionRequest} {@link GetFunctionResponse} */
+  GetFunction(data: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
   /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
+  /** 获取函数列表 {@link ListFunctionsRequest} {@link ListFunctionsResponse} */
+  ListFunctions(data: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
   /** 查询目标环境已应用的 Migration {@link ListPGUserMigrationsRequest} {@link ListPGUserMigrationsResponse} */
   ListPGUserMigrations(data: ListPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPGUserMigrationsResponse>;
   /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
@@ -3955,6 +4397,10 @@ declare interface Tcb {
   UnbindStorageSource(data: UnbindStorageSourceRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindStorageSourceResponse>;
   /** 更新AI模型 {@link UpdateAIModelRequest} {@link UpdateAIModelResponse} */
   UpdateAIModel(data: UpdateAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIModelResponse>;
+  /** 更新云函数代码 {@link UpdateFunctionCodeRequest} {@link UpdateFunctionCodeResponse} */
+  UpdateFunctionCode(data: UpdateFunctionCodeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionCodeResponse>;
+  /** 更新函数配置 {@link UpdateFunctionConfigurationRequest} {@link UpdateFunctionConfigurationResponse} */
+  UpdateFunctionConfiguration(data: UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionConfigurationResponse>;
   /** 修改文档型数据库表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
   UpdateTable(data: UpdateTableRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableResponse>;
   /** 校验HTTP访问服务路由 {@link VerifyHTTPServiceRouteRequest} {@link VerifyHTTPServiceRouteResponse} */

@@ -66,6 +66,14 @@ declare interface AIGWCacheAwareRouteConfig {
   Candidates?: AIGWCacheAwareRouteCandidate[];
 }
 
+/** 版本变更的兼容变更，破坏变更数 */
+declare interface AIGWChangeSummary {
+  /** 破坏性变更数 */
+  Breaking?: number;
+  /** 兼容性变更数 */
+  Compatible?: number;
+}
+
 /** AI 网关中消费者组简要信息 */
 declare interface AIGWConsumerGroupBrief {
   /** 消费者组名称 */
@@ -80,6 +88,14 @@ declare interface AIGWConsumerModelScope {
   ScopeType?: string;
   /** 模型授权白名单列表 */
   AllowList?: string[];
+}
+
+/** 新建MCP路由结果 */
+declare interface AIGWCreateMCPRouteResult {
+  /** 路由ID */
+  RouteId?: string;
+  /** 结果 */
+  Success?: boolean;
 }
 
 /** 跨服务降级配置 */
@@ -132,6 +148,16 @@ declare interface AIGWForwardDesensitizeConfig {
   PlaceholderFormat?: string;
   /** 脱敏失败处理：Reject（拒绝请求）或 Skip（跳过脱敏并转发） */
   OnFailure?: string;
+}
+
+/** MCP路由 Header规则对象 */
+declare interface AIGWHeaderRule {
+  /** Header的Key */
+  Key: string;
+  /** Header匹配规则枚举值：Exact： 精确Prefix： 前缀Regex： 正则 */
+  MatchType: string;
+  /** Header匹配的值 */
+  Value: string;
 }
 
 /** 用于定义kong插件自定义健康检查的配置 */
@@ -366,6 +392,52 @@ declare interface AIGWLogDesensitizeConfig {
   Scope?: string[];
 }
 
+/** MCP路由对象 */
+declare interface AIGWMCPRoute {
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 路由表达式 */
+  Expression?: string;
+  /** Header匹配规则 */
+  HeaderMatch?: AIGWHeaderRule[];
+  /** 是否为默认路由枚举值：true： 是false： 否 */
+  IsDefault?: boolean;
+  /** http path */
+  Methods?: string[];
+  /** 路由名称 */
+  Name?: string;
+  /** 路由路径 */
+  Path?: string;
+  /** 路径匹配方式枚举值：Exact： 精确Prefix： 前缀Regex： 正则 */
+  PathMatchType?: string;
+  /** 优先级 */
+  Priority?: number;
+  /** 路由ID */
+  RouteId?: string;
+  /** 启用/禁用状态枚举值：Enabled： 启用Disabled： 禁用 */
+  Status?: string;
+  /** 是否开启保留原Host功能 */
+  PreserveHost?: boolean;
+}
+
+/** MCP路由规则的校验结果 */
+declare interface AIGWMCPRouteCheckResult {
+  /** 冲突路由ID */
+  ConflictRouteId?: string;
+  /** 是否冲突枚举值：true： 冲突false： 未冲突 */
+  IsConflict?: boolean;
+  /** 冲突原因 */
+  Reason?: string;
+}
+
+/** MCP 路由列表分页查询结果 */
+declare interface AIGWMCPRouteListResult {
+  /** 路由列表 */
+  DataList?: AIGWMCPRoute[];
+  /** 总数 */
+  TotalCount?: number;
+}
+
 /** MCP Server详情 */
 declare interface AIGWMCPServer {
   /** MCP Server ID */
@@ -473,6 +545,28 @@ declare interface AIGWMCPToolACLListResult {
   /** 数据列表 */
   DataList?: AIGWMCPToolACLItem[];
   /** 计数 */
+  TotalCount?: number;
+}
+
+/** mcp tool版本信息 */
+declare interface AIGWMCPToolVersion {
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 创建者 */
+  Creator?: string;
+  /** 是否生效 */
+  IsActive?: boolean;
+  /** 总参数 */
+  TotalParam?: number;
+  /** 版本号 */
+  Version?: string;
+}
+
+/** 分页查询返回的mcp tool version列表 */
+declare interface AIGWMCPToolVersionList {
+  /** mcp. tool 版本详情 */
+  MCPToolVersions?: AIGWMCPToolVersion[];
+  /** 总数 */
   TotalCount?: number;
 }
 
@@ -620,6 +714,80 @@ declare interface AIGWQueryParamCredentialConfig {
   ParamValue?: string;
 }
 
+/** AI网关配额 */
+declare interface AIGWQuota {
+  /** Id */
+  Id?: string;
+  /** 资源类型枚举值：Consumer： 消费者 */
+  ResourceType?: string;
+  /** 资源 id */
+  ResourceId?: string;
+  /** 资源名字如消费者名字 */
+  ResourceName?: string;
+  /** 配额类型枚举值：RequestCount： 请求数TotalToken： 总 tokenCost： 成本 */
+  QuotaType?: string;
+  /** 配额周期单位枚举值：Day： 天Week： 周Month： 月 */
+  PeriodUnit?: string;
+  /** 配额 */
+  QuotaLimit?: number;
+  /** 启用 */
+  Enabled?: boolean;
+  /** 创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  CreateTime?: string;
+  /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ModifyTime?: string;
+  /** 配额类型，手动配额还是默认配额 */
+  Source?: string;
+  /** 配额超限行为枚举值：Reject： 拒绝请求AllowOverage： 允许超支 */
+  ExceedAction?: string;
+  /** 缓存是否计入限额枚举值：Full： 全量计入Exclude： 不计入网关缓存命中部分 */
+  CacheHitStat?: string;
+}
+
+/** AI 网关配额详情 */
+declare interface AIGWQuotaDetail {
+  /** id */
+  Id?: string;
+  /** 资源类型枚举值：Consumer： 消费者 */
+  ResourceType?: string;
+  /** 资源id */
+  ResourceId?: string;
+  /** 资源名字 */
+  ResourceName?: string;
+  /** 配额类型枚举值：RequestCount： 请求数TotalToken： token总数Cost： 成本 */
+  QuotaType?: string;
+  /** 配额单位枚举值：Day： 天Week： 周Month： 月 */
+  PeriodUnit?: string;
+  /** 配额如果是成本则数值单位是分，如 1000 表示 10.00 元 */
+  QuotaLimit?: number;
+  /** 启用 */
+  Enabled?: boolean;
+  /** 用量 */
+  Used?: number;
+  /** 使用率 */
+  UsageRate?: number;
+  /** 预警级别枚举值：Normal： 正常Warning： 预警NearLimit： 临近超限Exceeded： 超限 */
+  AlarmLevel?: string;
+  /** 配额规则来源枚举值：Manual： 手动配置Default： 默认配额 */
+  Source?: string;
+  /** 配额超限行为枚举值：Reject： 拒绝请求AllowOverage： 允许超支 */
+  ExceedAction?: string;
+  /** 创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  CreateTime?: string | null;
+  /** 更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ModifyTime?: string | null;
+  /** 缓存是否计入限额枚举值：Full： 全量计入Exclude： 不计入网关缓存命中部分 */
+  CacheHitStat?: string;
+}
+
+/** AI网关配额列表 */
+declare interface AIGWQuotaList {
+  /** 总数 */
+  TotalCount?: number;
+  /** 配额列表 */
+  DataList?: AIGWQuota[];
+}
+
 /** 精确缓存 redis 配置 */
 declare interface AIGWRedisConfig {
   /** Host */
@@ -714,6 +882,54 @@ declare interface AIGWUpstreamTLSConfig {
   UpstreamCACertIds?: string[];
 }
 
+/** AI服务来源 */
+declare interface CNAPIGwAIServiceSource {
+  /** 服务来源 */
+  SourceName: string;
+  /** 服务ID */
+  SourceId: string;
+  /** 来源类型 */
+  SourceType: string;
+  /** 来源产品 */
+  SourceProduct: string;
+  /** 来源配置信息 */
+  SourceInfo: CNAPIGwAIServiceSourceInfo;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
+/** AI的服务来源授权信息 */
+declare interface CNAPIGwAIServiceSourceAuth {
+  /** 账号 */
+  Username?: string;
+  /** 密码 */
+  Password?: string;
+  /** 接入Token */
+  AccessToken?: string;
+}
+
+/** AI 的服务来源配置信息 */
+declare interface CNAPIGwAIServiceSourceInfo {
+  /** 服务来源实例id */
+  InstanceId?: string;
+  /** 授权信息 */
+  Auth?: CNAPIGwAIServiceSourceAuth;
+  /** 地址列表 */
+  Addresses?: string[];
+}
+
+/** AI数据源列表 */
+declare interface CNAPIGwAIServiceSourceList {
+  /** MCP服务列表 */
+  DataList?: CNAPIGwAIServiceSource[];
+  /** 总数 */
+  TotalCount?: number;
+}
+
 /** 消费者结构 */
 declare interface CNAPIGwConsumer {
   /** 消费者 ID。 */
@@ -798,6 +1014,44 @@ declare interface CNAPIGwMCPTool {
   Status?: string;
   /** 当前版本号 */
   CurrentVersion?: string;
+}
+
+/** MCP Tools的导入结果 */
+declare interface CNAPIGwMCPToolImportResult {
+  /** 导入失败的原因信息 */
+  FailedMessage?: string | null;
+  /** 请求方法 */
+  Method?: string;
+  /** MCP Tool 名字 */
+  Name?: string;
+  /** MCP Tool的请求路径 */
+  Path?: string;
+  /** 导入结果枚举值：Waiting： 等待导入Success： 导入成功Failed： 导入失败 */
+  Status?: string;
+  /** 虚拟MCP Server的Tool的完整后端地址 */
+  UpstreamUrl?: string | null;
+}
+
+/** MCP Tools导入任务的进度 */
+declare interface CNAPIGwMCPToolImportTaskResult {
+  /** 导入失败的数量 */
+  FailedCount?: number;
+  /** 已处理导入Tool的总数 */
+  ProcessedCount?: number;
+  /** 成功导入的Tool数量 */
+  SuccessCount?: number;
+  /** 任务结束时间 */
+  TaskEndTime?: string | null;
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务开始时间 */
+  TaskStartTime?: string | null;
+  /** 任务状态枚举值：Running： 运行中End： 结束 */
+  TaskStatus?: string;
+  /** 导入结果详情 */
+  ToolsImportResult?: CNAPIGwMCPToolImportResult[];
+  /** 待导入Tools的总数 */
+  TotalCount?: number;
 }
 
 /** MCP Tool 列表 */
@@ -916,6 +1170,14 @@ declare interface CNAPIGwSecretKey {
   CustomHeaderCredentialConfig?: AIGWCustomHeaderCredentialConfig;
   /** 自定义Query参数凭证配置 */
   QueryParamCredentialConfig?: AIGWQueryParamCredentialConfig;
+}
+
+/** 密钥列表 */
+declare interface CNAPIGwSecretKeyList {
+  /** 密钥列表 */
+  SecretKeys?: CNAPIGwSecretKey[];
+  /** 总数 */
+  TotalCount?: number;
 }
 
 /** LLM 模型 API */
@@ -1378,6 +1640,90 @@ declare interface BindCloudNativeAPIGatewaySecretKeyResponse {
   RequestId?: string;
 }
 
+declare interface CheckCloudNativeAPIGatewayMCPRouteMatchRequest {
+  /** 网关 ID */
+  GatewayId: string;
+  /** MCP Server ID */
+  ServerId: string;
+  /** Modify时用于排除自身的Route ID */
+  ExcludeRouteId?: string;
+  /** Head匹配规则 */
+  HeaderMatch?: AIGWHeaderRule[];
+  /** http method */
+  Methods?: string[];
+  /** 路径 */
+  Path?: string;
+  /** path的匹配方式枚举值：Exact： 精确Prefix： 前缀Regex： 正则 */
+  PathMatchType?: string;
+}
+
+declare interface CheckCloudNativeAPIGatewayMCPRouteMatchResponse {
+  /** 是否冲突 */
+  Result?: AIGWMCPRouteCheckResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CheckCloudNativeAPIGatewayMCPToolVersionExistRequest {
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCPserverId */
+  ServerId: string;
+  /** 工具 id */
+  ToolId: string;
+  /** mcp tool版本id */
+  ToolVersion: string;
+}
+
+declare interface CheckCloudNativeAPIGatewayMCPToolVersionExistResponse {
+  /** 版本是否存在 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CompareCloudNativeAPIGatewayMCPToolVersionRequest {
+  /** 对比源版本号 */
+  BaseVersion: string;
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCPserverId */
+  ServerId: string;
+  /** 对比目标版本号 */
+  TargetVersion: string;
+  /** 工具 id */
+  ToolId: string;
+}
+
+declare interface CompareCloudNativeAPIGatewayMCPToolVersionResponse {
+  /** 对比总结 */
+  Result?: AIGWChangeSummary;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayAIServiceSourceRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 来源类型:MCPRegistry: mcp 注册中心 */
+  SourceType: string;
+  /** 服务来源名字 */
+  SourceName?: string;
+  /** 来源产品：- TSFNacos：TSF Nacos */
+  SourceProduct?: string;
+  /** 来源详情 */
+  SourceInfo?: CNAPIGwAIServiceSourceInfo;
+  /** 描述 */
+  Description?: string;
+}
+
+declare interface CreateCloudNativeAPIGatewayAIServiceSourceResponse {
+  /** 创建结果 */
+  Result?: CNAPIGwCreateCommonResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
   /** 网关实例id */
   GatewayId: string;
@@ -1536,6 +1882,34 @@ declare interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface CreateCloudNativeAPIGatewayMCPRouteRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** MCP Server ID */
+  ServerId: string;
+  /** 描述 */
+  Description?: string;
+  /** Header匹配规则 */
+  HeaderMatch?: AIGWHeaderRule[];
+  /** http method */
+  Methods?: string[];
+  /** 路由名称 */
+  Name?: string;
+  /** 路径 */
+  Path?: string;
+  /** 路径匹配规则枚举值：Exact： 精确Prefix： 前缀Regex： 正则 */
+  PathMatchType?: string;
+  /** route优先级 */
+  Priority?: number;
+}
+
+declare interface CreateCloudNativeAPIGatewayMCPRouteResponse {
+  /** 操作结果 */
+  Result?: AIGWCreateMCPRouteResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCloudNativeAPIGatewayMCPServerRequest {
   /** 实例 ID */
   GatewayId: string;
@@ -1638,6 +2012,20 @@ declare interface CreateCloudNativeAPIGatewaySecretKeyResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudNativeAPIGatewayAIServiceSourceRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 服务来源id */
+  SourceId?: string;
+  /** 服务来源类型枚举值：Registry： 普通注册中心MCPRegistry： MCP注册中心DNS： 域名服务 */
+  SourceType?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayAIServiceSourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
   /** 网关实例id */
   GatewayId: string;
@@ -1690,6 +2078,20 @@ declare interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCloudNativeAPIGatewayMCPRouteRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 路由ID */
+  RouteId: string;
+  /** MCP Server ID */
+  ServerId: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayMCPRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudNativeAPIGatewayMCPServerRequest {
   /** 云原生API网关实例ID */
   GatewayId: string;
@@ -1712,6 +2114,24 @@ declare interface DeleteCloudNativeAPIGatewayMCPToolRequest {
 }
 
 declare interface DeleteCloudNativeAPIGatewayMCPToolResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayMCPToolVersionRequest {
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCPserverId */
+  ServerId: string;
+  /** 工具 id */
+  ToolId: string;
+  /** mcp tool版本 */
+  ToolVersion: string;
+}
+
+declare interface DeleteCloudNativeAPIGatewayMCPToolVersionResponse {
+  /** 删除mcp tool版本结果 */
+  Result?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1742,6 +2162,56 @@ declare interface DescribeCNGWServicesWithRoutesRequest {
 declare interface DescribeCNGWServicesWithRoutesResponse {
   /** 服务及路由查询结果 */
   Result?: KongServiceWithRoutes;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayAIQuotaListRequest {
+  /** 网关实例Id */
+  GatewayId: string;
+  /** 开始位置 */
+  Offset: number;
+  /** 每页数量 */
+  Limit: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 配额预警级别枚举值：Normal： 正常Warning： 预警NearLimit： 临近超限Exceeded： 超限 */
+  AlarmLevels?: string[];
+}
+
+declare interface DescribeCloudNativeAPIGatewayAIQuotaListResponse {
+  /** 配额列表 */
+  Result?: AIGWQuotaList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayAIQuotaRequest {
+  /** 网关实例Id */
+  GatewayId: string;
+  /** 配额 id */
+  Id: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayAIQuotaResponse {
+  /** 配额详情 */
+  Result?: AIGWQuotaDetail;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayAIServiceSourceListRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 分页大小 */
+  Limit: number;
+  /** 分页偏移 */
+  Offset: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewayAIServiceSourceListResponse {
+  /** MCP Server 列表结果 */
+  Result?: CNAPIGwAIServiceSourceList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1892,6 +2362,24 @@ declare interface DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayMCPRouteListRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** MCP Server ID */
+  ServerId: string;
+  /** 分页限制 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewayMCPRouteListResponse {
+  /** 路由列表信息 */
+  Result?: AIGWMCPRouteListResult | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayMCPServerACLRequest {
   /** 网关实例 ID */
   GatewayId: string;
@@ -1972,6 +2460,20 @@ declare interface DescribeCloudNativeAPIGatewayMCPToolACLListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest {
+  /** 网关实例ID */
+  GatewayId: string;
+  /** MCP Server ID */
+  MCPServerId: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse {
+  /** 导入任务的进度 */
+  Result?: CNAPIGwMCPToolImportTaskResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayMCPToolListRequest {
   /** 实例 id */
   GatewayId: string;
@@ -2004,6 +2506,44 @@ declare interface DescribeCloudNativeAPIGatewayMCPToolResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudNativeAPIGatewayMCPToolVersionListRequest {
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCPserverId */
+  ServerId: string;
+  /** 工具 id */
+  ToolId: string;
+  /** 分页查询limit */
+  Limit?: number;
+  /** 分页查询偏移 */
+  Offset?: number;
+}
+
+declare interface DescribeCloudNativeAPIGatewayMCPToolVersionListResponse {
+  /** tool版本列表 */
+  Result?: AIGWMCPToolVersionList;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayMCPToolVersionRequest {
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCPserverId */
+  ServerId: string;
+  /** 工具 id */
+  ToolId: string;
+  /** tool版本id */
+  ToolVersion: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewayMCPToolVersionResponse {
+  /** tool版本的json snapshot */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest {
   /** OpenAPI文件内容 */
   Content: string;
@@ -2018,6 +2558,24 @@ declare interface DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest {
 declare interface DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse {
   /** 解析结果 */
   Result?: CNAPIGwParseMCPToolsResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 每页条数，范围 [1, 100]，默认 10。 */
+  Limit: number;
+  /** 起始位置，从 0 开始。 */
+  Offset: number;
+  /** 密钥归属资源类型。UseToBind=true 时必填。枚举值：Consumer：消费者ModelService：模型服务 */
+  ResourceType?: string;
+}
+
+declare interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
+  /** 密钥列表 */
+  Result?: CNAPIGwSecretKeyList;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2046,6 +2604,26 @@ declare interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
 declare interface DescribeCloudNativeAPIGatewaySecretKeyValueResponse {
   /** 密钥值 */
   Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayAIServiceSourceRequest {
+  /** 实例 ID */
+  GatewayId: string;
+  /** 服务来源名字 */
+  SourceName: string;
+  /** 服务来源类型枚举值：Registry： 普通注册中心MCPRegistry： MCP注册中心DNS： 域名服务 */
+  SourceType?: string;
+  /** 服务来源id */
+  SourceId?: string;
+  /** 描述 */
+  Description?: string;
+  /** 来源信息 */
+  SourceInfo?: CNAPIGwAIServiceSourceInfo;
+}
+
+declare interface ModifyCloudNativeAPIGatewayAIServiceSourceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2190,6 +2768,50 @@ declare interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
 declare interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
   /** 是否成功 */
   Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayMCPRouteRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** Route ID */
+  RouteId: string;
+  /** MCP Server ID */
+  ServerId: string;
+  /** 描述 */
+  Description?: string;
+  /** Header 匹配规则 */
+  HeaderMatch?: AIGWHeaderRule[];
+  /** http method */
+  Methods?: string[];
+  /** 路径 */
+  Path?: string;
+  /** 匹配规则枚举值：Exact： 精确Prefix： 前缀Regex： 正则 */
+  PathMatchType?: string;
+  /** 路由优先级 */
+  Priority?: number;
+}
+
+declare interface ModifyCloudNativeAPIGatewayMCPRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayMCPRouteStatusRequest {
+  /** 网关ID */
+  GatewayId: string;
+  /** 路由ID */
+  RouteId: string;
+  /** MCP Server ID */
+  ServerId: string;
+  /** 启用/禁用状态枚举值：Enabled： 启用Disabled： 禁用 */
+  Status: string;
+}
+
+declare interface ModifyCloudNativeAPIGatewayMCPRouteStatusResponse {
+  /** 操作结果 */
+  Result?: boolean | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2394,6 +3016,24 @@ declare interface RemoveCloudNativeAPIGatewayConsumerInGroupResponse {
   RequestId?: string;
 }
 
+declare interface RollbackCloudNativeAPIGatewayMCPToolVersionRequest {
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCPserverId */
+  ServerId: string;
+  /** 工具 id */
+  ToolId: string;
+  /** mcp tool版本 */
+  ToolVersion: string;
+}
+
+declare interface RollbackCloudNativeAPIGatewayMCPToolVersionResponse {
+  /** 操作结果 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindCloudNativeAPIGatewaySecretKeyRequest {
   /** 网关实例id */
   GatewayId: string;
@@ -2435,6 +3075,14 @@ declare interface Cngw {
   AddCloudNativeAPIGatewayConsumerInGroup(data: AddCloudNativeAPIGatewayConsumerInGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddCloudNativeAPIGatewayConsumerInGroupResponse>;
   /** 绑定AI网关密钥 {@link BindCloudNativeAPIGatewaySecretKeyRequest} {@link BindCloudNativeAPIGatewaySecretKeyResponse} */
   BindCloudNativeAPIGatewaySecretKey(data: BindCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<BindCloudNativeAPIGatewaySecretKeyResponse>;
+  /** 检查MCP路由规则是否重复 {@link CheckCloudNativeAPIGatewayMCPRouteMatchRequest} {@link CheckCloudNativeAPIGatewayMCPRouteMatchResponse} */
+  CheckCloudNativeAPIGatewayMCPRouteMatch(data: CheckCloudNativeAPIGatewayMCPRouteMatchRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCloudNativeAPIGatewayMCPRouteMatchResponse>;
+  /** 检查mcp tool版本是否存在 {@link CheckCloudNativeAPIGatewayMCPToolVersionExistRequest} {@link CheckCloudNativeAPIGatewayMCPToolVersionExistResponse} */
+  CheckCloudNativeAPIGatewayMCPToolVersionExist(data: CheckCloudNativeAPIGatewayMCPToolVersionExistRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCloudNativeAPIGatewayMCPToolVersionExistResponse>;
+  /** 对比两个mcp tool版本 {@link CompareCloudNativeAPIGatewayMCPToolVersionRequest} {@link CompareCloudNativeAPIGatewayMCPToolVersionResponse} */
+  CompareCloudNativeAPIGatewayMCPToolVersion(data: CompareCloudNativeAPIGatewayMCPToolVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CompareCloudNativeAPIGatewayMCPToolVersionResponse>;
+  /** 云原生网关新建AI服务来源 {@link CreateCloudNativeAPIGatewayAIServiceSourceRequest} {@link CreateCloudNativeAPIGatewayAIServiceSourceResponse} */
+  CreateCloudNativeAPIGatewayAIServiceSource(data: CreateCloudNativeAPIGatewayAIServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayAIServiceSourceResponse>;
   /** 创建AI网关消费者 {@link CreateCloudNativeAPIGatewayConsumerRequest} {@link CreateCloudNativeAPIGatewayConsumerResponse} */
   CreateCloudNativeAPIGatewayConsumer(data: CreateCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayConsumerResponse>;
   /** 创建AI网关消费者分组 {@link CreateCloudNativeAPIGatewayConsumerGroupRequest} {@link CreateCloudNativeAPIGatewayConsumerGroupResponse} */
@@ -2443,12 +3091,16 @@ declare interface Cngw {
   CreateCloudNativeAPIGatewayLLMModelAPI(data: CreateCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayLLMModelAPIResponse>;
   /** 创建 LLM 模型服务 {@link CreateCloudNativeAPIGatewayLLMModelServiceRequest} {@link CreateCloudNativeAPIGatewayLLMModelServiceResponse} */
   CreateCloudNativeAPIGatewayLLMModelService(data: CreateCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayLLMModelServiceResponse>;
+  /** 新建mcp路由 {@link CreateCloudNativeAPIGatewayMCPRouteRequest} {@link CreateCloudNativeAPIGatewayMCPRouteResponse} */
+  CreateCloudNativeAPIGatewayMCPRoute(data: CreateCloudNativeAPIGatewayMCPRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayMCPRouteResponse>;
   /** AI网关新建MCP服务 {@link CreateCloudNativeAPIGatewayMCPServerRequest} {@link CreateCloudNativeAPIGatewayMCPServerResponse} */
   CreateCloudNativeAPIGatewayMCPServer(data: CreateCloudNativeAPIGatewayMCPServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayMCPServerResponse>;
   /** AI网关新建MCP Tool {@link CreateCloudNativeAPIGatewayMCPToolRequest} {@link CreateCloudNativeAPIGatewayMCPToolResponse} */
   CreateCloudNativeAPIGatewayMCPTool(data: CreateCloudNativeAPIGatewayMCPToolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewayMCPToolResponse>;
   /** 创建AI网关密钥 {@link CreateCloudNativeAPIGatewaySecretKeyRequest} {@link CreateCloudNativeAPIGatewaySecretKeyResponse} */
   CreateCloudNativeAPIGatewaySecretKey(data: CreateCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudNativeAPIGatewaySecretKeyResponse>;
+  /** 删除云原生网关AI服务来源 {@link DeleteCloudNativeAPIGatewayAIServiceSourceRequest} {@link DeleteCloudNativeAPIGatewayAIServiceSourceResponse} */
+  DeleteCloudNativeAPIGatewayAIServiceSource(data: DeleteCloudNativeAPIGatewayAIServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayAIServiceSourceResponse>;
   /** 删除AI网关消费者 {@link DeleteCloudNativeAPIGatewayConsumerRequest} {@link DeleteCloudNativeAPIGatewayConsumerResponse} */
   DeleteCloudNativeAPIGatewayConsumer(data: DeleteCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayConsumerResponse>;
   /** 删除AI网关消费者组 {@link DeleteCloudNativeAPIGatewayConsumerGroupRequest} {@link DeleteCloudNativeAPIGatewayConsumerGroupResponse} */
@@ -2457,14 +3109,24 @@ declare interface Cngw {
   DeleteCloudNativeAPIGatewayLLMModelAPI(data: DeleteCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayLLMModelAPIResponse>;
   /** 删除 LLM 模型服务 {@link DeleteCloudNativeAPIGatewayLLMModelServiceRequest} {@link DeleteCloudNativeAPIGatewayLLMModelServiceResponse} */
   DeleteCloudNativeAPIGatewayLLMModelService(data: DeleteCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayLLMModelServiceResponse>;
+  /** 删除mcp路由 {@link DeleteCloudNativeAPIGatewayMCPRouteRequest} {@link DeleteCloudNativeAPIGatewayMCPRouteResponse} */
+  DeleteCloudNativeAPIGatewayMCPRoute(data: DeleteCloudNativeAPIGatewayMCPRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayMCPRouteResponse>;
   /** AI网关删除MCP服务 {@link DeleteCloudNativeAPIGatewayMCPServerRequest} {@link DeleteCloudNativeAPIGatewayMCPServerResponse} */
   DeleteCloudNativeAPIGatewayMCPServer(data: DeleteCloudNativeAPIGatewayMCPServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayMCPServerResponse>;
   /** 删除AI网关MCP Tool {@link DeleteCloudNativeAPIGatewayMCPToolRequest} {@link DeleteCloudNativeAPIGatewayMCPToolResponse} */
   DeleteCloudNativeAPIGatewayMCPTool(data: DeleteCloudNativeAPIGatewayMCPToolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayMCPToolResponse>;
+  /** 删除mcp tool版本 {@link DeleteCloudNativeAPIGatewayMCPToolVersionRequest} {@link DeleteCloudNativeAPIGatewayMCPToolVersionResponse} */
+  DeleteCloudNativeAPIGatewayMCPToolVersion(data: DeleteCloudNativeAPIGatewayMCPToolVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewayMCPToolVersionResponse>;
   /** 删除AI网关密钥 {@link DeleteCloudNativeAPIGatewaySecretKeyRequest} {@link DeleteCloudNativeAPIGatewaySecretKeyResponse} */
   DeleteCloudNativeAPIGatewaySecretKey(data: DeleteCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudNativeAPIGatewaySecretKeyResponse>;
   /** 查询云原生网关服务和路由列表 {@link DescribeCNGWServicesWithRoutesRequest} {@link DescribeCNGWServicesWithRoutesResponse} */
   DescribeCNGWServicesWithRoutes(data: DescribeCNGWServicesWithRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNGWServicesWithRoutesResponse>;
+  /** 查询AI配额配置详情 {@link DescribeCloudNativeAPIGatewayAIQuotaRequest} {@link DescribeCloudNativeAPIGatewayAIQuotaResponse} */
+  DescribeCloudNativeAPIGatewayAIQuota(data: DescribeCloudNativeAPIGatewayAIQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayAIQuotaResponse>;
+  /** 查询AI网关配额配置列表 {@link DescribeCloudNativeAPIGatewayAIQuotaListRequest} {@link DescribeCloudNativeAPIGatewayAIQuotaListResponse} */
+  DescribeCloudNativeAPIGatewayAIQuotaList(data: DescribeCloudNativeAPIGatewayAIQuotaListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayAIQuotaListResponse>;
+  /** 查询云原生网关AI服务来源 {@link DescribeCloudNativeAPIGatewayAIServiceSourceListRequest} {@link DescribeCloudNativeAPIGatewayAIServiceSourceListResponse} */
+  DescribeCloudNativeAPIGatewayAIServiceSourceList(data: DescribeCloudNativeAPIGatewayAIServiceSourceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayAIServiceSourceListResponse>;
   /** 查询AI网关消费者详情 {@link DescribeCloudNativeAPIGatewayConsumerRequest} {@link DescribeCloudNativeAPIGatewayConsumerResponse} */
   DescribeCloudNativeAPIGatewayConsumer(data: DescribeCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayConsumerResponse>;
   /** 查询AI网关消费者分组 {@link DescribeCloudNativeAPIGatewayConsumerGroupRequest} {@link DescribeCloudNativeAPIGatewayConsumerGroupResponse} */
@@ -2481,6 +3143,8 @@ declare interface Cngw {
   DescribeCloudNativeAPIGatewayLLMTokenUsageList(data: DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayLLMTokenUsageListResponse>;
   /** 查询AI网关Token用量消耗统计汇总结果 {@link DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest} {@link DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse} */
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatistics(data: DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse>;
+  /** 列出MCP路由列表 {@link DescribeCloudNativeAPIGatewayMCPRouteListRequest} {@link DescribeCloudNativeAPIGatewayMCPRouteListResponse} */
+  DescribeCloudNativeAPIGatewayMCPRouteList(data: DescribeCloudNativeAPIGatewayMCPRouteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPRouteListResponse>;
   /** AI网关查询MCP服务 {@link DescribeCloudNativeAPIGatewayMCPServerRequest} {@link DescribeCloudNativeAPIGatewayMCPServerResponse} */
   DescribeCloudNativeAPIGatewayMCPServer(data: DescribeCloudNativeAPIGatewayMCPServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPServerResponse>;
   /** 查看 MCP Server ACL {@link DescribeCloudNativeAPIGatewayMCPServerACLRequest} {@link DescribeCloudNativeAPIGatewayMCPServerACLResponse} */
@@ -2493,14 +3157,24 @@ declare interface Cngw {
   DescribeCloudNativeAPIGatewayMCPTool(data: DescribeCloudNativeAPIGatewayMCPToolRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolResponse>;
   /** 查看 MCP Server Tool ACL 列表 {@link DescribeCloudNativeAPIGatewayMCPToolACLListRequest} {@link DescribeCloudNativeAPIGatewayMCPToolACLListResponse} */
   DescribeCloudNativeAPIGatewayMCPToolACLList(data: DescribeCloudNativeAPIGatewayMCPToolACLListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolACLListResponse>;
+  /** 查询批量导入MCP Tools的任务进度 {@link DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest} {@link DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse} */
+  DescribeCloudNativeAPIGatewayMCPToolImportTask(data: DescribeCloudNativeAPIGatewayMCPToolImportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolImportTaskResponse>;
   /** 查询AI网关MCP Tool 列表 {@link DescribeCloudNativeAPIGatewayMCPToolListRequest} {@link DescribeCloudNativeAPIGatewayMCPToolListResponse} */
   DescribeCloudNativeAPIGatewayMCPToolList(data: DescribeCloudNativeAPIGatewayMCPToolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolListResponse>;
+  /** 查询MCP Tool 版本信息 {@link DescribeCloudNativeAPIGatewayMCPToolVersionRequest} {@link DescribeCloudNativeAPIGatewayMCPToolVersionResponse} */
+  DescribeCloudNativeAPIGatewayMCPToolVersion(data: DescribeCloudNativeAPIGatewayMCPToolVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolVersionResponse>;
+  /** 查询MCP Tool 版本列表 {@link DescribeCloudNativeAPIGatewayMCPToolVersionListRequest} {@link DescribeCloudNativeAPIGatewayMCPToolVersionListResponse} */
+  DescribeCloudNativeAPIGatewayMCPToolVersionList(data: DescribeCloudNativeAPIGatewayMCPToolVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolVersionListResponse>;
   /** 查询导入的OpenAPI文件里可导入Tools {@link DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest} {@link DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse} */
   DescribeCloudNativeAPIGatewayMCPToolsFromFile(data: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse>;
   /** 查询AI网关密钥详情 {@link DescribeCloudNativeAPIGatewaySecretKeyRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyResponse} */
   DescribeCloudNativeAPIGatewaySecretKey(data: DescribeCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyResponse>;
+  /** 查询AI网关密钥列表 {@link DescribeCloudNativeAPIGatewaySecretKeyListRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyListResponse} */
+  DescribeCloudNativeAPIGatewaySecretKeyList(data: DescribeCloudNativeAPIGatewaySecretKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyListResponse>;
   /** 查询AI网关密钥值 {@link DescribeCloudNativeAPIGatewaySecretKeyValueRequest} {@link DescribeCloudNativeAPIGatewaySecretKeyValueResponse} */
   DescribeCloudNativeAPIGatewaySecretKeyValue(data: DescribeCloudNativeAPIGatewaySecretKeyValueRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudNativeAPIGatewaySecretKeyValueResponse>;
+  /** 云原生网关修改AI服务来源 {@link ModifyCloudNativeAPIGatewayAIServiceSourceRequest} {@link ModifyCloudNativeAPIGatewayAIServiceSourceResponse} */
+  ModifyCloudNativeAPIGatewayAIServiceSource(data: ModifyCloudNativeAPIGatewayAIServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayAIServiceSourceResponse>;
   /** 修改AI网关消费者 {@link ModifyCloudNativeAPIGatewayConsumerRequest} {@link ModifyCloudNativeAPIGatewayConsumerResponse} */
   ModifyCloudNativeAPIGatewayConsumer(data: ModifyCloudNativeAPIGatewayConsumerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayConsumerResponse>;
   /** 修改AI网关消费者组 {@link ModifyCloudNativeAPIGatewayConsumerGroupRequest} {@link ModifyCloudNativeAPIGatewayConsumerGroupResponse} */
@@ -2509,6 +3183,10 @@ declare interface Cngw {
   ModifyCloudNativeAPIGatewayLLMModelAPI(data: ModifyCloudNativeAPIGatewayLLMModelAPIRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayLLMModelAPIResponse>;
   /** 修改 LLM 模型服务 {@link ModifyCloudNativeAPIGatewayLLMModelServiceRequest} {@link ModifyCloudNativeAPIGatewayLLMModelServiceResponse} */
   ModifyCloudNativeAPIGatewayLLMModelService(data: ModifyCloudNativeAPIGatewayLLMModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse>;
+  /** 修改mcp路由 {@link ModifyCloudNativeAPIGatewayMCPRouteRequest} {@link ModifyCloudNativeAPIGatewayMCPRouteResponse} */
+  ModifyCloudNativeAPIGatewayMCPRoute(data: ModifyCloudNativeAPIGatewayMCPRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayMCPRouteResponse>;
+  /** 修改MCP路由启用禁用状态 {@link ModifyCloudNativeAPIGatewayMCPRouteStatusRequest} {@link ModifyCloudNativeAPIGatewayMCPRouteStatusResponse} */
+  ModifyCloudNativeAPIGatewayMCPRouteStatus(data: ModifyCloudNativeAPIGatewayMCPRouteStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayMCPRouteStatusResponse>;
   /** AI网关修改MCP服务 {@link ModifyCloudNativeAPIGatewayMCPServerRequest} {@link ModifyCloudNativeAPIGatewayMCPServerResponse} */
   ModifyCloudNativeAPIGatewayMCPServer(data: ModifyCloudNativeAPIGatewayMCPServerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayMCPServerResponse>;
   /** 修改 MCP Server ACL {@link ModifyCloudNativeAPIGatewayMCPServerACLRequest} {@link ModifyCloudNativeAPIGatewayMCPServerACLResponse} */
@@ -2529,6 +3207,8 @@ declare interface Cngw {
   RemoveCloudNativeAPIGatewayConsumerGroupAuth(data: RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse>;
   /** AI网关消费者组中移除消费者 {@link RemoveCloudNativeAPIGatewayConsumerInGroupRequest} {@link RemoveCloudNativeAPIGatewayConsumerInGroupResponse} */
   RemoveCloudNativeAPIGatewayConsumerInGroup(data: RemoveCloudNativeAPIGatewayConsumerInGroupRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse>;
+  /** 回滚mcp tool版本 {@link RollbackCloudNativeAPIGatewayMCPToolVersionRequest} {@link RollbackCloudNativeAPIGatewayMCPToolVersionResponse} */
+  RollbackCloudNativeAPIGatewayMCPToolVersion(data: RollbackCloudNativeAPIGatewayMCPToolVersionRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackCloudNativeAPIGatewayMCPToolVersionResponse>;
   /** 解绑AI网关密钥 {@link UnbindCloudNativeAPIGatewaySecretKeyRequest} {@link UnbindCloudNativeAPIGatewaySecretKeyResponse} */
   UnbindCloudNativeAPIGatewaySecretKey(data: UnbindCloudNativeAPIGatewaySecretKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindCloudNativeAPIGatewaySecretKeyResponse>;
   /** 批量导入MCP tools {@link UpdateCloudNativeAPIGatewayMCPToolsRequest} {@link UpdateCloudNativeAPIGatewayMCPToolsResponse} */

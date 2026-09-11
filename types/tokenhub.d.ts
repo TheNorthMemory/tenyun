@@ -604,34 +604,42 @@ declare interface UsageRankItem {
 
 /** 用量时间周期内的时序点列表（按 metric key 索引）。为 JSON 数组的字符串形式,数组长度与响应 Timestamps 一致，无数据点处为 null。具体包含哪些 key 由响应 MetricKeys 决定。 */
 declare interface UsageSeries {
-  /** [tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 "[12,null,15]"。 */
+  /** [tokens / apikey_usage 族]总 token 数用量时间周期内的 JSON 字符串形式，如 "[12,null,15]"。 */
   TotalToken?: string;
-  /** [tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 "[7,null,9]"。 */
+  /** [tokens / apikey_usage 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 "[7,null,9]"。 */
   InputTotalToken?: string;
-  /** [tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 "[5,null,6]"。 */
+  /** [tokens / apikey_usage 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 "[5,null,6]"。 */
   OutputTotalToken?: string;
-  /** [tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
+  /** [tokens / apikey_usage 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
   CacheTotalToken?: string;
   /** [search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
   SearchRequestCount?: string;
   /** [search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如"[5,null,6]"。 */
   SearchCount?: string;
+  /** [apikey_usage 族] 请求次数在时间周期内的 JSON 字符串形式，如 "[12,null,15]"。 */
+  RequestCount?: string;
+  /** [apikey_usage 族] 请求失败次数在时间周期内的 JSON 字符串形式，如 "[12,null,15]"。 */
+  RequestFailCount?: string;
 }
 
-/** 时间周期内的统计聚合值（按 metric key 索引）。声明 tokens / search 两族字段都在本 schema 中，按 MetricKeys 实际返回取值，参见响应顶层 `MetricKeys` 字段。 */
+/** 时间周期内的统计聚合值，按 MetricKeys 实际返回取值，参见响应顶层 `MetricKeys` 字段。 */
 declare interface UsageStats {
-  /** [tokens 族] 时间周期内的累计总 token 数。 */
+  /** [tokens / apikey_usage 族] 时间周期内的累计总 token 数。 */
   TotalToken?: number;
-  /** [tokens 族] 时间周期内的累计输入 token 数。 */
+  /** [tokens / apikey_usage 族] 时间周期内的累计输入 token 数。 */
   InputTotalToken?: number;
-  /** [tokens 族] 时间周期内的累计输出 token 数。 */
+  /** [tokens / apikey_usage 族] 时间周期内的累计输出 token 数。 */
   OutputTotalToken?: number;
-  /** [tokens 族] 时间周期内的累计读缓存 token 数（命中缓存部分） */
+  /** [tokens / apikey_usage 族] 时间周期内的累计读缓存 token 数（命中缓存部分）注意：CacheTotalToken 是 InputTotalToken 的子集（已包含在内）。 */
   CacheTotalToken?: number;
-  /** [search 族] 整段累计联网搜索请求数 */
+  /** [search 族] 时间周期内的累计联网搜索请求数 */
   SearchRequestCount?: number;
-  /** [search 族] 整段累计搜索引擎调用次数 */
+  /** [search 族] 时间周期内的累计搜索引擎调用次数 */
   SearchCount?: number;
+  /** [apikey_usage 族] 时间周期内的累计请求次数 */
+  RequestCount?: number;
+  /** [apikey_usage 族] 时间周期内的累计请求失败次数 */
+  RequestFailCount?: number;
 }
 
 declare interface CreateApiKeyRequest {

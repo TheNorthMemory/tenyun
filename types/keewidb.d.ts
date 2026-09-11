@@ -537,8 +537,10 @@ declare interface AssociateSecurityGroupsResponse {
 declare interface ChangeInstanceMasterRequest {
   /** 实例 ID，如：kee-6ubh****。 */
   InstanceId: string;
+  /** 副本节点组 ID，请通过接口DescribeInstanceReplicas获取多 AZ备节点组的 ID 信息。 */
+  GroupId?: number;
   /** 副本节点 ID。 */
-  NodeId: string;
+  NodeId?: string;
 }
 
 declare interface ChangeInstanceMasterResponse {
@@ -625,6 +627,8 @@ declare interface CreateInstancesRequest {
   AutoRenew?: number;
   /** 给实例设置安全组 ID 数组。 */
   SecurityGroupIdList?: string[];
+  /** 实例的节点信息。包含节点ID、节点类型、节点可用区 ID等。具体信息，请参见NodeInfo 。目前支持传入节点的类型（主节点或者副本节点），节点的可用区。未指定该参数时，系统将默认创建单可用区架构实例。 */
+  NodeSet?: NodeInfo[];
   /** 给实例绑定标签。 */
   ResourceTags?: ResourceTag[];
   /** 极速版，单分片持久化内存容量。MachineMemory与持久内存容量MemSize为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见产品规格。单位：GB。 */
@@ -1277,6 +1281,10 @@ declare interface UpgradeInstanceRequest {
   ShardNum?: number;
   /** 配置变更后，每个分片硬盘的容量。单位：GB。每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见[产品规格](https://cloud.tencent.com/document/product/1520/80808)。变更实例内存、持久化内存与磁盘、变更实例的分片数量，每次只能变更一项。 */
   DiskSize?: number;
+  /** 配置变更后，副本数量。需要和NodeSet参数一起传递。取值范围：[1, 2] */
+  ReplicasNum?: number;
+  /** 配置变更后，副本节点信息。增加副本：可不传NodeId删除副本：需传保留节点的NodeId */
+  NodeSet?: NodeInfo[];
 }
 
 declare interface UpgradeInstanceResponse {
