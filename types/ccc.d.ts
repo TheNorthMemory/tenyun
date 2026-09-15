@@ -20,6 +20,74 @@ declare interface AIAnalysisResult {
   Result?: string;
 }
 
+/** 接口调用的单次尝试明细 */
+declare interface AICallAPICallAttempt {
+  /** 尝试序号，从 1 开始，1 表示首次调用。 */
+  Index?: number;
+  /** 本次尝试的发起时间戳，Unix 毫秒级时间戳。单位：ms */
+  Timestamp?: number;
+  /** 本次尝试的结果状态，取值同 APICall.Status。枚举值：success： 调通且返回 2xx，进入成功分支failed： 调用失败或返回非 2xx，进入失败分支internal_fail： 内部调用失败terminated： 调用过程中被用户新意图打断，无最终结果 */
+  Status?: string;
+  /** 本次尝试的 HTTP 状态码。调不通时为 0。 */
+  StatusCode?: number;
+  /** 本次尝试调不通时的错误类型，取值同 APICall.ErrorType。枚举值：timeout： 请求超时connect_failed： 建立连接失败dns_failed： DNS 解析失败tls_failed： TLS 证书校验失败other： 其他错误 */
+  ErrorType?: string;
+  /** 本次尝试的失败摘要，格式为 {状态码或错误类型}：{错误信息}。本次尝试成功时为空。 */
+  Summary?: string;
+  /** 本次尝试耗时。单位：ms */
+  CostMS?: number;
+  /** 本次尝试的请求详情。 */
+  Request?: AICallAPICallRequestDetail | null;
+  /** 本次尝试的响应详情。调不通（Status 为 unreachable）或异步上报时为空。 */
+  Response?: AICallAPICallResponseDetail | null;
+}
+
+/** 接口调用节点的调用详情 */
+declare interface AICallAPICallDetail {
+  /** 是否异步上报。节点配置「等待接口返回」关闭时为 true，此时不处理响应也不影响流程走向，Status、StatusCode、CostMS 等结果字段均为空，只记录 Attempts 中的请求详情。 */
+  Async?: boolean;
+  /** 本次接口调用的最终状态，重试场景为最后一次尝试的状态，Async 为 true 时为空。后续可能新增取值，请做好兼容。枚举值：success： 调通且返回 2xx，进入成功分支failed： 调用失败或返回非 2xx，进入失败分支terminated： 调用过程中被用户新意图打断，无最终结果 */
+  Status?: string;
+  /** 最终 HTTP 状态码。调不通或异步上报时为 0。 */
+  StatusCode?: number;
+  /** 失败摘要，格式为 {状态码或错误类型}：{错误信息}。调用成功时为空。 */
+  Summary?: string;
+  /** 接口调用总耗时，包含全部重试。异步上报时为 0。单位：ms */
+  CostMS?: number;
+  /** 重试次数。0 表示首次调用即结束，未发生重试。 */
+  RetryCount?: number;
+  /** 每次尝试的明细，按时间顺序排列，至少包含首次调用。 */
+  Attempts?: AICallAPICallAttempt[] | null;
+}
+
+/** 接口调用的请求详情 */
+declare interface AICallAPICallRequestDetail {
+  /** HTTP 请求方法，如 GET、POST。 */
+  Method?: string;
+  /** 请求地址。 */
+  URL?: string;
+  /** 请求参数（节点配置的入参与 URL query），json 序列化后的字符串，键升序排列。敏感值已脱敏，无参数时为空字符串。 */
+  Params?: string;
+  /** 请求头，json 序列化后的字符串，键升序排列。敏感值已脱敏，无请求头时为空字符串。 */
+  Headers?: string;
+  /** 请求体，超长时被截断，是否截断见 Truncated。 */
+  Body?: string;
+  /** 请求体 Body 是否被截断。 */
+  Truncated?: boolean;
+}
+
+/** 接口调用的响应详情 */
+declare interface AICallAPICallResponseDetail {
+  /** HTTP 状态码。 */
+  StatusCode?: number;
+  /** 响应头，json 序列化后的字符串，键升序排列。敏感值已脱敏，无响应头时为空字符串。 */
+  Headers?: string;
+  /** 响应体，超长时被截断，是否截断见 Truncated。 */
+  Body?: string;
+  /** 响应体 Body 是否被截断。 */
+  Truncated?: boolean;
+}
+
 /** AI 通话提取配置项 */
 declare interface AICallExtractConfigElement {
   /** 配置项类型，包括Text 文本Selector 选项Boolean 布尔值Number 数字 */
@@ -64,7 +132,7 @@ declare interface AICallInteractionRound {
   RoundId?: string;
   /** 轮次 */
   RoundIndex?: number;
-  /** 用户回复分类的标签， json序列化后的表示 */
+  /** 本轮命中的普通标签列表（TagType 为 1），json 序列化后的字符串。数组元素含 TagName（标签名）、TagValue（标签值）、TagType（标签类型，1 表示普通标签）三个字段；无标签时为空字符串。 */
   Tags?: string;
   /** 本轮涉及到的消息内容 */
   Messages?: AIRoundMessage[];
@@ -136,10 +204,12 @@ declare interface AIRoundMessage {
 declare interface AIRoundPath {
   /** 画布中的节点名称 */
   NodeName?: string;
-  /** 画布中的节点类型枚举值：DIALOGUE： 对话节点API_CALL： 接口调用节点TRANSFER： 转接节点KEY_PRESS： 按键节点END_CALL： 挂断节点 */
+  /** 画布中的节点类型枚举值：DIALOGUE： 对话节点API_CALL： 接口调用节点TRANSFER： 转接节点KEY_PRESS： 按键节点END_CALL： 挂断节点TRANSFER_AGENT： 转接智能体节点WORK_TIME： 工作时间节点 */
   NodeType?: string;
   /** 经过当前节点的时间戳单位：ms */
   Timestamp?: number;
+  /** 接口调用节点的调用详情，包含请求、响应、耗时以及每次重试的明细。仅 NodeType 为 API_CALL 时有值，其余节点类型不返回该字段。 */
+  APICall?: AICallAPICallDetail | null;
 }
 
 /** 智能体发言事件 */
@@ -148,10 +218,12 @@ declare interface AISpeakEvent {
   CanBeInterrupted?: boolean;
   /** 智能体播报的话术文本内容 */
   SpokenText?: string;
-  /** 智能体发言类型枚举值：Script： 智能体话术KnowledgeBase： 知识库LLMFallback： 大模型兜底NoResponseTip： 无响应提示智能追问： SmartFollowUpFAQ： FAQ转人工 - 排队等待音： TransferWaitingPrompt无响应挂断前放音： PlayNoResponseEndPrompt转人工 - 排队前放音： PlayQueuePrompt转人工 - 接待前放音： PlayPromptBeforeReception转人工 - 排队超时放音： PlayQueueTimeoutPrompt转人工 - 转人工失败放音： PlayTransferFailPromptDTMF收号（按键用户输入）： Dtmf按键节点 - 播放提示音： PlayDtmfPrompt按键节点 - 输入错误提示音： PlayInvalidDtmfPrompt按键节点 - 超时提示音： PlayDtmfTimeoutPrompt其他类型： Other */
+  /** 智能体发言类型枚举值：Script： 智能体话术KnowledgeBase： 知识库LLMFallback： 大模型兜底NoResponseTip： 无响应提示SmartFollowUp： 智能追问FAQ： FAQTransferWaitingPrompt： 转人工 - 排队等待音PlayNoResponseEndPrompt： 无响应挂断前放音PlayQueuePrompt： 转人工 - 排队前放音PlayPromptBeforeReception： 转人工 - 接待前放音PlayQueueTimeoutPrompt： 转人工 - 排队超时放音PlayTransferFailPrompt： 转人工 - 转人工失败放音Dtmf： DTMF收号（按键用户输入）PlayDtmfPrompt： 按键节点 - 播放提示音PlayInvalidDtmfPrompt： 按键节点 - 输入错误提示音PlayDtmfTimeoutPrompt： 按键节点 - 超时提示音TransferAgentPrompt： 转接智能体 - 转接至目标智能体提示音Other： 其他类型 */
   SpokenType?: string;
   /** 本次响应生成的时延结果 */
   LatencyMetrics?: AICallLatencyMetrics | null;
+  /** 用户回复命中的知识库问题标题，仅 SpokenType 为 KnowledgeBase 或 FAQ 等命中知识库的场景有值。 */
+  KnowledgeName?: string;
   /** 节点跳转的原因，仅画布为灵活模式时有值 */
   TraverseReason?: string;
 }
@@ -1238,9 +1310,9 @@ declare interface UserReplyEvent {
   ASRTranscript?: string;
   /** 命中画布中该对话节点配置的回复分类 */
   MatchedIntent?: string;
-  /** 用户回复分类的标签， json序列化后的信息 */
+  /** 本轮收集到的词槽列表（TagType 为 2 或 3），json 序列化后的字符串。数组元素含 TagName（词槽名）、TagValue（词槽值）、TagType（词槽类型，2 表示必填词槽，3 表示选填词槽）三个字段；无词槽时为空字符串。 */
   ExtractedSlots?: string;
-  /** 用户回复命中的分支类型枚举值：Intent： 用户意图Fallback： 兜底分支NoResponse： 无响应跳转分支SlotCollectionSuccess： 词槽收集完成跳转分支SlotCollectionFail： 词槽收集失败跳转分支GlobalIntent： 全局节点意图LogicAnd： 逻辑判断节点 andLogicOr： 逻辑判断节点 orDTMF成功： DTMFSuccessDTMF失败： DTMFFailDTMF导航： DTMFNavigationDTMF分机： DTMFExtensionDTMF收号： DTMFCollection转接智能体节点失败： TransferAgentFail */
+  /** 用户回复命中的分支类型枚举值：Intent： 用户意图Fallback： 兜底分支NoResponse： 无响应跳转分支SlotCollectionSuccess： 词槽收集完成跳转分支SlotCollectionFail： 词槽收集失败跳转分支GlobalIntent： 全局节点意图LogicAnd： 逻辑判断节点 andLogicOr： 逻辑判断节点 orDTMFSuccess： DTMF 收号成功DTMFFail： DTMF 收号失败DTMFNavigation： DTMF 导航DTMFExtension： DTMF 分机DTMFCollection： DTMF 收号TransferAgentFail： 转接智能体节点失败Other： 其他分支类型 */
   BranchType?: string;
 }
 

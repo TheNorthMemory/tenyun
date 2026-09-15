@@ -760,6 +760,18 @@ declare interface DescNatDnatRule {
   NatGwId?: string;
 }
 
+/** 处置建议-条目 */
+declare interface DisposalSuggestionItem {
+  /** 处置动作 */
+  Action?: string;
+  /** 处置对象 */
+  Target?: string;
+  /** 处置优先级 */
+  Priority?: string;
+  /** 处置建议 */
+  Suggestion?: string;
+}
+
 /** 设置nat防火墙的vpc dns 接入开关 */
 declare interface DnsVpcSwitch {
   /** vpc id */
@@ -4174,6 +4186,96 @@ declare interface DescribeNDRAssetIdentificationListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeNDRDataLeakOutAlertDetailRequest {
+  /** 风险事件ID */
+  RiskId: string;
+}
+
+declare interface DescribeNDRDataLeakOutAlertDetailResponse {
+  /** 风险事件ID */
+  RiskID?: string;
+  /** 资产实例ID */
+  InstanceId?: string;
+  /** 资产实例名称 */
+  InstanceName?: string;
+  /** 资产实例类型 */
+  InstanceType?: string;
+  /** 资产所在地域 */
+  Region?: string;
+  /** 源IP */
+  SrcIP?: string;
+  /** 目的IP端口 */
+  DstIPPort?: string;
+  /** 目的Host */
+  Hostname?: string;
+  /** 目的服务类型 */
+  DstServiceType?: string;
+  /** 目的服务名称 */
+  DstServiceName?: string;
+  /** 访问API */
+  ApiPattern?: string;
+  /** 目的IP地理信息 */
+  DstGeoLocation?: string;
+  /** 应用层协议 */
+  AppProto?: string;
+  /** 敏感类型集合 */
+  LeakTypeSet?: string;
+  /** 事件数量 */
+  EventCount?: number;
+  /** 敏感数据数量 */
+  LeakDataCount?: number;
+  /** 原始风险等级 */
+  Level?: number;
+  /** 处置状态 */
+  Status?: number;
+  /** 处置备注 */
+  Comment?: string;
+  /** 首次识别时间 */
+  FirstIdentificationTime?: string;
+  /** 最近识别时间 */
+  LatestIdentificationTime?: string;
+  /** AI任务分析状态 */
+  AnalysisStatus?: number;
+  /** AI任务失败原因 */
+  AnalysisFailReason?: string;
+  /** 最近一次AI分析时间 */
+  LastAnalysisTime?: string;
+  /** API业务类型 */
+  ApiBizType?: string;
+  /** API业务描述 */
+  ApiBizDescription?: string;
+  /** 风险场景（类型） */
+  RiskScenario?: string;
+  /** 风险场景（类型）描述 */
+  RiskScenarioDetail?: string;
+  /** 风险总结（概览） */
+  RiskSummary?: string;
+  /** 推断依据 */
+  RiskBasis?: string;
+  /** 风险影响范围 */
+  ImpactScope?: string;
+  /** AI建议风险等级 */
+  AiSuggestedLevel?: number;
+  /** 处置建议 */
+  DisposalSuggestions?: DisposalSuggestionItem[];
+  /** http请求头 */
+  HttpRequestHeader?: string;
+  /** http请求体 */
+  HttpRequestBody?: string;
+  /** http响应头 */
+  HttpResponseHeader?: string;
+  /** http响应体 */
+  HttpResponseBody?: string;
+  /** 敏感数据条目 */
+  LeakDataEntries?: string;
+  /** 脱敏状态 */
+  MaskStatus?: string;
+  /** 最高敏感等级 */
+  HighestLevel?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeNDRDataLeakOutAlertListRequest {
   /** 每页条数 */
   Limit: number;
@@ -5929,6 +6031,8 @@ declare interface Cfw {
   DescribeNDRAssetIdentificationCursorList(data: DescribeNDRAssetIdentificationCursorListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationCursorListResponse>;
   /** 获取NDR资产识别结果列表 {@link DescribeNDRAssetIdentificationListRequest} {@link DescribeNDRAssetIdentificationListResponse} */
   DescribeNDRAssetIdentificationList(data: DescribeNDRAssetIdentificationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRAssetIdentificationListResponse>;
+  /** 获取NDR出站敏感数据泄露风险详情 {@link DescribeNDRDataLeakOutAlertDetailRequest} {@link DescribeNDRDataLeakOutAlertDetailResponse} */
+  DescribeNDRDataLeakOutAlertDetail(data: DescribeNDRDataLeakOutAlertDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRDataLeakOutAlertDetailResponse>;
   /** 获取NDR出站敏感数据泄露风险列表 {@link DescribeNDRDataLeakOutAlertListRequest} {@link DescribeNDRDataLeakOutAlertListResponse} */
   DescribeNDRDataLeakOutAlertList(data: DescribeNDRDataLeakOutAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNDRDataLeakOutAlertListResponse>;
   /** 查询NAT访问控制列表 {@link DescribeNatAcRuleRequest} {@link DescribeNatAcRuleResponse} */

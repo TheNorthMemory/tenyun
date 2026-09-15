@@ -637,6 +637,12 @@ declare interface DescribeSandboxInstanceListRequest {
   Limit?: number;
   /** 过滤条件 */
   Filters?: Filter[];
+  /** 每次调用返回的最大结果数。如果查询返回的时候有NextToken返回，您可以使用NextToken值获取更多页结果， 当NextToke返回空或者返回的结果数量小于MaxResults时，表示没有更多数据了。允许的最大页面大小为 100。 */
+  MaxResults?: number;
+  /** 如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。 */
+  NextToken?: string;
+  /** 是否返回符合当前查询条件的沙箱实例总数，仅在使用 MaxResults/NextToken 分页时生效。设置为 true 时，首次请求（NextToken 为空）计算并返回精确的 TotalCount；后续使用 NextToken 翻页时返回首次请求计算的 TotalCount，分页期间该值保持不变。重新发起不带 NextToken 的请求时将重新计算。使用 NextToken 翻页时，本参数及其他查询参数必须与首次请求保持一致。默认值为 false，此时 TotalCount 返回 0。 */
+  NeedTotalCount?: boolean;
 }
 
 declare interface DescribeSandboxInstanceListResponse {
@@ -644,6 +650,8 @@ declare interface DescribeSandboxInstanceListResponse {
   InstanceSet?: SandboxInstance[];
   /** 符合条件的实例总数 */
   TotalCount?: number;
+  /** 如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。每个分页令牌在 24 小时后过期。 */
+  NextToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

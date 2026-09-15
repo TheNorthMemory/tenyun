@@ -22,19 +22,19 @@ declare interface AcceleratorAreas {
 
 /** 可加速地域信息 */
 declare interface AcceleratorRegionSet {
-  /** 地域中文名称。 */
+  /** 地域名称。 */
   Name?: string;
   /** 是否可用；0：不可用，1:可用。 */
   IsAvailable?: number;
-  /** 地域信息。 */
+  /** 地域。 */
   Region?: string;
   /** 地区名称。 */
   AreaName?: string;
-  /** 是否中国地域。 */
+  /** 是否中国地域。1 代表是中国地域，0代表不是中国地域。 */
   IsChinaMainland?: number;
   /** 支持IspType类型。 */
   SupportIspType?: string[];
-  /** 是否腾讯地域。 */
+  /** 是否腾讯云地域。1代表是腾讯云地域，0代表不是。 */
   IsTencentRegion?: number;
 }
 
@@ -72,7 +72,7 @@ declare interface EndpointGroupConfiguration {
   EndpointGroupRegion: string;
   /** 终端节点配置。 */
   EndpointConfigurations: EndpointConfigurations[];
-  /** 检查协议。支持配置'TCP', 'HTTP', 'PING', 'CUSTOM'。枚举值：TCP： 当终端节点组所在监听器协议是TCP时，可以选择检查协议为TCP。HTTP： 当终端节点组所在监听器协议是HTTP或HTTPS时，可以选择检查协议为HTTP。PING： 当终端节点组所在监听器协议是UDP时，可以选择检查协议为PING。CUSTOM： 当终端节点组所在监听器协议是UDP或TCP时，可以选择检查协议为CUSTOM。当开启健康检查时此字段必传。 */
+  /** 检查协议。支持配置'TCP', 'HTTP', 'PING', 'CUSTOM'。枚举值：TCP： 当终端节点组所在监听器协议是TCP时，可以选择检查协议为TCP。HTTP： 当终端节点组所在监听器协议是HTTP或HTTPS时，可以选择检查协议为HTTP。PING： 当终端节点组所在监听器协议是UDP时，可以选择检查协议为PING。CUSTOM： 当终端节点组所在监听器协议是UDP或TCP时，可以选择检查协议为CUSTOM。HTTPS： 当终端节点组所在监听器协议是HTTPS时，可以选择检查协议为HTTPS。当开启健康检查时此字段必传。 */
   CheckType?: string;
   /** 描述信息。默认值：默认值为空，代表不配置描述信息。最大长度不能超过100个字节。 */
   Description?: string;
@@ -174,6 +174,10 @@ declare interface EndpointGroupConfigurationSet {
   CipherPolicyId?: string;
   /** 仅HTTPS回源协议支持选择['HTTP/1.1', 'HTTP/2']枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
   HttpVersion?: string;
+  /** 出终端节点组内网IP */
+  OriginPrivateIps?: string[];
+  /** 出终端节点组公网CIDR */
+  OriginPublicCidrs?: string[];
 }
 
 /** 过滤器 */
@@ -228,6 +232,26 @@ declare interface ForwardingRuleSet {
 
 /** GA访问日志 */
 declare interface GlobalAcceleratorAccessLog {
+  /** 日志唯一Id */
+  LogPushTaskId?: string;
+  /** GA实例唯一Id */
+  GlobalAcceleratorId?: string;
+  /** 监听器唯一Id */
+  ListenerId?: string;
+  /** 终端节点组唯一Id */
+  EndpointGroupId?: string;
+  /** 日志任务描述 */
+  FlowLogDescription?: string;
+  /** 日志所在地域 */
+  CloudRegion?: string;
+  /** 日志主题Id */
+  CloudLogId?: string;
+  /** 日志集Id */
+  CloudLogSetId?: string;
+  /** 选择日志采集字段 */
+  FieldKeys?: string[];
+  /** 日志任务状态枚举值：active： 运行中stopped： 已暂停 */
+  Status?: string;
 }
 
 /** 访问控制策略 */
@@ -342,7 +366,7 @@ declare interface ListenerSet {
   CreateTime?: string;
   /** 监听路由类型。 */
   ListenerType?: string;
-  /** 监听器状态。 */
+  /** 监听器状态。枚举值：ACTIVE： 可用。CREATING： 创建中。DELETING： 删除中。CONFIGURING： 修改配置中。 */
   Status?: string;
   /** 所属监听器终端节点组个数。 */
   EndpointGroupCounts?: number;
@@ -495,7 +519,7 @@ declare interface CreateForwardingRuleResponse {
 }
 
 declare interface CreateGlobalAcceleratorAccessLogRequest {
-  /** GA示例唯一Id */
+  /** GA实例唯一Id */
   GlobalAcceleratorId: string;
   /** 监听器Id */
   ListenerId: string;
@@ -817,6 +841,8 @@ declare interface DescribeAccelerateRegionsResponse {
 }
 
 declare interface DescribeAccessLogParamRequest {
+  /** 全球加速实例ID。 */
+  GlobalAcceleratorId?: string;
 }
 
 declare interface DescribeAccessLogParamResponse {
@@ -875,6 +901,8 @@ declare interface DescribeForwardingPolicyRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
+  /** 过滤条件。forwarding-policy-id - String -（过滤条件）策略ID。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeForwardingPolicyResponse {
@@ -897,6 +925,8 @@ declare interface DescribeForwardingRuleRequest {
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
+  /** 过滤条件。forwarding-rule-id - String -（过滤条件）规则ID。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeForwardingRuleResponse {
@@ -953,6 +983,8 @@ declare interface DescribeGlobalAcceleratorAclRulesRequest {
   Offset?: number;
   /** 返回数量。取值范围：[1, 200]默认值：20 */
   Limit?: number;
+  /** 过滤条件。global-accelerator-acl-rule-id - String -（过滤条件）ACL规则ID。 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeGlobalAcceleratorAclRulesResponse {
@@ -1008,7 +1040,7 @@ declare interface DescribeTaskResultRequest {
 }
 
 declare interface DescribeTaskResultResponse {
-  /** 任务状态。 */
+  /** 任务状态。枚举值：SUCCESS： 任务成功。FAILURE： 任务失败。RUNNING： 任务运行。 */
   Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1065,7 +1097,7 @@ declare interface ModifyEndpointGroupRequest {
   UnhealthyThreshold?: number;
   /** 健康阀值。取值范围：[1, 10]当开启健康检查时，此字段必传。 */
   HealthyThreshold?: number;
-  /** 检查协议。入参限制：支持填写：'TCP', 'HTTP', 'PING', 'CUSTOM'。1、当监听器是TCP时，可以选CUSTOM+TCP。2、当监听器是UDP时，可以选PING+CUSTOM。3、当监听器是HTTP或HTTPS时，可以选HTTP。 */
+  /** 检查协议。入参限制：支持填写：'TCP', 'HTTP', 'PING', 'CUSTOM','HTTPS'。1、当监听器是TCP时，可以选CUSTOM+TCP。2、当监听器是UDP时，可以选PING+CUSTOM。3、当监听器是HTTP或HTTPS时，可以选HTTP。4、当监听器是HTTS时，可以选HTTPS。 */
   CheckType?: string;
   /** 检查端口。取值范围：[1, 65535]当CheckType是CUSTOM时，此字段必传。 */
   CheckPort?: number;
@@ -1263,6 +1295,8 @@ declare interface ModifyListenerRequest {
   ClientCaCertificates?: string[];
   /** 获取源IP方式。入参限制：支持选择'ProxyProtocol', 'Close', 'ProxyProtocolV2', 'TOA'。TCP监听器才支持此参数修改。 */
   GetRealIpType?: string;
+  /** HTTPS监听器支持选择版本枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
+  HttpVersion?: string;
 }
 
 declare interface ModifyListenerResponse {

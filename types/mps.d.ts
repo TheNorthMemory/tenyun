@@ -3504,7 +3504,7 @@ declare interface DocToVideoInput {
   Prompt: string;
   /** 文档生成视频模型名称默认值：Wand */
   ModelName: string;
-  /** 文档生成视频模型版本号默认值：1.0 */
+  /** 文档生成视频模型版本号枚举值：1.0： 1.01.0-lite： 1.0-lite默认值：1.0 */
   ModelVersion: string;
   /** 生成视频的宽高比。枚举值：16:9： 16:99:16： 9:161:1： 1:1默认值：16:9 */
   Ratio?: string;
@@ -13277,7 +13277,7 @@ declare interface TextToSpeechAsyncRequest {
   Text: string;
   /** 音色ID */
   VoiceId: string;
-  /** 文本语言，默认中文 */
+  /** 文本语言，不填时默认自动探测 */
   TextLang?: string;
   /** 扩展参数，json字符串synExt Object 语音合成扩展参数 duration Float 合成音频时长，单位秒，示例：5.2 sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100] pitch Integer 音调，默认0原音色输出，取值[-12, 12]transExt Object 翻译扩展参数 transInfo Object transDst String 目标语言，如en transRequirement String 翻译要求 */
   ExtParam?: string;

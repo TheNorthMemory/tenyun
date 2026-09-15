@@ -176,6 +176,14 @@ declare interface AudioParams {
   BitRate: number;
 }
 
+/** 音频分片时间 */
+declare interface AudioSegments {
+  /** 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 示例值：0 */
+  StartTime?: number;
+  /** 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 示例值：15 */
+  FinishTime?: number;
+}
+
 /** 腾讯云对象存储COS以及第三方云存储的账号信息 */
 declare interface CloudModerationStorage {
   /** 腾讯云对象存储COS以及第三方云存储账号信息0：腾讯云对象存储 COS1：AWS S32: 阿里云 OSS示例值：0 */
@@ -294,6 +302,14 @@ declare interface HotWord {
   Word: string;
   /** 权重 */
   Weight: number;
+}
+
+/** 图片坐标 */
+declare interface ImageLocation {
+  /** 该参数用于返回检测框左上角位置的横坐标（x）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：51 */
+  X?: number;
+  /** 该参数用于返回检测框左上角位置的纵坐标（y）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：448 */
+  Y?: number;
 }
 
 /** 拉流输入源 */
@@ -708,6 +724,34 @@ declare interface MixUserInfo {
   RoomIdType?: number;
 }
 
+/** 内容理解明细 */
+declare interface ModerationCheckDetail {
+  /** 该字段在内容理解回调事件中可直接忽略，仅在第三方审核时存在，检出违规的模型场景，枚举值：Ad/Porn/Abuse/Illegal/Polity/Terror/Sexy/Moan/Custom */
+  Scene?: string;
+  /** Normal：正常文本 Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义 */
+  Label?: string;
+  /** 子标签 */
+  SubLabel?: string;
+  /** 0：建议通过。 1 ：建议人工重新内容识别。 2：建议屏蔽。 */
+  Suggest?: number;
+  /** 自定义词库名。 */
+  LibName?: string;
+  /** 关键词。 */
+  Keywords?: string[];
+  /** 中文二级标签。 */
+  Desc?: string;
+  /** 置信度分数，取值范围：0（置信度最低）-100（置信度最高 ），越高代表越有可能属于当前返回的标签。 实例值：100 */
+  Score?: number;
+  /** 违规严重程度: 0-不区分 1-轻度 2-严重 */
+  Severity?: number;
+  /** 违规严重程度描述 仅名单内sdkappid返回 负面表达,正面或中性表达,语义模糊 */
+  SeverityDesc?: string;
+  /** 音频切片位置信息。 */
+  AudioSegments?: AudioSegments;
+  /** 图片命中坐标信息。 */
+  ImageLocation?: ImageLocation;
+}
+
 /** 云端审核的控制参数。 */
 declare interface ModerationParams {
   /** AI 内容理解任务类型， 1:音频切片理解，2:视频截帧理解，3:音视切片+视频截帧理解 默认值1 枚举值：1： 音频切片理解 */
@@ -814,9 +858,9 @@ declare interface PresetLayoutConfig {
 
 /** 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。 */
 declare interface PronunciationDict {
-  /** 需要纠正发音的词语，前后空格自动去除。同一请求中若有重复词语，以最后一条为准。 */
+  /** 需要纠正发音的词语，同一请求中若有重复词语，以最后一条为准。 */
   Word: string;
-  /** 目标发音，支持以下格式：① 带声调数字的拼音（1=阴平，2=阳平，3=上声，4=去声，5=轻声），如 yin2 hang2；② 拼音连写（无空格），如 yin2hang2；③ 文字+拼音混写，如 银hang2；④ 直接文本替换，会将原始文本替换为目标文本 */
+  /** 目标发音，支持以下格式：带声调数字的拼音（1=阴平，2=阳平，3=上声，4=去声，5=轻声），如 (yin2)(hang2)英文音标，如 (rɪˈzjuːm)裸文本替换，会将原始文本替换为目标文本支持任意格式混排，注意拼音和音标需要被括号包裹 */
   Pronunciation: string;
 }
 
@@ -1414,7 +1458,7 @@ declare interface Voice {
   Volume?: number;
   /** 音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12], 默认0 */
   Pitch?: number;
-  /** 情绪控制，目前仅flow_01_ex模型支持枚举值：happy： 高兴sad： 悲伤angry： 愤怒fearful： 害怕disgusted： 厌恶surprised： 惊讶calm： 中性fluent： 生动whisper： 低语 */
+  /** 情绪控制枚举值：happy： 高兴sad： 悲伤angry： 愤怒fearful： 害怕disgusted： 厌恶surprised： 惊讶calm： 中性fluent： 生动whisper： 低语 */
   Emotion?: string;
 }
 
@@ -1586,6 +1630,52 @@ declare interface ControlAIConversationRequest {
 }
 
 declare interface ControlAIConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAudioModerationSyncRequest {
+  /** sdkappid app账号 */
+  Sdkappid?: number;
+  /** BizType为策略的具体的编号, GME业务 2_2_3_sdkappid */
+  BizType?: string;
+  /** 据标识，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 */
+  DataId?: string;
+  /** 音频格式，当FileUrl为空时，必填。音频文件资源格式，当前支持格式：wav、mp3、m4a，请按照实际文件格式填入。 示例值：mp3 */
+  FileFormat?: string;
+  /** 文件名称，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 示例值：file_name */
+  FileName?: string;
+  /** 数据Base64编码，短音频同步接口仅传入可音频内容； 支持范围：文件大小不能超过5M，时长不可超过60s； 支持格式：wav (PCM编码)、mp3、m4a (采样率：16kHz~48kHz，位深：16bit 小端，声道数：单声道/双声道，建议格式：16kHz/16bit/单声道)。 示例值：1 */
+  FileContent?: string;
+  /** 音频资源访问链接，与FileContent参数必须二选一输入； 支持范围及格式：同FileContent； */
+  FileUrl?: string;
+}
+
+declare interface CreateAudioModerationSyncResponse {
+  /** 返回传入的DataId */
+  DataId?: string;
+  /** 审核返回的任务id */
+  TaskId?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 1：语音。 2：图片。 */
+  MediaType?: number;
+  /** 0：建议通过。 1 ：建议人工重新内容识别。 2：建议屏蔽。 */
+  Suggest?: number;
+  /** 置信度分数，取值范围：0（置信度最低）-100（置信度最高 ），越高代表越有可能属于当前返回的标签。 实例值：100 */
+  Rate?: number;
+  /** Normal：正常文本 Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义 */
+  Label?: string;
+  /** 子标签 */
+  SubLabel?: string;
+  /** 音频链接地址 */
+  Audio?: string;
+  /** 审核识别音频文本 */
+  AudioText?: string;
+  /** 音频时长，单位 ms */
+  Duration?: number;
+  /** 审核明细 */
+  CheckDetail?: ModerationCheckDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3229,6 +3319,8 @@ declare interface Trtc {
   AsyncTextToSpeech(data: AsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncTextToSpeechResponse>;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
+  /** 短音频内容理解同步接口 {@link CreateAudioModerationSyncRequest} {@link CreateAudioModerationSyncResponse} */
+  CreateAudioModerationSync(data?: CreateAudioModerationSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationSyncResponse>;
   /** 启动AI 内容理解 {@link CreateCloudModerationRequest} {@link CreateCloudModerationResponse} */
   CreateCloudModeration(data: CreateCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudModerationResponse>;
   /** 开始云端录制 {@link CreateCloudRecordingRequest} {@link CreateCloudRecordingResponse} */

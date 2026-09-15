@@ -113,14 +113,14 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 260+ 款产品，15918+ 服务数</summary>
+<details><summary>共计 261+ 款产品，15974+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
 aai |  | 2018-05-22(4) |
 aca | [AI 临床助手](https://cloud.tencent.com/document/product/1388) | 2021-03-23(8) |
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(8) |
-adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(86) |
+adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(120) |
 advisor | [智能顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(3) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
@@ -175,7 +175,7 @@ cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-
 cetcd | [云原生etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(165) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(166) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(41) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(37) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
@@ -207,6 +207,7 @@ cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(242) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
+databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(17) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(92) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
@@ -258,7 +259,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(45) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(252) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(256) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
@@ -351,9 +352,9 @@ trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/docum
 trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(57) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(63) |
 trro | [实时互动-工业能源版](https://cloud.tencent.com/document/product/1584) | 2022-03-25(39) |
-trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(85) |
+trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(86) |
 tse | [TSF-Polaris&ZK&网关](https://cloud.tencent.com/document/product/1364) | 2020-12-07(161) |
-tsf | [TSF-应用管理&Consul](https://cloud.tencent.com/document/product/649) | 2018-03-26(204) |
+tsf | [TSF-应用管理&Consul](https://cloud.tencent.com/document/product/649) | 2018-03-26(203) |
 tsi | [腾讯同传系统](https://cloud.tencent.com/document/product/1399) | 2021-03-25(3) |
 tsw | [微服务观测平台 TSW](https://cloud.tencent.com/document/product/1311) | 2021-04-12(3) | 2020-09-24(1) |
 tts | [语音合成](https://cloud.tencent.com/document/product/1073) | 2019-08-23(3) |

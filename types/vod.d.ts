@@ -2145,6 +2145,8 @@ declare namespace V20180717 {
     Seed?: number;
     /** 场景类型。取值如下：当 ModelName 为 Hunyuan 时： 3d_panorama 表示全景图；其他 ModelName 暂不支持。 */
     SceneType?: string;
+    /** 透传参数。 */
+    ExtInfo?: string;
   }
 
   /** AIGC生图任务输入文件信息 */
@@ -2441,6 +2443,8 @@ declare namespace V20180717 {
     SceneType?: string;
     /** 模型随机种子。 */
     Seed?: number;
+    /** 透传参数。 */
+    ExtInfo?: string;
   }
 
   /** AIGC 生视频任务输入的图片文件信息。 */

@@ -7287,22 +7287,6 @@ declare interface OperateApplicationTcrBindingResponse {
   RequestId?: string;
 }
 
-declare interface ReassociateBusinessLogConfigRequest {
-  /** 原关联日志配置ID */
-  ConfigId: string;
-  /** 新关联日志配置ID */
-  NewConfigId: string;
-  /** TSF应用ID */
-  ApplicationId: string;
-  /** TSF部署组ID */
-  GroupId: string;
-}
-
-declare interface ReassociateBusinessLogConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ReleaseApiGroupRequest {
   /** Api 分组ID */
   GroupId: string;
@@ -8133,8 +8117,6 @@ declare interface Tsf {
   ModifyUploadInfo(data: ModifyUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUploadInfoResponse>;
   /** 绑定解绑tcr仓库 {@link OperateApplicationTcrBindingRequest} {@link OperateApplicationTcrBindingResponse} */
   OperateApplicationTcrBinding(data?: OperateApplicationTcrBindingRequest, config?: AxiosRequestConfig): AxiosPromise<OperateApplicationTcrBindingResponse>;
-  /** @deprecated 重关联业务日志配置 {@link ReassociateBusinessLogConfigRequest} {@link ReassociateBusinessLogConfigResponse} */
-  ReassociateBusinessLogConfig(data: ReassociateBusinessLogConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ReassociateBusinessLogConfigResponse>;
   /** 发布Api分组 {@link ReleaseApiGroupRequest} {@link ReleaseApiGroupResponse} */
   ReleaseApiGroup(data: ReleaseApiGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseApiGroupResponse>;
   /** 发布配置 {@link ReleaseConfigRequest} {@link ReleaseConfigResponse} */

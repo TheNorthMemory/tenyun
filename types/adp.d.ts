@@ -1074,6 +1074,22 @@ declare interface CamAuthConfig {
   SupportRoleAuth?: boolean;
 }
 
+/** 分类可修改字段集合（配合 update_mask 使用） */
+declare interface CategoryModifyFields {
+  /** 分类名 */
+  Name?: string;
+}
+
+/** 分类路径信息 */
+declare interface CategoryPath {
+  /** 分类 ID */
+  CategoryId?: string;
+  /** 从根节点开始的路径分类 ID 列表 */
+  CategoryIdPath?: string[];
+  /** 从根节点开始的路径分类名称列表 */
+  CategoryNamePath?: string[];
+}
+
 /** CategoryPermission */
 declare interface CategoryPermission {
   /** 当前用户是否可新增子分类 */
@@ -1132,6 +1148,14 @@ declare interface ChannelSpec {
   WecomApp?: WecomAppChannelConfig | null;
   /** 企微机器人配置 */
   WecomRobot?: WecomRobotChannelConfig | null;
+}
+
+/** 通用校验结果 */
+declare interface CheckResult {
+  /** 是否通过校验 */
+  Passed?: boolean;
+  /** 失败原因（passed=false 时填充） */
+  Reason?: string;
 }
 
 /** ClawAgent Agent团队协作配置 */
@@ -1200,6 +1224,32 @@ declare interface ConcurrencyLimitDetail {
   SpaceId?: string;
 }
 
+/** 冲突 QA（冲突组中的单条 QA 快照） */
+declare interface ConflictQA {
+  /** 答案 */
+  Answer?: string;
+  /** 知识生效作用域：1=停用，2=仅开发域，3=仅发布域，4=全域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 关联文档名称 */
+  FileName?: string;
+  /** 关联文档类型 */
+  FileType?: string;
+  /** QA ID */
+  QaId?: string;
+  /** 问题 */
+  Question?: string;
+  /** 来源类型：1=文档生成，2=批量导入，3=手动录入枚举项枚举值描述QA_SOURCE_TYPE_UNKNOWN0QA_SOURCE_TYPE_DOC1文档生成QA_SOURCE_TYPE_BATCH_IMPORT2批量导入QA_SOURCE_TYPE_MANUAL3手动录入 */
+  SourceType?: number;
+  /** 更新时间（Unix 秒，用于排序判断新旧） */
+  UpdateTime?: string;
+}
+
+/** 冲突问摘要信息 */
+declare interface ConflictQASummary {
+  /** 冲突组 ID */
+  ConflictGroupId?: string;
+}
+
 /** 消耗分类 */
 declare interface ConsumptionClassification {
   /** 消耗场景（如推理/训练/评测等） */
@@ -1238,6 +1288,16 @@ declare interface ConsumptionUsage {
   Usage?: number;
   /** 用量单位，枚举值 DosageUnit枚举项枚举值描述DOSAGE_UNIT_TOKEN0token（默认）DOSAGE_UNIT_PAGE_COUNT1page_count（页数）DOSAGE_UNIT_TIMES2times（次数）DOSAGE_UNIT_SECOND3second（秒）DOSAGE_UNIT_ITEM4item（条）DOSAGE_UNIT_SHEET5sheet（张）DOSAGE_UNIT_CHARACTER6character（字符）DOSAGE_UNIT_GB7GBDOSAGE_UNIT_NUMBER8number（个数）DOSAGE_UNIT_MILL_SECOND9mill_second（毫秒） */
   UsageUnit?: number;
+}
+
+/** 内容过滤配置（图片名称正则/最小宽高），缺省时不启用过滤 */
+declare interface ContentFilter {
+  /** 图片最小高度（像素），小于则过滤；<=0 表示不启用 */
+  ImageMinHeight?: number;
+  /** 图片最小宽度（像素），小于则过滤；<=0 表示不启用 */
+  ImageMinWidth?: number;
+  /** 图片名称过滤规则（用分号 ';' 分隔的多条正则，如 'icon;notice;warning;info.*'） */
+  ImageNamePatterns?: string;
 }
 
 /** Conversation 会话信息 */
@@ -1470,10 +1530,24 @@ declare interface CronSchedule {
   Expression?: string;
 }
 
+/** 数据库检索配置 */
+declare interface DBRetrievalConfig {
+  /** 是否启用 */
+  Enabled?: boolean;
+}
+
 /** DailySchedule */
 declare interface DailySchedule {
   /** 时间 */
   TimeOfDay?: string;
+}
+
+/** 重复文件处理规则 */
+declare interface DeDuplicateStrategy {
+  /** 校验方式：1=按文档内容判断是否相同枚举项枚举值描述DUPLICATE_FILE_CHECK_TYPE_UNKNOWN0未知DUPLICATE_FILE_CHECK_TYPE_COS_HASH1按文档内容（cos_hash）判断是否相同 */
+  CheckType?: number;
+  /** 处理方式：1=返回报错，2=跳过并返回重复的文档 ID枚举项枚举值描述DUPLICATE_FILE_HANDLE_TYPE_UNKNOWN0未知DUPLICATE_FILE_HANDLE_TYPE_RETURN_ERR1返回报错DUPLICATE_FILE_HANDLE_TYPE_SKIP2跳过，返回重复的文档 ID */
+  HandleType?: number;
 }
 
 /** 对话端自定义配置(所有模式共用,允许对话中动态修改配置) */
@@ -1502,6 +1576,194 @@ declare interface DingTalkChannelConfig {
   AppSecret?: string;
 }
 
+/** 文档外部链接信息 */
+declare interface DocExternalLink {
+  /** 外部链接地址 */
+  ExternalUrl?: string;
+  /** 是否替换原文展示 */
+  ReplaceOriginEnabled?: boolean;
+}
+
+/** 文档导入规格（一次性输入的非持久化数据） */
+declare interface DocImportSpec {
+  /** 文件 ID（通过文件管理服务获取的文件标识，不可为空） */
+  FileId: string;
+  /** 归属分类 ID */
+  CategoryId?: string;
+  /** 重复文件处理规则列表 */
+  DeDuplicateStrategyList?: DeDuplicateStrategy[];
+  /** 知识生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy | null;
+  /** 外部链接 */
+  ExternalLink?: DocExternalLink | null;
+  /** 适用范围（标签条件） */
+  LabelRefList?: LabelRefIdentity[];
+  /** 解析配置（分割规则、内容过滤等） */
+  ParseConfig?: DocParseConfig | null;
+  /** 开关配置 */
+  Switch?: DocSwitch | null;
+  /** 更新周期 */
+  UpdatePeriod?: DocUpdatePeriod | null;
+  /** 用户访问配置 */
+  UserAccessConfig?: UserAccessConfig | null;
+}
+
+/** 文档生命周期信息 */
+declare interface DocLifecycle {
+  /** 创建时间（Unix 秒） */
+  CreateTime?: string;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy | null;
+  /** 文档状态：1=解析中，2=解析失败，3=导入失败，4=审核中，5=审核失败，6=学习中，7=学习失败，8=导入完成，9=已过期，10=超量失效，11=超量失效恢复中，12=重命名审核失败，13=重命名申诉失败，14=人工申诉中，15=人工申诉失败枚举项枚举值描述DOC_STATUS_UNKNOWN0DOC_STATUS_PARSING1解析中DOC_STATUS_PARSE_FAIL2解析失败DOC_STATUS_IMPORT_FAIL3导入失败DOC_STATUS_AUDITING4审核中DOC_STATUS_AUDIT_FAIL5审核失败DOC_STATUS_LEARNING6学习中DOC_STATUS_LEARN_FAIL7学习失败DOC_STATUS_IMPORTED8导入完成DOC_STATUS_EXPIRED9已过期DOC_STATUS_QUOTA_INVALID10超量失效DOC_STATUS_QUOTA_RECOVERING11超量失效恢复中DOC_STATUS_RENAME_AUDIT_FAIL12重命名审核失败DOC_STATUS_RENAME_APPEAL_FAIL13重命名申诉失败DOC_STATUS_MANUAL_APPEALING14人工申诉中DOC_STATUS_MANUAL_APPEAL_FAIL15人工申诉失败 */
+  Status?: number;
+  /** 状态描述 */
+  StatusDesc?: string;
+  /** 状态附加信息 */
+  StatusMessage?: string;
+  /** 更新时间（Unix 秒） */
+  UpdateTime?: string;
+}
+
+/** 文档链接 */
+declare interface DocLink {
+  /** COS 链接地址，可用作预览和下载 */
+  CosUrl?: string;
+  /** 外部链接 */
+  ExternalLink?: DocExternalLink | null;
+}
+
+/** 文档元信息 */
+declare interface DocMetadata {
+  /** 文档字符数 */
+  DocCharCount?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 文件大小（字节） */
+  FileSize?: string;
+  /** 文件类型/扩展名 */
+  FileType?: string;
+  /** 元数据引用字段名列表（用于显示文档哪些分类和属性被设置为元数据） */
+  RefFieldNameList?: string[];
+  /** 来源描述 */
+  SourceDesc?: string;
+  /** 文档来源类型：1=本地上传，2=网页链接，3=COS 对接，4=外部导入枚举项枚举值描述DOC_SOURCE_TYPE_UNKNOWN0DOC_SOURCE_TYPE_LOCAL1本地上传DOC_SOURCE_TYPE_URL2网页链接DOC_SOURCE_TYPE_COS3COS 对接DOC_SOURCE_TYPE_IMPORT4外部导入 */
+  SourceType?: number;
+}
+
+/** 文档可修改字段集合（配合 update_mask 使用） */
+declare interface DocModifyFields {
+  /** 归属分类 ID */
+  CategoryId?: string;
+  /** 生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy | null;
+  /** 外部链接 */
+  ExternalLink?: DocExternalLink | null;
+  /** 标签列表 */
+  LabelRefList?: LabelRefIdentity[];
+  /** 文档名 */
+  Name?: string;
+  /** 解析配置（分割规则、内容过滤等） */
+  ParseConfig?: DocParseConfig | null;
+  /** 开关配置 */
+  Switch?: DocSwitch | null;
+  /** 更新周期 */
+  UpdatePeriod?: DocUpdatePeriod | null;
+  /** 用户访问配置 */
+  UserAccessConfig?: UserAccessConfig | null;
+}
+
+/** 文档操作者信息 */
+declare interface DocOperator {
+  /** 修改人 */
+  Modifier?: Operator | null;
+  /** 操作权限 */
+  Permission?: DocPermission | null;
+}
+
+/** 文档解析配置 */
+declare interface DocParseConfig {
+  /** 内容过滤配置 */
+  ContentFilter?: ContentFilter | null;
+  /** 分割规则 */
+  SplitRule?: string;
+}
+
+/** 文档操作权限信息 */
+declare interface DocPermission {
+  /** 是否可删除 */
+  CanDelete?: boolean;
+  /** 是否可编辑 */
+  CanEdit?: boolean;
+  /** 是否可重新生成 */
+  CanRestart?: boolean;
+  /** 是否可重试 */
+  CanRetry?: boolean;
+}
+
+/** 文档查询条件 */
+declare interface DocQuery {
+  /** 查询关键词（名称模糊搜索） */
+  Query?: string;
+  /** 查询范围（query 作用的字段）：1=文件名，2=标签或标签值；支持多选，缺省时无效 */
+  QueryScopeList?: number[];
+}
+
+/** 文档检索配置 */
+declare interface DocRetrievalConfig {
+  /** 置信度阈值 */
+  Confidence?: number;
+  /** 是否启用 */
+  Enabled?: boolean;
+  /** 返回前 N 条 */
+  TopN?: number;
+}
+
+/** 文档摘要信息 */
+declare interface DocSummary {
+  /** 所属分类路径（包含分类 ID、从根节点开始的分类 ID 路径和分类名称路径） */
+  CategoryPath?: CategoryPath | null;
+  /** 文档 ID */
+  DocId?: string;
+  /** 知识生效范围（聚合生效作用域 + 标签条件） */
+  KnowledgeScope?: KnowledgeScope | null;
+  /** 生命周期信息 */
+  Lifecycle?: DocLifecycle | null;
+  /** 元信息 */
+  Metadata?: DocMetadata | null;
+  /** 操作者信息（聚合修改人 + 操作权限） */
+  OperatorInfo?: DocOperator | null;
+  /** 任务状态信息 */
+  TaskStatus?: DocTaskStatus | null;
+}
+
+/** 文档开关配置 */
+declare interface DocSwitch {
+  /** 是否可下载 */
+  DownloadEnabled?: boolean;
+  /** 是否在参考来源中展示 */
+  ReferEnabled?: boolean;
+}
+
+/** 文档任务状态信息 */
+declare interface DocTaskStatus {
+  /** 已完成的历史任务类型列表 */
+  CompletedTaskTypeList?: number[];
+  /** 正在进行中的任务类型列表 */
+  OngoingTaskTypeList?: number[];
+}
+
+/** 文档更新周期配置 */
+declare interface DocUpdatePeriod {
+  /** 是否开启周期性更新 */
+  Enabled?: boolean;
+  /** 更新周期（小时） */
+  PeriodHour?: number;
+}
+
 /** DuplexBilling */
 declare interface DuplexBilling {
   /** 枚举项枚举值描述UNKNOW0TOKEN1按tokenPAGE_COUNT2按页数TIMES3按次数TIMES_THOUSAND4按千次数SECOND5按时长CHARACTER6按字符数CHARACTER_THOUSAND7按千字符数SHEET8按张NUMBER9按个数 */
@@ -1516,12 +1778,48 @@ declare interface DuplexBilling {
   OutputPuPrice?: number;
 }
 
+/** ES 配置 */
+declare interface ESConfig {
+  /** 是否支持修改存储方式 */
+  CanModify?: boolean;
+  /** ES 密码（加密后） */
+  EncryptedPassword?: string;
+  /** ES 集群 ID */
+  InstanceId?: string;
+  /** 存储类型：1=默认存储，2=自定义存储枚举项枚举值描述ES_STORAGE_TYPE_UNKNOWN0ES_STORAGE_TYPE_DEFAULT1默认存储ES_STORAGE_TYPE_CUSTOM2自定义存储 */
+  StorageType?: number;
+  /** ES 用户名 */
+  UserName?: string;
+}
+
+/** 有效期 */
+declare interface EffectivePeriod {
+  /** 有效期结束时间（Unix 秒，0 表示永久有效） */
+  EndTime?: string;
+  /** 有效期开始时间（Unix 秒） */
+  StartTime?: string;
+}
+
 /** ExecuteConfig */
 declare interface ExecuteConfig {
   /** Prompt配置 */
   PromptConfig?: AppTriggerPromptExecuteConfig;
   /** 工作流配置 */
   WorkflowConfig?: AppTriggerWorkflowExecuteConfig;
+}
+
+/** 时效性检索增强配置 */
+declare interface ExpirationAwareness {
+  /** 是否启用时效性检索，开启后检索结果会结合知识的有效时间进行排序 */
+  Enabled?: boolean;
+}
+
+/** 过期策略（有效时间与超过有效时间后的行为） */
+declare interface ExpirationPolicy {
+  /** 有效时间 */
+  EffectivePeriod?: EffectivePeriod | null;
+  /** 超过有效时间后的行为：1=NOT_RETRIEVABLE 不可被检索，2=RETRIEVABLE 仍可被检索；永久有效时无意义枚举项枚举值描述EXPIRE_BEHAVIOR_UNKNOWN0未指定（服务端按默认处理）EXPIRE_BEHAVIOR_NOT_RETRIEVABLE1不可被检索（到期下架）EXPIRE_BEHAVIOR_RETRIEVABLE2仍可被检索（到期不下架，仅标记时效范围） */
+  ExpireBehavior?: number;
 }
 
 /** FieldMask */
@@ -1562,10 +1860,22 @@ declare interface Filter {
   ValueList?: string[];
 }
 
+/** 最终 rerank 配置 */
+declare interface FinalRerankConfig {
+  /** 模型名称 */
+  ModelName?: string;
+}
+
 /** 生成模型配置 */
 declare interface GenerateModel {
   /** 生成模型 */
   Model: ModelDetailInfo | null;
+}
+
+/** GraphRAG 配置 */
+declare interface GraphRAG {
+  /** 是否启用 */
+  Enabled?: boolean;
 }
 
 /** 通用身份信息（支持数字 ID 与字符串 ID 两种形态） */
@@ -1602,6 +1912,266 @@ declare interface IntervalSchedule {
   Unit?: number;
   /** 值 */
   Value?: number;
+}
+
+/** 知识库容量信息 */
+declare interface KBCapacity {
+  /** 最大字符数 */
+  MaxCharSize?: string;
+  /** 超量字符数 */
+  OverCharSize?: string;
+  /** 已用字符数 */
+  UsedCharSize?: string;
+}
+
+/** 知识库分类信息（含元数据配置） */
+declare interface KBCategory {
+  /** 是否可新增 */
+  CanAdd?: boolean;
+  /** 是否可删除 */
+  CanDelete?: boolean;
+  /** 是否可编辑 */
+  CanEdit?: boolean;
+  /** 分类 ID */
+  CategoryId?: string;
+  /** 子分类列表 */
+  ChildList?: KBCategory[];
+  /** 是否为叶子节点（无子分类） */
+  IsLeaf?: boolean;
+  /** 分类对象的数量 */
+  ItemCount?: number;
+  /** 元数据配置（该分类被设置为元数据时的配置信息） */
+  MetaValue?: MetaValue | null;
+  /** 分类名称 */
+  Name?: string;
+}
+
+/** 知识库模型配置 */
+declare interface KBModelConfig {
+  /** Embedding 模型 */
+  EmbeddingModel?: string;
+  /** QA 抽取模型 */
+  QaExtractModel?: string;
+  /** Schema 生成模型 */
+  SchemaModel?: string;
+}
+
+/** 知识库修改扩展字段（用于触发特殊操作） */
+declare interface KBModifyExtendFields {
+  /** 扩展操作：1=触发恢复超量枚举项枚举值描述KB_EXTENDED_ACTION_UNKNOWN0KB_EXTENDED_ACTION_RESUME_EXCEEDED1触发恢复超量（将知识库从超量状态恢复为正常状态） */
+  Action?: number;
+}
+
+/** 单个知识库检索配置 */
+declare interface KBRetrievalConfig {
+  /** 数据库检索配置 */
+  DbRetrievalConfig?: DBRetrievalConfig | null;
+  /** 文档检索配置 */
+  DocRetrievalConfig?: DocRetrievalConfig | null;
+  /** 知识库 ID */
+  KbId?: string;
+  /** 检索可选配置 */
+  OptionConfig?: RetrievalOption | null;
+  /** QA 检索配置 */
+  QaRetrievalConfig?: QARetrievalConfig | null;
+  /** rerank 配置 */
+  RerankConfig?: RerankConfig | null;
+  /** 检索过滤配置 */
+  SearchFilterConfig?: SearchFilterConfig | null;
+  /** 检索策略：1=混合，2=语义，3=关键词，4=无枚举项枚举值描述SEARCH_STRATEGY_TYPE_UNKNOWN0SEARCH_STRATEGY_TYPE_MIXING1混合检索SEARCH_STRATEGY_TYPE_SEMANTIC2语义检索SEARCH_STRATEGY_TYPE_KEYWORD3关键词检索SEARCH_STRATEGY_TYPE_NONE4无语义/向量检索 */
+  StrategyType?: number;
+  /** text2sql 模型 */
+  TextToSqlModel?: ModelDetailInfo | null;
+}
+
+/** 知识库可写属性集合（配合 update_mask 使用） */
+declare interface KBSpec {
+  /** 描述 */
+  Description?: string;
+  /** ES 配置 */
+  EsConfig?: ESConfig | null;
+  /** 模型配置 */
+  ModelConfig?: KBModelConfig | null;
+  /** 知识库名称 */
+  Name?: string;
+  /** 所有者 ID */
+  OwnerId?: string;
+}
+
+/** 知识库摘要信息 */
+declare interface KBSummary {
+  /** 关联的应用列表，仅共享知识库返回 */
+  AppList?: Identity[];
+  /** 创建时间（Unix 秒） */
+  CreateTime?: string;
+  /** 创建人 */
+  Creator?: Operator | null;
+  /** 描述 */
+  Description?: string;
+  /** 文档数 */
+  DocCount?: number;
+  /** 是否超量 */
+  IsExceeded?: boolean;
+  /** 知识库 ID */
+  KbId?: string;
+  /** 类型：1=默认知识库，2=共享知识库枚举项枚举值描述KB_TYPE_UNKNOWN0KB_TYPE_DEFAULT1默认知识库KB_TYPE_SHARED2共享知识库 */
+  KbType?: number;
+  /** 最后操作人，仅共享知识库返回 */
+  LatestOperator?: Operator | null;
+  /** 知识库名称 */
+  Name?: string;
+  /** 处理中状态列表 */
+  ProcessingFlagList?: number[];
+  /** 共享子类型：1=普通，2=公众号枚举项枚举值描述SHARED_KB_SUB_TYPE_UNKNOWN0SHARED_KB_SUB_TYPE_NORMAL1普通SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT2公众号 */
+  SharedSubType?: number;
+  /** 更新时间（Unix 秒） */
+  UpdateTime?: string;
+}
+
+/** 通用键值对 */
+declare interface KVPair {
+  /** 键 */
+  Key?: string;
+  /** 值 */
+  Value?: string;
+}
+
+/** 单条检索结果 */
+declare interface KnowledgeResult {
+  /** 置信度 */
+  Confidence?: number;
+  /** 命中知识类型：1=问答，2=文档片段，3=数据库，4=图谱枚举项枚举值描述KNOWLEDGE_SOURCE_TYPE_UNKNOWN0KNOWLEDGE_SOURCE_TYPE_QA1问答KNOWLEDGE_SOURCE_TYPE_DOC2文档片段KNOWLEDGE_SOURCE_TYPE_DB3数据库KNOWLEDGE_SOURCE_TYPE_GRAPH4图谱 */
+  KnowledgeType?: number;
+  /** 召回类型列表 */
+  RecallTypeList?: number[];
+  /** 结果负载 */
+  ResultPayload?: SearchResultPayload | null;
+  /** 检索结果类型枚举项枚举值描述SEARCH_RESULT_TYPE_UNKNOWN0SEARCH_RESULT_TYPE_RETRIEVAL1普通检索结果SEARCH_RESULT_TYPE_TEXT_TO_SQL2text2sql 结果SEARCH_RESULT_TYPE_IMAGE_SEARCH_IMAGE3SEARCH_RESULT_TYPE_TEXT_SEARCH_IMAGE4 */
+  ResultType?: number;
+  /** 相似问额外信息 */
+  SimilarQuestionExtra?: SimilarQuestionExtra | null;
+  /** 知识片段基础信息 */
+  SnippetProfile?: KnowledgeSnippetProfile | null;
+  /** 知识来源信息 */
+  SourceInfo?: KnowledgeSource | null;
+}
+
+/** 知识生效范围 */
+declare interface KnowledgeScope {
+  /** 生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 适用范围（标签条件） */
+  LabelRefList?: LabelRef[];
+}
+
+/** 知识片段基础信息 */
+declare interface KnowledgeSnippetProfile {
+  /** 内容 */
+  Content?: string;
+  /** 关联文档 ID */
+  DocId?: string;
+  /** 文档名 */
+  DocName?: string;
+  /** 知识库 ID */
+  KbId?: string;
+  /** 知识 ID */
+  KnowledgeId?: string;
+  /** 问题 */
+  Question?: string;
+  /** 文档标题 */
+  Title?: string;
+}
+
+/** 知识来源信息 */
+declare interface KnowledgeSource {
+  /** 是否为大数据 */
+  IsBigData?: boolean;
+  /** 是否为共享知识库 */
+  IsShared?: boolean;
+  /** 知识库名 */
+  KbName?: string;
+}
+
+/** 标签可修改字段集合（配合 update_mask 使用） */
+declare interface LabelModifyFields {
+  /** 标签名称 */
+  Name?: string;
+  /** 标准词增量修改列表（增/改/删） */
+  TermModifyList?: LabelTermModifyItem[];
+}
+
+/** 标签引用（出参用） */
+declare interface LabelRef {
+  /** 标签 ID */
+  LabelId?: string;
+  /** 标签名称 */
+  LabelName?: string;
+  /** 标签标准词 ID 列表 */
+  LabelTermIdList?: string[];
+  /** 标签标准词列表 */
+  LabelTermList?: string[];
+}
+
+/** 标签引用身份标识（入参用） */
+declare interface LabelRefIdentity {
+  /** 标签 ID */
+  LabelId?: string;
+  /** 标签标准词 ID 列表 */
+  LabelTermIdList?: string[];
+}
+
+/** 标签引用列表 */
+declare interface LabelRefIdentityList {
+  /** 标签引用列表 */
+  ItemList?: LabelRefIdentity[];
+}
+
+/** 标签摘要 */
+declare interface LabelSummary {
+  /** 标签 ID */
+  LabelId?: string;
+  /** 元数据配置（该标签被设置为元数据时的配置信息） */
+  MetaValue?: MetaValue | null;
+  /** 标签名称 */
+  Name?: string;
+  /** 引用该标签的资源数 */
+  RefCount?: number;
+  /** 标签值（标准词 + 同义词列表） */
+  TermList?: LabelTerm[];
+  /** 标签值总数 */
+  TermTotalCount?: number;
+}
+
+/** 标准词（标签值的一项） */
+declare interface LabelTerm {
+  /** 同义词列表 */
+  SynonymList?: string[];
+  /** 标准词 */
+  Term?: string;
+  /** 标准词 ID（由后台生成，创建时不传） */
+  TermId?: string;
+}
+
+/** 标准词校验项 */
+declare interface LabelTermCheckResult {
+  /** 校验结果 */
+  CheckResult?: CheckResult | null;
+  /** 待校验的标准词 */
+  Term?: string;
+  /** 已存在时返回对应标准词 ID */
+  TermId?: string;
+}
+
+/** 标签标准词修改项（增量更新） */
+declare interface LabelTermModifyItem {
+  /** 操作类型（不可为 0，取值：1=新增，2=修改，3=删除）枚举项枚举值描述MODIFY_ACTION_UNKNOWN0MODIFY_ACTION_CREATE1新增MODIFY_ACTION_UPDATE2修改MODIFY_ACTION_DELETE3删除 */
+  ModifyAction: number;
+  /** 同义词列表（CREATE 与 UPDATE 时传完整同义词集合，覆盖式更新） */
+  SynonymList?: string[];
+  /** 标准词（CREATE 与 UPDATE 必填，DELETE 可留空） */
+  Term?: string;
+  /** 标准词 ID（UPDATE 与 DELETE 必填，CREATE 留空由后台生成） */
+  TermId?: string;
 }
 
 /** 飞书机器人渠道配置 */
@@ -1674,6 +2244,20 @@ declare interface MCPToolUIMeta {
 declare interface ManualOnlySchedule {
   /** 启用 */
   Enabled?: boolean;
+}
+
+/** 元数据值 */
+declare interface MetaValue {
+  /** 元数据值名称（仅展示使用） */
+  Name?: string;
+  /** 是否引用该类型下的全部值（true 时 ref_value_id 应为 0） */
+  RefAll?: boolean;
+  /** 元数据引用的业务 ID（属性 ID、分类 ID 等）；ref_all=true 时该字段应为 0 */
+  RefValueId?: string;
+  /** 元数据使用场景：1=仅检索使用，2=检索和生成都使用枚举项枚举值描述META_SCENE_UNKNOWN0未知META_SCENE_SEARCH_ONLY1仅检索使用META_SCENE_ALL2检索和生成都使用 */
+  Scene?: number;
+  /** 元数据值类型：1=属性标签，2=文档分类，3=问答分类枚举项枚举值描述META_VALUE_TYPE_UNKNOWN0未知META_VALUE_TYPE_TAG1属性标签META_VALUE_TYPE_DOC_CATEGORY2文档分类META_VALUE_TYPE_QA_CATEGORY3问答分类 */
+  ValueType?: number;
 }
 
 /** 总览 KPI 卡片指标项 */
@@ -1986,6 +2570,24 @@ declare interface OnceSchedule {
   FireTime?: string;
 }
 
+/** 通用操作结果项 */
+declare interface OperationResult {
+  /** 资源 ID */
+  Id?: string;
+  /** 失败原因（succeeded=false 时填充） */
+  Reason?: string;
+  /** 是否成功 */
+  Succeeded?: boolean;
+}
+
+/** 通用操作人信息 */
+declare interface Operator {
+  /** 用户 ID */
+  UserId?: string;
+  /** 用户姓名 */
+  UserName?: string;
+}
+
 /** 平台资源用量聚合明细（PLATFORM 域专属） */
 declare interface PlatformUsageSummary {
   /** PLATFORM 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量，label 取 PlatformBizType 枚举名称字符串；典型如 unit=TIMES + label=PLATFORM_BIZ_TYPE_SECURITY_AUDIT/WEB_SEARCH/OPEN_CLAW/APP_INVOKE，unit=ITEM + label=PLATFORM_BIZ_TYPE_LONG_TERM_MEMORY */
@@ -2140,6 +2742,162 @@ declare interface PromptRewriteModel {
   Model: ModelDetailInfo | null;
 }
 
+/** QA 创建规格（一次性输入的非持久化数据） */
+declare interface QACreateSpec {
+  /** 问题 */
+  Question: string;
+  /** 答案 */
+  Answer?: string;
+  /** 分类 ID */
+  CategoryId?: string;
+  /** 关联文档 ID */
+  DocId?: string;
+  /** 知识生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy | null;
+  /** 适用范围（标签条件） */
+  LabelRefList?: LabelRefIdentity[];
+  /** 问题描述 */
+  QuestionDescription?: string;
+  /** 相似问列表 */
+  SimilarQuestionList?: string[];
+}
+
+/** QA 生命周期信息 */
+declare interface QALifecycle {
+  /** 创建时间（Unix 秒） */
+  CreateTime?: string;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy | null;
+  /** 状态：1=待校验，2=未采纳，3=导入失败，4=审核中，5=审核失败，6=学习中，7=学习失败，8=导入完成，9=已过期，10=超量失效，11=超量失效恢复中，12=人工申诉中，13=人工申诉失败枚举项枚举值描述QA_STATUS_UNKNOWN0QA_STATUS_PENDING_VERIFY1待校验QA_STATUS_NOT_ACCEPTED2未采纳QA_STATUS_IMPORT_FAIL3导入失败QA_STATUS_AUDITING4审核中QA_STATUS_AUDIT_FAIL5审核失败QA_STATUS_LEARNING6学习中QA_STATUS_LEARN_FAIL7学习失败QA_STATUS_IMPORTED8导入完成QA_STATUS_EXPIRED9已过期QA_STATUS_QUOTA_INVALID10超量失效QA_STATUS_QUOTA_RECOVERING11超量失效恢复中QA_STATUS_MANUAL_APPEALING12人工申诉中QA_STATUS_MANUAL_APPEAL_FAIL13人工申诉失败 */
+  Status?: number;
+  /** 状态描述 */
+  StatusDesc?: string;
+  /** 状态附加信息 */
+  StatusMessage?: string;
+  /** 更新时间（Unix 秒） */
+  UpdateTime?: string;
+}
+
+/** QA 元信息 */
+declare interface QAMetadata {
+  /** 答案 */
+  Answer?: string;
+  /** 问答字符数 */
+  QaCharCount?: string;
+  /** 问答大小（字节，含相似问） */
+  QaSize?: string;
+  /** 问题 */
+  Question?: string;
+  /** 元数据引用字段名列表（用于显示问答哪些分类和属性被设置为元数据） */
+  RefFieldNameList?: string[];
+}
+
+/** QA 可修改字段集合（配合 update_mask 使用） */
+declare interface QAModifyFields {
+  /** 答案 */
+  Answer?: string;
+  /** 分类 ID */
+  CategoryId?: string;
+  /** 关联文档 ID */
+  DocId?: string;
+  /** 知识生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy | null;
+  /** 是否采纳（校验通过） */
+  IsAccepted?: boolean;
+  /** 适用范围（标签条件） */
+  LabelRefList?: LabelRefIdentity[];
+  /** 问题 */
+  Question?: string;
+  /** 问题描述 */
+  QuestionDescription?: string;
+  /** 相似问修改列表 */
+  SimilarQuestionList?: SimilarQuestionModifySpec[];
+}
+
+/** QA 操作者信息 */
+declare interface QAOperator {
+  /** 修改人 */
+  Modifier?: Operator | null;
+  /** 操作权限 */
+  Permission?: QAPermission | null;
+}
+
+/** QA 操作权限信息 */
+declare interface QAPermission {
+  /** 是否可校验（采纳/不采纳） */
+  CanAccept?: boolean;
+  /** 是否可删除 */
+  CanDelete?: boolean;
+  /** 是否可编辑 */
+  CanEdit?: boolean;
+}
+
+/** QA 查询条件 */
+declare interface QAQuery {
+  /** 查询关键词（模糊搜索） */
+  Query?: string;
+  /** 查询范围（query 作用的字段）：1=问题，2=标签或标签值，3=答案；支持多选，缺省时无效 */
+  QueryScopeList?: number[];
+}
+
+/** QA 检索配置 */
+declare interface QARetrievalConfig {
+  /** 置信度阈值 */
+  Confidence?: number;
+  /** 是否启用 */
+  Enabled?: boolean;
+  /** 返回前 N 条 */
+  TopN?: number;
+}
+
+/** QA 分片高亮信息 */
+declare interface QASegmentHighlight {
+  /** 高亮结束位置 */
+  EndPos?: string;
+  /** 高亮起始位置 */
+  StartPos?: string;
+}
+
+/** QA 来源与关联文档信息 */
+declare interface QASourceInfo {
+  /** 关联文档的生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  DocEffectiveDomain?: number;
+  /** 关联文档 ID */
+  DocId?: string;
+  /** 关联文档名称 */
+  FileName?: string;
+  /** 关联文档类型 */
+  FileType?: string;
+  /** 来源描述 */
+  SourceDesc?: string;
+  /** 来源类型：1=文档生成，2=批量导入，3=手动录入枚举项枚举值描述QA_SOURCE_TYPE_UNKNOWN0QA_SOURCE_TYPE_DOC1文档生成QA_SOURCE_TYPE_BATCH_IMPORT2批量导入QA_SOURCE_TYPE_MANUAL3手动录入 */
+  SourceType?: number;
+}
+
+/** QA 摘要信息 */
+declare interface QASummary {
+  /** 所属分类路径（包含分类 ID、从根节点开始的分类 ID 路径和分类名称路径） */
+  CategoryPath?: CategoryPath | null;
+  /** 知识生效范围 */
+  KnowledgeScope?: KnowledgeScope | null;
+  /** 生命周期信息 */
+  Lifecycle?: QALifecycle | null;
+  /** 元信息（问题/答案/大小统计） */
+  Metadata?: QAMetadata | null;
+  /** 操作者信息 */
+  OperatorInfo?: QAOperator | null;
+  /** QA ID */
+  QaId?: string;
+  /** 相似问统计 */
+  SimilarQuestion?: SimilarQuestionStat | null;
+  /** 来源信息 */
+  SourceInfo?: QASourceInfo | null;
+}
+
 /** [数据结构定义] 发布记录 */
 declare interface ReleaseRecord {
   /** 是否可导出 */
@@ -2210,6 +2968,14 @@ declare interface RequestParam {
   Type?: number;
 }
 
+/** 重排配置 */
+declare interface RerankConfig {
+  /** 是否启用 */
+  Enabled?: boolean;
+  /** 模型名称 */
+  ModelName?: string;
+}
+
 /** 单项消耗计量 */
 declare interface ResourceConsumption {
   /** 功能标签，PLATFORM 场景取 PlatformBizType 枚举名称；MODEL/PLUGIN 场景为空 */
@@ -2234,16 +3000,134 @@ declare interface ResponseParam {
   Type?: number;
 }
 
+/** 检索可选配置 */
+declare interface RetrievalOption {
+  /** 时效性检索增强配置 */
+  ExpirationAwareness?: ExpirationAwareness | null;
+  /** GraphRAG配置 */
+  GraphRag?: GraphRAG | null;
+  /** 表格增强配置 */
+  TableEnhancement?: TableEnhancement | null;
+}
+
 /** 角色配置 */
 declare interface RoleConfig {
   /** 角色描述 */
   RoleDescription: string;
 }
 
+/** 检索高级配置 */
+declare interface SearchAdvancedConfig {
+  /** 最终 rerank 配置 */
+  FinalRerankConfig?: FinalRerankConfig | null;
+  /** 各知识库的检索配置 */
+  KbRetrievalList?: KBRetrievalConfig[];
+  /** 检索知识类型：1=文档和问答，2=拒答枚举项枚举值描述SEARCH_KNOWLEDGE_TYPE_UNKNOWN0SEARCH_KNOWLEDGE_TYPE_DOC_QA1文档和问答SEARCH_KNOWLEDGE_TYPE_REJECTED_QUESTION2拒答 */
+  KnowledgeType?: number;
+  /** 最终返回结果数 */
+  RecallCount?: number;
+}
+
+/** 检索计费信息 */
+declare interface SearchBilling {
+  /** 计费标签列表 */
+  BillingTagList?: KVPair[];
+  /** 计费子业务类型 */
+  FinanceSubBusinessType?: string;
+}
+
+/** 检索请求上下文信息 */
+declare interface SearchContext {
+  /** 请求来源枚举项枚举值描述CALL_SOURCE_UNSPECIFIED0CALL_SOURCE_RAG1标准模式CALL_SOURCE_WORKFLOW2工作流CALL_SOURCE_PLUGIN3插件CALL_SOURCE_OPENCLAW4openclawCALL_SOURCE_RECALL_TEST5召回测试CALL_SOURCE_RECALL_TEST_DIFF6召回测试在对比的场景，同样需要触发检索接口。区别这种case前端不需要更新最新配置。因为对比1，2，3 可能最后保存的是2 */
+  CallSource?: number;
+  /** adp域：1=开发域，2=生产域枚举项枚举值描述ADP_DOMAIN_UNSPECIFIED0未指定ADP_DOMAIN_DEV1开发域ADP_DOMAIN_PROD2生产域 */
+  Domain?: number;
+  /** 访客 ID */
+  VisitorId?: string;
+}
+
+/** 检索过滤 */
+declare interface SearchFilter {
+  /** 检索过滤类型枚举项枚举值描述SEARCH_FILTER_TYPE_UNKNOWN0SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE1用户自定义标签值SEARCH_FILTER_TYPE_CUSTOMER_LABEL_VALUE_ID2用户自定义标签值IDSEARCH_FILTER_TYPE_DOC_ID3指定文档 ID 检索SEARCH_FILTER_TYPE_DOC_CATEGORY_ID4指定文档分类 ID 检索SEARCH_FILTER_TYPE_DB_TABLE_ID5指定数据库表 ID 检索SEARCH_FILTER_TYPE_KB_SCHEMA_ID6指定知识库 schema ID */
+  FilterType?: number;
+  /** 过滤值列表，根据SearchFilterType取值1：传自定义标签值；2：传自定义标签值ID；3：传文档ID；4：传分类ID */
+  FilterValueList?: string[];
+  /** 用户自定义标签 ID */
+  LabelId?: string;
+  /** 逻辑运算符：AND 或 OR枚举项枚举值描述LOGIC_OPR_NOOP0LOGIC_OPR_AND1LOGIC_OPR_OR2 */
+  LogicOp?: number;
+  /** 嵌套检索过滤 */
+  SearchFilterList?: SearchFilter[];
+}
+
+/** 检索过滤配置 */
+declare interface SearchFilterConfig {
+  /** 是否仅检索选中标签，true:仅检索带有选中标签的知识，false:同时检索带有选中标签和不带任何标签的知识 */
+  OnlyRetrievalSelectedLabel?: boolean;
+  /** 检索过滤 */
+  SearchFilter?: SearchFilter | null;
+}
+
+/** 检索输入 */
+declare interface SearchInput {
+  /** 图片 URL 列表 */
+  ImageUrlList?: string[];
+  /** 问题 */
+  Question?: string;
+  /** 拆解的子问题列表 */
+  SubQuestionList?: string[];
+}
+
 /** 搜索资源状态信息 */
 declare interface SearchResourceStatusInfo {
   /** 搜索资源状态: AVAILABLE(1)=资源可用, EXHAUSTED(2)=资源已用尽。枚举值: 1:资源可用, 2:资源已用尽 */
   ResourceStatus: number;
+}
+
+/** 检索结果负载 */
+declare interface SearchResultPayload {
+  /** 图谱附加信息（JSON 字符串） */
+  GraphData?: string;
+  /** 命中的图片 URL 列表 */
+  ImageUrlList?: string[];
+  /** 表格附加信息（JSON 字符串） */
+  SheetInfo?: string;
+}
+
+/** QA 相似问 */
+declare interface SimilarQuestion {
+  /** 相似问内容 */
+  Content?: string;
+  /** 是否 AI 生成 */
+  IsAiGenerated?: boolean;
+  /** 相似问 ID */
+  SimilarQuestionId?: string;
+}
+
+/** 相似问额外信息 */
+declare interface SimilarQuestionExtra {
+  /** 相似问文本内容 */
+  Content?: string;
+  /** 相似问 ID */
+  SimilarQuestionId?: string;
+}
+
+/** QA 相似问修改项 */
+declare interface SimilarQuestionModifySpec {
+  /** 相似问内容（CREATE 与 UPDATE 必填） */
+  Content?: string;
+  /** 操作类型：1=新增，2=修改，3=删除枚举项枚举值描述MODIFY_ACTION_UNKNOWN0MODIFY_ACTION_CREATE1新增MODIFY_ACTION_UPDATE2修改MODIFY_ACTION_DELETE3删除 */
+  ModifyAction?: number;
+  /** 相似问 ID（UPDATE 与 DELETE 必填） */
+  SimilarQuestionId?: string;
+}
+
+/** QA 相似问统计 */
+declare interface SimilarQuestionStat {
+  /** 相似问数量 */
+  SimilarQuestionCount?: number;
+  /** 相似问提示（展示一条相似问样例） */
+  SimilarQuestionTips?: string;
 }
 
 /** 单工作流配置 */
@@ -2466,6 +3350,12 @@ declare interface SpecialStatusInfo {
   Status: number;
 }
 
+/** 摘要列表查询通用开关配置 */
+declare interface SummaryListSwitch {
+  /** 是否显示元数据 */
+  ShowMetadataEnabled?: boolean;
+}
+
 /** 支持的文件类型 */
 declare interface SupportedFileType {
   /** 文件类型描述(如"文本文档") */
@@ -2482,6 +3372,12 @@ declare interface SystemVariable {
   Description: string;
   /** 变量名称 */
   Name: string;
+}
+
+/** 表格增强配置 */
+declare interface TableEnhancement {
+  /** 是否启用 */
+  Enabled?: boolean;
 }
 
 /** Telegram渠道配置 */
@@ -2534,6 +3430,18 @@ declare interface TimerScheduleConfig {
   Timezone?: string;
   /** 每周固定时间触发 */
   Weekly?: WeeklySchedule;
+}
+
+/** Token 使用统计 */
+declare interface TokenUsage {
+  /** completion token 数 */
+  CompletionTokens?: number;
+  /** 模型名称 */
+  ModelName?: string;
+  /** prompt token 数 */
+  PromptTokens?: number;
+  /** 总 token 数 */
+  TotalTokens?: number;
 }
 
 /** Tool */
@@ -2646,6 +3554,14 @@ declare interface UsageSummary {
   SourceName?: string;
   /** 视图类型，决定 SourceId/SourceName 的业务含义枚举项枚举值描述VIEW_TYPE_UNSPECIFIED0未指定（无效值，请求勿传）VIEW_TYPE_CORP1企业视图VIEW_TYPE_SPACE2空间视图VIEW_TYPE_APP3应用视图 */
   ViewType?: number;
+}
+
+/** 用户访问配置 */
+declare interface UserAccessConfig {
+  /** 客户自定义知识 ID */
+  CustomerKnowledgeId?: string;
+  /** 文档是否公开 */
+  IsPublic?: boolean;
 }
 
 /** 用户+Agent归属引用 */
@@ -2802,6 +3718,22 @@ declare interface WeeklyTime {
   Weekday?: number;
 }
 
+declare interface CheckLabelRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 待校验的标准词列表（数量：1~100） */
+  TermList: string[];
+  /** 标签 ID（在指定标签下校验标准词唯一性） */
+  LabelId?: string;
+}
+
+declare interface CheckLabelResponse {
+  /** 校验结果列表 */
+  CheckList?: LabelTermCheckResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CopyAgentFromAppRequest {
   /** 应用Id */
   AppId: string;
@@ -2896,6 +3828,24 @@ declare interface CreateAppTriggerResponse {
   RequestId?: string;
 }
 
+declare interface CreateCategoryRequest {
+  /** 分类类型（不可为 0，取值：1=文档分类，2=问答分类）枚举项枚举值描述CATEGORY_TYPE_UNKNOWN0CATEGORY_TYPE_DOC1文档分类CATEGORY_TYPE_QA2问答分类 */
+  CategoryType: number;
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 分类名（长度：1~64 个字符） */
+  Name: string;
+  /** 父分类 ID */
+  ParentCategoryId?: string;
+}
+
+declare interface CreateCategoryResponse {
+  /** 创建成功的分类 ID */
+  CategoryId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateChannelRequest {
   /** 应用业务ID */
   AppId: string;
@@ -2938,6 +3888,42 @@ declare interface CreateConversationResponse {
   RequestId?: string;
 }
 
+declare interface CreateKBRequest {
+  /** 知识库类型（不可为 0，取值：1=默认知识库，2=共享知识库）枚举项枚举值描述KB_TYPE_UNKNOWN0KB_TYPE_DEFAULT1默认知识库KB_TYPE_SHARED2共享知识库 */
+  KbType: number;
+  /** 工作空间 ID */
+  SpaceId: string;
+  /** 可写属性 */
+  Spec: KBSpec;
+  /** 共享子类型：1=普通，2=公众号枚举项枚举值描述SHARED_KB_SUB_TYPE_UNKNOWN0SHARED_KB_SUB_TYPE_NORMAL1普通SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT2公众号 */
+  SharedSubType?: number;
+}
+
+declare interface CreateKBResponse {
+  /** 创建后的知识库 ID */
+  KbId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateLabelRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 标签名称（长度不小于 1 个字符） */
+  Name: string;
+  /** 标签值（标准词 + 同义词列表），其中 term_id 由后台生成、创建时留空 */
+  TermList?: LabelTerm[];
+}
+
+declare interface CreateLabelResponse {
+  /** 标签 ID */
+  LabelId?: string;
+  /** 标签值（标准词 + 同义词列表，含后台生成的 term_id） */
+  TermList?: LabelTerm[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateMsgRecordCategoryRequest {
   /** 分类名称 */
   Name: string;
@@ -2976,6 +3962,34 @@ declare interface CreatePluginResponse {
   RequestId?: string;
 }
 
+declare interface CreateQAGenerationTaskRequest {
+  /** 待生成 QA 的文档 ID 列表（数量：1~20） */
+  DocIdList: string[];
+  /** 所属知识库 ID */
+  KbId: string;
+}
+
+declare interface CreateQAGenerationTaskResponse {
+  /** 任务 ID 列表 */
+  TaskIdList?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateQAListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 批量创建（数量：1~20） */
+  QaList: QACreateSpec[];
+}
+
+declare interface CreateQAListResponse {
+  /** 批量创建结果 */
+  ResultList?: OperationResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateReleaseRequest {
   /** 应用ID */
   AppId: string;
@@ -2998,6 +4012,22 @@ declare interface CreateReleaseResponse {
   NeedApproval?: boolean;
   /** release_id */
   ReleaseId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSimilarQuestionRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 问题 */
+  Question: string;
+  /** 答案 */
+  Answer?: string;
+}
+
+declare interface CreateSimilarQuestionResponse {
+  /** 生成的相似问列表 */
+  QuestionList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3102,6 +4132,8 @@ declare interface CreateWebSocketTokenResponse {
   AppId?: string;
   /** WebSocket Token */
   Token?: string;
+  /** 用户ID，在后续DescribeUserDialogConfig接口中会使用 */
+  UserId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3176,6 +4208,20 @@ declare interface DeleteAppTriggerResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCategoryRequest {
+  /** 待删除的分类 ID */
+  CategoryId: string;
+  /** 分类类型（不可为 0，取值：1=文档分类，2=问答分类）枚举项枚举值描述CATEGORY_TYPE_UNKNOWN0CATEGORY_TYPE_DOC1文档分类CATEGORY_TYPE_QA2问答分类 */
+  CategoryType: number;
+  /** 所属知识库 ID */
+  KbId: string;
+}
+
+declare interface DeleteCategoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteChannelRequest {
   /** 应用业务ID */
   AppId: string;
@@ -3210,6 +4256,46 @@ declare interface DeleteConversationResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDocListRequest {
+  /** 待删除的文档 ID 列表（数量：1~20） */
+  DocIdList: string[];
+  /** 所属知识库 ID */
+  KbId: string;
+}
+
+declare interface DeleteDocListResponse {
+  /** 批量删除结果 */
+  ResultList?: OperationResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteKBRequest {
+  /** 知识库 ID */
+  KbId: string;
+  /** 工作空间 ID */
+  SpaceId?: string;
+}
+
+declare interface DeleteKBResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLabelListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 待删除标签 ID 列表（数量：1~20） */
+  LabelIdList: string[];
+}
+
+declare interface DeleteLabelListResponse {
+  /** 批量删除结果 */
+  ResultList?: OperationResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteMsgRecordCategoryRequest {
   /** 应用 ID */
   AppId: string;
@@ -3232,6 +4318,20 @@ declare interface DeletePluginRequest {
 }
 
 declare interface DeletePluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteQAListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 待删除的 QA ID 列表（数量：1~20） */
+  QaIdList: string[];
+}
+
+declare interface DeleteQAListResponse {
+  /** 批量删除结果 */
+  ResultList?: OperationResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3526,6 +4626,30 @@ declare interface DescribeAuditLogMetaResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCategoryListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：CategoryType-分类类型,枚举值,精确匹配(CATEGORY_TYPE_DOC=1/CATEGORY_TYPE_QA=2); ParentCategoryId-父分类ID,精确匹配 */
+  FilterList?: Filter[];
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+  /** 关键词搜索 */
+  Query?: string;
+  /** 开关配置 */
+  SummaryListSwitch?: SummaryListSwitch;
+}
+
+declare interface DescribeCategoryListResponse {
+  /** 分类列表 */
+  CategoryList?: KBCategory[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeChannelListRequest {
   /** 应用业务ID */
   AppId: string;
@@ -3582,6 +4706,40 @@ declare interface DescribeConcurrencyLimitDetailListResponse {
   ConcurrencyLimitDetailList?: ConcurrencyLimitDetail[];
   /** 总记录数，用于前端分页 */
   TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConflictQARequest {
+  /** 冲突组 ID */
+  ConflictGroupId: string;
+  /** 所属知识库 ID */
+  KbId: string;
+}
+
+declare interface DescribeConflictQAResponse {
+  /** 一个冲突组的详情列表 */
+  ConflictQaList?: ConflictQA[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConflictQASummaryListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 通用过滤（支持按 status 筛选 PENDING/RESOLVED） */
+  FilterList?: Filter[];
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+}
+
+declare interface DescribeConflictQASummaryListResponse {
+  /** 冲突问列表 */
+  ConflictQaList?: ConflictQASummary[];
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3722,6 +4880,148 @@ declare interface DescribeConversationResponse {
   Title?: string;
   /** 会话使用的用户端 AgentId */
   AgentId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDocRequest {
+  /** 文档 ID */
+  DocId: string;
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 字段掩码：当前支持的 Path：DocLink.CosUrl，其他未列举的字段默认都返回 */
+  ReadMask?: FieldMask;
+}
+
+declare interface DescribeDocResponse {
+  /** 文档链接（外部链接 + COS 链接） */
+  DocLink?: DocLink | null;
+  /** 解析配置（分割规则、内容过滤等） */
+  ParseConfig?: DocParseConfig | null;
+  /** 文档基础信息 */
+  Summary?: DocSummary | null;
+  /** 开关配置 */
+  Switch?: DocSwitch | null;
+  /** 更新周期配置 */
+  UpdatePeriod?: DocUpdatePeriod | null;
+  /** 用户访问配置 */
+  UserAccessConfig?: UserAccessConfig | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDocSummaryListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：Status-文档状态,枚举值,精确匹配; CategoryId-分类ID,精确匹配; SourceType-文档来源类型,枚举值,精确匹配; EffectiveDomain-生效作用域,精确匹配; CreateTime-创建时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; UpdateTime-更新时间,Unix秒,BETWEEN 传 [起始秒,结束秒] */
+  FilterList?: Filter[];
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+  /** 查询条件（关键词 + 查询范围） */
+  Query?: DocQuery;
+  /** 开关配置 */
+  SummaryListSwitch?: SummaryListSwitch;
+}
+
+declare interface DescribeDocSummaryListResponse {
+  /** 文档列表 */
+  DocList?: DocSummary[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKBRequest {
+  /** 知识库 ID */
+  KbId: string;
+  /** 工作空间 ID */
+  SpaceId?: string;
+}
+
+declare interface DescribeKBResponse {
+  /** 关联的应用 ID 列表 */
+  AppIdList?: string[];
+  /** 容量信息 */
+  CapacityInfo?: KBCapacity | null;
+  /** ES 配置 */
+  EsConfig?: ESConfig | null;
+  /** 模型配置 */
+  ModelConfig?: KBModelConfig | null;
+  /** 所有者信息 */
+  Owner?: Operator | null;
+  /** 知识库摘要信息 */
+  Summary?: KBSummary | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeKBSummaryListRequest {
+  /** 工作空间 ID */
+  SpaceId: string;
+  /** 通用过滤 */
+  FilterList?: Filter[];
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+  /** 关键词 */
+  Query?: string;
+}
+
+declare interface DescribeKBSummaryListResponse {
+  /** 知识库列表 */
+  KbList?: KBSummary[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLabelRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 标签 ID */
+  LabelId: string;
+  /** 通用过滤 */
+  FilterList?: Filter[];
+  /** 滚动加载游标的标准词 ID（首次请求传 0，后续传上一页最后一条的 TermId） */
+  LastTermId?: string;
+  /** 每次加载数量，默认 10，最大 100 */
+  Limit?: number;
+  /** 关键词搜索 */
+  Query?: string;
+}
+
+declare interface DescribeLabelResponse {
+  /** 基础信息 */
+  Summary?: LabelSummary | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLabelSummaryListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 通用过滤 */
+  FilterList?: Filter[];
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+  /** 关键词搜索 */
+  Query?: string;
+  /** 开关配置 */
+  SummaryListSwitch?: SummaryListSwitch;
+}
+
+declare interface DescribeLabelSummaryListResponse {
+  /** 标签列表 */
+  LabelList?: LabelSummary[];
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3867,6 +5167,56 @@ declare interface DescribePluginSummaryListResponse {
   /** plugin_list */
   PluginList?: PluginSummary[];
   /** total_count */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQARequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** QA ID */
+  QaId: string;
+}
+
+declare interface DescribeQAResponse {
+  /** 分片高亮信息 */
+  HighlightList?: QASegmentHighlight[];
+  /** 分片内容 */
+  PageContent?: string;
+  /** 问题描述 */
+  QuestionDescription?: string;
+  /** 相似问列表 */
+  SimilarQuestionList?: SimilarQuestion[];
+  /** 基础信息 */
+  Summary?: QASummary | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQASummaryListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：Status-QA状态,枚举值,精确匹配; CategoryId-分类ID,精确匹配; SourceType-QA来源类型,枚举值,精确匹配; EffectiveDomain-生效作用域,精确匹配; DocId-关联文档ID,精确匹配; CreateTime-创建时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; UpdateTime-更新时间,Unix秒,BETWEEN 传 [起始秒,结束秒] */
+  FilterList?: Filter[];
+  /** 分页页码，从 0 开始 */
+  PageNumber?: number;
+  /** 每页数量，默认 10，最大 100 */
+  PageSize?: number;
+  /** 查询条件（关键词 + 查询范围） */
+  Query?: QAQuery;
+  /** 开关配置 */
+  SummaryListSwitch?: SummaryListSwitch;
+}
+
+declare interface DescribeQASummaryListResponse {
+  /** 未采纳数量 */
+  NotAcceptedCount?: number;
+  /** 待校验数量 */
+  PendingVerifyCount?: number;
+  /** QA 列表 */
+  QaList?: QASummary[];
+  /** 总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4086,6 +5436,22 @@ declare interface DescribeVariableResponse {
   RequestId?: string;
 }
 
+declare interface ExportQARequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 Values 为 OR 关系）：Status-QA状态,枚举值,精确匹配; CategoryId-分类ID,精确匹配; SourceType-QA来源类型,枚举值,精确匹配; EffectiveDomain-生效作用域,精确匹配; DocId-关联文档ID,精确匹配; CreateTime-创建时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; UpdateTime-更新时间,Unix秒,BETWEEN 传 [起始秒,结束秒]; QaId-QA ID列表,精确匹配,支持多值 */
+  FilterList?: Filter[];
+  /** 查询条件（关键词 + 查询范围），与 DescribeQASummaryList 保持一致 */
+  Query?: QAQuery;
+}
+
+declare interface ExportQAResponse {
+  /** 导出任务 ID（通过 DescribeAsyncTaskStatus 查询完成状态） */
+  ExportTaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface FavoritePluginRequest {
   /** 插件id */
   PluginId: string;
@@ -4106,6 +5472,20 @@ declare interface FavoriteSkillRequest {
 }
 
 declare interface FavoriteSkillResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ImportDocListRequest {
+  /** 待导入文档列表（数量：1~20） */
+  DocList: DocImportSpec[];
+  /** 知识库 ID */
+  KbId: string;
+}
+
+declare interface ImportDocListResponse {
+  /** 批量导入结果 */
+  ResultList?: OperationResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4174,6 +5554,24 @@ declare interface ModifyAppTriggerResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCategoryRequest {
+  /** 待修改的分类 ID（必须大于 0） */
+  CategoryId: string;
+  /** 分类类型（不可为 0，取值：1=文档分类，2=问答分类）枚举项枚举值描述CATEGORY_TYPE_UNKNOWN0CATEGORY_TYPE_DOC1文档分类CATEGORY_TYPE_QA2问答分类 */
+  CategoryType: number;
+  /** 修改字段内容（不可为空，与 update_mask 配合使用） */
+  Fields: CategoryModifyFields;
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 字段掩码：指定要修改的字段（支持的 Paths：Name） */
+  UpdateMask: FieldMask;
+}
+
+declare interface ModifyCategoryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyChannelRequest {
   /** 应用业务ID */
   AppId: string;
@@ -4188,6 +5586,24 @@ declare interface ModifyChannelRequest {
 }
 
 declare interface ModifyChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyConflictQARequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 冲突组 ID（全局忽略时可不传） */
+  ConflictGroupId?: string;
+  /** 是否全局忽略（忽略当前KB下所有待处理冲突问） */
+  IsIgnoreAll?: boolean;
+  /** 决策涉及的 QA ID 列表（KEEP 与 DELETE 必填） */
+  QaIdList?: string[];
+  /** 冲突解决策略：1=保留，2=忽略，3=删除（全局忽略时可不传）枚举项枚举值描述CONFLICT_RESOLUTION_UNKNOWN0CONFLICT_RESOLUTION_KEEP1保留CONFLICT_RESOLUTION_IGNORE2忽略CONFLICT_RESOLUTION_DELETE3删除CONFLICT_RESOLUTION_MERGE4合并CONFLICT_RESOLUTION_REPLACE5替换CONFLICT_RESOLUTION_RENAME6重命名 */
+  Resolution?: number;
+}
+
+declare interface ModifyConflictQAResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4214,6 +5630,82 @@ declare interface ModifyConversationRequest {
 }
 
 declare interface ModifyConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDocListRequest {
+  /** 待修改的文档 ID 列表（数量：1~20） */
+  DocIdList: string[];
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 归属分类 ID */
+  CategoryId?: string;
+  /** 生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy;
+  /** 外部链接 */
+  ExternalLink?: DocExternalLink;
+  /** 标签列表 */
+  LabelRefList?: LabelRefIdentityList;
+  /** 开关配置 */
+  Switch?: DocSwitch;
+}
+
+declare interface ModifyDocListResponse {
+  /** 批量修改结果 */
+  ResultList?: OperationResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDocRequest {
+  /** 文档 ID */
+  DocId: string;
+  /** 修改字段内容（不可为空，与 update_mask 配合使用） */
+  Fields: DocModifyFields;
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 字段掩码：指定要修改的字段（支持的 Paths：Name, CategoryId, EffectiveDomain, LabelRefList, ExternalLink, ExpirationPolicy, UpdatePeriod, Switch, ParseConfig, UserAccessConfig） */
+  UpdateMask: FieldMask;
+}
+
+declare interface ModifyDocResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyKBRequest {
+  /** 知识库 ID */
+  KbId: string;
+  /** 可写属性（与 update_mask 配合使用） */
+  Spec: KBSpec;
+  /** 字段掩码：指定要修改的字段（蛇形字段名），未列出的字段忽略 */
+  UpdateMask: FieldMask;
+  /** 扩展操作（用于承载无法归类到常规字段修改的特殊操作，例如触发超量恢复等；需在 update_mask 中同时传入 'extend_fields' 才会生效，取值参见 KBExtendedAction：1=触发恢复超量） */
+  ExtendFields?: KBModifyExtendFields;
+}
+
+declare interface ModifyKBResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLabelRequest {
+  /** 修改字段内容（不可为空，与 update_mask 配合使用） */
+  Fields: LabelModifyFields;
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 待修改的标签 ID */
+  LabelId: string;
+  /** 字段掩码：指定要修改的字段（支持的 Paths：Name, TermModifyList） */
+  UpdateMask: FieldMask;
+}
+
+declare interface ModifyLabelResponse {
+  /** 修改后的标签值（标准词 + 同义词列表） */
+  TermList?: LabelTerm[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4252,6 +5744,46 @@ declare interface ModifyPluginRequest {
 }
 
 declare interface ModifyPluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyQAListRequest {
+  /** 所属知识库 ID */
+  KbId: string;
+  /** 待修改的 QA ID 列表（数量：1~20） */
+  QaIdList: string[];
+  /** 分类 ID */
+  CategoryId?: string;
+  /** 生效作用域枚举项枚举值描述KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN0KNOWLEDGE_EFFECTIVE_DOMAIN_NONE1停用KNOWLEDGE_EFFECTIVE_DOMAIN_DEV2仅开发域KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE3仅发布域KNOWLEDGE_EFFECTIVE_DOMAIN_ALL4全域 */
+  EffectiveDomain?: number;
+  /** 过期策略（有效时间与超过有效时间后的行为） */
+  ExpirationPolicy?: ExpirationPolicy;
+  /** 是否采纳（校验通过） */
+  IsAccepted?: boolean;
+  /** 适用范围（标签条件列表） */
+  LabelRefList?: LabelRefIdentityList;
+}
+
+declare interface ModifyQAListResponse {
+  /** 批量修改结果 */
+  ResultList?: OperationResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyQARequest {
+  /** 修改字段内容（与 update_mask 配合使用） */
+  Fields: QAModifyFields;
+  /** 所属知识库 ID */
+  KbId: string;
+  /** QA ID */
+  QaId: string;
+  /** 字段掩码：指定要修改的字段（支持的 Paths：Question, Answer, CategoryId, DocId, LabelRefList, QuestionDescription, ExpirationPolicy, SimilarQuestionList, EffectiveDomain, IsAccepted） */
+  UpdateMask: FieldMask;
+}
+
+declare interface ModifyQAResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4418,6 +5950,26 @@ declare interface RunAppTriggerNowResponse {
   RequestId?: string;
 }
 
+declare interface SearchKnowledgeRequest {
+  /** 检索高级配置 */
+  AdvancedConfig: SearchAdvancedConfig;
+  /** 检索输入 */
+  Input: SearchInput;
+  /** 检索上下文 */
+  Context?: SearchContext;
+  /** 计费信息 */
+  SearchBilling?: SearchBilling;
+}
+
+declare interface SearchKnowledgeResponse {
+  /** 检索结果列表 */
+  KnowledgeList?: KnowledgeResult[];
+  /** 消耗的 token 统计 */
+  TokenUsageList?: TokenUsage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnfavoritePluginRequest {
   /** 插件id */
   PluginId: string;
@@ -4445,6 +5997,8 @@ declare interface UnfavoriteSkillResponse {
 /** {@link Adp 腾讯云智能体开发平台} */
 declare interface Adp {
   (): Versions;
+  /** 校验标签下的标准词是否已存在 {@link CheckLabelRequest} {@link CheckLabelResponse} */
+  CheckLabel(data: CheckLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLabelResponse>;
   /** 复制 Agent {@link CopyAgentFromAppRequest} {@link CopyAgentFromAppResponse} */
   CopyAgentFromApp(data: CopyAgentFromAppRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAgentFromAppResponse>;
   /** 复制应用 {@link CopyAppRequest} {@link CopyAppResponse} */
@@ -4455,16 +6009,28 @@ declare interface Adp {
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 创建应用触发器 {@link CreateAppTriggerRequest} {@link CreateAppTriggerResponse} */
   CreateAppTrigger(data?: CreateAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppTriggerResponse>;
+  /** 创建分类 {@link CreateCategoryRequest} {@link CreateCategoryResponse} */
+  CreateCategory(data: CreateCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCategoryResponse>;
   /** 创建渠道 {@link CreateChannelRequest} {@link CreateChannelResponse} */
   CreateChannel(data: CreateChannelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateChannelResponse>;
   /** 新建会话 {@link CreateConversationRequest} {@link CreateConversationResponse} */
   CreateConversation(data: CreateConversationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConversationResponse>;
+  /** 创建知识库 {@link CreateKBRequest} {@link CreateKBResponse} */
+  CreateKB(data: CreateKBRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKBResponse>;
+  /** 创建标签 {@link CreateLabelRequest} {@link CreateLabelResponse} */
+  CreateLabel(data: CreateLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLabelResponse>;
   /** 创建消息记录分类 {@link CreateMsgRecordCategoryRequest} {@link CreateMsgRecordCategoryResponse} */
   CreateMsgRecordCategory(data: CreateMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMsgRecordCategoryResponse>;
   /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
   CreatePlugin(data: CreatePluginRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePluginResponse>;
+  /** 创建 QA 生成任务 {@link CreateQAGenerationTaskRequest} {@link CreateQAGenerationTaskResponse} */
+  CreateQAGenerationTask(data: CreateQAGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAGenerationTaskResponse>;
+  /** 批量创建 QA {@link CreateQAListRequest} {@link CreateQAListResponse} */
+  CreateQAList(data: CreateQAListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAListResponse>;
   /** 新增发布任务 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
   CreateRelease(data: CreateReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseResponse>;
+  /** 创建相似问生成任务 {@link CreateSimilarQuestionRequest} {@link CreateSimilarQuestionResponse} */
+  CreateSimilarQuestion(data: CreateSimilarQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSimilarQuestionResponse>;
   /** 创建skill {@link CreateSkillRequest} {@link CreateSkillResponse} */
   CreateSkill(data: CreateSkillRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSkillResponse>;
   /** 创建Skill企业共享 {@link CreateSkillShareRequest} {@link CreateSkillShareResponse} */
@@ -4483,14 +6049,24 @@ declare interface Adp {
   DeleteApp(data: DeleteAppRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppResponse>;
   /** 删除应用触发器 {@link DeleteAppTriggerRequest} {@link DeleteAppTriggerResponse} */
   DeleteAppTrigger(data?: DeleteAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAppTriggerResponse>;
+  /** 删除分类 {@link DeleteCategoryRequest} {@link DeleteCategoryResponse} */
+  DeleteCategory(data: DeleteCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCategoryResponse>;
   /** 删除渠道 {@link DeleteChannelRequest} {@link DeleteChannelResponse} */
   DeleteChannel(data: DeleteChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteChannelResponse>;
   /** 删除会话 {@link DeleteConversationRequest} {@link DeleteConversationResponse} */
   DeleteConversation(data: DeleteConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConversationResponse>;
+  /** 批量删除文档 {@link DeleteDocListRequest} {@link DeleteDocListResponse} */
+  DeleteDocList(data: DeleteDocListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDocListResponse>;
+  /** 删除知识库 {@link DeleteKBRequest} {@link DeleteKBResponse} */
+  DeleteKB(data: DeleteKBRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteKBResponse>;
+  /** 批量删除标签 {@link DeleteLabelListRequest} {@link DeleteLabelListResponse} */
+  DeleteLabelList(data: DeleteLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLabelListResponse>;
   /** 删除消息记录分类 {@link DeleteMsgRecordCategoryRequest} {@link DeleteMsgRecordCategoryResponse} */
   DeleteMsgRecordCategory(data: DeleteMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMsgRecordCategoryResponse>;
   /** 删除插件 {@link DeletePluginRequest} {@link DeletePluginResponse} */
   DeletePlugin(data: DeletePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePluginResponse>;
+  /** 批量删除 QA {@link DeleteQAListRequest} {@link DeleteQAListResponse} */
+  DeleteQAList(data: DeleteQAListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAListResponse>;
   /** 删除Skill {@link DeleteSkillRequest} {@link DeleteSkillResponse} */
   DeleteSkill(data: DeleteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSkillResponse>;
   /** 删除Skill企业共享 {@link DeleteSkillShareRequest} {@link DeleteSkillShareResponse} */
@@ -4523,12 +6099,18 @@ declare interface Adp {
   DescribeAuditLogList(data?: DescribeAuditLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogListResponse>;
   /** 获取审计日志元信息 {@link DescribeAuditLogMetaRequest} {@link DescribeAuditLogMetaResponse} */
   DescribeAuditLogMeta(data?: DescribeAuditLogMetaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogMetaResponse>;
+  /** 查询分类列表 {@link DescribeCategoryListRequest} {@link DescribeCategoryListResponse} */
+  DescribeCategoryList(data: DescribeCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCategoryListResponse>;
   /** 查询渠道 {@link DescribeChannelRequest} {@link DescribeChannelResponse} */
   DescribeChannel(data: DescribeChannelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelResponse>;
   /** 查询渠道列表 {@link DescribeChannelListRequest} {@link DescribeChannelListResponse} */
   DescribeChannelList(data: DescribeChannelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeChannelListResponse>;
   /** 查询并发超限明细 {@link DescribeConcurrencyLimitDetailListRequest} {@link DescribeConcurrencyLimitDetailListResponse} */
   DescribeConcurrencyLimitDetailList(data: DescribeConcurrencyLimitDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrencyLimitDetailListResponse>;
+  /** 查询冲突问详情 {@link DescribeConflictQARequest} {@link DescribeConflictQAResponse} */
+  DescribeConflictQA(data: DescribeConflictQARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConflictQAResponse>;
+  /** 查询冲突问列表 {@link DescribeConflictQASummaryListRequest} {@link DescribeConflictQASummaryListResponse} */
+  DescribeConflictQASummaryList(data: DescribeConflictQASummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConflictQASummaryListResponse>;
   /** 查询资源消耗明细 {@link DescribeConsumptionDetailListRequest} {@link DescribeConsumptionDetailListResponse} */
   DescribeConsumptionDetailList(data: DescribeConsumptionDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumptionDetailListResponse>;
   /** 查看会话信息 {@link DescribeConversationRequest} {@link DescribeConversationResponse} */
@@ -4537,6 +6119,18 @@ declare interface Adp {
   DescribeConversationList(data: DescribeConversationListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationListResponse>;
   /** 获取会话历史消息 {@link DescribeConversationMessageListRequest} {@link DescribeConversationMessageListResponse} */
   DescribeConversationMessageList(data: DescribeConversationMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConversationMessageListResponse>;
+  /** 查询文档详情 {@link DescribeDocRequest} {@link DescribeDocResponse} */
+  DescribeDoc(data: DescribeDocRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocResponse>;
+  /** 查询文档摘要列表 {@link DescribeDocSummaryListRequest} {@link DescribeDocSummaryListResponse} */
+  DescribeDocSummaryList(data: DescribeDocSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDocSummaryListResponse>;
+  /** 查询知识库详情 {@link DescribeKBRequest} {@link DescribeKBResponse} */
+  DescribeKB(data: DescribeKBRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBResponse>;
+  /** 查询知识库列表 {@link DescribeKBSummaryListRequest} {@link DescribeKBSummaryListResponse} */
+  DescribeKBSummaryList(data: DescribeKBSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeKBSummaryListResponse>;
+  /** 查询标签详情 {@link DescribeLabelRequest} {@link DescribeLabelResponse} */
+  DescribeLabel(data: DescribeLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLabelResponse>;
+  /** 查询标签列表 {@link DescribeLabelSummaryListRequest} {@link DescribeLabelSummaryListResponse} */
+  DescribeLabelSummaryList(data: DescribeLabelSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLabelSummaryListResponse>;
   /** 拉取最新发布信息 {@link DescribeLatestReleaseRequest} {@link DescribeLatestReleaseResponse} */
   DescribeLatestRelease(data: DescribeLatestReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLatestReleaseResponse>;
   /** 查询看板总览KPI卡片 {@link DescribeMetricOverviewListRequest} {@link DescribeMetricOverviewListResponse} */
@@ -4551,6 +6145,10 @@ declare interface Adp {
   DescribePlugin(data: DescribePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginResponse>;
   /** 获取插件概要列表 {@link DescribePluginSummaryListRequest} {@link DescribePluginSummaryListResponse} */
   DescribePluginSummaryList(data: DescribePluginSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginSummaryListResponse>;
+  /** 查询 QA 详情 {@link DescribeQARequest} {@link DescribeQAResponse} */
+  DescribeQA(data: DescribeQARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQAResponse>;
+  /** 查询 QA 列表 {@link DescribeQASummaryListRequest} {@link DescribeQASummaryListResponse} */
+  DescribeQASummaryList(data: DescribeQASummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQASummaryListResponse>;
   /** 发布记录列表 {@link DescribeReleaseListRequest} {@link DescribeReleaseListResponse} */
   DescribeReleaseList(data: DescribeReleaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseListResponse>;
   /** 查询发布任务 {@link DescribeReleaseSummaryRequest} {@link DescribeReleaseSummaryResponse} */
@@ -4575,24 +6173,44 @@ declare interface Adp {
   DescribeVariable(data: DescribeVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableResponse>;
   /** 获取参数变量列表 {@link DescribeVariableListRequest} {@link DescribeVariableListResponse} */
   DescribeVariableList(data: DescribeVariableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableListResponse>;
+  /** 异步导出 QA {@link ExportQARequest} {@link ExportQAResponse} */
+  ExportQA(data: ExportQARequest, config?: AxiosRequestConfig): AxiosPromise<ExportQAResponse>;
   /** 收藏插件 {@link FavoritePluginRequest} {@link FavoritePluginResponse} */
   FavoritePlugin(data: FavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<FavoritePluginResponse>;
   /** 收藏skill {@link FavoriteSkillRequest} {@link FavoriteSkillResponse} */
   FavoriteSkill(data: FavoriteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<FavoriteSkillResponse>;
+  /** 批量导入文档 {@link ImportDocListRequest} {@link ImportDocListResponse} */
+  ImportDocList(data: ImportDocListRequest, config?: AxiosRequestConfig): AxiosPromise<ImportDocListResponse>;
   /** 修改Agent配置 {@link ModifyAgentRequest} {@link ModifyAgentResponse} */
   ModifyAgent(data?: ModifyAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentResponse>;
   /** 修改应用 {@link ModifyAppRequest} {@link ModifyAppResponse} */
   ModifyApp(data: ModifyAppRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppResponse>;
   /** 修改应用触发器 {@link ModifyAppTriggerRequest} {@link ModifyAppTriggerResponse} */
   ModifyAppTrigger(data?: ModifyAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAppTriggerResponse>;
+  /** 修改分类 {@link ModifyCategoryRequest} {@link ModifyCategoryResponse} */
+  ModifyCategory(data: ModifyCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCategoryResponse>;
   /** 更新渠道 {@link ModifyChannelRequest} {@link ModifyChannelResponse} */
   ModifyChannel(data: ModifyChannelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyChannelResponse>;
+  /** 修改冲突问 {@link ModifyConflictQARequest} {@link ModifyConflictQAResponse} */
+  ModifyConflictQA(data: ModifyConflictQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConflictQAResponse>;
   /** 修改会话信息 {@link ModifyConversationRequest} {@link ModifyConversationResponse} */
   ModifyConversation(data: ModifyConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConversationResponse>;
+  /** 修改单个文档 {@link ModifyDocRequest} {@link ModifyDocResponse} */
+  ModifyDoc(data: ModifyDocRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocResponse>;
+  /** 批量修改文档 {@link ModifyDocListRequest} {@link ModifyDocListResponse} */
+  ModifyDocList(data: ModifyDocListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDocListResponse>;
+  /** 修改知识库 {@link ModifyKBRequest} {@link ModifyKBResponse} */
+  ModifyKB(data: ModifyKBRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKBResponse>;
+  /** 修改标签 {@link ModifyLabelRequest} {@link ModifyLabelResponse} */
+  ModifyLabel(data: ModifyLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabelResponse>;
   /** 修改消息记录分类 {@link ModifyMsgRecordCategoryRequest} {@link ModifyMsgRecordCategoryResponse} */
   ModifyMsgRecordCategory(data: ModifyMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMsgRecordCategoryResponse>;
   /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */
   ModifyPlugin(data: ModifyPluginRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPluginResponse>;
+  /** 修改单个 QA {@link ModifyQARequest} {@link ModifyQAResponse} */
+  ModifyQA(data: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
+  /** 批量修改 QA {@link ModifyQAListRequest} {@link ModifyQAListResponse} */
+  ModifyQAList(data: ModifyQAListRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAListResponse>;
   /** 修改skill {@link ModifySkillRequest} {@link ModifySkillResponse} */
   ModifySkill(data: ModifySkillRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySkillResponse>;
   /** 编辑空间 {@link ModifySpaceRequest} {@link ModifySpaceResponse} */
@@ -4613,6 +6231,8 @@ declare interface Adp {
   RollbackRelease(data: RollbackReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackReleaseResponse>;
   /** 立即执行应用触发器 {@link RunAppTriggerNowRequest} {@link RunAppTriggerNowResponse} */
   RunAppTriggerNow(data?: RunAppTriggerNowRequest, config?: AxiosRequestConfig): AxiosPromise<RunAppTriggerNowResponse>;
+  /** 知识检索 {@link SearchKnowledgeRequest} {@link SearchKnowledgeResponse} */
+  SearchKnowledge(data: SearchKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKnowledgeResponse>;
   /** 取消收藏插件 {@link UnfavoritePluginRequest} {@link UnfavoritePluginResponse} */
   UnfavoritePlugin(data: UnfavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoritePluginResponse>;
   /** 取消收藏skill {@link UnfavoriteSkillRequest} {@link UnfavoriteSkillResponse} */

@@ -130,6 +130,7 @@ const SERVICE_VERSIONS = {
   cynosdb: ['2019-01-07'],
   dasb: ['2019-10-18'],
   dataagent: ['2025-05-13'],
+  databuddy: ['2026-07-15'],
   dayu: ['2018-07-09'],
   dbbrain: ['2021-05-27', '2019-10-16'],
   dbdc: ['2020-10-29'],

@@ -1300,6 +1300,50 @@ declare interface CustomTime {
   CacheTime?: number;
 }
 
+/** 自定义变量详情。 */
+declare interface CustomVariable {
+  /** 变量名称。需填写完整前缀：user.zone.* 表示站点级自定义变量，user.rule.* 表示规则级自定义变量。前缀后的自定义部分仅支持大小写字母、数字和下划线。变量名称区分大小写，长度不能超过 50 个字符。变量创建成功后，名称不可修改。 */
+  Name: string;
+  /** 变量初始值。支持使用常量字符串、变量以及公式。长度不能超过 255 个字符。 */
+  InitialValue?: string;
+  /** 变量描述。长度限制不超过 60 个字符。 */
+  Description?: string;
+}
+
+/** 自定义变量运算详情。 */
+declare interface CustomVariableOperation {
+  /** 子规则分支。此列表当前只支持填写一项规则，多填无效。 */
+  Branches?: CustomVariableOperationRuleBranch[] | null;
+  /** 规则注释。可以填写多个注释。 */
+  Description?: string[];
+}
+
+/** 自定义变量规则操作。 */
+declare interface CustomVariableOperationRuleAction {
+  /** 操作名称。名称需要与参数结构体对应，例如 Name=Set，则 SetParameters 必填。当前仅支持填写 Set。Set：自定义变量设置； */
+  Name: string;
+  /** 自定义变量设置参数。此参数中若存在多条运算，按照数组的顺序依次执行。当 Name 取值为 Set 时，该参数必填。 */
+  SetParameters?: SetParameters | null;
+}
+
+/** 自定义变量运算子规则分支。 */
+declare interface CustomVariableOperationRuleBranch {
+  /** 匹配条件。 */
+  Condition?: string;
+  /** 操作。注意：Actions 和 SubRules 不可同时为空。 */
+  Actions?: CustomVariableOperationRuleAction[] | null;
+  /** 子规则列表。此列表中若存在多条规则，按照从上往下的顺序依次执行。注意：SubRules 和 Actions 不可同时为空。且当前只支持填写一层 SubRules。 */
+  SubRules?: CustomVariableOperationSubRule[] | null;
+}
+
+/** 自定义变量运算子规则。 */
+declare interface CustomVariableOperationSubRule {
+  /** 子规则分支 */
+  Branches?: CustomVariableOperationRuleBranch[] | null;
+  /** 规则注释。 */
+  Description?: string[];
+}
+
 /** 负载均衡实例 HTTP/HTTPS 健康检查策略下可配置的自定义头部。 */
 declare interface CustomizedHeader {
   /** 自定义头部 Key。 */
@@ -2322,20 +2366,48 @@ declare interface InferenceEnvironmentVariable {
   Value?: string;
 }
 
+/** 推理服务硬件配置。 */
+declare interface InferenceHardwareConfig {
+  /** 推理服务单个实例分配的 GPU 卡数，当前仅支持整数值，且必须为 HardwareSpecId 对应规格的 AllowedGPUNums 中的可选值。若不填充，则使用所选 HardwareSpecId 规格对应的默认 GPUNum 值。 */
+  GPUNum?: number;
+  /** 推理服务单个实例分配的 CPU 核数，当前仅支持整数值。若不填充，则使用所选 HardwareSpecId 规格对应的默认 CPUNum 值。 */
+  CPUNum?: number;
+  /** 推理服务单实例分配的内存大小。单位：MB若不填充，则使用所选 HardwareSpecId 对应规格的默认 MemSize 值；若填充，则必须为 1024 的整数倍。 */
+  MemSize?: number;
+  /** 推理服务单实例分配的临时磁盘大小。单位：MB若不填充，则使用所选 HardwareSpecId 对应规格的默认 DiskSize 值；若填充，则必须为 1024 的整数倍。 */
+  DiskSize?: number;
+}
+
+/** 推理服务资源硬件配置的修改参数。 */
+declare interface InferenceHardwareConfigForModify {
+  /** 推理服务单实例分配的 CPU 核数，当前仅支持整数值。若不填充，则不修改。 */
+  CPUNum?: number;
+  /** 推理服务单实例分配的内存大小。单位：MB若不填充，则不修改；若填写，则必须为 1024 的整数倍。 */
+  MemSize?: number;
+  /** 推理服务单实例分配的临时磁盘大小。单位：MB若不填充，则不修改；若填充，则必须为 1024 的整数倍。 */
+  DiskSize?: number;
+}
+
 /** 推理硬件规格信息。 */
 declare interface InferenceHardwareSpecification {
-  /** 规格标识。 */
+  /** 规格标识。已废弃，参考使用字段 HardwareSpecId。 */
   Spec?: string;
+  /** 规格唯一标识 ID。 */
+  HardwareSpecId?: string;
   /** 规格名称。 */
   Name?: string;
-  /** CPU 核数。 */
-  CPUNum?: number;
-  /** 内存大小。单位为 MB。 */
-  MemSize?: number;
-  /** GPU 卡数。 */
+  /** 规格默认分配的 GPU 卡数。 */
   GPUNum?: number;
-  /** 显存大小。单位为 MB。 */
+  /** 规格默认分配的 CPU 核数。 */
+  CPUNum?: number;
+  /** 规格默认分配的内存大小。单位：MB */
+  MemSize?: number;
+  /** 规格默认分配的显存大小。单位：MB */
   GPUMemSize?: number;
+  /** 规格默认分配的磁盘大小。单位：MB */
+  DiskSize?: number;
+  /** 规格当前支持的 GPU 卡数列表。若不填充或填充空数组，则仅支持规格默认分配的 GPU 卡数。 */
+  AllowedGPUNums?: number[];
 }
 
 /** 推理服务人工设置实例配置。 */
@@ -2348,8 +2420,12 @@ declare interface InferenceManualInstanceConfig {
 declare interface InferenceResourceConfig {
   /** 扩容缩容的方式。取值有：Auto：根据请求量自动调整实例数量；Manual：人工设置固定的实例数量。 */
   ScalingMode: string;
-  /** 硬件规格。 */
-  HardwareSpec: string;
+  /** 硬件规格标识。已废弃，请参考使用 HardwareSpecId。 */
+  HardwareSpec?: string;
+  /** 硬件规格唯一标识 ID，可通过 DescribeInferenceHardwareSpecifications 接口获取当前站点支持的硬件规格。系统默认按照所选 HardwareSpecId 对应的硬件规格配置推理服务所需资源；如需调整，可通过 HardwareConfig 自定义硬件资源配置。 */
+  HardwareSpecId?: string;
+  /** 推理服务硬件配置。作为入参时，若未填充则按照所选 HardwareSpecId 规格的默认值配置硬件资源；若填充则优先按照填写值进行配置。 */
+  HardwareConfig?: InferenceHardwareConfig;
   /** 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。 */
   AutoScalingConfig?: InferenceAutoScalingConfig | null;
   /** 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。 */
@@ -2368,6 +2444,8 @@ declare interface InferenceResourceConfigForModify {
   ManualInstanceConfig?: InferenceManualInstanceConfig;
   /** 单实例的并发数。默认值为 1。 */
   Concurrency?: number;
+  /** 推理服务的硬件资源配置。 */
+  HardwareConfig?: InferenceHardwareConfigForModify;
 }
 
 /** 边缘推理弹性伸缩策略。 */
@@ -4034,12 +4112,16 @@ declare interface RuleEngineCustomActionParameterSchema {
 declare interface RuleEngineItem {
   /** 规则状态。取值有： enable: 启用； disable: 未启用。 */
   Status?: string;
-  /** 规则 ID。规则的唯一性标识，当调用 ModifyL7AccRules 时，该参数必填。 */
+  /** 规则 ID。规则的唯一性标识，当调用 ModifyL7AccRule 时，该参数必填。 */
   RuleId?: string;
   /** 规则名称。名称长度限制不超过 255 个字符。 */
   RuleName?: string;
   /** 规则注释。可以填写多个注释。 */
   Description?: string[];
+  /** 规则级自定义变量列表。CustomVariable.Name 需要使用 user.rule. 作为前缀。变量按照数组顺序依次初始化，InitialValue 支持引用站点级自定义变量，以及位于当前变量之前的规则级自定义变量，不支持引用当前变量自身或位于其后的规则级自定义变量。站点级自定义变量可通过 DescribeZoneCustomVariables 接口查询。当 Branches 为空时 CustomVariable 不允许填写，填写无效。 */
+  CustomVariables?: CustomVariable[] | null;
+  /** 规则级自定义变量运算详情。运算中支持引用站点级自定义变量和当前规则已定义的规则级自定义变量。站点级自定义变量可通过 DescribeZoneCustomVariables 接口查询。此列表当前只支持填写一项规则，多填无效。当 Branches 为空时 CustomVariableOperations 不允许填写，填写无效。 */
+  CustomVariableOperations?: CustomVariableOperation[] | null;
   /** 子规则分支。此列表当前只支持填写一项规则，多填无效。 */
   Branches?: RuleBranch[] | null;
   /** 规则优先级。仅作为出参使用。 */
@@ -4314,6 +4396,14 @@ declare interface SessionRateControl {
 declare interface SetContentIdentifierParameters {
   /** 内容标识id */
   ContentIdentifier?: string;
+}
+
+/** 自定义变量设置参数。 */
+declare interface SetParameters {
+  /** 自定义变量名称。自定义变量必须先被定义才可进行运算。 */
+  Name: string;
+  /** 自定义变量赋值。支持使用常量字符串、变量以及公式，不支持中文。长度不能超过 1000 个字符。 */
+  Value: string;
 }
 
 /** 共享CNAME明细 */

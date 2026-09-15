@@ -1098,6 +1098,8 @@ declare interface EsParam {
   RecordMappingMode?: string;
   /** 集群版 ES 连接协议，默认http协议枚举值：http： http协议https： https协议 */
   Protocol?: string;
+  /** 用户选择数据订阅任务的数据（如DTS）时，源数据的格式枚举值：Debezium： Debezium格式jsonCanal： Canal格式json */
+  SourceDataFormat?: string;
 }
 
 /** 消息字段与 es 索引的映射关系 */

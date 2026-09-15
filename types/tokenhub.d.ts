@@ -1187,8 +1187,10 @@ declare interface DescribeUsageRankListRequest {
   StartTime: string;
   /** 结束时间（开区间），RFC3339 格式。与 StartTime 的跨度最大 90 天。 */
   EndTime: string;
-  /** 指标族切换字段。tokens（默认）：Token 消耗图（statistics=sum），支持 Dimension = apikey/endpoint/modelsearch【待上线】：联网搜索调用次数（statistics=sum），仅支持 Dimension = model其他值返回 InvalidParameter。枚举值：tokens： tokens */
+  /** 指标族切换字段。tokens（默认）：Token 用量消耗（statistics=sum），支持 Dimension = apikey/endpoint/modelsearch：联网搜索调用次数（statistics=sum），仅支持 Dimension = modelapikey_usage: APIKey 锚定用量统计（某 APIKey 下按模型或接入点展开）（statistics=sum），支持 Dimension = endpoint/model其他值返回 InvalidParameter。 */
   MetricType?: string;
+  /** 锚定对象，用于缩小统计范围「在哪个具体对象之内」，MetricType 为 apikey_usage 时必填。各 MetricType 是否支持/如何使用 Anchor，见 MetricType 字段说明。 */
+  Anchor?: string;
   /** 维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。 */
   Target?: string;
   /** 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；> 10 天 → 86400。仅 ShowAll=false 时使用。 */
@@ -1197,14 +1199,16 @@ declare interface DescribeUsageRankListRequest {
   Offset?: number;
   /** 是否返回全量结果。false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含Series 时序点用于绘制曲线。true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。 */
   ShowAll?: boolean;
+  /** 排序指标键（可选），具体值见响应 MetricKeys。为空时按 MetricKeys[0] 降序排序（tokens/apikey_usage 族为 TotalToken，search 族为 SearchRequestCount）。非法值返回 InvalidParameter。 */
+  SortKey?: string;
 }
 
 declare interface DescribeUsageRankListResponse {
   /** 回填请求的统计维度。 */
   Dimension?: string;
-  /** 回填请求的指标族：tokens / search 。 */
+  /** 回填请求的指标族：取值同入参 MetricType（tokens / search / apikey_usage）枚举值：tokens： tokens */
   MetricType?: string;
-  /** 本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，按MetricType 区分：tokens=[Total,Input,Output,Cache]、search=[SearchRequestCount,SearchCount] */
+  /** 本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，按MetricType 区分：tokens=[TotalToken, InputTotalToken, OutputTotalToken, CacheTotalToken]search=[SearchRequestCount,SearchCount]apikey_usage=[TotalToken, InputTotalToken, OutputTotalToken, CacheTotalToken, RequestCount, RequestFailCount] */
   MetricKeys?: string[];
   /** 视图（数据来源） */
   ViewName?: string;
@@ -1222,12 +1226,14 @@ declare interface DescribeUsageRankListResponse {
   Limit?: number;
   /** Series 数组对应的时间戳序列（Unix 秒）。ShowAll=true 时为空数组。 */
   Timestamps?: number[];
-  /** 对象排行列表，按MetricKeys[0]降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。 */
+  /** 对象排行列表，按 SortKey 降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。 */
   TopList?: UsageRankItem[];
   /** 分页统计结果 */
   PageStats?: UsageStats;
   /** 总统计结果 */
   TotalStats?: UsageStats;
+  /** 排序指标键 */
+  SortKey?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

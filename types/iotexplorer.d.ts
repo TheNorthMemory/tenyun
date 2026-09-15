@@ -84,6 +84,34 @@ declare interface AuthMiniProgramAppInfo {
   IotAppName?: string;
 }
 
+/** 待查询的订单标识。OrderId 和 CustomOrderId 必须且只能填写一个。 */
+declare interface BatchDescribeTWeSeeOrdersEntry {
+  /** 订单 ID，与 CustomOrderId 二选一 */
+  OrderId?: string;
+  /** 自定义订单 ID，与 OrderId 二选一 */
+  CustomOrderId?: string;
+}
+
+/** 单个订单的查询结果。查询失败时 ErrorCode 和 ErrorMessage 非空。 */
+declare interface BatchDescribeTWeSeeOrdersResult {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 订单状态。枚举值：DELIVERED： 已发货DELIVERING： 发货中DELIVER_FAILED： 发货失败NOT_DELIVERED： 未发货 */
+  Status?: string;
+  /** 资源 ID */
+  ResourceId?: string;
+  /** 币种 */
+  Currency?: string;
+  /** 订单价格 */
+  Price?: string;
+  /** 自定义订单 ID */
+  CustomOrderId?: string;
+  /** 单个订单的查询错误码，查询成功时为空 */
+  ErrorCode?: string;
+  /** 单个订单的查询错误信息，查询成功时为空 */
+  ErrorMessage?: string;
+}
+
 /** 获取返回列表的详情。 */
 declare interface BatchProductionInfo {
   /** 量产ID */
@@ -1226,6 +1254,36 @@ declare interface SeeComprehensionResult {
   Keywords?: string[];
 }
 
+/** 待开通的 TWeSee 预付费订阅信息 */
+declare interface SeeCreateSubscriptionEntry {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType: string;
+  /** 套餐规格。可选值：- `BASIC`：基础版- `ADVANCED`：高级版 */
+  ServiceTier: string;
+  /** 订阅购买时长，单位：月 */
+  Period: number;
+  /** 自定义订单 ID */
+  CustomOrderId?: string;
+  /** 续费标识。可选值：- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费（默认）- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费 */
+  RenewFlag?: string;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+/** TWeSee 预付费订阅开通结果 */
+declare interface SeeCreateSubscriptionResult {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 订单状态 */
+  Status?: string;
+  /** 资源 ID */
+  ResourceId?: string;
+}
+
 /** TWeSee 任务删除条件 */
 declare interface SeeDeleteTaskCondition {
   /** 条件类型。枚举值：TaskId： 精确匹配任务 IDTimeRange： 匹配任务时间范围与指定范围有重合的任务。值的格式为 UnixTimestampStart,UnixTimestampEnd，其中起止时间均为秒级 UNIX 时间戳，且结束时间不早于起始时间CreateTimeBefore： 匹配在指定时间前创建的任务。值为秒级 UNIX 时间戳COSURI： 精确匹配任务来源 COS URI，值必须以 cos:// 开头COSURIPrefix： 按前缀匹配任务来源 COS URI，值必须以 cos:// 开头 */
@@ -1284,6 +1342,76 @@ declare interface SeeFaceRecognitionResult {
   Persons?: SeeTaskPersonInfo[];
 }
 
+/** TWeSee 直传对象列举选项 */
+declare interface SeeObjectListOptions {
+  /** 目录分隔符 */
+  Delimiter?: string;
+  /** 分页标记 */
+  Marker?: string;
+  /** 单页返回的最大对象数量 */
+  MaxKeys?: number;
+}
+
+/** TWeSee 直传对象列举结果 */
+declare interface SeeObjectListing {
+  /** 对象列表 */
+  Contents?: SeeObjectSummary[];
+  /** 子目录路径列表 */
+  CommonPrefixes?: string[];
+  /** 本次列举使用的目录分隔符 */
+  Delimiter?: string;
+  /** 是否还有后续分页数据 */
+  IsTruncated?: boolean;
+  /** 本次列举使用的分页标记 */
+  Marker?: string;
+  /** 本次列举的最大对象数量 */
+  MaxKeys?: number;
+  /** 下一页的分页标记 */
+  NextMarker?: string;
+  /** 本次列举的对象路径前缀 */
+  Prefix?: string;
+}
+
+/** TWeSee 直传对象元数据 */
+declare interface SeeObjectMetadata {
+  /** 对象 Key */
+  Key?: string;
+  /** 对象的 COS URI */
+  COSURI?: string;
+  /** 对象的 MIME 类型 */
+  ContentType?: string;
+  /** 对象大小，单位：字节 */
+  Size?: number;
+  /** 对象的 ETag */
+  ETag?: string;
+  /** 对象最后修改时间，秒级 UNIX 时间戳 */
+  LastModified?: number;
+  /** 对象的自定义元数据列表 */
+  Metadata?: SeeObjectMetadataEntry[];
+}
+
+/** TWeSee 直传对象自定义元数据项 */
+declare interface SeeObjectMetadataEntry {
+  /** 元数据名称 */
+  Name?: string;
+  /** 元数据值 */
+  Value?: string;
+}
+
+/** TWeSee 直传对象概要信息 */
+declare interface SeeObjectSummary {
+  /** 对象 Key */
+  Key?: string;
+  /** TWeSee 直传对象或目录的 COS URI */
+  COSURI?: string;
+  /** 对象大小，单位：字节 */
+  Size?: number;
+  /** 对象的 ETag */
+  ETag?: string;
+  /** 对象最后修改时间，秒级 UNIX 时间戳 */
+  LastModified?: number;
+}
+
 /** TWeSee 人员信息 */
 declare interface SeePersonInfo {
   /** 代表人脸列表 */
@@ -1296,6 +1424,32 @@ declare interface SeePersonInfo {
   PersonId?: string;
   /** 创建来源。0：自动识别；1：用户创建 */
   Source?: number;
+}
+
+/** 待续费的 TWeSee 预付费订阅信息 */
+declare interface SeeRenewSubscriptionEntry {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 算法类型。可选值：- `VID_COMP`：视频理解- `IMG_COMP`：图片理解 */
+  ServiceType: string;
+  /** 续费时长，单位：月 */
+  Period: number;
+  /** 自定义订单 ID */
+  CustomOrderId?: string;
+  /** 通道 ID */
+  ChannelId?: number;
+}
+
+/** TWeSee 预付费订阅续费结果 */
+declare interface SeeRenewSubscriptionResult {
+  /** 订单 ID */
+  OrderId?: string;
+  /** 订单状态 */
+  Status?: string;
+  /** 资源 ID */
+  ResourceId?: string;
 }
 
 /** TWeSee 统计数据点 */
@@ -1376,6 +1530,8 @@ declare interface SeeTaskInfo {
   UpdateTime?: number;
   /** 直传 COS 的对象 URI */
   COSURI?: string;
+  /** 任务的输入 URL */
+  InputURL?: string;
 }
 
 /** TWeSee 任务元数据 */
@@ -1938,6 +2094,10 @@ declare interface TargetInfo {
   ChannelId?: number;
   /** 缩略图路径 */
   Thumbnail?: string;
+  /** 搜索结果置信度枚举值：high： 高（精准匹配，或包括性的匹配）medium： 中（近义匹配）low： 低（模糊匹配，部分要素与用户 Query 可能不符合） */
+  Confidence?: string;
+  /** 任务信息当入参 WithTaskInfo = true 时，出参中会返回任务信息 */
+  TaskInfo?: SeeTaskInfo;
 }
 
 /** 缩略图信息 */
@@ -2174,6 +2334,30 @@ declare interface BatchCreateTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface BatchCreateTWeSeeSubscriptionRequest {
+  /** 待开通的订阅列表 */
+  Entries: SeeCreateSubscriptionEntry[];
+}
+
+declare interface BatchCreateTWeSeeSubscriptionResponse {
+  /** 订阅开通结果列表 */
+  Results?: SeeCreateSubscriptionResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchDescribeTWeSeeOrdersRequest {
+  /** 待查询的订单列表，最多 200 条 */
+  Entries: BatchDescribeTWeSeeOrdersEntry[];
+}
+
+declare interface BatchDescribeTWeSeeOrdersResponse {
+  /** 与请求 Entries 顺序一致的订单查询结果 */
+  Results?: BatchDescribeTWeSeeOrdersResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchInvokeTWeSeeRecognitionTaskRequest {
   /** 待执行的 TWeSee 语义理解任务列表 */
   Inputs: CreateVisionRecognitionTaskInput[];
@@ -2182,6 +2366,18 @@ declare interface BatchInvokeTWeSeeRecognitionTaskRequest {
 declare interface BatchInvokeTWeSeeRecognitionTaskResponse {
   /** TWeSee 语义理解任务的执行结果。与入参 Inputs 一一对应。 */
   Outputs?: InvokeVisionRecognitionTaskOutput[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchRenewTWeSeeSubscriptionRequest {
+  /** 待续费的订阅列表 */
+  Entries: SeeRenewSubscriptionEntry[];
+}
+
+declare interface BatchRenewTWeSeeSubscriptionResponse {
+  /** 订阅续费结果列表 */
+  Results?: SeeRenewSubscriptionResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6546,6 +6742,26 @@ declare interface ModifyTopicRuleResponse {
   RequestId?: string;
 }
 
+declare interface OperateTWeSeeDirectUploadObjectRequest {
+  /** TWeSee 直传对象或目录的 COS URI */
+  COSURI: string;
+  /** 操作类型。可选值：- `HeadObject`：查询对象元数据- `DeleteObject`：删除对象- `ListBucket`：列举对象 */
+  Operation: string;
+  /** 列举对象时使用的分页和目录选项 */
+  ListOptions?: SeeObjectListOptions;
+}
+
+declare interface OperateTWeSeeDirectUploadObjectResponse {
+  /** 对象列举结果 */
+  ListingResponse?: SeeObjectListing;
+  /** 对象元数据 */
+  ObjectResponse?: SeeObjectMetadata;
+  /** 操作结果状态码 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PauseTWeCallDeviceRequest {
   /** 设备列表 */
   DeviceList?: TWeCallInfo[];
@@ -7097,8 +7313,14 @@ declare interface Iotexplorer {
   ActivateTWeTalk(data: ActivateTWeTalkRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateTWeTalkResponse>;
   /** 批量创建 TWeSee 语义理解任务 {@link BatchCreateTWeSeeRecognitionTaskRequest} {@link BatchCreateTWeSeeRecognitionTaskResponse} */
   BatchCreateTWeSeeRecognitionTask(data: BatchCreateTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateTWeSeeRecognitionTaskResponse>;
+  /** 批量开通 TWeSee 预付费订阅 {@link BatchCreateTWeSeeSubscriptionRequest} {@link BatchCreateTWeSeeSubscriptionResponse} */
+  BatchCreateTWeSeeSubscription(data: BatchCreateTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<BatchCreateTWeSeeSubscriptionResponse>;
+  /** 批量查询 TWeSee 订单 {@link BatchDescribeTWeSeeOrdersRequest} {@link BatchDescribeTWeSeeOrdersResponse} */
+  BatchDescribeTWeSeeOrders(data: BatchDescribeTWeSeeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeTWeSeeOrdersResponse>;
   /** 批量同步执行 TWeSee 语义理解任务 {@link BatchInvokeTWeSeeRecognitionTaskRequest} {@link BatchInvokeTWeSeeRecognitionTaskResponse} */
   BatchInvokeTWeSeeRecognitionTask(data: BatchInvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchInvokeTWeSeeRecognitionTaskResponse>;
+  /** 批量续费 TWeSee 预付费订阅 {@link BatchRenewTWeSeeSubscriptionRequest} {@link BatchRenewTWeSeeSubscriptionResponse} */
+  BatchRenewTWeSeeSubscription(data: BatchRenewTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRenewTWeSeeSubscriptionResponse>;
   /** 批量升级固件 {@link BatchUpdateFirmwareRequest} {@link BatchUpdateFirmwareResponse} */
   BatchUpdateFirmware(data: BatchUpdateFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<BatchUpdateFirmwareResponse>;
   /** 绑定云存用户 {@link BindCloudStorageUserRequest} {@link BindCloudStorageUserResponse} */
@@ -7531,6 +7753,8 @@ declare interface Iotexplorer {
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
   /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */
   ModifyTopicRule(data: ModifyTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicRuleResponse>;
+  /** 操作 TWeSee 直传对象 {@link OperateTWeSeeDirectUploadObjectRequest} {@link OperateTWeSeeDirectUploadObjectResponse} */
+  OperateTWeSeeDirectUploadObject(data: OperateTWeSeeDirectUploadObjectRequest, config?: AxiosRequestConfig): AxiosPromise<OperateTWeSeeDirectUploadObjectResponse>;
   /** 暂停TWeCall激活设备 {@link PauseTWeCallDeviceRequest} {@link PauseTWeCallDeviceResponse} */
   PauseTWeCallDevice(data?: PauseTWeCallDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<PauseTWeCallDeviceResponse>;
   /** @deprecated 发布广播消息 {@link PublishBroadcastMessageRequest} {@link PublishBroadcastMessageResponse} */

@@ -1214,7 +1214,7 @@ declare interface ExportConfMeta {
   Classification?: string | null;
   /** 组件版本 */
   ServiceVersion?: string | null;
-  /** 导出配置参数 */
+  /** 导出配置参数 base64格式 */
   Properties?: string | null;
 }
 
