@@ -179,9 +179,9 @@ declare interface CreateIncrementalMigrationStrategyResponse {
 }
 
 declare interface CreateStorageCredentialsRequest {
-  /** 点播专业版[应用](/document/product/266/14574) ID。 */
+  /** 点播专业版应用 ID。 */
   SubAppId: number;
-  /** 按照下方语法组装好策略后，先序列化为字符串，再做 URL Encode，结果作为 Policy 字段入参。服务端会对该字段做 URL Decode，并按解析后的策略授予临时访问凭证权限，请按规范传入参数。注意： 1.策略语法参照[访问管理策略](/document/product/598/10603)。2.策略中不能包含 principal 元素。3.策略的 action 元素仅支持：name/vod:PutObject;name/vod:ListParts;name/vod:PostObject;name/vod:InitiateMultipartUpload;name/vod:UploadPart;name/vod:CompleteMultipartUpload;name/vod:AbortMultipartUpload;name/vod:ListMultipartUploads;4.策略的 resource 元素填写格式为：`qcs::vod:[存储地域]:uid/[账号AppID]:prefix//[点播应用ID]/[存储桶ID]/[存储路径]`，其中存储地域、账号 AppID、点播应用 ID、存储桶 ID 和存储路径要按需填写，其他内容不允许改动，例：`qcs:ap-chongqing:vod::uid/1231456789:prefix//1234567890/2ceds3ew323w3mu/file_path`。 */
+  /** 按照下方语法组装好策略后，先序列化为字符串，再做 URL Encode，结果作为 Policy 字段入参。服务端会对该字段做 URL Decode，并按解析后的策略授予临时访问凭证权限，请按规范传入参数。注意：1.策略语法参照访问管理策略。2.策略中不能包含 principal 元素。3.策略的 action 元素仅支持：name/vod:PutObject;name/vod:ListParts;name/vod:PostObject;name/vod:InitiateMultipartUpload;name/vod:UploadPart;name/vod:CompleteMultipartUpload;name/vod:AbortMultipartUpload;name/vod:ListMultipartUploads;4.策略的 resource 元素填写格式为：qcs::vod:[存储地域]:uid/[账号AppID]:prefix//[点播应用ID]/[存储桶ID]/[存储路径]，其中存储地域、账号 AppID、点播应用 ID、存储桶 ID 和存储路径要按需填写，其他内容不允许改动，例：qcs:ap-chongqing:vod::uid/1231456789:prefix//1234567890/2ceds3ew323w3mu/file_path。 */
   Policy: string;
   /** 指定临时证书的有效期，单位：秒。默认 1800 秒，最大 129600 秒。 */
   DurationSeconds?: number;
@@ -1711,7 +1711,7 @@ declare namespace V20180717 {
     Type: string;
     /** 人脸 ID 集合，当 Type为delete 时，该字段必填。 */
     FaceIds?: string[];
-    /** 人脸图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串集合，仅支持 jpeg、png 图片格式。当 Type为add 或 reset 时，该字段必填；数组长度限制：5 张图片。注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。 */
+    /** 人脸图片 Base64 编码后的字符串集合，仅支持 jpeg、png 图片格式。当 Type为add 或 reset 时，该字段必填；数组长度限制：5 张图片。注意：图片必须是单人像正面人脸较清晰的照片，像素不低于 200*200。 */
     FaceContents?: string[];
   }
 
@@ -1739,9 +1739,9 @@ declare namespace V20180717 {
     TagSet?: string[];
     /** 应用场景。 */
     UsageSet?: string[];
-    /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
   }
 
@@ -1761,9 +1761,9 @@ declare namespace V20180717 {
     TagSet?: string[];
     /** 关键词应用场景。 */
     UsageSet?: string[];
-    /** 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
-    /** 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 最后修改时间，使用 ISO 日期格式。 */
     UpdateTime?: string;
   }
 
@@ -2523,17 +2523,17 @@ declare namespace V20180717 {
 
   /** AIGC 生视频任务的用量。 */
   interface AigcVideoTaskUsage {
-    /** 输入 Token 数目。 */
+    /** 输入 Token 数目。仅使用 GV 的 omni 版本时取值有效。 */
     InputTokens?: number;
-    /** 思考产生的 Token 数目。 */
+    /** 思考产生的 Token 数目。仅使用 GV 的 omni 版本时取值有效。 */
     ThoughtTokens?: number;
-    /** 输入图片数目。 */
+    /** 输入图片数目。仅使用 Hailuo 的 H3 版本时取值有效。 */
     InputImageCount?: number;
-    /** 输入视频的时长。单位：秒。 */
+    /** 输入视频的时长。单位：秒。仅使用 Hailuo 的 H3 版本时取值有效。 */
     InputSeconds?: number;
-    /** 输出视频时长。单位：秒。 */
+    /** 输出视频时长。单位：秒。仅使用 Hailuo 的 H3 版本时取值有效。 */
     OutputSeconds?: number;
-    /** 输入输出总时长。默认值：秒。 */
+    /** 输入输出总时长。默认值：秒。仅使用 Hailuo 的 H3 版本时取值有效。 */
     TotalSeconds?: number;
   }
 
@@ -3449,7 +3449,7 @@ declare namespace V20180717 {
     Message?: string;
     /** 截取雪碧图文件 ID。 */
     FileId?: string;
-    /** 雪碧图规格，参见[雪碧图截图模板](https://cloud.tencent.com/document/product/266/33480)。 */
+    /** 雪碧图规格，参见雪碧图截图模板。 */
     Definition?: number;
     /** 雪碧图小图总数量。 */
     TotalCount?: number;
@@ -3479,7 +3479,7 @@ declare namespace V20180717 {
 
   /** 播放统计信息。 */
   interface DailyPlayStatInfo {
-    /** 播放媒体文件的日期，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 播放媒体文件的日期，使用 ISO 日期格式。 */
     Date?: string;
     /** 媒体文件ID。 */
     FileId?: string;
@@ -6219,9 +6219,9 @@ declare namespace V20180717 {
   interface OverrideTranscodeParameter {
     /** 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。 */
     Container?: string;
-    /** 是否去除视频数据，取值：0：保留；<\li>1：去除。<\li> */
+    /** 是否去除视频数据，取值：<li>0：保留；<\li><li>1：去除。<\li> */
     RemoveVideo?: number;
-    /** 是否去除音频数据，取值：0：保留；<\li>1：去除。<\li> */
+    /** 是否去除音频数据，取值：<li>0：保留；<\li><li>1：去除。<\li> */
     RemoveAudio?: number;
     /** 视频流配置参数。 */
     VideoTemplate?: VideoTemplateInfoForUpdate | null;
@@ -6229,6 +6229,8 @@ declare namespace V20180717 {
     AudioTemplate?: AudioTemplateInfoForUpdate | null;
     /** 极速高清转码配置参数。 */
     TEHDConfig?: TEHDConfigForUpdate | null;
+    /** 标准扩展字段，特殊用途使用。 */
+    StdExtInfo?: string;
   }
 
   /** 印花提取配置。 */
@@ -6841,11 +6843,11 @@ declare namespace V20180717 {
     MetaData?: MediaMetaData;
     /** 拉取上传完成后生成的播放地址。 */
     FileUrl?: string;
-    /** 任务类型为 Procedure 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
+    /** 任务类型为 Procedure 的任务 ID。若拉取上传时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
     ProcedureTaskId?: string;
-    /** 任务类型为 ReviewAudioVideo 的任务 ID。若[拉取上传](https://cloud.tencent.com/document/api/266/35575)时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
+    /** 任务类型为 ReviewAudioVideo 的任务 ID。若拉取上传时指定了媒体后续任务操作(Procedure)，当该任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。 */
     ReviewAudioVideoTaskId?: string;
-    /** 来源上下文，用于透传用户请求信息，[URL 拉取视频上传完成](https://cloud.tencent.com/document/product/266/7831)将返回该字段值，最长 1000 个字符。 */
+    /** 来源上下文，用于透传用户请求信息，URL 拉取视频上传完成将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
     /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
     SessionId?: string;
@@ -8329,7 +8331,7 @@ declare namespace V20180717 {
     Status?: string;
     /** 视频 ID。 */
     FileId?: string;
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；ReduceMediaBitrate：降码率任务；WechatDistribute：微信发布任务；ReviewAudioVideo：音视频审核任务。兼容 2017 版的任务类型：Transcode：视频转码任务；SnapshotByTimeOffset：视频截图任务；Concat：视频拼接任务；Clip：视频剪辑任务；ImageSprites：截取雪碧图任务。 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；ReduceMediaBitrate：降码率任务；WechatDistribute：微信发布任务；ReviewAudioVideo：音视频审核任务； MPSWorkflowTask：MPS 视频处理任务。兼容 2017 版的任务类型：Transcode：视频转码任务；SnapshotByTimeOffset：视频截图任务；Concat：视频拼接任务；Clip：视频剪辑任务；ImageSprites：截取雪碧图任务。 */
     TaskType?: string;
     /** 任务创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。 */
     CreateTime?: string;
@@ -9629,6 +9631,48 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface CreateAigcHunyuan3DTaskRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 生成 3D 模型的参考图片信息。入参限制：数组长度最大为1。ImageInfos、MultiViewImageInfos、Prompt 三个入参各自互斥，有且只能填写一个。 */
+    ImageInfos?: AigcHunyuan3DReferenceImageInfo[];
+    /** 用于生成 3D 模型的多视角图片信息。入参限制：数组长度必须在2-8之间，且必须包含 front 视角。ImageInfos、MultiViewImageInfos、Prompt 三个入参各自互斥，有且只能填写一个。 */
+    MultiViewImageInfos?: AigcHunyuan3DMultiViewImageInfo[];
+    /** 生成 3D 模型的提示词。入参限制：最长 1024 个 utf-8 字符。ImageInfos、MultiViewImageInfos、Prompt 三个入参各自互斥，有且只能填写一个。 */
+    Prompt?: string;
+    /** 生成类型。枚举值：Normal： 生成完整 3D 资产（几何 + 纹理）；Geometry： 只生成几何体（无纹理，输出速度更快）；Texture： 只生成纹理（需要填写 MeshInfos）默认值：Normal */
+    GenerateType?: string;
+    /** 用于生成 3D 模型的参考 3D 模型。入参限制：当填写 MeshInfos 时，则 GenerateType 取值必须为 Texture（贴纹理场景）。 */
+    MeshInfos?: AigcHunyuan3DMeshInfo[];
+    /** 是否开启输出 PBR 材质。枚举值：Enabled： 开启；Disabled： 关闭。默认值：Disabled */
+    EnablePBR?: string;
+    /** 面片数。仅 GenerateType 取值为 Normal 和 Geometry 时生效。取值范围：[3000, 1500000]默认值：500000 */
+    FaceCount?: number;
+    /** 是否保留 UV 展开。枚举值：Enabled： 保留；Disabled： 不保留。默认值：Disabled */
+    KeepUV?: string;
+    /** 结果格式。除默认返回的 obj 和 glb 外，附加输出的一种格式。枚举值：FBX： FBX 格式文件。 */
+    ResultFormat?: string;
+    /** 随机种子，同一 Seed 输入下结果可复现。取值范围：[0, 2147483647] */
+    Seed?: number;
+    /** 风格控制词。 */
+    Style?: string;
+    /** 任务的输出媒体文件配置。 */
+    OutputConfig?: AigcHunyuan3DOutputConfig;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+  }
+
+  interface CreateAigcHunyuan3DTaskResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface CreateAigcImageTaskRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
@@ -9658,7 +9702,7 @@ declare namespace V20180717 {
     SessionContext?: string;
     /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
     TasksPriority?: number;
-    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{"AdditionalParameters": "{\"size\":\"728x1024\"}"}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{"AdditionalParameters": "{\"size\":\"728*1024\"}"}支持设置透明图层：示例：{"AdditionalParameters": "{\"background\":\"transparent\"}"}Kling支持设置扩图参数，示例：{AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
+    /** 保留字段，特殊用途时使用。Hunyuan 3.0支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。示例：{"AdditionalParameters": "{\"size\":\"728x1024\"}"}OG支持自由设置分辨率宽高：计算像素大小，需要被16整除总像素数必须至少为655,360，且不得超过 8,294,400示例：{"AdditionalParameters": "{\"size\":\"728x1024\"}"}支持设置透明图层：示例：{"AdditionalParameters": "{\"background\":\"transparent\"}"}Kling支持设置扩图参数，示例：{"AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}通用约束：取值范围：[0, 2]；新图片整体面积不得超过原图片的 3 倍；可以通过 Prompt 字段传入正向提示词。示例说明：up_expansion_ratio：向上扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.1，则原图顶边距离新图顶边为 20 × 0.1 = 2，该区域为扩图范围。down_expansion_ratio：向下扩充范围，基于原图高度的倍数计算。若原图高 20，参数值为 0.2，则原图底边距离新图底边为 20 × 0.2 = 4，该区域为扩图范围。left_expansion_ratio：向左扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.3，则原图左边距离新图左边为 30 × 0.3 = 9，该区域为扩图范围。right_expansion_ratio：向右扩充范围，基于原图宽度的倍数计算。若原图宽 30，参数值为 0.4，则原图右边距离新图右边为 30 × 0.4 = 12，该区域为扩图范围。 */
     ExtInfo?: string;
   }
 
@@ -10668,7 +10712,7 @@ declare namespace V20180717 {
   interface DeleteAnimatedGraphicsTemplateRequest {
     /** 转动图模板唯一标识。 */
     Definition: number;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -11008,7 +11052,7 @@ declare namespace V20180717 {
   interface DeleteWordSamplesRequest {
     /** 关键词，数组长度限制：100 个词。 */
     Keywords: string[];
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -11492,7 +11536,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeDefaultDistributionConfigRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -11848,7 +11892,7 @@ declare namespace V20180717 {
   }
 
   interface DescribePersonSamplesRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 拉取的素材类型，可选值：UserDefine：用户自定义素材库；Default：系统默认素材库。默认值：UserDefine，拉取用户自定义素材库素材。说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且五官图片只返回一张。 */
     Type?: string;
@@ -12014,7 +12058,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeRoundPlaysRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 过滤条件：轮播播单标识，数组长度限制：100。 */
     RoundPlayIds?: string[];
@@ -12294,7 +12338,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTasksRequest {
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 过滤条件：任务状态，可选值：WAITING（等待中）、PROCESSING（处理中）、FINISH（已完成）。 */
     Status?: string;
@@ -12568,7 +12612,7 @@ declare namespace V20180717 {
     FunctionName: string;
     /** 接口参数，具体参数格式调用时与后端协调。 */
     FunctionArg: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
     /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
@@ -13634,7 +13678,7 @@ declare namespace V20180717 {
     Area: string;
     /** 开启或者关闭所选区域的域名加速，可选值：Enabled: 开启。Disabled：关闭。开启中国境内加速的域名，需要先[备案域名](/document/product/243/18905)。 */
     Status: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -13646,11 +13690,11 @@ declare namespace V20180717 {
   interface ModifyVodDomainConfigRequest {
     /** 域名。 */
     Domain: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** [Referer 防盗链](/document/product/266/14046)规则。 */
+    /** Referer 防盗链规则。 */
     RefererAuthPolicy?: RefererAuthPolicy;
-    /** [Key 防盗链](/document/product/266/14047)规则。 */
+    /** Key 防盗链规则。 */
     UrlSignatureAuthPolicy?: UrlSignatureAuthPolicy;
     /** QUIC 配置。 */
     QUICConfig?: DomainQUICConfig;
@@ -13952,7 +13996,7 @@ declare namespace V20180717 {
   interface PushUrlCacheRequest {
     /** 预热的 URL 列表，单次最多指定20个 URL。 */
     Urls: string[];
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
   }
 
@@ -14306,9 +14350,9 @@ declare namespace V20180717 {
     Domain: string;
     /** 本次接口调用的操作类型，可选值：Set：设置域名的 HTTPS 所需证书；Clear: 清空域名 HTTPS 配置，清空后该域名无法支持 HTTPS 访问。 */
     Operation: string;
-    /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
-    /** [腾讯云SSL](/document/product/400/7572) 上传的证书 ID。清空域名 HTTPS 配置时无需填写该字段。 */
+    /** 腾讯云SSL 上传的证书 ID。清空域名 HTTPS 配置时无需填写该字段。 */
     CertID?: string;
   }
 
@@ -14549,6 +14593,8 @@ declare interface Vod {
   CreateAigcCustomElement(data: V20180717.CreateAigcCustomElementRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomElementResponse>;
   /** 创建 AIGC 自定义音色 {@link V20180717.CreateAigcCustomVoiceRequest} {@link V20180717.CreateAigcCustomVoiceResponse} */
   CreateAigcCustomVoice(data: V20180717.CreateAigcCustomVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcCustomVoiceResponse>;
+  /** 创建 AIGC 混元 3D 任务 {@link V20180717.CreateAigcHunyuan3DTaskRequest} {@link V20180717.CreateAigcHunyuan3DTaskResponse} */
+  CreateAigcHunyuan3DTask(data: V20180717.CreateAigcHunyuan3DTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcHunyuan3DTaskResponse>;
   /** 创建 AIGC 生图任务 {@link V20180717.CreateAigcImageTaskRequest} {@link V20180717.CreateAigcImageTaskResponse} */
   CreateAigcImageTask(data: V20180717.CreateAigcImageTaskRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.CreateAigcImageTaskResponse>;
   /** 创建 AIGC 配额 {@link V20180717.CreateAigcQuotaRequest} {@link V20180717.CreateAigcQuotaResponse} */

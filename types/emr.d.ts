@@ -4023,6 +4023,10 @@ declare interface CreateCloudInstanceRequest {
   ComputeResourceGroupIds?: string[];
   /** 是否开启实例保护 */
   TerminateProtection?: boolean;
+  /** 是否启用emr-proxy枚举值：true： 启用false： 关闭 */
+  EnableEmrProxy?: boolean;
+  /** 日志存储服务实例id */
+  LogStoreID?: string;
 }
 
 declare interface CreateCloudInstanceResponse {

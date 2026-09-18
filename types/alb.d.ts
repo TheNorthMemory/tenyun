@@ -224,11 +224,11 @@ declare interface ListenerOutput {
   ListenerPort?: number;
   /** 监听器协议。 */
   ListenerProtocol?: string;
-  /** 监听器状态。取值:=- **Active**: 运行中。- **Provisioning**：创建中。- **Configuring**：变配中。- **ProvisionFailed**：创建失败 */
+  /** 监听器状态。取值:=Active: 运行中。Provisioning：创建中。Configuring：变配中。ProvisionFailed：创建失败 */
   ListenerStatus?: string;
   /** 监听器实例的最后变更时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00） */
   ModifyTime?: string;
-  /** 请求超时时间。 */
+  /** 连接请求超时时间。 */
   RequestTimeout?: number;
   /** 标签。 */
   Tags?: TagInfo[];
@@ -841,7 +841,7 @@ declare interface CreateListenerRequest {
   IdleTimeout?: number;
   /** 自定义监听名称。 长度为 1~255 个字符，必须是中文和无害字符串中的字符， 可包含中文、字母、数字、短划线（-）、正斜线（/）、半角句号（.）、下划线（_）。 */
   ListenerName?: string;
-  /** 请求超时时间。单位：秒。取值：1~600。默认值：60。如果在超时时间内后端服务器没有返回响应，负载均衡将放弃等待，并给客户端返回HTTP 504错误码。 */
+  /** 连接请求超时时间。单位：秒。取值：1~600。默认值：60。如果在超时时间内后端服务器没有返回响应，负载均衡将放弃等待，并给客户端返回HTTP 504错误码。 */
   RequestTimeout?: number;
   /** 安全策略 ID，格式为 tls- 后接 8 位字母数字。 */
   SecurityPolicyId?: string;
@@ -1144,13 +1144,13 @@ declare interface DescribeListenerDetailResponse {
   ListenerPort?: number;
   /** 监听协议。 */
   ListenerProtocol?: string;
-  /** 监听器状态。取值:=- **Active**: 运行中。- **Provisioning**：创建中。- **Configuring**：变配中。- **ProvisionFailed**：创建失败 */
+  /** 监听器状态。取值:=Active: 运行中。Provisioning：创建中。Configuring：变配中。ProvisionFailed：创建失败 */
   ListenerStatus?: string;
   /** 负载均衡实例 ID，格式为 alb- 后接 8 位字母数字。 */
   LoadBalancerId?: string;
   /** 监听器实例的最后变更时间。格式：ISO 8601（例如 2025-01-01T08:30:00+08:00） */
   ModifyTime?: string;
-  /** 请求超时时间。单位：秒。 */
+  /** 连接请求超时时间。单位：秒。 */
   RequestTimeout?: number;
   /** 安全策略 ID，格式为 tls- 后接 8 位字母数字。 */
   SecurityPolicyId?: string;

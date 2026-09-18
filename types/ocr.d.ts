@@ -270,6 +270,8 @@ declare interface CardWarnInfo {
   BlurScore?: number;
   /** 是否电子身份证0：否1：是电子身份证 */
   ElectronCheck?: number;
+  /** 是否存在反光枚举值：0： 正常1： 反光默认值：0 */
+  ReflectCheck?: number;
 }
 
 /** 单元格识别结果 */
@@ -4113,7 +4115,7 @@ declare interface IDCardOCRRequest {
   ImageUrl?: string;
   /** FRONT：身份证有照片的一面（人像面），BACK：身份证有国徽的一面（国徽面），该参数如果不填，将为您自动判断身份证正反面。 */
   CardSide?: string;
-  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
+  /** 以下可选字段均为bool 类型，默认false：CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）CropPortrait，人像照片裁剪（自动抠取身份证头像区域）CopyWarn，复印件告警BorderCheckWarn，边框不完整和框内遮挡告警ReshootWarn，屏幕翻拍告警DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）TempIdWarn，临时身份证告警InvalidDateWarn，身份证有效日期不合法告警Quality，图片质量分数（评价图片的模糊程度）MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）ReflectWarn，是否开启反光检测KeyCheck，是否开启字段名称（Key）的完整性及反光检测ValueCheck，是否开启字段值（Value）的完整性及反光检测SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true} */
   Config?: string;
   /** 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。 */
   EnableRecognitionRectify?: boolean;
@@ -4142,7 +4144,7 @@ declare interface IDCardOCRResponse {
   Authority?: string;
   /** 证件有效期（国徽面） */
   ValidDate?: string;
-  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;WarnInfos，告警信息，Code 告警码列表和释义：-9109 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警（仅CardWarnType参数为Advanced时），-9111 水印告警 */
+  /** 扩展信息，不请求则不返回，具体输入参考示例3和示例4。IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;IsKeyValid， 字段名称（Key）的聚合检测结果，请求 Config.KeyCheck 时返回，所有字段名称均完整且无反光时返回true，否则返回false；IsValueValid，字段值（Value）的聚合检测结果，请求 Config.ValueCheck 时返回，所有字段值均完整且无反光时返回true，否则返回false；WarnInfos，告警信息，Code 告警码列表和释义：-9109 身份证有效日期不合法告警，-9101 身份证边框不完整告警，-9102 身份证复印件告警（黑白及彩色复印件）,-9108 身份证复印件告警（仅黑白复印件），-9103 身份证翻拍告警，-9105 身份证框内遮挡告警，-9104 临时身份证告警，-9106 身份证疑似存在PS痕迹告警，-9107 身份证反光告警，-9110 电子身份证告警（仅CardWarnType参数为Advanced时），-9111 水印告警 */
   AdvancedInfo?: string;
   /** 反光点覆盖区域详情结果，具体内容请点击左侧链接 */
   ReflectDetailInfos?: ReflectDetailInfo[];
@@ -4895,6 +4897,8 @@ declare interface RecognizeValidIDCardOCRRequest {
   EnableCopyCheck?: boolean;
   /** 默认值为false，打开返回证件是否存在屏幕翻拍。 */
   EnableReshootCheck?: boolean;
+  /** 默认值为false，打开返回是否存在反光。 */
+  EnableReflectCheck?: boolean;
   /** 默认值为false，打开返回证件是否存在PS。类型为：临时、港澳台居住证、外国人居住证失效 */
   EnablePSCheck?: boolean;
   /** 默认值为false，打开返回字段级反光和字段级完整性告警。类型为：临时、港澳台居住证、外国人居住证失效 */
@@ -5677,7 +5681,7 @@ declare interface Ocr {
   MixedInvoiceDetect(data: MixedInvoiceDetectRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceDetectResponse>;
   /** 混贴票据识别 {@link MixedInvoiceOCRRequest} {@link MixedInvoiceOCRResponse} */
   MixedInvoiceOCR(data?: MixedInvoiceOCRRequest, config?: AxiosRequestConfig): AxiosPromise<MixedInvoiceOCRResponse>;
-  /** 多模态解析（文档版） {@link MultimodalDocParseRequest} {@link MultimodalDocParseResponse} */
+  /** 多模态文档解析 {@link MultimodalDocParseRequest} {@link MultimodalDocParseResponse} */
   MultimodalDocParse(data: MultimodalDocParseRequest, config?: AxiosRequestConfig): AxiosPromise<MultimodalDocParseResponse>;
   /** 护照识别（中国大陆地区护照） {@link PassportOCRRequest} {@link PassportOCRResponse} */
   PassportOCR(data?: PassportOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PassportOCRResponse>;

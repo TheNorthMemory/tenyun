@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 添加好友事件详情 */
+declare interface AddFriendEvent {
+  /** 所属服务器ID，允许空串 */
+  ServerId: string;
+  /** 发送者信息 */
+  Sender?: Sender;
+  /** 接收者信息 */
+  Receiver?: Receiver;
+}
+
 /** 参加营销活动事件详情 */
 declare interface AddPromotionEvent {
   /** 营销活动ID */
@@ -192,6 +202,32 @@ declare interface ChargeBackEvent {
   ChargeBackAmount?: Amount;
   /** 与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
   Cust?: Cust[];
+}
+
+/** 聊天信息 */
+declare interface Chat {
+  /** 聊天文本内容，不含HTML、不含昵称，限2000字符 */
+  ChatText: string;
+  /** 频道类型，枚举值：world-世界 / guild-公会 / single-单聊 / other-其他 */
+  ChannelType: string;
+  /** 群/频道唯一ID（单聊时为空） */
+  GroupId?: string;
+  /** 群/频道名称 */
+  GroupName?: string;
+  /** 群主/管理员ID */
+  GroupAdministrator?: string;
+}
+
+/** 聊天消息事件详情 */
+declare interface ChatEvent {
+  /** 聊天信息 */
+  ChatInfo: Chat;
+  /** 所属服务器ID，允许空串 */
+  ServerId: string;
+  /** 发送者信息 */
+  Sender?: Sender;
+  /** 接收者信息 */
+  Receiver?: Receiver;
 }
 
 /** 领红包事件详情 */
@@ -424,6 +460,28 @@ declare interface EventDetail {
   ClaimRedPacket?: ClaimRedPacketEvent;
   /** 浏览 */
   Browse?: BrowseEvent;
+  /** 聊天消息 */
+  Chat?: ChatEvent;
+  /** 编辑角色资料 */
+  ModifyRole?: ModifyRoleEvent;
+  /** 添加好友 */
+  AddFriend?: AddFriendEvent;
+  /** 编辑公会资料 */
+  ModifyGuild?: ModifyGuildEvent;
+}
+
+/** 公会信息 */
+declare interface Guild {
+  /** 公会唯一ID */
+  GuildId: string;
+  /** 公会名称，允许空串 */
+  GuildName: string;
+  /** 公会签名，允许空串 */
+  GuildSignature: string;
+  /** 公会会长账号ID */
+  PresidentUserId?: string;
+  /** 公会会长角色ID */
+  PresidentRoleId?: string;
 }
 
 /** IP地理位置信息 */
@@ -634,12 +692,40 @@ declare interface ModifyAccountEvent {
   Cust?: Cust[];
 }
 
+/** 编辑公会资料事件详情 */
+declare interface ModifyGuildEvent {
+  /** 修改后的公会名，允许空串 */
+  GuildNameAfter: string;
+  /** 修改后的公会签名，允许空串 */
+  GuildSignatureAfter: string;
+  /** 所属服务器ID，允许空串 */
+  ServerId: string;
+  /** 编辑者账号信息 */
+  UserInfo?: User;
+  /** 公会信息 */
+  Guild?: Guild;
+}
+
 /** 修改密码事件详情 */
 declare interface ModifyPasswordEvent {
   /** 修改原因枚举值：user_modify： 用户主动修改forgot_password： 忘记密码forced_reset： 系统强制重置 */
   Reason?: string;
   /** 与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
   Cust?: Cust[];
+}
+
+/** 编辑角色资料事件详情 */
+declare interface ModifyRoleEvent {
+  /** 修改后的角色名，允许空串 */
+  RoleNameAfter: string;
+  /** 修改后的签名档，允许空串 */
+  RoleSignatureAfter: string;
+  /** 所属服务器ID，允许空串 */
+  ServerId: string;
+  /** 编辑者账号信息 */
+  UserInfo?: User;
+  /** 角色信息 */
+  RoleInfo?: Role;
 }
 
 /** 订单信息 */
@@ -728,6 +814,16 @@ declare interface PromotionCode {
   Items?: Item[];
 }
 
+/** 接收者信息 */
+declare interface Receiver {
+  /** 接收者账号ID */
+  UserId?: string;
+  /** 接收者账号信息 */
+  UserInfo?: User;
+  /** 接收者角色信息 */
+  RoleInfo?: Role;
+}
+
 /** 兑奖事件详情 */
 declare interface RedeemEvent {
   /** 营销活动ID */
@@ -778,6 +874,22 @@ declare interface RiskLabel {
   Id?: string;
   /** 风险描述 */
   Reason?: string;
+}
+
+/** 角色信息 */
+declare interface Role {
+  /** 角色ID */
+  RoleId?: string;
+  /** 角色名称 */
+  RoleName?: string;
+  /** 个性签名 */
+  RoleSignature?: string;
+  /** 角色等级 */
+  RoleLevel?: string;
+  /** 角色总战力 */
+  RoleCe?: number;
+  /** 角色创建时间 */
+  RoleCreateTime?: string;
 }
 
 /** 短信事件详情 */
@@ -832,6 +944,14 @@ declare interface SecurityVerificationEvent {
   VerificationResult?: Result;
   /** 与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
   Cust?: Cust[];
+}
+
+/** 发送者信息 */
+declare interface Sender {
+  /** 发送者账号信息 */
+  UserInfo?: User;
+  /** 发送者角色信息 */
+  RoleInfo?: Role;
 }
 
 /** 做任务事件详情 */
@@ -898,6 +1018,8 @@ declare interface User {
   UserPoint?: CreditPoint;
   /** 用户类型 */
   UserType?: string;
+  /** 是否付费账号 */
+  IsPaid?: boolean;
 }
 
 /** 数字钱包 */
@@ -969,7 +1091,7 @@ declare interface AssessEnvironmentRiskResponse {
 }
 
 declare interface AssessRiskRequest {
-  /** 事件码。用于指定业务接入的场景节点。 账号保护产品下的标准事件包含： login： 登录 register： 注册 sms： 短信 logout： 登出 modify_account： 修改账号 modify_password： 修改密码 security_verification： 安全验证交易保护产品下的标准事件包含：create_order： 创建订单 transaction： 交易支付 charge_back： 拒付营销保护产品下的标准事件包含：add_promotion： 参加营销活动 redeem： 兑奖 withdraw： 提现 cust_event： 自定义事件，cust_xxx scan_code： 扫码 lucky_draw： 抽奖 task： 做任务 invitation： 邀请 claim_red_packet： 领红包 browse： 浏览自定义事件可与RCE约定后进行风险评估 */
+  /** 事件码。用于指定业务接入的场景节点。账号保护产品下的标准事件包含：login： 登录register： 注册（创建账户）sms： 短信logout： 登出modify_account： 修改账号modify_password： 修改密码security_verification： 安全验证交易保护产品下的标准事件包含：create_order： 创建订单transaction： 交易支付charge_back： 拒付营销保护产品下的标准事件包含：add_promotion： 参与营销活动redeem： 兑奖withdraw： 提现scan_code： 扫码task： 做任务claim_red_packet： 领红包lucky_draw： 抽奖invitation： 邀请browse： 浏览社群保护产品下的标准事件包含：chat： 聊天消息modify_role： 编辑角色资料add_friend： 添加好友modify_guild： 编辑公会资料自定义事件以 cust_ 为前缀，可与 RCE 约定后进行风险评估。 */
   EventCode: string;
   /** 事件的发生时间参数格式：符合ISO 8601标准的带UTC时区的毫秒级时间 */
   EventTime: string;
@@ -1001,6 +1123,8 @@ declare interface AssessRiskRequest {
   QQOpenId?: string;
   /** QQ应用ID，当传入QQ开放账号时，该字段必填，QQ分配给网站或应用的AppId，用来唯一标识网站或应用 */
   QQAppId?: string;
+  /** 业务序列号，您系统中一次业务动作的流水号 */
+  BusinessId?: string;
 }
 
 declare interface AssessRiskResponse {
@@ -1011,7 +1135,7 @@ declare interface AssessRiskResponse {
 }
 
 declare interface ReportEventRequest {
-  /** 事件码。用于指定业务接入的场景节点。 账号保护产品下的标准事件包含： login： 登录 register： 注册 sms： 短信 logout： 登出 modify_account： 修改账号 modify_password： 修改密码 security_verification： 安全验证交易保护产品下的标准事件包含：create_order： 创建订单 transaction： 交易支付 charge_back： 拒付营销保护产品下的标准事件包含：add_promotion： 参加营销活动 redeem： 兑奖 withdraw： 提现 cust_event： 自定义事件，cust_xxx scan_code： 扫码 lucky_draw： 抽奖 task： 做任务 invitation： 邀请 claim_red_packet： 领红包 browse： 浏览自定义事件可与RCE约定后进行风险评估 */
+  /** 事件码。用于指定业务接入的场景节点。账号保护产品下的标准事件包含：login： 登录register： 注册（创建账户）sms： 短信logout： 登出modify_account： 修改账号modify_password： 修改密码security_verification： 安全验证交易保护产品下的标准事件包含：create_order： 创建订单transaction： 交易支付charge_back： 拒付营销保护产品下的标准事件包含：add_promotion： 参与营销活动redeem： 兑奖withdraw： 提现scan_code： 扫码task： 做任务claim_red_packet： 领红包lucky_draw： 抽奖invitation： 邀请browse： 浏览社群保护产品下的标准事件包含：chat： 聊天消息modify_role： 编辑角色资料add_friend： 添加好友modify_guild： 编辑公会资料自定义事件以 cust_ 为前缀，可与 RCE 约定后进行风险评估。 */
   EventCode: string;
   /** 事件的发生时间参数格式：符合ISO 8601标准的带UTC时区的毫秒级时间 */
   EventTime: string;
@@ -1043,6 +1167,8 @@ declare interface ReportEventRequest {
   QQOpenId?: string;
   /** QQ应用ID，当传入QQ开放账号时，该字段必填，QQ分配给网站或应用的AppId，用来唯一标识网站或应用 */
   QQAppId?: string;
+  /** 业务序列号，您系统中一次业务动作的流水号 */
+  BusinessId?: string;
 }
 
 declare interface ReportEventResponse {

@@ -330,6 +330,16 @@ declare interface CustomLogConfig {
   LogTopicId?: string;
 }
 
+/** 每日用量详情结构 */
+declare interface DailyUsageList {
+  /** 资源点用量 */
+  Credits?: number;
+  /** 资源点用量日期参数格式：YYYY-MM-DD */
+  Date?: string;
+  /** 原始资源用量 */
+  UsageValue?: number;
+}
+
 /** 数据库资源信息 */
 declare interface DatabasesInfo {
   /** 数据库唯一标识 */
@@ -704,7 +714,7 @@ declare interface HTTPServiceCacheAction {
   CacheKey?: HTTPServiceCacheKeyParams;
 }
 
-/** 自定义缓存键参数。约束：FullURLCache=on 与 QueryStringSwitch=on 互斥使用示例：- 整 URL 参与缓存键：{FullURLCache: "on", QueryStringSwitch: "off"}- URL 路径 + 仅保留 x/y：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "includeCustom", QueryStringValues: ["x", "y"]}- URL 路径 + 忽略 debug：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "excludeCustom", QueryStringValues: ["debug"]} */
+/** 自定义缓存键参数。约束：FullURLCache=on 与 QueryStringSwitch=on 互斥使用示例：- 整 URL 参与缓存键：{FullURLCache: "on", QueryStringSwitch: "off"}- 整 URL 不参与缓存键：{FullURLCache: "off", QueryStringSwitch: "off"}- URL 路径 + 仅保留 x/y：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "includeCustom", QueryStringValues: ["x", "y"]}- URL 路径 + 忽略 debug：{FullURLCache: "off", QueryStringSwitch: "on", QueryStringAction: "excludeCustom", QueryStringValues: ["debug"]} */
 declare interface HTTPServiceCacheKeyParams {
   /** 全 URL 缓存开关枚举值：on： 开启off： 关闭 */
   FullURLCache?: string;
@@ -712,7 +722,7 @@ declare interface HTTPServiceCacheKeyParams {
   QueryStringSwitch?: string;
   /** QueryStringSwitch=on 时必填枚举值：includeCustom： 白名单excludeCustom： 黑名单 */
   QueryStringAction?: string;
-  /** 参数名列表入参限制：最多 100 项，单项 1~128 字节 */
+  /** 参数名列表入参限制：最多 30 项，单项 1~128 字节 */
   QueryStringValues?: string[];
 }
 
@@ -774,7 +784,7 @@ declare interface HTTPServiceDomain {
   Domain?: string;
   /** 域名类型。 HTTPSERVICE: HTTP访问服务，CBR: 云托管服务，ANYSERVICE: 任意服务，AI_AGENT: AI agent，VM: 主机，INTEGRATION_CALLBACK: 集成回调 */
   DomainType?: string;
-  /** 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF） */
+  /** 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）枚举值：DIRECT： 直连到HTTP访问服务CDN： 接入云开发CDN（即将下线）EO： 接入云开发EdgeOneCUSTOM： 自定义接入类型（其他CDN或者WAF）NONE： 不接入，当使用泛域名接入时，可通过NONE来接入子域名，子域名证书及协议继承泛域名默认值：DIRECT */
   AccessType?: string;
   /** 证书ID。当前账户下SSL平台的证书ID */
   CertId?: string;
@@ -806,7 +816,7 @@ declare interface HTTPServiceDomain {
 declare interface HTTPServiceDomainParam {
   /** 域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败 */
   Domain: string;
-  /** 绑定类型枚举值：DIRECT： 直连到HTTP访问服务CDN： 接入云开发CDN（即将下线）CUSTOM： 自定义接入类型（CDN、EO、WAF等接入）EO： 接入云开发EdgeOne默认值：DIRECT */
+  /** 绑定类型枚举值：DIRECT： 直连到HTTP访问服务CDN： 接入云开发CDN（即将下线）EO： 接入云开发EdgeOneNONE： 不接入，当使用泛域名接入时，可通过NONE来接入子域名，子域名证书及协议继承泛域名默认值：DIRECT */
   AccessType?: string;
   /** 证书ID。当前账户下SSL平台的证书ID，无证书无法使用https访问 */
   CertId?: string;
@@ -826,7 +836,7 @@ declare interface HTTPServiceDomainParam {
 declare interface HTTPServiceExtension {
   /** 添加请求头列表 */
   HeadersHandler?: HTTPServiceHeadersHandler;
-  /** HTTPService 缓存配置，包含Cache 节点缓存 / MaxAge 浏览器缓存 / CacheKey 自定义缓存键 */
+  /** HTTPService 缓存配置，仅限自定义域名配置。包含Cache 节点缓存 / MaxAge 浏览器缓存 / CacheKey 自定义缓存键 */
   Cache?: HTTPServiceCacheSet;
 }
 
@@ -932,7 +942,7 @@ declare interface HTTPServiceRuleCondition {
   Target?: string;
   /** MatchType 字符串匹配类型枚举值：prefix： 前缀匹配suffix： 后缀匹配contains： 包含匹配exact： 精确匹配 */
   MatchType?: string;
-  /** Values 匹配值集合，Values 内任一命中即认为条件成立（OR 语义）入参限制：单项 1~1024 字节，最多 100 条 */
+  /** Values 匹配值集合，Values 内任一命中即认为条件成立（OR 语义）入参限制：单项 1~1024 字节，最多 30 条 */
   Values?: string[];
 }
 
@@ -1384,6 +1394,108 @@ declare interface PlanInfo {
   PackageType?: string;
   /** json格式化用户资源限制 */
   ResourceLimit?: string;
+}
+
+/** 平台版资源信息 */
+declare interface PlatFormResourceInfo {
+  /** 资源类系枚举值：log： 日志storage： 云存储hosting： 静态托管 */
+  ResType?: string;
+  /** 资源唯一标识 */
+  ResName?: string;
+  /** 资源详细信息 */
+  Detail?: string;
+  /** 资源状态枚举值：0： 正常5： 初始化中 */
+  Status?: number;
+  /** 资源id */
+  PlatformId?: number;
+  /** 对用平台资源id */
+  Id?: number;
+}
+
+/** 平台版本消耗数据 */
+declare interface PlatformCreditsUsageDaily {
+  /** 数据日期参数格式：YYYY-MM-DD */
+  Date?: string;
+  /** 资源点套餐内用量 */
+  DeductValue?: number;
+  /** 资源点资源包用量 */
+  PackageDeductValue?: number;
+  /** 资源点按量用量 */
+  ReportValue?: number;
+  /** 资源点原价消耗 */
+  OriginCredits?: number;
+}
+
+/** 平台版资源信息 */
+declare interface PlatformInfo {
+  /** 平台版套餐id */
+  PlatformId?: string;
+  /** 套餐别名 */
+  Alias?: string;
+  /** 套餐id */
+  PackageId?: string;
+  /** 计费状态枚举值：normal： 正常isolated： 已隔离destroyed： 已销毁 */
+  BillStatus?: string;
+  /** 套餐资源状态枚举值：0： 可用5： 发货中 */
+  Status?: number;
+  /** 资源配置 */
+  Spec?: string;
+  /** 购买时间参数格式：YYYY-MM-DD hh:mm:ss */
+  BillTime?: string;
+  /** 套餐过期时间参数格式：YYYY-MM-DD hh:mm:ss */
+  ExpireTime?: string;
+  /** 是否自动续费枚举值：0： 未设置1： 自动续费2： 设置为到期不续费 */
+  IsAutoRenew?: number;
+  /** 资源信息列表 */
+  Resources?: PlatFormResourceInfo[];
+  /** 所属地域枚举值：ap-shanghai： 上海ap-singapore： 新加坡 */
+  Region?: string;
+}
+
+/** 平台版指标用量信息 */
+declare interface PlatformMetricUsageItem {
+  /** 指标名称 */
+  MetricName?: string;
+  /** 原始资源类型枚举值：COS： 对象存储 */
+  OriginalResourceType?: string;
+  /** 原始指标 */
+  OriginalMetricName?: string;
+  /** 资源用量 */
+  UsageValue?: number;
+  /** 资源用量单位 */
+  UsageUnit?: string;
+  /** 资源点 */
+  Credits?: number;
+  /** 用量按日明细列表 */
+  DailyUsageList?: DailyUsageList[];
+}
+
+/** 模块内平台版资源点用量及原始用量数据结构 */
+declare interface PlatformPkgCreditsUsage {
+  /** 平台版套餐id */
+  PlatformId?: string;
+  /** 模块 */
+  Module?: string;
+  /** module总资源点用量 */
+  CreditsValue?: number;
+  /** 指标用量明细 */
+  MetricUsageDetail?: MetricUsage[];
+  /** 资源点套餐内用量 */
+  DeductValue?: number;
+  /** 资源点资源包用量 */
+  PackageDeductValue?: number;
+  /** 资源点按量用量 */
+  ReportValue?: number;
+}
+
+/** 平台版资源用量信息 */
+declare interface PlatformResUsageItem {
+  /** 资源类型枚举值：Storage： 云存储Function： 云函数 */
+  ResourceType?: string;
+  /** 资源点 */
+  TotalCredits?: number;
+  /** 指标用量信息 */
+  Metrics?: PlatformMetricUsageItem[];
 }
 
 /** PostgreSQL资源信息结构体 */
@@ -2204,6 +2316,22 @@ declare interface CreateMySQLRequest {
 declare interface CreateMySQLResponse {
   /** 开通结果 */
   Data?: CreateMySQLResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePlatformEnvRequest {
+  /** 环境别名 */
+  Alias: string;
+  /** 套餐池标识 */
+  PlatformId: string;
+  /** 幂等键 */
+  ReqKey: string;
+}
+
+declare interface CreatePlatformEnvResponse {
+  /** 环境id */
+  EnvId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3186,6 +3314,102 @@ declare interface DescribePGUserMigrationResponse {
   RequestId?: string;
 }
 
+declare interface DescribePlatformAccountCircleRequest {
+}
+
+declare interface DescribePlatformAccountCircleResponse {
+  /** 套餐计费周期开始时间 */
+  StartTime?: string;
+  /** 套餐计费周期结束时间 */
+  EndTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlatformCreditsUsageDetailRequest {
+  /** 模块列表枚举值：FLEXDB： 文档数据库TDSQL： MYSQL数据库SCF： 云函数AI： 大模型EKS： 云托管COS： 云存储HOSTING： 静态托管Auth： 用户权限APIInvocation： API调用HTTPInvocation： HTTP调用VM： 主机Workflow： 工作流Other： 其他PostgreSQL： PostgreSQLToken： Token */
+  Modules: string[];
+  /** 开始日期参数格式：YYYY-MM-DD */
+  StartDate: string;
+  /** 结束日期参数格式：YYYY-MM-DD */
+  EndDate: string;
+  /** 是否需要每日用量明细 */
+  NeedUsageDetails: boolean;
+  /** 平台版套餐id */
+  PlatformId: string;
+}
+
+declare interface DescribePlatformCreditsUsageDetailResponse {
+  /** 用量数据 */
+  Usages?: PlatformPkgCreditsUsage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlatformCreditsUsageRequest {
+  /** 开始日期参数格式：2025-09-22 */
+  StartDate: string;
+  /** 结束日期参数格式：2025-09-22 */
+  EndDate: string;
+  /** 平台版套餐id */
+  PlatformId: string;
+}
+
+declare interface DescribePlatformCreditsUsageResponse {
+  /** 资源点套餐内用量总和 */
+  DeductValueCount?: number;
+  /** 资源点资源包用量总和 */
+  PackageDeductValueCount?: number;
+  /** 资源点按量用量总和 */
+  ReportValueCount?: number;
+  /** 每日消耗具体数据 */
+  DailyList?: PlatformCreditsUsageDaily[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlatformEnvUsageRequest {
+  /** 环境Id */
+  EnvId: string;
+  /** 查询用量起始时间参数格式：YYYY-MM-DD */
+  StartDate?: string;
+  /** 查询用量结束时间参数格式：YYYY-MM-DD */
+  EndDate?: string;
+  /** 资源类型枚举值：Storage： 云存储Function： 云函数Database： 数据库 */
+  ResourceTypes?: string[];
+  /** 是否展示用量明细 */
+  NeedUsageDetails?: boolean;
+}
+
+declare interface DescribePlatformEnvUsageResponse {
+  /** 资源用量信息 */
+  Resources?: PlatformResUsageItem[];
+  /** 资源点 */
+  TotalCredits?: number;
+  /** 资源点取整倍数 */
+  CreditsScale?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlatformsRequest {
+  /** 平台版套餐id列表默认值：若不指定，则分页返回当前账号下所有平台版资源 */
+  PlatformIds?: string[];
+  /** 分页限制取值范围：[10, 100]默认值：10 */
+  Limit?: number;
+  /** 分页偏移量默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribePlatformsResponse {
+  /** 平台版资源列表 */
+  PlatformList?: PlatformInfo[];
+  /** 总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQuotaDataRequest {
   /** 环境ID */
   EnvId: string;
@@ -3344,6 +3568,16 @@ declare interface DestroyMySQLRequest {
 declare interface DestroyMySQLResponse {
   /** 销毁结果 */
   Data?: DestroyMySQLResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DestroyPlatformEnvRequest {
+  /** 环境id */
+  EnvId: string;
+}
+
+declare interface DestroyPlatformEnvResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3722,6 +3956,18 @@ declare interface ModifyPGInstanceSpecResponse {
   DealName?: string;
   /** 账单标识 */
   BillId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPlatformEnvRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 环境状态枚举值：ENABLE： 启用环境DISABLE： 禁用环境 */
+  Status?: string;
+}
+
+declare interface ModifyPlatformEnvResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4223,6 +4469,8 @@ declare interface Tcb {
   CreateHostingDomain(data: CreateHostingDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateHostingDomainResponse>;
   /** 开通 MySql {@link CreateMySQLRequest} {@link CreateMySQLResponse} */
   CreateMySQL(data: CreateMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMySQLResponse>;
+  /** 创建平台版套餐环境 {@link CreatePlatformEnvRequest} {@link CreatePlatformEnvResponse} */
+  CreatePlatformEnv(data: CreatePlatformEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlatformEnvResponse>;
   /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
   CreateStaticStore(data: CreateStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaticStoreResponse>;
   /** 创建文档型数据库表 {@link CreateTableRequest} {@link CreateTableResponse} */
@@ -4313,6 +4561,16 @@ declare interface Tcb {
   DescribeMySQLTaskStatus(data: DescribeMySQLTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMySQLTaskStatusResponse>;
   /** 查看指定环境单条 migration 详情 {@link DescribePGUserMigrationRequest} {@link DescribePGUserMigrationResponse} */
   DescribePGUserMigration(data: DescribePGUserMigrationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePGUserMigrationResponse>;
+  /** 查询平台版资源计费周期 {@link DescribePlatformAccountCircleRequest} {@link DescribePlatformAccountCircleResponse} */
+  DescribePlatformAccountCircle(data?: DescribePlatformAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformAccountCircleResponse>;
+  /** 获取平台版资源点用量 {@link DescribePlatformCreditsUsageRequest} {@link DescribePlatformCreditsUsageResponse} */
+  DescribePlatformCreditsUsage(data: DescribePlatformCreditsUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformCreditsUsageResponse>;
+  /** 获取平台版资源点用量明细 {@link DescribePlatformCreditsUsageDetailRequest} {@link DescribePlatformCreditsUsageDetailResponse} */
+  DescribePlatformCreditsUsageDetail(data: DescribePlatformCreditsUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformCreditsUsageDetailResponse>;
+  /** 查询平台版资源用量 {@link DescribePlatformEnvUsageRequest} {@link DescribePlatformEnvUsageResponse} */
+  DescribePlatformEnvUsage(data: DescribePlatformEnvUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformEnvUsageResponse>;
+  /** 查询平台版资源信息 {@link DescribePlatformsRequest} {@link DescribePlatformsResponse} */
+  DescribePlatforms(data?: DescribePlatformsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformsResponse>;
   /** 查询环境的配额使用量 {@link DescribeQuotaDataRequest} {@link DescribeQuotaDataResponse} */
   DescribeQuotaData(data: DescribeQuotaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaDataResponse>;
   /** 查询资源基础权限 {@link DescribeResourcePermissionRequest} {@link DescribeResourcePermissionResponse} */
@@ -4331,6 +4589,8 @@ declare interface Tcb {
   DestroyEnv(data: DestroyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyEnvResponse>;
   /** 销毁MySql {@link DestroyMySQLRequest} {@link DestroyMySQLResponse} */
   DestroyMySQL(data: DestroyMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyMySQLResponse>;
+  /** 删除平台版环境 {@link DestroyPlatformEnvRequest} {@link DestroyPlatformEnvResponse} */
+  DestroyPlatformEnv(data: DestroyPlatformEnvRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyPlatformEnvResponse>;
   /** 销毁静态托管资源 {@link DestroyStaticStoreRequest} {@link DestroyStaticStoreResponse} */
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
   /** 获取云函数地址并下载 {@link DownloadFunctionRequest} {@link DownloadFunctionResponse} */
@@ -4365,6 +4625,8 @@ declare interface Tcb {
   ModifyLoginConfig(data: ModifyLoginConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginConfigResponse>;
   /** 修改 PG 独享实例规格 {@link ModifyPGInstanceSpecRequest} {@link ModifyPGInstanceSpecResponse} */
   ModifyPGInstanceSpec(data: ModifyPGInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPGInstanceSpecResponse>;
+  /** 修改平台版环境信息 {@link ModifyPlatformEnvRequest} {@link ModifyPlatformEnvResponse} */
+  ModifyPlatformEnv(data: ModifyPlatformEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPlatformEnvResponse>;
   /** 修改第三方认证源 {@link ModifyProviderRequest} {@link ModifyProviderResponse} */
   ModifyProvider(data: ModifyProviderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProviderResponse>;
   /** 修改资源基础权限 {@link ModifyResourcePermissionRequest} {@link ModifyResourcePermissionResponse} */

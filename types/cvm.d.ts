@@ -508,6 +508,8 @@ declare interface Instance {
   LicenseType?: string;
   /** 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：true：表示开启实例保护，不允许通过api接口删除实例false：表示关闭实例保护，允许通过api接口删除实例默认取值：false。 */
   DisableApiTermination?: boolean;
+  /** 实例主机名。 */
+  HostName?: string;
   /** 默认登录用户。 */
   DefaultLoginUser?: string;
   /** 默认登录端口。 */

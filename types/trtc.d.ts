@@ -160,7 +160,7 @@ declare interface AudioEncodeParams {
 declare interface AudioFormat {
   /** 生成的音频格式，注意opus格式是ogg/opus编码TextToSpeechSSE 流式接口支持 pcm,mp3,opus 默认: pcmTextToSpeech 非流式接口支持 pcm,wav,mp3,opus 默认: pcmAsyncTextToSpeech支持pcm,mp3,opus 默认: mp3 */
   Format?: string;
-  /** 生成的音频采样率，默认24000可选1600024000 */
+  /** 生成的音频采样率，默认24000支持如下采样率80001600024000 */
   SampleRate?: number;
   /** MP3 比特率 (kbps)，仅对 MP3 格式生效, 可以选： 64, 128, 192, 256 , 默认： 128 */
   Bitrate?: number;

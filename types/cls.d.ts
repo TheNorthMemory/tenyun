@@ -2,6 +2,34 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 开启告警AI诊断。UserPrompt是给AI诊断告警时使用的提示词，比如请详细分析根因。AnalysisDataScope示例：{"DataScopeType":"CLSLogTopic","DataScopeEntry":[{"Key":"TopicId",Value:"work-topic"},{"Key":"Region",Value:"ap-guangzhou"}]} */
+declare interface AIAnalysis {
+  /** 是否开启告警AI诊断默认值：false */
+  Enable: boolean;
+  /** 是否显示诊断过程默认值：false */
+  HideProcess?: boolean;
+  /** AI诊断告警时给AI的提示词参数格式：请详细诊断根因 */
+  UserPrompt?: string;
+  /** AI 分析的数据范围 */
+  AnalysisDataScope?: AIAnalysisDataScope[];
+}
+
+/** AI 分析的数据范围。DataScopeType值是CLSLogTopic。DataScopeEntry是数组结构，TopicId类型和Region类型是必填。实例： [{"Key":"TopicId",Value:"work-topic"},{"Key":"Region",Value:"ap-guangzhou"}] */
+declare interface AIAnalysisDataScope {
+  /** 告警AI诊断时查询的数据范围（查询哪些日志主题） */
+  DataScopeEntry?: AIAnalysisDataScopeEntry[];
+  /** 告警AI诊断的数据范围类型枚举值：CLSLogTopic： 日志主题默认值：CLSLogTopic */
+  DataScopeType?: string;
+}
+
+/** AI 分析的数据范围配置，如CLS日志主题配置。Key如果设置为TopicId，Value是对应日志主题topic_id，Key如果设置为Region，Value是地域的英文名，在https://cloud.tencent.com/document/product/614/18940查询。 */
+declare interface AIAnalysisDataScopeEntry {
+  /** 值类型枚举值：TopicId： 日志主题IDRegion： 地域 */
+  Key?: string;
+  /** Key如果设置为TopicId，Value是对应日志主题topic_id 在https://cloud.tencent.com/document/product/614/56454 查询，Key如果设置为Region，Value是地域的英文名，在https://cloud.tencent.com/document/product/614/18940查询。 */
+  Value?: string;
+}
+
 /** DataSight访问控制规则 */
 declare interface AccessControlRule {
   /** 网段或IP，支持IPv4或IPv6。 */
@@ -88,7 +116,7 @@ declare interface AlarmInfo {
   TriggerCount?: number;
   /** 告警重复的周期。单位是min。取值范围是0~1440。 */
   AlarmPeriod?: number;
-  /** 关联的告警通知渠道组列表。-通过[获取通知渠道组列表](https://cloud.tencent.com/document/product/614/56462)获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
+  /** 关联的告警通知渠道组列表。-通过获取通知渠道组列表获取关联的告警通知渠道组列表，和MonitorNotice互斥 */
   AlarmNoticeIds?: string[];
   /** 开启状态。 */
   Status?: boolean;
@@ -120,6 +148,10 @@ declare interface AlarmInfo {
   MultiConditions?: MultiCondition[];
   /** 腾讯云可观测平台通知渠道相关信息，和AlarmNoticeIds互斥 */
   MonitorNotice?: MonitorNotice;
+  /** AI分析内容 */
+  AIAnalysis?: AIAnalysis;
+  /** 最后修改人的uin信息 */
+  SubUin?: number;
 }
 
 /** 告警通知渠道组详细配置 */
@@ -348,6 +380,36 @@ declare interface BaseMetricCollectConfig {
   GroupId?: string | null;
   /** 基础监控采集配置信息 */
   Configs?: MetricCollectConfig[] | null;
+}
+
+/** 跨账号投递任务信息 */
+declare interface CLSDeliverTaskInfo {
+  /** 任务id */
+  TaskId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 主账号id */
+  Uin?: number;
+  /** 源主题信息 */
+  SourceTopicConfig?: SourceTopicConfig;
+  /** 目标主题信息 */
+  TargetTopicConfig?: TargetTopicConfig;
+  /** 投递规则 */
+  DeliverRule?: DeliverRule;
+  /** 合规承诺 */
+  Compliance?: number;
+  /** 任务状态。枚举值：0： 运行中1： 已暂停2： 已完成3： 异常 */
+  Status?: number;
+  /** 状态 枚举值：0： 运行1： 暂停 */
+  Enable?: number;
+  /** 任务进度百分比 */
+  Progress?: number;
+  /** 是否开启投递服务日志。枚举值：1： 关闭2： 开启 */
+  HasServicesLog?: number;
+  /** 创建时间。单位：秒级时间戳 */
+  CreateTime?: number;
+  /** 更新时间单位：秒级时间戳 */
+  UpdateTime?: number;
 }
 
 /** 回调配置 */
@@ -1050,6 +1112,12 @@ declare interface DeliverConfig {
   TopicId: string;
   /** 投递数据范围。0: 全部日志, 包括告警策略日常周期执行的所有日志，也包括告警策略变更产生的日志，默认值1:仅告警触发及恢复日志 */
   Scope: number;
+}
+
+/** 投递规则 */
+declare interface DeliverRule {
+  /** 数据投递范围。枚举值：1： 历史+新增数据2： 自定义时间范围3： 仅新增本次仅支持3新增数据。后续支持： 2自定义时间范围和1历史+新增数据 */
+  DataScope: number;
 }
 
 /** 返回的内容 */
@@ -2848,6 +2916,22 @@ declare interface ShipperTaskInfo {
   Message?: string;
 }
 
+/** 源日志主题配置 */
+declare interface SourceTopicConfig {
+  /** 日志主题筛选方式。枚举值：1： 静态选择 */
+  TopicFilterType: number;
+  /** 源日志集id */
+  LogsetId: string;
+  /** 源日志主题列表TopicFilterType=1时必填 */
+  Topics?: SourceTopicInfo[];
+}
+
+/** 源日志主题信息 */
+declare interface SourceTopicInfo {
+  /** 日志主题id */
+  TopicId: string;
+}
+
 /** Splunk投递任务信息 */
 declare interface SplunkDeliverInfo {
   /** 任务id */
@@ -2894,6 +2978,22 @@ declare interface Tag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** 目标主题配置 */
+declare interface TargetTopicConfig {
+  /** 目标账号类型。枚举值：1： 当前主账号2： 其他主账号 */
+  AccountType: number;
+  /** 目标地域参数格式：ap-guangzhou */
+  Region: string;
+  /** 目标日志集id */
+  LogsetId: string;
+  /** 目标日志主题id */
+  TopicId: string;
+  /** 角色ARNAccountType=2时必填 */
+  RoleArn?: string;
+  /** 外部IDAccountType=2时必填 */
+  ExternalId?: string;
 }
 
 /** 模型生成的工具调用 */
@@ -3343,6 +3443,28 @@ declare interface CreateAlarmShieldRequest {
 
 declare interface CreateAlarmShieldResponse {
   /** 屏蔽规则ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCLSDeliverTaskRequest {
+  /** 任务名称参数格式：^[a-zA-Z0-9_-]{1,64}$ */
+  TaskName: string;
+  /** 源主题信息 */
+  SourceTopicConfig: SourceTopicConfig;
+  /** 目标主题信息 */
+  TargetTopicConfig: TargetTopicConfig;
+  /** 投递规则 */
+  DeliverRule: DeliverRule;
+  /** 合规承诺。枚举值：1： 同意数据跨域传输条款 */
+  Compliance: number;
+  /** 是否开启投递服务日志。枚举值：1： 关闭2： 开启默认值：2 */
+  HasServicesLog?: number;
+}
+
+declare interface CreateCLSDeliverTaskResponse {
+  /** 任务id */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4428,6 +4550,16 @@ declare interface DeleteAlarmShieldResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCLSDeliverTaskRequest {
+  /** 任务id */
+  TaskId: string;
+}
+
+declare interface DeleteCLSDeliverTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudProductLogCollectionRequest {
   /** 实例ID */
   InstanceId: string;
@@ -4984,6 +5116,24 @@ declare interface DescribeAlertRecordHistoryResponse {
   TotalCount?: number;
   /** 告警历史详情 */
   Records?: AlertHistoryRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCLSDeliverTasksRequest {
+  /** taskId 按照【任务id】进行过滤。 类型：String 必选：否 taskName 按照【任务名称】进行过滤。 类型：String 必选：否 sourceLogsetId 按照【源日志集】进行过滤。 类型：String 必选：否 targetLogsetId 按照【目标日志集】进行过滤。 类型：String 必选：否每次请求的Filters的上限为10，Filter.Values的上限为10。 */
+  Filters?: Filter[];
+  /** 分页的偏移量，默认值为0。 */
+  Offset?: number;
+  /** 分页单页限制数目，默认值为20，最大值100。 */
+  Limit?: number;
+}
+
+declare interface DescribeCLSDeliverTasksResponse {
+  /** 投递任务信息列表 */
+  Infos?: CLSDeliverTaskInfo[];
+  /** 符合条件的任务总数。 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6456,6 +6606,28 @@ declare interface ModifyAlarmShieldResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCLSDeliverTaskRequest {
+  /** 任务id */
+  TaskId: string;
+  /** 任务名称参数格式：^[a-zA-Z0-9_-]{1,64}$ */
+  TaskName?: string;
+  /** 源主题信息 */
+  SourceTopicConfig?: SourceTopicConfig;
+  /** 目标主题信息 */
+  TargetTopicConfig?: TargetTopicConfig;
+  /** 投递规则 */
+  DeliverRule?: DeliverRule;
+  /** 状态枚举值：0： 运行1： 暂停 */
+  Enable?: number;
+  /** 是否开启投递服务日志。枚举值：1： 关闭2： 开启 */
+  HasServicesLog?: number;
+}
+
+declare interface ModifyCLSDeliverTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudProductLogCollectionRequest {
   /** 实例ID */
   InstanceId: string;
@@ -7831,6 +8003,8 @@ declare interface Cls {
   CreateAlarmNotice(data: CreateAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmNoticeResponse>;
   /** 创建告警屏蔽规则 {@link CreateAlarmShieldRequest} {@link CreateAlarmShieldResponse} */
   CreateAlarmShield(data: CreateAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAlarmShieldResponse>;
+  /** 新建CLS投递任务 {@link CreateCLSDeliverTaskRequest} {@link CreateCLSDeliverTaskResponse} */
+  CreateCLSDeliverTask(data: CreateCLSDeliverTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCLSDeliverTaskResponse>;
   /** 创建云产品日志投递 {@link CreateCloudProductLogCollectionRequest} {@link CreateCloudProductLogCollectionResponse} */
   CreateCloudProductLogCollection(data: CreateCloudProductLogCollectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCloudProductLogCollectionResponse>;
   /** 创建采集规则配置 {@link CreateConfigRequest} {@link CreateConfigResponse} */
@@ -7913,6 +8087,8 @@ declare interface Cls {
   DeleteAlarmNotice(data: DeleteAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmNoticeResponse>;
   /** 删除告警屏蔽规则 {@link DeleteAlarmShieldRequest} {@link DeleteAlarmShieldResponse} */
   DeleteAlarmShield(data: DeleteAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAlarmShieldResponse>;
+  /** 删除CLS投递任务 {@link DeleteCLSDeliverTaskRequest} {@link DeleteCLSDeliverTaskResponse} */
+  DeleteCLSDeliverTask(data: DeleteCLSDeliverTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCLSDeliverTaskResponse>;
   /** 删除云产品日志投递 {@link DeleteCloudProductLogCollectionRequest} {@link DeleteCloudProductLogCollectionResponse} */
   DeleteCloudProductLogCollection(data: DeleteCloudProductLogCollectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudProductLogCollectionResponse>;
   /** 删除采集规则配置 {@link DeleteConfigRequest} {@link DeleteConfigResponse} */
@@ -8001,6 +8177,8 @@ declare interface Cls {
   DescribeAlarms(data?: DescribeAlarmsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlarmsResponse>;
   /** 获取告警历史 {@link DescribeAlertRecordHistoryRequest} {@link DescribeAlertRecordHistoryResponse} */
   DescribeAlertRecordHistory(data: DescribeAlertRecordHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertRecordHistoryResponse>;
+  /** 获取CLS投递任务列表 {@link DescribeCLSDeliverTasksRequest} {@link DescribeCLSDeliverTasksResponse} */
+  DescribeCLSDeliverTasks(data?: DescribeCLSDeliverTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCLSDeliverTasksResponse>;
   /** 查看云产品日志投递任务列表 {@link DescribeCloudProductLogTasksRequest} {@link DescribeCloudProductLogTasksResponse} */
   DescribeCloudProductLogTasks(data?: DescribeCloudProductLogTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudProductLogTasksResponse>;
   /** 获取集群指标基础监控采集配置 {@link DescribeClusterBaseMetricConfigsRequest} {@link DescribeClusterBaseMetricConfigsResponse} */
@@ -8153,6 +8331,8 @@ declare interface Cls {
   ModifyAlarmNotice(data: ModifyAlarmNoticeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmNoticeResponse>;
   /** 修改告警屏蔽规则 {@link ModifyAlarmShieldRequest} {@link ModifyAlarmShieldResponse} */
   ModifyAlarmShield(data: ModifyAlarmShieldRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAlarmShieldResponse>;
+  /** 修改CLS投递任务 {@link ModifyCLSDeliverTaskRequest} {@link ModifyCLSDeliverTaskResponse} */
+  ModifyCLSDeliverTask(data: ModifyCLSDeliverTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCLSDeliverTaskResponse>;
   /** 修改云产品日志投递 {@link ModifyCloudProductLogCollectionRequest} {@link ModifyCloudProductLogCollectionResponse} */
   ModifyCloudProductLogCollection(data: ModifyCloudProductLogCollectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudProductLogCollectionResponse>;
   /** 修改采集规则配置 {@link ModifyConfigRequest} {@link ModifyConfigResponse} */

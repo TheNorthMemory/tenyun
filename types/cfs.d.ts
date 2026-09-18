@@ -308,6 +308,12 @@ declare interface FileSystemInfo {
   MetaType?: string;
   /** 业务场景。枚举值：AgentSandbox： 创建 AgentCFS */
   Scenario?: string;
+  /** 过满删除容量占比，0.0 表示关闭取值范围：[0.0, 1.0] */
+  FullDeleteCapacityUsage?: number;
+  /** 过满删除最小存活时间，单位秒单位：秒 */
+  FullDeleteMinTtl?: number;
+  /** 过期删除 TTL，单位秒，0 表示关闭单位：秒 */
+  ExpireDeleteTtl?: number;
 }
 
 /** 条件过滤 */
@@ -1209,6 +1215,10 @@ declare interface DescribeCfsFileSystemsRequest {
   Limit?: number;
   /** 用户自定义名称 */
   CreationToken?: string;
+  /** 过滤条件。Protocol - Array of String - 是否必填：否 -（过滤条件）按协议过滤。(NFS | CIFS | TURBO) StorageType - Array of String - 是否必填：否 -（过滤条件）按存储类型过滤。(SD | HP | TB | TP | THP) LifeCycleState - Array of String - 是否必填：否 -（过滤条件）按生命周期过滤。(creating | create_failed | available | deleting | delete_failed | upgrading | unserviced | expanding) Zone - Array of String - 是否必填：否 -（过滤条件）按可用区过滤。(例如：ap-guangzhou-3) IpAddress - Array of String - 是否必填：否 -（过滤条件）按导出点IP地址过滤。(例如：10.0.0.3) PGroupId - Array of String - 是否必填：否 -（过滤条件）按权限组ID过滤。(例如：pgroup-xxxxxrxt) PGroupName - Array of String - 是否必填：否 -（过滤条件）按权限组名称过滤。(例如：默认权限组) Scenario- Array of String - 是否必填：否 -（过滤条件）按权限组名称过滤。(例如：AgentSandbox) */
+  Filters?: Filter[];
+  /** 标签 */
+  Tags?: TagInfo[];
 }
 
 declare interface DescribeCfsFileSystemsResponse {

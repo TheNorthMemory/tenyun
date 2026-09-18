@@ -519,9 +519,9 @@ declare interface DescribeCaptchaResultRequest {
   UserIp: string;
   /** 前端回调函数返回的随机字符串 */
   Randstr: string;
-  /** 验证码应用ID。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到CaptchaAppId。 */
+  /** 验证码应用ID。登录 验证码控制台，在验证列表的【密钥】列，即可查看到CaptchaAppId。 */
   CaptchaAppId: number;
-  /** 验证码应用密钥。登录 [验证码控制台](https://console.cloud.tencent.com/captcha/graphical)，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。 */
+  /** 验证码应用密钥。登录 验证码控制台，在验证列表的【密钥】列，即可查看到AppSecretKey。AppSecretKey属于服务器端校验验证码票据的密钥，请妥善保密，请勿泄露给第三方。 */
   AppSecretKey: string;
   /** 预留字段 */
   BusinessId?: number;
@@ -550,7 +550,7 @@ declare interface DescribeCaptchaResultResponse {
   SubmitCaptchaTime?: number;
   /** 设备风险大类 */
   DeviceRiskCategory?: string | null;
-  /** 验证码评分 */
+  /** 验证码评分取值0-100，分值越高，风险越大 */
   Score?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

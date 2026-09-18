@@ -6103,7 +6103,7 @@ declare interface DeleteContentIdentifierResponse {
 declare interface DeleteCustomErrorPageRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 自定义页面 ID。 */
+  /** 自定义响应页面 ID。 */
   PageId: string;
 }
 
@@ -6619,7 +6619,7 @@ declare interface DescribeContentQuotaResponse {
 declare interface DescribeCustomErrorPagesRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 过滤条件，Filters.Values 的上限为20，详细的过滤条件Name值如下：page-id： 按照页面 ID 进行过滤；name： 按照页面名称进行过滤；description：按照页面描述过滤；content-type：按照页面类型过滤。 */
+  /** 过滤条件，Filters.Values 的上限为 20，详细的过滤条件Name值如下：page-id： 按照页面 ID 进行过滤；name： 按照页面名称进行过滤；description：按照页面描述过滤；content-type：按照页面类型过滤。 */
   Filters?: AdvancedFilter[];
   /** 分页查询偏移量。默认值：0。 */
   Offset?: number;
@@ -6628,9 +6628,9 @@ declare interface DescribeCustomErrorPagesRequest {
 }
 
 declare interface DescribeCustomErrorPagesResponse {
-  /** 自定义错误页面总数。 */
+  /** 自定义响应页面总数。 */
   TotalCount?: number;
-  /** 自定义错误页面数据列表。 */
+  /** 自定义响应页面数据列表。 */
   ErrorPages?: CustomErrorPage[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

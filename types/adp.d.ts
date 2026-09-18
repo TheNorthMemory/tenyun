@@ -60,6 +60,28 @@ declare interface AccountInfo {
   Avatar?: string;
 }
 
+/** 计费增值包用量信息 */
+declare interface AddOnPackageInfo {
+  /** 增值包总量 */
+  AddOnTotal?: number;
+  /** 增值包用量 */
+  AddOnUsage?: number;
+  /** 专属并发总数 */
+  ExclusiveConcurrency?: number;
+  /** 资源包状态枚举值：1： 可使2： 已用完3： 已过期 */
+  ResourceStatus?: number;
+  /** 专属并发状态枚举值：1： 可使3： 已过期 */
+  ConcurrencyStatus?: number;
+  /** 专属tpm */
+  ExclusiveTpm?: number;
+  /** 专属tpm状态枚举值：1： 可使3： 已过期 */
+  ExclusiveTpmStatus?: number;
+  /** 专属计算单元 */
+  ExclusiveComputeUnit?: number;
+  /** 专属计算单元状态枚举值：1： 可使3： 已过期4： 已销毁5： 已隔离6： 未生效7： 暂不可用（套餐包过期时） */
+  ExclusiveComputeUnitStatus?: number;
+}
+
 /** Agent高级设置 */
 declare interface AgentAdvancedConfig {
   /** 最大推理轮数 */
@@ -1962,6 +1984,16 @@ declare interface KBModifyExtendFields {
   Action?: number;
 }
 
+/** 知识库操作权限信息 */
+declare interface KBPermission {
+  /** 是否可删除 */
+  CanDelete?: boolean;
+  /** 是否可编辑 */
+  CanEdit?: boolean;
+  /** 是否可查看 */
+  CanView?: boolean;
+}
+
 /** 单个知识库检索配置 */
 declare interface KBRetrievalConfig {
   /** 数据库检索配置 */
@@ -2020,6 +2052,8 @@ declare interface KBSummary {
   LatestOperator?: Operator | null;
   /** 知识库名称 */
   Name?: string;
+  /** 操作权限 */
+  Permission?: KBPermission | null;
   /** 处理中状态列表 */
   ProcessingFlagList?: number[];
   /** 共享子类型：1=普通，2=公众号枚举项枚举值描述SHARED_KB_SUB_TYPE_UNKNOWN0SHARED_KB_SUB_TYPE_NORMAL1普通SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT2公众号 */
@@ -2390,6 +2424,8 @@ declare interface ModelParams {
   Temperature?: number | null;
   /** top_p */
   TopP?: number | null;
+  /** top_k */
+  TopK?: number;
 }
 
 /** 模型属性 */
@@ -2984,6 +3020,22 @@ declare interface ResourceConsumption {
   Unit?: number;
   /** 消耗数值 */
   Value?: number;
+}
+
+/** 计费套餐包用量信息 */
+declare interface ResourcePackageInfo {
+  /** 套餐类型枚举值：1： 免费版2： 专业版3： 企业版 */
+  PackageType?: number;
+  /** 资源包总量 */
+  ResourceTotal?: number;
+  /** 资源包用量 */
+  ResourceUsage?: number;
+  /** 知识库容量 */
+  KnowledgeCapacity?: number;
+  /** 知识库用量 */
+  KnowledgeUsage?: number;
+  /** 资源包状态枚举值：1： 正常3： 已到期4： 即将到期 */
+  ResourceStatus?: number;
 }
 
 /** ResponseParam */
@@ -5254,6 +5306,18 @@ declare interface DescribeReleaseSummaryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeResourceSummaryRequest {
+}
+
+declare interface DescribeResourceSummaryResponse {
+  /** 计费套餐包用量信息 */
+  ResourcePackage?: ResourcePackageInfo;
+  /** 计费增值包用量信息 */
+  AddOnPackage?: AddOnPackageInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillCategoryListRequest {
 }
 
@@ -5997,7 +6061,7 @@ declare interface UnfavoriteSkillResponse {
 /** {@link Adp 腾讯云智能体开发平台} */
 declare interface Adp {
   (): Versions;
-  /** 校验标签下的标准词是否已存在 {@link CheckLabelRequest} {@link CheckLabelResponse} */
+  /** 校验标签 {@link CheckLabelRequest} {@link CheckLabelResponse} */
   CheckLabel(data: CheckLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLabelResponse>;
   /** 复制 Agent {@link CopyAgentFromAppRequest} {@link CopyAgentFromAppResponse} */
   CopyAgentFromApp(data: CopyAgentFromAppRequest, config?: AxiosRequestConfig): AxiosPromise<CopyAgentFromAppResponse>;
@@ -6153,6 +6217,8 @@ declare interface Adp {
   DescribeReleaseList(data: DescribeReleaseListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseListResponse>;
   /** 查询发布任务 {@link DescribeReleaseSummaryRequest} {@link DescribeReleaseSummaryResponse} */
   DescribeReleaseSummary(data: DescribeReleaseSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseSummaryResponse>;
+  /** 获取资源套餐和增值包摘要信息 {@link DescribeResourceSummaryRequest} {@link DescribeResourceSummaryResponse} */
+  DescribeResourceSummary(data?: DescribeResourceSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceSummaryResponse>;
   /** 查询skill分类key {@link DescribeSkillCategoryListRequest} {@link DescribeSkillCategoryListResponse} */
   DescribeSkillCategoryList(data?: DescribeSkillCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillCategoryListResponse>;
   /** 查询Skill详情 {@link DescribeSkillDetailRequest} {@link DescribeSkillDetailResponse} */

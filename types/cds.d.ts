@@ -297,7 +297,7 @@ declare interface CreateTimerReportRequest {
   CntDate?: string;
   /** 报告说明 */
   Remark?: string;
-  /** 模版Id */
+  /** 模板Id */
   TemplateId?: number;
   /** 报表类型 */
   ReportType?: number;
@@ -411,7 +411,7 @@ declare interface DescribeReportListRequest {
   ReportType?: number;
   /** 报告状态 */
   ReportStatus?: number;
-  /** 报表模版id */
+  /** 报表模板id */
   TemplateId?: number;
   /** 需要排序的字段 */
   Field?: string;

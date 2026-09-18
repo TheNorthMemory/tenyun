@@ -172,6 +172,8 @@ declare interface Model {
   ModelImage?: ModelImage;
   /** 模型供应商。 */
   Provider?: string;
+  /** markdown 原生内容的模型提供方详情 */
+  ProviderIntroduction?: string;
   /** 模型状态。取值：online（上线）、offline（下线）。枚举值：online ： 上线pre-offline： 预下线discontinued： 停止新购maintenance： 维护中 */
   Status?: string;
   /** 标签列表。 */
@@ -380,18 +382,20 @@ declare interface RequestSort {
 
 /** API Key 额度及用量信息 */
 declare interface SubPackageBalance {
-  /** 独占额度。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 独占额度。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   ExclusiveQuota?: string;
-  /** 独占额度已用量。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 独占额度已用量。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   ExclusiveUsed?: string;
-  /** 独占额度剩余量。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 独占额度剩余量。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   ExclusiveRemain?: string;
-  /** 共享额度上限，-1 表示不限。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 共享额度上限，-1 表示不限。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   SharedQuota?: string;
-  /** 共享额度已用量。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 共享额度已用量。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   SharedUsed?: string;
-  /** 共享额度剩余量。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 共享额度剩余量。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   SharedRemain?: string;
+  /** 当前周期已用总量 exclusive_used + shared_used + overflow_used */
+  TotalUsed?: string;
   /** API Key 额度包状态。取值：0（正常）、1（耗尽）。 */
   Status?: number;
 }

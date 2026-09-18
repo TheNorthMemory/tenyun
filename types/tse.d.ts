@@ -370,6 +370,26 @@ declare interface AccurateQpsThreshold {
   GlobalConfigId: string;
 }
 
+/** AgentSkill AI Agent 技能定义 */
+declare interface AgentSkill {
+  /** agentID */
+  Id?: string;
+  /** skill名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 标签 */
+  Tags?: string[];
+  /** 样例 */
+  Examples?: string[];
+  /** 输入模式 */
+  InputModes?: string[];
+  /** 输出模式 */
+  OutputModes?: string[];
+  /** 版本 */
+  Version?: string;
+}
+
 /** Apollo 环境配置参数 */
 declare interface ApolloEnvParam {
   /** 环境名称 */
@@ -1740,6 +1760,14 @@ declare interface EnvInfo {
   EnableConfigIntranet?: boolean;
 }
 
+/** 服务扩展元数据 */
+declare interface ExtendedMetadata {
+  /** 枚举类型 */
+  Type?: string;
+  /** agent参数 */
+  AgentSkill?: AgentSkill;
+}
+
 /** 云原生网关限流插件外部redis配置 */
 declare interface ExternalRedis {
   /** redis ip */
@@ -2078,6 +2106,8 @@ declare interface GovernanceService {
   ServiceStatus?: number;
   /** 服务类型枚举值：0： 微服务（默认）1： MCP Server2： AI Agent */
   Type?: number;
+  /** 服务元数据 */
+  ExtendedMetadata?: ExtendedMetadata[];
 }
 
 /** 服务契约定义 */
@@ -2156,6 +2186,8 @@ declare interface GovernanceServiceInput {
   SyncToGlobalRegistry?: boolean;
   /** 服务类型枚举值：0： 微服务（默认）1： MCP Server2： AI Agent默认值：0 */
   Type?: number;
+  /** 拓展服务元数据 */
+  ExtendedMetadata?: ExtendedMetadata[];
 }
 
 /** 实例监听端口信息 */
@@ -2904,6 +2936,10 @@ declare interface SREInstance {
   GroupId?: string[];
   /** 是否为主地域 */
   IsMainRegion?: boolean;
+  /** 是否禁止变更 */
+  MutationEnabled?: boolean;
+  /** 禁止限流 */
+  MaxCapacityLimitEnabled?: boolean;
 }
 
 /** 微服务网关选择器 */
@@ -2938,6 +2974,10 @@ declare interface ServiceGovernanceInfo {
   CLSTopics?: PolarisCLSTopicInfo[];
   /** 子用户密码 */
   SubPassword?: string;
+  /** 是否允许变更 */
+  DisableMutation?: boolean;
+  /** 是否开启限流 */
+  MaxCapacityLimitEnabled?: boolean;
 }
 
 /** 普通服务选择器 */

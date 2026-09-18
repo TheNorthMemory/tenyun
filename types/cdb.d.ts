@@ -2067,16 +2067,18 @@ declare interface AdjustCdbProxyAddressResponse {
 }
 
 declare interface AdjustCdbProxyRequest {
-  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDBInstances 接口获取。 */
   InstanceId: string;
-  /** 代理组 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
+  /** 代理组 ID。可通过 DescribeCdbProxyInfo 接口获取。 */
   ProxyGroupId: string;
   /** 节点规格配置备注：数据库代理支持的节点规格为：2C4000MB、4C8000MB、8C16000MB。示例中参数说明：NodeCount：节点个数Region：节点地域Zone：节点可用区Cpu：单个代理节点核数（单位：核）Mem：单个代理节点内存数（单位：MB） */
   ProxyNodeCustom: ProxyNodeCustom[];
   /** 重新负载均衡：auto(自动),manual(手动) */
   ReloadBalance: string;
-  /** 升级切换时间：nowTime(升级完成时),timeWindow(维护时间内) */
+  /** 升级切换时间。枚举值：nowTime： 升级完成时timeWindow： 维护时间内rollUpgrade： 滚动升级 */
   UpgradeTime: string;
+  /** 滚动升级或平滑变配等待时间取值范围：[0, 3600]单位：秒 */
+  RollUpgradeWaitingTime?: number;
 }
 
 declare interface AdjustCdbProxyResponse {
@@ -5533,16 +5535,18 @@ declare interface SwitchForUpgradeResponse {
 }
 
 declare interface UpgradeCDBProxyVersionRequest {
-  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDBInstances 接口获取。 */
   InstanceId: string;
-  /** 数据库代理 ID。可通过 [DescribeCdbProxyInfo](https://cloud.tencent.com/document/api/236/90585) 接口获取。 */
+  /** 数据库代理 ID。可通过 DescribeCdbProxyInfo 接口获取。 */
   ProxyGroupId: string;
   /** 数据库代理当前版本 */
   SrcProxyVersion: string;
   /** 数据库代理升级版本 */
   DstProxyVersion: string;
-  /** 升级时间 ：nowTime（升级完成时）timeWindow（实例维护时间） */
+  /** 升级切换时间枚举值：nowTime： 升级完成时timeWindow： 实例维护时间rollUpgrade： 滚动升级 */
   UpgradeTime: string;
+  /** 滚动升级等待时间取值范围：[10, 3600]单位：秒 */
+  RollUpgradeWaitingTime?: number;
 }
 
 declare interface UpgradeCDBProxyVersionResponse {
@@ -5572,6 +5576,8 @@ declare interface UpgradeDBInstanceEngineVersionRequest {
 declare interface UpgradeDBInstanceEngineVersionResponse {
   /** 异步任务 ID，可使用 查询异步任务的执行结果 获取其执行情况。 */
   AsyncRequestId?: string;
+  /** 任务列表ID */
+  JobId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

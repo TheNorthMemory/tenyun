@@ -380,6 +380,16 @@ declare interface CheckpointMountInfo {
   SnapshotKey?: string;
 }
 
+/** 腾讯云资源标签键值对 */
+declare interface CloudTag {
+  /** 标签键 */
+  TagKey?: string;
+  /** 标签值 */
+  TagValue?: string;
+  /** 标签类型：Custom（自定义）/ System（系统）/ All（全部），仅查询接口返回 */
+  Category?: string | null;
+}
+
 /** CLS 日志主题条目 */
 declare interface ClsTopicItem {
   /** 日志主题 ID */
@@ -1578,13 +1588,13 @@ declare interface Filter {
 
 /** 流程活动详情 */
 declare interface FlowActivityDetail {
-  /** 活动编码 */
+  /** 活动编码；国际站返回英文编码，国内站返回中文描述 */
   ActivityCode?: string;
-  /** 活动状态 */
+  /** 活动状态：1-运行中，2-已完成，-2-失败 */
   Status?: number;
-  /** 创建时间 */
-  CreateTime?: string | null;
-  /** 耗时（秒） */
+  /** 活动创建时间 */
+  CreateTime?: string;
+  /** 耗时（秒），活动未完成时省略 */
   Duration?: number | null;
 }
 
@@ -2030,6 +2040,8 @@ declare interface JobSpec {
   ResourcePartitionName?: string;
   /** 默认队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 集群组Id */
   GroupId?: string;
   /** 集群id */
@@ -2040,6 +2052,8 @@ declare interface JobSpec {
   JobPackage?: string;
   /** 作业包名称 */
   JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺时按 Local 处理 */
+  JobPackageSource?: string;
   /** 优先级 */
   Priority?: number;
   /** 应用ID */
@@ -2048,6 +2062,8 @@ declare interface JobSpec {
   Uin?: string;
   /** 子用户UIN */
   SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
   /** 创建时间 */
   CreateTime?: number;
   /** 更新时间 */
@@ -2778,6 +2794,8 @@ declare interface PartitionDetail {
   ResourcePoolCode?: string | null;
   /** 资源配额列表 */
   ResourceQuota?: ResourceQuota[] | null;
+  /** 各计费项的单 worker/executor 最大可调度资源量列表，用于约束提交作业时可申请的规格上限；仅包含分区已有的非 GPU 计费项，无可返回项时为空数组 */
+  SchedulableLimitList?: SchedulableLimit[] | null;
   /** 付费模式 */
   PayMode?: number;
   /** 续费标志 */
@@ -2786,6 +2804,16 @@ declare interface PartitionDetail {
   Scheduler?: string | null;
   /** 状态 */
   Status?: number;
+  /** 过期时间参数格式：yyyy-MM-dd hh:mm:ss */
+  ExpireTime?: string;
+  /** 过期时间参数格式：yyyy-MM-dd hh:mm:ss */
+  IsolatedTimestamp?: string;
+  /** 资源已绑定的标签列表，由标签平台 GetResources 接口实时查询得到 */
+  Tags?: CloudTag[] | null;
+  /** 资源池形态：SYSTEM（系统）/ USER（用户）/ EXTERNAL_TKE（纳管外部 TKE 集群） */
+  ResourcePoolKind?: string;
+  /** 纳管外部集群的原始 ID（例如 EMR 实例 ID emr-xxx），仅 EXTERNAL_TKE 等纳管场景有值 */
+  ExternalClusterId?: string;
 }
 
 /** 资源分区信息 */
@@ -2802,14 +2830,24 @@ declare interface PartitionInfo {
   QueueCount?: number;
   /** 资源配置（配额） */
   ResourceQuota?: ResourceQuota[] | null;
+  /** 各计费项的单 worker/executor 最大可调度资源量列表，用于约束提交作业时可申请的规格上限；仅包含分区已有的非 GPU 计费项，无可返回项时为空数组 */
+  SchedulableLimitList?: SchedulableLimit[] | null;
   /** 计费类型：1-包年包月，0-按量计费 */
   PayMode?: number;
+  /** 续费标志：0-默认，1-自动续费，2-不自动续费（仅预付费有效）；按量计费分区无该字段 */
+  RenewFlag?: number | null;
   /** 创建时间 */
   CreateTime?: string | null;
   /** 更新时间 */
   UpdateTime?: string | null;
   /** 过期时间 */
   ExpireTime?: string | null;
+  /** 资源池形态：SYSTEM（系统）/ USER（用户）/ EXTERNAL_TKE（纳管外部 TKE 集群） */
+  ResourcePoolKind?: string | null;
+  /** 纳管外部集群的原始 ID（例如 EMR 实例 ID emr-xxx），仅 EXTERNAL_TKE 等纳管场景有值 */
+  ExternalClusterId?: string | null;
+  /** 资源已绑定的标签列表，由标签平台 GetResources 接口实时查询得到；列表场景下仅对当前页分区加载，单分区标签查询失败时降级留空 */
+  Tags?: CloudTag[] | null;
 }
 
 /** Workspace 持久化工作目录配置 */
@@ -2970,16 +3008,34 @@ declare interface PythonSparkImage {
 declare interface QueueInfo {
   /** 队列ID */
   Id?: number;
-  /** 队列名称 */
+  /** 不可变的Code */
   QueueName?: string;
+  /** 队列别名（用户可改显示名）；alias 为空时回落为 QueueName */
+  Alias?: string;
   /** 资源用量列表 */
   ResourceUsage?: ResourceUsage[] | null;
+  /** 队列各资源类型的实时余量（总量 / 已用量 / 可用量）。由 Kueue Prometheus 指标实时计算；监控关闭或查询失败时为 null，字段省略不返回 */
+  ResourceQuotas?: QueueResourceQuota[] | null;
   /** 队列描述 */
   Description?: string | null;
   /** 是否为默认队列 */
   IsDefault?: number;
   /** 队列类型：1-独占型，2-共享型 */
   QueueType?: number;
+}
+
+/** 队列维度单条资源配额数据（含总量、已用量、可用量） */
+declare interface QueueResourceQuota {
+  /** 资源类型标识。CPU / HM_CPU 类计费项统一映射为 "CU"；GPU 类计费项取卡型简称（如 "T4"、"H20"） */
+  ResourceType?: string;
+  /** 资源单位。CU 类为 "core"；GPU 类为 "card" */
+  Unit?: string;
+  /** 配额总量，由 resource_usage 最大值（index 1）× spec 折算得出 */
+  Total?: number;
+  /** 当前已使用量，计费 spec 口径：队列内业务容器（ray-head/ray-worker）的 Pod limits 之和，经 kube_pod_labels 按 local queue 过滤。依赖 kube_pod_labels 指标采集，未开启时恒为 0 */
+  Used?: number;
+  /** 可用量（总量 - 已使用量，截断至 0）。当 used 超出 total 时（例如配额尚未生效或数据短暂不一致），返回 0 而非负数 */
+  Available?: number;
 }
 
 /** Ray集群实体 */
@@ -2996,6 +3052,8 @@ declare interface RayClusterEntity {
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 应用ID */
   AppId?: number;
   /** 用户UIN */
@@ -3088,6 +3146,8 @@ declare interface RayJobSubmitEntity {
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 任务状态 */
   Status?: string;
   /** 入口命令 */
@@ -3290,6 +3350,14 @@ declare interface SQLTask {
   SQL: string;
   /** 任务的配置信息 */
   Config?: KVPair[];
+}
+
+/** 计费项最大可调度限制 */
+declare interface SchedulableLimit {
+  /** 四层计费项，与 ResourceQuota[].ResourceSpec.BillingItem 同值 */
+  BillingItem?: string;
+  /** 该计费项下单 worker/executor 可申请的最大可调度资源量，单位随计费项资源类型：CPU 计费项为 CU 数，GPU 计费项为 GU（卡）数 */
+  MaxSchedulableUnits?: number;
 }
 
 /** 引擎资源弹性伸缩策略 */
@@ -4368,6 +4436,8 @@ declare interface TrainingJobInstance {
   ResourcePartitionName?: string;
   /** 队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 提交时 runtime_env JSON */
   RuntimeEnv?: string;
   /** 提交时 entrypoint */
@@ -4438,6 +4508,8 @@ declare interface TrainingJobSpec {
   ResourcePartitionName?: string;
   /** 队列名称 */
   Queue?: string | null;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** Checkpoint 挂载摘要 */
   CheckpointMountInfo?: CheckpointMountInfo | null;
   /** 存储卷挂载配置 JSON */
@@ -5508,6 +5580,8 @@ declare interface CopyJobSpecResponse {
   ResourcePartitionName?: string;
   /** 默认队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 作业包URL */
   JobPackage?: string;
   /** 作业包名称 */
@@ -6230,6 +6304,8 @@ declare interface CreateJobSpecResponse {
   ResourcePartitionName?: string;
   /** 默认队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 作业包URL */
   JobPackage?: string;
   /** 作业包名称 */
@@ -6553,12 +6629,14 @@ declare interface CreateNotebookSessionStatementSupportBatchSQLResponse {
 declare interface CreatePartitionQueueRequest {
   /** 分区编码 */
   PartitionCode: string;
-  /** 队列名称 */
-  QueueName: string;
   /** 资源规格列表，定义队列的资源类型及大小范围 */
   ResourceUsages: ResourceUsage[];
   /** 队列类型：1-独占型，2-共享型 */
   QueueType: number;
+  /** 队列编码（不可变 code）：透传时按 RFC1123 校验并作为队列的固定标识；未透传时系统自动生成（格式 dlc-rg-xxxxxxxx）。落库后不可修改 */
+  QueueName?: string;
+  /** 队列别名（显示名）：用户可见、可修改；未提供时等于最终 QueueName。可与其它队列重复 */
+  Alias?: string;
   /** 队列描述 */
   Description?: string;
 }
@@ -6566,6 +6644,10 @@ declare interface CreatePartitionQueueRequest {
 declare interface CreatePartitionQueueResponse {
   /** 新创建的资源队列ID */
   Id?: number;
+  /** 最终生效的队列编码（含系统生成场景），与 DescribePartitionQueues 出参的 QueueName 语义一致 */
+  QueueName?: string;
+  /** 队列别名（显示名） */
+  Alias?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6593,7 +6675,9 @@ declare interface CreatePartitionResponse {
   /** 子订单号 */
   DealName?: string;
   /** 大订单号 */
-  BigDealId?: string;
+  BigDealId?: string | null;
+  /** 冻结流水号（后付费返回；预付费为空） */
+  BillId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8689,6 +8773,8 @@ declare interface DescribePartitionQueuesRequest {
   Page?: number;
   /** 每页返回数量 */
   PageSize?: number;
+  /** 是否返回队列实时余量（ResourceQuotas），默认 false 不返回。余量需实时查询 Prometheus，仅在需要时透传 true。Used 为计费 spec 口径（队列内业务容器 Pod limits，经 kube_pod_labels 队列过滤），依赖 kube_pod_labels 指标采集 */
+  ShowResourceQuotas?: boolean;
 }
 
 declare interface DescribePartitionQueuesResponse {
@@ -10076,6 +10162,8 @@ declare interface GetJobSpecResponse {
   ResourcePartitionName?: string | null;
   /** 默认队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 作业包URL */
   JobPackage?: string;
   /** 作业包名称 */
@@ -10146,6 +10234,8 @@ declare interface GetLabDetailResponse {
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 应用ID */
   AppId?: number;
   /** 用户UIN */
@@ -10506,6 +10596,8 @@ declare interface GetRayClusterResponse {
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 应用ID */
   AppId?: number;
   /** 用户UIN */
@@ -10680,6 +10772,8 @@ declare interface GetRayJobResponse {
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 任务状态 */
   Status?: string;
   /** 入口命令 */
@@ -10897,6 +10991,8 @@ declare interface LabResponse {
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 应用ID */
   AppId?: number;
   /** 用户UIN */
@@ -12078,8 +12174,10 @@ declare interface ModifyPartitionQueueRequest {
   Id: number;
   /** 分区编码 */
   PartitionCode?: string;
-  /** 队列名称 */
+  /** 队列编码（不可变 code）：与 Id 定位记录的一致性校验键，传入值必须与队列当前 QueueName 一致，不参与更新 */
   QueueName?: string;
+  /** 队列别名（显示名）：透传时更新，未透传时保持不变。可与其它队列重复 */
+  Alias?: string;
   /** 队列描述 */
   Description?: string;
   /** 资源规格列表，定义队列的资源类型及大小范围 */
@@ -13833,6 +13931,8 @@ declare interface UpdateJobSpecResponse {
   ResourcePartitionName?: string;
   /** 默认队列名称 */
   Queue?: string;
+  /** 所属队列别名 */
+  QueueAlias?: string;
   /** 作业包URL */
   JobPackage?: string;
   /** 作业包名称 */

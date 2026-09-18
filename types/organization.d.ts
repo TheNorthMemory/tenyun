@@ -146,6 +146,10 @@ declare interface ListTargetsForPolicyNode {
   Name?: string;
   /** 绑定时间 */
   AddTime?: string;
+  /** 目标对象所属的组织层级名称路径 */
+  NodePath?: string[];
+  /** 对应的组织层级 ID 路径 */
+  NodePathIds?: number[];
 }
 
 /** 我的共享单元列表详情 */

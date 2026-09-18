@@ -432,7 +432,7 @@ declare interface AcquireSandboxInstanceTokenResponse {
   Token?: string;
   /** 过期时间 */
   ExpiresAt?: string;
-  /** 非管控面（envd）的访问Token */
+  /** 除管控面envd端口(49983)以外端口的访问Token */
   TrafficToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

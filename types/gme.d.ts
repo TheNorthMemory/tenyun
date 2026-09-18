@@ -148,6 +148,14 @@ declare interface AsrConf {
   Status?: string;
 }
 
+/** 音频片段时间信息 */
+declare interface AudioSegments {
+  /** 该参数用于返回对应语种标签的片段在音频文件内的开始时间，单位为秒。 示例值：0 */
+  StartTime?: number;
+  /** 该参数用于返回对应语种标签的片段在音频文件内的结束时间，单位为秒。 示例值：15 */
+  FinishTime?: number;
+}
+
 /** 录音转文本用量统计数据 */
 declare interface AudioTextStatisticsItem {
   /** 统计值，单位：秒 */
@@ -266,6 +274,14 @@ declare interface Filter {
   Values?: string[];
 }
 
+/** 图片违规位置坐标 */
+declare interface ImageLocation {
+  /** 该参数用于返回检测框左上角位置的横坐标（x）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：51 */
+  X?: number;
+  /** 该参数用于返回检测框左上角位置的纵坐标（y）所在的像素位置，结合剩余参数可唯一确定检测框的大小和位置。 示例值：448 */
+  Y?: number;
+}
+
 /** 房间内的事件 */
 declare interface InOutTimeInfo {
   /** 进入房间时间 */
@@ -280,6 +296,34 @@ declare interface InvokeLLM {
   Content?: string;
   /** 是否允许该文本打断机器人说话 */
   Interrupt?: boolean;
+}
+
+/** 内容理解结果明细 */
+declare interface ModerationCheckDetail {
+  /** 该字段在内容理解回调事件中可直接忽略，仅在第三方审核时存在，检出违规的模型场景，枚举值：Ad/Porn/Abuse/Illegal/Polity/Terror/Sexy/Moan/Custom */
+  Scene?: string;
+  /** Normal：正常文本 Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义 */
+  Label?: string;
+  /** 二级标签 */
+  SubLabel?: string;
+  /** 处理建议 */
+  Suggest?: number;
+  /** 自定义词库名 */
+  LibName?: string;
+  /** 命中的关键词 */
+  Keywords?: string[];
+  /** 中文二级标签。 */
+  Desc?: string;
+  /** 置信度分值 */
+  Score?: number;
+  /** 违规严重程度: 0-不区分 1-轻度 2-严重 */
+  Severity?: number;
+  /** 违规严重程度描述 仅名单内sdkappid返回 负面表达,正面或中性表达,语义模糊 */
+  SeverityDesc?: string;
+  /** 音频切片位置信息 */
+  AudioSegments?: AudioSegments;
+  /** 图片命中坐标信息。 */
+  ImageLocation?: ImageLocation;
 }
 
 /** ModifyAppStatus接口输出参数 */
@@ -630,6 +674,52 @@ declare interface CreateAppRequest {
 declare interface CreateAppResponse {
   /** 创建应用返回数据 */
   Data?: CreateAppResp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAudioModerationSyncRequest {
+  /** sdkappid app账号 */
+  Sdkappid: number;
+  /** BizType为策略的具体的编号, GME业务 2_2_3_sdkappid */
+  BizType?: string;
+  /** 数据标识，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 */
+  DataId?: string;
+  /** 音频格式，当FileUrl为空时，必填。音频文件资源格式，当前支持格式：wav、mp3、m4a，请按照实际文件格式填入。 示例值：mp3 */
+  FileFormat?: string;
+  /** 文件名称，可以由英文字母、数字、下划线、-、@#组成，不超过64个字符 示例值：file_name */
+  FileName?: string;
+  /** 数据Base64编码，短音频同步接口仅传入可音频内容； 支持范围：文件大小不能超过5M，时长不可超过60s； 支持格式：wav (PCM编码)、mp3、m4a (采样率：16kHz~48kHz，位深：16bit 小端，声道数：单声道/双声道，建议格式：16kHz/16bit/单声道)。 示例值：1 */
+  FileContent?: string;
+  /** 音频资源访问链接，与FileContent参数必须二选一输入； 支持范围及格式：同FileContent； */
+  FileUrl?: string;
+}
+
+declare interface CreateAudioModerationSyncResponse {
+  /** 返回传入的DataId */
+  DataId?: string;
+  /** 审核返回的任务id */
+  TaskId?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 1：语音。 2：图片。枚举值：1： 语音2： 图片 */
+  MediaType?: number;
+  /** 0：建议通过。 1 ：建议人工重新内容识别。 2：建议屏蔽。枚举值：0： 建议通过1： 建议人工重新内容识别2： 建议屏蔽 */
+  Suggest?: number;
+  /** 置信度分数，取值范围：0（置信度最低）-100（置信度最高 ），越高代表越有可能属于当前返回的标签。 实例值：100 */
+  Rate?: number;
+  /** Normal：正常文本 Ad:广告 Porn：色情 Abuse：谩骂 Illegal: 违禁 Polity: 涉政 Terror: 暴恐 Sexy: 性感 Moan: 呻吟/娇喘 QRCode: 二维码 Custom: 自定义 */
+  Label?: string;
+  /** 子标签 */
+  SubLabel?: string;
+  /** 音频链接地址 */
+  Audio?: string;
+  /** 审核识别音频文本 */
+  AudioText?: string;
+  /** 审核明细 */
+  CheckDetail?: ModerationCheckDetail[];
+  /** 音频时长，单位 ms */
+  Duration?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1275,6 +1365,8 @@ declare interface Gme {
   CreateAgeDetectTask(data: CreateAgeDetectTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgeDetectTaskResponse>;
   /** 创建GME应用 {@link CreateAppRequest} {@link CreateAppResponse} */
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
+  /** 短音频内容理解同步 {@link CreateAudioModerationSyncRequest} {@link CreateAudioModerationSyncResponse} */
+  CreateAudioModerationSync(data: CreateAudioModerationSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationSyncResponse>;
   /** 创建语音消息转文本热句模型 {@link CreateCustomizationRequest} {@link CreateCustomizationResponse} */
   CreateCustomization(data: CreateCustomizationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizationResponse>;
   /** 新增自定义送检用户 {@link CreateScanUserRequest} {@link CreateScanUserResponse} */

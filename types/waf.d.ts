@@ -3524,11 +3524,11 @@ declare interface SpartaProtectionPort {
 
 /** 规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同，具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 同匹配字段Referer逻辑符号 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）rematch（正则匹配） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 empty（内容为空）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）rematch（正则匹配） 请输入内容,512个字符以内 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 eq（等于）neq（不等于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numge（数值大于等于）numle（数值小于等于） 请输入0-9999999999999之间的整数 IP_GEO（来源IP归属地） 不支持参数 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] HOST（请求Host） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入Host值,512个字符以内 CAPTCHA_RISK（验证码风险） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） 请输入风险等级值,支持数值范围0-255 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） 请输入设备风险代码,支持取值：101、201、301、401、501、601、701 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）nnull（存在） 请输入评估分数,支持数值范围0-100 */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同，具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 同匹配字段Referer逻辑符号 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）rematch（正则匹配） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 empty（内容为空）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）rematch（正则匹配） 请输入内容,512个字符以内 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 eq（等于）neq（不等于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numge（数值大于等于）numle（数值小于等于） 请输入0-9999999999999之间的整数 IP_GEO（来源IP归属地） 不支持参数 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] HOST（请求Host） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入Host值,512个字符以内 CAPTCHA_RISK（验证码风险） 不支持参数 numeq（数值等于）numneq（数值不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） numeq/numneq：Content 为 0-255 的整数字符串，例如 "10"；belong_to/not_belong_to：Content 为 JSON 字符串数组的序列化字符串，例如 ["1","2"]，最多50个元素，每个值为0-255整数；null/nnull：Content 必须为空字符串。集合格式不能使用普通逗号分隔字符串。 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 numeq（数值等于）numneq（数值不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） numeq/numneq：Content 为单个设备风险代码字符串；belong_to/not_belong_to：Content 为 JSON 字符串数组的序列化字符串，例如 ["101","201"]，最多7个元素；支持取值：101、201、301、401、501、601、701；null/nnull：Content 必须为空字符串。 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）nnull（存在） 数值比较时 Content 为 0-100 的整数字符串；null/nnull 时 Content 必须为空字符串。 */
   Field: string;
   /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） nempty （ 内容不为空） null （不存在） nnull （存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） belong_to （属于） not_belong_to （不属于） strprefix （ 前缀匹配）strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ IP匹配） ipnmatch （ IP不匹配） rematch （ 正则匹配） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） cel （ CEL表达式） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string;
-  /** 匹配内容 目前 当匹配字段为COOKIE（Cookie）时，不需要输入 匹配内容其他都需要 */
+  /** 匹配内容。请根据 Field 和 CompareFunc 按匹配字段表填写。CAPTCHA_RISK、CAPTCHA_DEVICE_RISK 和 CAPTCHAR_SCORE 使用 null/nnull 时必须传空字符串；数值比较传单个整数字符串；CAPTCHA_RISK、CAPTCHA_DEVICE_RISK 使用 belong_to/not_belong_to 时传 JSON 字符串数组的序列化字符串，数组元素范围和数量限制详见 Field。 */
   Content: string;
   /** 匹配参数 配置参数一共分2种类型 不支持参数与支持参数 当匹配字段为以下4个时，匹配参数才能录入，否则不支持该参数 GET（GET参数值） POST（POST参数值） ARGS_COOKIE（Cookie参数值） ARGS_HEADER（Header参数值） */
   Arg: string;
@@ -4342,6 +4342,74 @@ declare interface CreateAccessExportRequest {
 declare interface CreateAccessExportResponse {
   /** 日志导出ID。 */
   ExportId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAndUpdateBatchCCRuleRequest {
+  /** 名称 */
+  Name: string;
+  /** 规则ID，新增时填0 */
+  RuleId: number;
+  /** 状态 */
+  Status: number;
+  /** 高级模式（是否使用Session检测），0表示不启用，1表示启用 */
+  Advance: string;
+  /** CC检测阈值 */
+  Limit: string;
+  /** CC检测周期 */
+  Interval: string;
+  /** 动作，20表示观察，21表示人机识别，22表示拦截，23表示精准拦截，26表示精准人机识别，27表示JS校验 */
+  ActionType: string;
+  /** 优先级 */
+  Priority: number;
+  /** 动作有效时间 */
+  ValidTime: number;
+  /** 检测Url */
+  Url?: string;
+  /** url长度 */
+  Length?: number;
+  /** 匹配方法，0表示等于，1表示前缀匹配，2表示包含，3表示不等于，6表示后缀匹配，7表示不包含 */
+  MatchFunc?: number;
+  /** CC的匹配条件JSON序列化的字符串，示例：[{"key":"Method","args":["=R0VU"],"match":"0","encodeflag":true}] Key可选值为 Method、Post、Referer、Cookie、User-Agent、CustomHeader、CaptchaRisk、CaptchaDeviceRisk、CaptchaScore match可选值为，当Key为Method的时候可选值为0（等于）、3（不等于）。 Key为Post的时候可选值为0（等于）、3（不等于），Key为Cookie的时候可选值为0（等于）、2（包含），3（不等于）、7（不包含）、 当Key为Referer的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为Cookie的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为User-Agent的时候可选值为0（等于）、3（不等于）、1（前缀匹配）、6（后缀匹配）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）， 当Key为CustomHeader的时候可选值为0（等于）、3（不等于）、2（包含）、7（不包含）、12（存在）、5（不存在）、4（内容为空）。 Key为IPLocation时，可选值为13（属于）、14（不属于）。 Key为CaptchaRisk时，可选值为0（等于）、3（不等于）、13（属于）、14（不属于）、12（存在）、5（不存在）。 Key为CaptchaDeviceRisk时，可选值为0（等于）、3（不等于）、13（属于）、14（不属于）、12（存在）、5（不存在）。 Key为CaptchaScore时，可选值为15（数值等于）、16（数值不等于）、17（数值大于）、18（数值小于）、19（数值大于等于）、20（数值小于等于）、12（存在）、5（不存在）。args用来表示匹配内容，需要设置encodeflag为true，当Key为Post、Cookie、CustomHeader时，用等号=来分别串接Key和Value，并分别用Base64编码，类似YWJj=YWJj。当Key为Referer、User-Agent时，用等号=来串接Value，类似=YWJj。 */
+  OptionsArr?: string;
+  /** waf版本，sparta-waf或者clb-waf */
+  Edition?: string;
+  /** 操作类型 */
+  Type?: number;
+  /** 添加规则的来源事件id */
+  EventId?: string;
+  /** 规则需要启用的SessionID */
+  SessionApplied?: number[];
+  /** 限频方式 */
+  LimitMethod?: string;
+  /** 配置方式的逻辑操作符，and或者or */
+  LogicalOp?: string;
+  /** cel表达式 */
+  CelRule?: string;
+  /** 动作灰度比例，默认值100 */
+  ActionRatio?: number;
+  /** 页面ID */
+  PageId?: string;
+  /** 批量规则配置的域名 */
+  Domains?: string[];
+  /** 批量规则配置的防护组 */
+  GroupIds?: number[];
+  /** 定时生效类型 */
+  JobType?: string;
+  /** 定时生效配置 */
+  JobDateTime?: JobDateTime;
+  /** 定时生效类型：month or week */
+  CronType?: string;
+  /** 过期时间 */
+  ExpireTime?: number;
+}
+
+declare interface CreateAndUpdateBatchCCRuleResponse {
+  /** cc规则id */
+  RuleId?: number;
+  /** 响应数据 */
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8795,6 +8863,8 @@ declare interface Waf {
   BatchOperateUserSignatureRules(data: BatchOperateUserSignatureRulesRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateUserSignatureRulesResponse>;
   /** 创建访问日志导出 {@link CreateAccessExportRequest} {@link CreateAccessExportResponse} */
   CreateAccessExport(data: CreateAccessExportRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessExportResponse>;
+  /** 批量cc规则添加更新接口 {@link CreateAndUpdateBatchCCRuleRequest} {@link CreateAndUpdateBatchCCRuleResponse} */
+  CreateAndUpdateBatchCCRule(data: CreateAndUpdateBatchCCRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndUpdateBatchCCRuleResponse>;
   /** 添加地域封禁规则 {@link CreateAreaBanRuleRequest} {@link CreateAreaBanRuleResponse} */
   CreateAreaBanRule(data: CreateAreaBanRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAreaBanRuleResponse>;
   /** 批量IP黑白名单新增接口 {@link CreateBatchIpAccessControlRequest} {@link CreateBatchIpAccessControlResponse} */

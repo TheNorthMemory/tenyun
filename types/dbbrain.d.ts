@@ -1136,16 +1136,16 @@ declare interface StatDimension {
   Data?: string[];
 }
 
-/** 统计分析维度下的统计数据详情 */
+/** 统计分析维度下的统计数据详情。 */
 declare interface StatisticDataInfo {
   /** 统计维度的值。 */
-  Name?: string;
+  Name?: string | null;
   /** 平均时间。 */
-  TimeAvg?: number;
+  TimeAvg?: number | null;
   /** 总时间。 */
-  TimeSum?: number;
+  TimeSum?: number | null;
   /** 数量。 */
-  Count?: number;
+  Count?: number | null;
 }
 
 /** sql会话统计信息 */

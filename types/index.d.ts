@@ -111,6 +111,7 @@ import Eb, { Versions as EbVersions } from "./eb";
 import Ecc, { Versions as EccVersions } from "./ecc";
 import Ecdn, { Versions as EcdnVersions } from "./ecdn";
 import Ecm, { Versions as EcmVersions } from "./ecm";
+import Edgezone, { Versions as EdgezoneVersions } from "./edgezone";
 import Eiam, { Versions as EiamVersions } from "./eiam";
 import Eis, { Versions as EisVersions } from "./eis";
 import Emr, { Versions as EmrVersions } from "./emr";
@@ -376,6 +377,7 @@ export declare type SERVICE_VERSIONS = {
   ecc: EccVersions,
   ecdn: EcdnVersions,
   ecm: EcmVersions,
+  edgezone: EdgezoneVersions,
   eiam: EiamVersions,
   eis: EisVersions,
   emr: EmrVersions,
@@ -765,6 +767,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ecdn: Ecdn,
   /** {@link Ecm 边缘计算机器} */
   ecm: Ecm,
+  /** {@link Edgezone 边缘可用区} */
+  edgezone: Edgezone,
   /** {@link Eiam 数字身份管控平台（员工版）} */
   eiam: Eiam,
   /** {@link Eis 数据连接器} */

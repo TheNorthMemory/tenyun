@@ -388,7 +388,7 @@ declare interface Quota {
 
 /** 查询时过滤条件。 */
 declare interface ResourceFilter {
-  /** 过滤字段名，支持的列表如下：- type：主资源类型，CDN。- instanceId：IGTM实例ID。此为必传参数，未传将导致接口查询失败。 */
+  /** 过滤字段名，支持的列表如下：- MonitorName：监控器名称。- MonitorId：监控器名称 */
   Name: string;
   /** 过滤字段值。 */
   Value: string[];

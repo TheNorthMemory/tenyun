@@ -3425,7 +3425,7 @@ declare namespace V20180724 {
 
   /** Prometheus告警规则分组信息 */
   interface PrometheusAlertGroupSet {
-    /** 告警分组ID，满足正则表达式`alert-[a-z0-9]{8}` */
+    /** 告警分组ID，满足正则表达式alert-[a-z0-9]{8} */
     GroupId?: string | null;
     /** 告警分组名称 */
     GroupName?: string | null;
@@ -3443,6 +3443,8 @@ declare namespace V20180724 {
     CreatedAt?: string | null;
     /** 分组更新时间 */
     UpdatedAt?: string | null;
+    /** 最后修改人子账号uin */
+    LastModifySubAccountUin?: string;
   }
 
   /** 告警渠道使用自建alertmanager的配置 */

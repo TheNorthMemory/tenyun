@@ -791,7 +791,7 @@ declare interface VoicePrintEnrollRequest {
   Data?: string;
   /** 说话人昵称 不超过32字节 */
   SpeakerNick?: string;
-  /** 分组id, 仅支持大小写字母和下划线的组合，不超过128个字符 */
+  /** 分组id, 仅支持大小写字母和下划线的组合，不超过128个字符注意：一个group最多可容纳20个说话人IDgroup主要用在声纹1：N比对场景 */
   GroupId?: string;
   /** 声纹cos url 注意:仅支持腾讯云cos url 地址 */
   AudioUrl?: string;

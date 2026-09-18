@@ -802,6 +802,10 @@ declare interface CustomerGateway {
   CreatedTime?: string;
   /** BGP ASN。 */
   BgpAsn?: number;
+  /** 关联通道数 */
+  VpnConnNum?: number;
+  /** 标签信息 */
+  TagSet?: Tag[];
 }
 
 /** 对端网关厂商信息对象。 */
@@ -3294,6 +3298,8 @@ declare interface VpnGateway {
   BgpAsn?: number;
   /** 标签列表 */
   TagSet?: Tag[];
+  /** 私网VPN标识 */
+  IsPrivate?: boolean;
 }
 
 /** VPN网关配额对象 */
@@ -3304,6 +3310,8 @@ declare interface VpnGatewayQuota {
   Cname?: string;
   /** 配额英文名称 */
   Name?: string;
+  /** SSL 连接数可选配额 */
+  MaxConnection?: number[];
 }
 
 /** VPN网关目的路由 */
@@ -5127,6 +5135,16 @@ declare interface CreateVpnGatewayRequest {
   MaxConnection?: number;
   /** BGP ASN。 */
   BgpAsn?: number;
+  /** 是否是私网类型 */
+  IsPrivate?: boolean;
+  /** 私网唯一ID */
+  SubnetId?: string;
+  /** BGP 开关，开启时需指定BgpAsn。 */
+  BgpEnable?: boolean;
+  /** 内外层IP协议枚举值：4in4： IPv4 over IPv46in4： IPv6 over IPv46in6： IPv6 over IPv64in6： IPv4 over IPv6默认值：4in4 */
+  IpStack?: string;
+  /** CCN类型私网VPN接入网段 */
+  AccessSubnet?: string;
 }
 
 declare interface CreateVpnGatewayResponse {
@@ -5164,8 +5182,10 @@ declare interface CreateVpnGatewaySslClientRequest {
 declare interface CreateVpnGatewaySslClientResponse {
   /** 异步任务ID。 */
   TaskId?: number;
-  /** SSL-VPN client 唯一ID */
+  /** SSL VPN客户端唯一ID */
   SslVpnClientId?: string;
+  /** SSL VPN客户端唯一ID仅批量场景返回 */
+  SslVpnClientIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5181,11 +5201,11 @@ declare interface CreateVpnGatewaySslServerRequest {
   LocalAddress?: string[];
   /** SSL VPN服务端监听协议。当前仅支持 UDP，默认UDP。 */
   SslVpnProtocol?: string;
-  /** SSL VPN服务端监听协议端口，默认1194。 */
+  /** SSL VPN服务端监听协议端口，默认9798。 */
   SslVpnPort?: number;
-  /** 认证算法。可选 'SHA1'，默认SHA1。 */
+  /** 认证算法。可选 'SHA1', 'SHA224', 'SHA256', 'SHA384', 'SHA512' 默认SHA1。 */
   IntegrityAlgorithm?: string;
-  /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。 */
+  /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM', 'AES-192-GCM', 'AES-256-GCM'。默认值：AES-128-CBC */
   EncryptAlgorithm?: string;
   /** 是否支持压缩。当前不支持压缩，默认False。 */
   Compress?: boolean;
@@ -6429,9 +6449,9 @@ declare interface DescribeCustomerGatewayVendorsResponse {
 declare interface DescribeCustomerGatewaysRequest {
   /** 对端网关ID，例如：cgw-2wqq41m9。每次请求的实例的上限为100。参数不支持同时指定CustomerGatewayIds和Filters。 */
   CustomerGatewayIds?: string[];
-  /** 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：`cgw-mgp33pll`。customer-gateway-name - String - （过滤条件）用户网关名称形如：`test-cgw`。ip-address - String - （过滤条件）公网地址形如：`58.211.1.12`。 */
+  /** 过滤条件，详见下表：实例过滤条件表。每次请求的Filters的上限为10，Filter.Values的上限为5。参数不支持同时指定CustomerGatewayIds和Filters。customer-gateway-id - String - （过滤条件）用户网关唯一ID形如：cgw-mgp33pll。customer-gateway-name - String - （过滤条件）用户网关名称形如：test-cgw。ip-address - String - （过滤条件）公网地址形如：58.211.1.12。ip-version - String - （过滤条件）公网地址类型,可选值['IPv4','IPv6']。 */
   Filters?: Filter[];
-  /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/11646)中的相关小节。 */
+  /** 偏移量，默认为0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。 */
   Offset?: number;
   /** 返回数量，默认为20，最大值为100。 */
   Limit?: number;
@@ -9907,9 +9927,9 @@ declare interface ModifyVpnGatewaySslServerRequest {
   SslVpnProtocol?: string;
   /** SSL VPN服务端监听协议端口。 */
   SslVpnPort?: number;
-  /** 加密算法。可选 'AES-128-CBC','AES-192-CBC', 'AES-256-CBC', 默认AES-128-CBC。 */
+  /** 加密算法。可选值 'AES-128-CBC', 'AES-192-CBC', 'AES-256-CBC', 'AES-128-GCM', 'AES-192-GCM', 'AES-256-GCM', 默认AES-128-CBC。 */
   EncryptAlgorithm?: string;
-  /** 认证算法。可选 'SHA1'，默认SHA1。 */
+  /** 认证算法。可选 'SHA1', 'MD5', 'SHA224', 'SHA256', 'SHA384', 'SHA512'，默认SHA1。 */
   IntegrityAlgorithm?: string;
   /** 是否支持压缩。当前不支持压缩。默认False。 */
   Compress?: boolean;

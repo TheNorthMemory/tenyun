@@ -96,6 +96,18 @@ declare interface AgentInstance {
   OfflineTime?: string;
   /** 商业化资源归属 */
   ProductName?: string;
+  /** 具备能力 */
+  Capabilities?: string[];
+  /** 是否是免部署实例 */
+  DeploymentFree?: boolean;
+}
+
+/** 聊天图片附件列表 */
+declare interface Attachments {
+  /** cos key */
+  CosKey?: string;
+  /** 图片类型 */
+  MimeType?: string;
 }
 
 /** 会话信息 */
@@ -425,6 +437,8 @@ declare interface CreateChatCompletionRequest {
   IsHidden?: boolean;
   /** 是否隐藏会话 */
   IsChatHidden?: boolean;
+  /** 传递图片附件 */
+  Attachments?: Attachments[];
 }
 
 declare interface CreateChatCompletionResponse {

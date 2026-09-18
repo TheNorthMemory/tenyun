@@ -3567,7 +3567,7 @@ declare interface ActivateLibraDBInstanceResponse {
 declare interface AddClusterSlaveZoneRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 从可用区 */
+  /** 备可用区 */
   SlaveZone: string;
   /** binlog同步方式。默认值：async。可选值：sync、semisync、async */
   BinlogSyncWay?: string;
@@ -7275,9 +7275,9 @@ declare interface ModifyClusterReadOnlyResponse {
 declare interface ModifyClusterSlaveZoneRequest {
   /** 集群Id */
   ClusterId: string;
-  /** 旧从可用区 */
+  /** 旧备可用区 */
   OldSlaveZone: string;
-  /** 新从可用区 */
+  /** 新备可用区 */
   NewSlaveZone: string;
   /** binlog同步方式。默认值：async。可选值：sync、semisync、async */
   BinlogSyncWay?: string;
@@ -7997,7 +7997,7 @@ declare interface ReloadBalanceProxyNodeResponse {
 declare interface RemoveClusterSlaveZoneRequest {
   /** 集群ID */
   ClusterId: string;
-  /** 从可用区 */
+  /** 备可用区 */
   SlaveZone: string;
 }
 

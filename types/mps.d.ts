@@ -2880,7 +2880,7 @@ declare interface CoverConfigureInfoForUpdate {
 
 /** 生图任务。 */
 declare interface CreateImageConfig {
-  /** 生图模型枚举值：WAND-create-1.0-lite： 轻量生图模型WAND-create-1.0-flash： 质量-速度平衡生图模型WAND-create-1.0-pro： 高质量生图模型 */
+  /** 生图模型枚举值：scene-image-lite： 场景生图 lite 模型 */
   Model: string;
   /** 生图指令 */
   Prompt: string;
@@ -3502,10 +3502,10 @@ declare interface DocToVideoInput {
   FileUrl: string[];
   /** 用于生成视频的prompt信息。prompt长度限制：2000字符。 */
   Prompt: string;
-  /** 文档生成视频模型名称默认值：Wand */
-  ModelName: string;
   /** 文档生成视频模型版本号枚举值：1.0： 1.01.0-lite： 1.0-lite默认值：1.0 */
-  ModelVersion: string;
+  ModelVersion?: string;
+  /** 文档生成视频模型名称枚举值：WAND： WAND默认值：WAND */
+  ModelName?: string;
   /** 生成视频的宽高比。枚举值：16:9： 16:99:16： 9:161:1： 1:1默认值：16:9 */
   Ratio?: string;
   /** 生成视频的语言。枚举值：zh： 中文en： 英文ja： 日语ko： 韩语ru： 俄语fr： 法语es： 西班牙语de： 德语默认值：zh */
@@ -8695,9 +8695,9 @@ declare interface VideoTemplateInfoForUpdate {
 /** 多视角图生 3D 场景下，MultiViewImages 数组中的单个视角。 */
 declare interface ViewImage {
   /** 视角类型枚举值：front： 正视图 （必填）back： 背视图left： 左视图right： 右视图top： 顶视图bottom： 底视图left_front： 左前 45°right_front： 右前 45°MultiViewImages 数组长度 ≥ 2 ; 必须包含 front 视角; 同一 ViewType 不允许重复; 每项必须提供 ViewImageUrl */
-  ViewType: string;
+  ViewType: string | null;
   /** 图片 URL（http / https） */
-  ViewImageUrl: string;
+  ViewImageUrl: string | null;
 }
 
 /** 音色信息 */
@@ -9213,7 +9213,7 @@ declare interface CreateAigcAudioTaskRequest {
   StoreCosParam?: AigcStoreCosParam;
   /** 用于传入要求的额外参数。 */
   ExtraParameters?: AigcAudioExtraParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}}MiniMaxMusic生纯音乐参数使用示例: "AdditionalParameters":"{"is_instrumental":true}"。支持的透传参数有: lyrics，is_instrumental，aigc_watermark，sample_rate，bitrate。EL生音乐支持透传的参数有:PromptInfluence，WithTimestamps，CompositionPlan，ForceInstrumental等参数。 */
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。示例MinimaxMusic模型传入歌词时：{"lyric":{"小马在快乐奔跑，花儿在开放"}}MiniMaxMusic生纯音乐参数使用示例: "AdditionalParameters":"{"is_instrumental":true}"。支持的透传参数有: lyrics，is_instrumental，aigc_watermark，sample_rate，bitrate。EL生音乐支持透传的参数有:PromptInfluence，WithTimestamps，CompositionPlan，ForceInstrumental等参数。Mureka模型支持的透传参数有：n: 指定输出音频文件数。非instrumental版本支持：lyrics，gender，reference_id，melody_id。instrumental版本支持：instrumental_id。 */
   AdditionalParameters?: string;
   /** 接口操作者名称。 */
   Operator?: string;
@@ -11907,6 +11907,10 @@ declare interface DescribeVoicesRequest {
   Labels?: string[];
   /** 场景 */
   Scenes?: string[];
+  /** 分页查询页码。从1开始，默认1 */
+  PageNum?: number;
+  /** 页大小。不填默认返回所有符合条件数据 */
+  PageSize?: number;
   /** 扩展参数，json字符串其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色 */
   ExtParam?: string;
 }

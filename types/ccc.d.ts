@@ -1248,6 +1248,8 @@ declare interface TelCdrInfo {
   SysHangupReason?: number;
   /** 接通后系统挂断原因，文字描述信息 */
   SysHangupReasonString?: string;
+  /** 通话结束状态V2（灰度中） */
+  EndStatusV2?: number;
 }
 
 /** 时间范围，24 小时制，格式为 09:00:00 */
@@ -2598,6 +2600,8 @@ declare interface DescribeSessionDetailResponse {
   SysHangupReason?: number;
   /** 接通后系统挂断原因详见 */
   SysHangupReasonString?: string;
+  /** 通话结束状态V2（灰度中） */
+  EndStatusV2?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

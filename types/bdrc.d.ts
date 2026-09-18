@@ -2335,6 +2335,8 @@ declare interface ModifyCopyPairAttributeRequest {
   CopyPairType?: string;
   /** 修改复制对名称（长度最大支持 64 个字符） */
   CopyPairName?: string;
+  /** 容灾端实例类型（仅容灾端CVM未创建时可修改） */
+  InstanceType?: string;
 }
 
 declare interface ModifyCopyPairAttributeResponse {
