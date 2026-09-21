@@ -408,6 +408,8 @@ declare interface DescribeModelResponseVO {
   InstanceID?: string;
   /** 模型ID */
   ID?: string;
+  /** 模型提供商 */
+  Provider?: string;
   /** 模型名称 */
   Name?: string;
   /** 凭据ID */
@@ -1300,11 +1302,15 @@ declare interface CreateModelRequest {
   /** 模型名称 */
   Name: string;
   /** 协议类型：http/https */
-  HttpProtocolType: string;
+  HttpProtocolType?: string;
   /** 目标路径 */
-  TargetPath: string;
+  TargetPath?: string;
   /** 目标服务器 */
-  TargetHosts: TargetHostDTO[];
+  TargetHosts?: TargetHostDTO[];
+  /** 模型提供商枚举值：tencentTokenHub： 腾讯云TokenHubtiONE： TI-ONE应用default： 其他 */
+  Provider?: string;
+  /** Provider=tencentTokenHub时对应的密钥 */
+  ApiKeys?: string[];
   /** 凭据ID */
   CredentialID?: string;
   /** https时，是否检查证书合法 */

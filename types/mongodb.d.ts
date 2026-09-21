@@ -914,6 +914,32 @@ declare interface AssignProjectResponse {
   RequestId?: string;
 }
 
+declare interface CheckDBInstanceElasticCpuScalableRequest {
+  /** 实例ID */
+  InstanceId?: string;
+}
+
+declare interface CheckDBInstanceElasticCpuScalableResponse {
+  /** 是否可以进行弹性CPU扩容 */
+  Scalable?: boolean;
+  /** 当前是否处于扩容状态 */
+  IsScaled?: boolean;
+  /** 实例是否被锁定（有流程在执行） */
+  IsLocked?: boolean;
+  /** 不可扩容的原因 */
+  Reason?: string;
+  /** 最大可扩容的CPU核数，MIN(最小分片CPU核数, 24) */
+  MaxExtraCpu?: number;
+  /** 当前扩容的CPU核数（如果处于扩容状态） */
+  ExtraCpu?: number;
+  /** 扩容触发类型: 1-手动, 2-周期, 3-一次性时间段, 4-监控 */
+  TriggerType?: number;
+  /** 扩容时间 */
+  ScaleUpTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CloseAuditServiceRequest {
   /** 实例ID，格式如：cmgo-test1234，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
@@ -3115,6 +3141,8 @@ declare interface Mongodb {
   (): Versions;
   /** 指定云数据库实例的所属项目 {@link AssignProjectRequest} {@link AssignProjectResponse} */
   AssignProject(data: AssignProjectRequest, config?: AxiosRequestConfig): AxiosPromise<AssignProjectResponse>;
+  /** 查询cpu弹性扩容信息 {@link CheckDBInstanceElasticCpuScalableRequest} {@link CheckDBInstanceElasticCpuScalableResponse} */
+  CheckDBInstanceElasticCpuScalable(data?: CheckDBInstanceElasticCpuScalableRequest, config?: AxiosRequestConfig): AxiosPromise<CheckDBInstanceElasticCpuScalableResponse>;
   /** 关闭审计 {@link CloseAuditServiceRequest} {@link CloseAuditServiceResponse} */
   CloseAuditService(data: CloseAuditServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CloseAuditServiceResponse>;
   /** 创建账号 {@link CreateAccountUserRequest} {@link CreateAccountUserResponse} */

@@ -2,6 +2,68 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 直播审核标签分组数据 */
+declare interface AuditGroupClassInfo {
+  /** 标签组分类中文名。 */
+  GroupClassName?: string;
+  /** 标签组分类英文名。 */
+  GroupClassEname?: string;
+  /** 标签组列表。 */
+  LabelGroupList?: AuditLabelGroupInfo[] | null;
+}
+
+/** 直播审核标签分组信息 */
+declare interface AuditGroupInfo {
+  /** 标签类型。可取值：TagImage，TagText，TagAudio。 */
+  TagType?: string;
+  /** 标签组分类列表。 */
+  GroupClassList?: AuditGroupClassInfo[] | null;
+}
+
+/** 向图库提交的图片数据类型。 */
+declare interface AuditImage {
+  /** 提交的图片顺序索引。 */
+  Index: string;
+  /** 图片地址。 */
+  Url: string;
+  /** 图片 md5 值。 */
+  Md5: string;
+  /** 图片名称。 */
+  Name: string;
+  /** 违规类型。可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。 */
+  Label: string;
+}
+
+/** 直播审核图库添加图片详细结果。 */
+declare interface AuditImageCreateDetail {
+  /** 图片上传状态，0 表示成功，其他表示失败。10101: url 解码失败。10102: url 解析失败。10103: url 不是 cos 地址。10301: label 不合法。20101: 数据入库错误。30101: cos 下载图片连接错误。30102: cos 下载图片响应错误。40101: 优图接口调用错误。 */
+  Status: number;
+  /** 上传的图片 Id。 */
+  ImageId: string;
+  /** 图片上传顺序索引。 */
+  Index: string;
+}
+
+/** 直播审核图库删除图片详细结果。 */
+declare interface AuditImageDeleteDetail {
+  /** 图片 Id。 */
+  ImageId?: string;
+  /** 图片名称 */
+  Name?: string;
+  /** 删除状态。0：成功。10104：原图不存在。40201: 图库删图失败。20201: 图库记录删除失败。 */
+  Status?: number;
+  /** 违规类型。可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。 */
+  Label?: string;
+  /** 错误信息。 */
+  ErrMsg?: string;
+}
+
+/** 直播审核图库图片信息。 */
+declare interface AuditImageInfo {
+  /** 图片名称。 */
+  Name: string;
+}
+
 /** 直播审核关键词信息 */
 declare interface AuditKeyword {
   /** 关键词内容。 */
@@ -32,6 +94,32 @@ declare interface AuditKeywordInfo {
   Label?: string;
   /** 创建时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：1. 北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示。 */
   CreateTime?: string;
+}
+
+/** 直播审核，关键词库信息。 */
+declare interface AuditKeywordLibInfo {
+  /** 词库 Id。 */
+  LibId?: string;
+  /** 自定义词库名称。 */
+  Name?: string;
+  /** 自定义词库描述。 */
+  Description?: string;
+  /** 创建时间。UTC 格式，例如：2018-11-29T19:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示。 */
+  CreateTime?: string;
+  /** 处理建议。可取值：Review 疑似，Block 违规。 */
+  Suggestion?: string;
+  /** 匹配模式。可取值：ExactMatch 精确匹配， FuzzyMatch 模糊匹配。 */
+  MatchType?: string;
+}
+
+/** 直播审核标签组信息。 */
+declare interface AuditLabelGroupInfo {
+  /** 标签组中文名。 */
+  GroupName?: string;
+  /** 标签组英文名。 */
+  GroupEname?: string;
+  /** 标签组描述。 */
+  GroupMsg?: string;
 }
 
 /** 数字人主播信息。 */
@@ -2334,6 +2422,18 @@ declare interface CopyLiveAvatarRoomResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuditImagesRequest {
+  /** 样本图片列表。 */
+  Images: AuditImage[];
+}
+
+declare interface CreateAuditImagesResponse {
+  /** 创建图片结果详情。 */
+  Infos?: AuditImageCreateDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAuditKeywordLibRequest {
   /** 自定义词库名称。 */
   Name: string;
@@ -2365,7 +2465,7 @@ declare interface CreateAuditKeywordsResponse {
   /** 重复关键词列表。 */
   DupInfos?: AuditKeywordInfo[];
   /** 新增成功关键词列表 */
-  Keywords?: AuditKeywordInfo[];
+  Keywords?: AuditKeywordInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3162,6 +3262,28 @@ declare interface CreateVideoRedrawTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAuditImagesRequest {
+  /** 图片 Id 列表。 */
+  ImageIds: string[];
+}
+
+declare interface DeleteAuditImagesResponse {
+  /** 创建图片结果详情。 */
+  Infos?: AuditImageDeleteDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAuditKeywordLibRequest {
+  /** 词库 Id。 */
+  LibId: string;
+}
+
+declare interface DeleteAuditKeywordLibResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAuditKeywordsRequest {
   /** 要删除的关键词 Id 列表。 */
   KeywordIds: string[];
@@ -3584,6 +3706,54 @@ declare interface DescribeAreaBillBandwidthAndFluxListRequest {
 declare interface DescribeAreaBillBandwidthAndFluxListResponse {
   /** 明细数据信息。 */
   DataInfoList: BillAreaInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditGroupTagRequest {
+  /** 标签类别。Other：全量，TagText：文字，TagImage：图片，TagAudio：音频。 */
+  TagType: string;
+}
+
+declare interface DescribeAuditGroupTagResponse {
+  /** 标签组分类数据按类型返回。 */
+  GroupTypeList?: AuditGroupInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditImagesRequest {
+  /** 违规类型。可取值：Normal: 正常 ，Polity: 政治，Porn: 色情，Sexy：性感，Ad: 广告，Illegal: 违法，Abuse: 谩骂，Terror: 暴恐，Spam: 灌水，Moan:呻吟。 */
+  Label: string;
+  /** 查询页码。 */
+  PageIndex: number;
+  /** 查询条目数。 */
+  PageSize: number;
+}
+
+declare interface DescribeAuditImagesResponse {
+  /** 创建图片结果详情。 */
+  Infos?: AuditImageInfo[];
+  /** 图片总数。 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditKeywordLibsRequest {
+  /** 获取偏移量。 */
+  Offset: number;
+  /** 获取条数。 */
+  Limit: number;
+  /** 根据关键词库名进行模糊查询。传递空字符串时，忽略。 */
+  Name: string;
+}
+
+declare interface DescribeAuditKeywordLibsResponse {
+  /** 满足条件的关键词库数量。 */
+  Total?: number;
+  /** 关键词库信息列表。 */
+  Infos?: AuditKeywordLibInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5626,6 +5796,22 @@ declare interface InsertTaskTemporaryFilesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuditKeywordLibRequest {
+  /** 自定义词库名称。 */
+  Name: string;
+  /** 自定义词库描述。 */
+  Description: string;
+  /** 处理建议。可取值：Review 疑似，Block 违规。 */
+  Suggestion: string;
+  /** 要更新的词库 Id。 */
+  LibId: string;
+}
+
+declare interface ModifyAuditKeywordLibResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCasterInputInfoRequest {
   /** 导播台ID。 */
   CasterId: number;
@@ -6593,6 +6779,8 @@ declare interface Live {
   CopyCaster(data: CopyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CopyCasterResponse>;
   /** 复制数字人直播间 {@link CopyLiveAvatarRoomRequest} {@link CopyLiveAvatarRoomResponse} */
   CopyLiveAvatarRoom(data: CopyLiveAvatarRoomRequest, config?: AxiosRequestConfig): AxiosPromise<CopyLiveAvatarRoomResponse>;
+  /** 直播审核图库添加图片 {@link CreateAuditImagesRequest} {@link CreateAuditImagesResponse} */
+  CreateAuditImages(data: CreateAuditImagesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditImagesResponse>;
   /** 直播审核创建词库 {@link CreateAuditKeywordLibRequest} {@link CreateAuditKeywordLibResponse} */
   CreateAuditKeywordLib(data: CreateAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordLibResponse>;
   /** 直播审核创建关键词 {@link CreateAuditKeywordsRequest} {@link CreateAuditKeywordsResponse} */
@@ -6659,6 +6847,10 @@ declare interface Live {
   CreateScreenshotTask(data: CreateScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScreenshotTaskResponse>;
   /** 创建AIGC视频转绘任务 {@link CreateVideoRedrawTaskRequest} {@link CreateVideoRedrawTaskResponse} */
   CreateVideoRedrawTask(data: CreateVideoRedrawTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoRedrawTaskResponse>;
+  /** 直播审核图库删除图片 {@link DeleteAuditImagesRequest} {@link DeleteAuditImagesResponse} */
+  DeleteAuditImages(data: DeleteAuditImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditImagesResponse>;
+  /** 直播审核删除词库 {@link DeleteAuditKeywordLibRequest} {@link DeleteAuditKeywordLibResponse} */
+  DeleteAuditKeywordLib(data: DeleteAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordLibResponse>;
   /** 直播审核删除关键词 {@link DeleteAuditKeywordsRequest} {@link DeleteAuditKeywordsResponse} */
   DeleteAuditKeywords(data: DeleteAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordsResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
@@ -6727,6 +6919,12 @@ declare interface Live {
   DescribeAllStreamPlayInfoList(data: DescribeAllStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllStreamPlayInfoListResponse>;
   /** 海外分区直播播放带宽和流量数据查询 {@link DescribeAreaBillBandwidthAndFluxListRequest} {@link DescribeAreaBillBandwidthAndFluxListResponse} */
   DescribeAreaBillBandwidthAndFluxList(data: DescribeAreaBillBandwidthAndFluxListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAreaBillBandwidthAndFluxListResponse>;
+  /** 直播审核获取标签组分类数据 {@link DescribeAuditGroupTagRequest} {@link DescribeAuditGroupTagResponse} */
+  DescribeAuditGroupTag(data: DescribeAuditGroupTagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditGroupTagResponse>;
+  /** 直播审核图库获取图片 {@link DescribeAuditImagesRequest} {@link DescribeAuditImagesResponse} */
+  DescribeAuditImages(data: DescribeAuditImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditImagesResponse>;
+  /** 直播审核词库列表 {@link DescribeAuditKeywordLibsRequest} {@link DescribeAuditKeywordLibsResponse} */
+  DescribeAuditKeywordLibs(data: DescribeAuditKeywordLibsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordLibsResponse>;
   /** 直播审核获取关键词 {@link DescribeAuditKeywordsRequest} {@link DescribeAuditKeywordsResponse} */
   DescribeAuditKeywords(data: DescribeAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordsResponse>;
   /** 查询直播中的主备流 {@link DescribeBackupStreamListRequest} {@link DescribeBackupStreamListResponse} */
@@ -6945,6 +7143,8 @@ declare interface Live {
   GenerateLiveAvatarScriptBroadcast(data: GenerateLiveAvatarScriptBroadcastRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateLiveAvatarScriptBroadcastResponse>;
   /** 轮播任务插播文件 {@link InsertTaskTemporaryFilesRequest} {@link InsertTaskTemporaryFilesResponse} */
   InsertTaskTemporaryFiles(data: InsertTaskTemporaryFilesRequest, config?: AxiosRequestConfig): AxiosPromise<InsertTaskTemporaryFilesResponse>;
+  /** 直播审核更新词库 {@link ModifyAuditKeywordLibRequest} {@link ModifyAuditKeywordLibResponse} */
+  ModifyAuditKeywordLib(data: ModifyAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditKeywordLibResponse>;
   /** 修改导播台 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
   ModifyCaster(data: ModifyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterResponse>;
   /** 修改导播台输入源 {@link ModifyCasterInputInfoRequest} {@link ModifyCasterInputInfoResponse} */

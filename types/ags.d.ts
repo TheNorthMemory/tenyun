@@ -16,6 +16,14 @@ declare interface APIKeyInfo {
   CreatedAt?: string;
 }
 
+/** 主账号配额总览 */
+declare interface AccountQuotaOverview {
+  /** 主账号各资源维度的配额上限 */
+  Quota?: QuotaResourceInfo;
+  /** 主账号各资源维度的当前用量 */
+  Usage?: QuotaResourceInfo;
+}
+
 /** Deployment 对 Sandbox Instance 的亲和配置。 */
 declare interface AffinityConfiguration {
   /** Affinity 模式。枚举值：BEST_EFFORT：优先复用原 Instance，不可用时允许改选。STRICT：只复用原 Instance，不可用时失败且不改选。EXCLUSIVE：一个 Affinity ID 独占一个 Instance，不能迁移。缺失或空字符串表示关闭 Affinity。 */
@@ -156,6 +164,58 @@ declare interface EnvVar {
   Value?: string;
 }
 
+/** Agent 状态切换事件信息 */
+declare interface EventActionsInfo {
+  /** 状态增量，JSON 字符串，最大长度 8192 字符。 */
+  StateDelta?: string | null;
+}
+
+/** 事件内容信息 */
+declare interface EventContentInfo {
+  /** 角色，最大长度 64 字符。 */
+  Role?: string | null;
+  /** 内容片段列表。 */
+  Parts?: EventPartInfo[] | null;
+}
+
+/** 事件信息 */
+declare interface EventInfo {
+  /** 事件 ID。为空时由服务生成。 */
+  EventId?: string | null;
+  /** 调用 ID，最大长度 128 字符。 */
+  InvocationId?: string | null;
+  /** 事件作者，最大长度 128 字符。 */
+  Author?: string | null;
+  /** 事件内容。 */
+  Content?: EventContentInfo | null;
+  /** 事件动作信息。StateDelta 为 JSON 对象字符串 */
+  Actions?: EventActionsInfo | null;
+  /** 事件元数据。 */
+  Metadata?: string | null;
+  /** 事件扩展信息 JSON 对象字符串，最大长度 8192 字符。 */
+  Extensions?: string | null;
+  /** 错误码，最大长度 128 字符。 */
+  ErrorCode?: string | null;
+  /** 错误信息，最大长度 2048 字符。 */
+  ErrorMessage?: string | null;
+  /** 事件时间。 */
+  Timestamp?: string;
+}
+
+/** 多模态内容片段信息 */
+declare interface EventPartInfo {
+  /** 文本内容，最大长度 8192 字符。 */
+  Text?: string | null;
+  /** 是否为思考内容。 */
+  Thought?: boolean | null;
+  /** 工具调用信息，JSON 字符串，最大长度 8192 字符。 */
+  FunctionCall?: string | null;
+  /** 工具返回信息，JSON 字符串，最大长度 8192 字符。 */
+  FunctionResponse?: string | null;
+  /** 内联数据。 */
+  InlineData?: InlineDataInfo | null;
+}
+
 /** 过滤列表规则 */
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
@@ -184,6 +244,14 @@ declare interface ImageStorageSource {
   SubPath?: string;
   /** 镜像 Digest，请求时无需传入 */
   Digest?: string;
+}
+
+/** 文件内容数据信息 */
+declare interface InlineDataInfo {
+  /** 媒体类型，最大长度 128 字符。 */
+  MimeType?: string | null;
+  /** Base64 编码数据，最大长度 8192 字符。 */
+  Data?: string | null;
 }
 
 /** Deployment 管理的 Sandbox Instance 的空闲生命周期配置 */
@@ -266,6 +334,36 @@ declare interface ProbeConfiguration {
   SuccessThreshold?: number;
   /** 健康检查失败阈值 */
   FailureThreshold?: number;
+}
+
+/** 配额组资源信息 */
+declare interface QuotaGroupOverview {
+  /** 配额组关联的标签键值 */
+  Tag?: Tag;
+  /** 配额组名称 */
+  Name?: string;
+  /** 配额组各资源维度的配额上限 */
+  Quota?: QuotaResourceInfo;
+  /** 配额组各资源维度的当前用量 */
+  Usage?: QuotaResourceInfo;
+  /** 创建时间参数格式：RFC3339 格式 */
+  CreateTime?: string;
+  /** 最后更新时间参数格式：RFC3339 格式 */
+  UpdateTime?: string;
+}
+
+/** 主账号资源信息 */
+declare interface QuotaResourceInfo {
+  /** 沙箱工具配额或当前用量单位：个 */
+  SandboxTools?: number;
+  /** 沙箱实例配额或当前用量单位：个 */
+  SandboxInstances?: number;
+  /** 暂停实例配额或当前用量单位：个 */
+  PausedInstances?: number;
+  /** 暂停实例配额或当前用量。目前只在主账号中返回单位：核 */
+  CPUCores?: number;
+  /** 内存配额或当前用量单位：GiB */
+  MemoryGiB?: number;
 }
 
 /** 资源配置 */
@@ -362,6 +460,54 @@ declare interface ScalingConfiguration {
   MaxInstanceRequestConcurrency?: number;
 }
 
+/** 会话信息 */
+declare interface SessionInfo {
+  /** 会话 ID。 */
+  SessionId?: string;
+  /** 会话所属空间 ID。 */
+  SpaceId?: string;
+  /** Session 快照状态 */
+  State?: SessionState;
+  /** 会话元数据，以键值对数组形式表示。每个元素包含 Metadata 名称和对应值，最多支持 64 项。 */
+  Metadata?: MetadataVar[];
+  /** Agent ID。 */
+  AgentId?: string;
+  /** 用户 ID。 */
+  UserId?: string;
+  /** 会话标题。 */
+  Title?: string;
+  /** 事件数量。 */
+  EventCount?: number;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 更新时间。 */
+  UpdateTime?: string;
+}
+
+/** 描述会话空间的完整信息。会话空间是用户状态、会话和事件的上级资源及隔离边界，同一个会话只能属于一个会话空间。 */
+declare interface SessionSpaceInfo {
+  /** 会话空间唯一标识，由服务端生成，最大长度为 128 个字符。调用方不应自行构造或解析。 */
+  SpaceId?: string;
+  /** 会话空间名称，用于标识会话空间的业务用途，最大长度为 128 个字符。 */
+  Name?: string;
+  /** 会话空间描述，用于说明业务用途和使用范围，最大长度为 512 个字符。为空时该字段可能不返回 */
+  Description?: string;
+  /** 会话空间当前状态。枚举值：Active： 正常可用Deleting： 正在删除 */
+  Status?: string;
+  /** 是否为系统默认会话空间。true 表示默认会话空间，false 表示普通会话空间。默认会话空间不允许删除。 */
+  Default?: boolean;
+  /** 会话空间创建时间，采用 ISO 8601/RFC 3339 格式。 */
+  CreateTime?: string;
+  /** 会话空间最后更新时间，采用 ISO 8601/RFC 3339 格式。 */
+  UpdateTime?: string;
+}
+
+/** Session 快照状态 */
+declare interface SessionState {
+  /** 自定义状态 JSON 对象字符串 */
+  CustomState?: string;
+}
+
 /** 沙箱工具中实例存储挂载配置 */
 declare interface StorageMount {
   /** 存储挂载配置名称 */
@@ -438,6 +584,42 @@ declare interface AcquireSandboxInstanceTokenResponse {
   RequestId?: string;
 }
 
+declare interface AppendEventRequest {
+  /** 会话所属空间 ID。 */
+  SpaceId: string;
+  /** 用户 ID。可通过调用方业务系统接口获取。 */
+  UserId: string;
+  /** 会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。 */
+  SessionId: string;
+  /** 事件内容。 */
+  Event: EventInfo;
+  /** Agent ID。可选。 */
+  AgentId?: string;
+}
+
+declare interface AppendEventResponse {
+  /** 事件信息。 */
+  Event?: EventInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ApproveRegistryRecordRequest {
+}
+
+declare interface ApproveRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelRegistryRecordRequest {
+}
+
+declare interface CancelRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAPIKeyRequest {
   /** API密钥名称，方便用户记忆 */
   Name?: string;
@@ -494,6 +676,22 @@ declare interface CreatePreCacheImageTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreateRegistryRecordRequest {
+}
+
+declare interface CreateRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRegistryRequest {
+}
+
+declare interface CreateRegistryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSandboxToolRequest {
   /** 沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一 */
   ToolName: string;
@@ -530,6 +728,46 @@ declare interface CreateSandboxToolResponse {
   RequestId?: string;
 }
 
+declare interface CreateSessionRequest {
+  /** 会话所属空间 ID。 */
+  SpaceId: string;
+  /** 用户 ID。可通过调用方业务系统接口获取。 */
+  UserId: string;
+  /** Agent ID。可选。 */
+  AgentId?: string;
+  /** 会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。 */
+  SessionId?: string;
+  /** 会话标题，最大长度 256 字符。 */
+  Title?: string;
+  /** 初始会话状态。 */
+  State?: SessionState;
+  /** 创建会话时设置的初始元数据，以键值对数组形式表示。每个元素包含 Metadata 名称和对应值。入参限制：本参数可选，最多支持 64 项。Name 不能为空或重复，最大长度为 253 字节；Value 最大长度为 1024 字节，允许为空字符串。Metadata 序列化后的总大小不能超过 64 KiB。 */
+  Metadata?: MetadataVar[];
+}
+
+declare interface CreateSessionResponse {
+  /** 会话信息。 */
+  Session?: SessionInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateSessionSpaceRequest {
+  /** 会话空间名称，用于标识会话空间的业务用途。入参限制：必填；去除首尾空白后不能为空；最大长度为 128 个字符。建议名称包含业务和环境信息，便于识别和管理。 */
+  Name: string;
+  /** 会话空间描述，用于补充说明会话空间的业务用途。入参限制：选填；最大长度为 512 个字符。未传入时创建为空描述。 */
+  Description?: string;
+  /** 创建 SessionSpace 时为资源绑定标签。 */
+  Tags?: Tag[];
+}
+
+declare interface CreateSessionSpaceResponse {
+  /** 创建成功后的会话空间完整信息。接口成功时一定返回；接口失败时返回 Error，不会返回该字段。 */
+  SessionSpace?: SessionSpaceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAPIKeyRequest {
   /** 需要删除的API密钥ID */
   KeyId: string;
@@ -550,12 +788,54 @@ declare interface DeleteDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRegistryRecordRequest {
+}
+
+declare interface DeleteRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRegistryRequest {
+}
+
+declare interface DeleteRegistryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSandboxToolRequest {
   /** 沙箱工具ID */
   ToolId: string;
 }
 
 declare interface DeleteSandboxToolResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSessionRequest {
+  /** 会话所属空间 ID。 */
+  SpaceId: string;
+  /** 用户 ID。可通过调用方业务系统接口获取。 */
+  UserId: string;
+  /** 会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。 */
+  SessionId: string;
+  /** Agent ID。可选。 */
+  AgentId?: string;
+}
+
+declare interface DeleteSessionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSessionSpaceRequest {
+  /** 需要删除的会话空间唯一标识。 */
+  SpaceId: string;
+}
+
+declare interface DeleteSessionSpaceResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -602,6 +882,34 @@ declare interface DescribeDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEventsRequest {
+  /** 会话所属空间 ID。 */
+  SpaceId: string;
+  /** 用户 ID。可通过调用方业务系统接口获取。 */
+  UserId: string;
+  /** 会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。 */
+  SessionId: string;
+  /** Agent ID。可选。 */
+  AgentId?: string;
+  /** 事件作者。取值示例：user、assistant、tool。 */
+  Author?: string;
+  /** 起始时间，仅返回该时间之后的事件，使用 RFC3339 格式，最大长度 64 字符。 */
+  AfterTimestamp?: string;
+  /** 分页偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 50，最大值为 200。 */
+  Limit?: number;
+}
+
+declare interface DescribeEventsResponse {
+  /** 事件列表。 */
+  Events?: EventInfo[];
+  /** 符合条件的事件总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePreCacheImageTaskRequest {
   /** 镜像地址 */
   Image: string;
@@ -622,6 +930,76 @@ declare interface DescribePreCacheImageTaskResponse {
   Status?: string;
   /** 镜像预热状态描述 */
   Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeQuotaOverviewRequest {
+  /** 分页偏移量，从 0 开始，默认值为 0，必须大于等于 0。单位：偏移量 */
+  Offset?: number;
+  /** 每页返回的配额组数量单位：个 */
+  Limit?: number;
+  /** 配额组过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeQuotaOverviewResponse {
+  /** 主账号配额上限及全账号当前用量 */
+  AccountQuotaOverview?: AccountQuotaOverview;
+  /** 当前分页下的配额组配额与用量列表。没有数据时返回空数组。 */
+  QuotaGroupSet?: QuotaGroupOverview[];
+  /** 满足过滤条件的配额组总数，不受当前分页大小影响。单位：个 */
+  TotalCount?: number;
+  /** 本次查询完成时间，格式为 RFC3339 */
+  DataTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryAuditLogListRequest {
+}
+
+declare interface DescribeRegistryAuditLogListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryListRequest {
+}
+
+declare interface DescribeRegistryListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryRecordListRequest {
+}
+
+declare interface DescribeRegistryRecordListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryRecordRequest {
+}
+
+declare interface DescribeRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryRecordVersionListRequest {
+}
+
+declare interface DescribeRegistryRecordVersionListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRegistryRequest {
+}
+
+declare interface DescribeRegistryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -676,6 +1054,100 @@ declare interface DescribeSandboxToolListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSessionRequest {
+  /** 会话所属空间 ID。 */
+  SpaceId: string;
+  /** 用户 ID。可通过调用方业务系统接口获取。 */
+  UserId: string;
+  /** 会话 ID。可通过 CreateSession 或 DescribeSessions 接口获取。 */
+  SessionId: string;
+  /** Agent ID。可选。 */
+  AgentId?: string;
+  /** 返回最近事件数量，默认为 0，最大值为 200。 */
+  NumRecentEvents?: number;
+  /** 事件起始时间，RFC3339 格式，最大长度 64 字符。 */
+  AfterTimestamp?: string;
+}
+
+declare interface DescribeSessionResponse {
+  /** 会话信息。 */
+  Session?: SessionInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSessionSpaceRequest {
+  /** 需要查询的会话空间唯一标识。入参限制：必填，不能为空。可通过 CreateSessionSpace 或 DescribeSessionSpaces 获取，不应自行构造。 */
+  SpaceId: string;
+}
+
+declare interface DescribeSessionSpaceResponse {
+  /** 查询到的会话空间信息。 */
+  SessionSpace?: SessionSpaceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSessionSpacesRequest {
+  /** 分页查询的起始偏移量。 */
+  Offset?: number;
+  /** 单次分页查询返回的会话空间数量。 */
+  Limit?: number;
+  /** 会话空间筛选条件列表，支持按空间 ID 精确匹配、名称精确或模糊匹配、描述模糊匹配。同一 Filter 内多个 Values 之间为 OR，不同 Filter 之间为 AND。不传或传空数组时不增加筛选限制。入参限制：Filter.Name 支持 space-id、name、name-like、description-like，不可重复。name 与 name-like 不可同时提供。Values 不可为空数组，筛选值不可为空或纯空白。匹配区分大小写，包含匹配中的 %、_ 按普通字符处理，不具有通配含义。例如 Name 为 name-like，Values 为 ["客服","测试"]，表示查询名称包含“客服”或“测试”的会话空间。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeSessionSpacesResponse {
+  /** 会话空间列表。 */
+  SessionSpaces?: SessionSpaceInfo[];
+  /** 满足查询条件的会话空间总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSessionsRequest {
+  /** 查询的会话空间 ID。 */
+  SpaceId: string;
+  /** Agent ID 列表，最多支持 100 个。 */
+  AgentIds?: string[];
+  /** 用户 ID 列表，最多支持 100 个。 */
+  UserIds?: string[];
+  /** 分页偏移量，默认为 0。 */
+  Offset?: number;
+  /** 返回数量，默认为 20，最大值为 100。 */
+  Limit?: number;
+  /** 会话 ID 列表，最多支持 100 个。 */
+  SessionIds?: string[];
+  /** 会话筛选条件列表，支持 Metadata 精确匹配、标题精确匹配和标题模糊匹配。同一 Filter 内多个 Values 之间为 OR，不同 Filter 之间为 AND。不传或传空数组时不增加筛选限制。入参限制：最多传入 10 个 Filter，每个 Filter 最多支持 100 个 Values。Filter.Name 不可重复，支持 metadata:MetadataKey、title、title-like；title 与 title-like 不可同时提供。标题筛选值不可为空或纯空白。匹配区分大小写，标题包含匹配中的 %、_ 按普通字符处理，不具有通配含义。例如 Name 为 title-like，Values 为 ["客服","测试"]，表示查询标题包含“客服”或“测试”的会话。Name 为 metadata:env，Values 为 ["dev","test"]，表示按 Metadata env 的值精确筛选。标题条件与 Metadata、SessionIds、UserIds 筛选条件可组合使用，条件之间为 AND。筛选在分页前执行，TotalCount 为符合条件的会话总数。 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeSessionsResponse {
+  /** 符合条件的会话总数。 */
+  TotalCount?: number;
+  /** 会话列表。 */
+  Sessions?: SessionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetSkillPackageDownloadURLRequest {
+}
+
+declare interface GetSkillPackageDownloadURLResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetSkillPackageUploadURLRequest {
+}
+
+declare interface GetSkillPackageUploadURLResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeploymentRequest {
   /** 待修改的 Deployment ID。 */
   DeploymentId: string;
@@ -694,6 +1166,42 @@ declare interface ModifyDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface ModifySessionRequest {
+  /** 会话所属的 SessionSpace ID。 */
+  SpaceId: string;
+  /** 会话所属的用户 ID。 */
+  UserId: string;
+  /** 待修改的会话 ID。 */
+  SessionId: string;
+  /** 修改后的会话标题。入参限制：本参数可选，最大长度为 255 个字符。不传表示保持原会话标题不变，传空字符串表示清空会话标题。Title 与 Metadata 至少传入一项。 */
+  Title?: string;
+  /** 修改后的完整会话元数据，以键值对数组形式表示。入参限制：本参数可选，最多支持 64 项。Name 不能为空或重复，最大长度为 253 字节；Value 最大长度为 1024 字节，允许为空字符串。Metadata 序列化后的总大小不能超过 64 KiB。不传表示保持原 Metadata 不变；传空数组表示清空全部 Metadata；传非空数组表示使用传入内容全量覆盖原 Metadata。Metadata 与 Title 至少传入一项。 */
+  Metadata?: MetadataVar[];
+}
+
+declare interface ModifySessionResponse {
+  /** 修改后的完整会话信息。 */
+  Session?: SessionInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySessionSpaceRequest {
+  /** 需要修改的会话空间唯一标识。 */
+  SpaceId: string;
+  /** 修改后的会话空间名称。 */
+  Name: string;
+  /** 修改后的会话空间描述。 */
+  Description?: string;
+}
+
+declare interface ModifySessionSpaceResponse {
+  /** 修改后的会话空间信息。 */
+  SessionSpace?: SessionSpaceInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface PauseSandboxInstanceRequest {
   /** 沙箱实例ID */
   InstanceId: string;
@@ -704,6 +1212,22 @@ declare interface PauseSandboxInstanceRequest {
 declare interface PauseSandboxInstanceResponse {
   /** 目标沙箱实例当前的状态枚举值：PAUSING： 正在暂停中PAUSED： 已暂停PAUSE_FAILED： 暂停失败 */
   InstanceStatus?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PreviewRegistryRecordRequest {
+}
+
+declare interface PreviewRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RejectRegistryRecordRequest {
+}
+
+declare interface RejectRegistryRecordResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -756,6 +1280,30 @@ declare interface StopSandboxInstanceResponse {
   RequestId?: string;
 }
 
+declare interface SyncRegistryRecordRequest {
+}
+
+declare interface SyncRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRegistryRecordRequest {
+}
+
+declare interface UpdateRegistryRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateRegistryRequest {
+}
+
+declare interface UpdateRegistryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateSandboxInstanceRequest {
   /** 沙箱实例ID */
   InstanceId: string;
@@ -797,42 +1345,106 @@ declare interface Ags {
   AcquireDeploymentToken(data: AcquireDeploymentTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AcquireDeploymentTokenResponse>;
   /** 获取沙箱实例的访问Token {@link AcquireSandboxInstanceTokenRequest} {@link AcquireSandboxInstanceTokenResponse} */
   AcquireSandboxInstanceToken(data: AcquireSandboxInstanceTokenRequest, config?: AxiosRequestConfig): AxiosPromise<AcquireSandboxInstanceTokenResponse>;
+  /** 追加事件 {@link AppendEventRequest} {@link AppendEventResponse} */
+  AppendEvent(data: AppendEventRequest, config?: AxiosRequestConfig): AxiosPromise<AppendEventResponse>;
+  /** 审批通过 Record 版本 {@link ApproveRegistryRecordRequest} {@link ApproveRegistryRecordResponse} */
+  ApproveRegistryRecord(data?: ApproveRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ApproveRegistryRecordResponse>;
+  /** 取消 Record 版本 {@link CancelRegistryRecordRequest} {@link CancelRegistryRecordResponse} */
+  CancelRegistryRecord(data?: CancelRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CancelRegistryRecordResponse>;
   /** 创建新的API密钥 {@link CreateAPIKeyRequest} {@link CreateAPIKeyResponse} */
   CreateAPIKey(data?: CreateAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAPIKeyResponse>;
   /** 创建 Deployment {@link CreateDeploymentRequest} {@link CreateDeploymentResponse} */
   CreateDeployment(data: CreateDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeploymentResponse>;
   /** 创建预热镜像任务 {@link CreatePreCacheImageTaskRequest} {@link CreatePreCacheImageTaskResponse} */
   CreatePreCacheImageTask(data: CreatePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreCacheImageTaskResponse>;
+  /** 创建 Registry {@link CreateRegistryRequest} {@link CreateRegistryResponse} */
+  CreateRegistry(data?: CreateRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRegistryResponse>;
+  /** 创建 Record {@link CreateRegistryRecordRequest} {@link CreateRegistryRecordResponse} */
+  CreateRegistryRecord(data?: CreateRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRegistryRecordResponse>;
   /** 创建沙箱工具 {@link CreateSandboxToolRequest} {@link CreateSandboxToolResponse} */
   CreateSandboxTool(data: CreateSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxToolResponse>;
+  /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
+  CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
+  /** 创建会话空间 {@link CreateSessionSpaceRequest} {@link CreateSessionSpaceResponse} */
+  CreateSessionSpace(data: CreateSessionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionSpaceResponse>;
   /** 删除API密钥 {@link DeleteAPIKeyRequest} {@link DeleteAPIKeyResponse} */
   DeleteAPIKey(data: DeleteAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAPIKeyResponse>;
   /** 删除 Deployment {@link DeleteDeploymentRequest} {@link DeleteDeploymentResponse} */
   DeleteDeployment(data: DeleteDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeploymentResponse>;
+  /** 删除 Registry {@link DeleteRegistryRequest} {@link DeleteRegistryResponse} */
+  DeleteRegistry(data?: DeleteRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegistryResponse>;
+  /** 删除 Record {@link DeleteRegistryRecordRequest} {@link DeleteRegistryRecordResponse} */
+  DeleteRegistryRecord(data?: DeleteRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegistryRecordResponse>;
   /** 删除沙箱工具 {@link DeleteSandboxToolRequest} {@link DeleteSandboxToolResponse} */
   DeleteSandboxTool(data: DeleteSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxToolResponse>;
+  /** 删除会话 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
+  DeleteSession(data: DeleteSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionResponse>;
+  /** 删除会话空间 {@link DeleteSessionSpaceRequest} {@link DeleteSessionSpaceResponse} */
+  DeleteSessionSpace(data: DeleteSessionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionSpaceResponse>;
   /** 获取API密钥列表 {@link DescribeAPIKeyListRequest} {@link DescribeAPIKeyListResponse} */
   DescribeAPIKeyList(data?: DescribeAPIKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAPIKeyListResponse>;
   /** 查询 Deployment {@link DescribeDeploymentRequest} {@link DescribeDeploymentResponse} */
   DescribeDeployment(data: DescribeDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentResponse>;
   /** 查询 Deployment 列表 {@link DescribeDeploymentListRequest} {@link DescribeDeploymentListResponse} */
   DescribeDeploymentList(data?: DescribeDeploymentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentListResponse>;
+  /** 查询事件列表 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
+  DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
   DescribePreCacheImageTask(data: DescribePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageTaskResponse>;
+  /** 查询账号配额总览 {@link DescribeQuotaOverviewRequest} {@link DescribeQuotaOverviewResponse} */
+  DescribeQuotaOverview(data?: DescribeQuotaOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaOverviewResponse>;
+  /** 查询 Registry 详情 {@link DescribeRegistryRequest} {@link DescribeRegistryResponse} */
+  DescribeRegistry(data?: DescribeRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryResponse>;
+  /** 查询审计日志 {@link DescribeRegistryAuditLogListRequest} {@link DescribeRegistryAuditLogListResponse} */
+  DescribeRegistryAuditLogList(data?: DescribeRegistryAuditLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryAuditLogListResponse>;
+  /** 查询 Registry 列表 {@link DescribeRegistryListRequest} {@link DescribeRegistryListResponse} */
+  DescribeRegistryList(data?: DescribeRegistryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryListResponse>;
+  /** 查询 Record 详情 {@link DescribeRegistryRecordRequest} {@link DescribeRegistryRecordResponse} */
+  DescribeRegistryRecord(data?: DescribeRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryRecordResponse>;
+  /** 查询 Record 列表 {@link DescribeRegistryRecordListRequest} {@link DescribeRegistryRecordListResponse} */
+  DescribeRegistryRecordList(data?: DescribeRegistryRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryRecordListResponse>;
+  /** 查询 Record 版本列表 {@link DescribeRegistryRecordVersionListRequest} {@link DescribeRegistryRecordVersionListResponse} */
+  DescribeRegistryRecordVersionList(data?: DescribeRegistryRecordVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryRecordVersionListResponse>;
   /** 查询沙箱实例列表 {@link DescribeSandboxInstanceListRequest} {@link DescribeSandboxInstanceListResponse} */
   DescribeSandboxInstanceList(data?: DescribeSandboxInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstanceListResponse>;
   /** 查询沙箱工具列表 {@link DescribeSandboxToolListRequest} {@link DescribeSandboxToolListResponse} */
   DescribeSandboxToolList(data?: DescribeSandboxToolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxToolListResponse>;
+  /** 查询会话 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */
+  DescribeSession(data: DescribeSessionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionResponse>;
+  /** 查询会话空间详情 {@link DescribeSessionSpaceRequest} {@link DescribeSessionSpaceResponse} */
+  DescribeSessionSpace(data: DescribeSessionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionSpaceResponse>;
+  /** 查询会话空间列表 {@link DescribeSessionSpacesRequest} {@link DescribeSessionSpacesResponse} */
+  DescribeSessionSpaces(data?: DescribeSessionSpacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionSpacesResponse>;
+  /** 会话列表 {@link DescribeSessionsRequest} {@link DescribeSessionsResponse} */
+  DescribeSessions(data: DescribeSessionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionsResponse>;
+  /** 生成 Skill 包下载 URL {@link GetSkillPackageDownloadURLRequest} {@link GetSkillPackageDownloadURLResponse} */
+  GetSkillPackageDownloadURL(data?: GetSkillPackageDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetSkillPackageDownloadURLResponse>;
+  /** 生成 Skill 包上传 URL {@link GetSkillPackageUploadURLRequest} {@link GetSkillPackageUploadURLResponse} */
+  GetSkillPackageUploadURL(data?: GetSkillPackageUploadURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetSkillPackageUploadURLResponse>;
   /** 修改 Deployment {@link ModifyDeploymentRequest} {@link ModifyDeploymentResponse} */
   ModifyDeployment(data: ModifyDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeploymentResponse>;
+  /** 修改会话 {@link ModifySessionRequest} {@link ModifySessionResponse} */
+  ModifySession(data: ModifySessionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySessionResponse>;
+  /** 修改会话空间 {@link ModifySessionSpaceRequest} {@link ModifySessionSpaceResponse} */
+  ModifySessionSpace(data: ModifySessionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySessionSpaceResponse>;
   /** 暂停沙箱实例 {@link PauseSandboxInstanceRequest} {@link PauseSandboxInstanceResponse} */
   PauseSandboxInstance(data: PauseSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<PauseSandboxInstanceResponse>;
+  /** 测试调用 Record 端点 {@link PreviewRegistryRecordRequest} {@link PreviewRegistryRecordResponse} */
+  PreviewRegistryRecord(data?: PreviewRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PreviewRegistryRecordResponse>;
+  /** 驳回 Record 版本 {@link RejectRegistryRecordRequest} {@link RejectRegistryRecordResponse} */
+  RejectRegistryRecord(data?: RejectRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<RejectRegistryRecordResponse>;
   /** 恢复沙箱实例 {@link ResumeSandboxInstanceRequest} {@link ResumeSandboxInstanceResponse} */
   ResumeSandboxInstance(data: ResumeSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeSandboxInstanceResponse>;
   /** 启动沙箱实例 {@link StartSandboxInstanceRequest} {@link StartSandboxInstanceResponse} */
   StartSandboxInstance(data?: StartSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StartSandboxInstanceResponse>;
   /** 停止沙箱实例 {@link StopSandboxInstanceRequest} {@link StopSandboxInstanceResponse} */
   StopSandboxInstance(data: StopSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopSandboxInstanceResponse>;
+  /** 同步 Record 描述符 {@link SyncRegistryRecordRequest} {@link SyncRegistryRecordResponse} */
+  SyncRegistryRecord(data?: SyncRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<SyncRegistryRecordResponse>;
+  /** 更新 Registry {@link UpdateRegistryRequest} {@link UpdateRegistryResponse} */
+  UpdateRegistry(data?: UpdateRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRegistryResponse>;
+  /** 更新 Record 可变元数据 {@link UpdateRegistryRecordRequest} {@link UpdateRegistryRecordResponse} */
+  UpdateRegistryRecord(data?: UpdateRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRegistryRecordResponse>;
   /** 更新沙箱实例 {@link UpdateSandboxInstanceRequest} {@link UpdateSandboxInstanceResponse} */
   UpdateSandboxInstance(data: UpdateSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSandboxInstanceResponse>;
   /** 更新沙箱工具 {@link UpdateSandboxToolRequest} {@link UpdateSandboxToolResponse} */

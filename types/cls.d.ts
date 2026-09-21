@@ -64,7 +64,7 @@ declare interface AgentApplicationInfo {
   ApplicationId?: string;
   /** 应用名称 */
   ApplicationName?: string;
-  /** 接入类型枚举值：Langfuse： Langfuse​ 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool） */
+  /** 接入类型枚举值：Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool） */
   AccessType?: string;
   /** 应用下资源所属地域例如：ap-guangzhou */
   Region?: string;
@@ -76,6 +76,16 @@ declare interface AgentApplicationInfo {
   CreateTime?: number;
   /** 更新时间单位：秒秒级时间戳 */
   UpdateTime?: number;
+  /** 日志集id */
+  LogsetId?: string;
+  /** 服务方名称 */
+  AssumerName?: string;
+  /** 服务方子名称 */
+  SubAssumerName?: string;
+  /** 服务方Uin */
+  AssumerUin?: number;
+  /** 服务方使用的角色 */
+  RoleName?: string;
 }
 
 /** agent 应用主题信息 */
@@ -478,6 +488,8 @@ declare interface CloudProductLogTaskInfo {
   TopicTags?: Tag[];
   /** 投递任务关联logset的标签信息 */
   LogsetTags?: Tag[];
+  /** 应用id */
+  ApplicationId?: string;
 }
 
 /** 采集配置信息 */
@@ -1722,14 +1734,22 @@ declare interface KafkaConsumerContent {
 
 /** Kafka访问协议 */
 declare interface KafkaProtocolInfo {
-  /** 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证。- 当IsEncryptionAddr为true时，Protocol必填。- 支持的协议类型如下： - plaintext：纯文本无加密协议 - sasl_ssl：SASL 认证 + SSL 加密 - ssl：纯 SSL/TLS 加密协议 - sasl_plaintext：SASL 认证 + 非加密通道 */
+  /** 协议类型，支持的协议类型包括 plaintext、sasl_plaintext 或 sasl_ssl。建议使用 sasl_ssl，此协议会进行连接加密同时需要用户认证。当IsEncryptionAddr为true时，Protocol必填。支持的协议类型如下：plaintext：纯文本无加密协议sasl_ssl：SASL 认证 + SSL 加密ssl：纯 SSL/TLS 加密协议sasl_plaintext：SASL 认证 + 非加密通道 */
   Protocol?: string;
-  /** 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512。- 当Protocol为 `sasl_plaintext` 或 `sasl_ssl` 时 Mechanism 必填。- 支持加密类型如下 - PLAIN：明文认证 - SCRAM-SHA-256：基于挑战-响应机制，使用PBKDF2-HMAC-SHA256算法 - SCRAM-SHA-512：增强版SCRAM，使用PBKDF2-HMAC-SHA512算法 */
+  /** 加密类型，支持 PLAIN、SCRAM-SHA-256 或 SCRAM-SHA-512。当Protocol为 sasl_plaintext 或 sasl_ssl 时 Mechanism 必填。支持加密类型如下PLAIN：明文认证SCRAM-SHA-256：基于挑战-响应机制，使用PBKDF2-HMAC-SHA256算法SCRAM-SHA-512：增强版SCRAM，使用PBKDF2-HMAC-SHA512算法 */
   Mechanism?: string;
   /** 用户名。当Protocol为sasl_plaintext或sasl_ssl时必填 */
   UserName?: string;
   /** 用户密码。当Protocol为sasl_plaintext或sasl_ssl时必填 */
   Password?: string;
+  /** 是否开启客户端证书验证 */
+  EnableClientCertificate?: number;
+  /** 是否开启服务端证书验证 */
+  EnableServerCertificate?: number;
+  /** 云托管CA证书id */
+  CACertificateId?: string;
+  /** 云托管服务端证书id */
+  SVRCertificateId?: string;
 }
 
 /** Kafka导入配置信息 */
@@ -1758,12 +1778,14 @@ declare interface KafkaRechargeInfo {
   Status?: number;
   /** 导入数据位置，-2:最早（默认），-1：最晚 */
   Offset?: number;
-  /** 创建时间。格式`YYYY-MM-DD HH:MM:SS` */
+  /** 创建时间。格式YYYY-MM-DD HH:MM:SS */
   CreateTime?: string;
-  /** 更新时间。格式`YYYY-MM-DD HH:MM:SS` */
+  /** 更新时间。格式YYYY-MM-DD HH:MM:SS */
   UpdateTime?: string;
   /** 日志导入规则 */
   LogRechargeRule?: LogRechargeRuleInfo;
+  /** 私有网络信息 */
+  NetworkInfo?: NetworkInfo;
   /** 用户kafka拓展信息 */
   UserKafkaMeta?: UserKafkaMeta;
 }
@@ -1868,6 +1890,8 @@ declare interface LogInfo {
   RawLog?: string;
   /** 日志创建索引异常原因(仅在日志创建索引异常时有值) */
   IndexStatus?: string;
+  /** 日志时间，单位ns单位：纳秒 */
+  TimeNanos?: number;
 }
 
 /** 日志中的KV对 */
@@ -2256,6 +2280,22 @@ declare interface NetworkApplicationInfo {
   UpdateTime?: number;
 }
 
+/** 网络打通信息 */
+declare interface NetworkInfo {
+  /** 网络类型。 0：公网，1：内网 */
+  NetworkType: number;
+  /** 私有网络id */
+  VpcID?: string;
+  /** 私有网络所属用户app id */
+  AppID?: number;
+  /** 网络服务类型。0：CVM，3：专线网关，11：云联网，1025：CLB */
+  VirtualGatewayType?: number;
+  /** 专线网关id或者云联网id */
+  VpcGatewayIndex?: string;
+  /** 私有域名映射地址 */
+  PrivateDomainNames?: PrivateDomainNames[];
+}
+
 /** 通知内容模板详细配置 */
 declare interface NoticeContent {
   /** 渠道类型Email:邮件;Sms:短信;WeChat:微信;Phone:电话;WeCom:企业微信;DingTalk:钉钉;Lark:飞书;Http:自定义回调; */
@@ -2388,6 +2428,14 @@ declare interface PreviewLogStatistic {
   Time?: string;
   /** 目标topic-name */
   DstTopicName?: string | null;
+}
+
+/** 私有域名信息 */
+declare interface PrivateDomainNames {
+  /** 域名地址 */
+  DomainName: string;
+  /** ip地址 */
+  IpAddr: string;
 }
 
 /** 产品接入任务详情 */
@@ -3277,7 +3325,7 @@ declare interface CheckFunctionResponse {
 declare interface CheckRechargeKafkaServerRequest {
   /** 导入Kafka类型，0: 腾讯云CKafka；1: 用户自建Kafka。 */
   KafkaType: number;
-  /** 腾讯云CKafka实例ID。KafkaType为0时，KafkaInstance必填- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
+  /** 腾讯云CKafka实例ID。KafkaType为0时，KafkaInstance必填通过 获取实例列表信息 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址。KafkaType为1时，ServerAddr必填 */
   ServerAddr?: string;
@@ -3285,12 +3333,14 @@ declare interface CheckRechargeKafkaServerRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议。KafkaType参数为1并且IsEncryptionAddr参数为true时必填。 */
   Protocol?: KafkaProtocolInfo;
+  /** 网络信息参数 */
+  NetworkInfo?: NetworkInfo;
   /** 用户kafka拓展信息 */
   UserKafkaMeta?: UserKafkaMeta;
 }
 
 declare interface CheckRechargeKafkaServerResponse {
-  /** Kafka集群可访问状态。- 0：可正常访问 - -1：broker 连接失败- -2：sasl 鉴权失败- -3：ckafka 角色未授权- -4：topic 列表不存在- -5：topic 内暂无数据- -6：用户没有 ckafka 权限- -7：消费组已经存在- -8：kafka 实例不存在或已销毁- -9：Broker 列表为空- -10：Broker 地址格式不正确- -11：Broker 端口非整型 */
+  /** Kafka集群可访问状态。0：可正常访问 -1：broker 连接失败-2：sasl 鉴权失败-3：ckafka 角色未授权-4：topic 列表不存在-5：topic 内暂无数据-6：用户没有 ckafka 权限-7：消费组已经存在-8：kafka 实例不存在或已销毁-9：Broker 列表为空-10：Broker 地址格式不正确-11：Broker 端口非整型 */
   Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3943,7 +3993,7 @@ declare interface CreateIndexResponse {
 }
 
 declare interface CreateKafkaRechargeRequest {
-  /** 导入CLS目标TopicId。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。 */
+  /** 导入CLS目标TopicId。通过 获取日志主题列表 获取日志主题Id。通过 创建日志主题 获取日志主题Id。 */
   TopicId: string;
   /** Kafka导入配置名称 */
   Name: string;
@@ -3955,7 +4005,7 @@ declare interface CreateKafkaRechargeRequest {
   Offset: number;
   /** 日志导入规则。 */
   LogRechargeRule: LogRechargeRuleInfo;
-  /** 腾讯云CKafka实例ID，KafkaType为0时必填。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填。通过 获取实例列表信息 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址，KafkaType为1时必填。 */
   ServerAddr?: string;
@@ -3963,8 +4013,10 @@ declare interface CreateKafkaRechargeRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议。KafkaType为1并且IsEncryptionAddr为true时Protocol必填。 */
   Protocol?: KafkaProtocolInfo;
-  /** 用户Kafka消费组名称。- 消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。 */
+  /** 用户Kafka消费组名称。消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。 */
   ConsumerGroupName?: string;
+  /** 网络信息参数 */
+  NetworkInfo?: NetworkInfo;
   /** 用户kafka拓展信息 */
   UserKafkaMeta?: UserKafkaMeta;
 }
@@ -7047,15 +7099,15 @@ declare interface ModifyKafkaConsumerResponse {
 }
 
 declare interface ModifyKafkaRechargeRequest {
-  /** 导入配置Id。- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。 */
+  /** 导入配置Id。通过 创建Kafka数据订阅任务获取Kafka导入配置Id。通过 获取Kafka数据订阅任务列表获取Kafka导入配置Id。 */
   Id: string;
-  /** 导入CLS目标TopicId。- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456)获取日志主题Id。 */
+  /** 导入CLS目标TopicId。通过 获取日志主题列表获取日志主题Id。通过 创建日志主题获取日志主题Id。 */
   TopicId: string;
   /** Kafka导入配置名称 */
   Name?: string;
   /** 导入Kafka类型，0：腾讯云CKafka：1：用户自建Kafka。 */
   KafkaType?: number;
-  /** 腾讯云CKafka实例ID，KafkaType为0时必填。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
+  /** 腾讯云CKafka实例ID，KafkaType为0时必填。通过 获取实例列表信息 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址，KafkaType为1时必填。 */
   ServerAddr?: string;
@@ -7063,7 +7115,7 @@ declare interface ModifyKafkaRechargeRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议，KafkaType参数为1并且IsEncryptionAddr参数为true时必填。 */
   Protocol?: KafkaProtocolInfo;
-  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。- Kafka类型为腾讯云CKafka时：通过 [获取主题列表](https://cloud.tencent.com/document/product/597/40847) 获取TopicName。 */
+  /** 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。Kafka类型为腾讯云CKafka时：通过 获取主题列表 获取TopicName。 */
   UserKafkaTopics?: string;
   /** 用户Kafka消费组名称 */
   ConsumerGroupName?: string;
@@ -7071,6 +7123,8 @@ declare interface ModifyKafkaRechargeRequest {
   LogRechargeRule?: LogRechargeRuleInfo;
   /** 导入控制，1：暂停；2：启动。 */
   StatusControl?: number;
+  /** 私有网络信息参数 */
+  NetworkInfo?: NetworkInfo;
   /** 用户kafka拓展信息 */
   UserKafkaMeta?: UserKafkaMeta;
 }
@@ -7683,7 +7737,7 @@ declare interface PreviewKafkaRechargeRequest {
   UserKafkaTopics: string;
   /** 导入数据位置，-2：最早；-1：最晚。 */
   Offset: number;
-  /** 腾讯云CKafka实例ID，当KafkaType为0时参数KafkaInstance有效且必填。- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。 */
+  /** 腾讯云CKafka实例ID，当KafkaType为0时参数KafkaInstance有效且必填。通过 获取实例列表信息 获取实例id。 */
   KafkaInstance?: string;
   /** 服务地址。KafkaType为1时ServerAddr必填。 */
   ServerAddr?: string;
@@ -7691,10 +7745,12 @@ declare interface PreviewKafkaRechargeRequest {
   IsEncryptionAddr?: boolean;
   /** 加密访问协议。KafkaType为1并且IsEncryptionAddr为true时Protocol必填。 */
   Protocol?: KafkaProtocolInfo;
-  /** 用户Kafka消费组。- 消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。 */
+  /** 用户Kafka消费组。消费组是 Kafka 提供的可扩展且具有容错性的消费者机制，一个消费组中存在多个消费者，组内的所有消费者共同消费订阅 Topic 中的消息。一个消费者可同时消费多个 Partition，但一个 Partition 只能被消费组内的一个消费者消费。 */
   ConsumerGroupName?: string;
   /** 日志导入规则 */
   LogRechargeRule?: LogRechargeRuleInfo;
+  /** 网络连接参数 */
+  NetworkInfo?: NetworkInfo;
   /** 用户kafka拓展信息 */
   UserKafkaMeta?: UserKafkaMeta;
 }

@@ -641,7 +641,7 @@ declare interface CreateListenerRequest {
   RequestTimeout?: number;
   /** 是否打开七层获取源IP方式。 */
   XForwardedForRealIp?: boolean;
-  /** 解析方式。枚举值：UNIDIRECTIONAL： 双向。U： 单向。HTTPS监听器，此字段必传。 */
+  /** 解析方式。枚举值：UNIDIRECTIONAL： 单向。MUTUAL： 双向。HTTPS监听器，此字段必传。 */
   CertificationType?: string;
   /** 加密算法套件。支持配置'tls_policy_1.0-2', 'tls_policy_1.1-2', 'tls_policy_1.2', 'tls_policy_1.2_strict', 'tls_policy_1.2_strict-1.3'。 */
   CipherPolicyId?: string;
@@ -1295,7 +1295,7 @@ declare interface ModifyListenerRequest {
   ClientCaCertificates?: string[];
   /** 获取源IP方式。入参限制：支持选择'ProxyProtocol', 'Close', 'ProxyProtocolV2', 'TOA'。TCP监听器才支持此参数修改。 */
   GetRealIpType?: string;
-  /** HTTPS监听器支持选择版本枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2 */
+  /** HTTPS监听器支持选择版本枚举值：HTTP/1.1： 版本HTTP/1.1HTTP/2： 版本HTTP/2当前还支持修改。 */
   HttpVersion?: string;
 }
 

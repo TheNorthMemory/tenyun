@@ -448,7 +448,7 @@ declare interface AIGWMCPServer {
   ServerType: string;
   /** 协议类型，取值: StreamableHttp */
   Transport: string;
-  /** 服务类型：Registry HostIP */
+  /** 后端类型枚举值：MCPRegistry： mcp 注册中心Registry： 普通注册中心HostIP： 域名或ipVirtualMCPServer： 虚拟MCPServerDNS： 私有域名Kubernetes： Kubernetes服务 */
   UpstreamType: string;
   /** 展示名字 */
   DisplayName?: string;
@@ -482,6 +482,8 @@ declare interface AIGWMCPServer {
   MarketStatus?: string;
   /** 是否开启保留原Host功能 */
   PreserveHost?: boolean;
+  /** 日志采集配置 */
+  LogConfig?: AIGWLogConfig;
 }
 
 /** AI 网关 MCP Server ACL 配置详情 */
@@ -834,6 +836,20 @@ declare interface AIGWSensitiveWordRoute {
   ModelNameConfig?: CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy[];
 }
 
+/** 简单密钥信息 */
+declare interface AIGWSimpleSecretKey {
+  /** 密钥ID */
+  SecretKeyId?: string;
+  /** 密钥名称 */
+  Name?: string;
+  /** 启用状态枚举值：Enable： 启动Disable： 禁用 */
+  Status?: string;
+  /** 密钥类型枚举值：ApiKey： ApiKey类型 */
+  SecretType?: string;
+  /** 创建时间参数格式：2026-09-03 14:11:05 */
+  CreateTime?: string;
+}
+
 /** AI网关标签过滤 */
 declare interface AIGWTagFilter {
   /** 匹配策略枚举值：AND： 并OR： 或 */
@@ -1170,6 +1186,10 @@ declare interface CNAPIGwSecretKey {
   CustomHeaderCredentialConfig?: AIGWCustomHeaderCredentialConfig;
   /** 自定义Query参数凭证配置 */
   QueryParamCredentialConfig?: AIGWQueryParamCredentialConfig;
+  /** 该消费者密钥绑定的模型密钥列表 */
+  BoundModelSecretKeys?: AIGWSimpleSecretKey[];
+  /** 绑定了该模型密钥的消费者密钥列表 */
+  BoundConsumerSecretKeys?: AIGWSimpleSecretKey[];
 }
 
 /** 密钥列表 */
@@ -1921,7 +1941,7 @@ declare interface CreateCloudNativeAPIGatewayMCPServerRequest {
   ServerType: string;
   /** 传输协议：StreamableHttp或SSE枚举值：StreamableHttp： Streamable HTTPSSE： Server-Sent Events */
   Transport: string;
-  /** 后端类型枚举值：MCPRegistry： mcp 注册中心- RegistryRegistry： 普通注册中心HostIP： 域名或ipVirtualMCPServer： 虚拟MCPServer */
+  /** 后端类型枚举值：MCPRegistry： mcp 注册中心Registry： 普通注册中心HostIP： 域名或ipVirtualMCPServer： 虚拟MCPServerDNS： 私有域名Kubernetes： Kubernetes服务 */
   UpstreamType: string;
   /** 注册中心来源信息 */
   UpstreamInfo?: AIGWMCPUpstreamInfo;
@@ -1939,6 +1959,8 @@ declare interface CreateCloudNativeAPIGatewayMCPServerRequest {
   HealthCheck?: AIGWHealthCheckSetting;
   /** 是否开启保留原Host功能 */
   PreserveHost?: boolean;
+  /** 日志采集配置 */
+  LogConfig?: AIGWLogConfig;
 }
 
 declare interface CreateCloudNativeAPIGatewayMCPServerResponse {
@@ -2173,6 +2195,8 @@ declare interface DescribeCloudNativeAPIGatewayAIQuotaListRequest {
   Offset: number;
   /** 每页数量 */
   Limit: number;
+  /** 关键字 */
+  Keyword?: string;
   /** 过滤条件 */
   Filters?: Filter[];
   /** 配额预警级别枚举值：Normal： 正常Warning： 预警NearLimit： 临近超限Exceeded： 超限 */
@@ -2207,6 +2231,10 @@ declare interface DescribeCloudNativeAPIGatewayAIServiceSourceListRequest {
   Limit: number;
   /** 分页偏移 */
   Offset: number;
+  /** 搜索关键词 */
+  Keyword?: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeCloudNativeAPIGatewayAIServiceSourceListResponse {
@@ -2569,8 +2597,16 @@ declare interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
   Limit: number;
   /** 起始位置，从 0 开始。 */
   Offset: number;
+  /** 过滤条件。支持的 Name：Status / GenerateType / SecretType。 */
+  Filters?: Filter[];
+  /** 模糊匹配密钥名称。 */
+  Keyword?: string;
+  /** 对应资源的 ID（消费者 ID 或模型服务 ID）。 */
+  ResourceId?: string;
   /** 密钥归属资源类型。UseToBind=true 时必填。枚举值：Consumer：消费者ModelService：模型服务 */
   ResourceType?: string;
+  /** 是否用于绑定场景。true 时返回可被绑定到指定资源的密钥。 */
+  UseToBind?: boolean;
 }
 
 declare interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
@@ -2599,6 +2635,8 @@ declare interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
   GatewayId: string;
   /** 密钥id */
   SecretKeyId: string;
+  /** 指定从 AKSK 或 CAM 成对凭证中返回哪一半。取值：AccessKey（AKSK 返回 AccessKeyId，CAM 返回 SecretId）、SecretKey（AKSK 返回 SecretAccessKey，CAM 返回 SecretKey）。不传则保持原行为，仅返回 AccessKeyId 或 SecretId。 */
+  SecretValueType?: string;
 }
 
 declare interface DescribeCloudNativeAPIGatewaySecretKeyValueResponse {
@@ -2861,7 +2899,7 @@ declare interface ModifyCloudNativeAPIGatewayMCPServerRequest {
   DisplayName: string;
   /** 服务 id */
   ServerId: string;
-  /** 后端类型枚举值：HostIP： 域名 ipMCPRegistry： MCP 注册中心VirtualMCPServer： 虚拟MCP 服务 */
+  /** 后端类型枚举值：MCPRegistry： mcp 注册中心Registry： 普通注册中心HostIP： 域名或ipVirtualMCPServer： 虚拟MCPServerDNS： 私有域名Kubernetes： Kubernetes服务 */
   UpstreamType: string;
   /** 超时时间，单位ms，最大60000 */
   Timeout?: number;
@@ -2879,6 +2917,8 @@ declare interface ModifyCloudNativeAPIGatewayMCPServerRequest {
   HealthCheck?: AIGWHealthCheckSetting;
   /** 是否开启保留原Host功能 */
   PreserveHost?: boolean;
+  /** 日志配置 */
+  LogConfig?: AIGWLogConfig;
 }
 
 declare interface ModifyCloudNativeAPIGatewayMCPServerResponse {

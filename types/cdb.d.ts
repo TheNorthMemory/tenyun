@@ -1076,6 +1076,8 @@ declare interface InstanceInfo {
   DeviceBandwidth?: number;
   /** 实例销毁保护状态，on表示开启保护，否则为关闭保护 */
   DestroyProtect?: string;
+  /** 云盘版实例才使用该值。 on表示磁盘加密，否则为不加密。 */
+  DiskEncryption?: string;
   /** TDSQL引擎参数 */
   CpuModel?: string;
   /** 分析引擎实例版本升级信息 */
@@ -1768,6 +1770,8 @@ declare interface SlaveInfo {
   First?: SlaveInstanceInfo;
   /** 第二备机信息 */
   Second?: SlaveInstanceInfo;
+  /** 第三备机信息 */
+  Third?: SlaveInstanceInfo;
 }
 
 /** 备机信息 */
@@ -5241,7 +5245,7 @@ declare interface OpenAuditServiceResponse {
 }
 
 declare interface OpenDBInstanceEncryptionRequest {
-  /** 云数据库实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
+  /** 云数据库实例 ID。可通过 DescribeDBInstances 接口获取。 */
   InstanceId: string;
   /** 用户自定义密钥 ID，CMK 唯一标识符。该值为空时，将使用腾讯云自动生成的密钥 KMS-CDB。 */
   KeyId?: string;

@@ -2166,6 +2166,22 @@ declare interface VideoLicenseEntity {
   ExpiresSoonCount?: number;
 }
 
+/** 加密云存视频列表数据 */
+declare interface VideoList {
+  /** 用于播放加密视频 */
+  Psign?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 结束时间 */
+  EndTime?: number;
+  /** 播放url */
+  Url?: string;
+  /** 视频类型 */
+  StreamType?: string;
+  /** 点播文件id */
+  FileId?: string;
+}
+
 /** TWeSee 语义理解自定义标签请求 */
 declare interface VisionCustomDetectQuery {
   /** 自定义标签的标识符 */
@@ -2266,6 +2282,22 @@ declare interface VisionSummaryConfig {
   DetectContinuous?: SeeDetectContinuousConfig[];
   /** 自定义摘要提示词 */
   SummaryPrompt?: string;
+}
+
+/** 加密云存事件数据 */
+declare interface VodCloudStorageEvent {
+  /** 事件id */
+  EventId?: string;
+  /** 缩略图url */
+  ThumbnailUrl?: string;
+  /** 事件开始时间 */
+  EventStartTime?: number;
+  /** 事件结束时间 */
+  EventEndTime?: number;
+  /** 视频相关信息 */
+  VideoList?: VideoList[];
+  /** 是否为图片事件枚举值：true： 图片事件false： 视频事件 */
+  IsStaticEvent?: boolean;
 }
 
 /** 微信硬件设备信息 */
@@ -3922,6 +3954,30 @@ declare interface DescribeCloudStorageDateResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCloudStorageEventsByTWeSeePersonRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 人员 ID */
+  PersonId: string;
+  /** 分页拉取数量，取值范围为 1-100 */
+  Limit: number;
+  /** 分页拉取偏移 */
+  Offset?: number;
+  /** 通道 ID，非 NVR 设备不填，NVR 设备必填 */
+  ChannelId?: number;
+}
+
+declare interface DescribeCloudStorageEventsByTWeSeePersonResponse {
+  /** 人员关联的云存事件列表 */
+  Events?: CloudStorageEventWithAITasks[];
+  /** 人员关联的云存事件总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCloudStorageEventsRequest {
   /** 产品ID */
   ProductId: string;
@@ -4874,6 +4930,34 @@ declare interface DescribeTWeSeeConfigResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTWeSeeDirectUploadInfoRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 服务类型。枚举值：VID_COMP： 视频理解IMG_COMP： 图片理解 */
+  ServiceType: string;
+  /** 上传方式。枚举值：single： 单文件上传manifest： 上传源文件与 Manifest（先上传多个源文件，然后上传 Manifest JSON 触发分析）默认值：single */
+  UploadMethod?: string;
+  /** 上传目标，固定取值为 stream，不填时默认为 stream枚举值：stream： 上传到指定设备（加载对应设备的 ComprehensionConfig 等配置）默认值：stream */
+  UploadTarget?: string;
+  /** 通道 ID，非 NVR 设备不填，NVR 设备必填 */
+  ChannelId?: number;
+}
+
+declare interface DescribeTWeSeeDirectUploadInfoResponse {
+  /** TWeSee 直传目录的 COS URI */
+  COSURI?: string;
+  /** TWeSee 直传存储桶 */
+  StorageBucket?: string;
+  /** TWeSee 直传目录路径 */
+  StoragePath?: string;
+  /** TWeSee 直传存储地域 */
+  StorageRegion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTWeSeeFaceRequest {
   /** 产品 ID */
   ProductId: string;
@@ -5184,6 +5268,26 @@ declare interface DescribeVideoLicenseRequest {
 declare interface DescribeVideoLicenseResponse {
   /** 视频激活码分类概览 */
   License?: VideoLicenseEntity[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVodCloudStorageDateRequest {
+  /** 产品id */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 通道id */
+  ChannelId?: string;
+  /** 用户id */
+  UserId?: string;
+  /** 时区 */
+  TimeZone?: string;
+}
+
+declare interface DescribeVodCloudStorageDateResponse {
+  /** 日期数据 */
+  Data?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5686,6 +5790,84 @@ declare interface GetTopicRuleListResponse {
   TotalCnt?: number;
   /** 规则列表 */
   Rules?: TopicRuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetVodCloudStorageEventListRequest {
+  /** 产品id */
+  ProductId?: string;
+  /** 设备名 */
+  DeviceName?: string;
+  /** 日期参数格式：格式 yyyy-MM-dd */
+  Date?: string;
+  /** 分页游标，首页为空。 */
+  Context?: string;
+  /** 分页大小取值范围：[10, 100]默认值：10 */
+  Size?: number;
+  /** 通道id */
+  ChannelId?: number;
+  /** 用户id */
+  UserId?: string;
+  /** 时区 */
+  TimeZone?: string;
+  /** 非加密 URL 签名有效期单位：秒 */
+  ExpireSec?: number;
+  /** 请求平台：0 Android，1 小程序，2 iOS，3 鸿蒙 */
+  Platform?: number;
+}
+
+declare interface GetVodCloudStorageEventListResponse {
+  /** 事件列表 */
+  Events?: VodCloudStorageEvent[];
+  /** 数据是否已完整 */
+  Listover?: boolean;
+  /** 下一页游标 */
+  Context?: string;
+  /** 总数 */
+  Total?: number;
+  /** 加密播放器使用的 VOD 子应用 ID */
+  VodAppId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetVodCloudStorageVideoListRequest {
+  /** 产品id */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
+  /** 日期参数格式：格式 yyyy-MM-dd */
+  Date: string;
+  /** 通道id */
+  ChannelId?: number;
+  /** 开始时间；与 EndTime 必须同时填或同时省略单位：秒 */
+  StartTime?: number;
+  /** 结束时间单位：秒 */
+  EndTime?: number;
+  /** 用户id */
+  UserId?: string;
+  /** 时区 */
+  TimeZone?: string;
+  /** 非加密文件的防盗链 URL 有效期单位：秒 */
+  ExpireSec?: number;
+  /** 0 Android，1 小程序，2 iOS，3 鸿蒙 */
+  Platform?: number;
+  /** 分页游标；首页传空，之后原样回填上一页响应的 Context */
+  Context?: string;
+  /** 每页视频条数；<=0 或不填默认 10，>100 按 100 计 */
+  Size?: number;
+}
+
+declare interface GetVodCloudStorageVideoListResponse {
+  /** 播放器使用的 VOD 子应用 ID */
+  VodAppId?: string;
+  /** 视频列表 */
+  VideoList?: VideoList[];
+  /** 是否已拉完 */
+  Listover?: boolean;
+  /** 下一页游标 */
+  Context?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7481,6 +7663,8 @@ declare interface Iotexplorer {
   DescribeCloudStorageDate(data: DescribeCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageDateResponse>;
   /** 拉取云存事件列表 {@link DescribeCloudStorageEventsRequest} {@link DescribeCloudStorageEventsResponse} */
   DescribeCloudStorageEvents(data: DescribeCloudStorageEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsResponse>;
+  /** 查询 TWeSee 人员关联的云存事件 {@link DescribeCloudStorageEventsByTWeSeePersonRequest} {@link DescribeCloudStorageEventsByTWeSeePersonResponse} */
+  DescribeCloudStorageEventsByTWeSeePerson(data: DescribeCloudStorageEventsByTWeSeePersonRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsByTWeSeePersonResponse>;
   /** 拉取云存事件及 AI 分析任务列表 {@link DescribeCloudStorageEventsWithAITasksRequest} {@link DescribeCloudStorageEventsWithAITasksResponse} */
   DescribeCloudStorageEventsWithAITasks(data: DescribeCloudStorageEventsWithAITasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudStorageEventsWithAITasksResponse>;
   /** 拉取多个云存事件缩略图 {@link DescribeCloudStorageMultiThumbnailRequest} {@link DescribeCloudStorageMultiThumbnailResponse} */
@@ -7573,6 +7757,8 @@ declare interface Iotexplorer {
   DescribeTWeSeeCallback(data: DescribeTWeSeeCallbackRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeCallbackResponse>;
   /** 查询 TWeSee 配置 {@link DescribeTWeSeeConfigRequest} {@link DescribeTWeSeeConfigResponse} */
   DescribeTWeSeeConfig(data: DescribeTWeSeeConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeConfigResponse>;
+  /** 查询 TWeSee 直传信息 {@link DescribeTWeSeeDirectUploadInfoRequest} {@link DescribeTWeSeeDirectUploadInfoResponse} */
+  DescribeTWeSeeDirectUploadInfo(data: DescribeTWeSeeDirectUploadInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeDirectUploadInfoResponse>;
   /** 查询 TWeSee 人脸详情 {@link DescribeTWeSeeFaceRequest} {@link DescribeTWeSeeFaceResponse} */
   DescribeTWeSeeFace(data: DescribeTWeSeeFaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeSeeFaceResponse>;
   /** 查询 TWeSee 人员详情 {@link DescribeTWeSeePersonRequest} {@link DescribeTWeSeePersonResponse} */
@@ -7607,6 +7793,8 @@ declare interface Iotexplorer {
   DescribeUnbindedDevices(data: DescribeUnbindedDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUnbindedDevicesResponse>;
   /** @deprecated 查询视频激活码统计概览 {@link DescribeVideoLicenseRequest} {@link DescribeVideoLicenseResponse} */
   DescribeVideoLicense(data: DescribeVideoLicenseRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoLicenseResponse>;
+  /** 拉取云存日期 {@link DescribeVodCloudStorageDateRequest} {@link DescribeVodCloudStorageDateResponse} */
+  DescribeVodCloudStorageDate(data: DescribeVodCloudStorageDateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVodCloudStorageDateResponse>;
   /** 销毁 TWeSee 预付费订阅 {@link DestroyTWeSeeSubscriptionRequest} {@link DestroyTWeSeeSubscriptionResponse} */
   DestroyTWeSeeSubscription(data: DestroyTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyTWeSeeSubscriptionResponse>;
   /** 直接绑定设备和家庭 {@link DirectBindDeviceInFamilyRequest} {@link DirectBindDeviceInFamilyResponse} */
@@ -7661,6 +7849,10 @@ declare interface Iotexplorer {
   GetTWeTalkProductConfigListV2(data: GetTWeTalkProductConfigListV2Request, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkProductConfigListV2Response>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
+  /** 获取云存事件列表 {@link GetVodCloudStorageEventListRequest} {@link GetVodCloudStorageEventListResponse} */
+  GetVodCloudStorageEventList(data?: GetVodCloudStorageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<GetVodCloudStorageEventListResponse>;
+  /** 获取云存时间轴视频列表 {@link GetVodCloudStorageVideoListRequest} {@link GetVodCloudStorageVideoListResponse} */
+  GetVodCloudStorageVideoList(data: GetVodCloudStorageVideoListRequest, config?: AxiosRequestConfig): AxiosPromise<GetVodCloudStorageVideoListResponse>;
   /** 查询微信授权票据 {@link GetWechatDeviceTicketRequest} {@link GetWechatDeviceTicketResponse} */
   GetWechatDeviceTicket(data: GetWechatDeviceTicketRequest, config?: AxiosRequestConfig): AxiosPromise<GetWechatDeviceTicketResponse>;
   /** 导入 TWeSee 人脸 {@link ImportTWeSeeFacesRequest} {@link ImportTWeSeeFacesResponse} */

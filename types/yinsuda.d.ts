@@ -70,7 +70,7 @@ declare interface KTVMusicBaseInfo {
   Name?: string;
   /** 歌手名称。 */
   SingerSet?: string[];
-  /** 播放时长。 */
+  /** 播放时长。单位：秒 */
   Duration?: number;
   /** 歌手图片链接。 */
   SingerImageUrl?: string;

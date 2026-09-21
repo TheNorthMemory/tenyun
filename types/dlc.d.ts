@@ -2106,7 +2106,7 @@ declare interface JobStatusHistory {
   TransitionTime?: number;
 }
 
-/** 配置格式 */
+/** 通用键值对 POJO（替代各 DTO 中重复定义的 PropEntry / KVPair / PropertyEntry）。 */
 declare interface KVPair {
   /** 配置的key值 */
   Key: string;

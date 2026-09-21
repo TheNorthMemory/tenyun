@@ -8522,6 +8522,8 @@ declare interface UpgradeClusterVersionRequest {
 declare interface UpgradeClusterVersionResponse {
   /** 异步任务id */
   FlowId?: number;
+  /** 任务 ID */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

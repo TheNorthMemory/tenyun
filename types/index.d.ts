@@ -872,7 +872,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   market: Market,
   /** {@link Memcached 云数据库Memcached} */
   memcached: Memcached,
-  /** {@link Mmps 小程序安全} */
+  /** {@link Mmps 小程序安全检测} */
   mmps: Mmps,
   /** {@link Mna 多网聚合加速} */
   mna: Mna,
@@ -1064,7 +1064,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   weilingwith: Weilingwith,
   /** {@link Wimgs 联网图像搜索} */
   wimgs: Wimgs,
-  /** {@link Wsa 联网搜索API} */
+  /** {@link Wsa 元宝搜索} */
   wsa: Wsa,
   /** {@link Wss SSL证书管理服务} */
   wss: Wss,

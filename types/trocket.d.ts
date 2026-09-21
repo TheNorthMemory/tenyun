@@ -855,6 +855,8 @@ declare interface DeleteConsumerRouteConfigRequest {
   InstanceId: string;
   /** 消费组 */
   Group: string;
+  /** 消费者标签传入 Label 表示只删除该标签路由，不传表示删除完整路由 */
+  Label?: string;
 }
 
 declare interface DeleteConsumerRouteConfigResponse {

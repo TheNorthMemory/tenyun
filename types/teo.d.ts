@@ -2112,6 +2112,8 @@ declare interface HealthChecker {
   SendContext?: string;
   /** 该参数仅当 Type=UDP 时有效，表示健康检查期望源站返回结果。只允许 ASCII 可见字符，最大长度限制 500 个字符。 */
   RecvContext?: string;
+  /** 健康检查探测集群。指定本负载均衡实例发起健康探测的集群区域范围，探测集群地区分布详见健康检查策略介绍，仅 HTTP 专用型（V2）版本负载均衡实例支持设置。取值有：global：由全球所有区域的探测集群发起探测，包括中国大陆区域以及非中国大陆区域，各个区域的集群独立维护各自的探测结果；mainland_china：仅由中国大陆区域的探测集群发起探测，当前中国大陆区域共用一个探测集群，探测结果由中国大陆区域的探测集群维护，其他区域跟随中国大陆区域的集群的探测结果；overseas：仅由非中国大陆区域的探测集群发起探测，当前非中国大陆区域包含多个地区的探测集群，探测结果由各个地区的探测集群独立维护，中国大陆区域的探测结果由所有其他地区的探测集群的探测结果汇总生成。默认为 global。 */
+  ProbeCluster?: string;
 }
 
 /** Host Header 重写配置参数。 */
@@ -2840,13 +2842,13 @@ declare interface LoadBalancer {
   InstanceId?: string;
   /** 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。 */
   Name?: string;
-  /** 实例类型，取值有：HTTP：HTTP 专用型，支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）；GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。 */
+  /** 实例类型，取值有：HTTP_V2：HTTP 专用型（V2），支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）。该实例类型支持选择发起探测的区域，可显著降低探测请求量但对源站的健康感知灵敏度更低；HTTP：HTTP 专用型（V1），支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）。该实例类型不支持选择发起探测的区域，探测请求量较大但对源站的健康感知灵敏度更高；GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。该实例类型不支持选择发起探测的区域，探测请求量较大但对源站的健康感知灵敏度更高。 */
   Type?: string;
-  /** 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。 */
+  /** 健康检查策略。详情请参考 健康检查策略介绍。 */
   HealthChecker?: HealthChecker;
   /** 源站组间的流量调度策略，取值有：Pritory：按优先级顺序进行故障转移 。 */
   SteeringPolicy?: string;
-  /** 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。 */
+  /** 实际访问某源站失败时的请求重试策略，详情请参考 请求重试策略介绍，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。 */
   FailoverPolicy?: string;
   /** 源站组健康状态。 */
   OriginGroupHealthStatus?: OriginGroupHealthStatus[];
@@ -3232,6 +3234,18 @@ declare interface OriginACLEntity {
   Instances: string[];
   /** 操作模式，取值有：enable：启用；disable：停用。 */
   OperationMode: string;
+}
+
+/** 回源 IP 网段版本信息。 */
+declare interface OriginACLFamilyInfo {
+  /** 源站防护版本号。格式说明：标准版本：gaz-xxxxx：全球；mlc-xxxxx：中国；emc-xxxxx：海外(全球不含中国)；精简版(平台级版本)：plat-gaz-xxxxxx：精简全球版；plat-mlc-xxxxxx：精简中国版；plat-emc-xxxxxx：精简海外(全球不含中国)版；缩写说明：gaz：Global AZ Availability Zone;mlc：mainlandChina;emc：Exclude mainlandChina. */
+  Version?: string;
+  /** 版本生效时间，时间是北京时间 UTC+8， 遵循 ISO 8601 标准的日期和时间格式。 */
+  ActiveTime?: string;
+  /** 回源 IP 网段详情。 */
+  EntireAddresses?: Addresses;
+  /** 源站防护回源ACL控制域。取值说明如下：gaz：标准全球可用区控制域；mlc：标准中国大陆可用区控制域；emc：标准全球(不含中国大陆)可用区控制域；plat-gaz：精简全球可用区控制域；plat-mlc：精简中国大陆可用区控制域；plat-emc：精简全球(不含中国大陆)可用区控制域； */
+  OriginACLFamily?: string;
 }
 
 /** 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，同时包含回源 IP 网段详情和选择可切换的回源 IP 网段列表。 */
@@ -5645,15 +5659,15 @@ declare interface CreateLoadBalancerRequest {
   ZoneId: string;
   /** 实例名称，可输入 1-200 个字符，允许字符为 a-z，A-Z，0-9，_，-。 */
   Name: string;
-  /** 实例类型，取值有：HTTP：HTTP 专用型，支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）；GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。 */
+  /** 实例类型，取值有：HTTP_V2：HTTP 专用型（V2），支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）。该实例类型支持选择发起探测的区域，可显著降低探测请求量但对源站的健康感知灵敏度更低；HTTP：HTTP 专用型（V1），支持添加 HTTP 专用型和通用型源站组，仅支持被站点加速相关服务引用（如域名服务和规则引擎）。该实例类型不支持选择发起探测的区域，探测请求量较大但对源站的健康感知灵敏度更高；GENERAL：通用型，仅支持添加通用型源站组，能被站点加速服务（如域名服务和规则引擎）和四层代理引用。该实例类型不支持选择发起探测的区域，探测请求量较大但对源站的健康感知灵敏度更高。 */
   Type: string;
-  /** 源站组列表及其对应的容灾调度优先级。详情请参考 [快速创建负载均衡实例](https://cloud.tencent.com/document/product/1552/104223) 中的示例场景。 */
+  /** 源站组列表及其对应的容灾调度优先级。详情请参考 快速创建负载均衡实例 中的示例场景。 */
   OriginGroups: OriginGroupInLoadBalancer[];
-  /** 健康检查策略。详情请参考 [健康检查策略介绍](https://cloud.tencent.com/document/product/1552/104228)。不填写时，默认为不启用健康检查。 */
+  /** 健康检查策略。详情请参考 健康检查策略介绍。不填写时，默认为不启用健康检查。 */
   HealthChecker?: HealthChecker;
   /** 源站组间的流量调度策略，取值有：Pritory：按优先级顺序进行故障转移。默认值为 Pritory。 */
   SteeringPolicy?: string;
-  /** 实际访问某源站失败时的请求重试策略，详情请参考 [请求重试策略介绍](https://cloud.tencent.com/document/product/1552/104227)，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。默认值为 OtherRecordInOriginGroup。 */
+  /** 实际访问某源站失败时的请求重试策略，详情请参考 请求重试策略介绍，取值有：OtherOriginGroup：单次请求失败后，请求优先重试下一优先级源站组；OtherRecordInOriginGroup：单次请求失败后，请求优先重试同源站组内的其他源站。默认值为 OtherRecordInOriginGroup。 */
   FailoverPolicy?: string;
 }
 
@@ -6508,6 +6522,26 @@ declare interface DescribeAvailableCustomActionsForRuleEngineResponse {
   TotalCount?: number;
   /** 符合条件的规则引擎定制配置的列表。 */
   CustomActionSet?: RuleEngineCustomAction[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAvailableOriginACLFamilyRequest {
+  /** 站点ID。 */
+  ZoneId: string;
+  /** 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回当前站点下所有可用版本。源站防护的 IP 段控制域包含标准控制域和精简控制域。标准控制域和精简控制域主要区别在于提供的回源 IP 网段数量差异，后者数量更少,但是使用上有限制，如需使用请联系技术支持。具体取值说明如下：详细的过滤条件如下：OriginACLFamily：按照控制域进行过滤；gaz：标准全球可用区控制域；mlc：标准中国大陆可用区控制域；emc：标准全球(不含中国大陆)可用区控制域；plat-gaz：精简全球可用区控制域；plat-mlc：精简中国大陆可用区控制域；plat-emc：精简全球(不含中国大陆)可用区控制域；plat-specific-gaz：定制版控全球可用区制域；plat-specific-mlc：定制版控中国大陆可用区控制域；plat-specific-emc：定制版控全球（不含中国大陆）可用区控制域。 */
+  Filters?: Filter[];
+  /** 分页查询偏移量，默认为 0。 */
+  Offset?: number;
+  /** 分页查询限制数目，默认值：20，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeAvailableOriginACLFamilyResponse {
+  /** 源站防护 IP 段详细信息总数。 */
+  TotalCount?: number;
+  /** 回源 IP 网段详细信息列表。 */
+  OriginACLFamilyInfos?: OriginACLFamilyInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9671,6 +9705,8 @@ declare interface Teo {
   DescribeApplicationProxies(data?: DescribeApplicationProxiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeApplicationProxiesResponse>;
   /** 查询规则引擎可用的定制配置列表 {@link DescribeAvailableCustomActionsForRuleEngineRequest} {@link DescribeAvailableCustomActionsForRuleEngineResponse} */
   DescribeAvailableCustomActionsForRuleEngine(data: DescribeAvailableCustomActionsForRuleEngineRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableCustomActionsForRuleEngineResponse>;
+  /** 查询源站防护可配置控制域列表信息 {@link DescribeAvailableOriginACLFamilyRequest} {@link DescribeAvailableOriginACLFamilyResponse} */
+  DescribeAvailableOriginACLFamily(data: DescribeAvailableOriginACLFamilyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailableOriginACLFamilyResponse>;
   /** 查询当前账户可购买套餐信息列表 {@link DescribeAvailablePlansRequest} {@link DescribeAvailablePlansResponse} */
   DescribeAvailablePlans(data?: DescribeAvailablePlansRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvailablePlansResponse>;
   /** 查询计费数据 {@link DescribeBillingDataRequest} {@link DescribeBillingDataResponse} */

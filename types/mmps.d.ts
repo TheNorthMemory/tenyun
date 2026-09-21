@@ -500,7 +500,7 @@ declare interface DescribeScanTaskStatusResponse {
   RequestId?: string;
 }
 
-/** {@link Mmps 小程序安全} */
+/** {@link Mmps 小程序安全检测} */
 declare interface Mmps {
   (): Versions;
   /** 创建小程序隐私合规诊断任务 {@link CreateAppScanTaskRequest} {@link CreateAppScanTaskResponse} */

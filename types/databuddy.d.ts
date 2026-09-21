@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 添加控制台用户响应 */
+declare interface AddConsoleUsersRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
+}
+
 /** 高级依赖配置 */
 declare interface AdvancedDependencyConfig {
   /** 逻辑运算符号OR / AND */
@@ -64,6 +70,38 @@ declare interface AsyncOperation {
   OperationId: string | null;
   /** 异步作业状态：0-未指定，1-已受理，2-解压中，3-回调处理中，4-成功，5-部分失败，6-失败 */
   Status: number | null;
+}
+
+/** 通用错误信息 */
+declare interface CommonFailItem {
+  /** uin或者groupId */
+  Item?: string;
+  /** 错误信息 */
+  FailReason?: string;
+}
+
+/** 控制台用户信息（规范化，与内部 UserDetailInfo 解耦） */
+declare interface ConsoleUserInfo {
+  /** 用户 UIN */
+  UserUin?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 昵称 */
+  Nickname?: string;
+  /** 角色列表 */
+  Roles?: RoleBasicInfo[] | null;
+  /** 用户来源，group：用户组、user:用户 */
+  UserSource?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 是否主账号 */
+  IsOwner?: boolean;
+  /** 0: 普通用户 1: entraId用户 */
+  UserTag?: number;
+  /** 是否具有 admin 权限的子账号 */
+  IsAdmin?: boolean;
 }
 
 /** CreateWorkflowRsp */
@@ -296,6 +334,8 @@ declare interface GetWorkflowTaskRunRsp {
   RunResult?: string | null;
   /** 内嵌工作流任务运行详情（仅限 FOR_EACH 任务，其他任务类型不返回该字段） */
   InnerWorkflowTaskRun?: InnerWorkflowTaskRun | null;
+  /** 计划调度时间参数格式：毫秒时间戳（UTC） */
+  ScheduledTime?: string | null;
 }
 
 /** 内嵌工作流任务简要信息（目前只有 FOR_EACH 工作流任务该字段才有值） */
@@ -398,6 +438,20 @@ declare interface LabelBrief {
   LabelValueId?: string | null;
 }
 
+/** 查询控制台用户列表响应 */
+declare interface ListConsoleUsersRsp {
+  /** 用户列表 */
+  Items?: ConsoleUserInfo[] | null;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+}
+
 /** ListWorkflowRunsRsp */
 declare interface ListWorkflowRunsRsp {
   /** 当前页码 */
@@ -482,6 +536,16 @@ declare interface ParamInfo {
   ParamValue?: string | null;
 }
 
+/** 批量移除控制台用户响应 */
+declare interface RemoveConsoleUsersRsp {
+  /** 请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准 */
+  Status?: boolean;
+  /** 删除成功的用户 UIN 列表 */
+  SuccessUins?: string[];
+  /** 失败项列表（Item 为用户 UIN，FailReason 为失败原因） */
+  FailItems?: CommonFailItem[];
+}
+
 /** 资源组信息 */
 declare interface ResourceGroupInfo {
   /** 资源组ID */
@@ -490,6 +554,24 @@ declare interface ResourceGroupInfo {
   ResourceGroupName?: string | null;
   /** 资源组状态COMPUTE_RESOURCE_STATUS_UNSPECIFIED 未指定COMPUTE_RESOURCE_STATUS_PENDING_CREATE 待创建COMPUTE_RESOURCE_STATUS_CREATING 创建中COMPUTE_RESOURCE_STATUS_RUNNING 运行中COMPUTE_RESOURCE_STATUS_STOPPED 已停止COMPUTE_RESOURCE_STATUS_STOPPING 停止中COMPUTE_RESOURCE_STATUS_STARTING 启动中COMPUTE_RESOURCE_STATUS_UPDATING 更新中COMPUTE_RESOURCE_STATUS_DELETING 删除中COMPUTE_RESOURCE_STATUS_DELETED 已删除COMPUTE_RESOURCE_STATUS_FAILED 失败 */
   ResourceGroupStatus?: string | null;
+}
+
+/** 角色基础信息 */
+declare interface RoleBasicInfo {
+  /** 角色ID */
+  Id?: string;
+  /** 角色名称 */
+  Name?: string;
+  /** 角色描述 */
+  Description?: string;
+  /** 显示名称 */
+  DisplayName?: string;
+  /** 角色类型 */
+  RoleType?: string;
+  /** 角色来源，参考 web_enum_standard.proto -> RoleSource：0=未指定 1=用户直绑 2=用户组继承 3=两者都有 */
+  Source?: number;
+  /** 继承来源的用户组名称列表，Source=1 时为空 */
+  GroupNames?: string[];
 }
 
 /** 单个操作项的执行结果。 由 RunWorkflow / RerunWorkflowRun / KillWorkflowRun 共用： RunWorkflow—— WorkflowId / WorkflowName 有值，WorkflowRunId 为空 RerunWorkflowRun —— WorkflowId / WorkflowName / WorkflowRunId 均有值 KillWorkflowRun —— WorkflowId / WorkflowName / WorkflowRunId 均有值 */
@@ -516,6 +598,20 @@ declare interface ScheduleBizEnumBrief {
   LabelValue?: string | null;
   /** 枚举项统计数量 */
   Count?: number | null;
+}
+
+/** 计划调度时间配置 */
+declare interface ScheduledTimeConfig {
+  /** 调度时区，IANA 时区 ID */
+  ScheduledTimeZone?: string | null;
+  /** 调度生效开始时间参数格式：毫秒时间戳（UTC） */
+  StartTime?: string | null;
+  /** 调度生效结束时间参数格式：毫秒时间戳（UTC） */
+  EndTime?: string | null;
+  /** 周期类型枚举值：DAY_CYCLE： 天HOUR_CYCLE： 小时MINUTE_CYCLE： 分钟WEEK_CYCLE： 周 */
+  CycleType?: string | null;
+  /** 周期步长 */
+  CycleNum?: number | null;
 }
 
 /** 任务重试策略 */
@@ -586,6 +682,12 @@ declare interface TaskTypeProperty {
 declare interface UnbindWorkflowBundleRsp {
   /** 操作状态，true 表示成功 */
   Status?: boolean | null;
+}
+
+/** 修改控制台用户响应 */
+declare interface UpdateConsoleUsersRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
 }
 
 /** UpdateWorkflowRsp */
@@ -780,10 +882,12 @@ declare interface WorkflowRun {
   ParentWorkflowTaskRunId?: string | null;
   /** 父工作流任务运行名称 【由嵌套工作流触发独有】 */
   ParentWorkflowTaskRunName?: string | null;
-  /** 权限信息 */
+  /** 授权权限类型PERMISSION_TYPE_UNSPECIFIED：未指定权限MANAGE : 管理权限：包含所有操作权限RUN : 运行权限：可执行实体VIEW : 查看权限：可查看实体内容 */
   Permission?: string | null;
   /** 工作流高级运行时用户填入的参数 */
   AdvancedParameters?: AdvancedParameter[] | null;
+  /** 计划调度时间参数格式：毫秒时间戳（UTC） */
+  ScheduledTime?: string | null;
 }
 
 /** 工作流列表项的运行情况 */
@@ -948,6 +1052,8 @@ declare interface WorkflowTaskRun {
   AdvancedDependencyConfig?: AdvancedDependencyConfig | null;
   /** 内嵌工作流任务信息 */
   InnerTask?: InnerWorkflowTaskBrief | null;
+  /** 计划调度时间参数格式：毫秒时间戳，UTC */
+  ScheduledTime?: string | null;
 }
 
 /** 工作流调度高级配置。 */
@@ -980,6 +1086,20 @@ declare interface WorkflowTriggerConfiguration {
   ExtraInfo?: string | null;
   /** 高级配置 */
   AdvancedConfig?: WorkflowTriggerAdvancedConfiguration | null;
+}
+
+declare interface AddConsoleUsersRequest {
+  /** 用户 UIN 列表，单次最多100个 */
+  UserUins: string[];
+  /** 角色 ID 列表枚举值：2001： 控制台管理员2002： 控制台成员 */
+  RoleIds: string[];
+}
+
+declare interface AddConsoleUsersResponse {
+  /** 返回结果 */
+  Data?: AddConsoleUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CreateFileRequest {
@@ -1162,6 +1282,26 @@ declare interface KillWorkflowRunResponse {
   RequestId?: string;
 }
 
+declare interface ListConsoleUsersRequest {
+  /** 页码，从1开始，默认1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，最小10，最大200 */
+  PageSize?: number;
+  /** 用户名称与 UIN 模糊匹配 */
+  UserKeyword?: string;
+  /** 用于过滤角色关联的用户枚举值：2001： 控制台管理员2002： 控制台成员 */
+  RoleIds?: string[];
+  /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}, {Name: 'UserName', Direction: 'Asc'}]，默认按创建时间降序 */
+  OrderBys?: OrderBy[];
+}
+
+declare interface ListConsoleUsersResponse {
+  /** 控制台用户列表 */
+  Data?: ListConsoleUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListWorkflowRunsRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1250,6 +1390,18 @@ declare interface ListWorkflowsResponse {
   RequestId?: string;
 }
 
+declare interface RemoveConsoleUsersRequest {
+  /** 必填，待移除的用户 UIN 列表，单次最多10个 */
+  UserUins: string[];
+}
+
+declare interface RemoveConsoleUsersResponse {
+  /** 批量移除控制台用户结果 */
+  Data?: RemoveConsoleUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RerunWorkflowRunRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1263,6 +1415,8 @@ declare interface RerunWorkflowRunRequest {
   AdvancedParams?: TaskSchedulingParameterBrief[];
   /** 本次需要重跑指定的任务ID集合，可通过 ListWorkflowTasks 获取，不传默认重跑该工作流下所有任务 */
   TaskIds?: string[];
+  /** 计划调度时间列表配置 */
+  ScheduledTimeConfig?: ScheduledTimeConfig;
 }
 
 declare interface RerunWorkflowRunResponse {
@@ -1285,6 +1439,8 @@ declare interface RunWorkflowRequest {
   TaskIds?: string[];
   /** 幂等令牌。非必填，相同令牌的重复请求只会触发一次运行 */
   IdempotencyToken?: string;
+  /** 计划调度时间列表配置 */
+  ScheduledTimeConfig?: ScheduledTimeConfig;
 }
 
 declare interface RunWorkflowResponse {
@@ -1304,6 +1460,20 @@ declare interface UnbindWorkflowBundleRequest {
 declare interface UnbindWorkflowBundleResponse {
   /** 解绑工作流Bundle信息响应内容 */
   Data?: UnbindWorkflowBundleRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateConsoleUsersRequest {
+  /** 用户 UIN 列表，单次最多100个 */
+  UserUins: string[];
+  /** 角色 ID 列表枚举值：2001： 控制台管理员2002： 控制台成员 */
+  RoleIds: string[];
+}
+
+declare interface UpdateConsoleUsersResponse {
+  /** 返回结果 */
+  Data?: UpdateConsoleUsersRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1361,6 +1531,8 @@ declare interface UpdateWorkflowResponse {
 /** {@link Databuddy 大数据智能体工作台DataBuddy} */
 declare interface Databuddy {
   (): Versions;
+  /** 添加控制台用户 {@link AddConsoleUsersRequest} {@link AddConsoleUsersResponse} */
+  AddConsoleUsers(data: AddConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<AddConsoleUsersResponse>;
   /** 创建代码文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
@@ -1379,18 +1551,24 @@ declare interface Databuddy {
   GetWorkflowTaskRun(data: GetWorkflowTaskRunRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowTaskRunResponse>;
   /** 终止工作流的运行 {@link KillWorkflowRunRequest} {@link KillWorkflowRunResponse} */
   KillWorkflowRun(data: KillWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<KillWorkflowRunResponse>;
+  /** 查询控制台用户列表 {@link ListConsoleUsersRequest} {@link ListConsoleUsersResponse} */
+  ListConsoleUsers(data?: ListConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleUsersResponse>;
   /** 工作流运行列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
   ListWorkflowRuns(data: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
   /** 查询工作流任务历史运行列表 {@link ListWorkflowTaskRunsRequest} {@link ListWorkflowTaskRunsResponse} */
   ListWorkflowTaskRuns(data: ListWorkflowTaskRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowTaskRunsResponse>;
   /** 查询工作流列表 {@link ListWorkflowsRequest} {@link ListWorkflowsResponse} */
   ListWorkflows(data: ListWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowsResponse>;
+  /** 批量移除控制台用户 {@link RemoveConsoleUsersRequest} {@link RemoveConsoleUsersResponse} */
+  RemoveConsoleUsers(data: RemoveConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveConsoleUsersResponse>;
   /** 重跑工作流 {@link RerunWorkflowRunRequest} {@link RerunWorkflowRunResponse} */
   RerunWorkflowRun(data: RerunWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<RerunWorkflowRunResponse>;
   /** 运行工作流 {@link RunWorkflowRequest} {@link RunWorkflowResponse} */
   RunWorkflow(data: RunWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkflowResponse>;
   /** 解绑工作流Bundle信息 {@link UnbindWorkflowBundleRequest} {@link UnbindWorkflowBundleResponse} */
   UnbindWorkflowBundle(data: UnbindWorkflowBundleRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkflowBundleResponse>;
+  /** 修改控制台用户角色 {@link UpdateConsoleUsersRequest} {@link UpdateConsoleUsersResponse} */
+  UpdateConsoleUsers(data: UpdateConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConsoleUsersResponse>;
   /** 更新代码文件 {@link UpdateFileRequest} {@link UpdateFileResponse} */
   UpdateFile(data: UpdateFileRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileResponse>;
   /** 更新工作流 {@link UpdateWorkflowRequest} {@link UpdateWorkflowResponse} */

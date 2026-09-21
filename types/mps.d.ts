@@ -1044,7 +1044,7 @@ declare interface AiCutoutConfig {
   Type?: string;
   /** 图案抠图配置。仅在Type为pattern时生效。 */
   PatternConfig?: PatternConfig;
-  /** 抠图模型选择，可不填。枚举值：auto： 自动选择合适的模型WAND-cutout-1.0-lite： 标准版，速度最快WAND-cutout-2.0-lite： 增强版，速度最快WAND-cutout-2.0-flash： 增强版，质量-速度平衡 */
+  /** 抠图模型选择。枚举值：cutout-1.0-lite： 基础版，速度最快cutout-1.0-flash： 标准版，质量-速度平衡 */
   Model?: string;
 }
 

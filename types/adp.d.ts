@@ -1598,6 +1598,16 @@ declare interface DingTalkChannelConfig {
   AppSecret?: string;
 }
 
+/** 回复类型分布项 */
+declare interface Distribution {
+  /** 该回复方式的调用次数 */
+  CallCount?: string;
+  /** 该回复方式在总调用次数中的占比（百分比，0~100，保留两位小数；无数据时全为 0，有数据时各项之和为 100） */
+  Percentage?: number;
+  /** 回复方式名称（已按请求语言国际化；i18n 缺失时兜底为 reply_method 的枚举名） */
+  ReplyName?: string;
+}
+
 /** 文档外部链接信息 */
 declare interface DocExternalLink {
   /** 外部链接地址 */
@@ -4536,6 +4546,36 @@ declare interface DescribeAppResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAppStatisticsOverviewRequest {
+  /** 应用类型。可选值：APP_TYPE_RAG（RAG）、APP_TYPE_WORKFLOW（Workflow）、APP_TYPE_CLAW（Claw）、APP_TYPE_MULTIAGENT（MultiAgent）；本期仅 APP_TYPE_RAG 生效，其余为预留值，传入将返回 InvalidParameter枚举项枚举值描述APP_TYPE_UNSPECIFIED0未指定（无效值，请求勿传）APP_TYPE_RAG1RAG（本期唯一支持）APP_TYPE_WORKFLOW2Workflow（预留，暂不支持）APP_TYPE_CLAW3Claw（预留，暂不支持）APP_TYPE_MULTIAGENT4MultiAgent（预留，暂不支持） */
+  AppType: number;
+  /** 查询时间范围（Unix 秒） */
+  TimeRange: TimeRange;
+  /** 视图范围：应用视图（VIEW_TYPE_APP），scope_id 填应用 ID（uint64 雪花 ID 的十进制字符串） */
+  ViewScope: ViewScope;
+  /** 空间 ID参数格式：空间 ID默认值：default_space */
+  SpaceId: string;
+  /** 应用 ID参数格式：应用 ID参考值：2099767969573745984 */
+  AppId: string;
+  /** 扩展过滤。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：space_id（空间 ID）、channel_type（调用方式/渠道类型，取值参考 trpc.adp.common.v2.ChannelType 枚举名）；channel_type 不传时按全部渠道聚合 */
+  FilterList?: Filter[];
+}
+
+declare interface DescribeAppStatisticsOverviewResponse {
+  /** 首 tokens 平均耗时（毫秒） */
+  AvgFirstTokenTime?: string;
+  /** 总 tokens 平均耗时（毫秒） */
+  AvgTotalTokenTime?: string;
+  /** 应用调用成功率（百分比，0~100） */
+  CallSuccessRate?: number;
+  /** 回复类型分布列表；按 app_type 统计，已补全所有回复方式并按固定顺序返回，无数据的回复方式 call_count 为 0 */
+  ReplyTypeDistributionList?: Distribution[];
+  /** 总调用次数 */
+  TotalCallCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAppSummaryListRequest {
   /** 空间ID(必填) */
   SpaceId: string;
@@ -6149,6 +6189,8 @@ declare interface Adp {
   DescribeAgentSummaryList(data?: DescribeAgentSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentSummaryListResponse>;
   /** 获取应用信息 {@link DescribeAppRequest} {@link DescribeAppResponse} */
   DescribeApp(data: DescribeAppRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppResponse>;
+  /** 查询应用统计总览 {@link DescribeAppStatisticsOverviewRequest} {@link DescribeAppStatisticsOverviewResponse} */
+  DescribeAppStatisticsOverview(data: DescribeAppStatisticsOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppStatisticsOverviewResponse>;
   /** 获取应用摘要列表 {@link DescribeAppSummaryListRequest} {@link DescribeAppSummaryListResponse} */
   DescribeAppSummaryList(data: DescribeAppSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppSummaryListResponse>;
   /** 查询应用触发器详情 {@link DescribeAppTriggerRequest} {@link DescribeAppTriggerResponse} */

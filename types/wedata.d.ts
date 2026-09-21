@@ -9141,6 +9141,16 @@ declare namespace V20210820 {
     BizStandCode?: string | null;
   }
 
+  /** boundle 绑定/解绑操作资源信息 */
+  interface BundleResource {
+    /** 资源类型，取值范围：WORKFLOW 工作流TASK 任务CODE_TEMPLATE 代码模版RESOURCE 资源信息EVENT 事件PROJECT_PARAM 项目参数 */
+    ResourceType: string;
+    /** 资源id */
+    ResourceId?: string;
+    /** 资源名称 */
+    ResourceName?: string;
+  }
+
   /** 实时任务同步速度 字节/s */
   interface BytesSpeed {
     /** 节点类型 */
@@ -17457,6 +17467,17 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface BooleanResponse {
+    /** 是否成功 */
+    Success?: boolean;
+    /** 失败返回提示信息 */
+    Message?: string | null;
+    /** 基线Id */
+    BaselineId?: number | null;
+    /** 错误码 */
+    Code?: string | null;
+  }
+
   interface CheckAlarmRegularNameExistRequest {
     /** 项目名称 */
     ProjectId: string;
@@ -24282,6 +24303,20 @@ declare namespace V20210820 {
     RequestId?: string;
   }
 
+  interface UnbindingResourceRequest {
+    /** 项目id */
+    ProjectId: string;
+    /** 资源列表 */
+    ResourceList: BundleResource[];
+  }
+
+  interface UnbindingResourceResponse {
+    /** 操作结果 */
+    Data?: BooleanResponse[] | null;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface UnboundProjectExecutorResourceRequest {
     /** 执行资源组id */
     ExecutorGroupId: string;
@@ -25448,6 +25483,8 @@ declare interface Wedata {
   TriggerEvent(data: V20210820.TriggerEventRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.TriggerEventResponse>;
   /** 手动任务触发运行 {@link V20210820.TriggerManualTasksRequest} {@link V20210820.TriggerManualTasksResponse} */
   TriggerManualTasks(data: V20210820.TriggerManualTasksRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.TriggerManualTasksResponse>;
+  /** 解绑资源 {@link V20210820.UnbindingResourceRequest} {@link V20210820.UnbindingResourceResponse} */
+  UnbindingResource(data: V20210820.UnbindingResourceRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.UnbindingResourceResponse>;
   /** 执行资源组-资源包解除绑定项目 {@link V20210820.UnboundProjectExecutorResourceRequest} {@link V20210820.UnboundProjectExecutorResourceResponse} */
   UnboundProjectExecutorResource(data: V20210820.UnboundProjectExecutorResourceRequest, config: AxiosRequestConfig & V20210820.VersionHeader): AxiosPromise<V20210820.UnboundProjectExecutorResourceResponse>;
   /** 解锁实时集成任务 {@link V20210820.UnlockIntegrationTaskRequest} {@link V20210820.UnlockIntegrationTaskResponse} */

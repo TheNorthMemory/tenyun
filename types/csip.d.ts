@@ -1110,6 +1110,8 @@ declare interface AssetProviderDistributeInfo {
   OtherAssetCount?: number;
   /** 微软云资产数量 */
   AzureAssetCount?: number;
+  /** 腾讯TCE专有云资产数量 */
+  TceAssetCount?: number;
 }
 
 /** 按风险引擎分组风险信息 */
@@ -4206,6 +4208,8 @@ declare interface CustomRiskRuleItem {
   StandardTerms?: StandardTerm[];
   /** 资产类型图标 */
   AssetTypeIconURL?: string;
+  /** 规则默认开启状态 */
+  EnableDefault?: number;
 }
 
 /** 云安全中心标签 */
@@ -7328,6 +7332,8 @@ declare interface ImageRegistryInfo {
   RegionInfo?: RegionInfo;
   /** 镜像仓库用户名 */
   UserName?: string;
+  /** 连接状态枚举值：status_connected： 连接成功status_connecting： 连接中status_connect_failed： 连接失败status_partial_failed： 部分连接失败 */
+  ConnStatus?: string;
 }
 
 /** 镜像仓库命名空间信息 */
@@ -10120,6 +10126,16 @@ declare interface SkillScanRuleHit {
   Description?: string;
 }
 
+/** Skill 扫描任务列表项 */
+declare interface SkillScanTaskItem {
+  /** 上传时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  InsertTime?: string;
+  /** Skill 名称 */
+  SkillName?: string;
+  /** 消耗次数（总消耗次数） */
+  DeductCount?: number;
+}
+
 /** SKILL安装状态信息 */
 declare interface SkillState {
   /** SKILL安装状态枚举值：0：未安装1：安装中2：已安装3：安装失败4：卸载中5：卸载失败 */
@@ -12395,22 +12411,6 @@ declare interface BatchModifyImageVulWhitelistResponse {
   RequestId?: string;
 }
 
-declare interface BindClusterOwnerRequest {
-  /** 集群资产id */
-  ClusterAssetIds: string[];
-  /** 集团账号的成员id */
-  MemberId?: string[];
-  /** 负责人名称 */
-  OwnerName?: string;
-  /** 集群CAMD5值 */
-  ClusterCaMD5List?: string[];
-}
-
-declare interface BindClusterOwnerResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CancelEdrAlertIgnoreRequest {
   /** 告警定位列表（支持跨账号），最多500条 */
   Targets: EdrAlertTargetForIgnore[];
@@ -12788,6 +12788,8 @@ declare interface CreateCFGRiskPDFReportExportJobRequest {
   Order?: string;
   /** 排序字段 */
   By?: string;
+  /** 资产标签ID */
+  AssetTagIDs?: number[];
 }
 
 declare interface CreateCFGRiskPDFReportExportJobResponse {
@@ -12812,6 +12814,8 @@ declare interface CreateCFGRisksExportJobRequest {
   By?: string;
   /** 规范ID */
   StandardIDs?: number[];
+  /** 资产标签ID */
+  AssetTagIDs?: number[];
 }
 
 declare interface CreateCFGRisksExportJobResponse {
@@ -16478,6 +16482,8 @@ declare interface DescribeCFGRiskReportStatisticsRequest {
   MemberId?: string[];
   /** 规范ID */
   StandardIDs?: number[];
+  /** 资产标签ID */
+  AssetTagIDs?: number[];
 }
 
 declare interface DescribeCFGRiskReportStatisticsResponse {
@@ -16877,6 +16883,8 @@ declare interface DescribeCWPExposePathRequest {
 declare interface DescribeCWPExposePathResponse {
   /** 云边界分析路径节点内容 */
   Content?: string;
+  /** 互联网节点数量 */
+  PathCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -17537,22 +17545,6 @@ declare interface DescribeClusterInstallCommandResponse {
   URL?: string;
   /** 接入文件内容 */
   FileContent?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeClusterListV2Request {
-  /** 集团账号的成员id */
-  MemberId?: string[];
-  /** 通用过滤条件列表。支持的过滤字段：ClusterId：集群ID，精确匹配。ClusterName：集群名称，模糊匹配。ClusterType：集群类型，精确匹配。取值：TKE_MANAGED_CLUSTER（腾讯云标准集群）、TKE_INDEPENDENT_CLUSTER（标准集群Master自维护）、TKE_SERVERLESS_CLUSTER（Serverless集群）、TKE_EDGE_CLUSTER（边缘集群）、SELF_BUILT（腾讯云内自建）、SELF_BUILT_OTHER（非腾讯云自建/混合云）。RunStatus：集群运行状态，精确匹配。取值：Running（运行中）、Exception（异常）、Unknown（未知）。AccessedStatus：接入状态，精确匹配。取值：AccessedNone（未接入）、AccessedInstalling（接入中）、AccessedException（接入异常）、AccessedInstalled（已接入）。DefendStatus：防护状态，精确匹配。取值：Enabled（已防护）、Partial（部分防护）、Disabled（未防护）。RiskStatus：风险检查状态，精确匹配。RiskLevel：风险等级，精确匹配。取值：CRITICAL、HIGH、MEDIUM、LOW、NONE（无风险）。HasHighRisk：仅筛选含高危及以上风险的集群，无需填入 value，传入 HasHighRisk 即生效。Region：地域，精确匹配。OwnerName：负责人，模糊匹配。ClusterAssetIds：集群资产ID，精确匹配。ExcludeClusterAssetIds：排除的集群资产ID，精确排除。 */
-  Filter?: Filter;
-}
-
-declare interface DescribeClusterListV2Response {
-  /** 总数 */
-  TotalCount?: number;
-  /** 列表 */
-  List?: ClusterListItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18820,6 +18812,8 @@ declare interface DescribeDspmAssetFieldListRequest {
   MemberId?: string[];
   /** 筛选项 */
   Filter?: Filter;
+  /** SchemaName */
+  SchemaName?: string;
 }
 
 declare interface DescribeDspmAssetFieldListResponse {
@@ -18948,6 +18942,8 @@ declare interface DescribeDspmAssetTableListRequest {
   AssetId: string;
   /** 数据库名称 */
   DbName: string;
+  /** Schema名称 */
+  SchemaName?: string;
   /** 集团账号的成员id */
   MemberId?: string[];
   /** 筛选项 */
@@ -19730,7 +19726,7 @@ declare interface DescribeDspmSessionListRequest {
   Limit?: number;
   /** 偏移量 */
   Offset?: number;
-  /** 登陆状态(0 全部 1 成功 2 失败) */
+  /** 登录状态枚举值：0： 全部1： 成功2： 失败 */
   LoginType?: number;
   /** 数据库端口 */
   DbName?: string;
@@ -20034,7 +20030,7 @@ declare interface DescribeEdrAlertInfoResponse {
 declare interface DescribeEdrAlertListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效 */
+  /** 过滤条件，支持的 Name 如下：【资源属性过滤】（前缀模糊，后端自动反查资产后按实例过滤）InstanceName - string - 是否必填：否 - 资产名称（前缀匹配）InstanceID - string - 是否必填：否 - 实例ID（前缀匹配）IP - string - 是否必填：否 - IP地址，支持内网/外网IP（前缀匹配）Tags - string - 是否必填：否 - 腾讯云标签，格式 tagKey$tagValue（仅单账号场景生效）CSIPTag - string - 是否必填：否 - 安全中心标签名称（前缀匹配，按语言环境匹配中/英文字段）AssetTagIds - string - 是否必填：否 - 安全中心资产标签ID（精确匹配，多个标签ID之间为或关系；标签ID可通过资产中心标签树接口 DescribeAssetTagTree 获取）【容器维度过滤】（前缀模糊，命中后仅返回容器告警）ClusterName - string - 是否必填：否 - 集群名称（前缀匹配）ContainerName - string - 是否必填：否 - 容器名称（前缀匹配）【告警字段过滤】（精确匹配，支持多值）Status - int - 是否必填：否 - 处理状态Level - int - 是否必填：否 - 威胁等级AlertCategory - string - 是否必填：否 - 告警大类AlertSubType - string - 是否必填：否 - 告警子类型AttackStage - string - 是否必填：否 - 攻击阶段DetectMode - string - 是否必填：否 - 检测模式AlertSource - string - 是否必填：否 - 告警来源（HOST/CONTAINER）AlertId - string - 是否必填：否 - 告警IDInstanceId - string - 是否必填：否 - 实例ID（精确匹配）ContainerId - string - 是否必填：否 - 容器ID（精确匹配）ClusterId - string - 是否必填：否 - 集群ID（精确匹配）【时间范围】StartTime - string - 是否必填：否 - 开始时间，格式 2006-01-02 15:04:05（默认近180天）EndTime - string - 是否必填：否 - 结束时间，格式 2006-01-02 15:04:05（默认当前时间） */
   Filters?: EDRFilter[];
   /** 限制条数,默认10,最大100 */
   Limit?: number;
@@ -20245,6 +20241,8 @@ declare interface DescribeExposePathRequest {
 declare interface DescribeExposePathResponse {
   /** 云边界分析路径节点内容 */
   Content?: string;
+  /** 互联网节点数量 */
+  PathCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23011,6 +23009,12 @@ declare interface DescribeSkillScanPayInfoResponse {
   Uin?: string;
   /** 租户昵称 */
   NickName?: string;
+  /** 后付费资源状态枚举值：0：未开通1：正常2：隔离 */
+  PostPayStatus?: number;
+  /** 后付费资源ID，未开通后付费时为空 */
+  PostPayResourceId?: string;
+  /** 后付费资源开通时间，未开通后付费时为空。格式 YYYY-MM-DD HH:mm:ss */
+  PostPayBeginTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -23029,6 +23033,30 @@ declare interface DescribeSkillScanResultResponse {
   Status?: string;
   /** 检测结果详情。Status=SUCCESS 时大部分字段有值；Status=SCANNING 时仅包含 ContentHash 和 CreatedAt；Status=FAILED 时仅包含 ContentHash、FailedAt 和 Message；Status=NOT_FOUND 时仅包含 ContentHash */
   Data?: SkillScanItem;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSkillScanTaskListRequest {
+  /** 偏移量，默认 0 */
+  Offset?: number;
+  /** 每页数量，默认 10，上限 200 */
+  Limit?: number;
+  /** 开始时间，筛选上传时间不早于该时刻的任务参数格式：YYYY-MM-DD HH:mm:ss最大长度：128 字符使用约束：StartTime 与 EndTime 要么同时传入，要么都不传；都不传时默认查询本月数据 */
+  StartTime?: string;
+  /** 结束时间，筛选上传时间不晚于该时刻的任务参数格式：YYYY-MM-DD HH:mm:ss最大长度：128 字符建议与 StartTime 同时传入；未传入时默认使用当前时间作为结束时间 */
+  EndTime?: string;
+  /** 排序方式最大长度：128 字符枚举值：ASC：升序DESC：降序（默认） */
+  Order?: string;
+  /** 排序字段最大长度：128 字符枚举值：InsertTime：上传时间（默认） */
+  By?: string;
+}
+
+declare interface DescribeSkillScanTaskListResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 扫描任务列表，按上传时间倒序排列 */
+  TaskList?: SkillScanTaskItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -24840,7 +24868,7 @@ declare interface ModifyDspmBackupSettingResponse {
 }
 
 declare interface ModifyDspmCkafkaSaveRequest {
-  /** 接入类型，当前支持 1和7, 类型vip网络类型（1:外网TGW 2:基础网络 3:VPC网络 4:支撑网络(idc 环境) 5:SSL外网访问方式访问 6:黑石环境vpc 7:支撑网络(cvm 环境） */
+  /** 接入类型，当前支持 1和7枚举值：1： 外网TGW2： 基础网络3： VPC网络4： idc环境-支撑网络5： SSL外网访问方式访问6： 黑石环境vpc7： cvm环境-支撑网络 */
   VipType: number;
   /** 实例的地域 */
   RegionId: string;
@@ -27012,8 +27040,6 @@ declare interface Csip {
   BatchModifyImageVirusWhitelist(data: BatchModifyImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyImageVirusWhitelistResponse>;
   /** 批量修改容器镜像漏洞白名单 {@link BatchModifyImageVulWhitelistRequest} {@link BatchModifyImageVulWhitelistResponse} */
   BatchModifyImageVulWhitelist(data: BatchModifyImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<BatchModifyImageVulWhitelistResponse>;
-  /** 绑定集群负责人 {@link BindClusterOwnerRequest} {@link BindClusterOwnerResponse} */
-  BindClusterOwner(data: BindClusterOwnerRequest, config?: AxiosRequestConfig): AxiosPromise<BindClusterOwnerResponse>;
   /** 取消忽略EDR多行为告警 {@link CancelEdrAlertIgnoreRequest} {@link CancelEdrAlertIgnoreResponse} */
   CancelEdrAlertIgnore(data: CancelEdrAlertIgnoreRequest, config?: AxiosRequestConfig): AxiosPromise<CancelEdrAlertIgnoreResponse>;
   /** 判断用户是否购买旗舰版(适用于主机资产) {@link CheckCWPExposePathPermissionRequest} {@link CheckCWPExposePathPermissionResponse} */
@@ -27542,8 +27568,6 @@ declare interface Csip {
   DescribeClusterDetail(data?: DescribeClusterDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterDetailResponse>;
   /** 查询集群安装命令 {@link DescribeClusterInstallCommandRequest} {@link DescribeClusterInstallCommandResponse} */
   DescribeClusterInstallCommand(data: DescribeClusterInstallCommandRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterInstallCommandResponse>;
-  /** 查询集群列表V2版本 {@link DescribeClusterListV2Request} {@link DescribeClusterListV2Response} */
-  DescribeClusterListV2(data?: DescribeClusterListV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterListV2Response>;
   /** 查询集群命名空间列表 {@link DescribeClusterNamespaceListRequest} {@link DescribeClusterNamespaceListResponse} */
   DescribeClusterNamespaceList(data?: DescribeClusterNamespaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterNamespaceListResponse>;
   /** 查询集群节点列表 {@link DescribeClusterNodeListRequest} {@link DescribeClusterNodeListResponse} */
@@ -28078,6 +28102,8 @@ declare interface Csip {
   DescribeSkillScanPayInfo(data?: DescribeSkillScanPayInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanPayInfoResponse>;
   /** 查询 Skill 安全检测结果 {@link DescribeSkillScanResultRequest} {@link DescribeSkillScanResultResponse} */
   DescribeSkillScanResult(data: DescribeSkillScanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanResultResponse>;
+  /** 查询 Skill 扫描任务列表 {@link DescribeSkillScanTaskListRequest} {@link DescribeSkillScanTaskListResponse} */
+  DescribeSkillScanTaskList(data?: DescribeSkillScanTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillScanTaskListResponse>;
   /** 获取访问密钥资产（源IP视角） {@link DescribeSourceIPAssetRequest} {@link DescribeSourceIPAssetResponse} */
   DescribeSourceIPAsset(data?: DescribeSourceIPAssetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceIPAssetResponse>;
   /** 获取访问密钥资产详情（源IP视角） {@link DescribeSourceIPDetailRequest} {@link DescribeSourceIPDetailResponse} */

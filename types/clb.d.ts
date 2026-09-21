@@ -5385,6 +5385,10 @@ declare interface TestServiceProviderConnectionRequest {
   Capability?: string;
   /** 端点路径 */
   EndpointPath?: string;
+  /** 健康检查方式枚举值：Service： 探测服务可用性Model： 探测模型可用性 */
+  HealthCheckMethod?: string;
+  /** 健康检查路径。仅HealthCheckMethod为Service时生效。 */
+  HealthCheckPath?: string;
 }
 
 declare interface TestServiceProviderConnectionResponse {
