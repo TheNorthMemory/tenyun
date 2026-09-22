@@ -20,14 +20,6 @@ declare interface Filter {
   Occlusion?: number;
 }
 
-/** 图片 */
-declare interface Image {
-  /** 图片Base64 */
-  Base64?: string;
-  /** 图片Url */
-  Url?: string;
-}
-
 /** logo参数 */
 declare interface LogoParam {
   /** 水印 Url */
@@ -60,12 +52,6 @@ declare interface Rect {
   Width?: number;
   /** 人脸框高度。单位：px */
   Height?: number;
-}
-
-/** 返回结果配置 */
-declare interface ResultConfig {
-  /** 生成图分辨率图像风格化（图生图）支持生成以下分辨率的图片：origin（与输入图分辨率一致，长边最高为2000，超出将做等比例缩小）、768:768（1:1）、768:1024（3:4）、1024:768（4:3），不传默认使用origin，如果指定生成的长宽比与输入图长宽比差异过大可能导致图片内容被裁剪。 */
-  Resolution?: string | null;
 }
 
 declare interface ChangeClothesRequest {
@@ -162,40 +148,6 @@ declare interface ImageOutpaintingResponse {
   RequestId?: string;
 }
 
-declare interface ImageToImageRequest {
-  /** 输入图 Base64 数据。算法将根据输入的图片，结合文本描述智能生成与之相关的图像。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000px且大于50px，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
-  InputImage?: string;
-  /** 输入图 Url。算法将根据输入的图片，结合文本描述智能生成与之相关的图像。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000px且大于50px，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
-  InputUrl?: string;
-  /** 文本描述。用于在输入图的基础上引导生成图效果，增加生成结果中出现描述内容的可能。推荐使用中文。最多支持256个 utf-8 字符。 */
-  Prompt?: string;
-  /** 反向文本描述。用于一定程度上从反面引导模型生成的走向，减少生成结果中出现描述内容的可能，但不能完全杜绝。推荐使用中文。最多可传256个 utf-8 字符。 */
-  NegativePrompt?: string;
-  /** 绘画风格。请在 图像风格化风格列表 中选择期望的风格，传入风格编号。推荐使用且只使用一种风格。不传默认使用201（日系动漫风格）。 */
-  Styles?: string[];
-  /** 生成图结果的配置，包括输出图片分辨率和尺寸等。支持生成以下分辨率的图片：origin（与输入图分辨率一致，长边最高为2000，超出将做等比例缩小）、768:768（1:1）、768:1024（3:4）、1024:768（4:3）。不传默认使用origin。单位为 px。 */
-  ResultConfig?: ResultConfig;
-  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-  /** 生成自由度。Strength 值越小，生成图和原图越接近，取值范围(0, 1]，不传使用模型内置的默认值。推荐的取值范围为0.6 - 0.8。 */
-  Strength?: number;
-  /** 返回图像方式（base64 或 url) ，二选一，默认为 base64。url 有效期为1小时。 */
-  RspImgType?: string;
-  /** 画质增强开关，默认关闭。1：开启0：关闭开启后将增强图像的画质清晰度，生成耗时有所增加。 */
-  EnhanceImage?: number;
-  /** 细节优化的面部数量上限，支持0 ~ 6，默认为0。若上传大于0的值，将以此为上限对每张图片中面积占比较小的面部进行细节修复，生成耗时根据实际优化的面部个数有所增加。 */
-  RestoreFace?: number;
-}
-
-declare interface ImageToImageResponse {
-  /** 根据入参 RspImgType 填入不同，返回不同的内容。如果传入 base64 则返回生成图 Base64 编码。如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。 */
-  ResultImage?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface QueryDrawPortraitJobRequest {
   /** 查询生成写真图片任务 ID。 */
   JobId: string;
@@ -256,30 +208,6 @@ declare interface QueryMemeJobResponse {
   JobErrorMsg?: string;
   /** 生成图 URL，有效期1小时，请及时保存。 */
   ResultImage?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface QueryTextToImageJobRequest {
-  /** 任务 ID。 */
-  JobId: string;
-}
-
-declare interface QueryTextToImageJobResponse {
-  /** 当前任务状态码：1：等待中、2：运行中、4：处理失败、5：处理完成。 */
-  JobStatusCode?: string;
-  /** 当前任务状态：排队中、处理中、处理失败或者处理完成。 */
-  JobStatusMsg?: string;
-  /** 任务处理失败错误码。 */
-  JobErrorCode?: string;
-  /** 任务处理失败错误信息。 */
-  JobErrorMsg?: string;
-  /** 生成图 URL 列表，有效期1小时，请及时保存。 */
-  ResultImage?: string[];
-  /** 结果 detail 数组，Success 代表成功。 */
-  ResultDetails?: string[];
-  /** 对应 SubmitTextToImageProJob 接口中 Revise 参数。开启扩写时，返回扩写后的 prompt 文本。 如果关闭扩写，将直接返回原始输入的 prompt。 */
-  RevisedPrompt?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -470,30 +398,6 @@ declare interface SubmitMemeJobResponse {
   RequestId?: string;
 }
 
-declare interface SubmitTextToImageJobRequest {
-  /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。不能为空，推荐使用中文。最多可传8192个 utf-8 字符。 */
-  Prompt: string;
-  /** 参考图，最多三张图。 - Base64 或 Url 。单张图片限制：输入图分辨率单边最小50px，最大5000px；图片base64后大小小于6M ；格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
-  Images?: string[];
-  /** 生成图分辨率单位为 px。格式："${宽}:${高}"，说明：分辨率的设置和输入是否有参考图（image_urls/images参数）有关：一、文生图（无参考图）默认分辨率：1024:1024；尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。二、图生图（有参考图）尺寸约束：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。传入尺寸时（输出自适应，不严格遵循传入尺寸）：输入图分辨率分桶与传入尺寸分桶一致时：按输入图长宽比，缩放至接近 1024:1024 面积输出；输入图分辨率分桶与传入尺寸分桶不一致时：从 尺寸列表 中选取最接近传入尺寸的尺寸输出尺寸列表：2048:512、1984:512、1920:512、1856:512、1792:512、1728:512、1664:512、1600:512、1536:512、1472:576、1408:640、1344:704、1280:768、1216:832、1152:896、1088:960、1024:1024、960:1088、896:1152、832:1216、768:1280、704:1344、640:1408、576:1472、512:1536、512:1600、512:1664、512:1728、512:1792、512:1856、512:1920、512:1984、512:2048、768:1024、720:1280、1024:768、1280:720不传入尺寸时：将传入默认值1024:1024。 */
-  Resolution?: string;
-  /** 随机种子，默认随机。不传：随机种子生成。正数：固定种子生成。扩写开启时固定种子不生效，将保持随机。取值范围：1 - 4294967295 */
-  Seed?: number;
-  /** 为生成结果图添加显式水印标识的开关，默认为1。1：添加。0：不添加。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-  /** 是否开启prompt改写，为空时默认开启，改写预计会增加20s左右耗时。0：关闭改写1：开启改写建议默认开启，如果关闭改写，需要调用方自己接改写，否则对生图效果有较大影响，改写方法可以参考：改写示例值：1 */
-  Revise?: number;
-}
-
-declare interface SubmitTextToImageJobResponse {
-  /** 任务 ID。 */
-  JobId?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface SubmitTextToImageProJobRequest {
   /** 文本描述。 算法将根据输入的文本智能生成与之相关的图像。 不能为空，推荐使用中文。最多可传100个 utf-8 字符。 */
   Prompt: string;
@@ -522,60 +426,6 @@ declare interface SubmitTrainPortraitModelJobRequest {
 }
 
 declare interface SubmitTrainPortraitModelJobResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface TextToImageLiteRequest {
-  /** 文本描述。将根据输入的文本智能生成与之相关的图像。不能为空，推荐使用中文。最多可传1024个 utf-8 字符。 */
-  Prompt: string;
-  /** 反向提示词。 减少生成结果中出现描述内容。推荐使用中文。最多可传1024个 utf-8 字符。 */
-  NegativePrompt?: string;
-  /** 生成图分辨率，默认1024:1024。支持的图像宽高比例: 1:1，3:4，4:3，9:16，16:9。支持的长边分辨率: 160，200，225，258，512，520，608，768，1024，1080，1280，1600，1620，1920，2048，2400，2560，2592，3440，3840，4096。单位为px。 */
-  Resolution?: string;
-  /** 随机种子，默认随机。0：随机种子生成。不传：随机种子生成。正数：固定种子生成。 */
-  Seed?: number;
-  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-  /** 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 */
-  RspImgType?: string;
-}
-
-declare interface TextToImageLiteResponse {
-  /** 根据入参 RspImgType 填入不同，返回不同的内容。如果传入 base64 则返回生成图 Base64 编码。如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。 */
-  ResultImage?: string;
-  /** Seed */
-  Seed?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface TextToImageRapidRequest {
-  /** 文本描述。算法将根据输入的文本智能生成与之相关的图像。建议详细描述画面主体、细节、场景等，文本描述越丰富，生成效果越精美。不能为空，推荐使用中文。最多可传256个 utf-8 字符。 */
-  Prompt: string;
-  /** 生成图分辨率，默认1024:1024。支持的图像宽高比例: 1:1，3:4，4:3，9:16，16:9。支持的长边分辨率: 160，200，225，258，512，520，608，768，1024，1080，1280，1600，1620，1920，2048，2400，2560，2592，3440，3840，4096。单位为 px。 */
-  Resolution?: string;
-  /** 随机种子，默认随机。0：随机种子生成。不传：随机种子生成。正数：固定种子生成。 */
-  Seed?: number;
-  /** 参考图。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。当传入Image参数时，Style和Resolution参数不生效，输出图分辨率将保持Image传入图分辨率。图片限制：单边分辨率大于128px且小于2048px；图片小于6M；格式支持 jpg、jpeg、png、bmp、tiff、webp。 */
-  Image?: Image;
-  /** 生成的图片风格，参考值：1：宫崎骏风格；2：新海诚风格；3：去旅行风格；4：水彩风格；5：像素风格；6：童话世界风格；7：奇趣卡通风格；8：赛博朋克风格；9：极简风格；10：复古风格；11：暗黑系风格；12：波普风风格；13：糖果色风格；14：胶片电影风格；15：素描风格；16：水墨画风格；17：油画风格；18：粉笔风格；19：粘土风格；20：毛毡风格；21：刺绣风格；22：彩铅风格；23：莫奈风格；24：毕加索风格；25：穆夏风格；26：古风二次元风格；27：都市二次元风格；28：悬疑风格；29：校园风格；30：都市异能风格。 */
-  Style?: string;
-  /** 为生成结果图添加标识的开关，默认为1。1：添加标识。0：不添加标识。其他数值：默认按1处理。建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。 */
-  LogoAdd?: number;
-  /** 标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。 */
-  LogoParam?: LogoParam;
-  /** 返回图像方式（base64 或 url），二选一，默认为 base64。url 有效期为1小时。 */
-  RspImgType?: string;
-}
-
-declare interface TextToImageRapidResponse {
-  /** 根据入参 RspImgType 填入不同，返回不同的内容。如果传入 base64 则返回生成图 Base64 编码。如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。 */
-  ResultImage?: string;
-  /** Seed */
-  Seed?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -611,16 +461,12 @@ declare interface Aiart {
   ImageInpaintingRemoval(data?: ImageInpaintingRemovalRequest, config?: AxiosRequestConfig): AxiosPromise<ImageInpaintingRemovalResponse>;
   /** 扩图 {@link ImageOutpaintingRequest} {@link ImageOutpaintingResponse} */
   ImageOutpainting(data: ImageOutpaintingRequest, config?: AxiosRequestConfig): AxiosPromise<ImageOutpaintingResponse>;
-  /** 图像风格化（图生图） {@link ImageToImageRequest} {@link ImageToImageResponse} */
-  ImageToImage(data?: ImageToImageRequest, config?: AxiosRequestConfig): AxiosPromise<ImageToImageResponse>;
   /** 查询生成写真图片任务 {@link QueryDrawPortraitJobRequest} {@link QueryDrawPortraitJobResponse} */
   QueryDrawPortraitJob(data: QueryDrawPortraitJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryDrawPortraitJobResponse>;
   /** 查询美照生成任务 {@link QueryGlamPicJobRequest} {@link QueryGlamPicJobResponse} */
   QueryGlamPicJob(data: QueryGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryGlamPicJobResponse>;
   /** 查询表情动图生成任务 {@link QueryMemeJobRequest} {@link QueryMemeJobResponse} */
   QueryMemeJob(data: QueryMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryMemeJobResponse>;
-  /** 查询混元生图（3.0）任务 {@link QueryTextToImageJobRequest} {@link QueryTextToImageJobResponse} */
-  QueryTextToImageJob(data: QueryTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageJobResponse>;
   /** 查询文生图（高级版）任务（即将下线） {@link QueryTextToImageProJobRequest} {@link QueryTextToImageProJobResponse} */
   QueryTextToImageProJob(data: QueryTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryTextToImageProJobResponse>;
   /** 查询训练写真模型任务 {@link QueryTrainPortraitModelJobRequest} {@link QueryTrainPortraitModelJobResponse} */
@@ -637,16 +483,10 @@ declare interface Aiart {
   SubmitGlamPicJob(data: SubmitGlamPicJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitGlamPicJobResponse>;
   /** 提交表情动图生成任务 {@link SubmitMemeJobRequest} {@link SubmitMemeJobResponse} */
   SubmitMemeJob(data: SubmitMemeJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMemeJobResponse>;
-  /** 提交混元生图（3.0）任务 {@link SubmitTextToImageJobRequest} {@link SubmitTextToImageJobResponse} */
-  SubmitTextToImageJob(data: SubmitTextToImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageJobResponse>;
   /** 提交文生图（高级版）任务（即将下线） {@link SubmitTextToImageProJobRequest} {@link SubmitTextToImageProJobResponse} */
   SubmitTextToImageProJob(data: SubmitTextToImageProJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTextToImageProJobResponse>;
   /** 提交训练写真模型任务 {@link SubmitTrainPortraitModelJobRequest} {@link SubmitTrainPortraitModelJobResponse} */
   SubmitTrainPortraitModelJob(data: SubmitTrainPortraitModelJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTrainPortraitModelJobResponse>;
-  /** 混元生图（极速版） {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
-  TextToImageLite(data: TextToImageLiteRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageLiteResponse>;
-  /** 混元生图（2.0） {@link TextToImageRapidRequest} {@link TextToImageRapidResponse} */
-  TextToImageRapid(data: TextToImageRapidRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageRapidResponse>;
   /** 上传写真训练图片 {@link UploadTrainPortraitImagesRequest} {@link UploadTrainPortraitImagesResponse} */
   UploadTrainPortraitImages(data: UploadTrainPortraitImagesRequest, config?: AxiosRequestConfig): AxiosPromise<UploadTrainPortraitImagesResponse>;
 }

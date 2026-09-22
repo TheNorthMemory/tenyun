@@ -596,6 +596,34 @@ declare interface MetricThreshold {
   Duration?: number;
 }
 
+/** MongoDB 集合级空间使用明细，包含集合的存储、索引、碎片等各维度指标。 */
+declare interface MongoCollectionDetail {
+  /** 集合命名空间，格式为 db.collection。 */
+  CollStats?: string | null;
+  /** 集合逻辑大小（字节，未压缩）。 */
+  CollectionSize?: number | null;
+  /** 集合已分配但未使用的空间（字节）。 */
+  DataFree?: number | null;
+  /** 空间利用率（百分比字符串）。 */
+  SpaceRatio?: string | null;
+  /** 碎片率（百分比字符串）。 */
+  FragRatio?: string | null;
+  /** 集合数据大小（字节）。 */
+  Size?: number | null;
+  /** 所有索引占用大小（字节）。 */
+  TotalIndexSize?: number | null;
+  /** 平均文档大小（字节）。 */
+  AvgObjSize?: number | null;
+  /** 集合实际占用存储大小（字节，压缩后）。 */
+  StorageSize?: number | null;
+  /** 文档数量。 */
+  Count?: number | null;
+  /** 压缩率（百分比字符串）。 */
+  CompressionRatio?: string | null;
+  /** 可复用文件空间（字节）。 */
+  FileReuseBytes?: number | null;
+}
+
 /** Mongodb索引项 */
 declare interface MongoDBIndex {
   /** 实例id。 */
@@ -644,6 +672,22 @@ declare interface MongoDBProcessList {
   Names?: string[] | null;
   /** 接口返回数据详情 */
   Data?: MongoDBProcessItem[] | null;
+}
+
+/** MongoDB 产品表级（集合级）空间对象项，描述单个集合的空间使用统计信息。 */
+declare interface MongoDBTableSpaceItem {
+  /** 应用 Id（AppId）。 */
+  AppId?: number | null;
+  /** 实例 Id。 */
+  InstanceId?: string | null;
+  /** 数据库名。 */
+  Db?: string | null;
+  /** 数据采集时间戳（毫秒）。 */
+  Timestamp?: number | null;
+  /** 磁盘占用大小（字节）。 */
+  SizeOnDisk?: number | null;
+  /** 集合级空间使用明细。 */
+  Collection?: MongoCollectionDetail | null;
 }
 
 /** 监控数据（浮点型） */
@@ -702,6 +746,52 @@ declare interface MySqlProcess {
   Info?: string;
   /** sql类型 */
   SqlType?: string | null;
+}
+
+/** MySQL 系列产品空间对象项。库级查询时不包含 TableName/Engine 字段；表级查询时包含全部字段。 */
+declare interface MysqlSpaceObjectItem {
+  /** 数据库名。 */
+  TableSchema?: string | null;
+  /** 表名（Level=TABLE时返回）。 */
+  TableName?: string | null;
+  /** 存储引擎（Level=TABLE时返回）。 */
+  Engine?: string | null;
+  /** 行数。 */
+  TableRows?: number | null;
+  /** 总使用空间（MB）。 */
+  TotalLength?: number | null;
+  /** 数据空间（MB）。 */
+  DataLength?: number | null;
+  /** 索引空间（MB）。 */
+  IndexLength?: number | null;
+  /** 碎片空间（MB）。 */
+  DataFree?: number | null;
+  /** 碎片率（%）。 */
+  FragRatio?: number | null;
+  /** 物理文件大小（MB）。 */
+  PhysicalFileSize?: number | null;
+}
+
+/** PostgreSQL 产品空间对象项。字段语义与 MySQL 不同：使用 pg_relation_size / pg_total_relation_size 等 PG 特有指标。库级查询时不包含 TableSchema/TableName 字段；表级查询时包含全部字段。 */
+declare interface PostgresSpaceObjectItem {
+  /** 数据库名（PostgreSQL 顶层 catalog）。 */
+  TableCatalog?: string | null;
+  /** Schema 名（Level=TABLE 时返回）。 */
+  TableSchema?: string | null;
+  /** 表名（Level=TABLE 时返回）。 */
+  TableName?: string | null;
+  /** 表本身大小（MB），对应 pg_relation_size。 */
+  RelationSize?: number | null;
+  /** 表数据大小（MB），含 TOAST 但不含索引，对应 pg_table_size。 */
+  TableSize?: number | null;
+  /** 索引大小（MB），对应 pg_indexes_size。 */
+  IndexSize?: number | null;
+  /** 总大小（MB），含数据、索引、TOAST，对应 pg_total_relation_size。 */
+  TotalRelationSize?: number | null;
+  /** 表膨胀率（PostgreSQL 特有指标）。 */
+  TableBloat?: number | null;
+  /** 表行数。 */
+  TableRows?: number | null;
 }
 
 /** 实时会话详情。 */
@@ -1050,6 +1140,8 @@ declare interface SlowLogInfoItem {
   RowsExamined?: number;
   /** 返回行数 */
   RowsSent?: number;
+  /**  */
+  InstanceId?: string;
 }
 
 /** 慢日志TopSql */
@@ -1104,6 +1196,10 @@ declare interface SlowLogTopSqlItem {
   RowsExaminedAvg?: number;
   /** SQL模板的MD5值 */
   Md5?: string;
+  /**  */
+  SqlType?: string;
+  /**  */
+  InstanceId?: string;
 }
 
 /** 慢日志来源用户详情。 */
@@ -3100,6 +3196,32 @@ declare interface DescribeTopSpaceTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopSpaceTablesV2Request {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。 */
+  Product: string;
+  /** 查询日期，格式：yyyy-MM-dd。默认当天。 */
+  Date?: string;
+  /** 排序字段。MySQL/PG/TDSQL 系列支持：PhysicalFileSize/DataLength/IndexLength/TotalLength/DataFree/FragRatio/TableRows，默认 PhysicalFileSize。MongoDB 支持：Collection.CollectionSize/Collection.StorageSize/Collection.Size/Collection.AvgObjSize/Collection.Count/Collection.TotalIndexSize，默认 Collection.CollectionSize。 */
+  SortBy?: string;
+  /** 返回数量，默认20，最大100。 */
+  Limit?: number;
+}
+
+declare interface DescribeTopSpaceTablesV2Response {
+  /** MySQL/PG/TDSQL 系列产品表级空间对象列表。当产品为 mysql/cynosdb/tdsql/dcdb/mariadb/postgres 时返回。 */
+  MysqlObjects?: MysqlSpaceObjectItem[] | null;
+  /** PostgreSQL 产品表级空间对象列表。当产品为 postgres 时返回。字段语义与 MySQL 不同：使用 RelationSize / TableSize / IndexSize / TotalRelationSize / TableBloat 等 PG 特有指标。 */
+  PostgresObjects?: PostgresSpaceObjectItem[] | null;
+  /** MongoDB 产品表级（集合级）空间对象列表。当产品为 mongodb 时返回。 */
+  MongodbObjects?: MongoDBTableSpaceItem[] | null;
+  /** 数据采集时间戳（秒）。 */
+  Timestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserAutonomyProfileRequest {
   /** 配置类型，为需要配置的功能枚举值，目前包含一下枚举值：AutonomyGlobal（自治功能全局配置）、RedisAutoScaleUp（Redis自治扩容配置）。 */
   ProfileType: string;
@@ -4675,6 +4797,8 @@ declare interface Dbbrain {
   DescribeTopSpaceTableTimeSeries(data: DescribeTopSpaceTableTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTableTimeSeriesResponse>;
   /** 获取Top表的空间统计信息 {@link DescribeTopSpaceTablesRequest} {@link DescribeTopSpaceTablesResponse} */
   DescribeTopSpaceTables(data: DescribeTopSpaceTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTablesResponse>;
+  /** 查询表级空间 Top 对象（融合接口） {@link DescribeTopSpaceTablesV2Request} {@link DescribeTopSpaceTablesV2Response} */
+  DescribeTopSpaceTablesV2(data: DescribeTopSpaceTablesV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTablesV2Response>;
   /** 查询自治功能配置 {@link DescribeUserAutonomyProfileRequest} {@link DescribeUserAutonomyProfileResponse} */
   DescribeUserAutonomyProfile(data: DescribeUserAutonomyProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAutonomyProfileResponse>;
   /** 获取SQL优化建议 {@link DescribeUserSqlAdviceRequest} {@link DescribeUserSqlAdviceResponse} */

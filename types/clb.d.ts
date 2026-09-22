@@ -500,6 +500,40 @@ declare interface Coefficient {
   InputCoefficient?: number;
   /** 输出积分系数。取值范围：[1, 5000]默认值：100 */
   OutputCoefficient?: number;
+  /** 输入图片系数 */
+  InputImageCoefficient?: number;
+  /** 输入视频每秒系数 */
+  InputVideoSecondCoefficient?: number;
+  /** 输出视频每秒系数 */
+  OutputVideoSecondCoefficient?: number;
+}
+
+/** 峰谷计费配置 */
+declare interface CoefficientScheduleRule {
+  /** 1～7，表示周一至周日 */
+  Weekdays?: number[];
+  /** 00:00～23:59，固定 UTC+8，窗口左闭参数格式：HH:mm */
+  StartTime?: string;
+  /** 大于 StartTime，最大 24:00，窗口右开；跨午夜拆分并调整星期参数格式：HH:mm */
+  EndTime?: string;
+  /** 有限非负数，建议最多 6 位小数；0 免费、0.5 半价、1 原价，可大于 1；倍率计算后的价格须在服务支持的数值范围内 */
+  Multiplier?: number;
+}
+
+/** 积分分档配置 */
+declare interface CoefficientTier {
+  /** 积分分级条件 */
+  Condition?: CoefficientTierCondition;
+  /** 积分系数 */
+  Coefficient?: Coefficient;
+}
+
+/** 积分分档匹配条件 */
+declare interface CoefficientTierCondition {
+  /** 仅 chat；单位 K Token（1K=1000 Token）；非负整数，最大 2147483647；非空数组首条必须为 0，数组内严格递增、无重复；输入总 Token 严格超过阈值×1000，取满足条件的最大阈值，整单选价 */
+  InputTokensAbove?: number;
+  /** video 仅 480p／720p／768p／1024p／1080p／2k／4k，统一小写；只校验全局枚举，不校验模型支持子集；列表内不重复 */
+  Resolution?: string;
 }
 
 /** 配置内容 */
@@ -1250,8 +1284,12 @@ declare interface ModelAlias {
   Source?: string;
   /** 状态枚举值：Active： 正常可用Configuring： 变配中ConfigureFailed： 变配失败 */
   Status?: string;
-  /** 模型能力 */
+  /** 模型输出模态枚举值：chat ： 文本embedding： 向量rerank： 重排序video： 视频 */
   Capability?: string;
+  /** 分级积分系数配置 */
+  CoefficientTiers?: CoefficientTier[];
+  /** 峰谷积分系数配置 */
+  CoefficientSchedule?: CoefficientScheduleRule[];
 }
 
 /** 模型关联信息 */
@@ -2016,6 +2054,10 @@ declare interface ServiceProviderCoefficient {
   ServiceProviderId?: string;
   /** BYOK 实例（ServiceProvider）名称。 */
   ServiceProviderName?: string;
+  /** 分级积分系数设置 */
+  CoefficientTiers?: CoefficientTier[];
+  /** 峰谷积分系数设置 */
+  CoefficientSchedule?: CoefficientScheduleRule[];
 }
 
 /** 健康检查配置 */
@@ -3883,13 +3925,13 @@ declare interface DescribeLoadBalancersResponse {
 }
 
 declare interface DescribeModelAliasesRequest {
-  /** 过滤条件支持的过滤键：ModelAliasName：按模型别名过滤。 */
+  /** 过滤条件- ModelAliasName：模型别名- Capability：输出模态 */
   Filters?: Filter[];
   /** 每页数量，取值范围：[1, 100]，默认值：20。 */
   Limit?: number;
   /** 分页偏移量，默认值：0。 */
   Offset?: number;
-  /** 排序条件。支持按 InputCoefficient、InputCachedCoefficient 或 OutputCoefficient 排序，Order 支持 ASC、DESC。不传或传空数组时，默认按 OutputCoefficient 降序排列。最多支持 3 个排序条件，排序字段不可重复。 */
+  /** 排序条件。支持按 InputCoefficient 或 OutputCoefficient 排序，Order 支持 ASC、DESC。不传或传空数组时，默认按 OutputCoefficient 降序排列。最多支持 2 个排序条件，排序字段不可重复。 */
   Sort?: Sort[];
 }
 
@@ -4845,14 +4887,18 @@ declare interface ModifyLoadBalancersProjectResponse {
 }
 
 declare interface ModifyModelAliasAttributesRequest {
-  /** 模型积分系数配置。必填，包含 InputCoefficient 和 OutputCoefficient。InputCoefficient 为输入积分系数。OutputCoefficient 为输出积分系数。取值范围：[1, 200]，最多支持 1 位小数。 */
-  Coefficient: Coefficient;
   /** 模型别名 */
   ModelAliasNames: string[];
+  /** 基础积分系数配置，选填。不传时保留原配置。各系数字段均为选填，取值范围为 [0, 5000]，最多支持 6 位小数，0 表示零价。传入本参数时，至少填写一项有效系数，不能传空对象。 */
+  Coefficient?: Coefficient;
   /** BYOK 实例（ServiceProvider）ID 列表。可选，数组。传入时按 ServiceProvider 维度修改：把同一份 Coefficient 批量应用到数组内每一个实例（覆盖配置，仅作用于这些实例），此时 ModelAliasNames 只能传 1 个别名（即 1 别名 × N ServiceProvider）；数组需去重、非空、上限 100，任一实例不归属/不存在/该实例下无该别名将整批返回错误。不传时按 ModelAlias（账号）维度修改，作用于该别名下未单独配置覆盖的全部实例。 */
   ServiceProviderIds?: string[];
-  /** 模型能力 */
+  /** 模型输出模态枚举值：chat： 文本embedding： 向量video： 视频rerank： 重排序 */
   Capability?: string;
+  /** 积分梯度设置 */
+  CoefficientTiers?: CoefficientTier[];
+  /** 积分峰谷设置 */
+  CoefficientSchedule?: CoefficientScheduleRule[];
 }
 
 declare interface ModifyModelAliasAttributesResponse {

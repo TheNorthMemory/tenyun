@@ -776,6 +776,8 @@ declare interface CrossBorderCompliance {
   LegalPersonId?: string;
   /** 法定代表人身份证。 */
   LegalPersonIdCard?: string;
+  /** 白名单开关是否开启 */
+  WhiteListFlag?: boolean;
 }
 
 /** 跨境带宽监控数据 */
@@ -1350,11 +1352,11 @@ declare interface IPSECOptionsSpecification {
 
 /** 返回多运营商IPv6 Cidr Block */
 declare interface ISPIPv6CidrBlock {
-  /** IPv6 CIdr Block */
+  /** IPv6网段 */
   IPv6CidrBlock?: string;
-  /** 网络运营商类型 取值范围:'BGP'-默认, 'CMCC'-中国移动, 'CTCC'-中国电信, 'CUCC'-中国联调 */
+  /** 网络运营商类型枚举值：BGP： 默认CMCC： 中国移动CTCC： 中国电信CUCC： 中国联通 */
   ISPType?: string;
-  /** IPv6 Cidr 的类型：`GUA`(全球单播地址), `ULA`(唯一本地地址) */
+  /** IPv6网段类型枚举值：GUA： 全球单播地址ULA： 唯一本地地址 */
   AddressType?: string;
 }
 
@@ -1940,9 +1942,9 @@ declare interface NetworkInterface {
   Primary?: boolean;
   /** MAC地址。 */
   MacAddress?: string;
-  /** 弹性网卡状态：`PENDING`：创建中`AVAILABLE`：可用的`ATTACHING`：绑定中`DETACHING`：解绑中`DELETING`：删除中 */
+  /** 弹性网卡状态：PENDING：创建中AVAILABLE：可用的ATTACHING：绑定中DETACHING：解绑中DELETING：删除中 */
   State?: string;
-  /** 弹性网卡状态：`PENDING`：创建中`AVAILABLE`：可用的`ATTACHING`：绑定中`DETACHING`：解绑中`DELETING`：删除中`INUSE`：已绑定 */
+  /** 弹性网卡状态：PENDING：创建中AVAILABLE：可用的ATTACHING：绑定中DETACHING：解绑中DELETING：删除中INUSE：已绑定 */
   NetworkInterfaceState?: string;
   /** 内网IP信息。 */
   PrivateIpAddressSet?: PrivateIpAddressSpecification[];
@@ -1952,7 +1954,7 @@ declare interface NetworkInterface {
   Zone?: string;
   /** 创建时间。格式：YYYY-MM-DD hh:mm:ss。示例值：2020-10-28 08:23:59 */
   CreatedTime?: string;
-  /** `IPv6`地址列表。 */
+  /** IPv6地址列表。 */
   Ipv6AddressSet?: Ipv6Address[];
   /** 标签键值对。 */
   TagSet?: Tag[];
@@ -1968,6 +1970,10 @@ declare interface NetworkInterface {
   ResourceId?: string;
   /** 服务质量级别：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
+  /** 指定的IPv6地址列表，单次最多指定10个。与入参Ipv6AddressCount合并计算配额。 */
+  Ipv6Addresses?: Ipv6Address[];
+  /** 自动分配IPv6地址个数，内网IP地址个数总和不能超过配额数。与入参Ipv6Addresses合并计算配额。取值范围：[1, 10]单位：个 */
+  Ipv6AddressCount?: number;
 }
 
 /** 弹性网卡绑定关系 */
@@ -2828,17 +2834,23 @@ declare interface Subnet {
   CdcId?: string;
   /** 是否是CDC所属子网。0:否 1:是 */
   IsCdcSubnet?: number;
+  /** 协议栈类型枚举值：DualStack： IPv4和IPv6双栈IPv6Only： IPv6单栈 */
+  StackType?: string;
 }
 
 /** 子网对象 */
 declare interface SubnetInput {
-  /** 子网的`CIDR`。 */
-  CidrBlock: string;
   /** 子网名称。 */
   SubnetName: string;
-  /** 可用区。形如：`ap-guangzhou-2`。 */
+  /** 可用区。形如：ap-guangzhou-2。 */
   Zone: string;
-  /** 指定关联路由表，形如：`rtb-3ryrwzuu`。 */
+  /** 协议栈类型枚举值：DualStack： IPv4和IPv6双栈IPv6Only： IPv6单栈 */
+  StackType?: string;
+  /** 子网的CIDR。 */
+  CidrBlock?: string;
+  /** 子网的 IPv6 CIDR。 */
+  Ipv6CidrBlock?: string;
+  /** 指定关联路由表，形如：rtb-3ryrwzuu。 */
   RouteTableId?: string;
 }
 
@@ -3140,6 +3152,8 @@ declare interface VpcInfo {
   Ipv6CidrBlockSet?: ISPIPv6CidrBlock[];
   /** vpc关联云联网时IPv6类型路由发布策略， true：开启cidr路由发布，false：开启subnet子网路由发布。创建vpc时默认为子网路由发布，当选择cidr路由发布时，请通过工单加入白名单。 */
   EnableRouteVpcPublishIpv6?: boolean;
+  /** 协议栈类型枚举值：DualStack： IPv4和IPv6双栈IPv6Only： IPv6单栈 */
+  StackType?: string;
 }
 
 /** 终端节点服务的服务白名单对象详情。 */
@@ -3244,7 +3258,7 @@ declare interface VpnConnection {
   DpdAction?: string;
   /** 标签键值对数组 */
   TagSet?: Tag[];
-  /** 协商类型 */
+  /** 协商类型枚举值：active： 主动协商passive： 被动协商flowTrigger： 流量协商 */
   NegotiationType?: string;
   /** Bgp配置信息 */
   BgpConfig?: BgpConfigAndAsn;
@@ -3543,34 +3557,34 @@ declare interface AllocateIp6AddressesBandwidthResponse {
 }
 
 declare interface AssignIpv6AddressesRequest {
-  /** 弹性网卡实例`ID`，形如：`eni-m6dyj72l`。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
+  /** 弹性网卡实例ID，形如：eni-m6dyj72l。可通过DescribeNetworkInterfaces接口获取。 */
   NetworkInterfaceId: string;
-  /** 指定的`IPv6`地址列表，单次最多指定10个。与入参`Ipv6AddressCount`合并计算配额。与Ipv6AddressCount必填一个。 */
+  /** 指定的IPv6地址列表，单次最多指定10个。与入参Ipv6AddressCount合并计算配额。与Ipv6AddressCount必填一个。 */
   Ipv6Addresses?: Ipv6Address[];
-  /** 自动分配`IPv6`地址个数，内网IP地址个数总和不能超过配额数。与入参`Ipv6Addresses`合并计算配额。与Ipv6Addresses必填一个。 */
+  /** 自动分配IPv6地址个数，内网IP地址个数总和不能超过配额数。与入参Ipv6Addresses合并计算配额。与Ipv6Addresses必填一个。 */
   Ipv6AddressCount?: number;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
 }
 
 declare interface AssignIpv6AddressesResponse {
-  /** 分配给弹性网卡的`IPv6`地址列表。 */
+  /** 分配给弹性网卡的IPv6地址列表。 */
   Ipv6AddressSet?: Ipv6Address[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface AssignIpv6CidrBlockRequest {
-  /** `VPC`实例`ID`，形如：`vpc-f49l6u0z`。 */
+  /** VPC实例ID，形如：vpc-f49l6u0z。 */
   VpcId: string;
-  /** 申请IPv6 Cidr 的类型，`GUA`(全球单播地址), `ULA`(唯一本地地址)。 */
+  /** 申请IPv6 Cidr 的类型，GUA(全球单播地址), ULA(唯一本地地址)。 */
   AddressType?: string;
 }
 
 declare interface AssignIpv6CidrBlockResponse {
-  /** 分配的 `IPv6` 网段。形如：`3402:4e00:20:1000::/56`。 */
+  /** 分配的 IPv6 网段。形如：3402:4e00:20:1000::/56。 */
   Ipv6CidrBlock?: string;
-  /** 申请IPv6 Cidr 的类型，`GUA`, `ULA` */
+  /** 申请IPv6 Cidr 的类型，GUA, ULA */
   AddressType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3593,7 +3607,7 @@ declare interface AssignIpv6SubnetCidrBlockResponse {
 }
 
 declare interface AssignPrivateIpAddressesRequest {
-  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。 */
+  /** 弹性网卡实例ID，例如：eni-m6dyj72l。可通过DescribeNetworkInterfaces接口获取。 */
   NetworkInterfaceId: string;
   /** 指定的内网IP信息，单次最多指定10个。与SecondaryPrivateIpAddressCount至少提供一个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
@@ -3969,21 +3983,25 @@ declare interface CreateAddressTemplateResponse {
 }
 
 declare interface CreateAndAttachNetworkInterfaceRequest {
-  /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。 */
+  /** VPC实例ID。可通过DescribeVpcs接口获取。 */
   VpcId: string;
   /** 弹性网卡名称，最大长度不能超过60个字符。 */
   NetworkInterfaceName: string;
-  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
+  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过DescribeSubnets接口获取。 */
   SubnetId: string;
-  /** 云服务器实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。 */
+  /** 云服务器实例ID。可通过DescribeInstances接口获取。 */
   InstanceId: string;
   /** 指定的内网IP信息，单次最多指定10个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
   /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。 */
   SecondaryPrivateIpAddressCount?: number;
+  /** 指定的IPv6地址列表，单次最多指定10个。与入参Ipv6AddressCount合并计算配额。 */
+  Ipv6Addresses?: Ipv6Address[];
+  /** 自动分配IPv6地址个数，内网IP地址个数总和不能超过配额数。与入参Ipv6Addresses合并计算配额。取值范围：[1, 10]单位：个 */
+  Ipv6AddressCount?: number;
   /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
-  /** 指定绑定的安全组，例如：['sg-1dd51d']。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。 */
+  /** 指定绑定的安全组，例如：['sg-1dd51d']。可通过DescribeSecurityGroups接口获取。 */
   SecurityGroupIds?: string[];
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
@@ -3995,6 +4013,10 @@ declare interface CreateAndAttachNetworkInterfaceRequest {
   IsRdma?: boolean;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
+  /** 删除保护。 */
+  TerminationProtection?: boolean;
+  /** 流量保护。 */
+  TrafficProtection?: boolean;
 }
 
 declare interface CreateAndAttachNetworkInterfaceResponse {
@@ -4523,22 +4545,26 @@ declare interface CreateNetworkAclResponse {
 }
 
 declare interface CreateNetworkInterfaceRequest {
-  /** VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口获取。 */
+  /** VPC实例ID。可通过DescribeVpcs接口获取。 */
   VpcId: string;
   /** 弹性网卡名称，最大长度不能超过60个字节。 */
   NetworkInterfaceName: string;
-  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)接口获取。 */
+  /** 弹性网卡所在的子网实例ID，例如：subnet-0ap8nwca。可通过DescribeSubnets接口获取。 */
   SubnetId: string;
   /** 弹性网卡描述，可任意命名，但不得超过60个字符。 */
   NetworkInterfaceDescription?: string;
-  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。配额数查询：[DescribeVpcLimits](https://cloud.tencent.com/document/api/215/42942)。 */
-  SecondaryPrivateIpAddressCount?: number;
   /** IP服务质量等级，和SecondaryPrivateIpAddressCount配合使用，可选值：PT（云金）、AU（云银）、AG(云铜）、DEFAULT（默认）。 */
   QosLevel?: string;
-  /** 指定绑定的安全组，例如：['sg-1dd51d']。可通过[DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808)接口获取。 */
+  /** 指定绑定的安全组，例如：['sg-1dd51d']。可通过DescribeSecurityGroups接口获取。 */
   SecurityGroupIds?: string[];
   /** 指定的内网IP信息，单次最多指定10个。 */
   PrivateIpAddresses?: PrivateIpAddressSpecification[];
+  /** 新申请的内网IP地址个数，内网IP地址个数总和不能超过配额数。配额数查询：DescribeVpcLimits。 */
+  SecondaryPrivateIpAddressCount?: number;
+  /** 指定的IPv6地址列表，单次最多指定10个。与入参Ipv6AddressCount合并计算配额。 */
+  Ipv6Addresses?: Ipv6Address[];
+  /** 自动分配IPv6地址个数，内网IP地址个数总和不能超过配额数。与入参Ipv6Addresses合并计算配额。取值范围：[1, 10]单位：个 */
+  Ipv6AddressCount?: number;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
   Tags?: Tag[];
   /** 网卡trunking模式设置，Enable-开启，Disable--关闭，默认关闭。 */
@@ -4547,6 +4573,10 @@ declare interface CreateNetworkInterfaceRequest {
   IsRdma?: boolean;
   /** 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。 */
   ClientToken?: string;
+  /** 删除保护。 */
+  TerminationProtection?: boolean;
+  /** 流量保护。 */
+  TrafficProtection?: boolean;
 }
 
 declare interface CreateNetworkInterfaceResponse {
@@ -4831,10 +4861,14 @@ declare interface CreateSubnetRequest {
   VpcId: string;
   /** 子网名称，最大长度不能超过60个字节。 */
   SubnetName: string;
-  /** 子网网段，子网网段必须在VPC网段内，相同VPC内子网网段不能重叠。 */
-  CidrBlock: string;
   /** 子网所在的可用区ID，不同子网选择不同可用区可以做跨可用区灾备。 */
   Zone: string;
+  /** 协议栈类型枚举值：DualStack： IPv4和IPv6双栈IPv6Only： IPv6单栈 */
+  StackType?: string;
+  /** 子网网段，子网网段必须在VPC网段内，相同VPC内子网网段不能重叠。 */
+  CidrBlock?: string;
+  /** IPv6网段 */
+  Ipv6CidrBlock?: string;
   /** 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}] */
   Tags?: Tag[];
   /** CDC实例ID。 */
@@ -5039,8 +5073,14 @@ declare interface CreateVpcPeeringConnectionResponse {
 declare interface CreateVpcRequest {
   /** vpc名称，最大长度不能超过60个字节。 */
   VpcName: string;
+  /** 协议栈类型枚举值：DualStack： IPv4和IPv6双栈IPv6Only： IPv6单栈 */
+  StackType?: string;
   /** vpc的cidr，仅能在10.0.0.0/12，172.16.0.0/12，192.168.0.0/16这三个内网网段内。 */
-  CidrBlock: string;
+  CidrBlock?: string;
+  /** VPC的IPv6 CIDR。 */
+  Ipv6CidrBlock?: string;
+  /** IPv6网段类型枚举值：GUA： 全球单播地址ULA： 唯一本地地址 */
+  AddressType?: string;
   /** 是否开启组播。true: 开启, false: 不开启。 */
   EnableMulticast?: string;
   /** DNS地址，最多支持4个。 */
@@ -10433,6 +10473,8 @@ declare interface SetCcnRegionBandwidthLimitsRequest {
   CcnRegionBandwidthLimits: CcnRegionBandwidthLimit[];
   /** 是否恢复云联网地域出口/地域间带宽限速为默认值（1Gbps）。false表示不恢复；true表示恢复。恢复默认值后，限速实例将不在控制台展示。该参数默认为 false，不恢复。 */
   SetDefaultLimitFlag?: boolean;
+  /** 是否设置默认QOS带宽； */
+  SetQosDefaultLimitFlag?: boolean;
 }
 
 declare interface SetCcnRegionBandwidthLimitsResponse {

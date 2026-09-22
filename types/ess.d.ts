@@ -400,6 +400,8 @@ declare interface ComparisonDetail {
   DiffText?: string;
   /** 合同文本的格式类型。类型如下： **0**：段落（正文） **1**：标点符号 **2**：页眉页脚 **3**：目录 **4**：印章 **5**：序号 **6**：水印 **7**：下划线内容（填写区） */
   FormatType?: number;
+  /** 页码：对比点所在页码。 */
+  PageNumber?: number;
 }
 
 /** 此结构体 (Component) 用于描述控件属性。在通过文件发起合同时，对应的component有三种定位方式1. 绝对定位方式 （可以通过 [PDF坐标计算助手](https://qian.tencent.com/developers/tools/template-editor)计算控件的坐标）2. 表单域(FIELD)定位方式3. 关键字(KEYWORD)定位方式，使用关键字定位时，请确保PDF原始文件内是关键字以文字形式保存在PDF文件中，不支持对图片内文字进行关键字查找 */
@@ -1632,9 +1634,9 @@ declare interface OutputRisk {
 declare interface PdfVerifyResult {
   /** 验签结果。0-签名域未签名；1-验签成功； 3-验签失败；4-未找到签名域：文件内没有签名域；5-签名值格式不正确。 */
   VerifyResult?: number;
-  /** 签署平台如果文件是在腾讯电子签平台签署，则为**腾讯电子签**，如果文件不在腾讯电子签平台签署，则为**其他平台**。 */
+  /** 签署平台如果文件是在腾讯电子签平台签署，则为腾讯电子签，如果文件不在腾讯电子签平台签署，则为其他平台。 */
   SignPlatform?: string;
-  /** 申请证书的主体的名字如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下**企业**: ESS@企业名称@编码**个人**: ESS@个人姓名@证件号@808854如果在其他平台签署的, 主体的名字参考其他平台的说明 */
+  /** 申请证书的主体的名字如果是在腾讯电子签平台签署, 则对应的主体的名字个数如下企业: ESS@企业名称@编码个人: ESS@个人姓名@证件号@808854如果在其他平台签署的, 主体的名字参考其他平台的说明 */
   SignerName?: string;
   /** 签署时间的Unix时间戳，单位毫秒 */
   SignTime?: number;
@@ -1656,6 +1658,10 @@ declare interface PdfVerifyResult {
   ComponentHeight?: number;
   /** 签名域所在页码，1～N */
   ComponentPage?: number;
+  /** 证书颁发机构 */
+  CertProvider?: string;
+  /** 是否有可信时间戳 */
+  IsTimestampTrust?: boolean;
 }
 
 /** 权限树节点权限 */

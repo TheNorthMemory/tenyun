@@ -3151,9 +3151,9 @@ declare interface DescribeAclRuleRequest {
   Index?: string;
   /** 过滤条件组合 */
   Filters?: CommonFilter[];
-  /** 检索的起始时间，可不传 */
+  /** 检索的起始时间，规则创建时间，可不传参数格式：2022-07-27 16:00:00 */
   StartTime?: string;
-  /** 检索的截止时间，可不传 */
+  /** 检索的截止时间，规则创建时间，可不传参数格式：2022-07-27 16:00:00 */
   EndTime?: string;
   /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc */
   Order?: string;
@@ -4317,9 +4317,9 @@ declare interface DescribeNatAcRuleRequest {
   Index?: string;
   /** 过滤条件组合，Direction 为0时表述查询出向规则，为1时表示查询入向规则 */
   Filters?: CommonFilter[];
-  /** 检索的起始时间，可不传 */
+  /** 检索的起始时间，规则创建时间，可不传参数格式：2022-07-27 16:00:00 */
   StartTime?: string;
-  /** 检索的截止时间，可不传 */
+  /** 检索的截止时间，规则创建时间，可不传参数格式：2022-07-27 16:00:00 */
   EndTime?: string;
   /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc */
   Order?: string;
@@ -4855,9 +4855,9 @@ declare interface DescribeVpcAcRuleRequest {
   Index?: string;
   /** 过滤条件组合 */
   Filters?: CommonFilter[];
-  /** 检索的起始时间，可不传 */
+  /** 检索的起始时间，规则创建时间，可不传参数格式：2022-07-27 16:00:00 */
   StartTime?: string;
-  /** 检索的截止时间，可不传 */
+  /** 检索的截止时间，规则创建时间，可不传参数格式：2022-07-27 16:00:00 */
   EndTime?: string;
   /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
   Order?: string;

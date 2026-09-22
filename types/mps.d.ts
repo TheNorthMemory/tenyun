@@ -1926,7 +1926,7 @@ declare interface AiStoryboardConfig {
 
 /** 虚拟试穿任务配置。 */
 declare interface AiTryOnConfig {
-  /** 换装模型，取值：WAND-tryon-1.0-liteWAND-tryon-1.0-flashWAND-tryon-1.0-pro */
+  /** 换装模型，取值：tryon-1.0-litetryon-1.0-flashtryon-1.0-pro */
   Model: string;
   /** 换装指令。为空时使用内置指令。 */
   Prompt?: string;
@@ -2380,6 +2380,8 @@ declare interface BeautyConfig {
   BeautyEffectItems?: BeautyEffectItemConfig[];
   /** 美颜滤镜 */
   BeautyFilterItems?: BeautyFilterItemConfig[];
+  /** 美颜类型枚举值：auto： 智能自动美颜传入美颜参数时，忽略该参数。 */
+  Type?: string;
 }
 
 /** 美颜效果配置项 */
@@ -2884,9 +2886,9 @@ declare interface CreateImageConfig {
   Model: string;
   /** 生图指令 */
   Prompt: string;
-  /** 输出图片的分辨率枚举值：1K： 短边分辨率 10802K： 短边分辨率 14404K： 短边分辨率 2160默认值：1K */
+  /** 输出图片的分辨率，可取值：1K/2K/4K。默认值：1K */
   Resolution?: string;
-  /** 输出图片的宽高比枚举值：1:1： 宽高比 1:12:3： 宽高比 2:33:2： 宽高比 3:23:4： 宽高比 3:44:3： 宽高比 4:39:16： 宽高比 9:1616:9： 宽高比 16:9默认值：1:1 */
+  /** 输出图片的宽高比，可取值：1:12:33:23:44:34:55:49:1616:9默认值：1:1 */
   AspectRatio?: string;
   /** 附加参数。 */
   AdditionalParameters?: string;
@@ -4256,6 +4258,10 @@ declare interface ImageEraseLogoConfig {
   ImageAreaBoxes?: ImageAreaBoxInfo[] | null;
   /** 图片框选区域类型，可选值：logo：图标；text：文字；watermark：水印； */
   DetectTypes?: string[] | null;
+  /** 水印擦除能力档位，可选值：枚举值：low： 快速擦除档位mid： 擦除效果和速度均衡档位high： 进阶擦除效果档位注意：根据擦除场景复杂度选择对应擦除档位。 */
+  EraseStrength?: string;
+  /** 擦除图像水印时，选择特定水印类型，可选值：枚举值：corner_watermark： 擦除常规定点水印tiled_watermark： 擦除全图平铺水印auto_detect_type： 自动识别水印类型擦除selected_watermark： 跳过自动擦除，按指定位置进行水印擦除 */
+  WatermarkType?: string;
 }
 
 /** 图片处理编排输出配置。 */
@@ -8246,7 +8252,7 @@ declare interface UnattachSecurityGroupInOutInfo {
 
 /** 图片理解任务。 */
 declare interface UnderstandImageConfig {
-  /** 图片理解模型枚举值：WAND-understand-1.0-lite： 轻量理解模型WAND-understand-1.0-flash： 质量-速度平衡理解模型WAND-understand-1.0-pro： 高质量理解模型 */
+  /** 图片理解模型枚举值：understand-1.0-lite： 轻量理解模型understand-1.0-flash： 质量-速度平衡理解模型understand-1.0-pro： 高质量理解模型 */
   Model: string;
   /** 图片理解指令 */
   Prompt: string;

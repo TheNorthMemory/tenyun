@@ -760,6 +760,14 @@ declare interface DescribeServicesResponse {
   RequestId?: string;
 }
 
+declare interface GetServicePodLogsRequest {
+}
+
+declare interface GetServicePodLogsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface InquirePriceRunInstancesRequest {
   /** 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。 */
   ApplicationId: string;
@@ -941,6 +949,8 @@ declare interface Hai {
   DescribeServices(data?: DescribeServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesResponse>;
   /** 查询服务调用信息 {@link DescribeServicesCallInfoRequest} {@link DescribeServicesCallInfoResponse} */
   DescribeServicesCallInfo(data?: DescribeServicesCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesCallInfoResponse>;
+  /** 查询推理服务Pod日志 {@link GetServicePodLogsRequest} {@link GetServicePodLogsResponse} */
+  GetServicePodLogs(data?: GetServicePodLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetServicePodLogsResponse>;
   /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 更新服务配置询价 {@link InquirePriceUpdateServiceConfigsRequest} {@link InquirePriceUpdateServiceConfigsResponse} */

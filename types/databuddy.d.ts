@@ -80,6 +80,48 @@ declare interface CommonFailItem {
   FailReason?: string;
 }
 
+/** 控制台用户组信息（对外标准版，与内部 UserGroupRoleInfo 解耦） */
+declare interface ConsoleGroupInfo {
+  /** 用户组 ID */
+  GroupId?: string;
+  /** 用户组名称 */
+  GroupName?: string;
+  /** 角色列表 */
+  Roles?: RoleBasicInfo[] | null;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 用户组下用户数量 */
+  UserCount?: number;
+  /** 用户组类型。取值为枚举数值的字符串形式："0"=控制台系统类型（包含全部user）、"1"=控制台自定义类型、"2"=工作空间系统类型、"3"=工作空间自定义类型 */
+  GroupType?: string;
+}
+
+/** 控制台用户组成员信息（对外标准版，与内部 GroupUserInfo 解耦） */
+declare interface ConsoleGroupUserInfo {
+  /** 用户 UIN */
+  UserUin?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 昵称 */
+  Nickname?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
+/** 控制台角色信息（对外标准版，与内部 Role 解耦） */
+declare interface ConsoleRoleInfo {
+  /** 角色基本信息 */
+  BasicInfo?: RoleBasicInfo | null;
+  /** 角色元信息 */
+  MetaData?: RoleMetaData | null;
+  /** 角色权限 */
+  Permissions?: RolePermission[] | null;
+}
+
 /** 控制台用户信息（规范化，与内部 UserDetailInfo 解耦） */
 declare interface ConsoleUserInfo {
   /** 用户 UIN */
@@ -104,10 +146,22 @@ declare interface ConsoleUserInfo {
   IsAdmin?: boolean;
 }
 
+/** 创建控制台用户组响应 */
+declare interface CreateConsoleGroupRsp {
+  /** 创建成功的用户组 ID */
+  GroupId?: string;
+}
+
 /** CreateWorkflowRsp */
 declare interface CreateWorkflowRsp {
   /** 工作流ID */
   WorkflowId?: string | null;
+}
+
+/** 删除控制台用户组响应 */
+declare interface DeleteConsoleGroupsRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
 }
 
 /** 文件删除结果 */
@@ -272,7 +326,7 @@ declare interface GetWorkflowTaskRunRsp {
   WorkflowRunId?: string | null;
   /** 任务ID */
   TaskId?: string | null;
-  /** 任务类型名称 */
+  /** 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述 */
   TaskTypeName?: string | null;
   /** 任务版本ID */
   TaskVersionId?: string | null;
@@ -308,7 +362,7 @@ declare interface GetWorkflowTaskRunRsp {
   IssueTime?: string | null;
   /** 时区 */
   TimeZone?: string | null;
-  /** 依赖上游任务ID列表 */
+  /** 依赖上游任务ID列表。保留字段，暂时返回为[]保留字段，暂时返回为[] */
   DependOnList?: string[] | null;
   /** 运行参数 */
   RunParams?: string | null;
@@ -344,7 +398,7 @@ declare interface InnerWorkflowTaskBrief {
   TaskId?: string | null;
   /** 任务名称 */
   TaskName?: string | null;
-  /** 任务类型名称 */
+  /** 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述 */
   TaskTypeName?: string | null;
 }
 
@@ -436,6 +490,48 @@ declare interface LabelBrief {
   LabelKeyId?: string | null;
   /** 标签值ID，可通过标签相关接口获取 */
   LabelValueId?: string | null;
+}
+
+/** 查询控制台用户组成员列表响应 */
+declare interface ListConsoleGroupUsersRsp {
+  /** 用户组成员列表 */
+  Items?: ConsoleGroupUserInfo[] | null;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+}
+
+/** 查询控制台用户组列表响应 */
+declare interface ListConsoleGroupsRsp {
+  /** 用户组列表 */
+  Items?: ConsoleGroupInfo[] | null;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+}
+
+/** 查询控制台角色列表响应 */
+declare interface ListConsoleRolesRsp {
+  /** 角色列表 */
+  Items?: ConsoleRoleInfo[] | null;
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
 }
 
 /** 查询控制台用户列表响应 */
@@ -552,7 +648,7 @@ declare interface ResourceGroupInfo {
   ResourceGroupId?: string | null;
   /** 资源组名称 */
   ResourceGroupName?: string | null;
-  /** 资源组状态COMPUTE_RESOURCE_STATUS_UNSPECIFIED 未指定COMPUTE_RESOURCE_STATUS_PENDING_CREATE 待创建COMPUTE_RESOURCE_STATUS_CREATING 创建中COMPUTE_RESOURCE_STATUS_RUNNING 运行中COMPUTE_RESOURCE_STATUS_STOPPED 已停止COMPUTE_RESOURCE_STATUS_STOPPING 停止中COMPUTE_RESOURCE_STATUS_STARTING 启动中COMPUTE_RESOURCE_STATUS_UPDATING 更新中COMPUTE_RESOURCE_STATUS_DELETING 删除中COMPUTE_RESOURCE_STATUS_DELETED 已删除COMPUTE_RESOURCE_STATUS_FAILED 失败 */
+  /** 资源组状态参数格式：0 // 未指定 1 // 待创建 2 // 创建中 3 // 运行中 4 // 已停止 5 // 停止中 6 // 启动中 7 // 更新中 8 // 删除中 9 // 已删除 10 // 用户主动启动 / 自动启动（有任务提交且自动启停开启） 11 // 可用: 仅存在于数据计算型 12 // 不可用: 仅存在于数据计算型 13 // 失败 */
   ResourceGroupStatus?: string | null;
 }
 
@@ -572,6 +668,26 @@ declare interface RoleBasicInfo {
   Source?: number;
   /** 继承来源的用户组名称列表，Source=1 时为空 */
   GroupNames?: string[];
+}
+
+/** 角色元数据 */
+declare interface RoleMetaData {
+  /** 创建者 */
+  Creator?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新者 */
+  Updater?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+}
+
+/** 角色权限 */
+declare interface RolePermission {
+  /** 模块ID */
+  ModuleId?: string;
+  /** 权限点 */
+  Permissions?: string;
 }
 
 /** 单个操作项的执行结果。 由 RunWorkflow / RerunWorkflowRun / KillWorkflowRun 共用： RunWorkflow—— WorkflowId / WorkflowName 有值，WorkflowRunId 为空 RerunWorkflowRun —— WorkflowId / WorkflowName / WorkflowRunId 均有值 KillWorkflowRun —— WorkflowId / WorkflowName / WorkflowRunId 均有值 */
@@ -682,6 +798,12 @@ declare interface TaskTypeProperty {
 declare interface UnbindWorkflowBundleRsp {
   /** 操作状态，true 表示成功 */
   Status?: boolean | null;
+}
+
+/** 修改控制台用户组响应 */
+declare interface UpdateConsoleGroupRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
 }
 
 /** 修改控制台用户响应 */
@@ -808,7 +930,7 @@ declare interface WorkflowBrief {
   WorkflowRunList?: WorkflowRunBrief[] | null;
   /** 资源组信息列表 */
   ResourceGroupInfoList?: ResourceGroupInfo[] | null;
-  /** 工作流权限信息 */
+  /** 授权权限类型PERMISSION_TYPE_UNSPECIFIED：未指定权限MANAGE : 管理权限：包含所有操作权限RUN : 运行权限：可执行实体VIEW : 查看权限：可查看实体内容 */
   Permission?: string | null;
   /** 工作流绑定的 Bundle 唯一标识，未绑定时为空 */
   BundleId?: string | null;
@@ -850,7 +972,7 @@ declare interface WorkflowRun {
   QueueCostTime?: string | null;
   /** 等待资源花费时间，单位：秒 */
   PendingCostTime?: string | null;
-  /** 运行状态。取值参考工作流运行状态枚举，如 Pending / Running / Succeeded / Failed / Killed */
+  /** 运行状态。CREATE("初始化"), QUEUED("等待中"), PENDING("准备中"), RUNNING("运行中"), SKIPPED("跳过运行"), SUCCESS("成功"), FAILED("失败"), TERMINATING("终止中"), TERMINATED("终止"), CANCELLED("被手动终止")等 */
   RunState?: string | null;
   /** 计算资源（任务的资源组ID集合） */
   ResourceGroupIds?: string[] | null;
@@ -950,7 +1072,7 @@ declare interface WorkflowTaskNodeBrief {
   TaskId?: string | null;
   /** 任务名称 */
   TaskName?: string | null;
-  /** 任务类型名称 */
+  /** 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述 */
   TaskTypeName?: string | null;
   /** 任务依赖列表 */
   DependOnList?: DependOnBrief[] | null;
@@ -964,7 +1086,7 @@ declare interface WorkflowTaskNodeBrief {
   TopCoordinate?: number | null;
   /** 任务重试策略 */
   TaskRetryStrategy?: TaskRetryStrategy | null;
-  /** 依赖运行条件 */
+  /** 任依赖运行条件ALL_SUCCESS: 全部成功：所有上游依赖任务均已执行并成功ONE_SUCCESS: 至少一个成功：至少有一个上游依赖任务成功NONE_FAILED: 目前没有失败：没有依赖任务失败，并且至少有一个依赖任务在运行中ALL_DONE: 全部完成：所有上游依赖任务均已执行并完成（无论成功或失败ONE_FAILED: 至少一个失败：至少有一个上游依赖任务失败ALL_FAILED: 全部失败：所有上游依赖任务都失败ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行ALL_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行ADVANCED:运行条件为高级模式时配置 */
   DependOnRunCondition?: string | null;
   /** 高级依赖配置 */
   AdvancedDependencyConfig?: AdvancedDependencyConfig | null;
@@ -988,7 +1110,7 @@ declare interface WorkflowTaskRun {
   WorkflowRunId?: string | null;
   /** 任务ID */
   TaskId?: string | null;
-  /** 任务类型名称 */
+  /** 任务类型名称，请参考数据结构TaskType中TaskTypeName字段描述 */
   TaskTypeName?: string | null;
   /** 任务版本ID */
   TaskVersionId?: string | null;
@@ -1024,7 +1146,7 @@ declare interface WorkflowTaskRun {
   IssueTime?: string | null;
   /** 时区 */
   TimeZone?: string | null;
-  /** 依赖上游任务ID列表 */
+  /** 依赖上游任务ID列表。保留字段，暂时返回为[]保留字段，暂时返回为[] */
   DependOnList?: string[] | null;
   /** 运行参数 */
   RunParams?: string | null;
@@ -1046,7 +1168,7 @@ declare interface WorkflowTaskRun {
   ResourceGroupInfoList?: ResourceGroupInfo[] | null;
   /** 运行结果 */
   RunResult?: string | null;
-  /** 依赖运行条件 */
+  /** 任务依赖运行条件ALL_SUCCESS: 全部成功：所有上游依赖任务均已执行并成功ONE_SUCCESS: 至少一个成功：至少有一个上游依赖任务成功NONE_FAILED: 目前没有失败：没有依赖任务失败，并且至少有一个依赖任务在运行中ALL_DONE: 全部完成：所有上游依赖任务均已执行并完成（无论成功或失败ONE_FAILED: 至少一个失败：至少有一个上游依赖任务失败ALL_FAILED: 全部失败：所有上游依赖任务都失败ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行ALL_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行ADVANCED:运行条件为高级模式时配置 */
   DependOnRunCondition?: string | null;
   /** 高级依赖配置 */
   AdvancedDependencyConfig?: AdvancedDependencyConfig | null;
@@ -1068,7 +1190,7 @@ declare interface WorkflowTriggerConfiguration {
   TriggerId?: string | null;
   /** 调度状态 启动：START，暂停：PAUSE */
   SchedulerStatus?: string | null;
-  /** 触发方式，- 定时触发：TIME_TRIGGER- 持续运行：CONTINUE_RUN注意：- TIME_TRIGGER 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；- CONTINUE_RUN 模式下，AdvancedConfig必填； */
+  /** 触发方式，定时触发：TIME_TRIGGER持续运行：CONTINUE_RUN注意：TIME_TRIGGER 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；CONTINUE_RUN 模式下，AdvancedConfig必填； */
   TriggerMode?: string | null;
   /** 调度时区 */
   SchedulerTimeZone?: string | null;
@@ -1098,6 +1220,22 @@ declare interface AddConsoleUsersRequest {
 declare interface AddConsoleUsersResponse {
   /** 返回结果 */
   Data?: AddConsoleUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateConsoleGroupRequest {
+  /** 用户组名称 */
+  GroupName: string;
+  /** 用户组别名 */
+  GroupNickname?: string;
+  /** 用户组描述 */
+  Description?: string;
+}
+
+declare interface CreateConsoleGroupResponse {
+  /** 返回结果 */
+  Data?: CreateConsoleGroupRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1162,6 +1300,18 @@ declare interface CreateWorkflowRequest {
 declare interface CreateWorkflowResponse {
   /** 创建工作流响应内容 */
   Data?: CreateWorkflowRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConsoleGroupsRequest {
+  /** 要删除的用户组 ID 列表 */
+  GroupIds: string[];
+}
+
+declare interface DeleteConsoleGroupsResponse {
+  /** 返回结果 */
+  Data?: DeleteConsoleGroupsRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1278,6 +1428,64 @@ declare interface KillWorkflowRunRequest {
 declare interface KillWorkflowRunResponse {
   /** 终止工作流的运行响应内容 */
   Data?: AsyncActionRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListConsoleGroupUsersRequest {
+  /** 用户组 ID */
+  GroupId: string;
+  /** 用户名称或 UIN 模糊匹配 */
+  UserKeyword?: string;
+  /** 通过 UIN 批量查询用户信息 */
+  UserUins?: string[];
+  /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'DESC'}, {Name: 'UserName', Direction: 'ASC'}]，默认按创建时间降序 */
+  OrderBys?: OrderBy[];
+  /** 页码，从1开始，默认1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，最小10，最大200 */
+  PageSize?: number;
+}
+
+declare interface ListConsoleGroupUsersResponse {
+  /** 返回结果 */
+  Data?: ListConsoleGroupUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListConsoleGroupsRequest {
+  /** 页码，从1开始，默认1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，最小10，最大200 */
+  PageSize?: number;
+  /** 通过用户组 ID 批量查询 */
+  GroupIds?: string[];
+  /** 用户组名称模糊匹配 */
+  GroupKeyword?: string;
+  /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}, {Name: 'UserName', Direction: 'Asc'}]，默认按创建时间降序 */
+  OrderBys?: OrderBy[];
+}
+
+declare interface ListConsoleGroupsResponse {
+  /** 返回结果 */
+  Data?: ListConsoleGroupsRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListConsoleRolesRequest {
+  /** 页码，从1开始，默认1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，最小10，最大200 */
+  PageSize?: number;
+  /** 角色名称或描述模糊匹配 */
+  RoleKeyword?: string;
+}
+
+declare interface ListConsoleRolesResponse {
+  /** 返回结果 */
+  Data?: ListConsoleRolesRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1464,6 +1672,28 @@ declare interface UnbindWorkflowBundleResponse {
   RequestId?: string;
 }
 
+declare interface UpdateConsoleGroupRequest {
+  /** 用户组 ID */
+  GroupId: string;
+  /** 修改标识：USER_GROUP_OPER_TYPE_ADD_USER(1)=添加成员、USER_GROUP_OPER_TYPE_DELETE_USER(2)=删除成员、USER_GROUP_OPER_TYPE_BASIC_INFO(3)=基础信息（别名和描述） */
+  OperType: number;
+  /** 用户组名称 */
+  GroupName?: string;
+  /** 用户组别名 */
+  GroupNickname?: string;
+  /** 用户组描述 */
+  Description?: string;
+  /** 成员 UIN 列表（OperType 为添加/删除成员时使用） */
+  UserUins?: string[];
+}
+
+declare interface UpdateConsoleGroupResponse {
+  /** 返回结果 */
+  Data?: UpdateConsoleGroupRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateConsoleUsersRequest {
   /** 用户 UIN 列表，单次最多100个 */
   UserUins: string[];
@@ -1533,10 +1763,14 @@ declare interface Databuddy {
   (): Versions;
   /** 添加控制台用户 {@link AddConsoleUsersRequest} {@link AddConsoleUsersResponse} */
   AddConsoleUsers(data: AddConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<AddConsoleUsersResponse>;
+  /** 创建控制台用户组 {@link CreateConsoleGroupRequest} {@link CreateConsoleGroupResponse} */
+  CreateConsoleGroup(data: CreateConsoleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleGroupResponse>;
   /** 创建代码文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
+  /** 删除控制台用户组 {@link DeleteConsoleGroupsRequest} {@link DeleteConsoleGroupsResponse} */
+  DeleteConsoleGroups(data: DeleteConsoleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleGroupsResponse>;
   /** 删除代码文件 {@link DeleteFileRequest} {@link DeleteFileResponse} */
   DeleteFile(data: DeleteFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileResponse>;
   /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
@@ -1551,6 +1785,12 @@ declare interface Databuddy {
   GetWorkflowTaskRun(data: GetWorkflowTaskRunRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowTaskRunResponse>;
   /** 终止工作流的运行 {@link KillWorkflowRunRequest} {@link KillWorkflowRunResponse} */
   KillWorkflowRun(data: KillWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<KillWorkflowRunResponse>;
+  /** 查询控制台用户组成员列表 {@link ListConsoleGroupUsersRequest} {@link ListConsoleGroupUsersResponse} */
+  ListConsoleGroupUsers(data: ListConsoleGroupUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleGroupUsersResponse>;
+  /** 查询控制台用户组列表 {@link ListConsoleGroupsRequest} {@link ListConsoleGroupsResponse} */
+  ListConsoleGroups(data?: ListConsoleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleGroupsResponse>;
+  /** 查询控制台角色列表 {@link ListConsoleRolesRequest} {@link ListConsoleRolesResponse} */
+  ListConsoleRoles(data?: ListConsoleRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleRolesResponse>;
   /** 查询控制台用户列表 {@link ListConsoleUsersRequest} {@link ListConsoleUsersResponse} */
   ListConsoleUsers(data?: ListConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleUsersResponse>;
   /** 工作流运行列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
@@ -1567,6 +1807,8 @@ declare interface Databuddy {
   RunWorkflow(data: RunWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkflowResponse>;
   /** 解绑工作流Bundle信息 {@link UnbindWorkflowBundleRequest} {@link UnbindWorkflowBundleResponse} */
   UnbindWorkflowBundle(data: UnbindWorkflowBundleRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkflowBundleResponse>;
+  /** 修改控制台用户组 {@link UpdateConsoleGroupRequest} {@link UpdateConsoleGroupResponse} */
+  UpdateConsoleGroup(data: UpdateConsoleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConsoleGroupResponse>;
   /** 修改控制台用户角色 {@link UpdateConsoleUsersRequest} {@link UpdateConsoleUsersResponse} */
   UpdateConsoleUsers(data: UpdateConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConsoleUsersResponse>;
   /** 更新代码文件 {@link UpdateFileRequest} {@link UpdateFileResponse} */

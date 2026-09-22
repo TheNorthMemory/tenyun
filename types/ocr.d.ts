@@ -1538,10 +1538,6 @@ declare interface PassInvoiceInfo {
   PassDateEnd?: string;
   /** 税收分类编码 */
   TaxClassifyCode?: string;
-  /** 通行费车牌号 */
-  CarType?: string;
-  /** 通行费车辆类型 */
-  PlateNumber?: string;
 }
 
 /** 信息区证件内容 */

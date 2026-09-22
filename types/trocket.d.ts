@@ -74,6 +74,98 @@ declare interface ConsumerLabel {
   UpdatedAt?: number;
 }
 
+/** 批量标签接口的单条失败项 */
+declare interface ConsumerLabelFailure {
+  /** 失败项标识 */
+  Key?: ConsumerLabelKey | null;
+  /** 错误信息 */
+  Error?: ErrorInfo | null;
+}
+
+/** 消费组灰度标签项 */
+declare interface ConsumerLabelItem {
+  /** 标签名称 */
+  Label?: string | null;
+  /** 标签状态 */
+  State?: string | null;
+  /** 最近更新时间 */
+  UpdatedAt?: number | null;
+}
+
+/** 消费组灰度标签键 */
+declare interface ConsumerLabelKey {
+  /** 消费组名称 */
+  Group?: string | null;
+  /** 灰度标签名称 */
+  Label?: string | null;
+}
+
+/** 单个消费组下的标签列表 */
+declare interface ConsumerLabelList {
+  /** 消费组名称 */
+  Group?: string | null;
+  /** 标签数量 */
+  TotalCount?: number | null;
+  /** 标签列表 */
+  Labels?: ConsumerLabelItem[] | null;
+}
+
+/** 单个标签键命中的 Topic 路由结果 */
+declare interface ConsumerLabelRoute {
+  /** 标签键 */
+  Key?: ConsumerLabelKey | null;
+  /** 命中的路由规则列表 */
+  Routes?: ConsumerLabelRouteItem[] | null;
+}
+
+/** 标签命中的单条 Topic 路由规则项 */
+declare interface ConsumerLabelRouteItem {
+  /** Topic 名称 */
+  Topic?: string | null;
+  /** 匹配条件 */
+  MatchCondition?: string | null;
+  /** 目标消费组灰度标签名称 */
+  TargetConsumerLabel?: string | null;
+}
+
+/** 消费组灰度路由配置键 */
+declare interface ConsumerRouteKey {
+  /** Topic 名称 */
+  Topic?: string | null;
+  /** 消费组名称 */
+  Group?: string | null;
+}
+
+/** 消费组灰度路由配置及标签键 */
+declare interface ConsumerRouteLabelKey {
+  /** Topic 名称 */
+  Topic?: string | null;
+  /** 消费组名称 */
+  Group?: string | null;
+  /** 灰度标签名称，为空表示完整路由配置 */
+  Label?: string | null;
+}
+
+/** 批量删除路由配置的单条失败项 */
+declare interface DeleteConsumerRouteConfigFailure {
+  /** 失败项标识 */
+  Key?: ConsumerRouteLabelKey | null;
+  /** 错误信息 */
+  Error?: ErrorInfo | null;
+}
+
+/** 批量查询路由配置的单条结果 */
+declare interface DescribeConsumerRouteConfigItem {
+  /** 配置项标识 */
+  Key?: ConsumerRouteKey | null;
+  /** 版本号 */
+  Version?: number | null;
+  /** 路由规则列表 */
+  Rules?: RouteRule[] | null;
+  /** 切流时间戳 */
+  CutTimestamp?: number | null;
+}
+
 /** Topic&Group维度的权限配置 */
 declare interface DetailedRolePerm {
   /** 权限对应的资源可以是主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。可以是消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
@@ -108,6 +200,14 @@ declare interface Endpoint {
   IpRules?: IpRule[] | null;
   /** 公网是否按流量计费 */
   BillingFlow?: boolean | null;
+}
+
+/** 错误信息 */
+declare interface ErrorInfo {
+  /** 错误码 */
+  Code?: string | null;
+  /** 错误信息 */
+  Message?: string | null;
 }
 
 /** 查询过滤器 */
@@ -380,6 +480,24 @@ declare interface ProductSKU {
   PriceTags?: PriceTag[];
   /** 主题数量上限默认最大值 */
   TopicNumUpperLimit?: number;
+}
+
+/** 批量写入路由配置的单条失败项 */
+declare interface PutConsumerRouteConfigFailure {
+  /** 失败项标识 */
+  Key?: ConsumerRouteKey | null;
+  /** 错误信息 */
+  Error?: ErrorInfo | null;
+}
+
+/** 批量写入路由配置的单个配置项 */
+declare interface PutConsumerRouteConfigItem {
+  /** Topic 名称 */
+  Topic?: string | null;
+  /** 消费组名称 */
+  Group?: string | null;
+  /** 路由规则列表 */
+  Rules?: RouteRule[] | null;
 }
 
 /** 重试策略 */
@@ -702,6 +820,24 @@ declare interface CreateConsumerLabelResponse {
   RequestId?: string;
 }
 
+declare interface CreateConsumerLabelsRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 消费组标签列表入参限制：批量上限为 32 条 */
+  Labels?: ConsumerLabelKey[];
+}
+
+declare interface CreateConsumerLabelsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 失败数量 */
+  FailedCount?: number | null;
+  /** 创建失败的消费组标签列表 */
+  Failures?: ConsumerLabelFailure[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstanceRequest {
   /** 实例类型，枚举值如下：- EXPERIMENT：体验版- BASIC：基础版- PRO：专业版- PLATINUM：铂金版 */
   InstanceType: string;
@@ -848,6 +984,24 @@ declare interface DeleteConsumerLabelResponse {
   RequestId?: string;
 }
 
+declare interface DeleteConsumerLabelsRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 批量删除的消费标签列表入参限制：批量上限为 32 条 */
+  Labels?: ConsumerLabelKey[];
+}
+
+declare interface DeleteConsumerLabelsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 失败数量 */
+  FailedCount?: number;
+  /** 删除失败的消费组标签列表 */
+  Failures?: ConsumerLabelFailure[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConsumerRouteConfigRequest {
   /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   Topic: string;
@@ -860,6 +1014,24 @@ declare interface DeleteConsumerRouteConfigRequest {
 }
 
 declare interface DeleteConsumerRouteConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteConsumerRouteConfigsRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 批量删除的消费组路由列表入参限制：批量上限为 32 条传入 Label 表示只删除该标签路由，不传表示删除完整路由 */
+  Configs: ConsumerRouteLabelKey[];
+}
+
+declare interface DeleteConsumerRouteConfigsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 失败数量 */
+  FailedCount?: number;
+  /** 删除失败的消费者路由列表 */
+  Failures?: DeleteConsumerRouteConfigFailure[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1038,6 +1210,22 @@ declare interface DescribeConsumerLabelListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeConsumerLabelListsRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 消费组名称列表入参限制：批量上限为 32 条 */
+  Groups: string[];
+}
+
+declare interface DescribeConsumerLabelListsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 消费者标签列表 */
+  Results?: ConsumerLabelList[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeConsumerLabelRequest {
   /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
   InstanceId: string;
@@ -1050,6 +1238,22 @@ declare interface DescribeConsumerLabelRequest {
 declare interface DescribeConsumerLabelResponse {
   /** 标签详情 */
   Label?: ConsumerLabel;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerLabelRoutesRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 批量查询的消费者标签列表入参限制：批量上限为 32 条 */
+  Labels: ConsumerLabelKey[];
+}
+
+declare interface DescribeConsumerLabelRoutesResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 消费者标签绑定的路由 */
+  Results?: ConsumerLabelRoute[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1088,6 +1292,22 @@ declare interface DescribeConsumerRouteConfigResponse {
   Rules?: RouteRule[];
   /** 切流时间戳 */
   CutTimestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeConsumerRouteConfigsRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 批量查询的路由配置列表入参限制：批量上限为 32 条 */
+  Configs: ConsumerRouteKey[];
+}
+
+declare interface DescribeConsumerRouteConfigsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 路由配置列表 */
+  Results?: DescribeConsumerRouteConfigItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1800,6 +2020,24 @@ declare interface PutConsumerRouteConfigResponse {
   RequestId?: string;
 }
 
+declare interface PutConsumerRouteConfigsRequest {
+  /** 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。 */
+  InstanceId: string;
+  /** 批量写入的消费者路由配置列表入参限制：批量上限为 32 条覆盖式写入 */
+  Configs?: PutConsumerRouteConfigItem[];
+}
+
+declare interface PutConsumerRouteConfigsResponse {
+  /** 查询总数 */
+  TotalCount?: number;
+  /** 失败数量 */
+  FailedCount?: number;
+  /** 写入失败的消费者路由配置列表 */
+  Failures?: PutConsumerRouteConfigFailure[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveMigratingTopicRequest {
   /** 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031)或控制台中获得。 */
   TaskId: string;
@@ -1909,6 +2147,8 @@ declare interface Trocket {
   CreateConsumerGroup(data: CreateConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerGroupResponse>;
   /** 创建消费组灰度标签 {@link CreateConsumerLabelRequest} {@link CreateConsumerLabelResponse} */
   CreateConsumerLabel(data: CreateConsumerLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerLabelResponse>;
+  /** 批量创建消费组灰度标签 {@link CreateConsumerLabelsRequest} {@link CreateConsumerLabelsResponse} */
+  CreateConsumerLabels(data: CreateConsumerLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsumerLabelsResponse>;
   /** 创建集群 {@link CreateInstanceRequest} {@link CreateInstanceResponse} */
   CreateInstance(data: CreateInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceResponse>;
   /** 创建元数据迁移上云任务 {@link CreateMigrationTaskRequest} {@link CreateMigrationTaskResponse} */
@@ -1921,8 +2161,12 @@ declare interface Trocket {
   DeleteConsumerGroup(data: DeleteConsumerGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerGroupResponse>;
   /** 删除消费组灰度标签 {@link DeleteConsumerLabelRequest} {@link DeleteConsumerLabelResponse} */
   DeleteConsumerLabel(data: DeleteConsumerLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerLabelResponse>;
+  /** 批量删除消费组灰度标签 {@link DeleteConsumerLabelsRequest} {@link DeleteConsumerLabelsResponse} */
+  DeleteConsumerLabels(data: DeleteConsumerLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerLabelsResponse>;
   /** 删除消费组灰度路由配置 {@link DeleteConsumerRouteConfigRequest} {@link DeleteConsumerRouteConfigResponse} */
   DeleteConsumerRouteConfig(data: DeleteConsumerRouteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerRouteConfigResponse>;
+  /** 批量删除消费组灰度路由配置 {@link DeleteConsumerRouteConfigsRequest} {@link DeleteConsumerRouteConfigsResponse} */
+  DeleteConsumerRouteConfigs(data: DeleteConsumerRouteConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsumerRouteConfigsResponse>;
   /** 删除集群 {@link DeleteInstanceRequest} {@link DeleteInstanceResponse} */
   DeleteInstance(data: DeleteInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceResponse>;
   /** 删除角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
@@ -1943,10 +2187,16 @@ declare interface Trocket {
   DescribeConsumerLabel(data: DescribeConsumerLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLabelResponse>;
   /** 查询消费组下全部灰度标签列表 {@link DescribeConsumerLabelListRequest} {@link DescribeConsumerLabelListResponse} */
   DescribeConsumerLabelList(data: DescribeConsumerLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLabelListResponse>;
+  /** 批量查询消费组灰度标签列表 {@link DescribeConsumerLabelListsRequest} {@link DescribeConsumerLabelListsResponse} */
+  DescribeConsumerLabelLists(data: DescribeConsumerLabelListsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLabelListsResponse>;
+  /** 批量查询消费组灰度标签路由 {@link DescribeConsumerLabelRoutesRequest} {@link DescribeConsumerLabelRoutesResponse} */
+  DescribeConsumerLabelRoutes(data: DescribeConsumerLabelRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLabelRoutesResponse>;
   /** 查询指定消费组堆积数 {@link DescribeConsumerLagRequest} {@link DescribeConsumerLagResponse} */
   DescribeConsumerLag(data: DescribeConsumerLagRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerLagResponse>;
   /** 查询消费组当前生效的灰度路由配置 {@link DescribeConsumerRouteConfigRequest} {@link DescribeConsumerRouteConfigResponse} */
   DescribeConsumerRouteConfig(data: DescribeConsumerRouteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerRouteConfigResponse>;
+  /** 批量查询消费组灰度路由配置 {@link DescribeConsumerRouteConfigsRequest} {@link DescribeConsumerRouteConfigsResponse} */
+  DescribeConsumerRouteConfigs(data: DescribeConsumerRouteConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerRouteConfigsResponse>;
   /** 查询消费组灰度路由配置版本列表 {@link DescribeConsumerRouteVersionListRequest} {@link DescribeConsumerRouteVersionListResponse} */
   DescribeConsumerRouteVersionList(data: DescribeConsumerRouteVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConsumerRouteVersionListResponse>;
   /** 查询集群列表 {@link DescribeFusionInstanceListRequest} {@link DescribeFusionInstanceListResponse} */
@@ -2005,6 +2255,8 @@ declare interface Trocket {
   ModifyTopic(data: ModifyTopicRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicResponse>;
   /** 写入消费组灰度路由配置 {@link PutConsumerRouteConfigRequest} {@link PutConsumerRouteConfigResponse} */
   PutConsumerRouteConfig(data: PutConsumerRouteConfigRequest, config?: AxiosRequestConfig): AxiosPromise<PutConsumerRouteConfigResponse>;
+  /** 批量写入消费组灰度路由配置 {@link PutConsumerRouteConfigsRequest} {@link PutConsumerRouteConfigsResponse} */
+  PutConsumerRouteConfigs(data: PutConsumerRouteConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<PutConsumerRouteConfigsResponse>;
   /** 移除正在平滑迁移的主题 {@link RemoveMigratingTopicRequest} {@link RemoveMigratingTopicResponse} */
   RemoveMigratingTopic(data: RemoveMigratingTopicRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveMigratingTopicResponse>;
   /** 重新发送死信消息 {@link ResendDeadLetterMessageRequest} {@link ResendDeadLetterMessageResponse} */

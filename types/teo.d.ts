@@ -4422,7 +4422,7 @@ declare interface SetParameters {
 
 /** 共享CNAME明细 */
 declare interface SharedCNAMEInfo {
-  /** 共享CNAME类型：取值范围如下：custom：由用户创建的自定义共享CNAMEip-ssl：IP SSL类型的共享CNAME */
+  /** 共享CNAME类型：取值范围如下：custom：由用户创建的自定义共享CNAMEip-ssl：IP SSL类型的共享CNAMEzero-rating：免流类型的共享CNAMEpreset：预置资源类型的共享CNAME */
   Type?: string;
   /** 共享CNAME名称。 */
   SharedCNAME?: string;
@@ -8062,6 +8062,20 @@ declare interface DescribeZoneConfigImportResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeZoneCustomVariablesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+}
+
+declare interface DescribeZoneCustomVariablesResponse {
+  /** 站点级自定义变量列表。 */
+  CustomVariables?: CustomVariable[];
+  /** 站点级自定义变量运算规则。 */
+  CustomVariableOperations?: CustomVariableOperation[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeZoneSettingRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -9130,6 +9144,20 @@ declare interface ModifyWebSecurityTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyZoneCustomVariablesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 站点级自定义变量列表。CustomVariable.Name 需要使用 user.zone. 作为前缀。变量按照数组顺序依次初始化，InitialValue 仅支持引用位于当前变量之前的变量，不支持引用当前变量自身或位于当前变量之后的变量。 */
+  CustomVariables?: CustomVariable[];
+  /** 站点级自定义变量运算规则。运算中支持引用已定义的站点级自定义变量。此列表当前只支持填写一项规则，多填无效。 */
+  CustomVariableOperations?: CustomVariableOperation[];
+}
+
+declare interface ModifyZoneCustomVariablesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyZoneRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -9859,6 +9887,8 @@ declare interface Teo {
   DescribeWebSecurityTemplates(data: DescribeWebSecurityTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWebSecurityTemplatesResponse>;
   /** 查询站点配置导入结果 {@link DescribeZoneConfigImportResultRequest} {@link DescribeZoneConfigImportResultResponse} */
   DescribeZoneConfigImportResult(data: DescribeZoneConfigImportResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneConfigImportResultResponse>;
+  /** 查询站点级自定义变量 {@link DescribeZoneCustomVariablesRequest} {@link DescribeZoneCustomVariablesResponse} */
+  DescribeZoneCustomVariables(data: DescribeZoneCustomVariablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneCustomVariablesResponse>;
   /** 查询站点配置（旧） {@link DescribeZoneSettingRequest} {@link DescribeZoneSettingResponse} */
   DescribeZoneSetting(data: DescribeZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZoneSettingResponse>;
   /** 查询站点列表 {@link DescribeZonesRequest} {@link DescribeZonesResponse} */
@@ -9989,6 +10019,8 @@ declare interface Teo {
   ModifyWebSecurityTemplate(data: ModifyWebSecurityTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWebSecurityTemplateResponse>;
   /** 修改站点 {@link ModifyZoneRequest} {@link ModifyZoneResponse} */
   ModifyZone(data: ModifyZoneRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneResponse>;
+  /** 修改站点级自定义变量 {@link ModifyZoneCustomVariablesRequest} {@link ModifyZoneCustomVariablesResponse} */
+  ModifyZoneCustomVariables(data: ModifyZoneCustomVariablesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneCustomVariablesResponse>;
   /** 修改站点配置（旧） {@link ModifyZoneSettingRequest} {@link ModifyZoneSettingResponse} */
   ModifyZoneSetting(data: ModifyZoneSettingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneSettingResponse>;
   /** 切换站点状态 {@link ModifyZoneStatusRequest} {@link ModifyZoneStatusResponse} */

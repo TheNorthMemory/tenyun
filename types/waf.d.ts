@@ -2084,7 +2084,7 @@ declare interface HistogramInfo {
 declare interface HostDel {
   /** 域名 */
   Domain: string;
-  /** 域名ID */
+  /** 域名ID，使用DescribeDomains接口可以查询获取 */
   DomainId: string;
   /** 实例类型 */
   InstanceID?: string;
@@ -4883,7 +4883,7 @@ declare interface DeleteDomainWhiteRulesResponse {
 }
 
 declare interface DeleteExportRequest {
-  /** 日志导出ID */
+  /** 日志导出ID，可以通过DescribeExports接口获取 */
   ExportId: string;
 }
 
@@ -4961,7 +4961,7 @@ declare interface DeleteOwaspRuleStatusResponse {
 }
 
 declare interface DeleteOwaspWhiteRuleRequest {
-  /** 规则白名单ID列表 */
+  /** 规则白名单ID列表，可通过 [DescribeOwaspWhiteRule](https://cloud.tencent.com/document/product/627/122155) 接口获取 */
   Ids: number[];
   /** 域名 */
   Domain: string;
@@ -6961,7 +6961,7 @@ declare interface DescribeWebshellStatusResponse {
 }
 
 declare interface DestroyPostCKafkaFlowRequest {
-  /** 投递流的流ID */
+  /** 投递流的流ID，可以通过DescribePostCKafkaFlows接口获取 */
   FlowId: number;
   /** 1-访问日志，2-攻击日志，默认为访问日志。 */
   LogType?: number;

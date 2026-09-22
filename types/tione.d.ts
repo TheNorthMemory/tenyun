@@ -1702,10 +1702,14 @@ declare interface ResourceInfo {
   RealGpuDetailSet?: GpuDetail[];
   /** 是否开启rdma */
   EnableRDMA?: boolean | null;
+  /** rdma number */
+  RdmaNumber?: number;
   /** root disk size(GB) */
   RootDisk?: number;
   /** data disk size(GB) */
   DataDisk?: number;
+  /** rdma取值范围：[0, 99] */
+  Rdma?: number;
 }
 
 /** 资源组节点运行任务信息 */
@@ -2785,6 +2789,8 @@ declare interface CreateModelServiceRequest {
   ResourceSupplyAttribute?: ResourceSupplyAttribute;
   /** 推理模板 ID */
   InferTemplateId?: string;
+  /** 服务的优先级取值范围：[0, 9] */
+  Priority?: number;
 }
 
 declare interface CreateModelServiceResponse {
@@ -3199,7 +3205,7 @@ declare interface DescribeBillingResourceGroupRequest {
   ResourceGroupId: string;
   /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
   TiProjectId?: string;
-  /** 过滤条件注意: 1. Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)2. Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询3. Filter.Negative: 是否取反，默认为false4. Filter.Fuzzy: 是否模糊查询，默认为false5. 每次请求的Filters的上限为10，Filter.Values的上限为100 */
+  /** 过滤条件注意: Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询Filter.Negative: 是否取反，默认为falseFilter.Fuzzy: 是否模糊查询，默认为false每次请求的Filters的上限为10，Filter.Values的上限为100 */
   Filters?: Filter[];
   /** 分页查询起始位置，如：Limit为10，第一页Offset为0，第二页Offset为10...即每页左边为闭区间; 默认0 */
   Offset?: number;
@@ -4039,6 +4045,8 @@ declare interface ModifyModelServiceRequest {
   TargetProjectId?: number;
   /** 推理模板 ID，在内置大模型场景下使用 */
   InferTemplateId?: string;
+  /** 服务的优先级取值范围：[0, 9] */
+  Priority?: number;
 }
 
 declare interface ModifyModelServiceResponse {

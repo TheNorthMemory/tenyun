@@ -3628,6 +3628,10 @@ declare interface SparkJobInfo {
   IsSessionStarted?: boolean | null;
   /** 引擎详细类型：SparkSQL、PrestoSQL、SparkBatch、StandardSpark、StandardPresto */
   EngineTypeDetail?: string | null;
+  /** 标准引擎依赖包 */
+  DependencyPackages?: DependencyPackage[];
+  /** 作业运行鉴权身份 */
+  RunAsIdentity?: string;
 }
 
 /** Spark监控数据 */

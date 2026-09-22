@@ -1772,6 +1772,12 @@ declare interface BackupLog {
   NickName?: string;
   /** 资产所属账号uin */
   Uin?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 实例类型枚举值：cdb： cdbmariadb： mariadb */
+  AssetType?: string;
 }
 
 /** 基线子分类维度的聚合结果，承载该子分类下检测项的通过/未通过统计。 */

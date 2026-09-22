@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 262+ 款产品，16060+ 服务数</summary>
+<details><summary>共计 262+ 款产品，16072+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -126,7 +126,7 @@ af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
 ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(54) |
 ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(19) |
-aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(23) |
+aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(18) |
 alb | [应用型负载均衡](https://cloud.tencent.com/document/product/1822) | 2025-10-30(48) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
@@ -207,9 +207,9 @@ cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(242) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
-databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(21) |
+databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(27) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(92) | 2019-10-16(28) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(93) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
@@ -245,7 +245,7 @@ goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(83) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(19) |
 habo |  | 2018-12-03(2) |
-hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(25) |
+hai | [高性能应用服务](https://cloud.tencent.com/document/product/1721) | 2023-08-12(26) |
 hasim | [高可用物联网卡](https://cloud.tencent.com/document/product/1482) | 2021-07-16(22) |
 hcm | [数学作业批改](https://cloud.tencent.com/document/product/1004) | 2018-11-06(1) |
 hunyuan | [腾讯混元大模型](https://cloud.tencent.com/document/product/1729) | 2023-09-01(28) |
@@ -337,7 +337,7 @@ tdmq | [消息队列 TDMQ](https://cloud.tencent.com/document/product/1179) | 20
 tdmysql | [TDSQL](https://cloud.tencent.com/document/product/1376) | 2021-11-22(54) |
 tds | [设备安全](https://cloud.tencent.com/document/product/1628) | 2022-08-01(5) |
 tem | [弹性微服务](https://cloud.tencent.com/document/product/1371) | 2021-07-01(51) | 2020-12-21(17) |
-teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(232) | 2022-01-06(5) |
+teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552) | 2022-09-01(234) | 2022-01-06(5) |
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(52) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |
@@ -350,7 +350,7 @@ tmt | [机器翻译](https://cloud.tencent.com/document/product/551) | 2018-03-2
 tokenhub | [TokenHub](https://cloud.tencent.com/document/product/1823) | 2026-03-22(34) |
 tourism | [文旅客情大数据](https://cloud.tencent.com/document/product/1684) | 2023-02-15(1) |
 trabbit | [消息队列 RabbitMQ Serverless 版](https://cloud.tencent.com/document/product/1495) | 2023-04-18(29) |
-trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(57) |
+trocket | [消息队列 RocketMQ 版](https://cloud.tencent.com/document/product/1493) | 2023-03-08(64) |
 trp | [T-Sec-安心平台(RP)](https://cloud.tencent.com/document/product/1458) | 2021-05-15(63) |
 trro | [实时互动-工业能源版](https://cloud.tencent.com/document/product/1584) | 2022-03-25(39) |
 trtc | [实时音视频](https://cloud.tencent.com/document/product/647) | 2019-07-22(86) |

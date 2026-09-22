@@ -10,7 +10,7 @@ declare interface AddDeviceData {
   Code?: string;
   /** 设备名称 */
   Name?: string;
-  /** 设备接入协议，1:RTMP,2:GB,3:GW */
+  /** 设备接入协议，1:RTMP,2:GB枚举值：1： RTMP2： GB6： ISUP */
   AccessProtocol?: number;
   /** 设备类型，1:IPC,2:NVR */
   Type?: number;
@@ -28,15 +28,15 @@ declare interface AddDeviceData {
   Status?: number;
   /** 设备所属组织ID */
   OrganizationId?: number;
-  /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
+  /** 设备接入网关ID（已不再使用，保留用于兼容，可忽略） */
   GatewayId?: string;
-  /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  /** 网关接入协议类型（已不再使用，保留用于兼容，可忽略） */
   ProtocolType?: number;
-  /** 设备接入IP（仅网关接入需要） */
+  /** 设备接入IP（已不再使用，保留用于兼容，可忽略） */
   Ip?: string;
-  /** 设备Port（仅网关接入需要） */
+  /** 设备Port（已不再使用，保留用于兼容，可忽略） */
   Port?: number;
-  /** 设备用户名（仅网关接入需要） */
+  /** 设备用户名（已不再使用，保留用于兼容，可忽略） */
   Username?: string;
   /** 用户ID */
   AppId?: number;
@@ -228,7 +228,7 @@ declare interface DescribeDeviceData {
   Code?: string;
   /** 设备名称 */
   Name?: string;
-  /** 设备接入协议，1:RTMP,2:GB,3:GW */
+  /** 设备接入协议，1:RTMP,2:GB枚举值：1： RTMP2： GB */
   AccessProtocol?: number;
   /** 设备类型，1:IPC,2:NVR */
   Type?: number;
@@ -256,19 +256,19 @@ declare interface DescribeDeviceData {
   Status?: number;
   /** 设备所属组织ID */
   OrganizationId?: string;
-  /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
+  /** 设备接入网关ID（已不再使用，保留用于兼容，可忽略） */
   GatewayId?: string;
-  /** 设备所属网关名称 */
+  /** 设备所属网关名称（已不再使用，保留用于兼容，可忽略） */
   GatewayName?: string;
-  /** 设备网关协议名称 */
+  /** 设备网关协议名称（已不再使用，保留用于兼容，可忽略） */
   ProtocolTypeName?: string;
-  /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  /** 网关接入协议类型（已不再使用，保留用于兼容，可忽略） */
   ProtocolType?: number;
-  /** 设备接入IP */
+  /** 设备接入IP（已不再使用，保留用于兼容，可忽略） */
   Ip?: string;
-  /** 设备Port */
+  /** 设备Port（已不再使用，保留用于兼容，可忽略） */
   Port?: number;
-  /** 设备用户名 */
+  /** 设备用户名（已不再使用，保留用于兼容，可忽略） */
   Username?: string;
   /** 设备地域 */
   Region?: string;
@@ -286,6 +286,12 @@ declare interface DescribeDeviceData {
   SilentFrameSwitch?: number;
   /** Rtmp设备安全认证推流地址(仅rtmp设备有效) */
   PushStreamSecureUrl?: string;
+  /** 国标SIP域名 */
+  SipFQDN?: string;
+  /** 国标SIP三网IP地址 */
+  SipCarrierEndpoints?: SipCarrierEndpoints;
+  /** 国标校时开关枚举值：0： 关闭1： 开启默认值： 1 */
+  TimeSyncSwitch?: number;
 }
 
 /** 批量查询设备接口返回数据 */
@@ -840,6 +846,20 @@ declare interface SetForbidplayChannelParam {
   Enable: boolean;
 }
 
+/** 多运营商的国标服务器IP地址 */
+declare interface SipCarrierEndpoints {
+  /** 电信IP */
+  CT?: string;
+  /** 联通IP */
+  CU?: string;
+  /** 移动IP */
+  CMCC?: string;
+  /** 腾讯网络IP */
+  BGP?: string;
+  /** 中小运营商IP */
+  CAP?: string;
+}
+
 /** 子任务详情 */
 declare interface SubTaskData {
   /** 子任务ID */
@@ -934,7 +954,7 @@ declare interface UpdateDeviceData {
   Code?: string;
   /** 设备名称 */
   Name?: string;
-  /** 设备接入协议，1:RTMP,2:GB,3:GW */
+  /** 设备接入协议，1:RTMP,2:GB枚举值：1： RTMP2： GB */
   AccessProtocol?: number;
   /** 设备类型，1:IPC,2:NVR */
   Type?: number;
@@ -952,9 +972,9 @@ declare interface UpdateDeviceData {
   Status?: number;
   /** 设备所属组织ID */
   OrganizationId?: number;
-  /** 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要） */
+  /** 设备接入网关ID（已不再使用，保留用于兼容，可忽略） */
   GatewayId?: string;
-  /** 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  /** 网关接入协议类型（已不再使用，保留用于兼容，可忽略） */
   ProtocolType?: number;
   /** 设备接入IP */
   Ip?: string;
@@ -1279,31 +1299,31 @@ declare interface AddStreamAuthResponse {
 declare interface AddUserDeviceRequest {
   /** 设备名称，仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过128位；（设备名称无需全局唯一，可以重复） */
   Name: string;
-  /** 设备接入协议（1:RTMP,2:GB,3:GW,6:ISUP） */
+  /** 设备接入协议（1:RTMP,2:GB,6:ISUP）枚举值：1： RTMP2： GB6： ISUP默认值：2 */
   AccessProtocol: number;
-  /** 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP,IVCP，则设备类型只能选择IPC） */
+  /** 设备类型，1:IPC,2:NVR；（若设备接入协议选择RTMP，则设备类型只能选择IPC）枚举值：1： IPC2： NVR */
   Type: number;
   /** 设备所属组织ID，从查询组织接口DescribeOrganization中获取 */
   OrganizationId: string;
-  /** 设备接入服务节点ID（从查询设备可用服务节点接口DescribeDeviceRegion中获取的Value字段） */
+  /** 设备接入服务节点ID（从查询设备可用服务节点接口DescribeRegionDomain中获取的Value字段） */
   ClusterId: string;
   /** 设备流传输协议，1:UDP,2:TCP；(国标设备有效，不填写则默认UDP协议) */
   TransportProtocol?: number;
-  /** 设备密码（国标，网关设备必填，长度为1-64个字符） */
+  /** 设备密码（国标设备必填，长度为1-64个字符） */
   Password?: string;
   /** 设备描述，长度不超过128个字符 */
   Description?: string;
-  /** 设备接入网关ID，从查询网关列表接口中ListGateways获取（仅网关接入需要） */
+  /** 设备接入网关ID（已不再使用，保留用于兼容，可忽略） */
   GatewayId?: string;
-  /** 网关接入协议类型（从查询网关接入协议接口DescribeGatewayProtocol中获取）1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要） */
+  /** 网关接入协议类型（已不再使用，保留用于兼容，可忽略） */
   ProtocolType?: number;
-  /** 设备接入IP（仅网关接入需要） */
+  /** 设备接入IP（已不再使用，保留用于兼容，可忽略） */
   Ip?: string;
-  /** 设备端口（仅网关接入需要） */
+  /** 设备端口（已不再使用，保留用于兼容，可忽略）取值范围：[1, 65535]单位： 端口 */
   Port?: number;
-  /** 设备用户名（仅网关接入需要） */
+  /** 设备用户名（已不再使用，保留用于兼容，可忽略） */
   Username?: string;
-  /** 设备 SN，仅IVCP 协议设备需要 */
+  /** 设备 SN（已不再使用，保留用于兼容，可忽略） */
   SNCode?: string;
   /** RTMP推流地址自定义AppName（仅RTMP需要，支持英文、数字、_、-、.、长度不超过64位） */
   AppName?: string;
@@ -1329,9 +1349,9 @@ declare interface BatchDeleteVideoDownloadTaskResponse {
 }
 
 declare interface BatchOperateDeviceRequest {
-  /** 设备 ID 数组（从获取设备列表接口ListDevices中获取） */
+  /** 设备 ID 数组（从获取设备列表接口ListDevices中获取）取值参考：ListDevices */
   DeviceIds: string[];
-  /** 操作命令（enable：启用；disable：禁用；delete：删除；sync：同步设备通道；upgrade：固件升级；reset：恢复出厂设置；reboot：重启） */
+  /** 操作命令枚举值：enable： 启用disable： 禁用delete： 删除sync： 同步设备通道 */
   Cmd: string;
 }
 
@@ -2277,23 +2297,23 @@ declare interface UpdateRecordTemplateResponse {
 }
 
 declare interface UpdateUserDeviceRequest {
-  /** 设备ID（从获取设备列表接口ListDevices中获取） */
+  /** 设备ID（从获取设备列表接口ListDevices中获取）取值参考：ListDevices */
   DeviceId: string;
   /** 设备名称（仅支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过128位） */
   Name?: string;
   /** 设备流传输协议，仅国标设备有效，填0则不做更改（1:UDP,2:TCP） */
   TransportProtocol?: number;
-  /** 设备密码（仅国标，网关设备支持，长度不超过 64 位） */
+  /** 设备密码（仅国标设备支持，长度不超过 64 位） */
   Password?: string;
   /** 设备描述（长度不超过128位） */
   Description?: string;
-  /** 设备接入Ip（仅网关接入支持） */
+  /** 设备接入IP（已不再使用，保留用于兼容，可忽略） */
   Ip?: string;
-  /** 设备Port（仅网关接入支持） */
+  /** 设备Port（已不再使用，保留用于兼容，可忽略） */
   Port?: number;
-  /** 设备用户名（仅网关接入支持） */
+  /** 设备用户名（已不再使用，保留用于兼容，可忽略） */
   Username?: string;
-  /** 网关设备接入协议（仅网关接入支持） */
+  /** 网关设备接入协议（已不再使用，保留用于兼容，可忽略） */
   ProtocolType?: number;
   /** 音频关开（0：关闭；1：开启）默认开启，关闭时丢弃音频 */
   AudioSwitch?: number;
@@ -2301,6 +2321,8 @@ declare interface UpdateUserDeviceRequest {
   SubscribeSwitch?: number;
   /** 是否开启静音帧（0：关闭；1 开启） */
   SilentFrameSwitch?: number;
+  /** 时钟同步开关（仅国标设备生效）枚举值：0： 关闭1： 开启默认值： 1 */
+  TimeSyncSwitch?: number;
 }
 
 declare interface UpdateUserDeviceResponse {
