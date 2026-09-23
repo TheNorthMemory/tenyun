@@ -415,6 +415,10 @@ declare interface CreateAgentInstanceRequest {
   Description?: string;
   /** 企业版是否使用平台大账号模式发货 */
   UsePlatformAccount?: boolean;
+  /** 是否是免部署实例 */
+  DeploymentFree?: boolean;
+  /** 是否支持记忆 */
+  EnableMemory?: boolean;
 }
 
 declare interface CreateAgentInstanceResponse {

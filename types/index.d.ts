@@ -260,6 +260,7 @@ import Wav, { Versions as WavVersions } from "./wav";
 import Wedata, { Versions as WedataVersions } from "./wedata";
 import Weilingwith, { Versions as WeilingwithVersions } from "./weilingwith";
 import Wimgs, { Versions as WimgsVersions } from "./wimgs";
+import Workbuddyenterprise, { Versions as WorkbuddyenterpriseVersions } from "./workbuddyenterprise";
 import Wsa, { Versions as WsaVersions } from "./wsa";
 import Wss, { Versions as WssVersions } from "./wss";
 import Yinsuda, { Versions as YinsudaVersions } from "./yinsuda";
@@ -526,6 +527,7 @@ export declare type SERVICE_VERSIONS = {
   wedata: WedataVersions,
   weilingwith: WeilingwithVersions,
   wimgs: WimgsVersions,
+  workbuddyenterprise: WorkbuddyenterpriseVersions,
   wsa: WsaVersions,
   wss: WssVersions,
   yinsuda: YinsudaVersions,
@@ -1064,6 +1066,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   weilingwith: Weilingwith,
   /** {@link Wimgs 联网图像搜索} */
   wimgs: Wimgs,
+  /** {@link Workbuddyenterprise WorkBuddy Enterprise} */
+  workbuddyenterprise: Workbuddyenterprise,
   /** {@link Wsa 元宝搜索} */
   wsa: Wsa,
   /** {@link Wss SSL证书管理服务} */

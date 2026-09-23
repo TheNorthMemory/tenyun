@@ -176,7 +176,7 @@ declare interface CommonFilter {
   Name?: string | null;
   /** 筛选值列表 */
   Values?: string[] | null;
-  /** 操作类型：1-精确匹配 9-模糊匹配 */
+  /** 操作类型：1=精确匹配，7=in，9=模糊匹配 */
   OperatorType?: number | null;
 }
 
@@ -280,13 +280,13 @@ declare interface EdgeAclRuleResp {
 
 /** 成员信息 */
 declare interface MemberInfo {
-  /** 成员AppId */
+  /** 成员 AppId */
   AppId?: string;
-  /** 成员Uin */
+  /** 成员 Uin */
   Uin?: string;
   /** 成员昵称 */
   Nickname?: string;
-  /** 成员Id */
+  /** 成员 ID（个人场景为空） */
   MemberId?: string;
   /** 所属部门 */
   NodeName?: string;

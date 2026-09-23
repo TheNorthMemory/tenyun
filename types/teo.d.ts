@@ -120,6 +120,18 @@ declare interface AccessURLRedirectQueryString {
   Action?: string;
 }
 
+/** 账号保护配置。 */
+declare interface AccountProtectionSettings {
+  /** 账号保护功能开关。枚举值：on： 开启；off： 关闭。默认值：off。 */
+  Enabled?: string;
+  /** 请求目的。用于标识请求所属的业务操作场景。 枚举值： ACCOUNT.CHANGE_PASSWORD：在已知原密码的情况下修改密码的请求； ACCOUNT.CHANGE_SECURITY_QUESTION：修改账号安全问题的请求； ACCOUNT.CHECK_EXISTENCE：校验账号是否已存在的请求，常见于登录或注册页面输入邮箱、手机号后的预校验； ACCOUNT.LOGIN：登录账号的请求； ACCOUNT.REGISTER：注册新账号的请求； ACCOUNT.RESET_PASSWORD：重置密码的请求，通常通过邮箱或短信验证身份后设置新密码； ACCOUNT.UPDATE：修改账号关联信息的请求，例如手机号、邮箱、支付卡号、收货地址等； ASSET.CHECK_GIFTCARD_BALANCE：通过卡号等信息查询礼品卡余额的请求； ASSET.CHECK_LOYALTY_POINTS：查询账号积分余额的请求； ASSET.REDEEM_CODE：使用兑换码兑换权益的请求； BROWSE.QUERY：站内搜索商品或服务的请求； PAYMENT.ADD_TO_CART：将商品加入购物车的请求； PAYMENT.GET_METHODS：获取账号已绑定支付方式列表的请求； PAYMENT.MAKE_PAYMENT：提交支付、结算或转账的请求。 */
+  RequestPurpose?: string;
+  /** 用户标识在请求来源中的位置，其中 key 替换为实际的参数名称。取值有：http.request.cookies["key"]：从 Cookie 中获取名称为 key 的 Cookie 值；http.request.headers["key"]：从请求头中获取名称为 key 的头部值；http.request.uri.args["key"]：从 URL 查询参数中获取名称为 key 的参数值。 */
+  UserIDSource?: string;
+  /** 用户风险等级配置。 */
+  UserRiskProfile?: UserRiskProfile;
+}
+
 /** 精准防护条件 */
 declare interface AclCondition {
   /** 匹配字段，取值有：host：请求域名；sip：客户端IP；ua：User-Agent；cookie：会话 Cookie；cgi：CGI 脚本；xff：XFF 扩展头部；url：请求 URL；accept：请求内容类型；method：请求方式；header：请求头部；app_proto：应用层协议；sip_proto：网络层协议；uabot：UA 特征规则，仅bot自定义规则可用；idcid：IDC 规则，仅bot自定义规则可用；sipbot：搜索引擎规则，仅bot自定义规则可用；portrait：画像分析，仅bot自定义规则可用；header_seq：请求头顺序，仅bot自定义规则可用；hdr：请求正文，仅Web防护自定义规则可用。 */
@@ -912,10 +924,12 @@ declare interface ClientAttestationRule {
   Condition?: string;
   /** 客户端认证选项 ID。 */
   AttesterId?: string;
+  /** 客户端认证未通过的处置方式。SecurityAction.Name 取值范围如下：Allow：放行，其中 AllowActionParameters 支持 MinDelayTime 和 MaxDelayTime 配置；Deny：拦截，其中 DenyActionParameters 中支持 BlockIp、ReturnCustomPage 和 Stall 配置；Monitor：观察；Challenge：挑战，其中 ChallengeActionParameters.ChallengeOption 支持 JSChallenge、ManagedChallenge、InterstitialChallenge 和 InlineChallenge；Redirect：重定向至URL。 */
+  InvalidAttestationAction?: SecurityAction;
   /** 客户端设备配置。若 ClientAttestationRules 参数中，未指定 DeviceProfiles 参数值：保持已有客户端设备配置，不做修改。 */
   DeviceProfiles?: DeviceProfile[];
-  /** 客户端认证未通过的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值为 Monitor。 */
-  InvalidAttestationAction?: SecurityAction;
+  /** 账号保护配置。 */
+  AccountProtectionSettings?: AccountProtectionSettings;
 }
 
 /** 客户端认证的配置。 */
@@ -1574,11 +1588,11 @@ declare interface DetectLengthLimitRule {
 declare interface DeviceProfile {
   /** 客户端设备类型。取值有：iOS；Android；WebView；WeChatMiniProgram。 */
   ClientType: string;
-  /** 判定请求为高风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 50，对应含义 51～100 为高风险。 */
+  /** 高风险请求的最低风险分数。分数大于等于该值时，判定为高风险。取值范围：[2, 99]默认值：50 */
   HighRiskMinScore?: number;
   /** 高风险请求的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值为 Monitor。 */
   HighRiskRequestAction?: SecurityAction;
-  /** 判定请求为中风险的最低值，取值范围为 1～99。数值越大请求风险越高越接近 Bot 客户端发起的请求。默认值为 15，对应含义 16～50 为中风险。 */
+  /** 中风险请求的最低风险分数。分数大于等于该值且小于 HighRiskMinScore 时，判定为中风险；低于该值时，判定为低风险。取值范围：[1, 98]默认值：15 */
   MediumRiskMinScore?: number;
   /** 中风险请求的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值为 Monitor。 */
   MediumRiskRequestAction?: SecurityAction;
@@ -4314,6 +4328,16 @@ declare interface SecurityConfig {
   DetectLengthLimitConfig?: DetectLengthLimitConfig;
 }
 
+/** 回源请求携带安全头部配置，配置生效后将携带对应 keyname 的请求头部回源。 */
+declare interface SecurityHeadersToOrigin {
+  /** Bot 标识信息回源头部配置。枚举值：EO-Bot-Botnet-ID： 基于 Bot 请求特征生成的识别标识。 */
+  BotIdentificationHeaders?: string[];
+  /** 高级 Bot 管理模块识别结果回源头部配置。枚举值：EO-Bot-Client-Attestation： 高级 Bot 管理 - 客户端认证模块认证票据校验结果；EO-Bot-Client-Risk： 高级 Bot 管理 - 客户端认证模块设备风险评估结果；EO-Bot-Intelligence： 高级 Bot 管理 - Bot 智能分析模块识别结果；EO-Bot-IP-Reputation： 高级 Bot 管理 - 客户端画像分析识别结果；EO-Bot-Known-Tool： 高级 Bot 管理 - 基础特征管理 - UA 特征规则模块识别结果；EO-Bot-Search-Engine： 高级 Bot 管理 - 基础特征管理 - 搜索引擎规则模块识别结果；EO-Bot-Source-IDC： 高级 Bot 管理 - 基础特征管理 - IDC 规则模块识别结果；EO-Bot-User-Risk： 高级 Bot 管理 - 客户端认证模块账号风险评估结果。 */
+  BotManagementHeaders?: string[];
+  /** 客户端指纹信息回源头部配置。枚举值：EO-Bot-Fingerprint： 客户端指纹信息。 */
+  ClientFingerprintHeaders?: string[];
+}
+
 /** 安全策略配置 */
 declare interface SecurityPolicy {
   /** 自定义规则配置。 */
@@ -4332,6 +4356,8 @@ declare interface SecurityPolicy {
   BotManagementLite?: BotManagementLite;
   /** 默认拦截动作配置。 */
   DefaultDenySecurityActionParameters?: DefaultDenySecurityActionParameters;
+  /** 回源请求携带安全头部配置，配置生效后将携带对应 keyname 的请求头部回源。 */
+  SecurityHeadersToOrigin?: SecurityHeadersToOrigin;
 }
 
 /** 策略模板信息 */
@@ -4842,6 +4868,18 @@ declare interface UpstreamURLRewriteParameters {
   Value?: string;
   /** 回源 URL 重写用于正则替换匹配完整路径的正则表达式。需要满足 Google RE2 规范，长度范围为 1～1024。当 Action 为 regexReplace 时，此字段必填，否则无需填写此字段。 */
   Regex?: string;
+}
+
+/** 用户风险等级配置。风险分数范围为 0～100，分数越高表示风险越高。 */
+declare interface UserRiskProfile {
+  /** 高风险请求的最低风险分数。分数大于等于该值时，判定为高风险。取值范围：[2, 99]默认值：50 */
+  HighRiskMinScore?: number;
+  /** 高风险请求的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值：Monitor */
+  HighRiskRequestAction?: SecurityAction;
+  /** 中风险请求的最低风险分数。分数大于等于该值且小于 HighRiskMinScore 时，判定为中风险；低于该值时，判定为低风险。取值范围：[1, 98]默认值：15 */
+  MediumRiskMinScore?: number;
+  /** 中风险请求的处置方式。SecurityAction 的 Name 取值支持：Deny：拦截；Monitor：观察；Redirect：重定向；Challenge：挑战。默认值：Monitor */
+  MediumRiskRequestAction?: SecurityAction;
 }
 
 /** 自定义 nameservers */

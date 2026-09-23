@@ -122,6 +122,40 @@ declare interface AuditLabelGroupInfo {
   GroupMsg?: string;
 }
 
+/** 审核模板。 */
+declare interface AuditTemplate {
+  /** 模板 ID 。CreateAuditTemplate 时，此参数不传或传 0 。ModifyAuditTemplate 时，此参数必传。 */
+  TemplateId?: number;
+  /** 模板名称。CreateAuditTemplate 必填。 */
+  TemplateName?: string;
+  /** 描述信息。CreateAuditTemplate 必填。 */
+  Description?: string;
+  /** Cos Bucket名称。CreateAuditTemplate 必填。 */
+  CosBucket?: string;
+  /** Cos 地域。CreateAuditTemplate 必填。 */
+  CosRegion?: string;
+  /** Cos 完整文件名（包括前缀）。CreateAuditTemplate 必填。 */
+  CosFilePath?: string;
+  /** 是否启用图片审核。CreateAuditTemplate 必填。 */
+  AuditImage?: boolean;
+  /** 是否启用音频审核。CreateAuditTemplate 必填。 */
+  AuditAudio?: boolean;
+  /** 截图间隔，1-60秒。CreateAuditTemplate 必填。 */
+  SnapshotInterval?: number;
+  /** 音频间隔，1-60秒。CreateAuditTemplate 必填。 */
+  AudioInterval?: number;
+  /** 是否开启 Cos 容灾。CreateAuditTemplate 必填。 */
+  EnableFailoverCos?: boolean;
+  /** 容灾 Cos Bucket 。CreateAuditTemplate 必填。 */
+  FailoverCosBucket?: string;
+  /** 容灾 Cos 地域。CreateAuditTemplate 必填。 */
+  FailoverCosRegion?: string;
+  /** 场景策略配置信息。 */
+  SceneInfos?: CMSSceneDetail[] | null;
+  /** 1：表示启用音频文本识别。0 ：不启用。默认 0 。 */
+  AuditText?: number;
+}
+
 /** 数字人主播信息。 */
 declare interface AvatarAnchorInfo {
   /** 主播昵称。同一个主播可以存在多个数字人ID。 */
@@ -328,6 +362,26 @@ declare interface BillDataInfo {
   Flux: number;
   /** 峰值时间点，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。原始数据为5分钟粒度，如果查询小时和天粒度数据，则返回对应粒度内的带宽峰值时间点。 */
   PeakTime: string;
+}
+
+/** 天御内容安全 策略基本信息。 */
+declare interface CMSBizInfo {
+  /** 策略类型，可选值：Text：文本ShortAudio：音频Image:图片。 */
+  StrategyType: string | null;
+  /** 策略标识（自动生成）。 */
+  BizType: string | null;
+  /** 策略开通状态。 */
+  Status: boolean | null;
+  /** 策略配置。json字符串。具体取值方式如下：举例：色情："{"ability":{"asr_text":true,"audio":true},"asr_text_labels":{"porn":["OVR","Pornography","PornographyObscene"]},"audio_labels":{},"user_text_libs":["320fb40e-9305-4b00-a191-945c219b5cc0"]}" 可选项： { value: 'OVR', text: t('低俗语音识别'), msg: t('示例：呻吟、娇喘、娇喘等性暗示相关的语音'), }, { value: 'Pornography', text: t('严重色情'), msg: t('性行为、性器官等相关描述'), }, { value: 'PornographyObscene', text: t('色情低俗'), msg: t('低俗行为、性暗示等相关描述'), } */
+  StrategyConfig?: string | null;
+}
+
+/** 直播审核（内容安全）场景明细。 */
+declare interface CMSSceneDetail {
+  /** 策略信息 */
+  BizInfos?: CMSBizInfo[];
+  /** SceneID 。 */
+  SceneID?: string;
 }
 
 /** 规则信息 */
@@ -2470,6 +2524,34 @@ declare interface CreateAuditKeywordsResponse {
   RequestId?: string;
 }
 
+declare interface CreateAuditRuleRequest {
+  /** 推流域名。 */
+  DomainName: string;
+  /** 推流路径，与推流和播放地址中的AppName 保持一致。 */
+  AppName: string;
+  /** 审核模板 ID。 */
+  TemplateId: number;
+  /** 流名称。 不传默认为空。 */
+  StreamName?: string;
+}
+
+declare interface CreateAuditRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAuditTemplateRequest {
+  /** 审核模板。 */
+  AuditTemplate: AuditTemplate;
+}
+
+declare interface CreateAuditTemplateResponse {
+  /** 模板 ID 。 */
+  TemplateId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCasterInputPushUrlRequest {
   /** 导播台ID */
   CasterId: number;
@@ -2914,6 +2996,38 @@ declare interface CreateLiveRecordTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateLiveSmartEraseTemplateRequest {
+  /** 模板名称。长度上限：100字节。 */
+  TemplateName: string;
+  /** 擦除类型，如"illegal audio|illegal image|logo|privacy protection 。 */
+  Type: string;
+  /** 描述信息。长度上限：1024字节。仅支持中文、英文、数字、_、-。 */
+  Description?: string;
+  /** 关联的审核模板id, 表audio_conf 。 */
+  AuditConfId?: number;
+  /** 天御图片审核策略BizType Image 。 */
+  ImageBizType?: string;
+  /** 天御音频审核策略BizType ShortAudio 。 */
+  AudioBizType?: string;
+  /** 天御音频文本审核策略BizType ShortAudio 。 */
+  AudioTextBizType?: string;
+  /** 展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。 */
+  DisplayMode?: number;
+  /** 字幕延迟展示时间,单位毫秒。默认10000。 */
+  DisplayDelayTime?: number;
+  /** 隐私保护可选的类型名，包括人脸模糊、车牌模糊枚举值：blur face： 人脸模糊blur license plate： 车牌模糊blur face|blur license plate： 复选 */
+  PrivacyProtection?: string;
+  /** 音频处理可选项：静音擦除、哔音擦除，默认选择静音擦除枚举值：0： 静音1： 哔音默认值：0 */
+  AudioErasureMode?: number;
+}
+
+declare interface CreateLiveSmartEraseTemplateResponse {
+  /** 模板Id。 */
+  TemplateId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLiveSnapshotRuleRequest {
   /** 推流域名。 */
   DomainName: string;
@@ -3296,6 +3410,30 @@ declare interface DeleteAuditKeywordsResponse {
   SuccessCount?: number;
   /** 关键词详情列表。 */
   Infos?: AuditKeywordDeleteDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAuditRuleRequest {
+  /** 推流域名。 */
+  DomainName: string;
+  /** 推流路径，与推流和播放地址中的AppName保持一致。 */
+  AppName: string;
+  /** 流名称 。 不传默认为空。 */
+  StreamName?: string;
+}
+
+declare interface DeleteAuditRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteAuditTemplateRequest {
+  /** 审核模板 ID 。 */
+  TemplateId: number;
+}
+
+declare interface DeleteAuditTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3776,6 +3914,52 @@ declare interface DescribeAuditKeywordsResponse {
   Total?: number;
   /** 关键词详情列表。 */
   Infos?: AuditKeywordInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditRulesRequest {
+  /** 域名。 */
+  DomainName?: string;
+  /** 审核模板 ID 。 */
+  TemplateId?: number;
+  /** AppName 。 */
+  AppName?: string;
+  /** 流 ID 。 */
+  StreamName?: string;
+}
+
+declare interface DescribeAuditRulesResponse {
+  /** 规则信息列表。 */
+  Rules?: RuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditTemplateRequest {
+  /** 模板 ID 。 */
+  TemplateId: number;
+}
+
+declare interface DescribeAuditTemplateResponse {
+  /** 审核模板。 */
+  AuditTemplate?: AuditTemplate;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAuditTemplatesRequest {
+  /** 是否过滤出文本审核，false不过滤，true过滤。 */
+  WithTextAudit?: boolean;
+  /** 页码。 */
+  PageNum?: number;
+  /** 每页数量。取值范围：[5, 100] */
+  PageSize?: number;
+}
+
+declare interface DescribeAuditTemplatesResponse {
+  /** 审核模板列表。 */
+  AuditTemplates?: AuditTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5812,6 +5996,18 @@ declare interface ModifyAuditKeywordLibResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAuditTemplateRequest {
+  /** 审核模板。 */
+  AuditTemplate: AuditTemplate;
+}
+
+declare interface ModifyAuditTemplateResponse {
+  /** 模板 ID 。 */
+  TemplateId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCasterInputInfoRequest {
   /** 导播台ID。 */
   CasterId: number;
@@ -6785,6 +6981,10 @@ declare interface Live {
   CreateAuditKeywordLib(data: CreateAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordLibResponse>;
   /** 直播审核创建关键词 {@link CreateAuditKeywordsRequest} {@link CreateAuditKeywordsResponse} */
   CreateAuditKeywords(data: CreateAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditKeywordsResponse>;
+  /** 创建审核规则 {@link CreateAuditRuleRequest} {@link CreateAuditRuleResponse} */
+  CreateAuditRule(data: CreateAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleResponse>;
+  /** 创建审核模板 {@link CreateAuditTemplateRequest} {@link CreateAuditTemplateResponse} */
+  CreateAuditTemplate(data: CreateAuditTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTemplateResponse>;
   /** 创建导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
@@ -6821,6 +7021,8 @@ declare interface Live {
   CreateLiveRecordRule(data: CreateLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordRuleResponse>;
   /** 直播创建录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
   CreateLiveRecordTemplate(data: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
+  /** 创建直播智能擦除模板 {@link CreateLiveSmartEraseTemplateRequest} {@link CreateLiveSmartEraseTemplateResponse} */
+  CreateLiveSmartEraseTemplate(data: CreateLiveSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSmartEraseTemplateResponse>;
   /** 创建截图规则 {@link CreateLiveSnapshotRuleRequest} {@link CreateLiveSnapshotRuleResponse} */
   CreateLiveSnapshotRule(data: CreateLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSnapshotRuleResponse>;
   /** 创建截图模板 {@link CreateLiveSnapshotTemplateRequest} {@link CreateLiveSnapshotTemplateResponse} */
@@ -6853,6 +7055,10 @@ declare interface Live {
   DeleteAuditKeywordLib(data: DeleteAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordLibResponse>;
   /** 直播审核删除关键词 {@link DeleteAuditKeywordsRequest} {@link DeleteAuditKeywordsResponse} */
   DeleteAuditKeywords(data: DeleteAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditKeywordsResponse>;
+  /** 删除审核规则 {@link DeleteAuditRuleRequest} {@link DeleteAuditRuleResponse} */
+  DeleteAuditRule(data: DeleteAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditRuleResponse>;
+  /** 删除审核模板 {@link DeleteAuditTemplateRequest} {@link DeleteAuditTemplateResponse} */
+  DeleteAuditTemplate(data: DeleteAuditTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditTemplateResponse>;
   /** 删除导播台 {@link DeleteCasterRequest} {@link DeleteCasterResponse} */
   DeleteCaster(data: DeleteCasterRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCasterResponse>;
   /** 删除导播台输入源 {@link DeleteCasterInputInfoRequest} {@link DeleteCasterInputInfoResponse} */
@@ -6927,6 +7133,12 @@ declare interface Live {
   DescribeAuditKeywordLibs(data: DescribeAuditKeywordLibsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordLibsResponse>;
   /** 直播审核获取关键词 {@link DescribeAuditKeywordsRequest} {@link DescribeAuditKeywordsResponse} */
   DescribeAuditKeywords(data: DescribeAuditKeywordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditKeywordsResponse>;
+  /** 获取审核规则列表 {@link DescribeAuditRulesRequest} {@link DescribeAuditRulesResponse} */
+  DescribeAuditRules(data?: DescribeAuditRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditRulesResponse>;
+  /** 获取审核模板 {@link DescribeAuditTemplateRequest} {@link DescribeAuditTemplateResponse} */
+  DescribeAuditTemplate(data: DescribeAuditTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTemplateResponse>;
+  /** 获取审核模板列表 {@link DescribeAuditTemplatesRequest} {@link DescribeAuditTemplatesResponse} */
+  DescribeAuditTemplates(data?: DescribeAuditTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTemplatesResponse>;
   /** 查询直播中的主备流 {@link DescribeBackupStreamListRequest} {@link DescribeBackupStreamListResponse} */
   DescribeBackupStreamList(data?: DescribeBackupStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStreamListResponse>;
   /** 直播播放带宽和流量数据查询 {@link DescribeBillBandwidthAndFluxListRequest} {@link DescribeBillBandwidthAndFluxListResponse} */
@@ -7145,6 +7357,8 @@ declare interface Live {
   InsertTaskTemporaryFiles(data: InsertTaskTemporaryFilesRequest, config?: AxiosRequestConfig): AxiosPromise<InsertTaskTemporaryFilesResponse>;
   /** 直播审核更新词库 {@link ModifyAuditKeywordLibRequest} {@link ModifyAuditKeywordLibResponse} */
   ModifyAuditKeywordLib(data: ModifyAuditKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditKeywordLibResponse>;
+  /** 修改审核模板 {@link ModifyAuditTemplateRequest} {@link ModifyAuditTemplateResponse} */
+  ModifyAuditTemplate(data: ModifyAuditTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAuditTemplateResponse>;
   /** 修改导播台 {@link ModifyCasterRequest} {@link ModifyCasterResponse} */
   ModifyCaster(data: ModifyCasterRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCasterResponse>;
   /** 修改导播台输入源 {@link ModifyCasterInputInfoRequest} {@link ModifyCasterInputInfoResponse} */

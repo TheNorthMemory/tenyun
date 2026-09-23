@@ -1878,6 +1878,14 @@ declare interface ModifyGeneralApmApplicationConfigResponse {
   RequestId?: string;
 }
 
+declare interface OpenApmPaidVersionRequest {
+}
+
+declare interface OpenApmPaidVersionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface TerminateApmInstanceRequest {
   /** 业务系统ID */
   InstanceId: string;
@@ -1957,6 +1965,8 @@ declare interface Apm {
   ModifyApmService(data: ModifyApmServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApmServiceResponse>;
   /** 修改应用配置信息（不推荐） {@link ModifyGeneralApmApplicationConfigRequest} {@link ModifyGeneralApmApplicationConfigResponse} */
   ModifyGeneralApmApplicationConfig(data: ModifyGeneralApmApplicationConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGeneralApmApplicationConfigResponse>;
+  /** apm开通付费版本 {@link OpenApmPaidVersionRequest} {@link OpenApmPaidVersionResponse} */
+  OpenApmPaidVersion(data?: OpenApmPaidVersionRequest, config?: AxiosRequestConfig): AxiosPromise<OpenApmPaidVersionResponse>;
   /** 销毁 APM 业务系统 {@link TerminateApmInstanceRequest} {@link TerminateApmInstanceResponse} */
   TerminateApmInstance(data: TerminateApmInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateApmInstanceResponse>;
 }

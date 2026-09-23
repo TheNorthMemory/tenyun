@@ -1870,7 +1870,7 @@ declare interface ExportInfo {
   Query?: string;
   /** 日志导出文件名 */
   FileName?: string;
-  /** 日志文件大小 */
+  /** 日志文件大小单位：字节 */
   FileSize?: number;
   /** 日志导出时间排序 */
   Order?: string;

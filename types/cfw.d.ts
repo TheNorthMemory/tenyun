@@ -5556,6 +5556,8 @@ declare interface ModifyStorageSettingRequest {
 }
 
 declare interface ModifyStorageSettingResponse {
+  /** 操作状态枚举值：processing： 进行中success： 成功 */
+  Status?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

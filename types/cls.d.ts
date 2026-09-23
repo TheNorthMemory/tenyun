@@ -1144,6 +1144,14 @@ declare interface Delta {
   ToolCalls?: ToolCall[];
 }
 
+/** 拓扑图（节点 + 边） */
+declare interface DependencyTopology {
+  /** 节点列表 */
+  Nodes?: TopologyNode[];
+  /** 边列表 */
+  Edges?: TopologyEdge[];
+}
+
 /** 云产品实例维度信息 */
 declare interface Dimension {
   /** 实例维度名称,此字段可能返回 null，表示取不到有效值。 */
@@ -1320,6 +1328,36 @@ declare interface EBPFProcessNameFilter {
   Mode: number;
   /** 进程名列表 */
   ProcessNames?: string[];
+}
+
+/** 实体动态属性 KV */
+declare interface EntityAttribute {
+  /** 属性 key */
+  Key?: string;
+  /** 属性 value */
+  Value?: string;
+}
+
+/** 实体详情 */
+declare interface EntityInfo {
+  /** 实体 ID */
+  EntityId?: string;
+  /** 实体所属域默认值：实体所在域，如TC，App */
+  Domain?: string;
+  /** 实体所属产品参数格式：实体归属的产品，如CDB, Application */
+  Product?: string;
+  /** 实体名称 */
+  EntityName?: string;
+  /** 实体类名称参数格式：TC.CDB.Instance */
+  EntityClassName?: string;
+  /** 动态属性（base 在前 + 字典序） */
+  Attributes?: EntityAttribute[];
+  /** 标签列表 */
+  Tags?: Tag[];
+  /** 关联日志主题 */
+  RelatedLogTopics?: RelatedTopicItem[];
+  /** 实体资源ID */
+  ResourceId?: string;
 }
 
 /** 数据加工-高级设置-环境变量 */
@@ -2580,6 +2618,18 @@ declare interface Relabeling {
   Modulus?: number | null;
 }
 
+/** 已关联主题 */
+declare interface RelatedTopicItem {
+  /** 主题 ID */
+  TopicId?: string;
+  /** 主题地域 */
+  Region?: string;
+  /** 日志类型枚举值：Auditlog： 审计日志Eventlog： 事件日志ComponentLog： 组件日志 */
+  LogType?: string;
+  /** 日志类型， 0: 日志主题 ; 1: 指标主题枚举值：0： 日志主题1： 指标主题 */
+  BizType?: number;
+}
+
 /** 工作区关联的日志集 */
 declare interface RelationLogset {
   /** 日志集id */
@@ -2682,6 +2732,28 @@ declare interface ResourceGraphEntityRelatedTopic {
   LogType: string;
   /** 日志类型枚举值：0： 日志主题1： 指标主题 */
   BizType?: number;
+}
+
+/** 资源图谱基本信息 */
+declare interface ResourceGraphInfo {
+  /** 资源图谱id */
+  ResourceGraphId?: string;
+  /** 工作区名称 */
+  Name?: string;
+  /** 工作区描述 */
+  Description?: string;
+  /** 工作区状态枚举值：0： 初始化中1： 成功2： 失败3： 删除中4： 已删除5： 删除失败 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 关联的日志集 */
+  RelationLogset?: RelationLogset;
+  /** 关联的topic */
+  RelationTopics?: RelationTopic[];
+  /** 工作区绑定的标签信息 */
+  Tags?: Tag[];
 }
 
 /** 资源图谱tke集群接入信息 */
@@ -3156,6 +3228,32 @@ declare interface TopicPartitionOffsetInfo {
   TopicID: string | null;
   /** 分区点位信息 */
   PartitionOffsets: PartitionOffsetInfo[] | null;
+}
+
+/** 拓扑边 */
+declare interface TopologyEdge {
+  /** 源实体 ID */
+  SrcEntityId?: string;
+  /** 目的实体 ID */
+  DstEntityId?: string;
+  /** 关系类型：contains / same_as / calls枚举值：contains： 包含关系，A 包含 Bsame_as： 等价关系，A 等价 Bcalls： 调用关系， A 调用 B默认值：- */
+  RelationType?: string;
+}
+
+/** 拓扑节点 */
+declare interface TopologyNode {
+  /** 实体 ID */
+  EntityId?: string;
+  /** 实体名称 */
+  Name?: string;
+  /** 实体所属域 */
+  Domain?: string;
+  /** 实体所在产品 */
+  Product?: string;
+  /** 实体类型 */
+  EntityClassName?: string;
+  /** 距离中心节点深度 */
+  Depth?: number;
 }
 
 /** 用户kafka扩展信息 */
@@ -4308,6 +4406,8 @@ declare interface CreateResourceGraphRequest {
 }
 
 declare interface CreateResourceGraphResponse {
+  /** 资源图谱id */
+  ResourceGraphId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6082,6 +6182,10 @@ declare interface DescribeResourceGraphEntitiesRequest {
 }
 
 declare interface DescribeResourceGraphEntitiesResponse {
+  /** 实体列表 */
+  EntityInfos?: EntityInfo[];
+  /** 是否还有下一页枚举值：0： 没有下一页1： 还有下一页 */
+  HasMore?: number;
   /** 分页的游标，有值则下次分页请求原样带上，无值则表示无下一页 */
   NextCursor?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -6104,6 +6208,8 @@ declare interface DescribeResourceGraphEntityDependencyRequest {
 }
 
 declare interface DescribeResourceGraphEntityDependencyResponse {
+  /** 拓扑图（节点 + 边） */
+  Topology?: DependencyTopology;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6120,6 +6226,8 @@ declare interface DescribeResourceGraphEntityDetailRequest {
 }
 
 declare interface DescribeResourceGraphEntityDetailResponse {
+  /** 实体信息 */
+  EntityInfo?: EntityInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6215,9 +6323,19 @@ declare interface DescribeResourceGraphTkeClusterStatusResponse {
 }
 
 declare interface DescribeResourceGraphsRequest {
+  /** ResourceGraphId 按【资源图谱 ID】精确匹配。类型：String。必选：否Name 按【资源图谱名称】模糊匹配。类型：String。必选：否Status 按【状态】模糊匹配。类型：int。必选：否；0：初始化中；1：就绪；2：创建失败；3：删除中；5：删除失败tagKey 按照【标签键】进行过滤。类型：String。必选：否tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否注意：每次请求的 Filters 上限 10，Filter.Values 上限 100。 */
+  Filters?: Filter[];
+  /** 分页偏移量默认值：0 */
+  Offset?: number;
+  /** 分页单页数量取值范围：[0, 100]默认值：20 */
+  Limit?: number;
 }
 
 declare interface DescribeResourceGraphsResponse {
+  /** 资源图谱信息 */
+  ResourceGraphInfos?: ResourceGraphInfo[];
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

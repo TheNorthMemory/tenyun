@@ -761,9 +761,17 @@ declare interface DescribeServicesResponse {
 }
 
 declare interface GetServicePodLogsRequest {
+  /** 服务Id */
+  ServiceId: string;
+  /** Pod名称 */
+  PodName: string;
+  /** 日志行数 */
+  TailLines?: string;
 }
 
 declare interface GetServicePodLogsResponse {
+  /** 日志内容 */
+  LogLines?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -950,7 +958,7 @@ declare interface Hai {
   /** 查询服务调用信息 {@link DescribeServicesCallInfoRequest} {@link DescribeServicesCallInfoResponse} */
   DescribeServicesCallInfo(data?: DescribeServicesCallInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServicesCallInfoResponse>;
   /** 查询推理服务Pod日志 {@link GetServicePodLogsRequest} {@link GetServicePodLogsResponse} */
-  GetServicePodLogs(data?: GetServicePodLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetServicePodLogsResponse>;
+  GetServicePodLogs(data: GetServicePodLogsRequest, config?: AxiosRequestConfig): AxiosPromise<GetServicePodLogsResponse>;
   /** 创建实例询价 {@link InquirePriceRunInstancesRequest} {@link InquirePriceRunInstancesResponse} */
   InquirePriceRunInstances(data: InquirePriceRunInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<InquirePriceRunInstancesResponse>;
   /** 更新服务配置询价 {@link InquirePriceUpdateServiceConfigsRequest} {@link InquirePriceUpdateServiceConfigsResponse} */

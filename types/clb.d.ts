@@ -2078,6 +2078,10 @@ declare interface ServiceProviderHealthCheckConfigItemInput {
   HealthCheckMaxTokens?: number;
   /** 健康检查协议枚举值：chat： 表示/chat/completion协议messages： 表示/v1/messages协议responses： 表示/v1/messages协议 */
   HealthCheckProtocol?: string;
+  /** 健康检查路径。仅HealthCheckMethod为Service时生效。 */
+  HealthCheckPath?: string;
+  /** 健康检查方式。枚举值：Service： 探测服务可用性Model： 探测模型可用性 */
+  HealthCheckMethod?: string;
 }
 
 /** 健康检查配置 */
@@ -2089,9 +2093,13 @@ declare interface ServiceProviderHealthCheckConfigItemOutput {
   /** 不健康阈值。表示当模型连续多少次不健康时认为该模型不健康。取值范围：[1, 10]默认值：1 */
   HealthCheckUnhealthyThreshold?: number;
   /** 健康检查使用的最大Token数量。部分模型如gpt系列可能仅支持大于等于16。默认值：1 */
-  HealthCheckMaxTokens?: number;
+  HealthCheckMaxTokens?: number | null;
   /** 健康检查协议枚举值：chat： 表示/chat/completion协议messages： 表示/v1/messages协议responses： 表示/v1/messages协议 */
   HealthCheckProtocol?: string | null;
+  /** 健康检查路径。仅HealthCheckMethod为Service时生效。 */
+  HealthCheckPath?: string;
+  /** 健康检查方式。 */
+  HealthCheckMethod?: string;
 }
 
 /** 健康检查配置 */
@@ -2559,7 +2567,7 @@ declare interface AutoRewriteRequest {
   ListenerId: string;
   /** HTTPS:443监听器下需要重定向的域名，若不填，则对HTTPS:443监听器下的所有域名都设置重定向。 */
   Domains?: string[];
-  /** 重定向状态码，可取值301,302,307。 */
+  /** 重定向状态码，可取值301,302,307。默认值：302 */
   RewriteCodes?: number[];
   /** 重定向是否携带匹配的URL。 */
   TakeUrls?: boolean[];

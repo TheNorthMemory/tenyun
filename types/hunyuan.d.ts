@@ -1239,49 +1239,49 @@ declare interface Hunyuan {
   (): Versions;
   /** 开通服务 {@link ActivateServiceRequest} {@link ActivateServiceResponse} */
   ActivateService(data?: ActivateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ActivateServiceResponse>;
-  /** 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
+  /** @deprecated 对话 {@link ChatCompletionsRequest} {@link ChatCompletionsResponse} */
   ChatCompletions(data: ChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatCompletionsResponse>;
-  /** 翻译 {@link ChatTranslationsRequest} {@link ChatTranslationsResponse} */
+  /** @deprecated 翻译 {@link ChatTranslationsRequest} {@link ChatTranslationsResponse} */
   ChatTranslations(data: ChatTranslationsRequest, config?: AxiosRequestConfig): AxiosPromise<ChatTranslationsResponse>;
-  /** 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
+  /** @deprecated 创建术语库 {@link CreateGlossaryRequest} {@link CreateGlossaryResponse} */
   CreateGlossary(data: CreateGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryResponse>;
-  /** 添加术语条目 {@link CreateGlossaryEntryRequest} {@link CreateGlossaryEntryResponse} */
+  /** @deprecated 添加术语条目 {@link CreateGlossaryEntryRequest} {@link CreateGlossaryEntryResponse} */
   CreateGlossaryEntry(data: CreateGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateGlossaryEntryResponse>;
-  /** 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
+  /** @deprecated 创建会话 {@link CreateThreadRequest} {@link CreateThreadResponse} */
   CreateThread(data?: CreateThreadRequest, config?: AxiosRequestConfig): AxiosPromise<CreateThreadResponse>;
-  /** 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
+  /** @deprecated 删除术语库 {@link DeleteGlossaryRequest} {@link DeleteGlossaryResponse} */
   DeleteGlossary(data: DeleteGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryResponse>;
-  /** 删除术语条目 {@link DeleteGlossaryEntryRequest} {@link DeleteGlossaryEntryResponse} */
+  /** @deprecated 删除术语条目 {@link DeleteGlossaryEntryRequest} {@link DeleteGlossaryEntryResponse} */
   DeleteGlossaryEntry(data: DeleteGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGlossaryEntryResponse>;
-  /** 文件删除 {@link FilesDeletionsRequest} {@link FilesDeletionsResponse} */
+  /** @deprecated 文件删除 {@link FilesDeletionsRequest} {@link FilesDeletionsResponse} */
   FilesDeletions(data: FilesDeletionsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesDeletionsResponse>;
-  /** 文件列表 {@link FilesListRequest} {@link FilesListResponse} */
+  /** @deprecated 文件列表 {@link FilesListRequest} {@link FilesListResponse} */
   FilesList(data?: FilesListRequest, config?: AxiosRequestConfig): AxiosPromise<FilesListResponse>;
-  /** 文件上传 {@link FilesUploadsRequest} {@link FilesUploadsResponse} */
+  /** @deprecated 文件上传 {@link FilesUploadsRequest} {@link FilesUploadsResponse} */
   FilesUploads(data: FilesUploadsRequest, config?: AxiosRequestConfig): AxiosPromise<FilesUploadsResponse>;
-  /** 向量化 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
+  /** @deprecated 向量化 {@link GetEmbeddingRequest} {@link GetEmbeddingResponse} */
   GetEmbedding(data?: GetEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GetEmbeddingResponse>;
-  /** 查询会话 {@link GetThreadRequest} {@link GetThreadResponse} */
+  /** @deprecated 查询会话 {@link GetThreadRequest} {@link GetThreadResponse} */
   GetThread(data: GetThreadRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadResponse>;
-  /** 获取会话消息 {@link GetThreadMessageRequest} {@link GetThreadMessageResponse} */
+  /** @deprecated 获取会话消息 {@link GetThreadMessageRequest} {@link GetThreadMessageResponse} */
   GetThreadMessage(data: GetThreadMessageRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadMessageResponse>;
-  /** 会话消息列表 {@link GetThreadMessageListRequest} {@link GetThreadMessageListResponse} */
+  /** @deprecated 会话消息列表 {@link GetThreadMessageListRequest} {@link GetThreadMessageListResponse} */
   GetThreadMessageList(data: GetThreadMessageListRequest, config?: AxiosRequestConfig): AxiosPromise<GetThreadMessageListResponse>;
-  /** Token 计数 {@link GetTokenCountRequest} {@link GetTokenCountResponse} */
+  /** @deprecated Token 计数 {@link GetTokenCountRequest} {@link GetTokenCountResponse} */
   GetTokenCount(data: GetTokenCountRequest, config?: AxiosRequestConfig): AxiosPromise<GetTokenCountResponse>;
-  /** 群聊 {@link GroupChatCompletionsRequest} {@link GroupChatCompletionsResponse} */
+  /** @deprecated 群聊 {@link GroupChatCompletionsRequest} {@link GroupChatCompletionsResponse} */
   GroupChatCompletions(data: GroupChatCompletionsRequest, config?: AxiosRequestConfig): AxiosPromise<GroupChatCompletionsResponse>;
-  /** 拍照解题 {@link ImageQuestionRequest} {@link ImageQuestionResponse} */
+  /** @deprecated 拍照解题 {@link ImageQuestionRequest} {@link ImageQuestionResponse} */
   ImageQuestion(data: ImageQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<ImageQuestionResponse>;
-  /** 查询术语库 {@link ListGlossaryRequest} {@link ListGlossaryResponse} */
+  /** @deprecated 查询术语库 {@link ListGlossaryRequest} {@link ListGlossaryResponse} */
   ListGlossary(data?: ListGlossaryRequest, config?: AxiosRequestConfig): AxiosPromise<ListGlossaryResponse>;
-  /** 查询术语条目 {@link ListGlossaryEntryRequest} {@link ListGlossaryEntryResponse} */
+  /** @deprecated 查询术语条目 {@link ListGlossaryEntryRequest} {@link ListGlossaryEntryResponse} */
   ListGlossaryEntry(data: ListGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<ListGlossaryEntryResponse>;
   /** 查询混元生图（多轮对话）任务 {@link QueryHunyuanImageChatJobRequest} {@link QueryHunyuanImageChatJobResponse} */
   QueryHunyuanImageChatJob(data?: QueryHunyuanImageChatJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageChatJobResponse>;
   /** 查询混元生图任务 {@link QueryHunyuanImageJobRequest} {@link QueryHunyuanImageJobResponse} */
   QueryHunyuanImageJob(data: QueryHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<QueryHunyuanImageJobResponse>;
-  /** 执行会话 {@link RunThreadRequest} {@link RunThreadResponse} */
+  /** @deprecated 执行会话 {@link RunThreadRequest} {@link RunThreadResponse} */
   RunThread(data: RunThreadRequest, config?: AxiosRequestConfig): AxiosPromise<RunThreadResponse>;
   /** 设置付费模式 {@link SetPayModeRequest} {@link SetPayModeResponse} */
   SetPayMode(data: SetPayModeRequest, config?: AxiosRequestConfig): AxiosPromise<SetPayModeResponse>;
@@ -1291,7 +1291,7 @@ declare interface Hunyuan {
   SubmitHunyuanImageJob(data: SubmitHunyuanImageJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanImageJobResponse>;
   /** 文生图轻量版 {@link TextToImageLiteRequest} {@link TextToImageLiteResponse} */
   TextToImageLite(data: TextToImageLiteRequest, config?: AxiosRequestConfig): AxiosPromise<TextToImageLiteResponse>;
-  /** 更新术语条目 {@link UpdateGlossaryEntryRequest} {@link UpdateGlossaryEntryResponse} */
+  /** @deprecated 更新术语条目 {@link UpdateGlossaryEntryRequest} {@link UpdateGlossaryEntryResponse} */
   UpdateGlossaryEntry(data: UpdateGlossaryEntryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateGlossaryEntryResponse>;
 }
 

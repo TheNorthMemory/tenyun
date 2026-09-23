@@ -1294,6 +1294,14 @@ declare interface MySQLTaskStatus {
   StatusDesc?: string;
 }
 
+/** Key-Value类型，模拟的 object 类型 */
+declare interface ObjectKV {
+  /** object 的 key */
+  Key?: string;
+  /** object key 对应的 value */
+  Value?: string;
+}
+
 /** 订单信息 */
 declare interface OrderInfo {
   /** 订单号 */
@@ -3520,6 +3528,34 @@ declare interface DescribeTablesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTaskResultRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeTaskResultResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务类型枚举值：PGUserMigration： PG Migrate 任务 */
+  TaskType?: string;
+  /** 任务状态枚举值：Failed： 失败Succeed： 成功Accepted： 已接收Running： 运行中 */
+  Status?: string;
+  /** 当前步骤 */
+  Phase?: string;
+  /** 失败原因 */
+  Reason?: string;
+  /** 创建时间参数格式：2026-05-26T11:26:14+08:00 */
+  CreatedAt?: string;
+  /** 最后更新时间参数格式：2026-05-26T11:26:14+08:00 */
+  UpdatedAt?: string;
+  /** 任务参数 */
+  Params?: ObjectKV[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserListRequest {
   /** 环境id */
   EnvId: string;
@@ -4202,6 +4238,18 @@ declare interface RepairPGUserMigrationHistoryResponse {
   RequestId?: string;
 }
 
+declare interface ResetPGAccountPasswordRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 要设置的密码入参限制：长度8 ~ 32位，不能以" / "开头; 必须包含以下四项，字符种类: 小写字母： [a ~ z] 大写字母：[A ～ Z] 数字：0 - 9 特殊字符：()~!@#$%^&amp;*-+=_|{}[]:<>,.?/` 示例值：A8b!C2d#E4f&amp; */
+  Password: string;
+}
+
+declare interface ResetPGAccountPasswordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RunCommandsRequest {
   /** 待执行命令 */
   MgoCommands: MgoCommandParam[];
@@ -4398,6 +4446,28 @@ declare interface UpdateTableResponse {
   RequestId?: string;
 }
 
+declare interface UpgradePGInstanceToDedicatedRequest {
+  /** 云开发环境ID */
+  EnvId: string;
+  /** 切换时机枚举值：0： 立即切换1： 指定时间切换 */
+  SwitchTag: number;
+  /** 切换开始时间参数格式：15:04:05 */
+  SwitchStartTime?: string;
+  /** 切换结束时间参数格式：15:04:05 */
+  SwitchEndTime?: string;
+  /** PG 规格 */
+  SpecCode?: string;
+  /** 存储空间大小 */
+  Storage?: number;
+}
+
+declare interface UpgradePGInstanceToDedicatedResponse {
+  /** 任务ID可通过DescribeTaskResult 接口查询进度 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface VerifyHTTPServiceRouteRequest {
   /** 环境ID */
   EnvId: string;
@@ -4583,6 +4653,8 @@ declare interface Tcb {
   DescribeTable(data: DescribeTableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTableResponse>;
   /** 查询文档型数据库所有表信息 {@link DescribeTablesRequest} {@link DescribeTablesResponse} */
   DescribeTables(data: DescribeTablesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTablesResponse>;
+  /** 查看任务结果 {@link DescribeTaskResultRequest} {@link DescribeTaskResultResponse} */
+  DescribeTaskResult(data: DescribeTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTaskResultResponse>;
   /** 查询tcb用户列表 {@link DescribeUserListRequest} {@link DescribeUserListResponse} */
   DescribeUserList(data: DescribeUserListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserListResponse>;
   /** 销毁环境 {@link DestroyEnvRequest} {@link DestroyEnvResponse} */
@@ -4649,6 +4721,8 @@ declare interface Tcb {
   RenewEnv(data: RenewEnvRequest, config?: AxiosRequestConfig): AxiosPromise<RenewEnvResponse>;
   /** 修复Migration History {@link RepairPGUserMigrationHistoryRequest} {@link RepairPGUserMigrationHistoryResponse} */
   RepairPGUserMigrationHistory(data: RepairPGUserMigrationHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<RepairPGUserMigrationHistoryResponse>;
+  /** 修改 PG 实例用户角色密码 {@link ResetPGAccountPasswordRequest} {@link ResetPGAccountPasswordResponse} */
+  ResetPGAccountPassword(data: ResetPGAccountPasswordRequest, config?: AxiosRequestConfig): AxiosPromise<ResetPGAccountPasswordResponse>;
   /** 执行文档型数据库命令 {@link RunCommandsRequest} {@link RunCommandsResponse} */
   RunCommands(data: RunCommandsRequest, config?: AxiosRequestConfig): AxiosPromise<RunCommandsResponse>;
   /** 执行MySQL语句 {@link RunSqlRequest} {@link RunSqlResponse} */
@@ -4665,6 +4739,8 @@ declare interface Tcb {
   UpdateFunctionConfiguration(data: UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionConfigurationResponse>;
   /** 修改文档型数据库表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
   UpdateTable(data: UpdateTableRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableResponse>;
+  /** 发起共享升级独享 {@link UpgradePGInstanceToDedicatedRequest} {@link UpgradePGInstanceToDedicatedResponse} */
+  UpgradePGInstanceToDedicated(data: UpgradePGInstanceToDedicatedRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradePGInstanceToDedicatedResponse>;
   /** 校验HTTP访问服务路由 {@link VerifyHTTPServiceRouteRequest} {@link VerifyHTTPServiceRouteResponse} */
   VerifyHTTPServiceRoute(data: VerifyHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyHTTPServiceRouteResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

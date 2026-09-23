@@ -1190,6 +1190,12 @@ declare interface CynosdbInstanceDetail {
   DbMode?: string;
   /** 集群的读写实例所在可用区 */
   MasterZone?: string;
+  /** 实例的真实可用区 */
+  RealZone?: string;
+  /** 备可用区列表 */
+  SlaveZones?: string[];
+  /** 存储版本枚举值：1.0： 1.0版本存储2.0： 2.0版本存储 */
+  StorageVersion?: string;
 }
 
 /** 实例组信息 */
