@@ -9203,7 +9203,7 @@ declare interface Waf {
   ModifyHostStatus(data: ModifyHostStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyHostStatusResponse>;
   /** 修改实例攻击日志投递开关 {@link ModifyInstanceAttackLogPostRequest} {@link ModifyInstanceAttackLogPostResponse} */
   ModifyInstanceAttackLogPost(data: ModifyInstanceAttackLogPostRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAttackLogPostResponse>;
-  /** 修改实例的QPS弹性计费开关 {@link ModifyInstanceElasticModeRequest} {@link ModifyInstanceElasticModeResponse} */
+  /** @deprecated 修改实例的QPS弹性计费开关 {@link ModifyInstanceElasticModeRequest} {@link ModifyInstanceElasticModeResponse} */
   ModifyInstanceElasticMode(data: ModifyInstanceElasticModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceElasticModeResponse>;
   /** 修改实例名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;

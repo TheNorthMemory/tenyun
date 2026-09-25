@@ -5796,6 +5796,10 @@ declare interface DescribeKafkaConsumerResponse {
   ConsumerContent?: KafkaConsumerContent;
   /** 是否开启投递服务日志。1：关闭，2：开启。 */
   HasServicesLog?: number;
+  /** 外网消费开关。 */
+  EnableInternetConsume?: boolean;
+  /** 内网消费开关。 */
+  EnableIntranetConsume?: boolean;
   /** 消费范围类型，0:最新，1:历史+最新 */
   ScopeType?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -7207,6 +7211,10 @@ declare interface ModifyKafkaConsumerRequest {
   ConsumerContent?: KafkaConsumerContent;
   /** 是否开启投递服务日志。1：关闭，2：开启。 */
   HasServicesLog?: number;
+  /** 外网消费开关。 */
+  EnableInternetConsume?: boolean;
+  /** 内网消费开关。 */
+  EnableIntranetConsume?: boolean;
   /** 消费范围类型，0:最新，1:历史+最新 */
   ScopeType?: number;
 }
@@ -7835,6 +7843,10 @@ declare interface OpenKafkaConsumerRequest {
   ConsumerContent?: KafkaConsumerContent;
   /** 是否开启投递服务日志。1：关闭，2：开启。 默认值：2 */
   HasServicesLog?: number;
+  /** 外网消费开关，默认开启 */
+  EnableInternetConsume?: boolean;
+  /** 内网消费开关，默认开启 */
+  EnableIntranetConsume?: boolean;
   /** 消费范围类型，0:最新；1:历史+最新；默认值:0 */
   ScopeType?: number;
 }

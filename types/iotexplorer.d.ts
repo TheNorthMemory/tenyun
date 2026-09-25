@@ -486,6 +486,18 @@ declare interface DevicePositionItem {
   Latitude?: number;
 }
 
+/** 批处理发布消息请求单台设备下发结果(仅失败情况下显示具体情况) */
+declare interface DeviceResult {
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 设备状态枚举值：SUCCESS： 下发成功 PENDING： 存入离线存储OFFLINE： 设备离线FAILED： 下发失败TIMEOUT： 下发超时 */
+  Status?: string;
+  /** 错误码 */
+  ErrCode?: number;
+  /** 错误信息 */
+  ErrMsg?: string;
+}
+
 /** 设备签名 */
 declare interface DeviceSignatureInfo {
   /** 设备名 */
@@ -1236,6 +1248,10 @@ declare interface SeeComprehensionConfig {
   EnableFaceDetection?: boolean;
   /** 画面旋转角度枚举值：0： 不旋转90： 顺时针旋转90度-90： 逆时针旋转90度180： 旋转180度默认值：0 */
   InputRotateDegree?: number;
+  /** 开启扩展字段输出枚举值：true： 开启false： 关闭默认值：false */
+  EnableExtendedOutput?: boolean;
+  /** 自定义扩展输出的提示词（目前仅支持覆盖 custom） */
+  ExtendedOutputPrompts?: SeeExtendedOutputPrompt[];
 }
 
 /** TWeSee 视觉理解结果 */
@@ -1252,6 +1268,8 @@ declare interface SeeComprehensionResult {
   ErrorMsg?: string;
   /** 生成的关键词列表当配置 EnableKeywords 为 true 时返回 */
   Keywords?: string[];
+  /** 模型输出的扩展字段文本 */
+  ExtendedOutput?: SeeExtendedOutput[];
 }
 
 /** 待开通的 TWeSee 预付费订阅信息 */
@@ -1310,12 +1328,30 @@ declare interface SeeDetectContinuousResult {
   IsContinuousInRange?: boolean;
 }
 
-/** TWeSee 处理云存事件 EventId 的过滤规则配置 */
+/** TWeSee 处理云存事件的触发条件配置 */
 declare interface SeeEventIdFilterConfig {
   /** 包含的云存事件 ID 集合 */
   IncludeOnly?: string[];
   /** 排除的云存事件 ID 集合 */
   Exclude?: string[];
+  /** 触发分析的时机枚举值：end： 在云存事件结束时触发视频理解start： 在云存事件开始时触发视频理解image_and_video： 上传云存事件缩略图后触发图片理解，并且在云存事件结束时触发视频理解默认值：end */
+  TriggerAt?: string;
+}
+
+/** TWeSee 扩展输出字段 */
+declare interface SeeExtendedOutput {
+  /** 提示词标识符枚举值：overview： 内容概述scene： 场景关键词events： 事件关键词objects： 物品关键词 */
+  Key?: string;
+  /** 模型输出的扩展内容文本 */
+  Output?: string;
+}
+
+/** TWeSee 扩展输出提示词 */
+declare interface SeeExtendedOutputPrompt {
+  /** 提示词标识符枚举值：custom： 自定义 */
+  Key: string;
+  /** 提示词内容 */
+  Prompt: string;
 }
 
 /** TWeSee 人脸元数据 */
@@ -2402,6 +2438,32 @@ declare interface BatchInvokeTWeSeeRecognitionTaskResponse {
   RequestId?: string;
 }
 
+declare interface BatchPublishMessageRequest {
+  /** 产品名称 */
+  ProductId: string;
+  /** 设备名称 */
+  DeviceNames: string[];
+  /** 主题 */
+  Topic: string;
+  /** 消息体 */
+  Payload: string;
+  /** 服务质量 */
+  Qos?: number;
+  /** 消息体编码 */
+  PayloadEncoding?: string;
+}
+
+declare interface BatchPublishMessageResponse {
+  /** 批量推送总数 */
+  Total?: number;
+  /** 成功数量 */
+  SuccessCount?: number;
+  /** 失败明细 */
+  Failures?: DeviceResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchRenewTWeSeeSubscriptionRequest {
   /** 待续费的订阅列表 */
   Entries: SeeRenewSubscriptionEntry[];
@@ -2449,6 +2511,10 @@ declare interface BatchUpdateFirmwareRequest {
   TaskUserDefine?: string;
   /** 每分钟下发设备量 */
   RateLimit?: number;
+  /** 任务截止时间，Unix 时间戳（单位：秒）。传入 0 或不传表示不设截止，任务按原重试/超时策略执行完毕。单位：秒 */
+  EndTime?: number;
+  /** 任务开始调度时间，Unix 时间戳（单位：秒）。传入 0 或不传时任务立即创建执行，与 DelayTime 同时传入时，本参数优先生效。单位：秒 */
+  StartTime?: number;
 }
 
 declare interface BatchUpdateFirmwareResponse {
@@ -3965,6 +4031,10 @@ declare interface DescribeCloudStorageEventsByTWeSeePersonRequest {
   Limit: number;
   /** 分页拉取偏移 */
   Offset?: number;
+  /** 起始时间（Unix 时间戳）单位：秒 */
+  StartTime?: number;
+  /** 结束时间（Unix 时间戳）单位：秒 */
+  EndTime?: number;
   /** 通道 ID，非 NVR 设备不填，NVR 设备必填 */
   ChannelId?: number;
 }
@@ -3974,6 +4044,8 @@ declare interface DescribeCloudStorageEventsByTWeSeePersonResponse {
   Events?: CloudStorageEventWithAITasks[];
   /** 人员关联的云存事件总数 */
   Total?: number;
+  /** 视频播放URL */
+  VideoURL?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4564,6 +4636,10 @@ declare interface DescribeFirmwareTaskResponse {
   TaskUserDefine?: string;
   /** 每分钟发送设备量 */
   RateLimit?: number;
+  /** 任务截止时间，Unix 时间戳（单位：秒）。传入 0 或不传表示不设截止，任务按原重试/超时策略执行完毕。 单位：秒 */
+  EndTime?: number;
+  /** 任务开始调度时间，Unix 时间戳（单位：秒）。传入 0 或不传时任务立即创建执行，与 DelayTime 同时传入时，本参数优先生效。 单位：秒 */
+  StartTime?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7501,6 +7577,8 @@ declare interface Iotexplorer {
   BatchDescribeTWeSeeOrders(data: BatchDescribeTWeSeeOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDescribeTWeSeeOrdersResponse>;
   /** 批量同步执行 TWeSee 语义理解任务 {@link BatchInvokeTWeSeeRecognitionTaskRequest} {@link BatchInvokeTWeSeeRecognitionTaskResponse} */
   BatchInvokeTWeSeeRecognitionTask(data: BatchInvokeTWeSeeRecognitionTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchInvokeTWeSeeRecognitionTaskResponse>;
+  /** 批量设备透传指令控制 {@link BatchPublishMessageRequest} {@link BatchPublishMessageResponse} */
+  BatchPublishMessage(data: BatchPublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<BatchPublishMessageResponse>;
   /** 批量续费 TWeSee 预付费订阅 {@link BatchRenewTWeSeeSubscriptionRequest} {@link BatchRenewTWeSeeSubscriptionResponse} */
   BatchRenewTWeSeeSubscription(data: BatchRenewTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<BatchRenewTWeSeeSubscriptionResponse>;
   /** 批量升级固件 {@link BatchUpdateFirmwareRequest} {@link BatchUpdateFirmwareResponse} */

@@ -160,6 +160,18 @@ declare interface ModelList {
   Model?: string;
   /** 模型厂商 */
   Vendor?: string;
+  /** 展示名称 */
+  DisplayName?: string;
+  /** 模型描述 */
+  Description?: string;
+  /** 上下文窗口大小，单位 token */
+  ContextWindow?: number;
+  /** 模型图标 URL */
+  IconUrl?: string;
+  /** 计费倍率 */
+  CreditMultiplier?: number;
+  /** 思考配置 */
+  Thinking?: Thinking;
 }
 
 /** 用户对象的权限 */
@@ -206,6 +218,18 @@ declare interface RecordList {
   UpdateTime?: string;
   /** 模型信息 */
   Model?: string;
+}
+
+/** 模型思考强度 */
+declare interface Thinking {
+  /** 模式枚举值：toggle： 可开关always_on： 固定开启always_off： 固定关闭unconfigured： 未配置 */
+  Mode?: string;
+  /** 默认是否开启思考 */
+  DefaultEnabled?: boolean;
+  /** 思考强度可选项，如 ["high","max"] */
+  EffortOptions?: string[];
+  /** 默认思考强度 */
+  DefaultEffort?: string;
 }
 
 /** 上传任务 */

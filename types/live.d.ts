@@ -3003,13 +3003,13 @@ declare interface CreateLiveSmartEraseTemplateRequest {
   Type: string;
   /** 描述信息。长度上限：1024字节。仅支持中文、英文、数字、_、-。 */
   Description?: string;
-  /** 关联的审核模板id, 表audio_conf 。 */
+  /** 关联的审核模板id, 表audio_conf 。取值为DescribeAuditTemplates接口返回的AuditTemplates里面的TemplateId字段 */
   AuditConfId?: number;
-  /** 天御图片审核策略BizType Image 。 */
+  /** 天御图片审核策略BizType Image 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"Image"的BizType值 */
   ImageBizType?: string;
-  /** 天御音频审核策略BizType ShortAudio 。 */
+  /** 天御音频审核策略BizType ShortAudio 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"ShortAudio"的BizType值 */
   AudioBizType?: string;
-  /** 天御音频文本审核策略BizType ShortAudio 。 */
+  /** 天御音频文本审核策略BizType ShortAudio 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"Text"的BizType值 */
   AudioTextBizType?: string;
   /** 展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。 */
   DisplayMode?: number;

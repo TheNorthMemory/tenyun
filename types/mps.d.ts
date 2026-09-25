@@ -6364,9 +6364,9 @@ declare interface QualityControlTemplate {
   Type?: string | null;
   /** 媒体质检配置参数。 */
   QualityControlItemSet?: QualityControlItemConfig[] | null;
-  /** 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 模板创建时间，使用 ISO 日期格式。 */
   CreateTime?: string | null;
-  /** 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710)。 */
+  /** 模板最后修改时间，使用 ISO 日期格式。 */
   UpdateTime?: string | null;
   /** 媒体质检的抽检策略。 */
   Strategy?: QualityControlStrategy;

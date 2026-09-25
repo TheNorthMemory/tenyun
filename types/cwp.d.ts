@@ -2674,6 +2674,22 @@ declare interface HostLoginList {
   Port?: number;
   /** ip分析 */
   IPAnalyse?: IPAnalyse;
+  /** 命中策略ID枚举值：risk_login_1： 威胁情报risk_login_2： 密码破解成功后登录risk_login_3： 弱口令账户登录risk_login_4： 非法账户登录risk_login_5： 登录后存在入侵行为risk_login_101： 海外IP登录risk_login_102： 非常用登录地登录risk_login_103： 非工作时间登录 */
+  HitRule?: string;
+  /** 命中策略名 */
+  HitRuleName?: string;
+  /** 告警数量 */
+  AlertCount?: number;
+  /** 首次发现时间参数格式：YYYY-MM-DD HH:MM:SS */
+  FirstDiscoverTime?: string;
+  /** 最近发现时间参数格式：YYYY-MM-DD HH:MM:SS */
+  LastDiscoverTime?: string;
+  /** 危害描述 */
+  HarmDescribe?: string;
+  /** 修复建议 */
+  SuggestScheme?: string;
+  /** 最近登录历史 */
+  RecentLoginList?: RecentLoginItem[];
 }
 
 /** 新增登录审计白名单实体 */
@@ -4878,6 +4894,16 @@ declare interface RaspRuleVul {
   CveID?: string;
   /** 漏洞防御类型，从漏洞表富化， 1:支持组件漏洞防御，组件漏洞没有正则加白。2:支持正则防御 */
   SupportDefense?: number;
+}
+
+/** 异常登陆历史记录 */
+declare interface RecentLoginItem {
+  /** 登录时间参数格式：YYYY-MM-DD HH:MM:SS */
+  LoginTime?: string;
+  /** 登录方式枚举值：0： 无效用户1： 密码错误2： 密码登录3： 密钥登录4： PAM 认证失败（sshd）5： PAM 认证失败（tty）6： 键盘交互登录7： 键盘交互认证失败8： PAM 认证失败 */
+  LoginType?: number;
+  /** 登录方式描述 */
+  LoginTypeDesc?: string;
 }
 
 /** 客户端异常信息结构 */

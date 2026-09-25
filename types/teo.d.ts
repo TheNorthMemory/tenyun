@@ -2076,7 +2076,7 @@ declare interface HTTPResponseParameters {
 
 /** 七层回源超时配置。 */
 declare interface HTTPUpstreamTimeoutParameters {
-  /** HTTP 应答超时时间，单位为秒，取值：5～600。 */
+  /** HTTP 应答超时时间。取值范围：[5, 600]单位：秒默认值：15 */
   ResponseTimeout?: number;
 }
 
@@ -2130,6 +2130,24 @@ declare interface HealthChecker {
   ProbeCluster?: string;
 }
 
+/** https 服务端证书配置 */
+declare interface HostCertInfo {
+  /** 服务器证书 ID。 */
+  CertId: string | null;
+  /** 证书备注名。 */
+  Alias?: string | null;
+  /** 证书类型，取值有：default：默认证书；upload：用户上传；managed：腾讯云托管。 */
+  Type?: string | null;
+  /** 证书过期时间。 */
+  ExpireTime?: string | null;
+  /** 证书部署时间。 */
+  DeployTime?: string | null;
+  /** 签名算法。 */
+  SignAlgo?: string | null;
+  /** 证书状态，取值有：deployed：已部署；processing：部署中；applying：申请中；failed：申请失败；issued：绑定失败。 */
+  Status?: string | null;
+}
+
 /** Host Header 重写配置参数。 */
 declare interface HostHeaderParameters {
   /** 执行动作，取值有：followOrigin：跟随源站域名；custom：自定义。 */
@@ -2156,6 +2174,18 @@ declare interface HostPolicy {
   Policy?: SecurityPolicy;
   /** 可选。当 PolicyType 为 Template 时，该字段用于指定当前域名所使用的策略模板的 Id。 */
   TemplateId?: string;
+}
+
+/** 域名证书配置 */
+declare interface HostsCertificate {
+  /** 域名。 */
+  Host?: string | null;
+  /** 配置证书的模式，取值有：disable：不配置证书；eofreecert：配置 EdgeOne 免费证书； sslcert：配置 SSL 证书； */
+  Mode?: string;
+  /** 服务端证书配置。 */
+  HostCertInfo?: HostCertInfo[] | null;
+  /** 申请类型，取值有：apply：托管EdgeOne；none：不托管EdgeOne。不填，默认取值为none。 */
+  ApplyType?: string | null;
 }
 
 /** Hsts配置 */
@@ -2372,6 +2402,26 @@ declare interface InferenceContainerConfigForModify {
   StartupCommand?: string;
   /** 容器运行时的环境变量。最多支持 10 个变量。 */
   EnvironmentVariables?: InferenceEnvironmentVariable[];
+}
+
+/** 推理服务的域名信息。 */
+declare interface InferenceDomain {
+  /** 域名名称。 */
+  Domain?: string;
+  /** 域名状态。枚举值：Online： 已生效；Process： 部署中；Offline： 已停用；Init： 未生效，待激活站点。 */
+  Status?: string;
+  /** 推理任务请求鉴权开关。枚举值：Off： 关闭鉴权；On： 开启鉴权。默认值：On。 */
+  AuthSwitch?: string;
+  /** CNAME 地址。校验域名 CNAME 配置状态，请参考 CheckCnameStatus 接口。 */
+  Cname?: string;
+  /** 域名需进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。验证归属权，请参考 VerifyOwnership 接口。 */
+  OwnershipVerification?: OwnershipVerification;
+  /** 域名证书信息。申请免费证书，请参考 ApplyFreeCertificate 接口；检查免费证书申请结果，请参考 CheckFreeCertificateVerification 接口；配置域名证书，请参考 ModifyHostsCertificate 接口。 */
+  Certificate?: HostsCertificate;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 修改时间。 */
+  UpdateTime?: string;
 }
 
 /** 推理容器运行时的环境变量。 */
@@ -5102,12 +5152,22 @@ declare interface ZoneConfigParameters {
   ZoneConfig?: ZoneConfig | null;
 }
 
+/** 站点级自定义变量配置，包括变量定义和变量运算。 */
+declare interface ZoneCustomVariables {
+  /** 站点级自定义变量列表。CustomVariable.Name 需要使用 user.zone. 作为前缀。变量按照数组顺序依次初始化，InitialValue 仅支持引用位于当前变量之前的变量，不支持引用当前变量自身或位于当前变量之后的变量。 */
+  CustomVariables: CustomVariable[];
+  /** 站点级自定义变量运算规则。运算中支持引用已定义的站点级自定义变量。此列表当前只支持填写一项规则，多填无效。 */
+  CustomVariableOperations: CustomVariableOperation[];
+}
+
 /** 站点完整配置结构。 */
 declare interface ZoneFullConfig {
   /** 语法版本，当前默认为 1.0，输入其他值将会报错。 */
   FormatVersion: string;
   /** 站点级配置，包含「站点加速」中所有配置项，且所有项均为必选，否则配置无效。 */
   ZoneConfig?: ZoneConfig;
+  /** 站点级自定义变量配置，包括变量定义和变量运算。 */
+  ZoneCustomVariables?: ZoneCustomVariables;
   /** 规则级配置，包含「规则引擎」中所有规则，且数组可为空，表示不启用任何规则。 */
   Rules?: ConfigGroupRuleEngineItem[];
   /** Web 安全防护配置，对应控制台中「安全防护 - Web 防护」里支持的功能。 */
@@ -5584,6 +5644,22 @@ declare interface CreateInferenceAPITokenResponse {
   TokenId?: string;
   /** 推理 API Token 内容。 */
   Content?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInferenceDomainRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务ID。 */
+  ServiceId: string;
+  /** 推理服务域名。 */
+  Domain: string;
+  /** 推理任务请求鉴权开关。枚举值：Off： 关闭鉴权；On： 开启鉴权。默认值：On。 */
+  AuthSwitch?: string;
+}
+
+declare interface CreateInferenceDomainResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6485,7 +6561,7 @@ declare interface DescribeAccelerationDomainsRequest {
   Filters?: AdvancedFilter[];
   /** 可根据该字段对返回结果进行排序，取值有：created_on：加速域名创建时间；domain-name：加速域名。不填写时，默认对返回结果按照 domain-name 排序。 */
   Order?: string;
-  /** 排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ascill 码的大小排序。取值有：asc：升序排列；desc：降序排列。不填写使用默认值 asc。 */
+  /** 排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ASCII 码的大小排序。取值有：asc：升序排列；desc：降序排列。不填写使用默认值 asc。 */
   Direction?: string;
   /** 匹配方式，取值有：all：返回匹配所有查询条件的加速域名；any：返回匹配任意一个查询条件的加速域名。不填写时默认值为 all。 */
   Match?: string;
@@ -7096,6 +7172,30 @@ declare interface DescribeInferenceAPITokensResponse {
   TotalCount?: number;
   /** Token 列表。 */
   Tokens?: InferenceAPIToken[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInferenceDomainsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。 */
+  ServiceId: string;
+  /** 排序字段。枚举值：CreateTime： 域名创建时间；UpdateTime： 域名修改时间。默认值：CreateTime。 */
+  SortBy?: string;
+  /** 排序方式。枚举值：Asc： 升序方式；Desc： 降序方式。默认值：Desc。 */
+  SortOrder?: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20。最大值：200。 */
+  Limit?: number;
+}
+
+declare interface DescribeInferenceDomainsResponse {
+  /** 推理服务域名总数。 */
+  TotalCount?: number;
+  /** 推理服务域名列表。 */
+  Domains?: InferenceDomain[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9294,6 +9394,22 @@ declare interface ModifyZoneWorkModeResponse {
   RequestId?: string;
 }
 
+declare interface OperateInferenceDomainRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 推理服务 ID。 */
+  ServiceId: string;
+  /** 推理服务域名。 */
+  Domain: string;
+  /** 操作类型。枚举值：Resume： 启用域名；Stop： 停用域名；Delete： 删除域名。 */
+  Operation: string;
+}
+
+declare interface OperateInferenceDomainResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OperateInferenceServiceRequest {
   /** 站点ID。 */
   ZoneId: string;
@@ -9651,6 +9767,8 @@ declare interface Teo {
   CreateFunctionRule(data: CreateFunctionRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFunctionRuleResponse>;
   /** 创建推理 API Token {@link CreateInferenceAPITokenRequest} {@link CreateInferenceAPITokenResponse} */
   CreateInferenceAPIToken(data: CreateInferenceAPITokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceAPITokenResponse>;
+  /** 创建推理域名 {@link CreateInferenceDomainRequest} {@link CreateInferenceDomainResponse} */
+  CreateInferenceDomain(data: CreateInferenceDomainRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceDomainResponse>;
   /** 创建推理服务 {@link CreateInferenceServiceRequest} {@link CreateInferenceServiceResponse} */
   CreateInferenceService(data: CreateInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceServiceResponse>;
   /** 创建即时转码模板 {@link CreateJustInTimeTranscodeTemplateRequest} {@link CreateJustInTimeTranscodeTemplateResponse} */
@@ -9825,6 +9943,8 @@ declare interface Teo {
   DescribeIdentifications(data: DescribeIdentificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIdentificationsResponse>;
   /** 查询推理 API Token {@link DescribeInferenceAPITokensRequest} {@link DescribeInferenceAPITokensResponse} */
   DescribeInferenceAPITokens(data: DescribeInferenceAPITokensRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceAPITokensResponse>;
+  /** 查询推理服务域名列表 {@link DescribeInferenceDomainsRequest} {@link DescribeInferenceDomainsResponse} */
+  DescribeInferenceDomains(data: DescribeInferenceDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceDomainsResponse>;
   /** 查询推理硬件规格列表 {@link DescribeInferenceHardwareSpecificationsRequest} {@link DescribeInferenceHardwareSpecificationsResponse} */
   DescribeInferenceHardwareSpecifications(data: DescribeInferenceHardwareSpecificationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInferenceHardwareSpecificationsResponse>;
   /** 查询推理服务部署日志 {@link DescribeInferenceServiceDeploymentLogsRequest} {@link DescribeInferenceServiceDeploymentLogsResponse} */
@@ -10065,6 +10185,8 @@ declare interface Teo {
   ModifyZoneStatus(data: ModifyZoneStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneStatusResponse>;
   /** 修改站点工作模式 {@link ModifyZoneWorkModeRequest} {@link ModifyZoneWorkModeResponse} */
   ModifyZoneWorkMode(data: ModifyZoneWorkModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyZoneWorkModeResponse>;
+  /** 操作推理服务域名 {@link OperateInferenceDomainRequest} {@link OperateInferenceDomainResponse} */
+  OperateInferenceDomain(data: OperateInferenceDomainRequest, config?: AxiosRequestConfig): AxiosPromise<OperateInferenceDomainResponse>;
   /** 操作推理服务 {@link OperateInferenceServiceRequest} {@link OperateInferenceServiceResponse} */
   OperateInferenceService(data: OperateInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<OperateInferenceServiceResponse>;
   /** 刷新多通道安全加速网关密钥 {@link RefreshMultiPathGatewaySecretKeyRequest} {@link RefreshMultiPathGatewaySecretKeyResponse} */

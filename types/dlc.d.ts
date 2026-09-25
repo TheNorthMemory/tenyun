@@ -134,6 +134,22 @@ declare interface Asset {
   DatasourceId?: number;
 }
 
+/** tcc 审计信息 */
+declare interface Audit {
+  /** 创建者 */
+  Creator?: string;
+  /** 最后修改者 */
+  LastModifier?: string;
+  /** 创建时间戳 */
+  CreatedAt?: number;
+  /** 最后修改时间戳 */
+  LastModifiedAt?: number;
+  /** 最后修改时间（已废弃）参数格式：2024-11-01 11:01:01 */
+  LastModifiedTime?: string;
+  /** 创建时间（已废弃）参数格式：2024-11-01 11:01:01 */
+  CreatedTime?: string;
+}
+
 /** spark session batch SQL的消耗信息 */
 declare interface BatchSQLCostInfo {
   /** 任务id */
@@ -296,6 +312,14 @@ declare interface BenchmarkTaskInfo {
   SubAccountUin?: string;
 }
 
+/** tcc BucketPartitioning定义 */
+declare interface BucketPartitioning {
+  /** 分桶字段 */
+  FieldNames?: string[];
+  /** 分桶数 */
+  NumBuckets?: number;
+}
+
 /** chdfs产品vpc信息 */
 declare interface CHDFSProductVpcInfo {
   /** vpc id */
@@ -330,6 +354,64 @@ declare interface CSVSerde {
   Quote?: string;
   /** CSV序列化分隔符，默认为"\t"，最长8个字符, 如 Separator: "\t" */
   Separator?: string;
+}
+
+/** 数据目录配置 */
+declare interface CatalogConfig {
+  /** 数据目录唯一 ID */
+  Id?: string;
+  /** 数据目录名字 */
+  Name?: string;
+  /** 数据目录类型枚举值：LAKEHOUSE： LAKEHOUSE类型 */
+  Type?: string;
+  /** 数据目录描述信息 */
+  Comment?: string;
+  /** 状态枚举值：2： 连接成功 */
+  Status?: number;
+  /** 数据目录属性 */
+  Properties?: KVPair[];
+  /** 连接信息 */
+  Connection?: ConnectionConfig;
+  /** 操作人 uin */
+  Operator?: string;
+  /** 连接日志 */
+  Message?: string;
+  /** 审计信息 */
+  Audit?: Audit;
+  /** 创建时间（已废弃）参数格式：2024-01-01 12:00:00 */
+  CreateTime?: string;
+  /** 更新时间（已废弃）参数格式：2024-01-01 12:00:00 */
+  UpdateTime?: string;
+}
+
+/** tcc TableInfo定义 */
+declare interface CatalogTaleInfo {
+  /** 表名称 */
+  Name?: string;
+  /** 描述 */
+  Comment?: string;
+  /** 字段信息 */
+  Columns?: ColumnInfo[];
+  /** 属性值 */
+  Properties?: KVPair[];
+  /** 分区 */
+  Partitioning?: Partitioning[];
+  /** 索引 */
+  Indexes?: IndexInfo[];
+  /** 编辑者/审计信息 */
+  Audit?: Audit;
+  /** 数据目录名称 */
+  CatalogName?: string;
+  /** 数据库名称 */
+  SchemaName?: string;
+  /** 表格式 */
+  TableFormat?: string;
+  /** 表格式类型枚举值：v2： TcIceberg v2版本 */
+  FormatType?: string;
+  /** 表类型枚举值：Managed： 内部表 */
+  TableType?: string;
+  /** 场景类型枚举值：REALTIME： 实时类型 */
+  TableMode?: string;
 }
 
 /** 用于返回训练作业的checkpoint的配置信息 */
@@ -388,6 +470,14 @@ declare interface CloudTag {
   TagValue?: string;
   /** 标签类型：Custom（自定义）/ System（系统）/ All（全部），仅查询接口返回 */
   Category?: string | null;
+}
+
+/** 日志条目。 */
+declare interface ClsLogEntry {
+  /** Unix 毫秒时间戳。 */
+  Time?: number;
+  /** 日志 JSON 字符串。 */
+  LogJson?: string;
 }
 
 /** CLS 日志主题条目 */
@@ -488,6 +578,22 @@ declare interface Column {
   TypeText?: string;
 }
 
+/** tcc table列定义 */
+declare interface ColumnInfo {
+  /** 字段名 */
+  Name?: string;
+  /** 字段类型枚举值：integer： 数值类型 */
+  Type?: string;
+  /** 字段描述 */
+  Comment?: string;
+  /** 字段设置（已废弃） */
+  FieldSetting?: string;
+  /** 是否为主键（已废弃）枚举值：true： 是主键 */
+  IsPrimaryKey?: boolean;
+  /** 字段类型 sqlType 格式 */
+  TypeText?: string;
+}
+
 /** 任务公共指标 */
 declare interface CommonMetrics {
   /** 创建任务时长，单位：ms */
@@ -512,6 +618,24 @@ declare interface CommonMetrics {
   ProcessedBytes?: number | null;
   /** 扫描行数 */
   ProcessedRows?: number | null;
+}
+
+/** tcc链接信息 */
+declare interface ConnectionConfig {
+  /** mysql数据源连接信息 */
+  MysqlConnection?: MysqlConnection;
+  /** hive数据源连接信息 */
+  EmrHiveConnection?: HiveConnection;
+  /** doris数据源连接信息 */
+  TCHouseDConnection?: DorisConnection;
+  /** 数据卷连接信息 */
+  VolumeConnection?: VolumeConnection;
+  /** lakehouse连接信息 */
+  LakeHouseConnection?: LakeHouseConnection;
+  /** PostgreSQL数据源连接信息 */
+  PostgreSQLConnection?: PostgreSQLConnection;
+  /** dlc数据源连接信息 */
+  DlcConnection?: DlcConnection;
 }
 
 /** 任务 core 用量信息 */
@@ -1334,6 +1458,30 @@ declare interface DeploymentResourceInfo {
   Replicas?: number;
 }
 
+/** tcc DlcConnection定义 */
+declare interface DlcConnection {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+}
+
+/** tcc doris连接信息 */
+declare interface DorisConnection {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** JDBC连接地址 */
+  JDBCUrl?: string;
+  /** 账号 */
+  User?: string;
+  /** 密码 */
+  Password?: string;
+  /** 网络信息 */
+  NetWork?: NetWork;
+}
+
 /** 引擎资源弹性伸缩计划 */
 declare interface ElasticPlan {
   /** 最小集群数 */
@@ -1722,6 +1870,20 @@ declare interface HeadSpecDTO {
   BillingItem?: string;
 }
 
+/** tcc hive连接信息 */
+declare interface HiveConnection {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** 元数据url */
+  MetaStoreUrl?: string;
+  /** 网络信息 */
+  NetWork?: NetWork;
+  /** hive版本 */
+  HiveVersion?: string;
+}
+
 /** hive类型数据源的信息 */
 declare interface HiveInfo {
   /** hive metastore的地址 */
@@ -1816,6 +1978,16 @@ declare interface ImageDto {
   CreateTime?: number;
   /** 更新时间 */
   UpdateTime?: number;
+}
+
+/** tcc IndexInfo定义 */
+declare interface IndexInfo {
+  /** 索引名称 */
+  Name?: string;
+  /** 索引类型枚举值：primary_key： 主键 */
+  Type?: string;
+  /** 索引字段 */
+  FieldNames?: string[];
 }
 
 /** 推理引擎具体信息 */
@@ -1954,6 +2126,84 @@ declare interface IpPortPair {
   Ip?: string | null;
   /** 端口信息 */
   Port?: number | null;
+}
+
+/** 入站作业摘要（DescribeJobList.Items[] 元素）. */
+declare interface JobBriefInfo {
+  /** 作业唯一标识. */
+  JobId?: string;
+  /** 作业名称. */
+  JobName?: string;
+  /** 创建/提交者子账号 UIN。 */
+  CreatorSubUin?: string;
+  /** 作业状态. */
+  State?: string;
+  /** 引擎大类. */
+  MajorType?: string;
+  /** 引擎子类型. */
+  MinorType?: string;
+  /** 运行模式（WAREHOUSE / JOB）. */
+  RunMode?: string;
+  /** 计算仓库 ID，RunMode=WAREHOUSE 时非空. */
+  WarehouseId?: string;
+  /** 资源分区编码. */
+  PartitionCode?: string;
+  /** 资源分区展示名（解析不到时为空）. */
+  PartitionName?: string;
+  /** 队列名称. */
+  QueueName?: string;
+  /** 流作业 checkpoint 路径（MinorType=SPARK_STREAM 时非空）。同一流作业的多次运行必须复用同一路径，变更等于重置消费进度。 */
+  CheckpointLocation?: string;
+  /** 创建时间（Unix 毫秒时间戳）. */
+  CreateTime?: number;
+  /** 提交时间（Unix 毫秒时间戳）. */
+  SubmitTime?: number;
+  /** 完成时间（Unix 毫秒时间戳）. */
+  FinishTime?: number;
+  /** 运行时长（毫秒）. */
+  RunningTimeMs?: number;
+  /** 计算仓库名称（列表整页批量反查填充；warehouse 模式下非空）. */
+  WarehouseName?: string;
+}
+
+/** 作业定义列表项 POJO（精简版）. */
+declare interface JobDefinitionItemInfo {
+  /** 作业定义唯一标识符（ID）。 */
+  JobDefinitionId?: string;
+  /** 作业定义名称。 */
+  Name?: string;
+  /** 作业定义描述。 */
+  Description?: string;
+  /** 作业主类型。 */
+  MajorType?: string;
+  /** 作业子类型。 */
+  MinorType?: string;
+  /** 流作业 checkpoint 路径（MinorType=SPARK_STREAM 时非空）。同一流作业的多次运行必须复用同一路径，变更等于重置消费进度。 */
+  CheckpointLocation?: string;
+  /** 创建者（子账号 UIN）。 */
+  CreatorSubUin?: string;
+  /** 创建时间（Unix 毫秒时间戳）。 */
+  CreateTime?: number;
+  /** 更新时间（Unix 毫秒时间戳）。 */
+  UpdateTime?: number;
+  /** 分区编码。 */
+  PartitionCode?: string;
+  /** 分区展示名（解析不到时为空）。 */
+  PartitionName?: string;
+  /** 队列名称。 */
+  QueueName?: string;
+  /** 运行模式: JOB | WAREHOUSE. */
+  RunMode?: string;
+  /** 计算仓库 ID, RunMode=WAREHOUSE 时非空. */
+  WarehouseId?: string;
+  /** 请求时间窗口（InstanceTimeRange，默认 7 天）内的作业实例数。 */
+  InstanceCount?: number;
+  /** 运行时/镜像编码（可选值见 DescribeSparkRuntimes）。JOB 模式取定义自身配置，WAREHOUSE 模式取所属计算仓库运行时；解析不到时为空。 */
+  RuntimeCode?: string;
+  /** 运行时展示名（如 Spark 3.5.5），与 RuntimeCode 配套；解析不到时为空。 */
+  RuntimeName?: string;
+  /** 计算仓库名称（列表整页按去重后的仓库反查填充；warehouse 模式下非空，仓库已销毁时仍回填历史名称）。 */
+  WarehouseName?: string;
 }
 
 /** 日志详情 */
@@ -2180,6 +2430,24 @@ declare interface LakeFsInfo {
   Configuration?: KVPair[];
 }
 
+/** tcc lakehouse 连接信息 */
+declare interface LakeHouseConnection {
+  /** 元数据服务id */
+  MetastoreEndpointServiceId?: string;
+  /** endpoint服务id */
+  EndpointServiceId?: string;
+  /** 元数据url */
+  MetaStoreUrl?: string;
+  /** ranger信息 */
+  RangerConnection?: RangerConnection;
+  /** hive版本 */
+  HiveVersion?: string;
+  /** 存储位置 */
+  Location?: string;
+  /** 网络信息 */
+  NetWork?: NetWork;
+}
+
 /** 负载均衡条目（字段严格对齐 CLB DescribeLoadBalancers） */
 declare interface LbItem {
   /** 负载均衡实例 ID，例如 lb-xxxxxxxx */
@@ -2196,6 +2464,32 @@ declare interface LinkedServiceInfo {
   ServiceId?: string;
   /** 服务名称 */
   ServiceName?: string | null;
+}
+
+/** tcc ListPartition定义 */
+declare interface ListPartition {
+  /** 分区名 */
+  Name?: string;
+  /** 分区列表 */
+  Lists?: Literal[];
+  /** 属性 */
+  Properties?: KVPair[];
+}
+
+/** tcc ListPartitioning分区定义 */
+declare interface ListPartitioning {
+  /** 分区字段 */
+  FieldNames?: string[];
+  /** 分区列表信息 */
+  Assignments?: ListPartition[];
+}
+
+/** tcc Literal定义 */
+declare interface Literal {
+  /** 数值 */
+  Value?: string;
+  /** 类型枚举值：integer： 整数类型 */
+  DataType?: string;
 }
 
 /** Location信息结构 */
@@ -2476,6 +2770,22 @@ declare interface MountPointAssociates {
   AccessRuleId?: number;
 }
 
+/** tcc mysql连接信息 */
+declare interface MysqlConnection {
+  /** 实例id */
+  InstanceId?: string;
+  /** 实例名称 */
+  InstanceName?: string;
+  /** JDBC连接地址 */
+  JDBCUrl?: string;
+  /** 账号 */
+  User?: string;
+  /** 密码 */
+  Password?: string;
+  /** 网络信息 */
+  NetWork?: NetWork;
+}
+
 /** Mysql类型数据源信息 */
 declare interface MysqlInfo {
   /** 连接mysql的jdbc url */
@@ -2492,6 +2802,14 @@ declare interface MysqlInfo {
   InstanceId?: string | null;
   /** 数据库实例名称，和数据库侧保持一致 */
   InstanceName?: string | null;
+}
+
+/** tcc 通用命名标识 */
+declare interface NameIdentifier {
+  /** 名称 */
+  Name?: string;
+  /** 命名空间 */
+  Namespace?: string[];
 }
 
 /** 网络配置信息 */
@@ -2850,6 +3168,30 @@ declare interface PartitionInfo {
   Tags?: CloudTag[] | null;
 }
 
+/** tcc Partition分区定义 */
+declare interface Partitioning {
+  /** 转换策略 */
+  Strategy?: string;
+  /** 按年分区策略 */
+  YearPartitioning?: SingleFieldPartitioning;
+  /** 按月分区策略 */
+  MonthPartitioning?: SingleFieldPartitioning;
+  /** 按天分区策略 */
+  DayPartitioning?: SingleFieldPartitioning;
+  /** 按小时分区策略 */
+  HourPartitioning?: SingleFieldPartitioning;
+  /** 按字段分区策略 */
+  IdentityPartitioning?: SingleFieldPartitioning;
+  /** 列表分区策略 */
+  ListPartitioning?: ListPartitioning;
+  /** 范围分区策略 */
+  RangePartitioning?: RangePartitioning;
+  /** 分桶分区策略 */
+  BucketPartitioning?: BucketPartitioning;
+  /** 截断分区策略 */
+  TruncatePartitioning?: TruncatePartitioning;
+}
+
 /** Workspace 持久化工作目录配置 */
 declare interface PersistentWorkDir {
   /** 是否启用持久化工作目录；为空或 false 时沿用 emptyDir 行为 */
@@ -2956,6 +3298,26 @@ declare interface PostTrainingResources {
   Worker?: WorkerSpecDTO[];
 }
 
+/** tcc PostgreSQL连接信息 */
+declare interface PostgreSQLConnection {
+  /** IP地址 */
+  Ip?: string;
+  /** 端口 */
+  Port?: string;
+  /** 用户名 */
+  User?: string;
+  /** 密码 */
+  Password?: string;
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例名字 */
+  InstanceName?: string;
+  /** 网络信息 */
+  NetWork?: NetWork;
+  /** 数据库 */
+  Database?: string;
+}
+
 /** Presto监控指标 */
 declare interface PrestoMonitorMetrics {
   /** Alluxio本地缓存命中率 */
@@ -3036,6 +3398,38 @@ declare interface QueueResourceQuota {
   Used?: number;
   /** 可用量（总量 - 已使用量，截断至 0）。当 used 超出 total 时（例如配额尚未生效或数据短暂不一致），返回 0 而非负数 */
   Available?: number;
+}
+
+/** tcc RangePartition定义 */
+declare interface RangePartition {
+  /** 分区名 */
+  Name?: string;
+  /** 下界 */
+  Lower?: Literal;
+  /** 上界 */
+  Upper?: Literal;
+  /** 属性 */
+  Properties?: KVPair[];
+}
+
+/** tcc RangePartitioning定义 */
+declare interface RangePartitioning {
+  /** 字段名 */
+  FieldName?: string;
+  /** 分区信息 */
+  Assignments?: RangePartition[];
+}
+
+/** tcc ranger连接信息 */
+declare interface RangerConnection {
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 服务url */
+  ServiceUrl?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 密码 */
+  Password?: string;
 }
 
 /** Ray集群实体 */
@@ -3344,6 +3738,24 @@ declare interface ResourceUsage {
   Max?: number;
 }
 
+/** 结果集列定义（DescribeJobResult.Columns 的元素）. */
+declare interface ResultColumn {
+  /** 列名。 */
+  Name?: string;
+  /** 列数据类型（如 int / string）。 */
+  DataType?: string;
+  /** 列注释。 */
+  Comment?: string;
+  /** 是否可为 NULL。 */
+  Nullable?: boolean;
+}
+
+/** 结果集单行数据（DescribeJobResult.Rows 的元素）. */
+declare interface ResultRow {
+  /** 本行的单元格值列表，与 SchemaJson 列定义顺序一一对应；NULL 值以 null 表示. */
+  Values?: string[];
+}
+
 /** SQL查询任务 */
 declare interface SQLTask {
   /** base64加密后的SQL语句 */
@@ -3438,6 +3850,12 @@ declare interface SharedMountFileItem {
   Path?: string;
   /** Checkpoint 训练指标（仅 checkpoint 目录且 snapshot 存在时有值） */
   Metrics?: CheckpointMetrics;
+}
+
+/** tcc SingleFieldPartitioning定义 */
+declare interface SingleFieldPartitioning {
+  /** 分区字段 */
+  FieldName?: string;
 }
 
 /** 混合表中，change表的数据保存时间，单位为天 */
@@ -4650,6 +5068,14 @@ declare interface TrainingTuningParams {
   GpuMemoryUtilization?: number;
 }
 
+/** tcc TruncatePartitioning定义 */
+declare interface TruncatePartitioning {
+  /** 截取长度 */
+  Width?: number;
+  /** 字段名 */
+  FieldName?: string;
+}
+
 /** 通用的键值对数据结构 */
 declare interface TypeKVPair {
   /** key值 */
@@ -4826,6 +5252,12 @@ declare interface ViewResponseInfo {
   ModifiedTime?: string;
 }
 
+/** tcc volume 连接信息 */
+declare interface VolumeConnection {
+  /** 存储路径 */
+  Location?: string;
+}
+
 /** VPC子网信息 */
 declare interface VpcCidrBlock {
   /** 子网Id */
@@ -4844,6 +5276,48 @@ declare interface VpcInfo {
   RuleId?: number;
   /** 权限组Id */
   AccessGroupId?: string;
+}
+
+/** 计算仓库基础信息（对外 API 响应，DescribeWarehouses 列表结构）. */
+declare interface WarehouseInfo {
+  /** 仓库 id（格式 "dlc-wh-xxxxxxxx"）. */
+  WarehouseId?: string;
+  /** 仓库名称，租户内唯一。 */
+  Name?: string;
+  /** 创建者子账号 UIN。 */
+  CreatorSubUin?: string;
+  /** 仓库描述信息。 */
+  Description?: string;
+  /** fermion 合并后的单一状态。取值：STARTING / RUNNING / STOPPING / STOPPED / UPDATING / UNAVAILABLE / DESTROYING（销毁中，只读：不接受任何生命周期操作）。 */
+  State?: string;
+  /** 资源池编码. */
+  PartitionCode?: string;
+  /** 资源池展示名（解析不到时为空）. */
+  PartitionName?: string;
+  /** 资源组/队列名。 */
+  QueueName?: string;
+  /** 创建时间（毫秒时间戳）。 */
+  CreateTime?: number;
+  /** 最后更新时间（毫秒时间戳）。 */
+  UpdateTime?: number;
+  /** 活跃集群数（describe 与 list 均返回）。集群明细等完整快照仅 DescribeWarehouseDetail 的 Observability 返回。 */
+  ActiveClusters?: number;
+  /** 最小集群数（即最小实例数下限；describe 与 list 均返回）. */
+  MinClusters?: number;
+  /** 最大集群数（即最大实例数上限；describe 与 list 均返回）. */
+  MaxClusters?: number;
+  /** 运行时/镜像. */
+  RuntimeCode?: string;
+  /** 运行时展示名（如 Spark 3.5.5），与 RuntimeCode 配套；解析不到时为空. */
+  RuntimeName?: string;
+  /** Catalog 版本码. */
+  SysCatalogVersion?: string;
+  /** 环境变量. */
+  EnvVars?: KVPair[];
+  /** 静态运行参数（RuntimeConf）：spark.* KV 的 JSON 字符串（如 "{\"spark.sql.shuffle.partitions\":\"400\"}"），spark-submit 时生效。 */
+  RuntimeConf?: string;
+  /** 动态参数（DynamicProperties）：spark.* KV 的 JSON 字符串，运行期生效（会话级，openSession 弱注入，即改即生效）。 */
+  DynamicProperties?: string;
 }
 
 /** 工作组详细信息 */
@@ -6224,6 +6698,92 @@ declare interface CreateInternalTableRequest {
 declare interface CreateInternalTableResponse {
   /** 创建托管存储内表sql语句描述 */
   Execution?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateJobDefinitionRequest {
+  /** 作业定义名称。必填，trim 后非空。 */
+  Name?: string;
+  /** 作业定义描述。 */
+  Description?: string;
+  /** 引擎大类，非必传，缺省 SPARK；当前仅支持 SPARK。 */
+  MajorType?: string;
+  /** 作业子类型，SPARK_SQL / SPARK_BATCH / SPARK_STREAM，必填；决定 Entrypoint 字段的校验规则。 */
+  MinorType?: string;
+  /** 流作业 checkpoint 路径（如 cosn://bucket/path/checkpoint）。MinorType=SPARK_STREAM 时必填；同一作业的多次运行必须复用同一路径，变更等于重置消费进度。 */
+  CheckpointLocation?: string;
+  /** 资源分区代码，仅 RunMode=JOB 可传（QueueName 非空时必填）；RunMode=WAREHOUSE 时禁止传（被仓库反查值覆盖）。 */
+  PartitionCode?: string;
+  /** 队列名称，仅 RunMode=JOB 可传且须与 PartitionCode 成对；RunMode=WAREHOUSE 时禁止传。 */
+  QueueName?: string;
+  /** 运行时/镜像编码（可选值见 DescribeSparkRuntimes）。RunMode=JOB 新建时必填（无基座继承语义）；克隆场景可省略（继承源定义快照）；RunMode=WAREHOUSE 时忽略。 */
+  RuntimeCode?: string;
+  /** 内置 Catalog 版本码（取值为 DescribeSysCatalogList 返回的目录子类型）。RunMode=JOB 新建时条件必填：未传时若可用（enabled）SysCatalog 唯一则自动选中，多个/零个报错；克隆场景可省略（继承源定义快照）；RunMode=WAREHOUSE 时禁止传。 */
+  SysCatalogVersion?: string;
+  /** 自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），作为 SPARK_CUSTOM 配置通道落库，两种运行模式均生效。 */
+  CustomProperties?: string;
+  /** 环境变量（KEY=VALUE）列表。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。 */
+  EnvVars?: KVPair[];
+  /** 运行模式，必填。可选值：WAREHOUSE（提交到计算仓库执行）/ JOB（按 Spec 独享资源）。两种模式的参数集严格隔离，详见各字段说明。 */
+  RunMode?: string;
+  /** 计算仓库 ID。RunMode=WAREHOUSE 时必填（仓库需可启动）；RunMode=JOB 时禁止传。 */
+  WarehouseId?: string;
+}
+
+declare interface CreateJobDefinitionResponse {
+  /** 作业定义唯一标识符（ID）。 */
+  JobDefinitionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateJobFromDefinitionRequest {
+  /** 作业定义 ID（由 CreateJobDefinition 返回）。必填。 */
+  JobDefinitionId: string;
+}
+
+declare interface CreateJobFromDefinitionResponse {
+  /** 作业唯一标识符（ID）。 */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateJobRequest {
+  /** 作业名称，长度 ≤256；可省略，省略时服务端回退为 JobId。 */
+  JobName?: string;
+  /** 流作业 checkpoint 路径（如 cosn://bucket/path/checkpoint）。MinorType=SPARK_STREAM 时必填；同一作业的多次运行必须复用同一路径，变更等于重置消费进度。 */
+  CheckpointLocation?: string;
+  /** 引擎大类，非必传，缺省 SPARK；当前仅支持 SPARK。 */
+  MajorType?: string;
+  /** 作业子类型，决定入口形态：SPARK_SQL（SQL 作业，Entrypoint.Statement 必填）/ SPARK_BATCH（批处理作业，Entrypoint.EntryFile 必填）/ SPARK_STREAM（流作业，EntryFile 与 CheckpointLocation 必填）。 */
+  MinorType?: string;
+  /** 工作流实例关联 ID（长度 ≤64）：同一工作流/会话的多条 SQL 作业传相同 FlowId，可共享同一 Spark 会话、复用已就绪引擎。MinorType=SPARK_SQL 时必填；FlowId 非空时必须同时传 ExecutionId。WAREHOUSE 模式下 FlowId 即会话句柄（一个 FlowId 只对应一个会话）：会话过期或已销毁后须换新 FlowId，否则返回 FailedOperation.FlowIdNotExists。 */
+  FlowId?: string;
+  /** 工作流内部执行标识（长度 ≤64），同一 FlowId 下每次提交须唯一（如自增序号/UUID）。用于重复提交防重：同一账号下命中未删除的同 (FlowId, ExecutionId) 作业时返回 FailedOperation.FlowExecutionConflict。FlowId 非空时必填（SPARK_SQL 因 FlowId 必填而必填）。 */
+  ExecutionId?: string;
+  /** 运行模式，必填。WAREHOUSE / JOB. */
+  RunMode?: string;
+  /** 计算仓库 ID。RunMode=WAREHOUSE 时必填（仓库需处于 RUNNING，或 STOPPED 且 AutoStart 开启（提交后冷启动拉起））；RunMode=JOB 时必须为空。 */
+  WarehouseId?: string;
+  /** 运行时/镜像编码（可选值见 DescribeSparkRuntimes）。RunMode=JOB 时必填；RunMode=WAREHOUSE 时忽略。 */
+  RuntimeCode?: string;
+  /** 内置 Catalog 版本码（取值为 DescribeSysCatalogList 返回的目录子类型）。RunMode=JOB 时条件必填：未传时若可用（enabled）SysCatalog 唯一则自动选中，多个/零个报错；RunMode=WAREHOUSE 时禁止传。 */
+  SysCatalogVersion?: string;
+  /** 资源分区代码，仅 RunMode=JOB 可传（QueueName 非空时必填）；RunMode=WAREHOUSE 时禁止传。 */
+  PartitionCode?: string;
+  /** 队列名称，必须与 PartitionCode 成对使用（RunMode=JOB 下可选）；RunMode=WAREHOUSE 下被仓库反查值覆盖，无需传。 */
+  QueueName?: string;
+  /** 自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），作为 SPARK_CUSTOM 配置通道落库，两种运行模式均生效。 */
+  CustomProperties?: string;
+  /** 环境变量（KEY=VALUE）列表。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。 */
+  EnvVars?: KVPair[];
+}
+
+declare interface CreateJobResponse {
+  /** 作业唯一标识符（ID）。 */
+  JobId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7758,6 +8318,98 @@ declare interface DescribeBindablePrometheusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCatalogTableInfoRequest {
+  /** Catalog名称 */
+  CatalogName: string;
+  /** Schema名称 */
+  SchemaName: string;
+  /** Table名称 */
+  TableName: string;
+}
+
+declare interface DescribeCatalogTableInfoResponse {
+  /** Table详细信息 */
+  Table?: CatalogTaleInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCatalogTableNamesPageRequest {
+  /** catalog名称 */
+  CatalogName: string;
+  /** Schema名称 */
+  SchemaName: string;
+  /** 每页大小 */
+  Limit?: number;
+  /** 页数 */
+  Offset?: number;
+  /** 是否基于快照 */
+  SnapshotBased?: boolean;
+  /** 快照id */
+  SnapshotId?: string;
+  /** table匹配规则 */
+  TableNamePattern?: string;
+}
+
+declare interface DescribeCatalogTableNamesPageResponse {
+  /** table名字列表 */
+  TableNames?: NameIdentifier[];
+  /** table总数 */
+  TotalCount?: number;
+  /** 快照id */
+  SnapshotId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCatalogTableNamesRequest {
+  /** Catalog名称 */
+  CatalogName: string;
+  /** Schema名称 */
+  SchemaName: string;
+}
+
+declare interface DescribeCatalogTableNamesResponse {
+  /** Table名称列表 */
+  TableNames?: NameIdentifier[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCatalogsRequest {
+  /** 数据目录 ID */
+  CatalogId?: string;
+  /** 数据目录名称 */
+  Name?: string;
+  /** 操作人 uin */
+  Operator?: string;
+  /** 排序字段，支持 CreateTime / UpdateTime（默认 UpdateTime） */
+  Sort?: string;
+  /** true:升序（默认）/ false:降序 */
+  Asc?: string;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 状态：0 注册中 / 1 待测试 / 2 连接成功 / 3 连接失败 / 4 删除中 / 5 已删除枚举值：0： 注册中 */
+  Status?: number;
+  /** 数据目录类型枚举值：LAKEHOUSE： lakehouse类型 */
+  Type?: string;
+  /** 在这个时间之后创建（时间戳） */
+  CreatedAfter?: number;
+  /** 在这个时间之前创建（时间戳） */
+  CreatedBefore?: number;
+}
+
+declare interface DescribeCatalogsResponse {
+  /** Catalog详细信息列表 */
+  Catalogs?: CatalogConfig[];
+  /** Catalog总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeClsTopicsRequest {
   /** 日志主题名称（模糊匹配），可为空 */
   TopicName?: string;
@@ -8400,6 +9052,144 @@ declare interface DescribeForbiddenTableProResponse {
   RequestId?: string;
 }
 
+declare interface DescribeJobDefinitionDetailRequest {
+  /** 作业定义 ID。必填。 */
+  JobDefinitionId: string;
+}
+
+declare interface DescribeJobDefinitionDetailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobDefinitionsRequest {
+  /** 页码，从1开始，默认为1. */
+  Page?: number;
+  /** 每页返回数量，默认为10. */
+  PageSize?: number;
+  /** 高级过滤条件列表，元素 Name 为过滤字段名（PascalCase，可用字段与操作符约束见各接口 Filters 说明），Values 为过滤值列表；未列入白名单或非 PascalCase 的 Name 报 InvalidParameter。 */
+  Filters?: Filter[];
+  /** 排序字段列表，元素 Field 为排序字段名（PascalCase，与响应字段命名对齐，可用字段见各接口 SortFields 说明），Order 为排序方向（ASC/DESC，不传默认 DESC）；未列入白名单或非 PascalCase 的 Field 报 InvalidParameter。 */
+  SortFields?: SortField[];
+  /** 创建时间下限（Unix 毫秒时间戳）。 */
+  CreateTimeStart?: number;
+  /** 创建时间上限（Unix 毫秒时间戳）。 */
+  CreateTimeEnd?: number;
+  /** 作业实例计数时间窗口（毫秒时长）。不传时默认 7 天。 */
+  InstanceTimeRange?: number;
+}
+
+declare interface DescribeJobDefinitionsResponse {
+  /** 总记录数. */
+  Total?: number;
+  /** 作业定义列表项。 */
+  Items?: JobDefinitionItemInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobDetailRequest {
+  /** 作业唯一标识符（ID）。必填。 */
+  JobId: string;
+}
+
+declare interface DescribeJobDetailResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobListRequest {
+  /** 页码，从1开始，默认为1. */
+  Page?: number;
+  /** 每页返回数量，默认为10. */
+  PageSize?: number;
+  /** 高级过滤条件列表，元素 Name 为过滤字段名（PascalCase，可用字段与操作符约束见各接口 Filters 说明），Values 为过滤值列表；未列入白名单或非 PascalCase 的 Name 报 InvalidParameter。 */
+  Filters?: Filter[];
+  /** 排序字段列表，元素 Field 为排序字段名（PascalCase，与响应字段命名对齐，可用字段见各接口 SortFields 说明），Order 为排序方向（ASC/DESC，不传默认 DESC）；未列入白名单或非 PascalCase 的 Field 报 InvalidParameter。 */
+  SortFields?: SortField[];
+  /** 创建时间下限（Unix 毫秒时间戳）。 */
+  CreateTimeStart?: number;
+  /** 创建时间上限（Unix 毫秒时间戳）。 */
+  CreateTimeEnd?: number;
+}
+
+declare interface DescribeJobListResponse {
+  /** 总记录数. */
+  Total?: number;
+  /** 作业摘要列表。 */
+  Items?: JobBriefInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobLogRequest {
+  /** 作业 ID（必填）。 */
+  JobId: string;
+  /** 日志类型（必填）。可选值：SPARK_SQL_OPERATION / SPARK_BATCH_OPERATION / SPARK_LAUNCH / SPARK_DRIVER_STDOUT / SPARK_DRIVER_LOG4J / SPARK_EXECUTOR_STDOUT / SPARK_EXECUTOR_LOG4J。 */
+  LogType?: string;
+  /** Statement 序号（1-based，仅 LogType=SPARK_SQL_OPERATION 时可传），定位多语句作业中的具体语句。 */
+  StatementIndex?: number;
+  /** 分页游标（首页不传，后续页原样透传上一响应的 Cursor；不透明，无需解析）。无法续读时以 HasMore=false 终止分页。 */
+  Cursor?: string;
+  /** 返回上限（行数），范围 [1, 1000]。 */
+  Limit?: number;
+  /** 关键词过滤。 */
+  Keyword?: string;
+  /** Pod 名称过滤。 */
+  PodName?: string;
+  /** 日志级别过滤。取值：ERROR / WARN / INFO / DEBUG / TRACE，非法值拒绝。 */
+  LogLevel?: string;
+  /** 起始时间，Unix 毫秒。 */
+  From?: number;
+  /** 结束时间，Unix 毫秒。 */
+  To?: number;
+}
+
+declare interface DescribeJobLogResponse {
+  /** 日志行数据。 */
+  Lines?: string[];
+  /** 下一页游标（不透明令牌，原样透传回请求即可；无更多日志时不返回）。 */
+  Cursor?: string;
+  /** 是否还有更多日志。 */
+  HasMore?: boolean;
+  /** 日志条目列表。 */
+  Results?: ClsLogEntry[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeJobResultRequest {
+  /** 作业唯一标识符（ID）。必填。 */
+  JobId: string;
+  /** 页码，从1开始，默认为1. */
+  Page?: number;
+  /** 每页返回数量，默认为10. */
+  PageSize?: number;
+  /** Statement 序号（1-based），多语句作业时指定；缺省为 0，取整作业第一个结果集. */
+  StatementIndex?: number;
+}
+
+declare interface DescribeJobResultResponse {
+  /** 总记录数. */
+  Total?: number;
+  /** 作业 ID。 */
+  JobId?: string;
+  /** 结果状态（对客）：SUCCEEDED（结果集可用，含 0 行——DDL/DML 等无结果集语句亦归入此类，message 说明）/ UNAVAILABLE（终态无结果：statement 已失败或取消）/ ERROR（结果集拉取出错）/ NOT_READY（结果未就绪）/ NOT_SUPPORTED（作业形态不产出结果集）。 */
+  State?: string;
+  /** 状态描述（SUCCEEDED 0 行时为无结果集说明；ERROR 为错误信息；UNAVAILABLE 为 statement 失败/取消原因）。 */
+  Message?: string;
+  /** 列定义列表（按结果集列顺序；State=SUCCEEDED 才有）。 */
+  Columns?: ResultColumn[];
+  /** 结果集全量行数（未按在线展示上限封顶）。Total 为在线可见行数，二者不等说明仅部分行可内联查看，完整结果通过 Download 获取。 */
+  TotalRows?: number;
+  /** 行数据（State=SUCCEEDED 才有），每行为 {"Values": [单元格值...]} 数组。 */
+  Rows?: ResultRow[];
+  /** 本页内容是否因响应大小限制被截断（单元格/行超限，结果集仅 1 行时也可能触发）。行数超过在线展示上限不由本标记表达，以 TotalRows > Total 判断，完整结果通过 Download 获取. */
+  Truncated?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLakeFsDirSummaryRequest {
 }
 
@@ -8902,6 +9692,32 @@ declare interface DescribeSaleResourceInfoRequest {
 declare interface DescribeSaleResourceInfoResponse {
   /** 可售卖资源规格列表，包含规格、步长、单账户上限、以及库存情况 */
   SaleResourceInfoList?: ResourceSaleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSchemaNamesPageRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 是否快照分页 */
+  SnapshotBased?: boolean;
+  /** 快照 ID */
+  SnapshotId?: string;
+  /** SQL查询格式匹配 */
+  SchemaNamePattern?: string;
+}
+
+declare interface DescribeSchemaNamesPageResponse {
+  /** 数据库名称列表 */
+  SchemaNames?: NameIdentifier[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 快照 ID */
+  SnapshotId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9772,6 +10588,26 @@ declare interface DescribeViewsResponse {
   ViewList?: ViewResponseInfo[];
   /** 实例总数。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWarehousesRequest {
+  /** 页码，从1开始，默认为1. */
+  Page?: number;
+  /** 每页返回数量，默认为10. */
+  PageSize?: number;
+  /** 高级过滤条件列表，元素 Name 为过滤字段名（PascalCase，可用字段与操作符约束见各接口 Filters 说明），Values 为过滤值列表；未列入白名单或非 PascalCase 的 Name 报 InvalidParameter。 */
+  Filters?: Filter[];
+  /** 排序字段列表，元素 Field 为排序字段名（PascalCase，与响应字段命名对齐，可用字段见各接口 SortFields 说明），Order 为排序方向（ASC/DESC，不传默认 DESC）；未列入白名单或非 PascalCase 的 Field 报 InvalidParameter。 */
+  SortFields?: SortField[];
+}
+
+declare interface DescribeWarehousesResponse {
+  /** 总记录数. */
+  Total?: number;
+  /** 计算仓库列表。 */
+  WarehouseList?: WarehouseInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12075,6 +12911,42 @@ declare interface ModifyGovernEventRuleRequest {
 }
 
 declare interface ModifyGovernEventRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyJobDefinitionRequest {
+  /** 作业定义 ID。必填。 */
+  JobDefinitionId: string;
+  /** 作业定义名称。创建后不可修改：仅接受与当前名称相同的值（回显），传不同值报错；不传表示不修改。 */
+  Name?: string;
+  /** 修改后的作业定义描述。 */
+  Description?: string;
+  /** 引擎大类（当前仅支持 SPARK）。 */
+  MajorType?: string;
+  /** 作业子类型，SPARK_SQL / SPARK_BATCH / SPARK_STREAM；非必填。 */
+  MinorType?: string;
+  /** 流作业 checkpoint 路径（如 cosn://bucket/path/checkpoint），非必填，传了即覆盖。SPARK_STREAM 定义必须非空；变更等于重置消费进度。 */
+  CheckpointLocation?: string;
+  /** 资源分区代码，仅目标 RunMode=JOB 可传（QueueName 非空时必填）；目标 RunMode=WAREHOUSE 时禁止传。 */
+  PartitionCode?: string;
+  /** 队列名称，仅目标 RunMode=JOB 可传且须与 PartitionCode 成对；目标 RunMode=WAREHOUSE 时禁止传。 */
+  QueueName?: string;
+  /** 运行时/镜像编码，可选（null=沿用当前值）。仅对 JOB 模式定义生效；目标 RunMode=WAREHOUSE 时禁止传。 */
+  RuntimeCode?: string;
+  /** 内置 Catalog 版本码（取值为 DescribeSysCatalogList 返回的目录子类型），可选（null=沿用当前值）。 */
+  SysCatalogVersion?: string;
+  /** 自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），非必填，传了即整串覆盖。 */
+  CustomProperties?: string;
+  /** 环境变量（KEY=VALUE）列表，非必填，传了即整体覆盖。仅对 JOB 模式定义生效；目标 RunMode=WAREHOUSE 时禁止传。 */
+  EnvVars?: KVPair[];
+  /** 目标运行模式：WAREHOUSE / JOB；未传=保持不变。切换模式时两种模式的参数集严格隔离（切换 WAREHOUSE 须提供 WarehouseId 且禁传 JOB 模式专属字段，反之亦然）。 */
+  RunMode?: string;
+  /** 计算仓库 ID。仅目标 RunMode=WAREHOUSE 时可传（必填）；未传 RunMode 或目标为 JOB 时禁止传。 */
+  WarehouseId?: string;
+}
+
+declare interface ModifyJobDefinitionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14570,6 +15442,12 @@ declare interface Dlc {
   CreateInferenceService(data: CreateInferenceServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInferenceServiceResponse>;
   /** 创建托管存储内表 {@link CreateInternalTableRequest} {@link CreateInternalTableResponse} */
   CreateInternalTable(data: CreateInternalTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInternalTableResponse>;
+  /** AI DLC 创建作业 {@link CreateJobRequest} {@link CreateJobResponse} */
+  CreateJob(data?: CreateJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobResponse>;
+  /** AI DLC 创建作业定义 {@link CreateJobDefinitionRequest} {@link CreateJobDefinitionResponse} */
+  CreateJobDefinition(data?: CreateJobDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobDefinitionResponse>;
+  /** AI DLC 按作业定义创建作业 {@link CreateJobFromDefinitionRequest} {@link CreateJobFromDefinitionResponse} */
+  CreateJobFromDefinition(data: CreateJobFromDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobFromDefinitionResponse>;
   /** 创建作业配置 {@link CreateJobSpecRequest} {@link CreateJobSpecResponse} */
   CreateJobSpec(data: CreateJobSpecRequest, config?: AxiosRequestConfig): AxiosPromise<CreateJobSpecResponse>;
   /** 创建实验室 {@link CreateLabRequest} {@link CreateLabResponse} */
@@ -14698,6 +15576,14 @@ declare interface Dlc {
   DescribeAdvancedStoreLocation(data?: DescribeAdvancedStoreLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAdvancedStoreLocationResponse>;
   /** 查询 TKE 集群可绑定的 Prometheus 实例 {@link DescribeBindablePrometheusRequest} {@link DescribeBindablePrometheusResponse} */
   DescribeBindablePrometheus(data: DescribeBindablePrometheusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBindablePrometheusResponse>;
+  /** 获取Catalog Table 详情 {@link DescribeCatalogTableInfoRequest} {@link DescribeCatalogTableInfoResponse} */
+  DescribeCatalogTableInfo(data: DescribeCatalogTableInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCatalogTableInfoResponse>;
+  /** 获取 Schema 下所有 Table {@link DescribeCatalogTableNamesRequest} {@link DescribeCatalogTableNamesResponse} */
+  DescribeCatalogTableNames(data: DescribeCatalogTableNamesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCatalogTableNamesResponse>;
+  /** 分页查询表名 {@link DescribeCatalogTableNamesPageRequest} {@link DescribeCatalogTableNamesPageResponse} */
+  DescribeCatalogTableNamesPage(data: DescribeCatalogTableNamesPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCatalogTableNamesPageResponse>;
+  /** 查询数据目录列表 {@link DescribeCatalogsRequest} {@link DescribeCatalogsResponse} */
+  DescribeCatalogs(data?: DescribeCatalogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCatalogsResponse>;
   /** 查询 CLS 日志主题列表 {@link DescribeClsTopicsRequest} {@link DescribeClsTopicsResponse} */
   DescribeClsTopics(data?: DescribeClsTopicsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClsTopicsResponse>;
   /** 查询 TKE 集群事件日志开关 {@link DescribeClusterEventLogSwitchRequest} {@link DescribeClusterEventLogSwitchResponse} */
@@ -14754,6 +15640,18 @@ declare interface Dlc {
   DescribeFlowList(data: DescribeFlowListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFlowListResponse>;
   /** 查询被禁用的表属性列表（新） {@link DescribeForbiddenTableProRequest} {@link DescribeForbiddenTableProResponse} */
   DescribeForbiddenTablePro(data?: DescribeForbiddenTableProRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeForbiddenTableProResponse>;
+  /** AI DLC 查询作业定义详情 {@link DescribeJobDefinitionDetailRequest} {@link DescribeJobDefinitionDetailResponse} */
+  DescribeJobDefinitionDetail(data: DescribeJobDefinitionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobDefinitionDetailResponse>;
+  /** AI DLC 查询作业定义列表 {@link DescribeJobDefinitionsRequest} {@link DescribeJobDefinitionsResponse} */
+  DescribeJobDefinitions(data?: DescribeJobDefinitionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobDefinitionsResponse>;
+  /** AI DLC 查询作业详情 {@link DescribeJobDetailRequest} {@link DescribeJobDetailResponse} */
+  DescribeJobDetail(data: DescribeJobDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobDetailResponse>;
+  /** AI DLC 查询作业列表 {@link DescribeJobListRequest} {@link DescribeJobListResponse} */
+  DescribeJobList(data?: DescribeJobListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobListResponse>;
+  /** AI DLC 查询作业日志 {@link DescribeJobLogRequest} {@link DescribeJobLogResponse} */
+  DescribeJobLog(data: DescribeJobLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobLogResponse>;
+  /** AI DLC 获取作业结果集 {@link DescribeJobResultRequest} {@link DescribeJobResultResponse} */
+  DescribeJobResult(data: DescribeJobResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobResultResponse>;
   /** 查询托管存储指定目录的Summary {@link DescribeLakeFsDirSummaryRequest} {@link DescribeLakeFsDirSummaryResponse} */
   DescribeLakeFsDirSummary(data?: DescribeLakeFsDirSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLakeFsDirSummaryResponse>;
   /** 查询用户的托管存储信息 {@link DescribeLakeFsInfoRequest} {@link DescribeLakeFsInfoResponse} */
@@ -14814,6 +15712,8 @@ declare interface Dlc {
   DescribeSaleRegions(data?: DescribeSaleRegionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaleRegionsResponse>;
   /** 查询可售卖资源规格 {@link DescribeSaleResourceInfoRequest} {@link DescribeSaleResourceInfoResponse} */
   DescribeSaleResourceInfo(data?: DescribeSaleResourceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSaleResourceInfoResponse>;
+  /** 分页查询 Catalog 下 Schema 列表 {@link DescribeSchemaNamesPageRequest} {@link DescribeSchemaNamesPageResponse} */
+  DescribeSchemaNamesPage(data: DescribeSchemaNamesPageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSchemaNamesPageResponse>;
   /** 查询SQL脚本列表 {@link DescribeScriptsRequest} {@link DescribeScriptsResponse} */
   DescribeScripts(data?: DescribeScriptsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScriptsResponse>;
   /** 获取内置镜像信息 {@link DescribeSessionImageVersionRequest} {@link DescribeSessionImageVersionResponse} */
@@ -14898,6 +15798,8 @@ declare interface Dlc {
   DescribeUsers(data?: DescribeUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsersResponse>;
   /** 查询视图列表 {@link DescribeViewsRequest} {@link DescribeViewsResponse} */
   DescribeViews(data: DescribeViewsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeViewsResponse>;
+  /** AI DLC 查询计算仓库列表 {@link DescribeWarehousesRequest} {@link DescribeWarehousesResponse} */
+  DescribeWarehouses(data?: DescribeWarehousesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWarehousesResponse>;
   /** 获取工作组详细信息 {@link DescribeWorkGroupInfoRequest} {@link DescribeWorkGroupInfoResponse} */
   DescribeWorkGroupInfo(data?: DescribeWorkGroupInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkGroupInfoResponse>;
   /** 获取工作组列表 {@link DescribeWorkGroupsRequest} {@link DescribeWorkGroupsResponse} */
@@ -15056,6 +15958,8 @@ declare interface Dlc {
   ModifyDataEngineDescription(data: ModifyDataEngineDescriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataEngineDescriptionResponse>;
   /** 修改数据治理事件阈值 {@link ModifyGovernEventRuleRequest} {@link ModifyGovernEventRuleResponse} */
   ModifyGovernEventRule(data?: ModifyGovernEventRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGovernEventRuleResponse>;
+  /** AI DLC 修改作业定义 {@link ModifyJobDefinitionRequest} {@link ModifyJobDefinitionResponse} */
+  ModifyJobDefinition(data: ModifyJobDefinitionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyJobDefinitionResponse>;
   /** 修改实验室优先级 {@link ModifyLabPriorityRequest} {@link ModifyLabPriorityResponse} */
   ModifyLabPriority(data: ModifyLabPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabPriorityResponse>;
   /** 修改分区描述 {@link ModifyPartitionDescriptionRequest} {@link ModifyPartitionDescriptionResponse} */

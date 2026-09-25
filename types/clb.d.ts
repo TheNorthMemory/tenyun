@@ -594,6 +594,16 @@ declare interface CrossTargets {
   Region?: string;
 }
 
+/** DecisionsConfig配置。 */
+declare interface DecisionsConfig {
+  /** 模型内路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
+  RoutingStrategy?: string | null;
+  /** 路由参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs | null;
+  /** CMR实例级别模型组内请求重试次数取值范围：[0, 5]默认值：2 */
+  NumRetries?: number | null;
+}
+
 /** 模型路由待解除关联 Guardrail 防护配置 */
 declare interface DisassociateGuardrailConfig {
   /** Guardrail 防护配置 ID。可通过 DescribeModelRouterGuardrails 获取；DisassociateModelRouterGuardrails 使用该字段定位要解除关联的防护配置。 */
@@ -602,11 +612,11 @@ declare interface DisassociateGuardrailConfig {
 
 /** embedding配置。 */
 declare interface EmbeddingConfig {
-  /** 模型内路由策略 */
+  /** 模型内路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
   RoutingStrategy?: string | null;
   /** 路由参数 */
   RoutingStrategyArgs?: RoutingStrategyArgs | null;
-  /** 同一模型请求重试次数 */
+  /** CMR实例级别模型组内请求重试次数取值范围：[0, 5]默认值：2 */
   NumRetries?: number | null;
 }
 
@@ -1302,7 +1312,7 @@ declare interface ModelAssociation {
   ServiceProviders?: ServiceProvider[];
   /** 模型类型 */
   Type?: string;
-  /** 输出模态 */
+  /** 输出模态枚举值：chat： 文本embedding： 向量video： 视频rerank： 重排序 */
   Capability?: string;
 }
 
@@ -1382,7 +1392,7 @@ declare interface ModelKeyInfoItem {
   CMRPrivateNetworkTunnelName?: string | null;
   /** 健康检查配置 */
   HealthCheckConfigs?: ServiceProviderHealthCheckConfigItemOutput[];
-  /** 模型输出模态 */
+  /** 模型输出模态枚举值：chat： 文本embedding： 向量video： 视频rerank： 重排序 */
   Capability?: string | null;
   /** 请求后缀 */
   EndpointPath?: string | null;
@@ -1470,8 +1480,16 @@ declare interface ModelRouterDetail {
   EipAddressId?: string;
   /** 计费信息 */
   BillingConfig?: ModelRouterBillingConfigOutput;
-  /** Embedding配置 */
-  EmbeddingConfig?: EmbeddingConfig;
+  /** Embedding调度配置 */
+  EmbeddingConfig?: EmbeddingConfig | null;
+  /** CMR关联的负载均衡实例id */
+  LoadBalancerId?: string;
+  /** 视频模型设置 */
+  VideoConfig?: VideoConfig;
+  /** Rerank调度配置 */
+  RerankConfig?: RerankConfig | null;
+  /** 决策模型设置 */
+  DecisionsConfig?: DecisionsConfig;
 }
 
 /** 模型路由日志 */
@@ -1756,6 +1774,16 @@ declare interface RegeneratedKey {
   Key?: string;
   /** Key的ID */
   KeyId?: string;
+}
+
+/** Rerank调度配置。 */
+declare interface RerankConfig {
+  /** L2路由策略枚举值：SimpleShuffle： 简单随机路由LeastBusy： 最低繁忙路由LatencyBasedRouting： 最低延迟路由UsageBasedRouting： 用量均衡路由CostBasedRouting： 最低积分路由 */
+  RoutingStrategy?: string | null;
+  /** L2路由算法参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs | null;
+  /** CMR实例级别模型组内请求重试次数取值范围：[0, 5]默认值：2 */
+  NumRetries?: number | null;
 }
 
 /** 资源详细信息 */
@@ -2436,6 +2464,16 @@ declare interface UserGroupInfo {
   ModifiedTime?: string;
 }
 
+/** video配置。 */
+declare interface VideoConfig {
+  /** 模型内路由策略 */
+  RoutingStrategy?: string | null;
+  /** 路由参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs | null;
+  /** 同一模型请求重试次数 */
+  NumRetries?: number | null;
+}
+
 /** 可用区相关信息 */
 declare interface ZoneInfo {
   /** 可用区数值形式的唯一ID，如：100001 */
@@ -3013,7 +3051,7 @@ declare interface CreateModelRequest {
   CMRPrivateNetworkTunnelId?: string;
   /** 健康检查配置 */
   HealthCheckConfigs?: ServiceProviderHealthCheckConfigItemInput[];
-  /** 模型输出模态 */
+  /** 模型输出模态枚举值：chat： 文本embedding： 向量video： 视频rerank： 重排序 */
   Capability?: string;
   /** 请求后缀 */
   EndpointPath?: string;
@@ -3063,8 +3101,14 @@ declare interface CreateModelRouterRequest {
   EipAddressId?: string;
   /** 单位取值范围：[1, 2048]单位：Mbps */
   Bandwidth?: number;
-  /** Embedding 配置 */
+  /** Embedding 调度配置 */
   EmbeddingConfig?: EmbeddingConfig;
+  /** Video 配置 */
+  VideoConfig?: VideoConfig;
+  /** Rerank 调度配置 */
+  RerankConfig?: RerankConfig;
+  /** Decisions 调度配置 */
+  DecisionsConfig?: DecisionsConfig;
 }
 
 declare interface CreateModelRouterResourcePackageRequest {
@@ -3959,8 +4003,10 @@ declare interface DescribeModelAssociationsRequest {
   Limit?: number;
   /** 翻页偏移量默认值：0 */
   Offset?: number;
-  /** 模型输出模态 */
+  /** 模型输出模态枚举值：chat： 文本embedding： 向量video： 视频rerank： 重排序 */
   Capability?: string;
+  /** 模型输出模态枚举值：chat： 文本embedding： 向量rerank： 重排序video： 视频 */
+  Capabilities?: string[];
 }
 
 declare interface DescribeModelAssociationsResponse {
@@ -4945,10 +4991,16 @@ declare interface ModifyModelRouterAttributesRequest {
   RouterSetting?: RouterSettingWithFallBack;
   /** 带宽取值范围：[1, 2048]单位：Mbps */
   Bandwidth?: number;
-  /** 模型输出模态 */
+  /** 模型输出模态枚举值：chat： 文本embedding： 向量video： 视频rerank： 重排序 */
   Capability?: string;
-  /** embedding 模态配置 */
+  /** Embedding 调度配置传入该参数时，必须传Capability为embedding */
   EmbeddingConfig?: EmbeddingConfig;
+  /** Video 调度配置 */
+  VideoConfig?: VideoConfig;
+  /** Rerank 调度配置传入该参数时，必须传Capability为rerank */
+  RerankConfig?: RerankConfig;
+  /** Decisions 调度配置 */
+  DecisionsConfig?: DecisionsConfig;
 }
 
 declare interface ModifyModelRouterAttributesResponse {
@@ -5435,7 +5487,7 @@ declare interface TestServiceProviderConnectionRequest {
   HealthCheckProtocol?: string;
   /** CMR 私网管道ID */
   CMRPrivateNetworkTunnelId?: string;
-  /** 对应模型的能力枚举值：chat： 生文能力embedding： 向量能力 */
+  /** 对应模型的能力枚举值：chat： 生文能力embedding： 向量能力rerank： 重排序能力video： 生视频能力 */
   Capability?: string;
   /** 端点路径 */
   EndpointPath?: string;

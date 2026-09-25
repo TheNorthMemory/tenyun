@@ -3457,9 +3457,9 @@ declare interface SearchSubtaskResultByIdResponse {
 }
 
 declare interface SearchTaskResultRequest {
-  /** 搜索区间的开始时间 */
+  /** 搜索区间的开始时间，缺省时取结束时间前7天（含结束时间当日） */
   StartTime?: string;
-  /** 搜索区间的结束时间 */
+  /** 搜索区间的结束时间。未指定时，默认取当前时间 */
   EndTime?: string;
   /** 运维任务ID */
   OperationId?: string;

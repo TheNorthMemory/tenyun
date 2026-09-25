@@ -870,6 +870,14 @@ declare interface DescribeSkillListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserAccessTokenRequest {
+}
+
+declare interface DescribeUserAccessTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface MigrateAgentSessionRequest {
   /** 待迁移的会话 ID（必填） */
   SessionId: string;
@@ -1091,6 +1099,8 @@ declare interface Workbuddyenterprise {
   DescribeMessageEventList(data: DescribeMessageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageEventListResponse>;
   /** 查询技能列表 {@link DescribeSkillListRequest} {@link DescribeSkillListResponse} */
   DescribeSkillList(data: DescribeSkillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillListResponse>;
+  /** 查询用户级访问凭证 {@link DescribeUserAccessTokenRequest} {@link DescribeUserAccessTokenResponse} */
+  DescribeUserAccessToken(data?: DescribeUserAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAccessTokenResponse>;
   /** 迁移 Agent 会话 {@link MigrateAgentSessionRequest} {@link MigrateAgentSessionResponse} */
   MigrateAgentSession(data: MigrateAgentSessionRequest, config?: AxiosRequestConfig): AxiosPromise<MigrateAgentSessionResponse>;
   /** 修改 Agent {@link ModifyAgentRequest} {@link ModifyAgentResponse} */

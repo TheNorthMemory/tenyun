@@ -486,6 +486,8 @@ declare interface EnvVar {
   Name?: string | null;
   /** 环境变量value */
   Value?: string | null;
+  /** 是否对外不可见,true 表示该环境变量的 Value 为敏感值. */
+  IsPrivate?: boolean;
 }
 
 /** K8s的Event */

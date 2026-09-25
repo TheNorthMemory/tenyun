@@ -588,6 +588,8 @@ declare interface AddUserResponse {
   SecretKey?: string;
   /** 子用户 UID */
   Uid?: number;
+  /** 手机号验证地址。 */
+  PhoneNumVerifyLink?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -701,15 +703,17 @@ declare interface CreateMessageReceiverRequest {
   Name: string;
   /** 手机号国际区号，国内为86 */
   CountryCode: string;
+  /** 邮箱，例如：57*@qq.com */
+  Email: string;
   /** 手机号码, 例如：132****2492 */
   PhoneNumber: string;
-  /** 邮箱，例如：57*****@qq.com */
-  Email: string;
   /** 消息接收人的备注，选填 */
   Remark?: string;
 }
 
 declare interface CreateMessageReceiverResponse {
+  /** 手机号验证地址。 */
+  PhoneNumVerifyLink?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -1142,6 +1142,10 @@ declare interface SlowLogInfoItem {
   RowsSent?: number;
   /**  */
   InstanceId?: string;
+  /**  */
+  ClientAppName?: string;
+  /**  */
+  ClientHostName?: string;
 }
 
 /** 慢日志TopSql */
@@ -2913,13 +2917,13 @@ declare interface DescribeSecurityAuditLogExportTasksResponse {
 }
 
 declare interface DescribeSlowLogQueryTimeStatsRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
   /** 开始时间，如“2019-09-10 12:13:14”，截止时间与开始时间的间隔小于7天。 */
   StartTime: string;
   /** 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。 */
   EndTime: string;
-  /** "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。 */
+  /** "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"sqlserver" - 云数据库 SQL Server，默认为"mysql"。 */
   Product: string;
   /** Proxy节点ID。 */
   InstanceProxyId?: string;
@@ -2983,7 +2987,7 @@ declare interface DescribeSlowLogTopSqlsRequest {
   Offset?: number;
   /** 数据库名称数组。 */
   SchemaList?: SchemaItem[];
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "tdstore" - 云数据库TDSQL Boundless，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL， "tdstore" - 云数据库TDSQL Boundless，"sqlserver" - 云数据库 SQL Server，默认为"mysql"。 */
   Product?: string;
 }
 
@@ -2997,13 +3001,13 @@ declare interface DescribeSlowLogTopSqlsResponse {
 }
 
 declare interface DescribeSlowLogUserHostStatsRequest {
-  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;
   /** 查询范围的开始时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。 */
   StartTime: string;
   /** 查询范围的结束时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。 */
   EndTime: string;
-  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。 */
+  /** 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"sqlserver" - 云数据库 SQL Server，默认为"mysql"。 */
   Product?: string;
   /** SQL模板的MD5值 */
   Md5?: string;
@@ -3027,7 +3031,7 @@ declare interface DescribeSlowLogUserHostStatsResponse {
 }
 
 declare interface DescribeSlowLogsRequest {
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"tdstore" - 云数据库TDSQL Boundless，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，"tdstore" - 云数据库TDSQL Boundless，"sqlserver" - 云数据库 SQL Server， 默认为"mysql"。 */
   Product: string;
   /** 实例 ID。可通过 DescribeDiagDBInstances 接口获取。 */
   InstanceId: string;

@@ -1305,7 +1305,7 @@ declare interface CreateWorkflowResponse {
 }
 
 declare interface DeleteConsoleGroupsRequest {
-  /** 要删除的用户组 ID 列表 */
+  /** 要删除的用户组 ID 列表，单次最多100个 */
   GroupIds: string[];
 }
 
@@ -1439,11 +1439,11 @@ declare interface ListConsoleGroupUsersRequest {
   UserKeyword?: string;
   /** 通过 UIN 批量查询用户信息 */
   UserUins?: string[];
-  /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'DESC'}, {Name: 'UserName', Direction: 'ASC'}]，默认按创建时间降序 */
+  /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}, {Name: 'UserName', Direction: 'Asc'}]，默认按创建时间降序 */
   OrderBys?: OrderBy[];
   /** 页码，从1开始，默认1 */
   PageNumber?: number;
-  /** 每页大小，默认10，最小10，最大200 */
+  /** 每页大小，默认10，最小10，最大100 */
   PageSize?: number;
 }
 
@@ -1457,7 +1457,7 @@ declare interface ListConsoleGroupUsersResponse {
 declare interface ListConsoleGroupsRequest {
   /** 页码，从1开始，默认1 */
   PageNumber?: number;
-  /** 每页大小，默认10，最小10，最大200 */
+  /** 每页大小，默认10，最小10，最大100 */
   PageSize?: number;
   /** 通过用户组 ID 批量查询 */
   GroupIds?: string[];
@@ -1477,7 +1477,7 @@ declare interface ListConsoleGroupsResponse {
 declare interface ListConsoleRolesRequest {
   /** 页码，从1开始，默认1 */
   PageNumber?: number;
-  /** 每页大小，默认10，最小10，最大200 */
+  /** 每页大小，默认10，最小10，最大100 */
   PageSize?: number;
   /** 角色名称或描述模糊匹配 */
   RoleKeyword?: string;
@@ -1493,7 +1493,7 @@ declare interface ListConsoleRolesResponse {
 declare interface ListConsoleUsersRequest {
   /** 页码，从1开始，默认1 */
   PageNumber?: number;
-  /** 每页大小，默认10，最小10，最大200 */
+  /** 每页大小，默认10，最小10，最大100 */
   PageSize?: number;
   /** 用户名称与 UIN 模糊匹配 */
   UserKeyword?: string;
@@ -1683,7 +1683,7 @@ declare interface UpdateConsoleGroupRequest {
   GroupNickname?: string;
   /** 用户组描述 */
   Description?: string;
-  /** 成员 UIN 列表（OperType 为添加/删除成员时使用） */
+  /** 成员 UIN 列表（OperType 为添加/删除成员时使用），单次最多100个 */
   UserUins?: string[];
 }
 

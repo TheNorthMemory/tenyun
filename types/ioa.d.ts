@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 账户标识项(目录MenuId+登录账号UserId)，用于以(菜单目录、登录账号)代替账号Id标识账户 */
+declare interface AccountUserIdItem {
+  /** Comment: 账号所在目录ID(MenuId)，与accounts表menu_id一致，用于同一登录账号在不同目录下去重;Required:true */
+  MenuId?: number;
+  /** Comment: 登录账号(UserId)，对应DescribeLocalAccount -> UserId;Required:true */
+  UserId?: string;
+}
+
 /** 按版本聚合后的软件列表 */
 declare interface AggrCategorySoftDetailRow {
   /** ID */
@@ -78,6 +86,26 @@ declare interface AggrSoftDeviceRow {
   AssetType?: string;
 }
 
+/** 绑定账户虚拟组响应数据 */
+declare interface BindVirtualAccountData {
+  /** 绑定失败明细（含失败原因） */
+  FailItems?: BindVirtualAccountResultData[];
+  /** 绑定成功明细（含幂等场景：已存在绑定的账号也归入成功） */
+  SuccessItems?: BindVirtualAccountResultData[];
+}
+
+/** 绑定虚拟组结果明细项 */
+declare interface BindVirtualAccountResultData {
+  /** 账号Id（通过AccountIdList传入时回显） */
+  AccountId?: number;
+  /** 目录ID（通过AccountUserList传入时回显，否则为0） */
+  MenuId?: number;
+  /** 失败原因，仅失败项有值：ACCOUNT_NOT_FOUND / ACCOUNT_NOT_IN_GROUP / DB_ERROR */
+  Reason?: string;
+  /** 登录账号（通过AccountUserList传入时回显，否则为空） */
+  UserId?: string;
+}
+
 /** 自动划分规则数据 */
 declare interface ComplexRule {
   /** 简单规则表达式 */
@@ -140,6 +168,20 @@ declare interface DeleteResourceData {
   ResourceType: number | null;
   /** 资源或资源组Id(只支持32位) */
   ResourceId: number | null;
+}
+
+/** 多OU组信息 */
+declare interface DescribeAccountAccountGroupsData {
+  /** 组Id(只支持32位) */
+  AccountGroupId?: number | null;
+  /** 组名称 */
+  AccountGroupName?: string | null;
+  /** 主组标识(只支持32位) */
+  MasterFlag?: number | null;
+  /** 组路径 */
+  AccountGroupNamePaths?: string[] | null;
+  /** 组路径Id(只支持32位) */
+  AccountGroupPathIds?: number[] | null;
 }
 
 /** 账号分组信息 */
@@ -622,6 +664,20 @@ declare interface DescribeDeviceInfoRspData {
   ServiceList?: DeviceServiceInfo[] | null;
 }
 
+/** 终端安全信息 */
+declare interface DescribeDeviceSecurityInfoData {
+  /** 防火墙状态枚举值：0：未开启1：已开启 */
+  FirewallStatus?: number;
+  /** 实时防护状态枚举值：0：未开启1：部分开启2：已开启-1：未知 */
+  RealTimeProtectionStatus?: number;
+  /** 系统修复引擎版本 */
+  SysRepVersion?: string;
+  /** 病毒库版本 */
+  VirusVer?: string;
+  /** 漏洞库版本 */
+  VulVersion?: string;
+}
+
 /** 查询返回终端自定义分组的Data数据 */
 declare interface DescribeDeviceVirtualGroupsPageRsp {
   /** 分页公共对象 */
@@ -696,6 +752,14 @@ declare interface DescribeLocalAccountsPage {
   Items?: DescribeLocalAccountsData[];
 }
 
+/** 描述字段数据 */
+declare interface DescribeProfileFieldsRspData {
+  /** 详情item */
+  Item?: ProfileFieldItem[];
+  /** profile开关配置 */
+  ProfileTips?: ProfileTips;
+}
+
 /** 账号分组授权信息 */
 declare interface DescribeResourceGrantedAccountGroupsData {
   /** 授权信息 */
@@ -760,6 +824,48 @@ declare interface DescribeSoftwareInformationPageData {
   Items?: SoftwareInformationData[];
   /** 分页公共对象 */
   Page?: Paging;
+}
+
+/** 列表虚拟组的账户分页数据集合 */
+declare interface DescribeVirtualAccountsData {
+  /** Id(只支持32位) */
+  Id?: number | null;
+  /** 用户账号 */
+  UserId?: string | null;
+  /** 用户名 */
+  UserName?: string | null;
+  /** 账户分组Id(只支持32位) */
+  AccountGroupId?: number | null;
+  /** 账户组名称 */
+  GroupName?: string | null;
+  /** 关联服务器名称(只支持32位) */
+  AccountId?: number | null;
+  /** 账户源(只支持32位) */
+  Source?: number | null;
+  /** 状态(只支持32位) */
+  Status?: number | null;
+  /** 账户namepath */
+  NamePath?: string | null;
+  /** 账户扩展信息 */
+  ExtraInfo?: string | null;
+  /** 创建时间 */
+  Itime?: string | null;
+  /** 更新时间 */
+  Utime?: string | null;
+  /** 多OU组信息 */
+  AccountGroups?: DescribeAccountAccountGroupsData[] | null;
+  /** 绑定PC端数量 */
+  PcBindNum?: number | null;
+  /** 绑定移动端数量 */
+  MobileBindNum?: number | null;
+}
+
+/** 业务响应数据 */
+declare interface DescribeVirtualAccountsPageData {
+  /** 分页公共对象 */
+  Page?: Paging | null;
+  /** 列表虚拟组的账户分页数据集合 */
+  Items?: DescribeVirtualAccountsData[] | null;
 }
 
 /** 返回的具体Data数据 */
@@ -854,6 +960,8 @@ declare interface DeviceDetail {
   NGNNewStrategyVer?: string;
   /** 宿主机名称（需要宿主机也安装iOA才能显示） */
   HostName?: string;
+  /** 信息登记数据 */
+  Profiles?: DeviceProfile[];
   /** 主板序列号 */
   BaseBoardSn?: string;
   /** 绑定账户名称 */
@@ -872,6 +980,8 @@ declare interface DeviceDetail {
   ScreenRecordingPermission?: number;
   /** 是否开启磁盘访问权限，仅macOS， 0： 未开启、 1： 开启 */
   DiskAccessPermission?: number;
+  /** 安装状态（私有化：0: 已安装 1: 已卸载 ）（SaaS及一体化：0: 未知 1: 已安装 2: 已卸载） */
+  InstallationStatus?: number;
   /** 终端备注名 */
   RemarkName?: string;
   /** BiosUUID（启动盘标识符） */
@@ -976,6 +1086,26 @@ declare interface DeviceProcessInfo {
   ProcessId?: number | null;
   /** 启动用户 */
   User?: string | null;
+}
+
+/** 信息登记数据 */
+declare interface DeviceProfile {
+  /** 值 */
+  Value?: string;
+  /** 属性ID(只支持32位) */
+  FieldId?: number;
+  /** 设备唯一标识码 */
+  Mid?: string;
+  /** 名称 */
+  Title?: string;
+  /** 类型(只支持32位) */
+  Type?: number;
+  /** 可选数据 */
+  Options?: string;
+  /** 必填数据 */
+  IsMust?: string;
+  /** 必填数据 */
+  IsCustom?: string;
 }
 
 /** 分页的具体数据对象 */
@@ -1248,6 +1378,16 @@ declare interface ModifyVirtualDeviceGroupsReqItem {
   Operation?: number;
 }
 
+/** 多项选择数据 */
+declare interface OptionsItem {
+  /** 中文值 */
+  ValueCh?: string;
+  /** 英文值 */
+  ValueEn?: string;
+  /** 每一项的Key值 */
+  OptionKey?: number;
+}
+
 /** 页码 */
 declare interface Paging {
   /** 每页条数 */
@@ -1258,6 +1398,50 @@ declare interface Paging {
   PageCount?: number;
   /** 记录总数 */
   Total?: number;
+}
+
+/** 登记信息数据 */
+declare interface ProfileFieldItem {
+  /** 键值id */
+  Id?: number;
+  /** 排序key(只支持32位) */
+  Key?: number;
+  /** 名称 */
+  Title?: string;
+  /** 输入类型(只支持32位) */
+  Type?: number;
+  /** 是否必选(只支持32位) */
+  IsMust?: number;
+  /** 是否显示(只支持32位) */
+  IsShow?: number;
+  /** 是否自定义(只支持32位) */
+  IsCustom?: number;
+  /** 下一个选项key(只支持32位) */
+  NextOptionKey?: number;
+  /** 选项数据 */
+  Options?: string;
+  /** 是否覆盖(只支持32位) */
+  IsReplace?: number;
+  /** 是否可以修改分组 */
+  GroupEditable?: boolean;
+  /** 是否有规则 */
+  HasRules?: boolean;
+  /** 规则id */
+  RuleId?: number;
+  /** 名称-英文 */
+  TitleEn?: string;
+  /** 选项数据-英文 */
+  OptionsEn?: string;
+  /** 选项数据(包含中英文) */
+  OptionsItem?: OptionsItem[];
+}
+
+/** profile开关配置 */
+declare interface ProfileTips {
+  /** 配置id */
+  Id?: number;
+  /** 各开关值(json) */
+  Value?: string;
 }
 
 /** 规则表达式 */
@@ -1352,6 +1536,14 @@ declare interface Sort {
   Order?: string;
 }
 
+/** 取消绑定账户虚拟组响应数据 */
+declare interface UnbindVirtualAccountData {
+  /** 解绑失败明细（含失败原因） */
+  FailItems?: BindVirtualAccountResultData[];
+  /** 解绑成功明细（含幂等场景：本就未绑定的账号也归入成功） */
+  SuccessItems?: BindVirtualAccountResultData[];
+}
+
 declare interface BindBusinessResourceConnectorGroupRequest {
   /** 要绑定连接器的业务资源id，创建时候响应会返回，修改调用端自己获取传递 */
   ServiceId: number;
@@ -1360,6 +1552,24 @@ declare interface BindBusinessResourceConnectorGroupRequest {
 }
 
 declare interface BindBusinessResourceConnectorGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BindVirtualAccountsRequest {
+  /** Comment: 虚拟组id;Required:true */
+  VirtualGroupId: number;
+  /** Comment: 要绑定的账户Id集合，这里的Id指的是DescribeLocalAccountsData结构体里返回的Id;Required:true */
+  AccountIdList?: number[];
+  /** Comment: 要绑定的账户(目录MenuId+登录账号UserId)集合，与AccountIdList二选一或并用，查不到的账号会被跳过;Required:false */
+  AccountUserList?: AccountUserIdItem[];
+  /** Comment: 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+}
+
+declare interface BindVirtualAccountsResponse {
+  /** 业务响应数据 */
+  Data?: BindVirtualAccountData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1784,6 +1994,18 @@ declare interface DescribeDeviceInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeviceSecurityInfoRequest {
+  /** 设备唯一标识符 */
+  Mid: string;
+}
+
+declare interface DescribeDeviceSecurityInfoResponse {
+  /** 终端安全信息 */
+  Data?: DescribeDeviceSecurityInfoData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceVirtualGroupsRequest {
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -1860,6 +2082,20 @@ declare interface DescribeLocalAccountsRequest {
 declare interface DescribeLocalAccountsResponse {
   /** 获取账号列表响应的分页对象 */
   Data?: DescribeLocalAccountsPage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProfileFieldsMenuRequest {
+  /** 查找自动填写字段 */
+  OnlyRule: boolean;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+}
+
+declare interface DescribeProfileFieldsMenuResponse {
+  /** 描述字段数据 */
+  Data?: DescribeProfileFieldsRspData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1944,6 +2180,22 @@ declare interface DescribeSoftwareInformationRequest {
 declare interface DescribeSoftwareInformationResponse {
   /** 业务响应数据 */
   Data?: DescribeSoftwareInformationPageData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVirtualAccountsRequest {
+  /** 账户虚拟组Id(只支持32位) */
+  VirtualGroupId: number;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 滤条件、分页参数UserName - String - 是否必填：否 - 操作符: eq,like - 排序支持：否- 按用户名称过滤。UserId - String - 是否必填：否 - 操作符: eq,like - 排序支持：否- 按用户账号过滤。Phone - String - 是否必填：否 - 操作符: eq,like - 排序支持：否- 按电话过滤。 */
+  Condition?: Condition;
+}
+
+declare interface DescribeVirtualAccountsResponse {
+  /** 业务响应数据 */
+  Data?: DescribeVirtualAccountsPageData | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2132,11 +2384,31 @@ declare interface ModifyVirtualDeviceGroupsResponse {
   RequestId?: string;
 }
 
+declare interface UnbindVirtualAccountsRequest {
+  /** Comment: 虚拟组id;Required:true */
+  VirtualGroupId: number;
+  /** Comment: 要取消绑定的账户Id集合，这里的Id指的是DescribeLocalAccountsData结构体里返回的Id;Required:true */
+  AccountIdList?: number[];
+  /** Comment: 要取消绑定的账户(目录MenuId+登录账号UserId)集合，与AccountIdList二选一或并用，查不到的账号会被跳过;Required:false */
+  AccountUserList?: AccountUserIdItem[];
+  /** Comment: 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+}
+
+declare interface UnbindVirtualAccountsResponse {
+  /** 业务响应数据 */
+  Data?: UnbindVirtualAccountData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Ioa iOA 零信任安全管理系统} */
 declare interface Ioa {
   (): Versions;
   /** 绑定业务资源连接器 {@link BindBusinessResourceConnectorGroupRequest} {@link BindBusinessResourceConnectorGroupResponse} */
   BindBusinessResourceConnectorGroup(data: BindBusinessResourceConnectorGroupRequest, config?: AxiosRequestConfig): AxiosPromise<BindBusinessResourceConnectorGroupResponse>;
+  /** 绑定账户虚拟组 {@link BindVirtualAccountsRequest} {@link BindVirtualAccountsResponse} */
+  BindVirtualAccounts(data: BindVirtualAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<BindVirtualAccountsResponse>;
   /** 创建业务资源 {@link CreateBusinessResourceRequest} {@link CreateBusinessResourceResponse} */
   CreateBusinessResource(data: CreateBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBusinessResourceResponse>;
   /** 新建企业目录配置 {@link CreateCompanyDirectoryConfigRequest} {@link CreateCompanyDirectoryConfigResponse} */
@@ -2185,6 +2457,8 @@ declare interface Ioa {
   DescribeDeviceHardwareInfoList(data: DescribeDeviceHardwareInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceHardwareInfoListResponse>;
   /** 获取终端进程网络服务信息 {@link DescribeDeviceInfoRequest} {@link DescribeDeviceInfoResponse} */
   DescribeDeviceInfo(data?: DescribeDeviceInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceInfoResponse>;
+  /** 查询终端安全信息 {@link DescribeDeviceSecurityInfoRequest} {@link DescribeDeviceSecurityInfoResponse} */
+  DescribeDeviceSecurityInfo(data: DescribeDeviceSecurityInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceSecurityInfoResponse>;
   /** 查询终端自定义分组列表 {@link DescribeDeviceVirtualGroupsRequest} {@link DescribeDeviceVirtualGroupsResponse} */
   DescribeDeviceVirtualGroups(data?: DescribeDeviceVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceVirtualGroupsResponse>;
   /** 查询设备列表详情 {@link DescribeDevicesRequest} {@link DescribeDevicesResponse} */
@@ -2193,6 +2467,8 @@ declare interface Ioa {
   DescribeDirectAccountGroupResources(data: DescribeDirectAccountGroupResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDirectAccountGroupResourcesResponse>;
   /** 获取账号列表 {@link DescribeLocalAccountsRequest} {@link DescribeLocalAccountsResponse} */
   DescribeLocalAccounts(data?: DescribeLocalAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalAccountsResponse>;
+  /** 查询终端描述字段菜单 {@link DescribeProfileFieldsMenuRequest} {@link DescribeProfileFieldsMenuResponse} */
+  DescribeProfileFieldsMenu(data: DescribeProfileFieldsMenuRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProfileFieldsMenuResponse>;
   /** 查询授权的分组列表 {@link DescribeResourceGrantedAccountGroupsRequest} {@link DescribeResourceGrantedAccountGroupsResponse} */
   DescribeResourceGrantedAccountGroups(data: DescribeResourceGrantedAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedAccountGroupsResponse>;
   /** 查询直接授权的账号列表 {@link DescribeResourceGrantedAccountsRequest} {@link DescribeResourceGrantedAccountsResponse} */
@@ -2205,6 +2481,8 @@ declare interface Ioa {
   DescribeSoftCensusListByDevice(data: DescribeSoftCensusListByDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftCensusListByDeviceResponse>;
   /** 查看软件详情列表 {@link DescribeSoftwareInformationRequest} {@link DescribeSoftwareInformationResponse} */
   DescribeSoftwareInformation(data?: DescribeSoftwareInformationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSoftwareInformationResponse>;
+  /** 列表虚拟组的账户 {@link DescribeVirtualAccountsRequest} {@link DescribeVirtualAccountsResponse} */
+  DescribeVirtualAccounts(data: DescribeVirtualAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirtualAccountsResponse>;
   /** 展示自定义分组终端列表 {@link DescribeVirtualDevicesRequest} {@link DescribeVirtualDevicesResponse} */
   DescribeVirtualDevices(data?: DescribeVirtualDevicesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVirtualDevicesResponse>;
   /** 导出终端相关的数据 {@link ExportDeviceDownloadTaskRequest} {@link ExportDeviceDownloadTaskResponse} */
@@ -2225,6 +2503,8 @@ declare interface Ioa {
   ModifyDeviceTrustStatus(data: ModifyDeviceTrustStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTrustStatusResponse>;
   /** 终端自定义分组批量增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */
   ModifyVirtualDeviceGroups(data: ModifyVirtualDeviceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVirtualDeviceGroupsResponse>;
+  /** 解绑账户虚拟组 {@link UnbindVirtualAccountsRequest} {@link UnbindVirtualAccountsResponse} */
+  UnbindVirtualAccounts(data: UnbindVirtualAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindVirtualAccountsResponse>;
 }
 
 export declare type Versions = ["2022-06-01"];

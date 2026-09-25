@@ -444,6 +444,8 @@ declare interface ApmInstanceDetail {
   CrossAccountStatus?: number;
   /** 跨账号关联ID */
   CrossAccountPeerId?: string;
+  /** 开启Token展示安全保护单位：是、否 */
+  TokenDisplayProtection?: number;
 }
 
 /** 指标列表单元 */
@@ -1791,6 +1793,8 @@ declare interface ModifyApmInstanceRequest {
   CrossAccountStatus?: number;
   /** 跨账号关联ID */
   CrossAccountPeerId?: string;
+  /** 是否开启Token 展示安全保护单位：0：不开启，1：开启默认值：0 */
+  TokenDisplayProtection?: number;
 }
 
 declare interface ModifyApmInstanceResponse {

@@ -100,6 +100,20 @@ declare interface AgentInstance {
   Capabilities?: string[];
   /** 是否是免部署实例 */
   DeploymentFree?: boolean;
+  /** agent memory 服务详情 */
+  AgentMem?: AgentMemInfo;
+}
+
+/** AGM 记忆服务开通信息 */
+declare interface AgentMemInfo {
+  /** Memory实例ID */
+  MemInstanceId?: string;
+  /** 1=active, 0=disabled（软删/关闭/下线历史行） */
+  Status?: number;
+  /** 0=待安装,1=成功,2=失败待重试,3=开启中,4=关闭中/已关闭 */
+  InstallStatus?: number;
+  /** creating/online/isolated/error/ */
+  MemStatus?: string;
 }
 
 /** 聊天图片附件列表 */
