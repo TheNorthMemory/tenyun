@@ -752,6 +752,12 @@ declare interface InputKeyInfo {
   PlainKey?: string;
 }
 
+/** 意图路由使用决策模型配置 */
+declare interface IntentRouterDecisionModelConfig {
+  /** 是否开启使用决策模型 */
+  Enabled?: boolean;
+}
+
 /** 意图路由摘要信息对象（不含分层详情）。 */
 declare interface IntentRouterItem {
   /** 创建时间（ISO 8601格式）。 */
@@ -766,6 +772,8 @@ declare interface IntentRouterItem {
   Status?: string;
   /** 分层配置列表。 */
   Tiers?: IntentRouterTierItem[];
+  /** 意图路由使用决策模型配置 */
+  DecisionModelConfig?: IntentRouterDecisionModelConfig;
   /** 更新时间（ISO 8601格式）。 */
   UpdatedTime?: string;
 }
@@ -2801,6 +2809,8 @@ declare interface CreateIntentRouterRequest {
   Tiers: TierItem[];
   /** 意图路由描述。 */
   RouterDescribe?: string;
+  /** 意图路由使用决策模型配置 */
+  DecisionModelConfig?: IntentRouterDecisionModelConfig;
 }
 
 declare interface CreateIntentRouterResponse {
@@ -4763,8 +4773,10 @@ declare interface ModifyIntentRouterAttributeRequest {
   RouteName?: string;
   /** 意图路由描述。 */
   RouterDescribe?: string;
-  /** 新的分层配置列表（全量替换）。选填；不传则不修改。传入时必须为完整分层集合：复杂度分层须包含全部 4 个分层 SIMPLE/MEDIUM/COMPLEX/REASONING；语义分层须包含 default 及各语义 Tier（取决于实例所用协议，且不可跨协议变更）。每个分层至少包含一个模型，模型名称必须是已关联到该实例的模型。 */
+  /** 新的分层配置列表（全量替换）。选填；传入时必须包含全部4个分层：SIMPLE、MEDIUM、COMPLEX、REASONING。每个分层至少包含一个模型，模型名称必须是已关联到该实例的模型。不传则不修改。 */
   Tiers?: TierItem[];
+  /** 意图路由使用决策模型配置 */
+  DecisionModelConfig?: IntentRouterDecisionModelConfig;
 }
 
 declare interface ModifyIntentRouterAttributeResponse {
