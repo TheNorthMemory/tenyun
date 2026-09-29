@@ -22,12 +22,12 @@ declare interface AccountInfo {
 
 /** 磁盘规格 */
 declare interface CBSSpec {
-  /** 盘类型 */
-  DiskType: string;
-  /** 大小 */
-  DiskSize: number;
   /** 个数 */
   DiskCount: number;
+  /** 大小 */
+  DiskSize: number;
+  /** 盘类型 */
+  DiskType: string;
 }
 
 /** 磁盘信息 */
@@ -42,14 +42,14 @@ declare interface CBSSpecInfo {
 
 /** 云原生资源规格描述信息 */
 declare interface CNResourceSpec {
-  /** 节点类型 */
-  Type: string;
-  /** 机型 */
-  SpecName: string;
   /** 节点个数 */
   Count: number;
   /** 磁盘信息 */
   DiskSpec: CBSSpec;
+  /** 机型 */
+  SpecName: string;
+  /** 节点类型 */
+  Type: string;
 }
 
 /** 计费时间参数 */
@@ -60,10 +60,10 @@ declare interface ChargeProperties {
   TimeSpan: number;
   /** 时间单位，一般为h和m */
   TimeUnit: string;
-  /** 计费类型0-按量计费，1-包年包月 */
-  PayMode?: number;
   /** PREPAID、POSTPAID_BY_HOUR */
   ChargeType?: string;
+  /** 计费类型0-按量计费，1-包年包月 */
+  PayMode?: number;
 }
 
 /** ConfigHistory1 */
@@ -332,6 +332,30 @@ declare interface InstanceStateInfo {
   RequestId?: string;
   /** 集群是否有备份中任务，有为1,无为0 */
   BackupOpenStatus?: number;
+}
+
+/** 批量实例状态项 */
+declare interface InstanceStateItem {
+  /** 集群实例名称 */
+  InstanceId?: string;
+  /** 集群状态，例如：Serving */
+  InstanceState?: string;
+  /** 集群状态描述，例如：运行中 */
+  InstanceStateDesc?: string;
+  /** 集群备份任务开启状态 */
+  BackupStatus?: number;
+  /** 集群备份任务开启状态2 */
+  BackupOpenStatus?: number;
+  /** 集群操作创建时间 */
+  FlowCreateTime?: string;
+  /** 集群操作名称 */
+  FlowName?: string;
+  /** 集群操作进度 */
+  FlowProgress?: number;
+  /** 集群流程错误信息 */
+  FlowMsg?: string;
+  /** 当前步骤的名称 */
+  ProcessName?: string;
 }
 
 /** node参数 */
@@ -722,28 +746,32 @@ declare interface DescribeInstanceResponse {
 
 declare interface DescribeInstanceStateRequest {
   /** 集群实例名称 */
-  InstanceId: string;
+  InstanceId?: string;
+  /** 集群实例名称列表（批量查询，优先于 InstanceId；上限100，超出截断） */
+  InstanceIds?: string[];
 }
 
 declare interface DescribeInstanceStateResponse {
-  /** 集群状态，例如：Serving */
-  InstanceState?: string;
+  /** 集群备份任务开启状态2 */
+  BackupOpenStatus?: number;
+  /** 集群备份任务开启状态 */
+  BackupStatus?: number;
   /** 集群操作创建时间 */
   FlowCreateTime?: string;
+  /** 集群流程错误信息，例如：“创建失败，资源不足” */
+  FlowMsg?: string;
   /** 集群操作名称 */
   FlowName?: string;
   /** 集群操作进度 */
   FlowProgress?: number;
+  /** 集群状态，例如：Serving */
+  InstanceState?: string;
   /** 集群状态描述，例如：运行中 */
   InstanceStateDesc?: string;
-  /** 集群流程错误信息，例如：“创建失败，资源不足” */
-  FlowMsg?: string;
   /** 当前步骤的名称，例如：”购买资源中“ */
   ProcessName?: string;
-  /** 集群备份任务开启状态 */
-  BackupStatus?: number;
-  /** 集群备份任务开启状态2 */
-  BackupOpenStatus?: number;
+  /** 批量实例状态列表（InstanceIds 入参时返回，每项含 InstanceId 与状态字段） */
+  InstanceStates?: InstanceStateItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1030,7 +1058,7 @@ declare interface Cdwpg {
   /** 云原生拉取集群操作列表 {@link DescribeInstanceOperationsRequest} {@link DescribeInstanceOperationsResponse} */
   DescribeInstanceOperations(data: DescribeInstanceOperationsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceOperationsResponse>;
   /** 获取集群实例状态 {@link DescribeInstanceStateRequest} {@link DescribeInstanceStateResponse} */
-  DescribeInstanceState(data: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
+  DescribeInstanceState(data?: DescribeInstanceStateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceStateResponse>;
   /** 获取云原生实例列表 {@link DescribeInstancesRequest} {@link DescribeInstancesResponse} */
   DescribeInstances(data?: DescribeInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstancesResponse>;
   /** 获取集群精简信息列表 {@link DescribeSimpleInstancesRequest} {@link DescribeSimpleInstancesResponse} */

@@ -2,6 +2,44 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** airflow cfs dag目录源配置 */
+declare interface AirflowCfsSource {
+  /** cfs实例id */
+  FileSystemId?: string;
+  /** cfs实例挂载目录 */
+  Directory?: string;
+}
+
+/** airflow dag源目录来源 */
+declare interface AirflowDagSourceInput {
+  /** 是否支持dag共享源 */
+  Enabled: boolean;
+  /** dag源类型枚举值：CFS： CFSGIT： Git */
+  Type?: string;
+  /** cfs实例DAG源配置 */
+  Cfs?: AirflowCfsSource;
+  /** Git型DAG源配置 */
+  Git?: AirflowGitSource;
+}
+
+/** airflow git鉴权配置 */
+declare interface AirflowGitCredentialInput {
+  /** 用户名 */
+  Username?: string;
+  /** 用户凭证 */
+  Token?: string;
+}
+
+/** airflow dag目录git源配置 */
+declare interface AirflowGitSource {
+  /** git仓库URL */
+  RepositoryUrl?: string;
+  /** DAG跟踪分支/TAG */
+  Ref?: string;
+  /** DAG挂载目录 */
+  Directory?: string;
+}
+
 /** 资源描述 */
 declare interface AllNodeResourceSpec {
   /** 描述Master节点资源 */
@@ -4027,6 +4065,10 @@ declare interface CreateCloudInstanceRequest {
   EnableEmrProxy?: boolean;
   /** 日志存储服务实例id */
   LogStoreID?: string;
+  /** airflow目录源 */
+  AirflowDagSource?: AirflowDagSourceInput;
+  /** airflow源凭证 */
+  AirflowGitCredential?: AirflowGitCredentialInput;
 }
 
 declare interface CreateCloudInstanceResponse {

@@ -885,7 +885,7 @@ declare interface CreateDeploymentResponse {
 }
 
 declare interface CreatePreCacheImageTaskRequest {
-  /** 镜像地址 */
+  /** 镜像地址。仅支持 repository:tag、repository@sha256:<64 位摘要> 或 repository:tag@sha256:<64 位摘要>。 */
   Image: string;
   /** 镜像仓库类型：enterprise、personal、custom枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
   ImageRegistryType: string;
@@ -898,6 +898,8 @@ declare interface CreatePreCacheImageTaskResponse {
   ImageDigest?: string;
   /** 镜像仓库类型：enterprise、personal。 */
   ImageRegistryType?: string;
+  /** 镜像预热ID */
+  PreCacheImageId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1190,11 +1192,13 @@ declare interface DescribeEventsResponse {
 
 declare interface DescribePreCacheImageTaskRequest {
   /** 镜像地址 */
-  Image: string;
-  /** 镜像 Digest */
-  ImageDigest: string;
+  Image?: string;
   /** 镜像仓库类型：enterprise、personal、custom 。枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
-  ImageRegistryType: string;
+  ImageRegistryType?: string;
+  /** 镜像 Digest */
+  ImageDigest?: string;
+  /** 镜像预热ID，只能ID或三元组（Image、ImageDigest、ImageRegistrytype）二选一查询 */
+  PreCacheImageId?: string;
 }
 
 declare interface DescribePreCacheImageTaskResponse {
@@ -1208,6 +1212,16 @@ declare interface DescribePreCacheImageTaskResponse {
   Status?: string;
   /** 镜像预热状态描述 */
   Message?: string;
+  /** 镜像预热创建时间 */
+  CreateTime?: string;
+  /** 镜像预热ID */
+  PreCacheImageId?: string;
+  /** 镜像预热资源的来源类型，取值为 EXPLICIT、AUTO枚举值：EXPLICIT： 手动创建AUTO： 自动创建TCR_AUTO： TCR自动预热 */
+  SourceType?: string;
+  /** 镜像预热存储大小单位：Byte */
+  CachedImageSizeBytes?: number;
+  /** 该预热镜像最近一次被沙箱实例使用时间 */
+  LastUsedTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1858,7 +1872,7 @@ declare interface Ags {
   /** 查询事件列表 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
-  DescribePreCacheImageTask(data: DescribePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageTaskResponse>;
+  DescribePreCacheImageTask(data?: DescribePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageTaskResponse>;
   /** 查询账号配额总览 {@link DescribeQuotaOverviewRequest} {@link DescribeQuotaOverviewResponse} */
   DescribeQuotaOverview(data?: DescribeQuotaOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuotaOverviewResponse>;
   /** 查询 Registry 详情 {@link DescribeRegistryRequest} {@link DescribeRegistryResponse} */

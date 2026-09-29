@@ -4870,6 +4870,10 @@ declare interface RecognizeThaiIDCardOCRResponse {
   AdvancedInfo?: string;
   /** 卡证正面图片中，证件主体的数量（仅请求曼谷地域[ap-bangkok]返回） */
   CardCount?: number;
+  /** 泰文姓名 */
+  ThaiFirstName?: string;
+  /** 泰文姓名 */
+  ThaiLastName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

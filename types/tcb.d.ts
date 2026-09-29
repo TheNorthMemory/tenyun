@@ -128,6 +128,18 @@ declare interface BanConfig {
   CountryBlackList?: string[];
 }
 
+/** 构建产物信息 */
+declare interface BuildArtifactInfo {
+  /** 产物类型 */
+  Type?: string;
+  /** 产物名称 */
+  Name?: string;
+  /** 产物状态 */
+  Status?: string;
+  /** 扩展详情 Json */
+  ContentJson?: string;
+}
+
 /** 构建命令 */
 declare interface BuildCommands {
   /** 平台生成默认 install step 时执行 */
@@ -136,6 +148,14 @@ declare interface BuildCommands {
   BuildCmd?: string;
   /** 平台生成默认deploy step 时执行 */
   DeployCmd?: string;
+}
+
+/** 构建上下文 */
+declare interface BuildContext {
+  /** 构建路径 */
+  Path?: string;
+  /** 构建产物输出路径 */
+  OutPut?: string;
 }
 
 /** 构建密钥 */
@@ -164,6 +184,8 @@ declare interface BuildSource {
   CosTimestamp?: string;
   /** 仅 Type=zip/cos 时使用。zip 文件后缀，默认 .zip；与 CosTimestamp 配合定位 COS 对象 */
   CosSuffix?: string;
+  /** zip 包名称 */
+  PackageFileName?: string;
 }
 
 /** 构建步骤 */
@@ -182,6 +204,54 @@ declare interface BuildStepStatus {
   Status?: string;
   /** 构建耗时 */
   Duration?: string;
+}
+
+/** 云应用过滤 */
+declare interface CloudAppFilter {
+  /** 云应用过滤列表 */
+  ServiceNameList?: string[];
+}
+
+/** 云应用关联服务 */
+declare interface CloudAppLinkService {
+  /** 服务类型枚举值：http-function： HTTP 云函数function： 普通云函数static-hosting： 静态托管 */
+  ServiceType?: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 服务身份 */
+  Identifier?: string;
+  /** 服务动作 */
+  Action?: string;
+  /** 服务构建命令 */
+  Command?: BuildCommands;
+  /** 服务构建部署上下文 */
+  BuildContext?: BuildContext;
+}
+
+/** 云应用资源信息 */
+declare interface CloudAppResourceItem {
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 服务类型枚举值：http-function： HTTP 云函数function： 普通云函数static-hosting： 静态托管 */
+  ServiceType?: string;
+  /** 服务部署版本 */
+  DeployedRef?: string;
+  /** 服务动作 */
+  DiffCategory?: string;
+  /** 服务状态 */
+  Status?: string;
+}
+
+/** 云应用路由 */
+declare interface CloudAppRoute {
+  /** 服务跟路由 */
+  Source?: string;
+  /** 服务类型枚举值：http-function： HTTP 云函数function： 普通云函数static-hosting： 静态托管 */
+  ServiceType?: string;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 目标路径，暂不支持 */
+  TargetPath?: string;
 }
 
 /** 部署服务信息 */
@@ -204,6 +274,16 @@ declare interface CloudAppServiceItem {
   LatestBuildTime?: string;
   /** 部署类型 */
   DeployType?: string;
+  /** 构建配置 */
+  BuildConfig?: string;
+  /** 当前流量版本 */
+  CurrentVersion?: string;
+}
+
+/** 云应用触发器 */
+declare interface CloudAppTrigger {
+  /** webhook 配置 */
+  Webhook?: CloudAppWebHook;
 }
 
 /** 服务版本信息 */
@@ -224,6 +304,26 @@ declare interface CloudAppVersionItem {
   BuildTime?: string;
   /** 构建步骤 */
   Steps?: BuildStepStatus[] | null;
+  /** 服务版本部署快照 */
+  Snapshot?: string;
+  /** 服务版本域名 */
+  VersionDomain?: string;
+  /** 服务版本流量 */
+  TrafficPercent?: number;
+  /** 服务资源 */
+  Resources?: CloudAppResourceItem[];
+  /** 服务产物列表 */
+  Artifacts?: BuildArtifactInfo[];
+}
+
+/** 云应用 WebHook 配置 */
+declare interface CloudAppWebHook {
+  /** 开启 webhook 触发 */
+  Enabled?: boolean;
+  /** 触发分支 */
+  Branches?: string[];
+  /** 触发事件 */
+  Events?: string[];
 }
 
 /** BuildLog */
@@ -2141,6 +2241,22 @@ declare interface CreateCloudAppRequest {
   Secrets?: BuildSecret[];
   /** 选择 NodeRuntime 版本: 16,18,20,22,24 等 */
   NodeJsVersion?: string;
+  /** 暂不支持：Webhook 触发器功能尚未对外开放，客户端传入的 Trigger 字段会被平台静默忽略（仅日志告警，不拒绝请求） */
+  Trigger?: CloudAppTrigger;
+  /** 服务列表 */
+  ServiceList?: CloudAppLinkService[];
+  /** 全局工作目录 */
+  WorkingDir?: string;
+  /** 路由列表 */
+  Routes?: CloudAppRoute[];
+  /** 部署类型 */
+  PromoteType?: string;
+  /** 发布 Token 校验 */
+  ClientToken?: string;
+  /** 前置执行命令 */
+  PreDeployCommand?: string;
+  /** 后置执行命令 */
+  PostDeployCommand?: string;
 }
 
 declare interface CreateCloudAppResponse {
@@ -2344,6 +2460,20 @@ declare interface CreatePlatformEnvResponse {
   RequestId?: string;
 }
 
+declare interface CreatePlatformHTTPServiceRouteRequest {
+  /** 平台id */
+  PlatformId: string;
+  /** 域名路由信息 */
+  Domain: HTTPServiceDomainParam;
+}
+
+declare interface CreatePlatformHTTPServiceRouteResponse {
+  /** 归属权校验不通过返回信息，根据校验信息配置dns或者文件验证，可通过VerifyHTTPServiceRoute接口验证归属权是否通过 */
+  OwnershipVerification?: OwnershipVerificationInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateStaticStoreRequest {
   /** 环境ID */
   EnvId: string;
@@ -2510,6 +2640,20 @@ declare interface DeleteHTTPServiceRouteRequest {
 }
 
 declare interface DeleteHTTPServiceRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePlatformHTTPServiceRouteRequest {
+  /** 平台id */
+  PlatformId: string;
+  /** 域名 */
+  Domain: string;
+  /** 路径列表。为空则表示删除此域名和所有路由 */
+  Paths?: string[];
+}
+
+declare interface DeletePlatformHTTPServiceRouteResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2722,6 +2866,12 @@ declare interface DescribeCloudAppInfoResponse {
   LatestBuildTime?: string;
   /** 部署类型 */
   DeployType?: string;
+  /** 构建配置 */
+  BuildConfig?: string;
+  /** 当前服务流量版本 */
+  CurrentVersion?: string;
+  /** 版本关联默认域名 */
+  PreviewDomain?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2737,6 +2887,8 @@ declare interface DescribeCloudAppListRequest {
   PageSize?: number;
   /** 页号 */
   PageNo?: number;
+  /** 服务过滤 */
+  Filter?: CloudAppFilter;
 }
 
 declare interface DescribeCloudAppListResponse {
@@ -2798,6 +2950,16 @@ declare interface DescribeCloudAppVersionResponse {
   BuildTime?: string;
   /** []BuildStepStatus 的 JSON 序列化 */
   Steps?: BuildStepStatus[];
+  /** 服务版本快照 */
+  Snapshot?: string;
+  /** 服务版本流量比例 */
+  TrafficPercent?: number;
+  /** 服务版本域名 */
+  VersionDomain?: string;
+  /** 服务管理资源列表 */
+  Resources?: CloudAppResourceItem[];
+  /** []ArtifactInfo 的 JSON 序列化 */
+  Artifacts?: BuildArtifactInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3396,6 +3558,28 @@ declare interface DescribePlatformEnvUsageResponse {
   TotalCredits?: number;
   /** 资源点取整倍数 */
   CreditsScale?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePlatformHTTPServiceRouteRequest {
+  /** 平台id */
+  PlatformId: string;
+  /** 过滤条件。Key的含义参考对应字段，Value精确匹配。可过滤: Domain、Path、DomainType、UpstreamResourceType。可过滤的Values单条不超过100 */
+  Filters?: Filter[];
+  /** 分页偏移量。默认 0 */
+  Offset?: number;
+  /** 分页限制。默认20，最大值1000 */
+  Limit?: number;
+}
+
+declare interface DescribePlatformHTTPServiceRouteResponse {
+  /** 域名路由信息列表 */
+  Domains?: HTTPServiceDomain[];
+  /** 自定义接入的源站域名（HTTPService接入层域名） */
+  OriginDomain?: string;
+  /** 域名总数，分页查询使用总数判断是否已经拉取到所有数据 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4008,6 +4192,18 @@ declare interface ModifyPlatformEnvResponse {
   RequestId?: string;
 }
 
+declare interface ModifyPlatformHTTPServiceRouteRequest {
+  /** 平台id */
+  PlatformId: string;
+  /** 域名路由信息 */
+  Domain: HTTPServiceDomainParam;
+}
+
+declare interface ModifyPlatformHTTPServiceRouteResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyProviderRequest {
   /** 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。 */
   EnvId: string;
@@ -4401,9 +4597,9 @@ declare interface UpdateFunctionConfigurationRequest {
   Role?: string;
   /** 在线依赖安装，TRUE 表示安装，仅支持 Node.js 函数。 默认值：FALSE */
   InstallDependency?: string;
-  /** 日志投递到的cls日志集ID */
-  ClsTopicId?: string;
   /** 日志投递到的cls Topic ID */
+  ClsTopicId?: string;
+  /** 日志投递到的cls日志集ID */
   ClsLogsetId?: string;
   /** 在更新时是否同步发布新版本默认值：FALSE */
   Publish?: string;
@@ -4500,6 +4696,38 @@ declare interface VerifyHTTPServiceRouteResponse {
   RequestId?: string;
 }
 
+declare interface VerifyPlatformHTTPServiceRouteRequest {
+  /** 平台id */
+  PlatformId: string;
+  /** 域名路由信息 */
+  Domain: HTTPServiceDomainParam;
+}
+
+declare interface VerifyPlatformHTTPServiceRouteResponse {
+  /** 前置校验总开关。所有启用的检查项均为 PASS 或 SKIPPED 时为 true，任一检查项为 FAIL 时为 false。当为 false 时，前端应根据各 CheckItem 的 Code 精确渲染错误提示和操作指引；当为 true 时可继续调用 CreateHTTPServiceRoute 完成创建。 示例值：false */
+  Passed?: boolean;
+  /** 域名归属权校验结果 */
+  Ownership?: VerifyHTTPServiceRouteCheckItem;
+  /** 证书校验结果；CertId 为空时 Status=SKIPPED */
+  Cert?: VerifyHTTPServiceRouteCheckItem;
+  /** 域名/路径数量配额校验结果 */
+  Quota?: VerifyHTTPServiceRouteCheckItem;
+  /** 同域名下路由路径冲突校验结果 */
+  RouteConflict?: VerifyHTTPServiceRouteCheckItem;
+  /** 域名被其他环境占用校验结果 */
+  DomainConflict?: VerifyHTTPServiceRouteCheckItem;
+  /** 内部域名且非内部账号校验结果 */
+  InternalAccount?: VerifyHTTPServiceRouteCheckItem;
+  /** 域名黑名单校验结果 */
+  Blacklist?: VerifyHTTPServiceRouteCheckItem;
+  /** AccessType=CDN 时 CDN 资源存在性 / 状态校验结果（含 ICP 未备案的提示） */
+  CDNResource?: VerifyHTTPServiceRouteCheckItem;
+  /** AccessType=EO 时的 EdgeOne 预检结果（域名冲突/备案/归属权） */
+  EO?: VerifyHTTPServiceRouteCheckItem;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Tcb 云开发 CloudBase} */
 declare interface Tcb {
   (): Versions;
@@ -4541,6 +4769,8 @@ declare interface Tcb {
   CreateMySQL(data: CreateMySQLRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMySQLResponse>;
   /** 创建平台版套餐环境 {@link CreatePlatformEnvRequest} {@link CreatePlatformEnvResponse} */
   CreatePlatformEnv(data: CreatePlatformEnvRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlatformEnvResponse>;
+  /** 创建平台HTTP访问服务路由 {@link CreatePlatformHTTPServiceRouteRequest} {@link CreatePlatformHTTPServiceRouteResponse} */
+  CreatePlatformHTTPServiceRoute(data: CreatePlatformHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePlatformHTTPServiceRouteResponse>;
   /** 创建静态托管资源 {@link CreateStaticStoreRequest} {@link CreateStaticStoreResponse} */
   CreateStaticStore(data: CreateStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<CreateStaticStoreResponse>;
   /** 创建文档型数据库表 {@link CreateTableRequest} {@link CreateTableResponse} */
@@ -4561,6 +4791,8 @@ declare interface Tcb {
   DeleteFunction(data: DeleteFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFunctionResponse>;
   /** 删除HTTP访问服务路由 {@link DeleteHTTPServiceRouteRequest} {@link DeleteHTTPServiceRouteResponse} */
   DeleteHTTPServiceRoute(data: DeleteHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteHTTPServiceRouteResponse>;
+  /** 删除平台HTTP访问服务路由 {@link DeletePlatformHTTPServiceRouteRequest} {@link DeletePlatformHTTPServiceRouteResponse} */
+  DeletePlatformHTTPServiceRoute(data: DeletePlatformHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePlatformHTTPServiceRouteResponse>;
   /** 删除第三方认证源 {@link DeleteProviderRequest} {@link DeleteProviderResponse} */
   DeleteProvider(data: DeleteProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProviderResponse>;
   /** 删除文档型数据库表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
@@ -4639,6 +4871,8 @@ declare interface Tcb {
   DescribePlatformCreditsUsageDetail(data: DescribePlatformCreditsUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformCreditsUsageDetailResponse>;
   /** 查询平台版资源用量 {@link DescribePlatformEnvUsageRequest} {@link DescribePlatformEnvUsageResponse} */
   DescribePlatformEnvUsage(data: DescribePlatformEnvUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformEnvUsageResponse>;
+  /** 查询平台HTTP访问服务路由信息 {@link DescribePlatformHTTPServiceRouteRequest} {@link DescribePlatformHTTPServiceRouteResponse} */
+  DescribePlatformHTTPServiceRoute(data: DescribePlatformHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformHTTPServiceRouteResponse>;
   /** 查询平台版资源信息 {@link DescribePlatformsRequest} {@link DescribePlatformsResponse} */
   DescribePlatforms(data?: DescribePlatformsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlatformsResponse>;
   /** 查询环境的配额使用量 {@link DescribeQuotaDataRequest} {@link DescribeQuotaDataResponse} */
@@ -4699,6 +4933,8 @@ declare interface Tcb {
   ModifyPGInstanceSpec(data: ModifyPGInstanceSpecRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPGInstanceSpecResponse>;
   /** 修改平台版环境信息 {@link ModifyPlatformEnvRequest} {@link ModifyPlatformEnvResponse} */
   ModifyPlatformEnv(data: ModifyPlatformEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPlatformEnvResponse>;
+  /** 修改平台HTTP访问服务路由 {@link ModifyPlatformHTTPServiceRouteRequest} {@link ModifyPlatformHTTPServiceRouteResponse} */
+  ModifyPlatformHTTPServiceRoute(data: ModifyPlatformHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPlatformHTTPServiceRouteResponse>;
   /** 修改第三方认证源 {@link ModifyProviderRequest} {@link ModifyProviderResponse} */
   ModifyProvider(data: ModifyProviderRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProviderResponse>;
   /** 修改资源基础权限 {@link ModifyResourcePermissionRequest} {@link ModifyResourcePermissionResponse} */
@@ -4743,6 +4979,8 @@ declare interface Tcb {
   UpgradePGInstanceToDedicated(data: UpgradePGInstanceToDedicatedRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradePGInstanceToDedicatedResponse>;
   /** 校验HTTP访问服务路由 {@link VerifyHTTPServiceRouteRequest} {@link VerifyHTTPServiceRouteResponse} */
   VerifyHTTPServiceRoute(data: VerifyHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyHTTPServiceRouteResponse>;
+  /** 校验平台HTTP访问服务路由 {@link VerifyPlatformHTTPServiceRouteRequest} {@link VerifyPlatformHTTPServiceRouteResponse} */
+  VerifyPlatformHTTPServiceRoute(data: VerifyPlatformHTTPServiceRouteRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyPlatformHTTPServiceRouteResponse>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   AddCustomDomain(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */

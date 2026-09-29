@@ -8884,6 +8884,8 @@ declare interface NotifyAssetConfigItem {
   CloudTags?: string[];
   /** 总数 */
   TotalCount?: number;
+  /** 项目ID */
+  ProjectIds?: number[];
 }
 
 /** 通知设置 */
@@ -12030,6 +12032,8 @@ declare interface WebhookAssetScope {
   TagIds?: number[];
   /** 腾讯云标签列表，仅 AssetRange=3 生效入参限制：AssetRange=3 时 TagIds + CloudTags 不能同时为空 */
   CloudTags?: string[];
+  /** 项目ID */
+  ProjectIds?: number[];
 }
 
 /** 自定义透传字段 */

@@ -152,10 +152,22 @@ declare interface CreateConsoleGroupRsp {
   GroupId?: string;
 }
 
+/** 创建文件夹回包 */
+declare interface CreateFolderRsp {
+  /** 文件夹 ID */
+  FolderId?: string;
+}
+
 /** CreateWorkflowRsp */
 declare interface CreateWorkflowRsp {
   /** 工作流ID */
   WorkflowId?: string | null;
+}
+
+/** 创建工作空间响应 */
+declare interface CreateWorkspaceRsp {
+  /** 创建成功的工作空间ID */
+  WorkspaceId?: string;
 }
 
 /** 删除控制台用户组响应 */
@@ -172,10 +184,22 @@ declare interface DeleteFileResult {
   Status?: boolean | null;
 }
 
+/** 删除文件夹回包 */
+declare interface DeleteFolderRsp {
+  /** 删除文件夹状态 */
+  Status?: boolean;
+}
+
 /** DeleteWorkflowRsp */
 declare interface DeleteWorkflowRsp {
   /** 删除状态，true 表示成功 */
   Status?: boolean | null;
+}
+
+/** 删除工作空间响应 */
+declare interface DeleteWorkspaceRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
 }
 
 /** 任务依赖简要信息 */
@@ -254,6 +278,48 @@ declare interface FileInfo {
   AsyncOperation?: AsyncOperation | null;
 }
 
+/** 文件元数据 */
+declare interface FileMeta {
+  /** 文件id */
+  FileId?: string;
+  /** 文件/文件夹名称 */
+  FileName?: string;
+  /** 文件类型 */
+  FileType?: string;
+  /** 创建时间，毫秒秒级时间戳参数格式：时间戳 */
+  CreateTime?: string;
+  /** 更新时间参数格式：时间戳字符串 */
+  UpdateTime?: string;
+  /** acl权限类型 */
+  AllowActions?: string[];
+  /** 是否收藏 */
+  IsFavorite?: boolean;
+  /** 文件path */
+  PathName?: string;
+  /** 是否系统创建 */
+  IsSystemGenerated?: boolean;
+}
+
+/** 文件节点 */
+declare interface FileNode {
+  /** 当前节点 */
+  Node?: FileMeta;
+  /** 父节点 */
+  Parent?: FileMeta;
+  /** 创建人 */
+  Creator?: UserInfo;
+  /** 拥有者 */
+  Owner?: UserInfo;
+  /** 节点类型 */
+  NodeType?: string;
+  /** 原始路径 */
+  OriginPath?: string;
+  /** 回收时间 */
+  DeleteTime?: string;
+  /** 文件git配置 */
+  GitConfig?: GitRepoConfig | null;
+}
+
 /** Notebook/Python单元格输出配置 */
 declare interface FileOutputConf {
   /** 单元格 ID */
@@ -272,6 +338,20 @@ declare interface FileStorage {
   StoragePath?: string;
   /** 文件内容 */
   Content?: string;
+}
+
+/** 文件夹定位器 */
+declare interface FolderLocator {
+  /** 节点id */
+  FolderId?: string;
+  /** 节点path */
+  PathName?: string;
+}
+
+/** 获取文件夹回包 */
+declare interface GetFolderRsp {
+  /** 文件夹信息 */
+  Folder?: FileNode;
 }
 
 /** GetWorkflowRsp */
@@ -390,6 +470,24 @@ declare interface GetWorkflowTaskRunRsp {
   InnerWorkflowTaskRun?: InnerWorkflowTaskRun | null;
   /** 计划调度时间参数格式：毫秒时间戳（UTC） */
   ScheduledTime?: string | null;
+}
+
+/** 查询工作空间详情响应 */
+declare interface GetWorkspaceRsp {
+  /** 工作空间详情 */
+  WorkspaceInfo?: WorkspaceInfo;
+}
+
+/** git配置 */
+declare interface GitRepoConfig {
+  /** 检出规则 */
+  SparseCheckout?: SparseCheckoutConfig | null;
+  /** Git 仓库地址 */
+  RepoUrl?: string;
+  /** 分支名 */
+  Branch?: string;
+  /** 关联的 gitAuth 配置名称 */
+  AuthConfigName?: string;
 }
 
 /** 内嵌工作流任务简要信息（目前只有 FOR_EACH 工作流任务该字段才有值） */
@@ -543,6 +641,20 @@ declare interface ListConsoleUsersRsp {
   /** 每页大小 */
   PageSize?: number;
   /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+}
+
+/** 查询文件信息结果 */
+declare interface ListFilesRsp {
+  /** 文件/文件夹节点列表 */
+  Items?: FileNode[];
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页条数 */
+  PageSize?: number;
+  /** 总条数 */
   TotalCount?: number;
   /** 总页数 */
   TotalPageNumber?: number;
@@ -730,6 +842,28 @@ declare interface ScheduledTimeConfig {
   CycleNum?: number | null;
 }
 
+/** git检出规则 */
+declare interface SparseCheckoutConfig {
+  /** 是否启用稀疏检出 */
+  Enabled?: boolean | null;
+  /** 是否使用 cone 模式（推荐 true，按目录匹配更高效） */
+  ConeMode?: boolean | null;
+  /** 稀疏检出路径列表（如 ["src/module-a/", "docs/"]） */
+  Patterns?: string[] | null;
+}
+
+/** 用户基础展示信息 */
+declare interface StandardUserInfo {
+  /** 用户UIN */
+  UserUin?: string;
+  /** 用户名 */
+  UserName?: string;
+  /** 昵称 */
+  Nickname?: string;
+  /** 0: 普通用户 1: entraId用户 */
+  UserTag?: string;
+}
+
 /** 任务重试策略 */
 declare interface TaskRetryStrategy {
   /** 最多重试次数，默认3 */
@@ -812,10 +946,34 @@ declare interface UpdateConsoleUsersRsp {
   Status?: boolean;
 }
 
+/** 更新文件夹回包 */
+declare interface UpdateFolderRsp {
+  /** 更新文件夹结果，true为成功 */
+  Status?: boolean;
+}
+
 /** UpdateWorkflowRsp */
 declare interface UpdateWorkflowRsp {
   /** 更新状态，true 表示成功 */
   Status?: boolean | null;
+}
+
+/** 修改工作空间响应 */
+declare interface UpdateWorkspaceRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
+}
+
+/** 用户基本信息 */
+declare interface UserInfo {
+  /** uin */
+  UserUin?: string;
+  /** 子用户名称 */
+  UserName?: string;
+  /** 子用户昵称 */
+  Nickname?: string;
+  /** 0: 普通用户 1: entraId用户 */
+  UserTag?: string;
 }
 
 /** 工作流完整配置 */
@@ -1210,6 +1368,30 @@ declare interface WorkflowTriggerConfiguration {
   AdvancedConfig?: WorkflowTriggerAdvancedConfiguration | null;
 }
 
+/** 工作空间信息 */
+declare interface WorkspaceInfo {
+  /** 工作空间ID */
+  WorkspaceId?: string;
+  /** 工作空间名称 */
+  WorkspaceName?: string;
+  /** 工作空间描述 */
+  Description?: string;
+  /** 工作空间地域（如 ap-guangzhou） */
+  WorkspaceRegion?: string;
+  /** 工作空间状态：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除 */
+  Status?: number;
+  /** 失败原因（Status=2 创建失败时有值） */
+  ErrorReason?: string;
+  /** 创建者信息 */
+  Creator?: StandardUserInfo;
+  /** 创建时间，毫秒时间戳 */
+  CreateTime?: string;
+  /** 更新时间，毫秒时间戳 */
+  UpdateTime?: string;
+  /** 当前用户是否拥有该工作空间的访问权限 */
+  HasAccess?: boolean;
+}
+
 declare interface AddConsoleUsersRequest {
   /** 用户 UIN 列表，单次最多100个 */
   UserUins: string[];
@@ -1268,6 +1450,26 @@ declare interface CreateFileResponse {
   RequestId?: string;
 }
 
+declare interface CreateFolderRequest {
+  /** 工作空间名称 */
+  WorkspaceId: string;
+  /** 文件夹名称 */
+  FolderName: string;
+  /** 文件夹类型枚举值：FOLDER： 文件夹GIT_FOLDER： git文件夹 */
+  FolderType: string;
+  /** 父节点 */
+  ParentFolder?: FolderLocator;
+  /** git配置，FolderType=GIT_FOLDER 时必填 */
+  GitConfig?: GitRepoConfig;
+}
+
+declare interface CreateFolderResponse {
+  /** 创建文件夹结果 */
+  Data?: CreateFolderRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkflowRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1304,6 +1506,22 @@ declare interface CreateWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface CreateWorkspaceRequest {
+  /** 工作空间名称，max_len=128 */
+  WorkspaceName: string;
+  /** 工作空间地域（如 ap-guangzhou），max_len=64 */
+  WorkspaceRegion: string;
+  /** 工作空间描述，max_len=300 */
+  Description?: string;
+}
+
+declare interface CreateWorkspaceResponse {
+  /** 创建成功的工作空间ID */
+  Data?: CreateWorkspaceRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConsoleGroupsRequest {
   /** 要删除的用户组 ID 列表，单次最多100个 */
   GroupIds: string[];
@@ -1332,6 +1550,22 @@ declare interface DeleteFileResponse {
   RequestId?: string;
 }
 
+declare interface DeleteFolderRequest {
+  /** 工作空间id */
+  WorkspaceId: string;
+  /** 待删除的文件夹 */
+  Folder: FolderLocator;
+  /** 软删除还是从回收站硬删除枚举值：false： 软删除到回收站true： 从回收站硬删除 */
+  ForceDelete?: boolean;
+}
+
+declare interface DeleteFolderResponse {
+  /** 删除文件夹结果 */
+  Data?: DeleteFolderRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWorkflowRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1342,6 +1576,18 @@ declare interface DeleteWorkflowRequest {
 declare interface DeleteWorkflowResponse {
   /** 删除工作流响应内容 */
   Data?: DeleteWorkflowRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWorkspaceRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+}
+
+declare interface DeleteWorkspaceResponse {
+  /** 操作结果 */
+  Data?: DeleteWorkspaceRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1364,6 +1610,20 @@ declare interface GetFileRequest {
 declare interface GetFileResponse {
   /** 返回结果 */
   Data?: FileInfo | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetFolderRequest {
+  /** 工作空间id */
+  WorkspaceId: string;
+  /** 文件夹定位 */
+  Folder: FolderLocator;
+}
+
+declare interface GetFolderResponse {
+  /** 文件夹详情结果 */
+  Data?: GetFolderRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1408,6 +1668,18 @@ declare interface GetWorkflowTaskRunRequest {
 declare interface GetWorkflowTaskRunResponse {
   /** 查询任务运行详情响应内容 */
   Data?: GetWorkflowTaskRunRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetWorkspaceRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+}
+
+declare interface GetWorkspaceResponse {
+  /** 工作空间详情 */
+  Data?: GetWorkspaceRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1506,6 +1778,34 @@ declare interface ListConsoleUsersRequest {
 declare interface ListConsoleUsersResponse {
   /** 控制台用户列表 */
   Data?: ListConsoleUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListFilesRequest {
+  /** 工作空间id */
+  WorkspaceId: string;
+  /** 父目录，不填默认查询根节点 */
+  Parent?: FolderLocator;
+  /** 按文件类型过滤 */
+  FileTypes?: string[];
+  /** 文件名模糊匹配 */
+  NameKeyword?: string;
+  /** 按所有者UIN过滤，多值为或关系 */
+  OwnerUserUins?: string[];
+  /** 是否只列出文件夹，默认 false */
+  OnlyFolder?: boolean;
+  /** 排序字段列表，如创建时间 [{Name: 'CreateTime', Direction: 'DESC'}]，文件名称 [{Name: 'Name', Direction: 'ASC'}] */
+  OrderBys?: OrderBy[];
+  /** 页码，默认1，最小值1 */
+  PageNumber?: number;
+  /** 每页条数，默认10，最小值10，最大值100取值范围：[10, 100] */
+  PageSize?: number;
+}
+
+declare interface ListFilesResponse {
+  /** 文件列表结果 */
+  Data?: ListFilesRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1740,6 +2040,26 @@ declare interface UpdateFileResponse {
   RequestId?: string;
 }
 
+declare interface UpdateFolderRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 待更新文件夹 */
+  Folder?: FolderLocator;
+  /** 操作类型枚举值：1： 重命名2： 移动 */
+  OperationType?: string;
+  /** 重命名后的文件名，OperationType = 1时生效 */
+  FolderName?: string;
+  /** 移动的目的文件夹，OperationType = 2时生效 */
+  TargetParent?: FolderLocator;
+}
+
+declare interface UpdateFolderResponse {
+  /** 更新文件夹结果 */
+  Data?: UpdateFolderRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateWorkflowRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1758,6 +2078,22 @@ declare interface UpdateWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface UpdateWorkspaceRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 工作空间名称，max_len=128 */
+  WorkspaceName: string;
+  /** 工作空间描述，max_len=300 */
+  Description?: string;
+}
+
+declare interface UpdateWorkspaceResponse {
+  /** 操作结果 */
+  Data?: UpdateWorkspaceRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Databuddy 大数据智能体工作台DataBuddy} */
 declare interface Databuddy {
   (): Versions;
@@ -1767,22 +2103,34 @@ declare interface Databuddy {
   CreateConsoleGroup(data: CreateConsoleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleGroupResponse>;
   /** 创建代码文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
+  /** 创建文件夹 {@link CreateFolderRequest} {@link CreateFolderResponse} */
+  CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
+  /** 创建工作空间 {@link CreateWorkspaceRequest} {@link CreateWorkspaceResponse} */
+  CreateWorkspace(data: CreateWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceResponse>;
   /** 删除控制台用户组 {@link DeleteConsoleGroupsRequest} {@link DeleteConsoleGroupsResponse} */
   DeleteConsoleGroups(data: DeleteConsoleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleGroupsResponse>;
   /** 删除代码文件 {@link DeleteFileRequest} {@link DeleteFileResponse} */
   DeleteFile(data: DeleteFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileResponse>;
+  /** 删除文件夹 {@link DeleteFolderRequest} {@link DeleteFolderResponse} */
+  DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
   /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
+  /** 删除工作空间 {@link DeleteWorkspaceRequest} {@link DeleteWorkspaceResponse} */
+  DeleteWorkspace(data: DeleteWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkspaceResponse>;
   /** 获取代码文件详情 {@link GetFileRequest} {@link GetFileResponse} */
   GetFile(data: GetFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileResponse>;
+  /** 获取文件夹详情 {@link GetFolderRequest} {@link GetFolderResponse} */
+  GetFolder(data: GetFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetFolderResponse>;
   /** 获取工作流详细信息 {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
   GetWorkflow(data: GetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowResponse>;
   /** 查询工作流运行详情 {@link GetWorkflowRunRequest} {@link GetWorkflowRunResponse} */
   GetWorkflowRun(data: GetWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowRunResponse>;
   /** 查询任务运行详情 {@link GetWorkflowTaskRunRequest} {@link GetWorkflowTaskRunResponse} */
   GetWorkflowTaskRun(data: GetWorkflowTaskRunRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowTaskRunResponse>;
+  /** 查询工作空间详情 {@link GetWorkspaceRequest} {@link GetWorkspaceResponse} */
+  GetWorkspace(data: GetWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkspaceResponse>;
   /** 终止工作流的运行 {@link KillWorkflowRunRequest} {@link KillWorkflowRunResponse} */
   KillWorkflowRun(data: KillWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<KillWorkflowRunResponse>;
   /** 查询控制台用户组成员列表 {@link ListConsoleGroupUsersRequest} {@link ListConsoleGroupUsersResponse} */
@@ -1793,6 +2141,8 @@ declare interface Databuddy {
   ListConsoleRoles(data?: ListConsoleRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleRolesResponse>;
   /** 查询控制台用户列表 {@link ListConsoleUsersRequest} {@link ListConsoleUsersResponse} */
   ListConsoleUsers(data?: ListConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleUsersResponse>;
+  /** 获取文件夹和文件列表 {@link ListFilesRequest} {@link ListFilesResponse} */
+  ListFiles(data: ListFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ListFilesResponse>;
   /** 工作流运行列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
   ListWorkflowRuns(data: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
   /** 查询工作流任务历史运行列表 {@link ListWorkflowTaskRunsRequest} {@link ListWorkflowTaskRunsResponse} */
@@ -1813,8 +2163,12 @@ declare interface Databuddy {
   UpdateConsoleUsers(data: UpdateConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConsoleUsersResponse>;
   /** 更新代码文件 {@link UpdateFileRequest} {@link UpdateFileResponse} */
   UpdateFile(data: UpdateFileRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileResponse>;
+  /** 更新文件夹（支持文件夹重命名、移动文件夹） {@link UpdateFolderRequest} {@link UpdateFolderResponse} */
+  UpdateFolder(data: UpdateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFolderResponse>;
   /** 更新工作流 {@link UpdateWorkflowRequest} {@link UpdateWorkflowResponse} */
   UpdateWorkflow(data: UpdateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowResponse>;
+  /** 修改工作空间 {@link UpdateWorkspaceRequest} {@link UpdateWorkspaceResponse} */
+  UpdateWorkspace(data: UpdateWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceResponse>;
 }
 
 export declare type Versions = ["2026-07-15"];

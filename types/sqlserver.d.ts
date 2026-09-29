@@ -654,6 +654,12 @@ declare interface ExportFile {
   FinishTime?: string | null;
   /** req */
   AsyncRequestId?: number | null;
+  /** 日志开始时间 */
+  LogStartTime?: string | null;
+  /** 日志结束时间 */
+  LogEndTime?: string | null;
+  /** 日志过滤条件 */
+  LogFilter?: string | null;
 }
 
 /** 允许动作信息 */
@@ -900,6 +906,8 @@ declare interface LogResult {
   Writes?: number | null;
   /** 目标 */
   Destination?: string | null;
+  /** 事件名称 */
+  EventName?: string | null;
 }
 
 /** 需要迁移的DB列表 */
@@ -2094,6 +2102,8 @@ declare interface CreateExportTaskRequest {
 }
 
 declare interface CreateExportTaskResponse {
+  /** 下载文件名称 */
+  FileName?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

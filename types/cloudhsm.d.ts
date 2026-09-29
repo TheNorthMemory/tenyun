@@ -90,6 +90,12 @@ declare interface ResourceInfo {
   PqcFlag?: number;
   /** 环境默认值：cloudcloud或者cdc */
   DeployEnv?: string;
+  /** vsm版本号 */
+  Version?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群角色，0-未加入集群 1-主 2-从 */
+  ClusterRole?: number;
 }
 
 /** 安全组基础信息 */
@@ -190,6 +196,14 @@ declare interface Vpc {
   CreatedTime?: string;
   /** 是否为默认VPC */
   IsDefault?: boolean;
+}
+
+/** VSM摘要信息 */
+declare interface VsmDigestItem {
+  /** 计数 */
+  DigestVer?: number;
+  /** 摘要值 */
+  Value?: string;
 }
 
 /** 支持的Vsm类型信息 */
@@ -366,6 +380,10 @@ declare interface DescribeVsmAttributesResponse {
   PqcFlag?: number;
   /** 环境默认值：cloudcloud或者cdc */
   DeployEnv?: string;
+  /** 集群id */
+  ClusterId?: string;
+  /** 集群角色 */
+  ClusterRole?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -383,6 +401,8 @@ declare interface DescribeVsmsRequest {
   Manufacturer?: string;
   /** Hsm服务类型，可选virtualization、physical、GHSM、EHSM、SHSM、all */
   HsmType?: string;
+  /** 集群id */
+  ClusterId?: string;
 }
 
 declare interface DescribeVsmsResponse {
@@ -414,6 +434,10 @@ declare interface GetVsmMonitorInfoRequest {
 declare interface GetVsmMonitorInfoResponse {
   /** VSM监控信息 */
   MonitorInfo?: string[];
+  /** vsm摘要列表 */
+  DigestList?: VsmDigestItem[];
+  /** 初始化状态 */
+  InitStatus?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

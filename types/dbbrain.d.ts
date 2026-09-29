@@ -244,6 +244,148 @@ declare interface ContactItem {
   Mail?: string;
 }
 
+/** 死锁事件列表。按事件时间倒序排列（最近的死锁在前）。 */
+declare interface DeadLockLogItem {
+  /** 实例 ID，例如 mssql-ks3s56dj。 */
+  InstanceId?: string;
+  /** 时间字段来源。XML_EVENT 表示时间来自 xml_deadlock_report 的引擎打点；OBSERVED_LOG 表示时间来自 chain/lock 观测记录（partial 事件）。 */
+  TimestampSource?: string;
+  /** 降级原因码。IsPartial=true 时值为 XML_NOT_AVAILABLE；否则为空。 */
+  PartialReasonCode?: string | null;
+  /** 被回滚的进程内部指针列表，例如 process260256c7468。与 Resources.Owners/Waiters.ProcessId 对齐，可用于死锁环节点定位。 */
+  VictimProcessIds?: string[];
+  /** 原始负载是否被上游截断。true 表示 XmlReport 或 chain/lock payload 有过截断，会影响诊断可信度。 */
+  PayloadTruncated?: boolean;
+  /** 组成本事件的所有 XEvent 原始消息 UUID 列表（去重后按字典序排序），用于多源溯源、审计、补数。 */
+  SourceUuids?: string[];
+  /** 实际可归因（有 TransactionId）的事务数量。 */
+  ObservedTransactionCount?: number;
+  /** 死锁发生时间。ISO-8601 带偏移格式，例如 2026-09-16T06:58:52.611+00:00。来源于 XEvent 原始 timestamp。 */
+  EventTimestamp?: string;
+  /** 死锁图完整性。COMPLETE 表示成功装配 xml_deadlock_report；MISSING 表示无 xml 只有 chain/lock 消息（对应 IsPartial=true）。 */
+  GraphStatus?: string;
+  /** 本次响应中是否内联了原始死锁 XML。仅当请求参数 IncludeXml=true 且事件为 COMPLETE 时为 true。 */
+  XmlIncluded?: boolean;
+  /** 参与死锁的进程总数。2 方死锁最常见，N 方死锁更严重。 */
+  ProcessCount?: number;
+  /** 参与死锁的事务列表（按 IsVictim=true 排前、TransactionId 升序）。每个事务下可能有多个 Session（例如并行执行 worker）。 */
+  Transactions?: DeadlockTransaction[];
+  /** 引擎内的死锁编号，例如 84。与 SQL Server 端 xml_deadlock_report 对齐。同实例短期内可辨识，重启后会复用。若上游数据缺失则为 null。 */
+  DeadlockId?: string;
+  /** 原始 SQL Server 死锁图 XML 字符串（xml_deadlock_report 输出）。IncludeXml=false 或事件为 partial 时为 null。可用于前端直接绘制死锁环、AI 深度诊断，或落到对象存储做冷归档。 */
+  XmlReport?: string;
+  /** 原始 XML 字节数，用于采集侧健康度评估。partial 事件为 null。 */
+  OriginalXmlBytes?: number;
+  /** 被 SQL Server 选中回滚的会话 SPID 列表（去重）。DBA 复盘定位牺牲者的核心字段。 */
+  VictimSessionIds?: number[];
+  /** 是否为降级 partial 事件。true 表示无 xml_deadlock_report，Transactions/Resources 只能从 chain/lock 消息尽力还原。AI 诊断前建议过滤 IsPartial=true 的记录。 */
+  IsPartial?: boolean;
+  /** 涉及的数据库名去重列表，用于分库聚合与影响范围判断。 */
+  DatabaseNames?: string[];
+  /** 事件唯一 ID，格式为 xml:<uuid> 或 partial:<uuid>。前缀 xml 表示由 xml_deadlock_report 装配的完整事件；partial 表示只有 chain/lock 消息的降级事件。可作为幂等主键。 */
+  EventId?: string;
+  /** 死锁事件级签名（SHA-1 前 16 位）。基于参与死锁的所有锁资源三元组 (Kind, ObjectName, IndexName, Mode) 排序后计算，用于聚合相同锁冲突模式的死锁模板。partial 事件无 Resources 时为 null。 */
+  DeadlockSignature?: string;
+  /** 死锁涉及的锁资源节点列表。每个资源节点有若干 Owners（持有边）与 Waiters（等待边），二者组合构成死锁环。partial 事件为空数组。 */
+  Resources?: DeadlockResource[];
+  /** XE 辅助事件（chain/lock）与 XML 图的关联状态。MATCHED 表示至少一个 chain/lock 消息已关联到该 xml；UNMATCHED 表示只有孤立 xml 或降级 partial 事件。 */
+  AssociationStatus?: string;
+  /** 参与死锁的事务总数（有 TransactionId 的会话按事务分组后的数量）。当存在无 TransactionId 的会话时为 null，通过 ObservedTransactionCount 与该字段的差值可以判断归因缺失情况。 */
+  TransactionCount?: number;
+}
+
+/** SQL Server 执行栈中的单个帧。 */
+declare interface DeadlockFrame {
+  /** 帧对应的行号（存储过程内的行号）。 */
+  Line?: number;
+  /** 语句在存储过程文本内的起始字节偏移。 */
+  StatementStart?: number;
+  /** 存储过程名。adhoc 表示动态 SQL、非存过。 */
+  ProcName?: string;
+  /** SQL 句柄（0x 十六进制字节），用于拉取具体语句文本和关联执行计划。 */
+  SqlHandle?: string;
+  /** 语句在存储过程文本内的结束字节偏移。StatementStart/StatementEnd 组合用于精确切片。 */
+  StatementEnd?: number;
+}
+
+/** 死锁涉及的锁资源节点。Owners（持有边）+ Waiters（等待边）与 Transactions[].Processes[] 关联，构成完整死锁环。 */
+declare interface DeadlockResource {
+  /** 锁资源对应的索引名。keylock/ridlock 尤为重要，可判断索引设计是否合理。 */
+  IndexName?: string;
+  /** 分区 HoBT ID（从 Attributes.hobtid 抽出）。分区表死锁排查必需字段，可定位到具体物理分区。 */
+  PartitionId?: string;
+  /** 等待该锁资源的进程列表（死锁环的等待边）。 */
+  Waiters?: WaiterItem[];
+  /** 锁资源类型。常见值：keylock / pagelock / objectlock / ridlock / applicationlock / exchangeEvent 等。 */
+  Kind?: string;
+  /** 锁模式。常见值：X（排他）/ U（更新）/ S（共享）/ IX / IU / RangeS-U / RangeX-X 等。 */
+  Mode?: string;
+  /** 关联对象 ID（从 Attributes.associatedObjectId 抽出）。ObjectName 为空时可用于兜底定位对象。 */
+  AssociatedObjectId?: string;
+  /** SQL Server 引擎内的锁资源指针，例如 lock26054644a80。环内节点唯一标识，串联 Owners/Waiters。 */
+  Id?: string;
+  /** 锁资源对应的数据库对象名，格式 '数据库.架构.表'，例如 tempdb.dbo.dl_a。applicationlock 无此字段。 */
+  ObjectName?: string;
+  /** 持有该锁资源的进程列表（死锁环的持有边）。 */
+  Owners?: OwnerItem[];
+}
+
+/** 参与死锁的单个进程/会话。 */
+declare interface DeadlockSession {
+  /** SQL 归一化后的指纹（SHA-1 前 16 位）。去掉字面量、注释、参数名、空白差异后计算，抗字面量差异，用于聚合相同 SQL 模板。SqlText 为空时为 null。 */
+  SqlFingerprint?: string;
+  /** SQL Server 登录账号，用于权限归因。可判断是 SQLAgent、业务账号还是 DBA 账号。 */
+  LoginName?: string;
+  /** 会话执行栈帧列表（xml 的 executionStack.frame），用于定位到存储过程内的具体语句区间。partial 事件为空数组。 */
+  Frames?: DeadlockFrame[];
+  /** 事务隔离级别，例如 'read committed (2)'、'repeatable read (3)'、'serializable (4)' 等。显著影响锁形态和死锁模式。 */
+  IsolationLevel?: string;
+  /** 进程状态。常见值：suspended（挂起等锁）/ running / background。判断是否运行中被检测终止。 */
+  ProcessStatus?: string;
+  /** 客户端应用名（xml 的 clientapp）。判断连接来源，例如 SQLAgent Job、ORM、SSMS、业务服务名等。 */
+  ClientApp?: string;
+  /** 会话的 DEADLOCK_PRIORITY 设置。-10 表示主动降级为牺牲者候选；10 表示优先级更高。可解释为何这一方成为牺牲品。 */
+  Priority?: number;
+  /** 会话当前活跃的数据库名（xml 的 currentdbname）。 */
+  DatabaseName?: string;
+  /** 本进程当前持有的锁资源描述列表（死锁环的持有边）。格式同 LockRequest 但结尾为 'holding'。partial 事件为空数组。 */
+  LockHold?: string[];
+  /** 会话最近执行的 SQL 文本（xml 的 InputBuf）。是 AI 诊断的主输入与 SqlFingerprint 的来源。 */
+  SqlText?: string;
+  /** 客户端主机的 IP 地址（点分十进制，来自 message.ip）。判断是否来自同一台机器、批处理源。 */
+  Host?: string;
+  /** 会话当前活跃的数据库 ID（xml 的 currentdb）。 */
+  DatabaseId?: number;
+  /** 本事务是否为牺牲事务。true 表示 SQL Server 已回滚该事务；false 表示正常提交；null 表示 XML 缺 VictimProcessIds 无法判定。 */
+  IsVictim?: boolean;
+  /** 等锁时长，单位毫秒。判断死锁检测延迟、事务超时的辅助指标。 */
+  WaitTimeMs?: number;
+  /** 事务开始时间（xml 里的 lasttranstarted，本地时间字符串，如 2026-09-16T14:58:23.840）。用于分析长事务、锁持有时长。 */
+  LastTransStarted?: string;
+  /** 该边对应进程的并行执行子线程 ID。 */
+  ExecutionContextId?: number;
+  /** SQL Server 引擎内的进程指针，例如 process260256c7468。与 Resources.Owners/Waiters.ProcessId 拼接死锁环。partial 事件为 null。 */
+  ProcessId?: string;
+  /** 归一化后的客户端应用名。去掉 SQLAgent 的 JobId（16-64 位十六进制串）、Step 号、GUID、末尾进程号等易变部分，用于按应用类别聚合。 */
+  ClientAppNormalized?: string;
+  /** 本进程正在等待的锁资源描述列表（死锁环的等待边）。每条形如 'keylock on tempdb.dbo.dl_a mode X waiting'。applicationlock 会展示原始资源名（如 'lock_a'）。partial 事件为空数组。 */
+  LockRequest?: string[];
+  /** SQL Server 会话 ID。日志排查主键。 */
+  SessionId?: number;
+}
+
+/** 参与死锁的单个事务。 */
+declare interface DeadlockTransaction {
+  /** 事务最终状态。Rollback（被回滚，对应 IsVictim=true）/ Normal（正常，对应 IsVictim=false）/ Unknown（无 victim 信息）。 */
+  Status?: string;
+  /** SQL Server 引擎内的事务 ID。同实例短期内唯一。与 Auxiliary 记录里的 transaction_id 对齐。 */
+  TransactionId?: string;
+  /** 本事务是否为牺牲事务。true 表示 SQL Server 已回滚该事务；false 表示正常提交；null 表示 XML 缺 VictimProcessIds 无法判定。 */
+  IsVictim?: boolean;
+  /** 该事务下的进程/会话列表。并行计划下同一事务可能包含多个 worker（SessionId 相同 ExecutionContextId 不同）。 */
+  Sessions?: DeadlockSession[];
+}
+
 /** 实例诊断历史事件 */
 declare interface DiagHistoryEventItem {
   /** 诊断类型。支持值包括"高危账号","自增键耗尽","连接性检查","CPU利用率","死锁","全表扫描","高并发/压力请求","预编译语句过多","内存利用率","Metadata lock","磁盘超限","内存超限","只读锁","只读实例剔除","行锁","活跃会话","慢SQL","数据库快照","磁盘空间利用率","执行计划变化","主从切换","Table open cache命中率低","大表","事务未提交","事务导致复制延迟"等。 */
@@ -770,6 +912,18 @@ declare interface MysqlSpaceObjectItem {
   FragRatio?: number | null;
   /** 物理文件大小（MB）。 */
   PhysicalFileSize?: number | null;
+}
+
+/** 持有该锁资源的进程列表（死锁环的持有边）。 */
+declare interface OwnerItem {
+  /** 锁模式。常见值：X（排他）/ U（更新）/ S（共享）/ IX / IU / RangeS-U / RangeX-X 等。 */
+  Mode?: string;
+  /** 该边对应进程的并行执行子线程 ID。 */
+  ExecutionContextId?: number;
+  /** SQL Server 引擎内的进程指针，例如 process260256c7468。与 Resources.Owners/Waiters.ProcessId 拼接死锁环。partial 事件为 null。 */
+  ProcessId?: string;
+  /** SQL Server 会话 ID。日志排查主键。 */
+  SessionId?: number;
 }
 
 /** PostgreSQL 产品空间对象项。字段语义与 MySQL 不同：使用 pg_relation_size / pg_total_relation_size 等 PG 特有指标。库级查询时不包含 TableSchema/TableName 字段；表级查询时包含全部字段。 */
@@ -1468,6 +1622,20 @@ declare interface UserProfile {
   ProfileName?: string;
   /** 配置详情。 */
   ProfileInfo?: ProfileInfo;
+}
+
+/** 等待该锁资源的进程列表（死锁环的等待边）。 */
+declare interface WaiterItem {
+  /** 该边持有或申请的锁模式。 */
+  Mode?: string;
+  /** 并行执行子线程 ID。0 表示主线程；大于 0 表示并行计划的 worker。SessionId + ExecutionContextId 组合可唯一区分并行执行下的 worker。 */
+  ExecutionContextId?: number;
+  /** 进程内部指针，对应 Transactions[].Processes[].ProcessId。 */
+  ProcessId?: string;
+  /** 该边对应进程的 SPID，便于前端直接展示无需回查。 */
+  SessionId?: number;
+  /** 仅 Waiters 边有值。常见值：wait（普通等待）/ convert（锁转换，如从 S 升级到 X）。owner 边无此字段。 */
+  RequestType?: string;
 }
 
 declare interface AddUserContactRequest {
@@ -2346,6 +2514,38 @@ declare interface DescribeDatabaseAutonomyStatusRequest {
 declare interface DescribeDatabaseAutonomyStatusResponse {
   /** 自治功能开关状态。取值：0（关闭）、1（开启）。 */
   Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeadLockLogsRequest {
+  /** 服务产品类型。取值：sqlserver（云数据库 Sqlserver）。 */
+  Product: string;
+  /** 实例 ID。SQLServer: mssql-xxxx。 */
+  InstanceId: string;
+  /** 查询开始时间，格式 yyyy-MM-dd HH:mm:ss，按 UTC+8 解析；也兼容带偏移的 ISO-8601（如 2026-09-16T00:00:00+08:00）。半开区间左闭。参数格式：2026-09-16 00:00:00 */
+  StartTime: string;
+  /** 查询结束时间，格式同 StartTime。EndTime 必须大于 StartTime，且总查询窗口不超过 24 小时。半开区间右开。参数格式：2026-09-16 23:59:59 */
+  EndTime: string;
+  /** 分页偏移量，非负整数，默认 0。当 Offset>0 时必须同时传入 ResultVersion，否则报 INVALID_PARAMETER。 */
+  Offset?: number;
+  /** 单页返回死锁事件数量，范围 [1, 100]。默认 20。 */
+  Limit?: number;
+  /** 是否在响应中包含原始死锁图 XML（XmlReport）。默认 false，避免响应体过大。仅在需要绘制完整死锁环时置 true。 */
+  IncludeXml?: boolean;
+  /** 结果集版本号，最大 128 字符。首次查询无需传入；翻页时必须透传首次响应中的 ResultVersion，服务端会校验结果集是否发生变化，变化时返回 RESULT_CHANGED 提示重新拉取首页。 */
+  ResultVersion?: string;
+}
+
+declare interface DescribeDeadLockLogsResponse {
+  /** 是否还有更多分页。true 表示 Offset+Limit < TotalCount，客户端可用 Offset+Limit 与本次 ResultVersion 继续翻页。 */
+  HasMore?: boolean;
+  /** 当前查询窗口内可用的死锁事件总数（去重、关联、时间窗口过滤后）。 */
+  TotalCount?: number;
+  /** 结果集版本号（SHA-256 十六进制）。同一批数据在同一查询条件下保持不变；数据发生变化时版本变化。翻页必须透传。 */
+  ResultVersion?: string;
+  /** 死锁事件列表。按事件时间倒序排列（最近的死锁在前）。 */
+  Items?: DeadLockLogItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4729,6 +4929,8 @@ declare interface Dbbrain {
   DescribeDBSpaceStatus(data: DescribeDBSpaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSpaceStatusResponse>;
   /** 查询数据库自治功能状态 {@link DescribeDatabaseAutonomyStatusRequest} {@link DescribeDatabaseAutonomyStatusResponse} */
   DescribeDatabaseAutonomyStatus(data: DescribeDatabaseAutonomyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAutonomyStatusResponse>;
+  /** 查询死锁日志 {@link DescribeDeadLockLogsRequest} {@link DescribeDeadLockLogsResponse} */
+  DescribeDeadLockLogs(data: DescribeDeadLockLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeadLockLogsResponse>;
   /** 获取实例信息列表 {@link DescribeDiagDBInstancesRequest} {@link DescribeDiagDBInstancesResponse} */
   DescribeDiagDBInstances(data: DescribeDiagDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDiagDBInstancesResponse>;
   /** 获取健康得分 {@link DescribeHealthScoreRequest} {@link DescribeHealthScoreResponse} */

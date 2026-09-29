@@ -1157,6 +1157,8 @@ declare interface CreateInstanceNewRequest {
   CacheDiskSize?: string;
   /** 缓存盘大小 */
   CacheDataDiskSize?: number;
+  /** 磁盘加密 */
+  DiskEncrypt?: number;
 }
 
 declare interface CreateInstanceNewResponse {

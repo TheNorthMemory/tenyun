@@ -320,6 +320,10 @@ declare interface ImageModerationResponse {
   FileMD5?: string;
   /** 该字段用于返回仅识别图片元素的模型结果；包括：场景模型命中的标签、置信度和位置信息 */
   RecognitionResults?: RecognitionResult[];
+  /** 转存地址，开启转存能力返回转存地址 */
+  StoreUrl?: string;
+  /** 命中原因，大模型提召回输出原因内容 */
+  Reason?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

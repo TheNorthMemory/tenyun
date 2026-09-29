@@ -1000,6 +1000,18 @@ declare interface AiAnalysisTaskVideoRemakeResult {
   Output?: AiAnalysisTaskVideoRemakeOutput | null;
 }
 
+/** 图片处理图层融合配置 */
+declare interface AiComposeConfig {
+  /** 能力配置开关。ON：开启（默认值）；OFF：关闭。 */
+  Switch?: string;
+  /** 合成模型。可选值：compose-1.0-lite（默认值，可不传）。 */
+  Model?: string;
+  /** 画布定义。可省略：省略时取 ZIndex 最小的图层（底层图层）的自然尺寸。 */
+  Canvas?: ImageComposeCanvas;
+  /** 图层列表，图层的唯一来源。至少 1 层、最多 20 层。 */
+  Layers?: ImageComposeLayer[];
+}
+
 /** 内容审核结果 */
 declare interface AiContentReviewResult {
   /** 任务的类型，可以取的值有：Porn：图片鉴黄Terrorism：图片敏感Political：图片敏感Porn.Asr：Asr 文字鉴黄Porn.Ocr：Ocr 文字鉴黄Political.Asr：Asr 文字敏感Political.Ocr：Ocr 文字敏感Terrorism.Ocr：Ocr 文字敏感Prohibited.Asr：Asr 文字鉴违禁Prohibited.Ocr：Ocr 文字鉴违禁 */
@@ -1110,7 +1122,7 @@ declare interface AiPosterSuiteConfig {
   PanelResolution?: string;
   /** 用户自定义变量。 */
   CustomVariables?: CustomVariable[];
-  /** 模型名称。枚举值：WAND-suite-1.0-flash： WAND-suite-1.0-flash */
+  /** 模型名称。枚举值：suite-1.0-flash： suite-1.0-flash */
   Model?: string;
 }
 
@@ -4210,6 +4222,28 @@ declare interface ImageAreaBoxInfo {
   BoundingBoxUnitType?: number;
 }
 
+/** 图片处理图层融合功能画布参数 */
+declare interface ImageComposeCanvas {
+  /** 画布宽度，取值范围 [1, 10240]，需与 Height 同时设置。 */
+  Width?: number;
+  /** 画布高度，取值范围 [1, 10240]，需与 Width 同时设置。 */
+  Height?: number;
+  /** 画布底色，统一为 8 位十六进制 #RRGGBBAA（含 alpha），原样作为画布底色。缺省 #00000000（全透明）。示例：#FFFFFFFF 不透明白、#FFFFFF80 半透明白。输出格式不支持透明通道时（如 JPEG），透明区域按该底色的 RGB 塌陷；缺省值会得到黑底，需要白底请显式传 #FFFFFFFF。 */
+  Background?: string;
+}
+
+/** 图片处理图层融合功能图层数据结构 */
+declare interface ImageComposeLayer {
+  /** 图层堆叠顺序，必填。同一请求内不可重复，数值越大越靠上（建议从 0 开始连续编号）。 */
+  ZIndex?: number;
+  /** 图层图片来源，必填。支持 URL / COS / AWS-S3 / VOD。 */
+  InputInfo?: MediaInputInfo;
+  /** 图层在画布中的位置与尺寸，必填。长度为 4 的数组 [X1, Y1, X2, Y2]：左上角 + 右下角坐标，要求 X2 > X1、Y2 > Y1。两种语义（与图片擦除能力的 BoundingBox 对齐）：像素：坐标值，取值范围 [-10240, 10240]，允许为负或超出画布（超出部分被裁掉）；比例：各值 ∈ [-1, 1]，按画布宽高换算（x 乘画布宽、y 乘画布高）。图层会缩放填满该矩形；超出画布的部分一律裁掉，输出尺寸恒等于画布尺寸。 */
+  BoundingBox?: number[];
+  /** 坐标单位，与图片擦除能力对齐。取值：0：自动判定（不传时的默认值）；1：比例；2：像素。自动判定规则：四个值全部大于 1 按像素解释、全部不大于 1 按比例解释；混合取值会返回InvalidParameter，建议始终显式指定。 */
+  BoundingBoxUnitType?: number;
+}
+
 /** 图片降噪配置 */
 declare interface ImageDenoiseConfig {
   /** 能力配置开关，可选值：ON：开启；OFF：关闭。默认值：ON。 */
@@ -4448,6 +4482,8 @@ declare interface ImageTaskInput {
   UnderstandImageConfig?: UnderstandImageConfig;
   /** 图片质量评估配置 */
   ImageQualityConfig?: ImageQualityConfig;
+  /** 图层融合配置。 */
+  AiComposeConfig?: AiComposeConfig;
 }
 
 /** 图片基础转换能力 */
