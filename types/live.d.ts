@@ -1856,6 +1856,38 @@ declare interface ScreenshotTask {
   Stopped?: number;
 }
 
+/** 直播智能擦除模板。 */
+declare interface SmartEraseTemplate {
+  /** 模板id。 */
+  TemplateId?: number;
+  /** 模板名称。 */
+  TemplateName?: string;
+  /** 模板描述。 */
+  Description?: string;
+  /** 擦除类型，如"illegal audio|illegal image|logo|privacy protection 。 */
+  Type?: string;
+  /** 关联的审核模板id, 表audio_conf 。取值为DescribeAuditTemplates接口返回的AuditTemplates里面的TemplateId字段 */
+  AuditConfId?: number;
+  /** 天御图片审核策略BizType Image 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"Image"的BizType值 */
+  ImageBizType?: string;
+  /** 天御音频审核策略BizType ShortAudio 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"ShortAudio"的BizType值 */
+  AudioBizType?: string;
+  /** 天御音频文本审核策略BizType ShortAudio 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"Text"的BizType值 */
+  AudioTextBizType?: string;
+  /** 模板创建时间。 */
+  CreateTime?: string;
+  /** 模板修改时间。 */
+  UpdateTime?: string;
+  /** 展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。 */
+  DisplayMode?: number;
+  /** 字幕延迟展示时间,单位毫秒。默认10000。 */
+  DisplayDelayTime?: number;
+  /** 仅当擦除类型选择了违规音频，该项可见枚举值：blur face： 人脸模糊blur license plate： 车牌模糊 */
+  PrivacyProtection?: string;
+  /** 仅当擦除类型选择了“隐私保护”后，该项可见枚举值：0： 静音1： 哔音 */
+  AudioErasureMode?: number;
+}
+
 /** 截图模板信息。 */
 declare interface SnapshotTemplateInfo {
   /** 模板 ID。 */
@@ -2996,6 +3028,22 @@ declare interface CreateLiveRecordTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateLiveSmartEraseRuleRequest {
+  /** 模板 ID。 */
+  TemplateId: number;
+  /** 推流域名。 */
+  DomainName?: string;
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName?: string;
+  /** 流名称。注：如果本参数设置为非空字符串，规则将只对此推流起作用。 */
+  StreamName?: string;
+}
+
+declare interface CreateLiveSmartEraseRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLiveSmartEraseTemplateRequest {
   /** 模板名称。长度上限：100字节。 */
   TemplateName: string;
@@ -3644,6 +3692,32 @@ declare interface DeleteLiveRecordTemplateRequest {
 }
 
 declare interface DeleteLiveRecordTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveSmartEraseRuleRequest {
+  /** 直播智能擦除模板id。 */
+  TemplateId: number;
+  /** 推流域名。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  DomainName?: string;
+  /** ，与推流和播放地址中的AppName保持一致，默认为 live。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。推流路径 */
+  AppName?: string;
+  /** 流名称。域名+AppName+StreamName唯一标识单个转码规则，如需删除需要强匹配，例如AppName为空也需要传空字符串进行强匹配。 */
+  StreamName?: string;
+}
+
+declare interface DeleteLiveSmartEraseRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLiveSmartEraseTemplateRequest {
+  /** 模板 ID。 */
+  TemplateId: number;
+}
+
+declare interface DeleteLiveSmartEraseTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4810,6 +4884,38 @@ declare interface DescribeLiveRecordTemplatesRequest {
 declare interface DescribeLiveRecordTemplatesResponse {
   /** 录制模板信息列表。 */
   Templates?: RecordTemplateInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveSmartEraseRulesRequest {
+}
+
+declare interface DescribeLiveSmartEraseRulesResponse {
+  /** 规则信息列表。 */
+  Rules?: RuleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveSmartEraseTemplateRequest {
+  /** 模板id。 */
+  TemplateId: number;
+}
+
+declare interface DescribeLiveSmartEraseTemplateResponse {
+  /** 直播智能擦除模板信息。 */
+  Template?: SmartEraseTemplate;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLiveSmartEraseTemplatesRequest {
+}
+
+declare interface DescribeLiveSmartEraseTemplatesResponse {
+  /** 直播智能擦除模板信息。 */
+  Templates?: SmartEraseTemplate[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6390,6 +6496,38 @@ declare interface ModifyLiveRecordTemplateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLiveSmartEraseTemplateRequest {
+  /** 模板id。 */
+  TemplateId: number;
+  /** 模板名称。长度上限：100字节。 */
+  TemplateName?: string;
+  /** 擦除类型，如"illegal audio|illegal image|logo|privacy protection 。 */
+  Type?: string;
+  /** 关联的审核模板id, 表audio_conf 。取值为DescribeAuditTemplates返回的TemplateId */
+  AuditConfId?: number;
+  /** 描述信息。长度上限：1024字节。仅支持中文、英文、数字、_、-。 */
+  Description?: string;
+  /** 天御图片审核策略BizType Image 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"Image"的BizType值 */
+  ImageBizType?: string;
+  /** 天御音频审核策略BizType ShortAudio 。取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"ShortAudio"的BizType值 */
+  AudioBizType?: string;
+  /** 天御音频文本审核策略BizType ShortAudio取值为DescribeAuditTemplates返回的SceneInfos下BizInfos里面的对应的StrategyType为"Text"的BizType值 */
+  AudioTextBizType?: string;
+  /** 展示模式，取值 1:延时稳态展示; 3.实时动态展示。默认1 。 */
+  DisplayMode?: number;
+  /** 字幕延迟展示时间,单位毫秒。默认10000。 */
+  DisplayDelayTime?: number;
+  /** 擦除类型选择“隐私保护”后，该项可见枚举值：blur face： 人脸模糊license plate： 车牌模糊 */
+  PrivacyProtection?: string;
+  /** 仅当擦除类型选择了违规音频，该项可见枚举值：0： 静音1： 哔音默认值：0 */
+  AudioErasureMode?: number;
+}
+
+declare interface ModifyLiveSmartEraseTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLiveSnapshotTemplateRequest {
   /** 模板 ID。 */
   TemplateId: number;
@@ -7021,6 +7159,8 @@ declare interface Live {
   CreateLiveRecordRule(data: CreateLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordRuleResponse>;
   /** 直播创建录制模板 {@link CreateLiveRecordTemplateRequest} {@link CreateLiveRecordTemplateResponse} */
   CreateLiveRecordTemplate(data: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
+  /** 创建直播智能擦除规则 {@link CreateLiveSmartEraseRuleRequest} {@link CreateLiveSmartEraseRuleResponse} */
+  CreateLiveSmartEraseRule(data: CreateLiveSmartEraseRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSmartEraseRuleResponse>;
   /** 创建直播智能擦除模板 {@link CreateLiveSmartEraseTemplateRequest} {@link CreateLiveSmartEraseTemplateResponse} */
   CreateLiveSmartEraseTemplate(data: CreateLiveSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveSmartEraseTemplateResponse>;
   /** 创建截图规则 {@link CreateLiveSnapshotRuleRequest} {@link CreateLiveSnapshotRuleResponse} */
@@ -7095,6 +7235,10 @@ declare interface Live {
   DeleteLiveRecordRule(data: DeleteLiveRecordRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordRuleResponse>;
   /** 删除录制模板 {@link DeleteLiveRecordTemplateRequest} {@link DeleteLiveRecordTemplateResponse} */
   DeleteLiveRecordTemplate(data: DeleteLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveRecordTemplateResponse>;
+  /** 删除直播智能擦除规则 {@link DeleteLiveSmartEraseRuleRequest} {@link DeleteLiveSmartEraseRuleResponse} */
+  DeleteLiveSmartEraseRule(data: DeleteLiveSmartEraseRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSmartEraseRuleResponse>;
+  /** 删除直播智能擦除模板 {@link DeleteLiveSmartEraseTemplateRequest} {@link DeleteLiveSmartEraseTemplateResponse} */
+  DeleteLiveSmartEraseTemplate(data: DeleteLiveSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSmartEraseTemplateResponse>;
   /** 删除截图规则 {@link DeleteLiveSnapshotRuleRequest} {@link DeleteLiveSnapshotRuleResponse} */
   DeleteLiveSnapshotRule(data: DeleteLiveSnapshotRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLiveSnapshotRuleResponse>;
   /** 删除截图模板 {@link DeleteLiveSnapshotTemplateRequest} {@link DeleteLiveSnapshotTemplateResponse} */
@@ -7247,6 +7391,12 @@ declare interface Live {
   DescribeLiveRecordTemplate(data: DescribeLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplateResponse>;
   /** 获取录制模板列表 {@link DescribeLiveRecordTemplatesRequest} {@link DescribeLiveRecordTemplatesResponse} */
   DescribeLiveRecordTemplates(data?: DescribeLiveRecordTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveRecordTemplatesResponse>;
+  /** 获取直播智能擦除规则列表 {@link DescribeLiveSmartEraseRulesRequest} {@link DescribeLiveSmartEraseRulesResponse} */
+  DescribeLiveSmartEraseRules(data?: DescribeLiveSmartEraseRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSmartEraseRulesResponse>;
+  /** 获取单个智能擦除模板 {@link DescribeLiveSmartEraseTemplateRequest} {@link DescribeLiveSmartEraseTemplateResponse} */
+  DescribeLiveSmartEraseTemplate(data: DescribeLiveSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSmartEraseTemplateResponse>;
+  /** 获取直播智能擦除模板 {@link DescribeLiveSmartEraseTemplatesRequest} {@link DescribeLiveSmartEraseTemplatesResponse} */
+  DescribeLiveSmartEraseTemplates(data?: DescribeLiveSmartEraseTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSmartEraseTemplatesResponse>;
   /** 获取截图规则列表 {@link DescribeLiveSnapshotRulesRequest} {@link DescribeLiveSnapshotRulesResponse} */
   DescribeLiveSnapshotRules(data?: DescribeLiveSnapshotRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveSnapshotRulesResponse>;
   /** 获取单个截图模板 {@link DescribeLiveSnapshotTemplateRequest} {@link DescribeLiveSnapshotTemplateResponse} */
@@ -7393,6 +7543,8 @@ declare interface Live {
   ModifyLivePushAuthKey(data: ModifyLivePushAuthKeyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLivePushAuthKeyResponse>;
   /** 直播修改录制模板配置 {@link ModifyLiveRecordTemplateRequest} {@link ModifyLiveRecordTemplateResponse} */
   ModifyLiveRecordTemplate(data: ModifyLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveRecordTemplateResponse>;
+  /** 修改直播智能擦除模板 {@link ModifyLiveSmartEraseTemplateRequest} {@link ModifyLiveSmartEraseTemplateResponse} */
+  ModifyLiveSmartEraseTemplate(data: ModifyLiveSmartEraseTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSmartEraseTemplateResponse>;
   /** 修改截图模板 {@link ModifyLiveSnapshotTemplateRequest} {@link ModifyLiveSnapshotTemplateResponse} */
   ModifyLiveSnapshotTemplate(data: ModifyLiveSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLiveSnapshotTemplateResponse>;
   /** 修改直播流监播任务 {@link ModifyLiveStreamMonitorRequest} {@link ModifyLiveStreamMonitorResponse} */

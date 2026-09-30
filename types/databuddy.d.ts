@@ -766,7 +766,7 @@ declare interface ResourceGroupInfo {
 
 /** 角色基础信息 */
 declare interface RoleBasicInfo {
-  /** 角色ID */
+  /** 角色ID，可通过 ListWorkspaceRoles / ListConsoleRoles 接口获取；创建/更新角色时无需填写（由系统自动生成，创建成功后从响应 Data.RoleId 获取） */
   Id?: string;
   /** 角色名称 */
   Name?: string;
@@ -774,11 +774,11 @@ declare interface RoleBasicInfo {
   Description?: string;
   /** 显示名称 */
   DisplayName?: string;
-  /** 角色类型 */
+  /** 角色类型：workspace=工作空间系统角色，workspace_custom=工作空间自定义角色，console=控制台角色；查询时返回，创建时无需填写（系统固定创建自定义角色） */
   RoleType?: string;
-  /** 角色来源，参考 web_enum_standard.proto -> RoleSource：0=未指定 1=用户直绑 2=用户组继承 3=两者都有 */
+  /** 角色来源（查询侧字段，创建时无需填写）：0=未指定，1=用户直绑，2=用户组继承，3=两者都有 */
   Source?: number;
-  /** 继承来源的用户组名称列表，Source=1 时为空 */
+  /** 继承来源的用户组名称列表（查询侧字段，创建时无需填写），Source=1 时为空 */
   GroupNames?: string[];
 }
 
@@ -796,9 +796,9 @@ declare interface RoleMetaData {
 
 /** 角色权限 */
 declare interface RolePermission {
-  /** 模块ID */
+  /** 模块ID，须为当前租户已开通的功能模块（叶子节点）的模块ID（层级编码字符串，如 101=快速开始、109=工作流、116101103=工作空间管理_角色权限），非法值返回 InvalidParameterValue；模块清单可通过控制台「工作空间设置-角色权限」页面查看 */
   ModuleId?: string;
-  /** 权限点 */
+  /** 模块访问权限，单值：R=只读，RW=读写，RWD=读写删除，N=无权限 */
   Permissions?: string;
 }
 
@@ -1705,7 +1705,7 @@ declare interface KillWorkflowRunResponse {
 }
 
 declare interface ListConsoleGroupUsersRequest {
-  /** 用户组 ID */
+  /** 用户组 ID，可通过 ListConsoleGroups 接口获取 */
   GroupId: string;
   /** 用户名称或 UIN 模糊匹配 */
   UserKeyword?: string;
@@ -1731,7 +1731,7 @@ declare interface ListConsoleGroupsRequest {
   PageNumber?: number;
   /** 每页大小，默认10，最小10，最大100 */
   PageSize?: number;
-  /** 通过用户组 ID 批量查询 */
+  /** 通过用户组ID批量查询；用户组ID可通过 ListConsoleGroups 接口获取 */
   GroupIds?: string[];
   /** 用户组名称模糊匹配 */
   GroupKeyword?: string;
@@ -1769,7 +1769,7 @@ declare interface ListConsoleUsersRequest {
   PageSize?: number;
   /** 用户名称与 UIN 模糊匹配 */
   UserKeyword?: string;
-  /** 用于过滤角色关联的用户枚举值：2001： 控制台管理员2002： 控制台成员 */
+  /** 用于过滤角色关联的用户枚举值：2001： 控制台管理员2002： 控制台成员可通过 ListConsoleRoles 接口获取 */
   RoleIds?: string[];
   /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}, {Name: 'UserName', Direction: 'Asc'}]，默认按创建时间降序 */
   OrderBys?: OrderBy[];

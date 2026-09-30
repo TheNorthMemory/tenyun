@@ -3108,6 +3108,14 @@ declare interface ResourceType {
   DataService?: ResourceGroupSpecification;
 }
 
+/** 查询结果字段信息 */
+declare interface ResultColumnInfo {
+  /** 字段名称 */
+  ColumnName?: string | null;
+  /** 字段类型，如 int、string、bigint 等 */
+  ColumnType?: string | null;
+}
+
 /** openapi回收授权返回 */
 declare interface RevokePrivilegesRsp {
   /** 结果 */
@@ -3234,6 +3242,46 @@ declare interface SecurityFilter {
 declare interface SqlCreateResult {
   /** 文件夹id */
   FolderId?: string | null;
+}
+
+/** 单个子查询（对应一条 SQL 语句）的查询结果 */
+declare interface SqlRunExecutionResult {
+  /** 子查询任务运行ID */
+  JobExecutionId?: string | null;
+  /** 子查询状态：SUCCESS、FAILED、TERMINATED、CANCELED 等 */
+  Status?: string | null;
+  /** 结果集字段信息；非查询类语句（INSERT/CREATE 等）为空列表 */
+  Columns?: ResultColumnInfo[] | null;
+  /** 结果数据行，每个元素的 Values 顺序与 Columns 一致 */
+  Rows?: SqlRunResultRow[] | null;
+  /** 本子查询的预览结果行数。预览行数上限遵循「项目管理-数据分析配置-单次运行的预览行数上限」，由执行平台在结果产出阶段截断 */
+  Total?: number | null;
+  /** 本子查询耗时，单位毫秒 */
+  CostMs?: number | null;
+  /** 本子查询结果是否不完整。返回数据总大小超过 10MB、或结果文件已被清理导致读取不完整时为 true */
+  Truncated?: boolean | null;
+}
+
+/** GetSQLRunResult 出参：一个查询任务下全部（或指定）子查询的结果集合 */
+declare interface SqlRunResult {
+  /** 查询任务ID */
+  JobId?: string | null;
+  /** 查询任务状态。终态取值：SUCCESS（成功）、FAILED（失败）、TERMINATED（已终止）、CANCELED（已取消）；非终态取值：QUEUED（排队中）、RUNNING（执行中）。非终态时不报错，Results 返回空数组，调用方应指数退避轮询直至进入终态 */
+  Status?: string | null;
+  /** 当前状态的可读说明，任意状态下均有值。用于说明 Results 为空的具体原因并给出下一步动作建议：任务未完成时提示稍后以相同 JobId 重试；任务失败/终止/取消时提示无结果数据及后续处理；成功且结果被截断时提示缩小查询范围。命名上与云API错误响应的 Error.Message 区分，本字段描述的是业务状态而非错误信息。随 Language 参数国际化 */
+  StatusMessage?: string | null;
+  /** 查询任务总耗时，单位毫秒 */
+  CostMs?: number | null;
+  /** 是否存在结果不完整的子查询。任一子查询的 Truncated 为 true 时本字段为 true */
+  Truncated?: boolean | null;
+  /** 各子查询的结果列表，顺序与 SQL 语句执行顺序一致 */
+  Results?: SqlRunExecutionResult[] | null;
+}
+
+/** 查询结果的单行数据。云API 数据结构不支持二维数组，故将一行数据包装为对象。 */
+declare interface SqlRunResultRow {
+  /** 该行各单元格取值，顺序与 Columns 一致。均为字符串：底层预览结果为 CSV 格式不携带类型信息，字段真实类型参见 Columns[].ColumnType */
+  Values?: string[] | null;
 }
 
 /** 批量启动任务返回参数 */
@@ -6066,6 +6114,22 @@ declare interface GetSQLFolderRequest {
 declare interface GetSQLFolderResponse {
   /** sql文件夹 */
   Data?: SQLFolderNode;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetSQLRunResultRequest {
+  /** 项目ID */
+  ProjectId: string;
+  /** 查询任务ID，由 RunSQLScript 返回 */
+  JobId: string;
+  /** 子查询任务运行ID。不传则返回该任务下全部子查询的结果 */
+  JobExecutionId?: string;
+}
+
+declare interface GetSQLRunResultResponse {
+  /** SQL查询结果 */
+  Data?: SqlRunResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -24667,6 +24731,8 @@ declare interface Wedata {
   GetResourceGroupMetrics(data: GetResourceGroupMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceGroupMetricsResponse>;
   /** 获取SQL文件夹详情 {@link GetSQLFolderRequest} {@link GetSQLFolderResponse} */
   GetSQLFolder(data: GetSQLFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetSQLFolderResponse>;
+  /** 获取SQL查询结果 {@link GetSQLRunResultRequest} {@link GetSQLRunResultResponse} */
+  GetSQLRunResult(data: GetSQLRunResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetSQLRunResultResponse>;
   /** 查看SQL脚本详情 {@link GetSQLScriptRequest} {@link GetSQLScriptResponse} */
   GetSQLScript(data: GetSQLScriptRequest, config?: AxiosRequestConfig): AxiosPromise<GetSQLScriptResponse>;
   /** 获取表详情 {@link GetTableRequest} {@link GetTableResponse} */
