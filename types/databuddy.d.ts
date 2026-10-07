@@ -72,12 +72,44 @@ declare interface AsyncOperation {
   Status: number | null;
 }
 
+/** 审计信息 */
+declare interface Audit {
+  /** 创建者。注意：此字段可能返回null，表示取不到有效值 */
+  Creator?: string | null;
+  /** 创建时间戳 */
+  CreatedAt?: string | null;
+  /** 最后修改者。注意：此字段可能返回null，表示取不到有效值 */
+  LastModifier?: string | null;
+  /** 最后修改时间戳 */
+  LastModifiedAt?: string | null;
+  /** 创建者名称 */
+  CreatorName?: string | null;
+  /** 最后修改者名称 */
+  LastModifierName?: string | null;
+}
+
 /** 通用错误信息 */
 declare interface CommonFailItem {
   /** uin或者groupId */
   Item?: string;
   /** 错误信息 */
   FailReason?: string;
+}
+
+/** 通用标签信息（用于查询展示场景），适用于表标签、字段标签等各类资产标签的轻量展示，供GetTable等接口返回使用 */
+declare interface CommonTagInfo {
+  /** 标签ID */
+  LabelId?: string;
+  /** 标签名称 */
+  LabelName?: string;
+  /** 标签值ID，属性标签（LabelType=3）可为0 */
+  LabelValueId?: string | null;
+  /** 标签值，脱敏标签（LabelType=4）时可为空 */
+  LabelValue?: string | null;
+  /** 标签类型，取值参考LabelType枚举定义：1-治理标签，2-自定义标签，3-属性标签，4-脱敏标签 */
+  Type?: number;
+  /** 标签是否已删除。true表示该LabelId在meta_biz_label中查不到记录，标签已被物理删除；false（默认）表示标签仍存在 */
+  Deleted?: boolean;
 }
 
 /** 控制台用户组信息（对外标准版，与内部 UserGroupRoleInfo 解耦） */
@@ -146,6 +178,12 @@ declare interface ConsoleUserInfo {
   IsAdmin?: boolean;
 }
 
+/** 创建数据目录的响应 */
+declare interface CreateCatalogRsp {
+  /** 新创建的数据目录的id */
+  CatalogId?: string | null;
+}
+
 /** 创建控制台用户组响应 */
 declare interface CreateConsoleGroupRsp {
   /** 创建成功的用户组 ID */
@@ -158,16 +196,36 @@ declare interface CreateFolderRsp {
   FolderId?: string;
 }
 
+/** 创建schema的响应 */
+declare interface CreateSchemaRsp {
+  /** schema信息 */
+  Schema?: Schema | null;
+}
+
 /** CreateWorkflowRsp */
 declare interface CreateWorkflowRsp {
   /** 工作流ID */
   WorkflowId?: string | null;
 }
 
+/** 创建工作空间角色结果 */
+declare interface CreateWorkspaceRoleResult {
+  /** 角色id */
+  RoleId?: string;
+  /** 创建工作空间角色是否成功 */
+  Status?: boolean | null;
+}
+
 /** 创建工作空间响应 */
 declare interface CreateWorkspaceRsp {
   /** 创建成功的工作空间ID */
   WorkspaceId?: string;
+}
+
+/** 删除数据目录描述的响应 */
+declare interface DeleteCatalogRsp {
+  /** 操作结果 */
+  Result?: boolean | null;
 }
 
 /** 删除控制台用户组响应 */
@@ -190,10 +248,22 @@ declare interface DeleteFolderRsp {
   Status?: boolean;
 }
 
+/** 删除Schema的响应 */
+declare interface DeleteSchemaRsp {
+  /** 操作结果 */
+  Result?: boolean | null;
+}
+
 /** DeleteWorkflowRsp */
 declare interface DeleteWorkflowRsp {
   /** 删除状态，true 表示成功 */
   Status?: boolean | null;
+}
+
+/** 删除工作空间角色结果 */
+declare interface DeleteWorkspaceRoleResult {
+  /** 删除工作空间角色是否成功 */
+  Status?: boolean;
 }
 
 /** 删除工作空间响应 */
@@ -208,6 +278,26 @@ declare interface DependOnBrief {
   TaskId?: string | null;
   /** 任务名称 */
   TaskName?: string | null;
+}
+
+/** 数据获取选项，用于get/list请求中控制响应返回哪些额外内容 */
+declare interface FetchOption {
+  /** 是否在响应中返回权限列表，默认false */
+  FetchPermissions?: boolean;
+  /** 是否获取特征表详情，当AssetType为TABLE时有效 */
+  FetchFeatureTableDetail?: boolean;
+  /** 按权限过滤，传入权限列表，仅返回当前用户拥有指定权限的实体。例如传入["SELECT_TABLE"]则仅返回当前用户有SELECT_TABLE权限的实体。只对list接口生效，为空时不进行权限过滤 */
+  FilterPermissions?: string[];
+  /** 是否在响应中返回负责人信息。不传或为true时返回负责人信息（默认返回），显式传false时不返回 */
+  FetchOwners?: boolean;
+  /** 是否将用户Uin转换为用户名(userName)。影响范围：Audit中的CreatorName/LastModifierName、MetaOwner中的OwnerName。不传或为true时执行转换（默认转换），显式传false时不转换 */
+  FetchUserInfo?: boolean;
+  /** 是否返回字段脱敏策略信息，默认不返回，传true则会查询表字段对应的字段脱敏策略信息 */
+  FetchMask?: boolean;
+  /** 是否返回标签信息，默认不返回。传true时，GetTable/ListTables/GetCatalog/ListCatalogs/GetSchema/ListSchemas/GetView/ListViews/GetFunction/ListFunctions/GetVolume/ListVolumes/GetModel/ListModels等接口会在对应实体中返回标签（Tags）字段 */
+  FetchTags?: boolean;
+  /** 是否返回字段关联的字典维度信息，默认不传，不返回 */
+  FetchDimensions?: boolean;
 }
 
 /** 文件运行配置 */
@@ -578,6 +668,14 @@ declare interface InnerWorkflowTaskRunListOption {
   RunStates?: string[] | null;
 }
 
+/** 扩展信息键值对 */
+declare interface KVPair {
+  /** 键 */
+  Key?: string | null;
+  /** 值 */
+  Value?: string | null;
+}
+
 /** 标签信息 */
 declare interface LabelBrief {
   /** 标签名称 */
@@ -660,6 +758,14 @@ declare interface ListFilesRsp {
   TotalPageNumber?: number;
 }
 
+/** 获取schema列表响应 */
+declare interface ListSchemasRsp {
+  /** schema列表 */
+  Items?: Schema[] | null;
+  /** 下页分页token */
+  NextPageToken?: string | null;
+}
+
 /** ListWorkflowRunsRsp */
 declare interface ListWorkflowRunsRsp {
   /** 当前页码 */
@@ -706,6 +812,34 @@ declare interface ListWorkflowsRsp {
   Items?: WorkflowBrief[] | null;
 }
 
+/** 查询工作空间列表响应 */
+declare interface ListWorkspacesRsp {
+  /** 工作空间列表 */
+  Items?: WorkspaceInfo[];
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+  /** 是否控制台管理员 */
+  IsConsoleAdmin?: boolean;
+}
+
+/** 元数据责任人信息数据结构 */
+declare interface MetaOwner {
+  /** 元数据名称（全名）:catalog.schema.table */
+  FullName?: string | null;
+  /** 所有者类型:User */
+  OwnerType?: string | null;
+  /** 所有者:唯一标识(uin) */
+  Owner?: string | null;
+  /** 所有者名称 */
+  OwnerName?: string | null;
+}
+
 /** 监控指标配置 */
 declare interface MonitorMetricBrief {
   /** 监控指标 ID，创建时无需传入，由服务端生成 */
@@ -742,6 +876,16 @@ declare interface ParamInfo {
   ParamKey?: string | null;
   /** 参数值 */
   ParamValue?: string | null;
+}
+
+/** 实体权限信息，用于在get/list接口中返回当前用户对实体的权限列表 */
+declare interface PermissionDetail {
+  /** 当前用户对该实体拥有的权限列表 */
+  Permissions?: string[];
+  /** catalog在工作空间上的权限信息（可选）。取值：WORKSPACE_READONLY（只读）或WORKSPACE_READWRITE（读写） */
+  CatalogWorkspacePrivilege?: string;
+  /** deny权限总列表（用户deny ∪ 角色deny ∪ 继承deny，已去重，已从Permissions中排除） */
+  DenyPrivilegeList?: string[];
 }
 
 /** 批量移除控制台用户响应 */
@@ -842,6 +986,26 @@ declare interface ScheduledTimeConfig {
   CycleNum?: number | null;
 }
 
+/** Schema信息 */
+declare interface Schema {
+  /** schema名称 */
+  Name: string;
+  /** 描述。注意：此字段可能返回null，表示取不到有效值 */
+  Comment?: string;
+  /** 属性。注意：此字段可能返回null，表示取不到有效值 */
+  Properties?: KVPair[];
+  /** 审计信息。注意：此字段可能返回null，表示取不到有效值 */
+  Audit?: Audit;
+  /** owner信息 */
+  MetaOwner?: MetaOwner;
+  /** 资产全局唯一ID，通过WedataAssetUIDUtils.generateUID生成 */
+  AssetGuid?: string;
+  /** 当前用户对该schema的权限信息。注意：此字段可能返回null，请求中未开启FetchPermissions时不返回 */
+  PermissionDetail?: PermissionDetail;
+  /** 标签信息列表。注意：此字段可能返回null，请求中未开启FetchTags时不返回 */
+  Tags?: CommonTagInfo[] | null;
+}
+
 /** git检出规则 */
 declare interface SparseCheckoutConfig {
   /** 是否启用稀疏检出 */
@@ -862,6 +1026,18 @@ declare interface StandardUserInfo {
   Nickname?: string;
   /** 0: 普通用户 1: entraId用户 */
   UserTag?: string;
+}
+
+/** 启动计算资源返回结果 */
+declare interface StartComputeRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
+}
+
+/** 停止计算资源返回结果 */
+declare interface StopComputeRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
 }
 
 /** 任务重试策略 */
@@ -956,6 +1132,12 @@ declare interface UpdateFolderRsp {
 declare interface UpdateWorkflowRsp {
   /** 更新状态，true 表示成功 */
   Status?: boolean | null;
+}
+
+/** 更新工作空间角色结果 */
+declare interface UpdateWorkspaceRoleResult {
+  /** 更新工作空间角色是否成功 */
+  Status?: boolean;
 }
 
 /** 修改工作空间响应 */
@@ -1406,6 +1588,28 @@ declare interface AddConsoleUsersResponse {
   RequestId?: string;
 }
 
+declare interface CreateCatalogRequest {
+  /** catalog名称 */
+  Name: string;
+  /** catalog类型, 可选值TABLE、MODEL、VOLUME */
+  Type: string;
+  /** 工作空间唯一id */
+  WorkspaceId: string;
+  /** 描述 */
+  Comment?: string;
+  /** connection 的 ID */
+  ConnectionId?: string;
+  /** 数据目录来源，可选（融合版新增字段），取值参考 CatalogSourceEnum：METALAKE（专业版）/ CONNECTION（分析版），不传时默认按 METALAKE 处理 */
+  CatalogSource?: string;
+}
+
+declare interface CreateCatalogResponse {
+  /** 创建catalog响应 */
+  Data?: CreateCatalogRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateConsoleGroupRequest {
   /** 用户组名称 */
   GroupName: string;
@@ -1470,6 +1674,26 @@ declare interface CreateFolderResponse {
   RequestId?: string;
 }
 
+declare interface CreateSchemaRequest {
+  /** catalog名称 */
+  CatalogName: string;
+  /** schema名称 */
+  Name: string;
+  /** 描述 */
+  Comment?: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId?: string;
+  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持创建schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误 */
+  ConnectionId?: string;
+}
+
+declare interface CreateSchemaResponse {
+  /** schema信息 */
+  Data?: CreateSchemaRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateWorkflowRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1522,6 +1746,38 @@ declare interface CreateWorkspaceResponse {
   RequestId?: string;
 }
 
+declare interface CreateWorkspaceRoleRequest {
+  /** 工作空间id */
+  WorkspaceId: string;
+  /** 角色基础信息 */
+  BasicInfo: RoleBasicInfo;
+  /** 角色权限 */
+  Permissions?: RolePermission[];
+}
+
+declare interface CreateWorkspaceRoleResponse {
+  /** 创建工作空间角色返回 */
+  Data?: CreateWorkspaceRoleResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteCatalogRequest {
+  /** 数据目录名 */
+  CatalogName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId?: string;
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  ConnectionId?: string;
+}
+
+declare interface DeleteCatalogResponse {
+  /** 操作结果 */
+  Data?: DeleteCatalogRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteConsoleGroupsRequest {
   /** 要删除的用户组 ID 列表，单次最多100个 */
   GroupIds: string[];
@@ -1566,6 +1822,24 @@ declare interface DeleteFolderResponse {
   RequestId?: string;
 }
 
+declare interface DeleteSchemaRequest {
+  /** 数据目录名 */
+  CatalogName: string;
+  /** 数据库名 */
+  SchemaName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId?: string;
+  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误 */
+  ConnectionId?: string;
+}
+
+declare interface DeleteSchemaResponse {
+  /** 操作结果 */
+  Data?: DeleteSchemaRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteWorkflowRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1588,6 +1862,20 @@ declare interface DeleteWorkspaceRequest {
 declare interface DeleteWorkspaceResponse {
   /** 操作结果 */
   Data?: DeleteWorkspaceRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteWorkspaceRoleRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 角色ID */
+  RoleId: string;
+}
+
+declare interface DeleteWorkspaceRoleResponse {
+  /** 删除工作空间角色结果 */
+  Data?: DeleteWorkspaceRoleResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1810,6 +2098,28 @@ declare interface ListFilesResponse {
   RequestId?: string;
 }
 
+declare interface ListSchemasRequest {
+  /** 数据目录名 */
+  CatalogName: string;
+  /** 最大结果条数 */
+  MaxResults?: number;
+  /** 分页token */
+  PageToken?: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId?: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  ConnectionId?: string;
+}
+
+declare interface ListSchemasResponse {
+  /** 操作结果 */
+  Data?: ListSchemasRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListWorkflowRunsRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -1898,6 +2208,32 @@ declare interface ListWorkflowsResponse {
   RequestId?: string;
 }
 
+declare interface ListWorkspacesRequest {
+  /** 工作空间ID精确匹配 */
+  WorkspaceId?: string;
+  /** 工作空间名称模糊匹配 */
+  WorkspaceKeyword?: string;
+  /** 工作空间状态过滤（多选）：0=未指定 1=创建中 2=创建失败 3=正常运行中 4=已删除 */
+  StatusList?: number[];
+  /** 多字段排序，如 [{Name: 'CreateTime', Direction: 'Desc'}]；传入单个即单字段排序，默认按创建时间降序 */
+  OrderBys?: OrderBy[];
+  /** 页码，从1开始，默认1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，最小10，最大100 */
+  PageSize?: number;
+  /** 工作空间地域过滤（多选），如 ap-guangzhou */
+  WorkspaceRegion?: string[];
+  /** 创建者UIN过滤（多选） */
+  Creator?: string[];
+}
+
+declare interface ListWorkspacesResponse {
+  /** 工作空间列表 */
+  Data?: ListWorkspacesRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveConsoleUsersRequest {
   /** 必填，待移除的用户 UIN 列表，单次最多10个 */
   UserUins: string[];
@@ -1954,6 +2290,34 @@ declare interface RunWorkflowRequest {
 declare interface RunWorkflowResponse {
   /** 运行工作流响应内容 */
   Data?: AsyncActionRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartComputeRequest {
+  /** 计算资源 ID */
+  ResourceId: string;
+  /** 工作空间 ID */
+  WorkspaceId: string;
+}
+
+declare interface StartComputeResponse {
+  /** 启动计算资源返回结果 */
+  Data?: StartComputeRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopComputeRequest {
+  /** 计算资源 ID */
+  ResourceId: string;
+  /** 工作空间 ID */
+  WorkspaceId: string;
+}
+
+declare interface StopComputeResponse {
+  /** 停止计算资源返回结果 */
+  Data?: StopComputeRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2094,31 +2458,59 @@ declare interface UpdateWorkspaceResponse {
   RequestId?: string;
 }
 
+declare interface UpdateWorkspaceRoleRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 角色信息 */
+  BasicInfo: RoleBasicInfo;
+  /** 功能点权限 */
+  Permissions?: RolePermission[];
+}
+
+declare interface UpdateWorkspaceRoleResponse {
+  /** 更新工作空间角色结果 */
+  Data?: UpdateWorkspaceRoleResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Databuddy 大数据智能体工作台DataBuddy} */
 declare interface Databuddy {
   (): Versions;
   /** 添加控制台用户 {@link AddConsoleUsersRequest} {@link AddConsoleUsersResponse} */
   AddConsoleUsers(data: AddConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<AddConsoleUsersResponse>;
+  /** 创建数据目录 {@link CreateCatalogRequest} {@link CreateCatalogResponse} */
+  CreateCatalog(data: CreateCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCatalogResponse>;
   /** 创建控制台用户组 {@link CreateConsoleGroupRequest} {@link CreateConsoleGroupResponse} */
   CreateConsoleGroup(data: CreateConsoleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleGroupResponse>;
   /** 创建代码文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建文件夹 {@link CreateFolderRequest} {@link CreateFolderResponse} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
+  /** 创建Schema {@link CreateSchemaRequest} {@link CreateSchemaResponse} */
+  CreateSchema(data: CreateSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemaResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
   /** 创建工作空间 {@link CreateWorkspaceRequest} {@link CreateWorkspaceResponse} */
   CreateWorkspace(data: CreateWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceResponse>;
+  /** 创建工作空间角色 {@link CreateWorkspaceRoleRequest} {@link CreateWorkspaceRoleResponse} */
+  CreateWorkspaceRole(data: CreateWorkspaceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceRoleResponse>;
+  /** 删除catalog {@link DeleteCatalogRequest} {@link DeleteCatalogResponse} */
+  DeleteCatalog(data: DeleteCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCatalogResponse>;
   /** 删除控制台用户组 {@link DeleteConsoleGroupsRequest} {@link DeleteConsoleGroupsResponse} */
   DeleteConsoleGroups(data: DeleteConsoleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteConsoleGroupsResponse>;
   /** 删除代码文件 {@link DeleteFileRequest} {@link DeleteFileResponse} */
   DeleteFile(data: DeleteFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileResponse>;
   /** 删除文件夹 {@link DeleteFolderRequest} {@link DeleteFolderResponse} */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
+  /** 删除schema {@link DeleteSchemaRequest} {@link DeleteSchemaResponse} */
+  DeleteSchema(data: DeleteSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSchemaResponse>;
   /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
   /** 删除工作空间 {@link DeleteWorkspaceRequest} {@link DeleteWorkspaceResponse} */
   DeleteWorkspace(data: DeleteWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkspaceResponse>;
+  /** 删除工作空间角色 {@link DeleteWorkspaceRoleRequest} {@link DeleteWorkspaceRoleResponse} */
+  DeleteWorkspaceRole(data: DeleteWorkspaceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkspaceRoleResponse>;
   /** 获取代码文件详情 {@link GetFileRequest} {@link GetFileResponse} */
   GetFile(data: GetFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileResponse>;
   /** 获取文件夹详情 {@link GetFolderRequest} {@link GetFolderResponse} */
@@ -2143,18 +2535,26 @@ declare interface Databuddy {
   ListConsoleUsers(data?: ListConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleUsersResponse>;
   /** 获取文件夹和文件列表 {@link ListFilesRequest} {@link ListFilesResponse} */
   ListFiles(data: ListFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ListFilesResponse>;
+  /** 查询schema列表 {@link ListSchemasRequest} {@link ListSchemasResponse} */
+  ListSchemas(data: ListSchemasRequest, config?: AxiosRequestConfig): AxiosPromise<ListSchemasResponse>;
   /** 工作流运行列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
   ListWorkflowRuns(data: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
   /** 查询工作流任务历史运行列表 {@link ListWorkflowTaskRunsRequest} {@link ListWorkflowTaskRunsResponse} */
   ListWorkflowTaskRuns(data: ListWorkflowTaskRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowTaskRunsResponse>;
   /** 查询工作流列表 {@link ListWorkflowsRequest} {@link ListWorkflowsResponse} */
   ListWorkflows(data: ListWorkflowsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowsResponse>;
+  /** 查询工作空间列表 {@link ListWorkspacesRequest} {@link ListWorkspacesResponse} */
+  ListWorkspaces(data?: ListWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspacesResponse>;
   /** 批量移除控制台用户 {@link RemoveConsoleUsersRequest} {@link RemoveConsoleUsersResponse} */
   RemoveConsoleUsers(data: RemoveConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveConsoleUsersResponse>;
   /** 重跑工作流 {@link RerunWorkflowRunRequest} {@link RerunWorkflowRunResponse} */
   RerunWorkflowRun(data: RerunWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<RerunWorkflowRunResponse>;
   /** 运行工作流 {@link RunWorkflowRequest} {@link RunWorkflowResponse} */
   RunWorkflow(data: RunWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkflowResponse>;
+  /** 启动计算资源 {@link StartComputeRequest} {@link StartComputeResponse} */
+  StartCompute(data: StartComputeRequest, config?: AxiosRequestConfig): AxiosPromise<StartComputeResponse>;
+  /** 停止计算资源 {@link StopComputeRequest} {@link StopComputeResponse} */
+  StopCompute(data: StopComputeRequest, config?: AxiosRequestConfig): AxiosPromise<StopComputeResponse>;
   /** 解绑工作流Bundle信息 {@link UnbindWorkflowBundleRequest} {@link UnbindWorkflowBundleResponse} */
   UnbindWorkflowBundle(data: UnbindWorkflowBundleRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkflowBundleResponse>;
   /** 修改控制台用户组 {@link UpdateConsoleGroupRequest} {@link UpdateConsoleGroupResponse} */
@@ -2169,6 +2569,8 @@ declare interface Databuddy {
   UpdateWorkflow(data: UpdateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowResponse>;
   /** 修改工作空间 {@link UpdateWorkspaceRequest} {@link UpdateWorkspaceResponse} */
   UpdateWorkspace(data: UpdateWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceResponse>;
+  /** 更新工作空间角色 {@link UpdateWorkspaceRoleRequest} {@link UpdateWorkspaceRoleResponse} */
+  UpdateWorkspaceRole(data: UpdateWorkspaceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceRoleResponse>;
 }
 
 export declare type Versions = ["2026-07-15"];

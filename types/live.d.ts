@@ -5438,6 +5438,16 @@ declare interface DescribeOriginStreamInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOriginWhiteIpListRequest {
+  /** 播放域名 */
+  Domain: string;
+}
+
+declare interface DescribeOriginWhiteIpListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePlayErrorCodeDetailInfoListRequest {
   /** 起始时间，使用UTC格式时间，例如：2019-01-08T10:00:00Z。注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/267/38543)。 */
   StartTime: string;
@@ -7449,6 +7459,8 @@ declare interface Live {
   DescribeMonitorReport(data: DescribeMonitorReportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMonitorReportResponse>;
   /** 获取直播源站配置信息 {@link DescribeOriginStreamInfoRequest} {@link DescribeOriginStreamInfoResponse} */
   DescribeOriginStreamInfo(data: DescribeOriginStreamInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginStreamInfoResponse>;
+  /** 获取直播源站白名单信息。 {@link DescribeOriginWhiteIpListRequest} {@link DescribeOriginWhiteIpListResponse} */
+  DescribeOriginWhiteIpList(data: DescribeOriginWhiteIpListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOriginWhiteIpListResponse>;
   /** 查询播放http错误码实时数据 {@link DescribePlayErrorCodeDetailInfoListRequest} {@link DescribePlayErrorCodeDetailInfoListResponse} */
   DescribePlayErrorCodeDetailInfoList(data: DescribePlayErrorCodeDetailInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePlayErrorCodeDetailInfoListResponse>;
   /** 查询播放http错误码汇总数据 {@link DescribePlayErrorCodeSumInfoListRequest} {@link DescribePlayErrorCodeSumInfoListResponse} */
