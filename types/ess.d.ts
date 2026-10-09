@@ -3945,10 +3945,10 @@ declare interface CreatePrepareFlowGroupResponse {
 declare interface CreatePrepareFlowRequest {
   /** 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）草稿Id（通过嵌入页面保存草稿后获取草稿Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
-  ResourceId: string;
   /** 自定义的合同流程的名称，长度不能超过200个字符，只能由中文汉字、中文标点、英文字母、阿拉伯数字、空格、小括号、中括号、中划线、下划线以及（,）、（;）、（.）、(&amp;)、（+）组成。该名称还将用于合同签署完成后文件下载的默认文件名称。 */
   FlowName: string;
+  /** 资源id，与ResourceType相对应，取值范围：文件Id（通过UploadFiles获取文件资源Id）模板Id（通过控制台创建模板后获取模板Id）草稿Id（通过嵌入页面保存草稿后获取草稿Id）注意：需要同时设置 ResourceType 参数指定资源类型 */
+  ResourceId?: string;
   /** 资源类型，取值有： **1**：模板 **2**：文件（默认值） **3**：草稿 */
   ResourceType?: number;
   /** 合同流程的签署顺序类型： **false**：(默认)有序签署, 本合同多个参与人需要依次签署 **true**：无序签署, 本合同多个参与人没有先后签署限制 */

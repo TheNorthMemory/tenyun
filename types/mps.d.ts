@@ -13114,6 +13114,26 @@ declare interface QueryHunyuan3DTaskResponse {
   ErrorMessage?: string;
   /** 仅 Status=DONE 时有值，产物文件列表 */
   ResultFile3Ds?: File3D[];
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务类型枚举值：text_to_3d： 文生3Dimage_to_3d： 图生3Dmultiview_to_3d： 多视图生3Dmesh_to_texture： 网格生纹理mesh_to_geometry： 网格生几何 */
+  TaskType?: string;
+  /** 输入的Prompt */
+  Prompt?: string;
+  /** 图生3D场景下输入的图片URL */
+  RefImage?: string;
+  /** 多图生3D场景下输入的图片信息 */
+  MultiViewImages?: ViewImage[];
+  /** 任务创建时间 */
+  CreateTime?: string;
+  /** 任务更新时间 */
+  UpdateTime?: string;
+  /** 提交任务的目标面数 */
+  FaceCount?: number;
+  /** 生成类型枚举值：Normal： 生成完整 3D 资产（几何 + 纹理）Geometry： 只生成几何体（无纹理，输出速度更快）Texture： 只生成纹理（需要传 MeshUrl）默认值：Normal */
+  GenerateType?: string;
+  /** 任务在队列中的位置，数值越小越靠前； */
+  QueuePosition?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -13271,6 +13291,8 @@ declare interface SubmitHunyuan3DTaskRequest {
   Seed?: number;
   /** 风格控制词 */
   Style?: string;
+  /** 客户自己申请创建的COS存储桶 */
+  StoreCosParam?: AigcStoreCosParam;
 }
 
 declare interface SubmitHunyuan3DTaskResponse {

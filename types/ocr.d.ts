@@ -4371,7 +4371,7 @@ declare interface MixedInvoiceOCRResponse {
 declare interface MultimodalDocParseRequest {
   /** 文件的 Url 地址，支持FileType参数对应的文件格式及大小。文件下载时间不超过3秒。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl: string;
-  /** 支持解析的文件类型。1：PDF 文档；2：Word 文档（.doc / .docx）；3：PPT 演示文稿（.ppt / .pptx）；4：Excel 表格（.xls / .xlsx）；5：Markdown 文档（.md）；6：纯文本文件（.txt）；7：图片文件（.png / .jpg / .jpeg 等）；8：WPS 文档；0：未知文件类型。支持的文件大小：PDF/WORD/PPT支持150M且300页以内、EXCEL支持10M以内、TXT支持10M以内、图片文件支持70M以内。默认值：1 */
+  /** 支持解析的文件类型。1：PDF 文档；2：Word 文档（.doc / .docx）；3：PPT 演示文稿（.ppt / .pptx）；4：Excel 表格（.xls / .xlsx）；5：Markdown 文档（.md）；6：纯文本文件（.txt）；7：图片文件（.png / .jpg / .jpeg 等）；8：WPS 文档；支持的文件大小：PDF/WORD/PPT支持150M且300页以内、EXCEL支持10M以内、TXT支持10M以内、图片文件支持30M以内。默认值：1 */
   FileType: number;
   /** 输出格式。1：json格式2：markdown格式3：xml格式9：json+markdown+xml格式默认值：9 */
   ResultType?: number;

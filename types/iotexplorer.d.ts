@@ -1494,10 +1494,12 @@ declare interface SeeStatItem {
   Time?: string;
   /** 任务数量 */
   Count?: number;
-  /** 基础能力用量 */
+  /** 基础能力后付费用量 */
   CostBasic?: number;
-  /** 高级能力用量 */
+  /** 高级能力后付费用量 */
   CostAdvanced?: number;
+  /** 预付费额度用量 */
+  CostCredits?: number;
 }
 
 /** TWeSee 每日与每周总结配置 */
@@ -1552,10 +1554,12 @@ declare interface SeeTaskInfo {
   FaceRecognitionResult?: SeeFaceRecognitionResult;
   /** 每日或每周总结结果 */
   SummarizeResult?: SeeSummarizeResult;
-  /** 完成该任务所消耗的基础能力额度 */
+  /** 完成该任务所产生的视觉理解基础能力后付费用量 */
   CostBasic?: number;
-  /** 完成该任务所消耗的高级能力额度 */
+  /** 完成该任务所产生的视觉理解高级能力后付费用量 */
   CostAdvanced?: number;
+  /** 完成该任务所消耗的视觉理解预付费额度 */
+  CostCredits?: number;
   /** 输出文件名列表 */
   Files?: string[];
   /** 输出文件详情列表 */
@@ -3371,9 +3375,9 @@ declare interface CreateTWeSeeSubscriptionRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  /** 算法类型枚举值：VID_COMP： 视频理解 */
   ServiceType: string;
-  /** 套餐规格。可选值：- `BASIC`：包年包月基础版（适用于视频理解） */
+  /** 套餐规格枚举值：BASIC： 包年包月基础版ADVANCED： 包年包月高级版 */
   ServiceTier: string;
   /** 订阅购买时长，单位：月，支持 1-60 */
   Period: number;
@@ -3381,7 +3385,7 @@ declare interface CreateTWeSeeSubscriptionRequest {
   ChannelId?: number;
   /** 自定义订单 ID */
   CustomOrderId?: string;
-  /** 续费标识。可选值：- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费（默认）- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费 */
+  /** 续费标识。可选值：NOTIFY_AND_MANUAL_RENEW：到期前通知并手动续费（默认）NOTIFY_AND_AUTO_RENEW：到期前通知并自动续费DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知且手动续费 */
   RenewFlag?: string;
 }
 
@@ -5114,7 +5118,7 @@ declare interface DescribeTWeSeeSubscriptionRequest {
 declare interface DescribeTWeSeeSubscriptionResponse {
   /** 资源 ID */
   ResourceId?: string;
-  /** 套餐规格。可能取值：BASIC：包年包月基础版（适用于视频理解） */
+  /** 套餐规格枚举值：BASIC： 包年包月基础版ADVANCED： 包年包月高级版 */
   ServiceTier?: string;
   /** 到期时间，秒级时间戳 */
   ExpireTime?: number;
@@ -5130,16 +5134,20 @@ declare interface DescribeTWeSeeSubscriptionResponse {
   EventIdFilterConfig?: SeeEventIdFilterConfig;
   /** 每日与每周总结配置 */
   SummarizeConfig?: SeeSummarizeConfig;
-  /** 当前周期基础能力总额度 */
-  QuotaBasic?: number;
-  /** 当前周期基础能力已用额度 */
-  QuotaUsedBasic?: number;
-  /** 当前周期高级能力总额度 */
-  QuotaAdvanced?: number;
-  /** 当前周期高级能力已用额度 */
-  QuotaUsedAdvanced?: number;
+  /** 当前周期内的额度总量 */
+  CreditsQuota?: number;
+  /** 当前周期内的已使用额度 */
+  CreditsUsed?: number;
   /** 额度刷新时间 */
   QuotaRefreshTime?: number;
+  /** 当前周期基础能力总额度（已废弃，当 ServiceTier=BASIC 时，取值等于 CreditsQuota） */
+  QuotaBasic?: number;
+  /** 当前周期基础能力已用额度（已废弃，当 ServiceTier=BASIC 时，取值等于 CreditsUsed 向下取整） */
+  QuotaUsedBasic?: number;
+  /** 当前周期高级能力总额度（已废弃，当 ServiceTier=ADVANCED 时，取值等于 CreditsQuota） */
+  QuotaAdvanced?: number;
+  /** 当前周期高级能力已用额度（已废弃，当 ServiceTier=ADVANCED 时，取值等于 CreditsUsed 向下取整） */
+  QuotaUsedAdvanced?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6163,6 +6171,8 @@ declare interface InvokeTWeSeeComprehensionRequest {
   ComprehensionConfig?: SeeComprehensionConfig;
   /** 等待结果的超时时间（单位：秒）。填 0 表示无需等待结果。最大超时时长 25 秒，默认超时时长 20 秒。 */
   WaitResultTimeout?: number;
+  /** 需额外等待结果的字段列表枚举值：FaceRecognitionResult： 等待人脸检测结果（仅当 ComprehensionConfig.EnableFaceDetection = true 时有效）接口固定会等待视觉理解结果，可选增加等待人脸检测结果 */
+  WaitResultFields?: string[];
   /** 回调目标 ID */
   CallbackId?: string;
 }
@@ -6174,10 +6184,12 @@ declare interface InvokeTWeSeeComprehensionResponse {
   Status?: number;
   /** 视觉理解结果 */
   ComprehensionResult?: SeeComprehensionResult;
-  /** 完成该任务所消耗的基础能力额度 */
+  /** 完成该任务所产生的视觉理解基础能力后付费用量 */
   CostBasic?: number;
-  /** 完成该任务所消耗的高级能力额度 */
+  /** 完成该任务所产生的视觉理解高级能力后付费用量 */
   CostAdvanced?: number;
+  /** 完成该任务所消耗的视觉理解预付费额度 */
+  CostCredits?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6419,14 +6431,14 @@ declare interface ListTWeSeePersonsResponse {
 }
 
 declare interface ListTWeSeeTasksRequest {
-  /** 设备名称 */
-  DeviceName: string;
-  /** 分页拉取数量 */
-  Limit: number;
   /** 产品 ID */
   ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
   /** 算法类目。可选值：COMPREHENSION：视觉理解HIGHLIGHT：视频浓缩SUMMARIZATION：每日/每周总结 */
   ServiceCategory: string;
+  /** 分页拉取数量 */
+  Limit: number;
   /** 通道 ID */
   ChannelId?: number;
   /** 查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。 */
@@ -6837,24 +6849,24 @@ declare interface ModifyTWeSeeSubscriptionRenewFlagResponse {
 }
 
 declare interface ModifyTWeSeeSubscriptionRequest {
-  /** 设备名称 */
-  DeviceName: string;
   /** 产品 ID */
   ProductId: string;
+  /** 设备名称 */
+  DeviceName: string;
   /** 算法类型。可选值：- `VID_COMP`：视频理解 */
   ServiceType: string;
-  /** 通道 ID */
-  ChannelId?: number;
-  /** 视频语义浓缩配置（适用于视频语义浓缩），不传则不修改 */
-  CompHighlightConfig?: SeeCompHighlightConfig;
   /** 视觉理解配置（适用于视频理解、图片理解），不传则不修改 */
   ComprehensionConfig?: SeeComprehensionConfig;
-  /** 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改 */
-  Enabled?: boolean;
-  /** 云存事件 ID 过滤规则配置，不传则不修改 */
-  EventIdFilterConfig?: SeeEventIdFilterConfig;
+  /** 视频语义浓缩配置（适用于视频语义浓缩），不传则不修改 */
+  CompHighlightConfig?: SeeCompHighlightConfig;
   /** 每日与每周总结配置，不传则不修改 */
   SummarizeConfig?: SeeSummarizeConfig;
+  /** 云存事件 ID 过滤规则配置，不传则不修改 */
+  EventIdFilterConfig?: SeeEventIdFilterConfig;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改 */
+  Enabled?: boolean;
 }
 
 declare interface ModifyTWeSeeSubscriptionResponse {
@@ -7131,7 +7143,7 @@ declare interface RenewTWeSeeSubscriptionRequest {
   ProductId: string;
   /** 设备名称 */
   DeviceName: string;
-  /** 算法类型。可选值：- `VID_COMP`：视频理解 */
+  /** 算法类型。可选值：VID_COMP：视频理解 */
   ServiceType: string;
   /** 续费时长，单位：月，支持 1-60 */
   Period: number;
