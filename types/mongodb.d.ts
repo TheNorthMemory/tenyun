@@ -516,6 +516,28 @@ declare interface InstanceTextParam {
   Status?: string;
 }
 
+/** 账号信息 */
+declare interface InstanceUserInfo {
+  /** 用户名 */
+  UserName?: string;
+  /** 认证数据库 */
+  Database?: string;
+  /** 角色列表（新方式） */
+  Roles?: Role[];
+  /** 权限列表（老方式） */
+  AuthRole?: Auth[];
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 控制台密码更新时间 */
+  ConsolePassUpdateTime?: string;
+  /** 是否开启密码轮转 */
+  EnablePasswordRotation?: number;
+  /** 自定义描述 */
+  Description?: string;
+}
+
 /** KMS密钥信息 */
 declare interface KMSInfoDetail {
   /** 主密钥 ID。 */
@@ -706,6 +728,46 @@ declare interface RestoreDatabases {
   Db: string;
   /** 待回档的集合信息。 */
   Collections: RestoreCollection[];
+}
+
+/** 角色 */
+declare interface Role {
+  /** 角色名 */
+  RoleName: string;
+  /** 角色所属db */
+  Database: string;
+}
+
+/** 角色详细信息 */
+declare interface RoleInfo {
+  /** 角色名称 */
+  RoleName?: string;
+  /** 角色所属数据库 */
+  Database?: string;
+  /** 角色类型：builtin_database-内置数据库角色，builtin_cluster-内置集群角色，custom-自定义角色 */
+  RoleType?: string;
+  /** 授予的权限 */
+  Privileges?: RolePrivilege[];
+  /** 继承的角色 */
+  InheritedRoles?: Role[];
+}
+
+/** 角色权限 */
+declare interface RolePrivilege {
+  /** 资源 */
+  Resource: RoleResource;
+  /** 动作 */
+  Actions: string[];
+}
+
+/** 角色资源 */
+declare interface RoleResource {
+  /** 是否集群级资源 */
+  Cluster?: boolean;
+  /** db名 */
+  Database?: string;
+  /** collection名 */
+  Collection?: string;
 }
 
 /** 安全组信息 */
@@ -1208,6 +1270,54 @@ declare interface CreateDBInstanceResponse {
   RequestId?: string;
 }
 
+declare interface CreateInstanceRoleRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 角色名 */
+  RoleName: string;
+  /** 角色所属db */
+  Database?: string;
+  /** 权限 */
+  Privileges?: RolePrivilege[];
+  /** 继承角色 */
+  InheritedRoles?: Role[];
+}
+
+declare interface CreateInstanceRoleResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateInstanceUserRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 用户名 */
+  UserName: string;
+  /** 密码 */
+  Password?: string;
+  /** 加密后的密码（与Password二选一） */
+  EncryptedPassword?: string;
+  /** 认证数据库（用户所属数据库） */
+  Database?: string;
+  /** 角色列表（新方式，可包含内置角色和自定义角色） */
+  Roles?: Role[];
+  /** 权限列表（旧方式） */
+  AuthRole?: Auth[];
+  /** 自定义描述 */
+  Description?: string;
+  /** 是否开启密码轮转（0-不开启，1-开启） */
+  EnablePasswordRotation?: number;
+}
+
+declare interface CreateInstanceUserResponse {
+  /** 异步任务ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateLogDownloadTaskRequest {
   /** 实例ID */
   InstanceId: string;
@@ -1292,6 +1402,38 @@ declare interface DeleteDBBackupsRequest {
 }
 
 declare interface DeleteDBBackupsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteInstanceRoleRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 角色名 */
+  RoleName: string;
+  /** 角色所属数据库 */
+  Database?: string;
+}
+
+declare interface DeleteInstanceRoleResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteInstanceUserRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 用户名 */
+  UserName: string;
+  /** 认证数据库 */
+  Database?: string;
+}
+
+declare interface DeleteInstanceUserResponse {
+  /** 流程ID */
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1806,6 +1948,36 @@ declare interface DescribeInstanceParamsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceRolesRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 数据库名，为空则查询所有数据库的角色 */
+  Database?: string;
+  /** 角色类型：builtin_database-内置数据库角色，builtin_cluster-内置集群角色，custom-自定义角色，为空则查询所有 */
+  RoleType?: string[];
+  /** 角色名称，为空则查询所有角色 */
+  RoleName?: string;
+  /** 通用搜索关键字，模糊匹配继承角色和权限相关数据库名、角色名、Action名等 */
+  SearchKey?: string;
+  /** 排序字段，支持：RoleName，默认为 RoleName */
+  OrderBy?: string;
+  /** 排序方式：asc-升序，desc-降序，默认为 asc */
+  OrderType?: string;
+  /** 分页偏移量，默认为 0 */
+  Offset?: number;
+  /** 每页数量，默认为 20，最大 100 */
+  Limit?: number;
+}
+
+declare interface DescribeInstanceRolesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 角色列表 */
+  Roles?: RoleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeInstanceSSLRequest {
   /** 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
   InstanceId: string;
@@ -1818,6 +1990,32 @@ declare interface DescribeInstanceSSLResponse {
   ExpiredTime?: string | null;
   /** 证书下载链接 */
   CertUrl?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceUsersRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 用户名，为空则查询所有用户 */
+  UserName?: string;
+  /** 数据库名，为空则查询所有数据库的账号 */
+  Database?: string;
+  /** 排序字段，可选值：UserName；不传则默认按 UserName 排序 */
+  OrderBy?: string;
+  /** 排序方式，可选值：asc（升序）、desc（降序），默认 asc */
+  OrderType?: string;
+  /** 分页偏移量，默认为 0 */
+  Offset?: number;
+  /** 每页数量，默认为 20，最大 100 */
+  Limit?: number;
+}
+
+declare interface DescribeInstanceUsersResponse {
+  /** 账号列表 */
+  Users?: InstanceUserInfo[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2650,6 +2848,52 @@ declare interface TerminateDBInstancesResponse {
   RequestId?: string;
 }
 
+declare interface UpdateInstanceRoleRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 角色名称 */
+  RoleName: string;
+  /** 角色所属数据库 */
+  Database?: string;
+  /** 角色权限列表，不传则不修改 */
+  Privileges?: RolePrivilege[];
+  /** 角色列表，不传则不修改 */
+  InheritedRoles?: Role[];
+}
+
+declare interface UpdateInstanceRoleResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateInstanceUserRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 用户名 */
+  UserName: string;
+  /** 认证数据库 */
+  Database?: string;
+  /** 新密码（可选，为空则不修改密码） */
+  Password?: string;
+  /** 加密后的密码（可选，与Password二选一） */
+  EncryptedPassword?: string;
+  /** 新的角色列表（可选，为空则不修改角色） */
+  Roles?: Role[];
+  /** 新的权限列表（可选，为空则不修改权限） */
+  AuthRole?: Auth[];
+  /** 用户描述（可选，为空则不修改描述） */
+  Description?: string;
+}
+
+declare interface UpdateInstanceUserResponse {
+  /** 流程ID */
+  FlowId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeDBInstanceKernelVersionRequest {
   /** 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同 */
   InstanceId: string;
@@ -3159,6 +3403,10 @@ declare interface Mongodb {
   CreateDBInstanceHour(data: CreateDBInstanceHourRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceHourResponse>;
   /** 创建数据库参数模板 {@link CreateDBInstanceParamTplRequest} {@link CreateDBInstanceParamTplResponse} */
   CreateDBInstanceParamTpl(data: CreateDBInstanceParamTplRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDBInstanceParamTplResponse>;
+  /** 创建数据库角色 {@link CreateInstanceRoleRequest} {@link CreateInstanceRoleResponse} */
+  CreateInstanceRole(data: CreateInstanceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceRoleResponse>;
+  /** 创建数据库账号 {@link CreateInstanceUserRequest} {@link CreateInstanceUserResponse} */
+  CreateInstanceUser(data: CreateInstanceUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceUserResponse>;
   /** 创建日志下载任务 {@link CreateLogDownloadTaskRequest} {@link CreateLogDownloadTaskResponse} */
   CreateLogDownloadTask(data: CreateLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLogDownloadTaskResponse>;
   /** 创建慢日志统计下载任务 {@link CreateSlowLogPatternDownloadTaskRequest} {@link CreateSlowLogPatternDownloadTaskResponse} */
@@ -3169,6 +3417,10 @@ declare interface Mongodb {
   DeleteAuditLogFile(data: DeleteAuditLogFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAuditLogFileResponse>;
   /** 删除全量备份 {@link DeleteDBBackupsRequest} {@link DeleteDBBackupsResponse} */
   DeleteDBBackups(data: DeleteDBBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDBBackupsResponse>;
+  /** 删除数据库角色 {@link DeleteInstanceRoleRequest} {@link DeleteInstanceRoleResponse} */
+  DeleteInstanceRole(data: DeleteInstanceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceRoleResponse>;
+  /** 删除数据库账号 {@link DeleteInstanceUserRequest} {@link DeleteInstanceUserResponse} */
+  DeleteInstanceUser(data: DeleteInstanceUserRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceUserResponse>;
   /** 删除日志下载任务 {@link DeleteLogDownloadTaskRequest} {@link DeleteLogDownloadTaskResponse} */
   DeleteLogDownloadTask(data: DeleteLogDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLogDownloadTaskResponse>;
   /** 全部账号列表 {@link DescribeAccountUsersRequest} {@link DescribeAccountUsersResponse} */
@@ -3213,8 +3465,12 @@ declare interface Mongodb {
   DescribeDetailedSlowLogs(data: DescribeDetailedSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDetailedSlowLogsResponse>;
   /** 获取当前实例可修改的参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询角色列表 {@link DescribeInstanceRolesRequest} {@link DescribeInstanceRolesResponse} */
+  DescribeInstanceRoles(data: DescribeInstanceRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceRolesResponse>;
   /** 查看实例SSL开启状态 {@link DescribeInstanceSSLRequest} {@link DescribeInstanceSSLResponse} */
   DescribeInstanceSSL(data: DescribeInstanceSSLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSSLResponse>;
+  /** 查询账号列表 {@link DescribeInstanceUsersRequest} {@link DescribeInstanceUsersResponse} */
+  DescribeInstanceUsers(data: DescribeInstanceUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceUsersResponse>;
   /** 日志下载任务查询 {@link DescribeLogDownloadTasksRequest} {@link DescribeLogDownloadTasksResponse} */
   DescribeLogDownloadTasks(data: DescribeLogDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogDownloadTasksResponse>;
   /** 日志查询接口 {@link DescribeMongodbLogsRequest} {@link DescribeMongodbLogsResponse} */
@@ -3313,6 +3569,10 @@ declare interface Mongodb {
   SetInstanceMaintenance(data: SetInstanceMaintenanceRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceMaintenanceResponse>;
   /** 包年包月退货退费 {@link TerminateDBInstancesRequest} {@link TerminateDBInstancesResponse} */
   TerminateDBInstances(data: TerminateDBInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateDBInstancesResponse>;
+  /** 更新数据库角色 {@link UpdateInstanceRoleRequest} {@link UpdateInstanceRoleResponse} */
+  UpdateInstanceRole(data: UpdateInstanceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInstanceRoleResponse>;
+  /** 更新账号信息 {@link UpdateInstanceUserRequest} {@link UpdateInstanceUserResponse} */
+  UpdateInstanceUser(data: UpdateInstanceUserRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateInstanceUserResponse>;
   /** 升级实例内核小版本号 {@link UpgradeDBInstanceKernelVersionRequest} {@link UpgradeDBInstanceKernelVersionResponse} */
   UpgradeDBInstanceKernelVersion(data: UpgradeDBInstanceKernelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeDBInstanceKernelVersionResponse>;
   /** 升级数据库版本 {@link UpgradeDbInstanceVersionRequest} {@link UpgradeDbInstanceVersionResponse} */

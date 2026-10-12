@@ -1760,13 +1760,13 @@ declare interface RailwayTicketInfo {
 
 /** 推理输出配置 */
 declare interface ReasoningConfig {
-  /** 实际使用的推理输出模式：enum 或 string。 */
+  /** 推理输出模式。可选值：enum（枚举值输出）、string（自由文本输出）。enum：VLM 必须从 EnumValues 中选择一个值输出，适用于二值判断或分类决策。string：VLM 输出自由文本，适用于需要自然语言解释的场景。 */
   OutputMode?: string;
-  /** 枚举值集合，仅在 OutputMode=enum 时生效。 VLM 输出必须精确命中此集合中的某个值。 */
+  /** 枚举值集合，仅在 OutputMode=enum 时生效，设置后VLM推理结果必须精确命中此集合中的某个值，否则会返回“输出偏离枚举值”，Prompt中的指令应与枚举值匹配。 */
   EnumValues?: string[];
-  /** 文本输出最大长度，仅在 OutputMode=string 时生效。取值范围：[1, 500]默认值：200 */
+  /** 文本输出最大长度，仅在 OutputMode=string 时生效。取值范围：[1, 500] */
   MaxLength?: number;
-  /** 是否在推理调用时向 VLM 传入原图进行多模态理解。 true（默认）：VLM 同时接收原图和渲染后的 Prompt，具备多模态理解能力，可直接"看"图片内容进行推理。 false：不传入原图，仅以渲染后的 Prompt（含变量注入值）进行纯文本推理。适用于推理逻辑完全基于结构化出参字段（如水印文字、置信度比较等）的场景，可降低推理延迟和计费成本。 建议：当 ReasoningPrompt 中未涉及"观察图片"、"直接看图"等多模态指令，且推理规则完全基于 ${变量名} 引用的文字结果时，可设为 false 以优化性能。 */
+  /** 是否在推理时向 VLM 传入原图进行多模态理解，不传入时默认为true。true：VLM 同时接收原图和渲染后的 Prompt，具备多模态理解能力，可直接"看"图片内容进行推理。false：不传入原图，仅以渲染后的 Prompt（含变量注入值）进行纯文本推理，适用于推理逻辑完全基于结构化出参字段（如水印文字、置信度比较等）的场景。建议：当 ReasoningPrompt 中未涉及"观察图片"、"分析图片"等多模态指令，推理规则完全基于 ${变量名} 引用的文字结果时，可设为 false 以获得更低的延迟。 */
   EnableImageInput?: boolean;
 }
 
@@ -1774,14 +1774,20 @@ declare interface ReasoningConfig {
 declare interface ReasoningResult {
   /** 实际使用的推理输出模式：enum 或 string。 */
   OutputMode?: string;
-  /** 枚举模式下的推理结果值。当 OutputMode=enum 时返回，必定命中请求中 EnumValues 的某个值。 若 VLM 输出无法匹配任何枚举值，则返回 UNCERTAIN。 */
+  /** 枚举模式下的推理结果值。当 OutputMode=enum 时返回，取值对应请求中配置的 EnumValues。 */
   EnumValue?: string;
-  /** 文本模式下的推理结果值。当 OutputMode=string 时返回。 若 VLM 无法得出结论，则返回 UNCERTAIN。 */
+  /** 文本模式下的推理结果值。当 OutputMode=string 时返回，以文本形式描述推理结论。 */
   TextValue?: string;
-  /** VLM 原始输出文本（未经过结构化校验）。 */
+  /** VLM 原始输出文本（未经过结构化校验）。该字段仅用于调试，生产环境可忽略。 */
   RawOutput?: string;
-  /** 变量替换后的实际 Prompt（脱敏后）。 */
+  /** 变量替换后的用户 Prompt 文本。该字段仅用于调试，生产环境可忽略。 */
   RenderedPrompt?: string;
+}
+
+/** 解析失败的页数 */
+declare interface ReconstructDocumentFailedPage {
+  /** 解析失败页数。 */
+  PageNumber?: number;
 }
 
 /** 矩形坐标 */
@@ -1822,6 +1828,14 @@ declare interface RequestIdInfo {
   ApiErrorCode?: string;
   /** 告警码 */
   WarnCodes?: number[];
+}
+
+/** 重排序结果 */
+declare interface RerankResult {
+  /** 文档在输入 Docs 列表中的索引，从 0 开始，用于回溯原文档。 */
+  Index?: number;
+  /** 文档与查询内容的相关性得分，数值越大越相关。 */
+  Score?: number;
 }
 
 /** 港澳台居住证信息返回 */
@@ -3578,6 +3592,30 @@ declare interface DescribeMarkEssayAgentJobResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMultimodalDocParseJobRequest {
+  /** 解析任务ID。由创建任务接口返回。 */
+  TaskId: string;
+}
+
+declare interface DescribeMultimodalDocParseJobResponse {
+  /** 任务状态。取值：Created：已创建，等待处理Processing：处理中Success：成功Failed：失败Unknown：未知 */
+  Status?: string;
+  /** 任务执行错误码。当任务状态不为 Failed 时，该值为“”。 */
+  ErrorCode?: string;
+  /** 任务执行错误信息。当任务状态不为 Failed 时，该值为“”。 */
+  ErrorMessage?: string;
+  /** 结果的临时下载地址。文件类型为 zip 压缩包，下载链接有效期 30 分钟。压缩包内包含 .md、.json 以及 images 文件夹。仅当任务状态为 Success 时返回该字段。 */
+  ResultUrl?: string;
+  /** 解析失败的页码列表。仅当任务状态为 Success 时返回该字段。 */
+  FailedPages?: ReconstructDocumentFailedPage[];
+  /** 解析成功页数。 */
+  SuccessPageNum?: number;
+  /** 解析失败页数。 */
+  FailPageNum?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQuestionMarkAgentJobRequest {
   /** 任务唯一ID。由服务端生成。 */
   JobId?: string;
@@ -5038,6 +5076,22 @@ declare interface RideHailingTransportLicenseOCRResponse {
   RequestId?: string;
 }
 
+declare interface RunRerankRequest {
+  /** 选择模型。0：Rerank-2b1：Rerank-0.6b */
+  Model: string;
+  /** 查询内容。用于匹配的query，即用户检索意图。 */
+  Query: string;
+  /** 文档内容列表。 */
+  Docs: string[];
+}
+
+declare interface RunRerankResponse {
+  /** 重排序后的结果列表，按相关性得分从高到低排列。 */
+  Results?: RerankResult[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SealOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -5128,6 +5182,32 @@ declare interface SubmitMarkEssayAgentJobRequest {
 declare interface SubmitMarkEssayAgentJobResponse {
   /** 任务唯一ID。由服务端生成。 示例值：1334797167793684480 */
   JobIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitMultimodalDocParseJobRequest {
+  /** 支持解析的文件类型。取值：1：PDF 文档2：Word 文档（.doc/.docx）3：PPT 演示文稿（.ppt/.pptx）4：Excel 表格（.xls/.xlsx）5：Markdown 文档（.md）6：纯文本文件（.txt）7：图片文件（.png/.jpg/.jpeg 等）8：WPS 文档支持的文件大小：PDF/WORD/PPT 支持 150M 且 300 页。 */
+  FileType: number;
+  /** 文件的 Url 地址，支持 FileType 参数对应的文件格式及大小。文件下载时间不超过 3 秒。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  FileUrl?: string;
+  /** 文件的 Base64 值。支持 FileType 参数对应的文件格式，支持的文件大小不超过 8M。文件下载时间不超过 3 秒。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
+  FileBase64?: string;
+  /** 输出格式。1：json格式2：markdown格式3：xml格式9：json+markdown+xml格式 */
+  ResultType?: number;
+  /** 是否开启子图提取，默认为 false。 */
+  EnableSubImg?: boolean;
+  /** 文档的起始页码。用来指定识别的起始页码，识别的页码包含当前值，不填时默认从文档第一页开始解析。本参数与 FileEndPageNumber 可分开填写，也可只填其中一个。 */
+  FileStartPageNumber?: number;
+  /** 文档的结束页码。用来指定识别的结束页码，识别的页码包含当前值，不填时默认解析到文档最后一页。本参数与 FileStartPageNumber 可分开填写，也可只填其中一个。 */
+  FileEndPageNumber?: number;
+  /** 任务类型，默认为 0。取值：0：默认1：Free OCR2：OCR3：表格识别4：代码识别 */
+  TaskType?: number;
+}
+
+declare interface SubmitMultimodalDocParseJobResponse {
+  /** 任务唯一 ID。30天内可以通过DescribeMultimodalDocParseJob接口查询TaskId对应的处理结果。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5535,15 +5615,15 @@ declare interface VerifyOfdVatInvoiceOCRResponse {
 declare interface VerifyScenePhotoRequest {
   /** 场景类型参数，如果场景无法细分请选用该大类的第一个子类，目前支持以下类型：经营场所照0101 门头照0102 店内照0103 流动经营照 车牌业务照0201 车牌 */
   Scene: string;
-  /** 鉴伪模式，目前支持以下模式，对应支持不同的入参、出参。Image：图像鉴伪模式，根据图像分析输出告警提示，支持推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。每次调用按1次调用计费。Video：视频鉴伪模式，根据视频分析输出告警提示，不支持推理，支持屏幕翻拍提示。每次调用按1次调用计费。Hybrid：混合鉴伪模式，综合图像、视频分析输出告警提示，支持推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。每次调用按2次调用计费。 */
+  /** 鉴伪模式，目前支持以下模式，对应支持不同的入参、出参，默认值为Image。Image：图像鉴伪模式，根据图像分析输出告警提示，支持自定义推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。每次调用按1次调用计费。Video：视频鉴伪模式，根据视频分析输出告警提示，不支持自定义推理，支持屏幕翻拍提示。每次调用按1次调用计费。Hybrid：混合鉴伪模式，综合图像、视频分析输出告警提示，支持自定义推理，支持区域篡改提示、AIGC合成提示、屏幕翻拍提示、截图提示、文字水印提示、水印内容、模板图片提示、VLM 推理结果。每次调用按2次调用计费。 */
   Mode?: string;
-  /** 视频的 Url 地址。格式支持：xxxxxx。要求视频不超过 100M。建议视频时长不小于1s。 */
+  /** 视频的 Url 地址。格式支持：mp4、avi、mov、mkv、webm，要求视频不超过 100M。建议视频时长不小于1s。 */
   VideoUrl?: string;
   /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M。 */
   ImageUrl?: string;
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M。 */
   ImageBase64?: string;
-  /** 推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。入参限制：长度限制：1–2000 字符 */
+  /** 推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。入参限制：长度限制：1–3000 字符 */
   ReasoningPrompt?: string;
   /** 推理输出配置。当 ReasoningPrompt 传入时建议同步传入，未传入时使用默认配置（OutputMode=enum, EnumValues=["true","false"], EnableImageInput=true）。 */
   ReasoningConfig?: ReasoningConfig;
@@ -5633,6 +5713,8 @@ declare interface Ocr {
   DescribeExtractDocAgentJob(data?: DescribeExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtractDocAgentJobResponse>;
   /** 作文批改Agent（查询任务） {@link DescribeMarkEssayAgentJobRequest} {@link DescribeMarkEssayAgentJobResponse} */
   DescribeMarkEssayAgentJob(data?: DescribeMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarkEssayAgentJobResponse>;
+  /** 异步多模态文档解析（查询任务） {@link DescribeMultimodalDocParseJobRequest} {@link DescribeMultimodalDocParseJobResponse} */
+  DescribeMultimodalDocParseJob(data: DescribeMultimodalDocParseJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultimodalDocParseJobResponse>;
   /** 试题批改Agent（查询任务） {@link DescribeQuestionMarkAgentJobRequest} {@link DescribeQuestionMarkAgentJobResponse} */
   DescribeQuestionMarkAgentJob(data?: DescribeQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQuestionMarkAgentJobResponse>;
   /** 异步试卷切题（查询任务） {@link DescribeQuestionSplitJobRequest} {@link DescribeQuestionSplitJobResponse} */
@@ -5729,6 +5811,8 @@ declare interface Ocr {
   RideHailingDriverLicenseOCR(data?: RideHailingDriverLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingDriverLicenseOCRResponse>;
   /** 网约车运输证识别 {@link RideHailingTransportLicenseOCRRequest} {@link RideHailingTransportLicenseOCRResponse} */
   RideHailingTransportLicenseOCR(data?: RideHailingTransportLicenseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<RideHailingTransportLicenseOCRResponse>;
+  /** 重排序 {@link RunRerankRequest} {@link RunRerankResponse} */
+  RunRerank(data: RunRerankRequest, config?: AxiosRequestConfig): AxiosPromise<RunRerankResponse>;
   /** 印章识别 {@link SealOCRRequest} {@link SealOCRResponse} */
   SealOCR(data?: SealOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SealOCRResponse>;
   /** 智能结构化识别 {@link SmartStructuralOCRRequest} {@link SmartStructuralOCRResponse} */
@@ -5737,6 +5821,8 @@ declare interface Ocr {
   SubmitExtractDocAgentJob(data?: SubmitExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitExtractDocAgentJobResponse>;
   /** 作文批改Agent（提交任务） {@link SubmitMarkEssayAgentJobRequest} {@link SubmitMarkEssayAgentJobResponse} */
   SubmitMarkEssayAgentJob(data?: SubmitMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMarkEssayAgentJobResponse>;
+  /** 异步多模态文档解析（创建任务） {@link SubmitMultimodalDocParseJobRequest} {@link SubmitMultimodalDocParseJobResponse} */
+  SubmitMultimodalDocParseJob(data: SubmitMultimodalDocParseJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMultimodalDocParseJobResponse>;
   /** 试题批改Agent（提交任务） {@link SubmitQuestionMarkAgentJobRequest} {@link SubmitQuestionMarkAgentJobResponse} */
   SubmitQuestionMarkAgentJob(data?: SubmitQuestionMarkAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitQuestionMarkAgentJobResponse>;
   /** 异步试卷切题（提交任务） {@link SubmitQuestionSplitJobRequest} {@link SubmitQuestionSplitJobResponse} */

@@ -274,6 +274,36 @@ declare interface DescribeAccountResourcesItems {
   AreaName?: string | null;
 }
 
+/** 列表账户虚拟组分页数据集 */
+declare interface DescribeAccountVirtualGroupsData {
+  /** id(只支持32位) */
+  Id?: number | null;
+  /** 分组id(只支持32位) */
+  AccountGroupId?: number | null;
+  /** 账户虚拟组名称 */
+  Name?: string | null;
+  /** 描述 */
+  Description?: string | null;
+  /** 源类型，手动、自动(只支持32位) */
+  SourceType?: number | null;
+  /** 扩展信息 */
+  ExtraInfo?: string | null;
+  /** 用户总数 */
+  UserTotal?: number | null;
+  /** 创建时间 */
+  Itime?: string | null;
+  /** 最后更新时间 */
+  Utime?: string | null;
+}
+
+/** 业务响应数据 */
+declare interface DescribeAccountVirtualGroupsPageData {
+  /** 分页公共对象 */
+  Page?: Paging | null;
+  /** 列表账户虚拟组分页数据集 */
+  Items?: DescribeAccountVirtualGroupsData[] | null;
+}
+
 /** 业务响应数据 */
 declare interface DescribeAggrSoftCategorySoftListData {
   /** 分页公共对象 */
@@ -1784,6 +1814,22 @@ declare interface DescribeAccountGroupsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAccountVirtualGroupsRequest {
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
+  /** 滤条件、分页参数Name - String - 是否必填：否 - 操作符: eq,like - 排序支持：否- 按账号虚拟组名称过滤。 */
+  Condition?: Condition;
+  /** 顶层目录分组ID，表示要查询哪个目录下的虚拟组 */
+  AccountGroupId?: number;
+}
+
+declare interface DescribeAccountVirtualGroupsResponse {
+  /** 业务响应数据 */
+  Data?: DescribeAccountVirtualGroupsPageData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAggrSoftCategorySoftListRequest {
   /** 过滤条件、分页参数Name - String - 过滤支持：是 - 操作符:eq,neq,like,ilike,nlike - 排序支持：是 - 按类别名称过滤或排序。CorpName - String - 过滤支持：是 - 操作符:eq,neq,like,ilike,nlike - 排序支持：是 - 按CorpName过滤或排序。Version - String - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按版本排序。InstalledDeviceCount - int - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按安装设备数量排序。GenuineRate - float - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按正版率排序。AuthNum - int - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按授权数量排序。CategoryNamePath - String - 过滤支持：否 - 操作符:eq,like - 排序支持：是 - 按类别路径名排序。 */
   Condition?: Condition;
@@ -2431,6 +2477,8 @@ declare interface Ioa {
   DeleteDeviceVirtualGroup(data?: DeleteDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceVirtualGroupResponse>;
   /** 获取账号分组信息 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
   DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
+  /** 列表账户虚拟组 {@link DescribeAccountVirtualGroupsRequest} {@link DescribeAccountVirtualGroupsResponse} */
+  DescribeAccountVirtualGroups(data?: DescribeAccountVirtualGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountVirtualGroupsResponse>;
   /** 软件分类的聚合软件列表查询 {@link DescribeAggrSoftCategorySoftListRequest} {@link DescribeAggrSoftCategorySoftListResponse} */
   DescribeAggrSoftCategorySoftList(data?: DescribeAggrSoftCategorySoftListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAggrSoftCategorySoftListResponse>;
   /** 获取聚合的软件详情 {@link DescribeAggrSoftDetailRequest} {@link DescribeAggrSoftDetailResponse} */

@@ -618,6 +618,28 @@ declare interface SandboxInstance {
   AuthMode?: string;
 }
 
+/** 沙箱快照 */
+declare interface SandboxSnapshot {
+  /** 沙箱快照 ID */
+  SnapshotId?: string;
+  /** 沙箱快照名称 */
+  SnapshotName?: string;
+  /** 源沙箱实例 ID，沙箱快照由其派生 */
+  SourceInstanceId?: string;
+  /** 制作快照时是否包含内存状态 */
+  MemoryIncluded?: boolean;
+  /** 沙箱快照状态枚举值：ACTIVE： 可用DELETING： 删除中DELETED： 已删除 */
+  Status?: string;
+  /** 用于说明沙箱快照处于该状态的原因 */
+  StatusReason?: string;
+  /** 云资源标签 */
+  Tags?: Tag[];
+  /** 创建时间参数格式：ISO8601 */
+  CreateTime?: string;
+  /** 更新时间参数格式：ISO8601 */
+  UpdateTime?: string;
+}
+
 /** 沙箱工具结构体 */
 declare interface SandboxTool {
   /** 沙箱工具唯一标识符 */
@@ -962,6 +984,26 @@ declare interface CreateRegistryResponse {
   RequestId?: string;
 }
 
+declare interface CreateSandboxSnapshotRequest {
+  /** 待制作快照的沙箱实例 ID */
+  InstanceId?: string;
+  /** 快照名称 */
+  SnapshotName?: string;
+  /** 制作快照时是否包含内存状态 */
+  Memory?: boolean;
+  /** 云资源标签 */
+  Tags?: Tag[];
+  /** 幂等 token */
+  ClientToken?: string;
+}
+
+declare interface CreateSandboxSnapshotResponse {
+  /** 沙箱快照 */
+  Snapshot?: SandboxSnapshot;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSandboxToolRequest {
   /** 沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一 */
   ToolName: string;
@@ -1080,6 +1122,16 @@ declare interface DeleteRegistryRequest {
 }
 
 declare interface DeleteRegistryResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteSandboxSnapshotRequest {
+  /** 待删除的沙箱快照 ID */
+  SnapshotId: string;
+}
+
+declare interface DeleteSandboxSnapshotResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1404,6 +1456,32 @@ declare interface DescribeSandboxInstanceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSandboxSnapshotListRequest {
+  /** 待查询的沙箱快照 ID 列表 */
+  SnapshotIds?: string[];
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 偏移量，与 NextToken 参数互斥 */
+  Offset?: number;
+  /** 返回数量上限 */
+  Limit?: number;
+  /** 分页偏移 token，与 Offset 参数互斥 */
+  NextToken?: string;
+  /** 每次调用返回的最大结果数。如果查询返回的时候有NextToken返回，您可以使用NextToken值获取更多页结果， 当NextToke返回空或者返回的结果数量小于MaxResults时，表示没有更多数据了。允许的最大页面大小为 100。 */
+  MaxResults?: number;
+}
+
+declare interface DescribeSandboxSnapshotListResponse {
+  /** 查询到的沙箱快照列表 */
+  SnapshotSet?: SandboxSnapshot[];
+  /** 查询到的沙箱快照数量 */
+  TotalCount?: number;
+  /** 分页偏移 token，可用于下一次查询 */
+  NextToken?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSandboxToolListRequest {
   /** 沙箱工具ID列表，指定要查询的工具。如果为空则查询所有工具。最大支持100个ID */
   ToolIds?: string[];
@@ -1671,6 +1749,8 @@ declare interface StartSandboxInstanceRequest {
   ToolId?: string;
   /** 沙箱工具名称，与 ToolId 至少有一个要填 */
   ToolName?: string;
+  /** 待克隆的源沙箱 ID */
+  SourceInstanceId?: string;
   /** 超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h */
   Timeout?: string;
   /** 幂等性 Token，长度不超过 64 字符 */
@@ -1843,6 +1923,8 @@ declare interface Ags {
   CreateRegistry(data: CreateRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRegistryResponse>;
   /** 创建 Record {@link CreateRegistryRecordRequest} {@link CreateRegistryRecordResponse} */
   CreateRegistryRecord(data: CreateRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRegistryRecordResponse>;
+  /** 创建沙箱快照 {@link CreateSandboxSnapshotRequest} {@link CreateSandboxSnapshotResponse} */
+  CreateSandboxSnapshot(data?: CreateSandboxSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxSnapshotResponse>;
   /** 创建沙箱工具 {@link CreateSandboxToolRequest} {@link CreateSandboxToolResponse} */
   CreateSandboxTool(data: CreateSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSandboxToolResponse>;
   /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
@@ -1857,6 +1939,8 @@ declare interface Ags {
   DeleteRegistry(data: DeleteRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegistryResponse>;
   /** 删除 Record {@link DeleteRegistryRecordRequest} {@link DeleteRegistryRecordResponse} */
   DeleteRegistryRecord(data: DeleteRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegistryRecordResponse>;
+  /** 删除沙箱快照 {@link DeleteSandboxSnapshotRequest} {@link DeleteSandboxSnapshotResponse} */
+  DeleteSandboxSnapshot(data: DeleteSandboxSnapshotRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxSnapshotResponse>;
   /** 删除沙箱工具 {@link DeleteSandboxToolRequest} {@link DeleteSandboxToolResponse} */
   DeleteSandboxTool(data: DeleteSandboxToolRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSandboxToolResponse>;
   /** 删除会话 {@link DeleteSessionRequest} {@link DeleteSessionResponse} */
@@ -1889,6 +1973,8 @@ declare interface Ags {
   DescribeRegistryRecordVersionList(data: DescribeRegistryRecordVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryRecordVersionListResponse>;
   /** 查询沙箱实例列表 {@link DescribeSandboxInstanceListRequest} {@link DescribeSandboxInstanceListResponse} */
   DescribeSandboxInstanceList(data?: DescribeSandboxInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstanceListResponse>;
+  /** 查询沙箱快照列表 {@link DescribeSandboxSnapshotListRequest} {@link DescribeSandboxSnapshotListResponse} */
+  DescribeSandboxSnapshotList(data?: DescribeSandboxSnapshotListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxSnapshotListResponse>;
   /** 查询沙箱工具列表 {@link DescribeSandboxToolListRequest} {@link DescribeSandboxToolListResponse} */
   DescribeSandboxToolList(data?: DescribeSandboxToolListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxToolListResponse>;
   /** 查询会话 {@link DescribeSessionRequest} {@link DescribeSessionResponse} */

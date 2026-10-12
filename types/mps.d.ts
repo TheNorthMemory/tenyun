@@ -1060,6 +1060,18 @@ declare interface AiCutoutConfig {
   Model?: string;
 }
 
+/** 智能图层拆分配置。 */
+declare interface AiDecomposeConfig {
+  /** 能力配置开关。枚举值：ON： 开启图层分离功能。OFF： 关闭图层分离功能。默认值：ON */
+  Switch?: string;
+  /** 预期拆层数量。取值范围：[2, 17] */
+  Layers?: number;
+  /** 提示词。 */
+  Prompt?: string;
+  /** 模型名称。枚举值：decompose-1.0-flash： 1.0版本 flash模型 */
+  Model?: string;
+}
+
 /** Ai自动生成漫剧的输入 */
 declare interface AiDramaInput {
   /** ai漫剧剧本参数格式：无入参限制：无 */
@@ -2284,6 +2296,16 @@ declare interface AudioEnhanceConfig {
   VolumeBalance?: VolumeBalanceConfig | null;
   /** 音频美化配置。 */
   Beautify?: AudioBeautifyConfig | null;
+  /** 音频增强编辑。 */
+  AudioEnhanceEdit?: AudioEnhanceEditConfig | null;
+}
+
+/** 音频增强编辑 */
+declare interface AudioEnhanceEditConfig {
+  /** 能力配置开关枚举值：ON： 开启OFF： 关闭默认值：OFF */
+  Switch?: string;
+  /** 音频编辑类型枚举值：restore： 修复默认值：restore */
+  Type?: string;
 }
 
 /** 音频分离配置 */
@@ -3496,6 +3518,14 @@ declare interface DiffusionEnhanceConfig {
   Type?: string | null;
 }
 
+/** 大模型增强-专业版 */
+declare interface DiffusionEnhanceV2Config {
+  /** 能力配置开关枚举值：ON： 开启OFF： 关闭默认值：OFF */
+  Switch?: string;
+  /** 强度类型枚举值：weak： 弱normal： 中strong： 强 */
+  Type?: string | null;
+}
+
 /** AIGC 文档生成视频背景图片信息 */
 declare interface DocToVideoBackgroundInfo {
   /** 用于生成视频的背景图片 URL。 */
@@ -4484,6 +4514,8 @@ declare interface ImageTaskInput {
   ImageQualityConfig?: ImageQualityConfig;
   /** 图层融合配置。 */
   AiComposeConfig?: AiComposeConfig;
+  /** 图层分离配置。 */
+  AiDecomposeConfig?: AiDecomposeConfig;
 }
 
 /** 图片基础转换能力 */
@@ -8594,6 +8626,8 @@ declare interface VideoEnhanceConfig {
   FrameRateWithDen?: FrameRateWithDenConfig | null;
   /** 大模型修复配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。 */
   AiRestoration?: AiRestorationConfig | null;
+  /** 大模型增强专业版配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。 */
+  DiffusionEnhanceV2?: DiffusionEnhanceV2Config | null;
 }
 
 /** aigc cos信息，存储用户请求时填写的cos信息，存放结果 */
@@ -10825,7 +10859,7 @@ declare interface DescribeCloneViralTaskResponse {
 }
 
 declare interface DescribeContentReviewTemplatesRequest {
-  /** 智能审核模板唯一标识过滤条件，数组长度限制：50。 */
+  /** 智能审核模板唯一标识过滤条件，数组长度限制：100。 */
   Definitions?: number[];
   /** 分页偏移量，默认值：0。 */
   Offset?: number;

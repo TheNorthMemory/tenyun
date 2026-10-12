@@ -3942,6 +3942,20 @@ declare interface DescribeWorkspacesResponse {
   RequestId?: string;
 }
 
+declare interface EnableTrainingTaskClsConfigRequest {
+  /** 训练任务ID */
+  TaskId: string;
+  /** 是否开启CLS日志投递 */
+  LogEnable: boolean;
+  /** 日志配置 */
+  LogConfig?: LogConfig;
+}
+
+declare interface EnableTrainingTaskClsConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyModelServiceAuthTokenRequest {
   /** 服务组 id */
   ServiceGroupId: string;
@@ -5095,6 +5109,8 @@ declare interface Tione {
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
   /** 查询工作空间列表 {@link DescribeWorkspacesRequest} {@link DescribeWorkspacesResponse} */
   DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
+  /** 开启CLS日志投递 {@link EnableTrainingTaskClsConfigRequest} {@link EnableTrainingTaskClsConfigResponse} */
+  EnableTrainingTaskClsConfig(data: EnableTrainingTaskClsConfigRequest, config?: AxiosRequestConfig): AxiosPromise<EnableTrainingTaskClsConfigResponse>;
   /** 更新模型服务 {@link ModifyModelServiceRequest} {@link ModifyModelServiceResponse} */
   ModifyModelService(data: ModifyModelServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModelServiceResponse>;
   /** 在线服务修改 AuthToken {@link ModifyModelServiceAuthTokenRequest} {@link ModifyModelServiceAuthTokenResponse} */

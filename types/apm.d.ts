@@ -550,6 +550,14 @@ declare interface CVMMeta {
   InstanceID?: string | null;
 }
 
+/** 接口参数列表 */
+declare interface ChartData {
+  /** 接口参数id列表 */
+  Series: Series[];
+  /** 接口参数列表 */
+  YAxis: YAxis[];
+}
+
 /** 包含了视图中节点组件类型的数量 */
 declare interface ComponentTopologyView {
   /** 服务纬度的节点数量 */
@@ -558,6 +566,14 @@ declare interface ComponentTopologyView {
   Database?: number | null;
   /** 消息队列节点数量 */
   MQ?: number | null;
+}
+
+/** 错误Span的数据项 */
+declare interface ErrorSpan {
+  /** 异常SpanId */
+  SpanID?: string;
+  /** 异常信息 */
+  ErrorMessage?: string;
 }
 
 /** 查询过滤参数 */
@@ -668,6 +684,16 @@ declare interface Selectors {
   Component?: string[] | null;
 }
 
+/** 耗时消耗时间 */
+declare interface Series {
+  /** 耗时列表信息 */
+  Data: number[];
+  /** 描述 */
+  Stack: string;
+  /** 字段名 */
+  Name?: string | null;
+}
+
 /** 应用详细信息 */
 declare interface ServiceDetail {
   /** 应用ID */
@@ -768,6 +794,34 @@ declare interface SpanTag {
   Key: string;
   /** 标签值 */
   Value: string;
+}
+
+/** 树形结构 */
+declare interface SpanTreeView {
+  /** 树结构json串 */
+  TreeData?: string;
+  /** 列表 */
+  ChartData?: ChartData;
+  /** Trace概览信息 */
+  TraceOverview?: TraceOverview;
+  /** 压缩编码后的树结构json串 */
+  CompressedTreeData?: string;
+  /** 整条链路的 span 数量是否超过限制 */
+  CntExceeded?: boolean;
+  /** 是否有内部查询超时 */
+  QueryTimeout?: boolean;
+  /** 链路中 span 总数量 */
+  SpanTotalCnt?: number;
+  /** 过滤视图的标签值列表 */
+  FilterViewTagValues?: TagValues[];
+}
+
+/** 维度值（值为List） */
+declare interface TagValues {
+  /** 维度键 */
+  Key?: string;
+  /** 维度值 */
+  Values?: string[];
 }
 
 /** tke资源元数据 */
@@ -878,6 +932,36 @@ declare interface TopologyNodeStats {
   Warning?: number;
   /** 异常节点数量 */
   Error?: number;
+}
+
+/** Trace概览查询 */
+declare interface TraceOverview {
+  /** traceID调用状态 */
+  Status?: number | null;
+  /** TraceId查询 */
+  TraceID?: string;
+  /** 错误信息 */
+  ErrorMsg?: string | null;
+  /** 服务名 */
+  ServiceName?: string | null;
+  /** 耗时 */
+  Duration?: number;
+  /** 接口名 */
+  Operation?: string;
+  /** 开始时间（微秒） */
+  StartTime?: number;
+  /** 应用数 */
+  ApplicationCount?: number;
+  /** 异常Span列表 */
+  ErrorSpans?: ErrorSpan[] | null;
+}
+
+/** 接口列表 */
+declare interface YAxis {
+  /** 接口列表 */
+  Keys: string[];
+  /** 接口列表 */
+  Data: string[];
 }
 
 declare interface CreateApmInstanceRequest {
@@ -1460,6 +1544,34 @@ declare interface DescribeServiceOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSpanTreeByIDRequest {
+  /** 业务系统 ID */
+  InstanceId: string;
+  /** TraceID */
+  Filters: Filter[];
+  /** Span查询开始时间戳（单位:秒） */
+  StartTime: number;
+  /** Span查询结束时间戳（单位:秒） */
+  EndTime: number;
+  /** 代表请求的是否为完整瀑布图 */
+  IsFold?: boolean;
+  /** 开启关键调用视图 */
+  EntrySpanSelected?: boolean;
+  /** 关注的SpanId */
+  FocusSpanId?: string;
+  /** 过滤视图的Tag列表 */
+  FilterViewTagKeyList?: string[];
+  /** 是否开启云资源关联 */
+  EnableResourceLink?: boolean;
+}
+
+declare interface DescribeSpanTreeByIDResponse {
+  /** 树形图 */
+  SpanTreeView?: SpanTreeView;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTagValuesRequest {
   /** 业务系统 ID */
   InstanceId: string;
@@ -1951,6 +2063,8 @@ declare interface Apm {
   DescribeRelatedServicesOnTrace(data: DescribeRelatedServicesOnTraceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRelatedServicesOnTraceResponse>;
   /** 获取应用概览数据 {@link DescribeServiceOverviewRequest} {@link DescribeServiceOverviewResponse} */
   DescribeServiceOverview(data: DescribeServiceOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServiceOverviewResponse>;
+  /** 查询 Trace 详情信息页 {@link DescribeSpanTreeByIDRequest} {@link DescribeSpanTreeByIDResponse} */
+  DescribeSpanTreeByID(data: DescribeSpanTreeByIDRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpanTreeByIDResponse>;
   /** 查询 Tag 数据 {@link DescribeTagValuesRequest} {@link DescribeTagValuesResponse} */
   DescribeTagValues(data: DescribeTagValuesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTagValuesResponse>;
   /** 获取拓扑图 {@link DescribeTopologyNewRequest} {@link DescribeTopologyNewResponse} */

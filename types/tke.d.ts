@@ -9303,7 +9303,7 @@ declare interface Tke {
   DescribeClusterRoutes(data: V20180525.DescribeClusterRoutesRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterRoutesResponse>;
   /** 查询集群调度策略 {@link V20180525.DescribeClusterSchedulerPolicyRequest} {@link V20180525.DescribeClusterSchedulerPolicyResponse} */
   DescribeClusterSchedulerPolicy(data: V20180525.DescribeClusterSchedulerPolicyRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterSchedulerPolicyResponse>;
-  /** 集群的密钥信息 {@link V20180525.DescribeClusterSecurityRequest} {@link V20180525.DescribeClusterSecurityResponse} */
+  /** @deprecated 集群的密钥信息 {@link V20180525.DescribeClusterSecurityRequest} {@link V20180525.DescribeClusterSecurityResponse} */
   DescribeClusterSecurity(data: V20180525.DescribeClusterSecurityRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterSecurityResponse>;
   /** 查看集群状态列表 {@link V20180525.DescribeClusterStatusRequest} {@link V20180525.DescribeClusterStatusResponse} */
   DescribeClusterStatus(data: V20180525.DescribeClusterStatusRequest, config: AxiosRequestConfig & V20180525.VersionHeader): AxiosPromise<V20180525.DescribeClusterStatusResponse>;

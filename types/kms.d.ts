@@ -855,13 +855,13 @@ declare interface GetParametersForImportRequest {
 
 declare interface GetParametersForImportResponse {
   /** CMK的唯一标识，用于指定目标导入密钥材料的CMK。 */
-  KeyId: string;
+  KeyId?: string;
   /** 导入密钥材料需要的token，用于作为 ImportKeyMaterial 的参数。 */
-  ImportToken: string;
+  ImportToken?: string;
   /** 用于加密密钥材料的RSA公钥，base64编码。使用PublicKey base64解码后的公钥将导入密钥进行加密后作为 ImportKeyMaterial 的参数。 */
-  PublicKey: string;
+  PublicKey?: string;
   /** 该导出token和公钥的有效期，超过该时间后无法导入，需要重新调用GetParametersForImport获取。 */
-  ParametersValidTo: number;
+  ParametersValidTo?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

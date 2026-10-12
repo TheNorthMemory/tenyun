@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，16171+ 服务数</summary>
+<details><summary>共计 263+ 款产品，16212+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -124,7 +124,7 @@ adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/produc
 advisor | [智能顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(3) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
-ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(54) |
+ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(57) |
 ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(19) |
 aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(18) |
 alb | [应用型负载均衡](https://cloud.tencent.com/document/product/1822) | 2025-10-30(48) |
@@ -136,7 +136,7 @@ ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
 apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(98) |
 apis | [AI Agent 安全网关](https://cloud.tencent.com/document/product/1627) | 2024-08-01(40) |
-apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(35) |
+apm | [应用性能监控](https://cloud.tencent.com/document/product/1463) | 2021-06-22(36) |
 asr | [语音识别](https://cloud.tencent.com/document/product/1093) | 2019-06-14(33) |
 asw | [应用与服务编排工作流](https://cloud.tencent.com/document/product/1272) | 2020-07-22(9) |
 as | [弹性伸缩](https://cloud.tencent.com/document/product/377) | 2018-04-19(58) |
@@ -207,7 +207,7 @@ cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(242) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
-databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(47) |
+databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(62) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
 dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(94) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
@@ -241,7 +241,7 @@ fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-
 ga2 | [全球加速](https://cloud.tencent.com/document/product/1817) | 2025-01-15(44) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(39) |
-goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(37) |
+goosefs | [数据加速器 GooseFS](https://cloud.tencent.com/document/product/1424) | 2022-05-19(44) |
 gs | [云游戏](https://cloud.tencent.com/document/product/1162) | 2019-11-18(83) |
 gwlb | [网关负载均衡](https://cloud.tencent.com/document/product/1782) | 2024-09-06(19) |
 habo |  | 2018-12-03(2) |
@@ -257,7 +257,7 @@ ie | [智能编辑](https://cloud.tencent.com/document/product/1186) | 2020-03-0
 ig | [智能导诊](https://cloud.tencent.com/document/product/1273) | 2021-05-18(6) |
 igtm | [智能全局流量管理](https://cloud.tencent.com/document/product/1551) | 2023-10-24(28) |
 ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 2020-12-29(2) | 2020-07-13(1) |
-ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(50) |
+ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(51) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
 iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(262) |
@@ -280,17 +280,17 @@ market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-1
 memcached | [云数据库Memcached](https://cloud.tencent.com/document/product/241) | 2019-03-18(1) |
 mmps | [小程序安全检测](https://cloud.tencent.com/document/product/1223) | 2020-07-10(15) |
 mna | [多网聚合加速](https://cloud.tencent.com/document/product/1385) | 2021-01-19(63) |
-mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(89) | 2018-04-08(13) |
+mongodb | [云数据库 MongoDB](https://cloud.tencent.com/document/product/240) | 2019-07-25(97) | 2018-04-08(13) |
 monitor | [腾讯云可观测平台](https://cloud.tencent.com/document/product/248) | 2023-06-16(42) | 2018-07-24(186) |
 mps | [媒体处理](https://cloud.tencent.com/document/product/862) | 2019-06-12(230) |
-mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(79) |
+mqtt | [消息队列 MQTT 版](https://cloud.tencent.com/document/product/1778) | 2024-05-16(80) |
 mrs | [医疗报告结构化](https://cloud.tencent.com/document/product/1314) | 2020-09-10(11) |
 ms | [移动应用安全](https://cloud.tencent.com/document/product/283) | 2018-04-08(23) |
 msp | [迁移服务平台](https://cloud.tencent.com/document/product/659) | 2018-03-19(7) |
 nlp | [NLP 技术](https://cloud.tencent.com/document/product/271) | 2019-04-08(3) |
 npp | 号码保护 | 2019-08-23(8) |
 oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 2019-04-22(54) |
-ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(80) |
+ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(32) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
 organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(134) | 2018-12-25(20) |
@@ -300,7 +300,7 @@ postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [风险识别 RCE](https://cloud.tencent.com/document/product/1343) | 2026-01-30(5) | 2025-04-25(1)<br/>2020-11-03(11) |
-redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(121) |
+redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(122) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
 rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(90) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
@@ -341,7 +341,7 @@ teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(52) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(75) | 2019-10-22(22) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(76) | 2019-10-22(22) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(35) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2022-05-01(24) | 2018-05-25(272) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |

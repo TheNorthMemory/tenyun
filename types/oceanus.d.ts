@@ -5,11 +5,11 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 /** 云联网描述信息 */
 declare interface CCN {
   /** 私有网络 ID */
-  VpcId: string;
+  VpcId?: string;
   /** 子网 ID */
-  SubnetId: string;
+  SubnetId?: string;
   /** 云联网 ID，如 ccn-rahigzjd */
-  CcnId: string;
+  CcnId?: string;
 }
 
 /** {"Clazz": "c1", // java类全路径"Level": "WARN" // 日志级别 TRACE，DEBUG、INFO、WARN、ERROR} */
@@ -280,6 +280,28 @@ declare interface ClusterSession {
   TaskManagerMem?: number;
   /** jdk版本 */
   JdkVersion?: string;
+  /** 描述 */
+  Description?: string | null;
+  /** 名称 */
+  Name?: string | null;
+  /** session集群SerialId */
+  SerialId?: string | null;
+  /** 集群名称 */
+  ClusterGroupName?: string | null;
+  /** cu */
+  TotalCpu?: number | null;
+  /** 使用Mem */
+  TotalMem?: number | null;
+  /** 空间Id */
+  WorkSpaceId?: string | null;
+  /** 空间名称 */
+  WorkSpaceName?: string | null;
+  /** 标签列表 */
+  Tags?: Tag[] | null;
+  /** 采集日志配置 */
+  LogConfig?: string | null;
+  /** 更新用户 */
+  UpdateUin?: string | null;
 }
 
 /** 集群的版本相关信息 */
@@ -1124,6 +1146,10 @@ declare interface Setats {
   Remark?: string;
   /** 集群隔离时间，0为7天，1为15天 */
   IsolationPolicyVersion?: number;
+  /** 安全组信息 */
+  SecurityGroupIds?: string[] | null;
+  /** 网络信息 */
+  CCNs?: CCN[] | null;
 }
 
 /** setats 机器规格 */
@@ -1424,6 +1450,8 @@ declare interface Warehouse {
   Properties?: Property[] | null;
   /** hive cata 类型 */
   HiveCatalogType?: number;
+  /** 流湖托管通serialId */
+  StorageSerialId?: string | null;
 }
 
 /** 空间和集群绑定关系 */

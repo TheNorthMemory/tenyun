@@ -174,6 +174,10 @@ declare interface DisplayConfig {
   CloudAssetStatus?: number;
   /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
   AggregationCount?: number;
+  /** 状态 */
+  Status?: string;
+  /** 最近检测时间 */
+  LastCheckTime?: string;
 }
 
 /** 暗网详情 */
@@ -650,6 +654,10 @@ declare interface DisplaySensitiveInfo {
   CloudAssetStatus?: number;
   /** 聚合视角下该组真实子项总数；非聚合视角为 0 */
   AggregationCount?: number;
+  /** 状态 */
+  Status?: string;
+  /** 最近检测时间 */
+  LastCheckTime?: string;
 }
 
 /** 子域名详情 */

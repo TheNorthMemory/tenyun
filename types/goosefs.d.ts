@@ -112,6 +112,32 @@ declare interface DistributedLoadAttrs {
   MetadataSync?: boolean;
 }
 
+/** 周期执行启动配置 */
+declare interface ExecutePeriodAttribute {
+  /** 选择的周期类型枚举值：DAY： 每天执行 WEEK： 每周执行MONTH： 每月执行 */
+  PeriodType?: string;
+  /** 选择每周执行时必填，需要选择周几,0-6 分别是周日到周六取值范围：[0, 6]默认值：0 */
+  StartWeekday?: number;
+  /** 选择每月执行时必填，1-28日选择一天取值范围：[1, 28]默认值：1 */
+  StartDate?: number;
+  /** 周期中的时间点，取值0~59取值范围：[0, 59] */
+  StartMinute?: number;
+  /** 24小时周期开始的小时数，取值0~23取值范围：[0, 23]默认值：1 */
+  StartHour?: number;
+}
+
+/** 执行时间 */
+declare interface ExecutionPlan {
+  /** 执行类型枚举值：scheduled： 指定时间执行periodic： 周期执行 */
+  ExecuteMode?: string;
+  /** 任务执行时间参数格式：2026-07-23 08:30入参限制：只有立即执行或者指定时间执行时设置，周期执行不需要设置默认值：当前时间 */
+  ExecuteAt?: string | null;
+  /** 周期执行的时间设置入参限制：选择周期执行时必填 */
+  ExecutePeriod?: ExecutePeriodAttribute | null;
+  /** 任务等待时间取值范围：[1, 500]单位：H默认值：12任务执行的等待时间，超过时间任务未启动，自动取消 */
+  WaitTime?: number;
+}
+
 /** 文件系统属性 */
 declare interface FSAttribute {
   /** 文件系统类型, 可填goosefs和goosefsx */
@@ -270,6 +296,18 @@ declare interface LoadTaskCreationAttrs {
   LoadDataAttrs?: LoadDataAttrs;
 }
 
+/** 清单配置 */
+declare interface ManifestAttr {
+  /** 桶名字 */
+  Bucket?: string;
+  /** 目录前缀 */
+  Prefix?: string;
+  /** 文件属性 */
+  Attributes?: string[];
+  /** 桶所在地域桶所在的地域，可以不填，认为是实例所在地域 */
+  Region?: string;
+}
+
 /** 关联的对象Bucket, 并将其映射到文件系统某个路径上 */
 declare interface MappedBucket {
   /** 对象存储Bucket名 */
@@ -312,12 +350,64 @@ declare interface MountPointEntry {
   MountDir?: string;
 }
 
+/** Policy扫描规则 */
+declare interface PolicyRuleOperator {
+  /** 规则名枚举值：CREATION_TIME_DAYS： 创建时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 CREATION_TIME > 5，指的是创建时间-今天大于5天，即5天前（以及更早）创建的文件CHANGE_TIME_DAYS： 元数据修改时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 CHANGE_TIME > 5，指的是元数据修改时间-今天大于5天，即5天前以及更早修改元数据的文件MODIFICATION_TIME_DAYS： 数据修改时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 MODIFICATION_TIME > 5，指的是数据修改时间-今天大于5天，即5天前（以及更早）修改的文件ACCESS_TIME_DAYS： 访问时间，比较的value 是days，数字整数。判断条件均为与“今天”相差。例如 ACCESS_TIME > 5，指的是访问时间-今天大于5天，即5天前（以及更早）访问的文件CREATION_TIME_DATE： 创建时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 CREATION_TIME > 2026-06-01，指的是创建时间晚于2026年6月1日CHANGE_TIME_DATE： 元数据修改时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 CHANGE_TIME > 2026-06-01，指的是元数据修改晚于2026年6月1日MODIFICATION_TIME_DATE： 数据修改时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 MODIFICATION_TIME > 2026-06-01，指的是数据修改时间晚于2026年6月1日ACCESS_TIME_DATE： 访问时间，比较的value 是date,日期，格式为YYYY-MM-DD。判断条件均为与value对应的日期的对比。例如 ACCESS_TIME > 2026-06-01，指的是访问时间晚于2026年6月1日FILE_SIZE： 文件大小，数字，单位byte，整数，0 ～ 64位整数最大值 */
+  Key?: string;
+  /** 比较关系枚举值：>： 大于>=： 大于等于=： 相等<： 小于<=： 小于等于 */
+  Operator?: string;
+  /** 比较值如果Key是CREATION_TIME_DAYS、CHANGE_TIME_DAYS、MODIFICATION_TIME_DAYS、ACCESS_TIME_DAYS时，值是整数；如果Key是CREATION_TIME_DATE、CHANGE_TIME_DATE、MODIFICATION_TIME_DATE、ACCESS_TIME_DATE时，值是日期，格式是YYYY-MM-DD；如果Key是FILE_SIZE，值是整数，单位是byte */
+  Value?: string;
+}
+
+/** 扫描规则信息 */
+declare interface PolicyRuleTaskAttribute {
+  /** 规则id */
+  RuleId?: string;
+  /** 规则名称 */
+  Name?: string;
+  /** 扫描目录 */
+  ScanDir?: string;
+  /** 执行计划 */
+  Execution?: ExecutionPlan;
+  /** 扫描规则 */
+  PolicyRuleSet?: PolicyRuleOperator[] | null;
+  /** 是否输出清单 */
+  EnableManifest?: boolean;
+  /** 输出清单配置 */
+  Manifest?: ManifestAttr | null;
+  /** 任务状态枚举值：0： 启用（enable）1： 禁用（disable）默认值：0 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+}
+
 /** 角色凭证 */
 declare interface RoleToken {
   /** 角色名 */
   RoleName?: string;
   /** 用于goosefs client/sdk等 */
   Token?: string;
+}
+
+/** 扫描规则执行信息 */
+declare interface RuleExecuteAttribute {
+  /** 执行id */
+  RecordId?: string;
+  /** 开始执行时间 */
+  StartTime?: string;
+  /** 执行结束时间 */
+  EndTime?: string;
+  /** 执行状态枚举值：0： 等待中1： 执行中2： 已完成3： 已跳过默认值：0已跳过是指任务排队超过了任务的等待时间会自动跳过 */
+  Status?: number;
+  /** 存储量单位：GB默认值：0不足1G按照1G 统计 */
+  Capacity?: number;
+  /** 文件数 */
+  FileCount?: number;
+  /** 文件清单路径参数格式：http://xxx/xxx/xx */
+  ManifestUrl?: string;
 }
 
 /** vpc子网信息 */
@@ -446,6 +536,20 @@ declare interface CancelLoadTaskResponse {
   RequestId?: string;
 }
 
+declare interface CancelPolicyRuleExecuteRecordRequest {
+  /** 规则id */
+  RuleId: string;
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 执行记录id */
+  RecordId: string;
+}
+
+declare interface CancelPolicyRuleExecuteRecordResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDataRepositoryTaskRequest {
   /** 数据流通任务类型, FS_TO_COS(文件系统到COS Bucket),或者COS_TO_FS(COS Bucket到文件系统) */
   TaskType: string;
@@ -554,6 +658,30 @@ declare interface CreateLoadTaskResponse {
   RequestId?: string;
 }
 
+declare interface CreatePolicyRuleRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 扫描目录 */
+  ScanDir: string;
+  /** 规则名称 */
+  Name: string;
+  /** 执行计划 */
+  Execution: ExecutionPlan;
+  /** 过滤规则 */
+  PolicyRuleSet?: PolicyRuleOperator[];
+  /** 是否输出清单 */
+  EnableManifest?: boolean;
+  /** 清单配置 */
+  Manifest?: ManifestAttr;
+}
+
+declare interface CreatePolicyRuleResponse {
+  /** 规则id */
+  RuleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCrossVpcSubnetSupportForClientNodeRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -596,6 +724,18 @@ declare interface DeleteFilesetRequest {
 }
 
 declare interface DeleteFilesetResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePolicyRuleRequest {
+  /** 规则id */
+  RuleId: string;
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DeletePolicyRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -742,6 +882,44 @@ declare interface DescribeLoadTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribePolicyRuleExecuteRecordRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 最大返回数量 */
+  Limit: number;
+  /** 规则id */
+  RuleId?: string;
+}
+
+declare interface DescribePolicyRuleExecuteRecordResponse {
+  /** 执行记录详情 */
+  RuleExecuteList?: RuleExecuteAttribute[];
+  /** 任务总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePolicyRuleRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 最大返回数量 */
+  Limit: number;
+}
+
+declare interface DescribePolicyRuleResponse {
+  /** 规则任务详情 */
+  PolicyRuleTaskList?: PolicyRuleTaskAttribute[];
+  /** 任务总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DetachFileSystemBucketRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -754,13 +932,39 @@ declare interface DetachFileSystemBucketResponse {
   RequestId?: string;
 }
 
+declare interface DisablePolicyRuleRequest {
+  /** 规则ID */
+  RuleId: string;
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface DisablePolicyRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface EnablePolicyRuleRequest {
+  /** 规则ID */
+  RuleId: string;
+  /** 文件系统ID */
+  FileSystemId: string;
+}
+
+declare interface EnablePolicyRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExpandCapacityRequest {
   /** 文件系统ID */
   FileSystemId: string;
-  /** 新增扩容的系统容量 */
+  /** 新增扩容的系统容量(单位 GiB) */
   ExpandedCapacity: number;
   /** 容量修改类型：add/sub */
   ModifyType?: string;
+  /** 是否是快速扩容,只针对部分model有效 */
+  RapidExpansion?: boolean;
 }
 
 declare interface ExpandCapacityResponse {
@@ -939,6 +1143,8 @@ declare interface Goosefs {
   BuildCustomerCluster(data?: BuildCustomerClusterRequest, config?: AxiosRequestConfig): AxiosPromise<BuildCustomerClusterResponse>;
   /** 取消 GooseFS 预热任务 {@link CancelLoadTaskRequest} {@link CancelLoadTaskResponse} */
   CancelLoadTask(data: CancelLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelLoadTaskResponse>;
+  /** 取消正在执行扫描的任务 {@link CancelPolicyRuleExecuteRecordRequest} {@link CancelPolicyRuleExecuteRecordResponse} */
+  CancelPolicyRuleExecuteRecord(data: CancelPolicyRuleExecuteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<CancelPolicyRuleExecuteRecordResponse>;
   /** 创建数据流动任务 {@link CreateDataRepositoryTaskRequest} {@link CreateDataRepositoryTaskResponse} */
   CreateDataRepositoryTask(data: CreateDataRepositoryTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDataRepositoryTaskResponse>;
   /** 创建文件系统 {@link CreateFileSystemRequest} {@link CreateFileSystemResponse} */
@@ -947,6 +1153,8 @@ declare interface Goosefs {
   CreateFileset(data: CreateFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFilesetResponse>;
   /** 创建 GooseFS 预热任务 {@link CreateLoadTaskRequest} {@link CreateLoadTaskResponse} */
   CreateLoadTask(data: CreateLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadTaskResponse>;
+  /** 创建扫描规则 {@link CreatePolicyRuleRequest} {@link CreatePolicyRuleResponse} */
+  CreatePolicyRule(data: CreatePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyRuleResponse>;
   /** 为客户端节点删除跨vpc子网访问能力 {@link DeleteCrossVpcSubnetSupportForClientNodeRequest} {@link DeleteCrossVpcSubnetSupportForClientNodeResponse} */
   DeleteCrossVpcSubnetSupportForClientNode(data: DeleteCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCrossVpcSubnetSupportForClientNodeResponse>;
   /** 删除客户端集群 {@link DeleteCustomerClusterRequest} {@link DeleteCustomerClusterResponse} */
@@ -955,6 +1163,8 @@ declare interface Goosefs {
   DeleteFileSystem(data: DeleteFileSystemRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileSystemResponse>;
   /** 删除Fileset {@link DeleteFilesetRequest} {@link DeleteFilesetResponse} */
   DeleteFileset(data: DeleteFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilesetResponse>;
+  /** 删除扫描规则 {@link DeletePolicyRuleRequest} {@link DeletePolicyRuleResponse} */
+  DeletePolicyRule(data: DeletePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyRuleResponse>;
   /** 列出集群中所有的客户端节点 {@link DescribeClientNodesRequest} {@link DescribeClientNodesResponse} */
   DescribeClientNodes(data: DescribeClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientNodesResponse>;
   /** 查询GooseFS集群客户端凭证 {@link DescribeClusterClientTokenRequest} {@link DescribeClusterClientTokenResponse} */
@@ -975,8 +1185,16 @@ declare interface Goosefs {
   DescribeFilesets(data: DescribeFilesetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFilesetsResponse>;
   /** 查询 GooseFS 预热任务 {@link DescribeLoadTaskRequest} {@link DescribeLoadTaskResponse} */
   DescribeLoadTask(data: DescribeLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoadTaskResponse>;
+  /** 列出扫描规则 {@link DescribePolicyRuleRequest} {@link DescribePolicyRuleResponse} */
+  DescribePolicyRule(data: DescribePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyRuleResponse>;
+  /** 列出扫描规则执行记录 {@link DescribePolicyRuleExecuteRecordRequest} {@link DescribePolicyRuleExecuteRecordResponse} */
+  DescribePolicyRuleExecuteRecord(data: DescribePolicyRuleExecuteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyRuleExecuteRecordResponse>;
   /** 解绑文件系统与Bucket的映射 {@link DetachFileSystemBucketRequest} {@link DetachFileSystemBucketResponse} */
   DetachFileSystemBucket(data: DetachFileSystemBucketRequest, config?: AxiosRequestConfig): AxiosPromise<DetachFileSystemBucketResponse>;
+  /** 禁用扫描规则 {@link DisablePolicyRuleRequest} {@link DisablePolicyRuleResponse} */
+  DisablePolicyRule(data: DisablePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DisablePolicyRuleResponse>;
+  /** 启用扫描规则 {@link EnablePolicyRuleRequest} {@link EnablePolicyRuleResponse} */
+  EnablePolicyRule(data: EnablePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePolicyRuleResponse>;
   /** 扩展文件系统容量 {@link ExpandCapacityRequest} {@link ExpandCapacityResponse} */
   ExpandCapacity(data: ExpandCapacityRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandCapacityResponse>;
   /** 列出 GooseFS 预热任务 {@link ListLoadTasksRequest} {@link ListLoadTasksResponse} */

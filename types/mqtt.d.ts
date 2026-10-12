@@ -208,6 +208,26 @@ declare interface DeviceIdentityItem {
   PropagatingProperties?: PropagatingProperty[];
 }
 
+/** 客户端事件信息详情 */
+declare interface EventInfo {
+  /** 事件信息key */
+  Key?: string | null;
+  /** 事件信息值 */
+  Value?: string | null;
+}
+
+/** 事件 */
+declare interface EventItem {
+  /** 创建时间 */
+  Timestamp?: number | null;
+  /** 事件 */
+  Event?: string | null;
+  /** 发消息或者收消息的clientid */
+  ClientId?: string | null;
+  /** 事件的相关信息 */
+  Info?: EventInfo[] | null;
+}
+
 /** 查询过滤器 */
 declare interface Filter {
   /** 过滤条件名 */
@@ -1164,6 +1184,24 @@ declare interface DescribeCaCertificatesRequest {
 declare interface DescribeCaCertificatesResponse {
   /** ca证书列表 */
   Data?: CaCertificateItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClientEventsRequest {
+  /** 集群id */
+  InstanceId: string;
+  /** 开始时间 */
+  StartTime: number;
+  /** 结束时间 */
+  EndTime: number;
+  /** 客户端id */
+  ClientId: string;
+}
+
+declare interface DescribeClientEventsResponse {
+  /** 轨迹 */
+  Events?: EventItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2241,6 +2279,8 @@ declare interface Mqtt {
   DescribeCaCertificate(data: DescribeCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificateResponse>;
   /** 查询集群CA证书列表 {@link DescribeCaCertificatesRequest} {@link DescribeCaCertificatesResponse} */
   DescribeCaCertificates(data: DescribeCaCertificatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaCertificatesResponse>;
+  /** 事件查询 {@link DescribeClientEventsRequest} {@link DescribeClientEventsResponse} */
+  DescribeClientEvents(data: DescribeClientEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientEventsResponse>;
   /** 查询 MQTT 客户端列表 {@link DescribeClientListRequest} {@link DescribeClientListResponse} */
   DescribeClientList(data: DescribeClientListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientListResponse>;
   /** 查询设备证书详情 {@link DescribeDeviceCertificateRequest} {@link DescribeDeviceCertificateResponse} */

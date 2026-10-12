@@ -134,6 +134,8 @@ declare interface AlarmNotifyHistory {
   PromeConsoleURL?: string;
   /** 告警的lable */
   Labels?: AlarmLable[];
+  /** 该条通知实际执行的接收人/组明细。一条元素对应通知模板里的一条渠道发送规则 */
+  ReceiverGroups?: ReceiverGroup[] | null;
 }
 
 /** 产物实体 */
@@ -160,7 +162,15 @@ declare interface ArtifactInfo {
   StoragePath?: string | null;
 }
 
-/** 接受人详情信息 */
+/** 消息正文 */
+declare interface ChannelContent {
+  /** 本段正文所属的渠道或子渠道全名枚举值：QCloudYehe_site： 腾讯云野鹤，站内信QCloudYehe_email： 腾讯云野鹤，电子邮件QCloudYehe_sms： 腾讯云野鹤，短信QCloudYehe_wechat： 腾讯云野鹤，微信QCloudYehe_voice： 腾讯云野鹤，语音QCloudYehe_qywx： 腾讯云野鹤，企业微信QCloudYehe_andon： 腾讯云野鹤，安灯TOF_weWorkMessage： TOF，企业微信消息TOF_email： TOF，企业邮箱TOF_phoneCall： TOF，电话WeWork： 企业微信机器人WebHook： 自定义 WebHookFeiShu： 飞书DingDing： 钉钉Slack： SlackGoogleChat： Google ChatTeams： TeamsTeamsWorkflow： Teams WorkflowPagerDuty： PagerDutyCLS： 日志服务 CLSAS： 弹性伸缩TCSYehe： TCS 野鹤。正文的 SubChannel 取渠道名本身SCF： 云函数。不返回 Contents */
+  SubChannel?: string | null;
+  /** 该渠道实际发送的消息正文，由 Ark 按写时捕获的内容还原 */
+  Content?: string | null;
+}
+
+/** 接受人详情信息和通知详情页展示 */
 declare interface ChannelsReceivers {
   /** 通知渠道名称 */
   ChannelName?: string | null;
@@ -168,6 +178,22 @@ declare interface ChannelsReceivers {
   Receivers?: string[] | null;
   /** 发送结果,0-无效,1-成功,2-失败,3-无需发送 */
   SendStatus?: string | null;
+  /** 参数定义 渠道返回的原始状态码。 */
+  SendStatusCode?: string | null;
+  /** Ark 发起该渠道调用的时间单位：Unix 秒级时间戳 */
+  SendTime?: number | null;
+  /** 该渠道本次实际发送的子渠道全名，格式为 父渠道_子渠道枚举值：QCloudYehe_site： 腾讯云野鹤，站内信QCloudYehe_email： 腾讯云野鹤，电子邮件QCloudYehe_sms： 腾讯云野鹤，短信QCloudYehe_wechat： 腾讯云野鹤，微信QCloudYehe_voice： 腾讯云野鹤，语音QCloudYehe_qywx： 腾讯云野鹤，企业微信QCloudYehe_andon： 腾讯云野鹤，安灯TOF_weWorkMessage： TOF，企业微信消息TOF_email： TOF，企业邮箱TOF_phoneCall： TOF，电话 */
+  SubChannels?: string[] | null;
+  /** 该渠道本次执行情况的文字描述 */
+  ExecDetail?: string | null;
+  /** 短信真实投递状态，来自野鹤 smsStatus 回调的 reportStatus 原值枚举值：SUCCESS： 短信已真实送达FAIL： 短信真实投递失败，失败原因见 RealDeliverErrMsg */
+  RealDeliverStatus?: string | null;
+  /** 用户真实收到短信的时间，取野鹤回调 userReceiverTime 原文字符串参数格式：YYYY-MM-DD HH:mm:ss */
+  RealDeliverTime?: string | null;
+  /** 短信真实投递回执中的结果码，取野鹤回调 errmsg 原值 */
+  RealDeliverErrMsg?: string | null;
+  /** 该渠道下各子渠道的消息正文明细 */
+  Contents?: ChannelContent[] | null;
 }
 
 /** 每个 ContentBlockInfo 对应下游 ContentBlock 转换而来的一个 AGUI 事件。 */
@@ -578,6 +604,28 @@ declare interface QCloudYeheWeChatNoticeTmplItem {
   AlarmRegionTmpl?: string;
   /** 告警时间模板 */
   AlarmTimeTmpl?: string;
+}
+
+/** 承载消息接收人/组明细 */
+declare interface ReceiverGroup {
+  /** 本条发送规则的接收者类型枚举值：UIDs： 按用户 UIDUINs： 按账号 UINGroup： 按用户分组。ReceiverIds 为分组 IDOncall： 按值班表，且未被发送时的真实接收人覆盖RtxName： 发送时解析出的员工 RTX 英文名 */
+  ReceiverType?: string | null;
+  /** 本条规则配置的原始接收者 ID 列表。具体是哪一种 ID，由 ReceiverType 决定 */
+  ReceiverIds?: string[] | null;
+  /** 接收者展示名称 */
+  Names?: string[] | null;
+  /** 用户分组展开后的成员用户 ID */
+  MemberIds?: string[] | null;
+  /** 该规则允许通知的星期。语义与 time.Weekday 一致枚举值：0： 周日1： 周一2： 周二3： 周三4： 周四5： 周五6： 周六 */
+  WeekDay?: number[] | null;
+  /** 通知时段相对当日零点的秒数偏移，需配合 TimeZoneName 解读单位：秒 */
+  DayStartSeconds?: number | null;
+  /** 通知时段相对当日零点的秒数偏移，需配合 TimeZoneName 解读单位：秒 */
+  DayEndSeconds?: number | null;
+  /** DayStartSeconds、DayEndSeconds 所属时区 */
+  TimeZoneName?: string | null;
+  /** 该规则实际发送的接收渠道全名列表枚举值：QCloudYehe_site： 腾讯云野鹤，站内信QCloudYehe_email： 腾讯云野鹤，电子邮件QCloudYehe_sms： 腾讯云野鹤，短信QCloudYehe_wechat： 腾讯云野鹤，微信QCloudYehe_voice： 腾讯云野鹤，语音QCloudYehe_qywx： 腾讯云野鹤，企业微信QCloudYehe_andon： 腾讯云野鹤，安灯TOF_weWorkMessage： TOF，企业微信消息TOF_email： TOF，企业邮箱TOF_phoneCall： TOF，电话WeWork： 企业微信机器人WebHook： 自定义 WebHookFeiShu： 飞书DingDing： 钉钉Slack： SlackGoogleChat： Google ChatTeams： TeamsTeamsWorkflow： Teams WorkflowPagerDuty： PagerDutyCLS： 日志服务 CLSAS： 弹性伸缩TCSYehe： TCS 野鹤。正文的 SubChannel 取渠道名本身SCF： 云函数。不返回 Contents */
+  ChannelNames?: string[] | null;
 }
 
 /** 资源实例 */
@@ -1099,6 +1147,8 @@ declare interface DescribeAlarmNotifyHistoriesRequest {
   ModelName?: string;
   /** 查询某个策略的通知历史 */
   PolicyId?: string;
+  /** 详情页展示所需id */
+  NotifyId?: string;
 }
 
 declare interface DescribeAlarmNotifyHistoriesResponse {
@@ -7313,7 +7363,7 @@ declare namespace V20180724 {
     PodMonitors?: PrometheusConfigItem[];
     /** prometheus原生Job配置 */
     RawJobs?: PrometheusConfigItem[];
-    /** 0: 更新实例组件镜像版本；1: 不更新实例组件镜像版本 */
+    /** 0: 更新实例组件镜像版本；1: 不更新实例组件镜像版本取值范围：[0, 1]默认值：0 */
     UpdateImage?: number;
   }
 

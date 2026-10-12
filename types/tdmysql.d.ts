@@ -58,14 +58,22 @@ declare interface ArchiveLogModel {
   StartTime?: string | null;
 }
 
-/** serverless实例的资源范围ResourceType 为 cpu 时表示 ccu为 nodecount 时表示节点数范围 */
+/** 实例变配的资源范围ResourceType 为 cpu 时表示 ccu为 nodecount 时表示节点数范围为 disk 表示磁盘容量范围（单位 GB）ScaleUpEnabled 为是否打开升配ScaleDownEnabled 为是否打开降配ThresholdPercent 为触发阈值（%）Step 为变配步长 */
 declare interface AutoScalingConfig {
-  /** ccu最小值 */
+  /** 最小值 */
   RangeMin: number | null;
-  /** ccu最大值 */
+  /** 最大值 */
   RangeMax: number | null;
-  /** 返回的 range 参数对应的资源类型枚举值：cpu： 返回的是 cpu 调整返回限制，当不存在mem限制时代表 ccunodecount： 返回的是水平扩缩容的节点数限制范围 */
-  ResourceType?: string;
+  /** 返回的 range 参数对应的资源类型枚举值：cpu： 返回的是 cpu 调整返回限制，当不存在mem限制时代表 ccunodecount： 返回的是水平扩缩容的节点数限制范围datadisk： 返回的是磁盘扩容的容量限制范围 */
+  ResourceType?: string | null;
+  /** 是否允许升配 */
+  ScaleUpEnabled?: boolean | null;
+  /** 是否允许降配 */
+  ScaleDownEnabled?: boolean | null;
+  /** 触发阈值（%） */
+  ThresholdPercent?: number | null;
+  /** 变配步长 */
+  Step?: number | null;
 }
 
 /** 备份方式统计对象-提供给备份空间统计接口 */
@@ -1789,6 +1797,8 @@ declare interface DescribeSpecsRequest {
   FullReplications?: number;
   /** 独享实例 */
   IsExclusiveInstance?: number;
+  /** 可用区组合列表 */
+  Zones?: string[];
 }
 
 declare interface DescribeSpecsResponse {
@@ -2035,6 +2045,10 @@ declare interface ModifyInstanceSSLStatusRequest {
   InstanceId: string;
   /** 是否启用SSL */
   Enabled: boolean;
+  /** 证书类型枚举值：Cloud： 云端证书Custom： 自定义证书 */
+  CertificateType?: string;
+  /** 腾讯云SSL证书服务的证书ID */
+  CertificateId?: string;
 }
 
 declare interface ModifyInstanceSSLStatusResponse {

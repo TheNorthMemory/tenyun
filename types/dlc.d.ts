@@ -1482,6 +1482,18 @@ declare interface DorisConnection {
   NetWork?: NetWork;
 }
 
+/** 入站下载信息（结果集 / 日志通用）. */
+declare interface DownloadInfo {
+  /** 下载链接地址. */
+  Url?: string;
+  /** 文件格式（如 CSV / JSON）. */
+  Format?: string;
+  /** 文件大小（字节）. */
+  Size?: number;
+  /** 链接有效时长（秒）. */
+  ExpireSeconds?: number;
+}
+
 /** 引擎资源弹性伸缩计划 */
 declare interface ElasticPlan {
   /** 最小集群数 */
@@ -1538,6 +1550,18 @@ declare interface EngineCapabilities {
   ParallelKeys?: ParallelKeyMapping[];
 }
 
+/** 引擎依赖管理，对应 Spark 的 --jars / --files / --archives / --py-files 四类资源。每条 JAR 要么 COS 路径（cos:///cosn://），要么 Maven GAV（group:artifact:version）；files/archives/pyFiles 是 COS 路径列表（pyFiles 支持 .py/.zip/.egg/.whl）。 */
+declare interface EngineConfigDependencies {
+  /** JAR 列表：每行一个 COS 路径或 Maven GAV。 */
+  Jars?: string[];
+  /** files 列表：COS 路径，下载到 executor 工作目录（不解压）。 */
+  Files?: string[];
+  /** archives 列表：COS 路径，下载并解压到 executor 工作目录。 */
+  Archives?: string[];
+  /** pyFiles 列表：COS 路径（.py/.zip/.egg/.whl），等价 Spark --py-files。 */
+  PyFiles?: string[];
+}
+
 /** 引擎网络信息 */
 declare interface EngineNetworkInfo {
   /** 引擎网络名字 */
@@ -1578,6 +1602,18 @@ declare interface EngineSessionImage {
   SparkImageType?: number | null;
   /** 镜像地址 */
   SparkImageTag?: string | null;
+}
+
+/** 入站作业入口（Entrypoint）. */
+declare interface EntrypointInfo {
+  /** SQL 语句文本，须为 Base64 编码的 UTF-8 文本。仅 SPARK_SQL 模式可传且必填（解码后 ≤1MB）；SPARK_BATCH 模式禁止传。 */
+  Statement?: string;
+  /** 作业文件路径（JAR/Python），须匹配配置的路径前缀白名单。以 .py 结尾判定为 Python 入口（EntryPoint 禁传），否则为 JAR 入口（EntryPoint 必填）。 */
+  EntryFile?: string;
+  /** 入口类名（main class 全限定名）。JAR 入口（EntryFile 非 .py 结尾）必填；Python 入口（.py 结尾）禁传；SPARK_SQL 模式禁止传。 */
+  EntryPoint?: string;
+  /** 主方法参数列表（JSON 数组字符串），仅 SPARK_BATCH 模式可传；SPARK_SQL 模式禁止传。 */
+  MainArgs?: string;
 }
 
 /** 环境变量标签 */
@@ -2204,6 +2240,66 @@ declare interface JobDefinitionItemInfo {
   RuntimeName?: string;
   /** 计算仓库名称（列表整页按去重后的仓库反查填充；warehouse 模式下非空，仓库已销毁时仍回填历史名称）。 */
   WarehouseName?: string;
+}
+
+/** 作业详情 POJO. */
+declare interface JobDetailInfo {
+  /** 作业唯一标识. */
+  JobId?: string;
+  /** 作业名称. */
+  JobName?: string;
+  /** 创建/提交者子账号 UIN。 */
+  CreatorSubUin?: string;
+  /** 作业状态. */
+  State?: string;
+  /** 引擎大类. */
+  MajorType?: string;
+  /** 引擎子类型. */
+  MinorType?: string;
+  /** 运行模式（WAREHOUSE / JOB）. */
+  RunMode?: string;
+  /** 计算仓库 ID，RunMode=WAREHOUSE 时非空. */
+  WarehouseId?: string;
+  /** 资源分区编码. */
+  PartitionCode?: string;
+  /** 资源分区展示名（解析不到时为空）. */
+  PartitionName?: string;
+  /** 队列名称. */
+  QueueName?: string;
+  /** 流作业 checkpoint 路径（MinorType=SPARK_STREAM 时非空）。同一流作业的多次运行必须复用同一路径，变更等于重置消费进度。 */
+  CheckpointLocation?: string;
+  /** 创建时间（Unix 毫秒时间戳）. */
+  CreateTime?: number;
+  /** 提交时间（Unix 毫秒时间戳）. */
+  SubmitTime?: number;
+  /** 完成时间（Unix 毫秒时间戳）. */
+  FinishTime?: number;
+  /** 运行时长（毫秒）. */
+  RunningTimeMs?: number;
+  /** 计算仓库名称（详情接口反查填充，warehouse 模式下非空）. */
+  WarehouseName?: string;
+  /** 流程 ID。 */
+  FlowId?: string;
+  /** 执行 ID。 */
+  ExecutionId?: string;
+  /** 作业来源。 */
+  JobSource?: string;
+  /** 排队等待时长（毫秒）。 */
+  WaitingTimeMs?: number;
+  /** Spark UI 历史链接。 */
+  HistoryUrl?: string;
+  /** 失败时的错误信息。 */
+  ErrorMessage?: string;
+  /** 自定义 Spark conf（JSON 字符串，由 job_config 组装）. */
+  CustomProperties?: string;
+  /** 环境变量. */
+  EnvVars?: KVPair[];
+  /** 运行时/镜像。 */
+  RuntimeCode?: string;
+  /** 运行时展示名（如 Spark 3.5.5），与 RuntimeCode 配套；解析不到时为空。 */
+  RuntimeName?: string;
+  /** Catalog 版本码。 */
+  SysCatalogVersion?: string;
 }
 
 /** 日志详情 */
@@ -4052,6 +4148,22 @@ declare interface SparkJobInfo {
   RunAsIdentity?: string;
 }
 
+/** Spark 集群资源规格（CU 维度），Spec.Spark 平铺字段载体。 */
+declare interface SparkJobSpec {
+  /** Driver 资源规格（CU 数）. */
+  DriverCU?: number;
+  /** Executor 资源规格（CU 数）. */
+  ExecutorCU?: number;
+  /** Executor 实例数量（弹性伸缩关闭时的固定数量）. */
+  ExecutorNum?: number;
+  /** 是否开启弹性扩缩容. */
+  DynamicAllocation?: boolean;
+  /** 弹性扩缩容最小 Executor 数. */
+  MinExecutors?: number;
+  /** 弹性扩缩容最大 Executor 数. */
+  MaxExecutors?: number;
+}
+
 /** Spark监控数据 */
 declare interface SparkMonitorMetrics {
   /** shuffle写溢出到COS数据量，单位：byte */
@@ -4114,6 +4226,12 @@ declare interface SparkSessionInfo {
   ApplicationId?: string;
   /** 应用启动时间 */
   ApplicationStartTime?: number;
+}
+
+/** 作业资源规格（跨引擎平铺载体；字段须与请求 MajorType 匹配）。 */
+declare interface Spec {
+  /** SPARK 资源规格（CU 维度）；MajorType=SPARK 时必填，其余引擎字段须为空。 */
+  Spark?: SparkJobSpec | null;
 }
 
 /** 节点规格信息 */
@@ -4610,6 +4728,8 @@ declare interface TaskFullRespInfo {
   QueueTime?: number;
   /** 资源组类型 */
   ResourceGroupType?: string;
+  /** 任务标签参数格式：任意字符串 */
+  Tag?: string;
 }
 
 /** 任务监控信息 */
@@ -6775,10 +6895,16 @@ declare interface CreateJobRequest {
   PartitionCode?: string;
   /** 队列名称，必须与 PartitionCode 成对使用（RunMode=JOB 下可选）；RunMode=WAREHOUSE 下被仓库反查值覆盖，无需传。 */
   QueueName?: string;
+  /** 集群规格配置。RunMode=JOB 时必填（MajorType 对应引擎字段须非空、其余引擎字段须为空）；RunMode=WAREHOUSE 时忽略。 */
+  Spec?: Spec;
   /** 自定义 Spark conf（JSON 字符串，亦接受多行 key=value 文本，归一化为 JSON 存储、出参恒为 JSON），作为 SPARK_CUSTOM 配置通道落库，两种运行模式均生效。 */
   CustomProperties?: string;
+  /** 依赖管理（jars / files / archives / pyFiles）。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。 */
+  Dependencies?: EngineConfigDependencies;
   /** 环境变量（KEY=VALUE）列表。仅 RunMode=JOB 可传；RunMode=WAREHOUSE 时禁止传。 */
   EnvVars?: KVPair[];
+  /** 入口点配置，必填。SPARK_SQL 时 Statement 必填（≤1MB）；SPARK_BATCH 时 Statement 或 EntryFile 至少其一（EntryFile 须匹配路径前缀白名单）。 */
+  Entrypoint?: EntrypointInfo;
 }
 
 declare interface CreateJobResponse {
@@ -9094,6 +9220,8 @@ declare interface DescribeJobDetailRequest {
 }
 
 declare interface DescribeJobDetailResponse {
+  /** 作业详情，JSON 嵌套在 JobDetail 键下。 */
+  JobDetail?: JobDetailInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9184,6 +9312,8 @@ declare interface DescribeJobResultResponse {
   TotalRows?: number;
   /** 行数据（State=SUCCEEDED 才有），每行为 {"Values": [单元格值...]} 数组。 */
   Rows?: ResultRow[];
+  /** 下载链接（结果集可用时按需返回；结果过大无法内联展示时仅返回 Download）。 */
+  Download?: DownloadInfo;
   /** 本页内容是否因响应大小限制被截断（单元格/行超限，结果集仅 1 行时也可能触发）。行数超过在线展示上限不由本标记表达，以 TotalRows > Total 判断，完整结果通过 Download 获取. */
   Truncated?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */

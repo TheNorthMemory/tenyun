@@ -1517,7 +1517,7 @@ declare interface CreateInstancesRequest {
   TemplateId?: string;
   /** 内部参数，标识创建实例是否需要检查。false ：默认值。发送正常请求，通过检查后直接创建实例。true：发送检查请求，不会创建实例。 */
   DryRun?: boolean;
-  /** 指实例部署模式。local：传统架构，默认为 local。cdc：独享集群。cloud：云原生，当前已暂停售卖。 */
+  /** 指实例部署类型。枚举值：local： 通用 I 型。localv2： 通用 II 型。cdc： 独享集群型。cloud： 云原生，当前已暂停售卖。 */
   ProductVersion?: string;
   /** 独享集群 ID。当 ProductVersion 设置为 cdc 时，该参数必须设置。请通过接口 DescribeRedisClusters 获取集群 ID。 */
   RedisClusterId?: string;
@@ -3506,6 +3506,22 @@ declare interface SwitchProxyResponse {
   RequestId?: string;
 }
 
+declare interface UpgradeInstanceProductVersionRequest {
+  /** 变更的目标产品类型。枚举值：localv2： 通用 II 型 */
+  TargetProductVersion: string;
+  /** 切换时间。1：维护时间窗切换。2：立即切换。 */
+  SwitchOption: number;
+  /** 指定实例 ID。例如：crs-xjhsdj****，请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface UpgradeInstanceProductVersionResponse {
+  /** 订单号。 */
+  DealName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpgradeInstanceRequest {
   /** 待变更实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -3835,6 +3851,8 @@ declare interface Redis {
   SwitchProxy(data: SwitchProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyResponse>;
   /** 变更实例配置 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
+  /** 升级实例类型 {@link UpgradeInstanceProductVersionRequest} {@link UpgradeInstanceProductVersionResponse} */
+  UpgradeInstanceProductVersion(data: UpgradeInstanceProductVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceProductVersionResponse>;
   /** 升级实例架构 {@link UpgradeInstanceVersionRequest} {@link UpgradeInstanceVersionResponse} */
   UpgradeInstanceVersion(data: UpgradeInstanceVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceVersionResponse>;
   /** 实例proxy版本升级接口 {@link UpgradeProxyVersionRequest} {@link UpgradeProxyVersionResponse} */
