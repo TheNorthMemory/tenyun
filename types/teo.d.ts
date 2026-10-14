@@ -316,7 +316,7 @@ declare interface AliasDomain {
   ModifiedOn?: string;
 }
 
-/** Web 安全 Allow 的附加参数 */
+/** 安全执行动作为放行时的附加参数。该参数用于指定在命中安全规则并执行放行动作时，系统所采取的附加处置动作。不同处置动作由不同且固定的参数组合进行配置，系统将根据所配置的参数组合判定实际生效的处置动作类型。在同一次放行执行过程中，仅允许配置并生效一种处置动作，多个处置动作对应的参数组合不可同时出现，否则视为非法配置。为空则采用默认放行处置动作。AllowActionParameters 支持以下附加处置动作：默认：当 AllowActionParameters 为空，立即跳过当前安全模块剩余规则，继续匹配后续安全模块。延迟放行：对请求增加响应延迟，并继续匹配当前模块的剩余规则。对应参数 MinDelayTime、MaxDelayTime。 */
 declare interface AllowActionParameters {
   /** 最小延迟响应时间，当配置为 0s 时，表示不延迟直接响应。支持的单位有：s：秒，取值范围 0～5。 */
   MinDelayTime?: string;
@@ -586,7 +586,7 @@ declare interface BotManagementCustomRule {
   Priority?: number;
   /** Bot 自定义规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
   Condition?: string;
-  /** Bot 自定义规则的处置方式。取值有：Monitor：观察；Deny：拦截，其中 DenyActionParameters.Name 支持 Deny 和 ReturnCustomPage；Challenge：挑战，其中 ChallengeActionParameters.Name 支持 JSChallenge 和 ManagedChallenge；Redirect：重定向至 URL。 */
+  /** 按权重分配的安全执行动作列表。 */
   Action?: SecurityWeightedAction[];
 }
 
@@ -890,11 +890,11 @@ declare interface CertificateInfo {
   Status?: string;
 }
 
-/** Web 安全 Challenge 挑战的附加参数 */
+/** 安全执行动作为挑战时的附加参数。该参数用于指定在命中安全规则并执行挑战动作时，系统所采取的附加处置动作。挑战处置动作通过 ChallengeOption 进行细分，不同挑战类型对应不同的交互形式及参数要求，系统将根据所选挑战类型，生效对应的参数配置。ChallengeActionParameters 支持以下挑战处置类型：插页式挑战：响应新页面，并在新页面内运行认证机制。对应 ChallengeOption 取值 InterstitialChallenge。内嵌式挑战：响应 SDK 挑战。对应 ChallengeOption 取值 InlineChallenge。JavaScript 挑战：浏览器无感验证，浏览器自动完成校验并展示请求资源。对应 ChallengeOption 取值 JSChallenge。托管挑战：响应包含 JavaScript 程序的重定向页面，用于校验浏览器运行环境。对应 ChallengeOption 取值 ManagedChallenge。 */
 declare interface ChallengeActionParameters {
-  /** 安全执行的具体挑战动作。取值有： InterstitialChallenge：插页式挑战； InlineChallenge：内嵌式挑战； JSChallenge：JavaScript 挑战； ManagedChallenge：托管挑战。 */
+  /** 安全执行的具体挑战动作。枚举值：InterstitialChallenge： 插页式挑战；InlineChallenge： 内嵌式挑战（SDK 挑战）；ManagedChallenge： 托管挑战。仅适用于用户通过浏览器直接访问的 HTML 网页。API 接口、网页内 XHR/AJAX 异步请求、移动 App、命令行工具等场景无法完成验证，请勿配置；JSChallenge： JavaScript 挑战。仅适用于用户通过浏览器直接访问的 HTML 网页。API 接口、网页内 XHR/AJAX 异步请求、移动 App、命令行工具等场景无法完成验证，请勿配置。 */
   ChallengeOption: string;
-  /** 重复挑战的时间间隔，当 Name 为 InterstitialChallenge/InlineChallenge 时，该字段必填。默认值为 300s。支持的单位有：s：秒，取值范围1～60；m：分，取值范围1～60；h：小时，取值范围1～24。 */
+  /** 重复挑战的时间间隔，当 ChallengeOption 为 InterstitialChallenge/InlineChallenge 时，该字段必填。默认值为 300s。支持的单位有：s：秒，取值范围1～60；m：分，取值范围1～60；h：小时，取值范围1～24。 */
   Interval?: string;
   /** 客户端认证方式 ID 。当 Name 为 InterstitialChallenge/InlineChallenge 时，该字段必填。 */
   AttesterId?: string;
@@ -1284,17 +1284,17 @@ declare interface CustomField {
 declare interface CustomRule {
   /** 自定义规则的名称。 */
   Name: string;
-  /** 自定义规则的具体内容，需符合表达式语法，详细规范参见 [产品文档](https://cloud.tencent.com/document/product/1552/125343) 。 */
+  /** 自定义规则的具体内容，需符合表达式语法，详细规范参见 产品文档 。 */
   Condition: string;
-  /** 自定义规则的处置动作。SecurityAction.Name 取值范围如下：Deny：拦截；Monitor：观察；ReturnCustomPage：使用指定页面拦截；Redirect：重定向至 URL；BlockIP：IP 封禁；JSChallenge：JavaScript 挑战；ManagedChallenge：托管挑战；Allow：放行。 */
+  /** 自定义规则的处置动作。SecurityAction.Name 取值范围如下：Allow：放行，其中 AllowActionParameters 支持 MinDelayTime 和 MaxDelayTime 配置；Deny：拦截，其中 DenyActionParameters 中支持 BlockIp、ReturnCustomPage 和 Stall 配置；Monitor：观察；Challenge：挑战，其中 ChallengeActionParameters.ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Redirect：重定向至URL。 */
   Action: SecurityAction;
-  /** 自定义规则是否开启。取值有：on：开启off：关闭 */
+  /** 自定义规则是否开启。取值有：on：开启；off：关闭。 */
   Enabled: string;
   /** 自定义规则的 ID。通过规则 ID 可支持不同的规则配置操作：增加新规则：ID 为空或不指定 ID 参数；修改已有规则：指定需要更新/修改的规则 ID；删除已有规则：CustomRules 参数中，Rules 列表中未包含的已有规则将被删除。 */
   Id?: string;
-  /** 自定义规则的类型。取值有：BasicAccessRule：基础访问管控；PreciseMatchRule：精准匹配规则；ManagedAccessRule：专家定制规则，仅出参支持。说明：当未指定 RuleType 时，默认为 `PreciseMatchRule`。 */
+  /** 自定义规则的类型。取值有：BasicAccessRule：基础访问管控；PreciseMatchRule：精准匹配规则；ManagedAccessRule：专家定制规则，仅出参支持。说明：当未指定 RuleType 时，默认为 PreciseMatchRule。 */
   RuleType?: string;
-  /** 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（`PreciseMatchRule`）。 */
+  /** 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（PreciseMatchRule）。 */
   Priority?: number;
 }
 
@@ -1474,7 +1474,7 @@ declare interface DeliveryCondition {
   Conditions?: QueryCondition[];
 }
 
-/** 安全执行动作为封禁的附加参数。 */
+/** 安全执行动作为拦截时的附加参数。该参数用于指定在命中安全规则并执行拦截动作时，系统所采取的附加处置动作。不同处置动作由不同且固定的参数组合进行配置，系统将根据所配置的参数组合判定实际生效的处置动作类型。在同一次拦截执行过程中，仅允许配置并生效一种处置动作，多个处置动作对应的参数组合不可同时出现，否则视为非法配置。为空则采用默认拦截处置动作。DenyActionParameters 支持以下附加处置动作：默认：当 DenyActionParameters 为空，或未启用任何附加处置动作时，系统将执行默认拦截处置，即响应拦截页面。IP 封禁：对触发规则的客户端来源 IP 进行持续封禁。对应参数 BlockIp、BlockIpDuration。自定义页面拦截：使用指定的自定义页面内容响应请求。对应参数 ReturnCustomPage、ResponseCode、ErrorPageId。静默：接受客户端请求但不返回。对应参数 Stall。 */
 declare interface DenyActionParameters {
   /** 是否对来源 IP 延长封禁。取值有：on：开启；off：关闭。启用后，对触发规则的客户端 IP 持续拦截。当启用该选项时，必须同时指定 BlockIpDuration 参数。注意：该选项不可与 ReturnCustomPage 或 Stall 选项同时启用。 */
   BlockIp?: string;
@@ -1958,7 +1958,7 @@ declare interface FunctionEnvironmentVariable {
   Key: string;
   /** 变量的值，限制最大 5000 字节，默认值为空。 */
   Value?: string;
-  /** 变量的类型，取值有：string：字符串类型；json：json 对象类型。默认值为：string。 */
+  /** 变量的类型，取值有：string：字符串类型；json：json 对象类型。secret：密钥类型。默认值为：string。 */
   Type?: string;
 }
 
@@ -2408,7 +2408,7 @@ declare interface InferenceContainerConfigForModify {
 declare interface InferenceDomain {
   /** 域名名称。 */
   Domain?: string;
-  /** 域名状态。枚举值：Online： 已生效；Process： 部署中；Offline： 已停用；Init： 未生效，待激活站点。 */
+  /** 域名状态。枚举值：Online： 已生效；Process： 部署中；Offline： 已停用；Init： 未生效，待激活站点；Forbidden： 域名被禁用。 */
   Status?: string;
   /** 推理任务请求鉴权开关。枚举值：Off： 关闭鉴权；On： 开启鉴权。默认值：On。 */
   AuthSwitch?: string;
@@ -3812,7 +3812,7 @@ declare interface RateLimitingRule {
   Id?: string;
   /** 精准速率限制的名称。 */
   Name?: string;
-  /** 精准速率限制的具体内容，需符合表达式语法，详细规范参见[产品文档](https://cloud.tencent.com/document/product/1552/125343)。 */
+  /** 精准速率限制的具体内容，需符合表达式语法，详细规范参见产品文档。 */
   Condition?: string;
   /** 限速方式。在统计时间窗口 CountingPeriod 内，对满足特征 CountBy 的请求，支持配置以下限速方式：Block: 阻断访问源。当统计次数超过阈值 MaxRequestThreshold 时，在 ActionDuration 时长内，对满足特征的所有后续请求执行 Action 处置；Throttle: 仅处置超额请求。当统计次数超过阈值 MaxRequestThreshold 时，仅对超过阈值的请求执行 Action 处置，窗口结束后停止处置。此时，ActionDuration 参数将被忽略。默认值为 Block。 */
   Mode?: string;
@@ -3824,7 +3824,7 @@ declare interface RateLimitingRule {
   CountingPeriod?: string;
   /** Action 动作的持续时长，单位仅支持：s：秒，取值 1 ~ 120；m：分钟，取值 1 ~ 120；h：小时，取值 1 ~ 48；d：天，取值 1 ~ 30。当 Mode 为 Throttle 时，此参数将被忽略，不会生效。 */
   ActionDuration?: string;
-  /** 精准速率限制的处置方式。取值有：Monitor：观察；Deny：拦截，其中DenyActionParameters.Name支持Deny和ReturnCustomPage；Challenge：挑战，其中ChallengeActionParameters.Name支持JSChallenge和ManagedChallenge；Redirect：重定向至URL； */
+  /** 精准速率限制的处置方式。SecurityAction.Name 取值范围如下：Allow：放行，其中 AllowActionParameters 支持 MinDelayTime 和 MaxDelayTime 配置；Deny：拦截，其中 DenyActionParameters 中支持 ReturnCustomPage 和 Stall 配置；Monitor：观察；Challenge：挑战，其中 ChallengeActionParameters.ChallengeOption 支持 JSChallenge 和 ManagedChallenge；Redirect：重定向至URL。 */
   Action?: SecurityAction;
   /** 精准速率限制的优先级，范围是 0 ~ 100，默认为 0。 */
   Priority?: number;
@@ -3878,7 +3878,7 @@ declare interface RealtimeLogDeliveryTask {
   UpdateTime?: string;
 }
 
-/** Web安全重定向的附加参数 */
+/** 安全执行动作为重定向时的附加参数。该参数用于指定在命中安全规则并执行重定向动作时，系统所采取的附加处置动作。不同处置动作由不同且固定的参数组合进行配置，系统将根据所配置的参数组合判定实际生效的处置动作类型。在同一次重定向执行过程中，仅允许配置并生效一种处置动作，多个处置动作对应的参数组合不可同时出现，否则视为非法配置。RedirectActionParameters 支持以下附加处置动作：重定向：将客户端请求重定向至指的目标 URL 。对应参数 URL。 */
 declare interface RedirectActionParameters {
   /** 重定向的URL。 */
   URL: string;
@@ -4336,7 +4336,7 @@ declare interface SecEntryValue {
 
 /** 安全的执行动作 */
 declare interface SecurityAction {
-  /** 安全执行的具体动作。取值有：Deny：拦截，阻止请求访问站点资源；Monitor：观察，仅记录日志；Redirect：重定向至 URL；Disabled：未启用，不启用指定规则；Allow：允许访问，但延迟处理请求；Challenge：挑战，响应挑战内容；Trans：放行，允许请求直接访问站点资源；BlockIP：待废弃，IP 封禁；ReturnCustomPage：待废弃，使用指定页面拦截；JSChallenge：待废弃，JavaScript 挑战；ManagedChallenge：待废弃，托管挑战。 */
+  /** 安全执行的具体动作。取值有：Deny：拦截，阻止请求访问站点资源；Monitor：观察，仅记录日志；Redirect：重定向至 URL；Disabled：未启用，不启用指定规则；Allow：放行， 跳过当前安全模块剩余规则。当配置 AllowActionParameters 参数时延迟响应；Challenge：挑战，响应挑战内容；BlockIP：待废弃，IP 封禁；ReturnCustomPage：待废弃，使用指定页面拦截；JSChallenge：待废弃，JavaScript 挑战；ManagedChallenge：待废弃，托管挑战。 */
   Name: string;
   /** 当 Name 为 Deny 时的附加参数。 */
   DenyActionParameters?: DenyActionParameters;
@@ -8805,7 +8805,7 @@ declare interface ModifyFunctionRuleRequest {
   TriggerType?: string;
   /** 指定执行的函数 ID。当 TriggerType 为 direct 或 TriggerType 不填时生效。 */
   FunctionId?: string;
-  /** 基于客户端 IP 国家/地区的函数选择配置，当 TriggerType 为 region 时生效且 RegionMappingSelections 必填。RegionMappingSelections 中至少包含一项 Regions 为 Default 的配置。 */
+  /** 基于客户端 IP 国家/地区的函数选择配置，当 TriggerType 为 region 时生效且 RegionMappingSelections 必填。RegionMappingSelections 中必须包含一项 Regions 为 Default 的配置，同时还需至少配置一项其他具体的 Region。 */
   RegionMappingSelections?: FunctionRegionSelection[];
   /** 基于权重的函数选择配置，当 TriggerType 为 weight 时生效且 WeightedSelections 必填。WeightedSelections 中的所有权重之和需要为100。 */
   WeightedSelections?: FunctionWeightedSelection[];

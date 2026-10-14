@@ -146,6 +146,14 @@ declare interface AddStreamAuthData {
   AppId?: number;
 }
 
+/** 批量获取截图图片URL列表信息 */
+declare interface BatchGetVideoSnapshotImageUrlData {
+  /** 图片Url信息 */
+  Images?: ImageUrlInfo[];
+  /** 图片Url有效期单位：秒默认值：600 */
+  ImageUrlExpires?: number;
+}
+
 /** 批量操作设备返回结果 */
 declare interface BatchOperateDeviceData {
   /** 任务 ID（用于在查询任务的子任务列表接口ListSubTasks中查询任务进度） */
@@ -158,6 +166,16 @@ declare interface BitRateInfo {
   ChannelId?: string;
   /** 码率,单位:kbps */
   Bitrate?: number;
+}
+
+/** 截图结果的回调地址配置 */
+declare interface CallbackURL {
+  /** 图片回调地址 */
+  Url?: string;
+  /** Token */
+  Token?: string;
+  /** 是否开启 */
+  Enable?: boolean;
 }
 
 /** 通道属性信息 */
@@ -482,6 +500,16 @@ declare interface DescribeVideoDownloadUrlData {
   ActualEndTime?: string;
 }
 
+/** 生效时段 */
+declare interface EffectiveTime {
+  /** 开始时间参数格式：hh:mm:ss */
+  BeginTime: string;
+  /** 结束时间参数格式：hh:mm:ss */
+  EndTime: string;
+  /** 重复周期： 1-周一 2-周二 3-周三 4-周四 5-周五 6-周六 7-周日取值范围：[1, 7] */
+  WeekDay: number;
+}
+
 /** 抓拍结果信息 */
 declare interface GBDeviceSnapInfo {
   /** 文件名称 */
@@ -504,6 +532,26 @@ declare interface GBDeviceSnapInfo {
 declare interface ISAPIOutputData {
   /** 输出参数 */
   OutputData?: string;
+}
+
+/** 图片场景配置 */
+declare interface ImageSceneInfo {
+  /** 截图类型枚举值：1：实时截帧2：低频截帧 */
+  Type: number;
+  /** 截帧频率Type=1时取值[5, 180]秒，Type=2时取值[30, 36000]秒 */
+  Interval: number;
+  /** 多张截图模式 */
+  MultiMode?: MultiSnapshotMode | null;
+}
+
+/** 图片下载URL信息 */
+declare interface ImageUrlInfo {
+  /** 图片Id */
+  ImageId?: string;
+  /** 图片Url */
+  ImageUrl?: string;
+  /** 错误信息说明获取图片url失败的原因 */
+  ErrorMessage?: string;
 }
 
 /** 生命周期，云文件生命周期设置，管理文件冷、热存储的时间 */
@@ -670,6 +718,42 @@ declare interface ListVideoDownloadTaskData {
   List?: VideoDownloadTask[];
   /** 任务总数 */
   TotalCount?: number;
+}
+
+/** 获取截图模板详情列表 */
+declare interface ListVideoSnapshotTemplateData {
+  /** 总数 */
+  TotalCount?: number;
+  /** 排序参数 */
+  Sort?: string;
+  /** 排序顺序 */
+  Order?: string;
+  /** 页码 */
+  PageNumber?: number;
+  /** 每页数目 */
+  PageSize?: number;
+  /** 截图模板列表 */
+  List?: VideoSnapshotTemplateInfo[];
+}
+
+/** 多张截图模式 */
+declare interface MultiSnapshotMode {
+  /** 是否启用多张模式false时为单张模式，忽略Interval、Total参数默认值：false */
+  Enable: boolean;
+  /** 截帧间隔取值范围：[10, 600]单位：秒 */
+  Interval: number;
+  /** 截帧张数取值范围：[1, 10] */
+  Total: number;
+}
+
+/** 多张模式参数 */
+declare interface MultiVideoSnapshotMode {
+  /** 是否启用多张模式， false时，为单张模式，忽略Interval、Total参数默认值：false */
+  Enable: boolean;
+  /** 截帧间隔取值范围：[10, 600]单位：秒 */
+  Interval: number;
+  /** 截帧张数取值范围：[1, 10] */
+  Total: number;
 }
 
 /** 组织目录下的通道信息 */
@@ -1108,6 +1192,112 @@ declare interface UpdateRecordTemplateData {
   TimeSections?: RecordTemplateTimeSections[];
 }
 
+/** 视觉理解计划信息 */
+declare interface VLPlanInfo {
+  /** 计划ID */
+  VLPlanId?: string;
+  /** 计划名称 */
+  Name?: string;
+  /** 计划描述 */
+  Describe?: string;
+  /** 视觉理解模板ID */
+  VLTemplateId?: string;
+  /** 回调通知配置 */
+  Callback?: CallbackURL;
+  /** 文件过期时间（秒） */
+  FileExpires?: number;
+  /** 计划包含的通道数量 */
+  ChannelCount?: number;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 最近一次更新时间 */
+  UpdatedAt?: string;
+}
+
+/** 视觉理解计划结果详情 */
+declare interface VLPlanResultDetailInfo {
+  /** 分析结果 ID */
+  VLPlanResultId?: string;
+  /** 媒体类型，当前固定为 image */
+  MediaType?: string;
+  /** 所属分析计划 ID */
+  VLPlanId?: string;
+  /** 计划名称 */
+  VLPlanName?: string;
+  /** 通道 ID */
+  ChannelId?: string;
+  /** 通道名称 */
+  ChannelName?: string;
+  /** 设备 ID */
+  DeviceId?: string;
+  /** 设备名称 */
+  DeviceName?: string;
+  /** 所属组织 ID */
+  OrganizationId?: string;
+  /** 所属组织名称 */
+  OrganizationName?: string;
+  /** 分析时间戳（秒） */
+  VLResultTimestamp?: number;
+  /** 图片模式截图时间戳（秒） */
+  SnapshotTimestamp?: number;
+  /** 视频片段开始时间戳（秒） */
+  VideoStartTimestamp?: number;
+  /** 视频片段结束时间戳（秒） */
+  VideoEndTimestamp?: number;
+  /** 视频模式计费帧数 */
+  BilledFrameCount?: number;
+  /** AI 分析结果内容（JSON 字符串） */
+  Content?: string;
+  /** 截图临时下载 URL（有效期 300 秒） */
+  ImageUrl?: string;
+  /** 截图 URL 有效期（秒） */
+  ImageUrlExpire?: number;
+  /** 创建时间，格式 2006-01-02 15:04:05 */
+  CreatedAt?: string;
+  /** 更新时间，格式 2006-01-02 15:04:05 */
+  UpdatedAt?: string;
+}
+
+/** 视觉理解计划源素材 URL 信息 */
+declare interface VLPlanResultSnapshotImageUrlInfo {
+  /** 分析结果 ID */
+  VLPlanResultId?: string;
+  /** 源素材下载 URL（失败时为空） */
+  SourceFileURL?: string;
+  /** URL 有效期（秒，失败时为 0） */
+  Expire?: number;
+  /** 错误信息（失败时有值） */
+  ErrMsg?: string;
+}
+
+/** 视觉理解模板信息 */
+declare interface VLTemplateInfo {
+  /** 模板ID */
+  VLTemplateId?: string;
+  /** AI 模型枚举值：IVC-G： 视图默认大模型 */
+  AIModel?: string;
+  /** AI场景名称 */
+  Name?: string;
+  /** AI场景描述 */
+  Describe?: string;
+  /** 提示词 */
+  Prompt?: string;
+  /** 分析模式枚举值：image： 图片模式video： 视频模式 */
+  AnalysisMode?: string;
+  /** 图片场景配置 */
+  ImageConfig?: ImageSceneInfo;
+  /** 生效时段列表 */
+  Times?: EffectiveTime[];
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 最近一次更新时间 */
+  UpdatedAt?: string;
+  /** 是否关联到视觉理解计划 */
+  IsUsed?: boolean;
+  /** 视频场景配置 */
+  VideoConfig?: VideoSceneInfo;
+}
+
 /** 本地录像下载任务 */
 declare interface VideoDownloadTask {
   /** 下载任务 ID */
@@ -1128,9 +1318,9 @@ declare interface VideoDownloadTask {
   VideoTimeSection?: string;
   /** 倍速 */
   Scale?: number;
-  /** 下载时长 */
+  /** 下载时长单位：秒 */
   DownloadTime?: number;
-  /** 录像大小 */
+  /** 录像大小单位：字节（Byte） */
   VideoSize?: number;
   /** 任务开始时间 */
   StartTime?: string;
@@ -1150,6 +1340,62 @@ declare interface VideoDownloadTask {
 declare interface VideoDownloadTaskData {
   /** 下载任务ID */
   DownloadTaskId?: string;
+}
+
+/** 视频场景配置（预留） */
+declare interface VideoSceneInfo {
+  /** 分析间隔（秒）：每隔多少秒触发一次分析（滑动步长） */
+  Interval: number;
+  /** 分析片段时长（秒）：单次送入模型的视频窗口长度，范围 [5, 12800] */
+  Duration: number;
+  /** 抽帧率，默认 1，范围 [0.1, 1]，每隔 1/Fps 秒抽 1 帧送模型 */
+  Fps?: number;
+}
+
+/** 截图配置信息 */
+declare interface VideoSnapshotConfigInfo {
+  /** 截图配置Id */
+  ConfigId?: string;
+  /** 截图配置名称 */
+  Name?: string;
+  /** 截图模板Id */
+  TemplateId?: string;
+  /** 截图模板名称 */
+  TemplateName?: string;
+  /** 截图类型枚举值：1： 实时截帧2： 低频截帧 */
+  Type?: number;
+  /** 图片存储天数单位：天 */
+  FileExpires?: number;
+  /** 回调配置 */
+  Callback?: CallbackURL;
+  /** 截图配置关联的通道数 */
+  RelatedChannelCount?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最近一次更新时间 */
+  UpdateTime?: string;
+}
+
+/** 截图模板信息 */
+declare interface VideoSnapshotTemplateInfo {
+  /** 截图模板Id */
+  TemplateId?: string;
+  /** 截图模板名称 */
+  Name?: string;
+  /** 截图类型枚举值：1： 实时截帧2： 低频截帧 */
+  Type?: number;
+  /** 截帧频率 */
+  Interval?: number;
+  /** 多张模式 */
+  MultiMode?: MultiVideoSnapshotMode;
+  /** 生效时段 */
+  Times?: EffectiveTime[];
+  /** 模板关联的配置数 */
+  RelatedConfigCount?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最近一次更新时间 */
+  UpdateTime?: string;
 }
 
 declare interface AddOrganizationRequest {
@@ -1338,12 +1584,70 @@ declare interface AddUserDeviceResponse {
   RequestId?: string;
 }
 
+declare interface BatchAddVideoSnapshotConfigChannelRequest {
+  /** 截图配置Id */
+  ConfigId: string;
+  /** 通道Id列表 */
+  Channels?: string[];
+}
+
+declare interface BatchAddVideoSnapshotConfigChannelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchAssignVLPlanChannelsRequest {
+  /** 计划 ID */
+  VLPlanId: string;
+  /** 操作命令：1=关联，2=解绑 */
+  Cmd: number;
+  /** 通道 ID 列表，最多 500 个；与 OrganizationIds 至少传一个（Cmd=1 时） */
+  ChannelIds?: string[];
+  /** 组织 ID 列表（仅 Cmd=1 时有效，Cmd=2 时不允许传入）；展开该组织下所有通道参与关联，与 ChannelIds 取并集去重 */
+  OrganizationIds?: string[];
+}
+
+declare interface BatchAssignVLPlanChannelsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BatchDeleteVideoDownloadTaskRequest {
   /** 本地录像下载任务 ID 列表 */
   DownloadTaskIds?: string[];
 }
 
 declare interface BatchDeleteVideoDownloadTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchGetVLPlanSourceFileURLRequest {
+  /** 分析结果 ID 列表，最多 200 个 */
+  VLPlanResultIds: string[];
+  /** URL 有效期（秒），范围 [60, 86400]，默认 600 */
+  Expire?: number;
+}
+
+declare interface BatchGetVLPlanSourceFileURLResponse {
+  /** URL 列表 */
+  Data?: VLPlanResultSnapshotImageUrlInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface BatchGetVideoSnapshotImageUrlRequest {
+  /** 图片Id */
+  ImageIds: string[];
+  /** 图片URL有效期，单位：秒取值范围：[60, 86400]默认值：600 */
+  ImageUrlExpires?: number;
+}
+
+declare interface BatchGetVideoSnapshotImageUrlResponse {
+  /** 截图图片URL结果列表 */
+  Data?: BatchGetVideoSnapshotImageUrlData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1474,6 +1778,50 @@ declare interface ControlRecordTimelineResponse {
   RequestId?: string;
 }
 
+declare interface CreateVLPlanRequest {
+  /** 计划名称，仅支持中文/英文/数字/_/-，最长 32 个字符 */
+  Name: string;
+  /** 关联的视觉理解模板 ID */
+  VLTemplateId: string;
+  /** 计划描述，最长 256 个字符 */
+  Describe?: string;
+  /** 截图文件存储天数，范围 [7, 1080]；图片模式必填，视频模式不传 */
+  FileExpires?: number;
+  /** 回调通知配置 */
+  Callback?: CallbackURL;
+}
+
+declare interface CreateVLPlanResponse {
+  /** 视觉理解计划信息 */
+  Data?: VLPlanInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVLTemplateRequest {
+  /** AI 模型枚举值：ivc-vl-1.0： 视图大模型 */
+  AIModel: string;
+  /** 模板名称，仅支持中文/英文/数字/_/-，最长 32 个字符 */
+  Name: string;
+  /** 提示词，最大 2MB */
+  Prompt: string;
+  /** 分析模式枚举值：image： 图片模式video： 视频模式 */
+  AnalysisMode: string;
+  /** 生效时段列表，最多 100 条 */
+  Times: EffectiveTime[];
+  /** 模板描述，最长 256 个字符 */
+  Describe?: string;
+  /** 图片场景配置（AnalysisMode=image 时必填） */
+  ImageConfig?: ImageSceneInfo;
+}
+
+declare interface CreateVLTemplateResponse {
+  /** 视觉理解模板信息 */
+  Data?: VLTemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateVideoDownloadTaskRequest {
   /** 通道ID */
   ChannelId: string;
@@ -1494,6 +1842,44 @@ declare interface CreateVideoDownloadTaskRequest {
 declare interface CreateVideoDownloadTaskResponse {
   /** 下载任务返回结果 */
   Data?: VideoDownloadTaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVideoSnapshotConfigRequest {
+  /** 截图配置名称入参限制：中文、英文、数字、“-”、“_” 长度不超过128个字符 */
+  Name: string;
+  /** 截图模板Id */
+  TemplateId: string;
+  /** 图片文件的热存储天数枚举值：7： 7天15： 15天30： 30天60： 60天90： 90天180： 180天270： 270天360： 360天540： 540天720： 720天900： 900天1080： 1080天 */
+  FileExpires: number;
+  /** 截图结果回调地址 */
+  Callback?: CallbackURL;
+}
+
+declare interface CreateVideoSnapshotConfigResponse {
+  /** 截图配置信息 */
+  Data?: VideoSnapshotConfigInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVideoSnapshotTemplateRequest {
+  /** 模板名称： 中文、英文、数字、“-”、“_” 长度不超过128个字符 */
+  Name: string;
+  /** 截图类型： 1-实时截帧 2-低频截帧注意：实时截帧在生效时段期间一直拉取实时流， 低频截帧在生效时段期间按需拉取实时流，每次拉流的最短持续时间不低于1分钟枚举值：1： 实时截帧2： 低频截帧 */
+  Type: number;
+  /** 截帧频率： Type = 1时，取值[5, 180]秒 Type = 2时 取值[30, 36000]秒 */
+  Interval: number;
+  /** 生效时段，注：数组大小不超过100个且每个时间段不低于1分钟 */
+  Times: EffectiveTime[];
+  /** 多张模式 */
+  MultiMode?: MultiVideoSnapshotMode;
+}
+
+declare interface CreateVideoSnapshotTemplateResponse {
+  /** 截图模板信息 */
+  Data?: VideoSnapshotTemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1584,6 +1970,46 @@ declare interface DeleteUserDeviceRequest {
 }
 
 declare interface DeleteUserDeviceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVLPlanRequest {
+  /** 计划 ID */
+  VLPlanId: string;
+}
+
+declare interface DeleteVLPlanResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVLTemplateRequest {
+  /** 模板 ID */
+  VLTemplateId: string;
+}
+
+declare interface DeleteVLTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVideoSnapshotConfigRequest {
+  /** 截图配置Id */
+  ConfigId: string;
+}
+
+declare interface DeleteVideoSnapshotConfigResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVideoSnapshotTemplateRequest {
+  /** 截图模板Id */
+  TemplateId: string;
+}
+
+declare interface DeleteVideoSnapshotTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1840,6 +2266,42 @@ declare interface DescribeUserDeviceResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVLPlanRequest {
+  /** 计划 ID */
+  VLPlanId: string;
+}
+
+declare interface DescribeVLPlanResponse {
+  /** 视觉理解计划信息 */
+  Data?: VLPlanInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVLPlanResultRequest {
+  /** 分析结果 ID */
+  VLPlanResultId: string;
+}
+
+declare interface DescribeVLPlanResultResponse {
+  /** 分析结果详情 */
+  Data?: VLPlanResultDetailInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVLTemplateRequest {
+  /** 模板 ID */
+  VLTemplateId: string;
+}
+
+declare interface DescribeVLTemplateResponse {
+  /** 视觉理解模板信息 */
+  Data?: VLTemplateInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVideoBitRateRequest {
   /** 通道ID列表 */
   ChannelIds: string[];
@@ -1874,6 +2336,30 @@ declare interface DescribeVideoDownloadUrlRequest {
 declare interface DescribeVideoDownloadUrlResponse {
   /** 返回的数据结构 */
   Data?: DescribeVideoDownloadUrlData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoSnapshotConfigRequest {
+  /** 截图配置Id */
+  ConfigId: string;
+}
+
+declare interface DescribeVideoSnapshotConfigResponse {
+  /** 截图配置详情结果 */
+  Data?: VideoSnapshotConfigInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVideoSnapshotTemplateRequest {
+  /** 截图模板Id */
+  TemplateId: string;
+}
+
+declare interface DescribeVideoSnapshotTemplateResponse {
+  /** 截图模板详情 */
+  Data?: VideoSnapshotTemplateInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2112,6 +2598,46 @@ declare interface ListTasksResponse {
   RequestId?: string;
 }
 
+declare interface ListVLPlansRequest {
+  /** 计划名称，精确匹配 */
+  Name?: string;
+  /** 页码，默认 1 */
+  PageNumber?: number;
+  /** 每页数量，默认 20，最大 200 */
+  PageSize?: number;
+}
+
+declare interface ListVLPlansResponse {
+  /** 计划列表 */
+  Data?: VLPlanInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListVLTemplatesRequest {
+  /** 模板名称，精确匹配 */
+  Name?: string;
+  /** 分析模式过滤，image / video */
+  AnalysisMode?: string;
+  /** 截图类型过滤（仅 AnalysisMode=image 时生效）：realtime / low */
+  CaptureType?: string;
+  /** 页码，默认 1 */
+  PageNumber?: number;
+  /** 每页数量，默认 20，最大 200 */
+  PageSize?: number;
+}
+
+declare interface ListVLTemplatesResponse {
+  /** 模板列表 */
+  Data?: VLTemplateInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListVideoDownloadTaskRequest {
   /** 设备名称，用于模糊搜索 */
   DeviceName?: string;
@@ -2138,6 +2664,70 @@ declare interface ListVideoDownloadTaskRequest {
 declare interface ListVideoDownloadTaskResponse {
   /** 本地录像下载任务列表 */
   Data?: ListVideoDownloadTaskData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListVideoSnapshotTemplateRequest {
+  /** 模板名称 */
+  Name?: string;
+  /** 截图类型枚举值：1： 实时截帧2： 低频截帧 */
+  Type?: number;
+  /** 排序参数默认值：update_time */
+  Sort?: string;
+  /** 排序顺序枚举值：desc： 降序asc： 生序默认值：desc */
+  Order?: string;
+  /** 页码默认值：1 */
+  PageNumber?: number;
+  /** 每页数目默认值：20 */
+  PageSize?: number;
+}
+
+declare interface ListVideoSnapshotTemplateResponse {
+  /** 截图模板结果列表 */
+  Data?: ListVideoSnapshotTemplateData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVLPlanRequest {
+  /** 计划 ID */
+  VLPlanId: string;
+  /** 新计划名称 */
+  Name?: string;
+  /** 新计划描述 */
+  Describe?: string;
+  /** 新关联视觉理解模板 ID */
+  VLTemplateId?: string;
+  /** 新存储天数，范围 [7, 1080]，0 表示不修改 */
+  FileExpires?: number;
+  /** 新回调配置 */
+  Callback?: CallbackURL;
+}
+
+declare interface ModifyVLPlanResponse {
+  /** 视觉理解计划信息 */
+  Data?: VLPlanInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVideoSnapshotConfigRequest {
+  /** 截图配置Id */
+  ConfigId: string;
+  /** 截图配置名称入参限制：中文、英文、数字、“-”、“_” 长度不超过128个字符 */
+  Name?: string;
+  /** 截图模板Id */
+  TemplateId?: string;
+  /** 图片文件的热存储天数枚举值：7： 7天15： 15天30： 30天60： 60天90： 90天180： 180天270： 270天360： 360天540： 540天720： 720天900： 900天1080： 1080天 */
+  FileExpires?: number;
+  /** 回调配置 */
+  Callback?: CallbackURL;
+}
+
+declare interface ModifyVideoSnapshotConfigResponse {
+  /** 截图配置信息 */
+  Data?: VideoSnapshotConfigInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2351,8 +2941,16 @@ declare interface Iss {
   AddStreamAuth(data: AddStreamAuthRequest, config?: AxiosRequestConfig): AxiosPromise<AddStreamAuthResponse>;
   /** 新增设备 {@link AddUserDeviceRequest} {@link AddUserDeviceResponse} */
   AddUserDevice(data: AddUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserDeviceResponse>;
+  /** 批量添加截图配置的通道 {@link BatchAddVideoSnapshotConfigChannelRequest} {@link BatchAddVideoSnapshotConfigChannelResponse} */
+  BatchAddVideoSnapshotConfigChannel(data: BatchAddVideoSnapshotConfigChannelRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAddVideoSnapshotConfigChannelResponse>;
+  /** 批量关联视觉理解计划通道 {@link BatchAssignVLPlanChannelsRequest} {@link BatchAssignVLPlanChannelsResponse} */
+  BatchAssignVLPlanChannels(data: BatchAssignVLPlanChannelsRequest, config?: AxiosRequestConfig): AxiosPromise<BatchAssignVLPlanChannelsResponse>;
   /** 批量删除本地录像下载任务 {@link BatchDeleteVideoDownloadTaskRequest} {@link BatchDeleteVideoDownloadTaskResponse} */
   BatchDeleteVideoDownloadTask(data?: BatchDeleteVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteVideoDownloadTaskResponse>;
+  /** 批量获取视觉理解计划源素材 URL {@link BatchGetVLPlanSourceFileURLRequest} {@link BatchGetVLPlanSourceFileURLResponse} */
+  BatchGetVLPlanSourceFileURL(data: BatchGetVLPlanSourceFileURLRequest, config?: AxiosRequestConfig): AxiosPromise<BatchGetVLPlanSourceFileURLResponse>;
+  /** 批量获取截图图片URL {@link BatchGetVideoSnapshotImageUrlRequest} {@link BatchGetVideoSnapshotImageUrlResponse} */
+  BatchGetVideoSnapshotImageUrl(data: BatchGetVideoSnapshotImageUrlRequest, config?: AxiosRequestConfig): AxiosPromise<BatchGetVideoSnapshotImageUrlResponse>;
   /** 批量操作设备 {@link BatchOperateDeviceRequest} {@link BatchOperateDeviceResponse} */
   BatchOperateDevice(data: BatchOperateDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<BatchOperateDeviceResponse>;
   /** ISAPI 透传异步回调 {@link CallISAPIRequest} {@link CallISAPIResponse} */
@@ -2369,8 +2967,16 @@ declare interface Iss {
   ControlRecord(data: ControlRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordResponse>;
   /** 查询本地录像时间轴 {@link ControlRecordTimelineRequest} {@link ControlRecordTimelineResponse} */
   ControlRecordTimeline(data: ControlRecordTimelineRequest, config?: AxiosRequestConfig): AxiosPromise<ControlRecordTimelineResponse>;
+  /** 创建视觉理解计划 {@link CreateVLPlanRequest} {@link CreateVLPlanResponse} */
+  CreateVLPlan(data: CreateVLPlanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVLPlanResponse>;
+  /** 创建视觉理解模板 {@link CreateVLTemplateRequest} {@link CreateVLTemplateResponse} */
+  CreateVLTemplate(data: CreateVLTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVLTemplateResponse>;
   /** 创建本地录像下载任务 {@link CreateVideoDownloadTaskRequest} {@link CreateVideoDownloadTaskResponse} */
   CreateVideoDownloadTask(data: CreateVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoDownloadTaskResponse>;
+  /** 创建截图配置 {@link CreateVideoSnapshotConfigRequest} {@link CreateVideoSnapshotConfigResponse} */
+  CreateVideoSnapshotConfig(data: CreateVideoSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoSnapshotConfigResponse>;
+  /** 创建截图模板 {@link CreateVideoSnapshotTemplateRequest} {@link CreateVideoSnapshotTemplateResponse} */
+  CreateVideoSnapshotTemplate(data: CreateVideoSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVideoSnapshotTemplateResponse>;
   /** 删除域名 {@link DeleteDomainRequest} {@link DeleteDomainResponse} */
   DeleteDomain(data: DeleteDomainRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDomainResponse>;
   /** 删除组织 {@link DeleteOrganizationRequest} {@link DeleteOrganizationResponse} */
@@ -2389,6 +2995,14 @@ declare interface Iss {
   DeleteTask(data: DeleteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTaskResponse>;
   /** 删除设备 {@link DeleteUserDeviceRequest} {@link DeleteUserDeviceResponse} */
   DeleteUserDevice(data: DeleteUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserDeviceResponse>;
+  /** 删除视觉理解计划 {@link DeleteVLPlanRequest} {@link DeleteVLPlanResponse} */
+  DeleteVLPlan(data: DeleteVLPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVLPlanResponse>;
+  /** 删除视觉理解模板 {@link DeleteVLTemplateRequest} {@link DeleteVLTemplateResponse} */
+  DeleteVLTemplate(data: DeleteVLTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVLTemplateResponse>;
+  /** 删除截图配置 {@link DeleteVideoSnapshotConfigRequest} {@link DeleteVideoSnapshotConfigResponse} */
+  DeleteVideoSnapshotConfig(data: DeleteVideoSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoSnapshotConfigResponse>;
+  /** 删除截图模板 {@link DeleteVideoSnapshotTemplateRequest} {@link DeleteVideoSnapshotTemplateResponse} */
+  DeleteVideoSnapshotTemplate(data: DeleteVideoSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVideoSnapshotTemplateResponse>;
   /** 根据服务节点获取 CNAME {@link DescribeCNAMERequest} {@link DescribeCNAMEResponse} */
   DescribeCNAME(data: DescribeCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNAMEResponse>;
   /** 通道查询 {@link DescribeDeviceChannelRequest} {@link DescribeDeviceChannelResponse} */
@@ -2429,10 +3043,20 @@ declare interface Iss {
   DescribeUserDevice(data: DescribeUserDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceResponse>;
   /** 批量查询设备详情 {@link DescribeUserDeviceListRequest} {@link DescribeUserDeviceListResponse} */
   DescribeUserDeviceList(data: DescribeUserDeviceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDeviceListResponse>;
+  /** 查询视觉理解计划详情 {@link DescribeVLPlanRequest} {@link DescribeVLPlanResponse} */
+  DescribeVLPlan(data: DescribeVLPlanRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVLPlanResponse>;
+  /** 查询视觉理解计划结果详情 {@link DescribeVLPlanResultRequest} {@link DescribeVLPlanResultResponse} */
+  DescribeVLPlanResult(data: DescribeVLPlanResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVLPlanResultResponse>;
+  /** 查询视觉理解模板详情 {@link DescribeVLTemplateRequest} {@link DescribeVLTemplateResponse} */
+  DescribeVLTemplate(data: DescribeVLTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVLTemplateResponse>;
   /** 视频通道码率查询 {@link DescribeVideoBitRateRequest} {@link DescribeVideoBitRateResponse} */
   DescribeVideoBitRate(data: DescribeVideoBitRateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoBitRateResponse>;
   /** 获取云端录像下载URL地址 {@link DescribeVideoDownloadUrlRequest} {@link DescribeVideoDownloadUrlResponse} */
   DescribeVideoDownloadUrl(data: DescribeVideoDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoDownloadUrlResponse>;
+  /** 截图配置详情 {@link DescribeVideoSnapshotConfigRequest} {@link DescribeVideoSnapshotConfigResponse} */
+  DescribeVideoSnapshotConfig(data: DescribeVideoSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoSnapshotConfigResponse>;
+  /** 截图模板详情 {@link DescribeVideoSnapshotTemplateRequest} {@link DescribeVideoSnapshotTemplateResponse} */
+  DescribeVideoSnapshotTemplate(data: DescribeVideoSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVideoSnapshotTemplateResponse>;
   /** 获取设备抓拍结果列表 {@link ListDeviceSnapshotsRequest} {@link ListDeviceSnapshotsResponse} */
   ListDeviceSnapshots(data: ListDeviceSnapshotsRequest, config?: AxiosRequestConfig): AxiosPromise<ListDeviceSnapshotsResponse>;
   /** 获取设备列表 {@link ListDevicesRequest} {@link ListDevicesResponse} */
@@ -2461,8 +3085,18 @@ declare interface Iss {
   ListSubTasks(data: ListSubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSubTasksResponse>;
   /** 查询任务列表 {@link ListTasksRequest} {@link ListTasksResponse} */
   ListTasks(data?: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
+  /** 获取视觉理解计划列表 {@link ListVLPlansRequest} {@link ListVLPlansResponse} */
+  ListVLPlans(data?: ListVLPlansRequest, config?: AxiosRequestConfig): AxiosPromise<ListVLPlansResponse>;
+  /** 获取视觉理解模板列表 {@link ListVLTemplatesRequest} {@link ListVLTemplatesResponse} */
+  ListVLTemplates(data?: ListVLTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListVLTemplatesResponse>;
   /** 查询本地录像下载任务列表 {@link ListVideoDownloadTaskRequest} {@link ListVideoDownloadTaskResponse} */
   ListVideoDownloadTask(data?: ListVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ListVideoDownloadTaskResponse>;
+  /** 截图模板列表 {@link ListVideoSnapshotTemplateRequest} {@link ListVideoSnapshotTemplateResponse} */
+  ListVideoSnapshotTemplate(data?: ListVideoSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ListVideoSnapshotTemplateResponse>;
+  /** 修改视觉理解计划 {@link ModifyVLPlanRequest} {@link ModifyVLPlanResponse} */
+  ModifyVLPlan(data: ModifyVLPlanRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVLPlanResponse>;
+  /** 更新截图配置 {@link ModifyVideoSnapshotConfigRequest} {@link ModifyVideoSnapshotConfigResponse} */
+  ModifyVideoSnapshotConfig(data: ModifyVideoSnapshotConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVideoSnapshotConfigResponse>;
   /** 获取本地录像URL地址 {@link PlayRecordRequest} {@link PlayRecordResponse} */
   PlayRecord(data: PlayRecordRequest, config?: AxiosRequestConfig): AxiosPromise<PlayRecordResponse>;
   /** 查询禁播通道列表 {@link QueryForbidPlayChannelListRequest} {@link QueryForbidPlayChannelListResponse} */

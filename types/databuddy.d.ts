@@ -2258,7 +2258,7 @@ declare interface DeleteCatalogRequest {
   /** 数据目录名 */
   CatalogName: string;
   /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
+  WorkspaceId: string;
   /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
@@ -2322,7 +2322,7 @@ declare interface DeleteSchemaRequest {
   /** 数据库名 */
   SchemaName: string;
   /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
+  WorkspaceId: string;
   /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
@@ -2462,7 +2462,7 @@ declare interface GetSchemaRequest {
   /** 数据库名 */
   SchemaName: string;
   /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
+  WorkspaceId: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
   /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
@@ -2486,7 +2486,7 @@ declare interface GetTableRequest {
   /** 表名 */
   TableName: string;
   /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
+  WorkspaceId: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
   /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
@@ -2731,12 +2731,12 @@ declare interface ListFilesResponse {
 declare interface ListSchemasRequest {
   /** 数据目录名 */
   CatalogName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
   /** 最大结果条数 */
   MaxResults?: number;
   /** 分页token */
   PageToken?: string;
-  /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
   /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
@@ -2757,12 +2757,12 @@ declare interface ListTablesRequest {
   CatalogName: string;
   /** 数据库名 */
   SchemaName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
   /** 最大结果条数 */
   MaxResults?: number;
   /** 分页token */
   PageToken?: string;
-  /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
   /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */

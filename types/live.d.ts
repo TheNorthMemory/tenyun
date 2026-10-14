@@ -1040,6 +1040,18 @@ declare interface HttpStatusInfo {
   Num?: number;
 }
 
+/** IngestStatisticsDataInfo */
+declare interface IngestStatisticsDataInfo {
+  /** 输入用量 */
+  Ingest?: number;
+  /** 时间 */
+  Time?: string;
+  /** 频道Id */
+  ChannelId?: string;
+  /** 频道类型 */
+  Type?: string;
+}
+
 /** 数字人直播间克隆形象信息 */
 declare interface LiveAvatarCloneFigureInfo {
   /** 克隆形象任务ID */
@@ -1322,6 +1334,18 @@ declare interface OriginStreamCustomizationRule {
   CustomizationCacheFollowOrigin?: number;
   /** 缓存 Http 头部键。 */
   KeepHttpHeader?: string[];
+}
+
+/** OutputStatisticsDataInfo */
+declare interface OutputStatisticsDataInfo {
+  /** 输出用量 */
+  Output?: number;
+  /** 时间 */
+  Time?: string;
+  /** 频道Id */
+  ChannelId?: string;
+  /** 类型 */
+  Type?: string;
 }
 
 /** 查询当前垫片流的信息 */
@@ -1764,6 +1788,16 @@ declare interface RefererAuthConfig {
   AllowEmpty?: number;
   /** 名单列表，以分号(;)分隔。 */
   Rules?: string;
+}
+
+/** RemuxStatisticsDataInfo */
+declare interface RemuxStatisticsDataInfo {
+  /** 转封装用量 */
+  Remux?: number;
+  /** 时间 */
+  Time?: string;
+  /** 频道Id */
+  ChannelId?: string;
 }
 
 /** 规则信息。 */
@@ -5792,6 +5826,76 @@ declare interface DescribeStreamDayPlayInfoListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeStreamPackageIngestStatisticsRequest {
+  /** 查询起始时间，RFC3339 格式，如2026-08-24T00:00:00+08:00 */
+  StartTime?: string;
+  /** 查询结束时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00；必须晚于 StartTime */
+  EndTime?: string;
+  /** 频道ID列表，不传则查全部频道 */
+  ChannelIds?: string[];
+  /** 频道类型过滤，枚举值：LiveChannel、SSAI、FASTChannel */
+  Types?: string[];
+  /** 维度，false(默认): summary 汇总模式；true: detail 明细模式（按时间拆分），当为false时粒度不生效 */
+  Dimension?: boolean;
+  /** 时间粒度（分钟），支持5（默认）/ 60 / 1440 */
+  Granularity?: number;
+}
+
+declare interface DescribeStreamPackageIngestStatisticsResponse {
+  /** 输入流量数据 */
+  DataInfoList?: IngestStatisticsDataInfo[];
+  /** 总输入用量 */
+  TotalIngest?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageOutputStatisticsRequest {
+  /** 查询起始时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00 */
+  StartTime?: string;
+  /** 查询结束时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00；必须晚于 StartTime */
+  EndTime?: string;
+  /** 频道ID列表，不传则查全部频道 */
+  ChannelIds?: string[];
+  /** 频道类型过滤，枚举值：LiveChannel */
+  Types?: string[];
+  /** 维度，false(默认): summary 汇总模式；true: detail 明细模式（按时间拆分），当为false时粒度不生效 */
+  Dimension?: boolean;
+  /** 时间粒度（分钟），支持5（默认）/ 60 / 1440 */
+  Granularity?: number;
+}
+
+declare interface DescribeStreamPackageOutputStatisticsResponse {
+  /** 输出流量统计 */
+  DataInfoList?: OutputStatisticsDataInfo[];
+  /** 输出总用量 */
+  TotalOutput?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeStreamPackageRemuxStatisticsRequest {
+  /** 查询起始时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00 */
+  StartTime?: string;
+  /** 查询结束时间，RFC3339 格式，如 2026-08-24T00:00:00+08:00；必须晚于 StartTime */
+  EndTime?: string;
+  /** 频道ID列表，不传则查全部频道 */
+  ChannelIds?: string[];
+  /** 维度，false(默认): summary 汇总模式；true: detail 明细模式（按时间拆分），当为false时粒度不生效 */
+  Dimension?: boolean;
+  /** 时间粒度（分钟），支持5（默认）/ 60 / 1440 */
+  Granularity?: number;
+}
+
+declare interface DescribeStreamPackageRemuxStatisticsResponse {
+  /** 封装用量数据 */
+  DataInfoList?: RemuxStatisticsDataInfo[];
+  /** 封装总用量 */
+  TotalRemux?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStreamPlayInfoListRequest {
   /** 起始时间点，接口查询支持两种时间格式：1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732 */
   StartTime: string;
@@ -7487,6 +7591,12 @@ declare interface Live {
   DescribeScreenshotTask(data: DescribeScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScreenshotTaskResponse>;
   /** 查询所有流的流量数据 {@link DescribeStreamDayPlayInfoListRequest} {@link DescribeStreamDayPlayInfoListResponse} */
   DescribeStreamDayPlayInfoList(data: DescribeStreamDayPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamDayPlayInfoListResponse>;
+  /** 查询媒体包装输入用量信息 {@link DescribeStreamPackageIngestStatisticsRequest} {@link DescribeStreamPackageIngestStatisticsResponse} */
+  DescribeStreamPackageIngestStatistics(data?: DescribeStreamPackageIngestStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageIngestStatisticsResponse>;
+  /** 查询媒体包装输出用量信息 {@link DescribeStreamPackageOutputStatisticsRequest} {@link DescribeStreamPackageOutputStatisticsResponse} */
+  DescribeStreamPackageOutputStatistics(data?: DescribeStreamPackageOutputStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageOutputStatisticsResponse>;
+  /** 查询媒体包装转封装用量信息 {@link DescribeStreamPackageRemuxStatisticsRequest} {@link DescribeStreamPackageRemuxStatisticsResponse} */
+  DescribeStreamPackageRemuxStatistics(data?: DescribeStreamPackageRemuxStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPackageRemuxStatisticsResponse>;
   /** 查询流的播放信息列表 {@link DescribeStreamPlayInfoListRequest} {@link DescribeStreamPlayInfoListResponse} */
   DescribeStreamPlayInfoList(data: DescribeStreamPlayInfoListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStreamPlayInfoListResponse>;
   /** 查询某条流上行推流质量数据 {@link DescribeStreamPushInfoListRequest} {@link DescribeStreamPushInfoListResponse} */

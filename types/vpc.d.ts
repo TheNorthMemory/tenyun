@@ -494,16 +494,18 @@ declare interface CcnPolicyBasedRoutingNextHop {
 declare interface CcnPolicyBasedRoutingRule {
   /** 策略路由下一跳ID */
   PolicyBasedRoutingNextHopId: string;
-  /** 实例类型[VPC,DIRECTCONNECT,VPNGW] */
-  InstanceType: string;
-  /** 实例ID */
-  InstanceId: string;
   /** 源地址CIDR */
   SourceCidrBlock: string;
   /** 目的地址CIDR */
   DestinationCidrBlock: string;
   /** 优先级 */
   Priority: number;
+  /** 实例类型[VPC,DIRECTCONNECT,VPNGW] */
+  InstanceType: string;
+  /** 实例ID */
+  InstanceId: string;
+  /** 实例所在地域 */
+  InstanceRegion?: string;
   /** 描述 */
   Description?: string;
   /** 策略路由匹配策略ID */

@@ -160,6 +160,12 @@ declare interface ArtifactInfo {
   SkillId?: string | null;
   /** 用于解析调用下载接口 */
   StoragePath?: string | null;
+  /** 来源类型 */
+  SourceType?: string | null;
+  /** 来源名称 */
+  SourceName?: string | null;
+  /** 预览摘要 */
+  ExecutionSummary?: string | null;
 }
 
 /** 消息正文 */
@@ -1323,6 +1329,10 @@ declare interface ListAIWorkbenchArtifactsRequest {
   MimeTypes?: string[];
   /** 排序枚举值：ASC： 正序DESC： 倒序 */
   OrderDirection?: string;
+  /** 数字分身ID */
+  AgentId?: string;
+  /** 模糊搜索制品信息 */
+  NameKeyword?: string;
 }
 
 declare interface ListAIWorkbenchArtifactsResponse {

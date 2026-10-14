@@ -64,6 +64,68 @@ declare interface AlarmsRules {
   Value?: number;
 }
 
+/** DB 层审计日志单条明细。字段由 DruidCommonUtil#changeLogsTdsqlDB 和 BusinessCodeUtils 固定输出。LogType=All 时额外追加 FlowTime。 */
+declare interface AuditDBLogItem {
+  /** SQL 执行时间点（格式化字符串，yyyy-MM-dd HH:mm:ss）。 */
+  Timestamp?: string | null;
+  /** 集群 ID。 */
+  ClusterId?: string | null;
+  /** 影响行数。 */
+  AffectRows?: number | null;
+  /** 扫描行数。 */
+  CheckRows?: number | null;
+  /** CPU 耗时（微秒）。 */
+  CpuTime?: number | null;
+  /** 后端 Set Host（源字段 dbHost）。 */
+  SetHost?: string | null;
+  /** SQL 执行所在的数据库名。 */
+  DBName?: string | null;
+  /** SQL 执行返回的错误码，0 表示成功。 */
+  ErrCode?: string | null;
+  /** SQL 执行耗时（微秒）。 */
+  ExecTime?: number | null;
+  /** 客户端来源 IP。 */
+  Host?: string | null;
+  /** Set 名称（源字段 instanceId）。 */
+  SetName?: string | null;
+  /** IO 等待时间（微秒）。 */
+  IoWaitTime?: number | null;
+  /** 锁等待时间（微秒）。 */
+  LockWaitTime?: number | null;
+  /** SQL 开始时间（纳秒级时间戳）。 */
+  SqlStartTimeNs?: number | null;
+  /** 查询 ID（用于关联查询）。 */
+  QueryId?: string | null;
+  /** 查询序号（同一事务内 SQL 的序列号）。 */
+  QueryNo?: number | null;
+  /** 返回行数（扫描结果集行数）。 */
+  SentRows?: number | null;
+  /** 执行的 SQL 语句原文。 */
+  Sql?: string | null;
+  /** SQL 模板 ID。 */
+  SqlTemplateId?: string | null;
+  /** SQL 类型（如 Select、Insert、Update、Delete 等）。 */
+  SqlType?: string | null;
+  /** 涉及的表。 */
+  Tables?: string | null;
+  /** 线程 ID。 */
+  ThreadId?: string | null;
+  /** SQL 开始时间（毫秒级时间戳）。 */
+  SqlStartTime?: number | null;
+  /** 事务存活时间（微秒）。 */
+  TrxLivingTime?: number | null;
+  /** 执行 SQL 的数据库用户名。 */
+  User?: string | null;
+  /** 事务 ID。 */
+  TrxId?: string | null;
+  /** 内部 XID。 */
+  InternalXId?: string | null;
+  /** 业务码（由业务侧 SQL 注释中 i/o/p 等 KV 提取）。 */
+  BusinessCode?: string | null;
+  /** 网关流转耗时（毫秒），仅 LogType=All 时由 Gateway 日志关联后返回；LogType=DB 时该字段不下发。 */
+  FlowTime?: number | null;
+}
+
 /** 实例详细信息 */
 declare interface AuditInstance {
   /** 审计状态，已开通审计为：YES，未开通审计为：ON。 */
@@ -152,6 +214,120 @@ declare interface AuditLogFilter {
   AffectRows?: number;
   /** 执行时间。单位为：µs。表示筛选执行时间大于该值的审计日志。 */
   ExecTime?: number;
+}
+
+/** 审计日志查询过滤条件集合。所有字段均可选。注意：MultiSql 、 ExcludeMultiSql 以 JSON 字符串承载二维数组（云 API 平台不支持二维数组），示例：[[a,b]] 表示 (a OR b)。 */
+declare interface AuditLogQueryFilter {
+  /** SQL 类型列表，取值如 SELECT、INSERT、UPDATE、DELETE 等。 */
+  SqlType?: string[];
+  /** 执行耗时范围（毫秒），长度为 2 的数组：[最小值, 最大值]。 */
+  ExecTime?: number[];
+  /** IO 等待耗时范围（毫秒），长度为 2 的数组。 */
+  IoWaitTime?: number[];
+  /** CPU 耗时范围（毫秒），长度为 2 的数组。 */
+  CpuTime?: number[];
+  /** 锁等待耗时范围（毫秒），长度为 2 的数组。 */
+  LockWaitTime?: number[];
+  /** SQL 执行错误码，例如 0 表示成功。 */
+  ErrCode?: string;
+  /** 错误信息。 */
+  ErrInfo?: string;
+  /** 数据库名列表。 */
+  DBName?: string[];
+  /** 用户名列表。 */
+  User?: string[];
+  /** 来源 IP 列表。 */
+  Host?: string[];
+  /** 线程 ID 列表。 */
+  ThreadId?: string[];
+  /** 代理节点 Host 列表。 */
+  ProxyHostList?: string[];
+  /** 后端 Set Host 列表。 */
+  SetHostList?: string[];
+  /** 后端 Set ID 列表。 */
+  SetIdList?: string[];
+  /** 多 SQL 关键词条件，JSON 字符串，内部为二维数组：第一级为 AND，第二级为 OR。注意云 API 平台不支持二维数组，此处用字符串承载，服务端自动解析。 */
+  MultiSql?: string;
+  /** 排除的多 SQL 关键词条件，JSON 字符串，结构同 MultiSql。 */
+  ExcludeMultiSql?: string;
+  /** SQL 模板 ID。 */
+  SqlTemplateId?: string;
+  /** SQL 开始时间，示例：2026-10-10 11:05:06.002211参数格式：YYYY-MM-DD hh:mm:ss.SSSSSS */
+  SqlStartTime?: string;
+  /** 查询 ID，关联查询时使用（LogType=All 时必填）。 */
+  QueryId?: string;
+}
+
+/** Proxy 层审计日志单条明细。字段由 DruidCommonUtil#changeLogsTdsqlProxy 和 BusinessCodeUtils 固定输出。 */
+declare interface AuditProxyLogItem {
+  /** SQL 执行时间点（格式化字符串，yyyy-MM-dd HH:mm:ss）。 */
+  Timestamp?: string | null;
+  /** 集群 ID（dcdb/mariadb 集群标识，与 InstanceId 相同）。 */
+  ClusterId?: string | null;
+  /** 影响行数。 */
+  AffectRows?: number | null;
+  /** 是否自动提交。1 表示开启，0 表示关闭。 */
+  Autocommit?: string | null;
+  /** MySQL 网络协议命令类型（如 COM_QUERY、COM_CONNECT 等）。 */
+  ComType?: string | null;
+  /** 新建连接耗时。 */
+  ConnTc?: number | null;
+  /** 后端 DB 实例地址（多个用英文逗号分隔）。 */
+  DBHost?: string | null;
+  /** SQL 执行所在的数据库名。 */
+  DBName?: string | null;
+  /** SQL 执行返回的错误码，0 表示成功。 */
+  ErrCode?: string | null;
+  /** 错误信息。 */
+  ErrInfo?: string | null;
+  /** SQL 执行耗时（微秒）。 */
+  ExecTime?: number | null;
+  /** 请求结束后仍占用的连接数（非事务请求通常为 0）。 */
+  HoldConns?: string | null;
+  /** 客户端来源 IP。 */
+  Host?: string | null;
+  /** 是否开启全局一致性读（0 否、1 是）。 */
+  Mc?: string | null;
+  /** SQL 开始时间（微秒精度中的微秒部分）。 */
+  SqlStartTimeUs?: number | null;
+  /** 本次请求新建的连接数。 */
+  NewConnNum?: number | null;
+  /** Proxy 代理节点地址。 */
+  ProxyHost?: string | null;
+  /** Proxy ID。 */
+  ProxyId?: string | null;
+  /** 查询 ID（用于关联查询）。 */
+  QueryId?: string | null;
+  /** 返回行数（扫描结果集行数）。 */
+  SentRows?: number | null;
+  /** 是否为 Proxy 改写后的查询：0 原始查询，1 改写后查询。 */
+  Splited?: number | null;
+  /** 执行的 SQL 语句原文。 */
+  Sql?: string | null;
+  /** SQL 模板。 */
+  SqlTemplate?: string | null;
+  /** SQL 模板 ID。 */
+  SqlTemplateId?: string | null;
+  /** SQL 类型（如 Select、Insert、Create、Login、Set 等）。 */
+  SqlType?: string | null;
+  /** 涉及的表（多表以英文逗号分隔）。 */
+  Tables?: string | null;
+  /** 线程 ID。 */
+  ThreadId?: string | null;
+  /** SQL 开始时间（毫秒级时间戳）。 */
+  SqlStartTime?: number | null;
+  /** 执行 SQL 的数据库用户名。 */
+  User?: string | null;
+  /** 客户端连接的 HostPort。 */
+  HostPort?: string | null;
+  /** Proxy 节点处理线程 ID。 */
+  ProxyThread?: string | null;
+  /** 后端 DB Host 数量。 */
+  DbHostNum?: string | null;
+  /** 业务码（由业务侧 SQL 注释中 i/o/p 等 KV 提取）。 */
+  BusinessCode?: string | null;
+  /** 业务标签（根据业务码后置补齐）。 */
+  BusinessTag?: string | null;
 }
 
 /** redis自治事件任务详情 */
@@ -522,6 +698,14 @@ declare interface HealthStatus {
   ScoreDetails?: ScoreDetail[];
   /** 健康等级版本，默认为"V1" */
   HealthLevelVersion?: string;
+}
+
+/** 索引详细信息 */
+declare interface IndexDDLInfo {
+  /** 索引名称。 */
+  IndexName?: string;
+  /** 创建索引语句。 */
+  DDL?: string;
 }
 
 /** 推荐的索引 */
@@ -1460,6 +1644,34 @@ declare interface TableSpaceTimeSeries {
   SeriesData?: MonitorFloatMetricSeriesData;
 }
 
+/** 表统计信息明细 */
+declare interface TableStatistics {
+  /** 表名。 */
+  TableName?: string;
+  /** Schema 名。 */
+  TableSchema?: string;
+  /** 库名（catalog）。 */
+  DatabaseName?: string;
+  /** 存储引擎。 */
+  Engine?: string;
+  /** 数据空间。单位：MB */
+  DataLength?: number;
+  /** 索引空间。单位：MB */
+  IndexLength?: number;
+  /** 总分配空间。单位：MB */
+  TotalLength?: number;
+  /** 已用空间。单位：MB */
+  UsedLength?: number;
+  /** 碎片空间。单位：MB */
+  DataFree?: number;
+  /** 行数。 */
+  TableRows?: number;
+  /** 碎片率（%）。 */
+  FragRatio?: number;
+  /** 物理文件大小。单位：MB */
+  PhysicalFileSize?: number;
+}
+
 /** 标签过滤组。组内 TagPairs 之间为 OR 关系；不同 TagFilterGroup 之间为 AND 关系。 */
 declare interface TagFilterGroup {
   /** 过滤条件-标签组 */
@@ -2228,6 +2440,46 @@ declare interface DescribeDBAuditLogTopSqlsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDBAuditLogsRequest {
+  /** 服务产品类型。当前 云 API 仅支持：dcdb、mariadb（cdb、cynosdb 已切至中台）。 */
+  Product: string;
+  /** 开始时间，格式 yyyy-MM-dd HH:mm:ss。 */
+  StartTime: string;
+  /** 结束时间，格式 yyyy-MM-dd HH:mm:ss。 */
+  EndTime: string;
+  /** 实例 ID，必填。dcdb、mariadb 场景以实例维度查询审计日志。 */
+  InstanceId?: string;
+  /** 日志类型：Proxy 代理日志，DB 数据库日志，All 全部。 */
+  LogType?: string;
+  /** 排序字段，默认 Timestamp。 */
+  SortBy?: string;
+  /** 排序方式：ASC 升序，DESC 降序。默认 DESC。 */
+  OrderBy?: string;
+  /** 偏移量，默认 0。 */
+  Offset?: number;
+  /** 返回数量，默认 20，最大 100。 */
+  Limit?: number;
+  /** SQL 开始时间（毫秒级时间戳），根据 QueryId 关联查询时使用。 */
+  SqlStartTime?: number;
+  /** 审计日志查询过滤条件集合。 */
+  Filter?: AuditLogQueryFilter;
+  /** 集群 ID，dcdb 产品以集群维度查询审计日志 */
+  ClusterId?: string;
+}
+
+declare interface DescribeDBAuditLogsResponse {
+  /** 满足条件的总条数。 */
+  TotalCount?: number | null;
+  /** 过滤后记录数。 */
+  FilteredRecords?: number | null;
+  /** Proxy 层审计日志列表。LogType=Proxy 或 All 时返回，字段结构参见 AuditProxyLogItem。 */
+  ProxyLogs?: AuditProxyLogItem[];
+  /** DB 层审计日志列表。LogType=DB 或 All 时返回，字段结构参见 AuditDBLogItem。 */
+  DBLogs?: AuditDBLogItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDBAutonomyActionRequest {
   /** 自治任务ID。可通过 [DescribeDBAutonomyActions](https://cloud.tencent.com/document/product/1130/116974) 接口获取。 */
   ActionId: number;
@@ -2518,6 +2770,34 @@ declare interface DescribeDatabaseAutonomyStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDatabaseObjectV2Request {
+  /** 服务产品类型。取值：sqlserver（云数据库 Sqlserver）。 */
+  Product: string;
+  /** 查询对象类型。枚举值：TableDDL： 建表+索引DDLTableStatistics： 表空间统计 */
+  ObjectType: string;
+  /** 实例 ID。SQLServer: mssql-xxxx。 */
+  InstanceId?: string;
+  /** 库名（catalog）。TableStatistics 时必填；TableDDL 时可选。 */
+  TableSchema?: string;
+  /** 当产品为sqlserver时，表名/视图名，支持 schema.table 格式，未带 schema 默认 dbo */
+  TableName?: string;
+}
+
+declare interface DescribeDatabaseObjectV2Response {
+  /** 索引 DDL 列表，每项为一条 CREATE INDEX 语句，无索引时为空数组。 */
+  IndexDDLs?: IndexDDLInfo[];
+  /** 建表 DDL 语句，对象不存在时为空串。 */
+  TableDDL?: string;
+  /** 表名。 */
+  TableName?: string;
+  /** 库名。 */
+  TableSchema?: string;
+  /** 表空间统计。 */
+  TableStatistics?: TableStatistics;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeadLockLogsRequest {
   /** 服务产品类型。取值：sqlserver（云数据库 Sqlserver）。 */
   Product: string;
@@ -2791,7 +3071,7 @@ declare interface DescribeNoPrimaryKeyTablesResponse {
 }
 
 declare interface DescribeProxyProcessStatisticsRequest {
-  /** 实例 ID 。 */
+  /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
   InstanceId: string;
   /** 该实例下需要查询的某一个 ProxyID 。 */
   InstanceProxyId: string;
@@ -2801,9 +3081,9 @@ declare interface DescribeProxyProcessStatisticsRequest {
   Product: string;
   /** 偏移量，默认0。 */
   Offset?: number;
-  /** 按照某字段排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。 */
+  /** 按照某字段排序。支持值包括："AllConn"，"ActiveConn"，"Ip"。其中：- AllConn ：表示总连接数（活跃连接 + 非活跃连接）- ActiveConn：表示活跃连接数- Ip：表示 IP 地址 */
   SortBy?: string;
-  /** 排序方向。支持值包括："DESC"，"ASC"。 */
+  /** 排序方向。支持值包括："DESC"，"ASC"。其中：- DESC：降序- ASC：升序 */
   OrderDirection?: string;
 }
 
@@ -4905,6 +5185,8 @@ declare interface Dbbrain {
   DescribeAuditLogFiles(data: DescribeAuditLogFilesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditLogFilesResponse>;
   /** 获取审计日志TOP SQL模板列表 {@link DescribeDBAuditLogTopSqlsRequest} {@link DescribeDBAuditLogTopSqlsResponse} */
   DescribeDBAuditLogTopSqls(data: DescribeDBAuditLogTopSqlsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAuditLogTopSqlsResponse>;
+  /** 获取数据库审计日志 {@link DescribeDBAuditLogsRequest} {@link DescribeDBAuditLogsResponse} */
+  DescribeDBAuditLogs(data: DescribeDBAuditLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAuditLogsResponse>;
   /** 查询自治事件任务详情 {@link DescribeDBAutonomyActionRequest} {@link DescribeDBAutonomyActionResponse} */
   DescribeDBAutonomyAction(data: DescribeDBAutonomyActionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBAutonomyActionResponse>;
   /** 查询自治事件任务列表 {@link DescribeDBAutonomyActionsRequest} {@link DescribeDBAutonomyActionsResponse} */
@@ -4929,6 +5211,8 @@ declare interface Dbbrain {
   DescribeDBSpaceStatus(data: DescribeDBSpaceStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSpaceStatusResponse>;
   /** 查询数据库自治功能状态 {@link DescribeDatabaseAutonomyStatusRequest} {@link DescribeDatabaseAutonomyStatusResponse} */
   DescribeDatabaseAutonomyStatus(data: DescribeDatabaseAutonomyStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseAutonomyStatusResponse>;
+  /** 查询数据库表信息V2 {@link DescribeDatabaseObjectV2Request} {@link DescribeDatabaseObjectV2Response} */
+  DescribeDatabaseObjectV2(data: DescribeDatabaseObjectV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseObjectV2Response>;
   /** 查询死锁日志 {@link DescribeDeadLockLogsRequest} {@link DescribeDeadLockLogsResponse} */
   DescribeDeadLockLogs(data: DescribeDeadLockLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeadLockLogsResponse>;
   /** 获取实例信息列表 {@link DescribeDiagDBInstancesRequest} {@link DescribeDiagDBInstancesResponse} */

@@ -526,6 +526,28 @@ declare interface PortConfiguration {
   Protocol?: string;
 }
 
+/** 镜像预热产物 */
+declare interface PreCacheImage {
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像 Digest */
+  ImageDigest?: string;
+  /** 镜像仓库类型：enterprise、personal、custom 。枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
+  ImageRegistryType?: string;
+  /** 镜像预热状态 */
+  Status?: string;
+  /** 镜像预热创建时间 */
+  CreateTime?: string;
+  /** 镜像预热ID */
+  PreCacheImageId?: string;
+  /** 镜像预热来源枚举值：AUTO： Sandbox Tool / Instance 自动预热EXPLICIT： 手动预热TCR_AUTO： TCR自动预热 */
+  SourceType?: string;
+  /** 镜像预热存储大小单位：Byte */
+  CachedImageSizeBytes?: number;
+  /** 该预热镜像最近一次被沙箱实例使用时间 */
+  LastUsedTime?: string;
+}
+
 /** 健康检查探针配置 */
 declare interface ProbeConfiguration {
   /** HTTP GET 探测配置 */
@@ -1100,6 +1122,22 @@ declare interface DeleteDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface DeletePreCacheImageRequest {
+  /** 镜像地址 */
+  Image?: string;
+  /** 镜像仓库配置 */
+  ImageDigest?: string;
+  /** 镜像仓库类型：enterprise、personal、custom 。枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
+  ImageRegistryType?: string;
+  /** 镜像预热ID */
+  PreCacheImageId?: string;
+}
+
+declare interface DeletePreCacheImageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteRegistryRecordRequest {
   /** 父 Registry ID。 */
   RegistryId: string;
@@ -1238,6 +1276,28 @@ declare interface DescribeEventsResponse {
   Events?: EventInfo[];
   /** 符合条件的事件总数。 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePreCacheImageListRequest {
+  /** 查询过滤条件。支持 Image, ImageDigest, ImageRegistryType, Status, SourceType；不同 Filter 之间为 AND，同一 Filter 的 Values 之间为 OR。 */
+  Filters?: Filter[];
+  /** 返回数据列数取值范围：[1, 100]默认值：20 */
+  MaxResults?: number;
+  /** NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。 */
+  NextToken?: string;
+  /** 默认 false；仅控制是否返回精确总数 */
+  NeedTotalCount?: boolean;
+}
+
+declare interface DescribePreCacheImageListResponse {
+  /** 镜像预热总数 */
+  TotalCount?: number;
+  /** 镜像预热列表 */
+  PreCacheImageList?: PreCacheImage[];
+  /** 如果NextToken返回非空字符串 ，表示还有更多可用结果。 NextToken是每个页面唯一的分页令牌。使用返回的令牌再次调用以检索下一页。需要保持所有其他参数不变。 */
+  NextToken?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1751,6 +1811,8 @@ declare interface StartSandboxInstanceRequest {
   ToolName?: string;
   /** 待克隆的源沙箱 ID */
   SourceInstanceId?: string;
+  /** 待启动的沙箱快照 ID */
+  SnapshotId?: string;
   /** 超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h */
   Timeout?: string;
   /** 幂等性 Token，长度不超过 64 字符 */
@@ -1935,6 +1997,8 @@ declare interface Ags {
   DeleteAPIKey(data: DeleteAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAPIKeyResponse>;
   /** 删除 Deployment {@link DeleteDeploymentRequest} {@link DeleteDeploymentResponse} */
   DeleteDeployment(data: DeleteDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeploymentResponse>;
+  /** 删除镜像预热 {@link DeletePreCacheImageRequest} {@link DeletePreCacheImageResponse} */
+  DeletePreCacheImage(data?: DeletePreCacheImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePreCacheImageResponse>;
   /** 删除 Registry {@link DeleteRegistryRequest} {@link DeleteRegistryResponse} */
   DeleteRegistry(data: DeleteRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegistryResponse>;
   /** 删除 Record {@link DeleteRegistryRecordRequest} {@link DeleteRegistryRecordResponse} */
@@ -1955,6 +2019,8 @@ declare interface Ags {
   DescribeDeploymentList(data?: DescribeDeploymentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentListResponse>;
   /** 查询事件列表 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
+  /** 查询镜像预热列表 {@link DescribePreCacheImageListRequest} {@link DescribePreCacheImageListResponse} */
+  DescribePreCacheImageList(data?: DescribePreCacheImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageListResponse>;
   /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
   DescribePreCacheImageTask(data?: DescribePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageTaskResponse>;
   /** 查询账号配额总览 {@link DescribeQuotaOverviewRequest} {@link DescribeQuotaOverviewResponse} */

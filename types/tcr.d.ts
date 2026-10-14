@@ -1056,6 +1056,10 @@ declare interface WebhookTrigger {
   NamespaceId?: number;
   /** 触发器所属命名空间名称 */
   NamespaceName?: string | null;
+  /** 触发器所属产品类型：ags 为镜像预热，apparate 为镜像加速，普通 webhook 为空 */
+  Product?: string | null;
+  /** 预热目标地域，AGS 镜像预热的目标地域，非 AGS 触发器为空 */
+  PreheatRegion?: string | null;
 }
 
 /** 触发器日志 */
@@ -1523,6 +1527,10 @@ declare interface CreateWebhookTriggerRequest {
   Trigger: WebhookTrigger;
   /** 命名空间 */
   Namespace: string;
+  /** 产品名称，非空时创建的 webhook 将被隐藏 */
+  Product?: string;
+  /** 预热目标地域，AGS 镜像预热的目标地域，非 AGS 触发器为空 */
+  PreheatRegion?: string;
 }
 
 declare interface CreateWebhookTriggerResponse {
@@ -3155,6 +3163,10 @@ declare interface ModifyWebhookTriggerRequest {
   Trigger: WebhookTrigger;
   /** 命名空间 */
   Namespace: string;
+  /** 产品名称，非空时创建的 webhook 将被隐藏 */
+  Product?: string;
+  /** 预热目标地域，AGS 镜像预热的目标地域，非 AGS 触发器为空 */
+  PreheatRegion?: string;
 }
 
 declare interface ModifyWebhookTriggerResponse {

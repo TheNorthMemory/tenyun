@@ -34,6 +34,8 @@ declare interface CkafkaTargetParams {
   RetryPolicy: RetryPolicy;
   /** 事件投递kafka时的协议格式；目前只支持两种格式：1.CloudEvent(完整的cloudevent消息协议)2.CloudEventDataKey(cloudevent协议中的data字段内容) */
   EventDeliveryFormat?: string;
+  /** 事件顶层Time参数投递格式枚举值：RFC3339： 将时间戳转换成 YYYY-MM-DDTHH:mm:ssZ 格式 */
+  TimeFormat?: string;
 }
 
 /** Connection信息 */

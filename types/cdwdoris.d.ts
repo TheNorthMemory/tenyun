@@ -558,6 +558,8 @@ declare interface InstanceInfo {
   EnableSqlConv?: number;
   /** 集群时区，默认+08:00 */
   TimeZone?: string;
+  /** 缓存盘介质：任一计算组为单副本SSD即ELASTIC_REMOTE_SSD（不支持变配多可用区部署等），否则为默认计算组介质；非存算分离为空 */
+  CacheDiskType?: string;
 }
 
 /** 实例节点描述信息 */
@@ -778,6 +780,8 @@ declare interface ResourceSpec {
   ComputeSpecDesc?: string;
   /** cvm库存 */
   InstanceQuota?: number;
+  /** 计算组ID自定义后缀。1到8位小写字母、数字或连字符，首尾须为字母或数字；不传则随机生成8位后缀。最终计算组ID格式为实例ID-后缀，同时作为内核计算组名 */
+  ComputeGroupSuffix?: string;
 }
 
 /** 恢复任务信息 */

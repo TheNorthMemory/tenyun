@@ -240,8 +240,6 @@ declare interface ListenerOutput {
 
 /** 列表展示的应用型负载均衡实例结构。 */
 declare interface LoadBalancer {
-  /** 访问日志配置结构。 */
-  AccessLogConfig?: AccessLogConfig;
   /** IP 地址版本，取值 IPv4 或 IPv6。 */
   AddressIpVersion?: string | null;
   /** 负载均衡的地址类型。取值：- **Internet**：负载均衡具有公网IP地址，DNS域名被解析到公网IP，因此可以在公网环境访问。- **Intranet**：负载均衡只有私网IP地址，DNS域名被解析到私网IP，因此只能被负载均衡所在VPC的内网环境访问。 */
@@ -332,7 +330,7 @@ declare interface LoadBalancerOperationLocksItem {
 
 /** 修改保护状态信息。 */
 declare interface ModificationProtectionInfo {
-  /** 是否开启修改保护。开启后，可防止实例被意外修改或删除。- true：开启修改保护- false：关闭修改保护 */
+  /** 是否开启修改保护。开启后，可防止实例被意外修改或删除。true：开启修改保护false：关闭修改保护 */
   ModificationProtectionEnabled?: boolean;
   /** 1238716123 */
   OperatorUin?: string;

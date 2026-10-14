@@ -1044,6 +1044,30 @@ declare interface FwGroupIdName {
   FwGroupName?: string | null;
 }
 
+/** VPC防火墙状态监控图 */
+declare interface FwGroupIpFlowStat {
+  /** IP */
+  Ip?: string | null;
+  /** 实例ID */
+  InstanceId?: string | null;
+  /** 实例名称 */
+  InstanceName?: string | null;
+  /** VPCID */
+  VpcId?: string | null;
+  /** VPC 名称 */
+  VpcName?: string | null;
+  /** 峰值流量 */
+  FlowMax?: number | null;
+  /** 均值带宽 */
+  FlowAvg?: number | null;
+  /** 限速状态 */
+  TcRuleStatus?: number | null;
+  /** 防火墙ID */
+  FwInsId?: string | null;
+  /** 0 IPV4 , 1 IPV6 */
+  IpVersion?: number | null;
+}
+
 /** 多种VPC墙模式开关结构 */
 declare interface FwGroupSwitch {
   /** 防火墙实例的开关模式 1: 单点互通 2: 多点互通 3: 全互通 4: 自定义路由 */
@@ -4942,6 +4966,40 @@ declare interface DescribeVpcFwGroupSwitchResponse {
   RequestId?: string;
 }
 
+declare interface DescribeVpcFwIpStatRequest {
+  /** 每页条数 */
+  Limit: number;
+  /** 偏移值 */
+  Offset: number;
+  /** 防火墙组ID */
+  FwGroupId?: string;
+  /** 防火墙的实例id */
+  FwInsId?: string;
+  /** 选择的时间区间 1:1小时内，2: 24 小时 ，3：7天， 4：1个月 */
+  TimeType?: number;
+  /** 过滤条件组合 */
+  Filters?: CommonFilter[];
+  /** 检索的起始时间，可不传 */
+  StartTime?: string;
+  /** 检索的截止时间，可不传 */
+  EndTime?: string;
+  /** desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值 */
+  Order?: string;
+  /** 排序所用到的字段 */
+  By?: string;
+}
+
+declare interface DescribeVpcFwIpStatResponse {
+  /** 单台cvm峰值带宽统计列表 */
+  Data?: FwGroupIpFlowStat[] | null;
+  /** 总行数 */
+  Total?: number | null;
+  /** 异步查询状态，1查询执行中，0查询已结束 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExpandCfwVerticalRequest {
   /** nat：nat防火墙，ew：东西向防火墙 */
   FwType: string;
@@ -6097,6 +6155,8 @@ declare interface Cfw {
   DescribeVpcFwCcnPolicyWhiteList(data?: DescribeVpcFwCcnPolicyWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcFwCcnPolicyWhiteListResponse>;
   /** VPC防火墙(组)开关列表 {@link DescribeVpcFwGroupSwitchRequest} {@link DescribeVpcFwGroupSwitchResponse} */
   DescribeVpcFwGroupSwitch(data: DescribeVpcFwGroupSwitchRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcFwGroupSwitchResponse>;
+  /** 查询VPC防火墙下，单IP粒度的流量统计 {@link DescribeVpcFwIpStatRequest} {@link DescribeVpcFwIpStatResponse} */
+  DescribeVpcFwIpStat(data: DescribeVpcFwIpStatRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVpcFwIpStatResponse>;
   /** 防火墙垂直扩容 {@link ExpandCfwVerticalRequest} {@link ExpandCfwVerticalResponse} */
   ExpandCfwVertical(data: ExpandCfwVerticalRequest, config?: AxiosRequestConfig): AxiosPromise<ExpandCfwVerticalResponse>;
   /** 日志审计日志离线导出 {@link ExportLogsOfflineRequest} {@link ExportLogsOfflineResponse} */

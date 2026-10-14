@@ -1150,6 +1150,8 @@ declare interface Setats {
   SecurityGroupIds?: string[] | null;
   /** 网络信息 */
   CCNs?: CCN[] | null;
+  /** 挂靠的宿主集群 */
+  ClusterGroupSerialId?: string | null;
 }
 
 /** setats 机器规格 */

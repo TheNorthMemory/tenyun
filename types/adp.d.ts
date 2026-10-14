@@ -476,10 +476,14 @@ declare interface App {
   ShareUrlInfo: AppShareURLInfo | null;
   /** 状态 */
   Status: AppStatusInfo | null;
-  /** 应用引用的共享知识库列表 */
-  SharedKbList?: AppSharedKbInfo[];
   /** 企业共享配置 */
   CorpShareConfig?: CorpShareConfig | null;
+  /** 应用引用的共享知识库列表 */
+  SharedKbList?: AppSharedKbInfo[] | null;
+  /** portal共享配置 */
+  PortalShareConfig?: PortalShareConfig | null;
+  /** 应用挂载云盘 */
+  FileVolumeMountList?: FileVolumeMount[] | null;
 }
 
 /** 应用高级配置 */
@@ -542,12 +546,30 @@ declare interface AppExperienceConfig {
   Role: RoleConfig | null;
 }
 
+/** 应用级云盘挂载配置 */
+declare interface AppFileVolumeMount {
+  /** 应用云盘配置 */
+  FileVolumeMount?: FileVolumeMount;
+  /** 1：新增 2：修改 3：删除 */
+  Action?: number;
+}
+
 /** 欢迎语配置 */
 declare interface AppGreetingConfig {
   /** 欢迎语内容 */
   Greeting: string;
   /** 开场问题列表 */
   OpeningQuestionList?: string[];
+}
+
+/** 应用标识 */
+declare interface AppIdentity {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用名称 */
+  AppName?: string;
+  /** 应用模式枚举值：1： 标准模式2： agent模式3： 单工作流模式4： ClawAgent模式 */
+  AppMode?: number;
 }
 
 /** 记忆配置 */
@@ -710,6 +732,8 @@ declare interface AppSummary {
   SubStatus: AppSubStatusInfo | null;
   /** 资源操作权限 */
   PermissionIdList?: string[];
+  /** 应用描述信息 */
+  Description?: string;
 }
 
 /** AppToolConfig */
@@ -954,6 +978,14 @@ declare interface AppTriggerWorkflowExecuteConfig {
   WorkflowName?: string;
 }
 
+/** AppVariableValue */
+declare interface AppVariableValue {
+  /** 变量ID */
+  VariableId?: string;
+  /** 变量值 */
+  VariableValue?: string;
+}
+
 /** 联网搜索配置(国际版使用) */
 declare interface AppWebSearchConfig {
   /** API密钥 */
@@ -1050,6 +1082,24 @@ declare interface BasicBilling {
   CashPrice?: number;
   /** PU价格单位：pu */
   PuPrice?: number;
+}
+
+/** BatchRunSummary */
+declare interface BatchRunSummary {
+  /** 失败数量 */
+  FailedCount?: number;
+  /** 成功数量 */
+  SuccessCount?: number;
+  /** 总批次 */
+  TotalCount?: number;
+  /** 失败的下标 */
+  FailedIndexList?: number[];
+  /** 上一轮完成的批次 */
+  JustCompletedIndexList?: number[];
+  /** 运行中的下标 */
+  RunningIndexList?: number[];
+  /** 成功的下标 */
+  SuccessIndexList?: number[];
 }
 
 /** BillingAttribute */
@@ -1188,12 +1238,22 @@ declare interface ClawAgentAgentTeamConfig {
   PromptContent?: string;
 }
 
+/** 渠道上下文超时清空配置 */
+declare interface ClawAgentChannelContextTimeoutConfig {
+  /** 是否开启渠道上下文超时清空 */
+  Enabled?: boolean;
+  /** 渠道上下文超时时长取值范围：[1, 99] */
+  TimeoutHour?: number;
+}
+
 /** ClawAgent配置 */
 declare interface ClawAgentConfig {
   /** Agent团队协作配置 */
   AgentTeamConfig?: ClawAgentAgentTeamConfig | null;
   /** 长期记忆配置 */
   LongMemoryConfig?: ClawAgentLongMemoryConfig | null;
+  /** 渠道上下文超时清空配置 */
+  ChannelContextTimeoutConfig?: ClawAgentChannelContextTimeoutConfig | null;
 }
 
 /** ClawAgent长期记忆配置 */
@@ -1412,6 +1472,36 @@ declare interface ConversationExperience {
   RecommendPromptMode: number;
 }
 
+/** FileCollection 文件收集信息 */
+declare interface ConversationFileCollection {
+  /** 最大文件数量 */
+  MaxFileCount: number;
+  /** 支持的文件类型列表 */
+  SupportedFileTypeList?: string[];
+  /** 支持的文件类型列表 */
+  SupportedFileTypes?: string[];
+}
+
+/** FileInfo 文件信息 */
+declare interface ConversationFileInfo {
+  /** 文件创建时间 */
+  CreateTime: string;
+  /** 文档业务 ID */
+  DocId: string;
+  /** 文件名 */
+  FileName: string;
+  /** 文件大小 */
+  FileSize: string;
+  /** 文件类型 */
+  FileType: string;
+  /** 文件下载链接 */
+  FileUrl: string;
+  /** 文件在沙箱中的原始路径 */
+  LocalPath?: string;
+  /** 文件审核状态枚举值：1： 审核中2： 审核通过3： 审核不通过 */
+  AuditStatus?: number;
+}
+
 /** MCP App 内容，供历史会话重建可交互 App */
 declare interface ConversationMcpApp {
   /** 能力边界：一次请求只能读该 plugin 的资源 */
@@ -1526,6 +1616,24 @@ declare interface ConversationResetInfo {
   ResetThroughRecordId?: string;
 }
 
+/** Widget 组件内容信息 */
+declare interface ConversationWidget {
+  /** Base64 编码的原始 widget 数据 */
+  EncodedWidget: string;
+  /** 用户上次提交的 payload */
+  Payload: string;
+  /** widget 在正文中的位置 */
+  Position: number;
+  /** widget 状态 JSON 数据 */
+  State: string;
+  /** widget 视图数据 */
+  View: string;
+  /** 组件 ID */
+  WidgetId: string;
+  /** 组件运行 ID */
+  WidgetRunId: string;
+}
+
 /** Workspace 工作空间信息 */
 declare interface ConversationWorkspace {
   /** 工作空间 ID */
@@ -1550,6 +1658,14 @@ declare interface CorpShareConfig {
 declare interface CronSchedule {
   /** cron表达式 */
   Expression?: string;
+}
+
+/** 工作流的API参数 */
+declare interface CustomVariable {
+  /** 参数名称 */
+  Name?: string;
+  /** 参数的值 */
+  Value?: string;
 }
 
 /** 数据库检索配置 */
@@ -1882,6 +1998,22 @@ declare interface FileParseModel {
   SupportedFileList?: SupportedFileType[];
 }
 
+/** 应用沙箱中的云盘挂载配置。 */
+declare interface FileVolumeMount {
+  /** 访问模式：RO=只读，RW=读写；必填。挂载到 /workdir 时只能使用 RW。 */
+  AccessMode: string;
+  /** 沙箱内的绝对挂载目录；/workdir 最多挂载一条且只能使用 RW。 */
+  MountPath: string;
+  /** 云盘标识 */
+  VolumeId: string;
+  /** 服务端生成的挂载标识，修改保留，新增可不传 */
+  MountId?: string;
+  /** 相对云盘 data 根目录的路径；空字符串表示挂载整个 data 根目录。 */
+  RelativePath?: string;
+  /** 云盘名称，仅在查询应用配置时由服务端补充，修改时忽略；不可获取时为空且不影响挂载配置 */
+  VolumeName?: string;
+}
+
 /** 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系；BETWEEN 时 value_list 必须恰好 2 个元素表示闭区间 [start, end]） */
 declare interface Filter {
   /** 过滤字段名 */
@@ -2000,6 +2132,8 @@ declare interface KBPermission {
   CanDelete?: boolean;
   /** 是否可编辑 */
   CanEdit?: boolean;
+  /** 能否被共享 */
+  CanShare?: boolean;
   /** 是否可查看 */
   CanView?: boolean;
 }
@@ -2024,6 +2158,26 @@ declare interface KBRetrievalConfig {
   StrategyType?: number;
   /** text2sql 模型 */
   TextToSqlModel?: ModelDetailInfo | null;
+}
+
+/** 知识库子状态信息 */
+declare interface KBShareStatus {
+  /** 审批Id */
+  ApprovalId?: string;
+  /** 审批/共享状态：1=PENDING 审批中，2=REJECTED 已驳回， 3=APPROVED 同意, 4=CANCELLED 已取消 */
+  SubStatusList?: number[];
+}
+
+/** 知识库空间共享信息 */
+declare interface KBSpaceShare {
+  /** 是否已被其他空间引用 */
+  IsSpaceShared?: boolean;
+  /** 被引用空间信息 */
+  SharedSpaceList?: Identity[] | null;
+  /** 共享状态 */
+  SubStatus?: KBShareStatus | null;
+  /** 是否允许操作 */
+  Enable?: boolean;
 }
 
 /** 知识库可写属性集合（配合 update_mask 使用） */
@@ -2070,6 +2224,8 @@ declare interface KBSummary {
   SharedSubType?: number;
   /** 更新时间（Unix 秒） */
   UpdateTime?: string;
+  /** 知识库空间共享信息 */
+  SpaceShare?: KBSpaceShare | null;
 }
 
 /** 通用键值对 */
@@ -2319,38 +2475,38 @@ declare interface MetricOverview {
 /** 模型完整信息 */
 declare interface Model {
   /** 模型徽章列表 */
-  BadgeList?: ModelBadge[];
+  BadgeList?: ModelBadge[] | null;
+  /** 模型作者信息 */
+  DeveloperInfo?: ModelDeveloperBasic | null;
   /** 模型限制信息 */
   LimitInfo?: ModelLimit | null;
   /** 模型基本信息 */
   ModelBasic?: ModelBasic | null;
   /** 模型超参配置 */
-  ParameterList?: ModelParameter[];
+  ParameterList?: ModelParameter[] | null;
   /** 模型属性配置 */
-  PropertyList?: ModelProperty[];
+  PropertyList?: ModelProperty[] | null;
   /** 模型提供商信息 */
   ProviderInfo?: ModelProviderBasic | null;
   /** 模型状态信息 */
   StatusInfo?: ModelStatus | null;
   /** 模型标签列表 */
   TagList?: string[];
-  /** 模型作者信息 */
-  DeveloperInfo?: ModelDeveloperBasic;
 }
 
-/** 模型徽章 */
+/** 模型徽章（对外，用户端可见）：所有文案已渲染为最终展示内容，不暴露模板参数 */
 declare interface ModelBadge {
-  /** 展示文案 */
+  /** 展示文案（已渲染为最终文案） */
   Text?: string;
-  /** 样式主题。1-信息（蓝色）, 2-成功（绿色）, 3-警告（橙色）, 4-危险（红色） */
+  /** 样式主题枚举项枚举值描述MODEL_BADGE_THEME_UNSPECIFIED0未指定MODEL_BADGE_THEME_INFO1信息（蓝色）MODEL_BADGE_THEME_SUCCESS2成功（绿色）MODEL_BADGE_THEME_WARNING3警告（橙色）MODEL_BADGE_THEME_DANGER4危险（红色） */
   Theme?: number;
-  /** tooltip文案，为空则不展示 */
+  /** tooltip 文案（已渲染为最终文案），为空则不展示 */
   Tips?: string;
-  /** 徽章类型。1-限时免费, 2-即将下线, 3-新模型, 4-热门 */
+  /** 徽章类型枚举项枚举值描述MODEL_BADGE_TYPE_UNSPECIFIED0未指定MODEL_BADGE_TYPE_FREE_TRIAL1限时免费MODEL_BADGE_TYPE_DEPRECATING2即将下线MODEL_BADGE_TYPE_NEW3新模型MODEL_BADGE_TYPE_HOT4热门 */
   Type?: number;
 }
 
-/** 模型基本信息 */
+/** 模型基本信息（已弃用，请使用 ModelProfile） */
 declare interface ModelBasic {
   /** 模型描述 */
   Description?: string;
@@ -2358,7 +2514,7 @@ declare interface ModelBasic {
   IconUrl?: string;
   /** 模型ID */
   ModelId?: string;
-  /** 模型类型。1-LLM模型, 2-Rerank模型, 3-Embedding模型, 4-文档解析模型 */
+  /** 模型类型枚举项枚举值描述MODEL_TYPE_UNSPECIFIED0未指定MODEL_TYPE_LLM1LLM模型MODEL_TYPE_RERANK2Rerank模型MODEL_TYPE_EMBEDDING3Embedding模型MODEL_TYPE_FILE_PARSE4文档解析模型 */
   ModelType?: number;
   /** 模型名称 */
   Name?: string;
@@ -2376,20 +2532,24 @@ declare interface ModelDetailInfo {
   ModelParams?: ModelParams | null;
 }
 
-/** 模型作者信息 */
+/** 模型作者基本信息（已弃用） */
 declare interface ModelDeveloperBasic {
+  /** 作者别名 */
+  Alias?: string;
   /** 作者标识 */
   Name?: string;
-  /** 作者显示名称 */
-  Alias?: string;
 }
 
 /** 模型限制信息 */
 declare interface ModelLimit {
-  /** 模型上下文长度展示文案（如 "128K"、"1000K"） */
+  /** 模型上下文长度展示文案（如 128K、1000K） */
   ContextLengthDescription?: string;
   /** 模型对话框输入长度字符数限制 */
   InputLengthLimit?: number;
+  /** 最大输入 Tokens 展示文案（如 960k，服务端格式化，未配置为空串） */
+  MaxInputTokensDescription?: string;
+  /** 最大输出 Tokens 展示文案（如 64k，服务端格式化，未配置为空串） */
+  MaxOutputTokensDescription?: string;
   /** 模型提示词长度字符数限制 */
   PromptLengthLimit?: number;
 }
@@ -2438,7 +2598,7 @@ declare interface ModelParams {
   TopK?: number;
 }
 
-/** 模型属性 */
+/** 模型属性（支持工作流类型/AI 通话类型/是否关闭模型参数/是否支持深度思考/是否限时免费/是否默认模型等） */
 declare interface ModelProperty {
   /** 属性名称 */
   Name?: string;
@@ -2446,31 +2606,37 @@ declare interface ModelProperty {
   Value?: string;
 }
 
-/** 模型提供商基本信息 */
+/** 模型提供商基本信息（已弃用，请使用 ModelProviderProfile） */
 declare interface ModelProviderBasic {
   /** 模型提供商别名 */
   Alias?: string;
   /** 模型提供商名称 */
   Name?: string;
-  /** 模型提供商类型。1-自有提供商, 2-自定义模型提供商, 3-第三方模型提供商 */
+  /** 模型提供商类型枚举项枚举值描述MODEL_PROVIDER_TYPE_UNSPECIFIED0未指定MODEL_PROVIDER_TYPE_SELF1自有提供商MODEL_PROVIDER_TYPE_CUSTOM2自定义模型提供商MODEL_PROVIDER_TYPE_THIRD3第三方模型提供商 */
   ProviderType?: number;
 }
 
-/** 模型状态信息 */
+/** 模型状态 */
 declare interface ModelStatus {
   /** 专属并发数 */
   Concurrency?: number;
   /** 是否专属并发 */
   IsExclusive?: boolean;
-  /** 资源状态。1-资源可用, 2-资源已用尽 */
+  /** 是否支持在智能工作台直接体验（模型广场详情页：依赖 space_id 动态判定；false 时前端置灰「立即体验」按钮） */
+  IsExperienceSupported?: boolean;
+  /** 资源状态枚举项枚举值描述RESOURCE_STATUS_UNSPECIFIED0未指定RESOURCE_STATUS_AVAILABLE1资源可用RESOURCE_STATUS_EXHAUSTED2资源已用尽 */
   ResourceStatus?: number;
+  /** 调用 RPM 上限（当前账号维度：有配置取配置，无配置取默认；0 表示未获取到） */
+  RpmLimit?: string;
+  /** 调用 TPM 上限（当前账号维度：有配置取配置，无配置取默认；0 表示未获取到） */
+  TpmLimit?: string;
 }
 
 /** 模型调用明细 */
 declare interface ModelUsageDetail {
   /** 调用类型，来源于计费 scene_billing（与 filter.call_type 对应） */
   CallType?: string;
-  /** 是否默认知识库 */
+  /** 是否默认知识库，仅ResourceType=5（知识库容量）业务下有意义 */
   IsDefaultKB?: boolean;
   /** 模型名称 */
   ModelName?: string;
@@ -2594,6 +2760,80 @@ declare interface MultiModalQAModel {
 declare interface MultiModalUnderstandingModel {
   /** 模型配置 */
   Model: ModelDetailInfo | null;
+}
+
+/** 节点运行的基本信息 */
+declare interface NodeRun {
+  /** 节点运行的ID */
+  NodeRunId?: string;
+  /** 节点ID */
+  NodeId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 节点名称 */
+  NodeName?: string;
+  /** 节点类型。1： 开始节点2：参数提取节点3：大模型节点4：知识问答节点5：知识检索节点6：标签提取节点7：代码执行节点8：工具节点9：逻辑判断节点10：回复节点11：选项卡节点12：循环节点13：意图识别节点14：工作流节点15：插件节点16：结束节点17: 变量聚合节点数据18: 批处理节点19: 消息队列节点20: 数据库节点21: 变量赋值节点数据22: 变量转换节点数据23: Agent节点24: 注释节点25: 文件收集节点26: 文本收集节点27: Widget节点 */
+  NodeType?: number;
+  /** 运行状态。1: 初始状态；2: 运行中；3: 运行成功； 4: 运行失败； 5: 已取消 */
+  Status?: number;
+  /** 错误信息 */
+  FailMessage?: string;
+  /** 消耗的总时间（毫秒） */
+  TotalCostMs?: number;
+  /** 消耗的token总数 */
+  TotalTokens?: number;
+  /** 错误码 */
+  FailCode?: string;
+  /** 分支下标的列表 */
+  BranchIndexList?: number[];
+}
+
+/** 节点运行的内容 */
+declare interface NodeRunContent {
+  /** 输入变量信息 */
+  Input?: string;
+  /** 输出变量信息 */
+  Output?: string;
+  /** 原始输出信息。部分节点才有值，如工具节点、代码节点 */
+  OriginalOutput?: string;
+  /** 节点输入的完整内容的链接。（当Input内容超过限制的时候此字段才有值） */
+  InputRef?: string;
+  /** 节点输出的完整内容的链接。（当Output内容超过限制的时候此字段才有值） */
+  OutputRef?: string;
+  /** 任务的原始输出的完整内容的链接。（当TaskOutput内容超过限制的时候此字段才有值） */
+  OriginalOutputRef?: string;
+}
+
+/** 工作流节点运行详情 */
+declare interface NodeRunDetail {
+  /** 节点运行信息 */
+  NodeRun?: NodeRun | null;
+  /** 节点运行内容 */
+  NodeRunContent?: NodeRunContent | null;
+  /** 节点运行过程 */
+  NodeRunExecution?: NodeRunExecution | null;
+  /** 节点运行日志 */
+  NodeRunLog?: NodeRunLog | null;
+  /** 统计信息 */
+  StatisticList?: Statistic[];
+}
+
+/** NodeRunExecution */
+declare interface NodeRunExecution {
+  /** 批次运行汇总 */
+  BatchRunSummary?: BatchRunSummary | null;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: string;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: string;
+}
+
+/** NodeRunLog */
+declare interface NodeRunLog {
+  /** 节点的日志。 */
+  Log?: string;
+  /** 节点的日志的完整内容的链接志（当Log内容超过限制的时候才有值） */
+  LogRef?: string;
 }
 
 /** OAuth2.0授权信息 */
@@ -2780,6 +3020,12 @@ declare interface PluginUserState {
   IsInWhiteList?: boolean;
   /** 白名单类型，用于表示当前用户是否可直接使用该插件。枚举值：0：非白名单插件，全量开放1：当前用户在白名单内2：当前用户不在白名单内，需提交申请 */
   WhiteListType?: number;
+}
+
+/** PortalShareConfig */
+declare interface PortalShareConfig {
+  /** 企业共享开关 */
+  Enabled?: boolean;
 }
 
 /** Prompt改写配置 */
@@ -2990,6 +3236,28 @@ declare interface ReleaseSummary {
   ChannelIdList?: string[];
   /** 企业共享配置 */
   CorpShareConfig?: CorpShareConfig | null;
+  /** portal配置 */
+  PortalShareConfig?: PortalShareConfig | null;
+}
+
+/** 回复内容的详情 */
+declare interface ReplyContent {
+  /** 消息内容类型text：文本image：图片file：文件option_cards：选项卡custom_params：用户自定义业务参数sandbox：云桌面custom_variables：自定义输入参数web_search: 网页搜索内容file_collection：文件收集信息widget：widget信息widget_action：用户端widget动作信息 */
+  Type?: string;
+  /** 文本内容 */
+  Text?: string | null;
+  /** 选项卡信息 */
+  OptionCardList?: string[] | null;
+  /** 文件收集信息 */
+  FileCollection?: ConversationFileCollection | null;
+  /** Widget信息 */
+  Widget?: ConversationWidget | null;
+}
+
+/** 回复消息 */
+declare interface ReplyMessage {
+  /** 消息数组，包含多个消息对象 */
+  ContentList?: ReplyContent[];
 }
 
 /** RequestParam */
@@ -3320,6 +3588,8 @@ declare interface SkillReferenceSummary {
   SpaceName?: string;
   /** Reference实例拥有者 */
   Owner?: string;
+  /** 应用标识 */
+  AppIdentity?: AppIdentity;
 }
 
 /** SkillShare Skill 企业共享信息。 */
@@ -3412,6 +3682,22 @@ declare interface SpecialStatusInfo {
   Status: number;
 }
 
+/** 统计信息 */
+declare interface Statistic {
+  /** 首token耗时 */
+  FirstTokenCostMs: number;
+  /** 输入token数量 */
+  InputTokens: number;
+  /** 模型名称 */
+  ModelName: string;
+  /** 输出token数量 */
+  OutputTokens: number;
+  /** 推理总耗时 */
+  TotalCostMs: number;
+  /** 输入+输出总token */
+  TotalTokens: number;
+}
+
 /** 摘要列表查询通用开关配置 */
 declare interface SummaryListSwitch {
   /** 是否显示元数据 */
@@ -3420,11 +3706,11 @@ declare interface SummaryListSwitch {
 
 /** 支持的文件类型 */
 declare interface SupportedFileType {
-  /** 文件类型描述(如"文本文档") */
+  /** 描述信息 */
   Description: string;
-  /** 文件类型(如 txt、pdf、jpg, 建议用扩展名) */
+  /** 文件类型（如 txt、pdf、jpg，建议用扩展名） */
   FileExt: string;
-  /** 文件大小限制(单位: 字节) */
+  /** 文件大小限制（单位：字节） */
   MaxSizeBytes: string;
 }
 
@@ -3780,6 +4066,80 @@ declare interface WeeklyTime {
   Weekday?: number;
 }
 
+/** 工作流运行实例信息 */
+declare interface WorkflowRun {
+  /** 工作流运行实例基本信息 */
+  WorkflowRunSummary?: WorkflowRunSummary;
+  /** 工作流运行实例输出信息 */
+  WorkflowRunOutput?: WorkflowRunOutput;
+  /** 工作流运行实例元数据 */
+  WorkflowRunMetadata?: WorkflowRunMetadata;
+}
+
+/** 工作流运行实例元数据 */
+declare interface WorkflowRunMetadata {
+  /** 用户的输入 */
+  Query?: string;
+  /** 主模型名称 */
+  MainModelName?: string;
+  /** API参数配置 */
+  CustomVariableList?: CustomVariable[];
+  /** 工作流的流程图 */
+  WorkflowGraph?: string;
+}
+
+/** 工作流运行实例输出信息 */
+declare interface WorkflowRunOutput {
+  /** 工作流输出 */
+  Output?: string;
+  /** 当前的回复消息 */
+  LatestMessage?: ReplyMessage | null;
+}
+
+/** 工作流运行实例基本信息 */
+declare interface WorkflowRunProfile {
+  /** 应用ID */
+  AppId?: string;
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 工作流ID */
+  WorkflowId?: string;
+  /** 名称 */
+  Name?: string;
+}
+
+/** 工作流运行实例状态信息 */
+declare interface WorkflowRunResult {
+  /** 运行状态。1: 排队中；2: 运行中；3: 运行成功；4: 运行失败； 5: 已取消 */
+  Status?: number;
+  /** 错误信息 */
+  FailMessage?: string;
+  /** 消耗的token总数 */
+  TotalTokens?: number;
+}
+
+/** 工作流运行实例的基本信息 */
+declare interface WorkflowRunSummary {
+  /** 运行环境。1:开发域，2:生产域 */
+  Domain?: number;
+  /** 工作流运行实例基本信息 */
+  WorkflowRunProfile?: WorkflowRunProfile;
+  /** 工作流运行实例结果 */
+  WorkflowRunResult?: WorkflowRunResult;
+  /** 工作流运行实例时间信息 */
+  WorkflowRunTime?: WorkflowRunTime;
+}
+
+/** 工作流运行实例时间信息 */
+declare interface WorkflowRunTime {
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: string;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: string;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: string;
+}
+
 declare interface CheckLabelRequest {
   /** 所属知识库 ID */
   KbId: string;
@@ -4067,6 +4427,8 @@ declare interface CreateReleaseRequest {
   IsDevToRelease?: boolean;
   /** 是否同步发布为应用模板 */
   IsPublishAsTemplate?: boolean;
+  /** portal配置 */
+  PortalShareConfig?: PortalShareConfig;
 }
 
 declare interface CreateReleaseResponse {
@@ -4196,6 +4558,28 @@ declare interface CreateWebSocketTokenResponse {
   Token?: string;
   /** 用户ID，在后续DescribeUserDialogConfig接口中会使用 */
   UserId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateWorkflowRunRequest {
+  /** 应用ID, 获取方法参看如何获取 AppId */
+  AppId: string;
+  /** 运行环境。1:开发域，2:生产域 */
+  Domain: number;
+  /** 用户输入的内容 */
+  Query?: string;
+  /** API参数配置 */
+  CustomVariableList?: CustomVariable[];
+  /** 用户ID */
+  UserId?: string;
+}
+
+declare interface CreateWorkflowRunResponse {
+  /** 工作流运行实例的ID */
+  WorkflowRunId?: string;
+  /** 创建时间（毫秒时间戳） */
+  CreateTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4533,7 +4917,7 @@ declare interface DescribeAppRequest {
   AppId: string;
   /** 应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域 */
   Domain?: number;
-  /** 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置) */
+  /** 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置), FileVolumeMountList(云盘挂载列表) */
   FieldMask?: FieldMask;
   /** 特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态 */
   StatusType?: number;
@@ -5155,16 +5539,16 @@ declare interface DescribeMetricOverviewListResponse {
 declare interface DescribeModelListRequest {
   /** 模型场景。0-不区分场景, 1-标准生成, 2-标准思考, 3-Agent思考, 4-多模态理解, 5-多模态问答, 6-改写, 7-长期记忆, 8-自然语言转SQL, 9-AI优化, 10-实时文件解析, 11-文件解析, 12-GraphRAG, 13-OpenClaw, 14-多模态Embedding, 15-Rerank, 16-文本Embedding, 17-Widget, 18-Claw模式, 19-工作流代码生成, 20-工作流大模型节点, 21-工作流节点专用向量化, 22-工作流参数提取, 23-工作流大模型知识问答, 24-工作流标签提取, 25-工作流意图识别, 26-工作流选项卡, 27-工作流逻辑判断, 28-文档生成问答, 29-知识库Schema枚举值：0： 不区分场景1： 标准生成2： 标准思考3： Agent思考4： 多模态理解5： 多模态问答6： 改写7： 长期记忆8： 自然语言转SQL9： AI优化10： 实时文件解析11： 文件解析12： GraphRAG13： OpenClaw14： 多模态Embedding15： Rerank16： 文本Embedding17： Widget18： Claw模式19： 工作流代码生成20： 工作流大模型节点21： 工作流节点专用向量化22： 工作流参数提取23： 工作流大模型知识问答24： 工作流标签提取25： 工作流意图识别26： 工作流选项卡27： 工作流逻辑判断28： 文档生成问答29： 知识库Schema */
   ModelScene: number;
-  /** 空间ID */
-  SpaceId?: string;
-  /** 关键词模糊搜索 */
-  Query?: string;
+  /** 过滤条件(多个 Filter 之间为 AND, 同一 Filter 多 Values 为 OR)DeveloperName： 模型作者名称ProviderName： 模型提供商名称ProviderType：模型提供商类型 */
+  FilterList?: Filter[];
   /** 页码。从0开始 */
   PageNumber?: number;
   /** 每页数量，默认20，最大100 */
   PageSize?: number;
-  /** 过滤条件(多个 Filter 之间为 AND, 同一 Filter 多 Values 为 OR)DeveloperName： 模型作者名称ProviderName： 模型提供商名称ProviderType：模型提供商类型 */
-  FilterList?: Filter[];
+  /** 关键词模糊搜索 */
+  Query?: string;
+  /** 空间ID */
+  SpaceId?: string;
 }
 
 declare interface DescribeModelListResponse {
@@ -5212,6 +5596,52 @@ declare interface DescribeMsgRecordListResponse {
   PrevCursor?: string;
   /** 符合条件的总记录数，用于前端分页显示 */
   TotalCount?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNodeBatchRunRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 索引号 */
+  Index?: number;
+  /** 工作流节点ID */
+  NodeId?: string;
+  /** 子工作流所属节点node_id_a.node_id_b[1] */
+  SubWorkflowNodePath?: string;
+  /** 工作流运行ID */
+  WorkflowRunId?: string;
+}
+
+declare interface DescribeNodeBatchRunResponse {
+  /** 错误码 */
+  FailCode?: string;
+  /** 错误描述 */
+  FailMessage?: string;
+  /** 输入参数 */
+  Input?: string;
+  /** 输入参数Cos地址 */
+  InputRef?: string;
+  /** 输出参数 */
+  Output?: string;
+  /** 输出参数Cos地址 */
+  OutputRef?: string;
+  /** 枚举项枚举值描述NODE_BATCH_RUN_STATUS_UNSPECIFIED0未定义NODE_BATCH_RUN_STATUS_INIT1初始状态NODE_BATCH_RUN_STATUS_RUNNING2运行中NODE_BATCH_RUN_STATUS_SUCCESS3运行成功NODE_BATCH_RUN_STATUS_FAILED4运行失败NODE_BATCH_RUN_STATUS_CANCELED5已取消NODE_BATCH_RUN_STATUS_WAITING_INPUT6待处理 */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeNodeRunDetailRequest {
+  /** 应用ID */
+  AppId: string;
+  /** 节点运行实例ID */
+  NodeRunId: string;
+}
+
+declare interface DescribeNodeRunDetailResponse {
+  /** 节点运行实例详情 */
+  NodeRunDetail?: NodeRunDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5451,7 +5881,7 @@ declare interface DescribeSystemVariableListResponse {
 }
 
 declare interface DescribeUsageDetailListRequest {
-  /** 资源类型，限定为 RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量RESOURCE_TYPE_PLATFORM3平台功能用量RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限RESOURCE_TYPE_KB_CAPACITY5知识库容量RESOURCE_TYPE_USAGE_SUMMARY6用量汇总RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细） */
+  /** 资源类型，限定为 RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量（预留，暂不支持）RESOURCE_TYPE_PLATFORM3平台功能用量（预留，暂不支持）RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限（预留，暂不支持）RESOURCE_TYPE_KB_CAPACITY5知识库容量（预留，暂不支持）RESOURCE_TYPE_USAGE_SUMMARY6用量汇总（预留，暂不支持）RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细）（预留，暂不支持） */
   ResourceType: number;
   /** 查询时间范围（Unix 秒） */
   TimeRange: TimeRange;
@@ -5475,7 +5905,7 @@ declare interface DescribeUsageDetailListResponse {
 }
 
 declare interface DescribeUsageSummaryListRequest {
-  /** 资源类型，限定为 MODEL / PLUGIN / PLATFORM枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量RESOURCE_TYPE_PLATFORM3平台功能用量RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限RESOURCE_TYPE_KB_CAPACITY5知识库容量RESOURCE_TYPE_USAGE_SUMMARY6用量汇总RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细） */
+  /** 资源类型，限定为 MODEL / PLUGIN / PLATFORM枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量（预留，暂不支持）RESOURCE_TYPE_PLATFORM（预留，暂不支持）3平台功能用量（预留，暂不支持）RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限（预留，暂不支持）RESOURCE_TYPE_KB_CAPACITY5知识库容量（预留，暂不支持）RESOURCE_TYPE_USAGE_SUMMARY6用量汇总（预留，暂不支持）RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细）（预留，暂不支持） */
   ResourceType: number;
   /** 查询时间范围（Unix 秒） */
   TimeRange: TimeRange;
@@ -5536,6 +5966,50 @@ declare interface DescribeVariableRequest {
 declare interface DescribeVariableResponse {
   /** 变量信息 */
   Variable?: Variable;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkflowRunRequest {
+  /** 应用ID, 获取方法参看如何获取 AppId */
+  AppId: string;
+  /** 工作流运行实例ID */
+  WorkflowRunId: string;
+  /** 指定的子工作流对应的NodePath。 格式：[<node_id>[<index>].]*<node_id>[<index>] 此路径用于定位一个具体的工作流实例（Workflow Run），可以是主工作流实例或某个子工作流节点产生的子实例。 路径由点号（.）分隔的节点标识符组成，每个节点标识符格式为 节点ID[实例索引]。 节点ID (node_id)：子工作流所属的节点的ID。 实例索引 (index)：“实例索引” 在工作流节点的时候为空，循环、批处理节点非空，从1开始。 示例： "" 或 不设置 -> 查询主工作流实例 (父工作流) "node_id_a" -> 查询由主工作流中工作流节点node_id_a对应的子工作流实例 "node_id_a.node_id_b[1]" -> 查询工作流节点node_id_a对应的子工作流的循环节点node_id_b的第1轮循环的子工作流运行状态 */
+  SubWorkflowNodePath?: string;
+  /** 是否需要返回工作流的流程图配置 */
+  IncludeWorkflowGraph?: boolean;
+}
+
+declare interface DescribeWorkflowRunResponse {
+  /** 工作流运行实例详情 */
+  WorkflowRun?: WorkflowRun;
+  /** 节点列表 */
+  NodeRunList?: NodeRun[];
+  /** 子工作流对应的NodePath */
+  SubWorkflowNodePath?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkflowRunSummaryListRequest {
+  /** 应用ID, 获取方法参看如何获取 AppId */
+  AppId: string;
+  /** 每页数量(取值范围1-200) */
+  PageSize: number;
+  /** 页码(必须大于0) */
+  PageNumber: number;
+  /** 运行环境。1:开发域，2:生产域 - */
+  Domain: number;
+  /** 参数过滤 */
+  FilterList?: Filter[];
+}
+
+declare interface DescribeWorkflowRunSummaryListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 工作流运行实例列表 */
+  WorkflowRunSummaryList?: WorkflowRunSummary[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5625,7 +6099,9 @@ declare interface ModifyAppRequest {
   Name?: string;
   /** 引用的共享知识库ID列表(全量覆盖) */
   SharedKbIdList?: string[];
-  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig, Config.Mode.ClawAgentConfig【Mode.ClawAgentConfig】Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility, Config.Experience.Advanced.DialogCustomConfig */
+  /** 应用挂载云盘 */
+  FileVolumeMountList?: AppFileVolumeMount[];
+  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
   UpdateMask?: FieldMask;
 }
 
@@ -6012,6 +6488,22 @@ declare interface ResumeAppTriggerResponse {
   RequestId?: string;
 }
 
+declare interface ResumeWorkflowRunRequest {
+  /** 应用ID */
+  AppId: string;
+  /** 工作流运行实例ID */
+  WorkflowRunId: string;
+  /** 用户输入的内容 */
+  Query?: string;
+  /** 文件信息 */
+  FileList?: ConversationFileInfo[];
+}
+
+declare interface ResumeWorkflowRunResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RetryReleaseRequest {
   /** 应用ID */
   AppId: string;
@@ -6054,6 +6546,38 @@ declare interface RunAppTriggerNowResponse {
   RequestId?: string;
 }
 
+declare interface SaveWorkflowDebugContextRequest {
+  /** 应用ID */
+  AppId?: string;
+  /** 应用变量列表 */
+  AppVariableValueList?: AppVariableValue[];
+  /** 会话ID */
+  SessionId?: string;
+  /** 自定义用户ID */
+  UserId?: string;
+}
+
+declare interface SaveWorkflowDebugContextResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SaveWorkflowToolNodeOutputRequest {
+  /** 回调TokenRequest Header X-ADP-Callback-Token */
+  CallbackToken?: string;
+  /** 回调结果 */
+  Result?: string;
+}
+
+declare interface SaveWorkflowToolNodeOutputResponse {
+  /** 状态码枚举值：0： 成功1000： 失败 */
+  Code?: number;
+  /** 错误描述 */
+  Msg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SearchKnowledgeRequest {
   /** 检索高级配置 */
   AdvancedConfig: SearchAdvancedConfig;
@@ -6070,6 +6594,22 @@ declare interface SearchKnowledgeResponse {
   KnowledgeList?: KnowledgeResult[];
   /** 消耗的 token 统计 */
   TokenUsageList?: TokenUsage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopWorkflowRunListRequest {
+  /** 应用ID */
+  AppId: string;
+  /** 工作流运行实例ID列表 */
+  WorkflowRunIdList: string[];
+}
+
+declare interface StopWorkflowRunListResponse {
+  /** 停止成功的运行实例ID列表 */
+  SuccessIdList?: string[];
+  /** 停止失败的运行实例ID列表 */
+  FailedIdList?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6145,6 +6685,8 @@ declare interface Adp {
   CreateVariable(data: CreateVariableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVariableResponse>;
   /** 创建 WebSocket Token {@link CreateWebSocketTokenRequest} {@link CreateWebSocketTokenResponse} */
   CreateWebSocketToken(data: CreateWebSocketTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWebSocketTokenResponse>;
+  /** 创建工作流运行实例 {@link CreateWorkflowRunRequest} {@link CreateWorkflowRunResponse} */
+  CreateWorkflowRun(data: CreateWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowRunResponse>;
   /** 创建工作空间凭证 {@link CreateWorkspaceCredentialRequest} {@link CreateWorkspaceCredentialResponse} */
   CreateWorkspaceCredential(data: CreateWorkspaceCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkspaceCredentialResponse>;
   /** 删除 Agent {@link DeleteAgentRequest} {@link DeleteAgentResponse} */
@@ -6247,6 +6789,10 @@ declare interface Adp {
   DescribeMsgRecordCategoryList(data: DescribeMsgRecordCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgRecordCategoryListResponse>;
   /** 查询消息列表 {@link DescribeMsgRecordListRequest} {@link DescribeMsgRecordListResponse} */
   DescribeMsgRecordList(data: DescribeMsgRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMsgRecordListResponse>;
+  /** 获取节点批次运行详情 {@link DescribeNodeBatchRunRequest} {@link DescribeNodeBatchRunResponse} */
+  DescribeNodeBatchRun(data?: DescribeNodeBatchRunRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeBatchRunResponse>;
+  /** 查看工作流节点运行详情 {@link DescribeNodeRunDetailRequest} {@link DescribeNodeRunDetailResponse} */
+  DescribeNodeRunDetail(data: DescribeNodeRunDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNodeRunDetailResponse>;
   /** 获取插件详情 {@link DescribePluginRequest} {@link DescribePluginResponse} */
   DescribePlugin(data: DescribePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginResponse>;
   /** 获取插件概要列表 {@link DescribePluginSummaryListRequest} {@link DescribePluginSummaryListResponse} */
@@ -6273,7 +6819,7 @@ declare interface Adp {
   DescribeSpaceList(data?: DescribeSpaceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSpaceListResponse>;
   /** 获取系统变量 {@link DescribeSystemVariableListRequest} {@link DescribeSystemVariableListResponse} */
   DescribeSystemVariableList(data: DescribeSystemVariableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSystemVariableListResponse>;
-  /** 查询资源调用时序明细 {@link DescribeUsageDetailListRequest} {@link DescribeUsageDetailListResponse} */
+  /** 查询资源调用明细 {@link DescribeUsageDetailListRequest} {@link DescribeUsageDetailListResponse} */
   DescribeUsageDetailList(data: DescribeUsageDetailListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageDetailListResponse>;
   /** 查询资源用量聚合明细 {@link DescribeUsageSummaryListRequest} {@link DescribeUsageSummaryListResponse} */
   DescribeUsageSummaryList(data: DescribeUsageSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageSummaryListResponse>;
@@ -6281,6 +6827,10 @@ declare interface Adp {
   DescribeVariable(data: DescribeVariableRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableResponse>;
   /** 获取参数变量列表 {@link DescribeVariableListRequest} {@link DescribeVariableListResponse} */
   DescribeVariableList(data: DescribeVariableListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVariableListResponse>;
+  /** 查询工作流运行实例详情 {@link DescribeWorkflowRunRequest} {@link DescribeWorkflowRunResponse} */
+  DescribeWorkflowRun(data: DescribeWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowRunResponse>;
+  /** 查询工作流运行实例列表 {@link DescribeWorkflowRunSummaryListRequest} {@link DescribeWorkflowRunSummaryListResponse} */
+  DescribeWorkflowRunSummaryList(data: DescribeWorkflowRunSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkflowRunSummaryListResponse>;
   /** 异步导出 QA {@link ExportQARequest} {@link ExportQAResponse} */
   ExportQA(data: ExportQARequest, config?: AxiosRequestConfig): AxiosPromise<ExportQAResponse>;
   /** 收藏插件 {@link FavoritePluginRequest} {@link FavoritePluginResponse} */
@@ -6333,14 +6883,22 @@ declare interface Adp {
   ResetConversation(data: ResetConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ResetConversationResponse>;
   /** 恢复应用触发器 {@link ResumeAppTriggerRequest} {@link ResumeAppTriggerResponse} */
   ResumeAppTrigger(data?: ResumeAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeAppTriggerResponse>;
+  /** 继续执行等待输入的异步工作流运行实例 {@link ResumeWorkflowRunRequest} {@link ResumeWorkflowRunResponse} */
+  ResumeWorkflowRun(data: ResumeWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<ResumeWorkflowRunResponse>;
   /** 重试发布 {@link RetryReleaseRequest} {@link RetryReleaseResponse} */
   RetryRelease(data: RetryReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RetryReleaseResponse>;
   /** 回滚发布 {@link RollbackReleaseRequest} {@link RollbackReleaseResponse} */
   RollbackRelease(data: RollbackReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<RollbackReleaseResponse>;
   /** 立即执行应用触发器 {@link RunAppTriggerNowRequest} {@link RunAppTriggerNowResponse} */
   RunAppTriggerNow(data?: RunAppTriggerNowRequest, config?: AxiosRequestConfig): AxiosPromise<RunAppTriggerNowResponse>;
+  /** 保存工作流调试信息 {@link SaveWorkflowDebugContextRequest} {@link SaveWorkflowDebugContextResponse} */
+  SaveWorkflowDebugContext(data?: SaveWorkflowDebugContextRequest, config?: AxiosRequestConfig): AxiosPromise<SaveWorkflowDebugContextResponse>;
+  /** 工作流工具节点异步调用回调 {@link SaveWorkflowToolNodeOutputRequest} {@link SaveWorkflowToolNodeOutputResponse} */
+  SaveWorkflowToolNodeOutput(data?: SaveWorkflowToolNodeOutputRequest, config?: AxiosRequestConfig): AxiosPromise<SaveWorkflowToolNodeOutputResponse>;
   /** 知识检索 {@link SearchKnowledgeRequest} {@link SearchKnowledgeResponse} */
   SearchKnowledge(data: SearchKnowledgeRequest, config?: AxiosRequestConfig): AxiosPromise<SearchKnowledgeResponse>;
+  /** 批量停止工作流运行实例 {@link StopWorkflowRunListRequest} {@link StopWorkflowRunListResponse} */
+  StopWorkflowRunList(data: StopWorkflowRunListRequest, config?: AxiosRequestConfig): AxiosPromise<StopWorkflowRunListResponse>;
   /** 取消收藏插件 {@link UnfavoritePluginRequest} {@link UnfavoritePluginResponse} */
   UnfavoritePlugin(data: UnfavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoritePluginResponse>;
   /** 取消收藏skill {@link UnfavoriteSkillRequest} {@link UnfavoriteSkillResponse} */

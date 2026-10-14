@@ -113,18 +113,18 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，16212+ 服务数</summary>
+<details><summary>共计 263+ 款产品，16266+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
 aai |  | 2018-05-22(4) |
 aca | [AI 临床助手](https://cloud.tencent.com/document/product/1388) | 2021-03-23(8) |
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(8) |
-adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(122) |
+adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(131) |
 advisor | [智能顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(3) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
-ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(57) |
+ags | [Agent 沙箱服务](https://cloud.tencent.com/document/product/1814) | 2025-09-20(59) |
 ai3d | [腾讯混元生3D](https://cloud.tencent.com/document/product/1804) | 2025-05-13(19) |
 aiart | [腾讯混元生图](https://cloud.tencent.com/document/product/1668) | 2022-12-29(18) |
 alb | [应用型负载均衡](https://cloud.tencent.com/document/product/1822) | 2025-10-30(48) |
@@ -175,7 +175,7 @@ cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-
 cetcd | [云原生etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(166) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(167) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(41) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(37) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
@@ -209,7 +209,7 @@ dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/pr
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
 databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(62) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(94) | 2019-10-16(28) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(96) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
@@ -264,13 +264,13 @@ iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
-iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(76) |
+iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(98) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(28) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
 kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(69) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(85) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(120) |
-live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(258) |
+live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(261) |
 lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(106) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(11) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(17) |
@@ -293,7 +293,7 @@ oceanus | [流计算 Oceanus](https://cloud.tencent.com/document/product/849) | 
 ocr | [文字识别](https://cloud.tencent.com/document/product/866) | 2018-11-19(83) |
 omics | [腾讯健康组学平台](https://cloud.tencent.com/document/product/1643) | 2022-11-28(32) |
 open | 腾讯云 OAuth | 2018-12-25(2) |
-organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(134) | 2018-12-25(20) |
+organization | [集团账号管理](https://cloud.tencent.com/document/product/850) | 2021-03-31(135) | 2018-12-25(20) |
 partners | [渠道合作伙伴](https://cloud.tencent.com/document/product/563) | 2018-03-21(23) |
 portal | [官网门户服务](https://cloud.tencent.com/document/product/1842) | 2023-04-13(1) |
 postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/409) | 2017-03-12(130) |
@@ -369,7 +369,7 @@ vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(448) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(226) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(240) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(183) | 2021-08-20(309) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(63) |

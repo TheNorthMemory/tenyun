@@ -2651,6 +2651,8 @@ declare interface CreateDatasetResponse {
 declare interface CreateExportRequest {
   /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：- TRAIN- NOTEBOOK- INFER- BATCH */
   Service: string;
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
   /** 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：- Service类型为TRAIN： 调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId- Service类型为NOTEBOOK： 调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName- Service类型为INFER： 调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId- Service类型为BATCH： 调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId */
   ServiceId?: string;
   /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
@@ -3055,6 +3057,8 @@ declare interface DeleteDatasetResponse {
 declare interface DeleteExportRequest {
   /** 日志下载任务的ID */
   ExportId: string;
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
 }
 
 declare interface DeleteExportResponse {
@@ -3423,7 +3427,7 @@ declare interface DescribeEventsResponse {
 declare interface DescribeExportRequest {
   /** 日志下载任务的ID */
   ExportId: string;
-  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
   TiProjectId?: string;
 }
 
@@ -3457,7 +3461,7 @@ declare interface DescribeInferTemplatesResponse {
 declare interface DescribeLogsRequest {
   /** 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测枚举值：TRAINNOTEBOOKINFERBATCH */
   Service: string;
-  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
   TiProjectId?: string;
   /** 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时 */
   StartTime?: string;
@@ -3919,7 +3923,7 @@ declare interface DescribeTrainingTasksResponse {
 }
 
 declare interface DescribeWorkspacesRequest {
-  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
   TiProjectId?: string;
   /** 过滤条件 */
   Filters?: Filter[];

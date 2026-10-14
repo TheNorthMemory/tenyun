@@ -1194,6 +1194,16 @@ declare interface CacheUrlItems {
   CreateTime?: string;
 }
 
+/** 按分类分组的规则列表 */
+declare interface CategoryGroup {
+  /** 分类 */
+  Category?: string;
+  /** 总数 */
+  Count?: number;
+  /** 规则列表 */
+  Rules?: RuleDetail[];
+}
+
 /** CDC场景下负载均衡WAF的集群信息 */
 declare interface CdcCluster {
   /** cdc的集群id */
@@ -2538,6 +2548,26 @@ declare interface LLMDetectResult {
   IntentDetectResult?: IntentDetectResult;
 }
 
+/** LLM waf 自定义词库实体 */
+declare interface LLMKeywordLibrary {
+  /** 词库名 */
+  Name: string;
+  /** 词库描述 */
+  Description: string;
+  /** 词库类型，custom 或 builtin */
+  Type: string;
+  /** 关键词列表 */
+  Keywords: string[];
+  /** 词库规则 id */
+  RuleId?: string;
+  /** 被引用的规则 id 列表 */
+  ReferencedRules?: string[];
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 词库类别：black-黑库(默认)，white-白库；空值按黑库处理 */
+  Category?: string;
+}
+
 /** 有效预付费大模型安全包信息 */
 declare interface LLMMonPkg {
   /** 资源id */
@@ -2558,6 +2588,20 @@ declare interface LLMMonPkg {
   UseToken?: number;
   /** 实例id */
   InstanceId?: string;
+}
+
+/** 大模型Rule生效条件 */
+declare interface LLMOptionsItem {
+  /** 键 */
+  Key?: string;
+  /** 操作符 */
+  Op?: string;
+  /** 值 */
+  Value?: string[];
+  /** Header参数值时使用 */
+  Name?: string;
+  /** 区域选择 */
+  Areas?: Area[];
 }
 
 /** 大模型安全「后付费」资源信息（数据源：tb_waf_llm_resource），与 DescribeInstances 的 InstanceDetail.LLMPkg 保持一致 */
@@ -2582,6 +2626,46 @@ declare interface LLMPkg {
 declare interface LLMRisks {
   /** 分数 */
   Risks?: ClawRiskItem[];
+}
+
+/** sdk接入配置 */
+declare interface LLMSdkAccessItem {
+  /** 服务id */
+  Domain?: string;
+  /** 服务名称 */
+  Name?: string;
+  /** 备注 */
+  Remark?: string;
+  /** SDK接入来源，tokenhub 表示通过 TokenHub 创建，空字符串表示通过控制台创建 */
+  SdkSource?: string;
+  /** 总开关 */
+  MainStatus?: boolean;
+  /** 限速开关 */
+  LimitRuleStatus?: boolean;
+  /** 内容安全开关 */
+  ContentRuleStatus?: boolean;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 修改时间 */
+  UpdateTime?: number;
+  /** 限流规则数量 */
+  LimitRuleCount?: number;
+  /** 内容安全规则数量 */
+  ContentRuleCount?: number;
+  /** toolcall防护开关 */
+  ToolCallStatus?: boolean;
+  /** llm推理防护开关 */
+  LLMProtectStatus?: boolean;
+  /** 内容合规检测开关 */
+  ContentComplianceStatus?: boolean;
+  /** dlp防护开关 */
+  DLPStatus?: boolean;
+  /** skills防护开关 */
+  SkillsStatus?: boolean;
+  /** 意图识别检测开关 */
+  IntentStatus?: boolean;
+  /** 生效规则数量 */
+  EffectiveRules?: number;
 }
 
 /** 涉敏信息结果结构体 */
@@ -3316,6 +3400,38 @@ declare interface Rule {
   AddTime?: string;
 }
 
+/** aiguard规则详情 */
+declare interface RuleDetail {
+  /** 规则ID */
+  RuleId?: string;
+  /** 规则名称 */
+  RuleName?: string;
+  /** 描述 */
+  Description?: string;
+  /** 严重度 */
+  Severity?: string;
+  /** 动作 */
+  Action?: string;
+  /** 开关 */
+  Status?: number;
+  /** 脱敏样例 */
+  DesensitizeSample?: string;
+  /** 检测方向取值范围：[0, 3] */
+  Direction?: number;
+}
+
+/** 大模型检测内容匹配 */
+declare interface RuleItem {
+  /** 信息类型 */
+  Key?: string;
+  /** 操作符，默认是包含 */
+  Op?: string;
+  /** 信息类型 */
+  Value?: string[];
+  /** 信息类 */
+  Levels?: ValueLevel[];
+}
+
 /** 规则白名单 */
 declare interface RuleList {
   /** 规则Id */
@@ -3856,6 +3972,14 @@ declare interface UserWhiteRuleItem {
   MatchContent: string;
   /** 匹配参数名 */
   MatchParams?: string;
+}
+
+/** 大模型内容安全，不当信息配置中，敏感度配置 */
+declare interface ValueLevel {
+  /** 标签，如政治等 */
+  Label: string;
+  /** 敏感度 */
+  Level: number;
 }
 
 /** Vip信息 */
@@ -4944,6 +5068,28 @@ declare interface DeleteIpAccessControlV2Request {
 declare interface DeleteIpAccessControlV2Response {
   /** 在批量删除的时候表示删除失败的条数 */
   FailedCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLLMContentRuleRequest {
+  /** Id列表 */
+  Ids: string[];
+  /** 域名 */
+  Domain?: string;
+}
+
+declare interface DeleteLLMContentRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLLMKeywordLibraryRequest {
+  /** 要删除的词库 id 列表 */
+  Ids?: string[];
+}
+
+declare interface DeleteLLMKeywordLibraryResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6208,6 +6354,14 @@ declare interface DescribeIpHitItemsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLLMContentRuleListRequest {
+}
+
+declare interface DescribeLLMContentRuleListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLLMContentSecCheckRequest {
   /** 服务id，使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则 */
   ServiceId: string;
@@ -6240,6 +6394,82 @@ declare interface DescribeLLMContentSecCheckRequest {
 declare interface DescribeLLMContentSecCheckResponse {
   /** 检测结果 */
   Data?: LLMDetectResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLLMKeywordLibraryRequest {
+  /** 词库类型筛选枚举值：custom：自定义黑库builtin：内置词库all：全部词库white：自定义白库 */
+  Type: string;
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 1000]默认值：10 */
+  Limit?: number;
+  /** 排序字段枚举值：UpdateTime：按更新时间排序CreateTime：按创建时间排序Name：按名称排序默认值：UpdateTime */
+  By?: string;
+  /** 排序方向枚举值：ASC：升序DESC：降序默认值：DESC */
+  Order?: string;
+}
+
+declare interface DescribeLLMKeywordLibraryResponse {
+  /** 关键词库列表 */
+  LibList?: LLMKeywordLibrary[];
+  /** 词库总数 */
+  Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLLMSdkAccessRequest {
+  /** 实例id */
+  InstanceId: string;
+  /** 分页的起始位置 */
+  Offset?: number;
+  /** 每页行数 */
+  Limit?: number;
+  /** 过滤器 */
+  Filters?: FiltersItemNew[];
+  /** 支持根据ts排序 */
+  By?: string;
+  /** asc或者desc */
+  Order?: string;
+}
+
+declare interface DescribeLLMSdkAccessResponse {
+  /** 查询结果中规则数量 */
+  Total?: number;
+  /** 操作结果 */
+  Data?: LLMSdkAccessItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLLMWafDLPRulesRequest {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 实例id */
+  InstanceId?: string;
+}
+
+declare interface DescribeLLMWafDLPRulesResponse {
+  /** 规则列表 */
+  Rules?: RuleDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLLMWafProtectRulesRequest {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 实例id */
+  InstanceId?: string;
+  /** 规则类型 */
+  RuleType?: string;
+}
+
+declare interface DescribeLLMWafProtectRulesResponse {
+  /** 类别列表 */
+  Categories?: CategoryGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7008,6 +7238,18 @@ declare interface EnableRateLimitsV2Request {
 declare interface EnableRateLimitsV2Response {
   /** 操作结果 */
   BaseInfo?: RateLimitCommonRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ExportLLMKeywordLibRequest {
+  /** 要导出的词库id列表 */
+  RuleIds: string[];
+}
+
+declare interface ExportLLMKeywordLibResponse {
+  /** 导出的文件url */
+  Url?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7934,6 +8176,140 @@ declare interface ModifyIpAccessControlRequest {
 }
 
 declare interface ModifyIpAccessControlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMContentRuleRequest {
+  /** 名称 */
+  Name: string;
+  /** 优先级 */
+  Priority: number;
+  /** 规则开关 */
+  Status: number;
+  /** 检测范围，1：入向，2：出向，3：入向和出向 */
+  CheckType: number;
+  /** 检测内容匹配 */
+  RuleItem: RuleItem[];
+  /** 匹配条件 */
+  Options: LLMOptionsItem[];
+  /** 域名 */
+  Domain?: string;
+  /** 动作，观察monitor，拦截intercept */
+  ActionType?: string;
+  /** 响应提示内容 */
+  ResponseText?: string;
+  /** 规则需要启用的SessionID */
+  SessionApplied?: string[];
+  /** 规则ID，新增时填0 */
+  RuleId?: string;
+  /** 拦截页面id */
+  PageId?: number;
+  /** 检测内容and or表达式,默认为and */
+  ContentLogicalOp?: string;
+  /** 实例id，必填项 */
+  InstanceId?: string;
+  /** 代答类型：1-内置可信模型安全代答，2-自定义代答（ActionType=reply时生效枚举值：1： 内置可信模型安全代答2： 自定义代答ActionType=reply时生效 */
+  ReplyType?: number;
+  /** 自定义回答模板 */
+  CustomReplyRuleId?: string;
+  /** 模态类型：0-文本（默认），1-图片枚举值：0： 文本1： 图片 */
+  ModalType?: number;
+  /** 规则类别：black-普通规则(默认)，white-白名单规则；空值按black处理。white时ActionType仅允许pass(放行)，RuleItem支持白名单匹配字段(Key: ip/geo/type/content/chat_id/user_id/tool_name/tool_args/keyword_whitelist；Op: belong/not_belong/equal/not_equal/contain/not_contain/prefix/suffix/wildcard) */
+  Category?: string;
+  /** 白名单规则生效范围：多个serviceId/domain列表（Category=white时使用），表示该白名单规则同时生效于哪些域名/serviceId。黑名单规则不使用此字段。 */
+  Domains?: string[];
+  /** 加白生效模块type列表（Category=white时使用），表示该白名单规则命中后对哪些防护模块生效(放行)。取值：2-算力消耗规则，3-自定义防护规则，4-ToolCall防护，5-提示词攻击防护，6-内容合规检测，7-敏感数据检测。 */
+  AppliedModules?: number[];
+}
+
+declare interface ModifyLLMContentRuleResponse {
+  /** 操作的RuleId */
+  RuleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMContentRuleStatusRequest {
+  /** 状态 */
+  Status: number;
+  /** Id列表 */
+  Ids: string[];
+  /** 域名 */
+  Domain?: string;
+}
+
+declare interface ModifyLLMContentRuleStatusResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMKeywordLibraryRequest {
+  /** 新增的关键词库列表 */
+  LibList: LLMKeywordLibrary[];
+}
+
+declare interface ModifyLLMKeywordLibraryResponse {
+  /** 成功创建的列表id */
+  RuleIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMStatusRequest {
+  /** 开关状态。true：开启，false：关闭。 */
+  Status: boolean;
+  /** 需要操作的域名或者serviceid */
+  Domain: string;
+  /** 开关类型，用于指定要操作的防护模块开关。取值如下：1：防护总开关，控制大模型防护功能的全局开启/关闭。2：算力消耗防护规则开关，控制算力消耗限制功能的开启/关闭。3：自定义防护规则开关，控制内容安全自定义规则功能的开启/关闭。4：ToolCall 防护开关，控制工具调用安全检测功能的开启/关闭。5：提示词攻击防护开关，控制提示词注入/越狱攻击检测功能的开启/关闭。6：内容合规检测开关，控制输入输出内容合规检测功能的开启/关闭。7：敏感数据检测开关，控制敏感信息泄露检测（DLP）功能的开启/关闭。8：Skill 安全检测开关，控制 Skill/Plugin 调用安全检测功能的开启/关闭。9：意图行为检测开关，控制用户意图识别与行为检测功能的开启/关闭。10：恶意URL检测开关，控制响应中恶意链接检测功能的开启/关闭。 */
+  SwitchType: number;
+  /** WAF 实例 ID，表示当前操作所属的 WAF 实例。可通过 DescribeInstances 接口获取。 */
+  InstanceId?: string;
+}
+
+declare interface ModifyLLMStatusResponse {
+  /** 操作结果，成功时返回 "Success"。 */
+  Res?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMWafDLPRuleRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** 要修改的规则id列表 */
+  RuleIds: string[];
+  /** 动作 */
+  RuleAction?: string;
+  /** 开关 */
+  Status?: number;
+  /** 实例id */
+  InstanceId?: string;
+  /** 检测方向：1是入向，2是出向，3是入向和出向都检测 */
+  Direction?: number;
+}
+
+declare interface ModifyLLMWafDLPRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMWafProtectRuleRequest {
+  /** 服务ID */
+  ServiceId: string;
+  /** 要修改的规则id列表 */
+  RuleIds: string[];
+  /** 规则动作 */
+  RuleAction?: string;
+  /** 开关 */
+  Status?: number;
+  /** 实例id */
+  InstanceId?: string;
+  /** 检测方向：1是入向，2是出向，3是入向和出向都检测 */
+  Direction?: number;
+}
+
+declare interface ModifyLLMWafProtectRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8921,6 +9297,10 @@ declare interface Waf {
   DeleteIpAccessControl(data: DeleteIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlResponse>;
   /** IP黑白名单删除接口 {@link DeleteIpAccessControlV2Request} {@link DeleteIpAccessControlV2Response} */
   DeleteIpAccessControlV2(data: DeleteIpAccessControlV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteIpAccessControlV2Response>;
+  /** 删除大模型内容防护规则 {@link DeleteLLMContentRuleRequest} {@link DeleteLLMContentRuleResponse} */
+  DeleteLLMContentRule(data: DeleteLLMContentRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLLMContentRuleResponse>;
+  /** 删除关键词列表 {@link DeleteLLMKeywordLibraryRequest} {@link DeleteLLMKeywordLibraryResponse} */
+  DeleteLLMKeywordLibrary(data?: DeleteLLMKeywordLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLLMKeywordLibraryResponse>;
   /** 删除用户自定义规则状态 {@link DeleteOwaspRuleStatusRequest} {@link DeleteOwaspRuleStatusResponse} */
   DeleteOwaspRuleStatus(data: DeleteOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspRuleStatusResponse>;
   /** 删除用户规则引擎白名单 {@link DeleteOwaspWhiteRuleRequest} {@link DeleteOwaspWhiteRuleResponse} */
@@ -9035,8 +9415,18 @@ declare interface Waf {
   DescribeIpAccessControl(data: DescribeIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpAccessControlResponse>;
   /** Waf IP封堵状态查询 {@link DescribeIpHitItemsRequest} {@link DescribeIpHitItemsResponse} */
   DescribeIpHitItems(data: DescribeIpHitItemsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIpHitItemsResponse>;
+  /** 获取LLM内容防护规则 {@link DescribeLLMContentRuleListRequest} {@link DescribeLLMContentRuleListResponse} */
+  DescribeLLMContentRuleList(data?: DescribeLLMContentRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMContentRuleListResponse>;
   /** 大模型内容审核接口 {@link DescribeLLMContentSecCheckRequest} {@link DescribeLLMContentSecCheckResponse} */
   DescribeLLMContentSecCheck(data: DescribeLLMContentSecCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMContentSecCheckResponse>;
+  /** 查询自定义词库列表 {@link DescribeLLMKeywordLibraryRequest} {@link DescribeLLMKeywordLibraryResponse} */
+  DescribeLLMKeywordLibrary(data: DescribeLLMKeywordLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMKeywordLibraryResponse>;
+  /** 查询llmsdk接入信息 {@link DescribeLLMSdkAccessRequest} {@link DescribeLLMSdkAccessResponse} */
+  DescribeLLMSdkAccess(data: DescribeLLMSdkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMSdkAccessResponse>;
+  /** 查询llmwaf DLP 规则 {@link DescribeLLMWafDLPRulesRequest} {@link DescribeLLMWafDLPRulesResponse} */
+  DescribeLLMWafDLPRules(data?: DescribeLLMWafDLPRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMWafDLPRulesResponse>;
+  /** 查询 waf-LLM 规则推理防护规则 {@link DescribeLLMWafProtectRulesRequest} {@link DescribeLLMWafProtectRulesResponse} */
+  DescribeLLMWafProtectRules(data?: DescribeLLMWafProtectRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMWafProtectRulesResponse>;
   /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */
   DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
   /** 查询waf各个模块接口的开关状态 {@link DescribeModuleStatusRequest} {@link DescribeModuleStatusResponse} */
@@ -9117,6 +9507,8 @@ declare interface Waf {
   EnableClientMsg(data: EnableClientMsgRequest, config?: AxiosRequestConfig): AxiosPromise<EnableClientMsgResponse>;
   /** 批量更改自研版限流规则开关 {@link EnableRateLimitsV2Request} {@link EnableRateLimitsV2Response} */
   EnableRateLimitsV2(data: EnableRateLimitsV2Request, config?: AxiosRequestConfig): AxiosPromise<EnableRateLimitsV2Response>;
+  /** 导出用户自定义关键词库 {@link ExportLLMKeywordLibRequest} {@link ExportLLMKeywordLibResponse} */
+  ExportLLMKeywordLib(data: ExportLLMKeywordLibRequest, config?: AxiosRequestConfig): AxiosPromise<ExportLLMKeywordLibResponse>;
   /** 刷新防篡改url {@link FreshAntiFakeUrlRequest} {@link FreshAntiFakeUrlResponse} */
   FreshAntiFakeUrl(data: FreshAntiFakeUrlRequest, config?: AxiosRequestConfig): AxiosPromise<FreshAntiFakeUrlResponse>;
   /** 计费资源购买、续费下单接口 {@link GenerateDealsAndPayNewRequest} {@link GenerateDealsAndPayNewResponse} */
@@ -9213,6 +9605,18 @@ declare interface Waf {
   ModifyInstanceRenewFlag(data: ModifyInstanceRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceRenewFlagResponse>;
   /** IP黑白名单编辑接口 {@link ModifyIpAccessControlRequest} {@link ModifyIpAccessControlResponse} */
   ModifyIpAccessControl(data: ModifyIpAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyIpAccessControlResponse>;
+  /** 更新大模型内容安全防护规则 {@link ModifyLLMContentRuleRequest} {@link ModifyLLMContentRuleResponse} */
+  ModifyLLMContentRule(data: ModifyLLMContentRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMContentRuleResponse>;
+  /** 切换大模型内容防护规则开关 {@link ModifyLLMContentRuleStatusRequest} {@link ModifyLLMContentRuleStatusResponse} */
+  ModifyLLMContentRuleStatus(data: ModifyLLMContentRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMContentRuleStatusResponse>;
+  /** 修改关键词库 {@link ModifyLLMKeywordLibraryRequest} {@link ModifyLLMKeywordLibraryResponse} */
+  ModifyLLMKeywordLibrary(data: ModifyLLMKeywordLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMKeywordLibraryResponse>;
+  /** 修改大模型防护开关状态 {@link ModifyLLMStatusRequest} {@link ModifyLLMStatusResponse} */
+  ModifyLLMStatus(data: ModifyLLMStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMStatusResponse>;
+  /** 修改llmwaf DLP 规则 {@link ModifyLLMWafDLPRuleRequest} {@link ModifyLLMWafDLPRuleResponse} */
+  ModifyLLMWafDLPRule(data: ModifyLLMWafDLPRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMWafDLPRuleResponse>;
+  /** 修改 LLMwaf 推理防护规则 {@link ModifyLLMWafProtectRuleRequest} {@link ModifyLLMWafProtectRuleResponse} */
+  ModifyLLMWafProtectRule(data: ModifyLLMWafProtectRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMWafProtectRuleResponse>;
   /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */

@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 账号安全详情（账号保护） */
+declare interface AccountSecurityEvent {
+  /** 与RCE约定的定制化信息，为K:V 格式的对象数组，示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
+  Cust?: Cust[];
+}
+
 /** 添加好友事件详情 */
 declare interface AddFriendEvent {
   /** 所属服务器ID，允许空串 */
@@ -130,6 +136,18 @@ declare interface Billing {
   Email?: string;
   /** 账单接收人姓名 */
   Recipient?: string;
+}
+
+/** 预约事件详情（营销保护） */
+declare interface BookingEvent {
+  /** 预约场景。例如：预订机票、预订酒店 */
+  BookingScene?: string;
+  /** 预约时间。要求符合ISO-8601标准的带时区的毫秒级时间，格式"YYYY-MM-DDTHH:mm:ss.sssZ" ，例如"2025-10-19T09:11:10.145+08:00"。 */
+  BookingTime?: string;
+  /** 预约单唯一ID。 */
+  BookingId?: string;
+  /** 与RCE-PRO约定的定制化信息。为K:V 格式的对象数组。示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
+  Cust?: Cust[];
 }
 
 /** 浏览事件详情 */
@@ -468,6 +486,12 @@ declare interface EventDetail {
   AddFriend?: AddFriendEvent;
   /** 编辑公会资料 */
   ModifyGuild?: ModifyGuildEvent;
+  /** 搜索 */
+  Search?: SearchEvent;
+  /** 预约 */
+  Booking?: BookingEvent;
+  /** 账号安全 */
+  AccountSecurity?: AccountSecurityEvent;
 }
 
 /** 公会信息 */
@@ -930,6 +954,20 @@ declare interface Score {
   RiskScore?: number;
   /** 风险标签 */
   RiskLabels?: RiskLabel[];
+}
+
+/** 查询事件详情（营销保护） */
+declare interface SearchEvent {
+  /** 查询场景。例如：查询航班、查询库存等。 */
+  SearchScene?: string;
+  /** 查询参数。查询时输入的参数。 */
+  SearchParam?: string;
+  /** 上一个网页URL */
+  ReferPageUrl?: string;
+  /** 游客账号ID */
+  GuestId?: string;
+  /** 与RCE-PRO约定的定制化信息。为K:V 格式的对象数组。示例：[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}] */
+  Cust?: Cust[];
 }
 
 /** 安全验证事件详情 */

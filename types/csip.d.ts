@@ -7120,6 +7120,8 @@ declare interface ImageAssociatedAssetCount {
   OwnerAppId?: number;
   /** 镜像所属账号uin */
   OwnerUin?: string;
+  /** 镜像关联超级节点数 */
+  SuperNodeHostCount?: number;
 }
 
 /** 镜像关联主机资产 */

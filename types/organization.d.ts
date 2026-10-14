@@ -1140,6 +1140,24 @@ declare interface AttachPolicyResponse {
   RequestId?: string;
 }
 
+declare interface AuditPermissionApplyOrderRequest {
+  /** 空间 ID */
+  ZoneId: string;
+  /** 申请单 ID */
+  ApplyId: string;
+  /** 审批结果枚举值：Approve： 通过Reject： 拒绝 */
+  AuditResult: string;
+  /** 审批意见 */
+  AuditOpinion?: string;
+}
+
+declare interface AuditPermissionApplyOrderResponse {
+  /** 同步任务列表 */
+  Tasks?: TaskInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BindOrganizationMemberAuthAccountRequest {
   /** 成员Uin。 */
   MemberUin: number;
@@ -3709,6 +3727,8 @@ declare interface Organization {
   AddUserToGroup(data: AddUserToGroupRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserToGroupResponse>;
   /** 绑定策略 {@link AttachPolicyRequest} {@link AttachPolicyResponse} */
   AttachPolicy(data: AttachPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<AttachPolicyResponse>;
+  /** 审批用户权限申请 {@link AuditPermissionApplyOrderRequest} {@link AuditPermissionApplyOrderResponse} */
+  AuditPermissionApplyOrder(data: AuditPermissionApplyOrderRequest, config?: AxiosRequestConfig): AxiosPromise<AuditPermissionApplyOrderResponse>;
   /** 绑定组织成员和组织管理员子账号的授权关系 {@link BindOrganizationMemberAuthAccountRequest} {@link BindOrganizationMemberAuthAccountResponse} */
   BindOrganizationMemberAuthAccount(data: BindOrganizationMemberAuthAccountRequest, config?: AxiosRequestConfig): AxiosPromise<BindOrganizationMemberAuthAccountResponse>;
   /** 绑定成员访问授权策略和组织管理员子账号 {@link BindOrganizationPolicySubAccountRequest} {@link BindOrganizationPolicySubAccountResponse} */

@@ -579,6 +579,18 @@ declare namespace V20180416 {
     InputPath?: string | null;
     /** inputs.tail_files */
     InputsTailFiles?: boolean | null;
+    /** 开关inputs.multitline */
+    InputsMultiLineEnabled?: boolean | null;
+    /** inputs.multiline.type */
+    InputsMultiLineType?: string | null;
+    /** inputs.multiline.pattern */
+    InputsMultiLinePattern?: string | null;
+    /** inputs.multiline.negate */
+    InputsMultiLineNegate?: boolean | null;
+    /** inputs.multiline.match */
+    InputsMultiLineMatch?: string | null;
+    /** 按空间采集时 tke 的采集类型，默认为 container，支持 container、filestream */
+    TkeCollectType?: string;
   }
 
   /** 普通索引信息列表 */
@@ -1055,6 +1067,8 @@ declare namespace V20180416 {
     SubEventType?: number;
     /** 子事件名称 */
     SubEventName?: string;
+    /** 事件范围枚举值：0： 实例级1： 账号级 */
+    EventScope?: number;
   }
 
   /** 事件类型详情结构 */
@@ -1075,6 +1089,22 @@ declare namespace V20180416 {
     Reason?: string | null;
     /** 快照失败的状态 */
     Status?: string | null;
+  }
+
+  /** 机型族下单个机型族的资源可用性明细 */
+  interface FamilyResourceStat {
+    /** 机型族，如 "SA5" */
+    InsFamily?: string;
+    /** CVM资源是否有货 */
+    CvmAvailable?: boolean;
+    /** 系统盘资源是否有货 */
+    SysDiskAvailable?: boolean;
+    /** 该盘型数据盘资源是否有货 */
+    DiskAvailable?: boolean;
+    /** 三类资源是否全部有货(可直接购买) */
+    Purchasable?: boolean;
+    /** 缺少的资源，取值 CVM/SYSDISK/DISK；为空表示不缺 */
+    MissingResources?: string[];
   }
 
   /** 节点Gpu信息 */
@@ -1659,6 +1689,8 @@ declare namespace V20180416 {
     SsdAvailable?: boolean;
     /** SSD磁盘取值范围 */
     SsdDiskSizeRange?: DiskSizeRange;
+    /** SSD云硬盘售罄明细 */
+    SsdSoldOutDetail?: FamilyResourceStat[] | null;
     /** SATA盘是否可售 */
     SataAvailable?: boolean;
     /** SATA磁盘取值范围 */
@@ -1667,6 +1699,8 @@ declare namespace V20180416 {
     SsdSoldOutReason?: string;
     /** SATA机型售罄原因 */
     SataSoldOutReason?: string;
+    /** 高性能云硬盘售罄明细 */
+    SataSoldOutDetail?: FamilyResourceStat[] | null;
     /** 本地盘信息 */
     LocalDiskInfo?: LocalDiskInfo | null;
     /** 云盘块数取值范围 */
@@ -1675,24 +1709,32 @@ declare namespace V20180416 {
     HSsdAvailable?: boolean | null;
     /** 增强型SSD机型售罄原因 */
     HSsdSoldOutReason?: string | null;
+    /** 增强型SSD售罄明细 */
+    HSsdSoldOutDetail?: FamilyResourceStat[] | null;
     /** 增强型SSD磁盘取值范围 */
     HSsdDiskSizeRange?: DiskSizeRange | null;
     /** 吞吐型云盘是否可用 */
     ThroughputAvailable?: boolean | null;
     /** 吞吐型云盘售罄原因 */
     ThroughputSoldOutReason?: string | null;
+    /** 吞吐型云硬盘售罄 */
+    ThroughputSoldOutDetail?: FamilyResourceStat[] | null;
     /** 吞吐型云盘取值范围 */
     ThroughputDiskSizeRange?: DiskSizeRange | null;
     /** BigData盘是否可售 */
     BigDataAvailable?: boolean | null;
     /** BigData盘售罄原因 */
     BigDataSoldOutReason?: string | null;
+    /** 大数据型云硬盘售罄明细 */
+    BigDataSoldOutDetail?: FamilyResourceStat[] | null;
     /** BigData磁盘取值范围 */
     BigDataDiskSizeRange?: DiskSizeRange | null;
     /** HighIO盘是否可售 */
     HighIOAvailable?: boolean | null;
     /** HighIO盘售罄原因 */
     HighIOSoldOutReason?: string | null;
+    /** 高IO型云硬盘售罄明细 */
+    HighIOSoldOutDetail?: FamilyResourceStat[] | null;
     /** HighIO磁盘取值范围 */
     HighIODiskSizeRange?: DiskSizeRange | null;
     /** Bssd盘是否可售 */
@@ -1701,6 +1743,8 @@ declare namespace V20180416 {
     BssdSoldOutReason?: string | null;
     /** Bssd盘取值范围 */
     BssdDiskSizeRange?: DiskSizeRange | null;
+    /** 通用型SSD云硬盘售罄明细 */
+    BssdSoldOutDetail?: FamilyResourceStat[] | null;
     /** GpuInfo */
     GpuInfo?: GpuInfo | null;
   }
@@ -1939,48 +1983,62 @@ declare namespace V20180416 {
     SsdAvailable?: boolean;
     /** SSD磁盘取值范围 */
     SsdDiskSizeRange?: DiskSizeRange;
+    /** SSD机型售罄原因 */
+    SsdSoldOutReason?: string;
+    /** SSD云硬盘售罄明细 */
+    SsdSoldOutDetail?: FamilyResourceStat[] | null;
     /** SATA盘是否可售 */
     SataAvailable?: boolean;
     /** SATA磁盘取值范围 */
     SataDiskSizeRange?: DiskSizeRange;
-    /** SSD机型售罄原因 */
-    SsdSoldOutReason?: string;
     /** SATA机型售罄原因 */
     SataSoldOutReason?: string;
+    /** 高性能云硬盘售罄明细 */
+    SataSoldOutDetail?: FamilyResourceStat[] | null;
     /** 本地盘信息 */
     LocalDiskInfo?: LocalDiskInfo | null;
     /** 云盘块数取值范围 */
     DiskCountRange?: DiskCountRange;
     /** HSSD盘是否可售 */
     HSsdAvailable?: boolean;
-    /** HSSD机型售罄原因 */
-    HSsdSoldOutReason?: string;
     /** HSSD磁盘取值范围 */
     HSsdDiskSizeRange?: DiskSizeRange;
+    /** HSSD机型售罄原因 */
+    HSsdSoldOutReason?: string;
+    /** 增强型SSD售罄明细 */
+    HSsdSoldOutDetail?: FamilyResourceStat[] | null;
     /** Throughput盘是否可售 */
     ThroughputAvailable?: boolean;
-    /** Throughput机型售罄原因 */
-    ThroughputSoldOutReason?: string;
     /** Throughput磁盘取值范围 */
     ThroughputDiskSizeRange?: DiskSizeRange;
+    /** Throughput机型售罄原因 */
+    ThroughputSoldOutReason?: string;
+    /** 吞吐型云硬盘售罄 */
+    ThroughputSoldOutDetail?: FamilyResourceStat[] | null;
     /** BigData盘是否可售 */
     BigDataAvailable?: boolean;
-    /** BigData盘售罄原因 */
-    BigDataSoldOutReason?: string;
     /** BigData磁盘取值范围 */
     BigDataDiskSizeRange?: DiskSizeRange;
+    /** BigData盘售罄原因 */
+    BigDataSoldOutReason?: string;
+    /** 大数据型云硬盘售罄明细 */
+    BigDataSoldOutDetail?: FamilyResourceStat[] | null;
     /** HighIO盘是否可售 */
     HighIOAvailable?: boolean;
     /** HighIO盘售罄原因 */
     HighIOSoldOutReason?: string;
     /** HighIO磁盘取值范围 */
     HighIODiskSizeRange?: DiskSizeRange;
+    /** 高IO型云硬盘售罄明细 */
+    HighIOSoldOutDetail?: FamilyResourceStat[] | null;
     /** Bssd盘是否可售 */
     BssdAvailable?: boolean | null;
-    /** Bssd盘售罄原因 */
-    BssdSoldOutReason?: string | null;
     /** Bssd盘取值范围 */
     BssdDiskSizeRange?: DiskSizeRange | null;
+    /** Bssd盘售罄原因 */
+    BssdSoldOutReason?: string | null;
+    /** 通用型SSD云硬盘售罄明细 */
+    BssdSoldOutDetail?: FamilyResourceStat[] | null;
     /** 节点Gpu信息 */
     GpuInfo?: GpuInfo | null;
   }
@@ -3304,6 +3362,8 @@ declare namespace V20180416 {
     TagList?: TagInfo[];
     /** 私有网络vip列表 */
     IpList?: string[];
+    /** 集群节点IP列表 */
+    NodeIps?: string[];
     /** 可用区列表 */
     ZoneList?: string[];
     /** 健康状态筛列表:0表示绿色，1表示黄色，2表示红色,-1表示未知 */

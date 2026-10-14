@@ -2527,13 +2527,13 @@ declare namespace V20180717 {
     InputTokens?: number;
     /** 思考产生的 Token 数目。仅使用 GV 的 omni 版本时取值有效。 */
     ThoughtTokens?: number;
-    /** 输入图片数目。仅使用 Hailuo 的 H3 版本时取值有效。 */
+    /** 输入图片数目。仅使用 Hailuo(H3/H3-Max)、wand-vega-video(1.0-lite) 时取值有效。 */
     InputImageCount?: number;
-    /** 输入视频的时长。单位：秒。仅使用 Hailuo 的 H3 版本时取值有效。 */
+    /** 输入视频的时长。单位：秒。 仅使用 Hailuo(H3/H3-Max)、wand-vega-video(1.0-lite/1.0-pro/1.5-pro)、Wan(3.0/3.0-prime) 时取值有效。 */
     InputSeconds?: number;
-    /** 输出视频时长。单位：秒。仅使用 Hailuo 的 H3 版本时取值有效。 */
+    /** 输出视频时长。单位：秒。所有模型版本取值均有效。 */
     OutputSeconds?: number;
-    /** 输入输出总时长。默认值：秒。仅使用 Hailuo 的 H3 版本时取值有效。 */
+    /** 输入输出总时长。默认值：秒。 仅使用 Hailuo(H3/H3-Max)、wand-vega-video(1.0-lite/1.0-pro/1.5-pro)、Wan(3.0/3.0-prime) 时取值有效。 */
     TotalSeconds?: number;
   }
 
