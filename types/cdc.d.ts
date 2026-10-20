@@ -784,6 +784,14 @@ declare interface DescribeDedicatedSupportedZonesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEdgeHostVmRequest {
+}
+
+declare interface DescribeEdgeHostVmResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSitesDetailRequest {
   /** 按照站点id过滤 */
   SiteIds?: string[];
@@ -957,6 +965,8 @@ declare interface Cdc {
   DescribeDedicatedClusters(data?: DescribeDedicatedClustersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedClustersResponse>;
   /** 查询专用集群支持的可用区列表 {@link DescribeDedicatedSupportedZonesRequest} {@link DescribeDedicatedSupportedZonesResponse} */
   DescribeDedicatedSupportedZones(data?: DescribeDedicatedSupportedZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDedicatedSupportedZonesResponse>;
+  /** 查询CDC指定母机的虚机 {@link DescribeEdgeHostVmRequest} {@link DescribeEdgeHostVmResponse} */
+  DescribeEdgeHostVm(data?: DescribeEdgeHostVmRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeHostVmResponse>;
   /** 查询站点列表 {@link DescribeSitesRequest} {@link DescribeSitesResponse} */
   DescribeSites(data?: DescribeSitesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSitesResponse>;
   /** 查询站点详情 {@link DescribeSitesDetailRequest} {@link DescribeSitesDetailResponse} */

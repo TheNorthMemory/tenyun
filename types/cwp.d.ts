@@ -1746,6 +1746,12 @@ declare interface BashEventNew {
   MachineType?: number;
   /** 机器额外信息 */
   MachineExtraInfo?: MachineExtraInfo;
+  /** 告警次数：同一聚合维度当天的告警命中次数，老数据为空 */
+  EventCount?: number;
+  /** 首次发现时间（格式 yyyy-MM-dd HH:mm:ss） */
+  FirstDetectTime?: string;
+  /** 最近发现时间（格式 yyyy-MM-dd HH:mm:ss） */
+  LatestDetectTime?: string;
 }
 
 /** 高危命令数据详情 */
@@ -1862,6 +1868,32 @@ declare interface BashEventsInfoNew {
   DetectBy?: number;
   /** 执行命令(解码后) */
   BashCmdDecoded?: string;
+  /** 告警次数：同一聚合维度当天的告警命中次数，老数据为空 */
+  EventCount?: number;
+  /** 首次发现时间（格式 yyyy-MM-dd HH:mm:ss） */
+  FirstDetectTime?: string;
+  /** 最近发现时间（格式 yyyy-MM-dd HH:mm:ss） */
+  LatestDetectTime?: string;
+  /** 进程MD5（文件监控行为独有） */
+  FileProcessMd5?: string;
+  /** 动作：进程对文件的操作，如 读/写/重命名/删除/清空内容（文件监控行为独有） */
+  FileAction?: string;
+  /** 文件路径（文件监控行为独有） */
+  FilePath?: string;
+  /** 文件MD5（文件监控行为独有） */
+  FileMd5?: string;
+  /** 文件名称（文件监控行为独有） */
+  FileName?: string;
+  /** 文件大小（文件监控行为独有） */
+  FileSize?: string;
+  /** 文件修改时间（文件监控行为独有） */
+  FileModifyTime?: string;
+  /** 文件权限（文件监控行为独有） */
+  FilePermission?: string;
+  /** 文件访问时间 */
+  FileAccessTime?: string;
+  /** 高危命令事件类型枚举值：filemon： 文件监控事件connect： 外联行为事件process： 进程启动事件 */
+  BashType?: string;
 }
 
 /** 高危命令策略 */
@@ -1900,6 +1932,8 @@ declare interface BashPolicy {
   Uuids?: string[];
   /** 规则表达式 */
   Rules?: PolicyRules;
+  /** 匹配类型：0-命令行（默认） 1-文件操作 */
+  MatchType?: number;
 }
 
 /** 高危命令规则 */
@@ -3888,6 +3922,10 @@ declare interface PolicyRules {
   PProcess?: CommandLine;
   /** 祖先进程 */
   AProcess?: CommandLine;
+  /** 目标文件路径（匹配类型=文件操作时有效） */
+  FilePath?: string;
+  /** 动作列表（匹配类型=文件操作时有效，多选为或关系）：read-读 write-写 rename-重命名 delete-删除 truncate-清空内容 */
+  FileActions?: string[];
 }
 
 /** 本地提权数据 */

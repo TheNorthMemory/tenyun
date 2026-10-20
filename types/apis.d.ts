@@ -1585,10 +1585,10 @@ declare interface DescribeAgentAppResponse {
 }
 
 declare interface DescribeAgentAppServicesRequest {
-  /** 实例ID */
-  InstanceID: string;
   /** 数据量 */
   Limit: number;
+  /** 实例ID */
+  InstanceID?: string;
   /** IDs */
   IDs?: string[];
   /** 应用IDs */

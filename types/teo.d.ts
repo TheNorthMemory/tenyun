@@ -4712,8 +4712,10 @@ declare interface TCCaptchaOption {
 
 /** EdgeOne 人机校验认证实例信息。 */
 declare interface TCEOCaptchaOption {
-  /** EdgeOne 人机校验模式，取值有： Invisible：无感验证；Adaptive：自适应交互验证。 */
+  /** 浏览器端 WebView 人机校验交互模式。枚举值：Invisible： 无感验证Adaptive： 自适应交互验证默认值：Invisible */
   CaptchaMode?: string;
+  /** 移动端原生 App 人机校验交互模式。枚举值：Invisible： 无感验证Visible： 交互验证默认值：Invisible */
+  MobileCaptchaMode?: string;
 }
 
 /** RCE 认证选项实例信息。 */

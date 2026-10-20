@@ -2526,7 +2526,7 @@ declare interface CloneViralAIGC {
   AspectRatio?: string;
   /** 分辨率。支持720p（默认）/1080p/2k/4k */
   Resolution?: string;
-  /** 模型等级。flagship（默认）、standard */
+  /** 模式。flagship（高级版，默认）、standard（标准版）、depthcrafter(深度提取) */
   ModelTier?: string;
 }
 
@@ -9091,8 +9091,8 @@ declare interface ChangeVoiceResponse {
 declare interface CloneViralRequest {
   /** 爆款视频Url */
   VideoUrl: string;
-  /** 产品信息 */
-  Product: CloneViralProduct;
+  /** 产品信息。除深度提取外，其他模式必填 */
+  Product?: CloneViralProduct;
   /** AIGC生视频相关参数 */
   AIGCParam?: CloneViralAIGC;
   /** 内容/风格相关参数 */

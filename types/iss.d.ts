@@ -206,6 +206,8 @@ declare interface ControlDeviceStreamData {
   Hls?: string;
   /** rtmp 流地址 */
   Rtmp?: string;
+  /** fmp4地址 */
+  FMp4?: string;
 }
 
 /** 查询国标设备地址列表 */
@@ -772,8 +774,10 @@ declare interface OrganizationChannelInfo {
 
 /** 本地录像播放url数据结构 */
 declare interface PlayRecordData {
-  /** 录像播放地址 */
+  /** flv录像播放地址 */
   Flv?: string;
+  /** fmp4录像播放地址 */
+  FMp4?: string;
 }
 
 /** 实时上云计划基础信息 */
@@ -1342,13 +1346,13 @@ declare interface VideoDownloadTaskData {
   DownloadTaskId?: string;
 }
 
-/** 视频场景配置（预留） */
+/** 视频场景配置 */
 declare interface VideoSceneInfo {
-  /** 分析间隔（秒）：每隔多少秒触发一次分析（滑动步长） */
+  /** 分析周期（秒）：每隔多少秒从云端录像中截取一个视频片段进行分析。例如 Interval=3600、Duration=600，表示每隔1小时 取一个 10 分钟的视频片段进行分析。需满足 Duration ≤ Interval，否则相邻片段将重叠。取值范围［5,86400］。 */
   Interval: number;
-  /** 分析片段时长（秒）：单次送入模型的视频窗口长度，范围 [5, 12800] */
+  /** 分析片段时长（秒）：每次分析截取的视频片段长度，即单次分析覆盖的视频时长。取值范围［5,12800］。 */
   Duration: number;
-  /** 抽帧率，默认 1，范围 [0.1, 1]，每隔 1/Fps 秒抽 1 帧送模型 */
+  /** 抽帧率（FPS）：在片段内每隔1/Fps 秒截取一帧进行分析。取值越大，分析越精细，单次分析的帧数越多。默认值1，取值范围［0.1,1 */
   Fps?: number;
 }
 

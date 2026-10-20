@@ -2236,9 +2236,9 @@ declare interface CreateAccountsRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
   /** 云数据库账号。 */
-  Accounts: Account[];
+  Accounts?: Account[];
   /** 新账户的密码。说明：在8 ～ 64位字符数以内（推荐12位以上）。至少包含其中两项：小写字母 a ~ z 或 大写字母 A ～ Z。数字0 ～ 9。_+-,&amp;=!@#$%^*().|。不能包含非法字符。 */
-  Password: string;
+  Password?: string;
   /** 备注信息。最多支持输入255个字符。 */
   Description?: string;
   /** 新账户最大可用连接数，默认值为10240，最大可设置值为10240。 */
@@ -2822,7 +2822,7 @@ declare interface DeleteAccountsRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
   /** 云数据库账号。 */
-  Accounts: Account[];
+  Accounts?: Account[];
 }
 
 declare interface DeleteAccountsResponse {
@@ -5521,6 +5521,8 @@ declare interface SwitchDBInstanceMasterSlaveResponse {
 declare interface SwitchDrInstanceToMasterRequest {
   /** 灾备实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
+  /** 忽略同步延迟的阈值，不填默认为0表示完全等待追平取值范围：[0, 104857600]默认值：0 */
+  IgnoreSyncDelay?: number;
 }
 
 declare interface SwitchDrInstanceToMasterResponse {

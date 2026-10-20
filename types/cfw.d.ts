@@ -1508,6 +1508,10 @@ declare interface NatFwSwitchDetailS {
   Progress?: string;
   /** 预接入检查结果 */
   CheckResult?: ClusterFwPreAccessCheckResult;
+  /** NAT 集群防火墙开关的可用模式枚举值：0： 开关无额外限制1： 自动接入不可用2： 手动接入不可用3： 开关不可用，开关不被允许任何操作默认值：0 */
+  ForbidMode?: number;
+  /** 开关被限制使用的原因。格式为原因码或 原因码:关联资源ID，按第一个 : 拆分枚举值：SAME_VPC_OCCUPIED:{NatInsId}： CCN 内同一 VPC 开启一个 NAT 防火墙开关即可。本开关与 NAT 网关 {NatInsId} 状态同步，请通过该网关操作SAME_VPC_DUPLICATE:{NatInsId}： CCN 内同一 VPC 开启一个 NAT 防火墙开关即可，请通过 NAT 网关 {NatInsId} 开启CCN_HAS_AUTO_MODE:{NatInsId}： 该云联网下的 NAT 网关 {NatInsId} 已使用自动接入。请先关闭该防火墙或改为手动接入后，再操作本开关VPCFW_MODE_INCOMPATIBLE:{防火墙组ID}： 该云联网下的 VPC 防火墙 {FwGroupId} 为主备模式且非自定义开关，与 NAT 集群防火墙不兼容。请先将其调整为自定义开关模式或关闭POLICY_ROUTE_UNSUPPORTED： 云联网未开通策略路由，暂不支持自动接入。请提交工单联系云联网开通，或使用手动接入AUTO_MODE_EXCLUSIVE:{NatInsId}： 该云联网下的 NAT 网关 {NatInsId} 已开启防火墙。自动接入要求该云联网下没有其他 NAT 防火墙，请改用手动接入 */
+  ForbidCode?: string;
 }
 
 /** Nat实例卡片详细信息 */
@@ -1670,6 +1674,280 @@ declare interface OperatorFilter {
   Values: string[];
   /** 操作类型：1：等于 field = value2：大于 field > value3：小于 field < value4：大于等于 field >= value5：小于等于 field <= value6：不等于 field <> value7：IN field IN (value1, value2...)8：NOT IN field NOT IN (value1, value2...)9：模糊匹配 field LIKE value13：非模糊匹配 field NOT LIKE value14：按位与 field & value = value15：between and field between value1 and value2 */
   OperatorType: number;
+}
+
+/** 概览封禁列表配额 */
+declare interface OverviewBlockListQuota {
+  /** 封禁列表总配额数量。 */
+  TotalCnt?: number;
+  /** 封禁列表已使用数量。 */
+  UsedCnt?: number;
+  /** 入站方向已使用的封禁列表记录。 */
+  InUsedCnt?: number;
+  /** 出方向封禁列表已使用数量。 */
+  OutUsedCnt?: number;
+}
+
+/** 概览封禁列表配额详情 */
+declare interface OverviewBlockListQuotaDetail {
+  /** 封禁列表总配额数量。 */
+  TotalCnt?: number;
+  /** 封禁列表已使用数量。 */
+  UsedCnt?: number;
+  /** 封禁列表剩余配额数量。 */
+  RemainCnt?: number;
+  /** 基础配额总数量。 */
+  BaseTotalCnt?: number;
+  /** 基础配额已使用数量。 */
+  BaseUsedCnt?: number;
+  /** 基础配额剩余数量。 */
+  BaseRemainCnt?: number;
+  /** 扩容配额总数量。 */
+  ExtensionTotalCnt?: number;
+  /** 扩容配额已使用数量。 */
+  ExtensionUsedCnt?: number;
+  /** 扩容配额剩余数量。 */
+  ExtensionRemainCnt?: number;
+}
+
+/** 概览通用规则配额详情 */
+declare interface OverviewCommonRuleQuotaDetail {
+  /** 允许使用的规则总数。 */
+  AllowedNum?: number;
+  /** 已使用规则数量。 */
+  UsedNum?: number;
+  /** 剩余规则配额数量。 */
+  RemainQuota?: number;
+  /** 剩余扩容规则数量。 */
+  RemainExtensionNum?: number;
+  /** 入方向规则总数。 */
+  InTotal?: number;
+  /** 入方向启用规则数。 */
+  InEnableNum?: number;
+  /** 出方向规则总数。 */
+  OutTotal?: number;
+  /** 出方向启用规则数。 */
+  OutEnableNum?: number;
+}
+
+/** 概览东西向带宽详情 */
+declare interface OverviewEastWestDetail {
+  /** 东西向总带宽，单位为 Mbps。单位：Mbps */
+  TotalMbps?: number;
+  /** 当前已使用流量，单位为 bps。单位：bps */
+  UsedBps?: number;
+  /** 当前带宽使用率。单位：% */
+  UsagePercent?: number;
+  /** 已分配并使用的带宽，单位为 Mbps。单位：Mbps */
+  AllocatedBandwidthUsedMbps?: number;
+  /** 当前仍可使用带宽，单位为 Mbps。单位：Mbps */
+  CanUsedBandwidthMbps?: number;
+  /** 集群模式带宽，单位为 Mbps。单位：Mbps */
+  ClusterModeWidthMbps?: number;
+  /** 主备模式带宽，单位为 Mbps。单位：Mbps */
+  MasterSlaveModeWidthMbps?: number;
+  /** 同地域防火墙实例 ID。 */
+  SameRegionFwInsId?: string;
+  /** 同地域防火墙实例名称。 */
+  SameRegionFwInsName?: string;
+  /** 同地域防火墙实例峰值流量，单位为 bps。单位：bps */
+  SameRegionMaxFlowBps?: number;
+  /** 跨地域防火墙实例 ID。 */
+  DiffRegionFwInsId?: string;
+  /** 跨地域防火墙实例名称。 */
+  DiffRegionFwInsName?: string;
+  /** 跨地域防火墙实例峰值流量，单位为 bps。单位：bps */
+  DiffRegionMaxFlowBps?: number;
+  /** 防火墙实例组 ID。 */
+  FwGroupId?: string;
+  /** 防火墙实例组名称。 */
+  FwGroupName?: string;
+  /** 防火墙实例组峰值流量，单位为 bps。单位：bps */
+  FwGroupMaxFlowBps?: number;
+  /** 防火墙实例 ID。 */
+  FwInsId?: string;
+  /** 防火墙实例名称。 */
+  FwInsName?: string;
+  /** 防火墙实例峰值流量，单位为 bps。单位：bps */
+  FwInsMaxFlowBps?: number;
+  /** 集群 VPC 峰值流量，单位为 bps。单位：bps */
+  ClusterVpcMaxFlowBps?: number;
+}
+
+/** 概览日志存储详情 */
+declare interface OverviewLogStorageDetail {
+  /** 日志已使用存储容量，单位为 Byte。单位：Byte */
+  UsedBytes?: number;
+  /** 日志总存储容量，单位为 Byte。单位：Byte */
+  TotalBytes?: number;
+  /** 日志保留天数。单位：天 */
+  StorageDay?: number;
+  /** NDR 日志保留天数。单位：天 */
+  NDRStorageDay?: number;
+  /** 访问控制日志占用容量，单位为 Byte。单位：Byte */
+  AclSize?: number;
+  /** 入侵检测日志占用容量，单位为 Byte。单位：Byte */
+  IdsSize?: number;
+  /** 流量日志占用容量，单位为 Byte。单位：Byte */
+  NetFlowSize?: number;
+  /** 操作日志占用容量，单位为 Byte。单位：Byte */
+  OperateSize?: number;
+  /** NDR 风险日志占用容量，单位为 Byte。单位：Byte */
+  NDRRiskSize?: number;
+  /** NDR 流量日志占用容量，单位为 Byte。单位：Byte */
+  NDRNetFlowSize?: number;
+  /** 日志存储计费模式标识。 */
+  PayMode?: number;
+  /** 是否因欠费停止写入日志的状态标识。 */
+  ArrearsStopWriting?: number;
+}
+
+/** 概览 NDR 带宽详情 */
+declare interface OverviewNDRDetail {
+  /** NDR 能力或服务状态标识。 */
+  Status?: number;
+  /** NDR 总带宽，单位为 Mbps。单位：Mbps */
+  TotalMbps?: number;
+  /** 入方向峰值流量，单位为 bps。单位：bps */
+  InMaxBps?: number;
+  /** 出方向峰值流量，单位为 bps。单位：bps */
+  OutMaxBps?: number;
+  /** 总体峰值流量，单位为 bps。单位：bps */
+  MaxFlowBps?: number;
+  /** 当前流量使用率。单位：% */
+  FlowPercent?: number;
+}
+
+/** 概览南北向带宽详情 */
+declare interface OverviewNorthSouthDetail {
+  /** 南北向互联网总带宽，单位为 Mbps。单位：Mbps */
+  InternetBandwidthTotalMbps?: number;
+  /** 南北向网络峰值流量，单位为 bps。单位：bps */
+  NetMaxFlowBps?: number;
+  /** 串行接入总带宽，单位为 Mbps。单位：Mbps */
+  SerialBandwidthTotalMbps?: number;
+  /** NAT 防火墙总带宽，单位为 Mbps。单位：Mbps */
+  NatBandwidthTotalMbps?: number;
+  /** 仅旁路接入带宽，单位为 Mbps。单位：Mbps */
+  BypassOnlyBandwidthMbps?: number;
+  /** 未使用带宽，单位为 Mbps。单位：Mbps */
+  UnusedBandwidthMbps?: number;
+  /** 当前仍可使用带宽，单位为 Mbps。单位：Mbps */
+  CanUsedBandwidthMbps?: number;
+  /** 串行链路峰值流量最高的地域名称。 */
+  MaxSerialRegion?: string;
+  /** 峰值最高地域的入站流量峰值，单位为 bps。单位：bps */
+  SerialRegionInFlowMax?: number;
+  /** 峰值最高地域的出方向最大流量，单位为 bps。单位：bps */
+  SerialRegionOutFlowMax?: number;
+}
+
+/** 概览资源与配额详情 */
+declare interface OverviewQuotaDetail {
+  /** 已使用公网 IP 数量。 */
+  PublicIpUsed?: number;
+  /** 公网 IP 总配额数量。 */
+  PublicIpTotal?: number;
+  /** 通用实例总配额数量。 */
+  CommonInstanceTotal?: number;
+  /** 通用实例剩余配额数量。 */
+  CommonInstanceRemain?: number;
+  /** 通用实例已使用数量。 */
+  CommonInstanceUsed?: number;
+  /** 访问控制规则已使用数量。 */
+  AccessControlRuleUsed?: number;
+  /** 访问控制规则总配额数量。 */
+  AccessControlRuleTotal?: number;
+  /** 已使用串行地域数量。 */
+  SerialRegionUsed?: number;
+  /** 已使用 NAT 防火墙实例数量。 */
+  NatInstanceUsed?: number;
+  /** 已使用 VPC 防火墙实例数量。 */
+  VpcInstanceUsed?: number;
+  /** 边界规则配额详情。 */
+  BorderRuleQuota?: OverviewCommonRuleQuotaDetail;
+  /** NAT 规则配额详情。 */
+  NatRuleQuota?: OverviewCommonRuleQuotaDetail;
+  /** VPC 规则配额详情。 */
+  VpcRuleQuota?: OverviewVpcRuleQuotaDetail;
+  /** 封禁列表配额统计信息。 */
+  BlockListQuota?: OverviewBlockListQuota;
+  /** 封禁 IP 总数量。 */
+  BlockIpCount?: number;
+  /** 已使用封禁 IP 数量。 */
+  BlockIpUsed?: number;
+  /** 封禁 IP 总配额数量。 */
+  BlockIpTotal?: number;
+  /** 封禁列表基础包与扩容包配额详情。 */
+  BlockListQuotaDetail?: OverviewBlockListQuotaDetail;
+  /** 安全组规则已使用数量。 */
+  SgRuleQuotaUsed?: number;
+  /** 安全组规则总配额数量。 */
+  SgRuleQuotaTotal?: number;
+  /** 总扩容资源已使用数量。 */
+  TotalExtensionUsed?: number;
+  /** 总扩容资源配额数量。 */
+  TotalExtensionNum?: number;
+  /** 地址模板已使用数量。 */
+  AddressTemplateUsed?: number;
+  /** 地址模板总配额数量。 */
+  AddressTemplateTotal?: number;
+  /** 蜜罐已使用数量。 */
+  HoneyPotUsed?: number;
+  /** 蜜罐总配额数量。 */
+  HoneyPotTotal?: number;
+}
+
+/** 资源与配额详情返回数据，包含详情字段和能力标识 */
+declare interface OverviewResourceQuotaDataLite {
+  /** 资源与配额详情核心数据，包含南北向带宽、东西向带宽、NDR 带宽、资源配额和日志存储信息。 */
+  Detail?: OverviewResourceQuotaDetail;
+  /** 纯按量计费使用情况 */
+  VolumeUsageDetail?: VolumeUsageDetail;
+}
+
+/** 概览资源与配额详情字段 */
+declare interface OverviewResourceQuotaDetail {
+  /** 南北向带宽与流量详情数据。 */
+  NorthSouthDetail?: OverviewNorthSouthDetail;
+  /** 东西向带宽与流量详情数据。 */
+  EastWestDetail?: OverviewEastWestDetail;
+  /** NDR 带宽与流量详情数据。 */
+  NDRDetail?: OverviewNDRDetail;
+  /** 账号下资源、实例、规则和扩容配额详情数据。 */
+  QuotaDetail?: OverviewQuotaDetail;
+  /** 日志存储使用量、保留天数和各类日志容量详情数据。 */
+  LogStorageDetail?: OverviewLogStorageDetail;
+}
+
+/** 概览 VPC 规则配额详情 */
+declare interface OverviewVpcRuleQuotaDetail {
+  /** 允许使用的规则总数。 */
+  AllowedNum?: number;
+  /** 已使用规则数量。 */
+  UsedNum?: number;
+  /** 剩余规则配额数量。 */
+  RemainQuota?: number;
+  /** 剩余扩容规则数量。 */
+  RemainExtensionNum?: number;
+  /** 全局规则总数。 */
+  GlobalRuleNum?: number;
+  /** 当前已启用的全局规则条目。 */
+  GlobalEnableRuleNum?: number;
+  /** 边界规则总数。 */
+  EdgeRuleNum?: number;
+  /** 边界启用规则数。 */
+  EdgeEnableRuleNum?: number;
+  /** IPv4 规则总数。 */
+  V4RuleTotal?: number;
+  /** 当前已启用的 IPv4 规则条目。 */
+  V4EnableRuleTotal?: number;
+  /** IPv6 规则总数。 */
+  V6RuleTotal?: number;
+  /** 当前已启用的 IPv6 规则条目。 */
+  V6EnableRuleTotal?: number;
+  /** VPC 防火墙开关状态标识。 */
+  IsSwitchEnable?: number;
 }
 
 /** 策略路由预编排配额报告 */
@@ -2210,6 +2488,20 @@ declare interface UnHandleEventDetail {
   EventName: string;
   /** 未处置事件数量 */
   Total: number;
+}
+
+/** 纯按量计费版本使用详情 */
+declare interface VolumeUsageDetail {
+  /** 防护IP数默认值：0 */
+  PublicIpUsed?: number;
+  /** 防护实例数默认值：0 */
+  InstanceUsed?: number;
+  /** 统计日期 */
+  StatDate?: string;
+  /** 处理流量 */
+  TodayTrafficGB?: number;
+  /** 防护天数 */
+  ProtectDays?: number;
 }
 
 /** nat防火墙 vpc dns 开关信息 */
@@ -4594,6 +4886,22 @@ declare interface DescribeOfflineExportTemporaryCredentialsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeOverviewResourceQuotaRequest {
+  /** 返回视图范围默认值：不传该参数时，默认返回完整的资源与配额详情数据 */
+  Scene?: string;
+}
+
+declare interface DescribeOverviewResourceQuotaResponse {
+  /** 资源与配额详情数据包含详情字段和能力标识，具体字段含义见关联数据结构说明。访问控制规则同时提供汇总字段及按互联网边界、NAT边界、VPC边界拆分的字段。 */
+  Data?: OverviewResourceQuotaDataLite;
+  /** 返回代码 */
+  ReturnCode?: number;
+  /** 返回状态字符 */
+  ReturnMsg?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeResourceGroupNewRequest {
   /** 查询类型 网络结构-vpc，业务识别-resource ，资源标签-tag */
   QueryType: string;
@@ -6121,6 +6429,8 @@ declare interface Cfw {
   DescribeOfflineExportTask(data: DescribeOfflineExportTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineExportTaskResponse>;
   /** 获取日志离线导出任务文件下载临时凭证 {@link DescribeOfflineExportTemporaryCredentialsRequest} {@link DescribeOfflineExportTemporaryCredentialsResponse} */
   DescribeOfflineExportTemporaryCredentials(data: DescribeOfflineExportTemporaryCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOfflineExportTemporaryCredentialsResponse>;
+  /** 资源与配额详情 {@link DescribeOverviewResourceQuotaRequest} {@link DescribeOverviewResourceQuotaResponse} */
+  DescribeOverviewResourceQuota(data?: DescribeOverviewResourceQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeOverviewResourceQuotaResponse>;
   /** 资产中心资产树信息查询 {@link DescribeResourceGroupRequest} {@link DescribeResourceGroupResponse} */
   DescribeResourceGroup(data: DescribeResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGroupResponse>;
   /** 资产中心资产树信息查询new {@link DescribeResourceGroupNewRequest} {@link DescribeResourceGroupNewResponse} */

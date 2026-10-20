@@ -2848,11 +2848,11 @@ declare interface ServiceConfig {
 
 /** 注册配置治理信息 */
 declare interface ServiceGovernanceConfig {
-  /** 是否开启服务注册治理 */
+  /** 是否开启服务注册治理枚举值：true： 使用Consul或者北极星服务注册治理false： 不使用服务注册治理 */
   EnableGovernance?: boolean;
-  /** 服务治理类型（枚举：SHARE表示共享型、EXCLUSIVE表示独占型） */
+  /** 服务治理类型枚举值：SHARE： 使用Consul注册中心EXCLUSIVE： 使用北极星注册中心 */
   GovernanceType?: string;
-  /** 独享实例列表 */
+  /** 北极星实例列表 */
   ExclusiveInstances?: ExclusiveInstance[] | null;
 }
 
@@ -3982,7 +3982,7 @@ declare interface CreateApplicationRequest {
   ApplicationResourceType?: string;
   /** 应用runtime类型 */
   ApplicationRuntimeType?: string;
-  /** 【数据集ID】。可通过调用[DescribePrograms](https://cloud.tencent.com/document/product/649/73477)查询已创建的数据集列表或登录[控制台](https://console.cloud.tencent.com/tsf/privilege?rid=1&tab=program&roleId=role-a26486wy)进行查看；也可以调用[CreateProgram](https://cloud.tencent.com/document/product/649/108544)创建新的数据集。 */
+  /** 【数据集ID】。可通过调用DescribePrograms查询已创建的数据集列表或登录控制台进行查看；也可以调用CreateProgram创建新的数据集。 */
   ProgramId?: string;
   /** 服务配置信息列表 */
   ServiceConfigList?: ServiceConfig[];
@@ -3996,7 +3996,7 @@ declare interface CreateApplicationRequest {
   ProgramLanguage?: string;
   /** 开发框架-SpringCloud/Dubbo/Go-GRPC/Other */
   FrameworkType?: string;
-  /** 注册配置治理 */
+  /** 注册配置治理，关闭注册配置治理或者使用北极星注册中心时必须传值 */
   ServiceGovernanceConfig?: ServiceGovernanceConfig;
   /** 是否创建并关联同名镜像仓库 */
   CreateSameNameImageRepository?: boolean;

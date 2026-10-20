@@ -112,6 +112,56 @@ declare interface AccessValueInfo {
   ContainZH?: boolean;
 }
 
+/** 后付费实例（Edition=llm-sdk-waf）的基础信息，仅包含 tb_instance_conf 基础字段 */
+declare interface AfterPayInstanceInfo {
+  /** 用户appid */
+  AppId: number;
+  /** 实例唯一ID */
+  InstanceId: string;
+  /** 实例名称 */
+  InstanceName: string;
+  /** 实例对应资源ID，计费使用 */
+  ResourceIds: string;
+  /** 实例版本，后付费实例固定为 llm-sdk-waf */
+  Edition: string;
+  /** 实例所属地域 */
+  Region: string;
+  /** 付费模式，后付费实例为 0 */
+  PayMode: number;
+  /** 实例过期时间 */
+  ValidTime: string;
+  /** 实例开始时间 */
+  BeginTime: string;
+  /** 计费项 */
+  BillingItem: string;
+  /** 自动续费标识。0：关闭1：开启 */
+  RenewFlag?: number;
+  /** 实例套餐版本 */
+  Level?: number;
+  /** 实例修改时间 */
+  ModifyTime?: string;
+  /** 域名数量上限 */
+  SubDomainLimit?: number;
+  /** 主域名数量上限 */
+  MainDomainLimit?: number;
+  /** qps弹性计费上限 */
+  ElasticBilling?: number;
+  /** 攻击日志投递开关 */
+  AttackLogPost?: number;
+  /** api安全是否购买 */
+  APISecurity?: number;
+  /** 是否api 安全试用 */
+  IsAPISecurityTrial?: number;
+  /** 实例延期释放标识 */
+  FreeDelayFlag?: number;
+  /** 1是基础2025版本；0不是 */
+  BasicFlag?: number;
+  /** 大模型安全「后付费」资源信息，结构与内容与 DescribeInstances 的 InstanceDetail.LLMPkg 保持一致 */
+  LLMPkg?: LLMPkg;
+  /** LLM实例当天4个计费模块token消耗量及近7天趋势（仅后付费llm-sdk-waf实例返回） */
+  LLMTokenUsage?: LLMTokenUsage;
+}
+
 /** 免鉴权信息 */
 declare interface AnonymousInfo {
   /** 操作列表，支持trackLog(JS/HTTP上传日志 )和realtimeProducer(kafka协议上传日志) */
@@ -2548,6 +2598,14 @@ declare interface LLMDetectResult {
   IntentDetectResult?: IntentDetectResult;
 }
 
+/** 近7天图片送检趋势的单日数据点 */
+declare interface LLMImageTrendItem {
+  /** YYYYMMDD 格式日期 */
+  DayTime?: string;
+  /** 当日图片送检量（单位：张） */
+  ImageUsage?: number;
+}
+
 /** LLM waf 自定义词库实体 */
 declare interface LLMKeywordLibrary {
   /** 词库名 */
@@ -2636,7 +2694,7 @@ declare interface LLMSdkAccessItem {
   Name?: string;
   /** 备注 */
   Remark?: string;
-  /** SDK接入来源，tokenhub 表示通过 TokenHub 创建，空字符串表示通过控制台创建 */
+  /** SDK接入来源，可不填 */
   SdkSource?: string;
   /** 总开关 */
   MainStatus?: boolean;
@@ -2664,6 +2722,8 @@ declare interface LLMSdkAccessItem {
   SkillsStatus?: boolean;
   /** 意图识别检测开关 */
   IntentStatus?: boolean;
+  /** 恶意URL检测开关 */
+  UrlDetectStatus?: boolean;
   /** 生效规则数量 */
   EffectiveRules?: number;
 }
@@ -2674,6 +2734,30 @@ declare interface LLMSensitiveValueLevel {
   Label?: string;
   /** 敏感数据等级，250,300，400分别代表超严格、严格、标准等级 */
   Level?: number;
+}
+
+/** 近7天token总量趋势的单日数据点 */
+declare interface LLMTokenTrendItem {
+  /** YYYYMMDD 格式日期 */
+  DayTime?: string;
+  /** 当日token总用量 */
+  TokenUsage?: number;
+}
+
+/** LLM实例当天4个计费模块的token消耗量及近7天趋势（均为实例维度） */
+declare interface LLMTokenUsage {
+  /** 今日提示词攻击防护 token 消耗量 */
+  PromptUsage?: number;
+  /** 今日内容安全文本检测 token 消耗量 */
+  ContentTextUsage?: number;
+  /** 今日敏感数据检测 token 消耗量 */
+  SensitiveDataUsage?: number;
+  /** 今日图片送检量（单位：张） */
+  ContentImageUsage?: number;
+  /** 该实例近7天token总量趋势（按天，缺失日期补0） */
+  TokenTrend?: LLMTokenTrendItem[];
+  /** 该实例近7天图片送检趋势（按天，缺失日期补0） */
+  ImageTrend?: LLMImageTrendItem[];
 }
 
 /** 限流Header数据结构 */
@@ -4314,6 +4398,22 @@ declare interface AddDomainWhiteRuleResponse {
   RequestId?: string;
 }
 
+declare interface AddLLMSdkAccessRequest {
+  /** 要接入的应用名称 */
+  Name: string;
+  /** 实例id */
+  InstanceId: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface AddLLMSdkAccessResponse {
+  /** 服务id */
+  Domain?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface AddSpartaProtectionRequest {
   /** 需要防护的域名 */
   Domain: string;
@@ -5262,6 +5362,26 @@ declare interface DescribeAccessIndexResponse {
   Rule?: AccessRuleInfo;
   /** 索引修改时间，初始值为索引创建时间。 */
   ModifyTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAfterPayInstancesRequest {
+  /** 偏移量 */
+  Offset: number;
+  /** 容量 */
+  Limit: number;
+  /** 过滤数组 */
+  Filters?: FiltersItemNew[];
+  /** 释放延期标识 */
+  FreeDelayFlag?: number;
+}
+
+declare interface DescribeAfterPayInstancesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 后付费实例列表 */
+  Instances?: AfterPayInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -9233,6 +9353,8 @@ declare interface Waf {
   AddCustomWhiteRule(data: AddCustomWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddCustomWhiteRuleResponse>;
   /** 增加域名规则白名单 {@link AddDomainWhiteRuleRequest} {@link AddDomainWhiteRuleResponse} */
   AddDomainWhiteRule(data?: AddDomainWhiteRuleRequest, config?: AxiosRequestConfig): AxiosPromise<AddDomainWhiteRuleResponse>;
+  /** 创建服务id接口 {@link AddLLMSdkAccessRequest} {@link AddLLMSdkAccessResponse} */
+  AddLLMSdkAccess(data: AddLLMSdkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<AddLLMSdkAccessResponse>;
   /** 添加SaaS型WAF防护域名 {@link AddSpartaProtectionRequest} {@link AddSpartaProtectionResponse} */
   AddSpartaProtection(data: AddSpartaProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<AddSpartaProtectionResponse>;
   /** 批量操作Tiga规则 {@link BatchOperateUserSignatureRulesRequest} {@link BatchOperateUserSignatureRulesResponse} */
@@ -9323,6 +9445,8 @@ declare interface Waf {
   DescribeAccessHistogram(data: DescribeAccessHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessHistogramResponse>;
   /** 获取访问日志索引配置信息 {@link DescribeAccessIndexRequest} {@link DescribeAccessIndexResponse} */
   DescribeAccessIndex(data?: DescribeAccessIndexRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessIndexResponse>;
+  /** 查询后付费实例列表 {@link DescribeAfterPayInstancesRequest} {@link DescribeAfterPayInstancesResponse} */
+  DescribeAfterPayInstances(data: DescribeAfterPayInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAfterPayInstancesResponse>;
   /** 获取防篡改信息 {@link DescribeAntiFakeRulesRequest} {@link DescribeAntiFakeRulesResponse} */
   DescribeAntiFakeRules(data: DescribeAntiFakeRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAntiFakeRulesResponse>;
   /** 获取信息防泄漏规则列表 {@link DescribeAntiInfoLeakageRulesRequest} {@link DescribeAntiInfoLeakageRulesResponse} */

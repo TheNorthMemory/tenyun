@@ -2877,12 +2877,14 @@ declare interface CreateDraftContractByPromptsTaskRequest {
   Operator: UserInfo;
   /** 起草要求，范围要求 5-1000 字 */
   Requirement: string;
-  /** 参考模板文件资源id（PDF/Word格式），大小不超过1M，通过[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口来获取。 */
+  /** 参考模板文件资源id（PDF/Word格式），大小不超过1M，通过上传文件接口来获取。 */
   ReferenceTemplateId?: string;
-  /** 相关规定文件资源id列表（PDF/Word格式），最多3个文件，每个大小不超过1M，通过[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口来获取。 */
+  /** 相关规定文件资源id列表（PDF/Word格式），最多3个文件，每个大小不超过1M，通过上传文件接口来获取。 */
   RequirementFileIds?: string[];
   /** 起草合同的语言要求（zh，en）默认zh */
   ContractLanguage?: string;
+  /** 审查任务id，仅支持传入1个，通过批量创建合同审查任务接口来获取。 */
+  ReviewTaskId?: string;
 }
 
 declare interface CreateDraftContractByPromptsTaskResponse {

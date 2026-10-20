@@ -2430,6 +2430,8 @@ declare interface JobSpec {
   GroupName?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 网络配置，JSON 字符串 */
+  NetworkConfig?: string;
 }
 
 /** 任务状态历史记录 */
@@ -3586,6 +3588,8 @@ declare interface RayClusterEntity {
   StopTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 /** 集群状态历史详情 */
@@ -5092,6 +5096,12 @@ declare interface TrainingJobSpec {
   ResumeTraining?: boolean;
   /** 高级参数 JSON（透传给 Neutrino advanced_options） */
   AdvancedOptions?: string;
+  /** 创建人子账号 UIN（实际提交者） */
+  SubAccountUin?: string;
+  /** 创建人子账号名称（CAM 解析，解析失败为 null） */
+  SubAccountName?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 /** 零代码后训练参数 */
@@ -5631,6 +5641,8 @@ declare interface AddDeploymentRequest {
   Image?: string;
   /** 高级参数 */
   AdvancedOptions?: string;
+  /** NetworkConfig */
+  NetworkConfig?: string;
 }
 
 declare interface AddDeploymentResponse {
@@ -6753,6 +6765,8 @@ declare interface CreateInferenceServiceRequest {
   IsCustom?: boolean;
   /** python runtime env */
   RuntimeEnv?: string;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
 }
 
 declare interface CreateInferenceServiceResponse {
@@ -6816,6 +6830,8 @@ declare interface CreateInferenceServiceResponse {
   DeploymentMode?: string;
   /** 是否是自定义 RayServe 创建 */
   IsCustom?: boolean;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6975,6 +6991,8 @@ declare interface CreateJobSpecRequest {
   Tags?: Tag[];
   /** 集群分派策略枚举值：RANDOM： 随机分配 */
   DispatchStrategy?: string;
+  /** 用户自定义网络配置JSON */
+  NetworkConfig?: string;
 }
 
 declare interface CreateJobSpecResponse {
@@ -7052,6 +7070,8 @@ declare interface CreateJobSpecResponse {
   GroupName?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7101,6 +7121,8 @@ declare interface CreateLabRequest {
   ImagePullType?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
 }
 
 declare interface CreateLabResponse {
@@ -7162,6 +7184,8 @@ declare interface CreateLabResponse {
   SubAccountName?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7417,6 +7441,8 @@ declare interface CreateRayClusterRequest {
   Priority?: number;
   /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
   Tags?: Tag[];
+  /** 自定义网络配置参数格式：{"appId":22,"uin":"111","uniqVpcId":"vpc-xxx","subnetId":"subnet-xxx"} */
+  NetworkConfig?: string;
 }
 
 declare interface CreateRayClusterResponse {
@@ -7466,6 +7492,8 @@ declare interface CreateRayClusterResponse {
   Priority?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10225,7 +10253,7 @@ declare interface DescribeTaskListRequest {
   Offset?: number;
   /** 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。task-operator- string （子uin过滤）task-kind - string （任务类型过滤） */
   Filters?: Filter[];
-  /** 排序字段，支持如下字段类型，create-time（创建时间，默认）、update-time（更新时间） */
+  /** 排序字段，支持如下字段类型，create-time（创建时间，默认） */
   SortBy?: string;
   /** 排序方式，desc表示正序，asc表示反序， 默认为asc。 */
   Sorting?: string;
@@ -11190,6 +11218,8 @@ declare interface GetJobSpecResponse {
   GroupName?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 用户自定义网络配置 */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11266,6 +11296,8 @@ declare interface GetLabDetailResponse {
   SubAccountName?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -11626,6 +11658,8 @@ declare interface GetRayClusterResponse {
   Tags?: Tag[];
   /** 资源配置ID */
   ResourceConfigId?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -12031,6 +12065,8 @@ declare interface LabResponse {
   EnableToken?: boolean;
   /** Token 认证密钥（开启 token 认证时由系统生成） */
   Token?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 declare interface LaunchStandardEngineResourceGroupsRequest {
@@ -13426,6 +13462,8 @@ declare interface ModifyTrainingJobSpecRequest {
   ResumeTraining?: boolean;
   /** 调优参数（整体替换，未填字段回模板默认值；不传则不更新；仅 POST_TRAINING） */
   TuningParams?: TrainingTuningParams;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 declare interface ModifyTrainingJobSpecResponse {
@@ -14007,6 +14045,8 @@ declare interface StartLabResponse {
   SubAccountName?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14081,6 +14121,8 @@ declare interface StartRayClusterResponse {
   StopTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14325,6 +14367,8 @@ declare interface StopLabResponse {
   SubAccountName?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14391,6 +14435,8 @@ declare interface StopRayClusterResponse {
   StopTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14446,6 +14492,8 @@ declare interface SubmitTrainingJobRequest {
   Tags?: Tag[];
   /** 产出模型名称（用于后续模型注册，当前仅保存） */
   OutputModelName?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 declare interface SubmitTrainingJobResponse {
@@ -14918,6 +14966,8 @@ declare interface UpdateJobSpecRequest {
   Tags?: Tag[];
   /** 集群分派策略枚举值：RANDOM： 随机分配 */
   DispatchStrategy?: string;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
 }
 
 declare interface UpdateJobSpecResponse {
@@ -14995,6 +15045,8 @@ declare interface UpdateJobSpecResponse {
   GroupName?: string;
   /** 集群名称 */
   ClusterName?: string;
+  /** 用户网络配置 JSON 字符串（跨租户 ENI 注入） */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15036,6 +15088,8 @@ declare interface UpdateLabRequest {
   ImagePullType?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 declare interface UpdateLabResponse {
@@ -15091,6 +15145,8 @@ declare interface UpdateLabResponse {
   SubAccountName?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15138,6 +15194,8 @@ declare interface UpdateRayClusterRequest {
   Priority?: number;
   /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
   Tags?: Tag[];
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
 }
 
 declare interface UpdateRayClusterResponse {
@@ -15187,6 +15245,8 @@ declare interface UpdateRayClusterResponse {
   Priority?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
+  /** 用户网络配置(JSON，跨租户 ENI 等) */
+  NetworkConfig?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

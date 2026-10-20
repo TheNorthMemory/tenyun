@@ -1220,6 +1220,10 @@ declare interface ChannelSpec {
   WecomApp?: WecomAppChannelConfig | null;
   /** 企微机器人配置 */
   WecomRobot?: WecomRobotChannelConfig | null;
+  /** 共享群聊会话false不共享群聊会话; true共享群聊会话 */
+  ShareGroupConversation?: boolean | null;
+  /** 是否调试态 */
+  IsDebug?: boolean | null;
 }
 
 /** 通用校验结果 */
@@ -2412,6 +2416,20 @@ declare interface MCPPluginConfig {
   AuthConfig?: AuthConfig;
   /** 是否支持交互界面（MCP Apps），插件级标签，默认false */
   SupportsApps?: boolean;
+}
+
+/** MCP ResourceContents，chat-manage 侧不解析内部字段，仅结构透传 */
+declare interface MCPResourceContents {
+  /** 二进制内容，与 text 二选一 */
+  Blob?: string | null;
+  /** JSON：单个资源的 _meta 原文 */
+  Meta?: string | null;
+  /** MIME 类型，MCP App 的 HTML 为 text/html;profile=mcp-app */
+  MimeType?: string | null;
+  /** 文本内容，与 blob 二选一 */
+  Text?: string | null;
+  /** 资源 URI */
+  Uri?: string | null;
 }
 
 /** MCPToolConfig */
@@ -4138,6 +4156,24 @@ declare interface WorkflowRunTime {
   StartTime?: string;
   /** 结束时间（毫秒时间戳） */
   EndTime?: string;
+}
+
+declare interface CallMCPToolRequest {
+  /** 能力边界：一次请求只能调该 plugin 上的工具 */
+  PluginId: string;
+  /** agent-exec 侧 thread */
+  ThreadId: string;
+  /** 工具名，用于在 plugin 配置的 tool_list 中定位 tool_id */
+  ToolName: string;
+  /** JSON：工具入参原文，原样透传给 MCP Server */
+  Arguments?: string;
+}
+
+declare interface CallMCPToolResponse {
+  /** JSON：完整 CallToolResult 原文，含 structuredContent / isError / _meta */
+  Result?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface CheckLabelRequest {
@@ -6101,7 +6137,7 @@ declare interface ModifyAppRequest {
   SharedKbIdList?: string[];
   /** 应用挂载云盘 */
   FileVolumeMountList?: AppFileVolumeMount[];
-  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
+  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig,Config.Mode.ClawAgentConfig 【Mode.ClawAgentConfig】 Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig, Config.Mode.ClawAgentConfig.ChannelContextTimeoutConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch,Config.Experience.Conversation.NewMessageInterrupt【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
   UpdateMask?: FieldMask;
 }
 
@@ -6179,7 +6215,7 @@ declare interface ModifyConflictQARequest {
   IsIgnoreAll?: boolean;
   /** 决策涉及的 QA ID 列表（KEEP 与 DELETE 必填） */
   QaIdList?: string[];
-  /** 冲突解决策略：1=保留，2=忽略，3=删除（全局忽略时可不传）枚举项枚举值描述CONFLICT_RESOLUTION_UNKNOWN0CONFLICT_RESOLUTION_KEEP1保留CONFLICT_RESOLUTION_IGNORE2忽略CONFLICT_RESOLUTION_DELETE3删除CONFLICT_RESOLUTION_MERGE4合并CONFLICT_RESOLUTION_REPLACE5替换CONFLICT_RESOLUTION_RENAME6重命名 */
+  /** 冲突解决策略：1=保留，2=忽略，3=删除（全局忽略时可不传）枚举项枚举值描述CONFLICT_RESOLUTION_UNKNOWN0-CONFLICT_RESOLUTION_KEEP1保留CONFLICT_RESOLUTION_IGNORE2忽略CONFLICT_RESOLUTION_DELETE3删除 */
   Resolution?: number;
 }
 
@@ -6436,6 +6472,24 @@ declare interface PauseAppTriggerResponse {
   RequestId?: string;
 }
 
+declare interface ReadMCPResourceRequest {
+  /** 能力边界：一次请求只能读该 plugin 的资源 */
+  PluginId: string;
+  /** agent-exec 侧 thread */
+  ThreadId: string;
+  /** 资源 URI，来源 tool 的 _meta.ui.resourceUri */
+  Uri: string;
+}
+
+declare interface ReadMCPResourceResponse {
+  /** MCP resources/read 返回的资源内容 */
+  Contents?: MCPResourceContents[];
+  /** JSON：Resource 的 _meta 原文，MCP App 场景 Host 依据 ui.csp 强制 CSP 策略 */
+  ResourceMeta?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReleaseSkillRequest {
   /** SkillId */
   SkillId: string;
@@ -6468,6 +6522,10 @@ declare interface ResetConversationRequest {
 }
 
 declare interface ResetConversationResponse {
+  /** 重置时间，单位为ms */
+  ResetTime?: string;
+  /** 重置前的最后一条记录的recordId */
+  ResetThroughRecordId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6641,6 +6699,8 @@ declare interface UnfavoriteSkillResponse {
 /** {@link Adp 腾讯云智能体开发平台} */
 declare interface Adp {
   (): Versions;
+  /** MCP-APP工具调用接口 {@link CallMCPToolRequest} {@link CallMCPToolResponse} */
+  CallMCPTool(data: CallMCPToolRequest, config?: AxiosRequestConfig): AxiosPromise<CallMCPToolResponse>;
   /** 校验标签 {@link CheckLabelRequest} {@link CheckLabelResponse} */
   CheckLabel(data: CheckLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CheckLabelResponse>;
   /** 复制 Agent {@link CopyAgentFromAppRequest} {@link CopyAgentFromAppResponse} */
@@ -6877,6 +6937,8 @@ declare interface Adp {
   ModifyVariable(data: ModifyVariableRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVariableResponse>;
   /** 暂停应用触发器 {@link PauseAppTriggerRequest} {@link PauseAppTriggerResponse} */
   PauseAppTrigger(data?: PauseAppTriggerRequest, config?: AxiosRequestConfig): AxiosPromise<PauseAppTriggerResponse>;
+  /** MCP-APP资源获取接口 {@link ReadMCPResourceRequest} {@link ReadMCPResourceResponse} */
+  ReadMCPResource(data: ReadMCPResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ReadMCPResourceResponse>;
   /** 上架skill {@link ReleaseSkillRequest} {@link ReleaseSkillResponse} */
   ReleaseSkill(data: ReleaseSkillRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseSkillResponse>;
   /** 重置会话 {@link ResetConversationRequest} {@link ResetConversationResponse} */

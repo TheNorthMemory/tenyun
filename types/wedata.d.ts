@@ -596,6 +596,8 @@ declare interface CreateTaskSchedulerConfiguration {
   DependencyTriggerPolicy?: string;
   /** 是否允许下游依赖 1允许 0不允许取值范围：[0, 1]默认值：1 */
   AllowDownstreamDependency?: number;
+  /** 分钟任务相位偏移 */
+  MinuteOffset?: number;
 }
 
 /** 创建任务基本属性信息 */
@@ -1304,6 +1306,10 @@ declare interface LineageNodeInfo {
   DownStreamCount?: number;
   /** 下游数量 */
   UpStreamCount?: number;
+  /** 查询字段名（本次请求携带的字段名，用于聚合） */
+  SourceColumnName?: string | null;
+  /** 当前结果字段名 */
+  ColumnName?: string | null;
 }
 
 /** 血缘Pair对象 */
@@ -2062,6 +2068,8 @@ declare interface Project {
   ProjectOwnerUin?: string | null;
   /** 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中 */
   Status?: number;
+  /** 项目状态枚举：ENABLED 正常、UNABLED 已禁用、ENABLING 启用中、UNABLING 禁用中、REMOVING 删除中、DELETED 已删除 */
+  DisplayStatus?: string;
   /** 项目模式，SIMPLE：简单模式 STANDARD：标准模式 */
   ProjectModel?: string | null;
   /** 项目的额外配置参数，{Key: "scheduleMode", Value: "task|workflow"} */
@@ -3096,6 +3104,14 @@ declare interface ResourceStatus {
   Status?: boolean | null;
 }
 
+/** 资源组标签数据 */
+declare interface ResourceTag {
+  /** 标签键 */
+  TagKey: string;
+  /** 标签值 */
+  TagValue: string;
+}
+
 /** 开通的资源组信息 */
 declare interface ResourceType {
   /** 资源组类型- Schedule --- 调度资源组- Integration --- 集成资源组- DataService -- 数据服务资源组 */
@@ -3838,6 +3854,8 @@ declare interface TaskSchedulerConfiguration {
   DependencyTriggerPolicy?: string | null;
   /** 是否允许下游依赖 1允许 0不允许取值范围：[0, 1]默认值：1 */
   AllowDownstreamDependency?: number | null;
+  /** 分钟任务相位偏移 */
+  MinuteOffset?: number | null;
 }
 
 /** 任务调度变量参数 */
@@ -4824,6 +4842,8 @@ declare interface WorkflowSchedulerConfiguration {
   CalendarName?: string | null;
   /** 日历id */
   CalendarId?: string | null;
+  /** 分钟任务相位偏移 */
+  MinuteOffset?: number | null;
 }
 
 /** 工作流统一调度参数入参依赖任务信息取值说明表：| 当前任务周期类型 | 上游任务周期类型 | 配置方式 | MainCyclicConfig取值 | 时间维度/实例范围 | SubordinateCyclicConfig取值 | offset取值 || ---------------- | ---------------- | -------- | -------------------- | --------------------------- | --------------------------------- | ---------------------- || HOUR_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || MINUTE_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || DAY_CYCLE | WEEK_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || DAY_CYCLE | WEEK_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || HOUR_CYCLE | HOUR_CYCLE | 推荐策略 | HOUR | 按小时/最近实例 | CURRENT_HOUR | 无 || HOUR_CYCLE | HOUR_CYCLE | 推荐策略 | HOUR | 按小时/前一周期 | PREVIOUS_HOUR_CYCLE | 无 || HOUR_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || WEEK_CYCLE | DAY_CYCLE | 推荐策略 | WEEK | 按周/上周 | PREVIOUS_WEEK | 无 || WEEK_CYCLE | DAY_CYCLE | 推荐策略 | WEEK | 按周/上周五 | PREVIOUS_FRIDAY | 无 || WEEK_CYCLE | DAY_CYCLE | 推荐策略 | WEEK | 按周/上周日 | PREVIOUS_WEEKEND | 无 || WEEK_CYCLE | DAY_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || WEEK_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 、 | CURRENT_DAY | 无 || WEEK_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/前一天 | PREVIOUS_DAY | 无 || WEEK_CYCLE | ONEOFF_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || HOUR_CYCLE | MINUTE_CYCLE | 推荐策略 | HOUR | 按小时/前一个小时(-60,0] | PREVIOUS_HOUR_LATER_OFFSET_MINUTE | 无 || HOUR_CYCLE | MINUTE_CYCLE | 推荐策略 | HOUR | 按小时/前一个小时 | PREVIOUS_HOUR | 无 || HOUR_CYCLE | MINUTE_CYCLE | 推荐策略 | HOUR | 按小时/当前小时 | CURRENT_HOUR | 无 || YEAR_CYCLE | WEEK_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || WEEK_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || MINUTE_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || WEEK_CYCLE | HOUR_CYCLE | 推荐策略 | WEEK | 按周/上周 | PREVIOUS_WEEK | 无 || WEEK_CYCLE | HOUR_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || MINUTE_CYCLE | HOUR_CYCLE | 推荐策略 | HOUR | 按小时/当前小时 | CURRENT_HOUR | 无 || HOUR_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || MONTH_CYCLE | HOUR_CYCLE | 推荐策略 | MONTH | 按月/上月 | PREVIOUS_MONTH | 无 || MONTH_CYCLE | HOUR_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || MONTH_CYCLE | ONEOFF_CYCLE | 推荐策略 | MONTH | 按月/当月 | CURRENT_MONTH | 无 || DAY_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || DAY_CYCLE | MONTH_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || MONTH_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || ONEOFF_CYCLE | WEEK_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || MINUTE_CYCLE | MINUTE_CYCLE | 推荐策略 | MINUTE | 按分钟/当前分钟 | CURRENT_MINUTE | 无 || MINUTE_CYCLE | MINUTE_CYCLE | 推荐策略 | MINUTE | 按分钟/前一周期 | PREVIOUS_MINUTE_CYCLE | 无 || YEAR_CYCLE | MINUTE_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || ONEOFF_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || DAY_CYCLE | MINUTE_CYCLE | 推荐策略 | DAY | 按天/前一天(-24 * 60,0] | PREVIOUS_DAY_LATER_OFFSET_MINUTE | 无 || DAY_CYCLE | MINUTE_CYCLE | 推荐策略 | DAY | 按天/前一天 | PREVIOUS_DAY | 无 || DAY_CYCLE | MINUTE_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || MINUTE_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || WEEK_CYCLE | WEEK_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || WEEK_CYCLE | WEEK_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || YEAR_CYCLE | YEAR_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || YEAR_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || YEAR_CYCLE | HOUR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || MINUTE_CYCLE | WEEK_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || ONEOFF_CYCLE | MINUTE_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || HOUR_CYCLE | ONEOFF_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || WEEK_CYCLE | MINUTE_CYCLE | 推荐策略 | WEEK | 按周/上周 | PREVIOUS_WEEK | 无 || WEEK_CYCLE | MINUTE_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || DAY_CYCLE | HOUR_CYCLE | 推荐策略 | DAY | 按天/前一天(-24,0] | PREVIOUS_DAY_LATER_OFFSET_HOUR | 无 || DAY_CYCLE | HOUR_CYCLE | 推荐策略 | DAY | 按天/前一天[-24,0) | PREVIOUS_DAY | 无 || DAY_CYCLE | HOUR_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || YEAR_CYCLE | MONTH_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || YEAR_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本年所有月 | ALL_MONTH_OF_YEAR | 无 || YEAR_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || YEAR_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/上月 | PREVIOUS_MONTH | 无 || YEAR_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/上月末 | PREVIOUS_END_OF_MONTH | 无 || YEAR_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/上月初 | PREVIOUS_BEGIN_OF_MONTH | 无 || ONEOFF_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || DAY_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || ONEOFF_CYCLE | HOUR_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || DAY_CYCLE | ONEOFF_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || MINUTE_CYCLE | ONEOFF_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || WEEK_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || WEEK_CYCLE | MONTH_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || YEAR_CYCLE | ONEOFF_CYCLE | 推荐策略 | YEAR | 按年/当年 | CURRENT_YEAR | 无 || MONTH_CYCLE | DAY_CYCLE | 推荐策略 | MONTH | 按月/上月 | PREVIOUS_MONTH | 无 || MONTH_CYCLE | DAY_CYCLE | 推荐策略 | MONTH | 按月/上月末 | PREVIOUS_END_OF_MONTH | 无 || MONTH_CYCLE | DAY_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || MONTH_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || MONTH_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/前一天 | PREVIOUS_DAY | 无 || YEAR_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/本年所有天 | ALL_DAY_OF_YEAR | 无 || YEAR_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || YEAR_CYCLE | DAY_CYCLE | 推荐策略 | DAY | 按天/前一天 | PREVIOUS_DAY | 无 || HOUR_CYCLE | WEEK_CYCLE | 推荐策略 | WEEK | 按周/本周 | CURRENT_WEEK | 无 || MONTH_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/当月 | CURRENT_MONTH | 无 || MONTH_CYCLE | MONTH_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || MONTH_CYCLE | MINUTE_CYCLE | 推荐策略 | MONTH | 按月/上月 | PREVIOUS_MONTH | 无 || MONTH_CYCLE | MINUTE_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || MONTH_CYCLE | WEEK_CYCLE | 推荐策略 | MONTH | 按月/上月 | PREVIOUS_MONTH | 无 || MONTH_CYCLE | WEEK_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || MONTH_CYCLE | WEEK_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || DAY_CYCLE | YEAR_CYCLE | 推荐策略 | YEAR | 按年/本年 | CURRENT_YEAR | 无 || DAY_CYCLE | YEAR_CYCLE | 推荐策略 | DAY | 按天/最近一次数据时间的实例 | RECENT_DATE | 无 || ONEOFF_CYCLE | ONEOFF_CYCLE | 推荐策略 | DAY | 按天/当天 | CURRENT_DAY | 无 || ONEOFF_CYCLE | MONTH_CYCLE | 推荐策略 | MONTH | 按月/本月 | CURRENT_MONTH | 无 || CRONTAB_CYCLE | CRONTAB_CYCLE | 推荐策略 | CRONTAB | 无 | CURRENT | 无 || HOUR_CYCLE | HOUR_CYCLE | 自定义 | RANGE_HOUR | 区间(小时) | 无 | 逗号分隔的整数，如-1,0 || HOUR_CYCLE | DAY_CYCLE | 自定义 | RANGE_DAY | 区间(天) | 无 | 逗号分隔的整数，如-1,0 || WEEK_CYCLE | DAY_CYCLE | 自定义 | RANGE_DAY | 区间(天) | 无 | 逗号分隔的整数，如-1,0 || HOUR_CYCLE | MINUTE_CYCLE | 自定义 | RANGE_MINUTE | 区间(分钟) | 无 | 逗号分隔的整数，如-1,0 || WEEK_CYCLE | HOUR_CYCLE | 自定义 | RANGE_HOUR | 区间(小时) | 无 | 逗号分隔的整数，如-1,0 || MINUTE_CYCLE | HOUR_CYCLE | 自定义 | RANGE_HOUR | 区间(小时) | 无 | 逗号分隔的整数，如-1,0 || MONTH_CYCLE | HOUR_CYCLE | 自定义 | RANGE_HOUR | 区间(小时) | 无 | 逗号分隔的整数，如-1,0 || MINUTE_CYCLE | MINUTE_CYCLE | 自定义 | RANGE_MINUTE | 区间(分钟) | 无 | 逗号分隔的整数，如-1,0 || YEAR_CYCLE | MINUTE_CYCLE | 自定义 | RANGE_MINUTE | 区间(分钟) | 无 | 逗号分隔的整数，如-1,0 || DAY_CYCLE | MINUTE_CYCLE | 自定义 | RANGE_MINUTE | 区间(分钟) | 无 | 逗号分隔的整数，如-1,0 || MINUTE_CYCLE | DAY_CYCLE | 自定义 | RANGE_DAY | 区间(天) | 无 | 逗号分隔的整数，如-1,0 || YEAR_CYCLE | HOUR_CYCLE | 自定义 | RANGE_HOUR | 区间(小时) | 无 | 逗号分隔的整数，如-1,0 || WEEK_CYCLE | MINUTE_CYCLE | 自定义 | RANGE_MINUTE | 区间(分钟) | 无 | 逗号分隔的整数，如-1,0 || DAY_CYCLE | HOUR_CYCLE | 自定义 | RANGE_HOUR | 区间(小时) | 无 | 逗号分隔的整数，如-1,0 || DAY_CYCLE | DAY_CYCLE | 自定义 | RANGE_DAY | 区间(天) | 无 | 逗号分隔的整数，如-1,0 || MONTH_CYCLE | DAY_CYCLE | 自定义 | RANGE_DAY | 区间(天) | 无 | 逗号分隔的整数，如-1,0 || YEAR_CYCLE | DAY_CYCLE | 自定义 | RANGE_DAY | 区间(天) | 无 | 逗号分隔的整数，如-1,0 || MONTH_CYCLE | MINUTE_CYCLE | 自定义 | RANGE_MINUTE | 区间(分钟) | 无 | 逗号分隔的整数，如-1,0 || HOUR_CYCLE | HOUR_CYCLE | 自定义 | LIST_HOUR | 列表(小时) | 无 | 逗号分隔的整数，如-1,0 || HOUR_CYCLE | DAY_CYCLE | 自定义 | LIST_DAY | 列表(天) | 无 | 逗号分隔的整数，如-1,0 || WEEK_CYCLE | DAY_CYCLE | 自定义 | LIST_DAY | 列表(天) | 无 | 逗号分隔的整数，如-1,0 || HOUR_CYCLE | MINUTE_CYCLE | 自定义 | LIST_MINUTE | 列表(分钟) | 无 | 逗号分隔的整数，如-1,0 || WEEK_CYCLE | HOUR_CYCLE | 自定义 | LIST_HOUR | 列表(小时) | 无 | 逗号分隔的整数，如-1,0 || MINUTE_CYCLE | HOUR_CYCLE | 自定义 | LIST_HOUR | 列表(小时) | 无 | 逗号分隔的整数，如-1,0 || MONTH_CYCLE | HOUR_CYCLE | 自定义 | LIST_HOUR | 列表(小时) | 无 | 逗号分隔的整数，如-1,0 || MINUTE_CYCLE | MINUTE_CYCLE | 自定义 | LIST_MINUTE | 列表(分钟) | 无 | 逗号分隔的整数，如-1,0 || YEAR_CYCLE | MINUTE_CYCLE | 自定义 | LIST_MINUTE | 列表(分钟) | 无 | 逗号分隔的整数，如-1,0 || DAY_CYCLE | MINUTE_CYCLE | 自定义 | LIST_MINUTE | 列表(分钟) | 无 | 逗号分隔的整数，如-1,0 || MINUTE_CYCLE | DAY_CYCLE | 自定义 | LIST_DAY | 列表(天) | 无 | 逗号分隔的整数，如-1,0 || YEAR_CYCLE | HOUR_CYCLE | 自定义 | LIST_HOUR | 列表(小时) | 无 | 逗号分隔的整数，如-1,0 || WEEK_CYCLE | MINUTE_CYCLE | 自定义 | LIST_MINUTE | 列表(分钟) | 无 | 逗号分隔的整数，如-1,0 || DAY_CYCLE | HOUR_CYCLE | 自定义 | LIST_HOUR | 列表(小时) | 无 | 逗号分隔的整数，如-1,0 || DAY_CYCLE | DAY_CYCLE | 自定义 | LIST_DAY | 列表(天) | 无 | 逗号分隔的整数，如-1,0 || MONTH_CYCLE | DAY_CYCLE | 自定义 | LIST_DAY | 列表(天) | 无 | 逗号分隔的整数，如-1,0 || YEAR_CYCLE | DAY_CYCLE | 自定义 | LIST_DAY | 列表(天) | 无 | 逗号分隔的整数，如-1,0 || MONTH_CYCLE | MINUTE_CYCLE | 自定义 | LIST_MINUTE | 列表(分钟) | 无 | 逗号分隔的整数，如-1,0 | */
@@ -4846,9 +4866,9 @@ declare interface WorkflowSchedulerConfigurationInfo {
   ModifyCycleValue?: string;
   /** 工作流存在跨工作流依赖且使用cron表达式调度。如果保存统一调度，会断开不支持的依赖关系 */
   ClearLink?: boolean;
-  /** ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-时间维度，取值为：* CRONTAB* DAY* HOUR* LIST_DAY* LIST_HOUR* LIST_MINUTE* MINUTE* MONTH* RANGE_DAY* RANGE_HOUR* RANGE_MINUTE* WEEK* YEARhttps://capi.woa.com/object/detail?product=wedata&env=api_dev&version=2025-08-06&name=WorkflowSchedulerConfigurationInfo */
+  /** ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-时间维度，取值为：CRONTABDAYHOURLIST_DAYLIST_HOURLIST_MINUTEMINUTEMONTHRANGE_DAYRANGE_HOURRANGE_MINUTEWEEKYEARhttps://capi.woa.com/object/detail?product=wedata&amp;env=api_dev&amp;version=2025-08-06&amp;name=WorkflowSchedulerConfigurationInfo */
   MainCyclicConfig?: string;
-  /** ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围取值为：* ALL_DAY_OF_YEAR* ALL_MONTH_OF_YEAR* CURRENT* CURRENT_DAY* CURRENT_HOUR* CURRENT_MINUTE* CURRENT_MONTH* CURRENT_WEEK* CURRENT_YEAR* PREVIOUS_BEGIN_OF_MONTH* PREVIOUS_DAY* PREVIOUS_DAY_LATER_OFFSET_HOUR* PREVIOUS_DAY_LATER_OFFSET_MINUTE* PREVIOUS_END_OF_MONTH* PREVIOUS_FRIDAY* PREVIOUS_HOUR* PREVIOUS_HOUR_CYCLE* PREVIOUS_HOUR_LATER_OFFSET_MINUTE* PREVIOUS_MINUTE_CYCLE* PREVIOUS_MONTH* PREVIOUS_WEEK* PREVIOUS_WEEKEND* RECENT_DATEhttps://capi.woa.com/object/detail?product=wedata&env=api_dev&version=2025-08-06&name=WorkflowSchedulerConfigurationInfo */
+  /** ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围取值为：ALL_DAY_OF_YEARALL_MONTH_OF_YEARCURRENTCURRENT_DAYCURRENT_HOURCURRENT_MINUTECURRENT_MONTHCURRENT_WEEKCURRENT_YEARPREVIOUS_BEGIN_OF_MONTHPREVIOUS_DAYPREVIOUS_DAY_LATER_OFFSET_HOURPREVIOUS_DAY_LATER_OFFSET_MINUTEPREVIOUS_END_OF_MONTHPREVIOUS_FRIDAYPREVIOUS_HOURPREVIOUS_HOUR_CYCLEPREVIOUS_HOUR_LATER_OFFSET_MINUTEPREVIOUS_MINUTE_CYCLEPREVIOUS_MONTHPREVIOUS_WEEKPREVIOUS_WEEKENDRECENT_DATEhttps://capi.woa.com/object/detail?product=wedata&amp;env=api_dev&amp;version=2025-08-06&amp;name=WorkflowSchedulerConfigurationInfo */
   SubordinateCyclicConfig?: string;
   /** 执行时间左闭区间，示例：00:00，只有周期类型为MINUTE_CYCLE才需要填入 */
   ExecutionStartTime?: string;
@@ -4858,6 +4878,8 @@ declare interface WorkflowSchedulerConfigurationInfo {
   CalendarOpen?: string;
   /** 日历id */
   CalendarId?: string;
+  /** 分钟任务相位偏移 */
+  MinuteOffset?: number;
 }
 
 /** 工作流调度配置 */
@@ -5233,6 +5255,8 @@ declare interface CreateResourceGroupRequest {
   AssociatedProjectId?: string;
   /** 资源组描述 */
   Description?: string;
+  /** 标签值 */
+  Tags?: ResourceTag[];
 }
 
 declare interface CreateResourceGroupResponse {
@@ -8805,6 +8829,8 @@ declare namespace V20210820 {
     CreateTimestamp?: number | null;
     /** 审批时间 */
     ApproveTimestamp?: number | null;
+    /** 审批扩展码 */
+    ApproveCode?: string;
   }
 
   /** 修改审批单状态 */
@@ -15831,6 +15857,8 @@ declare namespace V20210820 {
     LastUpdateTimestamp?: number | null;
     /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
     Privilege?: string | null;
+    /** 分钟任务相位偏移 */
+    MinuteOffset?: number | null;
   }
 
   /** 属性配置 */
@@ -17069,6 +17097,8 @@ declare namespace V20210820 {
     ScheduleTimeZone?: string | null;
     /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
     Privilege?: string | null;
+    /** 分钟任务相位偏移 */
+    MinuteOffset?: number | null;
   }
 
   /** 工作流调度详情 */
@@ -23189,6 +23219,8 @@ declare namespace V20210820 {
     RegisterDsEventPublisherRequest?: RegisterDsEventPublisherReq;
     /** base64编码后脚本内容 */
     Content?: string;
+    /** 分钟任务相位偏移 */
+    MinuteOffset?: number;
   }
 
   interface ModifyTaskInfoDsResponse {
@@ -23698,6 +23730,8 @@ declare namespace V20210820 {
     MainCyclicConfig?: string;
     /** ModifyCycleValue为1的时候生效，表示默认修改的上游依赖-实例范围 */
     SubordinateCyclicConfig?: string;
+    /** 分钟任务相位偏移 */
+    MinuteOffset?: number;
   }
 
   interface RenewWorkflowSchedulerInfoDsResponse {

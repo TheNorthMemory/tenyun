@@ -608,6 +608,8 @@ declare interface ModifyNetworkAddress {
   NewIPAddress: string;
   /** 原IP地址。 */
   OldIpAddress: string;
+  /** 在副本集时，修改网络需要传此字段，用于标识该ip地址为主节点或者hidden节点枚举值：PRIMARY： 主节点HIDDEN： hidden节点 */
+  NodeType?: string;
 }
 
 /** 单shark变配入参 */
@@ -2481,13 +2483,13 @@ declare interface ModifyDBInstanceLogToCLSResponse {
 }
 
 declare interface ModifyDBInstanceNetworkAddressRequest {
-  /** 指定需修改网络的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。 */
+  /** 指定需修改网络的实例 ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
-  /** 原 IP 地址保留时长。- 单位为分钟，0表示立即回收原 IP 地址。- 原 IP 将在约定时间后释放，在释放前原 IP和新 IP均可访问。 */
+  /** 原 IP 地址保留时长。单位为分钟，0表示立即回收原 IP 地址。原 IP 将在约定时间后释放，在释放前原 IP和新 IP均可访问。 */
   OldIpExpiredTime: number;
-  /** 切换后的私有网络 ID，若实例当前为基础网络，该字段无需配置。请通过接口 [DescribeDBInstances](https://cloud.tencent.com/document/product/240/38568) 获取私有网络 ID。 */
+  /** 切换后的私有网络 ID，若实例当前为基础网络，该字段无需配置。请通过接口 DescribeDBInstances 获取私有网络 ID。 */
   NewUniqVpcId: string;
-  /** 切换后私有网络的子网 ID。若实例当前为基础网络，该字段无需配置。请通过接口 [DescribeDBInstances](https://cloud.tencent.com/document/product/240/38568) 获取私有网络的子网 ID。 */
+  /** 切换后私有网络的子网 ID。若实例当前为基础网络，该字段无需配置。请通过接口 DescribeDBInstances 获取私有网络的子网 ID。 */
   NewUniqSubnetId: string;
   /** IP 地址信息，包含新 IP 地址与 原 IP 地址。 */
   NetworkAddresses?: ModifyNetworkAddress[];

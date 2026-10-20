@@ -46,6 +46,10 @@ declare interface ConsumeGroupItem {
   TagList?: Tag[];
   /** 重试策略 */
   RetryPolicy?: RetryPolicy;
+  /** 消费模式，枚举值如下：CLUSTERING：集群/广播消费LITE：LiteTopic 消费 */
+  ConsumeModel?: string;
+  /** 自定义的死信Topic名称 */
+  DeadLetterTargetTopic?: string;
 }
 
 /** 消费者客户端 */
@@ -710,6 +714,10 @@ declare interface TopicItem {
   MsgTTL?: number;
   /** 绑定的标签列表 */
   TagList?: Tag[];
+  /** LITE 类型 Topic 专用：是否开启自动过期删除 */
+  AutoExpireDelete?: boolean | null;
+  /** LITE 类型 Topic 专用：自动过期时间单位：分钟 */
+  AutoExpireTime?: number | null;
 }
 
 /** 迁移主题修改状态后的结果 */
@@ -789,6 +797,8 @@ declare interface CreateConsumerGroupRequest {
   RetryPolicy?: RetryPolicy;
   /** 轻量主题 */
   LiteTopic?: string;
+  /** 自定义死信 Topic非必选，死信消息默认投递到系统死信 Topic */
+  DeadLetterTargetTopic?: string;
 }
 
 declare interface CreateConsumerGroupResponse {
@@ -933,7 +943,7 @@ declare interface CreateTopicRequest {
   InstanceId: string;
   /** 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031) 或控制台获得。 */
   Topic: string;
-  /** 主题类型，枚举值如下：- NORMAL: 普通消息- FIFO: 顺序消息- DELAY: 延时消息- TRANSACTION: 事务消息- LITE: 轻量消息 */
+  /** 主题类型枚举值：NORMAL： 普通消息FIFO： 顺序消息DELAY： 延迟消息TRANSACTION： 事务消息LITE： 轻量消息PRIORITY： 优先级消息 */
   TopicType: string;
   /** 队列数量，取值范围3～16 */
   QueueNum?: number;
@@ -1190,6 +1200,8 @@ declare interface DescribeConsumerGroupResponse {
   ConsumeModel?: string;
   /** 订阅的轻量主题（仅适用于轻量消费模式） */
   LiteTopic?: string;
+  /** 自定义死信Topic */
+  DeadLetterTargetTopic?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1541,6 +1553,10 @@ declare interface DescribeMessageTraceRequest {
   QueryDeadLetterMessage?: boolean;
   /** 是否是延时消息，默认为false */
   QueryDelayMessage?: boolean;
+  /** 是否为重试消息 */
+  QueryRetryMessage?: boolean;
+  /** 查询重试消息时，需要指定具体的消费组名称 */
+  GroupId?: string;
 }
 
 declare interface DescribeMessageTraceResponse {
@@ -1792,6 +1808,8 @@ declare interface DescribeTopicResponse {
   Topic?: string;
   /** 主题类型UNSPECIFIED:未指定,NORMAL:普通消息,FIFO:顺序消息,DELAY:延时消息,TRANSACTION:事务消息 */
   TopicType?: string;
+  /** 队列数量 */
+  QueueNum?: number;
   /** 备注 */
   Remark?: string;
   /** 创建时间，Unix时间戳（毫秒） */
@@ -1895,6 +1913,8 @@ declare interface ModifyConsumerGroupRequest {
   Remark?: string;
   /** 重试策略 */
   RetryPolicy?: RetryPolicy;
+  /** 自定义死信Topic */
+  DeadLetterTargetTopic?: string;
 }
 
 declare interface ModifyConsumerGroupResponse {
@@ -2111,6 +2131,8 @@ declare interface SendMessageRequest {
   MsgTag?: string;
   /** 轻量主题 */
   LiteTopic?: string;
+  /** 指定队列优先级 */
+  Priority?: number;
 }
 
 declare interface SendMessageResponse {

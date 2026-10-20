@@ -48,6 +48,14 @@ declare interface CLSConfig {
   TopicId?: string;
 }
 
+/** 可以添加到正在运行的容器中或从中移除的 POSIX POSIX capabilities。 */
+declare interface Capabilities {
+  /** 要添加的capabilities取值参考：["SYS_ADMIN"] */
+  Add?: string[];
+  /** 要移除的capabilities取值参考：["ALL"] */
+  Drop?: string[];
+}
+
 /** 文件存储配置 */
 declare interface CfsStorageSource {
   /** CFS资源ID */
@@ -300,6 +308,8 @@ declare interface CustomConfiguration {
   Probe?: ProbeConfiguration;
   /** 沙箱 DNS 配置 */
   DNSConfig?: DNSConfig;
+  /** 沙箱安全上下文 */
+  SecurityContext?: SecurityContext;
 }
 
 /** 沙箱自定义配置详细信息 */
@@ -324,6 +334,8 @@ declare interface CustomConfigurationDetail {
   Probe?: ProbeConfiguration;
   /** 沙箱 DNS 配置 */
   DNSConfig?: DNSConfig;
+  /** 沙箱安全上下文 */
+  SecurityContext?: SecurityContext;
 }
 
 /** 沙箱自定义 dns 配置 */
@@ -710,6 +722,14 @@ declare interface ScalingConfiguration {
   MaxInstanceRequestConcurrency?: number;
 }
 
+/** SecurityContext 包含将应用于容器的安全配置。 */
+declare interface SecurityContext {
+  /** 是否开启特权默认值：true */
+  Privileged?: boolean;
+  /** Capabilities 指的是可以添加到正在运行的容器中或从中移除的 POSIX capabilities。 */
+  Capabilities?: Capabilities;
+}
+
 /** 会话信息 */
 declare interface SessionInfo {
   /** 会话 ID。 */
@@ -768,6 +788,10 @@ declare interface StorageMount {
   MountPath?: string;
   /** 存储挂载读写权限配置，默认为false */
   ReadOnly?: boolean;
+  /** Volume的引用 */
+  Volume?: VolumeRef | null;
+  /** VolumeTemplate 的引用以及派生规则 */
+  VolumeTemplate?: VolumeTemplateRef | null;
 }
 
 /** 挂载存储配置 */
@@ -796,6 +820,22 @@ declare interface VPCConfig {
   SubnetIds?: string[];
   /** 安全组ID列表 */
   SecurityGroupIds?: string[];
+}
+
+/** 对 Volume 的引用，其中 Name 或 Id 之一必须不为空 */
+declare interface VolumeRef {
+  /** Volume 名称；服务端在当前认证 AppId 下解析为稳定 VolumeId */
+  VolumeName?: string | null;
+  /** 稳定 Volume ID，格式 vol-xxxxxxxx */
+  VolumeId?: string | null;
+}
+
+/** 对 VolumeTemplate 的引用 */
+declare interface VolumeTemplateRef {
+  /** VolumeTemplate 名称 */
+  VolumeTemplateName: string | null;
+  /** 复用键，可为字面量或 ${metadata.xxx} */
+  ReuseKey?: string | null;
 }
 
 /** waa自定义配置项 */

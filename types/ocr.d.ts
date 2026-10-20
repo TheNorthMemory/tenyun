@@ -134,6 +134,16 @@ declare interface AirTransport {
   TaxAmount?: string;
 }
 
+/** 试题识别结果-答案元素内容 */
+declare interface AnswerElement {
+  /** 答案是否正确 */
+  IsCorrect?: boolean;
+  /** 答案分析结果 */
+  AnswerAnalysis?: string;
+  /** 返回正确答案内容 */
+  RightAnswer?: string;
+}
+
 /** 单题所有答案区域批改信息 */
 declare interface AnswerInfo {
   /** 手写答案内容，比如选择题的手写的选项、填空题的手写内容 */
@@ -664,6 +674,8 @@ declare interface Element {
   Index?: number;
   /** 元素所在页单位：页默认值：1 */
   PageIndex?: number;
+  /** 批改时答案的额外数据 */
+  AnswerElement?: AnswerElement;
 }
 
 /** 敏感数据加密 */
@@ -1678,6 +1690,8 @@ declare interface QuestionInfo {
   OrgWidth?: number;
   /** 预处理后的图片base64编码 */
   ImageBase64?: string;
+  /** 预处理后的图片URL,如果开启了图像切边矫正，后续的坐标都是基于当前图片返回的坐标 */
+  ReturnImageUrl?: string;
 }
 
 /** 定额发票 */
@@ -1886,6 +1900,12 @@ declare interface ResultList {
   Coord?: Polygon[] | null;
   /** 多坐标返回，显示坐标所在页默认值：[] */
   CoordPageIndex?: number[];
+  /** 返回正确答案内容 */
+  RightAnswer?: string;
+  /** 学科（如语文、数学、英语） */
+  Subject?: string;
+  /** 返回题目的知识点内容 */
+  KnowledgePoints?: string[];
 }
 
 /** 销货清单 */
@@ -3408,9 +3428,9 @@ declare interface BizLicenseOCRResponse {
   ComposingForm?: string;
   /** 成立日期 */
   SetDate?: string;
-  /** Code 告警码列表和释义：-9102 黑白复印件告警-9104 翻拍件告警 */
+  /** Code 告警码列表和释义：-9102 黑白复印件告警-9104 翻拍件告警-9108 经营范围识别异常告警（由于文字过小、模糊、反光、遮挡或明显倾斜等情况导致未能正常识别） */
   RecognizeWarnCode?: number[];
-  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警WARN_RESHOOT_CARD翻拍件告警 */
+  /** 告警码说明：WARN_COPY_CARD 黑白复印件告警WARN_RESHOOT_CARD翻拍件告警WARN_EARLY_STOP 经营范围识别异常告警 */
   RecognizeWarnMsg?: string[];
   /** 是否为副本。1为是，-1为不是。 */
   IsDuplication?: number;
@@ -3630,8 +3650,10 @@ declare interface DescribeQuestionMarkAgentJobResponse {
   JobStatus?: string;
   /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
   Angle?: number;
-  /** 试题批改信息 */
+  /** 试题批改信息 （该字段后续废弃，使用QuestionInfo兼容多页批改场景） */
   MarkInfos?: MarkInfo[];
+  /** 试题批改信息。 */
+  QuestionInfo?: QuestionInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4695,7 +4717,7 @@ declare interface RecognizeGeneralCardWarnRequest {
   ImageUrl?: string;
   /** 图片base64 */
   ImageBase64?: string;
-  /** 卡证类型参数，包含以下范围： General：通用卡证IDCard：身份证 Passport：护照 BankCard：银行卡VehicleLicense：行驶证DriverLicense：驾驶证BizLicense：营业执照 HmtResidentPermit：港澳台居住证ForeignPermanentResident：外国人永居证MainlandPermit：港澳台来往内地通行证SocialSecurityCard：社保卡 */
+  /** 卡证类型参数，选填，不填则默认为General，枚举值：（如输入图片的卡证类型明确，建议填入，可降低请求耗时）General：系统自动分类/其他类型IDCard：身份证Passport：护照BankCard：银行卡VehicleLicense：行驶证DriverLicense：驾驶证BizLicense：营业执照HmtResidentPermit：港澳台居住证ForeignPermanentResident：外国人永居证MainlandPermit：港澳台来往内地通行证SocialSecurityCard：社保卡 */
   CardType?: string;
   /** 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。 */
   IsPdf?: boolean;
@@ -4704,7 +4726,7 @@ declare interface RecognizeGeneralCardWarnRequest {
 }
 
 declare interface RecognizeGeneralCardWarnResponse {
-  /** 卡证类型参数，包含以下范围： General：通用卡证IDCard：身份证 Passport：护照 BankCard：银行卡VehicleLicense：行驶证DriverLicense：驾驶证BizLicense：营业执照 HmtResidentPermit：港澳台居住证ForeignPermanentResident：外国人永居证MainlandPermit：港澳台来往内地通行证SocialSecurityCard：社保卡 */
+  /** 卡证类型参数，枚举值：（如入参CardType未填或填入General，返回自动分类的卡证类型，未能分类的其他类型返回General；如入参CardType填入General以外的值，则不进行自动分类、返回相同的值）General：其他类型IDCard：身份证Passport：护照BankCard：银行卡VehicleLicense：行驶证DriverLicense：驾驶证BizLicense：营业执照HmtResidentPermit：港澳台居住证ForeignPermanentResident：外国人永居证MainlandPermit：港澳台来往内地通行证SocialSecurityCard：社保卡 */
   CardType?: string;
   /** 模糊信息 */
   Blur?: GeneralCardWarnInfo;
@@ -5217,24 +5239,26 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   ImageBase64?: string;
   /** 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg */
   ImageUrl?: string;
-  /** 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 */
+  /** 不传则默认识别整个PDF，如果识别单页则输入指定页码 */
   PdfPageNumber?: number;
   /** 表示整张试卷批改需要先切题，默认为false */
   BoolSingleQuestion?: boolean;
   /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
   EnableDeepThink?: boolean;
-  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改；当key为DisableAnswerAnalysis value为true表示不输出答案解析；当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）；参数格式：{"KnowledgePoints":true,"TrueAnswer":true} */
+  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改；当key为DisableAnswerAnalysis value为true表示不输出答案解析；当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）； */
   QuestionConfigMap?: string;
-  /** 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中 */
+  /** 【废除字段】仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中 */
   ReferenceAnswer?: string;
-  /** 批量base64图片入口，每个base64参考单独ImageBase64参数规则。当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景） */
+  /** 批量base64图片入口，每个base64参考单独ImageBase64参数规则。当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景） */
   ImageBase64List?: string[];
-  /** 批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景） */
+  /** 批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行多图同时批改逻辑（解决单题跨页场景） */
   ImageUrlList?: string[];
   /** 辅助批改类型枚举值：0： 无辅助批改，直接模型批改1： 单题文本辅助批改，配合AnswerAssistMap使用2： 整页辅助批改，待批改试卷使用ImageUrl/ImageBase64，答案部分使用ImageBase64List.N/ImageUrlList.N默认值：0 */
   AssistMarkType?: number;
   /** 单题辅助批改文本内容列表，当AssistMarkType为1时生效，用于提供题目相关的辅助文本信息。当key为ReferenceAnswer，value可以输入单题的辅助答案文本。当key为QuestionAuxStem，value可以输入单题的辅助题干。 */
   AnswerAssistMap?: string;
+  /** 是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-> ReturnImageUr中l,默认为false不开启示例值：false */
+  EnableImageCrop?: boolean;
 }
 
 declare interface SubmitQuestionMarkAgentJobResponse {
@@ -5244,7 +5268,7 @@ declare interface SubmitQuestionMarkAgentJobResponse {
   QuestionInfo?: QuestionInfo[];
   /** 题目切题数量，作为计费题目数总量 */
   QuestionCount?: string;
-  /** 客户图片url */
+  /** 废弃字段 */
   OriginalImageUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -5257,6 +5281,8 @@ declare interface SubmitQuestionSplitJobRequest {
   ImageBase64List?: string[];
   /** 选择切题模型枚举值：youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题youtu_crop_pro： 属于切题精调大模型，针对双栏、跨栏等复杂版式识别精度大幅提升，但推理耗时更长默认值：youtu_crop */
   ModelType?: string;
+  /** 是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-> ReturnImageUr中l,默认为false不开启 */
+  EnableImageCrop?: boolean;
 }
 
 declare interface SubmitQuestionSplitJobResponse {
@@ -5755,7 +5781,7 @@ declare interface Ocr {
   HandwritingEssayOCR(data?: HandwritingEssayOCRRequest, config?: AxiosRequestConfig): AxiosPromise<HandwritingEssayOCRResponse>;
   /** 身份证识别 {@link IDCardOCRRequest} {@link IDCardOCRResponse} */
   IDCardOCR(data?: IDCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<IDCardOCRResponse>;
-  /** 文本图像增强 {@link ImageEnhancementRequest} {@link ImageEnhancementResponse} */
+  /** @deprecated 文本图像增强 {@link ImageEnhancementRequest} {@link ImageEnhancementResponse} */
   ImageEnhancement(data?: ImageEnhancementRequest, config?: AxiosRequestConfig): AxiosPromise<ImageEnhancementResponse>;
   /** 车牌识别 {@link LicensePlateOCRRequest} {@link LicensePlateOCRResponse} */
   LicensePlateOCR(data?: LicensePlateOCRRequest, config?: AxiosRequestConfig): AxiosPromise<LicensePlateOCRResponse>;

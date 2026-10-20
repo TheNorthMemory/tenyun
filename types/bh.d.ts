@@ -452,6 +452,12 @@ declare interface Device {
   ProviderName?: string;
   /** 同步的云资产状态，标记同步的资产的状态情况，0-已删除,1-正常,2-已隔离,3-已过期 */
   SyncCloudDeviceStatus?: number;
+  /** 所属账号 AppId */
+  OwnerAppId?: number;
+  /** 所属账号 UIN */
+  OwnerAccountUin?: string;
+  /** 所属账号展示名 */
+  OwnerAccountName?: string;
 }
 
 /** 主机账号 */
@@ -888,6 +894,8 @@ declare interface Resource {
   DeployCvmCount?: number;
   /** 堡垒机实例的可用区信息 */
   ResourceZoneSet?: ResourceDeployZone[];
+  /** 多账号额度 */
+  OrgAccountQuota?: number;
 }
 
 /** 堡垒机实例部署的可用区 */
@@ -2283,7 +2291,7 @@ declare interface DescribeDevicesRequest {
   Kind?: number;
   /** 分页偏移位置，默认值为0 */
   Offset?: number;
-  /** 每页条目数量，默认20 */
+  /** 每页条目数量取值范围：[0, 500]默认值：20 */
   Limit?: number;
   /** 有该资产访问权限的用户ID集合 */
   AuthorizedUserIdSet?: number[];
@@ -2305,6 +2313,8 @@ declare interface DescribeDevicesRequest {
   TagFilters?: TagFilter[];
   /** 过滤数组。支持的Name：BindingStatus 绑定状态 */
   Filters?: Filter[];
+  /** 所属成员 AppId */
+  OwnerAppIds?: number[];
 }
 
 declare interface DescribeDevicesResponse {

@@ -506,6 +506,8 @@ declare interface Coefficient {
   InputVideoSecondCoefficient?: number;
   /** 输出视频每秒系数 */
   OutputVideoSecondCoefficient?: number;
+  /** 输出图片系数 */
+  OutputImageCoefficient?: number;
 }
 
 /** 峰谷计费配置 */
@@ -742,6 +744,18 @@ declare interface IdleLoadBalancer {
   Forward?: number;
   /** 负载均衡域名 */
   Domain?: string;
+}
+
+/** video配置。 */
+declare interface ImageConfig {
+  /** 模型内路由策略 */
+  RoutingStrategy?: string | null;
+  /** 路由参数 */
+  RoutingStrategyArgs?: RoutingStrategyArgs | null;
+  /** 同一模型请求重试次数 */
+  NumRetries?: number | null;
+  /** 同步超时时间取值范围：[0, 60]单位：秒 */
+  WaitSeconds?: number;
 }
 
 /** 创建Key的信息 */
@@ -1498,6 +1512,8 @@ declare interface ModelRouterDetail {
   RerankConfig?: RerankConfig | null;
   /** 决策模型设置 */
   DecisionsConfig?: DecisionsConfig;
+  /** Images 生图配置 */
+  ImageConfig?: ImageConfig;
 }
 
 /** 模型路由日志 */
@@ -2118,6 +2134,8 @@ declare interface ServiceProviderHealthCheckConfigItemInput {
   HealthCheckPath?: string;
   /** 健康检查方式。枚举值：Service： 探测服务可用性Model： 探测模型可用性 */
   HealthCheckMethod?: string;
+  /** 健康检查超时时间取值范围：[1, 60]单位：秒 */
+  HealthCheckTimeout?: number;
 }
 
 /** 健康检查配置 */
@@ -2136,6 +2154,8 @@ declare interface ServiceProviderHealthCheckConfigItemOutput {
   HealthCheckPath?: string;
   /** 健康检查方式。 */
   HealthCheckMethod?: string;
+  /** 健康检查超时时间单位：秒默认值：15 */
+  HealthCheckTimeout?: number;
 }
 
 /** 健康检查配置 */
@@ -3119,6 +3139,8 @@ declare interface CreateModelRouterRequest {
   RerankConfig?: RerankConfig;
   /** Decisions 调度配置 */
   DecisionsConfig?: DecisionsConfig;
+  /** Images 生图配置 */
+  ImageConfig?: ImageConfig;
 }
 
 declare interface CreateModelRouterResourcePackageRequest {
@@ -5013,6 +5035,8 @@ declare interface ModifyModelRouterAttributesRequest {
   RerankConfig?: RerankConfig;
   /** Decisions 调度配置 */
   DecisionsConfig?: DecisionsConfig;
+  /** Images 生图配置 */
+  ImageConfig?: ImageConfig;
 }
 
 declare interface ModifyModelRouterAttributesResponse {

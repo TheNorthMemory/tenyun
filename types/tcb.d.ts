@@ -1106,6 +1106,14 @@ declare interface LocalizedTemplate {
   ZhCN?: string | null;
   /** 英文 */
   EnUS?: string | null;
+  /** 中文主题入参限制：长度限制100字符以内，仅允许：{{.VerificationCode}}、{{.Usage}}、{{.Email}}、{{.ExpireMinutes}}、{{.ConfirmationURL}}，未知变量拒绝 */
+  SubjectZhCN?: string | null;
+  /** 英文主题入参限制：长度限制100字符以内，仅允许：{{.VerificationCode}}、{{.Usage}}、{{.Email}}、{{.ExpireMinutes}}、{{.ConfirmationURL}}，未知变量拒绝 */
+  SubjectEnUS?: string | null;
+  /** 中文发件人入参限制：长度限制50字符以内，静态纯文本，不支持变量 */
+  SenderNameZhCN?: string | null;
+  /** 英文发件人默认值：长度限制50字符以内，静态纯文本，不支持变量 */
+  SenderNameEnUS?: string | null;
 }
 
 /** CLS日志单条信息 */

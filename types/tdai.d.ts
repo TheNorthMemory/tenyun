@@ -102,6 +102,8 @@ declare interface AgentInstance {
   DeploymentFree?: boolean;
   /** agent memory 服务详情 */
   AgentMem?: AgentMemInfo;
+  /** 关联的 memory（AGM）实例ID（仅免部署实例有值） */
+  MemInstanceId?: string;
 }
 
 /** AGM 记忆服务开通信息 */
@@ -286,6 +288,8 @@ declare interface MemoryPlusInfo {
   MemoryUsage?: number;
   /** 当月积分数 */
   CreditUsage?: number;
+  /** 是否开启压缩 */
+  Compressed?: boolean;
   /** 资源标签 */
   ResourceTags?: ResourceTag[];
   /** 版本号 */
@@ -716,6 +720,8 @@ declare interface DescribeMemoryPlusSpaceResponse {
   CreditUsage?: number;
   /** Memory 实例 Credit 的最大使用数量。 */
   CreditLimit?: number;
+  /** 是否开启压缩 */
+  Compressed?: boolean;
   /** Memory 实例的内网访问地址。 */
   AccessUrl?: string;
   /** Memory 实例的外网访问地址。 */
@@ -847,6 +853,8 @@ declare interface ModifyMemoryPlusSpaceRequest {
   Name?: string;
   /** 指定修改后的实例描述。最多支持 200 个字符。 */
   Description?: string;
+  /** 是否开启压缩 */
+  Compressed?: boolean;
 }
 
 declare interface ModifyMemoryPlusSpaceResponse {

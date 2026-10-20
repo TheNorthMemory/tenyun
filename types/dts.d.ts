@@ -944,6 +944,8 @@ declare interface MigrateOption {
   MigrateWay?: string;
   /** 迁移配置阶段限速相关参数 */
   RateLimit?: RateLimit;
+  /** 跳过报错的DDL策略 */
+  SkipDdlOnError?: SkipDdlOnError;
 }
 
 /** 数据数据订阅的对象，用于修改订阅对象接口。与SubscribeObject结构类似，只是类型和参数名不同。 */
@@ -1032,6 +1034,8 @@ declare interface Options {
   FilterBeginCommit?: boolean;
   /** 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持 */
   FilterCheckpoint?: boolean;
+  /** 跳过报错的DDL策略 */
+  SkipDdlOnError?: SkipDdlOnError;
 }
 
 /** pg对象owner不一致信息 */
@@ -1164,6 +1168,14 @@ declare interface SchemaDifference {
   SrcSchema?: string;
   /** 目标库表结构 */
   DstSchema?: string;
+}
+
+/** 跳过报错DDL的策略 */
+declare interface SkipDdlOnError {
+  /** 按表名跳过，支持精确 "db.tbl"、库通配 "db.*"、表通配 ".tbl"、全通配 "" */
+  Tables?: string[];
+  /** 按 MySQL 错误码（1~65535）跳过取值范围：[1, 65535] */
+  ErrorCodes?: number[];
 }
 
 /** 跳过校验的表详情 */

@@ -436,6 +436,8 @@ declare interface RuleHealthStatusInfo {
   RuleId?: string;
   /** 目标组健康状态。 */
   TargetGroupHealthInfos?: TargetGroupHealthInfo[];
+  /** 优先级，值越小优先级越高，取值范围：1~10000。 */
+  Priority?: number;
 }
 
 /** 转发规则创建信息 */

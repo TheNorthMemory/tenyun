@@ -1720,6 +1720,24 @@ declare interface DescribeBackupDownloadRestrictionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeBackupEncryptConfigRequest {
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeBackupEncryptConfigResponse {
+  /** 备份是否加密枚举值：true： 加密false： 不加密 */
+  BackupEncrypt?: boolean;
+  /** 加密密钥类型。枚举值：0： 腾讯云托管（默认）1： 用户自定义 KMS 密钥 */
+  EncryptKeyType?: number;
+  /** KMS的密钥ID。参数格式：xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx */
+  KmsKeyId?: string;
+  /** KMS地域信息。参数格式：ap-xxxx */
+  KmsRegion?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeBackupUrlRequest {
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -2988,6 +3006,24 @@ declare interface ModifyBackupDownloadRestrictionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBackupEncryptRequest {
+  /** 实例 ID，请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 是否开启备份加密。默认值：false */
+  BackupEncrypt: boolean;
+  /** 加密密钥类型。枚举值：0： 腾讯云托管（默认）1： 用户自定义 KMS 密钥默认值：0 */
+  EncryptKeyType?: number;
+  /** KMS的密钥ID。参数格式：xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx */
+  KmsKeyId?: string;
+  /** 地域信息。参数格式：ap-xxxx取值参考：KMS支持的地域列表 */
+  KmsRegion?: string;
+}
+
+declare interface ModifyBackupEncryptResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyConnectionConfigRequest {
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -3665,6 +3701,8 @@ declare interface Redis {
   DescribeBackupDetail(data: DescribeBackupDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDetailResponse>;
   /** 查询备份文件的下载来源限制 {@link DescribeBackupDownloadRestrictionRequest} {@link DescribeBackupDownloadRestrictionResponse} */
   DescribeBackupDownloadRestriction(data?: DescribeBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupDownloadRestrictionResponse>;
+  /** 查询实例备份加密配置 {@link DescribeBackupEncryptConfigRequest} {@link DescribeBackupEncryptConfigResponse} */
+  DescribeBackupEncryptConfig(data: DescribeBackupEncryptConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupEncryptConfigResponse>;
   /** 查询备份Rdb下载地址 {@link DescribeBackupUrlRequest} {@link DescribeBackupUrlResponse} */
   DescribeBackupUrl(data: DescribeBackupUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupUrlResponse>;
   /** 查询实例带宽信息 {@link DescribeBandwidthRangeRequest} {@link DescribeBandwidthRangeResponse} */
@@ -3789,6 +3827,8 @@ declare interface Redis {
   ModifyAutoBackupConfig(data: ModifyAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoBackupConfigResponse>;
   /** 修改备份文件的下载来源限制 {@link ModifyBackupDownloadRestrictionRequest} {@link ModifyBackupDownloadRestrictionResponse} */
   ModifyBackupDownloadRestriction(data: ModifyBackupDownloadRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupDownloadRestrictionResponse>;
+  /** 更改备份加密 {@link ModifyBackupEncryptRequest} {@link ModifyBackupEncryptResponse} */
+  ModifyBackupEncrypt(data: ModifyBackupEncryptRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBackupEncryptResponse>;
   /** 修改实例连接数与带宽 {@link ModifyConnectionConfigRequest} {@link ModifyConnectionConfigResponse} */
   ModifyConnectionConfig(data: ModifyConnectionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyConnectionConfigResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */

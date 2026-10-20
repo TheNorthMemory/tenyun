@@ -8807,6 +8807,66 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** 视频深度估计任务的输入信息。 */
+  interface VideoDepthEstimationInput {
+    /** 输入视频的 URL，支持以下三种形式：以 http:// 或 https:// 开头的网络地址；vod:// 开头的点播媒体文件 ID，例如 vod://5285890815916760123；data:video/<ext>;base64, 开头的 base64 编码视频数据。 */
+    Url?: string;
+    /** 输入视频的媒体文件 ID，仅当 Url 以 vod:// 开头时有值。 */
+    FileId?: string;
+  }
+
+  /** 视频深度估计任务的输出信息。 */
+  interface VideoDepthEstimationOutput {
+    /** 输出文件的存储模式，取值：Temporary：临时存储，文件默认 7 天后删除；Permanent：永久存储，保存到点播媒资库。 */
+    StorageMode?: string;
+    /** 输出文件的媒体名称，仅 StorageMode 为 Permanent 时有值。 */
+    MediaName?: string;
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601 标准表示，详见 ISO 日期格式说明。注意：StorageMode 为 Temporary 时，该字段为文件生成时间加 7 天。 */
+    ExpireTime?: string;
+    /** 输出文件的类型，取值 mp4。 */
+    FileType?: string;
+    /** 输出文件的媒体文件 ID，仅 StorageMode 为 Permanent 时有值。 */
+    FileId?: string;
+    /** 输出文件的播放地址。 */
+    FileUrl?: string;
+    /** 输出视频的元信息。 */
+    MetaData?: MediaMetaData;
+  }
+
+  /** 视频深度估计输出存储配置。 */
+  interface VideoDepthEstimationOutputConfig {
+    /** 存储模式。可选值：Temporary（默认，产物临时存储 7 天，不返回 FileId）、Permanent（产物写入当前应用媒资库并返回 FileId）。 */
+    StorageMode?: string | null;
+    /** 输出媒资名称，仅 StorageMode 为 Permanent 时生效，不传默认为 depthVideoGenFile。 */
+    MediaName?: string | null;
+    /** 输出媒资过期时间，使用 ISO 日期格式，仅 StorageMode 为 Permanent 时生效。不传表示永不过期。 */
+    ExpireTime?: string | null;
+  }
+
+  /** 视频深度估计任务信息。 */
+  interface VideoDepthEstimationTask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+    ErrCode?: number;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 视频处理类错误码 列表。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 任务进度，取值范围 [0-100] 。 */
+    Progress?: number;
+    /** 视频深度估计任务的输入信息。 */
+    Input?: VideoDepthEstimationInput;
+    /** 视频深度估计任务的输出信息。 */
+    Output?: VideoDepthEstimationOutput;
+    /** 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+  }
+
   /** 视频配音任务输入。 */
   interface VideoDubbingAsyncInput {
     /** 输入视频Url */
@@ -12239,7 +12299,7 @@ declare namespace V20180717 {
   }
 
   interface DescribeTaskDetailResponse {
-    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；AigcAudioTask：AIGC 生音频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别AigcHunyuan3DTask：AIGC 混元 3D 任务DesignVoiceAsync：音色设计CloneVoiceAsync：音色克隆TextToSpeechAsync：语音生成VideoDubbingAsync：视频翻译配音 */
+    /** 任务类型，取值：Procedure：视频处理任务；EditMedia：视频编辑任务；SplitMedia：视频拆条任务；ComposeMedia：制作媒体文件任务；WechatPublish：微信发布任务；WechatMiniProgramPublish：微信小程序视频发布任务；PullUpload：拉取上传媒体文件任务；FastClipMedia：快速剪辑任务；RemoveWatermarkTask：智能去除水印任务；DescribeFileAttributesTask：获取文件属性任务；RebuildMedia：音画质重生任务（不推荐使用）；ReviewAudioVideo：音视频审核任务；ExtractTraceWatermark：提取溯源水印任务；ExtractCopyRightWatermark：提取版权水印任务；QualityInspect：音画质检测任务；QualityEnhance：音画质重生任务；ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；ProcessMediaByMPS：MPS 视频处理任务；AigcImageTask：AIGC 生图任务；SceneAigcImageTask：场景化 AIGC 生图任务；AigcVideoTask：AIGC 生视频任务；AigcAudioTask：AIGC 生音频任务；ImportMediaKnowledge：导入媒体知识任务。SceneAigcVideoTask：场景化 AIGC 生视频任务； ExtractBlindWatermark：提取数字水印任务。 ExtractBlindWatermark：提取数字水印任务。 CreateAigcAdvancedCustomElement：创建自定义主体任务CreateAigcCustomVoice：创建自定义音色任务CreateAigcSubject：创建主体任务AigcVideoRedrawTask：AIGC 视频转绘任务CreateAigcAudioClone：AIGC 声音复刻任务DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务WandAsrTask：WAND 语音识别AigcHunyuan3DTask：AIGC 混元 3D 任务DesignVoiceAsync：音色设计CloneVoiceAsync：音色克隆TextToSpeechAsync：语音生成VideoDubbingAsync：视频翻译配音VideoDepthEstimation: 视频深度估计任务 */
     TaskType?: string;
     /** 任务状态，取值：WAITING：等待中；PROCESSING：处理中；FINISH：已完成；ABORTED：已终止。 */
     Status?: string;
@@ -12333,6 +12393,8 @@ declare namespace V20180717 {
     TextToSpeechAsyncTask?: TextToSpeechAsyncTask;
     /** 视频翻译配音，仅当 TaskType 为VideoDubbingAsync，该字段有值。 */
     VideoDubbingAsyncTask?: VideoDubbingAsyncTask;
+    /** 视频深度估算任务，仅当 TaskType 为VideoDepthEstimation，该字段有值。 */
+    VideoDepthEstimationTask?: VideoDepthEstimationTask;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -14527,6 +14589,30 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface VideoDepthEstimationRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId?: number;
+    /** 输入视频地址，必填。支持三种形态，按前缀自动识别：vod://{FileId} —— 引用当前账号下的 VOD 媒资。要求媒资存在且未处于禁用状态，否则将报参数错误。源文件不受影响。http(s)://... —— 公网可下载的视频地址，长度不超过 8182 字符。data:{mime};base64,{payload} —— Base64 内联媒体，适合小体积素材。解码后大小上限 20 MB，mime 须为视频容器类型（如 video/mp4、video/quicktime）。 */
+    Url?: string;
+    /** 输出存储配置。不传时为临时存储。 */
+    OutputConfig?: VideoDepthEstimationOutputConfig;
+    /** 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。 */
+    SessionId?: string;
+    /** 来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。 */
+    SessionContext?: string;
+    /** 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。 */
+    TasksPriority?: number;
+    /** 保留字段，特殊用途时使用。 */
+    ExtInfo?: string;
+  }
+
+  interface VideoDepthEstimationResponse {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface WeChatMiniProgramPublishRequest {
     /** 媒体文件 ID。 */
     FileId: string;
@@ -15039,6 +15125,8 @@ declare interface Vod {
   UpdateVoice(data: V20180717.UpdateVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateVoiceResponse>;
   /** 验证域名解析 {@link V20180717.VerifyDomainRecordRequest} {@link V20180717.VerifyDomainRecordResponse} */
   VerifyDomainRecord(data: V20180717.VerifyDomainRecordRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.VerifyDomainRecordResponse>;
+  /** 视频深度估计 {@link V20180717.VideoDepthEstimationRequest} {@link V20180717.VideoDepthEstimationResponse} */
+  VideoDepthEstimation(data: V20180717.VideoDepthEstimationRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.VideoDepthEstimationResponse>;
   /** 微信小程序视频发布 {@link V20180717.WeChatMiniProgramPublishRequest} {@link V20180717.WeChatMiniProgramPublishResponse} */
   WeChatMiniProgramPublish(data: V20180717.WeChatMiniProgramPublishRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.WeChatMiniProgramPublishResponse>;
 }

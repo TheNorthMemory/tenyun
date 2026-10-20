@@ -2594,6 +2594,34 @@ declare interface DescribeFOOMReportListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFileCertificateRequest {
+  /** 超时时间，不填默认是 5 分钟 */
+  Timeout?: number;
+  /** bucket类型，不填默认1:web，2:app */
+  FileType?: number;
+  /** ProjectID */
+  ID?: number;
+  /** reigon对应的id */
+  RegionID?: number;
+}
+
+declare interface DescribeFileCertificateResponse {
+  /** 临时密钥key */
+  SecretKey?: string;
+  /** 临时密钥 id */
+  SecretID?: string;
+  /** 临时密钥临时 token */
+  SessionToken?: string;
+  /** 开始时间戳 */
+  StartTime?: number;
+  /** 过期时间戳 */
+  ExpiredTime?: number;
+  /** 桶地址 */
+  BucketAddress?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeIssuesDistributionRequest {
   /** 产品Id */
   ProductId?: string;
@@ -3567,6 +3595,8 @@ declare interface Rum {
   DescribeFOOMProblemList(data: DescribeFOOMProblemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMProblemListResponse>;
   /** 【融合版】获取FOOM个例列表 {@link DescribeFOOMReportListRequest} {@link DescribeFOOMReportListResponse} */
   DescribeFOOMReportList(data: DescribeFOOMReportListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFOOMReportListResponse>;
+  /** 获取cos鉴权 {@link DescribeFileCertificateRequest} {@link DescribeFileCertificateResponse} */
+  DescribeFileCertificate(data?: DescribeFileCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileCertificateResponse>;
   /** 【融合版】获取问题指定维度下的分布数据 {@link DescribeIssuesDistributionRequest} {@link DescribeIssuesDistributionResponse} */
   DescribeIssuesDistribution(data?: DescribeIssuesDistributionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIssuesDistributionResponse>;
   /** 【融合版】获取问题列表数据 {@link DescribeIssuesListRequest} {@link DescribeIssuesListResponse} */

@@ -572,6 +572,14 @@ declare interface CheckItem {
 
 /** 集群实例信息 */
 declare interface ClusterInstanceDetail {
+  /** 用户Uin */
+  Uin?: string;
+  /** 用户AppId */
+  AppId?: number;
+  /** 集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
   /** 实例ID */
   InstanceId?: string;
   /** 实例名称 */
@@ -584,6 +592,14 @@ declare interface ClusterInstanceDetail {
   InstanceStatusDesc?: string;
   /** cpu核数 */
   InstanceCpu?: number;
+  /** Cpu单位：核 */
+  Cpu?: number;
+  /** serverless实例cpu下限单位：核 */
+  MinCpu?: number;
+  /** serverless实例cpu上限单位：核 */
+  MaxCpu?: number;
+  /** 内存单位：GB */
+  Memory?: number;
   /** 内存 */
   InstanceMemory?: number;
   /** 硬盘 */
@@ -596,8 +612,6 @@ declare interface ClusterInstanceDetail {
   MaintainDuration?: number;
   /** 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"] */
   MaintainWeekDays?: string[];
-  /** serverless实例子状态 */
-  ServerlessStatus?: string;
   /** 实例任务信息 */
   InstanceTasks?: ObjectTask[];
   /** 实例机器类型common，通用型。exclusive，独享型。 */
@@ -608,8 +622,82 @@ declare interface ClusterInstanceDetail {
   DbMode?: string;
   /** 节点列表说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
   NodeList?: string[];
+  /** serverless实例子状态 */
+  ServerlessStatus?: string;
   /** AI优化器状态 */
   AIOptimizerStatus?: AIOptimizerStatus;
+  /** 项目ID */
+  ProjectId?: number;
+  /** 地域 */
+  Region?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** 实例所在的物理可用区 */
+  PhysicalZone?: string;
+  /** 实例状态枚举值：creating： 创建中running： 运行中isolating： 隔离中isolated： 已隔离activating： 恢复中offlining： 下线中offlined： 已下线 */
+  Status?: string;
+  /** 实例状态中文描述 */
+  StatusDesc?: string;
+  /** 数据库类型 */
+  DbType?: string;
+  /** 数据库版本 */
+  DbVersion?: string;
+  /** 存储量单位：GB */
+  Storage?: number;
+  /** 预付费存储Id */
+  StorageId?: string;
+  /** 存储付费类型枚举值：0： 后付费1： 预付费 */
+  StoragePayMode?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 隔离时间 */
+  IsolateTime?: string;
+  /** 实例销毁时间 */
+  DestroyTime?: string;
+  /** 销毁期限 */
+  DestroyDeadlineText?: string;
+  /** 实例过期时间 */
+  PeriodEndTime?: string;
+  /** VPC网络ID */
+  VpcId?: string;
+  /** 子网ID */
+  SubnetId?: string;
+  /** 实例内网IP */
+  Vip?: string;
+  /** 实例内网端口 */
+  Vport?: number;
+  /** 网络类型 */
+  NetType?: number;
+  /** 外网IP */
+  WanIP?: string;
+  /** 外网端口 */
+  WanPort?: number;
+  /** 外网开启状态 */
+  WanStatus?: string;
+  /** 实例外网域名 */
+  WanDomain?: string;
+  /** 实例的网络信息 */
+  InstanceNetInfo?: InstanceNetInfo[];
+  /** 付费模式枚举值：0： 后付费1： 预付费 */
+  PayMode?: number;
+  /** 正在处理的任务 */
+  ProcessingTask?: string;
+  /** 续费标志 */
+  RenewFlag?: number;
+  /** 任务 */
+  Tasks?: ObjectTask[];
+  /** 是否冻结 */
+  IsFreeze?: string;
+  /** 资源标签 */
+  ResourceTags?: Tag[] | null;
+  /** 当前实例支持的能力 */
+  InstanceAbility?: InstanceAbility;
+  /** 实例机器类型枚举值：common： 通用型exclusive： 独享型 */
+  DeviceType?: string;
+  /** 全球数据库唯一标识 */
+  GdnId?: string;
 }
 
 /** 参数修改记录 */
@@ -2762,6 +2850,8 @@ declare interface ProxyGroupRwInfo {
   ApQueryToOtherNode?: boolean;
   /** 自动负载枚举值：static： 静态负载dynamic： 动态负载 */
   LoadBalanceMode?: string;
+  /** 是否开启事务全拆分。在一个事务中将事务写前和写后的读拆分到不同的实例上去执行。 */
+  TransAllSplit?: boolean;
 }
 
 /** 数据库代理，读写分离实例权重 */
@@ -4445,6 +4535,8 @@ declare interface CreateProxyEndPointRequest {
   InstanceWeights?: ProxyInstanceWeight[];
   /** 负载均衡模式枚举值：static： 静态负载dynamic： 动态负载 */
   LoadBalanceMode?: string;
+  /** 是否开启事务全拆分。在一个事务中将事务写前和写后的读拆分到不同的实例上去执行。 */
+  TransAllSplit?: boolean;
 }
 
 declare interface CreateProxyEndPointResponse {
@@ -7595,6 +7687,8 @@ declare interface ModifyProxyRwSplitRequest {
   ApQueryToOtherNode?: boolean;
   /** 负载均衡模式枚举值：static： 静态负载dynamic： 动态负载 */
   LoadBalanceMode?: string;
+  /** 是否开启事务全拆分。在一个事务中将事务写前和写后的读拆分到不同的实例上去执行。 */
+  TransAllSplit?: boolean;
 }
 
 declare interface ModifyProxyRwSplitResponse {

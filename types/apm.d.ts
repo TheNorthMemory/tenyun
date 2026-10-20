@@ -182,6 +182,10 @@ declare interface ApmAppConfig {
   CrossAccountStatus?: number;
   /** 跨账号关联ID */
   CrossAccountPeerId?: string;
+  /** 自定义 Span 状态配置 */
+  SpanStatusConfig?: SpanStatusConfig;
+  /** 应用级自定义 Span 状态开关 */
+  EnableSpanStatusConfig?: boolean;
 }
 
 /** 应用相关的配置列表项 */
@@ -446,6 +450,8 @@ declare interface ApmInstanceDetail {
   CrossAccountPeerId?: string;
   /** 开启Token展示安全保护单位：是、否 */
   TokenDisplayProtection?: number;
+  /** 自定义 Span 状态配置 */
+  SpanStatusConfig?: SpanStatusConfig;
 }
 
 /** 指标列表单元 */
@@ -574,6 +580,14 @@ declare interface ErrorSpan {
   SpanID?: string;
   /** 异常信息 */
   ErrorMessage?: string;
+}
+
+/** 具体单个配置 */
+declare interface ErrorSpanConf {
+  /** 错误类型匹配规则列表 */
+  ErrorObjectPatterns?: string[] | null;
+  /** 错误码匹配规则列表 */
+  ErrorCodes?: string[] | null;
 }
 
 /** 查询过滤参数 */
@@ -784,6 +798,14 @@ declare interface SpanReference {
   SpanID: string;
   /** Trace ID */
   TraceID: string;
+}
+
+/** https://iwiki.woa.com/p/4035597532自定义 Span 状态 */
+declare interface SpanStatusConfig {
+  /** 标记为错误规则组 */
+  MarkAsError?: ErrorSpanConf | null;
+  /** 标记为正常规则组 */
+  MarkAsOk?: ErrorSpanConf | null;
 }
 
 /** 标签 */
@@ -1779,6 +1801,10 @@ declare interface ModifyApmApplicationConfigRequest {
   CrossAccountStatus?: number;
   /** 跨账号关联ID */
   CrossAccountPeerId?: string;
+  /** 应用级自定义 Span 状态开关 */
+  EnableSpanStatusConfig?: boolean;
+  /** 自定义 Span 状态配置 */
+  SpanStatusConfig?: SpanStatusConfig;
 }
 
 declare interface ModifyApmApplicationConfigResponse {
@@ -1907,6 +1933,8 @@ declare interface ModifyApmInstanceRequest {
   CrossAccountPeerId?: string;
   /** 是否开启Token 展示安全保护单位：0：不开启，1：开启默认值：0 */
   TokenDisplayProtection?: number;
+  /** 自定义 Span 状态配置 */
+  SpanStatusConfig?: SpanStatusConfig;
 }
 
 declare interface ModifyApmInstanceResponse {

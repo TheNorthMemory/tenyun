@@ -1846,6 +1846,8 @@ declare interface BaselineAggregatedPolicy {
   CheckAssetType?: string;
   /** 该基线类别是否被扫描过 */
   Scanned?: boolean;
+  /** 自定义策略情况下策略的appid */
+  AppID?: number;
 }
 
 /** 基线分类基础信息，覆盖父分类与子分类两层。 */
@@ -2030,6 +2032,8 @@ declare interface BaselineMainTask {
   ScanFailedCount?: number;
   /** 子任务总数 */
   ScanTotalCount?: number;
+  /** 检测的策略列表 */
+  PolicyList?: BaselinePolicyBrief[];
 }
 
 /** 基线概览页头部的统计指标。 */
@@ -2094,6 +2098,16 @@ declare interface BaselinePolicy {
   TagIDList?: number[];
   /** 云标签列表 */
   CloudTagList?: string[];
+}
+
+/** 基线策略简要信息 */
+declare interface BaselinePolicyBrief {
+  /** 基线策略 ID。 */
+  ID?: number;
+  /** 基线策略名称。 */
+  PolicyName?: string;
+  /** 是否为系统内置策略。true 是，false 否（用户自定义策略）。 */
+  IsSystem?: boolean;
 }
 
 /** 子分类维度的检测项命中配置。 */
@@ -5160,6 +5174,8 @@ declare interface DspmDbAsset {
   TotalAuditLogs?: number;
   /** 日志审计禁止开通的原因，可选值：VersionNotSupportLogSubscription, InstanceIsUpgrading, CdbRuleAuditEnabled, AssetNotExists */
   LogDeliveryDisableReason?: string;
+  /** 日志审计禁止开通时的详细说明 */
+  LogDeliveryDisableMessage?: string;
   /** 在线日志的起始时间戳，精确到秒 */
   OldestOnlineLogTimestamp?: number;
   /** 在线日志的最新时间戳，精确到秒 */
@@ -5178,6 +5194,8 @@ declare interface DspmDbAsset {
   ClusterId?: string | null;
   /** 集群名 */
   ClusterName?: string | null;
+  /** 数据库版本 */
+  DbVersion?: string;
 }
 
 /** 数据库资产Id信息 */
@@ -5634,6 +5652,10 @@ declare interface DspmRiskCount {
   NumOfNewAlarmEvent?: number;
   /** 新增配置风险 */
   NumOfNewConfigRisk?: number;
+  /** 账号风险条数 */
+  AccountRisk?: number;
+  /** 配置风险条数 */
+  ConfigRisk?: number;
 }
 
 /** Dspm 风险策略 */
@@ -5970,6 +5992,8 @@ declare interface EDRRule {
   ConditionMatches?: ConditionMatch[];
   /** 安全中心标签 */
   TagItems?: EDRRuleTagItem[];
+  /** 文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或） */
+  FileOperationRules?: RuleContentFileOperation;
 }
 
 /** 安全中心标签 */
@@ -8048,6 +8072,8 @@ declare interface LicenseStatusItem {
   BeginTime?: string;
   /** 最晚到期时间（格式：2006-01-02 15:04:05） */
   EndTime?: string;
+  /** 订单类型枚举值：PURCHASED： 正式订单TRIAL： 试用订单 */
+  OrderType?: string;
 }
 
 /** 解绑失败明细 */
@@ -8927,11 +8953,13 @@ declare interface OrderDetail {
 /** 订单配额信息 */
 declare interface OrderQuotaInfo {
   /** 配额键 */
-  QuotaKey?: string | null;
+  QuotaKey?: string;
   /** 配额总量 */
-  QuotaNum?: number | null;
-  /** 配额已使用量 */
-  QuotaUsed?: number | null;
+  QuotaNum?: number;
+  /** 配额已使用量（含共享给其他账号的消耗）。仅请求参数 NeedQuotaUsed 为 true 时采集；未传或为 false 时恒为 0；用量查询失败时恒为 0，错误提示见响应 QuotaUsedError 字段 */
+  QuotaUsed?: number;
+  /** 赠送配额。仅 CSPM 存在赠送额度，其余计费项为 0 */
+  QuotaGranted?: number;
 }
 
 /** 集团账号详情 */
@@ -9034,7 +9062,7 @@ declare interface OrganizationUserInfo {
   IsExpired?: boolean;
   /** 多云账户 权限列表 */
   PermissionList?: string[];
-  /** 1 */
+  /** 账户权限类型枚举值：1： 认证类型-Root账号AKSK2： 认证类型-子账号AKSK3： 认证类型-角色 */
   AuthType?: number;
   /** 0 腾讯云集团账户1 腾讯云接入账户2 非腾讯云 */
   TcMemberType?: number;
@@ -9042,6 +9070,10 @@ declare interface OrganizationUserInfo {
   SubUserCount?: number;
   /** 加入方式详细信息 */
   JoinTypeInfo?: string;
+  /** 被共享模块列表枚举值：AKSK： 云API异常监测SDL： 日志分析CSPM： 云安全态势管理CWP： 主机安全COS_AUDIT： COS审计IMAGE_SCAN： 容器镜像扫描SKILL_SCAN： Skill安全检测SKILL_SCAN_POST： Skill安全检测(后付费)DSPM： 数据安全态势管理默认值：[] */
+  SharedModules?: string[];
+  /** 安全分 */
+  SecurityScore?: number;
 }
 
 /** 操作系统信息 */
@@ -9648,6 +9680,18 @@ declare interface RuleContentCmdLine {
   ParentProcess?: RuleContentProcessInfo;
   /** 祖先进程命令行信息 */
   AncestorProcess?: RuleContentProcessInfo;
+}
+
+/** EDR文件操作规则（ContentType=file_operation，高危命令聚合降噪新增） */
+declare interface RuleContentFileOperation {
+  /** 当前进程命令行信息（可选，未配置时该维度不参与匹配） */
+  Process?: RuleContentProcessInfo;
+  /** 父进程命令行信息（可选，未配置时该维度不参与匹配） */
+  ParentProcess?: RuleContentProcessInfo;
+  /** 目标文件路径（正则） */
+  FilePath?: string;
+  /** 动作列表（多选为或关系）：read-读 write-写 rename-重命名 delete-删除 truncate-清空内容 */
+  FileActions?: string[];
 }
 
 /** EDR命令行规则单规则 */
@@ -11132,6 +11176,10 @@ declare interface UserDspmInfo {
   IsIsolating?: boolean;
   /** 是否正在数据清理 */
   IsDataCleaning?: boolean;
+  /** 集团账号角色（member-普通成员/admin-管理员/delegatedAdmin-委派管理员），非集团账号为空 */
+  Role?: string;
+  /** 所属部门名称，未分配部门或非集团账号为空 */
+  NodeName?: string;
 }
 
 /** 用户信息 */
@@ -12056,6 +12104,8 @@ declare interface WebhookNotifyItem {
   Levels?: string[];
   /** 处理状态等 */
   Items?: string[];
+  /** 可选项 */
+  Options?: string[];
 }
 
 /** 通知策略完整信息 */
@@ -16632,6 +16682,10 @@ declare interface DescribeCLSLogListV3Response {
 }
 
 declare interface DescribeCSCPayInfoRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 是否返回配额已使用量。默认为 false：不采集用量，QuotaList 中的 QuotaUsed 恒为 0；需要展示已用量的调用方显式传 true。只关心订单状态、到期时间或配额购买数量的调用方无需传入 */
+  NeedQuotaUsed?: boolean;
 }
 
 declare interface DescribeCSCPayInfoResponse {
@@ -16663,6 +16717,8 @@ declare interface DescribeCSCPayInfoResponse {
   NewUser?: number;
   /** 用户计费信息，Key为L4 */
   QuotaList?: OrderQuotaInfo[];
+  /** 配额用量查询失败提示。仅请求参数 NeedQuotaUsed 为 true 时可能非空：此时订单信息仍正常返回，QuotaList 中的 QuotaUsed 恒为 0；查询正常或未请求用量时为空字符串 */
+  QuotaUsedError?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -19902,6 +19958,8 @@ declare interface DescribeEDRRuleListRequest {
   Order?: string;
   /** 可选排序列: [ModifyTime] */
   By?: string;
+  /** 文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或） */
+  FileOperationRules?: RuleContentFileOperation;
 }
 
 declare interface DescribeEDRRuleListResponse {
@@ -24092,6 +24150,8 @@ declare interface ExportEDRRulesRequest {
   Order?: string;
   /** 排序列，ModifyTime */
   By?: string;
+  /** 文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或） */
+  FileOperationRules?: RuleContentFileOperation;
 }
 
 declare interface ExportEDRRulesResponse {
@@ -25270,6 +25330,8 @@ declare interface ModifyEDRRuleRequest {
   ImageIDsWithAppId?: ImageIDWithAppIdItem[];
   /** 容器条件匹配 */
   ConditionMatches?: ConditionMatch[];
+  /** 文件操作规则，ContentType=file_operation 时填充（文件路径正则 AND 动作多选或） */
+  FileOperationRules?: RuleContentFileOperation;
 }
 
 declare interface ModifyEDRRuleResponse {

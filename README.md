@@ -113,14 +113,14 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，16266+ 服务数</summary>
+<details><summary>共计 263+ 款产品，16272+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
 aai |  | 2018-05-22(4) |
 aca | [AI 临床助手](https://cloud.tencent.com/document/product/1388) | 2021-03-23(8) |
 acp | [应用合规平台](https://cloud.tencent.com/document/product/1553) | 2022-01-05(8) |
-adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(131) |
+adp | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2026-05-20(133) |
 advisor | [智能顾问](https://cloud.tencent.com/document/product/1264) | 2020-07-21(3) |
 af | [借贷反欺诈](https://cloud.tencent.com/document/product/668) | 2020-02-26(3) |
 afc | [定制建模](https://cloud.tencent.com/document/product/1029) | 2020-02-26(3) |
@@ -165,7 +165,7 @@ cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(1
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(61) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(84) |
 cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(179) |
-cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(23) |
+cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(24) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(52+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(10) |
 cdwch | [腾讯云数据仓库TCHouse-C](https://cloud.tencent.com/document/product/1299) | 2020-09-15(31) |
@@ -175,7 +175,7 @@ cdz | [专属可用区](https://cloud.tencent.com/document/product/1629) | 2022-
 cetcd | [云原生etcd](https://cloud.tencent.com/document/product/1577) | 2022-03-25(20) |
 cfg | [智能顾问-混沌演练](https://cloud.tencent.com/document/product/1500) | 2021-08-20(17) |
 cfs | [文件存储](https://cloud.tencent.com/document/product/582) | 2019-07-19(64) |
-cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(167) |
+cfw | [云防火墙](https://cloud.tencent.com/document/product/1132) | 2019-09-04(168) |
 chc | [云托付物理服务器](https://cloud.tencent.com/document/product/1448) | 2023-04-18(41) |
 chdfs | [云 HDFS](https://cloud.tencent.com/document/product/1105) | 2020-11-12(37) | 2019-07-18(26) |
 ciam | [账号风控平台](https://cloud.tencent.com/document/product/1441) | 2022-03-31(23) |
@@ -209,7 +209,7 @@ dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/pr
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
 databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(62) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(96) | 2019-10-16(28) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(97) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
@@ -237,7 +237,7 @@ facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 20
 faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(37) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
-fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-06-11(44) |
+fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-06-11(45) |
 ga2 | [全球加速](https://cloud.tencent.com/document/product/1817) | 2025-01-15(44) |
 gaap | [全球应用加速](https://cloud.tencent.com/document/product/608) | 2018-05-29(102) |
 gme | [游戏多媒体引擎](https://cloud.tencent.com/document/product/607) | 2018-07-11(39) |
@@ -260,7 +260,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(51) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(262) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(255) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
@@ -300,9 +300,9 @@ postgres | [云数据库 PostgreSQL](https://cloud.tencent.com/document/product/
 privatedns | [私有域解析 Private DNS](https://cloud.tencent.com/document/product/1338) | 2020-10-28(40) |
 pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(48) |
 rce | [风险识别 RCE](https://cloud.tencent.com/document/product/1343) | 2026-01-30(5) | 2025-04-25(1)<br/>2020-11-03(11) |
-redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(122) |
+redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(124) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(90) |
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(91) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
 securitylake | [安全湖](https://cloud.tencent.com/document/product/1720) | 2024-01-17(1) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(36) |
@@ -341,7 +341,7 @@ teo | [边缘安全加速平台](https://cloud.tencent.com/document/product/1552
 thpc | [高性能计算平台](https://cloud.tencent.com/document/product/1527) | 2023-03-21(52) | 2022-04-01(16)<br/>2021-11-09(4) |
 tia | [智能钛机器学习](https://cloud.tencent.com/document/product/851) | 2018-02-26(10) |
 tiia | [图像分析](https://cloud.tencent.com/document/product/865) | 2019-05-29(21) |
-tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(76) | 2019-10-22(22) |
+tione | [TI-ONE 训练平台](https://cloud.tencent.com/document/product/851) | 2021-11-11(77) | 2019-10-22(22) |
 tiw | [互动白板](https://cloud.tencent.com/document/product/1137) | 2019-09-19(35) |
 tke | [容器服务](https://cloud.tencent.com/document/product/457) | 2022-05-01(24) | 2018-05-25(272) |
 tkgdq | [腾讯知识图谱数据查询](https://cloud.tencent.com/document/product/1072) | 2019-04-11(3) |
@@ -365,11 +365,11 @@ vcube | [音视频终端引擎](https://cloud.tencent.com/document/product/1449)
 vdb | [向量数据库](https://cloud.tencent.com/document/product/1709) | 2023-06-16(17) |
 vm | [视频内容安全](https://cloud.tencent.com/document/product/1265) | 2021-09-22(4) | 2020-12-29(4)<br/>2020-07-09(5) |
 vms | [语音消息](https://cloud.tencent.com/document/product/1128) | 2020-09-02(2) |
-vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7) | 2018-07-17(240) |
+vod | [云点播](https://cloud.tencent.com/document/product/266) | 2024-07-18(7) | 2018-07-17(241) |
 vpc | [私有网络](https://cloud.tencent.com/document/product/215) | 2017-03-12(448) |
 vrs | [声音复刻](https://cloud.tencent.com/document/product/1283) | 2020-08-24(8) |
 vtc | [视频转译](https://cloud.tencent.com/document/product/1769) | 2024-02-23(3) |
-waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(240) |
+waf | [Web 应用防火墙](https://cloud.tencent.com/document/product/627) | 2018-01-25(242) |
 wav | [企业微信汽车行业版](https://cloud.tencent.com/document/product/1318) | 2021-01-29(26) |
 wedata | [数据开发治理平台 WeData](https://cloud.tencent.com/document/product/1267) | 2025-08-06(183) | 2021-08-20(309) |
 weilingwith | [微瓴同业开放平台](https://cloud.tencent.com/document/product/1693) | 2023-04-27(63) |

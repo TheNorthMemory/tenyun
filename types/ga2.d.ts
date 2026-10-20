@@ -184,7 +184,7 @@ declare interface EndpointGroupConfigurationSet {
 declare interface Filter {
   /** 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。 */
   Name: string;
-  /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。当值类型为布尔类型时，可直接取值为字符串"TRUE"或 "FALSE"。 */
+  /** 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。 */
   Values: string[];
 }
 
@@ -633,7 +633,7 @@ declare interface CreateListenerRequest {
   Protocol?: string;
   /** 连接空闲等待时间。1、HTTP/HTTPS监听器，默认值为15，支持范围为1-60；2、TCP监听器，默认值为900，支持范围为10-900；3、UDP监听器，默认值为20，支持范围为10-20； */
   IdleTimeout?: number;
-  /** 四层获取源IP方式，支持'TOA', 'ProxyProtocol', 'ProxyProtocolV2'。需要开启四层获取源IP方式，才填写此参数。 */
+  /** 四层获取源IP方式。枚举值：TOA： TOAProxyProtocol： ProxyProtocolProxyProtocolV2： ProxyProtocolV2需要开启四层获取源IP方式，才填写此参数。 */
   GetRealIpType?: string;
   /** 是否开启会话保持。支持配置'Open', 'Close'。枚举值：Open： 开启。Close： 关闭。仅支持4层监听器 ，7层不支持修改 */
   ClientAffinity?: string;
@@ -713,7 +713,7 @@ declare interface DeleteForwardingRuleRequest {
   GlobalAcceleratorId: string;
   /** 监听器ID。 */
   ListenerId: string;
-  /** 策略ID。 */
+  /** 七层转发策略ID。 */
   ForwardingPolicyId: string;
   /** 七层转发规则ID。 */
   ForwardingRuleId: string;
@@ -729,7 +729,7 @@ declare interface DeleteForwardingRuleResponse {
 declare interface DeleteGlobalAcceleratorAccessLogRequest {
   /** 日志唯一Id */
   LogPushTaskId: string;
-  /** GA实例唯一Id */
+  /** 全球加速实例ID */
   GlobalAcceleratorId: string;
 }
 
@@ -755,9 +755,9 @@ declare interface DeleteGlobalAcceleratorAclPolicyResponse {
 declare interface DeleteGlobalAcceleratorAclRuleRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
-  /** 安全策略ID */
+  /** 访问控制策略ID */
   GlobalAcceleratorAclPolicyId: string;
-  /** Acl规则ID。 */
+  /** 访问规则ID */
   GlobalAcceleratorAclRuleIds: string[];
 }
 
@@ -879,7 +879,7 @@ declare interface DescribeEndpointGroupsRequest {
   Offset?: number;
   /** 返回数量，默认为10，最大值为10。 */
   Limit?: number;
-  /** 过滤条件。 endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。 */
+  /** 过滤条件。 endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。listener-id- String -（过滤条件）监听器实例ID。endpoint-group-name- String -（过滤条件）终端节点组名称。 */
   Filters?: Filter[];
 }
 
@@ -1001,7 +1001,7 @@ declare interface DescribeGlobalAcceleratorsRequest {
   Offset?: number;
   /** 返回数量。取值范围：[1, 200]默认值：20 */
   Limit?: number;
-  /** 过滤条件。global-accelerator-id - String -（过滤条件）全球加速实例ID。 global-accelerator-state - String -（过滤条件）全球加速实例状态。 */
+  /** 过滤条件。global-accelerator-id - String -（过滤条件）全球加速实例ID。 global-accelerator-state - String -（过滤条件）全球加速实例状态。global-accelerator-name - String -（过滤条件）全球加速实例名称。 */
   Filters?: Filter[];
 }
 
@@ -1065,7 +1065,7 @@ declare interface ModifyAccessLogStatusRequest {
   LogPushTaskId: string;
   /** 状态（启动START， 停止STOP）枚举值：START： 启动STOP： 停止 */
   Status: string;
-  /** GA实例唯一Id */
+  /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
 }
 

@@ -276,6 +276,10 @@ declare interface EdgeAclRuleResp {
   UpdateTime?: string;
   /** 域名数 */
   DnsParseCnt?: number;
+  /** 命中次数。该规则在所有已下发成员账号下的累计命中次数合计，直接采用云防火墙返回值，不做时间窗口换算；从未命中时为 0 */
+  HitCount?: number;
+  /** 最近命中时间。取该规则在所有已下发成员账号中最新的命中时间；从未命中时为 "-" */
+  LastHitTime?: string;
 }
 
 /** 成员信息 */
@@ -390,6 +394,10 @@ declare interface NatAclRuleResp {
   UpdateTime?: string | null;
   /** 域名数 */
   DnsParseCnt?: number;
+  /** 命中次数。该规则在所有已下发成员账号下的累计命中次数合计，直接采用云防火墙返回值，不做时间窗口换算；从未命中时为 0 */
+  HitCount?: number;
+  /** 最近命中时间。取该规则在所有已下发成员账号中最新的命中时间；从未命中时为 "-" */
+  LastHitTime?: string;
 }
 
 /** 集团成员信息 */
@@ -464,6 +472,8 @@ declare interface OrganSummary {
   ManagedProductCount?: number;
   /** 纳管账号数 */
   CfwManageCount?: number;
+  /** 规格共享总配额 */
+  FwmShareUserQuota?: number;
 }
 
 /** 策略风险 */
@@ -603,7 +613,7 @@ declare interface SecGroupRuleResp {
   /** 规则id 等同RuleUuid */
   Id?: number;
   /** 域名解析的IP统计 */
-  DnsParseCount?: SgDnsParseCount;
+  DnsParseCount?: SgDnsParseCount | null;
   /** 规则生效范围 */
   Scope?: string;
   /** 规则最近一次是否有改动 取值范围：0/1 0:否 1:是 */
@@ -862,6 +872,10 @@ declare interface VpcAclRuleResp {
   DnsParseCnt?: number;
   /** 防火墙组名称 */
   FwGroupName?: string;
+  /** 命中次数。该规则在所有已下发成员账号下的累计命中次数合计，直接采用云防火墙返回值，不做时间窗口换算；从未命中时为 0 */
+  HitCount?: number;
+  /** 最近命中时间。取该规则在所有已下发成员账号中最新的命中时间；从未命中时为 "-" */
+  LastHitTime?: string;
 }
 
 declare interface CancelIgnorePolicyRiskRequest {
@@ -914,6 +928,8 @@ declare interface CreateEdgeAclRuleRequest {
 }
 
 declare interface CreateEdgeAclRuleResponse {
+  /** 规则Id列表 */
+  RuleIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -942,6 +958,22 @@ declare interface CreateNatAclRuleRequest {
 }
 
 declare interface CreateNatAclRuleResponse {
+  /** 规则Id列表 */
+  RuleIds?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateRuleGroupRequest {
+  /** 规则组名称，不可为空，最长50字符（按字符数计，中文按1个字符计） */
+  GroupName?: string;
+  /** 规则组归属产品。enterprise_sg-企业安全组，cfw_vpc_acl-VPC边界防火墙，cfw_nat_acl-NAT边界防火墙，cfw_edge_acl-互联网边界防火墙。必填，不接受 all */
+  Product?: string;
+}
+
+declare interface CreateRuleGroupResponse {
+  /** 创建成功的规则组唯一标识，fwmrg- 前缀 */
+  GroupId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -970,6 +1002,8 @@ declare interface CreateSecurityGroupRuleRequest {
 }
 
 declare interface CreateSecurityGroupRuleResponse {
+  /** 规则Id列表 */
+  RuleIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -988,6 +1022,8 @@ declare interface CreateStrategyRequest {
 }
 
 declare interface CreateStrategyResponse {
+  /** 策略Id列表 */
+  StrategyIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1016,6 +1052,8 @@ declare interface CreateVpcAclRuleRequest {
 }
 
 declare interface CreateVpcAclRuleResponse {
+  /** 规则Id列表 */
+  RuleIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1577,6 +1615,8 @@ declare interface Fwm {
   CreateNatAclRule(data: CreateNatAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatAclRuleResponse>;
   /** 创建NAT边界规则组 {@link CreateNatAclRuleGroupRequest} {@link CreateNatAclRuleGroupResponse} */
   CreateNatAclRuleGroup(data: CreateNatAclRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNatAclRuleGroupResponse>;
+  /** 创建规则组 {@link CreateRuleGroupRequest} {@link CreateRuleGroupResponse} */
+  CreateRuleGroup(data?: CreateRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRuleGroupResponse>;
   /** 创建企业安全组规则 {@link CreateSecurityGroupRuleRequest} {@link CreateSecurityGroupRuleResponse} */
   CreateSecurityGroupRule(data?: CreateSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecurityGroupRuleResponse>;
   /** 创建企业安全组规则组 {@link CreateSecurityGroupRuleGroupRequest} {@link CreateSecurityGroupRuleGroupResponse} */

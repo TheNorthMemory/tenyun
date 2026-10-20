@@ -361,9 +361,11 @@ declare interface AnonymousInfo {
 /** DataSight内网匿名登录账号信息 */
 declare interface AnonymousLoginInfo {
   /** 匿名登录账号secretId */
-  SecretId: string | null;
+  SecretId?: string | null;
   /** 匿名登录账号secretKey */
   SecretKey?: string | null;
+  /** 角色的资源描述，可在访问管理，点击角色名获取。普通角色：qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName服务角色：qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleNameDataSight将扮演此角色，使用此角色的临时密钥来发起API请求。 */
+  RoleArn?: string;
 }
 
 /** 元数据Pod label标签结构体 */
@@ -379,9 +381,11 @@ declare interface AuthRoleInfo {
   /** Auth角色名称 */
   RoleName: string;
   /** Auth角色对应权限SecretId */
-  SecretId: string;
+  SecretId?: string;
   /** Auth角色对应权限SecretKey */
   SecretKey?: string | null;
+  /** 角色的资源描述，可在访问管理，点击角色名获取。普通角色：qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName服务角色：qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleNameDataSight将扮演此角色，使用此角色的临时密钥来发起API请求。 */
+  RoleArn?: string;
 }
 
 /** 指标采集配置 */
@@ -653,11 +657,13 @@ declare interface ConsoleAccount {
   /** 用户密码 */
   Password: string | null;
   /** 腾讯云账号SecretId */
-  SecretId: string | null;
+  SecretId?: string | null;
   /** 腾讯云账号SecretKey */
-  SecretKey: string | null;
+  SecretKey?: string | null;
   /** 电子邮箱，用于发送验证码 */
   Email?: string | null;
+  /** 角色的资源描述，可在访问管理，点击角色名获取。普通角色：qcs::cam::uin/12345678:role/4611686018427397919、qcs::cam::uin/12345678:roleName/testRoleName服务角色：qcs::cam::uin/12345678:role/tencentcloudServiceRole/4611686018427397920、qcs::cam::uin/12345678:role/tencentcloudServiceRoleName/testServiceRoleNameDataSight将扮演此角色，使用此角色的临时密钥来发起API请求。 */
+  RoleArn?: string;
 }
 
 /** 控制台分享配置 */
@@ -1042,7 +1048,7 @@ declare interface DataTransformResouceInfo {
   RoleARN?: string;
   /** 外部ID值，可以在被投递账号的角色-载体里找到该值 */
   ExternalId?: string;
-  /** topic名称 */
+  /** 目标日志主题的名称,当DataTransformType=1(前置加工任务)时, 该值和源日志主题名称的值相同. */
   TopicName?: string;
   /** 日志集的名称 */
   LogsetName?: string;
@@ -1074,7 +1080,7 @@ declare interface DataTransformTaskInfo {
   EnableFlag?: number;
   /** 加工任务类型，1： DSL(使用自定义加工语言的加工任务)， 2：SQL(使用sql的加工任务) */
   Type?: number;
-  /** 源日志主题 */
+  /** 源日志主题ID,当DataTransformType=1,代表当前任务的类型是前置加工任务,该值和目标日志主题的ID值相同. */
   SrcTopicId?: string;
   /** 当前加工任务状态（1准备中/2运行中/3停止中/4已停止） */
   Status?: number;
@@ -1084,7 +1090,7 @@ declare interface DataTransformTaskInfo {
   UpdateTime?: string;
   /** 最后启用时间，如果需要重建集群，修改该时间时间格式：yyyy-MM-dd HH:mm:ss */
   LastEnableTime?: string;
-  /** 日志主题名称 */
+  /** 源日志主题名称,当DataTransformType=1,代表当前任务的类型是前置加工任务,该值和目标日志主题名称的值相同. */
   SrcTopicName?: string;
   /** 日志集id */
   LogsetId?: string;
@@ -1100,15 +1106,15 @@ declare interface DataTransformTaskInfo {
   HasServicesLog?: number;
   /** 任务目标日志主题数量 */
   TaskDstCount?: number;
-  /** 数据加工类型。0：标准加工任务；1：前置加工任务。 */
+  /** 数据加工类型。0：标准加工任务；1：前置加工任务。当该值=1时, 源日志主题和目标日志主题的名称和ID相同.枚举值：1： 前置加工任务0： 标准加工任务 */
   DataTransformType?: number;
   /** 保留失败日志状态。 1:不保留，2:保留 */
   KeepFailureLog?: number;
   /** 失败日志的字段名称 */
   FailureLogKey?: string;
-  /** 指定加工数据的开始时间，秒级时间戳。- 日志主题生命周期内的任意时间范围，如果超出了生命周期,只处理生命周期内有数据的部分。 */
+  /** 指定加工数据的开始时间，秒级时间戳。日志主题生命周期内的任意时间范围，如果超出了生命周期,只处理生命周期内有数据的部分。 */
   ProcessFromTimestamp?: number;
-  /** 指定加工数据的结束时间，秒级时间戳。1. 不可指定未来的时间2. 不填则表示持续执行 */
+  /** 指定加工数据的结束时间，秒级时间戳。不可指定未来的时间不填则表示持续执行 */
   ProcessToTimestamp?: number;
   /** sql数据源信息 */
   DataTransformSqlDataSources?: DataTransformSqlDataSource[];
@@ -3741,9 +3747,9 @@ declare interface CreateConsoleRequest {
   LoginMode: number;
   /** 自定义域名前缀 */
   DomainPrefix: string;
-  /** 用户账号信息“账号密码鉴权”登录方式必传 */
+  /** 用户账号信息“账号密码鉴权”登录方式必传。SecretId + SecretKey 或 RoleArn需要传其中一种。 */
   Accounts?: ConsoleAccount[];
-  /** 匿名登录账号信息“匿名登录”登录方式必传 */
+  /** 匿名登录账号信息“匿名登录”登录方式必传。SecretId + SecretKey 或 RoleArn需要传其中一种。 */
   AnonymousLogin?: AnonymousLoginInfo;
   /** 内网类型，默认为0 */
   IntranetType?: number;
@@ -3753,7 +3759,7 @@ declare interface CreateConsoleRequest {
   VpcId?: string;
   /** 内网子网SubnetId */
   SubnetId?: string;
-  /** Auth角色信息“第三方认证登录”登录方式必传 */
+  /** Auth角色信息“第三方认证登录”登录方式必传。SecretId + SecretKey 或 RoleArn需要传其中一种。 */
   AuthRoles?: AuthRoleInfo[];
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
   Tags?: Tag[];
@@ -6905,9 +6911,9 @@ declare interface ModifyConsoleRequest {
   LoginMode?: number;
   /** 自定义域名前缀 */
   DomainPrefix?: string;
-  /** 用户账号信息“账号密码鉴权”登录方式必传 */
+  /** 用户账号信息“账号密码鉴权”登录方式必传。如果SecretId、SecretKey、RoleArn都不传，表示不修改这部分鉴权信息。 */
   Accounts?: ConsoleAccount[];
-  /** 匿名登录账号信息“匿名登录”登录方式必传 */
+  /** 匿名登录账号信息“匿名登录”登录方式必传。如果SecretId、SecretKey、RoleArn都不传，表示不修改这部分鉴权信息。 */
   AnonymousLogin?: AnonymousLoginInfo;
   /** 内网类型，默认为0 */
   IntranetType?: number;
@@ -6917,7 +6923,7 @@ declare interface ModifyConsoleRequest {
   VpcId?: string;
   /** 内网子网SubnetId */
   SubnetId?: string;
-  /** Auth用户角色信息“第三方认证登录”登录方式必传 */
+  /** Auth用户角色信息“第三方认证登录”登录方式必传。如果SecretId、SecretKey、RoleArn都不传，表示不修改这部分鉴权信息。 */
   AuthRoles?: AuthRoleInfo[];
   /** 自定义隐藏参数 */
   HideParams?: string[];

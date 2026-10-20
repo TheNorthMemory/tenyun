@@ -687,6 +687,8 @@ declare interface BindAutoSnapshotPolicyResponse {
 declare interface CreateAccessCertRequest {
   /** 证书描述，不超过64字符 */
   CertDesc: string;
+  /** 凭证类型枚举值：ssh： 通用系列文件系统凭证gss： Turbo系列文件系统凭证默认值：ssh */
+  Type?: string;
 }
 
 declare interface CreateAccessCertResponse {
