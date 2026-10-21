@@ -6900,6 +6900,66 @@ declare interface PublishRRPCMessageResponse {
   RequestId?: string;
 }
 
+declare interface PurchaseImagePackageRequest {
+  /** 存储天数枚举值：3： 存储3天7： 存储7天15： 存储15天30： 存储30天 */
+  RetentionDays: number;
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 卡有效期类型：monthly_card=月卡（12 个月有效期），annual_card=年卡（24 个月有效期） */
+  ValidityPeriod: string;
+  /** 图片档位：每日可上传的图片张数上限，"300"=300 张/日，"1000"=1000 张/日 */
+  ImageCapacity: string;
+  /** 同规格资源包个数（默认 1） */
+  GoodsNum?: number;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 套餐生效策略：""=默认语义，front=插队生效，end=排队末尾 */
+  PackageQueue?: string;
+  /** 覆盖当前生效套餐：0=否，1=是 */
+  Override?: number;
+  /** 订单id */
+  OrderId?: string;
+}
+
+declare interface PurchaseImagePackageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface PurchaseVideoPackageRequest {
+  /** 存储天数（每份录像保留的天数）枚举值：3： 存储3天7： 存储7天15： 存储15天30： 存储30天 */
+  RetentionDays: number;
+  /** 录制模式：low_power=2 / event=8 / full_time=24，单位：小时/日枚举值：low_power： 2小时/日event： 8小时/日full_time： 24小时/日 */
+  RecordingMode: string;
+  /** 码率（视频必填）枚举值：0.5m： 0.5Mbps1m： 1Mbps1.5m： 1.5Mbps2m： 2Mbps */
+  Bitrate: string;
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 卡有效期类型：monthly_card=月卡（12 个月有效期），annual_card=年卡（24 个月有效期） */
+  ValidityPeriod: string;
+  /** 同规格资源包个数（默认 1） */
+  GoodsNum?: number;
+  /** 通道 ID（多通道场景必填，否则填 0） */
+  ChannelId?: number;
+  /** 存储地域（可选） */
+  StorageRegion?: string;
+  /** 套餐生效策略：""=默认语义，front=插队生效，end=排队末尾 */
+  PackageQueue?: string;
+  /** 覆盖当前生效套餐：0=否，1=是 */
+  Override?: number;
+  /** 订单id */
+  OrderId?: string;
+}
+
+declare interface PurchaseVideoPackageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ReleaseStudioProductRequest {
   /** 产品ID */
   ProductId: string;
@@ -7144,6 +7204,50 @@ declare interface ShareDeviceToUserResponse {
   OwnerUserID?: string;
   /** 被分享用户的 UserID */
   ToUserID?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartPackageUsageReportRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 预付费 resourceId（ncs- 前缀，必填） */
+  ResourceId: string;
+  /** 通道 ID（无通道填 0） */
+  ChannelId?: number;
+  /** 操作者 */
+  Operator?: string;
+  /** 备注（可选） */
+  Remark?: string;
+}
+
+declare interface StartPackageUsageReportResponse {
+  /** 启停后状态（0 停用 / 1 启用） */
+  Status?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopPackageUsageReportRequest {
+  /** 产品 ID */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 区分停用的云存类别，必填枚举值：image： 图片云存video： 视频云存 */
+  MediaType: string;
+  /** 通道 ID */
+  ChannelId?: number;
+  /** 操作者 */
+  Operator?: string;
+  /** 备注（可选） */
+  Remark?: string;
+}
+
+declare interface StopPackageUsageReportResponse {
+  /** 启停后状态 */
+  Status?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7815,6 +7919,10 @@ declare interface Iotexplorer {
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
   /** @deprecated 发布RRPC消息 {@link PublishRRPCMessageRequest} {@link PublishRRPCMessageResponse} */
   PublishRRPCMessage(data: PublishRRPCMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishRRPCMessageResponse>;
+  /** 新购图片云存资源包 {@link PurchaseImagePackageRequest} {@link PurchaseImagePackageResponse} */
+  PurchaseImagePackage(data: PurchaseImagePackageRequest, config?: AxiosRequestConfig): AxiosPromise<PurchaseImagePackageResponse>;
+  /** 新购视频云存资源包 {@link PurchaseVideoPackageRequest} {@link PurchaseVideoPackageResponse} */
+  PurchaseVideoPackage(data: PurchaseVideoPackageRequest, config?: AxiosRequestConfig): AxiosPromise<PurchaseVideoPackageResponse>;
   /** 发布产品 {@link ReleaseStudioProductRequest} {@link ReleaseStudioProductResponse} */
   ReleaseStudioProduct(data: ReleaseStudioProductRequest, config?: AxiosRequestConfig): AxiosPromise<ReleaseStudioProductResponse>;
   /** 将用户从TRTC房间移出 {@link RemoveUserByRoomIdFromTRTCRequest} {@link RemoveUserByRoomIdFromTRTCResponse} */
@@ -7843,6 +7951,10 @@ declare interface Iotexplorer {
   SearchTopicRule(data: SearchTopicRuleRequest, config?: AxiosRequestConfig): AxiosPromise<SearchTopicRuleResponse>;
   /** 分享设备给指定用户 {@link ShareDeviceToUserRequest} {@link ShareDeviceToUserResponse} */
   ShareDeviceToUser(data: ShareDeviceToUserRequest, config?: AxiosRequestConfig): AxiosPromise<ShareDeviceToUserResponse>;
+  /** 启用套餐用量上报 {@link StartPackageUsageReportRequest} {@link StartPackageUsageReportResponse} */
+  StartPackageUsageReport(data: StartPackageUsageReportRequest, config?: AxiosRequestConfig): AxiosPromise<StartPackageUsageReportResponse>;
+  /** 停用套餐用量上报 {@link StopPackageUsageReportRequest} {@link StopPackageUsageReportResponse} */
+  StopPackageUsageReport(data: StopPackageUsageReportRequest, config?: AxiosRequestConfig): AxiosPromise<StopPackageUsageReportResponse>;
   /** 退订 TWeSee 预付费订阅 {@link TerminateTWeSeeSubscriptionRequest} {@link TerminateTWeSeeSubscriptionResponse} */
   TerminateTWeSeeSubscription(data: TerminateTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<TerminateTWeSeeSubscriptionResponse>;
   /** 转移云存服务 {@link TransferCloudStorageRequest} {@link TransferCloudStorageResponse} */

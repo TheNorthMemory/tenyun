@@ -118,6 +118,18 @@ declare interface CloudAttachInfo {
   ServiceType?: string;
   /** VLAN范围 */
   VlanRange?: string;
+  /** 裁撤状态枚举值：APPLYING： 申请裁撤EXECUTING： 裁撤执行中FAILED： 裁撤失败 */
+  RepealStatus?: string;
+  /** 计划裁撤时间 */
+  PlanRepealTime?: string;
+  /** 续费标记枚举值：MANUAL_RENEW： 手动续费AUTO_RENEW： 自动续费NO_RENEW： 到期不续 */
+  RenewFlag?: string;
+  /** 接入点ID */
+  AccessPointId?: string;
+  /** 接入点名称 */
+  AccessPointName?: string;
+  /** 计费阶梯带宽(Mbps) */
+  BillStairBandwidth?: number;
 }
 
 /** 坐标，经维度描述 */
@@ -150,6 +162,8 @@ declare interface CreateCasInput {
   BIapLinkProtected?: boolean;
   /** 服务类型，SHARE-共享型，EXCLUSIVE-独占型 */
   ServiceType?: string;
+  /** 接入点ID */
+  AccessPointId?: string;
 }
 
 /** 物理专线信息列表 */

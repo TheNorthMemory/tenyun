@@ -496,6 +496,36 @@ declare interface CloudProductLogTaskInfo {
   ApplicationId?: string;
 }
 
+/** 云产品投递任务topic配置信息 */
+declare interface CloudProductTopicConfig {
+  /** 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。枚举值：0： 不加密1： kms-cls 云产品密钥加密默认值：0 */
+  Encryption?: number;
+  /** 主题分区个数。默认创建1个，最大支持创建10个分区。 */
+  PartitionCount?: number;
+  /** 是否开启自动分裂，默认值为true */
+  AutoSplit?: boolean;
+  /** 开启自动分裂后，每个主题能够允许的最大分区数默认值：50 */
+  MaxSplitPartitions?: number;
+  /** 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）。指标主题不支持该配置。默认值：hot */
+  StorageType?: string;
+  /** 存储时间，单位天。日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。指标主题：支持1至3600天，值为3640时代表永久保存。 */
+  Period?: number;
+  /** 0：日志主题关闭日志沉降。非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效，指标主题不支持该配置。 */
+  HotPeriod?: number;
+  /** 计费模式枚举值：0： 按使用功能计费1： 按原始日志量计费（目前仅面向少部分客户支持） */
+  BillingMode?: number;
+  /** 主题描述 */
+  Describes?: string;
+  /** 开启记录公网来源ip和服务端接收时间 */
+  IsSourceFrom?: boolean;
+  /** 免鉴权开关。 false：关闭； true：开启。默认为false。 开启后将支持指定操作匿名访问该日志主题。 */
+  IsWebTracking?: boolean;
+  /** 用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）当参数 Encryption为 1 时有效。 */
+  CustomKmsInfo?: CustomKmsInfo;
+  /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。如果指定该字段，需保证全地域唯一 */
+  TopicId?: string;
+}
+
 /** 采集配置信息 */
 declare interface CollectConfig {
   /** 指定采集类型的采集配置名称信息。当CollectInfo中Type为0：表示元数据配置，name为元数据名称。目前支持"container_id"，"container_name"，"image_name"，"namespace"，"pod_uid"，"pod_name"，"pod_ip"。当CollectInfo中Type为1：指定pod label，name为指定pod label名称。 */
@@ -3483,6 +3513,8 @@ declare interface CreateAgentApplicationRequest {
   AccessType: string;
   /** 日志集Id。通过 获取日志集列表获取日志集Id。 */
   LogsetId?: string;
+  /** 标签描述列表，通过指定该参数可以同时绑定标签到应用创建的主题和日志集。 */
+  Tags?: Tag[];
 }
 
 declare interface CreateAgentApplicationResponse {
@@ -3647,6 +3679,8 @@ declare interface CreateCloudProductLogCollectionRequest {
   TopicId?: string;
   /** 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。 */
   Tags?: Tag[];
+  /** 日志主题信息。当创建云产品投递任务并传递TopicName时，会创建具备这些属性的日志主题。 */
+  TopicConfig?: CloudProductTopicConfig;
 }
 
 declare interface CreateCloudProductLogCollectionResponse {

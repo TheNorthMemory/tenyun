@@ -586,14 +586,18 @@ declare interface ClusterInstanceDetail {
   InstanceName?: string;
   /** 引擎类型 */
   InstanceType?: string;
+  /** 实例状态枚举值：creating： 创建中running： 运行中isolating： 隔离中isolated： 已隔离activating： 恢复中offlining： 下线中offlined： 已下线 */
+  Status?: string;
   /** 实例状态 */
   InstanceStatus?: string;
+  /** 实例状态中文描述 */
+  StatusDesc?: string;
   /** 实例状态描述 */
   InstanceStatusDesc?: string;
-  /** cpu核数 */
-  InstanceCpu?: number;
   /** Cpu单位：核 */
   Cpu?: number;
+  /** cpu核数 */
+  InstanceCpu?: number;
   /** serverless实例cpu下限单位：核 */
   MinCpu?: number;
   /** serverless实例cpu上限单位：核 */
@@ -614,6 +618,8 @@ declare interface ClusterInstanceDetail {
   MaintainWeekDays?: string[];
   /** 实例任务信息 */
   InstanceTasks?: ObjectTask[];
+  /** 实例机器类型枚举值：common： 通用型exclusive： 独享型 */
+  DeviceType?: string;
   /** 实例机器类型common，通用型。exclusive，独享型。 */
   InstanceDeviceType?: string;
   /** 实例存储类型说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。 */
@@ -634,10 +640,6 @@ declare interface ClusterInstanceDetail {
   Zone?: string;
   /** 实例所在的物理可用区 */
   PhysicalZone?: string;
-  /** 实例状态枚举值：creating： 创建中running： 运行中isolating： 隔离中isolated： 已隔离activating： 恢复中offlining： 下线中offlined： 已下线 */
-  Status?: string;
-  /** 实例状态中文描述 */
-  StatusDesc?: string;
   /** 数据库类型 */
   DbType?: string;
   /** 数据库版本 */
@@ -694,8 +696,6 @@ declare interface ClusterInstanceDetail {
   ResourceTags?: Tag[] | null;
   /** 当前实例支持的能力 */
   InstanceAbility?: InstanceAbility;
-  /** 实例机器类型枚举值：common： 通用型exclusive： 独享型 */
-  DeviceType?: string;
   /** 全球数据库唯一标识 */
   GdnId?: string;
 }
@@ -2916,6 +2916,18 @@ declare interface ProxyZone {
   ProxyNodeCount?: number;
 }
 
+/** 数据库代理规格 */
+declare interface ProxyZoneStockInfo {
+  /** 地域 */
+  Region?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** CPU库存该字段不作为发货是否有资源的判断标准，资源请参考CheckProxyStockInfos */
+  CpuStock?: number;
+  /** 内存库存该字段不作为发货是否有资源的判断标准，资源请参考CheckProxyStockInfos */
+  MemStock?: number;
+}
+
 /** 查询过滤器。用于 DescribeClusterAndInstances 接口的过滤条件。 */
 declare interface QueryFilter {
   /** 字段值列表，与 Names 一一对应。InstanceId/ClusterId 为精确匹配，InstanceName 默认模糊匹配 */
@@ -3902,6 +3914,16 @@ declare interface CancelClusterServerlessScalePlanRequest {
 declare interface CancelClusterServerlessScalePlanResponse {
   /** 任务id */
   TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CancelTaskRequest {
+  /** 任务ID */
+  TaskId: number;
+}
+
+declare interface CancelTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6300,6 +6322,18 @@ declare interface DescribeProxySpecsRequest {
 declare interface DescribeProxySpecsResponse {
   /** 数据库代理规格列表 */
   ProxySpecs?: ProxySpec[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProxyZoneStocksRequest {
+  /** 可用区 */
+  Zone: string;
+}
+
+declare interface DescribeProxyZoneStocksResponse {
+  /** 数据库代理地域库存列表 */
+  ProxyZoneStockInfos?: ProxyZoneStockInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8743,6 +8777,8 @@ declare interface Cynosdb {
   CalculateBackupSaveSecExpires(data: CalculateBackupSaveSecExpiresRequest, config?: AxiosRequestConfig): AxiosPromise<CalculateBackupSaveSecExpiresResponse>;
   /** 取消集群的弹性计划 {@link CancelClusterServerlessScalePlanRequest} {@link CancelClusterServerlessScalePlanResponse} */
   CancelClusterServerlessScalePlan(data: CancelClusterServerlessScalePlanRequest, config?: AxiosRequestConfig): AxiosPromise<CancelClusterServerlessScalePlanResponse>;
+  /** 取消任务 {@link CancelTaskRequest} {@link CancelTaskResponse} */
+  CancelTask(data: CancelTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelTaskResponse>;
   /** 校验集群是否可以添加只读分析引擎 {@link CheckCreateLibraDBInstanceRequest} {@link CheckCreateLibraDBInstanceResponse} */
   CheckCreateLibraDBInstance(data: CheckCreateLibraDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CheckCreateLibraDBInstanceResponse>;
   /** 检查跨可用区迁移 {@link CheckTransferClusterZoneRequest} {@link CheckTransferClusterZoneResponse} */
@@ -8961,6 +8997,8 @@ declare interface Cynosdb {
   DescribeProxyNodes(data?: DescribeProxyNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyNodesResponse>;
   /** 查询数据库代理规格 {@link DescribeProxySpecsRequest} {@link DescribeProxySpecsResponse} */
   DescribeProxySpecs(data?: DescribeProxySpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxySpecsResponse>;
+  /** 查询数据库代理地域库存 {@link DescribeProxyZoneStocksRequest} {@link DescribeProxyZoneStocksResponse} */
+  DescribeProxyZoneStocks(data: DescribeProxyZoneStocksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProxyZoneStocksResponse>;
   /** 查询保险箱内redolog备份 {@link DescribeRedoLogListByVaultRequest} {@link DescribeRedoLogListByVaultResponse} */
   DescribeRedoLogListByVault(data: DescribeRedoLogListByVaultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRedoLogListByVaultResponse>;
   /** redo日志列表 {@link DescribeRedoLogsRequest} {@link DescribeRedoLogsResponse} */

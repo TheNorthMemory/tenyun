@@ -112,7 +112,7 @@ declare interface AccessValueInfo {
   ContainZH?: boolean;
 }
 
-/** 后付费实例（Edition=llm-sdk-waf）的基础信息，仅包含 tb_instance_conf 基础字段 */
+/** 后付费实例详情，结构与 DescribeInstances 的 InstanceInfo 保持一致，全量返回实例字段（含各类套餐包信息），并额外填充 LLMTokenUsage；基础安全实例另返回 DomainCount、ExpertRuleCount、CustomRuleCount 实时统计 */
 declare interface AfterPayInstanceInfo {
   /** 用户appid */
   AppId: number;
@@ -160,6 +160,86 @@ declare interface AfterPayInstanceInfo {
   LLMPkg?: LLMPkg;
   /** LLM实例当天4个计费模块token消耗量及近7天趋势（仅后付费llm-sdk-waf实例返回） */
   LLMTokenUsage?: LLMTokenUsage;
+  /** 弹性计费开关。0：关闭1：开启 */
+  Mode?: number;
+  /** 已配置域名个数。按量后付费基础安全实例（Edition为sparta-waf或clb-waf）返回实时去重后的接入域名数，统计范围覆盖SaaS接入域名、云原生防护对象（含默认虚拟域名）与四层REIP接入域名，同一域名多条接入记录只计一次。 */
+  DomainCount?: number;
+  /** 已配置主域名个数。按接入域名归属的主域名去重统计；未接入任何域名时为0。 */
+  MainDomainCount?: number;
+  /** 实例当前实时开启的专家规则数量。统计口径：接入一个防护对象（域名）即默认计1个专家规则，即等于该实例的实时接入域名数DomainCount；未接入任何对象时为0。仅按量后付费基础安全实例（Edition为sparta-waf或clb-waf）返回，其余实例类型固定为0。该值为实时快照，与账单接口DescribeWafPostpaidBillDetail返回的小时计量值ExpertUsage可能存在差异。 */
+  ExpertRuleCount?: number;
+  /** 实例下所有接入域名的实时自定义规则条数之和。统计范围包含自定义策略、规则白名单、IP封禁、自定义CC、紧急CC、地域封禁、防信息泄露、防篡改、IP黑白名单等模块；同一条批量规则命中该实例下N个域名时计N条。仅按量后付费基础安全实例（Edition为sparta-waf或clb-waf）返回，其余实例类型固定为0。该值为实时快照且不做多实例平分，与账单接口DescribeWafPostpaidBillDetail返回的小时计量值CustomUsage可能存在差异。 */
+  CustomRuleCount?: number;
+  /** 实例30天内QPS峰值 */
+  MaxQPS?: number;
+  /** qps扩展包信息 */
+  QPS?: QPSPackageNew;
+  /** 域名扩展包信息 */
+  DomainPkg?: DomainPackageNew;
+  /** 业务安全包 */
+  FraudPkg?: FraudPkg;
+  /** Bot资源包 */
+  BotPkg?: BotPkg;
+  /** bot的qps详情 */
+  BotQPS?: BotQPS;
+  /** 带宽峰值，单位为B/s(字节每秒) */
+  MaxBandwidth?: number;
+  /** 购买的qps规格 */
+  QpsStandard?: number;
+  /** 购买的带宽规格 */
+  BandwidthStandard?: number;
+  /** 实例状态 */
+  Status?: number;
+  /** 实例沙箱qps值 */
+  SandboxQps?: number;
+  /** 重保包 */
+  MajorEventsPkg?: MajorEventsPkg;
+  /** 混合云子节点包 */
+  HybridPkg?: HybridPkg;
+  /** API安全资源包 */
+  ApiPkg?: ApiPkg;
+  /** 小程序安全加速包 */
+  MiniPkg?: MiniPkg;
+  /** 小程序qps规格 */
+  MiniQpsStandard?: number;
+  /** 小程序qps峰值 */
+  MiniMaxQPS?: number;
+  /** 最近一次超量时间 */
+  LastQpsExceedTime?: string;
+  /** 小程序安全接入ID数量扩张包 */
+  MiniExtendPkg?: MiniExtendPkg;
+  /** 最近3天最大qps */
+  Last3MaxQPS?: number;
+  /** 最近3天最大带宽 */
+  Last3MaxBandwidth?: number;
+  /** 过去7天小程序流量最大带宽，单位Byte/s，仅开启小程序安全时有值。转换为Mbps请使用 *8/1000/1000（十进制），不要使用MaxBandwidth所用的*8/1024/1024（二进制），否则会有约4.63%的偏差 */
+  Last7MaxMiniBandwidth?: number;
+  /** 小程序带宽上限，单位Mbps，仅开启小程序安全时有值 */
+  MiniBandwidthStandard?: number;
+  /** 重保增强包 */
+  MajorEventsProPkg?: MajorEventsProPkg;
+  /** 实例的网络配置 */
+  NetworkConfig?: NetworkConfig;
+  /** RCE设备安全信息包 */
+  RCEPkg?: RCEPkg;
+  /** 超量策略。0：超量沙箱1：超量限流 */
+  ExceedPolicy?: number;
+  /** 弹性资源Id */
+  ElasticResourceId?: string;
+  /** 预付费大模型安全信息包 */
+  LLMMonPkg?: LLMMonPkg;
+  /** 地域id */
+  RegionId?: number;
+  /** BOT安全护航信息 */
+  BotSecurityPkg?: BotSecurityPkg;
+  /** BOT安全监测资源信息 */
+  BotMonitorPkg?: BotMonitorPkg;
+  /** 独享ip资源信息 */
+  DedicatedIPPkg?: DedicatedIPPkg;
+  /** 已经配置独享ip的数量 */
+  DedicatedIPCount?: number;
+  /** 标签结构体 */
+  TagInfos?: TagInfo[];
 }
 
 /** 免鉴权信息 */
@@ -318,7 +398,7 @@ declare interface ApiParameterType {
 declare interface ApiPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -330,7 +410,7 @@ declare interface ApiPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -848,7 +928,7 @@ declare interface BotIdStat {
 declare interface BotMonitorPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -860,7 +940,7 @@ declare interface BotMonitorPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -870,7 +950,7 @@ declare interface BotMonitorPkg {
 declare interface BotPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -884,7 +964,7 @@ declare interface BotPkg {
   UsedNum?: number;
   /** 子产品code */
   Type?: string;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 购买页bot6折 */
   BotCPWaf?: number;
@@ -906,7 +986,7 @@ declare interface BotQPS {
   Region: string;
   /** 使用qps的最大值 */
   MaxBotQPS: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag: number;
 }
 
@@ -1036,7 +1116,7 @@ declare interface BotScoreRuleEntry {
 declare interface BotSecurityPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -1048,7 +1128,7 @@ declare interface BotSecurityPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -1354,8 +1434,10 @@ declare interface ClbObject {
   PostCKafkaStatus?: number;
   /** 对象类型：CLB:负载均衡器，TSE:云原生网关 */
   Type?: string;
-  /** 对象地域 */
+  /** 对象地域对象地域，地域缩写，例如 gz。与 ApRegion 表达同一含义、格式不同 */
   Region?: string;
+  /** 对象所在地域，腾讯云标准地域格式参数格式：形如 ap-guangzhou与 Region 表达同一含义、格式不同。对象恒为单地域，数组长度恒为 0 或 1出参在可识别时填充，无法识别时为空枚举值：ap-guangzhou：广州ap-shanghai：上海ap-beijing：北京ap-chengdu：成都ap-chongqing：重庆ap-hongkong：中国香港ap-nanjing：南京ap-tianjin：天津ap-shenzhen：深圳ap-qingyuan：清远ap-guangzhou-open：广州Openap-shenzhen-fsi：深圳金融ap-beijing-fsi：北京金融ap-shanghai-fsi：上海金融ap-hangzhou-ec：杭州ap-fuzhou-ec：福州ap-jinan-ec：济南ap-wuhan-ec：武汉ap-changsha-ec：长沙ap-hefei-ec：合肥ap-shenyang-ec：沈阳ap-xian-ec：西安ap-xibei-ec：西北ap-shijiazhuang-ec：石家庄ap-zhengzhou-ec：郑州ap-qingyuan-xinan：清远信安ap-shanghai-adc：上海ADCap-shanghai-wxp-ops：上海无线城市运营ap-singapore：新加坡ap-seoul：首尔ap-tokyo：东京ap-osaka：大阪ap-mumbai：孟买ap-bangkok：曼谷ap-jakarta：雅加达ap-taipei：台北ap-johorbahru：柔佛巴鲁eu-frankfurt：法兰克福eu-moscow：莫斯科na-ashburn：弗吉尼亚na-siliconvalley：硅谷na-toronto：多伦多sa-saopaulo：圣保罗me-saudi-arabia：沙特阿拉伯 */
+  ApRegion?: string[];
   /** 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出 */
   Proxy?: number;
   /** 指定获取客户端IP的头部字段列表。IsCdn为3时有效 */
@@ -1624,7 +1706,7 @@ declare interface DomainInfo {
   Cname: string;
   /** 域名所属实例类型。sparta-waf：SaaS型WAF实例clb-waf：负载均衡型WAF实例cdc-clb-waf：CDC环境下负载均衡型WAF实例 */
   Edition: string;
-  /** 地域。"多伦多": "ca""广州": "gz""成都": "cd""福州": "fzec""深圳": "szx""印度": "in""济南": "jnec""重庆": "cq""天津": "tsn""欧洲东北": "ru""南京": "nj""美国硅谷": "usw""泰国": "th""广州Open": "gzopen""深圳金融": "szjr""法兰克福": "de""日本": "jp""弗吉尼亚": "use""北京": "bj""中国香港": "hk""杭州": "hzec""北京金融": "bjjr""上海金融": "shjr""台北": "tpe""首尔": "kr""上海": "sh""新加坡": "sg""清远": "qy" */
+  /** 地域。"多伦多": "ca""广州": "gz""成都": "cd""福州": "fzec""深圳": "szx""印度": "in""济南": "jnec""重庆": "cq""天津": "tsn""欧洲东北": "ru""南京": "nj""美国硅谷": "usw""泰国": "th""广州Open": "gzopen""深圳金融": "szjr""法兰克福": "de""日本": "jp""弗吉尼亚": "use""北京": "bj""中国香港": "hk""杭州": "hzec""北京金融": "bjjr""上海金融": "shjr""台北": "tpe""首尔": "kr""上海": "sh""新加坡": "sg""清远": "qy"与 ApRegion 表达同一含义、格式不同：本字段为地域缩写，ApRegion 为腾讯云标准 ap-xxx 格式 */
   Region: string;
   /** 实例名 */
   InstanceName: string;
@@ -1650,6 +1732,10 @@ declare interface DomainInfo {
   AppId: number;
   /** SAAS型WAF域名状态：-2：配置下发失败-1：配置下发中0：DNS解析中1：无DNS解析记录，请接入WAF10：DNS解析未知，域名启用了代理11：DNS解析异常，使用A记录接入WAF IP200：检测源站不可达220：源站不支持长连接311：证书过期312：证书即将过期310：证书异常316：备案异常5：WAF回源已变更负载均衡型WAF域名LB监听器状态：0：操作成功4：正在绑定LB6：正在解绑LB7：解绑LB失败8：绑定LB失败10：内部错误 */
   State: number;
+  /** 域名所在地域，腾讯云标准地域格式参数格式：形如 ap-guangzhou与 Region 表达同一含义、格式不同：Region 为地域缩写，本字段为标准地域名数组。负载均衡型多地域接入时数组可含多个元素出参在可识别时填充，无法识别的地域不返回对应元素枚举值：ap-guangzhou：广州ap-shanghai：上海ap-beijing：北京ap-chengdu：成都ap-chongqing：重庆ap-hongkong：中国香港ap-nanjing：南京ap-tianjin：天津ap-shenzhen：深圳ap-qingyuan：清远ap-guangzhou-open：广州Openap-shenzhen-fsi：深圳金融ap-beijing-fsi：北京金融ap-shanghai-fsi：上海金融ap-hangzhou-ec：杭州ap-fuzhou-ec：福州ap-jinan-ec：济南ap-wuhan-ec：武汉ap-changsha-ec：长沙ap-hefei-ec：合肥ap-shenyang-ec：沈阳ap-xian-ec：西安ap-xibei-ec：西北ap-shijiazhuang-ec：石家庄ap-zhengzhou-ec：郑州ap-qingyuan-xinan：清远信安ap-shanghai-adc：上海ADCap-shanghai-wxp-ops：上海无线城市运营ap-singapore：新加坡ap-seoul：首尔ap-tokyo：东京ap-osaka：大阪ap-mumbai：孟买ap-bangkok：曼谷ap-jakarta：雅加达ap-taipei：台北ap-johorbahru：柔佛巴鲁eu-frankfurt：法兰克福eu-moscow：莫斯科na-ashburn：弗吉尼亚na-siliconvalley：硅谷na-toronto：多伦多sa-saopaulo：圣保罗me-saudi-arabia：沙特阿拉伯 */
+  ApRegion?: string[];
+  /** DNSSEC CNAME 地址。客户开启 DNSSEC CNAME 校验后，将业务域名 CNAME 到该地址即可接入。开关关闭、非 SaaS CNAME 接入或无法映射时为空字符串。默认值："" */
+  DnssecCname?: string;
   /** 创建时间 */
   CreateTime?: string;
   /** 编辑时间 */
@@ -1788,6 +1874,8 @@ declare interface DomainsPartInfo {
   Cls?: number;
   /** 接入Cname，SaaS型域名使用此Cname进行接入 */
   Cname?: string;
+  /** DNSSEC CNAME 地址。客户开启 DNSSEC CNAME 校验后，将业务域名 CNAME 到该地址即可接入。开关关闭、非 SaaS CNAME 接入或无法映射时为空字符串。默认值："" */
+  DnssecCname?: string;
   /** 是否开启长连接。0： 短连接1： 长连接 */
   IsKeepAlive?: number;
   /** 是否开启主动健康检测。0：不开启1：开启 */
@@ -1964,6 +2052,12 @@ declare interface FieldWriteConfig {
   EnableBot?: number;
   /** 响应方向body1:开启 0:不开启 */
   EnableResponse?: number;
+  /** 是否投递 response_headers（响应头，完整键值对，原样投递不做过滤/脱敏，超过2KB截断）。1:开启 0/不填:不开启。与 EnableResponse（响应体）完全独立，互不影响。 */
+  EnableResponseHeaders?: number;
+  /** 是否投递 response_length（响应包长度，单位字节）。1:开启 0/不填:不开启。与 EnableResponse 完全独立，互不影响。 */
+  EnableResponseLength?: number;
+  /** 是否投递 response_status_line（客户端可见 HTTP 状态行，如 HTTP/1.1 200 OK，超过1KB截断）。1:开启 0/不填:不开启。与 EnableResponse 完全独立，互不影响。拦截/未回源时也会有值，记录的是 WAF 返回给客户端的状态行。 */
+  EnableResponseStatusLine?: number;
 }
 
 /** 过滤器 */
@@ -2008,7 +2102,7 @@ declare interface FindAllDomainDetail {
 declare interface FraudPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -2020,7 +2114,7 @@ declare interface FraudPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
 }
 
@@ -2170,7 +2264,7 @@ declare interface HostRecord {
   IsCdn: number;
   /** 绑定的负载均衡器信息列表 */
   LoadBalancerSet: LoadBalancer[];
-  /** 域名绑定的LB的地域，以逗号分割多个地域 */
+  /** 域名绑定的LB的地域，以逗号分割多个地域与 ApRegion 表达同一含义、格式不同。本字段为地域缩写，多个地域以英文逗号拼接；入参与 ApRegion 同时传入时以 ApRegion 为准 */
   Region: string;
   /** 域名所属实例类型。负载均衡型WAF为"clb-waf" */
   Edition: string;
@@ -2178,6 +2272,8 @@ declare interface HostRecord {
   FlowMode: number;
   /** 是否开启访问日志。1：开启0：关闭 */
   ClsStatus: number;
+  /** 域名绑定的负载均衡所在地域，腾讯云标准地域格式参数格式：形如 ap-guangzhou与 Region 表达同一含义、格式不同：Region 为地域缩写且多个地域以英文逗号拼接，本字段为标准地域名数组入参可选；与 Region 同时传入时以本字段为准；取值不在枚举范围内时返回 UnsupportedRegion出参在可识别时填充，无法识别的地域不返回对应元素枚举值：ap-guangzhou：广州ap-shanghai：上海ap-beijing：北京ap-chengdu：成都ap-chongqing：重庆ap-hongkong：中国香港ap-nanjing：南京ap-tianjin：天津ap-shenzhen：深圳ap-qingyuan：清远ap-guangzhou-open：广州Openap-shenzhen-fsi：深圳金融ap-beijing-fsi：北京金融ap-shanghai-fsi：上海金融ap-hangzhou-ec：杭州ap-fuzhou-ec：福州ap-jinan-ec：济南ap-wuhan-ec：武汉ap-changsha-ec：长沙ap-hefei-ec：合肥ap-shenyang-ec：沈阳ap-xian-ec：西安ap-xibei-ec：西北ap-shijiazhuang-ec：石家庄ap-zhengzhou-ec：郑州ap-qingyuan-xinan：清远信安ap-shanghai-adc：上海ADCap-shanghai-wxp-ops：上海无线城市运营ap-singapore：新加坡ap-seoul：首尔ap-tokyo：东京ap-osaka：大阪ap-mumbai：孟买ap-bangkok：曼谷ap-jakarta：雅加达ap-taipei：台北ap-johorbahru：柔佛巴鲁eu-frankfurt：法兰克福eu-moscow：莫斯科na-ashburn：弗吉尼亚na-siliconvalley：硅谷na-toronto：多伦多sa-saopaulo：圣保罗me-saudi-arabia：沙特阿拉伯 */
+  ApRegion?: string[];
   /** 防护等级，可选值100,200,300 */
   Level?: number;
   /** 域名需要下发到的cdc集群列表。仅CDC场景下填充 */
@@ -2210,7 +2306,7 @@ declare interface HostStatus {
 declare interface HybridPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -2222,8 +2318,10 @@ declare interface HybridPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
+  /** 可接入弹性节点数。仅 Edition 为 clb-waf 的实例有混合云接入节点；弹性关闭或不满足版本、已购混合云节点条件时为 0；满足时为 1 + floor(弹性计费 QPS 上限 / 5000)，不含已购买节点数 */
+  ElasticNodeNum?: number;
 }
 
 /** llm要检测的图片的检测结果 */
@@ -2332,7 +2430,7 @@ declare interface InstanceInfo {
   ResourceIds: string;
   /** 实例所属地域 */
   Region: string;
-  /** 付费模式 */
+  /** 付费模式，0表示后付费（按量计费），1表示预付费（包年包月） */
   PayMode: number;
   /** 自动续费标识。0：关闭1：开启 */
   RenewFlag: number;
@@ -2378,9 +2476,9 @@ declare interface InstanceInfo {
   APISecurity?: number;
   /** 购买的qps规格 */
   QpsStandard?: number;
-  /** 购买的带宽规格 */
+  /** 购买的带宽规格上限，单位：Mbps */
   BandwidthStandard?: number;
-  /** 实例状态 */
+  /** 实例状态，0表示正常，1表示正常使用，2表示隔离期，3表示已销毁 */
   Status?: number;
   /** 实例沙箱qps值 */
   SandboxQps?: number;
@@ -2392,7 +2490,7 @@ declare interface InstanceInfo {
   HybridPkg?: HybridPkg;
   /** API安全资源包 */
   ApiPkg?: ApiPkg;
-  /** 小程序安全加速包 */
+  /** 小程序安全防护包 */
   MiniPkg?: MiniPkg;
   /** 小程序qps规格 */
   MiniQpsStandard?: number;
@@ -2404,12 +2502,16 @@ declare interface InstanceInfo {
   MiniExtendPkg?: MiniExtendPkg;
   /** 计费项 */
   BillingItem?: string;
-  /** 实例延期释放标识 */
+  /** 实例延期释放标识，0表示不延期，1表示延期释放 */
   FreeDelayFlag?: number;
   /** 最近3天最大qps */
   Last3MaxQPS?: number;
   /** 最近3天最大带宽 */
   Last3MaxBandwidth?: number;
+  /** 过去7天小程序流量最大带宽，单位Byte/s，仅开启小程序安全时有值。转换为Mbps请使用 *8/1000/1000（十进制），不要使用MaxBandwidth所用的*8/1024/1024（二进制），否则会有约4.63%的偏差 */
+  Last7MaxMiniBandwidth?: number;
+  /** 小程序带宽上限，单位Mbps，仅开启小程序安全时有值 */
+  MiniBandwidthStandard?: number;
   /** 重保增强包 */
   MajorEventsProPkg?: MajorEventsProPkg;
   /** 1是基础2025版本；0不是 */
@@ -2418,6 +2520,8 @@ declare interface InstanceInfo {
   NetworkConfig?: NetworkConfig;
   /** RCE设备安全信息包 */
   RCEPkg?: RCEPkg;
+  /** RCE QPS扩展包 */
+  RCEExtendPkg?: RCEExtendPkg;
   /** 超量策略。0：超量沙箱1：超量限流 */
   ExceedPolicy?: number;
   /** 大模型安全信息包 */
@@ -2588,6 +2692,8 @@ declare interface LLMDetectResult {
   Action?: string;
   /** 攻击payload */
   Payload?: string;
+  /** 脱敏后的内容。Action为mask时返回；如果未生成脱敏证据，则返回原文。 */
+  Desensitization?: string;
   /** 图片检测结果 */
   ImageResult?: ImageResult[];
   /** 要代答的消息id，此消息id用于作为GenerateLLMSecAnswer接口的入参 */
@@ -2596,6 +2702,8 @@ declare interface LLMDetectResult {
   ToolCallResult?: ToolCallResult;
   /** 意图检测结果 */
   IntentDetectResult?: IntentDetectResult;
+  /** 恶意URL检测结果 */
+  UrlDetectResult?: UrlDetectResult;
 }
 
 /** 近7天图片送检趋势的单日数据点 */
@@ -2630,7 +2738,7 @@ declare interface LLMKeywordLibrary {
 declare interface LLMMonPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -2666,7 +2774,7 @@ declare interface LLMOptionsItem {
 declare interface LLMPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -2868,12 +2976,14 @@ declare interface LoadBalancer {
   ListenerName: string;
   /** 负载均衡实例的端口 */
   Vport: number;
-  /** 负载均衡LD的地域 */
+  /** 负载均衡LD的地域与 ApRegion 表达同一含义、格式不同。本字段为地域缩写；入参与 ApRegion 同时传入时以 ApRegion 为准 */
   Region: string;
   /** 监听器协议，http、https */
   Protocol: string;
   /** 负载均衡监听器所在的zone */
   Zone: string;
+  /** 负载均衡实例所在地域，腾讯云标准地域格式参数格式：形如 ap-guangzhou与 Region 表达同一含义、格式不同。监听器恒为单地域，数组长度恒为 0 或 1入参可选；与 Region 同时传入时以本字段为准；取值不在枚举范围内时返回 UnsupportedRegion出参在可识别时填充，无法识别时为空数组枚举值：ap-guangzhou：广州ap-shanghai：上海ap-beijing：北京ap-chengdu：成都ap-chongqing：重庆ap-hongkong：中国香港ap-nanjing：南京ap-tianjin：天津ap-shenzhen：深圳ap-qingyuan：清远ap-guangzhou-open：广州Openap-shenzhen-fsi：深圳金融ap-beijing-fsi：北京金融ap-shanghai-fsi：上海金融ap-hangzhou-ec：杭州ap-fuzhou-ec：福州ap-jinan-ec：济南ap-wuhan-ec：武汉ap-changsha-ec：长沙ap-hefei-ec：合肥ap-shenyang-ec：沈阳ap-xian-ec：西安ap-xibei-ec：西北ap-shijiazhuang-ec：石家庄ap-zhengzhou-ec：郑州ap-qingyuan-xinan：清远信安ap-shanghai-adc：上海ADCap-shanghai-wxp-ops：上海无线城市运营ap-singapore：新加坡ap-seoul：首尔ap-tokyo：东京ap-osaka：大阪ap-mumbai：孟买ap-bangkok：曼谷ap-jakarta：雅加达ap-taipei：台北ap-johorbahru：柔佛巴鲁eu-frankfurt：法兰克福eu-moscow：莫斯科na-ashburn：弗吉尼亚na-siliconvalley：硅谷na-toronto：多伦多sa-saopaulo：圣保罗me-saudi-arabia：沙特阿拉伯 */
+  ApRegion?: string[];
   /** 负载均衡实例的IP。域名化CLB VIP可填空。 */
   Vip?: string;
   /** 负载均衡的VPCID，公网为-1，内网按实际填写 */
@@ -2900,7 +3010,7 @@ declare interface LoadBalancerPackageNew {
   LoadBalancerName: string;
   /** 协议 */
   Protocol: string;
-  /** 地区 "多伦多": "ca", "广州": "gz", "成都": "cd", "福州": "fzec", "深圳": "szx", "印度": "in", "济南": "jnec", "重庆": "cq", "天津": "tsn", "欧洲东北": "ru", "南京": "nj", "美国硅谷": "usw", "泰国": "th", "广州Open": "gzopen", "深圳金融": "szjr", "法兰克福": "de", "日本": "jp", "弗吉尼亚": "use", "北京": "bj", "中国香港": "hk", "杭州": "hzec", "北京金融": "bjjr", "上海金融": "shjr", "台北": "tpe", "首尔": "kr", "上海": "sh", "新加坡": "sg", "清远": "qy", "雅加达": "jkt" */
+  /** 地区 "多伦多": "ca", "广州": "gz", "成都": "cd", "福州": "fzec", "深圳": "szx", "印度": "in", "济南": "jnec", "重庆": "cq", "天津": "tsn", "欧洲东北": "ru", "南京": "nj", "美国硅谷": "usw", "泰国": "th", "广州Open": "gzopen", "深圳金融": "szjr", "法兰克福": "de", "日本": "jp", "弗吉尼亚": "use", "北京": "bj", "中国香港": "hk", "杭州": "hzec", "北京金融": "bjjr", "上海金融": "shjr", "台北": "tpe", "首尔": "kr", "上海": "sh", "新加坡": "sg", "清远": "qy", "雅加达": "jkt"与 ApRegion 表达同一含义、格式不同：本字段为地域缩写，ApRegion 为腾讯云标准 ap-xxx 格式 */
   Region: string;
   /** 接入IP */
   Vip: string;
@@ -2912,6 +3022,8 @@ declare interface LoadBalancerPackageNew {
   NumericalVpcId: number;
   /** CLB类型 */
   LoadBalancerType: string;
+  /** 负载均衡实例所在地域，腾讯云标准地域格式参数格式：形如 ap-guangzhou与 Region 表达同一含义、格式不同。监听器恒为单地域，数组长度恒为 0 或 1出参在可识别时填充，无法识别时为空数组枚举值：ap-guangzhou：广州ap-shanghai：上海ap-beijing：北京ap-chengdu：成都ap-chongqing：重庆ap-hongkong：中国香港ap-nanjing：南京ap-tianjin：天津ap-shenzhen：深圳ap-qingyuan：清远ap-guangzhou-open：广州Openap-shenzhen-fsi：深圳金融ap-beijing-fsi：北京金融ap-shanghai-fsi：上海金融ap-hangzhou-ec：杭州ap-fuzhou-ec：福州ap-jinan-ec：济南ap-wuhan-ec：武汉ap-changsha-ec：长沙ap-hefei-ec：合肥ap-shenyang-ec：沈阳ap-xian-ec：西安ap-xibei-ec：西北ap-shijiazhuang-ec：石家庄ap-zhengzhou-ec：郑州ap-qingyuan-xinan：清远信安ap-shanghai-adc：上海ADCap-shanghai-wxp-ops：上海无线城市运营ap-singapore：新加坡ap-seoul：首尔ap-tokyo：东京ap-osaka：大阪ap-mumbai：孟买ap-bangkok：曼谷ap-jakarta：雅加达ap-taipei：台北ap-johorbahru：柔佛巴鲁eu-frankfurt：法兰克福eu-moscow：莫斯科na-ashburn：弗吉尼亚na-siliconvalley：硅谷na-toronto：多伦多sa-saopaulo：圣保罗me-saudi-arabia：沙特阿拉伯 */
+  ApRegion?: string[];
   /** 负载均衡器的域名 */
   LoadBalancerDomain?: string;
   /** 监听器所属appid */
@@ -2976,7 +3088,7 @@ declare interface LogItems {
 declare interface MajorEventsPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -2988,7 +3100,7 @@ declare interface MajorEventsPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -3000,7 +3112,7 @@ declare interface MajorEventsPkg {
 declare interface MajorEventsProPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -3012,7 +3124,7 @@ declare interface MajorEventsProPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -3032,7 +3144,7 @@ declare interface MatchOption {
 declare interface MiniExtendPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -3042,7 +3154,7 @@ declare interface MiniExtendPkg {
   EndTime?: string;
   /** 购买数量 */
   Count?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -3052,7 +3164,7 @@ declare interface MiniExtendPkg {
 declare interface MiniPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -3062,7 +3174,7 @@ declare interface MiniPkg {
   EndTime?: string;
   /** 购买数量 */
   Count?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
@@ -3406,11 +3518,31 @@ declare interface QpsData {
   ElasticPrepaidRatio?: number;
 }
 
+/** RCE QPS扩展包资源信息。与基础套餐同表，inquire_key为sv_wsm_waf_qps_rce_pack系列。不支持弹性 */
+declare interface RCEExtendPkg {
+  /** 资源id */
+  ResourceIds?: string;
+  /** 状态，0表示关闭，1表示开启 */
+  Status?: number;
+  /** 地域 */
+  Region?: number;
+  /** 开始时间 */
+  BeginTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 扩展包个数，每个包1000 QPS */
+  InquireNum?: number;
+  /** 计费项 */
+  BillingItem?: string;
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
+  RenewFlag?: number;
+}
+
 /** 有效REC设备安全包信息 */
 declare interface RCEPkg {
   /** 资源id */
   ResourceIds?: string;
-  /** 状态 */
+  /** 状态，0表示关闭，1表示开启 */
   Status?: number;
   /** 地域 */
   Region?: number;
@@ -3422,10 +3554,14 @@ declare interface RCEPkg {
   InquireNum?: number;
   /** 使用数量 */
   UsedNum?: number;
-  /** 续费标志 */
+  /** 续费标识，0表示手动续费，1表示自动续费，2表示到期不续 */
   RenewFlag?: number;
   /** 计费项 */
   BillingItem?: string;
+  /** 弹性开关。0表示关闭，1表示开启。没有弹性资源时为0 */
+  ElasticMode?: number;
+  /** 弹性QPS上限，单位QPS。合法区间为10000到300000。开关关闭时仍保留上次设置的上限 */
+  ElasticBilling?: number;
 }
 
 /** 限流相关通用返回 */
@@ -3502,6 +3638,8 @@ declare interface RuleDetail {
   DesensitizeSample?: string;
   /** 检测方向取值范围：[0, 3] */
   Direction?: number;
+  /** 规则修改时间（秒级时间戳）：租户对该规则的最近一次修改时间，从未修改则为0 */
+  UpdateTime?: number;
 }
 
 /** 大模型检测内容匹配 */
@@ -3514,6 +3652,8 @@ declare interface RuleItem {
   Value?: string[];
   /** 信息类 */
   Levels?: ValueLevel[];
+  /** Toolcall工具参数名，支持多层路径(如apiData.operate_op)，仅tool_args信息类型使用 */
+  Name?: string;
 }
 
 /** 规则白名单 */
@@ -3948,6 +4088,22 @@ declare interface UpstreamRule {
   AddressList: string[];
   /** 回源负载均衡类型，仅多个回源地址时生效。0：轮询1：IP_HASH */
   BalanceType: number;
+}
+
+/** 恶意URL检测结果 */
+declare interface UrlDetectResult {
+  /** 命中的恶意URL列表 */
+  HitUrls?: UrlHitInfo[];
+}
+
+/** 恶意URL命中信息 */
+declare interface UrlHitInfo {
+  /** 命中的URL */
+  Url?: string;
+  /** 命中的规则ID */
+  RuleId?: string;
+  /** 命中的规则名称 */
+  RuleName?: string;
 }
 
 /** saas和clb、四层域名信息 */
@@ -4507,7 +4663,7 @@ declare interface AddSpartaProtectionRequest {
   GmEncPrivateKey?: string;
   /** GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   GmSSLId?: string;
-  /** 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源 */
+  /** 回源策略。枚举值：0：负载均衡回源（默认值）1：分流回源2：五元组精准回源，每个服务端口通过 UpstreamIps 单独配置回源 IP。仅高级版及以上可用，且仅支持 IP 回源 */
   UpstreamPolicy?: number;
   /** 分流回源时生效，分流回源的规则。 */
   UpstreamRules?: UpstreamRule[];
@@ -5380,7 +5536,7 @@ declare interface DescribeAfterPayInstancesRequest {
 declare interface DescribeAfterPayInstancesResponse {
   /** 总数 */
   Total?: number;
-  /** 后付费实例列表 */
+  /** 后付费实例列表（结构与 DescribeInstances 的 InstanceInfo 一致，全量返回实例字段含各类套餐包信息，额外填充 LLMTokenUsage） */
   Instances?: AfterPayInstanceInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -6375,7 +6531,7 @@ declare interface DescribeInstancesRequest {
   Limit: number;
   /** 过滤数组 */
   Filters?: FiltersItemNew[];
-  /** 释放延期标识 */
+  /** 释放延期标识，0表示不延期，1表示延期释放 */
   FreeDelayFlag?: number;
 }
 
@@ -6509,6 +6665,10 @@ declare interface DescribeLLMContentSecCheckRequest {
   IntentContent?: IntentContent;
   /** 客户端来源IP地址，用于白名单匹配等场景，支持IPv4和IPv6格式 */
   ClientIP?: string;
+  /** 多轮历史用户输入，按时间旧到新排列，仅用于提示词注入检测入参限制：最多10条，超出保留最新10条；History + Content 拼接后不超过6K字符，超限从最早History开始丢弃 */
+  History?: string[];
+  /** 待检测的URL列表，用于恶意URL检测入参限制：最多50个，单个URL长度不超过2048字符，超出截断 */
+  Urls?: string[];
 }
 
 declare interface DescribeLLMContentSecCheckResponse {
@@ -6565,10 +6725,16 @@ declare interface DescribeLLMSdkAccessResponse {
 }
 
 declare interface DescribeLLMWafDLPRulesRequest {
-  /** 服务ID */
+  /** SDK 模式传 ServiceId（与 Domain 二选一） */
   ServiceId?: string;
   /** 实例id */
   InstanceId?: string;
+  /** 排序字段，当前仅支持 UpdateTime；为空则按规则默认顺序返回 */
+  By?: string;
+  /** 排序方向：asc(升序)/desc(降序)，默认 desc */
+  Order?: string;
+  /** 域名模式传 Domain（与 ServiceId 二选一） */
+  Domain?: string;
 }
 
 declare interface DescribeLLMWafDLPRulesResponse {
@@ -6579,12 +6745,14 @@ declare interface DescribeLLMWafDLPRulesResponse {
 }
 
 declare interface DescribeLLMWafProtectRulesRequest {
-  /** 服务ID */
+  /** SDK 模式传 ServiceId（与 Domain 二选一） */
   ServiceId?: string;
   /** 实例id */
   InstanceId?: string;
   /** 规则类型 */
   RuleType?: string;
+  /** 域名模式传 Domain（与 ServiceId 二选一） */
+  Domain?: string;
 }
 
 declare interface DescribeLLMWafProtectRulesResponse {
@@ -8329,7 +8497,7 @@ declare interface ModifyLLMContentRuleRequest {
   ContentLogicalOp?: string;
   /** 实例id，必填项 */
   InstanceId?: string;
-  /** 代答类型：1-内置可信模型安全代答，2-自定义代答（ActionType=reply时生效枚举值：1： 内置可信模型安全代答2： 自定义代答ActionType=reply时生效 */
+  /** 代答类型：1-内置可信模型安全代答，2-自定义代答(ActionType=reply)时生效枚举值：1： 内置可信模型安全代答2： 自定义代答(ActionType=reply)时生效 */
   ReplyType?: number;
   /** 自定义回答模板 */
   CustomReplyRuleId?: string;
@@ -8341,6 +8509,8 @@ declare interface ModifyLLMContentRuleRequest {
   Domains?: string[];
   /** 加白生效模块type列表（Category=white时使用），表示该白名单规则命中后对哪些防护模块生效(放行)。取值：2-算力消耗规则，3-自定义防护规则，4-ToolCall防护，5-提示词攻击防护，6-内容合规检测，7-敏感数据检测。 */
   AppliedModules?: number[];
+  /** 严重程度：critical-超高危，high-高危，medium-中危(默认)，low-低危。命中该规则时攻击日志按此展示风险等级；不传或空值按medium处理。枚举值：critical： 超高危high： 高危medium： 中危(默认)low： 低危 */
+  RiskLevel?: string;
 }
 
 declare interface ModifyLLMContentRuleResponse {
@@ -8759,7 +8929,7 @@ declare interface ModifySpartaProtectionRequest {
   GmEncPrivateKey?: string;
   /** GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id */
   GmSSLId?: string;
-  /** 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源 */
+  /** 回源策略。枚举值：0：负载均衡回源（默认值）1：分流回源2：五元组精准回源，每个服务端口通过 UpstreamIps 单独配置回源 IP。仅高级版及以上可用，且仅支持 IP 回源 */
   UpstreamPolicy?: number;
   /** 分流回源时生效，分流回源的规则。 */
   UpstreamRules?: UpstreamRule[];

@@ -160,7 +160,7 @@ declare interface ConnectorInfo {
   Type?: string;
   /** 上游服务地址 */
   ServiceUrl?: string;
-  /** 授权方式列表：NONE / ONEID / OAUTH2_IDP */
+  /** 授权方式列表：NONE / ONEID / OAUTH2_IDP / API_KEY */
   AuthModes?: string[];
   /** 最新版本号 */
   LatestVersionNo?: number;
@@ -172,6 +172,8 @@ declare interface ConnectorInfo {
   CreatedTime?: string;
   /** 最后修改时间（ISO8601，UTC） */
   ModifiedTime?: string;
+  /** VPC 网络配置 ID。为空表示该连接器通过公网访问 ServiceUrl。仅绑定 VPC 网络配置时本字段有值。 */
+  VpcConfigId?: string;
 }
 
 /** 连接器引用入参 */

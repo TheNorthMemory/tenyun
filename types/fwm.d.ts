@@ -560,6 +560,38 @@ declare interface RiskCategoryItem {
   RemediationStatus?: string;
 }
 
+/** 规则组详情数据 */
+declare interface RuleGroupResp {
+  /** 租户Id */
+  AppId?: string;
+  /** 规则组Id */
+  GroupId?: string;
+  /** 规则组名称 */
+  GroupName?: string;
+  /** 规则数量 */
+  RuleCount?: number;
+  /** 产品类型 */
+  Product?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 创建人SubUin */
+  CreateBy?: string;
+  /** 创建人名称 */
+  CreateName?: string;
+  /** 更新人SubUin */
+  UpdateBy?: string;
+  /** 更新人名称 */
+  UpdateName?: string;
+  /** 下发关联账号 */
+  ReceiveAccount?: ReceiveAccount[];
+  /** 所属阶段 */
+  ExecAreas?: string[];
+  /** 规则方向：1-入站规则，0-出站规则，-1 表示无方向 */
+  Direction?: number;
+}
+
 /** 企业安全组规则列表信息 */
 declare interface SecGroupRuleResp {
   /** 排序 */
@@ -1310,6 +1342,30 @@ declare interface DescribeRiskListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRuleGroupsRequest {
+  /** 产品类型 */
+  Product?: string;
+  /** 产品类型 */
+  Filters?: CommonFilter[];
+  /** 排序 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+  /** 起始位置 */
+  Offset?: number;
+  /** 查询数量 */
+  Limit?: number;
+}
+
+declare interface DescribeRuleGroupsResponse {
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 规则组列表 */
+  RuleGroups?: RuleGroupResp[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSecurityGroupRuleRequest {
   /** 规则组Id */
   GroupId?: string;
@@ -1655,6 +1711,8 @@ declare interface Fwm {
   DescribeRiskCategoryStats(data?: DescribeRiskCategoryStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskCategoryStatsResponse>;
   /** 查询策略风险列表 {@link DescribeRiskListRequest} {@link DescribeRiskListResponse} */
   DescribeRiskList(data: DescribeRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRiskListResponse>;
+  /** 规则组列表查询（规则组管理） {@link DescribeRuleGroupsRequest} {@link DescribeRuleGroupsResponse} */
+  DescribeRuleGroups(data?: DescribeRuleGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRuleGroupsResponse>;
   /** 查询企业安全组规则详情 {@link DescribeSecurityGroupRuleRequest} {@link DescribeSecurityGroupRuleResponse} */
   DescribeSecurityGroupRule(data?: DescribeSecurityGroupRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityGroupRuleResponse>;
   /** 查询企业安全组规则列表 {@link DescribeSecurityGroupRulesRequest} {@link DescribeSecurityGroupRulesResponse} */

@@ -170,6 +170,72 @@ declare interface DeleteResourceData {
   ResourceId: number | null;
 }
 
+/** 编辑的数据内容 */
+declare interface DeliverServerItem {
+  /** 服务器id (创建时忽略) */
+  ID?: number | null;
+  /** 服务器名称 */
+  Name?: string | null;
+  /** 转发服务器地址类型 4:syslog, 2:kafka, 3:http(只支持32位) */
+  Type?: number | null;
+  /** 服务器描述 */
+  Description?: string | null;
+  /** syslog服务器地址 */
+  TargetSyslogAddress?: string | null;
+  /** syslog协议类型 */
+  TargetSyslogProtocol?: string | null;
+  /** syslog协议端口(只支持32位) */
+  TargetSyslogPort?: number | null;
+  /** syslog设备/Facility */
+  SyslogFacility?: string | null;
+  /** Kafka服务器地址 */
+  TargetKafkaAddress?: string | null;
+  /** Kafka主题 */
+  TargetKafkaTopic?: string | null;
+  /** Kafka版本 */
+  KafkaVersion?: string | null;
+  /** Kafka sasl用户名 */
+  KafkaSaslUserName?: string | null;
+  /** Kafka sasl密码 */
+  KafkaSaslPassword?: string | null;
+  /** http服务器地址 */
+  TargetHttpUrl?: string | null;
+  /** http服务超时时间(只支持32位)单位：毫秒 */
+  TargetHttpTimeout?: number | null;
+  /** 连接器分组ID */
+  ConnectorGroupId?: string | null;
+  /** 连接器分组名称 */
+  ConnectorGroupName?: string | null;
+  /** KAFKA是否启用SSL */
+  KafkaSSLEnable?: boolean;
+  /** 跳过证书检查 */
+  SSLSkipVerify?: boolean;
+}
+
+/** 数据 */
+declare interface DeliveryStrategyData {
+  /** 数据 */
+  Data?: DeliveryStrategyItem | null;
+}
+
+/** 数据 */
+declare interface DeliveryStrategyItem {
+  /** 策略名称 */
+  Name?: string | null;
+  /** 转发方式 0:syslog, 2:kafka, 3:http(只支持32位) */
+  Type?: number | null;
+  /** 转发日志类型列表 身份安全:"040201000000",资源访问日志:"040203000000",客户端操作日志:"040202000000",终端安全日志:"040205000000",终端管控日志:"040206000000",终端合规日志:"040207000000",license授权日志:"040212000000" */
+  LogTypes?: string[] | null;
+  /** 转发配置服务器名称 */
+  ConfigName?: string | null;
+  /** 策略描述 */
+  Description?: string | null;
+  /** 转发策略id */
+  ID?: number | null;
+  /** 转发服务器id */
+  ConfigId?: number | null;
+}
+
 /** 多OU组信息 */
 declare interface DescribeAccountAccountGroupsData {
   /** 组Id(只支持32位) */
@@ -790,6 +856,12 @@ declare interface DescribeProfileFieldsRspData {
   ProfileTips?: ProfileTips;
 }
 
+/** 获取公钥加密的key数据 */
+declare interface DescribePublicEncryptKeyData {
+  /** 返回公钥，base64编码后返回，使用需要base64解码 */
+  PublicEncryptKey?: string;
+}
+
 /** 账号分组授权信息 */
 declare interface DescribeResourceGrantedAccountGroupsData {
   /** 授权信息 */
@@ -1400,6 +1472,18 @@ declare interface I18nString {
   Value?: string;
 }
 
+/** 修改转发服务器返回数据 */
+declare interface ModifyDeliveryServerData {
+  /** 服务器ID */
+  ID?: number;
+}
+
+/** 修改转发策略返回数据 */
+declare interface ModifyDeliveryStrategyData {
+  /** 策略ID */
+  ID?: number;
+}
+
 /** 操作的设备列表 */
 declare interface ModifyVirtualDeviceGroupsReqItem {
   /** 设备mid */
@@ -1782,6 +1866,26 @@ declare interface DeleteAccountGroupResponse {
   RequestId?: string;
 }
 
+declare interface DeleteDeliveryServerRequest {
+  /** 服务器id */
+  ID?: number;
+}
+
+declare interface DeleteDeliveryServerResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteDeliveryStrategyRequest {
+  /** 转发策略id */
+  ID?: number;
+}
+
+declare interface DeleteDeliveryStrategyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDeviceVirtualGroupRequest {
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -1972,6 +2076,30 @@ declare interface DescribeDLPFileDetectTaskResultResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDeliveryServerRequest {
+  /** 服务器id */
+  ID?: number;
+}
+
+declare interface DescribeDeliveryServerResponse {
+  /** 数据 */
+  Data?: DeliverServerItem | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeliveryStrategyRequest {
+  /** 转发策略id */
+  ID?: number;
+}
+
+declare interface DescribeDeliveryStrategyResponse {
+  /** 数据 */
+  Data?: DeliveryStrategyData | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeDeviceChildGroupsRequest {
   /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
   DomainInstanceId?: string;
@@ -2142,6 +2270,16 @@ declare interface DescribeProfileFieldsMenuRequest {
 declare interface DescribeProfileFieldsMenuResponse {
   /** 描述字段数据 */
   Data?: DescribeProfileFieldsRspData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePublicEncryptKeyRequest {
+}
+
+declare interface DescribePublicEncryptKeyResponse {
+  /** 获取公钥加密的key数据 */
+  Data?: DescribePublicEncryptKeyData;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2394,6 +2532,42 @@ declare interface ModifyCompanyDirectoryConfigResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDeliveryServerRequest {
+  /** 编辑的数据内容 */
+  Data?: DeliverServerItem;
+}
+
+declare interface ModifyDeliveryServerResponse {
+  /** 转发服务器返回内容 */
+  Data?: ModifyDeliveryServerData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDeliveryStrategyRequest {
+  /** 策略名称 */
+  Name?: string;
+  /** 转发日志类型列表 身份安全:"040201000000",资源访问日志:"040203000000",客户端操作日志:"040202000000",终端安全日志:"040205000000",终端管控日志:"040206000000",终端合规日志:"040207000000",license授权日志:"040212000000" */
+  LogTypes?: string[];
+  /** 转发方式 0:syslog, 2:kafka, 3:http(只支持32位) */
+  Type?: number;
+  /** 转发服务器id(只支持32位) */
+  ConfigId?: number;
+  /** 转发策略描述 */
+  Description?: string;
+  /** 是否开启 */
+  Enabled?: boolean;
+  /** 转发策略id 创建时传递 编辑时候无需传递(只支持32位) */
+  ID?: number;
+}
+
+declare interface ModifyDeliveryStrategyResponse {
+  /** 策略返回内容 */
+  Data?: ModifyDeliveryStrategyData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDeviceTrustStatusRequest {
   /** 设备状态，1表示拉黑，0表示加白 */
   Status: number;
@@ -2473,6 +2647,10 @@ declare interface Ioa {
   DeleteAccountGroup(data?: DeleteAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResponse>;
   /** 删除账户组资源 {@link DeleteAccountGroupResourcesRequest} {@link DeleteAccountGroupResourcesResponse} */
   DeleteAccountGroupResources(data: DeleteAccountGroupResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResourcesResponse>;
+  /** 删除转发服务器 {@link DeleteDeliveryServerRequest} {@link DeleteDeliveryServerResponse} */
+  DeleteDeliveryServer(data?: DeleteDeliveryServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeliveryServerResponse>;
+  /** 删除转发策略 {@link DeleteDeliveryStrategyRequest} {@link DeleteDeliveryStrategyResponse} */
+  DeleteDeliveryStrategy(data?: DeleteDeliveryStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeliveryStrategyResponse>;
   /** 删除终端自定义分组 {@link DeleteDeviceVirtualGroupRequest} {@link DeleteDeviceVirtualGroupResponse} */
   DeleteDeviceVirtualGroup(data?: DeleteDeviceVirtualGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeviceVirtualGroupResponse>;
   /** 获取账号分组信息 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
@@ -2497,6 +2675,10 @@ declare interface Ioa {
   DescribeDLPFileDetectResult(data?: DescribeDLPFileDetectResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectResultResponse>;
   /** 查询文件鉴定任务结果 {@link DescribeDLPFileDetectTaskResultRequest} {@link DescribeDLPFileDetectTaskResultResponse} */
   DescribeDLPFileDetectTaskResult(data?: DescribeDLPFileDetectTaskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDLPFileDetectTaskResultResponse>;
+  /** 转发服务器详情 {@link DescribeDeliveryServerRequest} {@link DescribeDeliveryServerResponse} */
+  DescribeDeliveryServer(data?: DescribeDeliveryServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryServerResponse>;
+  /** 转发策略详情 {@link DescribeDeliveryStrategyRequest} {@link DescribeDeliveryStrategyResponse} */
+  DescribeDeliveryStrategy(data?: DescribeDeliveryStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeliveryStrategyResponse>;
   /** 查询设备组子分组 {@link DescribeDeviceChildGroupsRequest} {@link DescribeDeviceChildGroupsResponse} */
   DescribeDeviceChildGroups(data?: DescribeDeviceChildGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceChildGroupsResponse>;
   /** @deprecated 基于软件查看终端详情列表 {@link DescribeDeviceDetailListRequest} {@link DescribeDeviceDetailListResponse} */
@@ -2517,6 +2699,8 @@ declare interface Ioa {
   DescribeLocalAccounts(data?: DescribeLocalAccountsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLocalAccountsResponse>;
   /** 查询终端描述字段菜单 {@link DescribeProfileFieldsMenuRequest} {@link DescribeProfileFieldsMenuResponse} */
   DescribeProfileFieldsMenu(data: DescribeProfileFieldsMenuRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProfileFieldsMenuResponse>;
+  /** 获取加密公钥 {@link DescribePublicEncryptKeyRequest} {@link DescribePublicEncryptKeyResponse} */
+  DescribePublicEncryptKey(data?: DescribePublicEncryptKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicEncryptKeyResponse>;
   /** 查询授权的分组列表 {@link DescribeResourceGrantedAccountGroupsRequest} {@link DescribeResourceGrantedAccountGroupsResponse} */
   DescribeResourceGrantedAccountGroups(data: DescribeResourceGrantedAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceGrantedAccountGroupsResponse>;
   /** 查询直接授权的账号列表 {@link DescribeResourceGrantedAccountsRequest} {@link DescribeResourceGrantedAccountsResponse} */
@@ -2547,6 +2731,10 @@ declare interface Ioa {
   ModifyBusinessResource(data: ModifyBusinessResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBusinessResourceResponse>;
   /** 编辑企业目录配置 {@link ModifyCompanyDirectoryConfigRequest} {@link ModifyCompanyDirectoryConfigResponse} */
   ModifyCompanyDirectoryConfig(data: ModifyCompanyDirectoryConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCompanyDirectoryConfigResponse>;
+  /** 创建或编辑日志转发服务器 {@link ModifyDeliveryServerRequest} {@link ModifyDeliveryServerResponse} */
+  ModifyDeliveryServer(data?: ModifyDeliveryServerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeliveryServerResponse>;
+  /** 创建或编辑日志转发策略 {@link ModifyDeliveryStrategyRequest} {@link ModifyDeliveryStrategyResponse} */
+  ModifyDeliveryStrategy(data?: ModifyDeliveryStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeliveryStrategyResponse>;
   /** 给接入设备批量加黑加白 {@link ModifyDeviceTrustStatusRequest} {@link ModifyDeviceTrustStatusResponse} */
   ModifyDeviceTrustStatus(data: ModifyDeviceTrustStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeviceTrustStatusResponse>;
   /** 终端自定义分组批量增减终端 {@link ModifyVirtualDeviceGroupsRequest} {@link ModifyVirtualDeviceGroupsResponse} */

@@ -2,6 +2,16 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 申请的权限配置，包含用户申请权限配置的配置 ID、配置名称、描述信息 */
+declare interface ApplyRoleConfiguration {
+  /** 权限配置 ID */
+  RoleConfigurationId: string;
+  /** 权限配置名称 */
+  RoleConfigurationName: string;
+  /** 说明 */
+  Description?: string;
+}
+
 /** 互信主体主要信息 */
 declare interface AuthNode {
   /** 互信主体关系ID */
@@ -492,6 +502,30 @@ declare interface OrganizationServiceAssignMember {
   ManagementScopeMembers?: MemberMainInfo[];
   /** 管理的部门ID列表。ManagementScope值为2时该参数有效 */
   ManagementScopeNodes?: NodeMainInfo[];
+}
+
+/** 权限申请单，描述一张完整的权限申请工单，即谁（UserId/UserName）向哪个成员账号（TargetUin/TargetName）申请了哪些权限配置（RoleConfigurations），以及审批进展如何 */
+declare interface PermissionApplyOrder {
+  /** 申请单 ID */
+  ApplyId: string;
+  /** 申请人用户 ID */
+  UserId: string;
+  /** 申请人用户名 */
+  UserName: string;
+  /** 目标成员账号 UIN */
+  TargetUin: number;
+  /** 目标成员账号名称 */
+  TargetName: string;
+  /** 申请的权限配置 */
+  RoleConfigurations: ApplyRoleConfiguration[];
+  /** 申请单状态枚举值：1： 待审核2： 已通过 - 同步中3： 已通过 - 同步成功4： 已通过 - 同步失败5： 已拒绝 */
+  Status: number;
+  /** 创建时间参数格式：YYYY-M-DD hh:mm:ss */
+  CreateTime: string;
+  /** 审批意见 */
+  AuditOpinion?: string;
+  /** 审批时间参数格式：YYYY-M-DD hh:mm:ss未审批为空 */
+  AuditTime?: string;
 }
 
 /** 策略详情 */
@@ -1412,6 +1446,20 @@ declare interface CreateRoleAssignmentResponse {
   RequestId?: string;
 }
 
+declare interface CreateRoleConfigurationApplyScopeRequest {
+  /** 用户目录 */
+  ZoneId: string;
+  /** 申请范围条目 */
+  ApplyScopeInfo: RoleAssignmentInfo[];
+}
+
+declare interface CreateRoleConfigurationApplyScopeResponse {
+  /** 成功 upsert 的条目数 */
+  SuccessCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateRoleConfigurationRequest {
   /** 空间 ID。 */
   ZoneId: string;
@@ -1630,6 +1678,24 @@ declare interface DeleteRoleAssignmentRequest {
 declare interface DeleteRoleAssignmentResponse {
   /** 任务详情 */
   Task?: TaskInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteRoleConfigurationApplyScopeRequest {
+  /** 空间ID */
+  ZoneId: string;
+  /** 权限配置 ID 列表 */
+  RoleConfigurationIds: string[];
+  /** 目标账号 UIN */
+  TargetUin: number;
+  /** 身份 ID */
+  PrincipalId: string;
+  /** 身份类型枚举值：User： 用户Group： 用户组 */
+  PrincipalType: string;
+}
+
+declare interface DeleteRoleConfigurationApplyScopeResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2638,6 +2704,34 @@ declare interface ListOrganizationServiceResponse {
   RequestId?: string;
 }
 
+declare interface ListPermissionApplyOrdersRequest {
+  /** 空间 ID */
+  ZoneId: string;
+  /** 搜索字段按用户名 / 用户 ID 搜索 */
+  SearchValue?: string;
+  /** 状态值枚举值：1： 待审核2： 已通过 - 同步中3： 已通过 - 同步成功4： 已通过 - 同步失败5： 已拒绝 */
+  Status?: number;
+  /** 每页条数取值范围：[1, 100]默认值：10 */
+  MaxResults?: number;
+  /** 翻页游标 */
+  NextToken?: string;
+}
+
+declare interface ListPermissionApplyOrdersResponse {
+  /** 申请单列表 */
+  ApplyOrders?: PermissionApplyOrder[];
+  /** 总数 */
+  TotalCounts?: number;
+  /** 翻页游标 */
+  NextToken?: string;
+  /** 是否还有下一页 */
+  IsTruncated?: boolean;
+  /** 每页条数 */
+  MaxResults?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListPermissionPoliciesInRoleConfigurationRequest {
   /** 空间 ID */
   ZoneId: string;
@@ -2734,6 +2828,38 @@ declare interface ListRoleAssignmentsResponse {
   IsTruncated?: boolean;
   /** 集团账号目标账号的授权列表。 */
   RoleAssignments?: RoleAssignments[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListRoleConfigurationApplyScopesRequest {
+  /** 空间 ID */
+  ZoneId: string;
+  /** 身份 ID */
+  PrincipalId: string;
+  /** 身份类型枚举值：User： 用户Group： 用户组 */
+  PrincipalType: string;
+  /** 目标账号 UIN */
+  TargetUin?: number;
+  /** 过滤条件 */
+  Filter?: string;
+  /** 每页条数取值范围：[1, 100]默认值：10 */
+  MaxResults?: number;
+  /** 翻页游标 */
+  NextToken?: string;
+}
+
+declare interface ListRoleConfigurationApplyScopesResponse {
+  /** 申请范围列表 */
+  ApplyScopes?: RoleAssignments[];
+  /** 总数 */
+  TotalCounts?: number;
+  /** 每页条数 */
+  MaxResults?: number;
+  /** 翻页游标 */
+  NextToken?: string;
+  /** 是否被截断 */
+  IsTruncated?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3763,6 +3889,8 @@ declare interface Organization {
   CreateRoleAssignment(data: CreateRoleAssignmentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleAssignmentResponse>;
   /** 创建权限配置 {@link CreateRoleConfigurationRequest} {@link CreateRoleConfigurationResponse} */
   CreateRoleConfiguration(data: CreateRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleConfigurationResponse>;
+  /** 创建权限申请范围 {@link CreateRoleConfigurationApplyScopeRequest} {@link CreateRoleConfigurationApplyScopeResponse} */
+  CreateRoleConfigurationApplyScope(data: CreateRoleConfigurationApplyScopeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleConfigurationApplyScopeResponse>;
   /** 创建SCIM密钥 {@link CreateSCIMCredentialRequest} {@link CreateSCIMCredentialResponse} */
   CreateSCIMCredential(data: CreateSCIMCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSCIMCredentialResponse>;
   /** 创建用户 {@link CreateUserRequest} {@link CreateUserResponse} */
@@ -3793,6 +3921,8 @@ declare interface Organization {
   DeleteRoleAssignment(data: DeleteRoleAssignmentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleAssignmentResponse>;
   /** 删除权限配置信息 {@link DeleteRoleConfigurationRequest} {@link DeleteRoleConfigurationResponse} */
   DeleteRoleConfiguration(data: DeleteRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleConfigurationResponse>;
+  /** 删除权限申请范围 {@link DeleteRoleConfigurationApplyScopeRequest} {@link DeleteRoleConfigurationApplyScopeResponse} */
+  DeleteRoleConfigurationApplyScope(data: DeleteRoleConfigurationApplyScopeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleConfigurationApplyScopeResponse>;
   /** 删除SCIM密钥 {@link DeleteSCIMCredentialRequest} {@link DeleteSCIMCredentialResponse} */
   DeleteSCIMCredential(data: DeleteSCIMCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSCIMCredentialResponse>;
   /** 删除共享单元 {@link DeleteShareUnitRequest} {@link DeleteShareUnitResponse} */
@@ -3899,6 +4029,8 @@ declare interface Organization {
   ListOrganizationIdentity(data: ListOrganizationIdentityRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationIdentityResponse>;
   /** 获取集团服务设置列表 {@link ListOrganizationServiceRequest} {@link ListOrganizationServiceResponse} */
   ListOrganizationService(data: ListOrganizationServiceRequest, config?: AxiosRequestConfig): AxiosPromise<ListOrganizationServiceResponse>;
+  /** 管理员审批列表 {@link ListPermissionApplyOrdersRequest} {@link ListPermissionApplyOrdersResponse} */
+  ListPermissionApplyOrders(data: ListPermissionApplyOrdersRequest, config?: AxiosRequestConfig): AxiosPromise<ListPermissionApplyOrdersResponse>;
   /** 获取权限配置中的策略列表 {@link ListPermissionPoliciesInRoleConfigurationRequest} {@link ListPermissionPoliciesInRoleConfigurationResponse} */
   ListPermissionPoliciesInRoleConfiguration(data: ListPermissionPoliciesInRoleConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<ListPermissionPoliciesInRoleConfigurationResponse>;
   /** 查看策略列表数据 {@link ListPoliciesRequest} {@link ListPoliciesResponse} */
@@ -3907,6 +4039,8 @@ declare interface Organization {
   ListPoliciesForTarget(data: ListPoliciesForTargetRequest, config?: AxiosRequestConfig): AxiosPromise<ListPoliciesForTargetResponse>;
   /** 查询授权列表 {@link ListRoleAssignmentsRequest} {@link ListRoleAssignmentsResponse} */
   ListRoleAssignments(data: ListRoleAssignmentsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRoleAssignmentsResponse>;
+  /** 权限申请范围列表 {@link ListRoleConfigurationApplyScopesRequest} {@link ListRoleConfigurationApplyScopesResponse} */
+  ListRoleConfigurationApplyScopes(data: ListRoleConfigurationApplyScopesRequest, config?: AxiosRequestConfig): AxiosPromise<ListRoleConfigurationApplyScopesResponse>;
   /** 查询权限配置部署列表 {@link ListRoleConfigurationProvisioningsRequest} {@link ListRoleConfigurationProvisioningsResponse} */
   ListRoleConfigurationProvisionings(data: ListRoleConfigurationProvisioningsRequest, config?: AxiosRequestConfig): AxiosPromise<ListRoleConfigurationProvisioningsResponse>;
   /** 查询权限配置列表 {@link ListRoleConfigurationsRequest} {@link ListRoleConfigurationsResponse} */

@@ -2925,6 +2925,8 @@ declare interface CreateNotebookRequest {
   AutoStopping: boolean;
   /** 是否访问公网 */
   DirectInternetAccess: boolean;
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
   /** 资源组ID(for预付费) */
   ResourceGroupId?: string;
   /** Vpc-Id */

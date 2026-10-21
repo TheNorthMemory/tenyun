@@ -401,7 +401,7 @@ declare interface DescribeProbeMetricDataResponse {
 }
 
 declare interface DescribeProbeMetricTagValuesRequest {
-  /** 分析任务类型，支持以下几种类型：AnalyzeTaskType_Network：网络质量AnalyzeTaskType_Browse：页面性能 AnalyzeTaskType_Transport：端口性能AnalyzeTaskType_UploadDownload：文件传输AnalyzeTaskType_MediaStream：音视频体验 */
+  /** 分析任务类型，支持以下几种类型：AnalyzeTaskType_Network：网络质量AnalyzeTaskType_Browse：页面性能AnalyzeTaskType_Transport：端口性能AnalyzeTaskType_UploadDownload：文件传输AnalyzeTaskType_MediaStream：音视频体验 */
   AnalyzeTaskType?: string;
   /** 维度标签值，参考：host：任务域名errorInfo：状态类型area：拨测点地区operator：拨测点运营商taskId：任务ID */
   Key?: string;

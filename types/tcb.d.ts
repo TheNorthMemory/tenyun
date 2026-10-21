@@ -48,6 +48,14 @@ declare interface AIModelSecret {
   ApiKey?: string;
 }
 
+/** 控制模型启用和停止 */
+declare interface AIModelStatus {
+  /** 模型名称 */
+  Model?: string;
+  /** 开关状态枚举值：ENABLE： 打开模型DISABLE： 关闭模型 */
+  Status?: string;
+}
+
 /** Agent 创建云函数镜像配置 */
 declare interface AgentRuntimeCodeImageConfig {
   /** 镜像仓库类型，个人版或者企业版：personal/enterprise */
@@ -4040,6 +4048,22 @@ declare interface ListTablesResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAIModelStatusRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** 分组名枚举值：cloudbase： 生文系列内置模型hunyuan-image： 生图系列内置模型系统内置分组固定标识 */
+  GroupName: string;
+  /** 模型设置空数组表示无操作 */
+  Models?: AIModelStatus[];
+}
+
+declare interface ModifyAIModelStatusResponse {
+  /** 影响的分组数 */
+  Count?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyClientRequest {
   /** 客户端所属的云开发环境 ID，用于标识该应用归属的云开发环境。不同环境之间的应用数据相互隔离。 */
   EnvId: string;
@@ -4921,6 +4945,8 @@ declare interface Tcb {
   ListPGUserMigrations(data: ListPGUserMigrationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListPGUserMigrationsResponse>;
   /** 查询文档型数据库所有表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
+  /** 启停AI模型 {@link ModifyAIModelStatusRequest} {@link ModifyAIModelStatusResponse} */
+  ModifyAIModelStatus(data: ModifyAIModelStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIModelStatusResponse>;
   /** 修改应用客户端 {@link ModifyClientRequest} {@link ModifyClientResponse} */
   ModifyClient(data: ModifyClientRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClientResponse>;
   /** 修改日志主题 {@link ModifyClsTopicRequest} {@link ModifyClsTopicResponse} */
