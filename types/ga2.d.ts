@@ -316,7 +316,7 @@ declare interface GlobalAcceleratorSet {
 declare interface HideResponseHeaders {
   /** key参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()<>@,;:\"/[ ]?={ }入参限制：长度在1-40。 */
   Key: string;
-  /** value当前仅支持传空字符串"" */
+  /** value值枚举值：''： '' */
   Value: string;
 }
 

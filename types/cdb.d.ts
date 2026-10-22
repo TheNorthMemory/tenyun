@@ -5501,7 +5501,7 @@ declare interface SwitchCDBProxyResponse {
 declare interface SwitchDBInstanceMasterSlaveRequest {
   /** 实例 ID。 */
   InstanceId: string;
-  /** 目标从实例。可选值："first" - 第一备机；"second" - 第二备机。默认值为 "first"，仅多可用区实例支持设置为 "second"。 */
+  /** 目标从实例。可选值："first" - 第一备机；"second" - 第二备机；"third" - 第三备机。默认值为 "first"，仅多可用区实例支持设置为 "second"。 */
   DstSlave?: string;
   /** 是否强制切换。默认为 False。注意，若设置强制切换为 True，实例存在丢失数据的风险，请谨慎使用。 */
   ForceSwitch?: boolean;
@@ -5509,6 +5509,10 @@ declare interface SwitchDBInstanceMasterSlaveRequest {
   WaitSwitch?: boolean;
   /** 集群版实例指定节点 ID 发起主从切换。 */
   DstNodeId?: string;
+  /** 等待主备位点差收敛到阈值以内的最长时间,范围：30s-3600s */
+  SyncTimeout?: number;
+  /** slave 执行位点和读到位点差值，在最长等待时间内，位点差需小于该值才启动切换 */
+  SyncDistance?: string;
 }
 
 declare interface SwitchDBInstanceMasterSlaveResponse {

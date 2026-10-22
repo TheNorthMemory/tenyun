@@ -942,6 +942,10 @@ declare interface GetServiceStatusResponse {
   ResourceZone?: number;
   /** 资源的地域可用区信息 */
   ResourceRegion?: number;
+  /** 多账号开通额度单位：个数 */
+  MultiAccountLimit?: number;
+  /** 多账号启用个数单位：个数 */
+  MultiAccountUsedCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

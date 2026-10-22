@@ -1190,18 +1190,30 @@ declare interface SearchKeyword {
   Value?: string;
 }
 
+/** TWeSee CKafka 回调配置 */
+declare interface SeeCallbackCKafkaConfig {
+  /** CKafka 实例 ID */
+  InstanceId: string;
+  /** CKafka 实例中的 Topic 名 */
+  Topic: string;
+  /** CKafka 实例所在的地域 */
+  Region: string;
+}
+
 /** TWeSee 回调目标信息 */
 declare interface SeeCallbackInfo {
   /** 回调目标 ID */
   CallbackId?: string;
-  /** 回调签名 token */
-  CallbackToken?: string;
+  /** 回调类型枚举值：none： 不回调http： HTTP 回调ckafka： 投递 CKafka Topic */
+  Type?: string;
   /** 回调 URL */
   CallbackUrl?: string;
+  /** 回调签名 token */
+  CallbackToken?: string;
+  /** 回调 CKafka 配置 */
+  CallbackCKafka?: SeeCallbackCKafkaConfig;
   /** 创建时间（秒级时间戳） */
   CreateTime?: number;
-  /** 回调类型 */
-  Type?: string;
   /** 更新时间（秒级时间戳） */
   UpdateTime?: number;
 }
@@ -3083,12 +3095,16 @@ declare interface CreateTRTCSignaturesWithRoomIdResponse {
 }
 
 declare interface CreateTWeSeeCallbackRequest {
-  /** 回调类型。可选值：\n- `http` HTTP 回调 */
+  /** 回调类型枚举值：none： 不回调http： HTTP 回调ckafka： 投递 CKafka Topic */
   Type: string;
   /** 回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口 */
-  CallbackUrl: string;
+  CallbackUrl?: string;
   /** 回调签名 Token。最大长度 128 */
   CallbackToken?: string;
+  /** 回调 CKafka 配置 */
+  CallbackCKafka?: SeeCallbackCKafkaConfig;
+  /** 要创建回调目标的产品 ID */
+  ProductId?: string;
 }
 
 declare interface CreateTWeSeeCallbackResponse {
@@ -3565,7 +3581,7 @@ declare interface DeleteStudioProductResponse {
 }
 
 declare interface DeleteTWeSeeCallbackRequest {
-  /** 回调目标 ID，格式为 `callback-` + 8 位小写字母数字 */
+  /** 回调目标 ID */
   CallbackId: string;
 }
 
@@ -6565,14 +6581,16 @@ declare interface ModifyStudioProductResponse {
 }
 
 declare interface ModifyTWeSeeCallbackRequest {
-  /** 回调目标 ID，格式为 `callback-` + 8 位小写字母数字 */
+  /** 回调目标 ID */
   CallbackId: string;
-  /** 回调 URL，需要可访问并通过 Echo 校验 */
-  CallbackUrl: string;
-  /** 回调类型。当前仅支持：`http` */
+  /** 回调类型枚举值：none： 不回调http： HTTP 回调ckafka： 投递 CKafka Topic */
   Type: string;
+  /** 回调 URL，需要可访问并通过 Echo 校验 */
+  CallbackUrl?: string;
   /** 回调签名 token，最大长度 128 */
   CallbackToken?: string;
+  /** 回调 CKafka 配置 */
+  CallbackCKafka?: SeeCallbackCKafkaConfig;
 }
 
 declare interface ModifyTWeSeeCallbackResponse {

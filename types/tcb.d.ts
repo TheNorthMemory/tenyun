@@ -3729,7 +3729,7 @@ declare interface DescribeTablesResponse {
 }
 
 declare interface DescribeTaskResultRequest {
-  /** 云开发环境ID */
+  /** 云开发环境 ID。查询 PGDump 任务时，所有状态均须提供且与任务环境一致，用于验证调用方环境归属。环境隔离或销毁后，仍可在归档保留期内查询历史任务及下载文件。 */
   EnvId: string;
   /** 任务ID */
   TaskId: string;
@@ -3738,19 +3738,19 @@ declare interface DescribeTaskResultRequest {
 declare interface DescribeTaskResultResponse {
   /** 任务ID */
   TaskId?: string;
-  /** 任务类型枚举值：PGUserMigration： PG Migrate 任务 */
+  /** 任务类型枚举值：PGUserMigration： PG Migrate 任务PGDump： PG 数据库整库导出任务 */
   TaskType?: string;
-  /** 任务状态枚举值：Failed： 失败Succeed： 成功Accepted： 已接收Running： 运行中 */
+  /** 任务状态枚举值：Failed： 失败Succeed： 成功Accepted： 已接收Running： 运行中Pending： 已受理，等待工作流启动 */
   Status?: string;
-  /** 当前步骤 */
+  /** 任务当前执行步骤。PGDump 任务可能为 Queued（排队）、Preparing（准备）、Dumping（导出）、Validating（校验）、Uploading（上传）、Finalizing（收尾）、Completed（完成）；其他任务的步骤由任务类型决定。 */
   Phase?: string;
-  /** 失败原因 */
+  /** 失败原因。PGDump 任务返回稳定业务码：PGDumpPermissionDenied、PGDumpToolVersionMismatch、PGDumpSizeExceeded、PGDumpTimeout、PGDumpProcessFailed、PGDumpUploadFailed、PGDumpSourceChanged；成功时为空。其他任务按原有失败原因返回。 */
   Reason?: string;
   /** 创建时间参数格式：2026-05-26T11:26:14+08:00 */
   CreatedAt?: string;
   /** 最后更新时间参数格式：2026-05-26T11:26:14+08:00 */
   UpdatedAt?: string;
-  /** 任务参数 */
+  /** 任务参数键值对列表，Value 均为字符串。PGDump 成功任务包含 file_name（文件名）、file_size_bytes（字节数）、checksum_sha256（SHA256）、source_db_version（源库版本）、dump_tool_version（工具版本）、file_expires_at（RFC3339 过期时间）。文件未过期且对象存在时返回 download_url；URL 过期后可重新查询，勿记录或持久化签名 URL。仅对象确认缺失时返回 file_missing=true；文件过期不返回下载 URL。归档查询或签名临时故障返回系统错误，任务终态不变。 */
   Params?: ObjectKV[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

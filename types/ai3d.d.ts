@@ -411,7 +411,7 @@ declare interface Ai3d {
   DescribeHunyuanTo3DMotionJob(data: DescribeHunyuanTo3DMotionJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanTo3DMotionJobResponse>;
   /** 查询UV展开任务 {@link DescribeHunyuanTo3DUVJobRequest} {@link DescribeHunyuanTo3DUVJobResponse} */
   DescribeHunyuanTo3DUVJob(data: DescribeHunyuanTo3DUVJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHunyuanTo3DUVJobResponse>;
-  /** 查询3D人物生成任务 {@link DescribeProfileTo3DJobRequest} {@link DescribeProfileTo3DJobResponse} */
+  /** @deprecated 查询3D人物生成任务 {@link DescribeProfileTo3DJobRequest} {@link DescribeProfileTo3DJobResponse} */
   DescribeProfileTo3DJob(data?: DescribeProfileTo3DJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProfileTo3DJobResponse>;
   /** 查询智能拓扑任务 {@link DescribeReduceFaceJobRequest} {@link DescribeReduceFaceJobResponse} */
   DescribeReduceFaceJob(data?: DescribeReduceFaceJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReduceFaceJobResponse>;
@@ -435,7 +435,7 @@ declare interface Ai3d {
   SubmitHunyuanTo3DRapidJob(data?: SubmitHunyuanTo3DRapidJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DRapidJobResponse>;
   /** 提交UV展开任务 {@link SubmitHunyuanTo3DUVJobRequest} {@link SubmitHunyuanTo3DUVJobResponse} */
   SubmitHunyuanTo3DUVJob(data?: SubmitHunyuanTo3DUVJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitHunyuanTo3DUVJobResponse>;
-  /** 提交3D人物生成任务 {@link SubmitProfileTo3DJobRequest} {@link SubmitProfileTo3DJobResponse} */
+  /** @deprecated 提交3D人物生成任务 {@link SubmitProfileTo3DJobRequest} {@link SubmitProfileTo3DJobResponse} */
   SubmitProfileTo3DJob(data?: SubmitProfileTo3DJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitProfileTo3DJobResponse>;
   /** 提交智能拓扑任务 {@link SubmitReduceFaceJobRequest} {@link SubmitReduceFaceJobResponse} */
   SubmitReduceFaceJob(data: SubmitReduceFaceJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitReduceFaceJobResponse>;

@@ -47,7 +47,7 @@ declare interface DescribeFinanceFraudUltimateRequest {
   ElapsedTime?: number;
   /** 微信的OpenId */
   WeChatOpenId?: string;
-  /** 手机号码（注：不需要带国家代码 例如：13430421011）。可以传入原文或MD5 */
+  /** 手机号码（注：不需要带国家代码 例如：15xxxxxxxxx）。可以传入原文、MD5或SHA256 */
   PhoneNumber?: string;
   /** 业务客户端IP */
   BizClientIp?: string;
@@ -183,7 +183,7 @@ declare interface DescribeFraudUltimateRequest {
   ElapsedTime?: number;
   /** 微信的OpenId */
   WeChatOpenId?: string;
-  /** 手机号码（注：不需要带国家代码 例如：13430421011）。可以传入原文或MD5 */
+  /** 手机号码（注：不需要带国家代码 例如：15xxxxxxxxx）。可以传入原文、MD5或SHA256 */
   PhoneNumber?: string;
   /** 客户端IP */
   ClientIP?: string;

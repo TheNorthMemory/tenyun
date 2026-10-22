@@ -23,6 +23,22 @@ declare interface Account {
 }
 
 /** 账户组信息 */
+declare interface AccountGroup {
+  /** 账户组ID */
+  GroupId?: string;
+  /** 账户组名称 */
+  GroupName?: string;
+  /** 描述 */
+  Description?: string | null;
+  /** 成员数量 */
+  MemberCount?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 是否可删除 */
+  CanDelete?: boolean;
+}
+
+/** 账户组信息 */
 declare interface AccountGroupInfo {
   /** 账户组ID */
   GroupId?: string;
@@ -922,6 +938,20 @@ declare interface CancelIgnorePolicyRiskResponse {
   RequestId?: string;
 }
 
+declare interface CreateAccountGroupRequest {
+  /** 账户组名称 */
+  GroupName: string;
+  /** 描述（可选） */
+  Description?: string;
+}
+
+declare interface CreateAccountGroupResponse {
+  /** 新建账户组ID */
+  GroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAnalyzePolicyTaskRequest {
   /** 产品类型 */
   Products: string[];
@@ -1090,6 +1120,16 @@ declare interface CreateVpcAclRuleResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAccountGroupRequest {
+  /** 账户组ID */
+  GroupId: string;
+}
+
+declare interface DeleteAccountGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteEdgeAclRuleRequest {
   /** 规则组ID */
   GroupId?: string;
@@ -1154,6 +1194,28 @@ declare interface DeleteVpcAclRuleRequest {
 }
 
 declare interface DeleteVpcAclRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccountGroupsRequest {
+  /** 关键词搜索（可选） */
+  Filters?: CommonFilter[];
+  /** 分页大小，默认20 */
+  Limit?: number;
+  /** 分页偏移，默认0 */
+  Offset?: number;
+  /** 顺序 */
+  Order?: string;
+  /** 排序字段 */
+  By?: string;
+}
+
+declare interface DescribeAccountGroupsResponse {
+  /** 总数量 */
+  TotalCount?: number;
+  /** 账户组列表 */
+  AccountGroups?: AccountGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1524,6 +1586,44 @@ declare interface IgnorePolicyRiskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAccountGroupRequest {
+  /** 账户组ID */
+  GroupId: string;
+  /** 账户组名称 */
+  GroupName: string;
+}
+
+declare interface ModifyAccountGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCfwManagedRequest {
+  /** 目标成员 Id */
+  MemberId: string;
+  /** 云防火墙纳管：0-关闭，1-开启 */
+  CfwManaged: number;
+}
+
+declare interface ModifyCfwManagedResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyCfwShareRoleRequest {
+  /** 云防火墙共享角色，取值：sharer（共享者）、user（使用者）、none（无共享角色）。共享者→使用者禁止直接变更，需先设为 none */
+  CfwShareRole: string;
+  /** 使用者Id */
+  UserMemberId: string;
+  /** 共享者账号ID，CfwShareRole 为 user 时必填 */
+  SharerMemberId?: string;
+}
+
+declare interface ModifyCfwShareRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyEdgeAclRuleRequest {
   /** 规则组ID */
   GroupId?: string;
@@ -1546,6 +1646,18 @@ declare interface ModifyEdgeAclRuleSequenceRequest {
 }
 
 declare interface ModifyEdgeAclRuleSequenceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyMemberGroupRequest {
+  /** 目标成员 AppId */
+  UserMemberId: string;
+  /** 账户组ID（空字符串表示移出账户组） */
+  GroupId?: string;
+}
+
+declare interface ModifyMemberGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1661,6 +1773,8 @@ declare interface Fwm {
   (): Versions;
   /** 取消忽略策略风险 {@link CancelIgnorePolicyRiskRequest} {@link CancelIgnorePolicyRiskResponse} */
   CancelIgnorePolicyRisk(data: CancelIgnorePolicyRiskRequest, config?: AxiosRequestConfig): AxiosPromise<CancelIgnorePolicyRiskResponse>;
+  /** 创建账户组 {@link CreateAccountGroupRequest} {@link CreateAccountGroupResponse} */
+  CreateAccountGroup(data: CreateAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccountGroupResponse>;
   /** 创建风险分析任务 {@link CreateAnalyzePolicyTaskRequest} {@link CreateAnalyzePolicyTaskResponse} */
   CreateAnalyzePolicyTask(data: CreateAnalyzePolicyTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAnalyzePolicyTaskResponse>;
   /** 创建互联网边界规则 {@link CreateEdgeAclRuleRequest} {@link CreateEdgeAclRuleResponse} */
@@ -1683,6 +1797,8 @@ declare interface Fwm {
   CreateVpcAclRule(data: CreateVpcAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcAclRuleResponse>;
   /** 创建VPC边界规则组 {@link CreateVpcAclRuleGroupRequest} {@link CreateVpcAclRuleGroupResponse} */
   CreateVpcAclRuleGroup(data: CreateVpcAclRuleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVpcAclRuleGroupResponse>;
+  /** 删除账户组 {@link DeleteAccountGroupRequest} {@link DeleteAccountGroupResponse} */
+  DeleteAccountGroup(data: DeleteAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAccountGroupResponse>;
   /** 删除互联网边界规则 {@link DeleteEdgeAclRuleRequest} {@link DeleteEdgeAclRuleResponse} */
   DeleteEdgeAclRule(data?: DeleteEdgeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteEdgeAclRuleResponse>;
   /** 删除NAT边界规则 {@link DeleteNatAclRuleRequest} {@link DeleteNatAclRuleResponse} */
@@ -1695,6 +1811,8 @@ declare interface Fwm {
   DeleteStrategy(data?: DeleteStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteStrategyResponse>;
   /** 删除VPC边界规则 {@link DeleteVpcAclRuleRequest} {@link DeleteVpcAclRuleResponse} */
   DeleteVpcAclRule(data: DeleteVpcAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVpcAclRuleResponse>;
+  /** 获取账户组列表 {@link DescribeAccountGroupsRequest} {@link DescribeAccountGroupsResponse} */
+  DescribeAccountGroups(data?: DescribeAccountGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccountGroupsResponse>;
   /** 查询互联网边界规则列表 {@link DescribeEdgeAclRulesRequest} {@link DescribeEdgeAclRulesResponse} */
   DescribeEdgeAclRules(data: DescribeEdgeAclRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdgeAclRulesResponse>;
   /** 查询NAT边界规则列表 {@link DescribeNatAclRulesRequest} {@link DescribeNatAclRulesResponse} */
@@ -1731,10 +1849,18 @@ declare interface Fwm {
   DispatchStrategy(data?: DispatchStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DispatchStrategyResponse>;
   /** 忽略策略问题 {@link IgnorePolicyRiskRequest} {@link IgnorePolicyRiskResponse} */
   IgnorePolicyRisk(data: IgnorePolicyRiskRequest, config?: AxiosRequestConfig): AxiosPromise<IgnorePolicyRiskResponse>;
+  /** 修改账户组名称 {@link ModifyAccountGroupRequest} {@link ModifyAccountGroupResponse} */
+  ModifyAccountGroup(data: ModifyAccountGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAccountGroupResponse>;
+  /** 设置云防火墙纳管 {@link ModifyCfwManagedRequest} {@link ModifyCfwManagedResponse} */
+  ModifyCfwManaged(data: ModifyCfwManagedRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCfwManagedResponse>;
+  /** 设置云防火墙共享角色 {@link ModifyCfwShareRoleRequest} {@link ModifyCfwShareRoleResponse} */
+  ModifyCfwShareRole(data: ModifyCfwShareRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCfwShareRoleResponse>;
   /** 修改互联网边界规则 {@link ModifyEdgeAclRuleRequest} {@link ModifyEdgeAclRuleResponse} */
   ModifyEdgeAclRule(data?: ModifyEdgeAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeAclRuleResponse>;
   /** 修改互联网边界规则序号 {@link ModifyEdgeAclRuleSequenceRequest} {@link ModifyEdgeAclRuleSequenceResponse} */
   ModifyEdgeAclRuleSequence(data: ModifyEdgeAclRuleSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEdgeAclRuleSequenceResponse>;
+  /** 设置成员所属账户组 {@link ModifyMemberGroupRequest} {@link ModifyMemberGroupResponse} */
+  ModifyMemberGroup(data: ModifyMemberGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMemberGroupResponse>;
   /** 修改NAT边界规则 {@link ModifyNatAclRuleRequest} {@link ModifyNatAclRuleResponse} */
   ModifyNatAclRule(data: ModifyNatAclRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNatAclRuleResponse>;
   /** NAT边界规则排序 {@link ModifyNatAclRuleSequenceRequest} {@link ModifyNatAclRuleSequenceResponse} */

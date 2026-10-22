@@ -36,6 +36,20 @@ declare interface APIService {
   BasePath?: string;
 }
 
+/** AWS S3 目的地信息。通过 IAM 角色 + External ID 授权 EdgeOne 将实时日志投递至客户的 AWS S3 桶，无需提供长期访问密钥，详情见 [推送至 AWS S3](https://cloud.tencent.com/document/product/1552/96007)。 */
+declare interface AWSS3 {
+  /** AWS S3 存储桶对应的服务端点域名，取值可参考 AWS 服务端点。例如：s3.us-west-2.amazonaws.com 。 */
+  Endpoint: string;
+  /** AWS S3 存储桶名称。可在 AWS S3 控制台 Buckets（存储桶）列表中查看对应桶名。长度须为 3–63 个字符，只能包含小写字母、数字、句点（.）和连字符（-），且必须以字母或数字开头和结尾。 */
+  BucketName: string;
+  /** 日志文件在 AWS S3 桶中的存储目录路径，以 / 分隔可创建多级目录，且不能包含 ./.. 等相对路径段，路径总长度不超过 1024 个字节。当目录路径存在时直接使用该路径，当目录路径不存在时会自动创建。目录名仅允许由字母、数字、 及 !-_.*'() 构成。示例：eo-logs/l7-access-logs 。 */
+  Path: string;
+  /** 授权 EdgeOne 访问 AWS S3 桶的 IAM 角色的 ARN。需先在 AWS 账号中创建一个授予 EdgeOne 写入权限的 IAM 角色（创建方式详情见 推送至 AWS S3），创建后可在 AWS IAM 控制台的角色详情页顶部查看并复制该角色的 ARN。例如：arn:aws:iam::123456789012:role/eo-logs 。 */
+  RoleARN: string;
+  /** 数据压缩类型，取值有: gzip：gzip压缩。不填表示不启用压缩。 */
+  CompressType?: string;
+}
+
 /** 中国大陆加速优化配置。 */
 declare interface AccelerateMainland {
   /** 是否开启中国大陆加速优化配置，取值有：on：开启；off：关闭。 */
@@ -104,9 +118,9 @@ declare interface AccelerationDomainCertificate {
 declare interface AccessURLRedirectParameters {
   /** 状态码，取值为 301、302、303、307、308 之一。 */
   StatusCode?: number;
-  /** 目标请求协议，取值有：http：目标请求协议 HTTP；https：目标请求协议 HTTPS；follow：跟随请求。 */
+  /** 目标请求协议。枚举值：http： 目标请求协议为 HTTP。https： 目标请求协议为 HTTPS。follow： 跟随请求。 */
   Protocol?: string;
-  /** 目标 HostName 。 */
+  /** 目标 HostName。 */
   HostName?: HostName | null;
   /** 目标路径。 */
   URLPath?: URLPath | null;
@@ -2860,7 +2874,7 @@ declare interface L4ProxyRule {
   PortRange?: string[];
   /** 源站类型，取值有：IP_DOMAIN：IP/域名源站；ORIGIN_GROUP：源站组；LB：负载均衡，当前仅白名单开放。注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。 */
   OriginType?: string;
-  /** 源站地址：当 OriginType 为 IP_DOMAIN 时，填写 IP 或域名，如 8.8.8.8 或 test.com ；当 OriginType 为 ORIGIN_GROUP 时，填写源站组 ID，如 og-537y24vf5b41；当 OriginType 为 LB 时，填写负载均衡实例 ID，如 lb-2qwk30xf7s9g。注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。 */
+  /** 源站地址：当 OriginType 为 IP_DOMAIN 时，填写 IP 或域名，如 8.8.8.8 或 test.com ；当 OriginType 为 ORIGIN_GROUP 时，填写源站组 ID，如 og-537y24vf5b41；如果引用了其它站点的源站组，格式为{源站组 ID}@{ZoneID}。例如：og-testorigin@zone-38moq1z10wwwy；当 OriginType 为 LB 时，填写负载均衡实例 ID，如 lb-2qwk30xf7s9g；如果引用了其它站点的负载均衡，格式为{负载均衡 ID}@{ZoneID}。例如：lb-2rxpamcyqfzg@zone-38moq1z10wwwy。注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。 */
   OriginValue?: string[];
   /** 源站端口，支持按照以下形式填写：单端口，如：80；端口段，如：81-85，表示 81、82、83、84、85 五个端口。填写端口段时，则需要与转发端口段长度保持一致，例如转发端口：80-90，则转发端口：90-100。注意：L4ProxyRule 在 CreateL4ProxyRules 作为入参使用时，该参数必填；在 ModifyL4ProxyRules 作为入参使用时，该参数选填，不填写时表示不修改。 */
   OriginPortRange?: string;
@@ -3846,7 +3860,7 @@ declare interface RealtimeLogDeliveryTask {
   TaskName?: string;
   /** 实时日志投递任务的状态，取值有： enabled: 已启用； disabled: 已停用；deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。 */
   DeliveryStatus?: string;
-  /** 实时日志投递任务类型，取值有： cls: 推送到腾讯云 CLS； custom_endpoint：推送到自定义 HTTP(S) 地址； s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址；log_analysis：推送到 EdgeOne 日志分析。 */
+  /** 实时日志投递任务类型，取值有： cls: 推送到腾讯云 CLS； custom_endpoint：推送到自定义 HTTP(S) 地址； s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址；aws_s3：推送到 AWS S3 存储桶地址；log_analysis：推送到 EdgeOne 日志分析。 */
   TaskType?: string;
   /** 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： 七层域名：domain.example.com； 四层代理实例：sid-2s69eb5wcms7。 */
   EntityList?: string[];
@@ -3872,6 +3886,8 @@ declare interface RealtimeLogDeliveryTask {
   CustomEndpoint?: CustomEndpoint | null;
   /** S3 兼容（兼容 SigV4 鉴权算法）的对象存储的配置信息。 */
   S3?: S3 | null;
+  /** AWS S3 的对象存储的配置信息，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3 。 */
+  AWSS3?: AWSS3 | null;
   /** 创建时间。 */
   CreateTime?: string;
   /** 更新时间。 */
@@ -5987,7 +6003,7 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   LogType: string;
   /** 实时日志投递任务的名称，格式为数字、英文、-和_组合，最多 200 个字符。 */
   TaskName: string;
-  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 AWS S3 兼容存储桶地址；log_analysis：推送到 EdgeOne 日志分析，仅当 LogType = l7-access-logs 或 web-attack 时支持。 */
+  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址，当 LogType = web-attack 时不支持该任务类型；aws_s3：推送到 AWS S3 存储桶地址，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3；log_analysis：推送到 EdgeOne 日志分析，仅当 LogType = l7-access-logs 或 web-attack 时支持。 */
   TaskType: string;
   /** 实时日志投递任务对应的实体列表。取值示例如下：七层域名：domain.example.com四层代理实例：sid-2s69eb5wcms7边缘函数实例：test-zone-2mxigizoh9l9-1257626257取值参考：DescribeL4Proxy */
   EntityList: string[];
@@ -5995,20 +6011,22 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   Fields: string[];
   /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE)。 */
   CustomFields?: CustomField[];
-  /** 投递的自定义表达式字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，使用详情见 [自定义日志字段表达式]()。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE) 。**注意**：若 CustomExpressionFields 中存在命名 与 Fields 和 CustomFields 中同名的字段，以 CustomExpressionFields 中的取值为准。 */
+  /** 投递的自定义表达式字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，使用详情见 [自定义日志字段表达式](https://cloud.tencent.com/document/product/1552/105794)。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE) 。**注意**：若 CustomExpressionFields 中存在命名 与 Fields 和 CustomFields 中同名的字段，以 CustomExpressionFields 中的取值为准。 */
   CustomExpressionFields?: CustomExpressionField[];
   /** 日志投递的过滤条件，不填表示投递全量日志。 */
   DeliveryConditions?: DeliveryCondition[];
   /** 采样比例，采用千分制，取值范围为1-1000，例如：填写 605 表示采样比例为 60.5%。不填表示采样比例为 100%。 */
   Sample?: number;
-  /** 日志投递的输出格式，使用详情见 自定义日志输出格式。不填表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 时，默认格式为 JSON Lines；特别地，当 TaskType 取值为 cls 或 log_analysis 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
+  /** 日志投递的输出格式，使用详情见 自定义日志输出格式。不填表示为默认格式，默认格式逻辑如下：当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；当 TaskType 取值为 s3 或 aws_s3 时，默认格式为 JSON Lines；特别地，当 TaskType 取值为 cls 或 log_analysis 时，LogFormat.FormatType 的值只能为 json，且 LogFormat 中其他参数将被忽略，建议不传 LogFormat。 */
   LogFormat?: LogFormat;
   /** CLS 的配置信息。当 TaskType 取值为 cls 时，该参数必填。 */
   CLS?: CLSTopic;
   /** 自定义 HTTP 服务的配置信息。当 TaskType 取值为 custom_endpoint 时，该参数必填。 */
   CustomEndpoint?: CustomEndpoint;
-  /** AWS S3 兼容存储桶的配置信息。当 TaskType 取值为 s3 时，该参数必填。 */
+  /** S3 兼容（兼容 SigV4 鉴权算法）的对象存储的配置信息。当 TaskType 取值为 s3 时，该参数必填。 */
   S3?: S3;
+  /** AWS S3 的对象存储的配置信息，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3 。当 TaskType 为 aws_s3 时，该参数必填。 */
+  AWSS3?: AWSS3;
 }
 
 declare interface CreateRealtimeLogDeliveryTaskResponse {
@@ -9127,9 +9145,9 @@ declare interface ModifyRealtimeLogDeliveryTaskRequest {
   EntityList?: string[];
   /** 投递的预设字段列表。不填保持原有配置。取值参考：DescribeLogFields */
   Fields?: string[];
-  /** 投递的自定义日志字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，详见 自定义日志字段表达式。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段，允许配置的自定义字段个数有配额限制，如遇配额不足请 联系我们 。 */
+  /** 投递的自定义字段列表，支持在 HTTP 请求头、响应头、Cookie、请求正文中提取指定内容。自定义字段名称不能重复，仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE)。 */
   CustomFields?: CustomField[];
-  /** 投递的自定义表达式字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，使用详情见 [自定义日志字段表达式]()。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE) 。**注意**：若 CustomExpressionFields 中存在命名 与 Fields 和 CustomFields 中同名的字段，以 CustomExpressionFields 中的取值为准。 */
+  /** 投递的自定义表达式字段列表，可以通过自定义日志推送字段名称和取值表达式，实现个性化的实时日志内容推送，使用详情见 [自定义日志字段表达式](https://cloud.tencent.com/document/product/1552/105794)。仅七层访问日志（LogType= l7-access-logs 或 domain）支持添加自定义字段。允许配置的自定义字段个数有配额限制，如遇配额不足请 [联系我们](https://cloud.tencent.com/online-service?from=sales&amp;source=PRESALE) 。**注意**：若 CustomExpressionFields 中存在命名 与 Fields 和 CustomFields 中同名的字段，以 CustomExpressionFields 中的取值为准。 */
   CustomExpressionFields?: CustomExpressionField[];
   /** 日志投递的过滤条件。不填表示投递全量日志。 */
   DeliveryConditions?: DeliveryCondition[];
@@ -9139,8 +9157,10 @@ declare interface ModifyRealtimeLogDeliveryTaskRequest {
   LogFormat?: LogFormat;
   /** 自定义 HTTP 服务的配置信息，不填保持原有配置。 */
   CustomEndpoint?: CustomEndpoint;
-  /** AWS S3 兼容存储桶的配置信息，不填保持原有配置。 */
+  /** S3 兼容（兼容 SigV4 鉴权算法）的对象存储的配置信息，不填保持原有配置。 */
   S3?: S3;
+  /** AWS S3 对象存储的配置信息，不填保持原有配置。 */
+  AWSS3?: AWSS3;
 }
 
 declare interface ModifyRealtimeLogDeliveryTaskResponse {

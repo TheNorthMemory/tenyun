@@ -144,6 +144,8 @@ declare interface AddStreamAuthData {
   PushExpired?: number;
   /** 用户ID */
   AppId?: number;
+  /** 不生效推流鉴权的域名 ID 列表 */
+  ExcludePushDomainIds?: string[];
 }
 
 /** 批量获取截图图片URL列表信息 */
@@ -484,6 +486,8 @@ declare interface DescribeStreamAuthData {
   PushExpired?: number;
   /** 用户ID */
   AppId?: number;
+  /** 不生效推流鉴权的域名 ID 列表 */
+  ExcludePushDomainIds?: string[];
 }
 
 /** 查询视频通道码率的返回结果列表 */
@@ -1537,6 +1541,8 @@ declare interface AddStreamAuthRequest {
   PushSecret: string;
   /** 推流过期时间（单位：分钟） */
   PushExpired: number;
+  /** 不生效推流鉴权的域名 ID 列表 */
+  ExcludePushDomainIds?: string[];
 }
 
 declare interface AddStreamAuthResponse {

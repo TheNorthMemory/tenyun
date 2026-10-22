@@ -4069,6 +4069,8 @@ declare interface CreateCloudInstanceRequest {
   AirflowDagSource?: AirflowDagSourceInput;
   /** airflow源凭证 */
   AirflowGitCredential?: AirflowGitCredentialInput;
+  /** 多安全组绑定 */
+  SgIds?: string[];
 }
 
 declare interface CreateCloudInstanceResponse {

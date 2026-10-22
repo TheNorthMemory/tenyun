@@ -62,6 +62,8 @@ declare interface ComputeDetail {
   PrepaidEnable?: boolean;
   /** 该套餐是否支持按量计费 */
   PostpaidEnable?: boolean;
+  /** 该算力套餐支持的计费模式列表：POSTPAID_BY_HOUR（按量）、PREPAID（包年包月）、SPOT（竞价） */
+  SupportedChargeTypes?: string[];
 }
 
 /** 资源相关信息 */
@@ -432,7 +434,7 @@ declare interface ServiceDetail {
 declare interface ServiceMetaData {
   /** 服务名称 */
   ServiceName?: string;
-  /** 收费类型 */
+  /** 付费方式：POSTPAID_BY_HOUR 按量后付费，PREPAID_BY_MONTH 包年包月，SPOT 竞价售卖（竞价需先调用 BidSpotInferService 对套餐出价） */
   ServiceChargeType?: string;
 }
 
@@ -505,7 +507,7 @@ declare interface CreateInferServiceByTemplateRequest {
   ServiceName?: string;
   /** 副本数 */
   Replicas?: number;
-  /** 付费方式，POSTPAID_BY_HOUR按量后付费 */
+  /** 付费方式：POSTPAID_BY_HOUR 按量后付费，PREPAID_BY_MONTH 包年包月，SPOT 竞价售卖（竞价需先调用 BidSpotInferService 对套餐出价） */
   ServiceChargeType?: string;
   /** 描述了服务的超参数配置 */
   HyperParam?: HyperParam;

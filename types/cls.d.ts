@@ -524,6 +524,8 @@ declare interface CloudProductTopicConfig {
   CustomKmsInfo?: CustomKmsInfo;
   /** 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。如果指定该字段，需保证全地域唯一 */
   TopicId?: string;
+  /** 主题扩展信息 */
+  Extends?: TopicExtendInfo;
 }
 
 /** 采集配置信息 */
