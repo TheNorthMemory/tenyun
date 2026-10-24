@@ -2226,6 +2226,8 @@ declare interface SpecAvailability {
 declare interface StickyConfig {
   /** 是否开启粘连路由 */
   Enabled?: boolean;
+  /** 会话粘性的超时时间（秒），取值范围 1–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。取值范围：[1, 86400]单位：秒默认值：1800 */
+  TimeoutSeconds?: number;
 }
 
 /** 模型路由实例的标签信息 */
@@ -5009,6 +5011,16 @@ declare interface ModifyModelAttributesRequest {
   ApiBase?: string;
   /** 非chat输出模态的请求后缀 */
   EndpointPath?: string;
+  /** 所属厂商 */
+  ModelProvider?: string;
+  /** 协议 */
+  Protocol?: string;
+  /** 所使用的CMR 私网管道 ID */
+  CMRPrivateNetworkTunnelId?: string;
+  /** 携带的Host Header */
+  HostHeader?: string;
+  /** 是否需要进行ssl校验 */
+  VerifySSL?: boolean;
 }
 
 declare interface ModifyModelAttributesResponse {
@@ -5111,6 +5123,10 @@ declare interface ModifyServiceProviderModelAttributesRequest {
   ModelName: string;
   /** 该模型支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
   InputModalities?: string[];
+  /** 新的上游模型名称 */
+  NewModelName?: string;
+  /** 新的对外模型名称 */
+  NewModelAlias?: string;
 }
 
 declare interface ModifyServiceProviderModelAttributesResponse {

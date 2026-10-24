@@ -4668,6 +4668,12 @@ declare interface StandardDebugParameters {
   Expires?: string;
 }
 
+/** 统计结果行。 */
+declare interface StatisticsRecord {
+  /** 列表单行记录。 */
+  Record?: string[];
+}
+
 /** 状态码缓存 TTL 配置参数内部结构。 */
 declare interface StatusCodeCacheParam {
   /** 状态码，取值为 400、 401、403、 404、 405、 407、 414、 500、 501、 502、 503、 504、 509、 514 之一。 */
@@ -7506,6 +7512,30 @@ declare interface DescribeLogAnalysisDownloadTasksResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLogAnalysisStatisticsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 数据归属地区，可选值：mainland：中国大陆境内；overseas：全球（不含中国大陆）。注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。 */
+  Area: string;
+  /** 日志类型，可选值： l7-access-logs：七层访问日志；web-attack：托管规则日志。默认为 l7-access-logs 。 */
+  LogType: string;
+  /** 开始时间，示例值：2020-04-29T00:00:00Z。套餐版本不同，支持的可查询开始时间至今的最大时间跨度不同，详情请见 套餐选型对比。 */
+  StartTime: string;
+  /** 结束时间，示例值：2020-04-30T00:00:00Z。单次查询的开始时间到结束时间跨度最大为 31 天。 */
+  EndTime: string;
+  /** 统计查询语句，由 [检索条件] | [SQL语句] 构成，管道符 “|” 后的 SQL 段必填；检索条件段可为空（如 | SELECT ...），表示在全量数据上聚合。长度上限 12KB，SQL 默认 Limit 100，最大 Limit 10000 。示例：带检索条件： ${EdgeCacheStatus} in ['miss','other'] | select EdgeCacheStatus as status, count(\*) as cnt group by status limit 2不带检索条件：| select EdgeCacheStatus as status, count(\*) as cnt group by status */
+  Query: string;
+}
+
+declare interface DescribeLogAnalysisStatisticsResponse {
+  /** 日志分析统计结果的列名，对应入参 Query 中 SQL 部分 SELECT 的字段。示例：入参 Query = ${EdgeCacheStatus} in ['miss','other'] | select EdgeCacheStatus as status, count(*) as cnt group by status limit 2出参 Columns = ["status","cnt"] */
+  Columns?: string[];
+  /** 日志分析统计结果的数据行，每行值下标与列下标一一对应。示例：Columns = ["status","cnt"]Records = [["miss","9695"],["other","278"]] */
+  Records?: StatisticsRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeMultiPathGatewayLineRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -9993,6 +10023,8 @@ declare interface Teo {
   DescribeLogAnalysisDetail(data: DescribeLogAnalysisDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogAnalysisDetailResponse>;
   /** 查询日志分析的日志下载任务 {@link DescribeLogAnalysisDownloadTasksRequest} {@link DescribeLogAnalysisDownloadTasksResponse} */
   DescribeLogAnalysisDownloadTasks(data: DescribeLogAnalysisDownloadTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogAnalysisDownloadTasksResponse>;
+  /** 查询日志分析统计结果 {@link DescribeLogAnalysisStatisticsRequest} {@link DescribeLogAnalysisStatisticsResponse} */
+  DescribeLogAnalysisStatistics(data: DescribeLogAnalysisStatisticsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogAnalysisStatisticsResponse>;
   /** 查询多通道安全加速网关详情 {@link DescribeMultiPathGatewayRequest} {@link DescribeMultiPathGatewayResponse} */
   DescribeMultiPathGateway(data: DescribeMultiPathGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultiPathGatewayResponse>;
   /** 查询多通道安全加速网关线路详情 {@link DescribeMultiPathGatewayLineRequest} {@link DescribeMultiPathGatewayLineResponse} */

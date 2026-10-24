@@ -28,17 +28,17 @@ declare interface AccountAttribute {
 
 /** 描述 EIP 信息 */
 declare interface Address {
-  /** `EIP`的`ID`，是`EIP`的唯一标识。 */
+  /** EIP的ID，是EIP的唯一标识。 */
   AddressId?: string;
-  /** `EIP`名称。 */
+  /** EIP名称。 */
   AddressName?: string;
-  /** `EIP`状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡) */
+  /** EIP状态，包含'CREATING'(创建中),'BINDING'(绑定中),'BIND'(已绑定),'UNBINDING'(解绑中),'UNBIND'(已解绑),'OFFLINING'(释放中),'BIND_ENI'(绑定悬空弹性网卡) */
   AddressStatus?: string;
   /** 外网IP地址 */
   AddressIp?: string;
-  /** 绑定的资源实例`ID`。可能是一个`CVM`，`NAT`。 */
+  /** 绑定的资源实例ID。可能是一个CVM，NAT。 */
   InstanceId?: string;
-  /** 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。 */
+  /** 创建时间。按照ISO8601标准表示，并且使用UTC时间。格式为：YYYY-MM-DDThh:mm:ssZ。 */
   CreatedTime?: string;
   /** 绑定的弹性网卡ID，null表示没有绑定弹性网卡。 */
   NetworkInterfaceId?: string;
@@ -50,7 +50,7 @@ declare interface Address {
   IsBlocked?: boolean;
   /** eip是否支持直通模式。true表示eip支持直通模式，false表示资源不支持直通模式 */
   IsEipDirectConnection?: boolean;
-  /** EIP 资源类型，包括CalcIP、WanIP、EIP和AnycastEIP、高防EIP。其中：`CalcIP` 表示设备 IP，`WanIP` 表示普通公网 IP，`EIP` 表示弹性公网 IP，`AnycastEIP` 表示加速 EIP，`AntiDDoSEIP`表示高防EIP。 */
+  /** EIP 资源类型，包括CalcIP、WanIP、EIP和AnycastEIP、高防EIP。其中：CalcIP 表示设备 IP，WanIP 表示普通公网 IP，EIP 表示弹性公网 IP，AnycastEIP 表示加速 EIP，AntiDDoSEIP表示高防EIP。 */
   AddressType?: string;
   /** eip是否在解绑后自动释放。true表示eip将会在解绑后自动释放，false表示eip在解绑后不会自动释放 */
   CascadeRelease?: boolean;
@@ -82,6 +82,8 @@ declare interface Address {
   UnVpcId?: string;
   /** CDC唯一ID */
   DedicatedClusterId?: string;
+  /** eip是否在网卡上可见。true表示支持，false表示不支持 */
+  EipVisibleOnEni?: boolean;
 }
 
 /** 用于描述弹性公网IP的费用对象 */
@@ -8869,12 +8871,14 @@ declare interface MigratePrivateIpAddressResponse {
 }
 
 declare interface ModifyAddressAttributeRequest {
-  /** 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。 */
+  /** 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：eip-11112222。可以使用DescribeAddresses接口获取AddressId。 */
   AddressId: string;
-  /** 修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"\_"，不能包含空格。 */
+  /** 修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"_"，不能包含空格。 */
   AddressName?: string;
   /** 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。注意：该参数仅对 EIP 直通功能可见的用户可以设定，EIP 必须为绑定状态，绑定的对象为 CVM 。 */
   EipDirectConnection?: string;
+  /** 设定EIP是否在网卡可见 */
+  EipVisibleOnEni?: boolean;
 }
 
 declare interface ModifyAddressAttributeResponse {
@@ -9267,10 +9271,12 @@ declare interface ModifyHighPriorityRouteTableAttributeResponse {
 }
 
 declare interface ModifyIPv6AddressesAttributesRequest {
-  /** 弹性公网IPv6唯一ID列表。可以使用[DescribeIPv6Addresses](https://cloud.tencent.com/document/api/215/113677)接口获取IPv6AddressIds。 */
+  /** 弹性公网IPv6唯一ID列表。可以使用DescribeIPv6Addresses接口获取IPv6AddressIds。 */
   IPv6AddressIds: string[];
   /** 弹性公网IPv6地址名称，长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"_"，不能包含空格。 */
   IPv6AddressName?: string;
+  /** 是否开启弹性公网IPv6地址网卡可见 */
+  EipVisibleOnEni?: boolean;
 }
 
 declare interface ModifyIPv6AddressesAttributesResponse {

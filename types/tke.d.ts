@@ -506,6 +506,10 @@ declare interface NativeNodeInfo {
   InstanceId?: string | null;
   /** 原生节点云标签 */
   Tags?: Tag[] | null;
+  /** 是否是迁移的节点默认值：false */
+  IsMigrated?: boolean;
+  /** 资源 ID */
+  ResourceId?: string;
 }
 
 /** 原生节点池信息 */

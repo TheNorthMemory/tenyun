@@ -541,9 +541,9 @@ declare interface CreateCloudAttachServiceResponse {
 declare interface CreateDirectConnectRequest {
   /** 物理专线的名称。 */
   DirectConnectName: string;
-  /** 物理专线所在的接入点。您可以通过调用[DescribeAccessPoints](https://cloud.tencent.com/document/product/216/34827)接口获取接入点ID。 */
+  /** 物理专线所在的接入点。您可以通过调用DescribeAccessPoints接口获取接入点ID。 */
   AccessPointId: string;
-  /** 提供接入物理专线的运营商。ChinaTelecom：中国电信； ChinaMobile：中国移动；ChinaUnicom：中国联通； In-houseWiring：楼内线；ChinaOther：中国其他； InternationalOperator：境外其他。 */
+  /** 提供接入物理专线的运营商。ChinaTelecom：中国电信；ChinaMobile：中国移动；ChinaUnicom：中国联通； In-houseWiring：楼内线；ChinaOther：中国其他； InternationalOperator：境外其他。 */
   LineOperator: string;
   /** 物理专线接入端口类型，取值：100Base-T：百兆电口；1000Base-T（默认值）：千兆电口；1000Base-LX：千兆单模光口（10千米）；10GBase-T：万兆电口；10GBase-LR（默认值）：万兆单模光口（10千米）。 */
   PortType: string;

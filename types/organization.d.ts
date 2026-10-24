@@ -40,6 +40,14 @@ declare interface EffectivePolicy {
   LastUpdatedTimestamp?: number;
 }
 
+/** 失败账号信息 */
+declare interface FailedAccount {
+  /** 下发失败的成员账号 UIN */
+  TargetUin?: number;
+  /** 下发失败的成员账号名 */
+  TargetName?: string;
+}
+
 /** 用户组信息。 */
 declare interface GroupInfo {
   /** 用户组的名称。 */
@@ -610,6 +618,14 @@ declare interface RoleConfiguration {
   UpdateTime?: string;
   /** 如果有入参FilterTargets查询成员账号是否配置过权限，配置了返回true，否则返回false。 */
   IsSelected?: boolean;
+  /** 会话时长应用状态枚举值：Success： 全部账号应用成功Failed： 存在失败账号Applying： 任务在途Unknown： 已部署账号超查询上限 */
+  ApplyStatus?: string;
+  /** 当前已真实下发到 CAM 的会话时长取值范围：[900, 43200]单位：秒 */
+  AppliedSessionDuration?: number;
+  /** 最近一次成功下发时间参数格式： YYYY-MM-DD hh:mm:ss */
+  SessionDurationUpdateTime?: string;
+  /** 未成功应用的账号明细仅 Failed 态返回 */
+  FailedAccounts?: FailedAccount[];
 }
 
 /** 权限配置同步 */
@@ -3381,6 +3397,8 @@ declare interface UpdateRoleConfigurationRequest {
   NewSessionDuration?: number;
   /** 新的初始访问页面。 CIC 用户使用权限配置访问集团账号目标账号时，初始访问的页面地址。 该页面必须是腾讯云控制台页面。 */
   NewRelayState?: string;
+  /** true=保存并应用（立即下发）；false/缺省=仅保存 */
+  IsApply?: boolean;
 }
 
 declare interface UpdateRoleConfigurationResponse {

@@ -3042,7 +3042,7 @@ declare interface ClusterListItem {
   TotalCoresCount?: number;
   /** 已防护核数 */
   DefendCoresCount?: number;
-  /** 审计日志开关(0:关闭 1:开启 2:开启失败 3:关闭失败) */
+  /** 审计日志状态0：已关闭1：已开启2：开启失败（失败原因见 AuditLogFailedInfo）3：关闭失败（失败原因见 AuditLogFailedInfo）4：开启中5：关闭中6：不支持（当前集群类型不支持读取审计状态，如边缘集群）7：未知（集群未接入或接入异常，无法判断审计状态）枚举值：0： 已关闭1： 已开启2： 开启失败3： 关闭失败4： 开启中5： 关闭中6： 不支持7： 未知 */
   AuditLogSwitchStatus?: number;
   /** 防护状态已防护: Defended */
   DefendStatus?: string;
@@ -3084,6 +3084,10 @@ declare interface ClusterListItem {
   RegionNameEn?: string;
   /** 未绑定旗舰版的节点数量 */
   UnboundUltimateNodeCount?: number;
+  /** 资产标签列表 */
+  TagItems?: MiniTagItem[];
+  /** 标签修改信息 */
+  TagModifyInfo?: AssetTagModifyAssetItem;
 }
 
 /** 集群命名空间项 */

@@ -48,7 +48,7 @@ declare interface ApproverComponentLimitType {
 
 /** 合同参与者信息。 */
 declare interface ApproverInfo {
-  /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下:0：企业1：个人3：企业“授权签”注：类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。7: 个人“授权签”，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 */
+  /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: 0：企业 1：个人 3：企业“授权签”注：类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。 7: 个人“授权签”，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 8：本方企业 PIN 码授权，注：使用前需先完成员工PIN码授权 9：他方企业 PIN 码授权，注：使用前需先完成合作方企业PIN码授权 10: 个人 PIN 码授权，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 */
   ApproverType: number;
   /** 签署方经办人的姓名。经办人的姓名将用于身份认证和电子签名，请确保填写的姓名为签署方的真实姓名，而非昵称等代名。 */
   ApproverName?: string;
@@ -102,6 +102,8 @@ declare interface ApproverInfo {
   NotSaveContact?: boolean;
   /** 客户指定的邮箱信息 */
   ApproverEmail?: string;
+  /** PinCode计算规则 当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 PinCode。 计算公式 PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) 示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同") 参数 说明 PIN 码 企业员工、他方(合作方)企业、个人授权的 PIN 码 合同名称 签署流程名称，即FlowName，需去除合同名称前后空格后再进行计算 */
+  PinCode?: string;
 }
 
 /** 签署方信息，发起合同后可获取到对应的签署方信息，如角色ID，角色名称 */
@@ -846,6 +848,8 @@ declare interface FillApproverInfo {
   FlowId?: string;
   /** 通知类型：当FillApproverType =0，或签场景补充签署人时，指定是否发送或签领取短信SMS：开启或签领取短信通知NONE：关闭或签领取短信通知当NotifyType=NONE时，可调用获取跳转至腾讯电子签小程序的签署链接接口生成签署链接来完成或签领取 */
   NotifyType?: string;
+  /** PinCode计算规则 当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 PinCode。 计算公式 PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) 示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同") 参数 说明 PIN 码 个人授权的 PIN 码 合同名称 签署流程名称，即FlowName，需去除合同名称前后空格后再进行计算 */
+  PinCode?: string;
 }
 
 /** 批量补充签署人时，补充失败的报错说明 */
@@ -976,7 +980,7 @@ declare interface FlowBrief {
 
 /** 创建流程的签署方信息 */
 declare interface FlowCreateApprover {
-  /** 在指定签署方时，可以选择企业B端或个人C端等不同的参与者类型，可选类型如下： 0 :企业B端。 1 :个人C端。 3 :企业B端静默（自动）签署，无需签署人参与，“授权签”可以参考“授权签”使用说明文档。 7 :个人C端“授权签”，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 */
+  /** 在指定签署方时，可选择企业B端或个人C端等不同的参与者类型，可选类型如下: 0：企业 1：个人 3：企业“授权签”注：类型为3（企业“授权签”）时，此接口会默认完成该签署方的签署。“授权签”仅进行盖章操作，不能“授权签”名。 7: 个人“授权签”，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 8：本方企业 PIN 码授权，注：使用前需先完成员工PIN码授权 9：他方企业 PIN 码授权，注：使用前需先完成合作方企业PIN码授权 10: 个人 PIN 码授权，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 */
   ApproverType: number;
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。注: 当approverType=0(企业签署方) 或 approverType=3(企业“授权签”)时，必须指定 */
   OrganizationName?: string;
@@ -1038,6 +1042,8 @@ declare interface FlowCreateApprover {
   NotSaveContact?: boolean;
   /** 客户指定的邮箱信息 */
   ApproverEmail?: string;
+  /** PinCode计算规则 当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 PinCode。 计算公式 PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) 示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同") 参数 说明 PIN 码 企业员工、他方(合作方)企业、个人授权的 PIN 码 合同名称 签署流程名称，即FlowName，需去除合同名称前后空格后再进行计算 */
+  PinCode?: string;
 }
 
 /** 此结构体(FlowDetailInfo)描述的是合同(流程)的详细信息 */
@@ -1456,7 +1462,7 @@ declare interface NeedReviewApproverInfo {
   ApproverIdCardType?: string;
   /** 签署方经办人的证件号码，应符合以下规则中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。 */
   ApproverIdCardNumber?: string;
-  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方(approverType = 0 或者 approverType = 3)， 则企业名称必填。 */
+  /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。如果签署方是企业签署方， 则企业名称必填。 */
   OrganizationName?: string;
 }
 
@@ -1872,7 +1878,7 @@ declare interface ReleasedApprover {
   Mobile: string;
   /** 要更换的原合同参与人RecipientId编号。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号) */
   RelievedApproverReceiptId?: string;
-  /** 指定签署人类型，目前仅支持 ORGANIZATION：企业（默认值） ENTERPRISESERVER：企业“授权签” */
+  /** 指定签署人类型，目前仅支持 ORGANIZATION：企业（默认值） ENTERPRISESERVER：本方企业“授权签” ORGANIZATION_PIN_CODE_SIGN：本方企业PIN码签署 */
   ApproverType?: string;
   /** 签署控件类型，支持自定义企业签署方的签署控件类型 **SIGN_SEAL**：默认为印章控件类型（默认值） **SIGN_SIGNATURE**：手写签名控件类型 */
   ApproverSignComponentType?: string;
@@ -1882,6 +1888,8 @@ declare interface ReleasedApprover {
   ApproverSignSealId?: string;
   /** 要更换的原合同参与人RecipientId编号。(可通过接口DescribeFlowInfo查询签署人的RecipientId编号) */
   RelievedApproverRecipientId?: string;
+  /** PinCode计算规则 当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 PinCode。 计算公式 PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) 示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同") 参数 说明 PIN 码 企业员工、他方(合作方)企业、个人授权的 PIN 码 合同名称 签署流程名称，即FlowName，需去除合同名称前后空格后再进行计算 */
+  PinCode?: string;
 }
 
 /** 解除协议文档中内容信息，包括但不限于：解除理由、解除后仍然有效的条款-保留条款、原合同事项处理-费用结算、原合同事项处理-其他事项、其他约定等。下面各种字段在解除协议中的位置参考：![image](https://qcloudimg.tencent-cloud.cn/raw/5087164cfe5a15fa3ced3180842d5da9.png) */
@@ -4057,6 +4065,8 @@ declare interface CreateReleaseFlowRequest {
   Deadline?: number;
   /** 调用方自定义的个性化字段，该字段的值可以是字符串JSON或其他字符串形式，客户可以根据自身需求自定义数据格式并在需要时进行解析。该字段的信息将以Base64编码的形式传输，支持的最大数据大小为20480长度。在合同状态变更的回调信息等场景中，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的回调通知模块。 */
   UserData?: string;
+  /** 合同名称入参限制：如果替换解除协议的签署人中有本企业PIN 码签署人类型，则此字段必填 */
+  FlowName?: string;
 }
 
 declare interface CreateReleaseFlowResponse {

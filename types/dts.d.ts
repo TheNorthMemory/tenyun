@@ -2701,7 +2701,7 @@ declare interface ModifyMigrateNameResponse {
 }
 
 declare interface ModifyMigrateRateLimitRequest {
-  /** 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
+  /** 迁移任务 Id，可通过DescribeMigrationJobs接口获取。 */
   JobId: string;
   /** 迁移任务全量导出线程数、有效值为 1-16 */
   DumpThread?: number;

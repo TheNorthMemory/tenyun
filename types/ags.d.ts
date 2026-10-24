@@ -1556,6 +1556,18 @@ declare interface DescribeSandboxInstanceListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSandboxInstancesRequest {
+  /** 沙箱实例ID列表，指定要查询的实例。如果为空则查询所有实例。最大支持100个ID */
+  InstanceIds: string[];
+}
+
+declare interface DescribeSandboxInstancesResponse {
+  /** 沙箱实例列表 */
+  InstanceSet?: SandboxInstance[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSandboxSnapshotListRequest {
   /** 待查询的沙箱快照 ID 列表 */
   SnapshotIds?: string[];
@@ -2079,6 +2091,8 @@ declare interface Ags {
   DescribeRegistryRecordVersionList(data: DescribeRegistryRecordVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRegistryRecordVersionListResponse>;
   /** 查询沙箱实例列表 {@link DescribeSandboxInstanceListRequest} {@link DescribeSandboxInstanceListResponse} */
   DescribeSandboxInstanceList(data?: DescribeSandboxInstanceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstanceListResponse>;
+  /** 查询沙箱实例 {@link DescribeSandboxInstancesRequest} {@link DescribeSandboxInstancesResponse} */
+  DescribeSandboxInstances(data: DescribeSandboxInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxInstancesResponse>;
   /** 查询沙箱快照列表 {@link DescribeSandboxSnapshotListRequest} {@link DescribeSandboxSnapshotListResponse} */
   DescribeSandboxSnapshotList(data?: DescribeSandboxSnapshotListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSandboxSnapshotListResponse>;
   /** 查询沙箱工具列表 {@link DescribeSandboxToolListRequest} {@link DescribeSandboxToolListResponse} */

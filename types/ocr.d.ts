@@ -5549,6 +5549,12 @@ declare interface VerifyGeneralCardWarnRequest {
   ImageUrl?: string;
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M。 */
   ImageBase64?: string;
+  /** 推理 Prompt 模板，默认使用 VLM 对图片进行理解推理，同时支持使用 ${变量名} 进行推理。传入该参数即开启推理流程。入参限制：长度限制：1–3000 字符 */
+  ReasoningPrompt?: string;
+  /** 推理输出配置。当 ReasoningPrompt 传入时建议同步传入，未传入时使用默认配置（OutputMode=enum, EnumValues=["true","false"], EnableImageInput=true）。 */
+  ReasoningConfig?: ReasoningConfig;
+  /** 水印提示排除类型，选择出参“水印提示”排除掉的水印类型，不传的话即代表任意水印都会提示。 PhoneCam：手机相机水印 WatermarkCam：水印相机水印 */
+  IgnoreWatermarkCategories?: string[];
 }
 
 declare interface VerifyGeneralCardWarnResponse {
@@ -5580,6 +5586,10 @@ declare interface VerifyGeneralCardWarnResponse {
   TextWatermark?: GeneralCardWarnInfo;
   /** 水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。 */
   WatermarkContent?: string;
+  /** VLM 推理结果。仅当请求中传入 ReasoningPrompt 时返回，否则不返回此字段。 */
+  ReasoningResult?: ReasoningResult;
+  /** 是否关键字段被篡改（用于排除卡证背景等非字段区域篡改），目前支持的卡证类型：行驶证、驾驶证。枚举值：是否暂不支持 */
+  IsKeyFieldTamper?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
