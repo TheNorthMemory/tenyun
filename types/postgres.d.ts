@@ -1167,33 +1167,33 @@ declare interface AddDBInstanceToReadOnlyGroupResponse {
 }
 
 declare interface CloneDBInstanceRequest {
-  /** 克隆的源实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 克隆的源实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
-  /** 售卖规格码。该参数可以通过调用[DescribeClasses](https://cloud.tencent.com/document/api/409/89019)的返回值中的SpecCode字段来获取。 */
+  /** 售卖规格码。该参数可以通过调用DescribeClasses的返回值中的SpecCode字段来获取。 */
   SpecCode: string;
   /** 实例磁盘容量大小，设置步长限制为10。单位：GB。 */
   Storage: number;
-  /** 购买时长，单位：月。- 预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36- 后付费：只支持1 */
+  /** 购买时长，单位：月。预付费：支持1,2,3,4,5,6,7,8,9,10,11,12,24,36后付费：只支持1 */
   Period: number;
-  /** 续费标记。仅当计费模式为预付费时生效。枚举值：- 0：手动续费- 1：自动续费默认值：0 */
+  /** 续费标记。仅当计费模式为预付费时生效。枚举值：0：手动续费1：自动续费默认值：0 */
   AutoRenewFlag: number;
-  /** 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372) ，从接口返回中的unVpcId字段获取。 */
+  /** 私有网络ID，形如vpc-xxxxxxxx。有效的VpcId可通过登录控制台查询；也可以调用接口 DescribeVpcEx ，从接口返回中的unVpcId字段获取。 */
   VpcId: string;
-  /** 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 [DescribeSubnets ](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的unSubnetId字段获取。 */
+  /** 私有网络子网ID，形如subnet-xxxxxxxx。有效的私有网络子网ID可通过登录控制台查询；也可以调用接口 DescribeSubnets ，从接口返回中的unSubnetId字段获取。 */
   SubnetId: string;
   /** 新购的实例名称，仅支持长度小于60的中文/英文/数字/"_"/"-"，不指定实例名称则默认显示"源实例名-Copy"。 */
   Name?: string;
-  /** 实例计费类型，目前支持：- PREPAID：预付费，即包年包月- POSTPAID_BY_HOUR：后付费，即按量计费默认值：PREPAID */
+  /** 实例计费类型，目前支持：PREPAID：预付费，即包年包月POSTPAID_BY_HOUR：后付费，即按量计费默认值：PREPAID */
   InstanceChargeType?: string;
-  /** 实例所属安全组。该参数可以通过调用[DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808)的返回值中的SecurityGroupId字段来获取。若不指定该参数，则绑定默认安全组。 */
+  /** 实例所属安全组。该参数可以通过调用DescribeSecurityGroups的返回值中的SecurityGroupId字段来获取。若不指定该参数，则绑定默认安全组。 */
   SecurityGroupIds?: string[];
   /** 项目ID。默认值为0，表示所属默认项目。 */
   ProjectId?: number;
-  /** 实例需要绑定的Tag信息，默认为空；可以通过调用 [DescribeTags](https://cloud.tencent.com/document/api/651/35316) 返回值中的 Tags 字段来获取。 */
+  /** 实例需要绑定的Tag信息，默认为空；可以通过调用 DescribeTags 返回值中的 Tags 字段来获取。 */
   TagList?: Tag[];
-  /** 实例节点部署信息，必须填写主备节点可用区。支持多可用区部署时需要指定每个节点的部署可用区信息。可用区信息可以通过调用 [DescribeZones](https://cloud.tencent.com/document/api/409/16769) 接口的返回值中的Zone字段来获取。 */
+  /** 实例节点部署信息，必须填写主备节点可用区。支持多可用区部署时需要指定每个节点的部署可用区信息。可用区信息可以通过调用 DescribeZones 接口的返回值中的Zone字段来获取。 */
   DBNodeSet?: DBNode[];
-  /** 是否自动使用代金券：- 0：否- 1：是默认值：0 */
+  /** 是否自动使用代金券：0：否1：是默认值：0 */
   AutoVoucher?: number;
   /** 代金券ID列表。 */
   VoucherIds?: string;
@@ -2111,9 +2111,9 @@ declare interface DescribeClassesResponse {
 }
 
 declare interface DescribeCloneDBInstanceSpecRequest {
-  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
-  /** 基础备份集ID，可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取。此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。 */
+  /** 基础备份集ID，可通过DescribeBaseBackups接口获取。此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。 */
   BackupSetId?: string;
   /** 恢复目标时间，此入参和BackupSetId必须选择一个传入。时区以东八区（UTC+8）为准。 */
   RecoveryTargetTime?: string;

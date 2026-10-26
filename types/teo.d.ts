@@ -6009,7 +6009,7 @@ declare interface CreateRealtimeLogDeliveryTaskRequest {
   LogType: string;
   /** 实时日志投递任务的名称，格式为数字、英文、-和_组合，最多 200 个字符。 */
   TaskName: string;
-  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址，当 LogType = web-attack 时不支持该任务类型；aws_s3：推送到 AWS S3 存储桶地址，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3；log_analysis：推送到 EdgeOne 日志分析，仅当 LogType = l7-access-logs 或 web-attack 时支持。 */
+  /** 实时日志投递任务类型，取值有：cls: 推送到腾讯云 CLS；custom_endpoint：推送到自定义 HTTP(S) 地址；s3：推送到 S3 兼容（兼容 SigV4 鉴权算法）的对象存储的地址；aws_s3：推送到 AWS S3 存储桶地址，使用 IAM 角色授权，免长期密钥，仅适用于 AWS 原生 S3；log_analysis：推送到 EdgeOne 日志分析，仅当 LogType = l7-access-logs 或 web-attack 时支持。 */
   TaskType: string;
   /** 实时日志投递任务对应的实体列表。取值示例如下：七层域名：domain.example.com四层代理实例：sid-2s69eb5wcms7边缘函数实例：test-zone-2mxigizoh9l9-1257626257取值参考：DescribeL4Proxy */
   EntityList: string[];

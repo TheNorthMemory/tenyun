@@ -335,9 +335,9 @@ declare interface BackupLimitRestriction {
   /** In: 指定的ip可以下载； NotIn: 指定的ip不可以下载 */
   IpComparisonSymbol?: string;
   /** 限制下载的vpc设置 */
-  LimitVpcs?: BackupLimitVpcItem[] | null;
+  LimitVpcs?: BackupLimitVpcItem[];
   /** 限制下载的ip设置 */
-  LimitIps?: string[] | null;
+  LimitIps?: string[];
 }
 
 /** 备份文件限制下载来源VPC设置项 */

@@ -236,6 +236,22 @@ declare interface CreateSecretResponse {
   RequestId?: string;
 }
 
+declare interface CreateServiceRequest {
+  /** 仅支持 PostPay，区分大小写枚举值：PostPay： 后付费 按量计费模式仅支持 PostPay，区分大小写 */
+  PayMode: string;
+  /** 客户端生成的创建请求标识。同一次逻辑创建发生重试时，须使用相同的值。参数格式：1～64 个可见 ASCII 字符（! 至 ~）。入参限制：必填；不能含空格、中文或控制字符。建议使用 ssm-<UUID>，不要包含密钥或个人信息。默认值：留空，由调用方生成；不要设置固定默认值。SSM 将其透传给计费侧，不存储或返回。订单状态不明时先核单，再决定是否用原值重试。 */
+  ClientToken: string;
+}
+
+declare interface CreateServiceResponse {
+  /** 义SSM 服务资源 ID，供调用方保存并标识该服务资源。参数格式：一期后付费为 ssm_ 加 AppId，如 ssm_1250000000。默认值：留空。返回时资源可能仍在发货，不代表服务已可用。 */
+  ResourceId?: string;
+  /** 计费交易订单号，用于核对本次开通订单参数格式：留空；不承诺固定长度或纯数字格式。默认值：留空。来自计费返回的订单号；订单形成不代表发货完成。 */
+  OrderId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSecretRequest {
   /** 指定需要删除的凭据名称。 */
   SecretName: string;
@@ -651,6 +667,8 @@ declare interface Ssm {
   CreateSSHKeyPairSecret(data: CreateSSHKeyPairSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSSHKeyPairSecretResponse>;
   /** 创建凭据 {@link CreateSecretRequest} {@link CreateSecretResponse} */
   CreateSecret(data: CreateSecretRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSecretResponse>;
+  /** 开通 SSM 服务 {@link CreateServiceRequest} {@link CreateServiceResponse} */
+  CreateService(data: CreateServiceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateServiceResponse>;
   /** 删除凭据信息 {@link DeleteSecretRequest} {@link DeleteSecretResponse} */
   DeleteSecret(data: DeleteSecretRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSecretResponse>;
   /** 删除指定版本的凭据 {@link DeleteSecretVersionRequest} {@link DeleteSecretVersionResponse} */

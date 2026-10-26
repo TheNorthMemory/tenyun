@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，16305+ 服务数</summary>
+<details><summary>共计 263+ 款产品，16437+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -207,9 +207,9 @@ cws | 漏洞扫描服务 | 2018-03-12(19) |
 cynosdb | [TDSQL-C MySQL 版](https://cloud.tencent.com/document/product/1003) | 2019-01-07(244) |
 dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/product/1025) | 2019-10-18(63) |
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
-databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(62) |
+databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(95) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(97) | 2019-10-16(28) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(100) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
@@ -260,7 +260,7 @@ ims | [图片内容安全](https://cloud.tencent.com/document/product/1125) | 20
 ioa | [iOA 零信任安全管理系统](https://cloud.tencent.com/document/product/1092) | 2022-06-01(58) |
 iot | [加速物联网套件](https://cloud.tencent.com/document/product/568) | 2018-01-23(45) |
 iotcloud | [物联网通信](https://cloud.tencent.com/document/product/634) | 2021-04-08(73) | 2018-06-14(69) |
-iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(259) |
+iotexplorer | [物联网开发平台](https://cloud.tencent.com/document/product/1081) | 2019-04-23(268) |
 iotvideo | [物联网智能视频服务](https://cloud.tencent.com/document/product/1131) | 2021-11-25(108) | 2020-12-15(79)<br/>2019-11-26(68) |
 iotvideoindustry | [物联网智能视频服务（行业版）](https://cloud.tencent.com/document/product/1361) | 2020-12-01(104) |
 irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 2022-08-05(7) | 2022-03-24(4) |
@@ -302,7 +302,7 @@ pts | [云压测](https://cloud.tencent.com/document/product/1484) | 2021-07-28(
 rce | [风险识别 RCE](https://cloud.tencent.com/document/product/1343) | 2026-01-30(5) | 2025-04-25(1)<br/>2020-11-03(11) |
 redis | [云数据库Redis](https://cloud.tencent.com/document/product/239) | 2018-04-12(124) |
 region | [地域管理系统](https://cloud.tencent.com/document/product/1596) | 2022-06-27(3) |
-rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(91) |
+rum | [前端性能监控](https://cloud.tencent.com/document/product/1464) | 2021-06-22(177) |
 scf | [云函数](https://cloud.tencent.com/document/product/583) | 2018-04-16(52+7) |
 securitylake | [安全湖](https://cloud.tencent.com/document/product/1720) | 2024-01-17(1) |
 ses | [邮件推送](https://cloud.tencent.com/document/product/1288) | 2020-10-02(36) |
@@ -314,7 +314,7 @@ sqlserver | [云数据库 SQL Server](https://cloud.tencent.com/document/product
 ssa | [安全运营中心](https://cloud.tencent.com/document/product/664) | 2018-06-08(23) |
 ssl | [SSL 证书](https://cloud.tencent.com/document/product/400) | 2019-12-05(68) |
 sslpod | [证书监控 SSLPod](https://cloud.tencent.com/document/product/1084) | 2019-06-05(10) |
-ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(24) |
+ssm | [凭据管理系统](https://cloud.tencent.com/document/product/1140) | 2019-09-23(25) |
 sts | [安全凭证服务](https://cloud.tencent.com/document/product/1312) | 2018-08-13(7) |
 svp | [节省计划](https://cloud.tencent.com/document/product/1761) | 2024-01-25(5) |
 taf | [广告作弊检测](https://cloud.tencent.com/document/product/1031) | 2020-02-10(1) |

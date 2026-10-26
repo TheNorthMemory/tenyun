@@ -4645,6 +4645,8 @@ declare interface DescribeBillUsageRequest {
   QuotaType?: string;
   /** 是否展示集团子企业的明细，默认否 */
   DisplaySubEnterprise?: boolean;
+  /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
+  Operator?: UserInfo;
 }
 
 declare interface DescribeBillUsageResponse {

@@ -770,6 +770,8 @@ declare interface InputKeyInfo {
 declare interface IntentRouterDecisionModelConfig {
   /** 是否开启使用决策模型 */
   Enabled?: boolean;
+  /** 选定的分类决策模型名，不传递表示随机选用。 */
+  ModelName?: string;
 }
 
 /** 意图路由摘要信息对象（不含分层详情）。 */
@@ -1326,7 +1328,7 @@ declare interface ModelAlias {
 
 /** 模型关联信息 */
 declare interface ModelAssociation {
-  /** 该模型最大可支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  /** 该模型最大可支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）video： 支持视频输入 */
   InputModalitiesUnion?: string[];
   /** 模型名称 */
   ModelName?: string;
@@ -1340,7 +1342,7 @@ declare interface ModelAssociation {
 
 /** 模型可用性 */
 declare interface ModelAvailability {
-  /** 该模型所有健康BYOK实例下支持的输入多模态能力的并集。模型不健康时返回空列表。枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  /** 该模型所有健康BYOK实例下支持的输入多模态能力的并集。模型不健康时返回空列表。枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）video： 支持视频输入 */
   InputModalities?: string[];
   /** 模型 */
   Model?: string;
@@ -1362,7 +1364,7 @@ declare interface ModelHealthCheckResults {
 declare interface ModelItem {
   /** 模型唯一标识, 用于实际访问 */
   ModelId: string;
-  /** 该模型当前支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）默认值：text */
+  /** 该模型当前支持的输入多模态能力列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）video： 支持视频输入默认值：text */
   InputModalities?: string[];
   /** 模型别名, 可以用于实际访问 */
   ModelAlias?: string;
@@ -1426,7 +1428,7 @@ declare interface ModelNameAggregatedItem {
   ModelName: string;
   /** 关联的服务商列表 */
   ServiceProviders?: ServiceProviderItem[];
-  /** 该模型最大可支持的输入多模态能力列表。枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf） */
+  /** 该模型最大可支持的输入多模态能力列表。枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）video： 支持视频输入 */
   InputModalitiesUnion?: string[];
 }
 
@@ -1514,6 +1516,8 @@ declare interface ModelRouterDetail {
   DecisionsConfig?: DecisionsConfig;
   /** Images 生图配置 */
   ImageConfig?: ImageConfig;
+  /** 实例重定向配置 */
+  RedirectConfig?: RedirectConfig;
 }
 
 /** 模型路由日志 */
@@ -1684,6 +1688,8 @@ declare interface ModelRouterSet {
   EipAddressId?: string;
   /** 计费信息 */
   BillingConfig?: ModelRouterBillingConfigOutput;
+  /** 实例重定向配置 */
+  RedirectConfig?: RedirectConfig;
 }
 
 /** BYOK健康探测结果 */
@@ -1712,7 +1718,7 @@ declare interface MultiCertInfo {
 declare interface MultiModalityAttachments {
   /** base64 url编码的文件内容 */
   Data: string;
-  /** 附件类型枚举值：image： 图像pdf： pdf（文件） */
+  /** 附件类型枚举值：image： 图像pdf： pdf（文件）video： 视频 */
   Type: string;
 }
 
@@ -1790,6 +1796,14 @@ declare interface RateLimitConfigForModelRouter {
   RPM?: number;
   /** 每分钟限制的Token数量单位：个/分钟 */
   TPM?: number;
+}
+
+/** 重定向配置 */
+declare interface RedirectConfig {
+  /** 重定向状态码枚举值：301： 永久重定向302： 临时重定向303： 查看其他位置307： 临时重定向（保留请求方法）308： 永久重定向（保留请求方法） */
+  StatusCode?: number;
+  /** 目标地址，填写为空表示关闭重定向。不支持路径填写。 */
+  TargetUrl?: string;
 }
 
 /** 重新生成的Key信息 */
@@ -2080,7 +2094,7 @@ declare interface ServiceEndPoints {
 declare interface ServiceProvider {
   /** BYOK类型 */
   AccessType?: string;
-  /** 单个byok实例下该模型可支持的输入多模态能力列表。枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入 */
+  /** 单个byok实例下该模型可支持的输入多模态能力列表。枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入video： 支持视频输入 */
   InputModalities?: string[];
   /** 模型协议 */
   Protocol?: string;
@@ -2172,7 +2186,7 @@ declare interface ServiceProviderItem {
   ServiceProviderName?: string | null;
   /** 模型供应商 */
   ModelProvider?: string;
-  /** 该byok实例下该模型可支持的输入多模态能力列表。枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入 */
+  /** 该byok实例下该模型可支持的输入多模态能力列表。枚举值：text： 支持文本输入file： 支持文件输入（当前仅支持pdf）image： 支持图像输入video： 支持视频输入 */
   InputModalities?: string[];
 }
 
@@ -2226,7 +2240,7 @@ declare interface SpecAvailability {
 declare interface StickyConfig {
   /** 是否开启粘连路由 */
   Enabled?: boolean;
-  /** 会话粘性的超时时间（秒），取值范围 1–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。取值范围：[1, 86400]单位：秒默认值：1800 */
+  /** 会话粘性的超时时间（秒），取值范围 180–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。取值范围：[180, 21600]单位：秒默认值：1800 */
   TimeoutSeconds?: number;
 }
 
@@ -4087,7 +4101,7 @@ declare interface DescribeModelNamesRequest {
   Limit?: number;
   /** 过滤PrivateCustom类型自建模型。如果传递了此参数，则只返回具有相同VPC Id的模型。 */
   VpcId?: string;
-  /** 过滤器，Name取值：ModelName：按照模型名称过滤。ServiceProviderId：按照BYOK ID过滤。InputModalitiesUnion：按照模态过滤。 */
+  /** 过滤器，Name取值：ModelName：按照模型名称过滤。ServiceProviderId：按照BYOK ID过滤。InputModalitiesUnion：按照输入模态过滤。Capability：按照输出模态过滤。 */
   Filters?: Filter[];
 }
 
@@ -5053,6 +5067,12 @@ declare interface ModifyModelRouterAttributesRequest {
   DecisionsConfig?: DecisionsConfig;
   /** Images 生图配置 */
   ImageConfig?: ImageConfig;
+  /** 实例重定向配置 */
+  RedirectConfig?: RedirectConfig;
+  /** 网络协议 */
+  Schema?: string;
+  /** 监听端口取值范围：[1, 65535] */
+  Port?: number;
 }
 
 declare interface ModifyModelRouterAttributesResponse {
@@ -5510,7 +5530,7 @@ declare interface TestModelInputModalitiesRequest {
 declare interface TestModelInputModalitiesResponse {
   /** 探测的模型 */
   Model?: string;
-  /** 该模型确认支持的输入模态列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）收到上游大模型对于输入模态的响应即为“确认支持” */
+  /** 该模型确认支持的输入模态列表枚举值：text： 支持文本输入image： 支持图像输入file： 支持文件输入（当前仅支持pdf）video： 支持视频输入收到上游大模型对于输入模态的响应即为“确认支持” */
   SupportedModalities?: string[];
   /** 每个待探测模态的详细请求结果 */
   ProbeDetails?: ModalityProbeDetail[];

@@ -148,6 +148,8 @@ declare interface Job {
   CreateTime?: string;
   /** 完成时间，Unix 时间戳（秒），未完成为 0 */
   FinishTime?: string;
+  /** 任务下各状态处理项的数量分布，JSON 格式字符串 */
+  TaskStatusCount?: string;
 }
 
 /** 按授权查看的license列表 */
@@ -226,6 +228,10 @@ declare interface PolicyInfo {
 declare interface ProcessParams {
   /** 标注处理模式，预留字段 */
   Mode?: string;
+  /** 标注档位 */
+  Edition?: string;
+  /** 通用扩展参数，json格式字符串 */
+  ExtraParams?: string;
 }
 
 /** 项目信息 */

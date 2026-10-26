@@ -160,7 +160,7 @@ declare interface ConnectorInfo {
   Type?: string;
   /** 上游服务地址 */
   ServiceUrl?: string;
-  /** 授权方式列表：NONE / ONEID / OAUTH2_IDP / API_KEY */
+  /** 授权方式列表：NONE / ONEID / OAUTH2_IDP / API_KEY / DYNAMIC_API_KEY。DYNAMIC_API_KEY 表示按每轮请求提供的动态字段，通过 HeaderMappings 注入出站 HTTP Header。 */
   AuthModes?: string[];
   /** 最新版本号 */
   LatestVersionNo?: number;
@@ -174,6 +174,8 @@ declare interface ConnectorInfo {
   ModifiedTime?: string;
   /** VPC 网络配置 ID。为空表示该连接器通过公网访问 ServiceUrl。仅绑定 VPC 网络配置时本字段有值。 */
   VpcConfigId?: string;
+  /** 展示名：console 老连接器目录（DescribeConsoleConnectorList）下发，取 registry data.display_name，老数据缺失时回落 Name；云上目录无独立展示名，省略不返回。Name 是存储名/选型回写键（含 scope 前缀），不承担展示职责。 */
+  DisplayName?: string | null;
 }
 
 /** 连接器引用入参 */

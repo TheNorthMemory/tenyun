@@ -54,6 +54,38 @@ declare interface AlarmGroup {
   ChannelType?: number | null;
 }
 
+/** 资产标签投票记录 */
+declare interface AssetTagVote {
+  /** 主键ID */
+  Id?: string;
+  /** 资产类型，取值参考AssetType定义，如CATALOG、SCHEMA、TABLE、VIEW、MODEL、VOLUME、FUNCTION等 */
+  PropertyType?: string;
+  /** 资产ID */
+  PropertyId?: string;
+  /** 标签ID */
+  LabelId?: string;
+  /** 标签名称 */
+  LabelName?: string;
+  /** 标签值ID */
+  LabelValueId?: string;
+  /** 标签值 */
+  LabelValue?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 修改者 */
+  Modifier?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifiedTime?: string;
+  /** 所有者账号 */
+  OwnerAccount?: string;
+  /** 标签类型，取值：0=未知，1=治理标签，2=自定义标签，3=属性标签，4=脱敏标签 */
+  Type?: number;
+  /** 是否删除 */
+  Deleted?: boolean;
+}
+
 /** 批量异步操作的逐项结果 */
 declare interface AsyncActionRsp {
   /** 多个操作项的结果列表 */
@@ -132,6 +164,24 @@ declare interface Catalog {
   CatalogSource?: string | null;
   /** 连接侧数据目录名或数据库名（仅分析版三段式数据源有值，二段式数据源为空字符串）。Doris/StarRocks/TChouse-D 等 MySQL 内核三段式数据源：external catalog 名称；PostgreSQL/Tencent PG/GaussDB/Hologres 等 PG 内核三段式数据源：databaseName；MySQL 等二段式数据源：空字符串。注意：此字段仅分析版（CatalogSource=CONNECTION）有效，专业版（METALAKE）不填充。 */
   ConnectionCatalogName?: string | null;
+}
+
+/** 字段简要信息，用于批量修改表字段描述时传入 */
+declare interface ColumnBrief {
+  /** 字段名称 */
+  Name: string;
+  /** 字段类型 */
+  Type?: string;
+  /** 描述配置 */
+  Comment?: string;
+}
+
+/** 字段描述更新失败信息 */
+declare interface ColumnErrorMessages {
+  /** 字段名称 */
+  Name?: string;
+  /** 错误原因 */
+  ErrorMessage?: string;
 }
 
 /** 字段信息 */
@@ -262,10 +312,28 @@ declare interface CreateFolderRsp {
   FolderId?: string;
 }
 
+/** 创建模型返回数据 */
+declare interface CreateModelRsp {
+  /** 模型信息 */
+  Model?: ModelInfo;
+}
+
+/** 创建模型版本返回 */
+declare interface CreateModelVersionRsp {
+  /** 创建成功 */
+  Created?: boolean;
+}
+
 /** 创建schema的响应 */
 declare interface CreateSchemaRsp {
   /** schema信息 */
   Schema?: Schema | null;
+}
+
+/** 创建模型返回数据 */
+declare interface CreateVolumeRsp {
+  /** 数据卷信息 */
+  Volume?: Volume;
 }
 
 /** CreateWorkflowRsp */
@@ -350,6 +418,18 @@ declare interface DeleteFolderRsp {
   Status?: boolean;
 }
 
+/** 删除存储位置响应 */
+declare interface DeleteLocationRsp {
+  /** 是否成功删除 */
+  Deleted?: boolean;
+}
+
+/** 删除模型结果 */
+declare interface DeleteModelRsp {
+  /** 是否删除成功 */
+  Result?: boolean;
+}
+
 /** 删除Schema的响应 */
 declare interface DeleteSchemaRsp {
   /** 操作结果 */
@@ -360,6 +440,18 @@ declare interface DeleteSchemaRsp {
 declare interface DeleteTableRsp {
   /** 操作结果 */
   Result?: boolean | null;
+}
+
+/** 删除view的响应 */
+declare interface DeleteViewRsp {
+  /** 操作结果 */
+  Result?: boolean | null;
+}
+
+/** 删除模型结果 */
+declare interface DeleteVolumeRsp {
+  /** 是否删除成功 */
+  Result?: boolean;
 }
 
 /** DeleteWorkflowRsp */
@@ -404,6 +496,30 @@ declare interface DictItem {
   Value?: string;
 }
 
+/** 特征表定义 */
+declare interface FeatureTable {
+  /** 表名称 */
+  Name?: string;
+  /** 全称 */
+  FullName?: string;
+  /** 资产描述 */
+  Comment?: string | null;
+  /** 数据库名称 */
+  DatabaseName?: string | null;
+  /** 修改时间，iso8601格式 */
+  ModifiedTime?: string | null;
+  /** 创建时间，iso8601格式 */
+  CreateTime?: string | null;
+  /** 标签 */
+  Tags?: Tag[] | null;
+  /** 责任人 */
+  Owner?: Owner | null;
+  /** 工作空间ID */
+  WorkspaceId?: string | null;
+  /** 资产ID */
+  AssetGuid?: string | null;
+}
+
 /** catalog特征表详情 */
 declare interface FeatureTableDetail {
   /** 特征表主键字段列表 */
@@ -416,6 +532,10 @@ declare interface FeatureTableDetail {
   WorkflowId?: string;
   /** 离线特征表对应生成的在线特征表名称 */
   OnlineTableName?: string;
+  /** 离线特征表对应生成的在线特征表类型，取值：TENCENT_POSTGRESQL | REDIS），缺省 TENCENT_POSTGRESQL */
+  OnlineTableType?: string;
+  /** 离线特征表对应生成的在线特征表ConnectionId */
+  ConnectionId?: string;
 }
 
 /** 数据获取选项，用于get/list请求中控制响应返回哪些额外内容 */
@@ -436,6 +556,40 @@ declare interface FetchOption {
   FetchTags?: boolean;
   /** 是否返回字段关联的字典维度信息，默认不传，不返回 */
   FetchDimensions?: boolean;
+}
+
+/** 统一搜索字段信息 */
+declare interface FieldInfo {
+  /** 字段名称 */
+  Name?: string;
+  /** 字段描述 */
+  Comment?: string;
+  /** 字段类型 */
+  Type?: string;
+  /** 语言类型 */
+  Lang?: string;
+  /** 字段内容或代码片段 */
+  Content?: string;
+  /** 字段采样值 */
+  SampleValues?: string[];
+}
+
+/** 字段级标签信息，用于资产打标时指定字段维度的标签（入参+出参共用） */
+declare interface FieldTagInfo {
+  /** 字段名称（必填）；清除标记场景（LabelId=-1）下为待清除字段名 */
+  FieldName: string;
+  /** 标签ID特殊值：-1 表示「清除标记」，仅在 BatchAttachAssetTag 接口中生效：服务端会清除该 FieldName 下所有已有字段标签。使用 -1 时 FieldName 必填，其余字段可留空。 */
+  LabelId?: string;
+  /** 标签名称（可选） */
+  LabelName?: string;
+  /** 标签类型枚举值：1：GOVERNANCE_LABEL：治理标签2：CUSTOM_LABEL：自定义标签3：PROPERTY_LABEL：属性标签4：DESENSITIZATION_LABEL：脱敏标签字段打标规则：非脱敏标签（1/2/3）时 LabelValue 必填；脱敏标签（4）时 LabelValue 可为空 */
+  LabelType?: number;
+  /** 字段类型（可选），如 string、int、bigint 等 */
+  FieldType?: string;
+  /** 标签值ID（可选）；非脱敏标签（LabelType!=4）建议填充；属性标签（LabelType=3）可为0；脱敏标签（LabelType=4）及清除标记（LabelId=-1）场景可留空 */
+  LabelValueId?: string;
+  /** 标签值；非脱敏标签（LabelType!=4）必填，例如治理/自定义/属性标签均需携带业务语义值；脱敏标签（LabelType=4）及清除标记（LabelId=-1）场景可为空 */
+  LabelValue?: string;
 }
 
 /** 文件运行配置 */
@@ -580,6 +734,56 @@ declare interface FolderLocator {
   PathName?: string;
 }
 
+/** 代码片段 */
+declare interface Fragment {
+  /** 字段名称 */
+  Name?: string;
+  /** 字段类型 */
+  Type?: string;
+  /** 表字段描述 */
+  Comment?: string;
+  /** 片段内容 */
+  Content?: string;
+  /** 片段语言 */
+  Lang?: string;
+}
+
+/** 函数详情 */
+declare interface FunctionInfo {
+  /** 函数名 */
+  Name?: string;
+  /** 函数类型，取值如JAVA、SCALA、PYTHON、SQL等 */
+  FunctionType?: string;
+  /** 引擎类型，取值如SPARK、HIVE、PRESTO等 */
+  EngineType?: string;
+  /** 类名 */
+  ClassName?: string;
+  /** 函数依赖的资源 */
+  Resources?: FunctionResource[];
+  /** 描述 */
+  Comment?: string;
+  /** 属性 */
+  Properties?: KVPair[];
+  /** 审计信息 */
+  Audit?: Audit;
+  /** owner信息 */
+  MetaOwner?: MetaOwner;
+  /** 资产全局唯一ID */
+  AssetGuid?: string;
+  /** 当前用户对该实体的权限信息 */
+  PermissionDetail?: PermissionDetail;
+  /** 标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回 */
+  Tags?: CommonTagInfo[];
+}
+
+/** 函数资源 */
+declare interface FunctionResource {
+  /** 资源类型，取值如file(文件)、jar(jar包)、archive(归档文件)等 */
+  ResourceType?: string;
+  /** 资源路径 */
+  Uri?: string;
+}
+
 /** 获取数据目录详情的响应 */
 declare interface GetCatalogRsp {
   /** catalog详情 */
@@ -590,6 +794,24 @@ declare interface GetCatalogRsp {
 declare interface GetFolderRsp {
   /** 文件夹信息 */
   Folder?: FileNode;
+}
+
+/** 查询存储位置详情响应 */
+declare interface GetLocationRsp {
+  /** 存储位置详情 */
+  Location?: LocationInfo;
+}
+
+/** 获取模型结果 */
+declare interface GetModelRsp {
+  /** 模型详情 */
+  Model?: ModelInfo;
+}
+
+/** 获取模型版本结果 */
+declare interface GetModelVersionRsp {
+  /** 模型详情 */
+  ModelVersion?: ModelVersionInfo;
 }
 
 /** 获取schema详情的响应 */
@@ -608,6 +830,18 @@ declare interface GetTableRsp {
 declare interface GetTablesRsp {
   /** 表信息列表。注意：仅返回当前workspace有权限的catalog下的表，无权限的表会被静默跳过 */
   Items?: TableInfo[] | null;
+}
+
+/** 获取view详情的响应 */
+declare interface GetViewRsp {
+  /** view详情 */
+  View?: ViewInfo | null;
+}
+
+/** volume返回详情 */
+declare interface GetVolumeRsp {
+  /** volume详情 */
+  Volume?: Volume;
 }
 
 /** GetWorkflowRsp */
@@ -760,6 +994,36 @@ declare interface GroupUserInfo {
   UpdateTime?: string;
 }
 
+/** 搜索命中的高亮 */
+declare interface Highlighting {
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Comment?: string;
+  /** 片段 */
+  TextFragments?: Fragment[];
+}
+
+/** 高亮信息 */
+declare interface HighlightingInfo {
+  /** 资产名称 */
+  AssetName?: string | null;
+  /** 资产全名 */
+  FullName?: string | null;
+  /** 描述 */
+  Comment?: string | null;
+  /** 代码片段 */
+  CodeFragments?: Fragment[] | null;
+  /** 文本片段 */
+  TextFragments?: Fragment[] | null;
+  /** 标签(废弃) */
+  Tags?: TagInfo[] | null;
+  /** 标签 */
+  TagFragments?: TagInfo[] | null;
+  /** 别名高亮片段列表。使用场景：资产别名命中关键词时，返回带 标签的高亮片段供前端渲染 */
+  AliasFragments?: string[] | null;
+}
+
 /** 索引结构 */
 declare interface Index {
   /** 字段键值类型 */
@@ -880,6 +1144,14 @@ declare interface LabelBrief {
   LabelValueId?: string | null;
 }
 
+/** 获取数据目录名称列表响应 */
+declare interface ListCatalogNamesRsp {
+  /** 数据目录名列表 */
+  Items?: NameIdentifier[] | null;
+  /** 下页分页token信息(base64编码，包含offset、snapshotId等) */
+  NextPageToken?: string | null;
+}
+
 /** 获取数据目录列表响应 */
 declare interface ListCatalogsRsp {
   /** 数据目录列表 */
@@ -944,6 +1216,16 @@ declare interface ListConsoleUsersRsp {
   TotalPageNumber?: number;
 }
 
+/** ListFeatureTableResp返回 */
+declare interface ListFeatureTableResp {
+  /** 总数 */
+  TotalCount?: string | null;
+  /** 返回列表 */
+  Items?: FeatureTable[] | null;
+  /** 下一页token，为空表示没有更多数据 */
+  NextPageToken?: string | null;
+}
+
 /** 查询文件信息结果 */
 declare interface ListFilesRsp {
   /** 文件/文件夹节点列表 */
@@ -956,6 +1238,26 @@ declare interface ListFilesRsp {
   TotalCount?: number;
   /** 总页数 */
   TotalPageNumber?: number;
+}
+
+/** 分页查询存储位置列表响应 */
+declare interface ListLocationsRsp {
+  /** 存储位置详情列表 */
+  Locations?: LocationInfo[];
+  /** 结果总条数 */
+  TotalCount?: number;
+  /** 快照ID */
+  SnapshotId?: string;
+}
+
+/** 模型列表返回 */
+declare interface ListModelsRsp {
+  /** 模型列表 */
+  Items?: ModelInfo[];
+  /** 总数量 */
+  TotalCount?: string;
+  /** 分页令牌 */
+  NextPageToken?: string;
 }
 
 /** 列表分区 */
@@ -976,11 +1278,27 @@ declare interface ListPartitioning {
   Assignments: ListPartition[];
 }
 
+/** 获取数据库名称列表响应 */
+declare interface ListSchemaNamesRsp {
+  /** 数据库名列表 */
+  Items?: NameIdentifier[] | null;
+  /** 下页分页token信息(base64编码，包含offset、snapshotId等) */
+  NextPageToken?: string | null;
+}
+
 /** 获取schema列表响应 */
 declare interface ListSchemasRsp {
   /** schema列表 */
   Items?: Schema[] | null;
   /** 下页分页token */
+  NextPageToken?: string | null;
+}
+
+/** 获取数据表名称列表响应 */
+declare interface ListTableNamesRsp {
+  /** 数据表名数组 */
+  Items?: NameIdentifier[] | null;
+  /** 下页分页token信息(base64编码，包含offset、snapshotId等) */
   NextPageToken?: string | null;
 }
 
@@ -990,6 +1308,32 @@ declare interface ListTablesRsp {
   Items?: TableInfo[] | null;
   /** 下页分页token */
   NextPageToken?: string | null;
+}
+
+/** 获取视图名称列表响应 */
+declare interface ListViewNamesRsp {
+  /** 视图名数组 */
+  Items?: NameIdentifier[] | null;
+  /** 下页分页token信息(base64编码，包含offset、snapshotId等) */
+  NextPageToken?: string | null;
+}
+
+/** 获取view列表响应 */
+declare interface ListViewsRsp {
+  /** view列表 */
+  Items?: ViewInfo[] | null;
+  /** 下页分页token */
+  NextPageToken?: string | null;
+}
+
+/** 数据卷返回信息 */
+declare interface ListVolumesRsp {
+  /** 数据卷信息 */
+  Items?: Volume[];
+  /** 总数据卷数量 */
+  TotalCount?: string;
+  /** 分页信息 */
+  NextPageToken?: string;
 }
 
 /** ListWorkflowRunsRsp */
@@ -1106,6 +1450,34 @@ declare interface Literal {
   DataType: string;
 }
 
+/** 存储位置详情 */
+declare interface LocationInfo {
+  /** 存储位置名 */
+  LocationName?: string;
+  /** 存储位置URI */
+  LocationUri?: string;
+  /** 存储位置描述 */
+  Comment?: string;
+  /** 存储位置属性 */
+  Properties?: KVPair[];
+  /** 审计信息 */
+  Audit?: Audit;
+}
+
+/** 更新location的操作单元，通过 UpdateType 指定操作类型 */
+declare interface LocationUpdate {
+  /** 更新类型，取值：modify_location_name、modify_location_comment、modify_location_properties */
+  UpdateType: string;
+  /** 新的备注，可选，UpdateType 为 modify_location_comment 时使用 */
+  NewComment?: string;
+  /** 新增/修改的属性键值对列表，可选，UpdateType 为 modify_location_properties 时使用 */
+  SetProperties?: KVPair[];
+  /** 要移除的属性key列表，可选，UpdateType 为 modify_location_properties 时使用 */
+  RemoveProperties?: string[];
+  /** 新的名称，可选，UpdateType 为 modify_location_name 时使用 */
+  NewName?: string;
+}
+
 /** 元数据责任人信息数据结构 */
 declare interface MetaOwner {
   /** 元数据名称（全名）:catalog.schema.table */
@@ -1116,6 +1488,62 @@ declare interface MetaOwner {
   Owner?: string | null;
   /** 所有者名称 */
   OwnerName?: string | null;
+  /** 数据目录来源，取值参考 CatalogSourceEnum：METALAKE / CONNECTION / SETATS。ListMetaOwners 走新参数 Catalogs 查询时，按入参回填；走旧参数 FullNames 查询时，按请求顶层 CatalogSource 回填（默认 METALAKE） */
+  CatalogSource?: string | null;
+}
+
+/** 模型信息 */
+declare interface ModelInfo {
+  /** 模型名称 */
+  Name: string;
+  /** catalog信息 */
+  CatalogName: string;
+  /** schema 信息 */
+  SchemaName: string;
+  /** 模型描述 */
+  Comment?: string;
+  /** 最新版本号 */
+  LatestVersion?: string;
+  /** 扩展数据 */
+  Properties?: KVPair[];
+  /** 审计数据 */
+  Audit?: Audit;
+  /** 责任人信息 */
+  MetaOwner?: MetaOwner;
+  /** id */
+  Id?: string;
+  /** 资产全局唯一ID */
+  AssetGuid?: string;
+  /** 当前用户对该实体的权限信息 */
+  PermissionDetail?: PermissionDetail;
+  /** 标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回 */
+  Tags?: CommonTagInfo[] | null;
+}
+
+/** 模型版本信息 */
+declare interface ModelVersionInfo {
+  /** 版本号 */
+  Version?: string;
+  /** 模型版本uri */
+  Uri?: string;
+  /** 描述信息 */
+  Comment?: string;
+  /** 扩展参数 */
+  Properties?: KVPair[];
+  /** 别名 */
+  Aliases?: string[];
+  /** 审计信息 */
+  Audit?: Audit;
+  /** Catalog Name */
+  CatalogName?: string;
+  /** Schema Name */
+  SchemaName?: string;
+  /** Model Name */
+  ModelName?: string;
+  /** 标签列表 */
+  Tags?: AssetTagVote[];
+  /** 资产全局唯一ID */
+  AssetGuid?: string;
 }
 
 /** 监控指标配置 */
@@ -1138,12 +1566,34 @@ declare interface MonitorMetricItem {
   TimeoutThreshold?: string | null;
 }
 
+/** 名称标识符，用于各层级（catalog/schema/table/view等）名称列表接口的返回条目 */
+declare interface NameIdentifier {
+  /** 名称 */
+  Name?: string | null;
+  /** 命名空间 */
+  Namespace?: string[] | null;
+  /** 元数据来源，取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。响应体始终返回具体来源值，不会返回CATALOG_SOURCE_ALL。 */
+  CatalogSource?: string | null;
+  /** TCLAKE Catalog取值：（注册中0，待测试1，连接成功2，连接失败3，删除中4，已删除5）SETATS Catalog取值：（Creating=30, Available=31, Deleted=32, Scaling=33, Isolated=34, Failed=35，未知=0） */
+  Status?: string;
+}
+
 /** 排序字段 */
 declare interface OrderBy {
   /** 排序方向，Asc（升序）或 Desc（降序），大小写不敏感 */
   Direction?: string;
   /** 排序字段名 */
   Name?: string;
+}
+
+/** 责任人 */
+declare interface Owner {
+  /** 用户ID */
+  UserId?: string | null;
+  /** 用户名称 */
+  UserName?: string | null;
+  /** 0:USER, 1:GROUP */
+  Type?: number;
 }
 
 /** 参数键值对 */
@@ -1342,6 +1792,64 @@ declare interface Schema {
   Tags?: CommonTagInfo[] | null;
 }
 
+/** 统一搜索出参 */
+declare interface SearchAssetRsp {
+  /** 结果列表 */
+  Items?: SearchResult[] | null;
+  /** 分页token，不为空时表示还有下一页数据，作为参数PageToken传递 */
+  NextPageToken?: string | null;
+}
+
+/** 统一搜索返回结果 */
+declare interface SearchResult {
+  /** 资产全名 */
+  FullName?: string | null;
+  /** 资产全局ID */
+  AssetGuid?: string | null;
+  /** 各资产类别下的唯一ID */
+  AssetId?: string | null;
+  /** 资产名称 */
+  AssetName?: string | null;
+  /** 资产类型，参见ListEntityTypeMetas返回的EntityType */
+  AssetType?: string | null;
+  /** 用户活动 */
+  UserActivityInfo?: UserActivityInfo | null;
+  /** 热度，值范围：[1,2,3,4] */
+  Popularity?: string | null;
+  /** 资产标签 */
+  Tags?: TagInfo[] | null;
+  /** 责任人 */
+  Owner?: Owner | null;
+  /** 最近更新时间，毫秒时间戳 */
+  ModifiedTime?: string | null;
+  /** 描述 */
+  Comment?: string | null;
+  /** 工作空间ID */
+  WorkspaceId?: string | null;
+  /** 工作空间文件夹路径（废弃） */
+  WorkspaceFolderPath?: string | null;
+  /** 高亮(废弃) */
+  Highlighting?: Highlighting[] | null;
+  /** 各类资产扩展信息 */
+  Properties?: KVPair[] | null;
+  /** 工作空间文件夹路径 */
+  WorkspacePath?: string | null;
+  /** 字段信息 */
+  FieldInfo?: FieldInfo[] | null;
+  /** 废弃 */
+  SignalLevel?: string | null;
+  /** 热度值 */
+  PopularityQuantity?: string | null;
+  /** 高亮 */
+  HighlightingInfo?: HighlightingInfo | null;
+  /** 字段标签列表，返回资产下所有字段上打的标签信息，用于展示字段级标签；每项包含 LabelId、LabelName、LabelType、FieldName、FieldType */
+  FieldTags?: FieldTagInfo[] | null;
+  /** 资产别名列表。使用场景：仅指标、语义模型等业务资产支持多别名，其他资产类型返回空列表。前端可选择在资产名后面以【别名1、别名2】的形式展示 */
+  Aliases?: string[] | null;
+  /** 资产元数据来源。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。仅catalog类资产（CATALOG/SCHEMA/TABLE/VIEW/MODEL/VOLUME/FUNCTION/TABLE_COLUMN）返回该字段，非catalog类资产该字段为空字符串。 */
+  CatalogSource?: string | null;
+}
+
 /** 单字段分区 */
 declare interface SingleFieldPartitioning {
   /** 分区字段 */
@@ -1418,6 +1926,34 @@ declare interface TableInfo {
   PermissionDetail?: PermissionDetail;
   /** 表级标签列表，仅当请求中FetchOption.FetchTags=true时返回，默认不返回 */
   Tags?: CommonTagInfo[] | null;
+}
+
+/** 标签 */
+declare interface Tag {
+  /** 名称 */
+  Name?: string | null;
+  /** 值 */
+  Value?: string | null;
+  /** 标签类型，参考 LabelType 枚举：0=未知，1=治理标签，2=自定义标签，3=属性标签，4=脱敏标签 */
+  Type?: number | null;
+}
+
+/** 标签信息，入参时用于指定打标标签，出参时返回资产已打的标签（入参+出参共用） */
+declare interface TagInfo {
+  /** 标签ID（入参必填） */
+  LabelId: string;
+  /** 标签名称（入参必填） */
+  LabelName: string;
+  /** 标签类型（入参必填）枚举值：1：GOVERNANCE_LABEL：治理标签（标签管理页手动创建）2：CUSTOM_LABEL：自定义标签（打标时自动创建）3：PROPERTY_LABEL：属性标签（Key-Value键值对）4：DESENSITIZATION_LABEL：脱敏标签（与脱敏策略绑定） */
+  Type: number;
+  /** 标签值ID（可选）；属性标签可为0；LabelType=4（脱敏标签）时非必填 */
+  LabelValueId?: string;
+  /** 标签值（可选）；LabelType=4（脱敏标签）时非必填 */
+  LabelValue?: string;
+  /** 【仅出参，入参无需填写】标签是否已被物理删除（true=已删除） */
+  IsDeleted?: boolean;
+  /** 【仅入参，出参不返回】是否自动创建自定义标签（可选，默认 false）；true=当 LabelName 非空且标签不存在时，自动创建 LabelType=2（CUSTOM_LABEL）的自定义标签；false=仅使用已有标签打标，标签不存在时报错 */
+  CreateCustomLabel?: boolean;
 }
 
 /** 标签值信息 */
@@ -1510,6 +2046,12 @@ declare interface UnbindWorkflowBundleRsp {
   Status?: boolean | null;
 }
 
+/** 修改数据目录信息响应 */
+declare interface UpdateCatalogRsp {
+  /** 是否成功 */
+  Result?: boolean;
+}
+
 /** 修改控制台用户组响应 */
 declare interface UpdateConsoleGroupRsp {
   /** 操作是否成功 */
@@ -1528,6 +2070,62 @@ declare interface UpdateFolderRsp {
   Status?: boolean;
 }
 
+/** 修改函数信息响应 */
+declare interface UpdateFunctionRsp {
+  /** 更新后的函数信息 */
+  Function?: FunctionInfo;
+}
+
+/** 修改存储位置响应 */
+declare interface UpdateLocationRsp {
+  /** 修改后的存储位置详情 */
+  Location?: LocationInfo;
+}
+
+/** 修改模型信息响应 */
+declare interface UpdateModelRsp {
+  /** 更新后的模型信息 */
+  Model?: ModelInfo;
+}
+
+/** 修改模型版本信息响应 */
+declare interface UpdateModelVersionRsp {
+  /** 更新后的模型版本信息 */
+  ModelVersion?: ModelVersionInfo;
+}
+
+/** 修改 schema 信息响应 */
+declare interface UpdateSchemaRsp {
+  /** 更新后的 schema 信息 */
+  Schema?: Schema;
+}
+
+/** 修改表字段描述响应 */
+declare interface UpdateTableColumnRsp {
+  /** 整体结果，true表示全部成功 */
+  Result?: boolean;
+  /** 失败的字段列表（部分成功场景），全部成功时为空 */
+  FailedColumns?: ColumnErrorMessages[];
+}
+
+/** 修改表信息响应 */
+declare interface UpdateTableRsp {
+  /** 更新后的表信息 */
+  Table?: TableInfo;
+}
+
+/** 修改视图信息响应 */
+declare interface UpdateViewRsp {
+  /** 更新后的视图信息 */
+  View?: ViewInfo;
+}
+
+/** 修改数据卷信息响应 */
+declare interface UpdateVolumeRsp {
+  /** 更新后的数据卷信息 */
+  Volume?: Volume;
+}
+
 /** UpdateWorkflowRsp */
 declare interface UpdateWorkflowRsp {
   /** 更新状态，true 表示成功 */
@@ -1544,6 +2142,14 @@ declare interface UpdateWorkspaceRoleResult {
 declare interface UpdateWorkspaceRsp {
   /** 操作是否成功 */
   Status?: boolean;
+}
+
+/** 用户对资产的操作信息 */
+declare interface UserActivityInfo {
+  /** 是否收藏- true 是- false 否 */
+  IsFavorite: boolean;
+  /** 上次查看时间 */
+  LastViewTime: string;
 }
 
 /** 用户基本信息 */
@@ -1566,6 +2172,56 @@ declare interface UserTagInfo {
   TagName?: string;
   /** 该标签维度下绑定的标签值集合，元素结构见 TagValueInfo。ID 模式写接口中元素 TagValueId 必填；按名称模式接口中元素 TagValue 必填；查询接口出参中回填 */
   Values?: TagValueInfo[];
+}
+
+/** 视图信息 */
+declare interface ViewInfo {
+  /** 表名称 */
+  Name?: string | null;
+  /** 描述 */
+  Comment?: string | null;
+  /** 字段信息 */
+  Columns?: ColumnInfo[] | null;
+  /** 属性值 */
+  Properties?: KVPair[] | null;
+  /** 编辑者 */
+  Audit?: Audit | null;
+  /** owner信息 */
+  MetaOwner?: MetaOwner | null;
+  /** 资产全局唯一ID */
+  AssetGuid?: string;
+  /** 当前用户对该实体的权限信息 */
+  PermissionDetail?: PermissionDetail;
+  /** 标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回 */
+  Tags?: CommonTagInfo[] | null;
+}
+
+/** 数据卷信息 */
+declare interface Volume {
+  /** 名称 */
+  Name: string;
+  /** catalog信息 */
+  CatalogName: string;
+  /** schema 信息 */
+  SchemaName: string;
+  /** 模型描述 */
+  Comment?: string;
+  /** 存储位置 */
+  StorageLocation?: string;
+  /** 扩展数据 */
+  Properties?: KVPair[];
+  /** 审计数据 */
+  Audit?: Audit;
+  /** 数据卷类型，取值：MANAGED(内部管理)、EXTERNAL(外部存储) */
+  Type?: string;
+  /** 责任人信息 */
+  MetaOwner?: MetaOwner;
+  /** 资产全局唯一ID */
+  AssetGuid?: string;
+  /** 当前用户对该实体的权限信息 */
+  PermissionDetail?: PermissionDetail;
+  /** 标签信息列表。注意：仅当请求中 FetchTags=true 时返回，默认不返回 */
+  Tags?: CommonTagInfo[] | null;
 }
 
 /** 工作流完整配置 */
@@ -2085,7 +2741,7 @@ declare interface CreateCatalogRequest {
   WorkspaceId: string;
   /** 描述 */
   Comment?: string;
-  /** connection 的 ID */
+  /** connection 的 ID，通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（融合版新增字段），取值参考 CatalogSourceEnum：METALAKE（专业版）/ CONNECTION（分析版），不传时默认按 METALAKE 处理 */
   CatalogSource?: string;
@@ -2164,6 +2820,62 @@ declare interface CreateFolderResponse {
   RequestId?: string;
 }
 
+declare interface CreateLocationRequest {
+}
+
+declare interface CreateLocationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateModelRequest {
+  /** catalog 信息 */
+  CatalogName: string;
+  /** schema 信息 */
+  SchemaName: string;
+  /** 模型名称 */
+  ModelName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 描述信息 */
+  Comment?: string;
+  /** 扩展参数 */
+  Properties?: KVPair[];
+}
+
+declare interface CreateModelResponse {
+  /** 创建返回模型信息 */
+  Data?: CreateModelRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateModelVersionRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 模型名称 */
+  ModelName: string;
+  /** 地址 */
+  Uri: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 别名列表 */
+  Aliases?: string[];
+  /** 描述 */
+  Comment?: string;
+  /** 扩展信息 */
+  Properties?: KVPair[];
+}
+
+declare interface CreateModelVersionResponse {
+  /** 创建返回结果 */
+  Data?: CreateModelVersionRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSchemaRequest {
   /** catalog名称 */
   CatalogName: string;
@@ -2173,7 +2885,7 @@ declare interface CreateSchemaRequest {
   WorkspaceId: string;
   /** 描述 */
   Comment?: string;
-  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持创建schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误 */
+  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持创建schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2182,6 +2894,32 @@ declare interface CreateSchemaRequest {
 declare interface CreateSchemaResponse {
   /** schema信息 */
   Data?: CreateSchemaRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateVolumeRequest {
+  /** catalog 信息 */
+  CatalogName: string;
+  /** schema 信息 */
+  SchemaName: string;
+  /** 数据卷名称 */
+  VolumeName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 描述信息 */
+  Comment?: string;
+  /** 扩展参数 */
+  Properties?: KVPair[];
+  /** 存储位置 */
+  StorageLocation?: string;
+  /** 数据卷类型 */
+  Type?: string;
+}
+
+declare interface CreateVolumeResponse {
+  /** 创建返回数据卷信息 */
+  Data?: CreateVolumeRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2259,7 +2997,7 @@ declare interface DeleteCatalogRequest {
   CatalogName: string;
   /** 调用时所在workspace唯一id */
   WorkspaceId: string;
-  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2316,6 +3054,38 @@ declare interface DeleteFolderResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLocationRequest {
+  /** 存储位置名，必填 */
+  LocationName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+}
+
+declare interface DeleteLocationResponse {
+  /** 返回结果 */
+  Data?: DeleteLocationRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteModelRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 模型名称 */
+  ModelName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+}
+
+declare interface DeleteModelResponse {
+  /** 删除结果 */
+  Data?: DeleteModelRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteSchemaRequest {
   /** 数据目录名 */
   CatalogName: string;
@@ -2323,7 +3093,7 @@ declare interface DeleteSchemaRequest {
   SchemaName: string;
   /** 调用时所在workspace唯一id */
   WorkspaceId: string;
-  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误 */
+  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除schema，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2345,7 +3115,7 @@ declare interface DeleteTableRequest {
   TableName: string;
   /** 调用时所在workspace唯一id */
   WorkspaceId?: string;
-  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除表，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误 */
+  /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除表，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2354,6 +3124,42 @@ declare interface DeleteTableRequest {
 declare interface DeleteTableResponse {
   /** 操作结果 */
   Data?: DeleteTableRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteViewRequest {
+  /** 数据目录名 */
+  CatalogName: string;
+  /** 数据库名 */
+  SchemaName: string;
+  /** View名称 */
+  ViewName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+}
+
+declare interface DeleteViewResponse {
+  /** 操作结果 */
+  Data?: DeleteViewRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVolumeRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 数据卷名称 */
+  VolumeName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+}
+
+declare interface DeleteVolumeResponse {
+  /** 删除结果 */
+  Data?: DeleteVolumeRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2407,7 +3213,7 @@ declare interface GetCatalogRequest {
   CatalogId?: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
-  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2429,7 +3235,7 @@ declare interface GetFileRequest {
   FileType?: string;
   /** 是否返回文件内容。true 时 Storage.Content 返回 base64 内容，默认 false */
   IncludeContent?: boolean;
-  /** 文件版本 ID。来源：ListFileVersions 接口返回的 VersionId。不传则读取最新版本 */
+  /** 文件版本 ID。来源：ListCodeFileVersions 接口返回的 VersionId。不传则读取最新版本 */
   VersionId?: string;
   /** 文件完整路径，以 / 开头，如 /etl/daily/demo.ipynb。与 FileId 二选一 */
   FilePath?: string;
@@ -2456,6 +3262,60 @@ declare interface GetFolderResponse {
   RequestId?: string;
 }
 
+declare interface GetLocationRequest {
+  /** 存储位置名，必填 */
+  LocationName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+}
+
+declare interface GetLocationResponse {
+  /** 返回结果 */
+  Data?: GetLocationRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetModelRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 模型名称 */
+  ModelName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+}
+
+declare interface GetModelResponse {
+  /** 获取模型结果 */
+  Data?: GetModelRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetModelVersionRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 模型名称 */
+  ModelName: string;
+  /** 模型版本号 */
+  ModelVersion: number;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+}
+
+declare interface GetModelVersionResponse {
+  /** 获取模型结果 */
+  Data?: GetModelVersionRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetSchemaRequest {
   /** 数据目录名 */
   CatalogName: string;
@@ -2465,7 +3325,7 @@ declare interface GetSchemaRequest {
   WorkspaceId: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
-  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2489,7 +3349,7 @@ declare interface GetTableRequest {
   WorkspaceId: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
-  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2509,7 +3369,7 @@ declare interface GetTablesRequest {
   FullNames: string[];
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
-  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，要求所有FullNames属于同一catalog（分析版额外约束）；空/缺省→走专业版TcLake路径 */
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，要求所有FullNames属于同一catalog（分析版额外约束）；空/缺省→走专业版TcLake路径。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2518,6 +3378,46 @@ declare interface GetTablesRequest {
 declare interface GetTablesResponse {
   /** 返回结果 */
   Data?: GetTablesRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetViewRequest {
+  /** 数据目录名 */
+  CatalogName: string;
+  /** 数据库名 */
+  SchemaName: string;
+  /** View名称 */
+  ViewName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId?: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+}
+
+declare interface GetViewResponse {
+  /** view详情 */
+  Data?: GetViewRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetVolumeRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 数据卷名称 */
+  VolumeName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+}
+
+declare interface GetVolumeResponse {
+  /** 获取volume详情 */
+  Data?: GetVolumeRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2594,6 +3494,26 @@ declare interface KillWorkflowRunRequest {
 declare interface KillWorkflowRunResponse {
   /** 终止工作流的运行响应内容 */
   Data?: AsyncActionRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListCatalogNamesRequest {
+  /** workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 最大结果条数，可选，默认10 */
+  MaxResults?: string;
+  /** 分页token信息(base64编码，包含offset、snapshotId等) */
+  PageToken?: string;
+  /** catalog类型，参考CatalogType(当前支持：TABLE、MODEL、VOLUME)，可选，不填默认查询所有类型 */
+  Types?: string[];
+  /** 数据目录来源筛选，取值参考CatalogSourceEnum(METALAKE/CONNECTION/SETATS) */
+  CatalogSources?: string[];
+}
+
+declare interface ListCatalogNamesResponse {
+  /** 返回结果 */
+  Data?: ListCatalogNamesRsp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2700,6 +3620,32 @@ declare interface ListConsoleUsersResponse {
   RequestId?: string;
 }
 
+declare interface ListFeatureTablesRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 关键字 */
+  Keyword?: string;
+  /** Catalog目录列表 */
+  CatalogNames?: string[];
+  /** 标签列表 */
+  Tags?: string[];
+  /** 我负责的 */
+  OwnerMe?: boolean;
+  /** 最大结果条数，可选，取值1～50 */
+  MaxResults?: number;
+  /** 分页token信息(base64编码)，可选 */
+  PageToken?: string;
+  /** 排序，Name(CreateTime/ModifiedTime), Direction(Desc/Asc) */
+  OrderBys?: OrderBy[];
+}
+
+declare interface ListFeatureTablesResponse {
+  /** 返回信息 */
+  Data?: ListFeatureTableResp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListFilesRequest {
   /** 工作空间id */
   WorkspaceId: string;
@@ -2728,6 +3674,72 @@ declare interface ListFilesResponse {
   RequestId?: string;
 }
 
+declare interface ListLocationsRequest {
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 存储位置名匹配模式，支持SQL LIKE语法 */
+  LocationNamePattern?: string;
+  /** 是否基于快照分页 */
+  SnapshotBased?: boolean;
+  /** 快照ID */
+  SnapshotId?: string;
+  /** 页码，从1开始，可选，默认1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，取值范围 1~500 */
+  PageSize?: number;
+}
+
+declare interface ListLocationsResponse {
+  /** 返回结果 */
+  Data?: ListLocationsRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListModelsRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 最大结果条数，默认10，取值1~10000 */
+  MaxResults: number;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 分页信息 */
+  PageToken?: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+}
+
+declare interface ListModelsResponse {
+  /** 返回信息 */
+  Data?: ListModelsRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListSchemaNamesRequest {
+  /** 数据目录名，必填 */
+  CatalogName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 最大结果条数，可选，默认10 */
+  MaxResults?: string;
+  /** 分页token信息(base64编码，包含offset、snapshotId等) */
+  PageToken?: string;
+  /** 数据源连接ID，可选（融合版新增字段） */
+  ConnectionId?: string;
+  /** 数据目录来源，取值参考CatalogSourceEnum：METALAKE/CONNECTION/SETATS */
+  CatalogSource?: string;
+}
+
+declare interface ListSchemaNamesResponse {
+  /** 返回结果 */
+  Data?: ListSchemaNamesRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListSchemasRequest {
   /** 数据目录名 */
   CatalogName: string;
@@ -2752,6 +3764,30 @@ declare interface ListSchemasResponse {
   RequestId?: string;
 }
 
+declare interface ListTableNamesRequest {
+  /** 数据目录名，必填 */
+  CatalogName: string;
+  /** 数据库名，必填 */
+  SchemaName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 最大结果条数，可选，默认10 */
+  MaxResults?: string;
+  /** 分页token信息(base64编码，包含offset、snapshotId等) */
+  PageToken?: string;
+  /** 数据源连接ID，可选（融合版新增字段） */
+  ConnectionId?: string;
+  /** 数据目录来源，取值参考CatalogSourceEnum：METALAKE/CONNECTION/SETATS */
+  CatalogSource?: string;
+}
+
+declare interface ListTableNamesResponse {
+  /** 返回结果 */
+  Data?: ListTableNamesRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListTablesRequest {
   /** 数据目录名 */
   CatalogName: string;
@@ -2765,7 +3801,7 @@ declare interface ListTablesRequest {
   PageToken?: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
-  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径 */
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
   CatalogSource?: string;
@@ -2774,6 +3810,78 @@ declare interface ListTablesRequest {
 declare interface ListTablesResponse {
   /** 操作结果 */
   Data?: ListTablesRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListViewNamesRequest {
+  /** 数据目录名，必填 */
+  CatalogName: string;
+  /** 数据库名，必填 */
+  SchemaName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 最大结果条数，可选，默认10 */
+  MaxResults?: string;
+  /** 分页token信息(base64编码，包含offset、snapshotId等) */
+  PageToken?: string;
+  /** 数据源连接ID，可选（融合版新增字段） */
+  ConnectionId?: string;
+  /** 数据目录来源，取值参考CatalogSourceEnum：METALAKE/CONNECTION/SETATS */
+  CatalogSource?: string;
+}
+
+declare interface ListViewNamesResponse {
+  /** 返回结果 */
+  Data?: ListViewNamesRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListViewsRequest {
+  /** 数据目录名 */
+  CatalogName: string;
+  /** 数据库名 */
+  SchemaName: string;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 最大结果条数，默认10 */
+  MaxResults?: number;
+  /** 分页token */
+  PageToken?: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+  /** 数据源连接ID，可选（融合版新增字段）。非空→走分析版路径，空/缺省→走专业版TcLake路径。可通过 ListConnections 获取 */
+  ConnectionId?: string;
+  /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
+  CatalogSource?: string;
+}
+
+declare interface ListViewsResponse {
+  /** 操作结果 */
+  Data?: ListViewsRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListVolumesRequest {
+  /** 数据目录名称 */
+  CatalogName: string;
+  /** schema名称 */
+  SchemaName: string;
+  /** 获取数量 */
+  MaxResults: number;
+  /** 调用时所在workspace唯一id */
+  WorkspaceId: string;
+  /** 分页信息 */
+  PageToken?: string;
+  /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
+  FetchOption?: FetchOption;
+}
+
+declare interface ListVolumesResponse {
+  /** 接口返回信息 */
+  Data?: ListVolumesRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3042,6 +4150,44 @@ declare interface RunWorkflowResponse {
   RequestId?: string;
 }
 
+declare interface SearchAssetRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 最大结果条数，默认30，可选30～50 */
+  MaxResults?: number;
+  /** 关键字 */
+  Keyword?: string;
+  /** 资产类型列表，类型参见ListEntityTypeMetas的返回 */
+  AssetTypes?: string[];
+  /** 分页token信息，取上一页返回NextPageToken */
+  PageToken?: string;
+  /** 按资产负责人检索my 我负责的(包含my时其他uin不生效)uin 指定用户uin */
+  Owner?: string[];
+  /** 标签IDs，可通过 ListTags 获取 */
+  TagIds?: number[];
+  /** 标签值IDs，可通过 ListTags 获取 */
+  TagValueIds?: number[];
+  /** 更新时间，13位时间戳 */
+  ModifiedTime?: string;
+  /** 数据目录列表 */
+  CatalogNames?: string[];
+  /** 工作空间路径筛选(非catalog类资产) */
+  WorkspacePaths?: string[];
+  /** 是否开启混合搜索 */
+  EnableHybridSearch?: boolean;
+  /** 字段标签ID列表（可选）。使用场景：根据字段上打的标签检索资产（表），返回包含该字段标签的资产。与 TagIds 的区别：TagIds 是表级标签过滤，FieldTagIds 是字段级标签过滤。规格要求：int64 数组，最多支持 20 个标签 ID 同时过滤。可通过 ListTags 获取 */
+  FieldTagIds?: number[];
+  /** 排序，为空时默认按相关度倒排序Name:PopularityQuantity 热度Direction:Desc 降序Asc 升序 */
+  OrderBys?: OrderBy[];
+}
+
+declare interface SearchAssetResponse {
+  /** 返回信息 */
+  Data?: SearchAssetRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StartComputeRequest {
   /** 工作空间 ID */
   WorkspaceId: string;
@@ -3084,6 +4230,26 @@ declare interface UnbindWorkflowBundleRequest {
 declare interface UnbindWorkflowBundleResponse {
   /** 解绑工作流Bundle信息响应内容 */
   Data?: UnbindWorkflowBundleRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateCatalogRequest {
+  /** 数据目录名称，必填 */
+  CatalogName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新描述，可选，为空表示不修改注释 */
+  NewComment?: string;
+  /** 数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。 */
+  ConnectionId?: string;
+  /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
+  CatalogSource?: string;
+}
+
+declare interface UpdateCatalogResponse {
+  /** 返回结果 */
+  Data?: UpdateCatalogRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3172,6 +4338,206 @@ declare interface UpdateFolderRequest {
 declare interface UpdateFolderResponse {
   /** 更新文件夹结果 */
   Data?: UpdateFolderRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateFunctionRequest {
+  /** 数据目录名称，必填 */
+  CatalogName: string;
+  /** schema名称，必填 */
+  SchemaName: string;
+  /** 函数名称，必填 */
+  FunctionName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新描述，可选，为空表示不修改注释 */
+  NewComment?: string;
+}
+
+declare interface UpdateFunctionResponse {
+  /** 返回结果 */
+  Data?: UpdateFunctionRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateLocationRequest {
+  /** 存储位置名，必填 */
+  LocationName: string;
+  /** 更新location的操作列表，必填 */
+  Updates: LocationUpdate[];
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+}
+
+declare interface UpdateLocationResponse {
+  /** 返回结果 */
+  Data?: UpdateLocationRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateModelRequest {
+  /** 目录名称，必填 */
+  CatalogName: string;
+  /** 模式名称，必填 */
+  SchemaName: string;
+  /** 模型名称，必填 */
+  ModelName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新名称，可选，为空表示不修改名称 */
+  NewName?: string;
+  /** 新注释，可选，为空表示不修改注释 */
+  NewComment?: string;
+}
+
+declare interface UpdateModelResponse {
+  /** 返回结果 */
+  Data?: UpdateModelRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateModelVersionRequest {
+  /** 目录名称，必填 */
+  CatalogName: string;
+  /** 模式名称，必填 */
+  SchemaName: string;
+  /** 模型名称，必填 */
+  ModelName: string;
+  /** 模型版本号，必填 */
+  ModelVersion: number;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 要添加的别名，可选 */
+  AddedAliases?: string[];
+  /** 要移除的别名，可选 */
+  RemovedAliases?: string[];
+  /** 新注释，可选，为空表示不修改注释 */
+  NewComment?: string;
+}
+
+declare interface UpdateModelVersionResponse {
+  /** 返回结果 */
+  Data?: UpdateModelVersionRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateSchemaRequest {
+  /** 数据目录名称，必填 */
+  CatalogName: string;
+  /** schema名称，必填 */
+  SchemaName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新描述，可选，为空表示不修改注释 */
+  NewComment?: string;
+  /** 数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。可通过 ListConnections 获取 */
+  ConnectionId?: string;
+  /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
+  CatalogSource?: string;
+}
+
+declare interface UpdateSchemaResponse {
+  /** 返回结果 */
+  Data?: UpdateSchemaRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTableColumnRequest {
+  /** 数据目录名称，必填 */
+  CatalogName: string;
+  /** 数据库名称，必填 */
+  SchemaName: string;
+  /** 表名，必填 */
+  TableName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 字段描述列表，必填 */
+  Columns: ColumnBrief[];
+  /** 数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。可通过 ListConnections 获取 */
+  ConnectionId?: string;
+  /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
+  CatalogSource?: string;
+}
+
+declare interface UpdateTableColumnResponse {
+  /** 返回结果 */
+  Data?: UpdateTableColumnRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateTableRequest {
+  /** 数据目录名称，必填 */
+  CatalogName: string;
+  /** 数据库名称，必填 */
+  SchemaName: string;
+  /** 表名，必填 */
+  TableName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新名称，可选，为空表示不修改名称 */
+  NewName?: string;
+  /** 新描述，可选，为空表示不修改注释 */
+  NewComment?: string;
+  /** 数据源连接ID，可选。分析版catalog不支持写操作，传入非空时返回错误。可通过 ListConnections 获取 */
+  ConnectionId?: string;
+  /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
+  CatalogSource?: string;
+}
+
+declare interface UpdateTableResponse {
+  /** 返回结果 */
+  Data?: UpdateTableRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateViewRequest {
+  /** 数据目录名称，必填 */
+  CatalogName: string;
+  /** 数据库名称，必填 */
+  SchemaName: string;
+  /** View名，必填 */
+  ViewName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新名称，可选，为空表示不修改名称 */
+  NewName?: string;
+  /** 新描述，可选，为空表示不修改注释 */
+  NewComment?: string;
+}
+
+declare interface UpdateViewResponse {
+  /** 返回结果 */
+  Data?: UpdateViewRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateVolumeRequest {
+  /** 目录名称，必填 */
+  CatalogName: string;
+  /** 模式名称，必填 */
+  SchemaName: string;
+  /** 数据卷名称，必填 */
+  VolumeName: string;
+  /** 调用时所在workspace唯一id，必填 */
+  WorkspaceId: string;
+  /** 新名称，可选，为空表示不修改名称 */
+  NewName?: string;
+  /** 新注释，可选，为空表示不修改注释 */
+  NewComment?: string;
+}
+
+declare interface UpdateVolumeResponse {
+  /** 返回结果 */
+  Data?: UpdateVolumeRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3275,8 +4641,16 @@ declare interface Databuddy {
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建文件夹 {@link CreateFolderRequest} {@link CreateFolderResponse} */
   CreateFolder(data: CreateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFolderResponse>;
+  /** 创建存储位置 {@link CreateLocationRequest} {@link CreateLocationResponse} */
+  CreateLocation(data?: CreateLocationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLocationResponse>;
+  /** 创建模型 {@link CreateModelRequest} {@link CreateModelResponse} */
+  CreateModel(data: CreateModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelResponse>;
+  /** 创建模型版本 {@link CreateModelVersionRequest} {@link CreateModelVersionResponse} */
+  CreateModelVersion(data: CreateModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelVersionResponse>;
   /** 创建Schema {@link CreateSchemaRequest} {@link CreateSchemaResponse} */
   CreateSchema(data: CreateSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSchemaResponse>;
+  /** 创建数据卷 {@link CreateVolumeRequest} {@link CreateVolumeResponse} */
+  CreateVolume(data: CreateVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVolumeResponse>;
   /** 创建工作流 {@link CreateWorkflowRequest} {@link CreateWorkflowResponse} */
   CreateWorkflow(data: CreateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWorkflowResponse>;
   /** 创建工作空间 {@link CreateWorkspaceRequest} {@link CreateWorkspaceResponse} */
@@ -3291,10 +4665,18 @@ declare interface Databuddy {
   DeleteFile(data: DeleteFileRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFileResponse>;
   /** 删除文件夹 {@link DeleteFolderRequest} {@link DeleteFolderResponse} */
   DeleteFolder(data: DeleteFolderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFolderResponse>;
+  /** 删除存储位置 {@link DeleteLocationRequest} {@link DeleteLocationResponse} */
+  DeleteLocation(data: DeleteLocationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLocationResponse>;
+  /** 删除模型 {@link DeleteModelRequest} {@link DeleteModelResponse} */
+  DeleteModel(data: DeleteModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteModelResponse>;
   /** 删除schema {@link DeleteSchemaRequest} {@link DeleteSchemaResponse} */
   DeleteSchema(data: DeleteSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSchemaResponse>;
   /** 删除table {@link DeleteTableRequest} {@link DeleteTableResponse} */
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
+  /** 删除view {@link DeleteViewRequest} {@link DeleteViewResponse} */
+  DeleteView(data: DeleteViewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteViewResponse>;
+  /** 删除数据卷 {@link DeleteVolumeRequest} {@link DeleteVolumeResponse} */
+  DeleteVolume(data: DeleteVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVolumeResponse>;
   /** 删除工作流 {@link DeleteWorkflowRequest} {@link DeleteWorkflowResponse} */
   DeleteWorkflow(data: DeleteWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWorkflowResponse>;
   /** 删除工作空间 {@link DeleteWorkspaceRequest} {@link DeleteWorkspaceResponse} */
@@ -3307,12 +4689,22 @@ declare interface Databuddy {
   GetFile(data: GetFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileResponse>;
   /** 获取文件夹详情 {@link GetFolderRequest} {@link GetFolderResponse} */
   GetFolder(data: GetFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetFolderResponse>;
+  /** 查询存储位置详情 {@link GetLocationRequest} {@link GetLocationResponse} */
+  GetLocation(data: GetLocationRequest, config?: AxiosRequestConfig): AxiosPromise<GetLocationResponse>;
+  /** 获取模型详情 {@link GetModelRequest} {@link GetModelResponse} */
+  GetModel(data: GetModelRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelResponse>;
+  /** 获取模型版本详情 {@link GetModelVersionRequest} {@link GetModelVersionResponse} */
+  GetModelVersion(data: GetModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelVersionResponse>;
   /** 查询schema详情 {@link GetSchemaRequest} {@link GetSchemaResponse} */
   GetSchema(data: GetSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<GetSchemaResponse>;
   /** 查询table详情 {@link GetTableRequest} {@link GetTableResponse} */
   GetTable(data: GetTableRequest, config?: AxiosRequestConfig): AxiosPromise<GetTableResponse>;
   /** 批量获取表的元数据 {@link GetTablesRequest} {@link GetTablesResponse} */
   GetTables(data: GetTablesRequest, config?: AxiosRequestConfig): AxiosPromise<GetTablesResponse>;
+  /** 查询view详情 {@link GetViewRequest} {@link GetViewResponse} */
+  GetView(data: GetViewRequest, config?: AxiosRequestConfig): AxiosPromise<GetViewResponse>;
+  /** 获取数据卷详情 {@link GetVolumeRequest} {@link GetVolumeResponse} */
+  GetVolume(data: GetVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<GetVolumeResponse>;
   /** 获取工作流详细信息 {@link GetWorkflowRequest} {@link GetWorkflowResponse} */
   GetWorkflow(data: GetWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkflowResponse>;
   /** 查询工作流运行详情 {@link GetWorkflowRunRequest} {@link GetWorkflowRunResponse} */
@@ -3323,6 +4715,8 @@ declare interface Databuddy {
   GetWorkspace(data: GetWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<GetWorkspaceResponse>;
   /** 终止工作流的运行 {@link KillWorkflowRunRequest} {@link KillWorkflowRunResponse} */
   KillWorkflowRun(data: KillWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<KillWorkflowRunResponse>;
+  /** 获取数据目录名称列表 {@link ListCatalogNamesRequest} {@link ListCatalogNamesResponse} */
+  ListCatalogNames(data: ListCatalogNamesRequest, config?: AxiosRequestConfig): AxiosPromise<ListCatalogNamesResponse>;
   /** 获取数据目录列表 {@link ListCatalogsRequest} {@link ListCatalogsResponse} */
   ListCatalogs(data: ListCatalogsRequest, config?: AxiosRequestConfig): AxiosPromise<ListCatalogsResponse>;
   /** 查询控制台用户组成员列表 {@link ListConsoleGroupUsersRequest} {@link ListConsoleGroupUsersResponse} */
@@ -3333,12 +4727,28 @@ declare interface Databuddy {
   ListConsoleRoles(data?: ListConsoleRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleRolesResponse>;
   /** 查询控制台用户列表 {@link ListConsoleUsersRequest} {@link ListConsoleUsersResponse} */
   ListConsoleUsers(data?: ListConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListConsoleUsersResponse>;
+  /** 查询特征表列表 {@link ListFeatureTablesRequest} {@link ListFeatureTablesResponse} */
+  ListFeatureTables(data: ListFeatureTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListFeatureTablesResponse>;
   /** 获取文件夹和文件列表 {@link ListFilesRequest} {@link ListFilesResponse} */
   ListFiles(data: ListFilesRequest, config?: AxiosRequestConfig): AxiosPromise<ListFilesResponse>;
+  /** 分页查询存储位置列表 {@link ListLocationsRequest} {@link ListLocationsResponse} */
+  ListLocations(data: ListLocationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLocationsResponse>;
+  /** 分页获取模型列表 {@link ListModelsRequest} {@link ListModelsResponse} */
+  ListModels(data: ListModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelsResponse>;
+  /** 获取数据库名称列表 {@link ListSchemaNamesRequest} {@link ListSchemaNamesResponse} */
+  ListSchemaNames(data: ListSchemaNamesRequest, config?: AxiosRequestConfig): AxiosPromise<ListSchemaNamesResponse>;
   /** 查询schema列表 {@link ListSchemasRequest} {@link ListSchemasResponse} */
   ListSchemas(data: ListSchemasRequest, config?: AxiosRequestConfig): AxiosPromise<ListSchemasResponse>;
+  /** 获取数据表名称列表 {@link ListTableNamesRequest} {@link ListTableNamesResponse} */
+  ListTableNames(data: ListTableNamesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTableNamesResponse>;
   /** 查询table列表 {@link ListTablesRequest} {@link ListTablesResponse} */
   ListTables(data: ListTablesRequest, config?: AxiosRequestConfig): AxiosPromise<ListTablesResponse>;
+  /** 获取视图名称列表 {@link ListViewNamesRequest} {@link ListViewNamesResponse} */
+  ListViewNames(data: ListViewNamesRequest, config?: AxiosRequestConfig): AxiosPromise<ListViewNamesResponse>;
+  /** 查询view列表 {@link ListViewsRequest} {@link ListViewsResponse} */
+  ListViews(data: ListViewsRequest, config?: AxiosRequestConfig): AxiosPromise<ListViewsResponse>;
+  /** 分页获取数据卷列表 {@link ListVolumesRequest} {@link ListVolumesResponse} */
+  ListVolumes(data: ListVolumesRequest, config?: AxiosRequestConfig): AxiosPromise<ListVolumesResponse>;
   /** 工作流运行列表 {@link ListWorkflowRunsRequest} {@link ListWorkflowRunsResponse} */
   ListWorkflowRuns(data: ListWorkflowRunsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkflowRunsResponse>;
   /** 查询工作流任务历史运行列表 {@link ListWorkflowTaskRunsRequest} {@link ListWorkflowTaskRunsResponse} */
@@ -3361,12 +4771,16 @@ declare interface Databuddy {
   RerunWorkflowRun(data: RerunWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<RerunWorkflowRunResponse>;
   /** 运行工作流 {@link RunWorkflowRequest} {@link RunWorkflowResponse} */
   RunWorkflow(data: RunWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<RunWorkflowResponse>;
+  /** 资产统一搜索 {@link SearchAssetRequest} {@link SearchAssetResponse} */
+  SearchAsset(data: SearchAssetRequest, config?: AxiosRequestConfig): AxiosPromise<SearchAssetResponse>;
   /** 启动计算资源 {@link StartComputeRequest} {@link StartComputeResponse} */
   StartCompute(data: StartComputeRequest, config?: AxiosRequestConfig): AxiosPromise<StartComputeResponse>;
   /** 停止计算资源 {@link StopComputeRequest} {@link StopComputeResponse} */
   StopCompute(data: StopComputeRequest, config?: AxiosRequestConfig): AxiosPromise<StopComputeResponse>;
   /** 解绑工作流Bundle信息 {@link UnbindWorkflowBundleRequest} {@link UnbindWorkflowBundleResponse} */
   UnbindWorkflowBundle(data: UnbindWorkflowBundleRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindWorkflowBundleResponse>;
+  /** 修改数据目录信息 {@link UpdateCatalogRequest} {@link UpdateCatalogResponse} */
+  UpdateCatalog(data: UpdateCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateCatalogResponse>;
   /** 修改控制台用户组 {@link UpdateConsoleGroupRequest} {@link UpdateConsoleGroupResponse} */
   UpdateConsoleGroup(data: UpdateConsoleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateConsoleGroupResponse>;
   /** 修改控制台用户角色 {@link UpdateConsoleUsersRequest} {@link UpdateConsoleUsersResponse} */
@@ -3375,6 +4789,24 @@ declare interface Databuddy {
   UpdateFile(data: UpdateFileRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFileResponse>;
   /** 更新文件夹（支持文件夹重命名、移动文件夹） {@link UpdateFolderRequest} {@link UpdateFolderResponse} */
   UpdateFolder(data: UpdateFolderRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFolderResponse>;
+  /** 修改函数信息 {@link UpdateFunctionRequest} {@link UpdateFunctionResponse} */
+  UpdateFunction(data: UpdateFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionResponse>;
+  /** 修改存储位置 {@link UpdateLocationRequest} {@link UpdateLocationResponse} */
+  UpdateLocation(data: UpdateLocationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLocationResponse>;
+  /** 修改模型信息 {@link UpdateModelRequest} {@link UpdateModelResponse} */
+  UpdateModel(data: UpdateModelRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateModelResponse>;
+  /** 修改模型版本信息 {@link UpdateModelVersionRequest} {@link UpdateModelVersionResponse} */
+  UpdateModelVersion(data: UpdateModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateModelVersionResponse>;
+  /** 修改schema信息 {@link UpdateSchemaRequest} {@link UpdateSchemaResponse} */
+  UpdateSchema(data: UpdateSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSchemaResponse>;
+  /** 修改表信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
+  UpdateTable(data: UpdateTableRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableResponse>;
+  /** 修改表字段描述 {@link UpdateTableColumnRequest} {@link UpdateTableColumnResponse} */
+  UpdateTableColumn(data: UpdateTableColumnRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableColumnResponse>;
+  /** 修改视图信息 {@link UpdateViewRequest} {@link UpdateViewResponse} */
+  UpdateView(data: UpdateViewRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateViewResponse>;
+  /** 修改数据卷信息 {@link UpdateVolumeRequest} {@link UpdateVolumeResponse} */
+  UpdateVolume(data: UpdateVolumeRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVolumeResponse>;
   /** 更新工作流 {@link UpdateWorkflowRequest} {@link UpdateWorkflowResponse} */
   UpdateWorkflow(data: UpdateWorkflowRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkflowResponse>;
   /** 修改工作空间 {@link UpdateWorkspaceRequest} {@link UpdateWorkspaceResponse} */

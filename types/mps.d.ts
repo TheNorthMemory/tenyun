@@ -1998,7 +1998,7 @@ declare interface AigcAudioReferenceVideoInfo {
 declare interface AigcImageExtraParam {
   /** 指定所生成视频的宽高比。不同模型支持的宽高比:Kling 2.1支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling 3.0支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling 3.0-Omni支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Kling O1支持：16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。Vidu q2支持：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。MJ v7的宽高比需要在 prompt 中进行指定。注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。 */
   AspectRatio?: string;
-  /** 指定图片输出分辨率。支持该参数的模型：支持选择: 720P, 1080P, 2K, 4K。 */
+  /** 指定图片输出分辨率。支持该参数的模型：支持选择: 720P, 1080P, 2K, 4K。wand-vega-image模型支持的分辨率:1K, 2K, 4K。 */
   Resolution?: string;
   /** 是否添加图标水印。默认不加。1-添加，0-不添加。取值范围：[0, 1]默认值：0 */
   LogoAdd?: number;
@@ -9305,9 +9305,9 @@ declare interface CreateAigcAudioTaskResponse {
 }
 
 declare interface CreateAigcImageTaskRequest {
-  /** 模型名称。当前支持的模型列表：Hunyuan，Qwen，Vidu，Kling。 */
+  /** 模型名称。当前支持的模型列表：Hunyuan，Qwen，Vidu，Kling，wand-vega-image。 */
   ModelName?: string;
-  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [3.5-preview、3.0]。Vidu，可选 [q2]。Kling，可选 [2.1、O1、3.0、3.0-Omni]。Qwen，可选 [0925]。 */
+  /** 指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。Hunyuan，可选 [3.5-preview、3.0]。Vidu，可选 [q2]。Kling，可选 [2.1、O1、3.0、3.0-Omni]。Qwen，可选 [0925]。wand-vega-image，可选[1.0-lite, 1.0-flash, 1.0-pro]。 */
   ModelVersion?: string;
   /** 场景化生图使用，仅部分模型支持。枚举值：3d_panorama： 全景图。仅Hunyuan支持。 */
   SceneType?: string;
@@ -9317,7 +9317,7 @@ declare interface CreateAigcImageTaskRequest {
   NegativePrompt?: string;
   /** 默认取值为False，模型会严格地遵循指令。如果需要更精细的prompt获得最佳效果，可将此参数设置为True，将自动优化传入的prompt，以提升生成质量。 */
   EnhancePrompt?: boolean;
-  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：Kling 2.1，可支持最多 4 张图片输入作为资源图。Kling 3.0-Omni，可支持最多 10 张图片输入作为资源图。Kling O1，可支持最多 10 张图片输入作为资源图。Vidu q2，可支持最多 7 张图片输入作为资源图。Hunyuan 3.5-preview 可最多支持5张参数图，3.0 可支持最多 3 张图片输入作为资源图。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
+  /** 用于传入参考的资源图片信息，默认支持传入一张图片。支持多图输入的模型：Kling 2.1，可支持最多 4 张图片输入作为资源图。Kling 3.0-Omni，可支持最多 10 张图片输入作为资源图。Kling O1，可支持最多 10 张图片输入作为资源图。Vidu q2，可支持最多 7 张图片输入作为资源图。Hunyuan 3.5-preview 可最多支持5张参数图，3.0 可支持最多 3 张图片输入作为资源图。wand-vega-image 最多支持10张，每张大小不超过20M。注意：推荐图片小于7M，各模型限制不同。图片格式支持：jpeg, png, webp。 */
   ImageInfos?: AigcImageInfo[];
   /** 指定图片输出张数。目前默认支持输出 1 张。 */
   OutputImageCount?: number;

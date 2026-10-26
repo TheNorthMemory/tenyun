@@ -164,6 +164,26 @@ declare interface CamTag {
   TagValue?: string;
 }
 
+/** X509证书信息 */
+declare interface CertInfo {
+  /** 证书名称 */
+  CertName: string;
+  /** 证书序列号 */
+  CertSN: string;
+  /** 证书颁发者名称（颁发机构的 CN） */
+  IssuerName: string;
+  /** 证书主题，即证书持有者信息 */
+  Subject: string;
+  /** 证书创建时间，Unix 时间戳，单位：秒 */
+  CreateTime: number;
+  /** 证书生效时间，Unix 时间戳，单位：秒 */
+  EffectiveTime: number;
+  /** 证书过期时间，Unix 时间戳，单位：秒 */
+  ExpireTime: number;
+  /** 证书内容，PEM 格式文本 */
+  CertText: string;
+}
+
 /** 云存 AI 服务任务信息 */
 declare interface CloudStorageAIServiceTask {
   /** 云存 AI 服务任务 ID */
@@ -1046,6 +1066,16 @@ declare interface PositionSpaceInfo {
   Zoom?: number;
 }
 
+/** 子产品信息 */
+declare interface PrivateCABindProductInfo {
+  /** 产品ID */
+  ProductId?: string;
+  /** 产品名 */
+  ProductName?: string;
+  /** 产品创建时间单位：秒 */
+  CreateTime?: number;
+}
+
 /** 产品设备位置信息 */
 declare interface ProductDevicesPositionItem {
   /** 设备位置列表 */
@@ -1102,6 +1132,28 @@ declare interface ProductEntry {
   Period?: string;
   /** 互联互通标识 */
   IsInterconnection?: number;
+  /** UIN */
+  Uin?: string;
+  /** AppID */
+  AppId?: number;
+  /** 绑定的第三方CA名称；空 = 腾讯云CA证书 */
+  PrivateCAName?: string;
+  /** true = 第三方CA */
+  IsPrivateCA?: boolean;
+  /** CA 证书名称 */
+  CertName?: string;
+  /** 证书序列号 */
+  CertSN?: string;
+  /** 颁发者 */
+  IssuerName?: string;
+  /** 证书主题 */
+  Subject?: string;
+  /** 生效时间（Unix 秒）单位：秒 */
+  EffectiveTime?: number;
+  /** 过期时间（Unix 秒）单位：秒 */
+  ExpireTime?: number;
+  /** CA 证书 PEM 全文 */
+  CertText?: string;
 }
 
 /** 产品模型定义 */
@@ -2809,6 +2861,8 @@ declare interface CreateDeviceRequest {
   NwkSKey?: string;
   /** 手动指定设备的PSK密钥 */
   DefinedPsk?: string;
+  /** 设备证书。第三方CA证书认证的产品下必填；腾讯云CA证书产品传入会报错；非证书认证产品传入会被忽略 */
+  TlsCrt?: string;
 }
 
 declare interface CreateDeviceResponse {
@@ -3034,6 +3088,20 @@ declare interface CreatePositionSpaceResponse {
   RequestId?: string;
 }
 
+declare interface CreatePrivateCARequest {
+  /** 证书名称，长度 1~32 个字符。 */
+  CertName: string;
+  /** 证书内容，PEM 格式文本，需为 CA 证书。 */
+  CertText: string;
+  /** 验证证书内容，PEM 格式文本。须由所上传的 CA 签发，且 CN 为 sha256("iothub_主账号Uin") 的小写十六进制值，用于验证您持有 CA 私钥。 */
+  VerifyCertText: string;
+}
+
+declare interface CreatePrivateCAResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateProjectRequest {
   /** 项目名称 */
   ProjectName: string;
@@ -3057,20 +3125,22 @@ declare interface CreateStudioProductRequest {
   CategoryId: number;
   /** 产品类型 填写 ( 0 普通产品 ， 5 网关产品) */
   ProductType: number;
-  /** 加密类型 ，1表示证书认证，2表示密钥认证，21表示TID认证-SE方式，22表示TID认证-软加固方式 */
+  /** 设备认证方式 ，1表示证书认证，2表示密钥认证枚举值：1： 证书认证(X.509证书认证)2： 密钥认证 */
   EncryptionType: string;
   /** 连接类型 可以填写 wifi、wifi-ble、cellular、5g、lorawan、ble、ethernet、wifi-ethernet、else、sub_zigbee、sub_ble、sub_433mhz、sub_else、sub_blemesh */
   NetType: string;
-  /** 数据协议 (1 使用物模型 2 为自定义) */
+  /** 数据协议 (1 使用物模型，即使用腾讯云物联网开发平台制定的物模型协议 2 自定义透传，即用户自由定义MQTT协议Payload部分) */
   DataProtocol: number;
   /** 产品描述 */
   ProductDesc: string;
-  /** 产品的项目ID */
+  /** 产品所在的项目ID，可从产品管理页的当前URL中获取project_id的值 */
   ProjectId: string;
   /** 平均传输速率 */
   Rate?: string;
   /** 期限 */
   Period?: string;
+  /** 第三方CA证书名称。空/不传 = 腾讯云默认CA证书；非空 = 使用该证书（须为当前账号已上传的 CA，不存在会报错） */
+  PrivateCAName?: string;
 }
 
 declare interface CreateStudioProductResponse {
@@ -3556,6 +3626,26 @@ declare interface DeletePositionSpaceRequest {
 }
 
 declare interface DeletePositionSpaceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePrivateCARequest {
+  /** 证书名称。 */
+  CertName: string;
+}
+
+declare interface DeletePrivateCAResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProductPrivateCARequest {
+  /** 产品ID */
+  ProductId: string;
+}
+
+declare interface DeleteProductPrivateCAResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4750,6 +4840,56 @@ declare interface DescribePositionFenceListResponse {
   List?: PositionFenceInfo[];
   /** 围栏数量 */
   Total?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateCABindedProductsRequest {
+  /** 证书名称，长度 1~32 个字符。 */
+  CertName: string;
+  /** 分页偏移量。取值范围：[0, 5000000] */
+  Offset: number;
+  /** 单次返回的数量。取值范围：[1, 200] */
+  Limit: number;
+}
+
+declare interface DescribePrivateCABindedProductsResponse {
+  /** 绑定了该 CA 证书的产品列表。 */
+  Products?: PrivateCABindProductInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateCARequest {
+  /** 证书名称。 */
+  CertName: string;
+}
+
+declare interface DescribePrivateCAResponse {
+  /** CA 证书信息。 */
+  CA?: CertInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePrivateCAsRequest {
+}
+
+declare interface DescribePrivateCAsResponse {
+  /** 产品绑定的 CA 证书信息列表。产品绑定了第三方 CA 时,返回该 CA 的证书信息;产品未绑定第三方 CA 时,返回平台默认 CA;产品未绑定 CA 时为空数组。 */
+  CAs?: CertInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProductCARequest {
+  /** 产品ID。 */
+  ProductId: string;
+}
+
+declare interface DescribeProductCAResponse {
+  /** 产品绑定的 CA 证书信息列表。产品绑定了第三方 CA 时,返回该 CA 的证书信息;产品未绑定第三方 CA 时,返回平台默认 CA;产品未绑定 CA 时为空数组。 */
+  CAs?: CertInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7452,6 +7592,32 @@ declare interface UpdateOtaTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface UpdatePrivateCARequest {
+  /** 证书名称。 */
+  CertName: string;
+  /** 证书内容，PEM 格式文本，需为 CA 证书。 */
+  CertText: string;
+  /** 验证证书内容，PEM 格式文本。须由所上传的 CA 签发，且 CN 为 sha256("iothub_主账号Uin") 的小写十六进制值，用于验证您持有 CA 私钥。 */
+  VerifyCertText: string;
+}
+
+declare interface UpdatePrivateCAResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateProductPrivateCARequest {
+  /** 产品ID。 */
+  ProductId: string;
+  /** 证书名称，长度 1~32 个字符。 */
+  CertName: string;
+}
+
+declare interface UpdateProductPrivateCAResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UploadFirmwareRequest {
   /** 产品ID */
   ProductID: string;
@@ -7553,6 +7719,8 @@ declare interface Iotexplorer {
   CreatePositionFence(data: CreatePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionFenceResponse>;
   /** 创建位置空间 {@link CreatePositionSpaceRequest} {@link CreatePositionSpaceResponse} */
   CreatePositionSpace(data: CreatePositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePositionSpaceResponse>;
+  /** 创建私有CA证书 {@link CreatePrivateCARequest} {@link CreatePrivateCAResponse} */
+  CreatePrivateCA(data: CreatePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<CreatePrivateCAResponse>;
   /** 新建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
   /** 新建产品 {@link CreateStudioProductRequest} {@link CreateStudioProductResponse} */
@@ -7605,6 +7773,10 @@ declare interface Iotexplorer {
   DeletePositionFence(data: DeletePositionFenceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionFenceResponse>;
   /** 删除位置空间 {@link DeletePositionSpaceRequest} {@link DeletePositionSpaceResponse} */
   DeletePositionSpace(data: DeletePositionSpaceRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePositionSpaceResponse>;
+  /** 删除私有CA证书 {@link DeletePrivateCARequest} {@link DeletePrivateCAResponse} */
+  DeletePrivateCA(data: DeletePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<DeletePrivateCAResponse>;
+  /** 删除产品绑定的CA证书 {@link DeleteProductPrivateCARequest} {@link DeleteProductPrivateCAResponse} */
+  DeleteProductPrivateCA(data: DeleteProductPrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProductPrivateCAResponse>;
   /** 删除项目 {@link DeleteProjectRequest} {@link DeleteProjectResponse} */
   DeleteProject(data: DeleteProjectRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectResponse>;
   /** 删除产品 {@link DeleteStudioProductRequest} {@link DeleteStudioProductResponse} */
@@ -7727,6 +7899,14 @@ declare interface Iotexplorer {
   DescribePackageConsumeTasks(data: DescribePackageConsumeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackageConsumeTasksResponse>;
   /** 获取围栏列表 {@link DescribePositionFenceListRequest} {@link DescribePositionFenceListResponse} */
   DescribePositionFenceList(data: DescribePositionFenceListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePositionFenceListResponse>;
+  /** 查询私有CA证书详情 {@link DescribePrivateCARequest} {@link DescribePrivateCAResponse} */
+  DescribePrivateCA(data: DescribePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateCAResponse>;
+  /** 查询私有CA绑定的产品列表 {@link DescribePrivateCABindedProductsRequest} {@link DescribePrivateCABindedProductsResponse} */
+  DescribePrivateCABindedProducts(data: DescribePrivateCABindedProductsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateCABindedProductsResponse>;
+  /** 查询私有CA证书列表 {@link DescribePrivateCAsRequest} {@link DescribePrivateCAsResponse} */
+  DescribePrivateCAs(data?: DescribePrivateCAsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePrivateCAsResponse>;
+  /** 查询产品绑定的CA证书 {@link DescribeProductCARequest} {@link DescribeProductCAResponse} */
+  DescribeProductCA(data: DescribeProductCARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductCAResponse>;
   /** 查询产品云存AI分析服务 {@link DescribeProductCloudStorageAIServiceRequest} {@link DescribeProductCloudStorageAIServiceResponse} */
   DescribeProductCloudStorageAIService(data: DescribeProductCloudStorageAIServiceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProductCloudStorageAIServiceResponse>;
   /** 获取产品动态注册详情 {@link DescribeProductDynamicRegisterRequest} {@link DescribeProductDynamicRegisterResponse} */
@@ -7995,6 +8175,10 @@ declare interface Iotexplorer {
   UpdateOtaModule(data: UpdateOtaModuleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOtaModuleResponse>;
   /** 更新固件升级任务状态 {@link UpdateOtaTaskStatusRequest} {@link UpdateOtaTaskStatusResponse} */
   UpdateOtaTaskStatus(data: UpdateOtaTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateOtaTaskStatusResponse>;
+  /** 更新私有CA证书 {@link UpdatePrivateCARequest} {@link UpdatePrivateCAResponse} */
+  UpdatePrivateCA(data: UpdatePrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePrivateCAResponse>;
+  /** 更新产品绑定的CA证书 {@link UpdateProductPrivateCARequest} {@link UpdateProductPrivateCAResponse} */
+  UpdateProductPrivateCA(data: UpdateProductPrivateCARequest, config?: AxiosRequestConfig): AxiosPromise<UpdateProductPrivateCAResponse>;
   /** 创建固件版本信息 {@link UploadFirmwareRequest} {@link UploadFirmwareResponse} */
   UploadFirmware(data: UploadFirmwareRequest, config?: AxiosRequestConfig): AxiosPromise<UploadFirmwareResponse>;
 }

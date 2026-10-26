@@ -2383,10 +2383,12 @@ declare namespace V20180717 {
 
   /** 场景化 AIGC 生图配置。 */
   interface AigcVideoSceneInfo {
-    /** AI生视频场景类型，可选值：- product_showcase： 产品360度展示。 */
+    /** AIGC 生视频场景类型。枚举值：product_showcase： 产品360度展示。character_scene： 角色场景。 */
     Type: string;
-    /** 产品展示参数 */
+    /** 产品展示参数配置。 */
     ProductShowcaseConfig?: ProductShowcaseConfig;
+    /** 角色场景参数配置。 */
+    CharacterSceneConfig?: CharacterSceneConfig;
   }
 
   /** AIGC 生视频任务信息 */
@@ -2889,6 +2891,14 @@ declare namespace V20180717 {
     ClothesFileInfos?: SceneAigcImageTaskInputFileInfo[];
     /** AI换衣的提示词。仅Type为change_clothes有效。 */
     Prompt?: string;
+  }
+
+  /** 角色场景配置 */
+  interface CharacterSceneConfig {
+    /** 模型。枚举值：character_scene_standard： 标准。character_scene_mini： 轻量。character_scene_fast： 快速。 */
+    Model?: string;
+    /** 提示词模式。枚举值：Standard： 标准模式，自行填写提示词。Dynamic： 动态模式，由大模型根据参考素材产生提示词。默认值：Standard */
+    PromptMode?: string;
   }
 
   /** 智能分类任务控制参数 */
@@ -7863,18 +7873,20 @@ declare namespace V20180717 {
 
   /** AIGC 场景化生视频任务的输出媒体文件配置。 */
   interface SceneAigcVideoOutputConfig {
-    /** 存储模式。取值有： Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary */
+    /** 存储模式。取值有： Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId； Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；默认值：Temporary当使用角色场景时，不支持指定为 Permanent。 */
     StorageMode?: string;
     /** 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。 */
     MediaName?: string;
-    /** 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
+    /** 分类ID，用于对媒体进行分类管理，可通过 创建分类 接口，创建分类，获得分类 ID。默认值：0，表示其他分类。 */
     ClassId?: number;
-    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732)。 */
+    /** 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 ISO 日期格式说明。 */
     ExpireTime?: string;
-    /** 指定所生成视频的宽高比。输入格式为 W:H。仅生商品图场景有效。可选：16:9、9:16。 */
+    /** 指定所生成视频的宽高比。输入格式为 W:H。当生商品图场景时，可选：16:9、9:16。当角色场景时，可选：21:9、16:9、9:16、4:3、3:4、1:1。 */
     AspectRatio?: string;
-    /** 生成视频时长。可选值4、6、8秒 */
+    /** 生成视频时长。当使用生商品图场景时，可选值4、6、8秒。当使用角色场景时，可选值为4到15秒。 */
     Duration?: number;
+    /** 分辨率。仅当角色场景时有效。取值如下：当 Model 是 character_scene_standard 时，支持 480p、720p、1080p、4K；当 Model 是 character_scene_mini 时，支持 480p、720p；当 Model 是 character_scene_fast 时，支持 720p。 */
+    Resolution?: string;
   }
 
   /** 场景化 AIGC 生视频任务信息 */
