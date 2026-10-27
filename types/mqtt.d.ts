@@ -1519,7 +1519,7 @@ declare interface DescribeInstanceResponse {
 }
 
 declare interface DescribeMessageByTopicRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** home/room */
   Topic: string;
@@ -1527,6 +1527,8 @@ declare interface DescribeMessageByTopicRequest {
   StartTime: number;
   /** 查询消息条数，最大1024，默认100. */
   MaxNumber?: number;
+  /** 消息 body 过滤表达式（Base64 编码），jq 1.6 语法枚举值：LmxldmVsID09ICJFUlJPUiI=： .level == "ERROR" Base64编码后的字符串 */
+  FilterExpression?: string;
 }
 
 declare interface DescribeMessageByTopicResponse {
@@ -1537,7 +1539,7 @@ declare interface DescribeMessageByTopicResponse {
 }
 
 declare interface DescribeMessageDetailsRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 消息ID */
   MessageId: string;
@@ -1572,6 +1574,8 @@ declare interface DescribeMessageDetailsResponse {
   CorrelationData?: string;
   /** 订阅标识符（MQTT5）含义：为订阅分配的唯一标识符，用于标识客户端的特定订阅。当服务器向客户端发送消息时，可以包含此标识符，帮助客户端识别消息对应的订阅。示例：客户端订阅主题devices/+/temperature，并设置SubscriptionIdentifier为123。当服务器向客户端发送此主题的消息时，会在消息中包含SubscriptionIdentifier: 123，客户端可以根据此值知道消息是通过哪个订阅接收的。 */
   SubscriptionIdentifier?: string;
+  /** 是否保留消息 */
+  Retain?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2130,7 +2134,7 @@ declare interface RegisterCaCertificateRequest {
   /** CA证书内容，自签CA可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 签发自签CA */
   CaCertificate: string;
   /** 验证证书内容，可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 手动注册CA证书章节 */
-  VerificationCertificate: string;
+  VerificationCertificate?: string;
   /** 证书格式，不传默认PEM格式，当前仅支持PEM格式 */
   Format?: string;
   /** 证书状态，不传默认ACTIVE状态 ACTIVE：激活 INACTIVE：未激活 */
@@ -2361,7 +2365,7 @@ declare interface Mqtt {
   ModifyX509Config(data: ModifyX509ConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyX509ConfigResponse>;
   /** 发布 MQTT 消息 {@link PublishMessageRequest} {@link PublishMessageResponse} */
   PublishMessage(data: PublishMessageRequest, config?: AxiosRequestConfig): AxiosPromise<PublishMessageResponse>;
-  /** 注册CA证书 {@link RegisterCaCertificateRequest} {@link RegisterCaCertificateResponse} */
+  /** 注册CA证书（一机一证） {@link RegisterCaCertificateRequest} {@link RegisterCaCertificateResponse} */
   RegisterCaCertificate(data: RegisterCaCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterCaCertificateResponse>;
   /** 注册设备证书 {@link RegisterDeviceCertificateRequest} {@link RegisterDeviceCertificateResponse} */
   RegisterDeviceCertificate(data: RegisterDeviceCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterDeviceCertificateResponse>;

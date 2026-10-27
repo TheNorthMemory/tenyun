@@ -3686,6 +3686,12 @@ declare interface AddClusterSlaveZoneRequest {
 declare interface AddClusterSlaveZoneResponse {
   /** 异步FlowId */
   FlowId?: number;
+  /** 订单ID */
+  BigDealIds?: string[] | null;
+  /** 订单名称 */
+  DealNames?: string[] | null;
+  /** 交易ID */
+  TranId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

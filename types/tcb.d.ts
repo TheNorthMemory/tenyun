@@ -56,52 +56,6 @@ declare interface AIModelStatus {
   Status?: string;
 }
 
-/** 用户密钥对管理 */
-declare interface APIsUserKeyInfo {
-  /** 用户创建的集成的名称 */
-  Name?: string;
-  /** 用户对创建的集成的描述 */
-  Description?: string;
-  /** 集成ID，用户创建的集成的标识id，前半部分用户填写，后半部分平台按照一定规则生成 */
-  KeyID?: string;
-  /** 额外信息,根据集成类型不同，ext会有不同的子结构 */
-  Ext?: string;
-  /** 集成类型Code */
-  AuthTypeCode?: string;
-  /** 状态 */
-  Status?: string;
-  /** 引用该集成的服务列表 */
-  BindServiceList?: BindServiceList;
-  /** AuthTypeName 和AuthType 分别1-1对应 */
-  AuthTypeName?: string;
-  /** github、gitlab、gitee、腾讯会议等oauth类型的，需要传这个ticket_id，创建的密钥对跟auth_ticket_token(对于github、gitlab、gitee)、weda_ticket_token(对于腾讯会议)关联起来 */
-  TicketID?: string;
-  /** 用户在创建(weixinmp、wxvirtualpay、weixin-store、channels、weixinpaydc)这五种之一时创建的关联的示例代码云函数的函数名 */
-  DemoCodeFunctionName?: string;
-  /** 创建时间参数格式：2026-05-25T11:18:28+08:00 */
-  CreateAt?: string;
-  /** 更新时间参数格式：2026-05-25T11:18:28+08:00 */
-  UpdateAt?: string;
-}
-
-/** Agent 云函数代码 */
-declare interface AgentRuntimeCode {
-  /** 对象存储桶名称 */
-  CosBucketName?: string;
-  /** 对象存储中代码包文件路径，以/开头 */
-  CosObjectName?: string;
-  /** 包含函数代码文件及其依赖项的 zip 格式文件，zip包大小上限为 50MB，使用该接口时要求将 zip 文件的内容转成 base64 编码 */
-  ZipFile?: string;
-  /** 对象存储的地域，地域为北京时需要传入ap-beijing,北京一区时需要传递ap-beijing-1，其他的地域不需要传递。 */
-  CosBucketRegion?: string;
-  /** 如果是从TempCos创建的话，需要传入TempCosObjectName */
-  TempCosObjectName?: string;
-  /** 镜像部署时配置TCR镜像信息 */
-  ImageConfig?: AgentRuntimeCodeImageConfig;
-  /** 云函数DemoId */
-  DemoId?: string;
-}
-
 /** Agent 创建云函数镜像配置 */
 declare interface AgentRuntimeCodeImageConfig {
   /** 镜像仓库类型，个人版或者企业版：personal/enterprise */
@@ -116,40 +70,6 @@ declare interface AgentRuntimeCodeImageConfig {
   Args?: string;
   /** 镜像加速开关，默认False */
   ContainerImageAccelerate?: boolean;
-}
-
-/** Agent 云函数配置 */
-declare interface AgentRuntimeConfig {
-  /** 函数代码. 注意：不能同时指定Cos和ZipFile */
-  Code?: AgentRuntimeCode;
-  /** 函数运行环境，默认Python2.7目前支持的运行环境：- Python2.7- Python3.6- Python3.7- Python3.9- Python3.10- Nodejs6.10- Nodejs8.9- Nodejs10.15- Nodejs12.16- Nodejs14.18- Nodejs16.13- Nodejs18.15- Php5.6- Php7(7.2版本)- Php7.4- Php8.0- Go1- Java8- CustomRuntime */
-  Runtime?: string;
-  /** 函数运行时内存大小，默认为 128M，可选范围 64、128MB-3072MB，并且以 128MB 为阶梯 */
-  MemorySize?: number;
-  /** 函数是否自动安装依赖 */
-  InstallDependency?: boolean;
-  /** 函数最长执行时间，单位为秒，可选值范围 1-900 秒，默认为 3 秒 */
-  Timeout?: number;
-  /** 函数的环境变量，满足json格式 */
-  Environment?: string;
-  /** Agent Session 配置 */
-  SessionConfig?: AgentRuntimeSessionConfig;
-}
-
-/** Agent 运行时 Session 配置 */
-declare interface AgentRuntimeSessionConfig {
-  /** 单实例并发数最大值。取值范围 [1,100] */
-  MaxConcurrency?: number;
-  /** session 来源，三选一：'HEADER', 'COOKIE', 'QUERY_STRING' */
-  SessionSource?: string;
-  /** session 名称，以字母开头，非首字母可包含数字、字母、下划线、中划线，长度5-40个字符 */
-  SessionName?: string;
-  /** 最大并发会话数 */
-  MaximumConcurrencySessionPerInstance?: number;
-  /** 生命周期 */
-  MaximumTTLInSeconds?: number;
-  /** 空闲时长 */
-  MaximumIdleTimeInSeconds?: number;
 }
 
 /** API Key 访问凭证信息。描述云开发环境下 API Key 的完整信息，包括标识符、名称、令牌值、创建时间和过期时间。支持两种类型：api_key（服务端管理员访问凭证，用于服务端接口调用的身份认证，可设置有效期，单个环境最多 5 个）和 publish_key（前端匿名访问凭证，固定有效期，每个环境仅保留一个）。注意：令牌值（ApiKey 字段）仅在创建时返回完整明文，列表查询时将进行脱敏处理。 */
@@ -214,26 +134,6 @@ declare interface BanConfig {
   CountryWhiteList?: string[];
   /** 地域黑名单（国家英文名） */
   CountryBlackList?: string[];
-}
-
-/** ID:服务标识ID，Name:服务名称 */
-declare interface BindService {
-  /** 服务标识 */
-  ID?: string;
-  /** 服务名称 */
-  Name?: string;
-  /** 场景，云托管、云函数、aibuilder等 */
-  Scene?: string;
-}
-
-/** 密钥对绑定的mcp服务列表和apis服务列表 */
-declare interface BindServiceList {
-  /** 密钥对绑定的mcp服务列表 */
-  Mcp?: BindService[];
-  /** 密钥对绑定的apis服务列表 */
-  Apis?: BindService[];
-  /** 登记哪个资源下的哪个场景使用了密钥对 */
-  Other?: BindService[];
 }
 
 /** 构建产物信息 */
@@ -1090,10 +990,12 @@ declare interface HTTPServiceRoute {
   Path?: string;
   /** 路径重写规则 */
   PathRewrite?: HTTPServicePathRewrite;
-  /** 上游服务类型。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse */
+  /** 上游资源类型枚举值：SCF： 云函数CBR： 云托管STATIC_STORE： 静态托管WEB_SCF： WEB云函数STORAGE： 云存储 */
   UpstreamResourceType?: string;
-  /** 上游服务名 */
+  /** 上游资源名 */
   UpstreamResourceName?: string;
+  /** 上游资源版本。仅支持云函数，可填具体的版本，$DEFAULT:请求转发到资源，流量比例由资源控制；$LATEST: 请求转发到最新版本；为空默认是$DEFAULT */
+  UpstreamResourceVersion?: string;
   /** 是否开启安全域名 */
   EnableSafeDomain?: boolean;
   /** 是否开启身份认证 */
@@ -1116,10 +1018,12 @@ declare interface HTTPServiceRoute {
 declare interface HTTPServiceRouteParam {
   /** 路径 */
   Path: string;
-  /** 上游服务类型。创建时必填，修改时可选填枚举值：SCF： 云函数CBR： 云托管STATIC_STORE： 静态托管WEB_SCF： web云函数LH： LighthouseSTORAGE： 云存储 */
+  /** 上游资源类型。创建时必填，修改时可选填枚举值：SCF： 云函数CBR： 云托管STATIC_STORE： 静态托管WEB_SCF： web云函数STORAGE： 云存储 */
   UpstreamResourceType?: string;
-  /** 上游服务名。创建时必填，修改时可选填。HTTPServiceRouteServiceType类型为STATIC_STORE时，可不填，默认staticstore；HTTPServiceRouteServiceType类型为STORAGE时，可不填，默认storage。其他上游类型必须填写准确的服务名 */
+  /** 上游资源名。创建时必填，修改时可选填。HTTPServiceRouteServiceType类型为STATIC_STORE时，可不填，默认staticstore；HTTPServiceRouteServiceType类型为STORAGE时，可不填，默认storage。其他上游类型必须填写准确的服务名 */
   UpstreamResourceName?: string;
+  /** 上游资源版本。仅支持云函数，可填具体的版本，$DEFAULT:请求转发到资源，流量比例由资源控制；$LATEST: 请求转发到最新版本；为空默认是$DEFAULT */
+  UpstreamResourceVersion?: string;
   /** 路径重写 */
   PathRewrite?: HTTPServicePathRewrite;
   /** 是否开启安全域名。默认开启 */
@@ -2624,36 +2528,6 @@ declare interface CreateTableResponse {
   RequestId?: string;
 }
 
-declare interface CreateUserKeyRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 用户创建的集成名称，或者密钥名称 */
-  Name?: string;
-  /** 用户创建的集成ID，集成表示，或者密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成 */
-  KeyID?: string;
-  /** 集成描述 */
-  Description?: string;
-  /** 集成类型，或者授权类型码，对应GetUserKeyTemplateList接口的AuthTypeCode字段，比如github、gitlab、gitee、meeting、PublicAccountOpenService等 */
-  AuthTypeCode?: string;
-  /** 根据集成类型的不同，ext会有不同的子结构，具体每种授权类型的ext需要填写的信息，可以通过GetUserKeyTemplateList获取 */
-  Ext?: string;
-  /** github、gitlab、gitee、腾讯会议等oauth类型的，需要传这个ticket_id，创建的密钥对跟auth_ticket_token(对于github、gitlab、gitee)、weda_ticket_token(对于腾讯会议)关联起来 */
-  TicketID?: string;
-  /** 业务类型，integration：从集成中心来的，默认为空，表示是从授权管理中心来的 */
-  Business?: string;
-  /** 创建demo代码云函数需要的参数信息入参限制：当Business为integration，且AuthTypeCode为(weixinmp、wxvirtualpay、weixin-store、channels、weixinpaydc)之一时必填 */
-  RuntimeConfig?: AgentRuntimeConfig;
-  /** 创建集成时创建关联的示例代码云函数的名称，当Business为integration，且AuthTypeCode为(weixinmp、wxvirtualpay、weixin-store、channels、weixinpaydc)之一时必填 */
-  DemoCodeFunctionName?: string;
-}
-
-declare interface CreateUserKeyResponse {
-  /** 创建成功记录条数 */
-  CreateResult?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateUserRequest {
   /** 环境id */
   EnvId: string;
@@ -2828,20 +2702,6 @@ declare interface DeleteTableRequest {
 }
 
 declare interface DeleteTableResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteUserKeyRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 用户密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成 */
-  KeyID?: string;
-}
-
-declare interface DeleteUserKeyResponse {
-  /** 删除记录条数 */
-  DeleteResult?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4102,24 +3962,6 @@ declare interface GetFunctionResponse {
   RequestId?: string;
 }
 
-declare interface GetOneUserKeyRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 用户密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成 */
-  KeyID?: string;
-  /** 业务场景来源，默认不传，表示来源授权中心，integration表示来源集成中心，当从集成中心请求时必传integration */
-  Business?: string;
-  /** 是否需要加密字段的值，true：是，false：否，默认不传，不需要默认值：false当为true时，返回加密字段的值，前端进行按约定解密 */
-  NeedPwd?: boolean;
-}
-
-declare interface GetOneUserKeyResponse {
-  /** 单个密钥对详情页 */
-  UserKeyInfo?: APIsUserKeyInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface GetProvidersRequest {
   /** 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。 */
   EnvId: string;
@@ -4130,30 +3972,6 @@ declare interface GetProvidersResponse {
   Total?: number | null;
   /** 三方认证源列表 */
   Data?: Provider[] | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetUserKeyListRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 分页的offset，从0开始 */
-  Offset: number;
-  /** 分页的每页多少条 */
-  Limit: number;
-  /** 根据集成名称模糊查询，name */
-  Name?: string;
-  /** 集成类型映射码 */
-  AuthTypeCode?: string;
-  /** 业务类型，integration：从集成中心来的，默认为空，表示是从授权管理中心来的 */
-  Business?: string;
-}
-
-declare interface GetUserKeyListResponse {
-  /** 用户密钥对列表 */
-  UserKeyList?: APIsUserKeyInfo[];
-  /** 数据记录条数 */
-  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4860,34 +4678,6 @@ declare interface UpdateTableResponse {
   RequestId?: string;
 }
 
-declare interface UpdateUserKeyRequest {
-  /** 环境ID */
-  EnvId: string;
-  /** 用户密钥名称 */
-  Name?: string;
-  /** 用户密钥对标识，前半部分用户填写，后半部分平台按照一定规则生成 */
-  KeyID?: string;
-  /** 密钥对描述 */
-  Description?: string;
-  /** 授权类型code */
-  AuthTypeCode?: string;
-  /** 根据授权类型的不同，ext会有不同的子结构 */
-  Ext?: string;
-  /** 业务类型，integration：从集成中心来的，默认为空，表示是从授权管理中心来的 */
-  Business?: string;
-  /** 创建集成时创建对应的示例代码云函数需要的参数 */
-  RuntimeConfig?: AgentRuntimeConfig;
-  /** 创建集成时创建对应的示例代码云函数需要的函数名 */
-  DemoCodeFunctionName?: string;
-}
-
-declare interface UpdateUserKeyResponse {
-  /** 更新记录条数 */
-  UpdateResult?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface UpgradePGInstanceToDedicatedRequest {
   /** 云开发环境ID */
   EnvId: string;
@@ -5023,8 +4813,6 @@ declare interface Tcb {
   CreateTable(data: CreateTableRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTableResponse>;
   /** 创建tcb用户 {@link CreateUserRequest} {@link CreateUserResponse} */
   CreateUser(data: CreateUserRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserResponse>;
-  /** 用户创建集成 {@link CreateUserKeyRequest} {@link CreateUserKeyResponse} */
-  CreateUserKey(data: CreateUserKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserKeyResponse>;
   /** 删除AI模型 {@link DeleteAIModelRequest} {@link DeleteAIModelResponse} */
   DeleteAIModel(data: DeleteAIModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIModelResponse>;
   /** 删除云开发平台的API Key {@link DeleteApiKeyRequest} {@link DeleteApiKeyResponse} */
@@ -5045,8 +4833,6 @@ declare interface Tcb {
   DeleteProvider(data: DeleteProviderRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProviderResponse>;
   /** 删除文档型数据库表 {@link DeleteTableRequest} {@link DeleteTableResponse} */
   DeleteTable(data: DeleteTableRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTableResponse>;
-  /** 用户删除集成 {@link DeleteUserKeyRequest} {@link DeleteUserKeyResponse} */
-  DeleteUserKey(data: DeleteUserKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserKeyResponse>;
   /** 删除tcb用户 {@link DeleteUsersRequest} {@link DeleteUsersResponse} */
   DeleteUsers(data: DeleteUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUsersResponse>;
   /** 查询AI模型列表 {@link DescribeAIModelsRequest} {@link DescribeAIModelsResponse} */
@@ -5155,12 +4941,8 @@ declare interface Tcb {
   ExecutePGSql(data: ExecutePGSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ExecutePGSqlResponse>;
   /** 获取云函数详情 {@link GetFunctionRequest} {@link GetFunctionResponse} */
   GetFunction(data: GetFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<GetFunctionResponse>;
-  /** 用户获取指定集成的详情信息 {@link GetOneUserKeyRequest} {@link GetOneUserKeyResponse} */
-  GetOneUserKey(data: GetOneUserKeyRequest, config?: AxiosRequestConfig): AxiosPromise<GetOneUserKeyResponse>;
   /** 获取三方认证源列表 {@link GetProvidersRequest} {@link GetProvidersResponse} */
   GetProviders(data: GetProvidersRequest, config?: AxiosRequestConfig): AxiosPromise<GetProvidersResponse>;
-  /** 用户获取集成列表 {@link GetUserKeyListRequest} {@link GetUserKeyListResponse} */
-  GetUserKeyList(data: GetUserKeyListRequest, config?: AxiosRequestConfig): AxiosPromise<GetUserKeyListResponse>;
   /** 获取函数列表 {@link ListFunctionsRequest} {@link ListFunctionsResponse} */
   ListFunctions(data: ListFunctionsRequest, config?: AxiosRequestConfig): AxiosPromise<ListFunctionsResponse>;
   /** 查询目标环境已应用的 Migration {@link ListPGUserMigrationsRequest} {@link ListPGUserMigrationsResponse} */
@@ -5231,8 +5013,6 @@ declare interface Tcb {
   UpdateFunctionConfiguration(data: UpdateFunctionConfigurationRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFunctionConfigurationResponse>;
   /** 修改文档型数据库表索引信息 {@link UpdateTableRequest} {@link UpdateTableResponse} */
   UpdateTable(data: UpdateTableRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTableResponse>;
-  /** 用户更新集成信息 {@link UpdateUserKeyRequest} {@link UpdateUserKeyResponse} */
-  UpdateUserKey(data: UpdateUserKeyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserKeyResponse>;
   /** 发起共享升级独享 {@link UpgradePGInstanceToDedicatedRequest} {@link UpgradePGInstanceToDedicatedResponse} */
   UpgradePGInstanceToDedicated(data: UpgradePGInstanceToDedicatedRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradePGInstanceToDedicatedResponse>;
   /** 校验HTTP访问服务路由 {@link VerifyHTTPServiceRouteRequest} {@link VerifyHTTPServiceRouteResponse} */

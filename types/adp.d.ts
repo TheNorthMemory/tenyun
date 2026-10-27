@@ -1474,6 +1474,8 @@ declare interface ConversationExperience {
   Method: number;
   /** 推荐问生成prompt模式。枚举值: 1:仅结合知识库输出推荐问的prompt */
   RecommendPromptMode: number;
+  /** 新消息中断正在进行的消息 */
+  EnableNewMessageInterrupt?: boolean;
 }
 
 /** FileCollection 文件收集信息 */

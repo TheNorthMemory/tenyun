@@ -864,6 +864,18 @@ declare interface SearchTags {
   AllValue?: number;
 }
 
+/** 增量授权（UpdateType=4）时因库/表已被物理删除而被跳过的目标，后端已自动清理其残留权限，前端需弹窗提示用户 */
+declare interface SkippedPrivilegeItem {
+  /** 数据目录（catalog）名称 */
+  CatalogName?: string;
+  /** 库名 */
+  Database?: string;
+  /** 表名；库级条目被跳过时该字段为空（Go 定义带 omitempty，为空时响应里整个字段不出现） */
+  Table?: string;
+  /** 跳过原因，如 table not found, maybe already dropped、database not found, maybe already dropped、existence check failed, granting skipped this round, please retry */
+  Reason?: string;
+}
+
 /** 慢查询记录 */
 declare interface SlowQueryRecord {
   /** 查询用户 */
@@ -2122,10 +2134,10 @@ declare interface ModifyUserPrivilegesV3Request {
   /** 用户名 */
   UserName: string;
   /** 用户权限 */
-  UserPrivileges: UpdateUserPrivileges;
+  UserPrivileges?: UpdateUserPrivileges;
   /** 用户链接来自的 IP */
   WhiteHost?: string;
-  /** 更新类型，默认0，1为更新绑定计算组，2为更新默认计算组 */
+  /** 更新类型，默认0，1为更新绑定计算组，2为更新默认计算组，4 为 GrantPrivileges, RevokePrivileges 接口专用批量授权枚举值：0： 默认1： 更新绑定计算组2： 更新默认计算组4： GrantPrivileges, RevokePrivileges 接口专用批量授权 */
   UpdateType?: number;
   /** 需绑定计算组列表 */
   UpdateComputeGroups?: string[];
@@ -2133,6 +2145,10 @@ declare interface ModifyUserPrivilegesV3Request {
   DefaultComputeGroup?: string;
   /** 0: 灵活场景 1: 固定场景 */
   ComputeGroupType?: number;
+  /** 本次新增授权的库表，仅 UpdateType=4 时生效 */
+  GrantPrivileges?: UpdateUserPrivileges;
+  /** 本次取消授权的库表，仅 UpdateType=4 时生效 */
+  RevokePrivileges?: UpdateUserPrivileges;
 }
 
 declare interface ModifyUserPrivilegesV3Response {
@@ -2140,6 +2156,8 @@ declare interface ModifyUserPrivilegesV3Response {
   ErrorMsg?: string;
   /** 集群id */
   InstanceId?: string;
+  /** 因库/表已删除而被跳过的目标；ErrorMsg 为空时不代表失败，前端需弹窗提示 */
+  SkippedItems?: SkippedPrivilegeItem;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

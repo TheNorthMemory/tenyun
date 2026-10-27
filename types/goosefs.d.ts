@@ -96,6 +96,60 @@ declare interface CustomerClusterAttr {
   StorageFileSystemId?: string;
 }
 
+/** 数据流通任务属性 */
+declare interface DataRepositoryTaskAttribute {
+  /** 数据流通任务类型, FS_TO_COS(文件系统到COS Bucket),或者Bucket到文件系统(COS_TO_FS) */
+  TaskType?: string;
+  /** bucket名 */
+  Bucket?: string;
+  /** bucket路径 */
+  TaskPath?: string;
+  /** 总的容量(单位Byte) */
+  TotalCapacity?: number;
+  /** 已完成的数据量(单位Byte) */
+  FinishedCapacity?: number;
+  /** 任务创建时间 */
+  TaskCreateTime?: string;
+  /** 任务开始执行时间 */
+  TaskStartTime?: string;
+  /** 任务结束时间 */
+  TaskEndTime?: string | null;
+  /** INIT(任务初始化中) RUNNING(任务执行中) SUCCESS(任务已完成) FAIL(任务失败) */
+  TaskStatus?: string;
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名 */
+  TaskName?: string;
+  /** 任务失败原因 */
+  TaskFailMsg?: string;
+  /** 总共的文件个数 */
+  TotalFileNumber?: number;
+  /** 已完成的文件个数 */
+  FinishedFileNumber?: number;
+  /** 列表地址 */
+  TextLocation?: string;
+  /** 执行器类型 */
+  RepositoryType?: string;
+  /** 是否自定义路径 */
+  EnableDataFlowSubPath?: boolean;
+  /** 自定义路径 */
+  DataFlowSubPath?: string;
+  /** 是否支持自定义目的路径（沉降表示桶前缀，预热表示本地路径） */
+  EnableCustomDestPath?: boolean;
+  /** 自定义目的路径（沉降表示桶前缀，预热表示本地路径） */
+  CustomDestPath?: string;
+  /** 任务路径是否表示绝对路径（暂时仅支持沉降使用） */
+  IsTaskPathAbsolute?: boolean;
+  /** 任务内容输出桶 */
+  OutputBucket?: string | null;
+  /** 任务内容输出桶前缀 */
+  OutputPrefix?: string | null;
+  /** 是否支持自定义数据源路径(暂时仅支持清单过滤使用) */
+  EnableCustomSrcPath?: boolean | null;
+  /** 自定义数据源路径(暂时仅支持清单过滤使用) */
+  CustomSrcPath?: string | null;
+}
+
 /** 数据预热任务参数 */
 declare interface DistributedLoadAttrs {
   /** 预热类型，枚举值 LoadByPath｜LoadByList */
@@ -810,6 +864,24 @@ declare interface DescribeDataRepositoryTaskStatusResponse {
   RequestId?: string;
 }
 
+declare interface DescribeDataRepositoryTasksRequest {
+  /** 文件系统ID */
+  FileSystemId: string;
+  /** 偏移量 */
+  Offset: number;
+  /** 最大返回数量 */
+  Limit: number;
+}
+
+declare interface DescribeDataRepositoryTasksResponse {
+  /** 数据流通任务列表 */
+  DataRepositoryTaskList: DataRepositoryTaskAttribute[];
+  /** 任务总数 */
+  TotalCount: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeFileSystemBucketsRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -1175,6 +1247,8 @@ declare interface Goosefs {
   DescribeCustomerCluster(data?: DescribeCustomerClusterRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomerClusterResponse>;
   /** 获取数据流动任务实时状态 {@link DescribeDataRepositoryTaskStatusRequest} {@link DescribeDataRepositoryTaskStatusResponse} */
   DescribeDataRepositoryTaskStatus(data: DescribeDataRepositoryTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRepositoryTaskStatusResponse>;
+  /** 列出数据流通任务 {@link DescribeDataRepositoryTasksRequest} {@link DescribeDataRepositoryTasksResponse} */
+  DescribeDataRepositoryTasks(data: DescribeDataRepositoryTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRepositoryTasksResponse>;
   /** 罗列文件系统关联的Bucket映射 {@link DescribeFileSystemBucketsRequest} {@link DescribeFileSystemBucketsResponse} */
   DescribeFileSystemBuckets(data: DescribeFileSystemBucketsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFileSystemBucketsResponse>;
   /** 列出文件系统 {@link DescribeFileSystemsRequest} {@link DescribeFileSystemsResponse} */

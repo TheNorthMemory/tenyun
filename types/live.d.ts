@@ -1930,7 +1930,7 @@ declare interface SnapshotTemplateInfo {
   TemplateName?: string;
   /** 截图时间间隔，5-300秒。 */
   SnapshotInterval?: number;
-  /** 截图宽度，范围：0-3000。 0：原始宽度并适配原始比例。 */
+  /** 截图宽度，范围：0-3000。0：原始宽度并适配原始比例。 */
   Width?: number;
   /** 截图高度，范围：0-2000。0：原始高度并适配原始比例。 */
   Height?: number;
@@ -1948,6 +1948,10 @@ declare interface SnapshotTemplateInfo {
   CosPrefix?: string | null;
   /** Cos 文件名称。 */
   CosFileName?: string | null;
+  /** 第三方存储时账号的SecretId */
+  CosSecretId?: string;
+  /** 第三方存储时，账号的SecretKey当查询时，该值返回为****** */
+  CosSecretKey?: string;
 }
 
 /** 推断流事件信息。 */
@@ -6645,11 +6649,11 @@ declare interface ModifyLiveSmartEraseTemplateResponse {
 declare interface ModifyLiveSnapshotTemplateRequest {
   /** 模板 ID。 */
   TemplateId: number;
-  /** Cos 应用 ID。**注：此参数现在须必选。** */
+  /** Cos 应用 ID。注：此参数现在须必选。 */
   CosAppId: number;
-  /** Cos Bucket名称。注：CosBucket参数值不能包含-[appid] 部分。**注：此参数现在须必选。** */
+  /** Cos Bucket名称。注：CosBucket参数值不能包含-[appid] 部分。注：此参数现在须必选。 */
   CosBucket: string;
-  /** Cos 地域。**注：此参数现在须必选。** */
+  /** Cos 地域。注：此参数现在须必选。 */
   CosRegion: string;
   /** 模板名称。长度上限：255字节。 */
   TemplateName?: string;

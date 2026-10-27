@@ -22,7 +22,7 @@ declare interface SearchProRequest {
 declare interface SearchProResponse {
   /** 原始查询语 */
   Query?: string;
-  /** 搜索结果页面详情，格式为json字符串。title：结果标题date：内容发布时间url：内容发布源urlpassage：标准摘要content：动态摘要（极速版不返回该字段）site：网站名称，部分不知名站点结果可能为空score：相关性得分，取值0～1，越靠近1表示越相关authority_level：权威度得分，取值0～5，数值越大表示越权威（仅旗舰版返回该字段）pics：图片列表，单个doc返回0～10条（极速版不返回该字段）caption：图片描述origin_url：源图url地favicon：网站图标链接，部分不知名站点结果可能为空deeplinks：附件子链信息，单个doc最多返回10条子链信息。（仅旗舰版返回该字段，通过Deeplinks入参控制）title：子链标题url：子链地址 */
+  /** 搜索结果页面详情，格式为json字符串。title：结果标题date：内容发布时间url：内容发布源urlpassage：标准摘要content：动态摘要（极速版不返回该字段）site：网站名称，部分不知名站点结果可能为空score：相关性得分，取值0～1，越靠近1表示越相关（极速版不返回该字段）authority_level：权威度得分，取值0～5，数值越大表示越权威（仅旗舰版返回该字段）pics：图片列表，单个doc返回0～10条（极速版不返回该字段）caption：图片描述origin_url：源图url地favicon：网站图标链接，部分不知名站点结果可能为空deeplinks：附件子链信息，单个doc最多返回10条子链信息。（仅旗舰版返回该字段，通过Deeplinks入参控制）title：子链标题url：子链地址 */
   Pages?: string[];
   /** 用户版本：lite/standard/flagship（极速/标准/旗舰） */
   Version?: string;

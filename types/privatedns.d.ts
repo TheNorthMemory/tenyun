@@ -82,6 +82,12 @@ declare interface EndPointServiceInfo {
   EndPointIsolateFlag?: number;
 }
 
+/** PrivateDNS出站终端节点转发IP */
+declare interface EndpointService {
+  /** 子网剩余IP数 */
+  SubnetLessIp?: number;
+}
+
 /** 筛选参数 */
 declare interface Filter {
   /** 参数名 */
@@ -154,6 +160,26 @@ declare interface MetricData {
   DataSet?: DatePoint[];
   /** 查询范围内的请求总量 */
   MetricCount?: number;
+}
+
+/** 出站终端节点 */
+declare interface OutboundEndpoint {
+  /** 出站终端节点ID */
+  EndpointId?: string;
+  /** 出站终端节点名 */
+  EndpointName?: string;
+  /** 出站终端节点所属地域 */
+  Region?: string;
+  /** tag标签 */
+  Tags?: TagInfo[];
+  /** 出站终端节点信息仅在转发架构为 V2R的情况下返回 */
+  EndpointServiceSet?: EndpointService[];
+  /** 转发链接架构V2V: privatelinkV2R: jnsgw */
+  ForwardLinkArch?: string;
+  /** 终端节点服务ID仅在转发架构为 V2V的情况下返回 */
+  EndPointServiceId?: string;
+  /** 终端节点VIP列表仅在转发架构为 V2V的情况下返回 */
+  EndPointVipSet?: string[];
 }
 
 /** 私有域解析账号 */
@@ -712,6 +738,10 @@ declare interface DescribeExtendEndpointListRequest {
 }
 
 declare interface DescribeExtendEndpointListResponse {
+  /** 终端节点总数 */
+  TotalCount?: number;
+  /** 终端节点列表 */
+  OutboundEndpointSet?: OutboundEndpoint[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

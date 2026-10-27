@@ -11995,6 +11995,14 @@ declare namespace V20210820 {
     ProxyTaskType?: TaskTypeOpsDto | null;
     /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSIONS： 无权限 */
     Privilege?: string | null;
+    /** 触发记录来源 (仅嵌套工作流触发场景有值, 取值以 SUB_PROCESS_ 开头时表示由嵌套工作流生成运行记录触发枚举值：SUB_PROCESS_MAKEUP： 补录SUB_PROCESS_TRIGGER： 调度触发 */
+    TriggerSource?: string | null;
+    /** 父 嵌套工作流任务 ID (仅触发记录来源为嵌套工作流时有值) */
+    ParentSpTaskId?: string | null;
+    /** 父嵌套工作流实例名称 (仅触发记录来源为嵌套工作流时有值) */
+    ParentSpInstanceName?: string | null;
+    /** 父嵌套工作流实例数据时间 (仅触发记录来源为嵌套工作流时有值)参数格式：2026-10-12 00:00:00 */
+    ParentSpInstanceDataTime?: string | null;
   }
 
   /** 任务运行历史分页记录 */

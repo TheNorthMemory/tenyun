@@ -26412,6 +26412,8 @@ declare interface ModifyVulScanPeriodicRequest {
   SyncTo?: number[];
   /** 标签ID */
   TagIds?: number[];
+  /** 优先使用腾讯云软件源 */
+  PreferCloudSource?: boolean;
 }
 
 declare interface ModifyVulScanPeriodicResponse {

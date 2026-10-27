@@ -386,6 +386,10 @@ declare interface CosParam {
   ObjectKeyPrefix?: string;
   /** 根据strptime 时间格式化的分区格式 */
   DirectoryTimeFormat?: string;
+  /** 时间时区, 默认 UTC+08:00参数格式：UTC+08:00 */
+  Timezone?: string;
+  /** 源数据解析格式枚举值：JSON： JSON格式Debezium： Debezium格式 */
+  SourceDataFormat?: string;
 }
 
 /** 创建数据转储返回值 */
@@ -1568,6 +1572,8 @@ declare interface KafkaConnectParam {
   CrossNetResourceUniqueId?: string;
   /** 跨云子网ID */
   CrossNetVpcSubNetId?: string;
+  /** 用户输入原始broker接入点地址 */
+  OriginalBrokerAddresses?: string;
 }
 
 /** Ckafka配置 */

@@ -172,6 +172,8 @@ declare interface DBCustomNode {
   DisasterRecoverGroupId?: string;
   /** 节点最新进行中的任务类型枚举值：add-nodes-to-cluster： 添加节点到集群remove-nodes-from-cluster： 从集群中移除节点modify-nodes-attributes： 修改节点属性modify-nodes-drg： 修改节点置放群组 */
   LatestRunningTaskType?: string;
+  /** 节点所属的业务类型枚举值：sqlserver： 腾讯云 SQL Server 数据库实例 Custom 形态的节点 */
+  BusinessType?: string;
 }
 
 /** DB Custom 节点机型信息。 */
@@ -250,6 +252,14 @@ declare interface DataDisk {
   DiskSize: number;
   /** 磁盘名称DataDisk 作为输入参数时，DiskName 无效。 */
   DiskName?: string;
+  /** 数据盘是否加密枚举值：false： 不加密true： 加密 */
+  Encrypt?: boolean;
+  /** 磁盘ID入参限制：该参数目前仅用于 DescribeDBCustomNodes 等查询类接口的返回参数，不可用于 CreateDBCustomNodes 等写接口的入参。 */
+  DiskId?: string;
+  /** 数据盘快照ID入参限制：选择的数据盘快照大小需小于数据盘大小 */
+  SnapshotId?: string;
+  /** 自定义的数据盘标识（如 data / log / backup） */
+  ClientDiskKey?: string;
 }
 
 /** 独享集群详情 */
@@ -578,6 +588,8 @@ declare interface SystemDisk {
   DiskType: string;
   /** 磁盘大小单位：GiB */
   DiskSize: number;
+  /** 磁盘ID */
+  DiskId?: string;
 }
 
 /** 标签键值对。 */
@@ -596,6 +608,14 @@ declare interface Taint {
   Effect?: string;
   /** Taint 的值，≤ 63 字符，可为空 */
   Value?: string;
+}
+
+/** DB Custom 资源任务状态信息。 */
+declare interface TaskResourceStatus {
+  /** 资源ID。如节点ID dbcn-tnjzxz3n */
+  ResourceId?: string;
+  /** 任务状态枚举值：Running： 运行中Succeeded： 成功Failed： 失败 */
+  Status?: string;
 }
 
 /** 可用区信息。 */
@@ -1052,6 +1072,8 @@ declare interface DescribeDBCustomTaskStatusRequest {
 declare interface DescribeDBCustomTaskStatusResponse {
   /** 任务 ID枚举值：Running： 运行中Succeeded： 成功Failed： 失败 */
   Status?: string;
+  /** 任务所操作的每个资源的执行结果 */
+  ResourceStatusSet?: TaskResourceStatus[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
