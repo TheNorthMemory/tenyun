@@ -558,6 +558,24 @@ declare interface CLSInfo {
   GroupName?: string;
 }
 
+/** 证书详情 */
+declare interface CertDetail {
+  /** 证书ID */
+  CertId?: string;
+  /** 证书备注名 */
+  Alias?: string;
+  /** 证书绑定的主域名 */
+  Domain?: string;
+  /** 证书来源 */
+  Source?: string;
+  /** 有效期结束（秒级时间戳）单位：秒 */
+  EndTime?: number;
+  /** 证书到期剩余天数 */
+  RemainDays?: number;
+  /** 证书状态，1为已通过 */
+  CertStatus?: number;
+}
+
 /** 校验项 */
 declare interface CheckItem {
   /** 校验项名称 */
@@ -6542,6 +6560,10 @@ declare interface DescribeSSLStatusResponse {
   IsOpenSSL?: string;
   /** 证书下载地址 */
   DownloadUrl?: string;
+  /** 证书类型枚举值：platform： 云端证书custom： 自定义证书 */
+  CertType?: string;
+  /** 自定义证书详情，仅 CertType=custom 时有值。 */
+  CertDetail?: CertDetail;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8065,6 +8087,10 @@ declare interface OpenSSLRequest {
   ClusterId: string;
   /** 实例ID */
   InstanceId?: string;
+  /** 证书类型枚举值：platform： 云端证书custom： 自定义证书默认值：platform */
+  CertType?: string;
+  /** 证书ID，CertType=custom 时必传 */
+  CertId?: string;
 }
 
 declare interface OpenSSLResponse {

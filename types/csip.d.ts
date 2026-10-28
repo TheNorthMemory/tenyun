@@ -23933,6 +23933,8 @@ declare interface DescribeVulScanPeriodicResponse {
   AdminInfo?: AccountBriefInfo;
   /** 标签id */
   TagIds?: number[];
+  /** 优先使用腾讯云软件源 */
+  PreferCloudSource?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

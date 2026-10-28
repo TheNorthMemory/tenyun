@@ -138,6 +138,8 @@ declare interface Storage {
   StorageAppId?: string;
   /** 是否压缩。1:压缩 2:不压缩 */
   Compress?: number;
+  /** CKAFKA路由信息 */
+  CkafkaRoute?: string;
 }
 
 /** 跟踪集列表 */

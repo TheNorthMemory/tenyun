@@ -3477,6 +3477,42 @@ declare namespace V20180717 {
     VoiceInfo?: string;
   }
 
+  /** DNA查重估计任务信息。 */
+  interface DNATask {
+    /** 任务 ID。 */
+    TaskId?: string;
+    /** 任务状态。枚举值：WAITING： 等待中PROCESSING： 处理中FINISH： 已完成 */
+    Status?: string;
+    /** 错误码，0 表示成功，其他值表示失败：40000：输入参数不合法，请检查输入参数；60000：源文件错误（如视频数据损坏），请确认源文件是否正常；70000：内部服务错误，建议重试。 */
+    ErrCode?: number;
+    /** 错误码，空字符串表示成功，其他值表示失败，取值请参考 视频处理类错误码 列表。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 被检测的媒资 FileId。 */
+    FileId?: string;
+    /** 查重命中列表。 */
+    Output?: DNATaskOutput[] | null;
+  }
+
+  /** DNA查重任务输出。 */
+  interface DNATaskOutput {
+    /** 命中的参考媒资 FileId。 */
+    RefFileId?: string;
+    /** 查询媒资命中片段起始时间。单位：秒 */
+    QueryStartSec?: number;
+    /** 查询媒资命中片段结束时间。单位：秒 */
+    QueryEndSec?: number;
+    /** 参考媒资对应片段起始时间。单位：秒 */
+    RefStartSec?: number;
+    /** 参考媒资对应片段结束时间。单位：秒 */
+    RefEndSec?: number;
+    /** 匹配置信度。取值范围：[0, 1] */
+    Confidence?: number;
+    /** 变速比（1.0 表示原速，非 1 表示加速或者减速）。 */
+    SpeedRatio?: number;
+  }
+
   /** DNS解析验证信息 */
   interface DNSVerifyInfo {
     /** 子解析。 */
@@ -4623,6 +4659,10 @@ declare namespace V20180717 {
     Name?: string;
     /** 知识库描述。 */
     Description?: string;
+    /** 知识库的索引类型枚举值：Semantic： 语义索引DNA： DNA 索引 */
+    IndexType?: string;
+    /** 允许入库的媒体类型枚举值：Video： 视频Image： 图片 */
+    MediaType?: string;
     /** 知识库状态。枚举值：creating： 创建中active： 正常deleting： 删除中 */
     Status?: string;
     /** 知识库创建时间。 */
@@ -4648,6 +4688,12 @@ declare namespace V20180717 {
   /** 大模型解析文本转录解析配置 */
   interface LLMComprehendAsrForUpdate {
     /** 文本转录任务开关，可选值：- ON：开启文本转录任务；- OFF：关闭文本转录任务。 */
+    Switch?: string;
+  }
+
+  /** 大模型解析DNA解析配置 */
+  interface LLMComprehendDNA {
+    /** DNA解析任务开关枚举值：ON： 开启DNA解析任务OFF： 关闭DNA解析任务默认值：OFF */
     Switch?: string;
   }
 
@@ -4713,6 +4759,8 @@ declare namespace V20180717 {
     Asr?: LLMComprehendAsr;
     /** 人脸识别解析配置 */
     FaceRecognition?: LLMComprehendFaceRecognition;
+    /** DNA解析配置 */
+    DNA?: LLMComprehendDNA;
     /** 模板创建时间，使用 ISO 日期格式。 */
     CreateTime?: string;
     /** 模板最后修改时间，使用 ISO 日期格式。 */
@@ -7947,6 +7995,24 @@ declare namespace V20180717 {
     Type?: string;
   }
 
+  /** 异步按语义搜索媒体任务信息 */
+  interface SearchMediaBySemanticsAsync {
+    /** 任务ID。 */
+    TaskId?: string;
+    /** 任务状态，取值：PROCESSING：处理中；FINISH：已完成。 */
+    Status?: string;
+    /** 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。 */
+    ErrCode?: number;
+    /** 扩展错误码。 */
+    ErrCodeExt?: string;
+    /** 错误信息。 */
+    Message?: string;
+    /** 本次查询文本（图片查询时为空）。 */
+    QueryText?: string;
+    /** 召回列表。 */
+    SearchResults?: SemanticsSearchResult[] | null;
+  }
+
   /** 视频拆条任务识别控制参数 */
   interface SegmentConfigureInfo {
     /** 视频拆条识别任务开关，可选值：ON：开启智能视频拆条识别任务；OFF：关闭智能视频拆条识别任务。 */
@@ -10190,6 +10256,10 @@ declare namespace V20180717 {
     Name: string;
     /** 知识库描述。长度限制：最多256个字符。 */
     Description?: string;
+    /** 知识库的索引类型枚举值：Semantic： 语义索引DNA： DNA 索引默认值：Semantic */
+    IndexType?: string;
+    /** 允许入库的媒体类型枚举值：Video： 视频Image： 图片默认值：Video */
+    MediaType?: string;
   }
 
   interface CreateKnowledgeBaseResponse {
@@ -10214,6 +10284,8 @@ declare namespace V20180717 {
     Asr?: LLMComprehendAsr;
     /** 人脸识别配置 */
     FaceRecognition?: LLMComprehendFaceRecognition;
+    /** DNA解析配置 */
+    DNA?: LLMComprehendDNA;
   }
 
   interface CreateLLMComprehendTemplateResponse {
@@ -12407,6 +12479,10 @@ declare namespace V20180717 {
     VideoDubbingAsyncTask?: VideoDubbingAsyncTask;
     /** 视频深度估算任务，仅当 TaskType 为VideoDepthEstimation，该字段有值。 */
     VideoDepthEstimationTask?: VideoDepthEstimationTask;
+    /** DNA查重任务，仅当TaskType为CreateDnaTask，该字段有值。 */
+    DNATask?: DNATask;
+    /** 异步按语义搜索媒体任务，仅当TaskType为SearchMediaBySemanticsAsync，该字段有值。 */
+    SearchMediaBySemanticsAsync?: SearchMediaBySemanticsAsync;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -13344,6 +13420,8 @@ declare namespace V20180717 {
     Asr?: LLMComprehendAsrForUpdate;
     /** 人脸识别配置 */
     FaceRecognition?: LLMComprehendFaceRecognitionForUpdate;
+    /** DNA解析配置 */
+    DNA?: LLMComprehendDNA;
   }
 
   interface ModifyLLMComprehendTemplateResponse {
@@ -14290,9 +14368,13 @@ declare namespace V20180717 {
   interface SearchMediaBySemanticsRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId: number;
-    /** 需要进行搜索的内容 */
-    Text: string;
-    /** 知识库ID，留空时将使用默认知识库 */
+    /** 需要进行搜索的文本内容。入参限制：与 FileId、Url 三选一且互斥。 */
+    Text?: string;
+    /** 需要进行搜索的图片FileId。入参限制：必须是图片类型媒资，且与 Text、Url 三选一且互斥。 */
+    FileId?: string;
+    /** 需要进行搜索的图片Url。 入参限制：必须是图片Url，且与 Text、FileId 三选一且互斥。 */
+    Url?: string;
+    /** 知识库ID，留空时将使用默认知识库。当输入为图片时，必须选择MediaType=Image的知识库。 */
     KnowledgeBaseId?: string;
     /** 返回的记录条数，默认值：20。取值范围：[1, 100] */
     Limit?: number;

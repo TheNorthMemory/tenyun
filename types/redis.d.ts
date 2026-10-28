@@ -482,7 +482,7 @@ declare interface InstanceSet {
   Size?: number;
   /** 该字段已废弃。请使用腾讯云可观测平台API 接口 GetMonitorData 获取实例已使用的内存容量。 */
   SizeUsed?: number;
-  /** 实例类型。枚举值：2： Redis 2.8 内存版（标准架构）。3： CKV 3.2 内存版（标准架构）。4： CKV 3.2 内存版（集群架构）。5： Redis 2.8 内存版（单机）。6： Redis 4.0 内存版（标准架构）。7： Redis 4.0 内存版（集群架构）。8： Redis 5.0 内存版（标准架构）。9： Redis 5.0 内存版（集群架构）。15： Redis 6.2 内存版（标准架构）。16： Redis 6.2 内存版（集群架构）。17： Redis 7.0 内存版（标准架构）。18： Redis 7.0 内存版（集群架构）。19： Valkey 8.0 内存版（标准架构）。20： Valkey 8.0 内存版（集群架构）。21： Valkey 8.0 内存版（标准架构）。22： Valkey 8.0 内存版（集群架构）。200： Memcached 1.6 内存版（集群架构）。 */
+  /** 实例类型。枚举值：2： Redis 2.8 内存版（标准架构）。3： CKV 3.2 内存版（标准架构）。4： CKV 3.2 内存版（集群架构）。5： Redis 2.8 内存版（单机）。6： Redis 4.0 内存版（标准架构）。7： Redis 4.0 内存版（集群架构）。8： Redis 5.0 内存版（标准架构）。9： Redis 5.0 内存版（集群架构）。15： Redis 6.2 内存版（标准架构）。16： Redis 6.2 内存版（集群架构）。17： Redis 7.0 内存版（标准架构）。18： Redis 7.0 内存版（集群架构）。19： Valkey 8.0 内存版（标准架构）。20： Valkey 8.0 内存版（集群架构）。21： Valkey 9.0 内存版（标准架构）。22： Valkey 9.0 内存版（集群架构）。200： Memcached 1.6 内存版（集群架构）。 */
   Type?: number;
   /** 实例是否设置自动续费标识。1：设置自动续费。0：未设置自动续费。 */
   AutoRenewFlag?: number;
@@ -562,7 +562,7 @@ declare interface InstanceSet {
   RedisClusterId?: string;
   /** CDC 集群ID。 */
   DedicatedClusterId?: string;
-  /** 产品版本。local：本地盘。cloud：云盘版。cdc：CDC 集群版本。 */
+  /** 实例的部署类型。枚举值：local： 通用 I 型。localv2： 通用 II 型。cdc： 独享集群型。 */
   ProductVersion?: string;
   /** 实例当前Proxy版本。 */
   CurrentProxyVersion?: string;
@@ -2271,11 +2271,11 @@ declare interface DescribeInstancesRequest {
   Limit?: number;
   /** 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。 */
   Offset?: number;
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId?: string;
-  /** 实例列表排序依据，枚举值如下所示：- projectId：依据项目ID排序。- createtime：依据实例创建时间排序。- instancename：依据实例名称排序。- type：依据实例类型排序。- curDeadline：依据实例到期时间排序。 */
+  /** 实例列表排序依据，枚举值如下所示：projectId：依据项目ID排序。createtime：依据实例创建时间排序。instancename：依据实例名称排序。type：依据实例类型排序。curDeadline：依据实例到期时间排序。 */
   OrderBy?: string;
-  /** 实例排序方式，默认为倒序排序。- 1：倒序。- 0：顺序。 */
+  /** 实例排序方式，默认为倒序排序。1：倒序。0：顺序。 */
   OrderType?: number;
   /** 私有网络 ID 数组。如果不配置该参数或设置数组为空则默认选择基础网络。例如47525。该参数暂时保留，可忽略。请根据 UniqVpcIds 参数格式设置私有网络ID数组。 */
   VpcIds?: string[];
@@ -2293,19 +2293,19 @@ declare interface DescribeInstancesRequest {
   UniqSubnetIds?: string[];
   /** 地域 ID 数组，该参数已经弃用，可通过公共参数Region查询对应地域。 */
   RegionIds?: number[];
-  /** 实例状态。- 0：待初始化。- 1：流程中。- 2：运行中。- -2：已隔离。- -3：待删除。 */
+  /** 实例状态。0：待初始化。1：流程中。2：运行中。-2：已隔离。-3：待删除。 */
   Status?: number[];
-  /** 实例架构版本。- 1：单机版。- 2：主从版。- 3：集群版。 */
+  /** 实例架构版本。1：单机版。2：主从版。3：集群版。 */
   TypeVersion?: number;
   /** 存储引擎信息。可设置为Redis-2.8、Redis-4.0、Redis-5.0、Redis-6.0 或者 CKV。 */
   EngineName?: string;
-  /** 续费模式。- 0：手动续费。- 1：自动续费。- 2：到期不再续费。 */
+  /** 续费模式。0：手动续费。1：自动续费。2：到期不再续费。 */
   AutoRenew?: number[];
-  /** 计费模式。- postpaid：按量计费。- prepaid：包年包月。 */
+  /** 计费模式。postpaid：按量计费。prepaid：包年包月。 */
   BillingMode?: string;
-  /** 实例类型。- 2：Redis 2.8 内存版（标准架构）。- 3：CKV 3.2 内存版（标准架构）。- 4：CKV 3.2 内存版（集群架构）。- 5：Redis 2.8 内存版（单机）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。- 200:Memcached 1.6 内存版（集群架构）。 */
+  /** 实例类型。2：Redis 2.8 内存版（标准架构）。3：CKV 3.2 内存版（标准架构）。4：CKV 3.2 内存版（集群架构）。5：Redis 2.8 内存版（单机）。6：Redis 4.0 内存版（标准架构）。7：Redis 4.0 内存版（集群架构）。8：Redis 5.0 内存版（标准架构）。9：Redis 5.0 内存版（集群架构）。15：Redis 6.2 内存版（标准架构）。16：Redis 6.2 内存版（集群架构）。17：Redis 7.0 内存版（标准架构）。18：Redis 7.0 内存版（集群架构）。200:Memcached 1.6 内存版（集群架构）。 */
   Type?: number;
-  /** 该参数为数组类型，支持配置实例名称、实例 ID、IP地址，其中实例名称为模糊匹配，实例 ID 和 IP 地址精确匹配。- 数组中每一个元素取并集进行匹配查询。- **InstanceId** 与 **SearchKeys** 同时配置，则取二者交集进行匹配查询。 */
+  /** 该参数为数组类型，支持配置实例名称、实例 ID、IP地址，其中实例名称为模糊匹配，实例 ID 和 IP 地址精确匹配。数组中每一个元素取并集进行匹配查询。InstanceId 与 SearchKeys 同时配置，则取二者交集进行匹配查询。 */
   SearchKeys?: string[];
   /** 内部参数，用户可忽略。 */
   TypeList?: number[];
@@ -2315,11 +2315,11 @@ declare interface DescribeInstancesRequest {
   InstanceTags?: InstanceTagInfo[];
   /** 根据标签的 Key 筛选资源，该参数不配置或者数组设置为空值，则不根据标签Key进行过滤。 */
   TagKeys?: string[];
-  /** 实例的产品版本。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。- local：本地盘版。- cdc：独享集群版。 */
+  /** 实例的部署类型。如果该参数不配置或者数组设置为空值，则默认不依据此参数过滤实例。枚举值：local： 通用 I 型。localv2： 通用 II 型。cdc： 独享集群型。 */
   ProductVersions?: string[];
   /** 批量查询指定的实例 ID，返回结果已 Limit 限制为主。 */
   InstanceIds?: string[];
-  /** 可用区模式。- singleaz：单可用区。- multiaz：多可用区。 */
+  /** 可用区模式。singleaz：单可用区。multiaz：多可用区。 */
   AzMode?: string;
 }
 

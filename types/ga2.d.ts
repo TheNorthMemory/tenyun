@@ -52,6 +52,18 @@ declare interface AclEntries {
   Description?: string;
 }
 
+/** 创建加速地域信息 */
+declare interface CreateAcceleratorAreasInfo {
+  /** 加速地域 */
+  AccelerateRegion: string;
+  /** 带宽单位：Mbps */
+  Bandwidth: number;
+  /** 公网质量类型枚举值：BGP： BGPQUALITY_BGP： 精品BGPSTATIC_IP： 三网默认值：BGP */
+  IspType?: string;
+  /** IP 地址协议枚举值：IPv4： IPv4默认值：IPv4 */
+  IpVersion?: string;
+}
+
 /** 终端节点配置 */
 declare interface EndpointConfigurations {
   /** 域名类型。可选值'Domain', 'PublicIp'。 */
@@ -376,6 +388,18 @@ declare interface ListenerSet {
   IdleTimeout?: number;
 }
 
+/** 修改加速地域信息 */
+declare interface ModifyAccelerateAreasInfo {
+  /** 加速地域 */
+  AccelerateRegion: string;
+  /** 带宽单位：Mbps */
+  Bandwidth?: number;
+  /** 公网质量类型枚举值：BGP： BGPQUALITY_BGP： 精品BGPSTATIC_IP： 三网 */
+  IspType?: string;
+  /** IP 地址协议枚举值：IPv4： IPv4 */
+  IpVersion?: string;
+}
+
 /** 回源Header信息 */
 declare interface OriginHeader {
   /** 键。参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()<>@,;:\"/[ ]?={ }入参限制：长度在1-40。 */
@@ -436,7 +460,7 @@ declare interface CreateAccelerateAreasRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
   /** 加速地域信息。一次最多创建10组加速地域。 */
-  AcceleratorAreas: AcceleratorAreas[];
+  AcceleratorAreas: CreateAcceleratorAreasInfo[];
 }
 
 declare interface CreateAccelerateAreasResponse {
@@ -899,7 +923,7 @@ declare interface DescribeForwardingPolicyRequest {
   ListenerId: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。 */
+  /** 返回数量，默认为20，最大值为200。 */
   Limit?: number;
   /** 过滤条件。forwarding-policy-id - String -（过滤条件）策略ID。 */
   Filters?: Filter[];
@@ -923,7 +947,7 @@ declare interface DescribeForwardingRuleRequest {
   ForwardingPolicyId: string;
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量，默认为20，最大值为100。 */
+  /** 返回数量，默认为20，最大值为200。 */
   Limit?: number;
   /** 过滤条件。forwarding-rule-id - String -（过滤条件）规则ID。 */
   Filters?: Filter[];
@@ -945,7 +969,7 @@ declare interface DescribeGlobalAcceleratorAccessLogRequest {
   Filters?: Filter[];
   /** 偏移量，默认为0。 */
   Offset?: number;
-  /** 返回数量。取值范围：[0, 200] */
+  /** 返回数量。取值范围：[1, 200] */
   Limit?: number;
 }
 
@@ -1050,7 +1074,7 @@ declare interface ModifyAccelerateAreasRequest {
   /** 全球加速实例ID。 */
   GlobalAcceleratorId: string;
   /** 加速地域信息。入参限制：数组长度不能超过10。 */
-  AcceleratorAreas: AcceleratorAreas[];
+  AcceleratorAreas: ModifyAccelerateAreasInfo[];
 }
 
 declare interface ModifyAccelerateAreasResponse {

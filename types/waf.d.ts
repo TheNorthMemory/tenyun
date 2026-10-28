@@ -7610,7 +7610,7 @@ declare interface GetAttackHistogramRequest {
 declare interface GetAttackHistogramResponse {
   /** 统计详情 */
   Data?: LogHistogramInfo[];
-  /** 时间段大小 */
+  /** 时间段大小单位：秒 */
   Period?: number;
   /** 统计的条目数 */
   TotalCount?: number;

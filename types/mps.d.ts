@@ -8648,7 +8648,7 @@ declare interface VideoRedrawInput {
 
 /** Aigc 转绘、替换等任务参数 */
 declare interface VideoRedrawTaskInfo {
-  /** 转绘视频风格，如动漫、赛博朋克、水墨等 */
+  /** 转绘视频风格，如动漫、赛博朋克、水墨等默认值：动漫风 */
   Style?: string;
 }
 

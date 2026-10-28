@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 263+ 款产品，16433+ 服务数</summary>
+<details><summary>共计 264+ 款产品，16488+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -199,8 +199,9 @@ controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) 
 cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 csip | [云安全一体化平台](https://cloud.tencent.com/document/product/664) | 2022-11-21(751) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
-ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(61) |
+ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(66) |
 ctsdb | [时序数据库 CTSDB](https://cloud.tencent.com/document/product/652) | 2023-02-02(3) |
+cvd | [云桌面](https://cloud.tencent.com/document/product/1291) | 2020-11-04(48) |
 cvm | [云服务器](https://cloud.tencent.com/document/product/213) | 2017-03-12(106) |
 cwp | [主机安全](https://cloud.tencent.com/document/product/296) | 2018-02-28(533) |
 cws | 漏洞扫描服务 | 2018-03-12(19) |
@@ -209,7 +210,7 @@ dasb | [运维安全中心（堡垒机）](https://cloud.tencent.com/document/pr
 dataagent | [腾讯云数据分析智能体](https://cloud.tencent.com/document/product/1800) | 2025-05-13(23) |
 databuddy | [大数据智能体工作台DataBuddy](https://cloud.tencent.com/document/product/1835) | 2026-07-15(95) |
 dayu | [DDoS 高防包](https://cloud.tencent.com/document/product/1021) | 2018-07-09(112) |
-dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(100) | 2019-10-16(28) |
+dbbrain | [数据库智能管家 DBbrain](https://cloud.tencent.com/document/product/1130) | 2021-05-27(101) | 2019-10-16(28) |
 dbdc | [云数据库独享集群](https://cloud.tencent.com/document/product/1322) | 2020-10-29(43) |
 dbs | [数据库备份服务](https://cloud.tencent.com/document/product/1513) | 2021-11-08(8) |
 dc | [专线接入](https://cloud.tencent.com/document/product/216) | 2018-04-10(22) |
@@ -267,7 +268,7 @@ irp | [智能推荐平台](https://cloud.tencent.com/document/product/1541) | 20
 iss | [智能视图计算平台](https://cloud.tencent.com/document/product/1344) | 2023-05-17(98) |
 ivld | [媒体智能标签](https://cloud.tencent.com/document/product/1509) | 2021-09-03(28) |
 keewidb | [云数据库 KeeWiDB](https://cloud.tencent.com/document/product/1520) | 2022-03-08(38) |
-kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(69) |
+kms | [密钥管理系统](https://cloud.tencent.com/document/product/573) | 2019-01-18(70) |
 lcic | [实时互动-教育版](https://cloud.tencent.com/document/product/1639) | 2022-08-17(85) |
 lighthouse | [轻量应用服务器](https://cloud.tencent.com/document/product/1207) | 2020-03-24(120) |
 live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-01(261) |

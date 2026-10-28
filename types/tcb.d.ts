@@ -166,6 +166,12 @@ declare interface BuildContext {
   OutPut?: string;
 }
 
+/** 构建运行配置 */
+declare interface BuildRunner {
+  /** 构建服务所需 CPU 规格 */
+  Cpus?: number;
+}
+
 /** 构建密钥 */
 declare interface BuildSecret {
   /** 标准化为 DNS Label 风格；构建时注入为 $SECRET_<NAME>（同时也提供原大写形式 $SECRET_<NAME_UPPERCASE>） */
@@ -2243,7 +2249,7 @@ declare interface CreateCloudAppRequest {
   EnvId: string;
   /** 服务名 */
   ServiceName: string;
-  /** 部署类型 */
+  /** 部署类型枚举值：statis-hosting： 静态托管应用custom： 自定义流水线 */
   DeployType: string;
   /** 构建类型 */
   BuildType?: string;
@@ -2277,6 +2283,8 @@ declare interface CreateCloudAppRequest {
   PreDeployCommand?: string;
   /** 后置执行命令 */
   PostDeployCommand?: string;
+  /** 流水线运行配置 */
+  Runner?: BuildRunner;
 }
 
 declare interface CreateCloudAppResponse {

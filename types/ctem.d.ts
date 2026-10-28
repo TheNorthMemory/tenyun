@@ -912,6 +912,24 @@ declare interface IdndValue {
   Value?: string | null;
 }
 
+/** 漏洞情报扫描结果 */
+declare interface IntelligenceResult {
+  /** 客户ID */
+  CustomerId?: number;
+  /** 客户名称 */
+  CustomerName?: string;
+  /** 标题 */
+  Title?: string;
+  /** 指纹 */
+  Banner?: string;
+  /** 截图预览 */
+  ScreenshotUrl?: string;
+  /** 是否受影响 */
+  IsAffected?: boolean;
+  /** 网址 */
+  Url?: string;
+}
+
 /** 子任务进度 */
 declare interface JobRecordProgress {
   /** 正在执行的任务数 */
@@ -998,6 +1016,18 @@ declare interface CreateAssetRequest {
 declare interface CreateAssetResponse {
   /** Id */
   Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateCheckRequest {
+  /** 漏洞情报ID */
+  VulId: string;
+  /** 企业ID */
+  CustomerId?: number;
+}
+
+declare interface CreateCheckResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1220,6 +1250,18 @@ declare interface CreatePortRequest {
 declare interface CreatePortResponse {
   /** Id */
   Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateScanRequest {
+  /** 漏洞情报ID */
+  VulId: string;
+  /** 企业ID */
+  CustomerId?: number;
+}
+
+declare interface CreateScanResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1614,6 +1656,24 @@ declare interface DescribeAssetsResponse {
   Total?: number;
   /** 主机资产数组 */
   List?: DisplayAsset[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBannerAssetDataRequest {
+  /** 漏洞情报ID */
+  VulId: string;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+}
+
+declare interface DescribeBannerAssetDataResponse {
+  /** 数组 */
+  List?: IntelligenceResult[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2034,6 +2094,20 @@ declare interface DescribeHttpsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeIntelligencesRequest {
+  /** 查询数组 */
+  Filters?: Filter[];
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+}
+
+declare interface DescribeIntelligencesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeJobRecordDetailsRequest {
   /** 数据类型，包括：enterprise(企业架构)，domain(主域名)，sub_domain(子域名)，asset(主机资产)，port(端口服务)，http(网站资产)，vul(漏洞信息)，app(APP)，wechat_applet(微信小程序)，wechat_official_account(微信公众号)，github(Github泄露)，manage(后台识别)，config(目录爆破)，dark_web(暗网泄露)，net_disk(文库网盘泄露)，social_engineering(员工信息)，supply_chain(供应链信息)，weak_password(弱口令)，sensitive_info(敏感信息泄露)，suspicious_asset(影子资产) */
   Module: string;
@@ -2266,6 +2340,24 @@ declare interface DescribeNetDisksResponse {
   Total?: number;
   /** 数组 */
   List?: DisplayNetDisk[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePocAssetDataRequest {
+  /** 漏洞情报ID */
+  VulId: string;
+  /** 分页大小 */
+  Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+}
+
+declare interface DescribePocAssetDataResponse {
+  /** 数组 */
+  List?: IntelligenceResult[];
+  /** 总数 */
+  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2735,6 +2827,8 @@ declare interface Ctem {
   CreateApp(data: CreateAppRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAppResponse>;
   /** 添加主机资产 {@link CreateAssetRequest} {@link CreateAssetResponse} */
   CreateAsset(data: CreateAssetRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetResponse>;
+  /** 检查修复状况 {@link CreateCheckRequest} {@link CreateCheckResponse} */
+  CreateCheck(data: CreateCheckRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCheckResponse>;
   /** 创建企业 {@link CreateCustomerRequest} {@link CreateCustomerResponse} */
   CreateCustomer(data: CreateCustomerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomerResponse>;
   /** 添加主域名资产 {@link CreateDomainRequest} {@link CreateDomainResponse} */
@@ -2749,6 +2843,8 @@ declare interface Ctem {
   CreateManage(data: CreateManageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateManageResponse>;
   /** 添加端口服务资产 {@link CreatePortRequest} {@link CreatePortResponse} */
   CreatePort(data: CreatePortRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePortResponse>;
+  /** 扫描巡检 {@link CreateScanRequest} {@link CreateScanResponse} */
+  CreateScan(data: CreateScanRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScanResponse>;
   /** 创建种子 {@link CreateSeedsRequest} {@link CreateSeedsResponse} */
   CreateSeeds(data: CreateSeedsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSeedsResponse>;
   /** 添加子域名资产 {@link CreateSubDomainRequest} {@link CreateSubDomainResponse} */
@@ -2789,6 +2885,8 @@ declare interface Ctem {
   DescribeApps(data?: DescribeAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAppsResponse>;
   /** 查看主机资产 {@link DescribeAssetsRequest} {@link DescribeAssetsResponse} */
   DescribeAssets(data?: DescribeAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetsResponse>;
+  /** 相关资产 {@link DescribeBannerAssetDataRequest} {@link DescribeBannerAssetDataResponse} */
+  DescribeBannerAssetData(data: DescribeBannerAssetDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBannerAssetDataResponse>;
   /** 查看目录爆破数据 {@link DescribeConfigsRequest} {@link DescribeConfigsResponse} */
   DescribeConfigs(data?: DescribeConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConfigsResponse>;
   /** 查看企业列表 {@link DescribeCustomersRequest} {@link DescribeCustomersResponse} */
@@ -2811,6 +2909,8 @@ declare interface Ctem {
   DescribeGithubs(data?: DescribeGithubsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGithubsResponse>;
   /** 查看http数据 {@link DescribeHttpsRequest} {@link DescribeHttpsResponse} */
   DescribeHttps(data?: DescribeHttpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHttpsResponse>;
+  /** 查看情报列表 {@link DescribeIntelligencesRequest} {@link DescribeIntelligencesResponse} */
+  DescribeIntelligences(data?: DescribeIntelligencesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIntelligencesResponse>;
   /** 查看链路详情 {@link DescribeJobRecordDetailsRequest} {@link DescribeJobRecordDetailsResponse} */
   DescribeJobRecordDetails(data: DescribeJobRecordDetailsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeJobRecordDetailsResponse>;
   /** 查看任务运行记录列表 {@link DescribeJobRecordsRequest} {@link DescribeJobRecordsResponse} */
@@ -2825,6 +2925,8 @@ declare interface Ctem {
   DescribeManages(data?: DescribeManagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeManagesResponse>;
   /** 查看网盘泄露数据 {@link DescribeNetDisksRequest} {@link DescribeNetDisksResponse} */
   DescribeNetDisks(data?: DescribeNetDisksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeNetDisksResponse>;
+  /** 实际受影响资产 {@link DescribePocAssetDataRequest} {@link DescribePocAssetDataResponse} */
+  DescribePocAssetData(data: DescribePocAssetDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePocAssetDataResponse>;
   /** 查看端口数据 {@link DescribePortsRequest} {@link DescribePortsResponse} */
   DescribePorts(data?: DescribePortsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePortsResponse>;
   /** 查看种子列表 {@link DescribeSeedsRequest} {@link DescribeSeedsResponse} */

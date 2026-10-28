@@ -94,6 +94,14 @@ declare interface ExclusiveHSM {
   HsmClusterName?: string;
 }
 
+/** 预付费计费信息 */
+declare interface InstanceChargePrepaid {
+  /** 按月购买时长（1～100）月 */
+  Period: number;
+  /** 续费标记（0:用户未设置，1:自动续费 2:不自动续费） */
+  RenewFlag: number;
+}
+
 /** 返回CMK列表信息 */
 declare interface Key {
   /** CMK的全局唯一标识。 */
@@ -356,6 +364,30 @@ declare interface CreateKeyResponse {
   TagMsg?: string;
   /** HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效） */
   HsmClusterId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateKmsInstanceRequest {
+  /** 实例付费类型(PREPAID) */
+  InstanceChargeType: string;
+  /** 版本类型枚举值：professional： 专业版 */
+  ProductVersion?: string;
+  /** 预付费实例信息 */
+  InstanceChargePrepaid?: InstanceChargePrepaid;
+  /** 可重入客户端ID */
+  ClientToken?: string;
+  /** 实例标签 */
+  Tags?: Tag[];
+}
+
+declare interface CreateKmsInstanceResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 计费订单号 */
+  DealName?: string;
+  /** 计费冻结流水号 */
+  BillId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1397,6 +1429,8 @@ declare interface Kms {
   CancelKeyDeletion(data: CancelKeyDeletionRequest, config?: AxiosRequestConfig): AxiosPromise<CancelKeyDeletionResponse>;
   /** 创建主密钥 {@link CreateKeyRequest} {@link CreateKeyResponse} */
   CreateKey(data: CreateKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKeyResponse>;
+  /** 创建KMS实例 {@link CreateKmsInstanceRequest} {@link CreateKmsInstanceResponse} */
+  CreateKmsInstance(data: CreateKmsInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateKmsInstanceResponse>;
   /** 创建白盒密钥 {@link CreateWhiteBoxKeyRequest} {@link CreateWhiteBoxKeyResponse} */
   CreateWhiteBoxKey(data: CreateWhiteBoxKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWhiteBoxKeyResponse>;
   /** 解密 {@link DecryptRequest} {@link DecryptResponse} */

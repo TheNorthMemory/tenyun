@@ -548,10 +548,10 @@ declare interface DescribeBusinessResourceData {
 
 /** 业务资源分页返回对象 */
 declare interface DescribeBusinessResourcePageRsp {
-  /** 业务资源列表数据对象集合 */
-  Items?: DescribeBusinessResourceData[] | null;
   /** 分页公共对象 */
   Page?: Paging | null;
+  /** 业务资源列表数据对象集合 */
+  Items?: DescribeBusinessResourceData[] | null;
 }
 
 /** 业务响应数据 */
@@ -1705,6 +1705,26 @@ declare interface CreateBusinessResourceRequest {
   ServiceAddress: string;
   /** 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位) */
   DirectConn?: number;
+  /** 连通性检查开关，0-关闭 1-开启，默认1(只支持32位) */
+  ConnectivityCheckSwitch?: number;
+  /** 连通性检查测试间隔数值，最小为1，默认1(只支持32位) */
+  ConnectivityCheckInterval?: number;
+  /** 连通性检查测试间隔单位 minutes/hours/days，默认hours */
+  ConnectivityCheckIntervalUnit?: string;
+  /** 资源网络类型：1-内网资源 2-外网资源，默认1 */
+  ServiceNetwork?: number;
+  /** 是否启用L3网络：1-不启用 2-启用，默认1 */
+  WireGuardTunnel?: number;
+  /** 资源描述 */
+  Description?: string;
+  /** URL审计开关：0-关闭 1-开启，默认0枚举值：0： 关闭1： 开启 */
+  URLAuditState?: number;
+  /** URL审计证书ID列表，多个用分号分隔 */
+  URLAuditId?: string;
+  /** URL审计路径，多个用分号分隔 */
+  URLPath?: string;
+  /** 证书Id */
+  SSLCertId?: string;
 }
 
 declare interface CreateBusinessResourceResponse {
@@ -1983,18 +2003,18 @@ declare interface DescribeAggrSoftDeviceListResponse {
 }
 
 declare interface DescribeBusinessResourcesRequest {
-  /** 资源模块Id */
-  AreaId?: number;
-  /** 搜索的业务资源名称 */
-  ServiceName?: string;
-  /** 获取业务资源列表的开始时间，时间格式：2006-01-02 */
-  StartTime?: string;
-  /** 搜索关键字 */
-  Keywords?: string;
-  /** 获取业务资源列表的结束时间，时间格式：2006-01-02 */
-  EndTime?: string;
   /** 滤条件、分页参数。分页内容不传，默认获取第1页，10条数据排序条件CreateTime - string - 是否必填：否 - 排序支持：是 - 按业务资源创建时间排序。Levels - int - 是否必填：否 - 排序支持：是 - 按业务资源优先级排序。ReachableState - int - 是否必填：否 - 排序支持：是 - 按业务资源连通性排序(私有化版本不支持)。 */
   Condition?: Condition;
+  /** 资源模块Id */
+  AreaId?: number;
+  /** 服务名称 */
+  ServiceName?: string;
+  /** 搜索关键字 */
+  Keywords?: string;
+  /** 获取业务资源列表的开始时间，时间格式：2006-01-02 */
+  StartTime?: string;
+  /** 获取业务资源列表的结束时间，时间格式：2006-01-02 */
+  EndTime?: string;
   /** 资源类型 */
   AccessType?: string;
   /** web资源前端地址 */
@@ -2003,7 +2023,7 @@ declare interface DescribeBusinessResourcesRequest {
 
 declare interface DescribeBusinessResourcesResponse {
   /** 业务资源分页返回对象 */
-  Data: DescribeBusinessResourcePageRsp | null;
+  Data?: DescribeBusinessResourcePageRsp | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2493,6 +2513,24 @@ declare interface ModifyBusinessResourceRequest {
   ServiceAddress: string;
   /** 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位) */
   DirectConn?: number;
+  /** 连通性检查开关，0-关闭 1-开启，默认1(只支持32位) */
+  ConnectivityCheckSwitch?: number;
+  /** 连通性检查测试间隔数值，最小为1，默认1(只支持32位) */
+  ConnectivityCheckInterval?: number;
+  /** 连通性检查测试间隔单位 minutes/hours/days，默认hours */
+  ConnectivityCheckIntervalUnit?: string;
+  /** 资源网络类型：1-内网资源 2-外网资源，默认1 */
+  ServiceNetwork?: number;
+  /** 是否启用L3网络：1-不启用 2-启用，默认1 */
+  WireGuardTunnel?: number;
+  /** 资源描述 */
+  Description?: string;
+  /** URL审计开关：0-关闭 1-开启，默认0 */
+  URLAuditState?: number;
+  /** URL审计证书ID列表，多个用分号分隔 */
+  URLAuditId?: string;
+  /** URL审计路径，多个用分号分隔 */
+  URLPath?: string;
 }
 
 declare interface ModifyBusinessResourceResponse {

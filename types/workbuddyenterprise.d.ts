@@ -114,6 +114,14 @@ declare interface BuiltinModel {
   SupportsToolCall?: boolean | null;
   /** 是否支持视觉（图片输入） */
   SupportsImages?: boolean | null;
+  /** 模型是否支持思考。仅用于展示；能否配置思考强度以 ThinkingLevels 和 CanDisableThinking 为准 */
+  SupportsThinking?: boolean | null;
+  /** 可选的思考强度，取值：MINIMAL、LOW、MEDIUM、HIGH、XHIGH、MAX，数组顺序即展示顺序。不包含「关闭」，空数组表示不支持调整强度。在 Agent 版本 Manifest 中配置 thinking.level 时使用对应的小写值 */
+  ThinkingLevels?: string[] | null;
+  /** 模型默认的思考强度，取值同 ThinkingLevels；空字符串表示未声明。Agent 版本 Manifest 未配置 thinking 时按模型默认档位运行 */
+  DefaultThinkingLevel?: string | null;
+  /** 是否支持关闭思考。为 true 时，可在 Agent 版本 Manifest 中配置 thinking.level 为 disabled */
+  CanDisableThinking?: boolean | null;
   /** 模型中文描述 */
   DescriptionZh?: string | null;
   /** 模型英文描述 */
@@ -236,6 +244,8 @@ declare interface ExternalAgentInfo {
   IconUrl?: string | null;
   /** 外部 agent card 声明的版本号 */
   A2AVersion?: string | null;
+  /** 子 Agent 的最新版本名，返回版本存储名（default / test-N / prod-N），非 V1/V2 展示名。取值规则：有正式版本（prod）时取最新 prod，否则取最新 test，再否则取 default。仅企业 Agent 来源返回（其 A2AVersion 恒为 default）；其他来源或查询失败时不返回。注意：不代表 A2A 调用时实际执行的版本 */
+  LatestVersionName?: string | null;
   /** A2A card skills 集合 */
   A2ASkillSet?: A2ASkillItem[] | null;
 }
@@ -290,6 +300,18 @@ declare interface MessageEventToolCall {
   DurationMs?: number | null;
   /** 调用开始时间（RFC3339 格式） */
   StartedAt?: string | null;
+  /** 本次调用对应的业务专家 ID。 */
+  ExpertId?: string;
+  /** 本次调用对应的专家名称。 */
+  ExpertName?: string;
+  /** 执行时解析到的专家资源版本。 */
+  ExpertVersion?: string;
+  /** CBC 子代理执行实例 ID，可用于查询该次专家调用的消息事件。 */
+  SubAgentId?: string;
+  /** CBC 子代理定义名称。 */
+  SubAgentName?: string;
+  /** 父会话中触发本次子代理执行的工具调用 ID。 */
+  ParentToolCallId?: string;
 }
 
 /** 路由项 */
@@ -753,7 +775,7 @@ declare interface DescribeConnectorListResponse {
 declare interface DescribeExpertListRequest {
   /** 专家来源，必填：BUILTIN（内置）/ CUSTOM（自建） */
   Source: string;
-  /** 标准过滤条件：ExpertId（精确，多值 OR，携带即按 ID 批量查询，忽略分页）/ Keyword（模糊） */
+  /** 标准过滤条件：ExpertId（精确，多值 OR，携带即按 ID 批量查询，忽略分页）/ Keyword（模糊）/ PublishStatus（DRAFT、PUBLISHED、ALL，仅 CUSTOM）/ ExpertType（AGENT 普通专家、TEAM 专家团）。ExpertType 只允许一个过滤条件且 Values 必须仅含一个值，不传则不增加形态过滤；可与 ExpertId 组合取交集，分页总数 TotalCount 为过滤后的匹配数。专家选择列表建议传 {"Name":"ExpertType","Values":["AGENT"]}。CAPI 的 CUSTOM 目录仅有普通专家，按 TEAM 过滤返回空集。 */
   Filters?: Filter[];
   /** 偏移量，从 0 开始，默认 0（按 ID 批量查询时忽略） */
   Offset?: number;
@@ -768,6 +790,8 @@ declare interface DescribeExpertListResponse {
   ExpertSet?: ExpertItem[];
   /** 全局计数 */
   Counts?: ExpertCounts | null;
+  /** Agent 可绑定的专家数量上限，当前默认值为 5。 */
+  MaxBindings?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -837,6 +861,8 @@ declare interface DescribeMessageEventListRequest {
   Limit?: number;
   /** 过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系 */
   Filters?: Filter[];
+  /**  */
+  SubAgentId?: string;
 }
 
 declare interface DescribeMessageEventListResponse {

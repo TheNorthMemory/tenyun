@@ -68,6 +68,8 @@ declare interface DescribeCloudDedicatedZoneHostsRequest {
 declare interface DescribeCloudDedicatedZoneHostsResponse {
   /** 返回Host和Host上部署的实例信息之间的关系 */
   CloudDedicatedZoneHostsInfoSet?: CloudDedicatedZoneHostsInfo[];
+  /** 母机总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

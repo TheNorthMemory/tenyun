@@ -87,6 +87,7 @@ import Csip, { Versions as CsipVersions } from "./csip";
 import Csxg, { Versions as CsxgVersions } from "./csxg";
 import Ctem, { Versions as CtemVersions } from "./ctem";
 import Ctsdb, { Versions as CtsdbVersions } from "./ctsdb";
+import Cvd, { Versions as CvdVersions } from "./cvd";
 import Cvm, { Versions as CvmVersions } from "./cvm";
 import Cwp, { Versions as CwpVersions } from "./cwp";
 import Cws, { Versions as CwsVersions } from "./cws";
@@ -354,6 +355,7 @@ export declare type SERVICE_VERSIONS = {
   csxg: CsxgVersions,
   ctem: CtemVersions,
   ctsdb: CtsdbVersions,
+  cvd: CvdVersions,
   cvm: CvmVersions,
   cwp: CwpVersions,
   cws: CwsVersions,
@@ -721,6 +723,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   ctem: Ctem,
   /** {@link Ctsdb 时序数据库 CTSDB} */
   ctsdb: Ctsdb,
+  /** {@link Cvd 云桌面} */
+  cvd: Cvd,
   /** {@link Cvm 云服务器} */
   cvm: Cvm,
   /** {@link Cwp 主机安全} */

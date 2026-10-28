@@ -1186,6 +1186,34 @@ declare interface MongoDBProcessList {
   Data?: MongoDBProcessItem[] | null;
 }
 
+/** MongoDB 产品库级空间对象项，描述单个数据库的空间使用统计信息。 */
+declare interface MongoDBSchemaSpaceItem {
+  /** 数据库名。 */
+  Db?: string | null;
+  /** 数据采集时间戳（毫秒）。 */
+  Timestamp?: number | null;
+  /** 磁盘占用大小（字节）。 */
+  SizeOnDisk?: number | null;
+  /** 库级数据大小（字节）。 */
+  Size?: number | null;
+  /** 库级平均文档大小（字节）。 */
+  AvgObjSize?: number | null;
+  /** 库级文档数量。 */
+  Count?: number | null;
+  /** 库级存储大小（字节）。 */
+  StorageSize?: number | null;
+  /** 库级索引总大小（字节）。 */
+  TotalIndexSize?: number | null;
+  /** 库级已分配未使用空间（字节）。 */
+  DataFree?: number | null;
+  /** 库级碎片率（百分比字符串）。 */
+  FragRatio?: string | null;
+  /** 库级可复用文件空间（字节）。 */
+  FileReuseBytes?: number | null;
+  /** 库空间占比（百分比字符串）。 */
+  DatabaseRatio?: string | null;
+}
+
 /** MongoDB 产品集合级空间对象项，包含顶层标识字段与嵌套 Collection 明细。 */
 declare interface MongoDBTableSpaceItem {
   /** 应用 Id（AppId）。 */
@@ -3994,6 +4022,32 @@ declare interface DescribeTopSpaceSchemasResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTopSpaceSchemasV2Request {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 服务产品类型，支持值包括：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）、dcdb（TDSQL MySQL 版）、tdsql（TDSQL）、mariadb（云数据库 MariaDB）。 */
+  Product: string;
+  /** 查询日期，格式：yyyy-MM-dd。默认当天。 */
+  Date?: string;
+  /** 排序字段。MySQL/PG/TDSQL 系列支持：DataLength/IndexLength/TotalLength/DataFree/FragRatio/TableRows，默认 DataLength。MongoDB 支持：StorageSize/Size/AvgObjSize/Count/TotalIndexSize/DataFree，默认 StorageSize。 */
+  SortBy?: string;
+  /** 返回数量，默认20，最大100。 */
+  Limit?: number;
+}
+
+declare interface DescribeTopSpaceSchemasV2Response {
+  /** MySQL/PG/TDSQL 系列产品库级空间对象列表。当产品为 mysql/cynosdb/tdsql/dcdb/mariadb/postgres 时返回。库级返回项中不包含 TableName/Engine 字段。 */
+  MysqlObjects?: MysqlSpaceObjectItem[] | null;
+  /** PostgreSQL 产品库级空间对象列表。当产品为 postgres 时返回。字段语义与 MySQL 不同：使用 RelationSize / TableSize / IndexSize / TotalRelationSize / TableBloat 等 PG 特有指标。库级返回项中不包含 TableSchema/TableName 字段。 */
+  PostgresObjects?: PostgresSpaceObjectItem[] | null;
+  /** MongoDB 产品库级空间对象列表。当产品为 mongodb 时返回。 */
+  MongodbObjects?: MongoDBSchemaSpaceItem[] | null;
+  /** 数据采集时间戳（秒）。 */
+  Timestamp?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTopSpaceTableTimeSeriesRequest {
   /** 实例 ID 。 */
   InstanceId: string;
@@ -5647,6 +5701,8 @@ declare interface Dbbrain {
   DescribeTopSpaceSchemaTimeSeries(data: DescribeTopSpaceSchemaTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceSchemaTimeSeriesResponse>;
   /** 获取Top库的空间统计信息 {@link DescribeTopSpaceSchemasRequest} {@link DescribeTopSpaceSchemasResponse} */
   DescribeTopSpaceSchemas(data: DescribeTopSpaceSchemasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceSchemasResponse>;
+  /** 查询库级空间 Top 对象接口 {@link DescribeTopSpaceSchemasV2Request} {@link DescribeTopSpaceSchemasV2Response} */
+  DescribeTopSpaceSchemasV2(data: DescribeTopSpaceSchemasV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceSchemasV2Response>;
   /** 获取Top表在指定时间段内的每日空间统计信息 {@link DescribeTopSpaceTableTimeSeriesRequest} {@link DescribeTopSpaceTableTimeSeriesResponse} */
   DescribeTopSpaceTableTimeSeries(data: DescribeTopSpaceTableTimeSeriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopSpaceTableTimeSeriesResponse>;
   /** 获取Top表的空间统计信息 {@link DescribeTopSpaceTablesRequest} {@link DescribeTopSpaceTablesResponse} */
