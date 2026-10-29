@@ -1426,6 +1426,20 @@ declare interface ModifyDBCustomNodeTagsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBCustomNodeTypeRequest {
+  /** 节点ID */
+  NodeId: string;
+  /** 节点机型 */
+  NodeType: string;
+}
+
+declare interface ModifyDBCustomNodeTypeResponse {
+  /** 修改节点配置的任务ID */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBCustomNodesDisasterRecoverGroupRequest {
   /** 节点ID入参限制：单次数量上限为100 */
   NodeIds: string[];
@@ -1450,6 +1464,20 @@ declare interface ModifyInstanceNameRequest {
 }
 
 declare interface ModifyInstanceNameResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RebootDBCustomNodesRequest {
+  /** 节点 ID 列表入参限制：最多支持 100 个 */
+  NodeIds: string[];
+  /** 关机类型枚举值：SOFT： 软关机HARD： 硬关机SOFT_FIRST： 优先软关机，失败再执行硬关机默认值：SOFT */
+  StopType?: string;
+}
+
+declare interface RebootDBCustomNodesResponse {
+  /** 任务ID */
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1486,6 +1514,66 @@ declare interface RenewDBCustomNodeRequest {
 }
 
 declare interface RenewDBCustomNodeResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResetDBCustomNodeRequest {
+  /** 节点ID参数格式：dbcn-hq98qjym */
+  NodeId: string;
+  /** 实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。 */
+  LoginSettings: LoginSettings;
+  /** 重设的操作系统镜像ID取值参考：可通过"DescribeDBCustomImages"接口获取支持的镜像。 */
+  ImageId?: string;
+  /** 重装系统时，可以指定修改节点的主机名。入参限制：- 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。Windows ：主机名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。Linux：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。注意：节点在没有加入到集群之前才支持修改主机 HostName。 */
+  HostName?: string;
+}
+
+declare interface ResetDBCustomNodeResponse {
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ResizeDBCustomNodeDiskRequest {
+  /** 节点ID */
+  NodeId: string;
+  /** 节点磁盘ID */
+  DiskId: string;
+  /** 调整后的磁盘容量大小单位：GB必须大于当前硬盘大小。系统盘小于2048，数据盘小于32000 */
+  DiskSize: number;
+}
+
+declare interface ResizeDBCustomNodeDiskResponse {
+  /** 调整节点磁盘容量的任务ID */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StartDBCustomNodesRequest {
+  /** 节点 ID 列表入参限制：最多支持 100 个 */
+  NodeIds: string[];
+}
+
+declare interface StartDBCustomNodesResponse {
+  /** 任务ID */
+  TaskId?: number | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopDBCustomNodesRequest {
+  /** 节点 ID 列表入参限制：最多支持 100 个 */
+  NodeIds: string[];
+  /** 关机类型枚举值：SOFT： 软关机HARD： 硬关机SOFT_FIRST： 优先软关机，失败再执行硬关机默认值：SOFT */
+  StopType?: string;
+}
+
+declare interface StopDBCustomNodesResponse {
+  /** 任务ID */
+  TaskId?: number | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1571,14 +1659,26 @@ declare interface Dbdc {
   ModifyDBCustomNodeSecurityGroups(data: ModifyDBCustomNodeSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeSecurityGroupsResponse>;
   /** 修改节点绑定的标签 {@link ModifyDBCustomNodeTagsRequest} {@link ModifyDBCustomNodeTagsResponse} */
   ModifyDBCustomNodeTags(data: ModifyDBCustomNodeTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeTagsResponse>;
+  /** 修改节点配置 {@link ModifyDBCustomNodeTypeRequest} {@link ModifyDBCustomNodeTypeResponse} */
+  ModifyDBCustomNodeType(data: ModifyDBCustomNodeTypeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodeTypeResponse>;
   /** 修改节点的置放群组 {@link ModifyDBCustomNodesDisasterRecoverGroupRequest} {@link ModifyDBCustomNodesDisasterRecoverGroupResponse} */
   ModifyDBCustomNodesDisasterRecoverGroup(data: ModifyDBCustomNodesDisasterRecoverGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBCustomNodesDisasterRecoverGroupResponse>;
   /** 修改独享集群名称 {@link ModifyInstanceNameRequest} {@link ModifyInstanceNameResponse} */
   ModifyInstanceName(data: ModifyInstanceNameRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceNameResponse>;
+  /** 重启节点 {@link RebootDBCustomNodesRequest} {@link RebootDBCustomNodesResponse} */
+  RebootDBCustomNodes(data: RebootDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootDBCustomNodesResponse>;
   /** 移出集群中的节点 {@link RemoveNodesFromDBCustomClusterRequest} {@link RemoveNodesFromDBCustomClusterResponse} */
   RemoveNodesFromDBCustomCluster(data: RemoveNodesFromDBCustomClusterRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveNodesFromDBCustomClusterResponse>;
   /** 续费或解隔离节点 {@link RenewDBCustomNodeRequest} {@link RenewDBCustomNodeResponse} */
   RenewDBCustomNode(data: RenewDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<RenewDBCustomNodeResponse>;
+  /** 重装节点操作系统 {@link ResetDBCustomNodeRequest} {@link ResetDBCustomNodeResponse} */
+  ResetDBCustomNode(data: ResetDBCustomNodeRequest, config?: AxiosRequestConfig): AxiosPromise<ResetDBCustomNodeResponse>;
+  /** 调整节点磁盘容量 {@link ResizeDBCustomNodeDiskRequest} {@link ResizeDBCustomNodeDiskResponse} */
+  ResizeDBCustomNodeDisk(data: ResizeDBCustomNodeDiskRequest, config?: AxiosRequestConfig): AxiosPromise<ResizeDBCustomNodeDiskResponse>;
+  /** 开机节点 {@link StartDBCustomNodesRequest} {@link StartDBCustomNodesResponse} */
+  StartDBCustomNodes(data: StartDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<StartDBCustomNodesResponse>;
+  /** 关机节点 {@link StopDBCustomNodesRequest} {@link StopDBCustomNodesResponse} */
+  StopDBCustomNodes(data: StopDBCustomNodesRequest, config?: AxiosRequestConfig): AxiosPromise<StopDBCustomNodesResponse>;
 }
 
 export declare type Versions = ["2020-10-29"];

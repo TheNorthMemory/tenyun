@@ -1684,6 +1684,16 @@ declare interface RemoveConsoleUsersRsp {
   FailItems?: CommonFailItem[];
 }
 
+/** 批量移除工作空间用户响应 */
+declare interface RemoveWorkspaceUsersRsp {
+  /** 请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准 */
+  Status?: boolean;
+  /** 移除成功的用户 UIN 列表 */
+  SuccessUins?: string[];
+  /** 失败项列表（Item 为用户 UIN，FailReason 为失败原因） */
+  FailItems?: CommonFailItem[];
+}
+
 /** 资源组信息 */
 declare interface ResourceGroupInfo {
   /** 资源组ID */
@@ -2132,6 +2142,12 @@ declare interface UpdateWorkflowRsp {
   Status?: boolean | null;
 }
 
+/** 修改工作空间用户组标签响应 */
+declare interface UpdateWorkspaceGroupsTagsRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
+}
+
 /** 更新工作空间角色结果 */
 declare interface UpdateWorkspaceRoleResult {
   /** 更新工作空间角色是否成功 */
@@ -2140,6 +2156,12 @@ declare interface UpdateWorkspaceRoleResult {
 
 /** 修改工作空间响应 */
 declare interface UpdateWorkspaceRsp {
+  /** 操作是否成功 */
+  Status?: boolean;
+}
+
+/** 修改工作空间用户标签响应 */
+declare interface UpdateWorkspaceUsersTagsRsp {
   /** 操作是否成功 */
   Status?: boolean;
 }
@@ -4102,6 +4124,20 @@ declare interface RemoveWorkspaceGroupsResponse {
   RequestId?: string;
 }
 
+declare interface RemoveWorkspaceUsersRequest {
+  /** 必填，待移除的用户 UIN 列表，用户 UIN 可通过 ListWorkspaceUsers 接口获取，单次最多10个 */
+  UserUins: string[];
+  /** 工作空间ID */
+  WorkspaceId: string;
+}
+
+declare interface RemoveWorkspaceUsersResponse {
+  /** 批量移除工作空间用户结果 */
+  Data?: RemoveWorkspaceUsersRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RerunWorkflowRunRequest {
   /** 工作空间ID，可通过 ListWorkspaces 获取。必填 */
   WorkspaceId: string;
@@ -4576,6 +4612,22 @@ declare interface UpdateWorkspaceGroupsRolesResponse {
   RequestId?: string;
 }
 
+declare interface UpdateWorkspaceGroupsTagsRequest {
+  /** 必填，用户组ID列表，单次最多100个；可通过 ListWorkspaceGroups 接口获取 */
+  GroupIds: string[];
+  /** 必填，工作空间ID */
+  WorkspaceId: string;
+  /** 标签列表，覆盖写用户组的标签；传即覆盖更新，不传或为空则清除全部标签 */
+  Tags?: UserTagInfo[];
+}
+
+declare interface UpdateWorkspaceGroupsTagsResponse {
+  /** 修改工作空间用户组标签响应 */
+  Data?: UpdateWorkspaceGroupsTagsRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateWorkspaceRequest {
   /** 工作空间ID */
   WorkspaceId: string;
@@ -4620,6 +4672,22 @@ declare interface UpdateWorkspaceUsersRolesRequest {
 declare interface UpdateWorkspaceUsersRolesResponse {
   /** 结果 */
   Data?: PlatformStatusRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateWorkspaceUsersTagsRequest {
+  /** 必填，用户UIN列表，单次最多100个 */
+  UserUins: string[];
+  /** 必填，工作空间ID */
+  WorkspaceId: string;
+  /** 待更新的标签集合（标签维度及标签值通过 ID 指定），覆盖更新语义：传入后将被覆盖为目标用户的全部直绑标签，不传或传空数组则清空目标用户的所有直绑标签。每个元素中 TagId 必填，Values[].TagValueId 必填；传入的 TagValue、Source、GroupNames 服务端不读取，无需传入。标签维度与标签值可先通过 CreateTags / CreateTagValues 创建，再通过 ListTags 获取 ID（TagId 取 Items[].TagId，TagValueId 取 Items[].TagValues[].TagValueId）。 */
+  Tags?: UserTagInfo[];
+}
+
+declare interface UpdateWorkspaceUsersTagsResponse {
+  /** 修改工作空间用户标签响应 */
+  Data?: UpdateWorkspaceUsersTagsRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4767,6 +4835,8 @@ declare interface Databuddy {
   RemoveConsoleUsers(data: RemoveConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveConsoleUsersResponse>;
   /** 移除工作空间用户组 {@link RemoveWorkspaceGroupsRequest} {@link RemoveWorkspaceGroupsResponse} */
   RemoveWorkspaceGroups(data: RemoveWorkspaceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkspaceGroupsResponse>;
+  /** 批量移除工作空间用户 {@link RemoveWorkspaceUsersRequest} {@link RemoveWorkspaceUsersResponse} */
+  RemoveWorkspaceUsers(data: RemoveWorkspaceUsersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveWorkspaceUsersResponse>;
   /** 重跑工作流 {@link RerunWorkflowRunRequest} {@link RerunWorkflowRunResponse} */
   RerunWorkflowRun(data: RerunWorkflowRunRequest, config?: AxiosRequestConfig): AxiosPromise<RerunWorkflowRunResponse>;
   /** 运行工作流 {@link RunWorkflowRequest} {@link RunWorkflowResponse} */
@@ -4813,10 +4883,14 @@ declare interface Databuddy {
   UpdateWorkspace(data: UpdateWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceResponse>;
   /** 更新工作空间用户组角色 {@link UpdateWorkspaceGroupsRolesRequest} {@link UpdateWorkspaceGroupsRolesResponse} */
   UpdateWorkspaceGroupsRoles(data: UpdateWorkspaceGroupsRolesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceGroupsRolesResponse>;
+  /** 修改工作空间用户组标签 {@link UpdateWorkspaceGroupsTagsRequest} {@link UpdateWorkspaceGroupsTagsResponse} */
+  UpdateWorkspaceGroupsTags(data: UpdateWorkspaceGroupsTagsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceGroupsTagsResponse>;
   /** 更新工作空间角色 {@link UpdateWorkspaceRoleRequest} {@link UpdateWorkspaceRoleResponse} */
   UpdateWorkspaceRole(data: UpdateWorkspaceRoleRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceRoleResponse>;
   /** 修改工作空间用户角色 {@link UpdateWorkspaceUsersRolesRequest} {@link UpdateWorkspaceUsersRolesResponse} */
   UpdateWorkspaceUsersRoles(data: UpdateWorkspaceUsersRolesRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceUsersRolesResponse>;
+  /** 修改工作空间用户标签 {@link UpdateWorkspaceUsersTagsRequest} {@link UpdateWorkspaceUsersTagsResponse} */
+  UpdateWorkspaceUsersTags(data: UpdateWorkspaceUsersTagsRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateWorkspaceUsersTagsResponse>;
 }
 
 export declare type Versions = ["2026-07-15"];

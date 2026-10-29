@@ -3694,6 +3694,10 @@ declare interface Space {
   Description?: string;
   /** 空间权限 */
   PermissionIdList?: string[];
+  /** 创建时间参数格式：秒时间戳 */
+  CreateTime?: string;
+  /** 更新时间参数格式：秒时间戳 */
+  UpdateTime?: string;
 }
 
 /** 特殊状态信息 */

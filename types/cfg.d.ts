@@ -86,6 +86,14 @@ declare interface ActionLibraryListResult {
   ObjectTypeId?: number;
 }
 
+/** 筛选符合条件的Agent */
+declare interface AgentFilter {
+  /** 查询key */
+  Name?: string;
+  /** 查询value */
+  Value?: string[];
+}
+
 /** 应用性能监控产品中应用信息 */
 declare interface ApmServiceInfo {
   /** 业务ID */
@@ -106,6 +114,20 @@ declare interface DescribePolicy {
   TaskPolicyRule: string;
   /** 护栏策略生效处理策略 1:顺序执行，2:暂停 */
   TaskPolicyDealType: number;
+}
+
+/** 添加探针的参数 */
+declare interface InstanceAgent {
+  /** 添加InstanceAgent的参数名 */
+  InstanceAgentItem?: InstanceAgentItem[] | null;
+}
+
+/** 添加探针入参 */
+declare interface InstanceAgentItem {
+  /** 添加参数Key的名称 */
+  Name?: string | null;
+  /** 添加参数的Value */
+  Value?: string | null;
 }
 
 /** 对象类型 */
@@ -812,6 +834,28 @@ declare interface DescribeActionLibraryListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeInstanceAgentListRequest {
+  /** 1:CVM2.TKE */
+  InstanceType: number;
+  /** 筛选条件 */
+  Filters?: AgentFilter[];
+  /** 页数 */
+  Page?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 查询探针场景 */
+  AgentScene?: number;
+}
+
+declare interface DescribeInstanceAgentListResponse {
+  /** 返回InstnaceAgent详情 */
+  InstanceAgent?: InstanceAgent[];
+  /** 总条目数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeObjectTypeListRequest {
   /** 所支持的对象0：全平台产品1：平台接入的对象2：应用所支持的部分对象 */
   SupportType?: number;
@@ -986,6 +1030,20 @@ declare interface ExecuteTaskResponse {
   RequestId?: string;
 }
 
+declare interface InstallAgentOpenApiRequest {
+  /** 1:CVM2:TKE */
+  InstanceType: number;
+  /** 安装探针实例列表 */
+  InstanceIds: string[];
+}
+
+declare interface InstallAgentOpenApiResponse {
+  /** 状态异常提示用户 */
+  Message?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyTaskRunStatusRequest {
   /** 任务ID */
   TaskId: number;
@@ -1028,6 +1086,20 @@ declare interface TriggerPolicyResponse {
   RequestId?: string;
 }
 
+declare interface UninstallAgentOpenApiRequest {
+  /** 1: CVM2: TKE */
+  InstanceType: number;
+  /** 需要卸载的instance_id */
+  InstanceIds: string[];
+}
+
+declare interface UninstallAgentOpenApiResponse {
+  /** 提示用户状态不正确无法安装字段 */
+  Message?: string[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cfg 智能顾问-混沌演练} */
 declare interface Cfg {
   (): Versions;
@@ -1043,6 +1115,8 @@ declare interface Cfg {
   DescribeActionFieldConfigList(data: DescribeActionFieldConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionFieldConfigListResponse>;
   /** 获取动作库列表 {@link DescribeActionLibraryListRequest} {@link DescribeActionLibraryListResponse} */
   DescribeActionLibraryList(data: DescribeActionLibraryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeActionLibraryListResponse>;
+  /** 查询探针列表-新 {@link DescribeInstanceAgentListRequest} {@link DescribeInstanceAgentListResponse} */
+  DescribeInstanceAgentList(data: DescribeInstanceAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAgentListResponse>;
   /** 查询对象类型列表 {@link DescribeObjectTypeListRequest} {@link DescribeObjectTypeListResponse} */
   DescribeObjectTypeList(data?: DescribeObjectTypeListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeObjectTypeListResponse>;
   /** 查询任务 {@link DescribeTaskRequest} {@link DescribeTaskResponse} */
@@ -1061,10 +1135,14 @@ declare interface Cfg {
   ExecuteTask(data: ExecuteTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskResponse>;
   /** 执行任务动作实例 {@link ExecuteTaskInstanceRequest} {@link ExecuteTaskInstanceResponse} */
   ExecuteTaskInstance(data: ExecuteTaskInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ExecuteTaskInstanceResponse>;
+  /** 安装混沌探针 {@link InstallAgentOpenApiRequest} {@link InstallAgentOpenApiResponse} */
+  InstallAgentOpenApi(data: InstallAgentOpenApiRequest, config?: AxiosRequestConfig): AxiosPromise<InstallAgentOpenApiResponse>;
   /** 修改任务运行状态 {@link ModifyTaskRunStatusRequest} {@link ModifyTaskRunStatusResponse} */
   ModifyTaskRunStatus(data: ModifyTaskRunStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTaskRunStatusResponse>;
   /** 触发护栏策略 {@link TriggerPolicyRequest} {@link TriggerPolicyResponse} */
   TriggerPolicy(data: TriggerPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerPolicyResponse>;
+  /** 卸载混沌探针 {@link UninstallAgentOpenApiRequest} {@link UninstallAgentOpenApiResponse} */
+  UninstallAgentOpenApi(data: UninstallAgentOpenApiRequest, config?: AxiosRequestConfig): AxiosPromise<UninstallAgentOpenApiResponse>;
 }
 
 export declare type Versions = ["2021-08-20"];

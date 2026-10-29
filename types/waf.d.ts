@@ -5350,6 +5350,16 @@ declare interface DeleteLLMKeywordLibraryResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLLMSdkAccessRequest {
+  /** 要删除的应用id */
+  Domain: string;
+}
+
+declare interface DeleteLLMSdkAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteOwaspRuleStatusRequest {
   /** 域名 */
   Domain: string;
@@ -9593,6 +9603,8 @@ declare interface Waf {
   DeleteLLMContentRule(data: DeleteLLMContentRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLLMContentRuleResponse>;
   /** 删除关键词列表 {@link DeleteLLMKeywordLibraryRequest} {@link DeleteLLMKeywordLibraryResponse} */
   DeleteLLMKeywordLibrary(data?: DeleteLLMKeywordLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLLMKeywordLibraryResponse>;
+  /** 删除llm-sdk接入信息 {@link DeleteLLMSdkAccessRequest} {@link DeleteLLMSdkAccessResponse} */
+  DeleteLLMSdkAccess(data: DeleteLLMSdkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLLMSdkAccessResponse>;
   /** 删除用户自定义规则状态 {@link DeleteOwaspRuleStatusRequest} {@link DeleteOwaspRuleStatusResponse} */
   DeleteOwaspRuleStatus(data: DeleteOwaspRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteOwaspRuleStatusResponse>;
   /** 删除用户规则引擎白名单 {@link DeleteOwaspWhiteRuleRequest} {@link DeleteOwaspWhiteRuleResponse} */

@@ -722,14 +722,6 @@ declare interface FirmwareTaskInfo {
   FwType?: string;
 }
 
-/** 空闲检测配置信息。 */
-declare interface IdleResponseInfo {
-  /** 重试次数（1-3） */
-  RetryCount?: number;
-  /** 响应信息 */
-  Message?: string;
-}
-
 /** 实例信息公共实例过期时间 0001-01-01T00:00:00Z，公共实例是永久有效 */
 declare interface InstanceDetail {
   /** 实例ID */
@@ -1818,18 +1810,6 @@ declare interface TalkAgentInfo {
   EventCallbackConfig?: TalkEventCallbackConfig;
 }
 
-/** 基础配置信息。 */
-declare interface TalkBasicConfigInfo {
-  /** 系统提示词 */
-  SystemPrompt?: string;
-  /** 欢迎语，支持多个欢迎语随机切换，格式：字符串数组，JSON字符串。 */
-  GreetingMessage?: string;
-  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
-  DefaultVoiceType?: number;
-  /** 复刻音色ID，当不为空时，DefaultVoiceType为200000000 */
-  FastVoiceType?: string;
-}
-
 /** 对话行为配置 */
 declare interface TalkConversationConfig {
   /** 欢迎语 */
@@ -1840,24 +1820,6 @@ declare interface TalkConversationConfig {
   InterruptMode?: number;
   /** 打断词列表。AI 说话期间，仅当用户说出列表中的词才打断 AI；不会触发新的回复 */
   InterruptWordList?: string[];
-}
-
-/** 会话配置信息。 */
-declare interface TalkConversationConfigInfo {
-  /** 会话超时（秒） */
-  SessionTimeout?: number;
-  /** 允许打断 */
-  InterruptionEnabled?: boolean;
-  /** 最大上下文 */
-  MaxContextTokens?: number;
-  /** 空闲检测配置 */
-  IdleDetection?: TalkIdleDetectionConfigInfo;
-  /** 是否启用情绪识别 */
-  EmotionEnabled?: boolean;
-  /** 是否启用语义vad */
-  SemanticVADEnabled?: boolean;
-  /** 是否启用噪声过滤 */
-  NoiseFilterEnabled?: boolean;
 }
 
 /** 事件回调配置 */
@@ -1878,18 +1840,6 @@ declare interface TalkIOTTool {
   Parameters: string;
   /** 必填参数名列表，必须存在于Parameters.properties中 */
   Required?: string[];
-}
-
-/** 空闲检测信息。 */
-declare interface TalkIdleDetectionConfigInfo {
-  /** 是否启用 */
-  Enabled?: boolean;
-  /** 用户沉默多少秒后触发空闲回调 */
-  TimeoutSeconds?: number;
-  /** 最大重试次数（1-3） */
-  MaxRetries?: number;
-  /** 空闲响应 */
-  IdleResponses?: IdleResponseInfo[];
 }
 
 /** 大模型配置。基础对话必填；如使用平台默认能力，请显式设置 Type=default。 */
@@ -1916,82 +1866,10 @@ declare interface TalkLLMConfig {
   ADP?: ADPConfig;
 }
 
-/** LLM配置信息。 */
-declare interface TalkLLMConfigInfo {
-  /** 支持的LLM类型，openai-OPENAI格式。 */
-  LLMType?: string;
-  /** 是否开启 */
-  Enabled?: boolean;
-  /** 模型 */
-  Model?: string;
-  /** 是否开启 */
-  Streaming?: boolean;
-  /** 配置信息JSON字符串，根据`LLMType`进行不同的值匹配。例如`LLMType`是`openai`，`Config`值是`{\"ApiKey\":\"sk-09***\",\"ApiUrl\":\"base_url\",\"SystemPrompt\":\"你是一个语音助手\",\"Timeout\":30,\"History\":0,\"MetaInfo\":{\"productID\":\"test\"}}`## openai```{ "ApiKey": "sk-XXXXXXXXXXXX", "ApiUrl": "https://api.openai.com/v1", "SystemPrompt": "一个小小助手", "Timeout":20, "History":10, "MetaInfo":{}}``` */
-  Config?: string;
-  /** 温度 */
-  Temperature?: number;
-  /** 最大token数 */
-  MaxTokens?: number;
-  /** topP */
-  TopP?: number;
-  /** 工具ID列表 */
-  Tools?: string[];
-}
-
 /** 长期记忆配置。 */
 declare interface TalkMemoryConfig {
   /** 是否启用长期记忆；启用时需满足产品和运行时能力要求 */
   Enabled?: boolean;
-}
-
-/** Talk配置信息描述。 */
-declare interface TalkProductConfigInfo {
-  /** 产品ID */
-  ProductId?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-  /** 系统提示词 */
-  SystemPrompt?: string;
-  /** 欢迎语 */
-  GreetingMessage?: string;
-  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
-  VoiceType?: number;
-  /** 创建时间 */
-  CreateTime?: number;
-  /** 更新时间 */
-  UpdateTime?: number;
-}
-
-/** twetalk连接配置信息。 */
-declare interface TalkProductConfigV2Info {
-  /** UIN */
-  Uin?: number;
-  /** APPID */
-  AppId?: number;
-  /** 产品ID */
-  ProductId?: string;
-  /** 设备名称 */
-  DeviceName?: string;
-  /** 配置名称 */
-  ConfigName?: string;
-  /** 语言，默认zh；zh-中文；en-英文 */
-  TargetLanguage?: string;
-  /** 基础配置 */
-  BasicConfig?: TalkBasicConfigInfo;
-  /** 语音识别配置 */
-  STTConfig?: TalkSTTConfigInfo;
-  /** 大模型配置 */
-  LLMConfig?: TalkLLMConfigInfo;
-  /** 语音合成配置 */
-  TTSConfig?: TalkTTSConfigInfo;
-  /** 会话配置 */
-  ConversationConfig?: TalkConversationConfigInfo;
-  /** 版本号 */
-  Version?: number;
-  /** 创建时间，秒级时间戳 */
-  CreateTime?: number;
-  /** 更新时间，秒级时间戳 */
-  UpdateTime?: number;
 }
 
 /** 语音识别配置 */
@@ -2000,16 +1878,6 @@ declare interface TalkSTTConfig {
   Type: string;
   /** `Type=trtc` 时生效。整体省略表示全部使用 TRTC 默认值。 */
   TRTC?: TalkSTTTRTC;
-}
-
-/** STT配置信息。 */
-declare interface TalkSTTConfigInfo {
-  /** 支持的STT类型，tencent-腾讯；azure-亚马逊；deepgram-Deepgram;系统默认-tencent。 */
-  STTType?: string;
-  /** 是否开启 */
-  Enabled?: boolean;
-  /** 配置信息JSON字符串，根据STTType进行不同的值匹配。例如`STTType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"EngineType\":\"16k_zh\"}`## tencent```{ "AppId": 123456, "SecretId": "secretId*****", "SecretKey": "SecretKey****", "EngineType": "16k_zh"}```## azure```{ "Region": "", "EndpointId": "id", "Language": "zh-CN", "SubscriptionKey": "*****"}```## deepgram```{ "Model": "nova-2", "Language": "zh", "BaseUrl":"http://www.deepgram.com", "ApiKey": "SecretKey****"}``` */
-  Config?: string;
 }
 
 /** TRTC STT配置 */
@@ -2028,22 +1896,6 @@ declare interface TalkTTSConfig {
   Type: string;
   /** Flow TTS 的具体配置 */
   Flow?: TalkTTSFlow;
-}
-
-/** TTS配置信息。 */
-declare interface TalkTTSConfigInfo {
-  /** 支持的LLM类型，支持tencent-腾讯；azure-亚马逊；volcengine-火山引擎；elevenlabs-ELEVENLABS；minimax-MINIMAX；cartesia-CARTESIA；aliyun-阿里；系统默认-tencent。 */
-  TTSType?: string;
-  /** 是否开启 */
-  Enabled?: boolean;
-  /** 配置信息JSON字符串，根据`TTSType`进行不同的值匹配。例如`TTSType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"VoiceType\":10001}`## tencent```{ "AppId": 100203, "SecretId": "XXXX", "SecretKey": "XXXXX", "VoiceType":123456}```## azure```{ "SubscriptionKey": 100203, "Region": "ch-zn", "VoiceName": "XXXXX", "Language":"zh"}```## elevenlabs```{ "ModelId": 100203, "VoiceId": "ch-zn", "ApiKey": "XXXXX"}```## minimax```{ "Model":"xxxx", "ApiUrl": "346w34", "ApiKey": "xxx", "GroupId": "ion", "VoiceType":"xioawei"}```## cartesia```{ "Model":"xxxx", "ApiKey": "xxx", "VoiceId":"xioawei"}```## aliyun```{ "VoiceType": 100203, "RegionId": "XXXX", "ApiKey": "XXXXX"}```## volcengine```{ "AppId": "346w34", "AccessToken": "xxx", "ResourceId": "volc.bigasr.sauc.duration", "VoiceType":"xioawei"}``` */
-  Config?: string;
-  /** 温度 */
-  Speed?: number;
-  /** 最大token数 */
-  Volume?: number;
-  /** PITCH */
-  Pitch?: number;
 }
 
 /** Flow TTS 的具体配置 */
@@ -3426,52 +3278,6 @@ declare interface CreateTWeTalkAgentResponse {
   RequestId?: string;
 }
 
-declare interface CreateTWeTalkProductConfigRequest {
-  /** 产品ID */
-  ProductId: string;
-  /** 系统提示词 */
-  SystemPrompt: string;
-  /** 欢迎语 */
-  GreetingMessage: string;
-  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
-  VoiceType?: number;
-  /** 复刻音色 */
-  FastVoiceType?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-}
-
-declare interface CreateTWeTalkProductConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface CreateTWeTalkProductConfigV2Request {
-  /** 产品ID */
-  ProductId: string;
-  /** 设备名称 */
-  DeviceName?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-  /** 名称 */
-  ConfigName?: string;
-  /** 系统基础配置，当需要使用系统三段式配置时配置。 */
-  BasicConfig?: TalkBasicConfigInfo;
-  /** 自定义语音识别配置 */
-  STTConfig?: TalkSTTConfigInfo;
-  /** 自定义大模型配置 */
-  LLMConfig?: TalkLLMConfigInfo;
-  /** 语音合成配置 */
-  TTSConfig?: TalkTTSConfigInfo;
-  /** 会话配置 */
-  ConversationConfig?: TalkConversationConfigInfo;
-}
-
-declare interface CreateTWeTalkProductConfigV2Response {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface CreateTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -3738,20 +3544,6 @@ declare interface DeleteTWeTalkAgentRequest {
 }
 
 declare interface DeleteTWeTalkAgentResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DeleteTWeTalkProductConfigV2Request {
-  /** 产品ID */
-  ProductId: string;
-  /** 设备名称 */
-  DeviceName?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-}
-
-declare interface DeleteTWeTalkProductConfigV2Response {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5262,38 +5054,6 @@ declare interface DescribeTWeTalkAgentResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTWeTalkProductConfigRequest {
-  /** 产品ID */
-  ProductId: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-}
-
-declare interface DescribeTWeTalkProductConfigResponse {
-  /** 配置信息 */
-  Data?: TalkProductConfigInfo;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeTWeTalkProductConfigV2Request {
-  /** 产品ID */
-  ProductId: string;
-  /** 设备名称 */
-  DeviceName?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-  /** 是否脱敏 */
-  IncludeCredentials?: boolean;
-}
-
-declare interface DescribeTWeTalkProductConfigV2Response {
-  /** 配置信息 */
-  Data?: TalkProductConfigV2Info;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -5788,50 +5548,6 @@ declare interface GetTWeTalkActiveStatusRequest {
 declare interface GetTWeTalkActiveStatusResponse {
   /** 激活状态 */
   TalkActivationRecords?: TalkActivationStatusInfo[];
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetTWeTalkProductConfigListRequest {
-  /** 产品ID */
-  ProductId?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-  /** 页码 */
-  Offset?: number;
-  /** 偏移量，10-100 */
-  Limit?: number;
-}
-
-declare interface GetTWeTalkProductConfigListResponse {
-  /** 配置信息列表 */
-  Data?: TalkProductConfigInfo[];
-  /** 总数 */
-  Total?: number;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface GetTWeTalkProductConfigListV2Request {
-  /** 产品ID */
-  ProductId: string;
-  /** 设备名称 */
-  DeviceName?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-  /** 是否脱敏 */
-  IncludeCredentials?: boolean;
-  /** 页码 */
-  Offset?: number;
-  /** 每页数据大小， 10-100 */
-  Limit?: number;
-}
-
-declare interface GetTWeTalkProductConfigListV2Response {
-  /** 配置信息 */
-  Data?: TalkProductConfigV2Info[];
-  /** 总数 */
-  Total?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6882,52 +6598,6 @@ declare interface ModifyTWeTalkAgentResponse {
   RequestId?: string;
 }
 
-declare interface ModifyTWeTalkProductConfigRequest {
-  /** 产品ID */
-  ProductId: string;
-  /** 系统提示词 */
-  SystemPrompt?: string;
-  /** 欢迎语 */
-  GreetingMessage?: string;
-  /** 音色，支持的音色列表：100510000-阅读男声智逍遥；101001-情感女声智瑜；101002-通用女声智聆；101003-客服女声智美；101004-通用男声智云；101005-通用女声智莉；101006-助手女声智言；101008-客服女声智琪；101009-知性女声智芸；101010-通用男声智华；101011-新闻女声智燕；101012-新闻女声智丹；101013-新闻男声智辉；101014 -新闻男声智宁；101015-男童声智萌；101016-女童声智甜；101017-情感女声智蓉；101018-情感男声智靖；101019-粤语女声智彤。 */
-  VoiceType?: number;
-  /** 复刻音色 */
-  FastVoiceType?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-}
-
-declare interface ModifyTWeTalkProductConfigResponse {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface ModifyTWeTalkProductConfigV2Request {
-  /** 产品ID */
-  ProductId: string;
-  /** 设备名称 */
-  DeviceName?: string;
-  /** 支持的语言，zh-中文；en-英文；默认zh */
-  TargetLanguage?: string;
-  /** 名称 */
-  ConfigName?: string;
-  /** 系统基础配置，当需要使用系统三段式配置时配置。 */
-  BasicConfig?: TalkBasicConfigInfo;
-  /** 自定义语音识别配置 */
-  STTConfig?: TalkSTTConfigInfo;
-  /** 自定义大模型配置 */
-  LLMConfig?: TalkLLMConfigInfo;
-  /** 语音合成配置 */
-  TTSConfig?: TalkTTSConfigInfo;
-  /** 会话配置 */
-  ConversationConfig?: TalkConversationConfigInfo;
-}
-
-declare interface ModifyTWeTalkProductConfigV2Response {
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface ModifyTopicPolicyRequest {
   /** 产品ID */
   ProductId: string;
@@ -7745,10 +7415,6 @@ declare interface Iotexplorer {
   CreateTWeSeeSubscription(data: CreateTWeSeeSubscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeSeeSubscriptionResponse>;
   /** 创建TWeTalk智能体 {@link CreateTWeTalkAgentRequest} {@link CreateTWeTalkAgentResponse} */
   CreateTWeTalkAgent(data: CreateTWeTalkAgentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkAgentResponse>;
-  /** 新增TWeTalk连接配置信息 {@link CreateTWeTalkProductConfigRequest} {@link CreateTWeTalkProductConfigResponse} */
-  CreateTWeTalkProductConfig(data: CreateTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkProductConfigResponse>;
-  /** 新增TWeTalk连接产品配置v2版 {@link CreateTWeTalkProductConfigV2Request} {@link CreateTWeTalkProductConfigV2Response} */
-  CreateTWeTalkProductConfigV2(data: CreateTWeTalkProductConfigV2Request, config?: AxiosRequestConfig): AxiosPromise<CreateTWeTalkProductConfigV2Response>;
   /** 创建Topic {@link CreateTopicPolicyRequest} {@link CreateTopicPolicyResponse} */
   CreateTopicPolicy(data: CreateTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTopicPolicyResponse>;
   /** 创建规则 {@link CreateTopicRuleRequest} {@link CreateTopicRuleResponse} */
@@ -7791,8 +7457,6 @@ declare interface Iotexplorer {
   DeleteTWeSeeTasksByCondition(data: DeleteTWeSeeTasksByConditionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeSeeTasksByConditionResponse>;
   /** 删除TWeTalk Agent {@link DeleteTWeTalkAgentRequest} {@link DeleteTWeTalkAgentResponse} */
   DeleteTWeTalkAgent(data: DeleteTWeTalkAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkAgentResponse>;
-  /** 删除WeTalk连接产品配置v2版 {@link DeleteTWeTalkProductConfigV2Request} {@link DeleteTWeTalkProductConfigV2Response} */
-  DeleteTWeTalkProductConfigV2(data: DeleteTWeTalkProductConfigV2Request, config?: AxiosRequestConfig): AxiosPromise<DeleteTWeTalkProductConfigV2Response>;
   /** 删除Topic。 {@link DeleteTopicPolicyRequest} {@link DeleteTopicPolicyResponse} */
   DeleteTopicPolicy(data: DeleteTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTopicPolicyResponse>;
   /** 删除规则 {@link DeleteTopicRuleRequest} {@link DeleteTopicRuleResponse} */
@@ -7945,10 +7609,6 @@ declare interface Iotexplorer {
   DescribeTWeTalkAgentBinding(data?: DescribeTWeTalkAgentBindingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkAgentBindingResponse>;
   /** 查询智能体列表 {@link DescribeTWeTalkAgentListRequest} {@link DescribeTWeTalkAgentListResponse} */
   DescribeTWeTalkAgentList(data?: DescribeTWeTalkAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkAgentListResponse>;
-  /** 获取TWeTalk连接配置信息详情 {@link DescribeTWeTalkProductConfigRequest} {@link DescribeTWeTalkProductConfigResponse} */
-  DescribeTWeTalkProductConfig(data: DescribeTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkProductConfigResponse>;
-  /** 查询WeTalk连接产品配置信息 {@link DescribeTWeTalkProductConfigV2Request} {@link DescribeTWeTalkProductConfigV2Response} */
-  DescribeTWeTalkProductConfigV2(data: DescribeTWeTalkProductConfigV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeTWeTalkProductConfigV2Response>;
   /** 查看Topic详情 {@link DescribeTopicPolicyRequest} {@link DescribeTopicPolicyResponse} */
   DescribeTopicPolicy(data: DescribeTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopicPolicyResponse>;
   /** 获取规则信息 {@link DescribeTopicRuleRequest} {@link DescribeTopicRuleResponse} */
@@ -8005,10 +7665,6 @@ declare interface Iotexplorer {
   GetTWeTalkActiveRecordList(data?: GetTWeTalkActiveRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkActiveRecordListResponse>;
   /** 查询TWeTalk激活状态 {@link GetTWeTalkActiveStatusRequest} {@link GetTWeTalkActiveStatusResponse} */
   GetTWeTalkActiveStatus(data?: GetTWeTalkActiveStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkActiveStatusResponse>;
-  /** 获取TWeTalk连接配置信息列表 {@link GetTWeTalkProductConfigListRequest} {@link GetTWeTalkProductConfigListResponse} */
-  GetTWeTalkProductConfigList(data?: GetTWeTalkProductConfigListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkProductConfigListResponse>;
-  /** 查询WeTalk连接产品配置信息列表 {@link GetTWeTalkProductConfigListV2Request} {@link GetTWeTalkProductConfigListV2Response} */
-  GetTWeTalkProductConfigListV2(data: GetTWeTalkProductConfigListV2Request, config?: AxiosRequestConfig): AxiosPromise<GetTWeTalkProductConfigListV2Response>;
   /** 获取规则列表 {@link GetTopicRuleListRequest} {@link GetTopicRuleListResponse} */
   GetTopicRuleList(data: GetTopicRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<GetTopicRuleListResponse>;
   /** 获取云存事件列表 {@link GetVodCloudStorageEventListRequest} {@link GetVodCloudStorageEventListResponse} */
@@ -8097,10 +7753,6 @@ declare interface Iotexplorer {
   ModifyTWeSeeSubscriptionRenewFlag(data: ModifyTWeSeeSubscriptionRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeSeeSubscriptionRenewFlagResponse>;
   /** 修改TWeTalk智能体配置 {@link ModifyTWeTalkAgentRequest} {@link ModifyTWeTalkAgentResponse} */
   ModifyTWeTalkAgent(data: ModifyTWeTalkAgentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkAgentResponse>;
-  /** 修改TWeTalk连接配置信息 {@link ModifyTWeTalkProductConfigRequest} {@link ModifyTWeTalkProductConfigResponse} */
-  ModifyTWeTalkProductConfig(data: ModifyTWeTalkProductConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkProductConfigResponse>;
-  /** 修改TWeTalk连接产品配置v2版 {@link ModifyTWeTalkProductConfigV2Request} {@link ModifyTWeTalkProductConfigV2Response} */
-  ModifyTWeTalkProductConfigV2(data: ModifyTWeTalkProductConfigV2Request, config?: AxiosRequestConfig): AxiosPromise<ModifyTWeTalkProductConfigV2Response>;
   /** 更新Topic {@link ModifyTopicPolicyRequest} {@link ModifyTopicPolicyResponse} */
   ModifyTopicPolicy(data: ModifyTopicPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTopicPolicyResponse>;
   /** 修改规则 {@link ModifyTopicRuleRequest} {@link ModifyTopicRuleResponse} */

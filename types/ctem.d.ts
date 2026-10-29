@@ -899,9 +899,9 @@ declare interface Equity {
 /** 支持按照各字段过滤 */
 declare interface Filter {
   /** 要搜索的字段 */
-  Name?: string;
+  Name?: string | null;
   /** 目标值列表 */
-  Values?: string[];
+  Values?: string[] | null;
 }
 
 /** 链路详情扫描目标和ID */
@@ -910,6 +910,38 @@ declare interface IdndValue {
   Id?: number | null;
   /** 目标 */
   Value?: string | null;
+}
+
+/** 漏洞情报详情 */
+declare interface IntelligenceDesc {
+  /** 情报ID */
+  VulId?: string;
+  /** 情报名称 */
+  VulName?: string;
+  /** 情报概述 */
+  VulOverview?: string;
+  /** 录入时间 */
+  InsertTime?: string;
+  /** 漏洞风险等级 1：低风险，2：中风险，3：高风险 */
+  RiskLevel?: number;
+  /** 标签 */
+  Tags?: string;
+  /** 关联组件 */
+  VulComponents?: string;
+  /** 相关指纹数量 */
+  BannerCount?: number;
+  /** 漏洞资产数量 */
+  VulAssetCount?: number;
+  /** 最新任务状态:todo/doing/done，如果为空表示没有任务 */
+  LastTaskStatus?: string;
+  /** 任务id */
+  LastTaskInstanceId?: string;
+  /** xscan指纹插件id */
+  XscanBannerPluginId?: string;
+  /** xscan poc插件id */
+  XscanPocPluginId?: string;
+  /** 上一次扫描时间 */
+  LastScanTime?: string;
 }
 
 /** 漏洞情报扫描结果 */
@@ -2095,15 +2127,23 @@ declare interface DescribeHttpsResponse {
 }
 
 declare interface DescribeIntelligencesRequest {
+  /** 企业ID */
+  CustomerId?: number;
   /** 查询数组 */
   Filters?: Filter[];
   /** 分页大小 */
   Limit?: number;
   /** 分页偏移 */
   Offset?: number;
+  /** 是否筛选有效情报 */
+  IsActual?: boolean;
 }
 
 declare interface DescribeIntelligencesResponse {
+  /** 总数 */
+  Total?: number;
+  /** 数组 */
+  List?: IntelligenceDesc[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

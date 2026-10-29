@@ -486,6 +486,34 @@ declare interface Tag {
   Value: string;
 }
 
+/** 用户配额信息 */
+declare interface UserQuotaInfo {
+  /** 配额id */
+  QuotaId?: string;
+  /** 配额类型 */
+  QuotaType?: string;
+  /** 配额对象名称，对应UID/GID的值 */
+  QuotaObjectName?: string;
+  /** 容量配额限定值 */
+  QuotaSizeLimit?: string;
+  /** 已使用容量配额 */
+  QuotaSizeUsed?: string;
+  /** 容量配额使用占比 */
+  QuotaSizeUsedPercent?: string;
+  /** 文件数配额限定值 */
+  QuotaFilesLimit?: string;
+  /** 已使用文件数配额 */
+  QuotaFilesUsed?: string;
+  /** 文件数配额使用占比 */
+  QuotaFilesUsedPercent?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 修改时间 */
+  ModifyTime?: string;
+  /** 配额状态：creating 配置中 active 已生效 modify 修改中 */
+  Status?: string;
+}
+
 declare interface AddCrossVpcSubnetSupportForClientNodeRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -736,6 +764,26 @@ declare interface CreatePolicyRuleResponse {
   RequestId?: string;
 }
 
+declare interface CreateUserQuotaRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 配额类型，UID或GID */
+  QuotaType: string;
+  /** 配额对象名称，对应UID或者GID的值 */
+  QuotaObjectName: string;
+  /** 容量配额（需带单位G） */
+  QuotaSizeLimit?: string;
+  /** 文件数配额 */
+  QuotaFilesLimit?: string;
+}
+
+declare interface CreateUserQuotaResponse {
+  /** 配额id */
+  QuotaId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCrossVpcSubnetSupportForClientNodeRequest {
   /** 文件系统ID */
   FileSystemId: string;
@@ -790,6 +838,18 @@ declare interface DeletePolicyRuleRequest {
 }
 
 declare interface DeletePolicyRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteUserQuotaRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 配额id */
+  QuotaId: string;
+}
+
+declare interface DeleteUserQuotaResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -988,6 +1048,24 @@ declare interface DescribePolicyRuleResponse {
   PolicyRuleTaskList?: PolicyRuleTaskAttribute[];
   /** 任务总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeUserQuotaRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** QuotaId列表 */
+  QuotaIds?: string[];
+  /** 配额类型 */
+  QuotaType?: string;
+  /** 配额对象名称列表 */
+  QuotaObjectNames?: string[];
+}
+
+declare interface DescribeUserQuotaResponse {
+  /** 配额信息列表 */
+  QuotaList?: UserQuotaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1198,6 +1276,22 @@ declare interface UpdateLoadTaskPriorityResponse {
   RequestId?: string;
 }
 
+declare interface UpdateUserQuotaRequest {
+  /** 文件系统id */
+  FileSystemId: string;
+  /** 配额id */
+  QuotaId: string;
+  /** 容量配额限定值 */
+  QuotaSizeLimit?: string;
+  /** 文件数配额限定值 */
+  QuotaFilesLimit?: string;
+}
+
+declare interface UpdateUserQuotaResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Goosefs 数据加速器 GooseFS} */
 declare interface Goosefs {
   (): Versions;
@@ -1227,6 +1321,8 @@ declare interface Goosefs {
   CreateLoadTask(data: CreateLoadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLoadTaskResponse>;
   /** 创建扫描规则 {@link CreatePolicyRuleRequest} {@link CreatePolicyRuleResponse} */
   CreatePolicyRule(data: CreatePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePolicyRuleResponse>;
+  /** 创建用户配额 {@link CreateUserQuotaRequest} {@link CreateUserQuotaResponse} */
+  CreateUserQuota(data: CreateUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<CreateUserQuotaResponse>;
   /** 为客户端节点删除跨vpc子网访问能力 {@link DeleteCrossVpcSubnetSupportForClientNodeRequest} {@link DeleteCrossVpcSubnetSupportForClientNodeResponse} */
   DeleteCrossVpcSubnetSupportForClientNode(data: DeleteCrossVpcSubnetSupportForClientNodeRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCrossVpcSubnetSupportForClientNodeResponse>;
   /** 删除客户端集群 {@link DeleteCustomerClusterRequest} {@link DeleteCustomerClusterResponse} */
@@ -1237,6 +1333,8 @@ declare interface Goosefs {
   DeleteFileset(data: DeleteFilesetRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteFilesetResponse>;
   /** 删除扫描规则 {@link DeletePolicyRuleRequest} {@link DeletePolicyRuleResponse} */
   DeletePolicyRule(data: DeletePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePolicyRuleResponse>;
+  /** 删除用户配额 {@link DeleteUserQuotaRequest} {@link DeleteUserQuotaResponse} */
+  DeleteUserQuota(data: DeleteUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserQuotaResponse>;
   /** 列出集群中所有的客户端节点 {@link DescribeClientNodesRequest} {@link DescribeClientNodesResponse} */
   DescribeClientNodes(data: DescribeClientNodesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClientNodesResponse>;
   /** 查询GooseFS集群客户端凭证 {@link DescribeClusterClientTokenRequest} {@link DescribeClusterClientTokenResponse} */
@@ -1263,6 +1361,8 @@ declare interface Goosefs {
   DescribePolicyRule(data: DescribePolicyRuleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyRuleResponse>;
   /** 列出扫描规则执行记录 {@link DescribePolicyRuleExecuteRecordRequest} {@link DescribePolicyRuleExecuteRecordResponse} */
   DescribePolicyRuleExecuteRecord(data: DescribePolicyRuleExecuteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePolicyRuleExecuteRecordResponse>;
+  /** 查询用户配额 {@link DescribeUserQuotaRequest} {@link DescribeUserQuotaResponse} */
+  DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
   /** 解绑文件系统与Bucket的映射 {@link DetachFileSystemBucketRequest} {@link DetachFileSystemBucketResponse} */
   DetachFileSystemBucket(data: DetachFileSystemBucketRequest, config?: AxiosRequestConfig): AxiosPromise<DetachFileSystemBucketResponse>;
   /** 禁用扫描规则 {@link DisablePolicyRuleRequest} {@link DisablePolicyRuleResponse} */
@@ -1291,6 +1391,8 @@ declare interface Goosefs {
   UpdateFilesetGeneralConfig(data: UpdateFilesetGeneralConfigRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateFilesetGeneralConfigResponse>;
   /** 变更 GooseFS 预热任务优先级 {@link UpdateLoadTaskPriorityRequest} {@link UpdateLoadTaskPriorityResponse} */
   UpdateLoadTaskPriority(data: UpdateLoadTaskPriorityRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateLoadTaskPriorityResponse>;
+  /** 修改用户配额 {@link UpdateUserQuotaRequest} {@link UpdateUserQuotaResponse} */
+  UpdateUserQuota(data: UpdateUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateUserQuotaResponse>;
 }
 
 export declare type Versions = ["2022-05-19"];
