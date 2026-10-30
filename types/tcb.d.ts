@@ -3866,6 +3866,18 @@ declare interface DownloadFunctionResponse {
   RequestId?: string;
 }
 
+declare interface EnablePGDocumentExtRequest {
+  /** 环境 id，租户级标识信息，开通环境时产生，全局唯一参数格式：用户自定义小写英文命名 + 随机雪花字符 */
+  EnvId: string;
+}
+
+declare interface EnablePGDocumentExtResponse {
+  /** 是否开启成功标记枚举值：true： 开启成功false： 开启失败 */
+  Enabled?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ExecutePGSqlRequest {
   /** 云开发环境ID */
   EnvId: string;
@@ -4945,6 +4957,8 @@ declare interface Tcb {
   DestroyStaticStore(data: DestroyStaticStoreRequest, config?: AxiosRequestConfig): AxiosPromise<DestroyStaticStoreResponse>;
   /** 获取云函数地址并下载 {@link DownloadFunctionRequest} {@link DownloadFunctionResponse} */
   DownloadFunction(data: DownloadFunctionRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadFunctionResponse>;
+  /** 开通 PG 数据库文档插件能力 {@link EnablePGDocumentExtRequest} {@link EnablePGDocumentExtResponse} */
+  EnablePGDocumentExt(data: EnablePGDocumentExtRequest, config?: AxiosRequestConfig): AxiosPromise<EnablePGDocumentExtResponse>;
   /** 在PostgreSQL数据库上执行SQL查询 {@link ExecutePGSqlRequest} {@link ExecutePGSqlResponse} */
   ExecutePGSql(data: ExecutePGSqlRequest, config?: AxiosRequestConfig): AxiosPromise<ExecutePGSqlResponse>;
   /** 获取云函数详情 {@link GetFunctionRequest} {@link GetFunctionResponse} */

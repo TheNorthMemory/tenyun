@@ -2575,7 +2575,7 @@ declare interface AddModelRewriteRequest {
   ModelRouterId: string;
   /** 源模型名（重写规则的 key）。长度 1-255 字符；支持特殊值 default 表示兜底规则（命中所有未显式列出的源模型）。不允许使用 IntentRouter/ 前缀（大小写不敏感），即 IntentRouter 不能作为 source。 */
   SourceModel: string;
-  /** 目标模型名（重写规则的 value）。长度 1-255 字符；必须是已关联到该模型路由实例的模型（含 IntentRouter/* 也需先通过 AssociateModels 关联）。不允许使用 default；不允许与 SourceModel 相同（大小写不敏感）。 */
+  /** 目标模型名（重写规则的 value）。长度 1-255 字符；必须是已关联到该模型路由实例的模型（含 IntentRouter/* 也需先通过 AssociateModels 关联）。不允许使用 default；不允许与 SourceModel 相同（大小写不敏感）。特殊值 __reject__：仅 SourceModel=default 时可用，表示未指定模型的请求（未传、为空或 ModelRouter/auto）不走 L1 路由，直接拒绝（HTTP 400）。 */
   TargetModel: string;
 }
 
