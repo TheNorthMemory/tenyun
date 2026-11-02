@@ -4482,6 +4482,22 @@ declare interface CreateReleaseResponse {
   RequestId?: string;
 }
 
+declare interface CreateSSETokenRequest {
+  /** 主用户Uin */
+  LoginUin?: string;
+  /** 子用户Uin */
+  LoginSubAccountUin?: string;
+  /** 应用ID */
+  AppId?: string;
+}
+
+declare interface CreateSSETokenResponse {
+  /** SSE 鉴权 Token */
+  Token?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSimilarQuestionRequest {
   /** 所属知识库 ID */
   KbId: string;
@@ -6739,6 +6755,8 @@ declare interface Adp {
   CreateQAList(data: CreateQAListRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAListResponse>;
   /** 新增发布任务 {@link CreateReleaseRequest} {@link CreateReleaseResponse} */
   CreateRelease(data: CreateReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateReleaseResponse>;
+  /** 创建 SSE token {@link CreateSSETokenRequest} {@link CreateSSETokenResponse} */
+  CreateSSEToken(data?: CreateSSETokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSSETokenResponse>;
   /** 创建相似问生成任务 {@link CreateSimilarQuestionRequest} {@link CreateSimilarQuestionResponse} */
   CreateSimilarQuestion(data: CreateSimilarQuestionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSimilarQuestionResponse>;
   /** 创建skill {@link CreateSkillRequest} {@link CreateSkillResponse} */

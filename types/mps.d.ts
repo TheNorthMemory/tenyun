@@ -2528,6 +2528,8 @@ declare interface CloneViralAIGC {
   Resolution?: string;
   /** 模式。flagship（高级版，默认）、standard（标准版）、depthcrafter(深度提取) */
   ModelTier?: string;
+  /** 深度估计结果是否含音频， 默认不含 */
+  DepthWithAudio?: boolean;
 }
 
 /** 爆款复刻内容/风格参数 */
@@ -2570,6 +2572,8 @@ declare interface CloneViralPersona {
   Ethnicity?: string;
   /** 体型。slim / standard / athletic / chubby */
   BodyType?: string;
+  /** 人物图片 */
+  Images?: string[];
 }
 
 /** 爆款复刻产品信息 */
@@ -2580,6 +2584,14 @@ declare interface CloneViralProduct {
   Name?: string;
   /** 产品描述 */
   Description?: string;
+}
+
+/** 动作级补充素材：服饰套装 / 背景 */
+declare interface CloneViralReference {
+  /** 服饰套装参考图，多套按视频中的分段换装 */
+  Outfits?: string[];
+  /** 背景/场景参考图 */
+  Backgrounds?: string[];
 }
 
 /** 色彩增强配置 */
@@ -9091,6 +9103,8 @@ declare interface ChangeVoiceResponse {
 declare interface CloneViralRequest {
   /** 爆款视频Url */
   VideoUrl: string;
+  /** 处理类型枚举值：script ： 脚本级爆款复刻motion： 动作级爆款复刻depth： 深度估计 */
+  Mode?: string;
   /** 产品信息。除深度提取外，其他模式必填 */
   Product?: CloneViralProduct;
   /** AIGC生视频相关参数 */
@@ -9101,6 +9115,8 @@ declare interface CloneViralRequest {
   Persona?: CloneViralPersona;
   /** 输出相关参数 */
   Output?: CloneViralOutputOption;
+  /** 其他参考素材（如背景、服装） */
+  Reference?: CloneViralReference;
 }
 
 declare interface CloneViralResponse {

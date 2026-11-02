@@ -1585,6 +1585,8 @@ declare interface DescribeSpanTreeByIDRequest {
   FilterViewTagKeyList?: string[];
   /** 是否开启云资源关联 */
   EnableResourceLink?: boolean;
+  /** 字符串数组，tagstag里面的key */
+  FilterTagKeys?: string[];
 }
 
 declare interface DescribeSpanTreeByIDResponse {
