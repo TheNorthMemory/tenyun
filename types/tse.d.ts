@@ -1484,6 +1484,20 @@ declare interface ConfigFileTemplate {
   ModifyBy?: string;
 }
 
+/** 创建自定义安全护栏策略结果 */
+declare interface CreateAIGWCustomGuardrailPolicyResult {
+  /** 本次配置同步是否全部成功。即使云 API 未返回 Response.Error，仍须检查此值、SyncStatus 和 FailedResources。 */
+  Success?: boolean;
+  /** 新建策略 ID */
+  PolicyId?: string;
+  /** 本次同步成功的业务资源引用；Modify 返回的不是严格的新增差集。 */
+  AddedResources?: CustomGuardrailResourceRef[];
+  /** 失败资源及原因；非空表示配置同步仍需处理，不要因 HTTP 200 判定全部成功。 */
+  FailedResources?: CustomGuardrailSyncFailure[];
+  /** 同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。 */
+  SyncStatus?: string;
+}
+
 /** 创建云原生API网关响应结果。 */
 declare interface CreateCloudNativeAPIGatewayResult {
   /** 云原生API网关ID。 */
@@ -1522,6 +1536,486 @@ declare interface CreatePublicNetworkResult {
   NetworkId?: string;
 }
 
+/** 自定义安全护栏鉴权配置；不返回 API Key 明文 */
+declare interface CustomGuardrailAuthConfig {
+  /** 网关访问审核引擎的鉴权方式：none 无鉴权（创建默认值）；api_key 在指定 HTTP Header 中发送凭据。与客户端访问 AI 网关时使用的鉴权相互独立。none 模式不应携带 HeaderName 或 ApiKey。 */
+  AuthType?: string;
+  /** api_key 模式的鉴权 Header 名，例如 X-Audit-Key 或 Authorization。需为有效 Header 名；不能使用 Content-Type、Accept 或 x-cngw-audit- 前缀的保留名称。不建议使用 Host、Content-Length 等会影响 HTTP 协议语义的头。 */
+  HeaderName?: string;
+  /** 只读：是否已保存审核引擎鉴权密钥。不会返回密钥本身；修改时无需回传此字段。 */
+  HasApiKey?: boolean;
+}
+
+/** 自定义安全护栏审核服务鉴权配置 */
+declare interface CustomGuardrailAuthConfigInput {
+  /** 审核引擎鉴权方式，必须显式选择 none（无鉴权）或 api_key（Header 密钥）；无鉴权也必须填写 none，不再自动补齐。api_key 时 HeaderName 和 ApiKey 必填；与客户端访问网关的鉴权独立。 */
+  AuthType: string;
+  /** AuthType=api_key 时必填的有效 HTTP Header 名，例如 X-Audit-Key 或 Authorization；禁止协议保留头。AuthType=none 时不得填写。 */
+  HeaderName?: string;
+  /** AuthType=api_key 时必填，作为 Header 完整值原样发送；如需 Bearer，调用方自行填写前缀。修改时省略可沿用已保存密钥；不能用 HasApiKey 代替真实密钥。 */
+  ApiKey?: string;
+}
+
+/** 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。 */
+declare interface CustomGuardrailAuthConfigPatch {
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。审核引擎鉴权方式，必须显式选择 none（无鉴权）或 api_key（Header 密钥）；无鉴权也必须填写 none，不再自动补齐。api_key 时 HeaderName 和 ApiKey 必填；与客户端访问网关的鉴权独立。 */
+  AuthType?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。AuthType=api_key 时必填的有效 HTTP Header 名，例如 X-Audit-Key 或 Authorization；禁止协议保留头。AuthType=none 时不得填写。 */
+  HeaderName?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。AuthType=api_key 时必填，作为 Header 完整值原样发送；如需 Bearer，调用方自行填写前缀。修改时省略可沿用已保存密钥；不能用 HasApiKey 代替真实密钥。 */
+  ApiKey?: string;
+  /** true 表示清除已保存密钥，不能与 ApiKey 同时传入。仅传 ClearApiKey=true 时同时切换为 none 并清空鉴权 Header；也可通过 AuthType=none 清除既有密钥。修改时省略本字段保留原值。 */
+  ClearApiKey?: boolean;
+}
+
+/** 自定义安全护栏处理行为配置 */
+declare interface CustomGuardrailBehaviorConfig {
+  /** 审核方向：input 只审核业务请求，output 只审核业务响应，both 两者均审核；创建默认 input。送审包及审核日志使用 request/response 表示方向，不使用 input/output。 */
+  Direction?: string;
+  /** 命中后的处理：block 执行阻断或符合条件的输出替换；observe 仅观察记录命中，不执行命中阻断或替换。创建默认 block。审核调用异常另由 FailureMode 处理，不应把 observe 当作所有故障无条件放行。 */
+  HandleAction?: string;
+  /** 审核调用超时，单位毫秒，范围 50～5000，创建默认 500。不是整个模型生成/SSE 连接的总时长限制；流式多批次分别发生审核 HTTP 调用。应按引擎网络及处理耗时设置，示例中的 5000 是显式测试值，不是默认值。 */
+  TimeoutMs?: number;
+  /** 审核失败时的策略：open 尝试失败放行（创建默认值，有内容未审核即放行风险）；closed 失败关闭。此项处理网络、超时、响应契约等异常，不改变正常 block 判定。open 不能绕过所有 Relay 安全/生命周期错误，也不保证已派发业务请求可安全重放。 */
+  FailureMode?: string;
+}
+
+/** 自定义安全护栏处理行为配置 */
+declare interface CustomGuardrailBehaviorConfigInput {
+  /** 必填，仅允许 input（仅输入）或 both（输入加输出），与控制台一致；不允许 output、空值或省略。送审包方向使用 request/response。 */
+  Direction: string;
+  /** 必填，observe 只观察记录，block 执行命中阻断或符合条件的输出替换。不再自动补默认值。审核异常另由 FailureMode 处理。 */
+  HandleAction: string;
+  /** 必填整数，50～5000 毫秒，0 无效且不再代表默认值。控制台初始显示 500，但 API 调用方仍须传入。这是每次审核 HTTP 调用的超时，不是整个模型生成或 SSE 连接时长。 */
+  TimeoutMs: number;
+  /** 必填，open 为异常时尝试放行（存在未审核内容放行风险），closed 为异常时拦截；不得省略或为空。不改变正常命中结论，open 不能绕过所有 Relay 安全或生命周期错误。 */
+  FailureMode: string;
+}
+
+/** 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。 */
+declare interface CustomGuardrailBehaviorConfigPatch {
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，仅允许 input（仅输入）或 both（输入加输出），与控制台一致；不允许 output、空值或省略。送审包方向使用 request/response。 */
+  Direction?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，observe 只观察记录，block 执行命中阻断或符合条件的输出替换。不再自动补默认值。审核异常另由 FailureMode 处理。 */
+  HandleAction?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填整数，50～5000 毫秒，0 无效且不再代表默认值。控制台初始显示 500，但 API 调用方仍须传入。这是每次审核 HTTP 调用的超时，不是整个模型生成或 SSE 连接时长。 */
+  TimeoutMs?: number;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，open 为异常时尝试放行（存在未审核内容放行风险），closed 为异常时拦截；不得省略或为空。不改变正常命中结论，open 不能绕过所有 Relay 安全或生命周期错误。 */
+  FailureMode?: string;
+}
+
+/** 可绑定自定义安全护栏的业务资源 */
+declare interface CustomGuardrailBindableResource {
+  /** 业务资源类型 */
+  ResourceType?: string;
+  /** 业务资源 ID */
+  ResourceId?: string;
+  /** 业务资源名称 */
+  ResourceName?: string;
+  /** 业务资源访问路径 */
+  Path?: string;
+  /** 数据面解析协议 */
+  Protocol?: string;
+  /** 该业务资源对应的全部 Kong Route ID，仅用于关联/排查；创建 Scope.Resources 时仍填业务 ResourceId。 */
+  RouteIds?: string[];
+  /** 对应任一 Route 是否被其他自定义护栏策略占用；查询时传 PolicyId 可排除自身占用。 */
+  Occupied?: boolean;
+  /** 占用策略的可读名称及 ID，格式为 策略名称 (策略ID)，多个以逗号分隔；名称不可用时回退 ID，不应按此展示字段解析策略主键。 */
+  OccupiedBy?: string;
+  /** 资源当前是否可解析为受支持的绑定目标；与 Occupied 独立，选择时同时检查 Supported=true 且 Occupied=false。 */
+  Supported?: boolean;
+  /** 不支持绑定的原因 */
+  UnsupportedReason?: string;
+}
+
+/** 自定义安全护栏能力限制 */
+declare interface CustomGuardrailCapabilityLimits {
+  /** Header 白名单最大条数。 */
+  MaxHeaderAllowList?: number;
+  /** 单方向关键词最大条数。 */
+  MaxKeywordsPerDirection?: number;
+  /** 直接内联送审的 Body 上限，单位字节。 */
+  InlineBodyBytes?: number;
+  /** 可接受的请求 Body 上限，单位字节。 */
+  MaxAcceptedBodyBytes?: number;
+  /** 超大请求 Body 默认分片大小，单位字节。 */
+  TransferChunkBytes?: number;
+  /** 超大请求 Body 最大分片大小，单位字节。 */
+  MaxTransferChunkBytes?: number;
+  /** 分片传输目标最大分片数。 */
+  TransferTargetMaxChunks?: number;
+  /** 普通响应审核最大 Body 大小，单位字节。 */
+  MaxResponseBodyBytes?: number;
+  /** 单个流式事件最大字节数，单位字节。 */
+  MaxStreamEventBytes?: number;
+  /** 单数据面实例 Stream Relay 默认并发槽位。 */
+  StreamRelayMaxConcurrentRequests?: number;
+  /** 审核超时最小值，单位毫秒。 */
+  MinTimeoutMs?: number;
+  /** 审核超时最大值，单位毫秒。 */
+  MaxTimeoutMs?: number;
+  /** 审核超时默认值，单位毫秒。 */
+  DefaultTimeoutMs?: number;
+}
+
+/** 自定义安全护栏审核响应判定配置 */
+declare interface CustomGuardrailDecisionConfig {
+  /** 已保存的判定模式。新配置仅支持 field_mapping；存量策略可能返回 standard_v2，查询、删除或停用不要求迁移，修改判定配置或重新启用前必须迁移。 */
+  ContractMode?: string;
+  /** 必须显式填写 default 或 response。default 使用 BlockMessage；response 使用 FieldMapping.MessageFieldPath 读取提示，值缺失或不合法时回退默认文案。default 时 BlockMessage 必填，response 时 MessageFieldPath 必填。 */
+  BlockMessageMode?: string;
+  /** 本策略默认/兜底拦截提示，最长 512 个字符。未配置或为空时使用系统按请求语言选择的默认提示；不是替换后的业务响应 Body。 */
+  BlockMessage?: string;
+  /** 是否允许输出内容替换，省略为 false。开启且配置 RewriteFieldPath 后，输出审核响应只要存在该字段就优先 replace，不要求 HitFieldPath/HitValue 命中，也不要求引擎 decision=replace；替换字段不存在才按命中规则处理。输入永不替换；observe 只记录、不阻断或替换。非法替换正文是审核异常。流式仅替换当前未发送批次，不可撤回已发送内容。 */
+  RewriteEnabled?: boolean;
+  /** 自定义模式必填的响应字段映射。HitFieldPath 和 HitValue 必填。输出启用替换且替换字段存在时优先 replace；否则要求命中字段存在且为有效同类型标量，值相等时 block，不相等时 allow。缺失或非法命中字段属于无效审核响应，不能等同于安全放行。 */
+  FieldMapping?: CustomGuardrailFieldMapping;
+}
+
+/** 自定义安全护栏审核响应判定配置 */
+declare interface CustomGuardrailDecisionConfigInput {
+  /** 仅支持 field_mapping（自定义字段映射），必须显式填写；不允许 standard_v2、空字符串或 null。只决定如何解析审核响应，网关送审请求仍使用统一 Schema 2.0 封装。 */
+  ContractMode: string;
+  /** 必须显式填写 default 或 response。default 使用 BlockMessage；response 使用 FieldMapping.MessageFieldPath 读取提示，值缺失或不合法时回退默认文案。default 时 BlockMessage 必填，response 时 MessageFieldPath 必填。 */
+  BlockMessageMode: string;
+  /** 自定义模式必填的响应字段映射。HitFieldPath 和 HitValue 必填。输出启用替换且替换字段存在时优先 replace；否则要求命中字段存在且为有效同类型标量，值相等时 block，不相等时 allow。缺失或非法命中字段属于无效审核响应，不能等同于安全放行。 */
+  FieldMapping: CustomGuardrailFieldMappingInput;
+  /** 默认/兜底拦截提示，长度 1～512 字符，不是替换 Body。BlockMessageMode=default 时必填且不能为空白；创建/草稿测试使用 response 模式时可省略，后端补充系统兜底提示。修改时省略保留原值，显式空值不用于清空文案。 */
+  BlockMessage?: string;
+  /** 是否允许输出内容替换，省略为 false。开启且配置 RewriteFieldPath 后，输出审核响应只要存在该字段就优先 replace，不要求 HitFieldPath/HitValue 命中，也不要求引擎 decision=replace；替换字段不存在才按命中规则处理。输入永不替换；observe 只记录、不阻断或替换。非法替换正文是审核异常。流式仅替换当前未发送批次，不可撤回已发送内容。 */
+  RewriteEnabled?: boolean | null;
+}
+
+/** 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。 */
+declare interface CustomGuardrailDecisionConfigPatch {
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。仅支持 field_mapping（自定义字段映射），必须显式填写；不允许 standard_v2、空字符串或 null。只决定如何解析审核响应，网关送审请求仍使用统一 Schema 2.0 封装。 */
+  ContractMode?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必须显式填写 default 或 response。default 使用 BlockMessage；response 使用 FieldMapping.MessageFieldPath 读取提示，值缺失或不合法时回退默认文案。default 时 BlockMessage 必填，response 时 MessageFieldPath 必填。 */
+  BlockMessageMode?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。默认/兜底拦截提示，长度 1～512 字符，不是替换 Body。BlockMessageMode=default 时必填且不能为空白；创建/草稿测试使用 response 模式时可省略，后端补充系统兜底提示。修改时省略保留原值，显式空值不用于清空文案。 */
+  BlockMessage?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。是否允许输出内容替换，省略为 false。开启且配置 RewriteFieldPath 后，输出审核响应只要存在该字段就优先 replace，不要求 HitFieldPath/HitValue 命中，也不要求引擎 decision=replace；替换字段不存在才按命中规则处理。输入永不替换；observe 只记录、不阻断或替换。非法替换正文是审核异常。流式仅替换当前未发送批次，不可撤回已发送内容。 */
+  RewriteEnabled?: boolean | null;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。自定义模式必填的响应字段映射。HitFieldPath 和 HitValue 必填。输出启用替换且替换字段存在时优先 replace；否则要求命中字段存在且为有效同类型标量，值相等时 block，不相等时 allow。缺失或非法命中字段属于无效审核响应，不能等同于安全放行。 */
+  FieldMapping?: CustomGuardrailFieldMappingPatch;
+}
+
+/** 自定义审核响应字段映射 */
+declare interface CustomGuardrailFieldMapping {
+  /** 必填。命中字段的点分隔对象路径，例如 decision 或 result.blocked；不支持数组下标、JSONPath 或通配符。 */
+  HitFieldPath?: string;
+  /** 必填，API 类型为 string。可填写 JSON 字符串、数字或布尔标量文本，也接受 block 等非空普通文本并规范化为 JSON 字符串。示例：block 或 "block" 匹配字符串，true 匹配布尔值，0 匹配数字。null、对象、数组和空白文本不支持；类型不同不视为普通未命中。 */
+  HitValue?: string;
+  /** BlockMessageMode=response 时必填，例如 message 或 result.message；读取结果应为 1～512 字符的字符串，否则使用兜底文案。 */
+  MessageFieldPath?: string;
+  /** RewriteEnabled=true 时必填，例如 content.body；仅输出审核读取。字段存在即优先 replace，与命中值是否相等无关。JSON 替换值应是完整业务 JSON；SSE 必须是以空行结束的完整事件文本，替换当前未发送的 event_batch，不是整个流或某个 TCP chunk。输入不替换。 */
+  RewriteFieldPath?: string;
+}
+
+/** 自定义审核响应字段映射 */
+declare interface CustomGuardrailFieldMappingInput {
+  /** 必填。命中字段的点分隔对象路径，例如 decision 或 result.blocked；不支持数组下标、JSONPath 或通配符。 */
+  HitFieldPath: string;
+  /** 必填，API 类型为 string。可填写 JSON 字符串、数字或布尔标量文本，也接受 block 等非空普通文本并规范化为 JSON 字符串。示例：block 或 "block" 匹配字符串，true 匹配布尔值，0 匹配数字。null、对象、数组和空白文本不支持；类型不同不视为普通未命中。 */
+  HitValue: string;
+  /** BlockMessageMode=response 时必填，例如 message 或 result.message；读取结果应为 1～512 字符的字符串，否则使用兜底文案。 */
+  MessageFieldPath?: string;
+  /** RewriteEnabled=true 时必填，例如 content.body；仅输出审核读取。字段存在即优先 replace，与命中值是否相等无关。JSON 替换值应是完整业务 JSON；SSE 必须是以空行结束的完整事件文本，替换当前未发送的 event_batch，不是整个流或某个 TCP chunk。输入不替换。 */
+  RewriteFieldPath?: string;
+}
+
+/** 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。 */
+declare interface CustomGuardrailFieldMappingPatch {
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填。命中字段的点分隔对象路径，例如 decision 或 result.blocked；不支持数组下标、JSONPath 或通配符。 */
+  HitFieldPath?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。必填，API 类型为 string。可填写 JSON 字符串、数字或布尔标量文本，也接受 block 等非空普通文本并规范化为 JSON 字符串。示例：block 或 "block" 匹配字符串，true 匹配布尔值，0 匹配数字。null、对象、数组和空白文本不支持；类型不同不视为普通未命中。 */
+  HitValue?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。BlockMessageMode=response 时必填，例如 message 或 result.message；读取结果应为 1～512 字符的字符串，否则使用兜底文案。 */
+  MessageFieldPath?: string;
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。RewriteEnabled=true 时必填，例如 content.body；仅输出审核读取。字段存在即优先 replace，与命中值是否相等无关。JSON 替换值应是完整业务 JSON；SSE 必须是以空行结束的完整事件文本，替换当前未发送的 event_batch，不是整个流或某个 TCP chunk。输入不替换。 */
+  RewriteFieldPath?: string;
+}
+
+/** 自定义安全护栏过滤与采样配置 */
+declare interface CustomGuardrailFilterConfig {
+  /** 请求方向的流式筛选：all 全部（创建默认）、streaming 流式、non_streaming 非流式。依据请求的流式意图/协议识别；无法可靠判别时保守保留送审资格，不应依赖该字段实现强隔离。 */
+  RequestStreamMode?: string;
+  /** 响应方向的流式筛选：all 全部（创建默认）、streaming 仅流式、non_streaming 仅非流式。开启输出审核并选择 streaming 可用于 SSE 响应审核。此字段不设置窗口大小或分片步长。 */
+  ResponseStreamMode?: string;
+  /** 请求送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤；非空时按 KeywordMatchMode 满足条件才送审，不是本地违禁词阻断列表。 */
+  RequestKeywords?: string[];
+  /** 响应送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤。流式审核按增量审核单元执行筛选，不代表等待完整响应后统一判断。 */
+  ResponseKeywords?: string[];
+  /** 关键词匹配方式：any 任一关键词命中（创建默认）；all 所有关键词命中。按文本字面子串匹配，不是正则表达式。 */
+  KeywordMatchMode?: string;
+  /** 关键词匹配是否区分大小写，创建默认 false。 */
+  KeywordCaseSensitive?: boolean;
+  /** 是否启用送审采样，创建默认 false（不按采样率跳过）。采样与方向、流式、关键词过滤叠加；开启低比例采样会使未抽中的内容不送审。 */
+  SamplingEnabled?: boolean;
+  /** 请求送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。0 不抽取，1 全量，0.1 表示 10%，不是填写整数 10。 */
+  RequestSamplingRate?: number;
+  /** 响应送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。同一请求响应流保持一致的采样选择，不是对每个 SSE 网络 chunk 独立抽样。 */
+  ResponseSamplingRate?: number;
+}
+
+/** 自定义安全护栏过滤与采样配置 */
+declare interface CustomGuardrailFilterConfigInput {
+  /** 请求方向的流式筛选：all 全部（创建默认）、streaming 流式、non_streaming 非流式。依据请求的流式意图/协议识别；无法可靠判别时保守保留送审资格，不应依赖该字段实现强隔离。 */
+  RequestStreamMode?: string | null;
+  /** 响应方向的流式筛选：all 全部（创建默认）、streaming 仅流式、non_streaming 仅非流式。开启输出审核并选择 streaming 可用于 SSE 响应审核。此字段不设置窗口大小或分片步长。 */
+  ResponseStreamMode?: string | null;
+  /** 请求送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤；非空时按 KeywordMatchMode 满足条件才送审，不是本地违禁词阻断列表。 */
+  RequestKeywords?: string[] | null;
+  /** 响应送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤。流式审核按增量审核单元执行筛选，不代表等待完整响应后统一判断。 */
+  ResponseKeywords?: string[] | null;
+  /** 关键词匹配方式：any 任一关键词命中（创建默认）；all 所有关键词命中。按文本字面子串匹配，不是正则表达式。 */
+  KeywordMatchMode?: string | null;
+  /** 关键词匹配是否区分大小写，创建默认 false。 */
+  KeywordCaseSensitive?: boolean | null;
+  /** 是否启用送审采样，创建默认 false（不按采样率跳过）。采样与方向、流式、关键词过滤叠加；开启低比例采样会使未抽中的内容不送审。 */
+  SamplingEnabled?: boolean | null;
+  /** 请求送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。0 不抽取，1 全量，0.1 表示 10%，不是填写整数 10。 */
+  RequestSamplingRate?: number | null;
+  /** 响应送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。同一请求响应流保持一致的采样选择，不是对每个 SSE 网络 chunk 独立抽样。 */
+  ResponseSamplingRate?: number | null;
+}
+
+/** 自定义安全护栏过滤与采样局部更新配置。仅更新显式传入的字段；省略字段保留原值，文中默认值指创建时默认值，不表示修改时重置。 */
+declare interface CustomGuardrailFilterConfigPatch {
+  /** 请求方向的流式筛选：all 全部（创建默认）、streaming 流式、non_streaming 非流式。依据请求的流式意图/协议识别；无法可靠判别时保守保留送审资格，不应依赖该字段实现强隔离。修改时省略本字段保留原值。 */
+  RequestStreamMode?: string | null;
+  /** 响应方向的流式筛选：all 全部（创建默认）、streaming 仅流式、non_streaming 仅非流式。开启输出审核并选择 streaming 可用于 SSE 响应审核。此字段不设置窗口大小或分片步长。修改时省略本字段保留原值。 */
+  ResponseStreamMode?: string | null;
+  /** 请求送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤；非空时按 KeywordMatchMode 满足条件才送审，不是本地违禁词阻断列表。修改时省略本字段保留原值。 */
+  RequestKeywords?: string[] | null;
+  /** 响应送审触发关键词；最多 64 项，每项非空且最长 128 字符。默认 [] 不按关键词过滤。流式审核按增量审核单元执行筛选，不代表等待完整响应后统一判断。修改时省略本字段保留原值。 */
+  ResponseKeywords?: string[] | null;
+  /** 关键词匹配方式：any 任一关键词命中（创建默认）；all 所有关键词命中。按文本字面子串匹配，不是正则表达式。修改时省略本字段保留原值。 */
+  KeywordMatchMode?: string | null;
+  /** 关键词匹配是否区分大小写，创建默认 false。修改时省略本字段保留原值。 */
+  KeywordCaseSensitive?: boolean | null;
+  /** 是否启用送审采样，创建默认 false（不按采样率跳过）。采样与方向、流式、关键词过滤叠加；开启低比例采样会使未抽中的内容不送审。修改时省略本字段保留原值。 */
+  SamplingEnabled?: boolean | null;
+  /** 请求送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。0 不抽取，1 全量，0.1 表示 10%，不是填写整数 10。修改时省略本字段保留原值。 */
+  RequestSamplingRate?: number | null;
+  /** 响应送审采样比例，范围 0～1，创建默认 1；SamplingEnabled=true 时使用。同一请求响应流保持一致的采样选择，不是对每个 SSE 网络 chunk 独立抽样。修改时省略本字段保留原值。 */
+  ResponseSamplingRate?: number | null;
+}
+
+/** 自定义安全护栏审核记录 */
+declare interface CustomGuardrailHit {
+  /** 业务网关请求 ID；不是本次云 API 响应的 RequestId。流式同一业务请求可产生多条审核记录。 */
+  RequestId?: string;
+  /** 审核记录 Unix 毫秒级时间戳；注意查询入参 StartTime/EndTime 为秒级。 */
+  Timestamp?: number;
+  /** 网关实例 ID */
+  GatewayId?: string;
+  /** 策略 ID */
+  PolicyId?: string;
+  /** 策略名称 */
+  PolicyName?: string;
+  /** 业务资源类型 */
+  ResourceType?: string;
+  /** 业务资源 ID */
+  ResourceId?: string;
+  /** Kong Route ID */
+  RouteId?: string;
+  /** 业务协议 */
+  Protocol?: string;
+  /** 审核方向：request 或 response */
+  Direction?: string;
+  /** 是否为流式审核 */
+  Streaming?: boolean;
+  /** 该审核单元是否标记为最终单元；不是是否命中/是否连接正常结束的判断依据。 */
+  Final?: boolean;
+  /** 归一化后的审核判定，可能为 allow、block、replace、error；不是原始自定义字段的任意值。观察模式仍可记录命中判定。 */
+  Decision?: string;
+  /** 策略配置动作 */
+  ConfiguredAction?: string;
+  /** 该审核记录的策略处理结果，如 allow、block、replace、error。需与 Decision、ConfiguredAction、ErrorCode 联合分析；记录不等于客户端已成功收到全部响应。 */
+  EffectiveAction?: string;
+  /** 内容是否被改写 */
+  Rewritten?: boolean;
+  /** 请求或响应是否被拦截 */
+  Blocked?: boolean;
+  /** 本审核记录是否因失败放行发生降级；为 true 时不能认为内容已经审核通过。 */
+  Downgraded?: boolean;
+  /** 审核服务 HTTP 状态码 */
+  ProviderStatusCode?: number;
+  /** 该审核调用耗时，单位毫秒，可含小数；不是完整模型请求时长或客户端首字延迟。 */
+  LatencyMs?: number;
+  /** 稳定错误码 */
+  ErrorCode?: string;
+  /** 审核原因或错误摘要 */
+  Reason?: string;
+}
+
+/** 自定义安全护栏审核记录过滤条件 */
+declare interface CustomGuardrailHitFilter {
+  /** 支持 PolicyId、Direction、Decision、EffectiveAction、ResourceType、ResourceId、Protocol、RouteId、RequestId、ErrorCode。Direction 使用 request/response；Protocol 应使用实际审核日志中的协议名，如 mcp-streamable-http。 */
+  Name: string | null;
+  /** 每个过滤项仅支持一个非空字符串值，不支持同一项多值 OR；不同过滤项之间为 AND。 */
+  Values: string[] | null;
+}
+
+/** 自定义安全护栏策略 */
+declare interface CustomGuardrailPolicy {
+  /** 策略 ID */
+  PolicyId?: string;
+  /** 策略名称 */
+  Name?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 策略期望启用状态；实际生效还需检查 EffectiveEnabled 和 SyncStatus。 */
+  Enabled?: boolean;
+  /** 当前控制面计算值：Enabled=true 且 SyncStatus=synced 时为 true。不代表一次真实业务请求已通过审核，也不替代 DP 同步/链路验证。 */
+  EffectiveEnabled?: boolean;
+  /** 审核服务配置 */
+  ServiceConfig?: CustomGuardrailServiceConfig;
+  /** 审核引擎鉴权的脱敏视图，仅返回鉴权类型、Header 名和密钥存在状态，不返回 ApiKey。 */
+  AuthConfig?: CustomGuardrailAuthConfig;
+  /** 审核响应判定配置 */
+  DecisionConfig?: CustomGuardrailDecisionConfig;
+  /** 处理行为配置 */
+  BehaviorConfig?: CustomGuardrailBehaviorConfig;
+  /** 过滤与采样配置 */
+  FilterConfig?: CustomGuardrailFilterConfig;
+  /** 生效范围 */
+  Scope?: CustomGuardrailScope;
+  /** 业务资源到 Kong Route 的绑定及插件投影信息，一个业务资源可能对应多个 Route。 */
+  Bindings?: CustomGuardrailPolicyBinding[];
+  /** 同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。 */
+  SyncStatus?: string;
+  /** 配置同步错误摘要，无错误时可能省略。 */
+  SyncError?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最后修改时间 */
+  ModificationTime?: string;
+}
+
+/** 自定义安全护栏到 Kong Route 的运行态投影 */
+declare interface CustomGuardrailPolicyBinding {
+  /** 业务资源类型 */
+  ResourceType?: string;
+  /** 业务资源 ID */
+  ResourceId?: string;
+  /** 业务资源名称 */
+  ResourceName?: string;
+  /** 资源访问路径 */
+  Path?: string;
+  /** 数据面解析协议 */
+  Protocol?: string;
+  /** 底层 Kong Route ID */
+  RouteId?: string;
+  /** 绑定 Route 上的 cngw-ai-custom-guardrail 插件实例 ID；未投影、禁用或同步失败时可能不存在。 */
+  PluginId?: string;
+  /** 同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。 */
+  SyncStatus?: string;
+  /** 最近一次同步错误摘要 */
+  SyncError?: string;
+}
+
+/** 自定义安全护栏策略列表过滤条件 */
+declare interface CustomGuardrailPolicyFilter {
+  /** 过滤字段：Enabled、Direction、HandleAction、BindType、SyncStatus；名称区分大小写。Direction 使用 input/output/both。 */
+  Name: string | null;
+  /** 至少一个字符串值；同一过滤项内多个值为 OR，不同过滤项之间为 AND。例如 Enabled 的值为字符串 "true"，不是布尔值。 */
+  Values: string[] | null;
+}
+
+/** 自定义安全护栏业务资源引用 */
+declare interface CustomGuardrailResourceRef {
+  /** 被审核的业务资源类型：model_api 模型 API；mcp_server MCP Server（当前支持 Streamable HTTP）；agent_api Agent API（当前支持 A2A）。 */
+  ResourceType?: string;
+  /** 上述类型的管控业务资源 ID，可从 DescribeAIGWCustomGuardrailBindableResources 获取；不是审核引擎 ServiceId，也不是 Kong RouteId。请原样使用接口返回 ID。 */
+  ResourceId?: string;
+}
+
+/** 自定义安全护栏业务资源引用 */
+declare interface CustomGuardrailResourceRefInput {
+  /** 被审核的业务资源类型：model_api 模型 API；mcp_server MCP Server（当前支持 Streamable HTTP）；agent_api Agent API（当前支持 A2A）。 */
+  ResourceType: string;
+  /** 上述类型的管控业务资源 ID，可从 DescribeAIGWCustomGuardrailBindableResources 获取；不是审核引擎 ServiceId，也不是 Kong RouteId。请原样使用接口返回 ID。 */
+  ResourceId: string;
+}
+
+/** 自定义安全护栏生效范围 */
+declare interface CustomGuardrailScope {
+  /** 绑定方式：resource 显式指定业务资源；global 覆盖网关中当前支持的业务资源，由平台关联到其 Kong Route，并随受支持的资源变更协调绑定。不是创建一个独立的 Kong global 插件。相同 Route 不能同时被多个自定义护栏策略占用。 */
+  BindType?: string;
+  /** BindType=resource 时必填，1～200 个资源，ResourceType/ResourceId 组合不得重复；global 时不应填写资源或传 []。Modify 传入 Scope 时替换整个范围，不是增量追加。暂不纳入 Dify/Custom Agent 和 Legacy SSE MCP。 */
+  Resources?: CustomGuardrailResourceRef[];
+}
+
+/** 自定义安全护栏生效范围 */
+declare interface CustomGuardrailScopeInput {
+  /** 绑定方式：resource 显式指定业务资源；global 覆盖网关中当前支持的业务资源，由平台关联到其 Kong Route，并随受支持的资源变更协调绑定。不是创建一个独立的 Kong global 插件。相同 Route 不能同时被多个自定义护栏策略占用。 */
+  BindType: string;
+  /** BindType=resource 时必填，1～200 个资源，ResourceType/ResourceId 组合不得重复；global 时不应填写资源或传 []。Modify 传入 Scope 时替换整个范围，不是增量追加。暂不纳入 Dify/Custom Agent 和 Legacy SSE MCP。 */
+  Resources?: CustomGuardrailResourceRefInput[] | null;
+}
+
+/** 自定义安全护栏审核服务配置 */
+declare interface CustomGuardrailServiceConfig {
+  /** 审核服务地址来源：manual 手动填写完整 URL，service 引用本网关服务管理中的 Kong Service。二者互斥；创建时按接口要求显式传入。 */
+  AddressMode?: string;
+  /** AddressMode=service 时必填。填写审核引擎对应的 Kong Service ID，不是被审核的模型 API、MCP Server 或 Agent API ID。按该服务的 protocol、host、port、path 拼出审核 URL；直接请求该 URL，不是经过该服务的网关 Route，也不会自动继承其 Route 插件或业务鉴权。manual 模式不得填写。 */
+  ServiceId?: string;
+  /** AddressMode=manual 时必填，审核引擎接受 POST 的 HTTP/HTTPS 完整 URL，例如 https://audit.example.com/v2/audit；路径以实际引擎为准，不会自动补 /v2/audit。service 模式不得填写。请填写 URL 原文，不要粘贴 Markdown 链接。 */
+  Endpoint?: string;
+  /** 是否校验审核引擎 HTTPS 证书，创建默认 true；仅影响审核 HTTP 调用，不是客户端访问网关的 TLS 设置。 */
+  SSLVerify?: boolean;
+  /** 是否把原业务请求的完整 Query 字符串写入送审包，创建默认 false。开启可能把 Query 中的凭据或个人信息传给审核服务，须确认接收方可信；不是审核服务 URL 自身的 Query 开关。 */
+  QueryPassthroughEnabled?: boolean;
+  /** 允许额外写入送审包的原始 HTTP Header 名称，最多 64 项，每项最长 128 字节；名称不区分大小写，默认 []。内置保留 content-type、accept、mcp-protocol-version、a2a-version；Authorization、Cookie、API Key、MCP 会话标识和内部 Relay 等受限头不会因加入本列表而放行。审核服务自身的鉴权请使用 AuthConfig。 */
+  HeaderAllowList?: string[];
+}
+
+/** 自定义安全护栏审核服务配置 */
+declare interface CustomGuardrailServiceConfigInput {
+  /** 审核服务地址来源，必须显式选择 service（已有服务）或 manual（手动 URL）；不得省略、为空或 null。service 时 ServiceId 必填，manual 时 Endpoint 必填，两种地址互斥。 */
+  AddressMode: string;
+  /** AddressMode=service 时必填。填写审核引擎对应的 Kong Service ID，不是被审核的模型 API、MCP Server 或 Agent API ID。按该服务的 protocol、host、port、path 拼出审核 URL；直接请求该 URL，不是经过该服务的网关 Route，也不会自动继承其 Route 插件或业务鉴权。manual 模式不得填写。 */
+  ServiceId?: string;
+  /** AddressMode=manual 时必填，审核引擎接受 POST 的 HTTP/HTTPS 完整 URL，例如 https://audit.example.com/v2/audit；路径以实际引擎为准，不会自动补 /v2/audit。service 模式不得填写。请填写 URL 原文，不要粘贴 Markdown 链接。 */
+  Endpoint?: string;
+  /** 是否校验审核引擎 HTTPS 证书，创建默认 true；仅影响审核 HTTP 调用，不是客户端访问网关的 TLS 设置。 */
+  SSLVerify?: boolean | null;
+  /** 是否把原业务请求的完整 Query 字符串写入送审包，创建默认 false。开启可能把 Query 中的凭据或个人信息传给审核服务，须确认接收方可信；不是审核服务 URL 自身的 Query 开关。 */
+  QueryPassthroughEnabled?: boolean | null;
+  /** 允许额外写入送审包的原始 HTTP Header 名称，最多 64 项，每项最长 128 字节；名称不区分大小写，默认 []。内置保留 content-type、accept、mcp-protocol-version、a2a-version；Authorization、Cookie、API Key、MCP 会话标识和内部 Relay 等受限头不会因加入本列表而放行。审核服务自身的鉴权请使用 AuthConfig。 */
+  HeaderAllowList?: string[] | null;
+}
+
+/** 局部更新配置。只更新显式提供字段；未传字段保留。条件必填按合并后的完整策略校验，不会要求每次重传全部配置。 */
+declare interface CustomGuardrailServiceConfigPatch {
+  /** 局部更新：省略本字段保留原值；显式填写须满足枚举及条件必填约束。审核服务地址来源，必须显式选择 service（已有服务）或 manual（手动 URL）；不得省略、为空或 null。service 时 ServiceId 必填，manual 时 Endpoint 必填，两种地址互斥。 */
+  AddressMode?: string;
+  /** AddressMode=service 时必填。填写审核引擎对应的 Kong Service ID，不是被审核的模型 API、MCP Server 或 Agent API ID。按该服务的 protocol、host、port、path 拼出审核 URL；直接请求该 URL，不是经过该服务的网关 Route，也不会自动继承其 Route 插件或业务鉴权。manual 模式不得填写。修改时省略本字段保留原值。 */
+  ServiceId?: string;
+  /** AddressMode=manual 时必填，审核引擎接受 POST 的 HTTP/HTTPS 完整 URL，例如 https://audit.example.com/v2/audit；路径以实际引擎为准，不会自动补 /v2/audit。service 模式不得填写。请填写 URL 原文，不要粘贴 Markdown 链接。修改时省略本字段保留原值。 */
+  Endpoint?: string;
+  /** 是否校验审核引擎 HTTPS 证书，创建默认 true；仅影响审核 HTTP 调用，不是客户端访问网关的 TLS 设置。修改时省略本字段保留原值。 */
+  SSLVerify?: boolean | null;
+  /** 是否把原业务请求的完整 Query 字符串写入送审包，创建默认 false。开启可能把 Query 中的凭据或个人信息传给审核服务，须确认接收方可信；不是审核服务 URL 自身的 Query 开关。修改时省略本字段保留原值。 */
+  QueryPassthroughEnabled?: boolean | null;
+  /** 允许额外写入送审包的原始 HTTP Header 名称，最多 64 项，每项最长 128 字节；名称不区分大小写，默认 []。内置保留 content-type、accept、mcp-protocol-version、a2a-version；Authorization、Cookie、API Key、MCP 会话标识和内部 Relay 等受限头不会因加入本列表而放行。审核服务自身的鉴权请使用 AuthConfig。修改时省略本字段保留原值。 */
+  HeaderAllowList?: string[] | null;
+}
+
+/** 自定义安全护栏资源同步失败信息 */
+declare interface CustomGuardrailSyncFailure {
+  /** 资源类型；策略级错误时为 policy */
+  ResourceType?: string;
+  /** 资源 ID */
+  ResourceId?: string;
+  /** 底层 Kong Route ID */
+  RouteId?: string;
+  /** 错误摘要 */
+  Error?: string;
+}
+
 /** 默认kong路由，目前只在 LLM 模型 API相 关接口使用 */
 declare interface DefaultKongRoute {
   /** 服务名字 */
@@ -1532,6 +2026,14 @@ declare interface DefaultKongRoute {
   Methods?: string[];
   /** Http Path */
   Paths?: string[];
+}
+
+/** 删除自定义安全护栏策略结果 */
+declare interface DeleteAIGWCustomGuardrailPolicyResult {
+  /** 是否完成插件投影清理并删除策略。false 时策略保留供重试，应检查 FailedResources。 */
+  Success?: boolean;
+  /** 投影清理失败的业务资源 */
+  FailedResources?: CustomGuardrailSyncFailure[];
 }
 
 /** 删除云原生API网关响应结果。 */
@@ -1578,6 +2080,90 @@ declare interface DeleteNativeGatewayServerGroupResult {
   Status?: string;
   /** 任务ID */
   TaskId?: string;
+}
+
+/** 查询自定义安全护栏可绑定资源结果 */
+declare interface DescribeAIGWCustomGuardrailBindableResourcesResult {
+  /** 符合条件的资源总数 */
+  TotalCount?: number;
+  /** 可绑定资源列表 */
+  DataList?: CustomGuardrailBindableResource[];
+}
+
+/** 查询自定义安全护栏能力结果 */
+declare interface DescribeAIGWCustomGuardrailCapabilitiesResult {
+  /** 支持该能力的最低网关版本，当前为 3.9.6 */
+  MinGatewayVersion?: string;
+  /** 支持绑定的业务资源类型 */
+  SupportedResourceTypes?: string[];
+  /** 当前控制面允许绑定的协议分类，以返回值为准；不表示每种协议变体均可用。目前不开放 Dify、Custom Agent、Legacy SSE MCP。 */
+  SupportedProtocols?: string[];
+  /** 当前允许配置的审核方向，仅 input（仅输入）和 both（输入加输出）。 */
+  SupportedDirections?: string[];
+  /** 是否支持流式请求与响应审核 */
+  SupportsStreaming?: boolean;
+  /** 是否支持自定义审核响应字段映射 */
+  SupportsFieldMapping?: boolean;
+  /** 系统默认拦截提示 */
+  DefaultBlockMessage?: string;
+  /** 拦截提示最大字符数 */
+  MaxBlockMessageLength?: number;
+  /** 控制面公布的能力限制/默认值，不是当前请求可修改的配置对象，也不是逐个 DP 实时读取值。窗口大小、并发审核数等未作为策略 API 入参开放。 */
+  Limits?: CustomGuardrailCapabilityLimits;
+}
+
+/** 查询自定义安全护栏命中记录结果 */
+declare interface DescribeAIGWCustomGuardrailHitsResult {
+  /** 时间范围和过滤条件内匹配的审核日志总数，分页前统计；不再限定为最多 1000 条。日志异常条目可能无法解析为 Hits。 */
+  TotalCount?: number;
+  /** 当前页审核记录，按时间倒序；同一业务请求的多次送审会产生多条记录，不能直接把条数当业务请求数。 */
+  Hits?: CustomGuardrailHit[];
+  /** 兼容字段，当前分页查询返回 false；用 Offset、Limit、TotalCount 翻页。1000 条限制只适用于导出接口。 */
+  Truncated?: boolean;
+}
+
+/** 查询自定义安全护栏策略列表结果 */
+declare interface DescribeAIGWCustomGuardrailPolicyListResult {
+  /** 符合条件的策略总数 */
+  TotalCount?: number;
+  /** 策略列表 */
+  DataList?: CustomGuardrailPolicy[];
+}
+
+/** 查询自定义安全护栏策略详情结果 */
+declare interface DescribeAIGWCustomGuardrailPolicyResult {
+  /** 策略 ID */
+  PolicyId?: string;
+  /** 策略名称 */
+  Name?: string;
+  /** 策略描述 */
+  Description?: string;
+  /** 策略期望启用状态；实际生效还需检查 EffectiveEnabled 和 SyncStatus。 */
+  Enabled?: boolean;
+  /** 当前控制面计算值：Enabled=true 且 SyncStatus=synced 时为 true。不代表一次真实业务请求已通过审核，也不替代 DP 同步/链路验证。 */
+  EffectiveEnabled?: boolean;
+  /** 审核服务配置 */
+  ServiceConfig?: CustomGuardrailServiceConfig;
+  /** 审核引擎鉴权的脱敏视图，仅返回鉴权类型、Header 名和密钥存在状态，不返回 ApiKey。 */
+  AuthConfig?: CustomGuardrailAuthConfig;
+  /** 审核响应判定配置 */
+  DecisionConfig?: CustomGuardrailDecisionConfig;
+  /** 处理行为配置 */
+  BehaviorConfig?: CustomGuardrailBehaviorConfig;
+  /** 过滤与采样配置 */
+  FilterConfig?: CustomGuardrailFilterConfig;
+  /** 生效范围 */
+  Scope?: CustomGuardrailScope;
+  /** 业务资源到 Kong Route 的绑定及插件投影信息，一个业务资源可能对应多个 Route。 */
+  Bindings?: CustomGuardrailPolicyBinding[];
+  /** 同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。 */
+  SyncStatus?: string;
+  /** 配置同步错误摘要，无错误时可能省略。 */
+  SyncError?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 最后修改时间 */
+  ModificationTime?: string;
 }
 
 /** 获取云原生API网关实例网络配置结果。 */
@@ -1856,6 +2442,18 @@ declare interface EnvInfo {
   ClientBandWidth?: number;
   /** 客户端内网开关 */
   EnableConfigIntranet?: boolean;
+}
+
+/** 导出自定义安全护栏命中记录结果 */
+declare interface ExportAIGWCustomGuardrailHitsResult {
+  /** 实际导出格式 */
+  Format?: string;
+  /** 实际编码进导出内容的审核记录数，最多 1000。 */
+  RowCount?: number;
+  /** 是否达到单次最多 1000 条的导出截断条件；true 时可能还有更多记录，可缩小时间范围后分别导出。 */
+  Truncated?: boolean;
+  /** CSV/JSON 文件内容的 Base64 编码字符串，需 Base64 解码后保存，不是下载 URL。 */
+  Content?: string;
 }
 
 /** 服务扩展元数据 */
@@ -2746,12 +3344,40 @@ declare interface Location {
   Campus?: string;
 }
 
+/** 引擎实例维护窗口 */
+declare interface MaintenanceWindow {
+  /** 时区 */
+  TimeZone?: string;
+  /** 星期 */
+  DayOfWeek?: number;
+  /** 开始时间参数格式：hh:mm */
+  StartTime?: string;
+  /** 结束时间参数格式：hh:mm */
+  EndTime?: string;
+}
+
 /** 元数据信息 */
 declare interface Metadata {
   /** 元数据键名。 */
   Key: string;
   /** 元数据键值。不填则默认为空字符串。 */
   Value?: string;
+}
+
+/** 修改自定义安全护栏策略结果 */
+declare interface ModifyAIGWCustomGuardrailPolicyResult {
+  /** 本次配置同步是否全部成功。即使云 API 未返回 Response.Error，仍须检查此值、SyncStatus 和 FailedResources。 */
+  Success?: boolean;
+  /** 变更后的策略 */
+  Policy?: CustomGuardrailPolicy;
+  /** 本次同步成功的业务资源引用；Modify 返回的不是严格的新增差集。 */
+  AddedResources?: CustomGuardrailResourceRef[];
+  /** 与修改前相比移除的 Route 绑定数量；一个业务资源可有多条 Route，因此不等于业务资源数量。 */
+  RemovedCount?: number;
+  /** 失败资源及原因；非空表示配置同步仍需处理，不要因 HTTP 200 判定全部成功。 */
+  FailedResources?: CustomGuardrailSyncFailure[];
+  /** 同步状态：pending 待同步，synced 已完成本次配置同步，partial 部分失败，failed 失败。需结合 FailedResources/SyncError；synced 不等于已完成所有数据面实例的业务端到端验证。 */
+  SyncStatus?: string;
 }
 
 /** Nacos副本信息 */
@@ -3038,6 +3664,8 @@ declare interface SREInstance {
   MutationEnabled?: boolean;
   /** 禁止限流 */
   MaxCapacityLimitEnabled?: boolean;
+  /** 维护窗口 */
+  MaintenanceWindow?: MaintenanceWindow[];
 }
 
 /** 微服务网关选择器 */
@@ -3310,6 +3938,36 @@ declare interface CloseWafProtectionRequest {
 }
 
 declare interface CloseWafProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateAIGWCustomGuardrailPolicyRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 策略名称，同一网关内唯一，长度 1～64 */
+  Name: string;
+  /** 审核服务配置 */
+  ServiceConfig: CustomGuardrailServiceConfigInput;
+  /** 审核响应判定配置 */
+  DecisionConfig: CustomGuardrailDecisionConfigInput;
+  /** 资源绑定范围，global 或 resource。修改时传入的是新的完整范围，不是增量追加。 */
+  Scope: CustomGuardrailScopeInput;
+  /** 必填，必须显式选择鉴权类型；无鉴权填写 {"AuthType":"none"}。 */
+  AuthConfig: CustomGuardrailAuthConfigInput;
+  /** 必填，Direction、HandleAction、TimeoutMs、FailureMode 四项均须显式填写。 */
+  BehaviorConfig: CustomGuardrailBehaviorConfigInput;
+  /** 策略描述，最长 200 */
+  Description?: string;
+  /** 是否启用策略，默认 true */
+  Enabled?: boolean;
+  /** 过滤与采样配置 */
+  FilterConfig?: CustomGuardrailFilterConfigInput;
+}
+
+declare interface CreateAIGWCustomGuardrailPolicyResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: CreateAIGWCustomGuardrailPolicyResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4052,6 +4710,20 @@ declare interface CreateWafDomainsResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAIGWCustomGuardrailPolicyRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 策略 ID */
+  PolicyId: string;
+}
+
+declare interface DeleteAIGWCustomGuardrailPolicyResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: DeleteAIGWCustomGuardrailPolicyResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAutoScalerResourceStrategyRequest {
   /** 网关实例ID */
   GatewayId: string;
@@ -4450,6 +5122,96 @@ declare interface DeleteWafDomainsRequest {
 }
 
 declare interface DeleteWafDomainsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailBindableResourcesRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 资源类型：model_api、mcp_server 或 agent_api */
+  ResourceType: string;
+  /** 当前策略 ID；用于排除自身占用 */
+  PolicyId?: string;
+  /** 按资源名称或路径模糊搜索 */
+  Keyword?: string;
+  /** 分页偏移量，最小 0 */
+  Offset?: number;
+  /** 单页数量，范围 1～100，默认 20 */
+  Limit?: number;
+}
+
+declare interface DescribeAIGWCustomGuardrailBindableResourcesResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: DescribeAIGWCustomGuardrailBindableResourcesResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailCapabilitiesRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailCapabilitiesResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: DescribeAIGWCustomGuardrailCapabilitiesResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailHitsRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 查询起始时间，Unix 秒级时间戳 */
+  StartTime: number;
+  /** 查询结束时间，Unix 秒级时间戳 */
+  EndTime: number;
+  /** 分页偏移量，最小 0 */
+  Offset?: number;
+  /** 单页数量，范围 1～100，默认 20 */
+  Limit?: number;
+  /** 审核记录过滤条件 */
+  Filters?: CustomGuardrailHitFilter[];
+}
+
+declare interface DescribeAIGWCustomGuardrailHitsResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: DescribeAIGWCustomGuardrailHitsResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailPolicyListRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 单页数量，范围 1～100 */
+  Limit: number;
+  /** 按策略名称或描述模糊搜索 */
+  Keyword?: string;
+  /** 策略过滤条件 */
+  Filters?: CustomGuardrailPolicyFilter[];
+  /** 分页偏移量，最小 0 */
+  Offset?: number;
+}
+
+declare interface DescribeAIGWCustomGuardrailPolicyListResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: DescribeAIGWCustomGuardrailPolicyListResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailPolicyRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 策略 ID */
+  PolicyId: string;
+}
+
+declare interface DescribeAIGWCustomGuardrailPolicyResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: DescribeAIGWCustomGuardrailPolicyResult;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5692,6 +6454,58 @@ declare interface DescribeZookeeperServerInterfacesResponse {
   RequestId?: string;
 }
 
+declare interface ExportAIGWCustomGuardrailHitsRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 导出起始时间，Unix 秒级时间戳 */
+  StartTime: number;
+  /** 导出结束时间，Unix 秒级时间戳 */
+  EndTime: number;
+  /** 审核记录过滤条件 */
+  Filters?: CustomGuardrailHitFilter[];
+  /** 导出格式：csv 或 json；默认 csv */
+  Format?: string;
+}
+
+declare interface ExportAIGWCustomGuardrailHitsResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: ExportAIGWCustomGuardrailHitsResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyAIGWCustomGuardrailPolicyRequest {
+  /** 网关实例 ID */
+  GatewayId: string;
+  /** 策略 ID */
+  PolicyId: string;
+  /** 策略名称，长度 1～64 */
+  Name?: string;
+  /** 策略描述，最长 200；传空字符串可清空 */
+  Description?: string;
+  /** 是否启用策略 */
+  Enabled?: boolean;
+  /** 审核服务局部更新配置 */
+  ServiceConfig?: CustomGuardrailServiceConfigPatch;
+  /** 审核服务鉴权局部更新配置 */
+  AuthConfig?: CustomGuardrailAuthConfigPatch;
+  /** 审核响应判定局部更新配置 */
+  DecisionConfig?: CustomGuardrailDecisionConfigPatch;
+  /** 处理行为局部更新配置 */
+  BehaviorConfig?: CustomGuardrailBehaviorConfigPatch;
+  /** 过滤与采样局部更新配置 */
+  FilterConfig?: CustomGuardrailFilterConfigPatch;
+  /** 资源绑定范围，global 或 resource。修改时传入的是新的完整范围，不是增量追加。 */
+  Scope?: CustomGuardrailScopeInput;
+}
+
+declare interface ModifyAIGWCustomGuardrailPolicyResponse {
+  /** 接口业务结果，位于完整云 API 响应 Response.Result。存在 Success 时仍须单独判断；Response.RequestId 是本次云 API 请求标识。 */
+  Result?: ModifyAIGWCustomGuardrailPolicyResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyAutoScalerResourceStrategyRequest {
   /** 网关实例ID */
   GatewayId: string;
@@ -6466,6 +7280,8 @@ declare interface Tse {
   BindAutoScalerResourceStrategyToGroups(data: BindAutoScalerResourceStrategyToGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoScalerResourceStrategyToGroupsResponse>;
   /** 关闭 WAF 防护 {@link CloseWafProtectionRequest} {@link CloseWafProtectionResponse} */
   CloseWafProtection(data: CloseWafProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<CloseWafProtectionResponse>;
+  /** 创建自定义安全护栏策略 {@link CreateAIGWCustomGuardrailPolicyRequest} {@link CreateAIGWCustomGuardrailPolicyResponse} */
+  CreateAIGWCustomGuardrailPolicy(data: CreateAIGWCustomGuardrailPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAIGWCustomGuardrailPolicyResponse>;
   /** 创建弹性伸缩策略 {@link CreateAutoScalerResourceStrategyRequest} {@link CreateAutoScalerResourceStrategyResponse} */
   CreateAutoScalerResourceStrategy(data: CreateAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoScalerResourceStrategyResponse>;
   /** 创建云原生API网关实例 {@link CreateCloudNativeAPIGatewayRequest} {@link CreateCloudNativeAPIGatewayResponse} */
@@ -6522,6 +7338,8 @@ declare interface Tse {
   CreateOrUpdateConfigFileAndRelease(data: CreateOrUpdateConfigFileAndReleaseRequest, config?: AxiosRequestConfig): AxiosPromise<CreateOrUpdateConfigFileAndReleaseResponse>;
   /** 新建 WAF 防护域名 {@link CreateWafDomainsRequest} {@link CreateWafDomainsResponse} */
   CreateWafDomains(data: CreateWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateWafDomainsResponse>;
+  /** 删除自定义安全护栏策略 {@link DeleteAIGWCustomGuardrailPolicyRequest} {@link DeleteAIGWCustomGuardrailPolicyResponse} */
+  DeleteAIGWCustomGuardrailPolicy(data: DeleteAIGWCustomGuardrailPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAIGWCustomGuardrailPolicyResponse>;
   /** 删除弹性伸缩策略 {@link DeleteAutoScalerResourceStrategyRequest} {@link DeleteAutoScalerResourceStrategyResponse} */
   DeleteAutoScalerResourceStrategy(data: DeleteAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoScalerResourceStrategyResponse>;
   /** 删除云原生API网关实例 {@link DeleteCloudNativeAPIGatewayRequest} {@link DeleteCloudNativeAPIGatewayResponse} */
@@ -6580,6 +7398,16 @@ declare interface Tse {
   DeleteNativeGatewayServiceSource(data: DeleteNativeGatewayServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNativeGatewayServiceSourceResponse>;
   /** 删除 WAF 防护域名 {@link DeleteWafDomainsRequest} {@link DeleteWafDomainsResponse} */
   DeleteWafDomains(data: DeleteWafDomainsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteWafDomainsResponse>;
+  /** 查询自定义安全护栏可绑定资源 {@link DescribeAIGWCustomGuardrailBindableResourcesRequest} {@link DescribeAIGWCustomGuardrailBindableResourcesResponse} */
+  DescribeAIGWCustomGuardrailBindableResources(data: DescribeAIGWCustomGuardrailBindableResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailBindableResourcesResponse>;
+  /** 查询自定义安全护栏能力 {@link DescribeAIGWCustomGuardrailCapabilitiesRequest} {@link DescribeAIGWCustomGuardrailCapabilitiesResponse} */
+  DescribeAIGWCustomGuardrailCapabilities(data: DescribeAIGWCustomGuardrailCapabilitiesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailCapabilitiesResponse>;
+  /** 查询自定义安全护栏审核记录 {@link DescribeAIGWCustomGuardrailHitsRequest} {@link DescribeAIGWCustomGuardrailHitsResponse} */
+  DescribeAIGWCustomGuardrailHits(data: DescribeAIGWCustomGuardrailHitsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailHitsResponse>;
+  /** 查询自定义安全护栏策略详情 {@link DescribeAIGWCustomGuardrailPolicyRequest} {@link DescribeAIGWCustomGuardrailPolicyResponse} */
+  DescribeAIGWCustomGuardrailPolicy(data: DescribeAIGWCustomGuardrailPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailPolicyResponse>;
+  /** 查询自定义安全护栏策略列表 {@link DescribeAIGWCustomGuardrailPolicyListRequest} {@link DescribeAIGWCustomGuardrailPolicyListResponse} */
+  DescribeAIGWCustomGuardrailPolicyList(data: DescribeAIGWCustomGuardrailPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailPolicyListResponse>;
   /** 获取全量配置文件模板列表 {@link DescribeAllConfigFileTemplatesRequest} {@link DescribeAllConfigFileTemplatesResponse} */
   DescribeAllConfigFileTemplates(data: DescribeAllConfigFileTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAllConfigFileTemplatesResponse>;
   /** 查看弹性伸缩策略列表 {@link DescribeAutoScalerResourceStrategiesRequest} {@link DescribeAutoScalerResourceStrategiesResponse} */
@@ -6704,6 +7532,10 @@ declare interface Tse {
   DescribeZookeeperReplicas(data: DescribeZookeeperReplicasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperReplicasResponse>;
   /** 查询zookeeper服务接口列表 {@link DescribeZookeeperServerInterfacesRequest} {@link DescribeZookeeperServerInterfacesResponse} */
   DescribeZookeeperServerInterfaces(data?: DescribeZookeeperServerInterfacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeZookeeperServerInterfacesResponse>;
+  /** 导出自定义安全护栏审核记录 {@link ExportAIGWCustomGuardrailHitsRequest} {@link ExportAIGWCustomGuardrailHitsResponse} */
+  ExportAIGWCustomGuardrailHits(data: ExportAIGWCustomGuardrailHitsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAIGWCustomGuardrailHitsResponse>;
+  /** 修改自定义安全护栏策略 {@link ModifyAIGWCustomGuardrailPolicyRequest} {@link ModifyAIGWCustomGuardrailPolicyResponse} */
+  ModifyAIGWCustomGuardrailPolicy(data: ModifyAIGWCustomGuardrailPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIGWCustomGuardrailPolicyResponse>;
   /** 更新弹性伸缩策略 {@link ModifyAutoScalerResourceStrategyRequest} {@link ModifyAutoScalerResourceStrategyResponse} */
   ModifyAutoScalerResourceStrategy(data: ModifyAutoScalerResourceStrategyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoScalerResourceStrategyResponse>;
   /** 修改云原生API网关实例基础信息 {@link ModifyCloudNativeAPIGatewayRequest} {@link ModifyCloudNativeAPIGatewayResponse} */

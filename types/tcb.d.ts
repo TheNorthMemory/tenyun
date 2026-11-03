@@ -2473,7 +2473,7 @@ declare interface CreateMySQLResponse {
 }
 
 declare interface CreatePlatformEnvRequest {
-  /** 环境别名 */
+  /** 环境别名入参限制：可选字符： 小写字母(a~z)、数字、减号(-) 不能以 减号(-) 开头或结尾 不能有连个连续的 减号(-) 长度不超过20位 */
   Alias: string;
   /** 套餐池标识 */
   PlatformId: string;

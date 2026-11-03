@@ -38,6 +38,14 @@ declare interface A2ASkillItem {
   Description?: string | null;
 }
 
+/** 任务关联的 Agent 配置 */
+declare interface AgentConfig {
+  /** 执行 Prompt（必填） */
+  Prompt?: string | null;
+  /** Agent 唯一标识（引用 CreateAgent 创建的 Managed Agent，必填） */
+  AgentId?: string | null;
+}
+
 /** Agent 列表项（原 AgentSummary；Agent 级纯字段，不再内嵌版本信息） */
 declare interface AgentItem {
   /** Agent 业务 ID（全局唯一，数字字符串形态） */
@@ -192,6 +200,16 @@ declare interface ConnectorRefInput {
   ConnectorId?: string;
 }
 
+/** 投递目标 */
+declare interface DeliveryTarget {
+  /** 投递类型：BOT_CHANNEL（IM 渠道投递）或 WEBHOOK（自定义回调） */
+  Type?: string | null;
+  /** 是否启用此投递目标 */
+  Enabled?: boolean | null;
+  /** 投递配置，按 Type 不同 */
+  Options?: TargetOptions | null;
+}
+
 /** 全局专家计数 */
 declare interface ExpertCounts {
   /** 内置专家数 */
@@ -260,6 +278,14 @@ declare interface Filter {
   ExactMatch?: boolean | null;
 }
 
+/** 自定义请求头键值对 */
+declare interface Header {
+  /** 请求头名称 */
+  Key?: string | null;
+  /** 请求头值 */
+  Value?: string | null;
+}
+
 /** 消息事件 */
 declare interface MessageEvent {
   /** 序号 */
@@ -322,6 +348,70 @@ declare interface RoutingItem {
   Weight?: number | null;
 }
 
+/** 定时任务执行聚合统计 */
+declare interface ScheduledTaskLogStats {
+  /** 总执行次数 */
+  TotalCount?: number | null;
+  /** 成功次数 */
+  SuccessCount?: number | null;
+  /** 失败次数 */
+  FailedCount?: number | null;
+  /** 平均执行时长（毫秒） */
+  AvgDurationMs?: number | null;
+}
+
+/** 定时任务执行日志列表项 */
+declare interface ScheduledTaskLogSummary {
+  /** 执行日志 ID */
+  LogId?: string | null;
+  /** 任务唯一标识 */
+  TaskKey?: string | null;
+  /** 触发类型：MANUAL（手动）/ CRON（定时） */
+  TriggerType?: string | null;
+  /** 执行状态 */
+  Status?: string | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
+  /** 执行时长（毫秒） */
+  DurationMs?: number | null;
+  /** 投递状态 */
+  DeliveryStatus?: string | null;
+  /** 关联会话 ID */
+  SessionId?: string | null;
+  /** 失败原因 */
+  ErrorMessage?: string | null;
+  /** 会话名称（AgentOS 侧生成的 AI 标题 / 用户改名）；缺失时为空，调用方可兜底展示 SessionId 后缀 */
+  SessionName?: string | null;
+  /** 执行结果预览（前 50 字符），仅用于列表页展示；完整结果请调用 DescribeScheduledTaskLog */
+  Result?: string | null;
+}
+
+/** 定时任务列表项 */
+declare interface ScheduledTaskSummary {
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 任务唯一标识 */
+  TaskKey?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 关联 Agent ID */
+  AgentId?: string | null;
+  /** Cron 表达式 */
+  CronExpr?: string | null;
+  /** 任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用） */
+  Status?: string | null;
+  /** 最近执行时间 */
+  LastRunTime?: string | null;
+  /** 下次执行时间 */
+  NextRunTime?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** 任务 Agent 配置（Prompt/Model/AgentId） */
+  AgentConfig?: AgentConfig | null;
+}
+
 /** 会话列表项 */
 declare interface SessionItem {
   /** 会话 ID */
@@ -382,6 +472,22 @@ declare interface SkillItem {
   CreateTime?: string;
   /** 更新时间，RFC3339 UTC 格式（如 2026-09-15T06:51:26Z） */
   UpdateTime?: string;
+}
+
+/** 投递目标配置，按 Type 选用不同字段组 */
+declare interface TargetOptions {
+  /** 渠道类型（BOT_CHANNEL 必填）：FEISHU / DINGTALK / QQ / WECOM_NEW / WECOM_AIBOT / WECHAT_KF */
+  ChannelType?: string | null;
+  /** 渠道标识（BOT_CHANNEL 必填）：飞书 appId / 钉钉 appKey / QQ appId / 企微 corpId:agentId */
+  ChannelId?: string | null;
+  /** 回调 URL（WEBHOOK 必填）：仅允许 http/https，禁止内网地址（SSRF 防护） */
+  Url?: string | null;
+  /** 自定义请求头列表，与默认 Content-Type: application/json 合并 */
+  Headers?: Header[] | null;
+  /** HMAC-SHA256 签名密钥（WEBHOOK 可选） */
+  Secret?: string | null;
+  /** 接收目标 ID 集合（群 ID / 用户 ID / 频道 ID），BOT_CHANNEL 模式必填，至少一个 */
+  RecipientIdSet?: string[] | null;
 }
 
 /** Token用量 */
@@ -554,12 +660,54 @@ declare interface CreateAgentVersionResponse {
   RequestId?: string;
 }
 
+declare interface CreateScheduledTaskRequest {
+  /** 任务名称 */
+  TaskName: string;
+  /** 任务关联的 Agent 配置 */
+  AgentConfig: AgentConfig;
+  /** Cron 表达式 */
+  CronExpr: string;
+  /** 任务描述 */
+  Description?: string;
+  /** 调度类型：CRON（按 Cron 周期执行，默认）或 ONCE（单次执行） */
+  FrequencyType?: string;
+  /** 生效日期开始时间（YYYY-MM-DD 格式），可选，不传时不限制开始时间 */
+  EffectiveStart?: string;
+  /** 生效日期结束时间（YYYY-MM-DD 格式），可选，不传时不限制结束时间 */
+  EffectiveEnd?: string;
+  /** 投递目标集合（BOT_CHANNEL / WEBHOOK 可并存） */
+  DeliveryTargetSet?: DeliveryTarget[];
+}
+
+declare interface CreateScheduledTaskResponse {
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务唯一标识 */
+  TaskKey?: string;
+  /** 任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用） */
+  Status?: string;
+  /** 下次执行时间 */
+  NextRunTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAgentRequest {
   /** Agent 业务 ID */
   AgentId: string;
 }
 
 declare interface DeleteAgentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteScheduledTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+}
+
+declare interface DeleteScheduledTaskResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -874,6 +1022,132 @@ declare interface DescribeMessageEventListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeScheduledTaskListRequest {
+  /** 偏移量，从 0 开始 */
+  Offset?: number;
+  /** 返回数量，缺省为 20，最大 100 */
+  Limit?: number;
+  /** 过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系。支持的 Filter.Name：TaskName（模糊）、Status（精确 0/1）、AgentId（精确） */
+  Filters?: Filter[];
+}
+
+declare interface DescribeScheduledTaskListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 任务列表（分页后） */
+  ScheduledTaskSet?: ScheduledTaskSummary[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScheduledTaskLogListRequest {
+  /** 任务 ID */
+  TaskId: string;
+  /** 偏移量，从 0 开始 */
+  Offset?: number;
+  /** 返回数量，缺省为 20，最大 100 */
+  Limit?: number;
+  /** 是否返回聚合统计（Stats） */
+  WithStats?: boolean;
+  /** 过滤条件数组，多个 Filter 之间为 AND 关系，同一 Filter 内多个 Values 为 OR 关系 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeScheduledTaskLogListResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 执行日志列表（分页后） */
+  ScheduledTaskLogSet?: ScheduledTaskLogSummary[];
+  /** 聚合统计（WithStats=true 时返回） */
+  Stats?: ScheduledTaskLogStats;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScheduledTaskLogRequest {
+  /** 任务 ID */
+  TaskId: string;
+  /** 执行日志 ID */
+  LogId: string;
+}
+
+declare interface DescribeScheduledTaskLogResponse {
+  /** 执行日志 ID */
+  LogId?: string;
+  /** 任务 ID */
+  TaskId?: string;
+  /** 任务唯一标识 */
+  TaskKey?: string;
+  /** 关联会话 ID */
+  SessionId?: string;
+  /** 触发类型：MANUAL（手动）/ CRON（定时） */
+  TriggerType?: string;
+  /** 执行状态 */
+  Status?: string;
+  /** 本次执行 Prompt */
+  Prompt?: string;
+  /** 执行输出内容（完整结果；列表接口 DescribeScheduledTaskLogList 仅返回前 50 字符预览） */
+  Result?: string;
+  /** 开始时间 */
+  StartTime?: string;
+  /** 结束时间 */
+  EndTime?: string;
+  /** 执行时长（毫秒） */
+  DurationMs?: number;
+  /** 投递状态 */
+  DeliveryStatus?: string;
+  /** 投递错误信息 */
+  DeliveryError?: string;
+  /** 创建时间 */
+  CreatedTime?: string;
+  /** 失败原因 */
+  ErrorMessage?: string;
+  /** 会话名称（AgentOS 侧生成的 AI 标题 / 用户改名）；缺失时为空，调用方可兜底展示 SessionId 后缀 */
+  SessionName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeScheduledTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+}
+
+declare interface DescribeScheduledTaskResponse {
+  /** 任务 ID */
+  TaskId?: string | null;
+  /** 任务唯一标识 */
+  TaskKey?: string | null;
+  /** 任务名称 */
+  TaskName?: string | null;
+  /** 任务描述 */
+  Description?: string | null;
+  /** 关联 Agent ID */
+  AgentId?: string | null;
+  /** Cron 表达式 */
+  CronExpr?: string | null;
+  /** 任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用） */
+  Status?: string | null;
+  /** 最近执行时间 */
+  LastRunTime?: string | null;
+  /** 下次执行时间 */
+  NextRunTime?: string | null;
+  /** 创建时间 */
+  CreatedTime?: string | null;
+  /** 更新时间 */
+  ModifiedTime?: string | null;
+  /** 任务 Agent 配置（Prompt/Model/AgentId） */
+  AgentConfig?: AgentConfig | null;
+  /** 生效日期开始时间（YYYY-MM-DD 格式），不传时不限制开始时间 */
+  EffectiveStart?: string;
+  /** 生效日期结束时间（YYYY-MM-DD 格式），不传时不限制结束时间 */
+  EffectiveEnd?: string;
+  /** 投递目标集合（BOT_CHANNEL / WEBHOOK 可并存） */
+  DeliveryTargetSet?: DeliveryTarget[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillListRequest {
   /** 技能来源，必填：BUILTIN（内置）/ CUSTOM（自建）/ AUTHORIZED（企业授权）。数据通路判别，非筛选条件 */
   Source: string;
@@ -1070,6 +1344,46 @@ declare interface ModifyAgentVersionResponse {
   RequestId?: string;
 }
 
+declare interface ModifyScheduledTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 任务描述 */
+  Description?: string;
+  /** 任务关联的 Agent 配置 */
+  AgentConfig?: AgentConfig;
+  /** Cron 表达式 */
+  CronExpr?: string;
+  /** 任务状态：ACTIVE（启用）/ PAUSED（暂停）/ DISABLED（停用） */
+  Status?: string;
+  /** 生效日期开始时间（YYYY-MM-DD 格式），传空串清除，不传保持原值 */
+  EffectiveStart?: string;
+  /** 生效日期结束时间（YYYY-MM-DD 格式），传空串清除，不传保持原值 */
+  EffectiveEnd?: string;
+  /** 投递目标集合（部分更新时整体替换） */
+  DeliveryTargetSet?: DeliveryTarget[];
+}
+
+declare interface ModifyScheduledTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface TriggerScheduledTaskRequest {
+  /** 任务 ID */
+  TaskId: string;
+  /** 覆盖 Prompt，为空则使用任务原 Prompt */
+  OverridePrompt?: string;
+}
+
+declare interface TriggerScheduledTaskResponse {
+  /** 本次触发产生的执行日志 ID */
+  LogId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnbindExternalAgentRequest {
   /** TMA managed agent 业务 ID */
   AgentId: string;
@@ -1101,8 +1415,12 @@ declare interface Workbuddyenterprise {
   CreateAgentVersion(data: CreateAgentVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentVersionResponse>;
   /** 基于源版本创建 Agent 版本 {@link CreateAgentVersionFromSourceRequest} {@link CreateAgentVersionFromSourceResponse} */
   CreateAgentVersionFromSource(data: CreateAgentVersionFromSourceRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentVersionFromSourceResponse>;
+  /** 创建自动化任务 {@link CreateScheduledTaskRequest} {@link CreateScheduledTaskResponse} */
+  CreateScheduledTask(data: CreateScheduledTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateScheduledTaskResponse>;
   /** 删除 Agent {@link DeleteAgentRequest} {@link DeleteAgentResponse} */
   DeleteAgent(data: DeleteAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentResponse>;
+  /** 删除自动化任务 {@link DeleteScheduledTaskRequest} {@link DeleteScheduledTaskResponse} */
+  DeleteScheduledTask(data: DeleteScheduledTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledTaskResponse>;
   /** 查询 Agent 详情 {@link DescribeAgentRequest} {@link DescribeAgentResponse} */
   DescribeAgent(data: DescribeAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentResponse>;
   /** 查询 Agent 列表 {@link DescribeAgentListRequest} {@link DescribeAgentListResponse} */
@@ -1127,6 +1445,14 @@ declare interface Workbuddyenterprise {
   DescribeExternalAgentList(data: DescribeExternalAgentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExternalAgentListResponse>;
   /** 查询消息事件列表 {@link DescribeMessageEventListRequest} {@link DescribeMessageEventListResponse} */
   DescribeMessageEventList(data: DescribeMessageEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMessageEventListResponse>;
+  /** 查询自动化任务详情 {@link DescribeScheduledTaskRequest} {@link DescribeScheduledTaskResponse} */
+  DescribeScheduledTask(data: DescribeScheduledTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskResponse>;
+  /** 查询自动化任务列表 {@link DescribeScheduledTaskListRequest} {@link DescribeScheduledTaskListResponse} */
+  DescribeScheduledTaskList(data?: DescribeScheduledTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskListResponse>;
+  /** 查询自动化任务执行日志详情 {@link DescribeScheduledTaskLogRequest} {@link DescribeScheduledTaskLogResponse} */
+  DescribeScheduledTaskLog(data: DescribeScheduledTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskLogResponse>;
+  /** 查询自动化任务执行日志列表 {@link DescribeScheduledTaskLogListRequest} {@link DescribeScheduledTaskLogListResponse} */
+  DescribeScheduledTaskLogList(data: DescribeScheduledTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskLogListResponse>;
   /** 查询技能列表 {@link DescribeSkillListRequest} {@link DescribeSkillListResponse} */
   DescribeSkillList(data: DescribeSkillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillListResponse>;
   /** 查询用户级访问凭证 {@link DescribeUserAccessTokenRequest} {@link DescribeUserAccessTokenResponse} */
@@ -1141,6 +1467,10 @@ declare interface Workbuddyenterprise {
   ModifyAgentRouting(data: ModifyAgentRoutingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentRoutingResponse>;
   /** 修改 Agent 版本 {@link ModifyAgentVersionRequest} {@link ModifyAgentVersionResponse} */
   ModifyAgentVersion(data: ModifyAgentVersionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentVersionResponse>;
+  /** 修改自动化任务 {@link ModifyScheduledTaskRequest} {@link ModifyScheduledTaskResponse} */
+  ModifyScheduledTask(data: ModifyScheduledTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyScheduledTaskResponse>;
+  /** 手动触发自动化任务 {@link TriggerScheduledTaskRequest} {@link TriggerScheduledTaskResponse} */
+  TriggerScheduledTask(data: TriggerScheduledTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerScheduledTaskResponse>;
   /** 解除外部 agent 与 managed agent 的绑定 {@link UnbindExternalAgentRequest} {@link UnbindExternalAgentResponse} */
   UnbindExternalAgent(data: UnbindExternalAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UnbindExternalAgentResponse>;
 }

@@ -188,11 +188,11 @@ declare interface AnalysisSgRuleInfoResp {
 
 /** 通用筛选条件 */
 declare interface CommonFilter {
-  /** 筛选字段名 */
+  /** 筛选字段名。支持：SecurityGroupId、FwGroupId、IP（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索） */
   Name?: string | null;
   /** 筛选值列表 */
   Values?: string[] | null;
-  /** 操作类型：1=精确匹配，7=in，9=模糊匹配 */
+  /** 操作类型。1=等于，7=in，9=模糊匹配 */
   OperatorType?: number | null;
 }
 
@@ -444,6 +444,8 @@ declare interface OrganMemberItem {
   CfwShareRoleDisplay?: string | null;
   /** 云防火墙共享者 AppId，成员角色为使用者时有值 */
   CfwSharerAppId?: string | null;
+  /** 共享者MemberId */
+  CfwSharerMemberId?: string | null;
   /** 云防火墙计费实例 ID，非空表示已购买云防火墙 */
   CfwInstanceId?: string | null;
   /** 策略分析权限：0-关闭，1-开启 */
@@ -460,6 +462,8 @@ declare interface OrganMemberItem {
   SgManaged?: number;
   /** 是否是后付费云防版本枚举值：1： 后付费0： 非后付费-1： 未知 */
   IsCfwPostPay?: number;
+  /** 企业安全组免费额度领取态：0-未领用，1-已领用（永久领取态） */
+  SgFreeClaimed?: number;
 }
 
 /** 集团概览 */
@@ -810,6 +814,8 @@ declare interface StrategyResp {
   StrategyId?: string;
   /** 规则组Id */
   GroupId?: string;
+  /** 产品类型 */
+  Product?: string;
   /** 规则组名称 */
   GroupName?: string;
   /** 规则数 */

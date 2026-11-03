@@ -2402,7 +2402,7 @@ declare interface InferenceContainerConfig {
   TcrRepositoryConfig?: InferenceTCRRepositoryConfig | null;
   /** 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。 */
   StartupCommand?: string;
-  /** 容器运行时的环境变量。最多支持 10 个变量。 */
+  /** 容器运行时的环境变量。最多支持 50 个变量。 */
   EnvironmentVariables?: InferenceEnvironmentVariable[];
 }
 
@@ -2414,7 +2414,7 @@ declare interface InferenceContainerConfigForModify {
   TcrRepositoryConfig?: InferenceTCRRepositoryConfig;
   /** 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。 */
   StartupCommand?: string;
-  /** 容器运行时的环境变量。最多支持 10 个变量。 */
+  /** 容器运行时的环境变量。最多支持 50 个变量。 */
   EnvironmentVariables?: InferenceEnvironmentVariable[];
 }
 

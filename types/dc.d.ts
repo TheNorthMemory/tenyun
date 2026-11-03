@@ -643,6 +643,8 @@ declare interface CreateDirectConnectTunnelResponse {
 declare interface DeleteDirectConnectRequest {
   /** 物理专线的ID。 */
   DirectConnectId: string;
+  /** 预计裁撤时间 */
+  PlannedRepealDate?: string;
 }
 
 declare interface DeleteDirectConnectResponse {

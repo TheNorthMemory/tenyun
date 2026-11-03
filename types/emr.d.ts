@@ -1114,6 +1114,12 @@ declare interface EmrListInstance {
   IsDedicatedCluster?: boolean;
   /** 集群支持克隆 */
   IsSupportClone?: boolean;
+  /** 集群包含的组件 */
+  Soft?: string[];
+  /** 是否开启了实例保护 */
+  IsTerminateProtection?: boolean;
+  /** mcp密码信息 */
+  McpPasswordInfo?: McpPasswordInfo;
 }
 
 /** Emr询价描述 */
@@ -1820,6 +1826,14 @@ declare interface LoginSettings {
   Password?: string;
   /** 密钥ID。关联密钥后，就可以通过对应的私钥来访问实例；PublicKeyId可通过接口[DescribeKeyPairs](https://cloud.tencent.com/document/api/213/15699)获取 */
   PublicKeyId?: string;
+}
+
+/** mcp是否需要密码 */
+declare interface McpPasswordInfo {
+  /** hive是否需要密码 */
+  HivePasswordRequired?: boolean;
+  /** trino是否需要密码 */
+  TrinoPasswordRequired?: boolean;
 }
 
 /** 元数据库信息 */
@@ -5049,6 +5063,8 @@ declare interface DescribeInstancesListRequest {
   Filters?: Filters[];
   /** 默认0为普通集群，2为tke集群 */
   ClusterType?: number;
+  /** 是否返回需要密码信息 */
+  NeedMcpPasswordInfo?: boolean;
 }
 
 declare interface DescribeInstancesListResponse {

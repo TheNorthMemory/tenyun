@@ -5357,6 +5357,8 @@ declare interface DescribeClusterDatabaseTablesResponse {
 declare interface DescribeClusterDatabasesRequest {
   /** 集群id */
   ClusterId: string;
+  /** DB库名（支持模糊匹配） */
+  FuzzyDBNames?: string[];
   /** 分页偏移 */
   Offset?: number;
   /** 分页限制数量 */

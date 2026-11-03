@@ -66,6 +66,42 @@ declare interface COSInstanceList {
   Error?: string;
 }
 
+/** CSR详情 */
+declare interface CSRItem {
+  /** CSR Id标识 */
+  Id?: number;
+  /** 账号 */
+  OwnerUin?: string;
+  /** 域名 */
+  Domain?: string;
+  /** 企业/单位名称 */
+  Organization?: string;
+  /** 部门 */
+  Department?: string;
+  /** 邮箱 */
+  Email?: string;
+  /** 省份 */
+  Province?: string;
+  /** 城市 */
+  City?: string;
+  /** 国家 */
+  Country?: string;
+  /** 备注 */
+  Remarks?: string;
+  /** 状态 */
+  Status?: number;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 算法 */
+  EncryptAlgo?: string;
+  /** 算法参数 */
+  KeyParameter?: string;
+  /** 标签 */
+  Tags?: Tags[];
+  /** SAN域名 */
+  SubjectAltName?: string[];
+}
+
 /** CDN实例详情 */
 declare interface CdnInstanceDetail {
   /** 域名 */
@@ -272,6 +308,8 @@ declare interface Certificates {
   CertServiceShareEnabled?: boolean;
   /** 当前订阅服务下已经签发未过期的证书数量 */
   CertServiceValidCertificateCount?: number;
+  /** 是否可重新提交。默认值：false */
+  ResubmitAble?: boolean;
 }
 
 /** clb实例详情 */
@@ -1478,6 +1516,18 @@ declare interface ApplyCertificateResponse {
   RequestId?: string;
 }
 
+declare interface BatchDeleteCSRRequest {
+  /** 要删除的CSR Id标识。最多100个 */
+  CSRIds: number[];
+}
+
+declare interface BatchDeleteCSRResponse {
+  /** 成功删除的CSR ID 标识 */
+  Success?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CancelAuditCertificateRequest {
   /** 证书ID */
   CertificateId: string;
@@ -1682,6 +1732,44 @@ declare interface CompleteCertificateResponse {
   RequestId?: string;
 }
 
+declare interface CreateCSRRequest {
+  /** 域名 */
+  Domain: string;
+  /** 企业/单位名称 */
+  Organization: string;
+  /** 部门 */
+  Department: string;
+  /** 邮箱 */
+  Email: string;
+  /** 省份 */
+  Province: string;
+  /** 城市 */
+  City: string;
+  /** 符合ISO 3166 标准的国家或地域代码。如:CN、US */
+  Country: string;
+  /** 加密算法，支持 RSA及ECC。 */
+  EncryptAlgo: string;
+  /** 密钥参数，RSA仅支持2048，4096。ECC仅支持prime256v1 */
+  KeyParameter: string;
+  /** 是否生成CSR内容。生成CSR内容后，此CSR记录不再支持修改 */
+  Generate: boolean;
+  /** 私钥密码 */
+  KeyPassword?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 标签列表 */
+  Tags?: Tags[];
+  /** SAN域名 */
+  SubjectAltName?: string[];
+}
+
+declare interface CreateCSRResponse {
+  /** CSR ID标识 */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCertificateBindResourceSyncTaskRequest {
   /** 证书ID列表，总数不能超过100 */
   CertificateIds: string[];
@@ -1860,6 +1948,72 @@ declare interface DeployCertificateRecordRollbackResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCSRRequest {
+  /** CSR ID标识 */
+  CSRId: number;
+}
+
+declare interface DescribeCSRResponse {
+  /** CSR Id标识 */
+  Id?: number;
+  /** 账号 */
+  OwnerUin?: string;
+  /** 域名 */
+  Domain?: string;
+  /** 企业/单位名称 */
+  Organization?: string;
+  /** 部门 */
+  Department?: string;
+  /** 邮箱 */
+  Email?: string;
+  /** 省份 */
+  Province?: string;
+  /** 城市 */
+  City?: string;
+  /** 国家 */
+  Country?: string;
+  /** 密钥算法 */
+  EncryptAlgo?: string;
+  /** 算法参数 */
+  KeyParameter?: string;
+  /** 备注 */
+  Remarks?: string;
+  /** 状态 */
+  Status?: number;
+  /** 私钥密码 */
+  KeyPassword?: string | null;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** CSR内容 */
+  CSR?: string | null;
+  /** 私钥内容 */
+  PrivateKey?: string | null;
+  /** SAN域名 */
+  SubjectAltName?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCSRSetRequest {
+  /** 每页数量，默认10。最大100 */
+  Limit?: number;
+  /** 分页偏移量，从0开始。 */
+  Offset?: number;
+  /** 使用域名过滤。 */
+  Domain?: string;
+  /** 使用加密算法过滤 */
+  EncryptAlgo?: string;
+}
+
+declare interface DescribeCSRSetResponse {
+  /** 总数量。 */
+  Total?: number;
+  /** 列表。 */
+  Set?: CSRItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCertificateBindResourceTaskDetailRequest {
   /** 任务ID，根据CreateCertificateBindResourceSyncTask得到的任务ID查询绑定云资源结果 */
   TaskId: string;
@@ -2024,6 +2178,8 @@ declare interface DescribeCertificateDetailResponse {
   UseCrossSignRoot?: boolean;
   /** 托管状态，0代表托管中，5代表资源替换中， 10代表托管完成， -1代表未托管 */
   HostingStatus?: number;
+  /** 是否可重新提交。 */
+  ResubmitAble?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2064,7 +2220,7 @@ declare interface DescribeCertificateResponse {
   From?: string | null;
   /** 证书类型：CA = 客户端证书，SVR = 服务器证书。 */
   CertificateType?: string | null;
-  /** 证书套餐类型：null：用户上传证书（没有套餐类型），2：TrustAsia TLS RSA CA， 3：SecureSite 增强型企业版（EV Pro）， 4：SecureSite 增强型（EV）， 5：SecureSite 企业型专业版（OV Pro），6：SecureSite 企业型（OV）， 7：SecureSite 企业型（OV）通配符， 8：Geotrust 增强型（EV）， 9：Geotrust 企业型（OV）， 10：Geotrust 企业型（OV）通配符， 11：TrustAsia 域名型多域名 SSL 证书， 12：TrustAsia 域名型（DV）通配符， 13：TrustAsia 企业型通配符（OV）SSL 证书（D3）， 14：TrustAsia 企业型（OV）SSL 证书（D3）， 15：TrustAsia 企业型多域名 （OV）SSL 证书（D3）， 16：TrustAsia 增强型 （EV）SSL 证书（D3）， 17：TrustAsia 增强型多域名（EV）SSL 证书（D3）， 18：GlobalSign 企业型（OV）SSL 证书， 19：GlobalSign 企业型通配符 （OV）SSL 证书， 20：GlobalSign 增强型 （EV）SSL 证书， 21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3）， 22：GlobalSign 企业型多域名（OV）SSL 证书， 23：GlobalSign 企业型通配符多域名（OV）SSL 证书，24：GlobalSign 增强型多域名（EV）SSL 证书，25：Wotrus 域名型证书，26：Wotrus 域名型多域名证书，27：Wotrus 域名型通配符证书，28：Wotrus 企业型证书，29：Wotrus 企业型多域名证书，30：Wotrus 企业型通配符证书，31：Wotrus 增强型证书，32：Wotrus 增强型多域名证书，33：WoTrus-国密域名型证书，34：WoTrus-国密域名型证书（多域名），35：WoTrus-国密域名型证书（通配符），37：WoTrus-国密企业型证书，38：WoTrus-国密企业型证书（多域名），39：WoTrus-国密企业型证书（通配符），40：WoTrus-国密增强型证书，41：WoTrus-国密增强型证书（多域名），42：TrustAsia-域名型证书（通配符多域名），43：DNSPod-企业型(OV)SSL证书44：DNSPod-企业型(OV)通配符SSL证书45：DNSPod-企业型(OV)多域名SSL证书46：DNSPod-增强型(EV)SSL证书47：DNSPod-增强型(EV)多域名SSL证书48：DNSPod-域名型(DV)SSL证书49：DNSPod-域名型(DV)通配符SSL证书50：DNSPod-域名型(DV)多域名SSL证书51：DNSPod（国密）-企业型(OV)SSL证书52：DNSPod（国密）-企业型(OV)通配符SSL证书53：DNSPod（国密）-企业型(OV)多域名SSL证书54：DNSPod（国密）-域名型(DV)SSL证书55：DNSPod（国密）-域名型(DV)通配符SSL证书56：DNSPod（国密）-域名型(DV)多域名SSL证书57：SecureSite 企业型专业版多域名(OV Pro)58：SecureSite 企业型多域名(OV)59：SecureSite 增强型专业版多域名(EV Pro)60：SecureSite 增强型多域名(EV)61：Geotrust 增强型多域名(EV)75：SecureSite 企业型(OV)76：SecureSite 企业型(OV)通配符77：SecureSite 增强型(EV)78：Geotrust 企业型(OV)79：Geotrust 企业型(OV)通配符80：Geotrust 增强型(EV)81：GlobalSign 企业型（OV）SSL证书82：GlobalSign 企业型通配符 （OV）SSL证书83：TrustAsia C1 DV Free85：GlobalSign 增强型 （EV）SSL证书88：GlobalSign 企业型通配符多域名 （OV）SSL证书89：GlobalSign 企业型多域名 （OV）SSL证书90：GlobalSign 增强型多域名（EV） SSL证书91：Geotrust 增强型多域名(EV)92：SecureSite 企业型专业版多域名(OV Pro)93：SecureSite 企业型多域名(OV)94：SecureSite 增强型专业版多域名(EV Pro)95：SecureSite 增强型多域名(EV)96：SecureSite 增强型专业版(EV Pro)97：SecureSite 企业型专业版(OV Pro)98：CFCA 企业型(OV)SSL证书99：CFCA 企业型多域名(OV)SSL证书100：CFCA 企业型通配符(OV)SSL证书101：CFCA 增强型(EV)SSL证书 */
+  /** 证书套餐类型：null：用户上传证书（没有套餐类型），2：TrustAsia TLS RSA CA，3：SecureSite 增强型企业版（EV Pro），4：SecureSite 增强型（EV），5：SecureSite 企业型专业版（OV Pro），6：SecureSite 企业型（OV），7：SecureSite 企业型（OV）通配符，8：Geotrust 增强型（EV），9：Geotrust 企业型（OV），10：Geotrust 企业型（OV）通配符，11：TrustAsia 域名型多域名 SSL 证书，12：TrustAsia 域名型（DV）通配符，13：TrustAsia 企业型通配符（OV）SSL 证书（D3），14：TrustAsia 企业型（OV）SSL 证书（D3），15：TrustAsia 企业型多域名 （OV）SSL 证书（D3），16：TrustAsia 增强型 （EV）SSL 证书（D3），17：TrustAsia 增强型多域名（EV）SSL 证书（D3），18：GlobalSign 企业型（OV）SSL 证书，19：GlobalSign 企业型通配符 （OV）SSL 证书，20：GlobalSign 增强型 （EV）SSL 证书，21：TrustAsia 企业型通配符多域名（OV）SSL 证书（D3），22：GlobalSign 企业型多域名（OV）SSL 证书，23：GlobalSign 企业型通配符多域名（OV）SSL 证书，24：GlobalSign 增强型多域名（EV）SSL 证书，25：Wotrus 域名型证书，26：Wotrus 域名型多域名证书，27：Wotrus 域名型通配符证书，28：Wotrus 企业型证书，29：Wotrus 企业型多域名证书，30：Wotrus 企业型通配符证书，31：Wotrus 增强型证书，32：Wotrus 增强型多域名证书，33：WoTrus-国密域名型证书，34：WoTrus-国密域名型证书（多域名），35：WoTrus-国密域名型证书（通配符），37：WoTrus-国密企业型证书，38：WoTrus-国密企业型证书（多域名），39：WoTrus-国密企业型证书（通配符），40：WoTrus-国密增强型证书，41：WoTrus-国密增强型证书（多域名），42：TrustAsia-域名型证书（通配符多域名），43：DNSPod-企业型(OV)SSL证书44：DNSPod-企业型(OV)通配符SSL证书45：DNSPod-企业型(OV)多域名SSL证书46：DNSPod-增强型(EV)SSL证书47：DNSPod-增强型(EV)多域名SSL证书48：DNSPod-域名型(DV)SSL证书49：DNSPod-域名型(DV)通配符SSL证书50：DNSPod-域名型(DV)多域名SSL证书51：DNSPod（国密）-企业型(OV)SSL证书52：DNSPod（国密）-企业型(OV)通配符SSL证书53：DNSPod（国密）-企业型(OV)多域名SSL证书54：DNSPod（国密）-域名型(DV)SSL证书55：DNSPod（国密）-域名型(DV)通配符SSL证书56：DNSPod（国密）-域名型(DV)多域名SSL证书57：SecureSite 企业型专业版多域名(OV Pro)58：SecureSite 企业型多域名(OV)59：SecureSite 增强型专业版多域名(EV Pro)60：SecureSite 增强型多域名(EV)61：Geotrust 增强型多域名(EV)75：SecureSite 企业型(OV)76：SecureSite 企业型(OV)通配符77：SecureSite 增强型(EV)78：Geotrust 企业型(OV)79：Geotrust 企业型(OV)通配符80：Geotrust 增强型(EV)81：GlobalSign 企业型（OV）SSL证书82：GlobalSign 企业型通配符 （OV）SSL证书83：TrustAsia C1 DV Free85：GlobalSign 增强型 （EV）SSL证书88：GlobalSign 企业型通配符多域名 （OV）SSL证书89：GlobalSign 企业型多域名 （OV）SSL证书90：GlobalSign 增强型多域名（EV） SSL证书91：Geotrust 增强型多域名(EV)92：SecureSite 企业型专业版多域名(OV Pro)93：SecureSite 企业型多域名(OV)94：SecureSite 增强型专业版多域名(EV Pro)95：SecureSite 增强型多域名(EV)96：SecureSite 增强型专业版(EV Pro)97：SecureSite 企业型专业版(OV Pro)98：CFCA 企业型(OV)SSL证书99：CFCA 企业型多域名(OV)SSL证书100：CFCA 企业型通配符(OV)SSL证书101：CFCA 增强型(EV)SSL证书 */
   PackageType?: string | null;
   /** 证书产品名称 */
   ProductZhName?: string | null;
@@ -2128,6 +2284,8 @@ declare interface DescribeCertificateResponse {
   CAEndTimes?: string[] | null;
   /** DV证书吊销验证值 */
   DvRevokeAuthDetail?: DvAuths[] | null;
+  /** 是否可重新提交。默认值：false */
+  ResubmitAble?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2788,6 +2946,44 @@ declare interface DownloadCertificateResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCSRRequest {
+  /** CSR ID标识 */
+  CSRId: number;
+  /** 是否生成CSR内容。生成CSR内容后，此CSR记录不再支持修改 */
+  Generate: boolean;
+  /** 域名 */
+  Domain?: string;
+  /** 企业/单位名称 */
+  Organization?: string;
+  /** 部门 */
+  Department?: string;
+  /** 邮箱 */
+  Email?: string;
+  /** 省份 */
+  Province?: string;
+  /** 城市 */
+  City?: string;
+  /** 国家 */
+  Country?: string;
+  /** 加密算法，支持 RSA及ECC。 */
+  EncryptAlgo?: string;
+  /** 密钥参数，RSA仅支持2048，4096。ECC仅支持prime256v1 */
+  KeyParameter?: string;
+  /** 备注 */
+  Remark?: string;
+  /** 私钥密码 */
+  KeyPassword?: string;
+  /** SAN域名 */
+  SubjectAltName?: string[];
+}
+
+declare interface ModifyCSRResponse {
+  /** CSR ID标识 */
+  Id?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCertificateAliasRequest {
   /** 证书 ID。 */
   CertificateId: string;
@@ -3153,6 +3349,8 @@ declare interface Ssl {
   (): Versions;
   /** 免费证书申请 {@link ApplyCertificateRequest} {@link ApplyCertificateResponse} */
   ApplyCertificate(data: ApplyCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyCertificateResponse>;
+  /** 批量删除CSR {@link BatchDeleteCSRRequest} {@link BatchDeleteCSRResponse} */
+  BatchDeleteCSR(data: BatchDeleteCSRRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteCSRResponse>;
   /** 取消证书审核 {@link CancelAuditCertificateRequest} {@link CancelAuditCertificateResponse} */
   CancelAuditCertificate(data: CancelAuditCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CancelAuditCertificateResponse>;
   /** 取消证书订单 {@link CancelCertificateOrderRequest} {@link CancelCertificateOrderResponse} */
@@ -3171,6 +3369,8 @@ declare interface Ssl {
   CommitCertificateInformation(data: CommitCertificateInformationRequest, config?: AxiosRequestConfig): AxiosPromise<CommitCertificateInformationResponse>;
   /** 主动触发证书验证 {@link CompleteCertificateRequest} {@link CompleteCertificateResponse} */
   CompleteCertificate(data: CompleteCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CompleteCertificateResponse>;
+  /** 创建CSR {@link CreateCSRRequest} {@link CreateCSRResponse} */
+  CreateCSR(data: CreateCSRRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCSRResponse>;
   /** 购买付费证书 {@link CreateCertificateRequest} {@link CreateCertificateResponse} */
   CreateCertificate(data: CreateCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCertificateResponse>;
   /** 创建证书关联云资源异步任务 {@link CreateCertificateBindResourceSyncTaskRequest} {@link CreateCertificateBindResourceSyncTaskResponse} */
@@ -3189,6 +3389,10 @@ declare interface Ssl {
   DeployCertificateRecordRetry(data?: DeployCertificateRecordRetryRequest, config?: AxiosRequestConfig): AxiosPromise<DeployCertificateRecordRetryResponse>;
   /** 云资源部署成功记录回滚 {@link DeployCertificateRecordRollbackRequest} {@link DeployCertificateRecordRollbackResponse} */
   DeployCertificateRecordRollback(data?: DeployCertificateRecordRollbackRequest, config?: AxiosRequestConfig): AxiosPromise<DeployCertificateRecordRollbackResponse>;
+  /** 查询CSR详情 {@link DescribeCSRRequest} {@link DescribeCSRResponse} */
+  DescribeCSR(data: DescribeCSRRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSRResponse>;
+  /** 查询CSR列表 {@link DescribeCSRSetRequest} {@link DescribeCSRSetResponse} */
+  DescribeCSRSet(data?: DescribeCSRSetRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCSRSetResponse>;
   /** 获取证书信息 {@link DescribeCertificateRequest} {@link DescribeCertificateResponse} */
   DescribeCertificate(data: DescribeCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCertificateResponse>;
   /** 查询证书关联云资源任务结果 - 返回关联详情 {@link DescribeCertificateBindResourceTaskDetailRequest} {@link DescribeCertificateBindResourceTaskDetailResponse} */
@@ -3251,6 +3455,8 @@ declare interface Ssl {
   DescribePackages(data?: DescribePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePackagesResponse>;
   /** 下载证书 {@link DownloadCertificateRequest} {@link DownloadCertificateResponse} */
   DownloadCertificate(data: DownloadCertificateRequest, config?: AxiosRequestConfig): AxiosPromise<DownloadCertificateResponse>;
+  /** 修改CSR信息 {@link ModifyCSRRequest} {@link ModifyCSRResponse} */
+  ModifyCSR(data: ModifyCSRRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSRResponse>;
   /** 修改证书备注 {@link ModifyCertificateAliasRequest} {@link ModifyCertificateAliasResponse} */
   ModifyCertificateAlias(data: ModifyCertificateAliasRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCertificateAliasResponse>;
   /** 修改证书所属项目 {@link ModifyCertificateProjectRequest} {@link ModifyCertificateProjectResponse} */

@@ -2873,7 +2873,7 @@ declare interface InquiryPriceUpgradeDBInstanceRequest {
   Storage: number;
   /** 实例的内存大小，单位GB */
   Memory: number;
-  /** 实例ID，形如postgres-hez4fh0v。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID，形如postgres-hez4fh0v。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
   /** 实例计费类型。 */
   InstanceChargeType?: string;

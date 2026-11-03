@@ -4204,6 +4204,18 @@ declare interface ProtectStat {
   Num?: number;
 }
 
+/** 自定义隔离模式的告警类型字典条目（灰度规则系统下发） */
+declare interface QuaraTypeDictItem {
+  /** 告警类型标识，与 QuaraTypes 取值一致 */
+  Code?: string;
+  /** 展示类型名 */
+  Name?: string;
+  /** 是否推荐隔离 */
+  Recommend?: boolean;
+  /** 描述和建议 */
+  Desc?: string;
+}
+
 /** 主机快照备份列表 */
 declare interface RansomDefenseBackup {
   /** 备份时间 */
@@ -11002,7 +11014,7 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   EnableInspiredEngine?: number;
   /** 是否开启恶意进程查杀[0:未开启,1:开启] */
   EnableMemShellScan?: number;
-  /** 防护模式 0 标准 1 重保 */
+  /** 防护模式 0 标准 1 重保 2自定义隔离 */
   ProtectMode?: number;
   /** 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件 */
   ProtectFileScope?: number;
@@ -11012,6 +11024,10 @@ declare interface DescribeMalwareTimingScanSettingResponse {
   QuaraUuids?: string[];
   /** 用户选择的隔离范围，0：默认全隔离 1：用户自选 */
   QuaraScope?: number;
+  /** 自定义隔离模式已保存的告警类型Code列表 */
+  QuaraTypes?: string[];
+  /** 告警类型字典（灰度规则下发，供前端渲染勾选项） */
+  QuaraTypeDict?: QuaraTypeDictItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15275,7 +15291,7 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   EnableInspiredEngine?: number;
   /** 是否开启恶意进程查杀[0:未开启,1:开启] */
   EnableMemShellScan?: number;
-  /** 防护模式 0 标准 1重保 */
+  /** 防护模式 0 标准 1重保 2自定义隔离 */
   ProtectMode?: number;
   /** 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件 */
   ProtectFileScope?: number;
@@ -15285,6 +15301,8 @@ declare interface ModifyMalwareTimingScanSettingsRequest {
   QuaraScope?: number;
   /** 产品类型 0-主机安全(默认) 1-安全中心 */
   ProductType?: number;
+  /** 自定义隔离模式的告警类型Code列表（ProtectMode=2时必填，Code取自Describe返回的QuaraTypeDict） */
+  QuaraTypes?: string[];
 }
 
 declare interface ModifyMalwareTimingScanSettingsResponse {

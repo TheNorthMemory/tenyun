@@ -372,6 +372,28 @@ declare interface RegionInfo {
   ScholarRocketSupportState?: string;
 }
 
+/** 角色状态信息 */
+declare interface RoleStatusInfo {
+  /**  */
+  RoleName?: string;
+  /**  */
+  WorkloadType?: string;
+  /**  */
+  WorkloadName?: string;
+  /**  */
+  RunningReplicas?: number;
+  /**  */
+  TargetReplicas?: number;
+  /**  */
+  ContainerCount?: number;
+  /**  */
+  State?: string;
+  /**  */
+  LastObservedTime?: string;
+  /**  */
+  Role?: string;
+}
+
 /** 场景详情 */
 declare interface SceneInfo {
   /** 场景id */
@@ -412,6 +434,8 @@ declare interface ServiceDetail {
   DeploymentConfigs?: DeploymentConfig[];
   /** 服务超参数配置 */
   HyperParam?: HyperParam;
+  /** 角色状态 */
+  RoleStatuses?: RoleStatusInfo[];
   /** 安全类型 */
   SecurityType?: string;
   /** 角色算力配置列表 */

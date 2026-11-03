@@ -634,6 +634,8 @@ declare interface DisplaySeed {
   CreateAt?: string;
   /** 是否可信 */
   IsValid?: boolean;
+  /** 关键词用途，可多选：leakage_code代码泄露/leakage_data其他泄露/wechat_applet微信小程序/wechat_official_account微信公众号；不填=全部用途 */
+  Purposes?: string[] | null;
 }
 
 /** 敏感信息泄露数据 */
@@ -1315,6 +1317,8 @@ declare interface CreateSeedsRequest {
   Keywords?: string[];
   /** 母公司种子数组 */
   ParentCompanies?: string[];
+  /** 关键词用途：leakage_code代码泄露/leakage_data其他泄露/wechat_applet微信小程序/wechat_official_account微信公众号，不填=全部用途 */
+  KeywordPurposes?: string[];
 }
 
 declare interface CreateSeedsResponse {

@@ -5209,11 +5209,11 @@ declare interface SubmitMarkEssayAgentJobResponse {
 }
 
 declare interface SubmitMultimodalDocParseJobRequest {
-  /** 支持解析的文件类型。取值：1：PDF 文档2：Word 文档（.doc/.docx）3：PPT 演示文稿（.ppt/.pptx）4：Excel 表格（.xls/.xlsx）5：Markdown 文档（.md）6：纯文本文件（.txt）7：图片文件（.png/.jpg/.jpeg 等）8：WPS 文档支持的文件大小：PDF/WORD/PPT 支持 150M 且 300 页。 */
+  /** 支持解析的文件类型。取值：1：PDF 文档2：Word 文档（.doc/.docx）3：PPT 演示文稿（.ppt/.pptx）4：Excel 表格（.xls/.xlsx）5：Markdown 文档（.md）6：纯文本文件（.txt）7：图片文件（.png/.jpg/.jpeg 等）8：WPS 文档支持的文件大小：PDF/WORD/PPT 支持 500M 且 300 页。 */
   FileType: number;
-  /** 文件的 Url 地址，支持 FileType 参数对应的文件格式及大小。文件下载时间不超过 3 秒。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
+  /** 文件的 Url 地址，支持 FileType 参数对应的文件格式及大小。文件下载时间不超过 30 秒。文件存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议文件存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   FileUrl?: string;
-  /** 文件的 Base64 值。支持 FileType 参数对应的文件格式，支持的文件大小不超过 8M。文件下载时间不超过 3 秒。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
+  /** 文件的 Base64 值。支持 FileType 参数对应的文件格式，支持的文件大小不超过 8M。文件下载时间不超过 30 秒。文件的 FileUrl、FileBase64 必须提供一个，如果都提供，只使用 FileUrl。 */
   FileBase64?: string;
   /** 输出格式。1：json格式2：markdown格式3：xml格式9：json+markdown+xml格式 */
   ResultType?: number;
@@ -5245,7 +5245,7 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   BoolSingleQuestion?: boolean;
   /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
   EnableDeepThink?: boolean;
-  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改；当key为DisableAnswerAnalysis value为true表示不输出答案解析；当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）； */
+  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改；当key为DisableAnswerAnalysis value为true表示不输出答案解析；当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标； */
   QuestionConfigMap?: string;
   /** 【废弃字段】 */
   ReferenceAnswer?: string;
@@ -5257,7 +5257,7 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   AssistMarkType?: number;
   /** 单题辅助批改文本内容列表，当AssistMarkType为1时生效，用于提供题目相关的辅助文本信息。当key为ReferenceAnswer，value可以输入单题的辅助答案文本。当key为QuestionAuxStem，value可以输入单题的辅助题干。 */
   AnswerAssistMap?: string;
-  /** 是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-> ReturnImageUr中l,默认为false不开启 */
+  /** 是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-> ReturnImageUrl中,默认为false不开启 */
   EnableImageCrop?: boolean;
 }
 
@@ -5279,7 +5279,7 @@ declare interface SubmitQuestionSplitJobRequest {
   ImageUrlList?: string[];
   /** 批量base64图片入口。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。入参限制：要求pdf只能有一个url或base64 */
   ImageBase64List?: string[];
-  /** 选择切题模型枚举值：youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题youtu_crop_pro： 属于切题精调大模型，针对双栏、跨栏等复杂版式识别精度大幅提升，但推理耗时更长默认值：youtu_crop */
+  /** 选择切题模型枚举值：youtu_crop： 轻量化切题模型，运算速度更快，适合常规切题默认值：youtu_crop */
   ModelType?: string;
   /** 是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-> ReturnImageUr中l,默认为false不开启 */
   EnableImageCrop?: boolean;

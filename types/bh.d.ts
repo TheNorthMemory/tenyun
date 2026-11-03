@@ -292,6 +292,12 @@ declare interface ChangePwdTaskInfo {
   LastTime?: string;
   /** 改密任务状态，0-待执行，1-执行完成，2-执行失败，3-执行中，4-执行超时 */
   Status?: number;
+  /** 改密任务类别枚举值：0： Linux 类型改密任务1： Windows 类型改密任务默认值：0 */
+  Category?: number;
+  /** 改密任务协议类型枚举值：0： 未定义，Linux 改密任务类型默认值1： Windows OpenSSH 协议默认值：0 */
+  Protocol?: number;
+  /** 改密协议端口号. Linux 改密协议类型端口号值为0默认值：0 */
+  Port?: number;
 }
 
 /** 负载均衡 */
@@ -1230,6 +1236,8 @@ declare interface TaskResult {
   StartTime?: string;
   /** 运维任务结束时间 */
   EndTime?: string;
+  /** 任务类别枚举值：0： Linux 类型任务（默认类型）1： Windows 类型任务默认值：0 */
+  Category?: number;
 }
 
 /** 用户信息 */
@@ -1607,6 +1615,12 @@ declare interface CreateChangePwdTaskRequest {
   Period?: number;
   /** 周期任务首次执行时间 */
   FirstTime?: string;
+  /** 改密任务类别枚举值：0： Linux 类型改密任务1： Windows 类型改密任务默认值：0 */
+  Category?: number;
+  /** 改密任务协议类型枚举值：0： 未定义，Linux改密任务类型默认值1： Windows OpenSSH 协议默认值：0 */
+  Protocol?: number;
+  /** 改密协议端口号. Linux 改密类型协议端口号需设置为0取值范围：[0, 65535]默认值：0 */
+  Port?: number;
 }
 
 declare interface CreateChangePwdTaskResponse {
@@ -2901,6 +2915,12 @@ declare interface ModifyChangePwdTaskRequest {
   Period?: number;
   /** 周期任务首次执行时间 */
   FirstTime?: string;
+  /** 改密任务类别枚举值：0： Linux 类型改密任务1： Windows 类型改密任务默认值：0 */
+  Category?: number;
+  /** 改密任务协议类型枚举值：0： 未定义，Linux 改密任务类型默认值1： Windows OpenSSH 协议默认值：0 */
+  Protocol?: number;
+  /** 改密协议端口号，Linux 改密类型协议端口号需设置为0取值范围：[0, 65535]默认值：0 */
+  Port?: number;
 }
 
 declare interface ModifyChangePwdTaskResponse {
