@@ -320,6 +320,18 @@ declare interface BucketPartitioning {
   NumBuckets?: number;
 }
 
+/** CFS详情 */
+declare interface CFSFileSystemInfo {
+  /** 文件系统ID */
+  FileSystemId?: string;
+}
+
+/** CFS Turbo 文件系统信息（仅包含可用状态的文件系统） */
+declare interface CFSTurboFileSystemInfo {
+  /** CFS Turbo ID */
+  FileSystemId?: string;
+}
+
 /** chdfs产品vpc信息 */
 declare interface CHDFSProductVpcInfo {
   /** vpc id */
@@ -332,6 +344,12 @@ declare interface CHDFSProductVpcInfo {
   RuleId?: number;
   /** 权限组Id */
   AccessGroupId?: string;
+}
+
+/** COS详情 */
+declare interface COSBucketInfo {
+  /** COS桶名称 */
+  Name?: string;
 }
 
 /** CSV类型数据格式 */
@@ -1844,6 +1862,20 @@ declare interface GatewayInfo {
   PayMode?: number | null;
   /** 模式 */
   Mode?: number | null;
+}
+
+/** goosefs返回参数 */
+declare interface GooseFSClustersInfo {
+  /** 集群 ID，形如 g_cvm_xxx */
+  ClusterId?: string;
+  /** 集群名称 */
+  Name?: string;
+  /** 所属子网 ID */
+  SubnetId?: string;
+  /** 可用区 */
+  Zone?: string;
+  /** Master RPC 地址，多个地址用英文逗号拼接，例如 "10.0.1.10:19998,10.0.1.11:19998"，供 CSI 驱动连接用 */
+  MasterRPCAddress?: string;
 }
 
 /** 推理模型接入goosefs参数 */
@@ -11858,6 +11890,38 @@ declare interface GetRayJobYamlResponse {
   RequestId?: string;
 }
 
+declare interface GetRayServeEventRequest {
+  /** DeploymentId */
+  Id: string;
+  /** 开始时间（毫秒时间戳） */
+  StartTime?: number;
+  /** 结束时间（毫秒时间戳） */
+  EndTime?: number;
+  /** 排序字段列表 */
+  SortFields?: SortField[];
+  /** 翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值 */
+  Context?: string;
+  /** 分页大小 */
+  PageSize?: number;
+  /** 事件类型过滤，仅允许 ASCII 字母（如 Normal、Warning） */
+  EventType?: string;
+}
+
+declare interface GetRayServeEventResponse {
+  /** 翻页上下文，下一次分页请求时传入此值 */
+  Context?: string;
+  /** 是否已经返回所有符合条件的日志，true 表示已全部返回 */
+  ListOver?: boolean;
+  /** 事件列表 */
+  Events?: RayJobEventItem[];
+  /** 事件开始时间单位：毫秒 */
+  StartTime?: number;
+  /** 事件结束时间单位：毫秒 */
+  EndTime?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetResourceConfigRequest {
   /** 模板ID */
   Id: string;
@@ -12855,6 +12919,24 @@ declare interface ListServiceApiKeysResponse {
   PageSize?: number;
   /** 总页数 */
   TotalPages?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListStoragesRequest {
+  /** 存储类型筛选：CFS / CFSTurbo / COS / GooseFS；不填表示查询所有类型枚举值：CFS： CFS 文件.CFSTurbo： CFS Turbo 文件.COS ： COS Bucket.GooseFS： GooseFS . */
+  StorageType?: string;
+}
+
+declare interface ListStoragesResponse {
+  /** CFS列表 */
+  CFSFileSystems?: CFSFileSystemInfo[];
+  /** COS列表 */
+  COSBuckets?: COSBucketInfo[];
+  /** CFS Turbo 文件系统列表 */
+  CFSTurboFileSystems?: CFSTurboFileSystemInfo[];
+  /** GooseFS 集群列表（状态为 ACTIVE 的可用集群） */
+  GooseFSClusters?: GooseFSClustersInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -14437,6 +14519,90 @@ declare interface StopRayClusterResponse {
   Tags?: Tag[];
   /** 用户网络配置(JSON，跨租户 ENI 等) */
   NetworkConfig?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SubmitRayJobRequest {
+  /** 入口命令 */
+  Entrypoint: string;
+  /** 资源分区ID */
+  ResourcePartitionId?: string;
+  /** 队列名称 */
+  Queue?: string;
+  /** 任务名称 */
+  JobName?: string;
+  /** 运行时环境 */
+  RuntimeEnv?: string;
+  /** 镜像名称 */
+  Image?: string;
+  /** 镜像拉取策略（Always, IfNotPresent, Never） */
+  ImagePullPolicy?: string;
+  /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
+  ImagePullType?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
+  /** 目录 */
+  Catalog?: string;
+  /** 弹性伸缩配置 */
+  AutoscalerOptions?: string;
+  /** 高级参数，JSON 字符串（透传到 Neutrino） */
+  AdvancedOptions?: string;
+  /** 计算组ID；与 ClusterId 互斥。组成员展开为候选集群后由 neutrino 侧路由 */
+  GroupId?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 用户网络配置 JSON 字符串 */
+  NetworkConfig?: string;
+}
+
+declare interface SubmitRayJobResponse {
+  /** 任务ID */
+  Id?: string;
+  /** 所属资源分区ID */
+  ResourcePartitionId?: string;
+  /** 所属队列名称 */
+  Queue?: string;
+  /** 任务状态 */
+  Status?: string;
+  /** 入口命令 */
+  Entrypoint?: string;
+  /** 任务名称 */
+  JobName?: string;
+  /** 应用ID */
+  AppId?: number;
+  /** 用户UIN */
+  Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 运行时间(ms) */
+  RunningTime?: number;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
+  /** 镜像地址 */
+  Image?: string;
+  /** 资源配置(JSON) */
+  ResourceConfig?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
+  /** 高级参数，JSON 字符串（透传到 Neutrino） */
+  AdvancedOptions?: string;
+  /** 作业优先级（1-9，数字越大优先级越高） */
+  Priority?: number;
+  /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
+  Tags?: Tag[];
+  /** 业务来源标识（调用上下文） */
+  JobSource?: string;
+  /** 集群名称 */
+  ClusterName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -16078,6 +16244,8 @@ declare interface Dlc {
   GetRayJobPods(data: GetRayJobPodsRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobPodsResponse>;
   /** 获取RayJob的YAML内容 {@link GetRayJobYamlRequest} {@link GetRayJobYamlResponse} */
   GetRayJobYaml(data: GetRayJobYamlRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayJobYamlResponse>;
+  /** 获取RayServe事件 {@link GetRayServeEventRequest} {@link GetRayServeEventResponse} */
+  GetRayServeEvent(data: GetRayServeEventRequest, config?: AxiosRequestConfig): AxiosPromise<GetRayServeEventResponse>;
   /** 获取资源配置模板详情 {@link GetResourceConfigRequest} {@link GetResourceConfigResponse} */
   GetResourceConfig(data: GetResourceConfigRequest, config?: AxiosRequestConfig): AxiosPromise<GetResourceConfigResponse>;
   /** 授权DLCCatalog访问权限 {@link GrantDLCCatalogAccessRequest} {@link GrantDLCCatalogAccessResponse} */
@@ -16144,6 +16312,8 @@ declare interface Dlc {
   ListResourceConfigs(data?: ListResourceConfigsRequest, config?: AxiosRequestConfig): AxiosPromise<ListResourceConfigsResponse>;
   /** 列出指定推理服务绑定的 API Key {@link ListServiceApiKeysRequest} {@link ListServiceApiKeysResponse} */
   ListServiceApiKeys(data: ListServiceApiKeysRequest, config?: AxiosRequestConfig): AxiosPromise<ListServiceApiKeysResponse>;
+  /** 列出存储 {@link ListStoragesRequest} {@link ListStoragesResponse} */
+  ListStorages(data?: ListStoragesRequest, config?: AxiosRequestConfig): AxiosPromise<ListStoragesResponse>;
   /** 查询日志详情 {@link ListTaskJobLogDetailRequest} {@link ListTaskJobLogDetailResponse} */
   ListTaskJobLogDetail(data: ListTaskJobLogDetailRequest, config?: AxiosRequestConfig): AxiosPromise<ListTaskJobLogDetailResponse>;
   /** 日志名称列表 {@link ListTaskJobLogNameRequest} {@link ListTaskJobLogNameResponse} */
@@ -16242,6 +16412,8 @@ declare interface Dlc {
   StopMlflowServer(data?: StopMlflowServerRequest, config?: AxiosRequestConfig): AxiosPromise<StopMlflowServerResponse>;
   /** 停止集群 {@link StopRayClusterRequest} {@link StopRayClusterResponse} */
   StopRayCluster(data: StopRayClusterRequest, config?: AxiosRequestConfig): AxiosPromise<StopRayClusterResponse>;
+  /** 提交Ray任务 {@link SubmitRayJobRequest} {@link SubmitRayJobResponse} */
+  SubmitRayJob(data: SubmitRayJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitRayJobResponse>;
   /** 统一提交训练作业 {@link SubmitTrainingJobRequest} {@link SubmitTrainingJobResponse} */
   SubmitTrainingJob(data?: SubmitTrainingJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitTrainingJobResponse>;
   /** 挂起或启动数据引擎 {@link SuspendResumeDataEngineRequest} {@link SuspendResumeDataEngineResponse} */

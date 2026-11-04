@@ -2191,6 +2191,28 @@ declare namespace V20180717 {
     MetaData?: MediaMetaData;
   }
 
+  /** AIGC 单配额模型。 */
+  interface AigcModelQuota {
+    /** 模型名称。 */
+    ModelName: string;
+    /** 任务的配额数。单位：张/秒。当 QuotaType 为 Image 时，单位为张；当 QuotaType 为 Video 时，单位为秒； */
+    QuotaLimit: number;
+    /** 模型版本。 */
+    ModelVersion?: string;
+  }
+
+  /** AIGC 单模型配额与用量信息。 */
+  interface AigcModelQuotaWithUsage {
+    /** 模型名称。 */
+    ModelName?: string;
+    /** 模型版本。 */
+    ModelVersion?: string;
+    /** 任务的配额数。单位：张/秒。当 QuotaType 为 Image 时，单位为张；当 QuotaType 为 Video 时，单位为秒； */
+    QuotaLimit?: number;
+    /** 已经使用的用量数单位：当QuotaLimit=Image时，单位为张当QuotaLimit=Video时，单位为秒 */
+    Usage?: number;
+  }
+
   /** AIGC 配额 */
   interface AigcQuotaItem {
     /** 配额类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务Text： AIGC 生文任务 */
@@ -2201,6 +2223,14 @@ declare namespace V20180717 {
     QuotaLimit?: number;
     /** 已经使用的用量数单位：当QuotaLimit=Image时，单位为张当QuotaLimit=Video时，单位为秒当QuotaLimit=Text时，单位为token */
     Usage?: number;
+    /** 配额重置周期。枚举值：Day： 每天重置。Month： 每月指定日期重置。Total： 永不重置，QuotaLimit参数即为总额度。 */
+    QuotaPeriod?: string;
+    /** 每月配额的重置日期，仅QuotaPeriod=Month时有效。如果当月无所选日期时，顺延至次月 1 日 00:00 重置。 */
+    ResetDay?: number;
+    /** 是否开启按单个模型设置配额枚举值：ON： 打开OFF： 关闭默认值：OFF */
+    ModelQuotaSwitch?: string;
+    /** 按单个模型设置的配额，仅ModelQuotaSwitch=ON时有效。 */
+    ModelQuotas?: AigcModelQuotaWithUsage[];
   }
 
   /** AIGC生文明细 */
@@ -7933,7 +7963,7 @@ declare namespace V20180717 {
     AspectRatio?: string;
     /** 生成视频时长。当使用生商品图场景时，可选值4、6、8秒。当使用角色场景时，可选值为4到15秒。 */
     Duration?: number;
-    /** 分辨率。仅当角色场景时有效。取值如下：当 Model 是 character_scene_standard 时，支持 480p、720p、1080p、4K；当 Model 是 character_scene_mini 时，支持 480p、720p；当 Model 是 character_scene_fast 时，支持 720p。 */
+    /** 分辨率。仅当角色场景时有效。取值如下：当 Model 是 character_scene_standard 时，支持 480P、720P、1080P、4K；当 Model 是 character_scene_mini 时，支持 480P、720P；当 Model 是 character_scene_fast 时，支持 720P。 */
     Resolution?: string;
   }
 
@@ -8919,6 +8949,8 @@ declare namespace V20180717 {
     MediaName?: string | null;
     /** 输出媒资过期时间，使用 ISO 日期格式，仅 StorageMode 为 Permanent 时生效。不传表示永不过期。 */
     ExpireTime?: string | null;
+    /** 是否保留原视频音频，默认不保留原视频音频。枚举值：ON： 保留音频OFF： 不保留音频 */
+    KeepAudio?: string;
   }
 
   /** 视频深度估计任务信息。 */
@@ -9860,6 +9892,14 @@ declare namespace V20180717 {
     QuotaLimit: number;
     /** 仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken */
     ApiToken?: string;
+    /** 配额重置周期。枚举值：Day： 每天重置。Month： 每月指定日期重置。Total： 永不重置，QuotaLimit参数即为总额度。 */
+    QuotaPeriod?: string;
+    /** 每月配额的重置日期，仅QuotaPeriod=Month时有效。如果当月无所选日期时，顺延至次月 1 日 00:00 重置。 */
+    ResetDay?: number;
+    /** 是否开启按单个模型设置配额枚举值：ON： 打开OFF： 关闭 */
+    ModelQuotaSwitch?: string;
+    /** 按单个模型设置的配额，仅ModelQuotaSwitch=ON时有效。 */
+    ModelQuotas?: AigcModelQuota[];
   }
 
   interface CreateAigcQuotaResponse {
@@ -13136,6 +13176,14 @@ declare namespace V20180717 {
     QuotaLimit: number;
     /** 仅当QuotaType=Text时有效，用于选择需要进行配额限制ApiToken */
     ApiToken?: string;
+    /** 配额重置周期。枚举值：Day： 每天重置。Month： 每月指定日期重置。Total： 永不重置，QuotaLimit参数即为总额度。 */
+    QuotaPeriod?: string;
+    /** 每月配额的重置日期，仅QuotaPeriod=Month时有效。如果当月无所选日期时，顺延至次月 1 日 00:00 重置。 */
+    ResetDay?: number;
+    /** 是否开启按单个模型设置配额枚举值：ON： 打开OFF： 关闭 */
+    ModelQuotaSwitch?: string;
+    /** 按单个模型设置的配额，仅ModelQuotaSwitch=ON时有效。 */
+    ModelQuotas?: AigcModelQuota[];
   }
 
   interface ModifyAigcQuotaResponse {

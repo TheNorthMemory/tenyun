@@ -2546,7 +2546,7 @@ declare interface SecurityGroupLimitSet {
 
 /** 安全组规则对象 */
 declare interface SecurityGroupPolicy {
-  /** 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用`DescribeSecurityGroupPolicies`获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。 */
+  /** 安全组规则索引号，值会随着安全组规则的变更动态变化。使用PolicyIndex时，请先调用DescribeSecurityGroupPolicies获取到规则的PolicyIndex，并且结合返回值中的Version一起使用处理规则。 */
   PolicyIndex?: number;
   /** 协议, 取值: TCP,UDP,ICMP,ICMPv6,ALL。 */
   Protocol?: string;
@@ -2554,9 +2554,9 @@ declare interface SecurityGroupPolicy {
   Port?: string;
   /** 协议端口ID或者协议端口组ID。ServiceTemplate和Protocol+Port互斥。 */
   ServiceTemplate?: ServiceTemplateSpecification;
-  /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IP地址。 */
+  /** 网段或IP(互斥)，特殊说明：0.0.0.0/n 都会映射为0.0.0.0/0。作为入参时，可使用字符串MY_PUBLIC_IP指代发起请求的公网IP地址。 */
   CidrBlock?: string;
-  /** 网段或IPv6(互斥)。作为入参时，可使用字符串`MY_PUBLIC_IP`指代发起请求的公网IPv6地址。 */
+  /** 网段或IPv6(互斥)。作为入参时，可使用字符串MY_PUBLIC_IP指代发起请求的公网IPv6地址。 */
   Ipv6CidrBlock?: string;
   /** 安全组实例ID，例如：sg-ohuuioma。 */
   SecurityGroupId?: string;
@@ -2568,7 +2568,7 @@ declare interface SecurityGroupPolicy {
   PolicyDescription?: string;
   /** 安全组最近修改时间。 */
   ModifyTime?: string;
-  /** 安全组规则优先级，值会随着安全组规则的变更动态变化。使用Priority时，请先调用`DescribeSecurityGroupPolicies`获取到规则的Priority，并且结合返回值中的Version一起使用处理规则。 */
+  /** 安全组规则优先级，值会随着安全组规则的变更动态变化。使用Priority时，请先调用DescribeSecurityGroupPolicies获取到规则的Priority，并且结合返回值中的Version一起使用处理规则。 */
   Priority?: number;
 }
 

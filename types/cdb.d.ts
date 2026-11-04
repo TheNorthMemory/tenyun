@@ -664,6 +664,16 @@ declare interface CommonTimeWindow {
   BackupPeriodTime?: string;
 }
 
+/** 创建账号信息 */
+declare interface CreateDBAccount {
+  /** 账号名称 */
+  User?: string;
+  /** 主机名 */
+  Host?: string;
+  /** 开始SSM托管的相关信息 */
+  SSMInfos?: SSMCreateAccountInfos;
+}
+
 /** proxy配置 */
 declare interface CustomConfig {
   /** 设备 */
@@ -700,6 +710,20 @@ declare interface DatabasesWithCharacterLists {
   DatabaseName?: string;
   /** 字符集类型 */
   CharacterSet?: string;
+}
+
+/** 删除账号信息 */
+declare interface DeleteDBAccount {
+  /** 用户名 */
+  User?: string;
+  /** 主机名 */
+  Host?: string;
+  /** 凭据名称 */
+  SecretName?: string;
+  /** 保留时间，0表示立即删除(最大30天) */
+  RecoveryWindowInDays?: number;
+  /** 删除模式枚举值：0： 仅删除凭据1： 删除凭据+账号 */
+  DeleteMode?: number;
 }
 
 /** 投递错误 */
@@ -1320,6 +1344,18 @@ declare interface PeriodStrategy {
   TimeInterval?: TimeInterval;
 }
 
+/** 权限组 */
+declare interface PrivilegeGroup {
+  /** 全局权限 */
+  GlobalPrivileges?: string[] | null;
+  /** 数据库权限 */
+  DatabasePrivileges?: DatabasePrivilege[] | null;
+  /** 表权限 */
+  TablePrivileges?: TablePrivilege[] | null;
+  /** 列权限 */
+  ColumnPrivileges?: ColumnPrivilege[] | null;
+}
+
 /** 数据库代理地址信息 */
 declare interface ProxyAddress {
   /** 代理组地址ID */
@@ -1736,6 +1772,28 @@ declare interface RuleTemplateRecordInfo {
   Operator?: string;
   /** 变更的时间。 */
   UpdateTime?: string;
+}
+
+/** 创建SSM账号相关信息 */
+declare interface SSMCreateAccountInfos {
+  /** 是否开启SSM托管枚举值：true： 开启托管false： 不开启托管 */
+  IsOpenSSM?: boolean | null;
+  /** 是否创建轮转账号枚举值：true： 创建轮转账号false： 创建非轮转账号 */
+  IsRotationAccount?: boolean | null;
+  /** 凭据名称 */
+  SecretName?: string | null;
+  /** KMS CMK ID */
+  KmsKeyId?: string | null;
+  /** 密钥类型枚举值：0： KMS密码1： 软件密钥 */
+  EncryptType?: number | null;
+  /** 是否开启轮转 */
+  EnableRotation?: boolean | null;
+  /** 轮转周期 */
+  RotationFrequency?: number | null;
+  /** 权限列表 */
+  PrivilegesList?: PrivilegeGroup | null;
+  /** 独享版 KMS 集群 ID */
+  KmsHsmClusterId?: string | null;
 }
 
 /** 安全组详情 */
@@ -2243,6 +2301,8 @@ declare interface CreateAccountsRequest {
   Description?: string;
   /** 新账户最大可用连接数，默认值为10240，最大可设置值为10240。 */
   MaxUserConnections?: number;
+  /** 创建账号时的完整信息 */
+  CreateAccounts?: CreateDBAccount[];
 }
 
 declare interface CreateAccountsResponse {
@@ -2823,6 +2883,8 @@ declare interface DeleteAccountsRequest {
   InstanceId: string;
   /** 云数据库账号。 */
   Accounts?: Account[];
+  /** 待删除账号的完整信息。 */
+  DeleteAccounts?: DeleteDBAccount[];
 }
 
 declare interface DeleteAccountsResponse {

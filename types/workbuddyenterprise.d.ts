@@ -712,6 +712,14 @@ declare interface DeleteScheduledTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteSessionArtifactListRequest {
+}
+
+declare interface DeleteSessionArtifactListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAgentListRequest {
   /** 偏移量，从 0 开始 */
   Offset?: number;
@@ -1148,6 +1156,22 @@ declare interface DescribeScheduledTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSessionArtifactDownloadUrlRequest {
+}
+
+declare interface DescribeSessionArtifactDownloadUrlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeSessionArtifactListRequest {
+}
+
+declare interface DescribeSessionArtifactListResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSkillListRequest {
   /** 技能来源，必填：BUILTIN（内置）/ CUSTOM（自建）/ AUTHORIZED（企业授权）。数据通路判别，非筛选条件 */
   Source: string;
@@ -1421,6 +1445,8 @@ declare interface Workbuddyenterprise {
   DeleteAgent(data: DeleteAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentResponse>;
   /** 删除自动化任务 {@link DeleteScheduledTaskRequest} {@link DeleteScheduledTaskResponse} */
   DeleteScheduledTask(data: DeleteScheduledTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteScheduledTaskResponse>;
+  /** 删除会话物料 {@link DeleteSessionArtifactListRequest} {@link DeleteSessionArtifactListResponse} */
+  DeleteSessionArtifactList(data?: DeleteSessionArtifactListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteSessionArtifactListResponse>;
   /** 查询 Agent 详情 {@link DescribeAgentRequest} {@link DescribeAgentResponse} */
   DescribeAgent(data: DescribeAgentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentResponse>;
   /** 查询 Agent 列表 {@link DescribeAgentListRequest} {@link DescribeAgentListResponse} */
@@ -1453,6 +1479,10 @@ declare interface Workbuddyenterprise {
   DescribeScheduledTaskLog(data: DescribeScheduledTaskLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskLogResponse>;
   /** 查询自动化任务执行日志列表 {@link DescribeScheduledTaskLogListRequest} {@link DescribeScheduledTaskLogListResponse} */
   DescribeScheduledTaskLogList(data: DescribeScheduledTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskLogListResponse>;
+  /** 获取下载链接 {@link DescribeSessionArtifactDownloadUrlRequest} {@link DescribeSessionArtifactDownloadUrlResponse} */
+  DescribeSessionArtifactDownloadUrl(data?: DescribeSessionArtifactDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionArtifactDownloadUrlResponse>;
+  /** 查询会话物料 {@link DescribeSessionArtifactListRequest} {@link DescribeSessionArtifactListResponse} */
+  DescribeSessionArtifactList(data?: DescribeSessionArtifactListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionArtifactListResponse>;
   /** 查询技能列表 {@link DescribeSkillListRequest} {@link DescribeSkillListResponse} */
   DescribeSkillList(data: DescribeSkillListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSkillListResponse>;
   /** 查询用户级访问凭证 {@link DescribeUserAccessTokenRequest} {@link DescribeUserAccessTokenResponse} */

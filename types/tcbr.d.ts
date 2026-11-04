@@ -960,6 +960,30 @@ declare interface DescribeVersionDetailResponse {
   RequestId?: string;
 }
 
+declare interface InitializeCloudRunResourceRequest {
+  /** tcbr,run,weda,baas */
+  EnvType: string;
+  /** 环境ID 云开发平台必填 */
+  EnvId: string;
+  /** 私有网络Id */
+  VpcId?: string;
+  /** 子网列表 */
+  SubNetIds?: string[];
+  /** 来源：wechat | cloud | weda */
+  Source?: string;
+  /** 渠道：wechat | cloud | weda */
+  Channel?: string;
+}
+
+declare interface InitializeCloudRunResourceResponse {
+  /** 环境Id */
+  EnvId?: string;
+  /** 后付费订单号 */
+  TranId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OperateServerManageRequest {
   /** 环境Id */
   EnvId: string;
@@ -1151,6 +1175,8 @@ declare interface Tcbr {
   DescribeServerManageTask(data: DescribeServerManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerManageTaskResponse>;
   /** 查询版本详情 {@link DescribeVersionDetailRequest} {@link DescribeVersionDetailResponse} */
   DescribeVersionDetail(data: DescribeVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionDetailResponse>;
+  /** 初始化云托管资源 {@link InitializeCloudRunResourceRequest} {@link InitializeCloudRunResourceResponse} */
+  InitializeCloudRunResource(data: InitializeCloudRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeCloudRunResourceResponse>;
   /** 操作发布单 {@link OperateServerManageRequest} {@link OperateServerManageResponse} */
   OperateServerManage(data: OperateServerManageRequest, config?: AxiosRequestConfig): AxiosPromise<OperateServerManageResponse>;
   /** 灰度发布 {@link ReleaseGrayRequest} {@link ReleaseGrayResponse} */

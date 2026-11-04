@@ -1434,6 +1434,20 @@ declare interface ListWorkspaceGroupsRsp {
   TotalPageNumber?: number;
 }
 
+/** 查询工作空间角色列表 */
+declare interface ListWorkspaceRolesRsp {
+  /** 角色列表 */
+  Items?: Role[];
+  /** 当前页码 */
+  PageNumber?: number;
+  /** 每页大小 */
+  PageSize?: number;
+  /** 总记录数 */
+  TotalCount?: number;
+  /** 总页数 */
+  TotalPageNumber?: number;
+}
+
 /** 查询工作空间用户列表响应 */
 declare interface ListWorkspaceUsersRsp {
   /** 用户列表 */
@@ -1726,6 +1740,14 @@ declare interface ResourceGroupInfo {
   ResourceGroupName?: string | null;
   /** 资源组状态参数格式：0 // 未指定 1 // 待创建 2 // 创建中 3 // 运行中 4 // 已停止 5 // 停止中 6 // 启动中 7 // 更新中 8 // 删除中 9 // 已删除 10 // 用户主动启动 / 自动启动（有任务提交且自动启停开启） 11 // 可用: 仅存在于数据计算型 12 // 不可用: 仅存在于数据计算型 13 // 失败 */
   ResourceGroupStatus?: string | null;
+}
+
+/** 角色完整信息 */
+declare interface Role {
+  /** 角色基本信息 */
+  BasicInfo?: RoleBasicInfo;
+  /** 角色权限 */
+  Permissions?: RolePermission[];
 }
 
 /** 角色基础信息 */
@@ -3164,7 +3186,7 @@ declare interface DeleteTableRequest {
   /** 表名 */
   TableName: string;
   /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
+  WorkspaceId: string;
   /** 数据源连接ID，可选（融合版新增字段）。分析版catalog不支持删除表，传入非空时服务端返回ANA_CATALOG_NOT_SUPPORTED错误。通过ListConnections接口获取 */
   ConnectionId?: string;
   /** 数据目录来源，可选（Setats融合新增字段）。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。路由优先级：显式非空CatalogSource > 非空ConnectionId（视为CONNECTION）> 默认METALAKE；CatalogSource非空时ConnectionId将被忽略。 */
@@ -3259,7 +3281,7 @@ declare interface GetCatalogRequest {
   CatalogName: string;
   /** 调用时所在workspace唯一id */
   WorkspaceId: string;
-  /** 数据目录id */
+  /** 数据目录id，通过ListCatalogs接口获取 */
   CatalogId?: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
@@ -3440,7 +3462,7 @@ declare interface GetViewRequest {
   /** View名称 */
   ViewName: string;
   /** 调用时所在workspace唯一id */
-  WorkspaceId?: string;
+  WorkspaceId: string;
   /** 数据获取选项，可选，控制是否返回权限信息及按权限过滤 */
   FetchOption?: FetchOption;
 }
@@ -4070,6 +4092,24 @@ declare interface ListWorkspaceGroupsRequest {
 declare interface ListWorkspaceGroupsResponse {
   /** 工作空间用户组列表 */
   Data?: ListWorkspaceGroupsRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ListWorkspaceRolesRequest {
+  /** 工作空间ID */
+  WorkspaceId: string;
+  /** 关键字，支持按角色名称模糊搜索 */
+  NameKeyword?: string;
+  /** 页码，从1开始，默认1默认值：1 */
+  PageNumber?: number;
+  /** 每页大小，默认10，取值范围为 [1,100]，越界时自动收敛到边界值默认值：10 */
+  PageSize?: number;
+}
+
+declare interface ListWorkspaceRolesResponse {
+  /** 工作空间角色结果 */
+  Data?: ListWorkspaceRolesRsp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4857,6 +4897,8 @@ declare interface Databuddy {
   ListWorkspaceGroupUsers(data: ListWorkspaceGroupUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspaceGroupUsersResponse>;
   /** 查询工作空间用户组列表 {@link ListWorkspaceGroupsRequest} {@link ListWorkspaceGroupsResponse} */
   ListWorkspaceGroups(data: ListWorkspaceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspaceGroupsResponse>;
+  /** 查询工作空间角色列表 {@link ListWorkspaceRolesRequest} {@link ListWorkspaceRolesResponse} */
+  ListWorkspaceRoles(data: ListWorkspaceRolesRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspaceRolesResponse>;
   /** 查询工作空间用户列表 {@link ListWorkspaceUsersRequest} {@link ListWorkspaceUsersResponse} */
   ListWorkspaceUsers(data: ListWorkspaceUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspaceUsersResponse>;
   /** 查询工作空间列表 {@link ListWorkspacesRequest} {@link ListWorkspacesResponse} */

@@ -3505,6 +3505,10 @@ declare interface SearchTaskResultRequest {
   Offset?: number;
   /** 分页的页内记录数，默认为20，最大200 */
   Limit?: number;
+  /** 任务类别枚举值：0： Linux 类型任务1： Windows 类型任务 */
+  Category?: number[];
+  /** 任务状态枚举值：1： 执行中2： 成功3： 失败4： 部分成功 */
+  Status?: number[];
 }
 
 declare interface SearchTaskResultResponse {

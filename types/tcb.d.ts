@@ -3535,6 +3535,8 @@ declare interface DescribePlatformCreditsUsageDetailRequest {
   NeedUsageDetails: boolean;
   /** 平台版套餐id */
   PlatformId: string;
+  /** 查询返回数据时间界别枚举值：Daily： 按照天级别返回数据Hourly： 按照小时级别返回数据默认值：Daily部分数据按照天级别统计，无法按照小时级别返回 */
+  QueryLevel?: string;
 }
 
 declare interface DescribePlatformCreditsUsageDetailResponse {

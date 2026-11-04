@@ -1802,13 +1802,13 @@ declare interface ExceptionRule {
   Name?: string;
   /** 例外规则的具体内容，需符合表达式语法，详细规范参见产品文档。 */
   Condition?: string;
-  /** 例外规则执行选项，取值有：WebSecurityModules: 指定例外规则的安全防护模块，需配合 ⁠WebSecurityModulesForException⁠ 使用；WebSecuritySubmodules: 指定例外规则的安全防护子模块，需配合 ⁠WebSecuritySubmodulesForException⁠ 使用；ManagedRules：指定例外规则的具体托管规则，需配合 ⁠ManagedRulesForException⁠ 使用；ManagedRuleGroups：指定例外规则的托管规则组，需配合 ⁠ManagedRuleGroupsForException⁠ 使用。 */
+  /** 例外规则执行选项，取值有：WebSecurityModules: 指定例外规则的安全防护模块，需配合 WebSecurityModulesForException 使用；WebSecuritySubmodules: 指定例外规则的安全防护子模块，需配合 WebSecuritySubmodulesForException 使用；ManagedRules：指定例外规则的具体托管规则，需配合 ManagedRulesForException 使用；ManagedRuleGroups：指定例外规则的托管规则组，需配合 ManagedRuleGroupsForException 使用。 */
   SkipScope?: string;
   /** 跳过请求的具体类型，取值有：SkipOnAllRequestFields: 跳过所有请求；SkipOnSpecifiedRequestFields: 跳过指定请求字段。仅当 SkipScope 为 ManagedRules 或 ManagedRuleGroups 时有效。 */
   SkipOption?: string;
   /** 指定例外规则的安全防护模块，仅当 SkipScope 为 WebSecurityModules 时有效，取值有：websec-mod-managed-rules：托管规则；websec-mod-rate-limiting：速率限制；websec-mod-custom-rules：自定义规则；websec-mod-adaptive-control：自适应频控、智能客户端过滤、慢速攻击防护、流量盗刷防护；websec-mod-bot：Bot管理。 */
   WebSecurityModulesForException?: string[];
-  /** 指定例外规则的安全防护子模块，仅当 SkipScope 为 WebSecuritySubmodules 时有效，取值有：托管规则（ManagedRules）模块功能：websec-mod-managed-rules/managed-rule-groups：规则集；websec-mod-managed-rules/frequent-scanning-protection：高频扫描防护；速率限制（RateLimitingRules）模块功能：websec-mod-rate-limiting-rules：速率限制规则；自定义规则（CustomRules）模块功能：websec-mod-custom-rules：自定义规则；HTTP DDoS 防护（HttpDDoSProtection）模块功能：websec-mod-http-ddos-protection/adaptive-frequency-control：自适应频控；websec-mod-http-ddos-protection/client-filtering：智能客户端过滤；websec-mod-http-ddos-protection/bandwidth-abuse-defense：流量盗刷防护；高级 Bot 管理（BotManagement）模块功能：websec-mod-bot-management/basic-feature：基础特征管理；websec-mod-bot-management/ip-reputation：客户端画像分析；websec-mod-bot-management/bot-intelligence：智能 Bot 分析；websec-mod-bot-management/custom-rules：自定义规则；websec-mod-bot-management/browser-impersonation-detection：主动特征识别；websec-mod-bot-management/client-attestation-rules：客户端认证；基础 Bot 管理（BotManagementLite）模块功能：websec-mod-bot-management-lite/ai-crawler-detection：AI 爬虫处置；websec-mod-bot-management-lite/captcha-page-challenge：人机校验页。 */
+  /** 指定例外规则的安全防护子模块，仅当 SkipScope 为 WebSecuritySubmodules 时有效。枚举值：websec-mod-managed-rules/semantic-analysis： 托管规则-深度分析websec-mod-managed-rules/managed-rule-groups： 托管规则-规则集websec-mod-managed-rules/frequent-scanning-protection： 托管规则-高频扫描防护websec-mod-rate-limiting-rules： 速率限制规则websec-mod-custom-rules： 自定义规则websec-mod-http-ddos-protection/adaptive-frequency-control： HTTP DDoS 防护-自适应频控websec-mod-http-ddos-protection/client-filtering： HTTP DDoS 防护-智能客户端过滤websec-mod-http-ddos-protection/bandwidth-abuse-defense： HTTP DDoS 防护-流量盗刷防护websec-mod-bot-management/basic-feature： 高级 Bot 管理-基础特征管理websec-mod-bot-management/ip-reputation： 高级 Bot 管理-客户端画像分析websec-mod-bot-management/bot-intelligence： 高级 Bot 管理-智能 Bot 分析websec-mod-bot-management/custom-rules： 高级 Bot 管理-自定义规则websec-mod-bot-management/browser-impersonation-detection： 高级 Bot 管理-主动特征识别websec-mod-bot-management/client-attestation-rules： 高级 Bot 管理-客户端认证websec-mod-bot-management-lite/ai-crawler-detection： 基础 Bot 管理-AI 爬虫处置websec-mod-bot-management-lite/captcha-page-challenge： 基础 Bot 管理-人机校验页 */
   WebSecuritySubmodulesForException?: string[];
   /** 指定例外规则的具体托管规则，仅当 SkipScope 为 ManagedRules 时有效。 */
   ManagedRulesForException?: string[];
@@ -2128,6 +2128,8 @@ declare interface HealthChecker {
   CriticalThreshold?: number;
   /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测路径，需要填写完整的 host/path，不包含协议部分，例如：www.example.com/test。 */
   Path?: string;
+  /** 探测请求 Host Header 策略，仅当 Type=HTTP 或 Type=HTTPS ，且实例类型为 HTTP 专用型（V2）时生效。取值有：FollowCheckURL：遵循探测 URL 指定的 Host，即 HealthChecker.Path 字段中的 Host 部分将作为探测的 Host 地址；FollowOriginGroup：遵循源站组配置的回源 Host Header，即探测时使用本次探测源站所在源站组的 OriginGroup.HostHeader 字段值作为探测 Host 地址，若该源站组未配置 HostHeader，则使用 HealthChecker.Path 字段中的 Host 部分作为探测的 Host 地址；FollowOrigin：遵循源站地址，即探测时使用本次探测源站所在源站组中对应源站记录的 OriginGroup.Records[N].Record 字段值（即源站本身地址）作为探测的 Host 地址。默认为 FollowCheckURL。 */
+  HostHeaderPolicy?: string;
   /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示请求方法，取值有：GET；HEAD。 */
   Method?: string;
   /** 该参数仅当 Type=HTTP 或 Type=HTTPS 时有效，表示探测节点向源站发起健康检查时，响应哪些状态码可用于认定探测结果为健康。 */
@@ -3058,8 +3060,10 @@ declare interface ManagedRules {
   Enabled: string;
   /** 评估模式是否开启，仅在 Enabled 参数为 on 时有效。取值有：on：开启，表示所有托管规则以观察模式生效；off：关闭，表示所有托管规则以实际配置生效。 */
   DetectionOnly: string;
-  /** 托管规则语义分析选项是否开启，仅在 Enabled 参数为 on 时有效。取值有：on：开启，对请求进行语义分析后进行处理；off：关闭，对请求不进行语义分析，直接进行处理。 默认为 off。 */
+  /** 托管规则深度分析选项是否开启，仅在 Enabled 参数为 on 时有效。取值有：on：开启，对请求进行深度分析后进行处理；off：关闭，对请求不进行深度分析，直接进行处理。 此参数待废弃，深度分析规则开关迁移至 SemanticAnalysisRules.Enabled 参数。 */
   SemanticAnalysis?: string;
+  /** 深度分析配置选项，识别请求中的恶意行为（如：SQL 注入，XSS 攻击等），对恶意请求进行日志记录和拦截。 */
+  SemanticAnalysisRules?: SemanticAnalysisRules;
   /** 托管规则自动更新选项。 */
   AutoUpdate?: ManagedRuleAutoUpdate;
   /** 托管规则组的配置。如果此结构传空数组或 GroupId 未包含在列表内将按照默认方式处理。 */
@@ -4458,6 +4462,16 @@ declare interface SecurityWeightedAction {
   SecurityAction?: SecurityAction;
   /** 当前 SecurityAction 的权重，仅支持 10 ~ 100 且必须为 10 的倍数，其中 Weight 参数全部相加须等于 100。 */
   Weight?: number;
+}
+
+/** 深度分析配置选项。 */
+declare interface SemanticAnalysisRules {
+  /** 深度分析规则是否开启。取值有：on：开启，深度分析规则生效；off：关闭，深度分析规则不生效。 */
+  Enabled?: string;
+  /** 深度分析下规则项的具体配置。 */
+  RuleActions?: ManagedRuleAction[];
+  /** 深度分析配置信息，仅出参使用。 */
+  MetaData?: ManagedRuleGroupMeta;
 }
 
 /** https 服务端证书配置 */

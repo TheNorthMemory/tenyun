@@ -242,7 +242,7 @@ declare interface CreateBackupPlanRequest {
 declare interface CreateBackupPlanResponse {
   /** 订单参数。 */
   OrderId?: string;
-  /** 资源ID。 */
+  /** 备份计划 ID 列表。单次最多返回 10 个。 */
   BackupPlanIds?: string[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

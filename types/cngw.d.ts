@@ -2865,12 +2865,26 @@ declare interface CreateCloudNativeAPIGatewayMCPServerResponse {
 }
 
 declare interface CreateCloudNativeAPIGatewayMCPToolRequest {
+  /** 网关实例 id */
+  GatewayId: string;
+  /** MCP Server Id */
+  ServerId: string;
   /** 内容类型 */
   ContentType: string;
+  /** 名字 */
+  Name: string;
+  /** 方法枚举值：GET： GETPOST： POSTPUT： PUTDELETE： DELETEPATCH： PATCH */
+  Method: string;
+  /** 路径 */
+  Path: string;
   /** 展示名字 */
   DisplayName?: string;
   /** 服务 id */
   ServiceId?: string;
+  /** 输入 */
+  InputParams?: CNAPIGwMCPToolParam[];
+  /** 描述 */
+  Description?: string;
 }
 
 declare interface CreateCloudNativeAPIGatewayMCPToolResponse {

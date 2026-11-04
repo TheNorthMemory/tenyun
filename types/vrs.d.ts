@@ -149,6 +149,8 @@ declare interface CreateVRSTaskRequest {
   VPRAudioId?: string;
   /** 是否开启语音增强，0 - 关闭，1 - 开启 。默认关闭语音增强仅适用于一句话复刻场景 */
   EnableVoiceEnhance?: number;
+  /** 模型引擎，可选值：WXZL（默认）YTLX_V2（新版）示例：YTLX_V2 */
+  EngineType?: string;
 }
 
 declare interface CreateVRSTaskResponse {

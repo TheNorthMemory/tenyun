@@ -8464,6 +8464,70 @@ declare interface LoginWhiteCombinedInfo {
   Locations?: string;
 }
 
+/** 异常登录白名单规则项（自定义与自学习共用，以 Type 区分） */
+declare interface LoginWhiteItem {
+  /** 白名单类型：Custom-自定义白名单 Learn-自学习白名单 */
+  Type?: string;
+  /** 规则所属账号 AppId，多账号场景下用于区分与后续编辑定位 */
+  AppId?: number;
+  /** 规则ID；自学习为规则组ID（组内最小行ID） */
+  Id?: number;
+  /** 登录源IP（逗号分隔）；自学习白名单恒为空 */
+  SrcIp?: string;
+  /** 登录用户名（逗号分隔）；自学习白名单恒为空 */
+  UserName?: string;
+  /** 登录时段起始 HH:MM；自学习白名单恒为空 */
+  StartTime?: string;
+  /** 登录时段结束 HH:MM；自学习白名单恒为空 */
+  EndTime?: string;
+  /** 常用登录地列表 */
+  Places?: LoginWhitePlace[];
+  /** 常用登录地展示文案（逗号分隔），供列表直接展示 */
+  Locations?: string;
+  /** 生效资产范围：0-指定主机（主机或标签命中） 1-全部主机 */
+  Scope?: number;
+  /** 生效主机 QUUID 列表（与 InstanceIDs 一一对应） */
+  QUUIDS?: string[];
+  /** 生效主机实例ID列表（与 QUUIDS 一一对应） */
+  InstanceIDs?: string[];
+  /** 剔除主机 QUUID 列表 */
+  ExcludeQUUIDS?: string[];
+  /** 剔除主机实例ID列表 */
+  ExcludeInstanceIDs?: string[];
+  /** 生效标签详情列表 */
+  TagItems?: EDRRuleTagItem[];
+  /** 主机数：自定义为指定主机数（Scope=1 时为 0，前端展示全部主机）；自学习为组内去重主机数 */
+  HostCount?: number;
+  /** 备注 */
+  Remark?: string;
+  /** 创建时间，格式 2006-01-02 15:04:05 */
+  CreateTime?: string;
+  /** 最近修改时间，格式 2006-01-02 15:04:05 */
+  ModifyTime?: string;
+}
+
+/** 常用登录地（出参） */
+declare interface LoginWhitePlace {
+  /** 国家ID */
+  CountryId?: number;
+  /** 省份ID；99999 表示全部省份 */
+  ProvinceId?: number;
+  /** 城市ID；99999 表示全部城市 */
+  CityId?: number;
+  /** 地点展示文案，服务端按 Language 生成，如 中国-广东-深圳 */
+  Location?: string;
+}
+
+/** 常用登录地（入参） */
+declare interface LoginWhitePlaceInput {
+  /** 国家ID，当前仅支持国内：1 */
+  CountryId?: number;
+  /** 省份ID；99999 表示全部省份 */
+  ProvinceId?: number;
+  /** 城市ID；99999 表示全部城市 */
+  CityId?: number;
+}
+
 /** 主机列表 */
 declare interface Machine {
   /** Agent状态，取值：ONLINE-在线，OFFLINE-离线，UNINSTALL-未安装 */
@@ -15201,6 +15265,54 @@ declare interface DeleteImageVulWhitelistResponse {
   RequestId?: string;
 }
 
+declare interface DeleteLoginWhiteCustomEDRRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 显式勾选的规则ID列表，最多 1000 个；与 SelectAll 二选一 */
+  Ids?: number[];
+  /** 是否跨页全选：true-删除符合 Filters 的全部规则（此时 Filters 必填） false-仅删除 Ids */
+  SelectAll?: boolean;
+  /** 多账号目标账号 AppId 列表，最多 1000 个；为空表示仅当前账号；传入但全部无权限时返回 InvalidParameter */
+  TargetAppIDs?: number[];
+  /** 排除的规则ID列表，最多1000个 */
+  ExcludeIds?: number[];
+  /** 全选条件下的筛选条件 */
+  Filters?: EDRFilter[];
+}
+
+declare interface DeleteLoginWhiteCustomEDRResponse {
+  /** 删除的规则条数 */
+  DeletedCount?: number;
+  /** 删除失败的账号 AppId 列表；仅当全部失败时才返回错误 */
+  FailedAppIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteLoginWhiteLearnEDRRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 显式勾选的规则ID列表，最多 1000 个；与 SelectAll 二选一 */
+  Ids?: number[];
+  /** 是否跨页全选：true-删除符合 Filters 的全部规则（此时 Filters 必填） false-仅删除 Ids */
+  SelectAll?: boolean;
+  /** 多账号目标账号 AppId 列表，最多 1000 个；为空表示仅当前账号；传入但全部无权限时返回 InvalidParameter */
+  TargetAppIDs?: number[];
+  /** 排除的规则ID列表 */
+  ExcludeIds?: number[];
+  /** 全选条件下的筛选条件 */
+  Filters?: EDRFilter[];
+}
+
+declare interface DeleteLoginWhiteLearnEDRResponse {
+  /** 删除的主机记录行数（一个规则组可能含多行，与自定义白名单接口按规则条数统计的口径不同） */
+  DeletedCount?: number;
+  /** 删除失败的账号 AppId 列表；仅当全部失败时才返回错误 */
+  FailedAppIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteLoginWhiteListRequest {
   /** 白名单ID (最大 100 条) */
   Ids: number[];
@@ -20353,6 +20465,24 @@ declare interface DescribeEdrLogCollectPathsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEdrMalwareFileRequest {
+  /** EDR 告警唯一标识，必填，最长 34 字符 */
+  AlertId: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 告警所属账号 AppId（跨账号场景由前端透传成员 AppId）；为 0 或省略时回退为登录账号 AppId */
+  TargetAppId?: number;
+}
+
+declare interface DescribeEdrMalwareFileResponse {
+  /** 样本下载链接。公有云为 COS 预签名 URL（1 小时过期）；非公有云且导出开关打开时为 data:application/octet-stream;base64,<zip 的 base64> */
+  FileUrl?: string;
+  /** 导出文件名，形如 <name>.zip；仅非公有云 base64 分支返回，其余场景不返回该字段 */
+  FileName?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeExportJobDownloadURLRequest {
   /** 任务ID */
   JobID: string;
@@ -21427,6 +21557,30 @@ declare interface DescribeLoginWhiteCombinedListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLoginWhiteCustomListEDRRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件数组（多个 Filter 间为 AND 关系）。支持 Name：Keyword（SrcIp/UserName/Locations/Remark 模糊）、SrcIp、UserName、Location、Remark、ModifyBeginTime、ModifyEndTime（时间格式 2006-01-02 15:04:05）；未知 Name 忽略不报错 */
+  Filters?: EDRFilter[];
+  /** 分页大小，默认 10，上限 100；传 0 或大于 100 时按默认/上限返回 */
+  Limit?: number;
+  /** 分页偏移，默认 0 */
+  Offset?: number;
+  /** 排序方向：ASC-正序 DESC-倒序（大小写不敏感），默认 DESC */
+  Order?: string;
+  /** 排序字段：CreateTime-创建时间 ModifyTime-修改时间，默认 ModifyTime；传非法值返回 InvalidParameter */
+  By?: string;
+}
+
+declare interface DescribeLoginWhiteCustomListEDRResponse {
+  /** 符合筛选条件的规则总数 */
+  TotalCount?: number;
+  /** 自定义白名单规则列表（Type 恒为 Custom），为空时返回 [] */
+  List?: LoginWhiteItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLoginWhiteHostListRequest {
   /** 白名单ID */
   Id: number;
@@ -21445,6 +21599,32 @@ declare interface DescribeLoginWhiteHostListResponse {
   TotalCount?: number;
   /** 服务器列表 */
   Hosts?: HostDesc[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeLoginWhiteLearnListEDRRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 过滤条件数组（多个 Filter 间为 AND 关系）。支持 Name：Keyword 或 Location（常用登录地模糊）、Remark、ModifyBeginTime、ModifyEndTime（时间格式 2006-01-02 15:04:05）；未知 Name 忽略不报错 */
+  Filters?: EDRFilter[];
+  /** 分页大小，默认 10，上限 100；传 0 或大于 100 时按默认/上限返回 */
+  Limit?: number;
+  /** 分页偏移，默认 0 */
+  Offset?: number;
+  /** 排序方向：ASC-正序 DESC-倒序（大小写不敏感），默认 DESC */
+  Order?: string;
+  /** 排序字段：CreateTime-创建时间 ModifyTime-修改时间，默认 ModifyTime；传非法值返回 InvalidParameter */
+  By?: string;
+}
+
+declare interface DescribeLoginWhiteLearnListEDRResponse {
+  /** 规则组总数（按 AppId + 常用登录地聚合） */
+  TotalCount?: number;
+  /** 自学习白名单规则组列表（Type 恒为 Learn），为空时返回 [] */
+  List?: LoginWhiteItem[];
+  /** 自学习白名单开关状态；多账号时取当前账号，供前端空态提示前往开启 */
+  AutoLearnEnable?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -25785,6 +25965,70 @@ declare interface ModifyImageVulWhitelistResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLoginWhiteCustomEDRRequest {
+  /** 规则ID；自学习为规则组ID（组内最小行ID） */
+  Id?: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 登录源IP，多个以逗号分隔；支持单个IP、区间(a-b)、CIDR，支持 IPv4 与 IPv6；最长 2048 字符 */
+  SrcIp?: string;
+  /** 登录用户名，多个以逗号分隔；最长 1024 字符 */
+  UserName?: string;
+  /** 登录时段起始 HH:MM；与 EndTime 必须同时填写或同时为空 */
+  StartTime?: string;
+  /** 登录时段结束 HH:MM；与 StartTime 必须同时填写或同时为空 */
+  EndTime?: string;
+  /** 常用登录地列表，最多 200 个；ProvinceId/CityId 传 99999 表示全部省份/全部城市 */
+  Places?: LoginWhitePlaceInput[];
+  /** 备注，最长 255 字符 */
+  Remark?: string;
+  /** 生效资产范围：0-指定主机（主机或标签命中） 1-全部主机 */
+  Scope?: number;
+  /** 指定主机（实例ID 形态）列表，最多 10000 项；服务端经 idmap 翻译为 QUUID 后与 QUUIDSWithAppId 合并去重 */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 剔除主机（实例ID 形态）列表，最多 10000 项 */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 安全中心标签ID列表，最多 100 个；Scope=0 时与主机为或关系；自学习白名单不支持按标签生效（传非空将被拒绝） */
+  TagIDs?: string[];
+  /** 目标appid */
+  TargetAppIDs?: number[];
+  /** 是否加白历史告警 */
+  DealOldEvents?: number;
+}
+
+declare interface ModifyLoginWhiteCustomEDRResponse {
+  /** 失败的账号 */
+  FailedAppIds?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLoginWhiteLearnEDRRequest {
+  /** 规则ID；自学习为规则组ID（组内最小行ID） */
+  Id: number;
+  /** 常用登录地列表，必填，1-200 个；为自学习规则唯一的内容维度 */
+  Places: LoginWhitePlaceInput[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 规则所属账号 AppId（取列表出参 AppId）；为空取当前账号；非当前账号需通过归属校验 */
+  RuleAppId?: number;
+  /** 备注，最长 255 字符 */
+  Remark?: string;
+  /** 生效资产范围：0-指定主机（主机或标签命中） 1-全部主机 */
+  Scope?: number;
+  /** 指定主机（实例ID 形态）列表，最多 10000 项；服务端经 idmap 翻译为 QUUID 后与 QUUIDSWithAppId 合并去重 */
+  InstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 剔除主机（实例ID 形态）列表，最多 10000 项 */
+  ExcludeInstanceIDsWithAppId?: InstanceIDWithAppIdItem[];
+  /** 安全中心标签ID列表，最多 100 个；Scope=0 时与主机为或关系；自学习白名单不支持按标签生效（传非空将被拒绝） */
+  TagIDs?: string[];
+}
+
+declare interface ModifyLoginWhiteLearnEDRResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLoginWhiteRecordRequest {
   /** 白名单用户（多个用户逗号隔开） */
   UserName: string;
@@ -27534,6 +27778,10 @@ declare interface Csip {
   DeleteImageVirusWhitelist(data?: DeleteImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageVirusWhitelistResponse>;
   /** 删除容器镜像漏洞白名单 {@link DeleteImageVulWhitelistRequest} {@link DeleteImageVulWhitelistResponse} */
   DeleteImageVulWhitelist(data?: DeleteImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteImageVulWhitelistResponse>;
+  /** 删除异常登录自定义白名单 {@link DeleteLoginWhiteCustomEDRRequest} {@link DeleteLoginWhiteCustomEDRResponse} */
+  DeleteLoginWhiteCustomEDR(data?: DeleteLoginWhiteCustomEDRRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteCustomEDRResponse>;
+  /** 删除异常登录自学习白名单 {@link DeleteLoginWhiteLearnEDRRequest} {@link DeleteLoginWhiteLearnEDRResponse} */
+  DeleteLoginWhiteLearnEDR(data?: DeleteLoginWhiteLearnEDRRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteLearnEDRResponse>;
   /** 删除异地登录白名单规则 {@link DeleteLoginWhiteListRequest} {@link DeleteLoginWhiteListResponse} */
   DeleteLoginWhiteList(data: DeleteLoginWhiteListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteLoginWhiteListResponse>;
   /** 删除机器清理记录 {@link DeleteMachineClearHistoryRequest} {@link DeleteMachineClearHistoryResponse} */
@@ -28030,6 +28278,8 @@ declare interface Csip {
   DescribeEdrExportJobList(data?: DescribeEdrExportJobListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrExportJobListResponse>;
   /** 查询日志采集路径配置列表 {@link DescribeEdrLogCollectPathsRequest} {@link DescribeEdrLogCollectPathsResponse} */
   DescribeEdrLogCollectPaths(data?: DescribeEdrLogCollectPathsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrLogCollectPathsResponse>;
+  /** 获取EDR恶意文件告警的样本下载链接 {@link DescribeEdrMalwareFileRequest} {@link DescribeEdrMalwareFileResponse} */
+  DescribeEdrMalwareFile(data: DescribeEdrMalwareFileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEdrMalwareFileResponse>;
   /** 获取导出任务结果下载URL {@link DescribeExportJobDownloadURLRequest} {@link DescribeExportJobDownloadURLResponse} */
   DescribeExportJobDownloadURL(data: DescribeExportJobDownloadURLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExportJobDownloadURLResponse>;
   /** 查询导出任务列表 {@link DescribeExportJobManageListRequest} {@link DescribeExportJobManageListResponse} */
@@ -28148,8 +28398,12 @@ declare interface Csip {
   DescribeLoginTypeHost(data?: DescribeLoginTypeHostRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginTypeHostResponse>;
   /** 获取异地登录白名单合并后列表 {@link DescribeLoginWhiteCombinedListRequest} {@link DescribeLoginWhiteCombinedListResponse} */
   DescribeLoginWhiteCombinedList(data?: DescribeLoginWhiteCombinedListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCombinedListResponse>;
+  /** 查询异常登录自定义白名单列表 {@link DescribeLoginWhiteCustomListEDRRequest} {@link DescribeLoginWhiteCustomListEDRResponse} */
+  DescribeLoginWhiteCustomListEDR(data?: DescribeLoginWhiteCustomListEDRRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteCustomListEDRResponse>;
   /** 查询合并后白名单机器列表 {@link DescribeLoginWhiteHostListRequest} {@link DescribeLoginWhiteHostListResponse} */
   DescribeLoginWhiteHostList(data: DescribeLoginWhiteHostListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteHostListResponse>;
+  /** 查询异常登录自学习白名单列表 {@link DescribeLoginWhiteLearnListEDRRequest} {@link DescribeLoginWhiteLearnListEDRResponse} */
+  DescribeLoginWhiteLearnListEDR(data?: DescribeLoginWhiteLearnListEDRRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLoginWhiteLearnListEDRResponse>;
   /** 查询机器清理历史记录 {@link DescribeMachineClearHistoryRequest} {@link DescribeMachineClearHistoryResponse} */
   DescribeMachineClearHistory(data?: DescribeMachineClearHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMachineClearHistoryResponse>;
   /** CWP查询主机概览 {@link DescribeMachineGeneralRequest} {@link DescribeMachineGeneralResponse} */
@@ -28574,6 +28828,10 @@ declare interface Csip {
   ModifyImageVirusWhitelist(data: ModifyImageVirusWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageVirusWhitelistResponse>;
   /** 修改容器镜像漏洞白名单 {@link ModifyImageVulWhitelistRequest} {@link ModifyImageVulWhitelistResponse} */
   ModifyImageVulWhitelist(data: ModifyImageVulWhitelistRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyImageVulWhitelistResponse>;
+  /** 修改异常登录自定义白名单 {@link ModifyLoginWhiteCustomEDRRequest} {@link ModifyLoginWhiteCustomEDRResponse} */
+  ModifyLoginWhiteCustomEDR(data?: ModifyLoginWhiteCustomEDRRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginWhiteCustomEDRResponse>;
+  /** 修改异常登录自学习白名单 {@link ModifyLoginWhiteLearnEDRRequest} {@link ModifyLoginWhiteLearnEDRResponse} */
+  ModifyLoginWhiteLearnEDR(data: ModifyLoginWhiteLearnEDRRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginWhiteLearnEDRResponse>;
   /** 更新合并后登录审计白名单信息 {@link ModifyLoginWhiteRecordRequest} {@link ModifyLoginWhiteRecordResponse} */
   ModifyLoginWhiteRecord(data: ModifyLoginWhiteRecordRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLoginWhiteRecordResponse>;
   /** 修改机器清理配置 {@link ModifyMachineAutoClearConfigRequest} {@link ModifyMachineAutoClearConfigResponse} */

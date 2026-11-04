@@ -460,7 +460,7 @@ declare interface Column {
   Type?: string;
 }
 
-/** 通用的列表检索过滤选项 */
+/** 通用的列表检索过滤选项. */
 declare interface CommonFilter {
   /** 检索的键值 */
   Name: string;
@@ -2776,6 +2776,8 @@ declare interface WhiteRuleInfo {
   WhiteId?: string;
   /** HTTP X-Forwarded-For，仅 RuleType=9；精确 IP，多值逗号分隔，最多 50 个。 */
   XForwardedFor?: string;
+  /** 风险事件类型 */
+  RiskEventType?: string;
 }
 
 declare interface AddAclRuleRequest {
@@ -5535,6 +5537,8 @@ declare interface ModifyBlockIgnoreRuleNewRequest {
   Rule: BanAndAllowRule;
   /** RuleType: 1放通列表 2外部IP 3域名 4情报 5资产 6自定义规则 7入侵防御规则 */
   RuleType: number;
+  /** 冲突选择枚举值：1： 删除对端写入0： 跳过写入 */
+  CoverDuplicate?: number;
 }
 
 declare interface ModifyBlockIgnoreRuleNewResponse {

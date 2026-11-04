@@ -162,6 +162,10 @@ declare interface SplitDocumentFailedPage {
   PageNumber?: number | null;
 }
 
+/** 文档解析/拆分任务失败原因 */
+declare interface TaskErrInfo {
+}
+
 /** 思维链开关类型 */
 declare interface Thinking {
   /** 控制开启思维链，默认disabledenabled：开启思维链disabled：关闭思维链 */
@@ -306,7 +310,7 @@ declare interface GetReconstructDocumentResultRequest {
 }
 
 declare interface GetReconstructDocumentResultResponse {
-  /** 任务状态。- `Success`：执行完成- `Processing`：执行中- `Pause`: 暂停- `Failed`：执行失败- `WaitExecute`：等待执行 */
+  /** 任务状态。Success：执行完成Processing：执行中Pause: 暂停Failed：执行失败WaitExecute：等待执行 */
   Status?: string;
   /** 解析结果的临时下载地址。文件类型为zip压缩包，下载链接有效期30分钟 */
   DocumentRecognizeResultUrl?: string;
@@ -316,6 +320,8 @@ declare interface GetReconstructDocumentResultResponse {
   Usage?: DocumentUsage;
   /** 文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息 */
   Error?: ErrorInfo;
+  /** 文档解析任务失败错误信息，当文档解析任务失败会返回具体的错误信息 */
+  TaskErrInfo?: TaskErrInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
