@@ -6244,10 +6244,16 @@ declare interface CopyJobSpecResponse {
   JobPackage?: string;
   /** 作业包名称 */
   JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
   /** 应用ID */
   AppId?: number;
   /** 创建者UIN */
   Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
   /** 创建时间 */
   CreateTime?: number;
   /** 更新时间 */
@@ -7149,6 +7155,8 @@ declare interface CreateLabRequest {
   PersistentWorkDir?: PersistentWorkDir;
   /** 是否开启token认证 */
   EnableToken?: boolean;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
@@ -7188,6 +7196,8 @@ declare interface CreateLabResponse {
   Status?: string;
   /** 创建时间 */
   CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
   /** 计算组 ID */
   GroupId?: string;
   /** 资源配置(JSON) */
@@ -7204,12 +7214,22 @@ declare interface CreateLabResponse {
   AdvancedOptions?: string;
   /** 优先级（1-9，数字越大优先级越高） */
   Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 删除时间 */
+  DeleteTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
   /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
   PersistentWorkDir?: PersistentWorkDir;
   /** 是否开启token认证 */
   EnableToken?: boolean;
+  /** Token 认证密钥（开启 token 认证时由系统生成） */
+  Token?: string;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
   /** 子用户名称（由聚合层通过 CAM 接口回填） */
@@ -11294,6 +11314,10 @@ declare interface GetLabDetailResponse {
   Status?: string;
   /** 状态详情/错误信息 */
   StatusMessage?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
   /** 资源配置(JSON) */
   ResourceConfig?: string;
   /** 资源配置ID */
@@ -11322,6 +11346,10 @@ declare interface GetLabDetailResponse {
   PersistentWorkDir?: PersistentWorkDir;
   /** 是否开启token认证 */
   EnableToken?: boolean;
+  /** Token 认证密钥（开启 token 认证时由系统生成） */
+  Token?: string;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
   /** 子用户名称（由聚合层通过 CAM 接口回填） */
@@ -11818,6 +11846,8 @@ declare interface GetRayJobRequest {
 declare interface GetRayJobResponse {
   /** 任务ID */
   Id?: string;
+  /** 所属集群ID */
+  ClusterId?: string;
   /** 所属资源分区ID */
   ResourcePartitionId?: string;
   /** 默认资源分区名称 */
@@ -11826,6 +11856,8 @@ declare interface GetRayJobResponse {
   Queue?: string;
   /** 所属队列别名 */
   QueueAlias?: string;
+  /** Ray Submission ID */
+  SubmissionId?: string;
   /** 任务状态 */
   Status?: string;
   /** 入口命令 */
@@ -11838,6 +11870,8 @@ declare interface GetRayJobResponse {
   Uin?: string;
   /** 创建账号 */
   SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
   /** 历史记录链接 */
   HistoryUrl?: string;
   /** 运行时间(ms) */
@@ -12771,6 +12805,8 @@ declare interface ListRayClusterJobsRequest {
 }
 
 declare interface ListRayClusterJobsResponse {
+  /** 总记录数 */
+  Total?: number;
   /** 当前页码（从1开始） */
   Page?: number;
   /** 每页数量 */
@@ -12829,6 +12865,8 @@ declare interface ListRayJobsRequest {
 }
 
 declare interface ListRayJobsResponse {
+  /** 总记录数 */
+  Total?: number;
   /** 当前页码（从1开始） */
   Page?: number;
   /** 页数 */
@@ -13997,10 +14035,18 @@ declare interface RunJobSpecRequest {
 declare interface RunJobSpecResponse {
   /** 任务ID */
   Id?: string;
+  /** 所属集群ID */
+  ClusterId?: string;
+  /** 集群名称 */
+  ClusterName?: string;
   /** 所属资源分区ID */
   ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** Ray Submission ID */
+  SubmissionId?: string;
   /** 任务状态 */
   Status?: string;
   /** 入口命令 */
@@ -14013,10 +14059,16 @@ declare interface RunJobSpecResponse {
   Uin?: string;
   /** 子用户UIN */
   SubAccountUin?: string;
+  /** 历史记录链接 */
+  HistoryUrl?: string;
   /** 运行时间(ms) */
   RunningTime?: number;
+  /** 完成时间 */
+  FinishTime?: number;
   /** 创建时间 */
   CreateTime?: number;
+  /** 失败原因/错误信息 */
+  ErrorMessage?: string;
   /** 运行时环境配置(JSON) */
   RuntimeEnv?: string;
   /** 镜像地址 */
@@ -14093,6 +14145,8 @@ declare interface StartLabResponse {
   Status?: string;
   /** 创建时间 */
   CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
   /** 所属集群组名称 */
   GroupName?: string;
   /** 计算组 ID */
@@ -14115,12 +14169,20 @@ declare interface StartLabResponse {
   Priority?: number;
   /** 启动时间（最近一次启动） */
   StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 删除时间 */
+  DeleteTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
   /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
   PersistentWorkDir?: PersistentWorkDir;
   /** 是否开启token认证 */
   EnableToken?: boolean;
+  /** Token 认证密钥（开启 token 认证时由系统生成） */
+  Token?: string;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
   /** 子用户名称（由聚合层通过 CAM 接口回填） */
@@ -14395,16 +14457,22 @@ declare interface StopLabRequest {
 declare interface StopLabResponse {
   /** 案例模板ID（startMode=EXAMPLE 时使用） */
   ExampleId?: string;
+  /** 代码包/工程归档地址 */
+  CodeArchiveUrl?: string;
   /** 数据实验室服务入口（服务类型 -> 访问地址） */
   Services?: TypeKVPair[];
   /** Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在"内置 / 自定义"两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。 */
   LabImage?: string;
+  /** Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never） */
+  LabImagePullPolicy?: string;
   /** 集群ID */
   Id?: string;
   /** 资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口） */
   Type?: string;
   /** 集群名称 */
   Name?: string;
+  /** 集群描述 */
+  Description?: string;
   /** 所属资源分区ID */
   ResourcePartitionId?: string;
   /** 默认资源分区名称 */
@@ -14419,22 +14487,38 @@ declare interface StopLabResponse {
   SubAccountUin?: string;
   /** 集群状态 */
   Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
   /** 创建时间 */
   CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 所属集群组名称 */
+  GroupName?: string;
+  /** 计算组 ID */
+  GroupId?: string;
   /** 资源配置(JSON) */
   ResourceConfig?: string;
+  /** 资源配置ID */
+  ResourceConfigId?: string;
   /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
   Image?: string;
   /** 存储卷和挂载卷配置(JSON) */
   Catalog?: string;
   /** Dashboard URL / 历史记录链接 */
   HistoryUrl?: string;
+  /** 镜像拉取策略 */
+  ImagePullPolicy?: string;
   /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
   AdvancedOptions?: string;
   /** 优先级（1-9，数字越大优先级越高） */
   Priority?: number;
   /** 启动时间（最近一次启动） */
   StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 删除时间 */
+  DeleteTime?: number;
   /** 标签列表（TagKey-TagValue） */
   Tags?: Tag[];
   /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
@@ -14443,6 +14527,8 @@ declare interface StopLabResponse {
   EnableToken?: boolean;
   /** Token 认证密钥（开启 token 认证时由系统生成） */
   Token?: string;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
   /** 子用户名称（由聚合层通过 CAM 接口回填） */
@@ -14526,6 +14612,8 @@ declare interface StopRayClusterResponse {
 declare interface SubmitRayJobRequest {
   /** 入口命令 */
   Entrypoint: string;
+  /** 集群ID */
+  ClusterId?: string;
   /** 资源分区ID */
   ResourcePartitionId?: string;
   /** 队列名称 */
@@ -14550,10 +14638,24 @@ declare interface SubmitRayJobRequest {
   AdvancedOptions?: string;
   /** 计算组ID；与 ClusterId 互斥。组成员展开为候选集群后由 neutrino 侧路由 */
   GroupId?: string;
+  /** 集群分派策略，本期仅支持 RANDOM；大小写不敏感 */
+  DispatchStrategy?: string;
   /** 作业优先级（1-9，数字越大优先级越高） */
   Priority?: number;
   /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
   Tags?: Tag[];
+  /** 作业包 URL */
+  JobPackage?: string;
+  /** 作业包名称 */
+  JobPackageName?: string;
+  /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理 */
+  JobPackageSource?: string;
+  /** 业务来源标识，只为调用上下文，不落盘 JobSpec */
+  JobSource?: string;
+  /** 外部工作流引擎业务键 flowId */
+  FlowId?: string;
+  /** 外部工作流引擎业务键 executionId */
+  ExecutionId?: string;
   /** 用户网络配置 JSON 字符串 */
   NetworkConfig?: string;
 }
@@ -14561,10 +14663,16 @@ declare interface SubmitRayJobRequest {
 declare interface SubmitRayJobResponse {
   /** 任务ID */
   Id?: string;
+  /** 所属集群ID */
+  ClusterId?: string;
   /** 所属资源分区ID */
   ResourcePartitionId?: string;
+  /** 默认资源分区名称 */
+  ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** Ray Submission ID */
+  SubmissionId?: string;
   /** 任务状态 */
   Status?: string;
   /** 入口命令 */
@@ -14577,10 +14685,18 @@ declare interface SubmitRayJobResponse {
   Uin?: string;
   /** 子用户UIN */
   SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
+  /** 历史记录链接 */
+  HistoryUrl?: string;
   /** 运行时间(ms) */
   RunningTime?: number;
+  /** 完成时间 */
+  FinishTime?: number;
   /** 创建时间 */
   CreateTime?: number;
+  /** 失败原因/错误信息 */
+  ErrorMessage?: string;
   /** 运行时环境配置(JSON) */
   RuntimeEnv?: string;
   /** 镜像地址 */
@@ -14593,6 +14709,10 @@ declare interface SubmitRayJobResponse {
   ImagePullPolicy?: string;
   /** 弹性伸缩配置(JSON) */
   AutoscalerOptions?: string;
+  /** 来源配置ID */
+  SpecId?: string;
+  /** 来源配置名称 */
+  SpecName?: string;
   /** 高级参数，JSON 字符串（透传到 Neutrino） */
   AdvancedOptions?: string;
   /** 作业优先级（1-9，数字越大优先级越高） */
@@ -15055,6 +15175,8 @@ declare interface UpdateJobSpecPriorityResponse {
   ClusterId?: string | null;
   /** 集群分派策略（本期仅支持 RANDOM；NULL 时退化为依赖 ClusterGroup 配置兜底） */
   DispatchStrategy?: string;
+  /** 作业提交目标：GROUP（按计算组分派）/ CLUSTER（指定集群）/ SERVERLESS（按 Serverless 拉起） */
+  SubmissionTarget?: string;
   /** 作业包URL */
   JobPackage?: string;
   /** 作业包名称 */
@@ -15079,8 +15201,14 @@ declare interface UpdateJobSpecPriorityResponse {
   AdvancedOptions?: string;
   /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
   Tags?: Tag[];
+  /** 计算组名称 */
+  GroupName?: string;
+  /** 集群名称 */
+  ClusterName?: string;
   /** 作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺时按 Local 处理 */
   JobPackageSource?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -15218,6 +15346,8 @@ declare interface UpdateJobSpecResponse {
 }
 
 declare interface UpdateLabRequest {
+  /** 数据实验室ID */
+  Id: string;
   /** 数据实验室名称 */
   Name: string;
   /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
@@ -15228,20 +15358,28 @@ declare interface UpdateLabRequest {
   Description?: string;
   /** 镜像拉取策略（Always, IfNotPresent, Never） */
   ImagePullPolicy?: string;
+  /** 资源配置 */
+  ResourceConfig?: string;
   /** 资源配置ID */
   ResourceConfigId?: string;
+  /** 存储卷和挂载卷配置 */
+  Catalog?: string;
   /** 计算组 ID */
   GroupId?: string;
   /** 资源分区ID */
   ResourcePartitionId?: string;
   /** 队列名称 */
   Queue?: string;
+  /** 服务类型列表(VSCODE, JUPYTER, WEBSHELL)，不填则使用默认配置 */
+  ServiceTypes?: string[];
   /** 案例ID，当 startMode=EXAMPLE 时必填 */
   ExampleId?: string;
   /** 案例代码包地址，当 startMode=EXAMPLE 时填写 */
   CodeArchiveUrl?: string;
   /** Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never） */
   LabImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
   /** 优先级（1-9，数字越大优先级越高） */
   Priority?: number;
   /** 是否开启token认证 */
@@ -15250,6 +15388,8 @@ declare interface UpdateLabRequest {
   Tags?: Tag[];
   /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
   PersistentWorkDir?: PersistentWorkDir;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   ImagePullType?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
@@ -15287,8 +15427,18 @@ declare interface UpdateLabResponse {
   AppId?: number;
   /** 用户UIN */
   Uin?: string;
+  /** 子用户UIN */
+  SubAccountUin?: string;
   /** 集群状态 */
   Status?: string;
+  /** 状态详情/错误信息 */
+  StatusMessage?: string;
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 更新时间 */
+  UpdateTime?: number;
+  /** 所属集群组名称 */
+  GroupName?: string;
   /** 计算组 ID */
   GroupId?: string;
   /** 资源配置(JSON) */
@@ -15297,14 +15447,32 @@ declare interface UpdateLabResponse {
   ResourceConfigId?: string;
   /** Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。 */
   Image?: string;
+  /** 存储卷和挂载卷配置(JSON) */
+  Catalog?: string;
+  /** Dashboard URL / 历史记录链接 */
+  HistoryUrl?: string;
   /** 镜像拉取策略 */
   ImagePullPolicy?: string;
+  /** 高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md */
+  AdvancedOptions?: string;
   /** 优先级（1-9，数字越大优先级越高） */
   Priority?: number;
+  /** 启动时间（最近一次启动） */
+  StartTime?: number;
+  /** 停止时间（最近一次停止/休眠） */
+  StopTime?: number;
+  /** 删除时间 */
+  DeleteTime?: number;
+  /** 标签列表（TagKey-TagValue） */
+  Tags?: Tag[];
   /** 持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。 */
   PersistentWorkDir?: PersistentWorkDir;
   /** 是否开启token认证 */
   EnableToken?: boolean;
+  /** Token 认证密钥（开启 token 认证时由系统生成） */
+  Token?: string;
+  /** 弹性伸缩配置（JSON） */
+  AutoscalerOptions?: string;
   /** Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR） */
   LabImagePullType?: string;
   /** 子用户名称（由聚合层通过 CAM 接口回填） */
@@ -15427,12 +15595,16 @@ declare interface UpdateRayJobPriorityRequest {
 declare interface UpdateRayJobPriorityResponse {
   /** 任务ID */
   Id?: string;
+  /** 所属集群ID */
+  ClusterId?: string;
   /** 所属资源分区ID */
   ResourcePartitionId?: string;
   /** 默认资源分区名称 */
   ResourcePartitionName?: string;
   /** 所属队列名称 */
   Queue?: string;
+  /** Ray Submission ID */
+  SubmissionId?: string;
   /** 任务状态 */
   Status?: string;
   /** 入口命令 */
@@ -15445,6 +15617,8 @@ declare interface UpdateRayJobPriorityResponse {
   Uin?: string;
   /** 创建账号 */
   SubAccountUin?: string;
+  /** 子用户名称（由聚合层通过 CAM 接口回填） */
+  SubAccountName?: string;
   /** 历史记录链接 */
   HistoryUrl?: string;
   /** 运行时间(ms) */
@@ -15453,6 +15627,10 @@ declare interface UpdateRayJobPriorityResponse {
   FinishTime?: number;
   /** 创建时间 */
   CreateTime?: number;
+  /** 失败原因/错误信息 */
+  ErrorMessage?: string;
+  /** 运行时环境配置(JSON) */
+  RuntimeEnv?: string;
   /** 镜像地址 */
   Image?: string;
   /** 资源配置(JSON) */
@@ -15461,14 +15639,22 @@ declare interface UpdateRayJobPriorityResponse {
   Catalog?: string;
   /** 镜像拉取策略 */
   ImagePullPolicy?: string;
+  /** 弹性伸缩配置(JSON) */
+  AutoscalerOptions?: string;
   /** 来源配置ID */
   SpecId?: string;
+  /** 来源配置名称 */
+  SpecName?: string;
+  /** 高级参数，JSON 字符串 */
+  AdvancedOptions?: string;
   /** 作业优先级（1-9，数字越大优先级越高） */
   Priority?: number;
   /** 标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定 */
   Tags?: Tag[];
   /** 业务来源标识（调用上下文，长度上限 64，禁止控制字符） */
   JobSource?: string;
+  /** 集群名称 */
+  ClusterName?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

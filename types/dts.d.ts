@@ -908,6 +908,8 @@ declare interface MigrateDBItem {
   Usable?: number;
   /** 不可以作为迁移对象的原因 */
   Hint?: string;
+  /** 硬盘类型，仅Postgresql适用枚举值：PHYSICAL_LOCAL_SSD： 本地SSDCLOUD_PREMIUM： 高性能云硬盘CLOUD_SSD： SSD云硬盘CLOUD_HSSD： 增强型SSD云硬盘 */
+  StorageType?: string;
 }
 
 /** 迁移执行过程信息 */
@@ -3101,8 +3103,10 @@ declare interface StopCompareResponse {
 }
 
 declare interface StopMigrateJobRequest {
-  /** 数据迁移任务ID，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。 */
+  /** 数据迁移任务ID，可通过DescribeMigrationJobs接口获取。 */
   JobId: string;
+  /** 任务结束时是否强制迁移高级对象，仅PG适用枚举值：yes： 是no： 否 */
+  MigrateAdvancedObject?: string;
 }
 
 declare interface StopMigrateJobResponse {

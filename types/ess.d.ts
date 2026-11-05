@@ -1484,7 +1484,7 @@ declare interface OccupiedSeal {
   Creator?: string;
   /** 电子印章策略Id */
   SealPolicyId?: string;
-  /** 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止） */
+  /** 印章状态枚举值：CHECKING： 待审核SUCCESS： 启用状态FAIL： 审核拒绝DISABLE： 已停用STOPPED： 已终止VOID： 已作废INVALID： 已失效CHECKING-SADM： 待超管审核 */
   SealStatus?: string;
   /** 审核失败原因 */
   FailReason?: string;
@@ -2559,7 +2559,7 @@ declare interface CreateBatchInformationExtractionTaskResponse {
 declare interface CreateBatchInitOrganizationUrlRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** 初始化操作类型CREATE_SEAL : 创建印章AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业OPEN_AUTO_SIGN :开通企业“授权签”PARTNER_AUTO_SIGN_AUTH :合作方企业授权“授权签”CHANGE_SUB_ORGANIZATION_ADMIN_AUTH :变更子企业超管授权(授权后，主企业可变更子企业超管，此功能需联系客户经理开通白名单使用) */
+  /** 初始化操作类型CREATE_SEAL : 创建印章AUTH_JOIN_ORGANIZATION_GROUP : 加入集团企业OPEN_AUTO_SIGN :开通企业“授权签”PARTNER_AUTO_SIGN_AUTH :合作方企业授权“授权签”CHANGE_SUB_ORGANIZATION_ADMIN_AUTH :变更子企业超管授权(**授权后，主企业可变更子企业超管，此功能需联系客户经理开通白名单使用**)API_ACCREDIT: 开通企业 CA-API (**该操作类型不可与其他操作混合使用，此功能需联系客户经理开通白名单使用**) */
   OperateTypes: string[];
   /** 批量操作的企业Id列表，最大支持50个 */
   OrganizationIds: string[];
@@ -5361,7 +5361,7 @@ declare interface DescribeOrganizationSealsRequest {
   SealTypes?: string[];
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 需查询的印章状态列表。空：（默认）仅查询启用状态的印章；ALL：查询所有状态的印章；CHECKING：查询待审核的印章；SUCCESS：查询启用状态的印章；FAIL：查询印章审核拒绝的印章；DISABLE：查询已停用的印章；STOPPED：查询已终止的印章；VOID：查询已作废的印章；INVALID：查询已失效的印章。 */
+  /** 需查询的印章状态数组。默认为空，仅查询启用状态的印章枚举值：ALL： 所有状态CHECKING： 待审核SUCCESS： 启用状态FAIL： 审核拒绝DISABLE： 已停用STOPPED： 已终止VOID： 已作废INVALID： 已失效CHECKING-SADM： 待超管审核 */
   SealStatuses?: string[];
 }
 

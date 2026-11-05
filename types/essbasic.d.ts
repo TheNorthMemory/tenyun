@@ -1058,7 +1058,7 @@ declare interface OccupiedSeal {
   Creator?: string;
   /** 电子印章策略Id */
   SealPolicyId?: string;
-  /** 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止） */
+  /** 印章状态枚举值：CHECKING： 待审核CHECKING-SADM： 待超管审核SUCCESS： 启用状态FAIL： 审核拒绝DISABLE： 已停用STOPPED： 已终止VOID： 已作废INVALID： 已失效 */
   SealStatus?: string;
   /** 审核失败原因 */
   FailReason?: string;
@@ -2615,7 +2615,7 @@ declare interface ChannelDescribeOrganizationSealsRequest {
   SealId?: string;
   /** 电子印章类型 , 可选类型如下: OFFICIAL: 公章CONTRACT: 合同专用章;FINANCE: 财务专用章;PERSONNEL: 人事专用章INVOICE: 发票专用章LEGAL_PERSON_SEAL: 法定代表人章;EMPLOYEE_QUALIFICATION_SEAL: 员工执业章OTHER: 其他类型印章OTHER_XX: 其他印章子类型注: 1.为空时查询所有类型的印章。注: 2.OTHER_XX该类型为其他印章子类型，如需使用，请联系对接客服申请开通。具体可传入的子类型值，需在申请开通后由客服提供。 */
   SealTypes?: string[];
-  /** 需查询的印章状态列表。 空，()仅查询启用状态的印章； ALL，查询所有状态的印章； CHECKING，查询待审核的印章； SUCCESS，查询启用状态的印章； FAIL，查询印章审核拒绝的印章； DISABLE，查询已停用的印章； STOPPED，查询已终止的印章； VOID，查询已作废的印章； INVALID，查询已失效的印章。 */
+  /** 需查询的印章状态数组。默认为空，仅查询启用状态的印章枚举值：ALL： 所有状态CHECKING： 待审核CHECKING-SADM： 待超管审核SUCCESS： 启用状态FAIL： 审核拒绝DISABLE： 已停用STOPPED： 已终止VOID： 已作废INVALID： 已失效 */
   SealStatuses?: string[];
 }
 
@@ -2757,7 +2757,7 @@ declare interface ChannelRenewAutoSignLicenseResponse {
 declare interface ChannelUpdateSealStatusRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。 */
   Agent: Agent;
-  /** 印章状态，目前支持传入以下类型：DISABLE-停用印章 */
+  /** 印章状态，目前支持传入以下类型：ENABLE-启用印章DISABLE-停用印章 */
   Status: string;
   /** 印章ID */
   SealId: string;
@@ -2770,7 +2770,7 @@ declare interface ChannelUpdateSealStatusRequest {
 }
 
 declare interface ChannelUpdateSealStatusResponse {
-  /** 人脸验证操作人链接，用法可以参考"[跳转电子签小程序配置](https://qian.tencent.com/developers/company/openwxminiprogram/)"，默认为空。 */
+  /** 人脸验证操作人链接，用法可以参考"跳转电子签小程序配置"，默认为空。 */
   SealOperatorVerifyPath?: string;
   /** 人脸验证操作人二维码链接，扫码后会跳转到腾讯电子签小程序进行人脸验证，默认为空。 */
   SealOperatorVerifyQrcodeUrl?: string;

@@ -2,6 +2,18 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 访问规则 */
+declare interface AccessRule {
+  /** 模块 */
+  Module?: string;
+  /** 功能权限点 */
+  ActionType?: string[];
+  /** 数据权限点 */
+  DataActionType?: string[];
+  /** 功能权限点名称 */
+  ActionTypeName?: string[];
+}
+
 /** 聚合后的公共算法版本 */
 declare interface AggregatePublicAlgoVersion {
   /** 用于聚合的系列名字 */
@@ -268,6 +280,18 @@ declare interface DataPoint {
 declare interface DataSetConfig {
   /** 数据集ID */
   Id: string;
+}
+
+/** 数据源简要信息 */
+declare interface DataSourceBrief {
+  /** 存储实例ID */
+  StorageId?: string;
+  /** 存储实例名称 */
+  StorageName?: string;
+  /** 存储目录 */
+  WorkDir?: string;
+  /** 数据源读写权限，RW/RO */
+  Permission?: string;
 }
 
 /** 数据源信息 */
@@ -884,6 +908,14 @@ declare interface MaterialInfo {
   MaterialType?: string | null;
   /** 训练任务挂载路径 */
   MountPath?: string | null;
+}
+
+/** 空间成员信息 */
+declare interface MemberInfo {
+  /** 超管成员列表 */
+  SuperAdmins?: UserBriefInfo[] | null;
+  /** 空间内管理员列表 */
+  Admins?: UserBriefInfo[] | null;
 }
 
 /** 对话输入内容 */
@@ -1726,6 +1758,24 @@ declare interface ResourceInstanceRunningJobInfo {
   TaskName?: string | null;
 }
 
+/** 资源级权限记录 */
+declare interface ResourcePermission {
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 资源ID */
+  Id?: string;
+  /** 权限值 */
+  Permission?: string;
+  /** 资源名称 */
+  Name?: string;
+  /** 创建者子账号 */
+  SubUin?: string;
+  /** 创建者昵称 */
+  SubUinName?: string;
+  /** 数据源简要信息 */
+  DataSourceBrief?: DataSourceBrief;
+}
+
 /** TI资源规格 */
 declare interface ResourceSpec {
   /** 规格简称 */
@@ -1742,6 +1792,30 @@ declare interface ResourceSupplyAttribute {
   SupplyType?: string;
   /** 集群类型枚举值：DEFAULT： 默认集群THIRD： 第三方集群默认值：DEFAULT */
   ClusterType?: string;
+}
+
+/** 角色简要信息 */
+declare interface RoleBriefInfo {
+  /** 角色id */
+  RoleId?: string | null;
+  /** 角色名称 */
+  RoleName?: string | null;
+}
+
+/** 角色信息 */
+declare interface RoleInfo {
+  /** 角色ID */
+  RoleId?: string;
+  /** 名称 */
+  RoleName?: string;
+  /** 角色类型。"SYSTEM" 内置角色，"CUSTOMER" 自定义角色 */
+  RoleType?: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 绑定的用户数 */
+  UserCount?: number;
 }
 
 /** 滚动更新策略 */
@@ -2568,6 +2642,26 @@ declare interface Usage {
   TotalTokens?: number;
 }
 
+/** 用户简要信息 */
+declare interface UserBriefInfo {
+  /** 子用户uin */
+  SubUin?: string | null;
+  /** 子用户名 */
+  SubUinName?: string | null;
+}
+
+/** 用户+角色信息 */
+declare interface UserRoleInfo {
+  /** 子账号 */
+  SubUin?: string;
+  /** 名称 */
+  NickName?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 角色列表 */
+  Roles?: RoleInfo[];
+}
+
 /** 外部挂载信息 */
 declare interface VolumeMount {
   /** cfs的配置信息 */
@@ -2626,6 +2720,20 @@ declare interface Workspace {
   ActionType?: string[];
   /** 工作空间状态 */
   Status?: string;
+}
+
+/** 工作空间任务信息 */
+declare interface WorkspaceTaskInfo {
+  /** 任务ID */
+  TaskId?: string;
+  /** 任务名称 */
+  TaskName?: string;
+  /** 地域 */
+  Region?: string;
+  /** 任务类型 */
+  ResourceTaskType?: string;
+  /** 任务所属资源组 */
+  ResourceGroupId?: string;
 }
 
 declare interface ChatCompletionRequest {
@@ -2986,6 +3094,22 @@ declare interface CreatePresignedNotebookUrlResponse {
   RequestId?: string;
 }
 
+declare interface CreateRoleRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 角色名称 */
+  RoleName?: string;
+  /** 角色备注 */
+  Description?: string;
+}
+
+declare interface CreateRoleResponse {
+  /** 角色ID */
+  RoleId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateTrainingModelRequest {
   /** 导入方式MODEL：导入新模型VERSION：导入新版本EXIST：导入现有版本 */
   ImportMethod: string;
@@ -3228,6 +3352,18 @@ declare interface DeleteNotebookResponse {
   RequestId?: string;
 }
 
+declare interface DeleteRoleRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 角色ID */
+  RoleId?: string;
+}
+
+declare interface DeleteRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteTrainingModelRequest {
   /** 模型ID */
   TrainingModelId: string;
@@ -3266,6 +3402,26 @@ declare interface DeleteTrainingTaskRequest {
 }
 
 declare interface DeleteTrainingTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAccessRulesRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+}
+
+declare interface DescribeAccessRulesResponse {
+  /** 当前用户有哪些权限 */
+  AccessRules?: AccessRule[];
+  /** 权限点全量集合 */
+  FullAccessRules?: AccessRule[];
+  /** 当前用户拥有的空间外角色 */
+  GlobalRoles?: string[];
+  /** 当前用户可见的空间列表 */
+  Workspaces?: Workspace[];
+  /** 当前用户有哪些空间外权限 */
+  OutsideAccessRules?: AccessRule[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3311,7 +3467,7 @@ declare interface DescribeBillingResourceGroupAttachedWorkspacesResponse {
 declare interface DescribeBillingResourceGroupRequest {
   /** 资源组id, 取值为创建资源组接口(CreateBillingResourceGroup)响应中的ResourceGroupId */
   ResourceGroupId: string;
-  /** TI工作空间ID仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。 */
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
   TiProjectId?: string;
   /** 过滤条件注意: Filter.Name 只支持以下枚举值: InstanceId (资源组节点id) InstanceStatus (资源组节点状态)Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询Filter.Negative: 是否取反，默认为falseFilter.Fuzzy: 是否模糊查询，默认为false每次请求的Filters的上限为10，Filter.Values的上限为100 */
   Filters?: Filter[];
@@ -3920,6 +4076,84 @@ declare interface DescribePublicAlgoVersionListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeRoleRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 角色ID */
+  RoleId?: string;
+  /** 资源类型 */
+  ResourceType?: string;
+  /** 偏移值 */
+  Offset?: number;
+  /** 分页数量 */
+  Limit?: number;
+  /** 过滤条件 */
+  Filters?: Filter[];
+}
+
+declare interface DescribeRoleResponse {
+  /** 角色ID */
+  RoleId?: string;
+  /** 角色名称 */
+  RoleName?: string;
+  /** 角色类型 */
+  RoleType?: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 权限规则列表 */
+  AccessRules?: AccessRule[];
+  /** 资源级权限列表 */
+  ResourcePermissions?: ResourcePermission[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRoleUsersRequest {
+  /** 角色ID */
+  RoleId: string;
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+}
+
+declare interface DescribeRoleUsersResponse {
+  /** 符合过滤条件的用户总数 */
+  TotalCount?: number;
+  /** 用户列表 */
+  Users?: UserRoleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeRolesRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 偏移值 */
+  Offset?: number;
+  /** 分页数量 */
+  Limit?: number;
+  /** 排序方式 */
+  Order?: string;
+  /** 排序字段 */
+  OrderField?: string;
+  /** 是否返回绑定的用户数 */
+  WithUserCount?: boolean;
+}
+
+declare interface DescribeRolesResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 角色列表 */
+  Roles?: RoleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSubAccountLinuxUserInfosRequest {
   /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
   TiProjectId?: string;
@@ -4040,6 +4274,82 @@ declare interface DescribeTrainingTasksResponse {
   TrainingTaskSet?: TrainingTaskSetItem[];
   /** 数量 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkspaceMembersRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 过滤条件 */
+  Filters?: Filter[];
+  /** 偏移量 */
+  Offset?: number;
+  /** 数量 */
+  Limit?: number;
+  /** 排序字段 */
+  OrderField?: string;
+  /** 排序方式 */
+  Order?: string;
+  /** 是否包含角色信息 */
+  WithRoles?: boolean;
+}
+
+declare interface DescribeWorkspaceMembersResponse {
+  /** 总数 */
+  TotalCount?: number;
+  /** 用户列表 */
+  Members?: UserRoleInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkspaceQuotaUsageRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+}
+
+declare interface DescribeWorkspaceQuotaUsageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkspaceQuotasRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+}
+
+declare interface DescribeWorkspaceQuotasResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeWorkspaceRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 是否包含运行中的任务 */
+  WithRunningTasks?: boolean;
+  /** 是否包含有管理权限的人员信息 */
+  WithMembers?: boolean;
+}
+
+declare interface DescribeWorkspaceResponse {
+  /** 项目ID */
+  TiProjectId?: string;
+  /** 名称 */
+  Name?: string;
+  /** 描述 */
+  Description?: string;
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 运行中的任务信息 */
+  RunningTasks?: WorkspaceTaskInfo[];
+  /** 空间创建人信息 */
+  Creator?: UserBriefInfo;
+  /** 当前空间拥有的角色信息 */
+  OwnedRoles?: RoleBriefInfo[];
+  /** 空间成员信息 */
+  MemberInfo?: MemberInfo | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4278,6 +4588,46 @@ declare interface ModifyNotebookTagsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyRoleAccessRulesRequest {
+}
+
+declare interface ModifyRoleAccessRulesResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRoleRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 角色ID */
+  RoleId?: string;
+  /** 角色名称 */
+  RoleName?: string;
+  /** 描述 */
+  Description?: string;
+}
+
+declare interface ModifyRoleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyRoleUserGrantRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 角色ID列表 */
+  RoleIds?: string[];
+  /** 用户UIN列表 */
+  SubUins?: string[];
+  /** 授权方式 */
+  Grant?: string;
+}
+
+declare interface ModifyRoleUserGrantResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyServiceGroupWeightsRequest {
   /** 服务组id */
   ServiceGroupId: string;
@@ -4290,6 +4640,32 @@ declare interface ModifyServiceGroupWeightsRequest {
 declare interface ModifyServiceGroupWeightsResponse {
   /** 更新权重后的服务组信息 */
   ServiceGroup?: ServiceGroup | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyUserGrantRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 用户列表 */
+  SubUins?: string[];
+  /** 角色列表 */
+  RoleIds?: string[];
+  /** 授权类型 */
+  Grant?: string;
+}
+
+declare interface ModifyUserGrantResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyWorkspaceMembersRequest {
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+}
+
+declare interface ModifyWorkspaceMembersResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5153,6 +5529,8 @@ declare interface Tione {
   CreateNotebookImage(data: CreateNotebookImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateNotebookImageResponse>;
   /** 生成Notebook访问链接 {@link CreatePresignedNotebookUrlRequest} {@link CreatePresignedNotebookUrlResponse} */
   CreatePresignedNotebookUrl(data: CreatePresignedNotebookUrlRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePresignedNotebookUrlResponse>;
+  /** 创建权限角色 {@link CreateRoleRequest} {@link CreateRoleResponse} */
+  CreateRole(data?: CreateRoleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateRoleResponse>;
   /** 导入模型 {@link CreateTrainingModelRequest} {@link CreateTrainingModelResponse} */
   CreateTrainingModel(data: CreateTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateTrainingModelResponse>;
   /** 创建模型训练任务 {@link CreateTrainingTaskRequest} {@link CreateTrainingTaskResponse} */
@@ -5173,12 +5551,16 @@ declare interface Tione {
   DeleteMountLimit(data?: DeleteMountLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMountLimitResponse>;
   /** 删除Notebook {@link DeleteNotebookRequest} {@link DeleteNotebookResponse} */
   DeleteNotebook(data: DeleteNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteNotebookResponse>;
+  /** 删除权限角色 {@link DeleteRoleRequest} {@link DeleteRoleResponse} */
+  DeleteRole(data?: DeleteRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRoleResponse>;
   /** 删除模型 {@link DeleteTrainingModelRequest} {@link DeleteTrainingModelResponse} */
   DeleteTrainingModel(data: DeleteTrainingModelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelResponse>;
   /** 删除模型版本 {@link DeleteTrainingModelVersionRequest} {@link DeleteTrainingModelVersionResponse} */
   DeleteTrainingModelVersion(data: DeleteTrainingModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingModelVersionResponse>;
   /** 删除训练任务 {@link DeleteTrainingTaskRequest} {@link DeleteTrainingTaskResponse} */
   DeleteTrainingTask(data: DeleteTrainingTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTrainingTaskResponse>;
+  /** 列取权限角色的访问规则列表 {@link DescribeAccessRulesRequest} {@link DescribeAccessRulesResponse} */
+  DescribeAccessRules(data?: DescribeAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAccessRulesResponse>;
   /** 查询标注任务列表 {@link DescribeAnnotatedTaskListRequest} {@link DescribeAnnotatedTaskListResponse} */
   DescribeAnnotatedTaskList(data: DescribeAnnotatedTaskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAnnotatedTaskListResponse>;
   /** 查询资源组节点列表 {@link DescribeBillingResourceGroupRequest} {@link DescribeBillingResourceGroupResponse} */
@@ -5239,6 +5621,12 @@ declare interface Tione {
   DescribePresetImageList(data?: DescribePresetImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePresetImageListResponse>;
   /** 公共算法版本列表 {@link DescribePublicAlgoVersionListRequest} {@link DescribePublicAlgoVersionListResponse} */
   DescribePublicAlgoVersionList(data?: DescribePublicAlgoVersionListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePublicAlgoVersionListResponse>;
+  /** 获取角色详情 {@link DescribeRoleRequest} {@link DescribeRoleResponse} */
+  DescribeRole(data?: DescribeRoleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleResponse>;
+  /** 获取角色中的授权用户 {@link DescribeRoleUsersRequest} {@link DescribeRoleUsersResponse} */
+  DescribeRoleUsers(data: DescribeRoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRoleUsersResponse>;
+  /** 查询权限角色列表 {@link DescribeRolesRequest} {@link DescribeRolesResponse} */
+  DescribeRoles(data?: DescribeRolesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRolesResponse>;
   /** 批量查询子账号Linux用户信息 {@link DescribeSubAccountLinuxUserInfosRequest} {@link DescribeSubAccountLinuxUserInfosResponse} */
   DescribeSubAccountLinuxUserInfos(data?: DescribeSubAccountLinuxUserInfosRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSubAccountLinuxUserInfosResponse>;
   /** 查询模型版本 {@link DescribeTrainingModelVersionRequest} {@link DescribeTrainingModelVersionResponse} */
@@ -5253,6 +5641,14 @@ declare interface Tione {
   DescribeTrainingTaskPods(data: DescribeTrainingTaskPodsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTaskPodsResponse>;
   /** 模型训练任务列表 {@link DescribeTrainingTasksRequest} {@link DescribeTrainingTasksResponse} */
   DescribeTrainingTasks(data?: DescribeTrainingTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrainingTasksResponse>;
+  /** 查询工作空间详情 {@link DescribeWorkspaceRequest} {@link DescribeWorkspaceResponse} */
+  DescribeWorkspace(data?: DescribeWorkspaceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceResponse>;
+  /** 查询空间成员列表 {@link DescribeWorkspaceMembersRequest} {@link DescribeWorkspaceMembersResponse} */
+  DescribeWorkspaceMembers(data?: DescribeWorkspaceMembersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceMembersResponse>;
+  /** 读取工作空间配额用量 {@link DescribeWorkspaceQuotaUsageRequest} {@link DescribeWorkspaceQuotaUsageResponse} */
+  DescribeWorkspaceQuotaUsage(data?: DescribeWorkspaceQuotaUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceQuotaUsageResponse>;
+  /** 读取工作空间配额 {@link DescribeWorkspaceQuotasRequest} {@link DescribeWorkspaceQuotasResponse} */
+  DescribeWorkspaceQuotas(data?: DescribeWorkspaceQuotasRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspaceQuotasResponse>;
   /** 查询工作空间列表 {@link DescribeWorkspacesRequest} {@link DescribeWorkspacesResponse} */
   DescribeWorkspaces(data?: DescribeWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeWorkspacesResponse>;
   /** 开启CLS日志投递 {@link EnableTrainingTaskClsConfigRequest} {@link EnableTrainingTaskClsConfigResponse} */
@@ -5267,8 +5663,18 @@ declare interface Tione {
   ModifyNotebook(data: ModifyNotebookRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookResponse>;
   /** 修改Notebook标签 {@link ModifyNotebookTagsRequest} {@link ModifyNotebookTagsResponse} */
   ModifyNotebookTags(data: ModifyNotebookTagsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNotebookTagsResponse>;
+  /** 修改自定义角色 {@link ModifyRoleRequest} {@link ModifyRoleResponse} */
+  ModifyRole(data?: ModifyRoleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleResponse>;
+  /** 修改自定义角色的权限规则 {@link ModifyRoleAccessRulesRequest} {@link ModifyRoleAccessRulesResponse} */
+  ModifyRoleAccessRules(data?: ModifyRoleAccessRulesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleAccessRulesResponse>;
+  /** 修改角色下的用户授权状态 {@link ModifyRoleUserGrantRequest} {@link ModifyRoleUserGrantResponse} */
+  ModifyRoleUserGrant(data?: ModifyRoleUserGrantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleUserGrantResponse>;
   /** 更新推理服务组流量分配 {@link ModifyServiceGroupWeightsRequest} {@link ModifyServiceGroupWeightsResponse} */
   ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
+  /** 更新用户权限配置 {@link ModifyUserGrantRequest} {@link ModifyUserGrantResponse} */
+  ModifyUserGrant(data?: ModifyUserGrantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGrantResponse>;
+  /** 更新空间成员列表 {@link ModifyWorkspaceMembersRequest} {@link ModifyWorkspaceMembersResponse} */
+  ModifyWorkspaceMembers(data?: ModifyWorkspaceMembersRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyWorkspaceMembersResponse>;
   /** 上报训练自定义指标 {@link PushTrainingMetricsRequest} {@link PushTrainingMetricsResponse} */
   PushTrainingMetrics(data?: PushTrainingMetricsRequest, config?: AxiosRequestConfig): AxiosPromise<PushTrainingMetricsResponse>;
   /** 启动Notebook {@link StartNotebookRequest} {@link StartNotebookResponse} */

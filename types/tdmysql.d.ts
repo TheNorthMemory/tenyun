@@ -294,6 +294,10 @@ declare interface DBEngineInfo {
   IsSupportParamTemplate?: boolean;
   /** 是否支持Serverless模式 */
   IsSupportServerless?: boolean;
+  /** 是否支持透明加密 */
+  IsSupportTDE?: boolean;
+  /** 是否支持密码复杂度 */
+  IsSupportPasswordComplexity?: boolean;
 }
 
 /** 云数据库参数信息。 */
@@ -846,6 +850,8 @@ declare interface SlowLogData {
   TraceId?: string | null;
   /** 执行计划 */
   Explain?: Explain[] | null;
+  /** 执行计划树 */
+  ExplainTree?: string | null;
 }
 
 /** 灾备实例关系 */

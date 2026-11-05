@@ -62,6 +62,8 @@ declare interface ApplicationInfo {
   AppId?: string;
   /** 扩展包名数量上限 */
   NameLimit?: number;
+  /** linux 进程名 */
+  LinuxProcessName?: string;
 }
 
 /** 功能描述模型 */

@@ -5445,8 +5445,10 @@ declare interface DeleteGlobalRoutesResponse {
 }
 
 declare interface DeleteHaVipRequest {
-  /** `HAVIP`唯一`ID`，形如：`havip-9o233uri`。 */
+  /** HAVIP唯一ID，形如：havip-9o233uri。 */
   HaVipId: string;
+  /** 忽略删除保护。 */
+  SkipTerminationProtection?: boolean;
 }
 
 declare interface DeleteHaVipResponse {
@@ -9223,10 +9225,14 @@ declare interface ModifyGlobalRoutesResponse {
 }
 
 declare interface ModifyHaVipAttributeRequest {
-  /** `HAVIP`唯一`ID`，形如：`havip-9o233uri`。 */
+  /** HAVIP唯一ID，形如：havip-9o233uri。 */
   HaVipId: string;
-  /** `HAVIP`名称，可任意命名，但不得超过60个字符。 */
+  /** HAVIP名称，可任意命名，但不得超过60个字符。 */
   HaVipName?: string;
+  /** 删除保护。 */
+  TerminationProtection?: boolean;
+  /** 流量保护。 */
+  TrafficProtection?: boolean;
 }
 
 declare interface ModifyHaVipAttributeResponse {

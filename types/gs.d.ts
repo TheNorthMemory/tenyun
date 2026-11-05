@@ -524,6 +524,14 @@ declare interface CreateAndroidInstanceLabelResponse {
   RequestId?: string;
 }
 
+declare interface CreateAndroidInstanceMCPTokenRequest {
+}
+
+declare interface CreateAndroidInstanceMCPTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAndroidInstanceSSHRequest {
   /** 实例ID */
   AndroidInstanceId: string;
@@ -774,6 +782,14 @@ declare interface DeleteAndroidInstanceLabelResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAndroidInstanceMCPTokenRequest {
+}
+
+declare interface DeleteAndroidInstanceMCPTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAndroidAppsRequest {
   /** 分页偏移 */
   Offset?: number;
@@ -864,6 +880,14 @@ declare interface DescribeAndroidInstanceLabelsResponse {
   Labels?: AndroidInstanceLabel[];
   /** 安卓实例标签详情列表 */
   AndroidInstanceLabels?: AndroidInstanceLabelDetail[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAndroidInstanceMCPTokensRequest {
+}
+
+declare interface DescribeAndroidInstanceMCPTokensResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1356,6 +1380,14 @@ declare interface RebootAndroidInstancesResponse {
   RequestId?: string;
 }
 
+declare interface RenewAndroidInstanceMCPTokenRequest {
+}
+
+declare interface RenewAndroidInstanceMCPTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RenewAndroidInstancesAccessTokenRequest {
   /** token */
   AccessToken: string;
@@ -1707,6 +1739,8 @@ declare interface Gs {
   CreateAndroidInstanceImage(data: CreateAndroidInstanceImageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceImageResponse>;
   /** 创建安卓实例标签 {@link CreateAndroidInstanceLabelRequest} {@link CreateAndroidInstanceLabelResponse} */
   CreateAndroidInstanceLabel(data: CreateAndroidInstanceLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceLabelResponse>;
+  /** 创建安卓实例 MCP token {@link CreateAndroidInstanceMCPTokenRequest} {@link CreateAndroidInstanceMCPTokenResponse} */
+  CreateAndroidInstanceMCPToken(data?: CreateAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceMCPTokenResponse>;
   /** 创建安卓实例 SSH 连接 {@link CreateAndroidInstanceSSHRequest} {@link CreateAndroidInstanceSSHResponse} */
   CreateAndroidInstanceSSH(data: CreateAndroidInstanceSSHRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAndroidInstanceSSHResponse>;
   /** 创建安卓实例 WebShell 连接 {@link CreateAndroidInstanceWebShellRequest} {@link CreateAndroidInstanceWebShellResponse} */
@@ -1733,6 +1767,8 @@ declare interface Gs {
   DeleteAndroidInstanceImages(data: DeleteAndroidInstanceImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceImagesResponse>;
   /** 删除安卓实例标签 {@link DeleteAndroidInstanceLabelRequest} {@link DeleteAndroidInstanceLabelResponse} */
   DeleteAndroidInstanceLabel(data: DeleteAndroidInstanceLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceLabelResponse>;
+  /** 删除安卓实例 MCP token {@link DeleteAndroidInstanceMCPTokenRequest} {@link DeleteAndroidInstanceMCPTokenResponse} */
+  DeleteAndroidInstanceMCPToken(data?: DeleteAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceMCPTokenResponse>;
   /** 查询安卓应用信息 {@link DescribeAndroidAppsRequest} {@link DescribeAndroidAppsResponse} */
   DescribeAndroidApps(data?: DescribeAndroidAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidAppsResponse>;
   /** 查询安卓实例应用 {@link DescribeAndroidInstanceAppsRequest} {@link DescribeAndroidInstanceAppsResponse} */
@@ -1743,6 +1779,8 @@ declare interface Gs {
   DescribeAndroidInstanceImages(data?: DescribeAndroidInstanceImagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceImagesResponse>;
   /** 查询安卓实例标签 {@link DescribeAndroidInstanceLabelsRequest} {@link DescribeAndroidInstanceLabelsResponse} */
   DescribeAndroidInstanceLabels(data?: DescribeAndroidInstanceLabelsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceLabelsResponse>;
+  /** 查询安卓实例 MCP token {@link DescribeAndroidInstanceMCPTokensRequest} {@link DescribeAndroidInstanceMCPTokensResponse} */
+  DescribeAndroidInstanceMCPTokens(data?: DescribeAndroidInstanceMCPTokensRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceMCPTokensResponse>;
   /** 查询安卓实例任务状态 {@link DescribeAndroidInstanceTasksStatusRequest} {@link DescribeAndroidInstanceTasksStatusResponse} */
   DescribeAndroidInstanceTasksStatus(data?: DescribeAndroidInstanceTasksStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidInstanceTasksStatusResponse>;
   /** 查询安卓实例 {@link DescribeAndroidInstancesRequest} {@link DescribeAndroidInstancesResponse} */
@@ -1805,6 +1843,8 @@ declare interface Gs {
   RebootAndroidInstanceHosts(data: RebootAndroidInstanceHostsRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstanceHostsResponse>;
   /** 重启安卓实例 {@link RebootAndroidInstancesRequest} {@link RebootAndroidInstancesResponse} */
   RebootAndroidInstances(data: RebootAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstancesResponse>;
+  /** 续期安卓实例 MCP token {@link RenewAndroidInstanceMCPTokenRequest} {@link RenewAndroidInstanceMCPTokenResponse} */
+  RenewAndroidInstanceMCPToken(data?: RenewAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAndroidInstanceMCPTokenResponse>;
   /** 续期安卓实例访问Token {@link RenewAndroidInstancesAccessTokenRequest} {@link RenewAndroidInstancesAccessTokenResponse} */
   RenewAndroidInstancesAccessToken(data: RenewAndroidInstancesAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAndroidInstancesAccessTokenResponse>;
   /** 重置安卓实例 {@link ResetAndroidInstancesRequest} {@link ResetAndroidInstancesResponse} */

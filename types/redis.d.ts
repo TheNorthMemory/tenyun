@@ -314,7 +314,7 @@ declare interface InstanceEnumParam {
   ParamName?: string;
   /** 参数类型，例如：Enum。 */
   ValueType?: string;
-  /** 参数值修改后是否需要重启。- true：需要。- false：不需要。 */
+  /** 参数值修改后是否需要重启。true：需要。false：不需要。 */
   NeedRestart?: string;
   /** 参数默认值。 */
   DefaultValue?: string;
@@ -324,8 +324,18 @@ declare interface InstanceEnumParam {
   Tips?: string;
   /** 参数可取的值。 */
   EnumValue?: string[];
-  /** 参数修改状态。- 1: 修改中。- 2：修改完成。 */
+  /** 参数修改状态。1: 修改中。2：修改完成。 */
   Status?: number;
+  /** 参数类型枚举值：redis： cache节点支持的参数redis-interface： 代理proxy支持的参数tendis： tendis支持的参数 */
+  ParamType?: string;
+  /** 当前实例是否支持该特性 */
+  FeatureSupported?: boolean;
+  /** 新特性上线日期参数格式：时间格式YYYY-MM-DD */
+  NewFeatureOnlineTime?: string;
+  /** 正则校验规则 */
+  Pattern?: string;
+  /** 输入格式描述 */
+  InputDescription?: string;
 }
 
 /** 实例信息 */
@@ -372,6 +382,16 @@ declare interface InstanceIntegerParam {
   Status?: number;
   /** 参数单位 */
   Unit?: string;
+  /** 参数类型枚举值：redis： cache节点支持的参数redis-interface： 代理proxy支持的参数tendis： tendis支持的参数 */
+  ParamType?: string;
+  /** 当前实例是否支持该特性 */
+  FeatureSupported?: boolean;
+  /** 新特性上线日期参数格式：时间格式YYYY-MM-DD */
+  NewFeatureOnlineTime?: string;
+  /** 正则校验规则 */
+  Pattern?: string;
+  /** 输入格式描述 */
+  InputDescription?: string;
 }
 
 /** 实例多选项类型参数描述 */
@@ -380,7 +400,7 @@ declare interface InstanceMultiParam {
   ParamName?: string;
   /** 参数类型。例如：multi。 */
   ValueType?: string;
-  /** 参数修改后是否需要重启。- true：需要。- false：不需要。 */
+  /** 参数修改后是否需要重启。true：需要。false：不需要。 */
   NeedRestart?: string;
   /** 参数默认值。 */
   DefaultValue?: string;
@@ -390,8 +410,18 @@ declare interface InstanceMultiParam {
   Tips?: string;
   /** 参数枚举值。 */
   EnumValue?: string[];
-  /** 参数修改的状态。- 1：修改中。- 2：修改完成。 */
+  /** 参数修改的状态。1：修改中。2：修改完成。 */
   Status?: number;
+  /** 参数类型枚举值：redis： cache节点支持的参数redis-interface： 代理proxy支持的参数tendis： tendis支持的参数 */
+  ParamType?: string;
+  /** 当前实例是否支持该特性 */
+  FeatureSupported?: boolean;
+  /** 新特性上线日期参数格式：参数格式：时间格式YYYY-MM-DD */
+  NewFeatureOnlineTime?: string;
+  /** 正则校验规则 */
+  Pattern?: string;
+  /** 输入格式描述 */
+  InputDescription?: string;
 }
 
 /** 实例节点 */
@@ -608,7 +638,7 @@ declare interface InstanceTextParam {
   ParamName?: string;
   /** 参数类型。例如：text。 */
   ValueType?: string;
-  /** 参数修改后是否需要重启。- true：需要。- false：不需要。 */
+  /** 参数修改后是否需要重启。true：需要。false：不需要。 */
   NeedRestart?: string;
   /** 参数默认值。 */
   DefaultValue?: string;
@@ -618,8 +648,18 @@ declare interface InstanceTextParam {
   Tips?: string;
   /** 参数可取值。 */
   TextValue?: string[];
-  /** 参数修改状态。- 1: 修改中。- 2：修改完成。 */
+  /** 参数修改状态。1: 修改中。2：修改完成。 */
   Status?: number;
+  /** 参数类型枚举值：redis： cache节点支持的参数redis-interface： 代理proxy支持的参数tendis： tendis支持的参数 */
+  ParamType?: string;
+  /** 当前实例是否支持该特性 */
+  FeatureSupported?: boolean;
+  /** 新特性上线日期参数格式：时间格式YYYY-MM-DD */
+  NewFeatureOnlineTime?: string;
+  /** 正则校验规则 */
+  Pattern?: string;
+  /** 输入格式描述 */
+  InputDescription?: string;
 }
 
 /** 复制组实例 */
@@ -742,6 +782,8 @@ declare interface LogResult {
   CommandDetail?: string;
   /** 错误信息 */
   ErrMsg?: string;
+  /** proxy的节点ID */
+  Node?: string;
 }
 
 /** 安全组出站规则 */
@@ -2601,6 +2643,8 @@ declare interface DescribeReplicationGroupResponse {
 declare interface DescribeSSLStatusRequest {
   /** 实例 ID。请登录 Redis 控制台在实例列表复制实例 ID。 */
   InstanceId: string;
+  /** 证书下载格式类型，不传时默认 nginx。仅对自定义证书（CertSource=1）生效枚举值：nginx： nginx可用apache： apache可用tomcat： tomcat可用iis： iis可用 */
+  ServiceType?: string;
 }
 
 declare interface DescribeSSLStatusResponse {
@@ -2618,6 +2662,22 @@ declare interface DescribeSSLStatusResponse {
   AddressType?: number;
   /** 当前加密连接地址 */
   EncryptAddress?: string;
+  /** 密钥来源枚举值：0： 腾讯云提供1： 自定义证书 */
+  CertSource?: number;
+  /** 证书有效性枚举值：0： 有效1： 即将过期（30天内）2： 已过期404： 证书已被删除500： 查询异常 */
+  CertStatus?: number;
+  /** SSL 证书服务的证书 ID，CertSource=1 时必填 */
+  CertId?: string;
+  /** 证书别名 */
+  CertAlias?: string;
+  /** 证书到期时间参数格式：时间格式YYYY-MM-DD hh:mm:ss */
+  CertExpireTime?: string;
+  /** 证书关联域名（SAN）包括了IP */
+  Domain?: string;
+  /** 最低 TLS 版本枚举值：TLSv1.0： TLSv1.0TLSv1.1： TLSv1.1TLSv1.2： TLSv1.2 */
+  SSLMinVersion?: string;
+  /** 当前加密模式枚举值：required： 强制加密flexible： 兼容模式 */
+  EncryptionMode?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3383,6 +3443,16 @@ declare interface OpenSSLRequest {
   InstanceId: string;
   /** SSL地址类型。枚举值：0： 不限。1： 内网IPv4。2： 内网IPv6。3： 外网。-1： 未指定。默认值：0 */
   AddressType?: number;
+  /** 密钥类型。枚举值：0： 腾讯云提供1： 用户自定义证书默认值：0 */
+  CertSource?: number;
+  /** 切换时间。（该参数废弃，不再生效）枚举值：1： 维护时间窗操作：指开启SSL加密在设置的维护时间窗内执行。请通过接口DescribeMaintenanceWindow查询设置的维护时间窗时间段。2： 立即操作：操作将立即执行，无需等待维护时间窗。系统默认设置为立即操作。 */
+  SwitchOption?: number;
+  /** SSL 证书服务的证书 ID，CertSource=1 时必填 */
+  CertId?: string;
+  /** 最低TLS版本枚举值：TLSv1.0： TLSv1.0TLSv1.1： TLSv1.1TLSv1.2： TLSv1.2 */
+  SSLMinVersion?: string;
+  /** 目标加密模式枚举值：required： 强制加密flexible： 兼容模式默认值：flexible */
+  EncryptionMode?: string;
 }
 
 declare interface OpenSSLResponse {

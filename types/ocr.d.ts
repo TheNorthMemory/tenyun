@@ -678,6 +678,14 @@ declare interface Element {
   AnswerElement?: AnswerElement;
 }
 
+/** 文本向量化结果 */
+declare interface EmbeddingObject {
+  /** 输入文本在 Inputs 列表中的索引，从 0 开始。 */
+  Index?: number;
+  /** 向量化结果，维度由所选模型决定。 */
+  Embedding?: number[];
+}
+
 /** 敏感数据加密 */
 declare interface Encryption {
   /** 有加密需求的用户，接入传入kms的CiphertextBlob（Base64编码），关于数据加密可查阅[敏感数据加密指引](https://cloud.tencent.com/document/product/866/106048)文档。 */
@@ -4064,6 +4072,54 @@ declare interface GeneralHandwritingOCRResponse {
   RequestId?: string;
 }
 
+declare interface GenerateTextEmbeddingRequest {
+  /** 选择生成向量的模型（不同模型计费单价不同）。取值：0：text-embedding-0.6b1：text-embedding-4b */
+  Model: string;
+  /** 输入文本列表。单次最多 7 条，单条不超过 2000 字符。 */
+  Inputs: string[];
+  /** 文本向量化类型。取值：query：查询文本，用于检索场景的查询侧document：文档文本，用于检索场景的文档侧默认为 document */
+  TextType?: string;
+  /** 自定义任务指令词，用于指定向量化任务。最大 2000 字符。不传时按 TextType 使用系统默认指令词。 */
+  Instruction?: string;
+}
+
+declare interface GenerateTextEmbeddingResponse {
+  /** 向量化结果列表。顺序与输入 Inputs 列表一一对应。 */
+  Data?: EmbeddingObject[];
+  /** 输入 Token 数。 */
+  InputTokens?: number;
+  /** 总 Token 数。 */
+  TotalTokens?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GenerateVLEmbeddingRequest {
+  /** 选择生成向量的模型。取值：0：vl-embedding-4b1：vl-embedding-8b2：vl-embedding-2b */
+  Model: string;
+  /** 内容类型标识。取值：1：文本2：图像 URL3：视频 URL4：图文混合 */
+  Type: string;
+  /** 文本内容。仅当 Type 为 1 或 4 时必填，单条文本不超过 2000 字符。 */
+  Text?: string;
+  /** 图像地址，支持公网 http/https 链接或 base64 内容。仅当 Type 为 2 或 4 时必填。 */
+  ImageUrl?: string;
+  /** 视频地址，支持公网 http/https 链接或 base64 内容。仅当 Type 为 3 时必填。 */
+  VideoUrl?: string;
+  /** 检索场景，未传入该参数时将自动匹配。取值：0：自动匹配1：图搜图（找同款、相似图），仅 Type 为 2 或 4 时可用2：图文搜图（图 + 问题），仅 Type 为 4 时可用3：文搜图（纯文本搜图），仅 Type 为 1 或 4 时可用4：文搜视频（纯文本搜视频），仅 Type 为 1 或 4 时可用5：图搜视频、图文搜视频，仅 Type 为 2 或 4 时可用 */
+  SearchMode?: string;
+}
+
+declare interface GenerateVLEmbeddingResponse {
+  /** 向量化结果列表。单条图文混合输入可能返回多个向量。 */
+  Data?: EmbeddingObject[];
+  /** 输入 Token 数，多模态场景含图像、视频折算的 Token。 */
+  InputTokens?: number;
+  /** 总 Token 数。 */
+  TotalTokens?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetOCRResultRequest {
   /** token值 */
   OCRToken: string;
@@ -5781,6 +5837,10 @@ declare interface Ocr {
   GeneralFastOCR(data?: GeneralFastOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralFastOCRResponse>;
   /** 通用手写体识别 {@link GeneralHandwritingOCRRequest} {@link GeneralHandwritingOCRResponse} */
   GeneralHandwritingOCR(data?: GeneralHandwritingOCRRequest, config?: AxiosRequestConfig): AxiosPromise<GeneralHandwritingOCRResponse>;
+  /** 文本向量 {@link GenerateTextEmbeddingRequest} {@link GenerateTextEmbeddingResponse} */
+  GenerateTextEmbedding(data: GenerateTextEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateTextEmbeddingResponse>;
+  /** 多模态向量 {@link GenerateVLEmbeddingRequest} {@link GenerateVLEmbeddingResponse} */
+  GenerateVLEmbedding(data: GenerateVLEmbeddingRequest, config?: AxiosRequestConfig): AxiosPromise<GenerateVLEmbeddingResponse>;
   /** 获取OCR识别结果 {@link GetOCRResultRequest} {@link GetOCRResultResponse} */
   GetOCRResult(data: GetOCRResultRequest, config?: AxiosRequestConfig): AxiosPromise<GetOCRResultResponse>;
   /** 获取OCR Token {@link GetOCRTokenRequest} {@link GetOCRTokenResponse} */
