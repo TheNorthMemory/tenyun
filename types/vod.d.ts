@@ -9209,6 +9209,16 @@ declare namespace V20180717 {
     Scenes?: string[];
   }
 
+  /** 音色配额 */
+  interface VoiceSlotInfo {
+    /** 音色限制数量 */
+    Limit?: number;
+    /** 音色限制剩余数 */
+    Remaining?: number;
+    /** 音色限制已用数 */
+    Used?: number;
+  }
+
   /** 音色更新字段 */
   interface VoiceUpdateFields {
     /** 音色名 */
@@ -9452,6 +9462,8 @@ declare namespace V20180717 {
   interface CloneVoiceAsyncRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
+    /** 模型名，不填默认为MiniMax模型。 枚举值： MiniMaxElevenLabs */
+    ModelName?: string;
     /** 克隆音频base64编码。 */
     AudioData?: string;
     /** 克隆音频Url，AudioData为空时有效 */
@@ -9460,7 +9472,7 @@ declare namespace V20180717 {
     AudioFileId?: string;
     /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
     LanguageBoost?: string;
-    /** 音色克隆拓展参数。ExtParam 支持的字段： text (string)：试听合成文本，最大 1000 字符；非空时必须同时传 tts_model，克隆成功后返回试听音频 DemoAudio。 model (string)：克隆模型，缺省 minimax-voice-clone。 tts_model (string)：合成试听音频用的模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；text 非空时必填。 text_lang (string)：试听文本语言。 voice_profile (object)：音色画像，可选字段： name (string)：音色名称。 description (string)：音色描述。 gender (string)：性别，可选 male / female / unknown。 age (string)：年龄段，可选 child / teenager / youth / middle_aged / senior / unknown。 languages (string[])：支持语言，如 ["zh", "en"]。 labels (string[])：音色标签，如 ["磁性"]。 scenes (string[])：适用场景，如 ["解说"]。 */
+    /** ExtParam JSON 字符串字段，用于指定各模型的高级音色参数。通用参数text（string）：试听文本，最大 1000 字符；传入后返回试听音频 DemoAudiotts_model（string）：试听文本合成模型，text 非空时必填；按 ModelName 模型系列白名单校验text_lang（string）：试听文本语言，如 zhvoice_profile.name（string）：音色名称voice_profile.description（string）：音色描述voice_profile.gender（string）：性别，可选 male、female、unknownvoice_profile.age（string）：年龄段，可选 child、teenager、youth、middle_aged、senior、unknownvoice_profile.languages（array of string）：语言，如 ["zh"]voice_profile.labels（array of string）：标签，如 ["磁性"]voice_profile.scenes（array of string）：场景，如 ["解说"]ElevenLabsvoice_name（string）：音色名称；未传时回退取 voice_profile.name，两者都缺时使用默认名称description（string）：音色描述；未传时回退取 voice_profile.descriptionlabels（map<string,string>）：音色标签，官方推荐键 language、accent、gender、age；最多 16 项，键值各不超过 256 字节remove_background_noise（boolean）：是否用音频隔离模型去除背景噪声，默认 false；样本本身无噪声时开启可能降低质量 */
     ExtParam?: string;
     /** 标识来源上下文，用于透传用户请求信息，在回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
@@ -9478,6 +9490,8 @@ declare namespace V20180717 {
   interface CloneVoiceSyncRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
+    /** 模型名，不填默认为MiniMax模型。 枚举值： MiniMaxElevenLabs */
+    ModelName?: string;
     /** 克隆音频base64编码。 */
     AudioData?: string;
     /** 克隆音频Url，AudioData为空时有效 */
@@ -9486,7 +9500,7 @@ declare namespace V20180717 {
     AudioFileId?: string;
     /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
     LanguageBoost?: string;
-    /** 同步音色克隆拓展参数。ExtParam 支持的字段： text (string)：试听合成文本，最大 1000 字符；非空时必须同时传 tts_model，克隆成功后返回试听音频 DemoAudio。 model (string)：克隆模型，缺省 minimax-voice-clone。 tts_model (string)：合成试听音频用的模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；text 非空时必填。 text_lang (string)：试听文本语言。 voice_profile (object)：音色画像，可选字段： name (string)：音色名称。 description (string)：音色描述。 gender (string)：性别，可选 male / female / unknown。 age (string)：年龄段，可选 child / teenager / youth / middle_aged / senior / unknown。 languages (string[])：支持语言，如 ["zh", "en"]。 labels (string[])：音色标签，如 ["磁性"]。 scenes (string[])：适用场景，如 ["解说"]。 */
+    /** ExtParam JSON 字符串字段，用于指定各模型的高级音色参数。通用参数text（string）：试听文本，最大 1000 字符；传入后返回试听音频 DemoAudiotts_model（string）：试听文本合成模型，text 非空时必填；按 ModelName 模型系列白名单校验text_lang（string）：试听文本语言，如 zhvoice_profile.name（string）：音色名称voice_profile.description（string）：音色描述voice_profile.gender（string）：性别，可选 male、female、unknownvoice_profile.age（string）：年龄段，可选 child、teenager、youth、middle_aged、senior、unknownvoice_profile.languages（array of string）：语言，如 ["zh"]voice_profile.labels（array of string）：标签，如 ["磁性"]voice_profile.scenes（array of string）：场景，如 ["解说"]ElevenLabsvoice_name（string）：音色名称；未传时回退取 voice_profile.name，两者都缺时使用默认名称description（string）：音色描述；未传时回退取 voice_profile.descriptionlabels（map<string,string>）：音色标签，官方推荐键 language、accent、gender、age；最多 16 项，键值各不超过 256 字节remove_background_noise（boolean）：是否用音频隔离模型去除背景噪声，默认 false；样本本身无噪声时开启可能降低质量 */
     ExtParam?: string;
   }
 
@@ -11212,6 +11226,8 @@ declare namespace V20180717 {
   interface DeleteVoiceRequest {
     /** 音色Id */
     VoiceId: string;
+    /** 模型名，不填默认为MiniMax模型。 枚举值：MiniMax ElevenLabs */
+    ModelName?: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
   }
@@ -12608,6 +12624,8 @@ declare namespace V20180717 {
   interface DescribeVoicesRequest {
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
+    /** 模型名，不填默认为MiniMax模型。枚举值：MiniMaxElevenLabs */
+    ModelName?: string;
     /** 音色ID */
     VoiceId?: string;
     /** 音色类别枚举值：system： 系统音色clone： 克隆音色design： 设计音色all： 所有音色（默认） */
@@ -12635,6 +12653,8 @@ declare namespace V20180717 {
     Voices?: VoiceInfo[];
     /** 可用音色总数 */
     TotalCount?: number;
+    /** 可用音色槽位信息 */
+    VoiceSlot?: VoiceSlotInfo;
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -12690,11 +12710,13 @@ declare namespace V20180717 {
     Prompt: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
+    /** 模型名，不填默认为MiniMax模型。 枚举值： MiniMaxElevenLabs */
+    ModelName?: string;
     /** 音色设置 */
     VoiceSettings?: VoiceSettings;
     /** 试听合成文本，最大 500 字符 */
     PreviewText?: string;
-    /** 扩展参数，json字符串 */
+    /** ExtParam JSON 字符串字段，用于指定各模型的高级设计参数。ElevenLabsmodel_id（string）：TTV 模型，可选 eleven_multilingual_ttv_v2（默认）、eleven_ttv_v3voice_name（string）：音色名称，用于设计完成后正式创建音色labels（map<string,string>）：音色标签，最多 16 项，键值各不超过 256 字节auto_generate_text（boolean）：是否自动生成与描述匹配的试听文本，默认 falseloudness（float）：音量，取值范围 [-1, 1]，默认 0.5seed（integer）：采样种子，取值范围 [0, 2147483647]guidance_scale（float）：提示词遵循程度，取值范围 [0, 100]，默认 5quality（float）：输出质量，取值范围 [-1, 1]，越高质量越好但多样性越低should_enhance（boolean）：是否用 AI 扩写音色描述，默认 falsereference_audio_base64（string）：参考音频 base64，仅 eleven_ttv_v3 支持prompt_strength（float）：提示词与参考音频权重，取值范围 [0, 1]，仅 eleven_ttv_v3 支持audio_setting.format（string）：音频格式，可选 mp3、opus、alaw、pcmaudio_setting.sample_rate（integer）：采样率，与 format 组合受限audio_setting.bitrate（integer）：比特率，需与 format、sample_rate 匹配 */
     ExtParam?: string;
     /** 标识来源上下文，用于透传用户请求信息，在回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。 */
     SessionContext?: string;
@@ -14634,11 +14656,15 @@ declare namespace V20180717 {
     Text: string;
     /** 音色ID */
     VoiceId: string;
+    /** 模型系列，区分大小写，默认 MiniMax。枚举值：MiniMaxElevenLabs */
+    ModelName?: string;
+    /** 模型版本，不填时使用该模型系列的默认版本。各模型支持版本：MiniMax：minimax-speech-2.8-hd（默认）、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turboElevenLabs：custom-model-ll-v3（默认）、custom-model-ll-mlv2、custom-model-ll-fv2.5、custom-model-ll-fv2、custom-model-ll-v4、custom-model-ll-v4tb */
+    ModelVersion?: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
     /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
     LanguageBoost?: string;
-    /** 文本合成语音（异步）拓展参数。ExtParam 支持的字段：model (string)：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；默认 minimax-speech-2.8-hd。text_lang (string)：文本语言，如 zh / en；与入参 LanguageBoost 同义，同时传入时以 ExtParam 为准。audio_setting (object)：音频输出与音色微调参数（注意：异步接口的语速、音量、音调、情绪均在 audio_setting 下，与同步接口的 voice_setting 不同），可选字段：speed (float)：语速，[0.5, 2.0]，默认 1.0。vol (float)：音量，(0, 10]，默认 1.0。pitch (int)：音调，[-12, 12]，默认 0。emotion (string)：情绪，可选 happy / sad / angry / fearful / disgusted / surprised / calm / fluent / whisper。sample_rate (int)：采样率，可选 8000 / 16000 / 22050 / 24000 / 32000 / 44100，默认 16000。format (string)：音频格式，可选 mp3 / wav，默认 wav。duration (float)：目标时长（秒）。cut_silence (bool)：是否裁剪静音段。 */
+    /** ExtParam 是 JSON 字符串字段，用于指定各模型的高级合成参数。字段名中的 . 表示嵌套对象，如 req_params.audio_params.speech_rate，需按层级组成本地 JSON 对象后整体转义传入。未列出的字段不生效。MiniMaxmodel（string）：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo，默认 minimax-speech-2.8-hdvoice_setting.speed（float）：语速，取值范围 [0.5, 2.0]，默认 1.0voice_setting.vol（float）：音量，取值范围 (0, 10]，默认 1.0voice_setting.pitch（integer）：音调，取值范围 [-12, 12]，默认 0voice_setting.emotion（string）：情绪，可选 happy、sad、angry、fearful、disgusted、surprised、calm、fluent、whisperaudio_setting.format（string）：音频格式，可选 mp3、wav，默认 wavaudio_setting.sample_rate（integer）：采样率，可选 8000、16000、22050、24000、32000、44100，默认 16000audio_setting.duration（float）：目标时长，单位秒audio_setting.cut_silence（boolean）：是否裁剪静音段ElevenLabslanguage_code（string）：语言代码（ISO 639-1），用于强制语种与文本归一化previous_text（string）：上一段文本（衔接上下文）next_text（string）：下一段文本seed（integer）：确定性采样种子，范围 [0, 4294967295]apply_text_normalization（string）：文本规范化，可选 auto、on、offapply_language_text_normalization（boolean）：是否启用语种相关的文本规范化voice_settings.stability（float）：稳定性，默认 0.5voice_settings.similarity_boost（float）：音色相似度，默认 0.75voice_settings.style（float）：风格夸张度，默认 0voice_settings.use_speaker_boost（boolean）：是否增强音色相似度，默认 truevoice_settings.speed（float）：语速，取值范围 [0.5, 2.0]，默认 1.0audio_setting.format（string）：音频格式，可选 mp3、opus、alaw、pcmaudio_setting.sample_rate（integer）：采样率，需与 format 匹配audio_setting.bitrate（integer）：比特率，需与 format、sample_rate 匹配 */
     ExtParam?: string;
     /** 输出相关参数可以指定输出形式等。默认输出音频url。 */
     Output?: TextToSpeechAsyncOutputOption;
@@ -14660,13 +14686,17 @@ declare namespace V20180717 {
     Text: string;
     /** 音色Id，指定音色合成时填写，支持系统音色和设计、克隆音色。 */
     VoiceId: string;
+    /** 模型系列，区分大小写，默认 MiniMax。枚举值：MiniMaxElevenLabs */
+    ModelName?: string;
+    /** 模型版本，不填时使用该模型系列的默认版本。各模型支持版本：MiniMax：minimax-speech-2.8-hd（默认）、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turboElevenLabs：custom-model-ll-v3（默认）、custom-model-ll-mlv2、custom-model-ll-fv2.5、custom-model-ll-fv2、custom-model-ll-v4、custom-model-ll-v4tb */
+    ModelVersion?: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
     /** 语言增强，如 "zh" "en" "auto"，默认 "auto" */
     LanguageBoost?: string;
     /** 输出相关参数可以指定输出形式等。默认输出音频URL。 */
     Output?: TextToSpeechSyncOutputOption;
-    /** 同步语音合成拓展参数。ExtParam 支持的字段： model (string)：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo；默认 minimax-speech-2.8-hd。 voice_setting (object)：音色微调，可选字段： speed (float)：语速，[0.5, 2.0]，默认 1.0。 vol (float)：音量，(0, 10]，默认 1.0。 pitch (int)：音调，[-12, 12]，默认 0。 emotion (string)：情绪，可选 happy / sad / angry / fearful / disgusted / surprised / calm / fluent / whisper。 audio_setting (object)：音频输出参数，可选字段： sample_rate (int)：采样率，可选 8000 / 16000 / 22050 / 24000 / 32000 / 44100，默认 16000。 format (string)：音频格式，可选 mp3 / wav，默认 wav。 duration (float)：目标时长（秒）。 cut_silence (bool)：是否裁剪静音段。 */
+    /** ExtParam 是 JSON 字符串字段，用于指定各模型的高级合成参数。字段名中的 . 表示嵌套对象，如 req_params.audio_params.speech_rate，需按层级组成本地 JSON 对象后整体转义传入。未列出的字段不生效。MiniMaxmodel（string）：合成模型，可选 minimax-speech-2.8-hd、minimax-speech-2.8-turbo、minimax-speech-2.6-hd、minimax-speech-2.6-turbo、minimax-speech-02-hd、minimax-speech-02-turbo，默认 minimax-speech-2.8-hdvoice_setting.speed（float）：语速，取值范围 [0.5, 2.0]，默认 1.0voice_setting.vol（float）：音量，取值范围 (0, 10]，默认 1.0voice_setting.pitch（integer）：音调，取值范围 [-12, 12]，默认 0voice_setting.emotion（string）：情绪，可选 happy、sad、angry、fearful、disgusted、surprised、calm、fluent、whisperaudio_setting.format（string）：音频格式，可选 mp3、wav，默认 wavaudio_setting.sample_rate（integer）：采样率，可选 8000、16000、22050、24000、32000、44100，默认 16000audio_setting.duration（float）：目标时长，单位秒audio_setting.cut_silence（boolean）：是否裁剪静音段ElevenLabslanguage_code（string）：语言代码（ISO 639-1），用于强制语种与文本归一化previous_text（string）：上一段文本（衔接上下文）next_text（string）：下一段文本seed（integer）：确定性采样种子，范围 [0, 4294967295]apply_text_normalization（string）：文本规范化，可选 auto、on、offapply_language_text_normalization（boolean）：是否启用语种相关的文本规范化voice_settings.stability（float）：稳定性，默认 0.5voice_settings.similarity_boost（float）：音色相似度，默认 0.75voice_settings.style（float）：风格夸张度，默认 0voice_settings.use_speaker_boost（boolean）：是否增强音色相似度，默认 truevoice_settings.speed（float）：语速，取值范围 [0.5, 2.0]，默认 1.0audio_setting.format（string）：音频格式，可选 mp3、opus、alaw、pcmaudio_setting.sample_rate（integer）：采样率，需与 format 匹配audio_setting.bitrate（integer）：比特率，需与 format、sample_rate 匹配 */
     ExtParam?: string;
   }
 
@@ -14702,6 +14732,8 @@ declare namespace V20180717 {
     VoiceId: string;
     /** 更新音色字段 */
     VoiceFields: VoiceUpdateFields;
+    /** 模型名，不填默认为MiniMax模型。 枚举值： MiniMax ElevenLabs */
+    ModelName?: string;
     /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: string;
     /** 扩展参数，json字符串 */

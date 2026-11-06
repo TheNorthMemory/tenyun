@@ -3749,7 +3749,7 @@ declare interface CreateConfigExtraResponse {
 }
 
 declare interface CreateConfigRequest {
-  /** 采集配置名称名称种不得包含特殊字符｜名称最长255字符，超过截断 */
+  /** 采集配置名称- 名称中不得包含特殊字符"|"名称最长255字符，超过截断 */
   Name: string;
   /** 采集配置所属日志主题ID即TopicId通过获取日志主题列表获取日志主题Id。 */
   Output: string;
@@ -7325,9 +7325,9 @@ declare interface ModifyLogResponse {
 }
 
 declare interface ModifyLogsetRequest {
-  /** 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。 */
+  /** 日志集Id。通过 获取日志集列表获取日志集Id。 */
   LogsetId: string;
-  /** 日志集名字。- 最大支持255个字符。不支持`|`字符。 */
+  /** 日志集名字。- 最大支持255个字符。不支持"|"字符。 */
   LogsetName?: string;
   /** 日志集的绑定的标签键值对。最大支持10个标签键值对，同一个资源只能同时绑定一个标签键。 */
   Tags?: Tag[];

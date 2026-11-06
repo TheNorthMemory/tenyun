@@ -526,6 +526,8 @@ declare interface Instance {
   CpuTopology?: CpuTopology;
   /** 分区置放群组的分区号，具体取决于所选置放群组的分区数量(功能灰度中) */
   PartitionNumber?: number;
+  /** 逻辑超节点标识 */
+  SuperNodeId?: string;
 }
 
 /** 实例属性 */

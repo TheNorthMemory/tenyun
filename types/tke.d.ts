@@ -4328,9 +4328,9 @@ declare namespace V20180525 {
   }
 
   interface AddExistedInstancesRequest {
-    /** 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ） */
+    /** 集群ID（请登录 TKE 控制台 获取集群 ID ） */
     ClusterId: string;
-    /** 实例列表，不支持竞价实例（请登录 [CVM控制台](https://console.cloud.tencent.com/cvm) 获取待添加节点ID ） */
+    /** 实例列表，不支持竞价实例（请登录 CVM控制台 获取待添加节点ID ） */
     InstanceIds: string[];
     /** 实例额外需要设置参数信息(默认值) */
     InstanceAdvancedSettings?: InstanceAdvancedSettings;
@@ -4338,7 +4338,7 @@ declare namespace V20180525 {
     EnhancedService?: EnhancedService;
     /** 节点登录信息（目前仅支持使用Password或者单个KeyIds） */
     LoginSettings?: LoginSettings;
-    /** 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与[CVM创建实例](https://cloud.tencent.com/document/product/213/15730)接口HostName一致) */
+    /** 重装系统时，可以指定修改实例的HostName(集群为HostName模式时，此参数必传，规则名称除不支持大写字符外与CVM创建实例接口HostName一致) */
     HostName?: string;
     /** 实例所属安全组。该参数可以通过调用 DescribeSecurityGroups 的返回值中的sgId字段来获取。若不指定该参数，则绑定默认安全组。（目前仅支持设置单个sgId） */
     SecurityGroupIds?: string[];
@@ -4348,6 +4348,8 @@ declare namespace V20180525 {
     SkipValidateOptions?: string[];
     /** 参数InstanceAdvancedSettingsOverride数组用于定制化地配置各台instance，与InstanceIds顺序对应。当传入InstanceAdvancedSettingsOverrides数组时，将覆盖默认参数InstanceAdvancedSettings；当没有传入参数InstanceAdvancedSettingsOverrides时，InstanceAdvancedSettings参数对每台instance生效。参数InstanceAdvancedSettingsOverride数组的长度应与InstanceIds数组一致；当长度大于InstanceIds数组长度时将报错；当长度小于InstanceIds数组时，没有对应配置的instance将使用默认配置。 */
     InstanceAdvancedSettingsOverrides?: InstanceAdvancedSettings[];
+    /** 添加已有节点时需要跳过的步骤，默认为空，当前支持 :ResetCVM——跳过 CVM 重装（请确保 TKE 的 UserData 已经写入 CVM）InstallRuntime——跳过运行时安装ConfigRuntime——跳过运行时配置文件下发InstallKubelet——跳过 kubelet 配置文件下发ConfigKubelet——跳过 kubelet安装 */
+    SkipOptions?: string[];
     /** 节点镜像 */
     ImageId?: string;
     /** 直接添加为原生节点 */

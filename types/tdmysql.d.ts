@@ -236,6 +236,16 @@ declare interface BinlogInfo {
   InstanceId?: string;
 }
 
+/** 字符集与排序规则联动清单 */
+declare interface CharsetCollationItem {
+  /** 字符集 */
+  CharsetName?: string;
+  /** 排序规则 */
+  Collations?: string[];
+  /** 默认的排序规则 */
+  DefaultCollation?: string;
+}
+
 /** 克隆实例对象 */
 declare interface CloneInstanceModel {
   /** 克隆任务结束时间 */
@@ -746,6 +756,20 @@ declare interface ParamDesc {
   Description: string | null;
 }
 
+/** 密码复杂度 */
+declare interface PasswordComplexity {
+  /** 是否开启密码复杂度 */
+  Enable: boolean | null;
+  /** 大写和小写字符的最小长度取值范围：[1, 16] */
+  MixedCaseCount?: number | null;
+  /** 数字字符的最小长度取值范围：[1, 16] */
+  NumberCount?: number | null;
+  /** 特殊字符的最小长度取值范围：[1, 16] */
+  SpecialCharCount?: number | null;
+  /** 密码的最小长度取值范围：[8, 64] */
+  Length?: number | null;
+}
+
 /** 重置密码的用户类型 */
 declare interface ResetUserPasswordInfo {
   /** 用户名 */
@@ -1045,8 +1069,6 @@ declare interface CreateCloneInstanceResponse {
 }
 
 declare interface CreateDBInstancesRequest {
-  /** 创建实例区域 */
-  Zone: string;
   /** 字符型vpcid */
   VpcId: string;
   /** 字符型subnetid */
@@ -1061,6 +1083,8 @@ declare interface CreateDBInstancesRequest {
   Replications: number;
   /** 创建实例个数，上限为10 */
   InstanceCount: number;
+  /** 创建实例区域 */
+  Zone: string;
   /** 全能型副本数量 */
   FullReplications?: number;
   /** 创建实例版本，默认使用当前最新版本 */
@@ -1115,6 +1139,8 @@ declare interface CreateDBInstancesRequest {
   EncryptionEnable?: number;
   /** SVLS 实例的自动变配相关限制入参限制：传入时 AutoScaleConfig 参数不再生效 */
   AutoScaleConfigs?: AutoScalingConfig[];
+  /** 密码复杂度 */
+  PasswordComplexity?: PasswordComplexity;
 }
 
 declare interface CreateDBInstancesResponse {
@@ -1266,6 +1292,8 @@ declare interface DescribeDBCharsetsRequest {
 }
 
 declare interface DescribeDBCharsetsResponse {
+  /** 字符集与排序规则对应列表 */
+  CharsetCollations?: CharsetCollationItem[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1412,6 +1440,10 @@ declare interface DescribeDBInstanceDetailResponse {
   EncryptionKmsRegion?: string;
   /** serverless自动变配配置 */
   AutoScaleConfigs?: AutoScalingConfig[];
+  /** SSL开启状态 */
+  SSLStatus?: string;
+  /** 字符集的排序规则 */
+  Collation?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1805,6 +1837,8 @@ declare interface DescribeSpecsRequest {
   IsExclusiveInstance?: number;
   /** 可用区组合列表 */
   Zones?: string[];
+  /** 实例ID */
+  InstanceId?: string;
 }
 
 declare interface DescribeSpecsResponse {
@@ -2101,6 +2135,8 @@ declare interface ModifyUserPrivilegesResponse {
 declare interface ResetDbaAdminPrivilegesRequest {
   /** 实例id */
   InstanceId: string;
+  /** DbaAdmin的host */
+  Host?: string;
 }
 
 declare interface ResetDbaAdminPrivilegesResponse {

@@ -582,6 +582,8 @@ declare interface PreCacheImage {
   SourceType?: string;
   /** 镜像预热存储大小单位：Byte */
   CachedImageSizeBytes?: number;
+  /** 镜像预热完成时间 */
+  ReadyTime?: string;
   /** 该预热镜像最近一次被沙箱实例使用时间 */
   LastUsedTime?: string;
 }
@@ -1398,6 +1400,8 @@ declare interface DescribePreCacheImageTaskResponse {
   SourceType?: string;
   /** 镜像预热存储大小单位：Byte */
   CachedImageSizeBytes?: number;
+  /** 镜像预热完成时间 */
+  ReadyTime?: string;
   /** 该预热镜像最近一次被沙箱实例使用时间 */
   LastUsedTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */

@@ -1721,11 +1721,17 @@ declare interface CreateResourceRequest {
   PayMode: number;
   /** 自动续费 */
   AutoRenewFlag: number;
+  /** 零信任堡垒机功能包枚举值：0： 不开通1： 付费版（含 20 用户 / 10Mbps 带宽） */
+  IOAResource?: number;
+  /** 零信任用户扩展包，1 个 = 20 用户取值范围：[0, 999] */
+  PackageIOAUserCount?: number;
+  /** 零信任带宽扩展包，1 个 = 4Mbps取值范围：[0, 509] */
+  PackageIOABandwidth?: number;
   /** 部署zone */
   DeployZone?: string;
   /** 0非试用版，1试用版 */
   Trial?: number;
-  /** 是否共享clb，0：不共享，1：共享 */
+  /** 是否共享clb枚举值：0： 不共享1： 共享默认值：0公有云传0 */
   ShareClb?: number;
 }
 
@@ -3107,6 +3113,12 @@ declare interface ModifyResourceRequest {
   PackageNode?: number;
   /** 日志投递 */
   LogDelivery?: number;
+  /** 零信任堡垒机功能包枚举值：0： 不开通1： 付费版（含 20 用户 / 10Mbps 带宽）默认值：0 */
+  IOAResource?: number;
+  /** 零信任用户扩展包，1 个 = 20 用户取值范围：[0, 999] */
+  PackageIOAUserCount?: number;
+  /** 零信任带宽扩展包，1 个 = 4Mbps取值范围：[0, 509] */
+  PackageIOABandwidth?: number;
 }
 
 declare interface ModifyResourceResponse {

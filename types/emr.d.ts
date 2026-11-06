@@ -5207,7 +5207,7 @@ declare interface DescribeNodeResourceConfigFastResponse {
 }
 
 declare interface DescribeNodeSpecRequest {
-  /** 可用区Id，可以通过https://document.capi.woa.com/document/api/1605/76892查询相关信息 */
+  /** 可用区Id，可以通过可用区列表查询相关信息 */
   ZoneId: number;
   /** 0,按量，1包年包月，99按量+包年包月，错填将不会展示费用信息 */
   CvmPayMode: number;

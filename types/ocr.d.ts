@@ -4604,6 +4604,78 @@ declare interface QrcodeOCRResponse {
   RequestId?: string;
 }
 
+declare interface QueryEnterpriseBasicInfoRequest {
+  /** 统一社会信用代码。CreditCode、EntName 必须提供一个，如果都提供，只使用 CreditCode。 */
+  CreditCode?: string;
+  /** 企业名称。CreditCode、EntName 必须提供一个，如果都提供，只使用 CreditCode。 */
+  EntName?: string;
+}
+
+declare interface QueryEnterpriseBasicInfoResponse {
+  /** 请求状态。枚举值：0：成功，计费；1：系统异常，不计费；2：查询无结果，不计费。 */
+  StatusCode?: number;
+  /** 统一社会信用代码。 */
+  CreditCode?: string;
+  /** 企业名称。 */
+  EntName?: string;
+  /** 主体类型。 */
+  Type?: string;
+  /** 法人代表。 */
+  LrName?: string;
+  /** 注册资本。 */
+  Capital?: string;
+  /** 企业登记住所或注册地址。 */
+  Address?: string;
+  /** 经营范围。 */
+  Business?: string;
+  /** 登记机关。 */
+  RegistrationAuthority?: string;
+  /** 经营状态（标准化），枚举值：1：开业（在营）；2：迁出；3：注销；4：吊销；5：撤销；6：停业；7：撤销登记；0：其他；/：无法查询。 */
+  OperatingStatus?: string;
+  /** 经营状态（原始值）。 */
+  RawOperatingStatus?: string;
+  /** 成立日期。 */
+  SetDate?: string;
+  /** 营业期限：一般包括营业开始时间和结束时间参数格式：yyyy-MM-dd/yyyy-MM-dd无固定期限的格式为：yyyy-MM-dd/部分企业历史数据可能为空，将返回：/无法查询，将返回：/ */
+  OperatingPeriod?: string;
+  /** 核准日期。 */
+  ApprovalDate?: string;
+  /** 所在省份。 */
+  Province?: string;
+  /** 所在省份的行政区划代码。 */
+  ProvinceCode?: string;
+  /** 所在城市。 */
+  City?: string;
+  /** 所在城市的行政区划代码。 */
+  CityCode?: string;
+  /** 所在区县。 */
+  District?: string;
+  /** 所在区县的行政区划代码。 */
+  DistrictCode?: string;
+  /** 注册资本币种。 */
+  CapitalCurrency?: string;
+  /** 组织机构代码。 */
+  OrganizationCode?: string;
+  /** 企业英文名称。 */
+  EnglishName?: string;
+  /** 企业曾用名列表。 */
+  FormerNames?: string[];
+  /** 原注册号。 */
+  OriginalRegNum?: string;
+  /** 实收资本。 */
+  PaidInCapital?: string;
+  /** 吊销日期。 */
+  RevokeDate?: string;
+  /** 吊销原因。 */
+  RevokeReason?: string;
+  /** 注销日期。 */
+  CancellationDate?: string;
+  /** 注销原因。 */
+  CancellationReason?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface QuestionOCRRequest {
   /** 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：需介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。 */
   ImageUrl?: string;
@@ -5873,6 +5945,8 @@ declare interface Ocr {
   PermitOCR(data?: PermitOCRRequest, config?: AxiosRequestConfig): AxiosPromise<PermitOCRResponse>;
   /** 二维码和条形码识别 {@link QrcodeOCRRequest} {@link QrcodeOCRResponse} */
   QrcodeOCR(data?: QrcodeOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QrcodeOCRResponse>;
+  /** 营业执照核验（企业基本信息） {@link QueryEnterpriseBasicInfoRequest} {@link QueryEnterpriseBasicInfoResponse} */
+  QueryEnterpriseBasicInfo(data?: QueryEnterpriseBasicInfoRequest, config?: AxiosRequestConfig): AxiosPromise<QueryEnterpriseBasicInfoResponse>;
   /** 试题识别 {@link QuestionOCRRequest} {@link QuestionOCRResponse} */
   QuestionOCR(data?: QuestionOCRRequest, config?: AxiosRequestConfig): AxiosPromise<QuestionOCRResponse>;
   /** 试卷切题（仅检测） {@link QuestionSplitLayoutOCRRequest} {@link QuestionSplitLayoutOCRResponse} */

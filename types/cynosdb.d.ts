@@ -648,6 +648,8 @@ declare interface ClusterInstanceDetail {
   NodeList?: string[];
   /** serverless实例子状态 */
   ServerlessStatus?: string;
+  /** 实例Serverless弹性配置信息 */
+  ServerlessQuotaInfo?: InstanceServerlessQuotaInfo;
   /** AI优化器状态 */
   AIOptimizerStatus?: AIOptimizerStatus;
   /** 项目ID */
@@ -774,6 +776,16 @@ declare interface ClusterReadOnlyValue {
   ClusterId?: string;
   /** 只读开关值 */
   ReadOnlyValue?: string;
+}
+
+/** 集群serverless弹性配置 */
+declare interface ClusterServerlessQuotaConfig {
+  /** 实例类型枚举值：rw： 读写ro： 只读 */
+  InstanceType?: string;
+  /** 实例Serverless弹性CCU上限 */
+  MaxCcu?: number;
+  /** 实例Serverless弹性状态枚举值：opening： 开启中opened： 已开启closing： 关闭中closed： 已关闭 */
+  Status?: string;
 }
 
 /** 集群Serveless弹性计划 */
@@ -1220,6 +1232,8 @@ declare interface CynosdbInstance {
   GdnId?: string;
   /** 实例当前所在可用区 */
   RealZone?: string;
+  /** 实例Serverless弹性信息 */
+  ServerlessQuotaInfo?: InstanceServerlessQuotaInfo;
 }
 
 /** 实例详情 */
@@ -1302,6 +1316,8 @@ declare interface CynosdbInstanceDetail {
   SlaveZones?: string[];
   /** 存储版本枚举值：1.0： 1.0版本存储2.0： 2.0版本存储 */
   StorageVersion?: string;
+  /** 实例Serverless弹性信息 */
+  ServerlessQuotaInfo?: InstanceServerlessQuotaInfo;
 }
 
 /** 实例组信息 */
@@ -1882,6 +1898,20 @@ declare interface InstanceParamItem {
   InstanceId?: string;
   /** 实例参数列表 */
   ParamsItems?: ParamItemDetail[];
+}
+
+/** 实例serverless弹性配置详情 */
+declare interface InstanceServerlessQuotaInfo {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 实例类型枚举值：rw： 读写ro： 只读 */
+  InstanceType?: string;
+  /** 最大CCU规格 */
+  MaxCcu?: number;
+  /** 实例Serverless弹性开启状态枚举值：opening： 开启中opened： 已开启closing： 关闭中closed： 已关闭 */
+  Status?: string;
+  /** 开启Serverless弹性的时间 */
+  EnableTime?: string;
 }
 
 /** 实例信息 */
@@ -3310,6 +3340,16 @@ declare interface SecurityGroup {
   SecurityGroupRemark?: string;
 }
 
+/** serverless弹性配额 */
+declare interface ServerlessQuotaConfig {
+  /** 实例类型枚举值：rw： 读写ro： 只读 */
+  InstanceType: string;
+  /** 最大CCU */
+  MaxCcu?: number;
+  /** 开关 */
+  Enabled?: boolean;
+}
+
 /** serverless规格 */
 declare interface ServerlessSpec {
   /** cpu最小值 */
@@ -4351,6 +4391,8 @@ declare interface CreateClustersRequest {
   SyncWay?: string;
   /** 半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。取值范围：[1000, 4294967295]单位：毫秒默认值：10000 */
   SemiSyncTimeout?: number;
+  /** 集群实例Serverless弹性配置 */
+  ServerlessQuotaConfigs?: ServerlessQuotaConfig[];
 }
 
 declare interface CreateClustersResponse {
@@ -5728,6 +5770,22 @@ declare interface DescribeInstanceParamsRequest {
 declare interface DescribeInstanceParamsResponse {
   /** 实例参数列表 */
   Items?: InstanceParamItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceServerlessQuotaRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例类型枚举值：rw： 读写ro： 只读 */
+  InstanceType?: string;
+}
+
+declare interface DescribeInstanceServerlessQuotaResponse {
+  /** 集群实例Serveless弹性配置 */
+  QuotaConfigs?: ClusterServerlessQuotaConfig[];
+  /** 集群实例Serverless弹性状态 */
+  InstanceQuotas?: InstanceServerlessQuotaInfo[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8484,6 +8542,20 @@ declare interface SearchClusterTablesResponse {
   RequestId?: string;
 }
 
+declare interface SetInstanceServerlessQuotaRequest {
+  /** 集群ID */
+  ClusterId: string;
+  /** 实例SLS规格配置 */
+  ServerlessQuotaConfigs?: ServerlessQuotaConfig[];
+}
+
+declare interface SetInstanceServerlessQuotaResponse {
+  /** 任务id */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface SetLibraDBClusterRenewFlagRequest {
   /** 分析集群 ID 列表 */
   ResourceIds?: string[];
@@ -8977,6 +9049,8 @@ declare interface Cynosdb {
   DescribeInstanceErrorLogs(data: DescribeInstanceErrorLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceErrorLogsResponse>;
   /** 查询实例参数列表 {@link DescribeInstanceParamsRequest} {@link DescribeInstanceParamsResponse} */
   DescribeInstanceParams(data: DescribeInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceParamsResponse>;
+  /** 查询集群实例serverless弹性配置 {@link DescribeInstanceServerlessQuotaRequest} {@link DescribeInstanceServerlessQuotaResponse} */
+  DescribeInstanceServerlessQuota(data: DescribeInstanceServerlessQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceServerlessQuotaResponse>;
   /** 查询实例慢日志详情 {@link DescribeInstanceSlowQueriesRequest} {@link DescribeInstanceSlowQueriesResponse} */
   DescribeInstanceSlowQueries(data: DescribeInstanceSlowQueriesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceSlowQueriesResponse>;
   /** 查询购买页可购买的实例规格 {@link DescribeInstanceSpecsRequest} {@link DescribeInstanceSpecsResponse} */
@@ -9247,6 +9321,8 @@ declare interface Cynosdb {
   SearchClusterDatabases(data: SearchClusterDatabasesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterDatabasesResponse>;
   /** 搜索集群数据表列表 {@link SearchClusterTablesRequest} {@link SearchClusterTablesResponse} */
   SearchClusterTables(data: SearchClusterTablesRequest, config?: AxiosRequestConfig): AxiosPromise<SearchClusterTablesResponse>;
+  /** 设置集群实例Serverless弹性配置 {@link SetInstanceServerlessQuotaRequest} {@link SetInstanceServerlessQuotaResponse} */
+  SetInstanceServerlessQuota(data: SetInstanceServerlessQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<SetInstanceServerlessQuotaResponse>;
   /** 设置分析集群续费模式 {@link SetLibraDBClusterRenewFlagRequest} {@link SetLibraDBClusterRenewFlagResponse} */
   SetLibraDBClusterRenewFlag(data?: SetLibraDBClusterRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<SetLibraDBClusterRenewFlagResponse>;
   /** 设置自动续费 {@link SetRenewFlagRequest} {@link SetRenewFlagResponse} */

@@ -3262,6 +3262,14 @@ declare interface DescribeEnvAccountCircleResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEnvInfoRequest {
+}
+
+declare interface DescribeEnvInfoResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnvLimitRequest {
 }
 
@@ -4897,6 +4905,8 @@ declare interface Tcb {
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
   /** 查询环境当前计费周期 {@link DescribeEnvAccountCircleRequest} {@link DescribeEnvAccountCircleResponse} */
   DescribeEnvAccountCircle(data: DescribeEnvAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccountCircleResponse>;
+  /** 根据环境ID查询环境详情 {@link DescribeEnvInfoRequest} {@link DescribeEnvInfoResponse} */
+  DescribeEnvInfo(data?: DescribeEnvInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvInfoResponse>;
   /** 查询环境个数上限接口 {@link DescribeEnvLimitRequest} {@link DescribeEnvLimitResponse} */
   DescribeEnvLimit(data?: DescribeEnvLimitRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvLimitResponse>;
   /** 查询环境套餐信息 {@link DescribeEnvPlansRequest} {@link DescribeEnvPlansResponse} */

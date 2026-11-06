@@ -2,6 +2,12 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** A2AConfig */
+declare interface A2AConfig {
+  /** 企业共享开关 */
+  Enabled?: boolean;
+}
+
 /** 智能通话配置 */
 declare interface AICallConfig {
   /** 数智人配置 */
@@ -134,7 +140,7 @@ declare interface AgentExternalToolConfig {
 
 /** Agent输入值，支持直接赋值和引用 */
 declare interface AgentInput {
-  /** 输入来源类型：0 用户输入，3 自定义变量（API参数） */
+  /** 输入来源类型枚举值：1： 用户输入2： 系统变量3： 自定义变量（API参数）4： 环境变量5： 应用变量6： 工具参数 */
   InputType?: number;
   /** 用户手写输入 */
   UserInputValue?: AgentUserInputValue | null;
@@ -484,6 +490,8 @@ declare interface App {
   PortalShareConfig?: PortalShareConfig | null;
   /** 应用挂载云盘 */
   FileVolumeMountList?: FileVolumeMount[] | null;
+  /** A2A配置 */
+  A2AConfig?: A2AConfig | null;
 }
 
 /** 应用高级配置 */
@@ -3258,6 +3266,8 @@ declare interface ReleaseSummary {
   CorpShareConfig?: CorpShareConfig | null;
   /** portal配置 */
   PortalShareConfig?: PortalShareConfig | null;
+  /** A2A配置 */
+  A2AConfig?: A2AConfig | null;
 }
 
 /** 回复内容的详情 */
@@ -4471,6 +4481,8 @@ declare interface CreateReleaseRequest {
   IsPublishAsTemplate?: boolean;
   /** portal配置 */
   PortalShareConfig?: PortalShareConfig;
+  /** A2A配置 */
+  A2AConfig?: A2AConfig;
 }
 
 declare interface CreateReleaseResponse {
@@ -4975,7 +4987,7 @@ declare interface DescribeAppRequest {
   AppId: string;
   /** 应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域 */
   Domain?: number;
-  /** 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置), FileVolumeMountList(云盘挂载列表) */
+  /** 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置), FileVolumeMountList(云盘挂载列表), A2AConfig(A2A启用配置) */
   FieldMask?: FieldMask;
   /** 特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态 */
   StatusType?: number;

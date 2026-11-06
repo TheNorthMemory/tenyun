@@ -679,6 +679,8 @@ declare interface DownloadActiveDeviceCountRequest {
   EndTime?: number;
   /** 设备组, 不传查询全部 */
   DevGroup?: string;
+  /** 应用ID，指控制台上设备管理中的动态设备应用ID，不传查询全部。 */
+  ApplicationId?: string;
   /** license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权 */
   LicenseType?: number;
 }
@@ -699,6 +701,8 @@ declare interface GetActiveDeviceCountRequest {
   EndTime?: number;
   /** 设备组, 不传查询全部 */
   DevGroup?: string;
+  /** 应用ID，指控制台上设备管理中的动态设备应用ID，不传查询全部。 */
+  ApplicationId?: string;
   /** license类型, 不传查询全部, 1: 租户月付，2：厂商月付，3：永久授权 */
   LicenseType?: number;
 }

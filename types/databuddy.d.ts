@@ -2534,7 +2534,7 @@ declare interface WorkflowTask {
   TaskName?: string | null;
   /** 任务类型 */
   TaskType?: TaskType | null;
-  /** 资源组ID，可通过资源组相关接口获取 */
+  /** 计算资源组ID，计算资源取值通过 ListComputeResourceOptions 接口获取，入参 ResourceTypes 需按任务类型传值：DATA_INTEGRATION 传 [1]（平台集群），PYTHON/NOTEBOOK/RAY_JOB/DATA_QUALITY/IF_ELSE 传 [2]（作业集群），SQL 传 [2,3]（交互式+作业集群），其余任务类型无需填写本字段。 */
   ResourceGroupId?: string | null;
   /** 任务描述 */
   Description?: string | null;
@@ -4679,7 +4679,7 @@ declare interface UpdateWorkflowRequest {
   WorkspaceId: string;
   /** 待更新的工作流ID，可通过 ListWorkflows 获取。必填 */
   WorkflowId: string;
-  /** 需要清空的字段名列表，用于将指定字段重置为空 */
+  /** 需要清空的字段名列表，用于将指定字段重置为空。每项为斜杠分隔的字段路径（如 /BaseInfo/Description、/ParamList:[参数ID]），路径段与 NewSetting 字段名一致；列表字段用 字段名:[主键值] 定位单个元素、不带 [] 表示清空整个列表；workflowId、workspaceId、baseInfo 等标识类受保护字段不可删除，路径无效或未命中将返回 InvalidParameterValue 报错。 */
   FieldToRemoveList?: string[];
   /** 更新后的工作流配置，仅传入需要变更的部分即可 */
   NewSetting?: Workflow;

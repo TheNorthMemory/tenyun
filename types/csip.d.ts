@@ -6832,12 +6832,16 @@ declare interface HostKBRisk {
   KBDetail?: KBDetail;
   /** 受影响主机数 */
   EffectHostCount?: number;
-  /** 最近扫描时间参数格式：YYYY-MM-DDTHH:mm:ssZ */
+  /** 最近扫描时间参数格式：YYYY-MM-DD HH:mm:ss */
   LatestScanTime?: string;
   /** 所属账号列表 */
   Account?: AccountBriefInfo[];
   /** 修复状态枚举值：PENDING：待修复SCANNING：扫描中FIXED：已修复IGNORED：已加白FIXING：修复中FIX_FAILED：修复失败 */
   RiskStatus?: string;
+  /** 是否最新补丁枚举值：true： 是false： 否 */
+  IsNew?: boolean;
+  /** 修复任务id */
+  FixTaskId?: string;
 }
 
 /** 新增登录审计白名单实体 */
@@ -6930,6 +6934,10 @@ declare interface HostVulRisk {
   RiskStatus?: string;
   /** 漏洞详细信息 */
   VulDetail?: VulDetailInfo;
+  /** 修复任务ID */
+  FixTaskId?: string;
+  /** 当前用户可见范围内存在至少一台支持自动修复的主机时为 1，否则为 0单位：1 */
+  SupportAutoFix?: number;
 }
 
 /** IP威胁情报信息（通过TIX IPAnalysis接口获取） */
@@ -8020,6 +8028,8 @@ declare interface KBUpdateMachineItem {
   OsName?: string;
   /** 主机在线状态枚举值：ONLINE：在线OFFLINE：离线 */
   MachineStatus?: string;
+  /** 主机运行状态枚举值：RUNNING：运行中STOPPED：已停止EXPIRED：待回收 */
+  HostStatus?: string;
   /** 是否支持自动更新补丁枚举值：0：不支持1：支持 */
   SupportAutoFix?: number;
   /** 当前修复状态枚举值：0：未修复1：修复中2：修复失败3：修复成功4：修复超时 */
@@ -8028,11 +8038,13 @@ declare interface KBUpdateMachineItem {
   LatestFixTime?: string;
   /** 不可修复原因，SupportAutoFix为0时返回 */
   NotFixableReason?: string;
+  /** 不可修复原因关联动作，SupportAutoFix为0且存在可引导动作时返回 */
+  NotFixableAction?: VulFixableMachineAction;
   /** 资产标签列表 */
   TagItems?: MiniTagItem[];
   /** 所属账号AppId */
   AppId?: number;
-  /** 付费版本信息枚举值：BASIC：基础版PRO：专业版ULTIMATE：旗舰版 */
+  /** 付费版本信息枚举值：BASIC：基础版PRO：专业版ULTIMATE：旗舰版PRO_LH：轻量版 */
   PayVersion?: string;
 }
 
@@ -11398,6 +11410,8 @@ declare interface VPRExplainDimensionItem {
   Name?: string;
   /** 标签描述 */
   Remark?: string;
+  /** 危害等级枚举值：LOW： 低危MEDIUM： 中危HIGH： 高危CRITICAL： 严重 */
+  Level?: string;
 }
 
 /** VPR评级解释卡片 */
@@ -11812,6 +11826,12 @@ declare interface VulDetailInfo {
   HarmDescription?: string;
   /** 漏洞影响产品 */
   AffectVendorProduct?: VulVendorProduct[];
+  /** VPR暴露面信息 */
+  VPRExplainInfo?: VPRExplainInfo;
+  /** 最近扫描任务id(应急漏洞) */
+  ScanTaskId?: number;
+  /** 影响资产数(应急漏洞) */
+  AffectAsset?: number;
 }
 
 /** 漏洞修复项，指定一个漏洞/KB补丁及其需要修复的目标主机 */
@@ -11854,7 +11874,7 @@ declare interface VulFixSummaryItem {
   AffectedCount?: number;
   /** 修复后是否需要重启系统 */
   NeedReboot?: boolean;
-  /** 是否支持一键修复true-支持 false-不支持 */
+  /** 是否支持一键修复枚举值：true： 是false： 否 */
   FixSwitch?: boolean;
 }
 
@@ -11884,6 +11904,14 @@ declare interface VulFixTaskDetailItem {
   SnapshotStatus?: number;
   /** 异常提示信息 */
   ExceptionMessage?: string;
+  /** 结构化错误码（如 VF-INS-002、VF-AG-013） */
+  ErrorCode?: string;
+  /** 结构化失败原因 */
+  ErrorReason?: string;
+  /** 结构化解决方案 */
+  ErrorSolution?: string;
+  /** 原始错误信息（不做翻译） */
+  RawErrorMessage?: string;
   /** 修复启动时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
   StartTime?: string;
   /** 修复结束时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
@@ -11894,6 +11922,10 @@ declare interface VulFixTaskDetailItem {
   SnapshotExpireTime?: string;
   /** 快照创建失败原因（当 SnapshotStatus=3 时有值） */
   SnapshotFailReason?: string;
+  /** 机器类型枚举值：CVM： 腾讯云cvmOther： 混合云机器 */
+  MachineType?: string;
+  /** 快照是否复用枚举值：true： 是false： 否 */
+  SnapshotReused?: boolean;
 }
 
 /** 漏洞修复任务概要信息 */
@@ -11970,6 +12002,14 @@ declare interface VulFixTaskItem {
   AppId?: number;
 }
 
+/** 不可修复原因关联动作 */
+declare interface VulFixableMachineAction {
+  /** 动作类型枚举值：UPGRADE_PROTECTION：升级防护REINSTALL_CLIENT：重新安装客户端 */
+  ActionType?: string;
+  /** 动作按钮文案 */
+  ActionText?: string;
+}
+
 /** 可修复主机信息 */
 declare interface VulFixableMachineItem {
   /** 漏洞ID列表，按 SupportAutoFix 维度分组：SupportAutoFix=1 时为可修复的漏洞ID，SupportAutoFix=0 时为不可修复的漏洞ID */
@@ -11988,6 +12028,8 @@ declare interface VulFixableMachineItem {
   OsName?: string;
   /** 主机在线状态枚举值：ONLINE：在线OFFLINE：离线 */
   MachineStatus?: string;
+  /** 主机运行状态枚举值：RUNNING： 运行中STOPPED： 已停止EXPIRED： 待回收 */
+  HostStatus?: string;
   /** 是否支持自动修复枚举值：0：不支持1：支持 */
   SupportAutoFix?: number;
   /** 当前修复状态枚举值：0：未修复1：修复中2：修复失败3：修复成功4：修复超时 */
@@ -11996,6 +12038,10 @@ declare interface VulFixableMachineItem {
   LatestFixTime?: string;
   /** 不可修复原因，SupportAutoFix为0时返回 */
   NotFixableReason?: string;
+  /** 不可修复原因码，SupportAutoFix为0时返回枚举值：BASIC_VERSION：基础版主机不支持一键修复HOST_STOPPED：主机已关机CLIENT_OFFLINE：主机防护客户端已离线PATCH_UNAVAILABLE：官方已停止发布该系统版本的安全补丁SOURCE_COMPILED：源码编译安装，不支持一键修复 */
+  NotFixableReasonCode?: string;
+  /** 不可修复原因关联动作，SupportAutoFix为0且存在可引导动作时返回 */
+  NotFixableAction?: VulFixableMachineAction;
   /** 修复命令列表，SupportAutoFix为1时返回 */
   FixCommands?: string[];
   /** 关联组件列表 */
@@ -12034,6 +12080,8 @@ declare interface VulFixedItem {
   LatestFixTime?: string;
   /** VPR评级依据 */
   VPRExplainInfo?: VPRExplainInfo;
+  /** 修复方式：AUTO_FIX-一键修复 MANUAL_FIX-手动修复 */
+  RepairMethod?: string;
 }
 
 /** 主机简要信息 */
@@ -12046,13 +12094,13 @@ declare interface VulHostBriefInfo {
   PublicIP?: string;
   /** 内网 IP 地址 */
   PrivateIP?: string;
-  /** 防护版本枚举值：NONE：无防护BASIC：基础版PRO：专业版ULTIMATE：旗舰版PRO_LH：轻量版 */
+  /** 防护版本枚举值 BASIC：基础版PRO：专业版ULTIMATE：旗舰版PRO_LH：轻量版 */
   DefendVersion?: string;
   /** 漏洞防御状态枚举值：ENABLED：已开启NOT_SUPPORTED：不支持NOT_ENABLED：未开启 */
   DefendStatus?: string;
   /** 所属账号信息 */
   Account?: AccountBriefInfo;
-  /** 云主机实例状态枚举值：RUNNING：运行中STOPPED：已停止UNKNOWN：未知 */
+  /** 云主机实例状态枚举值：RUNNING： 运行中STOPPED： 已停止EXPIRED： 待回收 */
   InstanceStatus?: string;
   /** 修复状态枚举值枚举值：PENDING： 待修复SCANNING： 扫描中FIXED： 已修复IGNORED： 已忽略FIXING： 修复中FIX_FAILED： 修复失败NEED_REBOOT： 修复待重启 */
   RiskStatus?: string;
@@ -12064,6 +12112,8 @@ declare interface VulHostBriefInfo {
   TagItem?: MiniTagItem[];
   /** 云上标签列表（云资产侧 Tag） */
   CloudTag?: Tag[];
+  /** VPR评级解释卡片 */
+  VPRExplainInfo?: VPRExplainInfo;
 }
 
 /** 漏洞影响组件信息 */

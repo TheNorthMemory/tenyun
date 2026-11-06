@@ -3911,7 +3911,7 @@ declare interface CreatePersonAuthCertificateImageRequest {
   IdCardNumber: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** “授权签”使用的场景值, 可以选择的场景值如下: E_PRESCRIPTION_AUTO_SIGN : 电子处方场景 OTHER : 通用场景注: 不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN */
+  /** “授权签”使用的场景值, 可以选择的场景值如下:枚举值：E_PRESCRIPTION_AUTO_SIGN： 电子处方场景OTHER： 通用场景（需要联系客户经理添加白名单才能使用）注: 不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN */
   SceneKey?: string;
 }
 
@@ -4283,7 +4283,7 @@ declare interface CreateSingleSignOnEmployeesResponse {
 declare interface CreateUserAutoSignEnableUrlRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** “授权签”使用的场景值, 可以选择的场景值如下: E_PRESCRIPTION_AUTO_SIGN : 电子处方场景 OTHER : 通用场景 */
+  /** “授权签”使用的场景值, 可以选择的场景值如下:枚举值：E_PRESCRIPTION_AUTO_SIGN： 电子处方场景（需要联系客户经理添加白名单才能使用）OTHER： 通用场景 */
   SceneKey: string;
   /** “授权签”开通配置信息, 包括开通的人员的信息等 */
   AutoSignConfig: AutoSignConfig;
@@ -4323,7 +4323,7 @@ declare interface CreateUserAutoSignEnableUrlResponse {
 declare interface CreateUserAutoSignSealUrlRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** “授权签”使用的场景值, 可以选择的场景值如下: E_PRESCRIPTION_AUTO_SIGN : 电子处方场景 OTHER : 通用场景 */
+  /** “授权签”使用的场景值, 可以选择的场景值如下:枚举值：E_PRESCRIPTION_AUTO_SIGN： 电子处方场景（需要联系客户经理添加白名单才能使用）OTHER： 通用场景 */
   SceneKey: string;
   /** “授权签”开通个人用户信息, 包括名字,身份证等。 */
   UserInfo: UserThreeFactor;
@@ -5395,7 +5395,7 @@ declare interface DescribePersonCertificateRequest {
   UserInfo: UserThreeFactor;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;
-  /** 证书使用场景，可以选择的场景值如下: **E_PRESCRIPTION_AUTO_SIGN** : 电子处方场景 **OTHER** : 通用场景 */
+  /** 证书使用场景，可以选择的场景值如下:枚举值：E_PRESCRIPTION_AUTO_SIGN： 电子处方场景OTHER： 通用场景（需要联系客户经理添加白名单才能使用） */
   SceneKey?: string;
 }
 
@@ -5483,7 +5483,7 @@ declare interface DescribeThirdPartyAuthCodeResponse {
 declare interface DescribeUserAutoSignStatusRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** “授权签”使用的场景值, 可以选择的场景值如下: E_PRESCRIPTION_AUTO_SIGN : 电子处方场景 OTHER : 通用场景 */
+  /** “授权签”使用的场景值, 可以选择的场景值如下: E_PRESCRIPTION_AUTO_SIGN : 电子处方场景 OTHER : 通用场景枚举值：E_PRESCRIPTION_AUTO_SIGN： 电子处方场景（需要联系客户经理添加白名单才能使用）OTHER： 通用场景 */
   SceneKey: string;
   /** 要查询状态的用户信息, 包括名字,身份证等 */
   UserInfo: UserThreeFactor;
@@ -5545,7 +5545,7 @@ declare interface DescribeUserVerifyStatusResponse {
 declare interface DisableUserAutoSignRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** “授权签”使用的场景值, 可以选择的场景值如下: E_PRESCRIPTION_AUTO_SIGN : 电子处方场景 OTHER : 通用场景 */
+  /** “授权签”使用的场景值, 可以选择的场景值如下:枚举值：E_PRESCRIPTION_AUTO_SIGN： 电子处方场景（需要联系客户经理添加白名单才能使用）OTHER： 通用场景 */
   SceneKey: string;
   /** 需要关闭“授权签”的个人的信息，如姓名，证件信息等。 */
   UserInfo: UserThreeFactor;

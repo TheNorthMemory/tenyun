@@ -220,6 +220,34 @@ declare interface RecordList {
   Model?: string;
 }
 
+/** 会话的归属与保存状态 */
+declare interface SessionTargetInfo {
+  /** targetID */
+  TargetId?: string;
+  /** targetType */
+  TargetType?: string;
+  /** target名称 */
+  TargetName?: string;
+  /** 资源名称 */
+  Source?: string;
+  /** 最后活跃时间参数格式：2026-11-05 14:30:00 */
+  LastInteractionTime?: string;
+  /** 上下文 */
+  SurfaceContext?: SurfaceContext;
+  /** 是否保存 */
+  Saved?: boolean;
+  /** 保存时间 */
+  SavedAt?: string;
+  /** 是否删除 */
+  Deleted?: boolean;
+}
+
+/** 前端宿主环境上下文 */
+declare interface SurfaceContext {
+  /** 地域 */
+  Region?: string;
+}
+
 /** 模型思考强度 */
 declare interface Thinking {
   /** 模式枚举值：toggle： 可开关always_on： 固定开启always_off： 固定关闭unconfigured： 未配置 */
@@ -361,6 +389,8 @@ declare interface DeleteDataAgentSessionRequest {
   SessionId?: string;
   /** 批量删除 会话id 列表 */
   SessionIds?: string[];
+  /** 上下文 */
+  SurfaceContext?: SurfaceContext;
 }
 
 declare interface DeleteDataAgentSessionResponse {
@@ -613,6 +643,8 @@ declare interface QueryUserSessionDetailRequest {
   Offset?: number;
   /** 实例id */
   InstanceId?: string;
+  /** 上下文 */
+  SurfaceContext?: SurfaceContext;
 }
 
 declare interface QueryUserSessionDetailResponse {
@@ -626,6 +658,8 @@ declare interface QueryUserSessionDetailResponse {
   TotalCount?: number;
   /** 运行中的聊天请求, 返回为json字符串 */
   RunRecord?: string;
+  /** 会话归属信息 */
+  SessionTargetInfo?: SessionTargetInfo;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

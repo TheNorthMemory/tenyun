@@ -2254,6 +2254,8 @@ declare interface SmartRouterResourceSpec {
   Priority?: number;
   /** 资源供应属性（潮汐/竞价等供应模式），公有云场景用于指定机器来源类型。仅区分供应来源，计费/部署/伸缩仍按后付费处理（ChargeType 恒为 POSTPAID_BY_HOUR） */
   ResourceSupplyAttribute?: ResourceSupplyAttribute | null;
+  /** 资源组类型（output only，查询时回显供前端区分资源组表单）。枚举值：NORMAL（托管资源组）/ SW（纳管资源组）。按量计费（ChargeType=POSTPAID_BY_HOUR）时为空；写入时仍以查询到的资源组实际类型为准，调用方无需传入 */
+  ResourceGroupSWType?: string;
 }
 
 /** 计费项内容 */
@@ -3071,6 +3073,10 @@ declare interface CreateNotebookRequest {
   VolumeSourceGooseFS?: GooseFS;
   /** 描述 */
   Description?: string;
+  /** 资源供应属性 */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute;
+  /** 队列ID */
+  Queues?: string[];
 }
 
 declare interface CreateNotebookResponse {

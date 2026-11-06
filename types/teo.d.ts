@@ -126,6 +126,16 @@ declare interface AccessURLRedirectParameters {
   URLPath?: URLPath | null;
   /** 携带查询参数。 */
   QueryString?: AccessURLRedirectQueryString | null;
+  /** 目标端口配置。不填写此参数时，按 FollowProtocol 模式处理，即重定向地址中不显式指定端口，由目标协议使用默认端口，HTTP 使用 80，HTTPS 使用 443。 */
+  Port?: AccessURLRedirectPort | null;
+}
+
+/** 访问 URL 重定向目标端口配置参数。 */
+declare interface AccessURLRedirectPort {
+  /** 目标端口配置枚举值：FollowProtocol： 使用目标协议的默认端口。重定向地址中不显式指定端口，由目标协议使用默认端口，HTTP 使用 80，HTTPS 使用 443。FollowRequest： 跟随客户端请求的目标端口。请求地址显式携带端口时沿用该端口；未显式携带时，重定向地址中不携带端口。Custom： 使用指定的自定义端口。 */
+  Action?: string;
+  /** 自定义目标端口。取值范围：[1, 65535]当 Action 为 Custom 时，此字段必填；当 Action 为 FollowProtocol 或 FollowRequest 时，此字段不生效。 */
+  Value?: number;
 }
 
 /** 访问 URL 重定向 配置参数。 */
@@ -5297,15 +5307,15 @@ declare interface ApplyFreeCertificateResponse {
 }
 
 declare interface BindSecurityTemplateToEntityRequest {
-  /** 需要绑定或解绑的策略模板所属站点 ID。 */
+  /** 需要绑定或解绑的域名所属站点 ID。 */
   ZoneId: string;
   /** 绑定至策略模板（或者从策略模板解绑）的域名列表。 */
   Entities: string[];
-  /** 绑定或解绑操作选项，取值有：bind：绑定域名至策略模板。unbind-keep-policy：将域名从策略模板解绑，解绑时保留当前策略。unbind-use-default：将域名从策略模板解绑，并使用默认空白策略。注意：解绑操作当前仅支持单个域名解绑。即：当 Operate 参数取值为 unbind-keep-policy 或 unbind-use-default 时，Entities 参数列表仅支持填写一个域名。 */
+  /** 绑定或解绑操作选项。枚举值：bind： 绑定域名至策略模板。unbind-keep-policy： 将域名从策略模板解绑，解绑时保留当前策略。unbind-use-default： 将域名从策略模板解绑，并使用默认空白策略。 */
   Operate: string;
-  /** 指定绑定或解绑的策略模板 ID 或站点全局策略如需绑定至策略模板，或从策略模板解绑，请指定策略模板 ID。如需绑定至站点全局策略，或从站点全局策略解绑，请使用 @ZoneLevel@domain 参数值。注意：解绑后，域名将使用独立策略，并单独计算规则配额，请确保解绑前套餐规则配额充足。 */
+  /** 指定绑定或解绑的策略模板 ID 或站点全局策略。如需绑定至策略模板，或从策略模板解绑，请指定策略模板 ID；如需绑定至站点全局策略，或从站点全局策略解绑，请使用 @ZoneLevel@domain 参数值。注意：解绑后，域名将使用独立策略，并单独计算规则配额，请确保解绑前套餐规则配额充足。 */
   TemplateId: string;
-  /** 传入域名如果已经绑定了策略模板（含站点级防护策略），通过设置该参数表示是否替换该模板，默认值为 true。支持下列取值：true： 替换域名当前绑定的模板。false：不替换域名当前绑定的模板。注意：当设置为 false 时，若传入域名已经绑定策略模板，API 将返回错误；站点级防护策略也为一种策略模板。 */
+  /** 传入域名如果已经绑定了策略模板（含站点级防护策略），通过设置该参数表示是否替换该模板。枚举值：true： 替换域名当前绑定的模板。false： 不替换域名当前绑定的模板。默认值：true注意：当设置为 false 时，若传入域名已经绑定策略模板，API 将返回错误；站点级防护策略也为一种策略模板。 */
   OverWrite?: boolean;
 }
 
