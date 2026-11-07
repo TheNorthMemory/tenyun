@@ -332,6 +332,14 @@ declare interface InvokeLLM {
   ExperimentalParams?: string;
 }
 
+/** LLM自定义数据结构 */
+declare interface KeyValueItem {
+  /** Key */
+  Key: string;
+  /** Value */
+  Value: string;
+}
+
 /** MCU混流布局参数 */
 declare interface LayoutParams {
   /** 混流布局模板ID，0为悬浮模板(默认);1为九宫格模板;2为屏幕分享模板;3为画中画模板;4为自定义模板。 */
@@ -666,13 +674,13 @@ declare interface MixLayout {
   UserId?: string;
   /** 画布的透明度值，取值范围[0, 255]。0表示不透明，255表示全透明。默认值为0。 */
   Alpha?: number;
-  /** 0 ：拉伸模式，这个模式下整个视频内容会全部显示，并填满子画面，在源视频和目的视频宽高比不一致的时候，画面不会缺少内容，但是画面可能产生形变；1 ：剪裁模式（默认），这个模式下会严格按照目的视频的宽高比对源视频剪裁之后再拉伸，并填满子画面画布，在源视频和目的视频宽高比不一致的时候，画面保持不变形，但是会被剪裁；2 ：填黑模式，这个模式下会严格保持源视频的宽高比进行等比缩放，在源视频和目的视频宽高比不一致的时候，画面的上下侧边缘或者左右侧边缘会露出子画面画布的背景；3 ：智能拉伸模式，这个模式类似剪裁模式，区别是在源视频和目的视频宽高比不一致的时候，限制了最大剪裁比例为画面的宽度或者高度的20%； */
+  /** 画布上该画面的渲染模式枚举值：0： 拉伸模式，这个模式下整个视频内容会全部显示，并填满子画面，在源视频和目的视频宽高比不一致的时候，画面不会缺少内容，但是画面可能产生形变；1： 剪裁模式（默认），这个模式下会严格按照目的视频的宽高比对源视频剪裁之后再拉伸，并填满子画面画布，在源视频和目的视频宽高比不一致的时候，画面保持不变形，但是会被剪裁；2： 填黑模式，这个模式下会严格保持源视频的宽高比进行等比缩放，在源视频和目的视频宽高比不一致的时候，画面的上下侧边缘或者左右侧边缘会露出子画面画布的背景；3： 智能拉伸模式，这个模式类似剪裁模式，区别是在源视频和目的视频宽高比不一致的时候，限制了最大剪裁比例为画面的宽度或者高度的20%； */
   RenderMode?: number;
   /** 对应订阅流的主辅路标识：0：主流（默认）；1：辅流； */
   MediaId?: number;
   /** 该画布的图层顺序, 这个值越小表示图层越靠后。默认值为0。 */
   ImageLayer?: number;
-  /** 图片的url地址， 只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&', '(', ')', '*', '+', ',', '%', '=' */
+  /** 图片的url地址， 只支持jpg, png, jpeg，图片分辨率限制不超过2K，图片大小限制不超过5MB。注意，url必须携带格式后缀，url内只支持特定的字符串, 范围是a-z A-Z 0-9 '-', '.', '_', '~', ':', '/', '?', '#', '[', ']' '@', '!', '&amp;', '(', ')', '*', '+', ',', '%', '=' */
   SubBackgroundImage?: string;
 }
 
@@ -1016,14 +1024,6 @@ declare interface SdkAppIdTrtcMcuTranscodeTimeUsage {
   Flux: number;
 }
 
-/** SeriesInfo类型 */
-declare interface SeriesInfo {
-  /** 数据列 */
-  Columns: string[] | null;
-  /** 数据值 */
-  Values: number[] | null;
-}
-
 /** SeriesInfos类型 */
 declare interface SeriesInfos {
   /** 数据列 */
@@ -1153,16 +1153,6 @@ declare interface SubscribeStreamUserIds {
 }
 
 /** TRTC数据大盘/实时监控 API接口数据出参 */
-declare interface TRTCDataResp {
-  /** StatementID值，监控仪表盘下固定为0。 */
-  StatementID: number | null;
-  /** 查询结果数据，以Columns-Values形式返回。 */
-  Series: SeriesInfo[] | null;
-  /** Total值，监控仪表盘功能下固定为1。 */
-  Total: number | null;
-}
-
-/** TRTC数据大盘/实时监控 API接口数据出参 */
 declare interface TRTCDataResult {
   /** StatementID值，监控仪表盘下固定为0。 */
   StatementID?: number | null;
@@ -1170,6 +1160,18 @@ declare interface TRTCDataResult {
   Series?: SeriesInfos[] | null;
   /** Total值，监控仪表盘功能下固定为1。 */
   Total?: number | null;
+}
+
+/** VoicePrintList 接口出参 VoicePrintSet 的元素类型 */
+declare interface TRTCVoicePrintItem {
+  /** 声纹 ID，36 位 UUID（含连字符）。对 (AppId, SdkAppId) 维度内唯一。示例值：59d83c76-8f4e-4a1b-9c2d-0e7f8a6b5c4d */
+  VoicePrintId?: string;
+  /** 业务方自定义的说话人标识，长度不超过 128 字节，由客户在注册声纹时传入。同一 SpeakerId 可对应多条声纹。示例值：user_12345 */
+  SpeakerId?: string;
+  /** 声纹注册时间，ISO8601 格式，UTC 时区。示例值：2025-04-24T10:20:30Z */
+  CreateTime?: string;
+  /** 声纹最近一次更新时间，ISO8601 格式，UTC 时区。未被更新过时等于 CreateTime。示例值：2025-04-24T10:20:30Z */
+  UpdateTime?: string;
 }
 
 /** TTS相关配置 */
@@ -1462,12 +1464,178 @@ declare interface Voice {
   Emotion?: string;
 }
 
+/** AI对话的任务参数。 */
+declare interface VoiceConversationConfig {
+  /** 对话服务在TRTC房间使用的UserId，注意这个userId不能与其他TRTC或者对话服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。 */
+  UserId: string;
+  /** 对话服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算UserSig的方案。 */
+  UserSig: string;
+  /** 对话服务订阅的主播名，订阅指定真实用户的音频，只能填写一个订阅主播。 */
+  TargetUserId: string[];
+  /** 回推机器人参数。 */
+  TTSPushRoomParams: TranscriptionUserInfoParams;
+  /** 参与对话的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止对话任务，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。单位：秒 */
+  MaxIdleTime?: number;
+  /** 用于过滤LLM返回内容，不播放括号中的内容。1：中文括号（）2：英文括号() 3：中文方括号【】4：英文方括号[] 5：英文花括号{} 。默认值为空，表示不进行过滤。 示例值：1取值范围：[1, 5]。S2S 模式不支持填写该参数。 */
+  FilterBracketsContent?: number[];
+  /** 字幕显示模式。S2S 模式不支持填写该参数。枚举值：0： 尽快显示1： 句子级别实时显示 */
+  SubtitleMode?: number;
+  /** 控制新一轮对话的触发方式，默认为"auto"。S2S 模式不支持填写该参数。枚举值："auto"： 后台自动识别断句触发LLM(基于静音时长) */
+  TurnDetectionMode?: string;
+}
+
+/** AI对话相关配置。 */
+declare interface VoiceConversationDialogConfig {
+  /** 打断模式。枚举值：0： 自动打断（ASR 出文本打断 TTS，配合InterruptSpeechDuration 使用，默认）1： 手动打断（仅服务端/客户端接口 Interrupt 命令打断）2： 关键词打断 */
+  InterruptMode?: number;
+  /** 自动打断的最小用户语音持续时长（毫秒），默认 200单位：毫秒 */
+  InterruptSpeechDuration?: number;
+  /** 预设的关键词，关键词打断，适用于需要用户明确表达意图才能打断的场景。最多支持128个关键词，InterruptMode 为2时生效， */
+  InterruptKeywords?: string[];
+  /** 用户静音多久后 Bot 主动追问，范围 0~300，0 表示关闭（默认）。单位：秒 */
+  SilenceFollowUp?: number;
+  /** 主动追问的文本。 */
+  SilenceFollowUpText?: string;
+  /** 主播首次进房主动播报的欢迎语，主播退房后再次进房也会播报。 */
+  WelcomeMessage?: string;
+}
+
+/** 历史对话内容。 */
+declare interface VoiceConversationHistoryContent {
+  /** 对话角色。 */
+  Role?: string;
+  /** 对话内容。 */
+  Content?: string;
+}
+
+/** AI对话历史消息。 */
+declare interface VoiceConversationHistoryMessage {
+  /** 对话角色，如"user"、"assistant"、"system"等。 */
+  Role: string;
+  /** 对话内容。 */
+  Content: string;
+}
+
+/** 调用服务端主动发起请求到LLM */
+declare interface VoiceConversationInvokeLLM {
+  /** 注入的内容。 */
+  Content: string;
+  /** 优先级。如果不处于对话中则将注入的内容送给LLM，否则由优先级决定。枚举值：0： 高优先级，打断当前对话，并清空等待队列将注入的内容送给LLM。1： 中优先级，不会打断当前对话，清空等待队列将注入的内容排队。如果不处于对话中则将注入的内容排队。2： 低优先级，丢弃注入的内容。默认值：0InvokeLLM和InvokeTTS的任务队列是同一队列，最多支持一个Invoke事件排队。 */
+  Priority?: number;
+}
+
+/** 调用服务端主动发起请求到TTS */
+declare interface VoiceConversationInvokeTTS {
+  /** 注入的内容。 */
+  Content: string;
+  /** 优先级。如果不处于对话中则将注入的内容送给TTS，否则由优先级决定。枚举值：0： 高优先级，打断当前对话，并清空等待队列将注入的内容送给TTS。1： 中优先级，不会打断当前对话，清空等待队列将注入的内容排队。如果不处于对话中则将注入的内容排队。2： 低优先级，丢弃注入的内容。默认值：0InvokeLLM和InvokeTTS的任务队列是同一队列，最多支持一个Invoke事件排队。 */
+  Priority?: number;
+}
+
+/** AI对话的LLM参数配置 */
+declare interface VoiceConversationLLMConfig {
+  /** LLM 协议类型，如openai（OpenAI 兼容协议）。 */
+  LLMType: string;
+  /** 模型名，如 gpt-4o-mini */
+  Model: string;
+  /** OpenAI 协议兼容的 endpoint。 */
+  APIUrl?: string;
+  /** 厂商 API Key。 */
+  APIKey?: string;
+  /** 系统提示词。 */
+  SystemPrompt?: string;
+  /** LLM 调用失败后，使用此文本生成 TTS音频。 */
+  FailureMessage?: string;
+  /** 单次回复最大 Token 数，0=不限制，默认值为0。注意：如果模型输出token数量大于设置的MaxTokens的值，会截断回复内容。 */
+  MaxTokens?: number;
+  /** 是否开启思考模式（需结合提供厂商具体使用）。注意：开启思考模式会占用输出token数。 */
+  ThinkingMode?: boolean;
+  /** LLM 中缓存的对话轮次数量，范围 0~50。建议值[10, 30]。注意：指定轮次上下文的总 token 数不能超过 LLM 支持的上限。 */
+  MaxHistory?: number;
+  /** MCP 工具调用最大轮次，范围 0~50，默认 10。 */
+  MaxToolRound?: number;
+  /** 单次请求的超时事件（毫秒），范围 1000~60000，默认 10000。单位：毫秒 */
+  Timeout?: number;
+  /** 采样温度，范围 0.0~2.0，默认 1.0。 */
+  Temperature?: number;
+  /** 采样概率，范围 0.0~1.0，默认 1.0。 */
+  TopP?: number;
+  /** Mcp Server参数。 */
+  McpServer?: VoiceConversationMcpServer;
+  /** 自定义 HTTP 请求头。 */
+  CustomHeaders?: KeyValueItem[];
+  /** 各厂商独有的扩展参数（如 DeepSeek 的reasoning_effort、混元的 enable_enhancement 等）。 */
+  CustomFields?: KeyValueItem[];
+  /** 初始历史消息，每项为 {"Role": "user"/"assistant"/"system", "Content": "xxx"}这种格式。 */
+  HistoryMessages?: VoiceConversationHistoryMessage[];
+}
+
+/** Mcp Sever参数。 */
+declare interface VoiceConversationMcpServer {
+  /** mcp唯一标识符。 */
+  Name?: string;
+  /** 接入地址。 */
+  Url?: string;
+  /** 请求超时，单位ms，默认 5000。待确认范围。单位：毫秒。 */
+  Timeout?: number;
+  /** 自定义请求header，用于填写鉴权等信息。 */
+  Headers?: KeyValueItem[];
+  /** 工具使用白名单。 */
+  ToolList?: string[];
+}
+
+/** AI对话任务端到端语音大模型的配置参数。 */
+declare interface VoiceConversationS2SConfig {
+  /** S2S 厂商标识，例如"tencent"。 */
+  Provider: string;
+  /** 厂商专属参数，JSON 序列化后的字符串。 */
+  Params: string;
+  /** 主播首次进房主动播报的欢迎语，主播退房后再次进房也会播报。 */
+  WelcomeMessage?: string;
+}
+
+/** AI对话任务的STT配置参数 */
+declare interface VoiceConversationSTTConfig {
+  /** ASR 提供方：trtc（腾讯自研）或第三方厂商名称（如 azure）。 */
+  Provider: string;
+  /** ASR厂商专属参数，填写JSON 序列化后的字符串。 */
+  Params: string;
+}
+
+/** 对话任务的TTS配置。 */
+declare interface VoiceConversationTTSConfig {
+  /** TTS 提供厂商，例如trtc。 */
+  Provider: string;
+  /** 厂商专属参数，JSON 序列化后的字符串。 */
+  Params: string;
+}
+
+/** AI对话视觉理解相关的参数配置。 */
+declare interface VoiceConversationVisionConfig {
+  /** 是否启用视觉理解。 */
+  Enable: boolean;
+  /** 存储类型。枚举值：0： 不存储。1： 指定云存储，这种情况下CloudStorage参数必填。默认值：0 */
+  StorageType?: number;
+  /** 第三方云存储归档配置。配置后，后台将从 SDK 收到的 I 帧自动上传至指定云存储桶进行持久化保存。 */
+  CloudStorage?: CloudStorage;
+}
+
 /** 声纹配置参数 */
 declare interface VoicePrint {
   /** 默认为0，表示不启用声纹。1表示启用声纹，此时需要填写voiceprint id。 */
   Mode?: number;
   /** VoicePrint Mode为1时需要填写，目前仅支持填写一个声纹id */
   IdList?: string[];
+}
+
+/** 批量删除逐项结果（VoicePrintBatchDelete 出参 Results 元素） */
+declare interface VoicePrintBatchDeleteResult {
+  /** 本项对应的声纹 ID。成功项与失败项均会返回。示例值：59d83c76-8f4e-4a1b-9c2d-0e7f8a6b5c4d */
+  VoicePrintId?: string;
+  /** 本项失败时的错误码，成功项为空。常见值：FailedOperation.VoicePrintNotFound（声纹不存在或已删除）、InvalidParameterValue.InvalidVoicePrintId（ID 格式非法）。示例值：FailedOperation.VoicePrintNotFound */
+  ErrorCode?: string;
+  /** 本项失败时的错误描述，成功项为空。示例值：voiceprint not found */
+  ErrorMessage?: string;
 }
 
 /** 声纹查询数据 */
@@ -1616,6 +1784,26 @@ declare interface AsyncTextToSpeechResponse {
   RequestId?: string;
 }
 
+declare interface BatchDeleteTRTCVoicePrintRequest {
+  /** 待批量删除的声纹 ID 列表，最多 50 个；请求内自动去重；按 (AppId, SdkAppId, VoicePrintId) 做数据隔离 */
+  VoicePrintIds: string[];
+  /** SdkappId */
+  SdkAppId: string;
+}
+
+declare interface BatchDeleteTRTCVoicePrintResponse {
+  /** 成功删除的声纹数量（按数据库实际删除行数统计） */
+  SuccessCount?: number;
+  /** 失败的声纹数量（通常是因为声纹不存在） */
+  FailCount?: number;
+  /** 每个 VoicePrintId 的处理结果列表，元素为 VoicePrintBatchDeleteResult结构：{ VoiceprintId:string, ErrorCode:string, ErrorMessage:string }，成功项仅返回 VoiceprintId，失败项带 ErrorCode/ErrorMessage。 */
+  Results?: VoicePrintBatchDeleteResult[];
+  /** 结果描述，成功时为 batch delete completed: X succeeded, Y failed */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ControlAIConversationRequest {
   /** 任务唯一标识 */
   TaskId: string;
@@ -1630,6 +1818,26 @@ declare interface ControlAIConversationRequest {
 }
 
 declare interface ControlAIConversationResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ControlVoiceConversationRequest {
+  /** TRTC的SdkAppId，和对话的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** 对话任务的唯一Id，在启动对话成功后会返回。 */
+  TaskId: string;
+  /** 控制指令。枚举值："Interrupt"： 强制打断"invokellm"： 文本注入 LLM：向当前对话上下文注入一段文本，触发一轮 LLM 回复。S2S模式不支持该指令invoketts： 文本注入TTS：向当前TTS注入文本，触发TTS播报。S2S模式不支持该指令 */
+  Command: string;
+  /** 注入LLM的配置，Command=invokellm 时必填 */
+  InvokeLLM?: VoiceConversationInvokeLLM;
+  /** 注入TTS的配置，Command=invoketts 时必填 */
+  InvokeTTS?: VoiceConversationInvokeTTS;
+}
+
+declare interface ControlVoiceConversationResponse {
+  /** 对话任务的唯一Id。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1697,6 +1905,8 @@ declare interface CreateCloudModerationRequest {
   RoomIdType?: number;
   /** 任务ID可以调用的时效性，从成功开启任务并获得TaskID后开始计算，超时后无法调用查询、更新和停止等接口，但是切片任务不会停止。 参数的单位是小时，默认24小时（1天），最大可设置72小时（3天），最小设置6小时。举例说明：如果不设置该参数，那么开始切片成功后，查询、更新和停止切片的调用时效为24个小时。 */
   ResourceExpiredHour?: number;
+  /** 客户自定义扩展字段，服务端完全不解析，只做透传，在事件回调中原样返回入参限制：总字符数≤4KB */
+  Extra?: string;
 }
 
 declare interface CreateCloudModerationResponse {
@@ -1858,6 +2068,38 @@ declare interface CreateRecognizeVocabV3Response {
   RequestId?: string;
 }
 
+declare interface CreateVoiceConversationRequest {
+  /** TRTC的SdkAppId，和对话的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** TRTC的RoomId，对话的TRTC房间所对应的RoomId。注：房间号类型默认为整型，若房间号类型为字符串，请通过RoomIdType指定。 */
+  RoomId: string;
+  /** 房间信息RoomType，必须和对话的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。枚举值：0： 数字房间号1： 字符串房间号默认值：0 */
+  RoomIdType: number;
+  /** 对话机器人相关配置。 */
+  AgentConfig: VoiceConversationConfig;
+  /** 对话链路模式：Cascade（默认，三段式）/ S2S（端到端语音大模型）。枚举值：Cascade： 默认，三段式S2S： 端到端语音大模型默认值：Cascade */
+  ConversationMode?: string;
+  /** 端到端语音大模型配置。仅 S2S 模式必填；Cascade 模式忽略。 */
+  S2SConfig?: VoiceConversationS2SConfig;
+  /** 语音识别配置。仅 Cascade 模式必填；S2S 模式忽略。 */
+  STTConfig?: VoiceConversationSTTConfig;
+  /** 大模型配置。仅 Cascade 模式必填；S2S 模式忽略。 */
+  LLMConfig?: VoiceConversationLLMConfig;
+  /** 语音合成配置。仅 Cascade 模式必填；S2S 模式忽略。 */
+  TTSConfig?: VoiceConversationTTSConfig;
+  /** 对话控制配置，S2S 模式不支持填写该参数。 */
+  DialogConfig?: VoiceConversationDialogConfig;
+  /** 视觉理解配置，S2S 模式不支持填写该参数。 */
+  VisionConfig?: VoiceConversationVisionConfig;
+}
+
+declare interface CreateVoiceConversationResponse {
+  /** 用于唯一标识对话任务，由腾讯云服务端生成，后续查询、控制等请求都需要携带TaskID参数。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteCloudModerationRequest {
   /** TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -1948,6 +2190,36 @@ declare interface DeleteRecognizeVocabV3Request {
 }
 
 declare interface DeleteRecognizeVocabV3Response {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteTRTCVoicePrintRequest {
+  /** 待删除的声纹 ID（由 RegisterTRTCVoicePrint返回）。删除为软删，按 (AppId, SdkAppId, VoicePrintId) 做数据隔离。 */
+  VoicePrintId: string;
+  /** SdkappId */
+  SdkAppId: string;
+}
+
+declare interface DeleteTRTCVoicePrintResponse {
+  /** 已删除的声纹 ID（回显，便于调用方核对） */
+  VoicePrintId?: string;
+  /** 结果描述，成功时为 voiceprint deleted successfully */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteVoiceConversationRequest {
+  /** TRTC的SdkAppId，和对话的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** 对话任务的唯一Id，在启动对话成功后会返回。 */
+  TaskId: string;
+}
+
+declare interface DeleteVoiceConversationResponse {
+  /** 对话任务的唯一Id。 */
+  TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2372,24 +2644,6 @@ declare interface DescribeTRTCMarketScaleDataResponse {
   RequestId?: string;
 }
 
-declare interface DescribeTRTCMarketScaleMetricDataRequest {
-  /** 用户SdkAppId */
-  SdkAppId: string;
-  /** 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天） */
-  StartTime: string;
-  /** 查询结束时间，格式为YYYY-MM-DD。 */
-  EndTime: string;
-  /** 返回数据的粒度，支持设为以下值：d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。 */
-  Period: string;
-}
-
-declare interface DescribeTRTCMarketScaleMetricDataResponse {
-  /** TRTC监控数据出参 */
-  Data: TRTCDataResp | null;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeTRTCRealTimeQualityDataRequest {
   /** 用户SdkAppId（如：1400xxxxxx） */
   SdkAppId: string;
@@ -2446,6 +2700,26 @@ declare interface DescribeTRTCSegmentModerationUsageResponse {
   UsageList?: UsageList[];
   /** 汇总用量列表 */
   TotalUsage?: number[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTRTCVoicePrintRequest {
+  /** SdkappId */
+  SdkAppId: string;
+  /** 分页起始偏移，0 或不传表示从第一条开始 */
+  Offset?: number;
+  /** 每页返回数量，默认 20，最大 100；超过最大值会被截断到 100 */
+  Limit?: number;
+}
+
+declare interface DescribeTRTCVoicePrintResponse {
+  /** 当前 (AppId, SdkAppId) 下的声纹总数（仅计活跃状态） */
+  TotalCount?: number;
+  /** 声纹条目列表，元素为 TRTCVoicePrintItem 结构：{ VoicePrintId:string, SpeakerId:string, CreateTime:string(ISO8601), UpdateTime:string(ISO8601) }。 */
+  VoicePrintList?: TRTCVoicePrintItem[];
+  /** 结果描述，成功时为 query voiceprint list successfully */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2543,7 +2817,7 @@ declare interface DescribeUserEventResponse {
 }
 
 declare interface DescribeUserInfoRequest {
-  /** 通话 ID（唯一标识一次通话）： SdkAppId_RoomId（房间号）_ CreateTime（房间创建时间，unix时间戳，单位为s）例：1400xxxxxx_218695_1590065777。通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。 */
+  /** 通话 ID（唯一标识一次通话）， 需通过 DescribeRoomInfo（查询历史房间列表）接口获取（[查询历史房间列表](https://cloud.tencent.com/document/product/647/44050)）。 */
   CommId: string;
   /** 查询开始时间，本地unix时间戳，单位为秒（如：1590065777）注意：最大支持查询14天内的数据 */
   StartTime: number;
@@ -2564,6 +2838,28 @@ declare interface DescribeUserInfoResponse {
   Total?: number;
   /** 用户信息列表 */
   UserList?: UserInformation[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeVoiceConversationRequest {
+  /** TRTC的SdkAppId，和对话的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** 对话任务的唯一Id，在启动对话成功后会返回。 */
+  TaskId: string;
+  /** 查询任务状态枚举值：0： 不查询对话上下文历史1： 查询对话上下文历史默认值：0 */
+  DescribeType?: number;
+}
+
+declare interface DescribeVoiceConversationResponse {
+  /** 任务启动时间单位：毫秒 */
+  StartTime?: number;
+  /** 转录任务状态。枚举值：Idle： 表示当前转录任务空闲中 InProgress： 表示当前转录任务正在进行中Exited： 表示当前转录任务正在退出的过程中 */
+  Status?: string;
+  /** 转录任务的唯一Id。 */
+  TaskId?: string;
+  /** 历史对话信息。 */
+  HistoryContents?: VoiceConversationHistoryContent[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2758,6 +3054,54 @@ declare interface ModifyPictureRequest {
 }
 
 declare interface ModifyPictureResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyVoiceConversationRequest {
+  /** TRTC的SdkAppId，和对话的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** 对话任务的唯一Id，在启动对话成功后会返回。 */
+  TaskId: string;
+  /** 需要保证同一个任务，每次更新请求中的SequenceNumber递增，防止请求乱序。 */
+  SequenceNumber: number;
+  /** 大模型配置。仅 Cascade 模式生效；S2S 模式报错。 */
+  LLMConfig?: VoiceConversationLLMConfig;
+  /** 端到端语音大模型配置。仅 S2S 模式生效；Cascade 报错。 */
+  S2SConfig?: VoiceConversationS2SConfig;
+  /** 对话控制配置。仅 Cascade 模式生效。 */
+  DialogConfig?: VoiceConversationDialogConfig;
+}
+
+declare interface ModifyVoiceConversationResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RegisterTRTCVoicePrintRequest {
+  /** 业务方自定义的说话人唯一标识，同一 (AppId, SdkAppId, SpeakerId) 重复调用会覆盖旧声纹（软删旧记录 + 新建一行，返回新的 VoicePrintId） */
+  SpeakerId: string;
+  /** 音频数据的 Base64 字符串。要求：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后大小 ≤ 2MB；PCM 裸数据时长 10s ≤ 时长 ≤ 45s（WAV 去掉 header 后按相同标准校验） */
+  Data: string;
+  /** SdkAppId */
+  SdkAppId: string;
+  /** 音频格式，可选 pcm 或 wav，大小写不敏感，不传默认为 pcm */
+  AudioFormat?: string;
+}
+
+declare interface RegisterTRTCVoicePrintResponse {
+  /** 本次注册生成的声纹 ID，后续 Update/Delete/Verify 均以此为准 */
+  VoicePrintId?: string;
+  /** 回显的业务方 SpeakerId */
+  SpeakerId?: string;
+  /** 本次注册音频中有效人声时长（秒） */
+  EffectiveAudioDuration?: number;
+  /** 音频信噪比（dB），由声纹服务端评估给出 */
+  SNR?: number;
+  /** 结果描述，成功时为 voiceprint enrolled successfully */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3268,6 +3612,30 @@ declare interface UpdateStreamIngestResponse {
   RequestId?: string;
 }
 
+declare interface UpdateTRTCVoicePrintRequest {
+  /** 待更新的声纹 ID（由 RegisterTRTCVoicePrint 返回）。更新采用覆盖模式——只保留一条最新音频，VoicePrintId 保持不变。 */
+  VoicePrintId: string;
+  /** 新的音频数据的 Base64 字符串。要求与 RegisterTRTCVoicePrint一致：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。 */
+  Data: string;
+  /** SdkAppId */
+  SdkAppId: string;
+  /** 音频格式，可选 pcm 或 wav，大小写不敏感，不传默认为 pcm */
+  AudioFormat?: string;
+}
+
+declare interface UpdateTRTCVoicePrintResponse {
+  /** 声纹 ID（更新前后保持不变） */
+  VoicePrintId?: string;
+  /** 本次更新音频中有效人声时长（秒） */
+  EffectiveAudioDuration?: number;
+  /** 音频信噪比（dB），由声纹服务端评估给出 */
+  SNR?: number;
+  /** 结果描述，成功时为 voiceprint updated successfully */
+  Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UpdateVoicePrintRequest {
   /** 声纹信息ID */
   VoicePrintId: string;
@@ -3282,6 +3650,32 @@ declare interface UpdateVoicePrintRequest {
 }
 
 declare interface UpdateVoicePrintResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface VerifyTRTCVoicePrintRequest {
+  /** 待验证的目标声纹 ID（由 RegisterTRTCVoicePrint 返回）。按 (AppId, SdkAppId, VoicePrintId) 做数据隔离。 */
+  VoicePrintId: string;
+  /** 待验证音频数据的 Base64 字符串。要求：16kHz/16bit/单声道 PCM 或 WAV；Base64 解码后 ≤ 2MB；PCM 裸数据 10s ≤ 时长 ≤ 45s。 */
+  Data: string;
+  /** SdkAppId */
+  SdkAppId: string;
+  /** 音频格式，可选 pcm 或 wav，大小写不敏感，不传默认为 pcm */
+  AudioFormat?: string;
+}
+
+declare interface VerifyTRTCVoicePrintResponse {
+  /** 被验证的目标声纹 ID */
+  VoicePrintId?: string;
+  /** 注册时写入的业务方 SpeakerId（以服务端记录为准） */
+  SpeakerId?: string;
+  /** 相似度分值（字符串形式，保留两位小数，范围约 0~100，越大越相似） */
+  Score?: string;
+  /** 服务端阈值判决结果，0=不通过，1=通过（默认阈值 60 分，由服务端统一维护） */
+  Decision?: number;
+  /** 结果描述，成功时为 voiceprint verify success */
+  Message?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3317,8 +3711,12 @@ declare interface Trtc {
   (): Versions;
   /** 异步文本转语音 {@link AsyncTextToSpeechRequest} {@link AsyncTextToSpeechResponse} */
   AsyncTextToSpeech(data: AsyncTextToSpeechRequest, config?: AxiosRequestConfig): AxiosPromise<AsyncTextToSpeechResponse>;
+  /** 声纹批量删除 {@link BatchDeleteTRTCVoicePrintRequest} {@link BatchDeleteTRTCVoicePrintResponse} */
+  BatchDeleteTRTCVoicePrint(data: BatchDeleteTRTCVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<BatchDeleteTRTCVoicePrintResponse>;
   /** 控制AI对话 {@link ControlAIConversationRequest} {@link ControlAIConversationResponse} */
   ControlAIConversation(data: ControlAIConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlAIConversationResponse>;
+  /** 控制AI对话任务 {@link ControlVoiceConversationRequest} {@link ControlVoiceConversationResponse} */
+  ControlVoiceConversation(data: ControlVoiceConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ControlVoiceConversationResponse>;
   /** 短音频内容理解同步接口 {@link CreateAudioModerationSyncRequest} {@link CreateAudioModerationSyncResponse} */
   CreateAudioModerationSync(data?: CreateAudioModerationSyncRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAudioModerationSyncResponse>;
   /** 启动AI 内容理解 {@link CreateCloudModerationRequest} {@link CreateCloudModerationResponse} */
@@ -3335,6 +3733,8 @@ declare interface Trtc {
   CreatePicture(data: CreatePictureRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePictureResponse>;
   /** 创建智能识别热词表V3 {@link CreateRecognizeVocabV3Request} {@link CreateRecognizeVocabV3Response} */
   CreateRecognizeVocabV3(data: CreateRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<CreateRecognizeVocabV3Response>;
+  /** 创建AI对话任务 {@link CreateVoiceConversationRequest} {@link CreateVoiceConversationResponse} */
+  CreateVoiceConversation(data: CreateVoiceConversationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateVoiceConversationResponse>;
   /** 停止AI 内容理解任务 {@link DeleteCloudModerationRequest} {@link DeleteCloudModerationResponse} */
   DeleteCloudModeration(data: DeleteCloudModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCloudModerationResponse>;
   /** 停止云端录制任务 {@link DeleteCloudRecordingRequest} {@link DeleteCloudRecordingResponse} */
@@ -3349,6 +3749,10 @@ declare interface Trtc {
   DeletePicture(data: DeletePictureRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePictureResponse>;
   /** 删除智能识别热词表V3 {@link DeleteRecognizeVocabV3Request} {@link DeleteRecognizeVocabV3Response} */
   DeleteRecognizeVocabV3(data: DeleteRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<DeleteRecognizeVocabV3Response>;
+  /** 声纹删除 {@link DeleteTRTCVoicePrintRequest} {@link DeleteTRTCVoicePrintResponse} */
+  DeleteTRTCVoicePrint(data: DeleteTRTCVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteTRTCVoicePrintResponse>;
+  /** 删除AI对话任务 {@link DeleteVoiceConversationRequest} {@link DeleteVoiceConversationResponse} */
+  DeleteVoiceConversation(data: DeleteVoiceConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVoiceConversationResponse>;
   /** 删除声纹信息 {@link DeleteVoicePrintRequest} {@link DeleteVoicePrintResponse} */
   DeleteVoicePrint(data: DeleteVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteVoicePrintResponse>;
   /** 查询AI对话状态 {@link DescribeAIConversationRequest} {@link DescribeAIConversationResponse} */
@@ -3393,14 +3797,14 @@ declare interface Trtc {
   DescribeTRTCMarketQualityData(data: DescribeTRTCMarketQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketQualityDataResponse>;
   /** 查询TRTC数据大盘规模数据 {@link DescribeTRTCMarketScaleDataRequest} {@link DescribeTRTCMarketScaleDataResponse} */
   DescribeTRTCMarketScaleData(data: DescribeTRTCMarketScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleDataResponse>;
-  /** @deprecated 查询TRTC数据大盘规模指标 {@link DescribeTRTCMarketScaleMetricDataRequest} {@link DescribeTRTCMarketScaleMetricDataResponse} */
-  DescribeTRTCMarketScaleMetricData(data: DescribeTRTCMarketScaleMetricDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCMarketScaleMetricDataResponse>;
   /** 查询TRTC实时监控质量数据 {@link DescribeTRTCRealTimeQualityDataRequest} {@link DescribeTRTCRealTimeQualityDataResponse} */
   DescribeTRTCRealTimeQualityData(data: DescribeTRTCRealTimeQualityDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeQualityDataResponse>;
   /** 查询TRTC实时监控规模数据 {@link DescribeTRTCRealTimeScaleDataRequest} {@link DescribeTRTCRealTimeScaleDataResponse} */
   DescribeTRTCRealTimeScaleData(data: DescribeTRTCRealTimeScaleDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCRealTimeScaleDataResponse>;
   /** 切片截图与内容理解用量查询 {@link DescribeTRTCSegmentModerationUsageRequest} {@link DescribeTRTCSegmentModerationUsageResponse} */
   DescribeTRTCSegmentModerationUsage(data: DescribeTRTCSegmentModerationUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCSegmentModerationUsageResponse>;
+  /** 声纹列表查询 {@link DescribeTRTCVoicePrintRequest} {@link DescribeTRTCVoicePrintResponse} */
+  DescribeTRTCVoicePrint(data: DescribeTRTCVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTRTCVoicePrintResponse>;
   /** 查询旁路转码计费时长（旧） {@link DescribeTrtcMcuTranscodeTimeRequest} {@link DescribeTrtcMcuTranscodeTimeResponse} */
   DescribeTrtcMcuTranscodeTime(data: DescribeTrtcMcuTranscodeTimeRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTrtcMcuTranscodeTimeResponse>;
   /** 查询TRTC音视频房间维度用量 {@link DescribeTrtcRoomUsageRequest} {@link DescribeTrtcRoomUsageResponse} */
@@ -3413,6 +3817,8 @@ declare interface Trtc {
   DescribeUserEvent(data: DescribeUserEventRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserEventResponse>;
   /** 查询历史用户列表 {@link DescribeUserInfoRequest} {@link DescribeUserInfoResponse} */
   DescribeUserInfo(data: DescribeUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserInfoResponse>;
+  /** 查询AI对话任务 {@link DescribeVoiceConversationRequest} {@link DescribeVoiceConversationResponse} */
+  DescribeVoiceConversation(data: DescribeVoiceConversationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoiceConversationResponse>;
   /** 查询声纹信息 {@link DescribeVoicePrintRequest} {@link DescribeVoicePrintResponse} */
   DescribeVoicePrint(data: DescribeVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVoicePrintResponse>;
   /** 查询页面录制 {@link DescribeWebRecordRequest} {@link DescribeWebRecordResponse} */
@@ -3435,6 +3841,10 @@ declare interface Trtc {
   ModifyCloudSliceTask(data: ModifyCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudSliceTaskResponse>;
   /** 修改图片 {@link ModifyPictureRequest} {@link ModifyPictureResponse} */
   ModifyPicture(data: ModifyPictureRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPictureResponse>;
+  /** 修改AI对话任务 {@link ModifyVoiceConversationRequest} {@link ModifyVoiceConversationResponse} */
+  ModifyVoiceConversation(data: ModifyVoiceConversationRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyVoiceConversationResponse>;
+  /** 声纹注册 {@link RegisterTRTCVoicePrintRequest} {@link RegisterTRTCVoicePrintResponse} */
+  RegisterTRTCVoicePrint(data: RegisterTRTCVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterTRTCVoicePrintResponse>;
   /** 注册声纹信息 {@link RegisterVoicePrintRequest} {@link RegisterVoicePrintResponse} */
   RegisterVoicePrint(data: RegisterVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<RegisterVoicePrintResponse>;
   /** 移出用户 {@link RemoveUserRequest} {@link RemoveUserResponse} */
@@ -3483,8 +3893,12 @@ declare interface Trtc {
   UpdateRecognizeVocabV3(data: UpdateRecognizeVocabV3Request, config?: AxiosRequestConfig): AxiosPromise<UpdateRecognizeVocabV3Response>;
   /** 更新输入在线媒体流 {@link UpdateStreamIngestRequest} {@link UpdateStreamIngestResponse} */
   UpdateStreamIngest(data: UpdateStreamIngestRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateStreamIngestResponse>;
+  /** 声纹更新 {@link UpdateTRTCVoicePrintRequest} {@link UpdateTRTCVoicePrintResponse} */
+  UpdateTRTCVoicePrint(data: UpdateTRTCVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateTRTCVoicePrintResponse>;
   /** 更新声纹信息 {@link UpdateVoicePrintRequest} {@link UpdateVoicePrintResponse} */
   UpdateVoicePrint(data: UpdateVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateVoicePrintResponse>;
+  /** 声纹验证 {@link VerifyTRTCVoicePrintRequest} {@link VerifyTRTCVoicePrintResponse} */
+  VerifyTRTCVoicePrint(data: VerifyTRTCVoicePrintRequest, config?: AxiosRequestConfig): AxiosPromise<VerifyTRTCVoicePrintResponse>;
   /** 声音克隆 {@link VoiceCloneRequest} {@link VoiceCloneResponse} */
   VoiceClone(data: VoiceCloneRequest, config?: AxiosRequestConfig): AxiosPromise<VoiceCloneResponse>;
 }
