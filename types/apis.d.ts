@@ -38,6 +38,8 @@ declare interface AgentAppMcpServerVO {
   AgentAppID?: string | null;
   /** mcp ID */
   McpServerID?: string | null;
+  /** 应用 */
+  AgentAppVO?: DescribeAgentAppResp;
 }
 
 /** 应用绑定模型服务入参 */
@@ -98,6 +100,8 @@ declare interface AgentAppServiceVO {
   AgentCredentialID?: string;
   /** 凭据详情 */
   AgentCredentialVO?: DescribeAgentCredentialResp;
+  /** 应用 */
+  AgentAppVO?: DescribeAgentAppResp;
 }
 
 /** API Key类型凭据 */

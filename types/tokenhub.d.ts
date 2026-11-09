@@ -1242,6 +1242,22 @@ declare interface DescribeUsageRankListResponse {
   RequestId?: string;
 }
 
+declare interface ModifyApiKeyBindingsRequest {
+  /** API 密钥 ID。 */
+  ApiKeyId: string;
+  /** 平台类型。取值：maas。 */
+  Platform: string;
+  /** 绑定类型。取值：all（全部模型和接入点）、model_custom_endpoint_custom（自定义模型+自定义接入点）。枚举值：model_custom_endpoint_custom： 自定义模型+自定义接入点 */
+  BindType: string;
+  /** 修改后的apikey的模型或服务绑定列表 */
+  Bindings?: BindingItem[];
+}
+
+declare interface ModifyApiKeyBindingsResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyApiKeyInfoRequest {
   /** API 密钥 ID。 */
   ApiKeyId: string;
@@ -1417,6 +1433,8 @@ declare interface Tokenhub {
   DescribeTokenPlanList(data?: DescribeTokenPlanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanListResponse>;
   /** 查询用量排行列表 {@link DescribeUsageRankListRequest} {@link DescribeUsageRankListResponse} */
   DescribeUsageRankList(data: DescribeUsageRankListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageRankListResponse>;
+  /** 更新 API 密钥绑定 {@link ModifyApiKeyBindingsRequest} {@link ModifyApiKeyBindingsResponse} */
+  ModifyApiKeyBindings(data: ModifyApiKeyBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyBindingsResponse>;
   /** 更新 API 密钥信息 {@link ModifyApiKeyInfoRequest} {@link ModifyApiKeyInfoResponse} */
   ModifyApiKeyInfo(data: ModifyApiKeyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyApiKeyInfoResponse>;
   /** 更新 API 密钥状态 {@link ModifyApiKeyStatusRequest} {@link ModifyApiKeyStatusResponse} */

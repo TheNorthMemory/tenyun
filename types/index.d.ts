@@ -715,7 +715,7 @@ declare type TenYun = CloudInstance & CloudServices & {
   controlcenter: Controlcenter,
   /** {@link Cpdp 企业收付平台} */
   cpdp: Cpdp,
-  /** {@link Csip 云安全一体化平台} */
+  /** {@link Csip 云安全中心} */
   csip: Csip,
   /** {@link Csxg 5G入云服务} */
   csxg: Csxg,

@@ -1681,7 +1681,7 @@ declare interface DeleteReplicationInstanceResponse {
 }
 
 declare interface DescribeAutoBackupConfigRequest {
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
 }
 
@@ -1692,7 +1692,7 @@ declare interface DescribeAutoBackupConfigResponse {
   WeekDays?: string[];
   /** 备份任务发起时间段。 */
   TimePeriod?: string;
-  /** 全量备份文件保存天数。默认为7天。如需保存更多天数，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请。 */
+  /** 全量备份文件保存天数。默认为7天。如需保存更多天数，请提交工单申请。 */
   BackupStorageDays?: number;
   /** 该参数不再使用，请忽略。 */
   BinlogStorageDays?: number;
@@ -3023,7 +3023,7 @@ declare interface ModfiyInstancePasswordResponse {
 }
 
 declare interface ModifyAutoBackupConfigRequest {
-  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
   InstanceId: string;
   /** 设置自动备份周期。可设置为Monday，Tuesday，Wednesday，Thursday，Friday，Saturday，Sunday。该参数暂不支持修改。 */
   WeekDays?: string[];
@@ -3031,7 +3031,7 @@ declare interface ModifyAutoBackupConfigRequest {
   TimePeriod?: string;
   /** 自动备份类型。目前仅能配置为：1 ，指定时备份。 */
   AutoBackupType?: number;
-  /** 全量备份文件保存天数。 仅支持设置为 7，单位：天。如需更长天数，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请。 */
+  /** 全量备份文件保存天数。 仅支持设置为 7，单位：天。如需更长天数，请提交工单申请。 */
   BackupStorageDays?: number;
 }
 
@@ -3131,6 +3131,10 @@ declare interface ModifyInstanceAccountRequest {
   NoAuth?: boolean;
   /** 是否启用密码加密传输。true：加密。false：不加密（默认值）。 */
   EncryptPassword?: boolean;
+  /** 账号维度的禁用命令配置。默认值：[]（空数组，即不禁用任何命令）入参限制：仅支持配置以下指定的数据库命令（支持多选）flushall, flushdb, keys, hgetall, eval, evalsha, script, scan, psetex, set, hmset, hset, lpush, rpush, sadd, zadd, del, mget, mset, bitop, exists, msetnx, blpop, brpop, rpoplpush, brpoplpush, smove, sunion, sinter, sdiff, sunionstore, sinterstore, sdiffstore, zunionstore, zinterstore, pfmerge, pfcount, pfadd。默认值："" */
+  DisableCommands?: string[];
+  /** 是否修改账号维度的禁用命令配置。仅在需要更新禁用命令列表时传入。true：修改（将根据传入的新命令列表进行覆盖更新）。false：不修改（默认值）。 */
+  ModifyDisableCommands?: boolean;
 }
 
 declare interface ModifyInstanceAccountResponse {

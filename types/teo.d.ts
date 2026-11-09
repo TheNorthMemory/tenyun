@@ -8062,6 +8062,32 @@ declare interface DescribeSharedCNAMEResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTimingFunctionAnalysisDataRequest {
+  /** 站点 ID 集合，至少填入1个站点 ID。 */
+  ZoneIds: string[];
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。查询时间范围（EndTime - StartTime）需小于等于 7 天。 */
+  EndTime: string;
+  /** 指标列表，取值有:function_requestCount: 边缘函数请求数，为累计值；function_cpuCostTime: 边缘函数执行的平均 CPU 耗时，单位为微秒；function_wallClockTime: 边缘函数执行的平均墙上时钟耗时，单位为微秒。 */
+  MetricNames: string[];
+  /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
+  Interval?: string;
+  /** 过滤条件，Filters.Value 的集合数量上限为20，详细的过滤条件 Key 值如下：domain：按照子域名进行过滤，示例值： www.example.com。function-name：按照边缘函数名称进行过滤，示例值： test051301-zone-2r2fdoxxxx-130000000。function-result：按照边缘函数执行结果进行过滤。对应 Value 的可选项如下： success：成功； fail：失败。 */
+  Filters?: QueryCondition[];
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为 global。 */
+  Area?: string;
+}
+
+declare interface DescribeTimingFunctionAnalysisDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount?: number;
+  /** 时序数据列表。 */
+  Data?: TimingDataRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTimingL4DataRequest {
   /** 开始时间。 */
   StartTime: string;
@@ -8164,6 +8190,34 @@ declare interface DescribeTimingL7OriginPullDataResponse {
   TotalCount?: number;
   /** 回源时序数据列表。 */
   TimingDataRecords?: TimingDataRecord[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeTopFunctionAnalysisDataRequest {
+  /** 站点 ID 集合，至少填入1个站点 ID。 */
+  ZoneIds: string[];
+  /** 开始时间。 */
+  StartTime: string;
+  /** 结束时间。查询时间范围（EndTime - StartTime）需小于等于 7 天。 */
+  EndTime: string;
+  /** 查询的指标，取值有：function_requestCount_functionResult: 按照执行结果的维度统计边缘函数的请求数；function_requestCount_functionName: 按照函数名称的维度统计边缘函数的请求数；function_requestCount_domain: 按照域名的维度统计边缘函数的请求数。 */
+  MetricName: string;
+  /** 查询前多少个 top 数据，最大值为1000。不填默认为10，表示查询 top10 的数据。 */
+  Limit?: number;
+  /** 过滤条件，Filters.Value 的集合数量上限为20，详细的过滤条件 Key 值如下：domain：按照子域名进行过滤，示例值： www.example.com。function-name：按照边缘函数名称进行过滤，示例值： test051301-zone-2r2fdoxxxx-130000000。function-result：按照边缘函数执行结果进行过滤。对应 Value 的可选项如下： success：成功； fail：失败。 */
+  Filters?: QueryCondition[];
+  /** 查询时间粒度，取值有：min: 1分钟；5min: 5分钟；hour: 1小时；day: 1天。不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2 小时范围内以 min 粒度查询，2 天范围内以 5min 粒度查询，7 天范围内以 hour 粒度查询，超过 7 天以 day 粒度查询。 */
+  Interval?: string;
+  /** 数据归属地区，取值有：overseas：全球（除中国大陆地区）数据；mainland：中国大陆地区数据；global：全球数据。不填默认取值为global。 */
+  Area?: string;
+}
+
+declare interface DescribeTopFunctionAnalysisDataResponse {
+  /** 查询结果的总条数。 */
+  TotalCount?: number;
+  /** 按照 MetricName 指定统计维度的前 topN 数据列表。 */
+  Data?: TopDataRecord[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -10105,6 +10159,8 @@ declare interface Teo {
   DescribeSecurityTemplateBindings(data: DescribeSecurityTemplateBindingsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecurityTemplateBindingsResponse>;
   /** 查询共享CNAME列表 {@link DescribeSharedCNAMERequest} {@link DescribeSharedCNAMEResponse} */
   DescribeSharedCNAME(data: DescribeSharedCNAMERequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSharedCNAMEResponse>;
+  /** 查询边缘函数分析时序数据 {@link DescribeTimingFunctionAnalysisDataRequest} {@link DescribeTimingFunctionAnalysisDataResponse} */
+  DescribeTimingFunctionAnalysisData(data: DescribeTimingFunctionAnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingFunctionAnalysisDataResponse>;
   /** 查询四层流量时序数据 {@link DescribeTimingL4DataRequest} {@link DescribeTimingL4DataResponse} */
   DescribeTimingL4Data(data: DescribeTimingL4DataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL4DataResponse>;
   /** 查询流量分析时序数据 {@link DescribeTimingL7AnalysisDataRequest} {@link DescribeTimingL7AnalysisDataResponse} */
@@ -10113,6 +10169,8 @@ declare interface Teo {
   DescribeTimingL7CacheData(data: DescribeTimingL7CacheDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7CacheDataResponse>;
   /** 查询回源时序数据 {@link DescribeTimingL7OriginPullDataRequest} {@link DescribeTimingL7OriginPullDataResponse} */
   DescribeTimingL7OriginPullData(data: DescribeTimingL7OriginPullDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTimingL7OriginPullDataResponse>;
+  /** 查询边缘函数分析Top数据 {@link DescribeTopFunctionAnalysisDataRequest} {@link DescribeTopFunctionAnalysisDataResponse} */
+  DescribeTopFunctionAnalysisData(data: DescribeTopFunctionAnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopFunctionAnalysisDataResponse>;
   /** 查询流量分析Top数据 {@link DescribeTopL7AnalysisDataRequest} {@link DescribeTopL7AnalysisDataResponse} */
   DescribeTopL7AnalysisData(data: DescribeTopL7AnalysisDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTopL7AnalysisDataResponse>;
   /** 查询缓存分析Top数据（待废弃） {@link DescribeTopL7CacheDataRequest} {@link DescribeTopL7CacheDataResponse} */

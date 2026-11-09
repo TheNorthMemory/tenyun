@@ -2431,14 +2431,22 @@ declare interface ModifyBackupVaultAttributeResponse {
 }
 
 declare interface ModifyCopyPairAttributeRequest {
-  /** 要修改属性的复制对id */
+  /** 要修改属性的复制对ID */
   CopyPairId: string;
-  /** 要修改的复制对类型，可选值：DISK、INSTANCE、CFS，默认 INSTANCE */
+  /** 要修改的复制对类型，可选值：INSTANCE。枚举值：INSTANCE： CVM复制对 */
   CopyPairType?: string;
   /** 修改复制对名称（长度最大支持 64 个字符） */
   CopyPairName?: string;
   /** 容灾端实例类型（仅容灾端CVM未创建时可修改） */
   InstanceType?: string;
+  /** 容灾端实例VPC IP（仅容灾端CVM未创建时可修改） */
+  PrivateIpAddress?: string;
+  /** 是否使用默认IP，与PrivateIpAddress互斥，不能同时使用（仅容灾端CVM未创建时可修改） */
+  UseDefaultPrivateIp?: boolean;
+  /** 实例登录设置，需要修改的时候才传（仅容灾端CVM未创建时可修改） */
+  LoginSettings?: LoginSettings;
+  /** 是否自动生成密码，与LoginSettings互斥，不能同时使用（仅容灾端CVM未创建时可修改） */
+  UseDefaultPassword?: boolean;
 }
 
 declare interface ModifyCopyPairAttributeResponse {
@@ -2581,10 +2589,12 @@ declare interface RunCopyPairTasksResponse {
 declare interface RunFailoverCopyPairsRequest {
   /** 复制对ID列表 */
   CopyPairIds: string[];
-  /** 复制对类型，枚举值：DISK / INSTANCE / CFS。 */
+  /** 复制对类型，枚举值：INSTANCE。枚举值：INSTANCE： CVM复制对 */
   CopyPairType: string;
   /** 切换类型，支持WAIT和NOW */
   FailoverType: string;
+  /** 故障切换成功后是否自动关机生产端实例，默认为true */
+  StopSourceInstance?: boolean;
 }
 
 declare interface RunFailoverCopyPairsResponse {

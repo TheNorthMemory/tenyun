@@ -1120,6 +1120,12 @@ declare interface BillingAttribute {
 
 /** 调用来源 */
 declare interface CallSource {
+  /** 环境 UUID（来源于上报字段 channel_uuid）；公有云可为空，不能用 deployment_type 替代 */
+  DeploymentUuid?: string;
+  /** 空间 ID */
+  SpaceId?: string;
+  /** 空间名称；空间不存在或查询失败时为空 */
+  SpaceName?: string;
   /** 调用主体 ID，含义由 subject_type 决定（如 app_id、kb_id 等） */
   SubjectId?: string;
   /** 调用主体名称 */
@@ -1926,6 +1932,22 @@ declare interface DocUpdatePeriod {
   PeriodHour?: number;
 }
 
+/** 文档解析单次调用明细 */
+declare interface DocumentParseUsageDetail {
+  /** 应用 ID */
+  AppId?: string;
+  /** 消耗资源数（PU） */
+  ConsumptionPu?: number;
+  /** 文档 ID */
+  DocId?: string;
+  /** 文档解析方式：离线文档解析、实时文档解析。上报值 OfflineUpload 对应离线文档解析；RealtimeUpload、RealTimeDocParse 对应实时文档解析 */
+  DocUsageMethod?: string;
+  /** 知识库 ID */
+  KbId?: string;
+  /** 解析页数 */
+  ParsedPageCount?: string;
+}
+
 /** DuplexBilling */
 declare interface DuplexBilling {
   /** 枚举项枚举值描述UNKNOW0TOKEN1按tokenPAGE_COUNT2按页数TIMES3按次数TIMES_THOUSAND4按千次数SECOND5按时长CHARACTER6按字符数CHARACTER_THOUSAND7按千字符数SHEET8按张NUMBER9按个数 */
@@ -2662,30 +2684,34 @@ declare interface ModelStatus {
 
 /** 模型调用明细 */
 declare interface ModelUsageDetail {
+  /** API Key 别名或脱敏值；禁止返回明文密钥 */
+  ApiKeyDisplay?: string;
+  /** 计费方式；非模型 API 或历史数据可为未指定；后付费不产生 PU */
+  BillingType?: number;
   /** 调用类型，来源于计费 scene_billing（与 filter.call_type 对应） */
   CallType?: string;
+  /** 本次调用消耗 PU 量 */
+  ConsumptionPU?: number;
   /** 是否默认知识库，仅ResourceType=5（知识库容量）业务下有意义 */
   IsDefaultKB?: boolean;
   /** 模型名称 */
   ModelName?: string;
   /** MODEL 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数 */
   ResourceConsumptionList?: ResourceConsumption[];
-  /** 本次调用消耗 PU 量 */
-  ConsumptionPU?: number;
 }
 
 /** 模型资源用量聚合明细（MODEL 域专属） */
 declare interface ModelUsageSummary {
   /** 调用次数（业务调用维度的顶层计数） */
   CallCount?: number;
+  /** 模型消耗 PU 总量（聚合维度内的 PU 消耗之和） */
+  ConsumptionPU?: number;
   /** 是否默认知识库 */
   IsDefaultKB?: boolean;
   /** 模型名称，标识使用的 AI 模型 */
   ModelName?: string;
   /** MODEL 域消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_cache_*），label 为空表示 total_tokens；unit=PAGE_COUNT 表示模型消耗页数 */
   ResourceConsumptionList?: ResourceConsumption[];
-  /** 模型消耗 PU 总量（聚合维度内的 PU 消耗之和） */
-  ConsumptionPU?: number;
 }
 
 /** MsgRecord */
@@ -3024,11 +3050,11 @@ declare interface PluginSummary {
 
 /** 插件调用明细 */
 declare interface PluginUsageDetail {
-  /** 插件名称 */
+  /** 连接器与工具名称 */
   PluginName?: string;
-  /** PLUGIN 域单次调用的消耗计量列表（权威字段）：按单位+label 分项列出每类计量。unit=TOKEN 时 label 区分 Token 子类别（input/output/avg_*），label 为空表示 total_tokens */
+  /** 插件单次调用计量：TOKEN 总量用 total_tokens（兼容空 Label），输入/输出用 input/output；其余消耗量按 Unit 区分，PU 的 Label 为 total_pu */
   ResourceConsumptionList?: ResourceConsumption[];
-  /** 插件工具名（tool_name） */
+  /** 工具名称 */
   ToolName?: string;
 }
 
@@ -3908,6 +3934,8 @@ declare interface TriggerStatus {
 declare interface UsageDetail {
   /** 调用来源 */
   CallSource?: CallSource;
+  /** MODEL 类型的文档解析明细 */
+  DocumentParse?: DocumentParseUsageDetail;
   /** 计量 ID，用于对账/回溯 */
   DosageId?: string;
   /** 调用时间戳（Unix 秒） */
@@ -5587,7 +5615,7 @@ declare interface DescribeLatestReleaseResponse {
 }
 
 declare interface DescribeMetricOverviewListRequest {
-  /** 看板域，必填，决定返回哪个域的 KPI 数据枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量RESOURCE_TYPE_PLATFORM3平台功能用量RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限RESOURCE_TYPE_KB_CAPACITY5知识库容量RESOURCE_TYPE_USAGE_SUMMARY6用量汇总RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细） */
+  /** 看板域，必填，决定返回哪个域的 KPI 数据枚举项枚举值描述RESOURCE_TYPE_UNSPECIFIED0RESOURCE_TYPE_MODEL1模型用量RESOURCE_TYPE_PLUGIN2插件用量（预留，暂不支持）RESOURCE_TYPE_PLATFORM3平台功能用量（预留，暂不支持）RESOURCE_TYPE_MODEL_CONCURRENCY4模型并发超限（预留，暂不支持）RESOURCE_TYPE_KB_CAPACITY5知识库容量（预留，暂不支持）RESOURCE_TYPE_USAGE_SUMMARY6用量汇总（预留，暂不支持）RESOURCE_TYPE_RESOURCE_CONSUME7资源消耗（计费明细）（预留，暂不支持） */
   ResourceType: number;
   /** 查询时间范围（Unix 秒） */
   TimeRange: TimeRange;
@@ -5595,6 +5623,8 @@ declare interface DescribeMetricOverviewListRequest {
   ViewScope: ViewScope;
   /** 扩展过滤（resource_type=MODEL）。Filter 组合规则：多项 AND，同项 value_list OR。支持 Name：model_name（模型名）、user_id（用户ID）、space_id（空间ID）、resource_id/source_id（来源ID）、metric_source_type（METRIC_SOURCE_TYPE_* 枚举名或整数） */
   FilterList?: Filter[];
+  /** 空间 ID，用于服务端校验当前用户的空间权限；空间或应用视图需传入，企业视图可不传。VIEW_TYPE_SPACE 时应与 ViewScope.ScopeId 一致，VIEW_TYPE_APP 时须校验应用归属该空间；与 FilterList 的 space_id 同传须一致。服务端不得仅凭请求中的 SpaceId 授权 */
+  SpaceId?: string;
 }
 
 declare interface DescribeMetricOverviewListResponse {
@@ -5963,6 +5993,8 @@ declare interface DescribeUsageDetailListRequest {
   PageNumber?: number;
   /** 每页数量，最大 100 */
   PageSize?: number;
+  /** 空间 ID；空间或应用视图必传，由服务端校验空间权限 */
+  SpaceId?: string;
 }
 
 declare interface DescribeUsageDetailListResponse {
@@ -5987,6 +6019,8 @@ declare interface DescribeUsageSummaryListRequest {
   PageNumber?: number;
   /** 每页数量，最大 100 */
   PageSize?: number;
+  /** 空间 ID，空间或应用视图必传；服务端据登录态校验空间权限 */
+  SpaceId?: string;
 }
 
 declare interface DescribeUsageSummaryListResponse {

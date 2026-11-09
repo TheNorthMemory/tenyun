@@ -642,6 +642,8 @@ declare interface ResourceConfiguration {
   Memory?: string;
   /** 自定义磁盘大小枚举值：1Gi： 1Gi5Gi： 5Gi10Gi： 10Gi20Gi： 20Gi */
   Storage?: string | null;
+  /** 关联的GPU资源组ID */
+  GPUResourceGroupId?: string;
 }
 
 /** 沙箱实例结构体信息 */
@@ -1379,6 +1381,8 @@ declare interface DescribePreCacheImageTaskRequest {
   ImageDigest?: string;
   /** 镜像预热ID，只能ID或三元组（Image、ImageDigest、ImageRegistrytype）二选一查询 */
   PreCacheImageId?: string;
+  /** 镜像预热类型枚举值：image： 镜像预热image_volume： 镜像卷预热默认值：image */
+  PreCacheType?: string;
 }
 
 declare interface DescribePreCacheImageTaskResponse {
@@ -1907,6 +1911,8 @@ declare interface StartSandboxInstanceRequest {
   AuthMode?: string;
   /** 沙箱元数据 */
   Metadata?: MetadataVar[];
+  /** 实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果。 */
+  StartMode?: string;
 }
 
 declare interface StartSandboxInstanceResponse {

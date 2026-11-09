@@ -486,6 +486,10 @@ declare interface ContractReviewWebUrlOption {
   DisableReviewAgain?: boolean;
   /** 禁用二维码分享。默认 false，设置为 true 会隐藏界面上的分享二维码 */
   DisableWxQrcode?: boolean;
+  /** 禁用忽略风险。默认false，设置为true，会根据用户合同审查忽略风险权限点决定是否禁用忽略选项。 */
+  DisableIgnoreRisk?: boolean;
+  /** 关闭原文修改。默认false，设置为true，根据用户合同审查修订操作权限点决定能否修改、一键修订原文。 */
+  DisableRevisedRisk?: boolean;
 }
 
 /** 合同摘要 */

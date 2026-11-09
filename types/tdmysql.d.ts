@@ -1962,6 +1962,48 @@ declare interface ModifyAutoRenewFlagResponse {
   RequestId?: string;
 }
 
+declare interface ModifyDBInstanceRequest {
+  /** 实例ID */
+  InstanceId: string;
+  /** 是否仅做预检查，不实际执行变配。true: 仅返回变配计划和预检查结果；false: 实际执行变配（默认） */
+  DryRun: boolean;
+  /** 对等节点CPU核数，不传则保持当前值不变 */
+  HybridNodeCpu?: number;
+  /** 对等节点内存大小，单位GB，不传则保持当前值不变 */
+  HybridNodeMem?: number;
+  /** 对等节点数量，不传则保持当前值不变 */
+  HybridNodeNum?: number;
+  /** 对等节点磁盘容量，单位GB，不传则保持当前值不变 */
+  Disk?: number;
+  /** 存储类型，可选值：CLOUD_HSSD（增强型SSD云硬盘）、CLOUD_TCS（本地盘）、CLOUD_BSSD（通用型SSD云硬盘），不传则保持当前值不变 */
+  StorageType?: string;
+  /** 规格编码，如 4c8g、16c32g 等 */
+  SpecCode?: string;
+  /** 目标可用区列表，不传则保持当前值不变 */
+  Zones?: string[];
+  /** 可用区模式，1: 单可用区，3: 多可用区主AZ模式 */
+  AZMode?: number;
+  /** 主可用区，AZMode传3时生效 */
+  PrimaryAZ?: string;
+  /** 全功能型副本数，取值范围1-3 */
+  FullReplications?: number;
+}
+
+declare interface ModifyDBInstanceResponse {
+  /** 异步任务ID，DryRun=false时返回。根据此ID可以调用查询任务接口获取任务状态 */
+  FlowId?: number | null;
+  /** 订单号，预付费场景下返回 */
+  DealName?: string | null;
+  /** 是否原地变配，DryRun=true时返回 */
+  IsInPlaceModification?: boolean | null;
+  /** 是否迁移变配，DryRun=true时返回 */
+  IsMigrateModification?: boolean | null;
+  /** 变配计划描述，DryRun=true时返回，描述将执行的变配子流程编排 */
+  ModifyPlan?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDBInstanceSecurityGroupsRequest {
   /** 实例ID。 */
   InstanceId: string;
@@ -2275,6 +2317,8 @@ declare interface Tdmysql {
   IsolateDBInstance(data: IsolateDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<IsolateDBInstanceResponse>;
   /** 修改自动续费标志 {@link ModifyAutoRenewFlagRequest} {@link ModifyAutoRenewFlagResponse} */
   ModifyAutoRenewFlag(data: ModifyAutoRenewFlagRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoRenewFlagResponse>;
+  /** 通用变配实例 {@link ModifyDBInstanceRequest} {@link ModifyDBInstanceResponse} */
+  ModifyDBInstance(data: ModifyDBInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceResponse>;
   /** 修改云数据库安全组 {@link ModifyDBInstanceSecurityGroupsRequest} {@link ModifyDBInstanceSecurityGroupsResponse} */
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例VPC端口 {@link ModifyDBInstanceVPortRequest} {@link ModifyDBInstanceVPortResponse} */

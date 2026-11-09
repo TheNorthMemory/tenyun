@@ -14712,13 +14712,13 @@ declare namespace V20180717 {
   }
 
   interface UpdateAigcApiTokenRequest {
-    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
-    SubAppId: number;
     /** 要更新Api Key */
     ApiToken: string;
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
     /** Merge（默认，对 ExtInfo JSON 按顶层 key 合并）、Overwrite（直接覆盖） */
     ActionType?: string;
-    /** token 的扩展信息 */
+    /** ip白名单和模型白名单在ExtInfo上，用json保存，分别字段是（1）ip白名单"ip": {"127.0.0.1":true}不开启"ip": {}多组 {"'11.12.112.90":true,"15.12.112.90":true}（2）模型白名单"model": {"deepseek-v4-pro":true}不开启"model": {}（3）名称"name": "test" */
     ExtInfo?: string;
   }
 
@@ -15293,7 +15293,7 @@ declare interface Vod {
   TextToSpeechAsync(data: V20180717.TextToSpeechAsyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.TextToSpeechAsyncResponse>;
   /** 同步语音合成 {@link V20180717.TextToSpeechSyncRequest} {@link V20180717.TextToSpeechSyncResponse} */
   TextToSpeechSync(data: V20180717.TextToSpeechSyncRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.TextToSpeechSyncResponse>;
-  /** 更新AIGC API Token {@link V20180717.UpdateAigcApiTokenRequest} {@link V20180717.UpdateAigcApiTokenResponse} */
+  /** 更新 AIGC API Token {@link V20180717.UpdateAigcApiTokenRequest} {@link V20180717.UpdateAigcApiTokenResponse} */
   UpdateAigcApiToken(data: V20180717.UpdateAigcApiTokenRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateAigcApiTokenResponse>;
   /** 更新音色信息 {@link V20180717.UpdateVoiceRequest} {@link V20180717.UpdateVoiceResponse} */
   UpdateVoice(data: V20180717.UpdateVoiceRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.UpdateVoiceResponse>;

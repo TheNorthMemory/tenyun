@@ -212,6 +212,24 @@ declare interface AndroidInstanceLabelDetail {
   CreateTime?: string;
 }
 
+/** 安卓实例MCP Token */
+declare interface AndroidInstanceMCPToken {
+  /** 内部 ID，格式 k_ + 16 位 hex */
+  TokenId?: string;
+  /** ROOT / USER（大小写敏感），默认 USER。ROOT 可访问该 AppId 下全部实例 */
+  Role?: string;
+  /** 备注名 */
+  TokenName?: string;
+  /** USER 角色可访问的实例白名单 */
+  AllowedInstanceIds?: string[] | null;
+  /** 创建时间参数格式：ISO8601 字符串； */
+  CreateTime?: string;
+  /** 过期时间参数格式：ISO8601 字符串；永不过期时为空串 */
+  ExpiresTime?: string;
+  /** 或 EXPIRED；EXPIRED 由 ExpiresTime 推导。已删除的不出现在列表里枚举值：ACTIVE： 正常可用的EXPIRED： 过期的 */
+  Status?: string;
+}
+
 /** 安卓实例属性 */
 declare interface AndroidInstanceProperty {
   /** 属性键 */
@@ -525,9 +543,21 @@ declare interface CreateAndroidInstanceLabelResponse {
 }
 
 declare interface CreateAndroidInstanceMCPTokenRequest {
+  /** ROOT / USER（大小写敏感），默认 USER。ROOT 可访问该 AppId 下全部实例枚举值：ROOT： 可访问该 AppId 下全部实例USER： 可访问本角色实例白名单内的实例默认值：USER */
+  Role?: string;
+  /** 有效期（秒）；0 或不传表示永不过期（负值等同不过期） */
+  ExpireSeconds?: number;
+  /** 备注名 */
+  TokenName?: string;
+  /** USER 角色可访问的实例白名单 */
+  AllowedInstanceIds?: string[];
 }
 
 declare interface CreateAndroidInstanceMCPTokenResponse {
+  /** 内部 ID，格式 k_ + 16 位 hex */
+  TokenId?: string;
+  /** 明文 token，格式 mcpk_ + 48 位 hex。服务端只存 sha256，只返回这一次 */
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -783,6 +813,8 @@ declare interface DeleteAndroidInstanceLabelResponse {
 }
 
 declare interface DeleteAndroidInstanceMCPTokenRequest {
+  /** 内部 ID，格式 k_ + 16 位 hex */
+  TokenId: string;
 }
 
 declare interface DeleteAndroidInstanceMCPTokenResponse {
@@ -885,9 +917,17 @@ declare interface DescribeAndroidInstanceLabelsResponse {
 }
 
 declare interface DescribeAndroidInstanceMCPTokensRequest {
+  /** 偏移量，默认为 0 */
+  Offset?: number;
+  /** 本次请求单次返回数据条数，用于分页控制取值范围：[0, 100]默认值：10 */
+  Limit?: number;
 }
 
 declare interface DescribeAndroidInstanceMCPTokensResponse {
+  /** Token列表 */
+  Tokens?: AndroidInstanceMCPToken[] | null;
+  /** Token总数单位：个 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1381,9 +1421,15 @@ declare interface RebootAndroidInstancesResponse {
 }
 
 declare interface RenewAndroidInstanceMCPTokenRequest {
+  /** 内部 ID，格式 k_ + 16 位 hex */
+  TokenId: string;
+  /** 有效期（秒），必须大于 0单位：秒 */
+  ExpireSeconds: number;
 }
 
 declare interface RenewAndroidInstanceMCPTokenResponse {
+  /** 过期时间，ISO8601 字符串；token 永不过期时为空串 */
+  ExpiresTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1768,7 +1814,7 @@ declare interface Gs {
   /** 删除安卓实例标签 {@link DeleteAndroidInstanceLabelRequest} {@link DeleteAndroidInstanceLabelResponse} */
   DeleteAndroidInstanceLabel(data: DeleteAndroidInstanceLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceLabelResponse>;
   /** 删除安卓实例 MCP token {@link DeleteAndroidInstanceMCPTokenRequest} {@link DeleteAndroidInstanceMCPTokenResponse} */
-  DeleteAndroidInstanceMCPToken(data?: DeleteAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceMCPTokenResponse>;
+  DeleteAndroidInstanceMCPToken(data: DeleteAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAndroidInstanceMCPTokenResponse>;
   /** 查询安卓应用信息 {@link DescribeAndroidAppsRequest} {@link DescribeAndroidAppsResponse} */
   DescribeAndroidApps(data?: DescribeAndroidAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAndroidAppsResponse>;
   /** 查询安卓实例应用 {@link DescribeAndroidInstanceAppsRequest} {@link DescribeAndroidInstanceAppsResponse} */
@@ -1844,7 +1890,7 @@ declare interface Gs {
   /** 重启安卓实例 {@link RebootAndroidInstancesRequest} {@link RebootAndroidInstancesResponse} */
   RebootAndroidInstances(data: RebootAndroidInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<RebootAndroidInstancesResponse>;
   /** 续期安卓实例 MCP token {@link RenewAndroidInstanceMCPTokenRequest} {@link RenewAndroidInstanceMCPTokenResponse} */
-  RenewAndroidInstanceMCPToken(data?: RenewAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAndroidInstanceMCPTokenResponse>;
+  RenewAndroidInstanceMCPToken(data: RenewAndroidInstanceMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAndroidInstanceMCPTokenResponse>;
   /** 续期安卓实例访问Token {@link RenewAndroidInstancesAccessTokenRequest} {@link RenewAndroidInstancesAccessTokenResponse} */
   RenewAndroidInstancesAccessToken(data: RenewAndroidInstancesAccessTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewAndroidInstancesAccessTokenResponse>;
   /** 重置安卓实例 {@link ResetAndroidInstancesRequest} {@link ResetAndroidInstancesResponse} */

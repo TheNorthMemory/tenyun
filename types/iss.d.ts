@@ -1266,6 +1266,38 @@ declare interface VLPlanResultDetailInfo {
   UpdatedAt?: string;
 }
 
+/** 视觉理解计划结果信息 */
+declare interface VLPlanResultInfo {
+  /** 分析结果 ID */
+  VLPlanResultId?: string;
+  /** 所属分析计划 ID */
+  VLPlanId?: string;
+  /** 计划名称 */
+  VLPlanName?: string;
+  /** 通道 ID */
+  ChannelId?: string;
+  /** 通道名称 */
+  ChannelName?: string;
+  /** 分析模式：image=图片模式，video=视频模式（预留） */
+  AnalysisMode?: string;
+  /** 分析时间戳（秒） */
+  VLResultTimestamp?: number;
+  /** 截图时间戳 */
+  SnapshotTimestamp?: number;
+  /** 视频开始时间戳 */
+  VideoStartTimestamp?: number;
+  /** 视频结束时间戳 */
+  VideoEndTimestamp?: number;
+  /** 视频模式计费帧数 */
+  BilledFrameCount?: number;
+  /** AI 分析结果内容（JSON 字符串） */
+  Content?: string;
+  /** 创建时间，格式 2006-01-02 15:04:05 */
+  CreatedAt?: string;
+  /** 更新时间，格式 2006-01-02 15:04:05 */
+  UpdatedAt?: string;
+}
+
 /** 视觉理解计划源素材 URL 信息 */
 declare interface VLPlanResultSnapshotImageUrlInfo {
   /** 分析结果 ID */
@@ -2608,6 +2640,32 @@ declare interface ListTasksResponse {
   RequestId?: string;
 }
 
+declare interface ListVLPlanResultsRequest {
+  /** 开始时间戳（秒），不早于 30 天前 */
+  Start: number;
+  /** 结束时间戳（秒），不超过当前时间，时间范围不超过 30 天 */
+  End: number;
+  /** 分析计划 ID，不传则查询所有计划的结果 */
+  VLPlanId?: string;
+  /** 通道 ID 列表，支持多值（英文逗号分隔），不传则查询所有通道的结果 */
+  ChannelIds?: string[];
+  /** 页码，默认 1 */
+  PageNumber?: number;
+  /** 每页数量，默认 20，最大 200 */
+  PageSize?: number;
+  /** 分析模式枚举值：image： 图片模式video： 视频模式 */
+  AnalysisMode?: string;
+}
+
+declare interface ListVLPlanResultsResponse {
+  /** 结果列表 */
+  Data?: VLPlanResultInfo[];
+  /** 总数量 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListVLPlansRequest {
   /** 计划名称，精确匹配 */
   Name?: string;
@@ -3095,6 +3153,8 @@ declare interface Iss {
   ListSubTasks(data: ListSubTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListSubTasksResponse>;
   /** 查询任务列表 {@link ListTasksRequest} {@link ListTasksResponse} */
   ListTasks(data?: ListTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListTasksResponse>;
+  /** 获取视觉理解计划结果列表 {@link ListVLPlanResultsRequest} {@link ListVLPlanResultsResponse} */
+  ListVLPlanResults(data: ListVLPlanResultsRequest, config?: AxiosRequestConfig): AxiosPromise<ListVLPlanResultsResponse>;
   /** 获取视觉理解计划列表 {@link ListVLPlansRequest} {@link ListVLPlansResponse} */
   ListVLPlans(data?: ListVLPlansRequest, config?: AxiosRequestConfig): AxiosPromise<ListVLPlansResponse>;
   /** 获取视觉理解模板列表 {@link ListVLTemplatesRequest} {@link ListVLTemplatesResponse} */

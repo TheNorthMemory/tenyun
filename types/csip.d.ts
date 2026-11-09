@@ -27519,7 +27519,7 @@ declare interface VerifyDspmAssetLoginCodeResponse {
   RequestId?: string;
 }
 
-/** {@link Csip 云安全一体化平台} */
+/** {@link Csip 云安全中心} */
 declare interface Csip {
   (): Versions;
   /** 接入AI助手SMTP邮箱信息 {@link AccessAIAnalysisSMTPRequest} {@link AccessAIAnalysisSMTPResponse} */

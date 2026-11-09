@@ -3586,7 +3586,7 @@ declare interface DescribeExtractDocAgentJobRequest {
 declare interface DescribeExtractDocAgentJobResponse {
   /** 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。 */
   Angle?: number;
-  /** 配置结构化文本信息。 */
+  /** 配置结构化文本信息。AgentType为0按照这个结构返回 */
   StructuralList?: GroupInfo[];
   /** 任务执行错误码。当任务状态不为 FAIL 时，该值为""。 */
   ErrorCode?: string;
@@ -3596,6 +3596,8 @@ declare interface DescribeExtractDocAgentJobResponse {
   JobStatus?: string;
   /** 思考过程 */
   ThoughtContent?: string;
+  /** 定制的json结构字符串，主要用于快速定制输出的agent输出结构。推荐用于POC场景 */
+  AgentResultJson?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5309,6 +5311,8 @@ declare interface SubmitExtractDocAgentJobRequest {
   FileEndPageNumber?: number;
   /** model_hunyuan:选择混元底座视觉大模型精调抽取任务 model_youtu：选择优图底座多模态大模型精调抽取任务 */
   ModelConfig?: string;
+  /** agent支持的类型枚举,不同类型输出结果不一样，默认为00:表示标准抽取Agent1:表示合同协议分类+抽取+审核Agent */
+  AgentType?: number;
 }
 
 declare interface SubmitExtractDocAgentJobResponse {
