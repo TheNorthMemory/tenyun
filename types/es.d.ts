@@ -461,6 +461,18 @@ declare namespace V20180416 {
     IndexUuid?: string;
   }
 
+  /** 批量索引操作的逐项结果，用于 DeleteIndex（批量删除）和 ModifyIndexStatus（批量关闭/打开索引）的返回值。 */
+  interface BatchIndexResult {
+    /** 索引名 */
+    IndexName?: string;
+    /** 该项是否成功 */
+    Success?: boolean;
+    /** 失败时的错误码，成功时不返回 */
+    ErrCode?: number;
+    /** 失败时的错误信息，成功时不返回 */
+    ErrMsg?: string;
+  }
+
   /** 集群维度视图数据 */
   interface ClusterView {
     /** 集群健康状态 */
@@ -1069,6 +1081,8 @@ declare namespace V20180416 {
     SubEventName?: string;
     /** 事件范围枚举值：0： 实例级1： 账号级 */
     EventScope?: number;
+    /** 展开详情 */
+    ExpandDetail?: string;
   }
 
   /** 事件类型详情结构 */
@@ -1149,6 +1163,22 @@ declare namespace V20180416 {
     AppId?: number | null;
     /** 索引文档数 */
     IndexDocs?: number | null;
+    /** 当前字段数 */
+    FieldCount?: number;
+    /** 当前上限 */
+    FieldLimit?: number;
+    /** 使用率 */
+    FieldUsageRatio?: string;
+    /** 占用分片数 */
+    OccupiedShards?: number;
+    /** 索引开启状态 */
+    IndexOpenStatus?: string;
+    /** 索引字段数硬上限 */
+    FieldLimitHardCap?: number;
+    /** 上限可调整最小值 */
+    FieldLimitMin?: number;
+    /** 剩余调整次数 */
+    FieldAutoAdjustRemaining?: number;
   }
 
   /** 索引自治字段 */
@@ -1201,6 +1231,10 @@ declare namespace V20180416 {
     NumberOfReplicas?: string | null;
     /** 索引刷新频率 */
     RefreshInterval?: string | null;
+    /** 动态字段识别开关 */
+    Dynamic?: string;
+    /** 索引字段数上限 */
+    TotalFieldsLimit?: string;
   }
 
   /** 实例详细信息 */
@@ -2984,9 +3018,19 @@ declare namespace V20180416 {
     BackingIndexName?: string;
     /** 索引生命阶段 */
     IndexPhrase?: string;
+    /** 索引列表 */
+    IndexNames?: string[];
   }
 
   interface DeleteIndexResponse {
+    /** 索引数量 */
+    TotalCount?: number;
+    /** 成功数量 */
+    SuccessCount?: number;
+    /** 失败数量 */
+    FailedCount?: number;
+    /** 无 */
+    Results?: BatchIndexResult[];
     /** 唯一请求 ID，每次请求都会返回。 */
     RequestId?: string;
   }
@@ -3228,6 +3272,8 @@ declare namespace V20180416 {
     IndexStatusList?: string[];
     /** 排序顺序，支持asc、desc，默认为desc 数据格式"asc","desc" */
     Order?: string;
+    /** 索引名称过滤列表。仅返回列表中指定的索引，常用于事件中心跳转时筛选受影响的索引；不填返回全部索引。单次最多支持100个索引名称。 */
+    FilterIndexNames?: string[];
   }
 
   interface DescribeIndexListResponse {
@@ -4306,7 +4352,7 @@ declare namespace V20180416 {
     NodeNum?: number;
     /** ES配置项（JSON格式字符串） */
     EsConfig?: string;
-    /** 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号） */
+    /** 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&amp;^*+=_:;,.?]的特殊符号） */
     Password?: string;
     /** 可视化组件（Kibana、Cerebro）的公网访问策略 */
     EsAcl?: EsAcl;
@@ -4392,6 +4438,8 @@ declare namespace V20180416 {
     AutoScaleDiskDeleteNodeTypeList?: string[];
     /** 其他附加配置，jvm或者yml */
     OtherConfig?: OtherConfig;
+    /** 滚动升降配时是否等待集群恢复Green再滚动下一个节点 */
+    WaitGreen?: string;
   }
 
   interface UpdateInstanceResponse {

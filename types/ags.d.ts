@@ -430,6 +430,36 @@ declare interface EventInfo {
   Timestamp?: string;
 }
 
+/** 用于描述事件中心中的一条事件记录，包含事件标识、所属资源、事件类型、级别、发生时间、原因及业务扩展信息。 */
+declare interface EventItem {
+  /** 事件唯一标识，用于区分事件及识别重复投递。聚合模式下为该聚合结果代表事件的标识。 */
+  EventId?: string;
+  /** 事件来源。 */
+  Source?: string;
+  /** 事件关联的对象类型。 */
+  ObjectType?: string;
+  /** 事件关联的对象 ID。 */
+  ObjectId?: string;
+  /** 事件级别。Normal 表示正常事件，Warning 表示告警事件。 */
+  EventLevel?: string;
+  /** 事件类型。 */
+  EventType?: string;
+  /** 事件原因标识，无原因信息时不返回。例如 Manual 表示通过停止接口主动停止，包括人工、脚本或 SDK 调用，不代表一定由人工操作。 */
+  Reason?: string;
+  /** 事件的说明文本。建议使用 EventType 和 Reason 判断事件类型及原因，不依赖说明文本进行业务判断。 */
+  Message?: string;
+  /** 事件扩展信息，以 JSON 字符串返回。当前 Sandbox 事件包含 ToolId、ToolType，以及可选的 ToolName。调用方需解析 JSON 字符串后读取扩展字段。 */
+  Extensions?: string;
+  /** 事件发生时间，RFC3339 格式。仅 Raw 模式返回。 */
+  OccurredAt?: string;
+  /** 当前查询范围内，该聚合结果包含的去重事件数。仅 Aggregate 模式返回。当前生命周期事件逐条展示，该值为 1。 */
+  Count?: number;
+  /** 当前查询范围内，该聚合结果中最早的事件发生时间，RFC3339 格式。仅 Aggregate 模式返回，不代表该对象历史上的首次事件时间。 */
+  FirstOccurredAt?: string;
+  /** 当前查询范围内，该聚合结果中最近的事件发生时间，RFC3339 格式。仅 Aggregate 模式返回，不代表该对象此后不会再发生事件。 */
+  LastOccurredAt?: string;
+}
+
 /** 多模态内容片段信息 */
 declare interface EventPartInfo {
   /** 文本内容，最大长度 8192 字符。 */
@@ -1322,6 +1352,38 @@ declare interface DescribeDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEventCenterEventsRequest {
+  /** 事件筛选条件，用于按事件来源、对象、类型、级别及工具等信息查询事件。入参限制：最多支持 12 个筛选条件，同名筛选条件不可重复；每个条件支持 1～20 个值，每个值非空且不超过 256 字节。支持的筛选字段：Source、ObjectType、ObjectId、EventType、EventLevel、Reason、EventId、ToolId、ToolType、Message。 */
+  Filters?: Filter[];
+  /** 查询开始时间，包含该时间点。参数格式：RFC3339 格式，例如 2026-10-23T13:28:00Z。入参限制：必须早于 EndTime，且不能早于当前时间前 7 天。默认值：不传时默认为 EndTime 前 1 小时。 */
+  StartTime?: string;
+  /** 查询结束时间，不包含该时间点。参数格式：RFC3339 格式，例如 2026-10-23T14:28:00Z。入参限制：必须晚于 StartTime，不应晚于当前时间。默认值：不传时默认为当前时间。查询范围为 [StartTime, EndTime)。 */
+  EndTime?: string;
+  /** 分页偏移量。取值范围：[0, 10000]默认值：0Raw 模式按去重后的事件分页，Aggregate 模式按聚合结果分页。 */
+  Offset?: number;
+  /** 单次返回的最大结果条数。取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 事件结果的时间排序方向。枚举值：Asc： 按时间升序排列，较早的事件在前。Desc： 按时间降序排列，较新的事件在前。默认值。默认值：DescRaw 模式按事件发生时间排序；Aggregate 模式按聚合结果最近发生时间排序。 */
+  Order?: string;
+  /** 事件查询模式。枚举值：Raw： 明细模式，返回去重后的事件明细。默认值。Aggregate： 聚合模式，返回聚合结果及事件数量、首次和最近发生时间；生命周期事件仍逐条展示。默认值：RawRaw 返回去重后的事件明细；Aggregate 返回聚合结果。 */
+  Mode?: string;
+}
+
+declare interface DescribeEventCenterEventsResponse {
+  /** 本次查询返回的事件明细或聚合结果列表。无匹配结果时返回空数组。 */
+  Events?: EventItem[];
+  /** 符合查询条件的结果总数，不受 Offset 和 Limit 影响。Raw 模式为去重后的事件总数，Aggregate 模式为聚合结果总数。 */
+  TotalCount?: number;
+  /** 本次查询实际使用的开始时间，RFC3339 格式，包含该时间点。 */
+  StartTime?: string;
+  /** 本次查询实际使用的结束时间，RFC3339 格式，不包含该时间点。 */
+  EndTime?: string;
+  /** 本次查询实际使用的模式。枚举值：Raw： 明细模式。Aggregate： 聚合模式。 */
+  Mode?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEventsRequest {
   /** 会话所属空间 ID。 */
   SpaceId: string;
@@ -1911,7 +1973,7 @@ declare interface StartSandboxInstanceRequest {
   AuthMode?: string;
   /** 沙箱元数据 */
   Metadata?: MetadataVar[];
-  /** 实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果。 */
+  /** 实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果，当前仅支持WAA沙箱和GPU沙箱。 */
   StartMode?: string;
 }
 
@@ -2105,6 +2167,8 @@ declare interface Ags {
   DescribeDeployment(data: DescribeDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentResponse>;
   /** 查询 Deployment 列表 {@link DescribeDeploymentListRequest} {@link DescribeDeploymentListResponse} */
   DescribeDeploymentList(data?: DescribeDeploymentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentListResponse>;
+  /** 查询事件中心事件列表 {@link DescribeEventCenterEventsRequest} {@link DescribeEventCenterEventsResponse} */
+  DescribeEventCenterEvents(data?: DescribeEventCenterEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventCenterEventsResponse>;
   /** 查询事件列表 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
   /** 查询镜像预热列表 {@link DescribePreCacheImageListRequest} {@link DescribePreCacheImageListResponse} */

@@ -1306,6 +1306,14 @@ declare interface TranscriptionParams {
   TurnDetection?: TurnDetection;
 }
 
+/** 转录服务订阅用户参数 */
+declare interface TranscriptionSubscribeParam {
+  /** 转录用户白名单，为空或不填表示转录所有主播音频，填具体值表示转录指定主播音频。 使用黑白名单时，同一个用户同时在黑白名单时，以黑名单为主。 */
+  SubscribeList?: TranscriptionUserInfoParams[];
+  /** 转录用户黑名单，为空或不填表示无黑名单，填具体值表示不转录指定主播音频。 同一个用户同时在黑白名单时，以黑名单为主。 */
+  UnSubscribeList?: TranscriptionUserInfoParams[];
+}
+
 /** 转录用户信息 */
 declare interface TranscriptionUserInfoParams {
   /** 用户ID。 */
@@ -3038,6 +3046,28 @@ declare interface ModifyCloudSliceTaskResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCloudTranscriptionRequest {
+  /** TRTC的SdkAppId，和转录的房间所对应的SdkAppId相同。 */
+  SdkAppId: number;
+  /** 转录任务的唯一Id，在启动转录成功后会返回。 */
+  TaskId: string;
+  /** 客户保证同一个任务，每次更新请求中的SequenceNumber递增，防止请求乱序。 */
+  SequenceNumber: number;
+  /** 转录订阅用户信息，包括白名单和黑名单。 */
+  SubscribeUserInfo?: TranscriptionSubscribeParam;
+  /** 转录服务翻译使用的参数。 */
+  TranslationParam?: TranslationParam;
+  /** 转录服务TTS使用的参数。 */
+  TTSParam?: TTSParam[];
+}
+
+declare interface ModifyCloudTranscriptionResponse {
+  /** 转录服务分配的任务 ID。任务 ID 是对一次转录生命周期过程的唯一标识，结束转录时会失去意义。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyPictureRequest {
   /** 图片id */
   PictureId: number;
@@ -3839,6 +3869,8 @@ declare interface Trtc {
   ModifyCloudRecording(data: ModifyCloudRecordingRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudRecordingResponse>;
   /** 修改云端切片任务 {@link ModifyCloudSliceTaskRequest} {@link ModifyCloudSliceTaskResponse} */
   ModifyCloudSliceTask(data: ModifyCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudSliceTaskResponse>;
+  /** 更新云端转录任务 {@link ModifyCloudTranscriptionRequest} {@link ModifyCloudTranscriptionResponse} */
+  ModifyCloudTranscription(data: ModifyCloudTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudTranscriptionResponse>;
   /** 修改图片 {@link ModifyPictureRequest} {@link ModifyPictureResponse} */
   ModifyPicture(data: ModifyPictureRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPictureResponse>;
   /** 修改AI对话任务 {@link ModifyVoiceConversationRequest} {@link ModifyVoiceConversationResponse} */

@@ -3586,7 +3586,7 @@ declare interface PartialModule {
 
 /** 套餐信息 */
 declare interface Plan {
-  /** 套餐类型。取值有：plan-trial: 试用版套餐；plan-personal: 个人版套餐；plan-basic: 基础版套餐；plan-standard: 标准版套餐；plan-enterprise-v2: 企业版套餐；plan-enterprise-model-a: 企业版 Model A 套餐。plan-enterprise: 旧企业版套餐。 */
+  /** 套餐类型。取值有：plan-trial: 试用版套餐；plan-personal: 个人版套餐；plan-basic: 基础版套餐；plan-standard: 标准版套餐；plan-enterprise-v2: 企业版套餐；plan-enterprise-model-a: 企业版 Model A 套餐；plan-enterprise: 旧企业版套餐；plan-makers-pro: Makers 专业版套餐；plan-makers-business: Makers 商业版套餐；枚举值：plan-trial： 试用版套餐plan-personal： 个人版套餐plan-basic： 基础版套餐plan-standard： 标准版套餐plan-enterprise-v2： 企业版套餐plan-enterprise-model-a： 企业版 Model A 套餐plan-enterprise： 旧企业版套餐plan-makers-pro： Makers 专业版套餐plan-makers-business： Makers 商业版套餐 */
   PlanType?: string;
   /** 套餐 ID。形如 edgeone-2y041pblwaxe。 */
   PlanId?: string;
@@ -3606,6 +3606,8 @@ declare interface Plan {
   VAUCapacity?: number;
   /** 套餐内内容加速流量规格，单位：字节。 */
   AccTrafficCapacity?: number;
+  /** 套餐内客户端认证流量规格，单位：字节。 */
+  ClientAuthTrafficCapacity?: number;
   /** 套餐内智能加速流量规格，单位：字节。 */
   SmartTrafficCapacity?: number;
   /** 套餐内DDoS防护流量规格，单位：字节。 */

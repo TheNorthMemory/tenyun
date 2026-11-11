@@ -292,6 +292,10 @@ declare interface ApmApplicationConfigView {
   ResponseDurationWarningThreshold?: number;
   /** 是否使用探针默认熔断阈值 */
   UseDefaultFuseConfig?: boolean;
+  /** 是否开启JNDI注入检测 */
+  IsJNDIInjectionAnalysis?: string;
+  /** 是否开启JNI注入检测 */
+  IsJNIInjectionAnalysis?: string;
 }
 
 /** 展示apm业务系统与其他云产品关联关系返回体 */
@@ -552,16 +556,18 @@ declare interface AutoProfilingConfig {
 declare interface CVMMeta {
   /** 地域 */
   Region?: string | null;
-  /** 实例ID */
+  /** 业务系统ID */
   InstanceID?: string | null;
+  /** 业务系统ID */
+  InstanceId?: string | null;
 }
 
 /** 接口参数列表 */
 declare interface ChartData {
   /** 接口参数id列表 */
-  Series: Series[];
+  Series?: Series[];
   /** 接口参数列表 */
-  YAxis: YAxis[];
+  YAxis?: YAxis[];
 }
 
 /** 包含了视图中节点组件类型的数量 */
@@ -734,6 +740,10 @@ declare interface ServiceDetail {
   ErrRateThreshold?: number | null;
   /** 响应时间预警阈值（ms），用于判断应用健康状态为"黄色"单位：ms */
   ResponseDurationWarningThreshold?: number | null;
+  /** 用户appid */
+  AppId?: string;
+  /** 主账号uin */
+  CreateUin?: string;
 }
 
 /** 应用对应的链路上下游应用集合 */
@@ -942,6 +952,8 @@ declare interface TopologyNode {
   ReqCnt?: number;
   /** 消息队列消费者视角的调用次数 */
   ConsumerReqCnt?: number;
+  /** 应用 ID */
+  ServiceID?: string;
 }
 
 /** 拓扑图应用节点状态 */
@@ -981,9 +993,9 @@ declare interface TraceOverview {
 /** 接口列表 */
 declare interface YAxis {
   /** 接口列表 */
-  Keys: string[];
+  Keys?: string[];
   /** 接口列表 */
-  Data: string[];
+  Data?: string[];
 }
 
 declare interface CreateApmInstanceRequest {

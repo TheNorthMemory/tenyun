@@ -244,6 +244,12 @@ declare interface HPCCluster {
   VPCCIDRBlock?: string;
   /** 集群确认交付截止日期 */
   ConfirmDeadline?: string;
+  /** 状态原因 */
+  StatusReason?: string;
+  /** 隔离时间 */
+  IsolateTime?: string;
+  /** 消息 */
+  Message?: string;
 }
 
 /** HPC实例硬盘 */
@@ -334,6 +340,8 @@ declare interface HPCNode {
   QueueName?: string;
   /** 节点状态。取值范围：IDLE 空闲DOWN 节点下线MIXED 节点部分使用ALLOC 节点完全分配DRAIN 排空，不接受新任务 */
   Status?: string;
+  /** 是否存量节点 */
+  IsExistingNode?: boolean;
 }
 
 /** 运行参数模板 */

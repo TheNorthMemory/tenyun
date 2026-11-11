@@ -56,13 +56,13 @@ declare interface ChargePrepaid {
 
 /** chc部署网络minos引导配置。 */
 declare interface ChcDeployExtraConfig {
-  /** minos类型。是使用腾讯云的minios，还是客户自己的minios。 */
+  /** MiniOS类型。是使用腾讯云的MiniOS，还是客户私有的MiniOS。枚举值：public： 腾讯云的MiniOS。private： 客户私有的MiniOS。 */
   MiniOsType: string;
-  /** 服务器的架构和启动方式。取值为x86_legacy, arm_uefi。 */
+  /** 服务器的架构和启动方式。枚举值：x86_legacy： X86架构、Legacy启动模式。x86_uefi： X86架构、UEFI启动模式。arm_uefi： ARM架构，UEFI启动模式。 */
   BootType: string;
   /** PXE使用的引导文件。默认为pxelinux.0。 */
   BootFile?: string;
-  /** tftp服务器的ip地址。 */
+  /** TFTP服务器的IP地址。 */
   NextServerAddress?: string;
 }
 
@@ -1301,18 +1301,20 @@ declare interface AssociateSecurityGroupsResponse {
 }
 
 declare interface ConfigureChcAssistVpcRequest {
-  /** CHC物理服务器的实例Id。 */
+  /** CHC物理服务器ID。 */
   ChcIds: string[];
   /** 带外网络信息。 */
   BmcVirtualPrivateCloud: VirtualPrivateCloud;
-  /** 带外网络的安全组列表 */
+  /** 带外网络的安全组列表。 */
   BmcSecurityGroupIds?: string[];
   /** 部署网络信息。 */
   DeployVirtualPrivateCloud?: VirtualPrivateCloud;
-  /** 部署网络的安全组列表 */
+  /** 部署网络的安全组列表。 */
   DeploySecurityGroupIds?: string[];
-  /** 部署网络的附加参数，用于指定minios类型、bios引导模式等 */
+  /** 部署网络的附加参数，用于指定DHCP选项、bios引导模式等配置。 */
   ChcDeployExtraConfig?: ChcDeployExtraConfig;
+  /** 是否跳过带外检查。默认值：false */
+  SkipBmcCheck?: boolean;
 }
 
 declare interface ConfigureChcAssistVpcResponse {

@@ -1426,7 +1426,7 @@ declare interface JumpEvent {
 
 /** 创建流程的签署方信息 */
 declare interface MiniAppCreateApproverInfo {
-  /** 在指定签署方时，可以选择企业B端或个人C端等不同的参与者类型，可选类型如下： 0 :企业B端。 1 :个人C端。 3 :企业B端静默（自动）签署，无需签署人参与，“授权签”可以参考“授权签”使用说明文档。 7 :个人C端“授权签”，适用于个人“授权签”场景。注: 个人“授权签”场景为白名单功能，使用前请联系对接的客户经理沟通。 */
+  /** 在指定签署方时，可以选择企业B端或个人C端等不同的参与者类型，可选类型如下： 0 :企业B端。 1 :个人C端。 3 :企业B端静默（自动）签署，无需签署人参与，“授权签”可以参考“授权签”使用说明文档。 8 :本企业PIN码授权签。注: 仅模板发起支持 */
   ApproverType: number;
   /** 组织机构名称。请确认该名称与企业营业执照中注册的名称一致。如果名称中包含英文括号()，请使用中文括号（）代替。注: 当approverType=0(企业签署方) 或 approverType=3(企业“授权签”)时，必须指定 */
   OrganizationName?: string;
@@ -1440,6 +1440,8 @@ declare interface MiniAppCreateApproverInfo {
   ApproverIdCardNumber?: string;
   /** 签署方经办人在模板中配置的参与方ID，与控件绑定，是控件的归属方，ID为32位字符串。模板发起合同时，该参数为必填项，可以通过查询模板信息接口获得。文件发起合同时，该参数无需传值。如果开发者后续用合同模板发起合同，建议保存此值，在用合同模板发起合同中需此值绑定对应的签署经办人 。 */
   RecipientId?: string;
+  /** PinCode计算规则 当使用 PIN 码授权签进行身份验证时，需要按以下规则生成 PinCode。 计算公式 PinCode = HMAC_SHA256(SHA256(PIN 码)，合同名称) 示例： PinCode = HMAC_SHA256(SHA256("v0ZIwH8lRDLsWRHJWJT7PR05FoXdl4S2")，"给张三的入职合同") 参数 说明 PIN 码 企业员工、他方(合作方)企业、个人授权的 PIN 码 合同名称 签署流程名称，即FlowName，需去除合同名称前后空格后再进行计算 */
+  PinCode?: string;
 }
 
 /** 小程序发起合同可选项 */

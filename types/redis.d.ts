@@ -786,6 +786,16 @@ declare interface LogResult {
   Node?: string;
 }
 
+/** Redis 支持的扩展模块信息。 */
+declare interface Module {
+  /** Redis 支持的扩展模块，包括 Bloom、JSON、Search 和 TimeSeries，可以为 Redis 提供额外的功能支持。Bloom：指 RedisBloom 模块，可以高效地判断一个元素是否存在于集合中。JSON：指 RedisJSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。Search：指 RediSearch 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。TimeSeries：指 RedisTimeSeries 模块，专门用于处理时间序列数据，适合存储和查询时间相关的数据。ValkeyBloom：指Valkey引擎的RedisBloom 模块，可以高效地判断一个元素是否存在于集合中。ValkeyJSON：指Valkey引擎的RedisJSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。ValkeySearch：指Valkey引擎的RediSearch 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。 */
+  Name?: string;
+  /** 扩展模块的启用状态。ON：启用。OFF：关闭。 */
+  Status?: string;
+  /** 实例是否支持参数 Name 对应的扩展模块。true：支持。false：不支持。 */
+  IsSupport?: boolean;
+}
+
 /** 安全组出站规则 */
 declare interface Outbound {
   /** 策略，ACCEPT或者DROP。 */
@@ -2442,6 +2452,18 @@ declare interface DescribeMaintenanceWindowResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModulesRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+}
+
+declare interface DescribeModulesResponse {
+  /** 实例的扩展模块列表，包括模块的支持状态（是否支持）、启用状态（是否已启用）等信息。 */
+  Modules?: Module[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeParamTemplateInfoRequest {
   /** 指定查询的参数模板 ID。请通过接口[DescribeParamTemplates](https://cloud.tencent.com/document/product/239/58750)获取参数模板列表信息。 */
   TemplateId: string;
@@ -3360,6 +3382,22 @@ declare interface ModifyMaintenanceWindowResponse {
   RequestId?: string;
 }
 
+declare interface ModifyModuleRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 指定待修改的扩展模块。Redis 支持修改如下扩展模块的状态。- Bloom：指 RedisBloom 模块，可以高效地判断一个元素是否存在于集合中。- JSON：指 RedisJSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。- Search：指 RediSearch 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。- TimeSeries：指 RedisTimeSeries 模块，专门用于处理时间序列数据，适合存储和查询时间相关的数据。 */
+  Name: string;
+  /** 设置扩展模块的启用状态。仅支持设置为 ON，启用扩展模块。 */
+  Status: string;
+}
+
+declare interface ModifyModuleResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyNetworkConfigRequest {
   /** 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。 */
   InstanceId: string;
@@ -3418,6 +3456,36 @@ declare interface ModifyReplicationGroupRequest {
 }
 
 declare interface ModifyReplicationGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifySSLEncryptionModeRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 目标加密模式枚举值：required： 强制加密flexible： 兼容模式 */
+  EncryptionMode: string;
+}
+
+declare interface ModifySSLEncryptionModeResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyValkeyModuleRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 指定待修改的扩展模块。枚举值：ValkeyBloom： 指 Bloom 模块，可以高效地判断一个元素是否存在于集合中ValkeyJSON： 指 JSON 模块，允许 Redis 原生支持 JSON 数据格式，方便存储和操作 JSON 对象。ValkeySearch： 指 Search 模块，提供全文搜索功能，可以对存储在 Redis 中的数据进行高效的搜索操作。 */
+  Name: string;
+  /** 设置扩展模块的启用状态。仅支持设置为 ON，启用扩展模块。 */
+  Status: string;
+}
+
+declare interface ModifyValkeyModuleResponse {
+  /** 任务ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3610,6 +3678,34 @@ declare interface SwitchProxyRequest {
 }
 
 declare interface SwitchProxyResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdateSSLCertRequest {
+  /** 指定实例 ID。例如：crs-xjhsdj****。请登录Redis控制台在实例列表复制实例 ID。 */
+  InstanceId: string;
+  /** 密钥类型。枚举值：0： 腾讯云提供1： 用户自定义KMS */
+  CertSource?: number;
+  /** 切换时间。（该参数废弃，不再生效）枚举值：1： 维护时间窗操作：指开启SSL加密在设置的维护时间窗内执行。请通过接口DescribeMaintenanceWindow查询设置的维护时间窗时间段2： 立即操作：操作将立即执行，无需等待维护时间窗。系统默认设置为立即操作。 */
+  SwitchOption?: number;
+  /** SSL地址类型。枚举值：0： 不限。1： 内网IPv4。2： 内网IPv6。3： 外网。-1： 未指定。 */
+  AddressType?: number;
+  /** KMS的密钥ID。（该参数废弃，不再生效）参数格式：xxxxxxx-xxxx-xxxx-xxxx-xxxxxxx */
+  KmsKeyId?: string;
+  /** KMS地域信息。（该参数废弃，不再生效）参数格式：ap-xxxx取值参考：KMS支持的地域列表 */
+  KmsRegion?: string;
+  /** SSL 证书服务的证书 ID，CertSource=1 时必填 */
+  CertId?: string;
+  /** 最低 TLS 版本枚举值：TLSv1.0： TLSv1.0TLSv1.1： TLSv1.1TLSv1.2： TLSv1.2 */
+  SSLMinVersion?: string;
+  /** 目标加密模式枚举值：required： 强制加密flexible： 兼容模式 */
+  EncryptionMode?: string;
+}
+
+declare interface UpdateSSLCertResponse {
   /** 任务ID。 */
   TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -3843,6 +3939,8 @@ declare interface Redis {
   DescribeLogs(data: DescribeLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogsResponse>;
   /** 查询实例维护时间窗 {@link DescribeMaintenanceWindowRequest} {@link DescribeMaintenanceWindowResponse} */
   DescribeMaintenanceWindow(data: DescribeMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMaintenanceWindowResponse>;
+  /** 查询扩展模块信息 {@link DescribeModulesRequest} {@link DescribeModulesResponse} */
+  DescribeModules(data: DescribeModulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModulesResponse>;
   /** 查询参数模板详情 {@link DescribeParamTemplateInfoRequest} {@link DescribeParamTemplateInfoResponse} */
   DescribeParamTemplateInfo(data: DescribeParamTemplateInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeParamTemplateInfoResponse>;
   /** 查询参数模板列表 {@link DescribeParamTemplatesRequest} {@link DescribeParamTemplatesResponse} */
@@ -3933,12 +4031,18 @@ declare interface Redis {
   ModifyLog(data: ModifyLogRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLogResponse>;
   /** 修改实例维护时间窗时间 {@link ModifyMaintenanceWindowRequest} {@link ModifyMaintenanceWindowResponse} */
   ModifyMaintenanceWindow(data: ModifyMaintenanceWindowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMaintenanceWindowResponse>;
+  /** 修改扩展模块(已下线) {@link ModifyModuleRequest} {@link ModifyModuleResponse} */
+  ModifyModule(data: ModifyModuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleResponse>;
   /** 修改实例网络配置 {@link ModifyNetworkConfigRequest} {@link ModifyNetworkConfigResponse} */
   ModifyNetworkConfig(data: ModifyNetworkConfigRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyNetworkConfigResponse>;
   /** 修改参数模板 {@link ModifyParamTemplateRequest} {@link ModifyParamTemplateResponse} */
   ModifyParamTemplate(data: ModifyParamTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyParamTemplateResponse>;
   /** 修改复制组信息 {@link ModifyReplicationGroupRequest} {@link ModifyReplicationGroupResponse} */
   ModifyReplicationGroup(data: ModifyReplicationGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyReplicationGroupResponse>;
+  /** 修改SSL加密模式 {@link ModifySSLEncryptionModeRequest} {@link ModifySSLEncryptionModeResponse} */
+  ModifySSLEncryptionMode(data: ModifySSLEncryptionModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySSLEncryptionModeResponse>;
+  /** 修改Valkey实例扩展模块 {@link ModifyValkeyModuleRequest} {@link ModifyValkeyModuleResponse} */
+  ModifyValkeyModule(data: ModifyValkeyModuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyValkeyModuleResponse>;
   /** 开启审计日志 {@link OpenLogRequest} {@link OpenLogResponse} */
   OpenLog(data: OpenLogRequest, config?: AxiosRequestConfig): AxiosPromise<OpenLogResponse>;
   /** 开启SSL {@link OpenSSLRequest} {@link OpenSSLResponse} */
@@ -3963,6 +4067,8 @@ declare interface Redis {
   SwitchInstanceVip(data: SwitchInstanceVipRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchInstanceVipResponse>;
   /** Proxy模拟故障接口 {@link SwitchProxyRequest} {@link SwitchProxyResponse} */
   SwitchProxy(data: SwitchProxyRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchProxyResponse>;
+  /** 更新SSL证书 {@link UpdateSSLCertRequest} {@link UpdateSSLCertResponse} */
+  UpdateSSLCert(data: UpdateSSLCertRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateSSLCertResponse>;
   /** 变更实例配置 {@link UpgradeInstanceRequest} {@link UpgradeInstanceResponse} */
   UpgradeInstance(data: UpgradeInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<UpgradeInstanceResponse>;
   /** 升级实例类型 {@link UpgradeInstanceProductVersionRequest} {@link UpgradeInstanceProductVersionResponse} */

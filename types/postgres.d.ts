@@ -2193,7 +2193,7 @@ declare interface DescribeDBInstanceAttributeResponse {
 }
 
 declare interface DescribeDBInstanceHAConfigRequest {
-  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
 }
 
@@ -3071,7 +3071,7 @@ declare interface ModifyDBInstanceDeploymentResponse {
 }
 
 declare interface ModifyDBInstanceHAConfigRequest {
-  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
   /** 主从同步方式：Semi-sync：半同步Async：异步 */
   SyncMode: string;

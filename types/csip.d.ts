@@ -748,6 +748,20 @@ declare interface AlertInfo {
   LogSearch?: string;
 }
 
+/** 资产基线风险 */
+declare interface AssetBaselineRisk {
+  /** 风险记录唯一标识。 */
+  RiskID?: string;
+  /** 检测项详细信息。 */
+  Item?: BaselineItem;
+  /** 最近一次检测时间（ISO 8601 格式）。 */
+  LatestCheckTime?: string;
+  /** 检测结果状态。取值：NOT_PASS：未通过PASS：通过CHECKING：检测中 */
+  ResultStatus?: string;
+  /** 所属基线策略简要信息。 */
+  PolicyInfo?: BaselinePolicyBrief;
+}
+
 /** 集群列表集群防护状态，左边枚举,右边为显示集群防护状态 0:未接入1:未防护 2:部分防护 3:防护中 4:接入异常 5:接入中 6:卸载中 7:卸载异常 */
 declare interface AssetCluster {
   /** 租户id */
@@ -1946,6 +1960,34 @@ declare interface BaselineHostAsset {
   ProtectVersion?: string;
 }
 
+/** 基线忽略策略 */
+declare interface BaselineIgnorePolicy {
+  /** 忽略策略记录 ID。 */
+  ID?: number;
+  /** 检测项名称。 */
+  ItemName?: string;
+  /** 检测项所属分类名称。 */
+  CategoryName?: string;
+  /** 用户 AppID。 */
+  AppID?: number;
+  /** 忽略范围类型枚举值：ALL： 全部资产PICK： 指定资产 */
+  ScopeType?: string;
+  /** 自选资产 ID 列表，PICK时生效，存储 instance-id 或集群 ID。 */
+  ScopeIncludeList?: string[];
+  /** 剔除资产 ID 列表，ALL 时生效，存储 instance-id 或集群 ID。 */
+  ScopeExcludeList?: string[];
+  /** 备注信息。 */
+  Remark?: string;
+  /** 创建时间。 */
+  CreateTime?: string;
+  /** 最近修改时间。 */
+  ModifyTime?: string;
+  /** 对应资产类型枚举值：HOST： 主机CLUSTER： 集群相关资产 */
+  AssetType?: string;
+  /** 检测项ID */
+  ItemID?: number;
+}
+
 /** 基线检测项。 */
 declare interface BaselineItem {
   /** 基线检测项 ID。 */
@@ -2948,6 +2990,20 @@ declare interface CloudFunctionItem {
   PrivateURL?: string;
   /** 所属账号 */
   AccountInfo?: string;
+}
+
+/** 集群基线策略 */
+declare interface ClusterBaselinePolicy {
+  /** 基线策略 ID。 */
+  PolicyID?: number;
+  /** 基线策略名称。 */
+  PolicyName?: string;
+  /** 检测资产类型。枚举值：HOST：主机CLUSTER：容器集群 */
+  CheckAssetType?: string;
+  /** 基线系统父分类 ID。 */
+  ParentCategoryID?: number;
+  /** 是否为系统基线策略。true 表示系统策略，false 表示自定义策略。 */
+  IsSystem?: boolean;
 }
 
 /** 集群容器列表项 */
@@ -6938,6 +6994,62 @@ declare interface HostVulRisk {
   FixTaskId?: string;
   /** 当前用户可见范围内存在至少一台支持自动修复的主机时为 1，否则为 0单位：1 */
   SupportAutoFix?: number;
+}
+
+/** 主机漏洞风险事件明细 */
+declare interface HostVulRiskEventItem {
+  /** 漏洞风险记录唯一标识 */
+  UUID?: string;
+  /** 风险记录 ID */
+  RiskID?: number;
+  /** 漏洞 ID */
+  VulID?: number;
+  /** 漏洞名称 */
+  VulName?: string;
+  /** CVE 编号参数格式：形如 CVE-2024-12345 */
+  CVEID?: string;
+  /** 漏洞分类枚举值：LINUX：Linux 软件漏洞WINDOWS：Windows 系统补丁WEB_CMS：Web-CMS 漏洞APPLICATION：应用漏洞EMERGENCY：应急漏洞 */
+  Category?: string;
+  /** 漏洞危害等级枚举值：UNKNOWN：无效LOW：低危MEDIUM：中危HIGH：高危CRITICAL：严重 */
+  Level?: string;
+  /** VPR 修复优先级枚举值：DEFERRABLE：可暂缓修复PLANNED：计划修复SOON：尽快修复URGENT：紧急修复 */
+  VPRLevel?: string;
+  /** 检测方式枚举值：VersionCompare：版本比对POC：POC 检测VersionComparePOC：版本比对 + POC */
+  CheckMethod?: string;
+  /** 风险状态枚举值：PENDING：待处理HANDLED：已处置FIXED：已修复SCANNING：重新检测中IGNORED：已忽略NOT_REQUIRED：无需处理DELETED：已删除FIXING：修复中NEED_REBOOT：已修复待重启FIX_FAILED：修复失败 */
+  RiskStatus?: string;
+  /** 是否支持一键修复 */
+  SupportFix?: boolean;
+  /** 最近扫描时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式） */
+  LatestScanTime?: string;
+  /** 云主机实例 ID参数格式：形如 ins-xxxxxxxx */
+  InstanceID?: string;
+  /** 所属账号 AppID */
+  AppID?: number;
+}
+
+/** 主机漏洞扫描状态 */
+declare interface HostVulScanStatus {
+  /** 是否发起过漏洞扫描枚举值：true：已发起过漏洞扫描false：从未发起过漏洞扫描 */
+  HasScanned?: boolean;
+  /** 是否处于首次漏洞扫描判断场景枚举值：true：处于首次漏洞扫描判断场景false：不处于首次漏洞扫描判断场景 */
+  IsFirstScan?: boolean;
+  /** 最近一次扫描任务状态枚举值：SCANNING：扫描中SUCCESS：扫描成功PARTIAL_FAILED：部分扫描失败ALL_FAILED：全部扫描失败STOPPED：停止扫描 */
+  ScanTaskStatus?: string;
+  /** 页面业务状态枚举值：NEVER_SCANNED：从未扫描过漏洞SCANNING：扫描中FIRST_SCAN_FAILED：首次漏洞扫描失败FIRST_SCAN_HAS_FIXABLE_VUL：首次扫描完成，存在可修复漏洞FIRST_SCAN_NO_FIXABLE_VUL：首次扫描完成，有漏洞但无可修复漏洞FIRST_SCAN_NO_VUL：首次扫描完成，没有漏洞SCANNED_HAS_FIXABLE_VUL：非首次扫描，存在可修复漏洞SCANNED_NO_FIXABLE_VUL：非首次扫描，有漏洞但无可修复漏洞SCANNED_NO_VUL：非首次扫描，没有漏洞 */
+  ScanScene?: string;
+  /** 最近扫描时间参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）从未扫描时返回空字符串。 */
+  LatestScanTime?: string;
+  /** 当前待处理漏洞总数包含普通主机漏洞和最新 Windows KB 待处理风险。 */
+  TotalVulCount?: number;
+  /** 当前可修复漏洞数包含支持一键修复的普通主机漏洞和最新 Windows KB 待处理风险。 */
+  FixableVulCount?: number;
+  /** 当前可修复应急漏洞数应急漏洞优先归类：应急漏洞仅计入该字段，不再计入 Linux 软件漏洞数。 */
+  FixableEmergencyCount?: number;
+  /** 当前可修复 Linux 软件漏洞数仅统计非应急 Linux 软件漏洞。 */
+  FixableLinuxVulCount?: number;
+  /** 当前可修复 Windows 系统补丁数统计最新 Windows KB 待处理风险。 */
+  FixableWindowVulCount?: number;
 }
 
 /** IP威胁情报信息（通过TIX IPAnalysis接口获取） */
@@ -12859,6 +12971,28 @@ declare interface CreateAllAssetsExportJobResponse {
   RequestId?: string;
 }
 
+declare interface CreateAssetBaselineRiskExportJobRequest {
+  /** 资产唯一标识（UUID），与 AssetType 组合定位具体资产。 */
+  AssetUniqueID: string;
+  /** 资产类型。取值：HOST（主机）、CLUSTER（集群）。 */
+  AssetType: string;
+  /** 资产所属appid */
+  AssetAppID: number;
+  /** 导出任务名字 */
+  Name: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用过滤条件。支持字段：ItemName（检测项名称，模糊）、PolicyName（所属基线名称，模糊）、InstanceName（主机名称，模糊）、InstanceID（实例ID，精准）、IP（IP 地址，模糊）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。 */
+  Filters?: Filters[];
+}
+
+declare interface CreateAssetBaselineRiskExportJobResponse {
+  /** 导出任务ID */
+  JobId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAssetComponentListExportJobRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -14020,7 +14154,7 @@ declare interface CreateHostVulExportJobRequest {
   BusinessAction: string;
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：KbID：KB风险关联主机情况下需要额外加入KB风险IDVulID：漏洞风险关联主机情况下需要额外加入vul风险ID */
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：KbID：KB风险关联主机情况下需要额外加入KB风险IDVulID：漏洞风险关联主机情况下需要额外加入vul风险ID ClusterId：集群id（仅支持单集群id筛选） */
   Filters?: Filters[];
 }
 
@@ -14853,6 +14987,18 @@ declare interface DeleteAssetTagResponse {
   Code?: string;
   /** 信息 */
   Message?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteBaselineIgnorePolicyRequest {
+  /** 要删除的忽略策略记录 ID。 */
+  ID: number[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DeleteBaselineIgnorePolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -16061,6 +16207,32 @@ declare interface DescribeAlertListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAssetBaselineRiskListRequest {
+  /** 资产唯一标识（UUID），与 AssetType 组合定位具体资产。 */
+  AssetUniqueID: string;
+  /** 资产类型。取值：HOST（主机）、CLUSTER（集群）。 */
+  AssetType: string;
+  /** 资产所属appid */
+  AssetAppID: number;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用过滤条件。支持字段：ItemName（检测项名称，模糊）、PolicyName（所属基线名称，模糊）、ResultStatus（结果状态）、RiskLevel（风险等级）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。 */
+  Filters?: Filters[];
+  /** 分页查询每页数量，最大值 100；超过时服务端将自动回退为默认值 10。 */
+  Limit?: number;
+  /** 分页查询起始偏移量，从 0 开始。 */
+  Offset?: number;
+}
+
+declare interface DescribeAssetBaselineRiskListResponse {
+  /** 基线风险修复记录列表。 */
+  List?: AssetBaselineRisk[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAssetComponentListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -16527,6 +16699,26 @@ declare interface DescribeBaselineFixRecordListRequest {
 declare interface DescribeBaselineFixRecordListResponse {
   /** 基线风险修复记录列表。 */
   List?: BaselineFixRecord[];
+  /** 凭据总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeBaselineIgnorePolicyListRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 通用过滤条件。支持字段：ItemName（检测项名称，模糊）。不同 Name 之间为且关系，同一 Name 下多个 Values 为或关系。 */
+  Filters?: Filters[];
+  /** 分页查询每页数量，最大值 100；超过时服务端将自动回退为默认值 10。 */
+  Limit?: number;
+  /** 分页查询起始偏移量，从 0 开始。 */
+  Offset?: number;
+}
+
+declare interface DescribeBaselineIgnorePolicyListResponse {
+  /** 基线风险修复记录列表。 */
+  List?: BaselineIgnorePolicy[];
   /** 凭据总数 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
@@ -17639,6 +17831,22 @@ declare interface DescribeClusterAssetsResponse {
   AppIdList?: FilterDataObject[];
   /** 集群防护状态枚举 */
   ProtectStatusList?: FilterDataObject[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeClusterBaselineRiskPolicyListRequest {
+  /** 集群所属账号的 Appid，用于指定查询基线风险策略的账号。 */
+  ClusterAppid: number;
+  /** 集群CaMD5 */
+  ClusterCaMD5: string;
+  /** 集团账号的成员 ID 列表。 */
+  MemberId?: string[];
+}
+
+declare interface DescribeClusterBaselineRiskPolicyListResponse {
+  /** 扫描主任务列表。 */
+  List?: ClusterBaselinePolicy[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -18969,6 +19177,34 @@ declare interface DescribeDspmAccessTopologyIpsRequest {
 declare interface DescribeDspmAccessTopologyIpsResponse {
   /** ip列表 */
   Items?: string[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDspmAccessTopologySummaryRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeDspmAccessTopologySummaryResponse {
+  /** 来源IP数 */
+  SourceIpCount?: number;
+  /** 访问账号数 */
+  AccountCount?: number;
+  /** 被访问的库数 */
+  DbCount?: number;
+  /** 被访问的表数 */
+  TableCount?: number;
+  /** 近7天访问次数 */
+  AccessCountLast7Days?: number;
+  /** 近30天访问次数 */
+  AccessCountLast30Days?: number;
+  /** 表级访问组合数（实例+账号+来源IP+库+schema+表 的去重组合数） */
+  TableCombinationCount?: number;
+  /** 表级访问组合数是否已达上限。为 true 时表级拓扑数据不完整：达上限后新出现的访问组合会被拒绝写入（已有组合仍继续累加），因此展示的拓扑可能缺失部分对象，且保留了哪些组合取决于到达顺序。建议据此显式提示数据不完整。查询不到该标志时不返回本字段 */
+  DataIncomplete?: boolean;
+  /** 数据最后计算时间。拓扑数据由后台预聚合产生，存在链路延迟；多成员账号场景取各成员中最早的一个 */
+  LastCalcTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -20835,6 +21071,30 @@ declare interface DescribeHostVulOverviewResponse {
   RequestId?: string;
 }
 
+declare interface DescribeHostVulRiskEventListRequest {
+  /** 分页偏移量取值范围：[0, +∞)默认值：0 */
+  Offset?: number;
+  /** 每页返回数量取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 过滤条件支持的Filter.Name：VulName - 模糊匹配，按漏洞名称搜索Category - 精确匹配，按漏洞分类筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞RiskStatus - 精确匹配，按风险状态筛选：PENDING-待处理 HANDLED-已处置 FIXED-已修复 SCANNING-重新检测中 IGNORED-已忽略 NOT_REQUIRED-无需处理 DELETED-已删除 FIXING-修复中 NEED_REBOOT-已修复待重启 FIX_FAILED-修复失败Level - 精确匹配，按漏洞危害等级筛选：UNKNOWN-无效 LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重CVSSLevel - 精确匹配，兼容字段，等同于 LevelVPRLevel - 精确匹配，按VPR修复优先级筛选：DEFERRABLE-可暂缓修复 PLANNED-计划修复 SOON-尽快修复 URGENT-紧急修复- 精确匹配，按漏洞ID筛选InstanceID - 精确匹配，按云主机实例ID筛选InstanceId - 精确匹配，兼容字段，等同于 InstanceIDUUID - 精确匹配，按主机安全UUID筛选LatestScanTimeStart - 范围匹配，最近扫描时间起，格式：YYYY-MM-DD HH:mm:ssLatestScanTimeEnd - 范围匹配，最近扫描时间止，格式：YYYY-MM-DD HH:mm:ss */
+  Filters?: Filters[];
+  /** 排序方式枚举值：asc：升序desc：降序默认值：desc */
+  Order?: string;
+  /** 排序字段枚举值：LatestScanTime：按最近扫描时间排序Level：按威胁等级排序VPRLevel：按 VPR 评级排序RiskStatus：按风险状态排序VulID：按漏洞 ID 排序InstanceID：按实例 ID 排序默认值：LatestScanTime */
+  By?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeHostVulRiskEventListResponse {
+  /** 主机漏洞风险事件列表 */
+  List?: HostVulRiskEventItem[];
+  /** 符合筛选条件的总条数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeHostVulRiskListRequest {
   /** 集团账号的成员id */
   MemberId?: string[];
@@ -20855,6 +21115,18 @@ declare interface DescribeHostVulRiskListResponse {
   List?: HostVulRisk[];
   /** 凭据总数 */
   TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeHostVulScanStatusRequest {
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface DescribeHostVulScanStatusResponse {
+  /** 主机漏洞扫描状态 */
+  Status?: HostVulScanStatus;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -24210,7 +24482,7 @@ declare interface DescribeVulRiskRelateComponentRequest {
   VulID: number;
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对组件名称模糊匹配） */
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对组件名称模糊匹配）ClusterId：集群id（仅支持单集群id筛选） */
   Filters?: Filters[];
 }
 
@@ -24228,7 +24500,7 @@ declare interface DescribeVulRiskRelateHostRequest {
   VulID: number;
   /** 集团账号的成员id */
   MemberId?: string[];
-  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）CloudTag: 云标签Tag: 安全中心标签 */
+  /** 筛选条件数组，多条件之间为 AND 关系支持的 Filter.Name：Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）CloudTag: 云标签Tag: 安全中心标签ClusterId：集群id（仅支持单集群id筛选） */
   Filters?: Filters[];
   /** 每页返回数量取值范围：[1, 100]默认值：10 */
   Limit?: number;
@@ -24825,6 +25097,28 @@ declare interface ModifyBanModeResponse {
   RequestId?: string;
 }
 
+declare interface ModifyBaselineIgnorePolicyRequest {
+  /** 检测项 ID，标识对哪个检测项设置忽略策略。 */
+  ItemID: number;
+  /** 忽略范围类型。枚举值：ALL： 全部资产PICK： 指定资产 */
+  ScopeType: string;
+  /** 备注信息。 */
+  Remark: string;
+  /** 忽略策略记录 ID。新建时传 0，更新时传对应记录 ID。 */
+  ID: number;
+  /** 自选资产 ID 列表，PICK 时生效，传入 instance-id 或集群 ID。 */
+  ScopeIncludeList?: string[];
+  /** 剔除资产 ID 列表，ALL 时生效，传入 instance-id 或集群 ID。 */
+  ScopeExcludeList?: string[];
+  /** 集团账号的成员id */
+  MemberId?: string[];
+}
+
+declare interface ModifyBaselineIgnorePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyBaselinePolicyEnableRequest {
   /** 待修改的基线策略 ID 列表，不可为空且元素不可为 0。 */
   PolicyIDList: number[];
@@ -24993,6 +25287,24 @@ declare interface ModifyCSIPRaspLicenseUnBindsResponse {
   FailedNum?: number;
   /** 失败明细 */
   FailedList?: LicenseUnbindFailedItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyClusterAuditLogStatusRequest {
+  /** 审计日志开关，审计日志目标状态：true-开启，false-关闭。开启要求集群已开启防护，关闭不要求。 */
+  AuditLogSwitch: boolean;
+  /** 集群资产 id（已废弃） */
+  ClusterAssetId?: string;
+  /** 集团账号的成员id */
+  MemberId?: string[];
+  /** 被调用的集团账号的成员id */
+  OperatedMemberId?: string[];
+  /** 集群 CA 证书 MD5 列表，集群的唯一标识，支持单个或批量修改 */
+  ClusterCaMD5List?: string[];
+}
+
+declare interface ModifyClusterAuditLogStatusResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -27564,6 +27876,8 @@ declare interface Csip {
   CreateAccessKeySyncTask(data?: CreateAccessKeySyncTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessKeySyncTaskResponse>;
   /** 创建全部资产导出任务 {@link CreateAllAssetsExportJobRequest} {@link CreateAllAssetsExportJobResponse} */
   CreateAllAssetsExportJob(data?: CreateAllAssetsExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAllAssetsExportJobResponse>;
+  /** 创建资产基线风险导出任务 {@link CreateAssetBaselineRiskExportJobRequest} {@link CreateAssetBaselineRiskExportJobResponse} */
+  CreateAssetBaselineRiskExportJob(data: CreateAssetBaselineRiskExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetBaselineRiskExportJobResponse>;
   /** 创建镜像资产中组件列表导出任务 {@link CreateAssetComponentListExportJobRequest} {@link CreateAssetComponentListExportJobResponse} */
   CreateAssetComponentListExportJob(data?: CreateAssetComponentListExportJobRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAssetComponentListExportJobResponse>;
   /** 创建镜像仓库组件关联镜像列表导出任务 {@link CreateAssetComponentRelatedImageListExportJobRequest} {@link CreateAssetComponentRelatedImageListExportJobResponse} */
@@ -27758,6 +28072,8 @@ declare interface Csip {
   DeleteAssetFilterView(data: DeleteAssetFilterViewRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetFilterViewResponse>;
   /** 删除资产标签 {@link DeleteAssetTagRequest} {@link DeleteAssetTagResponse} */
   DeleteAssetTag(data: DeleteAssetTagRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAssetTagResponse>;
+  /** 删除基线忽略策略 {@link DeleteBaselineIgnorePolicyRequest} {@link DeleteBaselineIgnorePolicyResponse} */
+  DeleteBaselineIgnorePolicy(data: DeleteBaselineIgnorePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineIgnorePolicyResponse>;
   /** 删除自定义基线策略 {@link DeleteBaselineSelfDefinedPolicyListRequest} {@link DeleteBaselineSelfDefinedPolicyListResponse} */
   DeleteBaselineSelfDefinedPolicyList(data: DeleteBaselineSelfDefinedPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteBaselineSelfDefinedPolicyListResponse>;
   /** CSIP 手动扫描任务删除接口 {@link DeleteCSIPMalwareScanTaskRequest} {@link DeleteCSIPMalwareScanTaskResponse} */
@@ -27912,6 +28228,8 @@ declare interface Csip {
   DescribeAgentRunPolicy(data?: DescribeAgentRunPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentRunPolicyResponse>;
   /** 查询全量告警列表 {@link DescribeAlertListRequest} {@link DescribeAlertListResponse} */
   DescribeAlertList(data: DescribeAlertListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAlertListResponse>;
+  /** 获取资产基线风险列表 {@link DescribeAssetBaselineRiskListRequest} {@link DescribeAssetBaselineRiskListResponse} */
+  DescribeAssetBaselineRiskList(data: DescribeAssetBaselineRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetBaselineRiskListResponse>;
   /** 查询资产中组件列表 {@link DescribeAssetComponentListRequest} {@link DescribeAssetComponentListResponse} */
   DescribeAssetComponentList(data?: DescribeAssetComponentListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAssetComponentListResponse>;
   /** 查询镜像仓库组件关联镜像列表 {@link DescribeAssetComponentRelatedImageListRequest} {@link DescribeAssetComponentRelatedImageListResponse} */
@@ -27962,6 +28280,8 @@ declare interface Csip {
   DescribeBaselineCategoryItemList(data?: DescribeBaselineCategoryItemListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineCategoryItemListResponse>;
   /** 获取基线修复记录列表 {@link DescribeBaselineFixRecordListRequest} {@link DescribeBaselineFixRecordListResponse} */
   DescribeBaselineFixRecordList(data?: DescribeBaselineFixRecordListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineFixRecordListResponse>;
+  /** 获取基线忽略策略列表 {@link DescribeBaselineIgnorePolicyListRequest} {@link DescribeBaselineIgnorePolicyListResponse} */
+  DescribeBaselineIgnorePolicyList(data?: DescribeBaselineIgnorePolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineIgnorePolicyListResponse>;
   /** 获取基线检测项风险列表 {@link DescribeBaselineItemRiskListRequest} {@link DescribeBaselineItemRiskListResponse} */
   DescribeBaselineItemRiskList(data: DescribeBaselineItemRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBaselineItemRiskListResponse>;
   /** 获取主任务检测项列表 {@link DescribeBaselineMainTaskItemListRequest} {@link DescribeBaselineMainTaskItemListResponse} */
@@ -28058,6 +28378,8 @@ declare interface Csip {
   DescribeClusterAssetSyncTaskStatus(data: DescribeClusterAssetSyncTaskStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAssetSyncTaskStatusResponse>;
   /** 集群列表 {@link DescribeClusterAssetsRequest} {@link DescribeClusterAssetsResponse} */
   DescribeClusterAssets(data?: DescribeClusterAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterAssetsResponse>;
+  /** 获取集群基线风险策略列表 {@link DescribeClusterBaselineRiskPolicyListRequest} {@link DescribeClusterBaselineRiskPolicyListResponse} */
+  DescribeClusterBaselineRiskPolicyList(data: DescribeClusterBaselineRiskPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterBaselineRiskPolicyListResponse>;
   /** 查询容器关联应用列表 {@link DescribeClusterContainerAppListRequest} {@link DescribeClusterContainerAppListResponse} */
   DescribeClusterContainerAppList(data: DescribeClusterContainerAppListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeClusterContainerAppListResponse>;
   /** 查询容器关联组件列表 {@link DescribeClusterContainerComponentListRequest} {@link DescribeClusterContainerComponentListResponse} */
@@ -28182,6 +28504,8 @@ declare interface Csip {
   DescribeDspmAccessTopologyAssets(data?: DescribeDspmAccessTopologyAssetsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessTopologyAssetsResponse>;
   /** 查询Dspm访问拓扑ip列表 {@link DescribeDspmAccessTopologyIpsRequest} {@link DescribeDspmAccessTopologyIpsResponse} */
   DescribeDspmAccessTopologyIps(data?: DescribeDspmAccessTopologyIpsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessTopologyIpsResponse>;
+  /** 查询Dspm访问拓扑概览 {@link DescribeDspmAccessTopologySummaryRequest} {@link DescribeDspmAccessTopologySummaryResponse} */
+  DescribeDspmAccessTopologySummary(data?: DescribeDspmAccessTopologySummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmAccessTopologySummaryResponse>;
   /** 查询Dspm申请历史 {@link DescribeDspmApplyHistoryRequest} {@link DescribeDspmApplyHistoryResponse} */
   DescribeDspmApplyHistory(data?: DescribeDspmApplyHistoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDspmApplyHistoryResponse>;
   /** 查询Dspm申请单列表 {@link DescribeDspmApplyOrderListRequest} {@link DescribeDspmApplyOrderListResponse} */
@@ -28362,8 +28686,12 @@ declare interface Csip {
   DescribeHostVulItemVPRInfo(data?: DescribeHostVulItemVPRInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulItemVPRInfoResponse>;
   /** 获取主机漏洞概览 {@link DescribeHostVulOverviewRequest} {@link DescribeHostVulOverviewResponse} */
   DescribeHostVulOverview(data?: DescribeHostVulOverviewRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulOverviewResponse>;
+  /** 获取主机漏洞风险事件列表 {@link DescribeHostVulRiskEventListRequest} {@link DescribeHostVulRiskEventListResponse} */
+  DescribeHostVulRiskEventList(data?: DescribeHostVulRiskEventListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulRiskEventListResponse>;
   /** 获取主机漏洞风险列表 {@link DescribeHostVulRiskListRequest} {@link DescribeHostVulRiskListResponse} */
   DescribeHostVulRiskList(data?: DescribeHostVulRiskListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulRiskListResponse>;
+  /** 查询主机漏洞扫描状态 {@link DescribeHostVulScanStatusRequest} {@link DescribeHostVulScanStatusResponse} */
+  DescribeHostVulScanStatus(data?: DescribeHostVulScanStatusRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeHostVulScanStatusResponse>;
   /** 获取IaC检测文件列表 {@link DescribeIaCFileListRequest} {@link DescribeIaCFileListResponse} */
   DescribeIaCFileList(data?: DescribeIaCFileListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIaCFileListResponse>;
   /** 获取IaC检测文件概览 {@link DescribeIaCFileOverviewRequest} {@link DescribeIaCFileOverviewResponse} */
@@ -28748,6 +29076,8 @@ declare interface Csip {
   ModifyAssetTagsByAssetInfo(data?: ModifyAssetTagsByAssetInfoRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAssetTagsByAssetInfoResponse>;
   /** 修改爆破阻断模式 {@link ModifyBanModeRequest} {@link ModifyBanModeResponse} */
   ModifyBanMode(data: ModifyBanModeRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBanModeResponse>;
+  /** 修改基线忽略策略 {@link ModifyBaselineIgnorePolicyRequest} {@link ModifyBaselineIgnorePolicyResponse} */
+  ModifyBaselineIgnorePolicy(data: ModifyBaselineIgnorePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselineIgnorePolicyResponse>;
   /** 更改基线策略 {@link ModifyBaselinePolicyRequest} {@link ModifyBaselinePolicyResponse} */
   ModifyBaselinePolicy(data: ModifyBaselinePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyBaselinePolicyResponse>;
   /** 更改基线策略开关 {@link ModifyBaselinePolicyEnableRequest} {@link ModifyBaselinePolicyEnableResponse} */
@@ -28770,6 +29100,8 @@ declare interface Csip {
   ModifyCSIPRaspLicenseBinds(data: ModifyCSIPRaspLicenseBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPRaspLicenseBindsResponse>;
   /** 解绑RASP授权 {@link ModifyCSIPRaspLicenseUnBindsRequest} {@link ModifyCSIPRaspLicenseUnBindsResponse} */
   ModifyCSIPRaspLicenseUnBinds(data?: ModifyCSIPRaspLicenseUnBindsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCSIPRaspLicenseUnBindsResponse>;
+  /** 修改集群审计日志状态 {@link ModifyClusterAuditLogStatusRequest} {@link ModifyClusterAuditLogStatusResponse} */
+  ModifyClusterAuditLogStatus(data: ModifyClusterAuditLogStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterAuditLogStatusResponse>;
   /** 修改集群防护状态 {@link ModifyClusterDefendStatusRequest} {@link ModifyClusterDefendStatusResponse} */
   ModifyClusterDefendStatus(data: ModifyClusterDefendStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyClusterDefendStatusResponse>;
   /** 修改存储桶监测状态 {@link ModifyCosAuditBucketMonitorStatusRequest} {@link ModifyCosAuditBucketMonitorStatusResponse} */

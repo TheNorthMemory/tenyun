@@ -1792,6 +1792,34 @@ declare interface SqlCostDistribution {
   Ratio?: number;
 }
 
+/** 执行计划字段说明项。提供 EXPLAIN / VisualExplain 输出中各字段的中文释义，便于前端在展示可视化执行计划时进行翻译。 */
+declare interface SqlExplainFieldDescV2 {
+  /** 字段英文名，与 Explain / VisualExplain 中出现的字段一致，例如 access_type、key、rows。 */
+  Field?: string;
+  /** 字段中文释义。 */
+  Desc?: string;
+}
+
+/** EXPLAIN 输出结果。Names 为 EXPLAIN 列名顺序，Data 为按行展开的执行计划数据。 */
+declare interface SqlExplainResultV2 {
+  /** EXPLAIN 列名顺序，与 Data 中每一行的字段一一对应。 */
+  Names?: string[];
+  /** 执行计划行列表。 */
+  Data?: SqlExplainRowV2[];
+}
+
+/** EXPLAIN TRADITIONAL 格式的执行计划行（共 12 列），字段语义与 MySQL 原生 EXPLAIN 输出一致。 */
+declare interface SqlExplainRowV2 {
+}
+
+/** SQL 涉及的表信息。包含库名与表名，用于在前端展示 SQL 涉及的表清单。 */
+declare interface SqlExplainTableRefV2 {
+  /** 表名。 */
+  TableName?: string;
+  /** 表所在的数据库名。 */
+  TableSchema?: string;
+}
+
 /** SQL Server 产品空间对象项（单表明细）。字段命名与 MySQL 同构（TableSchema/TableName/Engine/TableRows/TotalLength/DataLength/IndexLength/DataFree，单位 MB），无 FragRatio / PhysicalFileSize。 */
 declare interface SqlServerSpaceObjectItem {
   /** 数据库名。 */
@@ -3894,6 +3922,38 @@ declare interface DescribeSlowLogsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeSqlExplainV2Request {
+  /** 服务产品类型。取值：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、dcdb（TDSQL MySQL 版）、mariadb（TDSQL MariaDB 版）。 */
+  Product: string;
+  /** 待分析的 SQL 语句。仅支持单条 SELECT 语句；若以 EXPLAIN 开头会自动剥离 EXPLAIN 前缀后分析。最大 4096 字符。 */
+  SqlText: string;
+  /** 实例 ID。MySQL: cdb-xxxxxxx，TDSQL-C: cynosdbmysql-ins-xxxxxxx，MariaDB: tdsql-xxxxx，TDSQL-MySQL： '集群id&amp;分片id',如果TDSQL-MySQL数据库类型同时传入了集群id则instanceId字段只需要传入分片id。最大 64 字符。与 ClusterId 至少需传入其一。 */
+  InstanceId?: string;
+  /** 数据库名。可选；为空时按当前 SQL 上下文执行。最大 64 字符。 */
+  Schema?: string;
+  /** 集群 ID。仅 TDSQL-MySQL时使用，与 InstanceId 至少需传入其一。最大 64 字符。 */
+  ClusterId?: string;
+  /** 是否输出可视化执行树默认值：false */
+  Visual?: boolean;
+}
+
+declare interface DescribeSqlExplainV2Response {
+  /** 数据库名，回显请求中的 Schema。 */
+  Schema?: string;
+  /** SQL 文本，回显请求中的 SqlText。 */
+  SqlText?: string;
+  /** SQL 涉及的表名列表。 */
+  Tables?: SqlExplainTableRefV2[];
+  /** 执行计划详细信息。由数据库 EXPLAIN 输出透传，内容为 JSON 字符串，包含 Meta（列定义）与 Data（执行计划行）两部分；Format=JSON 时为 EXPLAIN FORMAT=JSON 的原始结果。 */
+  Explain?: SqlExplainResultV2;
+  /** 执行计划字段说明列表。仅当请求 Visual=true 或走 SqlTemplateKey 路径时返回，用于前端展示字段中文释义。 */
+  FieldDesc?: SqlExplainFieldDescV2[];
+  /** 可视化执行计划树，当Visual=true时返回 */
+  VisualExplain?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeSqlFiltersRequest {
   /** 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。 */
   InstanceId: string;
@@ -5691,6 +5751,8 @@ declare interface Dbbrain {
   DescribeSlowLogUserHostStats(data: DescribeSlowLogUserHostStatsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogUserHostStatsResponse>;
   /** 获取SQL模板在指定时间段内的详细信息 {@link DescribeSlowLogsRequest} {@link DescribeSlowLogsResponse} */
   DescribeSlowLogs(data: DescribeSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlowLogsResponse>;
+  /** 查询 SQL 执行计划V2 {@link DescribeSqlExplainV2Request} {@link DescribeSqlExplainV2Response} */
+  DescribeSqlExplainV2(data: DescribeSqlExplainV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlExplainV2Response>;
   /** 查询实例SQL限流任务列表 {@link DescribeSqlFiltersRequest} {@link DescribeSqlFiltersResponse} */
   DescribeSqlFilters(data: DescribeSqlFiltersRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSqlFiltersResponse>;
   /** 查询SQL模板 {@link DescribeSqlTemplateRequest} {@link DescribeSqlTemplateResponse} */

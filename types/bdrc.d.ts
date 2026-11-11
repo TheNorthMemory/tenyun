@@ -148,6 +148,10 @@ declare interface BackupGroup {
   SubAccountUin?: string | null;
   /** 创建当前备份的定期备份策略ID，为null则为手动创建的备份。 */
   AutoBackupPolicyId?: string | null;
+  /** 开始时间 */
+  StartTime?: string | null;
+  /** 结束时间 */
+  EndTime?: string | null;
 }
 
 /** 备份组的操作掩码 */
@@ -252,8 +256,12 @@ declare interface BackupInfo {
   EnableObjectTags?: boolean | null;
   /** 云上资源ID */
   CloudResourceId?: string | null;
-  /** 产品存储类型枚举值：SD： 文件系统通用标准型存储HP： 文件系统通用性能性存储TB： 文件系统Turbo标准型存储TP： 文件系统Turbo性能型存储THP： 文件系统Turbo吞吐型存储 */
+  /** 产品存储类型。CFS 资源返回文件系统存储类型；非 CFS 资源无存储类型，返回资源类型标识。枚举值：SD： 文件系统通用标准型存储HP： 文件系统通用性能性存储TB： 文件系统Turbo标准型存储TP： 文件系统Turbo性能型存储THP： 文件系统Turbo吞吐型存储CVM_AGENT： CVM 资源（非 CFS 资源时返回）COS_AGENT： COS 资源（非 CFS 资源时返回） */
   ProductType?: string | null;
+  /** 备份完成量单位：MB */
+  BackupCompletedSize?: number | null;
+  /** 备份完成量 */
+  BackupCompletedSizeFormatted?: string | null;
 }
 
 /** 描述实例的备份信息 */
@@ -816,7 +824,7 @@ declare interface FileBackupOverview {
 
 /** 文件信息 */
 declare interface FileInfo {
-  /** 文件名称 */
+  /** 完整路径：浏览路径 + "/" + 名称（浏览根目录时为 "/名称"） */
   Path?: string;
   /** 文件大小，单位是Bytes */
   Size?: number;
@@ -950,7 +958,7 @@ declare interface PlanInfo {
   EnableObjectAcl?: boolean | null;
   /** 是否备份对象标签（仅COS备份支持）枚举值：true： 是false： 否 */
   EnableObjectTags?: boolean | null;
-  /** 产品存储类型枚举值：SD： 文件系统通用标准型存储HP： 文件系统通用性能性存储TB： 文件系统Turbo标准型存储TP： 文件系统Turbo性能型存储THP： 文件系统Turbo吞吐型存储 */
+  /** 产品存储类型。CFS 资源返回文件系统存储类型；非 CFS 资源无存储类型，返回资源类型标识。枚举值：SD： 文件系统通用标准型存储HP： 文件系统通用性能性存储TB： 文件系统Turbo标准型存储TP： 文件系统Turbo性能型存储THP： 文件系统Turbo吞吐型存储CVM_AGENT： CVM 资源（非 CFS 资源时返回）COS_AGENT： COS 资源（非 CFS 资源时返回） */
   ProductType?: string | null;
 }
 
@@ -1056,7 +1064,7 @@ declare interface ProtectInstance {
   OfflineReason?: string;
   /** 备份数据量，单位为字节 */
   BackupSize?: number | null;
-  /** 产品存储类型枚举值：SD： 文件系统通用标准型存储HP： 文件系统通用性能性存储TB： 文件系统Turbo标准型存储TP： 文件系统Turbo性能型存储THP： 文件系统Turbo吞吐型存储 */
+  /** 产品存储类型。CFS 资源返回文件系统存储类型；非 CFS 资源无存储类型，返回资源类型标识。枚举值：SD： 文件系统通用标准型存储HP： 文件系统通用性能性存储TB： 文件系统Turbo标准型存储TP： 文件系统Turbo性能型存储THP： 文件系统Turbo吞吐型存储CVM_AGENT： CVM 资源（非 CFS 资源时返回）COS_AGENT： COS 资源（非 CFS 资源时返回） */
   ProductType?: string | null;
 }
 
@@ -1140,13 +1148,13 @@ declare interface RestoreTask {
   TotalFileCount?: number;
   /** 需恢复数据总量（字节） */
   TotalSize?: number;
-  /** 需恢复数据总量（格式化，如 "1.5 GB"） */
+  /** 需恢复数据总量（格式化：1024 进制，保留两位小数，单位 B/KiB/MiB/GiB/TiB/PiB，如 "1.50 GiB"） */
   TotalSizeFormatted?: string;
   /** 已恢复文件数 */
   RestoreFileCount?: number;
   /** 已恢复数据量（字节） */
   RestoreSize?: number;
-  /** 已恢复数据量（格式化） */
+  /** 已恢复数据量（格式化，口径同 TotalSizeFormatted，如 "512.00 MiB"） */
   RestoreSizeFormatted?: string;
   /** 恢复进度（0-100） */
   Progress?: number;
@@ -1162,6 +1170,12 @@ declare interface RestoreTask {
   FailReason?: string;
   /** 冲突处理策略：skip-跳过/overwrite-覆盖/newer-保留最新版本/if_changed-内容变化时覆盖 */
   ConflictStrategy?: string;
+  /** 是否为原路径恢复 */
+  IsOriginalPath?: boolean | null;
+  /** 源端腾讯云资源ID */
+  CloudResourceId?: string | null;
+  /** 目标端腾讯云资源ID */
+  TargetCloudResourceId?: string | null;
 }
 
 /** 描述了 “云安全” 服务相关的信息 */

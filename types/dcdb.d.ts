@@ -2651,6 +2651,10 @@ declare interface UpgradeDedicatedDCDBInstanceRequest {
   SwitchEndTime?: string;
   /** 多个分片同时发起扩容，并发切换中的切换时间间隔，即当前分片切换开始时间和下一个分片的切换开始时间间隔，不传默认为1。取值范围：[1, 180]单位：秒 */
   SwitchInterval?: number;
+  /** 主节点所在机器，类似svr-xxx */
+  MasterHostId?: string;
+  /** 备节点所在机器，类似[svr-xxx1,svr-xxx2] */
+  SlaveHostIds?: string[];
 }
 
 declare interface UpgradeDedicatedDCDBInstanceResponse {

@@ -852,6 +852,12 @@ declare interface GetSchemaRsp {
   Schema?: Schema | null;
 }
 
+/** 查询会话任务状态响应 */
+declare interface GetSessionStatusRsp {
+  /** 结果列表，与请求 Items 顺序一致 */
+  Items?: SessionStatusItem[];
+}
+
 /** 获取table详情的响应 */
 declare interface GetTableRsp {
   /** table详情 */
@@ -1732,6 +1738,20 @@ declare interface RangePartitioning {
   Assignments: RangePartition[];
 }
 
+/** databuddy 产物json 响应 */
+declare interface ReadProductJsonRsp {
+  /** 文件路径 */
+  Path?: string | null;
+  /** 文件大小 */
+  Size?: string | null;
+  /** 文件内容 */
+  Content?: string | null;
+  /** 请求状态码 0-成功，其他-异常 */
+  ResultCode?: number | null;
+  /** 返回结果提示信息 */
+  Message?: string | null;
+}
+
 /** 批量移除控制台用户响应 */
 declare interface RemoveConsoleUsersRsp {
   /** 请求已完成处理；即使部分失败也为 true，逐个结果以 SuccessUins/FailItems 为准 */
@@ -1924,6 +1944,24 @@ declare interface SearchResult {
   Aliases?: string[] | null;
   /** 资产元数据来源。取值：METALAKE（专业版tclake）/ CONNECTION（分析版Linked Catalog）/ SETATS（Setats元数据）。仅catalog类资产（CATALOG/SCHEMA/TABLE/VIEW/MODEL/VOLUME/FUNCTION/TABLE_COLUMN）返回该字段，非catalog类资产该字段为空字符串。 */
   CatalogSource?: string | null;
+}
+
+/** 会话任务状态单条结果 */
+declare interface SessionStatusItem {
+  /** 对话 Session ID */
+  SessionId?: string;
+  /** 沙箱 Runtime ID */
+  RuntimeId?: string;
+  /** 任务运行状态: planning/working/pending/completed/failed */
+  TaskStatus?: string;
+}
+
+/** 查询会话任务状态的单条查询项 */
+declare interface SessionStatusQueryItem {
+  /** 沙箱 Runtime ID */
+  RuntimeId?: string;
+  /** 对话 Session ID */
+  SessionId?: string;
 }
 
 /** 单字段分区 */
@@ -3436,6 +3474,20 @@ declare interface GetSchemaResponse {
   RequestId?: string;
 }
 
+declare interface GetSessionStatusRequest {
+  /** 工作空间 ID */
+  WorkspaceId?: string;
+  /** 待查询的会话列表（支持传多个，传一条即单条查询） */
+  Items?: SessionStatusQueryItem[];
+}
+
+declare interface GetSessionStatusResponse {
+  /** 返回结果 */
+  Data?: GetSessionStatusRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetTableRequest {
   /** 数据目录名 */
   CatalogName: string;
@@ -4192,6 +4244,22 @@ declare interface ListWorkspacesResponse {
   RequestId?: string;
 }
 
+declare interface ReadProductJsonRequest {
+  /** 工作空间ID */
+  WorkspaceId?: string;
+  /** 沙盒runtimeId */
+  RuntimeId?: string;
+  /** 沙盒sessionId */
+  SessionId?: string;
+}
+
+declare interface ReadProductJsonResponse {
+  /** 返回对象实体 */
+  Data?: ReadProductJsonRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface RemoveConsoleUsersRequest {
   /** 必填，待移除的用户 UIN 列表，单次最多10个 */
   UserUins: string[];
@@ -4861,6 +4929,8 @@ declare interface Databuddy {
   GetModelVersion(data: GetModelVersionRequest, config?: AxiosRequestConfig): AxiosPromise<GetModelVersionResponse>;
   /** 查询schema详情 {@link GetSchemaRequest} {@link GetSchemaResponse} */
   GetSchema(data: GetSchemaRequest, config?: AxiosRequestConfig): AxiosPromise<GetSchemaResponse>;
+  /** 查询会话任务运行状态 {@link GetSessionStatusRequest} {@link GetSessionStatusResponse} */
+  GetSessionStatus(data?: GetSessionStatusRequest, config?: AxiosRequestConfig): AxiosPromise<GetSessionStatusResponse>;
   /** 查询table详情 {@link GetTableRequest} {@link GetTableResponse} */
   GetTable(data: GetTableRequest, config?: AxiosRequestConfig): AxiosPromise<GetTableResponse>;
   /** 批量获取表的元数据 {@link GetTablesRequest} {@link GetTablesResponse} */
@@ -4929,6 +4999,8 @@ declare interface Databuddy {
   ListWorkspaceUsers(data: ListWorkspaceUsersRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspaceUsersResponse>;
   /** 查询工作空间列表 {@link ListWorkspacesRequest} {@link ListWorkspacesResponse} */
   ListWorkspaces(data?: ListWorkspacesRequest, config?: AxiosRequestConfig): AxiosPromise<ListWorkspacesResponse>;
+  /** 读取databuddy产物 {@link ReadProductJsonRequest} {@link ReadProductJsonResponse} */
+  ReadProductJson(data?: ReadProductJsonRequest, config?: AxiosRequestConfig): AxiosPromise<ReadProductJsonResponse>;
   /** 批量移除控制台用户 {@link RemoveConsoleUsersRequest} {@link RemoveConsoleUsersResponse} */
   RemoveConsoleUsers(data: RemoveConsoleUsersRequest, config?: AxiosRequestConfig): AxiosPromise<RemoveConsoleUsersResponse>;
   /** 移除工作空间用户组 {@link RemoveWorkspaceGroupsRequest} {@link RemoveWorkspaceGroupsResponse} */

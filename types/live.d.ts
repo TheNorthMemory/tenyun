@@ -2622,6 +2622,26 @@ declare interface CreateAuditTemplateResponse {
   RequestId?: string;
 }
 
+declare interface CreateAvatarEditingLiveRequest {
+  /** 通道ID，这里是待编辑的直播流的源ID */
+  ChannelId: string;
+  /** 各种编辑场景的参考图 */
+  ImageUrl: string;
+  /** 支持的编辑类型枚举值：style_transfer： 整体风格迁移virtual_tryon： 虚拟试穿subject_replacement： 主体替换background_replacement： 背景替换默认值：style_transfer */
+  EditingType?: string;
+}
+
+declare interface CreateAvatarEditingLiveResponse {
+  /** 实时编辑会话ID */
+  LiveId?: string;
+  /** 实时编辑会话的状态枚举值：waiting： 等待中on_live： 直播中ending： 结束中ended： 已结束prepared： 准备中 */
+  Status?: string;
+  /** 通道ID，这里是待编辑的直播流的源ID */
+  ChannelId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCasterInputPushUrlRequest {
   /** 导播台ID */
   CasterId: number;
@@ -4072,6 +4092,34 @@ declare interface DescribeAuditTemplatesRequest {
 declare interface DescribeAuditTemplatesResponse {
   /** 审核模板列表。 */
   AuditTemplates?: AuditTemplate[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAvatarEditingLiveRequest {
+  /** 通道ID，通常是待编辑的直播流的源ID */
+  ChannelId: string;
+}
+
+declare interface DescribeAvatarEditingLiveResponse {
+  /** 通道ID，通常是待编辑的直播流的源ID */
+  ChannelId?: string;
+  /** 实时编辑会话ID */
+  LiveId?: string;
+  /** 实时编辑会话的状态枚举值：waiting： 等待中on_live： 直播中ending： 结束中ended： 已结束prepared： 准备中not_exist： 不存在 */
+  Status?: string;
+  /** 内部模块会话状态 */
+  Phase?: string;
+  /** 输出Mode */
+  CallMode?: string;
+  /** 创建时间 */
+  CreatedAt?: string;
+  /** 开播时刻 */
+  StartTime?: string;
+  /** 结束时间，如果还没结束则该值为0 */
+  EndTime?: string;
+  /** 跟踪ID，用于查日志 */
+  TraceId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7044,6 +7092,20 @@ declare interface StartLiveStreamMonitorResponse {
   RequestId?: string;
 }
 
+declare interface StopAvatarEditingLiveRequest {
+  /** 通道ID，通常是待编辑的直播流的源ID */
+  ChannelId: string;
+}
+
+declare interface StopAvatarEditingLiveResponse {
+  /** 通道ID，通常是待编辑的直播流的源ID */
+  ChannelId?: string;
+  /** 实时编辑会话ID */
+  LiveId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopCasterPgmRequest {
   /** 导播台ID。 */
   CasterId: number;
@@ -7130,6 +7192,24 @@ declare interface StopScreenshotTaskRequest {
 }
 
 declare interface StopScreenshotTaskResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface SwitchAvatarEditingSceneRequest {
+  /** 通道ID，通常是待编辑的直播流的源ID */
+  ChannelId: string;
+  /** 支持的编辑类型枚举值：style_transfer： 整体风格迁移virtual_tryon： 虚拟试穿subject_replacement： 主体替换background_replacement： 背景替换 */
+  EditingType?: string;
+  /** 各种编辑场景的参考图 */
+  ImageUrl?: string;
+}
+
+declare interface SwitchAvatarEditingSceneResponse {
+  /** 通道ID，通常是待编辑的直播流的源ID */
+  ChannelId?: string;
+  /** 实时编辑会话ID */
+  LiveId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7241,6 +7321,8 @@ declare interface Live {
   CreateAuditRule(data: CreateAuditRuleRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditRuleResponse>;
   /** 创建审核模板 {@link CreateAuditTemplateRequest} {@link CreateAuditTemplateResponse} */
   CreateAuditTemplate(data: CreateAuditTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAuditTemplateResponse>;
+  /** 创建实时编辑数字人 {@link CreateAvatarEditingLiveRequest} {@link CreateAvatarEditingLiveResponse} */
+  CreateAvatarEditingLive(data: CreateAvatarEditingLiveRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAvatarEditingLiveResponse>;
   /** 创建导播台 {@link CreateCasterRequest} {@link CreateCasterResponse} */
   CreateCaster(data?: CreateCasterRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCasterResponse>;
   /** 生成导播台推流URL {@link CreateCasterInputPushUrlRequest} {@link CreateCasterInputPushUrlResponse} */
@@ -7401,6 +7483,8 @@ declare interface Live {
   DescribeAuditTemplate(data: DescribeAuditTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTemplateResponse>;
   /** 获取审核模板列表 {@link DescribeAuditTemplatesRequest} {@link DescribeAuditTemplatesResponse} */
   DescribeAuditTemplates(data?: DescribeAuditTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAuditTemplatesResponse>;
+  /** 查询数字人实时编辑直播间状态 {@link DescribeAvatarEditingLiveRequest} {@link DescribeAvatarEditingLiveResponse} */
+  DescribeAvatarEditingLive(data: DescribeAvatarEditingLiveRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAvatarEditingLiveResponse>;
   /** 查询直播中的主备流 {@link DescribeBackupStreamListRequest} {@link DescribeBackupStreamListResponse} */
   DescribeBackupStreamList(data?: DescribeBackupStreamListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBackupStreamListResponse>;
   /** 直播播放带宽和流量数据查询 {@link DescribeBillBandwidthAndFluxListRequest} {@link DescribeBillBandwidthAndFluxListResponse} */
@@ -7703,6 +7787,8 @@ declare interface Live {
   StartLivePadStream(data: StartLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartLivePadStreamResponse>;
   /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
   StartLiveStreamMonitor(data: StartLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveStreamMonitorResponse>;
+  /** 停止实时编辑数字人 {@link StopAvatarEditingLiveRequest} {@link StopAvatarEditingLiveResponse} */
+  StopAvatarEditingLive(data: StopAvatarEditingLiveRequest, config?: AxiosRequestConfig): AxiosPromise<StopAvatarEditingLiveResponse>;
   /** 停止导播台主监任务 {@link StopCasterPgmRequest} {@link StopCasterPgmResponse} */
   StopCasterPgm(data: StopCasterPgmRequest, config?: AxiosRequestConfig): AxiosPromise<StopCasterPgmResponse>;
   /** 停止导播台预监任务 {@link StopCasterPvwRequest} {@link StopCasterPvwResponse} */
@@ -7719,6 +7805,8 @@ declare interface Live {
   StopRecordTask(data: StopRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordTaskResponse>;
   /** 终止截图任务 {@link StopScreenshotTaskRequest} {@link StopScreenshotTaskResponse} */
   StopScreenshotTask(data: StopScreenshotTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopScreenshotTaskResponse>;
+  /** 切换数字人实时编辑场景 {@link SwitchAvatarEditingSceneRequest} {@link SwitchAvatarEditingSceneResponse} */
+  SwitchAvatarEditingScene(data: SwitchAvatarEditingSceneRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchAvatarEditingSceneResponse>;
   /** 直播备用流切换 {@link SwitchBackupStreamRequest} {@link SwitchBackupStreamResponse} */
   SwitchBackupStream(data: SwitchBackupStreamRequest, config?: AxiosRequestConfig): AxiosPromise<SwitchBackupStreamResponse>;
   /** 切换导播台备播 {@link SwitchCasterToEmergencyRequest} {@link SwitchCasterToEmergencyResponse} */

@@ -2549,6 +2549,8 @@ declare interface CreateCloneInstanceRequest {
   Zone?: string;
   /** 备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。 */
   FourthZone?: string;
+  /** 是否使用最新小版本号进行克隆。枚举值：1： 是0： 否默认值：0默认和源实例的小版本号对齐 */
+  UseLatestMinorVersion?: number;
 }
 
 declare interface CreateCloneInstanceResponse {
@@ -3598,7 +3600,7 @@ declare interface DescribeDBFeaturesResponse {
   EncryptionNeedUpgrade?: boolean;
   /** 是否为异地只读实例。 */
   IsRemoteRo?: boolean;
-  /** 主实例所在地域。说明：此参数可能返回空值，您可忽略此出参返回值。如需获取实例所在地域详情，您可调用 [查询实例列表](https://cloud.tencent.com/document/product/236/15872) 接口查询。 */
+  /** 主实例所在地域。说明：此参数可能返回空值，您可忽略此出参返回值。如需获取实例所在地域详情，您可调用 查询实例列表 接口查询。 */
   MasterRegion?: string;
   /** 是否支持小版本升级。 */
   IsSupportUpdateSubVersion?: boolean;

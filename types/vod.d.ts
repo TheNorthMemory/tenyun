@@ -10406,7 +10406,7 @@ declare namespace V20180717 {
     Comment?: string;
     /** 视频处理类型任务参数。 */
     MediaProcessTask?: MediaProcessTaskInput;
-    /** AI 内容审核类型任务参数 *。*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。 */
+    /** AI 内容审核类型任务参数 *。*该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。 */
     AiContentReviewTask?: AiContentReviewTaskInput;
     /** AI 内容分析类型任务参数。 */
     AiAnalysisTask?: AiAnalysisTaskInput;

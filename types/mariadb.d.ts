@@ -2347,11 +2347,15 @@ declare interface UpgradeDedicatedDBInstanceRequest {
   SwitchStartTime?: string;
   /** 切换时间窗口结束时间 */
   SwitchEndTime?: string;
+  /** 主节点的机器id，类似svr-xxx */
+  MasterHostId?: string;
+  /** 备节点的机器id组，类似[svr-xxx1, svr-xxx2] */
+  SlaveHostIds?: string[];
 }
 
 declare interface UpgradeDedicatedDBInstanceResponse {
   /** 异步流程Id */
-  FlowId: number;
+  FlowId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -2304,6 +2304,10 @@ declare interface AudioEnhanceConfig {
   Beautify?: AudioBeautifyConfig | null;
   /** 音频增强编辑。 */
   AudioEnhanceEdit?: AudioEnhanceEditConfig | null;
+  /** 音频超分配置。 */
+  AudioSR?: AudioSRConfig | null;
+  /** 空间音频配置。 */
+  SpatialAudio?: SpatialAudioConfig | null;
 }
 
 /** 音频增强编辑 */
@@ -2312,6 +2316,16 @@ declare interface AudioEnhanceEditConfig {
   Switch?: string;
   /** 音频编辑类型枚举值：restore： 修复开关开启时，必须显式指定枚举值 */
   Type?: string;
+}
+
+/** 音频超分配置 */
+declare interface AudioSRConfig {
+  /** 能力配置开关枚举值：ON： 开启OFF： 关闭默认值：OFF */
+  Switch?: string;
+  /** 音频超分类型枚举值：premium_hd： 臻品高清版premium_master： 臻品母带版默认值：premium_hd */
+  Type?: string | null;
+  /** 目标采样率枚举值：44100： 44.1kHz48000： 48kHz64000： 64kHz88200： 88.2kHz96000： 96kHz192000： 192kHz默认值：48000其中 192kHz 仅臻品母带版才可以使用 */
+  Value?: number;
 }
 
 /** 音频分离配置 */
@@ -2526,13 +2540,13 @@ declare interface ClipRangeInfo {
 
 /** 爆款复刻 AIGC 生视频相关参数 */
 declare interface CloneViralAIGC {
-  /** 视频时长取值范围：[4, 15] */
+  /** 视频时长取值范围：[4, 30]指定时取值范围随档位不同：flash 为 2-15, pro 为 4-30。 */
   Duration?: number;
-  /** 宽高比。旗舰版支持 16:9/4:3/1:1/3:4/9:16/21:9/adaptive，标准版支持16:9/1:1/9:16 */
+  /** 宽高比。可选 9:16、16:9、3:4、4:3、1:1、21:9、adaptive（自适应参考视频，flash 档不支持）。 */
   AspectRatio?: string;
-  /** 分辨率。支持720p（默认）/1080p/2k/4k */
+  /** 分辨率。支持720p（默认）/1080p */
   Resolution?: string;
-  /** 模式。flagship（高级版，默认）、standard（标准版）、depthcrafter(深度提取) */
+  /** 模式。可选 pro（专业版）、 flash（高级版，默认） */
   ModelTier?: string;
   /** 深度估计结果是否含音频， 默认不含 */
   DepthWithAudio?: boolean;
@@ -5712,6 +5726,8 @@ declare interface MediaVideoStreamItem {
   HdrType?: string | null;
   /** 视频Codecs。 */
   Codecs?: string | null;
+  /** 视频时长。 */
+  Duration?: number | null;
   /** 帧率分子部分 */
   FpsNumerator?: number | null;
   /** 帧率分母部分 */
@@ -5724,6 +5740,114 @@ declare interface Metadata {
   Key?: string;
   /** Value。 */
   Value?: string;
+}
+
+/** 单条候选回复。 */
+declare interface ModelChatCompletionChoice {
+  /** 候选回复在候选数组中的索引 */
+  Index?: number;
+  /** 结束原因 */
+  FinishReason?: string;
+  /** 模型回复消息体 */
+  Message?: ModelChatResponseMessage;
+}
+
+/** 模型调用的 token 用量统计。 */
+declare interface ModelChatCompletionUsage {
+  /** 输入 token 数 */
+  PromptTokens?: number | null;
+  /** 输出 token 数 */
+  CompletionTokens?: number | null;
+  /** 总 token 数 */
+  TotalTokens?: number | null;
+}
+
+/** 消息内容片段。 */
+declare interface ModelChatContentPart {
+  /** 内容类型枚举值：text： 文本内容input_image： 图片输入input_video： 视频输入input_audio： 音频输入input_file： 文件输入 */
+  Type: string;
+  /** 文本消息Type=text 时必填 */
+  Text?: string;
+  /** 图片输入Type=input_image 时必填 */
+  InputImage?: ModelChatInputImage;
+  /** 视频输入Type=input_video 时必填 */
+  InputVideo?: ModelChatInputVideo;
+  /** 音频输入Type=input_audio 时必填 */
+  InputAudio?: ModelChatInputAudio;
+  /** 文件输入Type=input_file 时必填 */
+  InputFile?: ModelChatInputFile;
+}
+
+/** 多模态理解Base64输入 */
+declare interface ModelChatDataInputInfo {
+  /** Base64输入 */
+  Data: string;
+}
+
+/** 音频输入配置。 */
+declare interface ModelChatInputAudio {
+  /** 媒体文件输入 */
+  InputInfo: ModelChatMediaInputInfo;
+  /** 音频格式 */
+  Format?: string;
+}
+
+/** 文件输入配置。 */
+declare interface ModelChatInputFile {
+  /** 媒体文件输入 */
+  InputInfo: ModelChatMediaInputInfo;
+  /** 文件名 */
+  Filename?: string;
+}
+
+/** 图片输入配置。 */
+declare interface ModelChatInputImage {
+  /** 媒体文件输入 */
+  InputInfo: ModelChatMediaInputInfo;
+}
+
+/** 视频输入配置。 */
+declare interface ModelChatInputVideo {
+  /** 媒体文件输入 */
+  InputInfo: ModelChatMediaInputInfo;
+}
+
+/** 多模态理解媒体文件输入 */
+declare interface ModelChatMediaInputInfo {
+  /** 输入类型枚举值：URL： Url输入DATA： Base64输入 */
+  Type: string;
+  /** URL输入配置 */
+  UrlInputInfo?: ModelChatUrlInputInfo;
+  /** Base64输入配置 */
+  DataInputInfo?: ModelChatDataInputInfo;
+}
+
+/** 单条对话消息，定义对话中的角色与内容。 */
+declare interface ModelChatMessageItem {
+  /** 角色枚举值：system： 系统消息user： 用户消息assistant： 模型消息 */
+  Role: string;
+  /** 输入内容 */
+  Content: ModelChatContentPart[];
+}
+
+/** 模型回复消息体。 */
+declare interface ModelChatResponseMessage {
+  /** 角色标识枚举值：assistant： 模型消息user： 用户消息system： 系统消息 */
+  Role?: string;
+  /** 模型生成的识别文本 */
+  Content?: string;
+}
+
+/** 多模态理解任务的事件通知配置。 */
+declare interface ModelChatTaskNotifyConfig {
+  /** 回调 URL */
+  NotifyUrl?: string;
+}
+
+/** 多模态理解URL输入 */
+declare interface ModelChatUrlInputInfo {
+  /** Url输入 */
+  Url: string;
 }
 
 /** 修改 AIGC 文档生视频任务状态输入 */
@@ -7640,6 +7764,14 @@ declare interface SourceTag {
   Value?: string;
 }
 
+/** 空间音频配置 */
+declare interface SpatialAudioConfig {
+  /** 能力配置开关枚举值：ON： 开启OFF： 关闭默认值：OFF */
+  Switch?: string;
+  /** 空间音频类型枚举值：premium_immersive： 臻品全景声默认值：premium_immersive */
+  Type?: string | null;
+}
+
 /** 角色列表 */
 declare interface Speakers {
   /** 角色唯一标识 */
@@ -9345,7 +9477,7 @@ declare interface CreateAigcImageTaskRequest {
   OutputImageCount?: number;
   /** 用于传入模型要求的额外参数。 */
   ExtraParameters?: AigcImageExtraParam;
-  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 Hunyuan 3.0，支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。Qwen 0925，支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。示例： {"size":"1024x1024"}。 */
+  /** 用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。 Hunyuan 3.0，支持自由设置分辨率宽高，宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024x1024 像素。Qwen 0925，支持自由设置分辨率宽高，合法总像素范围 [512x512=261632, 2048x2048=4194304]。Hunyuan 3.5-preivew, 支持多轮编辑，可通过携带previous_task_id的方式来继续编辑图片。示例： {"size":"1024x1024"}， {"previous_task_id":"4-AigcVideo-56349234"}。 */
   AdditionalParameters?: string;
   /** 文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。 */
   StoreCosParam?: AigcStoreCosParam;
@@ -9583,6 +9715,24 @@ declare interface CreateMediaEvaluationRequest {
 
 declare interface CreateMediaEvaluationResponse {
   /** 任务 ID。 */
+  TaskId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateModelChatTaskRequest {
+  /** 模型标识 */
+  Model: string;
+  /** 对话消息数组 */
+  Messages?: ModelChatMessageItem[];
+  /** 回调通知配置 */
+  TaskNotifyConfig?: ModelChatTaskNotifyConfig;
+}
+
+declare interface CreateModelChatTaskResponse {
+  /** 错误描述 */
+  Msg?: string;
+  /** 任务ID */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -11062,6 +11212,32 @@ declare interface DescribeMediaMetaDataResponse {
   RequestId?: string;
 }
 
+declare interface DescribeModelChatTaskRequest {
+  /** 任务ID */
+  TaskId: string;
+}
+
+declare interface DescribeModelChatTaskResponse {
+  /** 任务ID */
+  TaskId?: string;
+  /** 响应生成时间 */
+  Created?: number;
+  /** 错误描述 */
+  Msg?: string;
+  /** 响应 ID */
+  Id?: string;
+  /** 响应对象类型标识 */
+  Object?: string;
+  /** 模型名称 */
+  Model?: string;
+  /** 候选回复数组 */
+  Choices?: ModelChatCompletionChoice[];
+  /** token 用量统计 */
+  Usage?: ModelChatCompletionUsage;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePersonSamplesRequest {
   /** 拉取的素材类型，可选值：UserDefine：用户自定义素材库；Default：系统默认素材库。默认值：UserDefine，拉取用户自定义素材库素材。说明：如果是拉取系统默认素材库，只能使用素材名字或者素材 ID + 素材名字的方式进行拉取，且人脸图片只返回一张。 */
   Type?: string;
@@ -12267,7 +12443,7 @@ declare interface ExecuteFunctionResponse {
 }
 
 declare interface ExtractBlindWatermarkRequest {
-  /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-abseq：ab序列版权数字水印； */
+  /** 数字水印类型，可选值：blind-basic：基础版权数字水印；blind-abseq：ab序列版权数字水印；blind-vega：vega数字水印； */
   Type: string;
   /** 媒体处理的文件输入信息。 */
   InputInfo: MediaInputInfo;
@@ -13579,6 +13755,8 @@ declare interface Mps {
   CreateLiveRecordTemplate(data?: CreateLiveRecordTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLiveRecordTemplateResponse>;
   /** 创建媒体评测 {@link CreateMediaEvaluationRequest} {@link CreateMediaEvaluationResponse} */
   CreateMediaEvaluation(data: CreateMediaEvaluationRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMediaEvaluationResponse>;
+  /** 创建多模态理解任务 {@link CreateModelChatTaskRequest} {@link CreateModelChatTaskResponse} */
+  CreateModelChatTask(data: CreateModelChatTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateModelChatTaskResponse>;
   /** 创建素材样本 {@link CreatePersonSampleRequest} {@link CreatePersonSampleResponse} */
   CreatePersonSample(data: CreatePersonSampleRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePersonSampleResponse>;
   /** 创建图片处理模板 {@link CreateProcessImageTemplateRequest} {@link CreateProcessImageTemplateResponse} */
@@ -13753,6 +13931,8 @@ declare interface Mps {
   DescribeMDPMPSUserInfo(data?: DescribeMDPMPSUserInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMDPMPSUserInfoResponse>;
   /** 获取媒体元信息 {@link DescribeMediaMetaDataRequest} {@link DescribeMediaMetaDataResponse} */
   DescribeMediaMetaData(data: DescribeMediaMetaDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMediaMetaDataResponse>;
+  /** 查询多模态理解任务 {@link DescribeModelChatTaskRequest} {@link DescribeModelChatTaskResponse} */
+  DescribeModelChatTask(data: DescribeModelChatTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeModelChatTaskResponse>;
   /** 获取素材样本列表 {@link DescribePersonSamplesRequest} {@link DescribePersonSamplesResponse} */
   DescribePersonSamples(data?: DescribePersonSamplesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePersonSamplesResponse>;
   /** 查询图片处理模板列表 {@link DescribeProcessImageTemplatesRequest} {@link DescribeProcessImageTemplatesResponse} */
