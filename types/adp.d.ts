@@ -94,6 +94,26 @@ declare interface AgentAdvancedConfig {
   MaxReasoningRound?: number;
 }
 
+/** Agent 内置工具详情 */
+declare interface AgentBuiltinTool {
+  /** 内置工具基础配置 */
+  Config?: AgentBuiltinToolConfig;
+  /** 工具展示名称 */
+  DisplayName?: string;
+  /** 工具描述 */
+  Description?: string;
+  /** 计费标识枚举值：0： 免费1： 限时免费2： 官方收费 */
+  BillingType?: number;
+}
+
+/** Agent 内置工具配置 */
+declare interface AgentBuiltinToolConfig {
+  /** 工具名称 */
+  Name?: string;
+  /** 是否禁用该内置工具 */
+  Disabled?: boolean;
+}
+
 /** [数据结构定义] Agent协同配置 */
 declare interface AgentCollaborationConfig {
   /** 协同方式。枚举值: 1:自由转交：Agent之间可自由传递任务, 2:工作流编排：基于预定义流程的协同, 3:Plan-and-Execute：规划与执行分离的协同模式 */
@@ -124,6 +144,16 @@ declare interface AgentDetail {
   AdvancedConfig?: AgentAdvancedConfig;
   /** 调用方执行的 Function Tool 列表入参限制：仅在 C 端用户态 Agent 场景可用，B 端配置态 Agent 忽略该字段与 */
   ExternalToolList?: AgentExternalToolConfig[];
+  /** 子 Agent 执行来源枚举值：0： 应用内子 Agent1： 引用已发布的应用 */
+  ProviderType?: number;
+  /** 引用应用的ID */
+  ReferenceAppId?: string;
+  /** 引用应用状态，ProviderType=1 时有效枚举值：0： 来源应用可用1： 来源应用不可用2： 无权限3： 嵌套引用: 来源应用线上生效配置中已含应用类子 Agent */
+  ReferenceAppStatus?: number;
+  /** 引用应用详情，ProviderType=1 时返回 */
+  ReferenceApp?: ReferenceAppDetail | null;
+  /** 内置工具列表 */
+  BuiltinToolList?: AgentBuiltinTool[];
 }
 
 /** 调用方执行的 Function Tool 配置 */
@@ -326,6 +356,12 @@ declare interface AgentSpec {
   AdvancedConfig?: AgentAdvancedConfig;
   /** 调用方执行的 Function Tool 列表入参限制：仅在 C 端用户态 Agent 场景可用，B 端配置态 Agent 忽略该字段与 */
   ExternalToolList?: AgentExternalToolConfig[];
+  /** 子 Agent执行来源枚举值：0： 应用内子 Agent1： 引用已发布的应用 */
+  ProviderType?: number;
+  /** 引用应用的Id */
+  ReferenceAppId?: string;
+  /** 内置工具信息 */
+  BuiltinToolList?: AgentBuiltinToolConfig[];
 }
 
 /** Agent摘要信息 */
@@ -336,6 +372,10 @@ declare interface AgentSummary {
   Profile?: AgentProfile;
   /** 高级设置;scope=0 时返回 */
   AdvancedConfig?: AgentAdvancedConfig;
+  /** 子 Agent 执行来源枚举值：0： 应用内子 Agent1： 引用已发布的应用 */
+  ProviderType?: number;
+  /** 引用应用状态，ProviderType=1 时有效枚举值：0： 来源应用可用1： 来源应用不可用2： 无权限3： 嵌套引用: 来源应用线上生效配置中已含应用类子 Agent */
+  ReferenceAppStatus?: number;
 }
 
 /** 系统参数 */
@@ -438,6 +478,8 @@ declare interface ApiKeyAuthConfig {
   KeyParamName: string;
   /** 密钥参数值 */
   KeyParamValue: string;
+  /** 密钥值用途，未指定按允许工具调用处理枚举值：1： 允许用于工具调用2： 仅用于连接测试和获取工具列表 */
+  KeyValueUsage?: number;
 }
 
 /** API插件配置 */
@@ -1118,6 +1160,16 @@ declare interface BillingAttribute {
   Value?: string;
 }
 
+/** 知识库容量信息 */
+declare interface ByteCapacity {
+  /** 最大容量 */
+  MaxCapacity?: string;
+  /** 超量失效容量 */
+  ExceededInvalidCapacity?: string;
+  /** 已使用容量 */
+  UsedCapacity?: string;
+}
+
 /** 调用来源 */
 declare interface CallSource {
   /** 环境 UUID（来源于上报字段 channel_uuid）；公有云可为空，不能用 deployment_type 替代 */
@@ -1238,6 +1290,16 @@ declare interface ChannelSpec {
   ShareGroupConversation?: boolean | null;
   /** 是否调试态 */
   IsDebug?: boolean | null;
+}
+
+/** 知识库容量信息 */
+declare interface CharacterSize {
+  /** 最大字符数 */
+  MaxCharSize?: string;
+  /** 超量字符数 */
+  OverCharSize?: string;
+  /** 已用字符数 */
+  UsedCharSize?: string;
 }
 
 /** 通用校验结果 */
@@ -1442,12 +1504,16 @@ declare interface ConversationContent {
   CustomVariablesData?: string | null;
   /** 企业表单 */
   EnterpriseCharts?: string | null;
+  /** 文件信息 */
+  File?: ConversationFileInfo | null;
   /** 选项卡列表 */
   OptionCardList?: string[];
   /** 选项卡列表 */
   OptionCards?: string[];
   /** 选项卡模式 枚举值: 0-OPTION_MODE_SINGLE(单选), 1-OPTION_MODE_MULTI(多选) */
   OptionMode?: number | null;
+  /** 问卷信息 */
+  Questionnaire?: ConversationQuestionnaire | null;
   /** 引用角标信息列表 */
   QuoteInfoList?: ConversationQuoteInfo[];
   /** 引用角标信息列表 */
@@ -1462,6 +1528,10 @@ declare interface ConversationContent {
   TaskList?: ConversationAgentTask[];
   /** 智能体任务列表 */
   Tasks?: ConversationAgentTask[];
+  /** Widget 信息 */
+  Widget?: ConversationWidget | null;
+  /** Widget 动作信息 */
+  WidgetAction?: ConversationWidgetAction | null;
   /** 工作流输入参数 */
   WorkflowInput?: string | null;
   /** MCP-APP调用信息 */
@@ -1538,6 +1608,8 @@ declare interface ConversationMcpApp {
 declare interface ConversationMessage {
   /** 会话 ID */
   ConversationId: string;
+  /** 额外信息 */
+  ExtraInfo: ConversationMessageExtraInfo | null;
   /** 消息图标 */
   Icon: string;
   /** 消息 ID */
@@ -1560,6 +1632,104 @@ declare interface ConversationMessage {
   Contents?: ConversationContent[];
   /** 类型 */
   Type?: string;
+}
+
+/** MessageExtraInfo 消息扩展信息 */
+declare interface ConversationMessageExtraInfo {
+  /** 智能体图标 */
+  AgentIcon: string;
+  /** 智能体名称 */
+  AgentName: string;
+  /** 消息处理耗时 */
+  Elapsed: string;
+  /** 父消息 ID */
+  ParentMessageId: string;
+  /** 关联记录 ID */
+  RelatedRecordId: string;
+  /** 消息处理开始时间戳（毫秒） */
+  StartTime: string;
+  /** 工具图标 */
+  ToolIcon: string;
+  /** 工具名称 */
+  ToolName: string;
+  /** Trace ID */
+  TraceId: string;
+  /** 是否可以反馈 */
+  CanFeedback?: boolean;
+  /** 是否可以点赞点踩 */
+  CanRate?: boolean;
+  /** 消息处理开始时间戳（毫秒） */
+  EndTime?: string;
+  /** 是否已读 */
+  HasRead?: boolean;
+  /** 是否大模型生成 */
+  IsModelGenerated?: boolean;
+  /** 用户反馈标签列表 */
+  ReasonList?: string[];
+  /** 回复方式 */
+  ReplyMethod?: number;
+  /** 用户打分 */
+  Score?: number;
+  /** 子 Agent 运行 Id */
+  SubAgentRunId?: string;
+  /** 是否是子 Agent 的消息 */
+  IsSubAgent?: boolean;
+  /** 子 Agent 线程 ID */
+  SubAgentThreadId?: string;
+  /** 是否是 Agent Team 模式下的 teammate 成员 */
+  IsTeammate?: boolean;
+  /** Agent Team 模式下的 teammate 名称 */
+  TeammateName?: string;
+  /** 工作流节点名称 */
+  WorkflowNodeName?: string;
+}
+
+/** Question 问卷问题信息 */
+declare interface ConversationQuestion {
+  /** 问题序号 */
+  Index: number;
+  /** 问题内容 */
+  Question: string;
+  /** 是否必答 */
+  Required: boolean;
+  /** 问题类型 枚举值: 0-QUESTION_TYPE_UNSPECIFIED(未指定), 1-QUESTION_TYPE_SINGLE(单选), 2-QUESTION_TYPE_MULTIPLE(多选) */
+  Type: number;
+  /** 选项列表 */
+  OptionList?: ConversationQuestionOption[];
+  /** 选项列表 */
+  Options?: ConversationQuestionOption[];
+}
+
+/** QuestionAnswer 问题答案信息 */
+declare interface ConversationQuestionAnswer {
+  /** 问题内容 */
+  Question: string;
+  /** 已选择的选项标签列表 */
+  SelectedLabelList?: string[];
+  /** 已选择的选项标签列表 */
+  SelectedLabels?: string[];
+}
+
+/** QuestionOption 问题选项信息 */
+declare interface ConversationQuestionOption {
+  /** 选项描述 */
+  Description: string;
+  /** 选项标签 */
+  Label: string;
+}
+
+/** Questionnaire 问卷信息 */
+declare interface ConversationQuestionnaire {
+  /** 问卷标题 */
+  Title: string;
+  /** 答案列表 */
+  AnswerList?: ConversationQuestionAnswer[];
+  /** 答案列表 */
+  Answers?: ConversationQuestionAnswer[];
+  /** 问题列表 */
+  QuestionList?: ConversationQuestion[];
+  /** 问题列表 */
+  Questions?: ConversationQuestion[];
 }
 
 /** QuoteInfo 参考来源索引信息 */
@@ -1648,6 +1818,18 @@ declare interface ConversationWidget {
   State: string;
   /** widget 视图数据 */
   View: string;
+  /** 组件 ID */
+  WidgetId: string;
+  /** 组件运行 ID */
+  WidgetRunId: string;
+}
+
+/** WidgetAction 组件交互动作信息 */
+declare interface ConversationWidgetAction {
+  /** 动作类型，非枚举类型，用户自定义 */
+  ActionType: string;
+  /** 动作载荷 */
+  Payload: string;
   /** 组件 ID */
   WidgetId: string;
   /** 组件运行 ID */
@@ -2122,6 +2304,12 @@ declare interface KBCapacity {
   OverCharSize?: string;
   /** 已用字符数 */
   UsedCharSize?: string;
+  /** 字符数 */
+  CharacterSize?: CharacterSize | null;
+  /** 容量 */
+  ByteCapacity?: ByteCapacity | null;
+  /** 知识库容量状态枚举值：1： 正常2： 超量但可用（pu 抵扣）3： 超量不可用 */
+  CapacityStatus?: number | null;
 }
 
 /** 知识库分类信息（含元数据配置） */
@@ -3244,6 +3432,22 @@ declare interface QASummary {
   SourceInfo?: QASourceInfo | null;
 }
 
+/** 引用的来源应用详情 */
+declare interface ReferenceAppDetail {
+  /** 来源应用当前名称 */
+  Name?: string;
+  /** 来源应用模式枚举值：1： 标准模式2： Multi-Agent模式3： 单工作流模式4： Claw模式 */
+  AppMode?: number;
+  /** 主 Agent 名称 */
+  MainAgentName?: string;
+  /** 子 Agent 名称列表 */
+  SubAgentNameList?: string[];
+  /** 来源应用创建人 */
+  Creator?: string;
+  /** 来源应用修改时间 */
+  UpdateTime?: string;
+}
+
 /** [数据结构定义] 发布记录 */
 declare interface ReleaseRecord {
   /** 是否可导出 */
@@ -3370,6 +3574,10 @@ declare interface ResourcePackageInfo {
   KnowledgeUsage?: number;
   /** 资源包状态枚举值：1： 正常3： 已到期4： 即将到期 */
   ResourceStatus?: number;
+  /** 云盘容量单位：GB */
+  CloudDiskCapacity?: number;
+  /** 云盘用量单位：GB */
+  CloudDiskUsage?: number;
 }
 
 /** ResponseParam */
@@ -6394,6 +6602,26 @@ declare interface ModifyLabelResponse {
   RequestId?: string;
 }
 
+declare interface ModifyMessageRecordFeedbackRequest {
+  /** 需要反馈的消息记录ID */
+  RecordId: string;
+  /** 消息记录所属应用的授权AppKey */
+  AppKey?: string;
+  /** 反馈分值枚举值：0： 取消点赞或点踩1： 点赞2： 点踩 */
+  Score?: number;
+  /** 反馈的原因列表 */
+  ReasonList?: string[];
+  /** 反馈的补充内容 */
+  FeedbackContent?: string;
+  /** 消息记录所属的应用ID */
+  AppId?: string;
+}
+
+declare interface ModifyMessageRecordFeedbackResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyMsgRecordCategoryRequest {
   /** 应用 ID */
   AppId: string;
@@ -6991,6 +7219,8 @@ declare interface Adp {
   ModifyKB(data: ModifyKBRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyKBResponse>;
   /** 修改标签 {@link ModifyLabelRequest} {@link ModifyLabelResponse} */
   ModifyLabel(data: ModifyLabelRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLabelResponse>;
+  /** 修改消息记录反馈 {@link ModifyMessageRecordFeedbackRequest} {@link ModifyMessageRecordFeedbackResponse} */
+  ModifyMessageRecordFeedback(data: ModifyMessageRecordFeedbackRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMessageRecordFeedbackResponse>;
   /** 修改消息记录分类 {@link ModifyMsgRecordCategoryRequest} {@link ModifyMsgRecordCategoryResponse} */
   ModifyMsgRecordCategory(data: ModifyMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMsgRecordCategoryResponse>;
   /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */

@@ -592,6 +592,8 @@ declare interface SnapshotInfo {
   SnapshotType?: string | null;
   /** 实际快照时间，反映快照对应文件系统某个时刻的数据。 */
   SnapshotTime?: string | null;
+  /** 快照完成时间 */
+  FinishTime?: string;
 }
 
 /** 快照操作日志 */

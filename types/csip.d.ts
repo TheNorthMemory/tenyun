@@ -8644,7 +8644,7 @@ declare interface LoginWhitePlace {
 
 /** 常用登录地（入参） */
 declare interface LoginWhitePlaceInput {
-  /** 国家ID，当前仅支持国内：1 */
+  /** 国家ID，当前仅支持境内：1 */
   CountryId?: number;
   /** 省份ID；99999 表示全部省份 */
   ProvinceId?: number;
@@ -11502,6 +11502,8 @@ declare interface UserItem {
   ShareFromAppID?: number;
   /** 配额共享方账号 */
   ShareFromUser?: string;
+  /** 是否试用订单 */
+  IsTrialOrder?: number;
 }
 
 /** VPR解释卡片中的单个维度 */
@@ -20939,6 +20941,10 @@ declare interface DescribeExposureTrendResponse {
   AclCount?: number;
   /** 近1天（24h）无法访问数量 */
   CloseCount?: number;
+  /** 互联网边界总数 */
+  ExposeTotalCount?: number;
+  /** 待处理边界数量 */
+  ToGovernRiskCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

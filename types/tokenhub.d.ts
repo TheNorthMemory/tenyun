@@ -1142,6 +1142,48 @@ declare interface DescribeTokenPlanListResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTokenPlanPersonalPackageRequest {
+  /** 产品类型。取值：personal（个人版）、personal-hunyuan（个人版混元）。 */
+  ProductType: string;
+}
+
+declare interface DescribeTokenPlanPersonalPackageResponse {
+  /** 产品类型。 */
+  ProductType?: string;
+  /** 套餐状态。取值：active（生效中）、processing（处理中）、failed（创建失败）、isolated（隔离/欠费）、destroyed（已销毁）、used_up（额度用尽）、stopped（已停止）、unpurchased（未购买）。 */
+  PackageStatus?: string;
+  /** 计费资源ID */
+  ResourceId?: string;
+  /** 总额度。 */
+  TotalCredits?: string;
+  /** 已使用额度。 */
+  TotalUsed?: string;
+  /** 单周期额度。 */
+  CycleCredits?: string;
+  /** 总周期数。 */
+  TotalCycles?: number;
+  /** 当前周期序号。 */
+  CurrentCycle?: number;
+  /** 剩余周期数。 */
+  RemainCycles?: number;
+  /** 套餐生效时间，ISO 8601 格式。 */
+  StartTime?: string;
+  /** 套餐过期时间，ISO 8601 格式。 */
+  ExpireTime?: string;
+  /** 当前周期到期日，ISO 8601 格式。 */
+  PeriodEndDate?: string;
+  /** 自动续费标识。取值：0（未开启）、1（已开启）。 */
+  AutoRenewFlag?: number;
+  /** 输出token数单位：tokens */
+  OutputToken?: number;
+  /** 输入token数单位：token */
+  InputToken?: number;
+  /** 缓存命中token数单位：token */
+  CacheToken?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeTokenPlanRequest {
   /** 套餐 ID。可通过 DescribeTokenPlanList 接口获取。 */
   TeamId: string;
@@ -1431,6 +1473,8 @@ declare interface Tokenhub {
   DescribeTokenPlanApiKeyUsageDetail(data: DescribeTokenPlanApiKeyUsageDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanApiKeyUsageDetailResponse>;
   /** 查询 Token Plan 套餐列表 {@link DescribeTokenPlanListRequest} {@link DescribeTokenPlanListResponse} */
   DescribeTokenPlanList(data?: DescribeTokenPlanListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanListResponse>;
+  /** 查询 TokenPlan 个人版套餐详情 {@link DescribeTokenPlanPersonalPackageRequest} {@link DescribeTokenPlanPersonalPackageResponse} */
+  DescribeTokenPlanPersonalPackage(data: DescribeTokenPlanPersonalPackageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTokenPlanPersonalPackageResponse>;
   /** 查询用量排行列表 {@link DescribeUsageRankListRequest} {@link DescribeUsageRankListResponse} */
   DescribeUsageRankList(data: DescribeUsageRankListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUsageRankListResponse>;
   /** 更新 API 密钥绑定 {@link ModifyApiKeyBindingsRequest} {@link ModifyApiKeyBindingsResponse} */

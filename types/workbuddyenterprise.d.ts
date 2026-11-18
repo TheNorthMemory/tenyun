@@ -1202,6 +1202,12 @@ declare interface DescribeUserAccessTokenRequest {
 }
 
 declare interface DescribeUserAccessTokenResponse {
+  /** OneID 颁发的用户级访问凭证 */
+  AccessToken?: string;
+  /** 凭证类型，目前固定 Bearer */
+  TokenType?: string;
+  /** 凭证有效期，单位：秒 */
+  ExpiresIn?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -8,6 +8,18 @@ declare interface AttackRiskDetail {
   Type?: string | null;
 }
 
+/** BlackListItem */
+declare interface BlackListItem {
+  /** 黑名单条目 ID，客户创建条目时自定义，用于回溯是哪一条命中 */
+  ModelId?: string;
+  /** 条目类型。当前仅有 face（人脸） */
+  ModelType?: string;
+  /** 人脸相似度，字符串形式表示，保留 4 位小数，取值 0.0000–1.0000 */
+  FaceScore?: string;
+  /** 背景相似度 */
+  BackgroundScore?: string;
+}
+
 /** 计费详情 */
 declare interface ChargeDetail {
   /** 一比一时间时间戳，13位。 */
@@ -196,6 +208,30 @@ declare interface ExtraInfo {
   RetrievalLivenessExtraInfo?: RetrievalLivenessExtraInfo[] | null;
 }
 
+/** ExtraRiskInfo */
+declare interface ExtraRiskInfo {
+  /** 客户业务域内稳定且唯一的人员标识，用于把同一人员的多次位置上报关联起来，判断是否存在异常位移。入参限制：长度 ≤ 128 字符；不可含控制字符（ASCII < 0x20 或 0x7F）；建议传脱敏标识，勿传明文身份证号/手机号 */
+  PersonId?: string;
+  /** 设备采集时的纬度，WGS84 十进制度 入参限制：与 Longitude 必须成对出现；取值 [-90, 90]；须为有效数字，不接受 NaN/Inf；JSON 中按字符串传（如 "22.5431"） */
+  Latitude?: string;
+  /** 设备采集时的经度，WGS84 十进制度 入参限制：与 Latitude 必须成对出现；取值 [-180, 180]；其余同上 */
+  Longitude?: string;
+  /** 设备采集时的公网出口 IP 入参限制：长度 ≤ 64；须为可解析的 IPv4/IPv6；私网、回环、链路本地、组播地址视为不可定位 */
+  Ip?: string;
+}
+
+/** ExtraRiskResult */
+declare interface ExtraRiskResult {
+  /** 本次附加检查的完成度，回答“这次结果可否采信”。枚举值：Completed： 本次请求所需的检查均已给出结论（命中或通过）Partial： 至少一项检查未能给出结论：依赖不可用、数据不足、入参不完整或非法。结果仅供参考，不代表安全 */
+  Status?: string;
+  /** 附加风险等级，可能为空字符串枚举值：High： 存在已生效的风险命中项（此时 RiskDetailList 非空）Low： 检查已完成，且确认无命中""（空字符串） ： 未识别：本次没有任何一项检查能给出结论，或检查未全部完成。既不代表有风险，也不代表安全 */
+  RiskLevel?: string;
+  /** 命中的风险项列表，未命中时为空数组 [] */
+  BlackListResult?: BlackListItem[];
+  /** 人脸黑名单命中明细，未命中时为空数组 [] */
+  RiskDetailList?: RiskDetailItem[];
+}
+
 /** 获取token时的配置 */
 declare interface GetEidTokenConfig {
   /** 姓名身份证输入方式。- 取值范围：1：传身份证正反面OCR。2：传身份证正面OCR。3：用户手动输入。4：客户后台传入。- 默认值：1。- 注意：使用OCR时仅支持用户修改结果中的姓名。 */
@@ -298,6 +334,12 @@ declare interface RetrievalLivenessExtraInfo {
   SimilarityScore?: number | null;
   /** 命中的模板id */
   HitTemplate?: string | null;
+}
+
+/** RiskDetailItem */
+declare interface RiskDetailItem {
+  /** 风险项类型枚举值：IpLocationMismatch： 上报坐标所在国家/地区与 IP 归属国家/地区不一致AbnormalLocationChange： 同一人员短时间内发生物理上不可能的位移 BlacklistHit： 命中客户自建人脸黑名单 */
+  Type?: string;
 }
 
 /** RuleId相关配置 */
@@ -525,6 +567,8 @@ declare interface DetectAIFakeFacesRequest {
   Encryption?: Encryption;
   /** 加密后的密文。加密前的数据格式如下:{"FaceInput":"AAAAA","FaceInputType":1}。 */
   EncryptedBody?: string;
+  /** 一次性携带本次请求的风控上下文，即“是谁、在哪、从哪个 IP 发起” */
+  ExtraRiskInfo?: ExtraRiskInfo;
 }
 
 declare interface DetectAIFakeFacesResponse {
@@ -534,6 +578,8 @@ declare interface DetectAIFakeFacesResponse {
   AttackRiskDetailList?: AttackRiskDetail[];
   /** 返回额外信息（包括命中模板的详细信息）。 */
   ExtraInfo?: ExtraInfo;
+  /** 附加风险结论的独立容器，回答“本次附加风险检查是否可信、有没有发现问题”。 */
+  ExtraRiskResult?: ExtraRiskResult | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

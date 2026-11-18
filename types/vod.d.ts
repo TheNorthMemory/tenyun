@@ -2569,6 +2569,14 @@ declare namespace V20180717 {
     TotalSeconds?: number;
   }
 
+  /** AIGC模型白名单 */
+  interface AigcWhitelistModel {
+    /** 模型名称 */
+    ModelName: string;
+    /** 模型版本 */
+    ModelVersion: string;
+  }
+
   /** 转动图任务类型 */
   interface AnimatedGraphicTaskInput {
     /** 视频转动图模板 ID */
@@ -8235,7 +8243,7 @@ declare namespace V20180717 {
 
   /** 统计数据 */
   interface StatDataItem {
-    /** 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。 */
+    /** 数据所在时间区间的开始时间，使用 ISO 日期格式。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。表示小时级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日0点到1点的统计数据。表示天级别数据时，2019-08-22T00:00:00+08:00表示2019-08-22日的统计数据。 */
     Time?: string;
     /** 数据大小。存储空间的数据，单位是字节。转码时长的数据，单位是秒。流量数据，单位是字节。带宽数据，单位是比特每秒。直播剪辑数据，单位是秒。轮播数据，单位是秒。子应用数量数据，单位是个。日志服务用量数据，单位是条。 */
     Value?: number;
@@ -11443,6 +11451,28 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface DescribeAigcWhitelistRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** AIGC任务类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务 */
+    AigcType: string;
+  }
+
+  interface DescribeAigcWhitelistResponse {
+    /** AIGC任务类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务 */
+    AigcType?: string;
+    /** 模型白名单开关枚举值：ON： 打开，只有允许调用ModelWhitelist中列出的模型OFF： 关闭，允许调用所有模型 */
+    ModelWhitelistSwitch?: string;
+    /** 模型白名单列表 */
+    ModelWhitelist?: AigcWhitelistModel[];
+    /** IP白名单开关枚举值：ON： 打开，只允许IpWhitelist中列出的IP段进行调用OFF： 关闭，允许所有IP进行调用 */
+    IpWhitelistSwitch?: string;
+    /** IP白名单的CIDR列表 */
+    IpWhitelist?: string[];
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface DescribeAllClassRequest {
     /** 点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
     SubAppId?: number;
@@ -14543,6 +14573,26 @@ declare namespace V20180717 {
     RequestId?: string;
   }
 
+  interface SetAigcWhitelistRequest {
+    /** 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。 */
+    SubAppId: number;
+    /** AIGC任务类型枚举值：Image： AIGC 生图任务Video： AIGC 生视频任务 */
+    AigcType: string;
+    /** 模型白名单开关枚举值：ON： 打开，只有允许调用ModelWhitelist中列出的模型OFF： 关闭，允许调用所有模型 */
+    ModelWhitelistSwitch: string;
+    /** IP白名单开关枚举值：ON： 打开，只允许IpWhitelist中列出的IP段进行调用OFF： 关闭，允许所有IP进行调用 */
+    IpWhitelistSwitch: string;
+    /** 模型白名单列表 */
+    ModelWhitelist?: AigcWhitelistModel[];
+    /** IP白名单的CIDR列表 */
+    IpWhitelist?: string[];
+  }
+
+  interface SetAigcWhitelistResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface SetCLSPushTargetRequest {
     /** 域名。 */
     Domain: string;
@@ -15021,6 +15071,8 @@ declare interface Vod {
   DescribeAigcQuotas(data: V20180717.DescribeAigcQuotasRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcQuotasResponse>;
   /** 查询 AIGC 用量统计数据 {@link V20180717.DescribeAigcUsageDataRequest} {@link V20180717.DescribeAigcUsageDataResponse} */
   DescribeAigcUsageData(data: V20180717.DescribeAigcUsageDataRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcUsageDataResponse>;
+  /** 查询AIGC白名单配置 {@link V20180717.DescribeAigcWhitelistRequest} {@link V20180717.DescribeAigcWhitelistResponse} */
+  DescribeAigcWhitelist(data: V20180717.DescribeAigcWhitelistRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAigcWhitelistResponse>;
   /** 获取所有分类 {@link V20180717.DescribeAllClassRequest} {@link V20180717.DescribeAllClassResponse} */
   DescribeAllClass(data: V20180717.DescribeAllClassRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.DescribeAllClassResponse>;
   /** 获取转动图模板列表 {@link V20180717.DescribeAnimatedGraphicsTemplatesRequest} {@link V20180717.DescribeAnimatedGraphicsTemplatesResponse} */
@@ -15279,6 +15331,8 @@ declare interface Vod {
   SearchMedia(data: V20180717.SearchMediaRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SearchMediaResponse>;
   /** 按语义搜索媒体 {@link V20180717.SearchMediaBySemanticsRequest} {@link V20180717.SearchMediaBySemanticsResponse} */
   SearchMediaBySemantics(data: V20180717.SearchMediaBySemanticsRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SearchMediaBySemanticsResponse>;
+  /** 修改AIGC白名单配置 {@link V20180717.SetAigcWhitelistRequest} {@link V20180717.SetAigcWhitelistResponse} */
+  SetAigcWhitelist(data: V20180717.SetAigcWhitelistRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SetAigcWhitelistResponse>;
   /** 设置日志投递目标 {@link V20180717.SetCLSPushTargetRequest} {@link V20180717.SetCLSPushTargetResponse} */
   SetCLSPushTarget(data: V20180717.SetCLSPushTargetRequest, config: AxiosRequestConfig & V20180717.VersionHeader): AxiosPromise<V20180717.SetCLSPushTargetResponse>;
   /** 设置 DRM 密钥提供商信息 {@link V20180717.SetDrmKeyProviderInfoRequest} {@link V20180717.SetDrmKeyProviderInfoResponse} */

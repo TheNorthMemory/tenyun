@@ -94,6 +94,18 @@ declare interface CloudAuditLog {
   VersionId?: string | null;
 }
 
+/** 通用文件来源。FILE 用于 Plugin 原始文件上传，SizeBytes 必填，SHA256 可选；VERSION 仅用于 UpdateRegistryRecord 复用同一 Record 的 READY 文件版本，仅填写 SourceVersionId。与其他来源互斥，不校验插件格式或语义。 */
+declare interface CloudFileSourceInput {
+  /** 通用文件来源类型，区分大小写。枚举值：FILE： 创建 Plugin 文件版本，必须填写 SizeBytes，SHA256 可选；随后通过预签名 PUT 链接上传原始文件。VERSION： 仅 UpdateRegistryRecord 支持，复用同一 Skill 或 Plugin Record 的 READY 文件版本，仅填写 SourceVersionId。Registry 不做 Plugin 文件内容格式或语义校验，由运行端解析加载。VERSION 不继承来源版本的 Metadata 和 SupportedHarnessVersions。 */
+  Type: string;
+  /** 待上传 Plugin 文件的原始字节数。FILE 时必填，VERSION 时禁止填写。取值范围：[1, 54525952]单位：字节上限 52 MiB，服务端校验实际上传文件的字节数；不推断文件格式。 */
+  SizeBytes?: number;
+  /** 期望的文件 SHA-256 摘要。FILE 时可选，VERSION 时禁止填写。参数格式：64 位小写十六进制字符串。提供时服务端计算实际文件摘要并比对；省略时仍计算摘要并在 READY 版本的 ContentSHA256 中返回。 */
+  SHA256?: string;
+  /** 用于复用文件内容的来源 Version ID。参数格式：rv- 前缀的 Version ID。入参限制：VERSION 时必填，FILE 时禁止填写。只能在 UpdateRegistryRecord 中引用同一 Record 下未删除、内容 READY 且存在可用制品的 Skill 或 Plugin 文件版本。只复用文件，不继承来源版本的 Metadata 和 SupportedHarnessVersions；不能跨 Record 或跨 Registry 复用。 */
+  SourceVersionId?: string;
+}
+
 /** 通用过滤条件。Name 为字段名，Values 为字段候选值；字段间 AND、Values 内 OR。 */
 declare interface CloudFilter {
   /** 过滤字段名。DescribeRegistryList 支持 name / search（模糊搜索）与 archived / status（true / false / all）；DescribeRegistryRecordList 支持 name / search（模糊）、descriptor-type、lifecycle-status（精确）。 */
@@ -126,19 +138,19 @@ declare interface CloudRecord {
   DescriptorType: string | null;
   /** 生命周期状态。ACTIVE：可用；DELETED：软删除墓碑，不再参与常规查询、下发或版本配额。 */
   LifecycleStatus: string | null;
-  /** 所属租户 AppId。 */
-  AppId: number | null;
-  /** 创建者主账号 UIN。 */
-  CreatorUin: string | null;
-  /** 创建者子账号 UIN；主账号直接创建时为空。 */
-  CreatorSubAccountUin: string | null;
   /** 创建时间，ISO 8601 UTC。 */
   CreateTime: string | null;
   /** 最近一次更新时间。 */
   UpdateTime: string | null;
-  /** Record 下未删除 Version 数量。 */
+  /** 所属租户 AppId。普通模式返回，MARKETPLACE 模式不返回。 */
+  AppId?: number | null;
+  /** 创建者主账号 UIN。普通模式返回，MARKETPLACE 模式不返回。 */
+  CreatorUin?: string | null;
+  /** 创建者子账号 UIN；主账号直接创建时为空。普通模式返回，MARKETPLACE 模式不返回。 */
+  CreatorSubAccountUin?: string | null;
+  /** Record 下未删除 Version 数量。MARKETPLACE 模式仅统计市场可读版本。 */
   VersionCount?: number | null;
-  /** Record 下所有 Label Name（含未绑定 Label），包括系统 Label（stable / latest）和自定义 Label。仅名称，不含 VersionId、更新时间或操作者。 */
+  /** Record 下所有 Label Name（含未绑定 Label），包括系统 Label（stable / latest）和自定义 Label。仅名称，不含 VersionId、更新时间或操作者。MARKETPLACE 模式仅统计市场可读版本。 */
   LabelSet?: string[] | null;
 }
 
@@ -482,6 +494,98 @@ declare interface Filter {
   Values?: string[];
 }
 
+/** 已购买GPU资源详细信息 */
+declare interface GPUResource {
+  /** GPU 资源 ID，与沙箱 InstanceId、底层 VM ID 不同。 */
+  ResourceId?: string;
+  /** 所属 GPU 资源组 ID。 */
+  ResourceGroupId?: string;
+  /** GPU资源状态，大小写敏感：Delivering（准备中）、Active（已生效）、Isolated（已隔离）、Destroying（释放中）。不返回 Destroyed 和补偿完成的 Failed。 */
+  State?: string;
+  /** 占用状态，大小写敏感：Idle（可领取）、Allocating（领取中）、InUse（使用中）、Returning（归还中）、Unavailable（暂不可用）。不能根据 InstanceId 是否存在判断是否空闲。 */
+  AllocationState?: string;
+  /** 已绑定的最终 AGS 沙箱实例 ID；尚未绑定或未占用时可能不返回。 */
+  InstanceId?: string;
+  /** 生效时间，未生效时可能不返回。 */
+  ActiveAt?: string;
+  /** 到期时间，未生效时可能不返回。 */
+  ExpireAt?: string;
+  /** 续费标记：0 不自动续费，1 自动续费，2 不再续费。 */
+  RenewFlag?: number;
+  /** 安全的状态原因标识；空串表示无额外原因，PhysicalUnavailable 表示物理状态不可用，BindingPending 表示绑定身份尚待确认。未知值应作状态确认中处理。 */
+  StatusReason?: string;
+}
+
+/** GPU 资源组元数据及统计；资源组是管理集合，期限和续费标记逐台保存。 */
+declare interface GPUResourceGroup {
+  /** GPU 资源组 ID。 */
+  ResourceGroupId?: string;
+  /** 资源组名称。 */
+  Name?: string;
+  /** 资源组固定规格；已下架规格的已购组仍可查询。 */
+  Spec?: GPUResourceGroupSpec;
+  /** 当前资源统计。 */
+  Statistics?: GPUResourceGroupStatistics;
+}
+
+/** 已购买 GPU 资源组的固定规格及展示元数据。 */
+declare interface GPUResourceGroupSpec {
+  /** GPU 类型标识，例如 5090d。 */
+  GPUType?: string;
+  /** GPU 类型展示名称；为空时使用 GPUType 展示。 */
+  GPUTypeAlias?: string;
+  /** 单台实例全部 GPU 的总显存，单位 GiB；不需要再乘 GPUNum。0 表示展示元数据未维护。 */
+  GPUMemoryGiB?: number;
+  /** 单台实例 CPU 核数。 */
+  CPU?: number;
+  /** 单台实例主机内存，单位 GiB；不是 GPU 显存。 */
+  Memory?: number;
+  /** 单台实例的 GPU 卡数。 */
+  GPUNum?: number;
+}
+
+/** 组内当前资源统计。可用/占用是额外维度，不能与 StateCounts 相加。 */
+declare interface GPUResourceGroupStatistics {
+  /** 组内当前资源总数，单位台；不含已销毁和补偿完成的失败资源。 */
+  TotalCount?: number;
+  /** Active、无占用且物理状态当前可领取的资源数量，单位台。 */
+  AvailableCount?: number;
+  /** 仍被占用或绑定的资源数量，含领取中、使用中及归还未完成，单位台。 */
+  AllocatedCount?: number;
+  /** 资源状态计数，四项之和等于本组 TotalCount。 */
+  StateCounts?: GPUResourceStateCount;
+}
+
+/** 当前地域可售 GPU 规格与当前租户可购买额度。 */
+declare interface GPUResourceSpec {
+  /** GPU 类型标识，例如 5090d。 */
+  GPUType?: string;
+  /** GPU 类型展示名称；为空时使用 GPUType 展示。 */
+  GPUTypeAlias?: string;
+  /** 单台实例全部 GPU 的总显存，单位 GiB；不需要再乘 GPUNum。0 表示展示元数据未维护。 */
+  GPUMemoryGiB?: number;
+  /** 单台实例 CPU 核数。 */
+  CPU?: number;
+  /** 单台实例主机内存，单位 GiB；不是 GPU 显存。 */
+  Memory?: number;
+  /** 单台实例的 GPU 卡数。 */
+  GPUNum?: number;
+  /** 当前可购买数量，单位台，不是卡数；0 表示确认无额度，null 表示额度未知。实际购买时仍会重新校验。 */
+  AvailableCount?: number | null;
+}
+
+/** 资源状态计数；四项之和为组内 TotalCount，不含已销毁和补偿完成的失败资源。 */
+declare interface GPUResourceStateCount {
+  /** 准备中的资源数量，单位台。 */
+  Delivering?: number;
+  /** 已生效的资源数量，单位台；不等于当前可领取数量。 */
+  Active?: number;
+  /** 已隔离的资源数量，单位台。 */
+  Isolated?: number;
+  /** 正在释放的资源数量，单位台。 */
+  Destroying?: number;
+}
+
 /** 资产版本支持的 Harness 引擎与具体版本。HarnessEngine 和 HarnessEngineVersion 原样使用 DescribeHarnessEngineList 返回的选项，两个字段共同确定兼容性。 */
 declare interface HarnessVersionReference {
   /** Harness 引擎标识，原样使用 DescribeHarnessEngineList 返回的 HarnessEngine，例如 pi。参数格式：必填，1 至 128 字符，区分大小写，不含空白、通配符或范围表达式。与同一对象的 HarnessEngineVersion 共同标识支持的版本。 */
@@ -662,6 +766,8 @@ declare interface QuotaResourceInfo {
   CPUCores?: number;
   /** 内存配额或当前用量单位：GiB */
   MemoryGiB?: number;
+  /** 最大镜像预热并发处理数量单位：个 */
+  PreCacheImageConcurrency?: number;
 }
 
 /** 资源配置 */
@@ -1033,6 +1139,8 @@ declare interface CreatePreCacheImageTaskRequest {
   Image: string;
   /** 镜像仓库类型：enterprise、personal、custom枚举值：enterprise： tcr 企业容器镜像服务personal： ccr 个人容器镜像服务 */
   ImageRegistryType: string;
+  /** 镜像预热类型枚举值：image： 镜像预热image_volume： 镜像卷预热默认值：image */
+  PreCacheType?: string;
 }
 
 declare interface CreatePreCacheImageTaskResponse {
@@ -1053,7 +1161,7 @@ declare interface CreateRegistryRecordRequest {
   RegistryId: string;
   /** Record 名称，长度 1..255，同一租户、Registry 内按规范化 Name 唯一（大小写不敏感）；软删除后允许复用。 */
   Name: string;
-  /** 协议描述符类型。MCP / A2A / AGUI / CUSTOM / AGENT_SKILLS。Record 创建后不可修改。 */
+  /** 资产类型。取值包括 MCP、A2A、AGUI、CUSTOM、AGENT_SKILLS 和 PLUGIN。Record 创建后不可修改。PLUGIN 按通用文件资产保存，由运行端解析和加载。 */
   DescriptorType: string;
   /** Record 描述，最大 4096 字符，可选，默认空。 */
   Description?: string;
@@ -1067,6 +1175,12 @@ declare interface CreateRegistryRecordRequest {
   SkillSource?: CloudSkillSourceInput;
   /** DescriptorType=CUSTOM 时必填，其他类型禁止。内容必须是 JSON object 字符串；服务端解析后写入 CloudRecordVersion.Descriptors，Version 的 SourceType 固定为 MANUAL、SourceConfig 固定为空对象。 */
   CustomDescriptors?: string;
+  /** Plugin 通用文件来源。DescriptorType=PLUGIN 时必填，其他类型禁止。入参限制：Create 仅支持 Type=FILE；声明 SizeBytes 为 1..54525952 字节，可选 SHA256 为 64 位小写十六进制摘要。Registry 保存原始文件，不校验插件内容格式或语义；由运行端解析和加载。Skill 继续使用原 SkillSource。 */
+  FileSource?: CloudFileSourceInput;
+  /** 本版本支持的 HarnessVersionReference 对象列表；每项包含 HarnessEngine 和 HarnessEngineVersion，原样使用 DescribeHarnessEngineList 返回的选项。入参限制：两个字段均必填，各为 1 至 128 字符的精确值，区分大小写，不含空白、通配符或版本范围；最多 128 项，按引擎与版本二元组去重。不接受旧字符串数组、null、缺少字段或额外字段。省略或空数组表示未声明，不继承前一版本，不代表支持所有 Harness。兼容性按同一对象的引擎与版本共同判断。修改兼容声明需创建新 Version，文件资产可通过 FileSource.Type=VERSION 复用制品。 */
+  SupportedHarnessVersions?: HarnessVersionReference[];
+  /** 版本元数据的 Name/Value 对象数组。参数格式：每项仅包含必填的 Name、Value 两个字符串字段。Name 非空、小写且数组内唯一，不自动转换；重复 Name 即使 Value 相同也返回 InvalidParameter。Value 允许空字符串，保留大小写；不接受嵌套对象、数组或非字符串值。默认值：空数组 []。创建新版本时省略或 [] 均为空，不继承；null、JSON 字符串和原生对象非法。响应按 Name 升序返回，旧 SQL NULL 归一为 []。服务内部使用 map[string]string，数据库 JSON 列保存对象。publisher 表示发布者展示名称；metadata.<key> 按完整小写名称精确筛选，规则不变。 */
+  Metadata?: MetadataEntry[];
 }
 
 declare interface CreateRegistryRecordResponse {
@@ -1076,11 +1190,11 @@ declare interface CreateRegistryRecordResponse {
   Record?: CloudRecord;
   /** 本次创建的 Revision 1 Version 详情。 */
   Version?: CloudRecordVersion;
-  /** SkillSource.Type=TAR_PACKAGE 时返回：TAR 包上传预签名 URL。 */
+  /** 文件上传预签名 URL。使用文件上传方式创建 Skill 或 Plugin 版本时返回；Plugin 文件使用 application/octet-stream 上传。 */
   UploadURL?: string | null;
-  /** SkillSource.Type=TAR_PACKAGE 时返回：UploadURL 过期时间，ISO 8601 UTC。 */
+  /** 文件上传链接的过期时间，使用文件上传方式创建 Skill 或 Plugin 版本时返回。参数格式：ISO 8601 UTC，例如 2026-10-21T15:30:08Z。 */
   ExpireTime?: string | null;
-  /** SkillSource.Type=TAR_PACKAGE 时返回：Version 内容当前状态（UPLOADING 等）。 */
+  /** 文件版本的内容状态，使用文件上传方式创建 Skill 或 Plugin 版本时返回。创建上传会话后通常为 UPLOADING；文件处理完成后为 READY，失败为 FAILED。 */
   ContentStatus?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -1218,6 +1332,16 @@ declare interface DeleteDeploymentRequest {
 }
 
 declare interface DeleteDeploymentResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteGPUResourceGroupRequest {
+  /** 待删除的 GPU 资源组 ID，必填、非空，最多 64 字节。资源组必须属于当前租户，且已清空有效 GPU 实例、占用绑定和关联沙箱工具。 */
+  ResourceGroupId: string;
+}
+
+declare interface DeleteGPUResourceGroupResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1412,6 +1536,72 @@ declare interface DescribeEventsResponse {
   RequestId?: string;
 }
 
+declare interface DescribeGPUResourceGroupsRequest {
+  /** 过滤条件，最多 10 项，Name 不可重复，每项 Values 为 1–10 个值。不同 Name 为 AND、同一 Values 为 OR。支持 resource-group-id（精确 ID）、resource-group-name（精确名称）、resource-group-name-like（普通文本子串，% 和 _ 不作为通配符）、gpu-type、gpu-num、cpu、memory。ID/GPUType 最多 64 字节，名称最多 128 字节；gpu-num 为正整数字符串，cpu/memory 为正数字符串，单位核/GiB。 */
+  Filters?: Filter[];
+  /** 分页偏移量，默认为 0，必须大于等于 0。 */
+  Offset?: number;
+  /** 每页条数，省略或传 0 时取 100；非零取值范围 1–500。 */
+  Limit?: number;
+}
+
+declare interface DescribeGPUResourceGroupsResponse {
+  /** 匹配的资源组列表；无匹配时为 []。 */
+  ResourceGroups?: GPUResourceGroup[];
+  /** 匹配的资源组总数，分页前计算。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGPUResourceSpecsRequest {
+  /** GPU 类型标识，例如 5090d；指定时必须同时提供 CPU、Memory、GPUNum。 */
+  GPUType?: string;
+  /** CPU 核数，必须为正数；与 GPUType、Memory、GPUNum 同时提供。 */
+  CPU?: number;
+  /** 主机内存 GiB，必须为正数；与 GPUType、CPU、GPUNum 同时提供。 */
+  Memory?: number;
+  /** 单台 GPU 卡数，必须为正整数；与 GPUType、CPU、Memory 同时提供。 */
+  GPUNum?: number;
+  /** 分页偏移量，默认为 0，必须大于等于 0。 */
+  Offset?: number;
+  /** 每页条数，省略或传 0 时取 100；非零取值范围 1–500。 */
+  Limit?: number;
+}
+
+declare interface DescribeGPUResourceSpecsResponse {
+  /** 可售规格与额度列表；无可售规格时为 []。 */
+  GPUResourceSpecSet?: GPUResourceSpec[];
+  /** 筛选后、分页前的总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeGPUResourcesRequest {
+  /** 按资源组 ID 过滤，可省略，最多 64 字节。 */
+  ResourceGroupId?: string;
+  /** 按GPU资源 ID 过滤，最多 500 个，每个为非空字符串且最多 64 字节；值之间为 OR，与其他条件为 AND。 */
+  ResourceIds?: string[];
+  /** 按GPU状态过滤，可省略。大小写敏感：Delivering、Active、Isolated、Destroying。 */
+  State?: string;
+  /** 按占用状态过滤，可省略。大小写敏感：Idle、Allocating、InUse、Returning、Unavailable。 */
+  AllocationState?: string;
+  /** 分页偏移量，默认为 0，必须大于等于 0。 */
+  Offset?: number;
+  /** 每页条数，省略或传 0 时取 100；非零取值范围 1–500。 */
+  Limit?: number;
+}
+
+declare interface DescribeGPUResourcesResponse {
+  /** GPU 资源列表；每台一条，无匹配时为 []。 */
+  Resources?: GPUResource[];
+  /** 筛选后、分页前的总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribePreCacheImageListRequest {
   /** 查询过滤条件。支持 Image, ImageDigest, ImageRegistryType, Status, SourceType；不同 Filter 之间为 AND，同一 Filter 的 Values 之间为 OR。 */
   Filters?: Filter[];
@@ -1545,7 +1735,7 @@ declare interface DescribeRegistryListResponse {
 }
 
 declare interface DescribeRegistryRecordListRequest {
-  /** 父 Registry ID。 */
+  /** RegistryId 必填。大写常量 MARKETPLACE 表示服务端主 YAML marketplace.registry_ids 配置的工具市场；真实 reg-xxx 表示具体 Registry。省略、空字符串、null 或其他大小写均拒绝。市场读取要求已认证身份，只返回配置来源内未删除、已审批的可读版本，文件还须 READY 和有效制品；不回退私有目录。 */
   RegistryId: string;
   /** 分页起始偏移，默认 0。 */
   Offset?: number;
@@ -1565,7 +1755,7 @@ declare interface DescribeRegistryRecordListResponse {
 }
 
 declare interface DescribeRegistryRecordRequest {
-  /** 父 Registry ID。 */
+  /** RegistryId 必填。大写常量 MARKETPLACE 表示服务端主 YAML marketplace.registry_ids 配置的工具市场；真实 reg-xxx 表示具体 Registry。省略、空字符串、null 或其他大小写均拒绝。市场读取要求已认证身份，只返回配置来源内未删除、已审批的可读版本，文件还须 READY 和有效制品；不回退私有目录。 */
   RegistryId: string;
   /** Record ID。 */
   RecordId: string;
@@ -1852,6 +2042,18 @@ declare interface ModifyDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface ModifyGPUResourceGroupRequest {
+  /** GPU 资源组 ID，必填、非空，最多 64 字节。 */
+  ResourceGroupId: string;
+  /** 新的资源组名称；去除首尾空白后不能为空，最多 128 字节，UTF-8 中文通常占 3 字节。 */
+  Name: string;
+}
+
+declare interface ModifyGPUResourceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifySessionRequest {
   /** 会话所属的 SessionSpace ID。 */
   SpaceId: string;
@@ -2047,6 +2249,12 @@ declare interface UpdateRegistryRecordRequest {
   CustomDescriptors?: string;
   /** Record 更新模式：Label 变更列表，最多 32 条，同一次请求中 Label Name 不可重复。 */
   LabelMutations?: CloudRecordLabelMutation[];
+  /** Skill 或 Plugin 后续版本的文件来源。PLUGIN 可使用 FILE 上传新文件，或使用 VERSION 复用同一 Record 的 READY 制品；Skill 仅通过 VERSION 复用现有文件。与其他内容来源互斥。VERSION 只提交 Type、SourceVersionId；Metadata 和 SupportedHarnessVersions 由本次请求单独声明，不继承来源版本。 */
+  FileSource?: CloudFileSourceInput;
+  /** 资产版本支持的 Harness 引擎与具体版本列表。每个元素同时包含 HarnessEngine 和 HarnessEngineVersion，取值原样使用 DescribeHarnessEngineList 返回的选项。入参限制：最多 128 个元素；两个字段均必填，长度 1～128，区分大小写，不允许空白、通配符或版本范围。按完整配对去重；不接受字符串数组或 null。省略或空数组表示未声明兼容性，不表示兼容全部。仅随新 Version 写入，后续修改需创建新 Version。筛选时 supported_harness_engine 与 supported_harness_version 必须同时传入，并在同一元素中精确匹配。 */
+  SupportedHarnessVersions?: HarnessVersionReference[];
+  /** 版本元数据的 Name/Value 对象数组。参数格式：每项仅包含必填的 Name、Value 两个字符串字段。Name 非空、小写且数组内唯一，不自动转换；重复 Name 即使 Value 相同也返回 InvalidParameter。Value 允许空字符串，保留大小写；不接受嵌套对象、数组或非字符串值。默认值：空数组 []。创建新版本时省略或 [] 均为空，不继承；null、JSON 字符串和原生对象非法。响应按 Name 升序返回，旧 SQL NULL 归一为 []。服务内部使用 map[string]string，数据库 JSON 列保存对象。publisher 表示发布者展示名称；metadata.<key> 按完整小写名称精确筛选，规则不变。 */
+  Metadata?: MetadataEntry[];
 }
 
 declare interface UpdateRegistryRecordResponse {
@@ -2147,6 +2355,8 @@ declare interface Ags {
   DeleteAPIKey(data: DeleteAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAPIKeyResponse>;
   /** 删除 Deployment {@link DeleteDeploymentRequest} {@link DeleteDeploymentResponse} */
   DeleteDeployment(data: DeleteDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDeploymentResponse>;
+  /** 删除空GPU资源组 {@link DeleteGPUResourceGroupRequest} {@link DeleteGPUResourceGroupResponse} */
+  DeleteGPUResourceGroup(data: DeleteGPUResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGPUResourceGroupResponse>;
   /** 删除镜像预热 {@link DeletePreCacheImageRequest} {@link DeletePreCacheImageResponse} */
   DeletePreCacheImage(data?: DeletePreCacheImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePreCacheImageResponse>;
   /** 删除 Registry {@link DeleteRegistryRequest} {@link DeleteRegistryResponse} */
@@ -2171,6 +2381,12 @@ declare interface Ags {
   DescribeEventCenterEvents(data?: DescribeEventCenterEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventCenterEventsResponse>;
   /** 查询事件列表 {@link DescribeEventsRequest} {@link DescribeEventsResponse} */
   DescribeEvents(data: DescribeEventsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEventsResponse>;
+  /** 查询GPU资源组 {@link DescribeGPUResourceGroupsRequest} {@link DescribeGPUResourceGroupsResponse} */
+  DescribeGPUResourceGroups(data?: DescribeGPUResourceGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGPUResourceGroupsResponse>;
+  /** 查询GPU可售规格及额度 {@link DescribeGPUResourceSpecsRequest} {@link DescribeGPUResourceSpecsResponse} */
+  DescribeGPUResourceSpecs(data?: DescribeGPUResourceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGPUResourceSpecsResponse>;
+  /** 查询GPU资源 {@link DescribeGPUResourcesRequest} {@link DescribeGPUResourcesResponse} */
+  DescribeGPUResources(data?: DescribeGPUResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGPUResourcesResponse>;
   /** 查询镜像预热列表 {@link DescribePreCacheImageListRequest} {@link DescribePreCacheImageListResponse} */
   DescribePreCacheImageList(data?: DescribePreCacheImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageListResponse>;
   /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
@@ -2211,6 +2427,8 @@ declare interface Ags {
   GetSkillPackageUploadURL(data: GetSkillPackageUploadURLRequest, config?: AxiosRequestConfig): AxiosPromise<GetSkillPackageUploadURLResponse>;
   /** 修改 Deployment {@link ModifyDeploymentRequest} {@link ModifyDeploymentResponse} */
   ModifyDeployment(data: ModifyDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDeploymentResponse>;
+  /** 修改GPU资源组名称 {@link ModifyGPUResourceGroupRequest} {@link ModifyGPUResourceGroupResponse} */
+  ModifyGPUResourceGroup(data: ModifyGPUResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyGPUResourceGroupResponse>;
   /** 修改会话 {@link ModifySessionRequest} {@link ModifySessionResponse} */
   ModifySession(data: ModifySessionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifySessionResponse>;
   /** 修改会话空间 {@link ModifySessionSpaceRequest} {@link ModifySessionSpaceResponse} */

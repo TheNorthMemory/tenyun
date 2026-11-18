@@ -2,6 +2,22 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 子账号信息 */
+declare interface Account {
+  /** 实例 ID。 */
+  InstanceId?: string;
+  /** 账号名称。 */
+  AccountName?: string;
+  /** 账号描述信息。 */
+  Remark?: string;
+  /** 读写权限策略。枚举值：r： 只读。rw： 读写。 */
+  Privilege?: string;
+  /** 只读路由策略。枚举值：master： 主节点。replication： 从节点。 */
+  ReadonlyPolicy?: string[];
+  /** 子账号状态。枚举值：1： 账号变更中。2： 账号有效。4： 账号已删除。 */
+  Status?: number;
+}
+
 /** 实例的备份信息 */
 declare interface BackupInfo {
   /** 备份开始时间。 */
@@ -592,6 +608,28 @@ declare interface CreateBackupManuallyResponse {
   RequestId?: string;
 }
 
+declare interface CreateInstanceAccountRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 自定义的访问数据库的账号名称。仅由字母、数字、下划线、中划线组成。长度不能大于32位。 */
+  AccountName: string;
+  /** 设置自定义账号的密码。密码复杂度要求如下：字符个数为[8,64]。至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;<>,.?/ 中的两种。不能以"/"开头。 */
+  AccountPassword: string;
+  /** 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。 枚举值：master： 主节点replication： 副本节点 */
+  ReadonlyPolicy: string[];
+  /** 账户读写权限，支持选择只读与读写权限。枚举值：rw： 读写r： 只读 */
+  Privilege: string;
+  /** 账号备注描述信息，长度为[0,64] 字节，支持中文。 */
+  Remark?: string;
+}
+
+declare interface CreateInstanceAccountResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateInstancesRequest {
   /** 实例版本类型。枚举值：11： 存储版标准架构。12： 存储版集群架构。13： 极速版标准架构。14： 极速版集群架构。 */
   TypeId: number;
@@ -654,6 +692,20 @@ declare interface CreateInstancesResponse {
   RequestId?: string;
 }
 
+declare interface DeleteInstanceAccountRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 指定需删除的账号名称。 */
+  AccountName: string;
+}
+
+declare interface DeleteInstanceAccountResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeAutoBackupConfigRequest {
   /** 实例 ID。 */
   InstanceId: string;
@@ -706,6 +758,24 @@ declare interface DescribeDBSecurityGroupsResponse {
   VIP: string;
   /** 安全组生效内网端口。 */
   VPort: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInstanceAccountRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 分页大小。取值范围：[1, 100]默认值：20 */
+  Limit: number;
+  /** 分页偏移量。默认值：0 */
+  Offset: number;
+}
+
+declare interface DescribeInstanceAccountResponse {
+  /** 账号详细信息。 */
+  Accounts?: Account[];
+  /** 账号个数。 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1146,6 +1216,28 @@ declare interface ModifyDBInstanceSecurityGroupsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyInstanceAccountRequest {
+  /** 实例ID。 */
+  InstanceId: string;
+  /** 指定需修改的账号。root：指在创建 KeeWiDB 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。 */
+  AccountName: string;
+  /** 指定所修改账号访问的密码。 */
+  AccountPassword?: string;
+  /** 账号描述信息 */
+  Remark?: string;
+  /** 指定所修改账号读写请求路由的策略。枚举值：master： 表示读写请求路由至主节点。replication： 表示读写请求路由至从节点。 */
+  ReadonlyPolicy?: string[];
+  /** 指定所修改账号的读写权限。枚举值：rw： 读写。r： 只读。 */
+  Privilege?: string;
+}
+
+declare interface ModifyInstanceAccountResponse {
+  /** 任务ID。 */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyInstanceParamsRequest {
   /** 实例 ID，如：kee-6ubh****。 */
   InstanceId: string;
@@ -1309,14 +1401,20 @@ declare interface Keewidb {
   ClearInstance(data: ClearInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ClearInstanceResponse>;
   /** 手动发起备份 {@link CreateBackupManuallyRequest} {@link CreateBackupManuallyResponse} */
   CreateBackupManually(data: CreateBackupManuallyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateBackupManuallyResponse>;
+  /** 创建自定义实例账号 {@link CreateInstanceAccountRequest} {@link CreateInstanceAccountResponse} */
+  CreateInstanceAccount(data: CreateInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstanceAccountResponse>;
   /** 创建数据库实例 {@link CreateInstancesRequest} {@link CreateInstancesResponse} */
   CreateInstances(data: CreateInstancesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateInstancesResponse>;
+  /** 删除实例自定义账号 {@link DeleteInstanceAccountRequest} {@link DeleteInstanceAccountResponse} */
+  DeleteInstanceAccount(data: DeleteInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteInstanceAccountResponse>;
   /** 获取自动备份配置 {@link DescribeAutoBackupConfigRequest} {@link DescribeAutoBackupConfigResponse} */
   DescribeAutoBackupConfig(data: DescribeAutoBackupConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoBackupConfigResponse>;
   /** 查询实例连接配置 {@link DescribeConnectionConfigRequest} {@link DescribeConnectionConfigResponse} */
   DescribeConnectionConfig(data: DescribeConnectionConfigRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConnectionConfigResponse>;
   /** 查询实例安全组详情 {@link DescribeDBSecurityGroupsRequest} {@link DescribeDBSecurityGroupsResponse} */
   DescribeDBSecurityGroups(data: DescribeDBSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDBSecurityGroupsResponse>;
+  /** 查看实例账号信息 {@link DescribeInstanceAccountRequest} {@link DescribeInstanceAccountResponse} */
+  DescribeInstanceAccount(data: DescribeInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceAccountResponse>;
   /** 查询实例全量备份列表 {@link DescribeInstanceBackupsRequest} {@link DescribeInstanceBackupsResponse} */
   DescribeInstanceBackups(data: DescribeInstanceBackupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeInstanceBackupsResponse>;
   /** 查询增量备份列表 {@link DescribeInstanceBinlogsRequest} {@link DescribeInstanceBinlogsResponse} */
@@ -1361,6 +1459,8 @@ declare interface Keewidb {
   ModifyDBInstanceSecurityGroups(data: ModifyDBInstanceSecurityGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDBInstanceSecurityGroupsResponse>;
   /** 修改实例相关信息 {@link ModifyInstanceRequest} {@link ModifyInstanceResponse} */
   ModifyInstance(data: ModifyInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceResponse>;
+  /** 修改实例账号 {@link ModifyInstanceAccountRequest} {@link ModifyInstanceAccountResponse} */
+  ModifyInstanceAccount(data: ModifyInstanceAccountRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceAccountResponse>;
   /** 修改实例参数配置 {@link ModifyInstanceParamsRequest} {@link ModifyInstanceParamsResponse} */
   ModifyInstanceParams(data: ModifyInstanceParamsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyInstanceParamsResponse>;
   /** 修改实例维护时间窗时间 {@link ModifyMaintenanceWindowRequest} {@link ModifyMaintenanceWindowResponse} */

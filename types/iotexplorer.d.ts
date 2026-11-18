@@ -930,6 +930,36 @@ declare interface LoRaGatewayLocation {
   Altitude?: number;
 }
 
+/** 新云存套餐相关参数 */
+declare interface NewCloudStoragePackage {
+  /** 资源id */
+  ResourceId?: string;
+  /** 媒体类型枚举值：image： 图片套餐video： 视频套餐 */
+  MediaType?: string;
+  /** 存储天数枚举值：3： 存储3天7： 存储7天15： 存储15天30： 存储30天 */
+  RetentionDays?: number;
+  /** 录制模式枚举值：low_power： 2小时/日event： 8小时/日full_time： 24小时/日 */
+  RecordingMode?: string;
+  /** 码率枚举值：0.5m： 0.5Mbps1m： 1Mbps1.5m： 1.5Mbps2m： 2Mbps */
+  Bitrate?: string;
+  /** 开始时间 */
+  StartTime?: number;
+  /** 过期时间 */
+  ExpireTime?: number;
+  /** 套餐状态枚举值：active： 生效中queued： 排队中 */
+  Status?: string;
+  /** 启停状态枚举值：0： 停用1： 启用 */
+  ReportEnabled?: number;
+  /** 订单id */
+  OrderId?: string;
+  /** 大订单号 */
+  BigDealId?: string;
+  /** 卡有效期类型枚举值：monthly_card： 月卡annual_card： 年卡 */
+  ValidityPeriod?: string;
+  /** 图片档位枚举值：300： 300张/日1000： 1000张/日 */
+  ImageCapacity?: string;
+}
+
 /** 升级包类型详细信息 */
 declare interface OtaModuleInfo {
   /** 模块创建时间 */
@@ -4108,6 +4138,26 @@ declare interface DescribeDeviceBindGatewayResponse {
   GatewayProductOwnerName?: string;
   /** 设备对应产品所属的主账号 UIN */
   GatewayProductOwnerUin?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDeviceCloudStoragePackagesRequest {
+  /** 产品id */
+  ProductId: string;
+  /** 设备名 */
+  DeviceName: string;
+  /** 通道id */
+  ChannelId?: number;
+  /** 云存类别枚举值：video： 视频云存image： 图片云存 */
+  MediaType?: string;
+}
+
+declare interface DescribeDeviceCloudStoragePackagesResponse {
+  /** 套餐包相关数据 */
+  Packages?: NewCloudStoragePackage[];
+  /** 套餐总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7513,6 +7563,8 @@ declare interface Iotexplorer {
   DescribeDevice(data: DescribeDeviceRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceResponse>;
   /** 查询设备绑定的网关设备 {@link DescribeDeviceBindGatewayRequest} {@link DescribeDeviceBindGatewayResponse} */
   DescribeDeviceBindGateway(data: DescribeDeviceBindGatewayRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceBindGatewayResponse>;
+  /** 查询设备云存套餐 {@link DescribeDeviceCloudStoragePackagesRequest} {@link DescribeDeviceCloudStoragePackagesResponse} */
+  DescribeDeviceCloudStoragePackages(data: DescribeDeviceCloudStoragePackagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceCloudStoragePackagesResponse>;
   /** 获取设备属性数据 {@link DescribeDeviceDataRequest} {@link DescribeDeviceDataResponse} */
   DescribeDeviceData(data: DescribeDeviceDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeviceDataResponse>;
   /** 获取设备历史数据 {@link DescribeDeviceDataHistoryRequest} {@link DescribeDeviceDataHistoryResponse} */

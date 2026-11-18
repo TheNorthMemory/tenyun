@@ -726,6 +726,18 @@ declare interface ListVideoDownloadTaskData {
   TotalCount?: number;
 }
 
+/** 截图结果列表信息 */
+declare interface ListVideoSnapshotResultData {
+  /** 截图信息列表 */
+  List?: VideoSnapshotInfo[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 页码 */
+  PageNumber?: number;
+  /** 每页数目 */
+  PageSize?: number;
+}
+
 /** 获取截图模板详情列表 */
 declare interface ListVideoSnapshotTemplateData {
   /** 总数 */
@@ -1414,6 +1426,30 @@ declare interface VideoSnapshotConfigInfo {
   CreateTime?: string;
   /** 最近一次更新时间 */
   UpdateTime?: string;
+}
+
+/** 视频截图信息 */
+declare interface VideoSnapshotInfo {
+  /** 图片Id */
+  ImageId?: string;
+  /** 截图配置Id */
+  ConfigId?: string;
+  /** 截图配置名称 */
+  ConfigName?: string;
+  /** 通道Id */
+  ChannelId?: string;
+  /** 通道名称 */
+  ChannelName?: string;
+  /** 截图类型枚举值：1： 实时截帧2： 低频截帧 */
+  Type?: number;
+  /** 图片Url */
+  ImageUrl?: string;
+  /** 图片Url有效期 */
+  ImageUrlExpires?: number;
+  /** 截图时间点 */
+  Timestamp?: number;
+  /** 图片大小单位：字节 */
+  FileSize?: number;
 }
 
 /** 截图模板信息 */
@@ -2736,6 +2772,32 @@ declare interface ListVideoDownloadTaskResponse {
   RequestId?: string;
 }
 
+declare interface ListVideoSnapshotResultRequest {
+  /** 开始时间单位：秒 */
+  BeginTime: number;
+  /** 结束时间单位：秒 */
+  EndTime: number;
+  /** 截图配置Id */
+  ConfigId?: string;
+  /** 通道Id */
+  ChannelId?: string;
+  /** 截图类型枚举值：1： 实时截帧2： 低频截帧 */
+  Type?: number;
+  /** 图片URL有效期，单位：秒取值范围：[60, 86400]默认值：600 */
+  ImageUrlExpires?: number;
+  /** 页码默认值：1 */
+  PageNumber?: number;
+  /** 每页数目取值范围：[1, 200]默认值：20 */
+  PageSize?: number;
+}
+
+declare interface ListVideoSnapshotResultResponse {
+  /** 截图结果列表 */
+  Data?: ListVideoSnapshotResultData;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListVideoSnapshotTemplateRequest {
   /** 模板名称 */
   Name?: string;
@@ -3161,6 +3223,8 @@ declare interface Iss {
   ListVLTemplates(data?: ListVLTemplatesRequest, config?: AxiosRequestConfig): AxiosPromise<ListVLTemplatesResponse>;
   /** 查询本地录像下载任务列表 {@link ListVideoDownloadTaskRequest} {@link ListVideoDownloadTaskResponse} */
   ListVideoDownloadTask(data?: ListVideoDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<ListVideoDownloadTaskResponse>;
+  /** 查询截图结果列表 {@link ListVideoSnapshotResultRequest} {@link ListVideoSnapshotResultResponse} */
+  ListVideoSnapshotResult(data: ListVideoSnapshotResultRequest, config?: AxiosRequestConfig): AxiosPromise<ListVideoSnapshotResultResponse>;
   /** 截图模板列表 {@link ListVideoSnapshotTemplateRequest} {@link ListVideoSnapshotTemplateResponse} */
   ListVideoSnapshotTemplate(data?: ListVideoSnapshotTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ListVideoSnapshotTemplateResponse>;
   /** 修改视觉理解计划 {@link ModifyVLPlanRequest} {@link ModifyVLPlanResponse} */

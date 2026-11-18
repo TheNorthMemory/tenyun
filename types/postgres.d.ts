@@ -3135,12 +3135,16 @@ declare interface ModifyDBInstanceReadOnlyGroupResponse {
 }
 
 declare interface ModifyDBInstanceSSLConfigRequest {
-  /** 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例 ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
   /** 开启或关闭SSL。true - 开启 ；false - 关闭。 */
   SSLEnabled: boolean;
   /** SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。 */
   ConnectAddress?: string;
+  /** SSL证书来源。枚举值：cloud： 平台自签发的云端证书custom： 腾讯云SSL证书产品托管的用户自有证书 */
+  CertSource?: string;
+  /** 腾讯云 SSL 证书产品的证书 ID。证书类型为custom时必须填写。 */
+  CertificateId?: string;
 }
 
 declare interface ModifyDBInstanceSSLConfigResponse {
@@ -3659,9 +3663,9 @@ declare interface UpgradeDBInstanceKernelVersionResponse {
 }
 
 declare interface UpgradeDBInstanceMajorVersionRequest {
-  /** 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取 */
+  /** 实例ID。可通过DescribeDBInstances接口获取 */
   DBInstanceId: string;
-  /** 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。 */
+  /** 目标内核版本号，可以通过API DescribeDBVersions获取可以升级的目标内核版本号。 */
   TargetDBKernelVersion: string;
   /** 是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。 */
   UpgradeCheck?: boolean;
@@ -3677,6 +3681,8 @@ declare interface UpgradeDBInstanceMajorVersionRequest {
   UpgradeTimeBegin?: string;
   /** 升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。UpgradeCheck为True时，此参数无效。 */
   UpgradeTimeEnd?: string;
+  /** 升级时是否携带RO。开启时在RO重建过程中会存在RO数据延迟现象。默认值：false */
+  UpgradeReadOnlyInstance?: boolean;
 }
 
 declare interface UpgradeDBInstanceMajorVersionResponse {

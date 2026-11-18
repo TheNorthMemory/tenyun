@@ -10829,9 +10829,9 @@ declare interface DescribeMachineSnapshotResponse {
 }
 
 declare interface DescribeMachinesRequest {
-  /** 机器所属专区类型CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区 */
+  /** 机器所属专区类型CVM 云服务器BM 黑石ECM 边缘计算LH 轻量应用服务器Other 混合云专区ALL 全部机器类型 */
   MachineType: string;
-  /** 机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others */
+  /** 机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others ，全部地域使用：all-regions */
   MachineRegion: string;
   /** 返回数量，默认为10，最大值为100。 */
   Limit?: number;

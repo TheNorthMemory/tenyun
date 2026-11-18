@@ -2939,7 +2939,7 @@ declare interface CreateDynamicFlowApproverResponse {
 declare interface CreateEmbedWebUrlRequest {
   /** 执行本接口操作的员工信息。注: 在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。 */
   Operator: UserInfo;
-  /** WEB嵌入资源类型，支持以下类型枚举值：CREATE_SEAL： 生成创建印章的嵌入页面CREATE_TEMPLATE： 生成创建模板的嵌入页面MODIFY_TEMPLATE： 生成编辑模板的嵌入页面CREATE_CONTRACT_DRAFT_COOPEDIT： 生成创建起草合同的嵌入页面PREVIEW_TEMPLATE： 生成预览模板的嵌入页面PREVIEW_SEAL_LIST： 生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL： 生成预览印章详情的嵌入页面EXTEND_SERVICE： 生成高级签署能力的嵌入页面PREVIEW_FLOW： 生成预览合同的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL： 生成查看合同详情的嵌入页面（仅支持PC端）CHANNEL_TEMPLATE： 生成应用模板库管理的嵌入页面（仅支持PC端）CHANNEL_COMPONENT： 生成应用模板控件管理的嵌入页面（仅支持PC端）注意： 不同的嵌入类型，操作人需要的权限项不同（权限配置可参考权限配置）。 EmbedType权限 CREATE_SEAL印章管理-添加印章 CREATE_TEMPLATE模板管理-创建模板 MODIFY_TEMPLATE模板管理-编辑模板 CREATE_CONTRACT_DRAFT_COOPEDIT合同管理-起草合同 PREVIEW_TEMPLATE拥有下面三种权限的一种就行 模板管理-查询模板（本企业全部模板） 模板管理-查询模板（本部门全部模板） 模板管理-查询模板（本人创建模板） PREVIEW_SEAL_LIST印章管理 PREVIEW_SEAL_DETAIL印章管理 EXTEND_SERVICE无要求 PREVIEW_FLOW是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 PREVIEW_FLOW_DETAIL是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 CHANNEL_TEMPLATE开发者中心-应用模板库管理 CHANNEL_COMPONENT开发者中心-应用模板控件管理 */
+  /** WEB嵌入资源类型，支持以下类型枚举值：CREATE_SEAL： 生成创建印章的嵌入页面CREATE_TEMPLATE： 生成创建模板的嵌入页面MODIFY_TEMPLATE： 生成编辑模板的嵌入页面CREATE_CONTRACT_DRAFT_COOPEDIT： 生成创建起草合同的嵌入页面PREVIEW_TEMPLATE： 生成预览模板的嵌入页面PREVIEW_SEAL_LIST： 生成预览印章列表的嵌入页面PREVIEW_SEAL_DETAIL： 生成预览印章详情的嵌入页面EXTEND_SERVICE： 生成高级签署能力的嵌入页面PREVIEW_FLOW： 生成预览合同的嵌入页面（支持移动端）PREVIEW_FLOW_DETAIL： 生成查看合同详情的嵌入页面（仅支持PC端）CHANNEL_TEMPLATE： 生成应用模板库管理的嵌入页面（仅支持PC端）CHANNEL_COMPONENT： 生成应用模板控件管理的嵌入页面（仅支持PC端）CHANNEL_TEMPLATE_PUBLISH： 生成应用模板发布/设置的嵌入页面（仅支持PC端）注意： 不同的嵌入类型，操作人需要的权限项不同（权限配置可参考权限配置）。 EmbedType 权限 CREATE_SEAL印章管理-添加印章 CREATE_TEMPLATE模板管理-创建模板 MODIFY_TEMPLATE模板管理-编辑模板 CREATE_CONTRACT_DRAFT_COOPEDIT合同管理-起草合同 PREVIEW_TEMPLATE 拥有下面三种权限的一种就行模板管理-查询模板（本企业全部模板）模板管理-查询模板（本部门全部模板）模板管理-查询模板（本人创建模板） PREVIEW_SEAL_LIST印章管理 PREVIEW_SEAL_DETAIL印章管理 EXTEND_SERVICE无要求 PREVIEW_FLOW是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 PREVIEW_FLOW_DETAIL是否是当前合同的参与方，或者发起方企业的法人、超管、合同管理员 CHANNEL_TEMPLATE开发者中心-应用模板库管理 CHANNEL_COMPONENT开发者中心-应用模板控件管理 CHANNEL_TEMPLATE_PUBLISH开发者中心-应用模板控件管理 */
   EmbedType: string;
   /** WEB嵌入的业务资源ID当EmbedType取值为PREVIEW_SEAL_DETAIL，必填，取值为印章id。为CREATE_TEMPLATE，非必填，取值为资源id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*为MODIFY_TEMPLATE，PREVIEW_TEMPLATE，必填，取值为模板id。为CREATE_CONTRACT_DRAFT_COOPEDIT，非必填，取值为资源 id。*资源Id获取可使用接口[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)*为PREVIEW_FLOW，PREVIEW_FLOW_DETAIL，必填，取值为合同id。注意：CREATE_TEMPLATE中的BusinessId仅支持PDF文件类型， 如果您的文件不是PDF， 请使用接口创建文件转换任务 和查询转换任务状态 来进行转换成PDF资源。CREATE_CONTRACT_DRAFT_COOPEDIT中的BusinessId仅支持DOC 和 DOCX 的文件，并且大小不能超过 10M。 */
   BusinessId?: string;
@@ -2951,7 +2951,7 @@ declare interface CreateEmbedWebUrlRequest {
   Option?: EmbedUrlOption;
   /** 目前仅支持EmbedType=CREATE_TEMPLATE时传入 指定后，创建，编辑，删除模板时，回调都会携带该userData 支持的格式：json字符串的BASE64编码字符串 示例： json字符串：{"ComeFrom":"xxx"}，BASE64编码：eyJDb21lRnJvbSI6Inh4eCJ9 eyJDb21lRnJvbSI6Inh4eCJ9，为符合要求的userData数据格式 */
   UserData?: string;
-  /** 第三方应用号ID当EmbedType取以下值时，该字段生效CHANNEL_TEMPLATE：生成指定应用的模板库管理页面CHANNEL_COMPONENT：生成指定应用的控件管理页面 */
+  /** 第三方应用号ID当EmbedType取以下值时，该字段生效CHANNEL_TEMPLATE：生成指定应用的模板库管理页面CHANNEL_COMPONENT：生成指定应用的控件管理页面CHANNEL_TEMPLATE_PUBLISH：生成指定应用的控件管理页面另：当生成创建/编辑/预览**应用模板库模板**的链接时，需要传该参数 */
   ApplicationId?: string;
 }
 
@@ -4627,13 +4627,13 @@ declare interface DescribeBatchOrganizationRegistrationUrlsResponse {
 declare interface DescribeBillUsageDetailRequest {
   /** 查询开始时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。参数格式：yyyyMMdd */
   StartTime: string;
-  /** 查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。参数格式：yyyyMMdd */
+  /** 查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。注意：数据存在延迟，最晚只能查询到截止到昨天的数据！参数格式：yyyyMMdd */
   EndTime: string;
   /** 指定分页返回第几页的数据，如果不传默认返回第一页，页码从 0 开始，即首页为 0 */
   Offset?: number;
   /** 指定分页每页返回的数据条数，如果不传默认为 100，单页最大支持 100。 */
   Limit?: number;
-  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询**NoAuthSign**: 形式签 */
+  /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**VerificationReport**: 公证处核验报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalEssAuthOperator**: 签署人实名（运营商三要素）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询**NoAuthSign**: 形式签**AutoSign**:单据处方自动签 */
   QuotaType?: string;
   /** 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。 */
   Agent?: Agent;

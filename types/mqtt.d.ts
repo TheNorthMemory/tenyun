@@ -2129,11 +2129,11 @@ declare interface PublishMessageResponse {
 }
 
 declare interface RegisterCaCertificateRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
-  /** CA证书内容，自签CA可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 签发自签CA */
+  /** CA证书内容 */
   CaCertificate: string;
-  /** 验证证书内容，可参考 [自定义 X.509 证书实现 “一机一证”](https://cloud.tencent.com/document/product/1778/114817) 手动注册CA证书章节 */
+  /** 验证证书内容 */
   VerificationCertificate?: string;
   /** 证书格式，不传默认PEM格式，当前仅支持PEM格式 */
   Format?: string;

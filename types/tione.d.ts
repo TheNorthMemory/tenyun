@@ -240,9 +240,9 @@ declare interface CrossTenantENIInfo {
 declare interface DataConfig {
   /** 映射路径 */
   MappingPath?: string;
-  /** 存储用途可选值为 BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, OTHER */
+  /** 存储用途，用于标识该数据配置中数据的使用场景。枚举值：BUILTIN_CODE： 内置代码BUILTIN_DATA： 内置数据BUILTIN_MODEL： 内置模型USER_DATA： 用户数据USER_CODE： 用户代码USER_MODEL： 用户模型OUTPUT： 训练输出DEFAULT： 其他 */
   DataSourceUsage?: string | null;
-  /** DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS */
+  /** 存储类型，各取值对应的数据结构见下方枚举值说明。枚举值：DATASET： 数据集，填 DataSetSourceCOS： COS 对象存储，填 COSSource；仅 Train 支持COSFS： COS 挂载（COSFS），填 COSSourceCFS： CFS 文件存储，填 CFSSourceCFSTurbo： CFSTurbo 文件存储，填 CFSSource；兼容历史字段 CFSTurboSource；仅 Train 支持GooseFS： GooseFS 实例，填 GooseFSSourceGooseFSx： GooseFSx 实例，填 GooseFSSourceHDFS： HDFS 存储，填 HDFSSource；仅 Train 支持LOCAL_DISK： 本地磁盘，填 LocalDiskSourceHOST_PATH： 宿主机路径，填 HostPathSourcePUBLIC_DATA_SOURCE： 公有云数据源，填 PublicDataSourceCLOUD_PREMIUM： 高性能云硬盘（CBS），填 CBSSource，需指定 VolumeSizeInGB；仅 Notebook 支持CLOUD_SSD： SSD 云硬盘（CBS），填 CBSSource，需指定 VolumeSizeInGB；仅 Notebook 支持FREE： 免费云硬盘（CBS），填 CBSSource；仅 Notebook 支持CFS_TURBO： CFSTurbo 文件存储，填 CFSSource；仅 Notebook 支持BUILTIN_DATASET： 平台内置数据集，填 DataSetSourcePRELOAD_FILE： 预加载文件，填 PreloadFileSource */
   DataSourceType?: string | null;
   /** 来自数据集的数据 */
   DataSetSource?: DataSetConfig | null;
@@ -324,6 +324,8 @@ declare interface DataSourceInfo {
   Tags?: Tag[];
   /** 额外配置,对应存储实例的额外配置 */
   ExtraConf?: StorageExtraConf | null;
+  /** 挂载数据源时默认填充的容器内路径 */
+  ContainerPath?: string;
 }
 
 /** 数据集组 */
@@ -594,6 +596,8 @@ declare interface GooseFS {
   NameSpace?: string | null;
   /** 客户端的挂载参数，逗号分隔的参数名 */
   MountOptions?: string;
+  /** GooseFS FUSE，支持用户自定义配置，输入格式为“空格”分隔的参数名 */
+  FuseOptions?: string;
 }
 
 /** GosseFSx的配置 */
@@ -1328,6 +1332,8 @@ declare interface NotebookSetItem {
   Description?: string | null;
   /** 操作者信息 */
   LatestOperatorInfo?: OperatorInfo;
+  /** 预付费专用资源组 */
+  ResourceGroupInstanceId?: string;
 }
 
 /** 用于表示百分比或数量 */
@@ -1434,7 +1440,7 @@ declare interface PodInfo {
   Name?: string | null;
   /** pod的IP */
   IP?: string | null;
-  /** pod状态。eg：SUBMITTING提交中、PENDING排队中、RUNNING运行中、SUCCEEDED已完成、FAILED异常、TERMINATING停止中、TERMINATED已停止 */
+  /** pod状态枚举值：PENDING： 排队中RUNNING： 运行中SUCCEEDED： 已完成FAILED： 异常TERMINATING： 停止中TERMINATED： 已停止UNKNOWN： 未知 */
   Status?: string | null;
   /** pod启动时间 */
   StartTime?: string | null;
@@ -2214,7 +2220,7 @@ declare interface SmartRouterComponent {
   ResourceConfig?: SmartRouterResourceConfig | null;
   /** 组件状态：CREATING 创建中 / CREATE_FAILED 创建失败 / Normal 正常运行中 / Stopped 已停止 / Stopping 停止中 / Abnormal 异常 / Pending 启动中 / Waiting 就绪中 */
   Status?: string;
-  /** 资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute；内网版场景展示：QueueId */
+  /** 资源规格（查询时回显用户创建/修改时的资源选择）。公有云场景展示：ChargeType / Zone / ResourceSupplyAttribute / ResourceGroupSWType；内网版场景展示：QueueId */
   ResourceSpec?: SmartRouterResourceSpec | null;
   /** 业务状态（组件级计费状态，Gateway/Scheduler 独立判定）：Billing 计费中 / Normal 正常（未计费或已停止计费）/ WhitelistUsing 白名单使用中（免计费） */
   BusinessStatus?: string;
@@ -2496,7 +2502,7 @@ declare interface TrainingTaskDetail {
   SubUinName?: string | null;
   /** 地域 */
   Region?: string;
-  /** 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH */
+  /** 训练框架名称，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH */
   FrameworkName?: string | null;
   /** 训练框架版本 */
   FrameworkVersion?: string | null;
@@ -2560,7 +2566,7 @@ declare interface TrainingTaskDetail {
   ResourceGroupName?: string | null;
   /** 任务信息 */
   Message?: string | null;
-  /** 任务状态枚举值：SUBMITTING： 排队中STARTING： 启动中RUNNING： 运行中STOPPING： 停止中STOPPED： 已停止FAILED： 异常SUCCEED： 已完成SUBMIT_FAILED： 提交失败 */
+  /** 任务状态枚举值：SUBMITTING： 提交中PENDING： 排队中STARTING： 启动中RUNNING： 运行中STOPPING： 停止中STOPPED： 已停止SUCCEED： 已完成FAILED： 异常SUBMIT_FAILED： 提交失败 */
   Status?: string;
   /** 回调地址 */
   CallbackUrl?: string | null;
@@ -2781,6 +2787,8 @@ declare interface CreateDataSourceRequest {
   MountConfigure?: MountConfigureInfo;
   /** 标签配置 */
   Tags?: Tag[];
+  /** 挂载数据源时默认填充的容器内路径 */
+  ContainerPath?: string;
 }
 
 declare interface CreateDataSourceResponse {
@@ -3013,6 +3021,8 @@ declare interface CreateNotebookImageRequest {
   Kernels?: string[];
   /** 是否保存到镜像中心 */
   RegisterToImageCenter?: boolean;
+  /** 是否忽略无法被冻结的进程 */
+  IgnoreUnfreezableProcesses?: boolean;
 }
 
 declare interface CreateNotebookImageResponse {
@@ -3183,7 +3193,7 @@ declare interface CreateTrainingModelResponse {
 }
 
 declare interface CreateTrainingTaskRequest {
-  /** 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
+  /** 训练任务名称，不超过256个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头 */
   Name: string;
   /** 计费模式，eg：PREPAID 包年包月（资源组）;POSTPAID_BY_HOUR 按量计费 */
   ChargeType: string;
@@ -3209,7 +3219,7 @@ declare interface CreateTrainingTaskRequest {
   StartCmdInfo?: StartCmdInfo;
   /** 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD */
   TrainingMode?: string;
-  /** 数据配置，依赖DataSource字段，数量不超过10个 */
+  /** 数据配置，数量不超过10个 */
   DataConfigs?: DataConfig[];
   /** VPC Id */
   VpcId?: string;
@@ -4763,6 +4773,8 @@ declare interface UpdateDataSourceRequest {
   Permission?: string;
   /** 数据源挂载配置 */
   MountConfigure?: MountConfigureInfo;
+  /** 挂载数据源时默认填充的容器内路径 */
+  ContainerPath?: string;
 }
 
 declare interface UpdateDataSourceResponse {

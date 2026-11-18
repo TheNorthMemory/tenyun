@@ -136,6 +136,14 @@ declare interface AlarmNotifyHistory {
   Labels?: AlarmLable[];
   /** 该条通知实际执行的接收人/组明细。一条元素对应通知模板里的一条渠道发送规则 */
   ReceiverGroups?: ReceiverGroup[] | null;
+  /** 发送时的告警历史 ID，用于从通知历史跳到对应告警历史。非分级告警与告警 ID 相同；分级告警为“告警 ID_发生时间的 32 进制_告警级别”。 */
+  AlarmId?: string;
+  /** 发送时的告警内容，不含产品名前缀，按请求语言返回。用于列表「告警历史」的展示文案。 */
+  AlarmName?: string;
+  /** 发送时的告警状态。控制台「告警状态」请使用 TriggerStatus。无数据、失效通知不返回该字段。枚举值：ALARM： 未恢复OK： 已恢复 */
+  AlarmStatus?: string;
+  /** 通知类型，无数据、失效通知不返回该字段。枚举值：Recovery： 恢复FirstTrigger： 首次触发ContinueTrigger： 持续触发 */
+  NotifyType?: string;
 }
 
 /** 产物实体 */
@@ -174,6 +182,12 @@ declare interface ChannelContent {
   SubChannel?: string | null;
   /** 该渠道实际发送的消息正文，由 Ark 按写时捕获的内容还原 */
   Content?: string | null;
+  /** 短信：SUCCESS / FAIL。电话：ANSWERED / UNANSWERED / ABNORMAL枚举值：SUCCESS： 短信已送达FAIL： 短信送达失败ANSWERED： 电话已接听UNANSWERED： 电话未接听ABNORMAL： 电话拨打异常 */
+  DeliverStatus?: string;
+  /** 原始时间字符串，不做时区转换。短信是收到时间；电话只在接听时有值参数格式：短信为 YYYY-MM-DD hh:mm:ss，例如 2026-08-05 18:04:46。电话为 Unix 秒级时间戳的数字字符串，仅接听时有值，例如 1717824258。空字符串表示没有时间。 */
+  DeliverTime?: string;
+  /** 短信回执的运营商错误码，原样透传。成功为 DELIVRD。失败为运营商原始码，如 EXPIRED、UNDELIV、MK:0001、MK:0012、24、29。电话为空。 */
+  DeliverErrMsg?: string;
 }
 
 /** 接受人详情信息和通知详情页展示 */
@@ -3593,6 +3607,8 @@ declare namespace V20180724 {
     DropAll?: boolean;
     /** 是否采集全部指标枚举值：false： 不采集true： 采集默认值：false */
     CollectAll?: boolean;
+    /** 私有连接的 IP */
+    PrivateLinkIP?: string;
     /** 是否开启默认预聚合规则 */
     OpenDefaultRecord?: boolean;
   }

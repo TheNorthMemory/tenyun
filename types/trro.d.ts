@@ -128,6 +128,14 @@ declare interface DurationDetails {
   DeductDuration?: number;
 }
 
+/** 伴生输入文件登记（多输入）。与主视频同桶同凭证，Name 为文件引用名，Path 为相对主视频所在目录的 COS 路径。 */
+declare interface ExtraSourceInfo {
+  /** 伴生文件的引用名。只允许 [A-Za-z0-9._-] 路径段，可含子目录（深度 ≤3 层）；不能以 / 开头，不能包含 ..；同一请求内不重复 */
+  Name: string;
+  /** 伴生文件相对主视频所在目录（含文件名）的 COS 相对路径。必须为相对路径（不能以 / 开头），长度 ≤128 字节，允许 ../ 上溯最多 2 层；批量接口支持 ${FileName} 占位符（替换为该处理项主视频文件名，不含扩展名 */
+  Path: string;
+}
+
 /** 任务信息 */
 declare interface Job {
   /** 任务 ID */
@@ -515,6 +523,8 @@ declare interface CreateBatchVideoAnnotationJobRequest {
   OutputStorage?: OutputStorage;
   /** 回调信息，配置后当任务下子处理项状态从处理中变为其他状态时，服务端会向回调地址发送请求（退避重试三次，不保证回调一定送达，需保证目标地址接收服务有效），建议接收方做好幂等处理。回调请求格式如下：请求头名称值X-Annotation-Signaturehex(HMAC-SHA256(请求体原始字节, CallbackInfo.Secret))请求体（application/json）参数名类型必选描述JobIdstring是任务 IDTaskIdstring是处理项 IDFileNamestring是视频文件名Statusint是触发本次回调的处理项状态：3 超时，4 异常，5 待确认，6 成功StatusChangedAtint是状态变更时间，Unix 时间戳（秒）RawResultstring否当前生效的结果 JSON 原文：成功=标注产物；待确认=原始标注；确认后=确认版内容。超时/异常无内容 */
   CallbackInfo?: CallbackInfo;
+  /** 伴生输入文件列表，全批共用一份。与主视频同桶同凭证，Path 相对每个处理项各自的主视频目录解析，支持 ${FileName} 占位符。最多 8 条；HTTP 源（InputType=2）不支持。 */
+  ExtraSources?: ExtraSourceInfo[];
 }
 
 declare interface CreateBatchVideoAnnotationJobResponse {
@@ -599,6 +609,8 @@ declare interface CreateVideoAnnotationJobRequest {
   OutputInfo?: OutputInfo;
   /** 回调信息，配置后当处理项状态从处理中变为其他状态时，服务端会向回调地址发送请求（退避重试三次，不保证回调一定送达，需保证目标地址接收服务有效），建议接收方做好幂等处理。回调请求格式如下：请求头名称值X-Annotation-Signaturehex(HMAC-SHA256(请求体原始字节, CallbackInfo.Secret))请求体（application/json）参数名类型必选描述JobIdstring是任务 IDTaskIdstring是处理项 IDFileNamestring是视频文件名Statusint是触发本次回调的处理项状态：3 超时，4 异常，5 待确认，6 成功StatusChangedAtint是状态变更时间，Unix 时间戳（秒）RawResultstring否当前生效的结果 JSON 原文：成功=标注产物；待确认=原始标注；确认后=确认版内容。超时/异常无内容 */
   CallbackInfo?: CallbackInfo;
+  /** 伴生输入文件列表。与主视频同桶同凭证，每个元素包含 Name（文件引用名）与 Path（相对主视频所在目录的 COS 路径）。最多 8 条；HTTP 源（InputType=2）不支持。 */
+  ExtraSources?: ExtraSourceInfo[];
 }
 
 declare interface CreateVideoAnnotationJobResponse {

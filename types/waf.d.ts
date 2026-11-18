@@ -748,6 +748,8 @@ declare interface BatchCustomRuleListItem {
   ActionRatio?: number;
   /** 防护对象组ID */
   GroupIds?: number[];
+  /** 自定义规则预览开关枚举值：0：关闭预览1：开启预览 */
+  Preview?: number;
 }
 
 /** 批量精准白名单规则详情 */
@@ -1692,6 +1694,8 @@ declare interface DescribeCustomRulesRspRuleListItem {
   LogicalOp?: string;
   /** 规则灰度的比例，默认是100，不灰度 */
   ActionRatio?: number;
+  /** 自定义规则预览开关枚举值：0：关闭预览1：开启预览 */
+  Preview?: number;
 }
 
 /** domain列表 */
@@ -2048,6 +2052,8 @@ declare interface FieldWriteConfig {
   EnableHeaders?: number;
   /** 1:开启 0:不开启 */
   EnableBody?: number;
+  /** 仅当该条访问日志命中攻击规则时，是否额外存储 attack_body 字段（取值与 body 字段相同）。1:开启 0/不填:不开启。与 EnableBody 完全独立，互不影响。仅在存储查询链路（DescribeAccessMeta/ModifyAccessPeriod）中生效，不影响 CLS/CKafka 自定义投递（CreatePostCLSFlow/CreatePostCKafkaFlow）配置。 */
+  EnableAttackBody?: number;
   /** 1:开启 0:不开启 */
   EnableBot?: number;
   /** 响应方向body1:开启 0:不开启 */
@@ -2058,6 +2064,10 @@ declare interface FieldWriteConfig {
   EnableResponseLength?: number;
   /** 是否投递 response_status_line（客户端可见 HTTP 状态行，如 HTTP/1.1 200 OK，超过1KB截断）。1:开启 0/不填:不开启。与 EnableResponse 完全独立，互不影响。拦截/未回源时也会有值，记录的是 WAF 返回给客户端的状态行。 */
   EnableResponseStatusLine?: number;
+  /** 大模型安全防护详情字段，用;分割，仅对 SDK 访问日志生效。不传表示全部写入；传空字符串表示只写必填字段（uuid、appid、instance、timestamp、llm_service_id）。 */
+  LlmItem?: string;
+  /** headers 字段中10个通用冗余子字段（accept/accept-encoding/accept-language/connection/content-type/cookie/host/referer/x-forwarded-for/user-agent）剔除开关。1:剔除 0/不填:不剔除。仅在CLS/CKafka自定义投递（CreatePostCLSFlow/CreatePostCKafkaFlow及对应Describe接口）中生效，不影响原有存储日志配置。 */
+  FilterPlusEnableHeaderFilter?: number;
 }
 
 /** 过滤器 */
@@ -2458,7 +2468,7 @@ declare interface InstanceInfo {
   DomainPkg: DomainPackageNew;
   /** 用户appid */
   AppId: number;
-  /** clb或saas */
+  /** 实例接入类型枚举值：sparta-waf：SaaS型WAF实例clb-waf：负载均衡型WAF实例cdn-waf：CDN上的Web防护实例cdc-clb-waf：CDC环境下负载均衡型WAF实例llm-sdk-waf：大模型SDK WAF实例 */
   Edition: string;
   /** 业务安全包 */
   FraudPkg?: FraudPkg;
@@ -2674,6 +2684,18 @@ declare interface KeyWordInfo {
   Name?: string;
 }
 
+/** 大模型安全按小时账单分项费用 */
+declare interface LLMBillItemFee {
+  /** 提示词攻击防护费用（元） */
+  PromptAttackFee?: string;
+  /** 内容合规检测（文本）费用（元） */
+  ContentTextFee?: string;
+  /** 内容合规检测（图片）费用（元） */
+  ContentImageFee?: string;
+  /** 敏感数据检测费用（元） */
+  SensitiveDataFee?: string;
+}
+
 /** 大模型安全检测综合结果 */
 declare interface LLMDetectResult {
   /** 仅输出侧：涉敏信息 */
@@ -2704,6 +2726,38 @@ declare interface LLMDetectResult {
   IntentDetectResult?: IntentDetectResult;
   /** 恶意URL检测结果 */
   UrlDetectResult?: UrlDetectResult;
+}
+
+/** 大模型安全按小时账单明细行 */
+declare interface LLMHourBillDetailItem {
+  /** 小时区间，如00:00-01:00 */
+  TimeRange?: string;
+  /** 提示词攻击防护计量值（token） */
+  PromptAttackUsage?: number;
+  /** 内容合规检测（文本）计量值（token） */
+  ContentTextUsage?: number;
+  /** 内容合规检测（图片）计量值（张） */
+  ContentImageUsage?: number;
+  /** 敏感数据检测计量值（token） */
+  SensitiveDataUsage?: number;
+  /** 该小时提示词攻击防护费用（元） */
+  PromptAttackFee?: string;
+  /** 该小时内容合规检测（文本）费用（元） */
+  ContentTextFee?: string;
+  /** 该小时内容合规检测（图片）费用（元） */
+  ContentImageFee?: string;
+  /** 该小时敏感数据检测费用（元） */
+  SensitiveDataFee?: string;
+  /** 该小时账单总额（元，净费用） */
+  TotalFee?: string;
+}
+
+/** 大模型安全按小时账单趋势数据点 */
+declare interface LLMHourBillTrendItem {
+  /** 小时，取值00到23 */
+  Hour?: string;
+  /** 该小时账单总额（元，净费用） */
+  Fee?: string;
 }
 
 /** 近7天图片送检趋势的单日数据点 */
@@ -2950,6 +3004,10 @@ declare interface LimitRuleV2 {
   PathsOption?: PathItem[] | null;
   /** 574新增需求，限流执行顺序，0：默认情况，限流优先，1：安全防护优先 */
   Order?: number;
+  /** 统一匹配条件列表，复用ACL自定义策略结构，条件数量上限10条 */
+  MatchConditions?: Strategy[];
+  /** 条件间逻辑：and(默认)/or */
+  ConditionLogic?: string;
 }
 
 /** 限流窗口大小 */
@@ -3864,7 +3922,7 @@ declare interface SpartaProtectionPort {
 
 /** 规则的匹配条件结构体 */
 declare interface Strategy {
-  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同，具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 同匹配字段Referer逻辑符号 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）rematch（正则匹配） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 empty（内容为空）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）rematch（正则匹配） 请输入内容,512个字符以内 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 eq（等于）neq（不等于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 不支持参数 numeq（数值等于）numneq（数值不等于）numgt（数值大于）numlt（数值小于）numge（数值大于等于）numle（数值小于等于） 请输入0-9999999999999之间的整数 IP_GEO（来源IP归属地） 不支持参数 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] HOST（请求Host） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入Host值,512个字符以内 CAPTCHA_RISK（验证码风险） 不支持参数 numeq（数值等于）numneq（数值不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） numeq/numneq：Content 为 0-255 的整数字符串，例如 "10"；belong_to/not_belong_to：Content 为 JSON 字符串数组的序列化字符串，例如 ["1","2"]，最多50个元素，每个值为0-255整数；null/nnull：Content 必须为空字符串。集合格式不能使用普通逗号分隔字符串。 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） belong_to/not_belong_to：Content 为 JSON 字符串数组的序列化字符串，例如 ["101","201"]，最多7个元素；支持取值：101、201、301、401、501、601、701；null/nnull：Content 必须为空字符串。 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）nnull（存在） 数值比较时 Content 为 0-100 的整数字符串；null/nnull 时 Content 必须为空字符串。 */
+  /** 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同，具体如下所示： 匹配字段 匹配参数 逻辑符号 匹配内容 IP（来源IP） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 多个IP以英文逗号隔开,最多20个 IPV6（来源IPv6） 不支持参数 ipmatch（匹配）ipnmatch（不匹配） 支持单个IPV6地址 Referer（Referer） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 URL（请求路径） 不支持参数 eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请以/开头,512个字符以内 UserAgent（UserAgent） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 HTTP_METHOD（HTTP请求方法） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）rematch（正则匹配） 请输入方法名称,建议大写 QUERY_STRING（请求字符串） 不支持参数 empty（内容为空）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET（GET参数值） 支持参数录入 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 GET_PARAMS_NAMES（GET参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配） 请输入内容,512个字符以内 POST（POST参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_POST_NAMES（POST参数名） 不支持参数 eq（等于）neq（不等于）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 POST_BODY（完整BODY） 不支持参数 empty（内容为空）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入BODY内容,512个字符以内 COOKIE（Cookie） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）rematch（正则匹配） 请输入内容,512个字符以内 GET_COOKIES_NAMES（Cookie参数名） 不支持参数 同匹配字段GET参数名逻辑符号 请输入内容,512个字符以内 ARGS_COOKIE（Cookie参数值） 支持参数录入 同匹配字段GET参数值逻辑符号 请输入内容,512个字符以内 GET_HEADERS_NAMES（Header参数名） 不支持参数 eq（等于）neq（不等于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,建议小写,512个字符以内 ARGS_HEADER（Header参数值） 支持参数录入 empty（内容为空）nempty（内容不为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）belong_to（属于）not_belong_to（不属于）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入内容,512个字符以内 CONTENT_LENGTH（Content-length） 不支持参数 numeq（数值等于）numgt（数值大于）numlt（数值小于） 请输入0-999999999999之间的整数 IP_GEO（来源IP归属地） 不支持参数 geo_in（属于）geo_not_in（不属于） 请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}] HOST（请求Host） 不支持参数 empty（内容为空）null（不存在）nnull（存在）eq（等于）neq（不等于）contains（包含）ncontains（不包含）len_eq（长度等于）len_gt（长度大于）len_lt（长度小于）strprefix（前缀匹配）strsuffix（后缀匹配）rematch（正则匹配） 请输入Host值,512个字符以内 CAPTCHA_RISK（验证码风险） 不支持参数 numeq（数值等于）numneq（数值不等于）belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） numeq/numneq：Content 为 0-255 的整数字符串，例如 "10"；belong_to/not_belong_to：Content 为 JSON 字符串数组的序列化字符串，例如 ["1","2"]，最多50个元素，每个值为0-255整数；null/nnull：Content 必须为空字符串。集合格式不能使用普通逗号分隔字符串。 CAPTCHA_DEVICE_RISK（验证码设备风险） 不支持参数 belong_to（属于）not_belong_to（不属于）null（不存在）nnull（存在） belong_to/not_belong_to：Content 为 JSON 字符串数组的序列化字符串，例如 ["101","201"]，最多7个元素；支持取值：101、201、301、401、501、601、701；null/nnull：Content 必须为空字符串。 CAPTCHAR_SCORE（验证码风险评估分） 不支持参数 numeq（数值等于）numgt（数值大于）numlt（数值小于）numle（数值小于等于）numge（数值大于等于）null（不存在）nnull（存在） 数值比较时 Content 为 0-100 的整数字符串；null/nnull 时 Content 必须为空字符串。 */
   Field: string;
   /** 逻辑符号 逻辑符号一共分为以下几种类型： empty （ 内容为空） nempty （ 内容不为空） null （不存在） nnull （存在） eq （ 等于） neq （ 不等于） contains （ 包含） ncontains （ 不包含） belong_to （属于） not_belong_to （不属于） strprefix （ 前缀匹配）strsuffix （ 后缀匹配） len_eq （ 长度等于） len_gt （ 长度大于） len_lt （ 长度小于） ipmatch （ IP匹配） ipnmatch （ IP不匹配） rematch （ 正则匹配） numgt （ 数值大于） numlt （ 数值小于） numeq （ 数值等于） numneq （ 数值不等于） numle （ 数值小于等于） numge （ 数值大于等于） geo_in （ IP地理属于） geo_not_in （ IP地理不属于） cel （ CEL表达式） 各匹配字段对应的逻辑符号不同，详见上述匹配字段表格 */
   CompareFunc: string;
@@ -4353,7 +4411,7 @@ declare interface AddAreaBanAreasResponse {
 declare interface AddAttackWhiteRuleRequest {
   /** 域名 */
   Domain: string;
-  /** 规则状态 */
+  /** 规则状态，0表示关闭，1表示开启 */
   Status: number;
   /** 匹配规则项列表 */
   Rules: UserWhiteRuleItem[];
@@ -4411,6 +4469,8 @@ declare interface AddBatchCustomRuleRequest {
   ActionRatio?: number;
   /** 绑定的防护组ID */
   GroupIds?: number[];
+  /** 自定义规则预览开关枚举值：0：关闭预览1：开启预览默认值：0开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。 */
+  Preview?: number;
 }
 
 declare interface AddBatchCustomRuleResponse {
@@ -4485,7 +4545,7 @@ declare interface AddCustomRuleRequest {
   Source?: string;
   /** 规则标签，小程序规则用，标识是内置规则还是自定义规则 */
   Label?: string;
-  /** 开关状态，小程序风控规则的时候传该值 */
+  /** 规则开关状态，0表示关闭，1表示开启，小程序风控规则传该值 */
   Status?: number;
   /** 拦截页面id */
   PageId?: string;
@@ -4493,6 +4553,8 @@ declare interface AddCustomRuleRequest {
   LogicalOp?: string;
   /** 动作灰度比例，即规则命中后执行动作的流量百分比取值范围：1-100默认值：100（全量生效） */
   ActionRatio?: number;
+  /** 自定义规则预览开关枚举值：0：关闭预览1：开启预览默认值：0开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。 */
+  Preview?: number;
 }
 
 declare interface AddCustomRuleResponse {
@@ -4819,7 +4881,7 @@ declare interface CreateBatchIpAccessControlRequest {
   JobType: string;
   /** 定时任务配置 */
   JobDateTime: JobDateTime;
-  /** 42为黑名单，40为白名单 */
+  /** IP黑白名单类型，40表示白名单，42表示黑名单 */
   ActionType: number;
   /** 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一 */
   GroupIds?: number[];
@@ -4903,7 +4965,7 @@ declare interface CreateIpAccessControlRequest {
   Domain: string;
   /** ip参数列表 */
   IpList: string[];
-  /** 42为黑名单，40为白名单 */
+  /** IP黑白名单类型，40表示白名单，42表示黑名单 */
   ActionType: number;
   /** valid_ts为有效日期，值为秒级时间戳（（如1680570420代表2023-04-04 09:07:00）） */
   ValidTS?: number;
@@ -5069,6 +5131,10 @@ declare interface CreateRateLimitV2Request {
   PathsOption?: PathItem[];
   /** 限流执行顺序，0：默认情况，限流优先，1：安全防护优先 */
   Order?: number;
+  /** 统一匹配条件列表，复用ACL自定义策略结构，条件数量上限10条。MatchConditions非空时引擎只走新字段 */
+  MatchConditions?: Strategy[];
+  /** 条件间逻辑：and(默认)/or */
+  ConditionLogic?: string;
 }
 
 declare interface CreateRateLimitV2Response {
@@ -5293,7 +5359,7 @@ declare interface DeleteIpAccessControlRequest {
   IsId?: boolean;
   /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定ip名单 */
   DeleteAll?: boolean;
-  /** 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 */
+  /** 数据来源，'batch'表示批量黑白名单规则，空/不传表示单域名黑白名单规则 */
   SourceType?: string;
   /** IP黑白名单类型，40为IP白名单，42为IP黑名单 */
   ActionType?: number;
@@ -5315,7 +5381,7 @@ declare interface DeleteIpAccessControlV2Request {
   RuleIds?: number[];
   /** 是否删除对应的域名下的所有黑/白IP名单，true表示全部删除，false表示只删除指定IP名单，批量防护不支持 */
   DeleteAll?: boolean;
-  /** 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 */
+  /** 数据来源，'batch'表示批量黑白名单规则，空/不传表示单域名黑白名单规则 */
   SourceType?: string;
   /** IP黑白名单类型，40为IP白名单，42为IP黑名单，在DeleteAll为true的时候必传此参数 */
   ActionType?: number;
@@ -6485,7 +6551,7 @@ declare interface DescribeHostLimitRequest {
   Domain: string;
   /** 实例id */
   InstanceID?: string;
-  /** 流量来源 */
+  /** 流量来源类型，'clb'表示CLB负载均衡，'apisix'表示自建网关（含Kong），'tsegw'表示TSE云原生网关 */
   AlbType?: string;
 }
 
@@ -6688,6 +6754,30 @@ declare interface DescribeLLMContentSecCheckResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLLMHourBillDetailRequest {
+  /** 实例ID参数格式：形如 waf_xxxxxxxx */
+  InstanceId: string;
+  /** 查询日期，仅支持单日参数格式：YYYY-MM-DD 或 YYYYMMDD */
+  Date: string;
+}
+
+declare interface DescribeLLMHourBillDetailResponse {
+  /** 实例ID */
+  InstanceId?: string;
+  /** 查询日期，归一化为YYYY-MM-DD格式 */
+  Date?: string;
+  /** 当日账单预估总额（元，扣减免费额度后的净费用） */
+  EstimatedTotalFee?: string;
+  /** 当日按计费项拆分的费用 */
+  ItemFees?: LLMBillItemFee;
+  /** 24小时账单趋势，固定24条，无数据补0 */
+  HourlyTrend?: LLMHourBillTrendItem[];
+  /** 24小时账单明细，固定24条，无数据补0 */
+  HourlyDetail?: LLMHourBillDetailItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLLMKeywordLibraryRequest {
   /** 词库类型筛选枚举值：custom：自定义黑库builtin：内置词库all：全部词库white：自定义白库 */
   Type: string;
@@ -6772,6 +6862,20 @@ declare interface DescribeLLMWafProtectRulesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeLLMWafToolCallRulesRequest {
+  /** 服务ID */
+  ServiceId?: string;
+  /** 实例id */
+  InstanceId?: string;
+}
+
+declare interface DescribeLLMWafToolCallRulesResponse {
+  /** 类别列表 */
+  Categories?: CategoryGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLogHistogramRequest {
   /** 要查询的日志的起始时间，Unix时间戳，单位ms */
   From: number;
@@ -6816,7 +6920,9 @@ declare interface DescribeModuleStatusResponse {
   AntiLeakage?: number;
   /** API安全是否开启 */
   ApiProtection?: number;
-  /** 限流模块开关 */
+  /** API安全检测开关是否开启 */
+  ApiDetect?: number;
+  /** 限流模块开关，0表示关闭，1表示开启 */
   RateLimit?: number;
   /** gzip 开关 */
   GzipAnalysis?: number;
@@ -6967,7 +7073,7 @@ declare interface DescribePeakValueResponse {
 declare interface DescribePolicyStatusRequest {
   /** 域名 */
   Domain: string;
-  /** clb-waf或者saas-waf */
+  /** clb-waf或者sparta-waf */
   Edition: string;
 }
 
@@ -7713,7 +7819,7 @@ declare interface ModifyAntiFakeUrlResponse {
 declare interface ModifyAntiFakeUrlStatusRequest {
   /** 域名 */
   Domain: string;
-  /** 状态 */
+  /** 防篡改规则状态，0表示关闭，1表示开启 */
   Status: number;
   /** Id列表 */
   Ids: number[];
@@ -7729,7 +7835,7 @@ declare interface ModifyAntiInfoLeakRuleStatusRequest {
   Domain: string;
   /** 规则 */
   RuleId: number;
-  /** 状态 */
+  /** 防信息泄露规则状态，0表示关闭，1表示开启 */
   Status: number;
 }
 
@@ -7745,7 +7851,7 @@ declare interface ModifyAntiInfoLeakRulesRequest {
   Name: string;
   /** 域名 */
   Domain: string;
-  /** Action 值 */
+  /** 防信息泄露动作类型，取值0~4 */
   ActionType: number;
   /** 策略数组 */
   Strategies: StrategyForAntiInfoLeak[];
@@ -7893,7 +7999,7 @@ declare interface ModifyAttackWhiteRuleRequest {
   RuleId: number;
   /** 域名 */
   Domain: string;
-  /** 规则状态 */
+  /** 规则状态，0表示关闭，1表示开启 */
   Status: number;
   /** 匹配规则项列表 */
   Rules: UserWhiteRuleItem[];
@@ -7951,6 +8057,8 @@ declare interface ModifyBatchCustomRuleRequest {
   PageId?: string;
   /** 动作灰度的比例，1-100，默认是100 */
   ActionRatio?: number;
+  /** 自定义规则预览开关枚举值：0：关闭预览1：开启预览未传入时保留规则当前的预览设置开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。 */
+  Preview?: number;
 }
 
 declare interface ModifyBatchCustomRuleResponse {
@@ -8023,7 +8131,7 @@ declare interface ModifyBatchIpAccessControlRequest {
   JobType: string;
   /** 定时任务配置 */
   JobDateTime: JobDateTime;
-  /** 42为黑名单，40为白名单 */
+  /** IP黑白名单类型，40表示白名单，42表示黑名单 */
   ActionType: number;
   /** 防护对象组ID列表，如果绑定的是防护对象组，和Domains参数二选一 */
   GroupIds?: number[];
@@ -8101,7 +8209,7 @@ declare interface ModifyBotSceneUCBRuleResponse {
 declare interface ModifyBotStatusRequest {
   /** 类别 */
   Category: string;
-  /** 状态 */
+  /** BOT模块开关状态，传入'0'表示关闭，'1'表示开启 */
   Status: string;
   /** 域名 */
   Domain?: string;
@@ -8155,7 +8263,7 @@ declare interface ModifyCustomRuleRequest {
   JobDateTime?: JobDateTime;
   /** 规则来源，判断是不是小程序的 */
   Source?: string;
-  /** 开关状态，小程序风控规则的时候传该值 */
+  /** 规则开关状态，0表示关闭，1表示开启，小程序风控规则传该值 */
   Status?: number;
   /** 拦截页面id */
   PageId?: string;
@@ -8163,6 +8271,8 @@ declare interface ModifyCustomRuleRequest {
   LogicalOp?: string;
   /** 动作灰度比例，即规则命中后执行动作的流量百分比取值范围：1-100默认值：100（全量生效） */
   ActionRatio?: number;
+  /** 自定义规则预览开关枚举值：0：关闭预览1：开启预览未传入时保留规则当前的预览设置开启后仅记录规则命中并继续匹配后续规则，不执行本规则配置的防护动作。仅支持自定义规则，启用时动作灰度比例须为100；不支持精准白名单和小程序规则。仅支持CNAME接入或云原生清洗接入，启用预览前须开启规则。 */
+  Preview?: number;
 }
 
 declare interface ModifyCustomRuleResponse {
@@ -8293,7 +8403,7 @@ declare interface ModifyDomainWhiteRuleResponse {
 declare interface ModifyDomainsCLSStatusRequest {
   /** 需要修改的域名列表 */
   Domains: DomainURI[];
-  /** 修改域名的访问日志开关为Status */
+  /** CLS访问日志开关，0表示关闭，1表示开启 */
   Status: number;
 }
 
@@ -8453,7 +8563,7 @@ declare interface ModifyIpAccessControlRequest {
   Domain: string;
   /** ip参数列表 */
   IpList: string[];
-  /** 42为黑名单，40为白名单 */
+  /** IP黑白名单类型，40表示白名单，42表示黑名单 */
   ActionType: number;
   /** 规则ID */
   RuleId: number;
@@ -8556,6 +8666,22 @@ declare interface ModifyLLMKeywordLibraryResponse {
   RequestId?: string;
 }
 
+declare interface ModifyLLMSdkAccessRequest {
+  /** 要接入的应用名称 */
+  Name: string;
+  /** 实例id */
+  InstanceId: string;
+  /** serviceid */
+  Domain: string;
+  /** 备注 */
+  Remark?: string;
+}
+
+declare interface ModifyLLMSdkAccessResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyLLMStatusRequest {
   /** 开关状态。true：开启，false：关闭。 */
   Status: boolean;
@@ -8575,10 +8701,10 @@ declare interface ModifyLLMStatusResponse {
 }
 
 declare interface ModifyLLMWafDLPRuleRequest {
-  /** 服务ID */
-  ServiceId: string;
   /** 要修改的规则id列表 */
   RuleIds: string[];
+  /** SDK 模式传 ServiceId（与 Domain 二选一） */
+  ServiceId?: string;
   /** 动作 */
   RuleAction?: string;
   /** 开关 */
@@ -8587,6 +8713,8 @@ declare interface ModifyLLMWafDLPRuleRequest {
   InstanceId?: string;
   /** 检测方向：1是入向，2是出向，3是入向和出向都检测 */
   Direction?: number;
+  /** 域名模式传 Domain（与 ServiceId 二选一） */
+  Domain?: string;
 }
 
 declare interface ModifyLLMWafDLPRuleResponse {
@@ -8595,6 +8723,28 @@ declare interface ModifyLLMWafDLPRuleResponse {
 }
 
 declare interface ModifyLLMWafProtectRuleRequest {
+  /** 要修改的规则id列表 */
+  RuleIds: string[];
+  /** SDK 模式传 ServiceId（与 Domain 二选一） */
+  ServiceId?: string;
+  /** 规则动作 */
+  RuleAction?: string;
+  /** 开关 */
+  Status?: number;
+  /** 实例id */
+  InstanceId?: string;
+  /** 检测方向：1是入向，2是出向，3是入向和出向都检测 */
+  Direction?: number;
+  /** 域名模式传 Domain（与 ServiceId 二选一） */
+  Domain?: string;
+}
+
+declare interface ModifyLLMWafProtectRuleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyLLMWafToolCallRuleRequest {
   /** 服务ID */
   ServiceId: string;
   /** 要修改的规则id列表 */
@@ -8605,11 +8755,9 @@ declare interface ModifyLLMWafProtectRuleRequest {
   Status?: number;
   /** 实例id */
   InstanceId?: string;
-  /** 检测方向：1是入向，2是出向，3是入向和出向都检测 */
-  Direction?: number;
 }
 
-declare interface ModifyLLMWafProtectRuleResponse {
+declare interface ModifyLLMWafToolCallRuleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8625,6 +8773,8 @@ declare interface ModifyModuleStatusRequest {
   CcProtection: number;
   /** API安全模块开关，0或者1 */
   ApiProtection: number;
+  /** API安全检测开关，0关闭1开启 */
+  ApiDetect?: number;
   /** 防篡改模块开关，0或者1 */
   AntiTamper?: number;
   /** 防泄漏模块开关，0或者1 */
@@ -9337,6 +9487,10 @@ declare interface UpdateRateLimitV2Request {
   PathsOption?: PathItem[];
   /** 限流执行顺序，0：默认情况，限流优先，1：安全防护优先 */
   Order?: number;
+  /** 统一匹配条件列表，复用ACL自定义策略结构，条件数量上限10条。MatchConditions非空时引擎只走新字段 */
+  MatchConditions?: Strategy[];
+  /** 条件间逻辑：and(默认)/or */
+  ConditionLogic?: string;
 }
 
 declare interface UpdateRateLimitV2Response {
@@ -9387,7 +9541,7 @@ declare interface UpsertCCRuleRequest {
   Domain: string;
   /** 名称 */
   Name: string;
-  /** 状态 */
+  /** CC规则开关，0表示关闭，1表示开启 */
   Status: number;
   /** 高级模式（是否使用Session检测），0表示不启用，1表示启用 */
   Advance: string;
@@ -9399,7 +9553,7 @@ declare interface UpsertCCRuleRequest {
   ActionType: string;
   /** 优先级 */
   Priority: number;
-  /** 动作有效时间 */
+  /** 动作有效时间，单位：秒，取值范围60~604800（即1分钟~7天） */
   ValidTime: number;
   /** 检测Url */
   Url?: string;
@@ -9409,7 +9563,7 @@ declare interface UpsertCCRuleRequest {
   OptionsArr?: string;
   /** waf版本，sparta-waf或者clb-waf */
   Edition?: string;
-  /** 操作类型 */
+  /** CC规则类型，0表示基础规则，1表示高级规则 */
   Type?: number;
   /** 添加规则的来源事件id */
   EventId?: string;
@@ -9725,6 +9879,8 @@ declare interface Waf {
   DescribeLLMContentRuleList(data?: DescribeLLMContentRuleListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMContentRuleListResponse>;
   /** 大模型内容审核接口 {@link DescribeLLMContentSecCheckRequest} {@link DescribeLLMContentSecCheckResponse} */
   DescribeLLMContentSecCheck(data: DescribeLLMContentSecCheckRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMContentSecCheckResponse>;
+  /** 查询大模型安全按小时账单明细 {@link DescribeLLMHourBillDetailRequest} {@link DescribeLLMHourBillDetailResponse} */
+  DescribeLLMHourBillDetail(data: DescribeLLMHourBillDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMHourBillDetailResponse>;
   /** 查询自定义词库列表 {@link DescribeLLMKeywordLibraryRequest} {@link DescribeLLMKeywordLibraryResponse} */
   DescribeLLMKeywordLibrary(data: DescribeLLMKeywordLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMKeywordLibraryResponse>;
   /** 查询llmsdk接入信息 {@link DescribeLLMSdkAccessRequest} {@link DescribeLLMSdkAccessResponse} */
@@ -9733,6 +9889,8 @@ declare interface Waf {
   DescribeLLMWafDLPRules(data?: DescribeLLMWafDLPRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMWafDLPRulesResponse>;
   /** 查询 waf-LLM 规则推理防护规则 {@link DescribeLLMWafProtectRulesRequest} {@link DescribeLLMWafProtectRulesResponse} */
   DescribeLLMWafProtectRules(data?: DescribeLLMWafProtectRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMWafProtectRulesResponse>;
+  /** 查询 llmwaf Tool Call 规则 {@link DescribeLLMWafToolCallRulesRequest} {@link DescribeLLMWafToolCallRulesResponse} */
+  DescribeLLMWafToolCallRules(data?: DescribeLLMWafToolCallRulesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLLMWafToolCallRulesResponse>;
   /** 获取日志数量直方图 {@link DescribeLogHistogramRequest} {@link DescribeLogHistogramResponse} */
   DescribeLogHistogram(data: DescribeLogHistogramRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLogHistogramResponse>;
   /** 查询waf各个模块接口的开关状态 {@link DescribeModuleStatusRequest} {@link DescribeModuleStatusResponse} */
@@ -9917,12 +10075,16 @@ declare interface Waf {
   ModifyLLMContentRuleStatus(data: ModifyLLMContentRuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMContentRuleStatusResponse>;
   /** 修改关键词库 {@link ModifyLLMKeywordLibraryRequest} {@link ModifyLLMKeywordLibraryResponse} */
   ModifyLLMKeywordLibrary(data: ModifyLLMKeywordLibraryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMKeywordLibraryResponse>;
+  /** 修改SDK接入信息 {@link ModifyLLMSdkAccessRequest} {@link ModifyLLMSdkAccessResponse} */
+  ModifyLLMSdkAccess(data: ModifyLLMSdkAccessRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMSdkAccessResponse>;
   /** 修改大模型防护开关状态 {@link ModifyLLMStatusRequest} {@link ModifyLLMStatusResponse} */
   ModifyLLMStatus(data: ModifyLLMStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMStatusResponse>;
   /** 修改llmwaf DLP 规则 {@link ModifyLLMWafDLPRuleRequest} {@link ModifyLLMWafDLPRuleResponse} */
   ModifyLLMWafDLPRule(data: ModifyLLMWafDLPRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMWafDLPRuleResponse>;
   /** 修改 LLMwaf 推理防护规则 {@link ModifyLLMWafProtectRuleRequest} {@link ModifyLLMWafProtectRuleResponse} */
   ModifyLLMWafProtectRule(data: ModifyLLMWafProtectRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMWafProtectRuleResponse>;
+  /** 修改 llmwafTool Call 规则 {@link ModifyLLMWafToolCallRuleRequest} {@link ModifyLLMWafToolCallRuleResponse} */
+  ModifyLLMWafToolCallRule(data: ModifyLLMWafToolCallRuleRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyLLMWafToolCallRuleResponse>;
   /** 设置某个domain下基础安全模块的开关 {@link ModifyModuleStatusRequest} {@link ModifyModuleStatusResponse} */
   ModifyModuleStatus(data: ModifyModuleStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyModuleStatusResponse>;
   /** 修改防护对象 {@link ModifyObjectRequest} {@link ModifyObjectResponse} */

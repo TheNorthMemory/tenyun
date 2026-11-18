@@ -2296,6 +2296,12 @@ declare interface KongRoutePreview {
   QueryStringParameters?: KVMapping[];
   /** 路由来源 */
   RouteSource?: string;
+  /** 用户绑定的业务标签（路由/服务标签分组能力，不含 Kong 内部 tag）。未绑定时字段为空数组或不返回。关联需求：路由/服务标签分组管理 */
+  Tags?: KongUserTagKV[];
+  /** 超时时间，单位ms */
+  Timeout?: number | null;
+  /** 路由超时配置的来源。 */
+  TimeoutSource?: string;
 }
 
 /** 云原生网关服务预览信息 */
@@ -2354,6 +2360,8 @@ declare interface KongTarget {
   CvmInstanceName?: string;
   /** 健康状态 */
   Health?: string;
+  /** Target ID */
+  Id?: string;
   /** Target的来源 */
   Source?: string;
   /** target标签 */
@@ -2408,6 +2416,16 @@ declare interface KongUpstreamInfo {
   SourceType?: string;
   /** 服务后端类型是IPList时提供 */
   Targets?: KongTarget[] | null;
+}
+
+/** 用户业务标签的 KV 表示（路由/服务标签分组） */
+declare interface KongUserTagKV {
+  /** 标签 ID */
+  TagId?: number;
+  /** 标签 Key */
+  TagKey?: string;
+  /** 标签 Value */
+  TagValue?: string;
 }
 
 /** LLM 模型 API 列表 */

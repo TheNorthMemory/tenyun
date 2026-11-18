@@ -258,7 +258,7 @@ declare interface CertInfo {
 
 /** 证书信息 */
 declare interface CertificateInput {
-  /** 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证。默认为 UNIDIRECTIONAL。 */
+  /** 认证类型，取值：UNIDIRECTIONAL：单向认证；MUTUAL：双向认证。 此参数是否必填取决于调用场景： - 创建监听器或转发规则：需要通过 Certificate 配置证书时，此参数必填；复用已有域名证书的转发规则无需传入。 - 修改监听器或域名属性：通过 Certificate 更新证书时，此参数必填；不修改证书时，无需传入整个 Certificate。 - 批量替换证书（ReplaceCertForLoadBalancers）：此参数无需传入，接口仅替换证书，不修改认证类型。枚举值：UNIDIRECTIONAL： 单向认证MUTUAL： 双向认证 */
   SSLMode?: string;
   /** 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON。 */
   SSLVerifyClient?: string;
@@ -2242,7 +2242,7 @@ declare interface SpecAvailability {
 declare interface StickyConfig {
   /** 是否开启粘连路由 */
   Enabled?: boolean;
-  /** 会话粘性的超时时间（秒），取值范围 180–86400。创建时默认为 1800；修改时若不设置该字段，则保留原有值。取值范围：[180, 21600]单位：秒默认值：1800 */
+  /** 会话粘性的超时时间（秒），取值范围 180–21600。创建时默认为 1800；修改时若不设置该字段，则保留原有值。取值范围：[180, 21600]单位：秒默认值：1800 */
   TimeoutSeconds?: number;
 }
 

@@ -2543,7 +2543,7 @@ declare interface ChannelDescribeBillUsageDetailRequest {
   Agent: Agent;
   /** 查询开始时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。参数格式：yyyyMMdd */
   StartTime: string;
-  /** 查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。参数格式：yyyyMMdd */
+  /** 查询结束时间字符串，格式为yyyyMMdd，时间跨度不能大于31天。注意：从 2026年10月10日起，开始日期和结束日期必须在同一个自然月内，不支持跨月查询。正确示例：StartTime=20260901，EndTime=20260930。开始和结束日期都在 2026年9月，可以查询。错误示例：StartTime=20260815，EndTime=20260915。开始日期在8月，结束日期在9月，属于跨月查询，不支持。注意：数据存在延迟，最晚只能查询到截止到昨天的数据！参数格式：yyyyMMdd */
   EndTime: string;
   /** 查询的套餐类型 （选填 ）不传则查询所有套餐；目前支持:**CloudEnterprise**: 企业版合同**SingleSignature**: 单方签章**CloudProve**: 签署报告**CloudOnlineSign**: 腾讯会议在线签约**ChannelWeCard**: 微工卡**SignFlow**: 合同套餐**SignFace**: 签署意愿（人脸识别）**SignPassword**: 签署意愿（密码）**SignSMS**: 签署意愿（短信）**PersonalEssAuth**: 签署人实名（腾讯电子签认证）**PersonalThirdAuth**: 签署人实名（信任第三方认证）**OrgEssAuth**: 签署企业实名**FlowNotify**: 短信通知**AuthService**: 企业工商信息查询 */
   QuotaType?: string;

@@ -346,6 +346,8 @@ declare interface DBInfo {
   EncryptConn?: string;
   /** tdsql的分片id。如节点类型为set必填。 */
   SetId?: string;
+  /** MongoDB专用。分片标识（如"shard01"），仅NodeType=cluster时生效，用于区分分片集群中不同的mongod节点 */
+  Shard?: string;
 }
 
 /** 迁移对象信息，在配置库表视图等对象信息时大小写敏感 */
@@ -1102,7 +1104,7 @@ declare interface ProcessStepTip {
 declare interface RateLimit {
   /** 全量导出线程数，如果不设置或设置为0则表示保持当前值，最大值为16 */
   DumpThread?: number;
-  /** 全量导出Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000 */
+  /** 全量导出Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000。支持mysql系相关链路、mongodb链路。 */
   DumpRps?: number;
   /** 全量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为16 */
   LoadThread?: number;
@@ -1110,6 +1112,16 @@ declare interface RateLimit {
   LoadRps?: number;
   /** 增量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为128 */
   SinkerThread?: number;
+  /** 全量导入Bps（暂时只有redis产品生效），单位MB/s */
+  LoadBps?: number;
+  /** 目标库分片数，目前暂时只有redis用 */
+  DstShardCount?: number;
+  /** 全量导出Bps（pg链路及MongoDB链路使用。MongoDB上限80），单位MB/s */
+  DumpBps?: number;
+  /** 增量导入RPS限制，MongoDB专用。上限30000 */
+  SinkerRps?: number;
+  /** 增量导入BPS限制，单位MB/s，MongoDB专用。上限120 */
+  SinkerBps?: number;
 }
 
 /** 迁移和同步任务限速的详细信息 */
@@ -1136,6 +1148,22 @@ declare interface RateLimitOption {
   DefaultSinkerThread: number;
   /** enum:"no"/"yes"、no表示用户未设置过限速、yes表示设置过限速，该字段仅在出参有意义 */
   HasUserSetRateLimit: string;
+  /** 默认的全量导出BPS，目前仅支持mongodb链路，单位MB/s */
+  DefaultDumpBps?: number;
+  /** 增量导入RPS，目前仅支持mongodb链路 */
+  CurrentSinkerRps?: number;
+  /** 默认的增量导入RPS，目前仅支持mongodb链路 */
+  DefaultSinkerRps?: number;
+  /** 当前导入BPS，暂时只有redis在用，单位MB/s */
+  CurrentLoadBps?: number;
+  /** 目标库分片数，暂时只有redis在用 */
+  CurrentDstShardCount?: number;
+  /** 全量导出BPS，目前仅支持mongodb链路，单位MB/s */
+  CurrentDumpBps?: number;
+  /** 增量导入BPS，目前仅支持mongodb链路，单位MB/s */
+  CurrentSinkerBps?: number;
+  /** 默认的增量导入BPS，目前仅支持mongodb链路，单位MB/s */
+  DefaultSinkerBps?: number;
 }
 
 /** 角色对象，postgresql独有参数 */
@@ -2709,12 +2737,22 @@ declare interface ModifyMigrateRateLimitRequest {
   DumpThread?: number;
   /** 迁移全量导出的 Rps 限制、需要大于 0 */
   DumpRps?: number;
+  /** 全量导出Bps，单位MB/s，MongoDB专用，上限80 */
+  DumpBps?: number;
   /** 迁移任务全量导入线程数、有效值为 1-16 */
   LoadThread?: number;
   /** 迁移任务增量导入线程数、有效值为 1-128 */
   SinkerThread?: number;
   /** 全量导入Rps限制 */
   LoadRps?: number;
+  /** 导入BPS，单位MB/s。目前仅对redis生效，表示目标库单分片流量限制大小 */
+  LoadBps?: number;
+  /** 目标库分片数，目前仅对redis生效 */
+  DstShardCount?: number;
+  /** 增量导入Rps，MongoDB专用，上限30000 */
+  SinkerRps?: number;
+  /** 增量导入Bps，单位MB/s，MongoDB专用，上限120 */
+  SinkerBps?: number;
 }
 
 declare interface ModifyMigrateRateLimitResponse {

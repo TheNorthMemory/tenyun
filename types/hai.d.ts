@@ -458,7 +458,7 @@ declare interface ServiceDetail {
 declare interface ServiceMetaData {
   /** 服务名称 */
   ServiceName?: string;
-  /** 付费方式：POSTPAID_BY_HOUR 按量后付费，PREPAID_BY_MONTH 包年包月，SPOT 竞价售卖（竞价需先调用 BidSpotInferService 对套餐出价） */
+  /** 付费方式枚举值：POSTPAID_BY_HOUR： 按量后付费PREPAID_BY_MONTH： 包年包月SPOT： 竞价售卖 */
   ServiceChargeType?: string;
 }
 

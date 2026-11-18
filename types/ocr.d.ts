@@ -138,9 +138,9 @@ declare interface AirTransport {
 declare interface AnswerElement {
   /** 答案是否正确 */
   IsCorrect?: boolean;
-  /** 答案分析结果 */
+  /** 【批改 API 专属特性】当ModelType= yuanbao_correction_model，该字段返回空。通过ResultList. AnswerAnalysis返回题目维度答案解析当ModelType= youtu_correction_model，返回答案维度答案解析 */
   AnswerAnalysis?: string;
-  /** 返回正确答案内容 */
+  /** 返回正确答案内容。为提升速度算式批改场景默认不输出正确答案 */
   RightAnswer?: string;
 }
 
@@ -1696,10 +1696,14 @@ declare interface QuestionInfo {
   OrgHeight?: number;
   /** 输入图片宽度单位：px */
   OrgWidth?: number;
-  /** 预处理后的图片base64编码 */
+  /** 废弃字段 */
   ImageBase64?: string;
   /** 预处理后的图片URL,如果开启了图像切边矫正，后续的坐标都是基于当前图片返回的坐标 */
   ReturnImageUrl?: string;
+  /** 【批改 API 专属特性】图片类型预判别（常规作业 / 非作业图片 / 无作答痕迹），仅 ModelType = yuanbao_correction_model 时生效。其他模型类型不支持该能力。 */
+  ClassName?: string;
+  /** 文档所在页 */
+  PageIndex?: number;
 }
 
 /** 定额发票 */
@@ -1906,14 +1910,18 @@ declare interface ResultList {
   Parse?: Element[];
   /** 整题的坐标，多页单题跨页/单页单题跨栏场景下，存在一道题有多个坐标 */
   Coord?: Polygon[] | null;
-  /** 多坐标返回，显示坐标所在页默认值：[] */
+  /** 单题跨栏/跨页场景下：配合CoordPageIndex一起使用，支持多坐标显示在不同页，按顺序对齐默认值：[] */
   CoordPageIndex?: number[];
-  /** 返回正确答案内容 */
+  /** 【批改 API 专属特性】返回步骤批改场景下的正确答案内容 */
   RightAnswer?: string;
   /** 学科（如语文、数学、英语） */
   Subject?: string;
   /** 返回题目的知识点内容 */
   KnowledgePoints?: string[];
+  /** 【批改 API 专属特性】当ModelType= yuanbao_correction_model，通过该字段返回题目维度的答案解析当ModelType= youtu_correction_model，该字段返回空，通过AnswerElement. AnswerAnalysis返回答案维度答案解析 */
+  AnswerAnalysis?: string;
+  /** 年级：小学/初中/高中 */
+  Grade?: string;
 }
 
 /** 销货清单 */
@@ -3338,6 +3346,48 @@ declare interface ArithmeticOCRResponse {
   RequestId?: string;
 }
 
+declare interface AuditMaterialAgentRequest {
+  /** 资料审核Agent类型，不同类型包含不同的输入、输出参数，提供不同的审核能力。枚举值：StorePicAudit： 商户照片审核 */
+  AgentType: string;
+  /** 图片的 Url 地址。要求图片经Base64编码后不超过 10M。 */
+  ImageUrl?: string;
+  /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M。 */
+  ImageBase64?: string;
+  /** 商户照片分类是否输出具体场景标签。注：开启后耗时会增加。 支持该入参的资料审核Agent类型：StorePicAudit */
+  NeedSceneType?: boolean;
+  /** 商户名称信息，辅助判断具体场景标签。注：仅SceneType配置为true时支持。 支持该出参的资料审核Agent类型：StorePicAudit */
+  StoreInfoHint?: string;
+  /** 水印提示排除类型，选择出参“水印提示”排除掉的水印类型，不传的话即代表任意水印都会提示。PhoneCam：手机相机水印WatermarkCam：水印相机水印 */
+  IgnoreWatermarkCategories?: string[];
+}
+
+declare interface AuditMaterialAgentResponse {
+  /** 商户照片类型 支持该出参的资料审核Agent类型：StorePicAudit */
+  StoreLabel?: string[];
+  /** 商户照片分类具体场景标签，输出3个最匹配的场景， 注：仅SceneType配置为true时支持。 支持该出参的资料审核Agent类型：StorePicAudit */
+  SceneType?: string;
+  /** 商户门头名称 支持该出参的资料审核Agent类型：StorePicAudit */
+  StoreInfo?: StoreInfo[];
+  /** 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负 支持该出参的资料审核Agent类型：StorePicAudit */
+  Angle?: number;
+  /** 区域篡改提示 */
+  Tamper?: SceneWarnInfo;
+  /** AIGC合成提示 */
+  Synthesis?: SceneWarnInfo;
+  /** 屏幕翻拍提示 */
+  RemakeScreen?: SceneWarnInfo;
+  /** 截图提示 */
+  Screenshot?: SceneWarnInfo;
+  /** 文字水印提示 */
+  TextWatermark?: SceneWarnInfo;
+  /** 水印内容，当未检测到文字水印时不返回，返回多组水印时以 | 分隔。 */
+  WatermarkContent?: string;
+  /** 模板图片提示 */
+  Template?: SceneWarnInfo;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface BankCardOCRRequest {
   /** 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。 */
   ImageBase64?: string;
@@ -3618,6 +3668,12 @@ declare interface DescribeMarkEssayAgentJobResponse {
   ErrorMessage?: string;
   /** 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功 */
   JobStatus?: string;
+  /** 支持题目结构化、批改场景的结构。AgentType为1、2都按照这个结构返回 */
+  QuestionInfo?: QuestionInfo[];
+  /** 定制的json结构字符串，主要用于快速定制输出的agent输出结构。推荐用于POC场景 */
+  AgentResultJson?: string;
+  /** 扩展字段 */
+  ThoughtContent?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5313,6 +5369,8 @@ declare interface SubmitExtractDocAgentJobRequest {
   ModelConfig?: string;
   /** agent支持的类型枚举,不同类型输出结果不一样，默认为00:表示标准抽取Agent1:表示合同协议分类+抽取+审核Agent */
   AgentType?: number;
+  /** 输出配置扩展，当key对应为1表示开启配置开关。 */
+  QuestionConfigMap?: string;
 }
 
 declare interface SubmitExtractDocAgentJobResponse {
@@ -5331,6 +5389,10 @@ declare interface SubmitMarkEssayAgentJobRequest {
   PdfPageNumber?: number;
   /** 批改信息输出配置，当key对应为1表示开启配置开关。 当key为StructureAndContent value为1 表示SentenceSuggest返回篇章结构和内容信息，默认只返回词汇、语句 */
   QuestionConfigMap?: string;
+  /** agent支持的类型枚举,不同类型输出结果不一样，默认为00:表示中英文作文批改Agent1:表示教辅试卷题库拆录Agent(支持拆录含解析与答案的教辅（解析、答案可与正文分置首尾，或与试题混排）、多页成套标准答案试卷及带有手写批注痕迹的试题) */
+  AgentType?: number;
+  /** 需要识别的页码范围（目前只有AgentType=1支持），单次调用最多支持100页。 参数格式：1-10 示例值：1-2 */
+  PageRange?: string;
 }
 
 declare interface SubmitMarkEssayAgentJobResponse {
@@ -5377,7 +5439,7 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   BoolSingleQuestion?: boolean;
   /** 默认false 表示关闭深度思考 true 表示打开深度思考，更深层次推理分析，速度更慢 */
   EnableDeepThink?: boolean;
-  /** 题目信息输出配置，当key对应为true表示开启配置开关。当key为TrueAnswer value为true 表示输出每道题的正确答案 ；当key为StepCorrection value为true表示启用步骤级批改；当key为DisableAnswerAnalysis value为true表示不输出答案解析；当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标； */
+  /** 题目信息输出配置（默认快速模式只输出题目外层题目边框坐标、批改答案、手写答案坐标、答案分析、正确答案）当key为QuickGradingEnabled value为false表示关闭快速模式（速度会变慢），新增输出手写作答、题干、插图坐标当key为StepCorrection value为true表示启用步骤级批改（速度会变慢）； */
   QuestionConfigMap?: string;
   /** 【废弃字段】 */
   ReferenceAnswer?: string;
@@ -5391,14 +5453,16 @@ declare interface SubmitQuestionMarkAgentJobRequest {
   AnswerAssistMap?: string;
   /** 是否开启切边、弯曲矫正、方向矫正，开启则批改之前先做图片前处理，图片url地址返回在查询接口的QuestionInfo-> ReturnImageUrl中,默认为false不开启 */
   EnableImageCrop?: boolean;
+  /** 批改模型选择枚举值：yuanbao_correction_model： 快速批改模型平均耗时8s。针对单题跨栏、多栏（≥2栏）排版及子题数超过 30 道的复杂算式场景，耗时约为快速批改模式的 2 倍+。youtu_correction_model： 深度批改模型平均耗时12-30s。全场景支持,精度更高。默认值：yuanbao_correction_model */
+  ModelType?: string;
 }
 
 declare interface SubmitQuestionMarkAgentJobResponse {
   /** 任务唯一ID。由服务端生成. */
   JobId?: string;
-  /** 切题题目边框坐标列表 （如果BoolSingleQuestion为true则返回空） */
+  /** 【废弃字段】 */
   QuestionInfo?: QuestionInfo[];
-  /** 题目切题数量，作为计费题目数总量 */
+  /** 【废弃字段】 */
   QuestionCount?: string;
   /** 【废弃字段】 */
   OriginalImageUrl?: string;
@@ -5861,6 +5925,8 @@ declare interface Ocr {
   AdvertiseOCR(data?: AdvertiseOCRRequest, config?: AxiosRequestConfig): AxiosPromise<AdvertiseOCRResponse>;
   /** 算式识别 {@link ArithmeticOCRRequest} {@link ArithmeticOCRResponse} */
   ArithmeticOCR(data?: ArithmeticOCRRequest, config?: AxiosRequestConfig): AxiosPromise<ArithmeticOCRResponse>;
+  /** 多模态材料核验Agent {@link AuditMaterialAgentRequest} {@link AuditMaterialAgentResponse} */
+  AuditMaterialAgent(data: AuditMaterialAgentRequest, config?: AxiosRequestConfig): AxiosPromise<AuditMaterialAgentResponse>;
   /** 银行卡识别 {@link BankCardOCRRequest} {@link BankCardOCRResponse} */
   BankCardOCR(data?: BankCardOCRRequest, config?: AxiosRequestConfig): AxiosPromise<BankCardOCRResponse>;
   /** 银行回单识别 {@link BankSlipOCRRequest} {@link BankSlipOCRResponse} */
@@ -5879,7 +5945,7 @@ declare interface Ocr {
   CropEnhanceImageOCR(data?: CropEnhanceImageOCRRequest, config?: AxiosRequestConfig): AxiosPromise<CropEnhanceImageOCRResponse>;
   /** 异步文档抽取Agent(查询任务) {@link DescribeExtractDocAgentJobRequest} {@link DescribeExtractDocAgentJobResponse} */
   DescribeExtractDocAgentJob(data?: DescribeExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeExtractDocAgentJobResponse>;
-  /** 作文批改Agent（查询任务） {@link DescribeMarkEssayAgentJobRequest} {@link DescribeMarkEssayAgentJobResponse} */
+  /** 智能教育SuperAgent（查询任务） {@link DescribeMarkEssayAgentJobRequest} {@link DescribeMarkEssayAgentJobResponse} */
   DescribeMarkEssayAgentJob(data?: DescribeMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMarkEssayAgentJobResponse>;
   /** 异步多模态文档解析（查询任务） {@link DescribeMultimodalDocParseJobRequest} {@link DescribeMultimodalDocParseJobResponse} */
   DescribeMultimodalDocParseJob(data: DescribeMultimodalDocParseJobRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMultimodalDocParseJobResponse>;
@@ -5993,7 +6059,7 @@ declare interface Ocr {
   SmartStructuralOCR(data?: SmartStructuralOCRRequest, config?: AxiosRequestConfig): AxiosPromise<SmartStructuralOCRResponse>;
   /** 异步文档抽取Agent(创建任务) {@link SubmitExtractDocAgentJobRequest} {@link SubmitExtractDocAgentJobResponse} */
   SubmitExtractDocAgentJob(data?: SubmitExtractDocAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitExtractDocAgentJobResponse>;
-  /** 作文批改Agent（提交任务） {@link SubmitMarkEssayAgentJobRequest} {@link SubmitMarkEssayAgentJobResponse} */
+  /** 智能教育SuperAgent（提交任务） {@link SubmitMarkEssayAgentJobRequest} {@link SubmitMarkEssayAgentJobResponse} */
   SubmitMarkEssayAgentJob(data?: SubmitMarkEssayAgentJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMarkEssayAgentJobResponse>;
   /** 异步多模态文档解析（创建任务） {@link SubmitMultimodalDocParseJobRequest} {@link SubmitMultimodalDocParseJobResponse} */
   SubmitMultimodalDocParseJob(data: SubmitMultimodalDocParseJobRequest, config?: AxiosRequestConfig): AxiosPromise<SubmitMultimodalDocParseJobResponse>;

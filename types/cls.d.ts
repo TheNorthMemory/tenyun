@@ -1152,6 +1152,8 @@ declare interface DataTransformTaskInfo {
   DataTransformSqlDataSources?: DataTransformSqlDataSource[];
   /** 环境变量 */
   EnvInfos?: EnvInfo[];
+  /** 前置加工任务源主题、目标主题说明 */
+  Describe?: string;
 }
 
 /** 投递配置入参 */
@@ -2878,6 +2880,10 @@ declare interface S3RechargeInfo {
   CreateTime?: number;
   /** 更新时间单位：秒秒级时间戳 */
   UpdateTime?: number;
+  /** 是否启用SQS。 */
+  SQSEnabled?: boolean;
+  /** SQS队列URL。 */
+  SQSUrl?: string;
 }
 
 /** ScheduledSql的资源信息 */
@@ -4481,6 +4487,10 @@ declare interface CreateS3RechargeRequest {
   ExtractRuleInfo?: ExtractRuleInfo;
   /** s3导入任务类型.枚举值：1： 一次性导入任务2： 持续性导入任务默认值：1 */
   TaskType?: number;
+  /** 是否启用SQS。默认值：false仅允许 TaskType=2是为true。 */
+  SQSEnabled?: boolean;
+  /** SQS队列URL。SqsEnabled=true 时必填非空标准队列 URL；默认空字符串，不隐式开启 SQS，关闭时不生效。 */
+  SQSUrl?: string;
 }
 
 declare interface CreateS3RechargeResponse {
@@ -7627,6 +7637,10 @@ declare interface ModifyS3RechargeRequest {
   Compress?: string;
   /** 提取规则，如果设置了ExtractRule，则必须设置LogType */
   ExtractRuleInfo?: ExtractRuleInfo;
+  /** 是否启用SQS。不传保持原配置； 开启开关仅对增量数据生效。 */
+  SQSEnabled?: boolean;
+  /** SQS队列URL。开启开关后仅对增量数据生效。 */
+  SQSUrl?: string;
 }
 
 declare interface ModifyS3RechargeResponse {

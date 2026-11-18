@@ -984,6 +984,20 @@ declare interface InitializeCloudRunResourceResponse {
   RequestId?: string;
 }
 
+declare interface ModifyStableIPStatusRequest {
+  /** 环境ID */
+  EnvId: string;
+  /** ON: 开启固定 IP；OFF: 关闭固定 IP */
+  Status: string;
+}
+
+declare interface ModifyStableIPStatusResponse {
+  /** 任务 ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface OperateServerManageRequest {
   /** 环境Id */
   EnvId: string;
@@ -1177,6 +1191,8 @@ declare interface Tcbr {
   DescribeVersionDetail(data: DescribeVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionDetailResponse>;
   /** 初始化云托管资源 {@link InitializeCloudRunResourceRequest} {@link InitializeCloudRunResourceResponse} */
   InitializeCloudRunResource(data: InitializeCloudRunResourceRequest, config?: AxiosRequestConfig): AxiosPromise<InitializeCloudRunResourceResponse>;
+  /** 修改固定 IP 状态 {@link ModifyStableIPStatusRequest} {@link ModifyStableIPStatusResponse} */
+  ModifyStableIPStatus(data: ModifyStableIPStatusRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyStableIPStatusResponse>;
   /** 操作发布单 {@link OperateServerManageRequest} {@link OperateServerManageResponse} */
   OperateServerManage(data: OperateServerManageRequest, config?: AxiosRequestConfig): AxiosPromise<OperateServerManageResponse>;
   /** 灰度发布 {@link ReleaseGrayRequest} {@link ReleaseGrayResponse} */

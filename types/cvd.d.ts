@@ -244,6 +244,8 @@ declare interface InstanceInfo {
   AnonymousAccess?: boolean | null;
   /** 实例绑定的标签 */
   Tags?: Tag[] | null;
+  /** 包销到期时间 */
+  UnderwriteDeadline?: string;
 }
 
 /** 实例状态 */
@@ -450,6 +452,8 @@ declare interface User {
   StrategyName?: string;
   /** 当前用户是否绑定桌面，true：绑定，false：未绑定任何桌面 */
   BindStatus?: boolean;
+  /** 用户登录锁定剩余时间 */
+  LockRemainMs?: number;
 }
 
 /** 私有网络相关信息 */
@@ -831,7 +835,7 @@ declare interface DescribeInstancesRequest {
   PageNumber: number;
   /** 每页拉取个数 */
   PageSize: number;
-  /** Name取值范围："InstanceId" 按照云桌面ID搜索，云桌面ID示例：cdi-l0dfy594htvbn37"Name" 按照云桌面名称搜索 "Region" 按照云桌面所在地域搜索，目前云桌面所支持的地域： ap-beijing：北京 ap-shanghai：上海 ap-guangzhou：广州 ap-shanghai-adc：上海自动驾驶云"Type" 按照云桌面类型搜索，类型取值： S3L.MEDIUM4：云桌面-标准S3_2核4G S3L.LARGE8：云桌面-标准S3_4核8G S3L.LARGE16：云桌面-标准S3_4核16G S3L.2XLARGE16：云桌面-标准S3_8核16G S1L.LARGE8：云桌面-标准S1_4核8G S1L.LARGE16：云桌面-标准S1_4核16G S2L.2XLARGE16：云桌面-标准S2_8核16G G1L.LARGE16：云桌面-图形G1_4核16G G1L.2XLARGE32：云桌面-图形G1_8核32G G1L.4XLARGE64：云桌面-图形G1_16核64G G2L.LARGE24：云桌面-图形G2_6核24G G2L.3XLARGE58：云桌面-图形G2_14核58G G2L.3XLARGE44：云桌面-图形G2_12核44G G3L.LARGE16：云桌面-图形G3_4核16G G3L.5XMEDIUM40：云桌面-图形G3_10核40G G3L.5XLARGE80：云桌面-图形G3_20核80G G4L.5XMEDIUM40：云桌面-图形G4_10核40G G4L.11XMEDIUM80：云桌面-图形G4_22核80G G4L.11XLARGE160：云桌面-图形G4_44核160G G5L.5XMEDIUM40：云桌面-图形G5_10核40G G5L.5XLARGE80：云桌面-图形G5_22核80G G5L.21XMEDIUM160：云桌面-图形G5_42核160G G5L.21XLARGE320：云桌面-图形G5_84核320G	"ImageId" 按照镜像ID搜索，镜像ID示例：img-ed892xcd2"ChargeType" 按着计费模式搜索，目前支持的计费模式为： PREPAID：包年包月 POSTPAID_BY_HOUR：按量计费 "HostName" 按照云桌面机器名称搜索，云桌面机器名示例：l0dfy594htvbn37"Status" 按照桌面状态搜索，云桌面状态： PENDING：创建中 STARTING：开机中 REBOOTING：重启中 ROLLBACKING：回滚中 RESETTING：重置中 STOPPING：关机中 TERMINATING：销毁中 RUNNING：运行中 USING：使用中 STOPPED：关机 ISOLATING ：隔离中，只返回最近24小时数据 SHUTDOWN：销毁，只返回最近24小时数据 DELETED：销毁和SHUTDOWN意义一致，只返回最近24小时数据 LAUNCH_FAILED：创建失败，只返回最近24小时数据"UserId" 按照绑定的用户ID搜索，用户ID示例: us-6b36f283c302481bb83bsdswdefqdqwerqw"UserVpcId" 按照云桌面所属vpc搜索，VPCID示例: vpc-0ji679xf"UserSubnetId" 按照云桌面所属子网搜索，SubnetID示例: subnet-0ji679xf"UserPrivateIp" 按照云桌面IP搜索"Keyword" 按照云桌面绑定的用户名搜索，Values每次只取第一个值"SecurityGroupId" 按照云桌面关联安全组搜索，Values每次只取第一个值,安全组ID实例：sg-0ji679xf"AssociateSG" 按照可以关联安全组搜索，Values每次只取第一个值,安全组ID实例：sg-0ji679xf"DomainControlPolicyId" 按照云桌面关联域名管控策略搜索，Values每次只取第一个值,安全组ID实例：domain-0ji679xf "AssociateDomainControlPolicy" 按照可以关联域名策略搜索 ①若已有域名策略关联桌面情况：Values每次只取第一个值,安全组ID实例：domain-0ji679xf ②若新建域名策略关联桌面情况，Values传空"Uin" 外部租户请勿使用"AppId" 外部租户请勿使用"ImageName" 废弃 */
+  /** 云桌面查询接口 Name 过滤参数取值说明一、基础属性InstanceId 按云桌面 ID 搜索，示例：cdi-l0dfy594htvbn37Name 按云桌面名称搜索HostName 按云桌面机器名称搜索，示例：l0dfy594htvbn37ImageId 按镜像 ID 搜索，示例：img-ed892xcd2ImageName 按镜像名称搜索（已废弃）二、地域 Regionap-beijing 北京ap-shanghai 上海ap-guangzhou 广州ap-shanghai-adc 上海自动驾驶云三、计费模式 ChargeTypePREPAID 包年包月POSTPAID_BY_HOUR 按量计费四、桌面状态 StatusPENDING 创建中STARTING 开机中REBOOTING 重启中ROLLBACKING 回滚中RESETTING 重置中STOPPING 关机中TERMINATING 销毁中RUNNING 运行中USING 使用中STOPPED 关机ISOLATING 隔离中（只返回最近 24 小时数据）SHUTDOWN 销毁（只返回最近 24 小时数据）DELETED 销毁，与 SHUTDOWN 意义一致（只返回最近 24 小时数据）LAUNCH_FAILED 创建失败（只返回最近 24 小时数据）五、云桌面类型 Type标准型：S3L.MEDIUM4 标准 S3_2 核 4GS3L.LARGE8 标准 S3_4 核 8GS3L.LARGE16 标准 S3_4 核 16GS3L.2XLARGE16 标准 S3_8 核 16GS1L.LARGE8 标准 S1_4 核 8GS1L.LARGE16 标准 S1_4 核 16GS2L.2XLARGE16 标准 S2_8 核 16G图形型：G1L.LARGE16 图形 G1_4 核 16GG1L.2XLARGE32 图形 G1_8 核 32GG1L.4XLARGE64 图形 G1_16 核 64GG2L.LARGE24 图形 G2_6 核 24GG2L.3XLARGE44 图形 G2_12 核 44GG2L.3XLARGE58 图形 G2_14 核 58GG3L.LARGE16 图形 G3_4 核 16GG3L.5XMEDIUM40 图形 G3_10 核 40GG3L.5XLARGE80 图形 G3_20 核 80GG4L.5XMEDIUM40 图形 G4_10 核 40GG4L.11XMEDIUM80 图形 G4_22 核 80GG4L.11XLARGE160 图形 G4_44 核 160GG5L.5XMEDIUM40 图形 G5_10 核 40GG5L.5XLARGE80 图形 G5_22 核 80GG5L.21XMEDIUM160 图形 G5_42 核 160GG5L.21XLARGE320 图形 G5_84 核 320G六、网络相关UserVpcId 按云桌面所属 VPC 搜索，示例：vpc-0ji679xfUserSubnetId 按云桌面所属子网搜索，示例：subnet-0ji679xfUserPrivateIp 按云桌面 IP 搜索七、用户绑定UserId 按绑定的用户 ID 搜索，示例：us-6b36f283c302481bb83b...Keyword 按绑定的用户名搜索，Values 每次只取第一个值八、安全组与策略SecurityGroupId 按关联安全组搜索，Values 每次只取第一个值，示例：sg-0ji679xfAssociateSG 按可关联安全组搜索，Values 每次只取第一个值，示例：sg-0ji679xfDomainControlPolicyId 按关联域名管控策略搜索，Values 每次只取第一个值，示例：domain-0ji679xfAssociateDomainControlPolicy 按可关联域名策略搜索① 已有域名策略关联桌面：Values 每次只取第一个值，示例：domain-0ji679xf② 新建域名策略关联桌面：Values 传空PowerPolicyId 按关联电源管理策略搜索，Values 每次只取第一个值，示例：power-0ji679xfAssociatePowerPolicy 按可关联电源管理策略搜索① 已有电源管理策略关联桌面：Values 每次只取第一个值，示例：power-0ji679xf② 新建电源管理策略关联桌面：Values 传空WaterMarkPolicy 按关联水印策略搜索, Values 每次只取第一个值，示例：watermark-0ji679xfAssociateWaterMarkPolicy 按可关联水印策略搜索① 已有水印策略关联桌面：Values 每次只取第一个值，示例：watermark-0ji679xf② 新建水印策略关联桌面：Values 传空RunControlPolicyId 按关联运行管控策略搜索, Values 每次只取第一个值，示例：appctl-run-0ji679xfAssociateRunControlPolicy 按可关联运行管控策略搜索① 已有运行管控策略关联桌面：Values 每次只取第一个值，示例：appctl-run-0ji679xf② 新建运行管控策略关联桌面：Values 传空九、内部参数（外部租户请勿使用）Uin 外部租户请勿使用AppId 外部租户请勿使用 */
   Filters?: Filter[];
 }
 

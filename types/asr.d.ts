@@ -124,6 +124,8 @@ declare interface SentenceDetail {
   LangType?: string;
   /** 说话人角色名称 */
   SpeakerRoleName?: string;
+  /** 说话人的声纹 ID */
+  SpeakerVoicePrintId?: string;
 }
 
 /** [一句话识别](https://cloud.tencent.com/document/product/1093/35646)返回的词时间戳 */
@@ -150,11 +152,11 @@ declare interface SentenceWords {
 declare interface SpeakerRoleInfo {
   /** 音频url地址，建议不超过30秒，最大45秒（配合RoleName字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎） */
   RoleAudioUrl?: string;
-  /** 不超过30字节（配合RoleAudioUrl字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎） */
+  /** 不超过32字节（配合RoleAudioUrl字段一起使用，仅限16k_zh_en、16k_zh_en_2.0引擎） */
   RoleName?: string;
   /** 声纹 ID（与SpeakerNick配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传入未注册或不属于本 AppId 的声纹 ID，该 ID 会被跳过（不报错，相当于没有传入这个说话人信息） */
   VoicePrintId?: string;
-  /** 角色昵称（与VoicePrintId配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传空字符串或者不传入则使用声纹注册时指定的角色名- 否则将覆盖声纹注册时指定的角色名- 角色名不超过 30 字节，仅支持字母、数字、下划线和中文。- 这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名 */
+  /** 角色昵称（与VoicePrintId配合使用，仅限16k_zh_en_meeting引擎支持），注意：- 传空字符串或者不传入则使用声纹注册时指定的角色名- 否则将覆盖声纹注册时指定的角色名- 角色名不超过 32 字节。- 这里指定的角色名只影响本次识别，不影响声纹库中注册的角色名 */
   SpeakerNick?: string;
 }
 
@@ -182,6 +184,8 @@ declare interface TaskStatus {
   AudioDuration?: number | null;
   /** 大模型后处理结果 */
   LlmResults?: LlmResult[];
+  /** 说话人上下文 ID */
+  SpeakerContextId?: string;
 }
 
 /** 用户用量信息 */
@@ -419,8 +423,16 @@ declare interface CreateRecTaskRequest {
   KeyWordLibIdList?: string[];
   /** 替换词汇表id, 适用于热词和自学习场景也无法解决的极端case词组, 会对识别结果强制替换。具体可参考配置控制台;强制替换功能可能会影响正常识别结果，请谨慎使用注意：本功能配置完成后，预计在10分钟后生效 */
   ReplaceTextId?: string;
-  /** 开启角色分离能力配合SpeakerDiarization: 3 使用。ASR增值服务，使用方式一：仅可传入一个声纹信息进行角色认证，仅支持16k_zh_en_2.0和16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。使用方式二：可传入一组声纹信息进行角色认证，仅支持16k_zh_en_meeting引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及VoicePrintId和SpeakerNick两个参数。 VoicePrintId：需要认证角色的声纹ID（需提前进行说话人注册），建议30s的纯净人声，最长不能超过45s，有效人声不得低于1s。 SpeakerNick：需要认证角色的名称，会替换话者分离中的SpeakerID，如不传则复用说话人注册时的名称。注意：声纹注册后5分钟生效 示例： "{"EngineModelType":"16k_zh_en","ChannelNum":1,"ResTextFormat":1,"SourceType":0,"Url":"需要进行ASR识别的音频链接","SpeakerDiarization":3,"SpeakerRoles":[{"RoleAudioUrl":"需要认证角色的声纹音频地址","RoleName":"需要认证角色的名称"}]}" */
+  /** 开启角色分离能力配合SpeakerDiarization: 3 使用。此为ASR增值服务使用方式一：仅可传入一个声纹信息进行角色认证，仅支持16k_zh_en_2.0和16k_zh_en引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及RoleAudioUrl和RoleName两个参数。 RoleAudioUrl：需要认证角色的声纹音频地址，建议30s内的纯净人声，最长不能超过45s。 RoleName：需要认证角色的名称，若匹配成功，会替换话者分离中的SpeakerID。使用方式二：可传入一组声纹信息进行角色认证，仅支持16k_zh_en_meeting引擎。需传入SpeakerRoleInfo数据组，确定说话人的角色信息，涉及VoicePrintId和SpeakerNick两个参数。 VoicePrintId：需要认证角色的声纹ID（需提前进行说话人注册），建议30s的纯净人声，最长不能超过45s，有效人声不得低于1s。 SpeakerNick：需要认证角色的名称，会替换话者分离中的SpeakerID，如不传则复用说话人注册时的名称。注意：声纹注册后5分钟生效 示例： "{"EngineModelType":"16k_zh_en","ChannelNum":1,"ResTextFormat":1,"SourceType":0,"Url":"需要进行ASR识别的音频链接","SpeakerDiarization":3,"SpeakerRoles":[{"RoleAudioUrl":"需要认证角色的声纹音频地址","RoleName":"需要认证角色的名称"}]}" */
   SpeakerRoles?: SpeakerRoleInfo[];
+  /** 上下文数据，支持文本输入，可输入历史对话上下文、关键词集合等。(支持引擎： 16k_zh_en_meeting) */
+  ContextData?: string;
+  /** 分句策略：0 - 默认分句，句子短。1 - 段落分句，可将同一说话人连续转写结果中相邻几句聚合成一个小段落，句子更长，仅当ResTextFormat > 0可配合使用。默认值：0 */
+  SentenceStrategy?: number;
+  /** 是否开启断点续传能力，需配合说话人分离能力使用（SpeakerDiarization为1或3）：0：关闭，1：开启。(支持引擎： 16k_zh_en_meeting)若开启断点续传能力，会返回说话人上下文SpeakerContextId（24h 有效），下一次识别时传入 SpeakerContextId，可以沿用本次识别保存的说话人信息，让两次识别中同一说话人的 SpeakerId 保持一致。 */
+  EnableSpeakerContext?: number;
+  /** 说话人上下文ID。传入后，本次话者分离说话人 ID 会与上次的话者分离任务保持一致。(支持引擎： 16k_zh_en_meeting) */
+  SpeakerContextId?: string;
 }
 
 declare interface CreateRecTaskResponse {

@@ -96,6 +96,8 @@ declare interface ResourceInfo {
   ClusterId?: string;
   /** 集群角色，0-未加入集群 1-主 2-从 */
   ClusterRole?: number;
+  /** 同步状态 */
+  SyncStatus?: string;
 }
 
 /** 安全组基础信息 */

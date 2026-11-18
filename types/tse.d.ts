@@ -1078,6 +1078,8 @@ declare interface CloudNativeAPIGatewayNode {
   Weight?: number;
   /** 是否默认权重 */
   IsDefaultWeight?: boolean;
+  /** 节点类型 */
+  NodeType?: string;
 }
 
 /** 云原生API网关节点配置。 */
@@ -2252,6 +2254,8 @@ declare interface DescribeCloudNativeAPIGatewayResult {
   AvailableRollbackVersion?: string;
   /** 强制跳转HTTPS开关 */
   ForceHTTPSRedirect?: boolean;
+  /** 内网IP地址列表 */
+  PrivateIpAddresses?: string[];
 }
 
 /** 获取云原生API网关实例协议端口列表响应结果 */
@@ -3060,6 +3064,12 @@ declare interface KongRoutePreview {
   QueryStringParameters?: KVMapping[];
   /** 路由来源 */
   RouteSource?: string;
+  /** 用户绑定的业务标签（路由/服务标签分组能力，不含 Kong 内部 tag）。未绑定时字段为空数组或不返回。关联需求：路由/服务标签分组管理 */
+  Tags?: KongUserTagKV[];
+  /** 超时时间 */
+  Timeout?: number | null;
+  /** 路由超时配置的来源。 */
+  TimeoutSource?: string;
 }
 
 /** 云原生网关服务详细信息 */
@@ -3174,16 +3184,18 @@ declare interface KongTarget {
   Port: number;
   /** 权重 */
   Weight: number;
-  /** 健康状态 */
-  Health?: string;
   /** 创建时间 */
   CreatedTime?: string;
-  /** Target的来源 */
-  Source?: string;
   /** CVM实例ID */
   CvmInstanceId?: string;
   /** CVM实例名称 */
   CvmInstanceName?: string;
+  /** 健康状态 */
+  Health?: string;
+  /** Target ID */
+  Id?: string;
+  /** Target的来源 */
+  Source?: string;
   /** target标签 */
   Tags?: string[];
 }
@@ -3252,6 +3264,16 @@ declare interface KongUpstreamPreview {
   Name?: string;
   /** 后端配置 */
   Target?: KongTarget[];
+}
+
+/** 用户业务标签的 KV 表示（路由/服务标签分组） */
+declare interface KongUserTagKV {
+  /** 标签 ID */
+  TagId?: number;
+  /** 标签 Key */
+  TagKey?: string;
+  /** 标签 Value */
+  TagValue?: string;
 }
 
 /** 标签 */
@@ -3774,6 +3796,14 @@ declare interface TSEGatewaySelector {
   Services?: string[] | null;
 }
 
+/** 按标签 K:V 过滤条件（关联需求：路由/服务标签分组管理） */
+declare interface TagKVFilter {
+  /** 标签 Key，长度 1~64 */
+  TagKey: string;
+  /** 标签 Value，长度 1~128 */
+  TagValue: string;
+}
+
 /** 泳道流量灰度规则 */
 declare interface TrafficGray {
   /** 流量灰度规则，按比例灰度或预热方式 */
@@ -4241,7 +4271,7 @@ declare interface CreateCloudNativeAPIGatewayRequest {
   Name: string;
   /** 云原生API网关类型, 目前只支持kong。 */
   Type: string;
-  /** 云原生API网关版本。参考值：- 2.4.1- 2.5.1 */
+  /** 云原生API网关版本。参考值：2.4.12.5.1 */
   GatewayVersion: string;
   /** 云原生API网关节点配置。 */
   NodeConfig: CloudNativeAPIGatewayNodeConfig;
@@ -4253,7 +4283,7 @@ declare interface CreateCloudNativeAPIGatewayRequest {
   Tags?: InstanceTagInfo[];
   /** 是否开启 CLS 日志。默认值：fasle */
   EnableCls?: boolean;
-  /** 产品版本。参考值：- TRIAL：开发版- STANDARD：标准版 （默认值）- PROFESSIONAL：专业版 */
+  /** 产品版本枚举值：STANDARD： 标准版PROFESSIONAL： 专业版 */
   FeatureVersion?: string;
   /** 公网出流量带宽，[1,2048]Mbps */
   InternetMaxBandwidthOut?: number;
@@ -4267,6 +4297,8 @@ declare interface CreateCloudNativeAPIGatewayRequest {
   InternetConfig?: InternetConfig;
   /** 关联的prometheus ID */
   PromId?: string;
+  /** 是否开启HTTP 80 端口的访问 */
+  EnableHttpPort?: boolean;
 }
 
 declare interface CreateCloudNativeAPIGatewayResponse {
@@ -4297,13 +4329,13 @@ declare interface CreateCloudNativeAPIGatewayRouteRequest {
   ServiceID: string;
   /** 路由的名字，实例级别唯一，可以不提供 */
   RouteName?: string;
-  /** 路由的方法，其中方法可选值：- GET- POST- DELETE- PUT- OPTIONS- PATCH- HEAD- ANY- TRACE- COPY- MOVE- PROPFIND- PROPPATCH- MKCOL- LOCK- UNLOCK */
+  /** 路由的方法，其中方法可选值：GETPOSTDELETEPUTOPTIONSPATCHHEADANYTRACECOPYMOVEPROPFINDPROPPATCHMKCOLLOCKUNLOCK */
   Methods?: string[];
   /** 路由的域名 */
   Hosts?: string[];
   /** 路由的路径 */
   Paths?: string[];
-  /** 路由的协议，可选- https- http */
+  /** 路由的协议，可选httpshttp */
   Protocols?: string[];
   /** 转发到后端时是否保留Host */
   PreserveHost?: boolean;
@@ -4325,6 +4357,8 @@ declare interface CreateCloudNativeAPIGatewayRouteRequest {
   RegexPriority?: number;
   /** queryString参数 */
   QueryStringParameters?: KVMapping[];
+  /** 路由级超时时间，单位ms */
+  Timeout?: number;
 }
 
 declare interface CreateCloudNativeAPIGatewayRouteResponse {
@@ -5629,6 +5663,10 @@ declare interface DescribeCloudNativeAPIGatewayRoutesRequest {
   OrderField?: string;
   /** 排序方式枚举值：DESC： 降序ASC： 升序 */
   OrderType?: string;
+  /** 按标签 ID 过滤路由（AND 语义，需同时命中所有传入的 tag），最多 10 个。关联需求：路由/服务标签分组管理 */
+  TagIds?: number[];
+  /** 按标签 K:V 过滤路由（AND 语义，前端下拉直传场景），最多 10 个。与 TagIds 同时传时取交集 */
+  TagFilters?: TagKVFilter[];
 }
 
 declare interface DescribeCloudNativeAPIGatewayRoutesResponse {
@@ -6799,6 +6837,8 @@ declare interface ModifyCloudNativeAPIGatewayRouteRequest {
   RegexPriority?: number;
   /** querysring参数 */
   QueryStringParameters?: KVMapping[];
+  /** 路由级超时时间，单位ms */
+  Timeout?: number;
 }
 
 declare interface ModifyCloudNativeAPIGatewayRouteResponse {
@@ -7019,12 +7059,16 @@ declare interface ModifyNetworkAccessStrategyRequest {
   GatewayId: string;
   /** 分组id */
   GroupId: string;
-  /** 网络类型： - Open 公网- Internal 内网	（暂不支持） */
+  /** 网络类型： Open 公网Internal 内网 （暂不支持） */
   NetworkType: string;
   /** ip地址 */
   Vip: string;
   /** 访问控制策略 */
   AccessControl: NetworkAccessControl;
+  /** GlobalConfig / Custom；不传默认 Custom */
+  AccessControlSource?: string;
+  /** 全局配置ID */
+  GlobalConfigId?: string;
 }
 
 declare interface ModifyNetworkAccessStrategyResponse {

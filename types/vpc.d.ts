@@ -3461,19 +3461,19 @@ declare interface AdjustPublicAddressResponse {
 }
 
 declare interface AllocateAddressesRequest {
-  /** EIP数量。可申请的数量限制参考：[EIP 配额限制](https://cloud.tencent.com/document/product/1199/41648)。默认值：1。 */
+  /** EIP数量。可申请的数量限制参考：EIP 配额限制。默认值：1。 */
   AddressCount?: number;
-  /** EIP线路类型。各种线路类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：BGP。BGP：常规 BGP 线路已开通静态单线IP白名单的用户，可选值：CMCC：中国移动CTCC：中国电信CUCC：中国联通注意：仅部分地域支持静态单线IP。 */
+  /** EIP线路类型。各种线路类型详情可参考：EIP 的 IP 地址类型。默认值：BGP。BGP：常规 BGP 线路已开通静态单线IP白名单的用户，可选值：CMCC：中国移动CTCC：中国电信CUCC：中国联通注意：仅部分地域支持静态单线IP。 */
   InternetServiceProvider?: string;
   /** EIP计费方式。标准账户类型，可选值：BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费BANDWIDTH_PREPAID_BY_MONTH：包月按带宽预付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR。传统账户类型，无需传递此参数，EIP计费方式与其绑定的实例的计费方式一致，无需传递此参数。 */
   InternetChargeType?: string;
   /** IP 资源计费模式，当前仅支持原生 IP。账号为标准账户类型的用户，可选值：IP_POSTPAID_BY_HOUR：IP资源按小时后付费IP_PREPAID_BY_MONTH：IP资源包月预付费 */
   IPChargeType?: string;
-  /** EIP出带宽上限，单位：Mbps。标准账户类型EIP出带宽上限，可选值范围取决于EIP计费方式：BANDWIDTH_PACKAGE：1 Mbps 至 2000 MbpsBANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 100 Mbps默认值：1 Mbps。传统账户类型无需传递此参数，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
+  /** EIP出带宽上限，单位：Mbps。标准账户类型EIP出带宽上限，可选值范围取决于EIP计费方式：BANDWIDTH_PACKAGE：1 Mbps 至 2000 MbpsBANDWIDTH_POSTPAID_BY_HOUR：1 Mbps 至 100 MbpsBANDWIDTH_PREPAID_BY_MONTH：1 Mbps 至 200 MbpsTRAFFIC_POSTPAID_BY_HOUR：1 Mbps 至 200 Mbps默认值：1 Mbps。传统账户类型无需传递此参数，EIP出带宽上限取决于与其绑定的实例的公网出带宽上限，无需传递此参数。 */
   InternetMaxBandwidthOut?: number;
   /** 包月按带宽预付费EIP的计费参数。EIP为包月按带宽预付费时，该参数必传，其余场景不需传递 */
   AddressChargePrepaid?: AddressChargePrepaid;
-  /** EIP类型。各种EIP类型详情可参考：[EIP 的 IP 地址类型](https://cloud.tencent.com/document/product/1199/41646)。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP。ResidentialEIP：原生 IP。仅部分地域支持原生IP。关于弹性公网 IP 支持的 IP 类型，请见[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
+  /** EIP类型。各种EIP类型详情可参考：EIP 的 IP 地址类型。默认值：EIP。EIP：弹性公网 IP。 AnycastEIP：加速 IP，已开通 [Anycast 公网加速](https://cloud.tencent.com/document/product/644)白名单的用户可选。仅部分地域支持加速IP，详情可见Anycast公网加速[购买指南](https://cloud.tencent.com/document/product/644/12617)。HighQualityEIP：精品 IP。仅新加坡和中国香港支持精品IP。AntiDDoSEIP：高防 IP。仅部分地域支持高防IP。ResidentialEIP：原生 IP。仅部分地域支持原生IP。关于弹性公网 IP 支持的 IP 类型，请见[产品概述](https://cloud.tencent.com/document/product/1199/41646)。 */
   AddressType?: string;
   /** Anycast发布域。已开通Anycast公网加速白名单的用户，可选值：ANYCAST_ZONE_GLOBAL：全球发布域（需要额外开通Anycast全球加速白名单）ANYCAST_ZONE_OVERSEAS：境外发布域默认值：ANYCAST_ZONE_OVERSEAS。 */
   AnycastZone?: string;
@@ -3489,7 +3489,7 @@ declare interface AllocateAddressesRequest {
   AddressName?: string;
   /** CDC唯一ID */
   DedicatedClusterId?: string;
-  /** 是否使用独占资源池，默认值：True- True：表示使用独占资源池- False：表示使用共享资源池说明：如需使用独占资源池，请 提交工单(https://console.cloud.tencent.com/workorder/category) 咨询，具体费用请咨询商务经理。 */
+  /** 是否使用独占资源池，默认值：TrueTrue：表示使用独占资源池False：表示使用共享资源池说明：如需使用独占资源池，请 提交工单(https://console.cloud.tencent.com/workorder/category) 咨询，具体费用请咨询商务经理。 */
   IsDedicatedAddressPool?: boolean;
   /** 网络出口，当前仅支持精品BGP、静态单线，这2种IP 地址类型的指定出口传入，默认值：center_egress1，其它可选值：center_egress2、center_egress3 */
   Egress?: string;
@@ -3502,7 +3502,7 @@ declare interface AllocateAddressesRequest {
 declare interface AllocateAddressesResponse {
   /** 申请到的 EIP 的唯一 ID 列表。 */
   AddressSet?: string[];
-  /** 异步任务TaskId。可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
+  /** 异步任务TaskId。可以使用DescribeTaskResult接口查询任务状态。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -3511,28 +3511,28 @@ declare interface AllocateAddressesResponse {
 declare interface AllocateIPv6AddressesRequest {
   /** EIP名称，用于申请EIP时用户自定义该EIP的个性化名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"_"，不能包含空格。默认值：未命名 */
   AddressName?: string;
-  /** 弹性公网IPv6类型，可选值：- EIPv6：弹性公网IPv6- HighQualityEIPv6：精品BGP线路弹性公网IPv6注意：弹性公网IPv6产品需开白才能使用，其中精品BGP线路仅在中国香港支持。默认值：EIPv6 */
+  /** 弹性公网IPv6类型，可选值：EIPv6：弹性公网IPv6HighQualityEIPv6：精品BGP线路弹性公网IPv6注意：弹性公网IPv6产品需开白才能使用，其中精品BGP线路仅在中国香港支持。默认值：EIPv6 */
   AddressType?: string;
-  /** 申请的弹性公网IPv6数量。单次最多可以申请20个弹性公网IPv6实例，总配额请参见[弹性公网 IPv6 配额说明](https://cloud.tencent.com/document/product/1142/38369)。默认值：1 */
+  /** 申请的弹性公网IPv6数量。单次最多可以申请20个弹性公网IPv6实例，总配额请参见弹性公网 IPv6 配额说明。默认值：1 */
   AddressCount?: number;
-  /** 弹性公网IPv6计费方式，可选值：- BANDWIDTH_PACKAGE：[共享带宽包](https://cloud.tencent.com/document/product/684/15255)付费- TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR */
+  /** 弹性公网IPv6计费方式，可选值：BANDWIDTH_PACKAGE：共享带宽包付费TRAFFIC_POSTPAID_BY_HOUR：流量按小时后付费默认值：TRAFFIC_POSTPAID_BY_HOUR */
   InternetChargeType?: string;
-  /** 弹性公网IPv6线路类型，默认值：BGP。已开通静态单线IP白名单的用户，可选值：- CMCC：中国移动- CTCC：中国电信- CUCC：中国联通注意：仅部分地域支持静态单线IP。具体请以控制台购买页展示为准。 */
+  /** 弹性公网IPv6线路类型，默认值：BGP。已开通静态单线IP白名单的用户，可选值：CMCC：中国移动CTCC：中国电信CUCC：中国联通注意：仅部分地域支持静态单线IP。具体请以控制台购买页展示为准。 */
   InternetServiceProvider?: string;
-  /** 弹性公网IPv6带宽上限，单位：Mbps。可选值范围取决于EIP计费方式：- BANDWIDTH_PACKAGE（共享带宽包付费）：1 Mbps 至 2000 Mbps- TRAFFIC_POSTPAID_BY_HOUR（流量按小时后付费）：1 Mbps 至 100 Mbps默认值：1 */
+  /** 弹性公网IPv6带宽上限，单位：Mbps。可选值范围取决于EIP计费方式：BANDWIDTH_PACKAGE（共享带宽包付费）：1 Mbps 至 2000 MbpsTRAFFIC_POSTPAID_BY_HOUR（流量按小时后付费）：1 Mbps 至 200 Mbps默认值：1 */
   InternetMaxBandwidthOut?: number;
-  /** 带宽包唯一ID参数。可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费。 */
+  /** 带宽包唯一ID参数。可以使用DescribeBandwidthPackages接口查询BandwidthPackageId。设定该参数且InternetChargeType为BANDWIDTH_PACKAGE，则表示创建的EIP加入该BGP带宽包并采用带宽包计费。 */
   BandwidthPackageId?: string;
   /** 需要关联的标签列表。 */
   Tags?: Tag[];
-  /** 弹性公网IPv6网络出口，可选值：- CENTER_EGRESS_1：中心出口一- CENTER_EGRESS_2：中心出口二注意：不同地域支持的线路类型、网络出口略有差异，请以控制台展示为准。默认值：CENTER_EGRESS_1 */
+  /** 弹性公网IPv6网络出口，可选值：CENTER_EGRESS_1：中心出口一CENTER_EGRESS_2：中心出口二注意：不同地域支持的线路类型、网络出口略有差异，请以控制台展示为准。默认值：CENTER_EGRESS_1 */
   Egress?: string;
 }
 
 declare interface AllocateIPv6AddressesResponse {
   /** 申请到的弹性公网 IPv6 地址的唯一 ID 列表。 */
   AddressSet?: string[];
-  /** 异步任务TaskId，可以使用[DescribeTaskResult](https://cloud.tencent.com/document/api/215/36271)接口查询任务状态。 */
+  /** 异步任务TaskId，可以使用DescribeTaskResult接口查询任务状态。 */
   TaskId?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

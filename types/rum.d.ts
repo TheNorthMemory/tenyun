@@ -232,6 +232,8 @@ declare interface DialTrendPoint {
   FailCount?: number;
   /** 平均时延，单位毫秒 */
   AvgDuration?: number;
+  /** 聚合桶时间。与旧字段 Time 同源，保留 Time 及其格式；按查询服务运行时区输出。参数格式：RFC3339，带数值时区偏移，例如 2026-10-01T00:00:00+08:00。 */
+  Datetime?: string;
 }
 
 /** 堆栈帧 */
@@ -1086,6 +1088,8 @@ declare interface UsageTimePoint {
   Time?: string;
   /** 上报量 */
   ReportVolume?: number;
+  /** 聚合桶时间。与旧字段 Time 同源，保留 Time 及其格式；按查询服务运行时区输出。参数格式：RFC3339，带数值时区偏移，例如 2026-10-01T00:00:00+08:00。 */
+  Datetime?: string;
 }
 
 /** 白名单 */

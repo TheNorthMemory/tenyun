@@ -727,7 +727,7 @@ declare interface Captcha {
   DescribeCaptchaMiniDataSum(data: DescribeCaptchaMiniDataSumRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniDataSumResponse>;
   /** 安全验证码小程序插件用户操作数据查询 {@link DescribeCaptchaMiniOperDataRequest} {@link DescribeCaptchaMiniOperDataResponse} */
   DescribeCaptchaMiniOperData(data: DescribeCaptchaMiniOperDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniOperDataResponse>;
-  /** 核查验证码票据结果(小程序插件) {@link DescribeCaptchaMiniResultRequest} {@link DescribeCaptchaMiniResultResponse} */
+  /** 核查验证码票据结果(小程序插件)，包含微信小程序和支付宝小程序 {@link DescribeCaptchaMiniResultRequest} {@link DescribeCaptchaMiniResultResponse} */
   DescribeCaptchaMiniResult(data: DescribeCaptchaMiniResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniResultResponse>;
   /** 核查验证码小程序插件票据接入风控结果(已停用) {@link DescribeCaptchaMiniRiskResultRequest} {@link DescribeCaptchaMiniRiskResultResponse} */
   DescribeCaptchaMiniRiskResult(data: DescribeCaptchaMiniRiskResultRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCaptchaMiniRiskResultResponse>;

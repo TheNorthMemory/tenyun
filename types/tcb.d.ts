@@ -3248,6 +3248,14 @@ declare interface DescribeDatabaseACLResponse {
   RequestId?: string;
 }
 
+declare interface DescribeEnvAccessControlRequest {
+}
+
+declare interface DescribeEnvAccessControlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeEnvAccountCircleRequest {
   /** 环境ID */
   EnvId: string;
@@ -4142,6 +4150,14 @@ declare interface ModifyDatabaseACLResponse {
   RequestId?: string;
 }
 
+declare interface ModifyEnvAccessControlRequest {
+}
+
+declare interface ModifyEnvAccessControlResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyEnvExtraRequest {
   /** 环境ID */
   EnvId: string;
@@ -4903,6 +4919,8 @@ declare interface Tcb {
   DescribeCurveData(data: DescribeCurveDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCurveDataResponse>;
   /** 获取文档型数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
+  /** 查询环境访问控制配置（域名来源） {@link DescribeEnvAccessControlRequest} {@link DescribeEnvAccessControlResponse} */
+  DescribeEnvAccessControl(data?: DescribeEnvAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccessControlResponse>;
   /** 查询环境当前计费周期 {@link DescribeEnvAccountCircleRequest} {@link DescribeEnvAccountCircleResponse} */
   DescribeEnvAccountCircle(data: DescribeEnvAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccountCircleResponse>;
   /** 根据环境ID查询环境详情 {@link DescribeEnvInfoRequest} {@link DescribeEnvInfoResponse} */
@@ -4993,6 +5011,8 @@ declare interface Tcb {
   ModifyDatabaseACL(data: ModifyDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDatabaseACLResponse>;
   /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
+  /** 修改环境访问控制配置（域名来源） {@link ModifyEnvAccessControlRequest} {@link ModifyEnvAccessControlResponse} */
+  ModifyEnvAccessControl(data?: ModifyEnvAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvAccessControlResponse>;
   /** 修改环境额外配置 {@link ModifyEnvExtraRequest} {@link ModifyEnvExtraResponse} */
   ModifyEnvExtra(data: ModifyEnvExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvExtraResponse>;
   /** 更新云开发环境套餐 {@link ModifyEnvPlanRequest} {@link ModifyEnvPlanResponse} */

@@ -161,6 +161,7 @@ import Live, { Versions as LiveVersions } from "./live";
 import Lke, { Versions as LkeVersions } from "./lke";
 import Lkeap, { Versions as LkeapVersions } from "./lkeap";
 import Lowcode, { Versions as LowcodeVersions } from "./lowcode";
+import Makers, { Versions as MakersVersions } from "./makers";
 import Mall, { Versions as MallVersions } from "./mall";
 import Mariadb, { Versions as MariadbVersions } from "./mariadb";
 import Market, { Versions as MarketVersions } from "./market";
@@ -429,6 +430,7 @@ export declare type SERVICE_VERSIONS = {
   lke: LkeVersions,
   lkeap: LkeapVersions,
   lowcode: LowcodeVersions,
+  makers: MakersVersions,
   mall: MallVersions,
   mariadb: MariadbVersions,
   market: MarketVersions,
@@ -870,6 +872,8 @@ declare type TenYun = CloudInstance & CloudServices & {
   lkeap: Lkeap,
   /** {@link Lowcode 云开发低码} */
   lowcode: Lowcode,
+  /** {@link Makers Web 与 Agent 开发部署平台 Makers} */
+  makers: Makers,
   /** {@link Mall 商场客留大数据} */
   mall: Mall,
   /** {@link Mariadb 云数据库 MariaDB} */

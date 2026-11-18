@@ -120,6 +120,20 @@ declare interface Audit {
   LastModifierName?: string | null;
 }
 
+/** AutoML配置 */
+declare interface AutoMlConf {
+  /** 评估指标：acc/auc/f1/mse/mae/rmse */
+  EvaluationMetric: string;
+  /** 搜索空间列表 */
+  SearchSpace: string[];
+  /** 最大运行时间（分钟），默认60 */
+  MaxRuntimeMinutes?: number;
+  /** 最大运行次数，默认100 */
+  MaxRunCount?: number;
+  /** 最大运行并发，默认1，最大100 */
+  MaxConcurrency?: number;
+}
+
 /** 分桶分区策略 */
 declare interface BucketPartitioning {
   /** 分桶字段 */
@@ -318,6 +332,12 @@ declare interface CreateConsoleGroupRsp {
   GroupId?: string;
 }
 
+/** 创建实验响应 */
+declare interface CreateExperimentRsp {
+  /** 创建的实验ID */
+  ExperimentId?: string;
+}
+
 /** 创建文件夹回包 */
 declare interface CreateFolderRsp {
   /** 文件夹 ID */
@@ -506,6 +526,26 @@ declare interface DictItem {
   Key?: string;
   /** 字典值 */
   Value?: string;
+}
+
+/** 实验标签 */
+declare interface ExperimentTag {
+  /** 标签键 */
+  Key?: string;
+  /** 标签值 */
+  Value?: string;
+}
+
+/** FeatureLookup */
+declare interface FeatureLookup {
+  /** 特征表全名 */
+  TableName?: string;
+  /** 关联键 */
+  LookupKey?: string[];
+  /** 时间戳关联键 */
+  TimestampLookupKey?: string;
+  /** 特征列名列表 */
+  FeatureNames?: string[];
 }
 
 /** 特征表定义 */
@@ -818,6 +858,24 @@ declare interface FunctionResource {
 declare interface GetCatalogRsp {
   /** catalog详情 */
   Catalog?: Catalog | null;
+}
+
+/** 获取文件内容响应 */
+declare interface GetFileContentRsp {
+  /** 文件ID；按 FilePath 查询时回显解析结果，便于调用方缓存 */
+  FileId?: string;
+  /** 文件名，不含路径 */
+  FileName?: string;
+  /** 文件全路径 */
+  FilePath?: string;
+  /** 文件类型，参考 ListEntityTypeMetas 返回值为准 */
+  FileType?: string;
+  /** 文件大小，字节 */
+  FileSize?: string;
+  /** 文件内容，base64 编码 */
+  Content?: string;
+  /** 内容编码方式，当前固定 base64 */
+  ContentEncoding?: string;
 }
 
 /** 获取文件夹回包 */
@@ -1170,6 +1228,16 @@ declare interface KVPair {
   Key?: string | null;
   /** 值 */
   Value?: string | null;
+}
+
+/** 标签列信息 */
+declare interface Label {
+  /** 列名 */
+  ColumnName?: string;
+  /** 缺失值填充 */
+  MissingValueImputation?: string;
+  /** 数据格式 */
+  Format?: string;
 }
 
 /** 标签信息 */
@@ -1554,6 +1622,8 @@ declare interface MetaOwner {
   OwnerName?: string | null;
   /** 数据目录来源，取值参考 CatalogSourceEnum：METALAKE / CONNECTION / SETATS。ListMetaOwners 走新参数 Catalogs 查询时，按入参回填；走旧参数 FullNames 查询时，按请求顶层 CatalogSource 回填（默认 METALAKE） */
   CatalogSource?: string | null;
+  /** 数据源连接ID，与入参 Catalogs[].ConnectionId 对应。CatalogSource=CONNECTION 时返回该连接ID，用于区分同名目录的归属；METALAKE / SETATS 来源为空。 */
+  ConnectionId?: string | null;
 }
 
 /** 模型信息 */
@@ -1640,6 +1710,10 @@ declare interface NameIdentifier {
   CatalogSource?: string | null;
   /** TCLAKE Catalog取值：（注册中0，待测试1，连接成功2，连接失败3，删除中4，已删除5）SETATS Catalog取值：（Creating=30, Available=31, Deleted=32, Scaling=33, Isolated=34, Failed=35，未知=0） */
   Status?: string;
+  /** 数据源连接ID（仅 CONNECTION 来源时返回） */
+  ConnectionId?: string | null;
+  /** 数据源连接名称（仅CatalogSource=CONNECTION） */
+  ConnectionName?: string | null;
 }
 
 /** 排序字段 */
@@ -2144,6 +2218,36 @@ declare interface TaskTypeProperty {
   PropertyKey?: string | null;
   /** 属性值 */
   PropertyValue?: string | null;
+}
+
+/** 训练数据配置 */
+declare interface TrainingData {
+  /** Catalog名称 */
+  Catalog: string;
+  /** Schema名称 */
+  Schema: string;
+  /** Table名称 */
+  Table: string;
+  /** 目标标签列 */
+  TargetLabel?: Label;
+  /** 忽略的列 */
+  DiscardedLabels?: Label[];
+  /** 预测列 */
+  PredictionLabel?: Label;
+  /** 时间间隔单位 */
+  EvaluationInterval?: string;
+  /** 时序步长 */
+  ForecastHorizon?: number;
+  /** 结果集Catalog名称 */
+  StorageCatalog?: string;
+  /** 结果集Schema名称 */
+  StorageSchema?: string;
+  /** 结果集Table名称 */
+  StorageTable?: string;
+  /** 选中的列 */
+  SelectedLabels?: Label[];
+  /** 特征查找配置 */
+  FeatureLookup?: FeatureLookup[];
 }
 
 /** 截断分区策略 */
@@ -2906,6 +3010,34 @@ declare interface CreateConsoleGroupResponse {
   RequestId?: string;
 }
 
+declare interface CreateExperimentRequest {
+  /** 工作空间ID（必填），可通过 ListWorkspaces 接口获取 */
+  WorkspaceId: string;
+  /** 实验名称（必填），同一工作空间内唯一 */
+  Name: string;
+  /** 实验类型（必填），取值：MACHINE_LEARNING（机器学习）/ CLASSIFICATION（分类）/ REGRESSION（回归）/ FORECASTING（时间序列预测）/ AGENT（智能体）。传入其他值将返回 InvalidParameter.ExperimentTypeInvalid */
+  Type: string;
+  /** 实验描述（可选），建议长度不超过 1024 字符 */
+  Description?: string;
+  /** Studio目录树文件夹节点ID，即实验所在的目录节点，可通过 ListFiles 接口获取 */
+  StudioId?: string;
+  /** 实验标签列表（可选），key/value 均为字符串 */
+  Tags?: ExperimentTag[];
+  /** AutoML配置（可选，仅 Type 为 CLASSIFICATION/REGRESSION/FORECASTING 时需要），包含评估指标、搜索空间、最大运行时间/次数/并发等 */
+  AutoMlConf?: AutoMlConf;
+  /** 训练数据配置（可选，仅 AutoML 类型实验需要），指定训练数据表（Catalog.Schema.Table 三段式）与目标标签列 */
+  TrainingData?: TrainingData;
+  /** 计算资源组ID（可选），指定实验运行所使用的计算资源，可通过 ListComputeResourceOptions 接口获取 */
+  ResourceGroupId?: string;
+}
+
+declare interface CreateExperimentResponse {
+  /** 返回结果 */
+  Data?: CreateExperimentRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateFileRequest {
   /** 工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId */
   WorkspaceId: string;
@@ -3362,6 +3494,20 @@ declare interface GetCatalogResponse {
   RequestId?: string;
 }
 
+declare interface GetFileContentRequest {
+  /** 工作空间ID，必填，最大长度64 */
+  WorkspaceId: string;
+  /** 文件ID，FileId/FilePath 二选一，最大长度128；非空时优先生效 */
+  FileId?: string;
+}
+
+declare interface GetFileContentResponse {
+  /** 文件内容查询结果 */
+  Data?: GetFileContentRsp;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface GetFileRequest {
   /** 工作空间 ID。来源：ListWorkspaces 接口返回的 WorkspaceId */
   WorkspaceId: string;
@@ -3659,6 +3805,8 @@ declare interface ListCatalogNamesRequest {
   Types?: string[];
   /** 数据目录来源筛选，取值参考CatalogSourceEnum(METALAKE/CONNECTION/SETATS) */
   CatalogSources?: string[];
+  /** 数据源连接ID，可选。传入后仅返回该数据源下的 catalog/database；不传则不做过滤，返回全部数据。 */
+  ConnectionId?: string;
 }
 
 declare interface ListCatalogNamesResponse {
@@ -3683,6 +3831,8 @@ declare interface ListCatalogsRequest {
   FetchOption?: FetchOption;
   /** 数据目录来源筛选（融合版新增字段），取值参考 CatalogSourceEnum。空数组或不传→只查tclake；["METALAKE"]→只查tclake；["CONNECTION"]→只查分析版ana_catalog；["METALAKE","CONNECTION"]→合并返回 */
   CatalogSources?: string[];
+  /** 数据源连接ID，可选。传入后仅返回该数据源下的 catalog/database；不传则不做过滤，返回全部数据。 */
+  ConnectionId?: string;
 }
 
 declare interface ListCatalogsResponse {
@@ -4869,6 +5019,8 @@ declare interface Databuddy {
   CreateCatalog(data: CreateCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCatalogResponse>;
   /** 创建控制台用户组 {@link CreateConsoleGroupRequest} {@link CreateConsoleGroupResponse} */
   CreateConsoleGroup(data: CreateConsoleGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConsoleGroupResponse>;
+  /** 创建实验 {@link CreateExperimentRequest} {@link CreateExperimentResponse} */
+  CreateExperiment(data: CreateExperimentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateExperimentResponse>;
   /** 创建代码文件 {@link CreateFileRequest} {@link CreateFileResponse} */
   CreateFile(data: CreateFileRequest, config?: AxiosRequestConfig): AxiosPromise<CreateFileResponse>;
   /** 创建文件夹 {@link CreateFolderRequest} {@link CreateFolderResponse} */
@@ -4919,6 +5071,8 @@ declare interface Databuddy {
   GetCatalog(data: GetCatalogRequest, config?: AxiosRequestConfig): AxiosPromise<GetCatalogResponse>;
   /** 获取代码文件详情 {@link GetFileRequest} {@link GetFileResponse} */
   GetFile(data: GetFileRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileResponse>;
+  /** 获取文件内容 {@link GetFileContentRequest} {@link GetFileContentResponse} */
+  GetFileContent(data: GetFileContentRequest, config?: AxiosRequestConfig): AxiosPromise<GetFileContentResponse>;
   /** 获取文件夹详情 {@link GetFolderRequest} {@link GetFolderResponse} */
   GetFolder(data: GetFolderRequest, config?: AxiosRequestConfig): AxiosPromise<GetFolderResponse>;
   /** 查询存储位置详情 {@link GetLocationRequest} {@link GetLocationResponse} */

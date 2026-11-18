@@ -198,6 +198,7 @@ const SERVICE_VERSIONS = {
   lke: ['2023-11-30'],
   lkeap: ['2024-05-22'],
   lowcode: ['2021-01-08'],
+  makers: ['2026-11-13'],
   mall: ['2023-05-18'],
   mariadb: ['2017-03-12'],
   market: ['2019-10-10'],
