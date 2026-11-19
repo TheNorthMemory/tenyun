@@ -5293,11 +5293,11 @@ declare interface OfflineIsolatedInstancesResponse {
 }
 
 declare interface OpenAuditServiceRequest {
-  /** CDB 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
+  /** CDB 实例 ID。可通过 DescribeDBInstances 接口获取。 */
   InstanceId: string;
-  /** 审计日志保存时长。支持值包括：7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
+  /** 审计日志保存时长。枚举值：7： 一周30： 一个月90： 三个月180： 六个月365： 一年1095： 三年1825： 五年 */
   LogExpireDay: number;
-  /** 高频审计日志保存时长。默认值为7，此项取值需小于等于 LogExpireDay，支持值包括：3 - 3天；7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
+  /** 高频审计日志保存时长。枚举值：7： 一周30： 一个月90： 三个月180： 六个月365： 一年1095： 三年1825： 五年默认值：7此项取值需小于等于 LogExpireDay。 */
   HighLogExpireDay?: number;
   /** 审计规则（该参数已废弃，不再生效）。 */
   AuditRuleFilters?: AuditRuleFilters[];

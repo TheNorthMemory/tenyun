@@ -320,6 +320,10 @@ declare interface Input {
   Format?: string;
   /** 声网拉流进房参数 */
   AgoraParam?: AgoraParam;
+  /** 网易云信(NERTC)频道拉流参数 */
+  NeteaseParam?: NeteaseParam;
+  /** 火山(Volc)房间拉流参数 */
+  VolcParam?: VolcParam;
 }
 
 /** 调用服务端主动发起请求到LLM */
@@ -800,6 +804,18 @@ declare interface ModerationSupplierParam {
   AudioBizType?: string;
   /** 图片场景，策略id或者businessId */
   ImageBizType?: string;
+}
+
+/** 网易云信(NERTC)频道拉流参数。传入后表示从网易云信频道内拉流审核，此时可不填 Url。 */
+declare interface NeteaseParam {
+  /** 网易云信应用 AppKey登陆云信侧控制台或联系云信获取 */
+  AppKey?: string;
+  /** 频道名。非空字符串,需要和生成token使用的Channel完全一致。 */
+  Channel?: string;
+  /** 用于拉流端进房安全签名生成方式详见文档：https://doc.yunxin.163.com/nertc/server-apis/TcxNDAxMTI?platform=server#%E8%8E%B7%E5%8F%96-token，每次请求审核需要重新生成新的token。 */
+  Token?: string;
+  /** 分配进房拉流的用户ID。和生成Token时所用 Uid 完全一致。 */
+  Uid?: number;
 }
 
 /** 旁路转码时长的查询结果 */
@@ -1664,6 +1680,22 @@ declare interface VoicePrintInfo {
   AudioName?: string;
   /** 请求毫秒时间戳 */
   ReqTimestamp?: number;
+}
+
+/** VolcParam 火山引擎(VolcEngineRTC / ByteRTC)房间拉流参数。 */
+declare interface VolcParam {
+  /** 火山引擎 AppID。 */
+  AppId?: string;
+  /** 房间号。 */
+  RoomId?: string;
+  /** 进房 Token。需要开启鉴权，生成 Token时，注意RoomId 、UserId 需要对应上。详见：https://www.volcengine.com/docs/6348/70121 */
+  Token?: string;
+  /** 分配给拉流端的UserId。 */
+  UserId?: string;
+  /** 订阅用户名单。当前名单列表为空时，默认为全订阅；当名单列表有用户id,则只会订阅列表中用户。 */
+  TrustedUserIdList?: string;
+  /** 不订阅用户名单 */
+  UntrustedUserIdList?: string;
 }
 
 /** 水印布局参数 */

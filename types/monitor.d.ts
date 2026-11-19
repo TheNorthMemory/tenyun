@@ -1169,6 +1169,12 @@ declare interface DescribeAlarmNotifyHistoriesRequest {
   PolicyId?: string;
   /** 详情页展示所需id */
   NotifyId?: string;
+  /** 通知渠道多选。按渠道过滤通知历史，多个取值之间为或关系。 */
+  ChannelNames?: string[];
+  /** 告警策略多选。按策略 ID 精确过滤通知历史，多个 ID 之间为或关系。 */
+  PolicyIds?: string[];
+  /** 字符串数组。每项为告警策略 ID，形如 policy- 开头。 */
+  NoticeIds?: string[];
 }
 
 declare interface DescribeAlarmNotifyHistoriesResponse {

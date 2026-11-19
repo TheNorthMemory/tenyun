@@ -1098,6 +1098,8 @@ declare interface CynosdbClusterDetail {
   StorageOverUse?: string;
   /** 自动扩容开启状态枚举值：yes： 已开启no： 关闭默认值：no */
   StorageAutoExpand?: string;
+  /** 是否在秒级回档链路中 */
+  IsInInstantRollbackChain?: boolean;
 }
 
 /** 实例错误日志返回类型 */

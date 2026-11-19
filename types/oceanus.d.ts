@@ -2201,6 +2201,10 @@ declare interface DescribeJobSubmissionLogRequest {
   OrderType?: string;
   /** 搜索的日志条数上限值，最大为100 */
   Limit?: number;
+  /** 分页偏移 */
+  Offset?: number;
+  /** 过滤 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeJobSubmissionLogResponse {
@@ -2216,6 +2220,8 @@ declare interface DescribeJobSubmissionLogResponse {
   LogList?: string[] | null;
   /** 日志列表 */
   LogContentList?: LogContent[] | null;
+  /** 分页偏移 */
+  Offset?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

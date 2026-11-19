@@ -2,6 +2,28 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 自动删除策略配置信息 */
+declare interface AutoDeletePolicy {
+  /** 策略 ID */
+  PolicyId?: string;
+  /** 文件系统Id */
+  FileSystemId?: string;
+  /** 自动清理策略名称 */
+  PolicyName?: string;
+  /** 待清理的路径 */
+  Paths?: string[];
+  /** 自动清理策略状态枚举值：enabling： 启用中enabled： 已启用disabling： 禁用中disabed： 已禁用deleting： 删除中failed： 失败creating： 创建中updating： 修改中 */
+  Status?: string;
+  /** 清理策略创建时间参数格式：YYYY-MM-DD hh:mm:ss */
+  CreateTime?: string;
+  /** 策略更新时间参数格式：YYYY-MM-DD hh:mm:ss */
+  UpdateTime?: string;
+  /** 策略所属地域 */
+  Region?: string;
+  /** 错误信息 */
+  ErrMsg?: string;
+}
+
 /** 自动扩容规则 */
 declare interface AutoScaleUpRule {
   /** 自动扩容策略开启，关闭 */
@@ -700,6 +722,22 @@ declare interface CreateAccessCertResponse {
   RequestId?: string;
 }
 
+declare interface CreateAutoDeletePolicyRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 自动清理策略名称 */
+  PolicyName: string;
+  /** 自动清理策略路径列表 */
+  Paths: string[];
+}
+
+declare interface CreateAutoDeletePolicyResponse {
+  /** 自动清理策略ID */
+  PolicyId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateAutoSnapshotPolicyRequest {
   /** 快照重复时间点,0-23，小时 */
   Hour: string;
@@ -1012,6 +1050,18 @@ declare interface CreateMigrationTaskResponse {
   RequestId?: string;
 }
 
+declare interface DeleteAutoDeletePolicyRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 自动清理策略ID */
+  PolicyId: string;
+}
+
+declare interface DeleteAutoDeletePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteAutoSnapshotPolicyRequest {
   /** 快照策略ID，查询快照策略接口获取,[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/api/582/80208) */
   AutoSnapshotPolicyId: string;
@@ -1132,6 +1182,24 @@ declare interface DeleteUserQuotaRequest {
 }
 
 declare interface DeleteUserQuotaResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeAutoDeletePoliciesRequest {
+  /** 文件系统 ID */
+  FileSystemId?: string;
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 分页大小 */
+  Limit?: number;
+}
+
+declare interface DescribeAutoDeletePoliciesResponse {
+  /** 自动清理策略列表 */
+  Policies?: AutoDeletePolicy[];
+  /** 总数 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1510,6 +1578,24 @@ declare interface DoDirectoryOperationResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAutoDeletePolicyRequest {
+  /** 文件系统 ID */
+  FileSystemId: string;
+  /** 自动清理策略 ID */
+  PolicyId: string;
+  /** 自动清理路径列表 */
+  Paths?: string[];
+  /** 自动清理策略名称 */
+  PolicyName?: string;
+  /** 策略状态枚举值：enabled： 启用disabled： 禁用 */
+  Status?: string;
+}
+
+declare interface ModifyAutoDeletePolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDataFlowRequest {
   /** 数据流动管理 ID ，通过查询数据流动接口获取 */
   DataFlowId: string;
@@ -1875,6 +1961,8 @@ declare interface Cfs {
   BindAutoSnapshotPolicy(data: BindAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<BindAutoSnapshotPolicyResponse>;
   /** 创建访问凭证 {@link CreateAccessCertRequest} {@link CreateAccessCertResponse} */
   CreateAccessCert(data: CreateAccessCertRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAccessCertResponse>;
+  /** 创建数据自动化清理策略 {@link CreateAutoDeletePolicyRequest} {@link CreateAutoDeletePolicyResponse} */
+  CreateAutoDeletePolicy(data: CreateAutoDeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoDeletePolicyResponse>;
   /** 创建定期快照策略 {@link CreateAutoSnapshotPolicyRequest} {@link CreateAutoSnapshotPolicyResponse} */
   CreateAutoSnapshotPolicy(data: CreateAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAutoSnapshotPolicyResponse>;
   /** 创建文件系统 {@link CreateCfsFileSystemRequest} {@link CreateCfsFileSystemResponse} */
@@ -1897,6 +1985,8 @@ declare interface Cfs {
   CreateLifecyclePolicyDownloadTask(data?: CreateLifecyclePolicyDownloadTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateLifecyclePolicyDownloadTaskResponse>;
   /** 创建迁移任务 {@link CreateMigrationTaskRequest} {@link CreateMigrationTaskResponse} */
   CreateMigrationTask(data: CreateMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMigrationTaskResponse>;
+  /** 删除指定自动删除策略 {@link DeleteAutoDeletePolicyRequest} {@link DeleteAutoDeletePolicyResponse} */
+  DeleteAutoDeletePolicy(data: DeleteAutoDeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoDeletePolicyResponse>;
   /** 删除快照策略 {@link DeleteAutoSnapshotPolicyRequest} {@link DeleteAutoSnapshotPolicyResponse} */
   DeleteAutoSnapshotPolicy(data: DeleteAutoSnapshotPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAutoSnapshotPolicyResponse>;
   /** 删除文件系统 {@link DeleteCfsFileSystemRequest} {@link DeleteCfsFileSystemResponse} */
@@ -1917,6 +2007,8 @@ declare interface Cfs {
   DeleteMigrationTask(data: DeleteMigrationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMigrationTaskResponse>;
   /** 删除文件系统配额 {@link DeleteUserQuotaRequest} {@link DeleteUserQuotaResponse} */
   DeleteUserQuota(data: DeleteUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteUserQuotaResponse>;
+  /** 查询数据自动删除策略列表 {@link DescribeAutoDeletePoliciesRequest} {@link DescribeAutoDeletePoliciesResponse} */
+  DescribeAutoDeletePolicies(data?: DescribeAutoDeletePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoDeletePoliciesResponse>;
   /** 查询文件系统快照策略列表信息 {@link DescribeAutoSnapshotPoliciesRequest} {@link DescribeAutoSnapshotPoliciesResponse} */
   DescribeAutoSnapshotPolicies(data?: DescribeAutoSnapshotPoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAutoSnapshotPoliciesResponse>;
   /** 查询区域可用情况 {@link DescribeAvailableZoneInfoRequest} {@link DescribeAvailableZoneInfoResponse} */
@@ -1943,7 +2035,7 @@ declare interface Cfs {
   DescribeDataRetrieval(data?: DescribeDataRetrievalRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRetrievalResponse>;
   /** 查询数据检索任务 {@link DescribeDataRetrievalTaskRequest} {@link DescribeDataRetrievalTaskResponse} */
   DescribeDataRetrievalTask(data: DescribeDataRetrievalTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDataRetrievalTaskResponse>;
-  /** 查询生命周期任务的接口 {@link DescribeLifecycleDataTaskRequest} {@link DescribeLifecycleDataTaskResponse} */
+  /** 查询数据管理任务 {@link DescribeLifecycleDataTaskRequest} {@link DescribeLifecycleDataTaskResponse} */
   DescribeLifecycleDataTask(data: DescribeLifecycleDataTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecycleDataTaskResponse>;
   /** 查询生命周期管理策略 {@link DescribeLifecyclePoliciesRequest} {@link DescribeLifecyclePoliciesResponse} */
   DescribeLifecyclePolicies(data?: DescribeLifecyclePoliciesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLifecyclePoliciesResponse>;
@@ -1957,6 +2049,8 @@ declare interface Cfs {
   DescribeUserQuota(data: DescribeUserQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserQuotaResponse>;
   /** 目录操作接口 {@link DoDirectoryOperationRequest} {@link DoDirectoryOperationResponse} */
   DoDirectoryOperation(data: DoDirectoryOperationRequest, config?: AxiosRequestConfig): AxiosPromise<DoDirectoryOperationResponse>;
+  /** 修改自动删除策略名称或清理路径 {@link ModifyAutoDeletePolicyRequest} {@link ModifyAutoDeletePolicyResponse} */
+  ModifyAutoDeletePolicy(data: ModifyAutoDeletePolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAutoDeletePolicyResponse>;
   /** 修改数据流动相关参数 {@link ModifyDataFlowRequest} {@link ModifyDataFlowResponse} */
   ModifyDataFlow(data: ModifyDataFlowRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDataFlowResponse>;
   /** 修改数据检索 {@link ModifyDataRetrievalRequest} {@link ModifyDataRetrievalResponse} */

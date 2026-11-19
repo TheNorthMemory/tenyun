@@ -3239,7 +3239,7 @@ declare interface DescribeHealthScoreRequest {
   InstanceId: string;
   /** 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。 */
   Time: string;
-  /** 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
+  /** 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"cynosdb" - 云数据库 TDSQL-C for MySQL，"dcdb" - 云数据库 TDSQL MySQL，"mariadb" - 云数据库 MariaDB，"tdstore" - 云数据库 TDSQL TDStore 版，"mongodb" - 云数据库 MongoDB，"sqlserver" - 云数据库 SQL Server，"postgres" - 云数据库 PostgreSQL，"redis" - 云数据库 Redis，默认为"mysql"。 */
   Product: string;
 }
 
@@ -3308,6 +3308,16 @@ declare interface DescribeIndexRecommendInfoResponse {
   Optimized?: number;
   /** 累计优化条数。 */
   OptimizedCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeInterfaceEncryptKeyV2Request {
+}
+
+declare interface DescribeInterfaceEncryptKeyV2Response {
+  /** RSA 公钥，Base64 编码格式，用于前端加密敏感数据。 */
+  PublicKey?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5701,6 +5711,8 @@ declare interface Dbbrain {
   DescribeIndexRecommendAggregationSlowLogs(data: DescribeIndexRecommendAggregationSlowLogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexRecommendAggregationSlowLogsResponse>;
   /** 查询实例的索引推荐信息 {@link DescribeIndexRecommendInfoRequest} {@link DescribeIndexRecommendInfoResponse} */
   DescribeIndexRecommendInfo(data: DescribeIndexRecommendInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeIndexRecommendInfoResponse>;
+  /** 查询接口加密公钥 {@link DescribeInterfaceEncryptKeyV2Request} {@link DescribeInterfaceEncryptKeyV2Response} */
+  DescribeInterfaceEncryptKeyV2(data?: DescribeInterfaceEncryptKeyV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeInterfaceEncryptKeyV2Response>;
   /** 获取邮件配置 {@link DescribeMailProfileRequest} {@link DescribeMailProfileResponse} */
   DescribeMailProfile(data: DescribeMailProfileRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMailProfileResponse>;
   /** 获取Redis Proxy 指标 {@link DescribeMetricTopProxiesRequest} {@link DescribeMetricTopProxiesResponse} */

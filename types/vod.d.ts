@@ -2163,6 +2163,8 @@ declare namespace V20180717 {
     Text?: string;
     /** 仅当 ModelName 为 OG 时有效。图片类型。枚举值：mask： 图片蒙版。 */
     ReferenceType?: string;
+    /** 自定义 Id，一般用于在 Prompt 中引用参考图片。 */
+    Id?: string;
   }
 
   /** AIGC 生图任务的输出。 */

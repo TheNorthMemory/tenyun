@@ -56,6 +56,20 @@ declare interface AIModelStatus {
   Status?: string;
 }
 
+/** 域名访问来源配置 */
+declare interface AccessSourceSetting {
+  /** 来源类型枚举值：PUBLIC： 公网请求VPC： VPC 请求WOA： 办公网请求 */
+  SourceType: string;
+  /** 来源请求状态枚举值：OPEN： 放通CLOSE： 拦截 */
+  Action?: string;
+  /** 是否开启 WOA 鉴权枚举值：FORCE_AUTH： 强制鉴权NO_AUTH： 不鉴权默认值：NO_AUTH仅 SourceType = WOA 且 Action= OPEN 时生效 */
+  WOAAuth?: string;
+  /** WOA 鉴权需要的 Token仅 Source Type=WOA 且 WOAAuth = FORCE_AUTH 时必填 */
+  AuthToken?: string;
+  /** VPC 白名单信息仅 SourceType = VPC 时有效; 不传表示不修改 */
+  VPCWhiteList?: VPCWhiteListConfig;
+}
+
 /** Agent 创建云函数镜像配置 */
 declare interface AgentRuntimeCodeImageConfig {
   /** 镜像仓库类型，个人版或者企业版：personal/enterprise */
@@ -1964,6 +1978,22 @@ declare interface User {
   Description?: string;
 }
 
+/** VPC信息 */
+declare interface VPCInfo {
+  /** VPC 唯一 ID参数格式：vpc-xxxxx */
+  UniqVpcId?: string;
+  /** VPC 所在地域参数格式：ap-xxxx */
+  Region?: string;
+}
+
+/** VPC 白名单列表配置 */
+declare interface VPCWhiteListConfig {
+  /** VPC 白名单配置状态枚举值：OPEN： 开启白名单，VPCs 必填，覆盖写入CLOSE： 关闭白名单，VPCs 填入时，覆盖写入 */
+  Action?: string;
+  /** VPC 信息 */
+  VPCs?: VPCInfo[];
+}
+
 /** 资源用量明细结构 */
 declare interface ValueDetail {
   /** 时间 */
@@ -3249,9 +3279,13 @@ declare interface DescribeDatabaseACLResponse {
 }
 
 declare interface DescribeEnvAccessControlRequest {
+  /** 环境id */
+  EnvId: string;
 }
 
 declare interface DescribeEnvAccessControlResponse {
+  /** 修改之后，当前的生效的配置 */
+  Current?: AccessSourceSetting[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4151,9 +4185,17 @@ declare interface ModifyDatabaseACLResponse {
 }
 
 declare interface ModifyEnvAccessControlRequest {
+  /** 环境id */
+  EnvId: string;
+  /** 本次要设置的来源集合入参限制：SourceType = PUBLIC 时，标识操作公网开关SourceType = VPC 时，通过配置 VPCWhiteList，开启/关闭 VPC 白名单SourceType = WOA 时，通过配置 WOAAuth，开启/关闭鉴权校验，开启鉴权时，AuthToken 字段为填 */
+  Sources: AccessSourceSetting[];
 }
 
 declare interface ModifyEnvAccessControlResponse {
+  /** 本次请求影响的权限数量 */
+  AffectedRows?: number;
+  /** 修改之后，当前的生效的配置SourceType = PUBLIC 表示公网链路访问配置SourceType = VPC 表示 VPC 链路访问配置SourceType = WOA 表示办公网链路访问配置 */
+  Current?: AccessSourceSetting[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4920,7 +4962,7 @@ declare interface Tcb {
   /** 获取文档型数据库权限 {@link DescribeDatabaseACLRequest} {@link DescribeDatabaseACLResponse} */
   DescribeDatabaseACL(data: DescribeDatabaseACLRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDatabaseACLResponse>;
   /** 查询环境访问控制配置（域名来源） {@link DescribeEnvAccessControlRequest} {@link DescribeEnvAccessControlResponse} */
-  DescribeEnvAccessControl(data?: DescribeEnvAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccessControlResponse>;
+  DescribeEnvAccessControl(data: DescribeEnvAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccessControlResponse>;
   /** 查询环境当前计费周期 {@link DescribeEnvAccountCircleRequest} {@link DescribeEnvAccountCircleResponse} */
   DescribeEnvAccountCircle(data: DescribeEnvAccountCircleRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvAccountCircleResponse>;
   /** 根据环境ID查询环境详情 {@link DescribeEnvInfoRequest} {@link DescribeEnvInfoResponse} */
@@ -5012,7 +5054,7 @@ declare interface Tcb {
   /** 更新环境信息 {@link ModifyEnvRequest} {@link ModifyEnvResponse} */
   ModifyEnv(data: ModifyEnvRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvResponse>;
   /** 修改环境访问控制配置（域名来源） {@link ModifyEnvAccessControlRequest} {@link ModifyEnvAccessControlResponse} */
-  ModifyEnvAccessControl(data?: ModifyEnvAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvAccessControlResponse>;
+  ModifyEnvAccessControl(data: ModifyEnvAccessControlRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvAccessControlResponse>;
   /** 修改环境额外配置 {@link ModifyEnvExtraRequest} {@link ModifyEnvExtraResponse} */
   ModifyEnvExtra(data: ModifyEnvExtraRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyEnvExtraResponse>;
   /** 更新云开发环境套餐 {@link ModifyEnvPlanRequest} {@link ModifyEnvPlanResponse} */

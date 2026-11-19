@@ -20,6 +20,14 @@ declare interface ApplyConcurrentResponse {
   RequestId?: string;
 }
 
+declare interface CreateMCPTokenRequest {
+}
+
+declare interface CreateMCPTokenResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateSessionRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -60,12 +68,28 @@ declare interface DescribeConcurrentCountResponse {
   RequestId?: string;
 }
 
+declare interface DescribeMCPTokensRequest {
+}
+
+declare interface DescribeMCPTokensResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DestroySessionRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
 }
 
 declare interface DestroySessionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface RenewMCPTokenRequest {
+}
+
+declare interface RenewMCPTokenResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -109,12 +133,18 @@ declare interface Car {
   (): Versions;
   /** 申请并发 {@link ApplyConcurrentRequest} {@link ApplyConcurrentResponse} */
   ApplyConcurrent(data: ApplyConcurrentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConcurrentResponse>;
+  /** 创建 MCP Token {@link CreateMCPTokenRequest} {@link CreateMCPTokenResponse} */
+  CreateMCPToken(data?: CreateMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMCPTokenResponse>;
   /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
   /** 获取并发计数 {@link DescribeConcurrentCountRequest} {@link DescribeConcurrentCountResponse} */
   DescribeConcurrentCount(data?: DescribeConcurrentCountRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeConcurrentCountResponse>;
+  /** 查询 MCP Token 列表 {@link DescribeMCPTokensRequest} {@link DescribeMCPTokensResponse} */
+  DescribeMCPTokens(data?: DescribeMCPTokensRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMCPTokensResponse>;
   /** 销毁会话 {@link DestroySessionRequest} {@link DestroySessionResponse} */
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
+  /** 续期 MCP Token {@link RenewMCPTokenRequest} {@link RenewMCPTokenResponse} */
+  RenewMCPToken(data?: RenewMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewMCPTokenResponse>;
   /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */
   StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
   /** 开始云端推流到指定URL {@link StartPublishStreamWithURLRequest} {@link StartPublishStreamWithURLResponse} */
