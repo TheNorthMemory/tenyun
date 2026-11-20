@@ -436,7 +436,7 @@ declare interface CreateFlowOption {
   PreviewAfterStart?: boolean;
   /** 发起成功之后是否签署合同，仅当前经办人作为签署人时生效（默认） false -否 true - 展示签署按钮 */
   SignAfterStart?: boolean;
-  /** 隐藏操作步骤: 具体的控件类型如下1 : 选择文件及签署方2 : 补充文件内容4 : 发起前合同信息与设置确认注：仅对新版页面生效 */
+  /** 隐藏操作步骤: 具体类型如下1 : 选择文件及签署方2 : 补充文件内容4 : 发起前合同信息与设置确认注：仅对新版页面生效 */
   HideOperationSteps?: number[];
   /** 本企业简称，注：仅对新版页面生效 */
   SelfName?: string;
@@ -456,6 +456,8 @@ declare interface CreateFlowOption {
   ResultPageConfig?: CreateResultPageConfig;
   /** 若指定了合同抄送人，此参数用来控制操作人能否在嵌入式页面看见或编辑（修改、增加、删除）抄送人信息。枚举值：0： 不可见不可编辑1： 可见不可编辑2： 可见可编辑默认值：0 */
   CcInfoVisibility?: number;
+  /** 在调用创建发起流程web页面创建合同时,可通过此参数限制在界面上拖拽签署控件后，可选那几种印章类型或签名类型。注：仅在嵌入式文件发起场景下生效。 */
+  SignComponentLimits?: EmbedSignComponentLimit[];
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */
@@ -538,6 +540,14 @@ declare interface DynamicSignOption {
   DynamicReceiveType?: number;
   /** 动态签署方时，预设的企业OpenId，预设企业OpenId后，只允许对应的企业员工进行领取签署。 */
   OrganizationOpenId?: string;
+}
+
+/** 签署控件的类型和范围限制条件，用于控制文件发起后签署人拖拽签署区时可使用的控件类型和具体的印章或签名方式。 */
+declare interface EmbedSignComponentLimit {
+  /** 控件类型，支持以下类型SIGN_SEAL : 印章控件SIGN_PAGING_SEAL : 骑缝章控件SIGN_SIGNATURE : 用户签名控件SIGN_PAGING_SIGNATURE : 用户签名骑缝控件 */
+  ComponentType: string;
+  /** 签署控件类型的值，用于限制签署时印章或者签名的选择范围1.当 ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时，可指定印章类型。具体场景与规则说明如下：指定印章类型:可传入以下枚举值来限制印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他2.当ComponentType 是 SIGN_SIGNATURE 或者 SIGN_PAGING_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 需要实时手写的手写签名OCR_ESIGN : OCR印章（智慧手写签名）IMG_ESIGN : 图片印章ESIGN : 个人印章SYSTEM_ESIGN : 系统印章 */
+  ComponentValue?: string[];
 }
 
 /** 创建嵌入式页面url个性化参数 */
@@ -884,6 +894,10 @@ declare interface FlowGroupOptions {
   SignAfterStart?: boolean;
   /** 发起成功后是否预览合同 true-展示预览按钮 false-否(默认) */
   PreviewAfterStart?: boolean;
+  /** 在调用获取发起合同组嵌入链接创建合同时,可通过此参数限制在界面上拖拽签署控件后，可选那几种印章类型或签名类型。注：仅在嵌入式文件发起场景下生效。 */
+  SignComponentLimits?: EmbedSignComponentLimit[];
+  /** 隐藏操作步骤: 具体的控件类型如下2 : 补充文件内容4 : 发起前合同信息与设置确认注：仅对新版页面生效 */
+  HideOperationSteps?: number[];
 }
 
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */
@@ -2229,7 +2243,7 @@ declare interface ChannelCreatePrepareFlowRequest {
   FlowOption?: CreateFlowOption;
   /** 已废弃，请用FlowInfo.Approvers */
   FlowApproverList?: CommonFlowApprover[];
-  /** 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接注: `该参数必须是一个待发起审核的合同id，并且还未审核通过` */
+  /** 合同Id：用于通过一个已发起的合同快速生成一个发起流程web链接注: 该参数必须是一个待发起审核的合同id，并且还未审核通过 */
   FlowId?: string;
   /** 该参数不可用，请通过获取 web 可嵌入接口获取合同流程预览 URL */
   NeedPreview?: boolean;
@@ -2237,7 +2251,7 @@ declare interface ChannelCreatePrepareFlowRequest {
   Organization?: OrganizationInfo;
   /** 操作人（用户）信息，不用传 */
   Operator?: UserInfo;
-  /** 此参数已经废弃，请使用 CreateFlowOption 里面的 SignComponentConfig签署控件的配置信息，用在嵌入式发起的页面配置，包括- 签署控件 是否默认展示日期. */
+  /** 此参数已经废弃，请使用 CreateFlowOption 里面的 SignComponentConfig签署控件的配置信息，用在嵌入式发起的页面配置，包括签署控件 是否默认展示日期. */
   SignComponentConfig?: SignComponentConfig;
 }
 
@@ -2957,8 +2971,10 @@ declare interface CreateChannelSubOrganizationActiveRequest {
   Agent: Agent;
   /** 要进行激活或者续期的子客企业OrganizationOpenId列表，请确保所有列出的子客企业均已完成认证。 */
   SubOrganizationOpenIds?: string[];
-  /** 操作类型，可以选择如下：**false**：（默认）激活子客企业**true**：续期子客企业 */
+  /** 操作类型，可以选择如下：false：（默认）激活子客企业true：续期子客企业 */
   Renew?: boolean;
+  /** 是否解绑子企业枚举值：false： 否true： 是：解绑后，份额将会返还，但是该子企业无法再次被激活默认值：false */
+  Unbind?: boolean;
 }
 
 declare interface CreateChannelSubOrganizationActiveResponse {

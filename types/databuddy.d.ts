@@ -608,6 +608,8 @@ declare interface FetchOption {
   FetchTags?: boolean;
   /** 是否返回字段关联的字典维度信息，默认不传，不返回 */
   FetchDimensions?: boolean;
+  /** 是否获取tclake表的snapshots文件信息（文件大小、文件数量、最后修改时间）各接口默认行为不同：GetTable：不传或未设置时默认获取（true），显式传 false 时跳过GetTables：不传或未设置时默认不获取（false），显式传 true 时获取；获取会显著增加接口耗时 */
+  FetchTableFilesInfo?: boolean;
 }
 
 /** 统一搜索字段信息 */
@@ -1396,6 +1398,18 @@ declare interface ListPartitioning {
   Assignments: ListPartition[];
 }
 
+/** 定时任务列表分页结果 */
+declare interface ListScheduledTasksRsp {
+  /** 当前页任务列表 */
+  Tasks?: ScheduledTaskDetail[] | null;
+  /** 符合筛选条件的任务总数 */
+  Total?: number | null;
+  /** 当前页码（从 1 开始） */
+  Page?: number | null;
+  /** 实际生效的每页数量 */
+  PageSize?: number | null;
+}
+
 /** 获取数据库名称列表响应 */
 declare interface ListSchemaNamesRsp {
   /** 数据库名列表 */
@@ -1926,6 +1940,46 @@ declare interface ScheduleBizEnumBrief {
   LabelValue?: string | null;
   /** 枚举项统计数量 */
   Count?: number | null;
+}
+
+/** 定时任务详情 */
+declare interface ScheduledTaskDetail {
+  /** 定时任务唯一标识 */
+  ScheduledTaskId?: string;
+  /** 任务名称 */
+  Name?: string;
+  /** 任务提示词 */
+  Prompt?: string;
+  /** 六段 cron 表达式 */
+  Schedule?: string;
+  /** 任务状态：1=ACTIVE，2=PAUSED */
+  Status?: number;
+  /** 会话类型：1=数据分析，2=数据工程 */
+  SessionType?: number;
+  /** 分析空间 ID */
+  AnalysisSpaceId?: string;
+  /** 工作空间 ID */
+  WorkspaceId?: string;
+  /** 创建人 UIN */
+  CreateUserUin?: string;
+  /** 创建时间，毫秒级 Unix 时间戳字符串 */
+  CreateTime?: string;
+  /** 最近修改时间，毫秒级 Unix 时间戳字符串 */
+  ModifyTime?: string;
+  /** 生效开始时间，上海时区本地零点的毫秒时间戳字符串；0 表示不传 */
+  StartTime?: string;
+  /** 生效结束时间，上海时区本地零点的毫秒时间戳字符串；0 表示不传 */
+  EndTime?: string;
+  /** 技能 ID 列表 */
+  SkillIds?: string;
+  /** 模型 ID */
+  ModelId?: string;
+  /** 调度类型：1=每天，2=间隔，3=单次 */
+  ScheduleType?: number;
+  /** 最近修改人 UIN */
+  UpdateUserUin?: string;
+  /** mcpId列表（逗号分隔） */
+  MCPIds?: string;
 }
 
 /** 计划调度时间配置 */
@@ -4018,6 +4072,18 @@ declare interface ListModelsResponse {
   RequestId?: string;
 }
 
+declare interface ListScheduledTasksRequest {
+  /** 工作空间 ID */
+  WorkspaceId: string;
+}
+
+declare interface ListScheduledTasksResponse {
+  /** 定时任务列表分页结果 */
+  Data?: ListScheduledTasksRsp | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ListSchemaNamesRequest {
   /** 数据目录名，必填 */
   CatalogName: string;
@@ -5123,6 +5189,8 @@ declare interface Databuddy {
   ListLocations(data: ListLocationsRequest, config?: AxiosRequestConfig): AxiosPromise<ListLocationsResponse>;
   /** 分页获取模型列表 {@link ListModelsRequest} {@link ListModelsResponse} */
   ListModels(data: ListModelsRequest, config?: AxiosRequestConfig): AxiosPromise<ListModelsResponse>;
+  /** 查询定时任务列表 {@link ListScheduledTasksRequest} {@link ListScheduledTasksResponse} */
+  ListScheduledTasks(data: ListScheduledTasksRequest, config?: AxiosRequestConfig): AxiosPromise<ListScheduledTasksResponse>;
   /** 获取数据库名称列表 {@link ListSchemaNamesRequest} {@link ListSchemaNamesResponse} */
   ListSchemaNames(data: ListSchemaNamesRequest, config?: AxiosRequestConfig): AxiosPromise<ListSchemaNamesResponse>;
   /** 查询schema列表 {@link ListSchemasRequest} {@link ListSchemasResponse} */

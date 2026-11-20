@@ -4555,6 +4555,8 @@ declare interface MultimodalDocParseRequest {
   PageRange?: string;
   /** 任务类型枚举值：0： 文档解析1： 图片OCR识别2： 切片文字识别3： 切片表格识别4： 切片代码识别默认值：0 */
   TaskType?: number;
+  /** 是否输出单元格坐标。开启后，耗时会稍有增加。默认值：false */
+  EnableTableCellCoord?: boolean;
 }
 
 declare interface MultimodalDocParseResponse {
@@ -5419,6 +5421,8 @@ declare interface SubmitMultimodalDocParseJobRequest {
   FileEndPageNumber?: number;
   /** 任务类型，默认为 0。取值：0：默认1：Free OCR2：OCR3：表格识别4：代码识别 */
   TaskType?: number;
+  /** 是否输出单元格坐标。开启后，耗时会稍有增加。默认值：false */
+  EnableTableCellCoord?: boolean;
 }
 
 declare interface SubmitMultimodalDocParseJobResponse {

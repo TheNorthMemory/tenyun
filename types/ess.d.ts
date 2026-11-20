@@ -588,6 +588,8 @@ declare interface CreateFlowOption {
   NeedFlowDraft?: boolean;
   /** 若指定了合同抄送人，此参数用来控制操作人能否在嵌入式页面看见或编辑（修改、增加、删除）抄送人信息。枚举值：0： 不可见不可编辑1： 可见不可编辑2： 可见可编辑默认值：0 */
   CcInfoVisibility?: number;
+  /** 在调用创建发起流程web页面创建合同时,可通过此参数限制在界面上拖拽签署控件后，可选那几种印章类型或签名类型。注：仅在嵌入式文件发起场景下生效。 */
+  SignComponentLimits?: EmbedSignComponentLimit[];
 }
 
 /** 发起流程的可嵌入页面操作结果页配置 */
@@ -656,6 +658,14 @@ declare interface DynamicSignOption {
   DynamicReceiveType?: number;
   /** 动态签署方时，预设的企业名称，预设企业名称后，只允许对应的企业员工进行领取签署。 */
   OrganizationName?: string;
+}
+
+/** 签署控件的类型和范围限制条件，用于控制**嵌入式文件**发起页面上，拖拽签署区时可使用的控件类型和具体的印章或签名方式。 */
+declare interface EmbedSignComponentLimit {
+  /** 控件类型，支持以下类型SIGN_SEAL : 印章控件SIGN_PAGING_SEAL : 骑缝章控件SIGN_SIGNATURE : 用户签名控件SIGN_PAGING_SIGNATURE : 用户签名骑缝控件 */
+  ComponentType: string;
+  /** 签署控件类型的值，用于限制签署时印章或者签名的选择范围1.当 ComponentType 是 SIGN_SEAL 或者 SIGN_PAGING_SEAL 时，可指定印章类型。具体场景与规则说明如下：指定印章类型:可传入以下枚举值来限制印章类型 OFFICIAL : 企业公章 CONTRACT : 合同专用章 FINANCE : 财务专用章 PERSONNEL : 人事专用章 OTHER : 其他2.当ComponentType 是 SIGN_SIGNATURE 或者 SIGN_PAGING_SIGNATURE 时可传入以下类型（支持多个）HANDWRITE : 需要实时手写的手写签名OCR_ESIGN : OCR印章（智慧手写签名）IMG_ESIGN : 图片印章ESIGN : 个人印章SYSTEM_ESIGN : 系统印章 */
+  ComponentValue?: string[];
 }
 
 /** 个性化参数 */
@@ -1172,6 +1182,10 @@ declare interface FlowGroupOptions {
   SignAfterStart?: boolean;
   /** 发起成功后是否预览合同 true-展示预览按钮 false-否(默认) */
   PreviewAfterStart?: boolean;
+  /** 在调用获取发起合同组嵌入链接创建合同时,可通过此参数限制在界面上拖拽签署控件后，可选那几种印章类型或签名类型。注：仅在嵌入式文件发起场景下生效。 */
+  SignComponentLimits?: EmbedSignComponentLimit[];
+  /** 隐藏操作步骤: 具体的控件类型如下2 : 补充文件内容4 : 发起前合同信息与设置确认注：仅对新版页面生效 */
+  HideOperationSteps?: number[];
 }
 
 /** 合同组相关信息，指定合同组子合同和签署方的信息，用于补充动态签署人。 */

@@ -2830,6 +2830,44 @@ declare interface ProxyEndPointConfigInfo {
   InstanceNameWeights?: InstanceNameWeight[];
 }
 
+/** 批量proxy接入点配置 */
+declare interface ProxyEndPointItem {
+  /** vpc id */
+  UniqueVpcId: string;
+  /** 子网ID */
+  UniqueSubnetId: string;
+  /** 安全组列表 */
+  SecurityGroupIds?: string[];
+  /** 权重模式枚举值：system： 系统分配custom： 自定义 */
+  WeightMode?: string;
+  /** 是否自动添加只读实例枚举值：yes： 是no： 否 */
+  AutoAddRo?: string;
+  /** 读写类型枚举值：READWRITE： 读写READONLY： 只读 */
+  RwType?: string;
+  /** 是否开启故障转移枚举值：yes： 是no： 否 */
+  FailOver?: string;
+  /** 一致性超时时间 */
+  ConsistencyTimeOut?: number;
+  /** 一致性类型。枚举值：eventual： 最终一致性global： 全局一致性session： 会话一致性仅当 RwType 参数值为 READWRITE 时，才支持设置此项。 */
+  ConsistencyType?: string;
+  /** 是否开启事务拆分。开启后，在一个事务中拆分读和写到不同的实例上去执行。 */
+  TransSplit?: boolean;
+  /** 接入模式枚举值：nearby： 就近访问balance： 均衡分配 */
+  AccessMode?: string;
+  /** 实例及权重 */
+  InstanceWeights?: ProxyInstanceWeight[];
+  /** 描述信息 */
+  Description?: string;
+  /** 自动负载模式枚举值：static： 静态dynamic： 自适应 */
+  LoadBalanceMode?: string;
+  /** 是否开启连接池枚举值：yes： 打开no： 不打开 */
+  OpenConnectionPool?: string;
+  /** 连接池类型枚举值：SessionConnectionPool： 会话级连接池TransactionConnectionPool： 事物级连接池 */
+  ConnectionPoolType?: string;
+  /** 连接池阀值 */
+  ConnectionPoolTimeOut?: number;
+}
+
 /** proxy组 */
 declare interface ProxyGroup {
   /** 数据库代理组ID */
@@ -4636,6 +4674,22 @@ declare interface CreateProxyEndPointResponse {
   TaskId?: number;
   /** 数据库代理组 ID。 */
   ProxyGroupId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreateProxyEndPointsRequest {
+  /** 集群 ID。 */
+  ClusterId: string;
+  /** proxyEndPoint的参数配置 */
+  ProxyEndPointItems: ProxyEndPointItem[];
+}
+
+declare interface CreateProxyEndPointsResponse {
+  /** 异步流程 ID。 */
+  FlowId?: number;
+  /** 异步任务 ID。 */
+  TaskId?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8935,6 +8989,8 @@ declare interface Cynosdb {
   CreateProxy(data: CreateProxyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyResponse>;
   /** 创建数据库代理连接点 {@link CreateProxyEndPointRequest} {@link CreateProxyEndPointResponse} */
   CreateProxyEndPoint(data: CreateProxyEndPointRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyEndPointResponse>;
+  /** 批量创建数据库代理连接点 {@link CreateProxyEndPointsRequest} {@link CreateProxyEndPointsResponse} */
+  CreateProxyEndPoints(data: CreateProxyEndPointsRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProxyEndPointsResponse>;
   /** 新购资源包 {@link CreateResourcePackageRequest} {@link CreateResourcePackageResponse} */
   CreateResourcePackage(data: CreateResourcePackageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateResourcePackageResponse>;
   /** 创建保险箱 {@link CreateVaultRequest} {@link CreateVaultResponse} */

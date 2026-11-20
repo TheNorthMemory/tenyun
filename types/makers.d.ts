@@ -705,7 +705,7 @@ declare interface ModifyZoneCustomDomainEnvResponse {
 /** {@link Makers Web 与 Agent 开发部署平台 Makers} */
 declare interface Makers {
   (): Versions;
-  /** 创建构建 {@link CreateDeploymentRequest} {@link CreateDeploymentResponse} */
+  /** 创建部署 {@link CreateDeploymentRequest} {@link CreateDeploymentResponse} */
   CreateDeployment(data: CreateDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeploymentResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */
   CreateProject(data: CreateProjectRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProjectResponse>;
@@ -719,9 +719,9 @@ declare interface Makers {
   DeleteProjectEnvs(data: DeleteProjectEnvsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProjectEnvsResponse>;
   /** 获取上传临时密钥 {@link DescribeCosTempTokenRequest} {@link DescribeCosTempTokenResponse} */
   DescribeCosTempToken(data: DescribeCosTempTokenRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCosTempTokenResponse>;
-  /** 获取构建日志 {@link DescribeDeploymentLogRequest} {@link DescribeDeploymentLogResponse} */
+  /** 获取部署日志 {@link DescribeDeploymentLogRequest} {@link DescribeDeploymentLogResponse} */
   DescribeDeploymentLog(data: DescribeDeploymentLogRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentLogResponse>;
-  /** 获取构建记录列表 {@link DescribeDeploymentsRequest} {@link DescribeDeploymentsResponse} */
+  /** 获取部署记录列表 {@link DescribeDeploymentsRequest} {@link DescribeDeploymentsResponse} */
   DescribeDeployments(data: DescribeDeploymentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDeploymentsResponse>;
   /** 查询环境列表 {@link DescribeEnvironmentsRequest} {@link DescribeEnvironmentsResponse} */
   DescribeEnvironments(data: DescribeEnvironmentsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeEnvironmentsResponse>;

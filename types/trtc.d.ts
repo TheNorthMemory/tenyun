@@ -2440,6 +2440,20 @@ declare interface DescribeCloudTranscriptionResponse {
   RequestId?: string;
 }
 
+declare interface DescribeFinanceCloudRoomUsageRequest {
+  /** 与房间对应的 TRTC SdkAppId，必须是金融云应用。 */
+  SdkAppId: number;
+  /** 查询开始时间，格式为 YYYY-MM-DD HH:MM，精确到分钟级。 */
+  StartTime: string;
+  /** 查询结束时间，格式为 YYYY-MM-DD HH:MM，单次查询不超过 24 小时。 */
+  EndTime: string;
+}
+
+declare interface DescribeFinanceCloudRoomUsageResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeLiveStreamModerationRequest {
   /** TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。 */
   SdkAppId: number;
@@ -3833,6 +3847,8 @@ declare interface Trtc {
   DescribeCloudSliceTask(data: DescribeCloudSliceTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudSliceTaskResponse>;
   /** 查询云端转录状态 {@link DescribeCloudTranscriptionRequest} {@link DescribeCloudTranscriptionResponse} */
   DescribeCloudTranscription(data: DescribeCloudTranscriptionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudTranscriptionResponse>;
+  /** 查询金融云房间维度用量 {@link DescribeFinanceCloudRoomUsageRequest} {@link DescribeFinanceCloudRoomUsageResponse} */
+  DescribeFinanceCloudRoomUsage(data: DescribeFinanceCloudRoomUsageRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeFinanceCloudRoomUsageResponse>;
   /** 查询直播流AI 内容理解任务信息 {@link DescribeLiveStreamModerationRequest} {@link DescribeLiveStreamModerationResponse} */
   DescribeLiveStreamModeration(data: DescribeLiveStreamModerationRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeLiveStreamModerationResponse>;
   /** 查询TRTC混流转码用量 {@link DescribeMixTranscodingUsageRequest} {@link DescribeMixTranscodingUsageResponse} */

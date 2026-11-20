@@ -1615,11 +1615,21 @@ declare interface TriggerAIWorkbenchSREDigitalTwinTaskResponse {
 declare interface TriggerAIWorkbenchTaskRequest {
   /** 任务 ID */
   TaskId?: string;
+  /** session会话ID */
+  SessionId?: string;
+  /** 输入内容 */
+  Content?: string;
+  /** 幂等键，调用方保证同一事件重试时携带同一 key */
+  IdempotencyKey?: string;
 }
 
 declare interface TriggerAIWorkbenchTaskResponse {
   /** 执行 ID */
   ExecutionId?: string | null;
+  /** 会话 ID */
+  SessionId?: string | null;
+  /** 运行 ID */
+  RunId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

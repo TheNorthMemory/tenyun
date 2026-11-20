@@ -241,7 +241,7 @@ declare interface SubmitHunyuan3DPartJobRequest {
   File?: InputFile3D;
   /** 组件生成模型版本，默认为1.5枚举值：1.5： 1.5模型默认值：1.5 */
   Model?: string;
-  /** 是否分步骤进行组件生成；开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；此参数默认关闭。 */
+  /** 模型组件分割数据；格式如：{"MeshName_part_1":{"face_ids":[1,2,3..],"color":"#FF805C"}}其中，face_ids 是整型数组，表示切片的一组面片ID, color是颜色。 */
   PartSegmentationInfo?: string;
   /** 是否分步骤进行组件生成；开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；此参数默认关闭。 */
   EnableStagedGeneration?: boolean;
