@@ -722,6 +722,26 @@ declare interface PreCacheImage {
   LastUsedTime?: string;
 }
 
+/** 预热镜像自动清理策略 */
+declare interface PreCacheImageCleanupPolicy {
+  /** 自动清理策略ID */
+  CleanupPolicyId?: string;
+  /** 自动清理策略名 */
+  Name?: string;
+  /** 策略启用配置 */
+  Enabled?: boolean;
+  /** 镜像仓库地址精准匹配，空串表示不限域名 */
+  RegistryHost?: string;
+  /** 镜像仓库名正则匹配，匹配 命名空间/仓库 完整路径，非锚定子串匹配，语法与 TCR 预热触发器一致；空串表示全部 Repo */
+  RepoPattern?: string;
+  /** 闲置过期清理时间规范化正数时长，例如 7d */
+  IdleTTL?: string;
+  /** 策略创建时间 */
+  CreateTime?: string;
+  /** 策略最近更新时间 */
+  UpdateTime?: string;
+}
+
 /** 健康检查探针配置 */
 declare interface ProbeConfiguration {
   /** HTTP GET 探测配置 */
@@ -1134,6 +1154,26 @@ declare interface CreateDeploymentResponse {
   RequestId?: string;
 }
 
+declare interface CreatePreCacheImageCleanupPolicyRequest {
+  /** 策略名 */
+  Name: string;
+  /** 闲置过期时间参数格式：正数 m/h/d */
+  IdleTTL: string;
+  /** 镜像仓库地址入参限制：精准匹配，不传或空串表示不限，最多 255 字符 */
+  RegistryHost?: string;
+  /** 镜像仓库名入参限制：正则匹配，最多 256 字符，编译后指令数不超过 128，账号全部启用策略合计不超过 1280；不传或空串表示全部 Repo */
+  RepoPattern?: string;
+  /** 策略启用配置枚举值：true： 启用策略false： 禁用策略默认值：true */
+  Enabled?: boolean;
+}
+
+declare interface CreatePreCacheImageCleanupPolicyResponse {
+  /** 清理策略详情 */
+  CleanupPolicy?: PreCacheImageCleanupPolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreatePreCacheImageTaskRequest {
   /** 镜像地址。仅支持 repository:tag、repository@sha256:<64 位摘要> 或 repository:tag@sha256:<64 位摘要>。 */
   Image: string;
@@ -1342,6 +1382,16 @@ declare interface DeleteGPUResourceGroupRequest {
 }
 
 declare interface DeleteGPUResourceGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePreCacheImageCleanupPolicyRequest {
+  /** 清理策略ID */
+  CleanupPolicyId: string;
+}
+
+declare interface DeletePreCacheImageCleanupPolicyResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1597,6 +1647,26 @@ declare interface DescribeGPUResourcesResponse {
   /** GPU 资源列表；每台一条，无匹配时为 []。 */
   Resources?: GPUResource[];
   /** 筛选后、分页前的总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePreCacheImageCleanupPolicyListRequest {
+  /** 策略 ID 列表入参限制：最多 100 个，每个 1～64 字符；指定时 Offset、Limit、Filters 不生效，不存在或已删除的 ID 被忽略 */
+  CleanupPolicyIds?: string[];
+  /** 过滤器入参限制：Filter={Name:String,Values:String[]}；最多 10 个 Filter，每个 Filter 的 Name 和 Values 必填，Values 最多 10 个、每个最多 255 字符 */
+  Filters?: Filter[];
+  /** 偏移值默认值：0 */
+  Offset?: number;
+  /** 返回数量限制取值范围：[1, 100]默认值：20 */
+  Limit?: number;
+}
+
+declare interface DescribePreCacheImageCleanupPolicyListResponse {
+  /** 清理策略集合 */
+  CleanupPolicySet?: PreCacheImageCleanupPolicy[];
+  /** 返回策略数单位：个 */
   TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -2175,6 +2245,8 @@ declare interface StartSandboxInstanceRequest {
   AuthMode?: string;
   /** 沙箱元数据 */
   Metadata?: MetadataVar[];
+  /** 启动沙箱实例时追加挂载规则，仅支持 volume、cfs、cos、image */
+  StorageMounts?: StorageMount[];
   /** 实例启动模式。DEFAULT：使用原有同步创建流程，为默认值；WAIT_UNTIL_HEALTHY：使用持久化后台创建流程，受理后可能返回 STARTING，需查询实例状态确认最终结果，当前仅支持WAA沙箱和GPU沙箱。 */
   StartMode?: string;
 }
@@ -2224,6 +2296,28 @@ declare interface SyncRegistryRecordResponse {
   ErrorCode?: string | null;
   /** 失败错误信息；SyncStatus=FAILED 时返回。 */
   ErrorMessage?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface UpdatePreCacheImageCleanupPolicyRequest {
+  /** 清理策略ID */
+  CleanupPolicyId: string;
+  /** 清理策略名 */
+  Name?: string;
+  /** 镜像仓库地址入参限制：精准匹配，不传或空串表示不限，最多 255 字符 */
+  RegistryHost?: string;
+  /** 镜像仓库名入参限制：正则匹配，最多 256 字符，编译后指令数不超过 128，账号全部启用策略合计不超过 1280。不传或空串表示全部 Repo。 */
+  RepoPattern?: string;
+  /** 闲置过期时间参数格式：正数 m/h/d */
+  IdleTTL?: string;
+  /** 策略启用配置枚举值：true： 启用策略false： 禁用策略默认值：true */
+  Enabled?: boolean;
+}
+
+declare interface UpdatePreCacheImageCleanupPolicyResponse {
+  /** 清理策略详情 */
+  CleanupPolicy?: PreCacheImageCleanupPolicy;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2313,6 +2407,8 @@ declare interface UpdateSandboxToolRequest {
   CustomConfiguration?: CustomConfiguration;
   /** 桌面电脑环境类沙箱配置 */
   ComputerConfiguration?: ComputerConfiguration;
+  /** 按挂载名称更新沙箱工具已有镜像卷的镜像来源和镜像内目录。入参限制：每项须提供已有镜像卷的 Name，以及 StorageSource.Image 中的 Reference 和 ImageRegistryType。同一请求中的 Name 须唯一。Reference 须包含镜像标签或 SHA-256 摘要。取值参考：[{"Name":"runtime","StorageSource":{"Image":{"Reference":"ccr.ccs.tencentyun.com/example/runtime:v2","ImageRegistryType":"personal","SubPath":"assets"}}}]省略本参数或传空数组时保留原配置。SubPath 省略时保留原目录，传空字符串时使用镜像根目录，传非空路径时使用指定目录。工具沿用原有 MountPath 和 ReadOnly，镜像摘要由服务解析。 */
+  StorageMounts?: StorageMount[];
 }
 
 declare interface UpdateSandboxToolResponse {
@@ -2337,6 +2433,8 @@ declare interface Ags {
   CreateAPIKey(data?: CreateAPIKeyRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAPIKeyResponse>;
   /** 创建 Deployment {@link CreateDeploymentRequest} {@link CreateDeploymentResponse} */
   CreateDeployment(data: CreateDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeploymentResponse>;
+  /** 创建镜像预热自动清理策略 {@link CreatePreCacheImageCleanupPolicyRequest} {@link CreatePreCacheImageCleanupPolicyResponse} */
+  CreatePreCacheImageCleanupPolicy(data: CreatePreCacheImageCleanupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreCacheImageCleanupPolicyResponse>;
   /** 创建预热镜像任务 {@link CreatePreCacheImageTaskRequest} {@link CreatePreCacheImageTaskResponse} */
   CreatePreCacheImageTask(data: CreatePreCacheImageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePreCacheImageTaskResponse>;
   /** 创建 Registry {@link CreateRegistryRequest} {@link CreateRegistryResponse} */
@@ -2359,6 +2457,8 @@ declare interface Ags {
   DeleteGPUResourceGroup(data: DeleteGPUResourceGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteGPUResourceGroupResponse>;
   /** 删除镜像预热 {@link DeletePreCacheImageRequest} {@link DeletePreCacheImageResponse} */
   DeletePreCacheImage(data?: DeletePreCacheImageRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePreCacheImageResponse>;
+  /** 删除镜像预热自动清理策略 {@link DeletePreCacheImageCleanupPolicyRequest} {@link DeletePreCacheImageCleanupPolicyResponse} */
+  DeletePreCacheImageCleanupPolicy(data: DeletePreCacheImageCleanupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePreCacheImageCleanupPolicyResponse>;
   /** 删除 Registry {@link DeleteRegistryRequest} {@link DeleteRegistryResponse} */
   DeleteRegistry(data: DeleteRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteRegistryResponse>;
   /** 删除 Record {@link DeleteRegistryRecordRequest} {@link DeleteRegistryRecordResponse} */
@@ -2387,6 +2487,8 @@ declare interface Ags {
   DescribeGPUResourceSpecs(data?: DescribeGPUResourceSpecsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGPUResourceSpecsResponse>;
   /** 查询GPU资源 {@link DescribeGPUResourcesRequest} {@link DescribeGPUResourcesResponse} */
   DescribeGPUResources(data?: DescribeGPUResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeGPUResourcesResponse>;
+  /** 查询镜像预热自动清理策略 {@link DescribePreCacheImageCleanupPolicyListRequest} {@link DescribePreCacheImageCleanupPolicyListResponse} */
+  DescribePreCacheImageCleanupPolicyList(data?: DescribePreCacheImageCleanupPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageCleanupPolicyListResponse>;
   /** 查询镜像预热列表 {@link DescribePreCacheImageListRequest} {@link DescribePreCacheImageListResponse} */
   DescribePreCacheImageList(data?: DescribePreCacheImageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePreCacheImageListResponse>;
   /** 查询镜像预热任务信息 {@link DescribePreCacheImageTaskRequest} {@link DescribePreCacheImageTaskResponse} */
@@ -2447,6 +2549,8 @@ declare interface Ags {
   StopSandboxInstance(data: StopSandboxInstanceRequest, config?: AxiosRequestConfig): AxiosPromise<StopSandboxInstanceResponse>;
   /** 同步 Record 描述符 {@link SyncRegistryRecordRequest} {@link SyncRegistryRecordResponse} */
   SyncRegistryRecord(data: SyncRegistryRecordRequest, config?: AxiosRequestConfig): AxiosPromise<SyncRegistryRecordResponse>;
+  /** 更新镜像预热自动清理策略 {@link UpdatePreCacheImageCleanupPolicyRequest} {@link UpdatePreCacheImageCleanupPolicyResponse} */
+  UpdatePreCacheImageCleanupPolicy(data: UpdatePreCacheImageCleanupPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<UpdatePreCacheImageCleanupPolicyResponse>;
   /** 更新 Registry {@link UpdateRegistryRequest} {@link UpdateRegistryResponse} */
   UpdateRegistry(data: UpdateRegistryRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateRegistryResponse>;
   /** 更新 Record 可变元数据 {@link UpdateRegistryRecordRequest} {@link UpdateRegistryRecordResponse} */
