@@ -748,7 +748,7 @@ declare interface IdleLoadBalancer {
   Domain?: string;
 }
 
-/** video配置。 */
+/** image配置。 */
 declare interface ImageConfig {
   /** 模型内路由策略 */
   RoutingStrategy?: string | null;
@@ -756,7 +756,7 @@ declare interface ImageConfig {
   RoutingStrategyArgs?: RoutingStrategyArgs | null;
   /** 同一模型请求重试次数 */
   NumRetries?: number | null;
-  /** 同步超时时间取值范围：[0, 60]单位：秒 */
+  /** 同步超时时间取值范围：[0, 300]单位：秒默认值：15 */
   WaitSeconds?: number;
 }
 

@@ -11769,6 +11769,8 @@ declare namespace V20210820 {
     MatchedBrokerIp?: string;
     /** 执行平台通用协议 */
     ExecutionExtendedProps?: PairDto[];
+    /** 日志诊断规则 */
+    LogDiagnosisRules?: LogDiagnosisRules | null;
   }
 
   /** 实例日志信息 */
@@ -12601,6 +12603,42 @@ declare namespace V20210820 {
     Time?: number | null;
     /** 日志所属的容器名 */
     ContainerName?: string | null;
+  }
+
+  /** LogDiagnosisRules */
+  interface LogDiagnosisRules {
+    /** id */
+    Id?: number | null;
+    /** errorCode */
+    ErrorCode?: number | null;
+    /** createTime */
+    CreateTime?: string | null;
+    /** lastUpdate */
+    LastUpdate?: string | null;
+    /** owner */
+    Owner?: string | null;
+    /** 异常概要 */
+    ErrorTitle?: string | null;
+    /** 异常关键字 */
+    ErrorMessage?: string | null;
+    /** 异常原因 */
+    ErrorReason?: string | null;
+    /** 解决办法 */
+    ErrorSolution?: string | null;
+    /** 展示顺序 */
+    ErrorOrder?: string | null;
+    /** 例子 */
+    ErrorExample?: string | null;
+    /** 扩展说明 */
+    ExtToolsUrl?: string | null;
+    /** 异常级别 */
+    ErrorLevel?: string | null;
+    /** 异常类型：用户/系统 */
+    ErrorTypeAggregation?: string | null;
+    /** 异常系统类型 */
+    ErrorSystem?: string | null;
+    /** 异常日志来源 */
+    ErrorLogSystem?: string | null;
   }
 
   /** MQPackageVO */

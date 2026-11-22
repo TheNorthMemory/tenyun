@@ -1700,7 +1700,7 @@ declare interface QuestionInfo {
   ImageBase64?: string;
   /** 预处理后的图片URL,如果开启了图像切边矫正，后续的坐标都是基于当前图片返回的坐标 */
   ReturnImageUrl?: string;
-  /** 【批改 API 专属特性】图片类型预判别（常规作业 / 非作业图片 / 无作答痕迹），仅 ModelType = yuanbao_correction_model 时生效。其他模型类型不支持该能力。 */
+  /** 【批改 API 专属特性】图片类型预判别（常规作业 / 非作业图片 / 无作答痕迹），仅 ModelType = yuanbao_correction_model 且快速模式下生效。其他模型类型不支持该能力。 */
   ClassName?: string;
   /** 文档所在页 */
   PageIndex?: number;
@@ -1918,10 +1918,12 @@ declare interface ResultList {
   Subject?: string;
   /** 返回题目的知识点内容 */
   KnowledgePoints?: string[];
-  /** 【批改 API 专属特性】当ModelType= yuanbao_correction_model，通过该字段返回题目维度的答案解析当ModelType= youtu_correction_model，该字段返回空，通过AnswerElement. AnswerAnalysis返回答案维度答案解析 */
+  /** 【批改 API 专属特性】当ModelType= yuanbao_correction_model 且快速模式下，通过该字段返回题目维度的答案解析其他批改配置参数情况，该字段返回空，通过AnswerElement. AnswerAnalysis返回答案维度答案解析 */
   AnswerAnalysis?: string;
   /** 年级：小学/初中/高中 */
   Grade?: string;
+  /** 【批改 API专属特性】返回题目维度的批改置信度（0-100）值越高表示答案准确度越高备注：仅有ModelType=youtu_correction_model模型且非快速模式支持返回。 */
+  Confidence?: number;
 }
 
 /** 销货清单 */

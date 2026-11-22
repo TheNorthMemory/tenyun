@@ -1110,6 +1110,8 @@ declare interface Whitelist {
   Aid?: string;
   /** 创建时间 */
   CreateTime?: string;
+  /** 白名单创建时刻。由原始time.Time同源生成带偏移RFC3339，旧CreateTime原值及十二小时显示格式保持；缺失原始时刻时省略本成员。 */
+  CreateDatetime?: string;
 }
 
 declare interface CreateFieldTransformRuleRequest {
@@ -4311,9 +4313,9 @@ declare interface DescribeProjectsResponse {
 declare interface DescribePvListRequest {
   /** ID */
   ProjectId: number;
-  /** 结束时间 */
+  /** 查询结束时间（必填）。参数格式：日维度继续支持 YYYYMMDD，也支持带时区的 RFC3339。入参限制：仅 Dimension=d 支持 RFC3339，须等于北京时间 00:00:00。等价日期的查询结果和返回字段一致。 */
   EndTime: string;
-  /** 开始时间 */
+  /** 查询开始时间（必填）。参数格式：日维度继续支持 YYYYMMDD，也支持带时区的 RFC3339。入参限制：仅 Dimension=d 支持 RFC3339，须等于北京时间 00:00:00。等价日期的查询结果和返回字段一致。 */
   StartTime: string;
   /** 对PV指标的查询维度。获取day：d， 获取min则不填。 */
   Dimension?: string;
@@ -4445,7 +4447,7 @@ declare interface DescribeReplayMetaResponse {
 declare interface DescribeRumGroupLogRequest {
   /** 排序方式 desc asc（必填） */
   OrderBy: string;
-  /** 开始时间（必填） */
+  /** 查询开始时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间范围的查询结果和返回字段一致。 */
   StartTime: string;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
@@ -4453,7 +4455,7 @@ declare interface DescribeRumGroupLogRequest {
   Page: number;
   /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
   Query: string;
-  /** 结束时间（必填） */
+  /** 查询结束时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间范围的查询结果和返回字段一致。 */
   EndTime: string;
   /** 项目ID（必填） */
   ID: number;
@@ -4497,25 +4499,33 @@ declare interface DescribeRumGroupLogV2Response {
 declare interface DescribeRumLogDetailsV2Request {
   /** 排序方式 desc asc */
   OrderBy: string;
-  /** 查询日志开始时间（必填）格式为时间戳 毫秒 */
+  /** Unix纳秒开始时间，包含该时刻；不猜测时间单位。 */
   StartTime: number;
-  /** 单次查询返回的原始日志条数，最大值为100（必填） */
+  /** CLS路径单次返回1～1000条；旧路径保留原行为。短页不表示结束，以ListOver为准。 */
   Limit: number;
   /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
-  /** 查询日志结束时间（必填）格式为时间戳 毫秒 */
+  /** Unix纳秒结束时间，不包含该时刻。 */
   EndTime: number;
   /** 项目ID（必填） */
   ID: number;
-  /** 上次查询的最后一个日志的时间戳 */
+  /** 旧游标参数已废弃，请迁移至Offset或Context。LastTime和LastRowId均为0或缺省视为未传；非零旧游标在cls下拒绝，off/window且不带新分页参数时保留旧行为。 */
   LastTime?: number;
-  /** 上次查询的最后一个日志的rowId */
+  /** 旧游标参数已废弃，请迁移至Offset或Context。LastTime和LastRowId均为0或缺省视为未传；非零旧游标在cls下拒绝，off/window且不带新分页参数时保留旧行为。 */
   LastRowId?: number;
+  /** 从0开始的非负偏移量；保留缺省与显式0的差别。不能与非空Context同时使用，Context续页时删除Offset。 */
+  Offset?: number;
+  /** 原样回传上次非空Context，续页时删除Offset，其余有效查询条件保持不变；空串视为缺省。不保证快照或重放同一页。 */
+  Context?: string;
 }
 
 declare interface DescribeRumLogDetailsV2Response {
-  /** 日志明细 */
+  /** 日志明细JSON字符串，内部Result数组结构不变。CLS路径row_id为0，ts为毫秒精度但单位仍为纳秒，字符串字段完整。 */
   Result?: string;
+  /** CLS续读令牌；ListOver为true时为空。仅CLS路径返回，可缺省。 */
+  Context?: string;
+  /** 当前条件的日志是否全部返回；预算短页不表示结束。仅CLS路径返回，可缺省。 */
+  ListOver?: boolean;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -4523,11 +4533,11 @@ declare interface DescribeRumLogDetailsV2Response {
 declare interface DescribeRumLogExportRequest {
   /** 导出标识name */
   Name: string;
-  /** 开始时间（必填） */
+  /** 查询开始时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间格式对应同一导出范围，返回字段一致。 */
   StartTime: string;
   /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
   Query: string;
-  /** 结束时间（必填） */
+  /** 查询结束时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间格式对应同一导出范围，返回字段一致。 */
   EndTime: string;
   /** 项目ID（必填） */
   ID: number;
@@ -4537,28 +4547,6 @@ declare interface DescribeRumLogExportRequest {
 
 declare interface DescribeRumLogExportResponse {
   /** 返回字符串 */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
-declare interface DescribeRumLogExportV2Request {
-  /** Name（string，必填）：导出任务名称标识，需要在使用API创建导出任务时填写。此字段为后续能力扩展预留，不在查询结果中返回。 */
-  Name: string;
-  /** 查询日志开始时间(必填) */
-  StartTime: number;
-  /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
-  Filter: string;
-  /** 查询日志结束时间(必填) */
-  EndTime: number;
-  /** 项目ID */
-  ID: number;
-  /** 注意：这个字段必选，不能为空！选择要导出哪些字段的参数，对应日志的列，可查看文档：日志查询相关枚举值：level： 日志类型url： URLip： 用户终端IPversion： 版本 */
-  Fields?: string[];
-}
-
-declare interface DescribeRumLogExportV2Response {
-  /** 日志导出任务TaskId */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
@@ -4580,26 +4568,10 @@ declare interface DescribeRumLogExportsResponse {
   RequestId?: string;
 }
 
-declare interface DescribeRumLogExportsV2Request {
-  /** 每页返回任务数 */
-  PageSize: number;
-  /** 当前页码 */
-  PageNum: number;
-  /** 项目ID */
-  ID: number;
-}
-
-declare interface DescribeRumLogExportsV2Response {
-  /** 日志导出列表 */
-  Result?: string;
-  /** 唯一请求 ID，每次请求都会返回。 */
-  RequestId?: string;
-}
-
 declare interface DescribeRumLogListRequest {
   /** 排序方式 desc asc（必填） */
   OrderBy: string;
-  /** 开始时间（必填）格式为时间戳 毫秒 */
+  /** 查询开始时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间范围的查询结果和返回字段一致。 */
   StartTime: string;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
@@ -4607,7 +4579,7 @@ declare interface DescribeRumLogListRequest {
   Page: number;
   /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
   Query: string;
-  /** 结束时间（必填）格式为时间戳 毫秒 */
+  /** 查询结束时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间范围的查询结果和返回字段一致。 */
   EndTime: string;
   /** 项目ID（必填） */
   ID: number;
@@ -4623,13 +4595,13 @@ declare interface DescribeRumLogListResponse {
 declare interface DescribeRumLogTotalV2Request {
   /** 排序方式 desc asc */
   OrderBy: string;
-  /** 查询日志开始时间（必填）格式为时间戳 毫秒 */
+  /** Unix纳秒开始时间，包含该时刻；不猜测时间单位。 */
   StartTime: number;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
   /** 过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：日志查询相关 */
   Filter: string;
-  /** 查询日志结束时间（必填）格式为时间戳 毫秒 */
+  /** Unix纳秒结束时间，不包含该时刻。 */
   EndTime: number;
   /** 项目ID（必填） */
   ID: number;
@@ -4640,20 +4612,20 @@ declare interface DescribeRumLogTotalV2Request {
 }
 
 declare interface DescribeRumLogTotalV2Response {
-  /** 日志总量 */
+  /** 日志总量JSON字符串，内部Total结构不变。总量与明细为独立查询，不保证同一快照；window迁移期间总量仍走旧后端，带新分页参数的明细可走CLS。旧游标继续忽略。 */
   Result?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeRumStatsLogListRequest {
-  /** 开始时间（必填） */
+  /** 查询开始时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间范围的查询结果和返回字段一致。 */
   StartTime: string;
   /** 单次查询返回的原始日志条数，最大值为100（必填） */
   Limit: number;
   /** 查询语句，参考控制台请求参数，语句长度最大为4096（必填） */
   Query: string;
-  /** 结束时间（必填） */
+  /** 查询结束时间（必填）。参数格式：支持旧 Unix 毫秒字符串或新 RFC3339（需带时区）。入参限制：RFC3339 最多 3 位小数秒，须对应非负毫秒。等价时间范围的查询结果和返回字段一致。 */
   EndTime: string;
   /** 项目ID（必填） */
   ID: number;
@@ -6853,12 +6825,8 @@ declare interface Rum {
   DescribeRumLogDetailsV2(data: DescribeRumLogDetailsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogDetailsV2Response>;
   /** 导出Rum日志列表 {@link DescribeRumLogExportRequest} {@link DescribeRumLogExportResponse} */
   DescribeRumLogExport(data: DescribeRumLogExportRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportResponse>;
-  /** 创建日志导出 {@link DescribeRumLogExportV2Request} {@link DescribeRumLogExportV2Response} */
-  DescribeRumLogExportV2(data: DescribeRumLogExportV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportV2Response>;
   /** 获取Rum日志导出列表 {@link DescribeRumLogExportsRequest} {@link DescribeRumLogExportsResponse} */
   DescribeRumLogExports(data: DescribeRumLogExportsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportsResponse>;
-  /** 获取日志导出列表 {@link DescribeRumLogExportsV2Request} {@link DescribeRumLogExportsV2Response} */
-  DescribeRumLogExportsV2(data: DescribeRumLogExportsV2Request, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogExportsV2Response>;
   /** 获取Rum日志列表 {@link DescribeRumLogListRequest} {@link DescribeRumLogListResponse} */
   DescribeRumLogList(data: DescribeRumLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeRumLogListResponse>;
   /** 日志总量查询 {@link DescribeRumLogTotalV2Request} {@link DescribeRumLogTotalV2Response} */

@@ -3054,7 +3054,7 @@ declare interface CreateDatahubTaskResponse {
 }
 
 declare interface CreateDatahubTopicRequest {
-  /** 名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-)，可通过接口DescribeAppInfo获取。 */
+  /** 名称，字符串长度不超过 128 个字符。必须以当前用户的实际 AppId 和连字符（-）开头，其余部分仅支持字母、数字和连字符（-）。AppId 可通过 GetUserAppId 接口获取。 */
   Name: string;
   /** Partition个数，最大值为500，大于0 */
   PartitionNum: number;
@@ -4654,7 +4654,7 @@ declare interface ModifyAccessPolicyResponse {
 declare interface ModifyAclRuleRequest {
   /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
-  /** ACL规则名 */
+  /** ACL规则名取值参考：DescribeAclRule */
   RuleName: string;
   /** 修改预设规则时传入,是否应用到新增的Topic枚举值：0： 不允许应用到新增的topic1： 允许应用到新增的topic默认值：0 */
   IsApplied?: number;

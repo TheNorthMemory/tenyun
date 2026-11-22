@@ -2710,10 +2710,10 @@ declare interface PreExecuteFileSettings {
 
 /** Serverless HBase 预付费设置 */
 declare interface PrePaySetting {
-  /** 时间 */
-  Period: Period | null;
   /** 自动续费标记，0：表示通知即将过期，但不自动续费 1：表示通知即将过期，而且自动续费 2：表示不通知即将过期，也不自动续费 */
   AutoRenewFlag: number;
+  /** 时间 */
+  Period: Period | null;
 }
 
 /** Pod容忍调度节点选择项 */
@@ -3730,10 +3730,10 @@ declare interface UserManagerUserBriefInfo {
 
 /** VPC 参数 */
 declare interface VPCSettings {
-  /** VPC ID */
-  VpcId: string;
   /** Subnet ID */
   SubnetId: string;
+  /** VPC ID */
+  VpcId: string;
 }
 
 /** VPC 参数 */
@@ -3916,12 +3916,12 @@ declare interface ZoneResourceConfiguration {
 
 /** 可用区配置描述。 */
 declare interface ZoneSetting {
-  /** 可用区名称 */
-  Zone: string;
-  /** 可用区VPC和子网 */
-  VPCSettings: VPCSettings;
   /** 可用区节点数量 */
   NodeNum: number;
+  /** 可用区VPC和子网 */
+  VPCSettings: VPCSettings;
+  /** 可用区名称 */
+  Zone: string;
 }
 
 declare interface AddMetricScaleStrategyRequest {
@@ -4291,26 +4291,32 @@ declare interface CreateInstanceResponse {
 }
 
 declare interface CreateSLInstanceRequest {
-  /** 实例名称。 */
-  InstanceName: string;
-  /** 实例计费模式，0表示后付费，即按量计费，1表示预付费，即包年包月。 */
-  PayMode: number;
-  /** 实例存储类型，CLOUD_HSSD表示性能云存储， CLOUD_BSSD表示标准云存储。 */
-  DiskType: string;
   /** 实例单节点磁盘容量，单位GB，单节点磁盘容量需大于等于100，小于等于250*CPU核心数，容量调整步长为100。 */
   DiskSize: number;
+  /** 实例存储类型，CLOUD_HSSD表示性能云存储， CLOUD_BSSD表示标准云存储。 */
+  DiskType: string;
+  /** 实例名称。 */
+  InstanceName: string;
   /** 实例节点规格，可填写4C16G、8C32G、16C64G、32C128G，不区分大小写。 */
   NodeType: string;
+  /** 实例计费模式，0表示后付费，即按量计费，1表示预付费，即包年包月。 */
+  PayMode: number;
   /** 实例可用区详细配置，当前支持多可用区，可用区数量只能为1或3，包含区域名称，VPC信息、节点数量，其中所有区域节点总数需大于等于3，小于等于50。 */
   ZoneSettings: ZoneSetting[];
-  /** 实例要绑定的标签列表。 */
-  Tags?: Tag[];
-  /** 预付费参数 */
-  PrePaySetting?: PrePaySetting;
-  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808 */
+  /** 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6---****-fae360632808 */
   ClientToken?: string;
   /** 部署模式 */
   DeploymentMode?: string;
+  /** 是否开启公网 IP 访问，默认 false。TCBase 开启后会创建并绑定 EIP；内网 CLB 绑定 EIP 后，CLB 安全组对来自 EIP 的流量不生效，对来自内网 CLB 的流量生效。 */
+  EnablePublicIP?: boolean;
+  /** 预付费参数 */
+  PrePaySetting?: PrePaySetting;
+  /** TCBase 实例 CLB 绑定的安全组 ID 列表，形如 sg-xxxxxxxx，可通过 DescribeSecurityGroups 获取。绑定后管控侧会尝试补充 TCP 80、5432、5433 入站放通规则。 */
+  SecurityGroupIds?: string[];
+  /** 实例要绑定的标签列表。 */
+  Tags?: Tag[];
+  /** 是否开启实例销毁保护，默认 false；true 表示开启，开启后不允许销毁实例。 */
+  TerminateProtection?: boolean;
   /** 服务用户名，对不需要用户名的服务不用传，8-16个字符，支持大写字母、小写字母、数字 */
   UserName?: string;
 }

@@ -988,6 +988,8 @@ declare interface WorkloadGroupConfig {
   EnableMemoryOverCommit?: boolean;
   /** cpu硬限制 */
   CpuHardLimit?: string;
+  /** 资源组归属的计算组ID */
+  ComputeGroup?: string;
   /** 4.1+ 新增；默认值为 0（不预留），根据业务可设为 5/10 */
   MinCpuPercent?: number;
   /** 4.1+ 新增；默认值为 0（不预留），根据业务可设为 5/10 */
@@ -1173,6 +1175,8 @@ declare interface CreateInstanceNewRequest {
   CacheDiskSize?: string;
   /** 缓存盘大小 */
   CacheDataDiskSize?: number;
+  /** 缓存盘介质，仅存算分离（IsSSC=true）时有效：CLOUD_HSSD=增强型SSD，ELASTIC_REMOTE_SSD=单副本SSD */
+  CacheDiskType?: string;
   /** 磁盘加密默认为0不加密，1表示加密 */
   DiskEncrypt?: number;
 }
@@ -1225,6 +1229,8 @@ declare interface DeleteWorkloadGroupRequest {
   InstanceId: string;
   /** 需要删除的资源组名称 */
   WorkloadGroupName?: string;
+  /** 资源组归属的计算组ID */
+  ComputeGroup?: string;
 }
 
 declare interface DeleteWorkloadGroupResponse {
@@ -1972,6 +1978,8 @@ declare interface DescribeWorkloadGroupResponse {
   WorkloadGroups?: WorkloadGroupConfig[];
   /** 是否开启资源组：开启-open、关闭-close */
   Status?: string;
+  /** 是否需要重建 */
+  NeedPodRebuild?: boolean;
   /** 错误信息 */
   ErrorMsg?: string;
   /** 是否开启监控，0：未开启，1：开启 */
@@ -2181,6 +2189,8 @@ declare interface ModifyWorkloadGroupStatusRequest {
   InstanceId: string;
   /** 是否开启资源组：open-开启、close-关闭 */
   OperationType?: string;
+  /** rolling_restart滚动\restart立即，存算分离开通时的Pod重建方式，默认滚动 */
+  RestartType?: string;
 }
 
 declare interface ModifyWorkloadGroupStatusResponse {

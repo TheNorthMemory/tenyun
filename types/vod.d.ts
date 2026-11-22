@@ -2527,6 +2527,8 @@ declare namespace V20180717 {
     FileInfos?: AigcVideoTaskOutputFileInfo[];
     /** 任务类型为 Procedure 的任务 ID。若发起创建 AIGC 生视频任务时指定了任务流模板(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。 */
     ProcedureTaskIds?: string[];
+    /** 输入视频时长。 */
+    TotalInputVideoDuration?: number;
     /** AIGC 生视频任务的用量信息。 */
     Usage?: AigcVideoTaskUsage;
   }
@@ -6763,7 +6765,7 @@ declare namespace V20180717 {
 
   /** 图片处理配置。 */
   interface ProcessImageAsyncTaskInput {
-    /** 图片异步处理模板ID。 */
+    /** 图片异步处理模板ID。可使用自定义模板ID，也可使用下列预制模板：模板编号（Definition）模板名称功能说明14图片理解图片内容分析、辅助分类与检索15AI擦除图片中文字或水印的擦除16图片修复图片修复与瑕疵处理，老照片修复17AI抠图主体抠图、背景替换前的素材准备19图片美颜人像照片美化20通用抠图商品或主体前景提取、素材合成22图片超分至4K图片超分-超分至4K-ultra（短边2160，长边自适应），可用于优化图片清晰度、高分辨率展示、大屏素材准备23图片超分至2K图片超分-超分至2K-ultra（短边1440，长边自适应），可用于优化图片清晰度、高分辨率图片展示、素材清晰度提升25图片压缩75质量图片压缩-75%质量-JPEG，可用于网页配图、缩略图等需要控制文件体积的场景27图片超分两倍超分图片超分-两倍超分-ultra，可用于小尺寸图片放大、提高展示分辨率与清晰度 */
     Definition: number;
     /** 图片异步处理扩展参数。 */
     ExtendedParameter?: ProcessImageAsyncInputExtendedParameter;

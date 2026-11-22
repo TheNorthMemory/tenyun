@@ -108,6 +108,8 @@ declare interface CreateNativeNodePoolParam {
   AutomationService?: boolean;
   /** 原生节点池密码 */
   Password?: string;
+  /** 原生节点池 containerd 镜像仓库定制（仅 containerd 生效）；非 containerd 节点池携带本字段会被消费侧忽略 */
+  Registry?: RegistryConfig;
   /** 自定义镜像 ID */
   CustomImage?: string;
   /** 原生节点池 containerd 运行时纯版本号，例如 1.7.28 或 1.7.28-tke.3。未指定或为空时使用原有 GPE 默认版本。仅对新建节点生效。 */
@@ -606,6 +608,24 @@ declare interface NodePool {
   External?: ExternalNodePoolInfo | null;
 }
 
+/** containerd 镜像仓库定制（仅 containerd 1.6+ 生效） */
+declare interface RegistryConfig {
+  /** 镜像加速站点列表，按 registry 维度渲染独立的 hosts.toml */
+  Mirrors?: RegistryMirror[];
+  /** 不安全镜像仓库（跳过证书校验） */
+  InsecureRegistries?: string[];
+}
+
+/** containerd 镜像加速站点 */
+declare interface RegistryMirror {
+  /** 源仓库，例如 docker.io / registry.k8s.io */
+  Registry: string;
+  /** 镜像加速地址列表，按顺序写入 hosts.toml */
+  Endpoints: string[];
+  /** 是否在 hosts.toml 中写入 override_path，为 true 时镜像 endpoints 路径不再追加 namespace 后缀 */
+  OverridePath?: boolean;
+}
+
 /** 普通节点信息 */
 declare interface RegularNodeInfo {
   /** 节点配置 */
@@ -780,6 +800,8 @@ declare interface UpdateNativeNodePoolParam {
   AutomationService?: boolean;
   /** 原生节点池密码 */
   Password?: string;
+  /** 节点的 containerd 镜像仓库定制（仅 containerd 运行时生效） */
+  Registry?: RegistryConfig;
   /** 自定义镜像 ID */
   CustomImage?: string;
 }

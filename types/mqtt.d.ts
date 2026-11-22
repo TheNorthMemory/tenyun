@@ -12,23 +12,25 @@ declare interface AuthorizationPolicyItem {
   PolicyName?: string;
   /** 规则语法版本，当前仅支持1，默认为1 */
   Version?: number;
-  /** 策略优先级，优先级ID越小表示策略越优先检查生效。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 策略优先级，优先级ID越小表示策略越优先检查生效。可参考 数据面授权策略说明。 */
   Priority?: number;
-  /** 决策allow：允许符合该策略的设备的访问请求。deny：拒绝覆盖该策略的设备的访问请求。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 决策allow：允许符合该策略的设备的访问请求。deny：拒绝覆盖该策略的设备的访问请求。可参考 数据面授权策略说明。 */
   Effect?: string;
-  /** 操作connect：连接pub：发布mqtt消息sub：订阅mqtt消息可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 操作connect：连接pub：发布mqtt消息sub：订阅mqtt消息可参考 数据面授权策略说明。 */
   Actions?: string;
-  /** 资源，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 资源，可参考 数据面授权策略说明。 */
   Resources?: string;
-  /** 条件-连接设备ID，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 条件-连接设备ID，可参考 数据面授权策略说明。 */
   ClientId?: string;
-  /** 条件-用户名，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 授权资源，支持函数表达式 */
+  ResourceItems?: string[];
+  /** 条件-用户名，可参考 数据面授权策略说明。 */
   Username?: string;
-  /** 条件-客户端IP地址，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 条件-客户端IP地址，可参考 数据面授权策略说明。 */
   Ip?: string;
-  /** 条件-服务质量，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 条件-服务质量，可参考 数据面授权策略说明。 */
   Qos?: string;
-  /** 条件-保留消息，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。1：表示匹配retain消息2：表示匹配非retain消息3：表示匹配retain和非retain消息 */
+  /** 条件-保留消息，可参考 数据面授权策略说明。1：表示匹配retain消息2：表示匹配非retain消息3：表示匹配retain和非retain消息 */
   Retain?: number;
   /** 备注，长度不超过128个字符。 */
   Remark?: string;
@@ -665,32 +667,34 @@ declare interface ApplyRegistrationCodeResponse {
 }
 
 declare interface CreateAuthorizationPolicyRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 策略名称，不能为空，3-64个字符，支持中文、字母、数字、“-”及“_”。 */
   PolicyName: string;
   /** 策略版本,默认为1，当前仅支持1 */
   PolicyVersion: number;
-  /** 策略优先级，越小越优先，不能重复，优先级ID越小表示策略越优先检查生效。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 策略优先级，越小越优先，不能重复，优先级ID越小表示策略越优先检查生效。可参考 数据面授权策略说明。 */
   Priority: number;
-  /** 决策：allow：允许符合该策略的设备的访问请求。deny：拒绝覆盖该策略的设备的访问请求。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 决策：allow：允许符合该策略的设备的访问请求。deny：拒绝覆盖该策略的设备的访问请求。可参考 数据面授权策略说明。 */
   Effect: string;
-  /** 操作,支持多选，多个操作用英文逗号隔开。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。connect：连接pub：发布sub：订阅 */
+  /** 操作,支持多选，多个操作用英文逗号隔开。可参考 数据面授权策略说明。connect：连接pub：发布sub：订阅 */
   Actions: string;
-  /** 条件-保留消息，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。1,匹配保留消息；2,匹配非保留消息，3.匹配保留和非保留消息 */
+  /** 条件-保留消息，可参考 数据面授权策略说明。1,匹配保留消息；2,匹配非保留消息，3.匹配保留和非保留消息 */
   Retain: number;
-  /** 条件：服务质量0：最多一次1：最少一次2：精确一次可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 条件：服务质量0：最多一次1：最少一次2：精确一次可参考 数据面授权策略说明。 */
   Qos: string;
-  /** 资源，需要匹配的订阅，支持配置多条匹配规则，多个用英文逗号隔开。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 资源，需要匹配的订阅，支持配置多条匹配规则，多个用英文逗号隔开。可参考 数据面授权策略说明。 */
   Resources?: string;
   /** 条件-用户名 */
   Username?: string;
   /** 条件：客户端ID，支持正则 */
   ClientId?: string;
-  /** 条件：客户端IP地址，支持IP或者CIDR，可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 条件：客户端IP地址，支持IP或者CIDR，可参考 数据面授权策略说明。 */
   Ip?: string;
   /** 备注信息，最长 128 字符 */
   Remark?: string;
+  /** 授权资源，支持函数表达式 */
+  ResourceItems?: string[];
 }
 
 declare interface CreateAuthorizationPolicyResponse {
@@ -1115,7 +1119,7 @@ declare interface DescribeAuthenticatorResponse {
 }
 
 declare interface DescribeAuthorizationPoliciesRequest {
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId?: string;
 }
 
@@ -1825,9 +1829,9 @@ declare interface KickOutClientResponse {
 }
 
 declare interface ModifyAuthorizationPolicyRequest {
-  /** 授权策略ID，从 [查询授权策略](https://cloud.tencent.com/document/product/1778/111074) 接口获取 */
+  /** 授权策略ID，从 查询授权策略 接口获取 */
   Id: number;
-  /** 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。 */
+  /** 腾讯云MQTT实例ID，从 DescribeInstanceList接口或控制台获得。 */
   InstanceId: string;
   /** 策略名称，不能为空，3-64个字符，支持中文、字母、数字、“-”及“_”。 */
   PolicyName?: string;
@@ -1837,9 +1841,9 @@ declare interface ModifyAuthorizationPolicyRequest {
   Priority?: number;
   /** 决策：allow 允许deny 拒绝 */
   Effect?: string;
-  /** 操作,支持多选，多个操作用英文逗号隔开。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。connect：连接pub：发布sub：订阅 */
+  /** 操作,支持多选，多个操作用英文逗号隔开。可参考 数据面授权策略说明。connect：连接pub：发布sub：订阅 */
   Actions?: string;
-  /** 资源，需要匹配的订阅，支持配置多条匹配规则，多个用英文逗号隔开。可参考 [数据面授权策略说明](https://cloud.tencent.com/document/product/1778/109715)。 */
+  /** 资源，需要匹配的订阅，支持配置多条匹配规则，多个用英文逗号隔开。可参考 数据面授权策略说明。 */
   Resources?: string;
   /** 条件-用户名 */
   Username?: string;
@@ -1853,6 +1857,8 @@ declare interface ModifyAuthorizationPolicyRequest {
   Qos?: string;
   /** 备注信息，最长 128 字符 */
   Remark?: string;
+  /** 授权资源列表，支持函数表达式 */
+  ResourceItems?: string[];
 }
 
 declare interface ModifyAuthorizationPolicyResponse {

@@ -8952,6 +8952,10 @@ declare interface VoiceInfo {
   Scenes?: string[];
   /** 音色所属引擎 */
   Engine?: string;
+  /** 音色创建时间 */
+  CreatedAt?: string;
+  /** 音色信息更新时间 */
+  UpdatedAt?: string;
 }
 
 /** 音色属性 */

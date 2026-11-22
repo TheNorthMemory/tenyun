@@ -302,6 +302,16 @@ declare interface AIGWLLMHealthCheckSetting {
   HealthCheckPath?: string;
 }
 
+/** IP 黑白名单配置。 */
+declare interface AIGWLLMIPRestrictionResult {
+  /** 是否开启 */
+  Enable?: boolean;
+  /** 限制类型枚举值：whiteList： 白名单blackList： 黑名单 */
+  RestrictionType?: string;
+  /** IP 或 CIDR 列表，每项须为合法 IP/CIDR（支持 IPv4/IPv6） */
+  AddressList?: string[];
+}
+
 /** 模型服务二级路由配置 */
 declare interface AIGWLLMModelServiceSubRoute {
   /** 生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个) */
@@ -3238,6 +3248,20 @@ declare interface DescribeAIGWCustomGuardrailPolicyResponse {
   RequestId?: string;
 }
 
+declare interface DescribeAIGWLLMModelAPIIPRestrictionRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 模型API ID */
+  ModelAPIId: string;
+}
+
+declare interface DescribeAIGWLLMModelAPIIPRestrictionResponse {
+  /** IP 黑白名单配置 */
+  Result?: AIGWLLMIPRestrictionResult;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCNGWServicesWithRoutesRequest {
   /** 网关ID */
   GatewayId: string;
@@ -3792,6 +3816,26 @@ declare interface ModifyAIGWCustomGuardrailPolicyResponse {
   RequestId?: string;
 }
 
+declare interface ModifyAIGWLLMModelAPIIPRestrictionRequest {
+  /** 网关实例id */
+  GatewayId: string;
+  /** 模型 API ID */
+  ModelAPIId: string;
+  /** 是否启用 IP 黑白名单 */
+  Enable?: boolean;
+  /** 限制类型枚举值：whiteList： 白名单blackList： 黑名单 */
+  RestrictionType?: string;
+  /** IP 或 CIDR 列表，每项须为合法 IP/CIDR（支持 IPv4/IPv6），长度 [1,400] */
+  AddressList?: string[];
+}
+
+declare interface ModifyAIGWLLMModelAPIIPRestrictionResponse {
+  /** 结果 */
+  Result?: boolean;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyCloudNativeAPIGatewayAIServiceSourceRequest {
   /** 实例 ID */
   GatewayId: string;
@@ -4335,6 +4379,8 @@ declare interface Cngw {
   DescribeAIGWCustomGuardrailPolicy(data: DescribeAIGWCustomGuardrailPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailPolicyResponse>;
   /** 查询自定义安全护栏策略列表 {@link DescribeAIGWCustomGuardrailPolicyListRequest} {@link DescribeAIGWCustomGuardrailPolicyListResponse} */
   DescribeAIGWCustomGuardrailPolicyList(data: DescribeAIGWCustomGuardrailPolicyListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWCustomGuardrailPolicyListResponse>;
+  /** 查询指定模型 API 的 IP 黑白名单配置 {@link DescribeAIGWLLMModelAPIIPRestrictionRequest} {@link DescribeAIGWLLMModelAPIIPRestrictionResponse} */
+  DescribeAIGWLLMModelAPIIPRestriction(data: DescribeAIGWLLMModelAPIIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAIGWLLMModelAPIIPRestrictionResponse>;
   /** 查询云原生网关服务和路由列表 {@link DescribeCNGWServicesWithRoutesRequest} {@link DescribeCNGWServicesWithRoutesResponse} */
   DescribeCNGWServicesWithRoutes(data: DescribeCNGWServicesWithRoutesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCNGWServicesWithRoutesResponse>;
   /** 查询AI配额配置详情 {@link DescribeCloudNativeAPIGatewayAIQuotaRequest} {@link DescribeCloudNativeAPIGatewayAIQuotaResponse} */
@@ -4395,6 +4441,8 @@ declare interface Cngw {
   ExportAIGWCustomGuardrailHits(data: ExportAIGWCustomGuardrailHitsRequest, config?: AxiosRequestConfig): AxiosPromise<ExportAIGWCustomGuardrailHitsResponse>;
   /** 修改自定义安全护栏策略 {@link ModifyAIGWCustomGuardrailPolicyRequest} {@link ModifyAIGWCustomGuardrailPolicyResponse} */
   ModifyAIGWCustomGuardrailPolicy(data: ModifyAIGWCustomGuardrailPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIGWCustomGuardrailPolicyResponse>;
+  /** 配置（创建或修改）模型 API 的 IP 黑白名单（PUT 覆盖语义） {@link ModifyAIGWLLMModelAPIIPRestrictionRequest} {@link ModifyAIGWLLMModelAPIIPRestrictionResponse} */
+  ModifyAIGWLLMModelAPIIPRestriction(data: ModifyAIGWLLMModelAPIIPRestrictionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAIGWLLMModelAPIIPRestrictionResponse>;
   /** 云原生网关修改AI服务来源 {@link ModifyCloudNativeAPIGatewayAIServiceSourceRequest} {@link ModifyCloudNativeAPIGatewayAIServiceSourceResponse} */
   ModifyCloudNativeAPIGatewayAIServiceSource(data: ModifyCloudNativeAPIGatewayAIServiceSourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCloudNativeAPIGatewayAIServiceSourceResponse>;
   /** 修改AI网关消费者 {@link ModifyCloudNativeAPIGatewayConsumerRequest} {@link ModifyCloudNativeAPIGatewayConsumerResponse} */

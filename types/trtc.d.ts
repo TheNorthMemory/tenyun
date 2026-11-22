@@ -3773,11 +3773,15 @@ declare interface VoiceCloneRequest {
   Language?: string;
   /** 拓展参数 */
   ExtraParams?: string;
+  /** 试听文本 */
+  PreviewText?: string;
 }
 
 declare interface VoiceCloneResponse {
   /** 克隆出的音色ID，可以用此id进行语音合成 */
   VoiceId?: string;
+  /** 试听音频url,请于24小时内尽快下载 */
+  PreviewUrl?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
