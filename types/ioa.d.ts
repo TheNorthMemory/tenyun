@@ -2191,6 +2191,8 @@ declare interface DescribeDeviceInfoResponse {
 declare interface DescribeDeviceSecurityInfoRequest {
   /** 设备唯一标识符 */
   Mid: string;
+  /** 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。 */
+  DomainInstanceId?: string;
 }
 
 declare interface DescribeDeviceSecurityInfoResponse {

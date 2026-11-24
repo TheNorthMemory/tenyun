@@ -906,6 +906,22 @@ declare interface DescribeServerManageTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeStableIPTaskRequest {
+  /** 环境 ID */
+  EnvId: string;
+  /** 任务 ID */
+  TaskId: number;
+}
+
+declare interface DescribeStableIPTaskResponse {
+  /** success | failed | running */
+  Result?: string;
+  /** 任务 ID */
+  TaskId?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeVersionDetailRequest {
   /** 环境Id */
   EnvId: string;
@@ -1187,6 +1203,8 @@ declare interface Tcbr {
   DescribeReleaseOrder(data: DescribeReleaseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseOrderResponse>;
   /** 查询服务管理任务信息 {@link DescribeServerManageTaskRequest} {@link DescribeServerManageTaskResponse} */
   DescribeServerManageTask(data: DescribeServerManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerManageTaskResponse>;
+  /** 查询固定 IP 任务状态 {@link DescribeStableIPTaskRequest} {@link DescribeStableIPTaskResponse} */
+  DescribeStableIPTask(data: DescribeStableIPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStableIPTaskResponse>;
   /** 查询版本详情 {@link DescribeVersionDetailRequest} {@link DescribeVersionDetailResponse} */
   DescribeVersionDetail(data: DescribeVersionDetailRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeVersionDetailResponse>;
   /** 初始化云托管资源 {@link InitializeCloudRunResourceRequest} {@link InitializeCloudRunResourceResponse} */

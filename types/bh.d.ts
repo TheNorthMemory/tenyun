@@ -664,6 +664,8 @@ declare interface LoginSetting {
   InactiveUserLock?: number;
   /** 运维账号单点登录开关：0-关闭，1-开启 */
   EnableSingleLogin?: number;
+  /** 主机指纹校验开关枚举值：0： 关闭1： 开启 */
+  EnableDeviceFingerprintVerify?: number;
 }
 
 /** OAuth认证配置 */
@@ -1475,6 +1477,8 @@ declare interface CheckLDAPConnectionRequest {
   DomainId?: string;
   /** 用户名称映射属性 */
   AttributeUserName?: string;
+  /** 堡垒机实例ID */
+  ResourceId?: string;
 }
 
 declare interface CheckLDAPConnectionResponse {
@@ -2387,6 +2391,8 @@ declare interface DescribeLDAPUnitSetRequest {
   IpBackup?: string;
   /** 网络域Id */
   DomainId?: string;
+  /** 堡垒机实例ID */
+  ResourceId?: string;
 }
 
 declare interface DescribeLDAPUnitSetResponse {
@@ -3025,6 +3031,8 @@ declare interface ModifyLDAPSettingRequest {
   AttributeEmail?: string;
   /** 网络域Id */
   DomainId?: string;
+  /** 堡垒机实例ID */
+  ResourceId?: string;
 }
 
 declare interface ModifyLDAPSettingResponse {

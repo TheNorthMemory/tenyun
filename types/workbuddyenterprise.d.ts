@@ -412,6 +412,32 @@ declare interface ScheduledTaskSummary {
   AgentConfig?: AgentConfig | null;
 }
 
+/** 会话物料结构 */
+declare interface SessionArtifactDetail {
+  /** 物料ID */
+  ArtifactId?: string;
+  /** 会话ID */
+  SessionId?: string;
+  /** AgentID */
+  AgentId?: string;
+  /** 文件名 */
+  FileName?: string;
+  /** 文件沙箱内路径 */
+  FilePath?: string;
+  /** 文件字节数 */
+  FileSizeBytes?: number;
+  /** 文件摘要值(Sha256) */
+  FileSha256?: string;
+  /** 物料状态枚举值：PENDING： 处理中READY： 准备完毕FAILED： 失败 */
+  Status?: string;
+  /** 创建时间参数格式：RFC3339 UTC */
+  CreatedTime?: string;
+  /** 更新时间参数格式：RFC3339 UTC */
+  UploadedTime?: string;
+  /** 过期时间参数格式：RFC3339 UTC */
+  ExpiredTime?: string;
+}
+
 /** 会话列表项 */
 declare interface SessionItem {
   /** 会话 ID */
@@ -567,6 +593,8 @@ declare interface CreateAgentSessionRequest {
   AgentId: string;
   /** 指定版本 ID（可选）。非空且合法时固定使用该版本，跳过 routing_config 权重挑选；指定版本需归属同一 Agent 且未被废弃 */
   VersionId?: string;
+  /** 会话创建来源，仅用于监控统计，不参与鉴权。page 表示页面端，adk 表示 ADK/API；不传或无法识别时统计为 unknown。 */
+  MetricEntry?: string;
 }
 
 declare interface CreateAgentSessionResponse {
@@ -713,9 +741,15 @@ declare interface DeleteScheduledTaskResponse {
 }
 
 declare interface DeleteSessionArtifactListRequest {
+  /** 会话ID */
+  SessionId?: string;
+  /** 需要删除的物料ID集合 */
+  ArtifactIds?: string[];
 }
 
 declare interface DeleteSessionArtifactListResponse {
+  /** 删除的物料数量 */
+  DeletedCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1157,17 +1191,43 @@ declare interface DescribeScheduledTaskResponse {
 }
 
 declare interface DescribeSessionArtifactDownloadUrlRequest {
+  /** 物料ID */
+  ArtifactId: string;
+  /** 产物过期时间单位：s */
+  ExpiredSeconds?: number;
 }
 
 declare interface DescribeSessionArtifactDownloadUrlResponse {
+  /** 产物下载地址 */
+  DownloadUrl?: string;
+  /** 产物过期时间 */
+  ExpiredTime?: string;
+  /** 产物对应文件名 */
+  FileName?: string;
+  /** 产物文件大小 */
+  FileSizeBytes?: number;
+  /** 文件摘要 */
+  FileSha256?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeSessionArtifactListRequest {
+  /** 会话ID */
+  SessionId?: string;
+  /** 偏移量，从 0 开始，默认 0（按 ID 批量查询时忽略） */
+  Offset?: number;
+  /** 每页数量，默认 20，最大 200（按 ID 批量查询时忽略） */
+  Limit?: number;
+  /** 标准过滤条件：ArtifactId（精确，多值 OR，携带即按 ID 批量查询，忽略分页）/ Keyword（模糊） */
+  Filters?: Filter[];
 }
 
 declare interface DescribeSessionArtifactListResponse {
+  /** 符合条件的物料总数（按 ID 批量时为实际命中数） */
+  TotalCount?: number;
+  /** 返回的物料集合 */
+  ArtifactSet?: SessionArtifactDetail[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1486,7 +1546,7 @@ declare interface Workbuddyenterprise {
   /** 查询自动化任务执行日志列表 {@link DescribeScheduledTaskLogListRequest} {@link DescribeScheduledTaskLogListResponse} */
   DescribeScheduledTaskLogList(data: DescribeScheduledTaskLogListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeScheduledTaskLogListResponse>;
   /** 获取下载链接 {@link DescribeSessionArtifactDownloadUrlRequest} {@link DescribeSessionArtifactDownloadUrlResponse} */
-  DescribeSessionArtifactDownloadUrl(data?: DescribeSessionArtifactDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionArtifactDownloadUrlResponse>;
+  DescribeSessionArtifactDownloadUrl(data: DescribeSessionArtifactDownloadUrlRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionArtifactDownloadUrlResponse>;
   /** 查询会话物料 {@link DescribeSessionArtifactListRequest} {@link DescribeSessionArtifactListResponse} */
   DescribeSessionArtifactList(data?: DescribeSessionArtifactListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSessionArtifactListResponse>;
   /** 查询技能列表 {@link DescribeSkillListRequest} {@link DescribeSkillListResponse} */

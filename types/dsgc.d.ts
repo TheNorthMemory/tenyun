@@ -1801,9 +1801,9 @@ declare interface ScanTaskCOSRules {
 /** 扫描任务选择的合规组信息 */
 declare interface ScanTaskComplianceInfo {
   /** 合规组ID */
-  ComplianceGroupId: number;
+  ComplianceGroupId?: number;
   /** 合规组名称 */
-  ComplianceGroupName: string;
+  ComplianceGroupName?: string;
 }
 
 /** 敏感识别任务RDB数据规则 */
@@ -1847,13 +1847,13 @@ declare interface SecurityProduct {
 /** 敏感等级分布 */
 declare interface SensitiveLevel {
   /** 分级标识ID */
-  LevelId: number;
+  LevelId?: number;
   /** 分级标识统计 */
-  LevelCnt: number;
+  LevelCnt?: number;
   /** 分级标识名称 */
-  LevelRiskName: string;
+  LevelRiskName?: string;
   /** 分级标识分数 */
-  LevelRiskScore: number;
+  LevelRiskScore?: number;
 }
 
 /** 生成的建议的风险等级矩阵 */
@@ -3327,6 +3327,10 @@ declare interface DescribeDSPACategoriesRequest {
   Offset?: number;
   /** 返回结果集数量，默认值是10000，最大值为10000，根据该资源的个数限制条件，该资源的个数不会超过10000，所以如果不输入该字段，默认获取全量数据 */
   Limit?: number;
+  /** 过滤条件（Id:分类id,Name:分类名称） */
+  Filters?: Filter[];
+  /** 关键字 */
+  Keyword?: string;
 }
 
 declare interface DescribeDSPACategoriesResponse {

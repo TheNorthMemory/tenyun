@@ -2502,6 +2502,8 @@ declare interface SecurityGroup {
   TagSet?: Tag[];
   /** 安全组更新时间。 */
   UpdateTime?: string;
+  /** 是否为托管安全组 */
+  ServiceManaged?: boolean;
 }
 
 /** 安全组关联的实例统计 */

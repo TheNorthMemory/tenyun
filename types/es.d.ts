@@ -1455,6 +1455,10 @@ declare namespace V20180416 {
     OldEsPrivateTcpUrl?: string;
     /** 是否需要从VIP下线旧节点 */
     NeedOfflineOldNodesNotify?: boolean;
+    /** 0 未开启 / 1 已开启 / 2 切换中 */
+    LvmStatus?: number;
+    /** 仅 LvmStatus=2 时返回，值为流程id */
+    LvmSwitchFlowId?: number;
   }
 
   /** ES集群日志详细信息 */
@@ -2854,6 +2858,8 @@ declare namespace V20180416 {
     EnableKibanaPublicAccess?: string;
     /** 已有的云监控告警策略 ID */
     AlarmPolicyIds?: string[];
+    /** LVM 控制台开关，0/不开，1/显式开启 */
+    EnableLvm?: number;
   }
 
   interface CreateInstanceResponse {

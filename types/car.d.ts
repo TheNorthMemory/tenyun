@@ -2,6 +2,32 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 查询过滤条件 */
+declare interface Filter {
+  /** 过滤字段名（ApplicationId 应用Id、ApplicationName 应用名称、ApplicationRunStatus 运行状态、ApplicationUpdateStatus 更新状态） */
+  Name: string;
+  /** 过滤值集合（当过滤 Name 为 ApplicationRunStatus 时，Values 取值为 [ApplicationDeleting 应用删除中、ApplicationCreateFail 应用创建失败、ApplicationCreating 应用创建中、ApplicationRunning 正常运行、ApplicationNoConfigured 主执行程序路径未配置 ]。当过滤 Name 为 ApplicationUpdateStatus 时，Values 取值 [ApplicationUpdateCreating 版本创建中、ApplicationUpdateCreateFail 版本创建失败、ApplicationUpdateNoReleased 版本待发布、ApplicationUpdateReleased 版本发布完成、ApplicationUpdateNormal 无]） */
+  Values: string[];
+}
+
+/** MCP Token 信息 */
+declare interface MCPTokenInfo {
+  /** TokenId用于管理 Token 数据，可用来延长对应 Token 有效时间 */
+  TokenId?: string;
+  /** Token 名称（注释） */
+  TokenName?: string;
+  /** 用户 Id固定使用这个 UserId 来操作云渲染并发资源（为空不限制） */
+  UserId?: string;
+  /** 权限范围默认值：["*"]用于指定操作权限，默认拥有全部权限 */
+  Scopes?: string[];
+  /** Token 状态枚举值：ACTIVE： 正常状态，未被吊销。不代表还在有效期内REVOKED： 已被吊销，永久失效默认值：ACTIVE */
+  Status?: string;
+  /** Token 创建时间 */
+  CreatedTime?: string;
+  /** Token 过期时间 */
+  ExpiresTime?: string;
+}
+
 declare interface ApplyConcurrentRequest {
   /** 唯一用户身份标识，由业务方自定义，平台不予理解。（可根据业务需要决定使用用户的唯一身份标识或是使用时间戳随机生成；在用户重连时应保持UserId不变） */
   UserId: string;
@@ -21,9 +47,19 @@ declare interface ApplyConcurrentResponse {
 }
 
 declare interface CreateMCPTokenRequest {
+  /** Token 过期时间取值范围：[0, 2592000]单位：秒默认值：86400不填的话，默认为 1 天超时；过期时间为当前时间 + 超时时间 */
+  ExpireSeconds: number;
+  /** Token 名称（注释）参数格式：只支持：中英文、数字、连字符 "-" 的组合长度不得超过 16 个字符 */
+  TokenName?: string;
+  /** 用户 Id参数格式：只支持：字母（A-Za-z）、数字（0-9）、下划线（_）的组合固定使用这个 UserId 来操作云渲染并发资源，长度不能超过 64 个字符 */
+  UserId?: string;
 }
 
 declare interface CreateMCPTokenResponse {
+  /** TokenId */
+  TokenId?: string;
+  /** MCP Token 当前值请妥善保存，后续需要使用该 Token 和 MCP Server 进行通信操作，丢失后无法再查看 */
+  Token?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -69,9 +105,19 @@ declare interface DescribeConcurrentCountResponse {
 }
 
 declare interface DescribeMCPTokensRequest {
+  /** 偏移量 */
+  Offset?: number;
+  /** 单页数量取值范围：[0, 200]默认值：20如果传入 0 会使用默认值 */
+  Limit?: number;
+  /** 过滤器列表只支持 TokenId 和 TokenName 过滤，Filters 数量不能超过 10、每个 Filter 的 Values 个数不能超过 20、单个 Value 长度不能超过 64 个字符、不允许同名 Filter 出现 */
+  Filters?: Filter[];
 }
 
 declare interface DescribeMCPTokensResponse {
+  /** Token 列表 */
+  Tokens?: MCPTokenInfo[];
+  /** Token 数量单位：个 */
+  TotalCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -87,6 +133,10 @@ declare interface DestroySessionResponse {
 }
 
 declare interface RenewMCPTokenRequest {
+  /** TokenId */
+  TokenId: string;
+  /** Token 过期时间取值范围：[0, 2592000]默认值：86400单位 秒、不填的话，默认为 1 天；新的超时时间为，当前时刻 + ExpireSeconds */
+  ExpireSeconds: number;
 }
 
 declare interface RenewMCPTokenResponse {
@@ -134,7 +184,7 @@ declare interface Car {
   /** 申请并发 {@link ApplyConcurrentRequest} {@link ApplyConcurrentResponse} */
   ApplyConcurrent(data: ApplyConcurrentRequest, config?: AxiosRequestConfig): AxiosPromise<ApplyConcurrentResponse>;
   /** 创建 MCP Token {@link CreateMCPTokenRequest} {@link CreateMCPTokenResponse} */
-  CreateMCPToken(data?: CreateMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMCPTokenResponse>;
+  CreateMCPToken(data: CreateMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMCPTokenResponse>;
   /** 创建会话 {@link CreateSessionRequest} {@link CreateSessionResponse} */
   CreateSession(data: CreateSessionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateSessionResponse>;
   /** 获取并发计数 {@link DescribeConcurrentCountRequest} {@link DescribeConcurrentCountResponse} */
@@ -144,7 +194,7 @@ declare interface Car {
   /** 销毁会话 {@link DestroySessionRequest} {@link DestroySessionResponse} */
   DestroySession(data: DestroySessionRequest, config?: AxiosRequestConfig): AxiosPromise<DestroySessionResponse>;
   /** 续期 MCP Token {@link RenewMCPTokenRequest} {@link RenewMCPTokenResponse} */
-  RenewMCPToken(data?: RenewMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewMCPTokenResponse>;
+  RenewMCPToken(data: RenewMCPTokenRequest, config?: AxiosRequestConfig): AxiosPromise<RenewMCPTokenResponse>;
   /** 开始云端推流 {@link StartPublishStreamRequest} {@link StartPublishStreamResponse} */
   StartPublishStream(data: StartPublishStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartPublishStreamResponse>;
   /** 开始云端推流到指定URL {@link StartPublishStreamWithURLRequest} {@link StartPublishStreamWithURLResponse} */

@@ -103,7 +103,7 @@ declare interface TextToVoiceRequest {
   ProjectId?: number;
   /** 模型类型，1-默认模型。 */
   ModelType?: number;
-  /** 音色 ID，包括精品音色、大模型音色与基础版复刻音色。不同音色价格有差异，详情请参见购买指南。完整的音色 ID 列表请参见音色列表。若使用一句话版声音复刻，请填入固定值“200000000”。 */
+  /** 音色 ID，包括精品音色、大模型音色与基础版复刻音色。不同音色价格有差异，详情请参见购买指南。完整的音色 ID 列表请参见音色列表。若使用一句话版声音复刻1.0(EngineType=WXZL)，请填入固定值“200000000”；若使用一句话版声音复刻2.0(EngineType=YTLX_V2)，请填入固定值“200000400”。 */
   VoiceType?: number;
   /** 一句话版声音复刻音色ID，使用一句话版声音复刻音色时需填写。 */
   FastVoiceType?: string;

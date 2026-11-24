@@ -540,6 +540,14 @@ declare interface DropIndex {
   IndexName?: string;
 }
 
+/** 同[EipOutConfig](https://document.capi.woa.com/document/product/583/17244) */
+declare interface EipOutConfig {
+  /** 是否固定 EIP */
+  EipFixed?: string | null;
+  /** EIP 列表 */
+  Eips?: string[] | null;
+}
+
 /** 邮箱登录配置 */
 declare interface EmailProviderConfig {
   /** smtp配置 */
@@ -686,6 +694,12 @@ declare interface EnvPkgCreditsUsage {
   PackageDeductValue?: number;
   /** 资源点按量用量 */
   ReportValue?: number;
+}
+
+/** 同[Environment](https://document.capi.woa.com/document/product/583/17244) */
+declare interface EnvironmentOut {
+  /** 环境变量数组 */
+  Variables?: Variable[] | null;
 }
 
 /** 外部存储。标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。 */
@@ -3994,6 +4008,8 @@ declare interface GetFunctionResponse {
   VpcConfig?: FunctionVpcConfig | null;
   /** 是否使用 GPU ("TRUE"/"FALSE") */
   UseGpu?: string;
+  /** 环境变量 */
+  Environment?: EnvironmentOut | null;
   /** 代码校验结果 ("success"/"failed") */
   CodeResult?: string;
   /** 代码错误码 */
@@ -4006,10 +4022,16 @@ declare interface GetFunctionResponse {
   InstallDependency?: string;
   /** 函数状态 ("Active", "Inactive" 等) */
   Status?: string;
+  /** CLS 日志集 ID */
+  ClsLogsetId?: string;
+  /** CLS Topic ID */
+  ClsTopicId?: string;
   /** 函数 ID */
   FunctionId?: string;
   /** 标签列表 */
   Tags?: Tag[] | null;
+  /** EIP 配置 */
+  EipConfig?: EipOutConfig | null;
   /** 函数类型 ("HTTP" 或 "Event") */
   Type?: string;
   /** 是否启用 L5 ("TRUE"/"FALSE") */
@@ -4293,6 +4315,8 @@ declare interface ModifyPGInstanceSpecRequest {
   SwitchEndTime?: string;
   /** 预检 */
   DryRun?: boolean;
+  /** 实例Cpu 核数取值范围：[0.1, 1024]单位：核数当 CpuCores 和 Cpu 共存时，优先 CpuCores 生效 */
+  CpuCores?: number;
 }
 
 declare interface ModifyPGInstanceSpecResponse {

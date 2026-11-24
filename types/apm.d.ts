@@ -482,6 +482,8 @@ declare interface ApmPrometheusRules {
   MetricMatchType?: number | null;
   /** 是否追加资源属性 */
   AppendResourceAttributes?: boolean;
+  /** 实际生效的关联记录 ID（存量 0 解析为默认关联） */
+  AssociationId?: number | null;
 }
 
 /** 采样配置信息 */
@@ -1035,6 +1037,8 @@ declare interface CreateApmPrometheusRuleRequest {
   InstanceId: string;
   /** 是否追加资源属性 */
   AppendResourceAttributes?: boolean;
+  /** 归属的关联记录 ID，0 或不传表示跟随默认关联 */
+  AssociationId?: number;
 }
 
 declare interface CreateApmPrometheusRuleResponse {
@@ -1215,6 +1219,8 @@ declare interface DescribeApmInstancesResponse {
 declare interface DescribeApmPrometheusRuleRequest {
   /** 业务系统ID */
   InstanceId: string;
+  /** 按有效关联过滤，0 或不传表示不过滤 */
+  AssociationId?: number;
 }
 
 declare interface DescribeApmPrometheusRuleResponse {
@@ -1973,6 +1979,8 @@ declare interface ModifyApmPrometheusRuleRequest {
   MetricNameRule?: string;
   /** 是否追加资源属性 */
   AppendResourceAttributes?: boolean;
+  /** 修改归属目标 ID，0 或不传表示不改变原归属 */
+  AssociationId?: number;
 }
 
 declare interface ModifyApmPrometheusRuleResponse {

@@ -1304,6 +1304,48 @@ declare interface CustomField {
   Enabled?: boolean;
 }
 
+/** 安全自定义组用于集中管理一组可复用的安全匹配条目，例如可以将多个 JA3/JA4 TLS 指纹保存为一个 TLS 指纹组，并在安全规则中直接引用该组，从而避免在多条规则中重复维护相同的指纹列表。 */
+declare interface CustomGroup {
+  /** 自定义组的唯一标识 ID。 */
+  GroupId?: string;
+  /** 自定义组名称。 */
+  GroupName?: string;
+  /** 自定义组类型。枚举值：TLSFingerprint： TLS 指纹组UA： UA 组Referer： Referer 组 */
+  GroupType?: string;
+  /** 自定义组条目列表。 */
+  GroupItems?: CustomGroupItem[];
+  /** 自定义组条目总数量。 */
+  GroupItemTotalCount?: number;
+  /** 自定义组被引用的次数。 */
+  RefCount?: number;
+}
+
+/** 自定义组条目。 */
+declare interface CustomGroupItem {
+  /** 条目内容。 */
+  Content: string;
+  /** 条目类型。枚举值：JA3： JA3 指纹，仅当所属组 GroupType 为 TLSFingerprint 时可用JA4： JA4 指纹，仅当所属组 GroupType 为 TLSFingerprint 时可用UA： UA 值，仅当所属组 GroupType 为 UA 时可用Referer： Referer 值，仅当所属组 GroupType 为 Referer 时可用 */
+  ItemType: string;
+}
+
+/** 引用自定义组的安全模块 */
+declare interface CustomGroupReference {
+  /** 站点 ID。 */
+  ZoneId?: string;
+  /** 实体类型。枚举值：WebSec.ZonePolicy： 站点级防护策略WebSec.HostPolicy： 域名级防护策略WebSec.Template： 策略模板WebSec.APIResource： API 资源WebSec.JSInjectionRule： 注入规则DDoS.L4Proxy： 四层代理 DDoS 防护DDoS.L3Transit： 三层代播 DDoS 防护 */
+  EntityType?: string;
+  /** 实体标识，根据 EntityType 不同代表不同的含义：WebSec.ZonePolicy：站点 IDWebSec.HostPolicy：域名WebSec.Template：模板 IDWebSec.APIResource：API 资源 IDWebSec.JSInjectionRule：JavaScript 注入规则 IDDDoS.L4Proxy：实例 IDDDoS.L3Transit：实例 ID */
+  EntityId?: string;
+  /** 实体标识，根据 EntityType 不同代表不同的含义：WebSec.ZonePolicy：空WebSec.HostPolicy：空WebSec.Template：模板名称WebSec.APIResource：API 资源名称WebSec.JSInjectionRule：JavaScript 注入规则名称DDoS.L4Proxy：空DDoS.L3Transit：空 */
+  EntityName?: string;
+  /** 子实体类型。枚举值：WebSec.ExceptionRule： 防护例外规则WebSec.BasicAccessRule： 基础访问管控WebSec.PreciseMatchRule： 精确匹配规则WebSec.RateLimitRule： 精准速率限制WebSec.BotCustomRule： 高级 Bot 管理 - 自定义规则DDoS.L4Proxy.IpAccessControl： 四层代理 DDoS 防护 - IP 黑白名单DDoS.L3Transit.IpAccessControl： 三层代播 DDoS 防护 - IP 黑白名单 */
+  SubEntityType?: string;
+  /** 子实体标识，根据 SubEntityType 不同代表不同的含义：WebSec.ExceptionRule：规则 IDWebSec.BasicAccessRule：规则 IDWebSec.PreciseMatchRule：规则 IDWebSec.RateLimitRule：规则 IDWebSec.BotCustomRule：规则 IDDDoS.L4Proxy.IpAccessControl：空DDoS.L3Transit.IpAccessControl：空EntityType 与 SubEntityType 为对应关系，不同的 EntityType 支持不同的 SubEntityType。WebSec.ZonePolicy，WebSec.HostPolicy 和 WebSec.Template 支持如下 SubEntityType：WebSec.ExceptionRuleWebSec.BasicAccessRuleWebSec.PreciseMatchRuleWebSec.RateLimitRuleWebSec.BotCustomRuleDDoS.L4Proxy 支持如下 SubEntityType：DDoS.L4Proxy.IpAccessControlDDoS.L3Transit 支持如下 SubEntityType：DDoS.L3Transit.IpAccessControl */
+  SubEntityId?: string;
+  /** 子实体名称，根据 SubEntityType 不同代表不同的含义：WebSec.ExceptionRule：规则名称WebSec.BasicAccessRule：规则名称WebSec.PreciseMatchRule：规则名称WebSec.RateLimitRule：规则名称WebSec.BotCustomRule：规则名称DDoS.L4Proxy.IpAccessControl：空DDoS.L3Transit.IpAccessControl：空 */
+  SubEntityName?: string;
+}
+
 /** Web 防护功能下的自定义规则。 */
 declare interface CustomRule {
   /** 自定义规则的名称。 */
@@ -5562,6 +5604,30 @@ declare interface CreateContentIdentifierResponse {
   RequestId?: string;
 }
 
+declare interface CreateCustomGroupRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义组名称。 */
+  GroupName: string;
+  /** 自定义组类型。创建后不可修改，不同类型的自定义组支持的条目类型不同。枚举值：TLSFingerprint： TLS 指纹组，支持 JA3、JA4 类型的条目UA： UA 组，支持 UA 类型的条目Referer： Referer 组，支持 Referer 类型的条目 */
+  GroupType: string;
+  /** 自定义组条目列表。 */
+  GroupItems: CustomGroupItem[];
+}
+
+declare interface CreateCustomGroupResponse {
+  /** 自定义组唯一标识 ID。 */
+  GroupId?: string;
+  /** 自定义组名称。 */
+  GroupName?: string;
+  /** 自定义组类型。枚举值：TLSFingerprint： TLS 指纹组UA： UA 组Referer： Referer 组 */
+  GroupType?: string;
+  /** 自定义组条目列表。 */
+  GroupItems?: CustomGroupItem[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateCustomizeErrorPageRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -6292,6 +6358,18 @@ declare interface DeleteCustomErrorPageResponse {
   RequestId?: string;
 }
 
+declare interface DeleteCustomGroupRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义组唯一标识 ID。 */
+  GroupId: string;
+}
+
+declare interface DeleteCustomGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DeleteDnsRecordsRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -6832,6 +6910,74 @@ declare interface DescribeCustomErrorPagesResponse {
   TotalCount?: number;
   /** 自定义响应页面数据列表。 */
   ErrorPages?: CustomErrorPage[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomGroupReferencesRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义组 ID。 */
+  GroupId: string;
+  /** 分页偏移量。默认值：0 */
+  Offset?: number;
+  /** 分页查询引用自定义组的配置条数。取值范围：[1, 200]默认值：20 */
+  Limit?: number;
+}
+
+declare interface DescribeCustomGroupReferencesResponse {
+  /** 引用对应自定义组的配置信息。 */
+  References?: CustomGroupReference[];
+  /** 查询结果总数。 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomGroupRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义组唯一标识 ID。 */
+  GroupId: string;
+  /** GroupItems 分页查询限制数目。取值范围：[1, 50000]默认值：500 */
+  Limit?: number;
+  /** GroupItems 分页查询偏移量。默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeCustomGroupResponse {
+  /** 自定义组唯一标识 ID。 */
+  GroupId?: string;
+  /** 自定义组名称。 */
+  GroupName?: string;
+  /** 自定义组类型。枚举值：TLSFingerprint： TLS 指纹组UA： UA 组Referer： Referer 组 */
+  GroupType?: string;
+  /** 自定义组条目列表。 */
+  GroupItems?: CustomGroupItem[];
+  /** 自定义组条目总数量。 */
+  GroupItemTotalCount?: number;
+  /** 自定义组被引用的次数。 */
+  RefCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeCustomGroupsRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义组类型列表。不传则查询所有类型的列表。 */
+  GroupTypes?: string[];
+  /** 分页查询限制数目。取值范围：[1, 100]默认值：10 */
+  Limit?: number;
+  /** 分页查询偏移量。默认值：0 */
+  Offset?: number;
+}
+
+declare interface DescribeCustomGroupsResponse {
+  /** 满足类型列表条件的自定义组总数量。 */
+  GroupTotalCount?: number;
+  /** 满足类型列表条件的自定义组列表。 */
+  CustomGroups?: CustomGroup[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -8810,6 +8956,24 @@ declare interface ModifyCustomErrorPageResponse {
   RequestId?: string;
 }
 
+declare interface ModifyCustomGroupRequest {
+  /** 站点 ID。 */
+  ZoneId: string;
+  /** 自定义组唯一标识 ID。 */
+  GroupId: string;
+  /** 自定义组名称。该字段不填时则保留原值。 */
+  GroupName?: string;
+  /** 指定本次对 GroupItems 的更新方式。枚举值：Replace： 使用 GroupItems 全量替换原有条目列表Append： 追加 GroupItems 到组条目列表中Remove： 从原有条目列表中移除与 GroupItems 中 Content 和 ItemType 均相同的条目。若指定条目不存在，则忽略该条目默认值：Replace */
+  GroupItemOperation?: string;
+  /** 自定义组条目列表。该字段不填时则保留原值。 */
+  GroupItems?: CustomGroupItem[];
+}
+
+declare interface ModifyCustomGroupResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyDDoSProtectionRequest {
   /** 站点 ID。 */
   ZoneId: string;
@@ -9885,6 +10049,8 @@ declare interface Teo {
   CreateConfigGroupVersion(data: CreateConfigGroupVersionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateConfigGroupVersionResponse>;
   /** 创建内容标识符 {@link CreateContentIdentifierRequest} {@link CreateContentIdentifierResponse} */
   CreateContentIdentifier(data: CreateContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<CreateContentIdentifierResponse>;
+  /** 创建自定义组 {@link CreateCustomGroupRequest} {@link CreateCustomGroupResponse} */
+  CreateCustomGroup(data: CreateCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomGroupResponse>;
   /** 创建自定义响应页面 {@link CreateCustomizeErrorPageRequest} {@link CreateCustomizeErrorPageResponse} */
   CreateCustomizeErrorPage(data: CreateCustomizeErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<CreateCustomizeErrorPageResponse>;
   /** 创建 DNS 记录 {@link CreateDnsRecordRequest} {@link CreateDnsRecordResponse} */
@@ -9963,6 +10129,8 @@ declare interface Teo {
   DeleteContentIdentifier(data: DeleteContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteContentIdentifierResponse>;
   /** 删除自定义响应页面 {@link DeleteCustomErrorPageRequest} {@link DeleteCustomErrorPageResponse} */
   DeleteCustomErrorPage(data: DeleteCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomErrorPageResponse>;
+  /** 删除自定义组 {@link DeleteCustomGroupRequest} {@link DeleteCustomGroupResponse} */
+  DeleteCustomGroup(data: DeleteCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteCustomGroupResponse>;
   /** 批量删除 DNS 记录 {@link DeleteDnsRecordsRequest} {@link DeleteDnsRecordsResponse} */
   DeleteDnsRecords(data: DeleteDnsRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteDnsRecordsResponse>;
   /** 删除 KV 命名空间 {@link DeleteEdgeKVNamespaceRequest} {@link DeleteEdgeKVNamespaceResponse} */
@@ -10037,6 +10205,12 @@ declare interface Teo {
   DescribeContentQuota(data: DescribeContentQuotaRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeContentQuotaResponse>;
   /** 查询自定义响应页面列表 {@link DescribeCustomErrorPagesRequest} {@link DescribeCustomErrorPagesResponse} */
   DescribeCustomErrorPages(data: DescribeCustomErrorPagesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomErrorPagesResponse>;
+  /** 查询自定义组 {@link DescribeCustomGroupRequest} {@link DescribeCustomGroupResponse} */
+  DescribeCustomGroup(data: DescribeCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomGroupResponse>;
+  /** 查询自定义组引用信息 {@link DescribeCustomGroupReferencesRequest} {@link DescribeCustomGroupReferencesResponse} */
+  DescribeCustomGroupReferences(data: DescribeCustomGroupReferencesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomGroupReferencesResponse>;
+  /** 查询自定义组列表 {@link DescribeCustomGroupsRequest} {@link DescribeCustomGroupsResponse} */
+  DescribeCustomGroups(data: DescribeCustomGroupsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCustomGroupsResponse>;
   /** 查询DDoS攻击时序数据 {@link DescribeDDoSAttackDataRequest} {@link DescribeDDoSAttackDataResponse} */
   DescribeDDoSAttackData(data: DescribeDDoSAttackDataRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSAttackDataResponse>;
   /** 查询DDoS攻击事件列表 {@link DescribeDDoSAttackEventRequest} {@link DescribeDDoSAttackEventResponse} */
@@ -10239,6 +10413,8 @@ declare interface Teo {
   ModifyContentIdentifier(data: ModifyContentIdentifierRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyContentIdentifierResponse>;
   /** 修改自定义响应页面 {@link ModifyCustomErrorPageRequest} {@link ModifyCustomErrorPageResponse} */
   ModifyCustomErrorPage(data: ModifyCustomErrorPageRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomErrorPageResponse>;
+  /** 修改自定义组 {@link ModifyCustomGroupRequest} {@link ModifyCustomGroupResponse} */
+  ModifyCustomGroup(data: ModifyCustomGroupRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyCustomGroupResponse>;
   /** 修改站点的独立 DDoS 防护 {@link ModifyDDoSProtectionRequest} {@link ModifyDDoSProtectionResponse} */
   ModifyDDoSProtection(data: ModifyDDoSProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSProtectionResponse>;
   /** 批量修改 DNS 记录 {@link ModifyDnsRecordsRequest} {@link ModifyDnsRecordsResponse} */

@@ -7092,6 +7092,22 @@ declare interface StartLiveStreamMonitorResponse {
   RequestId?: string;
 }
 
+declare interface StartLiveSubtitleRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 操作人备注信息。 */
+  Operator?: string;
+}
+
+declare interface StartLiveSubtitleResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface StopAvatarEditingLiveRequest {
   /** 通道ID，通常是待编辑的直播流的源ID */
   ChannelId: string;
@@ -7172,6 +7188,22 @@ declare interface StopLiveStreamMonitorRequest {
 }
 
 declare interface StopLiveStreamMonitorResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface StopLiveSubtitleRequest {
+  /** 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。 */
+  AppName: string;
+  /** 您的推流域名。 */
+  PushDomainName: string;
+  /** 流名称。 */
+  StreamName: string;
+  /** 操作人备注信息。 */
+  Operator?: string;
+}
+
+declare interface StopLiveSubtitleResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -7787,6 +7819,8 @@ declare interface Live {
   StartLivePadStream(data: StartLivePadStreamRequest, config?: AxiosRequestConfig): AxiosPromise<StartLivePadStreamResponse>;
   /** 启动直播流监播任务 {@link StartLiveStreamMonitorRequest} {@link StartLiveStreamMonitorResponse} */
   StartLiveStreamMonitor(data: StartLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveStreamMonitorResponse>;
+  /** 开始直播字幕 {@link StartLiveSubtitleRequest} {@link StartLiveSubtitleResponse} */
+  StartLiveSubtitle(data: StartLiveSubtitleRequest, config?: AxiosRequestConfig): AxiosPromise<StartLiveSubtitleResponse>;
   /** 停止实时编辑数字人 {@link StopAvatarEditingLiveRequest} {@link StopAvatarEditingLiveResponse} */
   StopAvatarEditingLive(data: StopAvatarEditingLiveRequest, config?: AxiosRequestConfig): AxiosPromise<StopAvatarEditingLiveResponse>;
   /** 停止导播台主监任务 {@link StopCasterPgmRequest} {@link StopCasterPgmResponse} */
@@ -7801,6 +7835,8 @@ declare interface Live {
   StopLiveRecord(data: StopLiveRecordRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveRecordResponse>;
   /** 停止直播流监播任务 {@link StopLiveStreamMonitorRequest} {@link StopLiveStreamMonitorResponse} */
   StopLiveStreamMonitor(data: StopLiveStreamMonitorRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveStreamMonitorResponse>;
+  /** 停止直播字幕 {@link StopLiveSubtitleRequest} {@link StopLiveSubtitleResponse} */
+  StopLiveSubtitle(data: StopLiveSubtitleRequest, config?: AxiosRequestConfig): AxiosPromise<StopLiveSubtitleResponse>;
   /** 终止录制任务（新） {@link StopRecordTaskRequest} {@link StopRecordTaskResponse} */
   StopRecordTask(data: StopRecordTaskRequest, config?: AxiosRequestConfig): AxiosPromise<StopRecordTaskResponse>;
   /** 终止截图任务 {@link StopScreenshotTaskRequest} {@link StopScreenshotTaskResponse} */
