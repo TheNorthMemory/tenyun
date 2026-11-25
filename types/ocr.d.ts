@@ -1810,9 +1810,9 @@ declare interface ReasoningResult {
   RenderedPrompt?: string;
 }
 
-/** 解析失败的页数 */
+/** 解析失败的页码 */
 declare interface ReconstructDocumentFailedPage {
-  /** 解析失败页数。 */
+  /** 解析失败页码。 */
   PageNumber?: number;
 }
 

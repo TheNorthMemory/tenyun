@@ -906,6 +906,22 @@ declare interface DescribeServerManageTaskResponse {
   RequestId?: string;
 }
 
+declare interface DescribeStableIPRequest {
+  /** 环境ID */
+  EnvId: string;
+}
+
+declare interface DescribeStableIPResponse {
+  /** 固定 IP 地址 */
+  Address?: string;
+  /** 状态：normal 正常 isolate 隔离 */
+  Status?: string;
+  /** 过期时间 */
+  ExpireTime?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeStableIPTaskRequest {
   /** 环境 ID */
   EnvId: string;
@@ -1203,6 +1219,8 @@ declare interface Tcbr {
   DescribeReleaseOrder(data: DescribeReleaseOrderRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeReleaseOrderResponse>;
   /** 查询服务管理任务信息 {@link DescribeServerManageTaskRequest} {@link DescribeServerManageTaskResponse} */
   DescribeServerManageTask(data: DescribeServerManageTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeServerManageTaskResponse>;
+  /** 获取固定IP {@link DescribeStableIPRequest} {@link DescribeStableIPResponse} */
+  DescribeStableIP(data: DescribeStableIPRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStableIPResponse>;
   /** 查询固定 IP 任务状态 {@link DescribeStableIPTaskRequest} {@link DescribeStableIPTaskResponse} */
   DescribeStableIPTask(data: DescribeStableIPTaskRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeStableIPTaskResponse>;
   /** 查询版本详情 {@link DescribeVersionDetailRequest} {@link DescribeVersionDetailResponse} */
@@ -1237,8 +1255,6 @@ declare interface Tcbr {
   DescribeCloudRunPeeringConnection(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   DescribeCloudRunPeeringConnectionQuota(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
-  /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
-  DescribeStableIP(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
   /** abstract via [@wxcloud/cloudapi@1.1.4](https://www.npmjs.com/package/@wxcloud/cloudapi) */
   RecoverEnv(data?: any, config?: AxiosRequestConfig): AxiosPromise<any>;
 }

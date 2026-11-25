@@ -6,6 +6,8 @@ import { AxiosPromise, AxiosRequestConfig } from "axios";
 declare interface AcceleratorAreas {
   /** 加速地域。 */
   AccelerateRegion: string;
+  /** 加速地域名称。 */
+  AccelerateRegionName?: string;
   /** 带宽。 */
   Bandwidth?: number;
   /** 支持'BGP', 'QUALITY_BGP', 'STATIC_IP'，默认BGP。枚举值：BGP： BGPSTATIC_IP： 三网QUALITY_BGP： 精品BGP */

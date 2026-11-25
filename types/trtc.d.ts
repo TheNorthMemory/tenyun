@@ -780,7 +780,7 @@ declare interface ModerationParams {
   ModerationSupplierParam?: ModerationSupplierParam;
   /** 是否保存文件: 0不保存文件 1保存所有文件 2仅保存命中文件 */
   SaveModerationFile?: number;
-  /** 是否回调所有内容理解结果:0 默认回调所有结果 1 仅回调命中结果 */
+  /** 是否回调所有内容理解结果: 0 默认回调所有结果 1 仅回调命中结果 */
   CallbackAllResults?: number;
   /** 指定订阅流白名单或者黑名单。 */
   SubscribeStreamUserIds?: SubscribeModerationUserIds;
@@ -2450,6 +2450,8 @@ declare interface DescribeFinanceCloudRoomUsageRequest {
 }
 
 declare interface DescribeFinanceCloudRoomUsageResponse {
+  /** 房间维度用量数据，csv 格式，单位秒。表头固定为 RoomId,Duration。 */
+  Data?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

@@ -682,6 +682,10 @@ declare interface AppModelConfig {
   PromptRewriteModel: PromptRewriteModel | null;
   /** 思考模型配置 */
   ThinkModel: ThinkModel | null;
+  /** 实时文档切分模型 */
+  FileSplitModel?: FileSplitModel | null;
+  /** 表头拆分模型 */
+  HeaderExtractModel?: HeaderExtractModel | null;
 }
 
 /** 应用操作信息 */
@@ -796,6 +800,8 @@ declare interface AppToolConfig {
 
 /** AppTrigger */
 declare interface AppTrigger {
+  /** Agent ID，scope=USER 时可选。 */
+  AgentId?: string;
   /** 应用ID */
   AppId?: string;
   /** 执行配置 */
@@ -824,6 +830,18 @@ declare interface AppTrigger {
   TriggerType?: number;
   /** 访客ID */
   UserId?: string;
+}
+
+/** 工蜂 Webhook 来源配置。 */
+declare interface AppTriggerGongfengWebhookConfig {
+  /** 监听的工蜂事件标识，原值传递，1 至 20 个，如 push、merge_request。 */
+  EventList: string[];
+  /** 工蜂项目 ID 或项目路径，不能为空。 */
+  ProjectId: string;
+  /** 分支规则列表，最多 20 个；空表示全部分支。 */
+  BranchRuleList?: string[];
+  /** 合并请求动作标识，最多 20 个；监听 merge_request 时必填，如 open、merge。 */
+  MRActionList?: string[];
 }
 
 /** AppTriggerInstance */
@@ -990,18 +1008,54 @@ declare interface AppTriggerSummary {
   UnreadRunLogCount?: string;
   /** 访客ID */
   UserId?: string;
+  /** Webhook 来源。0：未指定，兼容通用 Webhook；1：工蜂；2：TAPD。 */
+  WebhookProvider?: number;
+}
+
+/** TAPD Webhook 来源配置。 */
+declare interface AppTriggerTAPDWebhookConfig {
+  /** 监听的 TAPD 事件标识，原值传递，1 至 20 个，如 story::create、bug::update。 */
+  EventList: string[];
+  /** TAPD 项目 ID，不能为空。 */
+  ProjectId: string;
 }
 
 /** AppTriggerWebhookConfig */
 declare interface AppTriggerWebhookConfig {
   /** 触发器webhook参数配置 */
   ParamSchemaConfig?: AppTriggerWebhookParamSchemaConfig;
+  /** Webhook 来源扩展配置。通用 Webhook 不传；工蜂/TAPD 传对应配置及 OAuth 凭证，GongfengConfig 与 TAPDConfig 互斥且须与 WebhookProvider 一致。 */
+  WebhookConfigExt?: AppTriggerWebhookConfigExt | null;
   /** webhook的key */
   WebhookKey?: string;
+  /** Webhook 来源。0：未指定，兼容通用 Webhook；1：工蜂；2：TAPD。 */
+  WebhookProvider?: number;
   /** webhook的密钥 */
   WebhookToken?: string;
   /** webhook的地址 */
   WebhookUrl?: string;
+}
+
+/** Webhook 来源扩展配置。 */
+declare interface AppTriggerWebhookConfigExt {
+  /** 访问外部平台的 OAuth 凭证 ID，不能为空。 */
+  CredentialId: string;
+  /** 绑定凭证的只读摘要；创建和修改时忽略 */
+  Credential?: AppTriggerWebhookCredential;
+  /** 工蜂配置，仅 WebhookProvider=1 时使用，与 TAPDConfig 互斥。 */
+  GongfengConfig?: AppTriggerGongfengWebhookConfig;
+  /** TAPD 配置，仅 WebhookProvider=2 时使用，与 GongfengConfig 互斥。 */
+  TAPDConfig?: AppTriggerTAPDWebhookConfig;
+}
+
+/** 触发器绑定凭证的摘要，不包含授权密钥 */
+declare interface AppTriggerWebhookCredential {
+  /** 凭证ID */
+  CredentialId?: string;
+  /** 凭证名称；凭证不存在时为空 */
+  Name?: string;
+  /** 授权状态；0：未指定，凭证不存在或状态未知；1：未授权；2：已授权；3：已失效 */
+  Status?: number;
 }
 
 /** AppTriggerWebhookParamSchemaConfig */
@@ -1066,6 +1120,22 @@ declare interface AppealingStatus {
   NameInAppeal: boolean;
   /** 角色描述是否在申诉中 */
   RoleInAppeal: boolean;
+}
+
+/** 通用审计信息（创建/修改人 + 时间） */
+declare interface Audit {
+  /** 创建时间 */
+  CreateTime?: string;
+  /** 创建人 */
+  Creator?: string;
+  /** 创建人姓名 */
+  CreatorName?: string;
+  /** 最近修改人 */
+  Operator?: string;
+  /** 最近修改人姓名 */
+  OperatorName?: string;
+  /** 更新时间 */
+  UpdateTime?: string;
 }
 
 /** 操作日志 */
@@ -2216,6 +2286,12 @@ declare interface FileParseModel {
   SupportedFileList?: SupportedFileType[];
 }
 
+/** 实时文档切分模型 */
+declare interface FileSplitModel {
+  /** 实时文档解析模型 */
+  Model: ModelDetailInfo | null;
+}
+
 /** 应用沙箱中的云盘挂载配置。 */
 declare interface FileVolumeMount {
   /** 访问模式：RO=只读，RW=读写；必填。挂载到 /workdir 时只能使用 RW。 */
@@ -2258,6 +2334,12 @@ declare interface GenerateModel {
 declare interface GraphRAG {
   /** 是否启用 */
   Enabled?: boolean;
+}
+
+/** 表头拆分模型 */
+declare interface HeaderExtractModel {
+  /** 实时文档解析模型 */
+  Model: ModelDetailInfo | null;
 }
 
 /** 通用身份信息（支持数字 ID 与字符串 ID 两种形态） */
@@ -3276,6 +3358,90 @@ declare interface PromptRewriteModel {
   Model: ModelDetailInfo | null;
 }
 
+/** 提示词模板完整信息 */
+declare interface PromptTemplate {
+  /** 提示词模板Profile */
+  Profile?: PromptTemplateProfile | null;
+  /** 自定义变量列表 */
+  CustomVariableList?: string[];
+  /** 标签列表 */
+  LabelList?: PromptTemplateLabel[];
+  /** 提示词内容 */
+  PromptContent?: string;
+}
+
+/** 提示词模板分类 */
+declare interface PromptTemplateCategory {
+  /** 分类标识 */
+  Key?: string;
+  /** 分类名称 */
+  Name?: string;
+}
+
+/** 提示词模板分类分组 */
+declare interface PromptTemplateCategoryGroup {
+  /** 分类列表 */
+  CategoryList?: PromptTemplateCategory[];
+  /** 模块标识 */
+  Module?: string;
+}
+
+/** 提示词模板标签 */
+declare interface PromptTemplateLabel {
+  /** 标签内容 */
+  Content?: string;
+  /** 标签ID */
+  PromptTemplateLabelId?: string;
+  /** 标签类型。1-系统标签, 2-自定义标签 */
+  PromptTemplateLabelType?: number;
+}
+
+/** 提示词模板基本信息 */
+declare interface PromptTemplateProfile {
+  /** 分类 */
+  Category?: PromptTemplateCategory | null;
+  /** 描述 */
+  Description?: string;
+  /** 模板名称 */
+  Name?: string;
+  /** 提示词模板ID */
+  PromptTemplateId?: string;
+  /** 模板类型。1-预置模板, 2-自定义模板 */
+  PromptTemplateType?: number;
+  /** 空间ID */
+  SpaceId?: string;
+  /** 审计信息 */
+  Audit?: Audit;
+}
+
+/** 提示词模板规格参数（创建/修改） */
+declare interface PromptTemplateSpec {
+  /** 分类标识 */
+  CategoryKey?: string;
+  /** 自定义变量列表 */
+  CustomVariableList?: string[];
+  /** 描述 */
+  Description?: string;
+  /** 标签ID列表 */
+  LabelIdList?: string[];
+  /** 模板名称 */
+  Name?: string;
+  /** 提示词内容 */
+  PromptContent?: string;
+}
+
+/** 提示词模板摘要信息 */
+declare interface PromptTemplateSummary {
+  /** 提示词模板Profile */
+  Profile?: PromptTemplateProfile | null;
+  /** 标签列表 */
+  LabelList?: PromptTemplateLabel[];
+  /** 是否已收藏 */
+  IsFavorite?: boolean;
+  /** 权限列表 */
+  PermissionIdList?: string[];
+}
+
 /** QA 创建规格（一次性输入的非持久化数据） */
 declare interface QACreateSpec {
   /** 问题 */
@@ -4214,6 +4380,8 @@ declare interface Variable {
   IsBuiltin?: boolean;
   /** 是否可注入到沙箱环境 */
   EnableSandbox?: boolean;
+  /** 值作用域枚举值：0： 同一用户跨会话(默认): 同一用户的所有会话共用一份变量值1： 仅当前会话: 变量值按会话隔离, 各会话互不影响 */
+  ValueScope?: number;
 }
 
 /** 视图范围 */
@@ -4511,6 +4679,8 @@ declare interface CreateAppResponse {
 }
 
 declare interface CreateAppTriggerRequest {
+  /** Agent ID，scope=USER 时可选。 */
+  AgentId?: string;
   /** 应用ID */
   AppId?: string;
   /** 应用触发器执行配置 */
@@ -4668,6 +4838,32 @@ declare interface CreatePluginRequest {
 declare interface CreatePluginResponse {
   /** 插件id */
   PluginId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePromptTemplateLabelRequest {
+  /** 标签内容 */
+  Content: string;
+}
+
+declare interface CreatePromptTemplateLabelResponse {
+  /** 提示词模板标签ID */
+  PromptTemplateLabelId?: string | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface CreatePromptTemplateRequest {
+  /** 空间ID */
+  SpaceId: string;
+  /** 提示词内容 */
+  Spec: PromptTemplateSpec;
+}
+
+declare interface CreatePromptTemplateResponse {
+  /** 提示词模板ID */
+  PromptTemplateId?: string | null;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -5070,6 +5266,28 @@ declare interface DeletePluginRequest {
 }
 
 declare interface DeletePluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePromptTemplateLabelRequest {
+  /** 标签ID */
+  PromptTemplateLabelId: string;
+}
+
+declare interface DeletePromptTemplateLabelResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeletePromptTemplateRequest {
+  /** 空间ID */
+  SpaceId: string;
+  /** 提示词模板ID */
+  PromptTemplateId: string;
+}
+
+declare interface DeletePromptTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6002,6 +6220,72 @@ declare interface DescribePluginSummaryListResponse {
   RequestId?: string;
 }
 
+declare interface DescribePromptTemplateCategoryListRequest {
+}
+
+declare interface DescribePromptTemplateCategoryListResponse {
+  /** 分类分组列表 */
+  CategoryGroupList?: PromptTemplateCategoryGroup[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePromptTemplateLabelListRequest {
+  /** 页码，从0开始 */
+  PageNumber: number;
+  /** 每页数目，最大100 */
+  PageSize: number;
+  /** 关键词模糊搜索 */
+  Query?: string;
+}
+
+declare interface DescribePromptTemplateLabelListResponse {
+  /** 标签列表 */
+  PromptTemplateLabelList?: PromptTemplateLabel[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePromptTemplateRequest {
+  /** 提示词模板ID */
+  PromptTemplateId: string;
+  /** 空间ID */
+  SpaceId?: string;
+}
+
+declare interface DescribePromptTemplateResponse {
+  /** 提示词模板完整信息 */
+  PromptTemplate?: PromptTemplate | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribePromptTemplateSummaryListRequest {
+  /** 页码，从0开始 */
+  PageNumber: number;
+  /** 每页数目，最大100 */
+  PageSize: number;
+  /** 过滤条件列表 */
+  FilterList?: Filter[];
+  /** 是否只查询收藏的模板 */
+  IsFavorite?: boolean;
+  /** 关键词模糊搜索 */
+  Query?: string;
+  /** 空间ID */
+  SpaceId?: string;
+}
+
+declare interface DescribePromptTemplateSummaryListResponse {
+  /** 提示词模板摘要列表 */
+  PromptTemplateSummaryList?: PromptTemplateSummary[];
+  /** 总数 */
+  TotalCount?: number;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeQARequest {
   /** 所属知识库 ID */
   KbId: string;
@@ -6354,6 +6638,18 @@ declare interface FavoritePluginResponse {
   RequestId?: string;
 }
 
+declare interface FavoritePromptTemplateRequest {
+  /** 空间ID */
+  SpaceId: string;
+  /** 提示词模板ID */
+  PromptTemplateId: string;
+}
+
+declare interface FavoritePromptTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface FavoriteSkillRequest {
   /** SkillId */
   SkillId: string;
@@ -6413,7 +6709,7 @@ declare interface ModifyAppRequest {
   SharedKbIdList?: string[];
   /** 应用挂载云盘 */
   FileVolumeMountList?: AppFileVolumeMount[];
-  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig,Config.Mode.ClawAgentConfig 【Mode.ClawAgentConfig】 Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig, Config.Mode.ClawAgentConfig.ChannelContextTimeoutConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch,Config.Experience.Conversation.NewMessageInterrupt【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
+  /** 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：【顶层】Name, Avatar, Description, AppMode, SharedKbIdList, FileVolumeMountList【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel,Config.Model.FileSplitModel,Config.Model.HeaderExtractModel【WebSearch】Config.WebSearch【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig,Config.Mode.ClawAgentConfig 【Mode.ClawAgentConfig】 Config.Mode.ClawAgentConfig.LongMemoryConfig, Config.Mode.ClawAgentConfig.AgentTeamConfig, Config.Mode.ClawAgentConfig.ChannelContextTimeoutConfig【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch,Config.Experience.Conversation.NewMessageInterrupt【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility */
   UpdateMask?: FieldMask;
 }
 
@@ -6442,6 +6738,8 @@ declare interface ModifyAppTriggerRequest {
 }
 
 declare interface ModifyAppTriggerResponse {
+  /** 工蜂/TAPD 触发器绑定的凭证；其他触发器不返回 */
+  Credential?: AppTriggerWebhookCredential;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6656,6 +6954,22 @@ declare interface ModifyPluginRequest {
 }
 
 declare interface ModifyPluginResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyPromptTemplateRequest {
+  /** 空间ID */
+  SpaceId: string;
+  /** 提示词模板ID */
+  PromptTemplateId: string;
+  /** 要更新的字段掩码 */
+  UpdateMask: FieldMask;
+  /** 提示词规格 */
+  Spec: PromptTemplateSpec;
+}
+
+declare interface ModifyPromptTemplateResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -6980,6 +7294,18 @@ declare interface UnfavoritePluginResponse {
   RequestId?: string;
 }
 
+declare interface UnfavoritePromptTemplateRequest {
+  /** 空间ID */
+  SpaceId: string;
+  /** 提示词模板ID */
+  PromptTemplateId: string;
+}
+
+declare interface UnfavoritePromptTemplateResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface UnfavoriteSkillRequest {
   /** SkillId */
   SkillId: string;
@@ -7023,6 +7349,10 @@ declare interface Adp {
   CreateMsgRecordCategory(data: CreateMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMsgRecordCategoryResponse>;
   /** 创建插件 {@link CreatePluginRequest} {@link CreatePluginResponse} */
   CreatePlugin(data: CreatePluginRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePluginResponse>;
+  /** 创建提示词模板 {@link CreatePromptTemplateRequest} {@link CreatePromptTemplateResponse} */
+  CreatePromptTemplate(data: CreatePromptTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePromptTemplateResponse>;
+  /** 创建提示词模板标签 {@link CreatePromptTemplateLabelRequest} {@link CreatePromptTemplateLabelResponse} */
+  CreatePromptTemplateLabel(data: CreatePromptTemplateLabelRequest, config?: AxiosRequestConfig): AxiosPromise<CreatePromptTemplateLabelResponse>;
   /** 创建 QA 生成任务 {@link CreateQAGenerationTaskRequest} {@link CreateQAGenerationTaskResponse} */
   CreateQAGenerationTask(data: CreateQAGenerationTaskRequest, config?: AxiosRequestConfig): AxiosPromise<CreateQAGenerationTaskResponse>;
   /** 批量创建 QA {@link CreateQAListRequest} {@link CreateQAListResponse} */
@@ -7069,6 +7399,10 @@ declare interface Adp {
   DeleteMsgRecordCategory(data: DeleteMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMsgRecordCategoryResponse>;
   /** 删除插件 {@link DeletePluginRequest} {@link DeletePluginResponse} */
   DeletePlugin(data: DeletePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePluginResponse>;
+  /** 删除提示词模板 {@link DeletePromptTemplateRequest} {@link DeletePromptTemplateResponse} */
+  DeletePromptTemplate(data: DeletePromptTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePromptTemplateResponse>;
+  /** 删除提示词模板标签 {@link DeletePromptTemplateLabelRequest} {@link DeletePromptTemplateLabelResponse} */
+  DeletePromptTemplateLabel(data: DeletePromptTemplateLabelRequest, config?: AxiosRequestConfig): AxiosPromise<DeletePromptTemplateLabelResponse>;
   /** 批量删除 QA {@link DeleteQAListRequest} {@link DeleteQAListResponse} */
   DeleteQAList(data: DeleteQAListRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteQAListResponse>;
   /** 删除Skill {@link DeleteSkillRequest} {@link DeleteSkillResponse} */
@@ -7155,6 +7489,14 @@ declare interface Adp {
   DescribePlugin(data: DescribePluginRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginResponse>;
   /** 获取插件概要列表 {@link DescribePluginSummaryListRequest} {@link DescribePluginSummaryListResponse} */
   DescribePluginSummaryList(data: DescribePluginSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePluginSummaryListResponse>;
+  /** 查询提示词模板详情 {@link DescribePromptTemplateRequest} {@link DescribePromptTemplateResponse} */
+  DescribePromptTemplate(data: DescribePromptTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePromptTemplateResponse>;
+  /** 查询提示词模板分类列表 {@link DescribePromptTemplateCategoryListRequest} {@link DescribePromptTemplateCategoryListResponse} */
+  DescribePromptTemplateCategoryList(data?: DescribePromptTemplateCategoryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePromptTemplateCategoryListResponse>;
+  /** 查询提示词模板标签列表 {@link DescribePromptTemplateLabelListRequest} {@link DescribePromptTemplateLabelListResponse} */
+  DescribePromptTemplateLabelList(data: DescribePromptTemplateLabelListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePromptTemplateLabelListResponse>;
+  /** 查询提示词模板摘要列表 {@link DescribePromptTemplateSummaryListRequest} {@link DescribePromptTemplateSummaryListResponse} */
+  DescribePromptTemplateSummaryList(data: DescribePromptTemplateSummaryListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribePromptTemplateSummaryListResponse>;
   /** 查询 QA 详情 {@link DescribeQARequest} {@link DescribeQAResponse} */
   DescribeQA(data: DescribeQARequest, config?: AxiosRequestConfig): AxiosPromise<DescribeQAResponse>;
   /** 查询 QA 列表 {@link DescribeQASummaryListRequest} {@link DescribeQASummaryListResponse} */
@@ -7193,6 +7535,8 @@ declare interface Adp {
   ExportQA(data: ExportQARequest, config?: AxiosRequestConfig): AxiosPromise<ExportQAResponse>;
   /** 收藏插件 {@link FavoritePluginRequest} {@link FavoritePluginResponse} */
   FavoritePlugin(data: FavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<FavoritePluginResponse>;
+  /** 收藏提示词模板 {@link FavoritePromptTemplateRequest} {@link FavoritePromptTemplateResponse} */
+  FavoritePromptTemplate(data: FavoritePromptTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<FavoritePromptTemplateResponse>;
   /** 收藏skill {@link FavoriteSkillRequest} {@link FavoriteSkillResponse} */
   FavoriteSkill(data: FavoriteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<FavoriteSkillResponse>;
   /** 批量导入文档 {@link ImportDocListRequest} {@link ImportDocListResponse} */
@@ -7225,6 +7569,8 @@ declare interface Adp {
   ModifyMsgRecordCategory(data: ModifyMsgRecordCategoryRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMsgRecordCategoryResponse>;
   /** 修改插件 {@link ModifyPluginRequest} {@link ModifyPluginResponse} */
   ModifyPlugin(data: ModifyPluginRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPluginResponse>;
+  /** 修改提示词模板 {@link ModifyPromptTemplateRequest} {@link ModifyPromptTemplateResponse} */
+  ModifyPromptTemplate(data: ModifyPromptTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyPromptTemplateResponse>;
   /** 修改单个 QA {@link ModifyQARequest} {@link ModifyQAResponse} */
   ModifyQA(data: ModifyQARequest, config?: AxiosRequestConfig): AxiosPromise<ModifyQAResponse>;
   /** 批量修改 QA {@link ModifyQAListRequest} {@link ModifyQAListResponse} */
@@ -7263,6 +7609,8 @@ declare interface Adp {
   StopWorkflowRunList(data: StopWorkflowRunListRequest, config?: AxiosRequestConfig): AxiosPromise<StopWorkflowRunListResponse>;
   /** 取消收藏插件 {@link UnfavoritePluginRequest} {@link UnfavoritePluginResponse} */
   UnfavoritePlugin(data: UnfavoritePluginRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoritePluginResponse>;
+  /** 取消收藏提示词模板 {@link UnfavoritePromptTemplateRequest} {@link UnfavoritePromptTemplateResponse} */
+  UnfavoritePromptTemplate(data: UnfavoritePromptTemplateRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoritePromptTemplateResponse>;
   /** 取消收藏skill {@link UnfavoriteSkillRequest} {@link UnfavoriteSkillResponse} */
   UnfavoriteSkill(data: UnfavoriteSkillRequest, config?: AxiosRequestConfig): AxiosPromise<UnfavoriteSkillResponse>;
 }

@@ -336,26 +336,28 @@ declare interface InstanceStateInfo {
 
 /** 批量实例状态项 */
 declare interface InstanceStateItem {
+  /** 集群备份任务开启状态2 */
+  BackupOpenStatus?: number;
+  /** 集群备份任务开启状态 */
+  BackupStatus?: number;
+  /** 集群操作创建时间 */
+  FlowCreateTime?: string;
+  /** 集群流程错误信息 */
+  FlowMsg?: string;
+  /** 集群操作名称 */
+  FlowName?: string;
+  /** 集群操作进度 */
+  FlowProgress?: number;
   /** 集群实例名称 */
   InstanceId?: string;
   /** 集群状态，例如：Serving */
   InstanceState?: string;
   /** 集群状态描述，例如：运行中 */
   InstanceStateDesc?: string;
-  /** 集群备份任务开启状态 */
-  BackupStatus?: number;
-  /** 集群备份任务开启状态2 */
-  BackupOpenStatus?: number;
-  /** 集群操作创建时间 */
-  FlowCreateTime?: string;
-  /** 集群操作名称 */
-  FlowName?: string;
-  /** 集群操作进度 */
-  FlowProgress?: number;
-  /** 集群流程错误信息 */
-  FlowMsg?: string;
   /** 当前步骤的名称 */
   ProcessName?: string;
+  /** 恢复状态，仅用于前端交互判断（不用于展示）。TableRecovering=表级恢复进行中；ClusterRecovering=集群恢复进行中（CBS 快照恢复/旧回档，不区分）；空字符串=无恢复进行中 */
+  RecoveryState?: string;
 }
 
 /** node参数 */
@@ -768,10 +770,12 @@ declare interface DescribeInstanceStateResponse {
   InstanceState?: string;
   /** 集群状态描述，例如：运行中 */
   InstanceStateDesc?: string;
-  /** 当前步骤的名称，例如：”购买资源中“ */
-  ProcessName?: string;
   /** 批量实例状态列表（InstanceIds 入参时返回，每项含 InstanceId 与状态字段） */
   InstanceStates?: InstanceStateItem[];
+  /** 当前步骤的名称，例如：”购买资源中“ */
+  ProcessName?: string;
+  /** 恢复状态，仅用于前端交互判断（不用于展示）。TableRecovering=表级恢复进行中；ClusterRecovering=集群恢复进行中（CBS 快照恢复/旧回档，不区分）；空字符串=无恢复进行中。批量请求时以 InstanceStates 内各项为准 */
+  RecoveryState?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

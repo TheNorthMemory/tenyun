@@ -244,6 +244,8 @@ declare interface Project {
   CreatedOn?: string | null;
   /** 更新时间 */
   ModifiedOn?: string | null;
+  /** 构建规格客户契约枚举值：standard： 4C6G，默认档，所有套餐可用enhanced： 8C14G，专业版及以上可用；低配套餐声明时按 standard 处理并提示升级默认值：standard */
+  BuildMachine?: string;
 }
 
 /** 项目最近一次部署 */

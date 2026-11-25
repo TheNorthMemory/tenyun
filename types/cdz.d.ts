@@ -2,6 +2,20 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 专属可用区信息 */
+declare interface CloudDedicatedZone {
+  /** 专属可用区所属的可用区 */
+  Zone?: string;
+  /** 地域系统中的可用区ID */
+  ZoneId?: string;
+  /** 专属可用区名称 */
+  ZoneName?: string;
+  /** 是否为轻量专属可用区 */
+  IsLiteMode?: boolean;
+  /** 可用区所在地域 */
+  Region?: string;
+}
+
 /** CDZ的母机和子机的对应关系 */
 declare interface CloudDedicatedZoneHostsInfo {
   /** Host的唯一标识uuid */
@@ -88,6 +102,18 @@ declare interface DescribeCloudDedicatedZoneResourceSummaryResponse {
   RequestId?: string;
 }
 
+declare interface DescribeUserAvailableCloudDedicatedZonesRequest {
+}
+
+declare interface DescribeUserAvailableCloudDedicatedZonesResponse {
+  /** 返回当前用户可使用的专属可用区 ID */
+  ZoneIdSet?: string[];
+  /** 专属可用区列表信息。 */
+  ZoneSet?: CloudDedicatedZone[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 /** {@link Cdz 专属可用区} */
 declare interface Cdz {
   (): Versions;
@@ -95,6 +121,8 @@ declare interface Cdz {
   DescribeCloudDedicatedZoneHosts(data: DescribeCloudDedicatedZoneHostsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudDedicatedZoneHostsResponse>;
   /** 查询专属可用区资源水位概览 {@link DescribeCloudDedicatedZoneResourceSummaryRequest} {@link DescribeCloudDedicatedZoneResourceSummaryResponse} */
   DescribeCloudDedicatedZoneResourceSummary(data: DescribeCloudDedicatedZoneResourceSummaryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCloudDedicatedZoneResourceSummaryResponse>;
+  /** 查询用户可使用的专属可用区列表 {@link DescribeUserAvailableCloudDedicatedZonesRequest} {@link DescribeUserAvailableCloudDedicatedZonesResponse} */
+  DescribeUserAvailableCloudDedicatedZones(data?: DescribeUserAvailableCloudDedicatedZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserAvailableCloudDedicatedZonesResponse>;
 }
 
 export declare type Versions = ["2022-11-23"];

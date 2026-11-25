@@ -422,10 +422,10 @@ declare interface AIGWTokenLengthRouteRule {
 
 /** 云原生网关限流插件参数限流的精确Qps阈值 */
 declare interface AccurateQpsThreshold {
-  /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
-  Unit: string;
   /** 全局配置ID */
   GlobalConfigId: string;
+  /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
+  Unit: string;
 }
 
 /** AgentSkill AI Agent 技能定义 */
@@ -3162,7 +3162,7 @@ declare interface KongServiceRouteList {
 
 /** 返回kong的服务和路由列表 */
 declare interface KongServiceWithRoutes {
-  /**  */
+  /** 服务及路由列表 */
   ServiceList?: KongServiceRoute[];
   /** 总数 */
   TotalCount?: number;
@@ -3298,14 +3298,16 @@ declare interface LaneTrafficEntry {
 
 /** 参数限流的规则 */
 declare interface LimitRule {
+  /** 精确限流阈值 */
+  AccurateQpsThresholds?: AccurateQpsThreshold[];
   /** 请求匹配条件 */
   Filters?: RuleFilter[];
   /** 参数限流依据组合 */
   LimitBy?: KeyValue[];
   /** 限流阈值 */
   QpsThresholds?: QpsThreshold[];
-  /** 精确限流阈值 */
-  AccurateQpsThresholds?: AccurateQpsThreshold[];
+  /** 是否启用该条参数限流规则。不传或 true 表示启用；false 表示禁用，配置保留但不对流量生效。与 LimitDetail.Enabled（整个限流插件开关）相互独立。 */
+  Enabled?: boolean;
 }
 
 /** LLM 模型 API 列表 */
@@ -3534,10 +3536,10 @@ declare interface PublicAddressConfig {
 
 /** 云原生网关限流插件Qps阈值 */
 declare interface QpsThreshold {
-  /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
-  Unit: string;
   /** 阈值 */
   Max: number;
+  /** qps阈值控制维度,包含:second、minute、hour、day、month、year */
+  Unit: string;
 }
 
 /** 配置发布版本信息 */
@@ -3592,12 +3594,12 @@ declare interface RoutingDestinationRuleLabel {
 declare interface RuleFilter {
   /** 限流条件的Key */
   Key?: string;
-  /** 限流条件的Values */
-  Values?: string[];
-  /** 操作符 */
-  Operator?: string;
   /** header或query对应的name */
   Name?: string;
+  /** 操作符 */
+  Operator?: string;
+  /** 限流条件的Values */
+  Values?: string[];
 }
 
 /** 微服务注册引擎实例 */
@@ -5649,6 +5651,8 @@ declare interface DescribeCloudNativeAPIGatewayRoutesRequest {
   Limit?: number;
   /** 翻页单页偏移量，默认值0 */
   Offset?: number;
+  /** 按服务 ID 查询路由。 */
+  ServiceId?: string;
   /** 服务的名字，精确匹配 */
   ServiceName?: string;
   /** 路由的名字，精确匹配 */

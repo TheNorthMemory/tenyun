@@ -326,7 +326,7 @@ declare interface Command {
   Time?: string;
   /** 命令执行时间相对于所属会话开始时间的偏移量，单位ms */
   TimeOffset?: number;
-  /** 命令执行情况，1--允许，2--拒绝，3--确认 */
+  /** 命令执行情况，1--已放行，2--已阻断，3--确认 */
   Action?: number;
   /** 会话id */
   Sid?: string;
@@ -954,7 +954,7 @@ declare interface SearchCommandResult {
   PrivateIp?: string;
   /** 命令 */
   Cmd?: string;
-  /** 命令执行情况，1--允许，2--拒绝 */
+  /** 命令执行情况，1--已放行，2--已阻断 */
   Action?: number;
   /** 命令所属的会话ID */
   Sid?: string;
@@ -1010,7 +1010,7 @@ declare interface SearchFileBySidResult {
   FileNew?: string;
   /** method为上传文件、下载文件、删除文件时显示文件大小。其他情况为null */
   Size?: number;
-  /** 堡垒机拦截情况, 1-已执行， 2-被阻断 */
+  /** 堡垒机拦截情况, 1-已放行， 2-已阻断 */
   Action?: number;
   /** 复核时间，当Action是3时，需有复核时间 */
   ConfirmTime?: string;
@@ -1042,7 +1042,7 @@ declare interface SearchFileResult {
   PublicIp?: string;
   /** 资产内网IP */
   PrivateIp?: string;
-  /** 操作结果：1 - 已执行，2 - 已阻断 */
+  /** 操作结果：1 - 已放行，2 - 已阻断 */
   Action?: number;
   /** 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹 */
   Method?: number;
@@ -1242,6 +1242,56 @@ declare interface TaskResult {
   Category?: number;
 }
 
+/** 运维工单 */
+declare interface Ticket {
+  /** 数据库主键 */
+  Id?: number;
+  /** 工单ID,id-s3ed4r5e */
+  TicketId?: string;
+  /** 工单类型，0-运维访问工单，1-权限工单, 2-数据库变更工单,3-自动执行命令/脚本工单 */
+  TicketType?: number;
+  /** acl权限 */
+  Acl?: Acl;
+  /** 运维开始时间 */
+  StartTime?: string;
+  /** 运维结束时间 */
+  EndTime?: string;
+  /** 工单状态，0待提交(草稿)，1待审批，2批准，3已执行，4驳回,5删除，6过期 */
+  Status?: number;
+  /** 申请时间 */
+  ApplyTime?: string;
+  /** 申请人用户Id */
+  ApplyUser?: number;
+  /** 审批人uin */
+  ApproveUser?: string;
+  /** 工单审批备注 */
+  ApproveDesc?: string;
+  /** acl权限Id */
+  AclId?: number;
+  /** 待审批状态下，可以审批的人 */
+  ApproveUserSet?: string[];
+  /** 审批人信息 */
+  ApproveUserInfoSet?: DepartmentManagerUser[];
+  /** 更新时间 */
+  UpdateTime?: string;
+  /** 申请权限 */
+  Name?: string;
+  /** 审批时间 */
+  ApproveTime?: string;
+  /** 部门ID */
+  DepartmentId?: string;
+  /** 部门名称 */
+  DepartmentName?: string;
+  /** 部门Sequence */
+  DepartmentSequence?: number;
+  /** 申请人用户名 */
+  ApplyUserName?: string;
+  /** 申请人真实姓名 */
+  ApplyRealName?: string;
+  /** 申请时间戳，微妙 */
+  ApplyTimeVersion?: number;
+}
+
 /** 用户信息 */
 declare interface User {
   /** 用户名,1 - 128个字符 必须以英文字母开头，只能由a-zA-Z0-9以及+=,.@_-组成，支持邮箱格式 */
@@ -1386,6 +1436,64 @@ declare interface AddUserGroupMembersRequest {
 }
 
 declare interface AddUserGroupMembersResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ApproveTicketRequest {
+  /** 工单唯一id，数据库索引id */
+  Id: number;
+  /** 2-审批通过，4-审批驳回 */
+  Status: number;
+  /** 审批意见 */
+  ApproveDesc: string;
+  /** 申请时间戳，单位微妙 */
+  ApplyTimeVersion: number;
+  /** 审批权限工单时，设置的有效期开始时间，默认为当前时间 */
+  StartTime?: string;
+  /** 审批权限工单时，设置的有效期的结束时间，默认有限期为1天 */
+  EndTime?: string;
+  /** 是否开启磁盘映射 */
+  AllowDiskRedirect?: boolean;
+  /** 是否开启剪贴板文件上行 */
+  AllowClipFileUp?: boolean;
+  /** 是否开启剪贴板文件下行 */
+  AllowClipFileDown?: boolean;
+  /** 是否开启剪贴板文本（含图片）上行 */
+  AllowClipTextUp?: boolean;
+  /** 是否开启剪贴板文本（含图片）下行 */
+  AllowClipTextDown?: boolean;
+  /** 是否开启 SFTP 文件上传 */
+  AllowFileUp?: boolean;
+  /** 文件传输上传大小限制（预留参数，目前暂未使用） */
+  MaxFileUpSize?: number;
+  /** 是否开启 SFTP 文件下载 */
+  AllowFileDown?: boolean;
+  /** 文件传输下载大小限制（预留参数，目前暂未使用） */
+  MaxFileDownSize?: number;
+  /** 是否开启rdp磁盘映射文件上传 */
+  AllowDiskFileUp?: boolean;
+  /** 是否开启rdp磁盘映射文件下载 */
+  AllowDiskFileDown?: boolean;
+  /** 是否开启rz sz文件上传 */
+  AllowShellFileUp?: boolean;
+  /** 是否开启rz sz文件下载 */
+  AllowShellFileDown?: boolean;
+  /** 是否开启 SFTP 文件删除 */
+  AllowFileDel?: boolean;
+  /** 是否允许使用访问串，默认允许 */
+  AllowAccessCredential?: boolean;
+  /** 关联的高危命令模板ID */
+  CmdTemplateIdSet?: number[];
+  /** 关联高危DB模板ID */
+  ACTemplateIdSet?: string[];
+  /** 部门id */
+  DepartmentId?: string;
+  /** 是否允许键盘记录 */
+  AllowKeyboardLogger?: boolean;
+}
+
+declare interface ApproveTicketResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2534,6 +2642,32 @@ declare interface DescribeSourceTypesResponse {
   RequestId?: string;
 }
 
+declare interface DescribeTicketsRequest {
+  /** 状态：0待提交(草稿)，1待审批，2批准，3已执行，4驳回 */
+  StatusSet?: number[];
+  /** 工单类型：0-运维工单，1-权限工单 */
+  TicketType?: string;
+  /** 过滤数组 */
+  Filters?: Filter[];
+  /** 资产过滤数组 */
+  DeviceFilters?: Filter[];
+  /** 部门id */
+  DepartmentId?: string;
+  /** 分页偏移位置，默认值为0 */
+  Offset?: number;
+  /** 每页条目数量，默认20，最大500 */
+  Limit?: number;
+}
+
+declare interface DescribeTicketsResponse {
+  /** 运维工单总数 */
+  TotalCount?: number;
+  /** 运维工单列表 */
+  TicketSet?: Ticket[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeUserDirectoryRequest {
   /** 分页大小 */
   Limit?: number;
@@ -3295,7 +3429,7 @@ declare interface SearchCommandBySidRequest {
   Offset?: number;
   /** 每页容量，默认20，最大200 */
   Limit?: number;
-  /** 根据拦截状态进行过滤 */
+  /** 根据拦截状态进行过滤，1-已放行，2-已阻断，3-复核 */
   AuditAction?: number[];
 }
 
@@ -3329,7 +3463,7 @@ declare interface SearchCommandRequest {
   Cmd?: string;
   /** Cmd字段是前端传值是否进行base64.0:否，1：是 */
   Encoding?: number;
-  /** 根据拦截状态进行过滤：1 - 已执行，2 - 被阻断 */
+  /** 根据拦截状态进行过滤：1 - 已放行，2 - 已阻断 */
   AuditAction?: number[];
   /** 每页容量，默认20，最大200 */
   Limit?: number;
@@ -3357,9 +3491,9 @@ declare interface SearchFileBySidRequest {
   FileName?: string;
   /** 分页用偏移量 */
   Offset?: number;
-  /** 1-已执行， 2-被阻断 */
+  /** 1-已放行， 2-已阻断 */
   AuditAction?: number;
-  /** 1-已执行， 2-被阻断 */
+  /** 1-已放行， 2-已阻断 */
   AuditActionSet?: number[];
   /** 以Protocol和Method为条件查询 */
   TypeFilters?: SearchFileTypeFilter[];
@@ -3395,7 +3529,7 @@ declare interface SearchFileRequest {
   Method?: number[];
   /** 可填写路径名或文件（夹）名 */
   FileName?: string;
-  /** 1-已执行， 2-被阻断 */
+  /** 1-已放行， 2-已阻断 */
   AuditAction?: number[];
   /** 分页的页内记录数，默认为20，最大200 */
   Limit?: number;
@@ -3587,6 +3721,8 @@ declare interface Bh {
   AddDeviceGroupMembers(data: AddDeviceGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddDeviceGroupMembersResponse>;
   /** 添加用户组成员 {@link AddUserGroupMembersRequest} {@link AddUserGroupMembersResponse} */
   AddUserGroupMembers(data: AddUserGroupMembersRequest, config?: AxiosRequestConfig): AxiosPromise<AddUserGroupMembersResponse>;
+  /** 审批工单 {@link ApproveTicketRequest} {@link ApproveTicketResponse} */
+  ApproveTicket(data: ApproveTicketRequest, config?: AxiosRequestConfig): AxiosPromise<ApproveTicketResponse>;
   /** 绑定容器账号凭据 {@link BindDeviceAccountKubeconfigRequest} {@link BindDeviceAccountKubeconfigResponse} */
   BindDeviceAccountKubeconfig(data: BindDeviceAccountKubeconfigRequest, config?: AxiosRequestConfig): AxiosPromise<BindDeviceAccountKubeconfigResponse>;
   /** 绑定主机账号密码 {@link BindDeviceAccountPasswordRequest} {@link BindDeviceAccountPasswordResponse} */
@@ -3697,6 +3833,8 @@ declare interface Bh {
   DescribeSecuritySetting(data?: DescribeSecuritySettingRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSecuritySettingResponse>;
   /** 获取认证源类型列表 {@link DescribeSourceTypesRequest} {@link DescribeSourceTypesResponse} */
   DescribeSourceTypes(data?: DescribeSourceTypesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSourceTypesResponse>;
+  /** 查询运维工单列表 {@link DescribeTicketsRequest} {@link DescribeTicketsResponse} */
+  DescribeTickets(data?: DescribeTicketsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTicketsResponse>;
   /** 获取用户目录 {@link DescribeUserDirectoryRequest} {@link DescribeUserDirectoryResponse} */
   DescribeUserDirectory(data?: DescribeUserDirectoryRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeUserDirectoryResponse>;
   /** 查询用户组成员列表 {@link DescribeUserGroupMembersRequest} {@link DescribeUserGroupMembersResponse} */

@@ -78,6 +78,10 @@ declare interface AndroidInstance {
   Width?: number;
   /** 分辨率高度 */
   Height?: number;
+  /** 每英寸像素点。 */
+  DPI?: number;
+  /** 帧率 */
+  FPS?: number;
   /** 宿主机 ID */
   HostSerialNumber?: string;
   /** 分组 ID */

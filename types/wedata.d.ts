@@ -3962,6 +3962,18 @@ declare interface TriggerDependencyConfigPage {
   Items?: TriggerTaskDependDto[] | null;
 }
 
+/** 触发本次运行的一条表更新记录（某张表在某个时刻、某个版本的一次更新） */
+declare interface TriggerTableUpdateRecord {
+  /** 表全名参数格式：格式 catalog.schema.table */
+  TableQualifier?: string | null;
+  /** 表更新时间参数格式：时间戳格式，如：1792951200000 */
+  UpdateTime?: string | null;
+  /** 表更新版本号 */
+  UpdateVersion?: string | null;
+  /** 数据资产ID */
+  AssetGuid?: string | null;
+}
+
 /** 任务对象 */
 declare interface TriggerTask {
   /** 任务基本属性 */
@@ -4254,6 +4266,8 @@ declare interface TriggerTaskRunBrief {
   ScheduleRunType?: string | null;
   /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSION： 无权限 */
   Privilege?: string | null;
+  /** 所属工作流运行中本次触发涉及的表 */
+  TriggerTableUpdateRecords?: TriggerTableUpdateRecord[] | null;
 }
 
 /** 任务调度配置信息 */
@@ -4386,6 +4400,8 @@ declare interface TriggerWorkflowDetail {
   TriggerMode?: string | null;
   /** 运行账号ID */
   ExecuteUserUin?: string | null;
+  /** 工作流标签列表 */
+  WorkflowLabels?: WorkflowLabel[] | null;
 }
 
 /** 获取工作流的列表信息item */
@@ -4500,6 +4516,10 @@ declare interface TriggerWorkflowRunBrief {
   ParentTaskExecutionName?: string | null;
   /** 权限枚举值：CAN_MANAGE： 可管理CAN_VIEW： 可见NO_PERMISSION： 无权限 */
   Privilege?: string | null;
+  /** 表更新触发的运行中，本次触发涉及的表 */
+  TriggerTableUpdateRecords?: TriggerTableUpdateRecord[] | null;
+  /** 工作流标签列表，仅工作流调度模式返回 */
+  WorkflowLabels?: WorkflowLabel[];
 }
 
 /** 查询工作流结果 */
@@ -4668,6 +4688,8 @@ declare interface UpdateTriggerWorkflowPartially {
   TriggerMode?: string;
   /** 运行账号ID */
   ExecuteUserUin?: string;
+  /** 工作流标签列表。不传则不修改；传空数组则清空；传值则整体覆盖。同一标签Key只能选一个Value，标签需在数据资产中已存在 */
+  WorkflowLabels?: WorkflowLabel[];
 }
 
 /** 更新工作流结果 */
@@ -4778,6 +4800,18 @@ declare interface WorkflowInfo {
   CreateUserUin?: string | null;
 }
 
+/** 工作流标签（K-V），标签字典与数据资产标签一致 */
+declare interface WorkflowLabel {
+  /** 标签ID，入参时必填 */
+  LabelId?: number | null;
+  /** 标签名称 */
+  LabelName?: string | null;
+  /** 标签值ID */
+  LabelValueId?: number | null;
+  /** 标签值名称 */
+  LabelValue?: string | null;
+}
+
 /** 用户对工作流文件夹的递归最大权限类型 */
 declare interface WorkflowMaxPermission {
   /** 授权权限类型(CAN_VIEW/CAN_RUN/CAN_EDIT/CAN_MANAGE，当前仅支持CAN_MANAGE) */
@@ -4884,7 +4918,7 @@ declare interface WorkflowSchedulerConfigurationInfo {
 
 /** 工作流调度配置 */
 declare interface WorkflowTriggerConfig {
-  /** 触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高定时触发：TIME_TRIGGER文件到达：FILE_ARRIVAL持续运行：CONTINUE_RUN（暂不支持）注意：TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达 */
+  /** 触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高定时触发：TIME_TRIGGER文件到达：FILE_ARRIVAL表更新：TABLE_UPDATE持续运行：CONTINUE_RUN（暂不支持）注意：TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；TABLE_UPDATE 模式下，TriggerMinimumIntervalSecond、TriggerWaitTimeSecond、tableQualifiers、triggerPolicy 必填；枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达TABLE_UPDATE： 表更新 */
   TriggerMode?: string | null;
   /** WorkflowTriggerConfig转换成Json格式，对账使用 */
   ExtraInfo?: string | null;
@@ -4910,14 +4944,18 @@ declare interface WorkflowTriggerConfig {
   FileNamePattern?: string | null;
   /** 文件到达模式下 是否递归检测子目录取值范围：[0, 1]默认值：1默认 1（开启） 0 （关闭） */
   Recursive?: number | null;
-  /** 文件到达模式下 最小触发间隔取值范围：[1, 1440]单位：分钟 */
+  /** 文件到达、表更新 模式下 最小触发间隔取值范围：[1, 1440]单位：分钟默认值：5 */
   TriggerMinimumInterval?: number | null;
-  /** 文件到达模式下 文件批次等待时间取值范围：[1, 60]单位：分钟 */
+  /** 文件到达、表更新 模式下 批次等待时间取值范围：[1, 60]单位：分钟默认值：2 */
   TriggerWaitTime?: number | null;
-  /** 文件到达模式下 触发最短间隔时间单位：秒后续废弃 勿用 */
+  /** 文件到达、表更新 模式下，触发最短间隔时间取值范围：[60, 86400]单位：秒默认值：300只需填TriggerMinimumIntervalSecond，不用填TriggerMinimumInterval；两者都填取TriggerMinimumIntervalSecond； */
   TriggerMinimumIntervalSecond?: number | null;
-  /** 文件到达模式下 触发等待时间单位：秒后续废弃 勿用 */
+  /** 文件到达、表更新 模式下，触发等待时间取值范围：[60, 3600]单位：秒默认值：120只需填TriggerWaitTimeSecond，不用填TriggerWaitTime；两者都填取TriggerWaitTimeSecond； */
   TriggerWaitTimeSecond?: number | null;
+  /** 表更新 模式下，触发表列表 */
+  TableQualifiers?: string[] | null;
+  /** 表更新模式下，触发条件枚举值：ALL： 所有表更新ANY： 任一表更新默认值：ANY */
+  TriggerPolicy?: string | null;
 }
 
 /** 项目扩展信息 */
@@ -5387,10 +5425,12 @@ declare interface CreateTriggerWorkflowRequest {
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
   /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的Trigger状态可不配置，如果配置，内容会被该值覆盖枚举值：ACTIVE： 启动PAUSED： 暂停 */
   SchedulerStatus?: string;
-  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发 */
+  /** 触发方式：定时触发：TIME_TRIGGER 、文件到达触发：FILE_ARRIVAL、表更新触发：TABLE_UPDATE。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件触发TABLE_UPDATE： 表更新 */
   TriggerMode?: string;
-  /** 运行账号ID,未传时默认使用当前登录用户ID */
+  /** 运行账号ID */
   ExecuteUserUin?: string;
+  /** 工作流标签列表。可按ID或名称传，标签需在数据资产中已存在；同一标签Key只能选一个Value。标签写入失败时工作流创建会回滚 */
+  WorkflowLabels?: WorkflowLabel[];
 }
 
 declare interface CreateTriggerWorkflowResponse {
@@ -6511,6 +6551,8 @@ declare interface ListCodeFolderContentsRequest {
   OnlyFolderNode?: boolean;
   /** 是否只查询用户自己创建的代码文件 */
   OnlyUserSelfScript?: boolean;
+  /** 是否只查询提交状态为提交成功的文件默认值：false */
+  SubmitStatusFilter?: boolean;
 }
 
 declare interface ListCodeFolderContentsResponse {
@@ -8363,10 +8405,12 @@ declare interface UpdateTriggerWorkflowRequest {
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig;
   /** Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的SchedulerStatus可不配置，如果配置，内容会被改值覆盖。枚举值：ACTIVE： 启动PAUSED： 暂停 */
   SchedulerStatus?: string;
-  /** 触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达 */
+  /** 触发方式：定时触发：TIME_TRIGGER、文件到达触发：FILE_ARRIVAL、表更新触发：TABLE_UPDATE。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。枚举值：TIME_TRIGGER： 定时触发FILE_ARRIVAL： 文件到达TABLE_UPDATE： 表更新 */
   TriggerMode?: string;
   /** 运行账号ID */
   ExecuteUserUin?: string;
+  /** 工作流标签列表。不传则不修改；传空数组则清空；传值则整体覆盖。同一标签Key只能选一个Value，标签需在数据资产中已存在 */
+  WorkflowLabels?: WorkflowLabel[];
 }
 
 declare interface UpdateTriggerWorkflowResponse {
@@ -17035,6 +17079,8 @@ declare namespace V20210820 {
     ExecuteUserName?: string | null;
     /** 用户对该资源的最高权限枚举值：NO_PERMISSIONS： 无权限CAN_VIEW： 只读权限CAN_MANAGE： 管理权限 */
     Privilege?: string | null;
+    /** 工作流标签列表，仅工作流调度模式返回 */
+    WorkflowLabels?: WorkflowLabel[] | null;
   }
 
   /** 工作流 */
@@ -17087,6 +17133,18 @@ declare namespace V20210820 {
     TotalCount?: number | null;
     /** 记录列表 */
     Items?: WorkflowExtOpsDto[] | null;
+  }
+
+  /** 工作流标签（K-V），标签字典与数据资产标签一致 */
+  interface WorkflowLabel {
+    /** 标签ID，入参时必填 */
+    LabelId?: number | null;
+    /** 标签名称 */
+    LabelName?: string | null;
+    /** 标签值ID */
+    LabelValueId?: number | null;
+    /** 标签值名称 */
+    LabelValue?: string | null;
   }
 
   /** 工作流调度信息 */

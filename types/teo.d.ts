@@ -3384,8 +3384,12 @@ declare interface OriginACLFamilyInfo {
 
 /** 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，同时包含回源 IP 网段详情和选择可切换的回源 IP 网段列表。 */
 declare interface OriginACLInfo {
+  /** 七层加速域名源站防护模式，取值有：all：自动纳入防护模式，站点内所有七层加速域名已纳入源站防护列表，包含后续新增的七层加速域名；specific：指定加入防护模式，仅防护已绑定的七层加速域名。 */
+  L7EnableMode?: string;
   /** 启用了特定回源 IP 网段回源的七层加速域名列表。源站防护未开启时为空。 */
   L7Hosts?: string[];
+  /** 四层代理实例源站防护模式，取值有：all：自动纳入防护模式，站点内所有四层代理实例已纳入源站防护列表，包含后续新增的四层代理实例；specific：指定加入防护模式，仅防护已绑定的四层代理实例。 */
+  L4EnableMode?: string;
   /** 启用了特定回源 IP 网段回源的四层代理实例列表。源站防护未开启时为空。 */
   L4ProxyIds?: string[];
   /** 当前生效的回源 IP 网段。源站防护未开启时为空。 */
@@ -5101,9 +5105,9 @@ declare interface WebSecurity {
   /** 站点级策略的配置详情。 */
   ZoneDefaultPolicy?: SecurityPolicy;
   /** 域名级策略的配置详情。 */
-  HostPolicy?: HostPolicy;
+  HostPolicy?: HostPolicy[];
   /** 策略模板的配置详情。 */
-  Templates?: WebSecurityTemplates;
+  Templates?: WebSecurityTemplates[];
 }
 
 /** 模板的安全配置。 */
@@ -8677,13 +8681,13 @@ declare interface EdgeKVPutResponse {
 declare interface EnableOriginACLRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 站点首次开启源站防护时，为七层加速域名配置特定回源 IP 网段的模式。all：针对当前站点下的所有七层加速域名开启，当域名数量超过 200 时，请先通过 specific 模式启用 200 个域名，剩余资源通过 ModifyOriginACL 接口启用。specific：针对站点下指定的七层加速域名开启。注意：当参数为空时，默认为 specific。后续新增七层加速域名/四层代理实例均请通过 ModifyOriginACL 接口配置。 */
+  /** 七层加速域名源站防护模式，默认值: specific。all：自动纳入防护模式，站点内所有七层加速域名将自动加入到源站防护列表中，包含后续新增的七层加速域名；specific：指定加入防护模式，需要人工指定期望加入到源站防护的七层加速域名（通过 L7Hosts 参数指定），未指定的资源不会加入到源站防护列表中，后续的防护资源调整可通过 ModifyOriginACL 接口进行。注意：取值为 all 时，L7Hosts 请保留为空；当站点下七层加速域名数量超过 200 时，请先通过 specific 模式启用，剩余资源通过 ModifyOriginACL 接口启用后，再通过 ModifyOriginACL 接口切换为 all。 */
   L7EnableMode?: string;
-  /** 开启源站防护的七层加速域名列表，仅当参数 L7EnableMode 为 specific 时生效。L7EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 200 个七层加速域名。 */
+  /** 需要开启源站防护的七层加速域名列表，仅当参数 L7EnableMode 为 specific 时生效。本字段最多支持一次开启 200 个七层加速域名；当期望开启的域名个数超过 200 时，请联合使用 ModifyOriginACL 接口进行分片配置。 */
   L7Hosts?: string[];
-  /** 站点首次开启源站防护时，为四层代理实例配置特定回源 IP 网段的模式。all：针对当前站点下的所有四层代理实例开启，当实例数量超过 100 时，请先通过 specific 模式启用 100 个域名，剩余资源通过 ModifyOriginACL 接口启用。specific：针对站点下指定的四层代理实例开启。注意：当参数为空时，默认为 specific。后续新增七层加速域名/四层代理实例均请通过 ModifyOriginACL 接口配置。 */
+  /** 四层代理实例源站防护模式，默认值: specific。all：自动纳入防护模式，站点内所有四层代理实例将自动加入到源站防护列表中，包含后续新增的四层代理实例资源；specific：指定加入防护模式，需要人工指定期望加入到源站防护的四层代理实例（通过 L4ProxyIds 参数指定），未指定的资源不会加入到源站防护列表中，后续的防护资源调整可通过 ModifyOriginACL 接口进行。注意：取值为 all 时，L4ProxyIds 请保留为空；当站点下四层代理实例数量超过 100 时，请先通过 specific 模式启用，剩余资源通过 ModifyOriginACL 接口启用后，再通过 ModifyOriginACL 接口切换为 all。 */
   L4EnableMode?: string;
-  /** 开启源站防护的四层代理实例列表，仅当参数 L4EnableMode 为 specific 时生效。L4EnableMode 为 all 时，请保留此参数为空。单次最大仅支持填写 100 个四层代理实例。 */
+  /** 需要开启源站防护的四层代理实例列表，仅当参数 L4EnableMode 为 specific 时生效。本字段最多支持一次开启 100 个四层代理实例；当期望开启的四层代理实例个数超过 100 时，请联合使用 ModifyOriginACL 接口进行分片配置。 */
   L4ProxyIds?: string[];
   /** 源站防护回源ACL控制域，不填则默认用标准全球控制域；可用控制域信息可以通过DescribeAvailableOriginACLFamily接口查询获得。具体取值说明如下：gaz：标准全球可用区控制域；mlc：标准中国大陆可用区控制域；emc：标准全球(不含中国大陆)可用区控制域；plat-gaz：精简全球可用区控制域；plat-mlc：精简中国大陆可用区控制域；plat-emc：精简全球(不含中国大陆)可用区控制域； */
   OriginACLFamily?: string;
@@ -9345,7 +9349,11 @@ declare interface ModifyMultiPathGatewayStatusResponse {
 declare interface ModifyOriginACLRequest {
   /** 站点 ID。 */
   ZoneId: string;
-  /** 需要启用/关闭特定回源 IP 网段回源的实例。 */
+  /** 七层加速域名源站防护模式，默认值: specific。all：自动纳入防护模式，站点内所有七层加速域名将自动加入到源站防护列表中，包含后续新增的七层加速域名；specific：指定加入防护模式，需要人工指定期望加入到源站防护的七层加速域名（通过 L7Hosts 参数指定），未指定的资源不会加入到源站防护列表中，后续的防护资源调整可通过 ModifyOriginACL 接口进行。注意：取值为 all 时，L7Hosts 请保留为空；当站点下七层加速域名数量超过 200 时，请先通过 specific 模式启用，剩余资源通过 ModifyOriginACL 接口启用后，再通过 ModifyOriginACL 接口切换为 all。 */
+  L7EnableMode?: string;
+  /** 四层代理实例源站防护模式，默认值: specific。all：自动纳入防护模式，站点内所有四层代理实例将自动加入到源站防护列表中，包含后续新增的四层代理实例资源；specific：指定加入防护模式，需要人工指定期望加入到源站防护的四层代理实例（通过 L4ProxyIds 参数指定），未指定的资源不会加入到源站防护列表中，后续的防护资源调整可通过 ModifyOriginACL 接口进行。注意：取值为 all 时，L4ProxyIds 请保留为空；当站点下四层代理实例数量超过 100 时，请先通过 specific 模式启用，剩余资源通过 ModifyOriginACL 接口启用后，再通过 ModifyOriginACL 接口切换为 all。 */
+  L4EnableMode?: string;
+  /** 需要启用/关闭特定回源 IP 网段回源的实例。注意：本参数仅适用于 指定加入防护模式 下的资源调整；当对应层级的源站防护模式为 all 时，该类型的资源列表由系统自动维护，本参数中请勿包含该类型的资源，如需手动调整，请先通过 L7EnableMode/L4EnableMode 将对应层级切换为 specific。 */
   OriginACLEntities?: OriginACLEntity[];
   /** 源站防护回源ACL控制域，不填则默认不变；控制域信息可以通过DescribeAvailableOriginACLFamily接口查询获得。具体取值说明如下：gaz：标准全球可用区控制域；mlc：标准中国大陆可用区控制域；emc：标准全球(不含中国大陆)可用区控制域；plat-gaz：精简全球可用区控制域；plat-mlc：精简中国大陆可用区控制域；plat-emc：精简全球(不含中国大陆)可用区控制域； */
   OriginACLFamily?: string;

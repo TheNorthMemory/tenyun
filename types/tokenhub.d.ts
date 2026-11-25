@@ -84,6 +84,10 @@ declare interface EndpointCreateDetail {
 declare interface EndpointDetail {
   /** 推理服务 ID。 */
   EndpointId?: string;
+  /** 所属企业空间 ID。 */
+  WorkspaceId?: string;
+  /** 跨空间展开时的原始推理服务 ID；未展开时与 EndpointId 相同。 */
+  OriginEndpointId?: string;
   /** 服务名称。 */
   EndpointName?: string;
   /** 模型名称。 */
@@ -110,6 +114,8 @@ declare interface EndpointDetail {
   RPM?: number;
   /** 模型状态枚举值：online： 在线pre-offline： 预下线discontinued： 停止新购maintenance： 维护offline： 下线 */
   ModelStatus?: string;
+  /** 是否参与夜间折扣。true 表示该接入点参与夜间时段折扣计费，false 表示不参与。 */
+  NightDiscountEnabled?: boolean;
 }
 
 /** 新建术语条目项 */
@@ -254,6 +260,8 @@ declare interface ModelEndpointView {
   Status?: string;
   /** 模型状态枚举值：online： 在线pre-offline： 预下线discontinued： 停止新购maintenance： 维护中offline： 下线 */
   ModelStatus?: string;
+  /** 模型计费单位（模型维度属性，区别于计费方式 ChargeType）。取值：TOKEN（词元）、COUNT（次）、CREDIT（积分）、PICTURE（张）。未激活时为空。 */
+  ModelChargeUnit?: string;
   /** 服务类型。固定为 TEXT_GENERATION（文本生成）。 */
   ServiceType?: string;
   /** 计费方式。取值：FREE（免费体验）、TOKEN（按 Token 计费）。未激活时为空。 */
@@ -268,6 +276,14 @@ declare interface ModelEndpointView {
   RPM?: number;
   /** 推理服务的tpm 限制，没设置就按模型维度 tpm 限制展示 */
   TPM?: number;
+  /** 模型图标。 */
+  ModelImage?: ModelImage;
+  /** 模型下线时间，Status=pre-offline 时，会配置模型下线时间 */
+  OfflineAt?: string;
+  /** 停止新购时间 */
+  DiscontinuedAt?: string;
+  /** 是否参与夜间折扣。true 表示该接入点参与夜间时段折扣计费，false 表示不参与。 */
+  NightDiscountEnabled?: boolean;
 }
 
 /** 模型体验包信息 */
@@ -474,6 +490,10 @@ declare interface TokenPlanApiKeyListItem {
   Balance?: SubPackageBalance;
   /** 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）。 */
   ProductType?: string;
+  /** IP 白名单列表。支持 IPv4 单地址与 IPv4 CIDR 格式，空数组表示不限制。 */
+  IpWhitelist?: string[];
+  /** 是否开启超额按量计费。开启后，若 APIKey 用量达到总额度上限，并且使用的模型已开启按量计费，将自动切换至按量计费模式；未开启时用量达上限后调用报错。 */
+  OverageEnabled?: boolean;
 }
 
 /** Token Plan 套餐列表项 */
@@ -743,14 +763,18 @@ declare interface CreateTokenPlanApiKeysRequest {
   ApiKeyName: string;
   /** 创建数量。取值范围：1 ~ 10。 */
   Count: number;
-  /** 可用模型列表。如果套餐类型为企业版专业套餐，可以指定模型，也可以传入“all”，传入 “all“表示可以使用套餐支持的所有模型，如果要指定具体模型，传入 Model ID，“all“和具体的 Model ID 不能同时传入，如果不传则表示该API Key不支持任何模型，从而影响API Key的正常使用。如果套餐类型为企业版轻享套餐，则无论是否传入该字段，以及该字段传入什么值，都会被强制覆盖为["auto"]。 */
+  /** 可用模型列表。如果套餐类型为企业版专业套餐，该字段必传！可以指定模型，也可以传入“all”，传入 “all“表示可以使用套餐支持的所有模型，如果要指定具体模型，传入 Model ID，“all“和具体的 Model ID 不能同时传入。如果套餐类型为企业版轻享套餐，则无论是否传入该字段，以及该字段传入什么值，都会被强制覆盖为["auto"]。 */
   AllowedModels?: string[];
-  /** 独占额度。不传则为0，代表该 API Key 不被分配任何独占配额。单位说明如下：- 套餐类型为专业，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 独占额度。不传则为0，代表该 API Key 不被分配任何独占配额。单位说明如下：套餐类型为专业，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   ExclusiveQuota?: number;
-  /** 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度）。不传表示不设置上限。单位说明如下：- 套餐类型为专业，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度）。不传表示不设置上限。单位说明如下：套餐类型为专业，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   TotalQuota?: number;
   /** TPM（Tokens Per Minute）限制。不传使用套餐级别 TPM。必须 >= 0 且 <= 套餐 TPM。 */
   TPM?: number;
+  /** IP 白名单列表。支持 IPv4 单地址（如 1.2.3.4）和 IPv4 CIDR（如 10.0.0.0/24）格式。最多 50 个条目，不允许重复；不支持 IPv6 与 IP 范围。不传或传空数组表示不限制。批量创建时所有 APIKey 共用同一份白名单。 */
+  IpWhitelist?: string[];
+  /** 是否开启超额按量计费。默认值为 false。开启后，若 APIKey 用量达到总额度上限，并且使用的模型已开启按量计费，将自动切换至按量计费模式，该部分将按所用模型的按量计费定价额外计费；未开启时用量达上限后调用报错。 */
+  OverageEnabled?: boolean;
 }
 
 declare interface CreateTokenPlanApiKeysResponse {
@@ -1361,16 +1385,18 @@ declare interface ModifyGlossaryEntriesResponse {
 declare interface ModifyTokenPlanApiKeyRequest {
   /** API Key ID。 */
   ApiKeyId: string;
-  /** 可用模型列表。不传则不修改。- 如果套餐类型为企业版专业套餐：1）传入“all“ ：使用套餐支持的所有模型2）传入 Model ID：指定具体模型。“all“和具体的 Model ID 不能同时传入。- 如果套餐类型为企业版轻享套餐，不允许传该参数。 */
+  /** 可用模型列表。不传则不修改。如果套餐类型为企业版专业套餐：1）传入“all“ ：使用套餐支持的所有模型2）传入 Model ID：指定具体模型。“all“和具体的 Model ID 不能同时传入。如果套餐类型为企业版轻享套餐，不允许传该参数。 */
   AllowedModels?: string[];
-  /** 独占额度，不传则不修改。单位说明：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 独占额度，不传则不修改。单位说明：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   ExclusiveQuota?: number;
-  /** 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度），不传则不修改。单位说明如下：- 套餐类型为专业套餐，单位取值为积分；- 套餐类型为轻享套餐，单位取值为 token。 */
+  /** 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度），不传则不修改。单位说明如下：套餐类型为专业套餐，单位取值为积分；套餐类型为轻享套餐，单位取值为 token。 */
   TotalQuota?: number;
   /** 是否启用该 API Key。取值：enable（启用）、disable（停用），不传则不修改。 */
   UseStatus?: string;
   /** TPM（Tokens Per Minute）限制。不传则不修改。必须 >= 0 且 <= 套餐 TPM。 */
   TPM?: number;
+  /** IP 白名单列表。不传则不修改；传空数组表示清空（不限制 IP）；传非空数组表示覆盖。支持 IPv4 单地址（如 1.2.3.4）和 IPv4 CIDR（如 10.0.0.0/24）格式，最多 50 个条目，不允许重复；不支持 IPv6 与 IP 范围。 */
+  IpWhitelist?: string[];
 }
 
 declare interface ModifyTokenPlanApiKeyResponse {

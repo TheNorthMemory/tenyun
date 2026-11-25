@@ -4369,6 +4369,18 @@ declare namespace V20180724 {
     Destination?: string;
   }
 
+  interface AddSubnetToManagedClusterRequest {
+    /** Prometheus实例ID */
+    InstanceId: string;
+    /** 子网ID */
+    SubnetId: string;
+  }
+
+  interface AddSubnetToManagedClusterResponse {
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface BindProgressResponse {
     /** 绑定步骤 */
     Steps?: BindProgressStep[] | null;
@@ -8070,6 +8082,8 @@ declare interface Monitor {
   TriggerAIWorkbenchTask(data?: TriggerAIWorkbenchTaskRequest, config?: AxiosRequestConfig): AxiosPromise<TriggerAIWorkbenchTaskResponse>;
   /** 更新 Agent {@link UpdateAIWorkbenchAgentRequest} {@link UpdateAIWorkbenchAgentResponse} */
   UpdateAIWorkbenchAgent(data?: UpdateAIWorkbenchAgentRequest, config?: AxiosRequestConfig): AxiosPromise<UpdateAIWorkbenchAgentResponse>;
+  /** 添加子网到托管集群 {@link V20180724.AddSubnetToManagedClusterRequest} {@link V20180724.AddSubnetToManagedClusterResponse} */
+  AddSubnetToManagedCluster(data: V20180724.AddSubnetToManagedClusterRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.AddSubnetToManagedClusterResponse>;
   /** 绑定 Grafana 服务实例 {@link V20180724.BindPrometheusManagedGrafanaRequest} {@link V20180724.BindPrometheusManagedGrafanaResponse} */
   BindPrometheusManagedGrafana(data: V20180724.BindPrometheusManagedGrafanaRequest, config: AxiosRequestConfig & V20180724.VersionHeader): AxiosPromise<V20180724.BindPrometheusManagedGrafanaResponse>;
   /** 绑定策略对象 {@link V20180724.BindingPolicyObjectRequest} {@link V20180724.BindingPolicyObjectResponse} */

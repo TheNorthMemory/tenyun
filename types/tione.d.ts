@@ -1856,6 +1856,12 @@ declare interface SSHConfig {
   PodSSHInfo?: PodSSHInfo | null;
 }
 
+/** 任务调度策略 */
+declare interface SchedulePolicy {
+  /** 任务优先级，取值 p0~p9，p0 最高、p9 最低 */
+  PriorityClass?: string | null;
+}
+
 /** 定时的事务和行为 */
 declare interface ScheduledAction {
   /** 是否要定时停止服务，true or false。true 则 ScheduleStopTime 必填， false 则 ScheduleStopTime 不生效 */
@@ -4660,6 +4666,22 @@ declare interface ModifyServiceGroupWeightsResponse {
   RequestId?: string;
 }
 
+declare interface ModifyTrainingTaskSchedulingPolicyRequest {
+  /** 训练任务 id */
+  TrainingTaskId: string;
+  /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
+  TiProjectId?: string;
+  /** 是否开启跨资源组调度。缺省为 false，仅改优先级时若任务已开启需显式传 true，否则会被关闭。 */
+  CrossResourceGroupScheduling?: boolean;
+  /** 调度策略 */
+  SchedulePolicy?: SchedulePolicy;
+}
+
+declare interface ModifyTrainingTaskSchedulingPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface ModifyUserGrantRequest {
   /** TI工作空间ID使用非默认空间必须填写工作空间ID，使用默认空间无需填写工作空间ID。 */
   TiProjectId?: string;
@@ -5689,6 +5711,8 @@ declare interface Tione {
   ModifyRoleUserGrant(data?: ModifyRoleUserGrantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyRoleUserGrantResponse>;
   /** 更新推理服务组流量分配 {@link ModifyServiceGroupWeightsRequest} {@link ModifyServiceGroupWeightsResponse} */
   ModifyServiceGroupWeights(data: ModifyServiceGroupWeightsRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyServiceGroupWeightsResponse>;
+  /** 更新训练任务调度策略 {@link ModifyTrainingTaskSchedulingPolicyRequest} {@link ModifyTrainingTaskSchedulingPolicyResponse} */
+  ModifyTrainingTaskSchedulingPolicy(data: ModifyTrainingTaskSchedulingPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyTrainingTaskSchedulingPolicyResponse>;
   /** 更新用户权限配置 {@link ModifyUserGrantRequest} {@link ModifyUserGrantResponse} */
   ModifyUserGrant(data?: ModifyUserGrantRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyUserGrantResponse>;
   /** 更新空间成员列表 {@link ModifyWorkspaceMembersRequest} {@link ModifyWorkspaceMembersResponse} */

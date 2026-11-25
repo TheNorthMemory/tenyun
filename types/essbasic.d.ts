@@ -990,11 +990,11 @@ declare interface HasAuthUser {
 
 /** 视频核身意图配置，可指定问答模式或者点头模式的语音文本。注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
 declare interface Intention {
-  /** 视频认证类型，支持以下类型1 : 问答模式2 : 点头模式注: `视频认证为白名单功能，使用前请联系对接的客户经理沟通。` */
+  /** 视频认证类型，支持以下类型1 : 问答模式2 : 点头模式注: 视频认证为白名单功能，使用前请联系对接的客户经理沟通。 */
   IntentionType?: number;
-  /** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。支持传入1～10轮问答，最多支持10轮。注：`选择问答模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可语音回复“同意”或“不同意”。` */
+  /** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。支持传入1～9轮问答，最多支持9轮。注：选择问答模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可语音回复“同意”或“不同意”。 */
   IntentionQuestions?: IntentionQuestion[];
-  /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。支持传入1～10轮点头确认文本，最多支持10轮。注：`选择点头模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可点头同意。` */
+  /** 意愿核身（点头确认模式）使用的文案，若未使用意愿核身（点头确认模式），则该字段无需传入。支持传入1～9轮点头确认文本，最多支持9轮。注：选择点头模式时，此字段可不传，不传则使用默认语音文本：请问，您是否同意签署本协议？可点头同意。 */
   IntentionActions?: IntentionAction[];
   /** 视频核身相关配置 */
   RuleIdConfig?: RuleIdConfig;
@@ -1018,7 +1018,7 @@ declare interface IntentionActionResultDetail {
   Video?: string;
 }
 
-/** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。当前仅支持1轮问答。 */
+/** 意愿核身语音问答模式（即语音播报+语音回答）使用的文案，包括：系统语音播报的文本、需要核验的标准文本。支持9轮问答。 */
 declare interface IntentionQuestion {
   /** 当选择语音问答模式时，系统自动播报的问题文本，最大长度为250个字符。 */
   Question?: string;
@@ -3865,13 +3865,13 @@ declare interface ModifyPartnerAutoSignAuthUrlResponse {
 declare interface OperateChannelTemplateRequest {
   /** 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。此接口下面信息必填。渠道应用标识: Agent.AppId */
   Agent: Agent;
-  /** 操作类型，可取值如下:SELECT: 查询DELETE: 删除UPDATE: 更新 */
+  /** 操作类型，可取值如下:SELECT: 查询DELETE: 删除UPDATE: 更新 DELETETEMPLATE: 删除指定的模板 */
   OperateType: string;
-  /** 合同模板ID，为32位字符串。注: ` 此处为第三方应用平台模板库模板ID，非子客模板ID` */
+  /** 合同模板ID，为32位字符串。注: 此处为第三方应用平台模板库模板ID，非子客模板ID */
   TemplateId: string;
-  /** 第三方平台子客企业的唯一标识，支持批量(用,分割) 一次批量操作最多支持100个第三方平台子客 */
+  /** 第三方平台子客企业的唯一标识，支持批量(用,分割)一次批量操作最多支持100个第三方平台子客 */
   ProxyOrganizationOpenIds?: string;
-  /** 模板可见范围, 可以设置的值如下:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业对应控制台的位置![image](https://qcloudimg.tencent-cloud.cn/raw/68b97812c68d6af77a5991e3bff5c790.png) */
+  /** 模板可见范围, 可以设置的值如下:all: 所有本第三方应用合作企业可见part: 指定的本第三方应用合作企业对应控制台的位置 */
   AuthTag?: string;
   /** 当OperateType=UPDATE时，可以通过设置此字段对模板启停用状态进行操作。0: 不修改模板可用状态1: 启用模板2: 停用模板启用后模板可以正常领取。停用后，推送方式为【自动推送】的模板则无法被子客使用，推送方式为【手动领取】的模板则无法出现被模板库被子客领用。如果Available更新失败，会直接返回错误。 */
   Available?: number;
@@ -3890,7 +3890,7 @@ declare interface OperateChannelTemplateResponse {
   TemplateId?: string;
   /** 描述模板可见性更改的结果。all-success: 全部成功part-success: 部分成功,失败的会在FailMessageList中展示fail:全部失败, 失败的会在FailMessageList中展示 */
   OperateResult?: string;
-  /** 模板可见范围:**all**: 所有本第三方应用合作企业可见**part**: 指定的本第三方应用合作企业 */
+  /** 模板可见范围:all: 所有本第三方应用合作企业可见part: 指定的本第三方应用合作企业 */
   AuthTag?: string;
   /** 第三方平台子客企业标识列表，仅在select 模式下返回 */
   ProxyOrganizationOpenIds?: string[];

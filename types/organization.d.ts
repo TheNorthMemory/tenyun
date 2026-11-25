@@ -212,6 +212,20 @@ declare interface MemberMainInfo {
   MemberName?: string;
 }
 
+/** 创建/邀请成员时可设置的财务权限 */
+declare interface MemberPermissionOption {
+  /** 权限 ID */
+  Id?: number;
+  /** 权限名 */
+  Name?: string;
+  /** 展示状态枚举值：FIXED： 已勾选且置灰，不可修改OPTIONAL： 正常可选DISABLE： 置灰不可选，悬浮展示原因默认值：OPTIONAL */
+  Status?: string;
+  /** 是否默认勾选 */
+  DefaultChecked?: boolean;
+  /** 置灰原因码枚举值：TransferNotAllowAdd： 资金划拨权限未命中白名单CreditAmountsNotAllowAdd： 信用额度设置权限未命中白名单AddDiscountInheritNotAllow： 校验不通过或异常 */
+  DisabledCode?: string;
+}
+
 /** 部门主要信息 */
 declare interface NodeMainInfo {
   /** 部门ID */
@@ -2136,6 +2150,10 @@ declare interface DescribeOrganizationResponse {
   IsAssignManager?: boolean;
   /** 是否实名主体管理员。是：true，否：false */
   IsAuthManager?: boolean;
+  /** 创建/邀请成员时可设置的财务权限列表 */
+  MemberPermissionOptions?: MemberPermissionOption[];
+  /** 创建/邀请成员时的默认付费方式。枚举值：SelfPay： 自付BehalfPay： 代付 */
+  DefaultPayType?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
