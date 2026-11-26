@@ -232,6 +232,8 @@ declare interface AgentPluginConfig {
   OAuthConsent?: number;
   /** 凭证配置 */
   CredentialConfig?: AgentPluginCredentialConfig;
+  /** 连接器知识范围，目前仅支持腾讯乐享配置 */
+  KnowledgeScope?: ConnectorKnowledgeScope;
 }
 
 /** Agent 插件凭据配置 */
@@ -1482,6 +1484,36 @@ declare interface ConflictQASummary {
   ConflictGroupId?: string;
 }
 
+/** 连接器知识范围 */
+declare interface ConnectorKnowledgeScope {
+  /** 是否启用知识范围 */
+  Enabled?: boolean;
+  /** 已选资源列表，Enabled 为 true 时至少 1 项 */
+  ResourceList?: ConnectorResource[];
+}
+
+/** 连接器资源及上级链 */
+declare interface ConnectorResource {
+  /** 资源类型枚举值：1： 空间（乐享知识库）2： 文件夹3： 文档或文件4： 团队 */
+  Type?: number;
+  /** 连接器侧资源 ID */
+  ResourceId?: string;
+  /** 资源名称快照 */
+  Name?: string;
+  /** 祖先链快照，自顶向下且不含自身，最多 100 项；顶层资源为空。 */
+  AncestorList?: ConnectorResourceRef[];
+}
+
+/** 连接器资源引用 */
+declare interface ConnectorResourceRef {
+  /** 连接器侧资源 ID */
+  ResourceId: string;
+  /** 资源类型：1-空间（乐享知识库），2-文件夹，3-文档或文件，4-团队；0 无效。枚举项枚举值描述CONNECTOR_RESOURCE_TYPE_UNSPECIFIED0未指定，不允许用于资源引用CONNECTOR_RESOURCE_TYPE_WORKSPACE1空间；乐享个人知识库和团队知识库均为此类型CONNECTOR_RESOURCE_TYPE_FOLDER2文件夹CONNECTOR_RESOURCE_TYPE_DOC3文档或文件CONNECTOR_RESOURCE_TYPE_GROUP4团队或群组 */
+  Type: number;
+  /** 资源名称；请求中选填，不参与资源定位。 */
+  Name?: string;
+}
+
 /** 消耗分类 */
 declare interface ConsumptionClassification {
   /** 消耗场景（如推理/训练/评测等） */
@@ -2108,6 +2140,8 @@ declare interface DocOperator {
 declare interface DocParseConfig {
   /** 内容过滤配置 */
   ContentFilter?: ContentFilter | null;
+  /** 文档解析策略：1=OCR解析 2=智能解析 3=MLLM解析；不传默认智能解析枚举项枚举值描述DOC_PARSE_STRATEGY_UNKNOWN0未指定，走服务端默认（智能解析）DOC_PARSE_STRATEGY_OCR1OCR 解析DOC_PARSE_STRATEGY_SMART2智能解析（按图片类型自动选择：数据图/思维导图/架构图/流程图用 MLLM，其他图片用 OCR）DOC_PARSE_STRATEGY_MLLM3MLLM 解析 */
+  ParseStrategy?: number;
   /** 分割规则 */
   SplitRule?: string;
 }

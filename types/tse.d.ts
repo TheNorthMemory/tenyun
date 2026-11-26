@@ -210,7 +210,7 @@ declare interface AIGWLLMQuotaLimit {
   RPMLimit?: number;
   /** 该模型服务每分钟 Token 数上限，0 表示该维度不限 */
   TPMLimit?: number;
-  /** 并发限流数 */
+  /** 并发数限流 */
   ConcurrentCountLimit?: number;
 }
 
@@ -236,15 +236,15 @@ declare interface AIGWLatencyPriorityRouteRule {
 
 /** AI 网关模型服务单次请求输入字符长度限制。只拒绝超限输入，不做截断。计量为整个请求 JSON 的 Unicode 字符数。 */
 declare interface AIGWLengthLimitConfig {
-  /** 是否开启输入限制 */
+  /** 是否开启输入长度限制 */
   EnableInputLimit?: boolean;
-  /** 最大输入字符数 */
+  /** 最大输入长度字符数 */
   MaxInputChars?: number;
 }
 
 /** 负载均衡配置，仅服务来源（ServiceSource，SourceId 非空）场景生效。 */
 declare interface AIGWLoadBalanceConfig {
-  /** 负载均衡算法 */
+  /** 负载均衡类型枚举值：RoundRobin： 轮询WeightedRoundRobin： 加权轮询LeastConnections： 最少连接Random： 随机默认值：RoundRobin */
   Algorithm?: string;
 }
 
@@ -5815,6 +5815,8 @@ declare interface DescribeCloudNativeAPIGatewaysRequest {
   Offset?: number;
   /** 请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选 */
   Filters?: Filter[];
+  /** 是否按照地域进行过滤 */
+  EnableRegionFilter?: boolean;
 }
 
 declare interface DescribeCloudNativeAPIGatewaysResponse {

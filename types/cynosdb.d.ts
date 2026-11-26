@@ -470,7 +470,7 @@ declare interface BizTaskInfo {
   Operator?: string;
   /** 任务输出信息 */
   Output?: string;
-  /** 任务状态 */
+  /** 任务状态枚举值：waiting： 等待执行processing： 执行中success： 执行成功fail： 任务失败paused： 任务暂停（存量任务状态）undoing： 回滚中undoed： 任务已回滚 */
   Status?: string;
   /** 任务类型 */
   TaskType?: string;
@@ -2786,6 +2786,8 @@ declare interface ProxyConfig {
   Description?: string;
   /** 数据库节点信息（该参数与ProxyCount需要任选一个输入） */
   ProxyZones?: ProxyZone[];
+  /** proxy版本号 */
+  ProxyVersion?: string;
 }
 
 /** 访问代理配置 */
@@ -3686,6 +3688,8 @@ declare interface UserHostPrivilege {
   DbHost: string;
   /** 用户权限 */
   DbPrivilege: string;
+  /** 权限明细列表 */
+  PrivilegeList?: string[];
 }
 
 /** 保险箱信息 */
@@ -4701,6 +4705,8 @@ declare interface CreateProxyRequest {
   Cpu: number;
   /** 内存 */
   Mem: number;
+  /** 代理内核版本。不传时默认使用最新稳定版本（白名单用户以appoint策略为准）；显式指定时将实时校验该版本是否在当前集群支持的代理版本集合内，不在则返回错误。集群存在已开启列存索引的只读实例时，所选版本需不低于列存转发要求的最低版本（如1.4.7） */
+  ProxyVersion?: string;
   /** 私有网络ID，默认与集群私有网络ID保持一致 */
   UniqueVpcId?: string;
   /** 私有网络子网ID，默认与集群子网ID保持一致 */
@@ -6757,10 +6763,18 @@ declare interface DescribeSlaveZonesResponse {
 }
 
 declare interface DescribeSupportProxyVersionRequest {
-  /** 集群ID */
-  ClusterId: string;
-  /** 数据库代理组ID */
+  /** 集群ID。与Zone/DbVersion/CynosVersion二选一：查询存量集群支持的代理版本时必填；不传时表示创建集群前查询场景，需同时传入Zone、DbVersion、CynosVersion */
+  ClusterId?: string;
+  /** 数据库代理组ID。仅在传入ClusterId时有效，传入时返回当前代理版本号 */
   ProxyGroupId?: string;
+  /** 可用区，如ap-guangzhou-3。创建集群前查询场景（不传ClusterId时）必填 */
+  Zone?: string;
+  /** 数据库引擎版本，如5.7、8.0。创建集群前查询场景（不传ClusterId时）必填 */
+  DbVersion?: string;
+  /** 目标内核版本，如3.1.20.001。创建集群前查询场景（不传ClusterId时）必填 */
+  CynosVersion?: string;
+  /** 存储版本，枚举值：1.0、2.0。可选，仅创建集群前查询场景有效 */
+  StorageVersion?: string;
 }
 
 declare interface DescribeSupportProxyVersionResponse {
@@ -7109,6 +7123,8 @@ declare interface IsolateClusterRequest {
   IsolateReason?: string;
   /** 保留备份,true-保留（会产生费用） */
   SaveBackup?: boolean;
+  /** 立即彻底删除RO实例 */
+  ImmediateRecycleRo?: boolean;
 }
 
 declare interface IsolateClusterResponse {
@@ -7133,6 +7149,8 @@ declare interface IsolateInstanceRequest {
   IsolateReason?: string;
   /** 保留备份 */
   SaveBackup?: boolean;
+  /** 立即彻底删除RO实例 */
+  ImmediateRecycleRo?: boolean;
 }
 
 declare interface IsolateInstanceResponse {
@@ -9192,7 +9210,7 @@ declare interface Cynosdb {
   /** 查询从可用区 {@link DescribeSlaveZonesRequest} {@link DescribeSlaveZonesResponse} */
   DescribeSlaveZones(data: DescribeSlaveZonesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSlaveZonesResponse>;
   /** 查询支持的数据库代理版本 {@link DescribeSupportProxyVersionRequest} {@link DescribeSupportProxyVersionResponse} */
-  DescribeSupportProxyVersion(data: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
+  DescribeSupportProxyVersion(data?: DescribeSupportProxyVersionRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeSupportProxyVersionResponse>;
   /** 查询任务列表 {@link DescribeTasksRequest} {@link DescribeTasksResponse} */
   DescribeTasks(data?: DescribeTasksRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeTasksResponse>;
   /** 查询备份保险箱关联的集群信息列表 {@link DescribeVaultBackupClusterInfoRequest} {@link DescribeVaultBackupClusterInfoResponse} */

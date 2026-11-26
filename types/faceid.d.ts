@@ -2,6 +2,14 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 命中的攻击区域列表 */
+declare interface AttackRegion {
+  /** 攻击区域的四点坐标，固定为轴对齐矩形，按 左上 → 右上 → 右下 → 左下 顺时针顺序排列。单位为像素，坐标原点为图像左上角。数组长度固定为 4。 */
+  Polygon?: Point[];
+  /** 攻击描述，对该区域命中的可疑特征进行详细说明。 */
+  Description?: string;
+}
+
 /** 疑似攻击风险详情 */
 declare interface AttackRiskDetail {
   /** 疑似的攻击痕迹类型，具体类型如下：SuspectedSpoofingAttack：翻拍攻击SuspectedSynthesisImage：疑似合成图片SuspectedSynthesisVideo：疑似合成视频SuspectedAnomalyAttack：人脸特征疑似非真人SuspectedAdversarialAttack：疑似对抗样本攻击SuspectedBlackIndustry：疑似黑产批量模板攻击SuspectedWatermark：疑似存在水印 */
@@ -324,6 +332,14 @@ declare interface IntentionVerifyData {
   AsrResultSimilarity?: string | null;
   /** 意愿确认环节中录制的音频（base64）。若不存在则为空字符串。 */
   IntentionVerifyAudio?: string | null;
+}
+
+/** 图像坐标点结构体 */
+declare interface Point {
+  /** 横坐标，单位像素，取值范围 [0, 图像宽度] */
+  X?: number;
+  /** 纵坐标，单位像素，取值范围 [0, 图像高度] */
+  Y?: number;
 }
 
 /** 模板检索详细信息 */
@@ -650,6 +666,18 @@ declare interface GetActionSequenceRequest {
 declare interface GetActionSequenceResponse {
   /** 动作顺序，例如：2,1 or 1,2。- 1代表张嘴，2代表闭眼。 */
   ActionSequence?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface GetAttackDetailRequest {
+  /** 待查询的检测请求 ID，来自上游检测接口（如 DetectAIFakeFaces）返回的 RequestId。长度 32 ~ 64，仅支持数字、字母及短横线 -。检测结果保留期为 3 天，超期后将返回 ResourceUnavailable.ResultExpired。 */
+  SeqId: string;
+}
+
+declare interface GetAttackDetailResponse {
+  /** 检测命中的攻击区域列表。本次检测未命中任何攻击区域时返回空数组 [] */
+  AttackRegionList?: AttackRegion[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1373,6 +1401,8 @@ declare interface Faceid {
   EncryptedPhoneVerification(data: EncryptedPhoneVerificationRequest, config?: AxiosRequestConfig): AxiosPromise<EncryptedPhoneVerificationResponse>;
   /** 获取动作顺序 {@link GetActionSequenceRequest} {@link GetActionSequenceResponse} */
   GetActionSequence(data?: GetActionSequenceRequest, config?: AxiosRequestConfig): AxiosPromise<GetActionSequenceResponse>;
+  /** 获取攻击详细信息 {@link GetAttackDetailRequest} {@link GetAttackDetailResponse} */
+  GetAttackDetail(data: GetAttackDetailRequest, config?: AxiosRequestConfig): AxiosPromise<GetAttackDetailResponse>;
   /** 获取实名核身结果信息 {@link GetDetectInfoRequest} {@link GetDetectInfoResponse} */
   GetDetectInfo(data: GetDetectInfoRequest, config?: AxiosRequestConfig): AxiosPromise<GetDetectInfoResponse>;
   /** 获取实名核身结果信息（适用所有版本） {@link GetDetectInfoEnhancedRequest} {@link GetDetectInfoEnhancedResponse} */

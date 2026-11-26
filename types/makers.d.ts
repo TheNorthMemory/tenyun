@@ -342,6 +342,20 @@ declare interface ZoneDomain {
   OwnershipVerification?: OwnershipVerification | null;
 }
 
+declare interface BlockProjectRequest {
+  /** Makers 站点 ID */
+  ZoneId: string;
+  /** 项目 ID */
+  ProjectId: string;
+  /** 操作类型，目前支持 Ban表示封禁项目， Normal表示解封项目。枚举值：Ban： 表示封禁项目Normal： 表示解封项目 */
+  Status: string;
+}
+
+declare interface BlockProjectResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface CreateDeploymentRequest {
   /** Makers 站点 ID */
   ZoneId: string;
@@ -707,6 +721,8 @@ declare interface ModifyZoneCustomDomainEnvResponse {
 /** {@link Makers Web 与 Agent 开发部署平台 Makers} */
 declare interface Makers {
   (): Versions;
+  /** 封禁或解封项目 {@link BlockProjectRequest} {@link BlockProjectResponse} */
+  BlockProject(data: BlockProjectRequest, config?: AxiosRequestConfig): AxiosPromise<BlockProjectResponse>;
   /** 创建部署 {@link CreateDeploymentRequest} {@link CreateDeploymentResponse} */
   CreateDeployment(data: CreateDeploymentRequest, config?: AxiosRequestConfig): AxiosPromise<CreateDeploymentResponse>;
   /** 创建项目 {@link CreateProjectRequest} {@link CreateProjectResponse} */

@@ -1181,6 +1181,8 @@ declare interface CreatePreCacheImageTaskRequest {
   ImageRegistryType: string;
   /** 镜像预热类型枚举值：image： 镜像预热image_volume： 镜像卷预热默认值：image */
   PreCacheType?: string;
+  /** 闲置清理时间枚举值：inherit： 继承账号配置的自动清理策略0： 永不自动清理正整数加 m/h/d： 空闲相应时间后自动清理默认值：inherit */
+  IdleTTL?: string;
 }
 
 declare interface CreatePreCacheImageTaskResponse {
@@ -1730,6 +1732,10 @@ declare interface DescribePreCacheImageTaskResponse {
   ReadyTime?: string;
   /** 该预热镜像最近一次被沙箱实例使用时间 */
   LastUsedTime?: string;
+  /** 镜像预热闲置清理时间枚举值：inherit： 继承账号配置的自动清理策略0： 永不自动清理正整数加 m/h/d： 空闲相应时间后自动清理 */
+  IdleTTL?: string;
+  /** 预计过期清理时间 */
+  ExpireTime?: string;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

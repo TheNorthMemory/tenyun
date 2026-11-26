@@ -298,6 +298,28 @@ declare interface DescribeAgentCredentialResp {
   Type?: string;
 }
 
+/** 获取凭证列表的返回值 */
+declare interface DescribeAgentCredentialsResp {
+  /** 总数 */
+  Total?: number;
+  /** 条目 */
+  Items?: DescribeAgentCredentialResp[];
+}
+
+/** 查询凭据列表的排序 */
+declare interface DescribeAgentCredentialsSortDTO {
+  /** 创建时间 */
+  CreateTime?: number;
+  /** 修改时间 */
+  UpdateTime?: number;
+  /** 名称 */
+  Name?: number;
+  /** 状态 */
+  Status?: number;
+  /** 类型 */
+  Type?: number;
+}
+
 /** DescribeMcpServerResponseVO */
 declare interface DescribeMcpServerResponseVO {
   /** 实例ID */
@@ -776,6 +798,8 @@ declare interface PromptModerateConfigDTO {
   InterceptMessage?: string | null;
   /** 检测上下文 */
   ContextScope?: string | null;
+  /** 检测内容类型 */
+  CheckTargets?: string[];
 }
 
 /** ResultIDVO */
@@ -974,6 +998,10 @@ declare interface ServiceVO {
   CredentialName?: string;
   /** 访问协议枚举值：http： httphttps： https */
   RequestProtocolType?: string | null;
+  /** 安全规则 */
+  ServiceSecurityRules?: BindMcpSecurityRuleDTO[];
+  /** 安全规则 */
+  ServiceSecurityRulesVO?: McpSecurityRulesVO[];
 }
 
 /** 匹配条件请求参数 */
@@ -1086,6 +1114,8 @@ declare interface TmsConfigDTO {
   InterceptMessage?: string | null;
   /** 检测上下文 */
   ContextScope?: string | null;
+  /** 检测内容类型 */
+  CheckTargets?: string[];
 }
 
 /** token长度路由参数 */
@@ -1227,9 +1257,19 @@ declare interface CreateAgentAppServicesResponse {
 }
 
 declare interface CreateAgentCredentialRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** 名称 */
+  Name: string;
+  /** 类型 */
+  Type: string;
+  /** 具体内容 */
+  Content: AgentCredentialContentDTO;
 }
 
 declare interface CreateAgentCredentialResponse {
+  /** credential id */
+  Data?: ResultIDVO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1481,9 +1521,15 @@ declare interface DeleteAgentAppServicesResponse {
 }
 
 declare interface DeleteAgentCredentialRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** credential id */
+  ID: string;
 }
 
 declare interface DeleteAgentCredentialResponse {
+  /** credential id */
+  Data?: ResultIDVO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1647,17 +1693,43 @@ declare interface DescribeAgentAppsResponse {
 }
 
 declare interface DescribeAgentCredentialRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** app id */
+  ID: string;
 }
 
 declare interface DescribeAgentCredentialResponse {
+  /** Credential详情 */
+  Data?: DescribeAgentCredentialResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
 
 declare interface DescribeAgentCredentialsRequest {
+  /** 分页大小 */
+  Limit: number;
+  /** 实例ID */
+  InstanceID?: string;
+  /** notID列表 */
+  NotIDs?: string[];
+  /** 状态：normal正常状态，disabled下线状态 */
+  Status?: string;
+  /** 分页偏移量 */
+  Offset?: number;
+  /** 关键词 */
+  Keyword?: string;
+  /** 服务ID数组 */
+  IDs?: string[];
+  /** 认证类型：sts，reqKey */
+  Type?: string;
+  /** 排序 */
+  Sort?: DescribeAgentCredentialsSortDTO;
 }
 
 declare interface DescribeAgentCredentialsResponse {
+  /** Credential列表 */
+  Data?: DescribeAgentCredentialsResp;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -1849,9 +1921,21 @@ declare interface ModifyAgentAppResponse {
 }
 
 declare interface ModifyAgentCredentialRequest {
+  /** 实例ID */
+  InstanceID: string;
+  /** certify id */
+  ID: string;
+  /** 名称 */
+  Name?: string;
+  /** 类型 */
+  Type?: string;
+  /** 具体内容 */
+  Content?: AgentCredentialContentDTO;
 }
 
 declare interface ModifyAgentCredentialResponse {
+  /** credential id */
+  Data?: ResultIDVO;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2120,7 +2204,7 @@ declare interface Apis {
   /** 应用API关联 {@link CreateAgentAppServicesRequest} {@link CreateAgentAppServicesResponse} */
   CreateAgentAppServices(data: CreateAgentAppServicesRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentAppServicesResponse>;
   /** 创建凭据 {@link CreateAgentCredentialRequest} {@link CreateAgentCredentialResponse} */
-  CreateAgentCredential(data?: CreateAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentCredentialResponse>;
+  CreateAgentCredential(data: CreateAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<CreateAgentCredentialResponse>;
   /** 创建mcp server {@link CreateMcpServerRequest} {@link CreateMcpServerResponse} */
   CreateMcpServer(data: CreateMcpServerRequest, config?: AxiosRequestConfig): AxiosPromise<CreateMcpServerResponse>;
   /** 创建模型 {@link CreateModelRequest} {@link CreateModelResponse} */
@@ -2138,7 +2222,7 @@ declare interface Apis {
   /** 应用API关联关系解除 {@link DeleteAgentAppServicesRequest} {@link DeleteAgentAppServicesResponse} */
   DeleteAgentAppServices(data: DeleteAgentAppServicesRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentAppServicesResponse>;
   /** 删除凭据 {@link DeleteAgentCredentialRequest} {@link DeleteAgentCredentialResponse} */
-  DeleteAgentCredential(data?: DeleteAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentCredentialResponse>;
+  DeleteAgentCredential(data: DeleteAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteAgentCredentialResponse>;
   /** 删除mcp server {@link DeleteMcpServerRequest} {@link DeleteMcpServerResponse} */
   DeleteMcpServer(data: DeleteMcpServerRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteMcpServerResponse>;
   /** 删除模型 {@link DeleteModelRequest} {@link DeleteModelResponse} */
@@ -2158,9 +2242,9 @@ declare interface Apis {
   /** 查询app列表 {@link DescribeAgentAppsRequest} {@link DescribeAgentAppsResponse} */
   DescribeAgentApps(data: DescribeAgentAppsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentAppsResponse>;
   /** 查询凭据详情 {@link DescribeAgentCredentialRequest} {@link DescribeAgentCredentialResponse} */
-  DescribeAgentCredential(data?: DescribeAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCredentialResponse>;
+  DescribeAgentCredential(data: DescribeAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCredentialResponse>;
   /** 查询凭据列表 {@link DescribeAgentCredentialsRequest} {@link DescribeAgentCredentialsResponse} */
-  DescribeAgentCredentials(data?: DescribeAgentCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCredentialsResponse>;
+  DescribeAgentCredentials(data: DescribeAgentCredentialsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeAgentCredentialsResponse>;
   /** 查询mcp server详情 {@link DescribeMcpServerRequest} {@link DescribeMcpServerResponse} */
   DescribeMcpServer(data: DescribeMcpServerRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeMcpServerResponse>;
   /** 查询mcp server列表 {@link DescribeMcpServersRequest} {@link DescribeMcpServersResponse} */
@@ -2182,7 +2266,7 @@ declare interface Apis {
   /** 修改app的model service关联 {@link ModifyAgentAppModelServicesRequest} {@link ModifyAgentAppModelServicesResponse} */
   ModifyAgentAppModelServices(data: ModifyAgentAppModelServicesRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentAppModelServicesResponse>;
   /** 修改凭据 {@link ModifyAgentCredentialRequest} {@link ModifyAgentCredentialResponse} */
-  ModifyAgentCredential(data?: ModifyAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentCredentialResponse>;
+  ModifyAgentCredential(data: ModifyAgentCredentialRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyAgentCredentialResponse>;
   /** 修改mcp server {@link ModifyMcpServerRequest} {@link ModifyMcpServerResponse} */
   ModifyMcpServer(data: ModifyMcpServerRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyMcpServerResponse>;
   /** 修改模型 {@link ModifyModelRequest} {@link ModifyModelResponse} */

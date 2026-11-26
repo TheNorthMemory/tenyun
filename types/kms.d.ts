@@ -92,6 +92,10 @@ declare interface ExclusiveHSM {
   HsmClusterId?: string;
   /** 独享集群名称 */
   HsmClusterName?: string;
+  /** 根密钥的使用量单位：个 */
+  CmkUserCount?: number;
+  /** 根密钥的额度单位：个 */
+  CmkLimit?: number;
 }
 
 /** 预付费计费信息 */

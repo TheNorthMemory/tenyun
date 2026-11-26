@@ -132,6 +132,22 @@ declare interface AsrParam {
   FilterPunc?: number;
 }
 
+/** AsyncTTSTextSegment对应的结果 */
+declare interface AsyncTTSSegmentResult {
+  /** 分段文本 */
+  Text?: string;
+  /** 音频下载url */
+  AudioDownloadUrl?: string;
+  /** 音频时长单位：ms */
+  DurationMs?: number;
+}
+
+/** 文本分段元素 */
+declare interface AsyncTTSTextSegment {
+  /** 分段文本 */
+  Text?: string;
+}
+
 /** 音频编码参数。 */
 declare interface AudioEncode {
   /** 输出流音频采样率。取值为[48000, 44100, 32000, 24000, 16000, 8000]，单位是Hz。 */
@@ -1805,6 +1821,8 @@ declare interface AsyncTextToSpeechRequest {
   Voice: Voice;
   /** TRTC的SdkAppId */
   SdkAppId: number;
+  /** 分段文本，优先级高于text，适用于定制长文本分句场景入参限制：文本总长度不能超过50000字符，段数不能超过500 */
+  TextSegments?: AsyncTTSTextSegment[];
   /** 文本转语音的输出音频的格式 */
   AudioFormat?: AudioFormat;
   /** TTS的模型，当前固定为：flow_02_turbo枚举值：flow_02_turbo： flow_02_turbo */
@@ -1820,6 +1838,10 @@ declare interface AsyncTextToSpeechRequest {
 declare interface AsyncTextToSpeechResponse {
   /** 任务ID */
   TaskId?: string;
+  /** 当前正在处理的任务数 */
+  CurrentTaskCount?: number;
+  /** 最大允许提交的任务数，默认1000，有提额需求请提交工单 */
+  MaxTaskCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -2324,7 +2346,7 @@ declare interface DescribeAsyncTextToSpeechRequest {
 }
 
 declare interface DescribeAsyncTextToSpeechResponse {
-  /** 任务状态- Processing，处理中- Success，任务成功- Failed，任务失败- Expired，任务过期 */
+  /** 任务状态Processing，处理中Success，任务成功Failed，任务失败Expired，任务过期 */
   Status?: string;
   /** 音频下载url */
   AudioDownloadUrl?: string;
@@ -2332,6 +2354,8 @@ declare interface DescribeAsyncTextToSpeechResponse {
   SubtitleDownloadUrl?: string;
   /** 音频时长 */
   TotalDurationMs?: number;
+  /** 分段文本对应的结果 */
+  SegmentResults?: AsyncTTSSegmentResult[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

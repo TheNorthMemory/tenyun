@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 265+ 款产品，16704+ 服务数</summary>
+<details><summary>共计 265+ 款产品，16706+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -235,7 +235,7 @@ ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(99) | 2020-12-22(53) |
 evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(5) |
 facefusion | [人脸融合](https://cloud.tencent.com/document/product/670) | 2022-09-27(3) | 2018-12-01(3) |
-faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(37) |
+faceid | [人脸核身](https://cloud.tencent.com/document/product/1007) | 2018-03-01(38) |
 fmu | [人脸试妆](https://cloud.tencent.com/document/product/1172) | 2019-12-13(7) |
 ft | [人像变换](https://cloud.tencent.com/document/product/1202) | 2020-03-04(6) |
 fwm | [防火墙管理](https://cloud.tencent.com/document/product/1812) | 2025-06-11(53) |
@@ -275,7 +275,7 @@ live | [云直播CSS](https://cloud.tencent.com/document/product/267) | 2018-08-
 lke | [腾讯云智能体开发平台](https://cloud.tencent.com/document/product/1759) | 2023-11-30(106) |
 lkeap | [知识引擎原子能力](https://cloud.tencent.com/document/product/1772) | 2024-05-22(11) |
 lowcode | [云开发低码](https://cloud.tencent.com/document/product/1301) | 2021-01-08(17) |
-makers | [Web 与 Agent 开发部署平台 Makers](https://cloud.tencent.com/document/product/1847) | 2026-11-13(16) |
+makers | [Web 与 Agent 开发部署平台 Makers](https://cloud.tencent.com/document/product/1847) | 2026-11-13(17) |
 mall | [商场客留大数据](https://cloud.tencent.com/document/product/1707) | 2023-05-18(1) |
 mariadb | [云数据库 MariaDB](https://cloud.tencent.com/document/product/237) | 2017-03-12(81) |
 market | [云市场](https://cloud.tencent.com/document/product/306) | 2019-10-10(2) |

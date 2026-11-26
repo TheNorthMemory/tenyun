@@ -1992,6 +1992,8 @@ declare interface AigcAudioOutputVideoInfo {
 declare interface AigcAudioReferenceAudioInfo {
   /** 参考音频URL信息。需外网可访问。 */
   AudioUrl?: string;
+  /** 参考类型。 */
+  ReferenceType?: string;
 }
 
 /** 用于AIGC视频生成的参考视频素材。 */

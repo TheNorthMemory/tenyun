@@ -1603,6 +1603,8 @@ declare namespace V20180525 {
     ClusterCIDR?: string | null;
     /** 【已废弃】是否开启专线连接能力 */
     Enabled?: boolean;
+    /** ProxyCLBMode枚举值：Dedicated： 默认，独立专属 CLB 元素Shared： 复用支撑面 CLB默认值：Dedicated */
+    ProxyCLBMode?: string;
   }
 
   /** 集群master自定义参数 */

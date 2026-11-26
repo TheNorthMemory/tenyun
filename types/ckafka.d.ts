@@ -1720,7 +1720,7 @@ declare interface ModifyInstanceAttributesConfig {
   AutoCreateTopicEnable?: boolean;
   /** 新创建主题的默认分区数,如果AutoCreateTopicEnable设置为true没有设置该值时，默认设置为3 */
   DefaultNumPartitions?: number;
-  /** 新创建主题的默认副本数,如果AutoCreateTopicEnable设置为true没有指定该值时默认设置为2 */
+  /** 新创建主题的默认副本数如果AutoCreateTopicEnable设置为true时，该值必须大于0 */
   DefaultReplicationFactor?: number;
 }
 
@@ -2286,7 +2286,7 @@ declare interface SQLServerParam {
 declare interface SaleInfo {
   /** 手动设置的flag标志，true表示售罄，false表示可售。 */
   Flag?: boolean;
-  /** ckafka版本号(1.1.1/2.4.2/0.10.2) */
+  /** ckafka版本号(1.1.1/2.4.2/0.10.2/3.9.2) */
   Version?: string;
   /** 专业版、标准版标志 */
   Platform?: string;
@@ -2800,13 +2800,13 @@ declare interface BatchCreateAclResponse {
 }
 
 declare interface BatchModifyGroupOffsetsRequest {
-  /** 消费分组名称 */
+  /** 消费分组名称取值参考：DescribeGroup */
   GroupName: string;
   /** ckafka集群实例Id取值参考：DescribeInstances */
   InstanceId: string;
   /** partition信息 */
   Partitions: Partitions[];
-  /** 指定topic，默认所有topic */
+  /** 指定topic，默认所有topic取值参考：DescribeTopic */
   TopicName?: string[];
 }
 
@@ -3092,7 +3092,7 @@ declare interface CreateInstancePreRequest {
   ClusterId?: number;
   /** 预付费自动续费标记，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置) */
   RenewFlag?: number;
-  /** CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
+  /** CKafka版本号[2.4.1, 2.4.2, 2.8.1, 3.2.3, 3.9.2], 默认取值是2.4.1。2.4.1 与 2.4.2 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
   /** 实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium" */
   SpecificationsType?: string;
@@ -3240,7 +3240,7 @@ declare interface CreatePostPaidInstanceRequest {
   MsgRetentionTime?: number;
   /** 创建实例时可以选择集群Id, 该入参表示集群Id。不指定实例所在集群则不传入该参数 */
   ClusterId?: number;
-  /** 实例版本。目前支持当前支持"2.4.1", "2.4.2","2.8.1", "3.2.3"，默认取值"2.4.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
+  /** 实例版本。目前支持当前支持"2.4.1", "2.4.2","2.8.1", "3.2.3", "3.9.2"，默认取值"2.4.1"。"2.4.1" 与 "2.4.2" 属于同一个版本，传任意一个均可。 */
   KafkaVersion?: string;
   /** 实例类型。"standard"：标准版，"profession"：专业版。 (标准版仅国际站支持，国内站目前支持专业版) */
   SpecificationsType?: string;
@@ -3622,9 +3622,9 @@ declare interface DeleteThrottleRuleResponse {
 }
 
 declare interface DeleteTopicRequest {
-  /** ckafka 实例Id */
+  /** ckafka 实例Id取值参考：DescribeInstances */
   InstanceId: string;
-  /** ckafka 主题名称 */
+  /** ckafka 主题名称取值参考：DescribeTopic */
   TopicName: string;
 }
 
@@ -4926,13 +4926,13 @@ declare interface ModifyTopicAttributesRequest {
   MinInsyncReplicas?: number;
   /** 是否允许未同步的副本选为leader枚举值：0： 不允许1： 允许默认值：0 */
   UncleanLeaderElectionEnable?: number;
-  /** Segment分片滚动的时长单位：毫秒默认值：86400000最小值为86400000ms（1天） */
+  /** Segment分片滚动的时长取值范围：[86400000, 31536000000]单位：毫秒默认值：86400000最小值为86400000ms（1天） */
   RetentionMs?: number;
   /** 主题消息最大值取值范围：[1024, 12582912]单位：Bytes */
   MaxMessageBytes?: number;
   /** Segment 分片滚动的时长单位：毫秒最小值为86400000ms（1天） */
   SegmentMs?: number;
-  /** 消息删除策略，可以选择delete 或者compact */
+  /** 消息删除策略，可以选择delete 或者compact枚举值：delete： 按保留时间/大小删除旧消息compact： 日志压缩，按 Key 保留最新值 */
   CleanUpPolicy?: string;
   /** Ip白名单列表，配额限制，enableWhileList=1时必选 */
   IpWhiteList?: string[];
