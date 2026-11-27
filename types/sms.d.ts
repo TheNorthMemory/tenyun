@@ -633,7 +633,7 @@ declare interface SendStatusStatisticsResponse {
 }
 
 declare interface SmsPackagesStatisticsRequest {
-  /** 短信 SdkAppId 在 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
+  /** 短信 SdkAppId 在 短信控制台 添加应用后生成的实际 SdkAppId，示例如1400006666。 */
   SmsSdkAppId: string;
   /** 最大上限(需要拉取的套餐包个数)。注：Limit默认最大值为500，可结合Offset实现分页查询。 */
   Limit: number;
@@ -646,7 +646,7 @@ declare interface SmsPackagesStatisticsRequest {
 }
 
 declare interface SmsPackagesStatisticsResponse {
-  /** 发送数据统计响应包体。 */
+  /** 套餐包统计信息响应包体。 */
   SmsPackagesStatisticsSet?: SmsPackagesStatistics[];
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;

@@ -982,6 +982,8 @@ declare interface GetServiceStatusResponse {
   MultiAccountLimit?: number;
   /** 多账号启用个数单位：个数 */
   MultiAccountUsedCount?: number;
+  /** 根密钥的扩展包数量单位：个 */
+  CmkExtPackCount?: number;
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }

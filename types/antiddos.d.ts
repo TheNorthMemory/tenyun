@@ -2,6 +2,40 @@
 
 import { AxiosPromise, AxiosRequestConfig } from "axios";
 
+/** 连接异常条件。 */
+declare interface AbnormalConnectCondition {
+  /** SYN占比阈值（百分比）， 0为不检查。 同一连接中，SYN 包占比超过配置占比时，将被视为异常连接处置。取值范围：[0, 100] */
+  SynRatioThreshold: number;
+  /** SYN占比阈值（百分比）， 0为不检查。 同一连接中，SYN 包占比超过配置占比时，将被视为异常连接处置。取值范围：[0, 65535] */
+  SynCountThreshold: number;
+  /** 连接超时（秒），0为不检查。 连接超过配置时间内未收到数据时，将被视为异常连接处置。取值范围：[0, 65535] */
+  ConnectTimeout: number;
+  /** 是否开启空连接防护。 同一客户端对应了较大数量的空连接时，将被视为异常连接处置。枚举值：on： 开启off： 关闭 */
+  EmptyConnection: string;
+}
+
+/** 异常连接防护配置。 */
+declare interface AbnormalConnectionLimit {
+  /** 异常连接数限制，限制同一时间单个源 IP 异常连接数量， 0为不启用, 范围: 0-4294967295。取值范围：[0, 4294967295] */
+  AbnormalConnectThreshold: number;
+  /** 异常连接判定条件。满足任意条件则计为一次异常统计。 */
+  AbnormalConnectCondition: AbnormalConnectCondition;
+}
+
+/** 连接类攻击防护配置。 */
+declare interface ConnectionProtectionConfig {
+  /** 源 IP 每秒新建连接数限制，为 0 为不限制（关闭），大于 0 开启限制。命中后限制新建连接。取值范围：[0, 4294967295] */
+  SourceIPNewConnectionLimit: number;
+  /** 源 IP 并发连接数限制，为 0 不限制（关闭），大于 0 开启限制。命中后限制新建连接。取值范围：[0, 4294967295] */
+  SourceIPConcurrentConnectionLimit: number;
+  /** 目的 IP 每秒新建连接数限制，为 0 不限制（关闭），大于 0 开启限制。命中后限制新建连接。取值范围：[0, 4294967295] */
+  DestinationIPNewConnectionLimit: number;
+  /** 目的 IP 并发连接数限制，为 0 不限制（关闭）， 大于 0 开启限制。命中后限制新建连接。取值范围：[0, 4294967295] */
+  DestinationIPConcurrentConnectionLimit: number;
+  /** 源 IP 异常连接限制。 */
+  AbnormalConnectionLimit: AbnormalConnectionLimit;
+}
+
 /** 封堵记录 */
 declare interface DDoSBlockRecord {
   /** 被封堵的资源，公网 IP，示例如下： 公网 IP：117.175.94.231。 */
@@ -24,12 +58,266 @@ declare interface DDoSUnblockQuota {
   QuotaEndTime?: string;
 }
 
+/** DDoS 默认防护配置，用于设置清洗策略的灵敏度等级。 */
+declare interface DefaultProtectionConfig {
+  /** DDoS 防护等级配置，决定清洗策略的灵敏度。枚举值：high： 高灵敏度。清洗策略相对严格，建议在正常模式出现攻击透传时使用。medium： 适中灵敏度（默认）。清洗策略适配绝大多数业务，可有效防护常见攻击。low： 宽松灵敏度。清洗策略相对宽松，仅对具有明确攻击特征的攻击包进行防护。详见 各个防护等级防护策略 说明。 */
+  SensitivityLevel: string;
+}
+
 /** 描述键值对过滤器，用于条件过滤查询。例如过滤 ID、名称、状态等。 若存在多个 Filter 时，Filter 间的关系为逻辑与（AND）关系。 若同一个 Filter 存在多个 Values，同一 Filter 下 Values 间的关系为逻辑或（OR）关系。 */
 declare interface Filter {
   /** 需要过滤的字段；具体可选择值请查看对应的引用接口。 */
   Name: string;
   /** 字段的过滤值。 */
   Values: string[];
+}
+
+/** 区域封禁配置。 */
+declare interface GeoBlockingConfig {
+  /** 封禁地域列表。采用 ISO 3166-1 alpha-2 标准的两字代码。 */
+  GeoCode: string[];
+}
+
+/** IP 黑白名单规则。 */
+declare interface IPACLRule {
+  /** 处置方式。枚举值：drop： 黑名单（拦截）。allow： 白名单（放行）。 */
+  Action: string;
+  /** IP 列表。参数格式：支持 IPv4、IPv6 和 CIDR 格式。 */
+  IPs: string[];
+}
+
+/** IP 黑白名单规则列表。 */
+declare interface IPACLRules {
+  /** IP 黑白名单规则列表。 */
+  Rules: IPACLRule[];
+}
+
+/** 报文匹配条件。 */
+declare interface PacketFilterCondition {
+  /** 报文匹配的起始位置。枚举值：ip_header： 从 IP 头部开始匹配。transport_header： 从 TCP/UDP 头部开始匹配。payload： 从应用层载荷开始匹配。 */
+  MatchBegin: string;
+  /** 报文匹配内容。 */
+  Content: PacketMatchContent;
+}
+
+/** 特征过滤规则。 */
+declare interface PacketFilterRule {
+  /** 匹配后执行的动作。枚举值：drop： 丢弃。allow： 放行。drop_and_block： 丢弃并拉黑。forward： 继续防护，即继续执行下一个防护子策略，而非特征过滤内的其他规则。 */
+  Action: string;
+  /** 协议类型。枚举值：tcp： TCP 协议。udp： UDP 协议。all： 所有协议。 */
+  Protocol: string;
+  /** 报文长度范围。 */
+  PacketSizeRange: SizeRange;
+  /** 源端口范围。 */
+  SourcePortRange: PortRange;
+  /** 目的端口范围。 */
+  DestinationPortRange: PortRange;
+  /** 报文匹配条件列表。 */
+  PacketFilterConditions?: PacketFilterCondition[];
+}
+
+/** 特征过滤规则列表。 */
+declare interface PacketFilterRules {
+  /** 特征过滤规则列表。 */
+  Rules: PacketFilterRule[];
+}
+
+/** 报文匹配内容。 */
+declare interface PacketMatchContent {
+  /** 匹配值 Value 的格式类型。枚举值：string： 明文字符串。hex： 十六进制字符串。 */
+  Type: string;
+  /** 匹配值。Type=string 时为明文字符串，例如 GET /index；Type=hex 时为十六进制字符串，例如 0x7e2f68656c6c6f。 */
+  Value: string;
+  /** 匹配起始偏移量，从匹配起始位置（MatchBegin）开始计算。取值范围：[0, 1500]单位：字节 */
+  Offset: number;
+  /** 检查深度，即从 Offset 开始的最大检查字节数。取值范围：[0, 1500]单位：字节 */
+  Depth: number;
+}
+
+/** 端口过滤规则。 */
+declare interface PortACLRule {
+  /** 源端口范围。 */
+  SourcePortRange: PortRange;
+  /** 目的端口范围。 */
+  DestinationPortRange: PortRange;
+  /** 协议类型。枚举值：all ： 所有协议。tcp： TCP 协议。udp： UDP 协议。 */
+  Protocol: string;
+  /** 处置动作。枚举值：drop： 丢弃。allow： 放行。forward： 继续防护，即继续执行下一个防护子策略模块，而非端口过滤内的其他规则。 */
+  Action: string;
+}
+
+/** 端口过滤规则列表。 */
+declare interface PortACLRules {
+  /** 端口过滤规则列表。 */
+  Rules: PortACLRule[];
+}
+
+/** 端口范围。 */
+declare interface PortRange {
+  /** 起始端口。取值范围：[1, 65535]与 ToPort 相同时表示单个端口。 */
+  FromPort: number;
+  /** 结束端口取值范围：[1, 65535] */
+  ToPort: number;
+}
+
+/** 用于按指定字段过滤查询结果，例如按防护实例 ID、名称、状态等过滤。多个 Filter 之间为逻辑与（AND）关系；同一 Filter 的多个 Values 之间为逻辑或（OR）关系。 */
+declare interface ProtectionFilter {
+  /** 需要过滤的字段名。 */
+  Name: string;
+  /** 对应字段的过滤值。 */
+  Values: string[];
+  /** 是否启用模糊查询。 */
+  Fuzzy?: boolean;
+}
+
+/** DDoS 防护实例信息。 */
+declare interface ProtectionInfo {
+  /** 防护实例 ID。 */
+  ProtectionId?: string;
+  /** 防护实例名称。 */
+  Name?: string;
+  /** 防护实例的防护级别。枚举值：advanced： 增强防护；ultimate： 卓越防护。 */
+  ProtectionLevel?: string;
+  /** 防护实例状态。枚举值：protecting： 防护中；processing： 变更中；disabling： 停用中；disabled： 已停用。 */
+  Status?: string;
+  /** 资源标签列表。 */
+  Tags?: TagInfo[];
+  /** 防护实例中的防护资源数量。 */
+  ResourceCount?: number;
+}
+
+/** 防护实例的 L3/4 DDoS 防护策略。 */
+declare interface ProtectionPolicy {
+  /** 默认防护配置。 */
+  DefaultProtection?: DefaultProtectionConfig;
+  /** IP 黑白名单规则列表。 */
+  IPACLRules?: IPACLRules;
+  /** 端口过滤规则列表。 */
+  PortACLRules?: PortACLRules;
+  /** 限速规则列表。 */
+  SpeedLimitRules?: SpeedLimitRules;
+  /** 包特征过滤规则列表。 */
+  PacketFilterRules?: PacketFilterRules;
+  /** 区域封禁配置。 */
+  GeoBlocking?: GeoBlockingConfig;
+  /** 协议封禁配置。 */
+  ProtocolBlocking?: ProtocolBlockingConfig;
+  /** 连接类攻击防护配置。 */
+  ConnectionProtection?: ConnectionProtectionConfig;
+  /** 流量签名配置。 */
+  TrafficSignature?: TrafficSignatureConfig;
+}
+
+/** 协议封禁配置。 */
+declare interface ProtocolBlockingConfig {
+  /** TCP 协议封禁。枚举值：on： 开启off： 关闭 */
+  TCPProtocol: string;
+  /** UDP 协议封禁。枚举值：on： 开启off： 关闭 */
+  UDPProtocol: string;
+  /** ICMP 协议封禁。枚举值：on： 开启off： 关闭 */
+  ICMPProtocol: string;
+  /** 其它协议封禁（除 TCP/UDP/ICMP 外的协议）。枚举值：on： 开启off： 关闭 */
+  OtherProtocol: string;
+}
+
+/** 防护资源的详细信息。 */
+declare interface ResourceInfo {
+  /** 防护资源的资源六段式标识。 */
+  Resource?: string;
+  /** 防护资源类型。枚举值：cvm： 云服务器lighthouse： 轻量应用服务器clb： 负载均衡eip： 弹性公网 IPwaf： Web 应用防火墙teo_l7_domain： EdgeOne 域名teo_l4_proxy： EdgeOne 四层代理 */
+  ResourceType?: string;
+  /** 防护资源的防护状态。枚举值：protecting： 防护中processing： 防护变更中disabling： 防护停用中disabled： 防护已停用process_failed： 防护变更失败disabled_failed： 防护停用失败 */
+  Status?: string;
+  /** 防护资源所属地域，例如 ap-beijing。资源类型为 EdgeOne 时，Region 取以下枚举值：global：全球可用区。mainland：中国大陆可用区。overseas：全球可用区（中国大陆除外）。 */
+  Region?: string;
+  /** 公网访问地址。资源类型是以公网 IP 提供接入的云资产时，返回对应的公网 IP。资源类型是以域名提供接入的云资产时，返回对应域名，例如 域名化负载均衡实例。资源类型为 EdgeOne 四层代理或七层域名时，不返回该字段。 */
+  PublicAddresses?: string[];
+}
+
+/** 防护资源及其绑定的防护实例。 */
+declare interface ResourceProtection {
+  /** 防护资源的资源六段式标识。 */
+  Resource?: string;
+  /** 该资源绑定的防护实例 ID。 */
+  ProtectionId?: string;
+}
+
+/** 数值范围。 */
+declare interface SizeRange {
+  /** 最小值。与 Max 相等时表示单个值。 */
+  Min: number;
+  /** 最大值。 */
+  Max: number;
+}
+
+/** 端口限速规则。 */
+declare interface SpeedLimitRule {
+  /** IP 协议号。取值参考 IP 协议号列表 。参数格式：0-255 范围的数字。支持单个 IP 协议号和 IP 协议号范围。0-255 表示全部协议。 */
+  IPProtocolNumbers: string[];
+  /** 目的端口范围列表。 */
+  DestinationPortRanges: PortRange[];
+  /** 限速统计维度。枚举值：destination_ip： 按目的 IP 维度统计。source_destination_ip： 按源 IP + 目的 IP 维度统计。 */
+  Mode: string;
+  /** 流量带宽限制。取值范围：[0, 4294967295]单位：bps为 0 时表示不限制。BandwidthLimit 和 PacketRateLimit 至少需要设置一个大于 0 的值。 */
+  BandwidthLimit?: number;
+  /** 包速率限制。取值范围：[0, 4294967295]单位：pps为 0 时表示不限制。BandwidthLimit 和 PacketRateLimit 至少需要设置一个大于 0 的值。 */
+  PacketRateLimit?: number;
+}
+
+/** 端口限速规则列表。 */
+declare interface SpeedLimitRules {
+  /** 端口限速规则列表。 */
+  Rules: SpeedLimitRule[];
+}
+
+/** 标签配置。 */
+declare interface TagInfo {
+  /** 标签键。 */
+  TagKey: string;
+  /** 标签值。 */
+  TagValue: string;
+}
+
+/** 流量签名校验配置。 */
+declare interface TrafficSignatureConfig {
+  /** 流量签名配置开关。 */
+  Switch: string;
+  /** 流量签名密钥。 */
+  TrafficSignatureKeys: string[];
+  /** UDP 协议校验的端口范围，支持输入多个端口或端口范围。 */
+  UdpCheckPortRanges: PortRange[];
+  /** TCP 协议校验的端口范围，支持输入多个端口或端口范围。 */
+  TcpCheckPortRanges: PortRange[];
+  /** UDP 协议下签名在数据包负载中的起始偏移位置，支持 0 至 100 字节偏移量。默认为0。 */
+  UdpTrafficSignatureOffset?: number;
+  /** TCP 协议下签名在数据包负载中的起始偏移位置，支持 0 至 100 字节偏移量。默认为0 */
+  TcpTrafficSignatureOffset?: number;
+}
+
+declare interface CreateProtectionRequest {
+  /** 防护实例名称。入参限制：防护实例名称最多 60 个字符，同一主账号下不可重名。 */
+  Name: string;
+  /** 防护实例的防护级别。枚举值：advanced： 增强防护；ultimate： 卓越防护，仅在当前主账号已订阅任意扩展包时可用。不同订阅套餐版本下可用的防护级别不同，可接入的防护资源类型与防护容量也相应不同，具体请参见 DDoS 防护容量说明。 */
+  ProtectionLevel?: string;
+  /** 标签。用于对防护实例进行分权限管控与分账。需要先前往 标签控制台 创建对应标签，方可在此处传入标签键与标签值。 */
+  Tags?: TagInfo[];
+}
+
+declare interface CreateProtectionResponse {
+  /** 防护实例 ID。 */
+  ProtectionId?: string;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DeleteProtectionRequest {
+  /** 防护实例 ID。 */
+  ProtectionId: string;
+}
+
+declare interface DeleteProtectionResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
 }
 
 declare interface DescribeDDoSBlockRecordsRequest {
@@ -52,6 +340,108 @@ declare interface DescribeDDoSBlockRecordsResponse {
   BlockRecords?: DDoSBlockRecord[];
   /** 解封次数配额信息。 */
   UnblockQuotaInfo?: DDoSUnblockQuota;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeDDoSProtectionPolicyRequest {
+  /** 防护实例 ID。 */
+  ProtectionId: string;
+}
+
+declare interface DescribeDDoSProtectionPolicyResponse {
+  /** DDoS 防护策略。 */
+  ProtectionPolicy?: ProtectionPolicy;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProtectionResourcesRequest {
+  /** 防护实例 ID。 */
+  ProtectionId: string;
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+  /** 过滤条件。Filters 数组的元素个数上限为 20。不填写该参数时，返回防护实例下的全部防护资源。支持的过滤字段：ResourceType：按防护资源类型过滤。可选项：cvm：云服务器。lighthouse：轻量应用服务器。clb：负载均衡。eip：弹性公网 IP。waf：Web 应用防火墙。teo_l7_domain：EdgeOne 域名。teo_l4_proxy：EdgeOne 四层代理。 */
+  Filters?: ProtectionFilter[];
+}
+
+declare interface DescribeProtectionResourcesResponse {
+  /** 符合条件的防护资源总数。 */
+  TotalCount?: number;
+  /** 防护资源详细信息列表。 */
+  ResourceInfos?: ResourceInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeProtectionsRequest {
+  /** 过滤条件。Filters 数组的元素个数上限为 20。不填写该参数时，返回当前账号下有权限的全部防护实例。支持的过滤字段：Name：按防护实例名称过滤。ProtectionId：按防护实例 ID 过滤。ProtectionLevel：按防护实例级别过滤。可选项：advanced：增强防护。ultimate：卓越防护。Status：按防护实例状态过滤。可选项：protecting：防护中。processing：变更中。disabling：隔离中或删除中。disabled：已隔离。TagKey：按标签键过滤。TagValue：按标签值过滤。模糊查询时支持过滤字段名包括 Name、ProtectionId、ProtectionLevel、Status、TagKey、TagValue。 */
+  Filters?: ProtectionFilter[];
+  /** 分页查询偏移量。默认值：0。 */
+  Offset?: number;
+  /** 分页查询限制数目。默认值：20，最大值：100。 */
+  Limit?: number;
+}
+
+declare interface DescribeProtectionsResponse {
+  /** 符合条件的防护实例个数。 */
+  TotalCount?: number;
+  /** 防护实例详细信息列表。 */
+  Protections?: ProtectionInfo[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface DescribeResourceProtectionsRequest {
+  /** 防护资源，须采用资源六段式格式。具体格式如下：云服务器：qcs::cvm:${region}:uin/${uin}:instance/${InstanceId}轻量应用服务器：qcs::lighthouse:${region}:uin/${uin}:instance/${InstanceId}负载均衡：qcs::clb:${region}:uin/${uin}:clb/${LoadBalancerId}弹性公网 IP：qcs::cvm:${region}:uin/${uin}:eip/${AddressId}Web 应用防火墙：qcs::waf:${region}:uin/${uin}:waf/${InstanceId}EdgeOne 域名：qcs::teo::uin/${uin}:zone/${ZoneId}/Domain/${Domain}EdgeOne 四层代理：qcs::teo::uin/${uin}:zone/${ZoneId}/L4Proxy/${InstanceId}取值参考：支持 CAM 的业务接口 */
+  Resources: string[];
+}
+
+declare interface DescribeResourceProtectionsResponse {
+  /** 防护资源对应的防护实例列表。资源未绑定任何防护实例时，返回空数组。 */
+  ResourceProtections?: ResourceProtection[];
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyDDoSProtectionPolicyRequest {
+  /** 防护实例 ID。 */
+  ProtectionId: string;
+  /** 防护策略。支持部分修改：对于 ProtectionPolicy 下的各子策略，入参未传入的子策略保持原值不变。 */
+  ProtectionPolicy: ProtectionPolicy;
+}
+
+declare interface ModifyDDoSProtectionPolicyResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProtectionRequest {
+  /** 防护实例 ID。 */
+  ProtectionId: string;
+  /** 防护实例名称。入参限制：防护实例名称最多 60 个字符，同一主账号下不可重名。 */
+  Name?: string;
+}
+
+declare interface ModifyProtectionResourceRequest {
+  /** 防护实例 ID。 */
+  ProtectionId: string;
+  /** 操作类型。枚举值：APPEND： 向防护实例中添加新的防护资源；UPDATE： 替换防护实例中的全部防护资源；REMOVE： 从防护实例中移除指定的防护资源。默认值：APPEND */
+  Mode: string;
+  /** 防护资源，须采用资源六段式格式。具体格式如下：云服务器：qcs::cvm:${region}:uin/${uin}:instance/${InstanceId}轻量应用服务器：qcs::lighthouse:${region}:uin/${uin}:instance/${InstanceId}负载均衡：qcs::clb:${region}:uin/${uin}:clb/${LoadBalancerId}弹性公网 IP：qcs::cvm:${region}:uin/${uin}:eip/${AddressId}Web 应用防火墙：qcs::waf:${region}:uin/${uin}:waf/${InstanceId}EdgeOne 域名：qcs::teo::uin/${uin}:zone/${ZoneId}/Domain/${Domain}EdgeOne 四层代理：qcs::teo::uin/${uin}:zone/${ZoneId}/L4Proxy/${InstanceId}取值参考：支持 CAM 的业务接口 */
+  Resources?: string[];
+  /** 冲突策略。枚举值：REJECT： 若任一防护资源已存在于其他防护实例，则拒绝本次操作。FORCE： 若任一防护资源已存在于其他防护实例，则强制将其添加至当前实例。默认值：REJECT */
+  ConflictStrategy?: string;
+}
+
+declare interface ModifyProtectionResourceResponse {
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
+declare interface ModifyProtectionResponse {
   /** 唯一请求 ID，每次请求都会返回。 */
   RequestId?: string;
 }
@@ -3241,8 +3631,26 @@ declare namespace V20200309 {
 /** {@link Antiddos T-Sec-DDoS防护(Anti-DDoS)} */
 declare interface Antiddos {
   (): Versions;
+  /** 创建防护实例 {@link CreateProtectionRequest} {@link CreateProtectionResponse} */
+  CreateProtection(data: CreateProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<CreateProtectionResponse>;
+  /** 删除防护实例 {@link DeleteProtectionRequest} {@link DeleteProtectionResponse} */
+  DeleteProtection(data: DeleteProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<DeleteProtectionResponse>;
   /** 查询DDoS封堵解封列表 {@link DescribeDDoSBlockRecordsRequest} {@link DescribeDDoSBlockRecordsResponse} */
   DescribeDDoSBlockRecords(data: DescribeDDoSBlockRecordsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSBlockRecordsResponse>;
+  /** 查询 DDoS 防护策略 {@link DescribeDDoSProtectionPolicyRequest} {@link DescribeDDoSProtectionPolicyResponse} */
+  DescribeDDoSProtectionPolicy(data: DescribeDDoSProtectionPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeDDoSProtectionPolicyResponse>;
+  /** 查询防护实例的防护资源列表 {@link DescribeProtectionResourcesRequest} {@link DescribeProtectionResourcesResponse} */
+  DescribeProtectionResources(data: DescribeProtectionResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionResourcesResponse>;
+  /** 查询防护实例列表 {@link DescribeProtectionsRequest} {@link DescribeProtectionsResponse} */
+  DescribeProtections(data?: DescribeProtectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeProtectionsResponse>;
+  /** 查询资源绑定的防护实例 {@link DescribeResourceProtectionsRequest} {@link DescribeResourceProtectionsResponse} */
+  DescribeResourceProtections(data: DescribeResourceProtectionsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeResourceProtectionsResponse>;
+  /** 修改 DDoS 防护策略 {@link ModifyDDoSProtectionPolicyRequest} {@link ModifyDDoSProtectionPolicyResponse} */
+  ModifyDDoSProtectionPolicy(data: ModifyDDoSProtectionPolicyRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyDDoSProtectionPolicyResponse>;
+  /** 修改防护实例 {@link ModifyProtectionRequest} {@link ModifyProtectionResponse} */
+  ModifyProtection(data: ModifyProtectionRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionResponse>;
+  /** 修改防护实例的防护资源 {@link ModifyProtectionResourceRequest} {@link ModifyProtectionResourceResponse} */
+  ModifyProtectionResource(data: ModifyProtectionResourceRequest, config?: AxiosRequestConfig): AxiosPromise<ModifyProtectionResourceResponse>;
   /** 申请解封资源 {@link UnblockResourcesRequest} {@link UnblockResourcesResponse} */
   UnblockResources(data: UnblockResourcesRequest, config?: AxiosRequestConfig): AxiosPromise<UnblockResourcesResponse>;
   /** 绑定高防弹性公网IP {@link V20200309.AssociateDDoSEipAddressRequest} {@link V20200309.AssociateDDoSEipAddressResponse} */

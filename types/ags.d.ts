@@ -836,6 +836,8 @@ declare interface SandboxInstance {
   Metadata?: MetadataVar[];
   /** 沙箱访问认证模式枚举值：DEFAULT： 默认，即 TOKEN 认证TOKEN： Token认证，即所有端口访问都需携带TOKENNONE： 免认证，即所有端口访问无需携带TOKENPUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN默认值：DEFAULT */
   AuthMode?: string;
+  /** 表示发起实例启动并取得该实例的账号 UIN */
+  SubAccountUin?: string;
 }
 
 /** 沙箱快照 */

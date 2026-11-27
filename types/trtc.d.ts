@@ -1220,7 +1220,7 @@ declare interface TTSConfig {
 
 /** 伴生转录TTS参数 */
 declare interface TTSParam {
-  /** tts模型参数，仅支持填写"flow_02_turbo"。 */
+  /** tts模型参数，当前支持填写"flow_02_turbo"。 */
   Model: string;
   /** tts语言，必须在TranslationParam 的TargetLang列表中。 */
   Language: string;
@@ -1230,6 +1230,8 @@ declare interface TTSParam {
   TTSRobotUser: TranscriptionUserInfoParams;
   /** TTS的声音配置参数。 */
   Voice: TTSVoice;
+  /** TTS高级扩展参数，使用需要联系我们支持参数格式：{"Type":"xxx", "Data":{}} */
+  ExtraParams?: string;
 }
 
 /** 伴生转录TTS的语音参数配置 */

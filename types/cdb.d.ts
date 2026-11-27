@@ -452,6 +452,22 @@ declare interface Bucket {
   Count?: number;
 }
 
+/** 金融围拢、独享集群详情 */
+declare interface CageInfoItem {
+  /** 金融围拢ID、独享集群ID */
+  CageId?: string;
+  /** 可用区ID */
+  ZoneId?: number;
+  /** 金融围拢名称/独享集群名称 */
+  CageName?: string;
+  /** 是否对外售卖 */
+  Status?: string;
+  /** 后端支持围拢发货的设备类型，normal/common */
+  DeviceType?: string;
+  /** 支持独享集群的可用区 */
+  ZoneIds?: number[];
+}
+
 /** 地域售卖配置 */
 declare interface CdbRegionSellConf {
   /** 地域中文名称 */
@@ -1084,6 +1100,8 @@ declare interface InstanceInfo {
   InstanceNodes?: number;
   /** 标签列表 */
   TagList?: TagInfoItem[];
+  /** 金融围拢 ID 。 */
+  CageId?: string;
   /** 引擎类型 */
   EngineType?: string;
   /** 最大延迟阈值 */
@@ -3492,6 +3510,28 @@ declare interface DescribeCPUExpandStrategyInfoResponse {
   RequestId?: string;
 }
 
+declare interface DescribeCageListRequest {
+  /** 金融围拢ID、或者独享集群ID */
+  CageIds?: string[];
+  /** 金融围拢名称/独享集群名称 */
+  CageName?: string;
+  /** 本地专属集群所在可用用ID */
+  ZoneId?: number;
+  /** 查询本地专属集群列表LIMIT */
+  Limit?: number;
+  /** 分页 */
+  Offset?: number;
+}
+
+declare interface DescribeCageListResponse {
+  /** 金融围拢、独享集群返回数量 */
+  TotalCount?: number | null;
+  /** 详情 */
+  Items?: CageInfoItem[] | null;
+  /** 唯一请求 ID，每次请求都会返回。 */
+  RequestId?: string;
+}
+
 declare interface DescribeCdbProxyInfoRequest {
   /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
   InstanceId: string;
@@ -4797,17 +4837,17 @@ declare interface ModifyAuditRuleTemplatesResponse {
 }
 
 declare interface ModifyAuditServiceRequest {
-  /** 实例 ID。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。 */
+  /** 实例 ID。可通过 DescribeDBInstances 接口获取。 */
   InstanceId: string;
-  /** 日志保留时长。支持值包括：7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
+  /** 审计日志保存时长。枚举值：7： 一周30： 一个月90： 三个月180： 六个月365： 一年1095： 三年1825： 五年 */
   LogExpireDay?: number;
-  /** 高频日志保留时长。默认值为7，此项取值需小于等于 LogExpireDay，支持值包括：3 - 3天；7 - 一周；30 - 一个月；90 - 三个月；180 - 六个月；365 - 一年；1095 - 三年；1825 - 五年。 */
+  /** 高频审计日志保存时长。枚举值：7： 一周30： 一个月90： 三个月180： 六个月365： 一年1095： 三年1825： 五年此项取值需小于等于 LogExpireDay。 */
   HighLogExpireDay?: number;
   /** 修改实例审计规则为全审计。 */
   AuditAll?: boolean;
   /** 废弃。 */
   AuditRuleFilters?: AuditRuleFilters[];
-  /** 规则模板 ID。可通过 [DescribeAuditRuleTemplates](https://cloud.tencent.com/document/api/236/101811) 接口获取。 */
+  /** 规则模板 ID。可通过 DescribeAuditRuleTemplates 接口获取。 */
   RuleTemplateIds?: string[];
 }
 
@@ -4831,13 +4871,13 @@ declare interface ModifyAutoRenewFlagResponse {
 declare interface ModifyBackupConfigRequest {
   /** 实例 ID，格式如：cdb-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同。 */
   InstanceId: string;
-  /** 数据备份文件的保留时间，单位为天。1. MySQL 双节点、三节点、云盘版数据备份文件可以保留7天 - 1830天。2. MySQL 单节点（云盘）数据备份文件可以保留7天 - 30天。 */
+  /** 数据备份文件的保留时间，单位为天。MySQL 双节点、三节点、云盘版数据备份文件可以保留7天 - 1830天。MySQL 单节点（云盘）数据备份文件可以保留7天 - 30天。 */
   ExpireDays?: number;
   /** (将废弃，建议使用 BackupTimeWindow 参数) 备份时间范围，格式为：02:00-06:00，起点和终点时间目前限制为整点，目前可以选择的范围为： 00:00-12:00，02:00-06:00，06：00-10：00，10:00-14:00，14:00-18:00，18:00-22:00，22:00-02:00。 */
   StartTime?: string;
   /** 自动备份方式，仅支持：physical - 物理冷备 */
   BackupMethod?: string;
-  /** binlog 的保留时间，单位为天。1. MySQL 双节点、三节点、云盘版日志备份文件可以保留7天 - 3650天。2. MySQL 单节点（云盘）日志备份文件可以保留7天 - 30天。 */
+  /** binlog 的保留时间，单位为天。MySQL 双节点、三节点、云盘版日志备份文件可以保留7天 - 3650天。MySQL 单节点（云盘）日志备份文件可以保留7天 - 30天。 */
   BinlogExpireDays?: number;
   /** 备份时间窗，比如要设置每周二和周日 10:00-14:00之间备份，该参数如下：{"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"} （注：可以设置一周的某几天备份，但是每天的备份时间需要设置为相同的时间段。 如果设置了该字段，将忽略StartTime字段的设置） */
   BackupTimeWindow?: CommonTimeWindow;
@@ -5869,6 +5909,8 @@ declare interface Cdb {
   DescribeBinlogs(data: DescribeBinlogsRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeBinlogsResponse>;
   /** 查询实例的 CPU 弹性扩容策略信息 {@link DescribeCPUExpandStrategyInfoRequest} {@link DescribeCPUExpandStrategyInfoResponse} */
   DescribeCPUExpandStrategyInfo(data: DescribeCPUExpandStrategyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCPUExpandStrategyInfoResponse>;
+  /** 获取金融围拢、独享集群列表 {@link DescribeCageListRequest} {@link DescribeCageListResponse} */
+  DescribeCageList(data?: DescribeCageListRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCageListResponse>;
   /** 查询数据库代理详情 {@link DescribeCdbProxyInfoRequest} {@link DescribeCdbProxyInfoResponse} */
   DescribeCdbProxyInfo(data: DescribeCdbProxyInfoRequest, config?: AxiosRequestConfig): AxiosPromise<DescribeCdbProxyInfoResponse>;
   /** 查询数据库可用区及售卖规格 {@link DescribeCdbZoneConfigRequest} {@link DescribeCdbZoneConfigResponse} */

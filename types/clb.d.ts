@@ -508,6 +508,16 @@ declare interface Coefficient {
   OutputVideoSecondCoefficient?: number;
   /** 输出图片系数 */
   OutputImageCoefficient?: number;
+  /** Realtime 音频输入积分系数，单位为积分/百万音频 Token。取值范围：[0, 5000]默认值：80仅 Capability=realtime 支持，最多 6 位小数。修改时未提供此字段则保留旧值；0 表示零价，不接受 null。 */
+  InputAudioTokenCoefficient?: number;
+  /** Realtime 音频缓存命中输入积分系数，单位为积分/百万音频 Token。取值范围：[0, 5000]默认值：5仅 Capability=realtime 支持，最多 6 位小数。修改时未提供此字段则保留旧值；0 表示零价，不接受 null。 */
+  InputCachedAudioTokenCoefficient?: number;
+  /** Realtime 图像输入积分系数，单位为积分/百万图像 Token。取值范围：[0, 5000]默认值：12.5仅 Capability=realtime 支持，最多 6 位小数。修改时未提供此字段则保留旧值；0 表示零价，不接受 null。 */
+  InputImageTokenCoefficient?: number;
+  /** Realtime 图像缓存命中输入积分系数，单位为积分/百万图像 Token。取值范围：[0, 5000]默认值：5仅 Capability=realtime 支持，最多 6 位小数。修改时未提供此字段则保留旧值；0 表示零价，不接受 null。 */
+  InputCachedImageTokenCoefficient?: number;
+  /** Realtime 音频输出积分系数，单位为积分/百万音频 Token。取值范围：[0, 5000]默认值：300仅 Capability=realtime 支持，最多 6 位小数。修改时未提供此字段则保留旧值；0 表示零价，不接受 null。 */
+  OutputAudioTokenCoefficient?: number;
 }
 
 /** 峰谷计费配置 */
@@ -1798,6 +1808,24 @@ declare interface RateLimitConfigForModelRouter {
   RPM?: number;
   /** 每分钟限制的Token数量单位：个/分钟 */
   TPM?: number;
+}
+
+/** Realtime 路由配置。支持 SimpleShuffle、LeastBusy、CostBasedRouting，创建时默认 SimpleShuffle、NumRetries=2。修改时仅更新显式传入字段；切换策略时清理旧策略参数。所有字段选填，不接受显式 null。 */
+declare interface RealtimeConfig {
+  /** Realtime 模型路由策略。入参限制：仅支持 SimpleShuffle（随机）、LeastBusy（最少繁忙）、CostBasedRouting（最低成本）。默认值：SimpleShuffle修改时未传保留旧策略；切换策略会清理旧策略的 RoutingStrategyArgs。不接受 null。 */
+  RoutingStrategy?: string;
+  /** Realtime 路由重试次数。取值范围：[0, 5]默认值：2仅接受整数，0 表示不重试。修改时未提供此字段则保留旧值，不接受 null。 */
+  NumRetries?: number;
+  /** Realtime 路由策略的附加参数。入参限制：LeastBusy 仅接受 LeastBusyBuffer；CostBasedRouting 仅接受 LowestCostBuffer；SimpleShuffle 仅接受空对象。修改时未提供的参数保留旧值，切换策略时清理旧参数；适用的 Buffer 默认 0。不接受 null。 */
+  RoutingStrategyArgs?: RealtimeRoutingStrategyArgs;
+}
+
+/** Realtime 路由策略参数。LeastBusy 仅支持 LeastBusyBuffer，CostBasedRouting 仅支持 LowestCostBuffer，SimpleShuffle 不支持策略参数。Buffer 取值为 0～1000，最多两位小数，默认 0；修改时未传字段保留旧值。 */
+declare interface RealtimeRoutingStrategyArgs {
+  /** LeastBusy 路由策略的缓冲参数，仅 RoutingStrategy=LeastBusy 时允许设置。取值范围：[0, 1000]默认值：0最多支持两位小数；不接受字符串、布尔值或 null。修改时未传保留旧值，显式 0 生效。 */
+  LeastBusyBuffer?: number;
+  /** CostBasedRouting 路由策略的缓冲参数，仅 RoutingStrategy=CostBasedRouting 时允许设置。取值范围：[0, 1000]默认值：0最多支持两位小数；不接受字符串、布尔值或 null。修改时未传保留旧值，显式 0 生效。 */
+  LowestCostBuffer?: number;
 }
 
 /** 重定向配置 */
@@ -3169,6 +3197,8 @@ declare interface CreateModelRouterRequest {
   DecisionsConfig?: DecisionsConfig;
   /** Images 生图配置 */
   ImageConfig?: ImageConfig;
+  /** 可选的 Realtime 路由配置，提供此参数时预置 realtime 能力的路由策略。支持 SimpleShuffle、LeastBusy、CostBasedRouting；省略配置子字段时默认 RoutingStrategy=SimpleShuffle、NumRetries=2。配置及子字段不接受 null。 */
+  RealtimeConfig?: RealtimeConfig;
 }
 
 declare interface CreateModelRouterResourcePackageRequest {

@@ -24,7 +24,7 @@ declare interface SavingPlanCoverageDetail {
   TotalRealAmount?: number;
   /** 按量计费预期金额（即折前价 * 折扣） */
   ExpectedAmount?: number;
-  /** 覆盖率结果，取值[0, 100] */
+  /** 覆盖率结果，取值为百分比值，取值范围[0,100] */
   SpCoverage?: number;
   /** 支付者昵称 */
   PayerUinName?: string;

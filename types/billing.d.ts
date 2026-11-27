@@ -3438,9 +3438,9 @@ declare interface DescribeBillDetailResponse {
 }
 
 declare interface DescribeBillDownloadUrlRequest {
-  /** 账单类型，枚举值billOverview=L0-PDF账单billSummary=L1-汇总账单	billResource=L2-资源账单	billDetail=L3-明细账单	billPack=账单包 */
+  /** 账单类型，枚举值billOverview=L0-PDF账单billSummary=L1-汇总账单billResource=L2-资源账单billDetail=L3-明细账单billPack=账单包 */
   FileType: string;
-  /** 账单月份支持的最早开始月份为2021-01L0-PDF&账单包不支持当月下载，当月账单请在次月1号19:00出账后下载 */
+  /** 月份，格式为yyyy-mm，不能早于2021-01 示例值：2026-11 */
   Month: string;
   /** 下载的账号 ID列表，默认查询本账号账单，如集团管理账号需下载成员账号自付的账单，该字段需入参成员账号UIN */
   ChildUin?: string[];
@@ -3540,7 +3540,7 @@ declare interface DescribeBillResourceSummaryRequest {
   Offset: number;
   /** 数量，最大值为1000 */
   Limit: number;
-  /** 月份，格式为yyyy-mm。不能早于开通账单2.0的月份 */
+  /** 月份，格式为yyyy-mm，不能早于2021-01 示例值：2026-11 */
   Month: string;
   /** 周期类型，byUsedTime按计费周期/byPayTime按扣费周期。需要与费用中心该月份账单的周期保持一致。您可前往账单概览页面顶部查看确认您的账单统计周期类型。 */
   PeriodType?: string;
@@ -3572,9 +3572,9 @@ declare interface DescribeBillResourceSummaryResponse {
 }
 
 declare interface DescribeBillSummaryByPayModeRequest {
-  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   BeginTime: string;
-  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   EndTime: string;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -3590,13 +3590,13 @@ declare interface DescribeBillSummaryByPayModeResponse {
 }
 
 declare interface DescribeBillSummaryByProductRequest {
-  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   BeginTime: string;
-  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   EndTime: string;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
-  /** 款项类别，与L0账单上的汇总类别对应。此参数自账单3.0（即2021-05）之后开始生效。枚举值：consume-消费refund-退款adjustment-调账 */
+  /** 款项类别，与L0账单上的汇总类别对应。 此参数自账单3.0（即2021-01）之后开始生效。枚举值：consume： 消费refund： 退款adjustment： 调账 */
   PayType?: string;
 }
 
@@ -3630,9 +3630,9 @@ declare interface DescribeBillSummaryByProjectResponse {
 }
 
 declare interface DescribeBillSummaryByRegionRequest {
-  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   BeginTime: string;
-  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   EndTime: string;
   /** 查询账单数据的用户UIN */
   PayerUin?: string;
@@ -3648,9 +3648,9 @@ declare interface DescribeBillSummaryByRegionResponse {
 }
 
 declare interface DescribeBillSummaryByTagRequest {
-  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和EndTime相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   BeginTime: string;
-  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2018-09，EndTime 为 2018-09，查询结果是 2018 年 9 月数据。 */
+  /** 目前必须和BeginTime为相同月份，不支持跨月查询，且查询结果是整月数据，例如 BeginTime为2026-11，EndTime 为 2026-11，查询结果是 2026 年 11 月数据。格式为yyyy-mm，不能早于2021-01 */
   EndTime: string;
   /** 分账标签键，用户自定义 */
   TagKey: string;
@@ -3690,7 +3690,7 @@ declare interface DescribeBillSummaryForOrganizationResponse {
 }
 
 declare interface DescribeBillSummaryRequest {
-  /** 账单月份，格式为2023-04 */
+  /** 月份，格式为yyyy-mm，不能早于2021-01 示例值：2026-11 */
   Month: string;
   /** 账单维度类型，枚举值如下：business、project、region、payMode、tag */
   GroupType: string;

@@ -310,12 +310,12 @@ declare interface AutoCalloutTaskInfo {
 
 /** 工作时间配置 */
 declare interface AvailableTimeConfig {
-  /** 日期类型，默认为每天枚举值：EveryDay： 每天BusinessDay： 法定工作日Holiday： 法定休息日Custom： 自定义 */
-  DayType?: string;
+  /** 日期类型，默认为每天枚举值：EveryDay： 每天BusinessDay： 法定工作日（只支持中国大陆）Holiday： 法定休息日（只支持中国大陆）Custom： 自定义 */
+  DayType?: string | null;
   /** 仅在 DayType 为 Custom 时生效，指定适用的星期几枚举值：Monday： 星期一Tuesday： 星期二Wednesday： 星期三Thursday： 星期四Friday： 星期五Saturday： 星期六Sunday： 星期日 */
-  DaysOfWeek?: string[];
+  DaysOfWeek?: string[] | null;
   /** 该日期类型下的时间段列表 */
-  TimeRanges?: TimeRange[];
+  TimeRanges?: TimeRange[] | null;
 }
 
 /** basic 鉴权 */

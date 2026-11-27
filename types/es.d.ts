@@ -4187,6 +4187,26 @@ declare namespace V20180416 {
     RequestId?: string;
   }
 
+  interface SearchServerlessSpaceDataRequest {
+    /** space空间id */
+    SpaceId: string;
+    /** 请求url */
+    Uri?: string;
+    /** method枚举值：GET： get请求POST： post请求PUT： put请求 */
+    Method?: string;
+    /** 请求体 */
+    Body?: string;
+  }
+
+  interface SearchServerlessSpaceDataResponse {
+    /** 请求状态 */
+    HttpStatus?: number;
+    /** 返回结果 */
+    Result?: string;
+    /** 唯一请求 ID，每次请求都会返回。 */
+    RequestId?: string;
+  }
+
   interface StartLogstashPipelinesRequest {
     /** 实例ID */
     InstanceId: string;
@@ -4829,6 +4849,8 @@ declare interface Es {
   RestoreClusterSnapshot(data: V20180416.RestoreClusterSnapshotRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.RestoreClusterSnapshotResponse>;
   /** 保存并部署管道 {@link V20180416.SaveAndDeployLogstashPipelineRequest} {@link V20180416.SaveAndDeployLogstashPipelineResponse} */
   SaveAndDeployLogstashPipeline(data: V20180416.SaveAndDeployLogstashPipelineRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.SaveAndDeployLogstashPipelineResponse>;
+  /** 查询space下的数据 {@link V20180416.SearchServerlessSpaceDataRequest} {@link V20180416.SearchServerlessSpaceDataResponse} */
+  SearchServerlessSpaceData(data: V20180416.SearchServerlessSpaceDataRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.SearchServerlessSpaceDataResponse>;
   /** 启动Logstash管道 {@link V20180416.StartLogstashPipelinesRequest} {@link V20180416.StartLogstashPipelinesResponse} */
   StartLogstashPipelines(data: V20180416.StartLogstashPipelinesRequest, config: AxiosRequestConfig & V20180416.VersionHeader): AxiosPromise<V20180416.StartLogstashPipelinesResponse>;
   /** 停止Logstash管道 {@link V20180416.StopLogstashPipelinesRequest} {@link V20180416.StopLogstashPipelinesResponse} */

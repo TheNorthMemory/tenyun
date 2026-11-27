@@ -113,7 +113,7 @@ TenYun {
 
 ## 支持的产品及服务
 
-<details><summary>共计 265+ 款产品，16706+ 服务数</summary>
+<details><summary>共计 264+ 款产品，16498+ 服务数</summary>
 
 产品标识 | 产品说明 | 最新版本(数) | 历史版本(数)
 --- | --- | --- | ---
@@ -131,7 +131,7 @@ alb | [应用型负载均衡](https://cloud.tencent.com/document/product/1822) |
 ame | [正版曲库直通车](https://cloud.tencent.com/document/product/1155) | 2019-09-16(31) |
 ams | [音频内容安全](https://cloud.tencent.com/document/product/1219) | 2020-12-29(5) | 2020-06-08(7) |
 anicloud | [动效素材服务](https://cloud.tencent.com/document/product/1641) | 2022-09-23(3) |
-antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2025-09-03(2) | 2020-03-09(97) |
+antiddos | [T-Sec-DDoS防护(Anti-DDoS)](https://cloud.tencent.com/document/product/1021) | 2025-09-03(11) | 2020-03-09(97) |
 ape | [正版图库直通车](https://cloud.tencent.com/document/product/1181) | 2020-05-13(8) |
 api | [云 API](https://cloud.tencent.com/document/product/1278) | 2020-11-06(3) |
 apigateway | [API 网关](https://cloud.tencent.com/document/product/628) | 2018-08-08(98) |
@@ -164,7 +164,7 @@ car | [应用云渲染](https://cloud.tencent.com/document/product/1547) | 2022-
 cat | [云拨测](https://cloud.tencent.com/document/product/280) | 2018-04-09(14) |
 cbs | [云硬盘](https://cloud.tencent.com/document/product/362) | 2017-03-12(61) |
 ccc | [云联络中心](https://cloud.tencent.com/document/product/679) | 2020-02-10(84) |
-cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(179) |
+cdb | [云数据库 MySQL](https://cloud.tencent.com/document/product/236) | 2017-03-20(180) |
 cdc | [本地专用集群](https://cloud.tencent.com/document/product/1346) | 2020-12-14(24) |
 cdn | [内容分发网络 CDN](https://cloud.tencent.com/document/product/228) | 2018-06-06(52+3) |
 cds | [T-Sec-数据安全审计（DSA）](https://cloud.tencent.com/document/product/856) | 2018-04-20(10) |
@@ -196,7 +196,6 @@ cms | 内容安全 | 2019-03-21(6) |
 cngw | [云原生智能网关](https://cloud.tencent.com/document/product/1826) | 2023-04-18(86) |
 config | [配置审计](https://cloud.tencent.com/document/product/1579) | 2022-08-02(67) |
 controlcenter | [控制中心](https://cloud.tencent.com/document/product/1708) | 2023-01-10(5) |
-cpdp | [企业收付平台](https://cloud.tencent.com/document/product/1122) | 2019-08-20(219) |
 csip | [云安全中心](https://cloud.tencent.com/document/product/664) | 2022-11-21(768) |
 csxg | [5G入云服务](https://cloud.tencent.com/document/product/1687) | 2023-03-03(5) |
 ctem | [暴露面管理服务](https://cloud.tencent.com/document/product/1755) | 2023-11-28(66) |
@@ -230,7 +229,7 @@ edgezone | [边缘可用区](https://cloud.tencent.com/document/product/1379) | 
 eiam | [数字身份管控平台（员工版）](https://cloud.tencent.com/document/product/1442) | 2021-04-20(42) |
 eis | [数据连接器](https://cloud.tencent.com/document/product/1270) | 2021-06-01(5) | 2020-07-15(3) |
 emr | [弹性 MapReduce](https://cloud.tencent.com/document/product/589) | 2019-01-03(104) |
-es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(10) | 2018-04-16(90) |
+es | [Elasticsearch Service](https://cloud.tencent.com/document/product/845) | 2025-01-01(10) | 2018-04-16(91) |
 ess | [腾讯电子签企业版](https://cloud.tencent.com/document/product/1323) | 2020-11-11(157) |
 essbasic | [腾讯电子签（基础版）](https://cloud.tencent.com/document/product/1420) | 2021-05-26(99) | 2020-12-22(53) |
 evt | [事件中心](https://cloud.tencent.com/document/product/1808) | 2025-02-17(5) |

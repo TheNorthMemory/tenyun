@@ -206,11 +206,11 @@ declare interface AvatarRoomInfo {
   RoomId?: string;
   /** 数字人直播间名称。 */
   Name?: string;
-  /** 数字人直播间状态，CLOSE - 未开播。OPEN - 直播中。 */
+  /** 数字人直播间状态，CLOSE - 未开播。OPEN - 直播中。枚举值：CLOSE： 未开播OPEN： 直播中 */
   Status?: string;
   /** 数字人形象 KEY。 */
   AvatarKey?: string;
-  /** 音色 KEy。 */
+  /** 音色 KEY。 */
   TimbreKey?: string;
   /** 数字人形象图片 URL。 */
   AvatarImageUrl?: string;
@@ -234,6 +234,10 @@ declare interface AvatarRoomInfo {
   CreateTime?: string;
   /** 直播间最后更新时间，UTC时间。注意：UTC时间和北京时间相差八小时。 */
   UpdateTime?: string;
+  /** 直播间类型。枚举值：AIGC： AIGC直播 */
+  RoomType?: string;
+  /** 通过AIGC生成的数字人形象图片 URL。 */
+  AvatarAigcImageUrl?: string;
 }
 
 /** 数字人直播间话术信息。 */
@@ -1060,7 +1064,7 @@ declare interface LiveAvatarCloneFigureInfo {
   SceneType?: string;
   /** 形象名称 */
   FigureName?: string;
-  /** 性别：男或者女 */
+  /** 性别：男或者女或者UNKNOWN */
   Gender?: string;
   /** 状态枚举值：SUCCESS： 成功FAILED： 失败PROCESSING： 生成中 */
   Status?: string;
@@ -1260,7 +1264,7 @@ declare interface LogInfo {
   LogUrl?: string;
   /** 日志生成时间。注：此字段为北京时间（UTC+8时区）。 */
   LogTime?: string;
-  /** 文件大小。 */
+  /** 文件大小，单位字节。 */
   FileSize?: number;
 }
 
@@ -2052,7 +2056,7 @@ declare interface TemplateInfo {
   AudioBitrate?: number;
   /** 宽，默认0。范围[0-3000]数值必须是2的倍数，0是原始宽度 */
   Width?: number;
-  /** 高，默认0。范围[0-3000]数值必须是2的倍数，0是原始宽度 */
+  /** 高，默认0。范围[0-3000]数值必须是2的倍数，0是原始高度 */
   Height?: number;
   /** 帧率，默认0。范围0-60fps */
   Fps?: number;
@@ -2771,7 +2775,7 @@ declare interface CreateLiveAvatarCloneFigureRequest {
   FigureName: string;
   /** 克隆的形象的url */
   MaterialUrl: string;
-  /** 克隆的形象的性别枚举值：MALE： 男FEMALE： 女UNHNOWN： 不知道 */
+  /** 克隆的形象的性别枚举值：MALE： 男FEMALE： 女UNKNOWN： 不知道 */
   Gender?: string;
   /** 授权pdf */
   IdentityWrittenUrl?: string;
@@ -3245,7 +3249,7 @@ declare interface CreateLiveTimeShiftTemplateRequest {
   Duration: number;
   /** 描述信息。仅支持中文、英文、数字、_、-。 */
   Description?: string;
-  /** 地域。Mainland：中国大陆。Overseas：海外及港澳台地区。默认值：Mainland。 */
+  /** 地域。Mainland：中国大陆。Overseas：海外及港澳台地区。EuropeFrankfurt：欧洲-法兰克福。NorthAmericaSiliconValley：北美-硅谷。MiddleEastRiyadh：中东-利雅得。AsiaTokyo：亚太-东京。AsiaSeoul：亚太-首尔。默认值：Mainland。 */
   Area?: string;
   /** 分片时长。可取3-10。单位：s。默认值：5。 */
   ItemDuration?: number;
@@ -4789,7 +4793,7 @@ declare interface DescribeLiveEnhanceInfoListResponse {
 declare interface DescribeLivePackageInfoRequest {
   /** 包类型，可选值：0：流量包1：转码包2: 连麦包。 */
   PackageType: number;
-  /** 排序规则:1. BuyTimeDesc： 最新购买的排在最前面2. BuyTimeAsc： 最老购买的排在最前面3. ExpireTimeDesc： 最后过期的排在最前面4. ExpireTimeAsc：最先过期的排在最前面。注意：1. PackageType 为 2（连麦包） 的时候，不支持 3、4 排序。 */
+  /** 排序规则:BuyTimeDesc： 最新购买的排在最前面BuyTimeAsc： 最老购买的排在最前面ExpireTimeDesc： 最后过期的排在最前面ExpireTimeAsc：最先过期的排在最前面。注意：PackageType 为 2（连麦包） 的时候，不支持 3、4 排序。 */
   OrderBy?: string;
   /** 取得第几页的数据，和 PageSize 同时传递才会生效。 */
   PageNum?: number;
@@ -5476,7 +5480,7 @@ declare interface DescribeOriginStreamInfoResponse {
   HlsPlayFragmentDuration?: number | null;
   /** 是否透传 http 头信息，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
   PassThroughHttpHeader?: string | null;
-  /** 是否透传相应，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
+  /** 是否透传响应，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
   PassThroughResponse?: string | null;
   /** 是否透传参数，可取值：on、off。当原站播放协议为 hls 时，传递该字段才会生效。 */
   PassThroughParam?: string | null;
