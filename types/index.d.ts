@@ -82,7 +82,6 @@ import Cms, { Versions as CmsVersions } from "./cms";
 import Cngw, { Versions as CngwVersions } from "./cngw";
 import Config, { Versions as ConfigVersions } from "./config";
 import Controlcenter, { Versions as ControlcenterVersions } from "./controlcenter";
-import Cpdp, { Versions as CpdpVersions } from "./cpdp";
 import Csip, { Versions as CsipVersions } from "./csip";
 import Csxg, { Versions as CsxgVersions } from "./csxg";
 import Ctem, { Versions as CtemVersions } from "./ctem";
@@ -351,7 +350,6 @@ export declare type SERVICE_VERSIONS = {
   cngw: CngwVersions,
   config: ConfigVersions,
   controlcenter: ControlcenterVersions,
-  cpdp: CpdpVersions,
   csip: CsipVersions,
   csxg: CsxgVersions,
   ctem: CtemVersions,
@@ -715,8 +713,6 @@ declare type TenYun = CloudInstance & CloudServices & {
   config: Config,
   /** {@link Controlcenter 控制中心} */
   controlcenter: Controlcenter,
-  /** {@link Cpdp 企业收付平台} */
-  cpdp: Cpdp,
   /** {@link Csip 云安全中心} */
   csip: Csip,
   /** {@link Csxg 5G入云服务} */

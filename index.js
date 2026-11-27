@@ -119,7 +119,6 @@ const SERVICE_VERSIONS = {
   cngw: ['2023-04-18'],
   config: ['2022-08-02'],
   controlcenter: ['2023-01-10'],
-  cpdp: ['2019-08-20'],
   csip: ['2022-11-21'],
   csxg: ['2023-03-03'],
   ctem: ['2023-11-28'],
